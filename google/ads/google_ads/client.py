@@ -65,7 +65,8 @@ class GoogleAdsClient(object):
             credentials.refresh(google.auth.transport.requests.Request())
 
             return {'credentials': credentials,
-                    'developer_token': config_data['developer_token']}
+                    'developer_token': config_data['developer_token'],
+                    'endpoint': config_data.get('endpoint')}
         else:
             raise ValueError('A required field in the configuration data was'
                              'not found. The required fields are: %s'
@@ -141,15 +142,17 @@ class GoogleAdsClient(object):
 
         return cls.load_from_string(yaml_str)
 
-    def __init__(self, credentials, developer_token):
+    def __init__(self, credentials, developer_token, endpoint=None):
         """Initializer for the GoogleAdsClient.
 
         Args:
             credentials: a google.oauth2.credentials.Credentials instance.
             developer_token: a str developer token.
+            endpoint: a str specifying an optional alternative API endpoint.
         """
         self.credentials = credentials
         self.developer_token = developer_token
+        self.endpoint = endpoint
 
     def get_service(self, name, version=_DEFAULT_VERSION):
         """Returns a service client instance for the specified service_name.
@@ -183,6 +186,8 @@ class GoogleAdsClient(object):
                              'service "%s".' % name)
 
         channel = service_transport_class.create_channel(
+            address=(self.endpoint if self.endpoint
+                     else service_client.SERVICE_ADDRESS),
             credentials=self.credentials)
 
         channel = grpc.intercept_channel(

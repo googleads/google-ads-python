@@ -19,7 +19,7 @@ DESCRIPTOR = _descriptor.FileDescriptor(
   name='google/ads/googleads_v0/proto/enums/criterion_type.proto',
   package='google.ads.googleads.v0.enums',
   syntax='proto3',
-  serialized_pb=_b('\n8google/ads/googleads_v0/proto/enums/criterion_type.proto\x12\x1dgoogle.ads.googleads.v0.enums\"~\n\x11\x43riterionTypeEnum\"i\n\rCriterionType\x12\x0f\n\x0bUNSPECIFIED\x10\x00\x12\x0b\n\x07UNKNOWN\x10\x01\x12\x0b\n\x07KEYWORD\x10\x02\x12\x0c\n\x08PLATFORM\x10\x06\x12\x0c\n\x08LOCATION\x10\x07\x12\x11\n\rLISTING_GROUP\x10\x08\x42\xc3\x01\n!com.google.ads.googleads.v0.enumsB\x12\x43riterionTypeProtoP\x01ZBgoogle.golang.org/genproto/googleapis/ads/googleads/v0/enums;enums\xa2\x02\x03GAA\xaa\x02\x1dGoogle.Ads.GoogleAds.V0.Enums\xca\x02\x1dGoogle\\Ads\\GoogleAds\\V0\\Enumsb\x06proto3')
+  serialized_pb=_b('\n8google/ads/googleads_v0/proto/enums/criterion_type.proto\x12\x1dgoogle.ads.googleads.v0.enums\"\x8d\x01\n\x11\x43riterionTypeEnum\"x\n\rCriterionType\x12\x0f\n\x0bUNSPECIFIED\x10\x00\x12\x0b\n\x07UNKNOWN\x10\x01\x12\x0b\n\x07KEYWORD\x10\x02\x12\n\n\x06\x44\x45VICE\x10\x06\x12\x0c\n\x08LOCATION\x10\x07\x12\x11\n\rLISTING_GROUP\x10\x08\x12\x0f\n\x0b\x41\x44_SCHEDULE\x10\tB\xc3\x01\n!com.google.ads.googleads.v0.enumsB\x12\x43riterionTypeProtoP\x01ZBgoogle.golang.org/genproto/googleapis/ads/googleads/v0/enums;enums\xa2\x02\x03GAA\xaa\x02\x1dGoogle.Ads.GoogleAds.V0.Enums\xca\x02\x1dGoogle\\Ads\\GoogleAds\\V0\\Enumsb\x06proto3')
 )
 
 
@@ -43,7 +43,7 @@ _CRITERIONTYPEENUM_CRITERIONTYPE = _descriptor.EnumDescriptor(
       options=None,
       type=None),
     _descriptor.EnumValueDescriptor(
-      name='PLATFORM', index=3, number=6,
+      name='DEVICE', index=3, number=6,
       options=None,
       type=None),
     _descriptor.EnumValueDescriptor(
@@ -54,11 +54,15 @@ _CRITERIONTYPEENUM_CRITERIONTYPE = _descriptor.EnumDescriptor(
       name='LISTING_GROUP', index=5, number=8,
       options=None,
       type=None),
+    _descriptor.EnumValueDescriptor(
+      name='AD_SCHEDULE', index=6, number=9,
+      options=None,
+      type=None),
   ],
   containing_type=None,
   options=None,
-  serialized_start=112,
-  serialized_end=217,
+  serialized_start=113,
+  serialized_end=233,
 )
 _sym_db.RegisterEnumDescriptor(_CRITERIONTYPEENUM_CRITERIONTYPE)
 
@@ -83,8 +87,8 @@ _CRITERIONTYPEENUM = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=91,
-  serialized_end=217,
+  serialized_start=92,
+  serialized_end=233,
 )
 
 _CRITERIONTYPEENUM_CRITERIONTYPE.containing_type = _CRITERIONTYPEENUM

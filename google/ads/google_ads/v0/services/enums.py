@@ -16,6 +16,137 @@
 import enum
 
 
+class PolicyTopicEntryTypeEnum(object):
+    class PolicyTopicEntryType(enum.IntEnum):
+        """
+        The possible policy topic entry types.
+
+        Attributes:
+          UNSPECIFIED (int): No value has been specified.
+          UNKNOWN (int): The received value is not known in this version.
+
+          This is a response-only value.
+          PROHIBITED (int): The resource will not be served.
+          LIMITED (int): The resource will not be served under some circumstances.
+          DESCRIPTIVE (int): May be of interest, but does not limit how the resource is served.
+          BROADENING (int): Could increase coverage beyond normal.
+          AREA_OF_INTEREST_ONLY (int): Constrained for all targeted countries, but may serve in other countries
+          through area of interest.
+        """
+        UNSPECIFIED = 0
+        UNKNOWN = 1
+        PROHIBITED = 2
+        LIMITED = 4
+        DESCRIPTIVE = 5
+        BROADENING = 6
+        AREA_OF_INTEREST_ONLY = 7
+
+
+class PolicyTopicEvidenceDestinationMismatchUrlTypeEnum(object):
+    class PolicyTopicEvidenceDestinationMismatchUrlType(enum.IntEnum):
+        """
+        The possible policy topic evidence destination mismatch url types.
+
+        Attributes:
+          UNSPECIFIED (int): No value has been specified.
+          UNKNOWN (int): The received value is not known in this version.
+
+          This is a response-only value.
+          DISPLAY_URL (int): The display url.
+          FINAL_URL (int): The final url.
+          FINAL_MOBILE_URL (int): The final mobile url.
+          TRACKING_URL (int): The tracking url template, with substituted desktop url.
+          MOBILE_TRACKING_URL (int): The tracking url template, with substituted mobile url.
+        """
+        UNSPECIFIED = 0
+        UNKNOWN = 1
+        DISPLAY_URL = 2
+        FINAL_URL = 3
+        FINAL_MOBILE_URL = 4
+        TRACKING_URL = 5
+        MOBILE_TRACKING_URL = 6
+
+
+class DayOfWeekEnum(object):
+    class DayOfWeek(enum.IntEnum):
+        """
+        Enumerates days of the week, e.g., \"Monday\".
+
+        Attributes:
+          UNSPECIFIED (int): Not specified.
+          UNKNOWN (int): The value is unknown in this version.
+          MONDAY (int): Monday.
+          TUESDAY (int): Tuesday.
+          WEDNESDAY (int): Wednesday.
+          THURSDAY (int): Thursday.
+          FRIDAY (int): Friday.
+          SATURDAY (int): Saturday.
+          SUNDAY (int): Sunday.
+        """
+        UNSPECIFIED = 0
+        UNKNOWN = 1
+        MONDAY = 2
+        TUESDAY = 3
+        WEDNESDAY = 4
+        THURSDAY = 5
+        FRIDAY = 6
+        SATURDAY = 7
+        SUNDAY = 8
+
+
+class DeviceEnum(object):
+    class Device(enum.IntEnum):
+        """
+        Enumerates Google Ads devices available for targeting.
+
+        Attributes:
+          UNSPECIFIED (int): Not specified.
+          UNKNOWN (int): The value is unknown in this version.
+          MOBILE (int): Mobile devices with full browsers.
+          TABLET (int): Tablets with full browsers.
+          DESKTOP (int): Computers.
+          CONNECTED_TV (int): Connected TV.
+        """
+        UNSPECIFIED = 0
+        UNKNOWN = 1
+        MOBILE = 2
+        TABLET = 3
+        DESKTOP = 4
+        CONNECTED_TV = 5
+
+
+class HotelDateSelectionTypeEnum(object):
+    class HotelDateSelectionType(enum.IntEnum):
+        """
+        Enum describing possible hotel date selection types.
+
+        Attributes:
+          UNSPECIFIED (int): Not specified.
+          UNKNOWN (int): Used for return value only. Represents value unknown in this version.
+          DEFAULT_SELECTION (int): Dates selected by default.
+          USER_SELECTED (int): Dates selected by the user.
+        """
+        UNSPECIFIED = 0
+        UNKNOWN = 1
+        DEFAULT_SELECTION = 50
+        USER_SELECTED = 51
+
+
+class InteractionTypeEnum(object):
+    class InteractionType(enum.IntEnum):
+        """
+        Enum describing possible interaction types.
+
+        Attributes:
+          UNSPECIFIED (int): Not specified.
+          UNKNOWN (int): Used for return value only. Represents value unknown in this version.
+          CALLS (int): Calls.
+        """
+        UNSPECIFIED = 0
+        UNKNOWN = 1
+        CALLS = 8000
+
+
 class KeywordMatchTypeEnum(object):
     class KeywordMatchType(enum.IntEnum):
         """
@@ -77,6 +208,71 @@ class ListingGroupTypeEnum(object):
         UNIT = 3
 
 
+class MinuteOfHourEnum(object):
+    class MinuteOfHour(enum.IntEnum):
+        """
+        Enumerates of quarter-hours. E.g. \"FIFTEEN\"
+
+        Attributes:
+          UNSPECIFIED (int): Not specified.
+          UNKNOWN (int): The value is unknown in this version.
+          ZERO (int): Zero minutes past the hour.
+          FIFTEEN (int): Fifteen minutes past the hour.
+          THIRTY (int): Thirty minutes past the hour.
+          FORTY_FIVE (int): Forty-five minutes past the hour.
+        """
+        UNSPECIFIED = 0
+        UNKNOWN = 1
+        ZERO = 2
+        FIFTEEN = 3
+        THIRTY = 4
+        FORTY_FIVE = 5
+
+
+class ProductConditionEnum(object):
+    class ProductCondition(enum.IntEnum):
+        """
+        Enum describing the condition of a product offer.
+
+        Attributes:
+          UNSPECIFIED (int): Not specified.
+          UNKNOWN (int): Used for return value only. Represents value unknown in this version.
+          OLD (int): The product condition is old.
+          NEW (int): The product condition is new.
+          REFURBISHED (int): The product condition is refurbished.
+          USED (int): The product condition is used.
+        """
+        UNSPECIFIED = 0
+        UNKNOWN = 1
+        OLD = 2
+        NEW = 3
+        REFURBISHED = 4
+        USED = 5
+
+
+class ProductTypeLevelEnum(object):
+    class ProductTypeLevel(enum.IntEnum):
+        """
+        Enum describing the level of the type of a product offer.
+
+        Attributes:
+          UNSPECIFIED (int): Not specified.
+          UNKNOWN (int): Used for return value only. Represents value unknown in this version.
+          PRODUCT_TYPE_L1 (int): Level 1.
+          PRODUCT_TYPE_L2 (int): Level 2.
+          PRODUCT_TYPE_L3 (int): Level 3.
+          PRODUCT_TYPE_L4 (int): Level 4.
+          PRODUCT_TYPE_L5 (int): Level 5.
+        """
+        UNSPECIFIED = 0
+        UNKNOWN = 1
+        PRODUCT_TYPE_L1 = 2
+        PRODUCT_TYPE_L2 = 3
+        PRODUCT_TYPE_L3 = 4
+        PRODUCT_TYPE_L4 = 5
+        PRODUCT_TYPE_L5 = 6
+
+
 class PageOnePromotedStrategyGoalEnum(object):
     class PageOnePromotedStrategyGoal(enum.IntEnum):
         """
@@ -134,25 +330,6 @@ class AdGroupStatusEnum(object):
         REMOVED = 4
 
 
-class DeviceEnum(object):
-    class Device(enum.IntEnum):
-        """
-        Enumerates AdWords platforms available for targeting.
-
-        Attributes:
-          UNSPECIFIED (int): Not specified.
-          UNKNOWN (int): The value is unknown in this version.
-          MOBILE (int): Mobile devices with full browsers.
-          TABLET (int): Tablets with full browsers.
-          DESKTOP (int): Computers.
-        """
-        UNSPECIFIED = 0
-        UNKNOWN = 1
-        MOBILE = 2
-        TABLET = 3
-        DESKTOP = 4
-
-
 class AdGroupAdStatusEnum(object):
     class AdGroupAdStatus(enum.IntEnum):
         """
@@ -174,6 +351,60 @@ class AdGroupAdStatusEnum(object):
         REMOVED = 4
 
 
+class CampaignGroupStatusEnum(object):
+    class CampaignGroupStatus(enum.IntEnum):
+        """
+        Possible statuses of a CampaignGroup.
+
+        Attributes:
+          UNSPECIFIED (int): Not specified.
+          UNKNOWN (int): Used for return value only. Represents value unknown in this version.
+          ENABLED (int): Campaign group is currently serving ads depending on budget information.
+          REMOVED (int): Campaign group has been removed.
+        """
+        UNSPECIFIED = 0
+        UNKNOWN = 1
+        ENABLED = 2
+        REMOVED = 4
+
+
+class MonthOfYearEnum(object):
+    class MonthOfYear(enum.IntEnum):
+        """
+        Enumerates months of the year, e.g., \"January\".
+
+        Attributes:
+          UNSPECIFIED (int): Not specified.
+          UNKNOWN (int): The value is unknown in this version.
+          JANUARY (int): January.
+          FEBRUARY (int): February.
+          MARCH (int): March.
+          APRIL (int): April.
+          MAY (int): May.
+          JUNE (int): June.
+          JULY (int): July.
+          AUGUST (int): August.
+          SEPTEMBER (int): September.
+          OCTOBER (int): October.
+          NOVEMBER (int): November.
+          DECEMBER (int): December.
+        """
+        UNSPECIFIED = 0
+        UNKNOWN = 1
+        JANUARY = 2
+        FEBRUARY = 3
+        MARCH = 4
+        APRIL = 5
+        MAY = 6
+        JUNE = 7
+        JULY = 8
+        AUGUST = 9
+        SEPTEMBER = 10
+        OCTOBER = 11
+        NOVEMBER = 12
+        DECEMBER = 13
+
+
 class RecommendationTypeEnum(object):
     class RecommendationType(enum.IntEnum):
         """
@@ -186,6 +417,15 @@ class RecommendationTypeEnum(object):
           KEYWORD (int): Keyword recommendation.
           TEXT_AD (int): Recommendation to add a new text ad.
           TARGET_CPA_OPT_IN (int): Recommendation to update a campaign to use a Target CPA bidding strategy.
+          MAXIMIZE_CONVERSIONS_OPT_IN (int): Recommendation to update a campaign to use the Maximize Conversions
+          bidding strategy.
+          ENHANCED_CPC_OPT_IN (int): Recommendation to enable Enhanced Cost Per Click for a campaign.
+          SEARCH_PARTNERS_OPT_IN (int): Recommendation to start showing your campaign's ads on Google Search
+          Partners Websites.
+          MAXIMIZE_CLICKS_OPT_IN (int): Recommendation to update a campaign to use a Maximize Clicks bidding
+          strategy.
+          OPTIMIZE_AD_ROTATION (int): Recommendation to start using the \"Optimize\" ad rotation setting for the
+          given ad group.
         """
         UNSPECIFIED = 0
         UNKNOWN = 1
@@ -193,12 +433,17 @@ class RecommendationTypeEnum(object):
         KEYWORD = 3
         TEXT_AD = 4
         TARGET_CPA_OPT_IN = 5
+        MAXIMIZE_CONVERSIONS_OPT_IN = 6
+        ENHANCED_CPC_OPT_IN = 7
+        SEARCH_PARTNERS_OPT_IN = 8
+        MAXIMIZE_CLICKS_OPT_IN = 9
+        OPTIMIZE_AD_ROTATION = 10
 
 
 class AdNetworkTypeEnum(object):
     class AdNetworkType(enum.IntEnum):
         """
-        Enumerates AdWords network types.
+        Enumerates Google Ads network types.
 
         Attributes:
           UNSPECIFIED (int): Not specified.
@@ -208,6 +453,7 @@ class AdNetworkTypeEnum(object):
           CONTENT (int): Display Network.
           YOUTUBE_SEARCH (int): YouTube Search.
           YOUTUBE_WATCH (int): YouTube Videos
+          MIXED (int): Cross-network.
         """
         UNSPECIFIED = 0
         UNKNOWN = 1
@@ -216,6 +462,7 @@ class AdNetworkTypeEnum(object):
         CONTENT = 4
         YOUTUBE_SEARCH = 5
         YOUTUBE_WATCH = 6
+        MIXED = 7
 
 
 class TargetCpaOptInRecommendationGoalEnum(object):
@@ -333,6 +580,23 @@ class AdServingOptimizationStatusEnum(object):
         UNAVAILABLE = 6
 
 
+class CampaignSharedSetStatusEnum(object):
+    class CampaignSharedSetStatus(enum.IntEnum):
+        """
+        Enum listing the possible campaign shared set statuses.
+
+        Attributes:
+          UNSPECIFIED (int): Not specified.
+          UNKNOWN (int): Used for return value only. Represents value unknown in this version.
+          ENABLED (int): The campaign shared set is enabled.
+          REMOVED (int): The campaign shared set is removed and can no longer be used.
+        """
+        UNSPECIFIED = 0
+        UNKNOWN = 1
+        ENABLED = 2
+        REMOVED = 3
+
+
 class AdvertisingChannelSubTypeEnum(object):
     class AdvertisingChannelSubType(enum.IntEnum):
         """
@@ -342,12 +606,18 @@ class AdvertisingChannelSubTypeEnum(object):
           UNSPECIFIED (int): Not specified.
           UNKNOWN (int): Used as a return value only. Represents value unknown in this version.
           SEARCH_MOBILE_APP (int): Mobile app campaigns for Search.
+          DISPLAY_MOBILE_APP (int): Mobile app campaigns for Display.
           SEARCH_EXPRESS (int): AdWords express campaigns for search.
+          DISPLAY_EXPRESS (int): AdWords Express campaigns for display.
+          SHOPPING_SMART_ADS (int): Smart Shopping campaigns.
         """
         UNSPECIFIED = 0
         UNKNOWN = 1
         SEARCH_MOBILE_APP = 2
+        DISPLAY_MOBILE_APP = 3
         SEARCH_EXPRESS = 4
+        DISPLAY_EXPRESS = 5
+        SHOPPING_SMART_ADS = 6
 
 
 class BiddingStrategyTypeEnum(object):
@@ -435,33 +705,6 @@ class BiddingSourceEnum(object):
         CAMPAIGN_BIDDING_STRATEGY = 5
 
 
-class DayOfWeekEnum(object):
-    class DayOfWeek(enum.IntEnum):
-        """
-        Enumerates days of the week, e.g., \"Monday\".
-
-        Attributes:
-          UNSPECIFIED (int): Not specified.
-          UNKNOWN (int): The value is unknown in this version.
-          MONDAY (int): Monday.
-          TUESDAY (int): Tuesday.
-          WEDNESDAY (int): Wednesday.
-          THURSDAY (int): Thursday.
-          FRIDAY (int): Friday.
-          SATURDAY (int): Saturday.
-          SUNDAY (int): Sunday.
-        """
-        UNSPECIFIED = 0
-        UNKNOWN = 1
-        MONDAY = 2
-        TUESDAY = 3
-        WEDNESDAY = 4
-        THURSDAY = 5
-        FRIDAY = 6
-        SATURDAY = 7
-        SUNDAY = 8
-
-
 class GoogleAdsFieldCategoryEnum(object):
     class GoogleAdsFieldCategory(enum.IntEnum):
         """
@@ -496,11 +739,16 @@ class AdvertisingChannelTypeEnum(object):
           UNSPECIFIED (int): Not specified.
           UNKNOWN (int): Used for return value only. Represents value unknown in this version.
           SEARCH (int): Search Network. Includes display bundled, and Search+ campaigns.
+          DISPLAY (int): Google Display Network only.
+          SHOPPING (int): Shopping campaigns serve on the shopping property
+          and on google.com search results.
           HOTEL (int): Hotel Ads campaigns.
         """
         UNSPECIFIED = 0
         UNKNOWN = 1
         SEARCH = 2
+        DISPLAY = 3
+        SHOPPING = 4
         HOTEL = 5
 
 
@@ -521,6 +769,7 @@ class AdTypeEnum(object):
           CALL_ONLY_AD (int): The ad is a call only ad.
           EXPANDED_DYNAMIC_SEARCH_AD (int): The ad is an expanded dynamic search ad.
           HOTEL_AD (int): The ad is a hotel ad.
+          SHOPPING_SMART_AD (int): The ad is a Smart Shopping ad.
         """
         UNSPECIFIED = 0
         UNKNOWN = 1
@@ -531,6 +780,7 @@ class AdTypeEnum(object):
         CALL_ONLY_AD = 6
         EXPANDED_DYNAMIC_SEARCH_AD = 7
         HOTEL_AD = 8
+        SHOPPING_SMART_AD = 9
 
 
 class SlotEnum(object):
@@ -547,6 +797,7 @@ class SlotEnum(object):
           CONTENT (int): Google Display Network.
           SEARCH_PARTNER_TOP (int): Search partners: Top.
           SEARCH_PARTNER_OTHER (int): Search partners: Other.
+          MIXED (int): Cross-network.
         """
         UNSPECIFIED = 0
         UNKNOWN = 1
@@ -556,6 +807,24 @@ class SlotEnum(object):
         CONTENT = 5
         SEARCH_PARTNER_TOP = 6
         SEARCH_PARTNER_OTHER = 7
+        MIXED = 8
+
+
+class SharedSetStatusEnum(object):
+    class SharedSetStatus(enum.IntEnum):
+        """
+        Enum listing the possible shared set statuses.
+
+        Attributes:
+          UNSPECIFIED (int): Not specified.
+          UNKNOWN (int): Used for return value only. Represents value unknown in this version.
+          ENABLED (int): The shared set is enabled.
+          REMOVED (int): The shared set is removed and can no longer be used.
+        """
+        UNSPECIFIED = 0
+        UNKNOWN = 1
+        ENABLED = 2
+        REMOVED = 3
 
 
 class BudgetDeliveryMethodEnum(object):
@@ -644,12 +913,16 @@ class AdGroupTypeEnum(object):
 
           This is a response-only value.
           SEARCH_STANDARD (int): The default ad group type for Search campaigns.
+          DISPLAY_STANDARD (int): The default ad group type for Display campaigns.
           HOTEL_ADS (int): The default ad group type for Hotel campaigns.
+          SHOPPING_SMART_ADS (int): The type for ad groups in Smart Shopping campaigns.
         """
         UNSPECIFIED = 0
         UNKNOWN = 1
         SEARCH_STANDARD = 2
+        DISPLAY_STANDARD = 3
         HOTEL_ADS = 6
+        SHOPPING_SMART_ADS = 7
 
 
 class CriterionTypeEnum(object):
@@ -661,16 +934,53 @@ class CriterionTypeEnum(object):
           UNSPECIFIED (int): Not specified.
           UNKNOWN (int): Used for return value only. Represents value unknown in this version.
           KEYWORD (int): Keyword. e.g. 'mars cruise'.
-          PLATFORM (int): Platforms to target.
+          DEVICE (int): Devices to target.
           LOCATION (int): Locations to target.
           LISTING_GROUP (int): Listing groups to target.
+          AD_SCHEDULE (int): Ad Schedule.
         """
         UNSPECIFIED = 0
         UNKNOWN = 1
         KEYWORD = 2
-        PLATFORM = 6
+        DEVICE = 6
         LOCATION = 7
         LISTING_GROUP = 8
+        AD_SCHEDULE = 9
+
+
+class SharedSetTypeEnum(object):
+    class SharedSetType(enum.IntEnum):
+        """
+        Enum listing the possible shared set types.
+
+        Attributes:
+          UNSPECIFIED (int): Not specified.
+          UNKNOWN (int): Used for return value only. Represents value unknown in this version.
+          NEGATIVE_KEYWORDS (int): A set of keywords that can be excluded from targeting.
+          NEGATIVE_PLACEMENTS (int): A set of placements that can be excluded from targeting.
+        """
+        UNSPECIFIED = 0
+        UNKNOWN = 1
+        NEGATIVE_KEYWORDS = 2
+        NEGATIVE_PLACEMENTS = 3
+
+
+class BidModifierSourceEnum(object):
+    class BidModifierSource(enum.IntEnum):
+        """
+        Enum describing possible bid modifier sources.
+
+        Attributes:
+          UNSPECIFIED (int): Not specified.
+          UNKNOWN (int): Used for return value only. Represents value unknown in this version.
+          CAMPAIGN (int): The bid modifier is specified at the campaign level, on the campaign
+          level criterion.
+          AD_GROUP (int): The bid modifier is specified (overridden) at the ad group level.
+        """
+        UNSPECIFIED = 0
+        UNKNOWN = 1
+        CAMPAIGN = 2
+        AD_GROUP = 3
 
 
 class AdGroupAdErrorEnum(object):
@@ -704,6 +1014,22 @@ class AdGroupAdErrorEnum(object):
         RESOURCE_REFERENCED_IN_MULTIPLE_OPS = 9
 
 
+class PolicyFindingErrorEnum(object):
+    class PolicyFindingError(enum.IntEnum):
+        """
+        Enum describing possible policy finding errors.
+
+        Attributes:
+          UNSPECIFIED (int): Enum unspecified.
+          UNKNOWN (int): The received error code is not known in this version.
+          POLICY_FINDING (int): The resource has been disapproved since the policy summary includes
+          policy topics of type PROHIBITED.
+        """
+        UNSPECIFIED = 0
+        UNKNOWN = 1
+        POLICY_FINDING = 2
+
+
 class CampaignCriterionErrorEnum(object):
     class CampaignCriterionError(enum.IntEnum):
         """
@@ -726,6 +1052,7 @@ class CampaignCriterionErrorEnum(object):
           ProductSalesChannel targeting.
           CANNOT_ADD_EXISTING_FIELD (int): The existing field can't be updated with CREATE operation. It can be
           updated with UPDATE operation only.
+          CANNOT_UPDATE_NEGATIVE_CRITERION (int): Negative criteria are immutable, so updates are not allowed.
         """
         UNSPECIFIED = 0
         UNKNOWN = 1
@@ -739,6 +1066,7 @@ class CampaignCriterionErrorEnum(object):
         OPERATOR_NOT_SUPPORTED_FOR_CRITERION_TYPE = 9
         SHOPPING_CAMPAIGN_SALES_COUNTRY_NOT_SUPPORTED_FOR_SALES_CHANNEL = 10
         CANNOT_ADD_EXISTING_FIELD = 11
+        CANNOT_UPDATE_NEGATIVE_CRITERION = 12
 
 
 class QueryErrorEnum(object):
@@ -1351,6 +1679,12 @@ class AuthenticationErrorEnum(object):
           LOGIN_COOKIE_INVALID (int): Login cookie is not valid.
           FAILED_TO_RETRIEVE_LOGIN_COOKIE (int): Failed to decrypt the login cookie.
           USER_ID_INVALID (int): User Id in the header is not a valid id.
+          TWO_STEP_VERIFICATION_NOT_ENROLLED (int): An account administrator changed this account's authentication settings.
+          To access this Google Ads account, enable 2-Step Verification in your
+          Google account at https://www.google.com/landing/2step.
+          ADVANCED_PROTECTION_NOT_ENROLLED (int): An account administrator changed this account's authentication settings.
+          To access this Google Ads account, enable Advanced Protection in your
+          Google account at https://landing.google.com/advancedprotection.
         """
         UNSPECIFIED = 0
         UNKNOWN = 1
@@ -1371,6 +1705,8 @@ class AuthenticationErrorEnum(object):
         LOGIN_COOKIE_INVALID = 20
         FAILED_TO_RETRIEVE_LOGIN_COOKIE = 21
         USER_ID_INVALID = 22
+        TWO_STEP_VERIFICATION_NOT_ENROLLED = 23
+        ADVANCED_PROTECTION_NOT_ENROLLED = 24
 
 
 class CampaignBudgetErrorEnum(object):
@@ -1436,6 +1772,7 @@ class RecommendationErrorEnum(object):
           INVALID_BID_AMOUNT (int): The specified bid amount is not valid. e.g. too many fractional digits,
           or negative amount.
           ADGROUP_KEYWORD_LIMIT (int): The number of keywords in ad group have reached the maximum allowed.
+          RECOMMENDATION_ALREADY_APPLIED (int): The recommendation requested to apply has already been applied.
         """
         UNSPECIFIED = 0
         UNKNOWN = 1
@@ -1445,6 +1782,7 @@ class RecommendationErrorEnum(object):
         POLICY_ERROR = 5
         INVALID_BID_AMOUNT = 6
         ADGROUP_KEYWORD_LIMIT = 7
+        RECOMMENDATION_ALREADY_APPLIED = 8
 
 
 class NotEmptyErrorEnum(object):
@@ -1472,11 +1810,13 @@ class QuotaErrorEnum(object):
           UNKNOWN (int): The received error code is not known in this version.
           RESOURCE_EXHAUSTED (int): Too many requests.
           ACCESS_PROHIBITED (int): Access is prohibited.
+          RESOURCE_TEMPORARILY_EXHAUSTED (int): Too many requests in a short amount of time.
         """
         UNSPECIFIED = 0
         UNKNOWN = 1
         RESOURCE_EXHAUSTED = 2
         ACCESS_PROHIBITED = 3
+        RESOURCE_TEMPORARILY_EXHAUSTED = 4
 
 
 class AuthorizationErrorEnum(object):
@@ -1493,6 +1833,9 @@ class AuthorizationErrorEnum(object):
           PROJECT_DISABLED (int): The Google Cloud project sent in the request does not have permission to
           access the api.
           AUTHORIZATION_ERROR (int): Authorization of the client failed.
+          ACTION_NOT_PERMITTED (int): The user does not have permission to perform this action
+          (e.g., ADD, UPDATE, REMOVE) on the resource or call a method.
+          INCOMPLETE_SIGNUP (int): Signup not complete.
         """
         UNSPECIFIED = 0
         UNKNOWN = 1
@@ -1501,6 +1844,8 @@ class AuthorizationErrorEnum(object):
         DEVELOPER_TOKEN_PROHIBITED = 4
         PROJECT_DISABLED = 5
         AUTHORIZATION_ERROR = 6
+        ACTION_NOT_PERMITTED = 7
+        INCOMPLETE_SIGNUP = 8
 
 
 class NewResourceCreationErrorEnum(object):
@@ -1532,7 +1877,8 @@ class ResourceCountLimitExceededErrorEnum(object):
           UNSPECIFIED (int): Enum unspecified.
           UNKNOWN (int): The received error code is not known in this version.
           ACCOUNT_LIMIT (int): Indicates that this request would exceed the number of allowed resources
-          for the AdWords account. The exact resource type and limit being checked
+          for the Google Ads account. The exact resource type and limit being
+          checked
           can be inferred from accountLimitType.
           CAMPAIGN_LIMIT (int): Indicates that this request would exceed the number of allowed resources
           in a Campaign. The exact resource type and limit being checked can be
@@ -1567,6 +1913,21 @@ class ResourceCountLimitExceededErrorEnum(object):
         AD_GROUP_CRITERION_LIMIT = 6
         SHARED_SET_LIMIT = 7
         MATCHING_FUNCTION_LIMIT = 8
+
+
+class SharedCriterionErrorEnum(object):
+    class SharedCriterionError(enum.IntEnum):
+        """
+        Enum describing possible shared criterion errors.
+
+        Attributes:
+          UNSPECIFIED (int): Enum unspecified.
+          UNKNOWN (int): The received error code is not known in this version.
+          CRITERION_TYPE_NOT_ALLOWED_FOR_SHARED_SET_TYPE (int): The criterion is not appropriate for the shared set type.
+        """
+        UNSPECIFIED = 0
+        UNKNOWN = 1
+        CRITERION_TYPE_NOT_ALLOWED_FOR_SHARED_SET_TYPE = 2
 
 
 class BiddingErrorEnum(object):
@@ -2058,6 +2419,21 @@ class AdSharingErrorEnum(object):
         CANNOT_SHARE_INACTIVE_AD = 4
 
 
+class HeaderErrorEnum(object):
+    class HeaderError(enum.IntEnum):
+        """
+        Enum describing possible header errors.
+
+        Attributes:
+          UNSPECIFIED (int): Enum unspecified.
+          UNKNOWN (int): The received error code is not known in this version.
+          INVALID_USER_SELECTED_CUSTOMER_ID (int): The user selected customer id could not be parsed.
+        """
+        UNSPECIFIED = 0
+        UNKNOWN = 1
+        INVALID_USER_SELECTED_CUSTOMER_ID = 2
+
+
 class AdGroupCriterionErrorEnum(object):
     class AdGroupCriterionError(enum.IntEnum):
         """
@@ -2226,7 +2602,7 @@ class SettingErrorEnum(object):
         Attributes:
           UNSPECIFIED (int): Enum unspecified.
           UNKNOWN (int): The received error code is not known in this version.
-          SETTING_TYPE_IS_NOT_AVAILABLE (int): The campaign setting is not available for this AdWords account.
+          SETTING_TYPE_IS_NOT_AVAILABLE (int): The campaign setting is not available for this Google Ads account.
           SETTING_TYPE_IS_NOT_COMPATIBLE_WITH_CAMPAIGN (int): The setting is not compatible with the campaign.
           TARGETING_SETTING_CONTAINS_INVALID_CRITERION_TYPE_GROUP (int): The supplied TargetingSetting contains an invalid CriterionTypeGroup. See
           CriterionTypeGroup documentation for CriterionTypeGroups allowed
@@ -2365,7 +2741,7 @@ class CriterionErrorEnum(object):
           bidding strategy.
           CANNOT_EXCLUDE_CRITERION (int): The Criterion is not allowed to be excluded.
           CANNOT_REMOVE_CRITERION (int): The criterion is not allowed to be removed. For example, we cannot remove
-          any of the platform criterion.
+          any of the device criterion.
           PRODUCT_SCOPE_TOO_LONG (int): The combined length of product dimension values of the product scope
           criterion is too long.
           PRODUCT_SCOPE_TOO_MANY_DIMENSIONS (int): Product scope contains too many dimensions.
@@ -2486,6 +2862,42 @@ class CriterionErrorEnum(object):
         FIELD_INCOMPATIBLE_WITH_NEGATIVE_TARGETING = 84
 
 
+class CampaignSharedSetErrorEnum(object):
+    class CampaignSharedSetError(enum.IntEnum):
+        """
+        Enum describing possible campaign shared set errors.
+
+        Attributes:
+          UNSPECIFIED (int): Enum unspecified.
+          UNKNOWN (int): The received error code is not known in this version.
+          SHARED_SET_ACCESS_DENIED (int): The shared set belongs to another customer and permission isn't granted.
+        """
+        UNSPECIFIED = 0
+        UNKNOWN = 1
+        SHARED_SET_ACCESS_DENIED = 2
+
+
+class SharedSetErrorEnum(object):
+    class SharedSetError(enum.IntEnum):
+        """
+        Enum describing possible shared set errors.
+
+        Attributes:
+          UNSPECIFIED (int): Enum unspecified.
+          UNKNOWN (int): The received error code is not known in this version.
+          CUSTOMER_CANNOT_CREATE_SHARED_SET_OF_THIS_TYPE (int): The customer cannot create this type of shared set.
+          DUPLICATE_NAME (int): A shared set with this name already exists.
+          SHARED_SET_REMOVED (int): Removed shared sets cannot be mutated.
+          SHARED_SET_IN_USE (int): The shared set cannot be removed because it is in use.
+        """
+        UNSPECIFIED = 0
+        UNKNOWN = 1
+        CUSTOMER_CANNOT_CREATE_SHARED_SET_OF_THIS_TYPE = 2
+        DUPLICATE_NAME = 3
+        SHARED_SET_REMOVED = 4
+        SHARED_SET_IN_USE = 5
+
+
 class InternalErrorEnum(object):
     class InternalError(enum.IntEnum):
         """
@@ -2533,7 +2945,7 @@ class MediaBundleErrorEnum(object):
           SWIFFY_BUNDLE_NOT_ALLOWED (int): Media bundle created with the Swiffy tool is not allowed.
           TOO_MANY_FILES (int): The media bundle contains too many files.
           UNEXPECTED_SIZE (int): The media bundle is not of legal dimensions.
-          UNSUPPORTED_GOOGLE_WEB_DESIGNER_ENVIRONMENT (int): Google Web Designer not created for \"AdWords\" environment.
+          UNSUPPORTED_GOOGLE_WEB_DESIGNER_ENVIRONMENT (int): Google Web Designer not created for \"Google Ads\" environment.
           UNSUPPORTED_HTML5_FEATURE (int): Unsupported HTML5 feature in HTML5 asset.
           URL_IN_MEDIA_BUNDLE_NOT_SSL_COMPLIANT (int): URL in HTML5 entry is not ssl compliant.
           CUSTOM_EXIT_NOT_ALLOWED (int): Custom exits not allowed in HTML5 entry.
@@ -2664,11 +3076,30 @@ class MutateErrorEnum(object):
           UNKNOWN (int): The received error code is not known in this version.
           RESOURCE_NOT_FOUND (int): Requested resource was not found.
           ID_EXISTS_IN_MULTIPLE_MUTATES (int): Cannot mutate the same resource twice in one request.
+          INCONSISTENT_FIELD_VALUES (int): The field's contents don't match another field that represents the same
+          data.
         """
         UNSPECIFIED = 0
         UNKNOWN = 1
         RESOURCE_NOT_FOUND = 3
         ID_EXISTS_IN_MULTIPLE_MUTATES = 7
+        INCONSISTENT_FIELD_VALUES = 8
+
+
+class DatabaseErrorEnum(object):
+    class DatabaseError(enum.IntEnum):
+        """
+        Enum describing possible database errors.
+
+        Attributes:
+          UNSPECIFIED (int): Enum unspecified.
+          UNKNOWN (int): The received error code is not known in this version.
+          CONCURRENT_MODIFICATION (int): Multiple requests were attempting to modify the same resource at once.
+          Please retry the request.
+        """
+        UNSPECIFIED = 0
+        UNKNOWN = 1
+        CONCURRENT_MODIFICATION = 2
 
 
 class BiddingStrategyErrorEnum(object):
@@ -2733,9 +3164,6 @@ class CampaignErrorEnum(object):
           CAMPAIGN_LABEL_ALREADY_EXISTS (int): The label has already been attached to the campaign.
           MISSING_SHOPPING_SETTING (int): A ShoppingSetting was not found when creating a shopping campaign.
           INVALID_SHOPPING_SALES_COUNTRY (int): The country in shopping setting is not an allowed country.
-          SHOPPING_MERCHANT_NOT_ALLOWED_FOR_PURCHASES_ON_GOOGLE (int): Shopping merchant is not enabled for Purchases on Google.
-          PURCHASES_ON_GOOGLE_NOT_SUPPORTED_FOR_SHOPPING_SALES_COUNTRY (int): Purchases on Google not enabled for the shopping campaign's sales
-          country.
           MISSING_UNIVERSAL_APP_CAMPAIGN_SETTING (int): A Campaign with channel sub type UNIVERSAL_APP_CAMPAIGN must have a
           UniversalAppCampaignSetting specified.
           ADVERTISING_CHANNEL_TYPE_NOT_AVAILABLE_FOR_ACCOUNT_TYPE (int): The requested channel type is not available according to the customer's
@@ -2778,8 +3206,6 @@ class CampaignErrorEnum(object):
         CAMPAIGN_LABEL_ALREADY_EXISTS = 25
         MISSING_SHOPPING_SETTING = 26
         INVALID_SHOPPING_SALES_COUNTRY = 27
-        SHOPPING_MERCHANT_NOT_ALLOWED_FOR_PURCHASES_ON_GOOGLE = 28
-        PURCHASES_ON_GOOGLE_NOT_SUPPORTED_FOR_SHOPPING_SALES_COUNTRY = 29
         MISSING_UNIVERSAL_APP_CAMPAIGN_SETTING = 30
         ADVERTISING_CHANNEL_TYPE_NOT_AVAILABLE_FOR_ACCOUNT_TYPE = 31
         INVALID_ADVERTISING_CHANNEL_SUB_TYPE = 32
@@ -2792,6 +3218,26 @@ class CampaignErrorEnum(object):
         MISSING_HOTEL_SETTING = 39
 
 
+class CampaignGroupErrorEnum(object):
+    class CampaignGroupError(enum.IntEnum):
+        """
+        Enum describing possible campaign group errors.
+
+        Attributes:
+          UNSPECIFIED (int): Enum unspecified.
+          UNKNOWN (int): The received error code is not known in this version.
+          CANNOT_REMOVE_CAMPAIGN_GROUP_WITH_ENABLED_OR_PAUSED_CAMPAIGNS (int): CampaignGroup was removed with ENABLED or PAUSED Campaigns associated
+          with it.
+          DUPLICATE_NAME (int): CampaignGroup with the given name already exists.
+          CANNOT_MODIFY_REMOVED_CAMPAIGN_GROUP (int): Cannot modify a removed campaign group.
+        """
+        UNSPECIFIED = 0
+        UNKNOWN = 1
+        CANNOT_REMOVE_CAMPAIGN_GROUP_WITH_ENABLED_OR_PAUSED_CAMPAIGNS = 2
+        DUPLICATE_NAME = 3
+        CANNOT_MODIFY_REMOVED_CAMPAIGN_GROUP = 4
+
+
 class ContextErrorEnum(object):
     class ContextError(enum.IntEnum):
         """
@@ -2801,10 +3247,27 @@ class ContextErrorEnum(object):
           UNSPECIFIED (int): Enum unspecified.
           UNKNOWN (int): The received error code is not known in this version.
           OPERATION_NOT_PERMITTED_FOR_CONTEXT (int): The operation is not allowed for the given context.
+          OPERATION_NOT_PERMITTED_FOR_REMOVED_RESOURCE (int): The operation is not allowed for removed resources.
         """
         UNSPECIFIED = 0
         UNKNOWN = 1
         OPERATION_NOT_PERMITTED_FOR_CONTEXT = 2
+        OPERATION_NOT_PERMITTED_FOR_REMOVED_RESOURCE = 3
+
+
+class EnumErrorEnum(object):
+    class EnumError(enum.IntEnum):
+        """
+        Enum describing possible enum errors.
+
+        Attributes:
+          UNSPECIFIED (int): Enum unspecified.
+          UNKNOWN (int): The received error code is not known in this version.
+          ENUM_VALUE_NOT_PERMITTED (int): The enum value is not permitted.
+        """
+        UNSPECIFIED = 0
+        UNKNOWN = 1
+        ENUM_VALUE_NOT_PERMITTED = 3
 
 
 class FeedAttributeReferenceErrorEnum(object):

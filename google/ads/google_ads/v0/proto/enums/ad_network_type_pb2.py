@@ -19,7 +19,7 @@ DESCRIPTOR = _descriptor.FileDescriptor(
   name='google/ads/googleads_v0/proto/enums/ad_network_type.proto',
   package='google.ads.googleads.v0.enums',
   syntax='proto3',
-  serialized_pb=_b('\n9google/ads/googleads_v0/proto/enums/ad_network_type.proto\x12\x1dgoogle.ads.googleads.v0.enums\"\x98\x01\n\x11\x41\x64NetworkTypeEnum\"\x82\x01\n\rAdNetworkType\x12\x0f\n\x0bUNSPECIFIED\x10\x00\x12\x0b\n\x07UNKNOWN\x10\x01\x12\n\n\x06SEARCH\x10\x02\x12\x13\n\x0fSEARCH_PARTNERS\x10\x03\x12\x0b\n\x07\x43ONTENT\x10\x04\x12\x12\n\x0eYOUTUBE_SEARCH\x10\x05\x12\x11\n\rYOUTUBE_WATCH\x10\x06\x42\xc3\x01\n!com.google.ads.googleads.v0.enumsB\x12\x41\x64NetworkTypeProtoP\x01ZBgoogle.golang.org/genproto/googleapis/ads/googleads/v0/enums;enums\xa2\x02\x03GAA\xaa\x02\x1dGoogle.Ads.GoogleAds.V0.Enums\xca\x02\x1dGoogle\\Ads\\GoogleAds\\V0\\Enumsb\x06proto3')
+  serialized_pb=_b('\n9google/ads/googleads_v0/proto/enums/ad_network_type.proto\x12\x1dgoogle.ads.googleads.v0.enums\"\xa3\x01\n\x11\x41\x64NetworkTypeEnum\"\x8d\x01\n\rAdNetworkType\x12\x0f\n\x0bUNSPECIFIED\x10\x00\x12\x0b\n\x07UNKNOWN\x10\x01\x12\n\n\x06SEARCH\x10\x02\x12\x13\n\x0fSEARCH_PARTNERS\x10\x03\x12\x0b\n\x07\x43ONTENT\x10\x04\x12\x12\n\x0eYOUTUBE_SEARCH\x10\x05\x12\x11\n\rYOUTUBE_WATCH\x10\x06\x12\t\n\x05MIXED\x10\x07\x42\xc3\x01\n!com.google.ads.googleads.v0.enumsB\x12\x41\x64NetworkTypeProtoP\x01ZBgoogle.golang.org/genproto/googleapis/ads/googleads/v0/enums;enums\xa2\x02\x03GAA\xaa\x02\x1dGoogle.Ads.GoogleAds.V0.Enums\xca\x02\x1dGoogle\\Ads\\GoogleAds\\V0\\Enumsb\x06proto3')
 )
 
 
@@ -58,11 +58,15 @@ _ADNETWORKTYPEENUM_ADNETWORKTYPE = _descriptor.EnumDescriptor(
       name='YOUTUBE_WATCH', index=6, number=6,
       options=None,
       type=None),
+    _descriptor.EnumValueDescriptor(
+      name='MIXED', index=7, number=7,
+      options=None,
+      type=None),
   ],
   containing_type=None,
   options=None,
   serialized_start=115,
-  serialized_end=245,
+  serialized_end=256,
 )
 _sym_db.RegisterEnumDescriptor(_ADNETWORKTYPEENUM_ADNETWORKTYPE)
 
@@ -88,7 +92,7 @@ _ADNETWORKTYPEENUM = _descriptor.Descriptor(
   oneofs=[
   ],
   serialized_start=93,
-  serialized_end=245,
+  serialized_end=256,
 )
 
 _ADNETWORKTYPEENUM_ADNETWORKTYPE.containing_type = _ADNETWORKTYPEENUM
@@ -99,7 +103,7 @@ AdNetworkTypeEnum = _reflection.GeneratedProtocolMessageType('AdNetworkTypeEnum'
   DESCRIPTOR = _ADNETWORKTYPEENUM,
   __module__ = 'google.ads.googleads_v0.proto.enums.ad_network_type_pb2'
   ,
-  __doc__ = """Container for enumeration of AdWords network types.
+  __doc__ = """Container for enumeration of Google Ads network types.
   """,
   # @@protoc_insertion_point(class_scope:google.ads.googleads.v0.enums.AdNetworkTypeEnum)
   ))

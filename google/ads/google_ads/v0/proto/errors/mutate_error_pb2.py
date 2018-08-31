@@ -19,7 +19,7 @@ DESCRIPTOR = _descriptor.FileDescriptor(
   name='google/ads/googleads_v0/proto/errors/mutate_error.proto',
   package='google.ads.googleads.v0.errors',
   syntax='proto3',
-  serialized_pb=_b('\n7google/ads/googleads_v0/proto/errors/mutate_error.proto\x12\x1egoogle.ads.googleads.v0.errors\"y\n\x0fMutateErrorEnum\"f\n\x0bMutateError\x12\x0f\n\x0bUNSPECIFIED\x10\x00\x12\x0b\n\x07UNKNOWN\x10\x01\x12\x16\n\x12RESOURCE_NOT_FOUND\x10\x03\x12!\n\x1dID_EXISTS_IN_MULTIPLE_MUTATES\x10\x07\x42\xc6\x01\n\"com.google.ads.googleads.v0.errorsB\x10MutateErrorProtoP\x01ZDgoogle.golang.org/genproto/googleapis/ads/googleads/v0/errors;errors\xa2\x02\x03GAA\xaa\x02\x1eGoogle.Ads.GoogleAds.V0.Errors\xca\x02\x1eGoogle\\Ads\\GoogleAds\\V0\\Errorsb\x06proto3')
+  serialized_pb=_b('\n7google/ads/googleads_v0/proto/errors/mutate_error.proto\x12\x1egoogle.ads.googleads.v0.errors\"\x99\x01\n\x0fMutateErrorEnum\"\x85\x01\n\x0bMutateError\x12\x0f\n\x0bUNSPECIFIED\x10\x00\x12\x0b\n\x07UNKNOWN\x10\x01\x12\x16\n\x12RESOURCE_NOT_FOUND\x10\x03\x12!\n\x1dID_EXISTS_IN_MULTIPLE_MUTATES\x10\x07\x12\x1d\n\x19INCONSISTENT_FIELD_VALUES\x10\x08\x42\xc6\x01\n\"com.google.ads.googleads.v0.errorsB\x10MutateErrorProtoP\x01ZDgoogle.golang.org/genproto/googleapis/ads/googleads/v0/errors;errors\xa2\x02\x03GAA\xaa\x02\x1eGoogle.Ads.GoogleAds.V0.Errors\xca\x02\x1eGoogle\\Ads\\GoogleAds\\V0\\Errorsb\x06proto3')
 )
 
 
@@ -46,11 +46,15 @@ _MUTATEERRORENUM_MUTATEERROR = _descriptor.EnumDescriptor(
       name='ID_EXISTS_IN_MULTIPLE_MUTATES', index=3, number=7,
       options=None,
       type=None),
+    _descriptor.EnumValueDescriptor(
+      name='INCONSISTENT_FIELD_VALUES', index=4, number=8,
+      options=None,
+      type=None),
   ],
   containing_type=None,
   options=None,
-  serialized_start=110,
-  serialized_end=212,
+  serialized_start=112,
+  serialized_end=245,
 )
 _sym_db.RegisterEnumDescriptor(_MUTATEERRORENUM_MUTATEERROR)
 
@@ -75,8 +79,8 @@ _MUTATEERRORENUM = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=91,
-  serialized_end=212,
+  serialized_start=92,
+  serialized_end=245,
 )
 
 _MUTATEERRORENUM_MUTATEERROR.containing_type = _MUTATEERRORENUM

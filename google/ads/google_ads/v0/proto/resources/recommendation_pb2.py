@@ -24,7 +24,7 @@ DESCRIPTOR = _descriptor.FileDescriptor(
   name='google/ads/googleads_v0/proto/resources/recommendation.proto',
   package='google.ads.googleads.v0.resources',
   syntax='proto3',
-  serialized_pb=_b('\n<google/ads/googleads_v0/proto/resources/recommendation.proto\x12!google.ads.googleads.v0.resources\x1a\x33google/ads/googleads_v0/proto/common/criteria.proto\x1a=google/ads/googleads_v0/proto/enums/recommendation_type.proto\x1aOgoogle/ads/googleads_v0/proto/enums/target_cpa_opt_in_recommendation_goal.proto\x1a\x30google/ads/googleads_v0/proto/resources/ad.proto\x1a\x1egoogle/protobuf/wrappers.proto\"\xde\x15\n\x0eRecommendation\x12\x15\n\rresource_name\x18\x01 \x01(\t\x12V\n\x04type\x18\x02 \x01(\x0e\x32H.google.ads.googleads.v0.enums.RecommendationTypeEnum.RecommendationType\x12V\n\x06impact\x18\x03 \x01(\x0b\x32\x46.google.ads.googleads.v0.resources.Recommendation.RecommendationImpact\x12\x35\n\x0f\x63\x61mpaign_budget\x18\x05 \x01(\x0b\x32\x1c.google.protobuf.StringValue\x12.\n\x08\x63\x61mpaign\x18\x06 \x01(\x0b\x32\x1c.google.protobuf.StringValue\x12.\n\x08\x61\x64_group\x18\x07 \x01(\x0b\x32\x1c.google.protobuf.StringValue\x12x\n\x1e\x63\x61mpaign_budget_recommendation\x18\x04 \x01(\x0b\x32N.google.ads.googleads.v0.resources.Recommendation.CampaignBudgetRecommendationH\x00\x12i\n\x16keyword_recommendation\x18\x08 \x01(\x0b\x32G.google.ads.googleads.v0.resources.Recommendation.KeywordRecommendationH\x00\x12h\n\x16text_ad_recommendation\x18\t \x01(\x0b\x32\x46.google.ads.googleads.v0.resources.Recommendation.TextAdRecommendationH\x00\x12z\n target_cpa_opt_in_recommendation\x18\n \x01(\x0b\x32N.google.ads.googleads.v0.resources.Recommendation.TargetCpaOptInRecommendationH\x00\x1a\xd9\x01\n\x14RecommendationImpact\x12]\n\x0c\x62\x61se_metrics\x18\x01 \x01(\x0b\x32G.google.ads.googleads.v0.resources.Recommendation.RecommendationMetrics\x12\x62\n\x11potential_metrics\x18\x02 \x01(\x0b\x32G.google.ads.googleads.v0.resources.Recommendation.RecommendationMetrics\x1a\x90\x02\n\x15RecommendationMetrics\x12\x31\n\x0bimpressions\x18\x01 \x01(\x0b\x32\x1c.google.protobuf.DoubleValue\x12,\n\x06\x63licks\x18\x02 \x01(\x0b\x32\x1c.google.protobuf.DoubleValue\x12\x30\n\x0b\x63ost_micros\x18\x03 \x01(\x0b\x32\x1b.google.protobuf.Int64Value\x12\x31\n\x0b\x63onversions\x18\x04 \x01(\x0b\x32\x1c.google.protobuf.DoubleValue\x12\x31\n\x0bvideo_views\x18\x05 \x01(\x0b\x32\x1c.google.protobuf.DoubleValue\x1a\xee\x03\n\x1c\x43\x61mpaignBudgetRecommendation\x12\x41\n\x1c\x63urrent_budget_amount_micros\x18\x01 \x01(\x0b\x32\x1b.google.protobuf.Int64Value\x12\x45\n recommended_budget_amount_micros\x18\x02 \x01(\x0b\x32\x1b.google.protobuf.Int64Value\x12\x89\x01\n\x0e\x62udget_options\x18\x03 \x03(\x0b\x32q.google.ads.googleads.v0.resources.Recommendation.CampaignBudgetRecommendation.CampaignBudgetRecommendationOption\x1a\xb7\x01\n\"CampaignBudgetRecommendationOption\x12\x39\n\x14\x62udget_amount_micros\x18\x01 \x01(\x0b\x32\x1b.google.protobuf.Int64Value\x12V\n\x06impact\x18\x02 \x01(\x0b\x32\x46.google.ads.googleads.v0.resources.Recommendation.RecommendationImpact\x1a\x96\x01\n\x15KeywordRecommendation\x12<\n\x07keyword\x18\x01 \x01(\x0b\x32+.google.ads.googleads.v0.common.KeywordInfo\x12?\n\x1arecommended_cpc_bid_micros\x18\x02 \x01(\x0b\x32\x1b.google.protobuf.Int64Value\x1a\xb5\x01\n\x14TextAdRecommendation\x12\x31\n\x02\x61\x64\x18\x01 \x01(\x0b\x32%.google.ads.googleads.v0.resources.Ad\x12\x33\n\rcreation_date\x18\x02 \x01(\x0b\x32\x1c.google.protobuf.StringValue\x12\x35\n\x0f\x61uto_apply_date\x18\x03 \x01(\x0b\x32\x1c.google.protobuf.StringValue\x1a\xdf\x04\n\x1cTargetCpaOptInRecommendation\x12\x82\x01\n\x07options\x18\x01 \x03(\x0b\x32q.google.ads.googleads.v0.resources.Recommendation.TargetCpaOptInRecommendation.TargetCpaOptInRecommendationOption\x12\x42\n\x1drecommended_target_cpa_micros\x18\x02 \x01(\x0b\x32\x1b.google.protobuf.Int64Value\x1a\xf5\x02\n\"TargetCpaOptInRecommendationOption\x12r\n\x04goal\x18\x01 \x01(\x0e\x32\x64.google.ads.googleads.v0.enums.TargetCpaOptInRecommendationGoalEnum.TargetCpaOptInRecommendationGoal\x12\x36\n\x11target_cpa_micros\x18\x02 \x01(\x0b\x32\x1b.google.protobuf.Int64Value\x12K\n&required_campaign_budget_amount_micros\x18\x03 \x01(\x0b\x32\x1b.google.protobuf.Int64Value\x12V\n\x06impact\x18\x04 \x01(\x0b\x32\x46.google.ads.googleads.v0.resources.Recommendation.RecommendationImpactB\x10\n\x0erecommendationB\xd8\x01\n%com.google.ads.googleads.v0.resourcesB\x13RecommendationProtoP\x01ZJgoogle.golang.org/genproto/googleapis/ads/googleads/v0/resources;resources\xa2\x02\x03GAA\xaa\x02!Google.Ads.GoogleAds.V0.Resources\xca\x02!Google\\Ads\\GoogleAds\\V0\\Resourcesb\x06proto3')
+  serialized_pb=_b('\n<google/ads/googleads_v0/proto/resources/recommendation.proto\x12!google.ads.googleads.v0.resources\x1a\x33google/ads/googleads_v0/proto/common/criteria.proto\x1a=google/ads/googleads_v0/proto/enums/recommendation_type.proto\x1aOgoogle/ads/googleads_v0/proto/enums/target_cpa_opt_in_recommendation_goal.proto\x1a\x30google/ads/googleads_v0/proto/resources/ad.proto\x1a\x1egoogle/protobuf/wrappers.proto\"\xf8\x1d\n\x0eRecommendation\x12\x15\n\rresource_name\x18\x01 \x01(\t\x12V\n\x04type\x18\x02 \x01(\x0e\x32H.google.ads.googleads.v0.enums.RecommendationTypeEnum.RecommendationType\x12V\n\x06impact\x18\x03 \x01(\x0b\x32\x46.google.ads.googleads.v0.resources.Recommendation.RecommendationImpact\x12\x35\n\x0f\x63\x61mpaign_budget\x18\x05 \x01(\x0b\x32\x1c.google.protobuf.StringValue\x12.\n\x08\x63\x61mpaign\x18\x06 \x01(\x0b\x32\x1c.google.protobuf.StringValue\x12.\n\x08\x61\x64_group\x18\x07 \x01(\x0b\x32\x1c.google.protobuf.StringValue\x12-\n\tdismissed\x18\r \x01(\x0b\x32\x1a.google.protobuf.BoolValue\x12x\n\x1e\x63\x61mpaign_budget_recommendation\x18\x04 \x01(\x0b\x32N.google.ads.googleads.v0.resources.Recommendation.CampaignBudgetRecommendationH\x00\x12i\n\x16keyword_recommendation\x18\x08 \x01(\x0b\x32G.google.ads.googleads.v0.resources.Recommendation.KeywordRecommendationH\x00\x12h\n\x16text_ad_recommendation\x18\t \x01(\x0b\x32\x46.google.ads.googleads.v0.resources.Recommendation.TextAdRecommendationH\x00\x12z\n target_cpa_opt_in_recommendation\x18\n \x01(\x0b\x32N.google.ads.googleads.v0.resources.Recommendation.TargetCpaOptInRecommendationH\x00\x12\x8e\x01\n*maximize_conversions_opt_in_recommendation\x18\x0b \x01(\x0b\x32X.google.ads.googleads.v0.resources.Recommendation.MaximizeConversionsOptInRecommendationH\x00\x12~\n\"enhanced_cpc_opt_in_recommendation\x18\x0c \x01(\x0b\x32P.google.ads.googleads.v0.resources.Recommendation.EnhancedCpcOptInRecommendationH\x00\x12\x84\x01\n%search_partners_opt_in_recommendation\x18\x0e \x01(\x0b\x32S.google.ads.googleads.v0.resources.Recommendation.SearchPartnersOptInRecommendationH\x00\x12\x84\x01\n%maximize_clicks_opt_in_recommendation\x18\x0f \x01(\x0b\x32S.google.ads.googleads.v0.resources.Recommendation.MaximizeClicksOptInRecommendationH\x00\x12\x81\x01\n#optimize_ad_rotation_recommendation\x18\x10 \x01(\x0b\x32R.google.ads.googleads.v0.resources.Recommendation.OptimizeAdRotationRecommendationH\x00\x1a\xd9\x01\n\x14RecommendationImpact\x12]\n\x0c\x62\x61se_metrics\x18\x01 \x01(\x0b\x32G.google.ads.googleads.v0.resources.Recommendation.RecommendationMetrics\x12\x62\n\x11potential_metrics\x18\x02 \x01(\x0b\x32G.google.ads.googleads.v0.resources.Recommendation.RecommendationMetrics\x1a\x90\x02\n\x15RecommendationMetrics\x12\x31\n\x0bimpressions\x18\x01 \x01(\x0b\x32\x1c.google.protobuf.DoubleValue\x12,\n\x06\x63licks\x18\x02 \x01(\x0b\x32\x1c.google.protobuf.DoubleValue\x12\x30\n\x0b\x63ost_micros\x18\x03 \x01(\x0b\x32\x1b.google.protobuf.Int64Value\x12\x31\n\x0b\x63onversions\x18\x04 \x01(\x0b\x32\x1c.google.protobuf.DoubleValue\x12\x31\n\x0bvideo_views\x18\x05 \x01(\x0b\x32\x1c.google.protobuf.DoubleValue\x1a\xee\x03\n\x1c\x43\x61mpaignBudgetRecommendation\x12\x41\n\x1c\x63urrent_budget_amount_micros\x18\x01 \x01(\x0b\x32\x1b.google.protobuf.Int64Value\x12\x45\n recommended_budget_amount_micros\x18\x02 \x01(\x0b\x32\x1b.google.protobuf.Int64Value\x12\x89\x01\n\x0e\x62udget_options\x18\x03 \x03(\x0b\x32q.google.ads.googleads.v0.resources.Recommendation.CampaignBudgetRecommendation.CampaignBudgetRecommendationOption\x1a\xb7\x01\n\"CampaignBudgetRecommendationOption\x12\x39\n\x14\x62udget_amount_micros\x18\x01 \x01(\x0b\x32\x1b.google.protobuf.Int64Value\x12V\n\x06impact\x18\x02 \x01(\x0b\x32\x46.google.ads.googleads.v0.resources.Recommendation.RecommendationImpact\x1a\x96\x01\n\x15KeywordRecommendation\x12<\n\x07keyword\x18\x01 \x01(\x0b\x32+.google.ads.googleads.v0.common.KeywordInfo\x12?\n\x1arecommended_cpc_bid_micros\x18\x02 \x01(\x0b\x32\x1b.google.protobuf.Int64Value\x1a\xb5\x01\n\x14TextAdRecommendation\x12\x31\n\x02\x61\x64\x18\x01 \x01(\x0b\x32%.google.ads.googleads.v0.resources.Ad\x12\x33\n\rcreation_date\x18\x02 \x01(\x0b\x32\x1c.google.protobuf.StringValue\x12\x35\n\x0f\x61uto_apply_date\x18\x03 \x01(\x0b\x32\x1c.google.protobuf.StringValue\x1a\xdf\x04\n\x1cTargetCpaOptInRecommendation\x12\x82\x01\n\x07options\x18\x01 \x03(\x0b\x32q.google.ads.googleads.v0.resources.Recommendation.TargetCpaOptInRecommendation.TargetCpaOptInRecommendationOption\x12\x42\n\x1drecommended_target_cpa_micros\x18\x02 \x01(\x0b\x32\x1b.google.protobuf.Int64Value\x1a\xf5\x02\n\"TargetCpaOptInRecommendationOption\x12r\n\x04goal\x18\x01 \x01(\x0e\x32\x64.google.ads.googleads.v0.enums.TargetCpaOptInRecommendationGoalEnum.TargetCpaOptInRecommendationGoal\x12\x36\n\x11target_cpa_micros\x18\x02 \x01(\x0b\x32\x1b.google.protobuf.Int64Value\x12K\n&required_campaign_budget_amount_micros\x18\x03 \x01(\x0b\x32\x1b.google.protobuf.Int64Value\x12V\n\x06impact\x18\x04 \x01(\x0b\x32\x46.google.ads.googleads.v0.resources.Recommendation.RecommendationImpact\x1ao\n&MaximizeConversionsOptInRecommendation\x12\x45\n recommended_budget_amount_micros\x18\x01 \x01(\x0b\x32\x1b.google.protobuf.Int64Value\x1a \n\x1e\x45nhancedCpcOptInRecommendation\x1a#\n!SearchPartnersOptInRecommendation\x1aj\n!MaximizeClicksOptInRecommendation\x12\x45\n recommended_budget_amount_micros\x18\x01 \x01(\x0b\x32\x1b.google.protobuf.Int64Value\x1a\"\n OptimizeAdRotationRecommendationB\x10\n\x0erecommendationB\xd8\x01\n%com.google.ads.googleads.v0.resourcesB\x13RecommendationProtoP\x01ZJgoogle.golang.org/genproto/googleapis/ads/googleads/v0/resources;resources\xa2\x02\x03GAA\xaa\x02!Google.Ads.GoogleAds.V0.Resources\xca\x02!Google\\Ads\\GoogleAds\\V0\\Resourcesb\x06proto3')
   ,
   dependencies=[google_dot_ads_dot_googleads__v0_dot_proto_dot_common_dot_criteria__pb2.DESCRIPTOR,google_dot_ads_dot_googleads__v0_dot_proto_dot_enums_dot_recommendation__type__pb2.DESCRIPTOR,google_dot_ads_dot_googleads__v0_dot_proto_dot_enums_dot_target__cpa__opt__in__recommendation__goal__pb2.DESCRIPTOR,google_dot_ads_dot_googleads__v0_dot_proto_dot_resources_dot_ad__pb2.DESCRIPTOR,google_dot_protobuf_dot_wrappers__pb2.DESCRIPTOR,])
 
@@ -64,8 +64,8 @@ _RECOMMENDATION_RECOMMENDATIONIMPACT = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=1207,
-  serialized_end=1424,
+  serialized_start=1929,
+  serialized_end=2146,
 )
 
 _RECOMMENDATION_RECOMMENDATIONMETRICS = _descriptor.Descriptor(
@@ -122,8 +122,8 @@ _RECOMMENDATION_RECOMMENDATIONMETRICS = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=1427,
-  serialized_end=1699,
+  serialized_start=2149,
+  serialized_end=2421,
 )
 
 _RECOMMENDATION_CAMPAIGNBUDGETRECOMMENDATION_CAMPAIGNBUDGETRECOMMENDATIONOPTION = _descriptor.Descriptor(
@@ -159,8 +159,8 @@ _RECOMMENDATION_CAMPAIGNBUDGETRECOMMENDATION_CAMPAIGNBUDGETRECOMMENDATIONOPTION 
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=2013,
-  serialized_end=2196,
+  serialized_start=2735,
+  serialized_end=2918,
 )
 
 _RECOMMENDATION_CAMPAIGNBUDGETRECOMMENDATION = _descriptor.Descriptor(
@@ -203,8 +203,8 @@ _RECOMMENDATION_CAMPAIGNBUDGETRECOMMENDATION = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=1702,
-  serialized_end=2196,
+  serialized_start=2424,
+  serialized_end=2918,
 )
 
 _RECOMMENDATION_KEYWORDRECOMMENDATION = _descriptor.Descriptor(
@@ -240,8 +240,8 @@ _RECOMMENDATION_KEYWORDRECOMMENDATION = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=2199,
-  serialized_end=2349,
+  serialized_start=2921,
+  serialized_end=3071,
 )
 
 _RECOMMENDATION_TEXTADRECOMMENDATION = _descriptor.Descriptor(
@@ -284,8 +284,8 @@ _RECOMMENDATION_TEXTADRECOMMENDATION = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=2352,
-  serialized_end=2533,
+  serialized_start=3074,
+  serialized_end=3255,
 )
 
 _RECOMMENDATION_TARGETCPAOPTINRECOMMENDATION_TARGETCPAOPTINRECOMMENDATIONOPTION = _descriptor.Descriptor(
@@ -335,8 +335,8 @@ _RECOMMENDATION_TARGETCPAOPTINRECOMMENDATION_TARGETCPAOPTINRECOMMENDATIONOPTION 
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=2770,
-  serialized_end=3143,
+  serialized_start=3492,
+  serialized_end=3865,
 )
 
 _RECOMMENDATION_TARGETCPAOPTINRECOMMENDATION = _descriptor.Descriptor(
@@ -372,8 +372,137 @@ _RECOMMENDATION_TARGETCPAOPTINRECOMMENDATION = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=2536,
-  serialized_end=3143,
+  serialized_start=3258,
+  serialized_end=3865,
+)
+
+_RECOMMENDATION_MAXIMIZECONVERSIONSOPTINRECOMMENDATION = _descriptor.Descriptor(
+  name='MaximizeConversionsOptInRecommendation',
+  full_name='google.ads.googleads.v0.resources.Recommendation.MaximizeConversionsOptInRecommendation',
+  filename=None,
+  file=DESCRIPTOR,
+  containing_type=None,
+  fields=[
+    _descriptor.FieldDescriptor(
+      name='recommended_budget_amount_micros', full_name='google.ads.googleads.v0.resources.Recommendation.MaximizeConversionsOptInRecommendation.recommended_budget_amount_micros', index=0,
+      number=1, type=11, cpp_type=10, label=1,
+      has_default_value=False, default_value=None,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None, file=DESCRIPTOR),
+  ],
+  extensions=[
+  ],
+  nested_types=[],
+  enum_types=[
+  ],
+  options=None,
+  is_extendable=False,
+  syntax='proto3',
+  extension_ranges=[],
+  oneofs=[
+  ],
+  serialized_start=3867,
+  serialized_end=3978,
+)
+
+_RECOMMENDATION_ENHANCEDCPCOPTINRECOMMENDATION = _descriptor.Descriptor(
+  name='EnhancedCpcOptInRecommendation',
+  full_name='google.ads.googleads.v0.resources.Recommendation.EnhancedCpcOptInRecommendation',
+  filename=None,
+  file=DESCRIPTOR,
+  containing_type=None,
+  fields=[
+  ],
+  extensions=[
+  ],
+  nested_types=[],
+  enum_types=[
+  ],
+  options=None,
+  is_extendable=False,
+  syntax='proto3',
+  extension_ranges=[],
+  oneofs=[
+  ],
+  serialized_start=3980,
+  serialized_end=4012,
+)
+
+_RECOMMENDATION_SEARCHPARTNERSOPTINRECOMMENDATION = _descriptor.Descriptor(
+  name='SearchPartnersOptInRecommendation',
+  full_name='google.ads.googleads.v0.resources.Recommendation.SearchPartnersOptInRecommendation',
+  filename=None,
+  file=DESCRIPTOR,
+  containing_type=None,
+  fields=[
+  ],
+  extensions=[
+  ],
+  nested_types=[],
+  enum_types=[
+  ],
+  options=None,
+  is_extendable=False,
+  syntax='proto3',
+  extension_ranges=[],
+  oneofs=[
+  ],
+  serialized_start=4014,
+  serialized_end=4049,
+)
+
+_RECOMMENDATION_MAXIMIZECLICKSOPTINRECOMMENDATION = _descriptor.Descriptor(
+  name='MaximizeClicksOptInRecommendation',
+  full_name='google.ads.googleads.v0.resources.Recommendation.MaximizeClicksOptInRecommendation',
+  filename=None,
+  file=DESCRIPTOR,
+  containing_type=None,
+  fields=[
+    _descriptor.FieldDescriptor(
+      name='recommended_budget_amount_micros', full_name='google.ads.googleads.v0.resources.Recommendation.MaximizeClicksOptInRecommendation.recommended_budget_amount_micros', index=0,
+      number=1, type=11, cpp_type=10, label=1,
+      has_default_value=False, default_value=None,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None, file=DESCRIPTOR),
+  ],
+  extensions=[
+  ],
+  nested_types=[],
+  enum_types=[
+  ],
+  options=None,
+  is_extendable=False,
+  syntax='proto3',
+  extension_ranges=[],
+  oneofs=[
+  ],
+  serialized_start=4051,
+  serialized_end=4157,
+)
+
+_RECOMMENDATION_OPTIMIZEADROTATIONRECOMMENDATION = _descriptor.Descriptor(
+  name='OptimizeAdRotationRecommendation',
+  full_name='google.ads.googleads.v0.resources.Recommendation.OptimizeAdRotationRecommendation',
+  filename=None,
+  file=DESCRIPTOR,
+  containing_type=None,
+  fields=[
+  ],
+  extensions=[
+  ],
+  nested_types=[],
+  enum_types=[
+  ],
+  options=None,
+  is_extendable=False,
+  syntax='proto3',
+  extension_ranges=[],
+  oneofs=[
+  ],
+  serialized_start=4159,
+  serialized_end=4193,
 )
 
 _RECOMMENDATION = _descriptor.Descriptor(
@@ -426,29 +555,71 @@ _RECOMMENDATION = _descriptor.Descriptor(
       is_extension=False, extension_scope=None,
       options=None, file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
-      name='campaign_budget_recommendation', full_name='google.ads.googleads.v0.resources.Recommendation.campaign_budget_recommendation', index=6,
+      name='dismissed', full_name='google.ads.googleads.v0.resources.Recommendation.dismissed', index=6,
+      number=13, type=11, cpp_type=10, label=1,
+      has_default_value=False, default_value=None,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None, file=DESCRIPTOR),
+    _descriptor.FieldDescriptor(
+      name='campaign_budget_recommendation', full_name='google.ads.googleads.v0.resources.Recommendation.campaign_budget_recommendation', index=7,
       number=4, type=11, cpp_type=10, label=1,
       has_default_value=False, default_value=None,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None, file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
-      name='keyword_recommendation', full_name='google.ads.googleads.v0.resources.Recommendation.keyword_recommendation', index=7,
+      name='keyword_recommendation', full_name='google.ads.googleads.v0.resources.Recommendation.keyword_recommendation', index=8,
       number=8, type=11, cpp_type=10, label=1,
       has_default_value=False, default_value=None,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None, file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
-      name='text_ad_recommendation', full_name='google.ads.googleads.v0.resources.Recommendation.text_ad_recommendation', index=8,
+      name='text_ad_recommendation', full_name='google.ads.googleads.v0.resources.Recommendation.text_ad_recommendation', index=9,
       number=9, type=11, cpp_type=10, label=1,
       has_default_value=False, default_value=None,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None, file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
-      name='target_cpa_opt_in_recommendation', full_name='google.ads.googleads.v0.resources.Recommendation.target_cpa_opt_in_recommendation', index=9,
+      name='target_cpa_opt_in_recommendation', full_name='google.ads.googleads.v0.resources.Recommendation.target_cpa_opt_in_recommendation', index=10,
       number=10, type=11, cpp_type=10, label=1,
+      has_default_value=False, default_value=None,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None, file=DESCRIPTOR),
+    _descriptor.FieldDescriptor(
+      name='maximize_conversions_opt_in_recommendation', full_name='google.ads.googleads.v0.resources.Recommendation.maximize_conversions_opt_in_recommendation', index=11,
+      number=11, type=11, cpp_type=10, label=1,
+      has_default_value=False, default_value=None,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None, file=DESCRIPTOR),
+    _descriptor.FieldDescriptor(
+      name='enhanced_cpc_opt_in_recommendation', full_name='google.ads.googleads.v0.resources.Recommendation.enhanced_cpc_opt_in_recommendation', index=12,
+      number=12, type=11, cpp_type=10, label=1,
+      has_default_value=False, default_value=None,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None, file=DESCRIPTOR),
+    _descriptor.FieldDescriptor(
+      name='search_partners_opt_in_recommendation', full_name='google.ads.googleads.v0.resources.Recommendation.search_partners_opt_in_recommendation', index=13,
+      number=14, type=11, cpp_type=10, label=1,
+      has_default_value=False, default_value=None,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None, file=DESCRIPTOR),
+    _descriptor.FieldDescriptor(
+      name='maximize_clicks_opt_in_recommendation', full_name='google.ads.googleads.v0.resources.Recommendation.maximize_clicks_opt_in_recommendation', index=14,
+      number=15, type=11, cpp_type=10, label=1,
+      has_default_value=False, default_value=None,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None, file=DESCRIPTOR),
+    _descriptor.FieldDescriptor(
+      name='optimize_ad_rotation_recommendation', full_name='google.ads.googleads.v0.resources.Recommendation.optimize_ad_rotation_recommendation', index=15,
+      number=16, type=11, cpp_type=10, label=1,
       has_default_value=False, default_value=None,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
@@ -456,7 +627,7 @@ _RECOMMENDATION = _descriptor.Descriptor(
   ],
   extensions=[
   ],
-  nested_types=[_RECOMMENDATION_RECOMMENDATIONIMPACT, _RECOMMENDATION_RECOMMENDATIONMETRICS, _RECOMMENDATION_CAMPAIGNBUDGETRECOMMENDATION, _RECOMMENDATION_KEYWORDRECOMMENDATION, _RECOMMENDATION_TEXTADRECOMMENDATION, _RECOMMENDATION_TARGETCPAOPTINRECOMMENDATION, ],
+  nested_types=[_RECOMMENDATION_RECOMMENDATIONIMPACT, _RECOMMENDATION_RECOMMENDATIONMETRICS, _RECOMMENDATION_CAMPAIGNBUDGETRECOMMENDATION, _RECOMMENDATION_KEYWORDRECOMMENDATION, _RECOMMENDATION_TEXTADRECOMMENDATION, _RECOMMENDATION_TARGETCPAOPTINRECOMMENDATION, _RECOMMENDATION_MAXIMIZECONVERSIONSOPTINRECOMMENDATION, _RECOMMENDATION_ENHANCEDCPCOPTINRECOMMENDATION, _RECOMMENDATION_SEARCHPARTNERSOPTINRECOMMENDATION, _RECOMMENDATION_MAXIMIZECLICKSOPTINRECOMMENDATION, _RECOMMENDATION_OPTIMIZEADROTATIONRECOMMENDATION, ],
   enum_types=[
   ],
   options=None,
@@ -469,7 +640,7 @@ _RECOMMENDATION = _descriptor.Descriptor(
       index=0, containing_type=None, fields=[]),
   ],
   serialized_start=379,
-  serialized_end=3161,
+  serialized_end=4211,
 )
 
 _RECOMMENDATION_RECOMMENDATIONIMPACT.fields_by_name['base_metrics'].message_type = _RECOMMENDATION_RECOMMENDATIONMETRICS
@@ -503,15 +674,28 @@ _RECOMMENDATION_TARGETCPAOPTINRECOMMENDATION_TARGETCPAOPTINRECOMMENDATIONOPTION.
 _RECOMMENDATION_TARGETCPAOPTINRECOMMENDATION.fields_by_name['options'].message_type = _RECOMMENDATION_TARGETCPAOPTINRECOMMENDATION_TARGETCPAOPTINRECOMMENDATIONOPTION
 _RECOMMENDATION_TARGETCPAOPTINRECOMMENDATION.fields_by_name['recommended_target_cpa_micros'].message_type = google_dot_protobuf_dot_wrappers__pb2._INT64VALUE
 _RECOMMENDATION_TARGETCPAOPTINRECOMMENDATION.containing_type = _RECOMMENDATION
+_RECOMMENDATION_MAXIMIZECONVERSIONSOPTINRECOMMENDATION.fields_by_name['recommended_budget_amount_micros'].message_type = google_dot_protobuf_dot_wrappers__pb2._INT64VALUE
+_RECOMMENDATION_MAXIMIZECONVERSIONSOPTINRECOMMENDATION.containing_type = _RECOMMENDATION
+_RECOMMENDATION_ENHANCEDCPCOPTINRECOMMENDATION.containing_type = _RECOMMENDATION
+_RECOMMENDATION_SEARCHPARTNERSOPTINRECOMMENDATION.containing_type = _RECOMMENDATION
+_RECOMMENDATION_MAXIMIZECLICKSOPTINRECOMMENDATION.fields_by_name['recommended_budget_amount_micros'].message_type = google_dot_protobuf_dot_wrappers__pb2._INT64VALUE
+_RECOMMENDATION_MAXIMIZECLICKSOPTINRECOMMENDATION.containing_type = _RECOMMENDATION
+_RECOMMENDATION_OPTIMIZEADROTATIONRECOMMENDATION.containing_type = _RECOMMENDATION
 _RECOMMENDATION.fields_by_name['type'].enum_type = google_dot_ads_dot_googleads__v0_dot_proto_dot_enums_dot_recommendation__type__pb2._RECOMMENDATIONTYPEENUM_RECOMMENDATIONTYPE
 _RECOMMENDATION.fields_by_name['impact'].message_type = _RECOMMENDATION_RECOMMENDATIONIMPACT
 _RECOMMENDATION.fields_by_name['campaign_budget'].message_type = google_dot_protobuf_dot_wrappers__pb2._STRINGVALUE
 _RECOMMENDATION.fields_by_name['campaign'].message_type = google_dot_protobuf_dot_wrappers__pb2._STRINGVALUE
 _RECOMMENDATION.fields_by_name['ad_group'].message_type = google_dot_protobuf_dot_wrappers__pb2._STRINGVALUE
+_RECOMMENDATION.fields_by_name['dismissed'].message_type = google_dot_protobuf_dot_wrappers__pb2._BOOLVALUE
 _RECOMMENDATION.fields_by_name['campaign_budget_recommendation'].message_type = _RECOMMENDATION_CAMPAIGNBUDGETRECOMMENDATION
 _RECOMMENDATION.fields_by_name['keyword_recommendation'].message_type = _RECOMMENDATION_KEYWORDRECOMMENDATION
 _RECOMMENDATION.fields_by_name['text_ad_recommendation'].message_type = _RECOMMENDATION_TEXTADRECOMMENDATION
 _RECOMMENDATION.fields_by_name['target_cpa_opt_in_recommendation'].message_type = _RECOMMENDATION_TARGETCPAOPTINRECOMMENDATION
+_RECOMMENDATION.fields_by_name['maximize_conversions_opt_in_recommendation'].message_type = _RECOMMENDATION_MAXIMIZECONVERSIONSOPTINRECOMMENDATION
+_RECOMMENDATION.fields_by_name['enhanced_cpc_opt_in_recommendation'].message_type = _RECOMMENDATION_ENHANCEDCPCOPTINRECOMMENDATION
+_RECOMMENDATION.fields_by_name['search_partners_opt_in_recommendation'].message_type = _RECOMMENDATION_SEARCHPARTNERSOPTINRECOMMENDATION
+_RECOMMENDATION.fields_by_name['maximize_clicks_opt_in_recommendation'].message_type = _RECOMMENDATION_MAXIMIZECLICKSOPTINRECOMMENDATION
+_RECOMMENDATION.fields_by_name['optimize_ad_rotation_recommendation'].message_type = _RECOMMENDATION_OPTIMIZEADROTATIONRECOMMENDATION
 _RECOMMENDATION.oneofs_by_name['recommendation'].fields.append(
   _RECOMMENDATION.fields_by_name['campaign_budget_recommendation'])
 _RECOMMENDATION.fields_by_name['campaign_budget_recommendation'].containing_oneof = _RECOMMENDATION.oneofs_by_name['recommendation']
@@ -524,6 +708,21 @@ _RECOMMENDATION.fields_by_name['text_ad_recommendation'].containing_oneof = _REC
 _RECOMMENDATION.oneofs_by_name['recommendation'].fields.append(
   _RECOMMENDATION.fields_by_name['target_cpa_opt_in_recommendation'])
 _RECOMMENDATION.fields_by_name['target_cpa_opt_in_recommendation'].containing_oneof = _RECOMMENDATION.oneofs_by_name['recommendation']
+_RECOMMENDATION.oneofs_by_name['recommendation'].fields.append(
+  _RECOMMENDATION.fields_by_name['maximize_conversions_opt_in_recommendation'])
+_RECOMMENDATION.fields_by_name['maximize_conversions_opt_in_recommendation'].containing_oneof = _RECOMMENDATION.oneofs_by_name['recommendation']
+_RECOMMENDATION.oneofs_by_name['recommendation'].fields.append(
+  _RECOMMENDATION.fields_by_name['enhanced_cpc_opt_in_recommendation'])
+_RECOMMENDATION.fields_by_name['enhanced_cpc_opt_in_recommendation'].containing_oneof = _RECOMMENDATION.oneofs_by_name['recommendation']
+_RECOMMENDATION.oneofs_by_name['recommendation'].fields.append(
+  _RECOMMENDATION.fields_by_name['search_partners_opt_in_recommendation'])
+_RECOMMENDATION.fields_by_name['search_partners_opt_in_recommendation'].containing_oneof = _RECOMMENDATION.oneofs_by_name['recommendation']
+_RECOMMENDATION.oneofs_by_name['recommendation'].fields.append(
+  _RECOMMENDATION.fields_by_name['maximize_clicks_opt_in_recommendation'])
+_RECOMMENDATION.fields_by_name['maximize_clicks_opt_in_recommendation'].containing_oneof = _RECOMMENDATION.oneofs_by_name['recommendation']
+_RECOMMENDATION.oneofs_by_name['recommendation'].fields.append(
+  _RECOMMENDATION.fields_by_name['optimize_ad_rotation_recommendation'])
+_RECOMMENDATION.fields_by_name['optimize_ad_rotation_recommendation'].containing_oneof = _RECOMMENDATION.oneofs_by_name['recommendation']
 DESCRIPTOR.message_types_by_name['Recommendation'] = _RECOMMENDATION
 _sym_db.RegisterFileDescriptor(DESCRIPTOR)
 
@@ -690,6 +889,67 @@ Recommendation = _reflection.GeneratedProtocolMessageType('Recommendation', (_me
     # @@protoc_insertion_point(class_scope:google.ads.googleads.v0.resources.Recommendation.TargetCpaOptInRecommendation)
     ))
   ,
+
+  MaximizeConversionsOptInRecommendation = _reflection.GeneratedProtocolMessageType('MaximizeConversionsOptInRecommendation', (_message.Message,), dict(
+    DESCRIPTOR = _RECOMMENDATION_MAXIMIZECONVERSIONSOPTINRECOMMENDATION,
+    __module__ = 'google.ads.googleads_v0.proto.resources.recommendation_pb2'
+    ,
+    __doc__ = """The Maximize Conversions Opt-In recommendation.
+    
+    
+    Attributes:
+        recommended_budget_amount_micros:
+            The recommended new budget amount.
+    """,
+    # @@protoc_insertion_point(class_scope:google.ads.googleads.v0.resources.Recommendation.MaximizeConversionsOptInRecommendation)
+    ))
+  ,
+
+  EnhancedCpcOptInRecommendation = _reflection.GeneratedProtocolMessageType('EnhancedCpcOptInRecommendation', (_message.Message,), dict(
+    DESCRIPTOR = _RECOMMENDATION_ENHANCEDCPCOPTINRECOMMENDATION,
+    __module__ = 'google.ads.googleads_v0.proto.resources.recommendation_pb2'
+    ,
+    __doc__ = """The Enhanced Cost-Per-Click Opt-In recommendation.
+    """,
+    # @@protoc_insertion_point(class_scope:google.ads.googleads.v0.resources.Recommendation.EnhancedCpcOptInRecommendation)
+    ))
+  ,
+
+  SearchPartnersOptInRecommendation = _reflection.GeneratedProtocolMessageType('SearchPartnersOptInRecommendation', (_message.Message,), dict(
+    DESCRIPTOR = _RECOMMENDATION_SEARCHPARTNERSOPTINRECOMMENDATION,
+    __module__ = 'google.ads.googleads_v0.proto.resources.recommendation_pb2'
+    ,
+    __doc__ = """The Search Partners Opt-In recommendation.
+    """,
+    # @@protoc_insertion_point(class_scope:google.ads.googleads.v0.resources.Recommendation.SearchPartnersOptInRecommendation)
+    ))
+  ,
+
+  MaximizeClicksOptInRecommendation = _reflection.GeneratedProtocolMessageType('MaximizeClicksOptInRecommendation', (_message.Message,), dict(
+    DESCRIPTOR = _RECOMMENDATION_MAXIMIZECLICKSOPTINRECOMMENDATION,
+    __module__ = 'google.ads.googleads_v0.proto.resources.recommendation_pb2'
+    ,
+    __doc__ = """The Maximize Clicks opt-in recommendation.
+    
+    
+    Attributes:
+        recommended_budget_amount_micros:
+            The recommended new budget amount. Only set if the current
+            budget is too high.
+    """,
+    # @@protoc_insertion_point(class_scope:google.ads.googleads.v0.resources.Recommendation.MaximizeClicksOptInRecommendation)
+    ))
+  ,
+
+  OptimizeAdRotationRecommendation = _reflection.GeneratedProtocolMessageType('OptimizeAdRotationRecommendation', (_message.Message,), dict(
+    DESCRIPTOR = _RECOMMENDATION_OPTIMIZEADROTATIONRECOMMENDATION,
+    __module__ = 'google.ads.googleads_v0.proto.resources.recommendation_pb2'
+    ,
+    __doc__ = """The Optimize Ad Rotation recommendation.
+    """,
+    # @@protoc_insertion_point(class_scope:google.ads.googleads.v0.resources.Recommendation.OptimizeAdRotationRecommendation)
+    ))
+  ,
   DESCRIPTOR = _RECOMMENDATION,
   __module__ = 'google.ads.googleads_v0.proto.resources.recommendation_pb2'
   ,
@@ -715,13 +975,18 @@ Recommendation = _reflection.GeneratedProtocolMessageType('Recommendation', (_me
           The campaign targeted by this recommendation. This will be set
           only when the recommendation affects a single campaign.  This
           field must not be used in WHERE clauses.  This field will be
-          set for the following recommendation types: KEYWORD, TEXT\_AD,
-          TARGET\_CPA\_OPT\_IN
+          set for the following recommendation types:
+          ENHANCED\_CPC\_OPT\_IN, KEYWORD, MAXIMIZE\_CLICKS\_OPT\_IN,
+          MAXIMIZE\_CONVERSIONS\_OPT\_IN, OPTIMIZE\_AD\_ROTATION,
+          SEARCH\_PARTNERS\_OPT\_IN, TARGET\_CPA\_OPT\_IN, TEXT\_AD
       ad_group:
           The ad group targeted by this recommendation. This will be set
           only when the recommendation affects a single ad group.  This
           field must not be used in WHERE clauses.  This field will be
-          set for the following recommendation types: KEYWORD, TEXT\_AD
+          set for the following recommendation types: KEYWORD,
+          OPTIMIZE\_AD\_ROTATION, TEXT\_AD
+      dismissed:
+          Whether the recommendation is dismissed or not.
       recommendation:
           The details of recommendation.
       campaign_budget_recommendation:
@@ -732,6 +997,16 @@ Recommendation = _reflection.GeneratedProtocolMessageType('Recommendation', (_me
           Add expanded text ad recommendation.
       target_cpa_opt_in_recommendation:
           The TargetCPA opt-in recommendation.
+      maximize_conversions_opt_in_recommendation:
+          The MaximizeConversions Opt-In recommendation.
+      enhanced_cpc_opt_in_recommendation:
+          The Enhanced Cost-Per-Click Opt-In recommendation.
+      search_partners_opt_in_recommendation:
+          The Search Partners Opt-In recommendation.
+      maximize_clicks_opt_in_recommendation:
+          The MaximizeClicks Opt-In recommendation.
+      optimize_ad_rotation_recommendation:
+          The Optimize Ad Rotation recommendation.
   """,
   # @@protoc_insertion_point(class_scope:google.ads.googleads.v0.resources.Recommendation)
   ))
@@ -744,6 +1019,11 @@ _sym_db.RegisterMessage(Recommendation.KeywordRecommendation)
 _sym_db.RegisterMessage(Recommendation.TextAdRecommendation)
 _sym_db.RegisterMessage(Recommendation.TargetCpaOptInRecommendation)
 _sym_db.RegisterMessage(Recommendation.TargetCpaOptInRecommendation.TargetCpaOptInRecommendationOption)
+_sym_db.RegisterMessage(Recommendation.MaximizeConversionsOptInRecommendation)
+_sym_db.RegisterMessage(Recommendation.EnhancedCpcOptInRecommendation)
+_sym_db.RegisterMessage(Recommendation.SearchPartnersOptInRecommendation)
+_sym_db.RegisterMessage(Recommendation.MaximizeClicksOptInRecommendation)
+_sym_db.RegisterMessage(Recommendation.OptimizeAdRotationRecommendation)
 
 
 DESCRIPTOR.has_options = True

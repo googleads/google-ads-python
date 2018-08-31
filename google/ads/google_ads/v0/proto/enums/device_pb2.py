@@ -19,7 +19,7 @@ DESCRIPTOR = _descriptor.FileDescriptor(
   name='google/ads/googleads_v0/proto/enums/device.proto',
   package='google.ads.googleads.v0.enums',
   syntax='proto3',
-  serialized_pb=_b('\n0google/ads/googleads_v0/proto/enums/device.proto\x12\x1dgoogle.ads.googleads.v0.enums\"Y\n\nDeviceEnum\"K\n\x06\x44\x65vice\x12\x0f\n\x0bUNSPECIFIED\x10\x00\x12\x0b\n\x07UNKNOWN\x10\x01\x12\n\n\x06MOBILE\x10\x02\x12\n\n\x06TABLET\x10\x03\x12\x0b\n\x07\x44\x45SKTOP\x10\x04\x42\xbc\x01\n!com.google.ads.googleads.v0.enumsB\x0b\x44\x65viceProtoP\x01ZBgoogle.golang.org/genproto/googleapis/ads/googleads/v0/enums;enums\xa2\x02\x03GAA\xaa\x02\x1dGoogle.Ads.GoogleAds.V0.Enums\xca\x02\x1dGoogle\\Ads\\GoogleAds\\V0\\Enumsb\x06proto3')
+  serialized_pb=_b('\n0google/ads/googleads_v0/proto/enums/device.proto\x12\x1dgoogle.ads.googleads.v0.enums\"k\n\nDeviceEnum\"]\n\x06\x44\x65vice\x12\x0f\n\x0bUNSPECIFIED\x10\x00\x12\x0b\n\x07UNKNOWN\x10\x01\x12\n\n\x06MOBILE\x10\x02\x12\n\n\x06TABLET\x10\x03\x12\x0b\n\x07\x44\x45SKTOP\x10\x04\x12\x10\n\x0c\x43ONNECTED_TV\x10\x05\x42\xbc\x01\n!com.google.ads.googleads.v0.enumsB\x0b\x44\x65viceProtoP\x01ZBgoogle.golang.org/genproto/googleapis/ads/googleads/v0/enums;enums\xa2\x02\x03GAA\xaa\x02\x1dGoogle.Ads.GoogleAds.V0.Enums\xca\x02\x1dGoogle\\Ads\\GoogleAds\\V0\\Enumsb\x06proto3')
 )
 
 
@@ -50,11 +50,15 @@ _DEVICEENUM_DEVICE = _descriptor.EnumDescriptor(
       name='DESKTOP', index=4, number=4,
       options=None,
       type=None),
+    _descriptor.EnumValueDescriptor(
+      name='CONNECTED_TV', index=5, number=5,
+      options=None,
+      type=None),
   ],
   containing_type=None,
   options=None,
   serialized_start=97,
-  serialized_end=172,
+  serialized_end=190,
 )
 _sym_db.RegisterEnumDescriptor(_DEVICEENUM_DEVICE)
 
@@ -80,7 +84,7 @@ _DEVICEENUM = _descriptor.Descriptor(
   oneofs=[
   ],
   serialized_start=83,
-  serialized_end=172,
+  serialized_end=190,
 )
 
 _DEVICEENUM_DEVICE.containing_type = _DEVICEENUM
@@ -91,7 +95,7 @@ DeviceEnum = _reflection.GeneratedProtocolMessageType('DeviceEnum', (_message.Me
   DESCRIPTOR = _DEVICEENUM,
   __module__ = 'google.ads.googleads_v0.proto.enums.device_pb2'
   ,
-  __doc__ = """Container for enumeration of AdWords platforms available for targeting.
+  __doc__ = """Container for enumeration of Google Ads devices available for targeting.
   """,
   # @@protoc_insertion_point(class_scope:google.ads.googleads.v0.enums.DeviceEnum)
   ))

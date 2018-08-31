@@ -19,7 +19,7 @@ DESCRIPTOR = _descriptor.FileDescriptor(
   name='google/ads/googleads_v0/proto/enums/slot.proto',
   package='google.ads.googleads.v0.enums',
   syntax='proto3',
-  serialized_pb=_b('\n.google/ads/googleads_v0/proto/enums/slot.proto\x12\x1dgoogle.ads.googleads.v0.enums\"\xa3\x01\n\x08SlotEnum\"\x96\x01\n\x04Slot\x12\x0f\n\x0bUNSPECIFIED\x10\x00\x12\x0b\n\x07UNKNOWN\x10\x01\x12\x0f\n\x0bSEARCH_SIDE\x10\x02\x12\x0e\n\nSEARCH_TOP\x10\x03\x12\x10\n\x0cSEARCH_OTHER\x10\x04\x12\x0b\n\x07\x43ONTENT\x10\x05\x12\x16\n\x12SEARCH_PARTNER_TOP\x10\x06\x12\x18\n\x14SEARCH_PARTNER_OTHER\x10\x07\x42\xba\x01\n!com.google.ads.googleads.v0.enumsB\tSlotProtoP\x01ZBgoogle.golang.org/genproto/googleapis/ads/googleads/v0/enums;enums\xa2\x02\x03GAA\xaa\x02\x1dGoogle.Ads.GoogleAds.V0.Enums\xca\x02\x1dGoogle\\Ads\\GoogleAds\\V0\\Enumsb\x06proto3')
+  serialized_pb=_b('\n.google/ads/googleads_v0/proto/enums/slot.proto\x12\x1dgoogle.ads.googleads.v0.enums\"\xae\x01\n\x08SlotEnum\"\xa1\x01\n\x04Slot\x12\x0f\n\x0bUNSPECIFIED\x10\x00\x12\x0b\n\x07UNKNOWN\x10\x01\x12\x0f\n\x0bSEARCH_SIDE\x10\x02\x12\x0e\n\nSEARCH_TOP\x10\x03\x12\x10\n\x0cSEARCH_OTHER\x10\x04\x12\x0b\n\x07\x43ONTENT\x10\x05\x12\x16\n\x12SEARCH_PARTNER_TOP\x10\x06\x12\x18\n\x14SEARCH_PARTNER_OTHER\x10\x07\x12\t\n\x05MIXED\x10\x08\x42\xba\x01\n!com.google.ads.googleads.v0.enumsB\tSlotProtoP\x01ZBgoogle.golang.org/genproto/googleapis/ads/googleads/v0/enums;enums\xa2\x02\x03GAA\xaa\x02\x1dGoogle.Ads.GoogleAds.V0.Enums\xca\x02\x1dGoogle\\Ads\\GoogleAds\\V0\\Enumsb\x06proto3')
 )
 
 
@@ -62,11 +62,15 @@ _SLOTENUM_SLOT = _descriptor.EnumDescriptor(
       name='SEARCH_PARTNER_OTHER', index=7, number=7,
       options=None,
       type=None),
+    _descriptor.EnumValueDescriptor(
+      name='MIXED', index=8, number=8,
+      options=None,
+      type=None),
   ],
   containing_type=None,
   options=None,
   serialized_start=95,
-  serialized_end=245,
+  serialized_end=256,
 )
 _sym_db.RegisterEnumDescriptor(_SLOTENUM_SLOT)
 
@@ -92,7 +96,7 @@ _SLOTENUM = _descriptor.Descriptor(
   oneofs=[
   ],
   serialized_start=82,
-  serialized_end=245,
+  serialized_end=256,
 )
 
 _SLOTENUM_SLOT.containing_type = _SLOTENUM

@@ -19,7 +19,7 @@ DESCRIPTOR = _descriptor.FileDescriptor(
   name='google/ads/googleads_v0/proto/enums/ad_group_type.proto',
   package='google.ads.googleads.v0.enums',
   syntax='proto3',
-  serialized_pb=_b('\n7google/ads/googleads_v0/proto/enums/ad_group_type.proto\x12\x1dgoogle.ads.googleads.v0.enums\"b\n\x0f\x41\x64GroupTypeEnum\"O\n\x0b\x41\x64GroupType\x12\x0f\n\x0bUNSPECIFIED\x10\x00\x12\x0b\n\x07UNKNOWN\x10\x01\x12\x13\n\x0fSEARCH_STANDARD\x10\x02\x12\r\n\tHOTEL_ADS\x10\x06\x42\xc1\x01\n!com.google.ads.googleads.v0.enumsB\x10\x41\x64GroupTypeProtoP\x01ZBgoogle.golang.org/genproto/googleapis/ads/googleads/v0/enums;enums\xa2\x02\x03GAA\xaa\x02\x1dGoogle.Ads.GoogleAds.V0.Enums\xca\x02\x1dGoogle\\Ads\\GoogleAds\\V0\\Enumsb\x06proto3')
+  serialized_pb=_b('\n7google/ads/googleads_v0/proto/enums/ad_group_type.proto\x12\x1dgoogle.ads.googleads.v0.enums\"\x90\x01\n\x0f\x41\x64GroupTypeEnum\"}\n\x0b\x41\x64GroupType\x12\x0f\n\x0bUNSPECIFIED\x10\x00\x12\x0b\n\x07UNKNOWN\x10\x01\x12\x13\n\x0fSEARCH_STANDARD\x10\x02\x12\x14\n\x10\x44ISPLAY_STANDARD\x10\x03\x12\r\n\tHOTEL_ADS\x10\x06\x12\x16\n\x12SHOPPING_SMART_ADS\x10\x07\x42\xc1\x01\n!com.google.ads.googleads.v0.enumsB\x10\x41\x64GroupTypeProtoP\x01ZBgoogle.golang.org/genproto/googleapis/ads/googleads/v0/enums;enums\xa2\x02\x03GAA\xaa\x02\x1dGoogle.Ads.GoogleAds.V0.Enums\xca\x02\x1dGoogle\\Ads\\GoogleAds\\V0\\Enumsb\x06proto3')
 )
 
 
@@ -43,14 +43,22 @@ _ADGROUPTYPEENUM_ADGROUPTYPE = _descriptor.EnumDescriptor(
       options=None,
       type=None),
     _descriptor.EnumValueDescriptor(
-      name='HOTEL_ADS', index=3, number=6,
+      name='DISPLAY_STANDARD', index=3, number=3,
+      options=None,
+      type=None),
+    _descriptor.EnumValueDescriptor(
+      name='HOTEL_ADS', index=4, number=6,
+      options=None,
+      type=None),
+    _descriptor.EnumValueDescriptor(
+      name='SHOPPING_SMART_ADS', index=5, number=7,
       options=None,
       type=None),
   ],
   containing_type=None,
   options=None,
-  serialized_start=109,
-  serialized_end=188,
+  serialized_start=110,
+  serialized_end=235,
 )
 _sym_db.RegisterEnumDescriptor(_ADGROUPTYPEENUM_ADGROUPTYPE)
 
@@ -75,8 +83,8 @@ _ADGROUPTYPEENUM = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=90,
-  serialized_end=188,
+  serialized_start=91,
+  serialized_end=235,
 )
 
 _ADGROUPTYPEENUM_ADGROUPTYPE.containing_type = _ADGROUPTYPEENUM

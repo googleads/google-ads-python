@@ -19,7 +19,7 @@ DESCRIPTOR = _descriptor.FileDescriptor(
   name='google/ads/googleads_v0/proto/errors/recommendation_error.proto',
   package='google.ads.googleads.v0.errors',
   syntax='proto3',
-  serialized_pb=_b('\n?google/ads/googleads_v0/proto/errors/recommendation_error.proto\x12\x1egoogle.ads.googleads.v0.errors\"\xe9\x01\n\x17RecommendationErrorEnum\"\xcd\x01\n\x13RecommendationError\x12\x0f\n\x0bUNSPECIFIED\x10\x00\x12\x0b\n\x07UNKNOWN\x10\x01\x12\x1b\n\x17\x42UDGET_AMOUNT_TOO_SMALL\x10\x02\x12\x1b\n\x17\x42UDGET_AMOUNT_TOO_LARGE\x10\x03\x12\x19\n\x15INVALID_BUDGET_AMOUNT\x10\x04\x12\x10\n\x0cPOLICY_ERROR\x10\x05\x12\x16\n\x12INVALID_BID_AMOUNT\x10\x06\x12\x19\n\x15\x41\x44GROUP_KEYWORD_LIMIT\x10\x07\x42\xce\x01\n\"com.google.ads.googleads.v0.errorsB\x18RecommendationErrorProtoP\x01ZDgoogle.golang.org/genproto/googleapis/ads/googleads/v0/errors;errors\xa2\x02\x03GAA\xaa\x02\x1eGoogle.Ads.GoogleAds.V0.Errors\xca\x02\x1eGoogle\\Ads\\GoogleAds\\V0\\Errorsb\x06proto3')
+  serialized_pb=_b('\n?google/ads/googleads_v0/proto/errors/recommendation_error.proto\x12\x1egoogle.ads.googleads.v0.errors\"\x8d\x02\n\x17RecommendationErrorEnum\"\xf1\x01\n\x13RecommendationError\x12\x0f\n\x0bUNSPECIFIED\x10\x00\x12\x0b\n\x07UNKNOWN\x10\x01\x12\x1b\n\x17\x42UDGET_AMOUNT_TOO_SMALL\x10\x02\x12\x1b\n\x17\x42UDGET_AMOUNT_TOO_LARGE\x10\x03\x12\x19\n\x15INVALID_BUDGET_AMOUNT\x10\x04\x12\x10\n\x0cPOLICY_ERROR\x10\x05\x12\x16\n\x12INVALID_BID_AMOUNT\x10\x06\x12\x19\n\x15\x41\x44GROUP_KEYWORD_LIMIT\x10\x07\x12\"\n\x1eRECOMMENDATION_ALREADY_APPLIED\x10\x08\x42\xce\x01\n\"com.google.ads.googleads.v0.errorsB\x18RecommendationErrorProtoP\x01ZDgoogle.golang.org/genproto/googleapis/ads/googleads/v0/errors;errors\xa2\x02\x03GAA\xaa\x02\x1eGoogle.Ads.GoogleAds.V0.Errors\xca\x02\x1eGoogle\\Ads\\GoogleAds\\V0\\Errorsb\x06proto3')
 )
 
 
@@ -62,11 +62,15 @@ _RECOMMENDATIONERRORENUM_RECOMMENDATIONERROR = _descriptor.EnumDescriptor(
       name='ADGROUP_KEYWORD_LIMIT', index=7, number=7,
       options=None,
       type=None),
+    _descriptor.EnumValueDescriptor(
+      name='RECOMMENDATION_ALREADY_APPLIED', index=8, number=8,
+      options=None,
+      type=None),
   ],
   containing_type=None,
   options=None,
   serialized_start=128,
-  serialized_end=333,
+  serialized_end=369,
 )
 _sym_db.RegisterEnumDescriptor(_RECOMMENDATIONERRORENUM_RECOMMENDATIONERROR)
 
@@ -92,7 +96,7 @@ _RECOMMENDATIONERRORENUM = _descriptor.Descriptor(
   oneofs=[
   ],
   serialized_start=100,
-  serialized_end=333,
+  serialized_end=369,
 )
 
 _RECOMMENDATIONERRORENUM_RECOMMENDATIONERROR.containing_type = _RECOMMENDATIONERRORENUM

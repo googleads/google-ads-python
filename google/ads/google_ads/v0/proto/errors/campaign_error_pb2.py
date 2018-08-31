@@ -19,7 +19,7 @@ DESCRIPTOR = _descriptor.FileDescriptor(
   name='google/ads/googleads_v0/proto/errors/campaign_error.proto',
   package='google.ads.googleads.v0.errors',
   syntax='proto3',
-  serialized_pb=_b('\n9google/ads/googleads_v0/proto/errors/campaign_error.proto\x12\x1egoogle.ads.googleads.v0.errors\"\xcf\x0c\n\x11\x43\x61mpaignErrorEnum\"\xb9\x0c\n\rCampaignError\x12\x0f\n\x0bUNSPECIFIED\x10\x00\x12\x0b\n\x07UNKNOWN\x10\x01\x12!\n\x1d\x43\x41NNOT_TARGET_CONTENT_NETWORK\x10\x03\x12 \n\x1c\x43\x41NNOT_TARGET_SEARCH_NETWORK\x10\x04\x12\x36\n2CANNOT_TARGET_SEARCH_NETWORK_WITHOUT_GOOGLE_SEARCH\x10\x05\x12\x30\n,CANNOT_TARGET_GOOGLE_SEARCH_FOR_CPM_CAMPAIGN\x10\x06\x12-\n)CAMPAIGN_MUST_TARGET_AT_LEAST_ONE_NETWORK\x10\x07\x12(\n$CANNOT_TARGET_PARTNER_SEARCH_NETWORK\x10\x08\x12K\nGCANNOT_TARGET_CONTENT_NETWORK_ONLY_WITH_CRITERIA_LEVEL_BIDDING_STRATEGY\x10\t\x12\x36\n2CAMPAIGN_DURATION_MUST_CONTAIN_ALL_RUNNABLE_TRIALS\x10\n\x12$\n CANNOT_MODIFY_FOR_TRIAL_CAMPAIGN\x10\x0b\x12\x1b\n\x17\x44UPLICATE_CAMPAIGN_NAME\x10\x0c\x12\x1f\n\x1bINCOMPATIBLE_CAMPAIGN_FIELD\x10\r\x12\x19\n\x15INVALID_CAMPAIGN_NAME\x10\x0e\x12*\n&INVALID_AD_SERVING_OPTIMIZATION_STATUS\x10\x0f\x12\x18\n\x14INVALID_TRACKING_URL\x10\x10\x12>\n:CANNOT_SET_BOTH_TRACKING_URL_TEMPLATE_AND_TRACKING_SETTING\x10\x11\x12 \n\x1cMAX_IMPRESSIONS_NOT_IN_RANGE\x10\x12\x12\x1b\n\x17TIME_UNIT_NOT_SUPPORTED\x10\x13\x12\x31\n-INVALID_OPERATION_IF_SERVING_STATUS_HAS_ENDED\x10\x14\x12\x1b\n\x17\x42UDGET_CANNOT_BE_SHARED\x10\x15\x12%\n!CAMPAIGN_CANNOT_USE_SHARED_BUDGET\x10\x16\x12\x30\n,CANNOT_CHANGE_BUDGET_ON_CAMPAIGN_WITH_TRIALS\x10\x17\x12!\n\x1d\x43\x41MPAIGN_LABEL_DOES_NOT_EXIST\x10\x18\x12!\n\x1d\x43\x41MPAIGN_LABEL_ALREADY_EXISTS\x10\x19\x12\x1c\n\x18MISSING_SHOPPING_SETTING\x10\x1a\x12\"\n\x1eINVALID_SHOPPING_SALES_COUNTRY\x10\x1b\x12\x39\n5SHOPPING_MERCHANT_NOT_ALLOWED_FOR_PURCHASES_ON_GOOGLE\x10\x1c\x12@\n<PURCHASES_ON_GOOGLE_NOT_SUPPORTED_FOR_SHOPPING_SALES_COUNTRY\x10\x1d\x12*\n&MISSING_UNIVERSAL_APP_CAMPAIGN_SETTING\x10\x1e\x12;\n7ADVERTISING_CHANNEL_TYPE_NOT_AVAILABLE_FOR_ACCOUNT_TYPE\x10\x1f\x12(\n$INVALID_ADVERTISING_CHANNEL_SUB_TYPE\x10 \x12,\n(AT_LEAST_ONE_CONVERSION_MUST_BE_SELECTED\x10!\x12\x1f\n\x1b\x43\x41NNOT_SET_AD_ROTATION_MODE\x10\"\x12/\n+CANNOT_MODIFY_START_DATE_IF_ALREADY_STARTED\x10#\x12\x1b\n\x17\x43\x41NNOT_SET_DATE_TO_PAST\x10$\x12\x1f\n\x1bMISSING_HOTEL_CUSTOMER_LINK\x10%\x12\x1f\n\x1bINVALID_HOTEL_CUSTOMER_LINK\x10&\x12\x19\n\x15MISSING_HOTEL_SETTING\x10\'B\xc8\x01\n\"com.google.ads.googleads.v0.errorsB\x12\x43\x61mpaignErrorProtoP\x01ZDgoogle.golang.org/genproto/googleapis/ads/googleads/v0/errors;errors\xa2\x02\x03GAA\xaa\x02\x1eGoogle.Ads.GoogleAds.V0.Errors\xca\x02\x1eGoogle\\Ads\\GoogleAds\\V0\\Errorsb\x06proto3')
+  serialized_pb=_b('\n9google/ads/googleads_v0/proto/errors/campaign_error.proto\x12\x1egoogle.ads.googleads.v0.errors\"\xd2\x0b\n\x11\x43\x61mpaignErrorEnum\"\xbc\x0b\n\rCampaignError\x12\x0f\n\x0bUNSPECIFIED\x10\x00\x12\x0b\n\x07UNKNOWN\x10\x01\x12!\n\x1d\x43\x41NNOT_TARGET_CONTENT_NETWORK\x10\x03\x12 \n\x1c\x43\x41NNOT_TARGET_SEARCH_NETWORK\x10\x04\x12\x36\n2CANNOT_TARGET_SEARCH_NETWORK_WITHOUT_GOOGLE_SEARCH\x10\x05\x12\x30\n,CANNOT_TARGET_GOOGLE_SEARCH_FOR_CPM_CAMPAIGN\x10\x06\x12-\n)CAMPAIGN_MUST_TARGET_AT_LEAST_ONE_NETWORK\x10\x07\x12(\n$CANNOT_TARGET_PARTNER_SEARCH_NETWORK\x10\x08\x12K\nGCANNOT_TARGET_CONTENT_NETWORK_ONLY_WITH_CRITERIA_LEVEL_BIDDING_STRATEGY\x10\t\x12\x36\n2CAMPAIGN_DURATION_MUST_CONTAIN_ALL_RUNNABLE_TRIALS\x10\n\x12$\n CANNOT_MODIFY_FOR_TRIAL_CAMPAIGN\x10\x0b\x12\x1b\n\x17\x44UPLICATE_CAMPAIGN_NAME\x10\x0c\x12\x1f\n\x1bINCOMPATIBLE_CAMPAIGN_FIELD\x10\r\x12\x19\n\x15INVALID_CAMPAIGN_NAME\x10\x0e\x12*\n&INVALID_AD_SERVING_OPTIMIZATION_STATUS\x10\x0f\x12\x18\n\x14INVALID_TRACKING_URL\x10\x10\x12>\n:CANNOT_SET_BOTH_TRACKING_URL_TEMPLATE_AND_TRACKING_SETTING\x10\x11\x12 \n\x1cMAX_IMPRESSIONS_NOT_IN_RANGE\x10\x12\x12\x1b\n\x17TIME_UNIT_NOT_SUPPORTED\x10\x13\x12\x31\n-INVALID_OPERATION_IF_SERVING_STATUS_HAS_ENDED\x10\x14\x12\x1b\n\x17\x42UDGET_CANNOT_BE_SHARED\x10\x15\x12%\n!CAMPAIGN_CANNOT_USE_SHARED_BUDGET\x10\x16\x12\x30\n,CANNOT_CHANGE_BUDGET_ON_CAMPAIGN_WITH_TRIALS\x10\x17\x12!\n\x1d\x43\x41MPAIGN_LABEL_DOES_NOT_EXIST\x10\x18\x12!\n\x1d\x43\x41MPAIGN_LABEL_ALREADY_EXISTS\x10\x19\x12\x1c\n\x18MISSING_SHOPPING_SETTING\x10\x1a\x12\"\n\x1eINVALID_SHOPPING_SALES_COUNTRY\x10\x1b\x12*\n&MISSING_UNIVERSAL_APP_CAMPAIGN_SETTING\x10\x1e\x12;\n7ADVERTISING_CHANNEL_TYPE_NOT_AVAILABLE_FOR_ACCOUNT_TYPE\x10\x1f\x12(\n$INVALID_ADVERTISING_CHANNEL_SUB_TYPE\x10 \x12,\n(AT_LEAST_ONE_CONVERSION_MUST_BE_SELECTED\x10!\x12\x1f\n\x1b\x43\x41NNOT_SET_AD_ROTATION_MODE\x10\"\x12/\n+CANNOT_MODIFY_START_DATE_IF_ALREADY_STARTED\x10#\x12\x1b\n\x17\x43\x41NNOT_SET_DATE_TO_PAST\x10$\x12\x1f\n\x1bMISSING_HOTEL_CUSTOMER_LINK\x10%\x12\x1f\n\x1bINVALID_HOTEL_CUSTOMER_LINK\x10&\x12\x19\n\x15MISSING_HOTEL_SETTING\x10\'B\xc8\x01\n\"com.google.ads.googleads.v0.errorsB\x12\x43\x61mpaignErrorProtoP\x01ZDgoogle.golang.org/genproto/googleapis/ads/googleads/v0/errors;errors\xa2\x02\x03GAA\xaa\x02\x1eGoogle.Ads.GoogleAds.V0.Errors\xca\x02\x1eGoogle\\Ads\\GoogleAds\\V0\\Errorsb\x06proto3')
 )
 
 
@@ -139,58 +139,50 @@ _CAMPAIGNERRORENUM_CAMPAIGNERROR = _descriptor.EnumDescriptor(
       options=None,
       type=None),
     _descriptor.EnumValueDescriptor(
-      name='SHOPPING_MERCHANT_NOT_ALLOWED_FOR_PURCHASES_ON_GOOGLE', index=27, number=28,
+      name='MISSING_UNIVERSAL_APP_CAMPAIGN_SETTING', index=27, number=30,
       options=None,
       type=None),
     _descriptor.EnumValueDescriptor(
-      name='PURCHASES_ON_GOOGLE_NOT_SUPPORTED_FOR_SHOPPING_SALES_COUNTRY', index=28, number=29,
+      name='ADVERTISING_CHANNEL_TYPE_NOT_AVAILABLE_FOR_ACCOUNT_TYPE', index=28, number=31,
       options=None,
       type=None),
     _descriptor.EnumValueDescriptor(
-      name='MISSING_UNIVERSAL_APP_CAMPAIGN_SETTING', index=29, number=30,
+      name='INVALID_ADVERTISING_CHANNEL_SUB_TYPE', index=29, number=32,
       options=None,
       type=None),
     _descriptor.EnumValueDescriptor(
-      name='ADVERTISING_CHANNEL_TYPE_NOT_AVAILABLE_FOR_ACCOUNT_TYPE', index=30, number=31,
+      name='AT_LEAST_ONE_CONVERSION_MUST_BE_SELECTED', index=30, number=33,
       options=None,
       type=None),
     _descriptor.EnumValueDescriptor(
-      name='INVALID_ADVERTISING_CHANNEL_SUB_TYPE', index=31, number=32,
+      name='CANNOT_SET_AD_ROTATION_MODE', index=31, number=34,
       options=None,
       type=None),
     _descriptor.EnumValueDescriptor(
-      name='AT_LEAST_ONE_CONVERSION_MUST_BE_SELECTED', index=32, number=33,
+      name='CANNOT_MODIFY_START_DATE_IF_ALREADY_STARTED', index=32, number=35,
       options=None,
       type=None),
     _descriptor.EnumValueDescriptor(
-      name='CANNOT_SET_AD_ROTATION_MODE', index=33, number=34,
+      name='CANNOT_SET_DATE_TO_PAST', index=33, number=36,
       options=None,
       type=None),
     _descriptor.EnumValueDescriptor(
-      name='CANNOT_MODIFY_START_DATE_IF_ALREADY_STARTED', index=34, number=35,
+      name='MISSING_HOTEL_CUSTOMER_LINK', index=34, number=37,
       options=None,
       type=None),
     _descriptor.EnumValueDescriptor(
-      name='CANNOT_SET_DATE_TO_PAST', index=35, number=36,
+      name='INVALID_HOTEL_CUSTOMER_LINK', index=35, number=38,
       options=None,
       type=None),
     _descriptor.EnumValueDescriptor(
-      name='MISSING_HOTEL_CUSTOMER_LINK', index=36, number=37,
-      options=None,
-      type=None),
-    _descriptor.EnumValueDescriptor(
-      name='INVALID_HOTEL_CUSTOMER_LINK', index=37, number=38,
-      options=None,
-      type=None),
-    _descriptor.EnumValueDescriptor(
-      name='MISSING_HOTEL_SETTING', index=38, number=39,
+      name='MISSING_HOTEL_SETTING', index=36, number=39,
       options=None,
       type=None),
   ],
   containing_type=None,
   options=None,
   serialized_start=116,
-  serialized_end=1709,
+  serialized_end=1584,
 )
 _sym_db.RegisterEnumDescriptor(_CAMPAIGNERRORENUM_CAMPAIGNERROR)
 
@@ -216,7 +208,7 @@ _CAMPAIGNERRORENUM = _descriptor.Descriptor(
   oneofs=[
   ],
   serialized_start=94,
-  serialized_end=1709,
+  serialized_end=1584,
 )
 
 _CAMPAIGNERRORENUM_CAMPAIGNERROR.containing_type = _CAMPAIGNERRORENUM

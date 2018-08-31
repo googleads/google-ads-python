@@ -19,7 +19,7 @@ DESCRIPTOR = _descriptor.FileDescriptor(
   name='google/ads/googleads_v0/proto/errors/authentication_error.proto',
   package='google.ads.googleads.v0.errors',
   syntax='proto3',
-  serialized_pb=_b('\n?google/ads/googleads_v0/proto/errors/authentication_error.proto\x12\x1egoogle.ads.googleads.v0.errors\"\xc0\x04\n\x17\x41uthenticationErrorEnum\"\xa4\x04\n\x13\x41uthenticationError\x12\x0f\n\x0bUNSPECIFIED\x10\x00\x12\x0b\n\x07UNKNOWN\x10\x01\x12\x18\n\x14\x41UTHENTICATION_ERROR\x10\x02\x12\x1e\n\x1a\x43LIENT_CUSTOMER_ID_INVALID\x10\x05\x12\x16\n\x12\x43USTOMER_NOT_FOUND\x10\x08\x12\x1a\n\x16GOOGLE_ACCOUNT_DELETED\x10\t\x12!\n\x1dGOOGLE_ACCOUNT_COOKIE_INVALID\x10\n\x12)\n%FAILED_TO_AUTHENTICATE_GOOGLE_ACCOUNT\x10\x0b\x12-\n)GOOGLE_ACCOUNT_USER_AND_ADS_USER_MISMATCH\x10\x0c\x12\x19\n\x15LOGIN_COOKIE_REQUIRED\x10\r\x12\x10\n\x0cNOT_ADS_USER\x10\x0e\x12\x17\n\x13OAUTH_TOKEN_INVALID\x10\x0f\x12\x17\n\x13OAUTH_TOKEN_EXPIRED\x10\x10\x12\x18\n\x14OAUTH_TOKEN_DISABLED\x10\x11\x12\x17\n\x13OAUTH_TOKEN_REVOKED\x10\x12\x12\x1e\n\x1aOAUTH_TOKEN_HEADER_INVALID\x10\x13\x12\x18\n\x14LOGIN_COOKIE_INVALID\x10\x14\x12#\n\x1f\x46\x41ILED_TO_RETRIEVE_LOGIN_COOKIE\x10\x15\x12\x13\n\x0fUSER_ID_INVALID\x10\x16\x42\xce\x01\n\"com.google.ads.googleads.v0.errorsB\x18\x41uthenticationErrorProtoP\x01ZDgoogle.golang.org/genproto/googleapis/ads/googleads/v0/errors;errors\xa2\x02\x03GAA\xaa\x02\x1eGoogle.Ads.GoogleAds.V0.Errors\xca\x02\x1eGoogle\\Ads\\GoogleAds\\V0\\Errorsb\x06proto3')
+  serialized_pb=_b('\n?google/ads/googleads_v0/proto/errors/authentication_error.proto\x12\x1egoogle.ads.googleads.v0.errors\"\x8e\x05\n\x17\x41uthenticationErrorEnum\"\xf2\x04\n\x13\x41uthenticationError\x12\x0f\n\x0bUNSPECIFIED\x10\x00\x12\x0b\n\x07UNKNOWN\x10\x01\x12\x18\n\x14\x41UTHENTICATION_ERROR\x10\x02\x12\x1e\n\x1a\x43LIENT_CUSTOMER_ID_INVALID\x10\x05\x12\x16\n\x12\x43USTOMER_NOT_FOUND\x10\x08\x12\x1a\n\x16GOOGLE_ACCOUNT_DELETED\x10\t\x12!\n\x1dGOOGLE_ACCOUNT_COOKIE_INVALID\x10\n\x12)\n%FAILED_TO_AUTHENTICATE_GOOGLE_ACCOUNT\x10\x0b\x12-\n)GOOGLE_ACCOUNT_USER_AND_ADS_USER_MISMATCH\x10\x0c\x12\x19\n\x15LOGIN_COOKIE_REQUIRED\x10\r\x12\x10\n\x0cNOT_ADS_USER\x10\x0e\x12\x17\n\x13OAUTH_TOKEN_INVALID\x10\x0f\x12\x17\n\x13OAUTH_TOKEN_EXPIRED\x10\x10\x12\x18\n\x14OAUTH_TOKEN_DISABLED\x10\x11\x12\x17\n\x13OAUTH_TOKEN_REVOKED\x10\x12\x12\x1e\n\x1aOAUTH_TOKEN_HEADER_INVALID\x10\x13\x12\x18\n\x14LOGIN_COOKIE_INVALID\x10\x14\x12#\n\x1f\x46\x41ILED_TO_RETRIEVE_LOGIN_COOKIE\x10\x15\x12\x13\n\x0fUSER_ID_INVALID\x10\x16\x12&\n\"TWO_STEP_VERIFICATION_NOT_ENROLLED\x10\x17\x12$\n ADVANCED_PROTECTION_NOT_ENROLLED\x10\x18\x42\xce\x01\n\"com.google.ads.googleads.v0.errorsB\x18\x41uthenticationErrorProtoP\x01ZDgoogle.golang.org/genproto/googleapis/ads/googleads/v0/errors;errors\xa2\x02\x03GAA\xaa\x02\x1eGoogle.Ads.GoogleAds.V0.Errors\xca\x02\x1eGoogle\\Ads\\GoogleAds\\V0\\Errorsb\x06proto3')
 )
 
 
@@ -106,11 +106,19 @@ _AUTHENTICATIONERRORENUM_AUTHENTICATIONERROR = _descriptor.EnumDescriptor(
       name='USER_ID_INVALID', index=18, number=22,
       options=None,
       type=None),
+    _descriptor.EnumValueDescriptor(
+      name='TWO_STEP_VERIFICATION_NOT_ENROLLED', index=19, number=23,
+      options=None,
+      type=None),
+    _descriptor.EnumValueDescriptor(
+      name='ADVANCED_PROTECTION_NOT_ENROLLED', index=20, number=24,
+      options=None,
+      type=None),
   ],
   containing_type=None,
   options=None,
   serialized_start=128,
-  serialized_end=676,
+  serialized_end=754,
 )
 _sym_db.RegisterEnumDescriptor(_AUTHENTICATIONERRORENUM_AUTHENTICATIONERROR)
 
@@ -136,7 +144,7 @@ _AUTHENTICATIONERRORENUM = _descriptor.Descriptor(
   oneofs=[
   ],
   serialized_start=100,
-  serialized_end=676,
+  serialized_end=754,
 )
 
 _AUTHENTICATIONERRORENUM_AUTHENTICATIONERROR.containing_type = _AUTHENTICATIONERRORENUM

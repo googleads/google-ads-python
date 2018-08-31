@@ -19,7 +19,7 @@ DESCRIPTOR = _descriptor.FileDescriptor(
   name='google/ads/googleads_v0/proto/enums/recommendation_type.proto',
   package='google.ads.googleads.v0.enums',
   syntax='proto3',
-  serialized_pb=_b('\n=google/ads/googleads_v0/proto/enums/recommendation_type.proto\x12\x1dgoogle.ads.googleads.v0.enums\"\x92\x01\n\x16RecommendationTypeEnum\"x\n\x12RecommendationType\x12\x0f\n\x0bUNSPECIFIED\x10\x00\x12\x0b\n\x07UNKNOWN\x10\x01\x12\x13\n\x0f\x43\x41MPAIGN_BUDGET\x10\x02\x12\x0b\n\x07KEYWORD\x10\x03\x12\x0b\n\x07TEXT_AD\x10\x04\x12\x15\n\x11TARGET_CPA_OPT_IN\x10\x05\x42\xc8\x01\n!com.google.ads.googleads.v0.enumsB\x17RecommendationTypeProtoP\x01ZBgoogle.golang.org/genproto/googleapis/ads/googleads/v0/enums;enums\xa2\x02\x03GAA\xaa\x02\x1dGoogle.Ads.GoogleAds.V0.Enums\xca\x02\x1dGoogle\\Ads\\GoogleAds\\V0\\Enumsb\x06proto3')
+  serialized_pb=_b('\n=google/ads/googleads_v0/proto/enums/recommendation_type.proto\x12\x1dgoogle.ads.googleads.v0.enums\"\x9f\x02\n\x16RecommendationTypeEnum\"\x84\x02\n\x12RecommendationType\x12\x0f\n\x0bUNSPECIFIED\x10\x00\x12\x0b\n\x07UNKNOWN\x10\x01\x12\x13\n\x0f\x43\x41MPAIGN_BUDGET\x10\x02\x12\x0b\n\x07KEYWORD\x10\x03\x12\x0b\n\x07TEXT_AD\x10\x04\x12\x15\n\x11TARGET_CPA_OPT_IN\x10\x05\x12\x1f\n\x1bMAXIMIZE_CONVERSIONS_OPT_IN\x10\x06\x12\x17\n\x13\x45NHANCED_CPC_OPT_IN\x10\x07\x12\x1a\n\x16SEARCH_PARTNERS_OPT_IN\x10\x08\x12\x1a\n\x16MAXIMIZE_CLICKS_OPT_IN\x10\t\x12\x18\n\x14OPTIMIZE_AD_ROTATION\x10\nB\xc8\x01\n!com.google.ads.googleads.v0.enumsB\x17RecommendationTypeProtoP\x01ZBgoogle.golang.org/genproto/googleapis/ads/googleads/v0/enums;enums\xa2\x02\x03GAA\xaa\x02\x1dGoogle.Ads.GoogleAds.V0.Enums\xca\x02\x1dGoogle\\Ads\\GoogleAds\\V0\\Enumsb\x06proto3')
 )
 
 
@@ -54,11 +54,31 @@ _RECOMMENDATIONTYPEENUM_RECOMMENDATIONTYPE = _descriptor.EnumDescriptor(
       name='TARGET_CPA_OPT_IN', index=5, number=5,
       options=None,
       type=None),
+    _descriptor.EnumValueDescriptor(
+      name='MAXIMIZE_CONVERSIONS_OPT_IN', index=6, number=6,
+      options=None,
+      type=None),
+    _descriptor.EnumValueDescriptor(
+      name='ENHANCED_CPC_OPT_IN', index=7, number=7,
+      options=None,
+      type=None),
+    _descriptor.EnumValueDescriptor(
+      name='SEARCH_PARTNERS_OPT_IN', index=8, number=8,
+      options=None,
+      type=None),
+    _descriptor.EnumValueDescriptor(
+      name='MAXIMIZE_CLICKS_OPT_IN', index=9, number=9,
+      options=None,
+      type=None),
+    _descriptor.EnumValueDescriptor(
+      name='OPTIMIZE_AD_ROTATION', index=10, number=10,
+      options=None,
+      type=None),
   ],
   containing_type=None,
   options=None,
-  serialized_start=123,
-  serialized_end=243,
+  serialized_start=124,
+  serialized_end=384,
 )
 _sym_db.RegisterEnumDescriptor(_RECOMMENDATIONTYPEENUM_RECOMMENDATIONTYPE)
 
@@ -84,7 +104,7 @@ _RECOMMENDATIONTYPEENUM = _descriptor.Descriptor(
   oneofs=[
   ],
   serialized_start=97,
-  serialized_end=243,
+  serialized_end=384,
 )
 
 _RECOMMENDATIONTYPEENUM_RECOMMENDATIONTYPE.containing_type = _RECOMMENDATIONTYPEENUM

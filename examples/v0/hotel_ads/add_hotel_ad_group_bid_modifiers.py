@@ -13,15 +13,7 @@
 # limitations under the License.
 """This example adds an ad group bid modifier to a hotel ad group.
 
-Ad group bid modifiers based on hotel check-in day and hotel length of stay
-will be added.
-
-For hotel check-in day, you need tp specify the resource name, which includes
-the fixed criterion ID of the check-in day you want to set. In addition, you
-don't set an ad group for this bid modifier type.
-
-For hotel length of stay, you don't need to specify the resource name, but
-need to set an ad group instead.
+The bid modifiers will be based on hotel check-in day and length of stay.
 """
 
 from __future__ import absolute_import
@@ -33,22 +25,19 @@ import sys
 import google.ads.google_ads.client
 
 
-def main(client, customer_id, ad_group_id, check_in_day_criterion_id):
+def main(client, customer_id, ad_group_id):
     ad_group_service = client.get_service('AdGroupService')
     ag_bm_service = client.get_service('AdGroupBidModifierService')
 
     # Create ad group bid modifier based on hotel check-in day.
     check_in_ag_bm_operation = client.get_type('AdGroupBidModifierOperation')
     check_in_ag_bid_modifier = check_in_ag_bm_operation.create
-    # Sets the resource name for the criterion ID whose value corresponds to the
-    # desired check-in day.
-    check_in_bm_resource_name = ag_bm_service.ad_group_bid_modifier_path(
-        customer_id, '%s_%s' % (ad_group_id, check_in_day_criterion_id))
-    check_in_ag_bid_modifier.resource_name.value = check_in_bm_resource_name
+    check_in_ag_bid_modifier.hotel_check_in_day.day_of_week = (
+        client.get_type('DayOfWeekEnum').MONDAY)
+    check_in_ag_bid_modifier.ad_group.value = ad_group_service.ad_group_path(
+        customer_id, ad_group_id)
     # Sets the bid modifier value to 150%.
     check_in_ag_bid_modifier.bid_modifier.value = 1.5
-    check_in_ag_bid_modifier.hotel_check_in_day.CopyFrom(client.get_type(
-        'HotelCheckInDayInfo'))
 
     # Create ad group bid modifier based on hotel length of stay info.
     los_ag_bm_operation = client.get_type('AdGroupBidModifierOperation')
@@ -98,16 +87,6 @@ if __name__ == '__main__':
     parser.add_argument('-a', '--ad_group_id', type=six.text_type,
                         required=True,
                         help='The ad group ID of the hotel ad group.')
-    parser.add_argument('-d', '--check_in_criterion_id', type=int, default=60,
-                        help=('The criterion ID referring to the check-in day. '
-                              'If not specified, this example will provide the '
-                              'value "60" to select Monday as the check-in '
-                              'day. See the table of check-in days and '
-                              'criterion IDs at:'
-                              'https://developers.google.com/google-ads/api/'
-                              'docs/hotel-ads/create-ad-group-bid-modifier'
-                              '#hotelcheckindayinfo'))
     args = parser.parse_args()
 
-    main(google_ads_client, args.customer_id, args.ad_group_id,
-         args.check_in_criterion_id)
+    main(google_ads_client, args.customer_id, args.ad_group_id)

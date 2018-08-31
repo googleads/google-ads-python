@@ -19,7 +19,7 @@ DESCRIPTOR = _descriptor.FileDescriptor(
   name='google/ads/googleads_v0/proto/enums/advertising_channel_type.proto',
   package='google.ads.googleads.v0.enums',
   syntax='proto3',
-  serialized_pb=_b('\nBgoogle/ads/googleads_v0/proto/enums/advertising_channel_type.proto\x12\x1dgoogle.ads.googleads.v0.enums\"k\n\x1a\x41\x64vertisingChannelTypeEnum\"M\n\x16\x41\x64vertisingChannelType\x12\x0f\n\x0bUNSPECIFIED\x10\x00\x12\x0b\n\x07UNKNOWN\x10\x01\x12\n\n\x06SEARCH\x10\x02\x12\t\n\x05HOTEL\x10\x05\x42\xcc\x01\n!com.google.ads.googleads.v0.enumsB\x1b\x41\x64vertisingChannelTypeProtoP\x01ZBgoogle.golang.org/genproto/googleapis/ads/googleads/v0/enums;enums\xa2\x02\x03GAA\xaa\x02\x1dGoogle.Ads.GoogleAds.V0.Enums\xca\x02\x1dGoogle\\Ads\\GoogleAds\\V0\\Enumsb\x06proto3')
+  serialized_pb=_b('\nBgoogle/ads/googleads_v0/proto/enums/advertising_channel_type.proto\x12\x1dgoogle.ads.googleads.v0.enums\"\x86\x01\n\x1a\x41\x64vertisingChannelTypeEnum\"h\n\x16\x41\x64vertisingChannelType\x12\x0f\n\x0bUNSPECIFIED\x10\x00\x12\x0b\n\x07UNKNOWN\x10\x01\x12\n\n\x06SEARCH\x10\x02\x12\x0b\n\x07\x44ISPLAY\x10\x03\x12\x0c\n\x08SHOPPING\x10\x04\x12\t\n\x05HOTEL\x10\x05\x42\xcc\x01\n!com.google.ads.googleads.v0.enumsB\x1b\x41\x64vertisingChannelTypeProtoP\x01ZBgoogle.golang.org/genproto/googleapis/ads/googleads/v0/enums;enums\xa2\x02\x03GAA\xaa\x02\x1dGoogle.Ads.GoogleAds.V0.Enums\xca\x02\x1dGoogle\\Ads\\GoogleAds\\V0\\Enumsb\x06proto3')
 )
 
 
@@ -43,14 +43,22 @@ _ADVERTISINGCHANNELTYPEENUM_ADVERTISINGCHANNELTYPE = _descriptor.EnumDescriptor(
       options=None,
       type=None),
     _descriptor.EnumValueDescriptor(
-      name='HOTEL', index=3, number=5,
+      name='DISPLAY', index=3, number=3,
+      options=None,
+      type=None),
+    _descriptor.EnumValueDescriptor(
+      name='SHOPPING', index=4, number=4,
+      options=None,
+      type=None),
+    _descriptor.EnumValueDescriptor(
+      name='HOTEL', index=5, number=5,
       options=None,
       type=None),
   ],
   containing_type=None,
   options=None,
-  serialized_start=131,
-  serialized_end=208,
+  serialized_start=132,
+  serialized_end=236,
 )
 _sym_db.RegisterEnumDescriptor(_ADVERTISINGCHANNELTYPEENUM_ADVERTISINGCHANNELTYPE)
 
@@ -75,8 +83,8 @@ _ADVERTISINGCHANNELTYPEENUM = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=101,
-  serialized_end=208,
+  serialized_start=102,
+  serialized_end=236,
 )
 
 _ADVERTISINGCHANNELTYPEENUM_ADVERTISINGCHANNELTYPE.containing_type = _ADVERTISINGCHANNELTYPEENUM

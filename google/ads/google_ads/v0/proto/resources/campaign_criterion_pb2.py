@@ -22,7 +22,7 @@ DESCRIPTOR = _descriptor.FileDescriptor(
   name='google/ads/googleads_v0/proto/resources/campaign_criterion.proto',
   package='google.ads.googleads.v0.resources',
   syntax='proto3',
-  serialized_pb=_b('\n@google/ads/googleads_v0/proto/resources/campaign_criterion.proto\x12!google.ads.googleads.v0.resources\x1a\x33google/ads/googleads_v0/proto/common/criteria.proto\x1a\x38google/ads/googleads_v0/proto/enums/criterion_type.proto\x1a\x1egoogle/protobuf/wrappers.proto\"\x8d\x04\n\x11\x43\x61mpaignCriterion\x12\x15\n\rresource_name\x18\x01 \x01(\t\x12.\n\x08\x63\x61mpaign\x18\x04 \x01(\x0b\x32\x1c.google.protobuf.StringValue\x12\x31\n\x0c\x63riterion_id\x18\x05 \x01(\x0b\x32\x1b.google.protobuf.Int64Value\x12\x31\n\x0c\x62id_modifier\x18\x0e \x01(\x0b\x32\x1b.google.protobuf.FloatValue\x12,\n\x08negative\x18\x07 \x01(\x0b\x32\x1a.google.protobuf.BoolValue\x12L\n\x04type\x18\x06 \x01(\x0e\x32>.google.ads.googleads.v0.enums.CriterionTypeEnum.CriterionType\x12>\n\x07keyword\x18\x08 \x01(\x0b\x32+.google.ads.googleads.v0.common.KeywordInfoH\x00\x12@\n\x08location\x18\x0c \x01(\x0b\x32,.google.ads.googleads.v0.common.LocationInfoH\x00\x12@\n\x08platform\x18\r \x01(\x0b\x32,.google.ads.googleads.v0.common.PlatformInfoH\x00\x42\x0b\n\tcriterionB\xdb\x01\n%com.google.ads.googleads.v0.resourcesB\x16\x43\x61mpaignCriterionProtoP\x01ZJgoogle.golang.org/genproto/googleapis/ads/googleads/v0/resources;resources\xa2\x02\x03GAA\xaa\x02!Google.Ads.GoogleAds.V0.Resources\xca\x02!Google\\Ads\\GoogleAds\\V0\\Resourcesb\x06proto3')
+  serialized_pb=_b('\n@google/ads/googleads_v0/proto/resources/campaign_criterion.proto\x12!google.ads.googleads.v0.resources\x1a\x33google/ads/googleads_v0/proto/common/criteria.proto\x1a\x38google/ads/googleads_v0/proto/enums/criterion_type.proto\x1a\x1egoogle/protobuf/wrappers.proto\"\xd0\x04\n\x11\x43\x61mpaignCriterion\x12\x15\n\rresource_name\x18\x01 \x01(\t\x12.\n\x08\x63\x61mpaign\x18\x04 \x01(\x0b\x32\x1c.google.protobuf.StringValue\x12\x31\n\x0c\x63riterion_id\x18\x05 \x01(\x0b\x32\x1b.google.protobuf.Int64Value\x12\x31\n\x0c\x62id_modifier\x18\x0e \x01(\x0b\x32\x1b.google.protobuf.FloatValue\x12,\n\x08negative\x18\x07 \x01(\x0b\x32\x1a.google.protobuf.BoolValue\x12L\n\x04type\x18\x06 \x01(\x0e\x32>.google.ads.googleads.v0.enums.CriterionTypeEnum.CriterionType\x12>\n\x07keyword\x18\x08 \x01(\x0b\x32+.google.ads.googleads.v0.common.KeywordInfoH\x00\x12@\n\x08location\x18\x0c \x01(\x0b\x32,.google.ads.googleads.v0.common.LocationInfoH\x00\x12<\n\x06\x64\x65vice\x18\r \x01(\x0b\x32*.google.ads.googleads.v0.common.DeviceInfoH\x00\x12\x45\n\x0b\x61\x64_schedule\x18\x0f \x01(\x0b\x32..google.ads.googleads.v0.common.AdScheduleInfoH\x00\x42\x0b\n\tcriterionB\xdb\x01\n%com.google.ads.googleads.v0.resourcesB\x16\x43\x61mpaignCriterionProtoP\x01ZJgoogle.golang.org/genproto/googleapis/ads/googleads/v0/resources;resources\xa2\x02\x03GAA\xaa\x02!Google.Ads.GoogleAds.V0.Resources\xca\x02!Google\\Ads\\GoogleAds\\V0\\Resourcesb\x06proto3')
   ,
   dependencies=[google_dot_ads_dot_googleads__v0_dot_proto_dot_common_dot_criteria__pb2.DESCRIPTOR,google_dot_ads_dot_googleads__v0_dot_proto_dot_enums_dot_criterion__type__pb2.DESCRIPTOR,google_dot_protobuf_dot_wrappers__pb2.DESCRIPTOR,])
 
@@ -93,8 +93,15 @@ _CAMPAIGNCRITERION = _descriptor.Descriptor(
       is_extension=False, extension_scope=None,
       options=None, file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
-      name='platform', full_name='google.ads.googleads.v0.resources.CampaignCriterion.platform', index=8,
+      name='device', full_name='google.ads.googleads.v0.resources.CampaignCriterion.device', index=8,
       number=13, type=11, cpp_type=10, label=1,
+      has_default_value=False, default_value=None,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None, file=DESCRIPTOR),
+    _descriptor.FieldDescriptor(
+      name='ad_schedule', full_name='google.ads.googleads.v0.resources.CampaignCriterion.ad_schedule', index=9,
+      number=15, type=11, cpp_type=10, label=1,
       has_default_value=False, default_value=None,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
@@ -115,7 +122,7 @@ _CAMPAIGNCRITERION = _descriptor.Descriptor(
       index=0, containing_type=None, fields=[]),
   ],
   serialized_start=247,
-  serialized_end=772,
+  serialized_end=839,
 )
 
 _CAMPAIGNCRITERION.fields_by_name['campaign'].message_type = google_dot_protobuf_dot_wrappers__pb2._STRINGVALUE
@@ -125,7 +132,8 @@ _CAMPAIGNCRITERION.fields_by_name['negative'].message_type = google_dot_protobuf
 _CAMPAIGNCRITERION.fields_by_name['type'].enum_type = google_dot_ads_dot_googleads__v0_dot_proto_dot_enums_dot_criterion__type__pb2._CRITERIONTYPEENUM_CRITERIONTYPE
 _CAMPAIGNCRITERION.fields_by_name['keyword'].message_type = google_dot_ads_dot_googleads__v0_dot_proto_dot_common_dot_criteria__pb2._KEYWORDINFO
 _CAMPAIGNCRITERION.fields_by_name['location'].message_type = google_dot_ads_dot_googleads__v0_dot_proto_dot_common_dot_criteria__pb2._LOCATIONINFO
-_CAMPAIGNCRITERION.fields_by_name['platform'].message_type = google_dot_ads_dot_googleads__v0_dot_proto_dot_common_dot_criteria__pb2._PLATFORMINFO
+_CAMPAIGNCRITERION.fields_by_name['device'].message_type = google_dot_ads_dot_googleads__v0_dot_proto_dot_common_dot_criteria__pb2._DEVICEINFO
+_CAMPAIGNCRITERION.fields_by_name['ad_schedule'].message_type = google_dot_ads_dot_googleads__v0_dot_proto_dot_common_dot_criteria__pb2._ADSCHEDULEINFO
 _CAMPAIGNCRITERION.oneofs_by_name['criterion'].fields.append(
   _CAMPAIGNCRITERION.fields_by_name['keyword'])
 _CAMPAIGNCRITERION.fields_by_name['keyword'].containing_oneof = _CAMPAIGNCRITERION.oneofs_by_name['criterion']
@@ -133,8 +141,11 @@ _CAMPAIGNCRITERION.oneofs_by_name['criterion'].fields.append(
   _CAMPAIGNCRITERION.fields_by_name['location'])
 _CAMPAIGNCRITERION.fields_by_name['location'].containing_oneof = _CAMPAIGNCRITERION.oneofs_by_name['criterion']
 _CAMPAIGNCRITERION.oneofs_by_name['criterion'].fields.append(
-  _CAMPAIGNCRITERION.fields_by_name['platform'])
-_CAMPAIGNCRITERION.fields_by_name['platform'].containing_oneof = _CAMPAIGNCRITERION.oneofs_by_name['criterion']
+  _CAMPAIGNCRITERION.fields_by_name['device'])
+_CAMPAIGNCRITERION.fields_by_name['device'].containing_oneof = _CAMPAIGNCRITERION.oneofs_by_name['criterion']
+_CAMPAIGNCRITERION.oneofs_by_name['criterion'].fields.append(
+  _CAMPAIGNCRITERION.fields_by_name['ad_schedule'])
+_CAMPAIGNCRITERION.fields_by_name['ad_schedule'].containing_oneof = _CAMPAIGNCRITERION.oneofs_by_name['criterion']
 DESCRIPTOR.message_types_by_name['CampaignCriterion'] = _CAMPAIGNCRITERION
 _sym_db.RegisterFileDescriptor(DESCRIPTOR)
 
@@ -158,8 +169,8 @@ CampaignCriterion = _reflection.GeneratedProtocolMessageType('CampaignCriterion'
       bid_modifier:
           The modifier for the bids when the criterion matches.
           Allowable modifier values depend on the criterion: - 0.1 -
-          10.0: Location - 0.1 - 4.0: Platform (mobile). Use 0 to opt
-          out of mobile.
+          10.0: Location - 0.1 - 4.0: Device (mobile). Use 0 to opt out
+          of mobile.
       negative:
           Whether to target (``false``) or exclude (``true``) the
           criterion.
@@ -171,8 +182,10 @@ CampaignCriterion = _reflection.GeneratedProtocolMessageType('CampaignCriterion'
           Keyword.
       location:
           Location.
-      platform:
-          Platform.
+      device:
+          Device.
+      ad_schedule:
+          Ad Schedule.
   """,
   # @@protoc_insertion_point(class_scope:google.ads.googleads.v0.resources.CampaignCriterion)
   ))

@@ -49,6 +49,7 @@ from google.ads.google_ads.v0.proto.errors import authentication_error_pb2
 from google.ads.google_ads.v0.proto.errors import authorization_error_pb2
 from google.ads.google_ads.v0.proto.errors import bidding_error_pb2
 from google.ads.google_ads.v0.proto.common import bidding_pb2
+from google.ads.google_ads.v0.proto.enums import bid_modifier_source_pb2
 from google.ads.google_ads.v0.proto.enums import bidding_source_pb2
 from google.ads.google_ads.v0.proto.errors import bidding_strategy_error_pb2
 from google.ads.google_ads.v0.proto.resources import bidding_strategy_pb2
@@ -56,6 +57,8 @@ from google.ads.google_ads.v0.proto.services import bidding_strategy_service_pb2
 from google.ads.google_ads.v0.proto.enums import bidding_strategy_type_pb2
 from google.ads.google_ads.v0.proto.enums import budget_delivery_method_pb2
 from google.ads.google_ads.v0.proto.enums import budget_status_pb2
+from google.ads.google_ads.v0.proto.resources import campaign_bid_modifier_pb2
+from google.ads.google_ads.v0.proto.services import campaign_bid_modifier_service_pb2
 from google.ads.google_ads.v0.proto.errors import campaign_budget_error_pb2
 from google.ads.google_ads.v0.proto.resources import campaign_budget_pb2
 from google.ads.google_ads.v0.proto.services import campaign_budget_service_pb2
@@ -63,9 +66,17 @@ from google.ads.google_ads.v0.proto.errors import campaign_criterion_error_pb2
 from google.ads.google_ads.v0.proto.resources import campaign_criterion_pb2
 from google.ads.google_ads.v0.proto.services import campaign_criterion_service_pb2
 from google.ads.google_ads.v0.proto.errors import campaign_error_pb2
+from google.ads.google_ads.v0.proto.errors import campaign_group_error_pb2
+from google.ads.google_ads.v0.proto.resources import campaign_group_pb2
+from google.ads.google_ads.v0.proto.services import campaign_group_service_pb2
+from google.ads.google_ads.v0.proto.enums import campaign_group_status_pb2
 from google.ads.google_ads.v0.proto.resources import campaign_pb2
 from google.ads.google_ads.v0.proto.services import campaign_service_pb2
 from google.ads.google_ads.v0.proto.enums import campaign_serving_status_pb2
+from google.ads.google_ads.v0.proto.errors import campaign_shared_set_error_pb2
+from google.ads.google_ads.v0.proto.resources import campaign_shared_set_pb2
+from google.ads.google_ads.v0.proto.services import campaign_shared_set_service_pb2
+from google.ads.google_ads.v0.proto.enums import campaign_shared_set_status_pb2
 from google.ads.google_ads.v0.proto.enums import campaign_status_pb2
 from google.ads.google_ads.v0.proto.errors import collection_size_error_pb2
 from google.ads.google_ads.v0.proto.errors import context_error_pb2
@@ -75,11 +86,13 @@ from google.ads.google_ads.v0.proto.enums import criterion_type_pb2
 from google.ads.google_ads.v0.proto.common import custom_parameter_pb2
 from google.ads.google_ads.v0.proto.resources import customer_pb2
 from google.ads.google_ads.v0.proto.services import customer_service_pb2
+from google.ads.google_ads.v0.proto.errors import database_error_pb2
 from google.ads.google_ads.v0.proto.errors import date_error_pb2
 from google.ads.google_ads.v0.proto.errors import date_range_error_pb2
 from google.ads.google_ads.v0.proto.enums import day_of_week_pb2
 from google.ads.google_ads.v0.proto.enums import device_pb2
 from google.ads.google_ads.v0.proto.errors import distinct_error_pb2
+from google.ads.google_ads.v0.proto.errors import enum_error_pb2
 from google.ads.google_ads.v0.proto.errors import errors_pb2
 from google.ads.google_ads.v0.proto.errors import feed_attribute_reference_error_pb2
 from google.ads.google_ads.v0.proto.errors import field_error_pb2
@@ -93,8 +106,11 @@ from google.ads.google_ads.v0.proto.enums import google_ads_field_data_type_pb2
 from google.ads.google_ads.v0.proto.resources import google_ads_field_pb2
 from google.ads.google_ads.v0.proto.services import google_ads_field_service_pb2
 from google.ads.google_ads.v0.proto.services import google_ads_service_pb2
+from google.ads.google_ads.v0.proto.errors import header_error_pb2
+from google.ads.google_ads.v0.proto.enums import hotel_date_selection_type_pb2
 from google.ads.google_ads.v0.proto.errors import id_error_pb2
 from google.ads.google_ads.v0.proto.errors import image_error_pb2
+from google.ads.google_ads.v0.proto.enums import interaction_type_pb2
 from google.ads.google_ads.v0.proto.errors import internal_error_pb2
 from google.ads.google_ads.v0.proto.enums import keyword_match_type_pb2
 from google.ads.google_ads.v0.proto.resources import keyword_view_pb2
@@ -105,6 +121,8 @@ from google.ads.google_ads.v0.proto.enums import listing_group_type_pb2
 from google.ads.google_ads.v0.proto.errors import media_bundle_error_pb2
 from google.ads.google_ads.v0.proto.errors import media_error_pb2
 from google.ads.google_ads.v0.proto.common import metrics_pb2
+from google.ads.google_ads.v0.proto.enums import minute_of_hour_pb2
+from google.ads.google_ads.v0.proto.enums import month_of_year_pb2
 from google.ads.google_ads.v0.proto.errors import multiplier_error_pb2
 from google.ads.google_ads.v0.proto.errors import mutate_error_pb2
 from google.ads.google_ads.v0.proto.errors import new_resource_creation_error_pb2
@@ -113,7 +131,12 @@ from google.ads.google_ads.v0.proto.errors import null_error_pb2
 from google.ads.google_ads.v0.proto.errors import operation_access_denied_error_pb2
 from google.ads.google_ads.v0.proto.errors import operator_error_pb2
 from google.ads.google_ads.v0.proto.enums import page_one_promoted_strategy_goal_pb2
+from google.ads.google_ads.v0.proto.errors import policy_finding_error_pb2
 from google.ads.google_ads.v0.proto.common import policy_pb2
+from google.ads.google_ads.v0.proto.enums import policy_topic_entry_type_pb2
+from google.ads.google_ads.v0.proto.enums import policy_topic_evidence_destination_mismatch_url_type_pb2
+from google.ads.google_ads.v0.proto.enums import product_condition_pb2
+from google.ads.google_ads.v0.proto.enums import product_type_level_pb2
 from google.ads.google_ads.v0.proto.enums import quality_score_bucket_pb2
 from google.ads.google_ads.v0.proto.errors import query_error_pb2
 from google.ads.google_ads.v0.proto.errors import quota_error_pb2
@@ -127,6 +150,14 @@ from google.ads.google_ads.v0.proto.errors import request_error_pb2
 from google.ads.google_ads.v0.proto.errors import resource_access_denied_error_pb2
 from google.ads.google_ads.v0.proto.errors import resource_count_limit_exceeded_error_pb2
 from google.ads.google_ads.v0.proto.errors import setting_error_pb2
+from google.ads.google_ads.v0.proto.errors import shared_criterion_error_pb2
+from google.ads.google_ads.v0.proto.resources import shared_criterion_pb2
+from google.ads.google_ads.v0.proto.services import shared_criterion_service_pb2
+from google.ads.google_ads.v0.proto.errors import shared_set_error_pb2
+from google.ads.google_ads.v0.proto.resources import shared_set_pb2
+from google.ads.google_ads.v0.proto.services import shared_set_service_pb2
+from google.ads.google_ads.v0.proto.enums import shared_set_status_pb2
+from google.ads.google_ads.v0.proto.enums import shared_set_type_pb2
 from google.ads.google_ads.v0.proto.enums import slot_pb2
 from google.ads.google_ads.v0.proto.errors import string_format_error_pb2
 from google.ads.google_ads.v0.proto.errors import string_length_error_pb2
@@ -166,6 +197,7 @@ _shared_modules = [
     adx_error_pb2,
     authentication_error_pb2,
     authorization_error_pb2,
+    bid_modifier_source_pb2,
     bidding_error_pb2,
     bidding_pb2,
     bidding_source_pb2,
@@ -174,13 +206,20 @@ _shared_modules = [
     bidding_strategy_type_pb2,
     budget_delivery_method_pb2,
     budget_status_pb2,
+    campaign_bid_modifier_pb2,
     campaign_budget_error_pb2,
     campaign_budget_pb2,
     campaign_criterion_error_pb2,
     campaign_criterion_pb2,
     campaign_error_pb2,
+    campaign_group_error_pb2,
+    campaign_group_pb2,
+    campaign_group_status_pb2,
     campaign_pb2,
     campaign_serving_status_pb2,
+    campaign_shared_set_error_pb2,
+    campaign_shared_set_pb2,
+    campaign_shared_set_status_pb2,
     campaign_status_pb2,
     collection_size_error_pb2,
     context_error_pb2,
@@ -189,11 +228,13 @@ _shared_modules = [
     criterion_type_pb2,
     custom_parameter_pb2,
     customer_pb2,
+    database_error_pb2,
     date_error_pb2,
     date_range_error_pb2,
     day_of_week_pb2,
     device_pb2,
     distinct_error_pb2,
+    enum_error_pb2,
     errors_pb2,
     feed_attribute_reference_error_pb2,
     field_error_pb2,
@@ -204,8 +245,11 @@ _shared_modules = [
     google_ads_field_category_pb2,
     google_ads_field_data_type_pb2,
     google_ads_field_pb2,
+    header_error_pb2,
+    hotel_date_selection_type_pb2,
     id_error_pb2,
     image_error_pb2,
+    interaction_type_pb2,
     internal_error_pb2,
     keyword_match_type_pb2,
     keyword_view_pb2,
@@ -215,6 +259,8 @@ _shared_modules = [
     media_bundle_error_pb2,
     media_error_pb2,
     metrics_pb2,
+    minute_of_hour_pb2,
+    month_of_year_pb2,
     multiplier_error_pb2,
     mutate_error_pb2,
     new_resource_creation_error_pb2,
@@ -223,7 +269,12 @@ _shared_modules = [
     operation_access_denied_error_pb2,
     operator_error_pb2,
     page_one_promoted_strategy_goal_pb2,
+    policy_finding_error_pb2,
     policy_pb2,
+    policy_topic_entry_type_pb2,
+    policy_topic_evidence_destination_mismatch_url_type_pb2,
+    product_condition_pb2,
+    product_type_level_pb2,
     quality_score_bucket_pb2,
     query_error_pb2,
     quota_error_pb2,
@@ -236,6 +287,12 @@ _shared_modules = [
     resource_access_denied_error_pb2,
     resource_count_limit_exceeded_error_pb2,
     setting_error_pb2,
+    shared_criterion_error_pb2,
+    shared_criterion_pb2,
+    shared_set_error_pb2,
+    shared_set_pb2,
+    shared_set_status_pb2,
+    shared_set_type_pb2,
     slot_pb2,
     string_format_error_pb2,
     string_length_error_pb2,
@@ -255,15 +312,20 @@ _local_modules = [
     ad_group_criterion_service_pb2,
     ad_group_service_pb2,
     bidding_strategy_service_pb2,
+    campaign_bid_modifier_service_pb2,
     campaign_budget_service_pb2,
     campaign_criterion_service_pb2,
+    campaign_group_service_pb2,
     campaign_service_pb2,
+    campaign_shared_set_service_pb2,
     customer_service_pb2,
     geo_target_constant_service_pb2,
     google_ads_field_service_pb2,
     google_ads_service_pb2,
     keyword_view_service_pb2,
     recommendation_service_pb2,
+    shared_criterion_service_pb2,
+    shared_set_service_pb2,
 ]
 
 names = []

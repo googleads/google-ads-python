@@ -15,15 +15,16 @@ _sym_db = _symbol_database.Default()
 
 from google.ads.google_ads.v0.proto.resources import geo_target_constant_pb2 as google_dot_ads_dot_googleads__v0_dot_proto_dot_resources_dot_geo__target__constant__pb2
 from google.api import annotations_pb2 as google_dot_api_dot_annotations__pb2
+from google.protobuf import wrappers_pb2 as google_dot_protobuf_dot_wrappers__pb2
 
 
 DESCRIPTOR = _descriptor.FileDescriptor(
   name='google/ads/googleads_v0/proto/services/geo_target_constant_service.proto',
   package='google.ads.googleads.v0.services',
   syntax='proto3',
-  serialized_pb=_b('\nHgoogle/ads/googleads_v0/proto/services/geo_target_constant_service.proto\x12 google.ads.googleads.v0.services\x1a\x41google/ads/googleads_v0/proto/resources/geo_target_constant.proto\x1a\x1cgoogle/api/annotations.proto\"4\n\x1bGetGeoTargetConstantRequest\x12\x15\n\rresource_name\x18\x01 \x01(\t2\xda\x01\n\x18GeoTargetConstantService\x12\xbd\x01\n\x14GetGeoTargetConstant\x12=.google.ads.googleads.v0.services.GetGeoTargetConstantRequest\x1a\x34.google.ads.googleads.v0.resources.GeoTargetConstant\"0\x82\xd3\xe4\x93\x02*\x12(/v0/{resource_name=geoTargetConstants/*}B\xdd\x01\n$com.google.ads.googleads.v0.servicesB\x1dGeoTargetConstantServiceProtoP\x01ZHgoogle.golang.org/genproto/googleapis/ads/googleads/v0/services;services\xa2\x02\x03GAA\xaa\x02 Google.Ads.GoogleAds.V0.Services\xca\x02 Google\\Ads\\GoogleAds\\V0\\Servicesb\x06proto3')
+  serialized_pb=_b('\nHgoogle/ads/googleads_v0/proto/services/geo_target_constant_service.proto\x12 google.ads.googleads.v0.services\x1a\x41google/ads/googleads_v0/proto/resources/geo_target_constant.proto\x1a\x1cgoogle/api/annotations.proto\x1a\x1egoogle/protobuf/wrappers.proto\"4\n\x1bGetGeoTargetConstantRequest\x12\x15\n\rresource_name\x18\x01 \x01(\t2\xda\x01\n\x18GeoTargetConstantService\x12\xbd\x01\n\x14GetGeoTargetConstant\x12=.google.ads.googleads.v0.services.GetGeoTargetConstantRequest\x1a\x34.google.ads.googleads.v0.resources.GeoTargetConstant\"0\x82\xd3\xe4\x93\x02*\x12(/v0/{resource_name=geoTargetConstants/*}B\xdd\x01\n$com.google.ads.googleads.v0.servicesB\x1dGeoTargetConstantServiceProtoP\x01ZHgoogle.golang.org/genproto/googleapis/ads/googleads/v0/services;services\xa2\x02\x03GAA\xaa\x02 Google.Ads.GoogleAds.V0.Services\xca\x02 Google\\Ads\\GoogleAds\\V0\\Servicesb\x06proto3')
   ,
-  dependencies=[google_dot_ads_dot_googleads__v0_dot_proto_dot_resources_dot_geo__target__constant__pb2.DESCRIPTOR,google_dot_api_dot_annotations__pb2.DESCRIPTOR,])
+  dependencies=[google_dot_ads_dot_googleads__v0_dot_proto_dot_resources_dot_geo__target__constant__pb2.DESCRIPTOR,google_dot_api_dot_annotations__pb2.DESCRIPTOR,google_dot_protobuf_dot_wrappers__pb2.DESCRIPTOR,])
 
 
 
@@ -54,8 +55,8 @@ _GETGEOTARGETCONSTANTREQUEST = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=207,
-  serialized_end=259,
+  serialized_start=239,
+  serialized_end=291,
 )
 
 DESCRIPTOR.message_types_by_name['GetGeoTargetConstantRequest'] = _GETGEOTARGETCONSTANTREQUEST
@@ -87,8 +88,8 @@ _GEOTARGETCONSTANTSERVICE = _descriptor.ServiceDescriptor(
   file=DESCRIPTOR,
   index=0,
   options=None,
-  serialized_start=262,
-  serialized_end=480,
+  serialized_start=294,
+  serialized_end=512,
   methods=[
   _descriptor.MethodDescriptor(
     name='GetGeoTargetConstant',

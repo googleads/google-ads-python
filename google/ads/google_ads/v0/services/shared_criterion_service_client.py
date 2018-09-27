@@ -167,15 +167,6 @@ class SharedCriterionServiceClient(object):
         """
         Returns the requested shared criterion in full detail.
 
-        Example:
-            >>> from google.cloud.ads import googleads_v0
-            >>>
-            >>> client = googleads_v0.SharedCriterionServiceClient()
-            >>>
-            >>> resource_name = client.shared_criteria_path('[CUSTOMER]', '[SHARED_CRITERIA]')
-            >>>
-            >>> response = client.get_shared_criterion(resource_name)
-
         Args:
             resource_name (str): The resource name of the shared criterion to fetch.
             retry (Optional[google.api_core.retry.Retry]):  A retry object used
@@ -188,7 +179,7 @@ class SharedCriterionServiceClient(object):
                 that is provided to the method.
 
         Returns:
-            A :class:`~google.cloud.ads.googleads_v0.types.SharedCriterion` instance.
+            A :class:`~google.ads.google_ads.v0.types.SharedCriterion` instance.
 
         Raises:
             google.api_core.exceptions.GoogleAPICallError: If the request
@@ -223,24 +214,11 @@ class SharedCriterionServiceClient(object):
         """
         Creates or removes shared criteria. Operation statuses are returned.
 
-        Example:
-            >>> from google.cloud.ads import googleads_v0
-            >>>
-            >>> client = googleads_v0.SharedCriterionServiceClient()
-            >>>
-            >>> # TODO: Initialize ``customer_id``:
-            >>> customer_id = ''
-            >>>
-            >>> # TODO: Initialize ``operations``:
-            >>> operations = []
-            >>>
-            >>> response = client.mutate_shared_criteria(customer_id, operations)
-
         Args:
             customer_id (str): The ID of the customer whose shared criteria are being modified.
-            operations (list[Union[dict, ~google.cloud.ads.googleads_v0.types.SharedCriterionOperation]]): The list of operations to perform on individual shared criteria.
+            operations (list[Union[dict, ~google.ads.google_ads.v0.types.SharedCriterionOperation]]): The list of operations to perform on individual shared criteria.
                 If a dict is provided, it must be of the same form as the protobuf
-                message :class:`~google.cloud.ads.googleads_v0.types.SharedCriterionOperation`
+                message :class:`~google.ads.google_ads.v0.types.SharedCriterionOperation`
             retry (Optional[google.api_core.retry.Retry]):  A retry object used
                 to retry requests. If ``None`` is specified, requests will not
                 be retried.
@@ -251,7 +229,7 @@ class SharedCriterionServiceClient(object):
                 that is provided to the method.
 
         Returns:
-            A :class:`~google.cloud.ads.googleads_v0.types.MutateSharedCriteriaResponse` instance.
+            A :class:`~google.ads.google_ads.v0.types.MutateSharedCriteriaResponse` instance.
 
         Raises:
             google.api_core.exceptions.GoogleAPICallError: If the request

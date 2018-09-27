@@ -19,7 +19,7 @@ DESCRIPTOR = _descriptor.FileDescriptor(
   name='google/ads/googleads_v0/proto/enums/ad_group_type.proto',
   package='google.ads.googleads.v0.enums',
   syntax='proto3',
-  serialized_pb=_b('\n7google/ads/googleads_v0/proto/enums/ad_group_type.proto\x12\x1dgoogle.ads.googleads.v0.enums\"\x90\x01\n\x0f\x41\x64GroupTypeEnum\"}\n\x0b\x41\x64GroupType\x12\x0f\n\x0bUNSPECIFIED\x10\x00\x12\x0b\n\x07UNKNOWN\x10\x01\x12\x13\n\x0fSEARCH_STANDARD\x10\x02\x12\x14\n\x10\x44ISPLAY_STANDARD\x10\x03\x12\r\n\tHOTEL_ADS\x10\x06\x12\x16\n\x12SHOPPING_SMART_ADS\x10\x07\x42\xc1\x01\n!com.google.ads.googleads.v0.enumsB\x10\x41\x64GroupTypeProtoP\x01ZBgoogle.golang.org/genproto/googleapis/ads/googleads/v0/enums;enums\xa2\x02\x03GAA\xaa\x02\x1dGoogle.Ads.GoogleAds.V0.Enums\xca\x02\x1dGoogle\\Ads\\GoogleAds\\V0\\Enumsb\x06proto3')
+  serialized_pb=_b('\n7google/ads/googleads_v0/proto/enums/ad_group_type.proto\x12\x1dgoogle.ads.googleads.v0.enums\"\xbd\x01\n\x0f\x41\x64GroupTypeEnum\"\xa9\x01\n\x0b\x41\x64GroupType\x12\x0f\n\x0bUNSPECIFIED\x10\x00\x12\x0b\n\x07UNKNOWN\x10\x01\x12\x13\n\x0fSEARCH_STANDARD\x10\x02\x12\x14\n\x10\x44ISPLAY_STANDARD\x10\x03\x12\x18\n\x14SHOPPING_PRODUCT_ADS\x10\x04\x12\r\n\tHOTEL_ADS\x10\x06\x12\x16\n\x12SHOPPING_SMART_ADS\x10\x07\x12\x10\n\x0cVIDEO_BUMPER\x10\x08\x42\xc1\x01\n!com.google.ads.googleads.v0.enumsB\x10\x41\x64GroupTypeProtoP\x01ZBgoogle.golang.org/genproto/googleapis/ads/googleads/v0/enums;enums\xa2\x02\x03GAA\xaa\x02\x1dGoogle.Ads.GoogleAds.V0.Enums\xca\x02\x1dGoogle\\Ads\\GoogleAds\\V0\\Enumsb\x06proto3')
 )
 
 
@@ -47,18 +47,26 @@ _ADGROUPTYPEENUM_ADGROUPTYPE = _descriptor.EnumDescriptor(
       options=None,
       type=None),
     _descriptor.EnumValueDescriptor(
-      name='HOTEL_ADS', index=4, number=6,
+      name='SHOPPING_PRODUCT_ADS', index=4, number=4,
       options=None,
       type=None),
     _descriptor.EnumValueDescriptor(
-      name='SHOPPING_SMART_ADS', index=5, number=7,
+      name='HOTEL_ADS', index=5, number=6,
+      options=None,
+      type=None),
+    _descriptor.EnumValueDescriptor(
+      name='SHOPPING_SMART_ADS', index=6, number=7,
+      options=None,
+      type=None),
+    _descriptor.EnumValueDescriptor(
+      name='VIDEO_BUMPER', index=7, number=8,
       options=None,
       type=None),
   ],
   containing_type=None,
   options=None,
-  serialized_start=110,
-  serialized_end=235,
+  serialized_start=111,
+  serialized_end=280,
 )
 _sym_db.RegisterEnumDescriptor(_ADGROUPTYPEENUM_ADGROUPTYPE)
 
@@ -84,7 +92,7 @@ _ADGROUPTYPEENUM = _descriptor.Descriptor(
   oneofs=[
   ],
   serialized_start=91,
-  serialized_end=235,
+  serialized_end=280,
 )
 
 _ADGROUPTYPEENUM_ADGROUPTYPE.containing_type = _ADGROUPTYPEENUM

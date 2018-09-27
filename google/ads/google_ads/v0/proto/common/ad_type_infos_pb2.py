@@ -20,7 +20,7 @@ DESCRIPTOR = _descriptor.FileDescriptor(
   name='google/ads/googleads_v0/proto/common/ad_type_infos.proto',
   package='google.ads.googleads.v0.common',
   syntax='proto3',
-  serialized_pb=_b('\n8google/ads/googleads_v0/proto/common/ad_type_infos.proto\x12\x1egoogle.ads.googleads.v0.common\x1a\x1egoogle/protobuf/wrappers.proto\"\xa4\x01\n\nTextAdInfo\x12.\n\x08headline\x18\x01 \x01(\x0b\x32\x1c.google.protobuf.StringValue\x12\x32\n\x0c\x64\x65scription1\x18\x02 \x01(\x0b\x32\x1c.google.protobuf.StringValue\x12\x32\n\x0c\x64\x65scription2\x18\x03 \x01(\x0b\x32\x1c.google.protobuf.StringValue\"\x8d\x02\n\x12\x45xpandedTextAdInfo\x12\x34\n\x0eheadline_part1\x18\x01 \x01(\x0b\x32\x1c.google.protobuf.StringValue\x12\x34\n\x0eheadline_part2\x18\x02 \x01(\x0b\x32\x1c.google.protobuf.StringValue\x12\x31\n\x0b\x64\x65scription\x18\x03 \x01(\x0b\x32\x1c.google.protobuf.StringValue\x12+\n\x05path1\x18\x04 \x01(\x0b\x32\x1c.google.protobuf.StringValue\x12+\n\x05path2\x18\x05 \x01(\x0b\x32\x1c.google.protobuf.StringValue\"}\n\x13\x44ynamicSearchAdInfo\x12\x32\n\x0c\x64\x65scription1\x18\x01 \x01(\x0b\x32\x1c.google.protobuf.StringValue\x12\x32\n\x0c\x64\x65scription2\x18\x02 \x01(\x0b\x32\x1c.google.protobuf.StringValue\"\xec\x01\n\x17ResponsiveDisplayAdInfo\x12\x34\n\x0eshort_headline\x18\x01 \x01(\x0b\x32\x1c.google.protobuf.StringValue\x12\x33\n\rlong_headline\x18\x02 \x01(\x0b\x32\x1c.google.protobuf.StringValue\x12\x31\n\x0b\x64\x65scription\x18\x03 \x01(\x0b\x32\x1c.google.protobuf.StringValue\x12\x33\n\rbusiness_name\x18\x04 \x01(\x0b\x32\x1c.google.protobuf.StringValue\"\xc9\x03\n\x0e\x43\x61llOnlyAdInfo\x12\x32\n\x0c\x63ountry_code\x18\x01 \x01(\x0b\x32\x1c.google.protobuf.StringValue\x12\x32\n\x0cphone_number\x18\x02 \x01(\x0b\x32\x1c.google.protobuf.StringValue\x12\x33\n\rbusiness_name\x18\x03 \x01(\x0b\x32\x1c.google.protobuf.StringValue\x12\x32\n\x0c\x64\x65scription1\x18\x04 \x01(\x0b\x32\x1c.google.protobuf.StringValue\x12\x32\n\x0c\x64\x65scription2\x18\x05 \x01(\x0b\x32\x1c.google.protobuf.StringValue\x12\x30\n\x0c\x63\x61ll_tracked\x18\x06 \x01(\x0b\x32\x1a.google.protobuf.BoolValue\x12;\n\x17\x64isable_call_conversion\x18\x07 \x01(\x0b\x32\x1a.google.protobuf.BoolValue\x12\x43\n\x1dphone_number_verification_url\x18\x08 \x01(\x0b\x32\x1c.google.protobuf.StringValue\"P\n\x1b\x45xpandedDynamicSearchAdInfo\x12\x31\n\x0b\x64\x65scription\x18\x01 \x01(\x0b\x32\x1c.google.protobuf.StringValue\"\r\n\x0bHotelAdInfo\"\x15\n\x13ShoppingSmartAdInfoB\xc6\x01\n\"com.google.ads.googleads.v0.commonB\x10\x41\x64TypeInfosProtoP\x01ZDgoogle.golang.org/genproto/googleapis/ads/googleads/v0/common;common\xa2\x02\x03GAA\xaa\x02\x1eGoogle.Ads.GoogleAds.V0.Common\xca\x02\x1eGoogle\\Ads\\GoogleAds\\V0\\Commonb\x06proto3')
+  serialized_pb=_b('\n8google/ads/googleads_v0/proto/common/ad_type_infos.proto\x12\x1egoogle.ads.googleads.v0.common\x1a\x1egoogle/protobuf/wrappers.proto\"\xa4\x01\n\nTextAdInfo\x12.\n\x08headline\x18\x01 \x01(\x0b\x32\x1c.google.protobuf.StringValue\x12\x32\n\x0c\x64\x65scription1\x18\x02 \x01(\x0b\x32\x1c.google.protobuf.StringValue\x12\x32\n\x0c\x64\x65scription2\x18\x03 \x01(\x0b\x32\x1c.google.protobuf.StringValue\"\x8d\x02\n\x12\x45xpandedTextAdInfo\x12\x34\n\x0eheadline_part1\x18\x01 \x01(\x0b\x32\x1c.google.protobuf.StringValue\x12\x34\n\x0eheadline_part2\x18\x02 \x01(\x0b\x32\x1c.google.protobuf.StringValue\x12\x31\n\x0b\x64\x65scription\x18\x03 \x01(\x0b\x32\x1c.google.protobuf.StringValue\x12+\n\x05path1\x18\x04 \x01(\x0b\x32\x1c.google.protobuf.StringValue\x12+\n\x05path2\x18\x05 \x01(\x0b\x32\x1c.google.protobuf.StringValue\"}\n\x13\x44ynamicSearchAdInfo\x12\x32\n\x0c\x64\x65scription1\x18\x01 \x01(\x0b\x32\x1c.google.protobuf.StringValue\x12\x32\n\x0c\x64\x65scription2\x18\x02 \x01(\x0b\x32\x1c.google.protobuf.StringValue\"\xec\x01\n\x17ResponsiveDisplayAdInfo\x12\x34\n\x0eshort_headline\x18\x01 \x01(\x0b\x32\x1c.google.protobuf.StringValue\x12\x33\n\rlong_headline\x18\x02 \x01(\x0b\x32\x1c.google.protobuf.StringValue\x12\x31\n\x0b\x64\x65scription\x18\x03 \x01(\x0b\x32\x1c.google.protobuf.StringValue\x12\x33\n\rbusiness_name\x18\x04 \x01(\x0b\x32\x1c.google.protobuf.StringValue\"\xc9\x03\n\x0e\x43\x61llOnlyAdInfo\x12\x32\n\x0c\x63ountry_code\x18\x01 \x01(\x0b\x32\x1c.google.protobuf.StringValue\x12\x32\n\x0cphone_number\x18\x02 \x01(\x0b\x32\x1c.google.protobuf.StringValue\x12\x33\n\rbusiness_name\x18\x03 \x01(\x0b\x32\x1c.google.protobuf.StringValue\x12\x32\n\x0c\x64\x65scription1\x18\x04 \x01(\x0b\x32\x1c.google.protobuf.StringValue\x12\x32\n\x0c\x64\x65scription2\x18\x05 \x01(\x0b\x32\x1c.google.protobuf.StringValue\x12\x30\n\x0c\x63\x61ll_tracked\x18\x06 \x01(\x0b\x32\x1a.google.protobuf.BoolValue\x12;\n\x17\x64isable_call_conversion\x18\x07 \x01(\x0b\x32\x1a.google.protobuf.BoolValue\x12\x43\n\x1dphone_number_verification_url\x18\x08 \x01(\x0b\x32\x1c.google.protobuf.StringValue\"P\n\x1b\x45xpandedDynamicSearchAdInfo\x12\x31\n\x0b\x64\x65scription\x18\x01 \x01(\x0b\x32\x1c.google.protobuf.StringValue\"\r\n\x0bHotelAdInfo\"\x15\n\x13ShoppingSmartAdInfo\"\x17\n\x15ShoppingProductAdInfoB\xc6\x01\n\"com.google.ads.googleads.v0.commonB\x10\x41\x64TypeInfosProtoP\x01ZDgoogle.golang.org/genproto/googleapis/ads/googleads/v0/common;common\xa2\x02\x03GAA\xaa\x02\x1eGoogle.Ads.GoogleAds.V0.Common\xca\x02\x1eGoogle\\Ads\\GoogleAds\\V0\\Commonb\x06proto3')
   ,
   dependencies=[google_dot_protobuf_dot_wrappers__pb2.DESCRIPTOR,])
 
@@ -379,6 +379,30 @@ _SHOPPINGSMARTADINFO = _descriptor.Descriptor(
   serialized_end=1507,
 )
 
+
+_SHOPPINGPRODUCTADINFO = _descriptor.Descriptor(
+  name='ShoppingProductAdInfo',
+  full_name='google.ads.googleads.v0.common.ShoppingProductAdInfo',
+  filename=None,
+  file=DESCRIPTOR,
+  containing_type=None,
+  fields=[
+  ],
+  extensions=[
+  ],
+  nested_types=[],
+  enum_types=[
+  ],
+  options=None,
+  is_extendable=False,
+  syntax='proto3',
+  extension_ranges=[],
+  oneofs=[
+  ],
+  serialized_start=1509,
+  serialized_end=1532,
+)
+
 _TEXTADINFO.fields_by_name['headline'].message_type = google_dot_protobuf_dot_wrappers__pb2._STRINGVALUE
 _TEXTADINFO.fields_by_name['description1'].message_type = google_dot_protobuf_dot_wrappers__pb2._STRINGVALUE
 _TEXTADINFO.fields_by_name['description2'].message_type = google_dot_protobuf_dot_wrappers__pb2._STRINGVALUE
@@ -410,6 +434,7 @@ DESCRIPTOR.message_types_by_name['CallOnlyAdInfo'] = _CALLONLYADINFO
 DESCRIPTOR.message_types_by_name['ExpandedDynamicSearchAdInfo'] = _EXPANDEDDYNAMICSEARCHADINFO
 DESCRIPTOR.message_types_by_name['HotelAdInfo'] = _HOTELADINFO
 DESCRIPTOR.message_types_by_name['ShoppingSmartAdInfo'] = _SHOPPINGSMARTADINFO
+DESCRIPTOR.message_types_by_name['ShoppingProductAdInfo'] = _SHOPPINGPRODUCTADINFO
 _sym_db.RegisterFileDescriptor(DESCRIPTOR)
 
 TextAdInfo = _reflection.GeneratedProtocolMessageType('TextAdInfo', (_message.Message,), dict(
@@ -560,6 +585,16 @@ ShoppingSmartAdInfo = _reflection.GeneratedProtocolMessageType('ShoppingSmartAdI
   # @@protoc_insertion_point(class_scope:google.ads.googleads.v0.common.ShoppingSmartAdInfo)
   ))
 _sym_db.RegisterMessage(ShoppingSmartAdInfo)
+
+ShoppingProductAdInfo = _reflection.GeneratedProtocolMessageType('ShoppingProductAdInfo', (_message.Message,), dict(
+  DESCRIPTOR = _SHOPPINGPRODUCTADINFO,
+  __module__ = 'google.ads.googleads_v0.proto.common.ad_type_infos_pb2'
+  ,
+  __doc__ = """A standard Shopping ad.
+  """,
+  # @@protoc_insertion_point(class_scope:google.ads.googleads.v0.common.ShoppingProductAdInfo)
+  ))
+_sym_db.RegisterMessage(ShoppingProductAdInfo)
 
 
 DESCRIPTOR.has_options = True

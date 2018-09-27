@@ -167,15 +167,6 @@ class CampaignBudgetServiceClient(object):
         """
         Returns the requested Campaign Budget in full detail.
 
-        Example:
-            >>> from google.cloud.ads import googleads_v0
-            >>>
-            >>> client = googleads_v0.CampaignBudgetServiceClient()
-            >>>
-            >>> resource_name = client.campaign_budget_path('[CUSTOMER]', '[CAMPAIGN_BUDGET]')
-            >>>
-            >>> response = client.get_campaign_budget(resource_name)
-
         Args:
             resource_name (str): The resource name of the campaign budget to fetch.
             retry (Optional[google.api_core.retry.Retry]):  A retry object used
@@ -188,7 +179,7 @@ class CampaignBudgetServiceClient(object):
                 that is provided to the method.
 
         Returns:
-            A :class:`~google.cloud.ads.googleads_v0.types.CampaignBudget` instance.
+            A :class:`~google.ads.google_ads.v0.types.CampaignBudget` instance.
 
         Raises:
             google.api_core.exceptions.GoogleAPICallError: If the request
@@ -225,24 +216,11 @@ class CampaignBudgetServiceClient(object):
         Creates, updates, or removes campaign budgets. Operation statuses are
         returned.
 
-        Example:
-            >>> from google.cloud.ads import googleads_v0
-            >>>
-            >>> client = googleads_v0.CampaignBudgetServiceClient()
-            >>>
-            >>> # TODO: Initialize ``customer_id``:
-            >>> customer_id = ''
-            >>>
-            >>> # TODO: Initialize ``operations``:
-            >>> operations = []
-            >>>
-            >>> response = client.mutate_campaign_budgets(customer_id, operations)
-
         Args:
             customer_id (str): The ID of the customer whose campaign budgets are being modified.
-            operations (list[Union[dict, ~google.cloud.ads.googleads_v0.types.CampaignBudgetOperation]]): The list of operations to perform on individual campaign budgets.
+            operations (list[Union[dict, ~google.ads.google_ads.v0.types.CampaignBudgetOperation]]): The list of operations to perform on individual campaign budgets.
                 If a dict is provided, it must be of the same form as the protobuf
-                message :class:`~google.cloud.ads.googleads_v0.types.CampaignBudgetOperation`
+                message :class:`~google.ads.google_ads.v0.types.CampaignBudgetOperation`
             retry (Optional[google.api_core.retry.Retry]):  A retry object used
                 to retry requests. If ``None`` is specified, requests will not
                 be retried.
@@ -253,7 +231,7 @@ class CampaignBudgetServiceClient(object):
                 that is provided to the method.
 
         Returns:
-            A :class:`~google.cloud.ads.googleads_v0.types.MutateCampaignBudgetsResponse` instance.
+            A :class:`~google.ads.google_ads.v0.types.MutateCampaignBudgetsResponse` instance.
 
         Raises:
             google.api_core.exceptions.GoogleAPICallError: If the request

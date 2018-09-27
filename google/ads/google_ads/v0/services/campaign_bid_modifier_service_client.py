@@ -169,15 +169,6 @@ class CampaignBidModifierServiceClient(object):
         """
         Returns the requested campaign bid modifier in full detail.
 
-        Example:
-            >>> from google.cloud.ads import googleads_v0
-            >>>
-            >>> client = googleads_v0.CampaignBidModifierServiceClient()
-            >>>
-            >>> resource_name = client.campaign_bid_modifier_path('[CUSTOMER]', '[CAMPAIGN_BID_MODIFIER]')
-            >>>
-            >>> response = client.get_campaign_bid_modifier(resource_name)
-
         Args:
             resource_name (str): The resource name of the campaign bid modifier to fetch.
             retry (Optional[google.api_core.retry.Retry]):  A retry object used
@@ -190,7 +181,7 @@ class CampaignBidModifierServiceClient(object):
                 that is provided to the method.
 
         Returns:
-            A :class:`~google.cloud.ads.googleads_v0.types.CampaignBidModifier` instance.
+            A :class:`~google.ads.google_ads.v0.types.CampaignBidModifier` instance.
 
         Raises:
             google.api_core.exceptions.GoogleAPICallError: If the request
@@ -227,24 +218,11 @@ class CampaignBidModifierServiceClient(object):
         Creates, updates, or removes campaign bid modifiers.
         Operation statuses are returned.
 
-        Example:
-            >>> from google.cloud.ads import googleads_v0
-            >>>
-            >>> client = googleads_v0.CampaignBidModifierServiceClient()
-            >>>
-            >>> # TODO: Initialize ``customer_id``:
-            >>> customer_id = ''
-            >>>
-            >>> # TODO: Initialize ``operations``:
-            >>> operations = []
-            >>>
-            >>> response = client.mutate_campaign_bid_modifiers(customer_id, operations)
-
         Args:
             customer_id (str): ID of the customer whose campaign bid modifiers are being modified.
-            operations (list[Union[dict, ~google.cloud.ads.googleads_v0.types.CampaignBidModifierOperation]]): The list of operations to perform on individual campaign bid modifiers.
+            operations (list[Union[dict, ~google.ads.google_ads.v0.types.CampaignBidModifierOperation]]): The list of operations to perform on individual campaign bid modifiers.
                 If a dict is provided, it must be of the same form as the protobuf
-                message :class:`~google.cloud.ads.googleads_v0.types.CampaignBidModifierOperation`
+                message :class:`~google.ads.google_ads.v0.types.CampaignBidModifierOperation`
             retry (Optional[google.api_core.retry.Retry]):  A retry object used
                 to retry requests. If ``None`` is specified, requests will not
                 be retried.
@@ -255,7 +233,7 @@ class CampaignBidModifierServiceClient(object):
                 that is provided to the method.
 
         Returns:
-            A :class:`~google.cloud.ads.googleads_v0.types.MutateCampaignBidModifiersResponse` instance.
+            A :class:`~google.ads.google_ads.v0.types.MutateCampaignBidModifiersResponse` instance.
 
         Raises:
             google.api_core.exceptions.GoogleAPICallError: If the request

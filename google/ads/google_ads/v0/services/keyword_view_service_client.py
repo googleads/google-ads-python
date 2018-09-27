@@ -167,15 +167,6 @@ class KeywordViewServiceClient(object):
         """
         Returns the requested keyword view in full detail.
 
-        Example:
-            >>> from google.cloud.ads import googleads_v0
-            >>>
-            >>> client = googleads_v0.KeywordViewServiceClient()
-            >>>
-            >>> resource_name = client.keyword_view_path('[CUSTOMER]', '[KEYWORD_VIEW]')
-            >>>
-            >>> response = client.get_keyword_view(resource_name)
-
         Args:
             resource_name (str): The resource name of the keyword view to fetch.
             retry (Optional[google.api_core.retry.Retry]):  A retry object used
@@ -188,7 +179,7 @@ class KeywordViewServiceClient(object):
                 that is provided to the method.
 
         Returns:
-            A :class:`~google.cloud.ads.googleads_v0.types.KeywordView` instance.
+            A :class:`~google.ads.google_ads.v0.types.KeywordView` instance.
 
         Raises:
             google.api_core.exceptions.GoogleAPICallError: If the request

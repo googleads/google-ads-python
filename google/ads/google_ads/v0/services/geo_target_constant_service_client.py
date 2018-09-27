@@ -168,15 +168,6 @@ class GeoTargetConstantServiceClient(object):
         """
         Returns the requested geo target constant in full detail.
 
-        Example:
-            >>> from google.cloud.ads import googleads_v0
-            >>>
-            >>> client = googleads_v0.GeoTargetConstantServiceClient()
-            >>>
-            >>> resource_name = client.geo_target_constant_path('[GEO_TARGET_CONSTANT]')
-            >>>
-            >>> response = client.get_geo_target_constant(resource_name)
-
         Args:
             resource_name (str): The resource name of the geo target constant to fetch.
             retry (Optional[google.api_core.retry.Retry]):  A retry object used
@@ -189,7 +180,7 @@ class GeoTargetConstantServiceClient(object):
                 that is provided to the method.
 
         Returns:
-            A :class:`~google.cloud.ads.googleads_v0.types.GeoTargetConstant` instance.
+            A :class:`~google.ads.google_ads.v0.types.GeoTargetConstant` instance.
 
         Raises:
             google.api_core.exceptions.GoogleAPICallError: If the request

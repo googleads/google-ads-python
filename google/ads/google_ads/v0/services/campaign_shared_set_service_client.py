@@ -169,15 +169,6 @@ class CampaignSharedSetServiceClient(object):
         """
         Returns the requested campaign shared set in full detail.
 
-        Example:
-            >>> from google.cloud.ads import googleads_v0
-            >>>
-            >>> client = googleads_v0.CampaignSharedSetServiceClient()
-            >>>
-            >>> resource_name = client.campaign_shared_set_path('[CUSTOMER]', '[CAMPAIGN_SHARED_SET]')
-            >>>
-            >>> response = client.get_campaign_shared_set(resource_name)
-
         Args:
             resource_name (str): The resource name of the campaign shared set to fetch.
             retry (Optional[google.api_core.retry.Retry]):  A retry object used
@@ -190,7 +181,7 @@ class CampaignSharedSetServiceClient(object):
                 that is provided to the method.
 
         Returns:
-            A :class:`~google.cloud.ads.googleads_v0.types.CampaignSharedSet` instance.
+            A :class:`~google.ads.google_ads.v0.types.CampaignSharedSet` instance.
 
         Raises:
             google.api_core.exceptions.GoogleAPICallError: If the request
@@ -226,24 +217,11 @@ class CampaignSharedSetServiceClient(object):
         """
         Creates or removes campaign shared sets. Operation statuses are returned.
 
-        Example:
-            >>> from google.cloud.ads import googleads_v0
-            >>>
-            >>> client = googleads_v0.CampaignSharedSetServiceClient()
-            >>>
-            >>> # TODO: Initialize ``customer_id``:
-            >>> customer_id = ''
-            >>>
-            >>> # TODO: Initialize ``operations``:
-            >>> operations = []
-            >>>
-            >>> response = client.mutate_campaign_shared_sets(customer_id, operations)
-
         Args:
             customer_id (str): The ID of the customer whose campaign shared sets are being modified.
-            operations (list[Union[dict, ~google.cloud.ads.googleads_v0.types.CampaignSharedSetOperation]]): The list of operations to perform on individual campaign shared sets.
+            operations (list[Union[dict, ~google.ads.google_ads.v0.types.CampaignSharedSetOperation]]): The list of operations to perform on individual campaign shared sets.
                 If a dict is provided, it must be of the same form as the protobuf
-                message :class:`~google.cloud.ads.googleads_v0.types.CampaignSharedSetOperation`
+                message :class:`~google.ads.google_ads.v0.types.CampaignSharedSetOperation`
             retry (Optional[google.api_core.retry.Retry]):  A retry object used
                 to retry requests. If ``None`` is specified, requests will not
                 be retried.
@@ -254,7 +232,7 @@ class CampaignSharedSetServiceClient(object):
                 that is provided to the method.
 
         Returns:
-            A :class:`~google.cloud.ads.googleads_v0.types.MutateCampaignSharedSetsResponse` instance.
+            A :class:`~google.ads.google_ads.v0.types.MutateCampaignSharedSetsResponse` instance.
 
         Raises:
             google.api_core.exceptions.GoogleAPICallError: If the request

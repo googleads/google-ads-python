@@ -167,15 +167,6 @@ class CampaignServiceClient(object):
         """
         Returns the requested campaign in full detail.
 
-        Example:
-            >>> from google.cloud.ads import googleads_v0
-            >>>
-            >>> client = googleads_v0.CampaignServiceClient()
-            >>>
-            >>> resource_name = client.campaign_path('[CUSTOMER]', '[CAMPAIGN]')
-            >>>
-            >>> response = client.get_campaign(resource_name)
-
         Args:
             resource_name (str): The resource name of the campaign to fetch.
             retry (Optional[google.api_core.retry.Retry]):  A retry object used
@@ -188,7 +179,7 @@ class CampaignServiceClient(object):
                 that is provided to the method.
 
         Returns:
-            A :class:`~google.cloud.ads.googleads_v0.types.Campaign` instance.
+            A :class:`~google.ads.google_ads.v0.types.Campaign` instance.
 
         Raises:
             google.api_core.exceptions.GoogleAPICallError: If the request
@@ -222,24 +213,11 @@ class CampaignServiceClient(object):
         """
         Creates, updates, or removes campaigns. Operation statuses are returned.
 
-        Example:
-            >>> from google.cloud.ads import googleads_v0
-            >>>
-            >>> client = googleads_v0.CampaignServiceClient()
-            >>>
-            >>> # TODO: Initialize ``customer_id``:
-            >>> customer_id = ''
-            >>>
-            >>> # TODO: Initialize ``operations``:
-            >>> operations = []
-            >>>
-            >>> response = client.mutate_campaigns(customer_id, operations)
-
         Args:
             customer_id (str): The ID of the customer whose campaigns are being modified.
-            operations (list[Union[dict, ~google.cloud.ads.googleads_v0.types.CampaignOperation]]): The list of operations to perform on individual campaigns.
+            operations (list[Union[dict, ~google.ads.google_ads.v0.types.CampaignOperation]]): The list of operations to perform on individual campaigns.
                 If a dict is provided, it must be of the same form as the protobuf
-                message :class:`~google.cloud.ads.googleads_v0.types.CampaignOperation`
+                message :class:`~google.ads.google_ads.v0.types.CampaignOperation`
             retry (Optional[google.api_core.retry.Retry]):  A retry object used
                 to retry requests. If ``None`` is specified, requests will not
                 be retried.
@@ -250,7 +228,7 @@ class CampaignServiceClient(object):
                 that is provided to the method.
 
         Returns:
-            A :class:`~google.cloud.ads.googleads_v0.types.MutateCampaignsResponse` instance.
+            A :class:`~google.ads.google_ads.v0.types.MutateCampaignsResponse` instance.
 
         Raises:
             google.api_core.exceptions.GoogleAPICallError: If the request

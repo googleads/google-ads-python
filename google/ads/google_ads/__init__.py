@@ -14,14 +14,9 @@
 
 from __future__ import absolute_import
 
-try:
-    import pkg_resources
-    pkg_resources.declare_namespace(__name__)
-except ImportError:
-    import pkgutil
-    __path__ = pkgutil.extend_path(__path__, __name__)
-
-import google.ads.google_ads.v0
+import google.ads.google_ads.client
+import google.ads.google_ads.errors
 
 
-VERSION = '0.2.0'
+VERSION = '0.3.0'
+

@@ -167,15 +167,6 @@ class AdGroupServiceClient(object):
         """
         Returns the requested ad group in full detail.
 
-        Example:
-            >>> from google.cloud.ads import googleads_v0
-            >>>
-            >>> client = googleads_v0.AdGroupServiceClient()
-            >>>
-            >>> resource_name = client.ad_group_path('[CUSTOMER]', '[AD_GROUP]')
-            >>>
-            >>> response = client.get_ad_group(resource_name)
-
         Args:
             resource_name (str): The resource name of the ad group to fetch.
             retry (Optional[google.api_core.retry.Retry]):  A retry object used
@@ -188,7 +179,7 @@ class AdGroupServiceClient(object):
                 that is provided to the method.
 
         Returns:
-            A :class:`~google.cloud.ads.googleads_v0.types.AdGroup` instance.
+            A :class:`~google.ads.google_ads.v0.types.AdGroup` instance.
 
         Raises:
             google.api_core.exceptions.GoogleAPICallError: If the request
@@ -221,24 +212,11 @@ class AdGroupServiceClient(object):
         """
         Creates, updates, or removes ad groups. Operation statuses are returned.
 
-        Example:
-            >>> from google.cloud.ads import googleads_v0
-            >>>
-            >>> client = googleads_v0.AdGroupServiceClient()
-            >>>
-            >>> # TODO: Initialize ``customer_id``:
-            >>> customer_id = ''
-            >>>
-            >>> # TODO: Initialize ``operations``:
-            >>> operations = []
-            >>>
-            >>> response = client.mutate_ad_groups(customer_id, operations)
-
         Args:
             customer_id (str): The ID of the customer whose ad groups are being modified.
-            operations (list[Union[dict, ~google.cloud.ads.googleads_v0.types.AdGroupOperation]]): The list of operations to perform on individual ad groups.
+            operations (list[Union[dict, ~google.ads.google_ads.v0.types.AdGroupOperation]]): The list of operations to perform on individual ad groups.
                 If a dict is provided, it must be of the same form as the protobuf
-                message :class:`~google.cloud.ads.googleads_v0.types.AdGroupOperation`
+                message :class:`~google.ads.google_ads.v0.types.AdGroupOperation`
             retry (Optional[google.api_core.retry.Retry]):  A retry object used
                 to retry requests. If ``None`` is specified, requests will not
                 be retried.
@@ -249,7 +227,7 @@ class AdGroupServiceClient(object):
                 that is provided to the method.
 
         Returns:
-            A :class:`~google.cloud.ads.googleads_v0.types.MutateAdGroupsResponse` instance.
+            A :class:`~google.ads.google_ads.v0.types.MutateAdGroupsResponse` instance.
 
         Raises:
             google.api_core.exceptions.GoogleAPICallError: If the request

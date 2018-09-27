@@ -81,6 +81,7 @@ Authors
 -------
 
 * `Mark Saniscalchi`_
+* `David Wihl`_
 
 .. _pip: https://pip.pypa.io/en/stable/installing
 .. _template: https://github.com/googleads/google-ads-python/blob/master/google-ads.yaml
@@ -92,3 +93,5 @@ Authors
 .. _API documentation: https://developers.google.com/google-ads/api/
 .. _API Support: https://developers.google.com/adwords/api/community/
 .. _Mark Saniscalchi: https://github.com/msaniscalchi
+.. _David Wihl: https://github.com/wihl
+

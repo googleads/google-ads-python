@@ -161,31 +161,6 @@ class GoogleAdsServiceClient(object):
         """
         Returns all rows that match the search query.
 
-        Example:
-            >>> from google.cloud.ads import googleads_v0
-            >>>
-            >>> client = googleads_v0.GoogleAdsServiceClient()
-            >>>
-            >>> # TODO: Initialize ``customer_id``:
-            >>> customer_id = ''
-            >>>
-            >>> # TODO: Initialize ``query``:
-            >>> query = ''
-            >>>
-            >>> # Iterate over all results
-            >>> for element in client.search(customer_id, query):
-            ...     # process element
-            ...     pass
-            >>>
-            >>>
-            >>> # Alternatively:
-            >>>
-            >>> # Iterate over results one page at a time
-            >>> for page in client.search(customer_id, query, options=CallOptions(page_token=INITIAL_PAGE)):
-            ...     for element in page:
-            ...         # process element
-            ...         pass
-
         Args:
             customer_id (str): The ID of the customer being queried.
             query (str): The query string.
@@ -205,7 +180,7 @@ class GoogleAdsServiceClient(object):
 
         Returns:
             A :class:`~google.gax.PageIterator` instance. By default, this
-            is an iterable of :class:`~google.cloud.ads.googleads_v0.types.GoogleAdsRow` instances.
+            is an iterable of :class:`~google.ads.google_ads.v0.types.GoogleAdsRow` instances.
             This object can also be configured to iterate over the pages
             of the response through the `options` parameter.
 

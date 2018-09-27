@@ -168,15 +168,6 @@ class GoogleAdsFieldServiceClient(object):
         """
         Returns just the requested field.
 
-        Example:
-            >>> from google.cloud.ads import googleads_v0
-            >>>
-            >>> client = googleads_v0.GoogleAdsFieldServiceClient()
-            >>>
-            >>> resource_name = client.google_ads_field_path('[GOOGLE_ADS_FIELD]')
-            >>>
-            >>> response = client.get_google_ads_field(resource_name)
-
         Args:
             resource_name (str): The resource name of the field to get.
             retry (Optional[google.api_core.retry.Retry]):  A retry object used
@@ -189,7 +180,7 @@ class GoogleAdsFieldServiceClient(object):
                 that is provided to the method.
 
         Returns:
-            A :class:`~google.cloud.ads.googleads_v0.types.GoogleAdsField` instance.
+            A :class:`~google.ads.google_ads.v0.types.GoogleAdsField` instance.
 
         Raises:
             google.api_core.exceptions.GoogleAPICallError: If the request
@@ -225,28 +216,6 @@ class GoogleAdsFieldServiceClient(object):
         """
         Returns all fields that match the search query.
 
-        Example:
-            >>> from google.cloud.ads import googleads_v0
-            >>>
-            >>> client = googleads_v0.GoogleAdsFieldServiceClient()
-            >>>
-            >>> # TODO: Initialize ``query``:
-            >>> query = ''
-            >>>
-            >>> # Iterate over all results
-            >>> for element in client.search_google_ads_fields(query):
-            ...     # process element
-            ...     pass
-            >>>
-            >>>
-            >>> # Alternatively:
-            >>>
-            >>> # Iterate over results one page at a time
-            >>> for page in client.search_google_ads_fields(query, options=CallOptions(page_token=INITIAL_PAGE)):
-            ...     for element in page:
-            ...         # process element
-            ...         pass
-
         Args:
             query (str): The query string.
             page_size (int): The maximum number of resources contained in the
@@ -265,7 +234,7 @@ class GoogleAdsFieldServiceClient(object):
 
         Returns:
             A :class:`~google.gax.PageIterator` instance. By default, this
-            is an iterable of :class:`~google.cloud.ads.googleads_v0.types.GoogleAdsField` instances.
+            is an iterable of :class:`~google.ads.google_ads.v0.types.GoogleAdsField` instances.
             This object can also be configured to iterate over the pages
             of the response through the `options` parameter.
 

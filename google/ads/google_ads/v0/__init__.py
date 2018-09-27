@@ -15,17 +15,21 @@
 from __future__ import absolute_import
 
 from google.ads.google_ads.v0 import types
+from google.ads.google_ads.v0.services import account_budget_proposal_service_client
 from google.ads.google_ads.v0.services import ad_group_ad_service_client
 from google.ads.google_ads.v0.services import ad_group_bid_modifier_service_client
 from google.ads.google_ads.v0.services import ad_group_criterion_service_client
 from google.ads.google_ads.v0.services import ad_group_service_client
 from google.ads.google_ads.v0.services import bidding_strategy_service_client
+from google.ads.google_ads.v0.services import billing_setup_service_client
 from google.ads.google_ads.v0.services import campaign_bid_modifier_service_client
 from google.ads.google_ads.v0.services import campaign_budget_service_client
 from google.ads.google_ads.v0.services import campaign_criterion_service_client
 from google.ads.google_ads.v0.services import campaign_group_service_client
 from google.ads.google_ads.v0.services import campaign_service_client
 from google.ads.google_ads.v0.services import campaign_shared_set_service_client
+from google.ads.google_ads.v0.services import change_status_service_client
+from google.ads.google_ads.v0.services import conversion_action_service_client
 from google.ads.google_ads.v0.services import customer_service_client
 from google.ads.google_ads.v0.services import enums
 from google.ads.google_ads.v0.services import geo_target_constant_service_client
@@ -35,18 +39,23 @@ from google.ads.google_ads.v0.services import keyword_view_service_client
 from google.ads.google_ads.v0.services import recommendation_service_client
 from google.ads.google_ads.v0.services import shared_criterion_service_client
 from google.ads.google_ads.v0.services import shared_set_service_client
+from google.ads.google_ads.v0.services import video_service_client
+from google.ads.google_ads.v0.services.transports import account_budget_proposal_service_grpc_transport
 from google.ads.google_ads.v0.services.transports import ad_group_ad_service_grpc_transport
 from google.ads.google_ads.v0.services.transports import ad_group_bid_modifier_service_grpc_transport
 from google.ads.google_ads.v0.services.transports import ad_group_criterion_service_grpc_transport
 from google.ads.google_ads.v0.services.transports import ad_group_service_grpc_transport
 from google.ads.google_ads.v0.services.transports import bidding_strategy_service_grpc_transport
+from google.ads.google_ads.v0.services.transports import billing_setup_service_grpc_transport
 from google.ads.google_ads.v0.services.transports import campaign_bid_modifier_service_grpc_transport
 from google.ads.google_ads.v0.services.transports import campaign_budget_service_grpc_transport
 from google.ads.google_ads.v0.services.transports import campaign_criterion_service_grpc_transport
 from google.ads.google_ads.v0.services.transports import campaign_group_service_grpc_transport
 from google.ads.google_ads.v0.services.transports import campaign_service_grpc_transport
-from google.ads.google_ads.v0.services.transports import customer_service_grpc_transport
 from google.ads.google_ads.v0.services.transports import campaign_shared_set_service_grpc_transport
+from google.ads.google_ads.v0.services.transports import change_status_service_grpc_transport
+from google.ads.google_ads.v0.services.transports import conversion_action_service_grpc_transport
+from google.ads.google_ads.v0.services.transports import customer_service_grpc_transport
 from google.ads.google_ads.v0.services.transports import geo_target_constant_service_grpc_transport
 from google.ads.google_ads.v0.services.transports import google_ads_field_service_grpc_transport
 from google.ads.google_ads.v0.services.transports import google_ads_service_grpc_transport
@@ -54,7 +63,7 @@ from google.ads.google_ads.v0.services.transports import keyword_view_service_gr
 from google.ads.google_ads.v0.services.transports import recommendation_service_grpc_transport
 from google.ads.google_ads.v0.services.transports import shared_criterion_service_grpc_transport
 from google.ads.google_ads.v0.services.transports import shared_set_service_grpc_transport
-
+from google.ads.google_ads.v0.services.transports import video_service_grpc_transport
 
 
 class AdGroupAdServiceClient(
@@ -258,46 +267,113 @@ class SharedSetServiceGrpcTransport(
     shared_set_service_grpc_transport.SharedSetServiceGrpcTransport):
     __doc__ = shared_set_service_grpc_transport.SharedSetServiceGrpcTransport.__doc__
 
+class AccountBudgetProposalServiceClient(
+        account_budget_proposal_service_client.
+        AccountBudgetProposalServiceClient):
+    __doc__ = account_budget_proposal_service_client.AccountBudgetProposalServiceClient.__doc__
+    enums = enums
+
+
+class BillingSetupServiceClient(
+        billing_setup_service_client.BillingSetupServiceClient):
+    __doc__ = billing_setup_service_client.BillingSetupServiceClient.__doc__
+    enums = enums
+
+
+class ChangeStatusServiceClient(
+        change_status_service_client.ChangeStatusServiceClient):
+    __doc__ = change_status_service_client.ChangeStatusServiceClient.__doc__
+    enums = enums
+
+
+class ConversionActionServiceClient(
+        conversion_action_service_client.ConversionActionServiceClient):
+    __doc__ = conversion_action_service_client.ConversionActionServiceClient.__doc__
+    enums = enums
+
+class VideoServiceClient(video_service_client.VideoServiceClient):
+    __doc__ = video_service_client.VideoServiceClient.__doc__
+    enums = enums
+
+
+class AccountBudgetProposalServiceGrpcTransport(
+        account_budget_proposal_service_grpc_transport.
+        AccountBudgetProposalServiceGrpcTransport):
+    __doc__ = account_budget_proposal_service_grpc_transport.AccountBudgetProposalServiceGrpcTransport.__doc__
+    enums = enums
+
+
+class BillingSetupServiceGrpcTransport(
+        billing_setup_service_grpc_transport.BillingSetupServiceGrpcTransport):
+    __doc__ = billing_setup_service_grpc_transport.BillingSetupServiceGrpcTransport.__doc__
+    enums = enums
+
+
+class ChangeStatusServiceGrpcTransport(
+        change_status_service_grpc_transport.ChangeStatusServiceGrpcTransport):
+    __doc__ = change_status_service_grpc_transport.ChangeStatusServiceGrpcTransport.__doc__
+    enums = enums
+
+
+class ConversionActionServiceGrpcTransport(
+        conversion_action_service_grpc_transport.ConversionActionServiceGrpcTransport):
+    __doc__ = conversion_action_service_grpc_transport.ConversionActionServiceGrpcTransport.__doc__
+    enums = enums
+
+class VideoServiceGrpcTransport(video_service_grpc_transport.VideoServiceGrpcTransport):
+    __doc__ = video_service_grpc_transport.VideoServiceGrpcTransport.__doc__
+    enums = enums
+
 
 __all__ = (
     'enums',
     'types',
+    'AccountBudgetProposalServiceClient',
     'AdGroupAdServiceClient',
-    'AdGroupAdServiceGrpcTransport',
     'AdGroupBidModifierServiceClient',
-    'AdGroupBidModifierServiceGrpcTransport',
     'AdGroupCriterionServiceClient',
-    'AdGroupCriterionServiceGrpcTransport',
     'AdGroupServiceClient',
-    'AdGroupServiceGrpcTransport',
     'BiddingStrategyServiceClient',
-    'BiddingStrategyServiceGrpcTransport',
+    'BillingSetupServiceClient',
     'CampaignBidModifierServiceClient',
-    'CampaignBidModifierServiceGrpcTransport',
     'CampaignBudgetServiceClient',
-    'CampaignBudgetServiceGrpcTransport'
     'CampaignCriterionServiceClient',
-    'CampaignCriterionServiceGrpcTransport',
     'CampaignGroupServiceClient',
-    'CampaignGroupServiceGrpcTransport',
     'CampaignServiceClient',
-    'CampaignServiceGrpcTransport',
     'CampaignSharedSetServiceClient',
-    'CampaignSharedSetServiceGrpcTransport',
+    'ChangeStatusServiceClient',
+    'ConversionActionServiceClient',
     'CustomerServiceClient',
-    'CustomerServiceGrpcTransport',
     'GeoTargetConstantServiceClient',
-    'GeoTargetConstantServiceGrpcTransport',
     'GoogleAdsFieldServiceClient',
-    'GoogleAdsServiceGrpcTransport',
     'GoogleAdsServiceClient',
-    'GoogleAdsServiceGrpcTransport',
     'KeywordViewServiceClient',
-    'KeywordViewServiceGrpcTransport',
     'RecommendationServiceClient',
-    'RecommendationServiceGrpcTransport',
     'SharedCriterionServiceClient',
-    'SharedCriterionServiceGrpcTransport',
     'SharedSetServiceClient',
-    'SharedSetServiceGrpcTransport'
+    'VideoServiceClient',
+    'AccountBudgetProposalServiceGrpcTransport',
+    'AdGroupAdServiceGrpcTransport',
+    'AdGroupBidModifierServiceGrpcTransport',
+    'AdGroupCriterionServiceGrpcTransport',
+    'AdGroupServiceGrpcTransport',
+    'BiddingStrategyServiceGrpcTransport',
+    'BillingSetupServiceGrpcTransport',
+    'CampaignBidModifierServiceGrpcTransport',
+    'CampaignBudgetServiceGrpcTransport',
+    'CampaignCriterionServiceGrpcTransport',
+    'CampaignGroupServiceGrpcTransport',
+    'CampaignServiceGrpcTransport',
+    'CampaignSharedSetServiceGrpcTransport',
+    'ChangeStatusServiceGrpcTransport',
+    'ConversionActionServiceGrpcTransport',
+    'CustomerServiceGrpcTransport',
+    'GeoTargetConstantServiceGrpcTransport',
+    'GoogleAdsFieldServiceGrpcTransport',
+    'GoogleAdsServiceGrpcTransport',
+    'KeywordViewServiceGrpcTransport',
+    'RecommendationServiceGrpcTransport',
+    'SharedCriterionServiceGrpcTransport',
+    'SharedSetServiceGrpcTransport',
+    'VideoServiceGrpcTransport',
 )

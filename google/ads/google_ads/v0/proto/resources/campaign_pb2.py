@@ -28,7 +28,7 @@ DESCRIPTOR = _descriptor.FileDescriptor(
   name='google/ads/googleads_v0/proto/resources/campaign.proto',
   package='google.ads.googleads.v0.resources',
   syntax='proto3',
-  serialized_pb=_b('\n6google/ads/googleads_v0/proto/resources/campaign.proto\x12!google.ads.googleads.v0.resources\x1a\x32google/ads/googleads_v0/proto/common/bidding.proto\x1a;google/ads/googleads_v0/proto/common/custom_parameter.proto\x1aHgoogle/ads/googleads_v0/proto/enums/ad_serving_optimization_status.proto\x1a\x46google/ads/googleads_v0/proto/enums/advertising_channel_sub_type.proto\x1a\x42google/ads/googleads_v0/proto/enums/advertising_channel_type.proto\x1a?google/ads/googleads_v0/proto/enums/bidding_strategy_type.proto\x1a\x41google/ads/googleads_v0/proto/enums/campaign_serving_status.proto\x1a\x39google/ads/googleads_v0/proto/enums/campaign_status.proto\x1a\x1egoogle/protobuf/wrappers.proto\"\x98\x17\n\x08\x43\x61mpaign\x12\x15\n\rresource_name\x18\x01 \x01(\t\x12\'\n\x02id\x18\x03 \x01(\x0b\x32\x1b.google.protobuf.Int64Value\x12*\n\x04name\x18\x04 \x01(\x0b\x32\x1c.google.protobuf.StringValue\x12P\n\x06status\x18\x05 \x01(\x0e\x32@.google.ads.googleads.v0.enums.CampaignStatusEnum.CampaignStatus\x12\x66\n\x0eserving_status\x18\x15 \x01(\x0e\x32N.google.ads.googleads.v0.enums.CampaignServingStatusEnum.CampaignServingStatus\x12\x82\x01\n\x1e\x61\x64_serving_optimization_status\x18\x08 \x01(\x0e\x32Z.google.ads.googleads.v0.enums.AdServingOptimizationStatusEnum.AdServingOptimizationStatus\x12r\n\x18\x61\x64vertising_channel_type\x18\t \x01(\x0e\x32P.google.ads.googleads.v0.enums.AdvertisingChannelTypeEnum.AdvertisingChannelType\x12|\n\x1c\x61\x64vertising_channel_sub_type\x18\n \x01(\x0e\x32V.google.ads.googleads.v0.enums.AdvertisingChannelSubTypeEnum.AdvertisingChannelSubType\x12;\n\x15tracking_url_template\x18\x0b \x01(\x0b\x32\x1c.google.protobuf.StringValue\x12N\n\x15url_custom_parameters\x18\x0c \x03(\x0b\x32/.google.ads.googleads.v0.common.CustomParameter\x12U\n\x10network_settings\x18\x0e \x01(\x0b\x32;.google.ads.googleads.v0.resources.Campaign.NetworkSettings\x12S\n\rhotel_setting\x18  \x01(\x0b\x32<.google.ads.googleads.v0.resources.Campaign.HotelSettingInfo\x12g\n\x1a\x64ynamic_search_ads_setting\x18! \x01(\x0b\x32\x43.google.ads.googleads.v0.resources.Campaign.DynamicSearchAdsSetting\x12U\n\x10shopping_setting\x18$ \x01(\x0b\x32;.google.ads.googleads.v0.resources.Campaign.ShoppingSetting\x12\x35\n\x0f\x63\x61mpaign_budget\x18\x06 \x01(\x0b\x32\x1c.google.protobuf.StringValue\x12i\n\x15\x62idding_strategy_type\x18\x16 \x01(\x0e\x32J.google.ads.googleads.v0.enums.BiddingStrategyTypeEnum.BiddingStrategyType\x12\x30\n\nstart_date\x18\x13 \x01(\x0b\x32\x1c.google.protobuf.StringValue\x12\x34\n\x0e\x63\x61mpaign_group\x18# \x01(\x0b\x32\x1c.google.protobuf.StringValue\x12.\n\x08\x65nd_date\x18\x14 \x01(\x0b\x32\x1c.google.protobuf.StringValue\x12\x38\n\x10\x62idding_strategy\x18\x17 \x01(\x0b\x32\x1c.google.protobuf.StringValueH\x00\x12?\n\nmanual_cpc\x18\x18 \x01(\x0b\x32).google.ads.googleads.v0.common.ManualCpcH\x00\x12?\n\nmanual_cpm\x18\x19 \x01(\x0b\x32).google.ads.googleads.v0.common.ManualCpmH\x00\x12S\n\x14maximize_conversions\x18\x1e \x01(\x0b\x32\x33.google.ads.googleads.v0.common.MaximizeConversionsH\x00\x12\\\n\x19maximize_conversion_value\x18\x1f \x01(\x0b\x32\x37.google.ads.googleads.v0.common.MaximizeConversionValueH\x00\x12?\n\ntarget_cpa\x18\x1a \x01(\x0b\x32).google.ads.googleads.v0.common.TargetCpaH\x00\x12\x41\n\x0btarget_roas\x18\x1d \x01(\x0b\x32*.google.ads.googleads.v0.common.TargetRoasH\x00\x12\x43\n\x0ctarget_spend\x18\x1b \x01(\x0b\x32+.google.ads.googleads.v0.common.TargetSpendH\x00\x12\x41\n\x0bpercent_cpc\x18\" \x01(\x0b\x32*.google.ads.googleads.v0.common.PercentCpcH\x00\x1a\x85\x02\n\x0fNetworkSettings\x12\x38\n\x14target_google_search\x18\x01 \x01(\x0b\x32\x1a.google.protobuf.BoolValue\x12\x39\n\x15target_search_network\x18\x02 \x01(\x0b\x32\x1a.google.protobuf.BoolValue\x12:\n\x16target_content_network\x18\x03 \x01(\x0b\x32\x1a.google.protobuf.BoolValue\x12\x41\n\x1dtarget_partner_search_network\x18\x04 \x01(\x0b\x32\x1a.google.protobuf.BoolValue\x1aH\n\x10HotelSettingInfo\x12\x34\n\x0fhotel_center_id\x18\x01 \x01(\x0b\x32\x1b.google.protobuf.Int64Value\x1a\xec\x01\n\x17\x44ynamicSearchAdsSetting\x12\x31\n\x0b\x64omain_name\x18\x01 \x01(\x0b\x32\x1c.google.protobuf.StringValue\x12\x33\n\rlanguage_code\x18\x02 \x01(\x0b\x32\x1c.google.protobuf.StringValue\x12:\n\x16use_supplied_urls_only\x18\x03 \x01(\x0b\x32\x1a.google.protobuf.BoolValue\x12-\n\x08\x66\x65\x65\x64_ids\x18\x04 \x03(\x0b\x32\x1b.google.protobuf.Int64Value\x1a\xe2\x01\n\x0fShoppingSetting\x12\x30\n\x0bmerchant_id\x18\x01 \x01(\x0b\x32\x1b.google.protobuf.Int64Value\x12\x33\n\rsales_country\x18\x02 \x01(\x0b\x32\x1c.google.protobuf.StringValue\x12\x36\n\x11\x63\x61mpaign_priority\x18\x03 \x01(\x0b\x32\x1b.google.protobuf.Int32Value\x12\x30\n\x0c\x65nable_local\x18\x04 \x01(\x0b\x32\x1a.google.protobuf.BoolValueB\x1b\n\x19\x63\x61mpaign_bidding_strategyB\xd2\x01\n%com.google.ads.googleads.v0.resourcesB\rCampaignProtoP\x01ZJgoogle.golang.org/genproto/googleapis/ads/googleads/v0/resources;resources\xa2\x02\x03GAA\xaa\x02!Google.Ads.GoogleAds.V0.Resources\xca\x02!Google\\Ads\\GoogleAds\\V0\\Resourcesb\x06proto3')
+  serialized_pb=_b('\n6google/ads/googleads_v0/proto/resources/campaign.proto\x12!google.ads.googleads.v0.resources\x1a\x32google/ads/googleads_v0/proto/common/bidding.proto\x1a;google/ads/googleads_v0/proto/common/custom_parameter.proto\x1aHgoogle/ads/googleads_v0/proto/enums/ad_serving_optimization_status.proto\x1a\x46google/ads/googleads_v0/proto/enums/advertising_channel_sub_type.proto\x1a\x42google/ads/googleads_v0/proto/enums/advertising_channel_type.proto\x1a?google/ads/googleads_v0/proto/enums/bidding_strategy_type.proto\x1a\x41google/ads/googleads_v0/proto/enums/campaign_serving_status.proto\x1a\x39google/ads/googleads_v0/proto/enums/campaign_status.proto\x1a\x1egoogle/protobuf/wrappers.proto\"\xd9\x17\n\x08\x43\x61mpaign\x12\x15\n\rresource_name\x18\x01 \x01(\t\x12\'\n\x02id\x18\x03 \x01(\x0b\x32\x1b.google.protobuf.Int64Value\x12*\n\x04name\x18\x04 \x01(\x0b\x32\x1c.google.protobuf.StringValue\x12P\n\x06status\x18\x05 \x01(\x0e\x32@.google.ads.googleads.v0.enums.CampaignStatusEnum.CampaignStatus\x12\x66\n\x0eserving_status\x18\x15 \x01(\x0e\x32N.google.ads.googleads.v0.enums.CampaignServingStatusEnum.CampaignServingStatus\x12\x82\x01\n\x1e\x61\x64_serving_optimization_status\x18\x08 \x01(\x0e\x32Z.google.ads.googleads.v0.enums.AdServingOptimizationStatusEnum.AdServingOptimizationStatus\x12r\n\x18\x61\x64vertising_channel_type\x18\t \x01(\x0e\x32P.google.ads.googleads.v0.enums.AdvertisingChannelTypeEnum.AdvertisingChannelType\x12|\n\x1c\x61\x64vertising_channel_sub_type\x18\n \x01(\x0e\x32V.google.ads.googleads.v0.enums.AdvertisingChannelSubTypeEnum.AdvertisingChannelSubType\x12;\n\x15tracking_url_template\x18\x0b \x01(\x0b\x32\x1c.google.protobuf.StringValue\x12N\n\x15url_custom_parameters\x18\x0c \x03(\x0b\x32/.google.ads.googleads.v0.common.CustomParameter\x12U\n\x10network_settings\x18\x0e \x01(\x0b\x32;.google.ads.googleads.v0.resources.Campaign.NetworkSettings\x12S\n\rhotel_setting\x18  \x01(\x0b\x32<.google.ads.googleads.v0.resources.Campaign.HotelSettingInfo\x12g\n\x1a\x64ynamic_search_ads_setting\x18! \x01(\x0b\x32\x43.google.ads.googleads.v0.resources.Campaign.DynamicSearchAdsSetting\x12U\n\x10shopping_setting\x18$ \x01(\x0b\x32;.google.ads.googleads.v0.resources.Campaign.ShoppingSetting\x12\x35\n\x0f\x63\x61mpaign_budget\x18\x06 \x01(\x0b\x32\x1c.google.protobuf.StringValue\x12i\n\x15\x62idding_strategy_type\x18\x16 \x01(\x0e\x32J.google.ads.googleads.v0.enums.BiddingStrategyTypeEnum.BiddingStrategyType\x12\x30\n\nstart_date\x18\x13 \x01(\x0b\x32\x1c.google.protobuf.StringValue\x12\x34\n\x0e\x63\x61mpaign_group\x18# \x01(\x0b\x32\x1c.google.protobuf.StringValue\x12.\n\x08\x65nd_date\x18\x14 \x01(\x0b\x32\x1c.google.protobuf.StringValue\x12\x38\n\x10\x62idding_strategy\x18\x17 \x01(\x0b\x32\x1c.google.protobuf.StringValueH\x00\x12?\n\nmanual_cpc\x18\x18 \x01(\x0b\x32).google.ads.googleads.v0.common.ManualCpcH\x00\x12?\n\nmanual_cpm\x18\x19 \x01(\x0b\x32).google.ads.googleads.v0.common.ManualCpmH\x00\x12?\n\nmanual_cpv\x18% \x01(\x0b\x32).google.ads.googleads.v0.common.ManualCpvH\x00\x12S\n\x14maximize_conversions\x18\x1e \x01(\x0b\x32\x33.google.ads.googleads.v0.common.MaximizeConversionsH\x00\x12\\\n\x19maximize_conversion_value\x18\x1f \x01(\x0b\x32\x37.google.ads.googleads.v0.common.MaximizeConversionValueH\x00\x12?\n\ntarget_cpa\x18\x1a \x01(\x0b\x32).google.ads.googleads.v0.common.TargetCpaH\x00\x12\x41\n\x0btarget_roas\x18\x1d \x01(\x0b\x32*.google.ads.googleads.v0.common.TargetRoasH\x00\x12\x43\n\x0ctarget_spend\x18\x1b \x01(\x0b\x32+.google.ads.googleads.v0.common.TargetSpendH\x00\x12\x41\n\x0bpercent_cpc\x18\" \x01(\x0b\x32*.google.ads.googleads.v0.common.PercentCpcH\x00\x1a\x85\x02\n\x0fNetworkSettings\x12\x38\n\x14target_google_search\x18\x01 \x01(\x0b\x32\x1a.google.protobuf.BoolValue\x12\x39\n\x15target_search_network\x18\x02 \x01(\x0b\x32\x1a.google.protobuf.BoolValue\x12:\n\x16target_content_network\x18\x03 \x01(\x0b\x32\x1a.google.protobuf.BoolValue\x12\x41\n\x1dtarget_partner_search_network\x18\x04 \x01(\x0b\x32\x1a.google.protobuf.BoolValue\x1aH\n\x10HotelSettingInfo\x12\x34\n\x0fhotel_center_id\x18\x01 \x01(\x0b\x32\x1b.google.protobuf.Int64Value\x1a\xec\x01\n\x17\x44ynamicSearchAdsSetting\x12\x31\n\x0b\x64omain_name\x18\x01 \x01(\x0b\x32\x1c.google.protobuf.StringValue\x12\x33\n\rlanguage_code\x18\x02 \x01(\x0b\x32\x1c.google.protobuf.StringValue\x12:\n\x16use_supplied_urls_only\x18\x03 \x01(\x0b\x32\x1a.google.protobuf.BoolValue\x12-\n\x08\x66\x65\x65\x64_ids\x18\x04 \x03(\x0b\x32\x1b.google.protobuf.Int64Value\x1a\xe2\x01\n\x0fShoppingSetting\x12\x30\n\x0bmerchant_id\x18\x01 \x01(\x0b\x32\x1b.google.protobuf.Int64Value\x12\x33\n\rsales_country\x18\x02 \x01(\x0b\x32\x1c.google.protobuf.StringValue\x12\x36\n\x11\x63\x61mpaign_priority\x18\x03 \x01(\x0b\x32\x1b.google.protobuf.Int32Value\x12\x30\n\x0c\x65nable_local\x18\x04 \x01(\x0b\x32\x1a.google.protobuf.BoolValueB\x1b\n\x19\x63\x61mpaign_bidding_strategyB\xd2\x01\n%com.google.ads.googleads.v0.resourcesB\rCampaignProtoP\x01ZJgoogle.golang.org/genproto/googleapis/ads/googleads/v0/resources;resources\xa2\x02\x03GAA\xaa\x02!Google.Ads.GoogleAds.V0.Resources\xca\x02!Google\\Ads\\GoogleAds\\V0\\Resourcesb\x06proto3')
   ,
   dependencies=[google_dot_ads_dot_googleads__v0_dot_proto_dot_common_dot_bidding__pb2.DESCRIPTOR,google_dot_ads_dot_googleads__v0_dot_proto_dot_common_dot_custom__parameter__pb2.DESCRIPTOR,google_dot_ads_dot_googleads__v0_dot_proto_dot_enums_dot_ad__serving__optimization__status__pb2.DESCRIPTOR,google_dot_ads_dot_googleads__v0_dot_proto_dot_enums_dot_advertising__channel__sub__type__pb2.DESCRIPTOR,google_dot_ads_dot_googleads__v0_dot_proto_dot_enums_dot_advertising__channel__type__pb2.DESCRIPTOR,google_dot_ads_dot_googleads__v0_dot_proto_dot_enums_dot_bidding__strategy__type__pb2.DESCRIPTOR,google_dot_ads_dot_googleads__v0_dot_proto_dot_enums_dot_campaign__serving__status__pb2.DESCRIPTOR,google_dot_ads_dot_googleads__v0_dot_proto_dot_enums_dot_campaign__status__pb2.DESCRIPTOR,google_dot_protobuf_dot_wrappers__pb2.DESCRIPTOR,])
 
@@ -82,8 +82,8 @@ _CAMPAIGN_NETWORKSETTINGS = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=2780,
-  serialized_end=3041,
+  serialized_start=2845,
+  serialized_end=3106,
 )
 
 _CAMPAIGN_HOTELSETTINGINFO = _descriptor.Descriptor(
@@ -112,8 +112,8 @@ _CAMPAIGN_HOTELSETTINGINFO = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=3043,
-  serialized_end=3115,
+  serialized_start=3108,
+  serialized_end=3180,
 )
 
 _CAMPAIGN_DYNAMICSEARCHADSSETTING = _descriptor.Descriptor(
@@ -163,8 +163,8 @@ _CAMPAIGN_DYNAMICSEARCHADSSETTING = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=3118,
-  serialized_end=3354,
+  serialized_start=3183,
+  serialized_end=3419,
 )
 
 _CAMPAIGN_SHOPPINGSETTING = _descriptor.Descriptor(
@@ -214,8 +214,8 @@ _CAMPAIGN_SHOPPINGSETTING = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=3357,
-  serialized_end=3583,
+  serialized_start=3422,
+  serialized_end=3648,
 )
 
 _CAMPAIGN = _descriptor.Descriptor(
@@ -380,42 +380,49 @@ _CAMPAIGN = _descriptor.Descriptor(
       is_extension=False, extension_scope=None,
       options=None, file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
-      name='maximize_conversions', full_name='google.ads.googleads.v0.resources.Campaign.maximize_conversions', index=22,
+      name='manual_cpv', full_name='google.ads.googleads.v0.resources.Campaign.manual_cpv', index=22,
+      number=37, type=11, cpp_type=10, label=1,
+      has_default_value=False, default_value=None,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None, file=DESCRIPTOR),
+    _descriptor.FieldDescriptor(
+      name='maximize_conversions', full_name='google.ads.googleads.v0.resources.Campaign.maximize_conversions', index=23,
       number=30, type=11, cpp_type=10, label=1,
       has_default_value=False, default_value=None,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None, file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
-      name='maximize_conversion_value', full_name='google.ads.googleads.v0.resources.Campaign.maximize_conversion_value', index=23,
+      name='maximize_conversion_value', full_name='google.ads.googleads.v0.resources.Campaign.maximize_conversion_value', index=24,
       number=31, type=11, cpp_type=10, label=1,
       has_default_value=False, default_value=None,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None, file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
-      name='target_cpa', full_name='google.ads.googleads.v0.resources.Campaign.target_cpa', index=24,
+      name='target_cpa', full_name='google.ads.googleads.v0.resources.Campaign.target_cpa', index=25,
       number=26, type=11, cpp_type=10, label=1,
       has_default_value=False, default_value=None,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None, file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
-      name='target_roas', full_name='google.ads.googleads.v0.resources.Campaign.target_roas', index=25,
+      name='target_roas', full_name='google.ads.googleads.v0.resources.Campaign.target_roas', index=26,
       number=29, type=11, cpp_type=10, label=1,
       has_default_value=False, default_value=None,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None, file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
-      name='target_spend', full_name='google.ads.googleads.v0.resources.Campaign.target_spend', index=26,
+      name='target_spend', full_name='google.ads.googleads.v0.resources.Campaign.target_spend', index=27,
       number=27, type=11, cpp_type=10, label=1,
       has_default_value=False, default_value=None,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None, file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
-      name='percent_cpc', full_name='google.ads.googleads.v0.resources.Campaign.percent_cpc', index=27,
+      name='percent_cpc', full_name='google.ads.googleads.v0.resources.Campaign.percent_cpc', index=28,
       number=34, type=11, cpp_type=10, label=1,
       has_default_value=False, default_value=None,
       message_type=None, enum_type=None, containing_type=None,
@@ -437,7 +444,7 @@ _CAMPAIGN = _descriptor.Descriptor(
       index=0, containing_type=None, fields=[]),
   ],
   serialized_start=644,
-  serialized_end=3612,
+  serialized_end=3677,
 )
 
 _CAMPAIGN_NETWORKSETTINGS.fields_by_name['target_google_search'].message_type = google_dot_protobuf_dot_wrappers__pb2._BOOLVALUE
@@ -478,6 +485,7 @@ _CAMPAIGN.fields_by_name['end_date'].message_type = google_dot_protobuf_dot_wrap
 _CAMPAIGN.fields_by_name['bidding_strategy'].message_type = google_dot_protobuf_dot_wrappers__pb2._STRINGVALUE
 _CAMPAIGN.fields_by_name['manual_cpc'].message_type = google_dot_ads_dot_googleads__v0_dot_proto_dot_common_dot_bidding__pb2._MANUALCPC
 _CAMPAIGN.fields_by_name['manual_cpm'].message_type = google_dot_ads_dot_googleads__v0_dot_proto_dot_common_dot_bidding__pb2._MANUALCPM
+_CAMPAIGN.fields_by_name['manual_cpv'].message_type = google_dot_ads_dot_googleads__v0_dot_proto_dot_common_dot_bidding__pb2._MANUALCPV
 _CAMPAIGN.fields_by_name['maximize_conversions'].message_type = google_dot_ads_dot_googleads__v0_dot_proto_dot_common_dot_bidding__pb2._MAXIMIZECONVERSIONS
 _CAMPAIGN.fields_by_name['maximize_conversion_value'].message_type = google_dot_ads_dot_googleads__v0_dot_proto_dot_common_dot_bidding__pb2._MAXIMIZECONVERSIONVALUE
 _CAMPAIGN.fields_by_name['target_cpa'].message_type = google_dot_ads_dot_googleads__v0_dot_proto_dot_common_dot_bidding__pb2._TARGETCPA
@@ -493,6 +501,9 @@ _CAMPAIGN.fields_by_name['manual_cpc'].containing_oneof = _CAMPAIGN.oneofs_by_na
 _CAMPAIGN.oneofs_by_name['campaign_bidding_strategy'].fields.append(
   _CAMPAIGN.fields_by_name['manual_cpm'])
 _CAMPAIGN.fields_by_name['manual_cpm'].containing_oneof = _CAMPAIGN.oneofs_by_name['campaign_bidding_strategy']
+_CAMPAIGN.oneofs_by_name['campaign_bidding_strategy'].fields.append(
+  _CAMPAIGN.fields_by_name['manual_cpv'])
+_CAMPAIGN.fields_by_name['manual_cpv'].containing_oneof = _CAMPAIGN.oneofs_by_name['campaign_bidding_strategy']
 _CAMPAIGN.oneofs_by_name['campaign_bidding_strategy'].fields.append(
   _CAMPAIGN.fields_by_name['maximize_conversions'])
 _CAMPAIGN.fields_by_name['maximize_conversions'].containing_oneof = _CAMPAIGN.oneofs_by_name['campaign_bidding_strategy']
@@ -593,20 +604,19 @@ Campaign = _reflection.GeneratedProtocolMessageType('Campaign', (_message.Messag
     Attributes:
         merchant_id:
             ID of the Merchant Center account. This field is required for
-            create operations. This field is immutable for campaigns of
-            type AdvertisingChannelType.SHOPPING.
+            create operations. This field is immutable for Shopping
+            campaigns.
         sales_country:
             Sales country of products to include in the campaign. This
-            field is required for create operations. This field is
-            immutable. This field must be set to 'ZZ' for campaigns of
-            types other than AdvertisingChannelType.SHOPPING.
+            field is required for Shopping campaigns. This field is
+            immutable. This field is optional for non-Shopping campaigns,
+            but it must be equal to 'ZZ' if set.
         campaign_priority:
             Priority of the campaign. Campaigns with numerically higher
             priorities take precedence over those with lower priorities.
-            This field is required for create operations. Allowed values
-            are between 0 and 2, inclusive. This field must be set to 3
-            for campaigns of type
-            AdvertisingChannelSubType.SHOPPING\_SMART\_ADS.
+            This field is required for Shopping campaigns, with values
+            between 0 and 2, inclusive. This field is optional for Smart
+            Shopping campaigns, but must be equal to 3 if set.
         enable_local:
             Enable local inventory ads.
     """,
@@ -692,6 +702,9 @@ Campaign = _reflection.GeneratedProtocolMessageType('Campaign', (_message.Messag
       manual_cpm:
           Standard Manual CPM bidding strategy. Manual impression-based
           bidding where user pays per thousand impressions.
+      manual_cpv:
+          A bidding strategy that pays a configurable amount per video
+          view.
       maximize_conversions:
           Standard Maximize Conversions bidding strategy that
           automatically maximizes number of conversions given a daily

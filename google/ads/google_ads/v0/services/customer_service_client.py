@@ -166,15 +166,6 @@ class CustomerServiceClient(object):
         """
         Returns the requested customer in full detail.
 
-        Example:
-            >>> from google.cloud.ads import googleads_v0
-            >>>
-            >>> client = googleads_v0.CustomerServiceClient()
-            >>>
-            >>> resource_name = client.customer_path('[CUSTOMER]')
-            >>>
-            >>> response = client.get_customer(resource_name)
-
         Args:
             resource_name (str): The resource name of the customer to fetch.
             retry (Optional[google.api_core.retry.Retry]):  A retry object used
@@ -187,7 +178,7 @@ class CustomerServiceClient(object):
                 that is provided to the method.
 
         Returns:
-            A :class:`~google.cloud.ads.googleads_v0.types.Customer` instance.
+            A :class:`~google.ads.google_ads.v0.types.Customer` instance.
 
         Raises:
             google.api_core.exceptions.GoogleAPICallError: If the request

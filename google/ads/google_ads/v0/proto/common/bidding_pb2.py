@@ -21,7 +21,7 @@ DESCRIPTOR = _descriptor.FileDescriptor(
   name='google/ads/googleads_v0/proto/common/bidding.proto',
   package='google.ads.googleads.v0.common',
   syntax='proto3',
-  serialized_pb=_b('\n2google/ads/googleads_v0/proto/common/bidding.proto\x12\x1egoogle.ads.googleads.v0.common\x1aIgoogle/ads/googleads_v0/proto/enums/page_one_promoted_strategy_goal.proto\x1a\x1egoogle/protobuf/wrappers.proto\"\r\n\x0b\x45nhancedCpc\"E\n\tManualCpc\x12\x38\n\x14\x65nhanced_cpc_enabled\x18\x01 \x01(\x0b\x32\x1a.google.protobuf.BoolValue\"\x0b\n\tManualCpm\"\x15\n\x13MaximizeConversions\"L\n\x17MaximizeConversionValue\x12\x31\n\x0btarget_roas\x18\x01 \x01(\x0b\x32\x1c.google.protobuf.DoubleValue\"\xc6\x03\n\x0fPageOnePromoted\x12q\n\rstrategy_goal\x18\x01 \x01(\x0e\x32Z.google.ads.googleads.v0.enums.PageOnePromotedStrategyGoalEnum.PageOnePromotedStrategyGoal\x12;\n\x16\x63pc_bid_ceiling_micros\x18\x02 \x01(\x0b\x32\x1b.google.protobuf.Int64Value\x12\x32\n\x0c\x62id_modifier\x18\x03 \x01(\x0b\x32\x1c.google.protobuf.DoubleValue\x12\x37\n\x13only_raise_cpc_bids\x18\x04 \x01(\x0b\x32\x1a.google.protobuf.BoolValue\x12I\n%raise_cpc_bid_when_budget_constrained\x18\x05 \x01(\x0b\x32\x1a.google.protobuf.BoolValue\x12K\n\'raise_cpc_bid_when_quality_score_is_low\x18\x06 \x01(\x0b\x32\x1a.google.protobuf.BoolValue\"\xbb\x01\n\tTargetCpa\x12\x36\n\x11target_cpa_micros\x18\x01 \x01(\x0b\x32\x1b.google.protobuf.Int64Value\x12;\n\x16\x63pc_bid_ceiling_micros\x18\x02 \x01(\x0b\x32\x1b.google.protobuf.Int64Value\x12\x39\n\x14\x63pc_bid_floor_micros\x18\x03 \x01(\x0b\x32\x1b.google.protobuf.Int64Value\"\xd2\x02\n\x12TargetOutrankShare\x12@\n\x1btarget_outrank_share_micros\x18\x01 \x01(\x0b\x32\x1b.google.protobuf.Int32Value\x12\x37\n\x11\x63ompetitor_domain\x18\x02 \x01(\x0b\x32\x1c.google.protobuf.StringValue\x12;\n\x16\x63pc_bid_ceiling_micros\x18\x03 \x01(\x0b\x32\x1b.google.protobuf.Int64Value\x12\x37\n\x13only_raise_cpc_bids\x18\x04 \x01(\x0b\x32\x1a.google.protobuf.BoolValue\x12K\n\'raise_cpc_bid_when_quality_score_is_low\x18\x05 \x01(\x0b\x32\x1a.google.protobuf.BoolValue\"\xb7\x01\n\nTargetRoas\x12\x31\n\x0btarget_roas\x18\x01 \x01(\x0b\x32\x1c.google.protobuf.DoubleValue\x12;\n\x16\x63pc_bid_ceiling_micros\x18\x02 \x01(\x0b\x32\x1b.google.protobuf.Int64Value\x12\x39\n\x14\x63pc_bid_floor_micros\x18\x03 \x01(\x0b\x32\x1b.google.protobuf.Int64Value\"\x84\x01\n\x0bTargetSpend\x12\x38\n\x13target_spend_micros\x18\x01 \x01(\x0b\x32\x1b.google.protobuf.Int64Value\x12;\n\x16\x63pc_bid_ceiling_micros\x18\x02 \x01(\x0b\x32\x1b.google.protobuf.Int64Value\"\x83\x01\n\nPercentCpc\x12;\n\x16\x63pc_bid_ceiling_micros\x18\x01 \x01(\x0b\x32\x1b.google.protobuf.Int64Value\x12\x38\n\x14\x65nhanced_cpc_enabled\x18\x02 \x01(\x0b\x32\x1a.google.protobuf.BoolValueB\xc2\x01\n\"com.google.ads.googleads.v0.commonB\x0c\x42iddingProtoP\x01ZDgoogle.golang.org/genproto/googleapis/ads/googleads/v0/common;common\xa2\x02\x03GAA\xaa\x02\x1eGoogle.Ads.GoogleAds.V0.Common\xca\x02\x1eGoogle\\Ads\\GoogleAds\\V0\\Commonb\x06proto3')
+  serialized_pb=_b('\n2google/ads/googleads_v0/proto/common/bidding.proto\x12\x1egoogle.ads.googleads.v0.common\x1aIgoogle/ads/googleads_v0/proto/enums/page_one_promoted_strategy_goal.proto\x1a\x1egoogle/protobuf/wrappers.proto\"\r\n\x0b\x45nhancedCpc\"E\n\tManualCpc\x12\x38\n\x14\x65nhanced_cpc_enabled\x18\x01 \x01(\x0b\x32\x1a.google.protobuf.BoolValue\"\x0b\n\tManualCpm\"\x0b\n\tManualCpv\"\x15\n\x13MaximizeConversions\"L\n\x17MaximizeConversionValue\x12\x31\n\x0btarget_roas\x18\x01 \x01(\x0b\x32\x1c.google.protobuf.DoubleValue\"\xc6\x03\n\x0fPageOnePromoted\x12q\n\rstrategy_goal\x18\x01 \x01(\x0e\x32Z.google.ads.googleads.v0.enums.PageOnePromotedStrategyGoalEnum.PageOnePromotedStrategyGoal\x12;\n\x16\x63pc_bid_ceiling_micros\x18\x02 \x01(\x0b\x32\x1b.google.protobuf.Int64Value\x12\x32\n\x0c\x62id_modifier\x18\x03 \x01(\x0b\x32\x1c.google.protobuf.DoubleValue\x12\x37\n\x13only_raise_cpc_bids\x18\x04 \x01(\x0b\x32\x1a.google.protobuf.BoolValue\x12I\n%raise_cpc_bid_when_budget_constrained\x18\x05 \x01(\x0b\x32\x1a.google.protobuf.BoolValue\x12K\n\'raise_cpc_bid_when_quality_score_is_low\x18\x06 \x01(\x0b\x32\x1a.google.protobuf.BoolValue\"\xbb\x01\n\tTargetCpa\x12\x36\n\x11target_cpa_micros\x18\x01 \x01(\x0b\x32\x1b.google.protobuf.Int64Value\x12;\n\x16\x63pc_bid_ceiling_micros\x18\x02 \x01(\x0b\x32\x1b.google.protobuf.Int64Value\x12\x39\n\x14\x63pc_bid_floor_micros\x18\x03 \x01(\x0b\x32\x1b.google.protobuf.Int64Value\"\xd2\x02\n\x12TargetOutrankShare\x12@\n\x1btarget_outrank_share_micros\x18\x01 \x01(\x0b\x32\x1b.google.protobuf.Int32Value\x12\x37\n\x11\x63ompetitor_domain\x18\x02 \x01(\x0b\x32\x1c.google.protobuf.StringValue\x12;\n\x16\x63pc_bid_ceiling_micros\x18\x03 \x01(\x0b\x32\x1b.google.protobuf.Int64Value\x12\x37\n\x13only_raise_cpc_bids\x18\x04 \x01(\x0b\x32\x1a.google.protobuf.BoolValue\x12K\n\'raise_cpc_bid_when_quality_score_is_low\x18\x05 \x01(\x0b\x32\x1a.google.protobuf.BoolValue\"\xb7\x01\n\nTargetRoas\x12\x31\n\x0btarget_roas\x18\x01 \x01(\x0b\x32\x1c.google.protobuf.DoubleValue\x12;\n\x16\x63pc_bid_ceiling_micros\x18\x02 \x01(\x0b\x32\x1b.google.protobuf.Int64Value\x12\x39\n\x14\x63pc_bid_floor_micros\x18\x03 \x01(\x0b\x32\x1b.google.protobuf.Int64Value\"\x84\x01\n\x0bTargetSpend\x12\x38\n\x13target_spend_micros\x18\x01 \x01(\x0b\x32\x1b.google.protobuf.Int64Value\x12;\n\x16\x63pc_bid_ceiling_micros\x18\x02 \x01(\x0b\x32\x1b.google.protobuf.Int64Value\"\x83\x01\n\nPercentCpc\x12;\n\x16\x63pc_bid_ceiling_micros\x18\x01 \x01(\x0b\x32\x1b.google.protobuf.Int64Value\x12\x38\n\x14\x65nhanced_cpc_enabled\x18\x02 \x01(\x0b\x32\x1a.google.protobuf.BoolValueB\xc2\x01\n\"com.google.ads.googleads.v0.commonB\x0c\x42iddingProtoP\x01ZDgoogle.golang.org/genproto/googleapis/ads/googleads/v0/common;common\xa2\x02\x03GAA\xaa\x02\x1eGoogle.Ads.GoogleAds.V0.Common\xca\x02\x1eGoogle\\Ads\\GoogleAds\\V0\\Commonb\x06proto3')
   ,
   dependencies=[google_dot_ads_dot_googleads__v0_dot_proto_dot_enums_dot_page__one__promoted__strategy__goal__pb2.DESCRIPTOR,google_dot_protobuf_dot_wrappers__pb2.DESCRIPTOR,])
 
@@ -107,6 +107,30 @@ _MANUALCPM = _descriptor.Descriptor(
 )
 
 
+_MANUALCPV = _descriptor.Descriptor(
+  name='ManualCpv',
+  full_name='google.ads.googleads.v0.common.ManualCpv',
+  filename=None,
+  file=DESCRIPTOR,
+  containing_type=None,
+  fields=[
+  ],
+  extensions=[
+  ],
+  nested_types=[],
+  enum_types=[
+  ],
+  options=None,
+  is_extendable=False,
+  syntax='proto3',
+  extension_ranges=[],
+  oneofs=[
+  ],
+  serialized_start=292,
+  serialized_end=303,
+)
+
+
 _MAXIMIZECONVERSIONS = _descriptor.Descriptor(
   name='MaximizeConversions',
   full_name='google.ads.googleads.v0.common.MaximizeConversions',
@@ -126,8 +150,8 @@ _MAXIMIZECONVERSIONS = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=292,
-  serialized_end=313,
+  serialized_start=305,
+  serialized_end=326,
 )
 
 
@@ -157,8 +181,8 @@ _MAXIMIZECONVERSIONVALUE = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=315,
-  serialized_end=391,
+  serialized_start=328,
+  serialized_end=404,
 )
 
 
@@ -223,8 +247,8 @@ _PAGEONEPROMOTED = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=394,
-  serialized_end=848,
+  serialized_start=407,
+  serialized_end=861,
 )
 
 
@@ -268,8 +292,8 @@ _TARGETCPA = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=851,
-  serialized_end=1038,
+  serialized_start=864,
+  serialized_end=1051,
 )
 
 
@@ -327,8 +351,8 @@ _TARGETOUTRANKSHARE = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=1041,
-  serialized_end=1379,
+  serialized_start=1054,
+  serialized_end=1392,
 )
 
 
@@ -372,8 +396,8 @@ _TARGETROAS = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=1382,
-  serialized_end=1565,
+  serialized_start=1395,
+  serialized_end=1578,
 )
 
 
@@ -410,8 +434,8 @@ _TARGETSPEND = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=1568,
-  serialized_end=1700,
+  serialized_start=1581,
+  serialized_end=1713,
 )
 
 
@@ -448,8 +472,8 @@ _PERCENTCPC = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=1703,
-  serialized_end=1834,
+  serialized_start=1716,
+  serialized_end=1847,
 )
 
 _MANUALCPC.fields_by_name['enhanced_cpc_enabled'].message_type = google_dot_protobuf_dot_wrappers__pb2._BOOLVALUE
@@ -478,6 +502,7 @@ _PERCENTCPC.fields_by_name['enhanced_cpc_enabled'].message_type = google_dot_pro
 DESCRIPTOR.message_types_by_name['EnhancedCpc'] = _ENHANCEDCPC
 DESCRIPTOR.message_types_by_name['ManualCpc'] = _MANUALCPC
 DESCRIPTOR.message_types_by_name['ManualCpm'] = _MANUALCPM
+DESCRIPTOR.message_types_by_name['ManualCpv'] = _MANUALCPV
 DESCRIPTOR.message_types_by_name['MaximizeConversions'] = _MAXIMIZECONVERSIONS
 DESCRIPTOR.message_types_by_name['MaximizeConversionValue'] = _MAXIMIZECONVERSIONVALUE
 DESCRIPTOR.message_types_by_name['PageOnePromoted'] = _PAGEONEPROMOTED
@@ -526,6 +551,16 @@ ManualCpm = _reflection.GeneratedProtocolMessageType('ManualCpm', (_message.Mess
   # @@protoc_insertion_point(class_scope:google.ads.googleads.v0.common.ManualCpm)
   ))
 _sym_db.RegisterMessage(ManualCpm)
+
+ManualCpv = _reflection.GeneratedProtocolMessageType('ManualCpv', (_message.Message,), dict(
+  DESCRIPTOR = _MANUALCPV,
+  __module__ = 'google.ads.googleads_v0.proto.common.bidding_pb2'
+  ,
+  __doc__ = """View based bidding where user pays per video view.
+  """,
+  # @@protoc_insertion_point(class_scope:google.ads.googleads.v0.common.ManualCpv)
+  ))
+_sym_db.RegisterMessage(ManualCpv)
 
 MaximizeConversions = _reflection.GeneratedProtocolMessageType('MaximizeConversions', (_message.Message,), dict(
   DESCRIPTOR = _MAXIMIZECONVERSIONS,

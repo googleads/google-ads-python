@@ -46,7 +46,7 @@ def main(client, customer_id, ad_group_id):
 
 
 if __name__ == '__main__':
-    # GoogleAdsClient will read a google-ads.yaml configuration file in the
+    # GoogleAdsClient will read the google-ads.yaml configuration file in the
     # home directory if none is specified.
     google_ads_client = (google.ads.google_ads.client.GoogleAdsClient
                          .load_from_storage())

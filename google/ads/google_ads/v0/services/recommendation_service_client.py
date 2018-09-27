@@ -167,15 +167,6 @@ class RecommendationServiceClient(object):
         """
         Returns the requested recommendation in full detail.
 
-        Example:
-            >>> from google.cloud.ads import googleads_v0
-            >>>
-            >>> client = googleads_v0.RecommendationServiceClient()
-            >>>
-            >>> resource_name = client.recommendation_path('[CUSTOMER]', '[RECOMMENDATION]')
-            >>>
-            >>> response = client.get_recommendation(resource_name)
-
         Args:
             resource_name (str): The resource name of the recommendation to fetch.
             retry (Optional[google.api_core.retry.Retry]):  A retry object used
@@ -188,7 +179,7 @@ class RecommendationServiceClient(object):
                 that is provided to the method.
 
         Returns:
-            A :class:`~google.cloud.ads.googleads_v0.types.Recommendation` instance.
+            A :class:`~google.ads.google_ads.v0.types.Recommendation` instance.
 
         Raises:
             google.api_core.exceptions.GoogleAPICallError: If the request
@@ -223,24 +214,11 @@ class RecommendationServiceClient(object):
         """
         Applies given recommendations with corresponding apply parameters.
 
-        Example:
-            >>> from google.cloud.ads import googleads_v0
-            >>>
-            >>> client = googleads_v0.RecommendationServiceClient()
-            >>>
-            >>> # TODO: Initialize ``customer_id``:
-            >>> customer_id = ''
-            >>>
-            >>> # TODO: Initialize ``operations``:
-            >>> operations = []
-            >>>
-            >>> response = client.apply_recommendation(customer_id, operations)
-
         Args:
             customer_id (str): The ID of the customer with the recommendation.
-            operations (list[Union[dict, ~google.cloud.ads.googleads_v0.types.ApplyRecommendationOperation]]): The list of operations to apply recommendations.
+            operations (list[Union[dict, ~google.ads.google_ads.v0.types.ApplyRecommendationOperation]]): The list of operations to apply recommendations.
                 If a dict is provided, it must be of the same form as the protobuf
-                message :class:`~google.cloud.ads.googleads_v0.types.ApplyRecommendationOperation`
+                message :class:`~google.ads.google_ads.v0.types.ApplyRecommendationOperation`
             retry (Optional[google.api_core.retry.Retry]):  A retry object used
                 to retry requests. If ``None`` is specified, requests will not
                 be retried.
@@ -251,7 +229,7 @@ class RecommendationServiceClient(object):
                 that is provided to the method.
 
         Returns:
-            A :class:`~google.cloud.ads.googleads_v0.types.ApplyRecommendationResponse` instance.
+            A :class:`~google.ads.google_ads.v0.types.ApplyRecommendationResponse` instance.
 
         Raises:
             google.api_core.exceptions.GoogleAPICallError: If the request

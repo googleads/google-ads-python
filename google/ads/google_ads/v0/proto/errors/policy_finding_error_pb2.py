@@ -19,7 +19,7 @@ DESCRIPTOR = _descriptor.FileDescriptor(
   name='google/ads/googleads_v0/proto/errors/policy_finding_error.proto',
   package='google.ads.googleads.v0.errors',
   syntax='proto3',
-  serialized_pb=_b('\n?google/ads/googleads_v0/proto/errors/policy_finding_error.proto\x12\x1egoogle.ads.googleads.v0.errors\"`\n\x16PolicyFindingErrorEnum\"F\n\x12PolicyFindingError\x12\x0f\n\x0bUNSPECIFIED\x10\x00\x12\x0b\n\x07UNKNOWN\x10\x01\x12\x12\n\x0ePOLICY_FINDING\x10\x02\x42\xcd\x01\n\"com.google.ads.googleads.v0.errorsB\x17PolicyFindingErrorProtoP\x01ZDgoogle.golang.org/genproto/googleapis/ads/googleads/v0/errors;errors\xa2\x02\x03GAA\xaa\x02\x1eGoogle.Ads.GoogleAds.V0.Errors\xca\x02\x1eGoogle\\Ads\\GoogleAds\\V0\\Errorsb\x06proto3')
+  serialized_pb=_b('\n?google/ads/googleads_v0/proto/errors/policy_finding_error.proto\x12\x1egoogle.ads.googleads.v0.errors\"|\n\x16PolicyFindingErrorEnum\"b\n\x12PolicyFindingError\x12\x0f\n\x0bUNSPECIFIED\x10\x00\x12\x0b\n\x07UNKNOWN\x10\x01\x12\x12\n\x0ePOLICY_FINDING\x10\x02\x12\x1a\n\x16POLICY_TOPIC_NOT_FOUND\x10\x03\x42\xcd\x01\n\"com.google.ads.googleads.v0.errorsB\x17PolicyFindingErrorProtoP\x01ZDgoogle.golang.org/genproto/googleapis/ads/googleads/v0/errors;errors\xa2\x02\x03GAA\xaa\x02\x1eGoogle.Ads.GoogleAds.V0.Errors\xca\x02\x1eGoogle\\Ads\\GoogleAds\\V0\\Errorsb\x06proto3')
 )
 
 
@@ -42,11 +42,15 @@ _POLICYFINDINGERRORENUM_POLICYFINDINGERROR = _descriptor.EnumDescriptor(
       name='POLICY_FINDING', index=2, number=2,
       options=None,
       type=None),
+    _descriptor.EnumValueDescriptor(
+      name='POLICY_TOPIC_NOT_FOUND', index=3, number=3,
+      options=None,
+      type=None),
   ],
   containing_type=None,
   options=None,
   serialized_start=125,
-  serialized_end=195,
+  serialized_end=223,
 )
 _sym_db.RegisterEnumDescriptor(_POLICYFINDINGERRORENUM_POLICYFINDINGERROR)
 
@@ -72,7 +76,7 @@ _POLICYFINDINGERRORENUM = _descriptor.Descriptor(
   oneofs=[
   ],
   serialized_start=99,
-  serialized_end=195,
+  serialized_end=223,
 )
 
 _POLICYFINDINGERRORENUM_POLICYFINDINGERROR.containing_type = _POLICYFINDINGERRORENUM

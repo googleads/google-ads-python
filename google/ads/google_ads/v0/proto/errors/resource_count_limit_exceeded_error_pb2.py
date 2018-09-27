@@ -19,7 +19,7 @@ DESCRIPTOR = _descriptor.FileDescriptor(
   name='google/ads/googleads_v0/proto/errors/resource_count_limit_exceeded_error.proto',
   package='google.ads.googleads.v0.errors',
   syntax='proto3',
-  serialized_pb=_b('\nNgoogle/ads/googleads_v0/proto/errors/resource_count_limit_exceeded_error.proto\x12\x1egoogle.ads.googleads.v0.errors\"\x89\x02\n#ResourceCountLimitExceededErrorEnum\"\xe1\x01\n\x1fResourceCountLimitExceededError\x12\x0f\n\x0bUNSPECIFIED\x10\x00\x12\x0b\n\x07UNKNOWN\x10\x01\x12\x11\n\rACCOUNT_LIMIT\x10\x02\x12\x12\n\x0e\x43\x41MPAIGN_LIMIT\x10\x03\x12\x11\n\rADGROUP_LIMIT\x10\x04\x12\x15\n\x11\x41\x44_GROUP_AD_LIMIT\x10\x05\x12\x1c\n\x18\x41\x44_GROUP_CRITERION_LIMIT\x10\x06\x12\x14\n\x10SHARED_SET_LIMIT\x10\x07\x12\x1b\n\x17MATCHING_FUNCTION_LIMIT\x10\x08\x42\xda\x01\n\"com.google.ads.googleads.v0.errorsB$ResourceCountLimitExceededErrorProtoP\x01ZDgoogle.golang.org/genproto/googleapis/ads/googleads/v0/errors;errors\xa2\x02\x03GAA\xaa\x02\x1eGoogle.Ads.GoogleAds.V0.Errors\xca\x02\x1eGoogle\\Ads\\GoogleAds\\V0\\Errorsb\x06proto3')
+  serialized_pb=_b('\nNgoogle/ads/googleads_v0/proto/errors/resource_count_limit_exceeded_error.proto\x12\x1egoogle.ads.googleads.v0.errors\"\xaa\x02\n#ResourceCountLimitExceededErrorEnum\"\x82\x02\n\x1fResourceCountLimitExceededError\x12\x0f\n\x0bUNSPECIFIED\x10\x00\x12\x0b\n\x07UNKNOWN\x10\x01\x12\x11\n\rACCOUNT_LIMIT\x10\x02\x12\x12\n\x0e\x43\x41MPAIGN_LIMIT\x10\x03\x12\x11\n\rADGROUP_LIMIT\x10\x04\x12\x15\n\x11\x41\x44_GROUP_AD_LIMIT\x10\x05\x12\x1c\n\x18\x41\x44_GROUP_CRITERION_LIMIT\x10\x06\x12\x14\n\x10SHARED_SET_LIMIT\x10\x07\x12\x1b\n\x17MATCHING_FUNCTION_LIMIT\x10\x08\x12\x1f\n\x1bRESPONSE_ROW_LIMIT_EXCEEDED\x10\tB\xda\x01\n\"com.google.ads.googleads.v0.errorsB$ResourceCountLimitExceededErrorProtoP\x01ZDgoogle.golang.org/genproto/googleapis/ads/googleads/v0/errors;errors\xa2\x02\x03GAA\xaa\x02\x1eGoogle.Ads.GoogleAds.V0.Errors\xca\x02\x1eGoogle\\Ads\\GoogleAds\\V0\\Errorsb\x06proto3')
 )
 
 
@@ -66,11 +66,15 @@ _RESOURCECOUNTLIMITEXCEEDEDERRORENUM_RESOURCECOUNTLIMITEXCEEDEDERROR = _descript
       name='MATCHING_FUNCTION_LIMIT', index=8, number=8,
       options=None,
       type=None),
+    _descriptor.EnumValueDescriptor(
+      name='RESPONSE_ROW_LIMIT_EXCEEDED', index=9, number=9,
+      options=None,
+      type=None),
   ],
   containing_type=None,
   options=None,
   serialized_start=155,
-  serialized_end=380,
+  serialized_end=413,
 )
 _sym_db.RegisterEnumDescriptor(_RESOURCECOUNTLIMITEXCEEDEDERRORENUM_RESOURCECOUNTLIMITEXCEEDEDERROR)
 
@@ -96,7 +100,7 @@ _RESOURCECOUNTLIMITEXCEEDEDERRORENUM = _descriptor.Descriptor(
   oneofs=[
   ],
   serialized_start=115,
-  serialized_end=380,
+  serialized_end=413,
 )
 
 _RESOURCECOUNTLIMITEXCEEDEDERRORENUM_RESOURCECOUNTLIMITEXCEEDEDERROR.containing_type = _RESOURCECOUNTLIMITEXCEEDEDERRORENUM

@@ -167,15 +167,6 @@ class CampaignCriterionServiceClient(object):
         """
         Returns the requested criterion in full detail.
 
-        Example:
-            >>> from google.cloud.ads import googleads_v0
-            >>>
-            >>> client = googleads_v0.CampaignCriterionServiceClient()
-            >>>
-            >>> resource_name = client.campaign_criteria_path('[CUSTOMER]', '[CAMPAIGN_CRITERIA]')
-            >>>
-            >>> response = client.get_campaign_criterion(resource_name)
-
         Args:
             resource_name (str): The resource name of the criterion to fetch.
             retry (Optional[google.api_core.retry.Retry]):  A retry object used
@@ -188,7 +179,7 @@ class CampaignCriterionServiceClient(object):
                 that is provided to the method.
 
         Returns:
-            A :class:`~google.cloud.ads.googleads_v0.types.CampaignCriterion` instance.
+            A :class:`~google.ads.google_ads.v0.types.CampaignCriterion` instance.
 
         Raises:
             google.api_core.exceptions.GoogleAPICallError: If the request
@@ -224,24 +215,11 @@ class CampaignCriterionServiceClient(object):
         """
         Creates, updates, or removes criteria. Operation statuses are returned.
 
-        Example:
-            >>> from google.cloud.ads import googleads_v0
-            >>>
-            >>> client = googleads_v0.CampaignCriterionServiceClient()
-            >>>
-            >>> # TODO: Initialize ``customer_id``:
-            >>> customer_id = ''
-            >>>
-            >>> # TODO: Initialize ``operations``:
-            >>> operations = []
-            >>>
-            >>> response = client.mutate_campaign_criteria(customer_id, operations)
-
         Args:
             customer_id (str): The ID of the customer whose criteria are being modified.
-            operations (list[Union[dict, ~google.cloud.ads.googleads_v0.types.CampaignCriterionOperation]]): The list of operations to perform on individual criteria.
+            operations (list[Union[dict, ~google.ads.google_ads.v0.types.CampaignCriterionOperation]]): The list of operations to perform on individual criteria.
                 If a dict is provided, it must be of the same form as the protobuf
-                message :class:`~google.cloud.ads.googleads_v0.types.CampaignCriterionOperation`
+                message :class:`~google.ads.google_ads.v0.types.CampaignCriterionOperation`
             retry (Optional[google.api_core.retry.Retry]):  A retry object used
                 to retry requests. If ``None`` is specified, requests will not
                 be retried.
@@ -252,7 +230,7 @@ class CampaignCriterionServiceClient(object):
                 that is provided to the method.
 
         Returns:
-            A :class:`~google.cloud.ads.googleads_v0.types.MutateCampaignCriteriaResponse` instance.
+            A :class:`~google.ads.google_ads.v0.types.MutateCampaignCriteriaResponse` instance.
 
         Raises:
             google.api_core.exceptions.GoogleAPICallError: If the request

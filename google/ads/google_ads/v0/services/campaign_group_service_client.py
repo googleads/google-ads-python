@@ -167,15 +167,6 @@ class CampaignGroupServiceClient(object):
         """
         Returns the requested campaign group in full detail.
 
-        Example:
-            >>> from google.cloud.ads import googleads_v0
-            >>>
-            >>> client = googleads_v0.CampaignGroupServiceClient()
-            >>>
-            >>> resource_name = client.campaign_group_path('[CUSTOMER]', '[CAMPAIGN_GROUP]')
-            >>>
-            >>> response = client.get_campaign_group(resource_name)
-
         Args:
             resource_name (str): The resource name of the campaign group to fetch.
             retry (Optional[google.api_core.retry.Retry]):  A retry object used
@@ -188,7 +179,7 @@ class CampaignGroupServiceClient(object):
                 that is provided to the method.
 
         Returns:
-            A :class:`~google.cloud.ads.googleads_v0.types.CampaignGroup` instance.
+            A :class:`~google.ads.google_ads.v0.types.CampaignGroup` instance.
 
         Raises:
             google.api_core.exceptions.GoogleAPICallError: If the request
@@ -224,24 +215,11 @@ class CampaignGroupServiceClient(object):
         Creates, updates, or removes campaign groups. Operation statuses are
         returned.
 
-        Example:
-            >>> from google.cloud.ads import googleads_v0
-            >>>
-            >>> client = googleads_v0.CampaignGroupServiceClient()
-            >>>
-            >>> # TODO: Initialize ``customer_id``:
-            >>> customer_id = ''
-            >>>
-            >>> # TODO: Initialize ``operations``:
-            >>> operations = []
-            >>>
-            >>> response = client.mutate_campaign_groups(customer_id, operations)
-
         Args:
             customer_id (str): The ID of the customer whose campaign groups are being modified.
-            operations (list[Union[dict, ~google.cloud.ads.googleads_v0.types.CampaignGroupOperation]]): The list of operations to perform on individual campaign groups.
+            operations (list[Union[dict, ~google.ads.google_ads.v0.types.CampaignGroupOperation]]): The list of operations to perform on individual campaign groups.
                 If a dict is provided, it must be of the same form as the protobuf
-                message :class:`~google.cloud.ads.googleads_v0.types.CampaignGroupOperation`
+                message :class:`~google.ads.google_ads.v0.types.CampaignGroupOperation`
             retry (Optional[google.api_core.retry.Retry]):  A retry object used
                 to retry requests. If ``None`` is specified, requests will not
                 be retried.
@@ -252,7 +230,7 @@ class CampaignGroupServiceClient(object):
                 that is provided to the method.
 
         Returns:
-            A :class:`~google.cloud.ads.googleads_v0.types.MutateCampaignGroupsResponse` instance.
+            A :class:`~google.ads.google_ads.v0.types.MutateCampaignGroupsResponse` instance.
 
         Raises:
             google.api_core.exceptions.GoogleAPICallError: If the request

@@ -33,7 +33,7 @@ with io.open('README.rst', 'r', encoding='utf-8') as readme_file:
 
 setup(
     name='google-ads',
-    version='0.2.0',
+    version='0.3.0',
     author='Google LLC',
     author_email='googleapis-packages@google.com',
     classifiers=[
@@ -56,8 +56,8 @@ setup(
     tests_require=tests_require,
     test_suite='tests',
     license='Apache 2.0',
-    packages=find_packages(exclude=('tests*', )),
-    namespace_packages=['google', 'google.ads', 'google.ads.google_ads'],
+    packages=find_packages(exclude=['examples', 'examples.*', 'tests', 'tests.*']),
+    namespace_packages=['google', 'google.ads'],
     url='https://github.com/googleads/google-ads-python',
     zip_safe=False,
 )

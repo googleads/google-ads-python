@@ -14,6 +14,7 @@ _sym_db = _symbol_database.Default()
 
 
 from google.ads.google_ads.v0.proto.common import custom_parameter_pb2 as google_dot_ads_dot_googleads__v0_dot_proto_dot_common_dot_custom__parameter__pb2
+from google.ads.google_ads.v0.proto.enums import ad_group_ad_rotation_mode_pb2 as google_dot_ads_dot_googleads__v0_dot_proto_dot_enums_dot_ad__group__ad__rotation__mode__pb2
 from google.ads.google_ads.v0.proto.enums import ad_group_status_pb2 as google_dot_ads_dot_googleads__v0_dot_proto_dot_enums_dot_ad__group__status__pb2
 from google.ads.google_ads.v0.proto.enums import ad_group_type_pb2 as google_dot_ads_dot_googleads__v0_dot_proto_dot_enums_dot_ad__group__type__pb2
 from google.protobuf import wrappers_pb2 as google_dot_protobuf_dot_wrappers__pb2
@@ -23,9 +24,9 @@ DESCRIPTOR = _descriptor.FileDescriptor(
   name='google/ads/googleads_v0/proto/resources/ad_group.proto',
   package='google.ads.googleads.v0.resources',
   syntax='proto3',
-  serialized_pb=_b('\n6google/ads/googleads_v0/proto/resources/ad_group.proto\x12!google.ads.googleads.v0.resources\x1a;google/ads/googleads_v0/proto/common/custom_parameter.proto\x1a\x39google/ads/googleads_v0/proto/enums/ad_group_status.proto\x1a\x37google/ads/googleads_v0/proto/enums/ad_group_type.proto\x1a\x1egoogle/protobuf/wrappers.proto\"\x99\x06\n\x07\x41\x64Group\x12\x15\n\rresource_name\x18\x01 \x01(\t\x12\'\n\x02id\x18\x03 \x01(\x0b\x32\x1b.google.protobuf.Int64Value\x12*\n\x04name\x18\x04 \x01(\x0b\x32\x1c.google.protobuf.StringValue\x12N\n\x06status\x18\x05 \x01(\x0e\x32>.google.ads.googleads.v0.enums.AdGroupStatusEnum.AdGroupStatus\x12H\n\x04type\x18\x0c \x01(\x0e\x32:.google.ads.googleads.v0.enums.AdGroupTypeEnum.AdGroupType\x12;\n\x15tracking_url_template\x18\r \x01(\x0b\x32\x1c.google.protobuf.StringValue\x12N\n\x15url_custom_parameters\x18\x06 \x03(\x0b\x32/.google.ads.googleads.v0.common.CustomParameter\x12.\n\x08\x63\x61mpaign\x18\n \x01(\x0b\x32\x1c.google.protobuf.StringValue\x12\x33\n\x0e\x63pc_bid_micros\x18\x0e \x01(\x0b\x32\x1b.google.protobuf.Int64Value\x12\x33\n\x0e\x63pm_bid_micros\x18\x0f \x01(\x0b\x32\x1b.google.protobuf.Int64Value\x12\x33\n\x0e\x63pa_bid_micros\x18\x10 \x01(\x0b\x32\x1b.google.protobuf.Int64Value\x12\x33\n\x0e\x63pv_bid_micros\x18\x11 \x01(\x0b\x32\x1b.google.protobuf.Int64Value\x12:\n\x14target_roas_override\x18\x13 \x01(\x0b\x32\x1c.google.protobuf.DoubleValue\x12;\n\x16percent_cpc_bid_micros\x18\x14 \x01(\x0b\x32\x1b.google.protobuf.Int64ValueB\xd1\x01\n%com.google.ads.googleads.v0.resourcesB\x0c\x41\x64GroupProtoP\x01ZJgoogle.golang.org/genproto/googleapis/ads/googleads/v0/resources;resources\xa2\x02\x03GAA\xaa\x02!Google.Ads.GoogleAds.V0.Resources\xca\x02!Google\\Ads\\GoogleAds\\V0\\Resourcesb\x06proto3')
+  serialized_pb=_b('\n6google/ads/googleads_v0/proto/resources/ad_group.proto\x12!google.ads.googleads.v0.resources\x1a;google/ads/googleads_v0/proto/common/custom_parameter.proto\x1a\x43google/ads/googleads_v0/proto/enums/ad_group_ad_rotation_mode.proto\x1a\x39google/ads/googleads_v0/proto/enums/ad_group_status.proto\x1a\x37google/ads/googleads_v0/proto/enums/ad_group_type.proto\x1a\x1egoogle/protobuf/wrappers.proto\"\x83\x07\n\x07\x41\x64Group\x12\x15\n\rresource_name\x18\x01 \x01(\t\x12\'\n\x02id\x18\x03 \x01(\x0b\x32\x1b.google.protobuf.Int64Value\x12*\n\x04name\x18\x04 \x01(\x0b\x32\x1c.google.protobuf.StringValue\x12N\n\x06status\x18\x05 \x01(\x0e\x32>.google.ads.googleads.v0.enums.AdGroupStatusEnum.AdGroupStatus\x12H\n\x04type\x18\x0c \x01(\x0e\x32:.google.ads.googleads.v0.enums.AdGroupTypeEnum.AdGroupType\x12h\n\x10\x61\x64_rotation_mode\x18\x16 \x01(\x0e\x32N.google.ads.googleads.v0.enums.AdGroupAdRotationModeEnum.AdGroupAdRotationMode\x12;\n\x15tracking_url_template\x18\r \x01(\x0b\x32\x1c.google.protobuf.StringValue\x12N\n\x15url_custom_parameters\x18\x06 \x03(\x0b\x32/.google.ads.googleads.v0.common.CustomParameter\x12.\n\x08\x63\x61mpaign\x18\n \x01(\x0b\x32\x1c.google.protobuf.StringValue\x12\x33\n\x0e\x63pc_bid_micros\x18\x0e \x01(\x0b\x32\x1b.google.protobuf.Int64Value\x12\x33\n\x0e\x63pm_bid_micros\x18\x0f \x01(\x0b\x32\x1b.google.protobuf.Int64Value\x12\x33\n\x0e\x63pa_bid_micros\x18\x10 \x01(\x0b\x32\x1b.google.protobuf.Int64Value\x12\x33\n\x0e\x63pv_bid_micros\x18\x11 \x01(\x0b\x32\x1b.google.protobuf.Int64Value\x12:\n\x14target_roas_override\x18\x13 \x01(\x0b\x32\x1c.google.protobuf.DoubleValue\x12;\n\x16percent_cpc_bid_micros\x18\x14 \x01(\x0b\x32\x1b.google.protobuf.Int64ValueB\xd1\x01\n%com.google.ads.googleads.v0.resourcesB\x0c\x41\x64GroupProtoP\x01ZJgoogle.golang.org/genproto/googleapis/ads/googleads/v0/resources;resources\xa2\x02\x03GAA\xaa\x02!Google.Ads.GoogleAds.V0.Resources\xca\x02!Google\\Ads\\GoogleAds\\V0\\Resourcesb\x06proto3')
   ,
-  dependencies=[google_dot_ads_dot_googleads__v0_dot_proto_dot_common_dot_custom__parameter__pb2.DESCRIPTOR,google_dot_ads_dot_googleads__v0_dot_proto_dot_enums_dot_ad__group__status__pb2.DESCRIPTOR,google_dot_ads_dot_googleads__v0_dot_proto_dot_enums_dot_ad__group__type__pb2.DESCRIPTOR,google_dot_protobuf_dot_wrappers__pb2.DESCRIPTOR,])
+  dependencies=[google_dot_ads_dot_googleads__v0_dot_proto_dot_common_dot_custom__parameter__pb2.DESCRIPTOR,google_dot_ads_dot_googleads__v0_dot_proto_dot_enums_dot_ad__group__ad__rotation__mode__pb2.DESCRIPTOR,google_dot_ads_dot_googleads__v0_dot_proto_dot_enums_dot_ad__group__status__pb2.DESCRIPTOR,google_dot_ads_dot_googleads__v0_dot_proto_dot_enums_dot_ad__group__type__pb2.DESCRIPTOR,google_dot_protobuf_dot_wrappers__pb2.DESCRIPTOR,])
 
 
 
@@ -73,63 +74,70 @@ _ADGROUP = _descriptor.Descriptor(
       is_extension=False, extension_scope=None,
       options=None, file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
-      name='tracking_url_template', full_name='google.ads.googleads.v0.resources.AdGroup.tracking_url_template', index=5,
+      name='ad_rotation_mode', full_name='google.ads.googleads.v0.resources.AdGroup.ad_rotation_mode', index=5,
+      number=22, type=14, cpp_type=8, label=1,
+      has_default_value=False, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None, file=DESCRIPTOR),
+    _descriptor.FieldDescriptor(
+      name='tracking_url_template', full_name='google.ads.googleads.v0.resources.AdGroup.tracking_url_template', index=6,
       number=13, type=11, cpp_type=10, label=1,
       has_default_value=False, default_value=None,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None, file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
-      name='url_custom_parameters', full_name='google.ads.googleads.v0.resources.AdGroup.url_custom_parameters', index=6,
+      name='url_custom_parameters', full_name='google.ads.googleads.v0.resources.AdGroup.url_custom_parameters', index=7,
       number=6, type=11, cpp_type=10, label=3,
       has_default_value=False, default_value=[],
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None, file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
-      name='campaign', full_name='google.ads.googleads.v0.resources.AdGroup.campaign', index=7,
+      name='campaign', full_name='google.ads.googleads.v0.resources.AdGroup.campaign', index=8,
       number=10, type=11, cpp_type=10, label=1,
       has_default_value=False, default_value=None,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None, file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
-      name='cpc_bid_micros', full_name='google.ads.googleads.v0.resources.AdGroup.cpc_bid_micros', index=8,
+      name='cpc_bid_micros', full_name='google.ads.googleads.v0.resources.AdGroup.cpc_bid_micros', index=9,
       number=14, type=11, cpp_type=10, label=1,
       has_default_value=False, default_value=None,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None, file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
-      name='cpm_bid_micros', full_name='google.ads.googleads.v0.resources.AdGroup.cpm_bid_micros', index=9,
+      name='cpm_bid_micros', full_name='google.ads.googleads.v0.resources.AdGroup.cpm_bid_micros', index=10,
       number=15, type=11, cpp_type=10, label=1,
       has_default_value=False, default_value=None,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None, file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
-      name='cpa_bid_micros', full_name='google.ads.googleads.v0.resources.AdGroup.cpa_bid_micros', index=10,
+      name='cpa_bid_micros', full_name='google.ads.googleads.v0.resources.AdGroup.cpa_bid_micros', index=11,
       number=16, type=11, cpp_type=10, label=1,
       has_default_value=False, default_value=None,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None, file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
-      name='cpv_bid_micros', full_name='google.ads.googleads.v0.resources.AdGroup.cpv_bid_micros', index=11,
+      name='cpv_bid_micros', full_name='google.ads.googleads.v0.resources.AdGroup.cpv_bid_micros', index=12,
       number=17, type=11, cpp_type=10, label=1,
       has_default_value=False, default_value=None,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None, file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
-      name='target_roas_override', full_name='google.ads.googleads.v0.resources.AdGroup.target_roas_override', index=12,
+      name='target_roas_override', full_name='google.ads.googleads.v0.resources.AdGroup.target_roas_override', index=13,
       number=19, type=11, cpp_type=10, label=1,
       has_default_value=False, default_value=None,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None, file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
-      name='percent_cpc_bid_micros', full_name='google.ads.googleads.v0.resources.AdGroup.percent_cpc_bid_micros', index=13,
+      name='percent_cpc_bid_micros', full_name='google.ads.googleads.v0.resources.AdGroup.percent_cpc_bid_micros', index=14,
       number=20, type=11, cpp_type=10, label=1,
       has_default_value=False, default_value=None,
       message_type=None, enum_type=None, containing_type=None,
@@ -147,14 +155,15 @@ _ADGROUP = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=303,
-  serialized_end=1096,
+  serialized_start=372,
+  serialized_end=1271,
 )
 
 _ADGROUP.fields_by_name['id'].message_type = google_dot_protobuf_dot_wrappers__pb2._INT64VALUE
 _ADGROUP.fields_by_name['name'].message_type = google_dot_protobuf_dot_wrappers__pb2._STRINGVALUE
 _ADGROUP.fields_by_name['status'].enum_type = google_dot_ads_dot_googleads__v0_dot_proto_dot_enums_dot_ad__group__status__pb2._ADGROUPSTATUSENUM_ADGROUPSTATUS
 _ADGROUP.fields_by_name['type'].enum_type = google_dot_ads_dot_googleads__v0_dot_proto_dot_enums_dot_ad__group__type__pb2._ADGROUPTYPEENUM_ADGROUPTYPE
+_ADGROUP.fields_by_name['ad_rotation_mode'].enum_type = google_dot_ads_dot_googleads__v0_dot_proto_dot_enums_dot_ad__group__ad__rotation__mode__pb2._ADGROUPADROTATIONMODEENUM_ADGROUPADROTATIONMODE
 _ADGROUP.fields_by_name['tracking_url_template'].message_type = google_dot_protobuf_dot_wrappers__pb2._STRINGVALUE
 _ADGROUP.fields_by_name['url_custom_parameters'].message_type = google_dot_ads_dot_googleads__v0_dot_proto_dot_common_dot_custom__parameter__pb2._CUSTOMPARAMETER
 _ADGROUP.fields_by_name['campaign'].message_type = google_dot_protobuf_dot_wrappers__pb2._STRINGVALUE
@@ -191,6 +200,8 @@ AdGroup = _reflection.GeneratedProtocolMessageType('AdGroup', (_message.Message,
           The status of the ad group.
       type:
           The type of the ad group.
+      ad_rotation_mode:
+          The ad rotation mode of the ad group.
       tracking_url_template:
           The URL template for constructing a tracking URL.
       url_custom_parameters:
@@ -198,8 +209,7 @@ AdGroup = _reflection.GeneratedProtocolMessageType('AdGroup', (_message.Message,
           in a ``tracking_url_template``, ``final_urls``, or
           ``mobile_final_urls``.
       campaign:
-          The campaign to which the ad group belongs.  This field must
-          not be used in WHERE clauses.
+          The campaign to which the ad group belongs.
       cpc_bid_micros:
           The maximum CPC (cost-per-click) bid.
       cpm_bid_micros:

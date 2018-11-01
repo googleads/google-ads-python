@@ -20,7 +20,7 @@ DESCRIPTOR = _descriptor.FileDescriptor(
   name='google/ads/googleads_v0/proto/common/metrics.proto',
   package='google.ads.googleads.v0.common',
   syntax='proto3',
-  serialized_pb=_b('\n2google/ads/googleads_v0/proto/common/metrics.proto\x12\x1egoogle.ads.googleads.v0.common\x1a\x1egoogle/protobuf/wrappers.proto\"\xc1\x18\n\x07Metrics\x12L\n&all_conversions_from_interactions_rate\x18\x41 \x01(\x0b\x32\x1c.google.protobuf.DoubleValue\x12;\n\x15\x61ll_conversions_value\x18\x42 \x01(\x0b\x32\x1c.google.protobuf.DoubleValue\x12\x35\n\x0f\x61ll_conversions\x18\x07 \x01(\x0b\x32\x1c.google.protobuf.DoubleValue\x12\x44\n\x1e\x61ll_conversions_value_per_cost\x18> \x01(\x0b\x32\x1c.google.protobuf.DoubleValue\x12]\n7all_conversions_from_interactions_value_per_interaction\x18\x43 \x01(\x0b\x32\x1c.google.protobuf.DoubleValue\x12\x32\n\x0c\x61verage_cost\x18\x08 \x01(\x0b\x32\x1c.google.protobuf.DoubleValue\x12\x31\n\x0b\x61verage_cpc\x18\t \x01(\x0b\x32\x1c.google.protobuf.DoubleValue\x12\x31\n\x0b\x61verage_cpm\x18\n \x01(\x0b\x32\x1c.google.protobuf.DoubleValue\x12\x36\n\x10\x61verage_position\x18\r \x01(\x0b\x32\x1c.google.protobuf.DoubleValue\x12\x31\n\x0b\x62ounce_rate\x18\x0f \x01(\x0b\x32\x1c.google.protobuf.DoubleValue\x12+\n\x06\x63licks\x18\x13 \x01(\x0b\x32\x1b.google.protobuf.Int64Value\x12J\n$content_budget_lost_impression_share\x18\x14 \x01(\x0b\x32\x1c.google.protobuf.DoubleValue\x12>\n\x18\x63ontent_impression_share\x18\x15 \x01(\x0b\x32\x1c.google.protobuf.DoubleValue\x12P\n*conversion_last_received_request_date_time\x18I \x01(\x0b\x32\x1c.google.protobuf.StringValue\x12\x45\n\x1f\x63onversion_last_conversion_date\x18J \x01(\x0b\x32\x1c.google.protobuf.StringValue\x12H\n\"content_rank_lost_impression_share\x18\x16 \x01(\x0b\x32\x1c.google.protobuf.DoubleValue\x12H\n\"conversions_from_interactions_rate\x18\x45 \x01(\x0b\x32\x1c.google.protobuf.DoubleValue\x12\x37\n\x11\x63onversions_value\x18\x46 \x01(\x0b\x32\x1c.google.protobuf.DoubleValue\x12@\n\x1a\x63onversions_value_per_cost\x18G \x01(\x0b\x32\x1c.google.protobuf.DoubleValue\x12Y\n3conversions_from_interactions_value_per_interaction\x18H \x01(\x0b\x32\x1c.google.protobuf.DoubleValue\x12\x31\n\x0b\x63onversions\x18\x19 \x01(\x0b\x32\x1c.google.protobuf.DoubleValue\x12\x30\n\x0b\x63ost_micros\x18\x1a \x01(\x0b\x32\x1b.google.protobuf.Int64Value\x12>\n\x18\x63ost_per_all_conversions\x18\x44 \x01(\x0b\x32\x1c.google.protobuf.DoubleValue\x12\x39\n\x13\x63ost_per_conversion\x18\x1c \x01(\x0b\x32\x1c.google.protobuf.DoubleValue\x12>\n\x18\x63ross_device_conversions\x18\x1d \x01(\x0b\x32\x1c.google.protobuf.DoubleValue\x12)\n\x03\x63tr\x18\x1e \x01(\x0b\x32\x1c.google.protobuf.DoubleValue\x12\x35\n\x0f\x65ngagement_rate\x18\x1f \x01(\x0b\x32\x1c.google.protobuf.DoubleValue\x12\x30\n\x0b\x65ngagements\x18  \x01(\x0b\x32\x1b.google.protobuf.Int64Value\x12\x30\n\x0bimpressions\x18% \x01(\x0b\x32\x1b.google.protobuf.Int64Value\x12\x36\n\x10interaction_rate\x18& \x01(\x0b\x32\x1c.google.protobuf.DoubleValue\x12\x31\n\x0cinteractions\x18\' \x01(\x0b\x32\x1b.google.protobuf.Int64Value\x12\x38\n\x12invalid_click_rate\x18( \x01(\x0b\x32\x1c.google.protobuf.DoubleValue\x12\x33\n\x0einvalid_clicks\x18) \x01(\x0b\x32\x1b.google.protobuf.Int64Value\x12:\n\x14percent_new_visitors\x18* \x01(\x0b\x32\x1c.google.protobuf.DoubleValue\x12\x30\n\x0bphone_calls\x18+ \x01(\x0b\x32\x1b.google.protobuf.Int64Value\x12\x36\n\x11phone_impressions\x18, \x01(\x0b\x32\x1b.google.protobuf.Int64Value\x12\x38\n\x12phone_through_rate\x18- \x01(\x0b\x32\x1c.google.protobuf.DoubleValue\x12\x32\n\x0crelative_ctr\x18. \x01(\x0b\x32\x1c.google.protobuf.DoubleValue\x12I\n#search_budget_lost_impression_share\x18/ \x01(\x0b\x32\x1c.google.protobuf.DoubleValue\x12I\n#search_exact_match_impression_share\x18\x31 \x01(\x0b\x32\x1c.google.protobuf.DoubleValue\x12=\n\x17search_impression_share\x18\x32 \x01(\x0b\x32\x1c.google.protobuf.DoubleValue\x12G\n!search_rank_lost_impression_share\x18\x33 \x01(\x0b\x32\x1c.google.protobuf.DoubleValue\x12?\n\x19value_per_all_conversions\x18\x34 \x01(\x0b\x32\x1c.google.protobuf.DoubleValue\x12:\n\x14value_per_conversion\x18\x35 \x01(\x0b\x32\x1c.google.protobuf.DoubleValue\x12=\n\x17video_quartile_100_rate\x18\x36 \x01(\x0b\x32\x1c.google.protobuf.DoubleValue\x12<\n\x16video_quartile_25_rate\x18\x37 \x01(\x0b\x32\x1c.google.protobuf.DoubleValue\x12<\n\x16video_quartile_50_rate\x18\x38 \x01(\x0b\x32\x1c.google.protobuf.DoubleValue\x12<\n\x16video_quartile_75_rate\x18\x39 \x01(\x0b\x32\x1c.google.protobuf.DoubleValue\x12\x35\n\x0fvideo_view_rate\x18: \x01(\x0b\x32\x1c.google.protobuf.DoubleValue\x12\x30\n\x0bvideo_views\x18; \x01(\x0b\x32\x1b.google.protobuf.Int64Value\x12=\n\x18view_through_conversions\x18< \x01(\x0b\x32\x1b.google.protobuf.Int64ValueB\xc2\x01\n\"com.google.ads.googleads.v0.commonB\x0cMetricsProtoP\x01ZDgoogle.golang.org/genproto/googleapis/ads/googleads/v0/common;common\xa2\x02\x03GAA\xaa\x02\x1eGoogle.Ads.GoogleAds.V0.Common\xca\x02\x1eGoogle\\Ads\\GoogleAds\\V0\\Commonb\x06proto3')
+  serialized_pb=_b('\n2google/ads/googleads_v0/proto/common/metrics.proto\x12\x1egoogle.ads.googleads.v0.common\x1a\x1egoogle/protobuf/wrappers.proto\"\x88\x19\n\x07Metrics\x12L\n&all_conversions_from_interactions_rate\x18\x41 \x01(\x0b\x32\x1c.google.protobuf.DoubleValue\x12;\n\x15\x61ll_conversions_value\x18\x42 \x01(\x0b\x32\x1c.google.protobuf.DoubleValue\x12\x35\n\x0f\x61ll_conversions\x18\x07 \x01(\x0b\x32\x1c.google.protobuf.DoubleValue\x12\x44\n\x1e\x61ll_conversions_value_per_cost\x18> \x01(\x0b\x32\x1c.google.protobuf.DoubleValue\x12]\n7all_conversions_from_interactions_value_per_interaction\x18\x43 \x01(\x0b\x32\x1c.google.protobuf.DoubleValue\x12\x32\n\x0c\x61verage_cost\x18\x08 \x01(\x0b\x32\x1c.google.protobuf.DoubleValue\x12\x31\n\x0b\x61verage_cpc\x18\t \x01(\x0b\x32\x1c.google.protobuf.DoubleValue\x12\x31\n\x0b\x61verage_cpm\x18\n \x01(\x0b\x32\x1c.google.protobuf.DoubleValue\x12\x36\n\x10\x61verage_position\x18\r \x01(\x0b\x32\x1c.google.protobuf.DoubleValue\x12\x31\n\x0b\x62ounce_rate\x18\x0f \x01(\x0b\x32\x1c.google.protobuf.DoubleValue\x12+\n\x06\x63licks\x18\x13 \x01(\x0b\x32\x1b.google.protobuf.Int64Value\x12J\n$content_budget_lost_impression_share\x18\x14 \x01(\x0b\x32\x1c.google.protobuf.DoubleValue\x12>\n\x18\x63ontent_impression_share\x18\x15 \x01(\x0b\x32\x1c.google.protobuf.DoubleValue\x12P\n*conversion_last_received_request_date_time\x18I \x01(\x0b\x32\x1c.google.protobuf.StringValue\x12\x45\n\x1f\x63onversion_last_conversion_date\x18J \x01(\x0b\x32\x1c.google.protobuf.StringValue\x12H\n\"content_rank_lost_impression_share\x18\x16 \x01(\x0b\x32\x1c.google.protobuf.DoubleValue\x12H\n\"conversions_from_interactions_rate\x18\x45 \x01(\x0b\x32\x1c.google.protobuf.DoubleValue\x12\x37\n\x11\x63onversions_value\x18\x46 \x01(\x0b\x32\x1c.google.protobuf.DoubleValue\x12@\n\x1a\x63onversions_value_per_cost\x18G \x01(\x0b\x32\x1c.google.protobuf.DoubleValue\x12Y\n3conversions_from_interactions_value_per_interaction\x18H \x01(\x0b\x32\x1c.google.protobuf.DoubleValue\x12\x31\n\x0b\x63onversions\x18\x19 \x01(\x0b\x32\x1c.google.protobuf.DoubleValue\x12\x30\n\x0b\x63ost_micros\x18\x1a \x01(\x0b\x32\x1b.google.protobuf.Int64Value\x12>\n\x18\x63ost_per_all_conversions\x18\x44 \x01(\x0b\x32\x1c.google.protobuf.DoubleValue\x12\x39\n\x13\x63ost_per_conversion\x18\x1c \x01(\x0b\x32\x1c.google.protobuf.DoubleValue\x12>\n\x18\x63ross_device_conversions\x18\x1d \x01(\x0b\x32\x1c.google.protobuf.DoubleValue\x12)\n\x03\x63tr\x18\x1e \x01(\x0b\x32\x1c.google.protobuf.DoubleValue\x12\x35\n\x0f\x65ngagement_rate\x18\x1f \x01(\x0b\x32\x1c.google.protobuf.DoubleValue\x12\x30\n\x0b\x65ngagements\x18  \x01(\x0b\x32\x1b.google.protobuf.Int64Value\x12\x45\n\x1fhotel_average_lead_value_micros\x18K \x01(\x0b\x32\x1c.google.protobuf.DoubleValue\x12\x30\n\x0bimpressions\x18% \x01(\x0b\x32\x1b.google.protobuf.Int64Value\x12\x36\n\x10interaction_rate\x18& \x01(\x0b\x32\x1c.google.protobuf.DoubleValue\x12\x31\n\x0cinteractions\x18\' \x01(\x0b\x32\x1b.google.protobuf.Int64Value\x12\x38\n\x12invalid_click_rate\x18( \x01(\x0b\x32\x1c.google.protobuf.DoubleValue\x12\x33\n\x0einvalid_clicks\x18) \x01(\x0b\x32\x1b.google.protobuf.Int64Value\x12:\n\x14percent_new_visitors\x18* \x01(\x0b\x32\x1c.google.protobuf.DoubleValue\x12\x30\n\x0bphone_calls\x18+ \x01(\x0b\x32\x1b.google.protobuf.Int64Value\x12\x36\n\x11phone_impressions\x18, \x01(\x0b\x32\x1b.google.protobuf.Int64Value\x12\x38\n\x12phone_through_rate\x18- \x01(\x0b\x32\x1c.google.protobuf.DoubleValue\x12\x32\n\x0crelative_ctr\x18. \x01(\x0b\x32\x1c.google.protobuf.DoubleValue\x12I\n#search_budget_lost_impression_share\x18/ \x01(\x0b\x32\x1c.google.protobuf.DoubleValue\x12I\n#search_exact_match_impression_share\x18\x31 \x01(\x0b\x32\x1c.google.protobuf.DoubleValue\x12=\n\x17search_impression_share\x18\x32 \x01(\x0b\x32\x1c.google.protobuf.DoubleValue\x12G\n!search_rank_lost_impression_share\x18\x33 \x01(\x0b\x32\x1c.google.protobuf.DoubleValue\x12?\n\x19value_per_all_conversions\x18\x34 \x01(\x0b\x32\x1c.google.protobuf.DoubleValue\x12:\n\x14value_per_conversion\x18\x35 \x01(\x0b\x32\x1c.google.protobuf.DoubleValue\x12=\n\x17video_quartile_100_rate\x18\x36 \x01(\x0b\x32\x1c.google.protobuf.DoubleValue\x12<\n\x16video_quartile_25_rate\x18\x37 \x01(\x0b\x32\x1c.google.protobuf.DoubleValue\x12<\n\x16video_quartile_50_rate\x18\x38 \x01(\x0b\x32\x1c.google.protobuf.DoubleValue\x12<\n\x16video_quartile_75_rate\x18\x39 \x01(\x0b\x32\x1c.google.protobuf.DoubleValue\x12\x35\n\x0fvideo_view_rate\x18: \x01(\x0b\x32\x1c.google.protobuf.DoubleValue\x12\x30\n\x0bvideo_views\x18; \x01(\x0b\x32\x1b.google.protobuf.Int64Value\x12=\n\x18view_through_conversions\x18< \x01(\x0b\x32\x1b.google.protobuf.Int64ValueB\xc2\x01\n\"com.google.ads.googleads.v0.commonB\x0cMetricsProtoP\x01ZDgoogle.golang.org/genproto/googleapis/ads/googleads/v0/common;common\xa2\x02\x03GAA\xaa\x02\x1eGoogle.Ads.GoogleAds.V0.Common\xca\x02\x1eGoogle\\Ads\\GoogleAds\\V0\\Commonb\x06proto3')
   ,
   dependencies=[google_dot_protobuf_dot_wrappers__pb2.DESCRIPTOR,])
 
@@ -231,161 +231,168 @@ _METRICS = _descriptor.Descriptor(
       is_extension=False, extension_scope=None,
       options=None, file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
-      name='impressions', full_name='google.ads.googleads.v0.common.Metrics.impressions', index=28,
+      name='hotel_average_lead_value_micros', full_name='google.ads.googleads.v0.common.Metrics.hotel_average_lead_value_micros', index=28,
+      number=75, type=11, cpp_type=10, label=1,
+      has_default_value=False, default_value=None,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None, file=DESCRIPTOR),
+    _descriptor.FieldDescriptor(
+      name='impressions', full_name='google.ads.googleads.v0.common.Metrics.impressions', index=29,
       number=37, type=11, cpp_type=10, label=1,
       has_default_value=False, default_value=None,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None, file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
-      name='interaction_rate', full_name='google.ads.googleads.v0.common.Metrics.interaction_rate', index=29,
+      name='interaction_rate', full_name='google.ads.googleads.v0.common.Metrics.interaction_rate', index=30,
       number=38, type=11, cpp_type=10, label=1,
       has_default_value=False, default_value=None,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None, file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
-      name='interactions', full_name='google.ads.googleads.v0.common.Metrics.interactions', index=30,
+      name='interactions', full_name='google.ads.googleads.v0.common.Metrics.interactions', index=31,
       number=39, type=11, cpp_type=10, label=1,
       has_default_value=False, default_value=None,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None, file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
-      name='invalid_click_rate', full_name='google.ads.googleads.v0.common.Metrics.invalid_click_rate', index=31,
+      name='invalid_click_rate', full_name='google.ads.googleads.v0.common.Metrics.invalid_click_rate', index=32,
       number=40, type=11, cpp_type=10, label=1,
       has_default_value=False, default_value=None,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None, file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
-      name='invalid_clicks', full_name='google.ads.googleads.v0.common.Metrics.invalid_clicks', index=32,
+      name='invalid_clicks', full_name='google.ads.googleads.v0.common.Metrics.invalid_clicks', index=33,
       number=41, type=11, cpp_type=10, label=1,
       has_default_value=False, default_value=None,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None, file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
-      name='percent_new_visitors', full_name='google.ads.googleads.v0.common.Metrics.percent_new_visitors', index=33,
+      name='percent_new_visitors', full_name='google.ads.googleads.v0.common.Metrics.percent_new_visitors', index=34,
       number=42, type=11, cpp_type=10, label=1,
       has_default_value=False, default_value=None,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None, file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
-      name='phone_calls', full_name='google.ads.googleads.v0.common.Metrics.phone_calls', index=34,
+      name='phone_calls', full_name='google.ads.googleads.v0.common.Metrics.phone_calls', index=35,
       number=43, type=11, cpp_type=10, label=1,
       has_default_value=False, default_value=None,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None, file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
-      name='phone_impressions', full_name='google.ads.googleads.v0.common.Metrics.phone_impressions', index=35,
+      name='phone_impressions', full_name='google.ads.googleads.v0.common.Metrics.phone_impressions', index=36,
       number=44, type=11, cpp_type=10, label=1,
       has_default_value=False, default_value=None,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None, file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
-      name='phone_through_rate', full_name='google.ads.googleads.v0.common.Metrics.phone_through_rate', index=36,
+      name='phone_through_rate', full_name='google.ads.googleads.v0.common.Metrics.phone_through_rate', index=37,
       number=45, type=11, cpp_type=10, label=1,
       has_default_value=False, default_value=None,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None, file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
-      name='relative_ctr', full_name='google.ads.googleads.v0.common.Metrics.relative_ctr', index=37,
+      name='relative_ctr', full_name='google.ads.googleads.v0.common.Metrics.relative_ctr', index=38,
       number=46, type=11, cpp_type=10, label=1,
       has_default_value=False, default_value=None,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None, file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
-      name='search_budget_lost_impression_share', full_name='google.ads.googleads.v0.common.Metrics.search_budget_lost_impression_share', index=38,
+      name='search_budget_lost_impression_share', full_name='google.ads.googleads.v0.common.Metrics.search_budget_lost_impression_share', index=39,
       number=47, type=11, cpp_type=10, label=1,
       has_default_value=False, default_value=None,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None, file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
-      name='search_exact_match_impression_share', full_name='google.ads.googleads.v0.common.Metrics.search_exact_match_impression_share', index=39,
+      name='search_exact_match_impression_share', full_name='google.ads.googleads.v0.common.Metrics.search_exact_match_impression_share', index=40,
       number=49, type=11, cpp_type=10, label=1,
       has_default_value=False, default_value=None,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None, file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
-      name='search_impression_share', full_name='google.ads.googleads.v0.common.Metrics.search_impression_share', index=40,
+      name='search_impression_share', full_name='google.ads.googleads.v0.common.Metrics.search_impression_share', index=41,
       number=50, type=11, cpp_type=10, label=1,
       has_default_value=False, default_value=None,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None, file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
-      name='search_rank_lost_impression_share', full_name='google.ads.googleads.v0.common.Metrics.search_rank_lost_impression_share', index=41,
+      name='search_rank_lost_impression_share', full_name='google.ads.googleads.v0.common.Metrics.search_rank_lost_impression_share', index=42,
       number=51, type=11, cpp_type=10, label=1,
       has_default_value=False, default_value=None,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None, file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
-      name='value_per_all_conversions', full_name='google.ads.googleads.v0.common.Metrics.value_per_all_conversions', index=42,
+      name='value_per_all_conversions', full_name='google.ads.googleads.v0.common.Metrics.value_per_all_conversions', index=43,
       number=52, type=11, cpp_type=10, label=1,
       has_default_value=False, default_value=None,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None, file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
-      name='value_per_conversion', full_name='google.ads.googleads.v0.common.Metrics.value_per_conversion', index=43,
+      name='value_per_conversion', full_name='google.ads.googleads.v0.common.Metrics.value_per_conversion', index=44,
       number=53, type=11, cpp_type=10, label=1,
       has_default_value=False, default_value=None,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None, file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
-      name='video_quartile_100_rate', full_name='google.ads.googleads.v0.common.Metrics.video_quartile_100_rate', index=44,
+      name='video_quartile_100_rate', full_name='google.ads.googleads.v0.common.Metrics.video_quartile_100_rate', index=45,
       number=54, type=11, cpp_type=10, label=1,
       has_default_value=False, default_value=None,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None, file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
-      name='video_quartile_25_rate', full_name='google.ads.googleads.v0.common.Metrics.video_quartile_25_rate', index=45,
+      name='video_quartile_25_rate', full_name='google.ads.googleads.v0.common.Metrics.video_quartile_25_rate', index=46,
       number=55, type=11, cpp_type=10, label=1,
       has_default_value=False, default_value=None,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None, file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
-      name='video_quartile_50_rate', full_name='google.ads.googleads.v0.common.Metrics.video_quartile_50_rate', index=46,
+      name='video_quartile_50_rate', full_name='google.ads.googleads.v0.common.Metrics.video_quartile_50_rate', index=47,
       number=56, type=11, cpp_type=10, label=1,
       has_default_value=False, default_value=None,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None, file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
-      name='video_quartile_75_rate', full_name='google.ads.googleads.v0.common.Metrics.video_quartile_75_rate', index=47,
+      name='video_quartile_75_rate', full_name='google.ads.googleads.v0.common.Metrics.video_quartile_75_rate', index=48,
       number=57, type=11, cpp_type=10, label=1,
       has_default_value=False, default_value=None,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None, file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
-      name='video_view_rate', full_name='google.ads.googleads.v0.common.Metrics.video_view_rate', index=48,
+      name='video_view_rate', full_name='google.ads.googleads.v0.common.Metrics.video_view_rate', index=49,
       number=58, type=11, cpp_type=10, label=1,
       has_default_value=False, default_value=None,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None, file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
-      name='video_views', full_name='google.ads.googleads.v0.common.Metrics.video_views', index=49,
+      name='video_views', full_name='google.ads.googleads.v0.common.Metrics.video_views', index=50,
       number=59, type=11, cpp_type=10, label=1,
       has_default_value=False, default_value=None,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None, file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
-      name='view_through_conversions', full_name='google.ads.googleads.v0.common.Metrics.view_through_conversions', index=50,
+      name='view_through_conversions', full_name='google.ads.googleads.v0.common.Metrics.view_through_conversions', index=51,
       number=60, type=11, cpp_type=10, label=1,
       has_default_value=False, default_value=None,
       message_type=None, enum_type=None, containing_type=None,
@@ -404,7 +411,7 @@ _METRICS = _descriptor.Descriptor(
   oneofs=[
   ],
   serialized_start=119,
-  serialized_end=3256,
+  serialized_end=3327,
 )
 
 _METRICS.fields_by_name['all_conversions_from_interactions_rate'].message_type = google_dot_protobuf_dot_wrappers__pb2._DOUBLEVALUE
@@ -435,6 +442,7 @@ _METRICS.fields_by_name['cross_device_conversions'].message_type = google_dot_pr
 _METRICS.fields_by_name['ctr'].message_type = google_dot_protobuf_dot_wrappers__pb2._DOUBLEVALUE
 _METRICS.fields_by_name['engagement_rate'].message_type = google_dot_protobuf_dot_wrappers__pb2._DOUBLEVALUE
 _METRICS.fields_by_name['engagements'].message_type = google_dot_protobuf_dot_wrappers__pb2._INT64VALUE
+_METRICS.fields_by_name['hotel_average_lead_value_micros'].message_type = google_dot_protobuf_dot_wrappers__pb2._DOUBLEVALUE
 _METRICS.fields_by_name['impressions'].message_type = google_dot_protobuf_dot_wrappers__pb2._INT64VALUE
 _METRICS.fields_by_name['interaction_rate'].message_type = google_dot_protobuf_dot_wrappers__pb2._DOUBLEVALUE
 _METRICS.fields_by_name['interactions'].message_type = google_dot_protobuf_dot_wrappers__pb2._INT64VALUE
@@ -565,6 +573,8 @@ Metrics = _reflection.GeneratedProtocolMessageType('Metrics', (_message.Message,
           The number of engagements. An engagement occurs when a viewer
           expands your Lightbox ad. Also, in the future, other ad types
           may support engagement metrics.
+      hotel_average_lead_value_micros:
+          Average lead value of hotel.
       impressions:
           Count of how often your ad has appeared on a search results
           page or website on the Google Network.

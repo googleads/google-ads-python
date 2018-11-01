@@ -14,8 +14,7 @@ class BillingSetupServiceStub(object):
 
   Mutates:
   The REMOVE operation cancels a pending billing setup.
-  Functionality for creating new billing setups will be supported in a future
-  version.
+  The CREATE operation creates a new billing setup.
   """
 
   def __init__(self, channel):
@@ -45,8 +44,7 @@ class BillingSetupServiceServicer(object):
 
   Mutates:
   The REMOVE operation cancels a pending billing setup.
-  Functionality for creating new billing setups will be supported in a future
-  version.
+  The CREATE operation creates a new billing setup.
   """
 
   def GetBillingSetup(self, request, context):
@@ -57,7 +55,7 @@ class BillingSetupServiceServicer(object):
     raise NotImplementedError('Method not implemented!')
 
   def MutateBillingSetup(self, request, context):
-    """Cancels a pending billing setup.
+    """Creates a billing setup, or cancels an existing billing setup.
     """
     context.set_code(grpc.StatusCode.UNIMPLEMENTED)
     context.set_details('Method not implemented!')

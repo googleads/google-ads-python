@@ -968,23 +968,20 @@ Recommendation = _reflection.GeneratedProtocolMessageType('Recommendation', (_me
       campaign_budget:
           The budget targeted by this recommendation. This will be set
           only when the recommendation affects a single campaign budget.
-          This field must not be used in WHERE clauses.  This field will
-          be set for the following recommendation types:
+          This field will be set for the following recommendation types:
           CAMPAIGN\_BUDGET
       campaign:
           The campaign targeted by this recommendation. This will be set
           only when the recommendation affects a single campaign.  This
-          field must not be used in WHERE clauses.  This field will be
-          set for the following recommendation types:
+          field will be set for the following recommendation types:
           ENHANCED\_CPC\_OPT\_IN, KEYWORD, MAXIMIZE\_CLICKS\_OPT\_IN,
           MAXIMIZE\_CONVERSIONS\_OPT\_IN, OPTIMIZE\_AD\_ROTATION,
           SEARCH\_PARTNERS\_OPT\_IN, TARGET\_CPA\_OPT\_IN, TEXT\_AD
       ad_group:
           The ad group targeted by this recommendation. This will be set
           only when the recommendation affects a single ad group.  This
-          field must not be used in WHERE clauses.  This field will be
-          set for the following recommendation types: KEYWORD,
-          OPTIMIZE\_AD\_ROTATION, TEXT\_AD
+          field will be set for the following recommendation types:
+          KEYWORD, OPTIMIZE\_AD\_ROTATION, TEXT\_AD
       dismissed:
           Whether the recommendation is dismissed or not.
       recommendation:

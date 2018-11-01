@@ -20,6 +20,11 @@ class GeoTargetConstantServiceStub(object):
         request_serializer=google_dot_ads_dot_googleads__v0_dot_proto_dot_services_dot_geo__target__constant__service__pb2.GetGeoTargetConstantRequest.SerializeToString,
         response_deserializer=google_dot_ads_dot_googleads__v0_dot_proto_dot_resources_dot_geo__target__constant__pb2.GeoTargetConstant.FromString,
         )
+    self.SuggestGeoTargetConstants = channel.unary_unary(
+        '/google.ads.googleads.v0.services.GeoTargetConstantService/SuggestGeoTargetConstants',
+        request_serializer=google_dot_ads_dot_googleads__v0_dot_proto_dot_services_dot_geo__target__constant__service__pb2.SuggestGeoTargetConstantsRequest.SerializeToString,
+        response_deserializer=google_dot_ads_dot_googleads__v0_dot_proto_dot_services_dot_geo__target__constant__service__pb2.SuggestGeoTargetConstantsResponse.FromString,
+        )
 
 
 class GeoTargetConstantServiceServicer(object):
@@ -33,6 +38,13 @@ class GeoTargetConstantServiceServicer(object):
     context.set_details('Method not implemented!')
     raise NotImplementedError('Method not implemented!')
 
+  def SuggestGeoTargetConstants(self, request, context):
+    """Returns GeoTargetConstant suggestions by location name or by resource name.
+    """
+    context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+    context.set_details('Method not implemented!')
+    raise NotImplementedError('Method not implemented!')
+
 
 def add_GeoTargetConstantServiceServicer_to_server(servicer, server):
   rpc_method_handlers = {
@@ -40,6 +52,11 @@ def add_GeoTargetConstantServiceServicer_to_server(servicer, server):
           servicer.GetGeoTargetConstant,
           request_deserializer=google_dot_ads_dot_googleads__v0_dot_proto_dot_services_dot_geo__target__constant__service__pb2.GetGeoTargetConstantRequest.FromString,
           response_serializer=google_dot_ads_dot_googleads__v0_dot_proto_dot_resources_dot_geo__target__constant__pb2.GeoTargetConstant.SerializeToString,
+      ),
+      'SuggestGeoTargetConstants': grpc.unary_unary_rpc_method_handler(
+          servicer.SuggestGeoTargetConstants,
+          request_deserializer=google_dot_ads_dot_googleads__v0_dot_proto_dot_services_dot_geo__target__constant__service__pb2.SuggestGeoTargetConstantsRequest.FromString,
+          response_serializer=google_dot_ads_dot_googleads__v0_dot_proto_dot_services_dot_geo__target__constant__service__pb2.SuggestGeoTargetConstantsResponse.SerializeToString,
       ),
   }
   generic_handler = grpc.method_handlers_generic_handler(

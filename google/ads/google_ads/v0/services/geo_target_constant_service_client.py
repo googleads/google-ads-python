@@ -22,6 +22,8 @@ import google.api_core.gapic_v1.config
 import google.api_core.gapic_v1.method
 import google.api_core.grpc_helpers
 import google.api_core.path_template
+import google.api_core.protobuf_helpers
+import grpc
 
 from google.ads.google_ads.v0.services import geo_target_constant_service_client_config
 from google.ads.google_ads.v0.services.transports import geo_target_constant_service_grpc_transport
@@ -204,4 +206,72 @@ class GeoTargetConstantServiceClient(object):
         request = geo_target_constant_service_pb2.GetGeoTargetConstantRequest(
             resource_name=resource_name, )
         return self._inner_api_calls['get_geo_target_constant'](
+            request, retry=retry, timeout=timeout, metadata=metadata)
+
+    def suggest_geo_target_constants(
+            self,
+            locale,
+            location_names=None,
+            geo_targets=None,
+            retry=google.api_core.gapic_v1.method.DEFAULT,
+            timeout=google.api_core.gapic_v1.method.DEFAULT,
+            metadata=None):
+        """
+        Returns GeoTargetConstant suggestions by location name or by resource name.
+
+        Args:
+            locale (Union[dict, ~google.ads.google_ads.v0.types.StringValue]): If possible, returned geo targets are translated using this locale. If not,
+                en is used by default.
+                If a dict is provided, it must be of the same form as the protobuf
+                message :class:`~google.ads.google_ads.v0.types.StringValue`
+            location_names (Union[dict, ~google.ads.google_ads.v0.types.LocationNames]): The location names to search by. At most 25 names can be set.
+                If a dict is provided, it must be of the same form as the protobuf
+                message :class:`~google.ads.google_ads.v0.types.LocationNames`
+            geo_targets (Union[dict, ~google.ads.google_ads.v0.types.GeoTargets]): The geo target constant resource names to filter by.
+                If a dict is provided, it must be of the same form as the protobuf
+                message :class:`~google.ads.google_ads.v0.types.GeoTargets`
+            retry (Optional[google.api_core.retry.Retry]):  A retry object used
+                to retry requests. If ``None`` is specified, requests will not
+                be retried.
+            timeout (Optional[float]): The amount of time, in seconds, to wait
+                for the request to complete. Note that if ``retry`` is
+                specified, the timeout applies to each individual attempt.
+            metadata (Optional[Sequence[Tuple[str, str]]]): Additional metadata
+                that is provided to the method.
+
+        Returns:
+            A :class:`~google.ads.google_ads.v0.types.SuggestGeoTargetConstantsResponse` instance.
+
+        Raises:
+            google.api_core.exceptions.GoogleAPICallError: If the request
+                    failed for any reason.
+            google.api_core.exceptions.RetryError: If the request failed due
+                    to a retryable error and retry attempts failed.
+            ValueError: If the parameters are invalid.
+        """
+        # Wrap the transport method to add retry and timeout logic.
+        if 'suggest_geo_target_constants' not in self._inner_api_calls:
+            self._inner_api_calls[
+                'suggest_geo_target_constants'] = google.api_core.gapic_v1.method.wrap_method(
+                    self.transport.suggest_geo_target_constants,
+                    default_retry=self._method_configs[
+                        'SuggestGeoTargetConstants'].retry,
+                    default_timeout=self._method_configs[
+                        'SuggestGeoTargetConstants'].timeout,
+                    client_info=self._client_info,
+                )
+
+        # Sanity check: We have some fields which are mutually exclusive;
+        # raise ValueError if more than one is sent.
+        google.api_core.protobuf_helpers.check_oneof(
+            location_names=location_names,
+            geo_targets=geo_targets,
+        )
+
+        request = geo_target_constant_service_pb2.SuggestGeoTargetConstantsRequest(
+            locale=locale,
+            location_names=location_names,
+            geo_targets=geo_targets,
+        )
+        return self._inner_api_calls['suggest_geo_target_constants'](
             request, retry=retry, timeout=timeout, metadata=metadata)

@@ -161,8 +161,7 @@ AdGroupAd = _reflection.GeneratedProtocolMessageType('AdGroupAd', (_message.Mess
       status:
           The status of the ad.
       ad_group:
-          The ad group to which the ad belongs.  This field must not be
-          used in WHERE clauses.
+          The ad group to which the ad belongs.
       ad:
           The ad.
       policy_summary:

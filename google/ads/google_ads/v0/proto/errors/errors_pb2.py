@@ -28,6 +28,7 @@ from google.ads.google_ads.v0.proto.errors import authentication_error_pb2 as go
 from google.ads.google_ads.v0.proto.errors import authorization_error_pb2 as google_dot_ads_dot_googleads__v0_dot_proto_dot_errors_dot_authorization__error__pb2
 from google.ads.google_ads.v0.proto.errors import bidding_error_pb2 as google_dot_ads_dot_googleads__v0_dot_proto_dot_errors_dot_bidding__error__pb2
 from google.ads.google_ads.v0.proto.errors import bidding_strategy_error_pb2 as google_dot_ads_dot_googleads__v0_dot_proto_dot_errors_dot_bidding__strategy__error__pb2
+from google.ads.google_ads.v0.proto.errors import billing_setup_error_pb2 as google_dot_ads_dot_googleads__v0_dot_proto_dot_errors_dot_billing__setup__error__pb2
 from google.ads.google_ads.v0.proto.errors import campaign_budget_error_pb2 as google_dot_ads_dot_googleads__v0_dot_proto_dot_errors_dot_campaign__budget__error__pb2
 from google.ads.google_ads.v0.proto.errors import campaign_criterion_error_pb2 as google_dot_ads_dot_googleads__v0_dot_proto_dot_errors_dot_campaign__criterion__error__pb2
 from google.ads.google_ads.v0.proto.errors import campaign_error_pb2 as google_dot_ads_dot_googleads__v0_dot_proto_dot_errors_dot_campaign__error__pb2
@@ -38,6 +39,9 @@ from google.ads.google_ads.v0.proto.errors import collection_size_error_pb2 as g
 from google.ads.google_ads.v0.proto.errors import context_error_pb2 as google_dot_ads_dot_googleads__v0_dot_proto_dot_errors_dot_context__error__pb2
 from google.ads.google_ads.v0.proto.errors import conversion_action_error_pb2 as google_dot_ads_dot_googleads__v0_dot_proto_dot_errors_dot_conversion__action__error__pb2
 from google.ads.google_ads.v0.proto.errors import criterion_error_pb2 as google_dot_ads_dot_googleads__v0_dot_proto_dot_errors_dot_criterion__error__pb2
+from google.ads.google_ads.v0.proto.errors import customer_client_link_error_pb2 as google_dot_ads_dot_googleads__v0_dot_proto_dot_errors_dot_customer__client__link__error__pb2
+from google.ads.google_ads.v0.proto.errors import customer_error_pb2 as google_dot_ads_dot_googleads__v0_dot_proto_dot_errors_dot_customer__error__pb2
+from google.ads.google_ads.v0.proto.errors import customer_manager_link_error_pb2 as google_dot_ads_dot_googleads__v0_dot_proto_dot_errors_dot_customer__manager__link__error__pb2
 from google.ads.google_ads.v0.proto.errors import database_error_pb2 as google_dot_ads_dot_googleads__v0_dot_proto_dot_errors_dot_database__error__pb2
 from google.ads.google_ads.v0.proto.errors import date_error_pb2 as google_dot_ads_dot_googleads__v0_dot_proto_dot_errors_dot_date__error__pb2
 from google.ads.google_ads.v0.proto.errors import date_range_error_pb2 as google_dot_ads_dot_googleads__v0_dot_proto_dot_errors_dot_date__range__error__pb2
@@ -48,13 +52,14 @@ from google.ads.google_ads.v0.proto.errors import field_error_pb2 as google_dot_
 from google.ads.google_ads.v0.proto.errors import field_mask_error_pb2 as google_dot_ads_dot_googleads__v0_dot_proto_dot_errors_dot_field__mask__error__pb2
 from google.ads.google_ads.v0.proto.errors import function_error_pb2 as google_dot_ads_dot_googleads__v0_dot_proto_dot_errors_dot_function__error__pb2
 from google.ads.google_ads.v0.proto.errors import function_parsing_error_pb2 as google_dot_ads_dot_googleads__v0_dot_proto_dot_errors_dot_function__parsing__error__pb2
+from google.ads.google_ads.v0.proto.errors import geo_target_constant_suggestion_error_pb2 as google_dot_ads_dot_googleads__v0_dot_proto_dot_errors_dot_geo__target__constant__suggestion__error__pb2
 from google.ads.google_ads.v0.proto.errors import header_error_pb2 as google_dot_ads_dot_googleads__v0_dot_proto_dot_errors_dot_header__error__pb2
 from google.ads.google_ads.v0.proto.errors import id_error_pb2 as google_dot_ads_dot_googleads__v0_dot_proto_dot_errors_dot_id__error__pb2
 from google.ads.google_ads.v0.proto.errors import image_error_pb2 as google_dot_ads_dot_googleads__v0_dot_proto_dot_errors_dot_image__error__pb2
 from google.ads.google_ads.v0.proto.errors import internal_error_pb2 as google_dot_ads_dot_googleads__v0_dot_proto_dot_errors_dot_internal__error__pb2
 from google.ads.google_ads.v0.proto.errors import list_operation_error_pb2 as google_dot_ads_dot_googleads__v0_dot_proto_dot_errors_dot_list__operation__error__pb2
 from google.ads.google_ads.v0.proto.errors import media_bundle_error_pb2 as google_dot_ads_dot_googleads__v0_dot_proto_dot_errors_dot_media__bundle__error__pb2
-from google.ads.google_ads.v0.proto.errors import media_error_pb2 as google_dot_ads_dot_googleads__v0_dot_proto_dot_errors_dot_media__error__pb2
+from google.ads.google_ads.v0.proto.errors import media_file_error_pb2 as google_dot_ads_dot_googleads__v0_dot_proto_dot_errors_dot_media__file__error__pb2
 from google.ads.google_ads.v0.proto.errors import multiplier_error_pb2 as google_dot_ads_dot_googleads__v0_dot_proto_dot_errors_dot_multiplier__error__pb2
 from google.ads.google_ads.v0.proto.errors import mutate_error_pb2 as google_dot_ads_dot_googleads__v0_dot_proto_dot_errors_dot_mutate__error__pb2
 from google.ads.google_ads.v0.proto.errors import new_resource_creation_error_pb2 as google_dot_ads_dot_googleads__v0_dot_proto_dot_errors_dot_new__resource__creation__error__pb2
@@ -84,9 +89,9 @@ DESCRIPTOR = _descriptor.FileDescriptor(
   name='google/ads/googleads_v0/proto/errors/errors.proto',
   package='google.ads.googleads.v0.errors',
   syntax='proto3',
-  serialized_pb=_b('\n1google/ads/googleads_v0/proto/errors/errors.proto\x12\x1egoogle.ads.googleads.v0.errors\x1a\x31google/ads/googleads_v0/proto/common/policy.proto\x1a\x30google/ads/googleads_v0/proto/common/value.proto\x1aHgoogle/ads/googleads_v0/proto/errors/account_budget_proposal_error.proto\x1a>google/ads/googleads_v0/proto/errors/ad_customizer_error.proto\x1a\x33google/ads/googleads_v0/proto/errors/ad_error.proto\x1a<google/ads/googleads_v0/proto/errors/ad_group_ad_error.proto\x1a\x46google/ads/googleads_v0/proto/errors/ad_group_bid_modifier_error.proto\x1a\x43google/ads/googleads_v0/proto/errors/ad_group_criterion_error.proto\x1a\x39google/ads/googleads_v0/proto/errors/ad_group_error.proto\x1a;google/ads/googleads_v0/proto/errors/ad_sharing_error.proto\x1a\x34google/ads/googleads_v0/proto/errors/adx_error.proto\x1a?google/ads/googleads_v0/proto/errors/authentication_error.proto\x1a>google/ads/googleads_v0/proto/errors/authorization_error.proto\x1a\x38google/ads/googleads_v0/proto/errors/bidding_error.proto\x1a\x41google/ads/googleads_v0/proto/errors/bidding_strategy_error.proto\x1a@google/ads/googleads_v0/proto/errors/campaign_budget_error.proto\x1a\x43google/ads/googleads_v0/proto/errors/campaign_criterion_error.proto\x1a\x39google/ads/googleads_v0/proto/errors/campaign_error.proto\x1a?google/ads/googleads_v0/proto/errors/campaign_group_error.proto\x1a\x44google/ads/googleads_v0/proto/errors/campaign_shared_set_error.proto\x1a>google/ads/googleads_v0/proto/errors/change_status_error.proto\x1a@google/ads/googleads_v0/proto/errors/collection_size_error.proto\x1a\x38google/ads/googleads_v0/proto/errors/context_error.proto\x1a\x42google/ads/googleads_v0/proto/errors/conversion_action_error.proto\x1a:google/ads/googleads_v0/proto/errors/criterion_error.proto\x1a\x39google/ads/googleads_v0/proto/errors/database_error.proto\x1a\x35google/ads/googleads_v0/proto/errors/date_error.proto\x1a;google/ads/googleads_v0/proto/errors/date_range_error.proto\x1a\x39google/ads/googleads_v0/proto/errors/distinct_error.proto\x1a\x35google/ads/googleads_v0/proto/errors/enum_error.proto\x1aIgoogle/ads/googleads_v0/proto/errors/feed_attribute_reference_error.proto\x1a\x36google/ads/googleads_v0/proto/errors/field_error.proto\x1a;google/ads/googleads_v0/proto/errors/field_mask_error.proto\x1a\x39google/ads/googleads_v0/proto/errors/function_error.proto\x1a\x41google/ads/googleads_v0/proto/errors/function_parsing_error.proto\x1a\x37google/ads/googleads_v0/proto/errors/header_error.proto\x1a\x33google/ads/googleads_v0/proto/errors/id_error.proto\x1a\x36google/ads/googleads_v0/proto/errors/image_error.proto\x1a\x39google/ads/googleads_v0/proto/errors/internal_error.proto\x1a?google/ads/googleads_v0/proto/errors/list_operation_error.proto\x1a=google/ads/googleads_v0/proto/errors/media_bundle_error.proto\x1a\x36google/ads/googleads_v0/proto/errors/media_error.proto\x1a;google/ads/googleads_v0/proto/errors/multiplier_error.proto\x1a\x37google/ads/googleads_v0/proto/errors/mutate_error.proto\x1a\x46google/ads/googleads_v0/proto/errors/new_resource_creation_error.proto\x1a:google/ads/googleads_v0/proto/errors/not_empty_error.proto\x1a\x35google/ads/googleads_v0/proto/errors/null_error.proto\x1aHgoogle/ads/googleads_v0/proto/errors/operation_access_denied_error.proto\x1a\x39google/ads/googleads_v0/proto/errors/operator_error.proto\x1a?google/ads/googleads_v0/proto/errors/policy_finding_error.proto\x1a\x36google/ads/googleads_v0/proto/errors/query_error.proto\x1a\x36google/ads/googleads_v0/proto/errors/quota_error.proto\x1a\x36google/ads/googleads_v0/proto/errors/range_error.proto\x1a?google/ads/googleads_v0/proto/errors/recommendation_error.proto\x1a<google/ads/googleads_v0/proto/errors/region_code_error.proto\x1a\x38google/ads/googleads_v0/proto/errors/request_error.proto\x1aGgoogle/ads/googleads_v0/proto/errors/resource_access_denied_error.proto\x1aNgoogle/ads/googleads_v0/proto/errors/resource_count_limit_exceeded_error.proto\x1a\x38google/ads/googleads_v0/proto/errors/setting_error.proto\x1a\x41google/ads/googleads_v0/proto/errors/shared_criterion_error.proto\x1a;google/ads/googleads_v0/proto/errors/shared_set_error.proto\x1a>google/ads/googleads_v0/proto/errors/string_format_error.proto\x1a>google/ads/googleads_v0/proto/errors/string_length_error.proto\x1a:google/ads/googleads_v0/proto/errors/url_field_error.proto\x1a\x1egoogle/protobuf/wrappers.proto\"R\n\x10GoogleAdsFailure\x12>\n\x06\x65rrors\x18\x01 \x03(\x0b\x32..google.ads.googleads.v0.errors.GoogleAdsError\"\x98\x02\n\x0eGoogleAdsError\x12=\n\nerror_code\x18\x01 \x01(\x0b\x32).google.ads.googleads.v0.errors.ErrorCode\x12\x0f\n\x07message\x18\x02 \x01(\t\x12\x36\n\x07trigger\x18\x03 \x01(\x0b\x32%.google.ads.googleads.v0.common.Value\x12?\n\x08location\x18\x04 \x01(\x0b\x32-.google.ads.googleads.v0.errors.ErrorLocation\x12=\n\x07\x64\x65tails\x18\x05 \x01(\x0b\x32,.google.ads.googleads.v0.errors.ErrorDetails\"\xbd\x30\n\tErrorCode\x12V\n\rrequest_error\x18\x01 \x01(\x0e\x32=.google.ads.googleads.v0.errors.RequestErrorEnum.RequestErrorH\x00\x12o\n\x16\x62idding_strategy_error\x18\x02 \x01(\x0e\x32M.google.ads.googleads.v0.errors.BiddingStrategyErrorEnum.BiddingStrategyErrorH\x00\x12Z\n\x0furl_field_error\x18\x03 \x01(\x0e\x32?.google.ads.googleads.v0.errors.UrlFieldErrorEnum.UrlFieldErrorH\x00\x12i\n\x14list_operation_error\x18\x04 \x01(\x0e\x32I.google.ads.googleads.v0.errors.ListOperationErrorEnum.ListOperationErrorH\x00\x12P\n\x0bquery_error\x18\x05 \x01(\x0e\x32\x39.google.ads.googleads.v0.errors.QueryErrorEnum.QueryErrorH\x00\x12S\n\x0cmutate_error\x18\x07 \x01(\x0e\x32;.google.ads.googleads.v0.errors.MutateErrorEnum.MutateErrorH\x00\x12]\n\x10\x66ield_mask_error\x18\x08 \x01(\x0e\x32\x41.google.ads.googleads.v0.errors.FieldMaskErrorEnum.FieldMaskErrorH\x00\x12h\n\x13\x61uthorization_error\x18\t \x01(\x0e\x32I.google.ads.googleads.v0.errors.AuthorizationErrorEnum.AuthorizationErrorH\x00\x12Y\n\x0einternal_error\x18\n \x01(\x0e\x32?.google.ads.googleads.v0.errors.InternalErrorEnum.InternalErrorH\x00\x12P\n\x0bquota_error\x18\x0b \x01(\x0e\x32\x39.google.ads.googleads.v0.errors.QuotaErrorEnum.QuotaErrorH\x00\x12G\n\x08\x61\x64_error\x18\x0c \x01(\x0e\x32\x33.google.ads.googleads.v0.errors.AdErrorEnum.AdErrorH\x00\x12W\n\x0e\x61\x64_group_error\x18\r \x01(\x0e\x32=.google.ads.googleads.v0.errors.AdGroupErrorEnum.AdGroupErrorH\x00\x12l\n\x15\x63\x61mpaign_budget_error\x18\x0e \x01(\x0e\x32K.google.ads.googleads.v0.errors.CampaignBudgetErrorEnum.CampaignBudgetErrorH\x00\x12Y\n\x0e\x63\x61mpaign_error\x18\x0f \x01(\x0e\x32?.google.ads.googleads.v0.errors.CampaignErrorEnum.CampaignErrorH\x00\x12k\n\x14\x61uthentication_error\x18\x11 \x01(\x0e\x32K.google.ads.googleads.v0.errors.AuthenticationErrorEnum.AuthenticationErrorH\x00\x12s\n\x18\x61\x64_group_criterion_error\x18\x12 \x01(\x0e\x32O.google.ads.googleads.v0.errors.AdGroupCriterionErrorEnum.AdGroupCriterionErrorH\x00\x12\x66\n\x13\x61\x64_customizer_error\x18\x13 \x01(\x0e\x32G.google.ads.googleads.v0.errors.AdCustomizerErrorEnum.AdCustomizerErrorH\x00\x12^\n\x11\x61\x64_group_ad_error\x18\x15 \x01(\x0e\x32\x41.google.ads.googleads.v0.errors.AdGroupAdErrorEnum.AdGroupAdErrorH\x00\x12]\n\x10\x61\x64_sharing_error\x18\x18 \x01(\x0e\x32\x41.google.ads.googleads.v0.errors.AdSharingErrorEnum.AdSharingErrorH\x00\x12J\n\tadx_error\x18\x19 \x01(\x0e\x32\x35.google.ads.googleads.v0.errors.AdxErrorEnum.AdxErrorH\x00\x12V\n\rbidding_error\x18\x1a \x01(\x0e\x32=.google.ads.googleads.v0.errors.BiddingErrorEnum.BiddingErrorH\x00\x12u\n\x18\x63\x61mpaign_criterion_error\x18\x1d \x01(\x0e\x32Q.google.ads.googleads.v0.errors.CampaignCriterionErrorEnum.CampaignCriterionErrorH\x00\x12l\n\x15\x63ollection_size_error\x18\x1f \x01(\x0e\x32K.google.ads.googleads.v0.errors.CollectionSizeErrorEnum.CollectionSizeErrorH\x00\x12\\\n\x0f\x63riterion_error\x18  \x01(\x0e\x32\x41.google.ads.googleads.v0.errors.CriterionErrorEnum.CriterionErrorH\x00\x12M\n\ndate_error\x18! \x01(\x0e\x32\x37.google.ads.googleads.v0.errors.DateErrorEnum.DateErrorH\x00\x12]\n\x10\x64\x61te_range_error\x18\" \x01(\x0e\x32\x41.google.ads.googleads.v0.errors.DateRangeErrorEnum.DateRangeErrorH\x00\x12Y\n\x0e\x64istinct_error\x18# \x01(\x0e\x32?.google.ads.googleads.v0.errors.DistinctErrorEnum.DistinctErrorH\x00\x12\x85\x01\n\x1e\x66\x65\x65\x64_attribute_reference_error\x18$ \x01(\x0e\x32[.google.ads.googleads.v0.errors.FeedAttributeReferenceErrorEnum.FeedAttributeReferenceErrorH\x00\x12Y\n\x0e\x66unction_error\x18% \x01(\x0e\x32?.google.ads.googleads.v0.errors.FunctionErrorEnum.FunctionErrorH\x00\x12o\n\x16\x66unction_parsing_error\x18& \x01(\x0e\x32M.google.ads.googleads.v0.errors.FunctionParsingErrorEnum.FunctionParsingErrorH\x00\x12G\n\x08id_error\x18\' \x01(\x0e\x32\x33.google.ads.googleads.v0.errors.IdErrorEnum.IdErrorH\x00\x12P\n\x0bimage_error\x18( \x01(\x0e\x32\x39.google.ads.googleads.v0.errors.ImageErrorEnum.ImageErrorH\x00\x12\x63\n\x12media_bundle_error\x18* \x01(\x0e\x32\x45.google.ads.googleads.v0.errors.MediaBundleErrorEnum.MediaBundleErrorH\x00\x12P\n\x0bmedia_error\x18+ \x01(\x0e\x32\x39.google.ads.googleads.v0.errors.MediaErrorEnum.MediaErrorH\x00\x12_\n\x10multiplier_error\x18, \x01(\x0e\x32\x43.google.ads.googleads.v0.errors.MultiplierErrorEnum.MultiplierErrorH\x00\x12|\n\x1bnew_resource_creation_error\x18- \x01(\x0e\x32U.google.ads.googleads.v0.errors.NewResourceCreationErrorEnum.NewResourceCreationErrorH\x00\x12Z\n\x0fnot_empty_error\x18. \x01(\x0e\x32?.google.ads.googleads.v0.errors.NotEmptyErrorEnum.NotEmptyErrorH\x00\x12M\n\nnull_error\x18/ \x01(\x0e\x32\x37.google.ads.googleads.v0.errors.NullErrorEnum.NullErrorH\x00\x12Y\n\x0eoperator_error\x18\x30 \x01(\x0e\x32?.google.ads.googleads.v0.errors.OperatorErrorEnum.OperatorErrorH\x00\x12P\n\x0brange_error\x18\x31 \x01(\x0e\x32\x39.google.ads.googleads.v0.errors.RangeErrorEnum.RangeErrorH\x00\x12k\n\x14recommendation_error\x18: \x01(\x0e\x32K.google.ads.googleads.v0.errors.RecommendationErrorEnum.RecommendationErrorH\x00\x12`\n\x11region_code_error\x18\x33 \x01(\x0e\x32\x43.google.ads.googleads.v0.errors.RegionCodeErrorEnum.RegionCodeErrorH\x00\x12V\n\rsetting_error\x18\x34 \x01(\x0e\x32=.google.ads.googleads.v0.errors.SettingErrorEnum.SettingErrorH\x00\x12\x66\n\x13string_format_error\x18\x35 \x01(\x0e\x32G.google.ads.googleads.v0.errors.StringFormatErrorEnum.StringFormatErrorH\x00\x12\x66\n\x13string_length_error\x18\x36 \x01(\x0e\x32G.google.ads.googleads.v0.errors.StringLengthErrorEnum.StringLengthErrorH\x00\x12\x82\x01\n\x1doperation_access_denied_error\x18\x37 \x01(\x0e\x32Y.google.ads.googleads.v0.errors.OperationAccessDeniedErrorEnum.OperationAccessDeniedErrorH\x00\x12\x7f\n\x1cresource_access_denied_error\x18\x38 \x01(\x0e\x32W.google.ads.googleads.v0.errors.ResourceAccessDeniedErrorEnum.ResourceAccessDeniedErrorH\x00\x12\x92\x01\n#resource_count_limit_exceeded_error\x18\x39 \x01(\x0e\x32\x63.google.ads.googleads.v0.errors.ResourceCountLimitExceededErrorEnum.ResourceCountLimitExceededErrorH\x00\x12z\n\x1b\x61\x64_group_bid_modifier_error\x18; \x01(\x0e\x32S.google.ads.googleads.v0.errors.AdGroupBidModifierErrorEnum.AdGroupBidModifierErrorH\x00\x12V\n\rcontext_error\x18< \x01(\x0e\x32=.google.ads.googleads.v0.errors.ContextErrorEnum.ContextErrorH\x00\x12P\n\x0b\x66ield_error\x18= \x01(\x0e\x32\x39.google.ads.googleads.v0.errors.FieldErrorEnum.FieldErrorH\x00\x12]\n\x10shared_set_error\x18> \x01(\x0e\x32\x41.google.ads.googleads.v0.errors.SharedSetErrorEnum.SharedSetErrorH\x00\x12o\n\x16shared_criterion_error\x18? \x01(\x0e\x32M.google.ads.googleads.v0.errors.SharedCriterionErrorEnum.SharedCriterionErrorH\x00\x12v\n\x19\x63\x61mpaign_shared_set_error\x18@ \x01(\x0e\x32Q.google.ads.googleads.v0.errors.CampaignSharedSetErrorEnum.CampaignSharedSetErrorH\x00\x12r\n\x17\x63onversion_action_error\x18\x41 \x01(\x0e\x32O.google.ads.googleads.v0.errors.ConversionActionErrorEnum.ConversionActionErrorH\x00\x12S\n\x0cheader_error\x18\x42 \x01(\x0e\x32;.google.ads.googleads.v0.errors.HeaderErrorEnum.HeaderErrorH\x00\x12Y\n\x0e\x64\x61tabase_error\x18\x43 \x01(\x0e\x32?.google.ads.googleads.v0.errors.DatabaseErrorEnum.DatabaseErrorH\x00\x12i\n\x14policy_finding_error\x18\x44 \x01(\x0e\x32I.google.ads.googleads.v0.errors.PolicyFindingErrorEnum.PolicyFindingErrorH\x00\x12i\n\x14\x63\x61mpaign_group_error\x18\x45 \x01(\x0e\x32I.google.ads.googleads.v0.errors.CampaignGroupErrorEnum.CampaignGroupErrorH\x00\x12M\n\nenum_error\x18\x46 \x01(\x0e\x32\x37.google.ads.googleads.v0.errors.EnumErrorEnum.EnumErrorH\x00\x12\x82\x01\n\x1d\x61\x63\x63ount_budget_proposal_error\x18M \x01(\x0e\x32Y.google.ads.googleads.v0.errors.AccountBudgetProposalErrorEnum.AccountBudgetProposalErrorH\x00\x12\x66\n\x13\x63hange_status_error\x18O \x01(\x0e\x32G.google.ads.googleads.v0.errors.ChangeStatusErrorEnum.ChangeStatusErrorH\x00\x42\x0c\n\nerror_code\"\xf6\x01\n\rErrorLocation\x12\x34\n\x0foperation_index\x18\x01 \x01(\x0b\x32\x1b.google.protobuf.Int64Value\x12[\n\x13\x66ield_path_elements\x18\x02 \x03(\x0b\x32>.google.ads.googleads.v0.errors.ErrorLocation.FieldPathElement\x1aR\n\x10\x46ieldPathElement\x12\x12\n\nfield_name\x18\x01 \x01(\t\x12*\n\x05index\x18\x02 \x01(\x0b\x32\x1b.google.protobuf.Int64Value\"\xde\x01\n\x0c\x45rrorDetails\x12\x1e\n\x16unpublished_error_code\x18\x01 \x01(\t\x12X\n\x18policy_violation_details\x18\x02 \x01(\x0b\x32\x36.google.ads.googleads.v0.errors.PolicyViolationDetails\x12T\n\x16policy_finding_details\x18\x03 \x01(\x0b\x32\x34.google.ads.googleads.v0.errors.PolicyFindingDetails\"\xb3\x01\n\x16PolicyViolationDetails\x12#\n\x1b\x65xternal_policy_description\x18\x02 \x01(\t\x12?\n\x03key\x18\x04 \x01(\x0b\x32\x32.google.ads.googleads.v0.common.PolicyViolationKey\x12\x1c\n\x14\x65xternal_policy_name\x18\x05 \x01(\t\x12\x15\n\ris_exemptible\x18\x06 \x01(\x08\"f\n\x14PolicyFindingDetails\x12N\n\x14policy_topic_entries\x18\x01 \x03(\x0b\x32\x30.google.ads.googleads.v0.common.PolicyTopicEntryB\xc1\x01\n\"com.google.ads.googleads.v0.errorsB\x0b\x45rrorsProtoP\x01ZDgoogle.golang.org/genproto/googleapis/ads/googleads/v0/errors;errors\xa2\x02\x03GAA\xaa\x02\x1eGoogle.Ads.GoogleAds.V0.Errors\xca\x02\x1eGoogle\\Ads\\GoogleAds\\V0\\Errorsb\x06proto3')
+  serialized_pb=_b('\n1google/ads/googleads_v0/proto/errors/errors.proto\x12\x1egoogle.ads.googleads.v0.errors\x1a\x31google/ads/googleads_v0/proto/common/policy.proto\x1a\x30google/ads/googleads_v0/proto/common/value.proto\x1aHgoogle/ads/googleads_v0/proto/errors/account_budget_proposal_error.proto\x1a>google/ads/googleads_v0/proto/errors/ad_customizer_error.proto\x1a\x33google/ads/googleads_v0/proto/errors/ad_error.proto\x1a<google/ads/googleads_v0/proto/errors/ad_group_ad_error.proto\x1a\x46google/ads/googleads_v0/proto/errors/ad_group_bid_modifier_error.proto\x1a\x43google/ads/googleads_v0/proto/errors/ad_group_criterion_error.proto\x1a\x39google/ads/googleads_v0/proto/errors/ad_group_error.proto\x1a;google/ads/googleads_v0/proto/errors/ad_sharing_error.proto\x1a\x34google/ads/googleads_v0/proto/errors/adx_error.proto\x1a?google/ads/googleads_v0/proto/errors/authentication_error.proto\x1a>google/ads/googleads_v0/proto/errors/authorization_error.proto\x1a\x38google/ads/googleads_v0/proto/errors/bidding_error.proto\x1a\x41google/ads/googleads_v0/proto/errors/bidding_strategy_error.proto\x1a>google/ads/googleads_v0/proto/errors/billing_setup_error.proto\x1a@google/ads/googleads_v0/proto/errors/campaign_budget_error.proto\x1a\x43google/ads/googleads_v0/proto/errors/campaign_criterion_error.proto\x1a\x39google/ads/googleads_v0/proto/errors/campaign_error.proto\x1a?google/ads/googleads_v0/proto/errors/campaign_group_error.proto\x1a\x44google/ads/googleads_v0/proto/errors/campaign_shared_set_error.proto\x1a>google/ads/googleads_v0/proto/errors/change_status_error.proto\x1a@google/ads/googleads_v0/proto/errors/collection_size_error.proto\x1a\x38google/ads/googleads_v0/proto/errors/context_error.proto\x1a\x42google/ads/googleads_v0/proto/errors/conversion_action_error.proto\x1a:google/ads/googleads_v0/proto/errors/criterion_error.proto\x1a\x45google/ads/googleads_v0/proto/errors/customer_client_link_error.proto\x1a\x39google/ads/googleads_v0/proto/errors/customer_error.proto\x1a\x46google/ads/googleads_v0/proto/errors/customer_manager_link_error.proto\x1a\x39google/ads/googleads_v0/proto/errors/database_error.proto\x1a\x35google/ads/googleads_v0/proto/errors/date_error.proto\x1a;google/ads/googleads_v0/proto/errors/date_range_error.proto\x1a\x39google/ads/googleads_v0/proto/errors/distinct_error.proto\x1a\x35google/ads/googleads_v0/proto/errors/enum_error.proto\x1aIgoogle/ads/googleads_v0/proto/errors/feed_attribute_reference_error.proto\x1a\x36google/ads/googleads_v0/proto/errors/field_error.proto\x1a;google/ads/googleads_v0/proto/errors/field_mask_error.proto\x1a\x39google/ads/googleads_v0/proto/errors/function_error.proto\x1a\x41google/ads/googleads_v0/proto/errors/function_parsing_error.proto\x1aOgoogle/ads/googleads_v0/proto/errors/geo_target_constant_suggestion_error.proto\x1a\x37google/ads/googleads_v0/proto/errors/header_error.proto\x1a\x33google/ads/googleads_v0/proto/errors/id_error.proto\x1a\x36google/ads/googleads_v0/proto/errors/image_error.proto\x1a\x39google/ads/googleads_v0/proto/errors/internal_error.proto\x1a?google/ads/googleads_v0/proto/errors/list_operation_error.proto\x1a=google/ads/googleads_v0/proto/errors/media_bundle_error.proto\x1a;google/ads/googleads_v0/proto/errors/media_file_error.proto\x1a;google/ads/googleads_v0/proto/errors/multiplier_error.proto\x1a\x37google/ads/googleads_v0/proto/errors/mutate_error.proto\x1a\x46google/ads/googleads_v0/proto/errors/new_resource_creation_error.proto\x1a:google/ads/googleads_v0/proto/errors/not_empty_error.proto\x1a\x35google/ads/googleads_v0/proto/errors/null_error.proto\x1aHgoogle/ads/googleads_v0/proto/errors/operation_access_denied_error.proto\x1a\x39google/ads/googleads_v0/proto/errors/operator_error.proto\x1a?google/ads/googleads_v0/proto/errors/policy_finding_error.proto\x1a\x36google/ads/googleads_v0/proto/errors/query_error.proto\x1a\x36google/ads/googleads_v0/proto/errors/quota_error.proto\x1a\x36google/ads/googleads_v0/proto/errors/range_error.proto\x1a?google/ads/googleads_v0/proto/errors/recommendation_error.proto\x1a<google/ads/googleads_v0/proto/errors/region_code_error.proto\x1a\x38google/ads/googleads_v0/proto/errors/request_error.proto\x1aGgoogle/ads/googleads_v0/proto/errors/resource_access_denied_error.proto\x1aNgoogle/ads/googleads_v0/proto/errors/resource_count_limit_exceeded_error.proto\x1a\x38google/ads/googleads_v0/proto/errors/setting_error.proto\x1a\x41google/ads/googleads_v0/proto/errors/shared_criterion_error.proto\x1a;google/ads/googleads_v0/proto/errors/shared_set_error.proto\x1a>google/ads/googleads_v0/proto/errors/string_format_error.proto\x1a>google/ads/googleads_v0/proto/errors/string_length_error.proto\x1a:google/ads/googleads_v0/proto/errors/url_field_error.proto\x1a\x1egoogle/protobuf/wrappers.proto\"R\n\x10GoogleAdsFailure\x12>\n\x06\x65rrors\x18\x01 \x03(\x0b\x32..google.ads.googleads.v0.errors.GoogleAdsError\"\x98\x02\n\x0eGoogleAdsError\x12=\n\nerror_code\x18\x01 \x01(\x0b\x32).google.ads.googleads.v0.errors.ErrorCode\x12\x0f\n\x07message\x18\x02 \x01(\t\x12\x36\n\x07trigger\x18\x03 \x01(\x0b\x32%.google.ads.googleads.v0.common.Value\x12?\n\x08location\x18\x04 \x01(\x0b\x32-.google.ads.googleads.v0.errors.ErrorLocation\x12=\n\x07\x64\x65tails\x18\x05 \x01(\x0b\x32,.google.ads.googleads.v0.errors.ErrorDetails\"\x9e\x35\n\tErrorCode\x12V\n\rrequest_error\x18\x01 \x01(\x0e\x32=.google.ads.googleads.v0.errors.RequestErrorEnum.RequestErrorH\x00\x12o\n\x16\x62idding_strategy_error\x18\x02 \x01(\x0e\x32M.google.ads.googleads.v0.errors.BiddingStrategyErrorEnum.BiddingStrategyErrorH\x00\x12Z\n\x0furl_field_error\x18\x03 \x01(\x0e\x32?.google.ads.googleads.v0.errors.UrlFieldErrorEnum.UrlFieldErrorH\x00\x12i\n\x14list_operation_error\x18\x04 \x01(\x0e\x32I.google.ads.googleads.v0.errors.ListOperationErrorEnum.ListOperationErrorH\x00\x12P\n\x0bquery_error\x18\x05 \x01(\x0e\x32\x39.google.ads.googleads.v0.errors.QueryErrorEnum.QueryErrorH\x00\x12S\n\x0cmutate_error\x18\x07 \x01(\x0e\x32;.google.ads.googleads.v0.errors.MutateErrorEnum.MutateErrorH\x00\x12]\n\x10\x66ield_mask_error\x18\x08 \x01(\x0e\x32\x41.google.ads.googleads.v0.errors.FieldMaskErrorEnum.FieldMaskErrorH\x00\x12h\n\x13\x61uthorization_error\x18\t \x01(\x0e\x32I.google.ads.googleads.v0.errors.AuthorizationErrorEnum.AuthorizationErrorH\x00\x12Y\n\x0einternal_error\x18\n \x01(\x0e\x32?.google.ads.googleads.v0.errors.InternalErrorEnum.InternalErrorH\x00\x12P\n\x0bquota_error\x18\x0b \x01(\x0e\x32\x39.google.ads.googleads.v0.errors.QuotaErrorEnum.QuotaErrorH\x00\x12G\n\x08\x61\x64_error\x18\x0c \x01(\x0e\x32\x33.google.ads.googleads.v0.errors.AdErrorEnum.AdErrorH\x00\x12W\n\x0e\x61\x64_group_error\x18\r \x01(\x0e\x32=.google.ads.googleads.v0.errors.AdGroupErrorEnum.AdGroupErrorH\x00\x12l\n\x15\x63\x61mpaign_budget_error\x18\x0e \x01(\x0e\x32K.google.ads.googleads.v0.errors.CampaignBudgetErrorEnum.CampaignBudgetErrorH\x00\x12Y\n\x0e\x63\x61mpaign_error\x18\x0f \x01(\x0e\x32?.google.ads.googleads.v0.errors.CampaignErrorEnum.CampaignErrorH\x00\x12k\n\x14\x61uthentication_error\x18\x11 \x01(\x0e\x32K.google.ads.googleads.v0.errors.AuthenticationErrorEnum.AuthenticationErrorH\x00\x12s\n\x18\x61\x64_group_criterion_error\x18\x12 \x01(\x0e\x32O.google.ads.googleads.v0.errors.AdGroupCriterionErrorEnum.AdGroupCriterionErrorH\x00\x12\x66\n\x13\x61\x64_customizer_error\x18\x13 \x01(\x0e\x32G.google.ads.googleads.v0.errors.AdCustomizerErrorEnum.AdCustomizerErrorH\x00\x12^\n\x11\x61\x64_group_ad_error\x18\x15 \x01(\x0e\x32\x41.google.ads.googleads.v0.errors.AdGroupAdErrorEnum.AdGroupAdErrorH\x00\x12]\n\x10\x61\x64_sharing_error\x18\x18 \x01(\x0e\x32\x41.google.ads.googleads.v0.errors.AdSharingErrorEnum.AdSharingErrorH\x00\x12J\n\tadx_error\x18\x19 \x01(\x0e\x32\x35.google.ads.googleads.v0.errors.AdxErrorEnum.AdxErrorH\x00\x12V\n\rbidding_error\x18\x1a \x01(\x0e\x32=.google.ads.googleads.v0.errors.BiddingErrorEnum.BiddingErrorH\x00\x12u\n\x18\x63\x61mpaign_criterion_error\x18\x1d \x01(\x0e\x32Q.google.ads.googleads.v0.errors.CampaignCriterionErrorEnum.CampaignCriterionErrorH\x00\x12l\n\x15\x63ollection_size_error\x18\x1f \x01(\x0e\x32K.google.ads.googleads.v0.errors.CollectionSizeErrorEnum.CollectionSizeErrorH\x00\x12\\\n\x0f\x63riterion_error\x18  \x01(\x0e\x32\x41.google.ads.googleads.v0.errors.CriterionErrorEnum.CriterionErrorH\x00\x12Y\n\x0e\x63ustomer_error\x18Z \x01(\x0e\x32?.google.ads.googleads.v0.errors.CustomerErrorEnum.CustomerErrorH\x00\x12M\n\ndate_error\x18! \x01(\x0e\x32\x37.google.ads.googleads.v0.errors.DateErrorEnum.DateErrorH\x00\x12]\n\x10\x64\x61te_range_error\x18\" \x01(\x0e\x32\x41.google.ads.googleads.v0.errors.DateRangeErrorEnum.DateRangeErrorH\x00\x12Y\n\x0e\x64istinct_error\x18# \x01(\x0e\x32?.google.ads.googleads.v0.errors.DistinctErrorEnum.DistinctErrorH\x00\x12\x85\x01\n\x1e\x66\x65\x65\x64_attribute_reference_error\x18$ \x01(\x0e\x32[.google.ads.googleads.v0.errors.FeedAttributeReferenceErrorEnum.FeedAttributeReferenceErrorH\x00\x12Y\n\x0e\x66unction_error\x18% \x01(\x0e\x32?.google.ads.googleads.v0.errors.FunctionErrorEnum.FunctionErrorH\x00\x12o\n\x16\x66unction_parsing_error\x18& \x01(\x0e\x32M.google.ads.googleads.v0.errors.FunctionParsingErrorEnum.FunctionParsingErrorH\x00\x12G\n\x08id_error\x18\' \x01(\x0e\x32\x33.google.ads.googleads.v0.errors.IdErrorEnum.IdErrorH\x00\x12P\n\x0bimage_error\x18( \x01(\x0e\x32\x39.google.ads.googleads.v0.errors.ImageErrorEnum.ImageErrorH\x00\x12\x63\n\x12media_bundle_error\x18* \x01(\x0e\x32\x45.google.ads.googleads.v0.errors.MediaBundleErrorEnum.MediaBundleErrorH\x00\x12]\n\x10media_file_error\x18V \x01(\x0e\x32\x41.google.ads.googleads.v0.errors.MediaFileErrorEnum.MediaFileErrorH\x00\x12_\n\x10multiplier_error\x18, \x01(\x0e\x32\x43.google.ads.googleads.v0.errors.MultiplierErrorEnum.MultiplierErrorH\x00\x12|\n\x1bnew_resource_creation_error\x18- \x01(\x0e\x32U.google.ads.googleads.v0.errors.NewResourceCreationErrorEnum.NewResourceCreationErrorH\x00\x12Z\n\x0fnot_empty_error\x18. \x01(\x0e\x32?.google.ads.googleads.v0.errors.NotEmptyErrorEnum.NotEmptyErrorH\x00\x12M\n\nnull_error\x18/ \x01(\x0e\x32\x37.google.ads.googleads.v0.errors.NullErrorEnum.NullErrorH\x00\x12Y\n\x0eoperator_error\x18\x30 \x01(\x0e\x32?.google.ads.googleads.v0.errors.OperatorErrorEnum.OperatorErrorH\x00\x12P\n\x0brange_error\x18\x31 \x01(\x0e\x32\x39.google.ads.googleads.v0.errors.RangeErrorEnum.RangeErrorH\x00\x12k\n\x14recommendation_error\x18: \x01(\x0e\x32K.google.ads.googleads.v0.errors.RecommendationErrorEnum.RecommendationErrorH\x00\x12`\n\x11region_code_error\x18\x33 \x01(\x0e\x32\x43.google.ads.googleads.v0.errors.RegionCodeErrorEnum.RegionCodeErrorH\x00\x12V\n\rsetting_error\x18\x34 \x01(\x0e\x32=.google.ads.googleads.v0.errors.SettingErrorEnum.SettingErrorH\x00\x12\x66\n\x13string_format_error\x18\x35 \x01(\x0e\x32G.google.ads.googleads.v0.errors.StringFormatErrorEnum.StringFormatErrorH\x00\x12\x66\n\x13string_length_error\x18\x36 \x01(\x0e\x32G.google.ads.googleads.v0.errors.StringLengthErrorEnum.StringLengthErrorH\x00\x12\x82\x01\n\x1doperation_access_denied_error\x18\x37 \x01(\x0e\x32Y.google.ads.googleads.v0.errors.OperationAccessDeniedErrorEnum.OperationAccessDeniedErrorH\x00\x12\x7f\n\x1cresource_access_denied_error\x18\x38 \x01(\x0e\x32W.google.ads.googleads.v0.errors.ResourceAccessDeniedErrorEnum.ResourceAccessDeniedErrorH\x00\x12\x92\x01\n#resource_count_limit_exceeded_error\x18\x39 \x01(\x0e\x32\x63.google.ads.googleads.v0.errors.ResourceCountLimitExceededErrorEnum.ResourceCountLimitExceededErrorH\x00\x12z\n\x1b\x61\x64_group_bid_modifier_error\x18; \x01(\x0e\x32S.google.ads.googleads.v0.errors.AdGroupBidModifierErrorEnum.AdGroupBidModifierErrorH\x00\x12V\n\rcontext_error\x18< \x01(\x0e\x32=.google.ads.googleads.v0.errors.ContextErrorEnum.ContextErrorH\x00\x12P\n\x0b\x66ield_error\x18= \x01(\x0e\x32\x39.google.ads.googleads.v0.errors.FieldErrorEnum.FieldErrorH\x00\x12]\n\x10shared_set_error\x18> \x01(\x0e\x32\x41.google.ads.googleads.v0.errors.SharedSetErrorEnum.SharedSetErrorH\x00\x12o\n\x16shared_criterion_error\x18? \x01(\x0e\x32M.google.ads.googleads.v0.errors.SharedCriterionErrorEnum.SharedCriterionErrorH\x00\x12v\n\x19\x63\x61mpaign_shared_set_error\x18@ \x01(\x0e\x32Q.google.ads.googleads.v0.errors.CampaignSharedSetErrorEnum.CampaignSharedSetErrorH\x00\x12r\n\x17\x63onversion_action_error\x18\x41 \x01(\x0e\x32O.google.ads.googleads.v0.errors.ConversionActionErrorEnum.ConversionActionErrorH\x00\x12S\n\x0cheader_error\x18\x42 \x01(\x0e\x32;.google.ads.googleads.v0.errors.HeaderErrorEnum.HeaderErrorH\x00\x12Y\n\x0e\x64\x61tabase_error\x18\x43 \x01(\x0e\x32?.google.ads.googleads.v0.errors.DatabaseErrorEnum.DatabaseErrorH\x00\x12i\n\x14policy_finding_error\x18\x44 \x01(\x0e\x32I.google.ads.googleads.v0.errors.PolicyFindingErrorEnum.PolicyFindingErrorH\x00\x12i\n\x14\x63\x61mpaign_group_error\x18\x45 \x01(\x0e\x32I.google.ads.googleads.v0.errors.CampaignGroupErrorEnum.CampaignGroupErrorH\x00\x12M\n\nenum_error\x18\x46 \x01(\x0e\x32\x37.google.ads.googleads.v0.errors.EnumErrorEnum.EnumErrorH\x00\x12\x82\x01\n\x1d\x61\x63\x63ount_budget_proposal_error\x18M \x01(\x0e\x32Y.google.ads.googleads.v0.errors.AccountBudgetProposalErrorEnum.AccountBudgetProposalErrorH\x00\x12\x66\n\x13\x63hange_status_error\x18O \x01(\x0e\x32G.google.ads.googleads.v0.errors.ChangeStatusErrorEnum.ChangeStatusErrorH\x00\x12\x95\x01\n$geo_target_constant_suggestion_error\x18Q \x01(\x0e\x32\x65.google.ads.googleads.v0.errors.GeoTargetConstantSuggestionErrorEnum.GeoTargetConstantSuggestionErrorH\x00\x12\x66\n\x13\x62illing_setup_error\x18W \x01(\x0e\x32G.google.ads.googleads.v0.errors.BillingSetupErrorEnum.BillingSetupErrorH\x00\x12y\n\x1a\x63ustomer_client_link_error\x18X \x01(\x0e\x32S.google.ads.googleads.v0.errors.CustomerClientLinkErrorEnum.CustomerClientLinkErrorH\x00\x12|\n\x1b\x63ustomer_manager_link_error\x18[ \x01(\x0e\x32U.google.ads.googleads.v0.errors.CustomerManagerLinkErrorEnum.CustomerManagerLinkErrorH\x00\x42\x0c\n\nerror_code\"\xf6\x01\n\rErrorLocation\x12\x34\n\x0foperation_index\x18\x01 \x01(\x0b\x32\x1b.google.protobuf.Int64Value\x12[\n\x13\x66ield_path_elements\x18\x02 \x03(\x0b\x32>.google.ads.googleads.v0.errors.ErrorLocation.FieldPathElement\x1aR\n\x10\x46ieldPathElement\x12\x12\n\nfield_name\x18\x01 \x01(\t\x12*\n\x05index\x18\x02 \x01(\x0b\x32\x1b.google.protobuf.Int64Value\"\xde\x01\n\x0c\x45rrorDetails\x12\x1e\n\x16unpublished_error_code\x18\x01 \x01(\t\x12X\n\x18policy_violation_details\x18\x02 \x01(\x0b\x32\x36.google.ads.googleads.v0.errors.PolicyViolationDetails\x12T\n\x16policy_finding_details\x18\x03 \x01(\x0b\x32\x34.google.ads.googleads.v0.errors.PolicyFindingDetails\"\xb3\x01\n\x16PolicyViolationDetails\x12#\n\x1b\x65xternal_policy_description\x18\x02 \x01(\t\x12?\n\x03key\x18\x04 \x01(\x0b\x32\x32.google.ads.googleads.v0.common.PolicyViolationKey\x12\x1c\n\x14\x65xternal_policy_name\x18\x05 \x01(\t\x12\x15\n\ris_exemptible\x18\x06 \x01(\x08\"f\n\x14PolicyFindingDetails\x12N\n\x14policy_topic_entries\x18\x01 \x03(\x0b\x32\x30.google.ads.googleads.v0.common.PolicyTopicEntryB\xc1\x01\n\"com.google.ads.googleads.v0.errorsB\x0b\x45rrorsProtoP\x01ZDgoogle.golang.org/genproto/googleapis/ads/googleads/v0/errors;errors\xa2\x02\x03GAA\xaa\x02\x1eGoogle.Ads.GoogleAds.V0.Errors\xca\x02\x1eGoogle\\Ads\\GoogleAds\\V0\\Errorsb\x06proto3')
   ,
-  dependencies=[google_dot_ads_dot_googleads__v0_dot_proto_dot_common_dot_policy__pb2.DESCRIPTOR,google_dot_ads_dot_googleads__v0_dot_proto_dot_common_dot_value__pb2.DESCRIPTOR,google_dot_ads_dot_googleads__v0_dot_proto_dot_errors_dot_account__budget__proposal__error__pb2.DESCRIPTOR,google_dot_ads_dot_googleads__v0_dot_proto_dot_errors_dot_ad__customizer__error__pb2.DESCRIPTOR,google_dot_ads_dot_googleads__v0_dot_proto_dot_errors_dot_ad__error__pb2.DESCRIPTOR,google_dot_ads_dot_googleads__v0_dot_proto_dot_errors_dot_ad__group__ad__error__pb2.DESCRIPTOR,google_dot_ads_dot_googleads__v0_dot_proto_dot_errors_dot_ad__group__bid__modifier__error__pb2.DESCRIPTOR,google_dot_ads_dot_googleads__v0_dot_proto_dot_errors_dot_ad__group__criterion__error__pb2.DESCRIPTOR,google_dot_ads_dot_googleads__v0_dot_proto_dot_errors_dot_ad__group__error__pb2.DESCRIPTOR,google_dot_ads_dot_googleads__v0_dot_proto_dot_errors_dot_ad__sharing__error__pb2.DESCRIPTOR,google_dot_ads_dot_googleads__v0_dot_proto_dot_errors_dot_adx__error__pb2.DESCRIPTOR,google_dot_ads_dot_googleads__v0_dot_proto_dot_errors_dot_authentication__error__pb2.DESCRIPTOR,google_dot_ads_dot_googleads__v0_dot_proto_dot_errors_dot_authorization__error__pb2.DESCRIPTOR,google_dot_ads_dot_googleads__v0_dot_proto_dot_errors_dot_bidding__error__pb2.DESCRIPTOR,google_dot_ads_dot_googleads__v0_dot_proto_dot_errors_dot_bidding__strategy__error__pb2.DESCRIPTOR,google_dot_ads_dot_googleads__v0_dot_proto_dot_errors_dot_campaign__budget__error__pb2.DESCRIPTOR,google_dot_ads_dot_googleads__v0_dot_proto_dot_errors_dot_campaign__criterion__error__pb2.DESCRIPTOR,google_dot_ads_dot_googleads__v0_dot_proto_dot_errors_dot_campaign__error__pb2.DESCRIPTOR,google_dot_ads_dot_googleads__v0_dot_proto_dot_errors_dot_campaign__group__error__pb2.DESCRIPTOR,google_dot_ads_dot_googleads__v0_dot_proto_dot_errors_dot_campaign__shared__set__error__pb2.DESCRIPTOR,google_dot_ads_dot_googleads__v0_dot_proto_dot_errors_dot_change__status__error__pb2.DESCRIPTOR,google_dot_ads_dot_googleads__v0_dot_proto_dot_errors_dot_collection__size__error__pb2.DESCRIPTOR,google_dot_ads_dot_googleads__v0_dot_proto_dot_errors_dot_context__error__pb2.DESCRIPTOR,google_dot_ads_dot_googleads__v0_dot_proto_dot_errors_dot_conversion__action__error__pb2.DESCRIPTOR,google_dot_ads_dot_googleads__v0_dot_proto_dot_errors_dot_criterion__error__pb2.DESCRIPTOR,google_dot_ads_dot_googleads__v0_dot_proto_dot_errors_dot_database__error__pb2.DESCRIPTOR,google_dot_ads_dot_googleads__v0_dot_proto_dot_errors_dot_date__error__pb2.DESCRIPTOR,google_dot_ads_dot_googleads__v0_dot_proto_dot_errors_dot_date__range__error__pb2.DESCRIPTOR,google_dot_ads_dot_googleads__v0_dot_proto_dot_errors_dot_distinct__error__pb2.DESCRIPTOR,google_dot_ads_dot_googleads__v0_dot_proto_dot_errors_dot_enum__error__pb2.DESCRIPTOR,google_dot_ads_dot_googleads__v0_dot_proto_dot_errors_dot_feed__attribute__reference__error__pb2.DESCRIPTOR,google_dot_ads_dot_googleads__v0_dot_proto_dot_errors_dot_field__error__pb2.DESCRIPTOR,google_dot_ads_dot_googleads__v0_dot_proto_dot_errors_dot_field__mask__error__pb2.DESCRIPTOR,google_dot_ads_dot_googleads__v0_dot_proto_dot_errors_dot_function__error__pb2.DESCRIPTOR,google_dot_ads_dot_googleads__v0_dot_proto_dot_errors_dot_function__parsing__error__pb2.DESCRIPTOR,google_dot_ads_dot_googleads__v0_dot_proto_dot_errors_dot_header__error__pb2.DESCRIPTOR,google_dot_ads_dot_googleads__v0_dot_proto_dot_errors_dot_id__error__pb2.DESCRIPTOR,google_dot_ads_dot_googleads__v0_dot_proto_dot_errors_dot_image__error__pb2.DESCRIPTOR,google_dot_ads_dot_googleads__v0_dot_proto_dot_errors_dot_internal__error__pb2.DESCRIPTOR,google_dot_ads_dot_googleads__v0_dot_proto_dot_errors_dot_list__operation__error__pb2.DESCRIPTOR,google_dot_ads_dot_googleads__v0_dot_proto_dot_errors_dot_media__bundle__error__pb2.DESCRIPTOR,google_dot_ads_dot_googleads__v0_dot_proto_dot_errors_dot_media__error__pb2.DESCRIPTOR,google_dot_ads_dot_googleads__v0_dot_proto_dot_errors_dot_multiplier__error__pb2.DESCRIPTOR,google_dot_ads_dot_googleads__v0_dot_proto_dot_errors_dot_mutate__error__pb2.DESCRIPTOR,google_dot_ads_dot_googleads__v0_dot_proto_dot_errors_dot_new__resource__creation__error__pb2.DESCRIPTOR,google_dot_ads_dot_googleads__v0_dot_proto_dot_errors_dot_not__empty__error__pb2.DESCRIPTOR,google_dot_ads_dot_googleads__v0_dot_proto_dot_errors_dot_null__error__pb2.DESCRIPTOR,google_dot_ads_dot_googleads__v0_dot_proto_dot_errors_dot_operation__access__denied__error__pb2.DESCRIPTOR,google_dot_ads_dot_googleads__v0_dot_proto_dot_errors_dot_operator__error__pb2.DESCRIPTOR,google_dot_ads_dot_googleads__v0_dot_proto_dot_errors_dot_policy__finding__error__pb2.DESCRIPTOR,google_dot_ads_dot_googleads__v0_dot_proto_dot_errors_dot_query__error__pb2.DESCRIPTOR,google_dot_ads_dot_googleads__v0_dot_proto_dot_errors_dot_quota__error__pb2.DESCRIPTOR,google_dot_ads_dot_googleads__v0_dot_proto_dot_errors_dot_range__error__pb2.DESCRIPTOR,google_dot_ads_dot_googleads__v0_dot_proto_dot_errors_dot_recommendation__error__pb2.DESCRIPTOR,google_dot_ads_dot_googleads__v0_dot_proto_dot_errors_dot_region__code__error__pb2.DESCRIPTOR,google_dot_ads_dot_googleads__v0_dot_proto_dot_errors_dot_request__error__pb2.DESCRIPTOR,google_dot_ads_dot_googleads__v0_dot_proto_dot_errors_dot_resource__access__denied__error__pb2.DESCRIPTOR,google_dot_ads_dot_googleads__v0_dot_proto_dot_errors_dot_resource__count__limit__exceeded__error__pb2.DESCRIPTOR,google_dot_ads_dot_googleads__v0_dot_proto_dot_errors_dot_setting__error__pb2.DESCRIPTOR,google_dot_ads_dot_googleads__v0_dot_proto_dot_errors_dot_shared__criterion__error__pb2.DESCRIPTOR,google_dot_ads_dot_googleads__v0_dot_proto_dot_errors_dot_shared__set__error__pb2.DESCRIPTOR,google_dot_ads_dot_googleads__v0_dot_proto_dot_errors_dot_string__format__error__pb2.DESCRIPTOR,google_dot_ads_dot_googleads__v0_dot_proto_dot_errors_dot_string__length__error__pb2.DESCRIPTOR,google_dot_ads_dot_googleads__v0_dot_proto_dot_errors_dot_url__field__error__pb2.DESCRIPTOR,google_dot_protobuf_dot_wrappers__pb2.DESCRIPTOR,])
+  dependencies=[google_dot_ads_dot_googleads__v0_dot_proto_dot_common_dot_policy__pb2.DESCRIPTOR,google_dot_ads_dot_googleads__v0_dot_proto_dot_common_dot_value__pb2.DESCRIPTOR,google_dot_ads_dot_googleads__v0_dot_proto_dot_errors_dot_account__budget__proposal__error__pb2.DESCRIPTOR,google_dot_ads_dot_googleads__v0_dot_proto_dot_errors_dot_ad__customizer__error__pb2.DESCRIPTOR,google_dot_ads_dot_googleads__v0_dot_proto_dot_errors_dot_ad__error__pb2.DESCRIPTOR,google_dot_ads_dot_googleads__v0_dot_proto_dot_errors_dot_ad__group__ad__error__pb2.DESCRIPTOR,google_dot_ads_dot_googleads__v0_dot_proto_dot_errors_dot_ad__group__bid__modifier__error__pb2.DESCRIPTOR,google_dot_ads_dot_googleads__v0_dot_proto_dot_errors_dot_ad__group__criterion__error__pb2.DESCRIPTOR,google_dot_ads_dot_googleads__v0_dot_proto_dot_errors_dot_ad__group__error__pb2.DESCRIPTOR,google_dot_ads_dot_googleads__v0_dot_proto_dot_errors_dot_ad__sharing__error__pb2.DESCRIPTOR,google_dot_ads_dot_googleads__v0_dot_proto_dot_errors_dot_adx__error__pb2.DESCRIPTOR,google_dot_ads_dot_googleads__v0_dot_proto_dot_errors_dot_authentication__error__pb2.DESCRIPTOR,google_dot_ads_dot_googleads__v0_dot_proto_dot_errors_dot_authorization__error__pb2.DESCRIPTOR,google_dot_ads_dot_googleads__v0_dot_proto_dot_errors_dot_bidding__error__pb2.DESCRIPTOR,google_dot_ads_dot_googleads__v0_dot_proto_dot_errors_dot_bidding__strategy__error__pb2.DESCRIPTOR,google_dot_ads_dot_googleads__v0_dot_proto_dot_errors_dot_billing__setup__error__pb2.DESCRIPTOR,google_dot_ads_dot_googleads__v0_dot_proto_dot_errors_dot_campaign__budget__error__pb2.DESCRIPTOR,google_dot_ads_dot_googleads__v0_dot_proto_dot_errors_dot_campaign__criterion__error__pb2.DESCRIPTOR,google_dot_ads_dot_googleads__v0_dot_proto_dot_errors_dot_campaign__error__pb2.DESCRIPTOR,google_dot_ads_dot_googleads__v0_dot_proto_dot_errors_dot_campaign__group__error__pb2.DESCRIPTOR,google_dot_ads_dot_googleads__v0_dot_proto_dot_errors_dot_campaign__shared__set__error__pb2.DESCRIPTOR,google_dot_ads_dot_googleads__v0_dot_proto_dot_errors_dot_change__status__error__pb2.DESCRIPTOR,google_dot_ads_dot_googleads__v0_dot_proto_dot_errors_dot_collection__size__error__pb2.DESCRIPTOR,google_dot_ads_dot_googleads__v0_dot_proto_dot_errors_dot_context__error__pb2.DESCRIPTOR,google_dot_ads_dot_googleads__v0_dot_proto_dot_errors_dot_conversion__action__error__pb2.DESCRIPTOR,google_dot_ads_dot_googleads__v0_dot_proto_dot_errors_dot_criterion__error__pb2.DESCRIPTOR,google_dot_ads_dot_googleads__v0_dot_proto_dot_errors_dot_customer__client__link__error__pb2.DESCRIPTOR,google_dot_ads_dot_googleads__v0_dot_proto_dot_errors_dot_customer__error__pb2.DESCRIPTOR,google_dot_ads_dot_googleads__v0_dot_proto_dot_errors_dot_customer__manager__link__error__pb2.DESCRIPTOR,google_dot_ads_dot_googleads__v0_dot_proto_dot_errors_dot_database__error__pb2.DESCRIPTOR,google_dot_ads_dot_googleads__v0_dot_proto_dot_errors_dot_date__error__pb2.DESCRIPTOR,google_dot_ads_dot_googleads__v0_dot_proto_dot_errors_dot_date__range__error__pb2.DESCRIPTOR,google_dot_ads_dot_googleads__v0_dot_proto_dot_errors_dot_distinct__error__pb2.DESCRIPTOR,google_dot_ads_dot_googleads__v0_dot_proto_dot_errors_dot_enum__error__pb2.DESCRIPTOR,google_dot_ads_dot_googleads__v0_dot_proto_dot_errors_dot_feed__attribute__reference__error__pb2.DESCRIPTOR,google_dot_ads_dot_googleads__v0_dot_proto_dot_errors_dot_field__error__pb2.DESCRIPTOR,google_dot_ads_dot_googleads__v0_dot_proto_dot_errors_dot_field__mask__error__pb2.DESCRIPTOR,google_dot_ads_dot_googleads__v0_dot_proto_dot_errors_dot_function__error__pb2.DESCRIPTOR,google_dot_ads_dot_googleads__v0_dot_proto_dot_errors_dot_function__parsing__error__pb2.DESCRIPTOR,google_dot_ads_dot_googleads__v0_dot_proto_dot_errors_dot_geo__target__constant__suggestion__error__pb2.DESCRIPTOR,google_dot_ads_dot_googleads__v0_dot_proto_dot_errors_dot_header__error__pb2.DESCRIPTOR,google_dot_ads_dot_googleads__v0_dot_proto_dot_errors_dot_id__error__pb2.DESCRIPTOR,google_dot_ads_dot_googleads__v0_dot_proto_dot_errors_dot_image__error__pb2.DESCRIPTOR,google_dot_ads_dot_googleads__v0_dot_proto_dot_errors_dot_internal__error__pb2.DESCRIPTOR,google_dot_ads_dot_googleads__v0_dot_proto_dot_errors_dot_list__operation__error__pb2.DESCRIPTOR,google_dot_ads_dot_googleads__v0_dot_proto_dot_errors_dot_media__bundle__error__pb2.DESCRIPTOR,google_dot_ads_dot_googleads__v0_dot_proto_dot_errors_dot_media__file__error__pb2.DESCRIPTOR,google_dot_ads_dot_googleads__v0_dot_proto_dot_errors_dot_multiplier__error__pb2.DESCRIPTOR,google_dot_ads_dot_googleads__v0_dot_proto_dot_errors_dot_mutate__error__pb2.DESCRIPTOR,google_dot_ads_dot_googleads__v0_dot_proto_dot_errors_dot_new__resource__creation__error__pb2.DESCRIPTOR,google_dot_ads_dot_googleads__v0_dot_proto_dot_errors_dot_not__empty__error__pb2.DESCRIPTOR,google_dot_ads_dot_googleads__v0_dot_proto_dot_errors_dot_null__error__pb2.DESCRIPTOR,google_dot_ads_dot_googleads__v0_dot_proto_dot_errors_dot_operation__access__denied__error__pb2.DESCRIPTOR,google_dot_ads_dot_googleads__v0_dot_proto_dot_errors_dot_operator__error__pb2.DESCRIPTOR,google_dot_ads_dot_googleads__v0_dot_proto_dot_errors_dot_policy__finding__error__pb2.DESCRIPTOR,google_dot_ads_dot_googleads__v0_dot_proto_dot_errors_dot_query__error__pb2.DESCRIPTOR,google_dot_ads_dot_googleads__v0_dot_proto_dot_errors_dot_quota__error__pb2.DESCRIPTOR,google_dot_ads_dot_googleads__v0_dot_proto_dot_errors_dot_range__error__pb2.DESCRIPTOR,google_dot_ads_dot_googleads__v0_dot_proto_dot_errors_dot_recommendation__error__pb2.DESCRIPTOR,google_dot_ads_dot_googleads__v0_dot_proto_dot_errors_dot_region__code__error__pb2.DESCRIPTOR,google_dot_ads_dot_googleads__v0_dot_proto_dot_errors_dot_request__error__pb2.DESCRIPTOR,google_dot_ads_dot_googleads__v0_dot_proto_dot_errors_dot_resource__access__denied__error__pb2.DESCRIPTOR,google_dot_ads_dot_googleads__v0_dot_proto_dot_errors_dot_resource__count__limit__exceeded__error__pb2.DESCRIPTOR,google_dot_ads_dot_googleads__v0_dot_proto_dot_errors_dot_setting__error__pb2.DESCRIPTOR,google_dot_ads_dot_googleads__v0_dot_proto_dot_errors_dot_shared__criterion__error__pb2.DESCRIPTOR,google_dot_ads_dot_googleads__v0_dot_proto_dot_errors_dot_shared__set__error__pb2.DESCRIPTOR,google_dot_ads_dot_googleads__v0_dot_proto_dot_errors_dot_string__format__error__pb2.DESCRIPTOR,google_dot_ads_dot_googleads__v0_dot_proto_dot_errors_dot_string__length__error__pb2.DESCRIPTOR,google_dot_ads_dot_googleads__v0_dot_proto_dot_errors_dot_url__field__error__pb2.DESCRIPTOR,google_dot_protobuf_dot_wrappers__pb2.DESCRIPTOR,])
 
 
 
@@ -117,8 +122,8 @@ _GOOGLEADSFAILURE = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=4084,
-  serialized_end=4166,
+  serialized_start=4436,
+  serialized_end=4518,
 )
 
 
@@ -176,8 +181,8 @@ _GOOGLEADSERROR = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=4169,
-  serialized_end=4449,
+  serialized_start=4521,
+  serialized_end=4801,
 )
 
 
@@ -357,267 +362,302 @@ _ERRORCODE = _descriptor.Descriptor(
       is_extension=False, extension_scope=None,
       options=None, file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
-      name='date_error', full_name='google.ads.googleads.v0.errors.ErrorCode.date_error', index=24,
+      name='customer_error', full_name='google.ads.googleads.v0.errors.ErrorCode.customer_error', index=24,
+      number=90, type=14, cpp_type=8, label=1,
+      has_default_value=False, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None, file=DESCRIPTOR),
+    _descriptor.FieldDescriptor(
+      name='date_error', full_name='google.ads.googleads.v0.errors.ErrorCode.date_error', index=25,
       number=33, type=14, cpp_type=8, label=1,
       has_default_value=False, default_value=0,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None, file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
-      name='date_range_error', full_name='google.ads.googleads.v0.errors.ErrorCode.date_range_error', index=25,
+      name='date_range_error', full_name='google.ads.googleads.v0.errors.ErrorCode.date_range_error', index=26,
       number=34, type=14, cpp_type=8, label=1,
       has_default_value=False, default_value=0,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None, file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
-      name='distinct_error', full_name='google.ads.googleads.v0.errors.ErrorCode.distinct_error', index=26,
+      name='distinct_error', full_name='google.ads.googleads.v0.errors.ErrorCode.distinct_error', index=27,
       number=35, type=14, cpp_type=8, label=1,
       has_default_value=False, default_value=0,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None, file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
-      name='feed_attribute_reference_error', full_name='google.ads.googleads.v0.errors.ErrorCode.feed_attribute_reference_error', index=27,
+      name='feed_attribute_reference_error', full_name='google.ads.googleads.v0.errors.ErrorCode.feed_attribute_reference_error', index=28,
       number=36, type=14, cpp_type=8, label=1,
       has_default_value=False, default_value=0,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None, file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
-      name='function_error', full_name='google.ads.googleads.v0.errors.ErrorCode.function_error', index=28,
+      name='function_error', full_name='google.ads.googleads.v0.errors.ErrorCode.function_error', index=29,
       number=37, type=14, cpp_type=8, label=1,
       has_default_value=False, default_value=0,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None, file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
-      name='function_parsing_error', full_name='google.ads.googleads.v0.errors.ErrorCode.function_parsing_error', index=29,
+      name='function_parsing_error', full_name='google.ads.googleads.v0.errors.ErrorCode.function_parsing_error', index=30,
       number=38, type=14, cpp_type=8, label=1,
       has_default_value=False, default_value=0,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None, file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
-      name='id_error', full_name='google.ads.googleads.v0.errors.ErrorCode.id_error', index=30,
+      name='id_error', full_name='google.ads.googleads.v0.errors.ErrorCode.id_error', index=31,
       number=39, type=14, cpp_type=8, label=1,
       has_default_value=False, default_value=0,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None, file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
-      name='image_error', full_name='google.ads.googleads.v0.errors.ErrorCode.image_error', index=31,
+      name='image_error', full_name='google.ads.googleads.v0.errors.ErrorCode.image_error', index=32,
       number=40, type=14, cpp_type=8, label=1,
       has_default_value=False, default_value=0,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None, file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
-      name='media_bundle_error', full_name='google.ads.googleads.v0.errors.ErrorCode.media_bundle_error', index=32,
+      name='media_bundle_error', full_name='google.ads.googleads.v0.errors.ErrorCode.media_bundle_error', index=33,
       number=42, type=14, cpp_type=8, label=1,
       has_default_value=False, default_value=0,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None, file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
-      name='media_error', full_name='google.ads.googleads.v0.errors.ErrorCode.media_error', index=33,
-      number=43, type=14, cpp_type=8, label=1,
+      name='media_file_error', full_name='google.ads.googleads.v0.errors.ErrorCode.media_file_error', index=34,
+      number=86, type=14, cpp_type=8, label=1,
       has_default_value=False, default_value=0,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None, file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
-      name='multiplier_error', full_name='google.ads.googleads.v0.errors.ErrorCode.multiplier_error', index=34,
+      name='multiplier_error', full_name='google.ads.googleads.v0.errors.ErrorCode.multiplier_error', index=35,
       number=44, type=14, cpp_type=8, label=1,
       has_default_value=False, default_value=0,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None, file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
-      name='new_resource_creation_error', full_name='google.ads.googleads.v0.errors.ErrorCode.new_resource_creation_error', index=35,
+      name='new_resource_creation_error', full_name='google.ads.googleads.v0.errors.ErrorCode.new_resource_creation_error', index=36,
       number=45, type=14, cpp_type=8, label=1,
       has_default_value=False, default_value=0,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None, file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
-      name='not_empty_error', full_name='google.ads.googleads.v0.errors.ErrorCode.not_empty_error', index=36,
+      name='not_empty_error', full_name='google.ads.googleads.v0.errors.ErrorCode.not_empty_error', index=37,
       number=46, type=14, cpp_type=8, label=1,
       has_default_value=False, default_value=0,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None, file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
-      name='null_error', full_name='google.ads.googleads.v0.errors.ErrorCode.null_error', index=37,
+      name='null_error', full_name='google.ads.googleads.v0.errors.ErrorCode.null_error', index=38,
       number=47, type=14, cpp_type=8, label=1,
       has_default_value=False, default_value=0,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None, file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
-      name='operator_error', full_name='google.ads.googleads.v0.errors.ErrorCode.operator_error', index=38,
+      name='operator_error', full_name='google.ads.googleads.v0.errors.ErrorCode.operator_error', index=39,
       number=48, type=14, cpp_type=8, label=1,
       has_default_value=False, default_value=0,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None, file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
-      name='range_error', full_name='google.ads.googleads.v0.errors.ErrorCode.range_error', index=39,
+      name='range_error', full_name='google.ads.googleads.v0.errors.ErrorCode.range_error', index=40,
       number=49, type=14, cpp_type=8, label=1,
       has_default_value=False, default_value=0,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None, file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
-      name='recommendation_error', full_name='google.ads.googleads.v0.errors.ErrorCode.recommendation_error', index=40,
+      name='recommendation_error', full_name='google.ads.googleads.v0.errors.ErrorCode.recommendation_error', index=41,
       number=58, type=14, cpp_type=8, label=1,
       has_default_value=False, default_value=0,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None, file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
-      name='region_code_error', full_name='google.ads.googleads.v0.errors.ErrorCode.region_code_error', index=41,
+      name='region_code_error', full_name='google.ads.googleads.v0.errors.ErrorCode.region_code_error', index=42,
       number=51, type=14, cpp_type=8, label=1,
       has_default_value=False, default_value=0,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None, file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
-      name='setting_error', full_name='google.ads.googleads.v0.errors.ErrorCode.setting_error', index=42,
+      name='setting_error', full_name='google.ads.googleads.v0.errors.ErrorCode.setting_error', index=43,
       number=52, type=14, cpp_type=8, label=1,
       has_default_value=False, default_value=0,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None, file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
-      name='string_format_error', full_name='google.ads.googleads.v0.errors.ErrorCode.string_format_error', index=43,
+      name='string_format_error', full_name='google.ads.googleads.v0.errors.ErrorCode.string_format_error', index=44,
       number=53, type=14, cpp_type=8, label=1,
       has_default_value=False, default_value=0,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None, file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
-      name='string_length_error', full_name='google.ads.googleads.v0.errors.ErrorCode.string_length_error', index=44,
+      name='string_length_error', full_name='google.ads.googleads.v0.errors.ErrorCode.string_length_error', index=45,
       number=54, type=14, cpp_type=8, label=1,
       has_default_value=False, default_value=0,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None, file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
-      name='operation_access_denied_error', full_name='google.ads.googleads.v0.errors.ErrorCode.operation_access_denied_error', index=45,
+      name='operation_access_denied_error', full_name='google.ads.googleads.v0.errors.ErrorCode.operation_access_denied_error', index=46,
       number=55, type=14, cpp_type=8, label=1,
       has_default_value=False, default_value=0,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None, file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
-      name='resource_access_denied_error', full_name='google.ads.googleads.v0.errors.ErrorCode.resource_access_denied_error', index=46,
+      name='resource_access_denied_error', full_name='google.ads.googleads.v0.errors.ErrorCode.resource_access_denied_error', index=47,
       number=56, type=14, cpp_type=8, label=1,
       has_default_value=False, default_value=0,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None, file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
-      name='resource_count_limit_exceeded_error', full_name='google.ads.googleads.v0.errors.ErrorCode.resource_count_limit_exceeded_error', index=47,
+      name='resource_count_limit_exceeded_error', full_name='google.ads.googleads.v0.errors.ErrorCode.resource_count_limit_exceeded_error', index=48,
       number=57, type=14, cpp_type=8, label=1,
       has_default_value=False, default_value=0,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None, file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
-      name='ad_group_bid_modifier_error', full_name='google.ads.googleads.v0.errors.ErrorCode.ad_group_bid_modifier_error', index=48,
+      name='ad_group_bid_modifier_error', full_name='google.ads.googleads.v0.errors.ErrorCode.ad_group_bid_modifier_error', index=49,
       number=59, type=14, cpp_type=8, label=1,
       has_default_value=False, default_value=0,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None, file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
-      name='context_error', full_name='google.ads.googleads.v0.errors.ErrorCode.context_error', index=49,
+      name='context_error', full_name='google.ads.googleads.v0.errors.ErrorCode.context_error', index=50,
       number=60, type=14, cpp_type=8, label=1,
       has_default_value=False, default_value=0,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None, file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
-      name='field_error', full_name='google.ads.googleads.v0.errors.ErrorCode.field_error', index=50,
+      name='field_error', full_name='google.ads.googleads.v0.errors.ErrorCode.field_error', index=51,
       number=61, type=14, cpp_type=8, label=1,
       has_default_value=False, default_value=0,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None, file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
-      name='shared_set_error', full_name='google.ads.googleads.v0.errors.ErrorCode.shared_set_error', index=51,
+      name='shared_set_error', full_name='google.ads.googleads.v0.errors.ErrorCode.shared_set_error', index=52,
       number=62, type=14, cpp_type=8, label=1,
       has_default_value=False, default_value=0,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None, file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
-      name='shared_criterion_error', full_name='google.ads.googleads.v0.errors.ErrorCode.shared_criterion_error', index=52,
+      name='shared_criterion_error', full_name='google.ads.googleads.v0.errors.ErrorCode.shared_criterion_error', index=53,
       number=63, type=14, cpp_type=8, label=1,
       has_default_value=False, default_value=0,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None, file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
-      name='campaign_shared_set_error', full_name='google.ads.googleads.v0.errors.ErrorCode.campaign_shared_set_error', index=53,
+      name='campaign_shared_set_error', full_name='google.ads.googleads.v0.errors.ErrorCode.campaign_shared_set_error', index=54,
       number=64, type=14, cpp_type=8, label=1,
       has_default_value=False, default_value=0,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None, file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
-      name='conversion_action_error', full_name='google.ads.googleads.v0.errors.ErrorCode.conversion_action_error', index=54,
+      name='conversion_action_error', full_name='google.ads.googleads.v0.errors.ErrorCode.conversion_action_error', index=55,
       number=65, type=14, cpp_type=8, label=1,
       has_default_value=False, default_value=0,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None, file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
-      name='header_error', full_name='google.ads.googleads.v0.errors.ErrorCode.header_error', index=55,
+      name='header_error', full_name='google.ads.googleads.v0.errors.ErrorCode.header_error', index=56,
       number=66, type=14, cpp_type=8, label=1,
       has_default_value=False, default_value=0,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None, file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
-      name='database_error', full_name='google.ads.googleads.v0.errors.ErrorCode.database_error', index=56,
+      name='database_error', full_name='google.ads.googleads.v0.errors.ErrorCode.database_error', index=57,
       number=67, type=14, cpp_type=8, label=1,
       has_default_value=False, default_value=0,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None, file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
-      name='policy_finding_error', full_name='google.ads.googleads.v0.errors.ErrorCode.policy_finding_error', index=57,
+      name='policy_finding_error', full_name='google.ads.googleads.v0.errors.ErrorCode.policy_finding_error', index=58,
       number=68, type=14, cpp_type=8, label=1,
       has_default_value=False, default_value=0,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None, file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
-      name='campaign_group_error', full_name='google.ads.googleads.v0.errors.ErrorCode.campaign_group_error', index=58,
+      name='campaign_group_error', full_name='google.ads.googleads.v0.errors.ErrorCode.campaign_group_error', index=59,
       number=69, type=14, cpp_type=8, label=1,
       has_default_value=False, default_value=0,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None, file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
-      name='enum_error', full_name='google.ads.googleads.v0.errors.ErrorCode.enum_error', index=59,
+      name='enum_error', full_name='google.ads.googleads.v0.errors.ErrorCode.enum_error', index=60,
       number=70, type=14, cpp_type=8, label=1,
       has_default_value=False, default_value=0,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None, file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
-      name='account_budget_proposal_error', full_name='google.ads.googleads.v0.errors.ErrorCode.account_budget_proposal_error', index=60,
+      name='account_budget_proposal_error', full_name='google.ads.googleads.v0.errors.ErrorCode.account_budget_proposal_error', index=61,
       number=77, type=14, cpp_type=8, label=1,
       has_default_value=False, default_value=0,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None, file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
-      name='change_status_error', full_name='google.ads.googleads.v0.errors.ErrorCode.change_status_error', index=61,
+      name='change_status_error', full_name='google.ads.googleads.v0.errors.ErrorCode.change_status_error', index=62,
       number=79, type=14, cpp_type=8, label=1,
+      has_default_value=False, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None, file=DESCRIPTOR),
+    _descriptor.FieldDescriptor(
+      name='geo_target_constant_suggestion_error', full_name='google.ads.googleads.v0.errors.ErrorCode.geo_target_constant_suggestion_error', index=63,
+      number=81, type=14, cpp_type=8, label=1,
+      has_default_value=False, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None, file=DESCRIPTOR),
+    _descriptor.FieldDescriptor(
+      name='billing_setup_error', full_name='google.ads.googleads.v0.errors.ErrorCode.billing_setup_error', index=64,
+      number=87, type=14, cpp_type=8, label=1,
+      has_default_value=False, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None, file=DESCRIPTOR),
+    _descriptor.FieldDescriptor(
+      name='customer_client_link_error', full_name='google.ads.googleads.v0.errors.ErrorCode.customer_client_link_error', index=65,
+      number=88, type=14, cpp_type=8, label=1,
+      has_default_value=False, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None, file=DESCRIPTOR),
+    _descriptor.FieldDescriptor(
+      name='customer_manager_link_error', full_name='google.ads.googleads.v0.errors.ErrorCode.customer_manager_link_error', index=66,
+      number=91, type=14, cpp_type=8, label=1,
       has_default_value=False, default_value=0,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
@@ -637,8 +677,8 @@ _ERRORCODE = _descriptor.Descriptor(
       name='error_code', full_name='google.ads.googleads.v0.errors.ErrorCode.error_code',
       index=0, containing_type=None, fields=[]),
   ],
-  serialized_start=4452,
-  serialized_end=10657,
+  serialized_start=4804,
+  serialized_end=11618,
 )
 
 
@@ -675,8 +715,8 @@ _ERRORLOCATION_FIELDPATHELEMENT = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=10824,
-  serialized_end=10906,
+  serialized_start=11785,
+  serialized_end=11867,
 )
 
 _ERRORLOCATION = _descriptor.Descriptor(
@@ -712,8 +752,8 @@ _ERRORLOCATION = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=10660,
-  serialized_end=10906,
+  serialized_start=11621,
+  serialized_end=11867,
 )
 
 
@@ -757,8 +797,8 @@ _ERRORDETAILS = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=10909,
-  serialized_end=11131,
+  serialized_start=11870,
+  serialized_end=12092,
 )
 
 
@@ -809,8 +849,8 @@ _POLICYVIOLATIONDETAILS = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=11134,
-  serialized_end=11313,
+  serialized_start=12095,
+  serialized_end=12274,
 )
 
 
@@ -840,8 +880,8 @@ _POLICYFINDINGDETAILS = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=11315,
-  serialized_end=11417,
+  serialized_start=12276,
+  serialized_end=12378,
 )
 
 _GOOGLEADSFAILURE.fields_by_name['errors'].message_type = _GOOGLEADSERROR
@@ -873,6 +913,7 @@ _ERRORCODE.fields_by_name['bidding_error'].enum_type = google_dot_ads_dot_google
 _ERRORCODE.fields_by_name['campaign_criterion_error'].enum_type = google_dot_ads_dot_googleads__v0_dot_proto_dot_errors_dot_campaign__criterion__error__pb2._CAMPAIGNCRITERIONERRORENUM_CAMPAIGNCRITERIONERROR
 _ERRORCODE.fields_by_name['collection_size_error'].enum_type = google_dot_ads_dot_googleads__v0_dot_proto_dot_errors_dot_collection__size__error__pb2._COLLECTIONSIZEERRORENUM_COLLECTIONSIZEERROR
 _ERRORCODE.fields_by_name['criterion_error'].enum_type = google_dot_ads_dot_googleads__v0_dot_proto_dot_errors_dot_criterion__error__pb2._CRITERIONERRORENUM_CRITERIONERROR
+_ERRORCODE.fields_by_name['customer_error'].enum_type = google_dot_ads_dot_googleads__v0_dot_proto_dot_errors_dot_customer__error__pb2._CUSTOMERERRORENUM_CUSTOMERERROR
 _ERRORCODE.fields_by_name['date_error'].enum_type = google_dot_ads_dot_googleads__v0_dot_proto_dot_errors_dot_date__error__pb2._DATEERRORENUM_DATEERROR
 _ERRORCODE.fields_by_name['date_range_error'].enum_type = google_dot_ads_dot_googleads__v0_dot_proto_dot_errors_dot_date__range__error__pb2._DATERANGEERRORENUM_DATERANGEERROR
 _ERRORCODE.fields_by_name['distinct_error'].enum_type = google_dot_ads_dot_googleads__v0_dot_proto_dot_errors_dot_distinct__error__pb2._DISTINCTERRORENUM_DISTINCTERROR
@@ -882,7 +923,7 @@ _ERRORCODE.fields_by_name['function_parsing_error'].enum_type = google_dot_ads_d
 _ERRORCODE.fields_by_name['id_error'].enum_type = google_dot_ads_dot_googleads__v0_dot_proto_dot_errors_dot_id__error__pb2._IDERRORENUM_IDERROR
 _ERRORCODE.fields_by_name['image_error'].enum_type = google_dot_ads_dot_googleads__v0_dot_proto_dot_errors_dot_image__error__pb2._IMAGEERRORENUM_IMAGEERROR
 _ERRORCODE.fields_by_name['media_bundle_error'].enum_type = google_dot_ads_dot_googleads__v0_dot_proto_dot_errors_dot_media__bundle__error__pb2._MEDIABUNDLEERRORENUM_MEDIABUNDLEERROR
-_ERRORCODE.fields_by_name['media_error'].enum_type = google_dot_ads_dot_googleads__v0_dot_proto_dot_errors_dot_media__error__pb2._MEDIAERRORENUM_MEDIAERROR
+_ERRORCODE.fields_by_name['media_file_error'].enum_type = google_dot_ads_dot_googleads__v0_dot_proto_dot_errors_dot_media__file__error__pb2._MEDIAFILEERRORENUM_MEDIAFILEERROR
 _ERRORCODE.fields_by_name['multiplier_error'].enum_type = google_dot_ads_dot_googleads__v0_dot_proto_dot_errors_dot_multiplier__error__pb2._MULTIPLIERERRORENUM_MULTIPLIERERROR
 _ERRORCODE.fields_by_name['new_resource_creation_error'].enum_type = google_dot_ads_dot_googleads__v0_dot_proto_dot_errors_dot_new__resource__creation__error__pb2._NEWRESOURCECREATIONERRORENUM_NEWRESOURCECREATIONERROR
 _ERRORCODE.fields_by_name['not_empty_error'].enum_type = google_dot_ads_dot_googleads__v0_dot_proto_dot_errors_dot_not__empty__error__pb2._NOTEMPTYERRORENUM_NOTEMPTYERROR
@@ -911,6 +952,10 @@ _ERRORCODE.fields_by_name['campaign_group_error'].enum_type = google_dot_ads_dot
 _ERRORCODE.fields_by_name['enum_error'].enum_type = google_dot_ads_dot_googleads__v0_dot_proto_dot_errors_dot_enum__error__pb2._ENUMERRORENUM_ENUMERROR
 _ERRORCODE.fields_by_name['account_budget_proposal_error'].enum_type = google_dot_ads_dot_googleads__v0_dot_proto_dot_errors_dot_account__budget__proposal__error__pb2._ACCOUNTBUDGETPROPOSALERRORENUM_ACCOUNTBUDGETPROPOSALERROR
 _ERRORCODE.fields_by_name['change_status_error'].enum_type = google_dot_ads_dot_googleads__v0_dot_proto_dot_errors_dot_change__status__error__pb2._CHANGESTATUSERRORENUM_CHANGESTATUSERROR
+_ERRORCODE.fields_by_name['geo_target_constant_suggestion_error'].enum_type = google_dot_ads_dot_googleads__v0_dot_proto_dot_errors_dot_geo__target__constant__suggestion__error__pb2._GEOTARGETCONSTANTSUGGESTIONERRORENUM_GEOTARGETCONSTANTSUGGESTIONERROR
+_ERRORCODE.fields_by_name['billing_setup_error'].enum_type = google_dot_ads_dot_googleads__v0_dot_proto_dot_errors_dot_billing__setup__error__pb2._BILLINGSETUPERRORENUM_BILLINGSETUPERROR
+_ERRORCODE.fields_by_name['customer_client_link_error'].enum_type = google_dot_ads_dot_googleads__v0_dot_proto_dot_errors_dot_customer__client__link__error__pb2._CUSTOMERCLIENTLINKERRORENUM_CUSTOMERCLIENTLINKERROR
+_ERRORCODE.fields_by_name['customer_manager_link_error'].enum_type = google_dot_ads_dot_googleads__v0_dot_proto_dot_errors_dot_customer__manager__link__error__pb2._CUSTOMERMANAGERLINKERRORENUM_CUSTOMERMANAGERLINKERROR
 _ERRORCODE.oneofs_by_name['error_code'].fields.append(
   _ERRORCODE.fields_by_name['request_error'])
 _ERRORCODE.fields_by_name['request_error'].containing_oneof = _ERRORCODE.oneofs_by_name['error_code']
@@ -984,6 +1029,9 @@ _ERRORCODE.oneofs_by_name['error_code'].fields.append(
   _ERRORCODE.fields_by_name['criterion_error'])
 _ERRORCODE.fields_by_name['criterion_error'].containing_oneof = _ERRORCODE.oneofs_by_name['error_code']
 _ERRORCODE.oneofs_by_name['error_code'].fields.append(
+  _ERRORCODE.fields_by_name['customer_error'])
+_ERRORCODE.fields_by_name['customer_error'].containing_oneof = _ERRORCODE.oneofs_by_name['error_code']
+_ERRORCODE.oneofs_by_name['error_code'].fields.append(
   _ERRORCODE.fields_by_name['date_error'])
 _ERRORCODE.fields_by_name['date_error'].containing_oneof = _ERRORCODE.oneofs_by_name['error_code']
 _ERRORCODE.oneofs_by_name['error_code'].fields.append(
@@ -1011,8 +1059,8 @@ _ERRORCODE.oneofs_by_name['error_code'].fields.append(
   _ERRORCODE.fields_by_name['media_bundle_error'])
 _ERRORCODE.fields_by_name['media_bundle_error'].containing_oneof = _ERRORCODE.oneofs_by_name['error_code']
 _ERRORCODE.oneofs_by_name['error_code'].fields.append(
-  _ERRORCODE.fields_by_name['media_error'])
-_ERRORCODE.fields_by_name['media_error'].containing_oneof = _ERRORCODE.oneofs_by_name['error_code']
+  _ERRORCODE.fields_by_name['media_file_error'])
+_ERRORCODE.fields_by_name['media_file_error'].containing_oneof = _ERRORCODE.oneofs_by_name['error_code']
 _ERRORCODE.oneofs_by_name['error_code'].fields.append(
   _ERRORCODE.fields_by_name['multiplier_error'])
 _ERRORCODE.fields_by_name['multiplier_error'].containing_oneof = _ERRORCODE.oneofs_by_name['error_code']
@@ -1097,6 +1145,18 @@ _ERRORCODE.fields_by_name['account_budget_proposal_error'].containing_oneof = _E
 _ERRORCODE.oneofs_by_name['error_code'].fields.append(
   _ERRORCODE.fields_by_name['change_status_error'])
 _ERRORCODE.fields_by_name['change_status_error'].containing_oneof = _ERRORCODE.oneofs_by_name['error_code']
+_ERRORCODE.oneofs_by_name['error_code'].fields.append(
+  _ERRORCODE.fields_by_name['geo_target_constant_suggestion_error'])
+_ERRORCODE.fields_by_name['geo_target_constant_suggestion_error'].containing_oneof = _ERRORCODE.oneofs_by_name['error_code']
+_ERRORCODE.oneofs_by_name['error_code'].fields.append(
+  _ERRORCODE.fields_by_name['billing_setup_error'])
+_ERRORCODE.fields_by_name['billing_setup_error'].containing_oneof = _ERRORCODE.oneofs_by_name['error_code']
+_ERRORCODE.oneofs_by_name['error_code'].fields.append(
+  _ERRORCODE.fields_by_name['customer_client_link_error'])
+_ERRORCODE.fields_by_name['customer_client_link_error'].containing_oneof = _ERRORCODE.oneofs_by_name['error_code']
+_ERRORCODE.oneofs_by_name['error_code'].fields.append(
+  _ERRORCODE.fields_by_name['customer_manager_link_error'])
+_ERRORCODE.fields_by_name['customer_manager_link_error'].containing_oneof = _ERRORCODE.oneofs_by_name['error_code']
 _ERRORLOCATION_FIELDPATHELEMENT.fields_by_name['index'].message_type = google_dot_protobuf_dot_wrappers__pb2._INT64VALUE
 _ERRORLOCATION_FIELDPATHELEMENT.containing_type = _ERRORLOCATION
 _ERRORLOCATION.fields_by_name['operation_index'].message_type = google_dot_protobuf_dot_wrappers__pb2._INT64VALUE
@@ -1212,6 +1272,8 @@ ErrorCode = _reflection.GeneratedProtocolMessageType('ErrorCode', (_message.Mess
           The reasons for the collection size error
       criterion_error:
           The reasons for the criterion error
+      customer_error:
+          The reasons for the customer error
       date_error:
           The reasons for the date error
       date_range_error:
@@ -1230,8 +1292,8 @@ ErrorCode = _reflection.GeneratedProtocolMessageType('ErrorCode', (_message.Mess
           The reasons for the image error
       media_bundle_error:
           The reasons for the media bundle error
-      media_error:
-          The reasons for the media error
+      media_file_error:
+          The reasons for the media file error
       multiplier_error:
           The reasons for the multiplier error
       new_resource_creation_error:
@@ -1288,6 +1350,14 @@ ErrorCode = _reflection.GeneratedProtocolMessageType('ErrorCode', (_message.Mess
           The reasons for account budget proposal errors.
       change_status_error:
           The reasons for the change status error
+      geo_target_constant_suggestion_error:
+          The reasons for the geo target constant suggestion error.
+      billing_setup_error:
+          The reasons for the billing setup error
+      customer_client_link_error:
+          The reasons for the customer client link error
+      customer_manager_link_error:
+          The reasons for the customer manager link error
   """,
   # @@protoc_insertion_point(class_scope:google.ads.googleads.v0.errors.ErrorCode)
   ))

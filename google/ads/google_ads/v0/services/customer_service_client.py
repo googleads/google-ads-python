@@ -22,6 +22,7 @@ import google.api_core.gapic_v1.config
 import google.api_core.gapic_v1.method
 import google.api_core.grpc_helpers
 import google.api_core.path_template
+import grpc
 
 from google.ads.google_ads.v0.services import customer_service_client_config
 from google.ads.google_ads.v0.services.transports import customer_service_grpc_transport
@@ -201,4 +202,48 @@ class CustomerServiceClient(object):
         request = customer_service_pb2.GetCustomerRequest(
             resource_name=resource_name, )
         return self._inner_api_calls['get_customer'](
+            request, retry=retry, timeout=timeout, metadata=metadata)
+
+    def list_accessible_customers(
+            self,
+            retry=google.api_core.gapic_v1.method.DEFAULT,
+            timeout=google.api_core.gapic_v1.method.DEFAULT,
+            metadata=None):
+        """
+        Returns resource names of customers directly accessible by the
+        user authenticating the call.
+
+        Args:
+            retry (Optional[google.api_core.retry.Retry]):  A retry object used
+                to retry requests. If ``None`` is specified, requests will not
+                be retried.
+            timeout (Optional[float]): The amount of time, in seconds, to wait
+                for the request to complete. Note that if ``retry`` is
+                specified, the timeout applies to each individual attempt.
+            metadata (Optional[Sequence[Tuple[str, str]]]): Additional metadata
+                that is provided to the method.
+
+        Returns:
+            A :class:`~google.ads.google_ads.v0.types.ListAccessibleCustomersResponse` instance.
+
+        Raises:
+            google.api_core.exceptions.GoogleAPICallError: If the request
+                    failed for any reason.
+            google.api_core.exceptions.RetryError: If the request failed due
+                    to a retryable error and retry attempts failed.
+        """
+        # Wrap the transport method to add retry and timeout logic.
+        if 'list_accessible_customers' not in self._inner_api_calls:
+            self._inner_api_calls[
+                'list_accessible_customers'] = google.api_core.gapic_v1.method.wrap_method(
+                    self.transport.list_accessible_customers,
+                    default_retry=self._method_configs[
+                        'ListAccessibleCustomers'].retry,
+                    default_timeout=self._method_configs[
+                        'ListAccessibleCustomers'].timeout,
+                    client_info=self._client_info,
+                )
+
+        request = customer_service_pb2.ListAccessibleCustomersRequest()
+        return self._inner_api_calls['list_accessible_customers'](
             request, retry=retry, timeout=timeout, metadata=metadata)

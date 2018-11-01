@@ -13,14 +13,13 @@ from google.protobuf import descriptor_pb2
 _sym_db = _symbol_database.Default()
 
 
+from google.ads.google_ads.v0.proto.common import tag_snippet_pb2 as google_dot_ads_dot_googleads__v0_dot_proto_dot_common_dot_tag__snippet__pb2
 from google.ads.google_ads.v0.proto.enums import attribution_model_pb2 as google_dot_ads_dot_googleads__v0_dot_proto_dot_enums_dot_attribution__model__pb2
 from google.ads.google_ads.v0.proto.enums import conversion_action_category_pb2 as google_dot_ads_dot_googleads__v0_dot_proto_dot_enums_dot_conversion__action__category__pb2
 from google.ads.google_ads.v0.proto.enums import conversion_action_counting_type_pb2 as google_dot_ads_dot_googleads__v0_dot_proto_dot_enums_dot_conversion__action__counting__type__pb2
 from google.ads.google_ads.v0.proto.enums import conversion_action_status_pb2 as google_dot_ads_dot_googleads__v0_dot_proto_dot_enums_dot_conversion__action__status__pb2
 from google.ads.google_ads.v0.proto.enums import conversion_action_type_pb2 as google_dot_ads_dot_googleads__v0_dot_proto_dot_enums_dot_conversion__action__type__pb2
 from google.ads.google_ads.v0.proto.enums import data_driven_model_status_pb2 as google_dot_ads_dot_googleads__v0_dot_proto_dot_enums_dot_data__driven__model__status__pb2
-from google.ads.google_ads.v0.proto.enums import tracking_code_page_format_pb2 as google_dot_ads_dot_googleads__v0_dot_proto_dot_enums_dot_tracking__code__page__format__pb2
-from google.ads.google_ads.v0.proto.enums import tracking_code_type_pb2 as google_dot_ads_dot_googleads__v0_dot_proto_dot_enums_dot_tracking__code__type__pb2
 from google.protobuf import wrappers_pb2 as google_dot_protobuf_dot_wrappers__pb2
 
 
@@ -28,9 +27,9 @@ DESCRIPTOR = _descriptor.FileDescriptor(
   name='google/ads/googleads_v0/proto/resources/conversion_action.proto',
   package='google.ads.googleads.v0.resources',
   syntax='proto3',
-  serialized_pb=_b('\n?google/ads/googleads_v0/proto/resources/conversion_action.proto\x12!google.ads.googleads.v0.resources\x1a;google/ads/googleads_v0/proto/enums/attribution_model.proto\x1a\x44google/ads/googleads_v0/proto/enums/conversion_action_category.proto\x1aIgoogle/ads/googleads_v0/proto/enums/conversion_action_counting_type.proto\x1a\x42google/ads/googleads_v0/proto/enums/conversion_action_status.proto\x1a@google/ads/googleads_v0/proto/enums/conversion_action_type.proto\x1a\x42google/ads/googleads_v0/proto/enums/data_driven_model_status.proto\x1a\x43google/ads/googleads_v0/proto/enums/tracking_code_page_format.proto\x1a<google/ads/googleads_v0/proto/enums/tracking_code_type.proto\x1a\x1egoogle/protobuf/wrappers.proto\"\x9e\x0f\n\x10\x43onversionAction\x12\x15\n\rresource_name\x18\x01 \x01(\t\x12\'\n\x02id\x18\x02 \x01(\x0b\x32\x1b.google.protobuf.Int64Value\x12*\n\x04name\x18\x03 \x01(\x0b\x32\x1c.google.protobuf.StringValue\x12`\n\x06status\x18\x04 \x01(\x0e\x32P.google.ads.googleads.v0.enums.ConversionActionStatusEnum.ConversionActionStatus\x12Z\n\x04type\x18\x05 \x01(\x0e\x32L.google.ads.googleads.v0.enums.ConversionActionTypeEnum.ConversionActionType\x12\x66\n\x08\x63\x61tegory\x18\x06 \x01(\x0e\x32T.google.ads.googleads.v0.enums.ConversionActionCategoryEnum.ConversionActionCategory\x12\x34\n\x0eowner_customer\x18\x07 \x01(\x0b\x32\x1c.google.protobuf.StringValue\x12\x41\n\x1dinclude_in_conversions_metric\x18\x08 \x01(\x0b\x32\x1a.google.protobuf.BoolValue\x12G\n\"click_through_lookback_window_days\x18\t \x01(\x0b\x32\x1b.google.protobuf.Int64Value\x12\x46\n!view_through_lookback_window_days\x18\n \x01(\x0b\x32\x1b.google.protobuf.Int64Value\x12Y\n\x0evalue_settings\x18\x0b \x01(\x0b\x32\x41.google.ads.googleads.v0.resources.ConversionAction.ValueSettings\x12s\n\rcounting_type\x18\x0c \x01(\x0e\x32\\.google.ads.googleads.v0.enums.ConversionActionCountingTypeEnum.ConversionActionCountingType\x12p\n\x1a\x61ttribution_model_settings\x18\r \x01(\x0b\x32L.google.ads.googleads.v0.resources.ConversionAction.AttributionModelSettings\x12T\n\x0ctag_snippets\x18\x0e \x03(\x0b\x32>.google.ads.googleads.v0.resources.ConversionAction.TagSnippet\x12@\n\x1bphone_call_duration_seconds\x18\x0f \x01(\x0b\x32\x1b.google.protobuf.Int64Value\x12,\n\x06\x61pp_id\x18\x10 \x01(\x0b\x32\x1c.google.protobuf.StringValue\x1a\xed\x01\n\x18\x41ttributionModelSettings\x12_\n\x11\x61ttribution_model\x18\x01 \x01(\x0e\x32\x44.google.ads.googleads.v0.enums.AttributionModelEnum.AttributionModel\x12p\n\x18\x64\x61ta_driven_model_status\x18\x02 \x01(\x0e\x32N.google.ads.googleads.v0.enums.DataDrivenModelStatusEnum.DataDrivenModelStatus\x1a\xb3\x02\n\nTagSnippet\x12R\n\x04type\x18\x01 \x01(\x0e\x32\x44.google.ads.googleads.v0.enums.TrackingCodeTypeEnum.TrackingCodeType\x12\x65\n\x0bpage_format\x18\x02 \x01(\x0e\x32P.google.ads.googleads.v0.enums.TrackingCodePageFormatEnum.TrackingCodePageFormat\x12\x35\n\x0fglobal_site_tag\x18\x03 \x01(\x0b\x32\x1c.google.protobuf.StringValue\x12\x33\n\revent_snippet\x18\x04 \x01(\x0b\x32\x1c.google.protobuf.StringValue\x1a\xbf\x01\n\rValueSettings\x12\x33\n\rdefault_value\x18\x01 \x01(\x0b\x32\x1c.google.protobuf.DoubleValue\x12;\n\x15\x64\x65\x66\x61ult_currency_code\x18\x02 \x01(\x0b\x32\x1c.google.protobuf.StringValue\x12<\n\x18\x61lways_use_default_value\x18\x03 \x01(\x0b\x32\x1a.google.protobuf.BoolValueB\xda\x01\n%com.google.ads.googleads.v0.resourcesB\x15\x43onversionActionProtoP\x01ZJgoogle.golang.org/genproto/googleapis/ads/googleads/v0/resources;resources\xa2\x02\x03GAA\xaa\x02!Google.Ads.GoogleAds.V0.Resources\xca\x02!Google\\Ads\\GoogleAds\\V0\\Resourcesb\x06proto3')
+  serialized_pb=_b('\n?google/ads/googleads_v0/proto/resources/conversion_action.proto\x12!google.ads.googleads.v0.resources\x1a\x36google/ads/googleads_v0/proto/common/tag_snippet.proto\x1a;google/ads/googleads_v0/proto/enums/attribution_model.proto\x1a\x44google/ads/googleads_v0/proto/enums/conversion_action_category.proto\x1aIgoogle/ads/googleads_v0/proto/enums/conversion_action_counting_type.proto\x1a\x42google/ads/googleads_v0/proto/enums/conversion_action_status.proto\x1a@google/ads/googleads_v0/proto/enums/conversion_action_type.proto\x1a\x42google/ads/googleads_v0/proto/enums/data_driven_model_status.proto\x1a\x1egoogle/protobuf/wrappers.proto\"\xd4\x0c\n\x10\x43onversionAction\x12\x15\n\rresource_name\x18\x01 \x01(\t\x12\'\n\x02id\x18\x02 \x01(\x0b\x32\x1b.google.protobuf.Int64Value\x12*\n\x04name\x18\x03 \x01(\x0b\x32\x1c.google.protobuf.StringValue\x12`\n\x06status\x18\x04 \x01(\x0e\x32P.google.ads.googleads.v0.enums.ConversionActionStatusEnum.ConversionActionStatus\x12Z\n\x04type\x18\x05 \x01(\x0e\x32L.google.ads.googleads.v0.enums.ConversionActionTypeEnum.ConversionActionType\x12\x66\n\x08\x63\x61tegory\x18\x06 \x01(\x0e\x32T.google.ads.googleads.v0.enums.ConversionActionCategoryEnum.ConversionActionCategory\x12\x34\n\x0eowner_customer\x18\x07 \x01(\x0b\x32\x1c.google.protobuf.StringValue\x12\x41\n\x1dinclude_in_conversions_metric\x18\x08 \x01(\x0b\x32\x1a.google.protobuf.BoolValue\x12G\n\"click_through_lookback_window_days\x18\t \x01(\x0b\x32\x1b.google.protobuf.Int64Value\x12\x46\n!view_through_lookback_window_days\x18\n \x01(\x0b\x32\x1b.google.protobuf.Int64Value\x12Y\n\x0evalue_settings\x18\x0b \x01(\x0b\x32\x41.google.ads.googleads.v0.resources.ConversionAction.ValueSettings\x12s\n\rcounting_type\x18\x0c \x01(\x0e\x32\\.google.ads.googleads.v0.enums.ConversionActionCountingTypeEnum.ConversionActionCountingType\x12p\n\x1a\x61ttribution_model_settings\x18\r \x01(\x0b\x32L.google.ads.googleads.v0.resources.ConversionAction.AttributionModelSettings\x12@\n\x0ctag_snippets\x18\x0e \x03(\x0b\x32*.google.ads.googleads.v0.common.TagSnippet\x12@\n\x1bphone_call_duration_seconds\x18\x0f \x01(\x0b\x32\x1b.google.protobuf.Int64Value\x12,\n\x06\x61pp_id\x18\x10 \x01(\x0b\x32\x1c.google.protobuf.StringValue\x1a\xed\x01\n\x18\x41ttributionModelSettings\x12_\n\x11\x61ttribution_model\x18\x01 \x01(\x0e\x32\x44.google.ads.googleads.v0.enums.AttributionModelEnum.AttributionModel\x12p\n\x18\x64\x61ta_driven_model_status\x18\x02 \x01(\x0e\x32N.google.ads.googleads.v0.enums.DataDrivenModelStatusEnum.DataDrivenModelStatus\x1a\xbf\x01\n\rValueSettings\x12\x33\n\rdefault_value\x18\x01 \x01(\x0b\x32\x1c.google.protobuf.DoubleValue\x12;\n\x15\x64\x65\x66\x61ult_currency_code\x18\x02 \x01(\x0b\x32\x1c.google.protobuf.StringValue\x12<\n\x18\x61lways_use_default_value\x18\x03 \x01(\x0b\x32\x1a.google.protobuf.BoolValueB\xda\x01\n%com.google.ads.googleads.v0.resourcesB\x15\x43onversionActionProtoP\x01ZJgoogle.golang.org/genproto/googleapis/ads/googleads/v0/resources;resources\xa2\x02\x03GAA\xaa\x02!Google.Ads.GoogleAds.V0.Resources\xca\x02!Google\\Ads\\GoogleAds\\V0\\Resourcesb\x06proto3')
   ,
-  dependencies=[google_dot_ads_dot_googleads__v0_dot_proto_dot_enums_dot_attribution__model__pb2.DESCRIPTOR,google_dot_ads_dot_googleads__v0_dot_proto_dot_enums_dot_conversion__action__category__pb2.DESCRIPTOR,google_dot_ads_dot_googleads__v0_dot_proto_dot_enums_dot_conversion__action__counting__type__pb2.DESCRIPTOR,google_dot_ads_dot_googleads__v0_dot_proto_dot_enums_dot_conversion__action__status__pb2.DESCRIPTOR,google_dot_ads_dot_googleads__v0_dot_proto_dot_enums_dot_conversion__action__type__pb2.DESCRIPTOR,google_dot_ads_dot_googleads__v0_dot_proto_dot_enums_dot_data__driven__model__status__pb2.DESCRIPTOR,google_dot_ads_dot_googleads__v0_dot_proto_dot_enums_dot_tracking__code__page__format__pb2.DESCRIPTOR,google_dot_ads_dot_googleads__v0_dot_proto_dot_enums_dot_tracking__code__type__pb2.DESCRIPTOR,google_dot_protobuf_dot_wrappers__pb2.DESCRIPTOR,])
+  dependencies=[google_dot_ads_dot_googleads__v0_dot_proto_dot_common_dot_tag__snippet__pb2.DESCRIPTOR,google_dot_ads_dot_googleads__v0_dot_proto_dot_enums_dot_attribution__model__pb2.DESCRIPTOR,google_dot_ads_dot_googleads__v0_dot_proto_dot_enums_dot_conversion__action__category__pb2.DESCRIPTOR,google_dot_ads_dot_googleads__v0_dot_proto_dot_enums_dot_conversion__action__counting__type__pb2.DESCRIPTOR,google_dot_ads_dot_googleads__v0_dot_proto_dot_enums_dot_conversion__action__status__pb2.DESCRIPTOR,google_dot_ads_dot_googleads__v0_dot_proto_dot_enums_dot_conversion__action__type__pb2.DESCRIPTOR,google_dot_ads_dot_googleads__v0_dot_proto_dot_enums_dot_data__driven__model__status__pb2.DESCRIPTOR,google_dot_protobuf_dot_wrappers__pb2.DESCRIPTOR,])
 
 
 
@@ -68,59 +67,8 @@ _CONVERSIONACTION_ATTRIBUTIONMODELSETTINGS = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=1883,
-  serialized_end=2120,
-)
-
-_CONVERSIONACTION_TAGSNIPPET = _descriptor.Descriptor(
-  name='TagSnippet',
-  full_name='google.ads.googleads.v0.resources.ConversionAction.TagSnippet',
-  filename=None,
-  file=DESCRIPTOR,
-  containing_type=None,
-  fields=[
-    _descriptor.FieldDescriptor(
-      name='type', full_name='google.ads.googleads.v0.resources.ConversionAction.TagSnippet.type', index=0,
-      number=1, type=14, cpp_type=8, label=1,
-      has_default_value=False, default_value=0,
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      options=None, file=DESCRIPTOR),
-    _descriptor.FieldDescriptor(
-      name='page_format', full_name='google.ads.googleads.v0.resources.ConversionAction.TagSnippet.page_format', index=1,
-      number=2, type=14, cpp_type=8, label=1,
-      has_default_value=False, default_value=0,
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      options=None, file=DESCRIPTOR),
-    _descriptor.FieldDescriptor(
-      name='global_site_tag', full_name='google.ads.googleads.v0.resources.ConversionAction.TagSnippet.global_site_tag', index=2,
-      number=3, type=11, cpp_type=10, label=1,
-      has_default_value=False, default_value=None,
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      options=None, file=DESCRIPTOR),
-    _descriptor.FieldDescriptor(
-      name='event_snippet', full_name='google.ads.googleads.v0.resources.ConversionAction.TagSnippet.event_snippet', index=3,
-      number=4, type=11, cpp_type=10, label=1,
-      has_default_value=False, default_value=None,
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      options=None, file=DESCRIPTOR),
-  ],
-  extensions=[
-  ],
-  nested_types=[],
-  enum_types=[
-  ],
-  options=None,
-  is_extendable=False,
-  syntax='proto3',
-  extension_ranges=[],
-  oneofs=[
-  ],
-  serialized_start=2123,
-  serialized_end=2430,
+  serialized_start=1788,
+  serialized_end=2025,
 )
 
 _CONVERSIONACTION_VALUESETTINGS = _descriptor.Descriptor(
@@ -163,8 +111,8 @@ _CONVERSIONACTION_VALUESETTINGS = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=2433,
-  serialized_end=2624,
+  serialized_start=2028,
+  serialized_end=2219,
 )
 
 _CONVERSIONACTION = _descriptor.Descriptor(
@@ -289,7 +237,7 @@ _CONVERSIONACTION = _descriptor.Descriptor(
   ],
   extensions=[
   ],
-  nested_types=[_CONVERSIONACTION_ATTRIBUTIONMODELSETTINGS, _CONVERSIONACTION_TAGSNIPPET, _CONVERSIONACTION_VALUESETTINGS, ],
+  nested_types=[_CONVERSIONACTION_ATTRIBUTIONMODELSETTINGS, _CONVERSIONACTION_VALUESETTINGS, ],
   enum_types=[
   ],
   options=None,
@@ -298,18 +246,13 @@ _CONVERSIONACTION = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=674,
-  serialized_end=2624,
+  serialized_start=599,
+  serialized_end=2219,
 )
 
 _CONVERSIONACTION_ATTRIBUTIONMODELSETTINGS.fields_by_name['attribution_model'].enum_type = google_dot_ads_dot_googleads__v0_dot_proto_dot_enums_dot_attribution__model__pb2._ATTRIBUTIONMODELENUM_ATTRIBUTIONMODEL
 _CONVERSIONACTION_ATTRIBUTIONMODELSETTINGS.fields_by_name['data_driven_model_status'].enum_type = google_dot_ads_dot_googleads__v0_dot_proto_dot_enums_dot_data__driven__model__status__pb2._DATADRIVENMODELSTATUSENUM_DATADRIVENMODELSTATUS
 _CONVERSIONACTION_ATTRIBUTIONMODELSETTINGS.containing_type = _CONVERSIONACTION
-_CONVERSIONACTION_TAGSNIPPET.fields_by_name['type'].enum_type = google_dot_ads_dot_googleads__v0_dot_proto_dot_enums_dot_tracking__code__type__pb2._TRACKINGCODETYPEENUM_TRACKINGCODETYPE
-_CONVERSIONACTION_TAGSNIPPET.fields_by_name['page_format'].enum_type = google_dot_ads_dot_googleads__v0_dot_proto_dot_enums_dot_tracking__code__page__format__pb2._TRACKINGCODEPAGEFORMATENUM_TRACKINGCODEPAGEFORMAT
-_CONVERSIONACTION_TAGSNIPPET.fields_by_name['global_site_tag'].message_type = google_dot_protobuf_dot_wrappers__pb2._STRINGVALUE
-_CONVERSIONACTION_TAGSNIPPET.fields_by_name['event_snippet'].message_type = google_dot_protobuf_dot_wrappers__pb2._STRINGVALUE
-_CONVERSIONACTION_TAGSNIPPET.containing_type = _CONVERSIONACTION
 _CONVERSIONACTION_VALUESETTINGS.fields_by_name['default_value'].message_type = google_dot_protobuf_dot_wrappers__pb2._DOUBLEVALUE
 _CONVERSIONACTION_VALUESETTINGS.fields_by_name['default_currency_code'].message_type = google_dot_protobuf_dot_wrappers__pb2._STRINGVALUE
 _CONVERSIONACTION_VALUESETTINGS.fields_by_name['always_use_default_value'].message_type = google_dot_protobuf_dot_wrappers__pb2._BOOLVALUE
@@ -326,7 +269,7 @@ _CONVERSIONACTION.fields_by_name['view_through_lookback_window_days'].message_ty
 _CONVERSIONACTION.fields_by_name['value_settings'].message_type = _CONVERSIONACTION_VALUESETTINGS
 _CONVERSIONACTION.fields_by_name['counting_type'].enum_type = google_dot_ads_dot_googleads__v0_dot_proto_dot_enums_dot_conversion__action__counting__type__pb2._CONVERSIONACTIONCOUNTINGTYPEENUM_CONVERSIONACTIONCOUNTINGTYPE
 _CONVERSIONACTION.fields_by_name['attribution_model_settings'].message_type = _CONVERSIONACTION_ATTRIBUTIONMODELSETTINGS
-_CONVERSIONACTION.fields_by_name['tag_snippets'].message_type = _CONVERSIONACTION_TAGSNIPPET
+_CONVERSIONACTION.fields_by_name['tag_snippets'].message_type = google_dot_ads_dot_googleads__v0_dot_proto_dot_common_dot_tag__snippet__pb2._TAGSNIPPET
 _CONVERSIONACTION.fields_by_name['phone_call_duration_seconds'].message_type = google_dot_protobuf_dot_wrappers__pb2._INT64VALUE
 _CONVERSIONACTION.fields_by_name['app_id'].message_type = google_dot_protobuf_dot_wrappers__pb2._STRINGVALUE
 DESCRIPTOR.message_types_by_name['ConversionAction'] = _CONVERSIONACTION
@@ -349,31 +292,6 @@ ConversionAction = _reflection.GeneratedProtocolMessageType('ConversionAction', 
             conversion action.
     """,
     # @@protoc_insertion_point(class_scope:google.ads.googleads.v0.resources.ConversionAction.AttributionModelSettings)
-    ))
-  ,
-
-  TagSnippet = _reflection.GeneratedProtocolMessageType('TagSnippet', (_message.Message,), dict(
-    DESCRIPTOR = _CONVERSIONACTION_TAGSNIPPET,
-    __module__ = 'google.ads.googleads_v0.proto.resources.conversion_action_pb2'
-    ,
-    __doc__ = """The site tag and event snippet pair for a TrackingCodeType.
-    
-    
-    Attributes:
-        type:
-            The type of the generated tag snippets for tracking
-            conversions.
-        page_format:
-            The format of the web page where the tracking tag and snippet
-            will be installed, e.g. HTML.
-        global_site_tag:
-            The site tag that adds visitors to your basic remarketing
-            lists and sets new cookies on your domain.
-        event_snippet:
-            The event snippet that works with the site tag to track
-            actions that should be counted as conversions.
-    """,
-    # @@protoc_insertion_point(class_scope:google.ads.googleads.v0.resources.ConversionAction.TagSnippet)
     ))
   ,
 
@@ -461,7 +379,6 @@ ConversionAction = _reflection.GeneratedProtocolMessageType('ConversionAction', 
   ))
 _sym_db.RegisterMessage(ConversionAction)
 _sym_db.RegisterMessage(ConversionAction.AttributionModelSettings)
-_sym_db.RegisterMessage(ConversionAction.TagSnippet)
 _sym_db.RegisterMessage(ConversionAction.ValueSettings)
 
 

@@ -21,7 +21,7 @@ DESCRIPTOR = _descriptor.FileDescriptor(
   name='google/ads/googleads_v0/proto/services/billing_setup_service.proto',
   package='google.ads.googleads.v0.services',
   syntax='proto3',
-  serialized_pb=_b('\nBgoogle/ads/googleads_v0/proto/services/billing_setup_service.proto\x12 google.ads.googleads.v0.services\x1a;google/ads/googleads_v0/proto/resources/billing_setup.proto\x1a\x1cgoogle/api/annotations.proto\"/\n\x16GetBillingSetupRequest\x12\x15\n\rresource_name\x18\x01 \x01(\t\"|\n\x19MutateBillingSetupRequest\x12\x13\n\x0b\x63ustomer_id\x18\x01 \x01(\t\x12J\n\toperation\x18\x02 \x01(\x0b\x32\x37.google.ads.googleads.v0.services.BillingSetupOperation\"6\n\x15\x42illingSetupOperation\x12\x10\n\x06remove\x18\x01 \x01(\tH\x00\x42\x0b\n\toperation\"h\n\x1aMutateBillingSetupResponse\x12J\n\x06result\x18\x01 \x01(\x0b\x32:.google.ads.googleads.v0.services.MutateBillingSetupResult\"1\n\x18MutateBillingSetupResult\x12\x15\n\rresource_name\x18\x01 \x01(\t2\x9e\x03\n\x13\x42illingSetupService\x12\xb5\x01\n\x0fGetBillingSetup\x12\x38.google.ads.googleads.v0.services.GetBillingSetupRequest\x1a/.google.ads.googleads.v0.resources.BillingSetup\"7\x82\xd3\xe4\x93\x02\x31\x12//v0/{resource_name=customers/*/billingSetups/*}\x12\xce\x01\n\x12MutateBillingSetup\x12;.google.ads.googleads.v0.services.MutateBillingSetupRequest\x1a<.google.ads.googleads.v0.services.MutateBillingSetupResponse\"=\x82\xd3\xe4\x93\x02\x37\"2/v0/customers/{customer_id=*}/billingSetups:mutate:\x01*B\xd8\x01\n$com.google.ads.googleads.v0.servicesB\x18\x42illingSetupServiceProtoP\x01ZHgoogle.golang.org/genproto/googleapis/ads/googleads/v0/services;services\xa2\x02\x03GAA\xaa\x02 Google.Ads.GoogleAds.V0.Services\xca\x02 Google\\Ads\\GoogleAds\\V0\\Servicesb\x06proto3')
+  serialized_pb=_b('\nBgoogle/ads/googleads_v0/proto/services/billing_setup_service.proto\x12 google.ads.googleads.v0.services\x1a;google/ads/googleads_v0/proto/resources/billing_setup.proto\x1a\x1cgoogle/api/annotations.proto\"/\n\x16GetBillingSetupRequest\x12\x15\n\rresource_name\x18\x01 \x01(\t\"|\n\x19MutateBillingSetupRequest\x12\x13\n\x0b\x63ustomer_id\x18\x01 \x01(\t\x12J\n\toperation\x18\x02 \x01(\x0b\x32\x37.google.ads.googleads.v0.services.BillingSetupOperation\"y\n\x15\x42illingSetupOperation\x12\x41\n\x06\x63reate\x18\x02 \x01(\x0b\x32/.google.ads.googleads.v0.resources.BillingSetupH\x00\x12\x10\n\x06remove\x18\x01 \x01(\tH\x00\x42\x0b\n\toperation\"h\n\x1aMutateBillingSetupResponse\x12J\n\x06result\x18\x01 \x01(\x0b\x32:.google.ads.googleads.v0.services.MutateBillingSetupResult\"1\n\x18MutateBillingSetupResult\x12\x15\n\rresource_name\x18\x01 \x01(\t2\x9e\x03\n\x13\x42illingSetupService\x12\xb5\x01\n\x0fGetBillingSetup\x12\x38.google.ads.googleads.v0.services.GetBillingSetupRequest\x1a/.google.ads.googleads.v0.resources.BillingSetup\"7\x82\xd3\xe4\x93\x02\x31\x12//v0/{resource_name=customers/*/billingSetups/*}\x12\xce\x01\n\x12MutateBillingSetup\x12;.google.ads.googleads.v0.services.MutateBillingSetupRequest\x1a<.google.ads.googleads.v0.services.MutateBillingSetupResponse\"=\x82\xd3\xe4\x93\x02\x37\"2/v0/customers/{customer_id=*}/billingSetups:mutate:\x01*B\xd8\x01\n$com.google.ads.googleads.v0.servicesB\x18\x42illingSetupServiceProtoP\x01ZHgoogle.golang.org/genproto/googleapis/ads/googleads/v0/services;services\xa2\x02\x03GAA\xaa\x02 Google.Ads.GoogleAds.V0.Services\xca\x02 Google\\Ads\\GoogleAds\\V0\\Servicesb\x06proto3')
   ,
   dependencies=[google_dot_ads_dot_googleads__v0_dot_proto_dot_resources_dot_billing__setup__pb2.DESCRIPTOR,google_dot_api_dot_annotations__pb2.DESCRIPTOR,])
 
@@ -105,7 +105,14 @@ _BILLINGSETUPOPERATION = _descriptor.Descriptor(
   containing_type=None,
   fields=[
     _descriptor.FieldDescriptor(
-      name='remove', full_name='google.ads.googleads.v0.services.BillingSetupOperation.remove', index=0,
+      name='create', full_name='google.ads.googleads.v0.services.BillingSetupOperation.create', index=0,
+      number=2, type=11, cpp_type=10, label=1,
+      has_default_value=False, default_value=None,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None, file=DESCRIPTOR),
+    _descriptor.FieldDescriptor(
+      name='remove', full_name='google.ads.googleads.v0.services.BillingSetupOperation.remove', index=1,
       number=1, type=9, cpp_type=9, label=1,
       has_default_value=False, default_value=_b("").decode('utf-8'),
       message_type=None, enum_type=None, containing_type=None,
@@ -127,7 +134,7 @@ _BILLINGSETUPOPERATION = _descriptor.Descriptor(
       index=0, containing_type=None, fields=[]),
   ],
   serialized_start=370,
-  serialized_end=424,
+  serialized_end=491,
 )
 
 
@@ -157,8 +164,8 @@ _MUTATEBILLINGSETUPRESPONSE = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=426,
-  serialized_end=530,
+  serialized_start=493,
+  serialized_end=597,
 )
 
 
@@ -188,11 +195,15 @@ _MUTATEBILLINGSETUPRESULT = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=532,
-  serialized_end=581,
+  serialized_start=599,
+  serialized_end=648,
 )
 
 _MUTATEBILLINGSETUPREQUEST.fields_by_name['operation'].message_type = _BILLINGSETUPOPERATION
+_BILLINGSETUPOPERATION.fields_by_name['create'].message_type = google_dot_ads_dot_googleads__v0_dot_proto_dot_resources_dot_billing__setup__pb2._BILLINGSETUP
+_BILLINGSETUPOPERATION.oneofs_by_name['operation'].fields.append(
+  _BILLINGSETUPOPERATION.fields_by_name['create'])
+_BILLINGSETUPOPERATION.fields_by_name['create'].containing_oneof = _BILLINGSETUPOPERATION.oneofs_by_name['operation']
 _BILLINGSETUPOPERATION.oneofs_by_name['operation'].fields.append(
   _BILLINGSETUPOPERATION.fields_by_name['remove'])
 _BILLINGSETUPOPERATION.fields_by_name['remove'].containing_oneof = _BILLINGSETUPOPERATION.oneofs_by_name['operation']
@@ -249,13 +260,15 @@ BillingSetupOperation = _reflection.GeneratedProtocolMessageType('BillingSetupOp
   Attributes:
       operation:
           Only one of these operations can be set. "Update" operations
-          are not supported. "Create" operations will be supported in
-          the very near future.
+          are not supported.
+      create:
+          Creates a billing setup. No resource name is expected for the
+          new billing setup.
       remove:
           Resource name of the billing setup to remove. A setup cannot
           be removed unless it is in a pending state or its scheduled
           start time is in the future. The resource name looks like
-          "customers/{customer\_id}/billingSetups/{billing\_id}".
+          ``customers/{customer_id}/billingSetups/{billing_id}``.
   """,
   # @@protoc_insertion_point(class_scope:google.ads.googleads.v0.services.BillingSetupOperation)
   ))
@@ -302,8 +315,8 @@ _BILLINGSETUPSERVICE = _descriptor.ServiceDescriptor(
   file=DESCRIPTOR,
   index=0,
   options=None,
-  serialized_start=584,
-  serialized_end=998,
+  serialized_start=651,
+  serialized_end=1065,
   methods=[
   _descriptor.MethodDescriptor(
     name='GetBillingSetup',

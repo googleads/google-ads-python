@@ -55,7 +55,7 @@ if __name__ == '__main__':
         description=('Removes an ad group for the specified customer.'))
     # The following argument(s) should be provided to run the example.
     parser.add_argument('-c', '--customer_id', type=six.text_type,
-                        required=True, help='The AdWords customer ID.')
+                        required=True, help='The Google Ads customer ID.')
     parser.add_argument('-a', '--ad_group_id', type=six.text_type,
                         required=True, help='The ad group ID.')
     args = parser.parse_args()

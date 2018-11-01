@@ -19,7 +19,7 @@ DESCRIPTOR = _descriptor.FileDescriptor(
   name='google/ads/googleads_v0/proto/errors/request_error.proto',
   package='google.ads.googleads.v0.errors',
   syntax='proto3',
-  serialized_pb=_b('\n8google/ads/googleads_v0/proto/errors/request_error.proto\x12\x1egoogle.ads.googleads.v0.errors\"\xe3\x03\n\x10RequestErrorEnum\"\xce\x03\n\x0cRequestError\x12\x0f\n\x0bUNSPECIFIED\x10\x00\x12\x0b\n\x07UNKNOWN\x10\x01\x12\x19\n\x15RESOURCE_NAME_MISSING\x10\x03\x12\x1b\n\x17RESOURCE_NAME_MALFORMED\x10\x04\x12\x13\n\x0f\x42\x41\x44_RESOURCE_ID\x10\x11\x12\x17\n\x13INVALID_CUSTOMER_ID\x10\x10\x12\x16\n\x12OPERATION_REQUIRED\x10\x05\x12\x16\n\x12RESOURCE_NOT_FOUND\x10\x06\x12\x16\n\x12INVALID_PAGE_TOKEN\x10\x07\x12\x16\n\x12\x45XPIRED_PAGE_TOKEN\x10\x08\x12\x1a\n\x16REQUIRED_FIELD_MISSING\x10\t\x12\x13\n\x0fIMMUTABLE_FIELD\x10\x0b\x12\x1e\n\x1aTOO_MANY_MUTATE_OPERATIONS\x10\r\x12)\n%CANNOT_BE_EXECUTED_BY_MANAGER_ACCOUNT\x10\x0e\x12\x1f\n\x1b\x43\x41NNOT_MODIFY_FOREIGN_FIELD\x10\x0f\x12\x16\n\x12INVALID_ENUM_VALUE\x10\x12\x12%\n!DEVELOPER_TOKEN_PARAMETER_MISSING\x10\x13\x42\xc7\x01\n\"com.google.ads.googleads.v0.errorsB\x11RequestErrorProtoP\x01ZDgoogle.golang.org/genproto/googleapis/ads/googleads/v0/errors;errors\xa2\x02\x03GAA\xaa\x02\x1eGoogle.Ads.GoogleAds.V0.Errors\xca\x02\x1eGoogle\\Ads\\GoogleAds\\V0\\Errorsb\x06proto3')
+  serialized_pb=_b('\n8google/ads/googleads_v0/proto/errors/request_error.proto\x12\x1egoogle.ads.googleads.v0.errors\"\x8c\x04\n\x10RequestErrorEnum\"\xf7\x03\n\x0cRequestError\x12\x0f\n\x0bUNSPECIFIED\x10\x00\x12\x0b\n\x07UNKNOWN\x10\x01\x12\x19\n\x15RESOURCE_NAME_MISSING\x10\x03\x12\x1b\n\x17RESOURCE_NAME_MALFORMED\x10\x04\x12\x13\n\x0f\x42\x41\x44_RESOURCE_ID\x10\x11\x12\x17\n\x13INVALID_CUSTOMER_ID\x10\x10\x12\x16\n\x12OPERATION_REQUIRED\x10\x05\x12\x16\n\x12RESOURCE_NOT_FOUND\x10\x06\x12\x16\n\x12INVALID_PAGE_TOKEN\x10\x07\x12\x16\n\x12\x45XPIRED_PAGE_TOKEN\x10\x08\x12\x1a\n\x16REQUIRED_FIELD_MISSING\x10\t\x12\x13\n\x0fIMMUTABLE_FIELD\x10\x0b\x12\x1e\n\x1aTOO_MANY_MUTATE_OPERATIONS\x10\r\x12)\n%CANNOT_BE_EXECUTED_BY_MANAGER_ACCOUNT\x10\x0e\x12\x1f\n\x1b\x43\x41NNOT_MODIFY_FOREIGN_FIELD\x10\x0f\x12\x16\n\x12INVALID_ENUM_VALUE\x10\x12\x12%\n!DEVELOPER_TOKEN_PARAMETER_MISSING\x10\x13\x12\'\n#LOGIN_CUSTOMER_ID_PARAMETER_MISSING\x10\x14\x42\xc7\x01\n\"com.google.ads.googleads.v0.errorsB\x11RequestErrorProtoP\x01ZDgoogle.golang.org/genproto/googleapis/ads/googleads/v0/errors;errors\xa2\x02\x03GAA\xaa\x02\x1eGoogle.Ads.GoogleAds.V0.Errors\xca\x02\x1eGoogle\\Ads\\GoogleAds\\V0\\Errorsb\x06proto3')
 )
 
 
@@ -98,11 +98,15 @@ _REQUESTERRORENUM_REQUESTERROR = _descriptor.EnumDescriptor(
       name='DEVELOPER_TOKEN_PARAMETER_MISSING', index=16, number=19,
       options=None,
       type=None),
+    _descriptor.EnumValueDescriptor(
+      name='LOGIN_CUSTOMER_ID_PARAMETER_MISSING', index=17, number=20,
+      options=None,
+      type=None),
   ],
   containing_type=None,
   options=None,
   serialized_start=114,
-  serialized_end=576,
+  serialized_end=617,
 )
 _sym_db.RegisterEnumDescriptor(_REQUESTERRORENUM_REQUESTERROR)
 
@@ -128,7 +132,7 @@ _REQUESTERRORENUM = _descriptor.Descriptor(
   oneofs=[
   ],
   serialized_start=93,
-  serialized_end=576,
+  serialized_end=617,
 )
 
 _REQUESTERRORENUM_REQUESTERROR.containing_type = _REQUESTERRORENUM

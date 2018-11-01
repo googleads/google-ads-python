@@ -19,7 +19,7 @@ DESCRIPTOR = _descriptor.FileDescriptor(
   name='google/ads/googleads_v0/proto/enums/advertising_channel_sub_type.proto',
   package='google.ads.googleads.v0.enums',
   syntax='proto3',
-  serialized_pb=_b('\nFgoogle/ads/googleads_v0/proto/enums/advertising_channel_sub_type.proto\x12\x1dgoogle.ads.googleads.v0.enums\"\xcb\x01\n\x1d\x41\x64vertisingChannelSubTypeEnum\"\xa9\x01\n\x19\x41\x64vertisingChannelSubType\x12\x0f\n\x0bUNSPECIFIED\x10\x00\x12\x0b\n\x07UNKNOWN\x10\x01\x12\x15\n\x11SEARCH_MOBILE_APP\x10\x02\x12\x16\n\x12\x44ISPLAY_MOBILE_APP\x10\x03\x12\x12\n\x0eSEARCH_EXPRESS\x10\x04\x12\x13\n\x0f\x44ISPLAY_EXPRESS\x10\x05\x12\x16\n\x12SHOPPING_SMART_ADS\x10\x06\x42\xcf\x01\n!com.google.ads.googleads.v0.enumsB\x1e\x41\x64vertisingChannelSubTypeProtoP\x01ZBgoogle.golang.org/genproto/googleapis/ads/googleads/v0/enums;enums\xa2\x02\x03GAA\xaa\x02\x1dGoogle.Ads.GoogleAds.V0.Enums\xca\x02\x1dGoogle\\Ads\\GoogleAds\\V0\\Enumsb\x06proto3')
+  serialized_pb=_b('\nFgoogle/ads/googleads_v0/proto/enums/advertising_channel_sub_type.proto\x12\x1dgoogle.ads.googleads.v0.enums\"\x92\x02\n\x1d\x41\x64vertisingChannelSubTypeEnum\"\xf0\x01\n\x19\x41\x64vertisingChannelSubType\x12\x0f\n\x0bUNSPECIFIED\x10\x00\x12\x0b\n\x07UNKNOWN\x10\x01\x12\x15\n\x11SEARCH_MOBILE_APP\x10\x02\x12\x16\n\x12\x44ISPLAY_MOBILE_APP\x10\x03\x12\x12\n\x0eSEARCH_EXPRESS\x10\x04\x12\x13\n\x0f\x44ISPLAY_EXPRESS\x10\x05\x12\x16\n\x12SHOPPING_SMART_ADS\x10\x06\x12\x14\n\x10\x44ISPLAY_GMAIL_AD\x10\x07\x12\x1a\n\x16\x44ISPLAY_SMART_CAMPAIGN\x10\x08\x12\x13\n\x0fVIDEO_OUTSTREAM\x10\tB\xcf\x01\n!com.google.ads.googleads.v0.enumsB\x1e\x41\x64vertisingChannelSubTypeProtoP\x01ZBgoogle.golang.org/genproto/googleapis/ads/googleads/v0/enums;enums\xa2\x02\x03GAA\xaa\x02\x1dGoogle.Ads.GoogleAds.V0.Enums\xca\x02\x1dGoogle\\Ads\\GoogleAds\\V0\\Enumsb\x06proto3')
 )
 
 
@@ -58,11 +58,23 @@ _ADVERTISINGCHANNELSUBTYPEENUM_ADVERTISINGCHANNELSUBTYPE = _descriptor.EnumDescr
       name='SHOPPING_SMART_ADS', index=6, number=6,
       options=None,
       type=None),
+    _descriptor.EnumValueDescriptor(
+      name='DISPLAY_GMAIL_AD', index=7, number=7,
+      options=None,
+      type=None),
+    _descriptor.EnumValueDescriptor(
+      name='DISPLAY_SMART_CAMPAIGN', index=8, number=8,
+      options=None,
+      type=None),
+    _descriptor.EnumValueDescriptor(
+      name='VIDEO_OUTSTREAM', index=9, number=9,
+      options=None,
+      type=None),
   ],
   containing_type=None,
   options=None,
   serialized_start=140,
-  serialized_end=309,
+  serialized_end=380,
 )
 _sym_db.RegisterEnumDescriptor(_ADVERTISINGCHANNELSUBTYPEENUM_ADVERTISINGCHANNELSUBTYPE)
 
@@ -88,7 +100,7 @@ _ADVERTISINGCHANNELSUBTYPEENUM = _descriptor.Descriptor(
   oneofs=[
   ],
   serialized_start=106,
-  serialized_end=309,
+  serialized_end=380,
 )
 
 _ADVERTISINGCHANNELSUBTYPEENUM_ADVERTISINGCHANNELSUBTYPE.containing_type = _ADVERTISINGCHANNELSUBTYPEENUM

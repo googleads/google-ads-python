@@ -19,7 +19,7 @@ DESCRIPTOR = _descriptor.FileDescriptor(
   name='google/ads/googleads_v0/proto/errors/change_status_error.proto',
   package='google.ads.googleads.v0.errors',
   syntax='proto3',
-  serialized_pb=_b('\n>google/ads/googleads_v0/proto/errors/change_status_error.proto\x12\x1egoogle.ads.googleads.v0.errors\"z\n\x15\x43hangeStatusErrorEnum\"a\n\x11\x43hangeStatusError\x12\x0f\n\x0bUNSPECIFIED\x10\x00\x12\x0b\n\x07UNKNOWN\x10\x01\x12\x16\n\x12INVALID_START_DATE\x10\x02\x12\x16\n\x12START_DATE_TOO_OLD\x10\x03\x42\xcc\x01\n\"com.google.ads.googleads.v0.errorsB\x16\x43hangeStatusErrorProtoP\x01ZDgoogle.golang.org/genproto/googleapis/ads/googleads/v0/errors;errors\xa2\x02\x03GAA\xaa\x02\x1eGoogle.Ads.GoogleAds.V0.Errors\xca\x02\x1eGoogle\\Ads\\GoogleAds\\V0\\Errorsb\x06proto3')
+  serialized_pb=_b('\n>google/ads/googleads_v0/proto/errors/change_status_error.proto\x12\x1egoogle.ads.googleads.v0.errors\"b\n\x15\x43hangeStatusErrorEnum\"I\n\x11\x43hangeStatusError\x12\x0f\n\x0bUNSPECIFIED\x10\x00\x12\x0b\n\x07UNKNOWN\x10\x01\x12\x16\n\x12START_DATE_TOO_OLD\x10\x03\x42\xcc\x01\n\"com.google.ads.googleads.v0.errorsB\x16\x43hangeStatusErrorProtoP\x01ZDgoogle.golang.org/genproto/googleapis/ads/googleads/v0/errors;errors\xa2\x02\x03GAA\xaa\x02\x1eGoogle.Ads.GoogleAds.V0.Errors\xca\x02\x1eGoogle\\Ads\\GoogleAds\\V0\\Errorsb\x06proto3')
 )
 
 
@@ -39,18 +39,14 @@ _CHANGESTATUSERRORENUM_CHANGESTATUSERROR = _descriptor.EnumDescriptor(
       options=None,
       type=None),
     _descriptor.EnumValueDescriptor(
-      name='INVALID_START_DATE', index=2, number=2,
-      options=None,
-      type=None),
-    _descriptor.EnumValueDescriptor(
-      name='START_DATE_TOO_OLD', index=3, number=3,
+      name='START_DATE_TOO_OLD', index=2, number=3,
       options=None,
       type=None),
   ],
   containing_type=None,
   options=None,
   serialized_start=123,
-  serialized_end=220,
+  serialized_end=196,
 )
 _sym_db.RegisterEnumDescriptor(_CHANGESTATUSERRORENUM_CHANGESTATUSERROR)
 
@@ -76,7 +72,7 @@ _CHANGESTATUSERRORENUM = _descriptor.Descriptor(
   oneofs=[
   ],
   serialized_start=98,
-  serialized_end=220,
+  serialized_end=196,
 )
 
 _CHANGESTATUSERRORENUM_CHANGESTATUSERROR.containing_type = _CHANGESTATUSERRORENUM

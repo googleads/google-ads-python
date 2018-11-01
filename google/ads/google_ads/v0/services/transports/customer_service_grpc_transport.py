@@ -102,3 +102,17 @@ class CustomerServiceGrpcTransport(object):
                 deserialized response object.
         """
         return self._stubs['customer_service_stub'].GetCustomer
+
+    @property
+    def list_accessible_customers(self):
+        """Return the gRPC stub for {$apiMethod.name}.
+
+        Returns resource names of customers directly accessible by the
+        user authenticating the call.
+
+        Returns:
+            Callable: A callable which accepts the appropriate
+                deserialized request object and returns a
+                deserialized response object.
+        """
+        return self._stubs['customer_service_stub'].ListAccessibleCustomers

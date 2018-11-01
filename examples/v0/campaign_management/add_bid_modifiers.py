@@ -74,7 +74,7 @@ if __name__ == '__main__':
                      'the given customer ID.'))
     # The following argument(s) should be provided to run the example.
     parser.add_argument('-c', '--customer_id', type=six.text_type,
-                        required=True, help='The AdWords customer ID.')
+                        required=True, help='The Google Ads customer ID.')
     parser.add_argument('-i', '--campaign_id', type=six.text_type,
                         required=True, help='The campaign ID.')
     parser.add_argument('-b', '--bid_modifier_value', type=float,

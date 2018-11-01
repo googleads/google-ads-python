@@ -146,7 +146,8 @@ class GoogleAdsClientTest(TestCase):
     def test_get_service(self):
         # Retrieve service names for all defined service clients.
         service_names = [
-            name.rsplit('Client')[0] for name in dir(google.ads.google_ads.v0)
+            '%s%s' % (name.rsplit('ServiceClient')[0], 'Service')
+            for name in dir(google.ads.google_ads.v0)
             if 'ServiceClient' in name]
 
         client = self._create_test_client()

@@ -23,8 +23,10 @@ from google.ads.google_ads.v0.proto.resources import account_budget_pb2 as googl
 from google.ads.google_ads.v0.proto.resources import account_budget_proposal_pb2 as google_dot_ads_dot_googleads__v0_dot_proto_dot_resources_dot_account__budget__proposal__pb2
 from google.ads.google_ads.v0.proto.resources import ad_group_pb2 as google_dot_ads_dot_googleads__v0_dot_proto_dot_resources_dot_ad__group__pb2
 from google.ads.google_ads.v0.proto.resources import ad_group_ad_pb2 as google_dot_ads_dot_googleads__v0_dot_proto_dot_resources_dot_ad__group__ad__pb2
+from google.ads.google_ads.v0.proto.resources import ad_group_audience_view_pb2 as google_dot_ads_dot_googleads__v0_dot_proto_dot_resources_dot_ad__group__audience__view__pb2
 from google.ads.google_ads.v0.proto.resources import ad_group_bid_modifier_pb2 as google_dot_ads_dot_googleads__v0_dot_proto_dot_resources_dot_ad__group__bid__modifier__pb2
 from google.ads.google_ads.v0.proto.resources import ad_group_criterion_pb2 as google_dot_ads_dot_googleads__v0_dot_proto_dot_resources_dot_ad__group__criterion__pb2
+from google.ads.google_ads.v0.proto.resources import age_range_view_pb2 as google_dot_ads_dot_googleads__v0_dot_proto_dot_resources_dot_age__range__view__pb2
 from google.ads.google_ads.v0.proto.resources import bidding_strategy_pb2 as google_dot_ads_dot_googleads__v0_dot_proto_dot_resources_dot_bidding__strategy__pb2
 from google.ads.google_ads.v0.proto.resources import billing_setup_pb2 as google_dot_ads_dot_googleads__v0_dot_proto_dot_resources_dot_billing__setup__pb2
 from google.ads.google_ads.v0.proto.resources import campaign_pb2 as google_dot_ads_dot_googleads__v0_dot_proto_dot_resources_dot_campaign__pb2
@@ -35,11 +37,21 @@ from google.ads.google_ads.v0.proto.resources import campaign_group_pb2 as googl
 from google.ads.google_ads.v0.proto.resources import campaign_shared_set_pb2 as google_dot_ads_dot_googleads__v0_dot_proto_dot_resources_dot_campaign__shared__set__pb2
 from google.ads.google_ads.v0.proto.resources import change_status_pb2 as google_dot_ads_dot_googleads__v0_dot_proto_dot_resources_dot_change__status__pb2
 from google.ads.google_ads.v0.proto.resources import customer_pb2 as google_dot_ads_dot_googleads__v0_dot_proto_dot_resources_dot_customer__pb2
+from google.ads.google_ads.v0.proto.resources import customer_client_link_pb2 as google_dot_ads_dot_googleads__v0_dot_proto_dot_resources_dot_customer__client__link__pb2
+from google.ads.google_ads.v0.proto.resources import customer_manager_link_pb2 as google_dot_ads_dot_googleads__v0_dot_proto_dot_resources_dot_customer__manager__link__pb2
+from google.ads.google_ads.v0.proto.resources import display_keyword_view_pb2 as google_dot_ads_dot_googleads__v0_dot_proto_dot_resources_dot_display__keyword__view__pb2
+from google.ads.google_ads.v0.proto.resources import gender_view_pb2 as google_dot_ads_dot_googleads__v0_dot_proto_dot_resources_dot_gender__view__pb2
 from google.ads.google_ads.v0.proto.resources import geo_target_constant_pb2 as google_dot_ads_dot_googleads__v0_dot_proto_dot_resources_dot_geo__target__constant__pb2
+from google.ads.google_ads.v0.proto.resources import hotel_group_view_pb2 as google_dot_ads_dot_googleads__v0_dot_proto_dot_resources_dot_hotel__group__view__pb2
 from google.ads.google_ads.v0.proto.resources import keyword_view_pb2 as google_dot_ads_dot_googleads__v0_dot_proto_dot_resources_dot_keyword__view__pb2
+from google.ads.google_ads.v0.proto.resources import managed_placement_view_pb2 as google_dot_ads_dot_googleads__v0_dot_proto_dot_resources_dot_managed__placement__view__pb2
+from google.ads.google_ads.v0.proto.resources import parental_status_view_pb2 as google_dot_ads_dot_googleads__v0_dot_proto_dot_resources_dot_parental__status__view__pb2
+from google.ads.google_ads.v0.proto.resources import product_group_view_pb2 as google_dot_ads_dot_googleads__v0_dot_proto_dot_resources_dot_product__group__view__pb2
 from google.ads.google_ads.v0.proto.resources import recommendation_pb2 as google_dot_ads_dot_googleads__v0_dot_proto_dot_resources_dot_recommendation__pb2
 from google.ads.google_ads.v0.proto.resources import shared_criterion_pb2 as google_dot_ads_dot_googleads__v0_dot_proto_dot_resources_dot_shared__criterion__pb2
 from google.ads.google_ads.v0.proto.resources import shared_set_pb2 as google_dot_ads_dot_googleads__v0_dot_proto_dot_resources_dot_shared__set__pb2
+from google.ads.google_ads.v0.proto.resources import topic_constant_pb2 as google_dot_ads_dot_googleads__v0_dot_proto_dot_resources_dot_topic__constant__pb2
+from google.ads.google_ads.v0.proto.resources import topic_view_pb2 as google_dot_ads_dot_googleads__v0_dot_proto_dot_resources_dot_topic__view__pb2
 from google.ads.google_ads.v0.proto.resources import video_pb2 as google_dot_ads_dot_googleads__v0_dot_proto_dot_resources_dot_video__pb2
 from google.api import annotations_pb2 as google_dot_api_dot_annotations__pb2
 from google.protobuf import field_mask_pb2 as google_dot_protobuf_dot_field__mask__pb2
@@ -50,9 +62,9 @@ DESCRIPTOR = _descriptor.FileDescriptor(
   name='google/ads/googleads_v0/proto/services/google_ads_service.proto',
   package='google.ads.googleads.v0.services',
   syntax='proto3',
-  serialized_pb=_b('\n?google/ads/googleads_v0/proto/services/google_ads_service.proto\x12 google.ads.googleads.v0.services\x1a\x32google/ads/googleads_v0/proto/common/metrics.proto\x1a\x39google/ads/googleads_v0/proto/enums/ad_network_type.proto\x1a\x35google/ads/googleads_v0/proto/enums/day_of_week.proto\x1a\x30google/ads/googleads_v0/proto/enums/device.proto\x1a\x37google/ads/googleads_v0/proto/enums/month_of_year.proto\x1a.google/ads/googleads_v0/proto/enums/slot.proto\x1a<google/ads/googleads_v0/proto/resources/account_budget.proto\x1a\x45google/ads/googleads_v0/proto/resources/account_budget_proposal.proto\x1a\x36google/ads/googleads_v0/proto/resources/ad_group.proto\x1a\x39google/ads/googleads_v0/proto/resources/ad_group_ad.proto\x1a\x43google/ads/googleads_v0/proto/resources/ad_group_bid_modifier.proto\x1a@google/ads/googleads_v0/proto/resources/ad_group_criterion.proto\x1a>google/ads/googleads_v0/proto/resources/bidding_strategy.proto\x1a;google/ads/googleads_v0/proto/resources/billing_setup.proto\x1a\x36google/ads/googleads_v0/proto/resources/campaign.proto\x1a\x43google/ads/googleads_v0/proto/resources/campaign_bid_modifier.proto\x1a=google/ads/googleads_v0/proto/resources/campaign_budget.proto\x1a@google/ads/googleads_v0/proto/resources/campaign_criterion.proto\x1a<google/ads/googleads_v0/proto/resources/campaign_group.proto\x1a\x41google/ads/googleads_v0/proto/resources/campaign_shared_set.proto\x1a;google/ads/googleads_v0/proto/resources/change_status.proto\x1a\x36google/ads/googleads_v0/proto/resources/customer.proto\x1a\x41google/ads/googleads_v0/proto/resources/geo_target_constant.proto\x1a:google/ads/googleads_v0/proto/resources/keyword_view.proto\x1a<google/ads/googleads_v0/proto/resources/recommendation.proto\x1a>google/ads/googleads_v0/proto/resources/shared_criterion.proto\x1a\x38google/ads/googleads_v0/proto/resources/shared_set.proto\x1a\x33google/ads/googleads_v0/proto/resources/video.proto\x1a\x1cgoogle/api/annotations.proto\x1a google/protobuf/field_mask.proto\x1a\x1egoogle/protobuf/wrappers.proto\"c\n\x16SearchGoogleAdsRequest\x12\x13\n\x0b\x63ustomer_id\x18\x01 \x01(\t\x12\r\n\x05query\x18\x02 \x01(\t\x12\x12\n\npage_token\x18\x03 \x01(\t\x12\x11\n\tpage_size\x18\x04 \x01(\x05\"\xc0\x01\n\x17SearchGoogleAdsResponse\x12?\n\x07results\x18\x01 \x03(\x0b\x32..google.ads.googleads.v0.services.GoogleAdsRow\x12\x17\n\x0fnext_page_token\x18\x02 \x01(\t\x12\x1b\n\x13total_results_count\x18\x03 \x01(\x03\x12.\n\nfield_mask\x18\x05 \x01(\x0b\x32\x1a.google.protobuf.FieldMask\"\xb1\x12\n\x0cGoogleAdsRow\x12H\n\x0e\x61\x63\x63ount_budget\x18* \x01(\x0b\x32\x30.google.ads.googleads.v0.resources.AccountBudget\x12Y\n\x17\x61\x63\x63ount_budget_proposal\x18+ \x01(\x0b\x32\x38.google.ads.googleads.v0.resources.AccountBudgetProposal\x12<\n\x08\x61\x64_group\x18\x03 \x01(\x0b\x32*.google.ads.googleads.v0.resources.AdGroup\x12\x41\n\x0b\x61\x64_group_ad\x18\x10 \x01(\x0b\x32,.google.ads.googleads.v0.resources.AdGroupAd\x12T\n\x15\x61\x64_group_bid_modifier\x18\x18 \x01(\x0b\x32\x35.google.ads.googleads.v0.resources.AdGroupBidModifier\x12O\n\x12\x61\x64_group_criterion\x18\x11 \x01(\x0b\x32\x33.google.ads.googleads.v0.resources.AdGroupCriterion\x12L\n\x10\x62idding_strategy\x18\x12 \x01(\x0b\x32\x32.google.ads.googleads.v0.resources.BiddingStrategy\x12\x46\n\rbilling_setup\x18) \x01(\x0b\x32/.google.ads.googleads.v0.resources.BillingSetup\x12J\n\x0f\x63\x61mpaign_budget\x18\x13 \x01(\x0b\x32\x31.google.ads.googleads.v0.resources.CampaignBudget\x12=\n\x08\x63\x61mpaign\x18\x02 \x01(\x0b\x32+.google.ads.googleads.v0.resources.Campaign\x12U\n\x15\x63\x61mpaign_bid_modifier\x18\x1a \x01(\x0b\x32\x36.google.ads.googleads.v0.resources.CampaignBidModifier\x12P\n\x12\x63\x61mpaign_criterion\x18\x14 \x01(\x0b\x32\x34.google.ads.googleads.v0.resources.CampaignCriterion\x12H\n\x0e\x63\x61mpaign_group\x18\x19 \x01(\x0b\x32\x30.google.ads.googleads.v0.resources.CampaignGroup\x12Q\n\x13\x63\x61mpaign_shared_set\x18\x1e \x01(\x0b\x32\x34.google.ads.googleads.v0.resources.CampaignSharedSet\x12\x46\n\rchange_status\x18% \x01(\x0b\x32/.google.ads.googleads.v0.resources.ChangeStatus\x12=\n\x08\x63ustomer\x18\x01 \x01(\x0b\x32+.google.ads.googleads.v0.resources.Customer\x12Q\n\x13geo_target_constant\x18\x17 \x01(\x0b\x32\x34.google.ads.googleads.v0.resources.GeoTargetConstant\x12\x44\n\x0ckeyword_view\x18\x15 \x01(\x0b\x32..google.ads.googleads.v0.resources.KeywordView\x12I\n\x0erecommendation\x18\x16 \x01(\x0b\x32\x31.google.ads.googleads.v0.resources.Recommendation\x12L\n\x10shared_criterion\x18\x1d \x01(\x0b\x32\x32.google.ads.googleads.v0.resources.SharedCriterion\x12@\n\nshared_set\x18\x1b \x01(\x0b\x32,.google.ads.googleads.v0.resources.SharedSet\x12\x37\n\x05video\x18\' \x01(\x0b\x32(.google.ads.googleads.v0.resources.Video\x12\x38\n\x07metrics\x18\x04 \x01(\x0b\x32\'.google.ads.googleads.v0.common.Metrics\x12W\n\x0f\x61\x64_network_type\x18\x05 \x01(\x0e\x32>.google.ads.googleads.v0.enums.AdNetworkTypeEnum.AdNetworkType\x12*\n\x04\x64\x61te\x18\x06 \x01(\x0b\x32\x1c.google.protobuf.StringValue\x12K\n\x0b\x64\x61y_of_week\x18\x07 \x01(\x0e\x32\x36.google.ads.googleads.v0.enums.DayOfWeekEnum.DayOfWeek\x12@\n\x06\x64\x65vice\x18\x08 \x01(\x0e\x32\x30.google.ads.googleads.v0.enums.DeviceEnum.Device\x12)\n\x04hour\x18\t \x01(\x0b\x32\x1b.google.protobuf.Int32Value\x12+\n\x05month\x18\n \x01(\x0b\x32\x1c.google.protobuf.StringValue\x12Q\n\rmonth_of_year\x18\x1c \x01(\x0e\x32:.google.ads.googleads.v0.enums.MonthOfYearEnum.MonthOfYear\x12-\n\x07quarter\x18\x0c \x01(\x0b\x32\x1c.google.protobuf.StringValue\x12:\n\x04slot\x18\r \x01(\x0e\x32,.google.ads.googleads.v0.enums.SlotEnum.Slot\x12*\n\x04week\x18\x0e \x01(\x0b\x32\x1c.google.protobuf.StringValue\x12)\n\x04year\x18\x0f \x01(\x0b\x32\x1b.google.protobuf.Int32Value2\xcd\x01\n\x10GoogleAdsService\x12\xb8\x01\n\x06Search\x12\x38.google.ads.googleads.v0.services.SearchGoogleAdsRequest\x1a\x39.google.ads.googleads.v0.services.SearchGoogleAdsResponse\"9\x82\xd3\xe4\x93\x02\x33\"./v0/customers/{customer_id=*}/googleAds:search:\x01*B\xd5\x01\n$com.google.ads.googleads.v0.servicesB\x15GoogleAdsServiceProtoP\x01ZHgoogle.golang.org/genproto/googleapis/ads/googleads/v0/services;services\xa2\x02\x03GAA\xaa\x02 Google.Ads.GoogleAds.V0.Services\xca\x02 Google\\Ads\\GoogleAds\\V0\\Servicesb\x06proto3')
+  serialized_pb=_b('\n?google/ads/googleads_v0/proto/services/google_ads_service.proto\x12 google.ads.googleads.v0.services\x1a\x32google/ads/googleads_v0/proto/common/metrics.proto\x1a\x39google/ads/googleads_v0/proto/enums/ad_network_type.proto\x1a\x35google/ads/googleads_v0/proto/enums/day_of_week.proto\x1a\x30google/ads/googleads_v0/proto/enums/device.proto\x1a\x37google/ads/googleads_v0/proto/enums/month_of_year.proto\x1a.google/ads/googleads_v0/proto/enums/slot.proto\x1a<google/ads/googleads_v0/proto/resources/account_budget.proto\x1a\x45google/ads/googleads_v0/proto/resources/account_budget_proposal.proto\x1a\x36google/ads/googleads_v0/proto/resources/ad_group.proto\x1a\x39google/ads/googleads_v0/proto/resources/ad_group_ad.proto\x1a\x44google/ads/googleads_v0/proto/resources/ad_group_audience_view.proto\x1a\x43google/ads/googleads_v0/proto/resources/ad_group_bid_modifier.proto\x1a@google/ads/googleads_v0/proto/resources/ad_group_criterion.proto\x1a<google/ads/googleads_v0/proto/resources/age_range_view.proto\x1a>google/ads/googleads_v0/proto/resources/bidding_strategy.proto\x1a;google/ads/googleads_v0/proto/resources/billing_setup.proto\x1a\x36google/ads/googleads_v0/proto/resources/campaign.proto\x1a\x43google/ads/googleads_v0/proto/resources/campaign_bid_modifier.proto\x1a=google/ads/googleads_v0/proto/resources/campaign_budget.proto\x1a@google/ads/googleads_v0/proto/resources/campaign_criterion.proto\x1a<google/ads/googleads_v0/proto/resources/campaign_group.proto\x1a\x41google/ads/googleads_v0/proto/resources/campaign_shared_set.proto\x1a;google/ads/googleads_v0/proto/resources/change_status.proto\x1a\x36google/ads/googleads_v0/proto/resources/customer.proto\x1a\x42google/ads/googleads_v0/proto/resources/customer_client_link.proto\x1a\x43google/ads/googleads_v0/proto/resources/customer_manager_link.proto\x1a\x42google/ads/googleads_v0/proto/resources/display_keyword_view.proto\x1a\x39google/ads/googleads_v0/proto/resources/gender_view.proto\x1a\x41google/ads/googleads_v0/proto/resources/geo_target_constant.proto\x1a>google/ads/googleads_v0/proto/resources/hotel_group_view.proto\x1a:google/ads/googleads_v0/proto/resources/keyword_view.proto\x1a\x44google/ads/googleads_v0/proto/resources/managed_placement_view.proto\x1a\x42google/ads/googleads_v0/proto/resources/parental_status_view.proto\x1a@google/ads/googleads_v0/proto/resources/product_group_view.proto\x1a<google/ads/googleads_v0/proto/resources/recommendation.proto\x1a>google/ads/googleads_v0/proto/resources/shared_criterion.proto\x1a\x38google/ads/googleads_v0/proto/resources/shared_set.proto\x1a<google/ads/googleads_v0/proto/resources/topic_constant.proto\x1a\x38google/ads/googleads_v0/proto/resources/topic_view.proto\x1a\x33google/ads/googleads_v0/proto/resources/video.proto\x1a\x1cgoogle/api/annotations.proto\x1a google/protobuf/field_mask.proto\x1a\x1egoogle/protobuf/wrappers.proto\"c\n\x16SearchGoogleAdsRequest\x12\x13\n\x0b\x63ustomer_id\x18\x01 \x01(\t\x12\r\n\x05query\x18\x02 \x01(\t\x12\x12\n\npage_token\x18\x03 \x01(\t\x12\x11\n\tpage_size\x18\x04 \x01(\x05\"\xc0\x01\n\x17SearchGoogleAdsResponse\x12?\n\x07results\x18\x01 \x03(\x0b\x32..google.ads.googleads.v0.services.GoogleAdsRow\x12\x17\n\x0fnext_page_token\x18\x02 \x01(\t\x12\x1b\n\x13total_results_count\x18\x03 \x01(\x03\x12.\n\nfield_mask\x18\x05 \x01(\x0b\x32\x1a.google.protobuf.FieldMask\"\xef\x19\n\x0cGoogleAdsRow\x12H\n\x0e\x61\x63\x63ount_budget\x18* \x01(\x0b\x32\x30.google.ads.googleads.v0.resources.AccountBudget\x12Y\n\x17\x61\x63\x63ount_budget_proposal\x18+ \x01(\x0b\x32\x38.google.ads.googleads.v0.resources.AccountBudgetProposal\x12<\n\x08\x61\x64_group\x18\x03 \x01(\x0b\x32*.google.ads.googleads.v0.resources.AdGroup\x12\x41\n\x0b\x61\x64_group_ad\x18\x10 \x01(\x0b\x32,.google.ads.googleads.v0.resources.AdGroupAd\x12V\n\x16\x61\x64_group_audience_view\x18\x39 \x01(\x0b\x32\x36.google.ads.googleads.v0.resources.AdGroupAudienceView\x12T\n\x15\x61\x64_group_bid_modifier\x18\x18 \x01(\x0b\x32\x35.google.ads.googleads.v0.resources.AdGroupBidModifier\x12O\n\x12\x61\x64_group_criterion\x18\x11 \x01(\x0b\x32\x33.google.ads.googleads.v0.resources.AdGroupCriterion\x12G\n\x0e\x61ge_range_view\x18\x30 \x01(\x0b\x32/.google.ads.googleads.v0.resources.AgeRangeView\x12L\n\x10\x62idding_strategy\x18\x12 \x01(\x0b\x32\x32.google.ads.googleads.v0.resources.BiddingStrategy\x12\x46\n\rbilling_setup\x18) \x01(\x0b\x32/.google.ads.googleads.v0.resources.BillingSetup\x12J\n\x0f\x63\x61mpaign_budget\x18\x13 \x01(\x0b\x32\x31.google.ads.googleads.v0.resources.CampaignBudget\x12=\n\x08\x63\x61mpaign\x18\x02 \x01(\x0b\x32+.google.ads.googleads.v0.resources.Campaign\x12U\n\x15\x63\x61mpaign_bid_modifier\x18\x1a \x01(\x0b\x32\x36.google.ads.googleads.v0.resources.CampaignBidModifier\x12P\n\x12\x63\x61mpaign_criterion\x18\x14 \x01(\x0b\x32\x34.google.ads.googleads.v0.resources.CampaignCriterion\x12H\n\x0e\x63\x61mpaign_group\x18\x19 \x01(\x0b\x32\x30.google.ads.googleads.v0.resources.CampaignGroup\x12Q\n\x13\x63\x61mpaign_shared_set\x18\x1e \x01(\x0b\x32\x34.google.ads.googleads.v0.resources.CampaignSharedSet\x12\x46\n\rchange_status\x18% \x01(\x0b\x32/.google.ads.googleads.v0.resources.ChangeStatus\x12=\n\x08\x63ustomer\x18\x01 \x01(\x0b\x32+.google.ads.googleads.v0.resources.Customer\x12U\n\x15\x63ustomer_manager_link\x18= \x01(\x0b\x32\x36.google.ads.googleads.v0.resources.CustomerManagerLink\x12S\n\x14\x63ustomer_client_link\x18> \x01(\x0b\x32\x35.google.ads.googleads.v0.resources.CustomerClientLink\x12S\n\x14\x64isplay_keyword_view\x18/ \x01(\x0b\x32\x35.google.ads.googleads.v0.resources.DisplayKeywordView\x12\x42\n\x0bgender_view\x18( \x01(\x0b\x32-.google.ads.googleads.v0.resources.GenderView\x12Q\n\x13geo_target_constant\x18\x17 \x01(\x0b\x32\x34.google.ads.googleads.v0.resources.GeoTargetConstant\x12K\n\x10hotel_group_view\x18\x33 \x01(\x0b\x32\x31.google.ads.googleads.v0.resources.HotelGroupView\x12\x44\n\x0ckeyword_view\x18\x15 \x01(\x0b\x32..google.ads.googleads.v0.resources.KeywordView\x12W\n\x16managed_placement_view\x18\x35 \x01(\x0b\x32\x37.google.ads.googleads.v0.resources.ManagedPlacementView\x12S\n\x14parental_status_view\x18- \x01(\x0b\x32\x35.google.ads.googleads.v0.resources.ParentalStatusView\x12O\n\x12product_group_view\x18\x36 \x01(\x0b\x32\x33.google.ads.googleads.v0.resources.ProductGroupView\x12I\n\x0erecommendation\x18\x16 \x01(\x0b\x32\x31.google.ads.googleads.v0.resources.Recommendation\x12L\n\x10shared_criterion\x18\x1d \x01(\x0b\x32\x32.google.ads.googleads.v0.resources.SharedCriterion\x12@\n\nshared_set\x18\x1b \x01(\x0b\x32,.google.ads.googleads.v0.resources.SharedSet\x12@\n\ntopic_view\x18, \x01(\x0b\x32,.google.ads.googleads.v0.resources.TopicView\x12H\n\x0etopic_constant\x18\x1f \x01(\x0b\x32\x30.google.ads.googleads.v0.resources.TopicConstant\x12\x37\n\x05video\x18\' \x01(\x0b\x32(.google.ads.googleads.v0.resources.Video\x12\x38\n\x07metrics\x18\x04 \x01(\x0b\x32\'.google.ads.googleads.v0.common.Metrics\x12W\n\x0f\x61\x64_network_type\x18\x05 \x01(\x0e\x32>.google.ads.googleads.v0.enums.AdNetworkTypeEnum.AdNetworkType\x12*\n\x04\x64\x61te\x18\x06 \x01(\x0b\x32\x1c.google.protobuf.StringValue\x12K\n\x0b\x64\x61y_of_week\x18\x07 \x01(\x0e\x32\x36.google.ads.googleads.v0.enums.DayOfWeekEnum.DayOfWeek\x12@\n\x06\x64\x65vice\x18\x08 \x01(\x0e\x32\x30.google.ads.googleads.v0.enums.DeviceEnum.Device\x12)\n\x04hour\x18\t \x01(\x0b\x32\x1b.google.protobuf.Int32Value\x12+\n\x05month\x18\n \x01(\x0b\x32\x1c.google.protobuf.StringValue\x12Q\n\rmonth_of_year\x18\x1c \x01(\x0e\x32:.google.ads.googleads.v0.enums.MonthOfYearEnum.MonthOfYear\x12-\n\x07quarter\x18\x0c \x01(\x0b\x32\x1c.google.protobuf.StringValue\x12:\n\x04slot\x18\r \x01(\x0e\x32,.google.ads.googleads.v0.enums.SlotEnum.Slot\x12*\n\x04week\x18\x0e \x01(\x0b\x32\x1c.google.protobuf.StringValue\x12)\n\x04year\x18\x0f \x01(\x0b\x32\x1b.google.protobuf.Int32Value2\xcd\x01\n\x10GoogleAdsService\x12\xb8\x01\n\x06Search\x12\x38.google.ads.googleads.v0.services.SearchGoogleAdsRequest\x1a\x39.google.ads.googleads.v0.services.SearchGoogleAdsResponse\"9\x82\xd3\xe4\x93\x02\x33\"./v0/customers/{customer_id=*}/googleAds:search:\x01*B\xd5\x01\n$com.google.ads.googleads.v0.servicesB\x15GoogleAdsServiceProtoP\x01ZHgoogle.golang.org/genproto/googleapis/ads/googleads/v0/services;services\xa2\x02\x03GAA\xaa\x02 Google.Ads.GoogleAds.V0.Services\xca\x02 Google\\Ads\\GoogleAds\\V0\\Servicesb\x06proto3')
   ,
-  dependencies=[google_dot_ads_dot_googleads__v0_dot_proto_dot_common_dot_metrics__pb2.DESCRIPTOR,google_dot_ads_dot_googleads__v0_dot_proto_dot_enums_dot_ad__network__type__pb2.DESCRIPTOR,google_dot_ads_dot_googleads__v0_dot_proto_dot_enums_dot_day__of__week__pb2.DESCRIPTOR,google_dot_ads_dot_googleads__v0_dot_proto_dot_enums_dot_device__pb2.DESCRIPTOR,google_dot_ads_dot_googleads__v0_dot_proto_dot_enums_dot_month__of__year__pb2.DESCRIPTOR,google_dot_ads_dot_googleads__v0_dot_proto_dot_enums_dot_slot__pb2.DESCRIPTOR,google_dot_ads_dot_googleads__v0_dot_proto_dot_resources_dot_account__budget__pb2.DESCRIPTOR,google_dot_ads_dot_googleads__v0_dot_proto_dot_resources_dot_account__budget__proposal__pb2.DESCRIPTOR,google_dot_ads_dot_googleads__v0_dot_proto_dot_resources_dot_ad__group__pb2.DESCRIPTOR,google_dot_ads_dot_googleads__v0_dot_proto_dot_resources_dot_ad__group__ad__pb2.DESCRIPTOR,google_dot_ads_dot_googleads__v0_dot_proto_dot_resources_dot_ad__group__bid__modifier__pb2.DESCRIPTOR,google_dot_ads_dot_googleads__v0_dot_proto_dot_resources_dot_ad__group__criterion__pb2.DESCRIPTOR,google_dot_ads_dot_googleads__v0_dot_proto_dot_resources_dot_bidding__strategy__pb2.DESCRIPTOR,google_dot_ads_dot_googleads__v0_dot_proto_dot_resources_dot_billing__setup__pb2.DESCRIPTOR,google_dot_ads_dot_googleads__v0_dot_proto_dot_resources_dot_campaign__pb2.DESCRIPTOR,google_dot_ads_dot_googleads__v0_dot_proto_dot_resources_dot_campaign__bid__modifier__pb2.DESCRIPTOR,google_dot_ads_dot_googleads__v0_dot_proto_dot_resources_dot_campaign__budget__pb2.DESCRIPTOR,google_dot_ads_dot_googleads__v0_dot_proto_dot_resources_dot_campaign__criterion__pb2.DESCRIPTOR,google_dot_ads_dot_googleads__v0_dot_proto_dot_resources_dot_campaign__group__pb2.DESCRIPTOR,google_dot_ads_dot_googleads__v0_dot_proto_dot_resources_dot_campaign__shared__set__pb2.DESCRIPTOR,google_dot_ads_dot_googleads__v0_dot_proto_dot_resources_dot_change__status__pb2.DESCRIPTOR,google_dot_ads_dot_googleads__v0_dot_proto_dot_resources_dot_customer__pb2.DESCRIPTOR,google_dot_ads_dot_googleads__v0_dot_proto_dot_resources_dot_geo__target__constant__pb2.DESCRIPTOR,google_dot_ads_dot_googleads__v0_dot_proto_dot_resources_dot_keyword__view__pb2.DESCRIPTOR,google_dot_ads_dot_googleads__v0_dot_proto_dot_resources_dot_recommendation__pb2.DESCRIPTOR,google_dot_ads_dot_googleads__v0_dot_proto_dot_resources_dot_shared__criterion__pb2.DESCRIPTOR,google_dot_ads_dot_googleads__v0_dot_proto_dot_resources_dot_shared__set__pb2.DESCRIPTOR,google_dot_ads_dot_googleads__v0_dot_proto_dot_resources_dot_video__pb2.DESCRIPTOR,google_dot_api_dot_annotations__pb2.DESCRIPTOR,google_dot_protobuf_dot_field__mask__pb2.DESCRIPTOR,google_dot_protobuf_dot_wrappers__pb2.DESCRIPTOR,])
+  dependencies=[google_dot_ads_dot_googleads__v0_dot_proto_dot_common_dot_metrics__pb2.DESCRIPTOR,google_dot_ads_dot_googleads__v0_dot_proto_dot_enums_dot_ad__network__type__pb2.DESCRIPTOR,google_dot_ads_dot_googleads__v0_dot_proto_dot_enums_dot_day__of__week__pb2.DESCRIPTOR,google_dot_ads_dot_googleads__v0_dot_proto_dot_enums_dot_device__pb2.DESCRIPTOR,google_dot_ads_dot_googleads__v0_dot_proto_dot_enums_dot_month__of__year__pb2.DESCRIPTOR,google_dot_ads_dot_googleads__v0_dot_proto_dot_enums_dot_slot__pb2.DESCRIPTOR,google_dot_ads_dot_googleads__v0_dot_proto_dot_resources_dot_account__budget__pb2.DESCRIPTOR,google_dot_ads_dot_googleads__v0_dot_proto_dot_resources_dot_account__budget__proposal__pb2.DESCRIPTOR,google_dot_ads_dot_googleads__v0_dot_proto_dot_resources_dot_ad__group__pb2.DESCRIPTOR,google_dot_ads_dot_googleads__v0_dot_proto_dot_resources_dot_ad__group__ad__pb2.DESCRIPTOR,google_dot_ads_dot_googleads__v0_dot_proto_dot_resources_dot_ad__group__audience__view__pb2.DESCRIPTOR,google_dot_ads_dot_googleads__v0_dot_proto_dot_resources_dot_ad__group__bid__modifier__pb2.DESCRIPTOR,google_dot_ads_dot_googleads__v0_dot_proto_dot_resources_dot_ad__group__criterion__pb2.DESCRIPTOR,google_dot_ads_dot_googleads__v0_dot_proto_dot_resources_dot_age__range__view__pb2.DESCRIPTOR,google_dot_ads_dot_googleads__v0_dot_proto_dot_resources_dot_bidding__strategy__pb2.DESCRIPTOR,google_dot_ads_dot_googleads__v0_dot_proto_dot_resources_dot_billing__setup__pb2.DESCRIPTOR,google_dot_ads_dot_googleads__v0_dot_proto_dot_resources_dot_campaign__pb2.DESCRIPTOR,google_dot_ads_dot_googleads__v0_dot_proto_dot_resources_dot_campaign__bid__modifier__pb2.DESCRIPTOR,google_dot_ads_dot_googleads__v0_dot_proto_dot_resources_dot_campaign__budget__pb2.DESCRIPTOR,google_dot_ads_dot_googleads__v0_dot_proto_dot_resources_dot_campaign__criterion__pb2.DESCRIPTOR,google_dot_ads_dot_googleads__v0_dot_proto_dot_resources_dot_campaign__group__pb2.DESCRIPTOR,google_dot_ads_dot_googleads__v0_dot_proto_dot_resources_dot_campaign__shared__set__pb2.DESCRIPTOR,google_dot_ads_dot_googleads__v0_dot_proto_dot_resources_dot_change__status__pb2.DESCRIPTOR,google_dot_ads_dot_googleads__v0_dot_proto_dot_resources_dot_customer__pb2.DESCRIPTOR,google_dot_ads_dot_googleads__v0_dot_proto_dot_resources_dot_customer__client__link__pb2.DESCRIPTOR,google_dot_ads_dot_googleads__v0_dot_proto_dot_resources_dot_customer__manager__link__pb2.DESCRIPTOR,google_dot_ads_dot_googleads__v0_dot_proto_dot_resources_dot_display__keyword__view__pb2.DESCRIPTOR,google_dot_ads_dot_googleads__v0_dot_proto_dot_resources_dot_gender__view__pb2.DESCRIPTOR,google_dot_ads_dot_googleads__v0_dot_proto_dot_resources_dot_geo__target__constant__pb2.DESCRIPTOR,google_dot_ads_dot_googleads__v0_dot_proto_dot_resources_dot_hotel__group__view__pb2.DESCRIPTOR,google_dot_ads_dot_googleads__v0_dot_proto_dot_resources_dot_keyword__view__pb2.DESCRIPTOR,google_dot_ads_dot_googleads__v0_dot_proto_dot_resources_dot_managed__placement__view__pb2.DESCRIPTOR,google_dot_ads_dot_googleads__v0_dot_proto_dot_resources_dot_parental__status__view__pb2.DESCRIPTOR,google_dot_ads_dot_googleads__v0_dot_proto_dot_resources_dot_product__group__view__pb2.DESCRIPTOR,google_dot_ads_dot_googleads__v0_dot_proto_dot_resources_dot_recommendation__pb2.DESCRIPTOR,google_dot_ads_dot_googleads__v0_dot_proto_dot_resources_dot_shared__criterion__pb2.DESCRIPTOR,google_dot_ads_dot_googleads__v0_dot_proto_dot_resources_dot_shared__set__pb2.DESCRIPTOR,google_dot_ads_dot_googleads__v0_dot_proto_dot_resources_dot_topic__constant__pb2.DESCRIPTOR,google_dot_ads_dot_googleads__v0_dot_proto_dot_resources_dot_topic__view__pb2.DESCRIPTOR,google_dot_ads_dot_googleads__v0_dot_proto_dot_resources_dot_video__pb2.DESCRIPTOR,google_dot_api_dot_annotations__pb2.DESCRIPTOR,google_dot_protobuf_dot_field__mask__pb2.DESCRIPTOR,google_dot_protobuf_dot_wrappers__pb2.DESCRIPTOR,])
 
 
 
@@ -104,8 +116,8 @@ _SEARCHGOOGLEADSREQUEST = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=1890,
-  serialized_end=1989,
+  serialized_start=2674,
+  serialized_end=2773,
 )
 
 
@@ -156,8 +168,8 @@ _SEARCHGOOGLEADSRESPONSE = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=1992,
-  serialized_end=2184,
+  serialized_start=2776,
+  serialized_end=2968,
 )
 
 
@@ -197,210 +209,294 @@ _GOOGLEADSROW = _descriptor.Descriptor(
       is_extension=False, extension_scope=None,
       options=None, file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
-      name='ad_group_bid_modifier', full_name='google.ads.googleads.v0.services.GoogleAdsRow.ad_group_bid_modifier', index=4,
+      name='ad_group_audience_view', full_name='google.ads.googleads.v0.services.GoogleAdsRow.ad_group_audience_view', index=4,
+      number=57, type=11, cpp_type=10, label=1,
+      has_default_value=False, default_value=None,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None, file=DESCRIPTOR),
+    _descriptor.FieldDescriptor(
+      name='ad_group_bid_modifier', full_name='google.ads.googleads.v0.services.GoogleAdsRow.ad_group_bid_modifier', index=5,
       number=24, type=11, cpp_type=10, label=1,
       has_default_value=False, default_value=None,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None, file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
-      name='ad_group_criterion', full_name='google.ads.googleads.v0.services.GoogleAdsRow.ad_group_criterion', index=5,
+      name='ad_group_criterion', full_name='google.ads.googleads.v0.services.GoogleAdsRow.ad_group_criterion', index=6,
       number=17, type=11, cpp_type=10, label=1,
       has_default_value=False, default_value=None,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None, file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
-      name='bidding_strategy', full_name='google.ads.googleads.v0.services.GoogleAdsRow.bidding_strategy', index=6,
+      name='age_range_view', full_name='google.ads.googleads.v0.services.GoogleAdsRow.age_range_view', index=7,
+      number=48, type=11, cpp_type=10, label=1,
+      has_default_value=False, default_value=None,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None, file=DESCRIPTOR),
+    _descriptor.FieldDescriptor(
+      name='bidding_strategy', full_name='google.ads.googleads.v0.services.GoogleAdsRow.bidding_strategy', index=8,
       number=18, type=11, cpp_type=10, label=1,
       has_default_value=False, default_value=None,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None, file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
-      name='billing_setup', full_name='google.ads.googleads.v0.services.GoogleAdsRow.billing_setup', index=7,
+      name='billing_setup', full_name='google.ads.googleads.v0.services.GoogleAdsRow.billing_setup', index=9,
       number=41, type=11, cpp_type=10, label=1,
       has_default_value=False, default_value=None,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None, file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
-      name='campaign_budget', full_name='google.ads.googleads.v0.services.GoogleAdsRow.campaign_budget', index=8,
+      name='campaign_budget', full_name='google.ads.googleads.v0.services.GoogleAdsRow.campaign_budget', index=10,
       number=19, type=11, cpp_type=10, label=1,
       has_default_value=False, default_value=None,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None, file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
-      name='campaign', full_name='google.ads.googleads.v0.services.GoogleAdsRow.campaign', index=9,
+      name='campaign', full_name='google.ads.googleads.v0.services.GoogleAdsRow.campaign', index=11,
       number=2, type=11, cpp_type=10, label=1,
       has_default_value=False, default_value=None,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None, file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
-      name='campaign_bid_modifier', full_name='google.ads.googleads.v0.services.GoogleAdsRow.campaign_bid_modifier', index=10,
+      name='campaign_bid_modifier', full_name='google.ads.googleads.v0.services.GoogleAdsRow.campaign_bid_modifier', index=12,
       number=26, type=11, cpp_type=10, label=1,
       has_default_value=False, default_value=None,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None, file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
-      name='campaign_criterion', full_name='google.ads.googleads.v0.services.GoogleAdsRow.campaign_criterion', index=11,
+      name='campaign_criterion', full_name='google.ads.googleads.v0.services.GoogleAdsRow.campaign_criterion', index=13,
       number=20, type=11, cpp_type=10, label=1,
       has_default_value=False, default_value=None,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None, file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
-      name='campaign_group', full_name='google.ads.googleads.v0.services.GoogleAdsRow.campaign_group', index=12,
+      name='campaign_group', full_name='google.ads.googleads.v0.services.GoogleAdsRow.campaign_group', index=14,
       number=25, type=11, cpp_type=10, label=1,
       has_default_value=False, default_value=None,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None, file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
-      name='campaign_shared_set', full_name='google.ads.googleads.v0.services.GoogleAdsRow.campaign_shared_set', index=13,
+      name='campaign_shared_set', full_name='google.ads.googleads.v0.services.GoogleAdsRow.campaign_shared_set', index=15,
       number=30, type=11, cpp_type=10, label=1,
       has_default_value=False, default_value=None,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None, file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
-      name='change_status', full_name='google.ads.googleads.v0.services.GoogleAdsRow.change_status', index=14,
+      name='change_status', full_name='google.ads.googleads.v0.services.GoogleAdsRow.change_status', index=16,
       number=37, type=11, cpp_type=10, label=1,
       has_default_value=False, default_value=None,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None, file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
-      name='customer', full_name='google.ads.googleads.v0.services.GoogleAdsRow.customer', index=15,
+      name='customer', full_name='google.ads.googleads.v0.services.GoogleAdsRow.customer', index=17,
       number=1, type=11, cpp_type=10, label=1,
       has_default_value=False, default_value=None,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None, file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
-      name='geo_target_constant', full_name='google.ads.googleads.v0.services.GoogleAdsRow.geo_target_constant', index=16,
+      name='customer_manager_link', full_name='google.ads.googleads.v0.services.GoogleAdsRow.customer_manager_link', index=18,
+      number=61, type=11, cpp_type=10, label=1,
+      has_default_value=False, default_value=None,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None, file=DESCRIPTOR),
+    _descriptor.FieldDescriptor(
+      name='customer_client_link', full_name='google.ads.googleads.v0.services.GoogleAdsRow.customer_client_link', index=19,
+      number=62, type=11, cpp_type=10, label=1,
+      has_default_value=False, default_value=None,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None, file=DESCRIPTOR),
+    _descriptor.FieldDescriptor(
+      name='display_keyword_view', full_name='google.ads.googleads.v0.services.GoogleAdsRow.display_keyword_view', index=20,
+      number=47, type=11, cpp_type=10, label=1,
+      has_default_value=False, default_value=None,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None, file=DESCRIPTOR),
+    _descriptor.FieldDescriptor(
+      name='gender_view', full_name='google.ads.googleads.v0.services.GoogleAdsRow.gender_view', index=21,
+      number=40, type=11, cpp_type=10, label=1,
+      has_default_value=False, default_value=None,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None, file=DESCRIPTOR),
+    _descriptor.FieldDescriptor(
+      name='geo_target_constant', full_name='google.ads.googleads.v0.services.GoogleAdsRow.geo_target_constant', index=22,
       number=23, type=11, cpp_type=10, label=1,
       has_default_value=False, default_value=None,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None, file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
-      name='keyword_view', full_name='google.ads.googleads.v0.services.GoogleAdsRow.keyword_view', index=17,
+      name='hotel_group_view', full_name='google.ads.googleads.v0.services.GoogleAdsRow.hotel_group_view', index=23,
+      number=51, type=11, cpp_type=10, label=1,
+      has_default_value=False, default_value=None,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None, file=DESCRIPTOR),
+    _descriptor.FieldDescriptor(
+      name='keyword_view', full_name='google.ads.googleads.v0.services.GoogleAdsRow.keyword_view', index=24,
       number=21, type=11, cpp_type=10, label=1,
       has_default_value=False, default_value=None,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None, file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
-      name='recommendation', full_name='google.ads.googleads.v0.services.GoogleAdsRow.recommendation', index=18,
+      name='managed_placement_view', full_name='google.ads.googleads.v0.services.GoogleAdsRow.managed_placement_view', index=25,
+      number=53, type=11, cpp_type=10, label=1,
+      has_default_value=False, default_value=None,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None, file=DESCRIPTOR),
+    _descriptor.FieldDescriptor(
+      name='parental_status_view', full_name='google.ads.googleads.v0.services.GoogleAdsRow.parental_status_view', index=26,
+      number=45, type=11, cpp_type=10, label=1,
+      has_default_value=False, default_value=None,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None, file=DESCRIPTOR),
+    _descriptor.FieldDescriptor(
+      name='product_group_view', full_name='google.ads.googleads.v0.services.GoogleAdsRow.product_group_view', index=27,
+      number=54, type=11, cpp_type=10, label=1,
+      has_default_value=False, default_value=None,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None, file=DESCRIPTOR),
+    _descriptor.FieldDescriptor(
+      name='recommendation', full_name='google.ads.googleads.v0.services.GoogleAdsRow.recommendation', index=28,
       number=22, type=11, cpp_type=10, label=1,
       has_default_value=False, default_value=None,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None, file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
-      name='shared_criterion', full_name='google.ads.googleads.v0.services.GoogleAdsRow.shared_criterion', index=19,
+      name='shared_criterion', full_name='google.ads.googleads.v0.services.GoogleAdsRow.shared_criterion', index=29,
       number=29, type=11, cpp_type=10, label=1,
       has_default_value=False, default_value=None,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None, file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
-      name='shared_set', full_name='google.ads.googleads.v0.services.GoogleAdsRow.shared_set', index=20,
+      name='shared_set', full_name='google.ads.googleads.v0.services.GoogleAdsRow.shared_set', index=30,
       number=27, type=11, cpp_type=10, label=1,
       has_default_value=False, default_value=None,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None, file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
-      name='video', full_name='google.ads.googleads.v0.services.GoogleAdsRow.video', index=21,
+      name='topic_view', full_name='google.ads.googleads.v0.services.GoogleAdsRow.topic_view', index=31,
+      number=44, type=11, cpp_type=10, label=1,
+      has_default_value=False, default_value=None,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None, file=DESCRIPTOR),
+    _descriptor.FieldDescriptor(
+      name='topic_constant', full_name='google.ads.googleads.v0.services.GoogleAdsRow.topic_constant', index=32,
+      number=31, type=11, cpp_type=10, label=1,
+      has_default_value=False, default_value=None,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None, file=DESCRIPTOR),
+    _descriptor.FieldDescriptor(
+      name='video', full_name='google.ads.googleads.v0.services.GoogleAdsRow.video', index=33,
       number=39, type=11, cpp_type=10, label=1,
       has_default_value=False, default_value=None,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None, file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
-      name='metrics', full_name='google.ads.googleads.v0.services.GoogleAdsRow.metrics', index=22,
+      name='metrics', full_name='google.ads.googleads.v0.services.GoogleAdsRow.metrics', index=34,
       number=4, type=11, cpp_type=10, label=1,
       has_default_value=False, default_value=None,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None, file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
-      name='ad_network_type', full_name='google.ads.googleads.v0.services.GoogleAdsRow.ad_network_type', index=23,
+      name='ad_network_type', full_name='google.ads.googleads.v0.services.GoogleAdsRow.ad_network_type', index=35,
       number=5, type=14, cpp_type=8, label=1,
       has_default_value=False, default_value=0,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None, file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
-      name='date', full_name='google.ads.googleads.v0.services.GoogleAdsRow.date', index=24,
+      name='date', full_name='google.ads.googleads.v0.services.GoogleAdsRow.date', index=36,
       number=6, type=11, cpp_type=10, label=1,
       has_default_value=False, default_value=None,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None, file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
-      name='day_of_week', full_name='google.ads.googleads.v0.services.GoogleAdsRow.day_of_week', index=25,
+      name='day_of_week', full_name='google.ads.googleads.v0.services.GoogleAdsRow.day_of_week', index=37,
       number=7, type=14, cpp_type=8, label=1,
       has_default_value=False, default_value=0,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None, file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
-      name='device', full_name='google.ads.googleads.v0.services.GoogleAdsRow.device', index=26,
+      name='device', full_name='google.ads.googleads.v0.services.GoogleAdsRow.device', index=38,
       number=8, type=14, cpp_type=8, label=1,
       has_default_value=False, default_value=0,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None, file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
-      name='hour', full_name='google.ads.googleads.v0.services.GoogleAdsRow.hour', index=27,
+      name='hour', full_name='google.ads.googleads.v0.services.GoogleAdsRow.hour', index=39,
       number=9, type=11, cpp_type=10, label=1,
       has_default_value=False, default_value=None,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None, file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
-      name='month', full_name='google.ads.googleads.v0.services.GoogleAdsRow.month', index=28,
+      name='month', full_name='google.ads.googleads.v0.services.GoogleAdsRow.month', index=40,
       number=10, type=11, cpp_type=10, label=1,
       has_default_value=False, default_value=None,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None, file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
-      name='month_of_year', full_name='google.ads.googleads.v0.services.GoogleAdsRow.month_of_year', index=29,
+      name='month_of_year', full_name='google.ads.googleads.v0.services.GoogleAdsRow.month_of_year', index=41,
       number=28, type=14, cpp_type=8, label=1,
       has_default_value=False, default_value=0,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None, file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
-      name='quarter', full_name='google.ads.googleads.v0.services.GoogleAdsRow.quarter', index=30,
+      name='quarter', full_name='google.ads.googleads.v0.services.GoogleAdsRow.quarter', index=42,
       number=12, type=11, cpp_type=10, label=1,
       has_default_value=False, default_value=None,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None, file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
-      name='slot', full_name='google.ads.googleads.v0.services.GoogleAdsRow.slot', index=31,
+      name='slot', full_name='google.ads.googleads.v0.services.GoogleAdsRow.slot', index=43,
       number=13, type=14, cpp_type=8, label=1,
       has_default_value=False, default_value=0,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None, file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
-      name='week', full_name='google.ads.googleads.v0.services.GoogleAdsRow.week', index=32,
+      name='week', full_name='google.ads.googleads.v0.services.GoogleAdsRow.week', index=44,
       number=14, type=11, cpp_type=10, label=1,
       has_default_value=False, default_value=None,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None, file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
-      name='year', full_name='google.ads.googleads.v0.services.GoogleAdsRow.year', index=33,
+      name='year', full_name='google.ads.googleads.v0.services.GoogleAdsRow.year', index=45,
       number=15, type=11, cpp_type=10, label=1,
       has_default_value=False, default_value=None,
       message_type=None, enum_type=None, containing_type=None,
@@ -418,8 +514,8 @@ _GOOGLEADSROW = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=2187,
-  serialized_end=4540,
+  serialized_start=2971,
+  serialized_end=6282,
 )
 
 _SEARCHGOOGLEADSRESPONSE.fields_by_name['results'].message_type = _GOOGLEADSROW
@@ -428,8 +524,10 @@ _GOOGLEADSROW.fields_by_name['account_budget'].message_type = google_dot_ads_dot
 _GOOGLEADSROW.fields_by_name['account_budget_proposal'].message_type = google_dot_ads_dot_googleads__v0_dot_proto_dot_resources_dot_account__budget__proposal__pb2._ACCOUNTBUDGETPROPOSAL
 _GOOGLEADSROW.fields_by_name['ad_group'].message_type = google_dot_ads_dot_googleads__v0_dot_proto_dot_resources_dot_ad__group__pb2._ADGROUP
 _GOOGLEADSROW.fields_by_name['ad_group_ad'].message_type = google_dot_ads_dot_googleads__v0_dot_proto_dot_resources_dot_ad__group__ad__pb2._ADGROUPAD
+_GOOGLEADSROW.fields_by_name['ad_group_audience_view'].message_type = google_dot_ads_dot_googleads__v0_dot_proto_dot_resources_dot_ad__group__audience__view__pb2._ADGROUPAUDIENCEVIEW
 _GOOGLEADSROW.fields_by_name['ad_group_bid_modifier'].message_type = google_dot_ads_dot_googleads__v0_dot_proto_dot_resources_dot_ad__group__bid__modifier__pb2._ADGROUPBIDMODIFIER
 _GOOGLEADSROW.fields_by_name['ad_group_criterion'].message_type = google_dot_ads_dot_googleads__v0_dot_proto_dot_resources_dot_ad__group__criterion__pb2._ADGROUPCRITERION
+_GOOGLEADSROW.fields_by_name['age_range_view'].message_type = google_dot_ads_dot_googleads__v0_dot_proto_dot_resources_dot_age__range__view__pb2._AGERANGEVIEW
 _GOOGLEADSROW.fields_by_name['bidding_strategy'].message_type = google_dot_ads_dot_googleads__v0_dot_proto_dot_resources_dot_bidding__strategy__pb2._BIDDINGSTRATEGY
 _GOOGLEADSROW.fields_by_name['billing_setup'].message_type = google_dot_ads_dot_googleads__v0_dot_proto_dot_resources_dot_billing__setup__pb2._BILLINGSETUP
 _GOOGLEADSROW.fields_by_name['campaign_budget'].message_type = google_dot_ads_dot_googleads__v0_dot_proto_dot_resources_dot_campaign__budget__pb2._CAMPAIGNBUDGET
@@ -440,11 +538,21 @@ _GOOGLEADSROW.fields_by_name['campaign_group'].message_type = google_dot_ads_dot
 _GOOGLEADSROW.fields_by_name['campaign_shared_set'].message_type = google_dot_ads_dot_googleads__v0_dot_proto_dot_resources_dot_campaign__shared__set__pb2._CAMPAIGNSHAREDSET
 _GOOGLEADSROW.fields_by_name['change_status'].message_type = google_dot_ads_dot_googleads__v0_dot_proto_dot_resources_dot_change__status__pb2._CHANGESTATUS
 _GOOGLEADSROW.fields_by_name['customer'].message_type = google_dot_ads_dot_googleads__v0_dot_proto_dot_resources_dot_customer__pb2._CUSTOMER
+_GOOGLEADSROW.fields_by_name['customer_manager_link'].message_type = google_dot_ads_dot_googleads__v0_dot_proto_dot_resources_dot_customer__manager__link__pb2._CUSTOMERMANAGERLINK
+_GOOGLEADSROW.fields_by_name['customer_client_link'].message_type = google_dot_ads_dot_googleads__v0_dot_proto_dot_resources_dot_customer__client__link__pb2._CUSTOMERCLIENTLINK
+_GOOGLEADSROW.fields_by_name['display_keyword_view'].message_type = google_dot_ads_dot_googleads__v0_dot_proto_dot_resources_dot_display__keyword__view__pb2._DISPLAYKEYWORDVIEW
+_GOOGLEADSROW.fields_by_name['gender_view'].message_type = google_dot_ads_dot_googleads__v0_dot_proto_dot_resources_dot_gender__view__pb2._GENDERVIEW
 _GOOGLEADSROW.fields_by_name['geo_target_constant'].message_type = google_dot_ads_dot_googleads__v0_dot_proto_dot_resources_dot_geo__target__constant__pb2._GEOTARGETCONSTANT
+_GOOGLEADSROW.fields_by_name['hotel_group_view'].message_type = google_dot_ads_dot_googleads__v0_dot_proto_dot_resources_dot_hotel__group__view__pb2._HOTELGROUPVIEW
 _GOOGLEADSROW.fields_by_name['keyword_view'].message_type = google_dot_ads_dot_googleads__v0_dot_proto_dot_resources_dot_keyword__view__pb2._KEYWORDVIEW
+_GOOGLEADSROW.fields_by_name['managed_placement_view'].message_type = google_dot_ads_dot_googleads__v0_dot_proto_dot_resources_dot_managed__placement__view__pb2._MANAGEDPLACEMENTVIEW
+_GOOGLEADSROW.fields_by_name['parental_status_view'].message_type = google_dot_ads_dot_googleads__v0_dot_proto_dot_resources_dot_parental__status__view__pb2._PARENTALSTATUSVIEW
+_GOOGLEADSROW.fields_by_name['product_group_view'].message_type = google_dot_ads_dot_googleads__v0_dot_proto_dot_resources_dot_product__group__view__pb2._PRODUCTGROUPVIEW
 _GOOGLEADSROW.fields_by_name['recommendation'].message_type = google_dot_ads_dot_googleads__v0_dot_proto_dot_resources_dot_recommendation__pb2._RECOMMENDATION
 _GOOGLEADSROW.fields_by_name['shared_criterion'].message_type = google_dot_ads_dot_googleads__v0_dot_proto_dot_resources_dot_shared__criterion__pb2._SHAREDCRITERION
 _GOOGLEADSROW.fields_by_name['shared_set'].message_type = google_dot_ads_dot_googleads__v0_dot_proto_dot_resources_dot_shared__set__pb2._SHAREDSET
+_GOOGLEADSROW.fields_by_name['topic_view'].message_type = google_dot_ads_dot_googleads__v0_dot_proto_dot_resources_dot_topic__view__pb2._TOPICVIEW
+_GOOGLEADSROW.fields_by_name['topic_constant'].message_type = google_dot_ads_dot_googleads__v0_dot_proto_dot_resources_dot_topic__constant__pb2._TOPICCONSTANT
 _GOOGLEADSROW.fields_by_name['video'].message_type = google_dot_ads_dot_googleads__v0_dot_proto_dot_resources_dot_video__pb2._VIDEO
 _GOOGLEADSROW.fields_by_name['metrics'].message_type = google_dot_ads_dot_googleads__v0_dot_proto_dot_common_dot_metrics__pb2._METRICS
 _GOOGLEADSROW.fields_by_name['ad_network_type'].enum_type = google_dot_ads_dot_googleads__v0_dot_proto_dot_enums_dot_ad__network__type__pb2._ADNETWORKTYPEENUM_ADNETWORKTYPE
@@ -533,10 +641,14 @@ GoogleAdsRow = _reflection.GeneratedProtocolMessageType('GoogleAdsRow', (_messag
           The ad group referenced in the query.
       ad_group_ad:
           The ad referenced in the query.
+      ad_group_audience_view:
+          The ad group audience view referenced in the query.
       ad_group_bid_modifier:
           The bid modifier referenced in the query.
       ad_group_criterion:
           The criterion referenced in the query.
+      age_range_view:
+          The age range view referenced in the query.
       bidding_strategy:
           The bidding strategy referenced in the query.
       billing_setup:
@@ -557,16 +669,36 @@ GoogleAdsRow = _reflection.GeneratedProtocolMessageType('GoogleAdsRow', (_messag
           The ChangeStatus referenced in the query.
       customer:
           The customer referenced in the query.
+      customer_manager_link:
+          The CustomerManagerLink referenced in the query.
+      customer_client_link:
+          The CustomerClientLink referenced in the query.
+      display_keyword_view:
+          The display keyword view referenced in the query.
+      gender_view:
+          The gender view referenced in the query.
       geo_target_constant:
           The geo target constant referenced in the query.
+      hotel_group_view:
+          The hotel group view referenced in the query.
       keyword_view:
           The keyword view referenced in the query.
+      managed_placement_view:
+          The managed placement view referenced in the query.
+      parental_status_view:
+          The parental status view referenced in the query.
+      product_group_view:
+          The product group view referenced in the query.
       recommendation:
           The recommendation referenced in the query.
       shared_criterion:
           The shared set referenced in the query.
       shared_set:
           The shared set referenced in the query.
+      topic_view:
+          The topic view referenced in the query.
+      topic_constant:
+          The topic constant referenced in the query.
       video:
           The video referenced in the query.
       metrics:
@@ -574,7 +706,7 @@ GoogleAdsRow = _reflection.GeneratedProtocolMessageType('GoogleAdsRow', (_messag
       ad_network_type:
           Ad network type.
       date:
-          Date to which metrics apply. YYYY-MM-DD format, e.g.,
+          Date to which metrics apply. yyyy-MM-dd format, e.g.,
           2018-04-17.
       day_of_week:
           Day of the week, e.g., MONDAY.
@@ -584,17 +716,18 @@ GoogleAdsRow = _reflection.GeneratedProtocolMessageType('GoogleAdsRow', (_messag
           Hour of day as a number between 0 and 23, inclusive.
       month:
           Month as represented by the date of the first day of a month.
+          Formatted as yyyy-MM-dd.
       month_of_year:
           Month of the year, e.g., January.
       quarter:
           Quarter as represented by the date of the first day of a
           quarter. Uses the calendar year for quarters, e.g., the second
-          quarter of 2018 starts on 2018-04-01.
+          quarter of 2018 starts on 2018-04-01. Formatted as yyyy-MM-dd.
       slot:
           Position of the ad.
       week:
           Week as defined as Monday through Sunday, and represented by
-          the date of Monday.
+          the date of Monday. Formatted as yyyy-MM-dd.
       year:
           Year, formatted as yyyy.
   """,
@@ -612,8 +745,8 @@ _GOOGLEADSSERVICE = _descriptor.ServiceDescriptor(
   file=DESCRIPTOR,
   index=0,
   options=None,
-  serialized_start=4543,
-  serialized_end=4748,
+  serialized_start=6285,
+  serialized_end=6490,
   methods=[
   _descriptor.MethodDescriptor(
     name='Search',

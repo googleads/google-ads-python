@@ -22,6 +22,7 @@ import google.api_core.gapic_v1.config
 import google.api_core.gapic_v1.method
 import google.api_core.grpc_helpers
 import google.api_core.path_template
+import grpc
 
 from google.ads.google_ads.v0.services import billing_setup_service_client_config
 from google.ads.google_ads.v0.services.transports import billing_setup_service_grpc_transport
@@ -41,8 +42,7 @@ class BillingSetupServiceClient(object):
 
     Mutates:
     The REMOVE operation cancels a pending billing setup.
-    Functionality for creating new billing setups will be supported in a future
-    version.
+    The CREATE operation creates a new billing setup.
     """
 
     SERVICE_ADDRESS = 'googleads.googleapis.com:443'
@@ -223,7 +223,7 @@ class BillingSetupServiceClient(object):
                              timeout=google.api_core.gapic_v1.method.DEFAULT,
                              metadata=None):
         """
-        Cancels a pending billing setup.
+        Creates a billing setup, or cancels an existing billing setup.
 
         Args:
             customer_id (str): Id of the customer to apply the billing setup mutate operation to.

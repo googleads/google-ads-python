@@ -1,3 +1,7 @@
+* 0.4.0:
+- Google Ads v0_5 release.
+- Adding remarketing/add_conversion_action.py example.
+
 * 0.3.0:
 - Google Ads v0_4 release.
 - Resolving GitHub issue #3:

@@ -107,7 +107,7 @@ class BillingSetupServiceGrpcTransport(object):
     def mutate_billing_setup(self):
         """Return the gRPC stub for {$apiMethod.name}.
 
-        Cancels a pending billing setup.
+        Creates a billing setup, or cancels an existing billing setup.
 
         Returns:
             Callable: A callable which accepts the appropriate

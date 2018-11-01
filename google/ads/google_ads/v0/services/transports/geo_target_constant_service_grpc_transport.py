@@ -104,3 +104,17 @@ class GeoTargetConstantServiceGrpcTransport(object):
         """
         return self._stubs[
             'geo_target_constant_service_stub'].GetGeoTargetConstant
+
+    @property
+    def suggest_geo_target_constants(self):
+        """Return the gRPC stub for {$apiMethod.name}.
+
+        Returns GeoTargetConstant suggestions by location name or by resource name.
+
+        Returns:
+            Callable: A callable which accepts the appropriate
+                deserialized request object and returns a
+                deserialized response object.
+        """
+        return self._stubs[
+            'geo_target_constant_service_stub'].SuggestGeoTargetConstants

@@ -22,6 +22,7 @@ import google.api_core.gapic_v1.config
 import google.api_core.gapic_v1.method
 import google.api_core.grpc_helpers
 import google.api_core.path_template
+import grpc
 
 from google.ads.google_ads.v0.services import keyword_view_service_client_config
 from google.ads.google_ads.v0.services.transports import keyword_view_service_grpc_transport

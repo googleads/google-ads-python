@@ -28,13 +28,15 @@ _DEFAULT_PAGE_SIZE = 1000
 def main(client, customer_id, page_size):
     ga_service = client.get_service('GoogleAdsService')
 
-    query = ('SELECT billing_setup.id, billing_setup.status, '
-             'billing_setup.payments_account_id, '
-             'billing_setup.payments_account_name, '
-             'billing_setup.payments_profile_id, '
-             'billing_setup.payments_profile_name, '
-             'billing_setup.secondary_payments_profile_id '
-             'FROM billing_setup')
+    query = (
+        'SELECT billing_setup.id, billing_setup.status, '
+        'billing_setup.payments_account, '
+        'billing_setup.payments_account_info.payments_account_id, '
+        'billing_setup.payments_account_info.payments_account_name, '
+        'billing_setup.payments_account_info.payments_profile_id, '
+        'billing_setup.payments_account_info.payments_profile_name, '
+        'billing_setup.payments_account_info.secondary_payments_profile_id '
+        'FROM billing_setup')
 
     results = ga_service.search(customer_id, query=query, page_size=page_size)
 
@@ -46,17 +48,20 @@ def main(client, customer_id, page_size):
         print('Found the following billing setup results:')
         for row in results:
             billing_setup = row.billing_setup
+            payments_account_info = billing_setup.payments_account_info
             print('Billing setup with ID "%s", status "%s", '
-                  'payments_account_id "%s", payments_account_name "%s", '
-                  'payments_profile_id "%s", payments_profile_name "%s",'
+                  'payments_account "%s", payments_account_id "%s", '
+                  'payments_account_name "%s", payments_profile_id "%s", '
+                  'payments_profile_name "%s", '
                   'secondary_payments_profile_id "%s".'
                   % (billing_setup.id.value,
                      billing_setup_status_enum.Name(billing_setup.status),
-                     billing_setup.payments_account_id.value,
-                     billing_setup.payments_account_name.value,
-                     billing_setup.payments_profile_id.value,
-                     billing_setup.payments_profile_name.value,
-                     billing_setup.secondary_payments_profile_id.value))
+                     billing_setup.payments_account.value,
+                     payments_account_info.payments_account_id.value,
+                     payments_account_info.payments_account_name.value,
+                     payments_account_info.payments_profile_id.value,
+                     payments_account_info.payments_profile_name.value,
+                     payments_account_info.secondary_payments_profile_id.value))
     except google.ads.google_ads.errors.GoogleAdsException as ex:
         print('Request with ID "%s" failed with status "%s" and includes the '
               'following errors:' % (ex.request_id, ex.error.code().name))

@@ -19,7 +19,7 @@ DESCRIPTOR = _descriptor.FileDescriptor(
   name='google/ads/googleads_v0/proto/enums/ad_type.proto',
   package='google.ads.googleads.v0.enums',
   syntax='proto3',
-  serialized_pb=_b('\n1google/ads/googleads_v0/proto/enums/ad_type.proto\x12\x1dgoogle.ads.googleads.v0.enums\"\xfa\x01\n\nAdTypeEnum\"\xeb\x01\n\x06\x41\x64Type\x12\x0f\n\x0bUNSPECIFIED\x10\x00\x12\x0b\n\x07UNKNOWN\x10\x01\x12\x0b\n\x07TEXT_AD\x10\x02\x12\x14\n\x10\x45XPANDED_TEXT_AD\x10\x03\x12\x15\n\x11\x44YNAMIC_SEARCH_AD\x10\x04\x12\x19\n\x15RESPONSIVE_DISPLAY_AD\x10\x05\x12\x10\n\x0c\x43\x41LL_ONLY_AD\x10\x06\x12\x1e\n\x1a\x45XPANDED_DYNAMIC_SEARCH_AD\x10\x07\x12\x0c\n\x08HOTEL_AD\x10\x08\x12\x15\n\x11SHOPPING_SMART_AD\x10\t\x12\x17\n\x13SHOPPING_PRODUCT_AD\x10\nB\xbc\x01\n!com.google.ads.googleads.v0.enumsB\x0b\x41\x64TypeProtoP\x01ZBgoogle.golang.org/genproto/googleapis/ads/googleads/v0/enums;enums\xa2\x02\x03GAA\xaa\x02\x1dGoogle.Ads.GoogleAds.V0.Enums\xca\x02\x1dGoogle\\Ads\\GoogleAds\\V0\\Enumsb\x06proto3')
+  serialized_pb=_b('\n1google/ads/googleads_v0/proto/enums/ad_type.proto\x12\x1dgoogle.ads.googleads.v0.enums\"\x8f\x02\n\nAdTypeEnum\"\x80\x02\n\x06\x41\x64Type\x12\x0f\n\x0bUNSPECIFIED\x10\x00\x12\x0b\n\x07UNKNOWN\x10\x01\x12\x0b\n\x07TEXT_AD\x10\x02\x12\x14\n\x10\x45XPANDED_TEXT_AD\x10\x03\x12\x15\n\x11\x44YNAMIC_SEARCH_AD\x10\x04\x12\x19\n\x15RESPONSIVE_DISPLAY_AD\x10\x05\x12\x10\n\x0c\x43\x41LL_ONLY_AD\x10\x06\x12\x1e\n\x1a\x45XPANDED_DYNAMIC_SEARCH_AD\x10\x07\x12\x0c\n\x08HOTEL_AD\x10\x08\x12\x15\n\x11SHOPPING_SMART_AD\x10\t\x12\x17\n\x13SHOPPING_PRODUCT_AD\x10\n\x12\x13\n\x0fVIDEO_OUTSTREAM\x10\x0b\x42\xbc\x01\n!com.google.ads.googleads.v0.enumsB\x0b\x41\x64TypeProtoP\x01ZBgoogle.golang.org/genproto/googleapis/ads/googleads/v0/enums;enums\xa2\x02\x03GAA\xaa\x02\x1dGoogle.Ads.GoogleAds.V0.Enums\xca\x02\x1dGoogle\\Ads\\GoogleAds\\V0\\Enumsb\x06proto3')
 )
 
 
@@ -74,11 +74,15 @@ _ADTYPEENUM_ADTYPE = _descriptor.EnumDescriptor(
       name='SHOPPING_PRODUCT_AD', index=10, number=10,
       options=None,
       type=None),
+    _descriptor.EnumValueDescriptor(
+      name='VIDEO_OUTSTREAM', index=11, number=11,
+      options=None,
+      type=None),
   ],
   containing_type=None,
   options=None,
   serialized_start=100,
-  serialized_end=335,
+  serialized_end=356,
 )
 _sym_db.RegisterEnumDescriptor(_ADTYPEENUM_ADTYPE)
 
@@ -104,7 +108,7 @@ _ADTYPEENUM = _descriptor.Descriptor(
   oneofs=[
   ],
   serialized_start=85,
-  serialized_end=335,
+  serialized_end=356,
 )
 
 _ADTYPEENUM_ADTYPE.containing_type = _ADTYPEENUM

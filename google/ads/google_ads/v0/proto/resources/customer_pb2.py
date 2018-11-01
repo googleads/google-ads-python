@@ -20,7 +20,7 @@ DESCRIPTOR = _descriptor.FileDescriptor(
   name='google/ads/googleads_v0/proto/resources/customer.proto',
   package='google.ads.googleads.v0.resources',
   syntax='proto3',
-  serialized_pb=_b('\n6google/ads/googleads_v0/proto/resources/customer.proto\x12!google.ads.googleads.v0.resources\x1a\x1egoogle/protobuf/wrappers.proto\"\x97\x03\n\x08\x43ustomer\x12\x15\n\rresource_name\x18\x01 \x01(\t\x12\'\n\x02id\x18\x03 \x01(\x0b\x32\x1b.google.protobuf.Int64Value\x12\x36\n\x10\x64\x65scriptive_name\x18\x04 \x01(\x0b\x32\x1c.google.protobuf.StringValue\x12\x33\n\rcurrency_code\x18\x05 \x01(\x0b\x32\x1c.google.protobuf.StringValue\x12/\n\ttime_zone\x18\x06 \x01(\x0b\x32\x1c.google.protobuf.StringValue\x12;\n\x15tracking_url_template\x18\x07 \x01(\x0b\x32\x1c.google.protobuf.StringValue\x12\x38\n\x14\x61uto_tagging_enabled\x18\x08 \x01(\x0b\x32\x1a.google.protobuf.BoolValue\x12\x36\n\x12has_partners_badge\x18\t \x01(\x0b\x32\x1a.google.protobuf.BoolValueB\xd2\x01\n%com.google.ads.googleads.v0.resourcesB\rCustomerProtoP\x01ZJgoogle.golang.org/genproto/googleapis/ads/googleads/v0/resources;resources\xa2\x02\x03GAA\xaa\x02!Google.Ads.GoogleAds.V0.Resources\xca\x02!Google\\Ads\\GoogleAds\\V0\\Resourcesb\x06proto3')
+  serialized_pb=_b('\n6google/ads/googleads_v0/proto/resources/customer.proto\x12!google.ads.googleads.v0.resources\x1a\x1egoogle/protobuf/wrappers.proto\"\xf0\x03\n\x08\x43ustomer\x12\x15\n\rresource_name\x18\x01 \x01(\t\x12\'\n\x02id\x18\x03 \x01(\x0b\x32\x1b.google.protobuf.Int64Value\x12\x36\n\x10\x64\x65scriptive_name\x18\x04 \x01(\x0b\x32\x1c.google.protobuf.StringValue\x12\x33\n\rcurrency_code\x18\x05 \x01(\x0b\x32\x1c.google.protobuf.StringValue\x12/\n\ttime_zone\x18\x06 \x01(\x0b\x32\x1c.google.protobuf.StringValue\x12;\n\x15tracking_url_template\x18\x07 \x01(\x0b\x32\x1c.google.protobuf.StringValue\x12\x38\n\x14\x61uto_tagging_enabled\x18\x08 \x01(\x0b\x32\x1a.google.protobuf.BoolValue\x12\x36\n\x12has_partners_badge\x18\t \x01(\x0b\x32\x1a.google.protobuf.BoolValue\x12W\n\x16\x63\x61ll_reporting_setting\x18\n \x01(\x0b\x32\x37.google.ads.googleads.v0.resources.CallReportingSetting\"\xd7\x01\n\x14\x43\x61llReportingSetting\x12:\n\x16\x63\x61ll_reporting_enabled\x18\x01 \x01(\x0b\x32\x1a.google.protobuf.BoolValue\x12\x45\n!call_conversion_reporting_enabled\x18\x02 \x01(\x0b\x32\x1a.google.protobuf.BoolValue\x12<\n\x16\x63\x61ll_conversion_action\x18\t \x01(\x0b\x32\x1c.google.protobuf.StringValueB\xd2\x01\n%com.google.ads.googleads.v0.resourcesB\rCustomerProtoP\x01ZJgoogle.golang.org/genproto/googleapis/ads/googleads/v0/resources;resources\xa2\x02\x03GAA\xaa\x02!Google.Ads.GoogleAds.V0.Resources\xca\x02!Google\\Ads\\GoogleAds\\V0\\Resourcesb\x06proto3')
   ,
   dependencies=[google_dot_protobuf_dot_wrappers__pb2.DESCRIPTOR,])
 
@@ -90,6 +90,13 @@ _CUSTOMER = _descriptor.Descriptor(
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None, file=DESCRIPTOR),
+    _descriptor.FieldDescriptor(
+      name='call_reporting_setting', full_name='google.ads.googleads.v0.resources.Customer.call_reporting_setting', index=8,
+      number=10, type=11, cpp_type=10, label=1,
+      has_default_value=False, default_value=None,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None, file=DESCRIPTOR),
   ],
   extensions=[
   ],
@@ -103,7 +110,52 @@ _CUSTOMER = _descriptor.Descriptor(
   oneofs=[
   ],
   serialized_start=126,
-  serialized_end=533,
+  serialized_end=622,
+)
+
+
+_CALLREPORTINGSETTING = _descriptor.Descriptor(
+  name='CallReportingSetting',
+  full_name='google.ads.googleads.v0.resources.CallReportingSetting',
+  filename=None,
+  file=DESCRIPTOR,
+  containing_type=None,
+  fields=[
+    _descriptor.FieldDescriptor(
+      name='call_reporting_enabled', full_name='google.ads.googleads.v0.resources.CallReportingSetting.call_reporting_enabled', index=0,
+      number=1, type=11, cpp_type=10, label=1,
+      has_default_value=False, default_value=None,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None, file=DESCRIPTOR),
+    _descriptor.FieldDescriptor(
+      name='call_conversion_reporting_enabled', full_name='google.ads.googleads.v0.resources.CallReportingSetting.call_conversion_reporting_enabled', index=1,
+      number=2, type=11, cpp_type=10, label=1,
+      has_default_value=False, default_value=None,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None, file=DESCRIPTOR),
+    _descriptor.FieldDescriptor(
+      name='call_conversion_action', full_name='google.ads.googleads.v0.resources.CallReportingSetting.call_conversion_action', index=2,
+      number=9, type=11, cpp_type=10, label=1,
+      has_default_value=False, default_value=None,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None, file=DESCRIPTOR),
+  ],
+  extensions=[
+  ],
+  nested_types=[],
+  enum_types=[
+  ],
+  options=None,
+  is_extendable=False,
+  syntax='proto3',
+  extension_ranges=[],
+  oneofs=[
+  ],
+  serialized_start=625,
+  serialized_end=840,
 )
 
 _CUSTOMER.fields_by_name['id'].message_type = google_dot_protobuf_dot_wrappers__pb2._INT64VALUE
@@ -113,7 +165,12 @@ _CUSTOMER.fields_by_name['time_zone'].message_type = google_dot_protobuf_dot_wra
 _CUSTOMER.fields_by_name['tracking_url_template'].message_type = google_dot_protobuf_dot_wrappers__pb2._STRINGVALUE
 _CUSTOMER.fields_by_name['auto_tagging_enabled'].message_type = google_dot_protobuf_dot_wrappers__pb2._BOOLVALUE
 _CUSTOMER.fields_by_name['has_partners_badge'].message_type = google_dot_protobuf_dot_wrappers__pb2._BOOLVALUE
+_CUSTOMER.fields_by_name['call_reporting_setting'].message_type = _CALLREPORTINGSETTING
+_CALLREPORTINGSETTING.fields_by_name['call_reporting_enabled'].message_type = google_dot_protobuf_dot_wrappers__pb2._BOOLVALUE
+_CALLREPORTINGSETTING.fields_by_name['call_conversion_reporting_enabled'].message_type = google_dot_protobuf_dot_wrappers__pb2._BOOLVALUE
+_CALLREPORTINGSETTING.fields_by_name['call_conversion_action'].message_type = google_dot_protobuf_dot_wrappers__pb2._STRINGVALUE
 DESCRIPTOR.message_types_by_name['Customer'] = _CUSTOMER
+DESCRIPTOR.message_types_by_name['CallReportingSetting'] = _CALLREPORTINGSETTING
 _sym_db.RegisterFileDescriptor(DESCRIPTOR)
 
 Customer = _reflection.GeneratedProtocolMessageType('Customer', (_message.Message,), dict(
@@ -145,11 +202,36 @@ Customer = _reflection.GeneratedProtocolMessageType('Customer', (_message.Messag
           Whether the Customer has a Partners program badge. If the
           Customer is not associated with the Partners program, this
           will be false. For more information, see
-          https://support.google.com/partners/answer/3125774
+          https://support.google.com/partners/answer/3125774.
+      call_reporting_setting:
+          Call reporting setting for a customer.
   """,
   # @@protoc_insertion_point(class_scope:google.ads.googleads.v0.resources.Customer)
   ))
 _sym_db.RegisterMessage(Customer)
+
+CallReportingSetting = _reflection.GeneratedProtocolMessageType('CallReportingSetting', (_message.Message,), dict(
+  DESCRIPTOR = _CALLREPORTINGSETTING,
+  __module__ = 'google.ads.googleads_v0.proto.resources.customer_pb2'
+  ,
+  __doc__ = """Call reporting setting for a customer.
+  
+  
+  Attributes:
+      call_reporting_enabled:
+          Enable reporting of phone call events by redirecting them via
+          Google System.
+      call_conversion_reporting_enabled:
+          Whether to enable call conversion reporting.
+      call_conversion_action:
+          Customer-level call conversion action to attribute a call
+          conversion to. If not set a default conversion action is used.
+          Only in effect when call\_conversion\_reporting\_enabled is
+          set to true.
+  """,
+  # @@protoc_insertion_point(class_scope:google.ads.googleads.v0.resources.CallReportingSetting)
+  ))
+_sym_db.RegisterMessage(CallReportingSetting)
 
 
 DESCRIPTOR.has_options = True

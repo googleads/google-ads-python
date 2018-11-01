@@ -19,7 +19,7 @@ DESCRIPTOR = _descriptor.FileDescriptor(
   name='google/ads/googleads_v0/proto/errors/field_error.proto',
   package='google.ads.googleads.v0.errors',
   syntax='proto3',
-  serialized_pb=_b('\n6google/ads/googleads_v0/proto/errors/field_error.proto\x12\x1egoogle.ads.googleads.v0.errors\"\xa8\x01\n\x0e\x46ieldErrorEnum\"\x95\x01\n\nFieldError\x12\x0f\n\x0bUNSPECIFIED\x10\x00\x12\x0b\n\x07UNKNOWN\x10\x01\x12\x0c\n\x08REQUIRED\x10\x02\x12\x13\n\x0fIMMUTABLE_FIELD\x10\x03\x12\x11\n\rINVALID_VALUE\x10\x04\x12\x17\n\x13VALUE_MUST_BE_UNSET\x10\x05\x12\x1a\n\x16REQUIRED_NONEMPTY_LIST\x10\x06\x42\xc5\x01\n\"com.google.ads.googleads.v0.errorsB\x0f\x46ieldErrorProtoP\x01ZDgoogle.golang.org/genproto/googleapis/ads/googleads/v0/errors;errors\xa2\x02\x03GAA\xaa\x02\x1eGoogle.Ads.GoogleAds.V0.Errors\xca\x02\x1eGoogle\\Ads\\GoogleAds\\V0\\Errorsb\x06proto3')
+  serialized_pb=_b('\n6google/ads/googleads_v0/proto/errors/field_error.proto\x12\x1egoogle.ads.googleads.v0.errors\"\xc5\x01\n\x0e\x46ieldErrorEnum\"\xb2\x01\n\nFieldError\x12\x0f\n\x0bUNSPECIFIED\x10\x00\x12\x0b\n\x07UNKNOWN\x10\x01\x12\x0c\n\x08REQUIRED\x10\x02\x12\x13\n\x0fIMMUTABLE_FIELD\x10\x03\x12\x11\n\rINVALID_VALUE\x10\x04\x12\x17\n\x13VALUE_MUST_BE_UNSET\x10\x05\x12\x1a\n\x16REQUIRED_NONEMPTY_LIST\x10\x06\x12\x1b\n\x17\x46IELD_CANNOT_BE_CLEARED\x10\x07\x42\xc5\x01\n\"com.google.ads.googleads.v0.errorsB\x0f\x46ieldErrorProtoP\x01ZDgoogle.golang.org/genproto/googleapis/ads/googleads/v0/errors;errors\xa2\x02\x03GAA\xaa\x02\x1eGoogle.Ads.GoogleAds.V0.Errors\xca\x02\x1eGoogle\\Ads\\GoogleAds\\V0\\Errorsb\x06proto3')
 )
 
 
@@ -58,11 +58,15 @@ _FIELDERRORENUM_FIELDERROR = _descriptor.EnumDescriptor(
       name='REQUIRED_NONEMPTY_LIST', index=6, number=6,
       options=None,
       type=None),
+    _descriptor.EnumValueDescriptor(
+      name='FIELD_CANNOT_BE_CLEARED', index=7, number=7,
+      options=None,
+      type=None),
   ],
   containing_type=None,
   options=None,
   serialized_start=110,
-  serialized_end=259,
+  serialized_end=288,
 )
 _sym_db.RegisterEnumDescriptor(_FIELDERRORENUM_FIELDERROR)
 
@@ -88,7 +92,7 @@ _FIELDERRORENUM = _descriptor.Descriptor(
   oneofs=[
   ],
   serialized_start=91,
-  serialized_end=259,
+  serialized_end=288,
 )
 
 _FIELDERRORENUM_FIELDERROR.containing_type = _FIELDERRORENUM

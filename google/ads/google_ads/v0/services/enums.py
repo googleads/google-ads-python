@@ -16,6 +16,85 @@
 import enum
 
 
+class TrackingCodePageFormatEnum(object):
+    class TrackingCodePageFormat(enum.IntEnum):
+        """
+        The format of the web page where the tracking tag and snippet will be
+        installed.
+
+        Attributes:
+          UNSPECIFIED (int): Not specified.
+          UNKNOWN (int): Used for return value only. Represents value unknown in this version.
+          HTML (int): Standard HTML page format.
+        """
+        UNSPECIFIED = 0
+        UNKNOWN = 1
+        HTML = 2
+
+
+class TrackingCodeTypeEnum(object):
+    class TrackingCodeType(enum.IntEnum):
+        """
+        The type of the generated tag snippets for tracking conversions.
+
+        Attributes:
+          UNSPECIFIED (int): Not specified.
+          UNKNOWN (int): Used for return value only. Represents value unknown in this version.
+          WEBPAGE (int): The snippet that is fired as a result of a website page loading.
+          WEBPAGE_ONCLICK (int): The snippet contains a JavaScript function which fires the tag. This
+          function is typically called from an onClick handler added to a link or
+          button element on the page.
+          CLICK_TO_CALL (int): For embedding on a mobile webpage. The snippet contains a JavaScript
+          function which fires the tag.
+        """
+        UNSPECIFIED = 0
+        UNKNOWN = 1
+        WEBPAGE = 2
+        WEBPAGE_ONCLICK = 3
+        CLICK_TO_CALL = 4
+
+
+class CallConversionReportingStateEnum(object):
+    class CallConversionReportingState(enum.IntEnum):
+        """
+        Possible data types for a call conversion action state.
+
+        Attributes:
+          UNSPECIFIED (int): Not specified.
+          UNKNOWN (int): Used for return value only. Represents value unknown in this version.
+          DISABLED (int): Call conversion action is disabled.
+          USE_ACCOUNT_LEVEL_CALL_CONVERSION_ACTION (int): Call conversion action will use call conversion type set at the
+          account level.
+          USE_RESOURCE_LEVEL_CALL_CONVERSION_ACTION (int): Call conversion action will use call conversion type set at the resource
+          (call only ads/call extensions) level.
+        """
+        UNSPECIFIED = 0
+        UNKNOWN = 1
+        DISABLED = 2
+        USE_ACCOUNT_LEVEL_CALL_CONVERSION_ACTION = 3
+        USE_RESOURCE_LEVEL_CALL_CONVERSION_ACTION = 4
+
+
+class DisplayAdFormatSettingEnum(object):
+    class DisplayAdFormatSetting(enum.IntEnum):
+        """
+        Enumerates display ad format settings.
+
+        Attributes:
+          UNSPECIFIED (int): Not specified.
+          UNKNOWN (int): The value is unknown in this version.
+          ALL_FORMATS (int): Text, image and native formats.
+          NON_NATIVE (int): Text and image formats.
+          NATIVE (int): Native format, i.e. the format rendering is controlled by the publisher
+          and not by Google.
+        """
+        UNSPECIFIED = 0
+        UNKNOWN = 1
+        ALL_FORMATS = 2
+        NON_NATIVE = 3
+        NATIVE = 4
+
+
 class PageOnePromotedStrategyGoalEnum(object):
     class PageOnePromotedStrategyGoal(enum.IntEnum):
         """
@@ -84,6 +163,33 @@ class PolicyTopicEvidenceDestinationMismatchUrlTypeEnum(object):
         MOBILE_TRACKING_URL = 6
 
 
+class AgeRangeTypeEnum(object):
+    class AgeRangeType(enum.IntEnum):
+        """
+        The type of demographic age ranges (e.g. between 18 and 24 years old).
+
+        Attributes:
+          UNSPECIFIED (int): Not specified.
+          UNKNOWN (int): Used for return value only. Represents value unknown in this version.
+          AGE_RANGE_18_24 (int): Between 18 and 24 years old.
+          AGE_RANGE_25_34 (int): Between 25 and 34 years old.
+          AGE_RANGE_35_44 (int): Between 35 and 44 years old.
+          AGE_RANGE_45_54 (int): Between 45 and 54 years old.
+          AGE_RANGE_55_64 (int): Between 55 and 64 years old.
+          AGE_RANGE_65_UP (int): 65 years old and beyond.
+          AGE_RANGE_UNDETERMINED (int): Undetermined age range.
+        """
+        UNSPECIFIED = 0
+        UNKNOWN = 1
+        AGE_RANGE_18_24 = 503001
+        AGE_RANGE_25_34 = 503002
+        AGE_RANGE_35_44 = 503003
+        AGE_RANGE_45_54 = 503004
+        AGE_RANGE_55_64 = 503005
+        AGE_RANGE_65_UP = 503006
+        AGE_RANGE_UNDETERMINED = 503999
+
+
 class DayOfWeekEnum(object):
     class DayOfWeek(enum.IntEnum):
         """
@@ -130,6 +236,25 @@ class DeviceEnum(object):
         DESKTOP = 4
 
 
+class GenderTypeEnum(object):
+    class GenderType(enum.IntEnum):
+        """
+        The type of demographic genders (e.g. female).
+
+        Attributes:
+          UNSPECIFIED (int): Not specified.
+          UNKNOWN (int): Used for return value only. Represents value unknown in this version.
+          MALE (int): Male.
+          FEMALE (int): Female.
+          UNDETERMINED (int): Undetermined gender.
+        """
+        UNSPECIFIED = 0
+        UNKNOWN = 1
+        MALE = 10
+        FEMALE = 11
+        UNDETERMINED = 20
+
+
 class HotelDateSelectionTypeEnum(object):
     class HotelDateSelectionType(enum.IntEnum):
         """
@@ -145,6 +270,33 @@ class HotelDateSelectionTypeEnum(object):
         UNKNOWN = 1
         DEFAULT_SELECTION = 50
         USER_SELECTED = 51
+
+
+class IncomeRangeTypeEnum(object):
+    class IncomeRangeType(enum.IntEnum):
+        """
+        The type of demographic income ranges (e.g. between 0% to 50%).
+
+        Attributes:
+          UNSPECIFIED (int): Not specified.
+          UNKNOWN (int): Used for return value only. Represents value unknown in this version.
+          INCOME_RANGE_0_50 (int): 0%-50%.
+          INCOME_RANGE_50_60 (int): 50% to 60%.
+          INCOME_RANGE_60_70 (int): 60% to 70%.
+          INCOME_RANGE_70_80 (int): 70% to 80%.
+          INCOME_RANGE_80_90 (int): 80% to 90%.
+          INCOME_RANGE_90_UP (int): Greater than 90%.
+          INCOME_RANGE_UNDETERMINED (int): Undetermined income range.
+        """
+        UNSPECIFIED = 0
+        UNKNOWN = 1
+        INCOME_RANGE_0_50 = 510001
+        INCOME_RANGE_50_60 = 510002
+        INCOME_RANGE_60_70 = 510003
+        INCOME_RANGE_70_80 = 510004
+        INCOME_RANGE_80_90 = 510005
+        INCOME_RANGE_90_UP = 510006
+        INCOME_RANGE_UNDETERMINED = 510000
 
 
 class InteractionTypeEnum(object):
@@ -244,6 +396,25 @@ class MinuteOfHourEnum(object):
         FORTY_FIVE = 5
 
 
+class ParentalStatusTypeEnum(object):
+    class ParentalStatusType(enum.IntEnum):
+        """
+        The type of parental statuses (e.g. not a parent).
+
+        Attributes:
+          UNSPECIFIED (int): Not specified.
+          UNKNOWN (int): Used for return value only. Represents value unknown in this version.
+          PARENT (int): Parent.
+          NOT_A_PARENT (int): Not a parent.
+          UNDETERMINED (int): Undetermined parental status.
+        """
+        UNSPECIFIED = 0
+        UNKNOWN = 1
+        PARENT = 300
+        NOT_A_PARENT = 301
+        UNDETERMINED = 302
+
+
 class ProductChannelEnum(object):
     class ProductChannel(enum.IntEnum):
         """
@@ -322,6 +493,23 @@ class ProductTypeLevelEnum(object):
         PRODUCT_TYPE_L3 = 4
         PRODUCT_TYPE_L4 = 5
         PRODUCT_TYPE_L5 = 6
+
+
+class ProximityRadiusUnitsEnum(object):
+    class ProximityRadiusUnits(enum.IntEnum):
+        """
+        The unit of radius distance in proximity (e.g. MILES)
+
+        Attributes:
+          UNSPECIFIED (int): Not specified.
+          UNKNOWN (int): Used for return value only. Represents value unknown in this version.
+          MILES (int): Miles
+          KILOMETERS (int): Kilometers
+        """
+        UNSPECIFIED = 0
+        UNKNOWN = 1
+        MILES = 2
+        KILOMETERS = 3
 
 
 class AdServingOptimizationStatusEnum(object):
@@ -442,6 +630,25 @@ class CampaignGroupStatusEnum(object):
         REMOVED = 4
 
 
+class GeoTargetConstantStatusEnum(object):
+    class GeoTargetConstantStatus(enum.IntEnum):
+        """
+        The possible statuses of a geo target constant.
+
+        Attributes:
+          UNSPECIFIED (int): No value has been specified.
+          UNKNOWN (int): The received value is not known in this version.
+
+          This is a response-only value.
+          ENABLED (int): The geo target constant is valid.
+          REMOVAL_PLANNED (int): The geo target constant is obsolete and will be removed.
+        """
+        UNSPECIFIED = 0
+        UNKNOWN = 1
+        ENABLED = 2
+        REMOVAL_PLANNED = 3
+
+
 class CampaignServingStatusEnum(object):
     class CampaignServingStatus(enum.IntEnum):
         """
@@ -467,24 +674,8 @@ class CampaignServingStatusEnum(object):
         SUSPENDED = 6
 
 
-class TrackingCodePageFormatEnum(object):
-    class TrackingCodePageFormat(enum.IntEnum):
-        """
-        The format of the web page where the tracking tag and snippet will be
-        installed.
-
-        Attributes:
-          UNSPECIFIED (int): Not specified.
-          UNKNOWN (int): Used for return value only. Represents value unknown in this version.
-          HTML (int): Standard HTML page format.
-        """
-        UNSPECIFIED = 0
-        UNKNOWN = 1
-        HTML = 2
-
-
-class ResourceTypeEnum(object):
-    class ResourceType(enum.IntEnum):
+class ChangeStatusResourceTypeEnum(object):
+    class ChangeStatusResourceType(enum.IntEnum):
         """
         Enum listing the resource types support by the ChangeStatus resource.
 
@@ -492,7 +683,6 @@ class ResourceTypeEnum(object):
           UNSPECIFIED (int): No value has been specified.
           UNKNOWN (int): Used for return value only. Represents an unclassified resource unknown
           in this version.
-          AD (int): An Ad resource change.
           AD_GROUP (int): An AdGroup resource change.
           AD_GROUP_AD (int): An AdGroupAd resource change.
           AD_GROUP_CRITERION (int): An AdGroupCriterion resource change.
@@ -501,7 +691,6 @@ class ResourceTypeEnum(object):
         """
         UNSPECIFIED = 0
         UNKNOWN = 1
-        AD = 2
         AD_GROUP = 3
         AD_GROUP_AD = 4
         AD_GROUP_CRITERION = 5
@@ -605,6 +794,45 @@ class GoogleAdsFieldDataTypeEnum(object):
         STRING = 11
 
 
+class MimeTypeEnum(object):
+    class MimeType(enum.IntEnum):
+        """
+        The mime type
+
+        Attributes:
+          UNSPECIFIED (int): The mime type has not been specified.
+          UNKNOWN (int): The received value is not known in this version.
+
+          This is a response-only value.
+          IMAGE_JPEG (int): MIME type of image/jpeg.
+          IMAGE_GIF (int): MIME type of image/gif.
+          IMAGE_PNG (int): MIME type of image/png.
+          FLASH (int): MIME type of application/x-shockwave-flash.
+          TEXT_HTML (int): MIME type of text/html.
+          PDF (int): MIME type of application/pdf.
+          MSWORD (int): MIME type of application/msword.
+          MSEXCEL (int): MIME type of application/vnd.ms-excel.
+          RTF (int): MIME type of application/rtf.
+          AUDIO_WAV (int): MIME type of audio/wav.
+          AUDIO_MP3 (int): MIME type of audio/mp3.
+          HTML5_AD_ZIP (int): MIME type of application/x-html5-ad-zip.
+        """
+        UNSPECIFIED = 0
+        UNKNOWN = 1
+        IMAGE_JPEG = 2
+        IMAGE_GIF = 3
+        IMAGE_PNG = 4
+        FLASH = 5
+        TEXT_HTML = 6
+        PDF = 7
+        MSWORD = 8
+        MSEXCEL = 9
+        RTF = 10
+        AUDIO_WAV = 11
+        AUDIO_MP3 = 12
+        HTML5_AD_ZIP = 13
+
+
 class TimeTypeEnum(object):
     class TimeType(enum.IntEnum):
         """
@@ -638,28 +866,6 @@ class BudgetStatusEnum(object):
         UNKNOWN = 1
         ENABLED = 2
         REMOVED = 3
-
-
-class TrackingCodeTypeEnum(object):
-    class TrackingCodeType(enum.IntEnum):
-        """
-        The type of the generated tag snippets for tracking conversions.
-
-        Attributes:
-          UNSPECIFIED (int): Not specified.
-          UNKNOWN (int): Used for return value only. Represents value unknown in this version.
-          WEBPAGE (int): The snippet that is fired as a result of a website page loading.
-          WEBPAGE_ONCLICK (int): The snippet contains a JavaScript function which fires the tag. This
-          function is typically called from an onClick handler added to a link or
-          button element on the page.
-          CLICK_TO_CALL (int): For embedding on a mobile webpage. The snippet contains a JavaScript
-          function which fires the tag.
-        """
-        UNSPECIFIED = 0
-        UNKNOWN = 1
-        WEBPAGE = 2
-        WEBPAGE_ONCLICK = 3
-        CLICK_TO_CALL = 4
 
 
 class AdGroupCriterionStatusEnum(object):
@@ -1134,18 +1340,36 @@ class CriterionTypeEnum(object):
           UNSPECIFIED (int): Not specified.
           UNKNOWN (int): Used for return value only. Represents value unknown in this version.
           KEYWORD (int): Keyword. e.g. 'mars cruise'.
+          PLACEMENT (int): Placement, aka Website. e.g. 'www.flowers4sale.com'
           DEVICE (int): Devices to target.
           LOCATION (int): Locations to target.
           LISTING_GROUP (int): Listing groups to target.
           AD_SCHEDULE (int): Ad Schedule.
+          AGE_RANGE (int): Age range.
+          GENDER (int): Gender.
+          INCOME_RANGE (int): Income Range.
+          PARENTAL_STATUS (int): Parental status.
+          YOUTUBE_VIDEO (int): YouTube Video.
+          YOUTUBE_CHANNEL (int): YouTube Channel.
+          PROXIMITY (int): Proximity.
+          TOPIC (int): A topic target on the content network (e.g. \"Pets & Animals\").
         """
         UNSPECIFIED = 0
         UNKNOWN = 1
         KEYWORD = 2
+        PLACEMENT = 3
         DEVICE = 6
         LOCATION = 7
         LISTING_GROUP = 8
         AD_SCHEDULE = 9
+        AGE_RANGE = 10
+        GENDER = 11
+        INCOME_RANGE = 12
+        PARENTAL_STATUS = 13
+        YOUTUBE_VIDEO = 14
+        YOUTUBE_CHANNEL = 15
+        PROXIMITY = 17
+        TOPIC = 18
 
 
 class PolicyReviewStatusEnum(object):
@@ -1189,6 +1413,7 @@ class AdTypeEnum(object):
           HOTEL_AD (int): The ad is a hotel ad.
           SHOPPING_SMART_AD (int): The ad is a Smart Shopping ad.
           SHOPPING_PRODUCT_AD (int): The ad is a standard Shopping ad.
+          VIDEO_OUTSTREAM (int): Video outstream ad.
         """
         UNSPECIFIED = 0
         UNKNOWN = 1
@@ -1201,6 +1426,7 @@ class AdTypeEnum(object):
         HOTEL_AD = 8
         SHOPPING_SMART_AD = 9
         SHOPPING_PRODUCT_AD = 10
+        VIDEO_OUTSTREAM = 11
 
 
 class AdGroupTypeEnum(object):
@@ -1219,6 +1445,10 @@ class AdGroupTypeEnum(object):
           HOTEL_ADS (int): The default ad group type for Hotel campaigns.
           SHOPPING_SMART_ADS (int): The type for ad groups in Smart Shopping campaigns.
           VIDEO_BUMPER (int): Short unskippable in-stream video ads.
+          VIDEO_TRUE_VIEW_IN_STREAM (int): TrueView (skippable) in-stream video ads.
+          VIDEO_TRUE_VIEW_IN_DISPLAY (int): TrueView in-display video ads.
+          VIDEO_NON_SKIPPABLE_IN_STREAM (int): Unskippable in-stream video ads.
+          VIDEO_OUTSTREAM (int): Outstream video ads.
         """
         UNSPECIFIED = 0
         UNKNOWN = 1
@@ -1228,6 +1458,10 @@ class AdGroupTypeEnum(object):
         HOTEL_ADS = 6
         SHOPPING_SMART_ADS = 7
         VIDEO_BUMPER = 8
+        VIDEO_TRUE_VIEW_IN_STREAM = 9
+        VIDEO_TRUE_VIEW_IN_DISPLAY = 10
+        VIDEO_NON_SKIPPABLE_IN_STREAM = 11
+        VIDEO_OUTSTREAM = 12
 
 
 class ConversionActionCountingTypeEnum(object):
@@ -1246,6 +1480,50 @@ class ConversionActionCountingTypeEnum(object):
         UNKNOWN = 1
         ONE_PER_CLICK = 2
         MANY_PER_CLICK = 3
+
+
+class ManagerLinkStatusEnum(object):
+    class ManagerLinkStatus(enum.IntEnum):
+        """
+        Possible statuses of a link.
+
+        Attributes:
+          UNSPECIFIED (int): Not specified.
+          UNKNOWN (int): Used for return value only. Represents value unknown in this version.
+          ACTIVE (int): Indicates current in-effect relationship
+          INACTIVE (int): Indicates terminated relationship
+          PENDING (int): Indicates relationship has been requested by manager, but the client
+          hasn't accepted yet.
+          REFUSED (int): Relationship was requested by the manager, but the client has refused.
+          CANCELED (int): Indicates relationship has been requested by manager, but manager
+          canceled it.
+        """
+        UNSPECIFIED = 0
+        UNKNOWN = 1
+        ACTIVE = 2
+        INACTIVE = 3
+        PENDING = 4
+        REFUSED = 5
+        CANCELED = 6
+
+
+class AdGroupAdRotationModeEnum(object):
+    class AdGroupAdRotationMode(enum.IntEnum):
+        """
+        The possible ad rotation modes of an ad group.
+
+        Attributes:
+          UNSPECIFIED (int): The ad rotation mode has not been specified.
+          UNKNOWN (int): The received value is not known in this version.
+
+          This is a response-only value.
+          OPTIMIZE (int): Optimize ad group ads based on clicks or conversions.
+          ROTATE_FOREVER (int): Rotate evenly forever.
+        """
+        UNSPECIFIED = 0
+        UNKNOWN = 1
+        OPTIMIZE = 2
+        ROTATE_FOREVER = 3
 
 
 class SpendingLimitTypeEnum(object):
@@ -1324,6 +1602,9 @@ class AdvertisingChannelSubTypeEnum(object):
           SEARCH_EXPRESS (int): AdWords express campaigns for search.
           DISPLAY_EXPRESS (int): AdWords Express campaigns for display.
           SHOPPING_SMART_ADS (int): Smart Shopping campaigns.
+          DISPLAY_GMAIL_AD (int): Gmail Ad campaigns.
+          DISPLAY_SMART_CAMPAIGN (int): Smart display campaigns.
+          VIDEO_OUTSTREAM (int): Video Outstream campaigns.
         """
         UNSPECIFIED = 0
         UNKNOWN = 1
@@ -1332,6 +1613,9 @@ class AdvertisingChannelSubTypeEnum(object):
         SEARCH_EXPRESS = 4
         DISPLAY_EXPRESS = 5
         SHOPPING_SMART_ADS = 6
+        DISPLAY_GMAIL_AD = 7
+        DISPLAY_SMART_CAMPAIGN = 8
+        VIDEO_OUTSTREAM = 9
 
 
 class AdNetworkTypeEnum(object):
@@ -1377,6 +1661,25 @@ class BidModifierSourceEnum(object):
         AD_GROUP = 3
 
 
+class AccountBudgetStatusEnum(object):
+    class AccountBudgetStatus(enum.IntEnum):
+        """
+        The possible statuses of an AccountBudget.
+
+        Attributes:
+          UNSPECIFIED (int): Not specified.
+          UNKNOWN (int): Used for return value only. Represents value unknown in this version.
+          PENDING (int): The account budget is pending approval.
+          APPROVED (int): The account budget has been approved.
+          CANCELLED (int): The account budget has been cancelled by the user.
+        """
+        UNSPECIFIED = 0
+        UNKNOWN = 1
+        PENDING = 2
+        APPROVED = 3
+        CANCELLED = 4
+
+
 class AdvertisingChannelTypeEnum(object):
     class AdvertisingChannelType(enum.IntEnum):
         """
@@ -1399,6 +1702,33 @@ class AdvertisingChannelTypeEnum(object):
         SHOPPING = 4
         HOTEL = 5
         VIDEO = 6
+
+
+class MediaTypeEnum(object):
+    class MediaType(enum.IntEnum):
+        """
+        The type of media.
+
+        Attributes:
+          UNSPECIFIED (int): The media type has not been specified.
+          UNKNOWN (int): The received value is not known in this version.
+
+          This is a response-only value.
+          IMAGE (int): Static image, used for image ad.
+          ICON (int): Small image, used for map ad.
+          MEDIA_BUNDLE (int): ZIP file, used in fields of template ads.
+          AUDIO (int): Audio file.
+          VIDEO (int): Video file.
+          DYNAMIC_IMAGE (int): Animated image, such as animated GIF.
+        """
+        UNSPECIFIED = 0
+        UNKNOWN = 1
+        IMAGE = 2
+        ICON = 3
+        MEDIA_BUNDLE = 4
+        AUDIO = 5
+        VIDEO = 6
+        DYNAMIC_IMAGE = 7
 
 
 class AdGroupAdStatusEnum(object):
@@ -1623,68 +1953,6 @@ class AdGroupErrorEnum(object):
         CANNOT_ADD_ADGROUP_OF_TYPE_DSA_TO_CAMPAIGN_WITHOUT_DSA_SETTING = 14
 
 
-class MediaErrorEnum(object):
-    class MediaError(enum.IntEnum):
-        """
-        Enum describing possible media errors.
-
-        Attributes:
-          UNSPECIFIED (int): Enum unspecified.
-          UNKNOWN (int): The received error code is not known in this version.
-          CANNOT_ADD_STANDARD_ICON (int): Cannot add a standard icon type
-          CANNOT_SELECT_STANDARD_ICON_WITH_OTHER_TYPES (int): May only select Standard Icons alone
-          CANNOT_SPECIFY_MEDIA_ID_AND_DATA (int): Image contains both a media ID and media data.
-          DUPLICATE_MEDIA (int): A media with given type and reference id already exists
-          EMPTY_FIELD (int): A required field was not specified or is an empty string.
-          RESOURCE_REFERENCED_IN_MULTIPLE_OPS (int): A media may only be modified once per call
-          FIELD_NOT_SUPPORTED_FOR_MEDIA_SUB_TYPE (int): Field is not supported for the media sub type.
-          INVALID_MEDIA_ID (int): The media id is invalid
-          INVALID_MEDIA_SUB_TYPE (int): The media subtype is invalid
-          INVALID_MEDIA_TYPE (int): The media type is invalid
-          INVALID_MIME_TYPE (int): The mimetype is invalid
-          INVALID_REFERENCE_ID (int): The media reference id is invalid
-          INVALID_YOU_TUBE_ID (int): The YouTube video id is invalid
-          MEDIA_FAILED_TRANSCODING (int): Media has failed transcoding
-          MEDIA_NOT_TRANSCODED (int): Media has not been transcoded
-          MEDIA_TYPE_DOES_NOT_MATCH_OBJECT_TYPE (int): The MediaType does not match the actual media object's type
-          NO_FIELDS_SPECIFIED (int): None of the fields have been specified.
-          NULL_REFERENCE_ID_AND_MEDIA_ID (int): One of reference Id or media Id must be specified
-          TOO_LONG (int): The string has too many characters.
-          UNSUPPORTED_OPERATION (int): The specified operation is not supported. Only ADD, SET, and REMOVE are
-          supported
-          UNSUPPORTED_TYPE (int): The specified type is not supported.
-          YOU_TUBE_SERVICE_UNAVAILABLE (int): YouTube is unavailable for requesting video data.
-          YOU_TUBE_VIDEO_HAS_NON_POSITIVE_DURATION (int): The YouTube video has a non positive duration.
-          YOU_TUBE_VIDEO_NOT_FOUND (int): The YouTube video id is syntactically valid but the video was not found.
-        """
-        UNSPECIFIED = 0
-        UNKNOWN = 1
-        CANNOT_ADD_STANDARD_ICON = 2
-        CANNOT_SELECT_STANDARD_ICON_WITH_OTHER_TYPES = 3
-        CANNOT_SPECIFY_MEDIA_ID_AND_DATA = 4
-        DUPLICATE_MEDIA = 5
-        EMPTY_FIELD = 6
-        RESOURCE_REFERENCED_IN_MULTIPLE_OPS = 7
-        FIELD_NOT_SUPPORTED_FOR_MEDIA_SUB_TYPE = 8
-        INVALID_MEDIA_ID = 9
-        INVALID_MEDIA_SUB_TYPE = 10
-        INVALID_MEDIA_TYPE = 11
-        INVALID_MIME_TYPE = 12
-        INVALID_REFERENCE_ID = 13
-        INVALID_YOU_TUBE_ID = 14
-        MEDIA_FAILED_TRANSCODING = 15
-        MEDIA_NOT_TRANSCODED = 16
-        MEDIA_TYPE_DOES_NOT_MATCH_OBJECT_TYPE = 17
-        NO_FIELDS_SPECIFIED = 18
-        NULL_REFERENCE_ID_AND_MEDIA_ID = 19
-        TOO_LONG = 20
-        UNSUPPORTED_OPERATION = 21
-        UNSUPPORTED_TYPE = 22
-        YOU_TUBE_SERVICE_UNAVAILABLE = 23
-        YOU_TUBE_VIDEO_HAS_NON_POSITIVE_DURATION = 24
-        YOU_TUBE_VIDEO_NOT_FOUND = 25
-
-
 class FieldMaskErrorEnum(object):
     class FieldMaskError(enum.IntEnum):
         """
@@ -1875,6 +2143,65 @@ class FeedAttributeReferenceErrorEnum(object):
         INVALID_FEED_ATTRIBUTE_NAME = 4
 
 
+class MediaFileErrorEnum(object):
+    class MediaFileError(enum.IntEnum):
+        """
+        Enum describing possible media file errors.
+
+        Attributes:
+          UNSPECIFIED (int): Enum unspecified.
+          UNKNOWN (int): The received error code is not known in this version.
+          CANNOT_CREATE_STANDARD_ICON (int): Cannot create a standard icon type.
+          CANNOT_SELECT_STANDARD_ICON_WITH_OTHER_TYPES (int): May only select Standard Icons alone.
+          CANNOT_SPECIFY_MEDIA_FILE_ID_AND_DATA (int): Image contains both a media file ID and data.
+          DUPLICATE_MEDIA (int): A media file with given type and reference ID already exists.
+          EMPTY_FIELD (int): A required field was not specified or is an empty string.
+          RESOURCE_REFERENCED_IN_MULTIPLE_OPS (int): A media file may only be modified once per call.
+          FIELD_NOT_SUPPORTED_FOR_MEDIA_SUB_TYPE (int): Field is not supported for the media sub type.
+          INVALID_MEDIA_FILE_ID (int): The media file ID is invalid.
+          INVALID_MEDIA_SUB_TYPE (int): The media subtype is invalid.
+          INVALID_MEDIA_FILE_TYPE (int): The media file type is invalid.
+          INVALID_MIME_TYPE (int): The mimetype is invalid.
+          INVALID_REFERENCE_ID (int): The media reference ID is invalid.
+          INVALID_YOU_TUBE_ID (int): The YouTube video ID is invalid.
+          MEDIA_FILE_FAILED_TRANSCODING (int): Media file has failed transcoding
+          MEDIA_NOT_TRANSCODED (int): Media file has not been transcoded.
+          MEDIA_TYPE_DOES_NOT_MATCH_MEDIA_FILE_TYPE (int): The media type does not match the actual media file's type.
+          NO_FIELDS_SPECIFIED (int): None of the fields have been specified.
+          NULL_REFERENCE_ID_AND_MEDIA_ID (int): One of reference ID or media file ID must be specified.
+          TOO_LONG (int): The string has too many characters.
+          UNSUPPORTED_TYPE (int): The specified type is not supported.
+          YOU_TUBE_SERVICE_UNAVAILABLE (int): YouTube is unavailable for requesting video data.
+          YOU_TUBE_VIDEO_HAS_NON_POSITIVE_DURATION (int): The YouTube video has a non positive duration.
+          YOU_TUBE_VIDEO_NOT_FOUND (int): The YouTube video ID is syntactically valid but the video was not found.
+        """
+        UNSPECIFIED = 0
+        UNKNOWN = 1
+        CANNOT_CREATE_STANDARD_ICON = 2
+        CANNOT_SELECT_STANDARD_ICON_WITH_OTHER_TYPES = 3
+        CANNOT_SPECIFY_MEDIA_FILE_ID_AND_DATA = 4
+        DUPLICATE_MEDIA = 5
+        EMPTY_FIELD = 6
+        RESOURCE_REFERENCED_IN_MULTIPLE_OPS = 7
+        FIELD_NOT_SUPPORTED_FOR_MEDIA_SUB_TYPE = 8
+        INVALID_MEDIA_FILE_ID = 9
+        INVALID_MEDIA_SUB_TYPE = 10
+        INVALID_MEDIA_FILE_TYPE = 11
+        INVALID_MIME_TYPE = 12
+        INVALID_REFERENCE_ID = 13
+        INVALID_YOU_TUBE_ID = 14
+        MEDIA_FILE_FAILED_TRANSCODING = 15
+        MEDIA_NOT_TRANSCODED = 16
+        MEDIA_TYPE_DOES_NOT_MATCH_MEDIA_FILE_TYPE = 17
+        NO_FIELDS_SPECIFIED = 18
+        NULL_REFERENCE_ID_AND_MEDIA_ID = 19
+        TOO_LONG = 20
+        UNSUPPORTED_TYPE = 21
+        YOU_TUBE_SERVICE_UNAVAILABLE = 22
+        YOU_TUBE_VIDEO_HAS_NON_POSITIVE_DURATION = 23
+        YOU_TUBE_VIDEO_NOT_FOUND = 24
+
+
 class DateErrorEnum(object):
     class DateError(enum.IntEnum):
         """
@@ -2010,12 +2337,10 @@ class ChangeStatusErrorEnum(object):
         Attributes:
           UNSPECIFIED (int): Enum unspecified.
           UNKNOWN (int): The received error code is not known in this version.
-          INVALID_START_DATE (int): The requested start date is invalid.
           START_DATE_TOO_OLD (int): The requested start date is too old.
         """
         UNSPECIFIED = 0
         UNKNOWN = 1
-        INVALID_START_DATE = 2
         START_DATE_TOO_OLD = 3
 
 
@@ -2032,6 +2357,7 @@ class FieldErrorEnum(object):
           INVALID_VALUE (int): The field's value is invalid.
           VALUE_MUST_BE_UNSET (int): The field cannot be set.
           REQUIRED_NONEMPTY_LIST (int): The required repeated field was empty.
+          FIELD_CANNOT_BE_CLEARED (int): The field cannot be cleared.
         """
         UNSPECIFIED = 0
         UNKNOWN = 1
@@ -2040,6 +2366,7 @@ class FieldErrorEnum(object):
         INVALID_VALUE = 4
         VALUE_MUST_BE_UNSET = 5
         REQUIRED_NONEMPTY_LIST = 6
+        FIELD_CANNOT_BE_CLEARED = 7
 
 
 class SettingErrorEnum(object):
@@ -2200,6 +2527,9 @@ class UrlFieldErrorEnum(object):
           to urls associated with website ads or product ads.
           DUPLICATE_URL_ID (int): Duplicate url id.
           INVALID_URL_ID (int): Invalid url id.
+          FINAL_URL_SUFFIX_MALFORMED (int): The final url suffix cannot begin with '?' or '&' characters and must be
+          a valid query string.
+          INVALID_TAG_IN_FINAL_URL_SUFFIX (int): The final url suffix cannot contain {lpurl} related or {ignore} tags.
         """
         UNSPECIFIED = 0
         UNKNOWN = 1
@@ -2247,6 +2577,8 @@ class UrlFieldErrorEnum(object):
         MISSING_URL_TAG = 47
         DUPLICATE_URL_ID = 48
         INVALID_URL_ID = 49
+        FINAL_URL_SUFFIX_MALFORMED = 50
+        INVALID_TAG_IN_FINAL_URL_SUFFIX = 51
 
 
 class PolicyFindingErrorEnum(object):
@@ -2476,6 +2808,38 @@ class ResourceCountLimitExceededErrorEnum(object):
         SHARED_SET_LIMIT = 7
         MATCHING_FUNCTION_LIMIT = 8
         RESPONSE_ROW_LIMIT_EXCEEDED = 9
+
+
+class CustomerManagerLinkErrorEnum(object):
+    class CustomerManagerLinkError(enum.IntEnum):
+        """
+        Enum describing possible CustomerManagerLink errors.
+
+        Attributes:
+          UNSPECIFIED (int): Enum unspecified.
+          UNKNOWN (int): The received error code is not known in this version.
+          NO_PENDING_INVITE (int): No pending invitation.
+          SAME_CLIENT_MORE_THAN_ONCE_PER_CALL (int): Attempt to operate on the same client more than once in the same call.
+          MANAGER_HAS_MAX_NUMBER_OF_LINKED_ACCOUNTS (int): Manager account has the maximum number of linked accounts.
+          CANNOT_UNLINK_ACCOUNT_WITHOUT_ACTIVE_USER (int): If no active user on account it cannot be unlinked from its manager.
+          CANNOT_REMOVE_LAST_CLIENT_ACCOUNT_OWNER (int): Account should have at least one active owner on it before being
+          unlinked.
+          CANNOT_CHANGE_ROLE_BY_NON_ACCOUNT_OWNER (int): Only account owners may change their permission role.
+          CANNOT_CHANGE_ROLE_FOR_NON_ACTIVE_LINK_ACCOUNT (int): When a client's link to its manager is not active, the link role cannot
+          be changed.
+          DUPLICATE_CHILD_FOUND (int): Attempt to link a child to a parent that contains or will contain
+          duplicate children.
+        """
+        UNSPECIFIED = 0
+        UNKNOWN = 1
+        NO_PENDING_INVITE = 2
+        SAME_CLIENT_MORE_THAN_ONCE_PER_CALL = 3
+        MANAGER_HAS_MAX_NUMBER_OF_LINKED_ACCOUNTS = 4
+        CANNOT_UNLINK_ACCOUNT_WITHOUT_ACTIVE_USER = 5
+        CANNOT_REMOVE_LAST_CLIENT_ACCOUNT_OWNER = 6
+        CANNOT_CHANGE_ROLE_BY_NON_ACCOUNT_OWNER = 7
+        CANNOT_CHANGE_ROLE_FOR_NON_ACTIVE_LINK_ACCOUNT = 8
+        DUPLICATE_CHILD_FOUND = 9
 
 
 class AccountBudgetProposalErrorEnum(object):
@@ -2950,6 +3314,61 @@ class AuthorizationErrorEnum(object):
         INCOMPLETE_SIGNUP = 8
 
 
+class BillingSetupErrorEnum(object):
+    class BillingSetupError(enum.IntEnum):
+        """
+        Enum describing possible billing setup errors.
+
+        Attributes:
+          UNSPECIFIED (int): Enum unspecified.
+          UNKNOWN (int): The received error code is not known in this version.
+          CANNOT_USE_EXISTING_AND_NEW_ACCOUNT (int): Cannot use both an existing Payments account and a new Payments account
+          when setting up billing.
+          CANNOT_REMOVE_STARTED_BILLING_SETUP (int): Cannot cancel an APPROVED billing setup whose start time has passed.
+          CANNOT_CHANGE_BILLING_TO_SAME_PAYMENTS_ACCOUNT (int): Cannot perform a Change of Bill-To (CBT) to the same Payments account.
+          BILLING_SETUP_NOT_PERMITTED_FOR_CUSTOMER_STATUS (int): Billing Setups can only be used by customers with ENABLED or DRAFT
+          status.
+          INVALID_PAYMENTS_ACCOUNT (int): Billing Setups must either include a correctly formatted existing
+          Payments account id, or a non-empty new Payments account name.
+          BILLING_SETUP_NOT_PERMITTED_FOR_CUSTOMER_CATEGORY (int): Only billable and third party customers can create billing setups.
+          INVALID_START_TIME_TYPE (int): Billing Setup creations can only use NOW for start time type.
+          THIRD_PARTY_ALREADY_HAS_BILLING (int): Billing Setups can only be created for a third party customer if they do
+          not already have a setup.
+          BILLING_SETUP_IN_PROGRESS (int): Billing Setups cannot be created if there is already a pending billing in
+          progress, ie. a billing known to Payments.
+          NO_SIGNUP_PERMISSION (int): Billing Setups can only be created by customers who have permission to
+          setup billings. Users can contact a representative for help setting up
+          permissions.
+          CHANGE_OF_BILL_TO_IN_PROGRESS (int): Billing Setups cannot be created if there is already a future-approved
+          billing.
+          PAYMENTS_PROFILE_NOT_FOUND (int): Billing Setup creation failed because Payments could not find the
+          requested Payments profile.
+          PAYMENTS_ACCOUNT_NOT_FOUND (int): Billing Setup creation failed because Payments could not find the
+          requested Payments account.
+          PAYMENTS_PROFILE_INELIGIBLE (int): Billing Setup creation failed because Payments considers requested
+          Payments profile ineligible.
+          PAYMENTS_ACCOUNT_INELIGIBLE (int): Billing Setup creation failed because Payments considers requested
+          Payments account ineligible.
+        """
+        UNSPECIFIED = 0
+        UNKNOWN = 1
+        CANNOT_USE_EXISTING_AND_NEW_ACCOUNT = 2
+        CANNOT_REMOVE_STARTED_BILLING_SETUP = 3
+        CANNOT_CHANGE_BILLING_TO_SAME_PAYMENTS_ACCOUNT = 4
+        BILLING_SETUP_NOT_PERMITTED_FOR_CUSTOMER_STATUS = 5
+        INVALID_PAYMENTS_ACCOUNT = 6
+        BILLING_SETUP_NOT_PERMITTED_FOR_CUSTOMER_CATEGORY = 7
+        INVALID_START_TIME_TYPE = 8
+        THIRD_PARTY_ALREADY_HAS_BILLING = 9
+        BILLING_SETUP_IN_PROGRESS = 10
+        NO_SIGNUP_PERMISSION = 11
+        CHANGE_OF_BILL_TO_IN_PROGRESS = 12
+        PAYMENTS_PROFILE_NOT_FOUND = 13
+        PAYMENTS_ACCOUNT_NOT_FOUND = 14
+        PAYMENTS_PROFILE_INELIGIBLE = 15
+        PAYMENTS_ACCOUNT_INELIGIBLE = 16
+
+
 class CampaignBudgetErrorEnum(object):
     class CampaignBudgetError(enum.IntEnum):
         """
@@ -3210,7 +3629,7 @@ class CriterionErrorEnum(object):
           PLACEMENT_URL_HAS_ILLEGAL_CHAR (int): Indicates the URL contains an illegal character.
           PLACEMENT_URL_HAS_MULTIPLE_SITES_IN_LINE (int): Indicates the URL contains multiple comma separated URLs.
           PLACEMENT_IS_NOT_AVAILABLE_FOR_TARGETING_OR_EXCLUSION (int): Indicates the domain is blacklisted.
-          INVALID_VERTICAL_PATH (int): Invalid vertical path.
+          INVALID_TOPIC_PATH (int): Invalid topic path.
           INVALID_YOUTUBE_CHANNEL_ID (int): The YouTube Channel Id is invalid.
           INVALID_YOUTUBE_VIDEO_ID (int): The YouTube Video Id is invalid.
           YOUTUBE_VERTICAL_CHANNEL_DEPRECATED (int): Indicates the placement is a YouTube vertical channel, which is no longer
@@ -3248,9 +3667,9 @@ class CriterionErrorEnum(object):
           INVALID_PROXIMITY_RADIUS (int): Distance for the radius for the proximity criterion is invalid.
           INVALID_PROXIMITY_RADIUS_UNITS (int): Units for the distance for the radius for the proximity criterion is
           invalid.
-          INVALID_STREETADDRESS_LENGTH (int): Street address is too short.
-          INVALID_CITYNAME_LENGTH (int): City name in the address is too short.
-          INVALID_REGIONCODE_LENGTH (int): Region code in the address is too short.
+          INVALID_STREETADDRESS_LENGTH (int): Street address in the address is not valid.
+          INVALID_CITYNAME_LENGTH (int): City name in the address is not valid.
+          INVALID_REGIONCODE_LENGTH (int): Region code in the address is not valid.
           INVALID_REGIONNAME_LENGTH (int): Region name in the address is not valid.
           INVALID_POSTALCODE_LENGTH (int): Postal code in the address is not valid.
           INVALID_COUNTRY_CODE (int): Country code in the address is not valid.
@@ -3328,7 +3747,7 @@ class CriterionErrorEnum(object):
         PLACEMENT_URL_HAS_ILLEGAL_CHAR = 13
         PLACEMENT_URL_HAS_MULTIPLE_SITES_IN_LINE = 14
         PLACEMENT_IS_NOT_AVAILABLE_FOR_TARGETING_OR_EXCLUSION = 15
-        INVALID_VERTICAL_PATH = 16
+        INVALID_TOPIC_PATH = 16
         INVALID_YOUTUBE_CHANNEL_ID = 17
         INVALID_YOUTUBE_VIDEO_ID = 18
         YOUTUBE_VERTICAL_CHANNEL_DEPRECATED = 19
@@ -3397,6 +3816,51 @@ class CriterionErrorEnum(object):
         HOTEL_LENGTH_OF_STAY_OVERLAPS_WITH_EXISTING_CRITERION = 82
         HOTEL_ADVANCE_BOOKING_WINDOW_OVERLAPS_WITH_EXISTING_CRITERION = 83
         FIELD_INCOMPATIBLE_WITH_NEGATIVE_TARGETING = 84
+
+
+class CustomerClientLinkErrorEnum(object):
+    class CustomerClientLinkError(enum.IntEnum):
+        """
+        Enum describing possible CustomerClientLink errors.
+
+        Attributes:
+          UNSPECIFIED (int): Enum unspecified.
+          UNKNOWN (int): The received error code is not known in this version.
+          CLIENT_ALREADY_INVITED_BY_THIS_MANAGER (int): Trying to manage a client that already in being managed by customer.
+          CLIENT_ALREADY_MANAGED_IN_HIERARCHY (int): Already managed by some other manager in the hierarchy.
+          CYCLIC_LINK_NOT_ALLOWED (int): Attempt to create a cycle in the hierarchy.
+          CUSTOMER_HAS_TOO_MANY_ACCOUNTS (int): Managed accounts has the maximum number of linked accounts.
+          CLIENT_HAS_TOO_MANY_INVITATIONS (int): Invitor has the maximum pending invitations.
+          CANNOT_HIDE_OR_UNHIDE_MANAGER_ACCOUNTS (int): Attempt to change hidden status of a link that is not active.
+          CUSTOMER_HAS_TOO_MANY_ACCOUNTS_AT_MANAGER (int): Parent manager account has the maximum number of linked accounts.
+        """
+        UNSPECIFIED = 0
+        UNKNOWN = 1
+        CLIENT_ALREADY_INVITED_BY_THIS_MANAGER = 2
+        CLIENT_ALREADY_MANAGED_IN_HIERARCHY = 3
+        CYCLIC_LINK_NOT_ALLOWED = 4
+        CUSTOMER_HAS_TOO_MANY_ACCOUNTS = 5
+        CLIENT_HAS_TOO_MANY_INVITATIONS = 6
+        CANNOT_HIDE_OR_UNHIDE_MANAGER_ACCOUNTS = 7
+        CUSTOMER_HAS_TOO_MANY_ACCOUNTS_AT_MANAGER = 8
+
+
+class CustomerErrorEnum(object):
+    class CustomerError(enum.IntEnum):
+        """
+        Set of errors that are related to requests dealing with Customer.
+        Next id: 26
+
+        Attributes:
+          UNSPECIFIED (int): Enum unspecified.
+          UNKNOWN (int): The received error code is not known in this version.
+          STATUS_CHANGE_DISALLOWED (int): Customer status is not allowed to be changed from DRAFT and CLOSED.
+          Currency code and at least one of country code and time zone needs to be
+          set when status is changed to ENABLED.
+        """
+        UNSPECIFIED = 0
+        UNKNOWN = 1
+        STATUS_CHANGE_DISALLOWED = 2
 
 
 class DatabaseErrorEnum(object):
@@ -3519,6 +3983,29 @@ class FunctionParsingErrorEnum(object):
         TOO_MANY_OPERANDS = 12
 
 
+class GeoTargetConstantSuggestionErrorEnum(object):
+    class GeoTargetConstantSuggestionError(enum.IntEnum):
+        """
+        Enum describing possible geo target constant suggestion errors.
+
+        Attributes:
+          UNSPECIFIED (int): Enum unspecified.
+          UNKNOWN (int): The received error code is not known in this version.
+          LOCATION_NAME_SIZE_LIMIT (int): A location name cannot be greater than 300 characters.
+          LOCATION_NAME_LIMIT (int): At most 25 location names can be specified in a SuggestGeoTargetConstants
+          method.
+          INVALID_COUNTRY_CODE (int): The country code is invalid.
+          REQUEST_PARAMETERS_UNSET (int): Geo target constant resource names or location names must be provided in
+          the request.
+        """
+        UNSPECIFIED = 0
+        UNKNOWN = 1
+        LOCATION_NAME_SIZE_LIMIT = 2
+        LOCATION_NAME_LIMIT = 3
+        INVALID_COUNTRY_CODE = 4
+        REQUEST_PARAMETERS_UNSET = 5
+
+
 class HeaderErrorEnum(object):
     class HeaderError(enum.IntEnum):
         """
@@ -3527,11 +4014,11 @@ class HeaderErrorEnum(object):
         Attributes:
           UNSPECIFIED (int): Enum unspecified.
           UNKNOWN (int): The received error code is not known in this version.
-          INVALID_USER_SELECTED_CUSTOMER_ID (int): The user selected customer id could not be validated.
+          INVALID_LOGIN_CUSTOMER_ID (int): The login customer id could not be validated.
         """
         UNSPECIFIED = 0
         UNKNOWN = 1
-        INVALID_USER_SELECTED_CUSTOMER_ID = 2
+        INVALID_LOGIN_CUSTOMER_ID = 3
 
 
 class IdErrorEnum(object):
@@ -3901,6 +4388,7 @@ class RequestErrorEnum(object):
           but are read-only for adGroups:mutate.
           INVALID_ENUM_VALUE (int): Enum value is not permitted.
           DEVELOPER_TOKEN_PARAMETER_MISSING (int): The developer-token parameter is required for all requests.
+          LOGIN_CUSTOMER_ID_PARAMETER_MISSING (int): The login-customer-id parameter is required for this request.
         """
         UNSPECIFIED = 0
         UNKNOWN = 1
@@ -3919,6 +4407,7 @@ class RequestErrorEnum(object):
         CANNOT_MODIFY_FOREIGN_FIELD = 15
         INVALID_ENUM_VALUE = 18
         DEVELOPER_TOKEN_PARAMETER_MISSING = 19
+        LOGIN_CUSTOMER_ID_PARAMETER_MISSING = 20
 
 
 class SharedCriterionErrorEnum(object):

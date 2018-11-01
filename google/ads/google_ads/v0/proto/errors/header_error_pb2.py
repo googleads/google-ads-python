@@ -19,7 +19,7 @@ DESCRIPTOR = _descriptor.FileDescriptor(
   name='google/ads/googleads_v0/proto/errors/header_error.proto',
   package='google.ads.googleads.v0.errors',
   syntax='proto3',
-  serialized_pb=_b('\n7google/ads/googleads_v0/proto/errors/header_error.proto\x12\x1egoogle.ads.googleads.v0.errors\"e\n\x0fHeaderErrorEnum\"R\n\x0bHeaderError\x12\x0f\n\x0bUNSPECIFIED\x10\x00\x12\x0b\n\x07UNKNOWN\x10\x01\x12%\n!INVALID_USER_SELECTED_CUSTOMER_ID\x10\x02\x42\xc6\x01\n\"com.google.ads.googleads.v0.errorsB\x10HeaderErrorProtoP\x01ZDgoogle.golang.org/genproto/googleapis/ads/googleads/v0/errors;errors\xa2\x02\x03GAA\xaa\x02\x1eGoogle.Ads.GoogleAds.V0.Errors\xca\x02\x1eGoogle\\Ads\\GoogleAds\\V0\\Errorsb\x06proto3')
+  serialized_pb=_b('\n7google/ads/googleads_v0/proto/errors/header_error.proto\x12\x1egoogle.ads.googleads.v0.errors\"]\n\x0fHeaderErrorEnum\"J\n\x0bHeaderError\x12\x0f\n\x0bUNSPECIFIED\x10\x00\x12\x0b\n\x07UNKNOWN\x10\x01\x12\x1d\n\x19INVALID_LOGIN_CUSTOMER_ID\x10\x03\x42\xc6\x01\n\"com.google.ads.googleads.v0.errorsB\x10HeaderErrorProtoP\x01ZDgoogle.golang.org/genproto/googleapis/ads/googleads/v0/errors;errors\xa2\x02\x03GAA\xaa\x02\x1eGoogle.Ads.GoogleAds.V0.Errors\xca\x02\x1eGoogle\\Ads\\GoogleAds\\V0\\Errorsb\x06proto3')
 )
 
 
@@ -39,14 +39,14 @@ _HEADERERRORENUM_HEADERERROR = _descriptor.EnumDescriptor(
       options=None,
       type=None),
     _descriptor.EnumValueDescriptor(
-      name='INVALID_USER_SELECTED_CUSTOMER_ID', index=2, number=2,
+      name='INVALID_LOGIN_CUSTOMER_ID', index=2, number=3,
       options=None,
       type=None),
   ],
   containing_type=None,
   options=None,
   serialized_start=110,
-  serialized_end=192,
+  serialized_end=184,
 )
 _sym_db.RegisterEnumDescriptor(_HEADERERRORENUM_HEADERERROR)
 
@@ -72,7 +72,7 @@ _HEADERERRORENUM = _descriptor.Descriptor(
   oneofs=[
   ],
   serialized_start=91,
-  serialized_end=192,
+  serialized_end=184,
 )
 
 _HEADERERRORENUM_HEADERERROR.containing_type = _HEADERERRORENUM

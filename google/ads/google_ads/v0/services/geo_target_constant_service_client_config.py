@@ -21,6 +21,11 @@ config = {
                     "timeout_millis": 60000,
                     "retry_codes_name": "idempotent",
                     "retry_params_name": "default"
+                },
+                "SuggestGeoTargetConstants": {
+                    "timeout_millis": 60000,
+                    "retry_codes_name": "non_idempotent",
+                    "retry_params_name": "default"
                 }
             }
         }

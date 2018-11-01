@@ -20,6 +20,11 @@ class CustomerServiceStub(object):
         request_serializer=google_dot_ads_dot_googleads__v0_dot_proto_dot_services_dot_customer__service__pb2.GetCustomerRequest.SerializeToString,
         response_deserializer=google_dot_ads_dot_googleads__v0_dot_proto_dot_resources_dot_customer__pb2.Customer.FromString,
         )
+    self.ListAccessibleCustomers = channel.unary_unary(
+        '/google.ads.googleads.v0.services.CustomerService/ListAccessibleCustomers',
+        request_serializer=google_dot_ads_dot_googleads__v0_dot_proto_dot_services_dot_customer__service__pb2.ListAccessibleCustomersRequest.SerializeToString,
+        response_deserializer=google_dot_ads_dot_googleads__v0_dot_proto_dot_services_dot_customer__service__pb2.ListAccessibleCustomersResponse.FromString,
+        )
 
 
 class CustomerServiceServicer(object):
@@ -33,6 +38,14 @@ class CustomerServiceServicer(object):
     context.set_details('Method not implemented!')
     raise NotImplementedError('Method not implemented!')
 
+  def ListAccessibleCustomers(self, request, context):
+    """Returns resource names of customers directly accessible by the
+    user authenticating the call.
+    """
+    context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+    context.set_details('Method not implemented!')
+    raise NotImplementedError('Method not implemented!')
+
 
 def add_CustomerServiceServicer_to_server(servicer, server):
   rpc_method_handlers = {
@@ -40,6 +53,11 @@ def add_CustomerServiceServicer_to_server(servicer, server):
           servicer.GetCustomer,
           request_deserializer=google_dot_ads_dot_googleads__v0_dot_proto_dot_services_dot_customer__service__pb2.GetCustomerRequest.FromString,
           response_serializer=google_dot_ads_dot_googleads__v0_dot_proto_dot_resources_dot_customer__pb2.Customer.SerializeToString,
+      ),
+      'ListAccessibleCustomers': grpc.unary_unary_rpc_method_handler(
+          servicer.ListAccessibleCustomers,
+          request_deserializer=google_dot_ads_dot_googleads__v0_dot_proto_dot_services_dot_customer__service__pb2.ListAccessibleCustomersRequest.FromString,
+          response_serializer=google_dot_ads_dot_googleads__v0_dot_proto_dot_services_dot_customer__service__pb2.ListAccessibleCustomersResponse.SerializeToString,
       ),
   }
   generic_handler = grpc.method_handlers_generic_handler(

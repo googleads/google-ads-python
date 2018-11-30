@@ -105,7 +105,7 @@ _sym_db.RegisterFileDescriptor(DESCRIPTOR)
 
 AuthorizationErrorEnum = _reflection.GeneratedProtocolMessageType('AuthorizationErrorEnum', (_message.Message,), dict(
   DESCRIPTOR = _AUTHORIZATIONERRORENUM,
-  __module__ = 'google.ads.googleads_v0.proto.errors.authorization_error_pb2'
+  __module__ = 'google.ads.google_ads.v0.proto.errors.authorization_error_pb2'
   ,
   __doc__ = """Container for enum describing possible authorization errors.
   """,

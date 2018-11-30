@@ -64,9 +64,14 @@ class GoogleAdsClient(object):
                 token_uri=_DEFAULT_TOKEN_URI)
             credentials.refresh(google.auth.transport.requests.Request())
 
+            login_customer_id = config_data.get('login_customer_id')
+            login_customer_id = str(
+                login_customer_id) if login_customer_id else None
+
             return {'credentials': credentials,
                     'developer_token': config_data['developer_token'],
-                    'endpoint': config_data.get('endpoint')}
+                    'endpoint': config_data.get('endpoint'),
+                    'login_customer_id': login_customer_id}
         else:
             raise ValueError('A required field in the configuration data was'
                              'not found. The required fields are: %s'
@@ -142,17 +147,22 @@ class GoogleAdsClient(object):
 
         return cls.load_from_string(yaml_str)
 
-    def __init__(self, credentials, developer_token, endpoint=None):
+    def __init__(self, credentials, developer_token, endpoint=None,
+                 login_customer_id=None):
         """Initializer for the GoogleAdsClient.
 
         Args:
             credentials: a google.oauth2.credentials.Credentials instance.
             developer_token: a str developer token.
             endpoint: a str specifying an optional alternative API endpoint.
+            login_customer_id: a str specifying a login customer ID.
         """
+        _validate_login_customer_id(login_customer_id)
+
         self.credentials = credentials
         self.developer_token = developer_token
         self.endpoint = endpoint
+        self.login_customer_id = login_customer_id
 
     def get_service(self, name, version=_DEFAULT_VERSION):
         """Returns a service client instance for the specified service_name.
@@ -192,7 +202,7 @@ class GoogleAdsClient(object):
 
         channel = grpc.intercept_channel(
             channel,
-            MetadataInterceptor(self.developer_token),
+            MetadataInterceptor(self.developer_token, self.login_customer_id),
             ExceptionInterceptor(),
         )
 
@@ -247,7 +257,42 @@ class ExceptionInterceptor(grpc.UnaryUnaryClientInterceptor):
 
         return None
 
+    def _handle_grpc_exception(self, exception):
+        """Handles gRPC exceptions of type RpcError by attempting to
+           convert them to a more readable GoogleAdsException. Certain types of
+           exceptions are not converted; if the object's trailing metadata does
+           not indicate that it is a GoogleAdsException, or if it falls under
+           a certain category of status code, (INTERNAL or RESOURCE_EXHAUSTED).
+           See documentation for more information about gRPC status codes:
+           https://github.com/grpc/grpc/blob/master/doc/statuscodes.md
 
+        Args:
+            exception: an exception of type RpcError.
+
+        Raises:
+            GoogleAdsException: If the exception's trailing metadata
+                indicates that it is a GoogleAdsException.
+            RpcError: If the exception's trailing metadata is empty or is not
+                indicative of a GoogleAdsException, or if the exception has a
+                status code of INTERNAL or RESOURCE_EXHAUSTED.
+        """
+        if exception._state.code not in self._RETRY_STATUS_CODES:
+            trailing_metadata = exception.trailing_metadata()
+            google_ads_failure = self._get_google_ads_failure(
+                trailing_metadata)
+
+            if google_ads_failure:
+                request_id = self._get_request_id(trailing_metadata)
+
+                raise google.ads.google_ads.errors.GoogleAdsException(
+                    exception, exception, google_ads_failure, request_id)
+            else:
+                # Raise the original exception if not a GoogleAdsFailure.
+                raise exception
+        else:
+            # Raise the original exception if error has status code
+            # INTERNAL or RESOURCE_EXHAUSTED.
+            raise exception
 
     def intercept_unary_unary(self, continuation, client_call_details, request):
         """Intercepts and wraps exceptions in the rpc response.
@@ -255,24 +300,21 @@ class ExceptionInterceptor(grpc.UnaryUnaryClientInterceptor):
         Overrides abstract method defined in grpc.UnaryUnaryClientInterceptor.
 
         Raises:
-            GoogleAdsException: if the Google Ads API response contains an
-                exception and GoogleAdsFailure is in the trailing metadata.
+            GoogleAdsException: If the exception's trailing metadata
+                indicates that it is a GoogleAdsException.
+            RpcError: If the exception's trailing metadata is empty or is not
+                indicative of a GoogleAdsException, or if the exception has a
+                status code of INTERNAL or RESOURCE_EXHAUSTED.
         """
-        response = continuation(client_call_details, request)
-        ex = response.exception()
+        try:
+            response = continuation(client_call_details, request)
+        except grpc.RpcError as ex:
+            self._handle_grpc_exception(ex)
 
-        if ex and response._state.code not in self._RETRY_STATUS_CODES:
-            trailing_metadata = response.trailing_metadata()
-            google_ads_failure = self._get_google_ads_failure(trailing_metadata)
-
-            if google_ads_failure:
-                request_id = self._get_request_id(trailing_metadata)
-
-                raise google.ads.google_ads.errors.GoogleAdsException(
-                    ex, response, google_ads_failure, request_id)
-            else:
-                # Raise the original exception if not a GoogleAdsFailure.
-                raise ex
+        if response.exception():
+            # Any exception raised within the continuation function that is not
+            # an RpcError will be set on the response object and raised here.
+            raise response.exception()
 
         return response
 
@@ -298,8 +340,11 @@ class LoggingInterceptor(grpc.UnaryUnaryClientInterceptor):
 class MetadataInterceptor(grpc.UnaryUnaryClientInterceptor):
     """An interceptor that appends custom metadata to requests."""
 
-    def __init__(self, developer_token):
+    def __init__(self, developer_token, login_customer_id):
         self.developer_token_meta = ('developer-token', developer_token)
+        self.login_customer_id_meta = (
+            ('login-customer-id', login_customer_id) if login_customer_id
+            else None)
 
     def intercept_unary_unary(self, continuation, client_call_details, request):
         """Intercepts and appends custom metadata.
@@ -312,6 +357,9 @@ class MetadataInterceptor(grpc.UnaryUnaryClientInterceptor):
             metadata = list(client_call_details.metadata)
 
         metadata.append(self.developer_token_meta)
+
+        if self.login_customer_id_meta:
+            metadata.append(self.login_customer_id_meta)
 
         client_call_details = grpc._interceptor._ClientCallDetails(
             client_call_details.method, client_call_details.timeout, metadata,
@@ -336,3 +384,20 @@ def _get_version(name):
         raise ValueError('Specified Google Ads API version "%s" does not exist.'
                          % name)
     return version
+
+
+def _validate_login_customer_id(login_customer_id):
+    """Validates a login customer ID.
+
+    Args:
+        login_customer_id: a str from config indicating a login customer ID.
+
+    Raises:
+        ValueError: If the login customer ID is not
+        an int in the range 0 - 9999999999.
+    """
+    if login_customer_id is not None:
+        if not login_customer_id.isdigit() or len(login_customer_id) != 10:
+            raise ValueError('The specified login customer ID is invalid. '
+                             'It must be a ten digit number represented '
+                             'as a string, i.e. "1234567890"')

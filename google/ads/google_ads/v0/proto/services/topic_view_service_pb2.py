@@ -63,7 +63,7 @@ _sym_db.RegisterFileDescriptor(DESCRIPTOR)
 
 GetTopicViewRequest = _reflection.GeneratedProtocolMessageType('GetTopicViewRequest', (_message.Message,), dict(
   DESCRIPTOR = _GETTOPICVIEWREQUEST,
-  __module__ = 'google.ads.googleads_v0.proto.services.topic_view_service_pb2'
+  __module__ = 'google.ads.google_ads.v0.proto.services.topic_view_service_pb2'
   ,
   __doc__ = """Request message for
   [TopicViewService.GetTopicView][google.ads.googleads.v0.services.TopicViewService.GetTopicView].

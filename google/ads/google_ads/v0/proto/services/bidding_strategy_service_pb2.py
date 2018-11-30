@@ -237,7 +237,7 @@ _sym_db.RegisterFileDescriptor(DESCRIPTOR)
 
 GetBiddingStrategyRequest = _reflection.GeneratedProtocolMessageType('GetBiddingStrategyRequest', (_message.Message,), dict(
   DESCRIPTOR = _GETBIDDINGSTRATEGYREQUEST,
-  __module__ = 'google.ads.googleads_v0.proto.services.bidding_strategy_service_pb2'
+  __module__ = 'google.ads.google_ads.v0.proto.services.bidding_strategy_service_pb2'
   ,
   __doc__ = """Request message for
   [BiddingStrategyService.GetBiddingStrategy][google.ads.googleads.v0.services.BiddingStrategyService.GetBiddingStrategy].
@@ -253,7 +253,7 @@ _sym_db.RegisterMessage(GetBiddingStrategyRequest)
 
 MutateBiddingStrategiesRequest = _reflection.GeneratedProtocolMessageType('MutateBiddingStrategiesRequest', (_message.Message,), dict(
   DESCRIPTOR = _MUTATEBIDDINGSTRATEGIESREQUEST,
-  __module__ = 'google.ads.googleads_v0.proto.services.bidding_strategy_service_pb2'
+  __module__ = 'google.ads.google_ads.v0.proto.services.bidding_strategy_service_pb2'
   ,
   __doc__ = """Request message for
   [BiddingStrategyService.MutateBiddingStrategies][google.ads.googleads.v0.services.BiddingStrategyService.MutateBiddingStrategies].
@@ -273,7 +273,7 @@ _sym_db.RegisterMessage(MutateBiddingStrategiesRequest)
 
 BiddingStrategyOperation = _reflection.GeneratedProtocolMessageType('BiddingStrategyOperation', (_message.Message,), dict(
   DESCRIPTOR = _BIDDINGSTRATEGYOPERATION,
-  __module__ = 'google.ads.googleads_v0.proto.services.bidding_strategy_service_pb2'
+  __module__ = 'google.ads.google_ads.v0.proto.services.bidding_strategy_service_pb2'
   ,
   __doc__ = """A single operation (create, update, remove) on a bidding strategy.
   
@@ -301,7 +301,7 @@ _sym_db.RegisterMessage(BiddingStrategyOperation)
 
 MutateBiddingStrategiesResponse = _reflection.GeneratedProtocolMessageType('MutateBiddingStrategiesResponse', (_message.Message,), dict(
   DESCRIPTOR = _MUTATEBIDDINGSTRATEGIESRESPONSE,
-  __module__ = 'google.ads.googleads_v0.proto.services.bidding_strategy_service_pb2'
+  __module__ = 'google.ads.google_ads.v0.proto.services.bidding_strategy_service_pb2'
   ,
   __doc__ = """Response message for bidding strategy mutate.
   
@@ -316,7 +316,7 @@ _sym_db.RegisterMessage(MutateBiddingStrategiesResponse)
 
 MutateBiddingStrategyResult = _reflection.GeneratedProtocolMessageType('MutateBiddingStrategyResult', (_message.Message,), dict(
   DESCRIPTOR = _MUTATEBIDDINGSTRATEGYRESULT,
-  __module__ = 'google.ads.googleads_v0.proto.services.bidding_strategy_service_pb2'
+  __module__ = 'google.ads.google_ads.v0.proto.services.bidding_strategy_service_pb2'
   ,
   __doc__ = """The result for the bidding strategy mutate.
   

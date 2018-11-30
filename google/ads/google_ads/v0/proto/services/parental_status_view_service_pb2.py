@@ -63,7 +63,7 @@ _sym_db.RegisterFileDescriptor(DESCRIPTOR)
 
 GetParentalStatusViewRequest = _reflection.GeneratedProtocolMessageType('GetParentalStatusViewRequest', (_message.Message,), dict(
   DESCRIPTOR = _GETPARENTALSTATUSVIEWREQUEST,
-  __module__ = 'google.ads.googleads_v0.proto.services.parental_status_view_service_pb2'
+  __module__ = 'google.ads.google_ads.v0.proto.services.parental_status_view_service_pb2'
   ,
   __doc__ = """Request message for
   [ParentalStatusViewService.GetParentalStatusView][google.ads.googleads.v0.services.ParentalStatusViewService.GetParentalStatusView].

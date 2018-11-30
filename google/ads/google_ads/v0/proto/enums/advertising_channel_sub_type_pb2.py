@@ -109,7 +109,7 @@ _sym_db.RegisterFileDescriptor(DESCRIPTOR)
 
 AdvertisingChannelSubTypeEnum = _reflection.GeneratedProtocolMessageType('AdvertisingChannelSubTypeEnum', (_message.Message,), dict(
   DESCRIPTOR = _ADVERTISINGCHANNELSUBTYPEENUM,
-  __module__ = 'google.ads.googleads_v0.proto.enums.advertising_channel_sub_type_pb2'
+  __module__ = 'google.ads.google_ads.v0.proto.enums.advertising_channel_sub_type_pb2'
   ,
   __doc__ = """An immutable specialization of an Advertising Channel.
   """,

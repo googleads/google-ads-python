@@ -81,7 +81,7 @@ _sym_db.RegisterFileDescriptor(DESCRIPTOR)
 
 OperatorErrorEnum = _reflection.GeneratedProtocolMessageType('OperatorErrorEnum', (_message.Message,), dict(
   DESCRIPTOR = _OPERATORERRORENUM,
-  __module__ = 'google.ads.googleads_v0.proto.errors.operator_error_pb2'
+  __module__ = 'google.ads.google_ads.v0.proto.errors.operator_error_pb2'
   ,
   __doc__ = """Container for enum describing possible operator errors.
   """,

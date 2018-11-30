@@ -141,7 +141,7 @@ _sym_db.RegisterFileDescriptor(DESCRIPTOR)
 
 FunctionErrorEnum = _reflection.GeneratedProtocolMessageType('FunctionErrorEnum', (_message.Message,), dict(
   DESCRIPTOR = _FUNCTIONERRORENUM,
-  __module__ = 'google.ads.googleads_v0.proto.errors.function_error_pb2'
+  __module__ = 'google.ads.google_ads.v0.proto.errors.function_error_pb2'
   ,
   __doc__ = """Container for enum describing possible function errors.
   """,

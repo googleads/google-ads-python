@@ -89,7 +89,7 @@ _sym_db.RegisterFileDescriptor(DESCRIPTOR)
 
 ParentalStatusTypeEnum = _reflection.GeneratedProtocolMessageType('ParentalStatusTypeEnum', (_message.Message,), dict(
   DESCRIPTOR = _PARENTALSTATUSTYPEENUM,
-  __module__ = 'google.ads.googleads_v0.proto.enums.parental_status_type_pb2'
+  __module__ = 'google.ads.google_ads.v0.proto.enums.parental_status_type_pb2'
   ,
   __doc__ = """Container for enum describing the type of demographic parental statuses.
   """,

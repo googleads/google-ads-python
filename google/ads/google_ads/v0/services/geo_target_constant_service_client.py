@@ -28,6 +28,7 @@ import grpc
 from google.ads.google_ads.v0.services import geo_target_constant_service_client_config
 from google.ads.google_ads.v0.services.transports import geo_target_constant_service_grpc_transport
 from google.ads.google_ads.v0.proto.services import geo_target_constant_service_pb2
+from google.protobuf import wrappers_pb2
 
 _GAPIC_LIBRARY_VERSION = pkg_resources.get_distribution(
     'google-ads', ).version
@@ -211,6 +212,7 @@ class GeoTargetConstantServiceClient(object):
     def suggest_geo_target_constants(
             self,
             locale,
+            country_code,
             location_names=None,
             geo_targets=None,
             retry=google.api_core.gapic_v1.method.DEFAULT,
@@ -221,7 +223,11 @@ class GeoTargetConstantServiceClient(object):
 
         Args:
             locale (Union[dict, ~google.ads.google_ads.v0.types.StringValue]): If possible, returned geo targets are translated using this locale. If not,
-                en is used by default.
+                en is used by default. This is also used as a hint for returned geo
+                targets.
+                If a dict is provided, it must be of the same form as the protobuf
+                message :class:`~google.ads.google_ads.v0.types.StringValue`
+            country_code (Union[dict, ~google.ads.google_ads.v0.types.StringValue]): Returned geo targets are restricted to this country code.
                 If a dict is provided, it must be of the same form as the protobuf
                 message :class:`~google.ads.google_ads.v0.types.StringValue`
             location_names (Union[dict, ~google.ads.google_ads.v0.types.LocationNames]): The location names to search by. At most 25 names can be set.
@@ -270,6 +276,7 @@ class GeoTargetConstantServiceClient(object):
 
         request = geo_target_constant_service_pb2.SuggestGeoTargetConstantsRequest(
             locale=locale,
+            country_code=country_code,
             location_names=location_names,
             geo_targets=geo_targets,
         )

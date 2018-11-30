@@ -27,7 +27,8 @@ def main(client, customer_id, campaign_id, keyword, location_id):
 
     operations = [
         create_location_op(client, customer_id, campaign_id, location_id),
-        create_negative_keyword_op(client, customer_id, campaign_id, keyword)
+        create_negative_keyword_op(client, customer_id, campaign_id, keyword),
+        create_proximity_op(client, customer_id, campaign_id)
     ]
 
     try:
@@ -80,6 +81,26 @@ def create_negative_keyword_op(client, customer_id, campaign_id, keyword):
     criterion_keyword = campaign_criterion.keyword
     criterion_keyword.text.value = keyword
     criterion_keyword.match_type = client.get_type('KeywordMatchTypeEnum').BROAD
+
+    return campaign_criterion_operation
+
+
+def create_proximity_op(client, customer_id, campaign_id):
+    campaign_service = client.get_service('CampaignService')
+
+    # Create the campaign criterion.
+    campaign_criterion_operation = client.get_type('CampaignCriterionOperation')
+    campaign_criterion = campaign_criterion_operation.create
+    campaign_criterion.campaign.value = campaign_service.campaign_path(
+        customer_id, campaign_id)
+    campaign_criterion.proximity.address.street_address.value = '38 avenue de l\'Opera'
+    campaign_criterion.proximity.address.city_name.value = 'Paris'
+    campaign_criterion.proximity.address.postal_code.value = '75002'
+    campaign_criterion.proximity.address.country_code.value = 'FR'
+    campaign_criterion.proximity.radius.value = 10
+    # Default is kilometers.
+    campaign_criterion.proximity.radius_units = client.get_type(
+        'ProximityRadiusUnitsEnum').MILES
 
     return campaign_criterion_operation
 

@@ -63,7 +63,7 @@ _sym_db.RegisterFileDescriptor(DESCRIPTOR)
 
 GetManagedPlacementViewRequest = _reflection.GeneratedProtocolMessageType('GetManagedPlacementViewRequest', (_message.Message,), dict(
   DESCRIPTOR = _GETMANAGEDPLACEMENTVIEWREQUEST,
-  __module__ = 'google.ads.googleads_v0.proto.services.managed_placement_view_service_pb2'
+  __module__ = 'google.ads.google_ads.v0.proto.services.managed_placement_view_service_pb2'
   ,
   __doc__ = """Request message for
   [ManagedPlacementViewService.GetManagedPlacementView][google.ads.googleads.v0.services.ManagedPlacementViewService.GetManagedPlacementView].

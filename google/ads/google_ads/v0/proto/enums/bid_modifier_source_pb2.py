@@ -85,7 +85,7 @@ _sym_db.RegisterFileDescriptor(DESCRIPTOR)
 
 BidModifierSourceEnum = _reflection.GeneratedProtocolMessageType('BidModifierSourceEnum', (_message.Message,), dict(
   DESCRIPTOR = _BIDMODIFIERSOURCEENUM,
-  __module__ = 'google.ads.googleads_v0.proto.enums.bid_modifier_source_pb2'
+  __module__ = 'google.ads.google_ads.v0.proto.enums.bid_modifier_source_pb2'
   ,
   __doc__ = """Container for enum describing possible bid modifier sources.
   """,

@@ -63,7 +63,7 @@ _sym_db.RegisterFileDescriptor(DESCRIPTOR)
 
 GetCustomerClientLinkRequest = _reflection.GeneratedProtocolMessageType('GetCustomerClientLinkRequest', (_message.Message,), dict(
   DESCRIPTOR = _GETCUSTOMERCLIENTLINKREQUEST,
-  __module__ = 'google.ads.googleads_v0.proto.services.customer_client_link_service_pb2'
+  __module__ = 'google.ads.google_ads.v0.proto.services.customer_client_link_service_pb2'
   ,
   __doc__ = """Request message for
   [CustomerClientLinkService.GetCustomerClientLink][google.ads.googleads.v0.services.CustomerClientLinkService.GetCustomerClientLink].

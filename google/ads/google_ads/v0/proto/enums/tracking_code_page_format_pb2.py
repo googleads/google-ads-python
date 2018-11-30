@@ -19,7 +19,7 @@ DESCRIPTOR = _descriptor.FileDescriptor(
   name='google/ads/googleads_v0/proto/enums/tracking_code_page_format.proto',
   package='google.ads.googleads.v0.enums',
   syntax='proto3',
-  serialized_pb=_b('\nCgoogle/ads/googleads_v0/proto/enums/tracking_code_page_format.proto\x12\x1dgoogle.ads.googleads.v0.enums\"^\n\x1aTrackingCodePageFormatEnum\"@\n\x16TrackingCodePageFormat\x12\x0f\n\x0bUNSPECIFIED\x10\x00\x12\x0b\n\x07UNKNOWN\x10\x01\x12\x08\n\x04HTML\x10\x02\x42\xcc\x01\n!com.google.ads.googleads.v0.enumsB\x1bTrackingCodePageFormatProtoP\x01ZBgoogle.golang.org/genproto/googleapis/ads/googleads/v0/enums;enums\xa2\x02\x03GAA\xaa\x02\x1dGoogle.Ads.GoogleAds.V0.Enums\xca\x02\x1dGoogle\\Ads\\GoogleAds\\V0\\Enumsb\x06proto3')
+  serialized_pb=_b('\nCgoogle/ads/googleads_v0/proto/enums/tracking_code_page_format.proto\x12\x1dgoogle.ads.googleads.v0.enums\"g\n\x1aTrackingCodePageFormatEnum\"I\n\x16TrackingCodePageFormat\x12\x0f\n\x0bUNSPECIFIED\x10\x00\x12\x0b\n\x07UNKNOWN\x10\x01\x12\x08\n\x04HTML\x10\x02\x12\x07\n\x03\x41MP\x10\x03\x42\xcc\x01\n!com.google.ads.googleads.v0.enumsB\x1bTrackingCodePageFormatProtoP\x01ZBgoogle.golang.org/genproto/googleapis/ads/googleads/v0/enums;enums\xa2\x02\x03GAA\xaa\x02\x1dGoogle.Ads.GoogleAds.V0.Enums\xca\x02\x1dGoogle\\Ads\\GoogleAds\\V0\\Enumsb\x06proto3')
 )
 
 
@@ -42,11 +42,15 @@ _TRACKINGCODEPAGEFORMATENUM_TRACKINGCODEPAGEFORMAT = _descriptor.EnumDescriptor(
       name='HTML', index=2, number=2,
       options=None,
       type=None),
+    _descriptor.EnumValueDescriptor(
+      name='AMP', index=3, number=3,
+      options=None,
+      type=None),
   ],
   containing_type=None,
   options=None,
   serialized_start=132,
-  serialized_end=196,
+  serialized_end=205,
 )
 _sym_db.RegisterEnumDescriptor(_TRACKINGCODEPAGEFORMATENUM_TRACKINGCODEPAGEFORMAT)
 
@@ -72,7 +76,7 @@ _TRACKINGCODEPAGEFORMATENUM = _descriptor.Descriptor(
   oneofs=[
   ],
   serialized_start=102,
-  serialized_end=196,
+  serialized_end=205,
 )
 
 _TRACKINGCODEPAGEFORMATENUM_TRACKINGCODEPAGEFORMAT.containing_type = _TRACKINGCODEPAGEFORMATENUM
@@ -81,7 +85,7 @@ _sym_db.RegisterFileDescriptor(DESCRIPTOR)
 
 TrackingCodePageFormatEnum = _reflection.GeneratedProtocolMessageType('TrackingCodePageFormatEnum', (_message.Message,), dict(
   DESCRIPTOR = _TRACKINGCODEPAGEFORMATENUM,
-  __module__ = 'google.ads.googleads_v0.proto.enums.tracking_code_page_format_pb2'
+  __module__ = 'google.ads.google_ads.v0.proto.enums.tracking_code_page_format_pb2'
   ,
   __doc__ = """Container for enum describing the format of the web page where the
   tracking tag and snippet will be installed.

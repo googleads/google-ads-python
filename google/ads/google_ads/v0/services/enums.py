@@ -16,6 +16,104 @@
 import enum
 
 
+class AdvertisingChannelSubTypeEnum(object):
+    class AdvertisingChannelSubType(enum.IntEnum):
+        """
+        Enum describing the different channel subtypes.
+
+        Attributes:
+          UNSPECIFIED (int): Not specified.
+          UNKNOWN (int): Used as a return value only. Represents value unknown in this version.
+          SEARCH_MOBILE_APP (int): Mobile app campaigns for Search.
+          DISPLAY_MOBILE_APP (int): Mobile app campaigns for Display.
+          SEARCH_EXPRESS (int): AdWords express campaigns for search.
+          DISPLAY_EXPRESS (int): AdWords Express campaigns for display.
+          SHOPPING_SMART_ADS (int): Smart Shopping campaigns.
+          DISPLAY_GMAIL_AD (int): Gmail Ad campaigns.
+          DISPLAY_SMART_CAMPAIGN (int): Smart display campaigns.
+          VIDEO_OUTSTREAM (int): Video Outstream campaigns.
+        """
+        UNSPECIFIED = 0
+        UNKNOWN = 1
+        SEARCH_MOBILE_APP = 2
+        DISPLAY_MOBILE_APP = 3
+        SEARCH_EXPRESS = 4
+        DISPLAY_EXPRESS = 5
+        SHOPPING_SMART_ADS = 6
+        DISPLAY_GMAIL_AD = 7
+        DISPLAY_SMART_CAMPAIGN = 8
+        VIDEO_OUTSTREAM = 9
+
+
+class AdvertisingChannelTypeEnum(object):
+    class AdvertisingChannelType(enum.IntEnum):
+        """
+        Enum describing the various advertising channel types.
+
+        Attributes:
+          UNSPECIFIED (int): Not specified.
+          UNKNOWN (int): Used for return value only. Represents value unknown in this version.
+          SEARCH (int): Search Network. Includes display bundled, and Search+ campaigns.
+          DISPLAY (int): Google Display Network only.
+          SHOPPING (int): Shopping campaigns serve on the shopping property
+          and on google.com search results.
+          HOTEL (int): Hotel Ads campaigns.
+          VIDEO (int): Video campaigns.
+        """
+        UNSPECIFIED = 0
+        UNKNOWN = 1
+        SEARCH = 2
+        DISPLAY = 3
+        SHOPPING = 4
+        HOTEL = 5
+        VIDEO = 6
+
+
+class CriterionCategoryChannelAvailabilityModeEnum(object):
+    class CriterionCategoryChannelAvailabilityMode(enum.IntEnum):
+        """
+        Enum containing the possible CriterionCategoryChannelAvailabilityMode.
+
+        Attributes:
+          UNSPECIFIED (int): Not specified.
+          UNKNOWN (int): Used for return value only. Represents value unknown in this version.
+          ALL_CHANNELS (int): The category is available to campaigns of all channel types and subtypes.
+          CHANNEL_TYPE_AND_ALL_SUBTYPES (int): The category is available to campaigns of a specific channel type,
+          including all subtypes under it.
+          CHANNEL_TYPE_AND_SUBSET_SUBTYPES (int): The category is available to campaigns of a specific channel type and
+          subtype(s).
+        """
+        UNSPECIFIED = 0
+        UNKNOWN = 1
+        ALL_CHANNELS = 2
+        CHANNEL_TYPE_AND_ALL_SUBTYPES = 3
+        CHANNEL_TYPE_AND_SUBSET_SUBTYPES = 4
+
+
+class CriterionCategoryLocaleAvailabilityModeEnum(object):
+    class CriterionCategoryLocaleAvailabilityMode(enum.IntEnum):
+        """
+        Enum containing the possible CriterionCategoryLocaleAvailabilityMode.
+
+        Attributes:
+          UNSPECIFIED (int): Not specified.
+          UNKNOWN (int): Used for return value only. Represents value unknown in this version.
+          ALL_LOCALES (int): The category is available to campaigns of all locales.
+          COUNTRY_AND_ALL_LANGUAGES (int): The category is available to campaigns within a list of countries,
+          regardless of language.
+          LANGUAGE_AND_ALL_COUNTRIES (int): The category is available to campaigns within a list of languages,
+          regardless of country.
+          COUNTRY_AND_LANGUAGE (int): The category is available to campaigns within a list of country, language
+          pairs.
+        """
+        UNSPECIFIED = 0
+        UNKNOWN = 1
+        ALL_LOCALES = 2
+        COUNTRY_AND_ALL_LANGUAGES = 3
+        LANGUAGE_AND_ALL_COUNTRIES = 4
+        COUNTRY_AND_LANGUAGE = 5
+
+
 class TrackingCodePageFormatEnum(object):
     class TrackingCodePageFormat(enum.IntEnum):
         """
@@ -26,10 +124,12 @@ class TrackingCodePageFormatEnum(object):
           UNSPECIFIED (int): Not specified.
           UNKNOWN (int): Used for return value only. Represents value unknown in this version.
           HTML (int): Standard HTML page format.
+          AMP (int): Google AMP page format.
         """
         UNSPECIFIED = 0
         UNKNOWN = 1
         HTML = 2
+        AMP = 3
 
 
 class TrackingCodeTypeEnum(object):
@@ -52,6 +152,81 @@ class TrackingCodeTypeEnum(object):
         WEBPAGE = 2
         WEBPAGE_ONCLICK = 3
         CLICK_TO_CALL = 4
+
+
+class FrequencyCapEventTypeEnum(object):
+    class FrequencyCapEventType(enum.IntEnum):
+        """
+        The type of event that the cap applies to (e.g. impression).
+
+        Attributes:
+          UNSPECIFIED (int): Not specified.
+          UNKNOWN (int): Used for return value only. Represents value unknown in this version.
+          IMPRESSION (int): The cap applies on ad impressions.
+          VIDEO_VIEW (int): The cap applies on video ad views.
+        """
+        UNSPECIFIED = 0
+        UNKNOWN = 1
+        IMPRESSION = 2
+        VIDEO_VIEW = 3
+
+
+class FrequencyCapLevelEnum(object):
+    class FrequencyCapLevel(enum.IntEnum):
+        """
+        The level on which the cap is to be applied (e.g ad group ad, ad group).
+        Cap is applied to all the resources of this level.
+
+        Attributes:
+          UNSPECIFIED (int): Not specified.
+          UNKNOWN (int): Used for return value only. Represents value unknown in this version.
+          AD_GROUP_AD (int): The cap is applied at the ad group ad level.
+          AD_GROUP (int): The cap is applied at the ad group level.
+          CAMPAIGN (int): The cap is applied at the campaign level.
+        """
+        UNSPECIFIED = 0
+        UNKNOWN = 1
+        AD_GROUP_AD = 2
+        AD_GROUP = 3
+        CAMPAIGN = 4
+
+
+class FrequencyCapTimeUnitEnum(object):
+    class FrequencyCapTimeUnit(enum.IntEnum):
+        """
+        Unit of time the cap is defined at (e.g. day, week).
+
+        Attributes:
+          UNSPECIFIED (int): Not specified.
+          UNKNOWN (int): Used for return value only. Represents value unknown in this version.
+          DAY (int): The cap would define limit per one day.
+          WEEK (int): The cap would define limit per one week.
+          MONTH (int): The cap would define limit per one month.
+        """
+        UNSPECIFIED = 0
+        UNKNOWN = 1
+        DAY = 2
+        WEEK = 3
+        MONTH = 4
+
+
+class KeywordPlanCompetitionLevelEnum(object):
+    class KeywordPlanCompetitionLevel(enum.IntEnum):
+        """
+        Competition level of a keyword.
+
+        Attributes:
+          UNSPECIFIED (int): Not specified.
+          UNKNOWN (int): The value is unknown in this version.
+          LOW (int): Low competition.
+          MEDIUM (int): Medium competition.
+          HIGH (int): High competition.
+        """
+        UNSPECIFIED = 0
+        UNKNOWN = 1
+        LOW = 2
+        MEDIUM = 3
+        HIGH = 4
 
 
 class CallConversionReportingStateEnum(object):
@@ -93,6 +268,45 @@ class DisplayAdFormatSettingEnum(object):
         ALL_FORMATS = 2
         NON_NATIVE = 3
         NATIVE = 4
+
+
+class MimeTypeEnum(object):
+    class MimeType(enum.IntEnum):
+        """
+        The mime type
+
+        Attributes:
+          UNSPECIFIED (int): The mime type has not been specified.
+          UNKNOWN (int): The received value is not known in this version.
+
+          This is a response-only value.
+          IMAGE_JPEG (int): MIME type of image/jpeg.
+          IMAGE_GIF (int): MIME type of image/gif.
+          IMAGE_PNG (int): MIME type of image/png.
+          FLASH (int): MIME type of application/x-shockwave-flash.
+          TEXT_HTML (int): MIME type of text/html.
+          PDF (int): MIME type of application/pdf.
+          MSWORD (int): MIME type of application/msword.
+          MSEXCEL (int): MIME type of application/vnd.ms-excel.
+          RTF (int): MIME type of application/rtf.
+          AUDIO_WAV (int): MIME type of audio/wav.
+          AUDIO_MP3 (int): MIME type of audio/mp3.
+          HTML5_AD_ZIP (int): MIME type of application/x-html5-ad-zip.
+        """
+        UNSPECIFIED = 0
+        UNKNOWN = 1
+        IMAGE_JPEG = 2
+        IMAGE_GIF = 3
+        IMAGE_PNG = 4
+        FLASH = 5
+        TEXT_HTML = 6
+        PDF = 7
+        MSWORD = 8
+        MSEXCEL = 9
+        RTF = 10
+        AUDIO_WAV = 11
+        AUDIO_MP3 = 12
+        HTML5_AD_ZIP = 13
 
 
 class PageOnePromotedStrategyGoalEnum(object):
@@ -163,6 +377,46 @@ class PolicyTopicEvidenceDestinationMismatchUrlTypeEnum(object):
         MOBILE_TRACKING_URL = 6
 
 
+class CustomerMatchUploadKeyTypeEnum(object):
+    class CustomerMatchUploadKeyType(enum.IntEnum):
+        """
+        Enum describing possible customer match upload key types.
+
+        Attributes:
+          UNSPECIFIED (int): Not specified.
+          UNKNOWN (int): Used for return value only. Represents value unknown in this version.
+          CONTACT_INFO (int): Members are matched from customer info such as email address, phone
+          number or physical address.
+          CRM_ID (int): Members are matched from a user id generated and assigned by the
+          advertiser.
+          MOBILE_ADVERTISING_ID (int): Members are matched from mobile advertising ids.
+        """
+        UNSPECIFIED = 0
+        UNKNOWN = 1
+        CONTACT_INFO = 2
+        CRM_ID = 3
+        MOBILE_ADVERTISING_ID = 4
+
+
+class UserListCrmDataSourceTypeEnum(object):
+    class UserListCrmDataSourceType(enum.IntEnum):
+        """
+        Enum describing possible user list crm data source type.
+
+        Attributes:
+          UNSPECIFIED (int): Not specified.
+          UNKNOWN (int): Used for return value only. Represents value unknown in this version.
+          FIRST_PARTY (int): The uploaded data is first party data.
+          THIRD_PARTY_CREDIT_BUREAU (int): The uploaded data is from a third party credit bureau.
+          THIRD_PARTY_VOTER_FILE (int): The uploaded data is from a third party voter file.
+        """
+        UNSPECIFIED = 0
+        UNKNOWN = 1
+        FIRST_PARTY = 2
+        THIRD_PARTY_CREDIT_BUREAU = 3
+        THIRD_PARTY_VOTER_FILE = 4
+
+
 class AgeRangeTypeEnum(object):
     class AgeRangeType(enum.IntEnum):
         """
@@ -188,6 +442,49 @@ class AgeRangeTypeEnum(object):
         AGE_RANGE_55_64 = 503005
         AGE_RANGE_65_UP = 503006
         AGE_RANGE_UNDETERMINED = 503999
+
+
+class ContentLabelTypeEnum(object):
+    class ContentLabelType(enum.IntEnum):
+        """
+        Enum listing the content label types supported by ContentLabel criterion.
+
+        Attributes:
+          UNSPECIFIED (int): Not specified.
+          UNKNOWN (int): Used for return value only. Represents value unknown in this version.
+          SEXUALLY_SUGGESTIVE (int): Sexually suggestive content.
+          BELOW_THE_FOLD (int): Below the fold placement.
+          PARKED_DOMAIN (int): Parked domain.
+          GAME (int): Game.
+          JUVENILE (int): Juvenile, gross & bizarre content.
+          PROFANITY (int): Profanity & rough language.
+          TRAGEDY (int): Death & tragedy.
+          VIDEO (int): Video.
+          VIDEO_RATING_DV_G (int): Content rating: G.
+          VIDEO_RATING_DV_PG (int): Content rating: PG.
+          VIDEO_RATING_DV_T (int): Content rating: T.
+          VIDEO_RATING_DV_MA (int): Content rating: MA.
+          VIDEO_NOT_YET_RATED (int): Content rating: not yet rated.
+          EMBEDDED_VIDEO (int): Embedded video.
+          LIVE_STREAMING_VIDEO (int): Live streaming video.
+        """
+        UNSPECIFIED = 0
+        UNKNOWN = 1
+        SEXUALLY_SUGGESTIVE = 2
+        BELOW_THE_FOLD = 3
+        PARKED_DOMAIN = 4
+        GAME = 5
+        JUVENILE = 6
+        PROFANITY = 7
+        TRAGEDY = 8
+        VIDEO = 9
+        VIDEO_RATING_DV_G = 10
+        VIDEO_RATING_DV_PG = 11
+        VIDEO_RATING_DV_T = 12
+        VIDEO_RATING_DV_MA = 13
+        VIDEO_NOT_YET_RATED = 14
+        EMBEDDED_VIDEO = 15
+        LIVE_STREAMING_VIDEO = 16
 
 
 class DayOfWeekEnum(object):
@@ -415,6 +712,21 @@ class ParentalStatusTypeEnum(object):
         UNDETERMINED = 302
 
 
+class PreferredContentTypeEnum(object):
+    class PreferredContentType(enum.IntEnum):
+        """
+        Enumerates preferred content criterion type.
+
+        Attributes:
+          UNSPECIFIED (int): Not specified.
+          UNKNOWN (int): The value is unknown in this version.
+          YOUTUBE_TOP_CONTENT (int): Represents top content on YouTube.
+        """
+        UNSPECIFIED = 0
+        UNKNOWN = 1
+        YOUTUBE_TOP_CONTENT = 400
+
+
 class ProductChannelEnum(object):
     class ProductChannel(enum.IntEnum):
         """
@@ -459,14 +771,12 @@ class ProductConditionEnum(object):
         Attributes:
           UNSPECIFIED (int): Not specified.
           UNKNOWN (int): Used for return value only. Represents value unknown in this version.
-          OLD (int): The product condition is old.
           NEW (int): The product condition is new.
           REFURBISHED (int): The product condition is refurbished.
           USED (int): The product condition is used.
         """
         UNSPECIFIED = 0
         UNKNOWN = 1
-        OLD = 2
         NEW = 3
         REFURBISHED = 4
         USED = 5
@@ -540,6 +850,104 @@ class AdServingOptimizationStatusEnum(object):
         UNAVAILABLE = 6
 
 
+class CallPlaceholderFieldEnum(object):
+    class CallPlaceholderField(enum.IntEnum):
+        """
+        Possible values for Call placeholder fields.
+
+        Attributes:
+          UNSPECIFIED (int): Not specified.
+          UNKNOWN (int): Used for return value only. Represents value unknown in this version.
+          PHONE_NUMBER (int): Data Type: STRING. The advertiser's phone number to append to the ad.
+          COUNTRY_CODE (int): Data Type: STRING. Uppercase two-letter country code of the advertiser's
+          phone number.
+          TRACKED (int): Data Type: BOOLEAN. Indicates whether call tracking is enabled. Default:
+          true.
+          CONVERSION_TYPE_ID (int): Data Type: INT64. The ID of an AdCallMetricsConversion object. This
+          object contains the phoneCallDurationfield which is the minimum duration
+          (in seconds) of a call to be considered a conversion.
+          CONVERSION_REPORTING_STATE (int): Data Type: STRING. Indicates whether this call extension uses its own
+          call conversion setting or follows the account level setting.
+          Valid values are: USE_ACCOUNT_LEVEL_CALL_CONVERSION_ACTION and
+          USE_RESOURCE_LEVEL_CALL_CONVERSION_ACTION.
+        """
+        UNSPECIFIED = 0
+        UNKNOWN = 1
+        PHONE_NUMBER = 2
+        COUNTRY_CODE = 3
+        TRACKED = 4
+        CONVERSION_TYPE_ID = 5
+        CONVERSION_REPORTING_STATE = 6
+
+
+class FlightPlaceholderFieldEnum(object):
+    class FlightPlaceholderField(enum.IntEnum):
+        """
+        Possible values for Flight placeholder fields.
+
+        Attributes:
+          UNSPECIFIED (int): Not specified.
+          UNKNOWN (int): Used for return value only. Represents value unknown in this version.
+          DESTINATION_ID (int): Data Type: STRING. Required. Destination id. Example: PAR, LON.
+          For feed items that only have destination id, destination id must be a
+          unique key. For feed items that have both destination id and origin id,
+          then the combination must be a unique key.
+          ORIGIN_ID (int): Data Type: STRING. Origin id. Example: PAR, LON.
+          Optional. Combination of destination id and origin id must be unique per
+          offer.
+          FLIGHT_DESCRIPTION (int): Data Type: STRING. Required. Main headline with product name to be shown
+          in dynamic ad.
+          ORIGIN_NAME (int): Data Type: STRING. Shorter names are recommended.
+          DESTINATION_NAME (int): Data Type: STRING. Shorter names are recommended.
+          FLIGHT_PRICE (int): Data Type: STRING. Price to be shown in the ad.
+          Example: \"100.00 USD\"
+          FORMATTED_PRICE (int): Data Type: STRING. Formatted price to be shown in the ad.
+          Example: \"Starting at $100.00 USD\", \"$80 - $100\"
+          FLIGHT_SALE_PRICE (int): Data Type: STRING. Sale price to be shown in the ad.
+          Example: \"80.00 USD\"
+          FORMATTED_SALE_PRICE (int): Data Type: STRING. Formatted sale price to be shown in the ad.
+          Example: \"On sale for $80.00\", \"$60 - $80\"
+          IMAGE_URL (int): Data Type: URL. Image to be displayed in the ad.
+          FINAL_URLS (int): Data Type: URL_LIST. Required. Final URLs for the ad when using Upgraded
+          URLs. User will be redirected to these URLs when they click on an ad, or
+          when they click on a specific flight for ads that show multiple
+          flights.
+          FINAL_MOBILE_URLS (int): Data Type: URL_LIST. Final mobile URLs for the ad when using Upgraded
+          URLs.
+          TRACKING_URL (int): Data Type: URL. Tracking template for the ad when using Upgraded URLs.
+          ANDROID_APP_LINK (int): Data Type: STRING. Android app link. Must be formatted as:
+          android-app://{package_id}/{scheme}/{host_path}.
+          The components are defined as follows:
+          package_id: app ID as specified in Google Play.
+          scheme: the scheme to pass to the application. Can be HTTP, or a custom
+            scheme.
+          host_path: identifies the specific content within your application.
+          SIMILAR_DESTINATION_IDS (int): Data Type: STRING_LIST. List of recommended destination IDs to show
+          together with this item.
+          IOS_APP_LINK (int): Data Type: STRING. iOS app link.
+          IOS_APP_STORE_ID (int): Data Type: INT64. iOS app store ID.
+        """
+        UNSPECIFIED = 0
+        UNKNOWN = 1
+        DESTINATION_ID = 2
+        ORIGIN_ID = 3
+        FLIGHT_DESCRIPTION = 4
+        ORIGIN_NAME = 5
+        DESTINATION_NAME = 6
+        FLIGHT_PRICE = 7
+        FORMATTED_PRICE = 8
+        FLIGHT_SALE_PRICE = 9
+        FORMATTED_SALE_PRICE = 10
+        IMAGE_URL = 11
+        FINAL_URLS = 12
+        FINAL_MOBILE_URLS = 13
+        TRACKING_URL = 14
+        ANDROID_APP_LINK = 15
+        SIMILAR_DESTINATION_IDS = 16
+        IOS_APP_LINK = 17
+        IOS_APP_STORE_ID = 18
+
+
 class TargetCpaOptInRecommendationGoalEnum(object):
     class TargetCpaOptInRecommendationGoal(enum.IntEnum):
         """
@@ -560,6 +968,23 @@ class TargetCpaOptInRecommendationGoalEnum(object):
         SAME_CONVERSIONS = 3
         SAME_CPA = 4
         CLOSEST_CPA = 5
+
+
+class KeywordPlanNetworkEnum(object):
+    class KeywordPlanNetwork(enum.IntEnum):
+        """
+        Enumerates keyword plan forecastable network types.
+
+        Attributes:
+          UNSPECIFIED (int): Not specified.
+          UNKNOWN (int): The value is unknown in this version.
+          GOOGLE_SEARCH (int): Google Search.
+          GOOGLE_SEARCH_AND_PARTNERS (int): Google Search + Search partners.
+        """
+        UNSPECIFIED = 0
+        UNKNOWN = 1
+        GOOGLE_SEARCH = 2
+        GOOGLE_SEARCH_AND_PARTNERS = 3
 
 
 class BiddingStrategyTypeEnum(object):
@@ -630,6 +1055,67 @@ class CampaignGroupStatusEnum(object):
         REMOVED = 4
 
 
+class EducationPlaceholderFieldEnum(object):
+    class EducationPlaceholderField(enum.IntEnum):
+        """
+        Possible values for Education placeholder fields.
+
+        Attributes:
+          UNSPECIFIED (int): Not specified.
+          UNKNOWN (int): Used for return value only. Represents value unknown in this version.
+          PROGRAM_ID (int): Data Type: STRING. Required. Combination of PROGRAM ID and LOCATION ID
+          must be unique per offer.
+          LOCATION_ID (int): Data Type: STRING. Combination of PROGRAM ID and LOCATION ID must be
+          unique per offer.
+          PROGRAM_NAME (int): Data Type: STRING. Required. Main headline with program name to be shown
+          in dynamic ad.
+          AREA_OF_STUDY (int): Data Type: STRING. Area of study that can be shown in dynamic ad.
+          PROGRAM_DESCRIPTION (int): Data Type: STRING. Description of program that can be shown in dynamic
+          ad.
+          SCHOOL_NAME (int): Data Type: STRING. Name of school that can be shown in dynamic ad.
+          ADDRESS (int): Data Type: STRING. Complete school address, including postal code.
+          THUMBNAIL_IMAGE_URL (int): Data Type: URL. Image to be displayed in ads.
+          ALTERNATIVE_THUMBNAIL_IMAGE_URL (int): Data Type: URL. Alternative hosted file of image to be used in the ad.
+          FINAL_URLS (int): Data Type: URL_LIST. Required. Final URLs to be used in ad when using
+          Upgraded URLs; the more specific the better (e.g. the individual URL of a
+          specific program and its location).
+          FINAL_MOBILE_URLS (int): Data Type: URL_LIST. Final mobile URLs for the ad when using Upgraded
+          URLs.
+          TRACKING_URL (int): Data Type: URL. Tracking template for the ad when using Upgraded URLs.
+          CONTEXTUAL_KEYWORDS (int): Data Type: STRING_LIST. Keywords used for product retrieval.
+          ANDROID_APP_LINK (int): Data Type: STRING. Android app link. Must be formatted as:
+          android-app://{package_id}/{scheme}/{host_path}.
+          The components are defined as follows:
+          package_id: app ID as specified in Google Play.
+          scheme: the scheme to pass to the application. Can be HTTP, or a custom
+            scheme.
+          host_path: identifies the specific content within your application.
+          SIMILAR_PROGRAM_IDS (int): Data Type: STRING_LIST. List of recommended program IDs to show together
+          with this item.
+          IOS_APP_LINK (int): Data Type: STRING. iOS app link.
+          IOS_APP_STORE_ID (int): Data Type: INT64. iOS app store ID.
+        """
+        UNSPECIFIED = 0
+        UNKNOWN = 1
+        PROGRAM_ID = 2
+        LOCATION_ID = 3
+        PROGRAM_NAME = 4
+        AREA_OF_STUDY = 5
+        PROGRAM_DESCRIPTION = 6
+        SCHOOL_NAME = 7
+        ADDRESS = 8
+        THUMBNAIL_IMAGE_URL = 9
+        ALTERNATIVE_THUMBNAIL_IMAGE_URL = 10
+        FINAL_URLS = 11
+        FINAL_MOBILE_URLS = 12
+        TRACKING_URL = 13
+        CONTEXTUAL_KEYWORDS = 14
+        ANDROID_APP_LINK = 15
+        SIMILAR_PROGRAM_IDS = 16
+        IOS_APP_LINK = 17
+        IOS_APP_STORE_ID = 18
+
+
 class GeoTargetConstantStatusEnum(object):
     class GeoTargetConstantStatus(enum.IntEnum):
         """
@@ -672,6 +1158,40 @@ class CampaignServingStatusEnum(object):
         ENDED = 4
         PENDING = 5
         SUSPENDED = 6
+
+
+class GeoTargetingRestrictionEnum(object):
+    class GeoTargetingRestriction(enum.IntEnum):
+        """
+        A restriction used to determine if the request context's
+        geo should be matched.
+
+        Attributes:
+          UNSPECIFIED (int): Not specified.
+          UNKNOWN (int): Used for return value only. Represents value unknown in this version.
+          LOCATION_OF_PRESENCE (int): Indicates that request context should match the physical location of
+          the user.
+        """
+        UNSPECIFIED = 0
+        UNKNOWN = 1
+        LOCATION_OF_PRESENCE = 2
+
+
+class FeedMappingCriterionTypeEnum(object):
+    class FeedMappingCriterionType(enum.IntEnum):
+        """
+        Possible placeholder types for a feed mapping.
+
+        Attributes:
+          UNSPECIFIED (int): Not specified.
+          UNKNOWN (int): Used for return value only. Represents value unknown in this version.
+          CAMPAIGN_LOCATION_TARGETS (int): Allows campaign targeting at locations within a location feed.
+          DSA_PAGE_FEED (int): Allows url targeting for your dynamic search ads within a page feed.
+        """
+        UNSPECIFIED = 0
+        UNKNOWN = 1
+        CAMPAIGN_LOCATION_TARGETS = 2
+        DSA_PAGE_FEED = 3
 
 
 class ChangeStatusResourceTypeEnum(object):
@@ -717,6 +1237,174 @@ class QualityScoreBucketEnum(object):
         ABOVE_AVERAGE = 4
 
 
+class KeywordPlanForecastIntervalEnum(object):
+    class KeywordPlanForecastInterval(enum.IntEnum):
+        """
+        Forecast intervals.
+
+        Attributes:
+          UNSPECIFIED (int): Not specified.
+          UNKNOWN (int): The value is unknown in this version.
+          NEXT_WEEK (int): The next week date range for keyword plan. The next week is based
+          on the default locale of the user's account and is mostly SUN-SAT or
+          MON-SUN.
+          This can be different from next-7 days.
+          NEXT_MONTH (int): The next month date range for keyword plan.
+          NEXT_QUARTER (int): The next quarter date range for keyword plan.
+        """
+        UNSPECIFIED = 0
+        UNKNOWN = 1
+        NEXT_WEEK = 3
+        NEXT_MONTH = 4
+        NEXT_QUARTER = 5
+
+
+class JobPlaceholderFieldEnum(object):
+    class JobPlaceholderField(enum.IntEnum):
+        """
+        Possible values for Job placeholder fields.
+
+        Attributes:
+          UNSPECIFIED (int): Not specified.
+          UNKNOWN (int): Used for return value only. Represents value unknown in this version.
+          JOB_ID (int): Data Type: STRING. Required. If only JOB_ID is specified, then it must be
+          unique. If both JOB_ID and LOCATION_ID are specified, then the
+          pair must be unique.
+          ID) pair must be unique.
+          LOCATION_ID (int): Data Type: STRING. Combination of JOB_ID and LOCATION_ID must be unique
+          per offer.
+          TITLE (int): Data Type: STRING. Required. Main headline with job title to be shown in
+          dynamic ad.
+          SUBTITLE (int): Data Type: STRING. Job subtitle to be shown in dynamic ad.
+          DESCRIPTION (int): Data Type: STRING. Description of job to be shown in dynamic ad.
+          IMAGE_URL (int): Data Type: URL. Image to be displayed in the ad. Highly recommended for
+          image ads.
+          CATEGORY (int): Data Type: STRING. Category of property used to group like items together
+          for recommendation engine.
+          CONTEXTUAL_KEYWORDS (int): Data Type: STRING_LIST. Keywords used for product retrieval.
+          ADDRESS (int): Data Type: STRING. Complete property address, including postal code.
+          SALARY (int): Data Type: STRING. Salary or salary range of job to be shown in dynamic
+          ad.
+          FINAL_URLS (int): Data Type: URL_LIST. Required. Final URLs to be used in ad when using
+          Upgraded URLs; the more specific the better (e.g. the individual URL of a
+          specific job and its location).
+          FINAL_MOBILE_URLS (int): Data Type: URL_LIST. Final mobile URLs for the ad when using Upgraded
+          URLs.
+          TRACKING_URL (int): Data Type: URL. Tracking template for the ad when using Upgraded URLs.
+          ANDROID_APP_LINK (int): Data Type: STRING. Android app link. Must be formatted as:
+          android-app://{package_id}/{scheme}/{host_path}.
+          The components are defined as follows:
+          package_id: app ID as specified in Google Play.
+          scheme: the scheme to pass to the application. Can be HTTP, or a custom
+            scheme.
+          host_path: identifies the specific content within your application.
+          SIMILAR_JOB_IDS (int): Data Type: STRING_LIST. List of recommended job IDs to show together with
+          this item.
+          IOS_APP_LINK (int): Data Type: STRING. iOS app link.
+          IOS_APP_STORE_ID (int): Data Type: INT64. iOS app store ID.
+        """
+        UNSPECIFIED = 0
+        UNKNOWN = 1
+        JOB_ID = 2
+        LOCATION_ID = 3
+        TITLE = 4
+        SUBTITLE = 5
+        DESCRIPTION = 6
+        IMAGE_URL = 7
+        CATEGORY = 8
+        CONTEXTUAL_KEYWORDS = 9
+        ADDRESS = 10
+        SALARY = 11
+        FINAL_URLS = 12
+        FINAL_MOBILE_URLS = 14
+        TRACKING_URL = 15
+        ANDROID_APP_LINK = 16
+        SIMILAR_JOB_IDS = 17
+        IOS_APP_LINK = 18
+        IOS_APP_STORE_ID = 19
+
+
+class RealEstatePlaceholderFieldEnum(object):
+    class RealEstatePlaceholderField(enum.IntEnum):
+        """
+        Possible values for Real Estate placeholder fields.
+
+        Attributes:
+          UNSPECIFIED (int): Not specified.
+          UNKNOWN (int): Used for return value only. Represents value unknown in this version.
+          LISTING_ID (int): Data Type: STRING. Unique ID.
+          LISTING_NAME (int): Data Type: STRING. Main headline with listing name to be shown in dynamic
+          ad.
+          CITY_NAME (int): Data Type: STRING. City name to be shown in dynamic ad.
+          DESCRIPTION (int): Data Type: STRING. Description of listing to be shown in dynamic ad.
+          ADDRESS (int): Data Type: STRING. Complete listing address, including postal code.
+          PRICE (int): Data Type: STRING. Price to be shown in the ad.
+          Example: \"100.00 USD\"
+          FORMATTED_PRICE (int): Data Type: STRING. Formatted price to be shown in the ad.
+          Example: \"Starting at $100.00 USD\", \"$80 - $100\"
+          IMAGE_URL (int): Data Type: URL. Image to be displayed in the ad.
+          PROPERTY_TYPE (int): Data Type: STRING. Type of property (house, condo, apartment, etc.) used
+          to group like items together for recommendation engine.
+          LISTING_TYPE (int): Data Type: STRING. Type of listing (resale, rental, foreclosure, etc.)
+          used to group like items together for recommendation engine.
+          CONTEXTUAL_KEYWORDS (int): Data Type: STRING_LIST. Keywords used for product retrieval.
+          FINAL_URLS (int): Data Type: URL_LIST. Final URLs to be used in ad when using Upgraded
+          URLs; the more specific the better (e.g. the individual URL of a specific
+          listing and its location).
+          FINAL_MOBILE_URLS (int): Data Type: URL_LIST. Final mobile URLs for the ad when using Upgraded
+          URLs.
+          TRACKING_URL (int): Data Type: URL. Tracking template for the ad when using Upgraded URLs.
+          ANDROID_APP_LINK (int): Data Type: STRING. Android app link. Must be formatted as:
+          android-app://{package_id}/{scheme}/{host_path}.
+          The components are defined as follows:
+          package_id: app ID as specified in Google Play.
+          scheme: the scheme to pass to the application. Can be HTTP, or a custom
+            scheme.
+          host_path: identifies the specific content within your application.
+          SIMILAR_LISTING_IDS (int): Data Type: STRING_LIST. List of recommended listing IDs to show together
+          with this item.
+          IOS_APP_LINK (int): Data Type: STRING. iOS app link.
+          IOS_APP_STORE_ID (int): Data Type: INT64. iOS app store ID.
+        """
+        UNSPECIFIED = 0
+        UNKNOWN = 1
+        LISTING_ID = 2
+        LISTING_NAME = 3
+        CITY_NAME = 4
+        DESCRIPTION = 5
+        ADDRESS = 6
+        PRICE = 7
+        FORMATTED_PRICE = 8
+        IMAGE_URL = 9
+        PROPERTY_TYPE = 10
+        LISTING_TYPE = 11
+        CONTEXTUAL_KEYWORDS = 12
+        FINAL_URLS = 13
+        FINAL_MOBILE_URLS = 14
+        TRACKING_URL = 15
+        ANDROID_APP_LINK = 16
+        SIMILAR_LISTING_IDS = 17
+        IOS_APP_LINK = 18
+        IOS_APP_STORE_ID = 19
+
+
+class FeedLinkStatusEnum(object):
+    class FeedLinkStatus(enum.IntEnum):
+        """
+        Possible statuses of a feed link.
+
+        Attributes:
+          UNSPECIFIED (int): Not specified.
+          UNKNOWN (int): Used for return value only. Represents value unknown in this version.
+          ENABLED (int): Feed link is enabled.
+          REMOVED (int): Feed link has been removed.
+        """
+        UNSPECIFIED = 0
+        UNKNOWN = 1
+        ENABLED = 2
+        REMOVED = 3
+
+
 class AdGroupStatusEnum(object):
     class AdGroupStatus(enum.IntEnum):
         """
@@ -736,6 +1424,80 @@ class AdGroupStatusEnum(object):
         ENABLED = 2
         PAUSED = 3
         REMOVED = 4
+
+
+class SearchTermMatchTypeEnum(object):
+    class SearchTermMatchType(enum.IntEnum):
+        """
+        Possible match types for a keyword triggering an ad, including variants.
+
+        Attributes:
+          UNSPECIFIED (int): Not specified.
+          UNKNOWN (int): Used for return value only. Represents value unknown in this version.
+          BROAD (int): Broad match.
+          EXACT (int): Exact match.
+          PHRASE (int): Phrase match.
+          NEAR_EXACT (int): Exact match (close variant).
+          NEAR_PHRASE (int): Phrase match (close variant).
+        """
+        UNSPECIFIED = 0
+        UNKNOWN = 1
+        BROAD = 2
+        EXACT = 3
+        PHRASE = 4
+        NEAR_EXACT = 5
+        NEAR_PHRASE = 6
+
+
+class PlaceholderTypeEnum(object):
+    class PlaceholderType(enum.IntEnum):
+        """
+        Possible placeholder types for a feed mapping.
+
+        Attributes:
+          UNSPECIFIED (int): Not specified.
+          UNKNOWN (int): Used for return value only. Represents value unknown in this version.
+          SITELINK (int): Sitelink.
+          CALL (int): Call.
+          APP (int): App.
+          LOCATION (int): Location.
+          AFFILIATE_LOCATION (int): Affiliate location.
+          CALLOUT (int): Callout.
+          STRUCTURED_SNIPPET (int): Structured snippet.
+          MESSAGE (int): Message.
+          PRICE (int): Price.
+          PROMOTION (int): Promotion.
+          AD_CUSTOMIZER (int): Ad customizer.
+          DYNAMIC_EDUCATION (int): Dynamic education.
+          DYNAMIC_FLIGHT (int): Dynamic flights.
+          DYNAMIC_CUSTOM (int): Dynamic custom.
+          DYNAMIC_HOTEL (int): Dynamic hotels.
+          DYNAMIC_REAL_ESTATE (int): Dynamic real estate.
+          DYNAMIC_TRAVEL (int): Dynamic travel.
+          DYNAMIC_LOCAL (int): Dynamic local.
+          DYNAMIC_JOB (int): Dynamic jobs.
+        """
+        UNSPECIFIED = 0
+        UNKNOWN = 1
+        SITELINK = 2
+        CALL = 3
+        APP = 4
+        LOCATION = 5
+        AFFILIATE_LOCATION = 6
+        CALLOUT = 7
+        STRUCTURED_SNIPPET = 8
+        MESSAGE = 9
+        PRICE = 10
+        PROMOTION = 11
+        AD_CUSTOMIZER = 12
+        DYNAMIC_EDUCATION = 13
+        DYNAMIC_FLIGHT = 14
+        DYNAMIC_CUSTOM = 15
+        DYNAMIC_HOTEL = 16
+        DYNAMIC_REAL_ESTATE = 17
+        DYNAMIC_TRAVEL = 18
+        DYNAMIC_LOCAL = 19
+        DYNAMIC_JOB = 20
 
 
 class GoogleAdsFieldDataTypeEnum(object):
@@ -794,43 +1556,189 @@ class GoogleAdsFieldDataTypeEnum(object):
         STRING = 11
 
 
-class MimeTypeEnum(object):
-    class MimeType(enum.IntEnum):
+class AffiliateLocationFeedRelationshipTypeEnum(object):
+    class AffiliateLocationFeedRelationshipType(enum.IntEnum):
         """
-        The mime type
+        Possible values for a relationship type for an affiliate location feed.
 
         Attributes:
-          UNSPECIFIED (int): The mime type has not been specified.
-          UNKNOWN (int): The received value is not known in this version.
-
-          This is a response-only value.
-          IMAGE_JPEG (int): MIME type of image/jpeg.
-          IMAGE_GIF (int): MIME type of image/gif.
-          IMAGE_PNG (int): MIME type of image/png.
-          FLASH (int): MIME type of application/x-shockwave-flash.
-          TEXT_HTML (int): MIME type of text/html.
-          PDF (int): MIME type of application/pdf.
-          MSWORD (int): MIME type of application/msword.
-          MSEXCEL (int): MIME type of application/vnd.ms-excel.
-          RTF (int): MIME type of application/rtf.
-          AUDIO_WAV (int): MIME type of audio/wav.
-          AUDIO_MP3 (int): MIME type of audio/mp3.
-          HTML5_AD_ZIP (int): MIME type of application/x-html5-ad-zip.
+          UNSPECIFIED (int): Not specified.
+          UNKNOWN (int): Used for return value only. Represents value unknown in this version.
+          GENERAL_RETAILER (int): General retailer relationship.
         """
         UNSPECIFIED = 0
         UNKNOWN = 1
-        IMAGE_JPEG = 2
-        IMAGE_GIF = 3
-        IMAGE_PNG = 4
-        FLASH = 5
-        TEXT_HTML = 6
-        PDF = 7
-        MSWORD = 8
-        MSEXCEL = 9
-        RTF = 10
-        AUDIO_WAV = 11
-        AUDIO_MP3 = 12
-        HTML5_AD_ZIP = 13
+        GENERAL_RETAILER = 2
+
+
+class UserListClosingReasonEnum(object):
+    class UserListClosingReason(enum.IntEnum):
+        """
+        Enum describing possible user list closing reasons.
+
+        Attributes:
+          UNSPECIFIED (int): Not specified.
+          UNKNOWN (int): Used for return value only. Represents value unknown in this version.
+          UNUSED (int): The userlist was closed because of not being used for over one year.
+        """
+        UNSPECIFIED = 0
+        UNKNOWN = 1
+        UNUSED = 2
+
+
+class FeedItemStatusEnum(object):
+    class FeedItemStatus(enum.IntEnum):
+        """
+        Possible statuses of a feed item.
+
+        Attributes:
+          UNSPECIFIED (int): Not specified.
+          UNKNOWN (int): Used for return value only. Represents value unknown in this version.
+          ENABLED (int): Feed item is enabled.
+          REMOVED (int): Feed item has been removed.
+        """
+        UNSPECIFIED = 0
+        UNKNOWN = 1
+        ENABLED = 2
+        REMOVED = 3
+
+
+class UserListSizeRangeEnum(object):
+    class UserListSizeRange(enum.IntEnum):
+        """
+        Enum containing possible user list size ranges.
+
+        Attributes:
+          UNSPECIFIED (int): Not specified.
+          UNKNOWN (int): Used for return value only. Represents value unknown in this version.
+          LESS_THAN_FIVE_HUNDRED (int): User list has less than 500 users.
+          LESS_THAN_ONE_THOUSAND (int): User list has number of users in range of 500 to 1000.
+          ONE_THOUSAND_TO_TEN_THOUSAND (int): User list has number of users in range of 1000 to 10000.
+          TEN_THOUSAND_TO_FIFTY_THOUSAND (int): User list has number of users in range of 10000 to 50000.
+          FIFTY_THOUSAND_TO_ONE_HUNDRED_THOUSAND (int): User list has number of users in range of 50000 to 100000.
+          ONE_HUNDRED_THOUSAND_TO_THREE_HUNDRED_THOUSAND (int): User list has number of users in range of 100000 to 300000.
+          THREE_HUNDRED_THOUSAND_TO_FIVE_HUNDRED_THOUSAND (int): User list has number of users in range of 300000 to 500000.
+          FIVE_HUNDRED_THOUSAND_TO_ONE_MILLION (int): User list has number of users in range of 500000 to 1 million.
+          ONE_MILLION_TO_TWO_MILLION (int): User list has number of users in range of 1 to 2 millions.
+          TWO_MILLION_TO_THREE_MILLION (int): User list has number of users in range of 2 to 3 millions.
+          THREE_MILLION_TO_FIVE_MILLION (int): User list has number of users in range of 3 to 5 millions.
+          FIVE_MILLION_TO_TEN_MILLION (int): User list has number of users in range of 5 to 10 millions.
+          TEN_MILLION_TO_TWENTY_MILLION (int): User list has number of users in range of 10 to 20 millions.
+          TWENTY_MILLION_TO_THIRTY_MILLION (int): User list has number of users in range of 20 to 30 millions.
+          THIRTY_MILLION_TO_FIFTY_MILLION (int): User list has number of users in range of 30 to 50 millions.
+          OVER_FIFTY_MILLION (int): User list has over 50 million users.
+        """
+        UNSPECIFIED = 0
+        UNKNOWN = 1
+        LESS_THAN_FIVE_HUNDRED = 2
+        LESS_THAN_ONE_THOUSAND = 3
+        ONE_THOUSAND_TO_TEN_THOUSAND = 4
+        TEN_THOUSAND_TO_FIFTY_THOUSAND = 5
+        FIFTY_THOUSAND_TO_ONE_HUNDRED_THOUSAND = 6
+        ONE_HUNDRED_THOUSAND_TO_THREE_HUNDRED_THOUSAND = 7
+        THREE_HUNDRED_THOUSAND_TO_FIVE_HUNDRED_THOUSAND = 8
+        FIVE_HUNDRED_THOUSAND_TO_ONE_MILLION = 9
+        ONE_MILLION_TO_TWO_MILLION = 10
+        TWO_MILLION_TO_THREE_MILLION = 11
+        THREE_MILLION_TO_FIVE_MILLION = 12
+        FIVE_MILLION_TO_TEN_MILLION = 13
+        TEN_MILLION_TO_TWENTY_MILLION = 14
+        TWENTY_MILLION_TO_THIRTY_MILLION = 15
+        THIRTY_MILLION_TO_FIFTY_MILLION = 16
+        OVER_FIFTY_MILLION = 17
+
+
+class UserListTypeEnum(object):
+    class UserListType(enum.IntEnum):
+        """
+        Enum containing possible user list types.
+
+        Attributes:
+          UNSPECIFIED (int): Not specified.
+          UNKNOWN (int): Used for return value only. Represents value unknown in this version.
+          REMARKETING (int): UserList represented as a collection of conversion types.
+          LOGICAL (int): UserList represented as a combination of other user lists/interests.
+          EXTERNAL_REMARKETING (int): UserList created in the Google Ad Manager platform.
+          RULE_BASED (int): UserList associated with a rule.
+          SIMILAR (int): UserList with users similar to users of another UserList.
+          CRM_BASED (int): UserList of first party CRM data provided by advertiser in the form of
+          emails or other formats.
+        """
+        UNSPECIFIED = 0
+        UNKNOWN = 1
+        REMARKETING = 2
+        LOGICAL = 3
+        EXTERNAL_REMARKETING = 4
+        RULE_BASED = 5
+        SIMILAR = 6
+        CRM_BASED = 7
+
+
+class LocalPlaceholderFieldEnum(object):
+    class LocalPlaceholderField(enum.IntEnum):
+        """
+        Possible values for Local placeholder fields.
+
+        Attributes:
+          UNSPECIFIED (int): Not specified.
+          UNKNOWN (int): Used for return value only. Represents value unknown in this version.
+          DEAL_ID (int): Data Type: STRING. Required. Unique ID.
+          DEAL_NAME (int): Data Type: STRING. Required. Main headline with local deal title to be
+          shown in dynamic ad.
+          SUBTITLE (int): Data Type: STRING. Local deal subtitle to be shown in dynamic ad.
+          DESCRIPTION (int): Data Type: STRING. Description of local deal to be shown in dynamic ad.
+          PRICE (int): Data Type: STRING. Price to be shown in the ad. Highly recommended for
+          dynamic ads. Example: \"100.00 USD\"
+          FORMATTED_PRICE (int): Data Type: STRING. Formatted price to be shown in the ad.
+          Example: \"Starting at $100.00 USD\", \"$80 - $100\"
+          SALE_PRICE (int): Data Type: STRING. Sale price to be shown in the ad.
+          Example: \"80.00 USD\"
+          FORMATTED_SALE_PRICE (int): Data Type: STRING. Formatted sale price to be shown in the ad.
+          Example: \"On sale for $80.00\", \"$60 - $80\"
+          IMAGE_URL (int): Data Type: URL. Image to be displayed in the ad.
+          ADDRESS (int): Data Type: STRING. Complete property address, including postal code.
+          CATEGORY (int): Data Type: STRING. Category of local deal used to group like items
+          together for recommendation engine.
+          CONTEXTUAL_KEYWORDS (int): Data Type: STRING_LIST. Keywords used for product retrieval.
+          FINAL_URLS (int): Data Type: URL_LIST. Required. Final URLs to be used in ad when using
+          Upgraded URLs; the more specific the better (e.g. the individual URL of a
+          specific local deal and its location).
+          FINAL_MOBILE_URLS (int): Data Type: URL_LIST. Final mobile URLs for the ad when using Upgraded
+          URLs.
+          TRACKING_URL (int): Data Type: URL. Tracking template for the ad when using Upgraded URLs.
+          ANDROID_APP_LINK (int): Data Type: STRING. Android app link. Must be formatted as:
+          android-app://{package_id}/{scheme}/{host_path}.
+          The components are defined as follows:
+          package_id: app ID as specified in Google Play.
+          scheme: the scheme to pass to the application. Can be HTTP, or a custom
+            scheme.
+          host_path: identifies the specific content within your application.
+          SIMILAR_DEAL_IDS (int): Data Type: STRING_LIST. List of recommended local deal IDs to show
+          together with this item.
+          IOS_APP_LINK (int): Data Type: STRING. iOS app link.
+          IOS_APP_STORE_ID (int): Data Type: INT64. iOS app store ID.
+        """
+        UNSPECIFIED = 0
+        UNKNOWN = 1
+        DEAL_ID = 2
+        DEAL_NAME = 3
+        SUBTITLE = 4
+        DESCRIPTION = 5
+        PRICE = 6
+        FORMATTED_PRICE = 7
+        SALE_PRICE = 8
+        FORMATTED_SALE_PRICE = 9
+        IMAGE_URL = 10
+        ADDRESS = 11
+        CATEGORY = 12
+        CONTEXTUAL_KEYWORDS = 13
+        FINAL_URLS = 14
+        FINAL_MOBILE_URLS = 15
+        TRACKING_URL = 16
+        ANDROID_APP_LINK = 17
+        SIMILAR_DEAL_IDS = 18
+        IOS_APP_LINK = 19
+        IOS_APP_STORE_ID = 20
 
 
 class TimeTypeEnum(object):
@@ -851,6 +1759,56 @@ class TimeTypeEnum(object):
         FOREVER = 3
 
 
+class PromotionPlaceholderFieldEnum(object):
+    class PromotionPlaceholderField(enum.IntEnum):
+        """
+        Possible values for Promotion placeholder fields.
+
+        Attributes:
+          UNSPECIFIED (int): Not specified.
+          UNKNOWN (int): Used for return value only. Represents value unknown in this version.
+          PROMOTION_TARGET (int): Data Type: STRING. The text that appears on the ad when the extension is
+          shown.
+          DISCOUNT_MODIFIER (int): Data Type: STRING. Allows you to add \"up to\" phrase to the promotion,
+          in case you have variable promotion rates.
+          PERCENT_OFF (int): Data Type: INT64. Takes a value in micros, where 1 million micros
+          represents 1%, and is shown as a percentage when rendered.
+          MONEY_AMOUNT_OFF (int): Data Type: PRICE. Requires a currency and an amount of money.
+          PROMOTION_CODE (int): Data Type: STRING. A string that the user enters to get the discount.
+          ORDERS_OVER_AMOUNT (int): Data Type: PRICE. A minimum spend before the user qualifies for the
+          promotion.
+          PROMOTION_START (int): Data Type: DATE. The start date of the promotion.
+          PROMOTION_END (int): Data Type: DATE. The end date of the promotion.
+          OCCASION (int): Data Type: STRING. Describes the associated event for the promotion using
+          one of the PromotionExtensionOccasion enum values, for example NEW_YEARS.
+          FINAL_URLS (int): Data Type: URL_LIST. Final URLs to be used in the ad when using Upgraded
+          URLs.
+          FINAL_MOBILE_URLS (int): Data Type: URL_LIST. Final mobile URLs for the ad when using Upgraded
+          URLs.
+          TRACKING_URL (int): Data Type: URL. Tracking template for the ad when using Upgraded URLs.
+          LANGUAGE (int): Data Type: STRING. A string represented by a language code for the
+          promotion.
+          FINAL_URL_SUFFIX (int): Data Type: STRING. Final URL suffix for the ad when using parallel
+          tracking.
+        """
+        UNSPECIFIED = 0
+        UNKNOWN = 1
+        PROMOTION_TARGET = 2
+        DISCOUNT_MODIFIER = 3
+        PERCENT_OFF = 4
+        MONEY_AMOUNT_OFF = 5
+        PROMOTION_CODE = 6
+        ORDERS_OVER_AMOUNT = 7
+        PROMOTION_START = 8
+        PROMOTION_END = 9
+        OCCASION = 10
+        FINAL_URLS = 11
+        FINAL_MOBILE_URLS = 12
+        TRACKING_URL = 13
+        LANGUAGE = 14
+        FINAL_URL_SUFFIX = 15
+
+
 class BudgetStatusEnum(object):
     class BudgetStatus(enum.IntEnum):
         """
@@ -866,6 +1824,99 @@ class BudgetStatusEnum(object):
         UNKNOWN = 1
         ENABLED = 2
         REMOVED = 3
+
+
+class FeedMappingStatusEnum(object):
+    class FeedMappingStatus(enum.IntEnum):
+        """
+        Possible statuses of a feed mapping.
+
+        Attributes:
+          UNSPECIFIED (int): Not specified.
+          UNKNOWN (int): Used for return value only. Represents value unknown in this version.
+          ENABLED (int): Feed mapping is enabled.
+          REMOVED (int): Feed mapping has been removed.
+        """
+        UNSPECIFIED = 0
+        UNKNOWN = 1
+        ENABLED = 2
+        REMOVED = 3
+
+
+class CustomPlaceholderFieldEnum(object):
+    class CustomPlaceholderField(enum.IntEnum):
+        """
+        Possible values for Custom placeholder fields.
+
+        Attributes:
+          UNSPECIFIED (int): Not specified.
+          UNKNOWN (int): Used for return value only. Represents value unknown in this version.
+          ID (int): Data Type: STRING. Required. Combination ID and ID2 must be unique per
+          offer.
+          ID2 (int): Data Type: STRING. Combination ID and ID2 must be unique per offer.
+          ITEM_TITLE (int): Data Type: STRING. Required. Main headline with product name to be shown
+          in dynamic ad.
+          ITEM_SUBTITLE (int): Data Type: STRING. Optional text to be shown in the image ad.
+          ITEM_DESCRIPTION (int): Data Type: STRING. Optional description of the product to be shown in the
+          ad.
+          ITEM_ADDRESS (int): Data Type: STRING. Full address of your offer or service, including
+          postal code. This will be used to identify the closest product to the
+          user when there are multiple offers in the feed that are relevant to the
+          user.
+          PRICE (int): Data Type: STRING. Price to be shown in the ad.
+          Example: \"100.00 USD\"
+          FORMATTED_PRICE (int): Data Type: STRING. Formatted price to be shown in the ad.
+          Example: \"Starting at $100.00 USD\", \"$80 - $100\"
+          SALE_PRICE (int): Data Type: STRING. Sale price to be shown in the ad.
+          Example: \"80.00 USD\"
+          FORMATTED_SALE_PRICE (int): Data Type: STRING. Formatted sale price to be shown in the ad.
+          Example: \"On sale for $80.00\", \"$60 - $80\"
+          IMAGE_URL (int): Data Type: URL. Image to be displayed in the ad. Highly recommended for
+          image ads.
+          ITEM_CATEGORY (int): Data Type: STRING. Used as a recommendation engine signal to serve items
+          in the same category.
+          FINAL_URLS (int): Data Type: URL_LIST. Final URLs for the ad when using Upgraded
+          URLs. User will be redirected to these URLs when they click on an ad, or
+          when they click on a specific product for ads that have multiple
+          products.
+          FINAL_MOBILE_URLS (int): Data Type: URL_LIST. Final mobile URLs for the ad when using Upgraded
+          URLs.
+          TRACKING_URL (int): Data Type: URL. Tracking template for the ad when using Upgraded URLs.
+          CONTEXTUAL_KEYWORDS (int): Data Type: STRING_LIST. Keywords used for product retrieval.
+          ANDROID_APP_LINK (int): Data Type: STRING. Android app link. Must be formatted as:
+          android-app://{package_id}/{scheme}/{host_path}.
+          The components are defined as follows:
+          package_id: app ID as specified in Google Play.
+          scheme: the scheme to pass to the application. Can be HTTP, or a custom
+            scheme.
+          host_path: identifies the specific content within your application.
+          SIMILAR_IDS (int): Data Type: STRING_LIST. List of recommended IDs to show together with
+          this item.
+          IOS_APP_LINK (int): Data Type: STRING. iOS app link.
+          IOS_APP_STORE_ID (int): Data Type: INT64. iOS app store ID.
+        """
+        UNSPECIFIED = 0
+        UNKNOWN = 1
+        ID = 2
+        ID2 = 3
+        ITEM_TITLE = 4
+        ITEM_SUBTITLE = 5
+        ITEM_DESCRIPTION = 6
+        ITEM_ADDRESS = 7
+        PRICE = 8
+        FORMATTED_PRICE = 9
+        SALE_PRICE = 10
+        FORMATTED_SALE_PRICE = 11
+        IMAGE_URL = 12
+        ITEM_CATEGORY = 13
+        FINAL_URLS = 14
+        FINAL_MOBILE_URLS = 15
+        TRACKING_URL = 16
+        CONTEXTUAL_KEYWORDS = 17
+        ANDROID_APP_LINK = 18
+        SIMILAR_IDS = 19
+        IOS_APP_LINK = 20
+        IOS_APP_STORE_ID = 21
 
 
 class AdGroupCriterionStatusEnum(object):
@@ -887,6 +1938,23 @@ class AdGroupCriterionStatusEnum(object):
         ENABLED = 2
         PAUSED = 3
         REMOVED = 4
+
+
+class FeedStatusEnum(object):
+    class FeedStatus(enum.IntEnum):
+        """
+        Possible statuses of a feed.
+
+        Attributes:
+          UNSPECIFIED (int): Not specified.
+          UNKNOWN (int): Used for return value only. Represents value unknown in this version.
+          ENABLED (int): Feed is enabled.
+          REMOVED (int): Feed has been removed.
+        """
+        UNSPECIFIED = 0
+        UNKNOWN = 1
+        ENABLED = 2
+        REMOVED = 3
 
 
 class CampaignSharedSetStatusEnum(object):
@@ -965,6 +2033,29 @@ class AccountBudgetProposalStatusEnum(object):
         APPROVED = 4
         CANCELLED = 5
         REJECTED = 6
+
+
+class StructuredSnippetPlaceholderFieldEnum(object):
+    class StructuredSnippetPlaceholderField(enum.IntEnum):
+        """
+        Possible values for Structured Snippet placeholder fields.
+
+        Attributes:
+          UNSPECIFIED (int): Not specified.
+          UNKNOWN (int): Used for return value only. Represents value unknown in this version.
+          HEADER (int): Data Type: STRING. The category of snippet of your products/services.
+          Must match one of the predefined structured snippets headers exactly.
+          See
+          https://developers.google.com/adwords/api
+          /docs/appendix/structured-snippet-headers
+          SNIPPETS (int): Data Type: STRING_LIST. Text values that describe your products/services.
+          All text must be family safe. Special or non-ASCII characters are not
+          permitted. A snippet can be at most 25 characters.
+        """
+        UNSPECIFIED = 0
+        UNKNOWN = 1
+        HEADER = 2
+        SNIPPETS = 3
 
 
 class SlotEnum(object):
@@ -1050,6 +2141,112 @@ class MonthOfYearEnum(object):
         DECEMBER = 13
 
 
+class TravelPlaceholderFieldEnum(object):
+    class TravelPlaceholderField(enum.IntEnum):
+        """
+        Possible values for Travel placeholder fields.
+
+        Attributes:
+          UNSPECIFIED (int): Not specified.
+          UNKNOWN (int): Used for return value only. Represents value unknown in this version.
+          DESTINATION_ID (int): Data Type: STRING. Required. Destination id. Example: PAR, LON.
+          For feed items that only have destination id, destination id must be a
+          unique key. For feed items that have both destination id and origin id,
+          then the combination must be a unique key.
+          ORIGIN_ID (int): Data Type: STRING. Origin id. Example: PAR, LON.
+          Combination of DESTINATION_ID and ORIGIN_ID must be
+          unique per offer.
+          TITLE (int): Data Type: STRING. Required. Main headline with name to be shown in
+          dynamic ad.
+          DESTINATION_NAME (int): Data Type: STRING. The destination name. Shorter names are recommended.
+          ORIGIN_NAME (int): Data Type: STRING. Origin name. Shorter names are recommended.
+          PRICE (int): Data Type: STRING. Price to be shown in the ad. Highly recommended for
+          dynamic ads.
+          Example: \"100.00 USD\"
+          FORMATTED_PRICE (int): Data Type: STRING. Formatted price to be shown in the ad.
+          Example: \"Starting at $100.00 USD\", \"$80 - $100\"
+          SALE_PRICE (int): Data Type: STRING. Sale price to be shown in the ad.
+          Example: \"80.00 USD\"
+          FORMATTED_SALE_PRICE (int): Data Type: STRING. Formatted sale price to be shown in the ad.
+          Example: \"On sale for $80.00\", \"$60 - $80\"
+          IMAGE_URL (int): Data Type: URL. Image to be displayed in the ad.
+          CATEGORY (int): Data Type: STRING. Category of travel offer used to group like items
+          together for recommendation engine.
+          CONTEXTUAL_KEYWORDS (int): Data Type: STRING_LIST. Keywords used for product retrieval.
+          DESTINATION_ADDRESS (int): Data Type: STRING. Address of travel offer, including postal code.
+          FINAL_URL (int): Data Type: URL_LIST. Required. Final URLs to be used in ad, when using
+          Upgraded URLs; the more specific the better (e.g. the individual URL of a
+          specific travel offer and its location).
+          FINAL_MOBILE_URLS (int): Data Type: URL_LIST. Final mobile URLs for the ad when using Upgraded
+          URLs.
+          TRACKING_URL (int): Data Type: URL. Tracking template for the ad when using Upgraded URLs.
+          ANDROID_APP_LINK (int): Data Type: STRING. Android app link. Must be formatted as:
+          android-app://{package_id}/{scheme}/{host_path}.
+          The components are defined as follows:
+          package_id: app ID as specified in Google Play.
+          scheme: the scheme to pass to the application. Can be HTTP, or a custom
+            scheme.
+          host_path: identifies the specific content within your application.
+          SIMILAR_DESTINATION_IDS (int): Data Type: STRING_LIST. List of recommended destination IDs to show
+          together with this item.
+          IOS_APP_LINK (int): Data Type: STRING. iOS app link.
+          IOS_APP_STORE_ID (int): Data Type: INT64. iOS app store ID.
+        """
+        UNSPECIFIED = 0
+        UNKNOWN = 1
+        DESTINATION_ID = 2
+        ORIGIN_ID = 3
+        TITLE = 4
+        DESTINATION_NAME = 5
+        ORIGIN_NAME = 6
+        PRICE = 7
+        FORMATTED_PRICE = 8
+        SALE_PRICE = 9
+        FORMATTED_SALE_PRICE = 10
+        IMAGE_URL = 11
+        CATEGORY = 12
+        CONTEXTUAL_KEYWORDS = 13
+        DESTINATION_ADDRESS = 14
+        FINAL_URL = 15
+        FINAL_MOBILE_URLS = 16
+        TRACKING_URL = 17
+        ANDROID_APP_LINK = 18
+        SIMILAR_DESTINATION_IDS = 19
+        IOS_APP_LINK = 20
+        IOS_APP_STORE_ID = 21
+
+
+class SitelinkPlaceholderFieldEnum(object):
+    class SitelinkPlaceholderField(enum.IntEnum):
+        """
+        Possible values for Sitelink placeholder fields.
+
+        Attributes:
+          UNSPECIFIED (int): Not specified.
+          UNKNOWN (int): Used for return value only. Represents value unknown in this version.
+          TEXT (int): Data Type: STRING. The link text for your sitelink.
+          LINE_1 (int): Data Type: STRING. First line of the sitelink description.
+          LINE_2 (int): Data Type: STRING. Second line of the sitelink description.
+          FINAL_URLS (int): Data Type: URL_LIST. Final URLs for the sitelink when using Upgraded
+          URLs.
+          FINAL_MOBILE_URLS (int): Data Type: URL_LIST. Final Mobile URLs for the sitelink when using
+          Upgraded URLs.
+          TRACKING_URL (int): Data Type: URL. Tracking template for the sitelink when using Upgraded
+          URLs.
+          FINAL_URL_SUFFIX (int): Data Type: STRING. Final URL suffix for sitelink when using parallel
+          tracking.
+        """
+        UNSPECIFIED = 0
+        UNKNOWN = 1
+        TEXT = 2
+        LINE_1 = 3
+        LINE_2 = 4
+        FINAL_URLS = 5
+        FINAL_MOBILE_URLS = 6
+        TRACKING_URL = 7
+        FINAL_URL_SUFFIX = 8
+
+
 class ConversionActionCategoryEnum(object):
     class ConversionActionCategory(enum.IntEnum):
         """
@@ -1073,6 +2270,41 @@ class ConversionActionCategoryEnum(object):
         SIGNUP = 5
         LEAD = 6
         DOWNLOAD = 7
+
+
+class TargetingDimensionEnum(object):
+    class TargetingDimension(enum.IntEnum):
+        """
+        Enum describing possible targeting dimensions.
+
+        Attributes:
+          UNSPECIFIED (int): Not specified.
+          UNKNOWN (int): Used for return value only. Represents value unknown in this version.
+          KEYWORD (int): Keyword criteria, e.g. 'mars cruise'. KEYWORD may be used as a custom bid
+          dimension. Keywords are always a targeting dimension, so may not be set
+          as a target \"ALL\" dimension with TargetRestriction.
+          AUDIENCE (int): Audience criteria, which include user list, user interest, custom
+          affinity,  and custom in market.
+          TOPIC (int): Topic criteria for targeting categories of content, e.g.
+          'category::Animals>Pets' Used for Display and Video targeting.
+          GENDER (int): Criteria for targeting gender.
+          AGE_RANGE (int): Criteria for targeting age ranges.
+          PLACEMENT (int): Placement criteria, which include websites like 'www.flowers4sale.com',
+          as well as mobile applications, mobile app categories, YouTube videos,
+          and YouTube channels.
+          PARENTAL_STATUS (int): Criteria for parental status targeting.
+          INCOME_RANGE (int): Criteria for income range targeting.
+        """
+        UNSPECIFIED = 0
+        UNKNOWN = 1
+        KEYWORD = 2
+        AUDIENCE = 3
+        TOPIC = 4
+        GENDER = 5
+        AGE_RANGE = 6
+        PLACEMENT = 7
+        PARENTAL_STATUS = 8
+        INCOME_RANGE = 9
 
 
 class PolicyApprovalStatusEnum(object):
@@ -1173,6 +2405,21 @@ class BudgetDeliveryMethodEnum(object):
         ACCELERATED = 3
 
 
+class CalloutPlaceholderFieldEnum(object):
+    class CalloutPlaceholderField(enum.IntEnum):
+        """
+        Possible values for Callout placeholder fields.
+
+        Attributes:
+          UNSPECIFIED (int): Not specified.
+          UNKNOWN (int): Used for return value only. Represents value unknown in this version.
+          CALLOUT_TEXT (int): Data Type: STRING. Callout text.
+        """
+        UNSPECIFIED = 0
+        UNKNOWN = 1
+        CALLOUT_TEXT = 2
+
+
 class RecommendationTypeEnum(object):
     class RecommendationType(enum.IntEnum):
         """
@@ -1250,6 +2497,47 @@ class SharedSetStatusEnum(object):
         REMOVED = 3
 
 
+class FeedOriginEnum(object):
+    class FeedOrigin(enum.IntEnum):
+        """
+        Possible values for a feed origin.
+
+        Attributes:
+          UNSPECIFIED (int): Not specified.
+          UNKNOWN (int): Used for return value only. Represents value unknown in this version.
+          USER (int): The FeedAttributes for this Feed are managed by the
+          user. Users can add FeedAttributes to this Feed.
+          GOOGLE (int): The FeedAttributes for an GOOGLE Feed are created by Google. A feed of
+          this type is maintained by Google and will have the correct attributes
+          for the placeholder type of the feed.
+        """
+        UNSPECIFIED = 0
+        UNKNOWN = 1
+        USER = 2
+        GOOGLE = 3
+
+
+class AdCustomizerPlaceholderFieldEnum(object):
+    class AdCustomizerPlaceholderField(enum.IntEnum):
+        """
+        Possible values for Ad Customizers placeholder fields.
+
+        Attributes:
+          UNSPECIFIED (int): Not specified.
+          UNKNOWN (int): Used for return value only. Represents value unknown in this version.
+          INTEGER (int): Data Type: INT64. Integer value to be inserted.
+          PRICE (int): Data Type: STRING. Price value to be inserted.
+          DATE (int): Data Type: DATE_TIME. Date value to be inserted.
+          STRING (int): Data Type: STRING. String value to be inserted.
+        """
+        UNSPECIFIED = 0
+        UNKNOWN = 1
+        INTEGER = 2
+        PRICE = 3
+        DATE = 4
+        STRING = 5
+
+
 class AccountBudgetProposalTypeEnum(object):
     class AccountBudgetProposalType(enum.IntEnum):
         """
@@ -1271,6 +2559,162 @@ class AccountBudgetProposalTypeEnum(object):
         REMOVE = 5
 
 
+class PricePlaceholderFieldEnum(object):
+    class PricePlaceholderField(enum.IntEnum):
+        """
+        Possible values for Price placeholder fields.
+
+        Attributes:
+          UNSPECIFIED (int): Not specified.
+          UNKNOWN (int): Used for return value only. Represents value unknown in this version.
+          TYPE (int): Data Type: STRING. The type of your price feed. Must match one of the
+          predefined price feed type exactly.
+          PRICE_QUALIFIER (int): Data Type: STRING. The qualifier of each price. Must match one of the
+          predefined price qualifiers exactly.
+          TRACKING_TEMPLATE (int): Data Type: URL. Tracking template for the price feed when using Upgraded
+          URLs.
+          LANGUAGE (int): Data Type: STRING. Language of the price feed. Must match one of the
+          available available locale codes exactly.
+          FINAL_URL_SUFFIX (int): Data Type: STRING. Final URL suffix for the price feed when using
+          parallel tracking.
+          ITEM_1_HEADER (int): Data Type: STRING. The header of item 1 of the table.
+          ITEM_1_DESCRIPTION (int): Data Type: STRING. The description of item 1 of the table.
+          ITEM_1_PRICE (int): Data Type: PRICE. The price (money with currency) of item 1 of the table,
+          e.g., 30 USD. The currency must match one of the available currencies.
+          ITEM_1_UNIT (int): Data Type: STRING. The price unit of item 1 of the table. Must match one
+          of the predefined price units.
+          ITEM_1_FINAL_URLS (int): Data Type: URL_LIST. The final URLs of item 1 of the table when using
+          Upgraded URLs.
+          ITEM_1_FINAL_MOBILE_URLS (int): Data Type: URL_LIST. The final mobile URLs of item 1 of the table when
+          using Upgraded URLs.
+          ITEM_2_HEADER (int): Data Type: STRING. The header of item 2 of the table.
+          ITEM_2_DESCRIPTION (int): Data Type: STRING. The description of item 2 of the table.
+          ITEM_2_PRICE (int): Data Type: PRICE. The price (money with currency) of item 2 of the table,
+          e.g., 30 USD. The currency must match one of the available currencies.
+          ITEM_2_UNIT (int): Data Type: STRING. The price unit of item 2 of the table. Must match one
+          of the predefined price units.
+          ITEM_2_FINAL_URLS (int): Data Type: URL_LIST. The final URLs of item 2 of the table when using
+          Upgraded URLs.
+          ITEM_2_FINAL_MOBILE_URLS (int): Data Type: URL_LIST. The final mobile URLs of item 2 of the table when
+          using Upgraded URLs.
+          ITEM_3_HEADER (int): Data Type: STRING. The header of item 3 of the table.
+          ITEM_3_DESCRIPTION (int): Data Type: STRING. The description of item 3 of the table.
+          ITEM_3_PRICE (int): Data Type: PRICE. The price (money with currency) of item 3 of the table,
+          e.g., 30 USD. The currency must match one of the available currencies.
+          ITEM_3_UNIT (int): Data Type: STRING. The price unit of item 3 of the table. Must match one
+          of the predefined price units.
+          ITEM_3_FINAL_URLS (int): Data Type: URL_LIST. The final URLs of item 3 of the table when using
+          Upgraded URLs.
+          ITEM_3_FINAL_MOBILE_URLS (int): Data Type: URL_LIST. The final mobile URLs of item 3 of the table when
+          using Upgraded URLs.
+          ITEM_4_HEADER (int): Data Type: STRING. The header of item 4 of the table.
+          ITEM_4_DESCRIPTION (int): Data Type: STRING. The description of item 4 of the table.
+          ITEM_4_PRICE (int): Data Type: PRICE. The price (money with currency) of item 4 of the table,
+          e.g., 30 USD. The currency must match one of the available currencies.
+          ITEM_4_UNIT (int): Data Type: STRING. The price unit of item 4 of the table. Must match one
+          of the predefined price units.
+          ITEM_4_FINAL_URLS (int): Data Type: URL_LIST. The final URLs of item 4 of the table when using
+          Upgraded URLs.
+          ITEM_4_FINAL_MOBILE_URLS (int): Data Type: URL_LIST. The final mobile URLs of item 4 of the table when
+          using Upgraded URLs.
+          ITEM_5_HEADER (int): Data Type: STRING. The header of item 5 of the table.
+          ITEM_5_DESCRIPTION (int): Data Type: STRING. The description of item 5 of the table.
+          ITEM_5_PRICE (int): Data Type: PRICE. The price (money with currency) of item 5 of the table,
+          e.g., 30 USD. The currency must match one of the available currencies.
+          ITEM_5_UNIT (int): Data Type: STRING. The price unit of item 5 of the table. Must match one
+          of the predefined price units.
+          ITEM_5_FINAL_URLS (int): Data Type: URL_LIST. The final URLs of item 5 of the table when using
+          Upgraded URLs.
+          ITEM_5_FINAL_MOBILE_URLS (int): Data Type: URL_LIST. The final mobile URLs of item 5 of the table when
+          using Upgraded URLs.
+          ITEM_6_HEADER (int): Data Type: STRING. The header of item 6 of the table.
+          ITEM_6_DESCRIPTION (int): Data Type: STRING. The description of item 6 of the table.
+          ITEM_6_PRICE (int): Data Type: PRICE. The price (money with currency) of item 6 of the table,
+          e.g., 30 USD. The currency must match one of the available currencies.
+          ITEM_6_UNIT (int): Data Type: STRING. The price unit of item 6 of the table. Must match one
+          of the predefined price units.
+          ITEM_6_FINAL_URLS (int): Data Type: URL_LIST. The final URLs of item 6 of the table when using
+          Upgraded URLs.
+          ITEM_6_FINAL_MOBILE_URLS (int): Data Type: URL_LIST. The final mobile URLs of item 6 of the table when
+          using Upgraded URLs.
+          ITEM_7_HEADER (int): Data Type: STRING. The header of item 7 of the table.
+          ITEM_7_DESCRIPTION (int): Data Type: STRING. The description of item 7 of the table.
+          ITEM_7_PRICE (int): Data Type: PRICE. The price (money with currency) of item 7 of the table,
+          e.g., 30 USD. The currency must match one of the available currencies.
+          ITEM_7_UNIT (int): Data Type: STRING. The price unit of item 7 of the table. Must match one
+          of the predefined price units.
+          ITEM_7_FINAL_URLS (int): Data Type: URL_LIST. The final URLs of item 7 of the table when using
+          Upgraded URLs.
+          ITEM_7_FINAL_MOBILE_URLS (int): Data Type: URL_LIST. The final mobile URLs of item 7 of the table when
+          using Upgraded URLs.
+          ITEM_8_HEADER (int): Data Type: STRING. The header of item 8 of the table.
+          ITEM_8_DESCRIPTION (int): Data Type: STRING. The description of item 8 of the table.
+          ITEM_8_PRICE (int): Data Type: PRICE. The price (money with currency) of item 8 of the table,
+          e.g., 30 USD. The currency must match one of the available currencies.
+          ITEM_8_UNIT (int): Data Type: STRING. The price unit of item 8 of the table. Must match one
+          of the predefined price units.
+          ITEM_8_FINAL_URLS (int): Data Type: URL_LIST. The final URLs of item 8 of the table when using
+          Upgraded URLs.
+          ITEM_8_FINAL_MOBILE_URLS (int): Data Type: URL_LIST. The final mobile URLs of item 8 of the table when
+          using Upgraded URLs.
+        """
+        UNSPECIFIED = 0
+        UNKNOWN = 1
+        TYPE = 2
+        PRICE_QUALIFIER = 3
+        TRACKING_TEMPLATE = 4
+        LANGUAGE = 5
+        FINAL_URL_SUFFIX = 6
+        ITEM_1_HEADER = 100
+        ITEM_1_DESCRIPTION = 101
+        ITEM_1_PRICE = 102
+        ITEM_1_UNIT = 103
+        ITEM_1_FINAL_URLS = 104
+        ITEM_1_FINAL_MOBILE_URLS = 105
+        ITEM_2_HEADER = 200
+        ITEM_2_DESCRIPTION = 201
+        ITEM_2_PRICE = 202
+        ITEM_2_UNIT = 203
+        ITEM_2_FINAL_URLS = 204
+        ITEM_2_FINAL_MOBILE_URLS = 205
+        ITEM_3_HEADER = 300
+        ITEM_3_DESCRIPTION = 301
+        ITEM_3_PRICE = 302
+        ITEM_3_UNIT = 303
+        ITEM_3_FINAL_URLS = 304
+        ITEM_3_FINAL_MOBILE_URLS = 305
+        ITEM_4_HEADER = 400
+        ITEM_4_DESCRIPTION = 401
+        ITEM_4_PRICE = 402
+        ITEM_4_UNIT = 403
+        ITEM_4_FINAL_URLS = 404
+        ITEM_4_FINAL_MOBILE_URLS = 405
+        ITEM_5_HEADER = 500
+        ITEM_5_DESCRIPTION = 501
+        ITEM_5_PRICE = 502
+        ITEM_5_UNIT = 503
+        ITEM_5_FINAL_URLS = 504
+        ITEM_5_FINAL_MOBILE_URLS = 505
+        ITEM_6_HEADER = 600
+        ITEM_6_DESCRIPTION = 601
+        ITEM_6_PRICE = 602
+        ITEM_6_UNIT = 603
+        ITEM_6_FINAL_URLS = 604
+        ITEM_6_FINAL_MOBILE_URLS = 605
+        ITEM_7_HEADER = 700
+        ITEM_7_DESCRIPTION = 701
+        ITEM_7_PRICE = 702
+        ITEM_7_UNIT = 703
+        ITEM_7_FINAL_URLS = 704
+        ITEM_7_FINAL_MOBILE_URLS = 705
+        ITEM_8_HEADER = 800
+        ITEM_8_DESCRIPTION = 801
+        ITEM_8_PRICE = 802
+        ITEM_8_UNIT = 803
+        ITEM_8_FINAL_URLS = 804
+        ITEM_8_FINAL_MOBILE_URLS = 805
+
+
 class ConversionActionStatusEnum(object):
     class ConversionActionStatus(enum.IntEnum):
         """
@@ -1289,6 +2733,23 @@ class ConversionActionStatusEnum(object):
         ENABLED = 2
         REMOVED = 3
         HIDDEN = 4
+
+
+class UserListMembershipStatusEnum(object):
+    class UserListMembershipStatus(enum.IntEnum):
+        """
+        Enum containing possible user list membership statuses.
+
+        Attributes:
+          UNSPECIFIED (int): Not specified.
+          UNKNOWN (int): Used for return value only. Represents value unknown in this version.
+          OPEN (int): Open status - List is accruing members and can be targeted to.
+          CLOSED (int): Closed status - No new members being added. Cannot be used for targeting.
+        """
+        UNSPECIFIED = 0
+        UNKNOWN = 1
+        OPEN = 2
+        CLOSED = 3
 
 
 class BillingSetupStatusEnum(object):
@@ -1351,8 +2812,15 @@ class CriterionTypeEnum(object):
           PARENTAL_STATUS (int): Parental status.
           YOUTUBE_VIDEO (int): YouTube Video.
           YOUTUBE_CHANNEL (int): YouTube Channel.
+          USER_LIST (int): User list.
           PROXIMITY (int): Proximity.
-          TOPIC (int): A topic target on the content network (e.g. \"Pets & Animals\").
+          TOPIC (int): A topic target on the display network (e.g. \"Pets & Animals\").
+          LISTING_SCOPE (int): Listing scope to target.
+          LANGUAGE (int): Language.
+          IP_BLOCK (int): IpBlock.
+          CONTENT_LABEL (int): Content Label for category exclusion.
+          CARRIER (int): Carrier.
+          USER_INTEREST (int): A category the user is interested in.
         """
         UNSPECIFIED = 0
         UNKNOWN = 1
@@ -1368,8 +2836,15 @@ class CriterionTypeEnum(object):
         PARENTAL_STATUS = 13
         YOUTUBE_VIDEO = 14
         YOUTUBE_CHANNEL = 15
+        USER_LIST = 16
         PROXIMITY = 17
         TOPIC = 18
+        LISTING_SCOPE = 19
+        LANGUAGE = 20
+        IP_BLOCK = 21
+        CONTENT_LABEL = 22
+        CARRIER = 23
+        USER_INTEREST = 24
 
 
 class PolicyReviewStatusEnum(object):
@@ -1413,7 +2888,9 @@ class AdTypeEnum(object):
           HOTEL_AD (int): The ad is a hotel ad.
           SHOPPING_SMART_AD (int): The ad is a Smart Shopping ad.
           SHOPPING_PRODUCT_AD (int): The ad is a standard Shopping ad.
-          VIDEO_OUTSTREAM (int): Video outstream ad.
+          VIDEO_AD (int): The ad is a video ad.
+          GMAIL_AD (int): This ad is a Gmail ad.
+          IMAGE_AD (int): This ad is an Image ad.
         """
         UNSPECIFIED = 0
         UNKNOWN = 1
@@ -1426,7 +2903,9 @@ class AdTypeEnum(object):
         HOTEL_AD = 8
         SHOPPING_SMART_AD = 9
         SHOPPING_PRODUCT_AD = 10
-        VIDEO_OUTSTREAM = 11
+        VIDEO_AD = 12
+        GMAIL_AD = 13
+        IMAGE_AD = 14
 
 
 class AdGroupTypeEnum(object):
@@ -1507,6 +2986,100 @@ class ManagerLinkStatusEnum(object):
         CANCELED = 6
 
 
+class UserInterestTaxonomyTypeEnum(object):
+    class UserInterestTaxonomyType(enum.IntEnum):
+        """
+        Enum containing the possible UserInterestTaxonomyTypes.
+
+        Attributes:
+          UNSPECIFIED (int): Not specified.
+          UNKNOWN (int): Used for return value only. Represents value unknown in this version.
+          AFFINITY (int): The affinity for this user interest.
+          IN_MARKET (int): The market for this user interest.
+          MOBILE_APP_INSTALL_USER (int): Users known to have installed applications in the specified categories.
+          VERTICAL_GEO (int): The geographical location of the interest-based vertical.
+          NEW_SMART_PHONE_USER (int): User interest criteria for new smart phone users.
+        """
+        UNSPECIFIED = 0
+        UNKNOWN = 1
+        AFFINITY = 2
+        IN_MARKET = 3
+        MOBILE_APP_INSTALL_USER = 4
+        VERTICAL_GEO = 5
+        NEW_SMART_PHONE_USER = 6
+
+
+class HotelPlaceholderFieldEnum(object):
+    class HotelPlaceholderField(enum.IntEnum):
+        """
+        Possible values for Hotel placeholder fields.
+
+        Attributes:
+          UNSPECIFIED (int): Not specified.
+          UNKNOWN (int): Used for return value only. Represents value unknown in this version.
+          PROPERTY_ID (int): Data Type: STRING. Required. Unique ID.
+          PROPERTY_NAME (int): Data Type: STRING. Required. Main headline with property name to be shown
+          in dynamic ad.
+          DESTINATION_NAME (int): Data Type: STRING. Name of destination to be shown in dynamic ad.
+          DESCRIPTION (int): Data Type: STRING. Description of destination to be shown in dynamic ad.
+          ADDRESS (int): Data Type: STRING. Complete property address, including postal code.
+          PRICE (int): Data Type: STRING. Price to be shown in the ad.
+          Example: \"100.00 USD\"
+          FORMATTED_PRICE (int): Data Type: STRING. Formatted price to be shown in the ad.
+          Example: \"Starting at $100.00 USD\", \"$80 - $100\"
+          SALE_PRICE (int): Data Type: STRING. Sale price to be shown in the ad.
+          Example: \"80.00 USD\"
+          FORMATTED_SALE_PRICE (int): Data Type: STRING. Formatted sale price to be shown in the ad.
+          Example: \"On sale for $80.00\", \"$60 - $80\"
+          IMAGE_URL (int): Data Type: URL. Image to be displayed in the ad.
+          CATEGORY (int): Data Type: STRING. Category of property used to group like items together
+          for recommendation engine.
+          STAR_RATING (int): Data Type: INT64. Star rating (1 to 5) used to group like items
+          together for recommendation engine.
+          CONTEXTUAL_KEYWORDS (int): Data Type: STRING_LIST. Keywords used for product retrieval.
+          FINAL_URLS (int): Data Type: URL_LIST. Required. Final URLs for the ad when using Upgraded
+          URLs. User will be redirected to these URLs when they click on an ad, or
+          when they click on a specific flight for ads that show multiple
+          flights.
+          FINAL_MOBILE_URLS (int): Data Type: URL_LIST. Final mobile URLs for the ad when using Upgraded
+          URLs.
+          TRACKING_URL (int): Data Type: URL. Tracking template for the ad when using Upgraded URLs.
+          ANDROID_APP_LINK (int): Data Type: STRING. Android app link. Must be formatted as:
+          android-app://{package_id}/{scheme}/{host_path}.
+          The components are defined as follows:
+          package_id: app ID as specified in Google Play.
+          scheme: the scheme to pass to the application. Can be HTTP, or a custom
+            scheme.
+          host_path: identifies the specific content within your application.
+          SIMILAR_PROPERTY_IDS (int): Data Type: STRING_LIST. List of recommended property IDs to show together
+          with this item.
+          IOS_APP_LINK (int): Data Type: STRING. iOS app link.
+          IOS_APP_STORE_ID (int): Data Type: INT64. iOS app store ID.
+        """
+        UNSPECIFIED = 0
+        UNKNOWN = 1
+        PROPERTY_ID = 2
+        PROPERTY_NAME = 3
+        DESTINATION_NAME = 4
+        DESCRIPTION = 5
+        ADDRESS = 6
+        PRICE = 7
+        FORMATTED_PRICE = 8
+        SALE_PRICE = 9
+        FORMATTED_SALE_PRICE = 10
+        IMAGE_URL = 11
+        CATEGORY = 12
+        STAR_RATING = 13
+        CONTEXTUAL_KEYWORDS = 14
+        FINAL_URLS = 15
+        FINAL_MOBILE_URLS = 16
+        TRACKING_URL = 17
+        ANDROID_APP_LINK = 18
+        SIMILAR_PROPERTY_IDS = 19
+        IOS_APP_LINK = 20
+        IOS_APP_STORE_ID = 21
+
+
 class AdGroupAdRotationModeEnum(object):
     class AdGroupAdRotationMode(enum.IntEnum):
         """
@@ -1524,6 +3097,42 @@ class AdGroupAdRotationModeEnum(object):
         UNKNOWN = 1
         OPTIMIZE = 2
         ROTATE_FOREVER = 3
+
+
+class AppPlaceholderFieldEnum(object):
+    class AppPlaceholderField(enum.IntEnum):
+        """
+        Possible values for App placeholder fields.
+
+        Attributes:
+          UNSPECIFIED (int): Not specified.
+          UNKNOWN (int): Used for return value only. Represents value unknown in this version.
+          STORE (int): Data Type: INT64. The application store that the target application
+          belongs to. Valid values are: 1 = Apple iTunes Store; 2 = Google Play
+          Store.
+          ID (int): Data Type: STRING. The store-specific ID for the target application.
+          LINK_TEXT (int): Data Type: STRING. The visible text displayed when the link is rendered
+          in an ad.
+          URL (int): Data Type: STRING. The destination URL of the in-app link.
+          FINAL_URLS (int): Data Type: URL_LIST. Final URLs for the in-app link when using Upgraded
+          URLs.
+          FINAL_MOBILE_URLS (int): Data Type: URL_LIST. Final Mobile URLs for the in-app link when using
+          Upgraded URLs.
+          TRACKING_URL (int): Data Type: URL. Tracking template for the in-app link when using Upgraded
+          URLs.
+          FINAL_URL_SUFFIX (int): Data Type: STRING. Final URL suffix for the in-app link when using
+          parallel tracking.
+        """
+        UNSPECIFIED = 0
+        UNKNOWN = 1
+        STORE = 2
+        ID = 3
+        LINK_TEXT = 4
+        URL = 5
+        FINAL_URLS = 6
+        FINAL_MOBILE_URLS = 7
+        TRACKING_URL = 8
+        FINAL_URL_SUFFIX = 9
 
 
 class SpendingLimitTypeEnum(object):
@@ -1569,6 +3178,28 @@ class DataDrivenModelStatusEnum(object):
         NEVER_GENERATED = 5
 
 
+class SearchTermTargetingStatusEnum(object):
+    class SearchTermTargetingStatus(enum.IntEnum):
+        """
+        Indicates whether the search term is one of your targeted or excluded
+        keywords.
+
+        Attributes:
+          UNSPECIFIED (int): Not specified.
+          UNKNOWN (int): Used for return value only. Represents value unknown in this version.
+          ADDED (int): Search term is added to targeted keywords.
+          EXCLUDED (int): Search term matches a negative keyword.
+          ADDED_EXCLUDED (int): Search term has been both added and excluded.
+          NONE (int): Search term is neither targeted nor excluded.
+        """
+        UNSPECIFIED = 0
+        UNKNOWN = 1
+        ADDED = 2
+        EXCLUDED = 3
+        ADDED_EXCLUDED = 4
+        NONE = 5
+
+
 class ChangeStatusOperationEnum(object):
     class ChangeStatusOperation(enum.IntEnum):
         """
@@ -1589,33 +3220,69 @@ class ChangeStatusOperationEnum(object):
         REMOVED = 4
 
 
-class AdvertisingChannelSubTypeEnum(object):
-    class AdvertisingChannelSubType(enum.IntEnum):
+class UserListAccessStatusEnum(object):
+    class UserListAccessStatus(enum.IntEnum):
         """
-        Enum describing the different channel subtypes.
+        Enum containing possible user list access statuses.
 
         Attributes:
           UNSPECIFIED (int): Not specified.
-          UNKNOWN (int): Used as a return value only. Represents value unknown in this version.
-          SEARCH_MOBILE_APP (int): Mobile app campaigns for Search.
-          DISPLAY_MOBILE_APP (int): Mobile app campaigns for Display.
-          SEARCH_EXPRESS (int): AdWords express campaigns for search.
-          DISPLAY_EXPRESS (int): AdWords Express campaigns for display.
-          SHOPPING_SMART_ADS (int): Smart Shopping campaigns.
-          DISPLAY_GMAIL_AD (int): Gmail Ad campaigns.
-          DISPLAY_SMART_CAMPAIGN (int): Smart display campaigns.
-          VIDEO_OUTSTREAM (int): Video Outstream campaigns.
+          UNKNOWN (int): Used for return value only. Represents value unknown in this version.
+          ENABLED (int): The access is enabled.
+          DISABLED (int): The access is disabled.
         """
         UNSPECIFIED = 0
         UNKNOWN = 1
-        SEARCH_MOBILE_APP = 2
-        DISPLAY_MOBILE_APP = 3
-        SEARCH_EXPRESS = 4
-        DISPLAY_EXPRESS = 5
-        SHOPPING_SMART_ADS = 6
-        DISPLAY_GMAIL_AD = 7
-        DISPLAY_SMART_CAMPAIGN = 8
-        VIDEO_OUTSTREAM = 9
+        ENABLED = 2
+        DISABLED = 3
+
+
+class MessagePlaceholderFieldEnum(object):
+    class MessagePlaceholderField(enum.IntEnum):
+        """
+        Possible values for Message placeholder fields.
+
+        Attributes:
+          UNSPECIFIED (int): Not specified.
+          UNKNOWN (int): Used for return value only. Represents value unknown in this version.
+          BUSINESS_NAME (int): Data Type: STRING. The name of your business.
+          COUNTRY_CODE (int): Data Type: STRING. Country code of phone number.
+          PHONE_NUMBER (int): Data Type: STRING. A phone number that's capable of sending and receiving
+          text messages.
+          MESSAGE_EXTENSION_TEXT (int): Data Type: STRING. The text that will go in your click-to-message ad.
+          MESSAGE_TEXT (int): Data Type: STRING. The message text automatically shows in people's
+          messaging apps when they tap to send you a message.
+        """
+        UNSPECIFIED = 0
+        UNKNOWN = 1
+        BUSINESS_NAME = 2
+        COUNTRY_CODE = 3
+        PHONE_NUMBER = 4
+        MESSAGE_EXTENSION_TEXT = 5
+        MESSAGE_TEXT = 6
+
+
+class AccessReasonEnum(object):
+    class AccessReason(enum.IntEnum):
+        """
+        Enum describing possible access reasons.
+
+        Attributes:
+          UNSPECIFIED (int): Not specified.
+          UNKNOWN (int): Used for return value only. Represents value unknown in this version.
+          OWNED (int): The entity is owned by the user.
+          SHARED (int): The entity is shared to the user.
+          LICENSED (int): The entity is licensed to the user.
+          SUBSCRIBED (int): The user subscribed to the entity.
+          AFFILIATED (int): The entity is accessible to the user.
+        """
+        UNSPECIFIED = 0
+        UNKNOWN = 1
+        OWNED = 2
+        SHARED = 3
+        LICENSED = 4
+        SUBSCRIBED = 5
+        AFFILIATED = 6
 
 
 class AdNetworkTypeEnum(object):
@@ -1680,30 +3347,6 @@ class AccountBudgetStatusEnum(object):
         CANCELLED = 4
 
 
-class AdvertisingChannelTypeEnum(object):
-    class AdvertisingChannelType(enum.IntEnum):
-        """
-        Enum describing the various advertising channel types.
-
-        Attributes:
-          UNSPECIFIED (int): Not specified.
-          UNKNOWN (int): Used for return value only. Represents value unknown in this version.
-          SEARCH (int): Search Network. Includes display bundled, and Search+ campaigns.
-          DISPLAY (int): Google Display Network only.
-          SHOPPING (int): Shopping campaigns serve on the shopping property
-          and on google.com search results.
-          HOTEL (int): Hotel Ads campaigns.
-          VIDEO (int): Video campaigns.
-        """
-        UNSPECIFIED = 0
-        UNKNOWN = 1
-        SEARCH = 2
-        DISPLAY = 3
-        SHOPPING = 4
-        HOTEL = 5
-        VIDEO = 6
-
-
 class MediaTypeEnum(object):
     class MediaType(enum.IntEnum):
         """
@@ -1750,6 +3393,45 @@ class AdGroupAdStatusEnum(object):
         ENABLED = 2
         PAUSED = 3
         REMOVED = 4
+
+
+class FeedAttributeTypeEnum(object):
+    class FeedAttributeType(enum.IntEnum):
+        """
+        Possible data types for a feed attribute.
+
+        Attributes:
+          UNSPECIFIED (int): Not specified.
+          UNKNOWN (int): Used for return value only. Represents value unknown in this version.
+          INT64 (int): Int64.
+          DOUBLE (int): Double.
+          STRING (int): String.
+          BOOLEAN (int): Boolean.
+          URL (int): Url.
+          DATE_TIME (int): Datetime.
+          INT64_LIST (int): Int64 list.
+          DOUBLE_LIST (int): Double (8 bytes) list.
+          STRING_LIST (int): String list.
+          BOOLEAN_LIST (int): Boolean list.
+          URL_LIST (int): Url list.
+          DATE_TIME_LIST (int): Datetime list.
+          PRICE (int): Price.
+        """
+        UNSPECIFIED = 0
+        UNKNOWN = 1
+        INT64 = 2
+        DOUBLE = 3
+        STRING = 4
+        BOOLEAN = 5
+        URL = 6
+        DATE_TIME = 7
+        INT64_LIST = 8
+        DOUBLE_LIST = 9
+        STRING_LIST = 10
+        BOOLEAN_LIST = 11
+        URL_LIST = 12
+        DATE_TIME_LIST = 13
+        PRICE = 14
 
 
 class AdGroupBidModifierErrorEnum(object):
@@ -1840,6 +3522,56 @@ class AdxErrorEnum(object):
         UNSPECIFIED = 0
         UNKNOWN = 1
         UNSUPPORTED_FEATURE = 2
+
+
+class FeedMappingErrorEnum(object):
+    class FeedMappingError(enum.IntEnum):
+        """
+        Enum describing possible feed item errors.
+
+        Attributes:
+          UNSPECIFIED (int): Enum unspecified.
+          UNKNOWN (int): The received error code is not known in this version.
+          INVALID_PLACEHOLDER_FIELD (int): The given placeholder field does not exist.
+          INVALID_CRITERION_FIELD (int): The given criterion field does not exist.
+          INVALID_PLACEHOLDER_TYPE (int): The given placeholder type does not exist.
+          INVALID_CRITERION_TYPE (int): The given criterion type does not exist.
+          NO_ATTRIBUTE_FIELD_MAPPINGS (int): A feed mapping must contain at least one attribute field mapping.
+          FEED_ATTRIBUTE_TYPE_MISMATCH (int): The type of the feed attribute referenced in the attribute field mapping
+          must match the type of the placeholder field.
+          CANNOT_OPERATE_ON_MAPPINGS_FOR_SYSTEM_GENERATED_FEED (int): A feed mapping for a system generated feed cannot be operated on.
+          MULTIPLE_MAPPINGS_FOR_PLACEHOLDER_TYPE (int): Only one feed mapping for a placeholder type is allowed per feed or
+          customer (depending on the placeholder type).
+          MULTIPLE_MAPPINGS_FOR_CRITERION_TYPE (int): Only one feed mapping for a criterion type is allowed per customer.
+          MULTIPLE_MAPPINGS_FOR_PLACEHOLDER_FIELD (int): Only one feed attribute mapping for a placeholder field is allowed
+          (depending on the placeholder type).
+          MULTIPLE_MAPPINGS_FOR_CRITERION_FIELD (int): Only one feed attribute mapping for a criterion field is allowed
+          (depending on the criterion type).
+          UNEXPECTED_ATTRIBUTE_FIELD_MAPPINGS (int): This feed mapping may not contain any explicit attribute field mappings.
+          LOCATION_PLACEHOLDER_ONLY_FOR_PLACES_FEEDS (int): Location placeholder feed mappings can only be created for Places feeds.
+          CANNOT_MODIFY_MAPPINGS_FOR_TYPED_FEED (int): Mappings for typed feeds cannot be modified.
+          INVALID_PLACEHOLDER_TYPE_FOR_NON_SYSTEM_GENERATED_FEED (int): The given placeholder type can only be mapped to system generated feeds.
+          INVALID_PLACEHOLDER_TYPE_FOR_SYSTEM_GENERATED_FEED_TYPE (int): The given placeholder type cannot be mapped to a system generated feed
+          with the given type.
+        """
+        UNSPECIFIED = 0
+        UNKNOWN = 1
+        INVALID_PLACEHOLDER_FIELD = 2
+        INVALID_CRITERION_FIELD = 3
+        INVALID_PLACEHOLDER_TYPE = 4
+        INVALID_CRITERION_TYPE = 5
+        NO_ATTRIBUTE_FIELD_MAPPINGS = 7
+        FEED_ATTRIBUTE_TYPE_MISMATCH = 8
+        CANNOT_OPERATE_ON_MAPPINGS_FOR_SYSTEM_GENERATED_FEED = 9
+        MULTIPLE_MAPPINGS_FOR_PLACEHOLDER_TYPE = 10
+        MULTIPLE_MAPPINGS_FOR_CRITERION_TYPE = 11
+        MULTIPLE_MAPPINGS_FOR_PLACEHOLDER_FIELD = 12
+        MULTIPLE_MAPPINGS_FOR_CRITERION_FIELD = 13
+        UNEXPECTED_ATTRIBUTE_FIELD_MAPPINGS = 14
+        LOCATION_PLACEHOLDER_ONLY_FOR_PLACES_FEEDS = 15
+        CANNOT_MODIFY_MAPPINGS_FOR_TYPED_FEED = 16
+        INVALID_PLACEHOLDER_TYPE_FOR_NON_SYSTEM_GENERATED_FEED = 17
+        INVALID_PLACEHOLDER_TYPE_FOR_SYSTEM_GENERATED_FEED_TYPE = 18
 
 
 class ListOperationErrorEnum(object):
@@ -2090,6 +3822,58 @@ class AdGroupCriterionErrorEnum(object):
         LISTING_GROUP_ADD_MAY_ONLY_USE_TEMP_ID = 47
 
 
+class FeedErrorEnum(object):
+    class FeedError(enum.IntEnum):
+        """
+        Enum describing possible feed errors.
+
+        Attributes:
+          UNSPECIFIED (int): Enum unspecified.
+          UNKNOWN (int): The received error code is not known in this version.
+          ATTRIBUTE_NAMES_NOT_UNIQUE (int): The names of the FeedAttributes must be unique.
+          ATTRIBUTES_DO_NOT_MATCH_EXISTING_ATTRIBUTES (int): The attribute list must be an exact copy of the existing list if the
+          attribute ID's are present.
+          CANNOT_SPECIFY_USER_ORIGIN_FOR_SYSTEM_FEED (int): Cannot specify USER origin for a system generated feed.
+          CANNOT_SPECIFY_GOOGLE_ORIGIN_FOR_NON_SYSTEM_FEED (int): Cannot specify GOOGLE origin for a non-system generated feed.
+          CANNOT_SPECIFY_FEED_ATTRIBUTES_FOR_SYSTEM_FEED (int): Cannot specify feed attributes for system feed.
+          CANNOT_UPDATE_FEED_ATTRIBUTES_WITH_ORIGIN_GOOGLE (int): Cannot update FeedAttributes on feed with origin GOOGLE.
+          FEED_REMOVED (int): The given ID refers to a removed Feed. Removed Feeds are immutable.
+          INVALID_ORIGIN_VALUE (int): The origin of the feed is not valid for the client.
+          FEED_ORIGIN_IS_NOT_USER (int): A user can only create and modify feeds with USER origin.
+          INVALID_AUTH_TOKEN_FOR_EMAIL (int): Invalid auth token for the given email.
+          INVALID_EMAIL (int): Invalid email specified.
+          DUPLICATE_FEED_NAME (int): Feed name matches that of another active Feed.
+          INVALID_FEED_NAME (int): Name of feed is not allowed.
+          MISSING_OAUTH_INFO (int): Missing OAuthInfo.
+          NEW_ATTRIBUTE_CANNOT_BE_PART_OF_UNIQUE_KEY (int): New FeedAttributes must not affect the unique key.
+          TOO_MANY_ATTRIBUTES (int): Too many FeedAttributes for a Feed.
+          INVALID_BUSINESS_ACCOUNT (int): The business account is not valid.
+          BUSINESS_ACCOUNT_CANNOT_ACCESS_LOCATION_ACCOUNT (int): Business account cannot access Google My Business account.
+          INVALID_AFFILIATE_CHAIN_ID (int): Invalid chain ID provided for affiliate location feed.
+        """
+        UNSPECIFIED = 0
+        UNKNOWN = 1
+        ATTRIBUTE_NAMES_NOT_UNIQUE = 2
+        ATTRIBUTES_DO_NOT_MATCH_EXISTING_ATTRIBUTES = 3
+        CANNOT_SPECIFY_USER_ORIGIN_FOR_SYSTEM_FEED = 4
+        CANNOT_SPECIFY_GOOGLE_ORIGIN_FOR_NON_SYSTEM_FEED = 5
+        CANNOT_SPECIFY_FEED_ATTRIBUTES_FOR_SYSTEM_FEED = 6
+        CANNOT_UPDATE_FEED_ATTRIBUTES_WITH_ORIGIN_GOOGLE = 7
+        FEED_REMOVED = 8
+        INVALID_ORIGIN_VALUE = 9
+        FEED_ORIGIN_IS_NOT_USER = 10
+        INVALID_AUTH_TOKEN_FOR_EMAIL = 11
+        INVALID_EMAIL = 12
+        DUPLICATE_FEED_NAME = 13
+        INVALID_FEED_NAME = 14
+        MISSING_OAUTH_INFO = 15
+        NEW_ATTRIBUTE_CANNOT_BE_PART_OF_UNIQUE_KEY = 16
+        TOO_MANY_ATTRIBUTES = 17
+        INVALID_BUSINESS_ACCOUNT = 18
+        BUSINESS_ACCOUNT_CANNOT_ACCESS_LOCATION_ACCOUNT = 19
+        INVALID_AFFILIATE_CHAIN_ID = 20
+
+
 class CampaignSharedSetErrorEnum(object):
     class CampaignSharedSetError(enum.IntEnum):
         """
@@ -2202,6 +3986,78 @@ class MediaFileErrorEnum(object):
         YOU_TUBE_VIDEO_NOT_FOUND = 24
 
 
+class KeywordPlanIdeaErrorEnum(object):
+    class KeywordPlanIdeaError(enum.IntEnum):
+        """
+        Enum describing possible errors from KeywordPlanIdeaService.
+
+        Attributes:
+          UNSPECIFIED (int): Enum unspecified.
+          UNKNOWN (int): The received error code is not known in this version.
+          URL_CRAWL_ERROR (int): Error when crawling the input URL.
+          INVALID_VALUE (int): The input has an invalid value.
+        """
+        UNSPECIFIED = 0
+        UNKNOWN = 1
+        URL_CRAWL_ERROR = 2
+        INVALID_VALUE = 3
+
+
+class AdGroupFeedErrorEnum(object):
+    class AdGroupFeedError(enum.IntEnum):
+        """
+        Enum describing possible ad group feed errors.
+
+        Attributes:
+          UNSPECIFIED (int): Enum unspecified.
+          UNKNOWN (int): The received error code is not known in this version.
+          FEED_ALREADY_EXISTS_FOR_PLACEHOLDER_TYPE (int): An active feed already exists for this ad group and place holder type.
+          CANNOT_CREATE_FOR_REMOVED_FEED (int): The specified feed is removed.
+          ADGROUP_FEED_ALREADY_EXISTS (int): The AdGroupFeed already exists. UPDATE operation should be used to modify
+          the existing AdGroupFeed.
+          CANNOT_OPERATE_ON_REMOVED_ADGROUP_FEED (int): Cannot operate on removed AdGroupFeed.
+          INVALID_PLACEHOLDER_TYPE (int): Invalid placeholder type.
+          MISSING_FEEDMAPPING_FOR_PLACEHOLDER_TYPE (int): Feed mapping for this placeholder type does not exist.
+          NO_EXISTING_LOCATION_CUSTOMER_FEED (int): Location AdGroupFeeds cannot be created unless there is a location
+          CustomerFeed for the specified feed.
+        """
+        UNSPECIFIED = 0
+        UNKNOWN = 1
+        FEED_ALREADY_EXISTS_FOR_PLACEHOLDER_TYPE = 2
+        CANNOT_CREATE_FOR_REMOVED_FEED = 3
+        ADGROUP_FEED_ALREADY_EXISTS = 4
+        CANNOT_OPERATE_ON_REMOVED_ADGROUP_FEED = 5
+        INVALID_PLACEHOLDER_TYPE = 6
+        MISSING_FEEDMAPPING_FOR_PLACEHOLDER_TYPE = 7
+        NO_EXISTING_LOCATION_CUSTOMER_FEED = 8
+
+
+class CampaignFeedErrorEnum(object):
+    class CampaignFeedError(enum.IntEnum):
+        """
+        Enum describing possible campaign feed errors.
+
+        Attributes:
+          UNSPECIFIED (int): Enum unspecified.
+          UNKNOWN (int): The received error code is not known in this version.
+          FEED_ALREADY_EXISTS_FOR_PLACEHOLDER_TYPE (int): An active feed already exists for this campaign and placeholder type.
+          CANNOT_CREATE_FOR_REMOVED_FEED (int): The specified feed is removed.
+          CANNOT_CREATE_ALREADY_EXISTING_CAMPAIGN_FEED (int): The CampaignFeed already exists. UPDATE should be used to modify the
+          existing CampaignFeed.
+          CANNOT_MODIFY_REMOVED_CAMPAIGN_FEED (int): Cannot update removed campaign feed.
+          INVALID_PLACEHOLDER_TYPE (int): Invalid placeholder type.
+          MISSING_FEEDMAPPING_FOR_PLACEHOLDER_TYPE (int): Feed mapping for this placeholder type does not exist.
+        """
+        UNSPECIFIED = 0
+        UNKNOWN = 1
+        FEED_ALREADY_EXISTS_FOR_PLACEHOLDER_TYPE = 2
+        CANNOT_CREATE_FOR_REMOVED_FEED = 4
+        CANNOT_CREATE_ALREADY_EXISTING_CAMPAIGN_FEED = 5
+        CANNOT_MODIFY_REMOVED_CAMPAIGN_FEED = 6
+        INVALID_PLACEHOLDER_TYPE = 7
+        MISSING_FEEDMAPPING_FOR_PLACEHOLDER_TYPE = 8
+
+
 class DateErrorEnum(object):
     class DateError(enum.IntEnum):
         """
@@ -2212,8 +4068,9 @@ class DateErrorEnum(object):
           UNKNOWN (int): The received error code is not known in this version.
           INVALID_FIELD_VALUES_IN_DATE (int): Given field values do not correspond to a valid date.
           INVALID_FIELD_VALUES_IN_DATE_TIME (int): Given field values do not correspond to a valid date time.
-          INVALID_STRING_DATE (int): The string date's format should be yyyymmdd.
-          INVALID_STRING_DATE_TIME (int): The string date time's format should be yyyymmdd hhmmss [tz].
+          INVALID_STRING_DATE (int): The string date's format should be yyyy-mm-dd.
+          INVALID_STRING_DATE_TIME_MICROS (int): The string date time's format should be yyyy-mm-dd hh:mm:ss.ssssss.
+          INVALID_STRING_DATE_TIME_SECONDS (int): The string date time's format should be yyyy-mm-dd hh:mm:ss.
           EARLIER_THAN_MINIMUM_DATE (int): Date is before allowed minimum.
           LATER_THAN_MAXIMUM_DATE (int): Date is after allowed maximum.
           DATE_RANGE_MINIMUM_DATE_LATER_THAN_MAXIMUM_DATE (int): Date range bounds are not in order.
@@ -2224,7 +4081,8 @@ class DateErrorEnum(object):
         INVALID_FIELD_VALUES_IN_DATE = 2
         INVALID_FIELD_VALUES_IN_DATE_TIME = 3
         INVALID_STRING_DATE = 4
-        INVALID_STRING_DATE_TIME = 6
+        INVALID_STRING_DATE_TIME_MICROS = 6
+        INVALID_STRING_DATE_TIME_SECONDS = 11
         EARLIER_THAN_MINIMUM_DATE = 7
         LATER_THAN_MAXIMUM_DATE = 8
         DATE_RANGE_MINIMUM_DATE_LATER_THAN_MAXIMUM_DATE = 9
@@ -2306,6 +4164,98 @@ class StringFormatErrorEnum(object):
         INVALID_FORMAT = 3
 
 
+class UserListErrorEnum(object):
+    class UserListError(enum.IntEnum):
+        """
+        Enum describing possible user list errors.
+
+        Attributes:
+          UNSPECIFIED (int): Enum unspecified.
+          UNKNOWN (int): The received error code is not known in this version.
+          EXTERNAL_REMARKETING_USER_LIST_MUTATE_NOT_SUPPORTED (int): Creating and updating external remarketing user lists is not supported.
+          CONCRETE_TYPE_REQUIRED (int): Concrete type of user list is required.
+          CONVERSION_TYPE_ID_REQUIRED (int): Creating/updating user list conversion types requires specifying the
+          conversion type Id.
+          DUPLICATE_CONVERSION_TYPES (int): Remarketing user list cannot have duplicate conversion types.
+          INVALID_CONVERSION_TYPE (int): Conversion type is invalid/unknown.
+          INVALID_DESCRIPTION (int): User list description is empty or invalid.
+          INVALID_NAME (int): User list name is empty or invalid.
+          INVALID_TYPE (int): Type of the UserList does not match.
+          CAN_NOT_ADD_LOGICAL_LIST_AS_LOGICAL_LIST_OPERAND (int): Embedded logical user lists are not allowed.
+          INVALID_USER_LIST_LOGICAL_RULE_OPERAND (int): User list rule operand is invalid.
+          NAME_ALREADY_USED (int): Name is already being used for another user list for the account.
+          NEW_CONVERSION_TYPE_NAME_REQUIRED (int): Name is required when creating a new conversion type.
+          CONVERSION_TYPE_NAME_ALREADY_USED (int): The given conversion type name has been used.
+          OWNERSHIP_REQUIRED_FOR_SET (int): Only an owner account may edit a user list.
+          USER_LIST_MUTATE_NOT_SUPPORTED (int): The user list of the type is not mutable.
+          INVALID_RULE (int): Rule is invalid.
+          INVALID_DATE_RANGE (int): The specified date range is empty.
+          CAN_NOT_MUTATE_SENSITIVE_USERLIST (int): A UserList which is privacy sensitive or legal rejected cannot be mutated
+          by external users.
+          MAX_NUM_RULEBASED_USERLISTS (int): Maximum number of rulebased user lists a customer can have.
+          CANNOT_MODIFY_BILLABLE_RECORD_COUNT (int): BasicUserList's billable record field cannot be modified once it is set.
+          APP_ID_NOT_SET (int): crm_based_user_list.app_id field must be set when upload_key_type is
+          MOBILE_ADVERTISING_ID.
+          USERLIST_NAME_IS_RESERVED_FOR_SYSTEM_LIST (int): Name of the user list is reserved for system generated lists and cannot
+          be used.
+          ADVERTISER_NOT_WHITELISTED_FOR_USING_UPLOADED_DATA (int): Advertiser needs to be whitelisted to use remarketing lists created from
+          advertiser uploaded data (e.g., Customer Match lists).
+        """
+        UNSPECIFIED = 0
+        UNKNOWN = 1
+        EXTERNAL_REMARKETING_USER_LIST_MUTATE_NOT_SUPPORTED = 2
+        CONCRETE_TYPE_REQUIRED = 3
+        CONVERSION_TYPE_ID_REQUIRED = 4
+        DUPLICATE_CONVERSION_TYPES = 5
+        INVALID_CONVERSION_TYPE = 6
+        INVALID_DESCRIPTION = 7
+        INVALID_NAME = 8
+        INVALID_TYPE = 9
+        CAN_NOT_ADD_LOGICAL_LIST_AS_LOGICAL_LIST_OPERAND = 10
+        INVALID_USER_LIST_LOGICAL_RULE_OPERAND = 11
+        NAME_ALREADY_USED = 12
+        NEW_CONVERSION_TYPE_NAME_REQUIRED = 13
+        CONVERSION_TYPE_NAME_ALREADY_USED = 14
+        OWNERSHIP_REQUIRED_FOR_SET = 15
+        USER_LIST_MUTATE_NOT_SUPPORTED = 16
+        INVALID_RULE = 17
+        INVALID_DATE_RANGE = 27
+        CAN_NOT_MUTATE_SENSITIVE_USERLIST = 28
+        MAX_NUM_RULEBASED_USERLISTS = 29
+        CANNOT_MODIFY_BILLABLE_RECORD_COUNT = 30
+        APP_ID_NOT_SET = 31
+        USERLIST_NAME_IS_RESERVED_FOR_SYSTEM_LIST = 32
+        ADVERTISER_NOT_WHITELISTED_FOR_USING_UPLOADED_DATA = 33
+
+
+class CustomerFeedErrorEnum(object):
+    class CustomerFeedError(enum.IntEnum):
+        """
+        Enum describing possible customer feed errors.
+
+        Attributes:
+          UNSPECIFIED (int): Enum unspecified.
+          UNKNOWN (int): The received error code is not known in this version.
+          FEED_ALREADY_EXISTS_FOR_PLACEHOLDER_TYPE (int): An active feed already exists for this customer and place holder type.
+          CANNOT_CREATE_FOR_REMOVED_FEED (int): The specified feed is removed.
+          CANNOT_CREATE_ALREADY_EXISTING_CUSTOMER_FEED (int): The CustomerFeed already exists. Update should be used to modify the
+          existing CustomerFeed.
+          CANNOT_MODIFY_REMOVED_CUSTOMER_FEED (int): Cannot update removed customer feed.
+          INVALID_PLACEHOLDER_TYPE (int): Invalid placeholder type.
+          MISSING_FEEDMAPPING_FOR_PLACEHOLDER_TYPE (int): Feed mapping for this placeholder type does not exist.
+          PLACEHOLDER_TYPE_NOT_ALLOWED_ON_CUSTOMER_FEED (int): Placeholder not allowed at the account level.
+        """
+        UNSPECIFIED = 0
+        UNKNOWN = 1
+        FEED_ALREADY_EXISTS_FOR_PLACEHOLDER_TYPE = 2
+        CANNOT_CREATE_FOR_REMOVED_FEED = 3
+        CANNOT_CREATE_ALREADY_EXISTING_CUSTOMER_FEED = 4
+        CANNOT_MODIFY_REMOVED_CUSTOMER_FEED = 5
+        INVALID_PLACEHOLDER_TYPE = 6
+        MISSING_FEEDMAPPING_FOR_PLACEHOLDER_TYPE = 7
+        PLACEHOLDER_TYPE_NOT_ALLOWED_ON_CUSTOMER_FEED = 8
+
+
 class AdCustomizerErrorEnum(object):
     class AdCustomizerError(enum.IntEnum):
         """
@@ -2342,6 +4292,20 @@ class ChangeStatusErrorEnum(object):
         UNSPECIFIED = 0
         UNKNOWN = 1
         START_DATE_TOO_OLD = 3
+
+
+class KeywordPlanNegativeKeywordErrorEnum(object):
+    class KeywordPlanNegativeKeywordError(enum.IntEnum):
+        """
+        Enum describing possible errors from applying a keyword plan negative
+        keyword.
+
+        Attributes:
+          UNSPECIFIED (int): Enum unspecified.
+          UNKNOWN (int): The received error code is not known in this version.
+        """
+        UNSPECIFIED = 0
+        UNKNOWN = 1
 
 
 class FieldErrorEnum(object):
@@ -2520,6 +4484,7 @@ class UrlFieldErrorEnum(object):
           REDUNDANT_NESTED_URL_CUSTOM_PARAMETER_TAG (int): The custom parameter contains nested occurrences of the same conditional
           tag (i.e. {ifmobile:{ifmobile:x}}).
           MISSING_PROTOCOL (int): The protocol (http:// or https://) is missing.
+          INVALID_PROTOCOL (int): Unsupported protocol in URL. Only http and https are supported.
           INVALID_URL (int): The url is invalid.
           DESTINATION_URL_DEPRECATED (int): Destination Url is deprecated.
           INVALID_TAG_IN_URL (int): The url contains invalid tag.
@@ -2530,6 +4495,11 @@ class UrlFieldErrorEnum(object):
           FINAL_URL_SUFFIX_MALFORMED (int): The final url suffix cannot begin with '?' or '&' characters and must be
           a valid query string.
           INVALID_TAG_IN_FINAL_URL_SUFFIX (int): The final url suffix cannot contain {lpurl} related or {ignore} tags.
+          INVALID_TOP_LEVEL_DOMAIN (int): The top level domain is invalid, e.g, not a public top level domain
+          listed in publicsuffix.org.
+          MALFORMED_TOP_LEVEL_DOMAIN (int): Malformed top level domain in URL.
+          MALFORMED_URL (int): Malformed URL.
+          MISSING_HOST (int): No host found in URL.
         """
         UNSPECIFIED = 0
         UNKNOWN = 1
@@ -2571,6 +4541,7 @@ class UrlFieldErrorEnum(object):
         INVALID_TAG_IN_URL_CUSTOM_PARAMETER_VALUE = 41
         REDUNDANT_NESTED_URL_CUSTOM_PARAMETER_TAG = 42
         MISSING_PROTOCOL = 43
+        INVALID_PROTOCOL = 52
         INVALID_URL = 44
         DESTINATION_URL_DEPRECATED = 45
         INVALID_TAG_IN_URL = 46
@@ -2579,6 +4550,10 @@ class UrlFieldErrorEnum(object):
         INVALID_URL_ID = 49
         FINAL_URL_SUFFIX_MALFORMED = 50
         INVALID_TAG_IN_FINAL_URL_SUFFIX = 51
+        INVALID_TOP_LEVEL_DOMAIN = 53
+        MALFORMED_TOP_LEVEL_DOMAIN = 54
+        MALFORMED_URL = 55
+        MISSING_HOST = 56
 
 
 class PolicyFindingErrorEnum(object):
@@ -2612,6 +4587,48 @@ class ResourceAccessDeniedErrorEnum(object):
         UNSPECIFIED = 0
         UNKNOWN = 1
         WRITE_ACCESS_DENIED = 3
+
+
+class KeywordPlanErrorEnum(object):
+    class KeywordPlanError(enum.IntEnum):
+        """
+        Enum describing possible errors from applying a keyword plan.
+
+        Attributes:
+          UNSPECIFIED (int): Enum unspecified.
+          UNKNOWN (int): The received error code is not known in this version.
+          BID_MULTIPLIER_OUT_OF_RANGE (int): The plan's bid multiplier value is outside the valid range.
+          BID_TOO_HIGH (int): The plan's bid value is too high.
+          BID_TOO_LOW (int): The plan's bid value is too low.
+          BID_TOO_MANY_FRACTIONAL_DIGITS (int): The plan's cpc bid is not a multiple of the minimum billable unit.
+          DAILY_BUDGET_TOO_LOW (int): The plan's daily budget value is too low.
+          DAILY_BUDGET_TOO_MANY_FRACTIONAL_DIGITS (int): The plan's daily budget is not a multiple of the minimum billable unit.
+          INVALID_VALUE (int): The input has an invalid value.
+          KEYWORD_PLAN_HAS_NO_KEYWORDS (int): The plan has no keyword.
+          KEYWORD_PLAN_NOT_ENABLED (int): The plan is not enabled and API cannot provide mutation, forecast or
+          stats.
+          KEYWORD_PLAN_NOT_FOUND (int): The requested plan cannot be found for providing forecast or stats.
+          MISSING_BID (int): The plan is missing a cpc bid.
+          MISSING_FORECAST_PERIOD (int): The plan is missing required forecast_period field.
+          INVALID_FORECAST_DATE_RANGE (int): The plan's forecast_period has invalid forecast date range.
+          INVALID_NAME (int): The plan's name is invalid.
+        """
+        UNSPECIFIED = 0
+        UNKNOWN = 1
+        BID_MULTIPLIER_OUT_OF_RANGE = 2
+        BID_TOO_HIGH = 3
+        BID_TOO_LOW = 4
+        BID_TOO_MANY_FRACTIONAL_DIGITS = 5
+        DAILY_BUDGET_TOO_LOW = 6
+        DAILY_BUDGET_TOO_MANY_FRACTIONAL_DIGITS = 7
+        INVALID_VALUE = 8
+        KEYWORD_PLAN_HAS_NO_KEYWORDS = 9
+        KEYWORD_PLAN_NOT_ENABLED = 10
+        KEYWORD_PLAN_NOT_FOUND = 11
+        MISSING_BID = 13
+        MISSING_FORECAST_PERIOD = 14
+        INVALID_FORECAST_DATE_RANGE = 15
+        INVALID_NAME = 16
 
 
 class ImageErrorEnum(object):
@@ -2810,6 +4827,31 @@ class ResourceCountLimitExceededErrorEnum(object):
         RESPONSE_ROW_LIMIT_EXCEEDED = 9
 
 
+class KeywordPlanCampaignErrorEnum(object):
+    class KeywordPlanCampaignError(enum.IntEnum):
+        """
+        Enum describing possible errors from applying a keyword plan campaign.
+
+        Attributes:
+          UNSPECIFIED (int): Enum unspecified.
+          UNKNOWN (int): The received error code is not known in this version.
+          INVALID_NAME (int): A keyword plan campaign name is missing, empty, longer than allowed limit
+          or contains invalid chars.
+          INVALID_LANGUAGES (int): A keyword plan campaign contains one or more untargetable languages.
+          INVALID_GEOS (int): A keyword plan campaign contains one or more invalid geo targets.
+          DUPLICATE_NAME (int): The keyword plan campaign name is duplicate to an existing keyword plan
+          campaign name or other keyword plan campaign name in the request.
+          MAX_GEOS_EXCEEDED (int): The number of geo targets in the keyword plan campaign exceeds limits.
+        """
+        UNSPECIFIED = 0
+        UNKNOWN = 1
+        INVALID_NAME = 2
+        INVALID_LANGUAGES = 3
+        INVALID_GEOS = 4
+        DUPLICATE_NAME = 5
+        MAX_GEOS_EXCEEDED = 6
+
+
 class CustomerManagerLinkErrorEnum(object):
     class CustomerManagerLinkError(enum.IntEnum):
         """
@@ -2840,6 +4882,37 @@ class CustomerManagerLinkErrorEnum(object):
         CANNOT_CHANGE_ROLE_BY_NON_ACCOUNT_OWNER = 7
         CANNOT_CHANGE_ROLE_FOR_NON_ACTIVE_LINK_ACCOUNT = 8
         DUPLICATE_CHILD_FOUND = 9
+
+
+class FeedItemErrorEnum(object):
+    class FeedItemError(enum.IntEnum):
+        """
+        Enum describing possible feed item errors.
+
+        Attributes:
+          UNSPECIFIED (int): Enum unspecified.
+          UNKNOWN (int): The received error code is not known in this version.
+          CANNOT_CONVERT_ATTRIBUTE_VALUE_FROM_STRING (int): Cannot convert the feed attribute value from string to its real type.
+          CANNOT_OPERATE_ON_REMOVED_FEED_ITEM (int): Cannot operate on removed feed item.
+          DATE_TIME_MUST_BE_IN_ACCOUNT_TIME_ZONE (int): Date time zone does not match the account's time zone.
+          KEY_ATTRIBUTES_NOT_FOUND (int): Feed item with the key attributes could not be found.
+          INVALID_URL (int): Url feed attribute value is not valid.
+          MISSING_KEY_ATTRIBUTES (int): Some key attributes are missing.
+          KEY_ATTRIBUTES_NOT_UNIQUE (int): Feed item has same key attributes as another feed item.
+          CANNOT_MODIFY_KEY_ATTRIBUTE_VALUE (int): Cannot modify key attributes on an existing feed item.
+          SIZE_TOO_LARGE_FOR_MULTI_VALUE_ATTRIBUTE (int): The feed attribute value is too large.
+        """
+        UNSPECIFIED = 0
+        UNKNOWN = 1
+        CANNOT_CONVERT_ATTRIBUTE_VALUE_FROM_STRING = 2
+        CANNOT_OPERATE_ON_REMOVED_FEED_ITEM = 3
+        DATE_TIME_MUST_BE_IN_ACCOUNT_TIME_ZONE = 4
+        KEY_ATTRIBUTES_NOT_FOUND = 5
+        INVALID_URL = 6
+        MISSING_KEY_ATTRIBUTES = 7
+        KEY_ATTRIBUTES_NOT_UNIQUE = 8
+        CANNOT_MODIFY_KEY_ATTRIBUTE_VALUE = 9
+        SIZE_TOO_LARGE_FOR_MULTI_VALUE_ATTRIBUTE = 10
 
 
 class AccountBudgetProposalErrorEnum(object):
@@ -3238,11 +5311,11 @@ class AuthenticationErrorEnum(object):
           UNSPECIFIED (int): Enum unspecified.
           UNKNOWN (int): The received error code is not known in this version.
           AUTHENTICATION_ERROR (int): Authentication of the request failed.
-          CLIENT_CUSTOMER_ID_INVALID (int): Client customer Id is not a number.
+          CLIENT_CUSTOMER_ID_INVALID (int): Client Customer Id is not a number.
           CUSTOMER_NOT_FOUND (int): No customer found for the provided customer id.
           GOOGLE_ACCOUNT_DELETED (int): Client's Google Account is deleted.
           GOOGLE_ACCOUNT_COOKIE_INVALID (int): Google account login token in the cookie is invalid.
-          FAILED_TO_AUTHENTICATE_GOOGLE_ACCOUNT (int): A problem occurred during Google account authentication.
+          GOOGLE_ACCOUNT_AUTHENTICATION_FAILED (int): A problem occurred during Google account authentication.
           GOOGLE_ACCOUNT_USER_AND_ADS_USER_MISMATCH (int): The user in the google account login token does not match the UserId in
           the cookie.
           LOGIN_COOKIE_REQUIRED (int): Login cookie is required for authentication.
@@ -3253,7 +5326,6 @@ class AuthenticationErrorEnum(object):
           OAUTH_TOKEN_REVOKED (int): Oauth token in the header has been revoked.
           OAUTH_TOKEN_HEADER_INVALID (int): Oauth token HTTP header is malformed.
           LOGIN_COOKIE_INVALID (int): Login cookie is not valid.
-          FAILED_TO_RETRIEVE_LOGIN_COOKIE (int): Failed to decrypt the login cookie.
           USER_ID_INVALID (int): User Id in the header is not a valid id.
           TWO_STEP_VERIFICATION_NOT_ENROLLED (int): An account administrator changed this account's authentication settings.
           To access this Google Ads account, enable 2-Step Verification in your
@@ -3269,7 +5341,7 @@ class AuthenticationErrorEnum(object):
         CUSTOMER_NOT_FOUND = 8
         GOOGLE_ACCOUNT_DELETED = 9
         GOOGLE_ACCOUNT_COOKIE_INVALID = 10
-        FAILED_TO_AUTHENTICATE_GOOGLE_ACCOUNT = 11
+        GOOGLE_ACCOUNT_AUTHENTICATION_FAILED = 25
         GOOGLE_ACCOUNT_USER_AND_ADS_USER_MISMATCH = 12
         LOGIN_COOKIE_REQUIRED = 13
         NOT_ADS_USER = 14
@@ -3279,7 +5351,6 @@ class AuthenticationErrorEnum(object):
         OAUTH_TOKEN_REVOKED = 18
         OAUTH_TOKEN_HEADER_INVALID = 19
         LOGIN_COOKIE_INVALID = 20
-        FAILED_TO_RETRIEVE_LOGIN_COOKIE = 21
         USER_ID_INVALID = 22
         TWO_STEP_VERIFICATION_NOT_ENROLLED = 23
         ADVANCED_PROTECTION_NOT_ENROLLED = 24
@@ -3857,10 +5928,12 @@ class CustomerErrorEnum(object):
           STATUS_CHANGE_DISALLOWED (int): Customer status is not allowed to be changed from DRAFT and CLOSED.
           Currency code and at least one of country code and time zone needs to be
           set when status is changed to ENABLED.
+          ACCOUNT_NOT_SET_UP (int): CustomerService cannot get a customer that has not been fully set up.
         """
         UNSPECIFIED = 0
         UNKNOWN = 1
         STATUS_CHANGE_DISALLOWED = 2
+        ACCOUNT_NOT_SET_UP = 3
 
 
 class DatabaseErrorEnum(object):
@@ -4015,10 +6088,12 @@ class HeaderErrorEnum(object):
           UNSPECIFIED (int): Enum unspecified.
           UNKNOWN (int): The received error code is not known in this version.
           INVALID_LOGIN_CUSTOMER_ID (int): The login customer id could not be validated.
+          MALFORMED_TASK_INFO (int): One or more task headers could not be parsed.
         """
         UNSPECIFIED = 0
         UNKNOWN = 1
         INVALID_LOGIN_CUSTOMER_ID = 3
+        MALFORMED_TASK_INFO = 4
 
 
 class IdErrorEnum(object):
@@ -4034,6 +6109,51 @@ class IdErrorEnum(object):
         UNSPECIFIED = 0
         UNKNOWN = 1
         NOT_FOUND = 2
+
+
+class KeywordPlanAdGroupErrorEnum(object):
+    class KeywordPlanAdGroupError(enum.IntEnum):
+        """
+        Enum describing possible errors from applying a keyword plan ad group.
+
+        Attributes:
+          UNSPECIFIED (int): Enum unspecified.
+          UNKNOWN (int): The received error code is not known in this version.
+          INVALID_NAME (int): The keyword plan ad group name is missing, empty, longer than allowed
+          limit or contains invalid chars.
+          DUPLICATE_NAME (int): The keyword plan ad group name is duplicate to an existing keyword plan
+          AdGroup name or other keyword plan AdGroup name in the request.
+        """
+        UNSPECIFIED = 0
+        UNKNOWN = 1
+        INVALID_NAME = 2
+        DUPLICATE_NAME = 3
+
+
+class KeywordPlanKeywordErrorEnum(object):
+    class KeywordPlanKeywordError(enum.IntEnum):
+        """
+        Enum describing possible errors from applying a keyword plan keyword.
+
+        Attributes:
+          UNSPECIFIED (int): Enum unspecified.
+          UNKNOWN (int): The received error code is not known in this version.
+          INVALID_KEYWORD_MATCH_TYPE (int): A keyword or negative keyword has invalid match type.
+          DUPLICATE_KEYWORD (int): A keyword or negative keyword with same text and match type already
+          exists.
+          KEYWORD_TEXT_TOO_LONG (int): Keyword or negative keyword text exceeds the allowed limit.
+          KEYWORD_HAS_INVALID_CHARS (int): Keyword or negative keyword text has invalid characters or symbols.
+          KEYWORD_HAS_TOO_MANY_WORDS (int): Keyword or negative keyword text has too many words.
+          INVALID_KEYWORD_TEXT (int): Keyword or negative keyword has invalid text.
+        """
+        UNSPECIFIED = 0
+        UNKNOWN = 1
+        INVALID_KEYWORD_MATCH_TYPE = 2
+        DUPLICATE_KEYWORD = 3
+        KEYWORD_TEXT_TOO_LONG = 4
+        KEYWORD_HAS_INVALID_CHARS = 5
+        KEYWORD_HAS_TOO_MANY_WORDS = 6
+        INVALID_KEYWORD_TEXT = 7
 
 
 class MultiplierErrorEnum(object):
@@ -4104,14 +6224,14 @@ class NewResourceCreationErrorEnum(object):
         Attributes:
           UNSPECIFIED (int): Enum unspecified.
           UNKNOWN (int): The received error code is not known in this version.
-          CANNOT_SET_ID_FOR_ADD (int): Do not set the id field while creating new entities.
+          CANNOT_SET_ID_FOR_CREATE (int): Do not set the id field while creating new resources.
           DUPLICATE_TEMP_IDS (int): Creating more than one resource with the same temp ID is not allowed.
-          TEMP_ID_RESOURCE_HAD_ERRORS (int): Parent object with specified temp id failed validation, so no deep
+          TEMP_ID_RESOURCE_HAD_ERRORS (int): Parent resource with specified temp ID failed validation, so no
           validation will be done for this child resource.
         """
         UNSPECIFIED = 0
         UNKNOWN = 1
-        CANNOT_SET_ID_FOR_ADD = 2
+        CANNOT_SET_ID_FOR_CREATE = 2
         DUPLICATE_TEMP_IDS = 3
         TEMP_ID_RESOURCE_HAD_ERRORS = 4
 
@@ -4163,6 +6283,7 @@ class OperationAccessDeniedErrorEnum(object):
           CREATE_AS_REMOVED_NOT_PERMITTED (int): A CREATE operation may not set status to REMOVED.
           OPERATION_NOT_PERMITTED_FOR_REMOVED_RESOURCE (int): This operation is not allowed because the campaign or adgroup is removed.
           OPERATION_NOT_PERMITTED_FOR_AD_GROUP_TYPE (int): This operation is not permitted on this ad group type.
+          MUTATE_NOT_PERMITTED_FOR_CUSTOMER (int): The mutate is not allowed for this customer.
         """
         UNSPECIFIED = 0
         UNKNOWN = 1
@@ -4175,6 +6296,7 @@ class OperationAccessDeniedErrorEnum(object):
         CREATE_AS_REMOVED_NOT_PERMITTED = 8
         OPERATION_NOT_PERMITTED_FOR_REMOVED_RESOURCE = 9
         OPERATION_NOT_PERMITTED_FOR_AD_GROUP_TYPE = 10
+        MUTATE_NOT_PERMITTED_FOR_CUSTOMER = 11
 
 
 class OperatorErrorEnum(object):
@@ -4334,6 +6456,12 @@ class RecommendationErrorEnum(object):
           ADGROUP_KEYWORD_LIMIT (int): The number of keywords in ad group have reached the maximum allowed.
           RECOMMENDATION_ALREADY_APPLIED (int): The recommendation requested to apply has already been applied.
           RECOMMENDATION_INVALIDATED (int): The recommendation requested to apply has been invalidated.
+          TOO_MANY_OPERATIONS (int): The number of operations in a single request exceeds the maximum allowed.
+          NO_OPERATIONS (int): There are no operations in the request.
+          DIFFERENT_TYPES_NOT_SUPPORTED (int): Operations with multiple recommendation types are not supported when
+          partial failure mode is not enabled.
+          DUPLICATE_RESOURCE_NAME (int): Request contains multiple operations with the same resource_name.
+          RECOMMENDATION_ALREADY_DISMISSED (int): The recommendation requested to dismiss has already been dismissed.
         """
         UNSPECIFIED = 0
         UNKNOWN = 1
@@ -4345,6 +6473,11 @@ class RecommendationErrorEnum(object):
         ADGROUP_KEYWORD_LIMIT = 7
         RECOMMENDATION_ALREADY_APPLIED = 8
         RECOMMENDATION_INVALIDATED = 9
+        TOO_MANY_OPERATIONS = 10
+        NO_OPERATIONS = 11
+        DIFFERENT_TYPES_NOT_SUPPORTED = 12
+        DUPLICATE_RESOURCE_NAME = 13
+        RECOMMENDATION_ALREADY_DISMISSED = 14
 
 
 class RegionCodeErrorEnum(object):
@@ -4444,3 +6577,18 @@ class SharedSetErrorEnum(object):
         DUPLICATE_NAME = 3
         SHARED_SET_REMOVED = 4
         SHARED_SET_IN_USE = 5
+
+
+class FeedAttributeOperation(object):
+    class Operator(enum.IntEnum):
+        """
+        The operator.
+
+        Attributes:
+          UNSPECIFIED (int): Unspecified.
+          UNKNOWN (int): Used for return value only. Represents value unknown in this version.
+          ADD (int): Add the attribute to the existing attributes.
+        """
+        UNSPECIFIED = 0
+        UNKNOWN = 1
+        ADD = 2

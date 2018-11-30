@@ -27,6 +27,7 @@ import grpc
 from google.ads.google_ads.v0.services import topic_view_service_client_config
 from google.ads.google_ads.v0.services.transports import topic_view_service_grpc_transport
 from google.ads.google_ads.v0.proto.services import topic_view_service_pb2
+from google.protobuf import wrappers_pb2
 
 _GAPIC_LIBRARY_VERSION = pkg_resources.get_distribution(
     'google-ads', ).version

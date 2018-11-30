@@ -81,7 +81,7 @@ _sym_db.RegisterFileDescriptor(DESCRIPTOR)
 
 ResourceAccessDeniedErrorEnum = _reflection.GeneratedProtocolMessageType('ResourceAccessDeniedErrorEnum', (_message.Message,), dict(
   DESCRIPTOR = _RESOURCEACCESSDENIEDERRORENUM,
-  __module__ = 'google.ads.googleads_v0.proto.errors.resource_access_denied_error_pb2'
+  __module__ = 'google.ads.google_ads.v0.proto.errors.resource_access_denied_error_pb2'
   ,
   __doc__ = """Container for enum describing possible resource access denied errors.
   """,

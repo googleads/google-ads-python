@@ -22,7 +22,7 @@ DESCRIPTOR = _descriptor.FileDescriptor(
   name='google/ads/googleads_v0/proto/resources/campaign_criterion.proto',
   package='google.ads.googleads.v0.resources',
   syntax='proto3',
-  serialized_pb=_b('\n@google/ads/googleads_v0/proto/resources/campaign_criterion.proto\x12!google.ads.googleads.v0.resources\x1a\x33google/ads/googleads_v0/proto/common/criteria.proto\x1a\x38google/ads/googleads_v0/proto/enums/criterion_type.proto\x1a\x1egoogle/protobuf/wrappers.proto\"\xc7\t\n\x11\x43\x61mpaignCriterion\x12\x15\n\rresource_name\x18\x01 \x01(\t\x12.\n\x08\x63\x61mpaign\x18\x04 \x01(\x0b\x32\x1c.google.protobuf.StringValue\x12\x31\n\x0c\x63riterion_id\x18\x05 \x01(\x0b\x32\x1b.google.protobuf.Int64Value\x12\x31\n\x0c\x62id_modifier\x18\x0e \x01(\x0b\x32\x1b.google.protobuf.FloatValue\x12,\n\x08negative\x18\x07 \x01(\x0b\x32\x1a.google.protobuf.BoolValue\x12L\n\x04type\x18\x06 \x01(\x0e\x32>.google.ads.googleads.v0.enums.CriterionTypeEnum.CriterionType\x12>\n\x07keyword\x18\x08 \x01(\x0b\x32+.google.ads.googleads.v0.common.KeywordInfoH\x00\x12\x42\n\tplacement\x18\t \x01(\x0b\x32-.google.ads.googleads.v0.common.PlacementInfoH\x00\x12@\n\x08location\x18\x0c \x01(\x0b\x32,.google.ads.googleads.v0.common.LocationInfoH\x00\x12<\n\x06\x64\x65vice\x18\r \x01(\x0b\x32*.google.ads.googleads.v0.common.DeviceInfoH\x00\x12\x45\n\x0b\x61\x64_schedule\x18\x0f \x01(\x0b\x32..google.ads.googleads.v0.common.AdScheduleInfoH\x00\x12\x41\n\tage_range\x18\x10 \x01(\x0b\x32,.google.ads.googleads.v0.common.AgeRangeInfoH\x00\x12<\n\x06gender\x18\x11 \x01(\x0b\x32*.google.ads.googleads.v0.common.GenderInfoH\x00\x12G\n\x0cincome_range\x18\x12 \x01(\x0b\x32/.google.ads.googleads.v0.common.IncomeRangeInfoH\x00\x12M\n\x0fparental_status\x18\x13 \x01(\x0b\x32\x32.google.ads.googleads.v0.common.ParentalStatusInfoH\x00\x12I\n\ryoutube_video\x18\x14 \x01(\x0b\x32\x30.google.ads.googleads.v0.common.YouTubeVideoInfoH\x00\x12M\n\x0fyoutube_channel\x18\x15 \x01(\x0b\x32\x32.google.ads.googleads.v0.common.YouTubeChannelInfoH\x00\x12\x42\n\tproximity\x18\x17 \x01(\x0b\x32-.google.ads.googleads.v0.common.ProximityInfoH\x00\x12:\n\x05topic\x18\x18 \x01(\x0b\x32).google.ads.googleads.v0.common.TopicInfoH\x00\x42\x0b\n\tcriterionB\xdb\x01\n%com.google.ads.googleads.v0.resourcesB\x16\x43\x61mpaignCriterionProtoP\x01ZJgoogle.golang.org/genproto/googleapis/ads/googleads/v0/resources;resources\xa2\x02\x03GAA\xaa\x02!Google.Ads.GoogleAds.V0.Resources\xca\x02!Google\\Ads\\GoogleAds\\V0\\Resourcesb\x06proto3')
+  serialized_pb=_b('\n@google/ads/googleads_v0/proto/resources/campaign_criterion.proto\x12!google.ads.googleads.v0.resources\x1a\x33google/ads/googleads_v0/proto/common/criteria.proto\x1a\x38google/ads/googleads_v0/proto/enums/criterion_type.proto\x1a\x1egoogle/protobuf/wrappers.proto\"\xae\r\n\x11\x43\x61mpaignCriterion\x12\x15\n\rresource_name\x18\x01 \x01(\t\x12.\n\x08\x63\x61mpaign\x18\x04 \x01(\x0b\x32\x1c.google.protobuf.StringValue\x12\x31\n\x0c\x63riterion_id\x18\x05 \x01(\x0b\x32\x1b.google.protobuf.Int64Value\x12\x31\n\x0c\x62id_modifier\x18\x0e \x01(\x0b\x32\x1b.google.protobuf.FloatValue\x12,\n\x08negative\x18\x07 \x01(\x0b\x32\x1a.google.protobuf.BoolValue\x12L\n\x04type\x18\x06 \x01(\x0e\x32>.google.ads.googleads.v0.enums.CriterionTypeEnum.CriterionType\x12>\n\x07keyword\x18\x08 \x01(\x0b\x32+.google.ads.googleads.v0.common.KeywordInfoH\x00\x12\x42\n\tplacement\x18\t \x01(\x0b\x32-.google.ads.googleads.v0.common.PlacementInfoH\x00\x12@\n\x08location\x18\x0c \x01(\x0b\x32,.google.ads.googleads.v0.common.LocationInfoH\x00\x12<\n\x06\x64\x65vice\x18\r \x01(\x0b\x32*.google.ads.googleads.v0.common.DeviceInfoH\x00\x12\x45\n\x0b\x61\x64_schedule\x18\x0f \x01(\x0b\x32..google.ads.googleads.v0.common.AdScheduleInfoH\x00\x12\x41\n\tage_range\x18\x10 \x01(\x0b\x32,.google.ads.googleads.v0.common.AgeRangeInfoH\x00\x12<\n\x06gender\x18\x11 \x01(\x0b\x32*.google.ads.googleads.v0.common.GenderInfoH\x00\x12G\n\x0cincome_range\x18\x12 \x01(\x0b\x32/.google.ads.googleads.v0.common.IncomeRangeInfoH\x00\x12M\n\x0fparental_status\x18\x13 \x01(\x0b\x32\x32.google.ads.googleads.v0.common.ParentalStatusInfoH\x00\x12\x41\n\tuser_list\x18\x16 \x01(\x0b\x32,.google.ads.googleads.v0.common.UserListInfoH\x00\x12I\n\ryoutube_video\x18\x14 \x01(\x0b\x32\x30.google.ads.googleads.v0.common.YouTubeVideoInfoH\x00\x12M\n\x0fyoutube_channel\x18\x15 \x01(\x0b\x32\x32.google.ads.googleads.v0.common.YouTubeChannelInfoH\x00\x12\x42\n\tproximity\x18\x17 \x01(\x0b\x32-.google.ads.googleads.v0.common.ProximityInfoH\x00\x12:\n\x05topic\x18\x18 \x01(\x0b\x32).google.ads.googleads.v0.common.TopicInfoH\x00\x12I\n\rlisting_scope\x18\x19 \x01(\x0b\x32\x30.google.ads.googleads.v0.common.ListingScopeInfoH\x00\x12@\n\x08language\x18\x1a \x01(\x0b\x32,.google.ads.googleads.v0.common.LanguageInfoH\x00\x12?\n\x08ip_block\x18\x1b \x01(\x0b\x32+.google.ads.googleads.v0.common.IpBlockInfoH\x00\x12I\n\rcontent_label\x18\x1c \x01(\x0b\x32\x30.google.ads.googleads.v0.common.ContentLabelInfoH\x00\x12>\n\x07\x63\x61rrier\x18\x1d \x01(\x0b\x32+.google.ads.googleads.v0.common.CarrierInfoH\x00\x12I\n\ruser_interest\x18\x1e \x01(\x0b\x32\x30.google.ads.googleads.v0.common.UserInterestInfoH\x00\x42\x0b\n\tcriterionB\xdb\x01\n%com.google.ads.googleads.v0.resourcesB\x16\x43\x61mpaignCriterionProtoP\x01ZJgoogle.golang.org/genproto/googleapis/ads/googleads/v0/resources;resources\xa2\x02\x03GAA\xaa\x02!Google.Ads.GoogleAds.V0.Resources\xca\x02!Google\\Ads\\GoogleAds\\V0\\Resourcesb\x06proto3')
   ,
   dependencies=[google_dot_ads_dot_googleads__v0_dot_proto_dot_common_dot_criteria__pb2.DESCRIPTOR,google_dot_ads_dot_googleads__v0_dot_proto_dot_enums_dot_criterion__type__pb2.DESCRIPTOR,google_dot_protobuf_dot_wrappers__pb2.DESCRIPTOR,])
 
@@ -142,29 +142,78 @@ _CAMPAIGNCRITERION = _descriptor.Descriptor(
       is_extension=False, extension_scope=None,
       options=None, file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
-      name='youtube_video', full_name='google.ads.googleads.v0.resources.CampaignCriterion.youtube_video', index=15,
+      name='user_list', full_name='google.ads.googleads.v0.resources.CampaignCriterion.user_list', index=15,
+      number=22, type=11, cpp_type=10, label=1,
+      has_default_value=False, default_value=None,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None, file=DESCRIPTOR),
+    _descriptor.FieldDescriptor(
+      name='youtube_video', full_name='google.ads.googleads.v0.resources.CampaignCriterion.youtube_video', index=16,
       number=20, type=11, cpp_type=10, label=1,
       has_default_value=False, default_value=None,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None, file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
-      name='youtube_channel', full_name='google.ads.googleads.v0.resources.CampaignCriterion.youtube_channel', index=16,
+      name='youtube_channel', full_name='google.ads.googleads.v0.resources.CampaignCriterion.youtube_channel', index=17,
       number=21, type=11, cpp_type=10, label=1,
       has_default_value=False, default_value=None,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None, file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
-      name='proximity', full_name='google.ads.googleads.v0.resources.CampaignCriterion.proximity', index=17,
+      name='proximity', full_name='google.ads.googleads.v0.resources.CampaignCriterion.proximity', index=18,
       number=23, type=11, cpp_type=10, label=1,
       has_default_value=False, default_value=None,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None, file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
-      name='topic', full_name='google.ads.googleads.v0.resources.CampaignCriterion.topic', index=18,
+      name='topic', full_name='google.ads.googleads.v0.resources.CampaignCriterion.topic', index=19,
       number=24, type=11, cpp_type=10, label=1,
+      has_default_value=False, default_value=None,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None, file=DESCRIPTOR),
+    _descriptor.FieldDescriptor(
+      name='listing_scope', full_name='google.ads.googleads.v0.resources.CampaignCriterion.listing_scope', index=20,
+      number=25, type=11, cpp_type=10, label=1,
+      has_default_value=False, default_value=None,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None, file=DESCRIPTOR),
+    _descriptor.FieldDescriptor(
+      name='language', full_name='google.ads.googleads.v0.resources.CampaignCriterion.language', index=21,
+      number=26, type=11, cpp_type=10, label=1,
+      has_default_value=False, default_value=None,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None, file=DESCRIPTOR),
+    _descriptor.FieldDescriptor(
+      name='ip_block', full_name='google.ads.googleads.v0.resources.CampaignCriterion.ip_block', index=22,
+      number=27, type=11, cpp_type=10, label=1,
+      has_default_value=False, default_value=None,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None, file=DESCRIPTOR),
+    _descriptor.FieldDescriptor(
+      name='content_label', full_name='google.ads.googleads.v0.resources.CampaignCriterion.content_label', index=23,
+      number=28, type=11, cpp_type=10, label=1,
+      has_default_value=False, default_value=None,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None, file=DESCRIPTOR),
+    _descriptor.FieldDescriptor(
+      name='carrier', full_name='google.ads.googleads.v0.resources.CampaignCriterion.carrier', index=24,
+      number=29, type=11, cpp_type=10, label=1,
+      has_default_value=False, default_value=None,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None, file=DESCRIPTOR),
+    _descriptor.FieldDescriptor(
+      name='user_interest', full_name='google.ads.googleads.v0.resources.CampaignCriterion.user_interest', index=25,
+      number=30, type=11, cpp_type=10, label=1,
       has_default_value=False, default_value=None,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
@@ -185,7 +234,7 @@ _CAMPAIGNCRITERION = _descriptor.Descriptor(
       index=0, containing_type=None, fields=[]),
   ],
   serialized_start=247,
-  serialized_end=1470,
+  serialized_end=1957,
 )
 
 _CAMPAIGNCRITERION.fields_by_name['campaign'].message_type = google_dot_protobuf_dot_wrappers__pb2._STRINGVALUE
@@ -202,10 +251,17 @@ _CAMPAIGNCRITERION.fields_by_name['age_range'].message_type = google_dot_ads_dot
 _CAMPAIGNCRITERION.fields_by_name['gender'].message_type = google_dot_ads_dot_googleads__v0_dot_proto_dot_common_dot_criteria__pb2._GENDERINFO
 _CAMPAIGNCRITERION.fields_by_name['income_range'].message_type = google_dot_ads_dot_googleads__v0_dot_proto_dot_common_dot_criteria__pb2._INCOMERANGEINFO
 _CAMPAIGNCRITERION.fields_by_name['parental_status'].message_type = google_dot_ads_dot_googleads__v0_dot_proto_dot_common_dot_criteria__pb2._PARENTALSTATUSINFO
+_CAMPAIGNCRITERION.fields_by_name['user_list'].message_type = google_dot_ads_dot_googleads__v0_dot_proto_dot_common_dot_criteria__pb2._USERLISTINFO
 _CAMPAIGNCRITERION.fields_by_name['youtube_video'].message_type = google_dot_ads_dot_googleads__v0_dot_proto_dot_common_dot_criteria__pb2._YOUTUBEVIDEOINFO
 _CAMPAIGNCRITERION.fields_by_name['youtube_channel'].message_type = google_dot_ads_dot_googleads__v0_dot_proto_dot_common_dot_criteria__pb2._YOUTUBECHANNELINFO
 _CAMPAIGNCRITERION.fields_by_name['proximity'].message_type = google_dot_ads_dot_googleads__v0_dot_proto_dot_common_dot_criteria__pb2._PROXIMITYINFO
 _CAMPAIGNCRITERION.fields_by_name['topic'].message_type = google_dot_ads_dot_googleads__v0_dot_proto_dot_common_dot_criteria__pb2._TOPICINFO
+_CAMPAIGNCRITERION.fields_by_name['listing_scope'].message_type = google_dot_ads_dot_googleads__v0_dot_proto_dot_common_dot_criteria__pb2._LISTINGSCOPEINFO
+_CAMPAIGNCRITERION.fields_by_name['language'].message_type = google_dot_ads_dot_googleads__v0_dot_proto_dot_common_dot_criteria__pb2._LANGUAGEINFO
+_CAMPAIGNCRITERION.fields_by_name['ip_block'].message_type = google_dot_ads_dot_googleads__v0_dot_proto_dot_common_dot_criteria__pb2._IPBLOCKINFO
+_CAMPAIGNCRITERION.fields_by_name['content_label'].message_type = google_dot_ads_dot_googleads__v0_dot_proto_dot_common_dot_criteria__pb2._CONTENTLABELINFO
+_CAMPAIGNCRITERION.fields_by_name['carrier'].message_type = google_dot_ads_dot_googleads__v0_dot_proto_dot_common_dot_criteria__pb2._CARRIERINFO
+_CAMPAIGNCRITERION.fields_by_name['user_interest'].message_type = google_dot_ads_dot_googleads__v0_dot_proto_dot_common_dot_criteria__pb2._USERINTERESTINFO
 _CAMPAIGNCRITERION.oneofs_by_name['criterion'].fields.append(
   _CAMPAIGNCRITERION.fields_by_name['keyword'])
 _CAMPAIGNCRITERION.fields_by_name['keyword'].containing_oneof = _CAMPAIGNCRITERION.oneofs_by_name['criterion']
@@ -234,6 +290,9 @@ _CAMPAIGNCRITERION.oneofs_by_name['criterion'].fields.append(
   _CAMPAIGNCRITERION.fields_by_name['parental_status'])
 _CAMPAIGNCRITERION.fields_by_name['parental_status'].containing_oneof = _CAMPAIGNCRITERION.oneofs_by_name['criterion']
 _CAMPAIGNCRITERION.oneofs_by_name['criterion'].fields.append(
+  _CAMPAIGNCRITERION.fields_by_name['user_list'])
+_CAMPAIGNCRITERION.fields_by_name['user_list'].containing_oneof = _CAMPAIGNCRITERION.oneofs_by_name['criterion']
+_CAMPAIGNCRITERION.oneofs_by_name['criterion'].fields.append(
   _CAMPAIGNCRITERION.fields_by_name['youtube_video'])
 _CAMPAIGNCRITERION.fields_by_name['youtube_video'].containing_oneof = _CAMPAIGNCRITERION.oneofs_by_name['criterion']
 _CAMPAIGNCRITERION.oneofs_by_name['criterion'].fields.append(
@@ -245,12 +304,30 @@ _CAMPAIGNCRITERION.fields_by_name['proximity'].containing_oneof = _CAMPAIGNCRITE
 _CAMPAIGNCRITERION.oneofs_by_name['criterion'].fields.append(
   _CAMPAIGNCRITERION.fields_by_name['topic'])
 _CAMPAIGNCRITERION.fields_by_name['topic'].containing_oneof = _CAMPAIGNCRITERION.oneofs_by_name['criterion']
+_CAMPAIGNCRITERION.oneofs_by_name['criterion'].fields.append(
+  _CAMPAIGNCRITERION.fields_by_name['listing_scope'])
+_CAMPAIGNCRITERION.fields_by_name['listing_scope'].containing_oneof = _CAMPAIGNCRITERION.oneofs_by_name['criterion']
+_CAMPAIGNCRITERION.oneofs_by_name['criterion'].fields.append(
+  _CAMPAIGNCRITERION.fields_by_name['language'])
+_CAMPAIGNCRITERION.fields_by_name['language'].containing_oneof = _CAMPAIGNCRITERION.oneofs_by_name['criterion']
+_CAMPAIGNCRITERION.oneofs_by_name['criterion'].fields.append(
+  _CAMPAIGNCRITERION.fields_by_name['ip_block'])
+_CAMPAIGNCRITERION.fields_by_name['ip_block'].containing_oneof = _CAMPAIGNCRITERION.oneofs_by_name['criterion']
+_CAMPAIGNCRITERION.oneofs_by_name['criterion'].fields.append(
+  _CAMPAIGNCRITERION.fields_by_name['content_label'])
+_CAMPAIGNCRITERION.fields_by_name['content_label'].containing_oneof = _CAMPAIGNCRITERION.oneofs_by_name['criterion']
+_CAMPAIGNCRITERION.oneofs_by_name['criterion'].fields.append(
+  _CAMPAIGNCRITERION.fields_by_name['carrier'])
+_CAMPAIGNCRITERION.fields_by_name['carrier'].containing_oneof = _CAMPAIGNCRITERION.oneofs_by_name['criterion']
+_CAMPAIGNCRITERION.oneofs_by_name['criterion'].fields.append(
+  _CAMPAIGNCRITERION.fields_by_name['user_interest'])
+_CAMPAIGNCRITERION.fields_by_name['user_interest'].containing_oneof = _CAMPAIGNCRITERION.oneofs_by_name['criterion']
 DESCRIPTOR.message_types_by_name['CampaignCriterion'] = _CAMPAIGNCRITERION
 _sym_db.RegisterFileDescriptor(DESCRIPTOR)
 
 CampaignCriterion = _reflection.GeneratedProtocolMessageType('CampaignCriterion', (_message.Message,), dict(
   DESCRIPTOR = _CAMPAIGNCRITERION,
-  __module__ = 'google.ads.googleads_v0.proto.resources.campaign_criterion_pb2'
+  __module__ = 'google.ads.google_ads.v0.proto.resources.campaign_criterion_pb2'
   ,
   __doc__ = """A campaign criterion.
   
@@ -294,6 +371,8 @@ CampaignCriterion = _reflection.GeneratedProtocolMessageType('CampaignCriterion'
           Income range.
       parental_status:
           Parental status.
+      user_list:
+          User List.
       youtube_video:
           YouTube Video.
       youtube_channel:
@@ -302,6 +381,18 @@ CampaignCriterion = _reflection.GeneratedProtocolMessageType('CampaignCriterion'
           Proximity.
       topic:
           Topic.
+      listing_scope:
+          Listing scope.
+      language:
+          Language.
+      ip_block:
+          IpBlock.
+      content_label:
+          ContentLabel.
+      carrier:
+          Carrier.
+      user_interest:
+          User Interest.
   """,
   # @@protoc_insertion_point(class_scope:google.ads.googleads.v0.resources.CampaignCriterion)
   ))

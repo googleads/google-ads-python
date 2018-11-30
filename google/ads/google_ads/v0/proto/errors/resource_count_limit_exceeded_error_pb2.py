@@ -109,7 +109,7 @@ _sym_db.RegisterFileDescriptor(DESCRIPTOR)
 
 ResourceCountLimitExceededErrorEnum = _reflection.GeneratedProtocolMessageType('ResourceCountLimitExceededErrorEnum', (_message.Message,), dict(
   DESCRIPTOR = _RESOURCECOUNTLIMITEXCEEDEDERRORENUM,
-  __module__ = 'google.ads.googleads_v0.proto.errors.resource_count_limit_exceeded_error_pb2'
+  __module__ = 'google.ads.google_ads.v0.proto.errors.resource_count_limit_exceeded_error_pb2'
   ,
   __doc__ = """Container for enum describing possible resource count limit exceeded
   errors.

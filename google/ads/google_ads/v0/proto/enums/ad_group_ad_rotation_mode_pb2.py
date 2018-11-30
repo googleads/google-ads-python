@@ -85,7 +85,7 @@ _sym_db.RegisterFileDescriptor(DESCRIPTOR)
 
 AdGroupAdRotationModeEnum = _reflection.GeneratedProtocolMessageType('AdGroupAdRotationModeEnum', (_message.Message,), dict(
   DESCRIPTOR = _ADGROUPADROTATIONMODEENUM,
-  __module__ = 'google.ads.googleads_v0.proto.enums.ad_group_ad_rotation_mode_pb2'
+  __module__ = 'google.ads.google_ads.v0.proto.enums.ad_group_ad_rotation_mode_pb2'
   ,
   __doc__ = """Container for enum describing possible ad rotation modes of ads within
   an ad group.

@@ -85,7 +85,7 @@ _sym_db.RegisterFileDescriptor(DESCRIPTOR)
 
 ListOperationErrorEnum = _reflection.GeneratedProtocolMessageType('ListOperationErrorEnum', (_message.Message,), dict(
   DESCRIPTOR = _LISTOPERATIONERRORENUM,
-  __module__ = 'google.ads.googleads_v0.proto.errors.list_operation_error_pb2'
+  __module__ = 'google.ads.google_ads.v0.proto.errors.list_operation_error_pb2'
   ,
   __doc__ = """Container for enum describing possible list operation errors.
   """,

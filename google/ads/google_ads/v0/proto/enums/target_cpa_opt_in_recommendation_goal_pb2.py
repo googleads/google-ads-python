@@ -93,7 +93,7 @@ _sym_db.RegisterFileDescriptor(DESCRIPTOR)
 
 TargetCpaOptInRecommendationGoalEnum = _reflection.GeneratedProtocolMessageType('TargetCpaOptInRecommendationGoalEnum', (_message.Message,), dict(
   DESCRIPTOR = _TARGETCPAOPTINRECOMMENDATIONGOALENUM,
-  __module__ = 'google.ads.googleads_v0.proto.enums.target_cpa_opt_in_recommendation_goal_pb2'
+  __module__ = 'google.ads.google_ads.v0.proto.enums.target_cpa_opt_in_recommendation_goal_pb2'
   ,
   __doc__ = """Container for enum describing goals for TargetCpaOptIn recommendation.
   """,

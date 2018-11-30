@@ -85,7 +85,7 @@ _sym_db.RegisterFileDescriptor(DESCRIPTOR)
 
 ListingGroupTypeEnum = _reflection.GeneratedProtocolMessageType('ListingGroupTypeEnum', (_message.Message,), dict(
   DESCRIPTOR = _LISTINGGROUPTYPEENUM,
-  __module__ = 'google.ads.googleads_v0.proto.enums.listing_group_type_pb2'
+  __module__ = 'google.ads.google_ads.v0.proto.enums.listing_group_type_pb2'
   ,
   __doc__ = """Container for enum describing the type of the listing group.
   """,

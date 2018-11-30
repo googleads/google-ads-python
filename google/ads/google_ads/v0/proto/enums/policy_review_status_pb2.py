@@ -89,7 +89,7 @@ _sym_db.RegisterFileDescriptor(DESCRIPTOR)
 
 PolicyReviewStatusEnum = _reflection.GeneratedProtocolMessageType('PolicyReviewStatusEnum', (_message.Message,), dict(
   DESCRIPTOR = _POLICYREVIEWSTATUSENUM,
-  __module__ = 'google.ads.googleads_v0.proto.enums.policy_review_status_pb2'
+  __module__ = 'google.ads.google_ads.v0.proto.enums.policy_review_status_pb2'
   ,
   __doc__ = """Container for enum describing possible policy review statuses.
   """,

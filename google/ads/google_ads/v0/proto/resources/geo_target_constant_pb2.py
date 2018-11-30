@@ -103,7 +103,7 @@ _sym_db.RegisterFileDescriptor(DESCRIPTOR)
 
 GeoTargetConstant = _reflection.GeneratedProtocolMessageType('GeoTargetConstant', (_message.Message,), dict(
   DESCRIPTOR = _GEOTARGETCONSTANT,
-  __module__ = 'google.ads.googleads_v0.proto.resources.geo_target_constant_pb2'
+  __module__ = 'google.ads.google_ads.v0.proto.resources.geo_target_constant_pb2'
   ,
   __doc__ = """A geo target constant.
   

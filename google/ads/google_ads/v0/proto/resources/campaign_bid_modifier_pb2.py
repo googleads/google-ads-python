@@ -101,7 +101,7 @@ _sym_db.RegisterFileDescriptor(DESCRIPTOR)
 
 CampaignBidModifier = _reflection.GeneratedProtocolMessageType('CampaignBidModifier', (_message.Message,), dict(
   DESCRIPTOR = _CAMPAIGNBIDMODIFIER,
-  __module__ = 'google.ads.googleads_v0.proto.resources.campaign_bid_modifier_pb2'
+  __module__ = 'google.ads.google_ads.v0.proto.resources.campaign_bid_modifier_pb2'
   ,
   __doc__ = """Represents a bid-modifiable only criterion at the campaign level.
   

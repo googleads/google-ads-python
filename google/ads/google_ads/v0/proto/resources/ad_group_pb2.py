@@ -14,9 +14,11 @@ _sym_db = _symbol_database.Default()
 
 
 from google.ads.google_ads.v0.proto.common import custom_parameter_pb2 as google_dot_ads_dot_googleads__v0_dot_proto_dot_common_dot_custom__parameter__pb2
+from google.ads.google_ads.v0.proto.common import explorer_auto_optimizer_setting_pb2 as google_dot_ads_dot_googleads__v0_dot_proto_dot_common_dot_explorer__auto__optimizer__setting__pb2
 from google.ads.google_ads.v0.proto.enums import ad_group_ad_rotation_mode_pb2 as google_dot_ads_dot_googleads__v0_dot_proto_dot_enums_dot_ad__group__ad__rotation__mode__pb2
 from google.ads.google_ads.v0.proto.enums import ad_group_status_pb2 as google_dot_ads_dot_googleads__v0_dot_proto_dot_enums_dot_ad__group__status__pb2
 from google.ads.google_ads.v0.proto.enums import ad_group_type_pb2 as google_dot_ads_dot_googleads__v0_dot_proto_dot_enums_dot_ad__group__type__pb2
+from google.ads.google_ads.v0.proto.enums import targeting_dimension_pb2 as google_dot_ads_dot_googleads__v0_dot_proto_dot_enums_dot_targeting__dimension__pb2
 from google.protobuf import wrappers_pb2 as google_dot_protobuf_dot_wrappers__pb2
 
 
@@ -24,9 +26,9 @@ DESCRIPTOR = _descriptor.FileDescriptor(
   name='google/ads/googleads_v0/proto/resources/ad_group.proto',
   package='google.ads.googleads.v0.resources',
   syntax='proto3',
-  serialized_pb=_b('\n6google/ads/googleads_v0/proto/resources/ad_group.proto\x12!google.ads.googleads.v0.resources\x1a;google/ads/googleads_v0/proto/common/custom_parameter.proto\x1a\x43google/ads/googleads_v0/proto/enums/ad_group_ad_rotation_mode.proto\x1a\x39google/ads/googleads_v0/proto/enums/ad_group_status.proto\x1a\x37google/ads/googleads_v0/proto/enums/ad_group_type.proto\x1a\x1egoogle/protobuf/wrappers.proto\"\x83\x07\n\x07\x41\x64Group\x12\x15\n\rresource_name\x18\x01 \x01(\t\x12\'\n\x02id\x18\x03 \x01(\x0b\x32\x1b.google.protobuf.Int64Value\x12*\n\x04name\x18\x04 \x01(\x0b\x32\x1c.google.protobuf.StringValue\x12N\n\x06status\x18\x05 \x01(\x0e\x32>.google.ads.googleads.v0.enums.AdGroupStatusEnum.AdGroupStatus\x12H\n\x04type\x18\x0c \x01(\x0e\x32:.google.ads.googleads.v0.enums.AdGroupTypeEnum.AdGroupType\x12h\n\x10\x61\x64_rotation_mode\x18\x16 \x01(\x0e\x32N.google.ads.googleads.v0.enums.AdGroupAdRotationModeEnum.AdGroupAdRotationMode\x12;\n\x15tracking_url_template\x18\r \x01(\x0b\x32\x1c.google.protobuf.StringValue\x12N\n\x15url_custom_parameters\x18\x06 \x03(\x0b\x32/.google.ads.googleads.v0.common.CustomParameter\x12.\n\x08\x63\x61mpaign\x18\n \x01(\x0b\x32\x1c.google.protobuf.StringValue\x12\x33\n\x0e\x63pc_bid_micros\x18\x0e \x01(\x0b\x32\x1b.google.protobuf.Int64Value\x12\x33\n\x0e\x63pm_bid_micros\x18\x0f \x01(\x0b\x32\x1b.google.protobuf.Int64Value\x12\x33\n\x0e\x63pa_bid_micros\x18\x10 \x01(\x0b\x32\x1b.google.protobuf.Int64Value\x12\x33\n\x0e\x63pv_bid_micros\x18\x11 \x01(\x0b\x32\x1b.google.protobuf.Int64Value\x12:\n\x14target_roas_override\x18\x13 \x01(\x0b\x32\x1c.google.protobuf.DoubleValue\x12;\n\x16percent_cpc_bid_micros\x18\x14 \x01(\x0b\x32\x1b.google.protobuf.Int64ValueB\xd1\x01\n%com.google.ads.googleads.v0.resourcesB\x0c\x41\x64GroupProtoP\x01ZJgoogle.golang.org/genproto/googleapis/ads/googleads/v0/resources;resources\xa2\x02\x03GAA\xaa\x02!Google.Ads.GoogleAds.V0.Resources\xca\x02!Google\\Ads\\GoogleAds\\V0\\Resourcesb\x06proto3')
+  serialized_pb=_b('\n6google/ads/googleads_v0/proto/resources/ad_group.proto\x12!google.ads.googleads.v0.resources\x1a;google/ads/googleads_v0/proto/common/custom_parameter.proto\x1aJgoogle/ads/googleads_v0/proto/common/explorer_auto_optimizer_setting.proto\x1a\x43google/ads/googleads_v0/proto/enums/ad_group_ad_rotation_mode.proto\x1a\x39google/ads/googleads_v0/proto/enums/ad_group_status.proto\x1a\x37google/ads/googleads_v0/proto/enums/ad_group_type.proto\x1a=google/ads/googleads_v0/proto/enums/targeting_dimension.proto\x1a\x1egoogle/protobuf/wrappers.proto\"\x92\t\n\x07\x41\x64Group\x12\x15\n\rresource_name\x18\x01 \x01(\t\x12\'\n\x02id\x18\x03 \x01(\x0b\x32\x1b.google.protobuf.Int64Value\x12*\n\x04name\x18\x04 \x01(\x0b\x32\x1c.google.protobuf.StringValue\x12N\n\x06status\x18\x05 \x01(\x0e\x32>.google.ads.googleads.v0.enums.AdGroupStatusEnum.AdGroupStatus\x12H\n\x04type\x18\x0c \x01(\x0e\x32:.google.ads.googleads.v0.enums.AdGroupTypeEnum.AdGroupType\x12h\n\x10\x61\x64_rotation_mode\x18\x16 \x01(\x0e\x32N.google.ads.googleads.v0.enums.AdGroupAdRotationModeEnum.AdGroupAdRotationMode\x12;\n\x15tracking_url_template\x18\r \x01(\x0b\x32\x1c.google.protobuf.StringValue\x12N\n\x15url_custom_parameters\x18\x06 \x03(\x0b\x32/.google.ads.googleads.v0.common.CustomParameter\x12.\n\x08\x63\x61mpaign\x18\n \x01(\x0b\x32\x1c.google.protobuf.StringValue\x12\x33\n\x0e\x63pc_bid_micros\x18\x0e \x01(\x0b\x32\x1b.google.protobuf.Int64Value\x12\x33\n\x0e\x63pm_bid_micros\x18\x0f \x01(\x0b\x32\x1b.google.protobuf.Int64Value\x12\x33\n\x0e\x63pa_bid_micros\x18\x10 \x01(\x0b\x32\x1b.google.protobuf.Int64Value\x12\x33\n\x0e\x63pv_bid_micros\x18\x11 \x01(\x0b\x32\x1b.google.protobuf.Int64Value\x12:\n\x14target_roas_override\x18\x13 \x01(\x0b\x32\x1c.google.protobuf.DoubleValue\x12;\n\x16percent_cpc_bid_micros\x18\x14 \x01(\x0b\x32\x1b.google.protobuf.Int64Value\x12\x65\n\x1f\x65xplorer_auto_optimizer_setting\x18\x15 \x01(\x0b\x32<.google.ads.googleads.v0.common.ExplorerAutoOptimizerSetting\x12n\n\x1c\x64isplay_custom_bid_dimension\x18\x17 \x01(\x0e\x32H.google.ads.googleads.v0.enums.TargetingDimensionEnum.TargetingDimension\x12\x36\n\x10\x66inal_url_suffix\x18\x18 \x01(\x0b\x32\x1c.google.protobuf.StringValueB\xd1\x01\n%com.google.ads.googleads.v0.resourcesB\x0c\x41\x64GroupProtoP\x01ZJgoogle.golang.org/genproto/googleapis/ads/googleads/v0/resources;resources\xa2\x02\x03GAA\xaa\x02!Google.Ads.GoogleAds.V0.Resources\xca\x02!Google\\Ads\\GoogleAds\\V0\\Resourcesb\x06proto3')
   ,
-  dependencies=[google_dot_ads_dot_googleads__v0_dot_proto_dot_common_dot_custom__parameter__pb2.DESCRIPTOR,google_dot_ads_dot_googleads__v0_dot_proto_dot_enums_dot_ad__group__ad__rotation__mode__pb2.DESCRIPTOR,google_dot_ads_dot_googleads__v0_dot_proto_dot_enums_dot_ad__group__status__pb2.DESCRIPTOR,google_dot_ads_dot_googleads__v0_dot_proto_dot_enums_dot_ad__group__type__pb2.DESCRIPTOR,google_dot_protobuf_dot_wrappers__pb2.DESCRIPTOR,])
+  dependencies=[google_dot_ads_dot_googleads__v0_dot_proto_dot_common_dot_custom__parameter__pb2.DESCRIPTOR,google_dot_ads_dot_googleads__v0_dot_proto_dot_common_dot_explorer__auto__optimizer__setting__pb2.DESCRIPTOR,google_dot_ads_dot_googleads__v0_dot_proto_dot_enums_dot_ad__group__ad__rotation__mode__pb2.DESCRIPTOR,google_dot_ads_dot_googleads__v0_dot_proto_dot_enums_dot_ad__group__status__pb2.DESCRIPTOR,google_dot_ads_dot_googleads__v0_dot_proto_dot_enums_dot_ad__group__type__pb2.DESCRIPTOR,google_dot_ads_dot_googleads__v0_dot_proto_dot_enums_dot_targeting__dimension__pb2.DESCRIPTOR,google_dot_protobuf_dot_wrappers__pb2.DESCRIPTOR,])
 
 
 
@@ -143,6 +145,27 @@ _ADGROUP = _descriptor.Descriptor(
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None, file=DESCRIPTOR),
+    _descriptor.FieldDescriptor(
+      name='explorer_auto_optimizer_setting', full_name='google.ads.googleads.v0.resources.AdGroup.explorer_auto_optimizer_setting', index=15,
+      number=21, type=11, cpp_type=10, label=1,
+      has_default_value=False, default_value=None,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None, file=DESCRIPTOR),
+    _descriptor.FieldDescriptor(
+      name='display_custom_bid_dimension', full_name='google.ads.googleads.v0.resources.AdGroup.display_custom_bid_dimension', index=16,
+      number=23, type=14, cpp_type=8, label=1,
+      has_default_value=False, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None, file=DESCRIPTOR),
+    _descriptor.FieldDescriptor(
+      name='final_url_suffix', full_name='google.ads.googleads.v0.resources.AdGroup.final_url_suffix', index=17,
+      number=24, type=11, cpp_type=10, label=1,
+      has_default_value=False, default_value=None,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None, file=DESCRIPTOR),
   ],
   extensions=[
   ],
@@ -155,8 +178,8 @@ _ADGROUP = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=372,
-  serialized_end=1271,
+  serialized_start=511,
+  serialized_end=1681,
 )
 
 _ADGROUP.fields_by_name['id'].message_type = google_dot_protobuf_dot_wrappers__pb2._INT64VALUE
@@ -173,12 +196,15 @@ _ADGROUP.fields_by_name['cpa_bid_micros'].message_type = google_dot_protobuf_dot
 _ADGROUP.fields_by_name['cpv_bid_micros'].message_type = google_dot_protobuf_dot_wrappers__pb2._INT64VALUE
 _ADGROUP.fields_by_name['target_roas_override'].message_type = google_dot_protobuf_dot_wrappers__pb2._DOUBLEVALUE
 _ADGROUP.fields_by_name['percent_cpc_bid_micros'].message_type = google_dot_protobuf_dot_wrappers__pb2._INT64VALUE
+_ADGROUP.fields_by_name['explorer_auto_optimizer_setting'].message_type = google_dot_ads_dot_googleads__v0_dot_proto_dot_common_dot_explorer__auto__optimizer__setting__pb2._EXPLORERAUTOOPTIMIZERSETTING
+_ADGROUP.fields_by_name['display_custom_bid_dimension'].enum_type = google_dot_ads_dot_googleads__v0_dot_proto_dot_enums_dot_targeting__dimension__pb2._TARGETINGDIMENSIONENUM_TARGETINGDIMENSION
+_ADGROUP.fields_by_name['final_url_suffix'].message_type = google_dot_protobuf_dot_wrappers__pb2._STRINGVALUE
 DESCRIPTOR.message_types_by_name['AdGroup'] = _ADGROUP
 _sym_db.RegisterFileDescriptor(DESCRIPTOR)
 
 AdGroup = _reflection.GeneratedProtocolMessageType('AdGroup', (_message.Message,), dict(
   DESCRIPTOR = _ADGROUP,
-  __module__ = 'google.ads.googleads_v0.proto.resources.ad_group_pb2'
+  __module__ = 'google.ads.google_ads.v0.proto.resources.ad_group_pb2'
   ,
   __doc__ = """An ad group.
   
@@ -229,6 +255,15 @@ AdGroup = _reflection.GeneratedProtocolMessageType('AdGroup', (_message.Message,
           advertised price for some good or service. The valid range for
           the fraction is [0,1) and the value stored here is 1,000,000
           \* [fraction].
+      explorer_auto_optimizer_setting:
+          Settings for the Display Campaign Optimizer, initially termed
+          "Explorer".
+      display_custom_bid_dimension:
+          Allows advertisers to specify a targeting dimension on which
+          to place absolute bids. This is only applicable for campaigns
+          that target only the display network and not search.
+      final_url_suffix:
+          URL template for appending params to Final URL.
   """,
   # @@protoc_insertion_point(class_scope:google.ads.googleads.v0.resources.AdGroup)
   ))

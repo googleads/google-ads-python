@@ -36,8 +36,13 @@ def main(client):
     locale = client.get_type('StringValue')
     locale.value = 'en'
 
+    # A list of country codes can be referenced here:
+    # https://developers.google.com/adwords/api/docs/appendix/geotargeting
+    country_code = client.get_type('StringValue')
+    country_code.value = 'FR'
+
     results = gtc_service.suggest_geo_target_constants(
-        locale, location_names=location_names)
+        locale, country_code, location_names=location_names)
 
     geo_target_constant_status_enum = client.get_type(
         'GeoTargetConstantStatusEnum').GeoTargetConstantStatus

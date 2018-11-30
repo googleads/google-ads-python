@@ -85,7 +85,7 @@ _sym_db.RegisterFileDescriptor(DESCRIPTOR)
 
 CampaignSharedSetStatusEnum = _reflection.GeneratedProtocolMessageType('CampaignSharedSetStatusEnum', (_message.Message,), dict(
   DESCRIPTOR = _CAMPAIGNSHAREDSETSTATUSENUM,
-  __module__ = 'google.ads.googleads_v0.proto.enums.campaign_shared_set_status_pb2'
+  __module__ = 'google.ads.google_ads.v0.proto.enums.campaign_shared_set_status_pb2'
   ,
   __doc__ = """Container for enum describing types of campaign shared set statuses.
   """,

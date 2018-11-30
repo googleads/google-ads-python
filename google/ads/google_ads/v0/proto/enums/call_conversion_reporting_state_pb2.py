@@ -89,7 +89,7 @@ _sym_db.RegisterFileDescriptor(DESCRIPTOR)
 
 CallConversionReportingStateEnum = _reflection.GeneratedProtocolMessageType('CallConversionReportingStateEnum', (_message.Message,), dict(
   DESCRIPTOR = _CALLCONVERSIONREPORTINGSTATEENUM,
-  __module__ = 'google.ads.googleads_v0.proto.enums.call_conversion_reporting_state_pb2'
+  __module__ = 'google.ads.google_ads.v0.proto.enums.call_conversion_reporting_state_pb2'
   ,
   __doc__ = """Container for enum describing possible data types for call conversion
   reporting state.

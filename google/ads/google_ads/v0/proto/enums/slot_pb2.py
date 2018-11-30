@@ -105,7 +105,7 @@ _sym_db.RegisterFileDescriptor(DESCRIPTOR)
 
 SlotEnum = _reflection.GeneratedProtocolMessageType('SlotEnum', (_message.Message,), dict(
   DESCRIPTOR = _SLOTENUM,
-  __module__ = 'google.ads.googleads_v0.proto.enums.slot_pb2'
+  __module__ = 'google.ads.google_ads.v0.proto.enums.slot_pb2'
   ,
   __doc__ = """Container for enumeration of possible positions of the Ad.
   """,

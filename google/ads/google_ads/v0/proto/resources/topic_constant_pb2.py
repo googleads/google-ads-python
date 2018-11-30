@@ -86,7 +86,7 @@ _sym_db.RegisterFileDescriptor(DESCRIPTOR)
 
 TopicConstant = _reflection.GeneratedProtocolMessageType('TopicConstant', (_message.Message,), dict(
   DESCRIPTOR = _TOPICCONSTANT,
-  __module__ = 'google.ads.googleads_v0.proto.resources.topic_constant_pb2'
+  __module__ = 'google.ads.google_ads.v0.proto.resources.topic_constant_pb2'
   ,
   __doc__ = """Use topics to target or exclude placements in the Google Display Network
   based on the category into which the placement falls (for example, "Pets

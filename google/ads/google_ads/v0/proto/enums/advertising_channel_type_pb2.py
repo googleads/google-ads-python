@@ -97,7 +97,7 @@ _sym_db.RegisterFileDescriptor(DESCRIPTOR)
 
 AdvertisingChannelTypeEnum = _reflection.GeneratedProtocolMessageType('AdvertisingChannelTypeEnum', (_message.Message,), dict(
   DESCRIPTOR = _ADVERTISINGCHANNELTYPEENUM,
-  __module__ = 'google.ads.googleads_v0.proto.enums.advertising_channel_type_pb2'
+  __module__ = 'google.ads.google_ads.v0.proto.enums.advertising_channel_type_pb2'
   ,
   __doc__ = """The channel type a campaign may target to serve on.
   """,

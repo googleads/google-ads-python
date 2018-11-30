@@ -32,9 +32,10 @@ Configuration file setup
 ########################
 
 To authenticate your API calls, you must specify your **client ID**,
-**client secret**, **refresh token**, and **developer token**. If you have not
-yet created a client ID, see the `Authorization guide`_ and the
-`authentication samples`_ to get started. Likewise, see
+**client secret**, **refresh token**, **developer token**, and, if
+you are authenticating with a manager account, a **login customer id**.
+If you have not yet created a client ID, see the `Authorization guide`_
+and the `authentication samples`_ to get started. Likewise, see
 `Obtain your developer token`_ if you do not yet have one.
 
 When initializing a `GoogleAdsClient` instance via the `load_from_storage`

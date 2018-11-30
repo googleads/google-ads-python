@@ -125,7 +125,7 @@ _sym_db.RegisterFileDescriptor(DESCRIPTOR)
 
 MultiplierErrorEnum = _reflection.GeneratedProtocolMessageType('MultiplierErrorEnum', (_message.Message,), dict(
   DESCRIPTOR = _MULTIPLIERERRORENUM,
-  __module__ = 'google.ads.googleads_v0.proto.errors.multiplier_error_pb2'
+  __module__ = 'google.ads.google_ads.v0.proto.errors.multiplier_error_pb2'
   ,
   __doc__ = """Container for enum describing possible multiplier errors.
   """,

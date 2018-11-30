@@ -89,7 +89,7 @@ _sym_db.RegisterFileDescriptor(DESCRIPTOR)
 
 CampaignGroupErrorEnum = _reflection.GeneratedProtocolMessageType('CampaignGroupErrorEnum', (_message.Message,), dict(
   DESCRIPTOR = _CAMPAIGNGROUPERRORENUM,
-  __module__ = 'google.ads.googleads_v0.proto.errors.campaign_group_error_pb2'
+  __module__ = 'google.ads.google_ads.v0.proto.errors.campaign_group_error_pb2'
   ,
   __doc__ = """Container for enum describing possible campaign group errors.
   """,

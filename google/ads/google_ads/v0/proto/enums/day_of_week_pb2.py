@@ -105,7 +105,7 @@ _sym_db.RegisterFileDescriptor(DESCRIPTOR)
 
 DayOfWeekEnum = _reflection.GeneratedProtocolMessageType('DayOfWeekEnum', (_message.Message,), dict(
   DESCRIPTOR = _DAYOFWEEKENUM,
-  __module__ = 'google.ads.googleads_v0.proto.enums.day_of_week_pb2'
+  __module__ = 'google.ads.google_ads.v0.proto.enums.day_of_week_pb2'
   ,
   __doc__ = """Container for enumeration of days of the week, e.g., "Monday".
   """,

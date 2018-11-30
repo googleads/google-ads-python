@@ -93,7 +93,7 @@ _sym_db.RegisterFileDescriptor(DESCRIPTOR)
 
 DataDrivenModelStatusEnum = _reflection.GeneratedProtocolMessageType('DataDrivenModelStatusEnum', (_message.Message,), dict(
   DESCRIPTOR = _DATADRIVENMODELSTATUSENUM,
-  __module__ = 'google.ads.googleads_v0.proto.enums.data_driven_model_status_pb2'
+  __module__ = 'google.ads.google_ads.v0.proto.enums.data_driven_model_status_pb2'
   ,
   __doc__ = """Container for enum indicating data driven model status.
   """,

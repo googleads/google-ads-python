@@ -135,7 +135,7 @@ _sym_db.RegisterFileDescriptor(DESCRIPTOR)
 
 SharedCriterion = _reflection.GeneratedProtocolMessageType('SharedCriterion', (_message.Message,), dict(
   DESCRIPTOR = _SHAREDCRITERION,
-  __module__ = 'google.ads.googleads_v0.proto.resources.shared_criterion_pb2'
+  __module__ = 'google.ads.google_ads.v0.proto.resources.shared_criterion_pb2'
   ,
   __doc__ = """A criterion belonging to a shared set.
   

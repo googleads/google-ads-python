@@ -63,7 +63,7 @@ _sym_db.RegisterFileDescriptor(DESCRIPTOR)
 
 GetAgeRangeViewRequest = _reflection.GeneratedProtocolMessageType('GetAgeRangeViewRequest', (_message.Message,), dict(
   DESCRIPTOR = _GETAGERANGEVIEWREQUEST,
-  __module__ = 'google.ads.googleads_v0.proto.services.age_range_view_service_pb2'
+  __module__ = 'google.ads.google_ads.v0.proto.services.age_range_view_service_pb2'
   ,
   __doc__ = """Request message for
   [AgeRangeViewService.GetAgeRangeView][google.ads.googleads.v0.services.AgeRangeViewService.GetAgeRangeView].

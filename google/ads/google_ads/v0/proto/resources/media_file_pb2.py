@@ -203,7 +203,7 @@ _sym_db.RegisterFileDescriptor(DESCRIPTOR)
 
 MediaFile = _reflection.GeneratedProtocolMessageType('MediaFile', (_message.Message,), dict(
   DESCRIPTOR = _MEDIAFILE,
-  __module__ = 'google.ads.googleads_v0.proto.resources.media_file_pb2'
+  __module__ = 'google.ads.google_ads.v0.proto.resources.media_file_pb2'
   ,
   __doc__ = """A media file.
   
@@ -241,7 +241,7 @@ _sym_db.RegisterMessage(MediaFile)
 
 MediaImage = _reflection.GeneratedProtocolMessageType('MediaImage', (_message.Message,), dict(
   DESCRIPTOR = _MEDIAIMAGE,
-  __module__ = 'google.ads.googleads_v0.proto.resources.media_file_pb2'
+  __module__ = 'google.ads.google_ads.v0.proto.resources.media_file_pb2'
   ,
   __doc__ = """Encapsulates an Image.
   
@@ -256,7 +256,7 @@ _sym_db.RegisterMessage(MediaImage)
 
 MediaBundle = _reflection.GeneratedProtocolMessageType('MediaBundle', (_message.Message,), dict(
   DESCRIPTOR = _MEDIABUNDLE,
-  __module__ = 'google.ads.googleads_v0.proto.resources.media_file_pb2'
+  __module__ = 'google.ads.google_ads.v0.proto.resources.media_file_pb2'
   ,
   __doc__ = """Represents a ZIP archive media the content of which contains HTML5
   assets.

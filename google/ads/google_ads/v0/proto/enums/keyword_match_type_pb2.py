@@ -89,7 +89,7 @@ _sym_db.RegisterFileDescriptor(DESCRIPTOR)
 
 KeywordMatchTypeEnum = _reflection.GeneratedProtocolMessageType('KeywordMatchTypeEnum', (_message.Message,), dict(
   DESCRIPTOR = _KEYWORDMATCHTYPEENUM,
-  __module__ = 'google.ads.googleads_v0.proto.enums.keyword_match_type_pb2'
+  __module__ = 'google.ads.google_ads.v0.proto.enums.keyword_match_type_pb2'
   ,
   __doc__ = """Message describing Keyword match types.
   """,

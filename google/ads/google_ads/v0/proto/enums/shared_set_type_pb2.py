@@ -85,7 +85,7 @@ _sym_db.RegisterFileDescriptor(DESCRIPTOR)
 
 SharedSetTypeEnum = _reflection.GeneratedProtocolMessageType('SharedSetTypeEnum', (_message.Message,), dict(
   DESCRIPTOR = _SHAREDSETTYPEENUM,
-  __module__ = 'google.ads.googleads_v0.proto.enums.shared_set_type_pb2'
+  __module__ = 'google.ads.google_ads.v0.proto.enums.shared_set_type_pb2'
   ,
   __doc__ = """Container for enum describing types of shared sets.
   """,

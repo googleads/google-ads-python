@@ -93,7 +93,7 @@ _sym_db.RegisterFileDescriptor(DESCRIPTOR)
 
 SharedSetErrorEnum = _reflection.GeneratedProtocolMessageType('SharedSetErrorEnum', (_message.Message,), dict(
   DESCRIPTOR = _SHAREDSETERRORENUM,
-  __module__ = 'google.ads.googleads_v0.proto.errors.shared_set_error_pb2'
+  __module__ = 'google.ads.google_ads.v0.proto.errors.shared_set_error_pb2'
   ,
   __doc__ = """Container for enum describing possible shared set errors.
   """,

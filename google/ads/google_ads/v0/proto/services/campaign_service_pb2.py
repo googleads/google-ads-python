@@ -237,7 +237,7 @@ _sym_db.RegisterFileDescriptor(DESCRIPTOR)
 
 GetCampaignRequest = _reflection.GeneratedProtocolMessageType('GetCampaignRequest', (_message.Message,), dict(
   DESCRIPTOR = _GETCAMPAIGNREQUEST,
-  __module__ = 'google.ads.googleads_v0.proto.services.campaign_service_pb2'
+  __module__ = 'google.ads.google_ads.v0.proto.services.campaign_service_pb2'
   ,
   __doc__ = """Request message for
   [CampaignService.GetCampaign][google.ads.googleads.v0.services.CampaignService.GetCampaign].
@@ -253,7 +253,7 @@ _sym_db.RegisterMessage(GetCampaignRequest)
 
 MutateCampaignsRequest = _reflection.GeneratedProtocolMessageType('MutateCampaignsRequest', (_message.Message,), dict(
   DESCRIPTOR = _MUTATECAMPAIGNSREQUEST,
-  __module__ = 'google.ads.googleads_v0.proto.services.campaign_service_pb2'
+  __module__ = 'google.ads.google_ads.v0.proto.services.campaign_service_pb2'
   ,
   __doc__ = """Request message for
   [CampaignService.MutateCampaigns][google.ads.googleads.v0.services.CampaignService.MutateCampaigns].
@@ -271,7 +271,7 @@ _sym_db.RegisterMessage(MutateCampaignsRequest)
 
 CampaignOperation = _reflection.GeneratedProtocolMessageType('CampaignOperation', (_message.Message,), dict(
   DESCRIPTOR = _CAMPAIGNOPERATION,
-  __module__ = 'google.ads.googleads_v0.proto.services.campaign_service_pb2'
+  __module__ = 'google.ads.google_ads.v0.proto.services.campaign_service_pb2'
   ,
   __doc__ = """A single operation (create, update, remove) on a campaign.
   
@@ -299,7 +299,7 @@ _sym_db.RegisterMessage(CampaignOperation)
 
 MutateCampaignsResponse = _reflection.GeneratedProtocolMessageType('MutateCampaignsResponse', (_message.Message,), dict(
   DESCRIPTOR = _MUTATECAMPAIGNSRESPONSE,
-  __module__ = 'google.ads.googleads_v0.proto.services.campaign_service_pb2'
+  __module__ = 'google.ads.google_ads.v0.proto.services.campaign_service_pb2'
   ,
   __doc__ = """Response message for campaign mutate.
   
@@ -314,7 +314,7 @@ _sym_db.RegisterMessage(MutateCampaignsResponse)
 
 MutateCampaignResult = _reflection.GeneratedProtocolMessageType('MutateCampaignResult', (_message.Message,), dict(
   DESCRIPTOR = _MUTATECAMPAIGNRESULT,
-  __module__ = 'google.ads.googleads_v0.proto.services.campaign_service_pb2'
+  __module__ = 'google.ads.google_ads.v0.proto.services.campaign_service_pb2'
   ,
   __doc__ = """The result for the campaign mutate.
   

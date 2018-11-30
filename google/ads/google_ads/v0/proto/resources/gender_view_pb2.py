@@ -60,7 +60,7 @@ _sym_db.RegisterFileDescriptor(DESCRIPTOR)
 
 GenderView = _reflection.GeneratedProtocolMessageType('GenderView', (_message.Message,), dict(
   DESCRIPTOR = _GENDERVIEW,
-  __module__ = 'google.ads.googleads_v0.proto.resources.gender_view_pb2'
+  __module__ = 'google.ads.google_ads.v0.proto.resources.gender_view_pb2'
   ,
   __doc__ = """A gender view.
   

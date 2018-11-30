@@ -85,7 +85,7 @@ _sym_db.RegisterFileDescriptor(DESCRIPTOR)
 
 AdGroupBidModifierErrorEnum = _reflection.GeneratedProtocolMessageType('AdGroupBidModifierErrorEnum', (_message.Message,), dict(
   DESCRIPTOR = _ADGROUPBIDMODIFIERERRORENUM,
-  __module__ = 'google.ads.googleads_v0.proto.errors.ad_group_bid_modifier_error_pb2'
+  __module__ = 'google.ads.google_ads.v0.proto.errors.ad_group_bid_modifier_error_pb2'
   ,
   __doc__ = """Container for enum describing possible ad group bid modifier errors.
   """,

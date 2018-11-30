@@ -237,7 +237,7 @@ _sym_db.RegisterFileDescriptor(DESCRIPTOR)
 
 GetSharedSetRequest = _reflection.GeneratedProtocolMessageType('GetSharedSetRequest', (_message.Message,), dict(
   DESCRIPTOR = _GETSHAREDSETREQUEST,
-  __module__ = 'google.ads.googleads_v0.proto.services.shared_set_service_pb2'
+  __module__ = 'google.ads.google_ads.v0.proto.services.shared_set_service_pb2'
   ,
   __doc__ = """Request message for
   [SharedSetService.GetSharedSet][google.ads.googleads.v0.services.SharedSetService.GetSharedSet].
@@ -253,7 +253,7 @@ _sym_db.RegisterMessage(GetSharedSetRequest)
 
 MutateSharedSetsRequest = _reflection.GeneratedProtocolMessageType('MutateSharedSetsRequest', (_message.Message,), dict(
   DESCRIPTOR = _MUTATESHAREDSETSREQUEST,
-  __module__ = 'google.ads.googleads_v0.proto.services.shared_set_service_pb2'
+  __module__ = 'google.ads.google_ads.v0.proto.services.shared_set_service_pb2'
   ,
   __doc__ = """Request message for
   [SharedSetService.MutateSharedSets][google.ads.googleads.v0.services.SharedSetService.MutateSharedSets].
@@ -271,7 +271,7 @@ _sym_db.RegisterMessage(MutateSharedSetsRequest)
 
 SharedSetOperation = _reflection.GeneratedProtocolMessageType('SharedSetOperation', (_message.Message,), dict(
   DESCRIPTOR = _SHAREDSETOPERATION,
-  __module__ = 'google.ads.googleads_v0.proto.services.shared_set_service_pb2'
+  __module__ = 'google.ads.google_ads.v0.proto.services.shared_set_service_pb2'
   ,
   __doc__ = """A single operation (create, update, remove) on an shared set.
   
@@ -299,7 +299,7 @@ _sym_db.RegisterMessage(SharedSetOperation)
 
 MutateSharedSetsResponse = _reflection.GeneratedProtocolMessageType('MutateSharedSetsResponse', (_message.Message,), dict(
   DESCRIPTOR = _MUTATESHAREDSETSRESPONSE,
-  __module__ = 'google.ads.googleads_v0.proto.services.shared_set_service_pb2'
+  __module__ = 'google.ads.google_ads.v0.proto.services.shared_set_service_pb2'
   ,
   __doc__ = """Response message for a shared set mutate.
   
@@ -314,7 +314,7 @@ _sym_db.RegisterMessage(MutateSharedSetsResponse)
 
 MutateSharedSetResult = _reflection.GeneratedProtocolMessageType('MutateSharedSetResult', (_message.Message,), dict(
   DESCRIPTOR = _MUTATESHAREDSETRESULT,
-  __module__ = 'google.ads.googleads_v0.proto.services.shared_set_service_pb2'
+  __module__ = 'google.ads.google_ads.v0.proto.services.shared_set_service_pb2'
   ,
   __doc__ = """The result for the shared set mutate.
   

@@ -97,7 +97,7 @@ _sym_db.RegisterFileDescriptor(DESCRIPTOR)
 
 PolicyTopicEntryTypeEnum = _reflection.GeneratedProtocolMessageType('PolicyTopicEntryTypeEnum', (_message.Message,), dict(
   DESCRIPTOR = _POLICYTOPICENTRYTYPEENUM,
-  __module__ = 'google.ads.googleads_v0.proto.enums.policy_topic_entry_type_pb2'
+  __module__ = 'google.ads.google_ads.v0.proto.enums.policy_topic_entry_type_pb2'
   ,
   __doc__ = """Container for enum describing possible policy topic entry types.
   """,

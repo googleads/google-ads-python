@@ -85,7 +85,7 @@ _sym_db.RegisterFileDescriptor(DESCRIPTOR)
 
 StringFormatErrorEnum = _reflection.GeneratedProtocolMessageType('StringFormatErrorEnum', (_message.Message,), dict(
   DESCRIPTOR = _STRINGFORMATERRORENUM,
-  __module__ = 'google.ads.googleads_v0.proto.errors.string_format_error_pb2'
+  __module__ = 'google.ads.google_ads.v0.proto.errors.string_format_error_pb2'
   ,
   __doc__ = """Container for enum describing possible string format errors.
   """,

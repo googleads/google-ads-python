@@ -63,7 +63,7 @@ _sym_db.RegisterFileDescriptor(DESCRIPTOR)
 
 GetVideoRequest = _reflection.GeneratedProtocolMessageType('GetVideoRequest', (_message.Message,), dict(
   DESCRIPTOR = _GETVIDEOREQUEST,
-  __module__ = 'google.ads.googleads_v0.proto.services.video_service_pb2'
+  __module__ = 'google.ads.google_ads.v0.proto.services.video_service_pb2'
   ,
   __doc__ = """Request message for
   [VideoService.GetVideo][google.ads.googleads.v0.services.VideoService.GetVideo].

@@ -93,7 +93,7 @@ _sym_db.RegisterFileDescriptor(DESCRIPTOR)
 
 AccountBudgetProposalTypeEnum = _reflection.GeneratedProtocolMessageType('AccountBudgetProposalTypeEnum', (_message.Message,), dict(
   DESCRIPTOR = _ACCOUNTBUDGETPROPOSALTYPEENUM,
-  __module__ = 'google.ads.googleads_v0.proto.enums.account_budget_proposal_type_pb2'
+  __module__ = 'google.ads.google_ads.v0.proto.enums.account_budget_proposal_type_pb2'
   ,
   __doc__ = """Message describing AccountBudgetProposal types.
   """,

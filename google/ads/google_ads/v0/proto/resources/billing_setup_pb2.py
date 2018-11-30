@@ -22,7 +22,7 @@ DESCRIPTOR = _descriptor.FileDescriptor(
   name='google/ads/googleads_v0/proto/resources/billing_setup.proto',
   package='google.ads.googleads.v0.resources',
   syntax='proto3',
-  serialized_pb=_b('\n;google/ads/googleads_v0/proto/resources/billing_setup.proto\x12!google.ads.googleads.v0.resources\x1a>google/ads/googleads_v0/proto/enums/billing_setup_status.proto\x1a\x33google/ads/googleads_v0/proto/enums/time_type.proto\x1a\x1egoogle/protobuf/wrappers.proto\"\xa9\x06\n\x0c\x42illingSetup\x12\x15\n\rresource_name\x18\x01 \x01(\t\x12\'\n\x02id\x18\x02 \x01(\x0b\x32\x1b.google.protobuf.Int64Value\x12X\n\x06status\x18\x03 \x01(\x0e\x32H.google.ads.googleads.v0.enums.BillingSetupStatusEnum.BillingSetupStatus\x12\x36\n\x10payments_account\x18\x0b \x01(\x0b\x32\x1c.google.protobuf.StringValue\x12\x62\n\x15payments_account_info\x18\x0c \x01(\x0b\x32\x43.google.ads.googleads.v0.resources.BillingSetup.PaymentsAccountInfo\x12\x37\n\x0fstart_date_time\x18\t \x01(\x0b\x32\x1c.google.protobuf.StringValueH\x00\x12O\n\x0fstart_time_type\x18\n \x01(\x0e\x32\x34.google.ads.googleads.v0.enums.TimeTypeEnum.TimeTypeH\x00\x1a\xca\x02\n\x13PaymentsAccountInfo\x12\x39\n\x13payments_account_id\x18\x01 \x01(\x0b\x32\x1c.google.protobuf.StringValue\x12;\n\x15payments_account_name\x18\x02 \x01(\x0b\x32\x1c.google.protobuf.StringValue\x12\x39\n\x13payments_profile_id\x18\x03 \x01(\x0b\x32\x1c.google.protobuf.StringValue\x12;\n\x15payments_profile_name\x18\x04 \x01(\x0b\x32\x1c.google.protobuf.StringValue\x12\x43\n\x1dsecondary_payments_profile_id\x18\x05 \x01(\x0b\x32\x1c.google.protobuf.StringValueB\x0c\n\nstart_timeB\xd6\x01\n%com.google.ads.googleads.v0.resourcesB\x11\x42illingSetupProtoP\x01ZJgoogle.golang.org/genproto/googleapis/ads/googleads/v0/resources;resources\xa2\x02\x03GAA\xaa\x02!Google.Ads.GoogleAds.V0.Resources\xca\x02!Google\\Ads\\GoogleAds\\V0\\Resourcesb\x06proto3')
+  serialized_pb=_b('\n;google/ads/googleads_v0/proto/resources/billing_setup.proto\x12!google.ads.googleads.v0.resources\x1a>google/ads/googleads_v0/proto/enums/billing_setup_status.proto\x1a\x33google/ads/googleads_v0/proto/enums/time_type.proto\x1a\x1egoogle/protobuf/wrappers.proto\"\xbb\x07\n\x0c\x42illingSetup\x12\x15\n\rresource_name\x18\x01 \x01(\t\x12\'\n\x02id\x18\x02 \x01(\x0b\x32\x1b.google.protobuf.Int64Value\x12X\n\x06status\x18\x03 \x01(\x0e\x32H.google.ads.googleads.v0.enums.BillingSetupStatusEnum.BillingSetupStatus\x12\x36\n\x10payments_account\x18\x0b \x01(\x0b\x32\x1c.google.protobuf.StringValue\x12\x62\n\x15payments_account_info\x18\x0c \x01(\x0b\x32\x43.google.ads.googleads.v0.resources.BillingSetup.PaymentsAccountInfo\x12\x37\n\x0fstart_date_time\x18\t \x01(\x0b\x32\x1c.google.protobuf.StringValueH\x00\x12O\n\x0fstart_time_type\x18\n \x01(\x0e\x32\x34.google.ads.googleads.v0.enums.TimeTypeEnum.TimeTypeH\x00\x12\x35\n\rend_date_time\x18\r \x01(\x0b\x32\x1c.google.protobuf.StringValueH\x01\x12M\n\rend_time_type\x18\x0e \x01(\x0e\x32\x34.google.ads.googleads.v0.enums.TimeTypeEnum.TimeTypeH\x01\x1a\xca\x02\n\x13PaymentsAccountInfo\x12\x39\n\x13payments_account_id\x18\x01 \x01(\x0b\x32\x1c.google.protobuf.StringValue\x12;\n\x15payments_account_name\x18\x02 \x01(\x0b\x32\x1c.google.protobuf.StringValue\x12\x39\n\x13payments_profile_id\x18\x03 \x01(\x0b\x32\x1c.google.protobuf.StringValue\x12;\n\x15payments_profile_name\x18\x04 \x01(\x0b\x32\x1c.google.protobuf.StringValue\x12\x43\n\x1dsecondary_payments_profile_id\x18\x05 \x01(\x0b\x32\x1c.google.protobuf.StringValueB\x0c\n\nstart_timeB\n\n\x08\x65nd_timeB\xd6\x01\n%com.google.ads.googleads.v0.resourcesB\x11\x42illingSetupProtoP\x01ZJgoogle.golang.org/genproto/googleapis/ads/googleads/v0/resources;resources\xa2\x02\x03GAA\xaa\x02!Google.Ads.GoogleAds.V0.Resources\xca\x02!Google\\Ads\\GoogleAds\\V0\\Resourcesb\x06proto3')
   ,
   dependencies=[google_dot_ads_dot_googleads__v0_dot_proto_dot_enums_dot_billing__setup__status__pb2.DESCRIPTOR,google_dot_ads_dot_googleads__v0_dot_proto_dot_enums_dot_time__type__pb2.DESCRIPTOR,google_dot_protobuf_dot_wrappers__pb2.DESCRIPTOR,])
 
@@ -83,8 +83,8 @@ _BILLINGSETUP_PAYMENTSACCOUNTINFO = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=713,
-  serialized_end=1043,
+  serialized_start=847,
+  serialized_end=1177,
 )
 
 _BILLINGSETUP = _descriptor.Descriptor(
@@ -143,6 +143,20 @@ _BILLINGSETUP = _descriptor.Descriptor(
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None, file=DESCRIPTOR),
+    _descriptor.FieldDescriptor(
+      name='end_date_time', full_name='google.ads.googleads.v0.resources.BillingSetup.end_date_time', index=7,
+      number=13, type=11, cpp_type=10, label=1,
+      has_default_value=False, default_value=None,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None, file=DESCRIPTOR),
+    _descriptor.FieldDescriptor(
+      name='end_time_type', full_name='google.ads.googleads.v0.resources.BillingSetup.end_time_type', index=8,
+      number=14, type=14, cpp_type=8, label=1,
+      has_default_value=False, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None, file=DESCRIPTOR),
   ],
   extensions=[
   ],
@@ -157,9 +171,12 @@ _BILLINGSETUP = _descriptor.Descriptor(
     _descriptor.OneofDescriptor(
       name='start_time', full_name='google.ads.googleads.v0.resources.BillingSetup.start_time',
       index=0, containing_type=None, fields=[]),
+    _descriptor.OneofDescriptor(
+      name='end_time', full_name='google.ads.googleads.v0.resources.BillingSetup.end_time',
+      index=1, containing_type=None, fields=[]),
   ],
   serialized_start=248,
-  serialized_end=1057,
+  serialized_end=1203,
 )
 
 _BILLINGSETUP_PAYMENTSACCOUNTINFO.fields_by_name['payments_account_id'].message_type = google_dot_protobuf_dot_wrappers__pb2._STRINGVALUE
@@ -174,12 +191,20 @@ _BILLINGSETUP.fields_by_name['payments_account'].message_type = google_dot_proto
 _BILLINGSETUP.fields_by_name['payments_account_info'].message_type = _BILLINGSETUP_PAYMENTSACCOUNTINFO
 _BILLINGSETUP.fields_by_name['start_date_time'].message_type = google_dot_protobuf_dot_wrappers__pb2._STRINGVALUE
 _BILLINGSETUP.fields_by_name['start_time_type'].enum_type = google_dot_ads_dot_googleads__v0_dot_proto_dot_enums_dot_time__type__pb2._TIMETYPEENUM_TIMETYPE
+_BILLINGSETUP.fields_by_name['end_date_time'].message_type = google_dot_protobuf_dot_wrappers__pb2._STRINGVALUE
+_BILLINGSETUP.fields_by_name['end_time_type'].enum_type = google_dot_ads_dot_googleads__v0_dot_proto_dot_enums_dot_time__type__pb2._TIMETYPEENUM_TIMETYPE
 _BILLINGSETUP.oneofs_by_name['start_time'].fields.append(
   _BILLINGSETUP.fields_by_name['start_date_time'])
 _BILLINGSETUP.fields_by_name['start_date_time'].containing_oneof = _BILLINGSETUP.oneofs_by_name['start_time']
 _BILLINGSETUP.oneofs_by_name['start_time'].fields.append(
   _BILLINGSETUP.fields_by_name['start_time_type'])
 _BILLINGSETUP.fields_by_name['start_time_type'].containing_oneof = _BILLINGSETUP.oneofs_by_name['start_time']
+_BILLINGSETUP.oneofs_by_name['end_time'].fields.append(
+  _BILLINGSETUP.fields_by_name['end_date_time'])
+_BILLINGSETUP.fields_by_name['end_date_time'].containing_oneof = _BILLINGSETUP.oneofs_by_name['end_time']
+_BILLINGSETUP.oneofs_by_name['end_time'].fields.append(
+  _BILLINGSETUP.fields_by_name['end_time_type'])
+_BILLINGSETUP.fields_by_name['end_time_type'].containing_oneof = _BILLINGSETUP.oneofs_by_name['end_time']
 DESCRIPTOR.message_types_by_name['BillingSetup'] = _BILLINGSETUP
 _sym_db.RegisterFileDescriptor(DESCRIPTOR)
 
@@ -187,7 +212,7 @@ BillingSetup = _reflection.GeneratedProtocolMessageType('BillingSetup', (_messag
 
   PaymentsAccountInfo = _reflection.GeneratedProtocolMessageType('PaymentsAccountInfo', (_message.Message,), dict(
     DESCRIPTOR = _BILLINGSETUP_PAYMENTSACCOUNTINFO,
-    __module__ = 'google.ads.googleads_v0.proto.resources.billing_setup_pb2'
+    __module__ = 'google.ads.google_ads.v0.proto.resources.billing_setup_pb2'
     ,
     __doc__ = """Container of Payments account information for this billing.
     
@@ -218,7 +243,7 @@ BillingSetup = _reflection.GeneratedProtocolMessageType('BillingSetup', (_messag
     ))
   ,
   DESCRIPTOR = _BILLINGSETUP,
-  __module__ = 'google.ads.googleads_v0.proto.resources.billing_setup_pb2'
+  __module__ = 'google.ads.google_ads.v0.proto.resources.billing_setup_pb2'
   ,
   __doc__ = """A billing setup across Ads and Payments systems; an association between
   a Payments account and an advertiser. A billing setup is specific to one
@@ -261,6 +286,13 @@ BillingSetup = _reflection.GeneratedProtocolMessageType('BillingSetup', (_messag
           format. Only a future time is allowed.
       start_time_type:
           The start time as a type. Only NOW is allowed.
+      end_time:
+          When the billing setup ends / ended. This is either FOREVER or
+          the start time of the next scheduled billing setup.
+      end_date_time:
+          The end date time in yyyy-MM-dd or yyyy-MM-dd HH:mm:ss format.
+      end_time_type:
+          The end time as a type. The only possible value is FOREVER.
   """,
   # @@protoc_insertion_point(class_scope:google.ads.googleads.v0.resources.BillingSetup)
   ))

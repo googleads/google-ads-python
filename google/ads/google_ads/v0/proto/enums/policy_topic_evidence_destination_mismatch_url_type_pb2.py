@@ -97,7 +97,7 @@ _sym_db.RegisterFileDescriptor(DESCRIPTOR)
 
 PolicyTopicEvidenceDestinationMismatchUrlTypeEnum = _reflection.GeneratedProtocolMessageType('PolicyTopicEvidenceDestinationMismatchUrlTypeEnum', (_message.Message,), dict(
   DESCRIPTOR = _POLICYTOPICEVIDENCEDESTINATIONMISMATCHURLTYPEENUM,
-  __module__ = 'google.ads.googleads_v0.proto.enums.policy_topic_evidence_destination_mismatch_url_type_pb2'
+  __module__ = 'google.ads.google_ads.v0.proto.enums.policy_topic_evidence_destination_mismatch_url_type_pb2'
   ,
   __doc__ = """Container for enum describing possible policy topic evidence destination
   mismatch url types.

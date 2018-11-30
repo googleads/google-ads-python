@@ -105,7 +105,7 @@ _sym_db.RegisterFileDescriptor(DESCRIPTOR)
 
 AttributionModelEnum = _reflection.GeneratedProtocolMessageType('AttributionModelEnum', (_message.Message,), dict(
   DESCRIPTOR = _ATTRIBUTIONMODELENUM,
-  __module__ = 'google.ads.googleads_v0.proto.enums.attribution_model_pb2'
+  __module__ = 'google.ads.google_ads.v0.proto.enums.attribution_model_pb2'
   ,
   __doc__ = """Container for enum representing the attribution model that describes how
   to distribute credit for a particular conversion across potentially many

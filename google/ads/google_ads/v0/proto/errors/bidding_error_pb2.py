@@ -157,7 +157,7 @@ _sym_db.RegisterFileDescriptor(DESCRIPTOR)
 
 BiddingErrorEnum = _reflection.GeneratedProtocolMessageType('BiddingErrorEnum', (_message.Message,), dict(
   DESCRIPTOR = _BIDDINGERRORENUM,
-  __module__ = 'google.ads.googleads_v0.proto.errors.bidding_error_pb2'
+  __module__ = 'google.ads.google_ads.v0.proto.errors.bidding_error_pb2'
   ,
   __doc__ = """Container for enum describing possible bidding errors.
   """,

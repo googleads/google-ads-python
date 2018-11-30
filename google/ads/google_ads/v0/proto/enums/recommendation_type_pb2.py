@@ -113,7 +113,7 @@ _sym_db.RegisterFileDescriptor(DESCRIPTOR)
 
 RecommendationTypeEnum = _reflection.GeneratedProtocolMessageType('RecommendationTypeEnum', (_message.Message,), dict(
   DESCRIPTOR = _RECOMMENDATIONTYPEENUM,
-  __module__ = 'google.ads.googleads_v0.proto.enums.recommendation_type_pb2'
+  __module__ = 'google.ads.google_ads.v0.proto.enums.recommendation_type_pb2'
   ,
   __doc__ = """Container for enum describing types of recommendations.
   """,

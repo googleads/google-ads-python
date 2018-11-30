@@ -97,7 +97,7 @@ _sym_db.RegisterFileDescriptor(DESCRIPTOR)
 
 AdServingOptimizationStatusEnum = _reflection.GeneratedProtocolMessageType('AdServingOptimizationStatusEnum', (_message.Message,), dict(
   DESCRIPTOR = _ADSERVINGOPTIMIZATIONSTATUSENUM,
-  __module__ = 'google.ads.googleads_v0.proto.enums.ad_serving_optimization_status_pb2'
+  __module__ = 'google.ads.google_ads.v0.proto.enums.ad_serving_optimization_status_pb2'
   ,
   __doc__ = """Possible ad serving statuses of a campaign.
   """,

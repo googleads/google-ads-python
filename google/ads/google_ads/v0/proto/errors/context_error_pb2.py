@@ -85,7 +85,7 @@ _sym_db.RegisterFileDescriptor(DESCRIPTOR)
 
 ContextErrorEnum = _reflection.GeneratedProtocolMessageType('ContextErrorEnum', (_message.Message,), dict(
   DESCRIPTOR = _CONTEXTERRORENUM,
-  __module__ = 'google.ads.googleads_v0.proto.errors.context_error_pb2'
+  __module__ = 'google.ads.google_ads.v0.proto.errors.context_error_pb2'
   ,
   __doc__ = """Container for enum describing possible context errors.
   """,

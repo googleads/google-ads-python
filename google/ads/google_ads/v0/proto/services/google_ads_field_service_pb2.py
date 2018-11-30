@@ -156,7 +156,7 @@ _sym_db.RegisterFileDescriptor(DESCRIPTOR)
 
 GetGoogleAdsFieldRequest = _reflection.GeneratedProtocolMessageType('GetGoogleAdsFieldRequest', (_message.Message,), dict(
   DESCRIPTOR = _GETGOOGLEADSFIELDREQUEST,
-  __module__ = 'google.ads.googleads_v0.proto.services.google_ads_field_service_pb2'
+  __module__ = 'google.ads.google_ads.v0.proto.services.google_ads_field_service_pb2'
   ,
   __doc__ = """Request message for
   [GoogleAdsFieldService.GetGoogleAdsField][google.ads.googleads.v0.services.GoogleAdsFieldService.GetGoogleAdsField].
@@ -172,7 +172,7 @@ _sym_db.RegisterMessage(GetGoogleAdsFieldRequest)
 
 SearchGoogleAdsFieldsRequest = _reflection.GeneratedProtocolMessageType('SearchGoogleAdsFieldsRequest', (_message.Message,), dict(
   DESCRIPTOR = _SEARCHGOOGLEADSFIELDSREQUEST,
-  __module__ = 'google.ads.googleads_v0.proto.services.google_ads_field_service_pb2'
+  __module__ = 'google.ads.google_ads.v0.proto.services.google_ads_field_service_pb2'
   ,
   __doc__ = """Request message for
   [GoogleAdsFieldService.SearchGoogleAdsFields][google.ads.googleads.v0.services.GoogleAdsFieldService.SearchGoogleAdsFields].
@@ -197,7 +197,7 @@ _sym_db.RegisterMessage(SearchGoogleAdsFieldsRequest)
 
 SearchGoogleAdsFieldsResponse = _reflection.GeneratedProtocolMessageType('SearchGoogleAdsFieldsResponse', (_message.Message,), dict(
   DESCRIPTOR = _SEARCHGOOGLEADSFIELDSRESPONSE,
-  __module__ = 'google.ads.googleads_v0.proto.services.google_ads_field_service_pb2'
+  __module__ = 'google.ads.google_ads.v0.proto.services.google_ads_field_service_pb2'
   ,
   __doc__ = """Response message for
   [GoogleAdsFieldService.SearchGoogleAdsFields][google.ads.googleads.v0.services.GoogleAdsFieldService.SearchGoogleAdsFields].

@@ -93,7 +93,7 @@ _sym_db.RegisterFileDescriptor(DESCRIPTOR)
 
 GoogleAdsFieldCategoryEnum = _reflection.GeneratedProtocolMessageType('GoogleAdsFieldCategoryEnum', (_message.Message,), dict(
   DESCRIPTOR = _GOOGLEADSFIELDCATEGORYENUM,
-  __module__ = 'google.ads.googleads_v0.proto.enums.google_ads_field_category_pb2'
+  __module__ = 'google.ads.google_ads.v0.proto.enums.google_ads_field_category_pb2'
   ,
   __doc__ = """Container for enum that determines if the described artifact is a
   resource or a field, and if it is a field, when it segments search

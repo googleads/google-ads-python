@@ -89,7 +89,7 @@ _sym_db.RegisterFileDescriptor(DESCRIPTOR)
 
 AdGroupCriterionStatusEnum = _reflection.GeneratedProtocolMessageType('AdGroupCriterionStatusEnum', (_message.Message,), dict(
   DESCRIPTOR = _ADGROUPCRITERIONSTATUSENUM,
-  __module__ = 'google.ads.googleads_v0.proto.enums.ad_group_criterion_status_pb2'
+  __module__ = 'google.ads.google_ads.v0.proto.enums.ad_group_criterion_status_pb2'
   ,
   __doc__ = """Message describing AdGroupCriterion statuses.
   """,

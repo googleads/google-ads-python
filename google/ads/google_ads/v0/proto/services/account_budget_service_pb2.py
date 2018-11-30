@@ -63,7 +63,7 @@ _sym_db.RegisterFileDescriptor(DESCRIPTOR)
 
 GetAccountBudgetRequest = _reflection.GeneratedProtocolMessageType('GetAccountBudgetRequest', (_message.Message,), dict(
   DESCRIPTOR = _GETACCOUNTBUDGETREQUEST,
-  __module__ = 'google.ads.googleads_v0.proto.services.account_budget_service_pb2'
+  __module__ = 'google.ads.google_ads.v0.proto.services.account_budget_service_pb2'
   ,
   __doc__ = """Request message for
   [AccountBudgetService.GetAccountBudget][google.ads.googleads.v0.services.AccountBudgetService.GetAccountBudget].

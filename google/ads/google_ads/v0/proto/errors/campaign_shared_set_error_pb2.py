@@ -81,7 +81,7 @@ _sym_db.RegisterFileDescriptor(DESCRIPTOR)
 
 CampaignSharedSetErrorEnum = _reflection.GeneratedProtocolMessageType('CampaignSharedSetErrorEnum', (_message.Message,), dict(
   DESCRIPTOR = _CAMPAIGNSHAREDSETERRORENUM,
-  __module__ = 'google.ads.googleads_v0.proto.errors.campaign_shared_set_error_pb2'
+  __module__ = 'google.ads.google_ads.v0.proto.errors.campaign_shared_set_error_pb2'
   ,
   __doc__ = """Container for enum describing possible campaign shared set errors.
   """,

@@ -89,7 +89,7 @@ _sym_db.RegisterFileDescriptor(DESCRIPTOR)
 
 DisplayAdFormatSettingEnum = _reflection.GeneratedProtocolMessageType('DisplayAdFormatSettingEnum', (_message.Message,), dict(
   DESCRIPTOR = _DISPLAYADFORMATSETTINGENUM,
-  __module__ = 'google.ads.googleads_v0.proto.enums.display_ad_format_setting_pb2'
+  __module__ = 'google.ads.google_ads.v0.proto.enums.display_ad_format_setting_pb2'
   ,
   __doc__ = """Container for display ad format settings.
   """,

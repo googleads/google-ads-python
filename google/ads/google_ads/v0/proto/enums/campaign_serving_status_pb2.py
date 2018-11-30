@@ -97,7 +97,7 @@ _sym_db.RegisterFileDescriptor(DESCRIPTOR)
 
 CampaignServingStatusEnum = _reflection.GeneratedProtocolMessageType('CampaignServingStatusEnum', (_message.Message,), dict(
   DESCRIPTOR = _CAMPAIGNSERVINGSTATUSENUM,
-  __module__ = 'google.ads.googleads_v0.proto.enums.campaign_serving_status_pb2'
+  __module__ = 'google.ads.google_ads.v0.proto.enums.campaign_serving_status_pb2'
   ,
   __doc__ = """Message describing Campaign serving statuses.
   """,

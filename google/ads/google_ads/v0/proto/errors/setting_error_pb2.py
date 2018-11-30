@@ -145,7 +145,7 @@ _sym_db.RegisterFileDescriptor(DESCRIPTOR)
 
 SettingErrorEnum = _reflection.GeneratedProtocolMessageType('SettingErrorEnum', (_message.Message,), dict(
   DESCRIPTOR = _SETTINGERRORENUM,
-  __module__ = 'google.ads.googleads_v0.proto.errors.setting_error_pb2'
+  __module__ = 'google.ads.google_ads.v0.proto.errors.setting_error_pb2'
   ,
   __doc__ = """Container for enum describing possible setting errors.
   """,

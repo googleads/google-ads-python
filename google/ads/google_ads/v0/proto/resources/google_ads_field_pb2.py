@@ -168,7 +168,7 @@ _sym_db.RegisterFileDescriptor(DESCRIPTOR)
 
 GoogleAdsField = _reflection.GeneratedProtocolMessageType('GoogleAdsField', (_message.Message,), dict(
   DESCRIPTOR = _GOOGLEADSFIELD,
-  __module__ = 'google.ads.googleads_v0.proto.resources.google_ads_field_pb2'
+  __module__ = 'google.ads.google_ads.v0.proto.resources.google_ads_field_pb2'
   ,
   __doc__ = """A field or resource (artifact) used by GoogleAdsService.
   

@@ -225,7 +225,7 @@ _sym_db.RegisterFileDescriptor(DESCRIPTOR)
 
 ImageErrorEnum = _reflection.GeneratedProtocolMessageType('ImageErrorEnum', (_message.Message,), dict(
   DESCRIPTOR = _IMAGEERRORENUM,
-  __module__ = 'google.ads.googleads_v0.proto.errors.image_error_pb2'
+  __module__ = 'google.ads.google_ads.v0.proto.errors.image_error_pb2'
   ,
   __doc__ = """Container for enum describing possible image errors.
   """,

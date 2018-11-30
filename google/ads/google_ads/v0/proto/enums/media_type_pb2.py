@@ -101,7 +101,7 @@ _sym_db.RegisterFileDescriptor(DESCRIPTOR)
 
 MediaTypeEnum = _reflection.GeneratedProtocolMessageType('MediaTypeEnum', (_message.Message,), dict(
   DESCRIPTOR = _MEDIATYPEENUM,
-  __module__ = 'google.ads.googleads_v0.proto.enums.media_type_pb2'
+  __module__ = 'google.ads.google_ads.v0.proto.enums.media_type_pb2'
   ,
   __doc__ = """Container for enum describing the types of media.
   """,

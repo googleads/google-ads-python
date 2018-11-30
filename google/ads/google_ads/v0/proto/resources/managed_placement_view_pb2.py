@@ -60,7 +60,7 @@ _sym_db.RegisterFileDescriptor(DESCRIPTOR)
 
 ManagedPlacementView = _reflection.GeneratedProtocolMessageType('ManagedPlacementView', (_message.Message,), dict(
   DESCRIPTOR = _MANAGEDPLACEMENTVIEW,
-  __module__ = 'google.ads.googleads_v0.proto.resources.managed_placement_view_pb2'
+  __module__ = 'google.ads.google_ads.v0.proto.resources.managed_placement_view_pb2'
   ,
   __doc__ = """A managed placement view.
   

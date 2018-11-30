@@ -97,7 +97,7 @@ _sym_db.RegisterFileDescriptor(DESCRIPTOR)
 
 ManagerLinkStatusEnum = _reflection.GeneratedProtocolMessageType('ManagerLinkStatusEnum', (_message.Message,), dict(
   DESCRIPTOR = _MANAGERLINKSTATUSENUM,
-  __module__ = 'google.ads.googleads_v0.proto.enums.manager_link_status_pb2'
+  __module__ = 'google.ads.google_ads.v0.proto.enums.manager_link_status_pb2'
   ,
   __doc__ = """Container for enum describing possible status of a manager and client
   link.

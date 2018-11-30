@@ -89,7 +89,7 @@ _sym_db.RegisterFileDescriptor(DESCRIPTOR)
 
 TagSnippet = _reflection.GeneratedProtocolMessageType('TagSnippet', (_message.Message,), dict(
   DESCRIPTOR = _TAGSNIPPET,
-  __module__ = 'google.ads.googleads_v0.proto.common.tag_snippet_pb2'
+  __module__ = 'google.ads.google_ads.v0.proto.common.tag_snippet_pb2'
   ,
   __doc__ = """The site tag and event snippet pair for a TrackingCodeType.
   

@@ -63,7 +63,7 @@ _sym_db.RegisterFileDescriptor(DESCRIPTOR)
 
 GetKeywordViewRequest = _reflection.GeneratedProtocolMessageType('GetKeywordViewRequest', (_message.Message,), dict(
   DESCRIPTOR = _GETKEYWORDVIEWREQUEST,
-  __module__ = 'google.ads.googleads_v0.proto.services.keyword_view_service_pb2'
+  __module__ = 'google.ads.google_ads.v0.proto.services.keyword_view_service_pb2'
   ,
   __doc__ = """Request message for
   [KeywordViewService.GetKeywordView][google.ads.googleads.v0.services.KeywordViewService.GetKeywordView].

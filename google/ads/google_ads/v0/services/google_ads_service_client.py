@@ -28,6 +28,7 @@ import grpc
 from google.ads.google_ads.v0.services import google_ads_service_client_config
 from google.ads.google_ads.v0.services.transports import google_ads_service_grpc_transport
 from google.ads.google_ads.v0.proto.services import google_ads_service_pb2
+from google.protobuf import wrappers_pb2
 
 _GAPIC_LIBRARY_VERSION = pkg_resources.get_distribution(
     'google-ads', ).version
@@ -220,3 +221,53 @@ class GoogleAdsServiceClient(object):
             response_token_field='next_page_token',
         )
         return iterator
+
+    def mutate(self,
+               customer_id,
+               mutate_operations,
+               retry=google.api_core.gapic_v1.method.DEFAULT,
+               timeout=google.api_core.gapic_v1.method.DEFAULT,
+               metadata=None):
+        """
+        Creates, updates, or removes resources. Operation statuses are returned.
+
+        Args:
+            customer_id (str): The ID of the customer whose resources are being modified.
+            mutate_operations (list[Union[dict, ~google.ads.google_ads.v0.types.MutateOperation]]): The list of operations to perform on individual resources.
+                If a dict is provided, it must be of the same form as the protobuf
+                message :class:`~google.ads.google_ads.v0.types.MutateOperation`
+            retry (Optional[google.api_core.retry.Retry]):  A retry object used
+                to retry requests. If ``None`` is specified, requests will not
+                be retried.
+            timeout (Optional[float]): The amount of time, in seconds, to wait
+                for the request to complete. Note that if ``retry`` is
+                specified, the timeout applies to each individual attempt.
+            metadata (Optional[Sequence[Tuple[str, str]]]): Additional metadata
+                that is provided to the method.
+
+        Returns:
+            A :class:`~google.ads.google_ads.v0.types.MutateGoogleAdsResponse` instance.
+
+        Raises:
+            google.api_core.exceptions.GoogleAPICallError: If the request
+                    failed for any reason.
+            google.api_core.exceptions.RetryError: If the request failed due
+                    to a retryable error and retry attempts failed.
+            ValueError: If the parameters are invalid.
+        """
+        # Wrap the transport method to add retry and timeout logic.
+        if 'mutate' not in self._inner_api_calls:
+            self._inner_api_calls[
+                'mutate'] = google.api_core.gapic_v1.method.wrap_method(
+                    self.transport.mutate,
+                    default_retry=self._method_configs['Mutate'].retry,
+                    default_timeout=self._method_configs['Mutate'].timeout,
+                    client_info=self._client_info,
+                )
+
+        request = google_ads_service_pb2.MutateGoogleAdsRequest(
+            customer_id=customer_id,
+            mutate_operations=mutate_operations,
+        )
+        return self._inner_api_calls['mutate'](
+            request, retry=retry, timeout=timeout, metadata=metadata)

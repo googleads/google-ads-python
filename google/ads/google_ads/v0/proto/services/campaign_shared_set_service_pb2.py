@@ -217,7 +217,7 @@ _sym_db.RegisterFileDescriptor(DESCRIPTOR)
 
 GetCampaignSharedSetRequest = _reflection.GeneratedProtocolMessageType('GetCampaignSharedSetRequest', (_message.Message,), dict(
   DESCRIPTOR = _GETCAMPAIGNSHAREDSETREQUEST,
-  __module__ = 'google.ads.googleads_v0.proto.services.campaign_shared_set_service_pb2'
+  __module__ = 'google.ads.google_ads.v0.proto.services.campaign_shared_set_service_pb2'
   ,
   __doc__ = """Request message for
   [CampaignSharedSetService.GetCampaignSharedSet][google.ads.googleads.v0.services.CampaignSharedSetService.GetCampaignSharedSet].
@@ -233,7 +233,7 @@ _sym_db.RegisterMessage(GetCampaignSharedSetRequest)
 
 MutateCampaignSharedSetsRequest = _reflection.GeneratedProtocolMessageType('MutateCampaignSharedSetsRequest', (_message.Message,), dict(
   DESCRIPTOR = _MUTATECAMPAIGNSHAREDSETSREQUEST,
-  __module__ = 'google.ads.googleads_v0.proto.services.campaign_shared_set_service_pb2'
+  __module__ = 'google.ads.google_ads.v0.proto.services.campaign_shared_set_service_pb2'
   ,
   __doc__ = """Request message for
   [CampaignSharedSetService.MutateCampaignSharedSets][google.ads.googleads.v0.services.CampaignSharedSetService.MutateCampaignSharedSets].
@@ -253,7 +253,7 @@ _sym_db.RegisterMessage(MutateCampaignSharedSetsRequest)
 
 CampaignSharedSetOperation = _reflection.GeneratedProtocolMessageType('CampaignSharedSetOperation', (_message.Message,), dict(
   DESCRIPTOR = _CAMPAIGNSHAREDSETOPERATION,
-  __module__ = 'google.ads.googleads_v0.proto.services.campaign_shared_set_service_pb2'
+  __module__ = 'google.ads.google_ads.v0.proto.services.campaign_shared_set_service_pb2'
   ,
   __doc__ = """A single operation (create, remove) on an campaign shared set.
   
@@ -275,7 +275,7 @@ _sym_db.RegisterMessage(CampaignSharedSetOperation)
 
 MutateCampaignSharedSetsResponse = _reflection.GeneratedProtocolMessageType('MutateCampaignSharedSetsResponse', (_message.Message,), dict(
   DESCRIPTOR = _MUTATECAMPAIGNSHAREDSETSRESPONSE,
-  __module__ = 'google.ads.googleads_v0.proto.services.campaign_shared_set_service_pb2'
+  __module__ = 'google.ads.google_ads.v0.proto.services.campaign_shared_set_service_pb2'
   ,
   __doc__ = """Response message for a campaign shared set mutate.
   
@@ -290,7 +290,7 @@ _sym_db.RegisterMessage(MutateCampaignSharedSetsResponse)
 
 MutateCampaignSharedSetResult = _reflection.GeneratedProtocolMessageType('MutateCampaignSharedSetResult', (_message.Message,), dict(
   DESCRIPTOR = _MUTATECAMPAIGNSHAREDSETRESULT,
-  __module__ = 'google.ads.googleads_v0.proto.services.campaign_shared_set_service_pb2'
+  __module__ = 'google.ads.google_ads.v0.proto.services.campaign_shared_set_service_pb2'
   ,
   __doc__ = """The result for the campaign shared set mutate.
   

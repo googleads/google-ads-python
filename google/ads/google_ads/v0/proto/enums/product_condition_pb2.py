@@ -19,7 +19,7 @@ DESCRIPTOR = _descriptor.FileDescriptor(
   name='google/ads/googleads_v0/proto/enums/product_condition.proto',
   package='google.ads.googleads.v0.enums',
   syntax='proto3',
-  serialized_pb=_b('\n;google/ads/googleads_v0/proto/enums/product_condition.proto\x12\x1dgoogle.ads.googleads.v0.enums\"u\n\x14ProductConditionEnum\"]\n\x10ProductCondition\x12\x0f\n\x0bUNSPECIFIED\x10\x00\x12\x0b\n\x07UNKNOWN\x10\x01\x12\x07\n\x03OLD\x10\x02\x12\x07\n\x03NEW\x10\x03\x12\x0f\n\x0bREFURBISHED\x10\x04\x12\x08\n\x04USED\x10\x05\x42\xc6\x01\n!com.google.ads.googleads.v0.enumsB\x15ProductConditionProtoP\x01ZBgoogle.golang.org/genproto/googleapis/ads/googleads/v0/enums;enums\xa2\x02\x03GAA\xaa\x02\x1dGoogle.Ads.GoogleAds.V0.Enums\xca\x02\x1dGoogle\\Ads\\GoogleAds\\V0\\Enumsb\x06proto3')
+  serialized_pb=_b('\n;google/ads/googleads_v0/proto/enums/product_condition.proto\x12\x1dgoogle.ads.googleads.v0.enums\"l\n\x14ProductConditionEnum\"T\n\x10ProductCondition\x12\x0f\n\x0bUNSPECIFIED\x10\x00\x12\x0b\n\x07UNKNOWN\x10\x01\x12\x07\n\x03NEW\x10\x03\x12\x0f\n\x0bREFURBISHED\x10\x04\x12\x08\n\x04USED\x10\x05\x42\xc6\x01\n!com.google.ads.googleads.v0.enumsB\x15ProductConditionProtoP\x01ZBgoogle.golang.org/genproto/googleapis/ads/googleads/v0/enums;enums\xa2\x02\x03GAA\xaa\x02\x1dGoogle.Ads.GoogleAds.V0.Enums\xca\x02\x1dGoogle\\Ads\\GoogleAds\\V0\\Enumsb\x06proto3')
 )
 
 
@@ -39,26 +39,22 @@ _PRODUCTCONDITIONENUM_PRODUCTCONDITION = _descriptor.EnumDescriptor(
       options=None,
       type=None),
     _descriptor.EnumValueDescriptor(
-      name='OLD', index=2, number=2,
+      name='NEW', index=2, number=3,
       options=None,
       type=None),
     _descriptor.EnumValueDescriptor(
-      name='NEW', index=3, number=3,
+      name='REFURBISHED', index=3, number=4,
       options=None,
       type=None),
     _descriptor.EnumValueDescriptor(
-      name='REFURBISHED', index=4, number=4,
-      options=None,
-      type=None),
-    _descriptor.EnumValueDescriptor(
-      name='USED', index=5, number=5,
+      name='USED', index=4, number=5,
       options=None,
       type=None),
   ],
   containing_type=None,
   options=None,
   serialized_start=118,
-  serialized_end=211,
+  serialized_end=202,
 )
 _sym_db.RegisterEnumDescriptor(_PRODUCTCONDITIONENUM_PRODUCTCONDITION)
 
@@ -84,7 +80,7 @@ _PRODUCTCONDITIONENUM = _descriptor.Descriptor(
   oneofs=[
   ],
   serialized_start=94,
-  serialized_end=211,
+  serialized_end=202,
 )
 
 _PRODUCTCONDITIONENUM_PRODUCTCONDITION.containing_type = _PRODUCTCONDITIONENUM
@@ -93,7 +89,7 @@ _sym_db.RegisterFileDescriptor(DESCRIPTOR)
 
 ProductConditionEnum = _reflection.GeneratedProtocolMessageType('ProductConditionEnum', (_message.Message,), dict(
   DESCRIPTOR = _PRODUCTCONDITIONENUM,
-  __module__ = 'google.ads.googleads_v0.proto.enums.product_condition_pb2'
+  __module__ = 'google.ads.google_ads.v0.proto.enums.product_condition_pb2'
   ,
   __doc__ = """Condition of a product offer.
   """,

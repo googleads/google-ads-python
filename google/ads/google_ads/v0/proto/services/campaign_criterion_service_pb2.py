@@ -237,7 +237,7 @@ _sym_db.RegisterFileDescriptor(DESCRIPTOR)
 
 GetCampaignCriterionRequest = _reflection.GeneratedProtocolMessageType('GetCampaignCriterionRequest', (_message.Message,), dict(
   DESCRIPTOR = _GETCAMPAIGNCRITERIONREQUEST,
-  __module__ = 'google.ads.googleads_v0.proto.services.campaign_criterion_service_pb2'
+  __module__ = 'google.ads.google_ads.v0.proto.services.campaign_criterion_service_pb2'
   ,
   __doc__ = """Request message for
   [CampaignCriterionService.GetCampaignCriterion][google.ads.googleads.v0.services.CampaignCriterionService.GetCampaignCriterion].
@@ -253,7 +253,7 @@ _sym_db.RegisterMessage(GetCampaignCriterionRequest)
 
 MutateCampaignCriteriaRequest = _reflection.GeneratedProtocolMessageType('MutateCampaignCriteriaRequest', (_message.Message,), dict(
   DESCRIPTOR = _MUTATECAMPAIGNCRITERIAREQUEST,
-  __module__ = 'google.ads.googleads_v0.proto.services.campaign_criterion_service_pb2'
+  __module__ = 'google.ads.google_ads.v0.proto.services.campaign_criterion_service_pb2'
   ,
   __doc__ = """Request message for
   [CampaignCriterionService.MutateCampaignCriteria][google.ads.googleads.v0.services.CampaignCriterionService.MutateCampaignCriteria].
@@ -271,7 +271,7 @@ _sym_db.RegisterMessage(MutateCampaignCriteriaRequest)
 
 CampaignCriterionOperation = _reflection.GeneratedProtocolMessageType('CampaignCriterionOperation', (_message.Message,), dict(
   DESCRIPTOR = _CAMPAIGNCRITERIONOPERATION,
-  __module__ = 'google.ads.googleads_v0.proto.services.campaign_criterion_service_pb2'
+  __module__ = 'google.ads.google_ads.v0.proto.services.campaign_criterion_service_pb2'
   ,
   __doc__ = """A single operation (create, update, remove) on a campaign criterion.
   
@@ -299,7 +299,7 @@ _sym_db.RegisterMessage(CampaignCriterionOperation)
 
 MutateCampaignCriteriaResponse = _reflection.GeneratedProtocolMessageType('MutateCampaignCriteriaResponse', (_message.Message,), dict(
   DESCRIPTOR = _MUTATECAMPAIGNCRITERIARESPONSE,
-  __module__ = 'google.ads.googleads_v0.proto.services.campaign_criterion_service_pb2'
+  __module__ = 'google.ads.google_ads.v0.proto.services.campaign_criterion_service_pb2'
   ,
   __doc__ = """Response message for campaign criterion mutate.
   
@@ -314,7 +314,7 @@ _sym_db.RegisterMessage(MutateCampaignCriteriaResponse)
 
 MutateCampaignCriterionResult = _reflection.GeneratedProtocolMessageType('MutateCampaignCriterionResult', (_message.Message,), dict(
   DESCRIPTOR = _MUTATECAMPAIGNCRITERIONRESULT,
-  __module__ = 'google.ads.googleads_v0.proto.services.campaign_criterion_service_pb2'
+  __module__ = 'google.ads.google_ads.v0.proto.services.campaign_criterion_service_pb2'
   ,
   __doc__ = """The result for the criterion mutate.
   

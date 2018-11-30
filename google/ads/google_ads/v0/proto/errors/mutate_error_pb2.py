@@ -93,7 +93,7 @@ _sym_db.RegisterFileDescriptor(DESCRIPTOR)
 
 MutateErrorEnum = _reflection.GeneratedProtocolMessageType('MutateErrorEnum', (_message.Message,), dict(
   DESCRIPTOR = _MUTATEERRORENUM,
-  __module__ = 'google.ads.googleads_v0.proto.errors.mutate_error_pb2'
+  __module__ = 'google.ads.google_ads.v0.proto.errors.mutate_error_pb2'
   ,
   __doc__ = """Container for enum describing possible mutate errors.
   """,

@@ -85,7 +85,7 @@ _sym_db.RegisterFileDescriptor(DESCRIPTOR)
 
 ProductChannelEnum = _reflection.GeneratedProtocolMessageType('ProductChannelEnum', (_message.Message,), dict(
   DESCRIPTOR = _PRODUCTCHANNELENUM,
-  __module__ = 'google.ads.googleads_v0.proto.enums.product_channel_pb2'
+  __module__ = 'google.ads.google_ads.v0.proto.enums.product_channel_pb2'
   ,
   __doc__ = """Locality of a product offer.
   """,

@@ -515,7 +515,7 @@ _sym_db.RegisterFileDescriptor(DESCRIPTOR)
 
 EnhancedCpc = _reflection.GeneratedProtocolMessageType('EnhancedCpc', (_message.Message,), dict(
   DESCRIPTOR = _ENHANCEDCPC,
-  __module__ = 'google.ads.googleads_v0.proto.common.bidding_pb2'
+  __module__ = 'google.ads.google_ads.v0.proto.common.bidding_pb2'
   ,
   __doc__ = """An automated bidding strategy that raises bids for clicks that seem more
   likely to lead to a conversion and lowers them for clicks where they
@@ -527,7 +527,7 @@ _sym_db.RegisterMessage(EnhancedCpc)
 
 ManualCpc = _reflection.GeneratedProtocolMessageType('ManualCpc', (_message.Message,), dict(
   DESCRIPTOR = _MANUALCPC,
-  __module__ = 'google.ads.googleads_v0.proto.common.bidding_pb2'
+  __module__ = 'google.ads.google_ads.v0.proto.common.bidding_pb2'
   ,
   __doc__ = """Manual click-based bidding where user pays per click.
   
@@ -543,7 +543,7 @@ _sym_db.RegisterMessage(ManualCpc)
 
 ManualCpm = _reflection.GeneratedProtocolMessageType('ManualCpm', (_message.Message,), dict(
   DESCRIPTOR = _MANUALCPM,
-  __module__ = 'google.ads.googleads_v0.proto.common.bidding_pb2'
+  __module__ = 'google.ads.google_ads.v0.proto.common.bidding_pb2'
   ,
   __doc__ = """Manual impression-based bidding where user pays per thousand
   impressions.
@@ -554,7 +554,7 @@ _sym_db.RegisterMessage(ManualCpm)
 
 ManualCpv = _reflection.GeneratedProtocolMessageType('ManualCpv', (_message.Message,), dict(
   DESCRIPTOR = _MANUALCPV,
-  __module__ = 'google.ads.googleads_v0.proto.common.bidding_pb2'
+  __module__ = 'google.ads.google_ads.v0.proto.common.bidding_pb2'
   ,
   __doc__ = """View based bidding where user pays per video view.
   """,
@@ -564,7 +564,7 @@ _sym_db.RegisterMessage(ManualCpv)
 
 MaximizeConversions = _reflection.GeneratedProtocolMessageType('MaximizeConversions', (_message.Message,), dict(
   DESCRIPTOR = _MAXIMIZECONVERSIONS,
-  __module__ = 'google.ads.googleads_v0.proto.common.bidding_pb2'
+  __module__ = 'google.ads.google_ads.v0.proto.common.bidding_pb2'
   ,
   __doc__ = """An automated bidding strategy that sets bids to help get the most
   conversions for your campaign while spending your budget.
@@ -575,7 +575,7 @@ _sym_db.RegisterMessage(MaximizeConversions)
 
 MaximizeConversionValue = _reflection.GeneratedProtocolMessageType('MaximizeConversionValue', (_message.Message,), dict(
   DESCRIPTOR = _MAXIMIZECONVERSIONVALUE,
-  __module__ = 'google.ads.googleads_v0.proto.common.bidding_pb2'
+  __module__ = 'google.ads.google_ads.v0.proto.common.bidding_pb2'
   ,
   __doc__ = """An automated bidding strategy which tries to maximize conversion value
   given a daily budget.
@@ -596,7 +596,7 @@ _sym_db.RegisterMessage(MaximizeConversionValue)
 
 PageOnePromoted = _reflection.GeneratedProtocolMessageType('PageOnePromoted', (_message.Message,), dict(
   DESCRIPTOR = _PAGEONEPROMOTED,
-  __module__ = 'google.ads.googleads_v0.proto.common.bidding_pb2'
+  __module__ = 'google.ads.google_ads.v0.proto.common.bidding_pb2'
   ,
   __doc__ = """An automated bidding strategy which sets CPC bids to target impressions
   on page one, or page one promoted slots on google.com.
@@ -633,7 +633,7 @@ _sym_db.RegisterMessage(PageOnePromoted)
 
 TargetCpa = _reflection.GeneratedProtocolMessageType('TargetCpa', (_message.Message,), dict(
   DESCRIPTOR = _TARGETCPA,
-  __module__ = 'google.ads.googleads_v0.proto.common.bidding_pb2'
+  __module__ = 'google.ads.google_ads.v0.proto.common.bidding_pb2'
   ,
   __doc__ = """An automated bid strategy that sets bids to help get as many conversions
   as possible at the target cost-per-acquisition (CPA) you set.
@@ -657,7 +657,7 @@ _sym_db.RegisterMessage(TargetCpa)
 
 TargetOutrankShare = _reflection.GeneratedProtocolMessageType('TargetOutrankShare', (_message.Message,), dict(
   DESCRIPTOR = _TARGETOUTRANKSHARE,
-  __module__ = 'google.ads.googleads_v0.proto.common.bidding_pb2'
+  __module__ = 'google.ads.google_ads.v0.proto.common.bidding_pb2'
   ,
   __doc__ = """An automated bidding strategy that sets bids based on the target
   fraction of auctions where the advertiser should outrank a specific
@@ -693,7 +693,7 @@ _sym_db.RegisterMessage(TargetOutrankShare)
 
 TargetRoas = _reflection.GeneratedProtocolMessageType('TargetRoas', (_message.Message,), dict(
   DESCRIPTOR = _TARGETROAS,
-  __module__ = 'google.ads.googleads_v0.proto.common.bidding_pb2'
+  __module__ = 'google.ads.google_ads.v0.proto.common.bidding_pb2'
   ,
   __doc__ = """An automated bidding strategy that helps you maximize revenue while
   averaging a specific target return on ad spend (ROAS).
@@ -717,7 +717,7 @@ _sym_db.RegisterMessage(TargetRoas)
 
 TargetSpend = _reflection.GeneratedProtocolMessageType('TargetSpend', (_message.Message,), dict(
   DESCRIPTOR = _TARGETSPEND,
-  __module__ = 'google.ads.googleads_v0.proto.common.bidding_pb2'
+  __module__ = 'google.ads.google_ads.v0.proto.common.bidding_pb2'
   ,
   __doc__ = """An automated bid strategy that sets your bids to help get as many clicks
   as possible within your budget.
@@ -739,7 +739,7 @@ _sym_db.RegisterMessage(TargetSpend)
 
 PercentCpc = _reflection.GeneratedProtocolMessageType('PercentCpc', (_message.Message,), dict(
   DESCRIPTOR = _PERCENTCPC,
-  __module__ = 'google.ads.googleads_v0.proto.common.bidding_pb2'
+  __module__ = 'google.ads.google_ads.v0.proto.common.bidding_pb2'
   ,
   __doc__ = """A bidding strategy where bids are a fraction of the advertised price for
   some good or service.

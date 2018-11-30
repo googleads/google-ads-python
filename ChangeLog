@@ -1,3 +1,15 @@
+* 0.5.0:
+- Google Ads v0_6 release.
+- Updating add_campaign_targeting_criteria.py example to add
+  create proximity operation
+- Updating apply_recommendation.py example to pass required parameter
+  partial_failure=False
+- Updating get_geo_target_constant_by_names.py example to add
+  new required country_code parameter
+- Updating client.py to accept a login_customer_id
+- Fixing bug in ExceptionInterceptor to improve error logging. Resolves GitHub
+  issue #8: https://github.com/googleads/google-ads-python/issues/8
+
 * 0.4.0:
 - Google Ads v0_5 release.
 - Adding remarketing/add_conversion_action.py example.

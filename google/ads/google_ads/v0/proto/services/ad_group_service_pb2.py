@@ -237,7 +237,7 @@ _sym_db.RegisterFileDescriptor(DESCRIPTOR)
 
 GetAdGroupRequest = _reflection.GeneratedProtocolMessageType('GetAdGroupRequest', (_message.Message,), dict(
   DESCRIPTOR = _GETADGROUPREQUEST,
-  __module__ = 'google.ads.googleads_v0.proto.services.ad_group_service_pb2'
+  __module__ = 'google.ads.google_ads.v0.proto.services.ad_group_service_pb2'
   ,
   __doc__ = """Request message for
   [AdGroupService.GetAdGroup][google.ads.googleads.v0.services.AdGroupService.GetAdGroup].
@@ -253,7 +253,7 @@ _sym_db.RegisterMessage(GetAdGroupRequest)
 
 MutateAdGroupsRequest = _reflection.GeneratedProtocolMessageType('MutateAdGroupsRequest', (_message.Message,), dict(
   DESCRIPTOR = _MUTATEADGROUPSREQUEST,
-  __module__ = 'google.ads.googleads_v0.proto.services.ad_group_service_pb2'
+  __module__ = 'google.ads.google_ads.v0.proto.services.ad_group_service_pb2'
   ,
   __doc__ = """Request message for
   [AdGroupService.MutateAdGroups][google.ads.googleads.v0.services.AdGroupService.MutateAdGroups].
@@ -271,7 +271,7 @@ _sym_db.RegisterMessage(MutateAdGroupsRequest)
 
 AdGroupOperation = _reflection.GeneratedProtocolMessageType('AdGroupOperation', (_message.Message,), dict(
   DESCRIPTOR = _ADGROUPOPERATION,
-  __module__ = 'google.ads.googleads_v0.proto.services.ad_group_service_pb2'
+  __module__ = 'google.ads.google_ads.v0.proto.services.ad_group_service_pb2'
   ,
   __doc__ = """A single operation (create, update, remove) on an ad group.
   
@@ -299,7 +299,7 @@ _sym_db.RegisterMessage(AdGroupOperation)
 
 MutateAdGroupsResponse = _reflection.GeneratedProtocolMessageType('MutateAdGroupsResponse', (_message.Message,), dict(
   DESCRIPTOR = _MUTATEADGROUPSRESPONSE,
-  __module__ = 'google.ads.googleads_v0.proto.services.ad_group_service_pb2'
+  __module__ = 'google.ads.google_ads.v0.proto.services.ad_group_service_pb2'
   ,
   __doc__ = """Response message for an ad group mutate.
   
@@ -314,7 +314,7 @@ _sym_db.RegisterMessage(MutateAdGroupsResponse)
 
 MutateAdGroupResult = _reflection.GeneratedProtocolMessageType('MutateAdGroupResult', (_message.Message,), dict(
   DESCRIPTOR = _MUTATEADGROUPRESULT,
-  __module__ = 'google.ads.googleads_v0.proto.services.ad_group_service_pb2'
+  __module__ = 'google.ads.google_ads.v0.proto.services.ad_group_service_pb2'
   ,
   __doc__ = """The result for the ad group mutate.
   

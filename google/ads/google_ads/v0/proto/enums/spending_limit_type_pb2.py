@@ -81,7 +81,7 @@ _sym_db.RegisterFileDescriptor(DESCRIPTOR)
 
 SpendingLimitTypeEnum = _reflection.GeneratedProtocolMessageType('SpendingLimitTypeEnum', (_message.Message,), dict(
   DESCRIPTOR = _SPENDINGLIMITTYPEENUM,
-  __module__ = 'google.ads.googleads_v0.proto.enums.spending_limit_type_pb2'
+  __module__ = 'google.ads.google_ads.v0.proto.enums.spending_limit_type_pb2'
   ,
   __doc__ = """Message describing spending limit types.
   """,

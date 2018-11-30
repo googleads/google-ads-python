@@ -148,7 +148,7 @@ _sym_db.RegisterFileDescriptor(DESCRIPTOR)
 
 AdGroupAd = _reflection.GeneratedProtocolMessageType('AdGroupAd', (_message.Message,), dict(
   DESCRIPTOR = _ADGROUPAD,
-  __module__ = 'google.ads.googleads_v0.proto.resources.ad_group_ad_pb2'
+  __module__ = 'google.ads.google_ads.v0.proto.resources.ad_group_ad_pb2'
   ,
   __doc__ = """An ad group ad.
   
@@ -173,7 +173,7 @@ _sym_db.RegisterMessage(AdGroupAd)
 
 AdGroupAdPolicySummary = _reflection.GeneratedProtocolMessageType('AdGroupAdPolicySummary', (_message.Message,), dict(
   DESCRIPTOR = _ADGROUPADPOLICYSUMMARY,
-  __module__ = 'google.ads.googleads_v0.proto.resources.ad_group_ad_pb2'
+  __module__ = 'google.ads.google_ads.v0.proto.resources.ad_group_ad_pb2'
   ,
   __doc__ = """Contains policy information for an ad.
   

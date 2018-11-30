@@ -2,3 +2,9 @@ developer_token: INSERT_DEVELOPER_TOKEN_HERE
 client_id: INSERT_OAUTH2_CLIENT_ID_HERE
 client_secret: INSERT_OAUTH2_CLIENT_SECRET_HERE
 refresh_token: INSERT_REFRESH_TOKEN_HERE
+# Required for manager accounts only: Specify the login customer ID used to
+# authenticate API calls. This will be the customer ID of the authenticated
+# manager account. It should be set without dashes, for example: 1234567890
+# instead of 123-456-7890. You can also specify this later in code if your
+# application uses multiple manager account + OAuth pairs.
+login_customer_id: INSERT_LOGIN_CUSTOMER_ID_HERE

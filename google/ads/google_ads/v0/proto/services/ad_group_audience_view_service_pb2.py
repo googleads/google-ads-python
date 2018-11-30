@@ -63,7 +63,7 @@ _sym_db.RegisterFileDescriptor(DESCRIPTOR)
 
 GetAdGroupAudienceViewRequest = _reflection.GeneratedProtocolMessageType('GetAdGroupAudienceViewRequest', (_message.Message,), dict(
   DESCRIPTOR = _GETADGROUPAUDIENCEVIEWREQUEST,
-  __module__ = 'google.ads.googleads_v0.proto.services.ad_group_audience_view_service_pb2'
+  __module__ = 'google.ads.google_ads.v0.proto.services.ad_group_audience_view_service_pb2'
   ,
   __doc__ = """Request message for
   [AdGroupAudienceViewService.GetAdGoupAudienceView][].

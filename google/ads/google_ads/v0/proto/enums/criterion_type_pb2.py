@@ -19,7 +19,7 @@ DESCRIPTOR = _descriptor.FileDescriptor(
   name='google/ads/googleads_v0/proto/enums/criterion_type.proto',
   package='google.ads.googleads.v0.enums',
   syntax='proto3',
-  serialized_pb=_b('\n8google/ads/googleads_v0/proto/enums/criterion_type.proto\x12\x1dgoogle.ads.googleads.v0.enums\"\xa1\x02\n\x11\x43riterionTypeEnum\"\x8b\x02\n\rCriterionType\x12\x0f\n\x0bUNSPECIFIED\x10\x00\x12\x0b\n\x07UNKNOWN\x10\x01\x12\x0b\n\x07KEYWORD\x10\x02\x12\r\n\tPLACEMENT\x10\x03\x12\n\n\x06\x44\x45VICE\x10\x06\x12\x0c\n\x08LOCATION\x10\x07\x12\x11\n\rLISTING_GROUP\x10\x08\x12\x0f\n\x0b\x41\x44_SCHEDULE\x10\t\x12\r\n\tAGE_RANGE\x10\n\x12\n\n\x06GENDER\x10\x0b\x12\x10\n\x0cINCOME_RANGE\x10\x0c\x12\x13\n\x0fPARENTAL_STATUS\x10\r\x12\x11\n\rYOUTUBE_VIDEO\x10\x0e\x12\x13\n\x0fYOUTUBE_CHANNEL\x10\x0f\x12\r\n\tPROXIMITY\x10\x11\x12\t\n\x05TOPIC\x10\x12\x42\xc3\x01\n!com.google.ads.googleads.v0.enumsB\x12\x43riterionTypeProtoP\x01ZBgoogle.golang.org/genproto/googleapis/ads/googleads/v0/enums;enums\xa2\x02\x03GAA\xaa\x02\x1dGoogle.Ads.GoogleAds.V0.Enums\xca\x02\x1dGoogle\\Ads\\GoogleAds\\V0\\Enumsb\x06proto3')
+  serialized_pb=_b('\n8google/ads/googleads_v0/proto/enums/criterion_type.proto\x12\x1dgoogle.ads.googleads.v0.enums\"\x92\x03\n\x11\x43riterionTypeEnum\"\xfc\x02\n\rCriterionType\x12\x0f\n\x0bUNSPECIFIED\x10\x00\x12\x0b\n\x07UNKNOWN\x10\x01\x12\x0b\n\x07KEYWORD\x10\x02\x12\r\n\tPLACEMENT\x10\x03\x12\n\n\x06\x44\x45VICE\x10\x06\x12\x0c\n\x08LOCATION\x10\x07\x12\x11\n\rLISTING_GROUP\x10\x08\x12\x0f\n\x0b\x41\x44_SCHEDULE\x10\t\x12\r\n\tAGE_RANGE\x10\n\x12\n\n\x06GENDER\x10\x0b\x12\x10\n\x0cINCOME_RANGE\x10\x0c\x12\x13\n\x0fPARENTAL_STATUS\x10\r\x12\x11\n\rYOUTUBE_VIDEO\x10\x0e\x12\x13\n\x0fYOUTUBE_CHANNEL\x10\x0f\x12\r\n\tUSER_LIST\x10\x10\x12\r\n\tPROXIMITY\x10\x11\x12\t\n\x05TOPIC\x10\x12\x12\x11\n\rLISTING_SCOPE\x10\x13\x12\x0c\n\x08LANGUAGE\x10\x14\x12\x0c\n\x08IP_BLOCK\x10\x15\x12\x11\n\rCONTENT_LABEL\x10\x16\x12\x0b\n\x07\x43\x41RRIER\x10\x17\x12\x11\n\rUSER_INTEREST\x10\x18\x42\xc3\x01\n!com.google.ads.googleads.v0.enumsB\x12\x43riterionTypeProtoP\x01ZBgoogle.golang.org/genproto/googleapis/ads/googleads/v0/enums;enums\xa2\x02\x03GAA\xaa\x02\x1dGoogle.Ads.GoogleAds.V0.Enums\xca\x02\x1dGoogle\\Ads\\GoogleAds\\V0\\Enumsb\x06proto3')
 )
 
 
@@ -87,18 +87,46 @@ _CRITERIONTYPEENUM_CRITERIONTYPE = _descriptor.EnumDescriptor(
       options=None,
       type=None),
     _descriptor.EnumValueDescriptor(
-      name='PROXIMITY', index=14, number=17,
+      name='USER_LIST', index=14, number=16,
       options=None,
       type=None),
     _descriptor.EnumValueDescriptor(
-      name='TOPIC', index=15, number=18,
+      name='PROXIMITY', index=15, number=17,
+      options=None,
+      type=None),
+    _descriptor.EnumValueDescriptor(
+      name='TOPIC', index=16, number=18,
+      options=None,
+      type=None),
+    _descriptor.EnumValueDescriptor(
+      name='LISTING_SCOPE', index=17, number=19,
+      options=None,
+      type=None),
+    _descriptor.EnumValueDescriptor(
+      name='LANGUAGE', index=18, number=20,
+      options=None,
+      type=None),
+    _descriptor.EnumValueDescriptor(
+      name='IP_BLOCK', index=19, number=21,
+      options=None,
+      type=None),
+    _descriptor.EnumValueDescriptor(
+      name='CONTENT_LABEL', index=20, number=22,
+      options=None,
+      type=None),
+    _descriptor.EnumValueDescriptor(
+      name='CARRIER', index=21, number=23,
+      options=None,
+      type=None),
+    _descriptor.EnumValueDescriptor(
+      name='USER_INTEREST', index=22, number=24,
       options=None,
       type=None),
   ],
   containing_type=None,
   options=None,
   serialized_start=114,
-  serialized_end=381,
+  serialized_end=494,
 )
 _sym_db.RegisterEnumDescriptor(_CRITERIONTYPEENUM_CRITERIONTYPE)
 
@@ -124,7 +152,7 @@ _CRITERIONTYPEENUM = _descriptor.Descriptor(
   oneofs=[
   ],
   serialized_start=92,
-  serialized_end=381,
+  serialized_end=494,
 )
 
 _CRITERIONTYPEENUM_CRITERIONTYPE.containing_type = _CRITERIONTYPEENUM
@@ -133,7 +161,7 @@ _sym_db.RegisterFileDescriptor(DESCRIPTOR)
 
 CriterionTypeEnum = _reflection.GeneratedProtocolMessageType('CriterionTypeEnum', (_message.Message,), dict(
   DESCRIPTOR = _CRITERIONTYPEENUM,
-  __module__ = 'google.ads.googleads_v0.proto.enums.criterion_type_pb2'
+  __module__ = 'google.ads.google_ads.v0.proto.enums.criterion_type_pb2'
   ,
   __doc__ = """The possible types of a criterion.
   """,

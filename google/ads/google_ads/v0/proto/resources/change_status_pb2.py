@@ -128,7 +128,7 @@ _sym_db.RegisterFileDescriptor(DESCRIPTOR)
 
 ChangeStatus = _reflection.GeneratedProtocolMessageType('ChangeStatus', (_message.Message,), dict(
   DESCRIPTOR = _CHANGESTATUS,
-  __module__ = 'google.ads.googleads_v0.proto.resources.change_status_pb2'
+  __module__ = 'google.ads.google_ads.v0.proto.resources.change_status_pb2'
   ,
   __doc__ = """Describes the status of returned resource.
   

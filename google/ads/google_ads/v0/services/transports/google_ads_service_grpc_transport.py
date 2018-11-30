@@ -102,3 +102,16 @@ class GoogleAdsServiceGrpcTransport(object):
                 deserialized response object.
         """
         return self._stubs['google_ads_service_stub'].Search
+
+    @property
+    def mutate(self):
+        """Return the gRPC stub for {$apiMethod.name}.
+
+        Creates, updates, or removes resources. Operation statuses are returned.
+
+        Returns:
+            Callable: A callable which accepts the appropriate
+                deserialized request object and returns a
+                deserialized response object.
+        """
+        return self._stubs['google_ads_service_stub'].Mutate

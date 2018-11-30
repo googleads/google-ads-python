@@ -89,7 +89,7 @@ _sym_db.RegisterFileDescriptor(DESCRIPTOR)
 
 DeviceEnum = _reflection.GeneratedProtocolMessageType('DeviceEnum', (_message.Message,), dict(
   DESCRIPTOR = _DEVICEENUM,
-  __module__ = 'google.ads.googleads_v0.proto.enums.device_pb2'
+  __module__ = 'google.ads.google_ads.v0.proto.enums.device_pb2'
   ,
   __doc__ = """Container for enumeration of Google Ads devices available for targeting.
   """,

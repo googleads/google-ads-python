@@ -97,7 +97,7 @@ _sym_db.RegisterFileDescriptor(DESCRIPTOR)
 
 ListingCustomAttributeIndexEnum = _reflection.GeneratedProtocolMessageType('ListingCustomAttributeIndexEnum', (_message.Message,), dict(
   DESCRIPTOR = _LISTINGCUSTOMATTRIBUTEINDEXENUM,
-  __module__ = 'google.ads.googleads_v0.proto.enums.listing_custom_attribute_index_pb2'
+  __module__ = 'google.ads.google_ads.v0.proto.enums.listing_custom_attribute_index_pb2'
   ,
   __doc__ = """Container for enum describing the index of the listing custom attribute.
   """,

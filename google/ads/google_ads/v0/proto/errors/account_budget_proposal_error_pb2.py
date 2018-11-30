@@ -165,7 +165,7 @@ _sym_db.RegisterFileDescriptor(DESCRIPTOR)
 
 AccountBudgetProposalErrorEnum = _reflection.GeneratedProtocolMessageType('AccountBudgetProposalErrorEnum', (_message.Message,), dict(
   DESCRIPTOR = _ACCOUNTBUDGETPROPOSALERRORENUM,
-  __module__ = 'google.ads.googleads_v0.proto.errors.account_budget_proposal_error_pb2'
+  __module__ = 'google.ads.google_ads.v0.proto.errors.account_budget_proposal_error_pb2'
   ,
   __doc__ = """Container for enum describing possible account budget proposal errors.
   """,

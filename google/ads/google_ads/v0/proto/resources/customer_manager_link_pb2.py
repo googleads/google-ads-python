@@ -87,7 +87,7 @@ _sym_db.RegisterFileDescriptor(DESCRIPTOR)
 
 CustomerManagerLink = _reflection.GeneratedProtocolMessageType('CustomerManagerLink', (_message.Message,), dict(
   DESCRIPTOR = _CUSTOMERMANAGERLINK,
-  __module__ = 'google.ads.googleads_v0.proto.resources.customer_manager_link_pb2'
+  __module__ = 'google.ads.google_ads.v0.proto.resources.customer_manager_link_pb2'
   ,
   __doc__ = """Represents customer-manager link relationship.
   

@@ -117,7 +117,7 @@ _sym_db.RegisterFileDescriptor(DESCRIPTOR)
 
 AdGroupTypeEnum = _reflection.GeneratedProtocolMessageType('AdGroupTypeEnum', (_message.Message,), dict(
   DESCRIPTOR = _ADGROUPTYPEENUM,
-  __module__ = 'google.ads.googleads_v0.proto.enums.ad_group_type_pb2'
+  __module__ = 'google.ads.google_ads.v0.proto.enums.ad_group_type_pb2'
   ,
   __doc__ = """Defines types of an ad group, specific to a particular campaign channel
   type. This type drives validations that restrict which entities can be

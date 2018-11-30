@@ -63,7 +63,7 @@ _sym_db.RegisterFileDescriptor(DESCRIPTOR)
 
 GetTopicConstantRequest = _reflection.GeneratedProtocolMessageType('GetTopicConstantRequest', (_message.Message,), dict(
   DESCRIPTOR = _GETTOPICCONSTANTREQUEST,
-  __module__ = 'google.ads.googleads_v0.proto.services.topic_constant_service_pb2'
+  __module__ = 'google.ads.google_ads.v0.proto.services.topic_constant_service_pb2'
   ,
   __doc__ = """Request message for
   [TopicConstantService.GetTopicConstant][google.ads.googleads.v0.services.TopicConstantService.GetTopicConstant].

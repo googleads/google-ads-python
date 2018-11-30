@@ -246,7 +246,7 @@ _sym_db.RegisterFileDescriptor(DESCRIPTOR)
 
 GetAdGroupAdRequest = _reflection.GeneratedProtocolMessageType('GetAdGroupAdRequest', (_message.Message,), dict(
   DESCRIPTOR = _GETADGROUPADREQUEST,
-  __module__ = 'google.ads.googleads_v0.proto.services.ad_group_ad_service_pb2'
+  __module__ = 'google.ads.google_ads.v0.proto.services.ad_group_ad_service_pb2'
   ,
   __doc__ = """Request message for
   [AdGroupAdService.GetAdGroupAd][google.ads.googleads.v0.services.AdGroupAdService.GetAdGroupAd].
@@ -262,7 +262,7 @@ _sym_db.RegisterMessage(GetAdGroupAdRequest)
 
 MutateAdGroupAdsRequest = _reflection.GeneratedProtocolMessageType('MutateAdGroupAdsRequest', (_message.Message,), dict(
   DESCRIPTOR = _MUTATEADGROUPADSREQUEST,
-  __module__ = 'google.ads.googleads_v0.proto.services.ad_group_ad_service_pb2'
+  __module__ = 'google.ads.google_ads.v0.proto.services.ad_group_ad_service_pb2'
   ,
   __doc__ = """Request message for
   [AdGroupAdService.MutateAdGroupAds][google.ads.googleads.v0.services.AdGroupAdService.MutateAdGroupAds].
@@ -280,7 +280,7 @@ _sym_db.RegisterMessage(MutateAdGroupAdsRequest)
 
 AdGroupAdOperation = _reflection.GeneratedProtocolMessageType('AdGroupAdOperation', (_message.Message,), dict(
   DESCRIPTOR = _ADGROUPADOPERATION,
-  __module__ = 'google.ads.googleads_v0.proto.services.ad_group_ad_service_pb2'
+  __module__ = 'google.ads.google_ads.v0.proto.services.ad_group_ad_service_pb2'
   ,
   __doc__ = """A single operation (create, update, remove) on an ad group ad.
   
@@ -309,7 +309,7 @@ _sym_db.RegisterMessage(AdGroupAdOperation)
 
 MutateAdGroupAdsResponse = _reflection.GeneratedProtocolMessageType('MutateAdGroupAdsResponse', (_message.Message,), dict(
   DESCRIPTOR = _MUTATEADGROUPADSRESPONSE,
-  __module__ = 'google.ads.googleads_v0.proto.services.ad_group_ad_service_pb2'
+  __module__ = 'google.ads.google_ads.v0.proto.services.ad_group_ad_service_pb2'
   ,
   __doc__ = """Response message for an ad group ad mutate.
   
@@ -324,7 +324,7 @@ _sym_db.RegisterMessage(MutateAdGroupAdsResponse)
 
 MutateAdGroupAdResult = _reflection.GeneratedProtocolMessageType('MutateAdGroupAdResult', (_message.Message,), dict(
   DESCRIPTOR = _MUTATEADGROUPADRESULT,
-  __module__ = 'google.ads.googleads_v0.proto.services.ad_group_ad_service_pb2'
+  __module__ = 'google.ads.google_ads.v0.proto.services.ad_group_ad_service_pb2'
   ,
   __doc__ = """The result for the ad mutate.
   

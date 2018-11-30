@@ -87,7 +87,7 @@ _sym_db.RegisterFileDescriptor(DESCRIPTOR)
 
 CampaignSharedSet = _reflection.GeneratedProtocolMessageType('CampaignSharedSet', (_message.Message,), dict(
   DESCRIPTOR = _CAMPAIGNSHAREDSET,
-  __module__ = 'google.ads.googleads_v0.proto.resources.campaign_shared_set_pb2'
+  __module__ = 'google.ads.google_ads.v0.proto.resources.campaign_shared_set_pb2'
   ,
   __doc__ = """CampaignSharedSets are used for managing the shared sets associated with
   a campaign.

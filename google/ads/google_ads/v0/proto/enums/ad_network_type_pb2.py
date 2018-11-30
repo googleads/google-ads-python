@@ -101,7 +101,7 @@ _sym_db.RegisterFileDescriptor(DESCRIPTOR)
 
 AdNetworkTypeEnum = _reflection.GeneratedProtocolMessageType('AdNetworkTypeEnum', (_message.Message,), dict(
   DESCRIPTOR = _ADNETWORKTYPEENUM,
-  __module__ = 'google.ads.googleads_v0.proto.enums.ad_network_type_pb2'
+  __module__ = 'google.ads.google_ads.v0.proto.enums.ad_network_type_pb2'
   ,
   __doc__ = """Container for enumeration of Google Ads network types.
   """,

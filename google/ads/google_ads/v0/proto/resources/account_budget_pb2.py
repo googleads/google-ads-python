@@ -411,7 +411,7 @@ AccountBudget = _reflection.GeneratedProtocolMessageType('AccountBudget', (_mess
 
   PendingAccountBudgetProposal = _reflection.GeneratedProtocolMessageType('PendingAccountBudgetProposal', (_message.Message,), dict(
     DESCRIPTOR = _ACCOUNTBUDGET_PENDINGACCOUNTBUDGETPROPOSAL,
-    __module__ = 'google.ads.googleads_v0.proto.resources.account_budget_pb2'
+    __module__ = 'google.ads.google_ads.v0.proto.resources.account_budget_pb2'
     ,
     __doc__ = """A pending proposal associated with the enclosing account-level budget,
     if applicable.
@@ -455,7 +455,7 @@ AccountBudget = _reflection.GeneratedProtocolMessageType('AccountBudget', (_mess
     ))
   ,
   DESCRIPTOR = _ACCOUNTBUDGET,
-  __module__ = 'google.ads.googleads_v0.proto.resources.account_budget_pb2'
+  __module__ = 'google.ads.google_ads.v0.proto.resources.account_budget_pb2'
   ,
   __doc__ = """An account-level budget. It contains information about the budget
   itself, as well as the most recently approved changes to the budget and

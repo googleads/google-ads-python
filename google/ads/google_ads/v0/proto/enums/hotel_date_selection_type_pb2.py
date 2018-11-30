@@ -85,7 +85,7 @@ _sym_db.RegisterFileDescriptor(DESCRIPTOR)
 
 HotelDateSelectionTypeEnum = _reflection.GeneratedProtocolMessageType('HotelDateSelectionTypeEnum', (_message.Message,), dict(
   DESCRIPTOR = _HOTELDATESELECTIONTYPEENUM,
-  __module__ = 'google.ads.googleads_v0.proto.enums.hotel_date_selection_type_pb2'
+  __module__ = 'google.ads.google_ads.v0.proto.enums.hotel_date_selection_type_pb2'
   ,
   __doc__ = """Container for enum describing possible hotel date selection types
   """,

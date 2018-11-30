@@ -85,7 +85,7 @@ _sym_db.RegisterFileDescriptor(DESCRIPTOR)
 
 ProductChannelExclusivityEnum = _reflection.GeneratedProtocolMessageType('ProductChannelExclusivityEnum', (_message.Message,), dict(
   DESCRIPTOR = _PRODUCTCHANNELEXCLUSIVITYENUM,
-  __module__ = 'google.ads.googleads_v0.proto.enums.product_channel_exclusivity_pb2'
+  __module__ = 'google.ads.google_ads.v0.proto.enums.product_channel_exclusivity_pb2'
   ,
   __doc__ = """Availability of a product offer.
   """,

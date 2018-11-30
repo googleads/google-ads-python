@@ -85,7 +85,7 @@ _sym_db.RegisterFileDescriptor(DESCRIPTOR)
 
 BudgetDeliveryMethodEnum = _reflection.GeneratedProtocolMessageType('BudgetDeliveryMethodEnum', (_message.Message,), dict(
   DESCRIPTOR = _BUDGETDELIVERYMETHODENUM,
-  __module__ = 'google.ads.googleads_v0.proto.enums.budget_delivery_method_pb2'
+  __module__ = 'google.ads.google_ads.v0.proto.enums.budget_delivery_method_pb2'
   ,
   __doc__ = """Message describing Budget delivery methods. A delivery method determines
   the rate at which the Budget is spent.

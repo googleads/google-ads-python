@@ -20,7 +20,7 @@ DESCRIPTOR = _descriptor.FileDescriptor(
   name='google/ads/googleads_v0/proto/resources/customer.proto',
   package='google.ads.googleads.v0.resources',
   syntax='proto3',
-  serialized_pb=_b('\n6google/ads/googleads_v0/proto/resources/customer.proto\x12!google.ads.googleads.v0.resources\x1a\x1egoogle/protobuf/wrappers.proto\"\xf0\x03\n\x08\x43ustomer\x12\x15\n\rresource_name\x18\x01 \x01(\t\x12\'\n\x02id\x18\x03 \x01(\x0b\x32\x1b.google.protobuf.Int64Value\x12\x36\n\x10\x64\x65scriptive_name\x18\x04 \x01(\x0b\x32\x1c.google.protobuf.StringValue\x12\x33\n\rcurrency_code\x18\x05 \x01(\x0b\x32\x1c.google.protobuf.StringValue\x12/\n\ttime_zone\x18\x06 \x01(\x0b\x32\x1c.google.protobuf.StringValue\x12;\n\x15tracking_url_template\x18\x07 \x01(\x0b\x32\x1c.google.protobuf.StringValue\x12\x38\n\x14\x61uto_tagging_enabled\x18\x08 \x01(\x0b\x32\x1a.google.protobuf.BoolValue\x12\x36\n\x12has_partners_badge\x18\t \x01(\x0b\x32\x1a.google.protobuf.BoolValue\x12W\n\x16\x63\x61ll_reporting_setting\x18\n \x01(\x0b\x32\x37.google.ads.googleads.v0.resources.CallReportingSetting\"\xd7\x01\n\x14\x43\x61llReportingSetting\x12:\n\x16\x63\x61ll_reporting_enabled\x18\x01 \x01(\x0b\x32\x1a.google.protobuf.BoolValue\x12\x45\n!call_conversion_reporting_enabled\x18\x02 \x01(\x0b\x32\x1a.google.protobuf.BoolValue\x12<\n\x16\x63\x61ll_conversion_action\x18\t \x01(\x0b\x32\x1c.google.protobuf.StringValueB\xd2\x01\n%com.google.ads.googleads.v0.resourcesB\rCustomerProtoP\x01ZJgoogle.golang.org/genproto/googleapis/ads/googleads/v0/resources;resources\xa2\x02\x03GAA\xaa\x02!Google.Ads.GoogleAds.V0.Resources\xca\x02!Google\\Ads\\GoogleAds\\V0\\Resourcesb\x06proto3')
+  serialized_pb=_b('\n6google/ads/googleads_v0/proto/resources/customer.proto\x12!google.ads.googleads.v0.resources\x1a\x1egoogle/protobuf/wrappers.proto\"\xa8\x04\n\x08\x43ustomer\x12\x15\n\rresource_name\x18\x01 \x01(\t\x12\'\n\x02id\x18\x03 \x01(\x0b\x32\x1b.google.protobuf.Int64Value\x12\x36\n\x10\x64\x65scriptive_name\x18\x04 \x01(\x0b\x32\x1c.google.protobuf.StringValue\x12\x33\n\rcurrency_code\x18\x05 \x01(\x0b\x32\x1c.google.protobuf.StringValue\x12/\n\ttime_zone\x18\x06 \x01(\x0b\x32\x1c.google.protobuf.StringValue\x12;\n\x15tracking_url_template\x18\x07 \x01(\x0b\x32\x1c.google.protobuf.StringValue\x12\x36\n\x10\x66inal_url_suffix\x18\x0b \x01(\x0b\x32\x1c.google.protobuf.StringValue\x12\x38\n\x14\x61uto_tagging_enabled\x18\x08 \x01(\x0b\x32\x1a.google.protobuf.BoolValue\x12\x36\n\x12has_partners_badge\x18\t \x01(\x0b\x32\x1a.google.protobuf.BoolValue\x12W\n\x16\x63\x61ll_reporting_setting\x18\n \x01(\x0b\x32\x37.google.ads.googleads.v0.resources.CallReportingSetting\"\xd7\x01\n\x14\x43\x61llReportingSetting\x12:\n\x16\x63\x61ll_reporting_enabled\x18\x01 \x01(\x0b\x32\x1a.google.protobuf.BoolValue\x12\x45\n!call_conversion_reporting_enabled\x18\x02 \x01(\x0b\x32\x1a.google.protobuf.BoolValue\x12<\n\x16\x63\x61ll_conversion_action\x18\t \x01(\x0b\x32\x1c.google.protobuf.StringValueB\xd2\x01\n%com.google.ads.googleads.v0.resourcesB\rCustomerProtoP\x01ZJgoogle.golang.org/genproto/googleapis/ads/googleads/v0/resources;resources\xa2\x02\x03GAA\xaa\x02!Google.Ads.GoogleAds.V0.Resources\xca\x02!Google\\Ads\\GoogleAds\\V0\\Resourcesb\x06proto3')
   ,
   dependencies=[google_dot_protobuf_dot_wrappers__pb2.DESCRIPTOR,])
 
@@ -77,21 +77,28 @@ _CUSTOMER = _descriptor.Descriptor(
       is_extension=False, extension_scope=None,
       options=None, file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
-      name='auto_tagging_enabled', full_name='google.ads.googleads.v0.resources.Customer.auto_tagging_enabled', index=6,
+      name='final_url_suffix', full_name='google.ads.googleads.v0.resources.Customer.final_url_suffix', index=6,
+      number=11, type=11, cpp_type=10, label=1,
+      has_default_value=False, default_value=None,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None, file=DESCRIPTOR),
+    _descriptor.FieldDescriptor(
+      name='auto_tagging_enabled', full_name='google.ads.googleads.v0.resources.Customer.auto_tagging_enabled', index=7,
       number=8, type=11, cpp_type=10, label=1,
       has_default_value=False, default_value=None,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None, file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
-      name='has_partners_badge', full_name='google.ads.googleads.v0.resources.Customer.has_partners_badge', index=7,
+      name='has_partners_badge', full_name='google.ads.googleads.v0.resources.Customer.has_partners_badge', index=8,
       number=9, type=11, cpp_type=10, label=1,
       has_default_value=False, default_value=None,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None, file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
-      name='call_reporting_setting', full_name='google.ads.googleads.v0.resources.Customer.call_reporting_setting', index=8,
+      name='call_reporting_setting', full_name='google.ads.googleads.v0.resources.Customer.call_reporting_setting', index=9,
       number=10, type=11, cpp_type=10, label=1,
       has_default_value=False, default_value=None,
       message_type=None, enum_type=None, containing_type=None,
@@ -110,7 +117,7 @@ _CUSTOMER = _descriptor.Descriptor(
   oneofs=[
   ],
   serialized_start=126,
-  serialized_end=622,
+  serialized_end=678,
 )
 
 
@@ -154,8 +161,8 @@ _CALLREPORTINGSETTING = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=625,
-  serialized_end=840,
+  serialized_start=681,
+  serialized_end=896,
 )
 
 _CUSTOMER.fields_by_name['id'].message_type = google_dot_protobuf_dot_wrappers__pb2._INT64VALUE
@@ -163,6 +170,7 @@ _CUSTOMER.fields_by_name['descriptive_name'].message_type = google_dot_protobuf_
 _CUSTOMER.fields_by_name['currency_code'].message_type = google_dot_protobuf_dot_wrappers__pb2._STRINGVALUE
 _CUSTOMER.fields_by_name['time_zone'].message_type = google_dot_protobuf_dot_wrappers__pb2._STRINGVALUE
 _CUSTOMER.fields_by_name['tracking_url_template'].message_type = google_dot_protobuf_dot_wrappers__pb2._STRINGVALUE
+_CUSTOMER.fields_by_name['final_url_suffix'].message_type = google_dot_protobuf_dot_wrappers__pb2._STRINGVALUE
 _CUSTOMER.fields_by_name['auto_tagging_enabled'].message_type = google_dot_protobuf_dot_wrappers__pb2._BOOLVALUE
 _CUSTOMER.fields_by_name['has_partners_badge'].message_type = google_dot_protobuf_dot_wrappers__pb2._BOOLVALUE
 _CUSTOMER.fields_by_name['call_reporting_setting'].message_type = _CALLREPORTINGSETTING
@@ -175,7 +183,7 @@ _sym_db.RegisterFileDescriptor(DESCRIPTOR)
 
 Customer = _reflection.GeneratedProtocolMessageType('Customer', (_message.Message,), dict(
   DESCRIPTOR = _CUSTOMER,
-  __module__ = 'google.ads.googleads_v0.proto.resources.customer_pb2'
+  __module__ = 'google.ads.google_ads.v0.proto.resources.customer_pb2'
   ,
   __doc__ = """A customer.
   
@@ -196,6 +204,8 @@ Customer = _reflection.GeneratedProtocolMessageType('Customer', (_message.Messag
       tracking_url_template:
           The URL template for constructing a tracking URL out of
           parameters.
+      final_url_suffix:
+          The URL template for appending params to the final URL
       auto_tagging_enabled:
           Whether auto-tagging is enabled for the customer.
       has_partners_badge:
@@ -212,7 +222,7 @@ _sym_db.RegisterMessage(Customer)
 
 CallReportingSetting = _reflection.GeneratedProtocolMessageType('CallReportingSetting', (_message.Message,), dict(
   DESCRIPTOR = _CALLREPORTINGSETTING,
-  __module__ = 'google.ads.googleads_v0.proto.resources.customer_pb2'
+  __module__ = 'google.ads.google_ads.v0.proto.resources.customer_pb2'
   ,
   __doc__ = """Call reporting setting for a customer.
   

@@ -237,7 +237,7 @@ _sym_db.RegisterFileDescriptor(DESCRIPTOR)
 
 GetCampaignGroupRequest = _reflection.GeneratedProtocolMessageType('GetCampaignGroupRequest', (_message.Message,), dict(
   DESCRIPTOR = _GETCAMPAIGNGROUPREQUEST,
-  __module__ = 'google.ads.googleads_v0.proto.services.campaign_group_service_pb2'
+  __module__ = 'google.ads.google_ads.v0.proto.services.campaign_group_service_pb2'
   ,
   __doc__ = """Request message for
   [CampaignGroupService.GetCampaignGroup][google.ads.googleads.v0.services.CampaignGroupService.GetCampaignGroup].
@@ -253,7 +253,7 @@ _sym_db.RegisterMessage(GetCampaignGroupRequest)
 
 MutateCampaignGroupsRequest = _reflection.GeneratedProtocolMessageType('MutateCampaignGroupsRequest', (_message.Message,), dict(
   DESCRIPTOR = _MUTATECAMPAIGNGROUPSREQUEST,
-  __module__ = 'google.ads.googleads_v0.proto.services.campaign_group_service_pb2'
+  __module__ = 'google.ads.google_ads.v0.proto.services.campaign_group_service_pb2'
   ,
   __doc__ = """Request message for
   [CampaignGroupService.MutateCampaignGroups][google.ads.googleads.v0.services.CampaignGroupService.MutateCampaignGroups].
@@ -273,7 +273,7 @@ _sym_db.RegisterMessage(MutateCampaignGroupsRequest)
 
 CampaignGroupOperation = _reflection.GeneratedProtocolMessageType('CampaignGroupOperation', (_message.Message,), dict(
   DESCRIPTOR = _CAMPAIGNGROUPOPERATION,
-  __module__ = 'google.ads.googleads_v0.proto.services.campaign_group_service_pb2'
+  __module__ = 'google.ads.google_ads.v0.proto.services.campaign_group_service_pb2'
   ,
   __doc__ = """A single operation (create, update, remove) on a campaign group.
   
@@ -301,7 +301,7 @@ _sym_db.RegisterMessage(CampaignGroupOperation)
 
 MutateCampaignGroupsResponse = _reflection.GeneratedProtocolMessageType('MutateCampaignGroupsResponse', (_message.Message,), dict(
   DESCRIPTOR = _MUTATECAMPAIGNGROUPSRESPONSE,
-  __module__ = 'google.ads.googleads_v0.proto.services.campaign_group_service_pb2'
+  __module__ = 'google.ads.google_ads.v0.proto.services.campaign_group_service_pb2'
   ,
   __doc__ = """Response message for campaign group mutate.
   
@@ -316,7 +316,7 @@ _sym_db.RegisterMessage(MutateCampaignGroupsResponse)
 
 MutateCampaignGroupResult = _reflection.GeneratedProtocolMessageType('MutateCampaignGroupResult', (_message.Message,), dict(
   DESCRIPTOR = _MUTATECAMPAIGNGROUPRESULT,
-  __module__ = 'google.ads.googleads_v0.proto.services.campaign_group_service_pb2'
+  __module__ = 'google.ads.google_ads.v0.proto.services.campaign_group_service_pb2'
   ,
   __doc__ = """The result for the campaign group mutate.
   

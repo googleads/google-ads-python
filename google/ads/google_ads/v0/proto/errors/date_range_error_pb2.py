@@ -97,7 +97,7 @@ _sym_db.RegisterFileDescriptor(DESCRIPTOR)
 
 DateRangeErrorEnum = _reflection.GeneratedProtocolMessageType('DateRangeErrorEnum', (_message.Message,), dict(
   DESCRIPTOR = _DATERANGEERRORENUM,
-  __module__ = 'google.ads.googleads_v0.proto.errors.date_range_error_pb2'
+  __module__ = 'google.ads.google_ads.v0.proto.errors.date_range_error_pb2'
   ,
   __doc__ = """Container for enum describing possible date range errors.
   """,

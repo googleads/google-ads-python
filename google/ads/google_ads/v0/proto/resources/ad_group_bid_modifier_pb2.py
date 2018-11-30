@@ -22,7 +22,7 @@ DESCRIPTOR = _descriptor.FileDescriptor(
   name='google/ads/googleads_v0/proto/resources/ad_group_bid_modifier.proto',
   package='google.ads.googleads.v0.resources',
   syntax='proto3',
-  serialized_pb=_b('\nCgoogle/ads/googleads_v0/proto/resources/ad_group_bid_modifier.proto\x12!google.ads.googleads.v0.resources\x1a\x33google/ads/googleads_v0/proto/common/criteria.proto\x1a=google/ads/googleads_v0/proto/enums/bid_modifier_source.proto\x1a\x1egoogle/protobuf/wrappers.proto\"\x99\x06\n\x12\x41\x64GroupBidModifier\x12\x15\n\rresource_name\x18\x01 \x01(\t\x12.\n\x08\x61\x64_group\x18\x02 \x01(\x0b\x32\x1c.google.protobuf.StringValue\x12\x31\n\x0c\x63riterion_id\x18\x03 \x01(\x0b\x32\x1b.google.protobuf.Int64Value\x12\x32\n\x0c\x62id_modifier\x18\x04 \x01(\x0b\x32\x1c.google.protobuf.DoubleValue\x12\x33\n\rbase_ad_group\x18\t \x01(\x0b\x32\x1c.google.protobuf.StringValue\x12\x63\n\x13\x62id_modifier_source\x18\n \x01(\x0e\x32\x46.google.ads.googleads.v0.enums.BidModifierSourceEnum.BidModifierSource\x12_\n\x19hotel_date_selection_type\x18\x05 \x01(\x0b\x32:.google.ads.googleads.v0.common.HotelDateSelectionTypeInfoH\x00\x12\x65\n\x1chotel_advance_booking_window\x18\x06 \x01(\x0b\x32=.google.ads.googleads.v0.common.HotelAdvanceBookingWindowInfoH\x00\x12U\n\x14hotel_length_of_stay\x18\x07 \x01(\x0b\x32\x35.google.ads.googleads.v0.common.HotelLengthOfStayInfoH\x00\x12Q\n\x12hotel_check_in_day\x18\x08 \x01(\x0b\x32\x33.google.ads.googleads.v0.common.HotelCheckInDayInfoH\x00\x12<\n\x06\x64\x65vice\x18\x0b \x01(\x0b\x32*.google.ads.googleads.v0.common.DeviceInfoH\x00\x42\x0b\n\tcriterionB\xdc\x01\n%com.google.ads.googleads.v0.resourcesB\x17\x41\x64GroupBidModifierProtoP\x01ZJgoogle.golang.org/genproto/googleapis/ads/googleads/v0/resources;resources\xa2\x02\x03GAA\xaa\x02!Google.Ads.GoogleAds.V0.Resources\xca\x02!Google\\Ads\\GoogleAds\\V0\\Resourcesb\x06proto3')
+  serialized_pb=_b('\nCgoogle/ads/googleads_v0/proto/resources/ad_group_bid_modifier.proto\x12!google.ads.googleads.v0.resources\x1a\x33google/ads/googleads_v0/proto/common/criteria.proto\x1a=google/ads/googleads_v0/proto/enums/bid_modifier_source.proto\x1a\x1egoogle/protobuf/wrappers.proto\"\xec\x06\n\x12\x41\x64GroupBidModifier\x12\x15\n\rresource_name\x18\x01 \x01(\t\x12.\n\x08\x61\x64_group\x18\x02 \x01(\x0b\x32\x1c.google.protobuf.StringValue\x12\x31\n\x0c\x63riterion_id\x18\x03 \x01(\x0b\x32\x1b.google.protobuf.Int64Value\x12\x32\n\x0c\x62id_modifier\x18\x04 \x01(\x0b\x32\x1c.google.protobuf.DoubleValue\x12\x33\n\rbase_ad_group\x18\t \x01(\x0b\x32\x1c.google.protobuf.StringValue\x12\x63\n\x13\x62id_modifier_source\x18\n \x01(\x0e\x32\x46.google.ads.googleads.v0.enums.BidModifierSourceEnum.BidModifierSource\x12_\n\x19hotel_date_selection_type\x18\x05 \x01(\x0b\x32:.google.ads.googleads.v0.common.HotelDateSelectionTypeInfoH\x00\x12\x65\n\x1chotel_advance_booking_window\x18\x06 \x01(\x0b\x32=.google.ads.googleads.v0.common.HotelAdvanceBookingWindowInfoH\x00\x12U\n\x14hotel_length_of_stay\x18\x07 \x01(\x0b\x32\x35.google.ads.googleads.v0.common.HotelLengthOfStayInfoH\x00\x12Q\n\x12hotel_check_in_day\x18\x08 \x01(\x0b\x32\x33.google.ads.googleads.v0.common.HotelCheckInDayInfoH\x00\x12<\n\x06\x64\x65vice\x18\x0b \x01(\x0b\x32*.google.ads.googleads.v0.common.DeviceInfoH\x00\x12Q\n\x11preferred_content\x18\x0c \x01(\x0b\x32\x34.google.ads.googleads.v0.common.PreferredContentInfoH\x00\x42\x0b\n\tcriterionB\xdc\x01\n%com.google.ads.googleads.v0.resourcesB\x17\x41\x64GroupBidModifierProtoP\x01ZJgoogle.golang.org/genproto/googleapis/ads/googleads/v0/resources;resources\xa2\x02\x03GAA\xaa\x02!Google.Ads.GoogleAds.V0.Resources\xca\x02!Google\\Ads\\GoogleAds\\V0\\Resourcesb\x06proto3')
   ,
   dependencies=[google_dot_ads_dot_googleads__v0_dot_proto_dot_common_dot_criteria__pb2.DESCRIPTOR,google_dot_ads_dot_googleads__v0_dot_proto_dot_enums_dot_bid__modifier__source__pb2.DESCRIPTOR,google_dot_protobuf_dot_wrappers__pb2.DESCRIPTOR,])
 
@@ -113,6 +113,13 @@ _ADGROUPBIDMODIFIER = _descriptor.Descriptor(
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None, file=DESCRIPTOR),
+    _descriptor.FieldDescriptor(
+      name='preferred_content', full_name='google.ads.googleads.v0.resources.AdGroupBidModifier.preferred_content', index=11,
+      number=12, type=11, cpp_type=10, label=1,
+      has_default_value=False, default_value=None,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None, file=DESCRIPTOR),
   ],
   extensions=[
   ],
@@ -129,7 +136,7 @@ _ADGROUPBIDMODIFIER = _descriptor.Descriptor(
       index=0, containing_type=None, fields=[]),
   ],
   serialized_start=255,
-  serialized_end=1048,
+  serialized_end=1131,
 )
 
 _ADGROUPBIDMODIFIER.fields_by_name['ad_group'].message_type = google_dot_protobuf_dot_wrappers__pb2._STRINGVALUE
@@ -142,6 +149,7 @@ _ADGROUPBIDMODIFIER.fields_by_name['hotel_advance_booking_window'].message_type 
 _ADGROUPBIDMODIFIER.fields_by_name['hotel_length_of_stay'].message_type = google_dot_ads_dot_googleads__v0_dot_proto_dot_common_dot_criteria__pb2._HOTELLENGTHOFSTAYINFO
 _ADGROUPBIDMODIFIER.fields_by_name['hotel_check_in_day'].message_type = google_dot_ads_dot_googleads__v0_dot_proto_dot_common_dot_criteria__pb2._HOTELCHECKINDAYINFO
 _ADGROUPBIDMODIFIER.fields_by_name['device'].message_type = google_dot_ads_dot_googleads__v0_dot_proto_dot_common_dot_criteria__pb2._DEVICEINFO
+_ADGROUPBIDMODIFIER.fields_by_name['preferred_content'].message_type = google_dot_ads_dot_googleads__v0_dot_proto_dot_common_dot_criteria__pb2._PREFERREDCONTENTINFO
 _ADGROUPBIDMODIFIER.oneofs_by_name['criterion'].fields.append(
   _ADGROUPBIDMODIFIER.fields_by_name['hotel_date_selection_type'])
 _ADGROUPBIDMODIFIER.fields_by_name['hotel_date_selection_type'].containing_oneof = _ADGROUPBIDMODIFIER.oneofs_by_name['criterion']
@@ -157,12 +165,15 @@ _ADGROUPBIDMODIFIER.fields_by_name['hotel_check_in_day'].containing_oneof = _ADG
 _ADGROUPBIDMODIFIER.oneofs_by_name['criterion'].fields.append(
   _ADGROUPBIDMODIFIER.fields_by_name['device'])
 _ADGROUPBIDMODIFIER.fields_by_name['device'].containing_oneof = _ADGROUPBIDMODIFIER.oneofs_by_name['criterion']
+_ADGROUPBIDMODIFIER.oneofs_by_name['criterion'].fields.append(
+  _ADGROUPBIDMODIFIER.fields_by_name['preferred_content'])
+_ADGROUPBIDMODIFIER.fields_by_name['preferred_content'].containing_oneof = _ADGROUPBIDMODIFIER.oneofs_by_name['criterion']
 DESCRIPTOR.message_types_by_name['AdGroupBidModifier'] = _ADGROUPBIDMODIFIER
 _sym_db.RegisterFileDescriptor(DESCRIPTOR)
 
 AdGroupBidModifier = _reflection.GeneratedProtocolMessageType('AdGroupBidModifier', (_message.Message,), dict(
   DESCRIPTOR = _ADGROUPBIDMODIFIER,
-  __module__ = 'google.ads.googleads_v0.proto.resources.ad_group_bid_modifier_pb2'
+  __module__ = 'google.ads.google_ads.v0.proto.resources.ad_group_bid_modifier_pb2'
   ,
   __doc__ = """Represents an ad group bid modifier.
   
@@ -203,6 +214,8 @@ AdGroupBidModifier = _reflection.GeneratedProtocolMessageType('AdGroupBidModifie
           Criterion for day of the week the booking is for.
       device:
           A device criterion.
+      preferred_content:
+          A preferred content criterion.
   """,
   # @@protoc_insertion_point(class_scope:google.ads.googleads.v0.resources.AdGroupBidModifier)
   ))

@@ -94,7 +94,7 @@ _sym_db.RegisterFileDescriptor(DESCRIPTOR)
 
 Video = _reflection.GeneratedProtocolMessageType('Video', (_message.Message,), dict(
   DESCRIPTOR = _VIDEO,
-  __module__ = 'google.ads.googleads_v0.proto.resources.video_pb2'
+  __module__ = 'google.ads.google_ads.v0.proto.resources.video_pb2'
   ,
   __doc__ = """A video.
   

@@ -207,7 +207,7 @@ _sym_db.RegisterFileDescriptor(DESCRIPTOR)
 
 GetMediaFileRequest = _reflection.GeneratedProtocolMessageType('GetMediaFileRequest', (_message.Message,), dict(
   DESCRIPTOR = _GETMEDIAFILEREQUEST,
-  __module__ = 'google.ads.googleads_v0.proto.services.media_file_service_pb2'
+  __module__ = 'google.ads.google_ads.v0.proto.services.media_file_service_pb2'
   ,
   __doc__ = """Request message for
   [MediaFileService.GetMediaFile][google.ads.googleads.v0.services.MediaFileService.GetMediaFile]
@@ -223,7 +223,7 @@ _sym_db.RegisterMessage(GetMediaFileRequest)
 
 MutateMediaFilesRequest = _reflection.GeneratedProtocolMessageType('MutateMediaFilesRequest', (_message.Message,), dict(
   DESCRIPTOR = _MUTATEMEDIAFILESREQUEST,
-  __module__ = 'google.ads.googleads_v0.proto.services.media_file_service_pb2'
+  __module__ = 'google.ads.google_ads.v0.proto.services.media_file_service_pb2'
   ,
   __doc__ = """Request message for
   [MediaFileService.MutateMediaFiles][google.ads.googleads.v0.services.MediaFileService.MutateMediaFiles]
@@ -241,7 +241,7 @@ _sym_db.RegisterMessage(MutateMediaFilesRequest)
 
 MediaFileOperation = _reflection.GeneratedProtocolMessageType('MediaFileOperation', (_message.Message,), dict(
   DESCRIPTOR = _MEDIAFILEOPERATION,
-  __module__ = 'google.ads.googleads_v0.proto.services.media_file_service_pb2'
+  __module__ = 'google.ads.google_ads.v0.proto.services.media_file_service_pb2'
   ,
   __doc__ = """A single operation to create media file.
   
@@ -259,7 +259,7 @@ _sym_db.RegisterMessage(MediaFileOperation)
 
 MutateMediaFilesResponse = _reflection.GeneratedProtocolMessageType('MutateMediaFilesResponse', (_message.Message,), dict(
   DESCRIPTOR = _MUTATEMEDIAFILESRESPONSE,
-  __module__ = 'google.ads.googleads_v0.proto.services.media_file_service_pb2'
+  __module__ = 'google.ads.google_ads.v0.proto.services.media_file_service_pb2'
   ,
   __doc__ = """Response message for a media file mutate.
   
@@ -274,7 +274,7 @@ _sym_db.RegisterMessage(MutateMediaFilesResponse)
 
 MutateMediaFileResult = _reflection.GeneratedProtocolMessageType('MutateMediaFileResult', (_message.Message,), dict(
   DESCRIPTOR = _MUTATEMEDIAFILERESULT,
-  __module__ = 'google.ads.googleads_v0.proto.services.media_file_service_pb2'
+  __module__ = 'google.ads.google_ads.v0.proto.services.media_file_service_pb2'
   ,
   __doc__ = """The result for the media file mutate.
   

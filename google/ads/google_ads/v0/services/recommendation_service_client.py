@@ -27,6 +27,7 @@ import grpc
 from google.ads.google_ads.v0.services import recommendation_service_client_config
 from google.ads.google_ads.v0.services.transports import recommendation_service_grpc_transport
 from google.ads.google_ads.v0.proto.services import recommendation_service_pb2
+from google.protobuf import wrappers_pb2
 
 _GAPIC_LIBRARY_VERSION = pkg_resources.get_distribution(
     'google-ads', ).version
@@ -208,6 +209,7 @@ class RecommendationServiceClient(object):
 
     def apply_recommendation(self,
                              customer_id,
+                             partial_failure,
                              operations,
                              retry=google.api_core.gapic_v1.method.DEFAULT,
                              timeout=google.api_core.gapic_v1.method.DEFAULT,
@@ -217,7 +219,13 @@ class RecommendationServiceClient(object):
 
         Args:
             customer_id (str): The ID of the customer with the recommendation.
+            partial_failure (bool): If true, successful operations will be carried out and invalid
+                operations will return errors. If false, operations will be carried
+                out as a transaction if and only if they are all valid.
+                Default is false.
             operations (list[Union[dict, ~google.ads.google_ads.v0.types.ApplyRecommendationOperation]]): The list of operations to apply recommendations.
+                If partial_failure=false all recommendations should be of the same type
+                There is a limit of 100 operations per request.
                 If a dict is provided, it must be of the same form as the protobuf
                 message :class:`~google.ads.google_ads.v0.types.ApplyRecommendationOperation`
             retry (Optional[google.api_core.retry.Retry]):  A retry object used
@@ -253,7 +261,68 @@ class RecommendationServiceClient(object):
 
         request = recommendation_service_pb2.ApplyRecommendationRequest(
             customer_id=customer_id,
+            partial_failure=partial_failure,
             operations=operations,
         )
         return self._inner_api_calls['apply_recommendation'](
+            request, retry=retry, timeout=timeout, metadata=metadata)
+
+    def dismiss_recommendation(self,
+                               customer_id,
+                               partial_failure,
+                               operations,
+                               retry=google.api_core.gapic_v1.method.DEFAULT,
+                               timeout=google.api_core.gapic_v1.method.DEFAULT,
+                               metadata=None):
+        """
+        Dismisses given recommendations.
+
+        Args:
+            customer_id (str): The ID of the customer with the recommendation.
+            partial_failure (bool): If true, successful operations will be carried out and invalid
+                operations will return errors. If false, operations will be carried in a
+                single transaction if and only if they are all valid.
+                Default is false.
+            operations (list[Union[dict, ~google.ads.google_ads.v0.types.DismissRecommendationOperation]]): The list of operations to dismiss recommendations.
+                If partial_failure=false all recommendations should be of the same type
+                There is a limit of 100 operations per request.
+                If a dict is provided, it must be of the same form as the protobuf
+                message :class:`~google.ads.google_ads.v0.types.DismissRecommendationOperation`
+            retry (Optional[google.api_core.retry.Retry]):  A retry object used
+                to retry requests. If ``None`` is specified, requests will not
+                be retried.
+            timeout (Optional[float]): The amount of time, in seconds, to wait
+                for the request to complete. Note that if ``retry`` is
+                specified, the timeout applies to each individual attempt.
+            metadata (Optional[Sequence[Tuple[str, str]]]): Additional metadata
+                that is provided to the method.
+
+        Returns:
+            A :class:`~google.ads.google_ads.v0.types.DismissRecommendationResponse` instance.
+
+        Raises:
+            google.api_core.exceptions.GoogleAPICallError: If the request
+                    failed for any reason.
+            google.api_core.exceptions.RetryError: If the request failed due
+                    to a retryable error and retry attempts failed.
+            ValueError: If the parameters are invalid.
+        """
+        # Wrap the transport method to add retry and timeout logic.
+        if 'dismiss_recommendation' not in self._inner_api_calls:
+            self._inner_api_calls[
+                'dismiss_recommendation'] = google.api_core.gapic_v1.method.wrap_method(
+                    self.transport.dismiss_recommendation,
+                    default_retry=self._method_configs['DismissRecommendation']
+                    .retry,
+                    default_timeout=self._method_configs[
+                        'DismissRecommendation'].timeout,
+                    client_info=self._client_info,
+                )
+
+        request = recommendation_service_pb2.DismissRecommendationRequest(
+            customer_id=customer_id,
+            partial_failure=partial_failure,
+            operations=operations,
+        )
+        return self._inner_api_calls['dismiss_recommendation'](
             request, retry=retry, timeout=timeout, metadata=metadata)

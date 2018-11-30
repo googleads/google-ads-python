@@ -89,7 +89,7 @@ _sym_db.RegisterFileDescriptor(DESCRIPTOR)
 
 QualityScoreBucketEnum = _reflection.GeneratedProtocolMessageType('QualityScoreBucketEnum', (_message.Message,), dict(
   DESCRIPTOR = _QUALITYSCOREBUCKETENUM,
-  __module__ = 'google.ads.googleads_v0.proto.enums.quality_score_bucket_pb2'
+  __module__ = 'google.ads.google_ads.v0.proto.enums.quality_score_bucket_pb2'
   ,
   __doc__ = """The relative performance compared to other advertisers.
   """,

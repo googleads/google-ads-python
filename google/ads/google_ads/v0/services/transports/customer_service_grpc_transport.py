@@ -104,6 +104,19 @@ class CustomerServiceGrpcTransport(object):
         return self._stubs['customer_service_stub'].GetCustomer
 
     @property
+    def mutate_customer(self):
+        """Return the gRPC stub for {$apiMethod.name}.
+
+        Updates a customer. Operation statuses are returned.
+
+        Returns:
+            Callable: A callable which accepts the appropriate
+                deserialized request object and returns a
+                deserialized response object.
+        """
+        return self._stubs['customer_service_stub'].MutateCustomer
+
+    @property
     def list_accessible_customers(self):
         """Return the gRPC stub for {$apiMethod.name}.
 
@@ -116,3 +129,16 @@ class CustomerServiceGrpcTransport(object):
                 deserialized response object.
         """
         return self._stubs['customer_service_stub'].ListAccessibleCustomers
+
+    @property
+    def create_customer_client(self):
+        """Return the gRPC stub for {$apiMethod.name}.
+
+        Creates a new client under manager. The new client customer is returned.
+
+        Returns:
+            Callable: A callable which accepts the appropriate
+                deserialized request object and returns a
+                deserialized response object.
+        """
+        return self._stubs['customer_service_stub'].CreateCustomerClient

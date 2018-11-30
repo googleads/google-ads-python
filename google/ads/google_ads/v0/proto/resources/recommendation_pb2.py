@@ -730,7 +730,7 @@ Recommendation = _reflection.GeneratedProtocolMessageType('Recommendation', (_me
 
   RecommendationImpact = _reflection.GeneratedProtocolMessageType('RecommendationImpact', (_message.Message,), dict(
     DESCRIPTOR = _RECOMMENDATION_RECOMMENDATIONIMPACT,
-    __module__ = 'google.ads.googleads_v0.proto.resources.recommendation_pb2'
+    __module__ = 'google.ads.google_ads.v0.proto.resources.recommendation_pb2'
     ,
     __doc__ = """The impact of making the change as described in the recommendation. Some
     types of recommendations may not have impact information.
@@ -748,7 +748,7 @@ Recommendation = _reflection.GeneratedProtocolMessageType('Recommendation', (_me
 
   RecommendationMetrics = _reflection.GeneratedProtocolMessageType('RecommendationMetrics', (_message.Message,), dict(
     DESCRIPTOR = _RECOMMENDATION_RECOMMENDATIONMETRICS,
-    __module__ = 'google.ads.googleads_v0.proto.resources.recommendation_pb2'
+    __module__ = 'google.ads.google_ads.v0.proto.resources.recommendation_pb2'
     ,
     __doc__ = """Weekly account performance metrics. For some recommendation types, these
     are averaged over the past 90-day period and hence can be fractional.
@@ -775,7 +775,7 @@ Recommendation = _reflection.GeneratedProtocolMessageType('Recommendation', (_me
 
     CampaignBudgetRecommendationOption = _reflection.GeneratedProtocolMessageType('CampaignBudgetRecommendationOption', (_message.Message,), dict(
       DESCRIPTOR = _RECOMMENDATION_CAMPAIGNBUDGETRECOMMENDATION_CAMPAIGNBUDGETRECOMMENDATIONOPTION,
-      __module__ = 'google.ads.googleads_v0.proto.resources.recommendation_pb2'
+      __module__ = 'google.ads.google_ads.v0.proto.resources.recommendation_pb2'
       ,
       __doc__ = """The impact estimates for a given budget amount.
       
@@ -791,7 +791,7 @@ Recommendation = _reflection.GeneratedProtocolMessageType('Recommendation', (_me
       ))
     ,
     DESCRIPTOR = _RECOMMENDATION_CAMPAIGNBUDGETRECOMMENDATION,
-    __module__ = 'google.ads.googleads_v0.proto.resources.recommendation_pb2'
+    __module__ = 'google.ads.google_ads.v0.proto.resources.recommendation_pb2'
     ,
     __doc__ = """The budget recommendation for budget constrained campaigns.
     
@@ -811,7 +811,7 @@ Recommendation = _reflection.GeneratedProtocolMessageType('Recommendation', (_me
 
   KeywordRecommendation = _reflection.GeneratedProtocolMessageType('KeywordRecommendation', (_message.Message,), dict(
     DESCRIPTOR = _RECOMMENDATION_KEYWORDRECOMMENDATION,
-    __module__ = 'google.ads.googleads_v0.proto.resources.recommendation_pb2'
+    __module__ = 'google.ads.google_ads.v0.proto.resources.recommendation_pb2'
     ,
     __doc__ = """The keyword recommendation.
     
@@ -828,7 +828,7 @@ Recommendation = _reflection.GeneratedProtocolMessageType('Recommendation', (_me
 
   TextAdRecommendation = _reflection.GeneratedProtocolMessageType('TextAdRecommendation', (_message.Message,), dict(
     DESCRIPTOR = _RECOMMENDATION_TEXTADRECOMMENDATION,
-    __module__ = 'google.ads.googleads_v0.proto.resources.recommendation_pb2'
+    __module__ = 'google.ads.google_ads.v0.proto.resources.recommendation_pb2'
     ,
     __doc__ = """The text ad recommendation.
     
@@ -851,7 +851,7 @@ Recommendation = _reflection.GeneratedProtocolMessageType('Recommendation', (_me
 
     TargetCpaOptInRecommendationOption = _reflection.GeneratedProtocolMessageType('TargetCpaOptInRecommendationOption', (_message.Message,), dict(
       DESCRIPTOR = _RECOMMENDATION_TARGETCPAOPTINRECOMMENDATION_TARGETCPAOPTINRECOMMENDATIONOPTION,
-      __module__ = 'google.ads.googleads_v0.proto.resources.recommendation_pb2'
+      __module__ = 'google.ads.google_ads.v0.proto.resources.recommendation_pb2'
       ,
       __doc__ = """The Target CPA opt-in option with impact estimate.
       
@@ -873,7 +873,7 @@ Recommendation = _reflection.GeneratedProtocolMessageType('Recommendation', (_me
       ))
     ,
     DESCRIPTOR = _RECOMMENDATION_TARGETCPAOPTINRECOMMENDATION,
-    __module__ = 'google.ads.googleads_v0.proto.resources.recommendation_pb2'
+    __module__ = 'google.ads.google_ads.v0.proto.resources.recommendation_pb2'
     ,
     __doc__ = """The Target CPA opt-in recommendation.
     
@@ -892,7 +892,7 @@ Recommendation = _reflection.GeneratedProtocolMessageType('Recommendation', (_me
 
   MaximizeConversionsOptInRecommendation = _reflection.GeneratedProtocolMessageType('MaximizeConversionsOptInRecommendation', (_message.Message,), dict(
     DESCRIPTOR = _RECOMMENDATION_MAXIMIZECONVERSIONSOPTINRECOMMENDATION,
-    __module__ = 'google.ads.googleads_v0.proto.resources.recommendation_pb2'
+    __module__ = 'google.ads.google_ads.v0.proto.resources.recommendation_pb2'
     ,
     __doc__ = """The Maximize Conversions Opt-In recommendation.
     
@@ -907,7 +907,7 @@ Recommendation = _reflection.GeneratedProtocolMessageType('Recommendation', (_me
 
   EnhancedCpcOptInRecommendation = _reflection.GeneratedProtocolMessageType('EnhancedCpcOptInRecommendation', (_message.Message,), dict(
     DESCRIPTOR = _RECOMMENDATION_ENHANCEDCPCOPTINRECOMMENDATION,
-    __module__ = 'google.ads.googleads_v0.proto.resources.recommendation_pb2'
+    __module__ = 'google.ads.google_ads.v0.proto.resources.recommendation_pb2'
     ,
     __doc__ = """The Enhanced Cost-Per-Click Opt-In recommendation.
     """,
@@ -917,7 +917,7 @@ Recommendation = _reflection.GeneratedProtocolMessageType('Recommendation', (_me
 
   SearchPartnersOptInRecommendation = _reflection.GeneratedProtocolMessageType('SearchPartnersOptInRecommendation', (_message.Message,), dict(
     DESCRIPTOR = _RECOMMENDATION_SEARCHPARTNERSOPTINRECOMMENDATION,
-    __module__ = 'google.ads.googleads_v0.proto.resources.recommendation_pb2'
+    __module__ = 'google.ads.google_ads.v0.proto.resources.recommendation_pb2'
     ,
     __doc__ = """The Search Partners Opt-In recommendation.
     """,
@@ -927,7 +927,7 @@ Recommendation = _reflection.GeneratedProtocolMessageType('Recommendation', (_me
 
   MaximizeClicksOptInRecommendation = _reflection.GeneratedProtocolMessageType('MaximizeClicksOptInRecommendation', (_message.Message,), dict(
     DESCRIPTOR = _RECOMMENDATION_MAXIMIZECLICKSOPTINRECOMMENDATION,
-    __module__ = 'google.ads.googleads_v0.proto.resources.recommendation_pb2'
+    __module__ = 'google.ads.google_ads.v0.proto.resources.recommendation_pb2'
     ,
     __doc__ = """The Maximize Clicks opt-in recommendation.
     
@@ -943,7 +943,7 @@ Recommendation = _reflection.GeneratedProtocolMessageType('Recommendation', (_me
 
   OptimizeAdRotationRecommendation = _reflection.GeneratedProtocolMessageType('OptimizeAdRotationRecommendation', (_message.Message,), dict(
     DESCRIPTOR = _RECOMMENDATION_OPTIMIZEADROTATIONRECOMMENDATION,
-    __module__ = 'google.ads.googleads_v0.proto.resources.recommendation_pb2'
+    __module__ = 'google.ads.google_ads.v0.proto.resources.recommendation_pb2'
     ,
     __doc__ = """The Optimize Ad Rotation recommendation.
     """,
@@ -951,7 +951,7 @@ Recommendation = _reflection.GeneratedProtocolMessageType('Recommendation', (_me
     ))
   ,
   DESCRIPTOR = _RECOMMENDATION,
-  __module__ = 'google.ads.googleads_v0.proto.resources.recommendation_pb2'
+  __module__ = 'google.ads.google_ads.v0.proto.resources.recommendation_pb2'
   ,
   __doc__ = """A recommendation.
   

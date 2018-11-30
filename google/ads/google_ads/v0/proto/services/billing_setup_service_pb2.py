@@ -217,7 +217,7 @@ _sym_db.RegisterFileDescriptor(DESCRIPTOR)
 
 GetBillingSetupRequest = _reflection.GeneratedProtocolMessageType('GetBillingSetupRequest', (_message.Message,), dict(
   DESCRIPTOR = _GETBILLINGSETUPREQUEST,
-  __module__ = 'google.ads.googleads_v0.proto.services.billing_setup_service_pb2'
+  __module__ = 'google.ads.google_ads.v0.proto.services.billing_setup_service_pb2'
   ,
   __doc__ = """Request message for
   [BillingSetupService.GetBillingSetup][google.ads.googleads.v0.services.BillingSetupService.GetBillingSetup].
@@ -233,7 +233,7 @@ _sym_db.RegisterMessage(GetBillingSetupRequest)
 
 MutateBillingSetupRequest = _reflection.GeneratedProtocolMessageType('MutateBillingSetupRequest', (_message.Message,), dict(
   DESCRIPTOR = _MUTATEBILLINGSETUPREQUEST,
-  __module__ = 'google.ads.googleads_v0.proto.services.billing_setup_service_pb2'
+  __module__ = 'google.ads.google_ads.v0.proto.services.billing_setup_service_pb2'
   ,
   __doc__ = """Request message for billing setup mutate operations.
   
@@ -251,7 +251,7 @@ _sym_db.RegisterMessage(MutateBillingSetupRequest)
 
 BillingSetupOperation = _reflection.GeneratedProtocolMessageType('BillingSetupOperation', (_message.Message,), dict(
   DESCRIPTOR = _BILLINGSETUPOPERATION,
-  __module__ = 'google.ads.googleads_v0.proto.services.billing_setup_service_pb2'
+  __module__ = 'google.ads.google_ads.v0.proto.services.billing_setup_service_pb2'
   ,
   __doc__ = """A single operation on a billing setup, which describes the cancellation
   of an existing billing setup.
@@ -276,7 +276,7 @@ _sym_db.RegisterMessage(BillingSetupOperation)
 
 MutateBillingSetupResponse = _reflection.GeneratedProtocolMessageType('MutateBillingSetupResponse', (_message.Message,), dict(
   DESCRIPTOR = _MUTATEBILLINGSETUPRESPONSE,
-  __module__ = 'google.ads.googleads_v0.proto.services.billing_setup_service_pb2'
+  __module__ = 'google.ads.google_ads.v0.proto.services.billing_setup_service_pb2'
   ,
   __doc__ = """Response message for a billing setup operation.
   
@@ -292,7 +292,7 @@ _sym_db.RegisterMessage(MutateBillingSetupResponse)
 
 MutateBillingSetupResult = _reflection.GeneratedProtocolMessageType('MutateBillingSetupResult', (_message.Message,), dict(
   DESCRIPTOR = _MUTATEBILLINGSETUPRESULT,
-  __module__ = 'google.ads.googleads_v0.proto.services.billing_setup_service_pb2'
+  __module__ = 'google.ads.google_ads.v0.proto.services.billing_setup_service_pb2'
   ,
   __doc__ = """Result for a single billing setup mutate.
   

@@ -85,7 +85,7 @@ _sym_db.RegisterFileDescriptor(DESCRIPTOR)
 
 TimeTypeEnum = _reflection.GeneratedProtocolMessageType('TimeTypeEnum', (_message.Message,), dict(
   DESCRIPTOR = _TIMETYPEENUM,
-  __module__ = 'google.ads.googleads_v0.proto.enums.time_type_pb2'
+  __module__ = 'google.ads.google_ads.v0.proto.enums.time_type_pb2'
   ,
   __doc__ = """Message describing time types.
   """,

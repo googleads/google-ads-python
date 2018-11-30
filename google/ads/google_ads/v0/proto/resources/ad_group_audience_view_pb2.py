@@ -60,7 +60,7 @@ _sym_db.RegisterFileDescriptor(DESCRIPTOR)
 
 AdGroupAudienceView = _reflection.GeneratedProtocolMessageType('AdGroupAudienceView', (_message.Message,), dict(
   DESCRIPTOR = _ADGROUPAUDIENCEVIEW,
-  __module__ = 'google.ads.googleads_v0.proto.resources.ad_group_audience_view_pb2'
+  __module__ = 'google.ads.google_ads.v0.proto.resources.ad_group_audience_view_pb2'
   ,
   __doc__ = """An ad group audience view. Includes performance data from interests and
   remarketing lists for Display Network and YouTube Network ads, and

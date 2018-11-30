@@ -273,7 +273,7 @@ _sym_db.RegisterFileDescriptor(DESCRIPTOR)
 
 QueryErrorEnum = _reflection.GeneratedProtocolMessageType('QueryErrorEnum', (_message.Message,), dict(
   DESCRIPTOR = _QUERYERRORENUM,
-  __module__ = 'google.ads.googleads_v0.proto.errors.query_error_pb2'
+  __module__ = 'google.ads.google_ads.v0.proto.errors.query_error_pb2'
   ,
   __doc__ = """Container for enum describing possible query errors.
   """,

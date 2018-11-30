@@ -81,7 +81,7 @@ _sym_db.RegisterFileDescriptor(DESCRIPTOR)
 
 NotEmptyErrorEnum = _reflection.GeneratedProtocolMessageType('NotEmptyErrorEnum', (_message.Message,), dict(
   DESCRIPTOR = _NOTEMPTYERRORENUM,
-  __module__ = 'google.ads.googleads_v0.proto.errors.not_empty_error_pb2'
+  __module__ = 'google.ads.google_ads.v0.proto.errors.not_empty_error_pb2'
   ,
   __doc__ = """Container for enum describing possible not empty errors.
   """,

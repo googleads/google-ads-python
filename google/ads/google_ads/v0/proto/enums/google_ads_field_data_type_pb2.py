@@ -117,7 +117,7 @@ _sym_db.RegisterFileDescriptor(DESCRIPTOR)
 
 GoogleAdsFieldDataTypeEnum = _reflection.GeneratedProtocolMessageType('GoogleAdsFieldDataTypeEnum', (_message.Message,), dict(
   DESCRIPTOR = _GOOGLEADSFIELDDATATYPEENUM,
-  __module__ = 'google.ads.googleads_v0.proto.enums.google_ads_field_data_type_pb2'
+  __module__ = 'google.ads.google_ads.v0.proto.enums.google_ads_field_data_type_pb2'
   ,
   __doc__ = """Container holding the various data types.
   """,

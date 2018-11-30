@@ -217,7 +217,7 @@ _sym_db.RegisterFileDescriptor(DESCRIPTOR)
 
 GetSharedCriterionRequest = _reflection.GeneratedProtocolMessageType('GetSharedCriterionRequest', (_message.Message,), dict(
   DESCRIPTOR = _GETSHAREDCRITERIONREQUEST,
-  __module__ = 'google.ads.googleads_v0.proto.services.shared_criterion_service_pb2'
+  __module__ = 'google.ads.google_ads.v0.proto.services.shared_criterion_service_pb2'
   ,
   __doc__ = """Request message for
   [SharedCriterionService.GetSharedCriterion][google.ads.googleads.v0.services.SharedCriterionService.GetSharedCriterion].
@@ -233,7 +233,7 @@ _sym_db.RegisterMessage(GetSharedCriterionRequest)
 
 MutateSharedCriteriaRequest = _reflection.GeneratedProtocolMessageType('MutateSharedCriteriaRequest', (_message.Message,), dict(
   DESCRIPTOR = _MUTATESHAREDCRITERIAREQUEST,
-  __module__ = 'google.ads.googleads_v0.proto.services.shared_criterion_service_pb2'
+  __module__ = 'google.ads.google_ads.v0.proto.services.shared_criterion_service_pb2'
   ,
   __doc__ = """Request message for
   [SharedCriterionService.MutateSharedCriteria][google.ads.googleads.v0.services.SharedCriterionService.MutateSharedCriteria].
@@ -253,7 +253,7 @@ _sym_db.RegisterMessage(MutateSharedCriteriaRequest)
 
 SharedCriterionOperation = _reflection.GeneratedProtocolMessageType('SharedCriterionOperation', (_message.Message,), dict(
   DESCRIPTOR = _SHAREDCRITERIONOPERATION,
-  __module__ = 'google.ads.googleads_v0.proto.services.shared_criterion_service_pb2'
+  __module__ = 'google.ads.google_ads.v0.proto.services.shared_criterion_service_pb2'
   ,
   __doc__ = """A single operation (create, remove) on an shared criterion.
   
@@ -275,7 +275,7 @@ _sym_db.RegisterMessage(SharedCriterionOperation)
 
 MutateSharedCriteriaResponse = _reflection.GeneratedProtocolMessageType('MutateSharedCriteriaResponse', (_message.Message,), dict(
   DESCRIPTOR = _MUTATESHAREDCRITERIARESPONSE,
-  __module__ = 'google.ads.googleads_v0.proto.services.shared_criterion_service_pb2'
+  __module__ = 'google.ads.google_ads.v0.proto.services.shared_criterion_service_pb2'
   ,
   __doc__ = """Response message for a shared criterion mutate.
   
@@ -290,7 +290,7 @@ _sym_db.RegisterMessage(MutateSharedCriteriaResponse)
 
 MutateSharedCriterionResult = _reflection.GeneratedProtocolMessageType('MutateSharedCriterionResult', (_message.Message,), dict(
   DESCRIPTOR = _MUTATESHAREDCRITERIONRESULT,
-  __module__ = 'google.ads.googleads_v0.proto.services.shared_criterion_service_pb2'
+  __module__ = 'google.ads.google_ads.v0.proto.services.shared_criterion_service_pb2'
   ,
   __doc__ = """The result for the shared criterion mutate.
   

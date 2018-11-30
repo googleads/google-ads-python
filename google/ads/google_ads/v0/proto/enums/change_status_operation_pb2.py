@@ -89,7 +89,7 @@ _sym_db.RegisterFileDescriptor(DESCRIPTOR)
 
 ChangeStatusOperationEnum = _reflection.GeneratedProtocolMessageType('ChangeStatusOperationEnum', (_message.Message,), dict(
   DESCRIPTOR = _CHANGESTATUSOPERATIONENUM,
-  __module__ = 'google.ads.googleads_v0.proto.enums.change_status_operation_pb2'
+  __module__ = 'google.ads.google_ads.v0.proto.enums.change_status_operation_pb2'
   ,
   __doc__ = """Container for enum describing operations for the ChangeStatus resource.
   """,

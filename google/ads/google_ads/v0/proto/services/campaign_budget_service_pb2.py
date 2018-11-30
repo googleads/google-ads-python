@@ -237,7 +237,7 @@ _sym_db.RegisterFileDescriptor(DESCRIPTOR)
 
 GetCampaignBudgetRequest = _reflection.GeneratedProtocolMessageType('GetCampaignBudgetRequest', (_message.Message,), dict(
   DESCRIPTOR = _GETCAMPAIGNBUDGETREQUEST,
-  __module__ = 'google.ads.googleads_v0.proto.services.campaign_budget_service_pb2'
+  __module__ = 'google.ads.google_ads.v0.proto.services.campaign_budget_service_pb2'
   ,
   __doc__ = """Request message for
   [CampaignBudgetService.GetCampaignBudget][google.ads.googleads.v0.services.CampaignBudgetService.GetCampaignBudget].
@@ -253,7 +253,7 @@ _sym_db.RegisterMessage(GetCampaignBudgetRequest)
 
 MutateCampaignBudgetsRequest = _reflection.GeneratedProtocolMessageType('MutateCampaignBudgetsRequest', (_message.Message,), dict(
   DESCRIPTOR = _MUTATECAMPAIGNBUDGETSREQUEST,
-  __module__ = 'google.ads.googleads_v0.proto.services.campaign_budget_service_pb2'
+  __module__ = 'google.ads.google_ads.v0.proto.services.campaign_budget_service_pb2'
   ,
   __doc__ = """Request message for
   [CampaignBudgetService.MutateCampaignBudgets][google.ads.googleads.v0.services.CampaignBudgetService.MutateCampaignBudgets].
@@ -273,7 +273,7 @@ _sym_db.RegisterMessage(MutateCampaignBudgetsRequest)
 
 CampaignBudgetOperation = _reflection.GeneratedProtocolMessageType('CampaignBudgetOperation', (_message.Message,), dict(
   DESCRIPTOR = _CAMPAIGNBUDGETOPERATION,
-  __module__ = 'google.ads.googleads_v0.proto.services.campaign_budget_service_pb2'
+  __module__ = 'google.ads.google_ads.v0.proto.services.campaign_budget_service_pb2'
   ,
   __doc__ = """A single operation (create, update, remove) on a campaign budget.
   
@@ -301,7 +301,7 @@ _sym_db.RegisterMessage(CampaignBudgetOperation)
 
 MutateCampaignBudgetsResponse = _reflection.GeneratedProtocolMessageType('MutateCampaignBudgetsResponse', (_message.Message,), dict(
   DESCRIPTOR = _MUTATECAMPAIGNBUDGETSRESPONSE,
-  __module__ = 'google.ads.googleads_v0.proto.services.campaign_budget_service_pb2'
+  __module__ = 'google.ads.google_ads.v0.proto.services.campaign_budget_service_pb2'
   ,
   __doc__ = """Response message for campaign budget mutate.
   
@@ -316,7 +316,7 @@ _sym_db.RegisterMessage(MutateCampaignBudgetsResponse)
 
 MutateCampaignBudgetResult = _reflection.GeneratedProtocolMessageType('MutateCampaignBudgetResult', (_message.Message,), dict(
   DESCRIPTOR = _MUTATECAMPAIGNBUDGETRESULT,
-  __module__ = 'google.ads.googleads_v0.proto.services.campaign_budget_service_pb2'
+  __module__ = 'google.ads.google_ads.v0.proto.services.campaign_budget_service_pb2'
   ,
   __doc__ = """The result for the campaign budget mutate.
   

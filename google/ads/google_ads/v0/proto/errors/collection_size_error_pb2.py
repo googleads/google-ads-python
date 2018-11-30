@@ -85,7 +85,7 @@ _sym_db.RegisterFileDescriptor(DESCRIPTOR)
 
 CollectionSizeErrorEnum = _reflection.GeneratedProtocolMessageType('CollectionSizeErrorEnum', (_message.Message,), dict(
   DESCRIPTOR = _COLLECTIONSIZEERRORENUM,
-  __module__ = 'google.ads.googleads_v0.proto.errors.collection_size_error_pb2'
+  __module__ = 'google.ads.google_ads.v0.proto.errors.collection_size_error_pb2'
   ,
   __doc__ = """Container for enum describing possible collection size errors.
   """,

@@ -125,7 +125,7 @@ _sym_db.RegisterFileDescriptor(DESCRIPTOR)
 
 MonthOfYearEnum = _reflection.GeneratedProtocolMessageType('MonthOfYearEnum', (_message.Message,), dict(
   DESCRIPTOR = _MONTHOFYEARENUM,
-  __module__ = 'google.ads.googleads_v0.proto.enums.month_of_year_pb2'
+  __module__ = 'google.ads.google_ads.v0.proto.enums.month_of_year_pb2'
   ,
   __doc__ = """Container for enumeration of months of the year, e.g., "January".
   """,

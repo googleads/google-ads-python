@@ -237,7 +237,7 @@ _sym_db.RegisterFileDescriptor(DESCRIPTOR)
 
 GetAdGroupCriterionRequest = _reflection.GeneratedProtocolMessageType('GetAdGroupCriterionRequest', (_message.Message,), dict(
   DESCRIPTOR = _GETADGROUPCRITERIONREQUEST,
-  __module__ = 'google.ads.googleads_v0.proto.services.ad_group_criterion_service_pb2'
+  __module__ = 'google.ads.google_ads.v0.proto.services.ad_group_criterion_service_pb2'
   ,
   __doc__ = """Request message for
   [AdGroupCriterionService.GetAdGroupCriterion][google.ads.googleads.v0.services.AdGroupCriterionService.GetAdGroupCriterion].
@@ -253,7 +253,7 @@ _sym_db.RegisterMessage(GetAdGroupCriterionRequest)
 
 MutateAdGroupCriteriaRequest = _reflection.GeneratedProtocolMessageType('MutateAdGroupCriteriaRequest', (_message.Message,), dict(
   DESCRIPTOR = _MUTATEADGROUPCRITERIAREQUEST,
-  __module__ = 'google.ads.googleads_v0.proto.services.ad_group_criterion_service_pb2'
+  __module__ = 'google.ads.google_ads.v0.proto.services.ad_group_criterion_service_pb2'
   ,
   __doc__ = """Request message for
   [AdGroupCriterionService.MutateAdGroupCriteria][google.ads.googleads.v0.services.AdGroupCriterionService.MutateAdGroupCriteria].
@@ -271,7 +271,7 @@ _sym_db.RegisterMessage(MutateAdGroupCriteriaRequest)
 
 AdGroupCriterionOperation = _reflection.GeneratedProtocolMessageType('AdGroupCriterionOperation', (_message.Message,), dict(
   DESCRIPTOR = _ADGROUPCRITERIONOPERATION,
-  __module__ = 'google.ads.googleads_v0.proto.services.ad_group_criterion_service_pb2'
+  __module__ = 'google.ads.google_ads.v0.proto.services.ad_group_criterion_service_pb2'
   ,
   __doc__ = """A single operation (create, remove, update) on an ad group criterion.
   
@@ -299,7 +299,7 @@ _sym_db.RegisterMessage(AdGroupCriterionOperation)
 
 MutateAdGroupCriteriaResponse = _reflection.GeneratedProtocolMessageType('MutateAdGroupCriteriaResponse', (_message.Message,), dict(
   DESCRIPTOR = _MUTATEADGROUPCRITERIARESPONSE,
-  __module__ = 'google.ads.googleads_v0.proto.services.ad_group_criterion_service_pb2'
+  __module__ = 'google.ads.google_ads.v0.proto.services.ad_group_criterion_service_pb2'
   ,
   __doc__ = """Response message for an ad group criterion mutate.
   
@@ -314,7 +314,7 @@ _sym_db.RegisterMessage(MutateAdGroupCriteriaResponse)
 
 MutateAdGroupCriterionResult = _reflection.GeneratedProtocolMessageType('MutateAdGroupCriterionResult', (_message.Message,), dict(
   DESCRIPTOR = _MUTATEADGROUPCRITERIONRESULT,
-  __module__ = 'google.ads.googleads_v0.proto.services.ad_group_criterion_service_pb2'
+  __module__ = 'google.ads.google_ads.v0.proto.services.ad_group_criterion_service_pb2'
   ,
   __doc__ = """The result for the criterion mutate.
   

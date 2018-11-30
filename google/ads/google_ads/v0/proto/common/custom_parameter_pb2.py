@@ -71,7 +71,7 @@ _sym_db.RegisterFileDescriptor(DESCRIPTOR)
 
 CustomParameter = _reflection.GeneratedProtocolMessageType('CustomParameter', (_message.Message,), dict(
   DESCRIPTOR = _CUSTOMPARAMETER,
-  __module__ = 'google.ads.googleads_v0.proto.common.custom_parameter_pb2'
+  __module__ = 'google.ads.google_ads.v0.proto.common.custom_parameter_pb2'
   ,
   __doc__ = """A mapping that can be used by custom parameter tags in a
   ``tracking_url_template``, ``final_urls``, or ``mobile_final_urls``.

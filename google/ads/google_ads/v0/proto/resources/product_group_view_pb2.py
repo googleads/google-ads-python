@@ -60,7 +60,7 @@ _sym_db.RegisterFileDescriptor(DESCRIPTOR)
 
 ProductGroupView = _reflection.GeneratedProtocolMessageType('ProductGroupView', (_message.Message,), dict(
   DESCRIPTOR = _PRODUCTGROUPVIEW,
-  __module__ = 'google.ads.googleads_v0.proto.resources.product_group_view_pb2'
+  __module__ = 'google.ads.google_ads.v0.proto.resources.product_group_view_pb2'
   ,
   __doc__ = """A product group view.
   

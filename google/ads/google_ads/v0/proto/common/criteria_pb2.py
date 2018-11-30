@@ -14,6 +14,7 @@ _sym_db = _symbol_database.Default()
 
 
 from google.ads.google_ads.v0.proto.enums import age_range_type_pb2 as google_dot_ads_dot_googleads__v0_dot_proto_dot_enums_dot_age__range__type__pb2
+from google.ads.google_ads.v0.proto.enums import content_label_type_pb2 as google_dot_ads_dot_googleads__v0_dot_proto_dot_enums_dot_content__label__type__pb2
 from google.ads.google_ads.v0.proto.enums import day_of_week_pb2 as google_dot_ads_dot_googleads__v0_dot_proto_dot_enums_dot_day__of__week__pb2
 from google.ads.google_ads.v0.proto.enums import device_pb2 as google_dot_ads_dot_googleads__v0_dot_proto_dot_enums_dot_device__pb2
 from google.ads.google_ads.v0.proto.enums import gender_type_pb2 as google_dot_ads_dot_googleads__v0_dot_proto_dot_enums_dot_gender__type__pb2
@@ -25,6 +26,7 @@ from google.ads.google_ads.v0.proto.enums import listing_custom_attribute_index_
 from google.ads.google_ads.v0.proto.enums import listing_group_type_pb2 as google_dot_ads_dot_googleads__v0_dot_proto_dot_enums_dot_listing__group__type__pb2
 from google.ads.google_ads.v0.proto.enums import minute_of_hour_pb2 as google_dot_ads_dot_googleads__v0_dot_proto_dot_enums_dot_minute__of__hour__pb2
 from google.ads.google_ads.v0.proto.enums import parental_status_type_pb2 as google_dot_ads_dot_googleads__v0_dot_proto_dot_enums_dot_parental__status__type__pb2
+from google.ads.google_ads.v0.proto.enums import preferred_content_type_pb2 as google_dot_ads_dot_googleads__v0_dot_proto_dot_enums_dot_preferred__content__type__pb2
 from google.ads.google_ads.v0.proto.enums import product_channel_pb2 as google_dot_ads_dot_googleads__v0_dot_proto_dot_enums_dot_product__channel__pb2
 from google.ads.google_ads.v0.proto.enums import product_channel_exclusivity_pb2 as google_dot_ads_dot_googleads__v0_dot_proto_dot_enums_dot_product__channel__exclusivity__pb2
 from google.ads.google_ads.v0.proto.enums import product_condition_pb2 as google_dot_ads_dot_googleads__v0_dot_proto_dot_enums_dot_product__condition__pb2
@@ -37,9 +39,9 @@ DESCRIPTOR = _descriptor.FileDescriptor(
   name='google/ads/googleads_v0/proto/common/criteria.proto',
   package='google.ads.googleads.v0.common',
   syntax='proto3',
-  serialized_pb=_b('\n3google/ads/googleads_v0/proto/common/criteria.proto\x12\x1egoogle.ads.googleads.v0.common\x1a\x38google/ads/googleads_v0/proto/enums/age_range_type.proto\x1a\x35google/ads/googleads_v0/proto/enums/day_of_week.proto\x1a\x30google/ads/googleads_v0/proto/enums/device.proto\x1a\x35google/ads/googleads_v0/proto/enums/gender_type.proto\x1a\x43google/ads/googleads_v0/proto/enums/hotel_date_selection_type.proto\x1a;google/ads/googleads_v0/proto/enums/income_range_type.proto\x1a:google/ads/googleads_v0/proto/enums/interaction_type.proto\x1a<google/ads/googleads_v0/proto/enums/keyword_match_type.proto\x1aHgoogle/ads/googleads_v0/proto/enums/listing_custom_attribute_index.proto\x1a<google/ads/googleads_v0/proto/enums/listing_group_type.proto\x1a\x38google/ads/googleads_v0/proto/enums/minute_of_hour.proto\x1a>google/ads/googleads_v0/proto/enums/parental_status_type.proto\x1a\x39google/ads/googleads_v0/proto/enums/product_channel.proto\x1a\x45google/ads/googleads_v0/proto/enums/product_channel_exclusivity.proto\x1a;google/ads/googleads_v0/proto/enums/product_condition.proto\x1a<google/ads/googleads_v0/proto/enums/product_type_level.proto\x1a@google/ads/googleads_v0/proto/enums/proximity_radius_units.proto\x1a\x1egoogle/protobuf/wrappers.proto\"\x93\x01\n\x0bKeywordInfo\x12*\n\x04text\x18\x01 \x01(\x0b\x32\x1c.google.protobuf.StringValue\x12X\n\nmatch_type\x18\x02 \x01(\x0e\x32\x44.google.ads.googleads.v0.enums.KeywordMatchTypeEnum.KeywordMatchType\":\n\rPlacementInfo\x12)\n\x03url\x18\x01 \x01(\x0b\x32\x1c.google.protobuf.StringValue\"I\n\x0cLocationInfo\x12\x39\n\x13geo_target_constant\x18\x01 \x01(\x0b\x32\x1c.google.protobuf.StringValue\"L\n\nDeviceInfo\x12>\n\x04type\x18\x01 \x01(\x0e\x32\x30.google.ads.googleads.v0.enums.DeviceEnum.Device\"\xf1\x01\n\x10ListingGroupInfo\x12R\n\x04type\x18\x01 \x01(\x0e\x32\x44.google.ads.googleads.v0.enums.ListingGroupTypeEnum.ListingGroupType\x12H\n\ncase_value\x18\x02 \x01(\x0b\x32\x34.google.ads.googleads.v0.common.ListingDimensionInfo\x12?\n\x19parent_ad_group_criterion\x18\x03 \x01(\x0b\x32\x1c.google.protobuf.StringValue\"\xdb\x07\n\x14ListingDimensionInfo\x12I\n\rlisting_brand\x18\x01 \x01(\x0b\x32\x30.google.ads.googleads.v0.common.ListingBrandInfoH\x00\x12?\n\x08hotel_id\x18\x02 \x01(\x0b\x32+.google.ads.googleads.v0.common.HotelIdInfoH\x00\x12\x45\n\x0bhotel_class\x18\x03 \x01(\x0b\x32..google.ads.googleads.v0.common.HotelClassInfoH\x00\x12V\n\x14hotel_country_region\x18\x04 \x01(\x0b\x32\x36.google.ads.googleads.v0.common.HotelCountryRegionInfoH\x00\x12\x45\n\x0bhotel_state\x18\x05 \x01(\x0b\x32..google.ads.googleads.v0.common.HotelStateInfoH\x00\x12\x43\n\nhotel_city\x18\x06 \x01(\x0b\x32-.google.ads.googleads.v0.common.HotelCityInfoH\x00\x12^\n\x18listing_custom_attribute\x18\x07 \x01(\x0b\x32:.google.ads.googleads.v0.common.ListingCustomAttributeInfoH\x00\x12M\n\x0fproduct_channel\x18\x08 \x01(\x0b\x32\x32.google.ads.googleads.v0.common.ProductChannelInfoH\x00\x12\x64\n\x1bproduct_channel_exclusivity\x18\t \x01(\x0b\x32=.google.ads.googleads.v0.common.ProductChannelExclusivityInfoH\x00\x12Q\n\x11product_condition\x18\n \x01(\x0b\x32\x34.google.ads.googleads.v0.common.ProductConditionInfoH\x00\x12N\n\x10product_offer_id\x18\x0b \x01(\x0b\x32\x32.google.ads.googleads.v0.common.ProductOfferIdInfoH\x00\x12G\n\x0cproduct_type\x18\x0c \x01(\x0b\x32/.google.ads.googleads.v0.common.ProductTypeInfoH\x00\x42\x0b\n\tdimension\"?\n\x10ListingBrandInfo\x12+\n\x05value\x18\x01 \x01(\x0b\x32\x1c.google.protobuf.StringValue\":\n\x0bHotelIdInfo\x12+\n\x05value\x18\x01 \x01(\x0b\x32\x1c.google.protobuf.StringValue\"<\n\x0eHotelClassInfo\x12*\n\x05value\x18\x01 \x01(\x0b\x32\x1b.google.protobuf.Int64Value\"X\n\x16HotelCountryRegionInfo\x12>\n\x18\x63ountry_region_criterion\x18\x01 \x01(\x0b\x32\x1c.google.protobuf.StringValue\"G\n\x0eHotelStateInfo\x12\x35\n\x0fstate_criterion\x18\x01 \x01(\x0b\x32\x1c.google.protobuf.StringValue\"E\n\rHotelCityInfo\x12\x34\n\x0e\x63ity_criterion\x18\x01 \x01(\x0b\x32\x1c.google.protobuf.StringValue\"\xb4\x01\n\x1aListingCustomAttributeInfo\x12+\n\x05value\x18\x01 \x01(\x0b\x32\x1c.google.protobuf.StringValue\x12i\n\x05index\x18\x02 \x01(\x0e\x32Z.google.ads.googleads.v0.enums.ListingCustomAttributeIndexEnum.ListingCustomAttributeIndex\"g\n\x12ProductChannelInfo\x12Q\n\x07\x63hannel\x18\x01 \x01(\x0e\x32@.google.ads.googleads.v0.enums.ProductChannelEnum.ProductChannel\"\x94\x01\n\x1dProductChannelExclusivityInfo\x12s\n\x13\x63hannel_exclusivity\x18\x01 \x01(\x0e\x32V.google.ads.googleads.v0.enums.ProductChannelExclusivityEnum.ProductChannelExclusivity\"o\n\x14ProductConditionInfo\x12W\n\tcondition\x18\x01 \x01(\x0e\x32\x44.google.ads.googleads.v0.enums.ProductConditionEnum.ProductCondition\"A\n\x12ProductOfferIdInfo\x12+\n\x05value\x18\x01 \x01(\x0b\x32\x1c.google.protobuf.StringValue\"\x93\x01\n\x0fProductTypeInfo\x12+\n\x05value\x18\x01 \x01(\x0b\x32\x1c.google.protobuf.StringValue\x12S\n\x05level\x18\x02 \x01(\x0e\x32\x44.google.ads.googleads.v0.enums.ProductTypeLevelEnum.ProductTypeLevel\"|\n\x1aHotelDateSelectionTypeInfo\x12^\n\x04type\x18\x01 \x01(\x0e\x32P.google.ads.googleads.v0.enums.HotelDateSelectionTypeEnum.HotelDateSelectionType\"}\n\x1dHotelAdvanceBookingWindowInfo\x12-\n\x08min_days\x18\x01 \x01(\x0b\x32\x1b.google.protobuf.Int64Value\x12-\n\x08max_days\x18\x02 \x01(\x0b\x32\x1b.google.protobuf.Int64Value\"y\n\x15HotelLengthOfStayInfo\x12/\n\nmin_nights\x18\x01 \x01(\x0b\x32\x1b.google.protobuf.Int64Value\x12/\n\nmax_nights\x18\x02 \x01(\x0b\x32\x1b.google.protobuf.Int64Value\"b\n\x13HotelCheckInDayInfo\x12K\n\x0b\x64\x61y_of_week\x18\x01 \x01(\x0e\x32\x36.google.ads.googleads.v0.enums.DayOfWeekEnum.DayOfWeek\"g\n\x13InteractionTypeInfo\x12P\n\x04type\x18\x01 \x01(\x0e\x32\x42.google.ads.googleads.v0.enums.InteractionTypeEnum.InteractionType\"\xe3\x02\n\x0e\x41\x64ScheduleInfo\x12R\n\x0cstart_minute\x18\x01 \x01(\x0e\x32<.google.ads.googleads.v0.enums.MinuteOfHourEnum.MinuteOfHour\x12P\n\nend_minute\x18\x02 \x01(\x0e\x32<.google.ads.googleads.v0.enums.MinuteOfHourEnum.MinuteOfHour\x12/\n\nstart_hour\x18\x03 \x01(\x0b\x32\x1b.google.protobuf.Int32Value\x12-\n\x08\x65nd_hour\x18\x04 \x01(\x0b\x32\x1b.google.protobuf.Int32Value\x12K\n\x0b\x64\x61y_of_week\x18\x05 \x01(\x0e\x32\x36.google.ads.googleads.v0.enums.DayOfWeekEnum.DayOfWeek\"Z\n\x0c\x41geRangeInfo\x12J\n\x04type\x18\x01 \x01(\x0e\x32<.google.ads.googleads.v0.enums.AgeRangeTypeEnum.AgeRangeType\"T\n\nGenderInfo\x12\x46\n\x04type\x18\x01 \x01(\x0e\x32\x38.google.ads.googleads.v0.enums.GenderTypeEnum.GenderType\"c\n\x0fIncomeRangeInfo\x12P\n\x04type\x18\x01 \x01(\x0e\x32\x42.google.ads.googleads.v0.enums.IncomeRangeTypeEnum.IncomeRangeType\"l\n\x12ParentalStatusInfo\x12V\n\x04type\x18\x01 \x01(\x0e\x32H.google.ads.googleads.v0.enums.ParentalStatusTypeEnum.ParentalStatusType\"B\n\x10YouTubeVideoInfo\x12.\n\x08video_id\x18\x01 \x01(\x0b\x32\x1c.google.protobuf.StringValue\"F\n\x12YouTubeChannelInfo\x12\x30\n\nchannel_id\x18\x01 \x01(\x0b\x32\x1c.google.protobuf.StringValue\"\xa0\x02\n\rProximityInfo\x12?\n\tgeo_point\x18\x01 \x01(\x0b\x32,.google.ads.googleads.v0.common.GeoPointInfo\x12,\n\x06radius\x18\x02 \x01(\x0b\x32\x1c.google.protobuf.DoubleValue\x12\x62\n\x0cradius_units\x18\x03 \x01(\x0e\x32L.google.ads.googleads.v0.enums.ProximityRadiusUnitsEnum.ProximityRadiusUnits\x12<\n\x07\x61\x64\x64ress\x18\x04 \x01(\x0b\x32+.google.ads.googleads.v0.common.AddressInfo\"\x8f\x01\n\x0cGeoPointInfo\x12?\n\x1alongitude_in_micro_degrees\x18\x01 \x01(\x0b\x32\x1b.google.protobuf.Int32Value\x12>\n\x19latitude_in_micro_degrees\x18\x02 \x01(\x0b\x32\x1b.google.protobuf.Int32Value\"\xfc\x02\n\x0b\x41\x64\x64ressInfo\x12\x31\n\x0bpostal_code\x18\x01 \x01(\x0b\x32\x1c.google.protobuf.StringValue\x12\x33\n\rprovince_code\x18\x02 \x01(\x0b\x32\x1c.google.protobuf.StringValue\x12\x32\n\x0c\x63ountry_code\x18\x03 \x01(\x0b\x32\x1c.google.protobuf.StringValue\x12\x33\n\rprovince_name\x18\x04 \x01(\x0b\x32\x1c.google.protobuf.StringValue\x12\x34\n\x0estreet_address\x18\x05 \x01(\x0b\x32\x1c.google.protobuf.StringValue\x12\x35\n\x0fstreet_address2\x18\x06 \x01(\x0b\x32\x1c.google.protobuf.StringValue\x12/\n\tcity_name\x18\x07 \x01(\x0b\x32\x1c.google.protobuf.StringValue\"m\n\tTopicInfo\x12\x34\n\x0etopic_constant\x18\x01 \x01(\x0b\x32\x1c.google.protobuf.StringValue\x12*\n\x04path\x18\x02 \x03(\x0b\x32\x1c.google.protobuf.StringValueB\xc3\x01\n\"com.google.ads.googleads.v0.commonB\rCriteriaProtoP\x01ZDgoogle.golang.org/genproto/googleapis/ads/googleads/v0/common;common\xa2\x02\x03GAA\xaa\x02\x1eGoogle.Ads.GoogleAds.V0.Common\xca\x02\x1eGoogle\\Ads\\GoogleAds\\V0\\Commonb\x06proto3')
+  serialized_pb=_b('\n3google/ads/googleads_v0/proto/common/criteria.proto\x12\x1egoogle.ads.googleads.v0.common\x1a\x38google/ads/googleads_v0/proto/enums/age_range_type.proto\x1a<google/ads/googleads_v0/proto/enums/content_label_type.proto\x1a\x35google/ads/googleads_v0/proto/enums/day_of_week.proto\x1a\x30google/ads/googleads_v0/proto/enums/device.proto\x1a\x35google/ads/googleads_v0/proto/enums/gender_type.proto\x1a\x43google/ads/googleads_v0/proto/enums/hotel_date_selection_type.proto\x1a;google/ads/googleads_v0/proto/enums/income_range_type.proto\x1a:google/ads/googleads_v0/proto/enums/interaction_type.proto\x1a<google/ads/googleads_v0/proto/enums/keyword_match_type.proto\x1aHgoogle/ads/googleads_v0/proto/enums/listing_custom_attribute_index.proto\x1a<google/ads/googleads_v0/proto/enums/listing_group_type.proto\x1a\x38google/ads/googleads_v0/proto/enums/minute_of_hour.proto\x1a>google/ads/googleads_v0/proto/enums/parental_status_type.proto\x1a@google/ads/googleads_v0/proto/enums/preferred_content_type.proto\x1a\x39google/ads/googleads_v0/proto/enums/product_channel.proto\x1a\x45google/ads/googleads_v0/proto/enums/product_channel_exclusivity.proto\x1a;google/ads/googleads_v0/proto/enums/product_condition.proto\x1a<google/ads/googleads_v0/proto/enums/product_type_level.proto\x1a@google/ads/googleads_v0/proto/enums/proximity_radius_units.proto\x1a\x1egoogle/protobuf/wrappers.proto\"\x93\x01\n\x0bKeywordInfo\x12*\n\x04text\x18\x01 \x01(\x0b\x32\x1c.google.protobuf.StringValue\x12X\n\nmatch_type\x18\x02 \x01(\x0e\x32\x44.google.ads.googleads.v0.enums.KeywordMatchTypeEnum.KeywordMatchType\":\n\rPlacementInfo\x12)\n\x03url\x18\x01 \x01(\x0b\x32\x1c.google.protobuf.StringValue\"I\n\x0cLocationInfo\x12\x39\n\x13geo_target_constant\x18\x01 \x01(\x0b\x32\x1c.google.protobuf.StringValue\"L\n\nDeviceInfo\x12>\n\x04type\x18\x01 \x01(\x0e\x32\x30.google.ads.googleads.v0.enums.DeviceEnum.Device\"r\n\x14PreferredContentInfo\x12Z\n\x04type\x18\x02 \x01(\x0e\x32L.google.ads.googleads.v0.enums.PreferredContentTypeEnum.PreferredContentType\"\xf1\x01\n\x10ListingGroupInfo\x12R\n\x04type\x18\x01 \x01(\x0e\x32\x44.google.ads.googleads.v0.enums.ListingGroupTypeEnum.ListingGroupType\x12H\n\ncase_value\x18\x02 \x01(\x0b\x32\x34.google.ads.googleads.v0.common.ListingDimensionInfo\x12?\n\x19parent_ad_group_criterion\x18\x03 \x01(\x0b\x32\x1c.google.protobuf.StringValue\"\\\n\x10ListingScopeInfo\x12H\n\ndimensions\x18\x02 \x03(\x0b\x32\x34.google.ads.googleads.v0.common.ListingDimensionInfo\"\xdb\x07\n\x14ListingDimensionInfo\x12I\n\rlisting_brand\x18\x01 \x01(\x0b\x32\x30.google.ads.googleads.v0.common.ListingBrandInfoH\x00\x12?\n\x08hotel_id\x18\x02 \x01(\x0b\x32+.google.ads.googleads.v0.common.HotelIdInfoH\x00\x12\x45\n\x0bhotel_class\x18\x03 \x01(\x0b\x32..google.ads.googleads.v0.common.HotelClassInfoH\x00\x12V\n\x14hotel_country_region\x18\x04 \x01(\x0b\x32\x36.google.ads.googleads.v0.common.HotelCountryRegionInfoH\x00\x12\x45\n\x0bhotel_state\x18\x05 \x01(\x0b\x32..google.ads.googleads.v0.common.HotelStateInfoH\x00\x12\x43\n\nhotel_city\x18\x06 \x01(\x0b\x32-.google.ads.googleads.v0.common.HotelCityInfoH\x00\x12^\n\x18listing_custom_attribute\x18\x07 \x01(\x0b\x32:.google.ads.googleads.v0.common.ListingCustomAttributeInfoH\x00\x12M\n\x0fproduct_channel\x18\x08 \x01(\x0b\x32\x32.google.ads.googleads.v0.common.ProductChannelInfoH\x00\x12\x64\n\x1bproduct_channel_exclusivity\x18\t \x01(\x0b\x32=.google.ads.googleads.v0.common.ProductChannelExclusivityInfoH\x00\x12Q\n\x11product_condition\x18\n \x01(\x0b\x32\x34.google.ads.googleads.v0.common.ProductConditionInfoH\x00\x12N\n\x10product_offer_id\x18\x0b \x01(\x0b\x32\x32.google.ads.googleads.v0.common.ProductOfferIdInfoH\x00\x12G\n\x0cproduct_type\x18\x0c \x01(\x0b\x32/.google.ads.googleads.v0.common.ProductTypeInfoH\x00\x42\x0b\n\tdimension\"?\n\x10ListingBrandInfo\x12+\n\x05value\x18\x01 \x01(\x0b\x32\x1c.google.protobuf.StringValue\":\n\x0bHotelIdInfo\x12+\n\x05value\x18\x01 \x01(\x0b\x32\x1c.google.protobuf.StringValue\"<\n\x0eHotelClassInfo\x12*\n\x05value\x18\x01 \x01(\x0b\x32\x1b.google.protobuf.Int64Value\"X\n\x16HotelCountryRegionInfo\x12>\n\x18\x63ountry_region_criterion\x18\x01 \x01(\x0b\x32\x1c.google.protobuf.StringValue\"G\n\x0eHotelStateInfo\x12\x35\n\x0fstate_criterion\x18\x01 \x01(\x0b\x32\x1c.google.protobuf.StringValue\"E\n\rHotelCityInfo\x12\x34\n\x0e\x63ity_criterion\x18\x01 \x01(\x0b\x32\x1c.google.protobuf.StringValue\"\xb4\x01\n\x1aListingCustomAttributeInfo\x12+\n\x05value\x18\x01 \x01(\x0b\x32\x1c.google.protobuf.StringValue\x12i\n\x05index\x18\x02 \x01(\x0e\x32Z.google.ads.googleads.v0.enums.ListingCustomAttributeIndexEnum.ListingCustomAttributeIndex\"g\n\x12ProductChannelInfo\x12Q\n\x07\x63hannel\x18\x01 \x01(\x0e\x32@.google.ads.googleads.v0.enums.ProductChannelEnum.ProductChannel\"\x94\x01\n\x1dProductChannelExclusivityInfo\x12s\n\x13\x63hannel_exclusivity\x18\x01 \x01(\x0e\x32V.google.ads.googleads.v0.enums.ProductChannelExclusivityEnum.ProductChannelExclusivity\"o\n\x14ProductConditionInfo\x12W\n\tcondition\x18\x01 \x01(\x0e\x32\x44.google.ads.googleads.v0.enums.ProductConditionEnum.ProductCondition\"A\n\x12ProductOfferIdInfo\x12+\n\x05value\x18\x01 \x01(\x0b\x32\x1c.google.protobuf.StringValue\"\x93\x01\n\x0fProductTypeInfo\x12+\n\x05value\x18\x01 \x01(\x0b\x32\x1c.google.protobuf.StringValue\x12S\n\x05level\x18\x02 \x01(\x0e\x32\x44.google.ads.googleads.v0.enums.ProductTypeLevelEnum.ProductTypeLevel\"|\n\x1aHotelDateSelectionTypeInfo\x12^\n\x04type\x18\x01 \x01(\x0e\x32P.google.ads.googleads.v0.enums.HotelDateSelectionTypeEnum.HotelDateSelectionType\"}\n\x1dHotelAdvanceBookingWindowInfo\x12-\n\x08min_days\x18\x01 \x01(\x0b\x32\x1b.google.protobuf.Int64Value\x12-\n\x08max_days\x18\x02 \x01(\x0b\x32\x1b.google.protobuf.Int64Value\"y\n\x15HotelLengthOfStayInfo\x12/\n\nmin_nights\x18\x01 \x01(\x0b\x32\x1b.google.protobuf.Int64Value\x12/\n\nmax_nights\x18\x02 \x01(\x0b\x32\x1b.google.protobuf.Int64Value\"b\n\x13HotelCheckInDayInfo\x12K\n\x0b\x64\x61y_of_week\x18\x01 \x01(\x0e\x32\x36.google.ads.googleads.v0.enums.DayOfWeekEnum.DayOfWeek\"g\n\x13InteractionTypeInfo\x12P\n\x04type\x18\x01 \x01(\x0e\x32\x42.google.ads.googleads.v0.enums.InteractionTypeEnum.InteractionType\"\xe3\x02\n\x0e\x41\x64ScheduleInfo\x12R\n\x0cstart_minute\x18\x01 \x01(\x0e\x32<.google.ads.googleads.v0.enums.MinuteOfHourEnum.MinuteOfHour\x12P\n\nend_minute\x18\x02 \x01(\x0e\x32<.google.ads.googleads.v0.enums.MinuteOfHourEnum.MinuteOfHour\x12/\n\nstart_hour\x18\x03 \x01(\x0b\x32\x1b.google.protobuf.Int32Value\x12-\n\x08\x65nd_hour\x18\x04 \x01(\x0b\x32\x1b.google.protobuf.Int32Value\x12K\n\x0b\x64\x61y_of_week\x18\x05 \x01(\x0e\x32\x36.google.ads.googleads.v0.enums.DayOfWeekEnum.DayOfWeek\"Z\n\x0c\x41geRangeInfo\x12J\n\x04type\x18\x01 \x01(\x0e\x32<.google.ads.googleads.v0.enums.AgeRangeTypeEnum.AgeRangeType\"T\n\nGenderInfo\x12\x46\n\x04type\x18\x01 \x01(\x0e\x32\x38.google.ads.googleads.v0.enums.GenderTypeEnum.GenderType\"c\n\x0fIncomeRangeInfo\x12P\n\x04type\x18\x01 \x01(\x0e\x32\x42.google.ads.googleads.v0.enums.IncomeRangeTypeEnum.IncomeRangeType\"l\n\x12ParentalStatusInfo\x12V\n\x04type\x18\x01 \x01(\x0e\x32H.google.ads.googleads.v0.enums.ParentalStatusTypeEnum.ParentalStatusType\"B\n\x10YouTubeVideoInfo\x12.\n\x08video_id\x18\x01 \x01(\x0b\x32\x1c.google.protobuf.StringValue\"F\n\x12YouTubeChannelInfo\x12\x30\n\nchannel_id\x18\x01 \x01(\x0b\x32\x1c.google.protobuf.StringValue\"?\n\x0cUserListInfo\x12/\n\tuser_list\x18\x01 \x01(\x0b\x32\x1c.google.protobuf.StringValue\"\xa0\x02\n\rProximityInfo\x12?\n\tgeo_point\x18\x01 \x01(\x0b\x32,.google.ads.googleads.v0.common.GeoPointInfo\x12,\n\x06radius\x18\x02 \x01(\x0b\x32\x1c.google.protobuf.DoubleValue\x12\x62\n\x0cradius_units\x18\x03 \x01(\x0e\x32L.google.ads.googleads.v0.enums.ProximityRadiusUnitsEnum.ProximityRadiusUnits\x12<\n\x07\x61\x64\x64ress\x18\x04 \x01(\x0b\x32+.google.ads.googleads.v0.common.AddressInfo\"\x8f\x01\n\x0cGeoPointInfo\x12?\n\x1alongitude_in_micro_degrees\x18\x01 \x01(\x0b\x32\x1b.google.protobuf.Int32Value\x12>\n\x19latitude_in_micro_degrees\x18\x02 \x01(\x0b\x32\x1b.google.protobuf.Int32Value\"\xfc\x02\n\x0b\x41\x64\x64ressInfo\x12\x31\n\x0bpostal_code\x18\x01 \x01(\x0b\x32\x1c.google.protobuf.StringValue\x12\x33\n\rprovince_code\x18\x02 \x01(\x0b\x32\x1c.google.protobuf.StringValue\x12\x32\n\x0c\x63ountry_code\x18\x03 \x01(\x0b\x32\x1c.google.protobuf.StringValue\x12\x33\n\rprovince_name\x18\x04 \x01(\x0b\x32\x1c.google.protobuf.StringValue\x12\x34\n\x0estreet_address\x18\x05 \x01(\x0b\x32\x1c.google.protobuf.StringValue\x12\x35\n\x0fstreet_address2\x18\x06 \x01(\x0b\x32\x1c.google.protobuf.StringValue\x12/\n\tcity_name\x18\x07 \x01(\x0b\x32\x1c.google.protobuf.StringValue\"m\n\tTopicInfo\x12\x34\n\x0etopic_constant\x18\x01 \x01(\x0b\x32\x1c.google.protobuf.StringValue\x12*\n\x04path\x18\x02 \x03(\x0b\x32\x1c.google.protobuf.StringValue\"G\n\x0cLanguageInfo\x12\x37\n\x11language_constant\x18\x01 \x01(\x0b\x32\x1c.google.protobuf.StringValue\"?\n\x0bIpBlockInfo\x12\x30\n\nip_address\x18\x01 \x01(\x0b\x32\x1c.google.protobuf.StringValue\"f\n\x10\x43ontentLabelInfo\x12R\n\x04type\x18\x01 \x01(\x0e\x32\x44.google.ads.googleads.v0.enums.ContentLabelTypeEnum.ContentLabelType\"E\n\x0b\x43\x61rrierInfo\x12\x36\n\x10\x63\x61rrier_constant\x18\x01 \x01(\x0b\x32\x1c.google.protobuf.StringValue\"P\n\x10UserInterestInfo\x12<\n\x16user_interest_category\x18\x01 \x01(\x0b\x32\x1c.google.protobuf.StringValueB\xc3\x01\n\"com.google.ads.googleads.v0.commonB\rCriteriaProtoP\x01ZDgoogle.golang.org/genproto/googleapis/ads/googleads/v0/common;common\xa2\x02\x03GAA\xaa\x02\x1eGoogle.Ads.GoogleAds.V0.Common\xca\x02\x1eGoogle\\Ads\\GoogleAds\\V0\\Commonb\x06proto3')
   ,
-  dependencies=[google_dot_ads_dot_googleads__v0_dot_proto_dot_enums_dot_age__range__type__pb2.DESCRIPTOR,google_dot_ads_dot_googleads__v0_dot_proto_dot_enums_dot_day__of__week__pb2.DESCRIPTOR,google_dot_ads_dot_googleads__v0_dot_proto_dot_enums_dot_device__pb2.DESCRIPTOR,google_dot_ads_dot_googleads__v0_dot_proto_dot_enums_dot_gender__type__pb2.DESCRIPTOR,google_dot_ads_dot_googleads__v0_dot_proto_dot_enums_dot_hotel__date__selection__type__pb2.DESCRIPTOR,google_dot_ads_dot_googleads__v0_dot_proto_dot_enums_dot_income__range__type__pb2.DESCRIPTOR,google_dot_ads_dot_googleads__v0_dot_proto_dot_enums_dot_interaction__type__pb2.DESCRIPTOR,google_dot_ads_dot_googleads__v0_dot_proto_dot_enums_dot_keyword__match__type__pb2.DESCRIPTOR,google_dot_ads_dot_googleads__v0_dot_proto_dot_enums_dot_listing__custom__attribute__index__pb2.DESCRIPTOR,google_dot_ads_dot_googleads__v0_dot_proto_dot_enums_dot_listing__group__type__pb2.DESCRIPTOR,google_dot_ads_dot_googleads__v0_dot_proto_dot_enums_dot_minute__of__hour__pb2.DESCRIPTOR,google_dot_ads_dot_googleads__v0_dot_proto_dot_enums_dot_parental__status__type__pb2.DESCRIPTOR,google_dot_ads_dot_googleads__v0_dot_proto_dot_enums_dot_product__channel__pb2.DESCRIPTOR,google_dot_ads_dot_googleads__v0_dot_proto_dot_enums_dot_product__channel__exclusivity__pb2.DESCRIPTOR,google_dot_ads_dot_googleads__v0_dot_proto_dot_enums_dot_product__condition__pb2.DESCRIPTOR,google_dot_ads_dot_googleads__v0_dot_proto_dot_enums_dot_product__type__level__pb2.DESCRIPTOR,google_dot_ads_dot_googleads__v0_dot_proto_dot_enums_dot_proximity__radius__units__pb2.DESCRIPTOR,google_dot_protobuf_dot_wrappers__pb2.DESCRIPTOR,])
+  dependencies=[google_dot_ads_dot_googleads__v0_dot_proto_dot_enums_dot_age__range__type__pb2.DESCRIPTOR,google_dot_ads_dot_googleads__v0_dot_proto_dot_enums_dot_content__label__type__pb2.DESCRIPTOR,google_dot_ads_dot_googleads__v0_dot_proto_dot_enums_dot_day__of__week__pb2.DESCRIPTOR,google_dot_ads_dot_googleads__v0_dot_proto_dot_enums_dot_device__pb2.DESCRIPTOR,google_dot_ads_dot_googleads__v0_dot_proto_dot_enums_dot_gender__type__pb2.DESCRIPTOR,google_dot_ads_dot_googleads__v0_dot_proto_dot_enums_dot_hotel__date__selection__type__pb2.DESCRIPTOR,google_dot_ads_dot_googleads__v0_dot_proto_dot_enums_dot_income__range__type__pb2.DESCRIPTOR,google_dot_ads_dot_googleads__v0_dot_proto_dot_enums_dot_interaction__type__pb2.DESCRIPTOR,google_dot_ads_dot_googleads__v0_dot_proto_dot_enums_dot_keyword__match__type__pb2.DESCRIPTOR,google_dot_ads_dot_googleads__v0_dot_proto_dot_enums_dot_listing__custom__attribute__index__pb2.DESCRIPTOR,google_dot_ads_dot_googleads__v0_dot_proto_dot_enums_dot_listing__group__type__pb2.DESCRIPTOR,google_dot_ads_dot_googleads__v0_dot_proto_dot_enums_dot_minute__of__hour__pb2.DESCRIPTOR,google_dot_ads_dot_googleads__v0_dot_proto_dot_enums_dot_parental__status__type__pb2.DESCRIPTOR,google_dot_ads_dot_googleads__v0_dot_proto_dot_enums_dot_preferred__content__type__pb2.DESCRIPTOR,google_dot_ads_dot_googleads__v0_dot_proto_dot_enums_dot_product__channel__pb2.DESCRIPTOR,google_dot_ads_dot_googleads__v0_dot_proto_dot_enums_dot_product__channel__exclusivity__pb2.DESCRIPTOR,google_dot_ads_dot_googleads__v0_dot_proto_dot_enums_dot_product__condition__pb2.DESCRIPTOR,google_dot_ads_dot_googleads__v0_dot_proto_dot_enums_dot_product__type__level__pb2.DESCRIPTOR,google_dot_ads_dot_googleads__v0_dot_proto_dot_enums_dot_proximity__radius__units__pb2.DESCRIPTOR,google_dot_protobuf_dot_wrappers__pb2.DESCRIPTOR,])
 
 
 
@@ -77,8 +79,8 @@ _KEYWORDINFO = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=1167,
-  serialized_end=1314,
+  serialized_start=1295,
+  serialized_end=1442,
 )
 
 
@@ -108,8 +110,8 @@ _PLACEMENTINFO = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=1316,
-  serialized_end=1374,
+  serialized_start=1444,
+  serialized_end=1502,
 )
 
 
@@ -139,8 +141,8 @@ _LOCATIONINFO = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=1376,
-  serialized_end=1449,
+  serialized_start=1504,
+  serialized_end=1577,
 )
 
 
@@ -170,8 +172,39 @@ _DEVICEINFO = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=1451,
-  serialized_end=1527,
+  serialized_start=1579,
+  serialized_end=1655,
+)
+
+
+_PREFERREDCONTENTINFO = _descriptor.Descriptor(
+  name='PreferredContentInfo',
+  full_name='google.ads.googleads.v0.common.PreferredContentInfo',
+  filename=None,
+  file=DESCRIPTOR,
+  containing_type=None,
+  fields=[
+    _descriptor.FieldDescriptor(
+      name='type', full_name='google.ads.googleads.v0.common.PreferredContentInfo.type', index=0,
+      number=2, type=14, cpp_type=8, label=1,
+      has_default_value=False, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None, file=DESCRIPTOR),
+  ],
+  extensions=[
+  ],
+  nested_types=[],
+  enum_types=[
+  ],
+  options=None,
+  is_extendable=False,
+  syntax='proto3',
+  extension_ranges=[],
+  oneofs=[
+  ],
+  serialized_start=1657,
+  serialized_end=1771,
 )
 
 
@@ -215,8 +248,39 @@ _LISTINGGROUPINFO = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=1530,
-  serialized_end=1771,
+  serialized_start=1774,
+  serialized_end=2015,
+)
+
+
+_LISTINGSCOPEINFO = _descriptor.Descriptor(
+  name='ListingScopeInfo',
+  full_name='google.ads.googleads.v0.common.ListingScopeInfo',
+  filename=None,
+  file=DESCRIPTOR,
+  containing_type=None,
+  fields=[
+    _descriptor.FieldDescriptor(
+      name='dimensions', full_name='google.ads.googleads.v0.common.ListingScopeInfo.dimensions', index=0,
+      number=2, type=11, cpp_type=10, label=3,
+      has_default_value=False, default_value=[],
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None, file=DESCRIPTOR),
+  ],
+  extensions=[
+  ],
+  nested_types=[],
+  enum_types=[
+  ],
+  options=None,
+  is_extendable=False,
+  syntax='proto3',
+  extension_ranges=[],
+  oneofs=[
+  ],
+  serialized_start=2017,
+  serialized_end=2109,
 )
 
 
@@ -326,8 +390,8 @@ _LISTINGDIMENSIONINFO = _descriptor.Descriptor(
       name='dimension', full_name='google.ads.googleads.v0.common.ListingDimensionInfo.dimension',
       index=0, containing_type=None, fields=[]),
   ],
-  serialized_start=1774,
-  serialized_end=2761,
+  serialized_start=2112,
+  serialized_end=3099,
 )
 
 
@@ -357,8 +421,8 @@ _LISTINGBRANDINFO = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=2763,
-  serialized_end=2826,
+  serialized_start=3101,
+  serialized_end=3164,
 )
 
 
@@ -388,8 +452,8 @@ _HOTELIDINFO = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=2828,
-  serialized_end=2886,
+  serialized_start=3166,
+  serialized_end=3224,
 )
 
 
@@ -419,8 +483,8 @@ _HOTELCLASSINFO = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=2888,
-  serialized_end=2948,
+  serialized_start=3226,
+  serialized_end=3286,
 )
 
 
@@ -450,8 +514,8 @@ _HOTELCOUNTRYREGIONINFO = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=2950,
-  serialized_end=3038,
+  serialized_start=3288,
+  serialized_end=3376,
 )
 
 
@@ -481,8 +545,8 @@ _HOTELSTATEINFO = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=3040,
-  serialized_end=3111,
+  serialized_start=3378,
+  serialized_end=3449,
 )
 
 
@@ -512,8 +576,8 @@ _HOTELCITYINFO = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=3113,
-  serialized_end=3182,
+  serialized_start=3451,
+  serialized_end=3520,
 )
 
 
@@ -550,8 +614,8 @@ _LISTINGCUSTOMATTRIBUTEINFO = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=3185,
-  serialized_end=3365,
+  serialized_start=3523,
+  serialized_end=3703,
 )
 
 
@@ -581,8 +645,8 @@ _PRODUCTCHANNELINFO = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=3367,
-  serialized_end=3470,
+  serialized_start=3705,
+  serialized_end=3808,
 )
 
 
@@ -612,8 +676,8 @@ _PRODUCTCHANNELEXCLUSIVITYINFO = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=3473,
-  serialized_end=3621,
+  serialized_start=3811,
+  serialized_end=3959,
 )
 
 
@@ -643,8 +707,8 @@ _PRODUCTCONDITIONINFO = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=3623,
-  serialized_end=3734,
+  serialized_start=3961,
+  serialized_end=4072,
 )
 
 
@@ -674,8 +738,8 @@ _PRODUCTOFFERIDINFO = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=3736,
-  serialized_end=3801,
+  serialized_start=4074,
+  serialized_end=4139,
 )
 
 
@@ -712,8 +776,8 @@ _PRODUCTTYPEINFO = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=3804,
-  serialized_end=3951,
+  serialized_start=4142,
+  serialized_end=4289,
 )
 
 
@@ -743,8 +807,8 @@ _HOTELDATESELECTIONTYPEINFO = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=3953,
-  serialized_end=4077,
+  serialized_start=4291,
+  serialized_end=4415,
 )
 
 
@@ -781,8 +845,8 @@ _HOTELADVANCEBOOKINGWINDOWINFO = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=4079,
-  serialized_end=4204,
+  serialized_start=4417,
+  serialized_end=4542,
 )
 
 
@@ -819,8 +883,8 @@ _HOTELLENGTHOFSTAYINFO = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=4206,
-  serialized_end=4327,
+  serialized_start=4544,
+  serialized_end=4665,
 )
 
 
@@ -850,8 +914,8 @@ _HOTELCHECKINDAYINFO = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=4329,
-  serialized_end=4427,
+  serialized_start=4667,
+  serialized_end=4765,
 )
 
 
@@ -881,8 +945,8 @@ _INTERACTIONTYPEINFO = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=4429,
-  serialized_end=4532,
+  serialized_start=4767,
+  serialized_end=4870,
 )
 
 
@@ -940,8 +1004,8 @@ _ADSCHEDULEINFO = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=4535,
-  serialized_end=4890,
+  serialized_start=4873,
+  serialized_end=5228,
 )
 
 
@@ -971,8 +1035,8 @@ _AGERANGEINFO = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=4892,
-  serialized_end=4982,
+  serialized_start=5230,
+  serialized_end=5320,
 )
 
 
@@ -1002,8 +1066,8 @@ _GENDERINFO = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=4984,
-  serialized_end=5068,
+  serialized_start=5322,
+  serialized_end=5406,
 )
 
 
@@ -1033,8 +1097,8 @@ _INCOMERANGEINFO = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=5070,
-  serialized_end=5169,
+  serialized_start=5408,
+  serialized_end=5507,
 )
 
 
@@ -1064,8 +1128,8 @@ _PARENTALSTATUSINFO = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=5171,
-  serialized_end=5279,
+  serialized_start=5509,
+  serialized_end=5617,
 )
 
 
@@ -1095,8 +1159,8 @@ _YOUTUBEVIDEOINFO = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=5281,
-  serialized_end=5347,
+  serialized_start=5619,
+  serialized_end=5685,
 )
 
 
@@ -1126,8 +1190,39 @@ _YOUTUBECHANNELINFO = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=5349,
-  serialized_end=5419,
+  serialized_start=5687,
+  serialized_end=5757,
+)
+
+
+_USERLISTINFO = _descriptor.Descriptor(
+  name='UserListInfo',
+  full_name='google.ads.googleads.v0.common.UserListInfo',
+  filename=None,
+  file=DESCRIPTOR,
+  containing_type=None,
+  fields=[
+    _descriptor.FieldDescriptor(
+      name='user_list', full_name='google.ads.googleads.v0.common.UserListInfo.user_list', index=0,
+      number=1, type=11, cpp_type=10, label=1,
+      has_default_value=False, default_value=None,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None, file=DESCRIPTOR),
+  ],
+  extensions=[
+  ],
+  nested_types=[],
+  enum_types=[
+  ],
+  options=None,
+  is_extendable=False,
+  syntax='proto3',
+  extension_ranges=[],
+  oneofs=[
+  ],
+  serialized_start=5759,
+  serialized_end=5822,
 )
 
 
@@ -1178,8 +1273,8 @@ _PROXIMITYINFO = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=5422,
-  serialized_end=5710,
+  serialized_start=5825,
+  serialized_end=6113,
 )
 
 
@@ -1216,8 +1311,8 @@ _GEOPOINTINFO = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=5713,
-  serialized_end=5856,
+  serialized_start=6116,
+  serialized_end=6259,
 )
 
 
@@ -1289,8 +1384,8 @@ _ADDRESSINFO = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=5859,
-  serialized_end=6239,
+  serialized_start=6262,
+  serialized_end=6642,
 )
 
 
@@ -1327,8 +1422,163 @@ _TOPICINFO = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=6241,
-  serialized_end=6350,
+  serialized_start=6644,
+  serialized_end=6753,
+)
+
+
+_LANGUAGEINFO = _descriptor.Descriptor(
+  name='LanguageInfo',
+  full_name='google.ads.googleads.v0.common.LanguageInfo',
+  filename=None,
+  file=DESCRIPTOR,
+  containing_type=None,
+  fields=[
+    _descriptor.FieldDescriptor(
+      name='language_constant', full_name='google.ads.googleads.v0.common.LanguageInfo.language_constant', index=0,
+      number=1, type=11, cpp_type=10, label=1,
+      has_default_value=False, default_value=None,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None, file=DESCRIPTOR),
+  ],
+  extensions=[
+  ],
+  nested_types=[],
+  enum_types=[
+  ],
+  options=None,
+  is_extendable=False,
+  syntax='proto3',
+  extension_ranges=[],
+  oneofs=[
+  ],
+  serialized_start=6755,
+  serialized_end=6826,
+)
+
+
+_IPBLOCKINFO = _descriptor.Descriptor(
+  name='IpBlockInfo',
+  full_name='google.ads.googleads.v0.common.IpBlockInfo',
+  filename=None,
+  file=DESCRIPTOR,
+  containing_type=None,
+  fields=[
+    _descriptor.FieldDescriptor(
+      name='ip_address', full_name='google.ads.googleads.v0.common.IpBlockInfo.ip_address', index=0,
+      number=1, type=11, cpp_type=10, label=1,
+      has_default_value=False, default_value=None,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None, file=DESCRIPTOR),
+  ],
+  extensions=[
+  ],
+  nested_types=[],
+  enum_types=[
+  ],
+  options=None,
+  is_extendable=False,
+  syntax='proto3',
+  extension_ranges=[],
+  oneofs=[
+  ],
+  serialized_start=6828,
+  serialized_end=6891,
+)
+
+
+_CONTENTLABELINFO = _descriptor.Descriptor(
+  name='ContentLabelInfo',
+  full_name='google.ads.googleads.v0.common.ContentLabelInfo',
+  filename=None,
+  file=DESCRIPTOR,
+  containing_type=None,
+  fields=[
+    _descriptor.FieldDescriptor(
+      name='type', full_name='google.ads.googleads.v0.common.ContentLabelInfo.type', index=0,
+      number=1, type=14, cpp_type=8, label=1,
+      has_default_value=False, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None, file=DESCRIPTOR),
+  ],
+  extensions=[
+  ],
+  nested_types=[],
+  enum_types=[
+  ],
+  options=None,
+  is_extendable=False,
+  syntax='proto3',
+  extension_ranges=[],
+  oneofs=[
+  ],
+  serialized_start=6893,
+  serialized_end=6995,
+)
+
+
+_CARRIERINFO = _descriptor.Descriptor(
+  name='CarrierInfo',
+  full_name='google.ads.googleads.v0.common.CarrierInfo',
+  filename=None,
+  file=DESCRIPTOR,
+  containing_type=None,
+  fields=[
+    _descriptor.FieldDescriptor(
+      name='carrier_constant', full_name='google.ads.googleads.v0.common.CarrierInfo.carrier_constant', index=0,
+      number=1, type=11, cpp_type=10, label=1,
+      has_default_value=False, default_value=None,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None, file=DESCRIPTOR),
+  ],
+  extensions=[
+  ],
+  nested_types=[],
+  enum_types=[
+  ],
+  options=None,
+  is_extendable=False,
+  syntax='proto3',
+  extension_ranges=[],
+  oneofs=[
+  ],
+  serialized_start=6997,
+  serialized_end=7066,
+)
+
+
+_USERINTERESTINFO = _descriptor.Descriptor(
+  name='UserInterestInfo',
+  full_name='google.ads.googleads.v0.common.UserInterestInfo',
+  filename=None,
+  file=DESCRIPTOR,
+  containing_type=None,
+  fields=[
+    _descriptor.FieldDescriptor(
+      name='user_interest_category', full_name='google.ads.googleads.v0.common.UserInterestInfo.user_interest_category', index=0,
+      number=1, type=11, cpp_type=10, label=1,
+      has_default_value=False, default_value=None,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None, file=DESCRIPTOR),
+  ],
+  extensions=[
+  ],
+  nested_types=[],
+  enum_types=[
+  ],
+  options=None,
+  is_extendable=False,
+  syntax='proto3',
+  extension_ranges=[],
+  oneofs=[
+  ],
+  serialized_start=7068,
+  serialized_end=7148,
 )
 
 _KEYWORDINFO.fields_by_name['text'].message_type = google_dot_protobuf_dot_wrappers__pb2._STRINGVALUE
@@ -1336,9 +1586,11 @@ _KEYWORDINFO.fields_by_name['match_type'].enum_type = google_dot_ads_dot_googlea
 _PLACEMENTINFO.fields_by_name['url'].message_type = google_dot_protobuf_dot_wrappers__pb2._STRINGVALUE
 _LOCATIONINFO.fields_by_name['geo_target_constant'].message_type = google_dot_protobuf_dot_wrappers__pb2._STRINGVALUE
 _DEVICEINFO.fields_by_name['type'].enum_type = google_dot_ads_dot_googleads__v0_dot_proto_dot_enums_dot_device__pb2._DEVICEENUM_DEVICE
+_PREFERREDCONTENTINFO.fields_by_name['type'].enum_type = google_dot_ads_dot_googleads__v0_dot_proto_dot_enums_dot_preferred__content__type__pb2._PREFERREDCONTENTTYPEENUM_PREFERREDCONTENTTYPE
 _LISTINGGROUPINFO.fields_by_name['type'].enum_type = google_dot_ads_dot_googleads__v0_dot_proto_dot_enums_dot_listing__group__type__pb2._LISTINGGROUPTYPEENUM_LISTINGGROUPTYPE
 _LISTINGGROUPINFO.fields_by_name['case_value'].message_type = _LISTINGDIMENSIONINFO
 _LISTINGGROUPINFO.fields_by_name['parent_ad_group_criterion'].message_type = google_dot_protobuf_dot_wrappers__pb2._STRINGVALUE
+_LISTINGSCOPEINFO.fields_by_name['dimensions'].message_type = _LISTINGDIMENSIONINFO
 _LISTINGDIMENSIONINFO.fields_by_name['listing_brand'].message_type = _LISTINGBRANDINFO
 _LISTINGDIMENSIONINFO.fields_by_name['hotel_id'].message_type = _HOTELIDINFO
 _LISTINGDIMENSIONINFO.fields_by_name['hotel_class'].message_type = _HOTELCLASSINFO
@@ -1419,6 +1671,7 @@ _INCOMERANGEINFO.fields_by_name['type'].enum_type = google_dot_ads_dot_googleads
 _PARENTALSTATUSINFO.fields_by_name['type'].enum_type = google_dot_ads_dot_googleads__v0_dot_proto_dot_enums_dot_parental__status__type__pb2._PARENTALSTATUSTYPEENUM_PARENTALSTATUSTYPE
 _YOUTUBEVIDEOINFO.fields_by_name['video_id'].message_type = google_dot_protobuf_dot_wrappers__pb2._STRINGVALUE
 _YOUTUBECHANNELINFO.fields_by_name['channel_id'].message_type = google_dot_protobuf_dot_wrappers__pb2._STRINGVALUE
+_USERLISTINFO.fields_by_name['user_list'].message_type = google_dot_protobuf_dot_wrappers__pb2._STRINGVALUE
 _PROXIMITYINFO.fields_by_name['geo_point'].message_type = _GEOPOINTINFO
 _PROXIMITYINFO.fields_by_name['radius'].message_type = google_dot_protobuf_dot_wrappers__pb2._DOUBLEVALUE
 _PROXIMITYINFO.fields_by_name['radius_units'].enum_type = google_dot_ads_dot_googleads__v0_dot_proto_dot_enums_dot_proximity__radius__units__pb2._PROXIMITYRADIUSUNITSENUM_PROXIMITYRADIUSUNITS
@@ -1434,11 +1687,18 @@ _ADDRESSINFO.fields_by_name['street_address2'].message_type = google_dot_protobu
 _ADDRESSINFO.fields_by_name['city_name'].message_type = google_dot_protobuf_dot_wrappers__pb2._STRINGVALUE
 _TOPICINFO.fields_by_name['topic_constant'].message_type = google_dot_protobuf_dot_wrappers__pb2._STRINGVALUE
 _TOPICINFO.fields_by_name['path'].message_type = google_dot_protobuf_dot_wrappers__pb2._STRINGVALUE
+_LANGUAGEINFO.fields_by_name['language_constant'].message_type = google_dot_protobuf_dot_wrappers__pb2._STRINGVALUE
+_IPBLOCKINFO.fields_by_name['ip_address'].message_type = google_dot_protobuf_dot_wrappers__pb2._STRINGVALUE
+_CONTENTLABELINFO.fields_by_name['type'].enum_type = google_dot_ads_dot_googleads__v0_dot_proto_dot_enums_dot_content__label__type__pb2._CONTENTLABELTYPEENUM_CONTENTLABELTYPE
+_CARRIERINFO.fields_by_name['carrier_constant'].message_type = google_dot_protobuf_dot_wrappers__pb2._STRINGVALUE
+_USERINTERESTINFO.fields_by_name['user_interest_category'].message_type = google_dot_protobuf_dot_wrappers__pb2._STRINGVALUE
 DESCRIPTOR.message_types_by_name['KeywordInfo'] = _KEYWORDINFO
 DESCRIPTOR.message_types_by_name['PlacementInfo'] = _PLACEMENTINFO
 DESCRIPTOR.message_types_by_name['LocationInfo'] = _LOCATIONINFO
 DESCRIPTOR.message_types_by_name['DeviceInfo'] = _DEVICEINFO
+DESCRIPTOR.message_types_by_name['PreferredContentInfo'] = _PREFERREDCONTENTINFO
 DESCRIPTOR.message_types_by_name['ListingGroupInfo'] = _LISTINGGROUPINFO
+DESCRIPTOR.message_types_by_name['ListingScopeInfo'] = _LISTINGSCOPEINFO
 DESCRIPTOR.message_types_by_name['ListingDimensionInfo'] = _LISTINGDIMENSIONINFO
 DESCRIPTOR.message_types_by_name['ListingBrandInfo'] = _LISTINGBRANDINFO
 DESCRIPTOR.message_types_by_name['HotelIdInfo'] = _HOTELIDINFO
@@ -1464,15 +1724,21 @@ DESCRIPTOR.message_types_by_name['IncomeRangeInfo'] = _INCOMERANGEINFO
 DESCRIPTOR.message_types_by_name['ParentalStatusInfo'] = _PARENTALSTATUSINFO
 DESCRIPTOR.message_types_by_name['YouTubeVideoInfo'] = _YOUTUBEVIDEOINFO
 DESCRIPTOR.message_types_by_name['YouTubeChannelInfo'] = _YOUTUBECHANNELINFO
+DESCRIPTOR.message_types_by_name['UserListInfo'] = _USERLISTINFO
 DESCRIPTOR.message_types_by_name['ProximityInfo'] = _PROXIMITYINFO
 DESCRIPTOR.message_types_by_name['GeoPointInfo'] = _GEOPOINTINFO
 DESCRIPTOR.message_types_by_name['AddressInfo'] = _ADDRESSINFO
 DESCRIPTOR.message_types_by_name['TopicInfo'] = _TOPICINFO
+DESCRIPTOR.message_types_by_name['LanguageInfo'] = _LANGUAGEINFO
+DESCRIPTOR.message_types_by_name['IpBlockInfo'] = _IPBLOCKINFO
+DESCRIPTOR.message_types_by_name['ContentLabelInfo'] = _CONTENTLABELINFO
+DESCRIPTOR.message_types_by_name['CarrierInfo'] = _CARRIERINFO
+DESCRIPTOR.message_types_by_name['UserInterestInfo'] = _USERINTERESTINFO
 _sym_db.RegisterFileDescriptor(DESCRIPTOR)
 
 KeywordInfo = _reflection.GeneratedProtocolMessageType('KeywordInfo', (_message.Message,), dict(
   DESCRIPTOR = _KEYWORDINFO,
-  __module__ = 'google.ads.googleads_v0.proto.common.criteria_pb2'
+  __module__ = 'google.ads.google_ads.v0.proto.common.criteria_pb2'
   ,
   __doc__ = """A keyword criterion.
   
@@ -1489,7 +1755,7 @@ _sym_db.RegisterMessage(KeywordInfo)
 
 PlacementInfo = _reflection.GeneratedProtocolMessageType('PlacementInfo', (_message.Message,), dict(
   DESCRIPTOR = _PLACEMENTINFO,
-  __module__ = 'google.ads.googleads_v0.proto.common.criteria_pb2'
+  __module__ = 'google.ads.google_ads.v0.proto.common.criteria_pb2'
   ,
   __doc__ = """A placement criterion. This can be used to modify bids for sites when
   targeting the content network.
@@ -1505,7 +1771,7 @@ _sym_db.RegisterMessage(PlacementInfo)
 
 LocationInfo = _reflection.GeneratedProtocolMessageType('LocationInfo', (_message.Message,), dict(
   DESCRIPTOR = _LOCATIONINFO,
-  __module__ = 'google.ads.googleads_v0.proto.common.criteria_pb2'
+  __module__ = 'google.ads.google_ads.v0.proto.common.criteria_pb2'
   ,
   __doc__ = """A location criterion.
   
@@ -1520,7 +1786,7 @@ _sym_db.RegisterMessage(LocationInfo)
 
 DeviceInfo = _reflection.GeneratedProtocolMessageType('DeviceInfo', (_message.Message,), dict(
   DESCRIPTOR = _DEVICEINFO,
-  __module__ = 'google.ads.googleads_v0.proto.common.criteria_pb2'
+  __module__ = 'google.ads.google_ads.v0.proto.common.criteria_pb2'
   ,
   __doc__ = """A device criterion.
   
@@ -1533,9 +1799,24 @@ DeviceInfo = _reflection.GeneratedProtocolMessageType('DeviceInfo', (_message.Me
   ))
 _sym_db.RegisterMessage(DeviceInfo)
 
+PreferredContentInfo = _reflection.GeneratedProtocolMessageType('PreferredContentInfo', (_message.Message,), dict(
+  DESCRIPTOR = _PREFERREDCONTENTINFO,
+  __module__ = 'google.ads.google_ads.v0.proto.common.criteria_pb2'
+  ,
+  __doc__ = """A preferred content criterion.
+  
+  
+  Attributes:
+      type:
+          Type of the preferred content.
+  """,
+  # @@protoc_insertion_point(class_scope:google.ads.googleads.v0.common.PreferredContentInfo)
+  ))
+_sym_db.RegisterMessage(PreferredContentInfo)
+
 ListingGroupInfo = _reflection.GeneratedProtocolMessageType('ListingGroupInfo', (_message.Message,), dict(
   DESCRIPTOR = _LISTINGGROUPINFO,
-  __module__ = 'google.ads.googleads_v0.proto.common.criteria_pb2'
+  __module__ = 'google.ads.google_ads.v0.proto.common.criteria_pb2'
   ,
   __doc__ = """A listing group criterion.
   
@@ -1554,9 +1835,24 @@ ListingGroupInfo = _reflection.GeneratedProtocolMessageType('ListingGroupInfo', 
   ))
 _sym_db.RegisterMessage(ListingGroupInfo)
 
+ListingScopeInfo = _reflection.GeneratedProtocolMessageType('ListingScopeInfo', (_message.Message,), dict(
+  DESCRIPTOR = _LISTINGSCOPEINFO,
+  __module__ = 'google.ads.google_ads.v0.proto.common.criteria_pb2'
+  ,
+  __doc__ = """A listing scope criterion.
+  
+  
+  Attributes:
+      dimensions:
+          Scope of the campaign criterion.
+  """,
+  # @@protoc_insertion_point(class_scope:google.ads.googleads.v0.common.ListingScopeInfo)
+  ))
+_sym_db.RegisterMessage(ListingScopeInfo)
+
 ListingDimensionInfo = _reflection.GeneratedProtocolMessageType('ListingDimensionInfo', (_message.Message,), dict(
   DESCRIPTOR = _LISTINGDIMENSIONINFO,
-  __module__ = 'google.ads.googleads_v0.proto.common.criteria_pb2'
+  __module__ = 'google.ads.google_ads.v0.proto.common.criteria_pb2'
   ,
   __doc__ = """Listing dimensions for listing group criterion.
   
@@ -1595,7 +1891,7 @@ _sym_db.RegisterMessage(ListingDimensionInfo)
 
 ListingBrandInfo = _reflection.GeneratedProtocolMessageType('ListingBrandInfo', (_message.Message,), dict(
   DESCRIPTOR = _LISTINGBRANDINFO,
-  __module__ = 'google.ads.googleads_v0.proto.common.criteria_pb2'
+  __module__ = 'google.ads.google_ads.v0.proto.common.criteria_pb2'
   ,
   __doc__ = """Brand of the listing.
   
@@ -1610,7 +1906,7 @@ _sym_db.RegisterMessage(ListingBrandInfo)
 
 HotelIdInfo = _reflection.GeneratedProtocolMessageType('HotelIdInfo', (_message.Message,), dict(
   DESCRIPTOR = _HOTELIDINFO,
-  __module__ = 'google.ads.googleads_v0.proto.common.criteria_pb2'
+  __module__ = 'google.ads.google_ads.v0.proto.common.criteria_pb2'
   ,
   __doc__ = """Advertiser-specific hotel ID.
   
@@ -1625,7 +1921,7 @@ _sym_db.RegisterMessage(HotelIdInfo)
 
 HotelClassInfo = _reflection.GeneratedProtocolMessageType('HotelClassInfo', (_message.Message,), dict(
   DESCRIPTOR = _HOTELCLASSINFO,
-  __module__ = 'google.ads.googleads_v0.proto.common.criteria_pb2'
+  __module__ = 'google.ads.google_ads.v0.proto.common.criteria_pb2'
   ,
   __doc__ = """Class of the hotel as a number of stars 1 to 5.
   
@@ -1640,7 +1936,7 @@ _sym_db.RegisterMessage(HotelClassInfo)
 
 HotelCountryRegionInfo = _reflection.GeneratedProtocolMessageType('HotelCountryRegionInfo', (_message.Message,), dict(
   DESCRIPTOR = _HOTELCOUNTRYREGIONINFO,
-  __module__ = 'google.ads.googleads_v0.proto.common.criteria_pb2'
+  __module__ = 'google.ads.google_ads.v0.proto.common.criteria_pb2'
   ,
   __doc__ = """Country or Region the hotel is located in.
   
@@ -1655,7 +1951,7 @@ _sym_db.RegisterMessage(HotelCountryRegionInfo)
 
 HotelStateInfo = _reflection.GeneratedProtocolMessageType('HotelStateInfo', (_message.Message,), dict(
   DESCRIPTOR = _HOTELSTATEINFO,
-  __module__ = 'google.ads.googleads_v0.proto.common.criteria_pb2'
+  __module__ = 'google.ads.google_ads.v0.proto.common.criteria_pb2'
   ,
   __doc__ = """State the hotel is located in.
   
@@ -1670,7 +1966,7 @@ _sym_db.RegisterMessage(HotelStateInfo)
 
 HotelCityInfo = _reflection.GeneratedProtocolMessageType('HotelCityInfo', (_message.Message,), dict(
   DESCRIPTOR = _HOTELCITYINFO,
-  __module__ = 'google.ads.googleads_v0.proto.common.criteria_pb2'
+  __module__ = 'google.ads.google_ads.v0.proto.common.criteria_pb2'
   ,
   __doc__ = """City the hotel is located in.
   
@@ -1685,7 +1981,7 @@ _sym_db.RegisterMessage(HotelCityInfo)
 
 ListingCustomAttributeInfo = _reflection.GeneratedProtocolMessageType('ListingCustomAttributeInfo', (_message.Message,), dict(
   DESCRIPTOR = _LISTINGCUSTOMATTRIBUTEINFO,
-  __module__ = 'google.ads.googleads_v0.proto.common.criteria_pb2'
+  __module__ = 'google.ads.google_ads.v0.proto.common.criteria_pb2'
   ,
   __doc__ = """Listing custom attribute.
   
@@ -1702,7 +1998,7 @@ _sym_db.RegisterMessage(ListingCustomAttributeInfo)
 
 ProductChannelInfo = _reflection.GeneratedProtocolMessageType('ProductChannelInfo', (_message.Message,), dict(
   DESCRIPTOR = _PRODUCTCHANNELINFO,
-  __module__ = 'google.ads.googleads_v0.proto.common.criteria_pb2'
+  __module__ = 'google.ads.google_ads.v0.proto.common.criteria_pb2'
   ,
   __doc__ = """Locality of a product offer.
   
@@ -1717,7 +2013,7 @@ _sym_db.RegisterMessage(ProductChannelInfo)
 
 ProductChannelExclusivityInfo = _reflection.GeneratedProtocolMessageType('ProductChannelExclusivityInfo', (_message.Message,), dict(
   DESCRIPTOR = _PRODUCTCHANNELEXCLUSIVITYINFO,
-  __module__ = 'google.ads.googleads_v0.proto.common.criteria_pb2'
+  __module__ = 'google.ads.google_ads.v0.proto.common.criteria_pb2'
   ,
   __doc__ = """Availability of a product offer.
   
@@ -1732,7 +2028,7 @@ _sym_db.RegisterMessage(ProductChannelExclusivityInfo)
 
 ProductConditionInfo = _reflection.GeneratedProtocolMessageType('ProductConditionInfo', (_message.Message,), dict(
   DESCRIPTOR = _PRODUCTCONDITIONINFO,
-  __module__ = 'google.ads.googleads_v0.proto.common.criteria_pb2'
+  __module__ = 'google.ads.google_ads.v0.proto.common.criteria_pb2'
   ,
   __doc__ = """Condition of a product offer.
   
@@ -1747,7 +2043,7 @@ _sym_db.RegisterMessage(ProductConditionInfo)
 
 ProductOfferIdInfo = _reflection.GeneratedProtocolMessageType('ProductOfferIdInfo', (_message.Message,), dict(
   DESCRIPTOR = _PRODUCTOFFERIDINFO,
-  __module__ = 'google.ads.googleads_v0.proto.common.criteria_pb2'
+  __module__ = 'google.ads.google_ads.v0.proto.common.criteria_pb2'
   ,
   __doc__ = """Id of a product offer.
   
@@ -1762,7 +2058,7 @@ _sym_db.RegisterMessage(ProductOfferIdInfo)
 
 ProductTypeInfo = _reflection.GeneratedProtocolMessageType('ProductTypeInfo', (_message.Message,), dict(
   DESCRIPTOR = _PRODUCTTYPEINFO,
-  __module__ = 'google.ads.googleads_v0.proto.common.criteria_pb2'
+  __module__ = 'google.ads.google_ads.v0.proto.common.criteria_pb2'
   ,
   __doc__ = """Type of a product offer.
   
@@ -1779,7 +2075,7 @@ _sym_db.RegisterMessage(ProductTypeInfo)
 
 HotelDateSelectionTypeInfo = _reflection.GeneratedProtocolMessageType('HotelDateSelectionTypeInfo', (_message.Message,), dict(
   DESCRIPTOR = _HOTELDATESELECTIONTYPEINFO,
-  __module__ = 'google.ads.googleads_v0.proto.common.criteria_pb2'
+  __module__ = 'google.ads.google_ads.v0.proto.common.criteria_pb2'
   ,
   __doc__ = """Criterion for hotel date selection (default dates vs. user selected).
   
@@ -1794,7 +2090,7 @@ _sym_db.RegisterMessage(HotelDateSelectionTypeInfo)
 
 HotelAdvanceBookingWindowInfo = _reflection.GeneratedProtocolMessageType('HotelAdvanceBookingWindowInfo', (_message.Message,), dict(
   DESCRIPTOR = _HOTELADVANCEBOOKINGWINDOWINFO,
-  __module__ = 'google.ads.googleads_v0.proto.common.criteria_pb2'
+  __module__ = 'google.ads.google_ads.v0.proto.common.criteria_pb2'
   ,
   __doc__ = """Criterion for number of days prior to the stay the booking is being
   made.
@@ -1812,7 +2108,7 @@ _sym_db.RegisterMessage(HotelAdvanceBookingWindowInfo)
 
 HotelLengthOfStayInfo = _reflection.GeneratedProtocolMessageType('HotelLengthOfStayInfo', (_message.Message,), dict(
   DESCRIPTOR = _HOTELLENGTHOFSTAYINFO,
-  __module__ = 'google.ads.googleads_v0.proto.common.criteria_pb2'
+  __module__ = 'google.ads.google_ads.v0.proto.common.criteria_pb2'
   ,
   __doc__ = """Criterion for length of hotel stay in nights.
   
@@ -1829,7 +2125,7 @@ _sym_db.RegisterMessage(HotelLengthOfStayInfo)
 
 HotelCheckInDayInfo = _reflection.GeneratedProtocolMessageType('HotelCheckInDayInfo', (_message.Message,), dict(
   DESCRIPTOR = _HOTELCHECKINDAYINFO,
-  __module__ = 'google.ads.googleads_v0.proto.common.criteria_pb2'
+  __module__ = 'google.ads.google_ads.v0.proto.common.criteria_pb2'
   ,
   __doc__ = """Criterion for day of the week the booking is for.
   
@@ -1844,7 +2140,7 @@ _sym_db.RegisterMessage(HotelCheckInDayInfo)
 
 InteractionTypeInfo = _reflection.GeneratedProtocolMessageType('InteractionTypeInfo', (_message.Message,), dict(
   DESCRIPTOR = _INTERACTIONTYPEINFO,
-  __module__ = 'google.ads.googleads_v0.proto.common.criteria_pb2'
+  __module__ = 'google.ads.google_ads.v0.proto.common.criteria_pb2'
   ,
   __doc__ = """Criterion for Interaction Type.
   
@@ -1859,7 +2155,7 @@ _sym_db.RegisterMessage(InteractionTypeInfo)
 
 AdScheduleInfo = _reflection.GeneratedProtocolMessageType('AdScheduleInfo', (_message.Message,), dict(
   DESCRIPTOR = _ADSCHEDULEINFO,
-  __module__ = 'google.ads.googleads_v0.proto.common.criteria_pb2'
+  __module__ = 'google.ads.google_ads.v0.proto.common.criteria_pb2'
   ,
   __doc__ = """Represents an AdSchedule criterion.
   
@@ -1899,7 +2195,7 @@ _sym_db.RegisterMessage(AdScheduleInfo)
 
 AgeRangeInfo = _reflection.GeneratedProtocolMessageType('AgeRangeInfo', (_message.Message,), dict(
   DESCRIPTOR = _AGERANGEINFO,
-  __module__ = 'google.ads.googleads_v0.proto.common.criteria_pb2'
+  __module__ = 'google.ads.google_ads.v0.proto.common.criteria_pb2'
   ,
   __doc__ = """An age range criterion.
   
@@ -1914,7 +2210,7 @@ _sym_db.RegisterMessage(AgeRangeInfo)
 
 GenderInfo = _reflection.GeneratedProtocolMessageType('GenderInfo', (_message.Message,), dict(
   DESCRIPTOR = _GENDERINFO,
-  __module__ = 'google.ads.googleads_v0.proto.common.criteria_pb2'
+  __module__ = 'google.ads.google_ads.v0.proto.common.criteria_pb2'
   ,
   __doc__ = """A gender criterion.
   
@@ -1929,7 +2225,7 @@ _sym_db.RegisterMessage(GenderInfo)
 
 IncomeRangeInfo = _reflection.GeneratedProtocolMessageType('IncomeRangeInfo', (_message.Message,), dict(
   DESCRIPTOR = _INCOMERANGEINFO,
-  __module__ = 'google.ads.googleads_v0.proto.common.criteria_pb2'
+  __module__ = 'google.ads.google_ads.v0.proto.common.criteria_pb2'
   ,
   __doc__ = """An income range criterion.
   
@@ -1944,7 +2240,7 @@ _sym_db.RegisterMessage(IncomeRangeInfo)
 
 ParentalStatusInfo = _reflection.GeneratedProtocolMessageType('ParentalStatusInfo', (_message.Message,), dict(
   DESCRIPTOR = _PARENTALSTATUSINFO,
-  __module__ = 'google.ads.googleads_v0.proto.common.criteria_pb2'
+  __module__ = 'google.ads.google_ads.v0.proto.common.criteria_pb2'
   ,
   __doc__ = """A parental status criterion.
   
@@ -1959,7 +2255,7 @@ _sym_db.RegisterMessage(ParentalStatusInfo)
 
 YouTubeVideoInfo = _reflection.GeneratedProtocolMessageType('YouTubeVideoInfo', (_message.Message,), dict(
   DESCRIPTOR = _YOUTUBEVIDEOINFO,
-  __module__ = 'google.ads.googleads_v0.proto.common.criteria_pb2'
+  __module__ = 'google.ads.google_ads.v0.proto.common.criteria_pb2'
   ,
   __doc__ = """A YouTube Video criterion.
   
@@ -1974,7 +2270,7 @@ _sym_db.RegisterMessage(YouTubeVideoInfo)
 
 YouTubeChannelInfo = _reflection.GeneratedProtocolMessageType('YouTubeChannelInfo', (_message.Message,), dict(
   DESCRIPTOR = _YOUTUBECHANNELINFO,
-  __module__ = 'google.ads.googleads_v0.proto.common.criteria_pb2'
+  __module__ = 'google.ads.google_ads.v0.proto.common.criteria_pb2'
   ,
   __doc__ = """A YouTube Channel criterion.
   
@@ -1988,9 +2284,25 @@ YouTubeChannelInfo = _reflection.GeneratedProtocolMessageType('YouTubeChannelInf
   ))
 _sym_db.RegisterMessage(YouTubeChannelInfo)
 
+UserListInfo = _reflection.GeneratedProtocolMessageType('UserListInfo', (_message.Message,), dict(
+  DESCRIPTOR = _USERLISTINFO,
+  __module__ = 'google.ads.google_ads.v0.proto.common.criteria_pb2'
+  ,
+  __doc__ = """A User List criterion. Represents a user list that is defined by the
+  advertiser to be targeted.
+  
+  
+  Attributes:
+      user_list:
+          The User List resource name.
+  """,
+  # @@protoc_insertion_point(class_scope:google.ads.googleads.v0.common.UserListInfo)
+  ))
+_sym_db.RegisterMessage(UserListInfo)
+
 ProximityInfo = _reflection.GeneratedProtocolMessageType('ProximityInfo', (_message.Message,), dict(
   DESCRIPTOR = _PROXIMITYINFO,
-  __module__ = 'google.ads.googleads_v0.proto.common.criteria_pb2'
+  __module__ = 'google.ads.google_ads.v0.proto.common.criteria_pb2'
   ,
   __doc__ = """A Proximity criterion. The geo point and radius determine what
   geographical area is included. The address is a description of the geo
@@ -2018,7 +2330,7 @@ _sym_db.RegisterMessage(ProximityInfo)
 
 GeoPointInfo = _reflection.GeneratedProtocolMessageType('GeoPointInfo', (_message.Message,), dict(
   DESCRIPTOR = _GEOPOINTINFO,
-  __module__ = 'google.ads.googleads_v0.proto.common.criteria_pb2'
+  __module__ = 'google.ads.google_ads.v0.proto.common.criteria_pb2'
   ,
   __doc__ = """Geo point for proximity criterion.
   
@@ -2035,7 +2347,7 @@ _sym_db.RegisterMessage(GeoPointInfo)
 
 AddressInfo = _reflection.GeneratedProtocolMessageType('AddressInfo', (_message.Message,), dict(
   DESCRIPTOR = _ADDRESSINFO,
-  __module__ = 'google.ads.googleads_v0.proto.common.criteria_pb2'
+  __module__ = 'google.ads.google_ads.v0.proto.common.criteria_pb2'
   ,
   __doc__ = """Address for proximity criterion.
   
@@ -2064,7 +2376,7 @@ _sym_db.RegisterMessage(AddressInfo)
 
 TopicInfo = _reflection.GeneratedProtocolMessageType('TopicInfo', (_message.Message,), dict(
   DESCRIPTOR = _TOPICINFO,
-  __module__ = 'google.ads.googleads_v0.proto.common.criteria_pb2'
+  __module__ = 'google.ads.google_ads.v0.proto.common.criteria_pb2'
   ,
   __doc__ = """A topic criterion. Use topics to target or exclude placements in the
   Google Display Network based on the category into which the placement
@@ -2083,6 +2395,83 @@ TopicInfo = _reflection.GeneratedProtocolMessageType('TopicInfo', (_message.Mess
   # @@protoc_insertion_point(class_scope:google.ads.googleads.v0.common.TopicInfo)
   ))
 _sym_db.RegisterMessage(TopicInfo)
+
+LanguageInfo = _reflection.GeneratedProtocolMessageType('LanguageInfo', (_message.Message,), dict(
+  DESCRIPTOR = _LANGUAGEINFO,
+  __module__ = 'google.ads.google_ads.v0.proto.common.criteria_pb2'
+  ,
+  __doc__ = """A language criterion.
+  
+  
+  Attributes:
+      language_constant:
+          The language constant resource name.
+  """,
+  # @@protoc_insertion_point(class_scope:google.ads.googleads.v0.common.LanguageInfo)
+  ))
+_sym_db.RegisterMessage(LanguageInfo)
+
+IpBlockInfo = _reflection.GeneratedProtocolMessageType('IpBlockInfo', (_message.Message,), dict(
+  DESCRIPTOR = _IPBLOCKINFO,
+  __module__ = 'google.ads.google_ads.v0.proto.common.criteria_pb2'
+  ,
+  __doc__ = """An IpBlock criterion used for IP exclusions. We allow: - IPv4 and IPv6
+  addresses - individual addresses (192.168.0.1) - masks for individual
+  addresses (192.168.0.1/32) - masks for Class C networks (192.168.0.1/24)
+  
+  
+  Attributes:
+      ip_address:
+          The IP address of this IP block.
+  """,
+  # @@protoc_insertion_point(class_scope:google.ads.googleads.v0.common.IpBlockInfo)
+  ))
+_sym_db.RegisterMessage(IpBlockInfo)
+
+ContentLabelInfo = _reflection.GeneratedProtocolMessageType('ContentLabelInfo', (_message.Message,), dict(
+  DESCRIPTOR = _CONTENTLABELINFO,
+  __module__ = 'google.ads.google_ads.v0.proto.common.criteria_pb2'
+  ,
+  __doc__ = """Content Label for category exclusion.
+  
+  
+  Attributes:
+      type:
+          Content label type, required for CREATE operations.
+  """,
+  # @@protoc_insertion_point(class_scope:google.ads.googleads.v0.common.ContentLabelInfo)
+  ))
+_sym_db.RegisterMessage(ContentLabelInfo)
+
+CarrierInfo = _reflection.GeneratedProtocolMessageType('CarrierInfo', (_message.Message,), dict(
+  DESCRIPTOR = _CARRIERINFO,
+  __module__ = 'google.ads.google_ads.v0.proto.common.criteria_pb2'
+  ,
+  __doc__ = """Represents a Carrier Criterion.
+  
+  
+  Attributes:
+      carrier_constant:
+          The Carrier constant resource name.
+  """,
+  # @@protoc_insertion_point(class_scope:google.ads.googleads.v0.common.CarrierInfo)
+  ))
+_sym_db.RegisterMessage(CarrierInfo)
+
+UserInterestInfo = _reflection.GeneratedProtocolMessageType('UserInterestInfo', (_message.Message,), dict(
+  DESCRIPTOR = _USERINTERESTINFO,
+  __module__ = 'google.ads.google_ads.v0.proto.common.criteria_pb2'
+  ,
+  __doc__ = """Represents a particular interest-based topic to be targeted.
+  
+  
+  Attributes:
+      user_interest_category:
+          The UserInterest resource name.
+  """,
+  # @@protoc_insertion_point(class_scope:google.ads.googleads.v0.common.UserInterestInfo)
+  ))
+_sym_db.RegisterMessage(UserInterestInfo)
 
 
 DESCRIPTOR.has_options = True

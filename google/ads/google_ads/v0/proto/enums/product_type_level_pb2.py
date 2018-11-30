@@ -97,7 +97,7 @@ _sym_db.RegisterFileDescriptor(DESCRIPTOR)
 
 ProductTypeLevelEnum = _reflection.GeneratedProtocolMessageType('ProductTypeLevelEnum', (_message.Message,), dict(
   DESCRIPTOR = _PRODUCTTYPELEVELENUM,
-  __module__ = 'google.ads.googleads_v0.proto.enums.product_type_level_pb2'
+  __module__ = 'google.ads.google_ads.v0.proto.enums.product_type_level_pb2'
   ,
   __doc__ = """Level of the type of a product offer.
   """,

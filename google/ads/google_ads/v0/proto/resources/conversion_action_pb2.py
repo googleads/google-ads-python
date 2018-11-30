@@ -279,7 +279,7 @@ ConversionAction = _reflection.GeneratedProtocolMessageType('ConversionAction', 
 
   AttributionModelSettings = _reflection.GeneratedProtocolMessageType('AttributionModelSettings', (_message.Message,), dict(
     DESCRIPTOR = _CONVERSIONACTION_ATTRIBUTIONMODELSETTINGS,
-    __module__ = 'google.ads.googleads_v0.proto.resources.conversion_action_pb2'
+    __module__ = 'google.ads.google_ads.v0.proto.resources.conversion_action_pb2'
     ,
     __doc__ = """Settings related to this conversion action's attribution model.
     
@@ -297,7 +297,7 @@ ConversionAction = _reflection.GeneratedProtocolMessageType('ConversionAction', 
 
   ValueSettings = _reflection.GeneratedProtocolMessageType('ValueSettings', (_message.Message,), dict(
     DESCRIPTOR = _CONVERSIONACTION_VALUESETTINGS,
-    __module__ = 'google.ads.googleads_v0.proto.resources.conversion_action_pb2'
+    __module__ = 'google.ads.google_ads.v0.proto.resources.conversion_action_pb2'
     ,
     __doc__ = """Settings related to the value for conversion events associated with this
     conversion action.
@@ -323,7 +323,7 @@ ConversionAction = _reflection.GeneratedProtocolMessageType('ConversionAction', 
     ))
   ,
   DESCRIPTOR = _CONVERSIONACTION,
-  __module__ = 'google.ads.googleads_v0.proto.resources.conversion_action_pb2'
+  __module__ = 'google.ads.google_ads.v0.proto.resources.conversion_action_pb2'
   ,
   __doc__ = """A conversion action.
   

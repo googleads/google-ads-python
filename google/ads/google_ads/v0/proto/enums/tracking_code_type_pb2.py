@@ -89,7 +89,7 @@ _sym_db.RegisterFileDescriptor(DESCRIPTOR)
 
 TrackingCodeTypeEnum = _reflection.GeneratedProtocolMessageType('TrackingCodeTypeEnum', (_message.Message,), dict(
   DESCRIPTOR = _TRACKINGCODETYPEENUM,
-  __module__ = 'google.ads.googleads_v0.proto.enums.tracking_code_type_pb2'
+  __module__ = 'google.ads.google_ads.v0.proto.enums.tracking_code_type_pb2'
   ,
   __doc__ = """Container for enum describing the type of the generated tag snippets for
   tracking conversions.

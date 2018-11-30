@@ -85,7 +85,7 @@ _sym_db.RegisterFileDescriptor(DESCRIPTOR)
 
 RangeErrorEnum = _reflection.GeneratedProtocolMessageType('RangeErrorEnum', (_message.Message,), dict(
   DESCRIPTOR = _RANGEERRORENUM,
-  __module__ = 'google.ads.googleads_v0.proto.errors.range_error_pb2'
+  __module__ = 'google.ads.google_ads.v0.proto.errors.range_error_pb2'
   ,
   __doc__ = """Container for enum describing possible range errors.
   """,

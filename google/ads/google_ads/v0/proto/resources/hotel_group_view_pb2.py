@@ -60,7 +60,7 @@ _sym_db.RegisterFileDescriptor(DESCRIPTOR)
 
 HotelGroupView = _reflection.GeneratedProtocolMessageType('HotelGroupView', (_message.Message,), dict(
   DESCRIPTOR = _HOTELGROUPVIEW,
-  __module__ = 'google.ads.googleads_v0.proto.resources.hotel_group_view_pb2'
+  __module__ = 'google.ads.google_ads.v0.proto.resources.hotel_group_view_pb2'
   ,
   __doc__ = """A hotel group view.
   

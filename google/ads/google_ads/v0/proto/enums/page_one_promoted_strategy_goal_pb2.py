@@ -85,7 +85,7 @@ _sym_db.RegisterFileDescriptor(DESCRIPTOR)
 
 PageOnePromotedStrategyGoalEnum = _reflection.GeneratedProtocolMessageType('PageOnePromotedStrategyGoalEnum', (_message.Message,), dict(
   DESCRIPTOR = _PAGEONEPROMOTEDSTRATEGYGOALENUM,
-  __module__ = 'google.ads.googleads_v0.proto.enums.page_one_promoted_strategy_goal_pb2'
+  __module__ = 'google.ads.google_ads.v0.proto.enums.page_one_promoted_strategy_goal_pb2'
   ,
   __doc__ = """Container for enum describing possible strategy goals: where impressions
   are desired to be shown on search result pages.

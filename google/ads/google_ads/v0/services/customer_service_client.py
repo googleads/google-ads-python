@@ -204,6 +204,57 @@ class CustomerServiceClient(object):
         return self._inner_api_calls['get_customer'](
             request, retry=retry, timeout=timeout, metadata=metadata)
 
+    def mutate_customer(self,
+                        customer_id,
+                        operation,
+                        retry=google.api_core.gapic_v1.method.DEFAULT,
+                        timeout=google.api_core.gapic_v1.method.DEFAULT,
+                        metadata=None):
+        """
+        Updates a customer. Operation statuses are returned.
+
+        Args:
+            customer_id (str): The ID of the customer being modified.
+            operation (Union[dict, ~google.ads.google_ads.v0.types.CustomerOperation]): The operation to perform on the customer
+                If a dict is provided, it must be of the same form as the protobuf
+                message :class:`~google.ads.google_ads.v0.types.CustomerOperation`
+            retry (Optional[google.api_core.retry.Retry]):  A retry object used
+                to retry requests. If ``None`` is specified, requests will not
+                be retried.
+            timeout (Optional[float]): The amount of time, in seconds, to wait
+                for the request to complete. Note that if ``retry`` is
+                specified, the timeout applies to each individual attempt.
+            metadata (Optional[Sequence[Tuple[str, str]]]): Additional metadata
+                that is provided to the method.
+
+        Returns:
+            A :class:`~google.ads.google_ads.v0.types.MutateCustomerResponse` instance.
+
+        Raises:
+            google.api_core.exceptions.GoogleAPICallError: If the request
+                    failed for any reason.
+            google.api_core.exceptions.RetryError: If the request failed due
+                    to a retryable error and retry attempts failed.
+            ValueError: If the parameters are invalid.
+        """
+        # Wrap the transport method to add retry and timeout logic.
+        if 'mutate_customer' not in self._inner_api_calls:
+            self._inner_api_calls[
+                'mutate_customer'] = google.api_core.gapic_v1.method.wrap_method(
+                    self.transport.mutate_customer,
+                    default_retry=self._method_configs['MutateCustomer'].retry,
+                    default_timeout=self._method_configs['MutateCustomer']
+                    .timeout,
+                    client_info=self._client_info,
+                )
+
+        request = customer_service_pb2.MutateCustomerRequest(
+            customer_id=customer_id,
+            operation=operation,
+        )
+        return self._inner_api_calls['mutate_customer'](
+            request, retry=retry, timeout=timeout, metadata=metadata)
+
     def list_accessible_customers(
             self,
             retry=google.api_core.gapic_v1.method.DEFAULT,
@@ -246,4 +297,57 @@ class CustomerServiceClient(object):
 
         request = customer_service_pb2.ListAccessibleCustomersRequest()
         return self._inner_api_calls['list_accessible_customers'](
+            request, retry=retry, timeout=timeout, metadata=metadata)
+
+    def create_customer_client(self,
+                               customer_id,
+                               customer_client,
+                               retry=google.api_core.gapic_v1.method.DEFAULT,
+                               timeout=google.api_core.gapic_v1.method.DEFAULT,
+                               metadata=None):
+        """
+        Creates a new client under manager. The new client customer is returned.
+
+        Args:
+            customer_id (str): The ID of the Manager under whom client customer is being created.
+            customer_client (Union[dict, ~google.ads.google_ads.v0.types.Customer]): The new client customer to create. The resource name on this customer
+                will be ignored.
+                If a dict is provided, it must be of the same form as the protobuf
+                message :class:`~google.ads.google_ads.v0.types.Customer`
+            retry (Optional[google.api_core.retry.Retry]):  A retry object used
+                to retry requests. If ``None`` is specified, requests will not
+                be retried.
+            timeout (Optional[float]): The amount of time, in seconds, to wait
+                for the request to complete. Note that if ``retry`` is
+                specified, the timeout applies to each individual attempt.
+            metadata (Optional[Sequence[Tuple[str, str]]]): Additional metadata
+                that is provided to the method.
+
+        Returns:
+            A :class:`~google.ads.google_ads.v0.types.CreateCustomerClientResponse` instance.
+
+        Raises:
+            google.api_core.exceptions.GoogleAPICallError: If the request
+                    failed for any reason.
+            google.api_core.exceptions.RetryError: If the request failed due
+                    to a retryable error and retry attempts failed.
+            ValueError: If the parameters are invalid.
+        """
+        # Wrap the transport method to add retry and timeout logic.
+        if 'create_customer_client' not in self._inner_api_calls:
+            self._inner_api_calls[
+                'create_customer_client'] = google.api_core.gapic_v1.method.wrap_method(
+                    self.transport.create_customer_client,
+                    default_retry=self._method_configs['CreateCustomerClient']
+                    .retry,
+                    default_timeout=self._method_configs[
+                        'CreateCustomerClient'].timeout,
+                    client_info=self._client_info,
+                )
+
+        request = customer_service_pb2.CreateCustomerClientRequest(
+            customer_id=customer_id,
+            customer_client=customer_client,
+        )
+        return self._inner_api_calls['create_customer_client'](
             request, retry=retry, timeout=timeout, metadata=metadata)

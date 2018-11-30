@@ -106,7 +106,7 @@ _sym_db.RegisterFileDescriptor(DESCRIPTOR)
 
 Value = _reflection.GeneratedProtocolMessageType('Value', (_message.Message,), dict(
   DESCRIPTOR = _VALUE,
-  __module__ = 'google.ads.googleads_v0.proto.common.value_pb2'
+  __module__ = 'google.ads.google_ads.v0.proto.common.value_pb2'
   ,
   __doc__ = """A generic data container.
   

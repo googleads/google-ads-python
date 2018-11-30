@@ -93,7 +93,7 @@ _sym_db.RegisterFileDescriptor(DESCRIPTOR)
 
 BillingSetupStatusEnum = _reflection.GeneratedProtocolMessageType('BillingSetupStatusEnum', (_message.Message,), dict(
   DESCRIPTOR = _BILLINGSETUPSTATUSENUM,
-  __module__ = 'google.ads.googleads_v0.proto.enums.billing_setup_status_pb2'
+  __module__ = 'google.ads.google_ads.v0.proto.enums.billing_setup_status_pb2'
   ,
   __doc__ = """Message describing BillingSetup statuses.
   """,

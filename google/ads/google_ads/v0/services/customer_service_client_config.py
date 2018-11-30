@@ -22,9 +22,19 @@ config = {
                     "retry_codes_name": "idempotent",
                     "retry_params_name": "default"
                 },
+                "MutateCustomer": {
+                    "timeout_millis": 60000,
+                    "retry_codes_name": "non_idempotent",
+                    "retry_params_name": "default"
+                },
                 "ListAccessibleCustomers": {
                     "timeout_millis": 60000,
                     "retry_codes_name": "idempotent",
+                    "retry_params_name": "default"
+                },
+                "CreateCustomerClient": {
+                    "timeout_millis": 60000,
+                    "retry_codes_name": "non_idempotent",
                     "retry_params_name": "default"
                 }
             }

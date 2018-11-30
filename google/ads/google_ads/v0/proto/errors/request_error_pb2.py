@@ -141,7 +141,7 @@ _sym_db.RegisterFileDescriptor(DESCRIPTOR)
 
 RequestErrorEnum = _reflection.GeneratedProtocolMessageType('RequestErrorEnum', (_message.Message,), dict(
   DESCRIPTOR = _REQUESTERRORENUM,
-  __module__ = 'google.ads.googleads_v0.proto.errors.request_error_pb2'
+  __module__ = 'google.ads.google_ads.v0.proto.errors.request_error_pb2'
   ,
   __doc__ = """Container for enum describing possible request errors.
   """,

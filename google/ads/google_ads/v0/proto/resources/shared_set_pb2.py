@@ -112,7 +112,7 @@ _sym_db.RegisterFileDescriptor(DESCRIPTOR)
 
 SharedSet = _reflection.GeneratedProtocolMessageType('SharedSet', (_message.Message,), dict(
   DESCRIPTOR = _SHAREDSET,
-  __module__ = 'google.ads.googleads_v0.proto.resources.shared_set_pb2'
+  __module__ = 'google.ads.google_ads.v0.proto.resources.shared_set_pb2'
   ,
   __doc__ = """SharedSets are used for sharing criterion exclusions across multiple
   campaigns.

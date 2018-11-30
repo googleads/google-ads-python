@@ -237,7 +237,7 @@ _sym_db.RegisterFileDescriptor(DESCRIPTOR)
 
 GetConversionActionRequest = _reflection.GeneratedProtocolMessageType('GetConversionActionRequest', (_message.Message,), dict(
   DESCRIPTOR = _GETCONVERSIONACTIONREQUEST,
-  __module__ = 'google.ads.googleads_v0.proto.services.conversion_action_service_pb2'
+  __module__ = 'google.ads.google_ads.v0.proto.services.conversion_action_service_pb2'
   ,
   __doc__ = """Request message for [ConversionActionService.GetConversionAction].
   
@@ -252,7 +252,7 @@ _sym_db.RegisterMessage(GetConversionActionRequest)
 
 MutateConversionActionsRequest = _reflection.GeneratedProtocolMessageType('MutateConversionActionsRequest', (_message.Message,), dict(
   DESCRIPTOR = _MUTATECONVERSIONACTIONSREQUEST,
-  __module__ = 'google.ads.googleads_v0.proto.services.conversion_action_service_pb2'
+  __module__ = 'google.ads.google_ads.v0.proto.services.conversion_action_service_pb2'
   ,
   __doc__ = """Request message for [ConversionActionService.MutateConversionActions].
   
@@ -271,7 +271,7 @@ _sym_db.RegisterMessage(MutateConversionActionsRequest)
 
 ConversionActionOperation = _reflection.GeneratedProtocolMessageType('ConversionActionOperation', (_message.Message,), dict(
   DESCRIPTOR = _CONVERSIONACTIONOPERATION,
-  __module__ = 'google.ads.googleads_v0.proto.services.conversion_action_service_pb2'
+  __module__ = 'google.ads.google_ads.v0.proto.services.conversion_action_service_pb2'
   ,
   __doc__ = """A single operation (create, update, remove) on a conversion action.
   
@@ -299,7 +299,7 @@ _sym_db.RegisterMessage(ConversionActionOperation)
 
 MutateConversionActionsResponse = _reflection.GeneratedProtocolMessageType('MutateConversionActionsResponse', (_message.Message,), dict(
   DESCRIPTOR = _MUTATECONVERSIONACTIONSRESPONSE,
-  __module__ = 'google.ads.googleads_v0.proto.services.conversion_action_service_pb2'
+  __module__ = 'google.ads.google_ads.v0.proto.services.conversion_action_service_pb2'
   ,
   __doc__ = """Response message for conversion action mutate.
   
@@ -314,7 +314,7 @@ _sym_db.RegisterMessage(MutateConversionActionsResponse)
 
 MutateConversionActionResult = _reflection.GeneratedProtocolMessageType('MutateConversionActionResult', (_message.Message,), dict(
   DESCRIPTOR = _MUTATECONVERSIONACTIONRESULT,
-  __module__ = 'google.ads.googleads_v0.proto.services.conversion_action_service_pb2'
+  __module__ = 'google.ads.google_ads.v0.proto.services.conversion_action_service_pb2'
   ,
   __doc__ = """The result for the conversion action mutate.
   

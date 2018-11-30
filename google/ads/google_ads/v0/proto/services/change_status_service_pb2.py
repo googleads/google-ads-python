@@ -63,7 +63,7 @@ _sym_db.RegisterFileDescriptor(DESCRIPTOR)
 
 GetChangeStatusRequest = _reflection.GeneratedProtocolMessageType('GetChangeStatusRequest', (_message.Message,), dict(
   DESCRIPTOR = _GETCHANGESTATUSREQUEST,
-  __module__ = 'google.ads.googleads_v0.proto.services.change_status_service_pb2'
+  __module__ = 'google.ads.google_ads.v0.proto.services.change_status_service_pb2'
   ,
   __doc__ = """Request message for
   '[ChangeStatusService.GetChangeStatus][google.ads.googleads.v0.services.ChangeStatusService.GetChangeStatus]'.

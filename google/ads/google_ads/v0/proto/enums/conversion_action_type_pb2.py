@@ -109,7 +109,7 @@ _sym_db.RegisterFileDescriptor(DESCRIPTOR)
 
 ConversionActionTypeEnum = _reflection.GeneratedProtocolMessageType('ConversionActionTypeEnum', (_message.Message,), dict(
   DESCRIPTOR = _CONVERSIONACTIONTYPEENUM,
-  __module__ = 'google.ads.googleads_v0.proto.enums.conversion_action_type_pb2'
+  __module__ = 'google.ads.google_ads.v0.proto.enums.conversion_action_type_pb2'
   ,
   __doc__ = """Container for enum describing possible types of a conversion action.
   """,

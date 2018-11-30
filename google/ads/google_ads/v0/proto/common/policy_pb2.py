@@ -553,7 +553,7 @@ _sym_db.RegisterFileDescriptor(DESCRIPTOR)
 
 PolicyViolationKey = _reflection.GeneratedProtocolMessageType('PolicyViolationKey', (_message.Message,), dict(
   DESCRIPTOR = _POLICYVIOLATIONKEY,
-  __module__ = 'google.ads.googleads_v0.proto.common.policy_pb2'
+  __module__ = 'google.ads.google_ads.v0.proto.common.policy_pb2'
   ,
   __doc__ = """Key of the violation. The key is used for referring to a violation when
   filing an exemption request.
@@ -575,7 +575,7 @@ _sym_db.RegisterMessage(PolicyViolationKey)
 
 PolicyValidationParameter = _reflection.GeneratedProtocolMessageType('PolicyValidationParameter', (_message.Message,), dict(
   DESCRIPTOR = _POLICYVALIDATIONPARAMETER,
-  __module__ = 'google.ads.googleads_v0.proto.common.policy_pb2'
+  __module__ = 'google.ads.google_ads.v0.proto.common.policy_pb2'
   ,
   __doc__ = """Parameter for controlling how policy checking is done.
   
@@ -597,7 +597,7 @@ _sym_db.RegisterMessage(PolicyValidationParameter)
 
 PolicyTopicEntry = _reflection.GeneratedProtocolMessageType('PolicyTopicEntry', (_message.Message,), dict(
   DESCRIPTOR = _POLICYTOPICENTRY,
-  __module__ = 'google.ads.googleads_v0.proto.common.policy_pb2'
+  __module__ = 'google.ads.google_ads.v0.proto.common.policy_pb2'
   ,
   __doc__ = """Policy finding attached to a resource (e.g. alcohol policy associated
   with a site that sells alcohol).
@@ -636,7 +636,7 @@ PolicyTopicEvidence = _reflection.GeneratedProtocolMessageType('PolicyTopicEvide
 
   TextList = _reflection.GeneratedProtocolMessageType('TextList', (_message.Message,), dict(
     DESCRIPTOR = _POLICYTOPICEVIDENCE_TEXTLIST,
-    __module__ = 'google.ads.googleads_v0.proto.common.policy_pb2'
+    __module__ = 'google.ads.google_ads.v0.proto.common.policy_pb2'
     ,
     __doc__ = """A list of fragments of text that violated a policy.
     
@@ -654,7 +654,7 @@ PolicyTopicEvidence = _reflection.GeneratedProtocolMessageType('PolicyTopicEvide
 
   WebsiteList = _reflection.GeneratedProtocolMessageType('WebsiteList', (_message.Message,), dict(
     DESCRIPTOR = _POLICYTOPICEVIDENCE_WEBSITELIST,
-    __module__ = 'google.ads.googleads_v0.proto.common.policy_pb2'
+    __module__ = 'google.ads.google_ads.v0.proto.common.policy_pb2'
     ,
     __doc__ = """A list of websites that caused a policy finding. Used for
     ONE\_WEBSITE\_PER\_AD\_GROUP policy topic, for example. In case there
@@ -674,7 +674,7 @@ PolicyTopicEvidence = _reflection.GeneratedProtocolMessageType('PolicyTopicEvide
 
   DestinationTextList = _reflection.GeneratedProtocolMessageType('DestinationTextList', (_message.Message,), dict(
     DESCRIPTOR = _POLICYTOPICEVIDENCE_DESTINATIONTEXTLIST,
-    __module__ = 'google.ads.googleads_v0.proto.common.policy_pb2'
+    __module__ = 'google.ads.google_ads.v0.proto.common.policy_pb2'
     ,
     __doc__ = """A list of strings found in a destination page that caused a policy
     finding.
@@ -692,7 +692,7 @@ PolicyTopicEvidence = _reflection.GeneratedProtocolMessageType('PolicyTopicEvide
 
   DestinationMismatch = _reflection.GeneratedProtocolMessageType('DestinationMismatch', (_message.Message,), dict(
     DESCRIPTOR = _POLICYTOPICEVIDENCE_DESTINATIONMISMATCH,
-    __module__ = 'google.ads.googleads_v0.proto.common.policy_pb2'
+    __module__ = 'google.ads.google_ads.v0.proto.common.policy_pb2'
     ,
     __doc__ = """Evidence of mismatches between the URLs of a resource.
     
@@ -707,7 +707,7 @@ PolicyTopicEvidence = _reflection.GeneratedProtocolMessageType('PolicyTopicEvide
     ))
   ,
   DESCRIPTOR = _POLICYTOPICEVIDENCE,
-  __module__ = 'google.ads.googleads_v0.proto.common.policy_pb2'
+  __module__ = 'google.ads.google_ads.v0.proto.common.policy_pb2'
   ,
   __doc__ = """Additional information that explains a policy finding.
   
@@ -744,7 +744,7 @@ PolicyTopicConstraint = _reflection.GeneratedProtocolMessageType('PolicyTopicCon
 
   CountryConstraintList = _reflection.GeneratedProtocolMessageType('CountryConstraintList', (_message.Message,), dict(
     DESCRIPTOR = _POLICYTOPICCONSTRAINT_COUNTRYCONSTRAINTLIST,
-    __module__ = 'google.ads.googleads_v0.proto.common.policy_pb2'
+    __module__ = 'google.ads.google_ads.v0.proto.common.policy_pb2'
     ,
     __doc__ = """A list of countries where a resource's serving is constrained.
     
@@ -763,7 +763,7 @@ PolicyTopicConstraint = _reflection.GeneratedProtocolMessageType('PolicyTopicCon
 
   ResellerConstraint = _reflection.GeneratedProtocolMessageType('ResellerConstraint', (_message.Message,), dict(
     DESCRIPTOR = _POLICYTOPICCONSTRAINT_RESELLERCONSTRAINT,
-    __module__ = 'google.ads.googleads_v0.proto.common.policy_pb2'
+    __module__ = 'google.ads.google_ads.v0.proto.common.policy_pb2'
     ,
     __doc__ = """Indicates that a policy topic was constrained due to disapproval of the
     website for reseller purposes.
@@ -776,7 +776,7 @@ PolicyTopicConstraint = _reflection.GeneratedProtocolMessageType('PolicyTopicCon
 
   CountryConstraint = _reflection.GeneratedProtocolMessageType('CountryConstraint', (_message.Message,), dict(
     DESCRIPTOR = _POLICYTOPICCONSTRAINT_COUNTRYCONSTRAINT,
-    __module__ = 'google.ads.googleads_v0.proto.common.policy_pb2'
+    __module__ = 'google.ads.google_ads.v0.proto.common.policy_pb2'
     ,
     __doc__ = """Indicates that a resource's ability to serve in a particular country is
     constrained.
@@ -793,7 +793,7 @@ PolicyTopicConstraint = _reflection.GeneratedProtocolMessageType('PolicyTopicCon
     ))
   ,
   DESCRIPTOR = _POLICYTOPICCONSTRAINT,
-  __module__ = 'google.ads.googleads_v0.proto.common.policy_pb2'
+  __module__ = 'google.ads.google_ads.v0.proto.common.policy_pb2'
   ,
   __doc__ = """Describes the effect on serving that a policy topic entry will have.
   

@@ -89,7 +89,7 @@ _sym_db.RegisterFileDescriptor(DESCRIPTOR)
 
 AccountBudgetStatusEnum = _reflection.GeneratedProtocolMessageType('AccountBudgetStatusEnum', (_message.Message,), dict(
   DESCRIPTOR = _ACCOUNTBUDGETSTATUSENUM,
-  __module__ = 'google.ads.googleads_v0.proto.enums.account_budget_status_pb2'
+  __module__ = 'google.ads.google_ads.v0.proto.enums.account_budget_status_pb2'
   ,
   __doc__ = """Message describing AccountBudget statuses.
   """,

@@ -26,7 +26,7 @@ DESCRIPTOR = _descriptor.FileDescriptor(
   name='google/ads/googleads_v0/proto/resources/ad_group_criterion.proto',
   package='google.ads.googleads.v0.resources',
   syntax='proto3',
-  serialized_pb=_b('\n@google/ads/googleads_v0/proto/resources/ad_group_criterion.proto\x12!google.ads.googleads.v0.resources\x1a\x33google/ads/googleads_v0/proto/common/criteria.proto\x1a;google/ads/googleads_v0/proto/common/custom_parameter.proto\x1a\x43google/ads/googleads_v0/proto/enums/ad_group_criterion_status.proto\x1a\x38google/ads/googleads_v0/proto/enums/bidding_source.proto\x1a\x38google/ads/googleads_v0/proto/enums/criterion_type.proto\x1a>google/ads/googleads_v0/proto/enums/quality_score_bucket.proto\x1a\x1egoogle/protobuf/wrappers.proto\"\xa3\x17\n\x10\x41\x64GroupCriterion\x12\x15\n\rresource_name\x18\x01 \x01(\t\x12\x31\n\x0c\x63riterion_id\x18\x1a \x01(\x0b\x32\x1b.google.protobuf.Int64Value\x12`\n\x06status\x18\x03 \x01(\x0e\x32P.google.ads.googleads.v0.enums.AdGroupCriterionStatusEnum.AdGroupCriterionStatus\x12U\n\x0cquality_info\x18\x04 \x01(\x0b\x32?.google.ads.googleads.v0.resources.AdGroupCriterion.QualityInfo\x12.\n\x08\x61\x64_group\x18\x05 \x01(\x0b\x32\x1c.google.protobuf.StringValue\x12L\n\x04type\x18\x19 \x01(\x0e\x32>.google.ads.googleads.v0.enums.CriterionTypeEnum.CriterionType\x12,\n\x08negative\x18\x1f \x01(\x0b\x32\x1a.google.protobuf.BoolValue\x12\x32\n\x0c\x62id_modifier\x18, \x01(\x0b\x32\x1c.google.protobuf.DoubleValue\x12\x33\n\x0e\x63pc_bid_micros\x18\x10 \x01(\x0b\x32\x1b.google.protobuf.Int64Value\x12\x33\n\x0e\x63pm_bid_micros\x18\x11 \x01(\x0b\x32\x1b.google.protobuf.Int64Value\x12\x33\n\x0e\x63pv_bid_micros\x18\x18 \x01(\x0b\x32\x1b.google.protobuf.Int64Value\x12;\n\x16percent_cpc_bid_micros\x18! \x01(\x0b\x32\x1b.google.protobuf.Int64Value\x12=\n\x18\x65\x66\x66\x65\x63tive_cpc_bid_micros\x18\x12 \x01(\x0b\x32\x1b.google.protobuf.Int64Value\x12=\n\x18\x65\x66\x66\x65\x63tive_cpm_bid_micros\x18\x13 \x01(\x0b\x32\x1b.google.protobuf.Int64Value\x12=\n\x18\x65\x66\x66\x65\x63tive_cpv_bid_micros\x18\x14 \x01(\x0b\x32\x1b.google.protobuf.Int64Value\x12\x45\n effective_percent_cpc_bid_micros\x18\" \x01(\x0b\x32\x1b.google.protobuf.Int64Value\x12`\n\x18\x65\x66\x66\x65\x63tive_cpc_bid_source\x18\x15 \x01(\x0e\x32>.google.ads.googleads.v0.enums.BiddingSourceEnum.BiddingSource\x12`\n\x18\x65\x66\x66\x65\x63tive_cpm_bid_source\x18\x16 \x01(\x0e\x32>.google.ads.googleads.v0.enums.BiddingSourceEnum.BiddingSource\x12`\n\x18\x65\x66\x66\x65\x63tive_cpv_bid_source\x18\x17 \x01(\x0e\x32>.google.ads.googleads.v0.enums.BiddingSourceEnum.BiddingSource\x12h\n effective_percent_cpc_bid_source\x18# \x01(\x0e\x32>.google.ads.googleads.v0.enums.BiddingSourceEnum.BiddingSource\x12\x61\n\x12position_estimates\x18\n \x01(\x0b\x32\x45.google.ads.googleads.v0.resources.AdGroupCriterion.PositionEstimates\x12\x30\n\nfinal_urls\x18\x0b \x03(\x0b\x32\x1c.google.protobuf.StringValue\x12;\n\x15tracking_url_template\x18\r \x01(\x0b\x32\x1c.google.protobuf.StringValue\x12N\n\x15url_custom_parameters\x18\x0e \x03(\x0b\x32/.google.ads.googleads.v0.common.CustomParameter\x12>\n\x07keyword\x18\x1b \x01(\x0b\x32+.google.ads.googleads.v0.common.KeywordInfoH\x00\x12\x42\n\tplacement\x18\x1c \x01(\x0b\x32-.google.ads.googleads.v0.common.PlacementInfoH\x00\x12I\n\rlisting_group\x18  \x01(\x0b\x32\x30.google.ads.googleads.v0.common.ListingGroupInfoH\x00\x12\x41\n\tage_range\x18$ \x01(\x0b\x32,.google.ads.googleads.v0.common.AgeRangeInfoH\x00\x12<\n\x06gender\x18% \x01(\x0b\x32*.google.ads.googleads.v0.common.GenderInfoH\x00\x12G\n\x0cincome_range\x18& \x01(\x0b\x32/.google.ads.googleads.v0.common.IncomeRangeInfoH\x00\x12M\n\x0fparental_status\x18\' \x01(\x0b\x32\x32.google.ads.googleads.v0.common.ParentalStatusInfoH\x00\x12I\n\ryoutube_video\x18( \x01(\x0b\x32\x30.google.ads.googleads.v0.common.YouTubeVideoInfoH\x00\x12M\n\x0fyoutube_channel\x18) \x01(\x0b\x32\x32.google.ads.googleads.v0.common.YouTubeChannelInfoH\x00\x12:\n\x05topic\x18+ \x01(\x0b\x32).google.ads.googleads.v0.common.TopicInfoH\x00\x1a\xff\x02\n\x0bQualityInfo\x12\x32\n\rquality_score\x18\x01 \x01(\x0b\x32\x1b.google.protobuf.Int32Value\x12h\n\x16\x63reative_quality_score\x18\x02 \x01(\x0e\x32H.google.ads.googleads.v0.enums.QualityScoreBucketEnum.QualityScoreBucket\x12j\n\x18post_click_quality_score\x18\x03 \x01(\x0e\x32H.google.ads.googleads.v0.enums.QualityScoreBucketEnum.QualityScoreBucket\x12\x66\n\x14search_predicted_ctr\x18\x04 \x01(\x0e\x32H.google.ads.googleads.v0.enums.QualityScoreBucketEnum.QualityScoreBucket\x1a\xcc\x01\n\x11PositionEstimates\x12:\n\x15\x66irst_page_cpc_micros\x18\x01 \x01(\x0b\x32\x1b.google.protobuf.Int64Value\x12>\n\x19\x66irst_position_cpc_micros\x18\x02 \x01(\x0b\x32\x1b.google.protobuf.Int64Value\x12;\n\x16top_of_page_cpc_micros\x18\x03 \x01(\x0b\x32\x1b.google.protobuf.Int64ValueB\x0b\n\tcriterionB\xda\x01\n%com.google.ads.googleads.v0.resourcesB\x15\x41\x64GroupCriterionProtoP\x01ZJgoogle.golang.org/genproto/googleapis/ads/googleads/v0/resources;resources\xa2\x02\x03GAA\xaa\x02!Google.Ads.GoogleAds.V0.Resources\xca\x02!Google\\Ads\\GoogleAds\\V0\\Resourcesb\x06proto3')
+  serialized_pb=_b('\n@google/ads/googleads_v0/proto/resources/ad_group_criterion.proto\x12!google.ads.googleads.v0.resources\x1a\x33google/ads/googleads_v0/proto/common/criteria.proto\x1a;google/ads/googleads_v0/proto/common/custom_parameter.proto\x1a\x43google/ads/googleads_v0/proto/enums/ad_group_criterion_status.proto\x1a\x38google/ads/googleads_v0/proto/enums/bidding_source.proto\x1a\x38google/ads/googleads_v0/proto/enums/criterion_type.proto\x1a>google/ads/googleads_v0/proto/enums/quality_score_bucket.proto\x1a\x1egoogle/protobuf/wrappers.proto\"\xb1\x18\n\x10\x41\x64GroupCriterion\x12\x15\n\rresource_name\x18\x01 \x01(\t\x12\x31\n\x0c\x63riterion_id\x18\x1a \x01(\x0b\x32\x1b.google.protobuf.Int64Value\x12`\n\x06status\x18\x03 \x01(\x0e\x32P.google.ads.googleads.v0.enums.AdGroupCriterionStatusEnum.AdGroupCriterionStatus\x12U\n\x0cquality_info\x18\x04 \x01(\x0b\x32?.google.ads.googleads.v0.resources.AdGroupCriterion.QualityInfo\x12.\n\x08\x61\x64_group\x18\x05 \x01(\x0b\x32\x1c.google.protobuf.StringValue\x12L\n\x04type\x18\x19 \x01(\x0e\x32>.google.ads.googleads.v0.enums.CriterionTypeEnum.CriterionType\x12,\n\x08negative\x18\x1f \x01(\x0b\x32\x1a.google.protobuf.BoolValue\x12\x32\n\x0c\x62id_modifier\x18, \x01(\x0b\x32\x1c.google.protobuf.DoubleValue\x12\x33\n\x0e\x63pc_bid_micros\x18\x10 \x01(\x0b\x32\x1b.google.protobuf.Int64Value\x12\x33\n\x0e\x63pm_bid_micros\x18\x11 \x01(\x0b\x32\x1b.google.protobuf.Int64Value\x12\x33\n\x0e\x63pv_bid_micros\x18\x18 \x01(\x0b\x32\x1b.google.protobuf.Int64Value\x12;\n\x16percent_cpc_bid_micros\x18! \x01(\x0b\x32\x1b.google.protobuf.Int64Value\x12=\n\x18\x65\x66\x66\x65\x63tive_cpc_bid_micros\x18\x12 \x01(\x0b\x32\x1b.google.protobuf.Int64Value\x12=\n\x18\x65\x66\x66\x65\x63tive_cpm_bid_micros\x18\x13 \x01(\x0b\x32\x1b.google.protobuf.Int64Value\x12=\n\x18\x65\x66\x66\x65\x63tive_cpv_bid_micros\x18\x14 \x01(\x0b\x32\x1b.google.protobuf.Int64Value\x12\x45\n effective_percent_cpc_bid_micros\x18\" \x01(\x0b\x32\x1b.google.protobuf.Int64Value\x12`\n\x18\x65\x66\x66\x65\x63tive_cpc_bid_source\x18\x15 \x01(\x0e\x32>.google.ads.googleads.v0.enums.BiddingSourceEnum.BiddingSource\x12`\n\x18\x65\x66\x66\x65\x63tive_cpm_bid_source\x18\x16 \x01(\x0e\x32>.google.ads.googleads.v0.enums.BiddingSourceEnum.BiddingSource\x12`\n\x18\x65\x66\x66\x65\x63tive_cpv_bid_source\x18\x17 \x01(\x0e\x32>.google.ads.googleads.v0.enums.BiddingSourceEnum.BiddingSource\x12h\n effective_percent_cpc_bid_source\x18# \x01(\x0e\x32>.google.ads.googleads.v0.enums.BiddingSourceEnum.BiddingSource\x12\x61\n\x12position_estimates\x18\n \x01(\x0b\x32\x45.google.ads.googleads.v0.resources.AdGroupCriterion.PositionEstimates\x12\x30\n\nfinal_urls\x18\x0b \x03(\x0b\x32\x1c.google.protobuf.StringValue\x12;\n\x15tracking_url_template\x18\r \x01(\x0b\x32\x1c.google.protobuf.StringValue\x12N\n\x15url_custom_parameters\x18\x0e \x03(\x0b\x32/.google.ads.googleads.v0.common.CustomParameter\x12>\n\x07keyword\x18\x1b \x01(\x0b\x32+.google.ads.googleads.v0.common.KeywordInfoH\x00\x12\x42\n\tplacement\x18\x1c \x01(\x0b\x32-.google.ads.googleads.v0.common.PlacementInfoH\x00\x12I\n\rlisting_group\x18  \x01(\x0b\x32\x30.google.ads.googleads.v0.common.ListingGroupInfoH\x00\x12\x41\n\tage_range\x18$ \x01(\x0b\x32,.google.ads.googleads.v0.common.AgeRangeInfoH\x00\x12<\n\x06gender\x18% \x01(\x0b\x32*.google.ads.googleads.v0.common.GenderInfoH\x00\x12G\n\x0cincome_range\x18& \x01(\x0b\x32/.google.ads.googleads.v0.common.IncomeRangeInfoH\x00\x12M\n\x0fparental_status\x18\' \x01(\x0b\x32\x32.google.ads.googleads.v0.common.ParentalStatusInfoH\x00\x12\x41\n\tuser_list\x18* \x01(\x0b\x32,.google.ads.googleads.v0.common.UserListInfoH\x00\x12I\n\ryoutube_video\x18( \x01(\x0b\x32\x30.google.ads.googleads.v0.common.YouTubeVideoInfoH\x00\x12M\n\x0fyoutube_channel\x18) \x01(\x0b\x32\x32.google.ads.googleads.v0.common.YouTubeChannelInfoH\x00\x12:\n\x05topic\x18+ \x01(\x0b\x32).google.ads.googleads.v0.common.TopicInfoH\x00\x12I\n\ruser_interest\x18- \x01(\x0b\x32\x30.google.ads.googleads.v0.common.UserInterestInfoH\x00\x1a\xff\x02\n\x0bQualityInfo\x12\x32\n\rquality_score\x18\x01 \x01(\x0b\x32\x1b.google.protobuf.Int32Value\x12h\n\x16\x63reative_quality_score\x18\x02 \x01(\x0e\x32H.google.ads.googleads.v0.enums.QualityScoreBucketEnum.QualityScoreBucket\x12j\n\x18post_click_quality_score\x18\x03 \x01(\x0e\x32H.google.ads.googleads.v0.enums.QualityScoreBucketEnum.QualityScoreBucket\x12\x66\n\x14search_predicted_ctr\x18\x04 \x01(\x0e\x32H.google.ads.googleads.v0.enums.QualityScoreBucketEnum.QualityScoreBucket\x1a\xcc\x01\n\x11PositionEstimates\x12:\n\x15\x66irst_page_cpc_micros\x18\x01 \x01(\x0b\x32\x1b.google.protobuf.Int64Value\x12>\n\x19\x66irst_position_cpc_micros\x18\x02 \x01(\x0b\x32\x1b.google.protobuf.Int64Value\x12;\n\x16top_of_page_cpc_micros\x18\x03 \x01(\x0b\x32\x1b.google.protobuf.Int64ValueB\x0b\n\tcriterionB\xda\x01\n%com.google.ads.googleads.v0.resourcesB\x15\x41\x64GroupCriterionProtoP\x01ZJgoogle.golang.org/genproto/googleapis/ads/googleads/v0/resources;resources\xa2\x02\x03GAA\xaa\x02!Google.Ads.GoogleAds.V0.Resources\xca\x02!Google\\Ads\\GoogleAds\\V0\\Resourcesb\x06proto3')
   ,
   dependencies=[google_dot_ads_dot_googleads__v0_dot_proto_dot_common_dot_criteria__pb2.DESCRIPTOR,google_dot_ads_dot_googleads__v0_dot_proto_dot_common_dot_custom__parameter__pb2.DESCRIPTOR,google_dot_ads_dot_googleads__v0_dot_proto_dot_enums_dot_ad__group__criterion__status__pb2.DESCRIPTOR,google_dot_ads_dot_googleads__v0_dot_proto_dot_enums_dot_bidding__source__pb2.DESCRIPTOR,google_dot_ads_dot_googleads__v0_dot_proto_dot_enums_dot_criterion__type__pb2.DESCRIPTOR,google_dot_ads_dot_googleads__v0_dot_proto_dot_enums_dot_quality__score__bucket__pb2.DESCRIPTOR,google_dot_protobuf_dot_wrappers__pb2.DESCRIPTOR,])
 
@@ -80,8 +80,8 @@ _ADGROUPCRITERION_QUALITYINFO = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=2875,
-  serialized_end=3258,
+  serialized_start=3017,
+  serialized_end=3400,
 )
 
 _ADGROUPCRITERION_POSITIONESTIMATES = _descriptor.Descriptor(
@@ -124,8 +124,8 @@ _ADGROUPCRITERION_POSITIONESTIMATES = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=3261,
-  serialized_end=3465,
+  serialized_start=3403,
+  serialized_end=3607,
 )
 
 _ADGROUPCRITERION = _descriptor.Descriptor(
@@ -353,22 +353,36 @@ _ADGROUPCRITERION = _descriptor.Descriptor(
       is_extension=False, extension_scope=None,
       options=None, file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
-      name='youtube_video', full_name='google.ads.googleads.v0.resources.AdGroupCriterion.youtube_video', index=31,
+      name='user_list', full_name='google.ads.googleads.v0.resources.AdGroupCriterion.user_list', index=31,
+      number=42, type=11, cpp_type=10, label=1,
+      has_default_value=False, default_value=None,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None, file=DESCRIPTOR),
+    _descriptor.FieldDescriptor(
+      name='youtube_video', full_name='google.ads.googleads.v0.resources.AdGroupCriterion.youtube_video', index=32,
       number=40, type=11, cpp_type=10, label=1,
       has_default_value=False, default_value=None,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None, file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
-      name='youtube_channel', full_name='google.ads.googleads.v0.resources.AdGroupCriterion.youtube_channel', index=32,
+      name='youtube_channel', full_name='google.ads.googleads.v0.resources.AdGroupCriterion.youtube_channel', index=33,
       number=41, type=11, cpp_type=10, label=1,
       has_default_value=False, default_value=None,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None, file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
-      name='topic', full_name='google.ads.googleads.v0.resources.AdGroupCriterion.topic', index=33,
+      name='topic', full_name='google.ads.googleads.v0.resources.AdGroupCriterion.topic', index=34,
       number=43, type=11, cpp_type=10, label=1,
+      has_default_value=False, default_value=None,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None, file=DESCRIPTOR),
+    _descriptor.FieldDescriptor(
+      name='user_interest', full_name='google.ads.googleads.v0.resources.AdGroupCriterion.user_interest', index=35,
+      number=45, type=11, cpp_type=10, label=1,
       has_default_value=False, default_value=None,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
@@ -389,7 +403,7 @@ _ADGROUPCRITERION = _descriptor.Descriptor(
       index=0, containing_type=None, fields=[]),
   ],
   serialized_start=499,
-  serialized_end=3478,
+  serialized_end=3620,
 )
 
 _ADGROUPCRITERION_QUALITYINFO.fields_by_name['quality_score'].message_type = google_dot_protobuf_dot_wrappers__pb2._INT32VALUE
@@ -431,9 +445,11 @@ _ADGROUPCRITERION.fields_by_name['age_range'].message_type = google_dot_ads_dot_
 _ADGROUPCRITERION.fields_by_name['gender'].message_type = google_dot_ads_dot_googleads__v0_dot_proto_dot_common_dot_criteria__pb2._GENDERINFO
 _ADGROUPCRITERION.fields_by_name['income_range'].message_type = google_dot_ads_dot_googleads__v0_dot_proto_dot_common_dot_criteria__pb2._INCOMERANGEINFO
 _ADGROUPCRITERION.fields_by_name['parental_status'].message_type = google_dot_ads_dot_googleads__v0_dot_proto_dot_common_dot_criteria__pb2._PARENTALSTATUSINFO
+_ADGROUPCRITERION.fields_by_name['user_list'].message_type = google_dot_ads_dot_googleads__v0_dot_proto_dot_common_dot_criteria__pb2._USERLISTINFO
 _ADGROUPCRITERION.fields_by_name['youtube_video'].message_type = google_dot_ads_dot_googleads__v0_dot_proto_dot_common_dot_criteria__pb2._YOUTUBEVIDEOINFO
 _ADGROUPCRITERION.fields_by_name['youtube_channel'].message_type = google_dot_ads_dot_googleads__v0_dot_proto_dot_common_dot_criteria__pb2._YOUTUBECHANNELINFO
 _ADGROUPCRITERION.fields_by_name['topic'].message_type = google_dot_ads_dot_googleads__v0_dot_proto_dot_common_dot_criteria__pb2._TOPICINFO
+_ADGROUPCRITERION.fields_by_name['user_interest'].message_type = google_dot_ads_dot_googleads__v0_dot_proto_dot_common_dot_criteria__pb2._USERINTERESTINFO
 _ADGROUPCRITERION.oneofs_by_name['criterion'].fields.append(
   _ADGROUPCRITERION.fields_by_name['keyword'])
 _ADGROUPCRITERION.fields_by_name['keyword'].containing_oneof = _ADGROUPCRITERION.oneofs_by_name['criterion']
@@ -456,6 +472,9 @@ _ADGROUPCRITERION.oneofs_by_name['criterion'].fields.append(
   _ADGROUPCRITERION.fields_by_name['parental_status'])
 _ADGROUPCRITERION.fields_by_name['parental_status'].containing_oneof = _ADGROUPCRITERION.oneofs_by_name['criterion']
 _ADGROUPCRITERION.oneofs_by_name['criterion'].fields.append(
+  _ADGROUPCRITERION.fields_by_name['user_list'])
+_ADGROUPCRITERION.fields_by_name['user_list'].containing_oneof = _ADGROUPCRITERION.oneofs_by_name['criterion']
+_ADGROUPCRITERION.oneofs_by_name['criterion'].fields.append(
   _ADGROUPCRITERION.fields_by_name['youtube_video'])
 _ADGROUPCRITERION.fields_by_name['youtube_video'].containing_oneof = _ADGROUPCRITERION.oneofs_by_name['criterion']
 _ADGROUPCRITERION.oneofs_by_name['criterion'].fields.append(
@@ -464,6 +483,9 @@ _ADGROUPCRITERION.fields_by_name['youtube_channel'].containing_oneof = _ADGROUPC
 _ADGROUPCRITERION.oneofs_by_name['criterion'].fields.append(
   _ADGROUPCRITERION.fields_by_name['topic'])
 _ADGROUPCRITERION.fields_by_name['topic'].containing_oneof = _ADGROUPCRITERION.oneofs_by_name['criterion']
+_ADGROUPCRITERION.oneofs_by_name['criterion'].fields.append(
+  _ADGROUPCRITERION.fields_by_name['user_interest'])
+_ADGROUPCRITERION.fields_by_name['user_interest'].containing_oneof = _ADGROUPCRITERION.oneofs_by_name['criterion']
 DESCRIPTOR.message_types_by_name['AdGroupCriterion'] = _ADGROUPCRITERION
 _sym_db.RegisterFileDescriptor(DESCRIPTOR)
 
@@ -471,7 +493,7 @@ AdGroupCriterion = _reflection.GeneratedProtocolMessageType('AdGroupCriterion', 
 
   QualityInfo = _reflection.GeneratedProtocolMessageType('QualityInfo', (_message.Message,), dict(
     DESCRIPTOR = _ADGROUPCRITERION_QUALITYINFO,
-    __module__ = 'google.ads.googleads_v0.proto.resources.ad_group_criterion_pb2'
+    __module__ = 'google.ads.google_ads.v0.proto.resources.ad_group_criterion_pb2'
     ,
     __doc__ = """A container for ad group criterion quality information.
     
@@ -493,7 +515,7 @@ AdGroupCriterion = _reflection.GeneratedProtocolMessageType('AdGroupCriterion', 
 
   PositionEstimates = _reflection.GeneratedProtocolMessageType('PositionEstimates', (_message.Message,), dict(
     DESCRIPTOR = _ADGROUPCRITERION_POSITIONESTIMATES,
-    __module__ = 'google.ads.googleads_v0.proto.resources.ad_group_criterion_pb2'
+    __module__ = 'google.ads.google_ads.v0.proto.resources.ad_group_criterion_pb2'
     ,
     __doc__ = """Estimates for criterion bids at various positions.
     
@@ -514,7 +536,7 @@ AdGroupCriterion = _reflection.GeneratedProtocolMessageType('AdGroupCriterion', 
     ))
   ,
   DESCRIPTOR = _ADGROUPCRITERION,
-  __module__ = 'google.ads.googleads_v0.proto.resources.ad_group_criterion_pb2'
+  __module__ = 'google.ads.google_ads.v0.proto.resources.ad_group_criterion_pb2'
   ,
   __doc__ = """An ad group criterion.
   
@@ -597,12 +619,16 @@ AdGroupCriterion = _reflection.GeneratedProtocolMessageType('AdGroupCriterion', 
           Income range.
       parental_status:
           Parental status.
+      user_list:
+          User List.
       youtube_video:
           YouTube Video.
       youtube_channel:
           YouTube Channel.
       topic:
           Topic.
+      user_interest:
+          User Interest.
   """,
   # @@protoc_insertion_point(class_scope:google.ads.googleads.v0.resources.AdGroupCriterion)
   ))

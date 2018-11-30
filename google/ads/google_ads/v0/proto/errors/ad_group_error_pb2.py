@@ -125,7 +125,7 @@ _sym_db.RegisterFileDescriptor(DESCRIPTOR)
 
 AdGroupErrorEnum = _reflection.GeneratedProtocolMessageType('AdGroupErrorEnum', (_message.Message,), dict(
   DESCRIPTOR = _ADGROUPERRORENUM,
-  __module__ = 'google.ads.googleads_v0.proto.errors.ad_group_error_pb2'
+  __module__ = 'google.ads.google_ads.v0.proto.errors.ad_group_error_pb2'
   ,
   __doc__ = """Container for enum describing possible ad group errors.
   """,

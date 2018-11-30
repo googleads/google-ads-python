@@ -60,7 +60,7 @@ _sym_db.RegisterFileDescriptor(DESCRIPTOR)
 
 ParentalStatusView = _reflection.GeneratedProtocolMessageType('ParentalStatusView', (_message.Message,), dict(
   DESCRIPTOR = _PARENTALSTATUSVIEW,
-  __module__ = 'google.ads.googleads_v0.proto.resources.parental_status_view_pb2'
+  __module__ = 'google.ads.google_ads.v0.proto.resources.parental_status_view_pb2'
   ,
   __doc__ = """A parental status view.
   

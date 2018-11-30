@@ -87,7 +87,7 @@ _sym_db.RegisterFileDescriptor(DESCRIPTOR)
 
 CampaignGroup = _reflection.GeneratedProtocolMessageType('CampaignGroup', (_message.Message,), dict(
   DESCRIPTOR = _CAMPAIGNGROUP,
-  __module__ = 'google.ads.googleads_v0.proto.resources.campaign_group_pb2'
+  __module__ = 'google.ads.google_ads.v0.proto.resources.campaign_group_pb2'
   ,
   __doc__ = """A campaign group.
   

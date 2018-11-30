@@ -237,7 +237,7 @@ _sym_db.RegisterFileDescriptor(DESCRIPTOR)
 
 GetAdGroupBidModifierRequest = _reflection.GeneratedProtocolMessageType('GetAdGroupBidModifierRequest', (_message.Message,), dict(
   DESCRIPTOR = _GETADGROUPBIDMODIFIERREQUEST,
-  __module__ = 'google.ads.googleads_v0.proto.services.ad_group_bid_modifier_service_pb2'
+  __module__ = 'google.ads.google_ads.v0.proto.services.ad_group_bid_modifier_service_pb2'
   ,
   __doc__ = """Request message for
   [AdGroupBidModifierService.GetAdGroupBidModifier][google.ads.googleads.v0.services.AdGroupBidModifierService.GetAdGroupBidModifier].
@@ -253,7 +253,7 @@ _sym_db.RegisterMessage(GetAdGroupBidModifierRequest)
 
 MutateAdGroupBidModifiersRequest = _reflection.GeneratedProtocolMessageType('MutateAdGroupBidModifiersRequest', (_message.Message,), dict(
   DESCRIPTOR = _MUTATEADGROUPBIDMODIFIERSREQUEST,
-  __module__ = 'google.ads.googleads_v0.proto.services.ad_group_bid_modifier_service_pb2'
+  __module__ = 'google.ads.google_ads.v0.proto.services.ad_group_bid_modifier_service_pb2'
   ,
   __doc__ = """Request message for
   [AdGroupBidModifierService.MutateAdGroupBidModifiers][google.ads.googleads.v0.services.AdGroupBidModifierService.MutateAdGroupBidModifiers].
@@ -273,7 +273,7 @@ _sym_db.RegisterMessage(MutateAdGroupBidModifiersRequest)
 
 AdGroupBidModifierOperation = _reflection.GeneratedProtocolMessageType('AdGroupBidModifierOperation', (_message.Message,), dict(
   DESCRIPTOR = _ADGROUPBIDMODIFIEROPERATION,
-  __module__ = 'google.ads.googleads_v0.proto.services.ad_group_bid_modifier_service_pb2'
+  __module__ = 'google.ads.google_ads.v0.proto.services.ad_group_bid_modifier_service_pb2'
   ,
   __doc__ = """A single operation (create, remove, update) on an ad group bid modifier.
   
@@ -301,7 +301,7 @@ _sym_db.RegisterMessage(AdGroupBidModifierOperation)
 
 MutateAdGroupBidModifiersResponse = _reflection.GeneratedProtocolMessageType('MutateAdGroupBidModifiersResponse', (_message.Message,), dict(
   DESCRIPTOR = _MUTATEADGROUPBIDMODIFIERSRESPONSE,
-  __module__ = 'google.ads.googleads_v0.proto.services.ad_group_bid_modifier_service_pb2'
+  __module__ = 'google.ads.google_ads.v0.proto.services.ad_group_bid_modifier_service_pb2'
   ,
   __doc__ = """Response message for ad group bid modifiers mutate.
   
@@ -316,7 +316,7 @@ _sym_db.RegisterMessage(MutateAdGroupBidModifiersResponse)
 
 MutateAdGroupBidModifierResult = _reflection.GeneratedProtocolMessageType('MutateAdGroupBidModifierResult', (_message.Message,), dict(
   DESCRIPTOR = _MUTATEADGROUPBIDMODIFIERRESULT,
-  __module__ = 'google.ads.googleads_v0.proto.services.ad_group_bid_modifier_service_pb2'
+  __module__ = 'google.ads.google_ads.v0.proto.services.ad_group_bid_modifier_service_pb2'
   ,
   __doc__ = """The result for the criterion mutate.
   

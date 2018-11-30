@@ -19,7 +19,7 @@ DESCRIPTOR = _descriptor.FileDescriptor(
   name='google/ads/googleads_v0/proto/errors/new_resource_creation_error.proto',
   package='google.ads.googleads.v0.errors',
   syntax='proto3',
-  serialized_pb=_b('\nFgoogle/ads/googleads_v0/proto/errors/new_resource_creation_error.proto\x12\x1egoogle.ads.googleads.v0.errors\"\xad\x01\n\x1cNewResourceCreationErrorEnum\"\x8c\x01\n\x18NewResourceCreationError\x12\x0f\n\x0bUNSPECIFIED\x10\x00\x12\x0b\n\x07UNKNOWN\x10\x01\x12\x19\n\x15\x43\x41NNOT_SET_ID_FOR_ADD\x10\x02\x12\x16\n\x12\x44UPLICATE_TEMP_IDS\x10\x03\x12\x1f\n\x1bTEMP_ID_RESOURCE_HAD_ERRORS\x10\x04\x42\xd3\x01\n\"com.google.ads.googleads.v0.errorsB\x1dNewResourceCreationErrorProtoP\x01ZDgoogle.golang.org/genproto/googleapis/ads/googleads/v0/errors;errors\xa2\x02\x03GAA\xaa\x02\x1eGoogle.Ads.GoogleAds.V0.Errors\xca\x02\x1eGoogle\\Ads\\GoogleAds\\V0\\Errorsb\x06proto3')
+  serialized_pb=_b('\nFgoogle/ads/googleads_v0/proto/errors/new_resource_creation_error.proto\x12\x1egoogle.ads.googleads.v0.errors\"\xb0\x01\n\x1cNewResourceCreationErrorEnum\"\x8f\x01\n\x18NewResourceCreationError\x12\x0f\n\x0bUNSPECIFIED\x10\x00\x12\x0b\n\x07UNKNOWN\x10\x01\x12\x1c\n\x18\x43\x41NNOT_SET_ID_FOR_CREATE\x10\x02\x12\x16\n\x12\x44UPLICATE_TEMP_IDS\x10\x03\x12\x1f\n\x1bTEMP_ID_RESOURCE_HAD_ERRORS\x10\x04\x42\xd3\x01\n\"com.google.ads.googleads.v0.errorsB\x1dNewResourceCreationErrorProtoP\x01ZDgoogle.golang.org/genproto/googleapis/ads/googleads/v0/errors;errors\xa2\x02\x03GAA\xaa\x02\x1eGoogle.Ads.GoogleAds.V0.Errors\xca\x02\x1eGoogle\\Ads\\GoogleAds\\V0\\Errorsb\x06proto3')
 )
 
 
@@ -39,7 +39,7 @@ _NEWRESOURCECREATIONERRORENUM_NEWRESOURCECREATIONERROR = _descriptor.EnumDescrip
       options=None,
       type=None),
     _descriptor.EnumValueDescriptor(
-      name='CANNOT_SET_ID_FOR_ADD', index=2, number=2,
+      name='CANNOT_SET_ID_FOR_CREATE', index=2, number=2,
       options=None,
       type=None),
     _descriptor.EnumValueDescriptor(
@@ -54,7 +54,7 @@ _NEWRESOURCECREATIONERRORENUM_NEWRESOURCECREATIONERROR = _descriptor.EnumDescrip
   containing_type=None,
   options=None,
   serialized_start=140,
-  serialized_end=280,
+  serialized_end=283,
 )
 _sym_db.RegisterEnumDescriptor(_NEWRESOURCECREATIONERRORENUM_NEWRESOURCECREATIONERROR)
 
@@ -80,7 +80,7 @@ _NEWRESOURCECREATIONERRORENUM = _descriptor.Descriptor(
   oneofs=[
   ],
   serialized_start=107,
-  serialized_end=280,
+  serialized_end=283,
 )
 
 _NEWRESOURCECREATIONERRORENUM_NEWRESOURCECREATIONERROR.containing_type = _NEWRESOURCECREATIONERRORENUM
@@ -89,7 +89,7 @@ _sym_db.RegisterFileDescriptor(DESCRIPTOR)
 
 NewResourceCreationErrorEnum = _reflection.GeneratedProtocolMessageType('NewResourceCreationErrorEnum', (_message.Message,), dict(
   DESCRIPTOR = _NEWRESOURCECREATIONERRORENUM,
-  __module__ = 'google.ads.googleads_v0.proto.errors.new_resource_creation_error_pb2'
+  __module__ = 'google.ads.google_ads.v0.proto.errors.new_resource_creation_error_pb2'
   ,
   __doc__ = """Container for enum describing possible new resource creation errors.
   """,

@@ -24,7 +24,7 @@ DESCRIPTOR = _descriptor.FileDescriptor(
   name='google/ads/googleads_v0/proto/resources/ad.proto',
   package='google.ads.googleads.v0.resources',
   syntax='proto3',
-  serialized_pb=_b('\n0google/ads/googleads_v0/proto/resources/ad.proto\x12!google.ads.googleads.v0.resources\x1a\x38google/ads/googleads_v0/proto/common/ad_type_infos.proto\x1a;google/ads/googleads_v0/proto/common/custom_parameter.proto\x1a\x31google/ads/googleads_v0/proto/enums/ad_type.proto\x1a\x30google/ads/googleads_v0/proto/enums/device.proto\x1a\x1egoogle/protobuf/wrappers.proto\"\xf8\t\n\x02\x41\x64\x12\'\n\x02id\x18\x01 \x01(\x0b\x32\x1b.google.protobuf.Int64Value\x12\x30\n\nfinal_urls\x18\x02 \x03(\x0b\x32\x1c.google.protobuf.StringValue\x12\x37\n\x11\x66inal_mobile_urls\x18\x10 \x03(\x0b\x32\x1c.google.protobuf.StringValue\x12;\n\x15tracking_url_template\x18\x0c \x01(\x0b\x32\x1c.google.protobuf.StringValue\x12N\n\x15url_custom_parameters\x18\n \x03(\x0b\x32/.google.ads.googleads.v0.common.CustomParameter\x12\x31\n\x0b\x64isplay_url\x18\x04 \x01(\x0b\x32\x1c.google.protobuf.StringValue\x12>\n\x04type\x18\x05 \x01(\x0e\x32\x30.google.ads.googleads.v0.enums.AdTypeEnum.AdType\x12\x37\n\x13\x61\x64\x64\x65\x64_by_google_ads\x18\x13 \x01(\x0b\x32\x1a.google.protobuf.BoolValue\x12K\n\x11\x64\x65vice_preference\x18\x14 \x01(\x0e\x32\x30.google.ads.googleads.v0.enums.DeviceEnum.Device\x12=\n\x07text_ad\x18\x06 \x01(\x0b\x32*.google.ads.googleads.v0.common.TextAdInfoH\x00\x12N\n\x10\x65xpanded_text_ad\x18\x07 \x01(\x0b\x32\x32.google.ads.googleads.v0.common.ExpandedTextAdInfoH\x00\x12P\n\x11\x64ynamic_search_ad\x18\x08 \x01(\x0b\x32\x33.google.ads.googleads.v0.common.DynamicSearchAdInfoH\x00\x12X\n\x15responsive_display_ad\x18\t \x01(\x0b\x32\x37.google.ads.googleads.v0.common.ResponsiveDisplayAdInfoH\x00\x12\x46\n\x0c\x63\x61ll_only_ad\x18\r \x01(\x0b\x32..google.ads.googleads.v0.common.CallOnlyAdInfoH\x00\x12\x61\n\x1a\x65xpanded_dynamic_search_ad\x18\x0e \x01(\x0b\x32;.google.ads.googleads.v0.common.ExpandedDynamicSearchAdInfoH\x00\x12?\n\x08hotel_ad\x18\x0f \x01(\x0b\x32+.google.ads.googleads.v0.common.HotelAdInfoH\x00\x12P\n\x11shopping_smart_ad\x18\x11 \x01(\x0b\x32\x33.google.ads.googleads.v0.common.ShoppingSmartAdInfoH\x00\x12T\n\x13shopping_product_ad\x18\x12 \x01(\x0b\x32\x35.google.ads.googleads.v0.common.ShoppingProductAdInfoH\x00\x42\t\n\x07\x61\x64_dataB\xcc\x01\n%com.google.ads.googleads.v0.resourcesB\x07\x41\x64ProtoP\x01ZJgoogle.golang.org/genproto/googleapis/ads/googleads/v0/resources;resources\xa2\x02\x03GAA\xaa\x02!Google.Ads.GoogleAds.V0.Resources\xca\x02!Google\\Ads\\GoogleAds\\V0\\Resourcesb\x06proto3')
+  serialized_pb=_b('\n0google/ads/googleads_v0/proto/resources/ad.proto\x12!google.ads.googleads.v0.resources\x1a\x38google/ads/googleads_v0/proto/common/ad_type_infos.proto\x1a;google/ads/googleads_v0/proto/common/custom_parameter.proto\x1a\x31google/ads/googleads_v0/proto/enums/ad_type.proto\x1a\x30google/ads/googleads_v0/proto/enums/device.proto\x1a\x1egoogle/protobuf/wrappers.proto\"\xa6\x0b\n\x02\x41\x64\x12\'\n\x02id\x18\x01 \x01(\x0b\x32\x1b.google.protobuf.Int64Value\x12\x30\n\nfinal_urls\x18\x02 \x03(\x0b\x32\x1c.google.protobuf.StringValue\x12\x37\n\x11\x66inal_mobile_urls\x18\x10 \x03(\x0b\x32\x1c.google.protobuf.StringValue\x12;\n\x15tracking_url_template\x18\x0c \x01(\x0b\x32\x1c.google.protobuf.StringValue\x12N\n\x15url_custom_parameters\x18\n \x03(\x0b\x32/.google.ads.googleads.v0.common.CustomParameter\x12\x31\n\x0b\x64isplay_url\x18\x04 \x01(\x0b\x32\x1c.google.protobuf.StringValue\x12>\n\x04type\x18\x05 \x01(\x0e\x32\x30.google.ads.googleads.v0.enums.AdTypeEnum.AdType\x12\x37\n\x13\x61\x64\x64\x65\x64_by_google_ads\x18\x13 \x01(\x0b\x32\x1a.google.protobuf.BoolValue\x12K\n\x11\x64\x65vice_preference\x18\x14 \x01(\x0e\x32\x30.google.ads.googleads.v0.enums.DeviceEnum.Device\x12*\n\x04name\x18\x17 \x01(\x0b\x32\x1c.google.protobuf.StringValue\x12=\n\x07text_ad\x18\x06 \x01(\x0b\x32*.google.ads.googleads.v0.common.TextAdInfoH\x00\x12N\n\x10\x65xpanded_text_ad\x18\x07 \x01(\x0b\x32\x32.google.ads.googleads.v0.common.ExpandedTextAdInfoH\x00\x12P\n\x11\x64ynamic_search_ad\x18\x08 \x01(\x0b\x32\x33.google.ads.googleads.v0.common.DynamicSearchAdInfoH\x00\x12X\n\x15responsive_display_ad\x18\t \x01(\x0b\x32\x37.google.ads.googleads.v0.common.ResponsiveDisplayAdInfoH\x00\x12\x46\n\x0c\x63\x61ll_only_ad\x18\r \x01(\x0b\x32..google.ads.googleads.v0.common.CallOnlyAdInfoH\x00\x12\x61\n\x1a\x65xpanded_dynamic_search_ad\x18\x0e \x01(\x0b\x32;.google.ads.googleads.v0.common.ExpandedDynamicSearchAdInfoH\x00\x12?\n\x08hotel_ad\x18\x0f \x01(\x0b\x32+.google.ads.googleads.v0.common.HotelAdInfoH\x00\x12P\n\x11shopping_smart_ad\x18\x11 \x01(\x0b\x32\x33.google.ads.googleads.v0.common.ShoppingSmartAdInfoH\x00\x12T\n\x13shopping_product_ad\x18\x12 \x01(\x0b\x32\x35.google.ads.googleads.v0.common.ShoppingProductAdInfoH\x00\x12?\n\x08gmail_ad\x18\x15 \x01(\x0b\x32+.google.ads.googleads.v0.common.GmailAdInfoH\x00\x12?\n\x08image_ad\x18\x16 \x01(\x0b\x32+.google.ads.googleads.v0.common.ImageAdInfoH\x00\x42\t\n\x07\x61\x64_dataB\xcc\x01\n%com.google.ads.googleads.v0.resourcesB\x07\x41\x64ProtoP\x01ZJgoogle.golang.org/genproto/googleapis/ads/googleads/v0/resources;resources\xa2\x02\x03GAA\xaa\x02!Google.Ads.GoogleAds.V0.Resources\xca\x02!Google\\Ads\\GoogleAds\\V0\\Resourcesb\x06proto3')
   ,
   dependencies=[google_dot_ads_dot_googleads__v0_dot_proto_dot_common_dot_ad__type__infos__pb2.DESCRIPTOR,google_dot_ads_dot_googleads__v0_dot_proto_dot_common_dot_custom__parameter__pb2.DESCRIPTOR,google_dot_ads_dot_googleads__v0_dot_proto_dot_enums_dot_ad__type__pb2.DESCRIPTOR,google_dot_ads_dot_googleads__v0_dot_proto_dot_enums_dot_device__pb2.DESCRIPTOR,google_dot_protobuf_dot_wrappers__pb2.DESCRIPTOR,])
 
@@ -102,64 +102,85 @@ _AD = _descriptor.Descriptor(
       is_extension=False, extension_scope=None,
       options=None, file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
-      name='text_ad', full_name='google.ads.googleads.v0.resources.Ad.text_ad', index=9,
+      name='name', full_name='google.ads.googleads.v0.resources.Ad.name', index=9,
+      number=23, type=11, cpp_type=10, label=1,
+      has_default_value=False, default_value=None,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None, file=DESCRIPTOR),
+    _descriptor.FieldDescriptor(
+      name='text_ad', full_name='google.ads.googleads.v0.resources.Ad.text_ad', index=10,
       number=6, type=11, cpp_type=10, label=1,
       has_default_value=False, default_value=None,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None, file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
-      name='expanded_text_ad', full_name='google.ads.googleads.v0.resources.Ad.expanded_text_ad', index=10,
+      name='expanded_text_ad', full_name='google.ads.googleads.v0.resources.Ad.expanded_text_ad', index=11,
       number=7, type=11, cpp_type=10, label=1,
       has_default_value=False, default_value=None,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None, file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
-      name='dynamic_search_ad', full_name='google.ads.googleads.v0.resources.Ad.dynamic_search_ad', index=11,
+      name='dynamic_search_ad', full_name='google.ads.googleads.v0.resources.Ad.dynamic_search_ad', index=12,
       number=8, type=11, cpp_type=10, label=1,
       has_default_value=False, default_value=None,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None, file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
-      name='responsive_display_ad', full_name='google.ads.googleads.v0.resources.Ad.responsive_display_ad', index=12,
+      name='responsive_display_ad', full_name='google.ads.googleads.v0.resources.Ad.responsive_display_ad', index=13,
       number=9, type=11, cpp_type=10, label=1,
       has_default_value=False, default_value=None,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None, file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
-      name='call_only_ad', full_name='google.ads.googleads.v0.resources.Ad.call_only_ad', index=13,
+      name='call_only_ad', full_name='google.ads.googleads.v0.resources.Ad.call_only_ad', index=14,
       number=13, type=11, cpp_type=10, label=1,
       has_default_value=False, default_value=None,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None, file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
-      name='expanded_dynamic_search_ad', full_name='google.ads.googleads.v0.resources.Ad.expanded_dynamic_search_ad', index=14,
+      name='expanded_dynamic_search_ad', full_name='google.ads.googleads.v0.resources.Ad.expanded_dynamic_search_ad', index=15,
       number=14, type=11, cpp_type=10, label=1,
       has_default_value=False, default_value=None,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None, file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
-      name='hotel_ad', full_name='google.ads.googleads.v0.resources.Ad.hotel_ad', index=15,
+      name='hotel_ad', full_name='google.ads.googleads.v0.resources.Ad.hotel_ad', index=16,
       number=15, type=11, cpp_type=10, label=1,
       has_default_value=False, default_value=None,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None, file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
-      name='shopping_smart_ad', full_name='google.ads.googleads.v0.resources.Ad.shopping_smart_ad', index=16,
+      name='shopping_smart_ad', full_name='google.ads.googleads.v0.resources.Ad.shopping_smart_ad', index=17,
       number=17, type=11, cpp_type=10, label=1,
       has_default_value=False, default_value=None,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None, file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
-      name='shopping_product_ad', full_name='google.ads.googleads.v0.resources.Ad.shopping_product_ad', index=17,
+      name='shopping_product_ad', full_name='google.ads.googleads.v0.resources.Ad.shopping_product_ad', index=18,
       number=18, type=11, cpp_type=10, label=1,
+      has_default_value=False, default_value=None,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None, file=DESCRIPTOR),
+    _descriptor.FieldDescriptor(
+      name='gmail_ad', full_name='google.ads.googleads.v0.resources.Ad.gmail_ad', index=19,
+      number=21, type=11, cpp_type=10, label=1,
+      has_default_value=False, default_value=None,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None, file=DESCRIPTOR),
+    _descriptor.FieldDescriptor(
+      name='image_ad', full_name='google.ads.googleads.v0.resources.Ad.image_ad', index=20,
+      number=22, type=11, cpp_type=10, label=1,
       has_default_value=False, default_value=None,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
@@ -180,7 +201,7 @@ _AD = _descriptor.Descriptor(
       index=0, containing_type=None, fields=[]),
   ],
   serialized_start=340,
-  serialized_end=1612,
+  serialized_end=1786,
 )
 
 _AD.fields_by_name['id'].message_type = google_dot_protobuf_dot_wrappers__pb2._INT64VALUE
@@ -192,6 +213,7 @@ _AD.fields_by_name['display_url'].message_type = google_dot_protobuf_dot_wrapper
 _AD.fields_by_name['type'].enum_type = google_dot_ads_dot_googleads__v0_dot_proto_dot_enums_dot_ad__type__pb2._ADTYPEENUM_ADTYPE
 _AD.fields_by_name['added_by_google_ads'].message_type = google_dot_protobuf_dot_wrappers__pb2._BOOLVALUE
 _AD.fields_by_name['device_preference'].enum_type = google_dot_ads_dot_googleads__v0_dot_proto_dot_enums_dot_device__pb2._DEVICEENUM_DEVICE
+_AD.fields_by_name['name'].message_type = google_dot_protobuf_dot_wrappers__pb2._STRINGVALUE
 _AD.fields_by_name['text_ad'].message_type = google_dot_ads_dot_googleads__v0_dot_proto_dot_common_dot_ad__type__infos__pb2._TEXTADINFO
 _AD.fields_by_name['expanded_text_ad'].message_type = google_dot_ads_dot_googleads__v0_dot_proto_dot_common_dot_ad__type__infos__pb2._EXPANDEDTEXTADINFO
 _AD.fields_by_name['dynamic_search_ad'].message_type = google_dot_ads_dot_googleads__v0_dot_proto_dot_common_dot_ad__type__infos__pb2._DYNAMICSEARCHADINFO
@@ -201,6 +223,8 @@ _AD.fields_by_name['expanded_dynamic_search_ad'].message_type = google_dot_ads_d
 _AD.fields_by_name['hotel_ad'].message_type = google_dot_ads_dot_googleads__v0_dot_proto_dot_common_dot_ad__type__infos__pb2._HOTELADINFO
 _AD.fields_by_name['shopping_smart_ad'].message_type = google_dot_ads_dot_googleads__v0_dot_proto_dot_common_dot_ad__type__infos__pb2._SHOPPINGSMARTADINFO
 _AD.fields_by_name['shopping_product_ad'].message_type = google_dot_ads_dot_googleads__v0_dot_proto_dot_common_dot_ad__type__infos__pb2._SHOPPINGPRODUCTADINFO
+_AD.fields_by_name['gmail_ad'].message_type = google_dot_ads_dot_googleads__v0_dot_proto_dot_common_dot_ad__type__infos__pb2._GMAILADINFO
+_AD.fields_by_name['image_ad'].message_type = google_dot_ads_dot_googleads__v0_dot_proto_dot_common_dot_ad__type__infos__pb2._IMAGEADINFO
 _AD.oneofs_by_name['ad_data'].fields.append(
   _AD.fields_by_name['text_ad'])
 _AD.fields_by_name['text_ad'].containing_oneof = _AD.oneofs_by_name['ad_data']
@@ -228,12 +252,18 @@ _AD.fields_by_name['shopping_smart_ad'].containing_oneof = _AD.oneofs_by_name['a
 _AD.oneofs_by_name['ad_data'].fields.append(
   _AD.fields_by_name['shopping_product_ad'])
 _AD.fields_by_name['shopping_product_ad'].containing_oneof = _AD.oneofs_by_name['ad_data']
+_AD.oneofs_by_name['ad_data'].fields.append(
+  _AD.fields_by_name['gmail_ad'])
+_AD.fields_by_name['gmail_ad'].containing_oneof = _AD.oneofs_by_name['ad_data']
+_AD.oneofs_by_name['ad_data'].fields.append(
+  _AD.fields_by_name['image_ad'])
+_AD.fields_by_name['image_ad'].containing_oneof = _AD.oneofs_by_name['ad_data']
 DESCRIPTOR.message_types_by_name['Ad'] = _AD
 _sym_db.RegisterFileDescriptor(DESCRIPTOR)
 
 Ad = _reflection.GeneratedProtocolMessageType('Ad', (_message.Message,), dict(
   DESCRIPTOR = _AD,
-  __module__ = 'google.ads.googleads_v0.proto.resources.ad_pb2'
+  __module__ = 'google.ads.google_ads.v0.proto.resources.ad_pb2'
   ,
   __doc__ = """An ad.
   
@@ -271,6 +301,10 @@ Ad = _reflection.GeneratedProtocolMessageType('Ad', (_message.Message,), dict(
           types, e.g. if no other ads are available. If unspecified (no
           device preference), all devices are targeted. This is only
           supported by some ad types.
+      name:
+          The name of the ad. This is only used to be able to identify
+          the ad. It does not need to be unique and does not affect the
+          served ad.
       ad_data:
           Details pertinent to the ad type. Exactly one value must be
           set.
@@ -296,6 +330,10 @@ Ad = _reflection.GeneratedProtocolMessageType('Ad', (_message.Message,), dict(
           Details pertaining to a Smart Shopping ad.
       shopping_product_ad:
           Details pertaining to a Shopping product ad.
+      gmail_ad:
+          Details pertaining to a Gmail ad.
+      image_ad:
+          Details pertaining to an Image ad.
   """,
   # @@protoc_insertion_point(class_scope:google.ads.googleads.v0.resources.Ad)
   ))

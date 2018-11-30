@@ -279,7 +279,7 @@ _sym_db.RegisterFileDescriptor(DESCRIPTOR)
 
 AccountBudgetProposal = _reflection.GeneratedProtocolMessageType('AccountBudgetProposal', (_message.Message,), dict(
   DESCRIPTOR = _ACCOUNTBUDGETPROPOSAL,
-  __module__ = 'google.ads.googleads_v0.proto.resources.account_budget_proposal_pb2'
+  __module__ = 'google.ads.google_ads.v0.proto.resources.account_budget_proposal_pb2'
   ,
   __doc__ = """An account-level budget proposal.
   
@@ -314,7 +314,7 @@ AccountBudgetProposal = _reflection.GeneratedProtocolMessageType('AccountBudgetP
       proposed_name:
           The name to assign to the account-level budget.
       approved_start_date_time:
-          The approved start date time in yyyy-MM-dd HH:mm:ss format.
+          The approved start date time in yyyy-mm-dd hh:mm:ss format.
       proposed_purchase_order_number:
           A purchase order number is a value that enables the user to
           help them reference this budget in their monthly invoices.
@@ -331,21 +331,21 @@ AccountBudgetProposal = _reflection.GeneratedProtocolMessageType('AccountBudgetP
           The proposed start date time of the account-level budget,
           which cannot be in the past.
       proposed_start_date_time:
-          The proposed start date time in yyyy-MM-dd HH:mm:ss format.
+          The proposed start date time in yyyy-mm-dd hh:mm:ss format.
       proposed_start_time_type:
           The proposed start date time as a well-defined type, e.g. NOW.
       proposed_end_time:
           The proposed end date time of the account-level budget, which
           cannot be in the past.
       proposed_end_date_time:
-          The proposed end date time in yyyy-MM-dd HH:mm:ss format.
+          The proposed end date time in yyyy-mm-dd hh:mm:ss format.
       proposed_end_time_type:
           The proposed end date time as a well-defined type, e.g.
           FOREVER.
       approved_end_time:
           The approved end date time of the account-level budget.
       approved_end_date_time:
-          The approved end date time in yyyy-MM-dd HH:mm:ss format.
+          The approved end date time in yyyy-mm-dd hh:mm:ss format.
       approved_end_time_type:
           The approved end date time as a well-defined type, e.g.
           FOREVER.

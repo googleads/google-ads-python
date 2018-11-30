@@ -115,3 +115,16 @@ class RecommendationServiceGrpcTransport(object):
                 deserialized response object.
         """
         return self._stubs['recommendation_service_stub'].ApplyRecommendation
+
+    @property
+    def dismiss_recommendation(self):
+        """Return the gRPC stub for {$apiMethod.name}.
+
+        Dismisses given recommendations.
+
+        Returns:
+            Callable: A callable which accepts the appropriate
+                deserialized request object and returns a
+                deserialized response object.
+        """
+        return self._stubs['recommendation_service_stub'].DismissRecommendation

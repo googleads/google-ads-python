@@ -19,6 +19,11 @@ class GoogleAdsServiceStub(object):
         request_serializer=google_dot_ads_dot_googleads__v0_dot_proto_dot_services_dot_google__ads__service__pb2.SearchGoogleAdsRequest.SerializeToString,
         response_deserializer=google_dot_ads_dot_googleads__v0_dot_proto_dot_services_dot_google__ads__service__pb2.SearchGoogleAdsResponse.FromString,
         )
+    self.Mutate = channel.unary_unary(
+        '/google.ads.googleads.v0.services.GoogleAdsService/Mutate',
+        request_serializer=google_dot_ads_dot_googleads__v0_dot_proto_dot_services_dot_google__ads__service__pb2.MutateGoogleAdsRequest.SerializeToString,
+        response_deserializer=google_dot_ads_dot_googleads__v0_dot_proto_dot_services_dot_google__ads__service__pb2.MutateGoogleAdsResponse.FromString,
+        )
 
 
 class GoogleAdsServiceServicer(object):
@@ -32,6 +37,13 @@ class GoogleAdsServiceServicer(object):
     context.set_details('Method not implemented!')
     raise NotImplementedError('Method not implemented!')
 
+  def Mutate(self, request, context):
+    """Creates, updates, or removes resources. Operation statuses are returned.
+    """
+    context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+    context.set_details('Method not implemented!')
+    raise NotImplementedError('Method not implemented!')
+
 
 def add_GoogleAdsServiceServicer_to_server(servicer, server):
   rpc_method_handlers = {
@@ -39,6 +51,11 @@ def add_GoogleAdsServiceServicer_to_server(servicer, server):
           servicer.Search,
           request_deserializer=google_dot_ads_dot_googleads__v0_dot_proto_dot_services_dot_google__ads__service__pb2.SearchGoogleAdsRequest.FromString,
           response_serializer=google_dot_ads_dot_googleads__v0_dot_proto_dot_services_dot_google__ads__service__pb2.SearchGoogleAdsResponse.SerializeToString,
+      ),
+      'Mutate': grpc.unary_unary_rpc_method_handler(
+          servicer.Mutate,
+          request_deserializer=google_dot_ads_dot_googleads__v0_dot_proto_dot_services_dot_google__ads__service__pb2.MutateGoogleAdsRequest.FromString,
+          response_serializer=google_dot_ads_dot_googleads__v0_dot_proto_dot_services_dot_google__ads__service__pb2.MutateGoogleAdsResponse.SerializeToString,
       ),
   }
   generic_handler = grpc.method_handlers_generic_handler(

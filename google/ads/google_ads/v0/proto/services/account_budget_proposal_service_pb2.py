@@ -226,7 +226,7 @@ _sym_db.RegisterFileDescriptor(DESCRIPTOR)
 
 GetAccountBudgetProposalRequest = _reflection.GeneratedProtocolMessageType('GetAccountBudgetProposalRequest', (_message.Message,), dict(
   DESCRIPTOR = _GETACCOUNTBUDGETPROPOSALREQUEST,
-  __module__ = 'google.ads.googleads_v0.proto.services.account_budget_proposal_service_pb2'
+  __module__ = 'google.ads.google_ads.v0.proto.services.account_budget_proposal_service_pb2'
   ,
   __doc__ = """Request message for
   [AccountBudgetProposalService.GetAccountBudgetProposal][google.ads.googleads.v0.services.AccountBudgetProposalService.GetAccountBudgetProposal].
@@ -243,7 +243,7 @@ _sym_db.RegisterMessage(GetAccountBudgetProposalRequest)
 
 MutateAccountBudgetProposalRequest = _reflection.GeneratedProtocolMessageType('MutateAccountBudgetProposalRequest', (_message.Message,), dict(
   DESCRIPTOR = _MUTATEACCOUNTBUDGETPROPOSALREQUEST,
-  __module__ = 'google.ads.googleads_v0.proto.services.account_budget_proposal_service_pb2'
+  __module__ = 'google.ads.google_ads.v0.proto.services.account_budget_proposal_service_pb2'
   ,
   __doc__ = """Request message for
   [AccountBudgetProposalService.MutateAccountBudgetProposal][google.ads.googleads.v0.services.AccountBudgetProposalService.MutateAccountBudgetProposal].
@@ -262,7 +262,7 @@ _sym_db.RegisterMessage(MutateAccountBudgetProposalRequest)
 
 AccountBudgetProposalOperation = _reflection.GeneratedProtocolMessageType('AccountBudgetProposalOperation', (_message.Message,), dict(
   DESCRIPTOR = _ACCOUNTBUDGETPROPOSALOPERATION,
-  __module__ = 'google.ads.googleads_v0.proto.services.account_budget_proposal_service_pb2'
+  __module__ = 'google.ads.google_ads.v0.proto.services.account_budget_proposal_service_pb2'
   ,
   __doc__ = """A single operation to propose the creation of a new account-level budget
   or edit/end/remove an existing one.
@@ -295,7 +295,7 @@ _sym_db.RegisterMessage(AccountBudgetProposalOperation)
 
 MutateAccountBudgetProposalResponse = _reflection.GeneratedProtocolMessageType('MutateAccountBudgetProposalResponse', (_message.Message,), dict(
   DESCRIPTOR = _MUTATEACCOUNTBUDGETPROPOSALRESPONSE,
-  __module__ = 'google.ads.googleads_v0.proto.services.account_budget_proposal_service_pb2'
+  __module__ = 'google.ads.google_ads.v0.proto.services.account_budget_proposal_service_pb2'
   ,
   __doc__ = """Response message for account-level budget mutate operations.
   
@@ -310,7 +310,7 @@ _sym_db.RegisterMessage(MutateAccountBudgetProposalResponse)
 
 MutateAccountBudgetProposalResult = _reflection.GeneratedProtocolMessageType('MutateAccountBudgetProposalResult', (_message.Message,), dict(
   DESCRIPTOR = _MUTATEACCOUNTBUDGETPROPOSALRESULT,
-  __module__ = 'google.ads.googleads_v0.proto.services.account_budget_proposal_service_pb2'
+  __module__ = 'google.ads.google_ads.v0.proto.services.account_budget_proposal_service_pb2'
   ,
   __doc__ = """The result for the account budget proposal mutate.
   

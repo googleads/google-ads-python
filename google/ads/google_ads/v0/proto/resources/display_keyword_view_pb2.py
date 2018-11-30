@@ -60,7 +60,7 @@ _sym_db.RegisterFileDescriptor(DESCRIPTOR)
 
 DisplayKeywordView = _reflection.GeneratedProtocolMessageType('DisplayKeywordView', (_message.Message,), dict(
   DESCRIPTOR = _DISPLAYKEYWORDVIEW,
-  __module__ = 'google.ads.googleads_v0.proto.resources.display_keyword_view_pb2'
+  __module__ = 'google.ads.google_ads.v0.proto.resources.display_keyword_view_pb2'
   ,
   __doc__ = """A display keyword view.
   

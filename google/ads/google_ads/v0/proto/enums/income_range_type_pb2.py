@@ -105,7 +105,7 @@ _sym_db.RegisterFileDescriptor(DESCRIPTOR)
 
 IncomeRangeTypeEnum = _reflection.GeneratedProtocolMessageType('IncomeRangeTypeEnum', (_message.Message,), dict(
   DESCRIPTOR = _INCOMERANGETYPEENUM,
-  __module__ = 'google.ads.googleads_v0.proto.enums.income_range_type_pb2'
+  __module__ = 'google.ads.google_ads.v0.proto.enums.income_range_type_pb2'
   ,
   __doc__ = """Container for enum describing the type of demographic income ranges.
   """,

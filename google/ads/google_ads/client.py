@@ -14,17 +14,22 @@
 """A client and common configurations for the Google Ads API."""
 
 import logging
+import logging.config
 import os
 import yaml
 from collections import namedtuple
+import json
+
 
 import google.api_core.grpc_helpers
 import google.auth.transport.requests
 import google.oauth2.credentials
 import google.ads.google_ads.errors
 from google.ads.google_ads.v0.proto.errors import errors_pb2
+from google.protobuf.json_format import MessageToJson
 import grpc
 
+DEFAULT_LOGGING_FORMAT = '[%(asctime)s - %(levelname)s] %(message)s'
 
 _logger = logging.getLogger(__name__)
 
@@ -72,7 +77,8 @@ class GoogleAdsClient(object):
             return {'credentials': credentials,
                     'developer_token': config_data['developer_token'],
                     'endpoint': config_data.get('endpoint'),
-                    'login_customer_id': login_customer_id}
+                    'login_customer_id': login_customer_id,
+                    'logging_config': config_data.get('logging')}
         else:
             raise ValueError('A required field in the configuration data was'
                              'not found. The required fields are: %s'
@@ -149,7 +155,7 @@ class GoogleAdsClient(object):
         return cls.load_from_string(yaml_str)
 
     def __init__(self, credentials, developer_token, endpoint=None,
-                 login_customer_id=None):
+                 login_customer_id=None, logging_config=None):
         """Initializer for the GoogleAdsClient.
 
         Args:
@@ -157,6 +163,7 @@ class GoogleAdsClient(object):
             developer_token: a str developer token.
             endpoint: a str specifying an optional alternative API endpoint.
             login_customer_id: a str specifying a login customer ID.
+            logging_config: a dict specifying logging config options
         """
         _validate_login_customer_id(login_customer_id)
 
@@ -164,6 +171,7 @@ class GoogleAdsClient(object):
         self.developer_token = developer_token
         self.endpoint = endpoint
         self.login_customer_id = login_customer_id
+        self.logging_config = logging_config
 
     def get_service(self, name, version=_DEFAULT_VERSION):
         """Returns a service client instance for the specified service_name.
@@ -196,15 +204,18 @@ class GoogleAdsClient(object):
             raise ValueError('Grpc transport does not exist for the specified '
                              'service "%s".' % name)
 
+        endpoint = (self.endpoint if self.endpoint
+            else service_client.SERVICE_ADDRESS)
+
         channel = service_transport_class.create_channel(
-            address=(self.endpoint if self.endpoint
-                     else service_client.SERVICE_ADDRESS),
+            address=endpoint,
             credentials=self.credentials)
 
         channel = grpc.intercept_channel(
             channel,
             MetadataInterceptor(self.developer_token, self.login_customer_id),
-            ExceptionInterceptor(),
+            LoggingInterceptor(self.logging_config, endpoint),
+            ExceptionInterceptor()
         )
 
         service_transport = service_transport_class(channel=channel)
@@ -323,17 +334,112 @@ class ExceptionInterceptor(grpc.UnaryUnaryClientInterceptor):
 class LoggingInterceptor(grpc.UnaryUnaryClientInterceptor):
     """An interceptor that logs rpc requests and responses."""
 
+    _enabled = False
+    _log_type = 'summary'
+    _FULL_REQUEST_LOG_LINE = ('Request\n-------\nMethod: %s\nHost: %s\n'
+        'Headers: %s\nRequest: %s\n\nResponse\n-------\nHeaders: %s\n'
+        'Response: %s\n')
+    _FULL_FAULT_LOG_LINE = ('Request\n-------\nMethod: %s\nHost: %s\n'
+        'Headers: %s\nRequest: %s\n\nResponse\n-------\nHeaders: %s\n'
+        'Fault: %s\n')
+    _SUMMARY_LOG_LINE = ('Request made: ClientCustomerId: %s, Host: %s, '
+        'Method: %s, RequestId: %s, IsFault: %s, FaultMessage: %s')
+
+    def __init__(self, logging_config=None, endpoint=None):
+        """Initializer for the LoggingInterceptor
+
+        Args:
+            logging_config: configuration dictionary for logging
+            endpoint: a str specifying an optional alternative API endpoint.
+        """
+        if logging_config:
+            self._enabled = True
+            self._log_type = logging_config['type']
+            self.endpoint = endpoint
+            logging.config.dictConfig(logging_config)
+
+    def summary_log(self, client_call_details, request, response):
+        """Handles generating a summary log statement
+
+        Args:
+            client_call_details: information about the client call
+            request: request: an instance of the SearchGoogleAdsRequest type
+            response: a gRPC response object
+        """
+        customer_id = request.customer_id
+        host = self.endpoint
+        method = client_call_details.method
+        is_fault = False
+        fault_message = None
+        exception = response.exception()
+
+        if exception:
+            request_id = exception.request_id
+            is_fault = True
+            fault_message = exception.failure.errors[0].message
+        else:
+            trailing_metadata = response.trailing_metadata()
+            for datum in trailing_metadata:
+                if 'request-id' in datum:
+                    request_id = datum[1]
+
+        _logger.info(self._SUMMARY_LOG_LINE
+            % (
+                customer_id,
+                host,
+                method,
+                request_id,
+                is_fault,
+                fault_message
+            ))
+
+    def full_log(self, client_call_details, request, response):
+        """Handles generating a full log statement
+
+        Args:
+            client_call_details: information about the client call
+            request: request: an instance of the SearchGoogleAdsRequest type
+            response: a gRPC response object
+        """
+        method = client_call_details.method
+        host = self.endpoint
+        request_json = _parse_message_to_json(request)
+        metadata_json = _parse_metadata_to_json(client_call_details.metadata)
+        exception = response.exception()
+
+        if exception:
+            log_template = self._FULL_FAULT_LOG_LINE
+            trailing_metadata = exception.error.trailing_metadata()
+            trailing_metadata_json = _parse_metadata_to_json(trailing_metadata)
+            response_variant = _parse_message_to_json(exception.failure)
+        else:
+            log_template = self._FULL_REQUEST_LOG_LINE
+            trailing_metadata = response.trailing_metadata()
+            trailing_metadata_json = _parse_metadata_to_json(trailing_metadata)
+            response_variant = _parse_message_to_json(response.result())
+
+        _logger.info(log_template
+            % (
+                method,
+                host,
+                metadata_json,
+                request_json,
+                trailing_metadata_json,
+                response_variant
+            ))
+
     def intercept_unary_unary(self, continuation, client_call_details, request):
         """Intercepts and logs API interactions.
 
         Overrides abstract method defined in grpc.UnaryUnaryClientInterceptor.
         """
-        _logger.debug('Method: "%s" called with Request: "%s"'
-                      % (client_call_details.method, request))
-
         response = continuation(client_call_details, request)
 
-        # TODO: Handle response here.
+        if self._enabled:
+            if self._log_type == 'summary':
+                self.summary_log(client_call_details, request, response)
+            else:
+                self.full_log(client_call_details, request, response)
 
         return response
 
@@ -418,3 +524,38 @@ def _validate_login_customer_id(login_customer_id):
             raise ValueError('The specified login customer ID is invalid. '
                              'It must be a ten digit number represented '
                              'as a string, i.e. "1234567890"')
+
+
+def _parse_metadata_to_json(metadata):
+    """Parses metadata from a gRPC requests and responses to a JSON string.
+    Obscures the value for "developer-token".
+
+    Args:
+        metadata: a list of tuples of metadata information from a
+        gRPC response
+    """
+    SENSITIVE_INFO_MASK = 'REDACTED'
+    metadata_dict = {}
+
+    if metadata == None:
+        return '{}'
+
+    for datum in metadata:
+        key = datum[0]
+        if key == 'developer-token':
+            metadata_dict[key] = SENSITIVE_INFO_MASK
+        else:
+            value = datum[1]
+            metadata_dict[key] = value
+
+    return json.dumps(
+        metadata_dict, indent=2, sort_keys=True, ensure_ascii=False)
+
+
+def _parse_message_to_json(message):
+    """Parses a gRPC request object to a JSON string.
+
+    Args:
+        request: an instance of the SearchGoogleAdsRequest type
+    """
+    return MessageToJson(message)

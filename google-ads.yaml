@@ -8,3 +8,23 @@ refresh_token: INSERT_REFRESH_TOKEN_HERE
 # instead of 123-456-7890. You can also specify this later in code if your
 # application uses multiple manager account + OAuth pairs.
 login_customer_id: INSERT_LOGIN_CUSTOMER_ID_HERE
+# Logging configuration (optional)
+# Below you may specify the logging configuration. This will be provided as
+# an input to logging.config.dictConfig.
+# logging:
+  # type: summary
+  # version: 1
+  # disable_existing_loggers: False
+  # formatters:
+    # default_fmt:
+      # format: ext://googleads.util.LOGGER_FORMAT
+  # handlers:
+    # default_handler:
+      # class: logging.StreamHandler
+      # formatter: default_fmt
+      # level: INFO
+  # loggers:
+    # Configure root logger
+    # "":
+      # handlers: [default_handler]
+      # level: INFO

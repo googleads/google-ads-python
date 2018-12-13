@@ -70,6 +70,12 @@ retrieve the corresponding service client instance:
 
   google_ads_service = client.get_service('GoogleAdsService')
 
+Enable logging
+##############
+The library uses Python's built in logging framework. You can specify your
+configuration via the configuration file; see [google-ads.yaml](https://github.com/googleads/google-ads-python/blob/master/google-ads.yaml)
+for an example.
+
 Miscellaneous
 -------------
 
@@ -83,6 +89,7 @@ Authors
 
 * `Mark Saniscalchi`_
 * `David Wihl`_
+* `Ben Karl`_
 
 .. _pip: https://pip.pypa.io/en/stable/installing
 .. _template: https://github.com/googleads/google-ads-python/blob/master/google-ads.yaml

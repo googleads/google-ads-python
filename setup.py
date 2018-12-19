@@ -33,7 +33,7 @@ with io.open('README.rst', 'r', encoding='utf-8') as readme_file:
 
 setup(
     name='google-ads',
-    version='0.5.0',
+    version='0.5.1',
     author='Google LLC',
     author_email='googleapis-packages@google.com',
     classifiers=[

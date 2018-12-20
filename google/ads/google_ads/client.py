@@ -16,7 +16,7 @@
 import logging
 import os
 import yaml
-import collections
+from collections import namedtuple
 
 import google.api_core.grpc_helpers
 import google.auth.transport.requests
@@ -378,7 +378,7 @@ class MetadataInterceptor(grpc.UnaryUnaryClientInterceptor):
 
 
 class _ClientCallDetails(
-        collections.namedtuple(
+        namedtuple(
             '_ClientCallDetails',
             ('method', 'timeout', 'metadata', 'credentials')),
         grpc.ClientCallDetails):

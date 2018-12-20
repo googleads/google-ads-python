@@ -11,7 +11,7 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
-"""This example lists the resource names for the customer accounts that the
+"""This example lists the resource names for the customers that the
 authenticating user has access to.
 """
 
@@ -23,15 +23,23 @@ import sys
 
 import google.ads.google_ads.client
 
+_DEFAULT_LIMIT=200
 
-def main(client):
+
+def main(client, limit=_DEFAULT_LIMIT):
     customer_service = client.get_service('CustomerService')
 
     try:
         accessible_customers = customer_service.list_accessible_customers()
-        resource_names = accessible_customers.resource_names[:200]
+        result_total = len(accessible_customers.resource_names)
+        print('Total results: %i' % result_total)
+
+        resource_names = accessible_customers.resource_names[:limit]
         for resource_name in resource_names:
-            print('Customer account resource name: %s' % resource_name)
+            print('Customer resource name: %s' % resource_name)
+
+        if 0 < result_total > limit:
+            print('Printed results truncated to %i entrie(s)' % limit)
     except google.ads.google_ads.errors.GoogleAdsException as ex:
         print('Request with ID "%s" failed with status "%s" and includes the '
               'following errors:' % (ex.request_id, ex.error.code().name))
@@ -48,5 +56,13 @@ if __name__ == '__main__':
     # home directory if none is specified.
     google_ads_client = (google.ads.google_ads.client.GoogleAdsClient
                          .load_from_storage())
+    parser = argparse.ArgumentParser(
+        description=('Lists all customers the authenticating user has '
+                     'access to.'))
+    # The following argument(s) should be provided to run the example.
+    parser.add_argument('-l', '--limit', type=int,
+                        required=False, default=_DEFAULT_LIMIT,
+                        help=('A limit to the number of results to print.'))
+    args = parser.parse_args()
 
-    main(google_ads_client)
+    main(google_ads_client, args.limit)

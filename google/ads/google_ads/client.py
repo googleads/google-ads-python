@@ -16,6 +16,7 @@
 import logging
 import os
 import yaml
+from collections import namedtuple
 
 import google.api_core.grpc_helpers
 import google.auth.transport.requests
@@ -346,6 +347,14 @@ class MetadataInterceptor(grpc.UnaryUnaryClientInterceptor):
             ('login-customer-id', login_customer_id) if login_customer_id
             else None)
 
+    def _update_client_call_details_metadata(
+            self, client_call_details, metadata):
+        client_call_details = _ClientCallDetails(
+            client_call_details.method, client_call_details.timeout, metadata,
+            client_call_details.credentials)
+
+        return client_call_details
+
     def intercept_unary_unary(self, continuation, client_call_details, request):
         """Intercepts and appends custom metadata.
 
@@ -361,12 +370,20 @@ class MetadataInterceptor(grpc.UnaryUnaryClientInterceptor):
         if self.login_customer_id_meta:
             metadata.append(self.login_customer_id_meta)
 
-        client_call_details = grpc._interceptor._ClientCallDetails(
-            client_call_details.method, client_call_details.timeout, metadata,
-            client_call_details.credentials
-        )
+        client_call_details = self._update_client_call_details_metadata(
+            client_call_details,
+            metadata)
 
         return continuation(client_call_details, request)
+
+
+class _ClientCallDetails(
+        namedtuple(
+            '_ClientCallDetails',
+            ('method', 'timeout', 'metadata', 'credentials')),
+        grpc.ClientCallDetails):
+    """An wrapper class for initializing a new ClientCallDetails instance."""
+    pass
 
 
 def _get_version(name):

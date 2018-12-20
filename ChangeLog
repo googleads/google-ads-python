@@ -1,3 +1,6 @@
+* 0.5.1:
+- Fix bug related to usage of private grpc._interceptor._ClientCallDetails class
+
 * 0.5.0:
 - Google Ads v0_6 release.
 - Updating add_campaign_targeting_criteria.py example to add

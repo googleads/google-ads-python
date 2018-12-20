@@ -23,11 +23,15 @@ import sys
 
 import google.ads.google_ads.client
 
+
 def main(client):
     customer_service = client.get_service('CustomerService')
 
     try:
         accessible_customers = customer_service.list_accessible_customers()
+        resource_names = accessible_customers.resource_names[:200]
+        for resource_name in resource_names:
+            print('Customer account resource name: %s' % resource_name)
     except google.ads.google_ads.errors.GoogleAdsException as ex:
         print('Request with ID "%s" failed with status "%s" and includes the '
               'following errors:' % (ex.request_id, ex.error.code().name))
@@ -38,10 +42,6 @@ def main(client):
                     print('\t\tOn field: %s' % field_path_element.field_name)
         sys.exit(1)
 
-    resource_names = accessible_customers.resource_names
-
-    for resource_name in resource_names:
-        print('Customer account resource name: %s' % resource_name)
 
 if __name__ == '__main__':
     # GoogleAdsClient will read the google-ads.yaml configuration file in the

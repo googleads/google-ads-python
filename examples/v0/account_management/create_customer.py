@@ -45,10 +45,10 @@ def main(client, customer_id):
     customer.has_partners_badge.value = False
 
     try:
-      response = customer_service.create_customer_client(
-        customer_id, customer)
-      print(('Customer created with resource name "%s" under manager account'
-             ' with CID %s') % (response.resource_name, customer_id))
+        response = customer_service.create_customer_client(
+            customer_id, customer)
+        print(('Customer created with resource name "%s" under manager account'
+               ' with CID %s') % (response.resource_name, customer_id))
     except google.ads.google_ads.errors.GoogleAdsException as ex:
         print('Request with ID "%s" failed with status "%s" and includes the '
               'following errors:' % (ex.request_id, ex.error.code().name))

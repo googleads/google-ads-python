@@ -14,8 +14,9 @@
 """This example illustrates how to create a new customer under a given
 manager account.
 
-Note by default this account will only be accessible via its parent Google Ads
-manager account.
+Note: this example must be run using the credentials of a Google Ads manager
+account. By default, the new account will only be accessible via the manager
+account.
 """
 
 from __future__ import absolute_import
@@ -23,6 +24,7 @@ from __future__ import absolute_import
 import argparse
 import six
 import sys
+from datetime import datetime
 
 import google.ads.google_ads.client
 
@@ -32,13 +34,15 @@ def main(client, customer_id):
     resource_name = customer_service.customer_path(customer_id)
     customer = client.get_type('Customer')
     customer.resource_name = resource_name
-    customer.descriptive_name.value = 'A new customer.'
+    today = datetime.today().strftime('%Y%m%d %H:%M:%S')
+    customer.descriptive_name.value = ('Account create with '
+                                       'CustomerService on %s' % today)
     # For a list of valid currency codes and time zones see this documentation:
     # https://developers.google.com/adwords/api/docs/appendix/codes-formats
     customer.currency_code.value = 'USD'
     customer.time_zone.value = 'America/New_York'
-    # The below values are optional. For more information about tracking url
-    # templates see: https://support.google.com/google-ads/answer/6305348
+    # The below values are optional. For more information about URL
+    # options see: https://support.google.com/google-ads/answer/6305348
     customer.tracking_url_template.value = '{lpurl}?device={device}'
     customer.final_url_suffix.value = ('keyword={keyword}&matchtype={matchtype}'
                                        '&adgroupid={adgroupid}')
@@ -48,7 +52,7 @@ def main(client, customer_id):
         response = customer_service.create_customer_client(
             customer_id, customer)
         print(('Customer created with resource name "%s" under manager account'
-               ' with CID %s') % (response.resource_name, customer_id))
+               ' with customer ID %s') % (response.resource_name, customer_id))
     except google.ads.google_ads.errors.GoogleAdsException as ex:
         print('Request with ID "%s" failed with status "%s" and includes the '
               'following errors:' % (ex.request_id, ex.error.code().name))

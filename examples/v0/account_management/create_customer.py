@@ -37,6 +37,8 @@ def main(client, customer_id):
     # https://developers.google.com/adwords/api/docs/appendix/codes-formats
     customer.currency_code.value = 'USD'
     customer.time_zone.value = 'America/New_York'
+    # The below values are optional. For more information about tracking url
+    # templates see: https://support.google.com/google-ads/answer/6305348
     customer.tracking_url_template.value = '{lpurl}?device={device}'
     customer.final_url_suffix.value = ('keyword={keyword}&matchtype={matchtype}'
                                        '&adgroupid={adgroupid}')

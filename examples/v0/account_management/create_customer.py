@@ -14,7 +14,7 @@
 """This example illustrates how to create a new customer under a given
 manager account.
 
-Note by default this account will only be accessible via its parent AdWords
+Note by default this account will only be accessible via its parent Google Ads
 manager account.
 """
 
@@ -32,11 +32,14 @@ def main(client, customer_id):
     resource_name = customer_service.customer_path(customer_id)
     customer = client.get_type('Customer')
     customer.resource_name = resource_name
-    customer.descriptive_name.value = "A new customer."
-    customer.currency_code.value = "USD"
-    customer.time_zone.value = "America/New_York"
-    customer.tracking_url_template.value = "{lpurl}?device={device}"
-    customer.final_url_suffix.value = "param1=value1&param2=value2"
+    customer.descriptive_name.value = 'A new customer.'
+    # For a list of valid currency codes and time zones see this documentation:
+    # https://developers.google.com/adwords/api/docs/appendix/codes-formats
+    customer.currency_code.value = 'USD'
+    customer.time_zone.value = 'America/New_York'
+    customer.tracking_url_template.value = '{lpurl}?device={device}'
+    customer.final_url_suffix.value = ('keyword={keyword}&matchtype={matchtype}'
+                                       '&adgroupid={adgroupid}')
     customer.has_partners_badge.value = False
 
     try:

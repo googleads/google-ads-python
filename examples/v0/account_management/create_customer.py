@@ -31,9 +31,7 @@ import google.ads.google_ads.client
 
 def main(client, manager_customer_id):
     customer_service = client.get_service('CustomerService')
-    resource_name = customer_service.customer_path(manager_customer_id)
     customer = client.get_type('Customer')
-    customer.resource_name = resource_name
     today = datetime.today().strftime('%Y%m%d %H:%M:%S')
     customer.descriptive_name.value = ('Account create with '
                                        'CustomerService on %s' % today)

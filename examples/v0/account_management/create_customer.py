@@ -29,9 +29,9 @@ from datetime import datetime
 import google.ads.google_ads.client
 
 
-def main(client, customer_id):
+def main(client, manager_customer_id):
     customer_service = client.get_service('CustomerService')
-    resource_name = customer_service.customer_path(customer_id)
+    resource_name = customer_service.customer_path(manager_customer_id)
     customer = client.get_type('Customer')
     customer.resource_name = resource_name
     today = datetime.today().strftime('%Y%m%d %H:%M:%S')
@@ -50,9 +50,9 @@ def main(client, customer_id):
 
     try:
         response = customer_service.create_customer_client(
-            customer_id, customer)
+            manager_customer_id, customer)
         print(('Customer created with resource name "%s" under manager account'
-               ' with customer ID %s') % (response.resource_name, customer_id))
+               ' with customer ID %s') % (response.resource_name, manager_customer_id))
     except google.ads.google_ads.errors.GoogleAdsException as ex:
         print('Request with ID "%s" failed with status "%s" and includes the '
               'following errors:' % (ex.request_id, ex.error.code().name))
@@ -73,8 +73,8 @@ if __name__ == '__main__':
     parser = argparse.ArgumentParser(
         description=('Creates a new client under the given manager.'))
     # The following argument(s) should be provided to run the example.
-    parser.add_argument('-c', '--customer_id', type=six.text_type,
+    parser.add_argument('-m', '--manager_customer_id', type=six.text_type,
                         required=True, help='The Google Ads customer ID.')
     args = parser.parse_args()
 
-    main(google_ads_client, args.customer_id)
+    main(google_ads_client, args.manager_customer_id)

@@ -33,7 +33,7 @@ def main(client, manager_customer_id):
     customer_service = client.get_service('CustomerService')
     customer = client.get_type('Customer')
     today = datetime.today().strftime('%Y%m%d %H:%M:%S')
-    customer.descriptive_name.value = ('Account create with '
+    customer.descriptive_name.value = ('Account created with '
                                        'CustomerService on %s' % today)
     # For a list of valid currency codes and time zones see this documentation:
     # https://developers.google.com/adwords/api/docs/appendix/codes-formats
@@ -49,8 +49,9 @@ def main(client, manager_customer_id):
     try:
         response = customer_service.create_customer_client(
             manager_customer_id, customer)
-        print(('Customer created with resource name "%s" under manager account'
-               ' with customer ID %s') % (response.resource_name, manager_customer_id))
+        print(('Customer created with resource name "%s" under manager account '
+               'with customer ID %s') %
+               (response.resource_name, manager_customer_id))
     except google.ads.google_ads.errors.GoogleAdsException as ex:
         print('Request with ID "%s" failed with status "%s" and includes the '
               'following errors:' % (ex.request_id, ex.error.code().name))
@@ -72,7 +73,9 @@ if __name__ == '__main__':
         description=('Creates a new client under the given manager.'))
     # The following argument(s) should be provided to run the example.
     parser.add_argument('-m', '--manager_customer_id', type=six.text_type,
-                        required=True, help='The Google Ads customer ID.')
+                        required=True, help='A Google Ads customer ID for the '
+                        'manager account under which the new customer will '
+                        'be created.')
     args = parser.parse_args()
 
     main(google_ads_client, args.manager_customer_id)

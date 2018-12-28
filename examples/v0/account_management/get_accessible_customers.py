@@ -13,6 +13,10 @@
 # limitations under the License.
 """This example lists the resource names for the customers that the
 authenticating user has access to.
+
+The customer IDs retrieved from the resource names can be used to set
+the login-customer-id configuration. For more information see this
+documentation: https://developers.google.com/google-ads/api/docs/concepts/call-structure#login-customer-id
 """
 
 from __future__ import absolute_import

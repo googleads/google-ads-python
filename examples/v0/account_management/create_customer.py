@@ -50,7 +50,7 @@ def main(client, manager_customer_id):
         response = customer_service.create_customer_client(
             manager_customer_id, customer)
         print(('Customer created with resource name "%s" under manager account '
-               'with customer ID %s') %
+               'with customer ID "%s"') %
                (response.resource_name, manager_customer_id))
     except google.ads.google_ads.errors.GoogleAdsException as ex:
         print('Request with ID "%s" failed with status "%s" and includes the '

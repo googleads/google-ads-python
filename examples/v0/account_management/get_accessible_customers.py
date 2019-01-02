@@ -21,8 +21,6 @@ documentation: https://developers.google.com/google-ads/api/docs/concepts/call-s
 
 from __future__ import absolute_import
 
-import argparse
-import six
 import sys
 
 import google.ads.google_ads.client

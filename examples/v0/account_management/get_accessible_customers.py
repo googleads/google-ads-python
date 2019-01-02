@@ -27,10 +27,8 @@ import sys
 
 import google.ads.google_ads.client
 
-_DEFAULT_LIMIT=200
 
-
-def main(client, limit=_DEFAULT_LIMIT):
+def main(client):
     customer_service = client.get_service('CustomerService')
 
     try:
@@ -38,12 +36,9 @@ def main(client, limit=_DEFAULT_LIMIT):
         result_total = len(accessible_customers.resource_names)
         print('Total results: %i' % result_total)
 
-        resource_names = accessible_customers.resource_names[:limit]
+        resource_names = accessible_customers.resource_names
         for resource_name in resource_names:
-            print('Customer resource name: %s' % resource_name)
-
-        if 0 < result_total > limit:
-            print('Printed results truncated to %i entrie(s)' % limit)
+            print('Customer resource name: "%s"' % resource_name)
     except google.ads.google_ads.errors.GoogleAdsException as ex:
         print('Request with ID "%s" failed with status "%s" and includes the '
               'following errors:' % (ex.request_id, ex.error.code().name))
@@ -63,10 +58,5 @@ if __name__ == '__main__':
     parser = argparse.ArgumentParser(
         description=('Lists all customers the authenticating user has '
                      'access to.'))
-    # The following argument(s) should be provided to run the example.
-    parser.add_argument('-l', '--limit', type=int,
-                        required=False, default=_DEFAULT_LIMIT,
-                        help=('A limit to the number of results to print.'))
-    args = parser.parse_args()
 
-    main(google_ads_client, args.limit)
+    main(google_ads_client)

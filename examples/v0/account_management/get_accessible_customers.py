@@ -55,8 +55,5 @@ if __name__ == '__main__':
     # home directory if none is specified.
     google_ads_client = (google.ads.google_ads.client.GoogleAdsClient
                          .load_from_storage())
-    parser = argparse.ArgumentParser(
-        description=('Lists all customers the authenticating user has '
-                     'access to.'))
 
     main(google_ads_client)

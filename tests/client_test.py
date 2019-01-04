@@ -29,24 +29,25 @@ class ModuleLevelTest(TestCase):
     def test_parse_metadata_to_json(self):
         mock_metadata = [
             ('x-goog-api-client',
-            'gl-python/123 grpc/123 gax/123'),
+             'gl-python/123 grpc/123 gax/123'),
             ('developer-token', '0000000000'),
             ('login-customer-id', '9999999999')]
 
         result = (google.ads.google_ads.client.
-            _parse_metadata_to_json(mock_metadata))
+                  _parse_metadata_to_json(mock_metadata))
 
         self.assertEqual(result, '{\n'
-            '  "developer-token": "REDACTED", \n'
-            '  "login-customer-id": "9999999999", \n'
-            '  "x-goog-api-client": "gl-python/123 grpc/123 gax/123"\n'
-        '}')
+                                 '  "developer-token": "REDACTED", \n'
+                                 '  "login-customer-id": "9999999999", \n'
+                                 '  "x-goog-api-client": "gl-python/123 '
+                                 'grpc/123 gax/123"\n'
+                                 '}')
 
     def test_parse_metadata_to_json_with_none(self):
         mock_metadata = None
 
         result = (google.ads.google_ads.client.
-            _parse_metadata_to_json(mock_metadata))
+                  _parse_metadata_to_json(mock_metadata))
 
         self.assertEqual(result, '{}')
 
@@ -87,7 +88,7 @@ class GoogleAdsClientTest(TestCase):
 
         with mock.patch('google.ads.google_ads.client.GoogleAdsClient'
                         '.__init__') as mock_client_init, \
-             mock.patch(
+            mock.patch(
                  'google.oauth2.credentials.Credentials') as mock_credentials:
             mock_client_init.return_value = None
             mock_credentials_instance = mock.Mock()
@@ -114,7 +115,7 @@ class GoogleAdsClientTest(TestCase):
 
         with mock.patch('google.ads.google_ads.client.GoogleAdsClient'
                         '.__init__') as mock_client_init, \
-             mock.patch(
+            mock.patch(
                  'google.oauth2.credentials.Credentials') as mock_credentials:
             mock_client_init.return_value = None
             mock_credentials_instance = mock.Mock()
@@ -146,7 +147,7 @@ class GoogleAdsClientTest(TestCase):
             self.assertRaises(
                     ValueError,
                     google.ads.google_ads.client.GoogleAdsClient
-                        .load_from_storage)
+                    .load_from_storage)
 
     def test_load_from_storage_too_short_login_customer_id(self):
         config = {
@@ -167,7 +168,7 @@ class GoogleAdsClientTest(TestCase):
             self.assertRaises(
                     ValueError,
                     google.ads.google_ads.client.GoogleAdsClient
-                        .load_from_storage)
+                    .load_from_storage)
 
     def test_load_from_storage(self):
         config = {
@@ -182,7 +183,7 @@ class GoogleAdsClientTest(TestCase):
 
         with mock.patch('google.ads.google_ads.client.GoogleAdsClient'
                         '.__init__') as mock_client_init, \
-             mock.patch(
+            mock.patch(
                  'google.oauth2.credentials.Credentials') as mock_credentials:
             mock_client_init.return_value = None
             mock_credentials_instance = mock.Mock()
@@ -410,8 +411,8 @@ class MetadataInterceptorTest(TestCase):
 
             mock_updater.assert_called_once_with(
                 mock_client_call_details, [mock_client_call_details.metadata[0],
-                interceptor.developer_token_meta,
-                interceptor.login_customer_id_meta])
+                                           interceptor.developer_token_meta,
+                                           interceptor.login_customer_id_meta])
 
             mock_continuation.assert_called_once()
 
@@ -420,7 +421,8 @@ class LoggingInterceptorTest(TestCase):
     """Tests for the google.ads.googleads.client.LoggingInterceptor class."""
     _MOCK_CONFIG = {'test': True}
     _MOCK_ENDPOINT = 'www.test-endpoint.com'
-    _MOCK_INITIAL_METADATA = [('developer-token', '123456'),('header', 'value')]
+    _MOCK_INITIAL_METADATA = [('developer-token', '123456'),
+                              ('header', 'value')]
     _MOCK_CUSTOMER_ID = '123456'
     _MOCK_REQUEST_ID = '654321xyz'
     _MOCK_METHOD = 'test/method'
@@ -428,7 +430,7 @@ class LoggingInterceptorTest(TestCase):
     _MOCK_ERROR_MESSAGE = 'Test error message'
 
     def _create_test_interceptor(self, config=_MOCK_CONFIG,
-            endpoint=_MOCK_ENDPOINT):
+                                 endpoint=_MOCK_ENDPOINT):
         return google.ads.google_ads.client.LoggingInterceptor(config, endpoint)
 
     def _get_mock_client_call_details(self):
@@ -530,11 +532,10 @@ class LoggingInterceptorTest(TestCase):
                     self._MOCK_METHOD,
                     self._MOCK_ENDPOINT,
                     google.ads.google_ads.client.
-                        _parse_metadata_to_json(
-                            mock_client_call_details.metadata),
+                    _parse_metadata_to_json(mock_client_call_details.metadata),
                     mock_json_message,
                     google.ads.google_ads.client.
-                        _parse_metadata_to_json(mock_trailing_metadata),
+                    _parse_metadata_to_json(mock_trailing_metadata),
                     mock_json_message
                 )
             )
@@ -577,11 +578,10 @@ class LoggingInterceptorTest(TestCase):
                     self._MOCK_METHOD,
                     self._MOCK_ENDPOINT,
                     google.ads.google_ads.client.
-                        _parse_metadata_to_json(
-                            mock_client_call_details.metadata),
+                    _parse_metadata_to_json(mock_client_call_details.metadata),
                     mock_json_message,
                     google.ads.google_ads.client.
-                        _parse_metadata_to_json(mock_trailing_metadata),
+                    _parse_metadata_to_json(mock_trailing_metadata),
                     mock_json_message
                 )
             )

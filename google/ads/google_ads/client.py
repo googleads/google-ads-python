@@ -205,7 +205,7 @@ class GoogleAdsClient(object):
                              'service "%s".' % name)
 
         endpoint = (self.endpoint if self.endpoint
-            else service_client.SERVICE_ADDRESS)
+                    else service_client.SERVICE_ADDRESS)
 
         channel = service_transport_class.create_channel(
             address=endpoint,
@@ -335,13 +335,14 @@ class LoggingInterceptor(grpc.UnaryUnaryClientInterceptor):
     """An interceptor that logs rpc requests and responses."""
 
     _FULL_REQUEST_LOG_LINE = ('Request\n-------\nMethod: %s\nHost: %s\n'
-        'Headers: %s\nRequest: %s\n\nResponse\n-------\nHeaders: %s\n'
-        'Response: %s\n')
+                              'Headers: %s\nRequest: %s\n\nResponse\n-------\n'
+                              'Headers: %s\nResponse: %s\n')
     _FULL_FAULT_LOG_LINE = ('Request\n-------\nMethod: %s\nHost: %s\n'
-        'Headers: %s\nRequest: %s\n\nResponse\n-------\nHeaders: %s\n'
-        'Fault: %s\n')
+                            'Headers: %s\nRequest: %s\n\nResponse\n-------\n'
+                            'Headers: %s\nFault: %s\n')
     _SUMMARY_LOG_LINE = ('Request made: ClientCustomerId: %s, Host: %s, '
-        'Method: %s, RequestId: %s, IsFault: %s, FaultMessage: %s')
+                         'Method: %s, RequestId: %s, IsFault: %s, '
+                         'FaultMessage: %s')
 
     def __init__(self, logging_config=None, endpoint=None):
         """Initializer for the LoggingInterceptor
@@ -377,24 +378,24 @@ class LoggingInterceptor(grpc.UnaryUnaryClientInterceptor):
                 request_id = datum[1]
 
         _logger.debug(self._FULL_REQUEST_LOG_LINE
-            % (
-                method,
-                host,
-                metadata_json,
-                request_json,
-                trailing_metadata_json,
-                response_json
-            ))
+                      % (
+                          method,
+                          host,
+                          metadata_json,
+                          request_json,
+                          trailing_metadata_json,
+                          response_json
+                      ))
 
         _logger.info(self._SUMMARY_LOG_LINE
-            % (
-                customer_id,
-                host,
-                method,
-                request_id,
-                is_fault,
-                fault_message
-            ))
+                     % (
+                         customer_id,
+                         host,
+                         method,
+                         request_id,
+                         is_fault,
+                         fault_message
+                     ))
 
     def log_failed_request(self, client_call_details, request, exception):
         """Handles logging of a failed request
@@ -417,24 +418,24 @@ class LoggingInterceptor(grpc.UnaryUnaryClientInterceptor):
         request_id = exception.request_id
 
         _logger.warning(self._SUMMARY_LOG_LINE
-            % (
-                customer_id,
-                host,
-                method,
-                request_id,
-                is_fault,
-                fault_message
-            ))
+                        % (
+                            customer_id,
+                            host,
+                            method,
+                            request_id,
+                            is_fault,
+                            fault_message
+                        ))
 
         _logger.info(self._FULL_FAULT_LOG_LINE
-            % (
-                method,
-                host,
-                metadata_json,
-                request_json,
-                trailing_metadata_json,
-                response_json
-            ))
+                     % (
+                         method,
+                         host,
+                         metadata_json,
+                         request_json,
+                         trailing_metadata_json,
+                         response_json
+                     ))
 
     def intercept_unary_unary(self, continuation, client_call_details, request):
         """Intercepts and logs API interactions.
@@ -545,7 +546,7 @@ def _parse_metadata_to_json(metadata):
     SENSITIVE_INFO_MASK = 'REDACTED'
     metadata_dict = {}
 
-    if metadata == None:
+    if metadata is None:
         return '{}'
 
     for datum in metadata:
@@ -567,3 +568,4 @@ def _parse_message_to_json(message):
         request: an instance of the SearchGoogleAdsRequest type
     """
     return MessageToJson(message)
+

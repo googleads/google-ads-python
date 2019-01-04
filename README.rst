@@ -76,6 +76,32 @@ The library uses Python's built in logging framework. You can specify your
 configuration via the configuration file; see [google-ads.yaml](https://github.com/googleads/google-ads-python/blob/master/google-ads.yaml)
 for an example.
 
+It's also possible to configure logging programmatically using Python's built-in
+[logging](https://docs.python.org/2/library/logging.html) library. You can
+retrieve the client logger and configure it with the following:
+```python
+logging.basicConfig(level=logging.INFO, format=google.ads.google_ads.client.DEFAULT_LOGGING_FORMAT)
+logging.getLogger('google.ads.google_ads.client').setLevel(logging.DEBUG)
+```
+
+**NOTE:** The client logger is configured when the client is initialized, so if
+you have logger configurations in your google-ads.yaml file and you want to
+override them programmatically, you will need to call the above lines _before_
+initializing the client, otherwise the configuration from yaml will take
+precedent as it's provided first.
+
+Logs will be generated at the following levels. If you want all logs then you
+should configure the logger at the DEBUG level, if you only want brief logs
+of failed requests then set the level to WARNING.
+
+* DEBUG: A detailed log of complete request/response obects as JSON
+* INFO:
+        - A brief summary of the request and response
+        - A detailed log of the complete request/exception as JSON for failed
+          requests.
+* WARNING:
+        - A brief summary of the request and exception for failed requests
+
 Miscellaneous
 -------------
 

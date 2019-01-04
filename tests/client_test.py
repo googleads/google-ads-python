@@ -540,21 +540,27 @@ class LoggingInterceptorTest(TestCase):
                 )
             )
 
-    @unittest.skip('Refactor test to assert by level')
-    def test_intercept_unary_unary_summary_with_exception(self):
+    def test_intercept_unary_unary_failed_request(self):
         mock_client_call_details = self._get_mock_client_call_details()
-        mock_request = self._get_mock_request()
         mock_continuation_fn = self._get_mock_continuation_fn(fail=True)
+        mock_request = self._get_mock_request()
+        mock_json_message = '{"test": "request-response"}'
+        mock_response = mock_continuation_fn(
+            mock_client_call_details, mock_request)
+        mock_trailing_metadata = mock_response.trailing_metadata()
 
         with mock.patch('logging.config.dictConfig'), \
-            mock.patch('google.ads.google_ads.client._logger') as mock_logger:
+            mock.patch('google.ads.google_ads.client._logger') as mock_logger, \
+            mock.patch(
+                'google.ads.google_ads.client.MessageToJson') as mock_formatter:
+            mock_formatter.return_value = mock_json_message
             interceptor = self._create_test_interceptor()
             interceptor.intercept_unary_unary(
                 mock_continuation_fn,
                 mock_client_call_details,
                 mock_request)
 
-            mock_logger.info.assert_called_once_with(
+            mock_logger.warning.assert_called_once_with(
                 interceptor._SUMMARY_LOG_LINE
                 % (
                     self._MOCK_CUSTOMER_ID,
@@ -563,6 +569,21 @@ class LoggingInterceptorTest(TestCase):
                     self._MOCK_REQUEST_ID,
                     True,
                     self._MOCK_ERROR_MESSAGE
+                )
+            )
+
+            mock_logger.info.assert_called_once_with(
+                interceptor._FULL_FAULT_LOG_LINE
+                % (
+                    self._MOCK_METHOD,
+                    self._MOCK_ENDPOINT,
+                    google.ads.google_ads.client.
+                        _parse_metadata_to_json(
+                            mock_client_call_details.metadata),
+                    mock_json_message,
+                    google.ads.google_ads.client.
+                        _parse_metadata_to_json(mock_trailing_metadata),
+                    mock_json_message
                 )
             )
 

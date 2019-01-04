@@ -466,16 +466,58 @@ class LoggingInterceptor(grpc.UnaryUnaryClientInterceptor):
                 fault_message
             ))
 
+    def log_failed_request(self, client_call_details, request, exception):
+        """Handles logging of a failed request
+
+        Args:
+            client_call_details: information about the client call
+            request: request: an instance of the SearchGoogleAdsRequest type
+            exception: a gRPC exception object
+        """
+        method = client_call_details.method
+        host = self.endpoint
+        metadata_json = _parse_metadata_to_json(client_call_details.metadata)
+        request_json = _parse_message_to_json(request)
+        trailing_metadata = exception.error.trailing_metadata()
+        trailing_metadata_json = _parse_metadata_to_json(trailing_metadata)
+        response_json = _parse_message_to_json(exception.failure)
+        customer_id = request.customer_id
+        is_fault = True
+        fault_message = exception.failure.errors[0].message
+        request_id = exception.request_id
+
+        _logger.warning(self._SUMMARY_LOG_LINE
+            % (
+                customer_id,
+                host,
+                method,
+                request_id,
+                is_fault,
+                fault_message
+            ))
+
+        _logger.info(self._FULL_FAULT_LOG_LINE
+            % (
+                method,
+                host,
+                metadata_json,
+                request_json,
+                trailing_metadata_json,
+                response_json
+            ))
+
     def intercept_unary_unary(self, continuation, client_call_details, request):
         """Intercepts and logs API interactions.
 
         Overrides abstract method defined in grpc.UnaryUnaryClientInterceptor.
         """
         response = continuation(client_call_details, request)
-        self.log_successful_request(client_call_details, request, response)
+        exception = response.exception()
 
-        # self.summary_log(client_call_details, request, response)
-        # self.full_log(client_call_details, request, response)
+        if exception:
+            self.log_failed_request(client_call_details, request, exception)
+        else:
+            self.log_successful_request(client_call_details, request, response)
 
         return response
 

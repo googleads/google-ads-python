@@ -18,7 +18,6 @@ import os
 import mock
 import yaml
 import json
-import unittest
 
 import google.ads.google_ads.client
 import google.ads.google_ads.v0
@@ -587,71 +586,3 @@ class LoggingInterceptorTest(TestCase):
                 )
             )
 
-    @unittest.skip('Refactor test to assert by level')
-    def test_intercept_unary_unary_full(self):
-        mock_client_call_details = self._get_mock_client_call_details()
-        mock_request = self._get_mock_request()
-        mock_continuation_fn = self._get_mock_continuation_fn()
-        mock_json_message = '{"test": "request-response"}'
-        mock_response = mock_continuation_fn(
-            mock_client_call_details, mock_request)
-        mock_trailing_metadata = mock_response.trailing_metadata()
-
-        with mock.patch('logging.config.dictConfig'), \
-            mock.patch('google.ads.google_ads.client._logger') as mock_logger, \
-            mock.patch(
-                'google.ads.google_ads.client.MessageToJson') as mock_formatter:
-            mock_formatter.return_value = mock_json_message
-            interceptor = self._create_test_interceptor({'type': 'full'})
-            interceptor.intercept_unary_unary(
-                mock_continuation_fn, mock_client_call_details, mock_request)
-            self.assertEqual(mock_formatter.call_count, 2)
-            mock_logger.info.assert_called_once_with(
-                interceptor._FULL_REQUEST_LOG_LINE
-                % (
-                    self._MOCK_METHOD,
-                    self._MOCK_ENDPOINT,
-                    google.ads.google_ads.client.
-                        _parse_metadata_to_json(
-                            mock_client_call_details.metadata),
-                    mock_json_message,
-                    google.ads.google_ads.client.
-                        _parse_metadata_to_json(mock_trailing_metadata),
-                    mock_json_message,
-                )
-            )
-
-    @unittest.skip('Refactor test to assert by level')
-    def test_intercept_unary_unary_full_with_exception(self):
-        mock_client_call_details = self._get_mock_client_call_details()
-        mock_request = self._get_mock_request()
-        mock_continuation_fn = self._get_mock_continuation_fn(fail=True)
-
-        mock_json_message = '{"test": "request-response"}'
-        mock_response = mock_continuation_fn(
-            mock_client_call_details, mock_request)
-        mock_trailing_metadata = mock_response.trailing_metadata()
-
-        with mock.patch('logging.config.dictConfig'), \
-            mock.patch('google.ads.google_ads.client._logger') as mock_logger, \
-            mock.patch(
-                'google.ads.google_ads.client.MessageToJson') as mock_formatter:
-            mock_formatter.return_value = mock_json_message
-            interceptor = self._create_test_interceptor({'type': 'full'})
-            interceptor.intercept_unary_unary(
-                mock_continuation_fn, mock_client_call_details, mock_request)
-            self.assertEqual(mock_formatter.call_count, 2)
-            mock_logger.info.assert_called_once_with(
-                interceptor._FULL_FAULT_LOG_LINE
-                % (
-                    self._MOCK_METHOD,
-                    self._MOCK_ENDPOINT,
-                    google.ads.google_ads.client.
-                        _parse_metadata_to_json(
-                            mock_client_call_details.metadata),
-                    mock_json_message,
-                    google.ads.google_ads.client.
-                        _parse_metadata_to_json(mock_trailing_metadata),
-                    mock_json_message,
-                )
-            )

@@ -334,8 +334,6 @@ class ExceptionInterceptor(grpc.UnaryUnaryClientInterceptor):
 class LoggingInterceptor(grpc.UnaryUnaryClientInterceptor):
     """An interceptor that logs rpc requests and responses."""
 
-    _enabled = False
-    _log_type = 'summary'
     _FULL_REQUEST_LOG_LINE = ('Request\n-------\nMethod: %s\nHost: %s\n'
         'Headers: %s\nRequest: %s\n\nResponse\n-------\nHeaders: %s\n'
         'Response: %s\n')
@@ -352,10 +350,8 @@ class LoggingInterceptor(grpc.UnaryUnaryClientInterceptor):
             logging_config: configuration dictionary for logging
             endpoint: a str specifying an optional alternative API endpoint.
         """
+        self.endpoint = endpoint
         if logging_config:
-            self._enabled = True
-            self._log_type = logging_config['type']
-            self.endpoint = endpoint
             logging.config.dictConfig(logging_config)
 
     def summary_log(self, client_call_details, request, response):
@@ -428,18 +424,58 @@ class LoggingInterceptor(grpc.UnaryUnaryClientInterceptor):
                 response_variant
             ))
 
+    def log_successful_request(self, client_call_details, request, response):
+        """Handles logging of a successful request
+
+        Args:
+            client_call_details: information about the client call
+            request: request: an instance of the SearchGoogleAdsRequest type
+            response: a gRPC response object
+        """
+        method = client_call_details.method
+        host = self.endpoint
+        metadata_json = _parse_metadata_to_json(client_call_details.metadata)
+        request_json = _parse_message_to_json(request)
+        trailing_metadata = response.trailing_metadata()
+        trailing_metadata_json = _parse_metadata_to_json(trailing_metadata)
+        response_json = _parse_message_to_json(response.result())
+        customer_id = request.customer_id
+        is_fault = False
+        fault_message = None
+        for datum in trailing_metadata:
+            if 'request-id' in datum:
+                request_id = datum[1]
+
+        _logger.debug(self._FULL_REQUEST_LOG_LINE
+            % (
+                method,
+                host,
+                metadata_json,
+                request_json,
+                trailing_metadata_json,
+                response_json
+            ))
+
+        _logger.info(self._SUMMARY_LOG_LINE
+            % (
+                customer_id,
+                host,
+                method,
+                request_id,
+                is_fault,
+                fault_message
+            ))
+
     def intercept_unary_unary(self, continuation, client_call_details, request):
         """Intercepts and logs API interactions.
 
         Overrides abstract method defined in grpc.UnaryUnaryClientInterceptor.
         """
         response = continuation(client_call_details, request)
+        self.log_successful_request(client_call_details, request, response)
 
-        if self._enabled:
-            if self._log_type == 'summary':
-                self.summary_log(client_call_details, request, response)
-            else:
-                self.full_log(client_call_details, request, response)
+        # self.summary_log(client_call_details, request, response)
+        # self.full_log(client_call_details, request, response)
 
         return response
 

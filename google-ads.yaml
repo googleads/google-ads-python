@@ -12,7 +12,6 @@ login_customer_id: INSERT_LOGIN_CUSTOMER_ID_HERE
 # Below you may specify the logging configuration. This will be provided as
 # an input to logging.config.dictConfig.
 # logging:
-  # type: summary
   # version: 1
   # disable_existing_loggers: False
   # formatters:

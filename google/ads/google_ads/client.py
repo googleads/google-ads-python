@@ -352,24 +352,21 @@ class LoggingInterceptor(grpc.UnaryUnaryClientInterceptor):
         if logging_config:
             logging.config.dictConfig(logging_config)
 
-    def log_successful_request(self, client_call_details, request, response):
+    def log_successful_request(self, request, response, method, customer_id,
+                               metadata_json):
         """Handles logging of a successful request
 
         Args:
-            client_call_details: information about the client call
-            request: request: an instance of the SearchGoogleAdsRequest type
+            request: an instance of a gRPC request
             response: a gRPC response object
+            method: the gRPC method of the request
+            customer_id: the customer ID associated with the request
+            metadata_json: request metadata (i.e. headers) in JSON form
         """
-        method = client_call_details.method
-        host = self.endpoint
-        metadata_json = _parse_metadata_to_json(client_call_details.metadata)
         request_json = _parse_message_to_json(request)
         trailing_metadata = response.trailing_metadata()
         trailing_metadata_json = _parse_metadata_to_json(trailing_metadata)
         response_json = _parse_message_to_json(response.result())
-        customer_id = request.customer_id
-        is_fault = False
-        fault_message = None
         for datum in trailing_metadata:
             if 'request-id' in datum:
                 request_id = datum[1]
@@ -377,7 +374,7 @@ class LoggingInterceptor(grpc.UnaryUnaryClientInterceptor):
         _logger.debug(self._FULL_REQUEST_LOG_LINE
                       % (
                           method,
-                          host,
+                          self.endpoint,
                           metadata_json,
                           request_json,
                           trailing_metadata_json,
@@ -387,52 +384,79 @@ class LoggingInterceptor(grpc.UnaryUnaryClientInterceptor):
         _logger.info(self._SUMMARY_LOG_LINE
                      % (
                          customer_id,
-                         host,
+                         self.endpoint,
                          method,
                          request_id,
-                         is_fault,
-                         fault_message
+                         False,
+                         None
                      ))
 
-    def log_failed_request(self, client_call_details, request, exception):
+    def log_failed_request(self, request, exception, method, customer_id, 
+                           metadata_json):
         """Handles logging of a failed request
 
         Args:
-            client_call_details: information about the client call
-            request: request: an instance of the SearchGoogleAdsRequest type
+            request: an instance of a gRPC request
             exception: a gRPC exception object
+            method: the gRPC method of the request
+            customer_id: the customer ID associated with the request
+            metadata_json: request metadata (i.e. headers) in JSON form
         """
-        method = client_call_details.method
-        host = self.endpoint
-        metadata_json = _parse_metadata_to_json(client_call_details.metadata)
         request_json = _parse_message_to_json(request)
         trailing_metadata = exception.error.trailing_metadata()
         trailing_metadata_json = _parse_metadata_to_json(trailing_metadata)
         response_json = _parse_message_to_json(exception.failure)
-        customer_id = request.customer_id
-        is_fault = True
         fault_message = exception.failure.errors[0].message
         request_id = exception.request_id
 
         _logger.warning(self._SUMMARY_LOG_LINE
                         % (
                             customer_id,
-                            host,
+                            self.endpoint,
                             method,
                             request_id,
-                            is_fault,
+                            True,
                             fault_message
                         ))
 
         _logger.info(self._FULL_FAULT_LOG_LINE
                      % (
                          method,
-                         host,
+                         self.endpoint,
                          metadata_json,
                          request_json,
                          trailing_metadata_json,
                          response_json
                      ))
+
+    def log_request(self, client_call_details, request, response, exception):
+        """Handles logging all requests
+
+        Args:
+            client_call_details: information about the client call
+            request: an instance of a gRPC request
+            response: a gRPC response object
+            exception: a gRPC exception object
+        """
+        method = client_call_details.method
+        customer_id = getattr(request, 'customer_id', None)
+        metadata_json = _parse_metadata_to_json(client_call_details.metadata)
+
+        if exception:
+            self.log_failed_request(
+                request,
+                exception,
+                method,
+                customer_id,
+                metadata_json)
+        else:
+            self.log_successful_request(
+                request,
+                response,
+                method,
+                customer_id,
+                metadata_json)
+
 
     def intercept_unary_unary(self, continuation, client_call_details, request):
         """Intercepts and logs API interactions.
@@ -442,10 +466,7 @@ class LoggingInterceptor(grpc.UnaryUnaryClientInterceptor):
         response = continuation(client_call_details, request)
         exception = response.exception()
 
-        if exception:
-            self.log_failed_request(client_call_details, request, exception)
-        else:
-            self.log_successful_request(client_call_details, request, response)
+        self.log_request(client_call_details, request, response, exception)
 
         return response
 

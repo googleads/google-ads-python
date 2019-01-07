@@ -70,17 +70,18 @@ retrieve the corresponding service client instance:
 
   google_ads_service = client.get_service('GoogleAdsService')
 
-Enable logging
-##############
+Enabling and Configuring logging
+################################
 The library uses Python's built in logging framework. You can specify your
 configuration via the configuration file; see [google-ads.yaml](https://github.com/googleads/google-ads-python/blob/master/google-ads.yaml)
 for an example.
 
 It's also possible to configure logging programmatically using Python's built-in
-[logging](https://docs.python.org/2/library/logging.html) library. You can
-retrieve the client logger and configure it with the following:
+[logging](https://docs.python.org/2/library/logging.html) library by setting a
+logging configuration _before_ initializing the client. You can retrieve the
+client logger instance and configure it with the following example:
 ```python
-logging.basicConfig(level=logging.INFO, format=google.ads.google_ads.client.DEFAULT_LOGGING_FORMAT)
+logging.basicConfig(level=logging.DEBUG, format='[%(asctime)s - %(levelname)s] %(message).5000s')
 logging.getLogger('google.ads.google_ads.client').setLevel(logging.DEBUG)
 ```
 
@@ -90,17 +91,19 @@ override them programmatically, you will need to call the above lines _before_
 initializing the client, otherwise the configuration from yaml will take
 precedent as it's provided first.
 
-Logs will be generated at the following levels. If you want all logs then you
-should configure the logger at the DEBUG level, if you only want brief logs
-of failed requests then set the level to WARNING.
+The client generates logs at a few different levels and you can set your
+configuration to see some or all of the below:
 
-* DEBUG: A detailed log of complete request/response obects as JSON
-* INFO:
-        - A brief summary of the request and response
-        - A detailed log of the complete request/exception as JSON for failed
-          requests.
-* WARNING:
-        - A brief summary of the request and exception for failed requests
+| Level   | Successful Request                                                 | Failed Request                                                                        |   |   |
+|---------|--------------------------------------------------------------------|---------------------------------------------------------------------------------------|---|---|
+| DEBUG   | A detailed log with complete request and response objects as JSON. | None                                                                                  |   |   |
+| INFO    | A concise summary with specific request and response fields.       | A detailed log with complete request and exception objects as JSON.                   |   |   |
+| WARNING | None                                                               | A concise summary with specific request information, the exception state and message. |   |   |
+
+Since the Python logging framework ignores log messages that are less severe
+than the configured level, setting to WARNING means you will only see concise
+messages related to failed requests, but setting to DEBUG means you will see
+all possible types of logs in the above table.
 
 Miscellaneous
 -------------
@@ -113,7 +116,6 @@ Miscellaneous
 Authors
 -------
 
-* `Mark Saniscalchi`_
 * `David Wihl`_
 * `Ben Karl`_
 
@@ -126,6 +128,5 @@ Authors
 .. _Issue tracker: https://github.com/googleads/google-ads-python/issues
 .. _API documentation: https://developers.google.com/google-ads/api/
 .. _API Support: https://developers.google.com/adwords/api/community/
-.. _Mark Saniscalchi: https://github.com/msaniscalchi
 .. _David Wihl: https://github.com/wihl
-
+.. _Ben Karl: https://github.com/BenRKarl

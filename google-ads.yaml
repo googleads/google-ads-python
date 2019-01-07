@@ -13,14 +13,18 @@ login_customer_id: INSERT_LOGIN_CUSTOMER_ID_HERE
 ###############################################################################
 # Below you may specify the logging configuration. This will be provided as   #
 # an input to logging.config.dictConfig. Use the "level" block under the root #
-# logger configuration to adjust the logging level.                           #
+# logger configuration to adjust the logging level. Note in the "format"      #
+# field that log messages are truncated to 5000 characters by default. You    #
+# can change this to any length by removing the ".5000" portion or changing   #
+# it to a different number.                                                   #
 # #############################################################################
 # logging:
   # version: 1
   # disable_existing_loggers: False
   # formatters:
     # default_fmt:
-      # format: ext://googleads.util.LOGGER_FORMAT
+      # format: '[%(asctime)s - %(levelname)s] %(message).5000s'
+      # datefmt: '%Y-%m-%d %H:%M:%S'
   # handlers:
     # default_handler:
       # class: logging.StreamHandler

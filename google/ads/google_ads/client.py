@@ -20,7 +20,6 @@ import yaml
 from collections import namedtuple
 import json
 
-
 import google.api_core.grpc_helpers
 import google.auth.transport.requests
 import google.oauth2.credentials
@@ -28,8 +27,6 @@ import google.ads.google_ads.errors
 from google.ads.google_ads.v0.proto.errors import errors_pb2
 from google.protobuf.json_format import MessageToJson
 import grpc
-
-DEFAULT_LOGGING_FORMAT = '[%(asctime)s - %(levelname)s] %(message)s'
 
 _logger = logging.getLogger(__name__)
 

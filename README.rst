@@ -81,8 +81,8 @@ It's also possible to configure logging programmatically using Python's built-in
 logging configuration _before_ initializing the client. You can retrieve the
 client logger instance and configure it with the following example:
 ```python
-logging.basicConfig(level=logging.DEBUG, format='[%(asctime)s - %(levelname)s] %(message).5000s')
-logging.getLogger('google.ads.google_ads.client').setLevel(logging.DEBUG)
+logging.basicConfig(level=logging.INFO, format='[%(asctime)s - %(levelname)s] %(message).5000s')
+logging.getLogger('google.ads.google_ads.client').setLevel(logging.INFO)
 ```
 
 **NOTE:** The client logger is configured when the client is initialized, so if

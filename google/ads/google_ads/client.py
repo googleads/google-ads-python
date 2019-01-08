@@ -352,14 +352,13 @@ class LoggingInterceptor(grpc.UnaryUnaryClientInterceptor):
         if logging_config:
             logging.config.dictConfig(logging_config)
 
-    def _get_request_id(self, response):
+    def _get_request_id(self, response, exception):
         """Retrieves the request id from a response object
 
         Args:
             response: a gRPC response object
+            exception: a gRPC exception object
         """
-        exception = response.exception()
-
         if exception:
             return exception.request_id
         else:
@@ -368,27 +367,25 @@ class LoggingInterceptor(grpc.UnaryUnaryClientInterceptor):
                 if 'request-id' in datum:
                     return datum[1]
 
-    def _get_trailing_metadata(self, response):
+    def _get_trailing_metadata(self, response, exception):
         """Retrieves trailing metadata from a response object
 
         Args:
             response: a gRPC response object
+            exception: a gRPC exception object
         """
-        exception = response.exception()
-
         if exception:
             return exception.error.trailing_metadata()
         else:
             return response.trailing_metadata()
 
-    def _parse_response_to_json(self, response):
+    def _parse_response_to_json(self, response, exception):
         """Parses response object to JSON
 
         Args:
             response: a gRPC response object
+            exception: a gRPC exception object
         """
-        exception = response.exception()
-
         if exception:
             return _parse_message_to_json(exception.failure)
         else:
@@ -476,11 +473,11 @@ class LoggingInterceptor(grpc.UnaryUnaryClientInterceptor):
         method = client_call_details.method
         customer_id = getattr(request, 'customer_id', None)
         metadata_json = _parse_metadata_to_json(client_call_details.metadata)
-        request_id = self._get_request_id(response)
         request_json = _parse_message_to_json(request)
-        trailing_metadata = self._get_trailing_metadata(response)
+        request_id = self._get_request_id(response, exception)
+        response_json = self._parse_response_to_json(response, exception)
+        trailing_metadata = self._get_trailing_metadata(response, exception)
         trailing_metadata_json = _parse_metadata_to_json(trailing_metadata)
-        response_json = self._parse_response_to_json(response)
 
         if exception:
             fault_message = exception.failure.errors[0].message

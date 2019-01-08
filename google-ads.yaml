@@ -30,7 +30,6 @@ login_customer_id: INSERT_LOGIN_CUSTOMER_ID_HERE
       # class: logging.StreamHandler
       # formatter: default_fmt
   # loggers:
-    # Configure root logger
     # "":
       # handlers: [default_handler]
       # level: INFO

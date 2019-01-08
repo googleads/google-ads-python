@@ -37,8 +37,8 @@ class ModuleLevelTest(TestCase):
                   _parse_metadata_to_json(mock_metadata))
 
         self.assertEqual(result, '{\n'
-                                 '  "developer-token": "REDACTED", \n'
-                                 '  "login-customer-id": "9999999999", \n'
+                                 '  "developer-token": "REDACTED",\n'
+                                 '  "login-customer-id": "9999999999",\n'
                                  '  "x-goog-api-client": "gl-python/123 '
                                  'grpc/123 gax/123"\n'
                                  '}')

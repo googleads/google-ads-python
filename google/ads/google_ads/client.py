@@ -618,7 +618,8 @@ def _parse_metadata_to_json(metadata):
             metadata_dict[key] = value
 
     return json.dumps(
-        metadata_dict, indent=2, sort_keys=True, ensure_ascii=False)
+        metadata_dict, indent=2, sort_keys=True, ensure_ascii=False,
+        separators=(',', ': '))
 
 
 def _parse_message_to_json(message):
@@ -627,5 +628,7 @@ def _parse_message_to_json(message):
     Args:
         request: an instance of the SearchGoogleAdsRequest type
     """
-    return MessageToJson(message)
+    json =  MessageToJson(message)
+    json = json.replace(', \n', ',\n')
+    return json
 

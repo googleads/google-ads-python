@@ -20,7 +20,7 @@ install_requires = [
     'enum34; python_version < "3.4"',
     'google-auth-oauthlib>=0.0.1,<1.0.0',
     'google-api-core[grpc] >= 1.1.0, < 2.0.0dev',
-    'PyYAML >= 3.11, < 4.0',
+    'PyYAML >=4.2b1, < 5.0',
 ]
 
 tests_require = [
@@ -33,7 +33,7 @@ with io.open('README.rst', 'r', encoding='utf-8') as readme_file:
 
 setup(
     name='google-ads',
-    version='0.5.1',
+    version='0.5.2',
     author='Google LLC',
     author_email='googleapis-packages@google.com',
     classifiers=[

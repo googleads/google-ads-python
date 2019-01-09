@@ -1,3 +1,6 @@
+* 0.5.2:
+- Updated PyYAML dependencies to >=4.2b1 for https://nvd.nist.gov/vuln/detail/CVE-2017-18342
+
 * 0.5.1:
 - Fix bug related to usage of private grpc._interceptor._ClientCallDetails class
 

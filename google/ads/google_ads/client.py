@@ -601,7 +601,7 @@ def _parse_metadata_to_json(metadata):
 
     Args:
         metadata: a list of tuples of metadata information from a
-        gRPC response
+            gRPC response
     """
     SENSITIVE_INFO_MASK = 'REDACTED'
     metadata_dict = {}

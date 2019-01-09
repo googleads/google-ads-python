@@ -506,9 +506,11 @@ class LoggingInterceptor(grpc.UnaryUnaryClientInterceptor):
         Overrides abstract method defined in grpc.UnaryUnaryClientInterceptor.
         """
         response = continuation(client_call_details, request)
-        exception = response.exception()
+        if _logger.isEnabledFor(logging.WARNING):
+            exception = response.exception()
 
-        self._log_request(client_call_details, request, response, exception)
+            self._log_request(client_call_details, request, response,
+                              exception)
 
         return response
 

@@ -22,7 +22,8 @@ import json
 import google.ads.google_ads.client
 import google.ads.google_ads.v0
 from google.ads.google_ads.v0.proto.services import google_ads_service_pb2
-from pyfakefs.fake_filesystem_unittest import TestCase
+from unittest import TestCase
+from pyfakefs.fake_filesystem_unittest import TestCase as FileTestCase
 
 
 class ModuleLevelTest(TestCase):
@@ -52,7 +53,7 @@ class ModuleLevelTest(TestCase):
         self.assertEqual(result, '{}')
 
 
-class GoogleAdsClientTest(TestCase):
+class GoogleAdsClientTest(FileTestCase):
     """Tests for the google.ads.googleads.client.GoogleAdsClient class."""
 
     def _create_test_client(self, endpoint=None):

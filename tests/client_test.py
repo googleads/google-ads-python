@@ -18,6 +18,7 @@ import os
 import mock
 import yaml
 import json
+import logging
 
 import google.ads.google_ads.client
 import google.ads.google_ads.v0
@@ -494,6 +495,28 @@ class LoggingInterceptorTest(TestCase):
             interceptor = google.ads.google_ads.client.LoggingInterceptor(
                 config)
             mock_dictConfig.assert_called_once_with(config)
+
+    def test_intercept_unary_unary_unconfigured(self):
+        mock_client_call_details = self._get_mock_client_call_details()
+        mock_continuation_fn = self._get_mock_continuation_fn()
+        mock_request = self._get_mock_request()
+
+        with mock.patch(
+                'google.ads.google_ads.client.MessageToJson') as mock_formatter:
+            # Since logging configuration is global it needs to be reset here
+            # so that state from previous tests does not affect these assertions
+            logging.disable(logging.CRITICAL)
+            logger_spy = mock.Mock(wraps=google.ads.google_ads.client._logger)
+            interceptor = google.ads.google_ads.client.LoggingInterceptor()
+            interceptor.intercept_unary_unary(
+                mock_continuation_fn,
+                mock_client_call_details,
+                mock_request)
+
+            logger_spy.debug.assert_not_called()
+            logger_spy.info.assert_not_called()
+            logger_spy.warning.assert_not_called()
+
 
     def test_intercept_unary_unary_successful_request(self):
         mock_client_call_details = self._get_mock_client_call_details()

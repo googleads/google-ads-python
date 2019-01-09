@@ -597,7 +597,7 @@ def _validate_login_customer_id(login_customer_id):
 
 def _parse_metadata_to_json(metadata):
     """Parses metadata from a gRPC requests and responses to a JSON string.
-    Obscures the value for "developer-token".
+       Obscures the value for "developer-token".
 
     Args:
         metadata: a list of tuples of metadata information from a

@@ -15,15 +15,46 @@
 
 
 import os
+import mock
+import yaml
+import json
+import logging
 
 import google.ads.google_ads.client
 import google.ads.google_ads.v0
-import mock
-from pyfakefs.fake_filesystem_unittest import TestCase
-import yaml
+from google.ads.google_ads.v0.proto.services import google_ads_service_pb2
+from unittest import TestCase
+from pyfakefs.fake_filesystem_unittest import TestCase as FileTestCase
 
 
-class GoogleAdsClientTest(TestCase):
+class ModuleLevelTest(TestCase):
+    def test_parse_metadata_to_json(self):
+        mock_metadata = [
+            ('x-goog-api-client',
+             'gl-python/123 grpc/123 gax/123'),
+            ('developer-token', '0000000000'),
+            ('login-customer-id', '9999999999')]
+
+        result = (google.ads.google_ads.client.
+                  _parse_metadata_to_json(mock_metadata))
+
+        self.assertEqual(result, '{\n'
+                                 '  "developer-token": "REDACTED",\n'
+                                 '  "login-customer-id": "9999999999",\n'
+                                 '  "x-goog-api-client": "gl-python/123 '
+                                 'grpc/123 gax/123"\n'
+                                 '}')
+
+    def test_parse_metadata_to_json_with_none(self):
+        mock_metadata = None
+
+        result = (google.ads.google_ads.client.
+                  _parse_metadata_to_json(mock_metadata))
+
+        self.assertEqual(result, '{}')
+
+
+class GoogleAdsClientTest(FileTestCase):
     """Tests for the google.ads.googleads.client.GoogleAdsClient class."""
 
     def _create_test_client(self, endpoint=None):
@@ -59,7 +90,7 @@ class GoogleAdsClientTest(TestCase):
 
         with mock.patch('google.ads.google_ads.client.GoogleAdsClient'
                         '.__init__') as mock_client_init, \
-             mock.patch(
+            mock.patch(
                  'google.oauth2.credentials.Credentials') as mock_credentials:
             mock_client_init.return_value = None
             mock_credentials_instance = mock.Mock()
@@ -69,7 +100,8 @@ class GoogleAdsClientTest(TestCase):
                 credentials=mock_credentials_instance,
                 developer_token=self.developer_token,
                 endpoint=None,
-                login_customer_id=self.login_customer_id)
+                login_customer_id=self.login_customer_id,
+                logging_config=None)
 
     def test_load_from_storage_login_customer_id_as_None(self):
         config = {
@@ -85,7 +117,7 @@ class GoogleAdsClientTest(TestCase):
 
         with mock.patch('google.ads.google_ads.client.GoogleAdsClient'
                         '.__init__') as mock_client_init, \
-             mock.patch(
+            mock.patch(
                  'google.oauth2.credentials.Credentials') as mock_credentials:
             mock_client_init.return_value = None
             mock_credentials_instance = mock.Mock()
@@ -95,7 +127,8 @@ class GoogleAdsClientTest(TestCase):
                 credentials=mock_credentials_instance,
                 developer_token=self.developer_token,
                 endpoint=None,
-                login_customer_id=None)
+                login_customer_id=None,
+                logging_config=None)
 
     def test_load_from_storage_invalid_login_customer_id(self):
         config = {
@@ -116,7 +149,7 @@ class GoogleAdsClientTest(TestCase):
             self.assertRaises(
                     ValueError,
                     google.ads.google_ads.client.GoogleAdsClient
-                        .load_from_storage)
+                    .load_from_storage)
 
     def test_load_from_storage_too_short_login_customer_id(self):
         config = {
@@ -137,7 +170,7 @@ class GoogleAdsClientTest(TestCase):
             self.assertRaises(
                     ValueError,
                     google.ads.google_ads.client.GoogleAdsClient
-                        .load_from_storage)
+                    .load_from_storage)
 
     def test_load_from_storage(self):
         config = {
@@ -152,7 +185,7 @@ class GoogleAdsClientTest(TestCase):
 
         with mock.patch('google.ads.google_ads.client.GoogleAdsClient'
                         '.__init__') as mock_client_init, \
-             mock.patch(
+            mock.patch(
                  'google.oauth2.credentials.Credentials') as mock_credentials:
             mock_client_init.return_value = None
             mock_credentials_instance = mock.Mock()
@@ -163,7 +196,8 @@ class GoogleAdsClientTest(TestCase):
                 credentials=mock_credentials_instance,
                 developer_token=self.developer_token,
                 endpoint=None,
-                login_customer_id=None)
+                login_customer_id=None,
+                logging_config=None)
 
     def test_load_from_storage_custom_endpoint(self):
         endpoint = 'alt.endpoint.com'
@@ -190,7 +224,8 @@ class GoogleAdsClientTest(TestCase):
                 credentials=mock_credentials_instance,
                 developer_token=self.developer_token,
                 endpoint=endpoint,
-                login_customer_id=None)
+                login_customer_id=None,
+                logging_config=None)
 
     def test_load_from_storage_custom_path(self):
         config = {
@@ -216,7 +251,8 @@ class GoogleAdsClientTest(TestCase):
                 credentials=mock_credentials_instance,
                 developer_token=self.developer_token,
                 endpoint=None,
-                login_customer_id=None)
+                login_customer_id=None,
+                logging_config=None)
 
     def test_load_from_storage_file_not_found(self):
         wrong_file_path = 'test/wrong-google-ads.yaml'
@@ -377,7 +413,200 @@ class MetadataInterceptorTest(TestCase):
 
             mock_updater.assert_called_once_with(
                 mock_client_call_details, [mock_client_call_details.metadata[0],
-                interceptor.developer_token_meta,
-                interceptor.login_customer_id_meta])
+                                           interceptor.developer_token_meta,
+                                           interceptor.login_customer_id_meta])
 
             mock_continuation.assert_called_once()
+
+
+class LoggingInterceptorTest(TestCase):
+    """Tests for the google.ads.googleads.client.LoggingInterceptor class."""
+    _MOCK_CONFIG = {'test': True}
+    _MOCK_ENDPOINT = 'www.test-endpoint.com'
+    _MOCK_INITIAL_METADATA = [('developer-token', '123456'),
+                              ('header', 'value')]
+    _MOCK_CUSTOMER_ID = '123456'
+    _MOCK_REQUEST_ID = '654321xyz'
+    _MOCK_METHOD = 'test/method'
+    _MOCK_TRAILING_METADATA = (('request-id', _MOCK_REQUEST_ID),)
+    _MOCK_ERROR_MESSAGE = 'Test error message'
+
+    def _create_test_interceptor(self, config=_MOCK_CONFIG,
+                                 endpoint=_MOCK_ENDPOINT):
+        return google.ads.google_ads.client.LoggingInterceptor(config, endpoint)
+
+    def _get_mock_client_call_details(self):
+        mock_client_call_details = mock.Mock()
+        mock_client_call_details.method = self._MOCK_METHOD
+        mock_client_call_details.metadata = self._MOCK_INITIAL_METADATA
+        return mock_client_call_details
+
+    def _get_mock_request(self):
+        mock_request = mock.Mock()
+        mock_request.customer_id = self._MOCK_CUSTOMER_ID
+        return mock_request
+
+    def _get_trailing_metadata_fn(self, failed=False):
+        def mock_trailing_metadata_fn():
+            if failed:
+                return None
+            mock_trailing_metadata = self._MOCK_TRAILING_METADATA
+            return mock_trailing_metadata
+        return mock_trailing_metadata_fn
+
+    def _get_mock_exception(self):
+        exception = mock.Mock()
+        error = mock.Mock()
+        error.message = self._MOCK_ERROR_MESSAGE
+        exception.request_id = self._MOCK_REQUEST_ID
+        exception.failure = mock.Mock()
+        exception.failure.errors = [error]
+        exception.error = mock.Mock()
+        exception.error.trailing_metadata = self._get_trailing_metadata_fn(
+            failed=True)
+        return exception
+
+    def _get_mock_response(self, failed=False):
+        def mock_exception_fn():
+            if failed:
+                return self._get_mock_exception()
+            return None
+
+        mock_response = mock.Mock()
+        mock_response.exception = mock_exception_fn
+        mock_response.trailing_metadata = self._get_trailing_metadata_fn(failed)
+        return mock_response
+
+    def _get_mock_continuation_fn(self, fail=False):
+        def mock_continuation_fn(client_call_details, request):
+            mock_response = self._get_mock_response(fail)
+            return mock_response
+
+        return mock_continuation_fn
+
+    def test_init_no_config(self):
+        with mock.patch('logging.config.dictConfig') as mock_dictConfig:
+            interceptor = google.ads.google_ads.client.LoggingInterceptor()
+            mock_dictConfig.assert_not_called()
+
+    def test_init_with_config(self):
+        config = {'test': True}
+        with mock.patch('logging.config.dictConfig') as mock_dictConfig:
+            interceptor = google.ads.google_ads.client.LoggingInterceptor(
+                config)
+            mock_dictConfig.assert_called_once_with(config)
+
+    def test_intercept_unary_unary_unconfigured(self):
+        mock_client_call_details = self._get_mock_client_call_details()
+        mock_continuation_fn = self._get_mock_continuation_fn()
+        mock_request = self._get_mock_request()
+
+        with mock.patch(
+                'google.ads.google_ads.client.MessageToJson') as mock_formatter:
+            # Since logging configuration is global it needs to be reset here
+            # so that state from previous tests does not affect these assertions
+            logging.disable(logging.CRITICAL)
+            logger_spy = mock.Mock(wraps=google.ads.google_ads.client._logger)
+            interceptor = google.ads.google_ads.client.LoggingInterceptor()
+            interceptor.intercept_unary_unary(
+                mock_continuation_fn,
+                mock_client_call_details,
+                mock_request)
+
+            logger_spy.debug.assert_not_called()
+            logger_spy.info.assert_not_called()
+            logger_spy.warning.assert_not_called()
+
+
+    def test_intercept_unary_unary_successful_request(self):
+        mock_client_call_details = self._get_mock_client_call_details()
+        mock_continuation_fn = self._get_mock_continuation_fn()
+        mock_request = self._get_mock_request()
+        mock_json_message = '{"test": "request-response"}'
+        mock_response = mock_continuation_fn(
+            mock_client_call_details, mock_request)
+        mock_trailing_metadata = mock_response.trailing_metadata()
+
+        with mock.patch('logging.config.dictConfig'), \
+            mock.patch('google.ads.google_ads.client._logger') as mock_logger, \
+            mock.patch(
+                'google.ads.google_ads.client.MessageToJson') as mock_formatter:
+            mock_formatter.return_value = mock_json_message
+            interceptor = self._create_test_interceptor()
+            interceptor.intercept_unary_unary(
+                mock_continuation_fn,
+                mock_client_call_details,
+                mock_request)
+
+            mock_logger.info.assert_called_once_with(
+                interceptor._SUMMARY_LOG_LINE
+                % (
+                    self._MOCK_CUSTOMER_ID,
+                    self._MOCK_ENDPOINT,
+                    mock_client_call_details.method,
+                    self._MOCK_REQUEST_ID,
+                    False,
+                    None
+                )
+            )
+
+            mock_logger.debug.assert_called_once_with(
+                interceptor._FULL_REQUEST_LOG_LINE
+                % (
+                    self._MOCK_METHOD,
+                    self._MOCK_ENDPOINT,
+                    google.ads.google_ads.client.
+                    _parse_metadata_to_json(mock_client_call_details.metadata),
+                    mock_json_message,
+                    google.ads.google_ads.client.
+                    _parse_metadata_to_json(mock_trailing_metadata),
+                    mock_json_message
+                )
+            )
+
+    def test_intercept_unary_unary_failed_request(self):
+        mock_client_call_details = self._get_mock_client_call_details()
+        mock_continuation_fn = self._get_mock_continuation_fn(fail=True)
+        mock_request = self._get_mock_request()
+        mock_json_message = '{"test": "request-response"}'
+        mock_response = mock_continuation_fn(
+            mock_client_call_details, mock_request)
+        mock_trailing_metadata = mock_response.trailing_metadata()
+
+        with mock.patch('logging.config.dictConfig'), \
+            mock.patch('google.ads.google_ads.client._logger') as mock_logger, \
+            mock.patch(
+                'google.ads.google_ads.client.MessageToJson') as mock_formatter:
+            mock_formatter.return_value = mock_json_message
+            interceptor = self._create_test_interceptor()
+            interceptor.intercept_unary_unary(
+                mock_continuation_fn,
+                mock_client_call_details,
+                mock_request)
+
+            mock_logger.warning.assert_called_once_with(
+                interceptor._SUMMARY_LOG_LINE
+                % (
+                    self._MOCK_CUSTOMER_ID,
+                    self._MOCK_ENDPOINT,
+                    mock_client_call_details.method,
+                    self._MOCK_REQUEST_ID,
+                    True,
+                    self._MOCK_ERROR_MESSAGE
+                )
+            )
+
+            mock_logger.info.assert_called_once_with(
+                interceptor._FULL_FAULT_LOG_LINE
+                % (
+                    self._MOCK_METHOD,
+                    self._MOCK_ENDPOINT,
+                    google.ads.google_ads.client.
+                    _parse_metadata_to_json(mock_client_call_details.metadata),
+                    mock_json_message,
+                    google.ads.google_ads.client.
+                    _parse_metadata_to_json(mock_trailing_metadata),
+                    mock_json_message
+                )
+            )
+

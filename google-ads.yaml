@@ -8,3 +8,28 @@ refresh_token: INSERT_REFRESH_TOKEN_HERE
 # instead of 123-456-7890. You can also specify this later in code if your
 # application uses multiple manager account + OAuth pairs.
 login_customer_id: INSERT_LOGIN_CUSTOMER_ID_HERE
+
+# Logging configuration
+###############################################################################
+# Below you may specify the logging configuration. This will be provided as   #
+# an input to logging.config.dictConfig. Use the "level" block under the root #
+# logger configuration to adjust the logging level. Note in the "format"      #
+# field that log messages are truncated to 5000 characters by default. You    #
+# can change this to any length by removing the ".5000" portion or changing   #
+# it to a different number.                                                   #
+# #############################################################################
+# logging:
+  # version: 1
+  # disable_existing_loggers: False
+  # formatters:
+    # default_fmt:
+      # format: '[%(asctime)s - %(levelname)s] %(message).5000s'
+      # datefmt: '%Y-%m-%d %H:%M:%S'
+  # handlers:
+    # default_handler:
+      # class: logging.StreamHandler
+      # formatter: default_fmt
+  # loggers:
+    # "":
+      # handlers: [default_handler]
+      # level: INFO

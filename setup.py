@@ -19,7 +19,8 @@ import io
 install_requires = [
     'enum34; python_version < "3.4"',
     'google-auth-oauthlib>=0.0.1,<1.0.0',
-    'google-api-core[grpc] >= 1.4.0, < 2.0.0dev',
+    'google-api-core >= 1.1.0, < 2.0.0dev',
+    'grpcio == 1.17.0',
     'PyYAML >=4.2b1, < 5.0',
 ]
 

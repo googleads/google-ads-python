@@ -241,14 +241,17 @@ class ExceptionInterceptor(grpc.UnaryUnaryClientInterceptor):
             return the failure details, or if the GoogleAdsFailure fails to
             parse.
         """
-        for kv in trailing_metadata:
-            if kv[0] == self._FAILURE_KEY:
-                try:
-                    ga_failure = errors_pb2.GoogleAdsFailure()
-                    ga_failure.ParseFromString(kv[1])
-                    return ga_failure
-                except google.protobuf.message.DecodeError:
-                    return None
+        if trailing_metadata is not None:
+            for kv in trailing_metadata:
+                if kv[0] == self._FAILURE_KEY:
+                    try:
+                        ga_failure = errors_pb2.GoogleAdsFailure()
+                        ga_failure.ParseFromString(kv[1])
+                        return ga_failure
+                    except google.protobuf.message.DecodeError:
+                        return None
+
+        return None
 
     def _get_request_id(self, trailing_metadata):
         """Gets the request ID for the Google Ads API request.
@@ -285,7 +288,9 @@ class ExceptionInterceptor(grpc.UnaryUnaryClientInterceptor):
                 indicative of a GoogleAdsException, or if the exception has a
                 status code of INTERNAL or RESOURCE_EXHAUSTED.
         """
-        if exception.code() not in self._RETRY_STATUS_CODES:
+        status_code = exception.code()
+
+        if status_code not in self._RETRY_STATUS_CODES:
             trailing_metadata = exception.trailing_metadata()
             google_ads_failure = self._get_google_ads_failure(
                 trailing_metadata)
@@ -315,16 +320,12 @@ class ExceptionInterceptor(grpc.UnaryUnaryClientInterceptor):
                 indicative of a GoogleAdsException, or if the exception has a
                 status code of INTERNAL or RESOURCE_EXHAUSTED.
         """
-        try:
-            response = continuation(client_call_details, request)
-        except grpc.RpcError as ex:
-            self._handle_grpc_exception(ex)
-        else:
-            if response.exception():
-                # Any exception raised within the continuation function that is not
-                # an RpcError will be set on the response object and raised here.
-                raise response.exception()
+        response = continuation(client_call_details, request)
+        exception = response.exception()
 
+        if exception is not None:
+            self._handle_grpc_exception(exception)
+        else:
             return response
 
 

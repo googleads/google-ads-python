@@ -746,8 +746,37 @@ class ExceptionInterceptorTest(TestCase):
         interceptor = self._create_test_interceptor()
 
         with mock.patch.object(interceptor, '_handle_grpc_exception'):
-          interceptor.intercept_unary_unary(
-              mock_continuation, mock_client_call_details, mock_request)
+            interceptor.intercept_unary_unary(
+                mock_continuation, mock_client_call_details, mock_request)
 
-          interceptor._handle_grpc_exception.assert_called_once_with(
-              mock_exception)
+            interceptor._handle_grpc_exception.assert_called_once_with(
+                mock_exception)
+
+    def test_intercept_unary_unary_response_is_exception(self):
+        """This test ensures that if the continuation function doesn't raise an
+           error, but the response object from the continuation function
+           has an exception method that returns a Truthy value, that value is
+           then raised.
+        """
+        mock_request = mock.Mock()
+        mock_client_call_details = mock.Mock()
+        mock_response = mock.Mock()
+        mock_exception = TypeError
+
+        def mock_exception_fn():
+            return mock_exception()
+
+        mock_response.exception = mock_exception_fn
+
+        def mock_continuation(client_call_details, request):
+            del client_call_details
+            del request
+            return mock_response
+
+        interceptor = self._create_test_interceptor()
+
+        self.assertRaises(
+            mock_exception,
+            interceptor.intercept_unary_unary,
+            mock_continuation, mock_client_call_details, mock_request
+        )

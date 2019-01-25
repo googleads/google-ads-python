@@ -780,3 +780,29 @@ class ExceptionInterceptorTest(TestCase):
             interceptor.intercept_unary_unary,
             mock_continuation, mock_client_call_details, mock_request
         )
+
+    def test_intercept_unary_unary_response_is_successful(self):
+        """This test ensures that if the continuation function doesn't raise an
+           exception and the response.exception method doesn't return a Truthy
+           value then the response is returned.
+        """
+        mock_request = mock.Mock()
+        mock_client_call_details = mock.Mock()
+        mock_response = mock.Mock()
+
+        def mock_exception_fn():
+            return None
+
+        mock_response.exception = mock_exception_fn
+
+        def mock_continuation(client_call_details, request):
+            del client_call_details
+            del request
+            return mock_response
+
+        interceptor = self._create_test_interceptor()
+
+        result = interceptor.intercept_unary_unary(
+            mock_continuation, mock_client_call_details, mock_request)
+
+        self.assertEqual(result, mock_response)

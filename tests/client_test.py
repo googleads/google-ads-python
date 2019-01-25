@@ -22,7 +22,11 @@ import logging
 
 import google.ads.google_ads.client
 import google.ads.google_ads.v0
+import grpc
+
 from google.ads.google_ads.v0.proto.services import google_ads_service_pb2
+from google.ads.google_ads.v0.proto.errors import errors_pb2 as error_protos
+from google.ads.google_ads.errors import GoogleAdsException
 from unittest import TestCase
 from pyfakefs.fake_filesystem_unittest import TestCase as FileTestCase
 
@@ -343,7 +347,6 @@ class GoogleAdsClientTest(FileTestCase):
 
 
 class MetadataInterceptorTest(TestCase):
-
     def setUp(self):
         self.mock_developer_token = '1234567890'
         self.mock_login_customer_id = '0987654321'
@@ -610,3 +613,73 @@ class LoggingInterceptorTest(TestCase):
                 )
             )
 
+
+class ExceptionInterceptorTest(TestCase):
+    """Tests for the google.ads.googleads.client.ExceptionInterceptor class."""
+
+    def _create_test_interceptor(self):
+        return google.ads.google_ads.client.ExceptionInterceptor()
+
+    def test_init_(self):
+        interceptor = self._create_test_interceptor()
+        self.assertEqual(interceptor._RETRY_STATUS_CODES,
+            (grpc.StatusCode.INTERNAL, grpc.StatusCode.RESOURCE_EXHAUSTED))
+
+    def test_get_request_id(self):
+        mock_metadata = (('request-id', '123456'),)
+        interceptor = self._create_test_interceptor()
+        result = interceptor._get_request_id(mock_metadata)
+        self.assertEqual(result, '123456')
+
+    def test_get_request_id_no_id(self):
+        mock_metadata = (('another-key', 'another-val'),)
+        interceptor = self._create_test_interceptor()
+        result = interceptor._get_request_id(mock_metadata)
+        self.assertEqual(result, None)
+
+    def test_get_google_ads_failure(self):
+        interceptor = self._create_test_interceptor()
+        mock_metadata = ((interceptor._FAILURE_KEY,
+            "\n \n\x02\x08\x10\x12\x1aInvalid customer ID '123'."),)
+        result = interceptor._get_google_ads_failure(mock_metadata)
+        self.assertIsInstance(result, error_protos.GoogleAdsFailure)
+
+    def test_get_google_ads_failure_decode_error(self):
+        interceptor = self._create_test_interceptor()
+        mock_metadata = ((interceptor._FAILURE_KEY,
+            "\n \n\x02\x08\x10Invalid customer ID '123'."),)
+        result = interceptor._get_google_ads_failure(mock_metadata)
+        self.assertEqual(result, None)
+
+    def test_get_google_ads_failure_no_failure_key(self):
+        mock_metadata = (('another-key', 'another-val'),)
+        interceptor = self._create_test_interceptor()
+        result = interceptor._get_google_ads_failure(mock_metadata)
+        self.assertEqual(result, None)
+
+    def test_handle_grpc_exception(self):
+        """This test checks that _handle_grpc_exception throws a
+           GoogleAdsException under two specific condutions:
+
+           1. The exception's .code method returns a grpc.StatusCode enum that
+           is not considered retryable (i.e. is not INTERNAL or
+           RESOURCE_EXHAUSTED)
+           2. The exception's .trailing_metadata method returns metadata that
+           contains they failure key described by the _FAILURE_KEY property
+           on the class.
+        """
+        class MockRpcError(grpc.RpcError):
+            def code(self):
+                return grpc.StatusCode.INVALID_ARGUMENT
+
+            def trailing_metadata(self):
+                return ((interceptor._FAILURE_KEY,
+                    "\n \n\x02\x08\x10\x12\x1aInvalid customer ID '123'."),)
+
+        interceptor = self._create_test_interceptor()
+
+        self.assertRaises(
+            GoogleAdsException,
+            interceptor._handle_grpc_exception,
+            MockRpcError()
+        )

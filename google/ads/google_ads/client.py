@@ -285,7 +285,7 @@ class ExceptionInterceptor(grpc.UnaryUnaryClientInterceptor):
                 indicative of a GoogleAdsException, or if the exception has a
                 status code of INTERNAL or RESOURCE_EXHAUSTED.
         """
-        if exception._state.code not in self._RETRY_STATUS_CODES:
+        if exception.code() not in self._RETRY_STATUS_CODES:
             trailing_metadata = exception.trailing_metadata()
             google_ads_failure = self._get_google_ads_failure(
                 trailing_metadata)

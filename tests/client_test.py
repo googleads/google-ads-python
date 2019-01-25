@@ -658,14 +658,14 @@ class ExceptionInterceptorTest(TestCase):
         self.assertEqual(result, None)
 
     def test_handle_grpc_exception(self):
-        """This test checks that _handle_grpc_exception throws a
+        """This test checks that _handle_grpc_exception raises a
            GoogleAdsException under two specific condutions:
 
            1. The exception's .code method returns a grpc.StatusCode enum that
            is not considered retryable (i.e. is not INTERNAL or
-           RESOURCE_EXHAUSTED)
+           RESOURCE_EXHAUSTED).
            2. The exception's .trailing_metadata method returns metadata that
-           contains they failure key described by the _FAILURE_KEY property
+           contains the failure key described by the _FAILURE_KEY property
            on the class.
         """
         class MockRpcError(grpc.RpcError):
@@ -674,7 +674,7 @@ class ExceptionInterceptorTest(TestCase):
 
             def trailing_metadata(self):
                 return ((interceptor._FAILURE_KEY,
-                    "\n \n\x02\x08\x10\x12\x1aInvalid customer ID '123'."),)
+                    '\n \n\x02\x08\x10\x12\x1aInvalid customer ID \'123\'.'),)
 
         interceptor = self._create_test_interceptor()
 
@@ -683,3 +683,71 @@ class ExceptionInterceptorTest(TestCase):
             interceptor._handle_grpc_exception,
             MockRpcError()
         )
+
+    def test_handle_grpc_exception_retryable(self):
+        """This test checks that _handle_grpc_exception raises the originally
+           passed in exception if:
+
+           1. The exception's .code method returns a grpc.StatusCode enum that
+           is considered retryable (i.e. is INTERNAL or RESOURCE_EXHAUSTED).
+        """
+        class MockRpcError(grpc.RpcError):
+            def code(self):
+                return grpc.StatusCode.INTERNAL
+
+        interceptor = self._create_test_interceptor()
+
+        self.assertRaises(
+            MockRpcError,
+            interceptor._handle_grpc_exception,
+            MockRpcError()
+        )
+
+    def test_handle_grpc_exception_not_google_ads_failure(self):
+        """This test checks that _handle_grpc_exception raises the originally
+           passed in exception if:
+
+           1. The exception's .code method returns a grpc.StatusCode enum that
+           is not considered retryable (i.e. is not INTERNAL or
+           RESOURCE_EXHAUSTED).
+           2. The exception's .trailing_metadata method returns metadata that
+           does not contain the failure key described by the _FAILURE_KEY
+           property on the class.
+        """
+        class MockRpcError(grpc.RpcError):
+            def code(self):
+                return grpc.StatusCode.INVALID_ARGUMENT
+
+            def trailing_metadata(self):
+                return (('bad-failure-key', 'arbitrary-value'),)
+
+        interceptor = self._create_test_interceptor()
+
+        self.assertRaises(
+            MockRpcError,
+            interceptor._handle_grpc_exception,
+            MockRpcError()
+        )
+
+    def test_intercept_unary_unary_continuation_raises(self):
+        """This test checks that RpcErrors raised by the continuation function
+           passed into the interceptor are caught and passed to the
+           _handle_grpc_exception method.
+        """
+        mock_request = mock.Mock()
+        mock_client_call_details = mock.Mock()
+        mock_exception = grpc.RpcError()
+
+        def mock_continuation(client_call_details, request):
+            del client_call_details
+            del request
+            raise mock_exception
+
+        interceptor = self._create_test_interceptor()
+
+        with mock.patch.object(interceptor, '_handle_grpc_exception'):
+          interceptor.intercept_unary_unary(
+              mock_continuation, mock_client_call_details, mock_request)
+
+          interceptor._handle_grpc_exception.assert_called_once_with(
+              mock_exception)

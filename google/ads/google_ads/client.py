@@ -319,13 +319,13 @@ class ExceptionInterceptor(grpc.UnaryUnaryClientInterceptor):
             response = continuation(client_call_details, request)
         except grpc.RpcError as ex:
             self._handle_grpc_exception(ex)
+        else:
+            if response.exception():
+                # Any exception raised within the continuation function that is not
+                # an RpcError will be set on the response object and raised here.
+                raise response.exception()
 
-        if response.exception():
-            # Any exception raised within the continuation function that is not
-            # an RpcError will be set on the response object and raised here.
-            raise response.exception()
-
-        return response
+            return response
 
 
 class LoggingInterceptor(grpc.UnaryUnaryClientInterceptor):

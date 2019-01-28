@@ -361,7 +361,10 @@ class LoggingInterceptor(grpc.UnaryUnaryClientInterceptor):
             exception: a gRPC exception object
         """
         if exception:
-            return exception.request_id
+            try:
+                return exception.request_id
+            except AttributeError:
+                return None
         else:
             trailing_metadata = response.trailing_metadata()
             for datum in trailing_metadata:
@@ -379,6 +382,33 @@ class LoggingInterceptor(grpc.UnaryUnaryClientInterceptor):
             return exception.error.trailing_metadata()
         else:
             return response.trailing_metadata()
+
+    def _get_initial_metadata(self, client_call_details):
+        """Retrieves the initial metadata from client_call_details or None if
+           it is not present.
+
+        Args:
+            client_call_details: information about the client call
+        """
+        return getattr(client_call_details, 'metadata', None)
+
+    def _get_call_method(self, client_call_details):
+        """Retrieves the call method from client_call_details or None if
+           it is not present.
+
+        Args:
+            client_call_details: information about the client call
+        """
+        return getattr(client_call_details, 'method', None)
+
+    def _get_customer_id(self, request):
+        """Retrieves the customer_id from the grpc request or None if
+           it is not present.
+
+        Args:
+            request: an instance of a gRPC request
+        """
+        return getattr(request, 'customer_id', None)
 
     def _parse_response_to_json(self, response, exception):
         """Parses response object to JSON
@@ -471,10 +501,13 @@ class LoggingInterceptor(grpc.UnaryUnaryClientInterceptor):
             response: a gRPC response object
             exception: a gRPC exception object
         """
-        method = client_call_details.method
-        customer_id = getattr(request, 'customer_id', None)
-        metadata_json = _parse_metadata_to_json(client_call_details.metadata)
+        method = self._get_call_method(client_call_details)
+        customer_id = self._get_customer_id(request)
+        initial_metadata = self._get_initial_metadata(client_call_details)
+
+        initial_metadata_json = _parse_metadata_to_json(initial_metadata)
         request_json = _parse_message_to_json(request)
+
         request_id = self._get_request_id(response, exception)
         response_json = self._parse_response_to_json(response, exception)
         trailing_metadata = self._get_trailing_metadata(response, exception)
@@ -485,7 +518,7 @@ class LoggingInterceptor(grpc.UnaryUnaryClientInterceptor):
             self._log_failed_request(
                 method,
                 customer_id,
-                metadata_json,
+                initial_metadata_json,
                 request_id,
                 request_json,
                 trailing_metadata_json,
@@ -495,7 +528,7 @@ class LoggingInterceptor(grpc.UnaryUnaryClientInterceptor):
             self._log_successful_request(
                 method,
                 customer_id,
-                metadata_json,
+                initial_metadata_json,
                 request_id,
                 request_json,
                 trailing_metadata_json,

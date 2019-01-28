@@ -613,6 +613,63 @@ class LoggingInterceptorTest(TestCase):
                 )
             )
 
+    def test_get_initial_metadata(self):
+        with mock.patch('logging.config.dictConfig'):
+            mock_client_call_details = mock.Mock()
+            mock_client_call_details.metadata = self._MOCK_INITIAL_METADATA
+            interceptor = self._create_test_interceptor()
+            result = interceptor._get_initial_metadata(mock_client_call_details)
+            self.assertEqual(result, self._MOCK_INITIAL_METADATA)
+
+    def test_get_initial_metadata_none(self):
+        with mock.patch('logging.config.dictConfig'):
+            mock_client_call_details = {}
+            interceptor = self._create_test_interceptor()
+            result = interceptor._get_initial_metadata(mock_client_call_details)
+            self.assertEqual(result, None)
+
+    def test_get_call_method(self):
+        with mock.patch('logging.config.dictConfig'):
+            mock_client_call_details = mock.Mock()
+            mock_client_call_details.method = self._MOCK_METHOD
+            interceptor = self._create_test_interceptor()
+            result = interceptor._get_call_method(mock_client_call_details)
+            self.assertEqual(result, self._MOCK_METHOD)
+
+    def test_get_call_method_none(self):
+        with mock.patch('logging.config.dictConfig'):
+            mock_client_call_details = {}
+            interceptor = self._create_test_interceptor()
+            result = interceptor._get_call_method(mock_client_call_details)
+            self.assertEqual(result, None)
+
+    def test_get_request_id(self):
+        with mock.patch('logging.config.dictConfig'):
+            mock_response = self._get_mock_response()
+            mock_exception = None
+            interceptor = self._create_test_interceptor()
+            result = interceptor._get_request_id(mock_response, mock_exception)
+            self.assertEqual(result, self._MOCK_REQUEST_ID)
+
+    def test_get_request_id_google_ads_failure(self):
+        with mock.patch('logging.config.dictConfig'):
+            mock_response = self._get_mock_response(failed=True)
+            mock_exception = mock_response.exception()
+            interceptor = self._create_test_interceptor()
+            result = interceptor._get_request_id(mock_response, mock_exception)
+            self.assertEqual(result, self._MOCK_REQUEST_ID)
+
+    def test_get_request_id_transport_failure(self):
+        with mock.patch('logging.config.dictConfig'):
+            mock_response = self._get_mock_response(failed=True)
+            mock_exception = mock_response.exception()
+            # exceptions on transport errors have no request_id because they
+            # don't interact with a server that can provide one.
+            del mock_exception.request_id
+            interceptor = self._create_test_interceptor()
+            result = interceptor._get_request_id(mock_response, mock_exception)
+            self.assertEqual(result, None)
+
 
 class ExceptionInterceptorTest(TestCase):
     """Tests for the google.ads.googleads.client.ExceptionInterceptor class."""

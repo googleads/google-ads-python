@@ -24,7 +24,7 @@ import google.api_core.grpc_helpers
 import google.auth.transport.requests
 import google.oauth2.credentials
 import google.ads.google_ads.errors
-from google.ads.google_ads.v0.proto.errors import errors_pb2
+from google.ads.google_ads.v0.proto.errors import errors_pb2 as error_protos
 from google.protobuf.json_format import MessageToJson
 import grpc
 
@@ -245,7 +245,7 @@ class ExceptionInterceptor(grpc.UnaryUnaryClientInterceptor):
             for kv in trailing_metadata:
                 if kv[0] == self._FAILURE_KEY:
                     try:
-                        ga_failure = errors_pb2.GoogleAdsFailure()
+                        ga_failure = error_protos.GoogleAdsFailure()
                         ga_failure.ParseFromString(kv[1])
                         return ga_failure
                     except google.protobuf.message.DecodeError:
@@ -388,7 +388,7 @@ class LoggingInterceptor(grpc.UnaryUnaryClientInterceptor):
             exception: a gRPC exception object
         """
         if exception:
-            return _parse_message_to_json(exception.failure)
+            return _parse_message_to_json(getattr(exception, 'failure', None))
         else:
             return _parse_message_to_json(response.result())
 

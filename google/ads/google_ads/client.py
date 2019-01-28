@@ -452,6 +452,22 @@ class LoggingInterceptor(grpc.UnaryUnaryClientInterceptor):
         else:
             return _parse_message_to_json(response.result())
 
+    def _get_fault_message(self, exception):
+        """Retrieves fault message from response or exception, and None if no
+           fault exists.
+
+        Args:
+            response: a gRPC response object
+            exception: a gRPC exception object
+        """
+        try:
+            return exception.failure.errors[0].message
+        except AttributeError:
+            try:
+                return exception.details()
+            except AttributeError:
+                return None
+
     def _log_successful_request(self, method, customer_id, metadata_json,
                                 request_id, request_json,
                                 trailing_metadata_json, response_json):
@@ -534,17 +550,15 @@ class LoggingInterceptor(grpc.UnaryUnaryClientInterceptor):
         method = self._get_call_method(client_call_details)
         customer_id = self._get_customer_id(request)
         initial_metadata = self._get_initial_metadata(client_call_details)
-
         initial_metadata_json = _parse_metadata_to_json(initial_metadata)
         request_json = _parse_message_to_json(request)
-
         request_id = self._get_request_id(response, exception)
         response_json = self._parse_response_to_json(response, exception)
         trailing_metadata = self._get_trailing_metadata(response, exception)
         trailing_metadata_json = _parse_metadata_to_json(trailing_metadata)
 
         if exception:
-            fault_message = exception.failure.errors[0].message
+            fault_message = self._get_fault_message(exception)
             self._log_failed_request(
                 method,
                 customer_id,

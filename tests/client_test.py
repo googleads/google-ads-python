@@ -433,6 +433,8 @@ class LoggingInterceptorTest(TestCase):
     _MOCK_METHOD = 'test/method'
     _MOCK_TRAILING_METADATA = (('request-id', _MOCK_REQUEST_ID),)
     _MOCK_ERROR_MESSAGE = 'Test error message'
+    _MOCK_TRANSPORT_ERROR_MESSAGE = u'Received RST_STREAM with error code 2'
+    _MOCK_DEBUG_ERROR_STRING = u'{"description":"Error received from peer"}'
 
     def _create_test_interceptor(self, config=_MOCK_CONFIG,
                                  endpoint=_MOCK_ENDPOINT):
@@ -468,10 +470,14 @@ class LoggingInterceptorTest(TestCase):
 
     def _get_mock_transport_exception(self):
         def _mock_debug_error_string():
-            return u'{"description":"Error received from peer"}'
+            return self._MOCK_DEBUG_ERROR_STRING
+
+        def _mock_details():
+            return self._MOCK_TRANSPORT_ERROR_MESSAGE
 
         exception = mock.Mock()
         exception.debug_error_string = _mock_debug_error_string
+        exception.details = _mock_details
         del exception.failure
         return exception
 
@@ -704,8 +710,7 @@ class LoggingInterceptorTest(TestCase):
             mock_exception = self._get_mock_transport_exception()
             interceptor = self._create_test_interceptor()
             interceptor._parse_response_to_json(mock_response, mock_exception)
-            mock_parser.assert_called_once_with(
-                mock_exception.debug_error_string())
+            mock_parser.assert_called_once_with(self._MOCK_DEBUG_ERROR_STRING)
 
     def test_parse_response_to_json_unknown_failure(self):
         with mock.patch('logging.config.dictConfig'):
@@ -755,6 +760,33 @@ class LoggingInterceptorTest(TestCase):
                 mock_response, mock_exception)
             self.assertEqual(result, tuple())
 
+    def test_get_fault_message(self):
+        with mock.patch('logging.config.dictConfig'):
+            mock_exception = None
+            interceptor = self._create_test_interceptor()
+            result = interceptor._get_fault_message(mock_exception)
+            self.assertEqual(result, None)
+
+    def test_get_fault_message_google_ads_failure(self):
+        with mock.patch('logging.config.dictConfig'):
+            mock_exception = self._get_mock_exception()
+            interceptor = self._create_test_interceptor()
+            result = interceptor._get_fault_message(mock_exception)
+            self.assertEqual(result, self._MOCK_ERROR_MESSAGE)
+
+    def test_get_fault_message_transport_failure(self):
+        with mock.patch('logging.config.dictConfig'):
+            mock_exception = self._get_mock_transport_exception()
+            interceptor = self._create_test_interceptor()
+            result = interceptor._get_fault_message(mock_exception)
+            self.assertEqual(result, self._MOCK_TRANSPORT_ERROR_MESSAGE)
+
+    def test_get_fault_message_unknown_failure(self):
+        with mock.patch('logging.config.dictConfig'):
+            mock_exception = {}
+            interceptor = self._create_test_interceptor()
+            result = interceptor._get_fault_message(mock_exception)
+            self.assertEqual(result, None)
 
 class ExceptionInterceptorTest(TestCase):
     """Tests for the google.ads.googleads.client.ExceptionInterceptor class."""

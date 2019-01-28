@@ -793,6 +793,8 @@ class LoggingInterceptorTest(TestCase):
 class ExceptionInterceptorTest(TestCase):
     """Tests for the google.ads.googleads.client.ExceptionInterceptor class."""
 
+    _MOCK_FAILURE_VALUE = b"\n \n\x02\x08\x10\x12\x1aInvalid customer ID '123'."
+
     def _create_test_interceptor(self):
         return google.ads.google_ads.client.ExceptionInterceptor()
 
@@ -815,15 +817,14 @@ class ExceptionInterceptorTest(TestCase):
 
     def test_get_google_ads_failure(self):
         interceptor = self._create_test_interceptor()
-        mock_metadata = ((interceptor._FAILURE_KEY,
-            "\n \n\x02\x08\x10\x12\x1aInvalid customer ID '123'."),)
+        mock_metadata = ((interceptor._FAILURE_KEY, self._MOCK_FAILURE_VALUE),)
         result = interceptor._get_google_ads_failure(mock_metadata)
         self.assertIsInstance(result, error_protos.GoogleAdsFailure)
 
     def test_get_google_ads_failure_decode_error(self):
         interceptor = self._create_test_interceptor()
-        mock_metadata = ((interceptor._FAILURE_KEY,
-            "\n \n\x02\x08\x10Invalid customer ID '123'."),)
+        mock_failure_value = self._MOCK_FAILURE_VALUE + b'1234'
+        mock_metadata = ((interceptor._FAILURE_KEY, mock_failure_value),)
         result = interceptor._get_google_ads_failure(mock_metadata)
         self.assertEqual(result, None)
 
@@ -842,13 +843,14 @@ class ExceptionInterceptorTest(TestCase):
         """If exception is not retryable and is a GoogleAdsFailure convert to
            GoogleAdsException and raise.
         """
+        mock_error_message = self._MOCK_FAILURE_VALUE
+
         class MockRpcError(grpc.RpcError):
             def code(self):
                 return grpc.StatusCode.INVALID_ARGUMENT
 
             def trailing_metadata(self):
-                return ((interceptor._FAILURE_KEY,
-                    '\n \n\x02\x08\x10\x12\x1aInvalid customer ID \'123\'.'),)
+                return ((interceptor._FAILURE_KEY, mock_error_message),)
 
         interceptor = self._create_test_interceptor()
 

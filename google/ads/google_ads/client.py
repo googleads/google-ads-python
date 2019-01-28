@@ -690,15 +690,21 @@ def _validate_login_customer_id(login_customer_id):
                              'as a string, i.e. "1234567890"')
 
 
-def _parse_to_json(serializable):
-    """Parses a serializable object (i.e. a dict or a string) into a
+def _parse_to_json(obj):
+    """Parses a serializable object into a
        consistently formatted JSON string.
 
     Args:
-        serializable: a dict or string representing serializable key value pairs
+        obj: an object or dict
     """
-    return json.dumps(serializable, indent=2, sort_keys=True,
-        ensure_ascii=False, separators=(',', ': '))
+    def default_serializer(value):
+        if isinstance(value, bytes):
+            return value.decode(errors='ignore')
+        else:
+            return None
+
+    return json.dumps(obj, indent=2, sort_keys=True,
+        ensure_ascii=False, default=default_serializer, separators=(',', ': '))
 
 
 def _parse_metadata_to_json(metadata):

@@ -383,7 +383,12 @@ class LoggingInterceptor(grpc.UnaryUnaryClientInterceptor):
         try:
             return exception.error.trailing_metadata()
         except AttributeError:
-            return response.trailing_metadata()
+            try:
+                return response.trailing_metadata()
+            except AttributeError:
+                # if trailing metadata is not found on either the response or
+                # exception then return an empty tuple
+                return tuple()
 
     def _get_initial_metadata(self, client_call_details):
         """Retrieves the initial metadata from client_call_details or None if

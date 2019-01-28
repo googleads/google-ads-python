@@ -746,6 +746,15 @@ class LoggingInterceptorTest(TestCase):
                 mock_response, mock_exception)
             self.assertEqual(result, self._MOCK_TRAILING_METADATA)
 
+    def test_get_trailing_metadata_unknown_failure(self):
+        with mock.patch('logging.config.dictConfig'):
+            mock_response = {}
+            mock_exception = {}
+            interceptor = self._create_test_interceptor()
+            result = interceptor._get_trailing_metadata(
+                mock_response, mock_exception)
+            self.assertEqual(result, tuple())
+
 
 class ExceptionInterceptorTest(TestCase):
     """Tests for the google.ads.googleads.client.ExceptionInterceptor class."""

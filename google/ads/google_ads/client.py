@@ -372,15 +372,17 @@ class LoggingInterceptor(grpc.UnaryUnaryClientInterceptor):
                     return datum[1]
 
     def _get_trailing_metadata(self, response, exception):
-        """Retrieves trailing metadata from a response object
+        """Retrieves trailing metadata from a response or exception object. If
+           the exception is a GoogleAdsException the trailing metadata will be
+           on its error object, otherwise it will be on the response object.
 
         Args:
             response: a gRPC response object
             exception: a gRPC exception object
         """
-        if exception:
+        try:
             return exception.error.trailing_metadata()
-        else:
+        except AttributeError:
             return response.trailing_metadata()
 
     def _get_initial_metadata(self, client_call_details):

@@ -449,12 +449,10 @@ class LoggingInterceptorTest(TestCase):
         mock_request.customer_id = self._MOCK_CUSTOMER_ID
         return mock_request
 
-    def _get_trailing_metadata_fn(self, failed=False):
+    def _get_trailing_metadata_fn(self):
         def mock_trailing_metadata_fn():
-            if failed:
-                return None
-            mock_trailing_metadata = self._MOCK_TRAILING_METADATA
-            return mock_trailing_metadata
+            return self._MOCK_TRAILING_METADATA
+
         return mock_trailing_metadata_fn
 
     def _get_mock_exception(self):
@@ -465,8 +463,7 @@ class LoggingInterceptorTest(TestCase):
         exception.failure = mock.Mock()
         exception.failure.errors = [error]
         exception.error = mock.Mock()
-        exception.error.trailing_metadata = self._get_trailing_metadata_fn(
-            failed=True)
+        exception.error.trailing_metadata = self._get_trailing_metadata_fn()
         return exception
 
     def _get_mock_transport_exception(self):
@@ -486,7 +483,7 @@ class LoggingInterceptorTest(TestCase):
 
         mock_response = mock.Mock()
         mock_response.exception = mock_exception_fn
-        mock_response.trailing_metadata = self._get_trailing_metadata_fn(failed)
+        mock_response.trailing_metadata = self._get_trailing_metadata_fn()
         return mock_response
 
     def _get_mock_continuation_fn(self, fail=False):
@@ -720,6 +717,34 @@ class LoggingInterceptorTest(TestCase):
             result = interceptor._parse_response_to_json(
                 mock_response, mock_exception)
             self.assertEqual(result, '{}')
+
+    def test_get_trailing_metadata(self):
+        with mock.patch('logging.config.dictConfig'):
+            mock_response = self._get_mock_response()
+            mock_exception = mock_response.exception()
+            interceptor = self._create_test_interceptor()
+            result = interceptor._get_trailing_metadata(
+                mock_response, mock_exception)
+            self.assertEqual(result, self._MOCK_TRAILING_METADATA)
+
+    def test_get_trailing_metadata_google_ads_failure(self):
+        with mock.patch('logging.config.dictConfig'):
+            mock_response = self._get_mock_response(failed=True)
+            mock_exception = mock_response.exception()
+            interceptor = self._create_test_interceptor()
+            result = interceptor._get_trailing_metadata(
+                mock_response, mock_exception)
+            self.assertEqual(result, self._MOCK_TRAILING_METADATA)
+
+    def test_get_trailing_metadata_transport_failure(self):
+        with mock.patch('logging.config.dictConfig'):
+            mock_response = self._get_mock_response(failed=True)
+            mock_exception = mock_response.exception()
+            del mock_exception.error
+            interceptor = self._create_test_interceptor()
+            result = interceptor._get_trailing_metadata(
+                mock_response, mock_exception)
+            self.assertEqual(result, self._MOCK_TRAILING_METADATA)
 
 
 class ExceptionInterceptorTest(TestCase):

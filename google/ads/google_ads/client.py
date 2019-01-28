@@ -390,7 +390,10 @@ class LoggingInterceptor(grpc.UnaryUnaryClientInterceptor):
         Args:
             client_call_details: information about the client call
         """
-        return getattr(client_call_details, 'metadata', None)
+        try:
+            return client_call_details.metadata
+        except AttributeError:
+            return None
 
     def _get_call_method(self, client_call_details):
         """Retrieves the call method from client_call_details or None if
@@ -399,7 +402,10 @@ class LoggingInterceptor(grpc.UnaryUnaryClientInterceptor):
         Args:
             client_call_details: information about the client call
         """
-        return getattr(client_call_details, 'method', None)
+        try:
+            return client_call_details.method
+        except AttributeError:
+            return None
 
     def _get_customer_id(self, request):
         """Retrieves the customer_id from the grpc request or None if
@@ -408,7 +414,10 @@ class LoggingInterceptor(grpc.UnaryUnaryClientInterceptor):
         Args:
             request: an instance of a gRPC request
         """
-        return getattr(request, 'customer_id', None)
+        try:
+            return request.customer_id
+        except AttributeError:
+            return None
 
     def _parse_response_to_json(self, response, exception):
         """Parses response object to JSON

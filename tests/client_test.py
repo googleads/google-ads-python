@@ -469,6 +469,15 @@ class LoggingInterceptorTest(TestCase):
             failed=True)
         return exception
 
+    def _get_mock_transport_exception(self):
+        def _mock_debug_error_string():
+            return u'{"description":"Error received from peer"}'
+
+        exception = mock.Mock()
+        exception.debug_error_string = _mock_debug_error_string
+        del exception.failure
+        return exception
+
     def _get_mock_response(self, failed=False):
         def mock_exception_fn():
             if failed:
@@ -669,6 +678,48 @@ class LoggingInterceptorTest(TestCase):
             interceptor = self._create_test_interceptor()
             result = interceptor._get_request_id(mock_response, mock_exception)
             self.assertEqual(result, None)
+
+    def test_parse_response_to_json(self):
+        with mock.patch('logging.config.dictConfig'), \
+            mock.patch(
+                'google.ads.google_ads.client.MessageToJson') as mock_formatter:
+            mock_response = self._get_mock_response()
+            mock_exception = mock_response.exception()
+            interceptor = self._create_test_interceptor()
+            interceptor._parse_response_to_json(mock_response, mock_exception)
+            mock_formatter.assert_called_once_with(mock_response.result())
+
+    def test_parse_response_to_json_google_ads_failure(self):
+        with mock.patch('logging.config.dictConfig'), \
+            mock.patch(
+                'google.ads.google_ads.client.MessageToJson') as mock_formatter:
+            mock_response = mock.Mock()
+            mock_exception = self._get_mock_exception()
+            interceptor = self._create_test_interceptor()
+            interceptor._parse_response_to_json(mock_response, mock_exception)
+            mock_formatter.assert_called_once_with(mock_exception.failure)
+
+    def test_parse_response_to_json_transport_failure(self):
+        with mock.patch('logging.config.dictConfig'), \
+            mock.patch(
+                'google.ads.google_ads.client._parse_to_json') as mock_parser:
+            mock_response = mock.Mock()
+            mock_exception = self._get_mock_transport_exception()
+            interceptor = self._create_test_interceptor()
+            interceptor._parse_response_to_json(mock_response, mock_exception)
+            mock_parser.assert_called_once_with(
+                mock_exception.debug_error_string())
+
+    def test_parse_response_to_json_unknown_failure(self):
+        with mock.patch('logging.config.dictConfig'):
+            mock_response = mock.Mock()
+            mock_exception = mock.Mock()
+            del mock_exception.failure
+            del mock_exception.debug_error_string
+            interceptor = self._create_test_interceptor()
+            result = interceptor._parse_response_to_json(
+                mock_response, mock_exception)
+            self.assertEqual(result, '{}')
 
 
 class ExceptionInterceptorTest(TestCase):

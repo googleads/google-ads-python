@@ -427,7 +427,21 @@ class LoggingInterceptor(grpc.UnaryUnaryClientInterceptor):
             exception: a gRPC exception object
         """
         if exception:
-            return _parse_message_to_json(getattr(exception, 'failure', None))
+            try:
+                # try to retrieve the .failure property of a GoogleAdsFailure.
+                failure = exception.failure
+            except AttributeError:
+                # if .failure raises then it's likely this is a transport error
+                # with a .debug_error_string method.
+                try:
+                    debug_string = exception.debug_error_string()
+                    return _parse_to_json(debug_string)
+                except AttributeError:
+                    # if both attempts to retrieve serializable error data fail
+                    # then simply return an empty JSON string
+                    return '{}'
+            else:
+                return _parse_message_to_json(failure)
         else:
             return _parse_message_to_json(response.result())
 
@@ -640,6 +654,17 @@ def _validate_login_customer_id(login_customer_id):
                              'as a string, i.e. "1234567890"')
 
 
+def _parse_to_json(serializable):
+    """Parses a serializable object (i.e. a dict or a string) into a
+       consistently formatted JSON string.
+
+    Args:
+        serializable: a dict or string representing serializable key value pairs
+    """
+    return json.dumps(serializable, indent=2, sort_keys=True,
+        ensure_ascii=False, separators=(',', ': '))
+
+
 def _parse_metadata_to_json(metadata):
     """Parses metadata from a gRPC requests and responses to a JSON string.
        Obscures the value for "developer-token".
@@ -662,9 +687,7 @@ def _parse_metadata_to_json(metadata):
             value = datum[1]
             metadata_dict[key] = value
 
-    return json.dumps(
-        metadata_dict, indent=2, sort_keys=True, ensure_ascii=False,
-        separators=(',', ': '))
+    return _parse_to_json(metadata_dict)
 
 
 def _parse_message_to_json(message):
@@ -673,7 +696,7 @@ def _parse_message_to_json(message):
     Args:
         request: an instance of the SearchGoogleAdsRequest type
     """
-    json =  MessageToJson(message)
+    json = MessageToJson(message)
     json = json.replace(', \n', ',\n')
     return json
 

@@ -475,9 +475,14 @@ class LoggingInterceptorTest(TestCase):
         def _mock_details():
             return self._MOCK_TRANSPORT_ERROR_MESSAGE
 
+        def _mock_trailing_metadata():
+            return self._MOCK_TRAILING_METADATA
+
         exception = mock.Mock()
         exception.debug_error_string = _mock_debug_error_string
         exception.details = _mock_details
+        exception.trailing_metadata = _mock_trailing_metadata
+        del exception.error
         del exception.failure
         return exception
 
@@ -744,9 +749,8 @@ class LoggingInterceptorTest(TestCase):
 
     def test_get_trailing_metadata_transport_failure(self):
         with mock.patch('logging.config.dictConfig'):
-            mock_response = self._get_mock_response(failed=True)
-            mock_exception = mock_response.exception()
-            del mock_exception.error
+            mock_response = mock.Mock()
+            mock_exception = self._get_mock_transport_exception()
             interceptor = self._create_test_interceptor()
             result = interceptor._get_trailing_metadata(
                 mock_response, mock_exception)
@@ -755,7 +759,8 @@ class LoggingInterceptorTest(TestCase):
     def test_get_trailing_metadata_unknown_failure(self):
         with mock.patch('logging.config.dictConfig'):
             mock_response = {}
-            mock_exception = {}
+            mock_exception = self._get_mock_transport_exception()
+            del mock_exception.trailing_metadata
             interceptor = self._create_test_interceptor()
             result = interceptor._get_trailing_metadata(
                 mock_response, mock_exception)

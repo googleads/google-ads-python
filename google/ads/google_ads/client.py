@@ -291,9 +291,9 @@ class ExceptionInterceptor(grpc.UnaryUnaryClientInterceptor):
         status_code = exception.code()
 
         if status_code not in self._RETRY_STATUS_CODES:
-            trailing_metadata = exception.trailing_metadata()
-            google_ads_failure = self._get_google_ads_failure(
-                trailing_metadata)
+            trailing_metadata = (
+                _get_trailing_metadata_from_interceptor_exception(exception))
+            google_ads_failure = self._get_google_ads_failure(trailing_metadata)
 
             if google_ads_failure:
                 request_id = self._get_request_id(trailing_metadata)
@@ -323,7 +323,7 @@ class ExceptionInterceptor(grpc.UnaryUnaryClientInterceptor):
         response = continuation(client_call_details, request)
         exception = response.exception()
 
-        if exception is not None:
+        if exception:
             self._handle_grpc_exception(exception)
         else:
             return response
@@ -380,15 +380,10 @@ class LoggingInterceptor(grpc.UnaryUnaryClientInterceptor):
             response: a gRPC response object
             exception: a gRPC exception object
         """
-        try:
-            return exception.error.trailing_metadata()
-        except AttributeError:
-            try:
-                return response.trailing_metadata()
-            except AttributeError:
-                # if trailing metadata is not found on either the response or
-                # exception then return an empty tuple
-                return tuple()
+        if exception:
+            return _get_trailing_metadata_from_interceptor_exception(exception)
+        else:
+            return response.trailing_metadata()
 
     def _get_initial_metadata(self, client_call_details):
         """Retrieves the initial metadata from client_call_details or None if
@@ -639,6 +634,26 @@ class _ClientCallDetails(
         grpc.ClientCallDetails):
     """An wrapper class for initializing a new ClientCallDetails instance."""
     pass
+
+
+def _get_trailing_metadata_from_interceptor_exception(exception):
+    """Retrieves trailing metadata from an exception object.
+
+    Args:
+        exception: an exception object generated from within an interceptor
+
+    Returns:
+        A tuple of trailing metadata key value pairs
+    """
+    try:
+        return exception.error.trailing_metadata()
+    except AttributeError:
+        try:
+            return exception.trailing_metadata()
+        except AttributeError:
+            # if trailing metadata is not found in either location then
+            # return an empty tuple
+            return tuple()
 
 
 def _get_version(name):

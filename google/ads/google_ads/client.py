@@ -442,8 +442,8 @@ class LoggingInterceptor(grpc.UnaryUnaryClientInterceptor):
                 # with a .debug_error_string method.
                 try:
                     debug_string = exception.debug_error_string()
-                    return _parse_to_json(debug_string)
-                except AttributeError:
+                    return _parse_to_json(json.loads(debug_string))
+                except (AttributeError, ValueError):
                     # if both attempts to retrieve serializable error data fail
                     # then simply return an empty JSON string
                     return '{}'

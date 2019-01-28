@@ -710,7 +710,8 @@ class LoggingInterceptorTest(TestCase):
             mock_exception = self._get_mock_transport_exception()
             interceptor = self._create_test_interceptor()
             interceptor._parse_response_to_json(mock_response, mock_exception)
-            mock_parser.assert_called_once_with(self._MOCK_DEBUG_ERROR_STRING)
+            mock_parser.assert_called_once_with(
+                json.loads(self._MOCK_DEBUG_ERROR_STRING))
 
     def test_parse_response_to_json_unknown_failure(self):
         with mock.patch('logging.config.dictConfig'):
@@ -787,6 +788,7 @@ class LoggingInterceptorTest(TestCase):
             interceptor = self._create_test_interceptor()
             result = interceptor._get_fault_message(mock_exception)
             self.assertEqual(result, None)
+
 
 class ExceptionInterceptorTest(TestCase):
     """Tests for the google.ads.googleads.client.ExceptionInterceptor class."""

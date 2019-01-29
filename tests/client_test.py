@@ -19,16 +19,16 @@ import mock
 import yaml
 import json
 import logging
+from unittest import TestCase
+
+import grpc
+from pyfakefs.fake_filesystem_unittest import TestCase as FileTestCase
 
 import google.ads.google_ads.client
 import google.ads.google_ads.v0
-import grpc
-
 from google.ads.google_ads.v0.proto.services import google_ads_service_pb2
 from google.ads.google_ads.v0.proto.errors import errors_pb2 as error_protos
 from google.ads.google_ads.errors import GoogleAdsException
-from unittest import TestCase
-from pyfakefs.fake_filesystem_unittest import TestCase as FileTestCase
 
 
 class ModuleLevelTest(TestCase):

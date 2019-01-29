@@ -32,6 +32,7 @@ from google.ads.google_ads.errors import GoogleAdsException
 
 
 class ModuleLevelTest(TestCase):
+
     def test_parse_metadata_to_json(self):
         mock_metadata = [
             ('x-goog-api-client',
@@ -347,6 +348,7 @@ class GoogleAdsClientTest(FileTestCase):
 
 
 class MetadataInterceptorTest(TestCase):
+
     def setUp(self):
         self.mock_developer_token = '1234567890'
         self.mock_login_customer_id = '0987654321'
@@ -424,6 +426,7 @@ class MetadataInterceptorTest(TestCase):
 
 class LoggingInterceptorTest(TestCase):
     """Tests for the google.ads.googleads.client.LoggingInterceptor class."""
+
     _MOCK_CONFIG = {'test': True}
     _MOCK_ENDPOINT = 'www.test-endpoint.com'
     _MOCK_INITIAL_METADATA = [('developer-token', '123456'),

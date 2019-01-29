@@ -233,7 +233,7 @@ class ExceptionInterceptor(grpc.UnaryUnaryClientInterceptor):
         """Gets the Google Ads failure details if they exist.
 
         Args:
-            trailing_metadata:
+            trailing_metadata: a tuple of metadatum from the service response.
 
         Returns:
             A GoogleAdsFailure that describes how a GoogleAds API call failed.
@@ -257,7 +257,7 @@ class ExceptionInterceptor(grpc.UnaryUnaryClientInterceptor):
         """Gets the request ID for the Google Ads API request.
 
         Args:
-            trailing_metadata:
+            trailing_metadata: a tuple of metadatum from the service response.
 
         Returns:
             A str request ID associated with the Google Ads API request, or None
@@ -281,7 +281,7 @@ class ExceptionInterceptor(grpc.UnaryUnaryClientInterceptor):
         https://github.com/grpc/grpc/blob/master/doc/statuscodes.md
 
         Args:
-            exception: an exception of type RpcError.
+            exception: an exception of type grpc.RpcError.
 
         Raises:
             GoogleAdsException: If the exception's trailing metadata
@@ -314,6 +314,9 @@ class ExceptionInterceptor(grpc.UnaryUnaryClientInterceptor):
         """Intercepts and wraps exceptions in the rpc response.
 
         Overrides abstract method defined in grpc.UnaryUnaryClientInterceptor.
+
+        Returns:
+            A grpc.Call instance representing a service response
 
         Raises:
             GoogleAdsException: If the exception's trailing metadata
@@ -358,6 +361,10 @@ class LoggingInterceptor(grpc.UnaryUnaryClientInterceptor):
     def _get_request_id(self, response, exception):
         """Retrieves the request id from a response object
 
+        Returns:
+            A str of the request_id, or None if there's an exception but the
+            request_id isn't present.
+
         Args:
             response: a gRPC response object
             exception: a gRPC exception object
@@ -379,6 +386,9 @@ class LoggingInterceptor(grpc.UnaryUnaryClientInterceptor):
         If the exception is a GoogleAdsException the trailing metadata will be
         on its error object, otherwise it will be on the response object.
 
+        Returns:
+            A tuple of metadatum representing response header key value pairs.
+
         Args:
             response: a gRPC response object
             exception: a gRPC exception object
@@ -392,17 +402,23 @@ class LoggingInterceptor(grpc.UnaryUnaryClientInterceptor):
         """Retrieves the initial metadata from client_call_details or None if
         it is not present.
 
+        Returns:
+            A tuple of metadatum representing request header key value pairs.
+
         Args:
-            client_call_details: information about the client call
+            client_call_details: information about the client call.
         """
         try:
             return client_call_details.metadata
         except AttributeError:
-            return None
+            return tuple()
 
     def _get_call_method(self, client_call_details):
         """Retrieves the call method from client_call_details or None if
         it is not present.
+
+        Returns:
+            A str with the call method or None if it isn't present.
 
         Args:
             client_call_details: information about the client call
@@ -416,6 +432,10 @@ class LoggingInterceptor(grpc.UnaryUnaryClientInterceptor):
         """Retrieves the customer_id from the grpc request or None if
         it is not present.
 
+        Returns:
+            A str with the customer id from the request or None if it isn't
+            present.
+
         Args:
             request: an instance of a gRPC request
         """
@@ -426,6 +446,9 @@ class LoggingInterceptor(grpc.UnaryUnaryClientInterceptor):
 
     def _parse_response_to_json(self, response, exception):
         """Parses response object to JSON
+
+        Returns:
+            A str of JSON representing a response or exception from the service.
 
         Args:
             response: a gRPC response object
@@ -453,6 +476,9 @@ class LoggingInterceptor(grpc.UnaryUnaryClientInterceptor):
     def _get_fault_message(self, exception):
         """Retrieves fault message from response or exception, and None if no
         fault exists.
+
+        Returns:
+            A str with an error message or None if one cannot be found.
 
         Args:
             response: a gRPC response object
@@ -580,6 +606,9 @@ class LoggingInterceptor(grpc.UnaryUnaryClientInterceptor):
         """Intercepts and logs API interactions.
 
         Overrides abstract method defined in grpc.UnaryUnaryClientInterceptor.
+
+        Returns:
+            A grpc.Call instance representing a service response.
         """
         response = continuation(client_call_details, request)
         if _logger.isEnabledFor(logging.WARNING):
@@ -612,6 +641,9 @@ class MetadataInterceptor(grpc.UnaryUnaryClientInterceptor):
         """Intercepts and appends custom metadata.
 
         Overrides abstract method defined in grpc.UnaryUnaryClientInterceptor.
+
+        Returns:
+            A grpc.Call instance representing a service response.
         """
         if client_call_details.metadata is None:
             metadata = []
@@ -643,10 +675,10 @@ def _get_trailing_metadata_from_interceptor_exception(exception):
     """Retrieves trailing metadata from an exception object.
 
     Args:
-        exception: an exception object generated from within an interceptor
+        exception: an exception object generated from within an interceptor.
 
     Returns:
-        A tuple of trailing metadata key value pairs
+        A tuple of trailing metadata key value pairs.
     """
     try:
         return exception.error.trailing_metadata()
@@ -696,8 +728,11 @@ def _validate_login_customer_id(login_customer_id):
 def _parse_to_json(obj):
     """Parses a serializable object into a consistently formatted JSON string.
 
+    Returns:
+        A str of formatted JSON serialized from the given object.
+
     Args:
-        obj: an object or dict
+        obj: an object or dict.
     """
     def default_serializer(value):
         if isinstance(value, bytes):

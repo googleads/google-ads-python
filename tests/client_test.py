@@ -643,7 +643,7 @@ class LoggingInterceptorTest(TestCase):
             mock_client_call_details = {}
             interceptor = self._create_test_interceptor()
             result = interceptor._get_initial_metadata(mock_client_call_details)
-            self.assertEqual(result, None)
+            self.assertEqual(result, tuple())
 
     def test_get_call_method(self):
         with mock.patch('logging.config.dictConfig'):
@@ -866,8 +866,7 @@ class ExceptionInterceptorTest(TestCase):
         )
 
     def test_handle_grpc_exception_retryable(self):
-        """If exception is retryable raise as-is.
-        """
+        """If exception is retryable raise as-is."""
         class MockRpcError(grpc.RpcError):
             def code(self):
                 return grpc.StatusCode.INTERNAL

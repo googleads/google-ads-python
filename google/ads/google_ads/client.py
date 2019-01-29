@@ -370,10 +370,7 @@ class LoggingInterceptor(grpc.UnaryUnaryClientInterceptor):
             exception: a gRPC exception object
         """
         if exception:
-            try:
-                return exception.request_id
-            except AttributeError:
-                return None
+            return getattr(exception, 'request_id', None)
         else:
             trailing_metadata = response.trailing_metadata()
             for datum in trailing_metadata:
@@ -408,10 +405,7 @@ class LoggingInterceptor(grpc.UnaryUnaryClientInterceptor):
         Args:
             client_call_details: information about the client call.
         """
-        try:
-            return client_call_details.metadata
-        except AttributeError:
-            return tuple()
+        return getattr(client_call_details, 'metadata', tuple())
 
     def _get_call_method(self, client_call_details):
         """Retrieves the call method from client_call_details or None if
@@ -423,10 +417,7 @@ class LoggingInterceptor(grpc.UnaryUnaryClientInterceptor):
         Args:
             client_call_details: information about the client call
         """
-        try:
-            return client_call_details.method
-        except AttributeError:
-            return None
+        return getattr(client_call_details, 'method', None)
 
     def _get_customer_id(self, request):
         """Retrieves the customer_id from the grpc request or None if
@@ -439,10 +430,7 @@ class LoggingInterceptor(grpc.UnaryUnaryClientInterceptor):
         Args:
             request: an instance of a gRPC request
         """
-        try:
-            return request.customer_id
-        except AttributeError:
-            return None
+        return getattr(request, 'customer_id', None)
 
     def _parse_response_to_json(self, response, exception):
         """Parses response object to JSON
@@ -455,12 +443,14 @@ class LoggingInterceptor(grpc.UnaryUnaryClientInterceptor):
             exception: a gRPC exception object
         """
         if exception:
-            try:
-                # try to retrieve the .failure property of a GoogleAdsFailure.
-                failure = exception.failure
-            except AttributeError:
-                # if .failure raises then it's likely this is a transport error
-                # with a .debug_error_string method.
+            # try to retrieve the .failure property of a GoogleAdsFailure.
+            failure = getattr(exception, 'failure', None)
+
+            if failure:
+                return _parse_message_to_json(failure)
+            else:
+                # if exception.failure isn't present then it's likely this is a
+                # transport error with a .debug_error_string method.
                 try:
                     debug_string = exception.debug_error_string()
                     return _parse_to_json(json.loads(debug_string))
@@ -468,8 +458,6 @@ class LoggingInterceptor(grpc.UnaryUnaryClientInterceptor):
                     # if both attempts to retrieve serializable error data fail
                     # then simply return an empty JSON string
                     return '{}'
-            else:
-                return _parse_message_to_json(failure)
         else:
             return _parse_message_to_json(response.result())
 

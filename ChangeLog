@@ -1,5 +1,8 @@
 * 0.7.0:
 - Google Ads v0_7 release.
+- Address inconsistent exception handling in Exception and Logging
+interceptors.
+- Pin `google-api-core` and `grpcio` dependencies.
 
 * 0.6.0:
 - Add configurable logging functionality.

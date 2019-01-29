@@ -270,13 +270,15 @@ class ExceptionInterceptor(grpc.UnaryUnaryClientInterceptor):
         return None
 
     def _handle_grpc_exception(self, exception):
-        """Handles gRPC exceptions of type RpcError by attempting to
-           convert them to a more readable GoogleAdsException. Certain types of
-           exceptions are not converted; if the object's trailing metadata does
-           not indicate that it is a GoogleAdsException, or if it falls under
-           a certain category of status code, (INTERNAL or RESOURCE_EXHAUSTED).
-           See documentation for more information about gRPC status codes:
-           https://github.com/grpc/grpc/blob/master/doc/statuscodes.md
+        """Attempts to convert exceptions to a GoogleAdsException object.
+
+        Handles gRPC exceptions of type RpcError by attempting to convert them
+        to a more readable GoogleAdsException. Certain types of exceptions are
+        not converted; if the object's trailing metadata does not indicate that
+        it is a GoogleAdsException, or if it falls under a certain category of
+        status code, (INTERNAL or RESOURCE_EXHAUSTED). See documentation for
+        more information about gRPC status codes:
+        https://github.com/grpc/grpc/blob/master/doc/statuscodes.md
 
         Args:
             exception: an exception of type RpcError.
@@ -372,9 +374,10 @@ class LoggingInterceptor(grpc.UnaryUnaryClientInterceptor):
                     return datum[1]
 
     def _get_trailing_metadata(self, response, exception):
-        """Retrieves trailing metadata from a response or exception object. If
-           the exception is a GoogleAdsException the trailing metadata will be
-           on its error object, otherwise it will be on the response object.
+        """Retrieves trailing metadata from a response or exception object.
+
+        If the exception is a GoogleAdsException the trailing metadata will be
+        on its error object, otherwise it will be on the response object.
 
         Args:
             response: a gRPC response object
@@ -387,7 +390,7 @@ class LoggingInterceptor(grpc.UnaryUnaryClientInterceptor):
 
     def _get_initial_metadata(self, client_call_details):
         """Retrieves the initial metadata from client_call_details or None if
-           it is not present.
+        it is not present.
 
         Args:
             client_call_details: information about the client call
@@ -399,7 +402,7 @@ class LoggingInterceptor(grpc.UnaryUnaryClientInterceptor):
 
     def _get_call_method(self, client_call_details):
         """Retrieves the call method from client_call_details or None if
-           it is not present.
+        it is not present.
 
         Args:
             client_call_details: information about the client call
@@ -411,7 +414,7 @@ class LoggingInterceptor(grpc.UnaryUnaryClientInterceptor):
 
     def _get_customer_id(self, request):
         """Retrieves the customer_id from the grpc request or None if
-           it is not present.
+        it is not present.
 
         Args:
             request: an instance of a gRPC request
@@ -449,7 +452,7 @@ class LoggingInterceptor(grpc.UnaryUnaryClientInterceptor):
 
     def _get_fault_message(self, exception):
         """Retrieves fault message from response or exception, and None if no
-           fault exists.
+        fault exists.
 
         Args:
             response: a gRPC response object
@@ -632,7 +635,7 @@ class _ClientCallDetails(
             '_ClientCallDetails',
             ('method', 'timeout', 'metadata', 'credentials')),
         grpc.ClientCallDetails):
-    """An wrapper class for initializing a new ClientCallDetails instance."""
+    """A wrapper class for initializing a new ClientCallDetails instance."""
     pass
 
 
@@ -691,8 +694,7 @@ def _validate_login_customer_id(login_customer_id):
 
 
 def _parse_to_json(obj):
-    """Parses a serializable object into a
-       consistently formatted JSON string.
+    """Parses a serializable object into a consistently formatted JSON string.
 
     Args:
         obj: an object or dict
@@ -708,7 +710,7 @@ def _parse_to_json(obj):
 
 def _parse_metadata_to_json(metadata):
     """Parses metadata from a gRPC requests and responses to a JSON string.
-       Obscures the value for "developer-token".
+    Obscures the value for "developer-token".
 
     Args:
         metadata: a list of tuples of metadata information from a

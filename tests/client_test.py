@@ -846,7 +846,7 @@ class ExceptionInterceptorTest(TestCase):
 
     def test_handle_grpc_exception(self):
         """If exception is not retryable and is a GoogleAdsFailure convert to
-           GoogleAdsException and raise.
+        GoogleAdsException and raise.
         """
         mock_error_message = self._MOCK_FAILURE_VALUE
 

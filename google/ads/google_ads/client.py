@@ -703,9 +703,8 @@ def _parse_to_json(obj):
         else:
             return None
 
-    return json.dumps(obj, indent=2, sort_keys=True,
-        ensure_ascii=False, default=default_serializer, separators=(',', ': '))
-
+    return str(json.dumps(obj, indent=2, sort_keys=True,
+        ensure_ascii=False, default=default_serializer, separators=(',', ': ')))
 
 def _parse_metadata_to_json(metadata):
     """Parses metadata from a gRPC requests and responses to a JSON string.

@@ -963,7 +963,7 @@ class ExceptionInterceptorTest(TestCase):
                           interceptor._handle_grpc_exception, MockRpcError())
 
     def test_handle_grpc_exception_retryable(self):
-      """Raises retryable exceptions as-is."""
+        """Raises retryable exceptions as-is."""
         class MockRpcError(grpc.RpcError):
             def code(self):
                 return grpc.StatusCode.INTERNAL

@@ -468,7 +468,7 @@ class LoggingInterceptor(grpc.UnaryUnaryClientInterceptor):
             return _parse_message_to_json(response.result())
 
     def _get_fault_message(self, exception):
-      """Retrieves a fault/error message from an exception object.
+        """Retrieves a fault/error message from an exception object.
 
         Returns None if no error message can be found on the exception.
 

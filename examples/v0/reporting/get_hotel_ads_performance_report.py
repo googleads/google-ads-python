@@ -1,4 +1,4 @@
-# Copyright 2018 Google LLC
+# Copyright 2019 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -30,15 +30,15 @@ _DEFAULT_PAGE_SIZE = 50
 def main(client, customer_id, page_size):
     ga_service = client.get_service('GoogleAdsService')
 
-    query = ('SELECT campaign.id, campaign.name, ad_group.id, ad_group.name, '
-             'ad_group_criterion.criterion_id, '
-             'ad_group_criterion.keyword.text, '
-             'ad_group_criterion.keyword.match_type, '
-             'metrics.impressions, metrics.clicks, metrics.cost_micros '
-             'FROM keyword_view WHERE date DURING LAST_7_DAYS '
-             'AND campaign.advertising_channel_type = \'SEARCH\' '
+    query = ('SELECT campaign.id, campaign.advertising_channel_type, '
+             'ad_group.id, ad_group.status, metrics.impressions, '
+             'metrics.hotel_average_lead_value_micros, '
+             'segments.hotel_check_in_day_of_week, '
+             'segments.hotel_length_of_stay '
+             'FROM hotel_performance_view '
+             'WHERE segments.date DURING LAST_7_DAYS '
+             'AND campaign.advertising_channel_type = \'HOTEL\' '
              'AND ad_group.status = \'ENABLED\' '
-             'AND ad_group_criterion.status IN (\'ENABLED\', \'PAUSED\') '
              'ORDER BY metrics.impressions DESC '
              'LIMIT 50')
 
@@ -48,19 +48,17 @@ def main(client, customer_id, page_size):
         for row in response:
             campaign = row.campaign
             ad_group = row.ad_group
-            criterion = row.ad_group_criterion
+            hotel_check_in_day_of_week = row.hotel_check_in_day_of_week
+            hotel_length_of_stay = row.hotel_length_of_stay
             metrics = row.metrics
 
-            print('Keyword text "%s" with match type "%d" and ID %d in ad '
-                  'group "%s" with ID "%d" in campaign "%s" with ID %d had %s '
-                  'impression(s), %s click(s), and %s cost (in micros) during '
-                  'the last 7 days.'
-                  % (criterion.keyword.text.value, criterion.keyword.match_type,
-                     criterion.criterion_id.value,
-                     ad_group.name.value, ad_group.id.value,
-                     campaign.name.value, campaign.id.value,
-                     metrics.impressions.value,
-                     metrics.clicks.value, metrics.cost_micros.value))
+            print('Ad group ID "%s" in campaign ID "%s" with hotel check-in '
+                  'on "%s" and "%s" day(s) stay had %d impression(s) and %d '
+                  'average lead value (in micros) during the last 7 days.'
+                  % (ad_group.id.value, campaign.id.value,
+                     hotel_check_in_day_of_week,
+                     hotel_length_of_stay.value, metrics.impressions.value,
+                     metrics.hotel_average_lead_value_micros.value))
     except google.ads.google_ads.errors.GoogleAdsException as ex:
         print('Request with ID "%s" failed with status "%s" and includes the '
               'following errors:' % (ex.request_id, ex.error.code().name))
@@ -83,8 +81,8 @@ if __name__ == '__main__':
     # The following argument(s) should be provided to run the example.
     parser.add_argument('-c', '--customer_id', type=six.text_type,
                         required=True, help='The Google Ads customer ID.')
-    parser.add_argument('-p', '--page_size', type=integer, required=False,
-                        help='The number of entries to include per page.
+    parser.add_argument('-p', '--page_size', type=int, required=False,
+                        help='The number of entries to include per page.\
                         Default is 50.', default=_DEFAULT_PAGE_SIZE)
     args = parser.parse_args()
 

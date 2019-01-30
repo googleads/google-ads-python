@@ -647,9 +647,11 @@ class LoggingInterceptorTest(TestCase):
                     False, None))
 
             initial_metadata = (google.ads.google_ads.client.
-                _parse_metadata_to_json(mock_client_call_details.metadata))
+                                _parse_metadata_to_json(
+                                    mock_client_call_details.metadata))
             trailing_metadata = (google.ads.google_ads.client.
-                _parse_metadata_to_json(mock_trailing_metadata))
+                                 _parse_metadata_to_json(
+                                     mock_trailing_metadata))
 
             mock_logger.debug.assert_called_once_with(
                 interceptor._FULL_REQUEST_LOG_LINE
@@ -686,9 +688,11 @@ class LoggingInterceptorTest(TestCase):
                     True, self._MOCK_ERROR_MESSAGE))
 
             initial_metadata = (google.ads.google_ads.client.
-                _parse_metadata_to_json(mock_client_call_details.metadata))
+                                _parse_metadata_to_json(
+                                    mock_client_call_details.metadata))
             trailing_metadata = (google.ads.google_ads.client.
-                _parse_metadata_to_json(mock_trailing_metadata))
+                                 _parse_metadata_to_json(
+                                     mock_trailing_metadata))
 
             mock_logger.info.assert_called_once_with(
                 interceptor._FULL_FAULT_LOG_LINE
@@ -918,7 +922,8 @@ class ExceptionInterceptorTest(TestCase):
         """Tests that the interceptor initializes properly"""
         interceptor = self._create_test_interceptor()
         self.assertEqual(interceptor._RETRY_STATUS_CODES,
-            (grpc.StatusCode.INTERNAL, grpc.StatusCode.RESOURCE_EXHAUSTED))
+                         (grpc.StatusCode.INTERNAL,
+                          grpc.StatusCode.RESOURCE_EXHAUSTED))
 
     def test_get_request_id(self):
         """_get_request_id obtains a request ID from a metadata tuple"""
@@ -988,7 +993,7 @@ class ExceptionInterceptorTest(TestCase):
         interceptor = self._create_test_interceptor()
 
         self.assertRaises(GoogleAdsException,
-            interceptor._handle_grpc_exception, MockRpcError())
+                          interceptor._handle_grpc_exception, MockRpcError())
 
     def test_handle_grpc_exception_retryable(self):
         """If exception is retryable raise as-is."""
@@ -999,7 +1004,7 @@ class ExceptionInterceptorTest(TestCase):
         interceptor = self._create_test_interceptor()
 
         self.assertRaises(MockRpcError, interceptor._handle_grpc_exception,
-            MockRpcError())
+                          MockRpcError())
 
     def test_handle_grpc_exception_not_google_ads_failure(self):
         """If exception is not retryable and not a GoogleAdsFailure raise as-is.
@@ -1014,11 +1019,12 @@ class ExceptionInterceptorTest(TestCase):
         interceptor = self._create_test_interceptor()
 
         self.assertRaises(MockRpcError, interceptor._handle_grpc_exception,
-            MockRpcError())
+                          MockRpcError())
 
     def test_intercept_unary_unary_response_is_exception(self):
         """If response.exception() is not None exception is handled."""
         mock_exception = grpc.RpcError()
+
         class MockResponse():
             def exception(self):
                 return mock_exception

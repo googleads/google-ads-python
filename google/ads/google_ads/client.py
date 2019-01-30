@@ -348,7 +348,7 @@ class LoggingInterceptor(grpc.UnaryUnaryClientInterceptor):
                          'FaultMessage: %s')
 
     def __init__(self, logging_config=None, endpoint=None):
-        """Initializer for the LoggingInterceptor
+        """Initializer for the LoggingInterceptor.
 
         Args:
             logging_config: configuration dictionary for logging
@@ -359,7 +359,7 @@ class LoggingInterceptor(grpc.UnaryUnaryClientInterceptor):
             logging.config.dictConfig(logging_config)
 
     def _get_request_id(self, response, exception):
-        """Retrieves the request id from a response object
+        """Retrieves the request id from a response object.
 
         Returns:
             A str of the request_id, or None if there's an exception but the
@@ -396,8 +396,10 @@ class LoggingInterceptor(grpc.UnaryUnaryClientInterceptor):
             return response.trailing_metadata()
 
     def _get_initial_metadata(self, client_call_details):
-        """Retrieves the initial metadata from client_call_details or None if
-        it is not present.
+        """Retrieves the initial metadata from client_call_details.
+
+        Returns an empty tuple if metadata isn't present on the
+        client_call_details object.
 
         Returns:
             A tuple of metadatum representing request header key value pairs.
@@ -408,8 +410,10 @@ class LoggingInterceptor(grpc.UnaryUnaryClientInterceptor):
         return getattr(client_call_details, 'metadata', tuple())
 
     def _get_call_method(self, client_call_details):
-        """Retrieves the call method from client_call_details or None if
-        it is not present.
+        """Retrieves the call method from client_call_details.
+
+        Returns None if the method is not present on the client_call_details
+        object.
 
         Returns:
             A str with the call method or None if it isn't present.
@@ -420,8 +424,9 @@ class LoggingInterceptor(grpc.UnaryUnaryClientInterceptor):
         return getattr(client_call_details, 'method', None)
 
     def _get_customer_id(self, request):
-        """Retrieves the customer_id from the grpc request or None if
-        it is not present.
+        """Retrieves the customer_id from the grpc request.
+
+        Returns None if a customer_id is not present on the request object.
 
         Returns:
             A str with the customer id from the request or None if it isn't
@@ -433,10 +438,11 @@ class LoggingInterceptor(grpc.UnaryUnaryClientInterceptor):
         return getattr(request, 'customer_id', None)
 
     def _parse_response_to_json(self, response, exception):
-        """Parses response object to JSON
+        """Parses response object to JSON.
 
         Returns:
-            A str of JSON representing a response or exception from the service.
+            A str of JSON representing a response or exception from the
+            service.
 
         Args:
             response: a gRPC response object
@@ -462,8 +468,9 @@ class LoggingInterceptor(grpc.UnaryUnaryClientInterceptor):
             return _parse_message_to_json(response.result())
 
     def _get_fault_message(self, exception):
-        """Retrieves fault message from response or exception, and None if no
-        fault exists.
+      """Retrieves a fault/error message from an exception object.
+
+        Returns None if no error message can be found on the exception.
 
         Returns:
             A str with an error message or None if one cannot be found.
@@ -483,7 +490,7 @@ class LoggingInterceptor(grpc.UnaryUnaryClientInterceptor):
     def _log_successful_request(self, method, customer_id, metadata_json,
                                 request_id, request_json,
                                 trailing_metadata_json, response_json):
-        """Handles logging of a successful request
+        """Handles logging of a successful request.
 
         Args:
             method: the gRPC method of the request
@@ -505,7 +512,7 @@ class LoggingInterceptor(grpc.UnaryUnaryClientInterceptor):
                             request_id, request_json,
                             trailing_metadata_json, response_json,
                             fault_message):
-        """Handles logging of a failed request
+        """Handles logging of a failed request.
 
         Args:
             method: the gRPC method of the request
@@ -525,7 +532,7 @@ class LoggingInterceptor(grpc.UnaryUnaryClientInterceptor):
                         method, request_id, True, fault_message))
 
     def _log_request(self, client_call_details, request, response, exception):
-        """Handles logging all requests
+        """Handles logging all requests.
 
         Args:
             client_call_details: information about the client call
@@ -698,7 +705,8 @@ def _parse_to_json(obj):
 
 
 def _parse_metadata_to_json(metadata):
-    """Parses metadata from a gRPC requests and responses to a JSON string.
+    """Parses metadata from gRPC request and response messages to a JSON str.
+
     Obscures the value for "developer-token".
 
     Args:

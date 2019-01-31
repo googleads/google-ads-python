@@ -52,13 +52,14 @@ def main(client, customer_id, page_size):
             hotel_length_of_stay = row.hotel_length_of_stay
             metrics = row.metrics
 
-            print('Ad group ID "%s" in campaign ID "%s" with hotel check-in '
-                  'on "%s" and "%s" day(s) stay had %d impression(s) and %d '
-                  'average lead value (in micros) during the last 7 days.'
-                  % (ad_group.id.value, campaign.id.value,
-                     hotel_check_in_day_of_week,
-                     hotel_length_of_stay.value, metrics.impressions.value,
-                     metrics.hotel_average_lead_value_micros.value))
+            print('Ad group ID "%s" in campaign ID "%s" ' % (ad_group.id.value,
+                  campaign.id.value))
+            print('with hotel check-in on "%s" and "%s" day(s) stay ' % (
+                  hotel_check_in_day_of_week, hotel_length_of_stay.value))
+            print('had %d impression(s) and %d average lead value (in micros) '
+                  'during the last 7 days.\n' % (metrics.impressions.value,
+                  metrics.hotel_average_lead_value_micros.value))
+
     except google.ads.google_ads.errors.GoogleAdsException as ex:
         print('Request with ID "%s" failed with status "%s" and includes the '
               'following errors:' % (ex.request_id, ex.error.code().name))
@@ -77,13 +78,10 @@ if __name__ == '__main__':
                          .load_from_storage())
 
     parser = argparse.ArgumentParser(
-        description=('Retrieves a campaign\'s negative keywords.'))
+        description=('Retrieves Hotel-ads performance statistics.'))
     # The following argument(s) should be provided to run the example.
     parser.add_argument('-c', '--customer_id', type=six.text_type,
                         required=True, help='The Google Ads customer ID.')
-    parser.add_argument('-p', '--page_size', type=int, required=False,
-                        help='The number of entries to include per page.\
-                        Default is 50.', default=_DEFAULT_PAGE_SIZE)
     args = parser.parse_args()
 
-    main(google_ads_client, args.customer_id, args.page_size)
+    main(google_ads_client, args.customer_id, _DEFAULT_PAGE_SIZE)

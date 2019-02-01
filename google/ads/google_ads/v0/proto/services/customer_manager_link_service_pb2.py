@@ -7,7 +7,6 @@ from google.protobuf import descriptor as _descriptor
 from google.protobuf import message as _message
 from google.protobuf import reflection as _reflection
 from google.protobuf import symbol_database as _symbol_database
-from google.protobuf import descriptor_pb2
 # @@protoc_insertion_point(imports)
 
 _sym_db = _symbol_database.Default()
@@ -15,15 +14,17 @@ _sym_db = _symbol_database.Default()
 
 from google.ads.google_ads.v0.proto.resources import customer_manager_link_pb2 as google_dot_ads_dot_googleads__v0_dot_proto_dot_resources_dot_customer__manager__link__pb2
 from google.api import annotations_pb2 as google_dot_api_dot_annotations__pb2
+from google.protobuf import field_mask_pb2 as google_dot_protobuf_dot_field__mask__pb2
 
 
 DESCRIPTOR = _descriptor.FileDescriptor(
   name='google/ads/googleads_v0/proto/services/customer_manager_link_service.proto',
   package='google.ads.googleads.v0.services',
   syntax='proto3',
-  serialized_pb=_b('\nJgoogle/ads/googleads_v0/proto/services/customer_manager_link_service.proto\x12 google.ads.googleads.v0.services\x1a\x43google/ads/googleads_v0/proto/resources/customer_manager_link.proto\x1a\x1cgoogle/api/annotations.proto\"6\n\x1dGetCustomerManagerLinkRequest\x12\x15\n\rresource_name\x18\x01 \x01(\t2\xf0\x01\n\x1a\x43ustomerManagerLinkService\x12\xd1\x01\n\x16GetCustomerManagerLink\x12?.google.ads.googleads.v0.services.GetCustomerManagerLinkRequest\x1a\x36.google.ads.googleads.v0.resources.CustomerManagerLink\">\x82\xd3\xe4\x93\x02\x38\x12\x36/v0/{resource_name=customers/*/customerManagerLinks/*}B\xdf\x01\n$com.google.ads.googleads.v0.servicesB\x1f\x43ustomerManagerLinkServiceProtoP\x01ZHgoogle.golang.org/genproto/googleapis/ads/googleads/v0/services;services\xa2\x02\x03GAA\xaa\x02 Google.Ads.GoogleAds.V0.Services\xca\x02 Google\\Ads\\GoogleAds\\V0\\Servicesb\x06proto3')
+  serialized_options=_b('\n$com.google.ads.googleads.v0.servicesB\037CustomerManagerLinkServiceProtoP\001ZHgoogle.golang.org/genproto/googleapis/ads/googleads/v0/services;services\242\002\003GAA\252\002 Google.Ads.GoogleAds.V0.Services\312\002 Google\\Ads\\GoogleAds\\V0\\Services\352\002$Google::Ads::GoogleAds::V0::Services'),
+  serialized_pb=_b('\nJgoogle/ads/googleads_v0/proto/services/customer_manager_link_service.proto\x12 google.ads.googleads.v0.services\x1a\x43google/ads/googleads_v0/proto/resources/customer_manager_link.proto\x1a\x1cgoogle/api/annotations.proto\x1a google/protobuf/field_mask.proto\"6\n\x1dGetCustomerManagerLinkRequest\x12\x15\n\rresource_name\x18\x01 \x01(\t\"\x8b\x01\n MutateCustomerManagerLinkRequest\x12\x13\n\x0b\x63ustomer_id\x18\x01 \x01(\t\x12R\n\noperations\x18\x02 \x03(\x0b\x32>.google.ads.googleads.v0.services.CustomerManagerLinkOperation\"\xa6\x01\n\x1c\x43ustomerManagerLinkOperation\x12/\n\x0bupdate_mask\x18\x04 \x01(\x0b\x32\x1a.google.protobuf.FieldMask\x12H\n\x06update\x18\x02 \x01(\x0b\x32\x36.google.ads.googleads.v0.resources.CustomerManagerLinkH\x00\x42\x0b\n\toperation\"w\n!MutateCustomerManagerLinkResponse\x12R\n\x07results\x18\x01 \x03(\x0b\x32\x41.google.ads.googleads.v0.services.MutateCustomerManagerLinkResult\"8\n\x1fMutateCustomerManagerLinkResult\x12\x15\n\rresource_name\x18\x01 \x01(\t2\xdd\x03\n\x1a\x43ustomerManagerLinkService\x12\xd1\x01\n\x16GetCustomerManagerLink\x12?.google.ads.googleads.v0.services.GetCustomerManagerLinkRequest\x1a\x36.google.ads.googleads.v0.resources.CustomerManagerLink\">\x82\xd3\xe4\x93\x02\x38\x12\x36/v0/{resource_name=customers/*/customerManagerLinks/*}\x12\xea\x01\n\x19MutateCustomerManagerLink\x12\x42.google.ads.googleads.v0.services.MutateCustomerManagerLinkRequest\x1a\x43.google.ads.googleads.v0.services.MutateCustomerManagerLinkResponse\"D\x82\xd3\xe4\x93\x02>\"9/v0/customers/{customer_id=*}/customerManagerLinks:mutate:\x01*B\x86\x02\n$com.google.ads.googleads.v0.servicesB\x1f\x43ustomerManagerLinkServiceProtoP\x01ZHgoogle.golang.org/genproto/googleapis/ads/googleads/v0/services;services\xa2\x02\x03GAA\xaa\x02 Google.Ads.GoogleAds.V0.Services\xca\x02 Google\\Ads\\GoogleAds\\V0\\Services\xea\x02$Google::Ads::GoogleAds::V0::Servicesb\x06proto3')
   ,
-  dependencies=[google_dot_ads_dot_googleads__v0_dot_proto_dot_resources_dot_customer__manager__link__pb2.DESCRIPTOR,google_dot_api_dot_annotations__pb2.DESCRIPTOR,])
+  dependencies=[google_dot_ads_dot_googleads__v0_dot_proto_dot_resources_dot_customer__manager__link__pb2.DESCRIPTOR,google_dot_api_dot_annotations__pb2.DESCRIPTOR,google_dot_protobuf_dot_field__mask__pb2.DESCRIPTOR,])
 
 
 
@@ -41,29 +42,181 @@ _GETCUSTOMERMANAGERLINKREQUEST = _descriptor.Descriptor(
       has_default_value=False, default_value=_b("").decode('utf-8'),
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
-      options=None, file=DESCRIPTOR),
+      serialized_options=None, file=DESCRIPTOR),
   ],
   extensions=[
   ],
   nested_types=[],
   enum_types=[
   ],
-  options=None,
+  serialized_options=None,
   is_extendable=False,
   syntax='proto3',
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=211,
-  serialized_end=265,
+  serialized_start=245,
+  serialized_end=299,
 )
 
+
+_MUTATECUSTOMERMANAGERLINKREQUEST = _descriptor.Descriptor(
+  name='MutateCustomerManagerLinkRequest',
+  full_name='google.ads.googleads.v0.services.MutateCustomerManagerLinkRequest',
+  filename=None,
+  file=DESCRIPTOR,
+  containing_type=None,
+  fields=[
+    _descriptor.FieldDescriptor(
+      name='customer_id', full_name='google.ads.googleads.v0.services.MutateCustomerManagerLinkRequest.customer_id', index=0,
+      number=1, type=9, cpp_type=9, label=1,
+      has_default_value=False, default_value=_b("").decode('utf-8'),
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR),
+    _descriptor.FieldDescriptor(
+      name='operations', full_name='google.ads.googleads.v0.services.MutateCustomerManagerLinkRequest.operations', index=1,
+      number=2, type=11, cpp_type=10, label=3,
+      has_default_value=False, default_value=[],
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR),
+  ],
+  extensions=[
+  ],
+  nested_types=[],
+  enum_types=[
+  ],
+  serialized_options=None,
+  is_extendable=False,
+  syntax='proto3',
+  extension_ranges=[],
+  oneofs=[
+  ],
+  serialized_start=302,
+  serialized_end=441,
+)
+
+
+_CUSTOMERMANAGERLINKOPERATION = _descriptor.Descriptor(
+  name='CustomerManagerLinkOperation',
+  full_name='google.ads.googleads.v0.services.CustomerManagerLinkOperation',
+  filename=None,
+  file=DESCRIPTOR,
+  containing_type=None,
+  fields=[
+    _descriptor.FieldDescriptor(
+      name='update_mask', full_name='google.ads.googleads.v0.services.CustomerManagerLinkOperation.update_mask', index=0,
+      number=4, type=11, cpp_type=10, label=1,
+      has_default_value=False, default_value=None,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR),
+    _descriptor.FieldDescriptor(
+      name='update', full_name='google.ads.googleads.v0.services.CustomerManagerLinkOperation.update', index=1,
+      number=2, type=11, cpp_type=10, label=1,
+      has_default_value=False, default_value=None,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR),
+  ],
+  extensions=[
+  ],
+  nested_types=[],
+  enum_types=[
+  ],
+  serialized_options=None,
+  is_extendable=False,
+  syntax='proto3',
+  extension_ranges=[],
+  oneofs=[
+    _descriptor.OneofDescriptor(
+      name='operation', full_name='google.ads.googleads.v0.services.CustomerManagerLinkOperation.operation',
+      index=0, containing_type=None, fields=[]),
+  ],
+  serialized_start=444,
+  serialized_end=610,
+)
+
+
+_MUTATECUSTOMERMANAGERLINKRESPONSE = _descriptor.Descriptor(
+  name='MutateCustomerManagerLinkResponse',
+  full_name='google.ads.googleads.v0.services.MutateCustomerManagerLinkResponse',
+  filename=None,
+  file=DESCRIPTOR,
+  containing_type=None,
+  fields=[
+    _descriptor.FieldDescriptor(
+      name='results', full_name='google.ads.googleads.v0.services.MutateCustomerManagerLinkResponse.results', index=0,
+      number=1, type=11, cpp_type=10, label=3,
+      has_default_value=False, default_value=[],
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR),
+  ],
+  extensions=[
+  ],
+  nested_types=[],
+  enum_types=[
+  ],
+  serialized_options=None,
+  is_extendable=False,
+  syntax='proto3',
+  extension_ranges=[],
+  oneofs=[
+  ],
+  serialized_start=612,
+  serialized_end=731,
+)
+
+
+_MUTATECUSTOMERMANAGERLINKRESULT = _descriptor.Descriptor(
+  name='MutateCustomerManagerLinkResult',
+  full_name='google.ads.googleads.v0.services.MutateCustomerManagerLinkResult',
+  filename=None,
+  file=DESCRIPTOR,
+  containing_type=None,
+  fields=[
+    _descriptor.FieldDescriptor(
+      name='resource_name', full_name='google.ads.googleads.v0.services.MutateCustomerManagerLinkResult.resource_name', index=0,
+      number=1, type=9, cpp_type=9, label=1,
+      has_default_value=False, default_value=_b("").decode('utf-8'),
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR),
+  ],
+  extensions=[
+  ],
+  nested_types=[],
+  enum_types=[
+  ],
+  serialized_options=None,
+  is_extendable=False,
+  syntax='proto3',
+  extension_ranges=[],
+  oneofs=[
+  ],
+  serialized_start=733,
+  serialized_end=789,
+)
+
+_MUTATECUSTOMERMANAGERLINKREQUEST.fields_by_name['operations'].message_type = _CUSTOMERMANAGERLINKOPERATION
+_CUSTOMERMANAGERLINKOPERATION.fields_by_name['update_mask'].message_type = google_dot_protobuf_dot_field__mask__pb2._FIELDMASK
+_CUSTOMERMANAGERLINKOPERATION.fields_by_name['update'].message_type = google_dot_ads_dot_googleads__v0_dot_proto_dot_resources_dot_customer__manager__link__pb2._CUSTOMERMANAGERLINK
+_CUSTOMERMANAGERLINKOPERATION.oneofs_by_name['operation'].fields.append(
+  _CUSTOMERMANAGERLINKOPERATION.fields_by_name['update'])
+_CUSTOMERMANAGERLINKOPERATION.fields_by_name['update'].containing_oneof = _CUSTOMERMANAGERLINKOPERATION.oneofs_by_name['operation']
+_MUTATECUSTOMERMANAGERLINKRESPONSE.fields_by_name['results'].message_type = _MUTATECUSTOMERMANAGERLINKRESULT
 DESCRIPTOR.message_types_by_name['GetCustomerManagerLinkRequest'] = _GETCUSTOMERMANAGERLINKREQUEST
+DESCRIPTOR.message_types_by_name['MutateCustomerManagerLinkRequest'] = _MUTATECUSTOMERMANAGERLINKREQUEST
+DESCRIPTOR.message_types_by_name['CustomerManagerLinkOperation'] = _CUSTOMERMANAGERLINKOPERATION
+DESCRIPTOR.message_types_by_name['MutateCustomerManagerLinkResponse'] = _MUTATECUSTOMERMANAGERLINKRESPONSE
+DESCRIPTOR.message_types_by_name['MutateCustomerManagerLinkResult'] = _MUTATECUSTOMERMANAGERLINKRESULT
 _sym_db.RegisterFileDescriptor(DESCRIPTOR)
 
 GetCustomerManagerLinkRequest = _reflection.GeneratedProtocolMessageType('GetCustomerManagerLinkRequest', (_message.Message,), dict(
   DESCRIPTOR = _GETCUSTOMERMANAGERLINKREQUEST,
-  __module__ = 'google.ads.google_ads.v0.proto.services.customer_manager_link_service_pb2'
+  __module__ = 'google.ads.googleads_v0.proto.services.customer_manager_link_service_pb2'
   ,
   __doc__ = """Request message for
   [CustomerManagerLinkService.GetCustomerManagerLink][google.ads.googleads.v0.services.CustomerManagerLinkService.GetCustomerManagerLink].
@@ -77,18 +230,93 @@ GetCustomerManagerLinkRequest = _reflection.GeneratedProtocolMessageType('GetCus
   ))
 _sym_db.RegisterMessage(GetCustomerManagerLinkRequest)
 
+MutateCustomerManagerLinkRequest = _reflection.GeneratedProtocolMessageType('MutateCustomerManagerLinkRequest', (_message.Message,), dict(
+  DESCRIPTOR = _MUTATECUSTOMERMANAGERLINKREQUEST,
+  __module__ = 'google.ads.googleads_v0.proto.services.customer_manager_link_service_pb2'
+  ,
+  __doc__ = """Request message for
+  [CustomerManagerLinkService.MutateCustomerManagerLink][google.ads.googleads.v0.services.CustomerManagerLinkService.MutateCustomerManagerLink].
+  
+  
+  Attributes:
+      customer_id:
+          The ID of the customer whose customer manager links are being
+          modified.
+      operations:
+          The list of operations to perform on individual customer
+          manager links.
+  """,
+  # @@protoc_insertion_point(class_scope:google.ads.googleads.v0.services.MutateCustomerManagerLinkRequest)
+  ))
+_sym_db.RegisterMessage(MutateCustomerManagerLinkRequest)
 
-DESCRIPTOR.has_options = True
-DESCRIPTOR._options = _descriptor._ParseOptions(descriptor_pb2.FileOptions(), _b('\n$com.google.ads.googleads.v0.servicesB\037CustomerManagerLinkServiceProtoP\001ZHgoogle.golang.org/genproto/googleapis/ads/googleads/v0/services;services\242\002\003GAA\252\002 Google.Ads.GoogleAds.V0.Services\312\002 Google\\Ads\\GoogleAds\\V0\\Services'))
+CustomerManagerLinkOperation = _reflection.GeneratedProtocolMessageType('CustomerManagerLinkOperation', (_message.Message,), dict(
+  DESCRIPTOR = _CUSTOMERMANAGERLINKOPERATION,
+  __module__ = 'google.ads.googleads_v0.proto.services.customer_manager_link_service_pb2'
+  ,
+  __doc__ = """Updates the status of a CustomerManagerLink. The following actions are
+  possible: 1. Update operation with status ACTIVE accepts a pending
+  invitation. 2. Update operation with status REFUSED declines a pending
+  invitation. 3. Update operation with status INACTIVE terminates link to
+  manager.
+  
+  
+  Attributes:
+      update_mask:
+          FieldMask that determines which resource fields are modified
+          in an update.
+      operation:
+          The mutate operation.
+      update:
+          Update operation: The link is expected to have a valid
+          resource name.
+  """,
+  # @@protoc_insertion_point(class_scope:google.ads.googleads.v0.services.CustomerManagerLinkOperation)
+  ))
+_sym_db.RegisterMessage(CustomerManagerLinkOperation)
+
+MutateCustomerManagerLinkResponse = _reflection.GeneratedProtocolMessageType('MutateCustomerManagerLinkResponse', (_message.Message,), dict(
+  DESCRIPTOR = _MUTATECUSTOMERMANAGERLINKRESPONSE,
+  __module__ = 'google.ads.googleads_v0.proto.services.customer_manager_link_service_pb2'
+  ,
+  __doc__ = """Response message for a CustomerManagerLink mutate.
+  
+  
+  Attributes:
+      results:
+          A result that identifies the resource affected by the mutate
+          request.
+  """,
+  # @@protoc_insertion_point(class_scope:google.ads.googleads.v0.services.MutateCustomerManagerLinkResponse)
+  ))
+_sym_db.RegisterMessage(MutateCustomerManagerLinkResponse)
+
+MutateCustomerManagerLinkResult = _reflection.GeneratedProtocolMessageType('MutateCustomerManagerLinkResult', (_message.Message,), dict(
+  DESCRIPTOR = _MUTATECUSTOMERMANAGERLINKRESULT,
+  __module__ = 'google.ads.googleads_v0.proto.services.customer_manager_link_service_pb2'
+  ,
+  __doc__ = """The result for the customer manager link mutate.
+  
+  
+  Attributes:
+      resource_name:
+          Returned for successful operations.
+  """,
+  # @@protoc_insertion_point(class_scope:google.ads.googleads.v0.services.MutateCustomerManagerLinkResult)
+  ))
+_sym_db.RegisterMessage(MutateCustomerManagerLinkResult)
+
+
+DESCRIPTOR._options = None
 
 _CUSTOMERMANAGERLINKSERVICE = _descriptor.ServiceDescriptor(
   name='CustomerManagerLinkService',
   full_name='google.ads.googleads.v0.services.CustomerManagerLinkService',
   file=DESCRIPTOR,
   index=0,
-  options=None,
-  serialized_start=268,
-  serialized_end=508,
+  serialized_options=None,
+  serialized_start=792,
+  serialized_end=1269,
   methods=[
   _descriptor.MethodDescriptor(
     name='GetCustomerManagerLink',
@@ -97,7 +325,16 @@ _CUSTOMERMANAGERLINKSERVICE = _descriptor.ServiceDescriptor(
     containing_service=None,
     input_type=_GETCUSTOMERMANAGERLINKREQUEST,
     output_type=google_dot_ads_dot_googleads__v0_dot_proto_dot_resources_dot_customer__manager__link__pb2._CUSTOMERMANAGERLINK,
-    options=_descriptor._ParseOptions(descriptor_pb2.MethodOptions(), _b('\202\323\344\223\0028\0226/v0/{resource_name=customers/*/customerManagerLinks/*}')),
+    serialized_options=_b('\202\323\344\223\0028\0226/v0/{resource_name=customers/*/customerManagerLinks/*}'),
+  ),
+  _descriptor.MethodDescriptor(
+    name='MutateCustomerManagerLink',
+    full_name='google.ads.googleads.v0.services.CustomerManagerLinkService.MutateCustomerManagerLink',
+    index=1,
+    containing_service=None,
+    input_type=_MUTATECUSTOMERMANAGERLINKREQUEST,
+    output_type=_MUTATECUSTOMERMANAGERLINKRESPONSE,
+    serialized_options=_b('\202\323\344\223\002>\"9/v0/customers/{customer_id=*}/customerManagerLinks:mutate:\001*'),
   ),
 ])
 _sym_db.RegisterServiceDescriptor(_CUSTOMERMANAGERLINKSERVICE)

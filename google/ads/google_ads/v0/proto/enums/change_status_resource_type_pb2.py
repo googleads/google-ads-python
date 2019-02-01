@@ -7,7 +7,6 @@ from google.protobuf import descriptor as _descriptor
 from google.protobuf import message as _message
 from google.protobuf import reflection as _reflection
 from google.protobuf import symbol_database as _symbol_database
-from google.protobuf import descriptor_pb2
 # @@protoc_insertion_point(imports)
 
 _sym_db = _symbol_database.Default()
@@ -19,7 +18,8 @@ DESCRIPTOR = _descriptor.FileDescriptor(
   name='google/ads/googleads_v0/proto/enums/change_status_resource_type.proto',
   package='google.ads.googleads.v0.enums',
   syntax='proto3',
-  serialized_pb=_b('\nEgoogle/ads/googleads_v0/proto/enums/change_status_resource_type.proto\x12\x1dgoogle.ads.googleads.v0.enums\"\xb6\x01\n\x1c\x43hangeStatusResourceTypeEnum\"\x95\x01\n\x18\x43hangeStatusResourceType\x12\x0f\n\x0bUNSPECIFIED\x10\x00\x12\x0b\n\x07UNKNOWN\x10\x01\x12\x0c\n\x08\x41\x44_GROUP\x10\x03\x12\x0f\n\x0b\x41\x44_GROUP_AD\x10\x04\x12\x16\n\x12\x41\x44_GROUP_CRITERION\x10\x05\x12\x0c\n\x08\x43\x41MPAIGN\x10\x06\x12\x16\n\x12\x43\x41MPAIGN_CRITERION\x10\x07\x42\xce\x01\n!com.google.ads.googleads.v0.enumsB\x1d\x43hangeStatusResourceTypeProtoP\x01ZBgoogle.golang.org/genproto/googleapis/ads/googleads/v0/enums;enums\xa2\x02\x03GAA\xaa\x02\x1dGoogle.Ads.GoogleAds.V0.Enums\xca\x02\x1dGoogle\\Ads\\GoogleAds\\V0\\Enumsb\x06proto3')
+  serialized_options=_b('\n!com.google.ads.googleads.v0.enumsB\035ChangeStatusResourceTypeProtoP\001ZBgoogle.golang.org/genproto/googleapis/ads/googleads/v0/enums;enums\242\002\003GAA\252\002\035Google.Ads.GoogleAds.V0.Enums\312\002\035Google\\Ads\\GoogleAds\\V0\\Enums\352\002!Google::Ads::GoogleAds::V0::Enums'),
+  serialized_pb=_b('\nEgoogle/ads/googleads_v0/proto/enums/change_status_resource_type.proto\x12\x1dgoogle.ads.googleads.v0.enums\"\xcf\x01\n\x1c\x43hangeStatusResourceTypeEnum\"\xae\x01\n\x18\x43hangeStatusResourceType\x12\x0f\n\x0bUNSPECIFIED\x10\x00\x12\x0b\n\x07UNKNOWN\x10\x01\x12\x0c\n\x08\x41\x44_GROUP\x10\x03\x12\x0f\n\x0b\x41\x44_GROUP_AD\x10\x04\x12\x16\n\x12\x41\x44_GROUP_CRITERION\x10\x05\x12\x0c\n\x08\x43\x41MPAIGN\x10\x06\x12\x16\n\x12\x43\x41MPAIGN_CRITERION\x10\x07\x12\x08\n\x04\x46\x45\x45\x44\x10\t\x12\r\n\tFEED_ITEM\x10\nB\xf2\x01\n!com.google.ads.googleads.v0.enumsB\x1d\x43hangeStatusResourceTypeProtoP\x01ZBgoogle.golang.org/genproto/googleapis/ads/googleads/v0/enums;enums\xa2\x02\x03GAA\xaa\x02\x1dGoogle.Ads.GoogleAds.V0.Enums\xca\x02\x1dGoogle\\Ads\\GoogleAds\\V0\\Enums\xea\x02!Google::Ads::GoogleAds::V0::Enumsb\x06proto3')
 )
 
 
@@ -32,37 +32,45 @@ _CHANGESTATUSRESOURCETYPEENUM_CHANGESTATUSRESOURCETYPE = _descriptor.EnumDescrip
   values=[
     _descriptor.EnumValueDescriptor(
       name='UNSPECIFIED', index=0, number=0,
-      options=None,
+      serialized_options=None,
       type=None),
     _descriptor.EnumValueDescriptor(
       name='UNKNOWN', index=1, number=1,
-      options=None,
+      serialized_options=None,
       type=None),
     _descriptor.EnumValueDescriptor(
       name='AD_GROUP', index=2, number=3,
-      options=None,
+      serialized_options=None,
       type=None),
     _descriptor.EnumValueDescriptor(
       name='AD_GROUP_AD', index=3, number=4,
-      options=None,
+      serialized_options=None,
       type=None),
     _descriptor.EnumValueDescriptor(
       name='AD_GROUP_CRITERION', index=4, number=5,
-      options=None,
+      serialized_options=None,
       type=None),
     _descriptor.EnumValueDescriptor(
       name='CAMPAIGN', index=5, number=6,
-      options=None,
+      serialized_options=None,
       type=None),
     _descriptor.EnumValueDescriptor(
       name='CAMPAIGN_CRITERION', index=6, number=7,
-      options=None,
+      serialized_options=None,
+      type=None),
+    _descriptor.EnumValueDescriptor(
+      name='FEED', index=7, number=9,
+      serialized_options=None,
+      type=None),
+    _descriptor.EnumValueDescriptor(
+      name='FEED_ITEM', index=8, number=10,
+      serialized_options=None,
       type=None),
   ],
   containing_type=None,
-  options=None,
+  serialized_options=None,
   serialized_start=138,
-  serialized_end=287,
+  serialized_end=312,
 )
 _sym_db.RegisterEnumDescriptor(_CHANGESTATUSRESOURCETYPEENUM_CHANGESTATUSRESOURCETYPE)
 
@@ -81,14 +89,14 @@ _CHANGESTATUSRESOURCETYPEENUM = _descriptor.Descriptor(
   enum_types=[
     _CHANGESTATUSRESOURCETYPEENUM_CHANGESTATUSRESOURCETYPE,
   ],
-  options=None,
+  serialized_options=None,
   is_extendable=False,
   syntax='proto3',
   extension_ranges=[],
   oneofs=[
   ],
   serialized_start=105,
-  serialized_end=287,
+  serialized_end=312,
 )
 
 _CHANGESTATUSRESOURCETYPEENUM_CHANGESTATUSRESOURCETYPE.containing_type = _CHANGESTATUSRESOURCETYPEENUM
@@ -97,7 +105,7 @@ _sym_db.RegisterFileDescriptor(DESCRIPTOR)
 
 ChangeStatusResourceTypeEnum = _reflection.GeneratedProtocolMessageType('ChangeStatusResourceTypeEnum', (_message.Message,), dict(
   DESCRIPTOR = _CHANGESTATUSRESOURCETYPEENUM,
-  __module__ = 'google.ads.google_ads.v0.proto.enums.change_status_resource_type_pb2'
+  __module__ = 'google.ads.googleads_v0.proto.enums.change_status_resource_type_pb2'
   ,
   __doc__ = """Container for enum describing supported resource types for the
   ChangeStatus resource.
@@ -107,6 +115,5 @@ ChangeStatusResourceTypeEnum = _reflection.GeneratedProtocolMessageType('ChangeS
 _sym_db.RegisterMessage(ChangeStatusResourceTypeEnum)
 
 
-DESCRIPTOR.has_options = True
-DESCRIPTOR._options = _descriptor._ParseOptions(descriptor_pb2.FileOptions(), _b('\n!com.google.ads.googleads.v0.enumsB\035ChangeStatusResourceTypeProtoP\001ZBgoogle.golang.org/genproto/googleapis/ads/googleads/v0/enums;enums\242\002\003GAA\252\002\035Google.Ads.GoogleAds.V0.Enums\312\002\035Google\\Ads\\GoogleAds\\V0\\Enums'))
+DESCRIPTOR._options = None
 # @@protoc_insertion_point(module_scope)

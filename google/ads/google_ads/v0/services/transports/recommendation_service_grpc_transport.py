@@ -1,4 +1,6 @@
-# Copyright 2018 Google LLC
+# -*- coding: utf-8 -*-
+#
+# Copyright 2019 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -60,6 +62,8 @@ class RecommendationServiceGrpcTransport(object):
                 credentials=credentials,
             )
 
+        self._channel = channel
+
         # gRPC uses objects called "stubs" that are bound to the
         # channel and provide a basic method for each RPC.
         self._stubs = {
@@ -91,8 +95,17 @@ class RecommendationServiceGrpcTransport(object):
         )
 
     @property
+    def channel(self):
+        """The gRPC channel used by the transport.
+
+        Returns:
+            grpc.Channel: A gRPC channel object.
+        """
+        return self._channel
+
+    @property
     def get_recommendation(self):
-        """Return the gRPC stub for {$apiMethod.name}.
+        """Return the gRPC stub for :meth:`RecommendationServiceClient.get_recommendation`.
 
         Returns the requested recommendation in full detail.
 
@@ -105,7 +118,7 @@ class RecommendationServiceGrpcTransport(object):
 
     @property
     def apply_recommendation(self):
-        """Return the gRPC stub for {$apiMethod.name}.
+        """Return the gRPC stub for :meth:`RecommendationServiceClient.apply_recommendation`.
 
         Applies given recommendations with corresponding apply parameters.
 
@@ -118,7 +131,7 @@ class RecommendationServiceGrpcTransport(object):
 
     @property
     def dismiss_recommendation(self):
-        """Return the gRPC stub for {$apiMethod.name}.
+        """Return the gRPC stub for :meth:`RecommendationServiceClient.dismiss_recommendation`.
 
         Dismisses given recommendations.
 

@@ -1,4 +1,6 @@
-# Copyright 2018 Google LLC
+# -*- coding: utf-8 -*-
+#
+# Copyright 2019 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -22,7 +24,6 @@ import google.api_core.gapic_v1.config
 import google.api_core.gapic_v1.method
 import google.api_core.grpc_helpers
 import google.api_core.path_template
-import grpc
 
 from google.ads.google_ads.v0.services import customer_client_link_service_client_config
 from google.ads.google_ads.v0.services.transports import customer_client_link_service_grpc_transport
@@ -72,13 +73,12 @@ class CustomerClientLinkServiceClient(object):
             customer_client_link=customer_client_link,
         )
 
-    def __init__(
-            self,
-            transport=None,
-            channel=None,
-            credentials=None,
-            client_config=customer_client_link_service_client_config.config,
-            client_info=None):
+    def __init__(self,
+                 transport=None,
+                 channel=None,
+                 credentials=None,
+                 client_config=None,
+                 client_info=None):
         """Constructor.
 
         Args:
@@ -110,13 +110,20 @@ class CustomerClientLinkServiceClient(object):
                 your own client library.
         """
         # Raise deprecation warnings for things we want to go away.
-        if client_config:
-            warnings.warn('The `client_config` argument is deprecated.',
-                          PendingDeprecationWarning)
+        if client_config is not None:
+            warnings.warn(
+                'The `client_config` argument is deprecated.',
+                PendingDeprecationWarning,
+                stacklevel=2)
+        else:
+            client_config = customer_client_link_service_client_config.config
+
         if channel:
             warnings.warn(
                 'The `channel` argument is deprecated; use '
-                '`transport` instead.', PendingDeprecationWarning)
+                '`transport` instead.',
+                PendingDeprecationWarning,
+                stacklevel=2)
 
         # Instantiate the transport.
         # The transport is responsible for handling serialization and
@@ -142,9 +149,10 @@ class CustomerClientLinkServiceClient(object):
             )
 
         if client_info is None:
-            client_info = (
-                google.api_core.gapic_v1.client_info.DEFAULT_CLIENT_INFO)
-        client_info.gapic_version = _GAPIC_LIBRARY_VERSION
+            client_info = google.api_core.gapic_v1.client_info.ClientInfo(
+                gapic_version=_GAPIC_LIBRARY_VERSION, )
+        else:
+            client_info.gapic_version = _GAPIC_LIBRARY_VERSION
         self._client_info = client_info
 
         # Parse out the default settings for retry and timeout for each RPC
@@ -182,7 +190,7 @@ class CustomerClientLinkServiceClient(object):
                 that is provided to the method.
 
         Returns:
-            A :class:`~google.ads.google_ads.v0.types.CustomerClientLink` instance.
+            A :class:`~google.ads.googleads_v0.types.CustomerClientLink` instance.
 
         Raises:
             google.api_core.exceptions.GoogleAPICallError: If the request
@@ -196,14 +204,68 @@ class CustomerClientLinkServiceClient(object):
             self._inner_api_calls[
                 'get_customer_client_link'] = google.api_core.gapic_v1.method.wrap_method(
                     self.transport.get_customer_client_link,
-                    default_retry=self._method_configs['GetCustomerClientLink']
-                    .retry,
-                    default_timeout=self._method_configs[
-                        'GetCustomerClientLink'].timeout,
+                    default_retry=self.
+                    _method_configs['GetCustomerClientLink'].retry,
+                    default_timeout=self.
+                    _method_configs['GetCustomerClientLink'].timeout,
                     client_info=self._client_info,
                 )
 
         request = customer_client_link_service_pb2.GetCustomerClientLinkRequest(
             resource_name=resource_name, )
         return self._inner_api_calls['get_customer_client_link'](
+            request, retry=retry, timeout=timeout, metadata=metadata)
+
+    def mutate_customer_client_link(
+            self,
+            customer_id,
+            operation_,
+            retry=google.api_core.gapic_v1.method.DEFAULT,
+            timeout=google.api_core.gapic_v1.method.DEFAULT,
+            metadata=None):
+        """
+        Creates or updates a customer client link. Operation statuses are returned.
+
+        Args:
+            customer_id (str): The ID of the customer whose customer link are being modified.
+            operation_ (Union[dict, ~google.ads.googleads_v0.types.CustomerClientLinkOperation]): The operation to perform on the individual CustomerClientLink.
+
+                If a dict is provided, it must be of the same form as the protobuf
+                message :class:`~google.ads.googleads_v0.types.CustomerClientLinkOperation`
+            retry (Optional[google.api_core.retry.Retry]):  A retry object used
+                to retry requests. If ``None`` is specified, requests will not
+                be retried.
+            timeout (Optional[float]): The amount of time, in seconds, to wait
+                for the request to complete. Note that if ``retry`` is
+                specified, the timeout applies to each individual attempt.
+            metadata (Optional[Sequence[Tuple[str, str]]]): Additional metadata
+                that is provided to the method.
+
+        Returns:
+            A :class:`~google.ads.googleads_v0.types.MutateCustomerClientLinkResponse` instance.
+
+        Raises:
+            google.api_core.exceptions.GoogleAPICallError: If the request
+                    failed for any reason.
+            google.api_core.exceptions.RetryError: If the request failed due
+                    to a retryable error and retry attempts failed.
+            ValueError: If the parameters are invalid.
+        """
+        # Wrap the transport method to add retry and timeout logic.
+        if 'mutate_customer_client_link' not in self._inner_api_calls:
+            self._inner_api_calls[
+                'mutate_customer_client_link'] = google.api_core.gapic_v1.method.wrap_method(
+                    self.transport.mutate_customer_client_link,
+                    default_retry=self.
+                    _method_configs['MutateCustomerClientLink'].retry,
+                    default_timeout=self.
+                    _method_configs['MutateCustomerClientLink'].timeout,
+                    client_info=self._client_info,
+                )
+
+        request = customer_client_link_service_pb2.MutateCustomerClientLinkRequest(
+            customer_id=customer_id,
+            operation=operation_,
+        )
+        return self._inner_api_calls['mutate_customer_client_link'](
             request, retry=retry, timeout=timeout, metadata=metadata)

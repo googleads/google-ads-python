@@ -7,7 +7,6 @@ from google.protobuf import descriptor as _descriptor
 from google.protobuf import message as _message
 from google.protobuf import reflection as _reflection
 from google.protobuf import symbol_database as _symbol_database
-from google.protobuf import descriptor_pb2
 # @@protoc_insertion_point(imports)
 
 _sym_db = _symbol_database.Default()
@@ -19,7 +18,8 @@ DESCRIPTOR = _descriptor.FileDescriptor(
   name='google/ads/googleads_v0/proto/errors/ad_group_feed_error.proto',
   package='google.ads.googleads.v0.errors',
   syntax='proto3',
-  serialized_pb=_b('\n>google/ads/googleads_v0/proto/errors/ad_group_feed_error.proto\x12\x1egoogle.ads.googleads.v0.errors\"\xdc\x02\n\x14\x41\x64GroupFeedErrorEnum\"\xc3\x02\n\x10\x41\x64GroupFeedError\x12\x0f\n\x0bUNSPECIFIED\x10\x00\x12\x0b\n\x07UNKNOWN\x10\x01\x12,\n(FEED_ALREADY_EXISTS_FOR_PLACEHOLDER_TYPE\x10\x02\x12\"\n\x1e\x43\x41NNOT_CREATE_FOR_REMOVED_FEED\x10\x03\x12\x1f\n\x1b\x41\x44GROUP_FEED_ALREADY_EXISTS\x10\x04\x12*\n&CANNOT_OPERATE_ON_REMOVED_ADGROUP_FEED\x10\x05\x12\x1c\n\x18INVALID_PLACEHOLDER_TYPE\x10\x06\x12,\n(MISSING_FEEDMAPPING_FOR_PLACEHOLDER_TYPE\x10\x07\x12&\n\"NO_EXISTING_LOCATION_CUSTOMER_FEED\x10\x08\x42\xcb\x01\n\"com.google.ads.googleads.v0.errorsB\x15\x41\x64GroupFeedErrorProtoP\x01ZDgoogle.golang.org/genproto/googleapis/ads/googleads/v0/errors;errors\xa2\x02\x03GAA\xaa\x02\x1eGoogle.Ads.GoogleAds.V0.Errors\xca\x02\x1eGoogle\\Ads\\GoogleAds\\V0\\Errorsb\x06proto3')
+  serialized_options=_b('\n\"com.google.ads.googleads.v0.errorsB\025AdGroupFeedErrorProtoP\001ZDgoogle.golang.org/genproto/googleapis/ads/googleads/v0/errors;errors\242\002\003GAA\252\002\036Google.Ads.GoogleAds.V0.Errors\312\002\036Google\\Ads\\GoogleAds\\V0\\Errors\352\002\"Google::Ads::GoogleAds::V0::Errors'),
+  serialized_pb=_b('\n>google/ads/googleads_v0/proto/errors/ad_group_feed_error.proto\x12\x1egoogle.ads.googleads.v0.errors\"\xdc\x02\n\x14\x41\x64GroupFeedErrorEnum\"\xc3\x02\n\x10\x41\x64GroupFeedError\x12\x0f\n\x0bUNSPECIFIED\x10\x00\x12\x0b\n\x07UNKNOWN\x10\x01\x12,\n(FEED_ALREADY_EXISTS_FOR_PLACEHOLDER_TYPE\x10\x02\x12\"\n\x1e\x43\x41NNOT_CREATE_FOR_REMOVED_FEED\x10\x03\x12\x1f\n\x1b\x41\x44GROUP_FEED_ALREADY_EXISTS\x10\x04\x12*\n&CANNOT_OPERATE_ON_REMOVED_ADGROUP_FEED\x10\x05\x12\x1c\n\x18INVALID_PLACEHOLDER_TYPE\x10\x06\x12,\n(MISSING_FEEDMAPPING_FOR_PLACEHOLDER_TYPE\x10\x07\x12&\n\"NO_EXISTING_LOCATION_CUSTOMER_FEED\x10\x08\x42\xf0\x01\n\"com.google.ads.googleads.v0.errorsB\x15\x41\x64GroupFeedErrorProtoP\x01ZDgoogle.golang.org/genproto/googleapis/ads/googleads/v0/errors;errors\xa2\x02\x03GAA\xaa\x02\x1eGoogle.Ads.GoogleAds.V0.Errors\xca\x02\x1eGoogle\\Ads\\GoogleAds\\V0\\Errors\xea\x02\"Google::Ads::GoogleAds::V0::Errorsb\x06proto3')
 )
 
 
@@ -32,43 +32,43 @@ _ADGROUPFEEDERRORENUM_ADGROUPFEEDERROR = _descriptor.EnumDescriptor(
   values=[
     _descriptor.EnumValueDescriptor(
       name='UNSPECIFIED', index=0, number=0,
-      options=None,
+      serialized_options=None,
       type=None),
     _descriptor.EnumValueDescriptor(
       name='UNKNOWN', index=1, number=1,
-      options=None,
+      serialized_options=None,
       type=None),
     _descriptor.EnumValueDescriptor(
       name='FEED_ALREADY_EXISTS_FOR_PLACEHOLDER_TYPE', index=2, number=2,
-      options=None,
+      serialized_options=None,
       type=None),
     _descriptor.EnumValueDescriptor(
       name='CANNOT_CREATE_FOR_REMOVED_FEED', index=3, number=3,
-      options=None,
+      serialized_options=None,
       type=None),
     _descriptor.EnumValueDescriptor(
       name='ADGROUP_FEED_ALREADY_EXISTS', index=4, number=4,
-      options=None,
+      serialized_options=None,
       type=None),
     _descriptor.EnumValueDescriptor(
       name='CANNOT_OPERATE_ON_REMOVED_ADGROUP_FEED', index=5, number=5,
-      options=None,
+      serialized_options=None,
       type=None),
     _descriptor.EnumValueDescriptor(
       name='INVALID_PLACEHOLDER_TYPE', index=6, number=6,
-      options=None,
+      serialized_options=None,
       type=None),
     _descriptor.EnumValueDescriptor(
       name='MISSING_FEEDMAPPING_FOR_PLACEHOLDER_TYPE', index=7, number=7,
-      options=None,
+      serialized_options=None,
       type=None),
     _descriptor.EnumValueDescriptor(
       name='NO_EXISTING_LOCATION_CUSTOMER_FEED', index=8, number=8,
-      options=None,
+      serialized_options=None,
       type=None),
   ],
   containing_type=None,
-  options=None,
+  serialized_options=None,
   serialized_start=124,
   serialized_end=447,
 )
@@ -89,7 +89,7 @@ _ADGROUPFEEDERRORENUM = _descriptor.Descriptor(
   enum_types=[
     _ADGROUPFEEDERRORENUM_ADGROUPFEEDERROR,
   ],
-  options=None,
+  serialized_options=None,
   is_extendable=False,
   syntax='proto3',
   extension_ranges=[],
@@ -105,7 +105,7 @@ _sym_db.RegisterFileDescriptor(DESCRIPTOR)
 
 AdGroupFeedErrorEnum = _reflection.GeneratedProtocolMessageType('AdGroupFeedErrorEnum', (_message.Message,), dict(
   DESCRIPTOR = _ADGROUPFEEDERRORENUM,
-  __module__ = 'google.ads.google_ads.v0.proto.errors.ad_group_feed_error_pb2'
+  __module__ = 'google.ads.googleads_v0.proto.errors.ad_group_feed_error_pb2'
   ,
   __doc__ = """Container for enum describing possible ad group feed errors.
   """,
@@ -114,6 +114,5 @@ AdGroupFeedErrorEnum = _reflection.GeneratedProtocolMessageType('AdGroupFeedErro
 _sym_db.RegisterMessage(AdGroupFeedErrorEnum)
 
 
-DESCRIPTOR.has_options = True
-DESCRIPTOR._options = _descriptor._ParseOptions(descriptor_pb2.FileOptions(), _b('\n\"com.google.ads.googleads.v0.errorsB\025AdGroupFeedErrorProtoP\001ZDgoogle.golang.org/genproto/googleapis/ads/googleads/v0/errors;errors\242\002\003GAA\252\002\036Google.Ads.GoogleAds.V0.Errors\312\002\036Google\\Ads\\GoogleAds\\V0\\Errors'))
+DESCRIPTOR._options = None
 # @@protoc_insertion_point(module_scope)

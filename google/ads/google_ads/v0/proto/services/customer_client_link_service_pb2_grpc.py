@@ -20,6 +20,11 @@ class CustomerClientLinkServiceStub(object):
         request_serializer=google_dot_ads_dot_googleads__v0_dot_proto_dot_services_dot_customer__client__link__service__pb2.GetCustomerClientLinkRequest.SerializeToString,
         response_deserializer=google_dot_ads_dot_googleads__v0_dot_proto_dot_resources_dot_customer__client__link__pb2.CustomerClientLink.FromString,
         )
+    self.MutateCustomerClientLink = channel.unary_unary(
+        '/google.ads.googleads.v0.services.CustomerClientLinkService/MutateCustomerClientLink',
+        request_serializer=google_dot_ads_dot_googleads__v0_dot_proto_dot_services_dot_customer__client__link__service__pb2.MutateCustomerClientLinkRequest.SerializeToString,
+        response_deserializer=google_dot_ads_dot_googleads__v0_dot_proto_dot_services_dot_customer__client__link__service__pb2.MutateCustomerClientLinkResponse.FromString,
+        )
 
 
 class CustomerClientLinkServiceServicer(object):
@@ -33,6 +38,13 @@ class CustomerClientLinkServiceServicer(object):
     context.set_details('Method not implemented!')
     raise NotImplementedError('Method not implemented!')
 
+  def MutateCustomerClientLink(self, request, context):
+    """Creates or updates a customer client link. Operation statuses are returned.
+    """
+    context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+    context.set_details('Method not implemented!')
+    raise NotImplementedError('Method not implemented!')
+
 
 def add_CustomerClientLinkServiceServicer_to_server(servicer, server):
   rpc_method_handlers = {
@@ -40,6 +52,11 @@ def add_CustomerClientLinkServiceServicer_to_server(servicer, server):
           servicer.GetCustomerClientLink,
           request_deserializer=google_dot_ads_dot_googleads__v0_dot_proto_dot_services_dot_customer__client__link__service__pb2.GetCustomerClientLinkRequest.FromString,
           response_serializer=google_dot_ads_dot_googleads__v0_dot_proto_dot_resources_dot_customer__client__link__pb2.CustomerClientLink.SerializeToString,
+      ),
+      'MutateCustomerClientLink': grpc.unary_unary_rpc_method_handler(
+          servicer.MutateCustomerClientLink,
+          request_deserializer=google_dot_ads_dot_googleads__v0_dot_proto_dot_services_dot_customer__client__link__service__pb2.MutateCustomerClientLinkRequest.FromString,
+          response_serializer=google_dot_ads_dot_googleads__v0_dot_proto_dot_services_dot_customer__client__link__service__pb2.MutateCustomerClientLinkResponse.SerializeToString,
       ),
   }
   generic_handler = grpc.method_handlers_generic_handler(

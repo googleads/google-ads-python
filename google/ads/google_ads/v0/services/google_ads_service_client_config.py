@@ -18,12 +18,12 @@ config = {
             },
             "methods": {
                 "Search": {
-                    "timeout_millis": 60000,
+                    "timeout_millis": 600000,
                     "retry_codes_name": "non_idempotent",
                     "retry_params_name": "default"
                 },
                 "Mutate": {
-                    "timeout_millis": 60000,
+                    "timeout_millis": 600000,
                     "retry_codes_name": "non_idempotent",
                     "retry_params_name": "default"
                 }

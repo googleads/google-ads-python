@@ -7,7 +7,6 @@ from google.protobuf import descriptor as _descriptor
 from google.protobuf import message as _message
 from google.protobuf import reflection as _reflection
 from google.protobuf import symbol_database as _symbol_database
-from google.protobuf import descriptor_pb2
 # @@protoc_insertion_point(imports)
 
 _sym_db = _symbol_database.Default()
@@ -22,7 +21,8 @@ DESCRIPTOR = _descriptor.FileDescriptor(
   name='google/ads/googleads_v0/proto/resources/google_ads_field.proto',
   package='google.ads.googleads.v0.resources',
   syntax='proto3',
-  serialized_pb=_b('\n>google/ads/googleads_v0/proto/resources/google_ads_field.proto\x12!google.ads.googleads.v0.resources\x1a\x43google/ads/googleads_v0/proto/enums/google_ads_field_category.proto\x1a\x44google/ads/googleads_v0/proto/enums/google_ads_field_data_type.proto\x1a\x1egoogle/protobuf/wrappers.proto\"\x8f\x06\n\x0eGoogleAdsField\x12\x15\n\rresource_name\x18\x01 \x01(\t\x12*\n\x04name\x18\x02 \x01(\x0b\x32\x1c.google.protobuf.StringValue\x12\x62\n\x08\x63\x61tegory\x18\x03 \x01(\x0e\x32P.google.ads.googleads.v0.enums.GoogleAdsFieldCategoryEnum.GoogleAdsFieldCategory\x12.\n\nselectable\x18\x04 \x01(\x0b\x32\x1a.google.protobuf.BoolValue\x12.\n\nfilterable\x18\x05 \x01(\x0b\x32\x1a.google.protobuf.BoolValue\x12,\n\x08sortable\x18\x06 \x01(\x0b\x32\x1a.google.protobuf.BoolValue\x12\x35\n\x0fselectable_with\x18\x07 \x03(\x0b\x32\x1c.google.protobuf.StringValue\x12\x39\n\x13\x61ttribute_resources\x18\x08 \x03(\x0b\x32\x1c.google.protobuf.StringValue\x12-\n\x07metrics\x18\t \x03(\x0b\x32\x1c.google.protobuf.StringValue\x12.\n\x08segments\x18\n \x03(\x0b\x32\x1c.google.protobuf.StringValue\x12\x31\n\x0b\x65num_values\x18\x0b \x03(\x0b\x32\x1c.google.protobuf.StringValue\x12\x63\n\tdata_type\x18\x0c \x01(\x0e\x32P.google.ads.googleads.v0.enums.GoogleAdsFieldDataTypeEnum.GoogleAdsFieldDataType\x12.\n\x08type_url\x18\r \x01(\x0b\x32\x1c.google.protobuf.StringValue\x12/\n\x0bis_repeated\x18\x0e \x01(\x0b\x32\x1a.google.protobuf.BoolValueB\xd8\x01\n%com.google.ads.googleads.v0.resourcesB\x13GoogleAdsFieldProtoP\x01ZJgoogle.golang.org/genproto/googleapis/ads/googleads/v0/resources;resources\xa2\x02\x03GAA\xaa\x02!Google.Ads.GoogleAds.V0.Resources\xca\x02!Google\\Ads\\GoogleAds\\V0\\Resourcesb\x06proto3')
+  serialized_options=_b('\n%com.google.ads.googleads.v0.resourcesB\023GoogleAdsFieldProtoP\001ZJgoogle.golang.org/genproto/googleapis/ads/googleads/v0/resources;resources\242\002\003GAA\252\002!Google.Ads.GoogleAds.V0.Resources\312\002!Google\\Ads\\GoogleAds\\V0\\Resources\352\002%Google::Ads::GoogleAds::V0::Resources'),
+  serialized_pb=_b('\n>google/ads/googleads_v0/proto/resources/google_ads_field.proto\x12!google.ads.googleads.v0.resources\x1a\x43google/ads/googleads_v0/proto/enums/google_ads_field_category.proto\x1a\x44google/ads/googleads_v0/proto/enums/google_ads_field_data_type.proto\x1a\x1egoogle/protobuf/wrappers.proto\"\x8f\x06\n\x0eGoogleAdsField\x12\x15\n\rresource_name\x18\x01 \x01(\t\x12*\n\x04name\x18\x02 \x01(\x0b\x32\x1c.google.protobuf.StringValue\x12\x62\n\x08\x63\x61tegory\x18\x03 \x01(\x0e\x32P.google.ads.googleads.v0.enums.GoogleAdsFieldCategoryEnum.GoogleAdsFieldCategory\x12.\n\nselectable\x18\x04 \x01(\x0b\x32\x1a.google.protobuf.BoolValue\x12.\n\nfilterable\x18\x05 \x01(\x0b\x32\x1a.google.protobuf.BoolValue\x12,\n\x08sortable\x18\x06 \x01(\x0b\x32\x1a.google.protobuf.BoolValue\x12\x35\n\x0fselectable_with\x18\x07 \x03(\x0b\x32\x1c.google.protobuf.StringValue\x12\x39\n\x13\x61ttribute_resources\x18\x08 \x03(\x0b\x32\x1c.google.protobuf.StringValue\x12-\n\x07metrics\x18\t \x03(\x0b\x32\x1c.google.protobuf.StringValue\x12.\n\x08segments\x18\n \x03(\x0b\x32\x1c.google.protobuf.StringValue\x12\x31\n\x0b\x65num_values\x18\x0b \x03(\x0b\x32\x1c.google.protobuf.StringValue\x12\x63\n\tdata_type\x18\x0c \x01(\x0e\x32P.google.ads.googleads.v0.enums.GoogleAdsFieldDataTypeEnum.GoogleAdsFieldDataType\x12.\n\x08type_url\x18\r \x01(\x0b\x32\x1c.google.protobuf.StringValue\x12/\n\x0bis_repeated\x18\x0e \x01(\x0b\x32\x1a.google.protobuf.BoolValueB\x80\x02\n%com.google.ads.googleads.v0.resourcesB\x13GoogleAdsFieldProtoP\x01ZJgoogle.golang.org/genproto/googleapis/ads/googleads/v0/resources;resources\xa2\x02\x03GAA\xaa\x02!Google.Ads.GoogleAds.V0.Resources\xca\x02!Google\\Ads\\GoogleAds\\V0\\Resources\xea\x02%Google::Ads::GoogleAds::V0::Resourcesb\x06proto3')
   ,
   dependencies=[google_dot_ads_dot_googleads__v0_dot_proto_dot_enums_dot_google__ads__field__category__pb2.DESCRIPTOR,google_dot_ads_dot_googleads__v0_dot_proto_dot_enums_dot_google__ads__field__data__type__pb2.DESCRIPTOR,google_dot_protobuf_dot_wrappers__pb2.DESCRIPTOR,])
 
@@ -42,105 +42,105 @@ _GOOGLEADSFIELD = _descriptor.Descriptor(
       has_default_value=False, default_value=_b("").decode('utf-8'),
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
-      options=None, file=DESCRIPTOR),
+      serialized_options=None, file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
       name='name', full_name='google.ads.googleads.v0.resources.GoogleAdsField.name', index=1,
       number=2, type=11, cpp_type=10, label=1,
       has_default_value=False, default_value=None,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
-      options=None, file=DESCRIPTOR),
+      serialized_options=None, file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
       name='category', full_name='google.ads.googleads.v0.resources.GoogleAdsField.category', index=2,
       number=3, type=14, cpp_type=8, label=1,
       has_default_value=False, default_value=0,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
-      options=None, file=DESCRIPTOR),
+      serialized_options=None, file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
       name='selectable', full_name='google.ads.googleads.v0.resources.GoogleAdsField.selectable', index=3,
       number=4, type=11, cpp_type=10, label=1,
       has_default_value=False, default_value=None,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
-      options=None, file=DESCRIPTOR),
+      serialized_options=None, file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
       name='filterable', full_name='google.ads.googleads.v0.resources.GoogleAdsField.filterable', index=4,
       number=5, type=11, cpp_type=10, label=1,
       has_default_value=False, default_value=None,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
-      options=None, file=DESCRIPTOR),
+      serialized_options=None, file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
       name='sortable', full_name='google.ads.googleads.v0.resources.GoogleAdsField.sortable', index=5,
       number=6, type=11, cpp_type=10, label=1,
       has_default_value=False, default_value=None,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
-      options=None, file=DESCRIPTOR),
+      serialized_options=None, file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
       name='selectable_with', full_name='google.ads.googleads.v0.resources.GoogleAdsField.selectable_with', index=6,
       number=7, type=11, cpp_type=10, label=3,
       has_default_value=False, default_value=[],
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
-      options=None, file=DESCRIPTOR),
+      serialized_options=None, file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
       name='attribute_resources', full_name='google.ads.googleads.v0.resources.GoogleAdsField.attribute_resources', index=7,
       number=8, type=11, cpp_type=10, label=3,
       has_default_value=False, default_value=[],
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
-      options=None, file=DESCRIPTOR),
+      serialized_options=None, file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
       name='metrics', full_name='google.ads.googleads.v0.resources.GoogleAdsField.metrics', index=8,
       number=9, type=11, cpp_type=10, label=3,
       has_default_value=False, default_value=[],
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
-      options=None, file=DESCRIPTOR),
+      serialized_options=None, file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
       name='segments', full_name='google.ads.googleads.v0.resources.GoogleAdsField.segments', index=9,
       number=10, type=11, cpp_type=10, label=3,
       has_default_value=False, default_value=[],
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
-      options=None, file=DESCRIPTOR),
+      serialized_options=None, file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
       name='enum_values', full_name='google.ads.googleads.v0.resources.GoogleAdsField.enum_values', index=10,
       number=11, type=11, cpp_type=10, label=3,
       has_default_value=False, default_value=[],
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
-      options=None, file=DESCRIPTOR),
+      serialized_options=None, file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
       name='data_type', full_name='google.ads.googleads.v0.resources.GoogleAdsField.data_type', index=11,
       number=12, type=14, cpp_type=8, label=1,
       has_default_value=False, default_value=0,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
-      options=None, file=DESCRIPTOR),
+      serialized_options=None, file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
       name='type_url', full_name='google.ads.googleads.v0.resources.GoogleAdsField.type_url', index=12,
       number=13, type=11, cpp_type=10, label=1,
       has_default_value=False, default_value=None,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
-      options=None, file=DESCRIPTOR),
+      serialized_options=None, file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
       name='is_repeated', full_name='google.ads.googleads.v0.resources.GoogleAdsField.is_repeated', index=13,
       number=14, type=11, cpp_type=10, label=1,
       has_default_value=False, default_value=None,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
-      options=None, file=DESCRIPTOR),
+      serialized_options=None, file=DESCRIPTOR),
   ],
   extensions=[
   ],
   nested_types=[],
   enum_types=[
   ],
-  options=None,
+  serialized_options=None,
   is_extendable=False,
   syntax='proto3',
   extension_ranges=[],
@@ -168,7 +168,7 @@ _sym_db.RegisterFileDescriptor(DESCRIPTOR)
 
 GoogleAdsField = _reflection.GeneratedProtocolMessageType('GoogleAdsField', (_message.Message,), dict(
   DESCRIPTOR = _GOOGLEADSFIELD,
-  __module__ = 'google.ads.google_ads.v0.proto.resources.google_ads_field_pb2'
+  __module__ = 'google.ads.googleads_v0.proto.resources.google_ads_field_pb2'
   ,
   __doc__ = """A field or resource (artifact) used by GoogleAdsService.
   
@@ -224,6 +224,5 @@ GoogleAdsField = _reflection.GeneratedProtocolMessageType('GoogleAdsField', (_me
 _sym_db.RegisterMessage(GoogleAdsField)
 
 
-DESCRIPTOR.has_options = True
-DESCRIPTOR._options = _descriptor._ParseOptions(descriptor_pb2.FileOptions(), _b('\n%com.google.ads.googleads.v0.resourcesB\023GoogleAdsFieldProtoP\001ZJgoogle.golang.org/genproto/googleapis/ads/googleads/v0/resources;resources\242\002\003GAA\252\002!Google.Ads.GoogleAds.V0.Resources\312\002!Google\\Ads\\GoogleAds\\V0\\Resources'))
+DESCRIPTOR._options = None
 # @@protoc_insertion_point(module_scope)

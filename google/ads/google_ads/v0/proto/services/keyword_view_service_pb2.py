@@ -7,7 +7,6 @@ from google.protobuf import descriptor as _descriptor
 from google.protobuf import message as _message
 from google.protobuf import reflection as _reflection
 from google.protobuf import symbol_database as _symbol_database
-from google.protobuf import descriptor_pb2
 # @@protoc_insertion_point(imports)
 
 _sym_db = _symbol_database.Default()
@@ -21,7 +20,8 @@ DESCRIPTOR = _descriptor.FileDescriptor(
   name='google/ads/googleads_v0/proto/services/keyword_view_service.proto',
   package='google.ads.googleads.v0.services',
   syntax='proto3',
-  serialized_pb=_b('\nAgoogle/ads/googleads_v0/proto/services/keyword_view_service.proto\x12 google.ads.googleads.v0.services\x1a:google/ads/googleads_v0/proto/resources/keyword_view.proto\x1a\x1cgoogle/api/annotations.proto\".\n\x15GetKeywordViewRequest\x12\x15\n\rresource_name\x18\x01 \x01(\t2\xc8\x01\n\x12KeywordViewService\x12\xb1\x01\n\x0eGetKeywordView\x12\x37.google.ads.googleads.v0.services.GetKeywordViewRequest\x1a..google.ads.googleads.v0.resources.KeywordView\"6\x82\xd3\xe4\x93\x02\x30\x12./v0/{resource_name=customers/*/keywordViews/*}B\xd7\x01\n$com.google.ads.googleads.v0.servicesB\x17KeywordViewServiceProtoP\x01ZHgoogle.golang.org/genproto/googleapis/ads/googleads/v0/services;services\xa2\x02\x03GAA\xaa\x02 Google.Ads.GoogleAds.V0.Services\xca\x02 Google\\Ads\\GoogleAds\\V0\\Servicesb\x06proto3')
+  serialized_options=_b('\n$com.google.ads.googleads.v0.servicesB\027KeywordViewServiceProtoP\001ZHgoogle.golang.org/genproto/googleapis/ads/googleads/v0/services;services\242\002\003GAA\252\002 Google.Ads.GoogleAds.V0.Services\312\002 Google\\Ads\\GoogleAds\\V0\\Services\352\002$Google::Ads::GoogleAds::V0::Services'),
+  serialized_pb=_b('\nAgoogle/ads/googleads_v0/proto/services/keyword_view_service.proto\x12 google.ads.googleads.v0.services\x1a:google/ads/googleads_v0/proto/resources/keyword_view.proto\x1a\x1cgoogle/api/annotations.proto\".\n\x15GetKeywordViewRequest\x12\x15\n\rresource_name\x18\x01 \x01(\t2\xc8\x01\n\x12KeywordViewService\x12\xb1\x01\n\x0eGetKeywordView\x12\x37.google.ads.googleads.v0.services.GetKeywordViewRequest\x1a..google.ads.googleads.v0.resources.KeywordView\"6\x82\xd3\xe4\x93\x02\x30\x12./v0/{resource_name=customers/*/keywordViews/*}B\xfe\x01\n$com.google.ads.googleads.v0.servicesB\x17KeywordViewServiceProtoP\x01ZHgoogle.golang.org/genproto/googleapis/ads/googleads/v0/services;services\xa2\x02\x03GAA\xaa\x02 Google.Ads.GoogleAds.V0.Services\xca\x02 Google\\Ads\\GoogleAds\\V0\\Services\xea\x02$Google::Ads::GoogleAds::V0::Servicesb\x06proto3')
   ,
   dependencies=[google_dot_ads_dot_googleads__v0_dot_proto_dot_resources_dot_keyword__view__pb2.DESCRIPTOR,google_dot_api_dot_annotations__pb2.DESCRIPTOR,])
 
@@ -41,14 +41,14 @@ _GETKEYWORDVIEWREQUEST = _descriptor.Descriptor(
       has_default_value=False, default_value=_b("").decode('utf-8'),
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
-      options=None, file=DESCRIPTOR),
+      serialized_options=None, file=DESCRIPTOR),
   ],
   extensions=[
   ],
   nested_types=[],
   enum_types=[
   ],
-  options=None,
+  serialized_options=None,
   is_extendable=False,
   syntax='proto3',
   extension_ranges=[],
@@ -63,7 +63,7 @@ _sym_db.RegisterFileDescriptor(DESCRIPTOR)
 
 GetKeywordViewRequest = _reflection.GeneratedProtocolMessageType('GetKeywordViewRequest', (_message.Message,), dict(
   DESCRIPTOR = _GETKEYWORDVIEWREQUEST,
-  __module__ = 'google.ads.google_ads.v0.proto.services.keyword_view_service_pb2'
+  __module__ = 'google.ads.googleads_v0.proto.services.keyword_view_service_pb2'
   ,
   __doc__ = """Request message for
   [KeywordViewService.GetKeywordView][google.ads.googleads.v0.services.KeywordViewService.GetKeywordView].
@@ -78,15 +78,14 @@ GetKeywordViewRequest = _reflection.GeneratedProtocolMessageType('GetKeywordView
 _sym_db.RegisterMessage(GetKeywordViewRequest)
 
 
-DESCRIPTOR.has_options = True
-DESCRIPTOR._options = _descriptor._ParseOptions(descriptor_pb2.FileOptions(), _b('\n$com.google.ads.googleads.v0.servicesB\027KeywordViewServiceProtoP\001ZHgoogle.golang.org/genproto/googleapis/ads/googleads/v0/services;services\242\002\003GAA\252\002 Google.Ads.GoogleAds.V0.Services\312\002 Google\\Ads\\GoogleAds\\V0\\Services'))
+DESCRIPTOR._options = None
 
 _KEYWORDVIEWSERVICE = _descriptor.ServiceDescriptor(
   name='KeywordViewService',
   full_name='google.ads.googleads.v0.services.KeywordViewService',
   file=DESCRIPTOR,
   index=0,
-  options=None,
+  serialized_options=None,
   serialized_start=242,
   serialized_end=442,
   methods=[
@@ -97,7 +96,7 @@ _KEYWORDVIEWSERVICE = _descriptor.ServiceDescriptor(
     containing_service=None,
     input_type=_GETKEYWORDVIEWREQUEST,
     output_type=google_dot_ads_dot_googleads__v0_dot_proto_dot_resources_dot_keyword__view__pb2._KEYWORDVIEW,
-    options=_descriptor._ParseOptions(descriptor_pb2.MethodOptions(), _b('\202\323\344\223\0020\022./v0/{resource_name=customers/*/keywordViews/*}')),
+    serialized_options=_b('\202\323\344\223\0020\022./v0/{resource_name=customers/*/keywordViews/*}'),
   ),
 ])
 _sym_db.RegisterServiceDescriptor(_KEYWORDVIEWSERVICE)

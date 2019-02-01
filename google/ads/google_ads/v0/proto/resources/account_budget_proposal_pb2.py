@@ -7,7 +7,6 @@ from google.protobuf import descriptor as _descriptor
 from google.protobuf import message as _message
 from google.protobuf import reflection as _reflection
 from google.protobuf import symbol_database as _symbol_database
-from google.protobuf import descriptor_pb2
 # @@protoc_insertion_point(imports)
 
 _sym_db = _symbol_database.Default()
@@ -24,7 +23,8 @@ DESCRIPTOR = _descriptor.FileDescriptor(
   name='google/ads/googleads_v0/proto/resources/account_budget_proposal.proto',
   package='google.ads.googleads.v0.resources',
   syntax='proto3',
-  serialized_pb=_b('\nEgoogle/ads/googleads_v0/proto/resources/account_budget_proposal.proto\x12!google.ads.googleads.v0.resources\x1aHgoogle/ads/googleads_v0/proto/enums/account_budget_proposal_status.proto\x1a\x46google/ads/googleads_v0/proto/enums/account_budget_proposal_type.proto\x1a=google/ads/googleads_v0/proto/enums/spending_limit_type.proto\x1a\x33google/ads/googleads_v0/proto/enums/time_type.proto\x1a\x1egoogle/protobuf/wrappers.proto\"\xb3\r\n\x15\x41\x63\x63ountBudgetProposal\x12\x15\n\rresource_name\x18\x01 \x01(\t\x12\'\n\x02id\x18\x0e \x01(\x0b\x32\x1b.google.protobuf.Int64Value\x12\x33\n\rbilling_setup\x18\x02 \x01(\x0b\x32\x1c.google.protobuf.StringValue\x12\x34\n\x0e\x61\x63\x63ount_budget\x18\x03 \x01(\x0b\x32\x1c.google.protobuf.StringValue\x12m\n\rproposal_type\x18\x04 \x01(\x0e\x32V.google.ads.googleads.v0.enums.AccountBudgetProposalTypeEnum.AccountBudgetProposalType\x12j\n\x06status\x18\x0f \x01(\x0e\x32Z.google.ads.googleads.v0.enums.AccountBudgetProposalStatusEnum.AccountBudgetProposalStatus\x12\x33\n\rproposed_name\x18\x05 \x01(\x0b\x32\x1c.google.protobuf.StringValue\x12>\n\x18\x61pproved_start_date_time\x18\x14 \x01(\x0b\x32\x1c.google.protobuf.StringValue\x12\x44\n\x1eproposed_purchase_order_number\x18\x0c \x01(\x0b\x32\x1c.google.protobuf.StringValue\x12\x34\n\x0eproposed_notes\x18\r \x01(\x0b\x32\x1c.google.protobuf.StringValue\x12\x38\n\x12\x63reation_date_time\x18\x10 \x01(\x0b\x32\x1c.google.protobuf.StringValue\x12\x38\n\x12\x61pproval_date_time\x18\x11 \x01(\x0b\x32\x1c.google.protobuf.StringValue\x12@\n\x18proposed_start_date_time\x18\x12 \x01(\x0b\x32\x1c.google.protobuf.StringValueH\x00\x12X\n\x18proposed_start_time_type\x18\x07 \x01(\x0e\x32\x34.google.ads.googleads.v0.enums.TimeTypeEnum.TimeTypeH\x00\x12>\n\x16proposed_end_date_time\x18\x13 \x01(\x0b\x32\x1c.google.protobuf.StringValueH\x01\x12V\n\x16proposed_end_time_type\x18\t \x01(\x0e\x32\x34.google.ads.googleads.v0.enums.TimeTypeEnum.TimeTypeH\x01\x12>\n\x16\x61pproved_end_date_time\x18\x15 \x01(\x0b\x32\x1c.google.protobuf.StringValueH\x02\x12V\n\x16\x61pproved_end_time_type\x18\x16 \x01(\x0e\x32\x34.google.ads.googleads.v0.enums.TimeTypeEnum.TimeTypeH\x02\x12\x45\n\x1eproposed_spending_limit_micros\x18\n \x01(\x0b\x32\x1b.google.protobuf.Int64ValueH\x03\x12n\n\x1cproposed_spending_limit_type\x18\x0b \x01(\x0e\x32\x46.google.ads.googleads.v0.enums.SpendingLimitTypeEnum.SpendingLimitTypeH\x03\x12\x45\n\x1e\x61pproved_spending_limit_micros\x18\x17 \x01(\x0b\x32\x1b.google.protobuf.Int64ValueH\x04\x12n\n\x1c\x61pproved_spending_limit_type\x18\x18 \x01(\x0e\x32\x46.google.ads.googleads.v0.enums.SpendingLimitTypeEnum.SpendingLimitTypeH\x04\x42\x15\n\x13proposed_start_timeB\x13\n\x11proposed_end_timeB\x13\n\x11\x61pproved_end_timeB\x19\n\x17proposed_spending_limitB\x19\n\x17\x61pproved_spending_limitB\xdf\x01\n%com.google.ads.googleads.v0.resourcesB\x1a\x41\x63\x63ountBudgetProposalProtoP\x01ZJgoogle.golang.org/genproto/googleapis/ads/googleads/v0/resources;resources\xa2\x02\x03GAA\xaa\x02!Google.Ads.GoogleAds.V0.Resources\xca\x02!Google\\Ads\\GoogleAds\\V0\\Resourcesb\x06proto3')
+  serialized_options=_b('\n%com.google.ads.googleads.v0.resourcesB\032AccountBudgetProposalProtoP\001ZJgoogle.golang.org/genproto/googleapis/ads/googleads/v0/resources;resources\242\002\003GAA\252\002!Google.Ads.GoogleAds.V0.Resources\312\002!Google\\Ads\\GoogleAds\\V0\\Resources\352\002%Google::Ads::GoogleAds::V0::Resources'),
+  serialized_pb=_b('\nEgoogle/ads/googleads_v0/proto/resources/account_budget_proposal.proto\x12!google.ads.googleads.v0.resources\x1aHgoogle/ads/googleads_v0/proto/enums/account_budget_proposal_status.proto\x1a\x46google/ads/googleads_v0/proto/enums/account_budget_proposal_type.proto\x1a=google/ads/googleads_v0/proto/enums/spending_limit_type.proto\x1a\x33google/ads/googleads_v0/proto/enums/time_type.proto\x1a\x1egoogle/protobuf/wrappers.proto\"\xb3\r\n\x15\x41\x63\x63ountBudgetProposal\x12\x15\n\rresource_name\x18\x01 \x01(\t\x12\'\n\x02id\x18\x0e \x01(\x0b\x32\x1b.google.protobuf.Int64Value\x12\x33\n\rbilling_setup\x18\x02 \x01(\x0b\x32\x1c.google.protobuf.StringValue\x12\x34\n\x0e\x61\x63\x63ount_budget\x18\x03 \x01(\x0b\x32\x1c.google.protobuf.StringValue\x12m\n\rproposal_type\x18\x04 \x01(\x0e\x32V.google.ads.googleads.v0.enums.AccountBudgetProposalTypeEnum.AccountBudgetProposalType\x12j\n\x06status\x18\x0f \x01(\x0e\x32Z.google.ads.googleads.v0.enums.AccountBudgetProposalStatusEnum.AccountBudgetProposalStatus\x12\x33\n\rproposed_name\x18\x05 \x01(\x0b\x32\x1c.google.protobuf.StringValue\x12>\n\x18\x61pproved_start_date_time\x18\x14 \x01(\x0b\x32\x1c.google.protobuf.StringValue\x12\x44\n\x1eproposed_purchase_order_number\x18\x0c \x01(\x0b\x32\x1c.google.protobuf.StringValue\x12\x34\n\x0eproposed_notes\x18\r \x01(\x0b\x32\x1c.google.protobuf.StringValue\x12\x38\n\x12\x63reation_date_time\x18\x10 \x01(\x0b\x32\x1c.google.protobuf.StringValue\x12\x38\n\x12\x61pproval_date_time\x18\x11 \x01(\x0b\x32\x1c.google.protobuf.StringValue\x12@\n\x18proposed_start_date_time\x18\x12 \x01(\x0b\x32\x1c.google.protobuf.StringValueH\x00\x12X\n\x18proposed_start_time_type\x18\x07 \x01(\x0e\x32\x34.google.ads.googleads.v0.enums.TimeTypeEnum.TimeTypeH\x00\x12>\n\x16proposed_end_date_time\x18\x13 \x01(\x0b\x32\x1c.google.protobuf.StringValueH\x01\x12V\n\x16proposed_end_time_type\x18\t \x01(\x0e\x32\x34.google.ads.googleads.v0.enums.TimeTypeEnum.TimeTypeH\x01\x12>\n\x16\x61pproved_end_date_time\x18\x15 \x01(\x0b\x32\x1c.google.protobuf.StringValueH\x02\x12V\n\x16\x61pproved_end_time_type\x18\x16 \x01(\x0e\x32\x34.google.ads.googleads.v0.enums.TimeTypeEnum.TimeTypeH\x02\x12\x45\n\x1eproposed_spending_limit_micros\x18\n \x01(\x0b\x32\x1b.google.protobuf.Int64ValueH\x03\x12n\n\x1cproposed_spending_limit_type\x18\x0b \x01(\x0e\x32\x46.google.ads.googleads.v0.enums.SpendingLimitTypeEnum.SpendingLimitTypeH\x03\x12\x45\n\x1e\x61pproved_spending_limit_micros\x18\x17 \x01(\x0b\x32\x1b.google.protobuf.Int64ValueH\x04\x12n\n\x1c\x61pproved_spending_limit_type\x18\x18 \x01(\x0e\x32\x46.google.ads.googleads.v0.enums.SpendingLimitTypeEnum.SpendingLimitTypeH\x04\x42\x15\n\x13proposed_start_timeB\x13\n\x11proposed_end_timeB\x13\n\x11\x61pproved_end_timeB\x19\n\x17proposed_spending_limitB\x19\n\x17\x61pproved_spending_limitB\x87\x02\n%com.google.ads.googleads.v0.resourcesB\x1a\x41\x63\x63ountBudgetProposalProtoP\x01ZJgoogle.golang.org/genproto/googleapis/ads/googleads/v0/resources;resources\xa2\x02\x03GAA\xaa\x02!Google.Ads.GoogleAds.V0.Resources\xca\x02!Google\\Ads\\GoogleAds\\V0\\Resources\xea\x02%Google::Ads::GoogleAds::V0::Resourcesb\x06proto3')
   ,
   dependencies=[google_dot_ads_dot_googleads__v0_dot_proto_dot_enums_dot_account__budget__proposal__status__pb2.DESCRIPTOR,google_dot_ads_dot_googleads__v0_dot_proto_dot_enums_dot_account__budget__proposal__type__pb2.DESCRIPTOR,google_dot_ads_dot_googleads__v0_dot_proto_dot_enums_dot_spending__limit__type__pb2.DESCRIPTOR,google_dot_ads_dot_googleads__v0_dot_proto_dot_enums_dot_time__type__pb2.DESCRIPTOR,google_dot_protobuf_dot_wrappers__pb2.DESCRIPTOR,])
 
@@ -44,161 +44,161 @@ _ACCOUNTBUDGETPROPOSAL = _descriptor.Descriptor(
       has_default_value=False, default_value=_b("").decode('utf-8'),
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
-      options=None, file=DESCRIPTOR),
+      serialized_options=None, file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
       name='id', full_name='google.ads.googleads.v0.resources.AccountBudgetProposal.id', index=1,
       number=14, type=11, cpp_type=10, label=1,
       has_default_value=False, default_value=None,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
-      options=None, file=DESCRIPTOR),
+      serialized_options=None, file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
       name='billing_setup', full_name='google.ads.googleads.v0.resources.AccountBudgetProposal.billing_setup', index=2,
       number=2, type=11, cpp_type=10, label=1,
       has_default_value=False, default_value=None,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
-      options=None, file=DESCRIPTOR),
+      serialized_options=None, file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
       name='account_budget', full_name='google.ads.googleads.v0.resources.AccountBudgetProposal.account_budget', index=3,
       number=3, type=11, cpp_type=10, label=1,
       has_default_value=False, default_value=None,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
-      options=None, file=DESCRIPTOR),
+      serialized_options=None, file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
       name='proposal_type', full_name='google.ads.googleads.v0.resources.AccountBudgetProposal.proposal_type', index=4,
       number=4, type=14, cpp_type=8, label=1,
       has_default_value=False, default_value=0,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
-      options=None, file=DESCRIPTOR),
+      serialized_options=None, file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
       name='status', full_name='google.ads.googleads.v0.resources.AccountBudgetProposal.status', index=5,
       number=15, type=14, cpp_type=8, label=1,
       has_default_value=False, default_value=0,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
-      options=None, file=DESCRIPTOR),
+      serialized_options=None, file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
       name='proposed_name', full_name='google.ads.googleads.v0.resources.AccountBudgetProposal.proposed_name', index=6,
       number=5, type=11, cpp_type=10, label=1,
       has_default_value=False, default_value=None,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
-      options=None, file=DESCRIPTOR),
+      serialized_options=None, file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
       name='approved_start_date_time', full_name='google.ads.googleads.v0.resources.AccountBudgetProposal.approved_start_date_time', index=7,
       number=20, type=11, cpp_type=10, label=1,
       has_default_value=False, default_value=None,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
-      options=None, file=DESCRIPTOR),
+      serialized_options=None, file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
       name='proposed_purchase_order_number', full_name='google.ads.googleads.v0.resources.AccountBudgetProposal.proposed_purchase_order_number', index=8,
       number=12, type=11, cpp_type=10, label=1,
       has_default_value=False, default_value=None,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
-      options=None, file=DESCRIPTOR),
+      serialized_options=None, file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
       name='proposed_notes', full_name='google.ads.googleads.v0.resources.AccountBudgetProposal.proposed_notes', index=9,
       number=13, type=11, cpp_type=10, label=1,
       has_default_value=False, default_value=None,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
-      options=None, file=DESCRIPTOR),
+      serialized_options=None, file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
       name='creation_date_time', full_name='google.ads.googleads.v0.resources.AccountBudgetProposal.creation_date_time', index=10,
       number=16, type=11, cpp_type=10, label=1,
       has_default_value=False, default_value=None,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
-      options=None, file=DESCRIPTOR),
+      serialized_options=None, file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
       name='approval_date_time', full_name='google.ads.googleads.v0.resources.AccountBudgetProposal.approval_date_time', index=11,
       number=17, type=11, cpp_type=10, label=1,
       has_default_value=False, default_value=None,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
-      options=None, file=DESCRIPTOR),
+      serialized_options=None, file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
       name='proposed_start_date_time', full_name='google.ads.googleads.v0.resources.AccountBudgetProposal.proposed_start_date_time', index=12,
       number=18, type=11, cpp_type=10, label=1,
       has_default_value=False, default_value=None,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
-      options=None, file=DESCRIPTOR),
+      serialized_options=None, file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
       name='proposed_start_time_type', full_name='google.ads.googleads.v0.resources.AccountBudgetProposal.proposed_start_time_type', index=13,
       number=7, type=14, cpp_type=8, label=1,
       has_default_value=False, default_value=0,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
-      options=None, file=DESCRIPTOR),
+      serialized_options=None, file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
       name='proposed_end_date_time', full_name='google.ads.googleads.v0.resources.AccountBudgetProposal.proposed_end_date_time', index=14,
       number=19, type=11, cpp_type=10, label=1,
       has_default_value=False, default_value=None,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
-      options=None, file=DESCRIPTOR),
+      serialized_options=None, file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
       name='proposed_end_time_type', full_name='google.ads.googleads.v0.resources.AccountBudgetProposal.proposed_end_time_type', index=15,
       number=9, type=14, cpp_type=8, label=1,
       has_default_value=False, default_value=0,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
-      options=None, file=DESCRIPTOR),
+      serialized_options=None, file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
       name='approved_end_date_time', full_name='google.ads.googleads.v0.resources.AccountBudgetProposal.approved_end_date_time', index=16,
       number=21, type=11, cpp_type=10, label=1,
       has_default_value=False, default_value=None,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
-      options=None, file=DESCRIPTOR),
+      serialized_options=None, file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
       name='approved_end_time_type', full_name='google.ads.googleads.v0.resources.AccountBudgetProposal.approved_end_time_type', index=17,
       number=22, type=14, cpp_type=8, label=1,
       has_default_value=False, default_value=0,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
-      options=None, file=DESCRIPTOR),
+      serialized_options=None, file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
       name='proposed_spending_limit_micros', full_name='google.ads.googleads.v0.resources.AccountBudgetProposal.proposed_spending_limit_micros', index=18,
       number=10, type=11, cpp_type=10, label=1,
       has_default_value=False, default_value=None,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
-      options=None, file=DESCRIPTOR),
+      serialized_options=None, file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
       name='proposed_spending_limit_type', full_name='google.ads.googleads.v0.resources.AccountBudgetProposal.proposed_spending_limit_type', index=19,
       number=11, type=14, cpp_type=8, label=1,
       has_default_value=False, default_value=0,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
-      options=None, file=DESCRIPTOR),
+      serialized_options=None, file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
       name='approved_spending_limit_micros', full_name='google.ads.googleads.v0.resources.AccountBudgetProposal.approved_spending_limit_micros', index=20,
       number=23, type=11, cpp_type=10, label=1,
       has_default_value=False, default_value=None,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
-      options=None, file=DESCRIPTOR),
+      serialized_options=None, file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
       name='approved_spending_limit_type', full_name='google.ads.googleads.v0.resources.AccountBudgetProposal.approved_spending_limit_type', index=21,
       number=24, type=14, cpp_type=8, label=1,
       has_default_value=False, default_value=0,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
-      options=None, file=DESCRIPTOR),
+      serialized_options=None, file=DESCRIPTOR),
   ],
   extensions=[
   ],
   nested_types=[],
   enum_types=[
   ],
-  options=None,
+  serialized_options=None,
   is_extendable=False,
   syntax='proto3',
   extension_ranges=[],
@@ -279,7 +279,7 @@ _sym_db.RegisterFileDescriptor(DESCRIPTOR)
 
 AccountBudgetProposal = _reflection.GeneratedProtocolMessageType('AccountBudgetProposal', (_message.Message,), dict(
   DESCRIPTOR = _ACCOUNTBUDGETPROPOSAL,
-  __module__ = 'google.ads.google_ads.v0.proto.resources.account_budget_proposal_pb2'
+  __module__ = 'google.ads.googleads_v0.proto.resources.account_budget_proposal_pb2'
   ,
   __doc__ = """An account-level budget proposal.
   
@@ -371,6 +371,5 @@ AccountBudgetProposal = _reflection.GeneratedProtocolMessageType('AccountBudgetP
 _sym_db.RegisterMessage(AccountBudgetProposal)
 
 
-DESCRIPTOR.has_options = True
-DESCRIPTOR._options = _descriptor._ParseOptions(descriptor_pb2.FileOptions(), _b('\n%com.google.ads.googleads.v0.resourcesB\032AccountBudgetProposalProtoP\001ZJgoogle.golang.org/genproto/googleapis/ads/googleads/v0/resources;resources\242\002\003GAA\252\002!Google.Ads.GoogleAds.V0.Resources\312\002!Google\\Ads\\GoogleAds\\V0\\Resources'))
+DESCRIPTOR._options = None
 # @@protoc_insertion_point(module_scope)

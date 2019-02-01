@@ -7,7 +7,6 @@ from google.protobuf import descriptor as _descriptor
 from google.protobuf import message as _message
 from google.protobuf import reflection as _reflection
 from google.protobuf import symbol_database as _symbol_database
-from google.protobuf import descriptor_pb2
 # @@protoc_insertion_point(imports)
 
 _sym_db = _symbol_database.Default()
@@ -22,7 +21,8 @@ DESCRIPTOR = _descriptor.FileDescriptor(
   name='google/ads/googleads_v0/proto/resources/change_status.proto',
   package='google.ads.googleads.v0.resources',
   syntax='proto3',
-  serialized_pb=_b('\n;google/ads/googleads_v0/proto/resources/change_status.proto\x12!google.ads.googleads.v0.resources\x1a\x41google/ads/googleads_v0/proto/enums/change_status_operation.proto\x1a\x45google/ads/googleads_v0/proto/enums/change_status_resource_type.proto\x1a\x1egoogle/protobuf/wrappers.proto\"\xbf\x04\n\x0c\x43hangeStatus\x12\x15\n\rresource_name\x18\x01 \x01(\t\x12;\n\x15last_change_date_time\x18\x03 \x01(\x0b\x32\x1c.google.protobuf.StringValue\x12k\n\rresource_type\x18\x04 \x01(\x0e\x32T.google.ads.googleads.v0.enums.ChangeStatusResourceTypeEnum.ChangeStatusResourceType\x12.\n\x08\x63\x61mpaign\x18\x05 \x01(\x0b\x32\x1c.google.protobuf.StringValue\x12.\n\x08\x61\x64_group\x18\x06 \x01(\x0b\x32\x1c.google.protobuf.StringValue\x12g\n\x0fresource_status\x18\x08 \x01(\x0e\x32N.google.ads.googleads.v0.enums.ChangeStatusOperationEnum.ChangeStatusOperation\x12\x31\n\x0b\x61\x64_group_ad\x18\t \x01(\x0b\x32\x1c.google.protobuf.StringValue\x12\x38\n\x12\x61\x64_group_criterion\x18\n \x01(\x0b\x32\x1c.google.protobuf.StringValue\x12\x38\n\x12\x63\x61mpaign_criterion\x18\x0b \x01(\x0b\x32\x1c.google.protobuf.StringValueB\xd6\x01\n%com.google.ads.googleads.v0.resourcesB\x11\x43hangeStatusProtoP\x01ZJgoogle.golang.org/genproto/googleapis/ads/googleads/v0/resources;resources\xa2\x02\x03GAA\xaa\x02!Google.Ads.GoogleAds.V0.Resources\xca\x02!Google\\Ads\\GoogleAds\\V0\\Resourcesb\x06proto3')
+  serialized_options=_b('\n%com.google.ads.googleads.v0.resourcesB\021ChangeStatusProtoP\001ZJgoogle.golang.org/genproto/googleapis/ads/googleads/v0/resources;resources\242\002\003GAA\252\002!Google.Ads.GoogleAds.V0.Resources\312\002!Google\\Ads\\GoogleAds\\V0\\Resources\352\002%Google::Ads::GoogleAds::V0::Resources'),
+  serialized_pb=_b('\n;google/ads/googleads_v0/proto/resources/change_status.proto\x12!google.ads.googleads.v0.resources\x1a\x41google/ads/googleads_v0/proto/enums/change_status_operation.proto\x1a\x45google/ads/googleads_v0/proto/enums/change_status_resource_type.proto\x1a\x1egoogle/protobuf/wrappers.proto\"\x9c\x05\n\x0c\x43hangeStatus\x12\x15\n\rresource_name\x18\x01 \x01(\t\x12;\n\x15last_change_date_time\x18\x03 \x01(\x0b\x32\x1c.google.protobuf.StringValue\x12k\n\rresource_type\x18\x04 \x01(\x0e\x32T.google.ads.googleads.v0.enums.ChangeStatusResourceTypeEnum.ChangeStatusResourceType\x12.\n\x08\x63\x61mpaign\x18\x05 \x01(\x0b\x32\x1c.google.protobuf.StringValue\x12.\n\x08\x61\x64_group\x18\x06 \x01(\x0b\x32\x1c.google.protobuf.StringValue\x12g\n\x0fresource_status\x18\x08 \x01(\x0e\x32N.google.ads.googleads.v0.enums.ChangeStatusOperationEnum.ChangeStatusOperation\x12\x31\n\x0b\x61\x64_group_ad\x18\t \x01(\x0b\x32\x1c.google.protobuf.StringValue\x12\x38\n\x12\x61\x64_group_criterion\x18\n \x01(\x0b\x32\x1c.google.protobuf.StringValue\x12\x38\n\x12\x63\x61mpaign_criterion\x18\x0b \x01(\x0b\x32\x1c.google.protobuf.StringValue\x12*\n\x04\x66\x65\x65\x64\x18\x0c \x01(\x0b\x32\x1c.google.protobuf.StringValue\x12/\n\tfeed_item\x18\r \x01(\x0b\x32\x1c.google.protobuf.StringValueB\xfe\x01\n%com.google.ads.googleads.v0.resourcesB\x11\x43hangeStatusProtoP\x01ZJgoogle.golang.org/genproto/googleapis/ads/googleads/v0/resources;resources\xa2\x02\x03GAA\xaa\x02!Google.Ads.GoogleAds.V0.Resources\xca\x02!Google\\Ads\\GoogleAds\\V0\\Resources\xea\x02%Google::Ads::GoogleAds::V0::Resourcesb\x06proto3')
   ,
   dependencies=[google_dot_ads_dot_googleads__v0_dot_proto_dot_enums_dot_change__status__operation__pb2.DESCRIPTOR,google_dot_ads_dot_googleads__v0_dot_proto_dot_enums_dot_change__status__resource__type__pb2.DESCRIPTOR,google_dot_protobuf_dot_wrappers__pb2.DESCRIPTOR,])
 
@@ -42,77 +42,91 @@ _CHANGESTATUS = _descriptor.Descriptor(
       has_default_value=False, default_value=_b("").decode('utf-8'),
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
-      options=None, file=DESCRIPTOR),
+      serialized_options=None, file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
       name='last_change_date_time', full_name='google.ads.googleads.v0.resources.ChangeStatus.last_change_date_time', index=1,
       number=3, type=11, cpp_type=10, label=1,
       has_default_value=False, default_value=None,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
-      options=None, file=DESCRIPTOR),
+      serialized_options=None, file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
       name='resource_type', full_name='google.ads.googleads.v0.resources.ChangeStatus.resource_type', index=2,
       number=4, type=14, cpp_type=8, label=1,
       has_default_value=False, default_value=0,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
-      options=None, file=DESCRIPTOR),
+      serialized_options=None, file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
       name='campaign', full_name='google.ads.googleads.v0.resources.ChangeStatus.campaign', index=3,
       number=5, type=11, cpp_type=10, label=1,
       has_default_value=False, default_value=None,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
-      options=None, file=DESCRIPTOR),
+      serialized_options=None, file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
       name='ad_group', full_name='google.ads.googleads.v0.resources.ChangeStatus.ad_group', index=4,
       number=6, type=11, cpp_type=10, label=1,
       has_default_value=False, default_value=None,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
-      options=None, file=DESCRIPTOR),
+      serialized_options=None, file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
       name='resource_status', full_name='google.ads.googleads.v0.resources.ChangeStatus.resource_status', index=5,
       number=8, type=14, cpp_type=8, label=1,
       has_default_value=False, default_value=0,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
-      options=None, file=DESCRIPTOR),
+      serialized_options=None, file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
       name='ad_group_ad', full_name='google.ads.googleads.v0.resources.ChangeStatus.ad_group_ad', index=6,
       number=9, type=11, cpp_type=10, label=1,
       has_default_value=False, default_value=None,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
-      options=None, file=DESCRIPTOR),
+      serialized_options=None, file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
       name='ad_group_criterion', full_name='google.ads.googleads.v0.resources.ChangeStatus.ad_group_criterion', index=7,
       number=10, type=11, cpp_type=10, label=1,
       has_default_value=False, default_value=None,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
-      options=None, file=DESCRIPTOR),
+      serialized_options=None, file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
       name='campaign_criterion', full_name='google.ads.googleads.v0.resources.ChangeStatus.campaign_criterion', index=8,
       number=11, type=11, cpp_type=10, label=1,
       has_default_value=False, default_value=None,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
-      options=None, file=DESCRIPTOR),
+      serialized_options=None, file=DESCRIPTOR),
+    _descriptor.FieldDescriptor(
+      name='feed', full_name='google.ads.googleads.v0.resources.ChangeStatus.feed', index=9,
+      number=12, type=11, cpp_type=10, label=1,
+      has_default_value=False, default_value=None,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR),
+    _descriptor.FieldDescriptor(
+      name='feed_item', full_name='google.ads.googleads.v0.resources.ChangeStatus.feed_item', index=10,
+      number=13, type=11, cpp_type=10, label=1,
+      has_default_value=False, default_value=None,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR),
   ],
   extensions=[
   ],
   nested_types=[],
   enum_types=[
   ],
-  options=None,
+  serialized_options=None,
   is_extendable=False,
   syntax='proto3',
   extension_ranges=[],
   oneofs=[
   ],
   serialized_start=269,
-  serialized_end=844,
+  serialized_end=937,
 )
 
 _CHANGESTATUS.fields_by_name['last_change_date_time'].message_type = google_dot_protobuf_dot_wrappers__pb2._STRINGVALUE
@@ -123,12 +137,14 @@ _CHANGESTATUS.fields_by_name['resource_status'].enum_type = google_dot_ads_dot_g
 _CHANGESTATUS.fields_by_name['ad_group_ad'].message_type = google_dot_protobuf_dot_wrappers__pb2._STRINGVALUE
 _CHANGESTATUS.fields_by_name['ad_group_criterion'].message_type = google_dot_protobuf_dot_wrappers__pb2._STRINGVALUE
 _CHANGESTATUS.fields_by_name['campaign_criterion'].message_type = google_dot_protobuf_dot_wrappers__pb2._STRINGVALUE
+_CHANGESTATUS.fields_by_name['feed'].message_type = google_dot_protobuf_dot_wrappers__pb2._STRINGVALUE
+_CHANGESTATUS.fields_by_name['feed_item'].message_type = google_dot_protobuf_dot_wrappers__pb2._STRINGVALUE
 DESCRIPTOR.message_types_by_name['ChangeStatus'] = _CHANGESTATUS
 _sym_db.RegisterFileDescriptor(DESCRIPTOR)
 
 ChangeStatus = _reflection.GeneratedProtocolMessageType('ChangeStatus', (_message.Message,), dict(
   DESCRIPTOR = _CHANGESTATUS,
-  __module__ = 'google.ads.google_ads.v0.proto.resources.change_status_pb2'
+  __module__ = 'google.ads.googleads_v0.proto.resources.change_status_pb2'
   ,
   __doc__ = """Describes the status of returned resource.
   
@@ -157,12 +173,15 @@ ChangeStatus = _reflection.GeneratedProtocolMessageType('ChangeStatus', (_messag
           The AdGroupCriterion affected by this change.
       campaign_criterion:
           The CampaignCriterion affected by this change.
+      feed:
+          The Feed affected by this change.
+      feed_item:
+          The FeedItem affected by this change.
   """,
   # @@protoc_insertion_point(class_scope:google.ads.googleads.v0.resources.ChangeStatus)
   ))
 _sym_db.RegisterMessage(ChangeStatus)
 
 
-DESCRIPTOR.has_options = True
-DESCRIPTOR._options = _descriptor._ParseOptions(descriptor_pb2.FileOptions(), _b('\n%com.google.ads.googleads.v0.resourcesB\021ChangeStatusProtoP\001ZJgoogle.golang.org/genproto/googleapis/ads/googleads/v0/resources;resources\242\002\003GAA\252\002!Google.Ads.GoogleAds.V0.Resources\312\002!Google\\Ads\\GoogleAds\\V0\\Resources'))
+DESCRIPTOR._options = None
 # @@protoc_insertion_point(module_scope)

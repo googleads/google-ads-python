@@ -7,7 +7,6 @@ from google.protobuf import descriptor as _descriptor
 from google.protobuf import message as _message
 from google.protobuf import reflection as _reflection
 from google.protobuf import symbol_database as _symbol_database
-from google.protobuf import descriptor_pb2
 # @@protoc_insertion_point(imports)
 
 _sym_db = _symbol_database.Default()
@@ -21,7 +20,8 @@ DESCRIPTOR = _descriptor.FileDescriptor(
   name='google/ads/googleads_v0/proto/resources/keyword_plan_keyword.proto',
   package='google.ads.googleads.v0.resources',
   syntax='proto3',
-  serialized_pb=_b('\nBgoogle/ads/googleads_v0/proto/resources/keyword_plan_keyword.proto\x12!google.ads.googleads.v0.resources\x1a<google/ads/googleads_v0/proto/enums/keyword_match_type.proto\x1a\x1egoogle/protobuf/wrappers.proto\"\xcc\x02\n\x12KeywordPlanKeyword\x12\x15\n\rresource_name\x18\x01 \x01(\t\x12;\n\x15keyword_plan_ad_group\x18\x02 \x01(\x0b\x32\x1c.google.protobuf.StringValue\x12\'\n\x02id\x18\x03 \x01(\x0b\x32\x1b.google.protobuf.Int64Value\x12*\n\x04text\x18\x04 \x01(\x0b\x32\x1c.google.protobuf.StringValue\x12X\n\nmatch_type\x18\x05 \x01(\x0e\x32\x44.google.ads.googleads.v0.enums.KeywordMatchTypeEnum.KeywordMatchType\x12\x33\n\x0e\x63pc_bid_micros\x18\x06 \x01(\x0b\x32\x1b.google.protobuf.Int64ValueB\xdc\x01\n%com.google.ads.googleads.v0.resourcesB\x17KeywordPlanKeywordProtoP\x01ZJgoogle.golang.org/genproto/googleapis/ads/googleads/v0/resources;resources\xa2\x02\x03GAA\xaa\x02!Google.Ads.GoogleAds.V0.Resources\xca\x02!Google\\Ads\\GoogleAds\\V0\\Resourcesb\x06proto3')
+  serialized_options=_b('\n%com.google.ads.googleads.v0.resourcesB\027KeywordPlanKeywordProtoP\001ZJgoogle.golang.org/genproto/googleapis/ads/googleads/v0/resources;resources\242\002\003GAA\252\002!Google.Ads.GoogleAds.V0.Resources\312\002!Google\\Ads\\GoogleAds\\V0\\Resources\352\002%Google::Ads::GoogleAds::V0::Resources'),
+  serialized_pb=_b('\nBgoogle/ads/googleads_v0/proto/resources/keyword_plan_keyword.proto\x12!google.ads.googleads.v0.resources\x1a<google/ads/googleads_v0/proto/enums/keyword_match_type.proto\x1a\x1egoogle/protobuf/wrappers.proto\"\xcc\x02\n\x12KeywordPlanKeyword\x12\x15\n\rresource_name\x18\x01 \x01(\t\x12;\n\x15keyword_plan_ad_group\x18\x02 \x01(\x0b\x32\x1c.google.protobuf.StringValue\x12\'\n\x02id\x18\x03 \x01(\x0b\x32\x1b.google.protobuf.Int64Value\x12*\n\x04text\x18\x04 \x01(\x0b\x32\x1c.google.protobuf.StringValue\x12X\n\nmatch_type\x18\x05 \x01(\x0e\x32\x44.google.ads.googleads.v0.enums.KeywordMatchTypeEnum.KeywordMatchType\x12\x33\n\x0e\x63pc_bid_micros\x18\x06 \x01(\x0b\x32\x1b.google.protobuf.Int64ValueB\x84\x02\n%com.google.ads.googleads.v0.resourcesB\x17KeywordPlanKeywordProtoP\x01ZJgoogle.golang.org/genproto/googleapis/ads/googleads/v0/resources;resources\xa2\x02\x03GAA\xaa\x02!Google.Ads.GoogleAds.V0.Resources\xca\x02!Google\\Ads\\GoogleAds\\V0\\Resources\xea\x02%Google::Ads::GoogleAds::V0::Resourcesb\x06proto3')
   ,
   dependencies=[google_dot_ads_dot_googleads__v0_dot_proto_dot_enums_dot_keyword__match__type__pb2.DESCRIPTOR,google_dot_protobuf_dot_wrappers__pb2.DESCRIPTOR,])
 
@@ -41,49 +41,49 @@ _KEYWORDPLANKEYWORD = _descriptor.Descriptor(
       has_default_value=False, default_value=_b("").decode('utf-8'),
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
-      options=None, file=DESCRIPTOR),
+      serialized_options=None, file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
       name='keyword_plan_ad_group', full_name='google.ads.googleads.v0.resources.KeywordPlanKeyword.keyword_plan_ad_group', index=1,
       number=2, type=11, cpp_type=10, label=1,
       has_default_value=False, default_value=None,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
-      options=None, file=DESCRIPTOR),
+      serialized_options=None, file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
       name='id', full_name='google.ads.googleads.v0.resources.KeywordPlanKeyword.id', index=2,
       number=3, type=11, cpp_type=10, label=1,
       has_default_value=False, default_value=None,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
-      options=None, file=DESCRIPTOR),
+      serialized_options=None, file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
       name='text', full_name='google.ads.googleads.v0.resources.KeywordPlanKeyword.text', index=3,
       number=4, type=11, cpp_type=10, label=1,
       has_default_value=False, default_value=None,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
-      options=None, file=DESCRIPTOR),
+      serialized_options=None, file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
       name='match_type', full_name='google.ads.googleads.v0.resources.KeywordPlanKeyword.match_type', index=4,
       number=5, type=14, cpp_type=8, label=1,
       has_default_value=False, default_value=0,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
-      options=None, file=DESCRIPTOR),
+      serialized_options=None, file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
       name='cpc_bid_micros', full_name='google.ads.googleads.v0.resources.KeywordPlanKeyword.cpc_bid_micros', index=5,
       number=6, type=11, cpp_type=10, label=1,
       has_default_value=False, default_value=None,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
-      options=None, file=DESCRIPTOR),
+      serialized_options=None, file=DESCRIPTOR),
   ],
   extensions=[
   ],
   nested_types=[],
   enum_types=[
   ],
-  options=None,
+  serialized_options=None,
   is_extendable=False,
   syntax='proto3',
   extension_ranges=[],
@@ -103,9 +103,10 @@ _sym_db.RegisterFileDescriptor(DESCRIPTOR)
 
 KeywordPlanKeyword = _reflection.GeneratedProtocolMessageType('KeywordPlanKeyword', (_message.Message,), dict(
   DESCRIPTOR = _KEYWORDPLANKEYWORD,
-  __module__ = 'google.ads.google_ads.v0.proto.resources.keyword_plan_keyword_pb2'
+  __module__ = 'google.ads.googleads_v0.proto.resources.keyword_plan_keyword_pb2'
   ,
-  __doc__ = """A Keyword Plan ad group keyword.
+  __doc__ = """A Keyword Plan ad group keyword. Max number of keyword plan keywords per
+  plan: 2500.
   
   
   Attributes:
@@ -130,6 +131,5 @@ KeywordPlanKeyword = _reflection.GeneratedProtocolMessageType('KeywordPlanKeywor
 _sym_db.RegisterMessage(KeywordPlanKeyword)
 
 
-DESCRIPTOR.has_options = True
-DESCRIPTOR._options = _descriptor._ParseOptions(descriptor_pb2.FileOptions(), _b('\n%com.google.ads.googleads.v0.resourcesB\027KeywordPlanKeywordProtoP\001ZJgoogle.golang.org/genproto/googleapis/ads/googleads/v0/resources;resources\242\002\003GAA\252\002!Google.Ads.GoogleAds.V0.Resources\312\002!Google\\Ads\\GoogleAds\\V0\\Resources'))
+DESCRIPTOR._options = None
 # @@protoc_insertion_point(module_scope)

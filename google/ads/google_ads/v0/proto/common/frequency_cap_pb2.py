@@ -7,7 +7,6 @@ from google.protobuf import descriptor as _descriptor
 from google.protobuf import message as _message
 from google.protobuf import reflection as _reflection
 from google.protobuf import symbol_database as _symbol_database
-from google.protobuf import descriptor_pb2
 # @@protoc_insertion_point(imports)
 
 _sym_db = _symbol_database.Default()
@@ -23,7 +22,8 @@ DESCRIPTOR = _descriptor.FileDescriptor(
   name='google/ads/googleads_v0/proto/common/frequency_cap.proto',
   package='google.ads.googleads.v0.common',
   syntax='proto3',
-  serialized_pb=_b('\n8google/ads/googleads_v0/proto/common/frequency_cap.proto\x12\x1egoogle.ads.googleads.v0.common\x1a\x42google/ads/googleads_v0/proto/enums/frequency_cap_event_type.proto\x1a=google/ads/googleads_v0/proto/enums/frequency_cap_level.proto\x1a\x41google/ads/googleads_v0/proto/enums/frequency_cap_time_unit.proto\x1a\x1egoogle/protobuf/wrappers.proto\"{\n\x11\x46requencyCapEntry\x12<\n\x03key\x18\x01 \x01(\x0b\x32/.google.ads.googleads.v0.common.FrequencyCapKey\x12(\n\x03\x63\x61p\x18\x02 \x01(\x0b\x32\x1b.google.protobuf.Int32Value\"\xdf\x02\n\x0f\x46requencyCapKey\x12U\n\x05level\x18\x01 \x01(\x0e\x32\x46.google.ads.googleads.v0.enums.FrequencyCapLevelEnum.FrequencyCapLevel\x12\x62\n\nevent_type\x18\x03 \x01(\x0e\x32N.google.ads.googleads.v0.enums.FrequencyCapEventTypeEnum.FrequencyCapEventType\x12_\n\ttime_unit\x18\x02 \x01(\x0e\x32L.google.ads.googleads.v0.enums.FrequencyCapTimeUnitEnum.FrequencyCapTimeUnit\x12\x30\n\x0btime_length\x18\x04 \x01(\x0b\x32\x1b.google.protobuf.Int32ValueB\xc7\x01\n\"com.google.ads.googleads.v0.commonB\x11\x46requencyCapProtoP\x01ZDgoogle.golang.org/genproto/googleapis/ads/googleads/v0/common;common\xa2\x02\x03GAA\xaa\x02\x1eGoogle.Ads.GoogleAds.V0.Common\xca\x02\x1eGoogle\\Ads\\GoogleAds\\V0\\Commonb\x06proto3')
+  serialized_options=_b('\n\"com.google.ads.googleads.v0.commonB\021FrequencyCapProtoP\001ZDgoogle.golang.org/genproto/googleapis/ads/googleads/v0/common;common\242\002\003GAA\252\002\036Google.Ads.GoogleAds.V0.Common\312\002\036Google\\Ads\\GoogleAds\\V0\\Common\352\002\"Google::Ads::GoogleAds::V0::Common'),
+  serialized_pb=_b('\n8google/ads/googleads_v0/proto/common/frequency_cap.proto\x12\x1egoogle.ads.googleads.v0.common\x1a\x42google/ads/googleads_v0/proto/enums/frequency_cap_event_type.proto\x1a=google/ads/googleads_v0/proto/enums/frequency_cap_level.proto\x1a\x41google/ads/googleads_v0/proto/enums/frequency_cap_time_unit.proto\x1a\x1egoogle/protobuf/wrappers.proto\"{\n\x11\x46requencyCapEntry\x12<\n\x03key\x18\x01 \x01(\x0b\x32/.google.ads.googleads.v0.common.FrequencyCapKey\x12(\n\x03\x63\x61p\x18\x02 \x01(\x0b\x32\x1b.google.protobuf.Int32Value\"\xdf\x02\n\x0f\x46requencyCapKey\x12U\n\x05level\x18\x01 \x01(\x0e\x32\x46.google.ads.googleads.v0.enums.FrequencyCapLevelEnum.FrequencyCapLevel\x12\x62\n\nevent_type\x18\x03 \x01(\x0e\x32N.google.ads.googleads.v0.enums.FrequencyCapEventTypeEnum.FrequencyCapEventType\x12_\n\ttime_unit\x18\x02 \x01(\x0e\x32L.google.ads.googleads.v0.enums.FrequencyCapTimeUnitEnum.FrequencyCapTimeUnit\x12\x30\n\x0btime_length\x18\x04 \x01(\x0b\x32\x1b.google.protobuf.Int32ValueB\xec\x01\n\"com.google.ads.googleads.v0.commonB\x11\x46requencyCapProtoP\x01ZDgoogle.golang.org/genproto/googleapis/ads/googleads/v0/common;common\xa2\x02\x03GAA\xaa\x02\x1eGoogle.Ads.GoogleAds.V0.Common\xca\x02\x1eGoogle\\Ads\\GoogleAds\\V0\\Common\xea\x02\"Google::Ads::GoogleAds::V0::Commonb\x06proto3')
   ,
   dependencies=[google_dot_ads_dot_googleads__v0_dot_proto_dot_enums_dot_frequency__cap__event__type__pb2.DESCRIPTOR,google_dot_ads_dot_googleads__v0_dot_proto_dot_enums_dot_frequency__cap__level__pb2.DESCRIPTOR,google_dot_ads_dot_googleads__v0_dot_proto_dot_enums_dot_frequency__cap__time__unit__pb2.DESCRIPTOR,google_dot_protobuf_dot_wrappers__pb2.DESCRIPTOR,])
 
@@ -43,21 +43,21 @@ _FREQUENCYCAPENTRY = _descriptor.Descriptor(
       has_default_value=False, default_value=None,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
-      options=None, file=DESCRIPTOR),
+      serialized_options=None, file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
       name='cap', full_name='google.ads.googleads.v0.common.FrequencyCapEntry.cap', index=1,
       number=2, type=11, cpp_type=10, label=1,
       has_default_value=False, default_value=None,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
-      options=None, file=DESCRIPTOR),
+      serialized_options=None, file=DESCRIPTOR),
   ],
   extensions=[
   ],
   nested_types=[],
   enum_types=[
   ],
-  options=None,
+  serialized_options=None,
   is_extendable=False,
   syntax='proto3',
   extension_ranges=[],
@@ -81,35 +81,35 @@ _FREQUENCYCAPKEY = _descriptor.Descriptor(
       has_default_value=False, default_value=0,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
-      options=None, file=DESCRIPTOR),
+      serialized_options=None, file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
       name='event_type', full_name='google.ads.googleads.v0.common.FrequencyCapKey.event_type', index=1,
       number=3, type=14, cpp_type=8, label=1,
       has_default_value=False, default_value=0,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
-      options=None, file=DESCRIPTOR),
+      serialized_options=None, file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
       name='time_unit', full_name='google.ads.googleads.v0.common.FrequencyCapKey.time_unit', index=2,
       number=2, type=14, cpp_type=8, label=1,
       has_default_value=False, default_value=0,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
-      options=None, file=DESCRIPTOR),
+      serialized_options=None, file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
       name='time_length', full_name='google.ads.googleads.v0.common.FrequencyCapKey.time_length', index=3,
       number=4, type=11, cpp_type=10, label=1,
       has_default_value=False, default_value=None,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
-      options=None, file=DESCRIPTOR),
+      serialized_options=None, file=DESCRIPTOR),
   ],
   extensions=[
   ],
   nested_types=[],
   enum_types=[
   ],
-  options=None,
+  serialized_options=None,
   is_extendable=False,
   syntax='proto3',
   extension_ranges=[],
@@ -131,7 +131,7 @@ _sym_db.RegisterFileDescriptor(DESCRIPTOR)
 
 FrequencyCapEntry = _reflection.GeneratedProtocolMessageType('FrequencyCapEntry', (_message.Message,), dict(
   DESCRIPTOR = _FREQUENCYCAPENTRY,
-  __module__ = 'google.ads.google_ads.v0.proto.common.frequency_cap_pb2'
+  __module__ = 'google.ads.googleads_v0.proto.common.frequency_cap_pb2'
   ,
   __doc__ = """A rule specifying the maximum number of times an ad (or some set of ads)
   can be shown to a user over a particular time period.
@@ -151,7 +151,7 @@ _sym_db.RegisterMessage(FrequencyCapEntry)
 
 FrequencyCapKey = _reflection.GeneratedProtocolMessageType('FrequencyCapKey', (_message.Message,), dict(
   DESCRIPTOR = _FREQUENCYCAPKEY,
-  __module__ = 'google.ads.google_ads.v0.proto.common.frequency_cap_pb2'
+  __module__ = 'google.ads.googleads_v0.proto.common.frequency_cap_pb2'
   ,
   __doc__ = """A group of fields used as keys for a frequency cap. There can be no more
   than one frequency cap with the same key.
@@ -174,6 +174,5 @@ FrequencyCapKey = _reflection.GeneratedProtocolMessageType('FrequencyCapKey', (_
 _sym_db.RegisterMessage(FrequencyCapKey)
 
 
-DESCRIPTOR.has_options = True
-DESCRIPTOR._options = _descriptor._ParseOptions(descriptor_pb2.FileOptions(), _b('\n\"com.google.ads.googleads.v0.commonB\021FrequencyCapProtoP\001ZDgoogle.golang.org/genproto/googleapis/ads/googleads/v0/common;common\242\002\003GAA\252\002\036Google.Ads.GoogleAds.V0.Common\312\002\036Google\\Ads\\GoogleAds\\V0\\Common'))
+DESCRIPTOR._options = None
 # @@protoc_insertion_point(module_scope)

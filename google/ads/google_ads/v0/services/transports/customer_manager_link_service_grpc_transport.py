@@ -1,4 +1,6 @@
-# Copyright 2018 Google LLC
+# -*- coding: utf-8 -*-
+#
+# Copyright 2019 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -60,6 +62,8 @@ class CustomerManagerLinkServiceGrpcTransport(object):
                 credentials=credentials,
             )
 
+        self._channel = channel
+
         # gRPC uses objects called "stubs" that are bound to the
         # channel and provide a basic method for each RPC.
         self._stubs = {
@@ -92,8 +96,17 @@ class CustomerManagerLinkServiceGrpcTransport(object):
         )
 
     @property
+    def channel(self):
+        """The gRPC channel used by the transport.
+
+        Returns:
+            grpc.Channel: A gRPC channel object.
+        """
+        return self._channel
+
+    @property
     def get_customer_manager_link(self):
-        """Return the gRPC stub for {$apiMethod.name}.
+        """Return the gRPC stub for :meth:`CustomerManagerLinkServiceClient.get_customer_manager_link`.
 
         Returns the requested CustomerManagerLink in full detail.
 
@@ -104,3 +117,17 @@ class CustomerManagerLinkServiceGrpcTransport(object):
         """
         return self._stubs[
             'customer_manager_link_service_stub'].GetCustomerManagerLink
+
+    @property
+    def mutate_customer_manager_link(self):
+        """Return the gRPC stub for :meth:`CustomerManagerLinkServiceClient.mutate_customer_manager_link`.
+
+        Creates or updates customer manager links. Operation statuses are returned.
+
+        Returns:
+            Callable: A callable which accepts the appropriate
+                deserialized request object and returns a
+                deserialized response object.
+        """
+        return self._stubs[
+            'customer_manager_link_service_stub'].MutateCustomerManagerLink

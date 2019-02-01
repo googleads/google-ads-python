@@ -7,7 +7,6 @@ from google.protobuf import descriptor as _descriptor
 from google.protobuf import message as _message
 from google.protobuf import reflection as _reflection
 from google.protobuf import symbol_database as _symbol_database
-from google.protobuf import descriptor_pb2
 # @@protoc_insertion_point(imports)
 
 _sym_db = _symbol_database.Default()
@@ -16,15 +15,18 @@ _sym_db = _symbol_database.Default()
 from google.ads.google_ads.v0.proto.resources import keyword_plan_campaign_pb2 as google_dot_ads_dot_googleads__v0_dot_proto_dot_resources_dot_keyword__plan__campaign__pb2
 from google.api import annotations_pb2 as google_dot_api_dot_annotations__pb2
 from google.protobuf import field_mask_pb2 as google_dot_protobuf_dot_field__mask__pb2
+from google.protobuf import wrappers_pb2 as google_dot_protobuf_dot_wrappers__pb2
+from google.rpc import status_pb2 as google_dot_rpc_dot_status__pb2
 
 
 DESCRIPTOR = _descriptor.FileDescriptor(
   name='google/ads/googleads_v0/proto/services/keyword_plan_campaign_service.proto',
   package='google.ads.googleads.v0.services',
   syntax='proto3',
-  serialized_pb=_b('\nJgoogle/ads/googleads_v0/proto/services/keyword_plan_campaign_service.proto\x12 google.ads.googleads.v0.services\x1a\x43google/ads/googleads_v0/proto/resources/keyword_plan_campaign.proto\x1a\x1cgoogle/api/annotations.proto\x1a google/protobuf/field_mask.proto\"6\n\x1dGetKeywordPlanCampaignRequest\x12\x15\n\rresource_name\x18\x01 \x01(\t\"\x8c\x01\n!MutateKeywordPlanCampaignsRequest\x12\x13\n\x0b\x63ustomer_id\x18\x01 \x01(\t\x12R\n\noperations\x18\x02 \x03(\x0b\x32>.google.ads.googleads.v0.services.KeywordPlanCampaignOperation\"\x82\x02\n\x1cKeywordPlanCampaignOperation\x12/\n\x0bupdate_mask\x18\x04 \x01(\x0b\x32\x1a.google.protobuf.FieldMask\x12H\n\x06\x63reate\x18\x01 \x01(\x0b\x32\x36.google.ads.googleads.v0.resources.KeywordPlanCampaignH\x00\x12H\n\x06update\x18\x02 \x01(\x0b\x32\x36.google.ads.googleads.v0.resources.KeywordPlanCampaignH\x00\x12\x10\n\x06remove\x18\x03 \x01(\tH\x00\x42\x0b\n\toperation\"x\n\"MutateKeywordPlanCampaignsResponse\x12R\n\x07results\x18\x02 \x03(\x0b\x32\x41.google.ads.googleads.v0.services.MutateKeywordPlanCampaignResult\"8\n\x1fMutateKeywordPlanCampaignResult\x12\x15\n\rresource_name\x18\x01 \x01(\t2\xe0\x03\n\x1aKeywordPlanCampaignService\x12\xd1\x01\n\x16GetKeywordPlanCampaign\x12?.google.ads.googleads.v0.services.GetKeywordPlanCampaignRequest\x1a\x36.google.ads.googleads.v0.resources.KeywordPlanCampaign\">\x82\xd3\xe4\x93\x02\x38\x12\x36/v0/{resource_name=customers/*/keywordPlanCampaigns/*}\x12\xed\x01\n\x1aMutateKeywordPlanCampaigns\x12\x43.google.ads.googleads.v0.services.MutateKeywordPlanCampaignsRequest\x1a\x44.google.ads.googleads.v0.services.MutateKeywordPlanCampaignsResponse\"D\x82\xd3\xe4\x93\x02>\"9/v0/customers/{customer_id=*}/keywordPlanCampaigns:mutate:\x01*B\xdf\x01\n$com.google.ads.googleads.v0.servicesB\x1fKeywordPlanCampaignServiceProtoP\x01ZHgoogle.golang.org/genproto/googleapis/ads/googleads/v0/services;services\xa2\x02\x03GAA\xaa\x02 Google.Ads.GoogleAds.V0.Services\xca\x02 Google\\Ads\\GoogleAds\\V0\\Servicesb\x06proto3')
+  serialized_options=_b('\n$com.google.ads.googleads.v0.servicesB\037KeywordPlanCampaignServiceProtoP\001ZHgoogle.golang.org/genproto/googleapis/ads/googleads/v0/services;services\242\002\003GAA\252\002 Google.Ads.GoogleAds.V0.Services\312\002 Google\\Ads\\GoogleAds\\V0\\Services\352\002$Google::Ads::GoogleAds::V0::Services'),
+  serialized_pb=_b('\nJgoogle/ads/googleads_v0/proto/services/keyword_plan_campaign_service.proto\x12 google.ads.googleads.v0.services\x1a\x43google/ads/googleads_v0/proto/resources/keyword_plan_campaign.proto\x1a\x1cgoogle/api/annotations.proto\x1a google/protobuf/field_mask.proto\x1a\x1egoogle/protobuf/wrappers.proto\x1a\x17google/rpc/status.proto\"6\n\x1dGetKeywordPlanCampaignRequest\x12\x15\n\rresource_name\x18\x01 \x01(\t\"\xbc\x01\n!MutateKeywordPlanCampaignsRequest\x12\x13\n\x0b\x63ustomer_id\x18\x01 \x01(\t\x12R\n\noperations\x18\x02 \x03(\x0b\x32>.google.ads.googleads.v0.services.KeywordPlanCampaignOperation\x12\x17\n\x0fpartial_failure\x18\x03 \x01(\x08\x12\x15\n\rvalidate_only\x18\x04 \x01(\x08\"\x82\x02\n\x1cKeywordPlanCampaignOperation\x12/\n\x0bupdate_mask\x18\x04 \x01(\x0b\x32\x1a.google.protobuf.FieldMask\x12H\n\x06\x63reate\x18\x01 \x01(\x0b\x32\x36.google.ads.googleads.v0.resources.KeywordPlanCampaignH\x00\x12H\n\x06update\x18\x02 \x01(\x0b\x32\x36.google.ads.googleads.v0.resources.KeywordPlanCampaignH\x00\x12\x10\n\x06remove\x18\x03 \x01(\tH\x00\x42\x0b\n\toperation\"\xab\x01\n\"MutateKeywordPlanCampaignsResponse\x12\x31\n\x15partial_failure_error\x18\x03 \x01(\x0b\x32\x12.google.rpc.Status\x12R\n\x07results\x18\x02 \x03(\x0b\x32\x41.google.ads.googleads.v0.services.MutateKeywordPlanCampaignResult\"8\n\x1fMutateKeywordPlanCampaignResult\x12\x15\n\rresource_name\x18\x01 \x01(\t2\xe0\x03\n\x1aKeywordPlanCampaignService\x12\xd1\x01\n\x16GetKeywordPlanCampaign\x12?.google.ads.googleads.v0.services.GetKeywordPlanCampaignRequest\x1a\x36.google.ads.googleads.v0.resources.KeywordPlanCampaign\">\x82\xd3\xe4\x93\x02\x38\x12\x36/v0/{resource_name=customers/*/keywordPlanCampaigns/*}\x12\xed\x01\n\x1aMutateKeywordPlanCampaigns\x12\x43.google.ads.googleads.v0.services.MutateKeywordPlanCampaignsRequest\x1a\x44.google.ads.googleads.v0.services.MutateKeywordPlanCampaignsResponse\"D\x82\xd3\xe4\x93\x02>\"9/v0/customers/{customer_id=*}/keywordPlanCampaigns:mutate:\x01*B\x86\x02\n$com.google.ads.googleads.v0.servicesB\x1fKeywordPlanCampaignServiceProtoP\x01ZHgoogle.golang.org/genproto/googleapis/ads/googleads/v0/services;services\xa2\x02\x03GAA\xaa\x02 Google.Ads.GoogleAds.V0.Services\xca\x02 Google\\Ads\\GoogleAds\\V0\\Services\xea\x02$Google::Ads::GoogleAds::V0::Servicesb\x06proto3')
   ,
-  dependencies=[google_dot_ads_dot_googleads__v0_dot_proto_dot_resources_dot_keyword__plan__campaign__pb2.DESCRIPTOR,google_dot_api_dot_annotations__pb2.DESCRIPTOR,google_dot_protobuf_dot_field__mask__pb2.DESCRIPTOR,])
+  dependencies=[google_dot_ads_dot_googleads__v0_dot_proto_dot_resources_dot_keyword__plan__campaign__pb2.DESCRIPTOR,google_dot_api_dot_annotations__pb2.DESCRIPTOR,google_dot_protobuf_dot_field__mask__pb2.DESCRIPTOR,google_dot_protobuf_dot_wrappers__pb2.DESCRIPTOR,google_dot_rpc_dot_status__pb2.DESCRIPTOR,])
 
 
 
@@ -42,21 +44,21 @@ _GETKEYWORDPLANCAMPAIGNREQUEST = _descriptor.Descriptor(
       has_default_value=False, default_value=_b("").decode('utf-8'),
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
-      options=None, file=DESCRIPTOR),
+      serialized_options=None, file=DESCRIPTOR),
   ],
   extensions=[
   ],
   nested_types=[],
   enum_types=[
   ],
-  options=None,
+  serialized_options=None,
   is_extendable=False,
   syntax='proto3',
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=245,
-  serialized_end=299,
+  serialized_start=302,
+  serialized_end=356,
 )
 
 
@@ -73,28 +75,42 @@ _MUTATEKEYWORDPLANCAMPAIGNSREQUEST = _descriptor.Descriptor(
       has_default_value=False, default_value=_b("").decode('utf-8'),
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
-      options=None, file=DESCRIPTOR),
+      serialized_options=None, file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
       name='operations', full_name='google.ads.googleads.v0.services.MutateKeywordPlanCampaignsRequest.operations', index=1,
       number=2, type=11, cpp_type=10, label=3,
       has_default_value=False, default_value=[],
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
-      options=None, file=DESCRIPTOR),
+      serialized_options=None, file=DESCRIPTOR),
+    _descriptor.FieldDescriptor(
+      name='partial_failure', full_name='google.ads.googleads.v0.services.MutateKeywordPlanCampaignsRequest.partial_failure', index=2,
+      number=3, type=8, cpp_type=7, label=1,
+      has_default_value=False, default_value=False,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR),
+    _descriptor.FieldDescriptor(
+      name='validate_only', full_name='google.ads.googleads.v0.services.MutateKeywordPlanCampaignsRequest.validate_only', index=3,
+      number=4, type=8, cpp_type=7, label=1,
+      has_default_value=False, default_value=False,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR),
   ],
   extensions=[
   ],
   nested_types=[],
   enum_types=[
   ],
-  options=None,
+  serialized_options=None,
   is_extendable=False,
   syntax='proto3',
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=302,
-  serialized_end=442,
+  serialized_start=359,
+  serialized_end=547,
 )
 
 
@@ -111,35 +127,35 @@ _KEYWORDPLANCAMPAIGNOPERATION = _descriptor.Descriptor(
       has_default_value=False, default_value=None,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
-      options=None, file=DESCRIPTOR),
+      serialized_options=None, file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
       name='create', full_name='google.ads.googleads.v0.services.KeywordPlanCampaignOperation.create', index=1,
       number=1, type=11, cpp_type=10, label=1,
       has_default_value=False, default_value=None,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
-      options=None, file=DESCRIPTOR),
+      serialized_options=None, file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
       name='update', full_name='google.ads.googleads.v0.services.KeywordPlanCampaignOperation.update', index=2,
       number=2, type=11, cpp_type=10, label=1,
       has_default_value=False, default_value=None,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
-      options=None, file=DESCRIPTOR),
+      serialized_options=None, file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
       name='remove', full_name='google.ads.googleads.v0.services.KeywordPlanCampaignOperation.remove', index=3,
       number=3, type=9, cpp_type=9, label=1,
       has_default_value=False, default_value=_b("").decode('utf-8'),
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
-      options=None, file=DESCRIPTOR),
+      serialized_options=None, file=DESCRIPTOR),
   ],
   extensions=[
   ],
   nested_types=[],
   enum_types=[
   ],
-  options=None,
+  serialized_options=None,
   is_extendable=False,
   syntax='proto3',
   extension_ranges=[],
@@ -148,8 +164,8 @@ _KEYWORDPLANCAMPAIGNOPERATION = _descriptor.Descriptor(
       name='operation', full_name='google.ads.googleads.v0.services.KeywordPlanCampaignOperation.operation',
       index=0, containing_type=None, fields=[]),
   ],
-  serialized_start=445,
-  serialized_end=703,
+  serialized_start=550,
+  serialized_end=808,
 )
 
 
@@ -161,26 +177,33 @@ _MUTATEKEYWORDPLANCAMPAIGNSRESPONSE = _descriptor.Descriptor(
   containing_type=None,
   fields=[
     _descriptor.FieldDescriptor(
-      name='results', full_name='google.ads.googleads.v0.services.MutateKeywordPlanCampaignsResponse.results', index=0,
+      name='partial_failure_error', full_name='google.ads.googleads.v0.services.MutateKeywordPlanCampaignsResponse.partial_failure_error', index=0,
+      number=3, type=11, cpp_type=10, label=1,
+      has_default_value=False, default_value=None,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR),
+    _descriptor.FieldDescriptor(
+      name='results', full_name='google.ads.googleads.v0.services.MutateKeywordPlanCampaignsResponse.results', index=1,
       number=2, type=11, cpp_type=10, label=3,
       has_default_value=False, default_value=[],
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
-      options=None, file=DESCRIPTOR),
+      serialized_options=None, file=DESCRIPTOR),
   ],
   extensions=[
   ],
   nested_types=[],
   enum_types=[
   ],
-  options=None,
+  serialized_options=None,
   is_extendable=False,
   syntax='proto3',
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=705,
-  serialized_end=825,
+  serialized_start=811,
+  serialized_end=982,
 )
 
 
@@ -197,21 +220,21 @@ _MUTATEKEYWORDPLANCAMPAIGNRESULT = _descriptor.Descriptor(
       has_default_value=False, default_value=_b("").decode('utf-8'),
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
-      options=None, file=DESCRIPTOR),
+      serialized_options=None, file=DESCRIPTOR),
   ],
   extensions=[
   ],
   nested_types=[],
   enum_types=[
   ],
-  options=None,
+  serialized_options=None,
   is_extendable=False,
   syntax='proto3',
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=827,
-  serialized_end=883,
+  serialized_start=984,
+  serialized_end=1040,
 )
 
 _MUTATEKEYWORDPLANCAMPAIGNSREQUEST.fields_by_name['operations'].message_type = _KEYWORDPLANCAMPAIGNOPERATION
@@ -227,6 +250,7 @@ _KEYWORDPLANCAMPAIGNOPERATION.fields_by_name['update'].containing_oneof = _KEYWO
 _KEYWORDPLANCAMPAIGNOPERATION.oneofs_by_name['operation'].fields.append(
   _KEYWORDPLANCAMPAIGNOPERATION.fields_by_name['remove'])
 _KEYWORDPLANCAMPAIGNOPERATION.fields_by_name['remove'].containing_oneof = _KEYWORDPLANCAMPAIGNOPERATION.oneofs_by_name['operation']
+_MUTATEKEYWORDPLANCAMPAIGNSRESPONSE.fields_by_name['partial_failure_error'].message_type = google_dot_rpc_dot_status__pb2._STATUS
 _MUTATEKEYWORDPLANCAMPAIGNSRESPONSE.fields_by_name['results'].message_type = _MUTATEKEYWORDPLANCAMPAIGNRESULT
 DESCRIPTOR.message_types_by_name['GetKeywordPlanCampaignRequest'] = _GETKEYWORDPLANCAMPAIGNREQUEST
 DESCRIPTOR.message_types_by_name['MutateKeywordPlanCampaignsRequest'] = _MUTATEKEYWORDPLANCAMPAIGNSREQUEST
@@ -237,7 +261,7 @@ _sym_db.RegisterFileDescriptor(DESCRIPTOR)
 
 GetKeywordPlanCampaignRequest = _reflection.GeneratedProtocolMessageType('GetKeywordPlanCampaignRequest', (_message.Message,), dict(
   DESCRIPTOR = _GETKEYWORDPLANCAMPAIGNREQUEST,
-  __module__ = 'google.ads.google_ads.v0.proto.services.keyword_plan_campaign_service_pb2'
+  __module__ = 'google.ads.googleads_v0.proto.services.keyword_plan_campaign_service_pb2'
   ,
   __doc__ = """Request message for
   [KeywordPlanCampaignService.GetKeywordPlanCampaign][google.ads.googleads.v0.services.KeywordPlanCampaignService.GetKeywordPlanCampaign].
@@ -253,7 +277,7 @@ _sym_db.RegisterMessage(GetKeywordPlanCampaignRequest)
 
 MutateKeywordPlanCampaignsRequest = _reflection.GeneratedProtocolMessageType('MutateKeywordPlanCampaignsRequest', (_message.Message,), dict(
   DESCRIPTOR = _MUTATEKEYWORDPLANCAMPAIGNSREQUEST,
-  __module__ = 'google.ads.google_ads.v0.proto.services.keyword_plan_campaign_service_pb2'
+  __module__ = 'google.ads.googleads_v0.proto.services.keyword_plan_campaign_service_pb2'
   ,
   __doc__ = """Request message for
   [KeywordPlanCampaignService.MutateKeywordPlanCampaigns][google.ads.googleads.v0.services.KeywordPlanCampaignService.MutateKeywordPlanCampaigns].
@@ -266,6 +290,14 @@ MutateKeywordPlanCampaignsRequest = _reflection.GeneratedProtocolMessageType('Mu
       operations:
           The list of operations to perform on individual Keyword Plan
           campaigns.
+      partial_failure:
+          If true, successful operations will be carried out and invalid
+          operations will return errors. If false, all operations will
+          be carried out in one transaction if and only if they are all
+          valid. Default is false.
+      validate_only:
+          If true, the request is validated but not executed. Only
+          errors are returned, not results.
   """,
   # @@protoc_insertion_point(class_scope:google.ads.googleads.v0.services.MutateKeywordPlanCampaignsRequest)
   ))
@@ -273,7 +305,7 @@ _sym_db.RegisterMessage(MutateKeywordPlanCampaignsRequest)
 
 KeywordPlanCampaignOperation = _reflection.GeneratedProtocolMessageType('KeywordPlanCampaignOperation', (_message.Message,), dict(
   DESCRIPTOR = _KEYWORDPLANCAMPAIGNOPERATION,
-  __module__ = 'google.ads.google_ads.v0.proto.services.keyword_plan_campaign_service_pb2'
+  __module__ = 'google.ads.googleads_v0.proto.services.keyword_plan_campaign_service_pb2'
   ,
   __doc__ = """A single operation (create, update, remove) on a Keyword Plan campaign.
   
@@ -301,12 +333,18 @@ _sym_db.RegisterMessage(KeywordPlanCampaignOperation)
 
 MutateKeywordPlanCampaignsResponse = _reflection.GeneratedProtocolMessageType('MutateKeywordPlanCampaignsResponse', (_message.Message,), dict(
   DESCRIPTOR = _MUTATEKEYWORDPLANCAMPAIGNSRESPONSE,
-  __module__ = 'google.ads.google_ads.v0.proto.services.keyword_plan_campaign_service_pb2'
+  __module__ = 'google.ads.googleads_v0.proto.services.keyword_plan_campaign_service_pb2'
   ,
   __doc__ = """Response message for a Keyword Plan campaign mutate.
   
   
   Attributes:
+      partial_failure_error:
+          Errors that pertain to operation failures in the partial
+          failure mode. Returned only when partial\_failure = true and
+          all errors occur inside the operations. If any errors occur
+          outside the operations (e.g. auth errors), we return an RPC
+          level error.
       results:
           All results for the mutate.
   """,
@@ -316,7 +354,7 @@ _sym_db.RegisterMessage(MutateKeywordPlanCampaignsResponse)
 
 MutateKeywordPlanCampaignResult = _reflection.GeneratedProtocolMessageType('MutateKeywordPlanCampaignResult', (_message.Message,), dict(
   DESCRIPTOR = _MUTATEKEYWORDPLANCAMPAIGNRESULT,
-  __module__ = 'google.ads.google_ads.v0.proto.services.keyword_plan_campaign_service_pb2'
+  __module__ = 'google.ads.googleads_v0.proto.services.keyword_plan_campaign_service_pb2'
   ,
   __doc__ = """The result for the Keyword Plan campaign mutate.
   
@@ -330,17 +368,16 @@ MutateKeywordPlanCampaignResult = _reflection.GeneratedProtocolMessageType('Muta
 _sym_db.RegisterMessage(MutateKeywordPlanCampaignResult)
 
 
-DESCRIPTOR.has_options = True
-DESCRIPTOR._options = _descriptor._ParseOptions(descriptor_pb2.FileOptions(), _b('\n$com.google.ads.googleads.v0.servicesB\037KeywordPlanCampaignServiceProtoP\001ZHgoogle.golang.org/genproto/googleapis/ads/googleads/v0/services;services\242\002\003GAA\252\002 Google.Ads.GoogleAds.V0.Services\312\002 Google\\Ads\\GoogleAds\\V0\\Services'))
+DESCRIPTOR._options = None
 
 _KEYWORDPLANCAMPAIGNSERVICE = _descriptor.ServiceDescriptor(
   name='KeywordPlanCampaignService',
   full_name='google.ads.googleads.v0.services.KeywordPlanCampaignService',
   file=DESCRIPTOR,
   index=0,
-  options=None,
-  serialized_start=886,
-  serialized_end=1366,
+  serialized_options=None,
+  serialized_start=1043,
+  serialized_end=1523,
   methods=[
   _descriptor.MethodDescriptor(
     name='GetKeywordPlanCampaign',
@@ -349,7 +386,7 @@ _KEYWORDPLANCAMPAIGNSERVICE = _descriptor.ServiceDescriptor(
     containing_service=None,
     input_type=_GETKEYWORDPLANCAMPAIGNREQUEST,
     output_type=google_dot_ads_dot_googleads__v0_dot_proto_dot_resources_dot_keyword__plan__campaign__pb2._KEYWORDPLANCAMPAIGN,
-    options=_descriptor._ParseOptions(descriptor_pb2.MethodOptions(), _b('\202\323\344\223\0028\0226/v0/{resource_name=customers/*/keywordPlanCampaigns/*}')),
+    serialized_options=_b('\202\323\344\223\0028\0226/v0/{resource_name=customers/*/keywordPlanCampaigns/*}'),
   ),
   _descriptor.MethodDescriptor(
     name='MutateKeywordPlanCampaigns',
@@ -358,7 +395,7 @@ _KEYWORDPLANCAMPAIGNSERVICE = _descriptor.ServiceDescriptor(
     containing_service=None,
     input_type=_MUTATEKEYWORDPLANCAMPAIGNSREQUEST,
     output_type=_MUTATEKEYWORDPLANCAMPAIGNSRESPONSE,
-    options=_descriptor._ParseOptions(descriptor_pb2.MethodOptions(), _b('\202\323\344\223\002>\"9/v0/customers/{customer_id=*}/keywordPlanCampaigns:mutate:\001*')),
+    serialized_options=_b('\202\323\344\223\002>\"9/v0/customers/{customer_id=*}/keywordPlanCampaigns:mutate:\001*'),
   ),
 ])
 _sym_db.RegisterServiceDescriptor(_KEYWORDPLANCAMPAIGNSERVICE)

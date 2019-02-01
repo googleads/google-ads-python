@@ -1,4 +1,6 @@
-# Copyright 2018 Google LLC
+# -*- coding: utf-8 -*-
+#
+# Copyright 2019 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -22,12 +24,10 @@ import google.api_core.gapic_v1.config
 import google.api_core.gapic_v1.method
 import google.api_core.grpc_helpers
 import google.api_core.protobuf_helpers
-import grpc
 
 from google.ads.google_ads.v0.services import keyword_plan_idea_service_client_config
 from google.ads.google_ads.v0.services.transports import keyword_plan_idea_service_grpc_transport
 from google.ads.google_ads.v0.proto.services import keyword_plan_idea_service_pb2
-from google.protobuf import wrappers_pb2
 
 _GAPIC_LIBRARY_VERSION = pkg_resources.get_distribution(
     'google-ads', ).version
@@ -68,7 +68,7 @@ class KeywordPlanIdeaServiceClient(object):
                  transport=None,
                  channel=None,
                  credentials=None,
-                 client_config=keyword_plan_idea_service_client_config.config,
+                 client_config=None,
                  client_info=None):
         """Constructor.
 
@@ -101,13 +101,20 @@ class KeywordPlanIdeaServiceClient(object):
                 your own client library.
         """
         # Raise deprecation warnings for things we want to go away.
-        if client_config:
-            warnings.warn('The `client_config` argument is deprecated.',
-                          PendingDeprecationWarning)
+        if client_config is not None:
+            warnings.warn(
+                'The `client_config` argument is deprecated.',
+                PendingDeprecationWarning,
+                stacklevel=2)
+        else:
+            client_config = keyword_plan_idea_service_client_config.config
+
         if channel:
             warnings.warn(
                 'The `channel` argument is deprecated; use '
-                '`transport` instead.', PendingDeprecationWarning)
+                '`transport` instead.',
+                PendingDeprecationWarning,
+                stacklevel=2)
 
         # Instantiate the transport.
         # The transport is responsible for handling serialization and
@@ -133,9 +140,10 @@ class KeywordPlanIdeaServiceClient(object):
             )
 
         if client_info is None:
-            client_info = (
-                google.api_core.gapic_v1.client_info.DEFAULT_CLIENT_INFO)
-        client_info.gapic_version = _GAPIC_LIBRARY_VERSION
+            client_info = google.api_core.gapic_v1.client_info.ClientInfo(
+                gapic_version=_GAPIC_LIBRARY_VERSION, )
+        else:
+            client_info.gapic_version = _GAPIC_LIBRARY_VERSION
         self._client_info = client_info
 
         # Parse out the default settings for retry and timeout for each RPC
@@ -168,25 +176,30 @@ class KeywordPlanIdeaServiceClient(object):
 
         Args:
             customer_id (str): The ID of the customer with the recommendation.
-            language (Union[dict, ~google.ads.google_ads.v0.types.StringValue]): The resource name of the language to target.
+            language (Union[dict, ~google.ads.googleads_v0.types.StringValue]): The resource name of the language to target.
                 Required
+
                 If a dict is provided, it must be of the same form as the protobuf
-                message :class:`~google.ads.google_ads.v0.types.StringValue`
-            geo_target_constants (list[Union[dict, ~google.ads.google_ads.v0.types.StringValue]]): The resource names of the location to target.
+                message :class:`~google.ads.googleads_v0.types.StringValue`
+            geo_target_constants (list[Union[dict, ~google.ads.googleads_v0.types.StringValue]]): The resource names of the location to target.
                 Max 10
+
                 If a dict is provided, it must be of the same form as the protobuf
-                message :class:`~google.ads.google_ads.v0.types.StringValue`
-            keyword_plan_network (~google.ads.google_ads.v0.types.KeywordPlanNetwork): Targeting network.
-            keyword_and_url_seed (Union[dict, ~google.ads.google_ads.v0.types.KeywordAndUrlSeed]): A Keyword and a specific Url to generate ideas from
+                message :class:`~google.ads.googleads_v0.types.StringValue`
+            keyword_plan_network (~google.ads.googleads_v0.types.KeywordPlanNetwork): Targeting network.
+            keyword_and_url_seed (Union[dict, ~google.ads.googleads_v0.types.KeywordAndUrlSeed]): A Keyword and a specific Url to generate ideas from
                 e.g. cars, www.example.com/cars.
+
                 If a dict is provided, it must be of the same form as the protobuf
-                message :class:`~google.ads.google_ads.v0.types.KeywordAndUrlSeed`
-            keyword_seed (Union[dict, ~google.ads.google_ads.v0.types.KeywordSeed]): A Keyword or phrase to generate ideas from, e.g. cars.
+                message :class:`~google.ads.googleads_v0.types.KeywordAndUrlSeed`
+            keyword_seed (Union[dict, ~google.ads.googleads_v0.types.KeywordSeed]): A Keyword or phrase to generate ideas from, e.g. cars.
+
                 If a dict is provided, it must be of the same form as the protobuf
-                message :class:`~google.ads.google_ads.v0.types.KeywordSeed`
-            url_seed (Union[dict, ~google.ads.google_ads.v0.types.UrlSeed]): A specific url to generate ideas from, e.g. www.example.com/cars.
+                message :class:`~google.ads.googleads_v0.types.KeywordSeed`
+            url_seed (Union[dict, ~google.ads.googleads_v0.types.UrlSeed]): A specific url to generate ideas from, e.g. www.example.com/cars.
+
                 If a dict is provided, it must be of the same form as the protobuf
-                message :class:`~google.ads.google_ads.v0.types.UrlSeed`
+                message :class:`~google.ads.googleads_v0.types.UrlSeed`
             retry (Optional[google.api_core.retry.Retry]):  A retry object used
                 to retry requests. If ``None`` is specified, requests will not
                 be retried.
@@ -197,7 +210,7 @@ class KeywordPlanIdeaServiceClient(object):
                 that is provided to the method.
 
         Returns:
-            A :class:`~google.ads.google_ads.v0.types.GenerateKeywordIdeaResponse` instance.
+            A :class:`~google.ads.googleads_v0.types.GenerateKeywordIdeaResponse` instance.
 
         Raises:
             google.api_core.exceptions.GoogleAPICallError: If the request
@@ -211,10 +224,10 @@ class KeywordPlanIdeaServiceClient(object):
             self._inner_api_calls[
                 'generate_keyword_ideas'] = google.api_core.gapic_v1.method.wrap_method(
                     self.transport.generate_keyword_ideas,
-                    default_retry=self._method_configs['GenerateKeywordIdeas']
-                    .retry,
-                    default_timeout=self._method_configs[
-                        'GenerateKeywordIdeas'].timeout,
+                    default_retry=self._method_configs['GenerateKeywordIdeas'].
+                    retry,
+                    default_timeout=self.
+                    _method_configs['GenerateKeywordIdeas'].timeout,
                     client_info=self._client_info,
                 )
 

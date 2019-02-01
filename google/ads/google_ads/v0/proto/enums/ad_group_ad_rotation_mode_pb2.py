@@ -7,7 +7,6 @@ from google.protobuf import descriptor as _descriptor
 from google.protobuf import message as _message
 from google.protobuf import reflection as _reflection
 from google.protobuf import symbol_database as _symbol_database
-from google.protobuf import descriptor_pb2
 # @@protoc_insertion_point(imports)
 
 _sym_db = _symbol_database.Default()
@@ -19,7 +18,8 @@ DESCRIPTOR = _descriptor.FileDescriptor(
   name='google/ads/googleads_v0/proto/enums/ad_group_ad_rotation_mode.proto',
   package='google.ads.googleads.v0.enums',
   syntax='proto3',
-  serialized_pb=_b('\nCgoogle/ads/googleads_v0/proto/enums/ad_group_ad_rotation_mode.proto\x12\x1dgoogle.ads.googleads.v0.enums\"t\n\x19\x41\x64GroupAdRotationModeEnum\"W\n\x15\x41\x64GroupAdRotationMode\x12\x0f\n\x0bUNSPECIFIED\x10\x00\x12\x0b\n\x07UNKNOWN\x10\x01\x12\x0c\n\x08OPTIMIZE\x10\x02\x12\x12\n\x0eROTATE_FOREVER\x10\x03\x42\xcb\x01\n!com.google.ads.googleads.v0.enumsB\x1a\x41\x64GroupAdRotationModeProtoP\x01ZBgoogle.golang.org/genproto/googleapis/ads/googleads/v0/enums;enums\xa2\x02\x03GAA\xaa\x02\x1dGoogle.Ads.GoogleAds.V0.Enums\xca\x02\x1dGoogle\\Ads\\GoogleAds\\V0\\Enumsb\x06proto3')
+  serialized_options=_b('\n!com.google.ads.googleads.v0.enumsB\032AdGroupAdRotationModeProtoP\001ZBgoogle.golang.org/genproto/googleapis/ads/googleads/v0/enums;enums\242\002\003GAA\252\002\035Google.Ads.GoogleAds.V0.Enums\312\002\035Google\\Ads\\GoogleAds\\V0\\Enums\352\002!Google::Ads::GoogleAds::V0::Enums'),
+  serialized_pb=_b('\nCgoogle/ads/googleads_v0/proto/enums/ad_group_ad_rotation_mode.proto\x12\x1dgoogle.ads.googleads.v0.enums\"t\n\x19\x41\x64GroupAdRotationModeEnum\"W\n\x15\x41\x64GroupAdRotationMode\x12\x0f\n\x0bUNSPECIFIED\x10\x00\x12\x0b\n\x07UNKNOWN\x10\x01\x12\x0c\n\x08OPTIMIZE\x10\x02\x12\x12\n\x0eROTATE_FOREVER\x10\x03\x42\xef\x01\n!com.google.ads.googleads.v0.enumsB\x1a\x41\x64GroupAdRotationModeProtoP\x01ZBgoogle.golang.org/genproto/googleapis/ads/googleads/v0/enums;enums\xa2\x02\x03GAA\xaa\x02\x1dGoogle.Ads.GoogleAds.V0.Enums\xca\x02\x1dGoogle\\Ads\\GoogleAds\\V0\\Enums\xea\x02!Google::Ads::GoogleAds::V0::Enumsb\x06proto3')
 )
 
 
@@ -32,23 +32,23 @@ _ADGROUPADROTATIONMODEENUM_ADGROUPADROTATIONMODE = _descriptor.EnumDescriptor(
   values=[
     _descriptor.EnumValueDescriptor(
       name='UNSPECIFIED', index=0, number=0,
-      options=None,
+      serialized_options=None,
       type=None),
     _descriptor.EnumValueDescriptor(
       name='UNKNOWN', index=1, number=1,
-      options=None,
+      serialized_options=None,
       type=None),
     _descriptor.EnumValueDescriptor(
       name='OPTIMIZE', index=2, number=2,
-      options=None,
+      serialized_options=None,
       type=None),
     _descriptor.EnumValueDescriptor(
       name='ROTATE_FOREVER', index=3, number=3,
-      options=None,
+      serialized_options=None,
       type=None),
   ],
   containing_type=None,
-  options=None,
+  serialized_options=None,
   serialized_start=131,
   serialized_end=218,
 )
@@ -69,7 +69,7 @@ _ADGROUPADROTATIONMODEENUM = _descriptor.Descriptor(
   enum_types=[
     _ADGROUPADROTATIONMODEENUM_ADGROUPADROTATIONMODE,
   ],
-  options=None,
+  serialized_options=None,
   is_extendable=False,
   syntax='proto3',
   extension_ranges=[],
@@ -85,7 +85,7 @@ _sym_db.RegisterFileDescriptor(DESCRIPTOR)
 
 AdGroupAdRotationModeEnum = _reflection.GeneratedProtocolMessageType('AdGroupAdRotationModeEnum', (_message.Message,), dict(
   DESCRIPTOR = _ADGROUPADROTATIONMODEENUM,
-  __module__ = 'google.ads.google_ads.v0.proto.enums.ad_group_ad_rotation_mode_pb2'
+  __module__ = 'google.ads.googleads_v0.proto.enums.ad_group_ad_rotation_mode_pb2'
   ,
   __doc__ = """Container for enum describing possible ad rotation modes of ads within
   an ad group.
@@ -95,6 +95,5 @@ AdGroupAdRotationModeEnum = _reflection.GeneratedProtocolMessageType('AdGroupAdR
 _sym_db.RegisterMessage(AdGroupAdRotationModeEnum)
 
 
-DESCRIPTOR.has_options = True
-DESCRIPTOR._options = _descriptor._ParseOptions(descriptor_pb2.FileOptions(), _b('\n!com.google.ads.googleads.v0.enumsB\032AdGroupAdRotationModeProtoP\001ZBgoogle.golang.org/genproto/googleapis/ads/googleads/v0/enums;enums\242\002\003GAA\252\002\035Google.Ads.GoogleAds.V0.Enums\312\002\035Google\\Ads\\GoogleAds\\V0\\Enums'))
+DESCRIPTOR._options = None
 # @@protoc_insertion_point(module_scope)

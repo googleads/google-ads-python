@@ -27,7 +27,6 @@ import google.ads.google_ads.client
 
 def main(client, customer_id, recommendation_id):
     recommendation_service = client.get_service('RecommendationService')
-    partial_failure = False
 
     apply_recommendation_operation = client.get_type(
         'ApplyRecommendationOperation')
@@ -39,7 +38,6 @@ def main(client, customer_id, recommendation_id):
     try:
         recommendation_response = recommendation_service.apply_recommendation(
             customer_id,
-            partial_failure,
             [apply_recommendation_operation])
     except google.ads.google_ads.errors.GoogleAdsException as ex:
         print('Request with ID "%s" failed with status "%s" and includes the '

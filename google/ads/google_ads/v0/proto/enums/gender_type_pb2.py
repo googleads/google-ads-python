@@ -7,7 +7,6 @@ from google.protobuf import descriptor as _descriptor
 from google.protobuf import message as _message
 from google.protobuf import reflection as _reflection
 from google.protobuf import symbol_database as _symbol_database
-from google.protobuf import descriptor_pb2
 # @@protoc_insertion_point(imports)
 
 _sym_db = _symbol_database.Default()
@@ -19,7 +18,8 @@ DESCRIPTOR = _descriptor.FileDescriptor(
   name='google/ads/googleads_v0/proto/enums/gender_type.proto',
   package='google.ads.googleads.v0.enums',
   syntax='proto3',
-  serialized_pb=_b('\n5google/ads/googleads_v0/proto/enums/gender_type.proto\x12\x1dgoogle.ads.googleads.v0.enums\"d\n\x0eGenderTypeEnum\"R\n\nGenderType\x12\x0f\n\x0bUNSPECIFIED\x10\x00\x12\x0b\n\x07UNKNOWN\x10\x01\x12\x08\n\x04MALE\x10\n\x12\n\n\x06\x46\x45MALE\x10\x0b\x12\x10\n\x0cUNDETERMINED\x10\x14\x42\xc0\x01\n!com.google.ads.googleads.v0.enumsB\x0fGenderTypeProtoP\x01ZBgoogle.golang.org/genproto/googleapis/ads/googleads/v0/enums;enums\xa2\x02\x03GAA\xaa\x02\x1dGoogle.Ads.GoogleAds.V0.Enums\xca\x02\x1dGoogle\\Ads\\GoogleAds\\V0\\Enumsb\x06proto3')
+  serialized_options=_b('\n!com.google.ads.googleads.v0.enumsB\017GenderTypeProtoP\001ZBgoogle.golang.org/genproto/googleapis/ads/googleads/v0/enums;enums\242\002\003GAA\252\002\035Google.Ads.GoogleAds.V0.Enums\312\002\035Google\\Ads\\GoogleAds\\V0\\Enums\352\002!Google::Ads::GoogleAds::V0::Enums'),
+  serialized_pb=_b('\n5google/ads/googleads_v0/proto/enums/gender_type.proto\x12\x1dgoogle.ads.googleads.v0.enums\"d\n\x0eGenderTypeEnum\"R\n\nGenderType\x12\x0f\n\x0bUNSPECIFIED\x10\x00\x12\x0b\n\x07UNKNOWN\x10\x01\x12\x08\n\x04MALE\x10\n\x12\n\n\x06\x46\x45MALE\x10\x0b\x12\x10\n\x0cUNDETERMINED\x10\x14\x42\xe4\x01\n!com.google.ads.googleads.v0.enumsB\x0fGenderTypeProtoP\x01ZBgoogle.golang.org/genproto/googleapis/ads/googleads/v0/enums;enums\xa2\x02\x03GAA\xaa\x02\x1dGoogle.Ads.GoogleAds.V0.Enums\xca\x02\x1dGoogle\\Ads\\GoogleAds\\V0\\Enums\xea\x02!Google::Ads::GoogleAds::V0::Enumsb\x06proto3')
 )
 
 
@@ -32,27 +32,27 @@ _GENDERTYPEENUM_GENDERTYPE = _descriptor.EnumDescriptor(
   values=[
     _descriptor.EnumValueDescriptor(
       name='UNSPECIFIED', index=0, number=0,
-      options=None,
+      serialized_options=None,
       type=None),
     _descriptor.EnumValueDescriptor(
       name='UNKNOWN', index=1, number=1,
-      options=None,
+      serialized_options=None,
       type=None),
     _descriptor.EnumValueDescriptor(
       name='MALE', index=2, number=10,
-      options=None,
+      serialized_options=None,
       type=None),
     _descriptor.EnumValueDescriptor(
       name='FEMALE', index=3, number=11,
-      options=None,
+      serialized_options=None,
       type=None),
     _descriptor.EnumValueDescriptor(
       name='UNDETERMINED', index=4, number=20,
-      options=None,
+      serialized_options=None,
       type=None),
   ],
   containing_type=None,
-  options=None,
+  serialized_options=None,
   serialized_start=106,
   serialized_end=188,
 )
@@ -73,7 +73,7 @@ _GENDERTYPEENUM = _descriptor.Descriptor(
   enum_types=[
     _GENDERTYPEENUM_GENDERTYPE,
   ],
-  options=None,
+  serialized_options=None,
   is_extendable=False,
   syntax='proto3',
   extension_ranges=[],
@@ -89,7 +89,7 @@ _sym_db.RegisterFileDescriptor(DESCRIPTOR)
 
 GenderTypeEnum = _reflection.GeneratedProtocolMessageType('GenderTypeEnum', (_message.Message,), dict(
   DESCRIPTOR = _GENDERTYPEENUM,
-  __module__ = 'google.ads.google_ads.v0.proto.enums.gender_type_pb2'
+  __module__ = 'google.ads.googleads_v0.proto.enums.gender_type_pb2'
   ,
   __doc__ = """Container for enum describing the type of demographic genders.
   """,
@@ -98,6 +98,5 @@ GenderTypeEnum = _reflection.GeneratedProtocolMessageType('GenderTypeEnum', (_me
 _sym_db.RegisterMessage(GenderTypeEnum)
 
 
-DESCRIPTOR.has_options = True
-DESCRIPTOR._options = _descriptor._ParseOptions(descriptor_pb2.FileOptions(), _b('\n!com.google.ads.googleads.v0.enumsB\017GenderTypeProtoP\001ZBgoogle.golang.org/genproto/googleapis/ads/googleads/v0/enums;enums\242\002\003GAA\252\002\035Google.Ads.GoogleAds.V0.Enums\312\002\035Google\\Ads\\GoogleAds\\V0\\Enums'))
+DESCRIPTOR._options = None
 # @@protoc_insertion_point(module_scope)

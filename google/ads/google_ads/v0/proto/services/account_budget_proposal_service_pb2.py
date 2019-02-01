@@ -7,7 +7,6 @@ from google.protobuf import descriptor as _descriptor
 from google.protobuf import message as _message
 from google.protobuf import reflection as _reflection
 from google.protobuf import symbol_database as _symbol_database
-from google.protobuf import descriptor_pb2
 # @@protoc_insertion_point(imports)
 
 _sym_db = _symbol_database.Default()
@@ -22,7 +21,8 @@ DESCRIPTOR = _descriptor.FileDescriptor(
   name='google/ads/googleads_v0/proto/services/account_budget_proposal_service.proto',
   package='google.ads.googleads.v0.services',
   syntax='proto3',
-  serialized_pb=_b('\nLgoogle/ads/googleads_v0/proto/services/account_budget_proposal_service.proto\x12 google.ads.googleads.v0.services\x1a\x45google/ads/googleads_v0/proto/resources/account_budget_proposal.proto\x1a\x1cgoogle/api/annotations.proto\x1a google/protobuf/field_mask.proto\"8\n\x1fGetAccountBudgetProposalRequest\x12\x15\n\rresource_name\x18\x01 \x01(\t\"\x8e\x01\n\"MutateAccountBudgetProposalRequest\x12\x13\n\x0b\x63ustomer_id\x18\x01 \x01(\t\x12S\n\toperation\x18\x02 \x01(\x0b\x32@.google.ads.googleads.v0.services.AccountBudgetProposalOperation\"\xbc\x01\n\x1e\x41\x63\x63ountBudgetProposalOperation\x12/\n\x0bupdate_mask\x18\x03 \x01(\x0b\x32\x1a.google.protobuf.FieldMask\x12J\n\x06\x63reate\x18\x02 \x01(\x0b\x32\x38.google.ads.googleads.v0.resources.AccountBudgetProposalH\x00\x12\x10\n\x06remove\x18\x01 \x01(\tH\x00\x42\x0b\n\toperation\"z\n#MutateAccountBudgetProposalResponse\x12S\n\x06result\x18\x02 \x01(\x0b\x32\x43.google.ads.googleads.v0.services.MutateAccountBudgetProposalResult\":\n!MutateAccountBudgetProposalResult\x12\x15\n\rresource_name\x18\x01 \x01(\t2\xef\x03\n\x1c\x41\x63\x63ountBudgetProposalService\x12\xd9\x01\n\x18GetAccountBudgetProposal\x12\x41.google.ads.googleads.v0.services.GetAccountBudgetProposalRequest\x1a\x38.google.ads.googleads.v0.resources.AccountBudgetProposal\"@\x82\xd3\xe4\x93\x02:\x12\x38/v0/{resource_name=customers/*/accountBudgetProposals/*}\x12\xf2\x01\n\x1bMutateAccountBudgetProposal\x12\x44.google.ads.googleads.v0.services.MutateAccountBudgetProposalRequest\x1a\x45.google.ads.googleads.v0.services.MutateAccountBudgetProposalResponse\"F\x82\xd3\xe4\x93\x02@\";/v0/customers/{customer_id=*}/accountBudgetProposals:mutate:\x01*B\xe1\x01\n$com.google.ads.googleads.v0.servicesB!AccountBudgetProposalServiceProtoP\x01ZHgoogle.golang.org/genproto/googleapis/ads/googleads/v0/services;services\xa2\x02\x03GAA\xaa\x02 Google.Ads.GoogleAds.V0.Services\xca\x02 Google\\Ads\\GoogleAds\\V0\\Servicesb\x06proto3')
+  serialized_options=_b('\n$com.google.ads.googleads.v0.servicesB!AccountBudgetProposalServiceProtoP\001ZHgoogle.golang.org/genproto/googleapis/ads/googleads/v0/services;services\242\002\003GAA\252\002 Google.Ads.GoogleAds.V0.Services\312\002 Google\\Ads\\GoogleAds\\V0\\Services\352\002$Google::Ads::GoogleAds::V0::Services'),
+  serialized_pb=_b('\nLgoogle/ads/googleads_v0/proto/services/account_budget_proposal_service.proto\x12 google.ads.googleads.v0.services\x1a\x45google/ads/googleads_v0/proto/resources/account_budget_proposal.proto\x1a\x1cgoogle/api/annotations.proto\x1a google/protobuf/field_mask.proto\"8\n\x1fGetAccountBudgetProposalRequest\x12\x15\n\rresource_name\x18\x01 \x01(\t\"\x8e\x01\n\"MutateAccountBudgetProposalRequest\x12\x13\n\x0b\x63ustomer_id\x18\x01 \x01(\t\x12S\n\toperation\x18\x02 \x01(\x0b\x32@.google.ads.googleads.v0.services.AccountBudgetProposalOperation\"\xbc\x01\n\x1e\x41\x63\x63ountBudgetProposalOperation\x12/\n\x0bupdate_mask\x18\x03 \x01(\x0b\x32\x1a.google.protobuf.FieldMask\x12J\n\x06\x63reate\x18\x02 \x01(\x0b\x32\x38.google.ads.googleads.v0.resources.AccountBudgetProposalH\x00\x12\x10\n\x06remove\x18\x01 \x01(\tH\x00\x42\x0b\n\toperation\"z\n#MutateAccountBudgetProposalResponse\x12S\n\x06result\x18\x02 \x01(\x0b\x32\x43.google.ads.googleads.v0.services.MutateAccountBudgetProposalResult\":\n!MutateAccountBudgetProposalResult\x12\x15\n\rresource_name\x18\x01 \x01(\t2\xef\x03\n\x1c\x41\x63\x63ountBudgetProposalService\x12\xd9\x01\n\x18GetAccountBudgetProposal\x12\x41.google.ads.googleads.v0.services.GetAccountBudgetProposalRequest\x1a\x38.google.ads.googleads.v0.resources.AccountBudgetProposal\"@\x82\xd3\xe4\x93\x02:\x12\x38/v0/{resource_name=customers/*/accountBudgetProposals/*}\x12\xf2\x01\n\x1bMutateAccountBudgetProposal\x12\x44.google.ads.googleads.v0.services.MutateAccountBudgetProposalRequest\x1a\x45.google.ads.googleads.v0.services.MutateAccountBudgetProposalResponse\"F\x82\xd3\xe4\x93\x02@\";/v0/customers/{customer_id=*}/accountBudgetProposals:mutate:\x01*B\x88\x02\n$com.google.ads.googleads.v0.servicesB!AccountBudgetProposalServiceProtoP\x01ZHgoogle.golang.org/genproto/googleapis/ads/googleads/v0/services;services\xa2\x02\x03GAA\xaa\x02 Google.Ads.GoogleAds.V0.Services\xca\x02 Google\\Ads\\GoogleAds\\V0\\Services\xea\x02$Google::Ads::GoogleAds::V0::Servicesb\x06proto3')
   ,
   dependencies=[google_dot_ads_dot_googleads__v0_dot_proto_dot_resources_dot_account__budget__proposal__pb2.DESCRIPTOR,google_dot_api_dot_annotations__pb2.DESCRIPTOR,google_dot_protobuf_dot_field__mask__pb2.DESCRIPTOR,])
 
@@ -42,14 +42,14 @@ _GETACCOUNTBUDGETPROPOSALREQUEST = _descriptor.Descriptor(
       has_default_value=False, default_value=_b("").decode('utf-8'),
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
-      options=None, file=DESCRIPTOR),
+      serialized_options=None, file=DESCRIPTOR),
   ],
   extensions=[
   ],
   nested_types=[],
   enum_types=[
   ],
-  options=None,
+  serialized_options=None,
   is_extendable=False,
   syntax='proto3',
   extension_ranges=[],
@@ -73,21 +73,21 @@ _MUTATEACCOUNTBUDGETPROPOSALREQUEST = _descriptor.Descriptor(
       has_default_value=False, default_value=_b("").decode('utf-8'),
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
-      options=None, file=DESCRIPTOR),
+      serialized_options=None, file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
       name='operation', full_name='google.ads.googleads.v0.services.MutateAccountBudgetProposalRequest.operation', index=1,
       number=2, type=11, cpp_type=10, label=1,
       has_default_value=False, default_value=None,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
-      options=None, file=DESCRIPTOR),
+      serialized_options=None, file=DESCRIPTOR),
   ],
   extensions=[
   ],
   nested_types=[],
   enum_types=[
   ],
-  options=None,
+  serialized_options=None,
   is_extendable=False,
   syntax='proto3',
   extension_ranges=[],
@@ -111,28 +111,28 @@ _ACCOUNTBUDGETPROPOSALOPERATION = _descriptor.Descriptor(
       has_default_value=False, default_value=None,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
-      options=None, file=DESCRIPTOR),
+      serialized_options=None, file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
       name='create', full_name='google.ads.googleads.v0.services.AccountBudgetProposalOperation.create', index=1,
       number=2, type=11, cpp_type=10, label=1,
       has_default_value=False, default_value=None,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
-      options=None, file=DESCRIPTOR),
+      serialized_options=None, file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
       name='remove', full_name='google.ads.googleads.v0.services.AccountBudgetProposalOperation.remove', index=2,
       number=1, type=9, cpp_type=9, label=1,
       has_default_value=False, default_value=_b("").decode('utf-8'),
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
-      options=None, file=DESCRIPTOR),
+      serialized_options=None, file=DESCRIPTOR),
   ],
   extensions=[
   ],
   nested_types=[],
   enum_types=[
   ],
-  options=None,
+  serialized_options=None,
   is_extendable=False,
   syntax='proto3',
   extension_ranges=[],
@@ -159,14 +159,14 @@ _MUTATEACCOUNTBUDGETPROPOSALRESPONSE = _descriptor.Descriptor(
       has_default_value=False, default_value=None,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
-      options=None, file=DESCRIPTOR),
+      serialized_options=None, file=DESCRIPTOR),
   ],
   extensions=[
   ],
   nested_types=[],
   enum_types=[
   ],
-  options=None,
+  serialized_options=None,
   is_extendable=False,
   syntax='proto3',
   extension_ranges=[],
@@ -190,14 +190,14 @@ _MUTATEACCOUNTBUDGETPROPOSALRESULT = _descriptor.Descriptor(
       has_default_value=False, default_value=_b("").decode('utf-8'),
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
-      options=None, file=DESCRIPTOR),
+      serialized_options=None, file=DESCRIPTOR),
   ],
   extensions=[
   ],
   nested_types=[],
   enum_types=[
   ],
-  options=None,
+  serialized_options=None,
   is_extendable=False,
   syntax='proto3',
   extension_ranges=[],
@@ -226,7 +226,7 @@ _sym_db.RegisterFileDescriptor(DESCRIPTOR)
 
 GetAccountBudgetProposalRequest = _reflection.GeneratedProtocolMessageType('GetAccountBudgetProposalRequest', (_message.Message,), dict(
   DESCRIPTOR = _GETACCOUNTBUDGETPROPOSALREQUEST,
-  __module__ = 'google.ads.google_ads.v0.proto.services.account_budget_proposal_service_pb2'
+  __module__ = 'google.ads.googleads_v0.proto.services.account_budget_proposal_service_pb2'
   ,
   __doc__ = """Request message for
   [AccountBudgetProposalService.GetAccountBudgetProposal][google.ads.googleads.v0.services.AccountBudgetProposalService.GetAccountBudgetProposal].
@@ -243,7 +243,7 @@ _sym_db.RegisterMessage(GetAccountBudgetProposalRequest)
 
 MutateAccountBudgetProposalRequest = _reflection.GeneratedProtocolMessageType('MutateAccountBudgetProposalRequest', (_message.Message,), dict(
   DESCRIPTOR = _MUTATEACCOUNTBUDGETPROPOSALREQUEST,
-  __module__ = 'google.ads.google_ads.v0.proto.services.account_budget_proposal_service_pb2'
+  __module__ = 'google.ads.googleads_v0.proto.services.account_budget_proposal_service_pb2'
   ,
   __doc__ = """Request message for
   [AccountBudgetProposalService.MutateAccountBudgetProposal][google.ads.googleads.v0.services.AccountBudgetProposalService.MutateAccountBudgetProposal].
@@ -262,7 +262,7 @@ _sym_db.RegisterMessage(MutateAccountBudgetProposalRequest)
 
 AccountBudgetProposalOperation = _reflection.GeneratedProtocolMessageType('AccountBudgetProposalOperation', (_message.Message,), dict(
   DESCRIPTOR = _ACCOUNTBUDGETPROPOSALOPERATION,
-  __module__ = 'google.ads.google_ads.v0.proto.services.account_budget_proposal_service_pb2'
+  __module__ = 'google.ads.googleads_v0.proto.services.account_budget_proposal_service_pb2'
   ,
   __doc__ = """A single operation to propose the creation of a new account-level budget
   or edit/end/remove an existing one.
@@ -295,7 +295,7 @@ _sym_db.RegisterMessage(AccountBudgetProposalOperation)
 
 MutateAccountBudgetProposalResponse = _reflection.GeneratedProtocolMessageType('MutateAccountBudgetProposalResponse', (_message.Message,), dict(
   DESCRIPTOR = _MUTATEACCOUNTBUDGETPROPOSALRESPONSE,
-  __module__ = 'google.ads.google_ads.v0.proto.services.account_budget_proposal_service_pb2'
+  __module__ = 'google.ads.googleads_v0.proto.services.account_budget_proposal_service_pb2'
   ,
   __doc__ = """Response message for account-level budget mutate operations.
   
@@ -310,7 +310,7 @@ _sym_db.RegisterMessage(MutateAccountBudgetProposalResponse)
 
 MutateAccountBudgetProposalResult = _reflection.GeneratedProtocolMessageType('MutateAccountBudgetProposalResult', (_message.Message,), dict(
   DESCRIPTOR = _MUTATEACCOUNTBUDGETPROPOSALRESULT,
-  __module__ = 'google.ads.google_ads.v0.proto.services.account_budget_proposal_service_pb2'
+  __module__ = 'google.ads.googleads_v0.proto.services.account_budget_proposal_service_pb2'
   ,
   __doc__ = """The result for the account budget proposal mutate.
   
@@ -324,15 +324,14 @@ MutateAccountBudgetProposalResult = _reflection.GeneratedProtocolMessageType('Mu
 _sym_db.RegisterMessage(MutateAccountBudgetProposalResult)
 
 
-DESCRIPTOR.has_options = True
-DESCRIPTOR._options = _descriptor._ParseOptions(descriptor_pb2.FileOptions(), _b('\n$com.google.ads.googleads.v0.servicesB!AccountBudgetProposalServiceProtoP\001ZHgoogle.golang.org/genproto/googleapis/ads/googleads/v0/services;services\242\002\003GAA\252\002 Google.Ads.GoogleAds.V0.Services\312\002 Google\\Ads\\GoogleAds\\V0\\Services'))
+DESCRIPTOR._options = None
 
 _ACCOUNTBUDGETPROPOSALSERVICE = _descriptor.ServiceDescriptor(
   name='AccountBudgetProposalService',
   full_name='google.ads.googleads.v0.services.AccountBudgetProposalService',
   file=DESCRIPTOR,
   index=0,
-  options=None,
+  serialized_options=None,
   serialized_start=828,
   serialized_end=1323,
   methods=[
@@ -343,7 +342,7 @@ _ACCOUNTBUDGETPROPOSALSERVICE = _descriptor.ServiceDescriptor(
     containing_service=None,
     input_type=_GETACCOUNTBUDGETPROPOSALREQUEST,
     output_type=google_dot_ads_dot_googleads__v0_dot_proto_dot_resources_dot_account__budget__proposal__pb2._ACCOUNTBUDGETPROPOSAL,
-    options=_descriptor._ParseOptions(descriptor_pb2.MethodOptions(), _b('\202\323\344\223\002:\0228/v0/{resource_name=customers/*/accountBudgetProposals/*}')),
+    serialized_options=_b('\202\323\344\223\002:\0228/v0/{resource_name=customers/*/accountBudgetProposals/*}'),
   ),
   _descriptor.MethodDescriptor(
     name='MutateAccountBudgetProposal',
@@ -352,7 +351,7 @@ _ACCOUNTBUDGETPROPOSALSERVICE = _descriptor.ServiceDescriptor(
     containing_service=None,
     input_type=_MUTATEACCOUNTBUDGETPROPOSALREQUEST,
     output_type=_MUTATEACCOUNTBUDGETPROPOSALRESPONSE,
-    options=_descriptor._ParseOptions(descriptor_pb2.MethodOptions(), _b('\202\323\344\223\002@\";/v0/customers/{customer_id=*}/accountBudgetProposals:mutate:\001*')),
+    serialized_options=_b('\202\323\344\223\002@\";/v0/customers/{customer_id=*}/accountBudgetProposals:mutate:\001*'),
   ),
 ])
 _sym_db.RegisterServiceDescriptor(_ACCOUNTBUDGETPROPOSALSERVICE)

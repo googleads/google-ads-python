@@ -1,4 +1,6 @@
-# Copyright 2018 Google LLC
+# -*- coding: utf-8 -*-
+#
+# Copyright 2019 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -22,12 +24,10 @@ import google.api_core.gapic_v1.config
 import google.api_core.gapic_v1.method
 import google.api_core.grpc_helpers
 import google.api_core.path_template
-import grpc
 
 from google.ads.google_ads.v0.services import search_term_view_service_client_config
 from google.ads.google_ads.v0.services.transports import search_term_view_service_grpc_transport
 from google.ads.google_ads.v0.proto.services import search_term_view_service_pb2
-from google.protobuf import wrappers_pb2
 
 _GAPIC_LIBRARY_VERSION = pkg_resources.get_distribution(
     'google-ads', ).version
@@ -77,7 +77,7 @@ class SearchTermViewServiceClient(object):
                  transport=None,
                  channel=None,
                  credentials=None,
-                 client_config=search_term_view_service_client_config.config,
+                 client_config=None,
                  client_info=None):
         """Constructor.
 
@@ -110,13 +110,20 @@ class SearchTermViewServiceClient(object):
                 your own client library.
         """
         # Raise deprecation warnings for things we want to go away.
-        if client_config:
-            warnings.warn('The `client_config` argument is deprecated.',
-                          PendingDeprecationWarning)
+        if client_config is not None:
+            warnings.warn(
+                'The `client_config` argument is deprecated.',
+                PendingDeprecationWarning,
+                stacklevel=2)
+        else:
+            client_config = search_term_view_service_client_config.config
+
         if channel:
             warnings.warn(
                 'The `channel` argument is deprecated; use '
-                '`transport` instead.', PendingDeprecationWarning)
+                '`transport` instead.',
+                PendingDeprecationWarning,
+                stacklevel=2)
 
         # Instantiate the transport.
         # The transport is responsible for handling serialization and
@@ -142,9 +149,10 @@ class SearchTermViewServiceClient(object):
             )
 
         if client_info is None:
-            client_info = (
-                google.api_core.gapic_v1.client_info.DEFAULT_CLIENT_INFO)
-        client_info.gapic_version = _GAPIC_LIBRARY_VERSION
+            client_info = google.api_core.gapic_v1.client_info.ClientInfo(
+                gapic_version=_GAPIC_LIBRARY_VERSION, )
+        else:
+            client_info.gapic_version = _GAPIC_LIBRARY_VERSION
         self._client_info = client_info
 
         # Parse out the default settings for retry and timeout for each RPC
@@ -181,7 +189,7 @@ class SearchTermViewServiceClient(object):
                 that is provided to the method.
 
         Returns:
-            A :class:`~google.ads.google_ads.v0.types.SearchTermView` instance.
+            A :class:`~google.ads.googleads_v0.types.SearchTermView` instance.
 
         Raises:
             google.api_core.exceptions.GoogleAPICallError: If the request
@@ -195,10 +203,10 @@ class SearchTermViewServiceClient(object):
             self._inner_api_calls[
                 'get_search_term_view'] = google.api_core.gapic_v1.method.wrap_method(
                     self.transport.get_search_term_view,
-                    default_retry=self._method_configs[
-                        'GetSearchTermView'].retry,
-                    default_timeout=self._method_configs['GetSearchTermView']
-                    .timeout,
+                    default_retry=self._method_configs['GetSearchTermView'].
+                    retry,
+                    default_timeout=self._method_configs['GetSearchTermView'].
+                    timeout,
                     client_info=self._client_info,
                 )
 

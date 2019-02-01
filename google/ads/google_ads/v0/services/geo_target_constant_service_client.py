@@ -1,4 +1,6 @@
-# Copyright 2018 Google LLC
+# -*- coding: utf-8 -*-
+#
+# Copyright 2019 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -23,12 +25,10 @@ import google.api_core.gapic_v1.method
 import google.api_core.grpc_helpers
 import google.api_core.path_template
 import google.api_core.protobuf_helpers
-import grpc
 
 from google.ads.google_ads.v0.services import geo_target_constant_service_client_config
 from google.ads.google_ads.v0.services.transports import geo_target_constant_service_grpc_transport
 from google.ads.google_ads.v0.proto.services import geo_target_constant_service_pb2
-from google.protobuf import wrappers_pb2
 
 _GAPIC_LIBRARY_VERSION = pkg_resources.get_distribution(
     'google-ads', ).version
@@ -73,13 +73,12 @@ class GeoTargetConstantServiceClient(object):
             geo_target_constant=geo_target_constant,
         )
 
-    def __init__(
-            self,
-            transport=None,
-            channel=None,
-            credentials=None,
-            client_config=geo_target_constant_service_client_config.config,
-            client_info=None):
+    def __init__(self,
+                 transport=None,
+                 channel=None,
+                 credentials=None,
+                 client_config=None,
+                 client_info=None):
         """Constructor.
 
         Args:
@@ -111,13 +110,20 @@ class GeoTargetConstantServiceClient(object):
                 your own client library.
         """
         # Raise deprecation warnings for things we want to go away.
-        if client_config:
-            warnings.warn('The `client_config` argument is deprecated.',
-                          PendingDeprecationWarning)
+        if client_config is not None:
+            warnings.warn(
+                'The `client_config` argument is deprecated.',
+                PendingDeprecationWarning,
+                stacklevel=2)
+        else:
+            client_config = geo_target_constant_service_client_config.config
+
         if channel:
             warnings.warn(
                 'The `channel` argument is deprecated; use '
-                '`transport` instead.', PendingDeprecationWarning)
+                '`transport` instead.',
+                PendingDeprecationWarning,
+                stacklevel=2)
 
         # Instantiate the transport.
         # The transport is responsible for handling serialization and
@@ -143,9 +149,10 @@ class GeoTargetConstantServiceClient(object):
             )
 
         if client_info is None:
-            client_info = (
-                google.api_core.gapic_v1.client_info.DEFAULT_CLIENT_INFO)
-        client_info.gapic_version = _GAPIC_LIBRARY_VERSION
+            client_info = google.api_core.gapic_v1.client_info.ClientInfo(
+                gapic_version=_GAPIC_LIBRARY_VERSION, )
+        else:
+            client_info.gapic_version = _GAPIC_LIBRARY_VERSION
         self._client_info = client_info
 
         # Parse out the default settings for retry and timeout for each RPC
@@ -183,7 +190,7 @@ class GeoTargetConstantServiceClient(object):
                 that is provided to the method.
 
         Returns:
-            A :class:`~google.ads.google_ads.v0.types.GeoTargetConstant` instance.
+            A :class:`~google.ads.googleads_v0.types.GeoTargetConstant` instance.
 
         Raises:
             google.api_core.exceptions.GoogleAPICallError: If the request
@@ -197,10 +204,10 @@ class GeoTargetConstantServiceClient(object):
             self._inner_api_calls[
                 'get_geo_target_constant'] = google.api_core.gapic_v1.method.wrap_method(
                     self.transport.get_geo_target_constant,
-                    default_retry=self._method_configs['GetGeoTargetConstant']
-                    .retry,
-                    default_timeout=self._method_configs[
-                        'GetGeoTargetConstant'].timeout,
+                    default_retry=self._method_configs['GetGeoTargetConstant'].
+                    retry,
+                    default_timeout=self.
+                    _method_configs['GetGeoTargetConstant'].timeout,
                     client_info=self._client_info,
                 )
 
@@ -222,20 +229,24 @@ class GeoTargetConstantServiceClient(object):
         Returns GeoTargetConstant suggestions by location name or by resource name.
 
         Args:
-            locale (Union[dict, ~google.ads.google_ads.v0.types.StringValue]): If possible, returned geo targets are translated using this locale. If not,
+            locale (Union[dict, ~google.ads.googleads_v0.types.StringValue]): If possible, returned geo targets are translated using this locale. If not,
                 en is used by default. This is also used as a hint for returned geo
                 targets.
+
                 If a dict is provided, it must be of the same form as the protobuf
-                message :class:`~google.ads.google_ads.v0.types.StringValue`
-            country_code (Union[dict, ~google.ads.google_ads.v0.types.StringValue]): Returned geo targets are restricted to this country code.
+                message :class:`~google.ads.googleads_v0.types.StringValue`
+            country_code (Union[dict, ~google.ads.googleads_v0.types.StringValue]): Returned geo targets are restricted to this country code.
+
                 If a dict is provided, it must be of the same form as the protobuf
-                message :class:`~google.ads.google_ads.v0.types.StringValue`
-            location_names (Union[dict, ~google.ads.google_ads.v0.types.LocationNames]): The location names to search by. At most 25 names can be set.
+                message :class:`~google.ads.googleads_v0.types.StringValue`
+            location_names (Union[dict, ~google.ads.googleads_v0.types.LocationNames]): The location names to search by. At most 25 names can be set.
+
                 If a dict is provided, it must be of the same form as the protobuf
-                message :class:`~google.ads.google_ads.v0.types.LocationNames`
-            geo_targets (Union[dict, ~google.ads.google_ads.v0.types.GeoTargets]): The geo target constant resource names to filter by.
+                message :class:`~google.ads.googleads_v0.types.LocationNames`
+            geo_targets (Union[dict, ~google.ads.googleads_v0.types.GeoTargets]): The geo target constant resource names to filter by.
+
                 If a dict is provided, it must be of the same form as the protobuf
-                message :class:`~google.ads.google_ads.v0.types.GeoTargets`
+                message :class:`~google.ads.googleads_v0.types.GeoTargets`
             retry (Optional[google.api_core.retry.Retry]):  A retry object used
                 to retry requests. If ``None`` is specified, requests will not
                 be retried.
@@ -246,7 +257,7 @@ class GeoTargetConstantServiceClient(object):
                 that is provided to the method.
 
         Returns:
-            A :class:`~google.ads.google_ads.v0.types.SuggestGeoTargetConstantsResponse` instance.
+            A :class:`~google.ads.googleads_v0.types.SuggestGeoTargetConstantsResponse` instance.
 
         Raises:
             google.api_core.exceptions.GoogleAPICallError: If the request
@@ -260,10 +271,10 @@ class GeoTargetConstantServiceClient(object):
             self._inner_api_calls[
                 'suggest_geo_target_constants'] = google.api_core.gapic_v1.method.wrap_method(
                     self.transport.suggest_geo_target_constants,
-                    default_retry=self._method_configs[
-                        'SuggestGeoTargetConstants'].retry,
-                    default_timeout=self._method_configs[
-                        'SuggestGeoTargetConstants'].timeout,
+                    default_retry=self.
+                    _method_configs['SuggestGeoTargetConstants'].retry,
+                    default_timeout=self.
+                    _method_configs['SuggestGeoTargetConstants'].timeout,
                     client_info=self._client_info,
                 )
 

@@ -1,4 +1,6 @@
-# Copyright 2018 Google LLC
+# -*- coding: utf-8 -*-
+#
+# Copyright 2019 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -60,6 +62,8 @@ class CampaignSharedSetServiceGrpcTransport(object):
                 credentials=credentials,
             )
 
+        self._channel = channel
+
         # gRPC uses objects called "stubs" that are bound to the
         # channel and provide a basic method for each RPC.
         self._stubs = {
@@ -92,8 +96,17 @@ class CampaignSharedSetServiceGrpcTransport(object):
         )
 
     @property
+    def channel(self):
+        """The gRPC channel used by the transport.
+
+        Returns:
+            grpc.Channel: A gRPC channel object.
+        """
+        return self._channel
+
+    @property
     def get_campaign_shared_set(self):
-        """Return the gRPC stub for {$apiMethod.name}.
+        """Return the gRPC stub for :meth:`CampaignSharedSetServiceClient.get_campaign_shared_set`.
 
         Returns the requested campaign shared set in full detail.
 
@@ -107,7 +120,7 @@ class CampaignSharedSetServiceGrpcTransport(object):
 
     @property
     def mutate_campaign_shared_sets(self):
-        """Return the gRPC stub for {$apiMethod.name}.
+        """Return the gRPC stub for :meth:`CampaignSharedSetServiceClient.mutate_campaign_shared_sets`.
 
         Creates or removes campaign shared sets. Operation statuses are returned.
 

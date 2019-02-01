@@ -7,7 +7,6 @@ from google.protobuf import descriptor as _descriptor
 from google.protobuf import message as _message
 from google.protobuf import reflection as _reflection
 from google.protobuf import symbol_database as _symbol_database
-from google.protobuf import descriptor_pb2
 # @@protoc_insertion_point(imports)
 
 _sym_db = _symbol_database.Default()
@@ -15,15 +14,18 @@ _sym_db = _symbol_database.Default()
 
 from google.ads.google_ads.v0.proto.resources import media_file_pb2 as google_dot_ads_dot_googleads__v0_dot_proto_dot_resources_dot_media__file__pb2
 from google.api import annotations_pb2 as google_dot_api_dot_annotations__pb2
+from google.protobuf import wrappers_pb2 as google_dot_protobuf_dot_wrappers__pb2
+from google.rpc import status_pb2 as google_dot_rpc_dot_status__pb2
 
 
 DESCRIPTOR = _descriptor.FileDescriptor(
   name='google/ads/googleads_v0/proto/services/media_file_service.proto',
   package='google.ads.googleads.v0.services',
   syntax='proto3',
-  serialized_pb=_b('\n?google/ads/googleads_v0/proto/services/media_file_service.proto\x12 google.ads.googleads.v0.services\x1a\x38google/ads/googleads_v0/proto/resources/media_file.proto\x1a\x1cgoogle/api/annotations.proto\",\n\x13GetMediaFileRequest\x12\x15\n\rresource_name\x18\x01 \x01(\t\"x\n\x17MutateMediaFilesRequest\x12\x13\n\x0b\x63ustomer_id\x18\x01 \x01(\t\x12H\n\noperations\x18\x02 \x03(\x0b\x32\x34.google.ads.googleads.v0.services.MediaFileOperation\"a\n\x12MediaFileOperation\x12>\n\x06\x63reate\x18\x01 \x01(\x0b\x32,.google.ads.googleads.v0.resources.MediaFileH\x00\x42\x0b\n\toperation\"d\n\x18MutateMediaFilesResponse\x12H\n\x07results\x18\x02 \x03(\x0b\x32\x37.google.ads.googleads.v0.services.MutateMediaFileResult\".\n\x15MutateMediaFileResult\x12\x15\n\rresource_name\x18\x01 \x01(\t2\x86\x03\n\x10MediaFileService\x12\xa9\x01\n\x0cGetMediaFile\x12\x35.google.ads.googleads.v0.services.GetMediaFileRequest\x1a,.google.ads.googleads.v0.resources.MediaFile\"4\x82\xd3\xe4\x93\x02.\x12,/v0/{resource_name=customers/*/mediaFiles/*}\x12\xc5\x01\n\x10MutateMediaFiles\x12\x39.google.ads.googleads.v0.services.MutateMediaFilesRequest\x1a:.google.ads.googleads.v0.services.MutateMediaFilesResponse\":\x82\xd3\xe4\x93\x02\x34\"//v0/customers/{customer_id=*}/mediaFiles:mutate:\x01*B\xd5\x01\n$com.google.ads.googleads.v0.servicesB\x15MediaFileServiceProtoP\x01ZHgoogle.golang.org/genproto/googleapis/ads/googleads/v0/services;services\xa2\x02\x03GAA\xaa\x02 Google.Ads.GoogleAds.V0.Services\xca\x02 Google\\Ads\\GoogleAds\\V0\\Servicesb\x06proto3')
+  serialized_options=_b('\n$com.google.ads.googleads.v0.servicesB\025MediaFileServiceProtoP\001ZHgoogle.golang.org/genproto/googleapis/ads/googleads/v0/services;services\242\002\003GAA\252\002 Google.Ads.GoogleAds.V0.Services\312\002 Google\\Ads\\GoogleAds\\V0\\Services\352\002$Google::Ads::GoogleAds::V0::Services'),
+  serialized_pb=_b('\n?google/ads/googleads_v0/proto/services/media_file_service.proto\x12 google.ads.googleads.v0.services\x1a\x38google/ads/googleads_v0/proto/resources/media_file.proto\x1a\x1cgoogle/api/annotations.proto\x1a\x1egoogle/protobuf/wrappers.proto\x1a\x17google/rpc/status.proto\",\n\x13GetMediaFileRequest\x12\x15\n\rresource_name\x18\x01 \x01(\t\"\xa8\x01\n\x17MutateMediaFilesRequest\x12\x13\n\x0b\x63ustomer_id\x18\x01 \x01(\t\x12H\n\noperations\x18\x02 \x03(\x0b\x32\x34.google.ads.googleads.v0.services.MediaFileOperation\x12\x17\n\x0fpartial_failure\x18\x03 \x01(\x08\x12\x15\n\rvalidate_only\x18\x04 \x01(\x08\"a\n\x12MediaFileOperation\x12>\n\x06\x63reate\x18\x01 \x01(\x0b\x32,.google.ads.googleads.v0.resources.MediaFileH\x00\x42\x0b\n\toperation\"\x97\x01\n\x18MutateMediaFilesResponse\x12\x31\n\x15partial_failure_error\x18\x03 \x01(\x0b\x32\x12.google.rpc.Status\x12H\n\x07results\x18\x02 \x03(\x0b\x32\x37.google.ads.googleads.v0.services.MutateMediaFileResult\".\n\x15MutateMediaFileResult\x12\x15\n\rresource_name\x18\x01 \x01(\t2\x86\x03\n\x10MediaFileService\x12\xa9\x01\n\x0cGetMediaFile\x12\x35.google.ads.googleads.v0.services.GetMediaFileRequest\x1a,.google.ads.googleads.v0.resources.MediaFile\"4\x82\xd3\xe4\x93\x02.\x12,/v0/{resource_name=customers/*/mediaFiles/*}\x12\xc5\x01\n\x10MutateMediaFiles\x12\x39.google.ads.googleads.v0.services.MutateMediaFilesRequest\x1a:.google.ads.googleads.v0.services.MutateMediaFilesResponse\":\x82\xd3\xe4\x93\x02\x34\"//v0/customers/{customer_id=*}/mediaFiles:mutate:\x01*B\xfc\x01\n$com.google.ads.googleads.v0.servicesB\x15MediaFileServiceProtoP\x01ZHgoogle.golang.org/genproto/googleapis/ads/googleads/v0/services;services\xa2\x02\x03GAA\xaa\x02 Google.Ads.GoogleAds.V0.Services\xca\x02 Google\\Ads\\GoogleAds\\V0\\Services\xea\x02$Google::Ads::GoogleAds::V0::Servicesb\x06proto3')
   ,
-  dependencies=[google_dot_ads_dot_googleads__v0_dot_proto_dot_resources_dot_media__file__pb2.DESCRIPTOR,google_dot_api_dot_annotations__pb2.DESCRIPTOR,])
+  dependencies=[google_dot_ads_dot_googleads__v0_dot_proto_dot_resources_dot_media__file__pb2.DESCRIPTOR,google_dot_api_dot_annotations__pb2.DESCRIPTOR,google_dot_protobuf_dot_wrappers__pb2.DESCRIPTOR,google_dot_rpc_dot_status__pb2.DESCRIPTOR,])
 
 
 
@@ -41,21 +43,21 @@ _GETMEDIAFILEREQUEST = _descriptor.Descriptor(
       has_default_value=False, default_value=_b("").decode('utf-8'),
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
-      options=None, file=DESCRIPTOR),
+      serialized_options=None, file=DESCRIPTOR),
   ],
   extensions=[
   ],
   nested_types=[],
   enum_types=[
   ],
-  options=None,
+  serialized_options=None,
   is_extendable=False,
   syntax='proto3',
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=189,
-  serialized_end=233,
+  serialized_start=246,
+  serialized_end=290,
 )
 
 
@@ -72,28 +74,42 @@ _MUTATEMEDIAFILESREQUEST = _descriptor.Descriptor(
       has_default_value=False, default_value=_b("").decode('utf-8'),
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
-      options=None, file=DESCRIPTOR),
+      serialized_options=None, file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
       name='operations', full_name='google.ads.googleads.v0.services.MutateMediaFilesRequest.operations', index=1,
       number=2, type=11, cpp_type=10, label=3,
       has_default_value=False, default_value=[],
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
-      options=None, file=DESCRIPTOR),
+      serialized_options=None, file=DESCRIPTOR),
+    _descriptor.FieldDescriptor(
+      name='partial_failure', full_name='google.ads.googleads.v0.services.MutateMediaFilesRequest.partial_failure', index=2,
+      number=3, type=8, cpp_type=7, label=1,
+      has_default_value=False, default_value=False,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR),
+    _descriptor.FieldDescriptor(
+      name='validate_only', full_name='google.ads.googleads.v0.services.MutateMediaFilesRequest.validate_only', index=3,
+      number=4, type=8, cpp_type=7, label=1,
+      has_default_value=False, default_value=False,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR),
   ],
   extensions=[
   ],
   nested_types=[],
   enum_types=[
   ],
-  options=None,
+  serialized_options=None,
   is_extendable=False,
   syntax='proto3',
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=235,
-  serialized_end=355,
+  serialized_start=293,
+  serialized_end=461,
 )
 
 
@@ -110,14 +126,14 @@ _MEDIAFILEOPERATION = _descriptor.Descriptor(
       has_default_value=False, default_value=None,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
-      options=None, file=DESCRIPTOR),
+      serialized_options=None, file=DESCRIPTOR),
   ],
   extensions=[
   ],
   nested_types=[],
   enum_types=[
   ],
-  options=None,
+  serialized_options=None,
   is_extendable=False,
   syntax='proto3',
   extension_ranges=[],
@@ -126,8 +142,8 @@ _MEDIAFILEOPERATION = _descriptor.Descriptor(
       name='operation', full_name='google.ads.googleads.v0.services.MediaFileOperation.operation',
       index=0, containing_type=None, fields=[]),
   ],
-  serialized_start=357,
-  serialized_end=454,
+  serialized_start=463,
+  serialized_end=560,
 )
 
 
@@ -139,26 +155,33 @@ _MUTATEMEDIAFILESRESPONSE = _descriptor.Descriptor(
   containing_type=None,
   fields=[
     _descriptor.FieldDescriptor(
-      name='results', full_name='google.ads.googleads.v0.services.MutateMediaFilesResponse.results', index=0,
+      name='partial_failure_error', full_name='google.ads.googleads.v0.services.MutateMediaFilesResponse.partial_failure_error', index=0,
+      number=3, type=11, cpp_type=10, label=1,
+      has_default_value=False, default_value=None,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR),
+    _descriptor.FieldDescriptor(
+      name='results', full_name='google.ads.googleads.v0.services.MutateMediaFilesResponse.results', index=1,
       number=2, type=11, cpp_type=10, label=3,
       has_default_value=False, default_value=[],
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
-      options=None, file=DESCRIPTOR),
+      serialized_options=None, file=DESCRIPTOR),
   ],
   extensions=[
   ],
   nested_types=[],
   enum_types=[
   ],
-  options=None,
+  serialized_options=None,
   is_extendable=False,
   syntax='proto3',
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=456,
-  serialized_end=556,
+  serialized_start=563,
+  serialized_end=714,
 )
 
 
@@ -175,21 +198,21 @@ _MUTATEMEDIAFILERESULT = _descriptor.Descriptor(
       has_default_value=False, default_value=_b("").decode('utf-8'),
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
-      options=None, file=DESCRIPTOR),
+      serialized_options=None, file=DESCRIPTOR),
   ],
   extensions=[
   ],
   nested_types=[],
   enum_types=[
   ],
-  options=None,
+  serialized_options=None,
   is_extendable=False,
   syntax='proto3',
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=558,
-  serialized_end=604,
+  serialized_start=716,
+  serialized_end=762,
 )
 
 _MUTATEMEDIAFILESREQUEST.fields_by_name['operations'].message_type = _MEDIAFILEOPERATION
@@ -197,6 +220,7 @@ _MEDIAFILEOPERATION.fields_by_name['create'].message_type = google_dot_ads_dot_g
 _MEDIAFILEOPERATION.oneofs_by_name['operation'].fields.append(
   _MEDIAFILEOPERATION.fields_by_name['create'])
 _MEDIAFILEOPERATION.fields_by_name['create'].containing_oneof = _MEDIAFILEOPERATION.oneofs_by_name['operation']
+_MUTATEMEDIAFILESRESPONSE.fields_by_name['partial_failure_error'].message_type = google_dot_rpc_dot_status__pb2._STATUS
 _MUTATEMEDIAFILESRESPONSE.fields_by_name['results'].message_type = _MUTATEMEDIAFILERESULT
 DESCRIPTOR.message_types_by_name['GetMediaFileRequest'] = _GETMEDIAFILEREQUEST
 DESCRIPTOR.message_types_by_name['MutateMediaFilesRequest'] = _MUTATEMEDIAFILESREQUEST
@@ -207,7 +231,7 @@ _sym_db.RegisterFileDescriptor(DESCRIPTOR)
 
 GetMediaFileRequest = _reflection.GeneratedProtocolMessageType('GetMediaFileRequest', (_message.Message,), dict(
   DESCRIPTOR = _GETMEDIAFILEREQUEST,
-  __module__ = 'google.ads.google_ads.v0.proto.services.media_file_service_pb2'
+  __module__ = 'google.ads.googleads_v0.proto.services.media_file_service_pb2'
   ,
   __doc__ = """Request message for
   [MediaFileService.GetMediaFile][google.ads.googleads.v0.services.MediaFileService.GetMediaFile]
@@ -223,7 +247,7 @@ _sym_db.RegisterMessage(GetMediaFileRequest)
 
 MutateMediaFilesRequest = _reflection.GeneratedProtocolMessageType('MutateMediaFilesRequest', (_message.Message,), dict(
   DESCRIPTOR = _MUTATEMEDIAFILESREQUEST,
-  __module__ = 'google.ads.google_ads.v0.proto.services.media_file_service_pb2'
+  __module__ = 'google.ads.googleads_v0.proto.services.media_file_service_pb2'
   ,
   __doc__ = """Request message for
   [MediaFileService.MutateMediaFiles][google.ads.googleads.v0.services.MediaFileService.MutateMediaFiles]
@@ -234,6 +258,14 @@ MutateMediaFilesRequest = _reflection.GeneratedProtocolMessageType('MutateMediaF
           The ID of the customer whose media files are being modified.
       operations:
           The list of operations to perform on individual media file.
+      partial_failure:
+          If true, successful operations will be carried out and invalid
+          operations will return errors. If false, all operations will
+          be carried out in one transaction if and only if they are all
+          valid. Default is false.
+      validate_only:
+          If true, the request is validated but not executed. Only
+          errors are returned, not results.
   """,
   # @@protoc_insertion_point(class_scope:google.ads.googleads.v0.services.MutateMediaFilesRequest)
   ))
@@ -241,7 +273,7 @@ _sym_db.RegisterMessage(MutateMediaFilesRequest)
 
 MediaFileOperation = _reflection.GeneratedProtocolMessageType('MediaFileOperation', (_message.Message,), dict(
   DESCRIPTOR = _MEDIAFILEOPERATION,
-  __module__ = 'google.ads.google_ads.v0.proto.services.media_file_service_pb2'
+  __module__ = 'google.ads.googleads_v0.proto.services.media_file_service_pb2'
   ,
   __doc__ = """A single operation to create media file.
   
@@ -259,12 +291,18 @@ _sym_db.RegisterMessage(MediaFileOperation)
 
 MutateMediaFilesResponse = _reflection.GeneratedProtocolMessageType('MutateMediaFilesResponse', (_message.Message,), dict(
   DESCRIPTOR = _MUTATEMEDIAFILESRESPONSE,
-  __module__ = 'google.ads.google_ads.v0.proto.services.media_file_service_pb2'
+  __module__ = 'google.ads.googleads_v0.proto.services.media_file_service_pb2'
   ,
   __doc__ = """Response message for a media file mutate.
   
   
   Attributes:
+      partial_failure_error:
+          Errors that pertain to operation failures in the partial
+          failure mode. Returned only when partial\_failure = true and
+          all errors occur inside the operations. If any errors occur
+          outside the operations (e.g. auth errors), we return an RPC
+          level error.
       results:
           All results for the mutate.
   """,
@@ -274,7 +312,7 @@ _sym_db.RegisterMessage(MutateMediaFilesResponse)
 
 MutateMediaFileResult = _reflection.GeneratedProtocolMessageType('MutateMediaFileResult', (_message.Message,), dict(
   DESCRIPTOR = _MUTATEMEDIAFILERESULT,
-  __module__ = 'google.ads.google_ads.v0.proto.services.media_file_service_pb2'
+  __module__ = 'google.ads.googleads_v0.proto.services.media_file_service_pb2'
   ,
   __doc__ = """The result for the media file mutate.
   
@@ -288,17 +326,16 @@ MutateMediaFileResult = _reflection.GeneratedProtocolMessageType('MutateMediaFil
 _sym_db.RegisterMessage(MutateMediaFileResult)
 
 
-DESCRIPTOR.has_options = True
-DESCRIPTOR._options = _descriptor._ParseOptions(descriptor_pb2.FileOptions(), _b('\n$com.google.ads.googleads.v0.servicesB\025MediaFileServiceProtoP\001ZHgoogle.golang.org/genproto/googleapis/ads/googleads/v0/services;services\242\002\003GAA\252\002 Google.Ads.GoogleAds.V0.Services\312\002 Google\\Ads\\GoogleAds\\V0\\Services'))
+DESCRIPTOR._options = None
 
 _MEDIAFILESERVICE = _descriptor.ServiceDescriptor(
   name='MediaFileService',
   full_name='google.ads.googleads.v0.services.MediaFileService',
   file=DESCRIPTOR,
   index=0,
-  options=None,
-  serialized_start=607,
-  serialized_end=997,
+  serialized_options=None,
+  serialized_start=765,
+  serialized_end=1155,
   methods=[
   _descriptor.MethodDescriptor(
     name='GetMediaFile',
@@ -307,7 +344,7 @@ _MEDIAFILESERVICE = _descriptor.ServiceDescriptor(
     containing_service=None,
     input_type=_GETMEDIAFILEREQUEST,
     output_type=google_dot_ads_dot_googleads__v0_dot_proto_dot_resources_dot_media__file__pb2._MEDIAFILE,
-    options=_descriptor._ParseOptions(descriptor_pb2.MethodOptions(), _b('\202\323\344\223\002.\022,/v0/{resource_name=customers/*/mediaFiles/*}')),
+    serialized_options=_b('\202\323\344\223\002.\022,/v0/{resource_name=customers/*/mediaFiles/*}'),
   ),
   _descriptor.MethodDescriptor(
     name='MutateMediaFiles',
@@ -316,7 +353,7 @@ _MEDIAFILESERVICE = _descriptor.ServiceDescriptor(
     containing_service=None,
     input_type=_MUTATEMEDIAFILESREQUEST,
     output_type=_MUTATEMEDIAFILESRESPONSE,
-    options=_descriptor._ParseOptions(descriptor_pb2.MethodOptions(), _b('\202\323\344\223\0024\"//v0/customers/{customer_id=*}/mediaFiles:mutate:\001*')),
+    serialized_options=_b('\202\323\344\223\0024\"//v0/customers/{customer_id=*}/mediaFiles:mutate:\001*'),
   ),
 ])
 _sym_db.RegisterServiceDescriptor(_MEDIAFILESERVICE)

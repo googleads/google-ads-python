@@ -7,7 +7,6 @@ from google.protobuf import descriptor as _descriptor
 from google.protobuf import message as _message
 from google.protobuf import reflection as _reflection
 from google.protobuf import symbol_database as _symbol_database
-from google.protobuf import descriptor_pb2
 # @@protoc_insertion_point(imports)
 
 _sym_db = _symbol_database.Default()
@@ -23,7 +22,8 @@ DESCRIPTOR = _descriptor.FileDescriptor(
   name='google/ads/googleads_v0/proto/services/customer_service.proto',
   package='google.ads.googleads.v0.services',
   syntax='proto3',
-  serialized_pb=_b('\n=google/ads/googleads_v0/proto/services/customer_service.proto\x12 google.ads.googleads.v0.services\x1a\x36google/ads/googleads_v0/proto/resources/customer.proto\x1a\x1cgoogle/api/annotations.proto\x1a google/protobuf/field_mask.proto\x1a\x1egoogle/protobuf/wrappers.proto\"+\n\x12GetCustomerRequest\x12\x15\n\rresource_name\x18\x01 \x01(\t\"t\n\x15MutateCustomerRequest\x12\x13\n\x0b\x63ustomer_id\x18\x01 \x01(\t\x12\x46\n\toperation\x18\x04 \x01(\x0b\x32\x33.google.ads.googleads.v0.services.CustomerOperation\"x\n\x1b\x43reateCustomerClientRequest\x12\x13\n\x0b\x63ustomer_id\x18\x01 \x01(\t\x12\x44\n\x0f\x63ustomer_client\x18\x02 \x01(\x0b\x32+.google.ads.googleads.v0.resources.Customer\"\x81\x01\n\x11\x43ustomerOperation\x12;\n\x06update\x18\x01 \x01(\x0b\x32+.google.ads.googleads.v0.resources.Customer\x12/\n\x0bupdate_mask\x18\x02 \x01(\x0b\x32\x1a.google.protobuf.FieldMask\"5\n\x1c\x43reateCustomerClientResponse\x12\x15\n\rresource_name\x18\x02 \x01(\t\"`\n\x16MutateCustomerResponse\x12\x46\n\x06result\x18\x02 \x01(\x0b\x32\x36.google.ads.googleads.v0.services.MutateCustomerResult\"-\n\x14MutateCustomerResult\x12\x15\n\rresource_name\x18\x01 \x01(\t\" \n\x1eListAccessibleCustomersRequest\"9\n\x1fListAccessibleCustomersResponse\x12\x16\n\x0eresource_names\x18\x01 \x03(\t2\x8b\x06\n\x0f\x43ustomerService\x12\x99\x01\n\x0bGetCustomer\x12\x34.google.ads.googleads.v0.services.GetCustomerRequest\x1a+.google.ads.googleads.v0.resources.Customer\"\'\x82\xd3\xe4\x93\x02!\x12\x1f/v0/{resource_name=customers/*}\x12\xb4\x01\n\x0eMutateCustomer\x12\x37.google.ads.googleads.v0.services.MutateCustomerRequest\x1a\x38.google.ads.googleads.v0.services.MutateCustomerResponse\"/\x82\xd3\xe4\x93\x02)\"$/v0/customers/{customer_id=*}:mutate:\x01*\x12\xcd\x01\n\x17ListAccessibleCustomers\x12@.google.ads.googleads.v0.services.ListAccessibleCustomersRequest\x1a\x41.google.ads.googleads.v0.services.ListAccessibleCustomersResponse\"-\x82\xd3\xe4\x93\x02\'\x12%/v0/customers:listAccessibleCustomers\x12\xd4\x01\n\x14\x43reateCustomerClient\x12=.google.ads.googleads.v0.services.CreateCustomerClientRequest\x1a>.google.ads.googleads.v0.services.CreateCustomerClientResponse\"=\x82\xd3\xe4\x93\x02\x37\"2/v0/customers/{customer_id=*}:createCustomerClient:\x01*B\xd4\x01\n$com.google.ads.googleads.v0.servicesB\x14\x43ustomerServiceProtoP\x01ZHgoogle.golang.org/genproto/googleapis/ads/googleads/v0/services;services\xa2\x02\x03GAA\xaa\x02 Google.Ads.GoogleAds.V0.Services\xca\x02 Google\\Ads\\GoogleAds\\V0\\Servicesb\x06proto3')
+  serialized_options=_b('\n$com.google.ads.googleads.v0.servicesB\024CustomerServiceProtoP\001ZHgoogle.golang.org/genproto/googleapis/ads/googleads/v0/services;services\242\002\003GAA\252\002 Google.Ads.GoogleAds.V0.Services\312\002 Google\\Ads\\GoogleAds\\V0\\Services\352\002$Google::Ads::GoogleAds::V0::Services'),
+  serialized_pb=_b('\n=google/ads/googleads_v0/proto/services/customer_service.proto\x12 google.ads.googleads.v0.services\x1a\x36google/ads/googleads_v0/proto/resources/customer.proto\x1a\x1cgoogle/api/annotations.proto\x1a google/protobuf/field_mask.proto\x1a\x1egoogle/protobuf/wrappers.proto\"+\n\x12GetCustomerRequest\x12\x15\n\rresource_name\x18\x01 \x01(\t\"\x8b\x01\n\x15MutateCustomerRequest\x12\x13\n\x0b\x63ustomer_id\x18\x01 \x01(\t\x12\x46\n\toperation\x18\x04 \x01(\x0b\x32\x33.google.ads.googleads.v0.services.CustomerOperation\x12\x15\n\rvalidate_only\x18\x05 \x01(\x08\"x\n\x1b\x43reateCustomerClientRequest\x12\x13\n\x0b\x63ustomer_id\x18\x01 \x01(\t\x12\x44\n\x0f\x63ustomer_client\x18\x02 \x01(\x0b\x32+.google.ads.googleads.v0.resources.Customer\"\x81\x01\n\x11\x43ustomerOperation\x12;\n\x06update\x18\x01 \x01(\x0b\x32+.google.ads.googleads.v0.resources.Customer\x12/\n\x0bupdate_mask\x18\x02 \x01(\x0b\x32\x1a.google.protobuf.FieldMask\"5\n\x1c\x43reateCustomerClientResponse\x12\x15\n\rresource_name\x18\x02 \x01(\t\"`\n\x16MutateCustomerResponse\x12\x46\n\x06result\x18\x02 \x01(\x0b\x32\x36.google.ads.googleads.v0.services.MutateCustomerResult\"-\n\x14MutateCustomerResult\x12\x15\n\rresource_name\x18\x01 \x01(\t\" \n\x1eListAccessibleCustomersRequest\"9\n\x1fListAccessibleCustomersResponse\x12\x16\n\x0eresource_names\x18\x01 \x03(\t2\x8b\x06\n\x0f\x43ustomerService\x12\x99\x01\n\x0bGetCustomer\x12\x34.google.ads.googleads.v0.services.GetCustomerRequest\x1a+.google.ads.googleads.v0.resources.Customer\"\'\x82\xd3\xe4\x93\x02!\x12\x1f/v0/{resource_name=customers/*}\x12\xb4\x01\n\x0eMutateCustomer\x12\x37.google.ads.googleads.v0.services.MutateCustomerRequest\x1a\x38.google.ads.googleads.v0.services.MutateCustomerResponse\"/\x82\xd3\xe4\x93\x02)\"$/v0/customers/{customer_id=*}:mutate:\x01*\x12\xcd\x01\n\x17ListAccessibleCustomers\x12@.google.ads.googleads.v0.services.ListAccessibleCustomersRequest\x1a\x41.google.ads.googleads.v0.services.ListAccessibleCustomersResponse\"-\x82\xd3\xe4\x93\x02\'\x12%/v0/customers:listAccessibleCustomers\x12\xd4\x01\n\x14\x43reateCustomerClient\x12=.google.ads.googleads.v0.services.CreateCustomerClientRequest\x1a>.google.ads.googleads.v0.services.CreateCustomerClientResponse\"=\x82\xd3\xe4\x93\x02\x37\"2/v0/customers/{customer_id=*}:createCustomerClient:\x01*B\xfb\x01\n$com.google.ads.googleads.v0.servicesB\x14\x43ustomerServiceProtoP\x01ZHgoogle.golang.org/genproto/googleapis/ads/googleads/v0/services;services\xa2\x02\x03GAA\xaa\x02 Google.Ads.GoogleAds.V0.Services\xca\x02 Google\\Ads\\GoogleAds\\V0\\Services\xea\x02$Google::Ads::GoogleAds::V0::Servicesb\x06proto3')
   ,
   dependencies=[google_dot_ads_dot_googleads__v0_dot_proto_dot_resources_dot_customer__pb2.DESCRIPTOR,google_dot_api_dot_annotations__pb2.DESCRIPTOR,google_dot_protobuf_dot_field__mask__pb2.DESCRIPTOR,google_dot_protobuf_dot_wrappers__pb2.DESCRIPTOR,])
 
@@ -43,14 +43,14 @@ _GETCUSTOMERREQUEST = _descriptor.Descriptor(
       has_default_value=False, default_value=_b("").decode('utf-8'),
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
-      options=None, file=DESCRIPTOR),
+      serialized_options=None, file=DESCRIPTOR),
   ],
   extensions=[
   ],
   nested_types=[],
   enum_types=[
   ],
-  options=None,
+  serialized_options=None,
   is_extendable=False,
   syntax='proto3',
   extension_ranges=[],
@@ -74,28 +74,35 @@ _MUTATECUSTOMERREQUEST = _descriptor.Descriptor(
       has_default_value=False, default_value=_b("").decode('utf-8'),
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
-      options=None, file=DESCRIPTOR),
+      serialized_options=None, file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
       name='operation', full_name='google.ads.googleads.v0.services.MutateCustomerRequest.operation', index=1,
       number=4, type=11, cpp_type=10, label=1,
       has_default_value=False, default_value=None,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
-      options=None, file=DESCRIPTOR),
+      serialized_options=None, file=DESCRIPTOR),
+    _descriptor.FieldDescriptor(
+      name='validate_only', full_name='google.ads.googleads.v0.services.MutateCustomerRequest.validate_only', index=2,
+      number=5, type=8, cpp_type=7, label=1,
+      has_default_value=False, default_value=False,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR),
   ],
   extensions=[
   ],
   nested_types=[],
   enum_types=[
   ],
-  options=None,
+  serialized_options=None,
   is_extendable=False,
   syntax='proto3',
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=296,
-  serialized_end=412,
+  serialized_start=297,
+  serialized_end=436,
 )
 
 
@@ -112,28 +119,28 @@ _CREATECUSTOMERCLIENTREQUEST = _descriptor.Descriptor(
       has_default_value=False, default_value=_b("").decode('utf-8'),
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
-      options=None, file=DESCRIPTOR),
+      serialized_options=None, file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
       name='customer_client', full_name='google.ads.googleads.v0.services.CreateCustomerClientRequest.customer_client', index=1,
       number=2, type=11, cpp_type=10, label=1,
       has_default_value=False, default_value=None,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
-      options=None, file=DESCRIPTOR),
+      serialized_options=None, file=DESCRIPTOR),
   ],
   extensions=[
   ],
   nested_types=[],
   enum_types=[
   ],
-  options=None,
+  serialized_options=None,
   is_extendable=False,
   syntax='proto3',
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=414,
-  serialized_end=534,
+  serialized_start=438,
+  serialized_end=558,
 )
 
 
@@ -150,28 +157,28 @@ _CUSTOMEROPERATION = _descriptor.Descriptor(
       has_default_value=False, default_value=None,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
-      options=None, file=DESCRIPTOR),
+      serialized_options=None, file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
       name='update_mask', full_name='google.ads.googleads.v0.services.CustomerOperation.update_mask', index=1,
       number=2, type=11, cpp_type=10, label=1,
       has_default_value=False, default_value=None,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
-      options=None, file=DESCRIPTOR),
+      serialized_options=None, file=DESCRIPTOR),
   ],
   extensions=[
   ],
   nested_types=[],
   enum_types=[
   ],
-  options=None,
+  serialized_options=None,
   is_extendable=False,
   syntax='proto3',
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=537,
-  serialized_end=666,
+  serialized_start=561,
+  serialized_end=690,
 )
 
 
@@ -188,21 +195,21 @@ _CREATECUSTOMERCLIENTRESPONSE = _descriptor.Descriptor(
       has_default_value=False, default_value=_b("").decode('utf-8'),
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
-      options=None, file=DESCRIPTOR),
+      serialized_options=None, file=DESCRIPTOR),
   ],
   extensions=[
   ],
   nested_types=[],
   enum_types=[
   ],
-  options=None,
+  serialized_options=None,
   is_extendable=False,
   syntax='proto3',
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=668,
-  serialized_end=721,
+  serialized_start=692,
+  serialized_end=745,
 )
 
 
@@ -219,21 +226,21 @@ _MUTATECUSTOMERRESPONSE = _descriptor.Descriptor(
       has_default_value=False, default_value=None,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
-      options=None, file=DESCRIPTOR),
+      serialized_options=None, file=DESCRIPTOR),
   ],
   extensions=[
   ],
   nested_types=[],
   enum_types=[
   ],
-  options=None,
+  serialized_options=None,
   is_extendable=False,
   syntax='proto3',
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=723,
-  serialized_end=819,
+  serialized_start=747,
+  serialized_end=843,
 )
 
 
@@ -250,21 +257,21 @@ _MUTATECUSTOMERRESULT = _descriptor.Descriptor(
       has_default_value=False, default_value=_b("").decode('utf-8'),
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
-      options=None, file=DESCRIPTOR),
+      serialized_options=None, file=DESCRIPTOR),
   ],
   extensions=[
   ],
   nested_types=[],
   enum_types=[
   ],
-  options=None,
+  serialized_options=None,
   is_extendable=False,
   syntax='proto3',
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=821,
-  serialized_end=866,
+  serialized_start=845,
+  serialized_end=890,
 )
 
 
@@ -281,14 +288,14 @@ _LISTACCESSIBLECUSTOMERSREQUEST = _descriptor.Descriptor(
   nested_types=[],
   enum_types=[
   ],
-  options=None,
+  serialized_options=None,
   is_extendable=False,
   syntax='proto3',
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=868,
-  serialized_end=900,
+  serialized_start=892,
+  serialized_end=924,
 )
 
 
@@ -305,21 +312,21 @@ _LISTACCESSIBLECUSTOMERSRESPONSE = _descriptor.Descriptor(
       has_default_value=False, default_value=[],
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
-      options=None, file=DESCRIPTOR),
+      serialized_options=None, file=DESCRIPTOR),
   ],
   extensions=[
   ],
   nested_types=[],
   enum_types=[
   ],
-  options=None,
+  serialized_options=None,
   is_extendable=False,
   syntax='proto3',
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=902,
-  serialized_end=959,
+  serialized_start=926,
+  serialized_end=983,
 )
 
 _MUTATECUSTOMERREQUEST.fields_by_name['operation'].message_type = _CUSTOMEROPERATION
@@ -340,7 +347,7 @@ _sym_db.RegisterFileDescriptor(DESCRIPTOR)
 
 GetCustomerRequest = _reflection.GeneratedProtocolMessageType('GetCustomerRequest', (_message.Message,), dict(
   DESCRIPTOR = _GETCUSTOMERREQUEST,
-  __module__ = 'google.ads.google_ads.v0.proto.services.customer_service_pb2'
+  __module__ = 'google.ads.googleads_v0.proto.services.customer_service_pb2'
   ,
   __doc__ = """Request message for
   [CustomerService.GetCustomer][google.ads.googleads.v0.services.CustomerService.GetCustomer].
@@ -356,7 +363,7 @@ _sym_db.RegisterMessage(GetCustomerRequest)
 
 MutateCustomerRequest = _reflection.GeneratedProtocolMessageType('MutateCustomerRequest', (_message.Message,), dict(
   DESCRIPTOR = _MUTATECUSTOMERREQUEST,
-  __module__ = 'google.ads.google_ads.v0.proto.services.customer_service_pb2'
+  __module__ = 'google.ads.googleads_v0.proto.services.customer_service_pb2'
   ,
   __doc__ = """Request message for
   [CustomerService.MutateCustomer][google.ads.googleads.v0.services.CustomerService.MutateCustomer].
@@ -367,6 +374,9 @@ MutateCustomerRequest = _reflection.GeneratedProtocolMessageType('MutateCustomer
           The ID of the customer being modified.
       operation:
           The operation to perform on the customer
+      validate_only:
+          If true, the request is validated but not executed. Only
+          errors are returned, not results.
   """,
   # @@protoc_insertion_point(class_scope:google.ads.googleads.v0.services.MutateCustomerRequest)
   ))
@@ -374,7 +384,7 @@ _sym_db.RegisterMessage(MutateCustomerRequest)
 
 CreateCustomerClientRequest = _reflection.GeneratedProtocolMessageType('CreateCustomerClientRequest', (_message.Message,), dict(
   DESCRIPTOR = _CREATECUSTOMERCLIENTREQUEST,
-  __module__ = 'google.ads.google_ads.v0.proto.services.customer_service_pb2'
+  __module__ = 'google.ads.googleads_v0.proto.services.customer_service_pb2'
   ,
   __doc__ = """Request message for
   [CustomerService.CreateCustomerClient][google.ads.googleads.v0.services.CustomerService.CreateCustomerClient].
@@ -394,7 +404,7 @@ _sym_db.RegisterMessage(CreateCustomerClientRequest)
 
 CustomerOperation = _reflection.GeneratedProtocolMessageType('CustomerOperation', (_message.Message,), dict(
   DESCRIPTOR = _CUSTOMEROPERATION,
-  __module__ = 'google.ads.google_ads.v0.proto.services.customer_service_pb2'
+  __module__ = 'google.ads.googleads_v0.proto.services.customer_service_pb2'
   ,
   __doc__ = """A single update on a customer.
   
@@ -412,7 +422,7 @@ _sym_db.RegisterMessage(CustomerOperation)
 
 CreateCustomerClientResponse = _reflection.GeneratedProtocolMessageType('CreateCustomerClientResponse', (_message.Message,), dict(
   DESCRIPTOR = _CREATECUSTOMERCLIENTRESPONSE,
-  __module__ = 'google.ads.google_ads.v0.proto.services.customer_service_pb2'
+  __module__ = 'google.ads.googleads_v0.proto.services.customer_service_pb2'
   ,
   __doc__ = """Response message for CreateCustomerClient mutate.
   
@@ -427,7 +437,7 @@ _sym_db.RegisterMessage(CreateCustomerClientResponse)
 
 MutateCustomerResponse = _reflection.GeneratedProtocolMessageType('MutateCustomerResponse', (_message.Message,), dict(
   DESCRIPTOR = _MUTATECUSTOMERRESPONSE,
-  __module__ = 'google.ads.google_ads.v0.proto.services.customer_service_pb2'
+  __module__ = 'google.ads.googleads_v0.proto.services.customer_service_pb2'
   ,
   __doc__ = """Response message for customer mutate.
   
@@ -442,7 +452,7 @@ _sym_db.RegisterMessage(MutateCustomerResponse)
 
 MutateCustomerResult = _reflection.GeneratedProtocolMessageType('MutateCustomerResult', (_message.Message,), dict(
   DESCRIPTOR = _MUTATECUSTOMERRESULT,
-  __module__ = 'google.ads.google_ads.v0.proto.services.customer_service_pb2'
+  __module__ = 'google.ads.googleads_v0.proto.services.customer_service_pb2'
   ,
   __doc__ = """The result for the customer mutate.
   
@@ -457,7 +467,7 @@ _sym_db.RegisterMessage(MutateCustomerResult)
 
 ListAccessibleCustomersRequest = _reflection.GeneratedProtocolMessageType('ListAccessibleCustomersRequest', (_message.Message,), dict(
   DESCRIPTOR = _LISTACCESSIBLECUSTOMERSREQUEST,
-  __module__ = 'google.ads.google_ads.v0.proto.services.customer_service_pb2'
+  __module__ = 'google.ads.googleads_v0.proto.services.customer_service_pb2'
   ,
   __doc__ = """Request message for
   [CustomerService.ListAccessibleCustomers][google.ads.googleads.v0.services.CustomerService.ListAccessibleCustomers].
@@ -468,7 +478,7 @@ _sym_db.RegisterMessage(ListAccessibleCustomersRequest)
 
 ListAccessibleCustomersResponse = _reflection.GeneratedProtocolMessageType('ListAccessibleCustomersResponse', (_message.Message,), dict(
   DESCRIPTOR = _LISTACCESSIBLECUSTOMERSRESPONSE,
-  __module__ = 'google.ads.google_ads.v0.proto.services.customer_service_pb2'
+  __module__ = 'google.ads.googleads_v0.proto.services.customer_service_pb2'
   ,
   __doc__ = """Response message for
   [CustomerService.ListAccessibleCustomers][google.ads.googleads.v0.services.CustomerService.ListAccessibleCustomers].
@@ -484,17 +494,16 @@ ListAccessibleCustomersResponse = _reflection.GeneratedProtocolMessageType('List
 _sym_db.RegisterMessage(ListAccessibleCustomersResponse)
 
 
-DESCRIPTOR.has_options = True
-DESCRIPTOR._options = _descriptor._ParseOptions(descriptor_pb2.FileOptions(), _b('\n$com.google.ads.googleads.v0.servicesB\024CustomerServiceProtoP\001ZHgoogle.golang.org/genproto/googleapis/ads/googleads/v0/services;services\242\002\003GAA\252\002 Google.Ads.GoogleAds.V0.Services\312\002 Google\\Ads\\GoogleAds\\V0\\Services'))
+DESCRIPTOR._options = None
 
 _CUSTOMERSERVICE = _descriptor.ServiceDescriptor(
   name='CustomerService',
   full_name='google.ads.googleads.v0.services.CustomerService',
   file=DESCRIPTOR,
   index=0,
-  options=None,
-  serialized_start=962,
-  serialized_end=1741,
+  serialized_options=None,
+  serialized_start=986,
+  serialized_end=1765,
   methods=[
   _descriptor.MethodDescriptor(
     name='GetCustomer',
@@ -503,7 +512,7 @@ _CUSTOMERSERVICE = _descriptor.ServiceDescriptor(
     containing_service=None,
     input_type=_GETCUSTOMERREQUEST,
     output_type=google_dot_ads_dot_googleads__v0_dot_proto_dot_resources_dot_customer__pb2._CUSTOMER,
-    options=_descriptor._ParseOptions(descriptor_pb2.MethodOptions(), _b('\202\323\344\223\002!\022\037/v0/{resource_name=customers/*}')),
+    serialized_options=_b('\202\323\344\223\002!\022\037/v0/{resource_name=customers/*}'),
   ),
   _descriptor.MethodDescriptor(
     name='MutateCustomer',
@@ -512,7 +521,7 @@ _CUSTOMERSERVICE = _descriptor.ServiceDescriptor(
     containing_service=None,
     input_type=_MUTATECUSTOMERREQUEST,
     output_type=_MUTATECUSTOMERRESPONSE,
-    options=_descriptor._ParseOptions(descriptor_pb2.MethodOptions(), _b('\202\323\344\223\002)\"$/v0/customers/{customer_id=*}:mutate:\001*')),
+    serialized_options=_b('\202\323\344\223\002)\"$/v0/customers/{customer_id=*}:mutate:\001*'),
   ),
   _descriptor.MethodDescriptor(
     name='ListAccessibleCustomers',
@@ -521,7 +530,7 @@ _CUSTOMERSERVICE = _descriptor.ServiceDescriptor(
     containing_service=None,
     input_type=_LISTACCESSIBLECUSTOMERSREQUEST,
     output_type=_LISTACCESSIBLECUSTOMERSRESPONSE,
-    options=_descriptor._ParseOptions(descriptor_pb2.MethodOptions(), _b('\202\323\344\223\002\'\022%/v0/customers:listAccessibleCustomers')),
+    serialized_options=_b('\202\323\344\223\002\'\022%/v0/customers:listAccessibleCustomers'),
   ),
   _descriptor.MethodDescriptor(
     name='CreateCustomerClient',
@@ -530,7 +539,7 @@ _CUSTOMERSERVICE = _descriptor.ServiceDescriptor(
     containing_service=None,
     input_type=_CREATECUSTOMERCLIENTREQUEST,
     output_type=_CREATECUSTOMERCLIENTRESPONSE,
-    options=_descriptor._ParseOptions(descriptor_pb2.MethodOptions(), _b('\202\323\344\223\0027\"2/v0/customers/{customer_id=*}:createCustomerClient:\001*')),
+    serialized_options=_b('\202\323\344\223\0027\"2/v0/customers/{customer_id=*}:createCustomerClient:\001*'),
   ),
 ])
 _sym_db.RegisterServiceDescriptor(_CUSTOMERSERVICE)

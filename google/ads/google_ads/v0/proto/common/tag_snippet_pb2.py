@@ -7,7 +7,6 @@ from google.protobuf import descriptor as _descriptor
 from google.protobuf import message as _message
 from google.protobuf import reflection as _reflection
 from google.protobuf import symbol_database as _symbol_database
-from google.protobuf import descriptor_pb2
 # @@protoc_insertion_point(imports)
 
 _sym_db = _symbol_database.Default()
@@ -22,7 +21,8 @@ DESCRIPTOR = _descriptor.FileDescriptor(
   name='google/ads/googleads_v0/proto/common/tag_snippet.proto',
   package='google.ads.googleads.v0.common',
   syntax='proto3',
-  serialized_pb=_b('\n6google/ads/googleads_v0/proto/common/tag_snippet.proto\x12\x1egoogle.ads.googleads.v0.common\x1a\x43google/ads/googleads_v0/proto/enums/tracking_code_page_format.proto\x1a<google/ads/googleads_v0/proto/enums/tracking_code_type.proto\x1a\x1egoogle/protobuf/wrappers.proto\"\xb3\x02\n\nTagSnippet\x12R\n\x04type\x18\x01 \x01(\x0e\x32\x44.google.ads.googleads.v0.enums.TrackingCodeTypeEnum.TrackingCodeType\x12\x65\n\x0bpage_format\x18\x02 \x01(\x0e\x32P.google.ads.googleads.v0.enums.TrackingCodePageFormatEnum.TrackingCodePageFormat\x12\x35\n\x0fglobal_site_tag\x18\x03 \x01(\x0b\x32\x1c.google.protobuf.StringValue\x12\x33\n\revent_snippet\x18\x04 \x01(\x0b\x32\x1c.google.protobuf.StringValueB\xc5\x01\n\"com.google.ads.googleads.v0.commonB\x0fTagSnippetProtoP\x01ZDgoogle.golang.org/genproto/googleapis/ads/googleads/v0/common;common\xa2\x02\x03GAA\xaa\x02\x1eGoogle.Ads.GoogleAds.V0.Common\xca\x02\x1eGoogle\\Ads\\GoogleAds\\V0\\Commonb\x06proto3')
+  serialized_options=_b('\n\"com.google.ads.googleads.v0.commonB\017TagSnippetProtoP\001ZDgoogle.golang.org/genproto/googleapis/ads/googleads/v0/common;common\242\002\003GAA\252\002\036Google.Ads.GoogleAds.V0.Common\312\002\036Google\\Ads\\GoogleAds\\V0\\Common\352\002\"Google::Ads::GoogleAds::V0::Common'),
+  serialized_pb=_b('\n6google/ads/googleads_v0/proto/common/tag_snippet.proto\x12\x1egoogle.ads.googleads.v0.common\x1a\x43google/ads/googleads_v0/proto/enums/tracking_code_page_format.proto\x1a<google/ads/googleads_v0/proto/enums/tracking_code_type.proto\x1a\x1egoogle/protobuf/wrappers.proto\"\xb3\x02\n\nTagSnippet\x12R\n\x04type\x18\x01 \x01(\x0e\x32\x44.google.ads.googleads.v0.enums.TrackingCodeTypeEnum.TrackingCodeType\x12\x65\n\x0bpage_format\x18\x02 \x01(\x0e\x32P.google.ads.googleads.v0.enums.TrackingCodePageFormatEnum.TrackingCodePageFormat\x12\x35\n\x0fglobal_site_tag\x18\x03 \x01(\x0b\x32\x1c.google.protobuf.StringValue\x12\x33\n\revent_snippet\x18\x04 \x01(\x0b\x32\x1c.google.protobuf.StringValueB\xea\x01\n\"com.google.ads.googleads.v0.commonB\x0fTagSnippetProtoP\x01ZDgoogle.golang.org/genproto/googleapis/ads/googleads/v0/common;common\xa2\x02\x03GAA\xaa\x02\x1eGoogle.Ads.GoogleAds.V0.Common\xca\x02\x1eGoogle\\Ads\\GoogleAds\\V0\\Common\xea\x02\"Google::Ads::GoogleAds::V0::Commonb\x06proto3')
   ,
   dependencies=[google_dot_ads_dot_googleads__v0_dot_proto_dot_enums_dot_tracking__code__page__format__pb2.DESCRIPTOR,google_dot_ads_dot_googleads__v0_dot_proto_dot_enums_dot_tracking__code__type__pb2.DESCRIPTOR,google_dot_protobuf_dot_wrappers__pb2.DESCRIPTOR,])
 
@@ -42,35 +42,35 @@ _TAGSNIPPET = _descriptor.Descriptor(
       has_default_value=False, default_value=0,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
-      options=None, file=DESCRIPTOR),
+      serialized_options=None, file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
       name='page_format', full_name='google.ads.googleads.v0.common.TagSnippet.page_format', index=1,
       number=2, type=14, cpp_type=8, label=1,
       has_default_value=False, default_value=0,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
-      options=None, file=DESCRIPTOR),
+      serialized_options=None, file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
       name='global_site_tag', full_name='google.ads.googleads.v0.common.TagSnippet.global_site_tag', index=2,
       number=3, type=11, cpp_type=10, label=1,
       has_default_value=False, default_value=None,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
-      options=None, file=DESCRIPTOR),
+      serialized_options=None, file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
       name='event_snippet', full_name='google.ads.googleads.v0.common.TagSnippet.event_snippet', index=3,
       number=4, type=11, cpp_type=10, label=1,
       has_default_value=False, default_value=None,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
-      options=None, file=DESCRIPTOR),
+      serialized_options=None, file=DESCRIPTOR),
   ],
   extensions=[
   ],
   nested_types=[],
   enum_types=[
   ],
-  options=None,
+  serialized_options=None,
   is_extendable=False,
   syntax='proto3',
   extension_ranges=[],
@@ -89,7 +89,7 @@ _sym_db.RegisterFileDescriptor(DESCRIPTOR)
 
 TagSnippet = _reflection.GeneratedProtocolMessageType('TagSnippet', (_message.Message,), dict(
   DESCRIPTOR = _TAGSNIPPET,
-  __module__ = 'google.ads.google_ads.v0.proto.common.tag_snippet_pb2'
+  __module__ = 'google.ads.googleads_v0.proto.common.tag_snippet_pb2'
   ,
   __doc__ = """The site tag and event snippet pair for a TrackingCodeType.
   
@@ -113,6 +113,5 @@ TagSnippet = _reflection.GeneratedProtocolMessageType('TagSnippet', (_message.Me
 _sym_db.RegisterMessage(TagSnippet)
 
 
-DESCRIPTOR.has_options = True
-DESCRIPTOR._options = _descriptor._ParseOptions(descriptor_pb2.FileOptions(), _b('\n\"com.google.ads.googleads.v0.commonB\017TagSnippetProtoP\001ZDgoogle.golang.org/genproto/googleapis/ads/googleads/v0/common;common\242\002\003GAA\252\002\036Google.Ads.GoogleAds.V0.Common\312\002\036Google\\Ads\\GoogleAds\\V0\\Common'))
+DESCRIPTOR._options = None
 # @@protoc_insertion_point(module_scope)

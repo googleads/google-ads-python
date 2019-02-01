@@ -1,4 +1,6 @@
-# Copyright 2018 Google LLC
+# -*- coding: utf-8 -*-
+#
+# Copyright 2019 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -60,6 +62,8 @@ class BiddingStrategyServiceGrpcTransport(object):
                 credentials=credentials,
             )
 
+        self._channel = channel
+
         # gRPC uses objects called "stubs" that are bound to the
         # channel and provide a basic method for each RPC.
         self._stubs = {
@@ -92,8 +96,17 @@ class BiddingStrategyServiceGrpcTransport(object):
         )
 
     @property
+    def channel(self):
+        """The gRPC channel used by the transport.
+
+        Returns:
+            grpc.Channel: A gRPC channel object.
+        """
+        return self._channel
+
+    @property
     def get_bidding_strategy(self):
-        """Return the gRPC stub for {$apiMethod.name}.
+        """Return the gRPC stub for :meth:`BiddingStrategyServiceClient.get_bidding_strategy`.
 
         Returns the requested bidding strategy in full detail.
 
@@ -106,7 +119,7 @@ class BiddingStrategyServiceGrpcTransport(object):
 
     @property
     def mutate_bidding_strategies(self):
-        """Return the gRPC stub for {$apiMethod.name}.
+        """Return the gRPC stub for :meth:`BiddingStrategyServiceClient.mutate_bidding_strategies`.
 
         Creates, updates, or removes bidding strategies. Operation statuses are
         returned.

@@ -7,7 +7,6 @@ from google.protobuf import descriptor as _descriptor
 from google.protobuf import message as _message
 from google.protobuf import reflection as _reflection
 from google.protobuf import symbol_database as _symbol_database
-from google.protobuf import descriptor_pb2
 # @@protoc_insertion_point(imports)
 
 _sym_db = _symbol_database.Default()
@@ -21,7 +20,8 @@ DESCRIPTOR = _descriptor.FileDescriptor(
   name='google/ads/googleads_v0/proto/resources/keyword_plan_campaign.proto',
   package='google.ads.googleads.v0.resources',
   syntax='proto3',
-  serialized_pb=_b('\nCgoogle/ads/googleads_v0/proto/resources/keyword_plan_campaign.proto\x12!google.ads.googleads.v0.resources\x1a>google/ads/googleads_v0/proto/enums/keyword_plan_network.proto\x1a\x1egoogle/protobuf/wrappers.proto\"\xda\x03\n\x13KeywordPlanCampaign\x12\x15\n\rresource_name\x18\x01 \x01(\t\x12\x32\n\x0ckeyword_plan\x18\x02 \x01(\x0b\x32\x1c.google.protobuf.StringValue\x12\'\n\x02id\x18\x03 \x01(\x0b\x32\x1b.google.protobuf.Int64Value\x12*\n\x04name\x18\x04 \x01(\x0b\x32\x1c.google.protobuf.StringValue\x12\x38\n\x12language_constants\x18\x05 \x03(\x0b\x32\x1c.google.protobuf.StringValue\x12\x66\n\x14keyword_plan_network\x18\x06 \x01(\x0e\x32H.google.ads.googleads.v0.enums.KeywordPlanNetworkEnum.KeywordPlanNetwork\x12\x33\n\x0e\x63pc_bid_micros\x18\x07 \x01(\x0b\x32\x1b.google.protobuf.Int64Value\x12L\n\x0bgeo_targets\x18\x08 \x03(\x0b\x32\x37.google.ads.googleads.v0.resources.KeywordPlanGeoTarget\"Q\n\x14KeywordPlanGeoTarget\x12\x39\n\x13geo_target_constant\x18\x01 \x01(\x0b\x32\x1c.google.protobuf.StringValueB\xdd\x01\n%com.google.ads.googleads.v0.resourcesB\x18KeywordPlanCampaignProtoP\x01ZJgoogle.golang.org/genproto/googleapis/ads/googleads/v0/resources;resources\xa2\x02\x03GAA\xaa\x02!Google.Ads.GoogleAds.V0.Resources\xca\x02!Google\\Ads\\GoogleAds\\V0\\Resourcesb\x06proto3')
+  serialized_options=_b('\n%com.google.ads.googleads.v0.resourcesB\030KeywordPlanCampaignProtoP\001ZJgoogle.golang.org/genproto/googleapis/ads/googleads/v0/resources;resources\242\002\003GAA\252\002!Google.Ads.GoogleAds.V0.Resources\312\002!Google\\Ads\\GoogleAds\\V0\\Resources\352\002%Google::Ads::GoogleAds::V0::Resources'),
+  serialized_pb=_b('\nCgoogle/ads/googleads_v0/proto/resources/keyword_plan_campaign.proto\x12!google.ads.googleads.v0.resources\x1a>google/ads/googleads_v0/proto/enums/keyword_plan_network.proto\x1a\x1egoogle/protobuf/wrappers.proto\"\xda\x03\n\x13KeywordPlanCampaign\x12\x15\n\rresource_name\x18\x01 \x01(\t\x12\x32\n\x0ckeyword_plan\x18\x02 \x01(\x0b\x32\x1c.google.protobuf.StringValue\x12\'\n\x02id\x18\x03 \x01(\x0b\x32\x1b.google.protobuf.Int64Value\x12*\n\x04name\x18\x04 \x01(\x0b\x32\x1c.google.protobuf.StringValue\x12\x38\n\x12language_constants\x18\x05 \x03(\x0b\x32\x1c.google.protobuf.StringValue\x12\x66\n\x14keyword_plan_network\x18\x06 \x01(\x0e\x32H.google.ads.googleads.v0.enums.KeywordPlanNetworkEnum.KeywordPlanNetwork\x12\x33\n\x0e\x63pc_bid_micros\x18\x07 \x01(\x0b\x32\x1b.google.protobuf.Int64Value\x12L\n\x0bgeo_targets\x18\x08 \x03(\x0b\x32\x37.google.ads.googleads.v0.resources.KeywordPlanGeoTarget\"Q\n\x14KeywordPlanGeoTarget\x12\x39\n\x13geo_target_constant\x18\x01 \x01(\x0b\x32\x1c.google.protobuf.StringValueB\x85\x02\n%com.google.ads.googleads.v0.resourcesB\x18KeywordPlanCampaignProtoP\x01ZJgoogle.golang.org/genproto/googleapis/ads/googleads/v0/resources;resources\xa2\x02\x03GAA\xaa\x02!Google.Ads.GoogleAds.V0.Resources\xca\x02!Google\\Ads\\GoogleAds\\V0\\Resources\xea\x02%Google::Ads::GoogleAds::V0::Resourcesb\x06proto3')
   ,
   dependencies=[google_dot_ads_dot_googleads__v0_dot_proto_dot_enums_dot_keyword__plan__network__pb2.DESCRIPTOR,google_dot_protobuf_dot_wrappers__pb2.DESCRIPTOR,])
 
@@ -41,63 +41,63 @@ _KEYWORDPLANCAMPAIGN = _descriptor.Descriptor(
       has_default_value=False, default_value=_b("").decode('utf-8'),
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
-      options=None, file=DESCRIPTOR),
+      serialized_options=None, file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
       name='keyword_plan', full_name='google.ads.googleads.v0.resources.KeywordPlanCampaign.keyword_plan', index=1,
       number=2, type=11, cpp_type=10, label=1,
       has_default_value=False, default_value=None,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
-      options=None, file=DESCRIPTOR),
+      serialized_options=None, file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
       name='id', full_name='google.ads.googleads.v0.resources.KeywordPlanCampaign.id', index=2,
       number=3, type=11, cpp_type=10, label=1,
       has_default_value=False, default_value=None,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
-      options=None, file=DESCRIPTOR),
+      serialized_options=None, file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
       name='name', full_name='google.ads.googleads.v0.resources.KeywordPlanCampaign.name', index=3,
       number=4, type=11, cpp_type=10, label=1,
       has_default_value=False, default_value=None,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
-      options=None, file=DESCRIPTOR),
+      serialized_options=None, file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
       name='language_constants', full_name='google.ads.googleads.v0.resources.KeywordPlanCampaign.language_constants', index=4,
       number=5, type=11, cpp_type=10, label=3,
       has_default_value=False, default_value=[],
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
-      options=None, file=DESCRIPTOR),
+      serialized_options=None, file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
       name='keyword_plan_network', full_name='google.ads.googleads.v0.resources.KeywordPlanCampaign.keyword_plan_network', index=5,
       number=6, type=14, cpp_type=8, label=1,
       has_default_value=False, default_value=0,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
-      options=None, file=DESCRIPTOR),
+      serialized_options=None, file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
       name='cpc_bid_micros', full_name='google.ads.googleads.v0.resources.KeywordPlanCampaign.cpc_bid_micros', index=6,
       number=7, type=11, cpp_type=10, label=1,
       has_default_value=False, default_value=None,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
-      options=None, file=DESCRIPTOR),
+      serialized_options=None, file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
       name='geo_targets', full_name='google.ads.googleads.v0.resources.KeywordPlanCampaign.geo_targets', index=7,
       number=8, type=11, cpp_type=10, label=3,
       has_default_value=False, default_value=[],
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
-      options=None, file=DESCRIPTOR),
+      serialized_options=None, file=DESCRIPTOR),
   ],
   extensions=[
   ],
   nested_types=[],
   enum_types=[
   ],
-  options=None,
+  serialized_options=None,
   is_extendable=False,
   syntax='proto3',
   extension_ranges=[],
@@ -121,14 +121,14 @@ _KEYWORDPLANGEOTARGET = _descriptor.Descriptor(
       has_default_value=False, default_value=None,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
-      options=None, file=DESCRIPTOR),
+      serialized_options=None, file=DESCRIPTOR),
   ],
   extensions=[
   ],
   nested_types=[],
   enum_types=[
   ],
-  options=None,
+  serialized_options=None,
   is_extendable=False,
   syntax='proto3',
   extension_ranges=[],
@@ -152,9 +152,10 @@ _sym_db.RegisterFileDescriptor(DESCRIPTOR)
 
 KeywordPlanCampaign = _reflection.GeneratedProtocolMessageType('KeywordPlanCampaign', (_message.Message,), dict(
   DESCRIPTOR = _KEYWORDPLANCAMPAIGN,
-  __module__ = 'google.ads.google_ads.v0.proto.resources.keyword_plan_campaign_pb2'
+  __module__ = 'google.ads.googleads_v0.proto.resources.keyword_plan_campaign_pb2'
   ,
-  __doc__ = """A Keyword Plan campaign.
+  __doc__ = """A Keyword Plan campaign. Max number of keyword plan campaigns per plan
+  allowed: 1.
   
   
   Attributes:
@@ -170,7 +171,8 @@ KeywordPlanCampaign = _reflection.GeneratedProtocolMessageType('KeywordPlanCampa
           The name of the Keyword Plan campaign.  This field is required
           and should not be empty when creating Keyword Plan campaigns.
       language_constants:
-          The languages targeted for the Keyword Plan campaign.
+          The languages targeted for the Keyword Plan campaign. Max
+          allowed: 1.
       keyword_plan_network:
           Targeting network.  This field is required and should not be
           empty when creating Keyword Plan campaigns.
@@ -179,7 +181,7 @@ KeywordPlanCampaign = _reflection.GeneratedProtocolMessageType('KeywordPlanCampa
           for all ad groups under the campaign.  This field is required
           and should not be empty when creating Keyword Plan campaigns.
       geo_targets:
-          The geo targets.
+          The geo targets. Max number allowed: 20.
   """,
   # @@protoc_insertion_point(class_scope:google.ads.googleads.v0.resources.KeywordPlanCampaign)
   ))
@@ -187,7 +189,7 @@ _sym_db.RegisterMessage(KeywordPlanCampaign)
 
 KeywordPlanGeoTarget = _reflection.GeneratedProtocolMessageType('KeywordPlanGeoTarget', (_message.Message,), dict(
   DESCRIPTOR = _KEYWORDPLANGEOTARGET,
-  __module__ = 'google.ads.google_ads.v0.proto.resources.keyword_plan_campaign_pb2'
+  __module__ = 'google.ads.googleads_v0.proto.resources.keyword_plan_campaign_pb2'
   ,
   __doc__ = """A geo target. Next ID: 3
   
@@ -201,6 +203,5 @@ KeywordPlanGeoTarget = _reflection.GeneratedProtocolMessageType('KeywordPlanGeoT
 _sym_db.RegisterMessage(KeywordPlanGeoTarget)
 
 
-DESCRIPTOR.has_options = True
-DESCRIPTOR._options = _descriptor._ParseOptions(descriptor_pb2.FileOptions(), _b('\n%com.google.ads.googleads.v0.resourcesB\030KeywordPlanCampaignProtoP\001ZJgoogle.golang.org/genproto/googleapis/ads/googleads/v0/resources;resources\242\002\003GAA\252\002!Google.Ads.GoogleAds.V0.Resources\312\002!Google\\Ads\\GoogleAds\\V0\\Resources'))
+DESCRIPTOR._options = None
 # @@protoc_insertion_point(module_scope)

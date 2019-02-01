@@ -7,7 +7,6 @@ from google.protobuf import descriptor as _descriptor
 from google.protobuf import message as _message
 from google.protobuf import reflection as _reflection
 from google.protobuf import symbol_database as _symbol_database
-from google.protobuf import descriptor_pb2
 # @@protoc_insertion_point(imports)
 
 _sym_db = _symbol_database.Default()
@@ -23,7 +22,8 @@ DESCRIPTOR = _descriptor.FileDescriptor(
   name='google/ads/googleads_v0/proto/common/ad_type_infos.proto',
   package='google.ads.googleads.v0.common',
   syntax='proto3',
-  serialized_pb=_b('\n8google/ads/googleads_v0/proto/common/ad_type_infos.proto\x12\x1egoogle.ads.googleads.v0.common\x1aIgoogle/ads/googleads_v0/proto/enums/call_conversion_reporting_state.proto\x1a\x43google/ads/googleads_v0/proto/enums/display_ad_format_setting.proto\x1a\x33google/ads/googleads_v0/proto/enums/mime_type.proto\x1a\x1egoogle/protobuf/wrappers.proto\"\xa4\x01\n\nTextAdInfo\x12.\n\x08headline\x18\x01 \x01(\x0b\x32\x1c.google.protobuf.StringValue\x12\x32\n\x0c\x64\x65scription1\x18\x02 \x01(\x0b\x32\x1c.google.protobuf.StringValue\x12\x32\n\x0c\x64\x65scription2\x18\x03 \x01(\x0b\x32\x1c.google.protobuf.StringValue\"\xf7\x02\n\x12\x45xpandedTextAdInfo\x12\x34\n\x0eheadline_part1\x18\x01 \x01(\x0b\x32\x1c.google.protobuf.StringValue\x12\x34\n\x0eheadline_part2\x18\x02 \x01(\x0b\x32\x1c.google.protobuf.StringValue\x12\x34\n\x0eheadline_part3\x18\x06 \x01(\x0b\x32\x1c.google.protobuf.StringValue\x12\x31\n\x0b\x64\x65scription\x18\x03 \x01(\x0b\x32\x1c.google.protobuf.StringValue\x12\x32\n\x0c\x64\x65scription2\x18\x07 \x01(\x0b\x32\x1c.google.protobuf.StringValue\x12+\n\x05path1\x18\x04 \x01(\x0b\x32\x1c.google.protobuf.StringValue\x12+\n\x05path2\x18\x05 \x01(\x0b\x32\x1c.google.protobuf.StringValue\"}\n\x13\x44ynamicSearchAdInfo\x12\x32\n\x0c\x64\x65scription1\x18\x01 \x01(\x0b\x32\x1c.google.protobuf.StringValue\x12\x32\n\x0c\x64\x65scription2\x18\x02 \x01(\x0b\x32\x1c.google.protobuf.StringValue\"\xf7\x06\n\x17ResponsiveDisplayAdInfo\x12\x34\n\x0eshort_headline\x18\x01 \x01(\x0b\x32\x1c.google.protobuf.StringValue\x12\x33\n\rlong_headline\x18\x02 \x01(\x0b\x32\x1c.google.protobuf.StringValue\x12\x31\n\x0b\x64\x65scription\x18\x03 \x01(\x0b\x32\x1c.google.protobuf.StringValue\x12\x33\n\rbusiness_name\x18\x04 \x01(\x0b\x32\x1c.google.protobuf.StringValue\x12\x38\n\x14\x61llow_flexible_color\x18\x05 \x01(\x0b\x32\x1a.google.protobuf.BoolValue\x12\x32\n\x0c\x61\x63\x63\x65nt_color\x18\x06 \x01(\x0b\x32\x1c.google.protobuf.StringValue\x12\x30\n\nmain_color\x18\x07 \x01(\x0b\x32\x1c.google.protobuf.StringValue\x12\x39\n\x13\x63\x61ll_to_action_text\x18\x08 \x01(\x0b\x32\x1c.google.protobuf.StringValue\x12\x30\n\nlogo_image\x18\t \x01(\x0b\x32\x1c.google.protobuf.StringValue\x12\x37\n\x11square_logo_image\x18\n \x01(\x0b\x32\x1c.google.protobuf.StringValue\x12\x35\n\x0fmarketing_image\x18\x0b \x01(\x0b\x32\x1c.google.protobuf.StringValue\x12<\n\x16square_marketing_image\x18\x0c \x01(\x0b\x32\x1c.google.protobuf.StringValue\x12h\n\x0e\x66ormat_setting\x18\r \x01(\x0e\x32P.google.ads.googleads.v0.enums.DisplayAdFormatSettingEnum.DisplayAdFormatSetting\x12\x32\n\x0cprice_prefix\x18\x0e \x01(\x0b\x32\x1c.google.protobuf.StringValue\x12\x30\n\npromo_text\x18\x0f \x01(\x0b\x32\x1c.google.protobuf.StringValue\"\x85\x05\n\x0e\x43\x61llOnlyAdInfo\x12\x32\n\x0c\x63ountry_code\x18\x01 \x01(\x0b\x32\x1c.google.protobuf.StringValue\x12\x32\n\x0cphone_number\x18\x02 \x01(\x0b\x32\x1c.google.protobuf.StringValue\x12\x33\n\rbusiness_name\x18\x03 \x01(\x0b\x32\x1c.google.protobuf.StringValue\x12\x32\n\x0c\x64\x65scription1\x18\x04 \x01(\x0b\x32\x1c.google.protobuf.StringValue\x12\x32\n\x0c\x64\x65scription2\x18\x05 \x01(\x0b\x32\x1c.google.protobuf.StringValue\x12\x30\n\x0c\x63\x61ll_tracked\x18\x06 \x01(\x0b\x32\x1a.google.protobuf.BoolValue\x12;\n\x17\x64isable_call_conversion\x18\x07 \x01(\x0b\x32\x1a.google.protobuf.BoolValue\x12\x43\n\x1dphone_number_verification_url\x18\x08 \x01(\x0b\x32\x1c.google.protobuf.StringValue\x12\x37\n\x11\x63onversion_action\x18\t \x01(\x0b\x32\x1c.google.protobuf.StringValue\x12\x80\x01\n\x1a\x63onversion_reporting_state\x18\n \x01(\x0e\x32\\.google.ads.googleads.v0.enums.CallConversionReportingStateEnum.CallConversionReportingState\"P\n\x1b\x45xpandedDynamicSearchAdInfo\x12\x31\n\x0b\x64\x65scription\x18\x01 \x01(\x0b\x32\x1c.google.protobuf.StringValue\"\r\n\x0bHotelAdInfo\"\x15\n\x13ShoppingSmartAdInfo\"\x17\n\x15ShoppingProductAdInfo\"\x9d\x03\n\x0bGmailAdInfo\x12;\n\x06teaser\x18\x01 \x01(\x0b\x32+.google.ads.googleads.v0.common.GmailTeaser\x12\x32\n\x0cheader_image\x18\x02 \x01(\x0b\x32\x1c.google.protobuf.StringValue\x12\x35\n\x0fmarketing_image\x18\x03 \x01(\x0b\x32\x1c.google.protobuf.StringValue\x12>\n\x18marketing_image_headline\x18\x04 \x01(\x0b\x32\x1c.google.protobuf.StringValue\x12\x41\n\x1bmarketing_image_description\x18\x05 \x01(\x0b\x32\x1c.google.protobuf.StringValue\x12\x63\n&marketing_image_display_call_to_action\x18\x06 \x01(\x0b\x32\x33.google.ads.googleads.v0.common.DisplayCallToAction\"\xd7\x01\n\x0bGmailTeaser\x12.\n\x08headline\x18\x01 \x01(\x0b\x32\x1c.google.protobuf.StringValue\x12\x31\n\x0b\x64\x65scription\x18\x02 \x01(\x0b\x32\x1c.google.protobuf.StringValue\x12\x33\n\rbusiness_name\x18\x03 \x01(\x0b\x32\x1c.google.protobuf.StringValue\x12\x30\n\nlogo_image\x18\x04 \x01(\x0b\x32\x1c.google.protobuf.StringValue\"s\n\x13\x44isplayCallToAction\x12*\n\x04text\x18\x01 \x01(\x0b\x32\x1c.google.protobuf.StringValue\x12\x30\n\ntext_color\x18\x02 \x01(\x0b\x32\x1c.google.protobuf.StringValue\"\xb0\x04\n\x0bImageAdInfo\x12\x30\n\x0bpixel_width\x18\x04 \x01(\x0b\x32\x1b.google.protobuf.Int64Value\x12\x31\n\x0cpixel_height\x18\x05 \x01(\x0b\x32\x1b.google.protobuf.Int64Value\x12/\n\timage_url\x18\x06 \x01(\x0b\x32\x1c.google.protobuf.StringValue\x12\x38\n\x13preview_pixel_width\x18\x07 \x01(\x0b\x32\x1b.google.protobuf.Int64Value\x12\x39\n\x14preview_pixel_height\x18\x08 \x01(\x0b\x32\x1b.google.protobuf.Int64Value\x12\x37\n\x11preview_image_url\x18\t \x01(\x0b\x32\x1c.google.protobuf.StringValue\x12G\n\tmime_type\x18\n \x01(\x0e\x32\x34.google.ads.googleads.v0.enums.MimeTypeEnum.MimeType\x12*\n\x04name\x18\x0b \x01(\x0b\x32\x1c.google.protobuf.StringValue\x12\x32\n\nmedia_file\x18\x01 \x01(\x0b\x32\x1c.google.protobuf.StringValueH\x00\x12+\n\x04\x64\x61ta\x18\x02 \x01(\x0b\x32\x1b.google.protobuf.BytesValueH\x00\x42\x07\n\x05imageB\xc6\x01\n\"com.google.ads.googleads.v0.commonB\x10\x41\x64TypeInfosProtoP\x01ZDgoogle.golang.org/genproto/googleapis/ads/googleads/v0/common;common\xa2\x02\x03GAA\xaa\x02\x1eGoogle.Ads.GoogleAds.V0.Common\xca\x02\x1eGoogle\\Ads\\GoogleAds\\V0\\Commonb\x06proto3')
+  serialized_options=_b('\n\"com.google.ads.googleads.v0.commonB\020AdTypeInfosProtoP\001ZDgoogle.golang.org/genproto/googleapis/ads/googleads/v0/common;common\242\002\003GAA\252\002\036Google.Ads.GoogleAds.V0.Common\312\002\036Google\\Ads\\GoogleAds\\V0\\Common\352\002\"Google::Ads::GoogleAds::V0::Common'),
+  serialized_pb=_b('\n8google/ads/googleads_v0/proto/common/ad_type_infos.proto\x12\x1egoogle.ads.googleads.v0.common\x1aIgoogle/ads/googleads_v0/proto/enums/call_conversion_reporting_state.proto\x1a\x43google/ads/googleads_v0/proto/enums/display_ad_format_setting.proto\x1a\x33google/ads/googleads_v0/proto/enums/mime_type.proto\x1a\x1egoogle/protobuf/wrappers.proto\"\xa4\x01\n\nTextAdInfo\x12.\n\x08headline\x18\x01 \x01(\x0b\x32\x1c.google.protobuf.StringValue\x12\x32\n\x0c\x64\x65scription1\x18\x02 \x01(\x0b\x32\x1c.google.protobuf.StringValue\x12\x32\n\x0c\x64\x65scription2\x18\x03 \x01(\x0b\x32\x1c.google.protobuf.StringValue\"\xf7\x02\n\x12\x45xpandedTextAdInfo\x12\x34\n\x0eheadline_part1\x18\x01 \x01(\x0b\x32\x1c.google.protobuf.StringValue\x12\x34\n\x0eheadline_part2\x18\x02 \x01(\x0b\x32\x1c.google.protobuf.StringValue\x12\x34\n\x0eheadline_part3\x18\x06 \x01(\x0b\x32\x1c.google.protobuf.StringValue\x12\x31\n\x0b\x64\x65scription\x18\x03 \x01(\x0b\x32\x1c.google.protobuf.StringValue\x12\x32\n\x0c\x64\x65scription2\x18\x07 \x01(\x0b\x32\x1c.google.protobuf.StringValue\x12+\n\x05path1\x18\x04 \x01(\x0b\x32\x1c.google.protobuf.StringValue\x12+\n\x05path2\x18\x05 \x01(\x0b\x32\x1c.google.protobuf.StringValue\"}\n\x13\x44ynamicSearchAdInfo\x12\x32\n\x0c\x64\x65scription1\x18\x01 \x01(\x0b\x32\x1c.google.protobuf.StringValue\x12\x32\n\x0c\x64\x65scription2\x18\x02 \x01(\x0b\x32\x1c.google.protobuf.StringValue\"\xf7\x06\n\x17ResponsiveDisplayAdInfo\x12\x34\n\x0eshort_headline\x18\x01 \x01(\x0b\x32\x1c.google.protobuf.StringValue\x12\x33\n\rlong_headline\x18\x02 \x01(\x0b\x32\x1c.google.protobuf.StringValue\x12\x31\n\x0b\x64\x65scription\x18\x03 \x01(\x0b\x32\x1c.google.protobuf.StringValue\x12\x33\n\rbusiness_name\x18\x04 \x01(\x0b\x32\x1c.google.protobuf.StringValue\x12\x38\n\x14\x61llow_flexible_color\x18\x05 \x01(\x0b\x32\x1a.google.protobuf.BoolValue\x12\x32\n\x0c\x61\x63\x63\x65nt_color\x18\x06 \x01(\x0b\x32\x1c.google.protobuf.StringValue\x12\x30\n\nmain_color\x18\x07 \x01(\x0b\x32\x1c.google.protobuf.StringValue\x12\x39\n\x13\x63\x61ll_to_action_text\x18\x08 \x01(\x0b\x32\x1c.google.protobuf.StringValue\x12\x30\n\nlogo_image\x18\t \x01(\x0b\x32\x1c.google.protobuf.StringValue\x12\x37\n\x11square_logo_image\x18\n \x01(\x0b\x32\x1c.google.protobuf.StringValue\x12\x35\n\x0fmarketing_image\x18\x0b \x01(\x0b\x32\x1c.google.protobuf.StringValue\x12<\n\x16square_marketing_image\x18\x0c \x01(\x0b\x32\x1c.google.protobuf.StringValue\x12h\n\x0e\x66ormat_setting\x18\r \x01(\x0e\x32P.google.ads.googleads.v0.enums.DisplayAdFormatSettingEnum.DisplayAdFormatSetting\x12\x32\n\x0cprice_prefix\x18\x0e \x01(\x0b\x32\x1c.google.protobuf.StringValue\x12\x30\n\npromo_text\x18\x0f \x01(\x0b\x32\x1c.google.protobuf.StringValue\"\x85\x05\n\x0e\x43\x61llOnlyAdInfo\x12\x32\n\x0c\x63ountry_code\x18\x01 \x01(\x0b\x32\x1c.google.protobuf.StringValue\x12\x32\n\x0cphone_number\x18\x02 \x01(\x0b\x32\x1c.google.protobuf.StringValue\x12\x33\n\rbusiness_name\x18\x03 \x01(\x0b\x32\x1c.google.protobuf.StringValue\x12\x32\n\x0c\x64\x65scription1\x18\x04 \x01(\x0b\x32\x1c.google.protobuf.StringValue\x12\x32\n\x0c\x64\x65scription2\x18\x05 \x01(\x0b\x32\x1c.google.protobuf.StringValue\x12\x30\n\x0c\x63\x61ll_tracked\x18\x06 \x01(\x0b\x32\x1a.google.protobuf.BoolValue\x12;\n\x17\x64isable_call_conversion\x18\x07 \x01(\x0b\x32\x1a.google.protobuf.BoolValue\x12\x43\n\x1dphone_number_verification_url\x18\x08 \x01(\x0b\x32\x1c.google.protobuf.StringValue\x12\x37\n\x11\x63onversion_action\x18\t \x01(\x0b\x32\x1c.google.protobuf.StringValue\x12\x80\x01\n\x1a\x63onversion_reporting_state\x18\n \x01(\x0e\x32\\.google.ads.googleads.v0.enums.CallConversionReportingStateEnum.CallConversionReportingState\"P\n\x1b\x45xpandedDynamicSearchAdInfo\x12\x31\n\x0b\x64\x65scription\x18\x01 \x01(\x0b\x32\x1c.google.protobuf.StringValue\"\r\n\x0bHotelAdInfo\"\x15\n\x13ShoppingSmartAdInfo\"\x17\n\x15ShoppingProductAdInfo\"\x9d\x03\n\x0bGmailAdInfo\x12;\n\x06teaser\x18\x01 \x01(\x0b\x32+.google.ads.googleads.v0.common.GmailTeaser\x12\x32\n\x0cheader_image\x18\x02 \x01(\x0b\x32\x1c.google.protobuf.StringValue\x12\x35\n\x0fmarketing_image\x18\x03 \x01(\x0b\x32\x1c.google.protobuf.StringValue\x12>\n\x18marketing_image_headline\x18\x04 \x01(\x0b\x32\x1c.google.protobuf.StringValue\x12\x41\n\x1bmarketing_image_description\x18\x05 \x01(\x0b\x32\x1c.google.protobuf.StringValue\x12\x63\n&marketing_image_display_call_to_action\x18\x06 \x01(\x0b\x32\x33.google.ads.googleads.v0.common.DisplayCallToAction\"\xd7\x01\n\x0bGmailTeaser\x12.\n\x08headline\x18\x01 \x01(\x0b\x32\x1c.google.protobuf.StringValue\x12\x31\n\x0b\x64\x65scription\x18\x02 \x01(\x0b\x32\x1c.google.protobuf.StringValue\x12\x33\n\rbusiness_name\x18\x03 \x01(\x0b\x32\x1c.google.protobuf.StringValue\x12\x30\n\nlogo_image\x18\x04 \x01(\x0b\x32\x1c.google.protobuf.StringValue\"s\n\x13\x44isplayCallToAction\x12*\n\x04text\x18\x01 \x01(\x0b\x32\x1c.google.protobuf.StringValue\x12\x30\n\ntext_color\x18\x02 \x01(\x0b\x32\x1c.google.protobuf.StringValue\"\xb0\x04\n\x0bImageAdInfo\x12\x30\n\x0bpixel_width\x18\x04 \x01(\x0b\x32\x1b.google.protobuf.Int64Value\x12\x31\n\x0cpixel_height\x18\x05 \x01(\x0b\x32\x1b.google.protobuf.Int64Value\x12/\n\timage_url\x18\x06 \x01(\x0b\x32\x1c.google.protobuf.StringValue\x12\x38\n\x13preview_pixel_width\x18\x07 \x01(\x0b\x32\x1b.google.protobuf.Int64Value\x12\x39\n\x14preview_pixel_height\x18\x08 \x01(\x0b\x32\x1b.google.protobuf.Int64Value\x12\x37\n\x11preview_image_url\x18\t \x01(\x0b\x32\x1c.google.protobuf.StringValue\x12G\n\tmime_type\x18\n \x01(\x0e\x32\x34.google.ads.googleads.v0.enums.MimeTypeEnum.MimeType\x12*\n\x04name\x18\x0b \x01(\x0b\x32\x1c.google.protobuf.StringValue\x12\x32\n\nmedia_file\x18\x01 \x01(\x0b\x32\x1c.google.protobuf.StringValueH\x00\x12+\n\x04\x64\x61ta\x18\x02 \x01(\x0b\x32\x1b.google.protobuf.BytesValueH\x00\x42\x07\n\x05image\"\x8f\x01\n\x1bVideoTrueViewInStreamAdInfo\x12\x39\n\x13\x61\x63tion_button_label\x18\x01 \x01(\x0b\x32\x1c.google.protobuf.StringValue\x12\x35\n\x0f\x61\x63tion_headline\x18\x02 \x01(\x0b\x32\x1c.google.protobuf.StringValue\"\x9b\x01\n\x0bVideoAdInfo\x12\x30\n\nmedia_file\x18\x01 \x01(\x0b\x32\x1c.google.protobuf.StringValue\x12P\n\tin_stream\x18\x02 \x01(\x0b\x32;.google.ads.googleads.v0.common.VideoTrueViewInStreamAdInfoH\x00\x42\x08\n\x06\x66ormatB\xeb\x01\n\"com.google.ads.googleads.v0.commonB\x10\x41\x64TypeInfosProtoP\x01ZDgoogle.golang.org/genproto/googleapis/ads/googleads/v0/common;common\xa2\x02\x03GAA\xaa\x02\x1eGoogle.Ads.GoogleAds.V0.Common\xca\x02\x1eGoogle\\Ads\\GoogleAds\\V0\\Common\xea\x02\"Google::Ads::GoogleAds::V0::Commonb\x06proto3')
   ,
   dependencies=[google_dot_ads_dot_googleads__v0_dot_proto_dot_enums_dot_call__conversion__reporting__state__pb2.DESCRIPTOR,google_dot_ads_dot_googleads__v0_dot_proto_dot_enums_dot_display__ad__format__setting__pb2.DESCRIPTOR,google_dot_ads_dot_googleads__v0_dot_proto_dot_enums_dot_mime__type__pb2.DESCRIPTOR,google_dot_protobuf_dot_wrappers__pb2.DESCRIPTOR,])
 
@@ -43,28 +43,28 @@ _TEXTADINFO = _descriptor.Descriptor(
       has_default_value=False, default_value=None,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
-      options=None, file=DESCRIPTOR),
+      serialized_options=None, file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
       name='description1', full_name='google.ads.googleads.v0.common.TextAdInfo.description1', index=1,
       number=2, type=11, cpp_type=10, label=1,
       has_default_value=False, default_value=None,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
-      options=None, file=DESCRIPTOR),
+      serialized_options=None, file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
       name='description2', full_name='google.ads.googleads.v0.common.TextAdInfo.description2', index=2,
       number=3, type=11, cpp_type=10, label=1,
       has_default_value=False, default_value=None,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
-      options=None, file=DESCRIPTOR),
+      serialized_options=None, file=DESCRIPTOR),
   ],
   extensions=[
   ],
   nested_types=[],
   enum_types=[
   ],
-  options=None,
+  serialized_options=None,
   is_extendable=False,
   syntax='proto3',
   extension_ranges=[],
@@ -88,56 +88,56 @@ _EXPANDEDTEXTADINFO = _descriptor.Descriptor(
       has_default_value=False, default_value=None,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
-      options=None, file=DESCRIPTOR),
+      serialized_options=None, file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
       name='headline_part2', full_name='google.ads.googleads.v0.common.ExpandedTextAdInfo.headline_part2', index=1,
       number=2, type=11, cpp_type=10, label=1,
       has_default_value=False, default_value=None,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
-      options=None, file=DESCRIPTOR),
+      serialized_options=None, file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
       name='headline_part3', full_name='google.ads.googleads.v0.common.ExpandedTextAdInfo.headline_part3', index=2,
       number=6, type=11, cpp_type=10, label=1,
       has_default_value=False, default_value=None,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
-      options=None, file=DESCRIPTOR),
+      serialized_options=None, file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
       name='description', full_name='google.ads.googleads.v0.common.ExpandedTextAdInfo.description', index=3,
       number=3, type=11, cpp_type=10, label=1,
       has_default_value=False, default_value=None,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
-      options=None, file=DESCRIPTOR),
+      serialized_options=None, file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
       name='description2', full_name='google.ads.googleads.v0.common.ExpandedTextAdInfo.description2', index=4,
       number=7, type=11, cpp_type=10, label=1,
       has_default_value=False, default_value=None,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
-      options=None, file=DESCRIPTOR),
+      serialized_options=None, file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
       name='path1', full_name='google.ads.googleads.v0.common.ExpandedTextAdInfo.path1', index=5,
       number=4, type=11, cpp_type=10, label=1,
       has_default_value=False, default_value=None,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
-      options=None, file=DESCRIPTOR),
+      serialized_options=None, file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
       name='path2', full_name='google.ads.googleads.v0.common.ExpandedTextAdInfo.path2', index=6,
       number=5, type=11, cpp_type=10, label=1,
       has_default_value=False, default_value=None,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
-      options=None, file=DESCRIPTOR),
+      serialized_options=None, file=DESCRIPTOR),
   ],
   extensions=[
   ],
   nested_types=[],
   enum_types=[
   ],
-  options=None,
+  serialized_options=None,
   is_extendable=False,
   syntax='proto3',
   extension_ranges=[],
@@ -161,21 +161,21 @@ _DYNAMICSEARCHADINFO = _descriptor.Descriptor(
       has_default_value=False, default_value=None,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
-      options=None, file=DESCRIPTOR),
+      serialized_options=None, file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
       name='description2', full_name='google.ads.googleads.v0.common.DynamicSearchAdInfo.description2', index=1,
       number=2, type=11, cpp_type=10, label=1,
       has_default_value=False, default_value=None,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
-      options=None, file=DESCRIPTOR),
+      serialized_options=None, file=DESCRIPTOR),
   ],
   extensions=[
   ],
   nested_types=[],
   enum_types=[
   ],
-  options=None,
+  serialized_options=None,
   is_extendable=False,
   syntax='proto3',
   extension_ranges=[],
@@ -199,112 +199,112 @@ _RESPONSIVEDISPLAYADINFO = _descriptor.Descriptor(
       has_default_value=False, default_value=None,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
-      options=None, file=DESCRIPTOR),
+      serialized_options=None, file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
       name='long_headline', full_name='google.ads.googleads.v0.common.ResponsiveDisplayAdInfo.long_headline', index=1,
       number=2, type=11, cpp_type=10, label=1,
       has_default_value=False, default_value=None,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
-      options=None, file=DESCRIPTOR),
+      serialized_options=None, file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
       name='description', full_name='google.ads.googleads.v0.common.ResponsiveDisplayAdInfo.description', index=2,
       number=3, type=11, cpp_type=10, label=1,
       has_default_value=False, default_value=None,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
-      options=None, file=DESCRIPTOR),
+      serialized_options=None, file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
       name='business_name', full_name='google.ads.googleads.v0.common.ResponsiveDisplayAdInfo.business_name', index=3,
       number=4, type=11, cpp_type=10, label=1,
       has_default_value=False, default_value=None,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
-      options=None, file=DESCRIPTOR),
+      serialized_options=None, file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
       name='allow_flexible_color', full_name='google.ads.googleads.v0.common.ResponsiveDisplayAdInfo.allow_flexible_color', index=4,
       number=5, type=11, cpp_type=10, label=1,
       has_default_value=False, default_value=None,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
-      options=None, file=DESCRIPTOR),
+      serialized_options=None, file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
       name='accent_color', full_name='google.ads.googleads.v0.common.ResponsiveDisplayAdInfo.accent_color', index=5,
       number=6, type=11, cpp_type=10, label=1,
       has_default_value=False, default_value=None,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
-      options=None, file=DESCRIPTOR),
+      serialized_options=None, file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
       name='main_color', full_name='google.ads.googleads.v0.common.ResponsiveDisplayAdInfo.main_color', index=6,
       number=7, type=11, cpp_type=10, label=1,
       has_default_value=False, default_value=None,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
-      options=None, file=DESCRIPTOR),
+      serialized_options=None, file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
       name='call_to_action_text', full_name='google.ads.googleads.v0.common.ResponsiveDisplayAdInfo.call_to_action_text', index=7,
       number=8, type=11, cpp_type=10, label=1,
       has_default_value=False, default_value=None,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
-      options=None, file=DESCRIPTOR),
+      serialized_options=None, file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
       name='logo_image', full_name='google.ads.googleads.v0.common.ResponsiveDisplayAdInfo.logo_image', index=8,
       number=9, type=11, cpp_type=10, label=1,
       has_default_value=False, default_value=None,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
-      options=None, file=DESCRIPTOR),
+      serialized_options=None, file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
       name='square_logo_image', full_name='google.ads.googleads.v0.common.ResponsiveDisplayAdInfo.square_logo_image', index=9,
       number=10, type=11, cpp_type=10, label=1,
       has_default_value=False, default_value=None,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
-      options=None, file=DESCRIPTOR),
+      serialized_options=None, file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
       name='marketing_image', full_name='google.ads.googleads.v0.common.ResponsiveDisplayAdInfo.marketing_image', index=10,
       number=11, type=11, cpp_type=10, label=1,
       has_default_value=False, default_value=None,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
-      options=None, file=DESCRIPTOR),
+      serialized_options=None, file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
       name='square_marketing_image', full_name='google.ads.googleads.v0.common.ResponsiveDisplayAdInfo.square_marketing_image', index=11,
       number=12, type=11, cpp_type=10, label=1,
       has_default_value=False, default_value=None,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
-      options=None, file=DESCRIPTOR),
+      serialized_options=None, file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
       name='format_setting', full_name='google.ads.googleads.v0.common.ResponsiveDisplayAdInfo.format_setting', index=12,
       number=13, type=14, cpp_type=8, label=1,
       has_default_value=False, default_value=0,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
-      options=None, file=DESCRIPTOR),
+      serialized_options=None, file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
       name='price_prefix', full_name='google.ads.googleads.v0.common.ResponsiveDisplayAdInfo.price_prefix', index=13,
       number=14, type=11, cpp_type=10, label=1,
       has_default_value=False, default_value=None,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
-      options=None, file=DESCRIPTOR),
+      serialized_options=None, file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
       name='promo_text', full_name='google.ads.googleads.v0.common.ResponsiveDisplayAdInfo.promo_text', index=14,
       number=15, type=11, cpp_type=10, label=1,
       has_default_value=False, default_value=None,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
-      options=None, file=DESCRIPTOR),
+      serialized_options=None, file=DESCRIPTOR),
   ],
   extensions=[
   ],
   nested_types=[],
   enum_types=[
   ],
-  options=None,
+  serialized_options=None,
   is_extendable=False,
   syntax='proto3',
   extension_ranges=[],
@@ -328,77 +328,77 @@ _CALLONLYADINFO = _descriptor.Descriptor(
       has_default_value=False, default_value=None,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
-      options=None, file=DESCRIPTOR),
+      serialized_options=None, file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
       name='phone_number', full_name='google.ads.googleads.v0.common.CallOnlyAdInfo.phone_number', index=1,
       number=2, type=11, cpp_type=10, label=1,
       has_default_value=False, default_value=None,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
-      options=None, file=DESCRIPTOR),
+      serialized_options=None, file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
       name='business_name', full_name='google.ads.googleads.v0.common.CallOnlyAdInfo.business_name', index=2,
       number=3, type=11, cpp_type=10, label=1,
       has_default_value=False, default_value=None,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
-      options=None, file=DESCRIPTOR),
+      serialized_options=None, file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
       name='description1', full_name='google.ads.googleads.v0.common.CallOnlyAdInfo.description1', index=3,
       number=4, type=11, cpp_type=10, label=1,
       has_default_value=False, default_value=None,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
-      options=None, file=DESCRIPTOR),
+      serialized_options=None, file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
       name='description2', full_name='google.ads.googleads.v0.common.CallOnlyAdInfo.description2', index=4,
       number=5, type=11, cpp_type=10, label=1,
       has_default_value=False, default_value=None,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
-      options=None, file=DESCRIPTOR),
+      serialized_options=None, file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
       name='call_tracked', full_name='google.ads.googleads.v0.common.CallOnlyAdInfo.call_tracked', index=5,
       number=6, type=11, cpp_type=10, label=1,
       has_default_value=False, default_value=None,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
-      options=None, file=DESCRIPTOR),
+      serialized_options=None, file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
       name='disable_call_conversion', full_name='google.ads.googleads.v0.common.CallOnlyAdInfo.disable_call_conversion', index=6,
       number=7, type=11, cpp_type=10, label=1,
       has_default_value=False, default_value=None,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
-      options=None, file=DESCRIPTOR),
+      serialized_options=None, file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
       name='phone_number_verification_url', full_name='google.ads.googleads.v0.common.CallOnlyAdInfo.phone_number_verification_url', index=7,
       number=8, type=11, cpp_type=10, label=1,
       has_default_value=False, default_value=None,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
-      options=None, file=DESCRIPTOR),
+      serialized_options=None, file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
       name='conversion_action', full_name='google.ads.googleads.v0.common.CallOnlyAdInfo.conversion_action', index=8,
       number=9, type=11, cpp_type=10, label=1,
       has_default_value=False, default_value=None,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
-      options=None, file=DESCRIPTOR),
+      serialized_options=None, file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
       name='conversion_reporting_state', full_name='google.ads.googleads.v0.common.CallOnlyAdInfo.conversion_reporting_state', index=9,
       number=10, type=14, cpp_type=8, label=1,
       has_default_value=False, default_value=0,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
-      options=None, file=DESCRIPTOR),
+      serialized_options=None, file=DESCRIPTOR),
   ],
   extensions=[
   ],
   nested_types=[],
   enum_types=[
   ],
-  options=None,
+  serialized_options=None,
   is_extendable=False,
   syntax='proto3',
   extension_ranges=[],
@@ -422,14 +422,14 @@ _EXPANDEDDYNAMICSEARCHADINFO = _descriptor.Descriptor(
       has_default_value=False, default_value=None,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
-      options=None, file=DESCRIPTOR),
+      serialized_options=None, file=DESCRIPTOR),
   ],
   extensions=[
   ],
   nested_types=[],
   enum_types=[
   ],
-  options=None,
+  serialized_options=None,
   is_extendable=False,
   syntax='proto3',
   extension_ranges=[],
@@ -453,7 +453,7 @@ _HOTELADINFO = _descriptor.Descriptor(
   nested_types=[],
   enum_types=[
   ],
-  options=None,
+  serialized_options=None,
   is_extendable=False,
   syntax='proto3',
   extension_ranges=[],
@@ -477,7 +477,7 @@ _SHOPPINGSMARTADINFO = _descriptor.Descriptor(
   nested_types=[],
   enum_types=[
   ],
-  options=None,
+  serialized_options=None,
   is_extendable=False,
   syntax='proto3',
   extension_ranges=[],
@@ -501,7 +501,7 @@ _SHOPPINGPRODUCTADINFO = _descriptor.Descriptor(
   nested_types=[],
   enum_types=[
   ],
-  options=None,
+  serialized_options=None,
   is_extendable=False,
   syntax='proto3',
   extension_ranges=[],
@@ -525,49 +525,49 @@ _GMAILADINFO = _descriptor.Descriptor(
       has_default_value=False, default_value=None,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
-      options=None, file=DESCRIPTOR),
+      serialized_options=None, file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
       name='header_image', full_name='google.ads.googleads.v0.common.GmailAdInfo.header_image', index=1,
       number=2, type=11, cpp_type=10, label=1,
       has_default_value=False, default_value=None,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
-      options=None, file=DESCRIPTOR),
+      serialized_options=None, file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
       name='marketing_image', full_name='google.ads.googleads.v0.common.GmailAdInfo.marketing_image', index=2,
       number=3, type=11, cpp_type=10, label=1,
       has_default_value=False, default_value=None,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
-      options=None, file=DESCRIPTOR),
+      serialized_options=None, file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
       name='marketing_image_headline', full_name='google.ads.googleads.v0.common.GmailAdInfo.marketing_image_headline', index=3,
       number=4, type=11, cpp_type=10, label=1,
       has_default_value=False, default_value=None,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
-      options=None, file=DESCRIPTOR),
+      serialized_options=None, file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
       name='marketing_image_description', full_name='google.ads.googleads.v0.common.GmailAdInfo.marketing_image_description', index=4,
       number=5, type=11, cpp_type=10, label=1,
       has_default_value=False, default_value=None,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
-      options=None, file=DESCRIPTOR),
+      serialized_options=None, file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
       name='marketing_image_display_call_to_action', full_name='google.ads.googleads.v0.common.GmailAdInfo.marketing_image_display_call_to_action', index=5,
       number=6, type=11, cpp_type=10, label=1,
       has_default_value=False, default_value=None,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
-      options=None, file=DESCRIPTOR),
+      serialized_options=None, file=DESCRIPTOR),
   ],
   extensions=[
   ],
   nested_types=[],
   enum_types=[
   ],
-  options=None,
+  serialized_options=None,
   is_extendable=False,
   syntax='proto3',
   extension_ranges=[],
@@ -591,35 +591,35 @@ _GMAILTEASER = _descriptor.Descriptor(
       has_default_value=False, default_value=None,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
-      options=None, file=DESCRIPTOR),
+      serialized_options=None, file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
       name='description', full_name='google.ads.googleads.v0.common.GmailTeaser.description', index=1,
       number=2, type=11, cpp_type=10, label=1,
       has_default_value=False, default_value=None,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
-      options=None, file=DESCRIPTOR),
+      serialized_options=None, file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
       name='business_name', full_name='google.ads.googleads.v0.common.GmailTeaser.business_name', index=2,
       number=3, type=11, cpp_type=10, label=1,
       has_default_value=False, default_value=None,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
-      options=None, file=DESCRIPTOR),
+      serialized_options=None, file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
       name='logo_image', full_name='google.ads.googleads.v0.common.GmailTeaser.logo_image', index=3,
       number=4, type=11, cpp_type=10, label=1,
       has_default_value=False, default_value=None,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
-      options=None, file=DESCRIPTOR),
+      serialized_options=None, file=DESCRIPTOR),
   ],
   extensions=[
   ],
   nested_types=[],
   enum_types=[
   ],
-  options=None,
+  serialized_options=None,
   is_extendable=False,
   syntax='proto3',
   extension_ranges=[],
@@ -643,21 +643,21 @@ _DISPLAYCALLTOACTION = _descriptor.Descriptor(
       has_default_value=False, default_value=None,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
-      options=None, file=DESCRIPTOR),
+      serialized_options=None, file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
       name='text_color', full_name='google.ads.googleads.v0.common.DisplayCallToAction.text_color', index=1,
       number=2, type=11, cpp_type=10, label=1,
       has_default_value=False, default_value=None,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
-      options=None, file=DESCRIPTOR),
+      serialized_options=None, file=DESCRIPTOR),
   ],
   extensions=[
   ],
   nested_types=[],
   enum_types=[
   ],
-  options=None,
+  serialized_options=None,
   is_extendable=False,
   syntax='proto3',
   extension_ranges=[],
@@ -681,77 +681,77 @@ _IMAGEADINFO = _descriptor.Descriptor(
       has_default_value=False, default_value=None,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
-      options=None, file=DESCRIPTOR),
+      serialized_options=None, file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
       name='pixel_height', full_name='google.ads.googleads.v0.common.ImageAdInfo.pixel_height', index=1,
       number=5, type=11, cpp_type=10, label=1,
       has_default_value=False, default_value=None,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
-      options=None, file=DESCRIPTOR),
+      serialized_options=None, file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
       name='image_url', full_name='google.ads.googleads.v0.common.ImageAdInfo.image_url', index=2,
       number=6, type=11, cpp_type=10, label=1,
       has_default_value=False, default_value=None,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
-      options=None, file=DESCRIPTOR),
+      serialized_options=None, file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
       name='preview_pixel_width', full_name='google.ads.googleads.v0.common.ImageAdInfo.preview_pixel_width', index=3,
       number=7, type=11, cpp_type=10, label=1,
       has_default_value=False, default_value=None,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
-      options=None, file=DESCRIPTOR),
+      serialized_options=None, file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
       name='preview_pixel_height', full_name='google.ads.googleads.v0.common.ImageAdInfo.preview_pixel_height', index=4,
       number=8, type=11, cpp_type=10, label=1,
       has_default_value=False, default_value=None,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
-      options=None, file=DESCRIPTOR),
+      serialized_options=None, file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
       name='preview_image_url', full_name='google.ads.googleads.v0.common.ImageAdInfo.preview_image_url', index=5,
       number=9, type=11, cpp_type=10, label=1,
       has_default_value=False, default_value=None,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
-      options=None, file=DESCRIPTOR),
+      serialized_options=None, file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
       name='mime_type', full_name='google.ads.googleads.v0.common.ImageAdInfo.mime_type', index=6,
       number=10, type=14, cpp_type=8, label=1,
       has_default_value=False, default_value=0,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
-      options=None, file=DESCRIPTOR),
+      serialized_options=None, file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
       name='name', full_name='google.ads.googleads.v0.common.ImageAdInfo.name', index=7,
       number=11, type=11, cpp_type=10, label=1,
       has_default_value=False, default_value=None,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
-      options=None, file=DESCRIPTOR),
+      serialized_options=None, file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
       name='media_file', full_name='google.ads.googleads.v0.common.ImageAdInfo.media_file', index=8,
       number=1, type=11, cpp_type=10, label=1,
       has_default_value=False, default_value=None,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
-      options=None, file=DESCRIPTOR),
+      serialized_options=None, file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
       name='data', full_name='google.ads.googleads.v0.common.ImageAdInfo.data', index=9,
       number=2, type=11, cpp_type=10, label=1,
       has_default_value=False, default_value=None,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
-      options=None, file=DESCRIPTOR),
+      serialized_options=None, file=DESCRIPTOR),
   ],
   extensions=[
   ],
   nested_types=[],
   enum_types=[
   ],
-  options=None,
+  serialized_options=None,
   is_extendable=False,
   syntax='proto3',
   extension_ranges=[],
@@ -762,6 +762,85 @@ _IMAGEADINFO = _descriptor.Descriptor(
   ],
   serialized_start=3428,
   serialized_end=3988,
+)
+
+
+_VIDEOTRUEVIEWINSTREAMADINFO = _descriptor.Descriptor(
+  name='VideoTrueViewInStreamAdInfo',
+  full_name='google.ads.googleads.v0.common.VideoTrueViewInStreamAdInfo',
+  filename=None,
+  file=DESCRIPTOR,
+  containing_type=None,
+  fields=[
+    _descriptor.FieldDescriptor(
+      name='action_button_label', full_name='google.ads.googleads.v0.common.VideoTrueViewInStreamAdInfo.action_button_label', index=0,
+      number=1, type=11, cpp_type=10, label=1,
+      has_default_value=False, default_value=None,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR),
+    _descriptor.FieldDescriptor(
+      name='action_headline', full_name='google.ads.googleads.v0.common.VideoTrueViewInStreamAdInfo.action_headline', index=1,
+      number=2, type=11, cpp_type=10, label=1,
+      has_default_value=False, default_value=None,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR),
+  ],
+  extensions=[
+  ],
+  nested_types=[],
+  enum_types=[
+  ],
+  serialized_options=None,
+  is_extendable=False,
+  syntax='proto3',
+  extension_ranges=[],
+  oneofs=[
+  ],
+  serialized_start=3991,
+  serialized_end=4134,
+)
+
+
+_VIDEOADINFO = _descriptor.Descriptor(
+  name='VideoAdInfo',
+  full_name='google.ads.googleads.v0.common.VideoAdInfo',
+  filename=None,
+  file=DESCRIPTOR,
+  containing_type=None,
+  fields=[
+    _descriptor.FieldDescriptor(
+      name='media_file', full_name='google.ads.googleads.v0.common.VideoAdInfo.media_file', index=0,
+      number=1, type=11, cpp_type=10, label=1,
+      has_default_value=False, default_value=None,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR),
+    _descriptor.FieldDescriptor(
+      name='in_stream', full_name='google.ads.googleads.v0.common.VideoAdInfo.in_stream', index=1,
+      number=2, type=11, cpp_type=10, label=1,
+      has_default_value=False, default_value=None,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR),
+  ],
+  extensions=[
+  ],
+  nested_types=[],
+  enum_types=[
+  ],
+  serialized_options=None,
+  is_extendable=False,
+  syntax='proto3',
+  extension_ranges=[],
+  oneofs=[
+    _descriptor.OneofDescriptor(
+      name='format', full_name='google.ads.googleads.v0.common.VideoAdInfo.format',
+      index=0, containing_type=None, fields=[]),
+  ],
+  serialized_start=4137,
+  serialized_end=4292,
 )
 
 _TEXTADINFO.fields_by_name['headline'].message_type = google_dot_protobuf_dot_wrappers__pb2._STRINGVALUE
@@ -830,6 +909,13 @@ _IMAGEADINFO.fields_by_name['media_file'].containing_oneof = _IMAGEADINFO.oneofs
 _IMAGEADINFO.oneofs_by_name['image'].fields.append(
   _IMAGEADINFO.fields_by_name['data'])
 _IMAGEADINFO.fields_by_name['data'].containing_oneof = _IMAGEADINFO.oneofs_by_name['image']
+_VIDEOTRUEVIEWINSTREAMADINFO.fields_by_name['action_button_label'].message_type = google_dot_protobuf_dot_wrappers__pb2._STRINGVALUE
+_VIDEOTRUEVIEWINSTREAMADINFO.fields_by_name['action_headline'].message_type = google_dot_protobuf_dot_wrappers__pb2._STRINGVALUE
+_VIDEOADINFO.fields_by_name['media_file'].message_type = google_dot_protobuf_dot_wrappers__pb2._STRINGVALUE
+_VIDEOADINFO.fields_by_name['in_stream'].message_type = _VIDEOTRUEVIEWINSTREAMADINFO
+_VIDEOADINFO.oneofs_by_name['format'].fields.append(
+  _VIDEOADINFO.fields_by_name['in_stream'])
+_VIDEOADINFO.fields_by_name['in_stream'].containing_oneof = _VIDEOADINFO.oneofs_by_name['format']
 DESCRIPTOR.message_types_by_name['TextAdInfo'] = _TEXTADINFO
 DESCRIPTOR.message_types_by_name['ExpandedTextAdInfo'] = _EXPANDEDTEXTADINFO
 DESCRIPTOR.message_types_by_name['DynamicSearchAdInfo'] = _DYNAMICSEARCHADINFO
@@ -843,11 +929,13 @@ DESCRIPTOR.message_types_by_name['GmailAdInfo'] = _GMAILADINFO
 DESCRIPTOR.message_types_by_name['GmailTeaser'] = _GMAILTEASER
 DESCRIPTOR.message_types_by_name['DisplayCallToAction'] = _DISPLAYCALLTOACTION
 DESCRIPTOR.message_types_by_name['ImageAdInfo'] = _IMAGEADINFO
+DESCRIPTOR.message_types_by_name['VideoTrueViewInStreamAdInfo'] = _VIDEOTRUEVIEWINSTREAMADINFO
+DESCRIPTOR.message_types_by_name['VideoAdInfo'] = _VIDEOADINFO
 _sym_db.RegisterFileDescriptor(DESCRIPTOR)
 
 TextAdInfo = _reflection.GeneratedProtocolMessageType('TextAdInfo', (_message.Message,), dict(
   DESCRIPTOR = _TEXTADINFO,
-  __module__ = 'google.ads.google_ads.v0.proto.common.ad_type_infos_pb2'
+  __module__ = 'google.ads.googleads_v0.proto.common.ad_type_infos_pb2'
   ,
   __doc__ = """A text ad.
   
@@ -866,7 +954,7 @@ _sym_db.RegisterMessage(TextAdInfo)
 
 ExpandedTextAdInfo = _reflection.GeneratedProtocolMessageType('ExpandedTextAdInfo', (_message.Message,), dict(
   DESCRIPTOR = _EXPANDEDTEXTADINFO,
-  __module__ = 'google.ads.google_ads.v0.proto.common.ad_type_infos_pb2'
+  __module__ = 'google.ads.googleads_v0.proto.common.ad_type_infos_pb2'
   ,
   __doc__ = """An expanded text ad.
   
@@ -894,7 +982,7 @@ _sym_db.RegisterMessage(ExpandedTextAdInfo)
 
 DynamicSearchAdInfo = _reflection.GeneratedProtocolMessageType('DynamicSearchAdInfo', (_message.Message,), dict(
   DESCRIPTOR = _DYNAMICSEARCHADINFO,
-  __module__ = 'google.ads.google_ads.v0.proto.common.ad_type_infos_pb2'
+  __module__ = 'google.ads.googleads_v0.proto.common.ad_type_infos_pb2'
   ,
   __doc__ = """A dynamic search ad.
   
@@ -911,7 +999,7 @@ _sym_db.RegisterMessage(DynamicSearchAdInfo)
 
 ResponsiveDisplayAdInfo = _reflection.GeneratedProtocolMessageType('ResponsiveDisplayAdInfo', (_message.Message,), dict(
   DESCRIPTOR = _RESPONSIVEDISPLAYADINFO,
-  __module__ = 'google.ads.google_ads.v0.proto.common.ad_type_infos_pb2'
+  __module__ = 'google.ads.googleads_v0.proto.common.ad_type_infos_pb2'
   ,
   __doc__ = """A responsive display ad.
   
@@ -967,7 +1055,7 @@ _sym_db.RegisterMessage(ResponsiveDisplayAdInfo)
 
 CallOnlyAdInfo = _reflection.GeneratedProtocolMessageType('CallOnlyAdInfo', (_message.Message,), dict(
   DESCRIPTOR = _CALLONLYADINFO,
-  __module__ = 'google.ads.google_ads.v0.proto.common.ad_type_infos_pb2'
+  __module__ = 'google.ads.googleads_v0.proto.common.ad_type_infos_pb2'
   ,
   __doc__ = """A call-only ad.
   
@@ -1009,7 +1097,7 @@ _sym_db.RegisterMessage(CallOnlyAdInfo)
 
 ExpandedDynamicSearchAdInfo = _reflection.GeneratedProtocolMessageType('ExpandedDynamicSearchAdInfo', (_message.Message,), dict(
   DESCRIPTOR = _EXPANDEDDYNAMICSEARCHADINFO,
-  __module__ = 'google.ads.google_ads.v0.proto.common.ad_type_infos_pb2'
+  __module__ = 'google.ads.googleads_v0.proto.common.ad_type_infos_pb2'
   ,
   __doc__ = """An expanded dynamic search ad.
   
@@ -1024,7 +1112,7 @@ _sym_db.RegisterMessage(ExpandedDynamicSearchAdInfo)
 
 HotelAdInfo = _reflection.GeneratedProtocolMessageType('HotelAdInfo', (_message.Message,), dict(
   DESCRIPTOR = _HOTELADINFO,
-  __module__ = 'google.ads.google_ads.v0.proto.common.ad_type_infos_pb2'
+  __module__ = 'google.ads.googleads_v0.proto.common.ad_type_infos_pb2'
   ,
   __doc__ = """A hotel ad.
   """,
@@ -1034,7 +1122,7 @@ _sym_db.RegisterMessage(HotelAdInfo)
 
 ShoppingSmartAdInfo = _reflection.GeneratedProtocolMessageType('ShoppingSmartAdInfo', (_message.Message,), dict(
   DESCRIPTOR = _SHOPPINGSMARTADINFO,
-  __module__ = 'google.ads.google_ads.v0.proto.common.ad_type_infos_pb2'
+  __module__ = 'google.ads.googleads_v0.proto.common.ad_type_infos_pb2'
   ,
   __doc__ = """A Smart Shopping ad.
   """,
@@ -1044,7 +1132,7 @@ _sym_db.RegisterMessage(ShoppingSmartAdInfo)
 
 ShoppingProductAdInfo = _reflection.GeneratedProtocolMessageType('ShoppingProductAdInfo', (_message.Message,), dict(
   DESCRIPTOR = _SHOPPINGPRODUCTADINFO,
-  __module__ = 'google.ads.google_ads.v0.proto.common.ad_type_infos_pb2'
+  __module__ = 'google.ads.googleads_v0.proto.common.ad_type_infos_pb2'
   ,
   __doc__ = """A standard Shopping ad.
   """,
@@ -1054,7 +1142,7 @@ _sym_db.RegisterMessage(ShoppingProductAdInfo)
 
 GmailAdInfo = _reflection.GeneratedProtocolMessageType('GmailAdInfo', (_message.Message,), dict(
   DESCRIPTOR = _GMAILADINFO,
-  __module__ = 'google.ads.google_ads.v0.proto.common.ad_type_infos_pb2'
+  __module__ = 'google.ads.googleads_v0.proto.common.ad_type_infos_pb2'
   ,
   __doc__ = """A Gmail ad.
   
@@ -1086,7 +1174,7 @@ _sym_db.RegisterMessage(GmailAdInfo)
 
 GmailTeaser = _reflection.GeneratedProtocolMessageType('GmailTeaser', (_message.Message,), dict(
   DESCRIPTOR = _GMAILTEASER,
-  __module__ = 'google.ads.google_ads.v0.proto.common.ad_type_infos_pb2'
+  __module__ = 'google.ads.googleads_v0.proto.common.ad_type_infos_pb2'
   ,
   __doc__ = """Gmail teaser data. The teaser is a small header that acts as an
   invitation to view the rest of the ad (the body).
@@ -1110,7 +1198,7 @@ _sym_db.RegisterMessage(GmailTeaser)
 
 DisplayCallToAction = _reflection.GeneratedProtocolMessageType('DisplayCallToAction', (_message.Message,), dict(
   DESCRIPTOR = _DISPLAYCALLTOACTION,
-  __module__ = 'google.ads.google_ads.v0.proto.common.ad_type_infos_pb2'
+  __module__ = 'google.ads.googleads_v0.proto.common.ad_type_infos_pb2'
   ,
   __doc__ = """Data for display call to action. The call to action is a piece of the ad
   that prompts the user to do something. Like clicking a link or making a
@@ -1130,7 +1218,7 @@ _sym_db.RegisterMessage(DisplayCallToAction)
 
 ImageAdInfo = _reflection.GeneratedProtocolMessageType('ImageAdInfo', (_message.Message,), dict(
   DESCRIPTOR = _IMAGEADINFO,
-  __module__ = 'google.ads.google_ads.v0.proto.common.ad_type_infos_pb2'
+  __module__ = 'google.ads.googleads_v0.proto.common.ad_type_infos_pb2'
   ,
   __doc__ = """An image ad.
   
@@ -1167,7 +1255,47 @@ ImageAdInfo = _reflection.GeneratedProtocolMessageType('ImageAdInfo', (_message.
   ))
 _sym_db.RegisterMessage(ImageAdInfo)
 
+VideoTrueViewInStreamAdInfo = _reflection.GeneratedProtocolMessageType('VideoTrueViewInStreamAdInfo', (_message.Message,), dict(
+  DESCRIPTOR = _VIDEOTRUEVIEWINSTREAMADINFO,
+  __module__ = 'google.ads.googleads_v0.proto.common.ad_type_infos_pb2'
+  ,
+  __doc__ = """Representation of video TrueView in-stream ad format (ad shown during
+  video playback, often at beginning, which displays a skip button a few
+  seconds into the video).
+  
+  
+  Attributes:
+      action_button_label:
+          Label on the CTA (call-to-action) button taking the user to
+          the video ad's final URL. Required for TrueView for action
+          campaigns, optional otherwise.
+      action_headline:
+          Additional text displayed with the CTA (call-to-action) button
+          to give context and encourage clicking on the button.
+  """,
+  # @@protoc_insertion_point(class_scope:google.ads.googleads.v0.common.VideoTrueViewInStreamAdInfo)
+  ))
+_sym_db.RegisterMessage(VideoTrueViewInStreamAdInfo)
 
-DESCRIPTOR.has_options = True
-DESCRIPTOR._options = _descriptor._ParseOptions(descriptor_pb2.FileOptions(), _b('\n\"com.google.ads.googleads.v0.commonB\020AdTypeInfosProtoP\001ZDgoogle.golang.org/genproto/googleapis/ads/googleads/v0/common;common\242\002\003GAA\252\002\036Google.Ads.GoogleAds.V0.Common\312\002\036Google\\Ads\\GoogleAds\\V0\\Common'))
+VideoAdInfo = _reflection.GeneratedProtocolMessageType('VideoAdInfo', (_message.Message,), dict(
+  DESCRIPTOR = _VIDEOADINFO,
+  __module__ = 'google.ads.googleads_v0.proto.common.ad_type_infos_pb2'
+  ,
+  __doc__ = """A video ad.
+  
+  
+  Attributes:
+      media_file:
+          The MediaFile resource to use for the video.
+      format:
+          Format-specific schema for the different video formats.
+      in_stream:
+          Video TrueView in-stream format.
+  """,
+  # @@protoc_insertion_point(class_scope:google.ads.googleads.v0.common.VideoAdInfo)
+  ))
+_sym_db.RegisterMessage(VideoAdInfo)
+
+
+DESCRIPTOR._options = None
 # @@protoc_insertion_point(module_scope)

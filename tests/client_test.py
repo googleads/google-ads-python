@@ -950,42 +950,54 @@ class ExceptionInterceptorTest(TestCase):
         """Raises non-retryable GoogleAdsFailures as GoogleAdsExceptions."""
         mock_error_message = self._MOCK_FAILURE_VALUE
 
-        class MockRpcError(grpc.RpcError):
+        class MockRpcErrorResponse(grpc.RpcError):
             def code(self):
                 return grpc.StatusCode.INVALID_ARGUMENT
 
             def trailing_metadata(self):
                 return ((interceptor._FAILURE_KEY, mock_error_message),)
 
+            def exception(self):
+                return self
+
         interceptor = self._create_test_interceptor()
 
         self.assertRaises(GoogleAdsException,
-                          interceptor._handle_grpc_failure, MockRpcError())
+                          interceptor._handle_grpc_failure,
+                          MockRpcErrorResponse())
 
     def test_handle_grpc_failure_retryable(self):
         """Raises retryable exceptions as-is."""
-        class MockRpcError(grpc.RpcError):
+        class MockRpcErrorResponse(grpc.RpcError):
             def code(self):
                 return grpc.StatusCode.INTERNAL
 
+            def exception(self):
+                return self
+
         interceptor = self._create_test_interceptor()
 
-        self.assertRaises(MockRpcError, interceptor._handle_grpc_failure,
-                          MockRpcError())
+        self.assertRaises(MockRpcErrorResponse,
+                          interceptor._handle_grpc_failure,
+                          MockRpcErrorResponse())
 
     def test_handle_grpc_failure_not_google_ads_failure(self):
         """Raises as-is non-retryable non-GoogleAdsFailure exceptions."""
-        class MockRpcError(grpc.RpcError):
+        class MockRpcErrorResponse(grpc.RpcError):
             def code(self):
                 return grpc.StatusCode.INVALID_ARGUMENT
 
             def trailing_metadata(self):
                 return (('bad-failure-key', 'arbitrary-value'),)
 
+            def exception(self):
+                return self
+
         interceptor = self._create_test_interceptor()
 
-        self.assertRaises(MockRpcError, interceptor._handle_grpc_failure,
-                          MockRpcError())
+        self.assertRaises(MockRpcErrorResponse,
+                          interceptor._handle_grpc_failure,
+                          MockRpcErrorResponse())
 
     def test_intercept_unary_unary_response_is_exception(self):
         """If response.exception() is not None exception is handled."""
@@ -1011,7 +1023,7 @@ class ExceptionInterceptorTest(TestCase):
                 mock_continuation, mock_client_call_details, mock_request)
 
             interceptor._handle_grpc_failure.assert_called_once_with(
-                mock_exception)
+                mock_response)
 
     def test_intercept_unary_unary_response_is_successful(self):
         """If response.exception() is None response is returned."""

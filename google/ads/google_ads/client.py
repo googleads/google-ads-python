@@ -269,10 +269,10 @@ class ExceptionInterceptor(grpc.UnaryUnaryClientInterceptor):
 
         return None
 
-    def _handle_grpc_failure(self, exception):
-        """Attempts to convert exceptions to a GoogleAdsException object.
+    def _handle_grpc_failure(self, response):
+        """Attempts to convert failed responses to a GoogleAdsException object.
 
-        Handles gRPC exceptions of type RpcError by attempting to convert them
+        Handles failed gRPC responses of by attempting to convert them
         to a more readable GoogleAdsException. Certain types of exceptions are
         not converted; if the object's trailing metadata does not indicate that
         it is a GoogleAdsException, or if it falls under a certain category of
@@ -281,27 +281,30 @@ class ExceptionInterceptor(grpc.UnaryUnaryClientInterceptor):
         https://github.com/grpc/grpc/blob/master/doc/statuscodes.md
 
         Args:
-            exception: a grpc.Call instance.
+            response: a grpc.Call/grpc.Future instance.
 
         Raises:
             GoogleAdsException: If the exception's trailing metadata
                 indicates that it is a GoogleAdsException.
-            RpcError: If the exception's trailing metadata is empty or is not
-                indicative of a GoogleAdsException, or if the exception has a
-                status code of INTERNAL or RESOURCE_EXHAUSTED.
+            RpcError: If the exception's is a gRPC exception but the trailing
+                metadata is empty or is not indicative of a GoogleAdsException,
+                or if the exception has a status code of INTERNAL or
+                RESOURCE_EXHAUSTED.
+            Exception: If not a GoogleAdsException or RpcException the error
+                will be raised as-is.
         """
-        status_code = exception.code()
+        status_code = response.code()
+        exception = response.exception()
 
         if status_code not in self._RETRY_STATUS_CODES:
-            trailing_metadata = (
-                _get_trailing_metadata_from_interceptor_exception(exception))
+            trailing_metadata = response.trailing_metadata()
             google_ads_failure = self._get_google_ads_failure(trailing_metadata)
 
             if google_ads_failure:
                 request_id = self._get_request_id(trailing_metadata)
 
                 raise google.ads.google_ads.errors.GoogleAdsException(
-                    exception, exception, google_ads_failure, request_id)
+                    exception, response, google_ads_failure, request_id)
             else:
                 # Raise the original exception if not a GoogleAdsFailure.
                 raise exception
@@ -329,7 +332,7 @@ class ExceptionInterceptor(grpc.UnaryUnaryClientInterceptor):
         exception = response.exception()
 
         if exception:
-            self._handle_grpc_failure(exception)
+            self._handle_grpc_failure(response)
         else:
             return response
 

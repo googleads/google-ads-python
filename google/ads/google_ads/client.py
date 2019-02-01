@@ -24,7 +24,7 @@ import google.api_core.grpc_helpers
 import google.auth.transport.requests
 import google.oauth2.credentials
 import google.ads.google_ads.errors
-from google.ads.google_ads.v0.proto.errors import errors_pb2
+from google.ads.google_ads.v0.proto.errors import errors_pb2 as error_protos
 from google.protobuf.json_format import MessageToJson
 import grpc
 
@@ -160,7 +160,7 @@ class GoogleAdsClient(object):
             developer_token: a str developer token.
             endpoint: a str specifying an optional alternative API endpoint.
             login_customer_id: a str specifying a login customer ID.
-            logging_config: a dict specifying logging config options
+            logging_config: a dict specifying logging config options.
         """
         _validate_login_customer_id(login_customer_id)
 
@@ -233,7 +233,7 @@ class ExceptionInterceptor(grpc.UnaryUnaryClientInterceptor):
         """Gets the Google Ads failure details if they exist.
 
         Args:
-            trailing_metadata:
+            trailing_metadata: a tuple of metadatum from the service response.
 
         Returns:
             A GoogleAdsFailure that describes how a GoogleAds API call failed.
@@ -241,20 +241,23 @@ class ExceptionInterceptor(grpc.UnaryUnaryClientInterceptor):
             return the failure details, or if the GoogleAdsFailure fails to
             parse.
         """
-        for kv in trailing_metadata:
-            if kv[0] == self._FAILURE_KEY:
-                try:
-                    ga_failure = errors_pb2.GoogleAdsFailure()
-                    ga_failure.ParseFromString(kv[1])
-                    return ga_failure
-                except google.protobuf.message.DecodeError:
-                    return None
+        if trailing_metadata is not None:
+            for kv in trailing_metadata:
+                if kv[0] == self._FAILURE_KEY:
+                    try:
+                        ga_failure = error_protos.GoogleAdsFailure()
+                        ga_failure.ParseFromString(kv[1])
+                        return ga_failure
+                    except google.protobuf.message.DecodeError:
+                        return None
+
+        return None
 
     def _get_request_id(self, trailing_metadata):
         """Gets the request ID for the Google Ads API request.
 
         Args:
-            trailing_metadata:
+            trailing_metadata: a tuple of metadatum from the service response.
 
         Returns:
             A str request ID associated with the Google Ads API request, or None
@@ -266,35 +269,42 @@ class ExceptionInterceptor(grpc.UnaryUnaryClientInterceptor):
 
         return None
 
-    def _handle_grpc_exception(self, exception):
-        """Handles gRPC exceptions of type RpcError by attempting to
-           convert them to a more readable GoogleAdsException. Certain types of
-           exceptions are not converted; if the object's trailing metadata does
-           not indicate that it is a GoogleAdsException, or if it falls under
-           a certain category of status code, (INTERNAL or RESOURCE_EXHAUSTED).
-           See documentation for more information about gRPC status codes:
-           https://github.com/grpc/grpc/blob/master/doc/statuscodes.md
+    def _handle_grpc_failure(self, response):
+        """Attempts to convert failed responses to a GoogleAdsException object.
+
+        Handles failed gRPC responses of by attempting to convert them
+        to a more readable GoogleAdsException. Certain types of exceptions are
+        not converted; if the object's trailing metadata does not indicate that
+        it is a GoogleAdsException, or if it falls under a certain category of
+        status code, (INTERNAL or RESOURCE_EXHAUSTED). See documentation for
+        more information about gRPC status codes:
+        https://github.com/grpc/grpc/blob/master/doc/statuscodes.md
 
         Args:
-            exception: an exception of type RpcError.
+            response: a grpc.Call/grpc.Future instance.
 
         Raises:
             GoogleAdsException: If the exception's trailing metadata
                 indicates that it is a GoogleAdsException.
-            RpcError: If the exception's trailing metadata is empty or is not
-                indicative of a GoogleAdsException, or if the exception has a
-                status code of INTERNAL or RESOURCE_EXHAUSTED.
+            RpcError: If the exception's is a gRPC exception but the trailing
+                metadata is empty or is not indicative of a GoogleAdsException,
+                or if the exception has a status code of INTERNAL or
+                RESOURCE_EXHAUSTED.
+            Exception: If not a GoogleAdsException or RpcException the error
+                will be raised as-is.
         """
-        if exception._state.code not in self._RETRY_STATUS_CODES:
-            trailing_metadata = exception.trailing_metadata()
-            google_ads_failure = self._get_google_ads_failure(
-                trailing_metadata)
+        status_code = response.code()
+        exception = response.exception()
+
+        if status_code not in self._RETRY_STATUS_CODES:
+            trailing_metadata = response.trailing_metadata()
+            google_ads_failure = self._get_google_ads_failure(trailing_metadata)
 
             if google_ads_failure:
                 request_id = self._get_request_id(trailing_metadata)
 
                 raise google.ads.google_ads.errors.GoogleAdsException(
-                    exception, exception, google_ads_failure, request_id)
+                    exception, response, google_ads_failure, request_id)
             else:
                 # Raise the original exception if not a GoogleAdsFailure.
                 raise exception
@@ -308,6 +318,9 @@ class ExceptionInterceptor(grpc.UnaryUnaryClientInterceptor):
 
         Overrides abstract method defined in grpc.UnaryUnaryClientInterceptor.
 
+        Returns:
+            A grpc.Call instance representing a service response.
+
         Raises:
             GoogleAdsException: If the exception's trailing metadata
                 indicates that it is a GoogleAdsException.
@@ -315,17 +328,13 @@ class ExceptionInterceptor(grpc.UnaryUnaryClientInterceptor):
                 indicative of a GoogleAdsException, or if the exception has a
                 status code of INTERNAL or RESOURCE_EXHAUSTED.
         """
-        try:
-            response = continuation(client_call_details, request)
-        except grpc.RpcError as ex:
-            self._handle_grpc_exception(ex)
+        response = continuation(client_call_details, request)
+        exception = response.exception()
 
-        if response.exception():
-            # Any exception raised within the continuation function that is not
-            # an RpcError will be set on the response object and raised here.
-            raise response.exception()
-
-        return response
+        if exception:
+            self._handle_grpc_failure(response)
+        else:
+            return response
 
 
 class LoggingInterceptor(grpc.UnaryUnaryClientInterceptor):
@@ -342,10 +351,10 @@ class LoggingInterceptor(grpc.UnaryUnaryClientInterceptor):
                          'FaultMessage: %s')
 
     def __init__(self, logging_config=None, endpoint=None):
-        """Initializer for the LoggingInterceptor
+        """Initializer for the LoggingInterceptor.
 
         Args:
-            logging_config: configuration dictionary for logging
+            logging_config: configuration dict for logging.
             endpoint: a str specifying an optional alternative API endpoint.
         """
         self.endpoint = endpoint
@@ -353,14 +362,18 @@ class LoggingInterceptor(grpc.UnaryUnaryClientInterceptor):
             logging.config.dictConfig(logging_config)
 
     def _get_request_id(self, response, exception):
-        """Retrieves the request id from a response object
+        """Retrieves the request id from a response object.
+
+        Returns:
+            A str of the request_id, or None if there's an exception but the
+            request_id isn't present.
 
         Args:
-            response: a gRPC response object
-            exception: a gRPC exception object
+            response: A grpc.Call/grpc.Future instance.
+            exception: A grpc.Call instance.
         """
         if exception:
-            return exception.request_id
+            return getattr(exception, 'request_id', None)
         else:
             trailing_metadata = response.trailing_metadata()
             for datum in trailing_metadata:
@@ -368,111 +381,172 @@ class LoggingInterceptor(grpc.UnaryUnaryClientInterceptor):
                     return datum[1]
 
     def _get_trailing_metadata(self, response, exception):
-        """Retrieves trailing metadata from a response object
+        """Retrieves trailing metadata from a response or exception object.
+
+        If the exception is a GoogleAdsException the trailing metadata will be
+        on its error object, otherwise it will be on the response object.
+
+        Returns:
+            A tuple of metadatum representing response header key value pairs.
 
         Args:
-            response: a gRPC response object
-            exception: a gRPC exception object
+            response: A grpc.Call/grpc.Future instance.
+            exception: A grpc.Call instance.
         """
         if exception:
-            return exception.error.trailing_metadata()
+            return _get_trailing_metadata_from_interceptor_exception(exception)
         else:
             return response.trailing_metadata()
 
-    def _parse_response_to_json(self, response, exception):
-        """Parses response object to JSON
+    def _get_initial_metadata(self, client_call_details):
+        """Retrieves the initial metadata from client_call_details.
+
+        Returns an empty tuple if metadata isn't present on the
+        client_call_details object.
+
+        Returns:
+            A tuple of metadatum representing request header key value pairs.
 
         Args:
-            response: a gRPC response object
-            exception: a gRPC exception object
+            client_call_details: An instance of grpc.ClientCallDetails.
+        """
+        return getattr(client_call_details, 'metadata', tuple())
+
+    def _get_call_method(self, client_call_details):
+        """Retrieves the call method from client_call_details.
+
+        Returns None if the method is not present on the client_call_details
+        object.
+
+        Returns:
+            A str with the call method or None if it isn't present.
+
+        Args:
+            client_call_details: An instance of grpc.ClientCallDetails.
+        """
+        return getattr(client_call_details, 'method', None)
+
+    def _get_customer_id(self, request):
+        """Retrieves the customer_id from the grpc request.
+
+        Returns None if a customer_id is not present on the request object.
+
+        Returns:
+            A str with the customer id from the request or None if it isn't
+            present.
+
+        Args:
+            request: An instance of a request proto message.
+        """
+        return getattr(request, 'customer_id', None)
+
+    def _parse_response_to_json(self, response, exception):
+        """Parses response object to JSON.
+
+        Returns:
+            A str of JSON representing a response or exception from the
+            service.
+
+        Args:
+            response: A grpc.Call/grpc.Future instance.
+            exception: A grpc.Call instance.
         """
         if exception:
-            return _parse_message_to_json(exception.failure)
+            # try to retrieve the .failure property of a GoogleAdsFailure.
+            failure = getattr(exception, 'failure', None)
+
+            if failure:
+                return _parse_message_to_json(failure)
+            else:
+                # if exception.failure isn't present then it's likely this is a
+                # transport error with a .debug_error_string method.
+                try:
+                    debug_string = exception.debug_error_string()
+                    return _parse_to_json(json.loads(debug_string))
+                except (AttributeError, ValueError):
+                    # if both attempts to retrieve serializable error data fail
+                    # then simply return an empty JSON string
+                    return '{}'
         else:
             return _parse_message_to_json(response.result())
+
+    def _get_fault_message(self, exception):
+        """Retrieves a fault/error message from an exception object.
+
+        Returns None if no error message can be found on the exception.
+
+        Returns:
+            A str with an error message or None if one cannot be found.
+
+        Args:
+            response: A grpc.Call/grpc.Future instance.
+            exception: A grpc.Call instance.
+        """
+        try:
+            return exception.failure.errors[0].message
+        except AttributeError:
+            try:
+                return exception.details()
+            except AttributeError:
+                return None
 
     def _log_successful_request(self, method, customer_id, metadata_json,
                                 request_id, request_json,
                                 trailing_metadata_json, response_json):
-        """Handles logging of a successful request
+        """Handles logging of a successful request.
 
         Args:
-            method: the gRPC method of the request
-            customer_id: the customer ID associated with the request
-            metadata_json: request metadata (i.e. headers) in JSON form
-            request_id: unique ID for the request provided in the response
-            request_json: the request object in JSON form
-            trailing_metadata_json: metadata from the response as JSON
-            response_json: the response object as JSON
+            method: The method of the request.
+            customer_id: The customer ID associated with the request.
+            metadata_json: A JSON str of initial_metadata.
+            request_id: A unique ID for the request provided in the response.
+            request_json: A JSON str of the request message.
+            trailing_metadata_json: A JSON str of trailing_metadata.
+            response_json: A JSON str of the the response message.
         """
-        _logger.debug(self._FULL_REQUEST_LOG_LINE
-                      % (
-                          method,
-                          self.endpoint,
-                          metadata_json,
-                          request_json,
-                          trailing_metadata_json,
-                          response_json
-                      ))
+        _logger.debug(self._FULL_REQUEST_LOG_LINE % (method, self.endpoint,
+                      metadata_json, request_json, trailing_metadata_json,
+                      response_json))
 
-        _logger.info(self._SUMMARY_LOG_LINE
-                     % (
-                         customer_id,
-                         self.endpoint,
-                         method,
-                         request_id,
-                         False,
-                         None
-                     ))
+        _logger.info(self._SUMMARY_LOG_LINE % (customer_id, self.endpoint,
+                     method, request_id, False, None))
 
     def _log_failed_request(self, method, customer_id, metadata_json,
                             request_id, request_json,
                             trailing_metadata_json, response_json,
                             fault_message):
-        """Handles logging of a failed request
+        """Handles logging of a failed request.
 
         Args:
-            method: the gRPC method of the request
-            customer_id: the customer ID associated with the request
-            metadata_json: request metadata (i.e. headers) in JSON form
-            request_id: unique ID for the request provided in the response
-            request_json: the request object in JSON form
-            trailing_metadata_json: metadata from the response as JSON
-            response_json: the response object as JSON
-            fault_message: the error message from the failed request
+            method: The method of the request.
+            customer_id: The customer ID associated with the request.
+            metadata_json: A JSON str of initial_metadata.
+            request_id: A unique ID for the request provided in the response.
+            request_json: A JSON str of the request message.
+            trailing_metadata_json: A JSON str of trailing_metadata.
+            response_json: A JSON str of the the response message.
+            fault_message: A str error message from a failed request.
         """
-        _logger.warning(self._SUMMARY_LOG_LINE
-                        % (
-                            customer_id,
-                            self.endpoint,
-                            method,
-                            request_id,
-                            True,
-                            fault_message
-                        ))
+        _logger.info(self._FULL_FAULT_LOG_LINE % (method, self.endpoint,
+                     metadata_json, request_json, trailing_metadata_json,
+                     response_json))
 
-        _logger.info(self._FULL_FAULT_LOG_LINE
-                     % (
-                         method,
-                         self.endpoint,
-                         metadata_json,
-                         request_json,
-                         trailing_metadata_json,
-                         response_json
-                     ))
+        _logger.warning(self._SUMMARY_LOG_LINE % (customer_id, self.endpoint,
+                        method, request_id, True, fault_message))
 
     def _log_request(self, client_call_details, request, response, exception):
-        """Handles logging all requests
+        """Handles logging all requests.
 
         Args:
-            client_call_details: information about the client call
-            request: an instance of a gRPC request
-            response: a gRPC response object
-            exception: a gRPC exception object
+            client_call_details: An instance of grpc.ClientCallDetails.
+            request: An instance of a request proto message.
+            response: A grpc.Call/grpc.Future instance.
+            exception: A grpc.Call instance.
         """
-        method = client_call_details.method
-        customer_id = getattr(request, 'customer_id', None)
-        metadata_json = _parse_metadata_to_json(client_call_details.metadata)
+        method = self._get_call_method(client_call_details)
+        customer_id = self._get_customer_id(request)
+        initial_metadata = self._get_initial_metadata(client_call_details)
+        initial_metadata_json = _parse_metadata_to_json(initial_metadata)
         request_json = _parse_message_to_json(request)
         request_id = self._get_request_id(response, exception)
         response_json = self._parse_response_to_json(response, exception)
@@ -480,30 +554,24 @@ class LoggingInterceptor(grpc.UnaryUnaryClientInterceptor):
         trailing_metadata_json = _parse_metadata_to_json(trailing_metadata)
 
         if exception:
-            fault_message = exception.failure.errors[0].message
-            self._log_failed_request(
-                method,
-                customer_id,
-                metadata_json,
-                request_id,
-                request_json,
-                trailing_metadata_json,
-                response_json,
-                fault_message)
+            fault_message = self._get_fault_message(exception)
+            self._log_failed_request(method, customer_id, initial_metadata_json,
+                                     request_id, request_json,
+                                     trailing_metadata_json, response_json,
+                                     fault_message)
         else:
-            self._log_successful_request(
-                method,
-                customer_id,
-                metadata_json,
-                request_id,
-                request_json,
-                trailing_metadata_json,
-                response_json)
+            self._log_successful_request(method, customer_id,
+                                         initial_metadata_json, request_id,
+                                         request_json, trailing_metadata_json,
+                                         response_json)
 
     def intercept_unary_unary(self, continuation, client_call_details, request):
         """Intercepts and logs API interactions.
 
         Overrides abstract method defined in grpc.UnaryUnaryClientInterceptor.
+
+        Returns:
+            A grpc.Call/grpc.Future instance representing a service response.
         """
         response = continuation(client_call_details, request)
         if _logger.isEnabledFor(logging.WARNING):
@@ -536,6 +604,9 @@ class MetadataInterceptor(grpc.UnaryUnaryClientInterceptor):
         """Intercepts and appends custom metadata.
 
         Overrides abstract method defined in grpc.UnaryUnaryClientInterceptor.
+
+        Returns:
+            A grpc.Call/grpc.Future instance representing a service response.
         """
         if client_call_details.metadata is None:
             metadata = []
@@ -559,8 +630,28 @@ class _ClientCallDetails(
             '_ClientCallDetails',
             ('method', 'timeout', 'metadata', 'credentials')),
         grpc.ClientCallDetails):
-    """An wrapper class for initializing a new ClientCallDetails instance."""
+    """A wrapper class for initializing a new ClientCallDetails instance."""
     pass
+
+
+def _get_trailing_metadata_from_interceptor_exception(exception):
+    """Retrieves trailing metadata from an exception object.
+
+    Args:
+        exception: an instance of grpc.Call.
+
+    Returns:
+        A tuple of trailing metadata key value pairs.
+    """
+    try:
+        return exception.error.trailing_metadata()
+    except AttributeError:
+        try:
+            return exception.trailing_metadata()
+        except AttributeError:
+            # if trailing metadata is not found in either location then
+            # return an empty tuple
+            return tuple()
 
 
 def _get_version(name):
@@ -587,8 +678,8 @@ def _validate_login_customer_id(login_customer_id):
         login_customer_id: a str from config indicating a login customer ID.
 
     Raises:
-        ValueError: If the login customer ID is not
-        an int in the range 0 - 9999999999.
+        ValueError: If the login customer ID is not an int in the
+            range 0 - 9999999999.
     """
     if login_customer_id is not None:
         if not login_customer_id.isdigit() or len(login_customer_id) != 10:
@@ -597,13 +688,32 @@ def _validate_login_customer_id(login_customer_id):
                              'as a string, i.e. "1234567890"')
 
 
-def _parse_metadata_to_json(metadata):
-    """Parses metadata from a gRPC requests and responses to a JSON string.
-       Obscures the value for "developer-token".
+def _parse_to_json(obj):
+    """Parses a serializable object into a consistently formatted JSON string.
+
+    Returns:
+        A str of formatted JSON serialized from the given object.
 
     Args:
-        metadata: a list of tuples of metadata information from a
-            gRPC response
+        obj: an object or dict.
+    """
+    def default_serializer(value):
+        if isinstance(value, bytes):
+            return value.decode(errors='ignore')
+        else:
+            return None
+
+    return str(json.dumps(obj, indent=2, sort_keys=True, ensure_ascii=False,
+                          default=default_serializer, separators=(',', ': ')))
+
+
+def _parse_metadata_to_json(metadata):
+    """Parses metadata from gRPC request and response messages to a JSON str.
+
+    Obscures the value for "developer-token".
+
+    Args:
+        metadata: a tuple of metadatum.
     """
     SENSITIVE_INFO_MASK = 'REDACTED'
     metadata_dict = {}
@@ -619,18 +729,16 @@ def _parse_metadata_to_json(metadata):
             value = datum[1]
             metadata_dict[key] = value
 
-    return json.dumps(
-        metadata_dict, indent=2, sort_keys=True, ensure_ascii=False,
-        separators=(',', ': '))
+    return _parse_to_json(metadata_dict)
 
 
 def _parse_message_to_json(message):
     """Parses a gRPC request object to a JSON string.
 
     Args:
-        request: an instance of the SearchGoogleAdsRequest type
+        request: an instance of a request proto message, for example
+            a SearchGoogleAdsRequest or a MutateAdGroupAdsRequest.
     """
-    json =  MessageToJson(message)
+    json = MessageToJson(message)
     json = json.replace(', \n', ',\n')
     return json
-

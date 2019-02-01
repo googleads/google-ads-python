@@ -19,4 +19,5 @@ from __future__ import absolute_import
 import google.ads.google_ads.client
 import google.ads.google_ads.errors
 
+
 VERSION = '0.7.0'

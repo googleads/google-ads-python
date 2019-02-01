@@ -7,7 +7,6 @@ from google.protobuf import descriptor as _descriptor
 from google.protobuf import message as _message
 from google.protobuf import reflection as _reflection
 from google.protobuf import symbol_database as _symbol_database
-from google.protobuf import descriptor_pb2
 # @@protoc_insertion_point(imports)
 
 _sym_db = _symbol_database.Default()
@@ -21,7 +20,8 @@ DESCRIPTOR = _descriptor.FileDescriptor(
   name='google/ads/googleads_v0/proto/common/keyword_plan_common.proto',
   package='google.ads.googleads.v0.common',
   syntax='proto3',
-  serialized_pb=_b('\n>google/ads/googleads_v0/proto/common/keyword_plan_common.proto\x12\x1egoogle.ads.googleads.v0.common\x1aHgoogle/ads/googleads_v0/proto/enums/keyword_plan_competition_level.proto\x1a\x1egoogle/protobuf/wrappers.proto\"\xca\x01\n\x1cKeywordPlanHistoricalMetrics\x12\x39\n\x14\x61vg_monthly_searches\x18\x01 \x01(\x0b\x32\x1b.google.protobuf.Int64Value\x12o\n\x0b\x63ompetition\x18\x02 \x01(\x0e\x32Z.google.ads.googleads.v0.enums.KeywordPlanCompetitionLevelEnum.KeywordPlanCompetitionLevelB\xcc\x01\n\"com.google.ads.googleads.v0.commonB\x16KeywordPlanCommonProtoP\x01ZDgoogle.golang.org/genproto/googleapis/ads/googleads/v0/common;common\xa2\x02\x03GAA\xaa\x02\x1eGoogle.Ads.GoogleAds.V0.Common\xca\x02\x1eGoogle\\Ads\\GoogleAds\\V0\\Commonb\x06proto3')
+  serialized_options=_b('\n\"com.google.ads.googleads.v0.commonB\026KeywordPlanCommonProtoP\001ZDgoogle.golang.org/genproto/googleapis/ads/googleads/v0/common;common\242\002\003GAA\252\002\036Google.Ads.GoogleAds.V0.Common\312\002\036Google\\Ads\\GoogleAds\\V0\\Common\352\002\"Google::Ads::GoogleAds::V0::Common'),
+  serialized_pb=_b('\n>google/ads/googleads_v0/proto/common/keyword_plan_common.proto\x12\x1egoogle.ads.googleads.v0.common\x1aHgoogle/ads/googleads_v0/proto/enums/keyword_plan_competition_level.proto\x1a\x1egoogle/protobuf/wrappers.proto\"\xca\x01\n\x1cKeywordPlanHistoricalMetrics\x12\x39\n\x14\x61vg_monthly_searches\x18\x01 \x01(\x0b\x32\x1b.google.protobuf.Int64Value\x12o\n\x0b\x63ompetition\x18\x02 \x01(\x0e\x32Z.google.ads.googleads.v0.enums.KeywordPlanCompetitionLevelEnum.KeywordPlanCompetitionLevelB\xf1\x01\n\"com.google.ads.googleads.v0.commonB\x16KeywordPlanCommonProtoP\x01ZDgoogle.golang.org/genproto/googleapis/ads/googleads/v0/common;common\xa2\x02\x03GAA\xaa\x02\x1eGoogle.Ads.GoogleAds.V0.Common\xca\x02\x1eGoogle\\Ads\\GoogleAds\\V0\\Common\xea\x02\"Google::Ads::GoogleAds::V0::Commonb\x06proto3')
   ,
   dependencies=[google_dot_ads_dot_googleads__v0_dot_proto_dot_enums_dot_keyword__plan__competition__level__pb2.DESCRIPTOR,google_dot_protobuf_dot_wrappers__pb2.DESCRIPTOR,])
 
@@ -41,21 +41,21 @@ _KEYWORDPLANHISTORICALMETRICS = _descriptor.Descriptor(
       has_default_value=False, default_value=None,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
-      options=None, file=DESCRIPTOR),
+      serialized_options=None, file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
       name='competition', full_name='google.ads.googleads.v0.common.KeywordPlanHistoricalMetrics.competition', index=1,
       number=2, type=14, cpp_type=8, label=1,
       has_default_value=False, default_value=0,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
-      options=None, file=DESCRIPTOR),
+      serialized_options=None, file=DESCRIPTOR),
   ],
   extensions=[
   ],
   nested_types=[],
   enum_types=[
   ],
-  options=None,
+  serialized_options=None,
   is_extendable=False,
   syntax='proto3',
   extension_ranges=[],
@@ -72,7 +72,7 @@ _sym_db.RegisterFileDescriptor(DESCRIPTOR)
 
 KeywordPlanHistoricalMetrics = _reflection.GeneratedProtocolMessageType('KeywordPlanHistoricalMetrics', (_message.Message,), dict(
   DESCRIPTOR = _KEYWORDPLANHISTORICALMETRICS,
-  __module__ = 'google.ads.google_ads.v0.proto.common.keyword_plan_common_pb2'
+  __module__ = 'google.ads.googleads_v0.proto.common.keyword_plan_common_pb2'
   ,
   __doc__ = """Historical metrics.
   
@@ -88,6 +88,5 @@ KeywordPlanHistoricalMetrics = _reflection.GeneratedProtocolMessageType('Keyword
 _sym_db.RegisterMessage(KeywordPlanHistoricalMetrics)
 
 
-DESCRIPTOR.has_options = True
-DESCRIPTOR._options = _descriptor._ParseOptions(descriptor_pb2.FileOptions(), _b('\n\"com.google.ads.googleads.v0.commonB\026KeywordPlanCommonProtoP\001ZDgoogle.golang.org/genproto/googleapis/ads/googleads/v0/common;common\242\002\003GAA\252\002\036Google.Ads.GoogleAds.V0.Common\312\002\036Google\\Ads\\GoogleAds\\V0\\Common'))
+DESCRIPTOR._options = None
 # @@protoc_insertion_point(module_scope)

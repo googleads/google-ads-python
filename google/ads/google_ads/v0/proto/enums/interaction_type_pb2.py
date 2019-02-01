@@ -7,7 +7,6 @@ from google.protobuf import descriptor as _descriptor
 from google.protobuf import message as _message
 from google.protobuf import reflection as _reflection
 from google.protobuf import symbol_database as _symbol_database
-from google.protobuf import descriptor_pb2
 # @@protoc_insertion_point(imports)
 
 _sym_db = _symbol_database.Default()
@@ -19,7 +18,8 @@ DESCRIPTOR = _descriptor.FileDescriptor(
   name='google/ads/googleads_v0/proto/enums/interaction_type.proto',
   package='google.ads.googleads.v0.enums',
   syntax='proto3',
-  serialized_pb=_b('\n:google/ads/googleads_v0/proto/enums/interaction_type.proto\x12\x1dgoogle.ads.googleads.v0.enums\"R\n\x13InteractionTypeEnum\";\n\x0fInteractionType\x12\x0f\n\x0bUNSPECIFIED\x10\x00\x12\x0b\n\x07UNKNOWN\x10\x01\x12\n\n\x05\x43\x41LLS\x10\xc0>B\xc5\x01\n!com.google.ads.googleads.v0.enumsB\x14InteractionTypeProtoP\x01ZBgoogle.golang.org/genproto/googleapis/ads/googleads/v0/enums;enums\xa2\x02\x03GAA\xaa\x02\x1dGoogle.Ads.GoogleAds.V0.Enums\xca\x02\x1dGoogle\\Ads\\GoogleAds\\V0\\Enumsb\x06proto3')
+  serialized_options=_b('\n!com.google.ads.googleads.v0.enumsB\024InteractionTypeProtoP\001ZBgoogle.golang.org/genproto/googleapis/ads/googleads/v0/enums;enums\242\002\003GAA\252\002\035Google.Ads.GoogleAds.V0.Enums\312\002\035Google\\Ads\\GoogleAds\\V0\\Enums\352\002!Google::Ads::GoogleAds::V0::Enums'),
+  serialized_pb=_b('\n:google/ads/googleads_v0/proto/enums/interaction_type.proto\x12\x1dgoogle.ads.googleads.v0.enums\"R\n\x13InteractionTypeEnum\";\n\x0fInteractionType\x12\x0f\n\x0bUNSPECIFIED\x10\x00\x12\x0b\n\x07UNKNOWN\x10\x01\x12\n\n\x05\x43\x41LLS\x10\xc0>B\xe9\x01\n!com.google.ads.googleads.v0.enumsB\x14InteractionTypeProtoP\x01ZBgoogle.golang.org/genproto/googleapis/ads/googleads/v0/enums;enums\xa2\x02\x03GAA\xaa\x02\x1dGoogle.Ads.GoogleAds.V0.Enums\xca\x02\x1dGoogle\\Ads\\GoogleAds\\V0\\Enums\xea\x02!Google::Ads::GoogleAds::V0::Enumsb\x06proto3')
 )
 
 
@@ -32,19 +32,19 @@ _INTERACTIONTYPEENUM_INTERACTIONTYPE = _descriptor.EnumDescriptor(
   values=[
     _descriptor.EnumValueDescriptor(
       name='UNSPECIFIED', index=0, number=0,
-      options=None,
+      serialized_options=None,
       type=None),
     _descriptor.EnumValueDescriptor(
       name='UNKNOWN', index=1, number=1,
-      options=None,
+      serialized_options=None,
       type=None),
     _descriptor.EnumValueDescriptor(
       name='CALLS', index=2, number=8000,
-      options=None,
+      serialized_options=None,
       type=None),
   ],
   containing_type=None,
-  options=None,
+  serialized_options=None,
   serialized_start=116,
   serialized_end=175,
 )
@@ -65,7 +65,7 @@ _INTERACTIONTYPEENUM = _descriptor.Descriptor(
   enum_types=[
     _INTERACTIONTYPEENUM_INTERACTIONTYPE,
   ],
-  options=None,
+  serialized_options=None,
   is_extendable=False,
   syntax='proto3',
   extension_ranges=[],
@@ -81,7 +81,7 @@ _sym_db.RegisterFileDescriptor(DESCRIPTOR)
 
 InteractionTypeEnum = _reflection.GeneratedProtocolMessageType('InteractionTypeEnum', (_message.Message,), dict(
   DESCRIPTOR = _INTERACTIONTYPEENUM,
-  __module__ = 'google.ads.google_ads.v0.proto.enums.interaction_type_pb2'
+  __module__ = 'google.ads.googleads_v0.proto.enums.interaction_type_pb2'
   ,
   __doc__ = """Container for enum describing possible interaction types.
   """,
@@ -90,6 +90,5 @@ InteractionTypeEnum = _reflection.GeneratedProtocolMessageType('InteractionTypeE
 _sym_db.RegisterMessage(InteractionTypeEnum)
 
 
-DESCRIPTOR.has_options = True
-DESCRIPTOR._options = _descriptor._ParseOptions(descriptor_pb2.FileOptions(), _b('\n!com.google.ads.googleads.v0.enumsB\024InteractionTypeProtoP\001ZBgoogle.golang.org/genproto/googleapis/ads/googleads/v0/enums;enums\242\002\003GAA\252\002\035Google.Ads.GoogleAds.V0.Enums\312\002\035Google\\Ads\\GoogleAds\\V0\\Enums'))
+DESCRIPTOR._options = None
 # @@protoc_insertion_point(module_scope)

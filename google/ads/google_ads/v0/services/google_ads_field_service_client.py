@@ -1,4 +1,6 @@
-# Copyright 2018 Google LLC
+# -*- coding: utf-8 -*-
+#
+# Copyright 2019 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -24,12 +26,10 @@ import google.api_core.gapic_v1.method
 import google.api_core.grpc_helpers
 import google.api_core.page_iterator
 import google.api_core.path_template
-import grpc
 
 from google.ads.google_ads.v0.services import google_ads_field_service_client_config
 from google.ads.google_ads.v0.services.transports import google_ads_field_service_grpc_transport
 from google.ads.google_ads.v0.proto.services import google_ads_field_service_pb2
-from google.protobuf import wrappers_pb2
 
 _GAPIC_LIBRARY_VERSION = pkg_resources.get_distribution(
     'google-ads', ).version
@@ -78,7 +78,7 @@ class GoogleAdsFieldServiceClient(object):
                  transport=None,
                  channel=None,
                  credentials=None,
-                 client_config=google_ads_field_service_client_config.config,
+                 client_config=None,
                  client_info=None):
         """Constructor.
 
@@ -111,13 +111,20 @@ class GoogleAdsFieldServiceClient(object):
                 your own client library.
         """
         # Raise deprecation warnings for things we want to go away.
-        if client_config:
-            warnings.warn('The `client_config` argument is deprecated.',
-                          PendingDeprecationWarning)
+        if client_config is not None:
+            warnings.warn(
+                'The `client_config` argument is deprecated.',
+                PendingDeprecationWarning,
+                stacklevel=2)
+        else:
+            client_config = google_ads_field_service_client_config.config
+
         if channel:
             warnings.warn(
                 'The `channel` argument is deprecated; use '
-                '`transport` instead.', PendingDeprecationWarning)
+                '`transport` instead.',
+                PendingDeprecationWarning,
+                stacklevel=2)
 
         # Instantiate the transport.
         # The transport is responsible for handling serialization and
@@ -143,9 +150,10 @@ class GoogleAdsFieldServiceClient(object):
             )
 
         if client_info is None:
-            client_info = (
-                google.api_core.gapic_v1.client_info.DEFAULT_CLIENT_INFO)
-        client_info.gapic_version = _GAPIC_LIBRARY_VERSION
+            client_info = google.api_core.gapic_v1.client_info.ClientInfo(
+                gapic_version=_GAPIC_LIBRARY_VERSION, )
+        else:
+            client_info.gapic_version = _GAPIC_LIBRARY_VERSION
         self._client_info = client_info
 
         # Parse out the default settings for retry and timeout for each RPC
@@ -182,7 +190,7 @@ class GoogleAdsFieldServiceClient(object):
                 that is provided to the method.
 
         Returns:
-            A :class:`~google.ads.google_ads.v0.types.GoogleAdsField` instance.
+            A :class:`~google.ads.googleads_v0.types.GoogleAdsField` instance.
 
         Raises:
             google.api_core.exceptions.GoogleAPICallError: If the request
@@ -196,10 +204,10 @@ class GoogleAdsFieldServiceClient(object):
             self._inner_api_calls[
                 'get_google_ads_field'] = google.api_core.gapic_v1.method.wrap_method(
                     self.transport.get_google_ads_field,
-                    default_retry=self._method_configs[
-                        'GetGoogleAdsField'].retry,
-                    default_timeout=self._method_configs['GetGoogleAdsField']
-                    .timeout,
+                    default_retry=self._method_configs['GetGoogleAdsField'].
+                    retry,
+                    default_timeout=self._method_configs['GetGoogleAdsField'].
+                    timeout,
                     client_info=self._client_info,
                 )
 
@@ -236,7 +244,7 @@ class GoogleAdsFieldServiceClient(object):
 
         Returns:
             A :class:`~google.gax.PageIterator` instance. By default, this
-            is an iterable of :class:`~google.ads.google_ads.v0.types.GoogleAdsField` instances.
+            is an iterable of :class:`~google.ads.googleads_v0.types.GoogleAdsField` instances.
             This object can also be configured to iterate over the pages
             of the response through the `options` parameter.
 
@@ -252,10 +260,10 @@ class GoogleAdsFieldServiceClient(object):
             self._inner_api_calls[
                 'search_google_ads_fields'] = google.api_core.gapic_v1.method.wrap_method(
                     self.transport.search_google_ads_fields,
-                    default_retry=self._method_configs['SearchGoogleAdsFields']
-                    .retry,
-                    default_timeout=self._method_configs[
-                        'SearchGoogleAdsFields'].timeout,
+                    default_retry=self.
+                    _method_configs['SearchGoogleAdsFields'].retry,
+                    default_timeout=self.
+                    _method_configs['SearchGoogleAdsFields'].timeout,
                     client_info=self._client_info,
                 )
 

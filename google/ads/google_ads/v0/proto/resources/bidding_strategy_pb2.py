@@ -7,7 +7,6 @@ from google.protobuf import descriptor as _descriptor
 from google.protobuf import message as _message
 from google.protobuf import reflection as _reflection
 from google.protobuf import symbol_database as _symbol_database
-from google.protobuf import descriptor_pb2
 # @@protoc_insertion_point(imports)
 
 _sym_db = _symbol_database.Default()
@@ -22,7 +21,8 @@ DESCRIPTOR = _descriptor.FileDescriptor(
   name='google/ads/googleads_v0/proto/resources/bidding_strategy.proto',
   package='google.ads.googleads.v0.resources',
   syntax='proto3',
-  serialized_pb=_b('\n>google/ads/googleads_v0/proto/resources/bidding_strategy.proto\x12!google.ads.googleads.v0.resources\x1a\x32google/ads/googleads_v0/proto/common/bidding.proto\x1a?google/ads/googleads_v0/proto/enums/bidding_strategy_type.proto\x1a\x1egoogle/protobuf/wrappers.proto\"\x91\x05\n\x0f\x42iddingStrategy\x12\x15\n\rresource_name\x18\x01 \x01(\t\x12\'\n\x02id\x18\x03 \x01(\x0b\x32\x1b.google.protobuf.Int64Value\x12*\n\x04name\x18\x04 \x01(\x0b\x32\x1c.google.protobuf.StringValue\x12X\n\x04type\x18\x05 \x01(\x0e\x32J.google.ads.googleads.v0.enums.BiddingStrategyTypeEnum.BiddingStrategyType\x12\x43\n\x0c\x65nhanced_cpc\x18\x07 \x01(\x0b\x32+.google.ads.googleads.v0.common.EnhancedCpcH\x00\x12L\n\x11page_one_promoted\x18\x08 \x01(\x0b\x32/.google.ads.googleads.v0.common.PageOnePromotedH\x00\x12?\n\ntarget_cpa\x18\t \x01(\x0b\x32).google.ads.googleads.v0.common.TargetCpaH\x00\x12R\n\x14target_outrank_share\x18\n \x01(\x0b\x32\x32.google.ads.googleads.v0.common.TargetOutrankShareH\x00\x12\x41\n\x0btarget_roas\x18\x0b \x01(\x0b\x32*.google.ads.googleads.v0.common.TargetRoasH\x00\x12\x43\n\x0ctarget_spend\x18\x0c \x01(\x0b\x32+.google.ads.googleads.v0.common.TargetSpendH\x00\x42\x08\n\x06schemeB\xd9\x01\n%com.google.ads.googleads.v0.resourcesB\x14\x42iddingStrategyProtoP\x01ZJgoogle.golang.org/genproto/googleapis/ads/googleads/v0/resources;resources\xa2\x02\x03GAA\xaa\x02!Google.Ads.GoogleAds.V0.Resources\xca\x02!Google\\Ads\\GoogleAds\\V0\\Resourcesb\x06proto3')
+  serialized_options=_b('\n%com.google.ads.googleads.v0.resourcesB\024BiddingStrategyProtoP\001ZJgoogle.golang.org/genproto/googleapis/ads/googleads/v0/resources;resources\242\002\003GAA\252\002!Google.Ads.GoogleAds.V0.Resources\312\002!Google\\Ads\\GoogleAds\\V0\\Resources\352\002%Google::Ads::GoogleAds::V0::Resources'),
+  serialized_pb=_b('\n>google/ads/googleads_v0/proto/resources/bidding_strategy.proto\x12!google.ads.googleads.v0.resources\x1a\x32google/ads/googleads_v0/proto/common/bidding.proto\x1a?google/ads/googleads_v0/proto/enums/bidding_strategy_type.proto\x1a\x1egoogle/protobuf/wrappers.proto\"\x91\x05\n\x0f\x42iddingStrategy\x12\x15\n\rresource_name\x18\x01 \x01(\t\x12\'\n\x02id\x18\x03 \x01(\x0b\x32\x1b.google.protobuf.Int64Value\x12*\n\x04name\x18\x04 \x01(\x0b\x32\x1c.google.protobuf.StringValue\x12X\n\x04type\x18\x05 \x01(\x0e\x32J.google.ads.googleads.v0.enums.BiddingStrategyTypeEnum.BiddingStrategyType\x12\x43\n\x0c\x65nhanced_cpc\x18\x07 \x01(\x0b\x32+.google.ads.googleads.v0.common.EnhancedCpcH\x00\x12L\n\x11page_one_promoted\x18\x08 \x01(\x0b\x32/.google.ads.googleads.v0.common.PageOnePromotedH\x00\x12?\n\ntarget_cpa\x18\t \x01(\x0b\x32).google.ads.googleads.v0.common.TargetCpaH\x00\x12R\n\x14target_outrank_share\x18\n \x01(\x0b\x32\x32.google.ads.googleads.v0.common.TargetOutrankShareH\x00\x12\x41\n\x0btarget_roas\x18\x0b \x01(\x0b\x32*.google.ads.googleads.v0.common.TargetRoasH\x00\x12\x43\n\x0ctarget_spend\x18\x0c \x01(\x0b\x32+.google.ads.googleads.v0.common.TargetSpendH\x00\x42\x08\n\x06schemeB\x81\x02\n%com.google.ads.googleads.v0.resourcesB\x14\x42iddingStrategyProtoP\x01ZJgoogle.golang.org/genproto/googleapis/ads/googleads/v0/resources;resources\xa2\x02\x03GAA\xaa\x02!Google.Ads.GoogleAds.V0.Resources\xca\x02!Google\\Ads\\GoogleAds\\V0\\Resources\xea\x02%Google::Ads::GoogleAds::V0::Resourcesb\x06proto3')
   ,
   dependencies=[google_dot_ads_dot_googleads__v0_dot_proto_dot_common_dot_bidding__pb2.DESCRIPTOR,google_dot_ads_dot_googleads__v0_dot_proto_dot_enums_dot_bidding__strategy__type__pb2.DESCRIPTOR,google_dot_protobuf_dot_wrappers__pb2.DESCRIPTOR,])
 
@@ -42,77 +42,77 @@ _BIDDINGSTRATEGY = _descriptor.Descriptor(
       has_default_value=False, default_value=_b("").decode('utf-8'),
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
-      options=None, file=DESCRIPTOR),
+      serialized_options=None, file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
       name='id', full_name='google.ads.googleads.v0.resources.BiddingStrategy.id', index=1,
       number=3, type=11, cpp_type=10, label=1,
       has_default_value=False, default_value=None,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
-      options=None, file=DESCRIPTOR),
+      serialized_options=None, file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
       name='name', full_name='google.ads.googleads.v0.resources.BiddingStrategy.name', index=2,
       number=4, type=11, cpp_type=10, label=1,
       has_default_value=False, default_value=None,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
-      options=None, file=DESCRIPTOR),
+      serialized_options=None, file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
       name='type', full_name='google.ads.googleads.v0.resources.BiddingStrategy.type', index=3,
       number=5, type=14, cpp_type=8, label=1,
       has_default_value=False, default_value=0,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
-      options=None, file=DESCRIPTOR),
+      serialized_options=None, file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
       name='enhanced_cpc', full_name='google.ads.googleads.v0.resources.BiddingStrategy.enhanced_cpc', index=4,
       number=7, type=11, cpp_type=10, label=1,
       has_default_value=False, default_value=None,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
-      options=None, file=DESCRIPTOR),
+      serialized_options=None, file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
       name='page_one_promoted', full_name='google.ads.googleads.v0.resources.BiddingStrategy.page_one_promoted', index=5,
       number=8, type=11, cpp_type=10, label=1,
       has_default_value=False, default_value=None,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
-      options=None, file=DESCRIPTOR),
+      serialized_options=None, file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
       name='target_cpa', full_name='google.ads.googleads.v0.resources.BiddingStrategy.target_cpa', index=6,
       number=9, type=11, cpp_type=10, label=1,
       has_default_value=False, default_value=None,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
-      options=None, file=DESCRIPTOR),
+      serialized_options=None, file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
       name='target_outrank_share', full_name='google.ads.googleads.v0.resources.BiddingStrategy.target_outrank_share', index=7,
       number=10, type=11, cpp_type=10, label=1,
       has_default_value=False, default_value=None,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
-      options=None, file=DESCRIPTOR),
+      serialized_options=None, file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
       name='target_roas', full_name='google.ads.googleads.v0.resources.BiddingStrategy.target_roas', index=8,
       number=11, type=11, cpp_type=10, label=1,
       has_default_value=False, default_value=None,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
-      options=None, file=DESCRIPTOR),
+      serialized_options=None, file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
       name='target_spend', full_name='google.ads.googleads.v0.resources.BiddingStrategy.target_spend', index=9,
       number=12, type=11, cpp_type=10, label=1,
       has_default_value=False, default_value=None,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
-      options=None, file=DESCRIPTOR),
+      serialized_options=None, file=DESCRIPTOR),
   ],
   extensions=[
   ],
   nested_types=[],
   enum_types=[
   ],
-  options=None,
+  serialized_options=None,
   is_extendable=False,
   syntax='proto3',
   extension_ranges=[],
@@ -157,7 +157,7 @@ _sym_db.RegisterFileDescriptor(DESCRIPTOR)
 
 BiddingStrategy = _reflection.GeneratedProtocolMessageType('BiddingStrategy', (_message.Message,), dict(
   DESCRIPTOR = _BIDDINGSTRATEGY,
-  __module__ = 'google.ads.google_ads.v0.proto.resources.bidding_strategy_pb2'
+  __module__ = 'google.ads.googleads_v0.proto.resources.bidding_strategy_pb2'
   ,
   __doc__ = """A bidding strategy.
   
@@ -207,6 +207,5 @@ BiddingStrategy = _reflection.GeneratedProtocolMessageType('BiddingStrategy', (_
 _sym_db.RegisterMessage(BiddingStrategy)
 
 
-DESCRIPTOR.has_options = True
-DESCRIPTOR._options = _descriptor._ParseOptions(descriptor_pb2.FileOptions(), _b('\n%com.google.ads.googleads.v0.resourcesB\024BiddingStrategyProtoP\001ZJgoogle.golang.org/genproto/googleapis/ads/googleads/v0/resources;resources\242\002\003GAA\252\002!Google.Ads.GoogleAds.V0.Resources\312\002!Google\\Ads\\GoogleAds\\V0\\Resources'))
+DESCRIPTOR._options = None
 # @@protoc_insertion_point(module_scope)

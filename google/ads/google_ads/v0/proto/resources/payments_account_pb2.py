@@ -7,7 +7,6 @@ from google.protobuf import descriptor as _descriptor
 from google.protobuf import message as _message
 from google.protobuf import reflection as _reflection
 from google.protobuf import symbol_database as _symbol_database
-from google.protobuf import descriptor_pb2
 # @@protoc_insertion_point(imports)
 
 _sym_db = _symbol_database.Default()
@@ -20,7 +19,8 @@ DESCRIPTOR = _descriptor.FileDescriptor(
   name='google/ads/googleads_v0/proto/resources/payments_account.proto',
   package='google.ads.googleads.v0.resources',
   syntax='proto3',
-  serialized_pb=_b('\n>google/ads/googleads_v0/proto/resources/payments_account.proto\x12!google.ads.googleads.v0.resources\x1a\x1egoogle/protobuf/wrappers.proto\"\xc4\x02\n\x0fPaymentsAccount\x12\x15\n\rresource_name\x18\x01 \x01(\t\x12\x39\n\x13payments_account_id\x18\x02 \x01(\x0b\x32\x1c.google.protobuf.StringValue\x12*\n\x04name\x18\x03 \x01(\x0b\x32\x1c.google.protobuf.StringValue\x12\x33\n\rcurrency_code\x18\x04 \x01(\x0b\x32\x1c.google.protobuf.StringValue\x12\x39\n\x13payments_profile_id\x18\x05 \x01(\x0b\x32\x1c.google.protobuf.StringValue\x12\x43\n\x1dsecondary_payments_profile_id\x18\x06 \x01(\x0b\x32\x1c.google.protobuf.StringValueB\xd9\x01\n%com.google.ads.googleads.v0.resourcesB\x14PaymentsAccountProtoP\x01ZJgoogle.golang.org/genproto/googleapis/ads/googleads/v0/resources;resources\xa2\x02\x03GAA\xaa\x02!Google.Ads.GoogleAds.V0.Resources\xca\x02!Google\\Ads\\GoogleAds\\V0\\Resourcesb\x06proto3')
+  serialized_options=_b('\n%com.google.ads.googleads.v0.resourcesB\024PaymentsAccountProtoP\001ZJgoogle.golang.org/genproto/googleapis/ads/googleads/v0/resources;resources\242\002\003GAA\252\002!Google.Ads.GoogleAds.V0.Resources\312\002!Google\\Ads\\GoogleAds\\V0\\Resources\352\002%Google::Ads::GoogleAds::V0::Resources'),
+  serialized_pb=_b('\n>google/ads/googleads_v0/proto/resources/payments_account.proto\x12!google.ads.googleads.v0.resources\x1a\x1egoogle/protobuf/wrappers.proto\"\xc4\x02\n\x0fPaymentsAccount\x12\x15\n\rresource_name\x18\x01 \x01(\t\x12\x39\n\x13payments_account_id\x18\x02 \x01(\x0b\x32\x1c.google.protobuf.StringValue\x12*\n\x04name\x18\x03 \x01(\x0b\x32\x1c.google.protobuf.StringValue\x12\x33\n\rcurrency_code\x18\x04 \x01(\x0b\x32\x1c.google.protobuf.StringValue\x12\x39\n\x13payments_profile_id\x18\x05 \x01(\x0b\x32\x1c.google.protobuf.StringValue\x12\x43\n\x1dsecondary_payments_profile_id\x18\x06 \x01(\x0b\x32\x1c.google.protobuf.StringValueB\x81\x02\n%com.google.ads.googleads.v0.resourcesB\x14PaymentsAccountProtoP\x01ZJgoogle.golang.org/genproto/googleapis/ads/googleads/v0/resources;resources\xa2\x02\x03GAA\xaa\x02!Google.Ads.GoogleAds.V0.Resources\xca\x02!Google\\Ads\\GoogleAds\\V0\\Resources\xea\x02%Google::Ads::GoogleAds::V0::Resourcesb\x06proto3')
   ,
   dependencies=[google_dot_protobuf_dot_wrappers__pb2.DESCRIPTOR,])
 
@@ -40,49 +40,49 @@ _PAYMENTSACCOUNT = _descriptor.Descriptor(
       has_default_value=False, default_value=_b("").decode('utf-8'),
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
-      options=None, file=DESCRIPTOR),
+      serialized_options=None, file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
       name='payments_account_id', full_name='google.ads.googleads.v0.resources.PaymentsAccount.payments_account_id', index=1,
       number=2, type=11, cpp_type=10, label=1,
       has_default_value=False, default_value=None,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
-      options=None, file=DESCRIPTOR),
+      serialized_options=None, file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
       name='name', full_name='google.ads.googleads.v0.resources.PaymentsAccount.name', index=2,
       number=3, type=11, cpp_type=10, label=1,
       has_default_value=False, default_value=None,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
-      options=None, file=DESCRIPTOR),
+      serialized_options=None, file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
       name='currency_code', full_name='google.ads.googleads.v0.resources.PaymentsAccount.currency_code', index=3,
       number=4, type=11, cpp_type=10, label=1,
       has_default_value=False, default_value=None,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
-      options=None, file=DESCRIPTOR),
+      serialized_options=None, file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
       name='payments_profile_id', full_name='google.ads.googleads.v0.resources.PaymentsAccount.payments_profile_id', index=4,
       number=5, type=11, cpp_type=10, label=1,
       has_default_value=False, default_value=None,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
-      options=None, file=DESCRIPTOR),
+      serialized_options=None, file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
       name='secondary_payments_profile_id', full_name='google.ads.googleads.v0.resources.PaymentsAccount.secondary_payments_profile_id', index=5,
       number=6, type=11, cpp_type=10, label=1,
       has_default_value=False, default_value=None,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
-      options=None, file=DESCRIPTOR),
+      serialized_options=None, file=DESCRIPTOR),
   ],
   extensions=[
   ],
   nested_types=[],
   enum_types=[
   ],
-  options=None,
+  serialized_options=None,
   is_extendable=False,
   syntax='proto3',
   extension_ranges=[],
@@ -102,7 +102,7 @@ _sym_db.RegisterFileDescriptor(DESCRIPTOR)
 
 PaymentsAccount = _reflection.GeneratedProtocolMessageType('PaymentsAccount', (_message.Message,), dict(
   DESCRIPTOR = _PAYMENTSACCOUNT,
-  __module__ = 'google.ads.google_ads.v0.proto.resources.payments_account_pb2'
+  __module__ = 'google.ads.googleads_v0.proto.resources.payments_account_pb2'
   ,
   __doc__ = """A Payments account, which can be used to set up billing for an Ads
   customer.
@@ -111,9 +111,8 @@ PaymentsAccount = _reflection.GeneratedProtocolMessageType('PaymentsAccount', (_
   Attributes:
       resource_name:
           The resource name of the Payments account. PaymentsAccount
-          resource names have the form:
-          ``customers/{customer_id}/paymentsAccounts/
-          {payments_profile_id}_{payments_account_id}``
+          resource names have the form:  ``customers/{customer_id}/payme
+          ntsAccounts/{payments_account_id}``
       payments_account_id:
           A 16 digit ID used to identify a Payments account.
       name:
@@ -135,6 +134,5 @@ PaymentsAccount = _reflection.GeneratedProtocolMessageType('PaymentsAccount', (_
 _sym_db.RegisterMessage(PaymentsAccount)
 
 
-DESCRIPTOR.has_options = True
-DESCRIPTOR._options = _descriptor._ParseOptions(descriptor_pb2.FileOptions(), _b('\n%com.google.ads.googleads.v0.resourcesB\024PaymentsAccountProtoP\001ZJgoogle.golang.org/genproto/googleapis/ads/googleads/v0/resources;resources\242\002\003GAA\252\002!Google.Ads.GoogleAds.V0.Resources\312\002!Google\\Ads\\GoogleAds\\V0\\Resources'))
+DESCRIPTOR._options = None
 # @@protoc_insertion_point(module_scope)

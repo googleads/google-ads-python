@@ -1,4 +1,6 @@
-# Copyright 2018 Google LLC
+# -*- coding: utf-8 -*-
+#
+# Copyright 2019 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -11,7 +13,7 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
-"""Accesses the google.ads.googleads.v0.services CampaignGroupService API."""
+"""Accesses the google.ads.googleads.v0.services MobileDeviceConstantService API."""
 
 import pkg_resources
 import warnings
@@ -22,25 +24,24 @@ import google.api_core.gapic_v1.config
 import google.api_core.gapic_v1.method
 import google.api_core.grpc_helpers
 import google.api_core.path_template
-import grpc
 
-from google.ads.google_ads.v0.services import campaign_group_service_client_config
-from google.ads.google_ads.v0.services.transports import campaign_group_service_grpc_transport
-from google.ads.google_ads.v0.proto.services import campaign_group_service_pb2
+from google.ads.google_ads.v0.services import mobile_device_constant_service_client_config
+from google.ads.google_ads.v0.services.transports import mobile_device_constant_service_grpc_transport
+from google.ads.google_ads.v0.proto.services import mobile_device_constant_service_pb2
 
 _GAPIC_LIBRARY_VERSION = pkg_resources.get_distribution(
     'google-ads', ).version
 
 
-class CampaignGroupServiceClient(object):
-    """Service to manage campaign groups."""
+class MobileDeviceConstantServiceClient(object):
+    """Service to fetch mobile device constants."""
 
     SERVICE_ADDRESS = 'googleads.googleapis.com:443'
     """The default address of the service."""
 
     # The name of the interface for this client. This is the key used to
     # find the method configuration in the client_config dictionary.
-    _INTERFACE_NAME = 'google.ads.googleads.v0.services.CampaignGroupService'
+    _INTERFACE_NAME = 'google.ads.googleads.v0.services.MobileDeviceConstantService'
 
     @classmethod
     def from_service_account_file(cls, filename, *args, **kwargs):
@@ -54,7 +55,7 @@ class CampaignGroupServiceClient(object):
             kwargs: Additional arguments to pass to the constructor.
 
         Returns:
-            CampaignGroupServiceClient: The constructed client.
+            MobileDeviceConstantServiceClient: The constructed client.
         """
         credentials = service_account.Credentials.from_service_account_file(
             filename)
@@ -64,25 +65,24 @@ class CampaignGroupServiceClient(object):
     from_service_account_json = from_service_account_file
 
     @classmethod
-    def campaign_group_path(cls, customer, campaign_group):
-        """Return a fully-qualified campaign_group string."""
+    def mobile_device_constant_path(cls, mobile_device_constant):
+        """Return a fully-qualified mobile_device_constant string."""
         return google.api_core.path_template.expand(
-            'customers/{customer}/campaignGroups/{campaign_group}',
-            customer=customer,
-            campaign_group=campaign_group,
+            'mobileDeviceConstants/{mobile_device_constant}',
+            mobile_device_constant=mobile_device_constant,
         )
 
     def __init__(self,
                  transport=None,
                  channel=None,
                  credentials=None,
-                 client_config=campaign_group_service_client_config.config,
+                 client_config=None,
                  client_info=None):
         """Constructor.
 
         Args:
-            transport (Union[~.CampaignGroupServiceGrpcTransport,
-                    Callable[[~.Credentials, type], ~.CampaignGroupServiceGrpcTransport]): A transport
+            transport (Union[~.MobileDeviceConstantServiceGrpcTransport,
+                    Callable[[~.Credentials, type], ~.MobileDeviceConstantServiceGrpcTransport]): A transport
                 instance, responsible for actually making the API calls.
                 The default transport uses the gRPC protocol.
                 This argument may also be a callable which returns a
@@ -109,13 +109,20 @@ class CampaignGroupServiceClient(object):
                 your own client library.
         """
         # Raise deprecation warnings for things we want to go away.
-        if client_config:
-            warnings.warn('The `client_config` argument is deprecated.',
-                          PendingDeprecationWarning)
+        if client_config is not None:
+            warnings.warn(
+                'The `client_config` argument is deprecated.',
+                PendingDeprecationWarning,
+                stacklevel=2)
+        else:
+            client_config = mobile_device_constant_service_client_config.config
+
         if channel:
             warnings.warn(
                 'The `channel` argument is deprecated; use '
-                '`transport` instead.', PendingDeprecationWarning)
+                '`transport` instead.',
+                PendingDeprecationWarning,
+                stacklevel=2)
 
         # Instantiate the transport.
         # The transport is responsible for handling serialization and
@@ -124,8 +131,8 @@ class CampaignGroupServiceClient(object):
             if callable(transport):
                 self.transport = transport(
                     credentials=credentials,
-                    default_class=campaign_group_service_grpc_transport.
-                    CampaignGroupServiceGrpcTransport,
+                    default_class=mobile_device_constant_service_grpc_transport
+                    .MobileDeviceConstantServiceGrpcTransport,
                 )
             else:
                 if credentials:
@@ -134,16 +141,17 @@ class CampaignGroupServiceClient(object):
                         'credentials; these are mutually exclusive.')
                 self.transport = transport
         else:
-            self.transport = campaign_group_service_grpc_transport.CampaignGroupServiceGrpcTransport(
+            self.transport = mobile_device_constant_service_grpc_transport.MobileDeviceConstantServiceGrpcTransport(
                 address=self.SERVICE_ADDRESS,
                 channel=channel,
                 credentials=credentials,
             )
 
         if client_info is None:
-            client_info = (
-                google.api_core.gapic_v1.client_info.DEFAULT_CLIENT_INFO)
-        client_info.gapic_version = _GAPIC_LIBRARY_VERSION
+            client_info = google.api_core.gapic_v1.client_info.ClientInfo(
+                gapic_version=_GAPIC_LIBRARY_VERSION, )
+        else:
+            client_info.gapic_version = _GAPIC_LIBRARY_VERSION
         self._client_info = client_info
 
         # Parse out the default settings for retry and timeout for each RPC
@@ -160,16 +168,17 @@ class CampaignGroupServiceClient(object):
         self._inner_api_calls = {}
 
     # Service calls
-    def get_campaign_group(self,
-                           resource_name,
-                           retry=google.api_core.gapic_v1.method.DEFAULT,
-                           timeout=google.api_core.gapic_v1.method.DEFAULT,
-                           metadata=None):
+    def get_mobile_device_constant(
+            self,
+            resource_name,
+            retry=google.api_core.gapic_v1.method.DEFAULT,
+            timeout=google.api_core.gapic_v1.method.DEFAULT,
+            metadata=None):
         """
-        Returns the requested campaign group in full detail.
+        Returns the requested mobile device constant in full detail.
 
         Args:
-            resource_name (str): The resource name of the campaign group to fetch.
+            resource_name (str): Resource name of the mobile device to fetch.
             retry (Optional[google.api_core.retry.Retry]):  A retry object used
                 to retry requests. If ``None`` is specified, requests will not
                 be retried.
@@ -180,7 +189,7 @@ class CampaignGroupServiceClient(object):
                 that is provided to the method.
 
         Returns:
-            A :class:`~google.ads.google_ads.v0.types.CampaignGroup` instance.
+            A :class:`~google.ads.googleads_v0.types.MobileDeviceConstant` instance.
 
         Raises:
             google.api_core.exceptions.GoogleAPICallError: If the request
@@ -190,71 +199,18 @@ class CampaignGroupServiceClient(object):
             ValueError: If the parameters are invalid.
         """
         # Wrap the transport method to add retry and timeout logic.
-        if 'get_campaign_group' not in self._inner_api_calls:
+        if 'get_mobile_device_constant' not in self._inner_api_calls:
             self._inner_api_calls[
-                'get_campaign_group'] = google.api_core.gapic_v1.method.wrap_method(
-                    self.transport.get_campaign_group,
-                    default_retry=self._method_configs[
-                        'GetCampaignGroup'].retry,
-                    default_timeout=self._method_configs['GetCampaignGroup']
-                    .timeout,
+                'get_mobile_device_constant'] = google.api_core.gapic_v1.method.wrap_method(
+                    self.transport.get_mobile_device_constant,
+                    default_retry=self.
+                    _method_configs['GetMobileDeviceConstant'].retry,
+                    default_timeout=self.
+                    _method_configs['GetMobileDeviceConstant'].timeout,
                     client_info=self._client_info,
                 )
 
-        request = campaign_group_service_pb2.GetCampaignGroupRequest(
+        request = mobile_device_constant_service_pb2.GetMobileDeviceConstantRequest(
             resource_name=resource_name, )
-        return self._inner_api_calls['get_campaign_group'](
-            request, retry=retry, timeout=timeout, metadata=metadata)
-
-    def mutate_campaign_groups(self,
-                               customer_id,
-                               operations,
-                               retry=google.api_core.gapic_v1.method.DEFAULT,
-                               timeout=google.api_core.gapic_v1.method.DEFAULT,
-                               metadata=None):
-        """
-        Creates, updates, or removes campaign groups. Operation statuses are
-        returned.
-
-        Args:
-            customer_id (str): The ID of the customer whose campaign groups are being modified.
-            operations (list[Union[dict, ~google.ads.google_ads.v0.types.CampaignGroupOperation]]): The list of operations to perform on individual campaign groups.
-                If a dict is provided, it must be of the same form as the protobuf
-                message :class:`~google.ads.google_ads.v0.types.CampaignGroupOperation`
-            retry (Optional[google.api_core.retry.Retry]):  A retry object used
-                to retry requests. If ``None`` is specified, requests will not
-                be retried.
-            timeout (Optional[float]): The amount of time, in seconds, to wait
-                for the request to complete. Note that if ``retry`` is
-                specified, the timeout applies to each individual attempt.
-            metadata (Optional[Sequence[Tuple[str, str]]]): Additional metadata
-                that is provided to the method.
-
-        Returns:
-            A :class:`~google.ads.google_ads.v0.types.MutateCampaignGroupsResponse` instance.
-
-        Raises:
-            google.api_core.exceptions.GoogleAPICallError: If the request
-                    failed for any reason.
-            google.api_core.exceptions.RetryError: If the request failed due
-                    to a retryable error and retry attempts failed.
-            ValueError: If the parameters are invalid.
-        """
-        # Wrap the transport method to add retry and timeout logic.
-        if 'mutate_campaign_groups' not in self._inner_api_calls:
-            self._inner_api_calls[
-                'mutate_campaign_groups'] = google.api_core.gapic_v1.method.wrap_method(
-                    self.transport.mutate_campaign_groups,
-                    default_retry=self._method_configs['MutateCampaignGroups']
-                    .retry,
-                    default_timeout=self._method_configs[
-                        'MutateCampaignGroups'].timeout,
-                    client_info=self._client_info,
-                )
-
-        request = campaign_group_service_pb2.MutateCampaignGroupsRequest(
-            customer_id=customer_id,
-            operations=operations,
-        )
-        return self._inner_api_calls['mutate_campaign_groups'](
+        return self._inner_api_calls['get_mobile_device_constant'](
             request, retry=retry, timeout=timeout, metadata=metadata)

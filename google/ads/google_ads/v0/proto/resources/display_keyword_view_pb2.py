@@ -7,7 +7,6 @@ from google.protobuf import descriptor as _descriptor
 from google.protobuf import message as _message
 from google.protobuf import reflection as _reflection
 from google.protobuf import symbol_database as _symbol_database
-from google.protobuf import descriptor_pb2
 # @@protoc_insertion_point(imports)
 
 _sym_db = _symbol_database.Default()
@@ -19,7 +18,8 @@ DESCRIPTOR = _descriptor.FileDescriptor(
   name='google/ads/googleads_v0/proto/resources/display_keyword_view.proto',
   package='google.ads.googleads.v0.resources',
   syntax='proto3',
-  serialized_pb=_b('\nBgoogle/ads/googleads_v0/proto/resources/display_keyword_view.proto\x12!google.ads.googleads.v0.resources\"+\n\x12\x44isplayKeywordView\x12\x15\n\rresource_name\x18\x01 \x01(\tB\xdc\x01\n%com.google.ads.googleads.v0.resourcesB\x17\x44isplayKeywordViewProtoP\x01ZJgoogle.golang.org/genproto/googleapis/ads/googleads/v0/resources;resources\xa2\x02\x03GAA\xaa\x02!Google.Ads.GoogleAds.V0.Resources\xca\x02!Google\\Ads\\GoogleAds\\V0\\Resourcesb\x06proto3')
+  serialized_options=_b('\n%com.google.ads.googleads.v0.resourcesB\027DisplayKeywordViewProtoP\001ZJgoogle.golang.org/genproto/googleapis/ads/googleads/v0/resources;resources\242\002\003GAA\252\002!Google.Ads.GoogleAds.V0.Resources\312\002!Google\\Ads\\GoogleAds\\V0\\Resources\352\002%Google::Ads::GoogleAds::V0::Resources'),
+  serialized_pb=_b('\nBgoogle/ads/googleads_v0/proto/resources/display_keyword_view.proto\x12!google.ads.googleads.v0.resources\"+\n\x12\x44isplayKeywordView\x12\x15\n\rresource_name\x18\x01 \x01(\tB\x84\x02\n%com.google.ads.googleads.v0.resourcesB\x17\x44isplayKeywordViewProtoP\x01ZJgoogle.golang.org/genproto/googleapis/ads/googleads/v0/resources;resources\xa2\x02\x03GAA\xaa\x02!Google.Ads.GoogleAds.V0.Resources\xca\x02!Google\\Ads\\GoogleAds\\V0\\Resources\xea\x02%Google::Ads::GoogleAds::V0::Resourcesb\x06proto3')
 )
 
 
@@ -38,14 +38,14 @@ _DISPLAYKEYWORDVIEW = _descriptor.Descriptor(
       has_default_value=False, default_value=_b("").decode('utf-8'),
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
-      options=None, file=DESCRIPTOR),
+      serialized_options=None, file=DESCRIPTOR),
   ],
   extensions=[
   ],
   nested_types=[],
   enum_types=[
   ],
-  options=None,
+  serialized_options=None,
   is_extendable=False,
   syntax='proto3',
   extension_ranges=[],
@@ -60,7 +60,7 @@ _sym_db.RegisterFileDescriptor(DESCRIPTOR)
 
 DisplayKeywordView = _reflection.GeneratedProtocolMessageType('DisplayKeywordView', (_message.Message,), dict(
   DESCRIPTOR = _DISPLAYKEYWORDVIEW,
-  __module__ = 'google.ads.google_ads.v0.proto.resources.display_keyword_view_pb2'
+  __module__ = 'google.ads.googleads_v0.proto.resources.display_keyword_view_pb2'
   ,
   __doc__ = """A display keyword view.
   
@@ -76,6 +76,5 @@ DisplayKeywordView = _reflection.GeneratedProtocolMessageType('DisplayKeywordVie
 _sym_db.RegisterMessage(DisplayKeywordView)
 
 
-DESCRIPTOR.has_options = True
-DESCRIPTOR._options = _descriptor._ParseOptions(descriptor_pb2.FileOptions(), _b('\n%com.google.ads.googleads.v0.resourcesB\027DisplayKeywordViewProtoP\001ZJgoogle.golang.org/genproto/googleapis/ads/googleads/v0/resources;resources\242\002\003GAA\252\002!Google.Ads.GoogleAds.V0.Resources\312\002!Google\\Ads\\GoogleAds\\V0\\Resources'))
+DESCRIPTOR._options = None
 # @@protoc_insertion_point(module_scope)

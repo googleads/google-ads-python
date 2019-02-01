@@ -1,4 +1,6 @@
-# Copyright 2018 Google LLC
+# -*- coding: utf-8 -*-
+#
+# Copyright 2019 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -60,6 +62,8 @@ class FeedMappingServiceGrpcTransport(object):
                 credentials=credentials,
             )
 
+        self._channel = channel
+
         # gRPC uses objects called "stubs" that are bound to the
         # channel and provide a basic method for each RPC.
         self._stubs = {
@@ -91,8 +95,17 @@ class FeedMappingServiceGrpcTransport(object):
         )
 
     @property
+    def channel(self):
+        """The gRPC channel used by the transport.
+
+        Returns:
+            grpc.Channel: A gRPC channel object.
+        """
+        return self._channel
+
+    @property
     def get_feed_mapping(self):
-        """Return the gRPC stub for {$apiMethod.name}.
+        """Return the gRPC stub for :meth:`FeedMappingServiceClient.get_feed_mapping`.
 
         Returns the requested feed mapping in full detail.
 
@@ -105,7 +118,7 @@ class FeedMappingServiceGrpcTransport(object):
 
     @property
     def mutate_feed_mappings(self):
-        """Return the gRPC stub for {$apiMethod.name}.
+        """Return the gRPC stub for :meth:`FeedMappingServiceClient.mutate_feed_mappings`.
 
         Creates or removes feed mappings. Operation statuses are
         returned.

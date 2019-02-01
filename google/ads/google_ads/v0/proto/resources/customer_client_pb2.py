@@ -7,7 +7,6 @@ from google.protobuf import descriptor as _descriptor
 from google.protobuf import message as _message
 from google.protobuf import reflection as _reflection
 from google.protobuf import symbol_database as _symbol_database
-from google.protobuf import descriptor_pb2
 # @@protoc_insertion_point(imports)
 
 _sym_db = _symbol_database.Default()
@@ -20,7 +19,8 @@ DESCRIPTOR = _descriptor.FileDescriptor(
   name='google/ads/googleads_v0/proto/resources/customer_client.proto',
   package='google.ads.googleads.v0.resources',
   syntax='proto3',
-  serialized_pb=_b('\n=google/ads/googleads_v0/proto/resources/customer_client.proto\x12!google.ads.googleads.v0.resources\x1a\x1egoogle/protobuf/wrappers.proto\"\xb6\x01\n\x0e\x43ustomerClient\x12\x15\n\rresource_name\x18\x01 \x01(\t\x12\x35\n\x0f\x63lient_customer\x18\x03 \x01(\x0b\x32\x1c.google.protobuf.StringValue\x12*\n\x06hidden\x18\x04 \x01(\x0b\x32\x1a.google.protobuf.BoolValue\x12*\n\x05level\x18\x05 \x01(\x0b\x32\x1b.google.protobuf.Int64ValueB\xd8\x01\n%com.google.ads.googleads.v0.resourcesB\x13\x43ustomerClientProtoP\x01ZJgoogle.golang.org/genproto/googleapis/ads/googleads/v0/resources;resources\xa2\x02\x03GAA\xaa\x02!Google.Ads.GoogleAds.V0.Resources\xca\x02!Google\\Ads\\GoogleAds\\V0\\Resourcesb\x06proto3')
+  serialized_options=_b('\n%com.google.ads.googleads.v0.resourcesB\023CustomerClientProtoP\001ZJgoogle.golang.org/genproto/googleapis/ads/googleads/v0/resources;resources\242\002\003GAA\252\002!Google.Ads.GoogleAds.V0.Resources\312\002!Google\\Ads\\GoogleAds\\V0\\Resources\352\002%Google::Ads::GoogleAds::V0::Resources'),
+  serialized_pb=_b('\n=google/ads/googleads_v0/proto/resources/customer_client.proto\x12!google.ads.googleads.v0.resources\x1a\x1egoogle/protobuf/wrappers.proto\"\xb6\x01\n\x0e\x43ustomerClient\x12\x15\n\rresource_name\x18\x01 \x01(\t\x12\x35\n\x0f\x63lient_customer\x18\x03 \x01(\x0b\x32\x1c.google.protobuf.StringValue\x12*\n\x06hidden\x18\x04 \x01(\x0b\x32\x1a.google.protobuf.BoolValue\x12*\n\x05level\x18\x05 \x01(\x0b\x32\x1b.google.protobuf.Int64ValueB\x80\x02\n%com.google.ads.googleads.v0.resourcesB\x13\x43ustomerClientProtoP\x01ZJgoogle.golang.org/genproto/googleapis/ads/googleads/v0/resources;resources\xa2\x02\x03GAA\xaa\x02!Google.Ads.GoogleAds.V0.Resources\xca\x02!Google\\Ads\\GoogleAds\\V0\\Resources\xea\x02%Google::Ads::GoogleAds::V0::Resourcesb\x06proto3')
   ,
   dependencies=[google_dot_protobuf_dot_wrappers__pb2.DESCRIPTOR,])
 
@@ -40,35 +40,35 @@ _CUSTOMERCLIENT = _descriptor.Descriptor(
       has_default_value=False, default_value=_b("").decode('utf-8'),
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
-      options=None, file=DESCRIPTOR),
+      serialized_options=None, file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
       name='client_customer', full_name='google.ads.googleads.v0.resources.CustomerClient.client_customer', index=1,
       number=3, type=11, cpp_type=10, label=1,
       has_default_value=False, default_value=None,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
-      options=None, file=DESCRIPTOR),
+      serialized_options=None, file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
       name='hidden', full_name='google.ads.googleads.v0.resources.CustomerClient.hidden', index=2,
       number=4, type=11, cpp_type=10, label=1,
       has_default_value=False, default_value=None,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
-      options=None, file=DESCRIPTOR),
+      serialized_options=None, file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
       name='level', full_name='google.ads.googleads.v0.resources.CustomerClient.level', index=3,
       number=5, type=11, cpp_type=10, label=1,
       has_default_value=False, default_value=None,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
-      options=None, file=DESCRIPTOR),
+      serialized_options=None, file=DESCRIPTOR),
   ],
   extensions=[
   ],
   nested_types=[],
   enum_types=[
   ],
-  options=None,
+  serialized_options=None,
   is_extendable=False,
   syntax='proto3',
   extension_ranges=[],
@@ -86,9 +86,11 @@ _sym_db.RegisterFileDescriptor(DESCRIPTOR)
 
 CustomerClient = _reflection.GeneratedProtocolMessageType('CustomerClient', (_message.Message,), dict(
   DESCRIPTOR = _CUSTOMERCLIENT,
-  __module__ = 'google.ads.google_ads.v0.proto.resources.customer_client_pb2'
+  __module__ = 'google.ads.googleads_v0.proto.resources.customer_client_pb2'
   ,
-  __doc__ = """For a manager, it returns all the customers in its hierarchy and self.
+  __doc__ = """A link between the given customer and a client customer. CustomerClients
+  only exist for manager customers. All direct and indirect client
+  customers are included, as well as the manager itself.
   
   
   Attributes:
@@ -97,19 +99,19 @@ CustomerClient = _reflection.GeneratedProtocolMessageType('CustomerClient', (_me
           resource names have the form: ``customers/{customer_id}/custom
           erClients/{client_customer_id}``
       client_customer:
-          The client customer linked to this customer. Read only.
+          The resource name of the client-customer which is linked to
+          the given customer. Read only.
       hidden:
-          Whether the client is hidden or not. Default value is false.
-          Read only.
+          Specifies whether this is a hidden account. Learn more about
+          hidden accounts here. Read only.
       level:
-          Distance between customer and client. For self link, the level
-          value will be 0. Read only.
+          Distance between given customer and client. For self link, the
+          level value will be 0. Read only.
   """,
   # @@protoc_insertion_point(class_scope:google.ads.googleads.v0.resources.CustomerClient)
   ))
 _sym_db.RegisterMessage(CustomerClient)
 
 
-DESCRIPTOR.has_options = True
-DESCRIPTOR._options = _descriptor._ParseOptions(descriptor_pb2.FileOptions(), _b('\n%com.google.ads.googleads.v0.resourcesB\023CustomerClientProtoP\001ZJgoogle.golang.org/genproto/googleapis/ads/googleads/v0/resources;resources\242\002\003GAA\252\002!Google.Ads.GoogleAds.V0.Resources\312\002!Google\\Ads\\GoogleAds\\V0\\Resources'))
+DESCRIPTOR._options = None
 # @@protoc_insertion_point(module_scope)

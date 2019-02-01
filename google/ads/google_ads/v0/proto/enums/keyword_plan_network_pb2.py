@@ -7,7 +7,6 @@ from google.protobuf import descriptor as _descriptor
 from google.protobuf import message as _message
 from google.protobuf import reflection as _reflection
 from google.protobuf import symbol_database as _symbol_database
-from google.protobuf import descriptor_pb2
 # @@protoc_insertion_point(imports)
 
 _sym_db = _symbol_database.Default()
@@ -19,7 +18,8 @@ DESCRIPTOR = _descriptor.FileDescriptor(
   name='google/ads/googleads_v0/proto/enums/keyword_plan_network.proto',
   package='google.ads.googleads.v0.enums',
   syntax='proto3',
-  serialized_pb=_b('\n>google/ads/googleads_v0/proto/enums/keyword_plan_network.proto\x12\x1dgoogle.ads.googleads.v0.enums\"\x7f\n\x16KeywordPlanNetworkEnum\"e\n\x12KeywordPlanNetwork\x12\x0f\n\x0bUNSPECIFIED\x10\x00\x12\x0b\n\x07UNKNOWN\x10\x01\x12\x11\n\rGOOGLE_SEARCH\x10\x02\x12\x1e\n\x1aGOOGLE_SEARCH_AND_PARTNERS\x10\x03\x42\xc8\x01\n!com.google.ads.googleads.v0.enumsB\x17KeywordPlanNetworkProtoP\x01ZBgoogle.golang.org/genproto/googleapis/ads/googleads/v0/enums;enums\xa2\x02\x03GAA\xaa\x02\x1dGoogle.Ads.GoogleAds.V0.Enums\xca\x02\x1dGoogle\\Ads\\GoogleAds\\V0\\Enumsb\x06proto3')
+  serialized_options=_b('\n!com.google.ads.googleads.v0.enumsB\027KeywordPlanNetworkProtoP\001ZBgoogle.golang.org/genproto/googleapis/ads/googleads/v0/enums;enums\242\002\003GAA\252\002\035Google.Ads.GoogleAds.V0.Enums\312\002\035Google\\Ads\\GoogleAds\\V0\\Enums\352\002!Google::Ads::GoogleAds::V0::Enums'),
+  serialized_pb=_b('\n>google/ads/googleads_v0/proto/enums/keyword_plan_network.proto\x12\x1dgoogle.ads.googleads.v0.enums\"\x7f\n\x16KeywordPlanNetworkEnum\"e\n\x12KeywordPlanNetwork\x12\x0f\n\x0bUNSPECIFIED\x10\x00\x12\x0b\n\x07UNKNOWN\x10\x01\x12\x11\n\rGOOGLE_SEARCH\x10\x02\x12\x1e\n\x1aGOOGLE_SEARCH_AND_PARTNERS\x10\x03\x42\xec\x01\n!com.google.ads.googleads.v0.enumsB\x17KeywordPlanNetworkProtoP\x01ZBgoogle.golang.org/genproto/googleapis/ads/googleads/v0/enums;enums\xa2\x02\x03GAA\xaa\x02\x1dGoogle.Ads.GoogleAds.V0.Enums\xca\x02\x1dGoogle\\Ads\\GoogleAds\\V0\\Enums\xea\x02!Google::Ads::GoogleAds::V0::Enumsb\x06proto3')
 )
 
 
@@ -32,23 +32,23 @@ _KEYWORDPLANNETWORKENUM_KEYWORDPLANNETWORK = _descriptor.EnumDescriptor(
   values=[
     _descriptor.EnumValueDescriptor(
       name='UNSPECIFIED', index=0, number=0,
-      options=None,
+      serialized_options=None,
       type=None),
     _descriptor.EnumValueDescriptor(
       name='UNKNOWN', index=1, number=1,
-      options=None,
+      serialized_options=None,
       type=None),
     _descriptor.EnumValueDescriptor(
       name='GOOGLE_SEARCH', index=2, number=2,
-      options=None,
+      serialized_options=None,
       type=None),
     _descriptor.EnumValueDescriptor(
       name='GOOGLE_SEARCH_AND_PARTNERS', index=3, number=3,
-      options=None,
+      serialized_options=None,
       type=None),
   ],
   containing_type=None,
-  options=None,
+  serialized_options=None,
   serialized_start=123,
   serialized_end=224,
 )
@@ -69,7 +69,7 @@ _KEYWORDPLANNETWORKENUM = _descriptor.Descriptor(
   enum_types=[
     _KEYWORDPLANNETWORKENUM_KEYWORDPLANNETWORK,
   ],
-  options=None,
+  serialized_options=None,
   is_extendable=False,
   syntax='proto3',
   extension_ranges=[],
@@ -85,7 +85,7 @@ _sym_db.RegisterFileDescriptor(DESCRIPTOR)
 
 KeywordPlanNetworkEnum = _reflection.GeneratedProtocolMessageType('KeywordPlanNetworkEnum', (_message.Message,), dict(
   DESCRIPTOR = _KEYWORDPLANNETWORKENUM,
-  __module__ = 'google.ads.google_ads.v0.proto.enums.keyword_plan_network_pb2'
+  __module__ = 'google.ads.googleads_v0.proto.enums.keyword_plan_network_pb2'
   ,
   __doc__ = """Container for enumeration of keyword plan forecastable network types.
   """,
@@ -94,6 +94,5 @@ KeywordPlanNetworkEnum = _reflection.GeneratedProtocolMessageType('KeywordPlanNe
 _sym_db.RegisterMessage(KeywordPlanNetworkEnum)
 
 
-DESCRIPTOR.has_options = True
-DESCRIPTOR._options = _descriptor._ParseOptions(descriptor_pb2.FileOptions(), _b('\n!com.google.ads.googleads.v0.enumsB\027KeywordPlanNetworkProtoP\001ZBgoogle.golang.org/genproto/googleapis/ads/googleads/v0/enums;enums\242\002\003GAA\252\002\035Google.Ads.GoogleAds.V0.Enums\312\002\035Google\\Ads\\GoogleAds\\V0\\Enums'))
+DESCRIPTOR._options = None
 # @@protoc_insertion_point(module_scope)

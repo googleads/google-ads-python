@@ -7,7 +7,6 @@ from google.protobuf import descriptor as _descriptor
 from google.protobuf import message as _message
 from google.protobuf import reflection as _reflection
 from google.protobuf import symbol_database as _symbol_database
-from google.protobuf import descriptor_pb2
 # @@protoc_insertion_point(imports)
 
 _sym_db = _symbol_database.Default()
@@ -21,7 +20,8 @@ DESCRIPTOR = _descriptor.FileDescriptor(
   name='google/ads/googleads_v0/proto/services/product_group_view_service.proto',
   package='google.ads.googleads.v0.services',
   syntax='proto3',
-  serialized_pb=_b('\nGgoogle/ads/googleads_v0/proto/services/product_group_view_service.proto\x12 google.ads.googleads.v0.services\x1a@google/ads/googleads_v0/proto/resources/product_group_view.proto\x1a\x1cgoogle/api/annotations.proto\"3\n\x1aGetProductGroupViewRequest\x12\x15\n\rresource_name\x18\x01 \x01(\t2\xe1\x01\n\x17ProductGroupViewService\x12\xc5\x01\n\x13GetProductGroupView\x12<.google.ads.googleads.v0.services.GetProductGroupViewRequest\x1a\x33.google.ads.googleads.v0.resources.ProductGroupView\";\x82\xd3\xe4\x93\x02\x35\x12\x33/v0/{resource_name=customers/*/productGroupViews/*}B\xdc\x01\n$com.google.ads.googleads.v0.servicesB\x1cProductGroupViewServiceProtoP\x01ZHgoogle.golang.org/genproto/googleapis/ads/googleads/v0/services;services\xa2\x02\x03GAA\xaa\x02 Google.Ads.GoogleAds.V0.Services\xca\x02 Google\\Ads\\GoogleAds\\V0\\Servicesb\x06proto3')
+  serialized_options=_b('\n$com.google.ads.googleads.v0.servicesB\034ProductGroupViewServiceProtoP\001ZHgoogle.golang.org/genproto/googleapis/ads/googleads/v0/services;services\242\002\003GAA\252\002 Google.Ads.GoogleAds.V0.Services\312\002 Google\\Ads\\GoogleAds\\V0\\Services\352\002$Google::Ads::GoogleAds::V0::Services'),
+  serialized_pb=_b('\nGgoogle/ads/googleads_v0/proto/services/product_group_view_service.proto\x12 google.ads.googleads.v0.services\x1a@google/ads/googleads_v0/proto/resources/product_group_view.proto\x1a\x1cgoogle/api/annotations.proto\"3\n\x1aGetProductGroupViewRequest\x12\x15\n\rresource_name\x18\x01 \x01(\t2\xe1\x01\n\x17ProductGroupViewService\x12\xc5\x01\n\x13GetProductGroupView\x12<.google.ads.googleads.v0.services.GetProductGroupViewRequest\x1a\x33.google.ads.googleads.v0.resources.ProductGroupView\";\x82\xd3\xe4\x93\x02\x35\x12\x33/v0/{resource_name=customers/*/productGroupViews/*}B\x83\x02\n$com.google.ads.googleads.v0.servicesB\x1cProductGroupViewServiceProtoP\x01ZHgoogle.golang.org/genproto/googleapis/ads/googleads/v0/services;services\xa2\x02\x03GAA\xaa\x02 Google.Ads.GoogleAds.V0.Services\xca\x02 Google\\Ads\\GoogleAds\\V0\\Services\xea\x02$Google::Ads::GoogleAds::V0::Servicesb\x06proto3')
   ,
   dependencies=[google_dot_ads_dot_googleads__v0_dot_proto_dot_resources_dot_product__group__view__pb2.DESCRIPTOR,google_dot_api_dot_annotations__pb2.DESCRIPTOR,])
 
@@ -41,14 +41,14 @@ _GETPRODUCTGROUPVIEWREQUEST = _descriptor.Descriptor(
       has_default_value=False, default_value=_b("").decode('utf-8'),
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
-      options=None, file=DESCRIPTOR),
+      serialized_options=None, file=DESCRIPTOR),
   ],
   extensions=[
   ],
   nested_types=[],
   enum_types=[
   ],
-  options=None,
+  serialized_options=None,
   is_extendable=False,
   syntax='proto3',
   extension_ranges=[],
@@ -63,7 +63,7 @@ _sym_db.RegisterFileDescriptor(DESCRIPTOR)
 
 GetProductGroupViewRequest = _reflection.GeneratedProtocolMessageType('GetProductGroupViewRequest', (_message.Message,), dict(
   DESCRIPTOR = _GETPRODUCTGROUPVIEWREQUEST,
-  __module__ = 'google.ads.google_ads.v0.proto.services.product_group_view_service_pb2'
+  __module__ = 'google.ads.googleads_v0.proto.services.product_group_view_service_pb2'
   ,
   __doc__ = """Request message for
   [ProductGroupViewService.GetProductGroupView][google.ads.googleads.v0.services.ProductGroupViewService.GetProductGroupView].
@@ -78,15 +78,14 @@ GetProductGroupViewRequest = _reflection.GeneratedProtocolMessageType('GetProduc
 _sym_db.RegisterMessage(GetProductGroupViewRequest)
 
 
-DESCRIPTOR.has_options = True
-DESCRIPTOR._options = _descriptor._ParseOptions(descriptor_pb2.FileOptions(), _b('\n$com.google.ads.googleads.v0.servicesB\034ProductGroupViewServiceProtoP\001ZHgoogle.golang.org/genproto/googleapis/ads/googleads/v0/services;services\242\002\003GAA\252\002 Google.Ads.GoogleAds.V0.Services\312\002 Google\\Ads\\GoogleAds\\V0\\Services'))
+DESCRIPTOR._options = None
 
 _PRODUCTGROUPVIEWSERVICE = _descriptor.ServiceDescriptor(
   name='ProductGroupViewService',
   full_name='google.ads.googleads.v0.services.ProductGroupViewService',
   file=DESCRIPTOR,
   index=0,
-  options=None,
+  serialized_options=None,
   serialized_start=259,
   serialized_end=484,
   methods=[
@@ -97,7 +96,7 @@ _PRODUCTGROUPVIEWSERVICE = _descriptor.ServiceDescriptor(
     containing_service=None,
     input_type=_GETPRODUCTGROUPVIEWREQUEST,
     output_type=google_dot_ads_dot_googleads__v0_dot_proto_dot_resources_dot_product__group__view__pb2._PRODUCTGROUPVIEW,
-    options=_descriptor._ParseOptions(descriptor_pb2.MethodOptions(), _b('\202\323\344\223\0025\0223/v0/{resource_name=customers/*/productGroupViews/*}')),
+    serialized_options=_b('\202\323\344\223\0025\0223/v0/{resource_name=customers/*/productGroupViews/*}'),
   ),
 ])
 _sym_db.RegisterServiceDescriptor(_PRODUCTGROUPVIEWSERVICE)

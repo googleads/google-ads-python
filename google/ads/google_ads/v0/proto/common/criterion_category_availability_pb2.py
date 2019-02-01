@@ -7,7 +7,6 @@ from google.protobuf import descriptor as _descriptor
 from google.protobuf import message as _message
 from google.protobuf import reflection as _reflection
 from google.protobuf import symbol_database as _symbol_database
-from google.protobuf import descriptor_pb2
 # @@protoc_insertion_point(imports)
 
 _sym_db = _symbol_database.Default()
@@ -24,7 +23,8 @@ DESCRIPTOR = _descriptor.FileDescriptor(
   name='google/ads/googleads_v0/proto/common/criterion_category_availability.proto',
   package='google.ads.googleads.v0.common',
   syntax='proto3',
-  serialized_pb=_b('\nJgoogle/ads/googleads_v0/proto/common/criterion_category_availability.proto\x12\x1egoogle.ads.googleads.v0.common\x1a\x46google/ads/googleads_v0/proto/enums/advertising_channel_sub_type.proto\x1a\x42google/ads/googleads_v0/proto/enums/advertising_channel_type.proto\x1aVgoogle/ads/googleads_v0/proto/enums/criterion_category_channel_availability_mode.proto\x1aUgoogle/ads/googleads_v0/proto/enums/criterion_category_locale_availability_mode.proto\x1a\x1egoogle/protobuf/wrappers.proto\"\xcb\x01\n\x1d\x43riterionCategoryAvailability\x12U\n\x07\x63hannel\x18\x01 \x01(\x0b\x32\x44.google.ads.googleads.v0.common.CriterionCategoryChannelAvailability\x12S\n\x06locale\x18\x02 \x03(\x0b\x32\x43.google.ads.googleads.v0.common.CriterionCategoryLocaleAvailability\"\xf0\x03\n$CriterionCategoryChannelAvailability\x12\x8f\x01\n\x11\x61vailability_mode\x18\x01 \x01(\x0e\x32t.google.ads.googleads.v0.enums.CriterionCategoryChannelAvailabilityModeEnum.CriterionCategoryChannelAvailabilityMode\x12r\n\x18\x61\x64vertising_channel_type\x18\x02 \x01(\x0e\x32P.google.ads.googleads.v0.enums.AdvertisingChannelTypeEnum.AdvertisingChannelType\x12|\n\x1c\x61\x64vertising_channel_sub_type\x18\x03 \x03(\x0e\x32V.google.ads.googleads.v0.enums.AdvertisingChannelSubTypeEnum.AdvertisingChannelSubType\x12\x44\n include_default_channel_sub_type\x18\x04 \x01(\x0b\x32\x1a.google.protobuf.BoolValue\"\x9e\x02\n#CriterionCategoryLocaleAvailability\x12\x8d\x01\n\x11\x61vailability_mode\x18\x01 \x01(\x0e\x32r.google.ads.googleads.v0.enums.CriterionCategoryLocaleAvailabilityModeEnum.CriterionCategoryLocaleAvailabilityMode\x12\x32\n\x0c\x63ountry_code\x18\x02 \x01(\x0b\x32\x1c.google.protobuf.StringValue\x12\x33\n\rlanguage_code\x18\x03 \x01(\x0b\x32\x1c.google.protobuf.StringValueB\xd8\x01\n\"com.google.ads.googleads.v0.commonB\"CriterionCategoryAvailabilityProtoP\x01ZDgoogle.golang.org/genproto/googleapis/ads/googleads/v0/common;common\xa2\x02\x03GAA\xaa\x02\x1eGoogle.Ads.GoogleAds.V0.Common\xca\x02\x1eGoogle\\Ads\\GoogleAds\\V0\\Commonb\x06proto3')
+  serialized_options=_b('\n\"com.google.ads.googleads.v0.commonB\"CriterionCategoryAvailabilityProtoP\001ZDgoogle.golang.org/genproto/googleapis/ads/googleads/v0/common;common\242\002\003GAA\252\002\036Google.Ads.GoogleAds.V0.Common\312\002\036Google\\Ads\\GoogleAds\\V0\\Common\352\002\"Google::Ads::GoogleAds::V0::Common'),
+  serialized_pb=_b('\nJgoogle/ads/googleads_v0/proto/common/criterion_category_availability.proto\x12\x1egoogle.ads.googleads.v0.common\x1a\x46google/ads/googleads_v0/proto/enums/advertising_channel_sub_type.proto\x1a\x42google/ads/googleads_v0/proto/enums/advertising_channel_type.proto\x1aVgoogle/ads/googleads_v0/proto/enums/criterion_category_channel_availability_mode.proto\x1aUgoogle/ads/googleads_v0/proto/enums/criterion_category_locale_availability_mode.proto\x1a\x1egoogle/protobuf/wrappers.proto\"\xcb\x01\n\x1d\x43riterionCategoryAvailability\x12U\n\x07\x63hannel\x18\x01 \x01(\x0b\x32\x44.google.ads.googleads.v0.common.CriterionCategoryChannelAvailability\x12S\n\x06locale\x18\x02 \x03(\x0b\x32\x43.google.ads.googleads.v0.common.CriterionCategoryLocaleAvailability\"\xf0\x03\n$CriterionCategoryChannelAvailability\x12\x8f\x01\n\x11\x61vailability_mode\x18\x01 \x01(\x0e\x32t.google.ads.googleads.v0.enums.CriterionCategoryChannelAvailabilityModeEnum.CriterionCategoryChannelAvailabilityMode\x12r\n\x18\x61\x64vertising_channel_type\x18\x02 \x01(\x0e\x32P.google.ads.googleads.v0.enums.AdvertisingChannelTypeEnum.AdvertisingChannelType\x12|\n\x1c\x61\x64vertising_channel_sub_type\x18\x03 \x03(\x0e\x32V.google.ads.googleads.v0.enums.AdvertisingChannelSubTypeEnum.AdvertisingChannelSubType\x12\x44\n include_default_channel_sub_type\x18\x04 \x01(\x0b\x32\x1a.google.protobuf.BoolValue\"\x9e\x02\n#CriterionCategoryLocaleAvailability\x12\x8d\x01\n\x11\x61vailability_mode\x18\x01 \x01(\x0e\x32r.google.ads.googleads.v0.enums.CriterionCategoryLocaleAvailabilityModeEnum.CriterionCategoryLocaleAvailabilityMode\x12\x32\n\x0c\x63ountry_code\x18\x02 \x01(\x0b\x32\x1c.google.protobuf.StringValue\x12\x33\n\rlanguage_code\x18\x03 \x01(\x0b\x32\x1c.google.protobuf.StringValueB\xfd\x01\n\"com.google.ads.googleads.v0.commonB\"CriterionCategoryAvailabilityProtoP\x01ZDgoogle.golang.org/genproto/googleapis/ads/googleads/v0/common;common\xa2\x02\x03GAA\xaa\x02\x1eGoogle.Ads.GoogleAds.V0.Common\xca\x02\x1eGoogle\\Ads\\GoogleAds\\V0\\Common\xea\x02\"Google::Ads::GoogleAds::V0::Commonb\x06proto3')
   ,
   dependencies=[google_dot_ads_dot_googleads__v0_dot_proto_dot_enums_dot_advertising__channel__sub__type__pb2.DESCRIPTOR,google_dot_ads_dot_googleads__v0_dot_proto_dot_enums_dot_advertising__channel__type__pb2.DESCRIPTOR,google_dot_ads_dot_googleads__v0_dot_proto_dot_enums_dot_criterion__category__channel__availability__mode__pb2.DESCRIPTOR,google_dot_ads_dot_googleads__v0_dot_proto_dot_enums_dot_criterion__category__locale__availability__mode__pb2.DESCRIPTOR,google_dot_protobuf_dot_wrappers__pb2.DESCRIPTOR,])
 
@@ -44,21 +44,21 @@ _CRITERIONCATEGORYAVAILABILITY = _descriptor.Descriptor(
       has_default_value=False, default_value=None,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
-      options=None, file=DESCRIPTOR),
+      serialized_options=None, file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
       name='locale', full_name='google.ads.googleads.v0.common.CriterionCategoryAvailability.locale', index=1,
       number=2, type=11, cpp_type=10, label=3,
       has_default_value=False, default_value=[],
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
-      options=None, file=DESCRIPTOR),
+      serialized_options=None, file=DESCRIPTOR),
   ],
   extensions=[
   ],
   nested_types=[],
   enum_types=[
   ],
-  options=None,
+  serialized_options=None,
   is_extendable=False,
   syntax='proto3',
   extension_ranges=[],
@@ -82,35 +82,35 @@ _CRITERIONCATEGORYCHANNELAVAILABILITY = _descriptor.Descriptor(
       has_default_value=False, default_value=0,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
-      options=None, file=DESCRIPTOR),
+      serialized_options=None, file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
       name='advertising_channel_type', full_name='google.ads.googleads.v0.common.CriterionCategoryChannelAvailability.advertising_channel_type', index=1,
       number=2, type=14, cpp_type=8, label=1,
       has_default_value=False, default_value=0,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
-      options=None, file=DESCRIPTOR),
+      serialized_options=None, file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
       name='advertising_channel_sub_type', full_name='google.ads.googleads.v0.common.CriterionCategoryChannelAvailability.advertising_channel_sub_type', index=2,
       number=3, type=14, cpp_type=8, label=3,
       has_default_value=False, default_value=[],
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
-      options=None, file=DESCRIPTOR),
+      serialized_options=None, file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
       name='include_default_channel_sub_type', full_name='google.ads.googleads.v0.common.CriterionCategoryChannelAvailability.include_default_channel_sub_type', index=3,
       number=4, type=11, cpp_type=10, label=1,
       has_default_value=False, default_value=None,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
-      options=None, file=DESCRIPTOR),
+      serialized_options=None, file=DESCRIPTOR),
   ],
   extensions=[
   ],
   nested_types=[],
   enum_types=[
   ],
-  options=None,
+  serialized_options=None,
   is_extendable=False,
   syntax='proto3',
   extension_ranges=[],
@@ -134,28 +134,28 @@ _CRITERIONCATEGORYLOCALEAVAILABILITY = _descriptor.Descriptor(
       has_default_value=False, default_value=0,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
-      options=None, file=DESCRIPTOR),
+      serialized_options=None, file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
       name='country_code', full_name='google.ads.googleads.v0.common.CriterionCategoryLocaleAvailability.country_code', index=1,
       number=2, type=11, cpp_type=10, label=1,
       has_default_value=False, default_value=None,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
-      options=None, file=DESCRIPTOR),
+      serialized_options=None, file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
       name='language_code', full_name='google.ads.googleads.v0.common.CriterionCategoryLocaleAvailability.language_code', index=2,
       number=3, type=11, cpp_type=10, label=1,
       has_default_value=False, default_value=None,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
-      options=None, file=DESCRIPTOR),
+      serialized_options=None, file=DESCRIPTOR),
   ],
   extensions=[
   ],
   nested_types=[],
   enum_types=[
   ],
-  options=None,
+  serialized_options=None,
   is_extendable=False,
   syntax='proto3',
   extension_ranges=[],
@@ -181,7 +181,7 @@ _sym_db.RegisterFileDescriptor(DESCRIPTOR)
 
 CriterionCategoryAvailability = _reflection.GeneratedProtocolMessageType('CriterionCategoryAvailability', (_message.Message,), dict(
   DESCRIPTOR = _CRITERIONCATEGORYAVAILABILITY,
-  __module__ = 'google.ads.google_ads.v0.proto.common.criterion_category_availability_pb2'
+  __module__ = 'google.ads.googleads_v0.proto.common.criterion_category_availability_pb2'
   ,
   __doc__ = """Information of category availability, per advertising channel.
   
@@ -198,7 +198,7 @@ _sym_db.RegisterMessage(CriterionCategoryAvailability)
 
 CriterionCategoryChannelAvailability = _reflection.GeneratedProtocolMessageType('CriterionCategoryChannelAvailability', (_message.Message,), dict(
   DESCRIPTOR = _CRITERIONCATEGORYCHANNELAVAILABILITY,
-  __module__ = 'google.ads.google_ads.v0.proto.common.criterion_category_availability_pb2'
+  __module__ = 'google.ads.googleads_v0.proto.common.criterion_category_availability_pb2'
   ,
   __doc__ = """Information of advertising channel type and subtypes a category is
   available in.
@@ -231,7 +231,7 @@ _sym_db.RegisterMessage(CriterionCategoryChannelAvailability)
 
 CriterionCategoryLocaleAvailability = _reflection.GeneratedProtocolMessageType('CriterionCategoryLocaleAvailability', (_message.Message,), dict(
   DESCRIPTOR = _CRITERIONCATEGORYLOCALEAVAILABILITY,
-  __module__ = 'google.ads.google_ads.v0.proto.common.criterion_category_availability_pb2'
+  __module__ = 'google.ads.googleads_v0.proto.common.criterion_category_availability_pb2'
   ,
   __doc__ = """Information about which locales a category is available in.
   
@@ -253,6 +253,5 @@ CriterionCategoryLocaleAvailability = _reflection.GeneratedProtocolMessageType('
 _sym_db.RegisterMessage(CriterionCategoryLocaleAvailability)
 
 
-DESCRIPTOR.has_options = True
-DESCRIPTOR._options = _descriptor._ParseOptions(descriptor_pb2.FileOptions(), _b('\n\"com.google.ads.googleads.v0.commonB\"CriterionCategoryAvailabilityProtoP\001ZDgoogle.golang.org/genproto/googleapis/ads/googleads/v0/common;common\242\002\003GAA\252\002\036Google.Ads.GoogleAds.V0.Common\312\002\036Google\\Ads\\GoogleAds\\V0\\Common'))
+DESCRIPTOR._options = None
 # @@protoc_insertion_point(module_scope)

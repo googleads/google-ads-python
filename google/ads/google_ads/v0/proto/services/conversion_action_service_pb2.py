@@ -7,7 +7,6 @@ from google.protobuf import descriptor as _descriptor
 from google.protobuf import message as _message
 from google.protobuf import reflection as _reflection
 from google.protobuf import symbol_database as _symbol_database
-from google.protobuf import descriptor_pb2
 # @@protoc_insertion_point(imports)
 
 _sym_db = _symbol_database.Default()
@@ -16,15 +15,18 @@ _sym_db = _symbol_database.Default()
 from google.ads.google_ads.v0.proto.resources import conversion_action_pb2 as google_dot_ads_dot_googleads__v0_dot_proto_dot_resources_dot_conversion__action__pb2
 from google.api import annotations_pb2 as google_dot_api_dot_annotations__pb2
 from google.protobuf import field_mask_pb2 as google_dot_protobuf_dot_field__mask__pb2
+from google.protobuf import wrappers_pb2 as google_dot_protobuf_dot_wrappers__pb2
+from google.rpc import status_pb2 as google_dot_rpc_dot_status__pb2
 
 
 DESCRIPTOR = _descriptor.FileDescriptor(
   name='google/ads/googleads_v0/proto/services/conversion_action_service.proto',
   package='google.ads.googleads.v0.services',
   syntax='proto3',
-  serialized_pb=_b('\nFgoogle/ads/googleads_v0/proto/services/conversion_action_service.proto\x12 google.ads.googleads.v0.services\x1a?google/ads/googleads_v0/proto/resources/conversion_action.proto\x1a\x1cgoogle/api/annotations.proto\x1a google/protobuf/field_mask.proto\"3\n\x1aGetConversionActionRequest\x12\x15\n\rresource_name\x18\x01 \x01(\t\"\x86\x01\n\x1eMutateConversionActionsRequest\x12\x13\n\x0b\x63ustomer_id\x18\x01 \x01(\t\x12O\n\noperations\x18\x02 \x03(\x0b\x32;.google.ads.googleads.v0.services.ConversionActionOperation\"\xf9\x01\n\x19\x43onversionActionOperation\x12/\n\x0bupdate_mask\x18\x04 \x01(\x0b\x32\x1a.google.protobuf.FieldMask\x12\x45\n\x06\x63reate\x18\x01 \x01(\x0b\x32\x33.google.ads.googleads.v0.resources.ConversionActionH\x00\x12\x45\n\x06update\x18\x02 \x01(\x0b\x32\x33.google.ads.googleads.v0.resources.ConversionActionH\x00\x12\x10\n\x06remove\x18\x03 \x01(\tH\x00\x42\x0b\n\toperation\"r\n\x1fMutateConversionActionsResponse\x12O\n\x07results\x18\x02 \x03(\x0b\x32>.google.ads.googleads.v0.services.MutateConversionActionResult\"5\n\x1cMutateConversionActionResult\x12\x15\n\rresource_name\x18\x01 \x01(\t2\xc5\x03\n\x17\x43onversionActionService\x12\xc5\x01\n\x13GetConversionAction\x12<.google.ads.googleads.v0.services.GetConversionActionRequest\x1a\x33.google.ads.googleads.v0.resources.ConversionAction\";\x82\xd3\xe4\x93\x02\x35\x12\x33/v0/{resource_name=customers/*/conversionActions/*}\x12\xe1\x01\n\x17MutateConversionActions\x12@.google.ads.googleads.v0.services.MutateConversionActionsRequest\x1a\x41.google.ads.googleads.v0.services.MutateConversionActionsResponse\"A\x82\xd3\xe4\x93\x02;\"6/v0/customers/{customer_id=*}/conversionActions:mutate:\x01*B\xdc\x01\n$com.google.ads.googleads.v0.servicesB\x1c\x43onversionActionServiceProtoP\x01ZHgoogle.golang.org/genproto/googleapis/ads/googleads/v0/services;services\xa2\x02\x03GAA\xaa\x02 Google.Ads.GoogleAds.V0.Services\xca\x02 Google\\Ads\\GoogleAds\\V0\\Servicesb\x06proto3')
+  serialized_options=_b('\n$com.google.ads.googleads.v0.servicesB\034ConversionActionServiceProtoP\001ZHgoogle.golang.org/genproto/googleapis/ads/googleads/v0/services;services\242\002\003GAA\252\002 Google.Ads.GoogleAds.V0.Services\312\002 Google\\Ads\\GoogleAds\\V0\\Services\352\002$Google::Ads::GoogleAds::V0::Services'),
+  serialized_pb=_b('\nFgoogle/ads/googleads_v0/proto/services/conversion_action_service.proto\x12 google.ads.googleads.v0.services\x1a?google/ads/googleads_v0/proto/resources/conversion_action.proto\x1a\x1cgoogle/api/annotations.proto\x1a google/protobuf/field_mask.proto\x1a\x1egoogle/protobuf/wrappers.proto\x1a\x17google/rpc/status.proto\"3\n\x1aGetConversionActionRequest\x12\x15\n\rresource_name\x18\x01 \x01(\t\"\xb6\x01\n\x1eMutateConversionActionsRequest\x12\x13\n\x0b\x63ustomer_id\x18\x01 \x01(\t\x12O\n\noperations\x18\x02 \x03(\x0b\x32;.google.ads.googleads.v0.services.ConversionActionOperation\x12\x17\n\x0fpartial_failure\x18\x03 \x01(\x08\x12\x15\n\rvalidate_only\x18\x04 \x01(\x08\"\xf9\x01\n\x19\x43onversionActionOperation\x12/\n\x0bupdate_mask\x18\x04 \x01(\x0b\x32\x1a.google.protobuf.FieldMask\x12\x45\n\x06\x63reate\x18\x01 \x01(\x0b\x32\x33.google.ads.googleads.v0.resources.ConversionActionH\x00\x12\x45\n\x06update\x18\x02 \x01(\x0b\x32\x33.google.ads.googleads.v0.resources.ConversionActionH\x00\x12\x10\n\x06remove\x18\x03 \x01(\tH\x00\x42\x0b\n\toperation\"\xa5\x01\n\x1fMutateConversionActionsResponse\x12\x31\n\x15partial_failure_error\x18\x03 \x01(\x0b\x32\x12.google.rpc.Status\x12O\n\x07results\x18\x02 \x03(\x0b\x32>.google.ads.googleads.v0.services.MutateConversionActionResult\"5\n\x1cMutateConversionActionResult\x12\x15\n\rresource_name\x18\x01 \x01(\t2\xc5\x03\n\x17\x43onversionActionService\x12\xc5\x01\n\x13GetConversionAction\x12<.google.ads.googleads.v0.services.GetConversionActionRequest\x1a\x33.google.ads.googleads.v0.resources.ConversionAction\";\x82\xd3\xe4\x93\x02\x35\x12\x33/v0/{resource_name=customers/*/conversionActions/*}\x12\xe1\x01\n\x17MutateConversionActions\x12@.google.ads.googleads.v0.services.MutateConversionActionsRequest\x1a\x41.google.ads.googleads.v0.services.MutateConversionActionsResponse\"A\x82\xd3\xe4\x93\x02;\"6/v0/customers/{customer_id=*}/conversionActions:mutate:\x01*B\x83\x02\n$com.google.ads.googleads.v0.servicesB\x1c\x43onversionActionServiceProtoP\x01ZHgoogle.golang.org/genproto/googleapis/ads/googleads/v0/services;services\xa2\x02\x03GAA\xaa\x02 Google.Ads.GoogleAds.V0.Services\xca\x02 Google\\Ads\\GoogleAds\\V0\\Services\xea\x02$Google::Ads::GoogleAds::V0::Servicesb\x06proto3')
   ,
-  dependencies=[google_dot_ads_dot_googleads__v0_dot_proto_dot_resources_dot_conversion__action__pb2.DESCRIPTOR,google_dot_api_dot_annotations__pb2.DESCRIPTOR,google_dot_protobuf_dot_field__mask__pb2.DESCRIPTOR,])
+  dependencies=[google_dot_ads_dot_googleads__v0_dot_proto_dot_resources_dot_conversion__action__pb2.DESCRIPTOR,google_dot_api_dot_annotations__pb2.DESCRIPTOR,google_dot_protobuf_dot_field__mask__pb2.DESCRIPTOR,google_dot_protobuf_dot_wrappers__pb2.DESCRIPTOR,google_dot_rpc_dot_status__pb2.DESCRIPTOR,])
 
 
 
@@ -42,21 +44,21 @@ _GETCONVERSIONACTIONREQUEST = _descriptor.Descriptor(
       has_default_value=False, default_value=_b("").decode('utf-8'),
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
-      options=None, file=DESCRIPTOR),
+      serialized_options=None, file=DESCRIPTOR),
   ],
   extensions=[
   ],
   nested_types=[],
   enum_types=[
   ],
-  options=None,
+  serialized_options=None,
   is_extendable=False,
   syntax='proto3',
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=237,
-  serialized_end=288,
+  serialized_start=294,
+  serialized_end=345,
 )
 
 
@@ -73,28 +75,42 @@ _MUTATECONVERSIONACTIONSREQUEST = _descriptor.Descriptor(
       has_default_value=False, default_value=_b("").decode('utf-8'),
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
-      options=None, file=DESCRIPTOR),
+      serialized_options=None, file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
       name='operations', full_name='google.ads.googleads.v0.services.MutateConversionActionsRequest.operations', index=1,
       number=2, type=11, cpp_type=10, label=3,
       has_default_value=False, default_value=[],
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
-      options=None, file=DESCRIPTOR),
+      serialized_options=None, file=DESCRIPTOR),
+    _descriptor.FieldDescriptor(
+      name='partial_failure', full_name='google.ads.googleads.v0.services.MutateConversionActionsRequest.partial_failure', index=2,
+      number=3, type=8, cpp_type=7, label=1,
+      has_default_value=False, default_value=False,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR),
+    _descriptor.FieldDescriptor(
+      name='validate_only', full_name='google.ads.googleads.v0.services.MutateConversionActionsRequest.validate_only', index=3,
+      number=4, type=8, cpp_type=7, label=1,
+      has_default_value=False, default_value=False,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR),
   ],
   extensions=[
   ],
   nested_types=[],
   enum_types=[
   ],
-  options=None,
+  serialized_options=None,
   is_extendable=False,
   syntax='proto3',
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=291,
-  serialized_end=425,
+  serialized_start=348,
+  serialized_end=530,
 )
 
 
@@ -111,35 +127,35 @@ _CONVERSIONACTIONOPERATION = _descriptor.Descriptor(
       has_default_value=False, default_value=None,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
-      options=None, file=DESCRIPTOR),
+      serialized_options=None, file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
       name='create', full_name='google.ads.googleads.v0.services.ConversionActionOperation.create', index=1,
       number=1, type=11, cpp_type=10, label=1,
       has_default_value=False, default_value=None,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
-      options=None, file=DESCRIPTOR),
+      serialized_options=None, file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
       name='update', full_name='google.ads.googleads.v0.services.ConversionActionOperation.update', index=2,
       number=2, type=11, cpp_type=10, label=1,
       has_default_value=False, default_value=None,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
-      options=None, file=DESCRIPTOR),
+      serialized_options=None, file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
       name='remove', full_name='google.ads.googleads.v0.services.ConversionActionOperation.remove', index=3,
       number=3, type=9, cpp_type=9, label=1,
       has_default_value=False, default_value=_b("").decode('utf-8'),
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
-      options=None, file=DESCRIPTOR),
+      serialized_options=None, file=DESCRIPTOR),
   ],
   extensions=[
   ],
   nested_types=[],
   enum_types=[
   ],
-  options=None,
+  serialized_options=None,
   is_extendable=False,
   syntax='proto3',
   extension_ranges=[],
@@ -148,8 +164,8 @@ _CONVERSIONACTIONOPERATION = _descriptor.Descriptor(
       name='operation', full_name='google.ads.googleads.v0.services.ConversionActionOperation.operation',
       index=0, containing_type=None, fields=[]),
   ],
-  serialized_start=428,
-  serialized_end=677,
+  serialized_start=533,
+  serialized_end=782,
 )
 
 
@@ -161,26 +177,33 @@ _MUTATECONVERSIONACTIONSRESPONSE = _descriptor.Descriptor(
   containing_type=None,
   fields=[
     _descriptor.FieldDescriptor(
-      name='results', full_name='google.ads.googleads.v0.services.MutateConversionActionsResponse.results', index=0,
+      name='partial_failure_error', full_name='google.ads.googleads.v0.services.MutateConversionActionsResponse.partial_failure_error', index=0,
+      number=3, type=11, cpp_type=10, label=1,
+      has_default_value=False, default_value=None,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR),
+    _descriptor.FieldDescriptor(
+      name='results', full_name='google.ads.googleads.v0.services.MutateConversionActionsResponse.results', index=1,
       number=2, type=11, cpp_type=10, label=3,
       has_default_value=False, default_value=[],
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
-      options=None, file=DESCRIPTOR),
+      serialized_options=None, file=DESCRIPTOR),
   ],
   extensions=[
   ],
   nested_types=[],
   enum_types=[
   ],
-  options=None,
+  serialized_options=None,
   is_extendable=False,
   syntax='proto3',
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=679,
-  serialized_end=793,
+  serialized_start=785,
+  serialized_end=950,
 )
 
 
@@ -197,21 +220,21 @@ _MUTATECONVERSIONACTIONRESULT = _descriptor.Descriptor(
       has_default_value=False, default_value=_b("").decode('utf-8'),
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
-      options=None, file=DESCRIPTOR),
+      serialized_options=None, file=DESCRIPTOR),
   ],
   extensions=[
   ],
   nested_types=[],
   enum_types=[
   ],
-  options=None,
+  serialized_options=None,
   is_extendable=False,
   syntax='proto3',
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=795,
-  serialized_end=848,
+  serialized_start=952,
+  serialized_end=1005,
 )
 
 _MUTATECONVERSIONACTIONSREQUEST.fields_by_name['operations'].message_type = _CONVERSIONACTIONOPERATION
@@ -227,6 +250,7 @@ _CONVERSIONACTIONOPERATION.fields_by_name['update'].containing_oneof = _CONVERSI
 _CONVERSIONACTIONOPERATION.oneofs_by_name['operation'].fields.append(
   _CONVERSIONACTIONOPERATION.fields_by_name['remove'])
 _CONVERSIONACTIONOPERATION.fields_by_name['remove'].containing_oneof = _CONVERSIONACTIONOPERATION.oneofs_by_name['operation']
+_MUTATECONVERSIONACTIONSRESPONSE.fields_by_name['partial_failure_error'].message_type = google_dot_rpc_dot_status__pb2._STATUS
 _MUTATECONVERSIONACTIONSRESPONSE.fields_by_name['results'].message_type = _MUTATECONVERSIONACTIONRESULT
 DESCRIPTOR.message_types_by_name['GetConversionActionRequest'] = _GETCONVERSIONACTIONREQUEST
 DESCRIPTOR.message_types_by_name['MutateConversionActionsRequest'] = _MUTATECONVERSIONACTIONSREQUEST
@@ -237,7 +261,7 @@ _sym_db.RegisterFileDescriptor(DESCRIPTOR)
 
 GetConversionActionRequest = _reflection.GeneratedProtocolMessageType('GetConversionActionRequest', (_message.Message,), dict(
   DESCRIPTOR = _GETCONVERSIONACTIONREQUEST,
-  __module__ = 'google.ads.google_ads.v0.proto.services.conversion_action_service_pb2'
+  __module__ = 'google.ads.googleads_v0.proto.services.conversion_action_service_pb2'
   ,
   __doc__ = """Request message for [ConversionActionService.GetConversionAction].
   
@@ -252,7 +276,7 @@ _sym_db.RegisterMessage(GetConversionActionRequest)
 
 MutateConversionActionsRequest = _reflection.GeneratedProtocolMessageType('MutateConversionActionsRequest', (_message.Message,), dict(
   DESCRIPTOR = _MUTATECONVERSIONACTIONSREQUEST,
-  __module__ = 'google.ads.google_ads.v0.proto.services.conversion_action_service_pb2'
+  __module__ = 'google.ads.googleads_v0.proto.services.conversion_action_service_pb2'
   ,
   __doc__ = """Request message for [ConversionActionService.MutateConversionActions].
   
@@ -264,6 +288,14 @@ MutateConversionActionsRequest = _reflection.GeneratedProtocolMessageType('Mutat
       operations:
           The list of operations to perform on individual conversion
           actions.
+      partial_failure:
+          If true, successful operations will be carried out and invalid
+          operations will return errors. If false, all operations will
+          be carried out in one transaction if and only if they are all
+          valid. Default is false.
+      validate_only:
+          If true, the request is validated but not executed. Only
+          errors are returned, not results.
   """,
   # @@protoc_insertion_point(class_scope:google.ads.googleads.v0.services.MutateConversionActionsRequest)
   ))
@@ -271,7 +303,7 @@ _sym_db.RegisterMessage(MutateConversionActionsRequest)
 
 ConversionActionOperation = _reflection.GeneratedProtocolMessageType('ConversionActionOperation', (_message.Message,), dict(
   DESCRIPTOR = _CONVERSIONACTIONOPERATION,
-  __module__ = 'google.ads.google_ads.v0.proto.services.conversion_action_service_pb2'
+  __module__ = 'google.ads.googleads_v0.proto.services.conversion_action_service_pb2'
   ,
   __doc__ = """A single operation (create, update, remove) on a conversion action.
   
@@ -299,12 +331,18 @@ _sym_db.RegisterMessage(ConversionActionOperation)
 
 MutateConversionActionsResponse = _reflection.GeneratedProtocolMessageType('MutateConversionActionsResponse', (_message.Message,), dict(
   DESCRIPTOR = _MUTATECONVERSIONACTIONSRESPONSE,
-  __module__ = 'google.ads.google_ads.v0.proto.services.conversion_action_service_pb2'
+  __module__ = 'google.ads.googleads_v0.proto.services.conversion_action_service_pb2'
   ,
   __doc__ = """Response message for conversion action mutate.
   
   
   Attributes:
+      partial_failure_error:
+          Errors that pertain to operation failures in the partial
+          failure mode. Returned only when partial\_failure = true and
+          all errors occur inside the operations. If any errors occur
+          outside the operations (e.g. auth errors), we return an RPC
+          level error.
       results:
           All results for the mutate.
   """,
@@ -314,7 +352,7 @@ _sym_db.RegisterMessage(MutateConversionActionsResponse)
 
 MutateConversionActionResult = _reflection.GeneratedProtocolMessageType('MutateConversionActionResult', (_message.Message,), dict(
   DESCRIPTOR = _MUTATECONVERSIONACTIONRESULT,
-  __module__ = 'google.ads.google_ads.v0.proto.services.conversion_action_service_pb2'
+  __module__ = 'google.ads.googleads_v0.proto.services.conversion_action_service_pb2'
   ,
   __doc__ = """The result for the conversion action mutate.
   
@@ -328,17 +366,16 @@ MutateConversionActionResult = _reflection.GeneratedProtocolMessageType('MutateC
 _sym_db.RegisterMessage(MutateConversionActionResult)
 
 
-DESCRIPTOR.has_options = True
-DESCRIPTOR._options = _descriptor._ParseOptions(descriptor_pb2.FileOptions(), _b('\n$com.google.ads.googleads.v0.servicesB\034ConversionActionServiceProtoP\001ZHgoogle.golang.org/genproto/googleapis/ads/googleads/v0/services;services\242\002\003GAA\252\002 Google.Ads.GoogleAds.V0.Services\312\002 Google\\Ads\\GoogleAds\\V0\\Services'))
+DESCRIPTOR._options = None
 
 _CONVERSIONACTIONSERVICE = _descriptor.ServiceDescriptor(
   name='ConversionActionService',
   full_name='google.ads.googleads.v0.services.ConversionActionService',
   file=DESCRIPTOR,
   index=0,
-  options=None,
-  serialized_start=851,
-  serialized_end=1304,
+  serialized_options=None,
+  serialized_start=1008,
+  serialized_end=1461,
   methods=[
   _descriptor.MethodDescriptor(
     name='GetConversionAction',
@@ -347,7 +384,7 @@ _CONVERSIONACTIONSERVICE = _descriptor.ServiceDescriptor(
     containing_service=None,
     input_type=_GETCONVERSIONACTIONREQUEST,
     output_type=google_dot_ads_dot_googleads__v0_dot_proto_dot_resources_dot_conversion__action__pb2._CONVERSIONACTION,
-    options=_descriptor._ParseOptions(descriptor_pb2.MethodOptions(), _b('\202\323\344\223\0025\0223/v0/{resource_name=customers/*/conversionActions/*}')),
+    serialized_options=_b('\202\323\344\223\0025\0223/v0/{resource_name=customers/*/conversionActions/*}'),
   ),
   _descriptor.MethodDescriptor(
     name='MutateConversionActions',
@@ -356,7 +393,7 @@ _CONVERSIONACTIONSERVICE = _descriptor.ServiceDescriptor(
     containing_service=None,
     input_type=_MUTATECONVERSIONACTIONSREQUEST,
     output_type=_MUTATECONVERSIONACTIONSRESPONSE,
-    options=_descriptor._ParseOptions(descriptor_pb2.MethodOptions(), _b('\202\323\344\223\002;\"6/v0/customers/{customer_id=*}/conversionActions:mutate:\001*')),
+    serialized_options=_b('\202\323\344\223\002;\"6/v0/customers/{customer_id=*}/conversionActions:mutate:\001*'),
   ),
 ])
 _sym_db.RegisterServiceDescriptor(_CONVERSIONACTIONSERVICE)

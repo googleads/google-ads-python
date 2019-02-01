@@ -1,4 +1,6 @@
-# Copyright 2018 Google LLC
+# -*- coding: utf-8 -*-
+#
+# Copyright 2019 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -22,12 +24,10 @@ import google.api_core.gapic_v1.config
 import google.api_core.gapic_v1.method
 import google.api_core.grpc_helpers
 import google.api_core.path_template
-import grpc
 
 from google.ads.google_ads.v0.services import recommendation_service_client_config
 from google.ads.google_ads.v0.services.transports import recommendation_service_grpc_transport
 from google.ads.google_ads.v0.proto.services import recommendation_service_pb2
-from google.protobuf import wrappers_pb2
 
 _GAPIC_LIBRARY_VERSION = pkg_resources.get_distribution(
     'google-ads', ).version
@@ -77,7 +77,7 @@ class RecommendationServiceClient(object):
                  transport=None,
                  channel=None,
                  credentials=None,
-                 client_config=recommendation_service_client_config.config,
+                 client_config=None,
                  client_info=None):
         """Constructor.
 
@@ -110,13 +110,20 @@ class RecommendationServiceClient(object):
                 your own client library.
         """
         # Raise deprecation warnings for things we want to go away.
-        if client_config:
-            warnings.warn('The `client_config` argument is deprecated.',
-                          PendingDeprecationWarning)
+        if client_config is not None:
+            warnings.warn(
+                'The `client_config` argument is deprecated.',
+                PendingDeprecationWarning,
+                stacklevel=2)
+        else:
+            client_config = recommendation_service_client_config.config
+
         if channel:
             warnings.warn(
                 'The `channel` argument is deprecated; use '
-                '`transport` instead.', PendingDeprecationWarning)
+                '`transport` instead.',
+                PendingDeprecationWarning,
+                stacklevel=2)
 
         # Instantiate the transport.
         # The transport is responsible for handling serialization and
@@ -142,9 +149,10 @@ class RecommendationServiceClient(object):
             )
 
         if client_info is None:
-            client_info = (
-                google.api_core.gapic_v1.client_info.DEFAULT_CLIENT_INFO)
-        client_info.gapic_version = _GAPIC_LIBRARY_VERSION
+            client_info = google.api_core.gapic_v1.client_info.ClientInfo(
+                gapic_version=_GAPIC_LIBRARY_VERSION, )
+        else:
+            client_info.gapic_version = _GAPIC_LIBRARY_VERSION
         self._client_info = client_info
 
         # Parse out the default settings for retry and timeout for each RPC
@@ -181,7 +189,7 @@ class RecommendationServiceClient(object):
                 that is provided to the method.
 
         Returns:
-            A :class:`~google.ads.google_ads.v0.types.Recommendation` instance.
+            A :class:`~google.ads.googleads_v0.types.Recommendation` instance.
 
         Raises:
             google.api_core.exceptions.GoogleAPICallError: If the request
@@ -195,10 +203,10 @@ class RecommendationServiceClient(object):
             self._inner_api_calls[
                 'get_recommendation'] = google.api_core.gapic_v1.method.wrap_method(
                     self.transport.get_recommendation,
-                    default_retry=self._method_configs[
-                        'GetRecommendation'].retry,
-                    default_timeout=self._method_configs['GetRecommendation']
-                    .timeout,
+                    default_retry=self._method_configs['GetRecommendation'].
+                    retry,
+                    default_timeout=self._method_configs['GetRecommendation'].
+                    timeout,
                     client_info=self._client_info,
                 )
 
@@ -209,8 +217,8 @@ class RecommendationServiceClient(object):
 
     def apply_recommendation(self,
                              customer_id,
-                             partial_failure,
                              operations,
+                             partial_failure=None,
                              retry=google.api_core.gapic_v1.method.DEFAULT,
                              timeout=google.api_core.gapic_v1.method.DEFAULT,
                              metadata=None):
@@ -219,15 +227,16 @@ class RecommendationServiceClient(object):
 
         Args:
             customer_id (str): The ID of the customer with the recommendation.
+            operations (list[Union[dict, ~google.ads.googleads_v0.types.ApplyRecommendationOperation]]): The list of operations to apply recommendations. If
+                partial\_failure=false all recommendations should be of the same type
+                There is a limit of 100 operations per request.
+
+                If a dict is provided, it must be of the same form as the protobuf
+                message :class:`~google.ads.googleads_v0.types.ApplyRecommendationOperation`
             partial_failure (bool): If true, successful operations will be carried out and invalid
                 operations will return errors. If false, operations will be carried
                 out as a transaction if and only if they are all valid.
                 Default is false.
-            operations (list[Union[dict, ~google.ads.google_ads.v0.types.ApplyRecommendationOperation]]): The list of operations to apply recommendations.
-                If partial_failure=false all recommendations should be of the same type
-                There is a limit of 100 operations per request.
-                If a dict is provided, it must be of the same form as the protobuf
-                message :class:`~google.ads.google_ads.v0.types.ApplyRecommendationOperation`
             retry (Optional[google.api_core.retry.Retry]):  A retry object used
                 to retry requests. If ``None`` is specified, requests will not
                 be retried.
@@ -238,7 +247,7 @@ class RecommendationServiceClient(object):
                 that is provided to the method.
 
         Returns:
-            A :class:`~google.ads.google_ads.v0.types.ApplyRecommendationResponse` instance.
+            A :class:`~google.ads.googleads_v0.types.ApplyRecommendationResponse` instance.
 
         Raises:
             google.api_core.exceptions.GoogleAPICallError: If the request
@@ -252,25 +261,25 @@ class RecommendationServiceClient(object):
             self._inner_api_calls[
                 'apply_recommendation'] = google.api_core.gapic_v1.method.wrap_method(
                     self.transport.apply_recommendation,
-                    default_retry=self._method_configs[
-                        'ApplyRecommendation'].retry,
-                    default_timeout=self._method_configs['ApplyRecommendation']
-                    .timeout,
+                    default_retry=self._method_configs['ApplyRecommendation'].
+                    retry,
+                    default_timeout=self.
+                    _method_configs['ApplyRecommendation'].timeout,
                     client_info=self._client_info,
                 )
 
         request = recommendation_service_pb2.ApplyRecommendationRequest(
             customer_id=customer_id,
-            partial_failure=partial_failure,
             operations=operations,
+            partial_failure=partial_failure,
         )
         return self._inner_api_calls['apply_recommendation'](
             request, retry=retry, timeout=timeout, metadata=metadata)
 
     def dismiss_recommendation(self,
                                customer_id,
-                               partial_failure,
                                operations,
+                               partial_failure=None,
                                retry=google.api_core.gapic_v1.method.DEFAULT,
                                timeout=google.api_core.gapic_v1.method.DEFAULT,
                                metadata=None):
@@ -279,15 +288,16 @@ class RecommendationServiceClient(object):
 
         Args:
             customer_id (str): The ID of the customer with the recommendation.
+            operations (list[Union[dict, ~google.ads.googleads_v0.types.DismissRecommendationOperation]]): The list of operations to dismiss recommendations. If
+                partial\_failure=false all recommendations should be of the same type
+                There is a limit of 100 operations per request.
+
+                If a dict is provided, it must be of the same form as the protobuf
+                message :class:`~google.ads.googleads_v0.types.DismissRecommendationOperation`
             partial_failure (bool): If true, successful operations will be carried out and invalid
                 operations will return errors. If false, operations will be carried in a
                 single transaction if and only if they are all valid.
                 Default is false.
-            operations (list[Union[dict, ~google.ads.google_ads.v0.types.DismissRecommendationOperation]]): The list of operations to dismiss recommendations.
-                If partial_failure=false all recommendations should be of the same type
-                There is a limit of 100 operations per request.
-                If a dict is provided, it must be of the same form as the protobuf
-                message :class:`~google.ads.google_ads.v0.types.DismissRecommendationOperation`
             retry (Optional[google.api_core.retry.Retry]):  A retry object used
                 to retry requests. If ``None`` is specified, requests will not
                 be retried.
@@ -298,7 +308,7 @@ class RecommendationServiceClient(object):
                 that is provided to the method.
 
         Returns:
-            A :class:`~google.ads.google_ads.v0.types.DismissRecommendationResponse` instance.
+            A :class:`~google.ads.googleads_v0.types.DismissRecommendationResponse` instance.
 
         Raises:
             google.api_core.exceptions.GoogleAPICallError: If the request
@@ -312,17 +322,17 @@ class RecommendationServiceClient(object):
             self._inner_api_calls[
                 'dismiss_recommendation'] = google.api_core.gapic_v1.method.wrap_method(
                     self.transport.dismiss_recommendation,
-                    default_retry=self._method_configs['DismissRecommendation']
-                    .retry,
-                    default_timeout=self._method_configs[
-                        'DismissRecommendation'].timeout,
+                    default_retry=self.
+                    _method_configs['DismissRecommendation'].retry,
+                    default_timeout=self.
+                    _method_configs['DismissRecommendation'].timeout,
                     client_info=self._client_info,
                 )
 
         request = recommendation_service_pb2.DismissRecommendationRequest(
             customer_id=customer_id,
-            partial_failure=partial_failure,
             operations=operations,
+            partial_failure=partial_failure,
         )
         return self._inner_api_calls['dismiss_recommendation'](
             request, retry=retry, timeout=timeout, metadata=metadata)

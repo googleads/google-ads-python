@@ -1,4 +1,6 @@
-# Copyright 2018 Google LLC
+# -*- coding: utf-8 -*-
+#
+# Copyright 2019 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -14,12 +16,12 @@
 
 import google.api_core.grpc_helpers
 
-from google.ads.google_ads.v0.proto.services import campaign_group_service_pb2_grpc
+from google.ads.google_ads.v0.proto.services import ad_parameter_service_pb2_grpc
 
 
-class CampaignGroupServiceGrpcTransport(object):
+class AdParameterServiceGrpcTransport(object):
     """gRPC transport class providing stubs for
-    google.ads.googleads.v0.services CampaignGroupService API.
+    google.ads.googleads.v0.services AdParameterService API.
 
     The transport provides access to the raw gRPC stubs,
     which can be used to take advantage of advanced
@@ -60,11 +62,13 @@ class CampaignGroupServiceGrpcTransport(object):
                 credentials=credentials,
             )
 
+        self._channel = channel
+
         # gRPC uses objects called "stubs" that are bound to the
         # channel and provide a basic method for each RPC.
         self._stubs = {
-            'campaign_group_service_stub':
-            campaign_group_service_pb2_grpc.CampaignGroupServiceStub(channel),
+            'ad_parameter_service_stub':
+            ad_parameter_service_pb2_grpc.AdParameterServiceStub(channel),
         }
 
     @classmethod
@@ -91,23 +95,32 @@ class CampaignGroupServiceGrpcTransport(object):
         )
 
     @property
-    def get_campaign_group(self):
-        """Return the gRPC stub for {$apiMethod.name}.
+    def channel(self):
+        """The gRPC channel used by the transport.
 
-        Returns the requested campaign group in full detail.
+        Returns:
+            grpc.Channel: A gRPC channel object.
+        """
+        return self._channel
+
+    @property
+    def get_ad_parameter(self):
+        """Return the gRPC stub for :meth:`AdParameterServiceClient.get_ad_parameter`.
+
+        Returns the requested ad parameter in full detail.
 
         Returns:
             Callable: A callable which accepts the appropriate
                 deserialized request object and returns a
                 deserialized response object.
         """
-        return self._stubs['campaign_group_service_stub'].GetCampaignGroup
+        return self._stubs['ad_parameter_service_stub'].GetAdParameter
 
     @property
-    def mutate_campaign_groups(self):
-        """Return the gRPC stub for {$apiMethod.name}.
+    def mutate_ad_parameters(self):
+        """Return the gRPC stub for :meth:`AdParameterServiceClient.mutate_ad_parameters`.
 
-        Creates, updates, or removes campaign groups. Operation statuses are
+        Creates, updates, or removes ad parameters. Operation statuses are
         returned.
 
         Returns:
@@ -115,4 +128,4 @@ class CampaignGroupServiceGrpcTransport(object):
                 deserialized request object and returns a
                 deserialized response object.
         """
-        return self._stubs['campaign_group_service_stub'].MutateCampaignGroups
+        return self._stubs['ad_parameter_service_stub'].MutateAdParameters

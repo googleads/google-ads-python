@@ -7,7 +7,6 @@ from google.protobuf import descriptor as _descriptor
 from google.protobuf import message as _message
 from google.protobuf import reflection as _reflection
 from google.protobuf import symbol_database as _symbol_database
-from google.protobuf import descriptor_pb2
 # @@protoc_insertion_point(imports)
 
 _sym_db = _symbol_database.Default()
@@ -15,15 +14,18 @@ _sym_db = _symbol_database.Default()
 
 from google.ads.google_ads.v0.proto.resources import campaign_shared_set_pb2 as google_dot_ads_dot_googleads__v0_dot_proto_dot_resources_dot_campaign__shared__set__pb2
 from google.api import annotations_pb2 as google_dot_api_dot_annotations__pb2
+from google.protobuf import wrappers_pb2 as google_dot_protobuf_dot_wrappers__pb2
+from google.rpc import status_pb2 as google_dot_rpc_dot_status__pb2
 
 
 DESCRIPTOR = _descriptor.FileDescriptor(
   name='google/ads/googleads_v0/proto/services/campaign_shared_set_service.proto',
   package='google.ads.googleads.v0.services',
   syntax='proto3',
-  serialized_pb=_b('\nHgoogle/ads/googleads_v0/proto/services/campaign_shared_set_service.proto\x12 google.ads.googleads.v0.services\x1a\x41google/ads/googleads_v0/proto/resources/campaign_shared_set.proto\x1a\x1cgoogle/api/annotations.proto\"4\n\x1bGetCampaignSharedSetRequest\x12\x15\n\rresource_name\x18\x01 \x01(\t\"\x88\x01\n\x1fMutateCampaignSharedSetsRequest\x12\x13\n\x0b\x63ustomer_id\x18\x01 \x01(\t\x12P\n\noperations\x18\x02 \x03(\x0b\x32<.google.ads.googleads.v0.services.CampaignSharedSetOperation\"\x83\x01\n\x1a\x43\x61mpaignSharedSetOperation\x12\x46\n\x06\x63reate\x18\x01 \x01(\x0b\x32\x34.google.ads.googleads.v0.resources.CampaignSharedSetH\x00\x12\x10\n\x06remove\x18\x03 \x01(\tH\x00\x42\x0b\n\toperation\"t\n MutateCampaignSharedSetsResponse\x12P\n\x07results\x18\x02 \x03(\x0b\x32?.google.ads.googleads.v0.services.MutateCampaignSharedSetResult\"6\n\x1dMutateCampaignSharedSetResult\x12\x15\n\rresource_name\x18\x01 \x01(\t2\xce\x03\n\x18\x43\x61mpaignSharedSetService\x12\xc9\x01\n\x14GetCampaignSharedSet\x12=.google.ads.googleads.v0.services.GetCampaignSharedSetRequest\x1a\x34.google.ads.googleads.v0.resources.CampaignSharedSet\"<\x82\xd3\xe4\x93\x02\x36\x12\x34/v0/{resource_name=customers/*/campaignSharedSets/*}\x12\xe5\x01\n\x18MutateCampaignSharedSets\x12\x41.google.ads.googleads.v0.services.MutateCampaignSharedSetsRequest\x1a\x42.google.ads.googleads.v0.services.MutateCampaignSharedSetsResponse\"B\x82\xd3\xe4\x93\x02<\"7/v0/customers/{customer_id=*}/campaignSharedSets:mutate:\x01*B\xdd\x01\n$com.google.ads.googleads.v0.servicesB\x1d\x43\x61mpaignSharedSetServiceProtoP\x01ZHgoogle.golang.org/genproto/googleapis/ads/googleads/v0/services;services\xa2\x02\x03GAA\xaa\x02 Google.Ads.GoogleAds.V0.Services\xca\x02 Google\\Ads\\GoogleAds\\V0\\Servicesb\x06proto3')
+  serialized_options=_b('\n$com.google.ads.googleads.v0.servicesB\035CampaignSharedSetServiceProtoP\001ZHgoogle.golang.org/genproto/googleapis/ads/googleads/v0/services;services\242\002\003GAA\252\002 Google.Ads.GoogleAds.V0.Services\312\002 Google\\Ads\\GoogleAds\\V0\\Services\352\002$Google::Ads::GoogleAds::V0::Services'),
+  serialized_pb=_b('\nHgoogle/ads/googleads_v0/proto/services/campaign_shared_set_service.proto\x12 google.ads.googleads.v0.services\x1a\x41google/ads/googleads_v0/proto/resources/campaign_shared_set.proto\x1a\x1cgoogle/api/annotations.proto\x1a\x1egoogle/protobuf/wrappers.proto\x1a\x17google/rpc/status.proto\"4\n\x1bGetCampaignSharedSetRequest\x12\x15\n\rresource_name\x18\x01 \x01(\t\"\xb8\x01\n\x1fMutateCampaignSharedSetsRequest\x12\x13\n\x0b\x63ustomer_id\x18\x01 \x01(\t\x12P\n\noperations\x18\x02 \x03(\x0b\x32<.google.ads.googleads.v0.services.CampaignSharedSetOperation\x12\x17\n\x0fpartial_failure\x18\x03 \x01(\x08\x12\x15\n\rvalidate_only\x18\x04 \x01(\x08\"\x83\x01\n\x1a\x43\x61mpaignSharedSetOperation\x12\x46\n\x06\x63reate\x18\x01 \x01(\x0b\x32\x34.google.ads.googleads.v0.resources.CampaignSharedSetH\x00\x12\x10\n\x06remove\x18\x03 \x01(\tH\x00\x42\x0b\n\toperation\"\xa7\x01\n MutateCampaignSharedSetsResponse\x12\x31\n\x15partial_failure_error\x18\x03 \x01(\x0b\x32\x12.google.rpc.Status\x12P\n\x07results\x18\x02 \x03(\x0b\x32?.google.ads.googleads.v0.services.MutateCampaignSharedSetResult\"6\n\x1dMutateCampaignSharedSetResult\x12\x15\n\rresource_name\x18\x01 \x01(\t2\xce\x03\n\x18\x43\x61mpaignSharedSetService\x12\xc9\x01\n\x14GetCampaignSharedSet\x12=.google.ads.googleads.v0.services.GetCampaignSharedSetRequest\x1a\x34.google.ads.googleads.v0.resources.CampaignSharedSet\"<\x82\xd3\xe4\x93\x02\x36\x12\x34/v0/{resource_name=customers/*/campaignSharedSets/*}\x12\xe5\x01\n\x18MutateCampaignSharedSets\x12\x41.google.ads.googleads.v0.services.MutateCampaignSharedSetsRequest\x1a\x42.google.ads.googleads.v0.services.MutateCampaignSharedSetsResponse\"B\x82\xd3\xe4\x93\x02<\"7/v0/customers/{customer_id=*}/campaignSharedSets:mutate:\x01*B\x84\x02\n$com.google.ads.googleads.v0.servicesB\x1d\x43\x61mpaignSharedSetServiceProtoP\x01ZHgoogle.golang.org/genproto/googleapis/ads/googleads/v0/services;services\xa2\x02\x03GAA\xaa\x02 Google.Ads.GoogleAds.V0.Services\xca\x02 Google\\Ads\\GoogleAds\\V0\\Services\xea\x02$Google::Ads::GoogleAds::V0::Servicesb\x06proto3')
   ,
-  dependencies=[google_dot_ads_dot_googleads__v0_dot_proto_dot_resources_dot_campaign__shared__set__pb2.DESCRIPTOR,google_dot_api_dot_annotations__pb2.DESCRIPTOR,])
+  dependencies=[google_dot_ads_dot_googleads__v0_dot_proto_dot_resources_dot_campaign__shared__set__pb2.DESCRIPTOR,google_dot_api_dot_annotations__pb2.DESCRIPTOR,google_dot_protobuf_dot_wrappers__pb2.DESCRIPTOR,google_dot_rpc_dot_status__pb2.DESCRIPTOR,])
 
 
 
@@ -41,21 +43,21 @@ _GETCAMPAIGNSHAREDSETREQUEST = _descriptor.Descriptor(
       has_default_value=False, default_value=_b("").decode('utf-8'),
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
-      options=None, file=DESCRIPTOR),
+      serialized_options=None, file=DESCRIPTOR),
   ],
   extensions=[
   ],
   nested_types=[],
   enum_types=[
   ],
-  options=None,
+  serialized_options=None,
   is_extendable=False,
   syntax='proto3',
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=207,
-  serialized_end=259,
+  serialized_start=264,
+  serialized_end=316,
 )
 
 
@@ -72,28 +74,42 @@ _MUTATECAMPAIGNSHAREDSETSREQUEST = _descriptor.Descriptor(
       has_default_value=False, default_value=_b("").decode('utf-8'),
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
-      options=None, file=DESCRIPTOR),
+      serialized_options=None, file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
       name='operations', full_name='google.ads.googleads.v0.services.MutateCampaignSharedSetsRequest.operations', index=1,
       number=2, type=11, cpp_type=10, label=3,
       has_default_value=False, default_value=[],
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
-      options=None, file=DESCRIPTOR),
+      serialized_options=None, file=DESCRIPTOR),
+    _descriptor.FieldDescriptor(
+      name='partial_failure', full_name='google.ads.googleads.v0.services.MutateCampaignSharedSetsRequest.partial_failure', index=2,
+      number=3, type=8, cpp_type=7, label=1,
+      has_default_value=False, default_value=False,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR),
+    _descriptor.FieldDescriptor(
+      name='validate_only', full_name='google.ads.googleads.v0.services.MutateCampaignSharedSetsRequest.validate_only', index=3,
+      number=4, type=8, cpp_type=7, label=1,
+      has_default_value=False, default_value=False,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR),
   ],
   extensions=[
   ],
   nested_types=[],
   enum_types=[
   ],
-  options=None,
+  serialized_options=None,
   is_extendable=False,
   syntax='proto3',
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=262,
-  serialized_end=398,
+  serialized_start=319,
+  serialized_end=503,
 )
 
 
@@ -110,21 +126,21 @@ _CAMPAIGNSHAREDSETOPERATION = _descriptor.Descriptor(
       has_default_value=False, default_value=None,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
-      options=None, file=DESCRIPTOR),
+      serialized_options=None, file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
       name='remove', full_name='google.ads.googleads.v0.services.CampaignSharedSetOperation.remove', index=1,
       number=3, type=9, cpp_type=9, label=1,
       has_default_value=False, default_value=_b("").decode('utf-8'),
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
-      options=None, file=DESCRIPTOR),
+      serialized_options=None, file=DESCRIPTOR),
   ],
   extensions=[
   ],
   nested_types=[],
   enum_types=[
   ],
-  options=None,
+  serialized_options=None,
   is_extendable=False,
   syntax='proto3',
   extension_ranges=[],
@@ -133,8 +149,8 @@ _CAMPAIGNSHAREDSETOPERATION = _descriptor.Descriptor(
       name='operation', full_name='google.ads.googleads.v0.services.CampaignSharedSetOperation.operation',
       index=0, containing_type=None, fields=[]),
   ],
-  serialized_start=401,
-  serialized_end=532,
+  serialized_start=506,
+  serialized_end=637,
 )
 
 
@@ -146,26 +162,33 @@ _MUTATECAMPAIGNSHAREDSETSRESPONSE = _descriptor.Descriptor(
   containing_type=None,
   fields=[
     _descriptor.FieldDescriptor(
-      name='results', full_name='google.ads.googleads.v0.services.MutateCampaignSharedSetsResponse.results', index=0,
+      name='partial_failure_error', full_name='google.ads.googleads.v0.services.MutateCampaignSharedSetsResponse.partial_failure_error', index=0,
+      number=3, type=11, cpp_type=10, label=1,
+      has_default_value=False, default_value=None,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR),
+    _descriptor.FieldDescriptor(
+      name='results', full_name='google.ads.googleads.v0.services.MutateCampaignSharedSetsResponse.results', index=1,
       number=2, type=11, cpp_type=10, label=3,
       has_default_value=False, default_value=[],
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
-      options=None, file=DESCRIPTOR),
+      serialized_options=None, file=DESCRIPTOR),
   ],
   extensions=[
   ],
   nested_types=[],
   enum_types=[
   ],
-  options=None,
+  serialized_options=None,
   is_extendable=False,
   syntax='proto3',
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=534,
-  serialized_end=650,
+  serialized_start=640,
+  serialized_end=807,
 )
 
 
@@ -182,21 +205,21 @@ _MUTATECAMPAIGNSHAREDSETRESULT = _descriptor.Descriptor(
       has_default_value=False, default_value=_b("").decode('utf-8'),
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
-      options=None, file=DESCRIPTOR),
+      serialized_options=None, file=DESCRIPTOR),
   ],
   extensions=[
   ],
   nested_types=[],
   enum_types=[
   ],
-  options=None,
+  serialized_options=None,
   is_extendable=False,
   syntax='proto3',
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=652,
-  serialized_end=706,
+  serialized_start=809,
+  serialized_end=863,
 )
 
 _MUTATECAMPAIGNSHAREDSETSREQUEST.fields_by_name['operations'].message_type = _CAMPAIGNSHAREDSETOPERATION
@@ -207,6 +230,7 @@ _CAMPAIGNSHAREDSETOPERATION.fields_by_name['create'].containing_oneof = _CAMPAIG
 _CAMPAIGNSHAREDSETOPERATION.oneofs_by_name['operation'].fields.append(
   _CAMPAIGNSHAREDSETOPERATION.fields_by_name['remove'])
 _CAMPAIGNSHAREDSETOPERATION.fields_by_name['remove'].containing_oneof = _CAMPAIGNSHAREDSETOPERATION.oneofs_by_name['operation']
+_MUTATECAMPAIGNSHAREDSETSRESPONSE.fields_by_name['partial_failure_error'].message_type = google_dot_rpc_dot_status__pb2._STATUS
 _MUTATECAMPAIGNSHAREDSETSRESPONSE.fields_by_name['results'].message_type = _MUTATECAMPAIGNSHAREDSETRESULT
 DESCRIPTOR.message_types_by_name['GetCampaignSharedSetRequest'] = _GETCAMPAIGNSHAREDSETREQUEST
 DESCRIPTOR.message_types_by_name['MutateCampaignSharedSetsRequest'] = _MUTATECAMPAIGNSHAREDSETSREQUEST
@@ -217,7 +241,7 @@ _sym_db.RegisterFileDescriptor(DESCRIPTOR)
 
 GetCampaignSharedSetRequest = _reflection.GeneratedProtocolMessageType('GetCampaignSharedSetRequest', (_message.Message,), dict(
   DESCRIPTOR = _GETCAMPAIGNSHAREDSETREQUEST,
-  __module__ = 'google.ads.google_ads.v0.proto.services.campaign_shared_set_service_pb2'
+  __module__ = 'google.ads.googleads_v0.proto.services.campaign_shared_set_service_pb2'
   ,
   __doc__ = """Request message for
   [CampaignSharedSetService.GetCampaignSharedSet][google.ads.googleads.v0.services.CampaignSharedSetService.GetCampaignSharedSet].
@@ -233,7 +257,7 @@ _sym_db.RegisterMessage(GetCampaignSharedSetRequest)
 
 MutateCampaignSharedSetsRequest = _reflection.GeneratedProtocolMessageType('MutateCampaignSharedSetsRequest', (_message.Message,), dict(
   DESCRIPTOR = _MUTATECAMPAIGNSHAREDSETSREQUEST,
-  __module__ = 'google.ads.google_ads.v0.proto.services.campaign_shared_set_service_pb2'
+  __module__ = 'google.ads.googleads_v0.proto.services.campaign_shared_set_service_pb2'
   ,
   __doc__ = """Request message for
   [CampaignSharedSetService.MutateCampaignSharedSets][google.ads.googleads.v0.services.CampaignSharedSetService.MutateCampaignSharedSets].
@@ -246,6 +270,14 @@ MutateCampaignSharedSetsRequest = _reflection.GeneratedProtocolMessageType('Muta
       operations:
           The list of operations to perform on individual campaign
           shared sets.
+      partial_failure:
+          If true, successful operations will be carried out and invalid
+          operations will return errors. If false, all operations will
+          be carried out in one transaction if and only if they are all
+          valid. Default is false.
+      validate_only:
+          If true, the request is validated but not executed. Only
+          errors are returned, not results.
   """,
   # @@protoc_insertion_point(class_scope:google.ads.googleads.v0.services.MutateCampaignSharedSetsRequest)
   ))
@@ -253,7 +285,7 @@ _sym_db.RegisterMessage(MutateCampaignSharedSetsRequest)
 
 CampaignSharedSetOperation = _reflection.GeneratedProtocolMessageType('CampaignSharedSetOperation', (_message.Message,), dict(
   DESCRIPTOR = _CAMPAIGNSHAREDSETOPERATION,
-  __module__ = 'google.ads.google_ads.v0.proto.services.campaign_shared_set_service_pb2'
+  __module__ = 'google.ads.googleads_v0.proto.services.campaign_shared_set_service_pb2'
   ,
   __doc__ = """A single operation (create, remove) on an campaign shared set.
   
@@ -275,12 +307,18 @@ _sym_db.RegisterMessage(CampaignSharedSetOperation)
 
 MutateCampaignSharedSetsResponse = _reflection.GeneratedProtocolMessageType('MutateCampaignSharedSetsResponse', (_message.Message,), dict(
   DESCRIPTOR = _MUTATECAMPAIGNSHAREDSETSRESPONSE,
-  __module__ = 'google.ads.google_ads.v0.proto.services.campaign_shared_set_service_pb2'
+  __module__ = 'google.ads.googleads_v0.proto.services.campaign_shared_set_service_pb2'
   ,
   __doc__ = """Response message for a campaign shared set mutate.
   
   
   Attributes:
+      partial_failure_error:
+          Errors that pertain to operation failures in the partial
+          failure mode. Returned only when partial\_failure = true and
+          all errors occur inside the operations. If any errors occur
+          outside the operations (e.g. auth errors), we return an RPC
+          level error.
       results:
           All results for the mutate.
   """,
@@ -290,7 +328,7 @@ _sym_db.RegisterMessage(MutateCampaignSharedSetsResponse)
 
 MutateCampaignSharedSetResult = _reflection.GeneratedProtocolMessageType('MutateCampaignSharedSetResult', (_message.Message,), dict(
   DESCRIPTOR = _MUTATECAMPAIGNSHAREDSETRESULT,
-  __module__ = 'google.ads.google_ads.v0.proto.services.campaign_shared_set_service_pb2'
+  __module__ = 'google.ads.googleads_v0.proto.services.campaign_shared_set_service_pb2'
   ,
   __doc__ = """The result for the campaign shared set mutate.
   
@@ -304,17 +342,16 @@ MutateCampaignSharedSetResult = _reflection.GeneratedProtocolMessageType('Mutate
 _sym_db.RegisterMessage(MutateCampaignSharedSetResult)
 
 
-DESCRIPTOR.has_options = True
-DESCRIPTOR._options = _descriptor._ParseOptions(descriptor_pb2.FileOptions(), _b('\n$com.google.ads.googleads.v0.servicesB\035CampaignSharedSetServiceProtoP\001ZHgoogle.golang.org/genproto/googleapis/ads/googleads/v0/services;services\242\002\003GAA\252\002 Google.Ads.GoogleAds.V0.Services\312\002 Google\\Ads\\GoogleAds\\V0\\Services'))
+DESCRIPTOR._options = None
 
 _CAMPAIGNSHAREDSETSERVICE = _descriptor.ServiceDescriptor(
   name='CampaignSharedSetService',
   full_name='google.ads.googleads.v0.services.CampaignSharedSetService',
   file=DESCRIPTOR,
   index=0,
-  options=None,
-  serialized_start=709,
-  serialized_end=1171,
+  serialized_options=None,
+  serialized_start=866,
+  serialized_end=1328,
   methods=[
   _descriptor.MethodDescriptor(
     name='GetCampaignSharedSet',
@@ -323,7 +360,7 @@ _CAMPAIGNSHAREDSETSERVICE = _descriptor.ServiceDescriptor(
     containing_service=None,
     input_type=_GETCAMPAIGNSHAREDSETREQUEST,
     output_type=google_dot_ads_dot_googleads__v0_dot_proto_dot_resources_dot_campaign__shared__set__pb2._CAMPAIGNSHAREDSET,
-    options=_descriptor._ParseOptions(descriptor_pb2.MethodOptions(), _b('\202\323\344\223\0026\0224/v0/{resource_name=customers/*/campaignSharedSets/*}')),
+    serialized_options=_b('\202\323\344\223\0026\0224/v0/{resource_name=customers/*/campaignSharedSets/*}'),
   ),
   _descriptor.MethodDescriptor(
     name='MutateCampaignSharedSets',
@@ -332,7 +369,7 @@ _CAMPAIGNSHAREDSETSERVICE = _descriptor.ServiceDescriptor(
     containing_service=None,
     input_type=_MUTATECAMPAIGNSHAREDSETSREQUEST,
     output_type=_MUTATECAMPAIGNSHAREDSETSRESPONSE,
-    options=_descriptor._ParseOptions(descriptor_pb2.MethodOptions(), _b('\202\323\344\223\002<\"7/v0/customers/{customer_id=*}/campaignSharedSets:mutate:\001*')),
+    serialized_options=_b('\202\323\344\223\002<\"7/v0/customers/{customer_id=*}/campaignSharedSets:mutate:\001*'),
   ),
 ])
 _sym_db.RegisterServiceDescriptor(_CAMPAIGNSHAREDSETSERVICE)

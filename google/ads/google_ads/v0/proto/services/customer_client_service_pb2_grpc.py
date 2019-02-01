@@ -6,7 +6,7 @@ from google.ads.google_ads.v0.proto.services import customer_client_service_pb2 
 
 
 class CustomerClientServiceStub(object):
-  """Service to manage customer clients in a manager hierarchy.
+  """Service to get clients in a customer's hierarchy.
   """
 
   def __init__(self, channel):
@@ -23,11 +23,11 @@ class CustomerClientServiceStub(object):
 
 
 class CustomerClientServiceServicer(object):
-  """Service to manage customer clients in a manager hierarchy.
+  """Service to get clients in a customer's hierarchy.
   """
 
   def GetCustomerClient(self, request, context):
-    """Returns the requested customer client in full detail.
+    """Returns the requested client in full detail.
     """
     context.set_code(grpc.StatusCode.UNIMPLEMENTED)
     context.set_details('Method not implemented!')

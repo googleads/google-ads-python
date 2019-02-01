@@ -1,4 +1,6 @@
-# Copyright 2018 Google LLC
+# -*- coding: utf-8 -*-
+#
+# Copyright 2019 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -60,6 +62,8 @@ class CustomerServiceGrpcTransport(object):
                 credentials=credentials,
             )
 
+        self._channel = channel
+
         # gRPC uses objects called "stubs" that are bound to the
         # channel and provide a basic method for each RPC.
         self._stubs = {
@@ -91,8 +95,17 @@ class CustomerServiceGrpcTransport(object):
         )
 
     @property
+    def channel(self):
+        """The gRPC channel used by the transport.
+
+        Returns:
+            grpc.Channel: A gRPC channel object.
+        """
+        return self._channel
+
+    @property
     def get_customer(self):
-        """Return the gRPC stub for {$apiMethod.name}.
+        """Return the gRPC stub for :meth:`CustomerServiceClient.get_customer`.
 
         Returns the requested customer in full detail.
 
@@ -105,7 +118,7 @@ class CustomerServiceGrpcTransport(object):
 
     @property
     def mutate_customer(self):
-        """Return the gRPC stub for {$apiMethod.name}.
+        """Return the gRPC stub for :meth:`CustomerServiceClient.mutate_customer`.
 
         Updates a customer. Operation statuses are returned.
 
@@ -118,7 +131,7 @@ class CustomerServiceGrpcTransport(object):
 
     @property
     def list_accessible_customers(self):
-        """Return the gRPC stub for {$apiMethod.name}.
+        """Return the gRPC stub for :meth:`CustomerServiceClient.list_accessible_customers`.
 
         Returns resource names of customers directly accessible by the
         user authenticating the call.
@@ -132,7 +145,7 @@ class CustomerServiceGrpcTransport(object):
 
     @property
     def create_customer_client(self):
-        """Return the gRPC stub for {$apiMethod.name}.
+        """Return the gRPC stub for :meth:`CustomerServiceClient.create_customer_client`.
 
         Creates a new client under manager. The new client customer is returned.
 

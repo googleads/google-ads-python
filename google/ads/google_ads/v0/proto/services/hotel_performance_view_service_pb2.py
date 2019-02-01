@@ -7,7 +7,6 @@ from google.protobuf import descriptor as _descriptor
 from google.protobuf import message as _message
 from google.protobuf import reflection as _reflection
 from google.protobuf import symbol_database as _symbol_database
-from google.protobuf import descriptor_pb2
 # @@protoc_insertion_point(imports)
 
 _sym_db = _symbol_database.Default()
@@ -21,7 +20,8 @@ DESCRIPTOR = _descriptor.FileDescriptor(
   name='google/ads/googleads_v0/proto/services/hotel_performance_view_service.proto',
   package='google.ads.googleads.v0.services',
   syntax='proto3',
-  serialized_pb=_b('\nKgoogle/ads/googleads_v0/proto/services/hotel_performance_view_service.proto\x12 google.ads.googleads.v0.services\x1a\x44google/ads/googleads_v0/proto/resources/hotel_performance_view.proto\x1a\x1cgoogle/api/annotations.proto\"7\n\x1eGetHotelPerformanceViewRequest\x12\x15\n\rresource_name\x18\x01 \x01(\t2\xf2\x01\n\x1bHotelPerformanceViewService\x12\xd2\x01\n\x17GetHotelPerformanceView\x12@.google.ads.googleads.v0.services.GetHotelPerformanceViewRequest\x1a\x37.google.ads.googleads.v0.resources.HotelPerformanceView\"<\x82\xd3\xe4\x93\x02\x36\x12\x34/v0/{resource_name=customers/*/hotelPerformanceView}B\xe0\x01\n$com.google.ads.googleads.v0.servicesB HotelPerformanceViewServiceProtoP\x01ZHgoogle.golang.org/genproto/googleapis/ads/googleads/v0/services;services\xa2\x02\x03GAA\xaa\x02 Google.Ads.GoogleAds.V0.Services\xca\x02 Google\\Ads\\GoogleAds\\V0\\Servicesb\x06proto3')
+  serialized_options=_b('\n$com.google.ads.googleads.v0.servicesB HotelPerformanceViewServiceProtoP\001ZHgoogle.golang.org/genproto/googleapis/ads/googleads/v0/services;services\242\002\003GAA\252\002 Google.Ads.GoogleAds.V0.Services\312\002 Google\\Ads\\GoogleAds\\V0\\Services\352\002$Google::Ads::GoogleAds::V0::Services'),
+  serialized_pb=_b('\nKgoogle/ads/googleads_v0/proto/services/hotel_performance_view_service.proto\x12 google.ads.googleads.v0.services\x1a\x44google/ads/googleads_v0/proto/resources/hotel_performance_view.proto\x1a\x1cgoogle/api/annotations.proto\"7\n\x1eGetHotelPerformanceViewRequest\x12\x15\n\rresource_name\x18\x01 \x01(\t2\xf2\x01\n\x1bHotelPerformanceViewService\x12\xd2\x01\n\x17GetHotelPerformanceView\x12@.google.ads.googleads.v0.services.GetHotelPerformanceViewRequest\x1a\x37.google.ads.googleads.v0.resources.HotelPerformanceView\"<\x82\xd3\xe4\x93\x02\x36\x12\x34/v0/{resource_name=customers/*/hotelPerformanceView}B\x87\x02\n$com.google.ads.googleads.v0.servicesB HotelPerformanceViewServiceProtoP\x01ZHgoogle.golang.org/genproto/googleapis/ads/googleads/v0/services;services\xa2\x02\x03GAA\xaa\x02 Google.Ads.GoogleAds.V0.Services\xca\x02 Google\\Ads\\GoogleAds\\V0\\Services\xea\x02$Google::Ads::GoogleAds::V0::Servicesb\x06proto3')
   ,
   dependencies=[google_dot_ads_dot_googleads__v0_dot_proto_dot_resources_dot_hotel__performance__view__pb2.DESCRIPTOR,google_dot_api_dot_annotations__pb2.DESCRIPTOR,])
 
@@ -41,14 +41,14 @@ _GETHOTELPERFORMANCEVIEWREQUEST = _descriptor.Descriptor(
       has_default_value=False, default_value=_b("").decode('utf-8'),
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
-      options=None, file=DESCRIPTOR),
+      serialized_options=None, file=DESCRIPTOR),
   ],
   extensions=[
   ],
   nested_types=[],
   enum_types=[
   ],
-  options=None,
+  serialized_options=None,
   is_extendable=False,
   syntax='proto3',
   extension_ranges=[],
@@ -63,7 +63,7 @@ _sym_db.RegisterFileDescriptor(DESCRIPTOR)
 
 GetHotelPerformanceViewRequest = _reflection.GeneratedProtocolMessageType('GetHotelPerformanceViewRequest', (_message.Message,), dict(
   DESCRIPTOR = _GETHOTELPERFORMANCEVIEWREQUEST,
-  __module__ = 'google.ads.google_ads.v0.proto.services.hotel_performance_view_service_pb2'
+  __module__ = 'google.ads.googleads_v0.proto.services.hotel_performance_view_service_pb2'
   ,
   __doc__ = """Request message for
   [HotelPerformanceViewService.GetHotelPerformanceView][google.ads.googleads.v0.services.HotelPerformanceViewService.GetHotelPerformanceView].
@@ -78,15 +78,14 @@ GetHotelPerformanceViewRequest = _reflection.GeneratedProtocolMessageType('GetHo
 _sym_db.RegisterMessage(GetHotelPerformanceViewRequest)
 
 
-DESCRIPTOR.has_options = True
-DESCRIPTOR._options = _descriptor._ParseOptions(descriptor_pb2.FileOptions(), _b('\n$com.google.ads.googleads.v0.servicesB HotelPerformanceViewServiceProtoP\001ZHgoogle.golang.org/genproto/googleapis/ads/googleads/v0/services;services\242\002\003GAA\252\002 Google.Ads.GoogleAds.V0.Services\312\002 Google\\Ads\\GoogleAds\\V0\\Services'))
+DESCRIPTOR._options = None
 
 _HOTELPERFORMANCEVIEWSERVICE = _descriptor.ServiceDescriptor(
   name='HotelPerformanceViewService',
   full_name='google.ads.googleads.v0.services.HotelPerformanceViewService',
   file=DESCRIPTOR,
   index=0,
-  options=None,
+  serialized_options=None,
   serialized_start=271,
   serialized_end=513,
   methods=[
@@ -97,7 +96,7 @@ _HOTELPERFORMANCEVIEWSERVICE = _descriptor.ServiceDescriptor(
     containing_service=None,
     input_type=_GETHOTELPERFORMANCEVIEWREQUEST,
     output_type=google_dot_ads_dot_googleads__v0_dot_proto_dot_resources_dot_hotel__performance__view__pb2._HOTELPERFORMANCEVIEW,
-    options=_descriptor._ParseOptions(descriptor_pb2.MethodOptions(), _b('\202\323\344\223\0026\0224/v0/{resource_name=customers/*/hotelPerformanceView}')),
+    serialized_options=_b('\202\323\344\223\0026\0224/v0/{resource_name=customers/*/hotelPerformanceView}'),
   ),
 ])
 _sym_db.RegisterServiceDescriptor(_HOTELPERFORMANCEVIEWSERVICE)

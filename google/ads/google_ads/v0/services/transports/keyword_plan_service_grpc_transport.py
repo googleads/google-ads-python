@@ -1,4 +1,6 @@
-# Copyright 2018 Google LLC
+# -*- coding: utf-8 -*-
+#
+# Copyright 2019 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -60,6 +62,8 @@ class KeywordPlanServiceGrpcTransport(object):
                 credentials=credentials,
             )
 
+        self._channel = channel
+
         # gRPC uses objects called "stubs" that are bound to the
         # channel and provide a basic method for each RPC.
         self._stubs = {
@@ -91,8 +95,17 @@ class KeywordPlanServiceGrpcTransport(object):
         )
 
     @property
+    def channel(self):
+        """The gRPC channel used by the transport.
+
+        Returns:
+            grpc.Channel: A gRPC channel object.
+        """
+        return self._channel
+
+    @property
     def get_keyword_plan(self):
-        """Return the gRPC stub for {$apiMethod.name}.
+        """Return the gRPC stub for :meth:`KeywordPlanServiceClient.get_keyword_plan`.
 
         Returns the requested plan in full detail.
 
@@ -105,7 +118,7 @@ class KeywordPlanServiceGrpcTransport(object):
 
     @property
     def mutate_keyword_plans(self):
-        """Return the gRPC stub for {$apiMethod.name}.
+        """Return the gRPC stub for :meth:`KeywordPlanServiceClient.mutate_keyword_plans`.
 
         Creates, updates, or removes keyword plans. Operation statuses are
         returned.
@@ -119,7 +132,7 @@ class KeywordPlanServiceGrpcTransport(object):
 
     @property
     def generate_forecast_metrics(self):
-        """Return the gRPC stub for {$apiMethod.name}.
+        """Return the gRPC stub for :meth:`KeywordPlanServiceClient.generate_forecast_metrics`.
 
         Returns the requested Keyword Plan forecasts.
 
@@ -132,7 +145,7 @@ class KeywordPlanServiceGrpcTransport(object):
 
     @property
     def generate_historical_metrics(self):
-        """Return the gRPC stub for {$apiMethod.name}.
+        """Return the gRPC stub for :meth:`KeywordPlanServiceClient.generate_historical_metrics`.
 
         Returns the requested Keyword Plan historical metrics.
 

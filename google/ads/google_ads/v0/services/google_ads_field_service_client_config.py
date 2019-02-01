@@ -18,12 +18,12 @@ config = {
             },
             "methods": {
                 "GetGoogleAdsField": {
-                    "timeout_millis": 60000,
+                    "timeout_millis": 600000,
                     "retry_codes_name": "idempotent",
                     "retry_params_name": "default"
                 },
                 "SearchGoogleAdsFields": {
-                    "timeout_millis": 60000,
+                    "timeout_millis": 600000,
                     "retry_codes_name": "non_idempotent",
                     "retry_params_name": "default"
                 }

@@ -7,7 +7,6 @@ from google.protobuf import descriptor as _descriptor
 from google.protobuf import message as _message
 from google.protobuf import reflection as _reflection
 from google.protobuf import symbol_database as _symbol_database
-from google.protobuf import descriptor_pb2
 # @@protoc_insertion_point(imports)
 
 _sym_db = _symbol_database.Default()
@@ -22,7 +21,8 @@ DESCRIPTOR = _descriptor.FileDescriptor(
   name='google/ads/googleads_v0/proto/resources/user_interest.proto',
   package='google.ads.googleads.v0.resources',
   syntax='proto3',
-  serialized_pb=_b('\n;google/ads/googleads_v0/proto/resources/user_interest.proto\x12!google.ads.googleads.v0.resources\x1aJgoogle/ads/googleads_v0/proto/common/criterion_category_availability.proto\x1a\x45google/ads/googleads_v0/proto/enums/user_interest_taxonomy_type.proto\x1a\x1egoogle/protobuf/wrappers.proto\"\xbd\x03\n\x0cUserInterest\x12\x15\n\rresource_name\x18\x01 \x01(\t\x12k\n\rtaxonomy_type\x18\x02 \x01(\x0e\x32T.google.ads.googleads.v0.enums.UserInterestTaxonomyTypeEnum.UserInterestTaxonomyType\x12\x35\n\x10user_interest_id\x18\x03 \x01(\x0b\x32\x1b.google.protobuf.Int64Value\x12*\n\x04name\x18\x04 \x01(\x0b\x32\x1c.google.protobuf.StringValue\x12:\n\x14user_interest_parent\x18\x05 \x01(\x0b\x32\x1c.google.protobuf.StringValue\x12\x33\n\x0flaunched_to_all\x18\x06 \x01(\x0b\x32\x1a.google.protobuf.BoolValue\x12U\n\x0e\x61vailabilities\x18\x07 \x03(\x0b\x32=.google.ads.googleads.v0.common.CriterionCategoryAvailabilityB\xd6\x01\n%com.google.ads.googleads.v0.resourcesB\x11UserInterestProtoP\x01ZJgoogle.golang.org/genproto/googleapis/ads/googleads/v0/resources;resources\xa2\x02\x03GAA\xaa\x02!Google.Ads.GoogleAds.V0.Resources\xca\x02!Google\\Ads\\GoogleAds\\V0\\Resourcesb\x06proto3')
+  serialized_options=_b('\n%com.google.ads.googleads.v0.resourcesB\021UserInterestProtoP\001ZJgoogle.golang.org/genproto/googleapis/ads/googleads/v0/resources;resources\242\002\003GAA\252\002!Google.Ads.GoogleAds.V0.Resources\312\002!Google\\Ads\\GoogleAds\\V0\\Resources\352\002%Google::Ads::GoogleAds::V0::Resources'),
+  serialized_pb=_b('\n;google/ads/googleads_v0/proto/resources/user_interest.proto\x12!google.ads.googleads.v0.resources\x1aJgoogle/ads/googleads_v0/proto/common/criterion_category_availability.proto\x1a\x45google/ads/googleads_v0/proto/enums/user_interest_taxonomy_type.proto\x1a\x1egoogle/protobuf/wrappers.proto\"\xbd\x03\n\x0cUserInterest\x12\x15\n\rresource_name\x18\x01 \x01(\t\x12k\n\rtaxonomy_type\x18\x02 \x01(\x0e\x32T.google.ads.googleads.v0.enums.UserInterestTaxonomyTypeEnum.UserInterestTaxonomyType\x12\x35\n\x10user_interest_id\x18\x03 \x01(\x0b\x32\x1b.google.protobuf.Int64Value\x12*\n\x04name\x18\x04 \x01(\x0b\x32\x1c.google.protobuf.StringValue\x12:\n\x14user_interest_parent\x18\x05 \x01(\x0b\x32\x1c.google.protobuf.StringValue\x12\x33\n\x0flaunched_to_all\x18\x06 \x01(\x0b\x32\x1a.google.protobuf.BoolValue\x12U\n\x0e\x61vailabilities\x18\x07 \x03(\x0b\x32=.google.ads.googleads.v0.common.CriterionCategoryAvailabilityB\xfe\x01\n%com.google.ads.googleads.v0.resourcesB\x11UserInterestProtoP\x01ZJgoogle.golang.org/genproto/googleapis/ads/googleads/v0/resources;resources\xa2\x02\x03GAA\xaa\x02!Google.Ads.GoogleAds.V0.Resources\xca\x02!Google\\Ads\\GoogleAds\\V0\\Resources\xea\x02%Google::Ads::GoogleAds::V0::Resourcesb\x06proto3')
   ,
   dependencies=[google_dot_ads_dot_googleads__v0_dot_proto_dot_common_dot_criterion__category__availability__pb2.DESCRIPTOR,google_dot_ads_dot_googleads__v0_dot_proto_dot_enums_dot_user__interest__taxonomy__type__pb2.DESCRIPTOR,google_dot_protobuf_dot_wrappers__pb2.DESCRIPTOR,])
 
@@ -42,56 +42,56 @@ _USERINTEREST = _descriptor.Descriptor(
       has_default_value=False, default_value=_b("").decode('utf-8'),
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
-      options=None, file=DESCRIPTOR),
+      serialized_options=None, file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
       name='taxonomy_type', full_name='google.ads.googleads.v0.resources.UserInterest.taxonomy_type', index=1,
       number=2, type=14, cpp_type=8, label=1,
       has_default_value=False, default_value=0,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
-      options=None, file=DESCRIPTOR),
+      serialized_options=None, file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
       name='user_interest_id', full_name='google.ads.googleads.v0.resources.UserInterest.user_interest_id', index=2,
       number=3, type=11, cpp_type=10, label=1,
       has_default_value=False, default_value=None,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
-      options=None, file=DESCRIPTOR),
+      serialized_options=None, file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
       name='name', full_name='google.ads.googleads.v0.resources.UserInterest.name', index=3,
       number=4, type=11, cpp_type=10, label=1,
       has_default_value=False, default_value=None,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
-      options=None, file=DESCRIPTOR),
+      serialized_options=None, file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
       name='user_interest_parent', full_name='google.ads.googleads.v0.resources.UserInterest.user_interest_parent', index=4,
       number=5, type=11, cpp_type=10, label=1,
       has_default_value=False, default_value=None,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
-      options=None, file=DESCRIPTOR),
+      serialized_options=None, file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
       name='launched_to_all', full_name='google.ads.googleads.v0.resources.UserInterest.launched_to_all', index=5,
       number=6, type=11, cpp_type=10, label=1,
       has_default_value=False, default_value=None,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
-      options=None, file=DESCRIPTOR),
+      serialized_options=None, file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
       name='availabilities', full_name='google.ads.googleads.v0.resources.UserInterest.availabilities', index=6,
       number=7, type=11, cpp_type=10, label=3,
       has_default_value=False, default_value=[],
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
-      options=None, file=DESCRIPTOR),
+      serialized_options=None, file=DESCRIPTOR),
   ],
   extensions=[
   ],
   nested_types=[],
   enum_types=[
   ],
-  options=None,
+  serialized_options=None,
   is_extendable=False,
   syntax='proto3',
   extension_ranges=[],
@@ -112,7 +112,7 @@ _sym_db.RegisterFileDescriptor(DESCRIPTOR)
 
 UserInterest = _reflection.GeneratedProtocolMessageType('UserInterest', (_message.Message,), dict(
   DESCRIPTOR = _USERINTEREST,
-  __module__ = 'google.ads.google_ads.v0.proto.resources.user_interest_pb2'
+  __module__ = 'google.ads.googleads_v0.proto.resources.user_interest_pb2'
   ,
   __doc__ = """A user interest: a particular interest-based vertical to be targeted.
   
@@ -141,6 +141,5 @@ UserInterest = _reflection.GeneratedProtocolMessageType('UserInterest', (_messag
 _sym_db.RegisterMessage(UserInterest)
 
 
-DESCRIPTOR.has_options = True
-DESCRIPTOR._options = _descriptor._ParseOptions(descriptor_pb2.FileOptions(), _b('\n%com.google.ads.googleads.v0.resourcesB\021UserInterestProtoP\001ZJgoogle.golang.org/genproto/googleapis/ads/googleads/v0/resources;resources\242\002\003GAA\252\002!Google.Ads.GoogleAds.V0.Resources\312\002!Google\\Ads\\GoogleAds\\V0\\Resources'))
+DESCRIPTOR._options = None
 # @@protoc_insertion_point(module_scope)

@@ -1,4 +1,6 @@
-# Copyright 2018 Google LLC
+# -*- coding: utf-8 -*-
+#
+# Copyright 2019 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -60,6 +62,8 @@ class CustomerClientServiceGrpcTransport(object):
                 credentials=credentials,
             )
 
+        self._channel = channel
+
         # gRPC uses objects called "stubs" that are bound to the
         # channel and provide a basic method for each RPC.
         self._stubs = {
@@ -92,10 +96,19 @@ class CustomerClientServiceGrpcTransport(object):
         )
 
     @property
-    def get_customer_client(self):
-        """Return the gRPC stub for {$apiMethod.name}.
+    def channel(self):
+        """The gRPC channel used by the transport.
 
-        Returns the requested customer client in full detail.
+        Returns:
+            grpc.Channel: A gRPC channel object.
+        """
+        return self._channel
+
+    @property
+    def get_customer_client(self):
+        """Return the gRPC stub for :meth:`CustomerClientServiceClient.get_customer_client`.
+
+        Returns the requested client in full detail.
 
         Returns:
             Callable: A callable which accepts the appropriate

@@ -1,4 +1,6 @@
-# Copyright 2018 Google LLC
+# -*- coding: utf-8 -*-
+#
+# Copyright 2019 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -22,7 +24,6 @@ import google.api_core.gapic_v1.config
 import google.api_core.gapic_v1.method
 import google.api_core.grpc_helpers
 import google.api_core.path_template
-import grpc
 
 from google.ads.google_ads.v0.services import feed_mapping_service_client_config
 from google.ads.google_ads.v0.services.transports import feed_mapping_service_grpc_transport
@@ -76,7 +77,7 @@ class FeedMappingServiceClient(object):
                  transport=None,
                  channel=None,
                  credentials=None,
-                 client_config=feed_mapping_service_client_config.config,
+                 client_config=None,
                  client_info=None):
         """Constructor.
 
@@ -109,13 +110,20 @@ class FeedMappingServiceClient(object):
                 your own client library.
         """
         # Raise deprecation warnings for things we want to go away.
-        if client_config:
-            warnings.warn('The `client_config` argument is deprecated.',
-                          PendingDeprecationWarning)
+        if client_config is not None:
+            warnings.warn(
+                'The `client_config` argument is deprecated.',
+                PendingDeprecationWarning,
+                stacklevel=2)
+        else:
+            client_config = feed_mapping_service_client_config.config
+
         if channel:
             warnings.warn(
                 'The `channel` argument is deprecated; use '
-                '`transport` instead.', PendingDeprecationWarning)
+                '`transport` instead.',
+                PendingDeprecationWarning,
+                stacklevel=2)
 
         # Instantiate the transport.
         # The transport is responsible for handling serialization and
@@ -141,9 +149,10 @@ class FeedMappingServiceClient(object):
             )
 
         if client_info is None:
-            client_info = (
-                google.api_core.gapic_v1.client_info.DEFAULT_CLIENT_INFO)
-        client_info.gapic_version = _GAPIC_LIBRARY_VERSION
+            client_info = google.api_core.gapic_v1.client_info.ClientInfo(
+                gapic_version=_GAPIC_LIBRARY_VERSION, )
+        else:
+            client_info.gapic_version = _GAPIC_LIBRARY_VERSION
         self._client_info = client_info
 
         # Parse out the default settings for retry and timeout for each RPC
@@ -180,7 +189,7 @@ class FeedMappingServiceClient(object):
                 that is provided to the method.
 
         Returns:
-            A :class:`~google.ads.google_ads.v0.types.FeedMapping` instance.
+            A :class:`~google.ads.googleads_v0.types.FeedMapping` instance.
 
         Raises:
             google.api_core.exceptions.GoogleAPICallError: If the request
@@ -195,8 +204,8 @@ class FeedMappingServiceClient(object):
                 'get_feed_mapping'] = google.api_core.gapic_v1.method.wrap_method(
                     self.transport.get_feed_mapping,
                     default_retry=self._method_configs['GetFeedMapping'].retry,
-                    default_timeout=self._method_configs['GetFeedMapping']
-                    .timeout,
+                    default_timeout=self._method_configs['GetFeedMapping'].
+                    timeout,
                     client_info=self._client_info,
                 )
 
@@ -208,6 +217,8 @@ class FeedMappingServiceClient(object):
     def mutate_feed_mappings(self,
                              customer_id,
                              operations,
+                             partial_failure=None,
+                             validate_only=None,
                              retry=google.api_core.gapic_v1.method.DEFAULT,
                              timeout=google.api_core.gapic_v1.method.DEFAULT,
                              metadata=None):
@@ -217,9 +228,16 @@ class FeedMappingServiceClient(object):
 
         Args:
             customer_id (str): The ID of the customer whose feed mappings are being modified.
-            operations (list[Union[dict, ~google.ads.google_ads.v0.types.FeedMappingOperation]]): The list of operations to perform on individual feed mappings.
+            operations (list[Union[dict, ~google.ads.googleads_v0.types.FeedMappingOperation]]): The list of operations to perform on individual feed mappings.
+
                 If a dict is provided, it must be of the same form as the protobuf
-                message :class:`~google.ads.google_ads.v0.types.FeedMappingOperation`
+                message :class:`~google.ads.googleads_v0.types.FeedMappingOperation`
+            partial_failure (bool): If true, successful operations will be carried out and invalid
+                operations will return errors. If false, all operations will be carried
+                out in one transaction if and only if they are all valid.
+                Default is false.
+            validate_only (bool): If true, the request is validated but not executed. Only errors are
+                returned, not results.
             retry (Optional[google.api_core.retry.Retry]):  A retry object used
                 to retry requests. If ``None`` is specified, requests will not
                 be retried.
@@ -230,7 +248,7 @@ class FeedMappingServiceClient(object):
                 that is provided to the method.
 
         Returns:
-            A :class:`~google.ads.google_ads.v0.types.MutateFeedMappingsResponse` instance.
+            A :class:`~google.ads.googleads_v0.types.MutateFeedMappingsResponse` instance.
 
         Raises:
             google.api_core.exceptions.GoogleAPICallError: If the request
@@ -244,16 +262,18 @@ class FeedMappingServiceClient(object):
             self._inner_api_calls[
                 'mutate_feed_mappings'] = google.api_core.gapic_v1.method.wrap_method(
                     self.transport.mutate_feed_mappings,
-                    default_retry=self._method_configs[
-                        'MutateFeedMappings'].retry,
-                    default_timeout=self._method_configs['MutateFeedMappings']
-                    .timeout,
+                    default_retry=self._method_configs['MutateFeedMappings'].
+                    retry,
+                    default_timeout=self._method_configs['MutateFeedMappings'].
+                    timeout,
                     client_info=self._client_info,
                 )
 
         request = feed_mapping_service_pb2.MutateFeedMappingsRequest(
             customer_id=customer_id,
             operations=operations,
+            partial_failure=partial_failure,
+            validate_only=validate_only,
         )
         return self._inner_api_calls['mutate_feed_mappings'](
             request, retry=retry, timeout=timeout, metadata=metadata)

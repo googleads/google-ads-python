@@ -1,6 +1,7 @@
 config = {
     "interfaces": {
-        "google.ads.googleads.v0.services.CampaignGroupService": {
+        "google.ads.googleads.v0.services.OperatingSystemVersionConstantService":
+        {
             "retry_codes": {
                 "idempotent": ["DEADLINE_EXCEEDED", "UNAVAILABLE"],
                 "non_idempotent": []
@@ -17,14 +18,9 @@ config = {
                 }
             },
             "methods": {
-                "GetCampaignGroup": {
+                "GetOperatingSystemVersionConstant": {
                     "timeout_millis": 60000,
                     "retry_codes_name": "idempotent",
-                    "retry_params_name": "default"
-                },
-                "MutateCampaignGroups": {
-                    "timeout_millis": 60000,
-                    "retry_codes_name": "non_idempotent",
                     "retry_params_name": "default"
                 }
             }

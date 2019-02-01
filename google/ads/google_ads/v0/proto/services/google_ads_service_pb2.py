@@ -7,21 +7,13 @@ from google.protobuf import descriptor as _descriptor
 from google.protobuf import message as _message
 from google.protobuf import reflection as _reflection
 from google.protobuf import symbol_database as _symbol_database
-from google.protobuf import descriptor_pb2
 # @@protoc_insertion_point(imports)
 
 _sym_db = _symbol_database.Default()
 
 
 from google.ads.google_ads.v0.proto.common import metrics_pb2 as google_dot_ads_dot_googleads__v0_dot_proto_dot_common_dot_metrics__pb2
-from google.ads.google_ads.v0.proto.enums import ad_network_type_pb2 as google_dot_ads_dot_googleads__v0_dot_proto_dot_enums_dot_ad__network__type__pb2
-from google.ads.google_ads.v0.proto.enums import day_of_week_pb2 as google_dot_ads_dot_googleads__v0_dot_proto_dot_enums_dot_day__of__week__pb2
-from google.ads.google_ads.v0.proto.enums import device_pb2 as google_dot_ads_dot_googleads__v0_dot_proto_dot_enums_dot_device__pb2
-from google.ads.google_ads.v0.proto.enums import hotel_date_selection_type_pb2 as google_dot_ads_dot_googleads__v0_dot_proto_dot_enums_dot_hotel__date__selection__type__pb2
-from google.ads.google_ads.v0.proto.enums import month_of_year_pb2 as google_dot_ads_dot_googleads__v0_dot_proto_dot_enums_dot_month__of__year__pb2
-from google.ads.google_ads.v0.proto.enums import placeholder_type_pb2 as google_dot_ads_dot_googleads__v0_dot_proto_dot_enums_dot_placeholder__type__pb2
-from google.ads.google_ads.v0.proto.enums import search_term_match_type_pb2 as google_dot_ads_dot_googleads__v0_dot_proto_dot_enums_dot_search__term__match__type__pb2
-from google.ads.google_ads.v0.proto.enums import slot_pb2 as google_dot_ads_dot_googleads__v0_dot_proto_dot_enums_dot_slot__pb2
+from google.ads.google_ads.v0.proto.common import segments_pb2 as google_dot_ads_dot_googleads__v0_dot_proto_dot_common_dot_segments__pb2
 from google.ads.google_ads.v0.proto.resources import account_budget_pb2 as google_dot_ads_dot_googleads__v0_dot_proto_dot_resources_dot_account__budget__pb2
 from google.ads.google_ads.v0.proto.resources import account_budget_proposal_pb2 as google_dot_ads_dot_googleads__v0_dot_proto_dot_resources_dot_account__budget__proposal__pb2
 from google.ads.google_ads.v0.proto.resources import ad_group_pb2 as google_dot_ads_dot_googleads__v0_dot_proto_dot_resources_dot_ad__group__pb2
@@ -30,6 +22,7 @@ from google.ads.google_ads.v0.proto.resources import ad_group_audience_view_pb2 
 from google.ads.google_ads.v0.proto.resources import ad_group_bid_modifier_pb2 as google_dot_ads_dot_googleads__v0_dot_proto_dot_resources_dot_ad__group__bid__modifier__pb2
 from google.ads.google_ads.v0.proto.resources import ad_group_criterion_pb2 as google_dot_ads_dot_googleads__v0_dot_proto_dot_resources_dot_ad__group__criterion__pb2
 from google.ads.google_ads.v0.proto.resources import ad_group_feed_pb2 as google_dot_ads_dot_googleads__v0_dot_proto_dot_resources_dot_ad__group__feed__pb2
+from google.ads.google_ads.v0.proto.resources import ad_schedule_view_pb2 as google_dot_ads_dot_googleads__v0_dot_proto_dot_resources_dot_ad__schedule__view__pb2
 from google.ads.google_ads.v0.proto.resources import age_range_view_pb2 as google_dot_ads_dot_googleads__v0_dot_proto_dot_resources_dot_age__range__view__pb2
 from google.ads.google_ads.v0.proto.resources import bidding_strategy_pb2 as google_dot_ads_dot_googleads__v0_dot_proto_dot_resources_dot_bidding__strategy__pb2
 from google.ads.google_ads.v0.proto.resources import billing_setup_pb2 as google_dot_ads_dot_googleads__v0_dot_proto_dot_resources_dot_billing__setup__pb2
@@ -39,10 +32,10 @@ from google.ads.google_ads.v0.proto.resources import campaign_bid_modifier_pb2 a
 from google.ads.google_ads.v0.proto.resources import campaign_budget_pb2 as google_dot_ads_dot_googleads__v0_dot_proto_dot_resources_dot_campaign__budget__pb2
 from google.ads.google_ads.v0.proto.resources import campaign_criterion_pb2 as google_dot_ads_dot_googleads__v0_dot_proto_dot_resources_dot_campaign__criterion__pb2
 from google.ads.google_ads.v0.proto.resources import campaign_feed_pb2 as google_dot_ads_dot_googleads__v0_dot_proto_dot_resources_dot_campaign__feed__pb2
-from google.ads.google_ads.v0.proto.resources import campaign_group_pb2 as google_dot_ads_dot_googleads__v0_dot_proto_dot_resources_dot_campaign__group__pb2
 from google.ads.google_ads.v0.proto.resources import campaign_shared_set_pb2 as google_dot_ads_dot_googleads__v0_dot_proto_dot_resources_dot_campaign__shared__set__pb2
 from google.ads.google_ads.v0.proto.resources import carrier_constant_pb2 as google_dot_ads_dot_googleads__v0_dot_proto_dot_resources_dot_carrier__constant__pb2
 from google.ads.google_ads.v0.proto.resources import change_status_pb2 as google_dot_ads_dot_googleads__v0_dot_proto_dot_resources_dot_change__status__pb2
+from google.ads.google_ads.v0.proto.resources import conversion_action_pb2 as google_dot_ads_dot_googleads__v0_dot_proto_dot_resources_dot_conversion__action__pb2
 from google.ads.google_ads.v0.proto.resources import customer_pb2 as google_dot_ads_dot_googleads__v0_dot_proto_dot_resources_dot_customer__pb2
 from google.ads.google_ads.v0.proto.resources import customer_client_pb2 as google_dot_ads_dot_googleads__v0_dot_proto_dot_resources_dot_customer__client__pb2
 from google.ads.google_ads.v0.proto.resources import customer_client_link_pb2 as google_dot_ads_dot_googleads__v0_dot_proto_dot_resources_dot_customer__client__link__pb2
@@ -64,9 +57,14 @@ from google.ads.google_ads.v0.proto.resources import keyword_plan_negative_keywo
 from google.ads.google_ads.v0.proto.resources import keyword_view_pb2 as google_dot_ads_dot_googleads__v0_dot_proto_dot_resources_dot_keyword__view__pb2
 from google.ads.google_ads.v0.proto.resources import language_constant_pb2 as google_dot_ads_dot_googleads__v0_dot_proto_dot_resources_dot_language__constant__pb2
 from google.ads.google_ads.v0.proto.resources import managed_placement_view_pb2 as google_dot_ads_dot_googleads__v0_dot_proto_dot_resources_dot_managed__placement__view__pb2
+from google.ads.google_ads.v0.proto.resources import media_file_pb2 as google_dot_ads_dot_googleads__v0_dot_proto_dot_resources_dot_media__file__pb2
+from google.ads.google_ads.v0.proto.resources import mobile_app_category_constant_pb2 as google_dot_ads_dot_googleads__v0_dot_proto_dot_resources_dot_mobile__app__category__constant__pb2
+from google.ads.google_ads.v0.proto.resources import mobile_device_constant_pb2 as google_dot_ads_dot_googleads__v0_dot_proto_dot_resources_dot_mobile__device__constant__pb2
+from google.ads.google_ads.v0.proto.resources import operating_system_version_constant_pb2 as google_dot_ads_dot_googleads__v0_dot_proto_dot_resources_dot_operating__system__version__constant__pb2
 from google.ads.google_ads.v0.proto.resources import parental_status_view_pb2 as google_dot_ads_dot_googleads__v0_dot_proto_dot_resources_dot_parental__status__view__pb2
 from google.ads.google_ads.v0.proto.resources import product_group_view_pb2 as google_dot_ads_dot_googleads__v0_dot_proto_dot_resources_dot_product__group__view__pb2
 from google.ads.google_ads.v0.proto.resources import recommendation_pb2 as google_dot_ads_dot_googleads__v0_dot_proto_dot_resources_dot_recommendation__pb2
+from google.ads.google_ads.v0.proto.resources import remarketing_action_pb2 as google_dot_ads_dot_googleads__v0_dot_proto_dot_resources_dot_remarketing__action__pb2
 from google.ads.google_ads.v0.proto.resources import search_term_view_pb2 as google_dot_ads_dot_googleads__v0_dot_proto_dot_resources_dot_search__term__view__pb2
 from google.ads.google_ads.v0.proto.resources import shared_criterion_pb2 as google_dot_ads_dot_googleads__v0_dot_proto_dot_resources_dot_shared__criterion__pb2
 from google.ads.google_ads.v0.proto.resources import shared_set_pb2 as google_dot_ads_dot_googleads__v0_dot_proto_dot_resources_dot_shared__set__pb2
@@ -83,7 +81,6 @@ from google.ads.google_ads.v0.proto.services import bidding_strategy_service_pb2
 from google.ads.google_ads.v0.proto.services import campaign_bid_modifier_service_pb2 as google_dot_ads_dot_googleads__v0_dot_proto_dot_services_dot_campaign__bid__modifier__service__pb2
 from google.ads.google_ads.v0.proto.services import campaign_budget_service_pb2 as google_dot_ads_dot_googleads__v0_dot_proto_dot_services_dot_campaign__budget__service__pb2
 from google.ads.google_ads.v0.proto.services import campaign_criterion_service_pb2 as google_dot_ads_dot_googleads__v0_dot_proto_dot_services_dot_campaign__criterion__service__pb2
-from google.ads.google_ads.v0.proto.services import campaign_group_service_pb2 as google_dot_ads_dot_googleads__v0_dot_proto_dot_services_dot_campaign__group__service__pb2
 from google.ads.google_ads.v0.proto.services import campaign_service_pb2 as google_dot_ads_dot_googleads__v0_dot_proto_dot_services_dot_campaign__service__pb2
 from google.ads.google_ads.v0.proto.services import campaign_shared_set_service_pb2 as google_dot_ads_dot_googleads__v0_dot_proto_dot_services_dot_campaign__shared__set__service__pb2
 from google.ads.google_ads.v0.proto.services import conversion_action_service_pb2 as google_dot_ads_dot_googleads__v0_dot_proto_dot_services_dot_conversion__action__service__pb2
@@ -92,16 +89,17 @@ from google.ads.google_ads.v0.proto.services import shared_set_service_pb2 as go
 from google.ads.google_ads.v0.proto.services import user_list_service_pb2 as google_dot_ads_dot_googleads__v0_dot_proto_dot_services_dot_user__list__service__pb2
 from google.api import annotations_pb2 as google_dot_api_dot_annotations__pb2
 from google.protobuf import field_mask_pb2 as google_dot_protobuf_dot_field__mask__pb2
-from google.protobuf import wrappers_pb2 as google_dot_protobuf_dot_wrappers__pb2
+from google.rpc import status_pb2 as google_dot_rpc_dot_status__pb2
 
 
 DESCRIPTOR = _descriptor.FileDescriptor(
   name='google/ads/googleads_v0/proto/services/google_ads_service.proto',
   package='google.ads.googleads.v0.services',
   syntax='proto3',
-  serialized_pb=_b('\n?google/ads/googleads_v0/proto/services/google_ads_service.proto\x12 google.ads.googleads.v0.services\x1a\x32google/ads/googleads_v0/proto/common/metrics.proto\x1a\x39google/ads/googleads_v0/proto/enums/ad_network_type.proto\x1a\x35google/ads/googleads_v0/proto/enums/day_of_week.proto\x1a\x30google/ads/googleads_v0/proto/enums/device.proto\x1a\x43google/ads/googleads_v0/proto/enums/hotel_date_selection_type.proto\x1a\x37google/ads/googleads_v0/proto/enums/month_of_year.proto\x1a:google/ads/googleads_v0/proto/enums/placeholder_type.proto\x1a@google/ads/googleads_v0/proto/enums/search_term_match_type.proto\x1a.google/ads/googleads_v0/proto/enums/slot.proto\x1a<google/ads/googleads_v0/proto/resources/account_budget.proto\x1a\x45google/ads/googleads_v0/proto/resources/account_budget_proposal.proto\x1a\x36google/ads/googleads_v0/proto/resources/ad_group.proto\x1a\x39google/ads/googleads_v0/proto/resources/ad_group_ad.proto\x1a\x44google/ads/googleads_v0/proto/resources/ad_group_audience_view.proto\x1a\x43google/ads/googleads_v0/proto/resources/ad_group_bid_modifier.proto\x1a@google/ads/googleads_v0/proto/resources/ad_group_criterion.proto\x1a;google/ads/googleads_v0/proto/resources/ad_group_feed.proto\x1a<google/ads/googleads_v0/proto/resources/age_range_view.proto\x1a>google/ads/googleads_v0/proto/resources/bidding_strategy.proto\x1a;google/ads/googleads_v0/proto/resources/billing_setup.proto\x1a\x36google/ads/googleads_v0/proto/resources/campaign.proto\x1a\x44google/ads/googleads_v0/proto/resources/campaign_audience_view.proto\x1a\x43google/ads/googleads_v0/proto/resources/campaign_bid_modifier.proto\x1a=google/ads/googleads_v0/proto/resources/campaign_budget.proto\x1a@google/ads/googleads_v0/proto/resources/campaign_criterion.proto\x1a;google/ads/googleads_v0/proto/resources/campaign_feed.proto\x1a<google/ads/googleads_v0/proto/resources/campaign_group.proto\x1a\x41google/ads/googleads_v0/proto/resources/campaign_shared_set.proto\x1a>google/ads/googleads_v0/proto/resources/carrier_constant.proto\x1a;google/ads/googleads_v0/proto/resources/change_status.proto\x1a\x36google/ads/googleads_v0/proto/resources/customer.proto\x1a=google/ads/googleads_v0/proto/resources/customer_client.proto\x1a\x42google/ads/googleads_v0/proto/resources/customer_client_link.proto\x1a;google/ads/googleads_v0/proto/resources/customer_feed.proto\x1a\x43google/ads/googleads_v0/proto/resources/customer_manager_link.proto\x1a\x42google/ads/googleads_v0/proto/resources/display_keyword_view.proto\x1a\x32google/ads/googleads_v0/proto/resources/feed.proto\x1a\x37google/ads/googleads_v0/proto/resources/feed_item.proto\x1a:google/ads/googleads_v0/proto/resources/feed_mapping.proto\x1a\x39google/ads/googleads_v0/proto/resources/gender_view.proto\x1a\x41google/ads/googleads_v0/proto/resources/geo_target_constant.proto\x1a>google/ads/googleads_v0/proto/resources/hotel_group_view.proto\x1a\x44google/ads/googleads_v0/proto/resources/hotel_performance_view.proto\x1a:google/ads/googleads_v0/proto/resources/keyword_plan.proto\x1a\x43google/ads/googleads_v0/proto/resources/keyword_plan_ad_group.proto\x1a\x43google/ads/googleads_v0/proto/resources/keyword_plan_campaign.proto\x1a\x42google/ads/googleads_v0/proto/resources/keyword_plan_keyword.proto\x1aKgoogle/ads/googleads_v0/proto/resources/keyword_plan_negative_keyword.proto\x1a:google/ads/googleads_v0/proto/resources/keyword_view.proto\x1a?google/ads/googleads_v0/proto/resources/language_constant.proto\x1a\x44google/ads/googleads_v0/proto/resources/managed_placement_view.proto\x1a\x42google/ads/googleads_v0/proto/resources/parental_status_view.proto\x1a@google/ads/googleads_v0/proto/resources/product_group_view.proto\x1a<google/ads/googleads_v0/proto/resources/recommendation.proto\x1a>google/ads/googleads_v0/proto/resources/search_term_view.proto\x1a>google/ads/googleads_v0/proto/resources/shared_criterion.proto\x1a\x38google/ads/googleads_v0/proto/resources/shared_set.proto\x1a<google/ads/googleads_v0/proto/resources/topic_constant.proto\x1a\x38google/ads/googleads_v0/proto/resources/topic_view.proto\x1a;google/ads/googleads_v0/proto/resources/user_interest.proto\x1a\x37google/ads/googleads_v0/proto/resources/user_list.proto\x1a\x33google/ads/googleads_v0/proto/resources/video.proto\x1a@google/ads/googleads_v0/proto/services/ad_group_ad_service.proto\x1aJgoogle/ads/googleads_v0/proto/services/ad_group_bid_modifier_service.proto\x1aGgoogle/ads/googleads_v0/proto/services/ad_group_criterion_service.proto\x1a=google/ads/googleads_v0/proto/services/ad_group_service.proto\x1a\x45google/ads/googleads_v0/proto/services/bidding_strategy_service.proto\x1aJgoogle/ads/googleads_v0/proto/services/campaign_bid_modifier_service.proto\x1a\x44google/ads/googleads_v0/proto/services/campaign_budget_service.proto\x1aGgoogle/ads/googleads_v0/proto/services/campaign_criterion_service.proto\x1a\x43google/ads/googleads_v0/proto/services/campaign_group_service.proto\x1a=google/ads/googleads_v0/proto/services/campaign_service.proto\x1aHgoogle/ads/googleads_v0/proto/services/campaign_shared_set_service.proto\x1a\x46google/ads/googleads_v0/proto/services/conversion_action_service.proto\x1a\x45google/ads/googleads_v0/proto/services/shared_criterion_service.proto\x1a?google/ads/googleads_v0/proto/services/shared_set_service.proto\x1a>google/ads/googleads_v0/proto/services/user_list_service.proto\x1a\x1cgoogle/api/annotations.proto\x1a google/protobuf/field_mask.proto\x1a\x1egoogle/protobuf/wrappers.proto\"c\n\x16SearchGoogleAdsRequest\x12\x13\n\x0b\x63ustomer_id\x18\x01 \x01(\t\x12\r\n\x05query\x18\x02 \x01(\t\x12\x12\n\npage_token\x18\x03 \x01(\t\x12\x11\n\tpage_size\x18\x04 \x01(\x05\"\xc0\x01\n\x17SearchGoogleAdsResponse\x12?\n\x07results\x18\x01 \x03(\x0b\x32..google.ads.googleads.v0.services.GoogleAdsRow\x12\x17\n\x0fnext_page_token\x18\x02 \x01(\t\x12\x1b\n\x13total_results_count\x18\x03 \x01(\x03\x12.\n\nfield_mask\x18\x05 \x01(\x0b\x32\x1a.google.protobuf.FieldMask\"\xad,\n\x0cGoogleAdsRow\x12H\n\x0e\x61\x63\x63ount_budget\x18* \x01(\x0b\x32\x30.google.ads.googleads.v0.resources.AccountBudget\x12Y\n\x17\x61\x63\x63ount_budget_proposal\x18+ \x01(\x0b\x32\x38.google.ads.googleads.v0.resources.AccountBudgetProposal\x12<\n\x08\x61\x64_group\x18\x03 \x01(\x0b\x32*.google.ads.googleads.v0.resources.AdGroup\x12\x41\n\x0b\x61\x64_group_ad\x18\x10 \x01(\x0b\x32,.google.ads.googleads.v0.resources.AdGroupAd\x12V\n\x16\x61\x64_group_audience_view\x18\x39 \x01(\x0b\x32\x36.google.ads.googleads.v0.resources.AdGroupAudienceView\x12T\n\x15\x61\x64_group_bid_modifier\x18\x18 \x01(\x0b\x32\x35.google.ads.googleads.v0.resources.AdGroupBidModifier\x12O\n\x12\x61\x64_group_criterion\x18\x11 \x01(\x0b\x32\x33.google.ads.googleads.v0.resources.AdGroupCriterion\x12\x45\n\rad_group_feed\x18\x43 \x01(\x0b\x32..google.ads.googleads.v0.resources.AdGroupFeed\x12G\n\x0e\x61ge_range_view\x18\x30 \x01(\x0b\x32/.google.ads.googleads.v0.resources.AgeRangeView\x12L\n\x10\x62idding_strategy\x18\x12 \x01(\x0b\x32\x32.google.ads.googleads.v0.resources.BiddingStrategy\x12\x46\n\rbilling_setup\x18) \x01(\x0b\x32/.google.ads.googleads.v0.resources.BillingSetup\x12J\n\x0f\x63\x61mpaign_budget\x18\x13 \x01(\x0b\x32\x31.google.ads.googleads.v0.resources.CampaignBudget\x12=\n\x08\x63\x61mpaign\x18\x02 \x01(\x0b\x32+.google.ads.googleads.v0.resources.Campaign\x12W\n\x16\x63\x61mpaign_audience_view\x18\x45 \x01(\x0b\x32\x37.google.ads.googleads.v0.resources.CampaignAudienceView\x12U\n\x15\x63\x61mpaign_bid_modifier\x18\x1a \x01(\x0b\x32\x36.google.ads.googleads.v0.resources.CampaignBidModifier\x12P\n\x12\x63\x61mpaign_criterion\x18\x14 \x01(\x0b\x32\x34.google.ads.googleads.v0.resources.CampaignCriterion\x12\x46\n\rcampaign_feed\x18? \x01(\x0b\x32/.google.ads.googleads.v0.resources.CampaignFeed\x12H\n\x0e\x63\x61mpaign_group\x18\x19 \x01(\x0b\x32\x30.google.ads.googleads.v0.resources.CampaignGroup\x12Q\n\x13\x63\x61mpaign_shared_set\x18\x1e \x01(\x0b\x32\x34.google.ads.googleads.v0.resources.CampaignSharedSet\x12L\n\x10\x63\x61rrier_constant\x18\x42 \x01(\x0b\x32\x32.google.ads.googleads.v0.resources.CarrierConstant\x12\x46\n\rchange_status\x18% \x01(\x0b\x32/.google.ads.googleads.v0.resources.ChangeStatus\x12=\n\x08\x63ustomer\x18\x01 \x01(\x0b\x32+.google.ads.googleads.v0.resources.Customer\x12U\n\x15\x63ustomer_manager_link\x18= \x01(\x0b\x32\x36.google.ads.googleads.v0.resources.CustomerManagerLink\x12S\n\x14\x63ustomer_client_link\x18> \x01(\x0b\x32\x35.google.ads.googleads.v0.resources.CustomerClientLink\x12J\n\x0f\x63ustomer_client\x18\x46 \x01(\x0b\x32\x31.google.ads.googleads.v0.resources.CustomerClient\x12\x46\n\rcustomer_feed\x18@ \x01(\x0b\x32/.google.ads.googleads.v0.resources.CustomerFeed\x12S\n\x14\x64isplay_keyword_view\x18/ \x01(\x0b\x32\x35.google.ads.googleads.v0.resources.DisplayKeywordView\x12\x35\n\x04\x66\x65\x65\x64\x18. \x01(\x0b\x32\'.google.ads.googleads.v0.resources.Feed\x12>\n\tfeed_item\x18\x32 \x01(\x0b\x32+.google.ads.googleads.v0.resources.FeedItem\x12\x44\n\x0c\x66\x65\x65\x64_mapping\x18: \x01(\x0b\x32..google.ads.googleads.v0.resources.FeedMapping\x12\x42\n\x0bgender_view\x18( \x01(\x0b\x32-.google.ads.googleads.v0.resources.GenderView\x12Q\n\x13geo_target_constant\x18\x17 \x01(\x0b\x32\x34.google.ads.googleads.v0.resources.GeoTargetConstant\x12K\n\x10hotel_group_view\x18\x33 \x01(\x0b\x32\x31.google.ads.googleads.v0.resources.HotelGroupView\x12W\n\x16hotel_performance_view\x18G \x01(\x0b\x32\x37.google.ads.googleads.v0.resources.HotelPerformanceView\x12\x44\n\x0ckeyword_view\x18\x15 \x01(\x0b\x32..google.ads.googleads.v0.resources.KeywordView\x12\x44\n\x0ckeyword_plan\x18  \x01(\x0b\x32..google.ads.googleads.v0.resources.KeywordPlan\x12U\n\x15keyword_plan_campaign\x18! \x01(\x0b\x32\x36.google.ads.googleads.v0.resources.KeywordPlanCampaign\x12\x64\n\x1dkeyword_plan_negative_keyword\x18\" \x01(\x0b\x32=.google.ads.googleads.v0.resources.KeywordPlanNegativeKeyword\x12T\n\x15keyword_plan_ad_group\x18# \x01(\x0b\x32\x35.google.ads.googleads.v0.resources.KeywordPlanAdGroup\x12S\n\x14keyword_plan_keyword\x18$ \x01(\x0b\x32\x35.google.ads.googleads.v0.resources.KeywordPlanKeyword\x12N\n\x11language_constant\x18\x37 \x01(\x0b\x32\x33.google.ads.googleads.v0.resources.LanguageConstant\x12W\n\x16managed_placement_view\x18\x35 \x01(\x0b\x32\x37.google.ads.googleads.v0.resources.ManagedPlacementView\x12S\n\x14parental_status_view\x18- \x01(\x0b\x32\x35.google.ads.googleads.v0.resources.ParentalStatusView\x12O\n\x12product_group_view\x18\x36 \x01(\x0b\x32\x33.google.ads.googleads.v0.resources.ProductGroupView\x12I\n\x0erecommendation\x18\x16 \x01(\x0b\x32\x31.google.ads.googleads.v0.resources.Recommendation\x12K\n\x10search_term_view\x18\x44 \x01(\x0b\x32\x31.google.ads.googleads.v0.resources.SearchTermView\x12L\n\x10shared_criterion\x18\x1d \x01(\x0b\x32\x32.google.ads.googleads.v0.resources.SharedCriterion\x12@\n\nshared_set\x18\x1b \x01(\x0b\x32,.google.ads.googleads.v0.resources.SharedSet\x12@\n\ntopic_view\x18, \x01(\x0b\x32,.google.ads.googleads.v0.resources.TopicView\x12\x46\n\ruser_interest\x18; \x01(\x0b\x32/.google.ads.googleads.v0.resources.UserInterest\x12>\n\tuser_list\x18& \x01(\x0b\x32+.google.ads.googleads.v0.resources.UserList\x12H\n\x0etopic_constant\x18\x1f \x01(\x0b\x32\x30.google.ads.googleads.v0.resources.TopicConstant\x12\x37\n\x05video\x18\' \x01(\x0b\x32(.google.ads.googleads.v0.resources.Video\x12\x38\n\x07metrics\x18\x04 \x01(\x0b\x32\'.google.ads.googleads.v0.common.Metrics\x12W\n\x0f\x61\x64_network_type\x18\x05 \x01(\x0e\x32>.google.ads.googleads.v0.enums.AdNetworkTypeEnum.AdNetworkType\x12*\n\x04\x64\x61te\x18\x06 \x01(\x0b\x32\x1c.google.protobuf.StringValue\x12K\n\x0b\x64\x61y_of_week\x18\x07 \x01(\x0e\x32\x36.google.ads.googleads.v0.enums.DayOfWeekEnum.DayOfWeek\x12@\n\x06\x64\x65vice\x18\x08 \x01(\x0e\x32\x30.google.ads.googleads.v0.enums.DeviceEnum.Device\x12>\n\x19hotel_booking_window_days\x18S \x01(\x0b\x32\x1b.google.protobuf.Int64Value\x12\x34\n\x0fhotel_center_id\x18H \x01(\x0b\x32\x1b.google.protobuf.Int64Value\x12\x39\n\x13hotel_check_in_date\x18I \x01(\x0b\x32\x1c.google.protobuf.StringValue\x12Z\n\x1ahotel_check_in_day_of_week\x18J \x01(\x0e\x32\x36.google.ads.googleads.v0.enums.DayOfWeekEnum.DayOfWeek\x12\x30\n\nhotel_city\x18K \x01(\x0b\x32\x1c.google.protobuf.StringValue\x12\x30\n\x0bhotel_class\x18L \x01(\x0b\x32\x1b.google.protobuf.Int32Value\x12\x33\n\rhotel_country\x18M \x01(\x0b\x32\x1c.google.protobuf.StringValue\x12s\n\x19hotel_date_selection_type\x18N \x01(\x0e\x32P.google.ads.googleads.v0.enums.HotelDateSelectionTypeEnum.HotelDateSelectionType\x12\x39\n\x14hotel_length_of_stay\x18O \x01(\x0b\x32\x1b.google.protobuf.Int32Value\x12\x31\n\x0bhotel_state\x18Q \x01(\x0b\x32\x1c.google.protobuf.StringValue\x12)\n\x04hour\x18\t \x01(\x0b\x32\x1b.google.protobuf.Int32Value\x12+\n\x05month\x18\n \x01(\x0b\x32\x1c.google.protobuf.StringValue\x12Q\n\rmonth_of_year\x18\x1c \x01(\x0e\x32:.google.ads.googleads.v0.enums.MonthOfYearEnum.MonthOfYear\x12\x36\n\x10partner_hotel_id\x18R \x01(\x0b\x32\x1c.google.protobuf.StringValue\x12\\\n\x10placeholder_type\x18\x41 \x01(\x0e\x32\x42.google.ads.googleads.v0.enums.PlaceholderTypeEnum.PlaceholderType\x12-\n\x07quarter\x18\x0c \x01(\x0b\x32\x1c.google.protobuf.StringValue\x12j\n\x16search_term_match_type\x18\x38 \x01(\x0e\x32J.google.ads.googleads.v0.enums.SearchTermMatchTypeEnum.SearchTermMatchType\x12:\n\x04slot\x18\r \x01(\x0e\x32,.google.ads.googleads.v0.enums.SlotEnum.Slot\x12*\n\x04week\x18\x0e \x01(\x0b\x32\x1c.google.protobuf.StringValue\x12)\n\x04year\x18\x0f \x01(\x0b\x32\x1b.google.protobuf.Int32Value\"{\n\x16MutateGoogleAdsRequest\x12\x13\n\x0b\x63ustomer_id\x18\x01 \x01(\t\x12L\n\x11mutate_operations\x18\x02 \x03(\x0b\x32\x31.google.ads.googleads.v0.services.MutateOperation\"x\n\x17MutateGoogleAdsResponse\x12]\n\x1amutate_operation_responses\x18\x01 \x03(\x0b\x32\x39.google.ads.googleads.v0.services.MutateOperationResponse\"\xb1\x0b\n\x0fMutateOperation\x12U\n\x15\x61\x64_group_ad_operation\x18\x01 \x01(\x0b\x32\x34.google.ads.googleads.v0.services.AdGroupAdOperationH\x00\x12h\n\x1f\x61\x64_group_bid_modifier_operation\x18\x02 \x01(\x0b\x32=.google.ads.googleads.v0.services.AdGroupBidModifierOperationH\x00\x12\x63\n\x1c\x61\x64_group_criterion_operation\x18\x03 \x01(\x0b\x32;.google.ads.googleads.v0.services.AdGroupCriterionOperationH\x00\x12P\n\x12\x61\x64_group_operation\x18\x05 \x01(\x0b\x32\x32.google.ads.googleads.v0.services.AdGroupOperationH\x00\x12`\n\x1a\x62idding_strategy_operation\x18\x06 \x01(\x0b\x32:.google.ads.googleads.v0.services.BiddingStrategyOperationH\x00\x12i\n\x1f\x63\x61mpaign_bid_modifier_operation\x18\x07 \x01(\x0b\x32>.google.ads.googleads.v0.services.CampaignBidModifierOperationH\x00\x12^\n\x19\x63\x61mpaign_budget_operation\x18\x08 \x01(\x0b\x32\x39.google.ads.googleads.v0.services.CampaignBudgetOperationH\x00\x12\\\n\x18\x63\x61mpaign_group_operation\x18\t \x01(\x0b\x32\x38.google.ads.googleads.v0.services.CampaignGroupOperationH\x00\x12Q\n\x12\x63\x61mpaign_operation\x18\n \x01(\x0b\x32\x33.google.ads.googleads.v0.services.CampaignOperationH\x00\x12\x65\n\x1d\x63\x61mpaign_shared_set_operation\x18\x0b \x01(\x0b\x32<.google.ads.googleads.v0.services.CampaignSharedSetOperationH\x00\x12\x62\n\x1b\x63onversion_action_operation\x18\x0c \x01(\x0b\x32;.google.ads.googleads.v0.services.ConversionActionOperationH\x00\x12\x64\n\x1c\x63\x61mpaign_criterion_operation\x18\r \x01(\x0b\x32<.google.ads.googleads.v0.services.CampaignCriterionOperationH\x00\x12`\n\x1ashared_criterion_operation\x18\x0e \x01(\x0b\x32:.google.ads.googleads.v0.services.SharedCriterionOperationH\x00\x12T\n\x14shared_set_operation\x18\x0f \x01(\x0b\x32\x34.google.ads.googleads.v0.services.SharedSetOperationH\x00\x12R\n\x13user_list_operation\x18\x10 \x01(\x0b\x32\x33.google.ads.googleads.v0.services.UserListOperationH\x00\x42\x0b\n\toperation\"\xb8\x0b\n\x17MutateOperationResponse\x12U\n\x12\x61\x64_group_ad_result\x18\x01 \x01(\x0b\x32\x37.google.ads.googleads.v0.services.MutateAdGroupAdResultH\x00\x12h\n\x1c\x61\x64_group_bid_modifier_result\x18\x02 \x01(\x0b\x32@.google.ads.googleads.v0.services.MutateAdGroupBidModifierResultH\x00\x12\x63\n\x19\x61\x64_group_criterion_result\x18\x03 \x01(\x0b\x32>.google.ads.googleads.v0.services.MutateAdGroupCriterionResultH\x00\x12P\n\x0f\x61\x64_group_result\x18\x05 \x01(\x0b\x32\x35.google.ads.googleads.v0.services.MutateAdGroupResultH\x00\x12`\n\x17\x62idding_strategy_result\x18\x06 \x01(\x0b\x32=.google.ads.googleads.v0.services.MutateBiddingStrategyResultH\x00\x12i\n\x1c\x63\x61mpaign_bid_modifier_result\x18\x07 \x01(\x0b\x32\x41.google.ads.googleads.v0.services.MutateCampaignBidModifierResultH\x00\x12^\n\x16\x63\x61mpaign_budget_result\x18\x08 \x01(\x0b\x32<.google.ads.googleads.v0.services.MutateCampaignBudgetResultH\x00\x12\\\n\x15\x63\x61mpaign_group_result\x18\t \x01(\x0b\x32;.google.ads.googleads.v0.services.MutateCampaignGroupResultH\x00\x12Q\n\x0f\x63\x61mpaign_result\x18\n \x01(\x0b\x32\x36.google.ads.googleads.v0.services.MutateCampaignResultH\x00\x12\x65\n\x1a\x63\x61mpaign_shared_set_result\x18\x0b \x01(\x0b\x32?.google.ads.googleads.v0.services.MutateCampaignSharedSetResultH\x00\x12\x62\n\x18\x63onversion_action_result\x18\x0c \x01(\x0b\x32>.google.ads.googleads.v0.services.MutateConversionActionResultH\x00\x12\x64\n\x19\x63\x61mpaign_criterion_result\x18\r \x01(\x0b\x32?.google.ads.googleads.v0.services.MutateCampaignCriterionResultH\x00\x12`\n\x17shared_criterion_result\x18\x0e \x01(\x0b\x32=.google.ads.googleads.v0.services.MutateSharedCriterionResultH\x00\x12T\n\x11shared_set_result\x18\x0f \x01(\x0b\x32\x37.google.ads.googleads.v0.services.MutateSharedSetResultH\x00\x12R\n\x10user_list_result\x18\x10 \x01(\x0b\x32\x36.google.ads.googleads.v0.services.MutateUserListResultH\x00\x42\n\n\x08response2\x88\x03\n\x10GoogleAdsService\x12\xb8\x01\n\x06Search\x12\x38.google.ads.googleads.v0.services.SearchGoogleAdsRequest\x1a\x39.google.ads.googleads.v0.services.SearchGoogleAdsResponse\"9\x82\xd3\xe4\x93\x02\x33\"./v0/customers/{customer_id=*}/googleAds:search:\x01*\x12\xb8\x01\n\x06Mutate\x12\x38.google.ads.googleads.v0.services.MutateGoogleAdsRequest\x1a\x39.google.ads.googleads.v0.services.MutateGoogleAdsResponse\"9\x82\xd3\xe4\x93\x02\x33\"./v0/customers/{customer_id=*}/googleAds:mutate:\x01*B\xd5\x01\n$com.google.ads.googleads.v0.servicesB\x15GoogleAdsServiceProtoP\x01ZHgoogle.golang.org/genproto/googleapis/ads/googleads/v0/services;services\xa2\x02\x03GAA\xaa\x02 Google.Ads.GoogleAds.V0.Services\xca\x02 Google\\Ads\\GoogleAds\\V0\\Servicesb\x06proto3')
+  serialized_options=_b('\n$com.google.ads.googleads.v0.servicesB\025GoogleAdsServiceProtoP\001ZHgoogle.golang.org/genproto/googleapis/ads/googleads/v0/services;services\242\002\003GAA\252\002 Google.Ads.GoogleAds.V0.Services\312\002 Google\\Ads\\GoogleAds\\V0\\Services\352\002$Google::Ads::GoogleAds::V0::Services'),
+  serialized_pb=_b('\n?google/ads/googleads_v0/proto/services/google_ads_service.proto\x12 google.ads.googleads.v0.services\x1a\x32google/ads/googleads_v0/proto/common/metrics.proto\x1a\x33google/ads/googleads_v0/proto/common/segments.proto\x1a<google/ads/googleads_v0/proto/resources/account_budget.proto\x1a\x45google/ads/googleads_v0/proto/resources/account_budget_proposal.proto\x1a\x36google/ads/googleads_v0/proto/resources/ad_group.proto\x1a\x39google/ads/googleads_v0/proto/resources/ad_group_ad.proto\x1a\x44google/ads/googleads_v0/proto/resources/ad_group_audience_view.proto\x1a\x43google/ads/googleads_v0/proto/resources/ad_group_bid_modifier.proto\x1a@google/ads/googleads_v0/proto/resources/ad_group_criterion.proto\x1a;google/ads/googleads_v0/proto/resources/ad_group_feed.proto\x1a>google/ads/googleads_v0/proto/resources/ad_schedule_view.proto\x1a<google/ads/googleads_v0/proto/resources/age_range_view.proto\x1a>google/ads/googleads_v0/proto/resources/bidding_strategy.proto\x1a;google/ads/googleads_v0/proto/resources/billing_setup.proto\x1a\x36google/ads/googleads_v0/proto/resources/campaign.proto\x1a\x44google/ads/googleads_v0/proto/resources/campaign_audience_view.proto\x1a\x43google/ads/googleads_v0/proto/resources/campaign_bid_modifier.proto\x1a=google/ads/googleads_v0/proto/resources/campaign_budget.proto\x1a@google/ads/googleads_v0/proto/resources/campaign_criterion.proto\x1a;google/ads/googleads_v0/proto/resources/campaign_feed.proto\x1a\x41google/ads/googleads_v0/proto/resources/campaign_shared_set.proto\x1a>google/ads/googleads_v0/proto/resources/carrier_constant.proto\x1a;google/ads/googleads_v0/proto/resources/change_status.proto\x1a?google/ads/googleads_v0/proto/resources/conversion_action.proto\x1a\x36google/ads/googleads_v0/proto/resources/customer.proto\x1a=google/ads/googleads_v0/proto/resources/customer_client.proto\x1a\x42google/ads/googleads_v0/proto/resources/customer_client_link.proto\x1a;google/ads/googleads_v0/proto/resources/customer_feed.proto\x1a\x43google/ads/googleads_v0/proto/resources/customer_manager_link.proto\x1a\x42google/ads/googleads_v0/proto/resources/display_keyword_view.proto\x1a\x32google/ads/googleads_v0/proto/resources/feed.proto\x1a\x37google/ads/googleads_v0/proto/resources/feed_item.proto\x1a:google/ads/googleads_v0/proto/resources/feed_mapping.proto\x1a\x39google/ads/googleads_v0/proto/resources/gender_view.proto\x1a\x41google/ads/googleads_v0/proto/resources/geo_target_constant.proto\x1a>google/ads/googleads_v0/proto/resources/hotel_group_view.proto\x1a\x44google/ads/googleads_v0/proto/resources/hotel_performance_view.proto\x1a:google/ads/googleads_v0/proto/resources/keyword_plan.proto\x1a\x43google/ads/googleads_v0/proto/resources/keyword_plan_ad_group.proto\x1a\x43google/ads/googleads_v0/proto/resources/keyword_plan_campaign.proto\x1a\x42google/ads/googleads_v0/proto/resources/keyword_plan_keyword.proto\x1aKgoogle/ads/googleads_v0/proto/resources/keyword_plan_negative_keyword.proto\x1a:google/ads/googleads_v0/proto/resources/keyword_view.proto\x1a?google/ads/googleads_v0/proto/resources/language_constant.proto\x1a\x44google/ads/googleads_v0/proto/resources/managed_placement_view.proto\x1a\x38google/ads/googleads_v0/proto/resources/media_file.proto\x1aJgoogle/ads/googleads_v0/proto/resources/mobile_app_category_constant.proto\x1a\x44google/ads/googleads_v0/proto/resources/mobile_device_constant.proto\x1aOgoogle/ads/googleads_v0/proto/resources/operating_system_version_constant.proto\x1a\x42google/ads/googleads_v0/proto/resources/parental_status_view.proto\x1a@google/ads/googleads_v0/proto/resources/product_group_view.proto\x1a<google/ads/googleads_v0/proto/resources/recommendation.proto\x1a@google/ads/googleads_v0/proto/resources/remarketing_action.proto\x1a>google/ads/googleads_v0/proto/resources/search_term_view.proto\x1a>google/ads/googleads_v0/proto/resources/shared_criterion.proto\x1a\x38google/ads/googleads_v0/proto/resources/shared_set.proto\x1a<google/ads/googleads_v0/proto/resources/topic_constant.proto\x1a\x38google/ads/googleads_v0/proto/resources/topic_view.proto\x1a;google/ads/googleads_v0/proto/resources/user_interest.proto\x1a\x37google/ads/googleads_v0/proto/resources/user_list.proto\x1a\x33google/ads/googleads_v0/proto/resources/video.proto\x1a@google/ads/googleads_v0/proto/services/ad_group_ad_service.proto\x1aJgoogle/ads/googleads_v0/proto/services/ad_group_bid_modifier_service.proto\x1aGgoogle/ads/googleads_v0/proto/services/ad_group_criterion_service.proto\x1a=google/ads/googleads_v0/proto/services/ad_group_service.proto\x1a\x45google/ads/googleads_v0/proto/services/bidding_strategy_service.proto\x1aJgoogle/ads/googleads_v0/proto/services/campaign_bid_modifier_service.proto\x1a\x44google/ads/googleads_v0/proto/services/campaign_budget_service.proto\x1aGgoogle/ads/googleads_v0/proto/services/campaign_criterion_service.proto\x1a=google/ads/googleads_v0/proto/services/campaign_service.proto\x1aHgoogle/ads/googleads_v0/proto/services/campaign_shared_set_service.proto\x1a\x46google/ads/googleads_v0/proto/services/conversion_action_service.proto\x1a\x45google/ads/googleads_v0/proto/services/shared_criterion_service.proto\x1a?google/ads/googleads_v0/proto/services/shared_set_service.proto\x1a>google/ads/googleads_v0/proto/services/user_list_service.proto\x1a\x1cgoogle/api/annotations.proto\x1a google/protobuf/field_mask.proto\x1a\x17google/rpc/status.proto\"z\n\x16SearchGoogleAdsRequest\x12\x13\n\x0b\x63ustomer_id\x18\x01 \x01(\t\x12\r\n\x05query\x18\x02 \x01(\t\x12\x12\n\npage_token\x18\x03 \x01(\t\x12\x11\n\tpage_size\x18\x04 \x01(\x05\x12\x15\n\rvalidate_only\x18\x05 \x01(\x08\"\xc0\x01\n\x17SearchGoogleAdsResponse\x12?\n\x07results\x18\x01 \x03(\x0b\x32..google.ads.googleads.v0.services.GoogleAdsRow\x12\x17\n\x0fnext_page_token\x18\x02 \x01(\t\x12\x1b\n\x13total_results_count\x18\x03 \x01(\x03\x12.\n\nfield_mask\x18\x05 \x01(\x0b\x32\x1a.google.protobuf.FieldMask\"\xef$\n\x0cGoogleAdsRow\x12H\n\x0e\x61\x63\x63ount_budget\x18* \x01(\x0b\x32\x30.google.ads.googleads.v0.resources.AccountBudget\x12Y\n\x17\x61\x63\x63ount_budget_proposal\x18+ \x01(\x0b\x32\x38.google.ads.googleads.v0.resources.AccountBudgetProposal\x12<\n\x08\x61\x64_group\x18\x03 \x01(\x0b\x32*.google.ads.googleads.v0.resources.AdGroup\x12\x41\n\x0b\x61\x64_group_ad\x18\x10 \x01(\x0b\x32,.google.ads.googleads.v0.resources.AdGroupAd\x12V\n\x16\x61\x64_group_audience_view\x18\x39 \x01(\x0b\x32\x36.google.ads.googleads.v0.resources.AdGroupAudienceView\x12T\n\x15\x61\x64_group_bid_modifier\x18\x18 \x01(\x0b\x32\x35.google.ads.googleads.v0.resources.AdGroupBidModifier\x12O\n\x12\x61\x64_group_criterion\x18\x11 \x01(\x0b\x32\x33.google.ads.googleads.v0.resources.AdGroupCriterion\x12\x45\n\rad_group_feed\x18\x43 \x01(\x0b\x32..google.ads.googleads.v0.resources.AdGroupFeed\x12G\n\x0e\x61ge_range_view\x18\x30 \x01(\x0b\x32/.google.ads.googleads.v0.resources.AgeRangeView\x12K\n\x10\x61\x64_schedule_view\x18Y \x01(\x0b\x32\x31.google.ads.googleads.v0.resources.AdScheduleView\x12L\n\x10\x62idding_strategy\x18\x12 \x01(\x0b\x32\x32.google.ads.googleads.v0.resources.BiddingStrategy\x12\x46\n\rbilling_setup\x18) \x01(\x0b\x32/.google.ads.googleads.v0.resources.BillingSetup\x12J\n\x0f\x63\x61mpaign_budget\x18\x13 \x01(\x0b\x32\x31.google.ads.googleads.v0.resources.CampaignBudget\x12=\n\x08\x63\x61mpaign\x18\x02 \x01(\x0b\x32+.google.ads.googleads.v0.resources.Campaign\x12W\n\x16\x63\x61mpaign_audience_view\x18\x45 \x01(\x0b\x32\x37.google.ads.googleads.v0.resources.CampaignAudienceView\x12U\n\x15\x63\x61mpaign_bid_modifier\x18\x1a \x01(\x0b\x32\x36.google.ads.googleads.v0.resources.CampaignBidModifier\x12P\n\x12\x63\x61mpaign_criterion\x18\x14 \x01(\x0b\x32\x34.google.ads.googleads.v0.resources.CampaignCriterion\x12\x46\n\rcampaign_feed\x18? \x01(\x0b\x32/.google.ads.googleads.v0.resources.CampaignFeed\x12Q\n\x13\x63\x61mpaign_shared_set\x18\x1e \x01(\x0b\x32\x34.google.ads.googleads.v0.resources.CampaignSharedSet\x12L\n\x10\x63\x61rrier_constant\x18\x42 \x01(\x0b\x32\x32.google.ads.googleads.v0.resources.CarrierConstant\x12\x46\n\rchange_status\x18% \x01(\x0b\x32/.google.ads.googleads.v0.resources.ChangeStatus\x12N\n\x11\x63onversion_action\x18g \x01(\x0b\x32\x33.google.ads.googleads.v0.resources.ConversionAction\x12=\n\x08\x63ustomer\x18\x01 \x01(\x0b\x32+.google.ads.googleads.v0.resources.Customer\x12U\n\x15\x63ustomer_manager_link\x18= \x01(\x0b\x32\x36.google.ads.googleads.v0.resources.CustomerManagerLink\x12S\n\x14\x63ustomer_client_link\x18> \x01(\x0b\x32\x35.google.ads.googleads.v0.resources.CustomerClientLink\x12J\n\x0f\x63ustomer_client\x18\x46 \x01(\x0b\x32\x31.google.ads.googleads.v0.resources.CustomerClient\x12\x46\n\rcustomer_feed\x18@ \x01(\x0b\x32/.google.ads.googleads.v0.resources.CustomerFeed\x12S\n\x14\x64isplay_keyword_view\x18/ \x01(\x0b\x32\x35.google.ads.googleads.v0.resources.DisplayKeywordView\x12\x35\n\x04\x66\x65\x65\x64\x18. \x01(\x0b\x32\'.google.ads.googleads.v0.resources.Feed\x12>\n\tfeed_item\x18\x32 \x01(\x0b\x32+.google.ads.googleads.v0.resources.FeedItem\x12\x44\n\x0c\x66\x65\x65\x64_mapping\x18: \x01(\x0b\x32..google.ads.googleads.v0.resources.FeedMapping\x12\x42\n\x0bgender_view\x18( \x01(\x0b\x32-.google.ads.googleads.v0.resources.GenderView\x12Q\n\x13geo_target_constant\x18\x17 \x01(\x0b\x32\x34.google.ads.googleads.v0.resources.GeoTargetConstant\x12K\n\x10hotel_group_view\x18\x33 \x01(\x0b\x32\x31.google.ads.googleads.v0.resources.HotelGroupView\x12W\n\x16hotel_performance_view\x18G \x01(\x0b\x32\x37.google.ads.googleads.v0.resources.HotelPerformanceView\x12\x44\n\x0ckeyword_view\x18\x15 \x01(\x0b\x32..google.ads.googleads.v0.resources.KeywordView\x12\x44\n\x0ckeyword_plan\x18  \x01(\x0b\x32..google.ads.googleads.v0.resources.KeywordPlan\x12U\n\x15keyword_plan_campaign\x18! \x01(\x0b\x32\x36.google.ads.googleads.v0.resources.KeywordPlanCampaign\x12\x64\n\x1dkeyword_plan_negative_keyword\x18\" \x01(\x0b\x32=.google.ads.googleads.v0.resources.KeywordPlanNegativeKeyword\x12T\n\x15keyword_plan_ad_group\x18# \x01(\x0b\x32\x35.google.ads.googleads.v0.resources.KeywordPlanAdGroup\x12S\n\x14keyword_plan_keyword\x18$ \x01(\x0b\x32\x35.google.ads.googleads.v0.resources.KeywordPlanKeyword\x12N\n\x11language_constant\x18\x37 \x01(\x0b\x32\x33.google.ads.googleads.v0.resources.LanguageConstant\x12W\n\x16managed_placement_view\x18\x35 \x01(\x0b\x32\x37.google.ads.googleads.v0.resources.ManagedPlacementView\x12@\n\nmedia_file\x18Z \x01(\x0b\x32,.google.ads.googleads.v0.resources.MediaFile\x12\x62\n\x1cmobile_app_category_constant\x18W \x01(\x0b\x32<.google.ads.googleads.v0.resources.MobileAppCategoryConstant\x12W\n\x16mobile_device_constant\x18\x62 \x01(\x0b\x32\x37.google.ads.googleads.v0.resources.MobileDeviceConstant\x12l\n!operating_system_version_constant\x18V \x01(\x0b\x32\x41.google.ads.googleads.v0.resources.OperatingSystemVersionConstant\x12S\n\x14parental_status_view\x18- \x01(\x0b\x32\x35.google.ads.googleads.v0.resources.ParentalStatusView\x12O\n\x12product_group_view\x18\x36 \x01(\x0b\x32\x33.google.ads.googleads.v0.resources.ProductGroupView\x12I\n\x0erecommendation\x18\x16 \x01(\x0b\x32\x31.google.ads.googleads.v0.resources.Recommendation\x12K\n\x10search_term_view\x18\x44 \x01(\x0b\x32\x31.google.ads.googleads.v0.resources.SearchTermView\x12L\n\x10shared_criterion\x18\x1d \x01(\x0b\x32\x32.google.ads.googleads.v0.resources.SharedCriterion\x12@\n\nshared_set\x18\x1b \x01(\x0b\x32,.google.ads.googleads.v0.resources.SharedSet\x12@\n\ntopic_view\x18, \x01(\x0b\x32,.google.ads.googleads.v0.resources.TopicView\x12\x46\n\ruser_interest\x18; \x01(\x0b\x32/.google.ads.googleads.v0.resources.UserInterest\x12>\n\tuser_list\x18& \x01(\x0b\x32+.google.ads.googleads.v0.resources.UserList\x12P\n\x12remarketing_action\x18< \x01(\x0b\x32\x34.google.ads.googleads.v0.resources.RemarketingAction\x12H\n\x0etopic_constant\x18\x1f \x01(\x0b\x32\x30.google.ads.googleads.v0.resources.TopicConstant\x12\x37\n\x05video\x18\' \x01(\x0b\x32(.google.ads.googleads.v0.resources.Video\x12\x38\n\x07metrics\x18\x04 \x01(\x0b\x32\'.google.ads.googleads.v0.common.Metrics\x12:\n\x08segments\x18\x66 \x01(\x0b\x32(.google.ads.googleads.v0.common.Segments\"\xab\x01\n\x16MutateGoogleAdsRequest\x12\x13\n\x0b\x63ustomer_id\x18\x01 \x01(\t\x12L\n\x11mutate_operations\x18\x02 \x03(\x0b\x32\x31.google.ads.googleads.v0.services.MutateOperation\x12\x17\n\x0fpartial_failure\x18\x03 \x01(\x08\x12\x15\n\rvalidate_only\x18\x04 \x01(\x08\"\xab\x01\n\x17MutateGoogleAdsResponse\x12\x31\n\x15partial_failure_error\x18\x03 \x01(\x0b\x32\x12.google.rpc.Status\x12]\n\x1amutate_operation_responses\x18\x01 \x03(\x0b\x32\x39.google.ads.googleads.v0.services.MutateOperationResponse\"\xd3\n\n\x0fMutateOperation\x12U\n\x15\x61\x64_group_ad_operation\x18\x01 \x01(\x0b\x32\x34.google.ads.googleads.v0.services.AdGroupAdOperationH\x00\x12h\n\x1f\x61\x64_group_bid_modifier_operation\x18\x02 \x01(\x0b\x32=.google.ads.googleads.v0.services.AdGroupBidModifierOperationH\x00\x12\x63\n\x1c\x61\x64_group_criterion_operation\x18\x03 \x01(\x0b\x32;.google.ads.googleads.v0.services.AdGroupCriterionOperationH\x00\x12P\n\x12\x61\x64_group_operation\x18\x05 \x01(\x0b\x32\x32.google.ads.googleads.v0.services.AdGroupOperationH\x00\x12`\n\x1a\x62idding_strategy_operation\x18\x06 \x01(\x0b\x32:.google.ads.googleads.v0.services.BiddingStrategyOperationH\x00\x12i\n\x1f\x63\x61mpaign_bid_modifier_operation\x18\x07 \x01(\x0b\x32>.google.ads.googleads.v0.services.CampaignBidModifierOperationH\x00\x12^\n\x19\x63\x61mpaign_budget_operation\x18\x08 \x01(\x0b\x32\x39.google.ads.googleads.v0.services.CampaignBudgetOperationH\x00\x12Q\n\x12\x63\x61mpaign_operation\x18\n \x01(\x0b\x32\x33.google.ads.googleads.v0.services.CampaignOperationH\x00\x12\x65\n\x1d\x63\x61mpaign_shared_set_operation\x18\x0b \x01(\x0b\x32<.google.ads.googleads.v0.services.CampaignSharedSetOperationH\x00\x12\x62\n\x1b\x63onversion_action_operation\x18\x0c \x01(\x0b\x32;.google.ads.googleads.v0.services.ConversionActionOperationH\x00\x12\x64\n\x1c\x63\x61mpaign_criterion_operation\x18\r \x01(\x0b\x32<.google.ads.googleads.v0.services.CampaignCriterionOperationH\x00\x12`\n\x1ashared_criterion_operation\x18\x0e \x01(\x0b\x32:.google.ads.googleads.v0.services.SharedCriterionOperationH\x00\x12T\n\x14shared_set_operation\x18\x0f \x01(\x0b\x32\x34.google.ads.googleads.v0.services.SharedSetOperationH\x00\x12R\n\x13user_list_operation\x18\x10 \x01(\x0b\x32\x33.google.ads.googleads.v0.services.UserListOperationH\x00\x42\x0b\n\toperation\"\xda\n\n\x17MutateOperationResponse\x12U\n\x12\x61\x64_group_ad_result\x18\x01 \x01(\x0b\x32\x37.google.ads.googleads.v0.services.MutateAdGroupAdResultH\x00\x12h\n\x1c\x61\x64_group_bid_modifier_result\x18\x02 \x01(\x0b\x32@.google.ads.googleads.v0.services.MutateAdGroupBidModifierResultH\x00\x12\x63\n\x19\x61\x64_group_criterion_result\x18\x03 \x01(\x0b\x32>.google.ads.googleads.v0.services.MutateAdGroupCriterionResultH\x00\x12P\n\x0f\x61\x64_group_result\x18\x05 \x01(\x0b\x32\x35.google.ads.googleads.v0.services.MutateAdGroupResultH\x00\x12`\n\x17\x62idding_strategy_result\x18\x06 \x01(\x0b\x32=.google.ads.googleads.v0.services.MutateBiddingStrategyResultH\x00\x12i\n\x1c\x63\x61mpaign_bid_modifier_result\x18\x07 \x01(\x0b\x32\x41.google.ads.googleads.v0.services.MutateCampaignBidModifierResultH\x00\x12^\n\x16\x63\x61mpaign_budget_result\x18\x08 \x01(\x0b\x32<.google.ads.googleads.v0.services.MutateCampaignBudgetResultH\x00\x12Q\n\x0f\x63\x61mpaign_result\x18\n \x01(\x0b\x32\x36.google.ads.googleads.v0.services.MutateCampaignResultH\x00\x12\x65\n\x1a\x63\x61mpaign_shared_set_result\x18\x0b \x01(\x0b\x32?.google.ads.googleads.v0.services.MutateCampaignSharedSetResultH\x00\x12\x62\n\x18\x63onversion_action_result\x18\x0c \x01(\x0b\x32>.google.ads.googleads.v0.services.MutateConversionActionResultH\x00\x12\x64\n\x19\x63\x61mpaign_criterion_result\x18\r \x01(\x0b\x32?.google.ads.googleads.v0.services.MutateCampaignCriterionResultH\x00\x12`\n\x17shared_criterion_result\x18\x0e \x01(\x0b\x32=.google.ads.googleads.v0.services.MutateSharedCriterionResultH\x00\x12T\n\x11shared_set_result\x18\x0f \x01(\x0b\x32\x37.google.ads.googleads.v0.services.MutateSharedSetResultH\x00\x12R\n\x10user_list_result\x18\x10 \x01(\x0b\x32\x36.google.ads.googleads.v0.services.MutateUserListResultH\x00\x42\n\n\x08response2\x88\x03\n\x10GoogleAdsService\x12\xb8\x01\n\x06Search\x12\x38.google.ads.googleads.v0.services.SearchGoogleAdsRequest\x1a\x39.google.ads.googleads.v0.services.SearchGoogleAdsResponse\"9\x82\xd3\xe4\x93\x02\x33\"./v0/customers/{customer_id=*}/googleAds:search:\x01*\x12\xb8\x01\n\x06Mutate\x12\x38.google.ads.googleads.v0.services.MutateGoogleAdsRequest\x1a\x39.google.ads.googleads.v0.services.MutateGoogleAdsResponse\"9\x82\xd3\xe4\x93\x02\x33\"./v0/customers/{customer_id=*}/googleAds:mutate:\x01*B\xfc\x01\n$com.google.ads.googleads.v0.servicesB\x15GoogleAdsServiceProtoP\x01ZHgoogle.golang.org/genproto/googleapis/ads/googleads/v0/services;services\xa2\x02\x03GAA\xaa\x02 Google.Ads.GoogleAds.V0.Services\xca\x02 Google\\Ads\\GoogleAds\\V0\\Services\xea\x02$Google::Ads::GoogleAds::V0::Servicesb\x06proto3')
   ,
-  dependencies=[google_dot_ads_dot_googleads__v0_dot_proto_dot_common_dot_metrics__pb2.DESCRIPTOR,google_dot_ads_dot_googleads__v0_dot_proto_dot_enums_dot_ad__network__type__pb2.DESCRIPTOR,google_dot_ads_dot_googleads__v0_dot_proto_dot_enums_dot_day__of__week__pb2.DESCRIPTOR,google_dot_ads_dot_googleads__v0_dot_proto_dot_enums_dot_device__pb2.DESCRIPTOR,google_dot_ads_dot_googleads__v0_dot_proto_dot_enums_dot_hotel__date__selection__type__pb2.DESCRIPTOR,google_dot_ads_dot_googleads__v0_dot_proto_dot_enums_dot_month__of__year__pb2.DESCRIPTOR,google_dot_ads_dot_googleads__v0_dot_proto_dot_enums_dot_placeholder__type__pb2.DESCRIPTOR,google_dot_ads_dot_googleads__v0_dot_proto_dot_enums_dot_search__term__match__type__pb2.DESCRIPTOR,google_dot_ads_dot_googleads__v0_dot_proto_dot_enums_dot_slot__pb2.DESCRIPTOR,google_dot_ads_dot_googleads__v0_dot_proto_dot_resources_dot_account__budget__pb2.DESCRIPTOR,google_dot_ads_dot_googleads__v0_dot_proto_dot_resources_dot_account__budget__proposal__pb2.DESCRIPTOR,google_dot_ads_dot_googleads__v0_dot_proto_dot_resources_dot_ad__group__pb2.DESCRIPTOR,google_dot_ads_dot_googleads__v0_dot_proto_dot_resources_dot_ad__group__ad__pb2.DESCRIPTOR,google_dot_ads_dot_googleads__v0_dot_proto_dot_resources_dot_ad__group__audience__view__pb2.DESCRIPTOR,google_dot_ads_dot_googleads__v0_dot_proto_dot_resources_dot_ad__group__bid__modifier__pb2.DESCRIPTOR,google_dot_ads_dot_googleads__v0_dot_proto_dot_resources_dot_ad__group__criterion__pb2.DESCRIPTOR,google_dot_ads_dot_googleads__v0_dot_proto_dot_resources_dot_ad__group__feed__pb2.DESCRIPTOR,google_dot_ads_dot_googleads__v0_dot_proto_dot_resources_dot_age__range__view__pb2.DESCRIPTOR,google_dot_ads_dot_googleads__v0_dot_proto_dot_resources_dot_bidding__strategy__pb2.DESCRIPTOR,google_dot_ads_dot_googleads__v0_dot_proto_dot_resources_dot_billing__setup__pb2.DESCRIPTOR,google_dot_ads_dot_googleads__v0_dot_proto_dot_resources_dot_campaign__pb2.DESCRIPTOR,google_dot_ads_dot_googleads__v0_dot_proto_dot_resources_dot_campaign__audience__view__pb2.DESCRIPTOR,google_dot_ads_dot_googleads__v0_dot_proto_dot_resources_dot_campaign__bid__modifier__pb2.DESCRIPTOR,google_dot_ads_dot_googleads__v0_dot_proto_dot_resources_dot_campaign__budget__pb2.DESCRIPTOR,google_dot_ads_dot_googleads__v0_dot_proto_dot_resources_dot_campaign__criterion__pb2.DESCRIPTOR,google_dot_ads_dot_googleads__v0_dot_proto_dot_resources_dot_campaign__feed__pb2.DESCRIPTOR,google_dot_ads_dot_googleads__v0_dot_proto_dot_resources_dot_campaign__group__pb2.DESCRIPTOR,google_dot_ads_dot_googleads__v0_dot_proto_dot_resources_dot_campaign__shared__set__pb2.DESCRIPTOR,google_dot_ads_dot_googleads__v0_dot_proto_dot_resources_dot_carrier__constant__pb2.DESCRIPTOR,google_dot_ads_dot_googleads__v0_dot_proto_dot_resources_dot_change__status__pb2.DESCRIPTOR,google_dot_ads_dot_googleads__v0_dot_proto_dot_resources_dot_customer__pb2.DESCRIPTOR,google_dot_ads_dot_googleads__v0_dot_proto_dot_resources_dot_customer__client__pb2.DESCRIPTOR,google_dot_ads_dot_googleads__v0_dot_proto_dot_resources_dot_customer__client__link__pb2.DESCRIPTOR,google_dot_ads_dot_googleads__v0_dot_proto_dot_resources_dot_customer__feed__pb2.DESCRIPTOR,google_dot_ads_dot_googleads__v0_dot_proto_dot_resources_dot_customer__manager__link__pb2.DESCRIPTOR,google_dot_ads_dot_googleads__v0_dot_proto_dot_resources_dot_display__keyword__view__pb2.DESCRIPTOR,google_dot_ads_dot_googleads__v0_dot_proto_dot_resources_dot_feed__pb2.DESCRIPTOR,google_dot_ads_dot_googleads__v0_dot_proto_dot_resources_dot_feed__item__pb2.DESCRIPTOR,google_dot_ads_dot_googleads__v0_dot_proto_dot_resources_dot_feed__mapping__pb2.DESCRIPTOR,google_dot_ads_dot_googleads__v0_dot_proto_dot_resources_dot_gender__view__pb2.DESCRIPTOR,google_dot_ads_dot_googleads__v0_dot_proto_dot_resources_dot_geo__target__constant__pb2.DESCRIPTOR,google_dot_ads_dot_googleads__v0_dot_proto_dot_resources_dot_hotel__group__view__pb2.DESCRIPTOR,google_dot_ads_dot_googleads__v0_dot_proto_dot_resources_dot_hotel__performance__view__pb2.DESCRIPTOR,google_dot_ads_dot_googleads__v0_dot_proto_dot_resources_dot_keyword__plan__pb2.DESCRIPTOR,google_dot_ads_dot_googleads__v0_dot_proto_dot_resources_dot_keyword__plan__ad__group__pb2.DESCRIPTOR,google_dot_ads_dot_googleads__v0_dot_proto_dot_resources_dot_keyword__plan__campaign__pb2.DESCRIPTOR,google_dot_ads_dot_googleads__v0_dot_proto_dot_resources_dot_keyword__plan__keyword__pb2.DESCRIPTOR,google_dot_ads_dot_googleads__v0_dot_proto_dot_resources_dot_keyword__plan__negative__keyword__pb2.DESCRIPTOR,google_dot_ads_dot_googleads__v0_dot_proto_dot_resources_dot_keyword__view__pb2.DESCRIPTOR,google_dot_ads_dot_googleads__v0_dot_proto_dot_resources_dot_language__constant__pb2.DESCRIPTOR,google_dot_ads_dot_googleads__v0_dot_proto_dot_resources_dot_managed__placement__view__pb2.DESCRIPTOR,google_dot_ads_dot_googleads__v0_dot_proto_dot_resources_dot_parental__status__view__pb2.DESCRIPTOR,google_dot_ads_dot_googleads__v0_dot_proto_dot_resources_dot_product__group__view__pb2.DESCRIPTOR,google_dot_ads_dot_googleads__v0_dot_proto_dot_resources_dot_recommendation__pb2.DESCRIPTOR,google_dot_ads_dot_googleads__v0_dot_proto_dot_resources_dot_search__term__view__pb2.DESCRIPTOR,google_dot_ads_dot_googleads__v0_dot_proto_dot_resources_dot_shared__criterion__pb2.DESCRIPTOR,google_dot_ads_dot_googleads__v0_dot_proto_dot_resources_dot_shared__set__pb2.DESCRIPTOR,google_dot_ads_dot_googleads__v0_dot_proto_dot_resources_dot_topic__constant__pb2.DESCRIPTOR,google_dot_ads_dot_googleads__v0_dot_proto_dot_resources_dot_topic__view__pb2.DESCRIPTOR,google_dot_ads_dot_googleads__v0_dot_proto_dot_resources_dot_user__interest__pb2.DESCRIPTOR,google_dot_ads_dot_googleads__v0_dot_proto_dot_resources_dot_user__list__pb2.DESCRIPTOR,google_dot_ads_dot_googleads__v0_dot_proto_dot_resources_dot_video__pb2.DESCRIPTOR,google_dot_ads_dot_googleads__v0_dot_proto_dot_services_dot_ad__group__ad__service__pb2.DESCRIPTOR,google_dot_ads_dot_googleads__v0_dot_proto_dot_services_dot_ad__group__bid__modifier__service__pb2.DESCRIPTOR,google_dot_ads_dot_googleads__v0_dot_proto_dot_services_dot_ad__group__criterion__service__pb2.DESCRIPTOR,google_dot_ads_dot_googleads__v0_dot_proto_dot_services_dot_ad__group__service__pb2.DESCRIPTOR,google_dot_ads_dot_googleads__v0_dot_proto_dot_services_dot_bidding__strategy__service__pb2.DESCRIPTOR,google_dot_ads_dot_googleads__v0_dot_proto_dot_services_dot_campaign__bid__modifier__service__pb2.DESCRIPTOR,google_dot_ads_dot_googleads__v0_dot_proto_dot_services_dot_campaign__budget__service__pb2.DESCRIPTOR,google_dot_ads_dot_googleads__v0_dot_proto_dot_services_dot_campaign__criterion__service__pb2.DESCRIPTOR,google_dot_ads_dot_googleads__v0_dot_proto_dot_services_dot_campaign__group__service__pb2.DESCRIPTOR,google_dot_ads_dot_googleads__v0_dot_proto_dot_services_dot_campaign__service__pb2.DESCRIPTOR,google_dot_ads_dot_googleads__v0_dot_proto_dot_services_dot_campaign__shared__set__service__pb2.DESCRIPTOR,google_dot_ads_dot_googleads__v0_dot_proto_dot_services_dot_conversion__action__service__pb2.DESCRIPTOR,google_dot_ads_dot_googleads__v0_dot_proto_dot_services_dot_shared__criterion__service__pb2.DESCRIPTOR,google_dot_ads_dot_googleads__v0_dot_proto_dot_services_dot_shared__set__service__pb2.DESCRIPTOR,google_dot_ads_dot_googleads__v0_dot_proto_dot_services_dot_user__list__service__pb2.DESCRIPTOR,google_dot_api_dot_annotations__pb2.DESCRIPTOR,google_dot_protobuf_dot_field__mask__pb2.DESCRIPTOR,google_dot_protobuf_dot_wrappers__pb2.DESCRIPTOR,])
+  dependencies=[google_dot_ads_dot_googleads__v0_dot_proto_dot_common_dot_metrics__pb2.DESCRIPTOR,google_dot_ads_dot_googleads__v0_dot_proto_dot_common_dot_segments__pb2.DESCRIPTOR,google_dot_ads_dot_googleads__v0_dot_proto_dot_resources_dot_account__budget__pb2.DESCRIPTOR,google_dot_ads_dot_googleads__v0_dot_proto_dot_resources_dot_account__budget__proposal__pb2.DESCRIPTOR,google_dot_ads_dot_googleads__v0_dot_proto_dot_resources_dot_ad__group__pb2.DESCRIPTOR,google_dot_ads_dot_googleads__v0_dot_proto_dot_resources_dot_ad__group__ad__pb2.DESCRIPTOR,google_dot_ads_dot_googleads__v0_dot_proto_dot_resources_dot_ad__group__audience__view__pb2.DESCRIPTOR,google_dot_ads_dot_googleads__v0_dot_proto_dot_resources_dot_ad__group__bid__modifier__pb2.DESCRIPTOR,google_dot_ads_dot_googleads__v0_dot_proto_dot_resources_dot_ad__group__criterion__pb2.DESCRIPTOR,google_dot_ads_dot_googleads__v0_dot_proto_dot_resources_dot_ad__group__feed__pb2.DESCRIPTOR,google_dot_ads_dot_googleads__v0_dot_proto_dot_resources_dot_ad__schedule__view__pb2.DESCRIPTOR,google_dot_ads_dot_googleads__v0_dot_proto_dot_resources_dot_age__range__view__pb2.DESCRIPTOR,google_dot_ads_dot_googleads__v0_dot_proto_dot_resources_dot_bidding__strategy__pb2.DESCRIPTOR,google_dot_ads_dot_googleads__v0_dot_proto_dot_resources_dot_billing__setup__pb2.DESCRIPTOR,google_dot_ads_dot_googleads__v0_dot_proto_dot_resources_dot_campaign__pb2.DESCRIPTOR,google_dot_ads_dot_googleads__v0_dot_proto_dot_resources_dot_campaign__audience__view__pb2.DESCRIPTOR,google_dot_ads_dot_googleads__v0_dot_proto_dot_resources_dot_campaign__bid__modifier__pb2.DESCRIPTOR,google_dot_ads_dot_googleads__v0_dot_proto_dot_resources_dot_campaign__budget__pb2.DESCRIPTOR,google_dot_ads_dot_googleads__v0_dot_proto_dot_resources_dot_campaign__criterion__pb2.DESCRIPTOR,google_dot_ads_dot_googleads__v0_dot_proto_dot_resources_dot_campaign__feed__pb2.DESCRIPTOR,google_dot_ads_dot_googleads__v0_dot_proto_dot_resources_dot_campaign__shared__set__pb2.DESCRIPTOR,google_dot_ads_dot_googleads__v0_dot_proto_dot_resources_dot_carrier__constant__pb2.DESCRIPTOR,google_dot_ads_dot_googleads__v0_dot_proto_dot_resources_dot_change__status__pb2.DESCRIPTOR,google_dot_ads_dot_googleads__v0_dot_proto_dot_resources_dot_conversion__action__pb2.DESCRIPTOR,google_dot_ads_dot_googleads__v0_dot_proto_dot_resources_dot_customer__pb2.DESCRIPTOR,google_dot_ads_dot_googleads__v0_dot_proto_dot_resources_dot_customer__client__pb2.DESCRIPTOR,google_dot_ads_dot_googleads__v0_dot_proto_dot_resources_dot_customer__client__link__pb2.DESCRIPTOR,google_dot_ads_dot_googleads__v0_dot_proto_dot_resources_dot_customer__feed__pb2.DESCRIPTOR,google_dot_ads_dot_googleads__v0_dot_proto_dot_resources_dot_customer__manager__link__pb2.DESCRIPTOR,google_dot_ads_dot_googleads__v0_dot_proto_dot_resources_dot_display__keyword__view__pb2.DESCRIPTOR,google_dot_ads_dot_googleads__v0_dot_proto_dot_resources_dot_feed__pb2.DESCRIPTOR,google_dot_ads_dot_googleads__v0_dot_proto_dot_resources_dot_feed__item__pb2.DESCRIPTOR,google_dot_ads_dot_googleads__v0_dot_proto_dot_resources_dot_feed__mapping__pb2.DESCRIPTOR,google_dot_ads_dot_googleads__v0_dot_proto_dot_resources_dot_gender__view__pb2.DESCRIPTOR,google_dot_ads_dot_googleads__v0_dot_proto_dot_resources_dot_geo__target__constant__pb2.DESCRIPTOR,google_dot_ads_dot_googleads__v0_dot_proto_dot_resources_dot_hotel__group__view__pb2.DESCRIPTOR,google_dot_ads_dot_googleads__v0_dot_proto_dot_resources_dot_hotel__performance__view__pb2.DESCRIPTOR,google_dot_ads_dot_googleads__v0_dot_proto_dot_resources_dot_keyword__plan__pb2.DESCRIPTOR,google_dot_ads_dot_googleads__v0_dot_proto_dot_resources_dot_keyword__plan__ad__group__pb2.DESCRIPTOR,google_dot_ads_dot_googleads__v0_dot_proto_dot_resources_dot_keyword__plan__campaign__pb2.DESCRIPTOR,google_dot_ads_dot_googleads__v0_dot_proto_dot_resources_dot_keyword__plan__keyword__pb2.DESCRIPTOR,google_dot_ads_dot_googleads__v0_dot_proto_dot_resources_dot_keyword__plan__negative__keyword__pb2.DESCRIPTOR,google_dot_ads_dot_googleads__v0_dot_proto_dot_resources_dot_keyword__view__pb2.DESCRIPTOR,google_dot_ads_dot_googleads__v0_dot_proto_dot_resources_dot_language__constant__pb2.DESCRIPTOR,google_dot_ads_dot_googleads__v0_dot_proto_dot_resources_dot_managed__placement__view__pb2.DESCRIPTOR,google_dot_ads_dot_googleads__v0_dot_proto_dot_resources_dot_media__file__pb2.DESCRIPTOR,google_dot_ads_dot_googleads__v0_dot_proto_dot_resources_dot_mobile__app__category__constant__pb2.DESCRIPTOR,google_dot_ads_dot_googleads__v0_dot_proto_dot_resources_dot_mobile__device__constant__pb2.DESCRIPTOR,google_dot_ads_dot_googleads__v0_dot_proto_dot_resources_dot_operating__system__version__constant__pb2.DESCRIPTOR,google_dot_ads_dot_googleads__v0_dot_proto_dot_resources_dot_parental__status__view__pb2.DESCRIPTOR,google_dot_ads_dot_googleads__v0_dot_proto_dot_resources_dot_product__group__view__pb2.DESCRIPTOR,google_dot_ads_dot_googleads__v0_dot_proto_dot_resources_dot_recommendation__pb2.DESCRIPTOR,google_dot_ads_dot_googleads__v0_dot_proto_dot_resources_dot_remarketing__action__pb2.DESCRIPTOR,google_dot_ads_dot_googleads__v0_dot_proto_dot_resources_dot_search__term__view__pb2.DESCRIPTOR,google_dot_ads_dot_googleads__v0_dot_proto_dot_resources_dot_shared__criterion__pb2.DESCRIPTOR,google_dot_ads_dot_googleads__v0_dot_proto_dot_resources_dot_shared__set__pb2.DESCRIPTOR,google_dot_ads_dot_googleads__v0_dot_proto_dot_resources_dot_topic__constant__pb2.DESCRIPTOR,google_dot_ads_dot_googleads__v0_dot_proto_dot_resources_dot_topic__view__pb2.DESCRIPTOR,google_dot_ads_dot_googleads__v0_dot_proto_dot_resources_dot_user__interest__pb2.DESCRIPTOR,google_dot_ads_dot_googleads__v0_dot_proto_dot_resources_dot_user__list__pb2.DESCRIPTOR,google_dot_ads_dot_googleads__v0_dot_proto_dot_resources_dot_video__pb2.DESCRIPTOR,google_dot_ads_dot_googleads__v0_dot_proto_dot_services_dot_ad__group__ad__service__pb2.DESCRIPTOR,google_dot_ads_dot_googleads__v0_dot_proto_dot_services_dot_ad__group__bid__modifier__service__pb2.DESCRIPTOR,google_dot_ads_dot_googleads__v0_dot_proto_dot_services_dot_ad__group__criterion__service__pb2.DESCRIPTOR,google_dot_ads_dot_googleads__v0_dot_proto_dot_services_dot_ad__group__service__pb2.DESCRIPTOR,google_dot_ads_dot_googleads__v0_dot_proto_dot_services_dot_bidding__strategy__service__pb2.DESCRIPTOR,google_dot_ads_dot_googleads__v0_dot_proto_dot_services_dot_campaign__bid__modifier__service__pb2.DESCRIPTOR,google_dot_ads_dot_googleads__v0_dot_proto_dot_services_dot_campaign__budget__service__pb2.DESCRIPTOR,google_dot_ads_dot_googleads__v0_dot_proto_dot_services_dot_campaign__criterion__service__pb2.DESCRIPTOR,google_dot_ads_dot_googleads__v0_dot_proto_dot_services_dot_campaign__service__pb2.DESCRIPTOR,google_dot_ads_dot_googleads__v0_dot_proto_dot_services_dot_campaign__shared__set__service__pb2.DESCRIPTOR,google_dot_ads_dot_googleads__v0_dot_proto_dot_services_dot_conversion__action__service__pb2.DESCRIPTOR,google_dot_ads_dot_googleads__v0_dot_proto_dot_services_dot_shared__criterion__service__pb2.DESCRIPTOR,google_dot_ads_dot_googleads__v0_dot_proto_dot_services_dot_shared__set__service__pb2.DESCRIPTOR,google_dot_ads_dot_googleads__v0_dot_proto_dot_services_dot_user__list__service__pb2.DESCRIPTOR,google_dot_api_dot_annotations__pb2.DESCRIPTOR,google_dot_protobuf_dot_field__mask__pb2.DESCRIPTOR,google_dot_rpc_dot_status__pb2.DESCRIPTOR,])
 
 
 
@@ -119,42 +117,49 @@ _SEARCHGOOGLEADSREQUEST = _descriptor.Descriptor(
       has_default_value=False, default_value=_b("").decode('utf-8'),
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
-      options=None, file=DESCRIPTOR),
+      serialized_options=None, file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
       name='query', full_name='google.ads.googleads.v0.services.SearchGoogleAdsRequest.query', index=1,
       number=2, type=9, cpp_type=9, label=1,
       has_default_value=False, default_value=_b("").decode('utf-8'),
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
-      options=None, file=DESCRIPTOR),
+      serialized_options=None, file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
       name='page_token', full_name='google.ads.googleads.v0.services.SearchGoogleAdsRequest.page_token', index=2,
       number=3, type=9, cpp_type=9, label=1,
       has_default_value=False, default_value=_b("").decode('utf-8'),
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
-      options=None, file=DESCRIPTOR),
+      serialized_options=None, file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
       name='page_size', full_name='google.ads.googleads.v0.services.SearchGoogleAdsRequest.page_size', index=3,
       number=4, type=5, cpp_type=1, label=1,
       has_default_value=False, default_value=0,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
-      options=None, file=DESCRIPTOR),
+      serialized_options=None, file=DESCRIPTOR),
+    _descriptor.FieldDescriptor(
+      name='validate_only', full_name='google.ads.googleads.v0.services.SearchGoogleAdsRequest.validate_only', index=4,
+      number=5, type=8, cpp_type=7, label=1,
+      has_default_value=False, default_value=False,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR),
   ],
   extensions=[
   ],
   nested_types=[],
   enum_types=[
   ],
-  options=None,
+  serialized_options=None,
   is_extendable=False,
   syntax='proto3',
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=5124,
-  serialized_end=5223,
+  serialized_start=5055,
+  serialized_end=5177,
 )
 
 
@@ -171,42 +176,42 @@ _SEARCHGOOGLEADSRESPONSE = _descriptor.Descriptor(
       has_default_value=False, default_value=[],
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
-      options=None, file=DESCRIPTOR),
+      serialized_options=None, file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
       name='next_page_token', full_name='google.ads.googleads.v0.services.SearchGoogleAdsResponse.next_page_token', index=1,
       number=2, type=9, cpp_type=9, label=1,
       has_default_value=False, default_value=_b("").decode('utf-8'),
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
-      options=None, file=DESCRIPTOR),
+      serialized_options=None, file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
       name='total_results_count', full_name='google.ads.googleads.v0.services.SearchGoogleAdsResponse.total_results_count', index=2,
       number=3, type=3, cpp_type=2, label=1,
       has_default_value=False, default_value=0,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
-      options=None, file=DESCRIPTOR),
+      serialized_options=None, file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
       name='field_mask', full_name='google.ads.googleads.v0.services.SearchGoogleAdsResponse.field_mask', index=3,
       number=5, type=11, cpp_type=10, label=1,
       has_default_value=False, default_value=None,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
-      options=None, file=DESCRIPTOR),
+      serialized_options=None, file=DESCRIPTOR),
   ],
   extensions=[
   ],
   nested_types=[],
   enum_types=[
   ],
-  options=None,
+  serialized_options=None,
   is_extendable=False,
   syntax='proto3',
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=5226,
-  serialized_end=5418,
+  serialized_start=5180,
+  serialized_end=5372,
 )
 
 
@@ -223,560 +228,441 @@ _GOOGLEADSROW = _descriptor.Descriptor(
       has_default_value=False, default_value=None,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
-      options=None, file=DESCRIPTOR),
+      serialized_options=None, file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
       name='account_budget_proposal', full_name='google.ads.googleads.v0.services.GoogleAdsRow.account_budget_proposal', index=1,
       number=43, type=11, cpp_type=10, label=1,
       has_default_value=False, default_value=None,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
-      options=None, file=DESCRIPTOR),
+      serialized_options=None, file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
       name='ad_group', full_name='google.ads.googleads.v0.services.GoogleAdsRow.ad_group', index=2,
       number=3, type=11, cpp_type=10, label=1,
       has_default_value=False, default_value=None,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
-      options=None, file=DESCRIPTOR),
+      serialized_options=None, file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
       name='ad_group_ad', full_name='google.ads.googleads.v0.services.GoogleAdsRow.ad_group_ad', index=3,
       number=16, type=11, cpp_type=10, label=1,
       has_default_value=False, default_value=None,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
-      options=None, file=DESCRIPTOR),
+      serialized_options=None, file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
       name='ad_group_audience_view', full_name='google.ads.googleads.v0.services.GoogleAdsRow.ad_group_audience_view', index=4,
       number=57, type=11, cpp_type=10, label=1,
       has_default_value=False, default_value=None,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
-      options=None, file=DESCRIPTOR),
+      serialized_options=None, file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
       name='ad_group_bid_modifier', full_name='google.ads.googleads.v0.services.GoogleAdsRow.ad_group_bid_modifier', index=5,
       number=24, type=11, cpp_type=10, label=1,
       has_default_value=False, default_value=None,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
-      options=None, file=DESCRIPTOR),
+      serialized_options=None, file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
       name='ad_group_criterion', full_name='google.ads.googleads.v0.services.GoogleAdsRow.ad_group_criterion', index=6,
       number=17, type=11, cpp_type=10, label=1,
       has_default_value=False, default_value=None,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
-      options=None, file=DESCRIPTOR),
+      serialized_options=None, file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
       name='ad_group_feed', full_name='google.ads.googleads.v0.services.GoogleAdsRow.ad_group_feed', index=7,
       number=67, type=11, cpp_type=10, label=1,
       has_default_value=False, default_value=None,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
-      options=None, file=DESCRIPTOR),
+      serialized_options=None, file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
       name='age_range_view', full_name='google.ads.googleads.v0.services.GoogleAdsRow.age_range_view', index=8,
       number=48, type=11, cpp_type=10, label=1,
       has_default_value=False, default_value=None,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
-      options=None, file=DESCRIPTOR),
+      serialized_options=None, file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
-      name='bidding_strategy', full_name='google.ads.googleads.v0.services.GoogleAdsRow.bidding_strategy', index=9,
+      name='ad_schedule_view', full_name='google.ads.googleads.v0.services.GoogleAdsRow.ad_schedule_view', index=9,
+      number=89, type=11, cpp_type=10, label=1,
+      has_default_value=False, default_value=None,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR),
+    _descriptor.FieldDescriptor(
+      name='bidding_strategy', full_name='google.ads.googleads.v0.services.GoogleAdsRow.bidding_strategy', index=10,
       number=18, type=11, cpp_type=10, label=1,
       has_default_value=False, default_value=None,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
-      options=None, file=DESCRIPTOR),
+      serialized_options=None, file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
-      name='billing_setup', full_name='google.ads.googleads.v0.services.GoogleAdsRow.billing_setup', index=10,
+      name='billing_setup', full_name='google.ads.googleads.v0.services.GoogleAdsRow.billing_setup', index=11,
       number=41, type=11, cpp_type=10, label=1,
       has_default_value=False, default_value=None,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
-      options=None, file=DESCRIPTOR),
+      serialized_options=None, file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
-      name='campaign_budget', full_name='google.ads.googleads.v0.services.GoogleAdsRow.campaign_budget', index=11,
+      name='campaign_budget', full_name='google.ads.googleads.v0.services.GoogleAdsRow.campaign_budget', index=12,
       number=19, type=11, cpp_type=10, label=1,
       has_default_value=False, default_value=None,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
-      options=None, file=DESCRIPTOR),
+      serialized_options=None, file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
-      name='campaign', full_name='google.ads.googleads.v0.services.GoogleAdsRow.campaign', index=12,
+      name='campaign', full_name='google.ads.googleads.v0.services.GoogleAdsRow.campaign', index=13,
       number=2, type=11, cpp_type=10, label=1,
       has_default_value=False, default_value=None,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
-      options=None, file=DESCRIPTOR),
+      serialized_options=None, file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
-      name='campaign_audience_view', full_name='google.ads.googleads.v0.services.GoogleAdsRow.campaign_audience_view', index=13,
+      name='campaign_audience_view', full_name='google.ads.googleads.v0.services.GoogleAdsRow.campaign_audience_view', index=14,
       number=69, type=11, cpp_type=10, label=1,
       has_default_value=False, default_value=None,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
-      options=None, file=DESCRIPTOR),
+      serialized_options=None, file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
-      name='campaign_bid_modifier', full_name='google.ads.googleads.v0.services.GoogleAdsRow.campaign_bid_modifier', index=14,
+      name='campaign_bid_modifier', full_name='google.ads.googleads.v0.services.GoogleAdsRow.campaign_bid_modifier', index=15,
       number=26, type=11, cpp_type=10, label=1,
       has_default_value=False, default_value=None,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
-      options=None, file=DESCRIPTOR),
+      serialized_options=None, file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
-      name='campaign_criterion', full_name='google.ads.googleads.v0.services.GoogleAdsRow.campaign_criterion', index=15,
+      name='campaign_criterion', full_name='google.ads.googleads.v0.services.GoogleAdsRow.campaign_criterion', index=16,
       number=20, type=11, cpp_type=10, label=1,
       has_default_value=False, default_value=None,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
-      options=None, file=DESCRIPTOR),
+      serialized_options=None, file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
-      name='campaign_feed', full_name='google.ads.googleads.v0.services.GoogleAdsRow.campaign_feed', index=16,
+      name='campaign_feed', full_name='google.ads.googleads.v0.services.GoogleAdsRow.campaign_feed', index=17,
       number=63, type=11, cpp_type=10, label=1,
       has_default_value=False, default_value=None,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
-      options=None, file=DESCRIPTOR),
-    _descriptor.FieldDescriptor(
-      name='campaign_group', full_name='google.ads.googleads.v0.services.GoogleAdsRow.campaign_group', index=17,
-      number=25, type=11, cpp_type=10, label=1,
-      has_default_value=False, default_value=None,
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      options=None, file=DESCRIPTOR),
+      serialized_options=None, file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
       name='campaign_shared_set', full_name='google.ads.googleads.v0.services.GoogleAdsRow.campaign_shared_set', index=18,
       number=30, type=11, cpp_type=10, label=1,
       has_default_value=False, default_value=None,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
-      options=None, file=DESCRIPTOR),
+      serialized_options=None, file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
       name='carrier_constant', full_name='google.ads.googleads.v0.services.GoogleAdsRow.carrier_constant', index=19,
       number=66, type=11, cpp_type=10, label=1,
       has_default_value=False, default_value=None,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
-      options=None, file=DESCRIPTOR),
+      serialized_options=None, file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
       name='change_status', full_name='google.ads.googleads.v0.services.GoogleAdsRow.change_status', index=20,
       number=37, type=11, cpp_type=10, label=1,
       has_default_value=False, default_value=None,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
-      options=None, file=DESCRIPTOR),
+      serialized_options=None, file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
-      name='customer', full_name='google.ads.googleads.v0.services.GoogleAdsRow.customer', index=21,
+      name='conversion_action', full_name='google.ads.googleads.v0.services.GoogleAdsRow.conversion_action', index=21,
+      number=103, type=11, cpp_type=10, label=1,
+      has_default_value=False, default_value=None,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR),
+    _descriptor.FieldDescriptor(
+      name='customer', full_name='google.ads.googleads.v0.services.GoogleAdsRow.customer', index=22,
       number=1, type=11, cpp_type=10, label=1,
       has_default_value=False, default_value=None,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
-      options=None, file=DESCRIPTOR),
+      serialized_options=None, file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
-      name='customer_manager_link', full_name='google.ads.googleads.v0.services.GoogleAdsRow.customer_manager_link', index=22,
+      name='customer_manager_link', full_name='google.ads.googleads.v0.services.GoogleAdsRow.customer_manager_link', index=23,
       number=61, type=11, cpp_type=10, label=1,
       has_default_value=False, default_value=None,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
-      options=None, file=DESCRIPTOR),
+      serialized_options=None, file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
-      name='customer_client_link', full_name='google.ads.googleads.v0.services.GoogleAdsRow.customer_client_link', index=23,
+      name='customer_client_link', full_name='google.ads.googleads.v0.services.GoogleAdsRow.customer_client_link', index=24,
       number=62, type=11, cpp_type=10, label=1,
       has_default_value=False, default_value=None,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
-      options=None, file=DESCRIPTOR),
+      serialized_options=None, file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
-      name='customer_client', full_name='google.ads.googleads.v0.services.GoogleAdsRow.customer_client', index=24,
+      name='customer_client', full_name='google.ads.googleads.v0.services.GoogleAdsRow.customer_client', index=25,
       number=70, type=11, cpp_type=10, label=1,
       has_default_value=False, default_value=None,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
-      options=None, file=DESCRIPTOR),
+      serialized_options=None, file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
-      name='customer_feed', full_name='google.ads.googleads.v0.services.GoogleAdsRow.customer_feed', index=25,
+      name='customer_feed', full_name='google.ads.googleads.v0.services.GoogleAdsRow.customer_feed', index=26,
       number=64, type=11, cpp_type=10, label=1,
       has_default_value=False, default_value=None,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
-      options=None, file=DESCRIPTOR),
+      serialized_options=None, file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
-      name='display_keyword_view', full_name='google.ads.googleads.v0.services.GoogleAdsRow.display_keyword_view', index=26,
+      name='display_keyword_view', full_name='google.ads.googleads.v0.services.GoogleAdsRow.display_keyword_view', index=27,
       number=47, type=11, cpp_type=10, label=1,
       has_default_value=False, default_value=None,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
-      options=None, file=DESCRIPTOR),
+      serialized_options=None, file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
-      name='feed', full_name='google.ads.googleads.v0.services.GoogleAdsRow.feed', index=27,
+      name='feed', full_name='google.ads.googleads.v0.services.GoogleAdsRow.feed', index=28,
       number=46, type=11, cpp_type=10, label=1,
       has_default_value=False, default_value=None,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
-      options=None, file=DESCRIPTOR),
+      serialized_options=None, file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
-      name='feed_item', full_name='google.ads.googleads.v0.services.GoogleAdsRow.feed_item', index=28,
+      name='feed_item', full_name='google.ads.googleads.v0.services.GoogleAdsRow.feed_item', index=29,
       number=50, type=11, cpp_type=10, label=1,
       has_default_value=False, default_value=None,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
-      options=None, file=DESCRIPTOR),
+      serialized_options=None, file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
-      name='feed_mapping', full_name='google.ads.googleads.v0.services.GoogleAdsRow.feed_mapping', index=29,
+      name='feed_mapping', full_name='google.ads.googleads.v0.services.GoogleAdsRow.feed_mapping', index=30,
       number=58, type=11, cpp_type=10, label=1,
       has_default_value=False, default_value=None,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
-      options=None, file=DESCRIPTOR),
+      serialized_options=None, file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
-      name='gender_view', full_name='google.ads.googleads.v0.services.GoogleAdsRow.gender_view', index=30,
+      name='gender_view', full_name='google.ads.googleads.v0.services.GoogleAdsRow.gender_view', index=31,
       number=40, type=11, cpp_type=10, label=1,
       has_default_value=False, default_value=None,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
-      options=None, file=DESCRIPTOR),
+      serialized_options=None, file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
-      name='geo_target_constant', full_name='google.ads.googleads.v0.services.GoogleAdsRow.geo_target_constant', index=31,
+      name='geo_target_constant', full_name='google.ads.googleads.v0.services.GoogleAdsRow.geo_target_constant', index=32,
       number=23, type=11, cpp_type=10, label=1,
       has_default_value=False, default_value=None,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
-      options=None, file=DESCRIPTOR),
+      serialized_options=None, file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
-      name='hotel_group_view', full_name='google.ads.googleads.v0.services.GoogleAdsRow.hotel_group_view', index=32,
+      name='hotel_group_view', full_name='google.ads.googleads.v0.services.GoogleAdsRow.hotel_group_view', index=33,
       number=51, type=11, cpp_type=10, label=1,
       has_default_value=False, default_value=None,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
-      options=None, file=DESCRIPTOR),
+      serialized_options=None, file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
-      name='hotel_performance_view', full_name='google.ads.googleads.v0.services.GoogleAdsRow.hotel_performance_view', index=33,
+      name='hotel_performance_view', full_name='google.ads.googleads.v0.services.GoogleAdsRow.hotel_performance_view', index=34,
       number=71, type=11, cpp_type=10, label=1,
       has_default_value=False, default_value=None,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
-      options=None, file=DESCRIPTOR),
+      serialized_options=None, file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
-      name='keyword_view', full_name='google.ads.googleads.v0.services.GoogleAdsRow.keyword_view', index=34,
+      name='keyword_view', full_name='google.ads.googleads.v0.services.GoogleAdsRow.keyword_view', index=35,
       number=21, type=11, cpp_type=10, label=1,
       has_default_value=False, default_value=None,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
-      options=None, file=DESCRIPTOR),
+      serialized_options=None, file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
-      name='keyword_plan', full_name='google.ads.googleads.v0.services.GoogleAdsRow.keyword_plan', index=35,
+      name='keyword_plan', full_name='google.ads.googleads.v0.services.GoogleAdsRow.keyword_plan', index=36,
       number=32, type=11, cpp_type=10, label=1,
       has_default_value=False, default_value=None,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
-      options=None, file=DESCRIPTOR),
+      serialized_options=None, file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
-      name='keyword_plan_campaign', full_name='google.ads.googleads.v0.services.GoogleAdsRow.keyword_plan_campaign', index=36,
+      name='keyword_plan_campaign', full_name='google.ads.googleads.v0.services.GoogleAdsRow.keyword_plan_campaign', index=37,
       number=33, type=11, cpp_type=10, label=1,
       has_default_value=False, default_value=None,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
-      options=None, file=DESCRIPTOR),
+      serialized_options=None, file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
-      name='keyword_plan_negative_keyword', full_name='google.ads.googleads.v0.services.GoogleAdsRow.keyword_plan_negative_keyword', index=37,
+      name='keyword_plan_negative_keyword', full_name='google.ads.googleads.v0.services.GoogleAdsRow.keyword_plan_negative_keyword', index=38,
       number=34, type=11, cpp_type=10, label=1,
       has_default_value=False, default_value=None,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
-      options=None, file=DESCRIPTOR),
+      serialized_options=None, file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
-      name='keyword_plan_ad_group', full_name='google.ads.googleads.v0.services.GoogleAdsRow.keyword_plan_ad_group', index=38,
+      name='keyword_plan_ad_group', full_name='google.ads.googleads.v0.services.GoogleAdsRow.keyword_plan_ad_group', index=39,
       number=35, type=11, cpp_type=10, label=1,
       has_default_value=False, default_value=None,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
-      options=None, file=DESCRIPTOR),
+      serialized_options=None, file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
-      name='keyword_plan_keyword', full_name='google.ads.googleads.v0.services.GoogleAdsRow.keyword_plan_keyword', index=39,
+      name='keyword_plan_keyword', full_name='google.ads.googleads.v0.services.GoogleAdsRow.keyword_plan_keyword', index=40,
       number=36, type=11, cpp_type=10, label=1,
       has_default_value=False, default_value=None,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
-      options=None, file=DESCRIPTOR),
+      serialized_options=None, file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
-      name='language_constant', full_name='google.ads.googleads.v0.services.GoogleAdsRow.language_constant', index=40,
+      name='language_constant', full_name='google.ads.googleads.v0.services.GoogleAdsRow.language_constant', index=41,
       number=55, type=11, cpp_type=10, label=1,
       has_default_value=False, default_value=None,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
-      options=None, file=DESCRIPTOR),
+      serialized_options=None, file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
-      name='managed_placement_view', full_name='google.ads.googleads.v0.services.GoogleAdsRow.managed_placement_view', index=41,
+      name='managed_placement_view', full_name='google.ads.googleads.v0.services.GoogleAdsRow.managed_placement_view', index=42,
       number=53, type=11, cpp_type=10, label=1,
       has_default_value=False, default_value=None,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
-      options=None, file=DESCRIPTOR),
+      serialized_options=None, file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
-      name='parental_status_view', full_name='google.ads.googleads.v0.services.GoogleAdsRow.parental_status_view', index=42,
+      name='media_file', full_name='google.ads.googleads.v0.services.GoogleAdsRow.media_file', index=43,
+      number=90, type=11, cpp_type=10, label=1,
+      has_default_value=False, default_value=None,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR),
+    _descriptor.FieldDescriptor(
+      name='mobile_app_category_constant', full_name='google.ads.googleads.v0.services.GoogleAdsRow.mobile_app_category_constant', index=44,
+      number=87, type=11, cpp_type=10, label=1,
+      has_default_value=False, default_value=None,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR),
+    _descriptor.FieldDescriptor(
+      name='mobile_device_constant', full_name='google.ads.googleads.v0.services.GoogleAdsRow.mobile_device_constant', index=45,
+      number=98, type=11, cpp_type=10, label=1,
+      has_default_value=False, default_value=None,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR),
+    _descriptor.FieldDescriptor(
+      name='operating_system_version_constant', full_name='google.ads.googleads.v0.services.GoogleAdsRow.operating_system_version_constant', index=46,
+      number=86, type=11, cpp_type=10, label=1,
+      has_default_value=False, default_value=None,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR),
+    _descriptor.FieldDescriptor(
+      name='parental_status_view', full_name='google.ads.googleads.v0.services.GoogleAdsRow.parental_status_view', index=47,
       number=45, type=11, cpp_type=10, label=1,
       has_default_value=False, default_value=None,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
-      options=None, file=DESCRIPTOR),
+      serialized_options=None, file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
-      name='product_group_view', full_name='google.ads.googleads.v0.services.GoogleAdsRow.product_group_view', index=43,
+      name='product_group_view', full_name='google.ads.googleads.v0.services.GoogleAdsRow.product_group_view', index=48,
       number=54, type=11, cpp_type=10, label=1,
       has_default_value=False, default_value=None,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
-      options=None, file=DESCRIPTOR),
+      serialized_options=None, file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
-      name='recommendation', full_name='google.ads.googleads.v0.services.GoogleAdsRow.recommendation', index=44,
+      name='recommendation', full_name='google.ads.googleads.v0.services.GoogleAdsRow.recommendation', index=49,
       number=22, type=11, cpp_type=10, label=1,
       has_default_value=False, default_value=None,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
-      options=None, file=DESCRIPTOR),
+      serialized_options=None, file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
-      name='search_term_view', full_name='google.ads.googleads.v0.services.GoogleAdsRow.search_term_view', index=45,
+      name='search_term_view', full_name='google.ads.googleads.v0.services.GoogleAdsRow.search_term_view', index=50,
       number=68, type=11, cpp_type=10, label=1,
       has_default_value=False, default_value=None,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
-      options=None, file=DESCRIPTOR),
+      serialized_options=None, file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
-      name='shared_criterion', full_name='google.ads.googleads.v0.services.GoogleAdsRow.shared_criterion', index=46,
+      name='shared_criterion', full_name='google.ads.googleads.v0.services.GoogleAdsRow.shared_criterion', index=51,
       number=29, type=11, cpp_type=10, label=1,
       has_default_value=False, default_value=None,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
-      options=None, file=DESCRIPTOR),
+      serialized_options=None, file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
-      name='shared_set', full_name='google.ads.googleads.v0.services.GoogleAdsRow.shared_set', index=47,
+      name='shared_set', full_name='google.ads.googleads.v0.services.GoogleAdsRow.shared_set', index=52,
       number=27, type=11, cpp_type=10, label=1,
       has_default_value=False, default_value=None,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
-      options=None, file=DESCRIPTOR),
+      serialized_options=None, file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
-      name='topic_view', full_name='google.ads.googleads.v0.services.GoogleAdsRow.topic_view', index=48,
+      name='topic_view', full_name='google.ads.googleads.v0.services.GoogleAdsRow.topic_view', index=53,
       number=44, type=11, cpp_type=10, label=1,
       has_default_value=False, default_value=None,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
-      options=None, file=DESCRIPTOR),
+      serialized_options=None, file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
-      name='user_interest', full_name='google.ads.googleads.v0.services.GoogleAdsRow.user_interest', index=49,
+      name='user_interest', full_name='google.ads.googleads.v0.services.GoogleAdsRow.user_interest', index=54,
       number=59, type=11, cpp_type=10, label=1,
       has_default_value=False, default_value=None,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
-      options=None, file=DESCRIPTOR),
+      serialized_options=None, file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
-      name='user_list', full_name='google.ads.googleads.v0.services.GoogleAdsRow.user_list', index=50,
+      name='user_list', full_name='google.ads.googleads.v0.services.GoogleAdsRow.user_list', index=55,
       number=38, type=11, cpp_type=10, label=1,
       has_default_value=False, default_value=None,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
-      options=None, file=DESCRIPTOR),
+      serialized_options=None, file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
-      name='topic_constant', full_name='google.ads.googleads.v0.services.GoogleAdsRow.topic_constant', index=51,
+      name='remarketing_action', full_name='google.ads.googleads.v0.services.GoogleAdsRow.remarketing_action', index=56,
+      number=60, type=11, cpp_type=10, label=1,
+      has_default_value=False, default_value=None,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR),
+    _descriptor.FieldDescriptor(
+      name='topic_constant', full_name='google.ads.googleads.v0.services.GoogleAdsRow.topic_constant', index=57,
       number=31, type=11, cpp_type=10, label=1,
       has_default_value=False, default_value=None,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
-      options=None, file=DESCRIPTOR),
+      serialized_options=None, file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
-      name='video', full_name='google.ads.googleads.v0.services.GoogleAdsRow.video', index=52,
+      name='video', full_name='google.ads.googleads.v0.services.GoogleAdsRow.video', index=58,
       number=39, type=11, cpp_type=10, label=1,
       has_default_value=False, default_value=None,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
-      options=None, file=DESCRIPTOR),
+      serialized_options=None, file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
-      name='metrics', full_name='google.ads.googleads.v0.services.GoogleAdsRow.metrics', index=53,
+      name='metrics', full_name='google.ads.googleads.v0.services.GoogleAdsRow.metrics', index=59,
       number=4, type=11, cpp_type=10, label=1,
       has_default_value=False, default_value=None,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
-      options=None, file=DESCRIPTOR),
+      serialized_options=None, file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
-      name='ad_network_type', full_name='google.ads.googleads.v0.services.GoogleAdsRow.ad_network_type', index=54,
-      number=5, type=14, cpp_type=8, label=1,
-      has_default_value=False, default_value=0,
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      options=None, file=DESCRIPTOR),
-    _descriptor.FieldDescriptor(
-      name='date', full_name='google.ads.googleads.v0.services.GoogleAdsRow.date', index=55,
-      number=6, type=11, cpp_type=10, label=1,
+      name='segments', full_name='google.ads.googleads.v0.services.GoogleAdsRow.segments', index=60,
+      number=102, type=11, cpp_type=10, label=1,
       has_default_value=False, default_value=None,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
-      options=None, file=DESCRIPTOR),
-    _descriptor.FieldDescriptor(
-      name='day_of_week', full_name='google.ads.googleads.v0.services.GoogleAdsRow.day_of_week', index=56,
-      number=7, type=14, cpp_type=8, label=1,
-      has_default_value=False, default_value=0,
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      options=None, file=DESCRIPTOR),
-    _descriptor.FieldDescriptor(
-      name='device', full_name='google.ads.googleads.v0.services.GoogleAdsRow.device', index=57,
-      number=8, type=14, cpp_type=8, label=1,
-      has_default_value=False, default_value=0,
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      options=None, file=DESCRIPTOR),
-    _descriptor.FieldDescriptor(
-      name='hotel_booking_window_days', full_name='google.ads.googleads.v0.services.GoogleAdsRow.hotel_booking_window_days', index=58,
-      number=83, type=11, cpp_type=10, label=1,
-      has_default_value=False, default_value=None,
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      options=None, file=DESCRIPTOR),
-    _descriptor.FieldDescriptor(
-      name='hotel_center_id', full_name='google.ads.googleads.v0.services.GoogleAdsRow.hotel_center_id', index=59,
-      number=72, type=11, cpp_type=10, label=1,
-      has_default_value=False, default_value=None,
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      options=None, file=DESCRIPTOR),
-    _descriptor.FieldDescriptor(
-      name='hotel_check_in_date', full_name='google.ads.googleads.v0.services.GoogleAdsRow.hotel_check_in_date', index=60,
-      number=73, type=11, cpp_type=10, label=1,
-      has_default_value=False, default_value=None,
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      options=None, file=DESCRIPTOR),
-    _descriptor.FieldDescriptor(
-      name='hotel_check_in_day_of_week', full_name='google.ads.googleads.v0.services.GoogleAdsRow.hotel_check_in_day_of_week', index=61,
-      number=74, type=14, cpp_type=8, label=1,
-      has_default_value=False, default_value=0,
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      options=None, file=DESCRIPTOR),
-    _descriptor.FieldDescriptor(
-      name='hotel_city', full_name='google.ads.googleads.v0.services.GoogleAdsRow.hotel_city', index=62,
-      number=75, type=11, cpp_type=10, label=1,
-      has_default_value=False, default_value=None,
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      options=None, file=DESCRIPTOR),
-    _descriptor.FieldDescriptor(
-      name='hotel_class', full_name='google.ads.googleads.v0.services.GoogleAdsRow.hotel_class', index=63,
-      number=76, type=11, cpp_type=10, label=1,
-      has_default_value=False, default_value=None,
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      options=None, file=DESCRIPTOR),
-    _descriptor.FieldDescriptor(
-      name='hotel_country', full_name='google.ads.googleads.v0.services.GoogleAdsRow.hotel_country', index=64,
-      number=77, type=11, cpp_type=10, label=1,
-      has_default_value=False, default_value=None,
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      options=None, file=DESCRIPTOR),
-    _descriptor.FieldDescriptor(
-      name='hotel_date_selection_type', full_name='google.ads.googleads.v0.services.GoogleAdsRow.hotel_date_selection_type', index=65,
-      number=78, type=14, cpp_type=8, label=1,
-      has_default_value=False, default_value=0,
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      options=None, file=DESCRIPTOR),
-    _descriptor.FieldDescriptor(
-      name='hotel_length_of_stay', full_name='google.ads.googleads.v0.services.GoogleAdsRow.hotel_length_of_stay', index=66,
-      number=79, type=11, cpp_type=10, label=1,
-      has_default_value=False, default_value=None,
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      options=None, file=DESCRIPTOR),
-    _descriptor.FieldDescriptor(
-      name='hotel_state', full_name='google.ads.googleads.v0.services.GoogleAdsRow.hotel_state', index=67,
-      number=81, type=11, cpp_type=10, label=1,
-      has_default_value=False, default_value=None,
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      options=None, file=DESCRIPTOR),
-    _descriptor.FieldDescriptor(
-      name='hour', full_name='google.ads.googleads.v0.services.GoogleAdsRow.hour', index=68,
-      number=9, type=11, cpp_type=10, label=1,
-      has_default_value=False, default_value=None,
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      options=None, file=DESCRIPTOR),
-    _descriptor.FieldDescriptor(
-      name='month', full_name='google.ads.googleads.v0.services.GoogleAdsRow.month', index=69,
-      number=10, type=11, cpp_type=10, label=1,
-      has_default_value=False, default_value=None,
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      options=None, file=DESCRIPTOR),
-    _descriptor.FieldDescriptor(
-      name='month_of_year', full_name='google.ads.googleads.v0.services.GoogleAdsRow.month_of_year', index=70,
-      number=28, type=14, cpp_type=8, label=1,
-      has_default_value=False, default_value=0,
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      options=None, file=DESCRIPTOR),
-    _descriptor.FieldDescriptor(
-      name='partner_hotel_id', full_name='google.ads.googleads.v0.services.GoogleAdsRow.partner_hotel_id', index=71,
-      number=82, type=11, cpp_type=10, label=1,
-      has_default_value=False, default_value=None,
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      options=None, file=DESCRIPTOR),
-    _descriptor.FieldDescriptor(
-      name='placeholder_type', full_name='google.ads.googleads.v0.services.GoogleAdsRow.placeholder_type', index=72,
-      number=65, type=14, cpp_type=8, label=1,
-      has_default_value=False, default_value=0,
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      options=None, file=DESCRIPTOR),
-    _descriptor.FieldDescriptor(
-      name='quarter', full_name='google.ads.googleads.v0.services.GoogleAdsRow.quarter', index=73,
-      number=12, type=11, cpp_type=10, label=1,
-      has_default_value=False, default_value=None,
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      options=None, file=DESCRIPTOR),
-    _descriptor.FieldDescriptor(
-      name='search_term_match_type', full_name='google.ads.googleads.v0.services.GoogleAdsRow.search_term_match_type', index=74,
-      number=56, type=14, cpp_type=8, label=1,
-      has_default_value=False, default_value=0,
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      options=None, file=DESCRIPTOR),
-    _descriptor.FieldDescriptor(
-      name='slot', full_name='google.ads.googleads.v0.services.GoogleAdsRow.slot', index=75,
-      number=13, type=14, cpp_type=8, label=1,
-      has_default_value=False, default_value=0,
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      options=None, file=DESCRIPTOR),
-    _descriptor.FieldDescriptor(
-      name='week', full_name='google.ads.googleads.v0.services.GoogleAdsRow.week', index=76,
-      number=14, type=11, cpp_type=10, label=1,
-      has_default_value=False, default_value=None,
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      options=None, file=DESCRIPTOR),
-    _descriptor.FieldDescriptor(
-      name='year', full_name='google.ads.googleads.v0.services.GoogleAdsRow.year', index=77,
-      number=15, type=11, cpp_type=10, label=1,
-      has_default_value=False, default_value=None,
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      options=None, file=DESCRIPTOR),
+      serialized_options=None, file=DESCRIPTOR),
   ],
   extensions=[
   ],
   nested_types=[],
   enum_types=[
   ],
-  options=None,
+  serialized_options=None,
   is_extendable=False,
   syntax='proto3',
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=5421,
-  serialized_end=11098,
+  serialized_start=5375,
+  serialized_end=10094,
 )
 
 
@@ -793,28 +679,42 @@ _MUTATEGOOGLEADSREQUEST = _descriptor.Descriptor(
       has_default_value=False, default_value=_b("").decode('utf-8'),
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
-      options=None, file=DESCRIPTOR),
+      serialized_options=None, file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
       name='mutate_operations', full_name='google.ads.googleads.v0.services.MutateGoogleAdsRequest.mutate_operations', index=1,
       number=2, type=11, cpp_type=10, label=3,
       has_default_value=False, default_value=[],
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
-      options=None, file=DESCRIPTOR),
+      serialized_options=None, file=DESCRIPTOR),
+    _descriptor.FieldDescriptor(
+      name='partial_failure', full_name='google.ads.googleads.v0.services.MutateGoogleAdsRequest.partial_failure', index=2,
+      number=3, type=8, cpp_type=7, label=1,
+      has_default_value=False, default_value=False,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR),
+    _descriptor.FieldDescriptor(
+      name='validate_only', full_name='google.ads.googleads.v0.services.MutateGoogleAdsRequest.validate_only', index=3,
+      number=4, type=8, cpp_type=7, label=1,
+      has_default_value=False, default_value=False,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR),
   ],
   extensions=[
   ],
   nested_types=[],
   enum_types=[
   ],
-  options=None,
+  serialized_options=None,
   is_extendable=False,
   syntax='proto3',
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=11100,
-  serialized_end=11223,
+  serialized_start=10097,
+  serialized_end=10268,
 )
 
 
@@ -826,26 +726,33 @@ _MUTATEGOOGLEADSRESPONSE = _descriptor.Descriptor(
   containing_type=None,
   fields=[
     _descriptor.FieldDescriptor(
-      name='mutate_operation_responses', full_name='google.ads.googleads.v0.services.MutateGoogleAdsResponse.mutate_operation_responses', index=0,
+      name='partial_failure_error', full_name='google.ads.googleads.v0.services.MutateGoogleAdsResponse.partial_failure_error', index=0,
+      number=3, type=11, cpp_type=10, label=1,
+      has_default_value=False, default_value=None,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR),
+    _descriptor.FieldDescriptor(
+      name='mutate_operation_responses', full_name='google.ads.googleads.v0.services.MutateGoogleAdsResponse.mutate_operation_responses', index=1,
       number=1, type=11, cpp_type=10, label=3,
       has_default_value=False, default_value=[],
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
-      options=None, file=DESCRIPTOR),
+      serialized_options=None, file=DESCRIPTOR),
   ],
   extensions=[
   ],
   nested_types=[],
   enum_types=[
   ],
-  options=None,
+  serialized_options=None,
   is_extendable=False,
   syntax='proto3',
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=11225,
-  serialized_end=11345,
+  serialized_start=10271,
+  serialized_end=10442,
 )
 
 
@@ -862,112 +769,105 @@ _MUTATEOPERATION = _descriptor.Descriptor(
       has_default_value=False, default_value=None,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
-      options=None, file=DESCRIPTOR),
+      serialized_options=None, file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
       name='ad_group_bid_modifier_operation', full_name='google.ads.googleads.v0.services.MutateOperation.ad_group_bid_modifier_operation', index=1,
       number=2, type=11, cpp_type=10, label=1,
       has_default_value=False, default_value=None,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
-      options=None, file=DESCRIPTOR),
+      serialized_options=None, file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
       name='ad_group_criterion_operation', full_name='google.ads.googleads.v0.services.MutateOperation.ad_group_criterion_operation', index=2,
       number=3, type=11, cpp_type=10, label=1,
       has_default_value=False, default_value=None,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
-      options=None, file=DESCRIPTOR),
+      serialized_options=None, file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
       name='ad_group_operation', full_name='google.ads.googleads.v0.services.MutateOperation.ad_group_operation', index=3,
       number=5, type=11, cpp_type=10, label=1,
       has_default_value=False, default_value=None,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
-      options=None, file=DESCRIPTOR),
+      serialized_options=None, file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
       name='bidding_strategy_operation', full_name='google.ads.googleads.v0.services.MutateOperation.bidding_strategy_operation', index=4,
       number=6, type=11, cpp_type=10, label=1,
       has_default_value=False, default_value=None,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
-      options=None, file=DESCRIPTOR),
+      serialized_options=None, file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
       name='campaign_bid_modifier_operation', full_name='google.ads.googleads.v0.services.MutateOperation.campaign_bid_modifier_operation', index=5,
       number=7, type=11, cpp_type=10, label=1,
       has_default_value=False, default_value=None,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
-      options=None, file=DESCRIPTOR),
+      serialized_options=None, file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
       name='campaign_budget_operation', full_name='google.ads.googleads.v0.services.MutateOperation.campaign_budget_operation', index=6,
       number=8, type=11, cpp_type=10, label=1,
       has_default_value=False, default_value=None,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
-      options=None, file=DESCRIPTOR),
+      serialized_options=None, file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
-      name='campaign_group_operation', full_name='google.ads.googleads.v0.services.MutateOperation.campaign_group_operation', index=7,
-      number=9, type=11, cpp_type=10, label=1,
-      has_default_value=False, default_value=None,
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      options=None, file=DESCRIPTOR),
-    _descriptor.FieldDescriptor(
-      name='campaign_operation', full_name='google.ads.googleads.v0.services.MutateOperation.campaign_operation', index=8,
+      name='campaign_operation', full_name='google.ads.googleads.v0.services.MutateOperation.campaign_operation', index=7,
       number=10, type=11, cpp_type=10, label=1,
       has_default_value=False, default_value=None,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
-      options=None, file=DESCRIPTOR),
+      serialized_options=None, file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
-      name='campaign_shared_set_operation', full_name='google.ads.googleads.v0.services.MutateOperation.campaign_shared_set_operation', index=9,
+      name='campaign_shared_set_operation', full_name='google.ads.googleads.v0.services.MutateOperation.campaign_shared_set_operation', index=8,
       number=11, type=11, cpp_type=10, label=1,
       has_default_value=False, default_value=None,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
-      options=None, file=DESCRIPTOR),
+      serialized_options=None, file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
-      name='conversion_action_operation', full_name='google.ads.googleads.v0.services.MutateOperation.conversion_action_operation', index=10,
+      name='conversion_action_operation', full_name='google.ads.googleads.v0.services.MutateOperation.conversion_action_operation', index=9,
       number=12, type=11, cpp_type=10, label=1,
       has_default_value=False, default_value=None,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
-      options=None, file=DESCRIPTOR),
+      serialized_options=None, file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
-      name='campaign_criterion_operation', full_name='google.ads.googleads.v0.services.MutateOperation.campaign_criterion_operation', index=11,
+      name='campaign_criterion_operation', full_name='google.ads.googleads.v0.services.MutateOperation.campaign_criterion_operation', index=10,
       number=13, type=11, cpp_type=10, label=1,
       has_default_value=False, default_value=None,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
-      options=None, file=DESCRIPTOR),
+      serialized_options=None, file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
-      name='shared_criterion_operation', full_name='google.ads.googleads.v0.services.MutateOperation.shared_criterion_operation', index=12,
+      name='shared_criterion_operation', full_name='google.ads.googleads.v0.services.MutateOperation.shared_criterion_operation', index=11,
       number=14, type=11, cpp_type=10, label=1,
       has_default_value=False, default_value=None,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
-      options=None, file=DESCRIPTOR),
+      serialized_options=None, file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
-      name='shared_set_operation', full_name='google.ads.googleads.v0.services.MutateOperation.shared_set_operation', index=13,
+      name='shared_set_operation', full_name='google.ads.googleads.v0.services.MutateOperation.shared_set_operation', index=12,
       number=15, type=11, cpp_type=10, label=1,
       has_default_value=False, default_value=None,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
-      options=None, file=DESCRIPTOR),
+      serialized_options=None, file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
-      name='user_list_operation', full_name='google.ads.googleads.v0.services.MutateOperation.user_list_operation', index=14,
+      name='user_list_operation', full_name='google.ads.googleads.v0.services.MutateOperation.user_list_operation', index=13,
       number=16, type=11, cpp_type=10, label=1,
       has_default_value=False, default_value=None,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
-      options=None, file=DESCRIPTOR),
+      serialized_options=None, file=DESCRIPTOR),
   ],
   extensions=[
   ],
   nested_types=[],
   enum_types=[
   ],
-  options=None,
+  serialized_options=None,
   is_extendable=False,
   syntax='proto3',
   extension_ranges=[],
@@ -976,8 +876,8 @@ _MUTATEOPERATION = _descriptor.Descriptor(
       name='operation', full_name='google.ads.googleads.v0.services.MutateOperation.operation',
       index=0, containing_type=None, fields=[]),
   ],
-  serialized_start=11348,
-  serialized_end=12805,
+  serialized_start=10445,
+  serialized_end=11808,
 )
 
 
@@ -994,112 +894,105 @@ _MUTATEOPERATIONRESPONSE = _descriptor.Descriptor(
       has_default_value=False, default_value=None,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
-      options=None, file=DESCRIPTOR),
+      serialized_options=None, file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
       name='ad_group_bid_modifier_result', full_name='google.ads.googleads.v0.services.MutateOperationResponse.ad_group_bid_modifier_result', index=1,
       number=2, type=11, cpp_type=10, label=1,
       has_default_value=False, default_value=None,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
-      options=None, file=DESCRIPTOR),
+      serialized_options=None, file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
       name='ad_group_criterion_result', full_name='google.ads.googleads.v0.services.MutateOperationResponse.ad_group_criterion_result', index=2,
       number=3, type=11, cpp_type=10, label=1,
       has_default_value=False, default_value=None,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
-      options=None, file=DESCRIPTOR),
+      serialized_options=None, file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
       name='ad_group_result', full_name='google.ads.googleads.v0.services.MutateOperationResponse.ad_group_result', index=3,
       number=5, type=11, cpp_type=10, label=1,
       has_default_value=False, default_value=None,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
-      options=None, file=DESCRIPTOR),
+      serialized_options=None, file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
       name='bidding_strategy_result', full_name='google.ads.googleads.v0.services.MutateOperationResponse.bidding_strategy_result', index=4,
       number=6, type=11, cpp_type=10, label=1,
       has_default_value=False, default_value=None,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
-      options=None, file=DESCRIPTOR),
+      serialized_options=None, file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
       name='campaign_bid_modifier_result', full_name='google.ads.googleads.v0.services.MutateOperationResponse.campaign_bid_modifier_result', index=5,
       number=7, type=11, cpp_type=10, label=1,
       has_default_value=False, default_value=None,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
-      options=None, file=DESCRIPTOR),
+      serialized_options=None, file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
       name='campaign_budget_result', full_name='google.ads.googleads.v0.services.MutateOperationResponse.campaign_budget_result', index=6,
       number=8, type=11, cpp_type=10, label=1,
       has_default_value=False, default_value=None,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
-      options=None, file=DESCRIPTOR),
+      serialized_options=None, file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
-      name='campaign_group_result', full_name='google.ads.googleads.v0.services.MutateOperationResponse.campaign_group_result', index=7,
-      number=9, type=11, cpp_type=10, label=1,
-      has_default_value=False, default_value=None,
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      options=None, file=DESCRIPTOR),
-    _descriptor.FieldDescriptor(
-      name='campaign_result', full_name='google.ads.googleads.v0.services.MutateOperationResponse.campaign_result', index=8,
+      name='campaign_result', full_name='google.ads.googleads.v0.services.MutateOperationResponse.campaign_result', index=7,
       number=10, type=11, cpp_type=10, label=1,
       has_default_value=False, default_value=None,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
-      options=None, file=DESCRIPTOR),
+      serialized_options=None, file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
-      name='campaign_shared_set_result', full_name='google.ads.googleads.v0.services.MutateOperationResponse.campaign_shared_set_result', index=9,
+      name='campaign_shared_set_result', full_name='google.ads.googleads.v0.services.MutateOperationResponse.campaign_shared_set_result', index=8,
       number=11, type=11, cpp_type=10, label=1,
       has_default_value=False, default_value=None,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
-      options=None, file=DESCRIPTOR),
+      serialized_options=None, file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
-      name='conversion_action_result', full_name='google.ads.googleads.v0.services.MutateOperationResponse.conversion_action_result', index=10,
+      name='conversion_action_result', full_name='google.ads.googleads.v0.services.MutateOperationResponse.conversion_action_result', index=9,
       number=12, type=11, cpp_type=10, label=1,
       has_default_value=False, default_value=None,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
-      options=None, file=DESCRIPTOR),
+      serialized_options=None, file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
-      name='campaign_criterion_result', full_name='google.ads.googleads.v0.services.MutateOperationResponse.campaign_criterion_result', index=11,
+      name='campaign_criterion_result', full_name='google.ads.googleads.v0.services.MutateOperationResponse.campaign_criterion_result', index=10,
       number=13, type=11, cpp_type=10, label=1,
       has_default_value=False, default_value=None,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
-      options=None, file=DESCRIPTOR),
+      serialized_options=None, file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
-      name='shared_criterion_result', full_name='google.ads.googleads.v0.services.MutateOperationResponse.shared_criterion_result', index=12,
+      name='shared_criterion_result', full_name='google.ads.googleads.v0.services.MutateOperationResponse.shared_criterion_result', index=11,
       number=14, type=11, cpp_type=10, label=1,
       has_default_value=False, default_value=None,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
-      options=None, file=DESCRIPTOR),
+      serialized_options=None, file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
-      name='shared_set_result', full_name='google.ads.googleads.v0.services.MutateOperationResponse.shared_set_result', index=13,
+      name='shared_set_result', full_name='google.ads.googleads.v0.services.MutateOperationResponse.shared_set_result', index=12,
       number=15, type=11, cpp_type=10, label=1,
       has_default_value=False, default_value=None,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
-      options=None, file=DESCRIPTOR),
+      serialized_options=None, file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
-      name='user_list_result', full_name='google.ads.googleads.v0.services.MutateOperationResponse.user_list_result', index=14,
+      name='user_list_result', full_name='google.ads.googleads.v0.services.MutateOperationResponse.user_list_result', index=13,
       number=16, type=11, cpp_type=10, label=1,
       has_default_value=False, default_value=None,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
-      options=None, file=DESCRIPTOR),
+      serialized_options=None, file=DESCRIPTOR),
   ],
   extensions=[
   ],
   nested_types=[],
   enum_types=[
   ],
-  options=None,
+  serialized_options=None,
   is_extendable=False,
   syntax='proto3',
   extension_ranges=[],
@@ -1108,8 +1001,8 @@ _MUTATEOPERATIONRESPONSE = _descriptor.Descriptor(
       name='response', full_name='google.ads.googleads.v0.services.MutateOperationResponse.response',
       index=0, containing_type=None, fields=[]),
   ],
-  serialized_start=12808,
-  serialized_end=14272,
+  serialized_start=11811,
+  serialized_end=13181,
 )
 
 _SEARCHGOOGLEADSRESPONSE.fields_by_name['results'].message_type = _GOOGLEADSROW
@@ -1123,6 +1016,7 @@ _GOOGLEADSROW.fields_by_name['ad_group_bid_modifier'].message_type = google_dot_
 _GOOGLEADSROW.fields_by_name['ad_group_criterion'].message_type = google_dot_ads_dot_googleads__v0_dot_proto_dot_resources_dot_ad__group__criterion__pb2._ADGROUPCRITERION
 _GOOGLEADSROW.fields_by_name['ad_group_feed'].message_type = google_dot_ads_dot_googleads__v0_dot_proto_dot_resources_dot_ad__group__feed__pb2._ADGROUPFEED
 _GOOGLEADSROW.fields_by_name['age_range_view'].message_type = google_dot_ads_dot_googleads__v0_dot_proto_dot_resources_dot_age__range__view__pb2._AGERANGEVIEW
+_GOOGLEADSROW.fields_by_name['ad_schedule_view'].message_type = google_dot_ads_dot_googleads__v0_dot_proto_dot_resources_dot_ad__schedule__view__pb2._ADSCHEDULEVIEW
 _GOOGLEADSROW.fields_by_name['bidding_strategy'].message_type = google_dot_ads_dot_googleads__v0_dot_proto_dot_resources_dot_bidding__strategy__pb2._BIDDINGSTRATEGY
 _GOOGLEADSROW.fields_by_name['billing_setup'].message_type = google_dot_ads_dot_googleads__v0_dot_proto_dot_resources_dot_billing__setup__pb2._BILLINGSETUP
 _GOOGLEADSROW.fields_by_name['campaign_budget'].message_type = google_dot_ads_dot_googleads__v0_dot_proto_dot_resources_dot_campaign__budget__pb2._CAMPAIGNBUDGET
@@ -1131,10 +1025,10 @@ _GOOGLEADSROW.fields_by_name['campaign_audience_view'].message_type = google_dot
 _GOOGLEADSROW.fields_by_name['campaign_bid_modifier'].message_type = google_dot_ads_dot_googleads__v0_dot_proto_dot_resources_dot_campaign__bid__modifier__pb2._CAMPAIGNBIDMODIFIER
 _GOOGLEADSROW.fields_by_name['campaign_criterion'].message_type = google_dot_ads_dot_googleads__v0_dot_proto_dot_resources_dot_campaign__criterion__pb2._CAMPAIGNCRITERION
 _GOOGLEADSROW.fields_by_name['campaign_feed'].message_type = google_dot_ads_dot_googleads__v0_dot_proto_dot_resources_dot_campaign__feed__pb2._CAMPAIGNFEED
-_GOOGLEADSROW.fields_by_name['campaign_group'].message_type = google_dot_ads_dot_googleads__v0_dot_proto_dot_resources_dot_campaign__group__pb2._CAMPAIGNGROUP
 _GOOGLEADSROW.fields_by_name['campaign_shared_set'].message_type = google_dot_ads_dot_googleads__v0_dot_proto_dot_resources_dot_campaign__shared__set__pb2._CAMPAIGNSHAREDSET
 _GOOGLEADSROW.fields_by_name['carrier_constant'].message_type = google_dot_ads_dot_googleads__v0_dot_proto_dot_resources_dot_carrier__constant__pb2._CARRIERCONSTANT
 _GOOGLEADSROW.fields_by_name['change_status'].message_type = google_dot_ads_dot_googleads__v0_dot_proto_dot_resources_dot_change__status__pb2._CHANGESTATUS
+_GOOGLEADSROW.fields_by_name['conversion_action'].message_type = google_dot_ads_dot_googleads__v0_dot_proto_dot_resources_dot_conversion__action__pb2._CONVERSIONACTION
 _GOOGLEADSROW.fields_by_name['customer'].message_type = google_dot_ads_dot_googleads__v0_dot_proto_dot_resources_dot_customer__pb2._CUSTOMER
 _GOOGLEADSROW.fields_by_name['customer_manager_link'].message_type = google_dot_ads_dot_googleads__v0_dot_proto_dot_resources_dot_customer__manager__link__pb2._CUSTOMERMANAGERLINK
 _GOOGLEADSROW.fields_by_name['customer_client_link'].message_type = google_dot_ads_dot_googleads__v0_dot_proto_dot_resources_dot_customer__client__link__pb2._CUSTOMERCLIENTLINK
@@ -1156,6 +1050,10 @@ _GOOGLEADSROW.fields_by_name['keyword_plan_ad_group'].message_type = google_dot_
 _GOOGLEADSROW.fields_by_name['keyword_plan_keyword'].message_type = google_dot_ads_dot_googleads__v0_dot_proto_dot_resources_dot_keyword__plan__keyword__pb2._KEYWORDPLANKEYWORD
 _GOOGLEADSROW.fields_by_name['language_constant'].message_type = google_dot_ads_dot_googleads__v0_dot_proto_dot_resources_dot_language__constant__pb2._LANGUAGECONSTANT
 _GOOGLEADSROW.fields_by_name['managed_placement_view'].message_type = google_dot_ads_dot_googleads__v0_dot_proto_dot_resources_dot_managed__placement__view__pb2._MANAGEDPLACEMENTVIEW
+_GOOGLEADSROW.fields_by_name['media_file'].message_type = google_dot_ads_dot_googleads__v0_dot_proto_dot_resources_dot_media__file__pb2._MEDIAFILE
+_GOOGLEADSROW.fields_by_name['mobile_app_category_constant'].message_type = google_dot_ads_dot_googleads__v0_dot_proto_dot_resources_dot_mobile__app__category__constant__pb2._MOBILEAPPCATEGORYCONSTANT
+_GOOGLEADSROW.fields_by_name['mobile_device_constant'].message_type = google_dot_ads_dot_googleads__v0_dot_proto_dot_resources_dot_mobile__device__constant__pb2._MOBILEDEVICECONSTANT
+_GOOGLEADSROW.fields_by_name['operating_system_version_constant'].message_type = google_dot_ads_dot_googleads__v0_dot_proto_dot_resources_dot_operating__system__version__constant__pb2._OPERATINGSYSTEMVERSIONCONSTANT
 _GOOGLEADSROW.fields_by_name['parental_status_view'].message_type = google_dot_ads_dot_googleads__v0_dot_proto_dot_resources_dot_parental__status__view__pb2._PARENTALSTATUSVIEW
 _GOOGLEADSROW.fields_by_name['product_group_view'].message_type = google_dot_ads_dot_googleads__v0_dot_proto_dot_resources_dot_product__group__view__pb2._PRODUCTGROUPVIEW
 _GOOGLEADSROW.fields_by_name['recommendation'].message_type = google_dot_ads_dot_googleads__v0_dot_proto_dot_resources_dot_recommendation__pb2._RECOMMENDATION
@@ -1165,34 +1063,13 @@ _GOOGLEADSROW.fields_by_name['shared_set'].message_type = google_dot_ads_dot_goo
 _GOOGLEADSROW.fields_by_name['topic_view'].message_type = google_dot_ads_dot_googleads__v0_dot_proto_dot_resources_dot_topic__view__pb2._TOPICVIEW
 _GOOGLEADSROW.fields_by_name['user_interest'].message_type = google_dot_ads_dot_googleads__v0_dot_proto_dot_resources_dot_user__interest__pb2._USERINTEREST
 _GOOGLEADSROW.fields_by_name['user_list'].message_type = google_dot_ads_dot_googleads__v0_dot_proto_dot_resources_dot_user__list__pb2._USERLIST
+_GOOGLEADSROW.fields_by_name['remarketing_action'].message_type = google_dot_ads_dot_googleads__v0_dot_proto_dot_resources_dot_remarketing__action__pb2._REMARKETINGACTION
 _GOOGLEADSROW.fields_by_name['topic_constant'].message_type = google_dot_ads_dot_googleads__v0_dot_proto_dot_resources_dot_topic__constant__pb2._TOPICCONSTANT
 _GOOGLEADSROW.fields_by_name['video'].message_type = google_dot_ads_dot_googleads__v0_dot_proto_dot_resources_dot_video__pb2._VIDEO
 _GOOGLEADSROW.fields_by_name['metrics'].message_type = google_dot_ads_dot_googleads__v0_dot_proto_dot_common_dot_metrics__pb2._METRICS
-_GOOGLEADSROW.fields_by_name['ad_network_type'].enum_type = google_dot_ads_dot_googleads__v0_dot_proto_dot_enums_dot_ad__network__type__pb2._ADNETWORKTYPEENUM_ADNETWORKTYPE
-_GOOGLEADSROW.fields_by_name['date'].message_type = google_dot_protobuf_dot_wrappers__pb2._STRINGVALUE
-_GOOGLEADSROW.fields_by_name['day_of_week'].enum_type = google_dot_ads_dot_googleads__v0_dot_proto_dot_enums_dot_day__of__week__pb2._DAYOFWEEKENUM_DAYOFWEEK
-_GOOGLEADSROW.fields_by_name['device'].enum_type = google_dot_ads_dot_googleads__v0_dot_proto_dot_enums_dot_device__pb2._DEVICEENUM_DEVICE
-_GOOGLEADSROW.fields_by_name['hotel_booking_window_days'].message_type = google_dot_protobuf_dot_wrappers__pb2._INT64VALUE
-_GOOGLEADSROW.fields_by_name['hotel_center_id'].message_type = google_dot_protobuf_dot_wrappers__pb2._INT64VALUE
-_GOOGLEADSROW.fields_by_name['hotel_check_in_date'].message_type = google_dot_protobuf_dot_wrappers__pb2._STRINGVALUE
-_GOOGLEADSROW.fields_by_name['hotel_check_in_day_of_week'].enum_type = google_dot_ads_dot_googleads__v0_dot_proto_dot_enums_dot_day__of__week__pb2._DAYOFWEEKENUM_DAYOFWEEK
-_GOOGLEADSROW.fields_by_name['hotel_city'].message_type = google_dot_protobuf_dot_wrappers__pb2._STRINGVALUE
-_GOOGLEADSROW.fields_by_name['hotel_class'].message_type = google_dot_protobuf_dot_wrappers__pb2._INT32VALUE
-_GOOGLEADSROW.fields_by_name['hotel_country'].message_type = google_dot_protobuf_dot_wrappers__pb2._STRINGVALUE
-_GOOGLEADSROW.fields_by_name['hotel_date_selection_type'].enum_type = google_dot_ads_dot_googleads__v0_dot_proto_dot_enums_dot_hotel__date__selection__type__pb2._HOTELDATESELECTIONTYPEENUM_HOTELDATESELECTIONTYPE
-_GOOGLEADSROW.fields_by_name['hotel_length_of_stay'].message_type = google_dot_protobuf_dot_wrappers__pb2._INT32VALUE
-_GOOGLEADSROW.fields_by_name['hotel_state'].message_type = google_dot_protobuf_dot_wrappers__pb2._STRINGVALUE
-_GOOGLEADSROW.fields_by_name['hour'].message_type = google_dot_protobuf_dot_wrappers__pb2._INT32VALUE
-_GOOGLEADSROW.fields_by_name['month'].message_type = google_dot_protobuf_dot_wrappers__pb2._STRINGVALUE
-_GOOGLEADSROW.fields_by_name['month_of_year'].enum_type = google_dot_ads_dot_googleads__v0_dot_proto_dot_enums_dot_month__of__year__pb2._MONTHOFYEARENUM_MONTHOFYEAR
-_GOOGLEADSROW.fields_by_name['partner_hotel_id'].message_type = google_dot_protobuf_dot_wrappers__pb2._STRINGVALUE
-_GOOGLEADSROW.fields_by_name['placeholder_type'].enum_type = google_dot_ads_dot_googleads__v0_dot_proto_dot_enums_dot_placeholder__type__pb2._PLACEHOLDERTYPEENUM_PLACEHOLDERTYPE
-_GOOGLEADSROW.fields_by_name['quarter'].message_type = google_dot_protobuf_dot_wrappers__pb2._STRINGVALUE
-_GOOGLEADSROW.fields_by_name['search_term_match_type'].enum_type = google_dot_ads_dot_googleads__v0_dot_proto_dot_enums_dot_search__term__match__type__pb2._SEARCHTERMMATCHTYPEENUM_SEARCHTERMMATCHTYPE
-_GOOGLEADSROW.fields_by_name['slot'].enum_type = google_dot_ads_dot_googleads__v0_dot_proto_dot_enums_dot_slot__pb2._SLOTENUM_SLOT
-_GOOGLEADSROW.fields_by_name['week'].message_type = google_dot_protobuf_dot_wrappers__pb2._STRINGVALUE
-_GOOGLEADSROW.fields_by_name['year'].message_type = google_dot_protobuf_dot_wrappers__pb2._INT32VALUE
+_GOOGLEADSROW.fields_by_name['segments'].message_type = google_dot_ads_dot_googleads__v0_dot_proto_dot_common_dot_segments__pb2._SEGMENTS
 _MUTATEGOOGLEADSREQUEST.fields_by_name['mutate_operations'].message_type = _MUTATEOPERATION
+_MUTATEGOOGLEADSRESPONSE.fields_by_name['partial_failure_error'].message_type = google_dot_rpc_dot_status__pb2._STATUS
 _MUTATEGOOGLEADSRESPONSE.fields_by_name['mutate_operation_responses'].message_type = _MUTATEOPERATIONRESPONSE
 _MUTATEOPERATION.fields_by_name['ad_group_ad_operation'].message_type = google_dot_ads_dot_googleads__v0_dot_proto_dot_services_dot_ad__group__ad__service__pb2._ADGROUPADOPERATION
 _MUTATEOPERATION.fields_by_name['ad_group_bid_modifier_operation'].message_type = google_dot_ads_dot_googleads__v0_dot_proto_dot_services_dot_ad__group__bid__modifier__service__pb2._ADGROUPBIDMODIFIEROPERATION
@@ -1201,7 +1078,6 @@ _MUTATEOPERATION.fields_by_name['ad_group_operation'].message_type = google_dot_
 _MUTATEOPERATION.fields_by_name['bidding_strategy_operation'].message_type = google_dot_ads_dot_googleads__v0_dot_proto_dot_services_dot_bidding__strategy__service__pb2._BIDDINGSTRATEGYOPERATION
 _MUTATEOPERATION.fields_by_name['campaign_bid_modifier_operation'].message_type = google_dot_ads_dot_googleads__v0_dot_proto_dot_services_dot_campaign__bid__modifier__service__pb2._CAMPAIGNBIDMODIFIEROPERATION
 _MUTATEOPERATION.fields_by_name['campaign_budget_operation'].message_type = google_dot_ads_dot_googleads__v0_dot_proto_dot_services_dot_campaign__budget__service__pb2._CAMPAIGNBUDGETOPERATION
-_MUTATEOPERATION.fields_by_name['campaign_group_operation'].message_type = google_dot_ads_dot_googleads__v0_dot_proto_dot_services_dot_campaign__group__service__pb2._CAMPAIGNGROUPOPERATION
 _MUTATEOPERATION.fields_by_name['campaign_operation'].message_type = google_dot_ads_dot_googleads__v0_dot_proto_dot_services_dot_campaign__service__pb2._CAMPAIGNOPERATION
 _MUTATEOPERATION.fields_by_name['campaign_shared_set_operation'].message_type = google_dot_ads_dot_googleads__v0_dot_proto_dot_services_dot_campaign__shared__set__service__pb2._CAMPAIGNSHAREDSETOPERATION
 _MUTATEOPERATION.fields_by_name['conversion_action_operation'].message_type = google_dot_ads_dot_googleads__v0_dot_proto_dot_services_dot_conversion__action__service__pb2._CONVERSIONACTIONOPERATION
@@ -1231,9 +1107,6 @@ _MUTATEOPERATION.oneofs_by_name['operation'].fields.append(
   _MUTATEOPERATION.fields_by_name['campaign_budget_operation'])
 _MUTATEOPERATION.fields_by_name['campaign_budget_operation'].containing_oneof = _MUTATEOPERATION.oneofs_by_name['operation']
 _MUTATEOPERATION.oneofs_by_name['operation'].fields.append(
-  _MUTATEOPERATION.fields_by_name['campaign_group_operation'])
-_MUTATEOPERATION.fields_by_name['campaign_group_operation'].containing_oneof = _MUTATEOPERATION.oneofs_by_name['operation']
-_MUTATEOPERATION.oneofs_by_name['operation'].fields.append(
   _MUTATEOPERATION.fields_by_name['campaign_operation'])
 _MUTATEOPERATION.fields_by_name['campaign_operation'].containing_oneof = _MUTATEOPERATION.oneofs_by_name['operation']
 _MUTATEOPERATION.oneofs_by_name['operation'].fields.append(
@@ -1261,7 +1134,6 @@ _MUTATEOPERATIONRESPONSE.fields_by_name['ad_group_result'].message_type = google
 _MUTATEOPERATIONRESPONSE.fields_by_name['bidding_strategy_result'].message_type = google_dot_ads_dot_googleads__v0_dot_proto_dot_services_dot_bidding__strategy__service__pb2._MUTATEBIDDINGSTRATEGYRESULT
 _MUTATEOPERATIONRESPONSE.fields_by_name['campaign_bid_modifier_result'].message_type = google_dot_ads_dot_googleads__v0_dot_proto_dot_services_dot_campaign__bid__modifier__service__pb2._MUTATECAMPAIGNBIDMODIFIERRESULT
 _MUTATEOPERATIONRESPONSE.fields_by_name['campaign_budget_result'].message_type = google_dot_ads_dot_googleads__v0_dot_proto_dot_services_dot_campaign__budget__service__pb2._MUTATECAMPAIGNBUDGETRESULT
-_MUTATEOPERATIONRESPONSE.fields_by_name['campaign_group_result'].message_type = google_dot_ads_dot_googleads__v0_dot_proto_dot_services_dot_campaign__group__service__pb2._MUTATECAMPAIGNGROUPRESULT
 _MUTATEOPERATIONRESPONSE.fields_by_name['campaign_result'].message_type = google_dot_ads_dot_googleads__v0_dot_proto_dot_services_dot_campaign__service__pb2._MUTATECAMPAIGNRESULT
 _MUTATEOPERATIONRESPONSE.fields_by_name['campaign_shared_set_result'].message_type = google_dot_ads_dot_googleads__v0_dot_proto_dot_services_dot_campaign__shared__set__service__pb2._MUTATECAMPAIGNSHAREDSETRESULT
 _MUTATEOPERATIONRESPONSE.fields_by_name['conversion_action_result'].message_type = google_dot_ads_dot_googleads__v0_dot_proto_dot_services_dot_conversion__action__service__pb2._MUTATECONVERSIONACTIONRESULT
@@ -1290,9 +1162,6 @@ _MUTATEOPERATIONRESPONSE.fields_by_name['campaign_bid_modifier_result'].containi
 _MUTATEOPERATIONRESPONSE.oneofs_by_name['response'].fields.append(
   _MUTATEOPERATIONRESPONSE.fields_by_name['campaign_budget_result'])
 _MUTATEOPERATIONRESPONSE.fields_by_name['campaign_budget_result'].containing_oneof = _MUTATEOPERATIONRESPONSE.oneofs_by_name['response']
-_MUTATEOPERATIONRESPONSE.oneofs_by_name['response'].fields.append(
-  _MUTATEOPERATIONRESPONSE.fields_by_name['campaign_group_result'])
-_MUTATEOPERATIONRESPONSE.fields_by_name['campaign_group_result'].containing_oneof = _MUTATEOPERATIONRESPONSE.oneofs_by_name['response']
 _MUTATEOPERATIONRESPONSE.oneofs_by_name['response'].fields.append(
   _MUTATEOPERATIONRESPONSE.fields_by_name['campaign_result'])
 _MUTATEOPERATIONRESPONSE.fields_by_name['campaign_result'].containing_oneof = _MUTATEOPERATIONRESPONSE.oneofs_by_name['response']
@@ -1325,7 +1194,7 @@ _sym_db.RegisterFileDescriptor(DESCRIPTOR)
 
 SearchGoogleAdsRequest = _reflection.GeneratedProtocolMessageType('SearchGoogleAdsRequest', (_message.Message,), dict(
   DESCRIPTOR = _SEARCHGOOGLEADSREQUEST,
-  __module__ = 'google.ads.google_ads.v0.proto.services.google_ads_service_pb2'
+  __module__ = 'google.ads.googleads_v0.proto.services.google_ads_service_pb2'
   ,
   __doc__ = """Request message for
   [GoogleAdsService.Search][google.ads.googleads.v0.services.GoogleAdsService.Search].
@@ -1345,6 +1214,8 @@ SearchGoogleAdsRequest = _reflection.GeneratedProtocolMessageType('SearchGoogleA
           Number of elements to retrieve in a single page. When too
           large a page is requested, the server may decide to further
           limit the number of returned resources.
+      validate_only:
+          If true, the request is validated but not executed.
   """,
   # @@protoc_insertion_point(class_scope:google.ads.googleads.v0.services.SearchGoogleAdsRequest)
   ))
@@ -1352,7 +1223,7 @@ _sym_db.RegisterMessage(SearchGoogleAdsRequest)
 
 SearchGoogleAdsResponse = _reflection.GeneratedProtocolMessageType('SearchGoogleAdsResponse', (_message.Message,), dict(
   DESCRIPTOR = _SEARCHGOOGLEADSRESPONSE,
-  __module__ = 'google.ads.google_ads.v0.proto.services.google_ads_service_pb2'
+  __module__ = 'google.ads.googleads_v0.proto.services.google_ads_service_pb2'
   ,
   __doc__ = """Response message for
   [GoogleAdsService.Search][google.ads.googleads.v0.services.GoogleAdsService.Search].
@@ -1379,7 +1250,7 @@ _sym_db.RegisterMessage(SearchGoogleAdsResponse)
 
 GoogleAdsRow = _reflection.GeneratedProtocolMessageType('GoogleAdsRow', (_message.Message,), dict(
   DESCRIPTOR = _GOOGLEADSROW,
-  __module__ = 'google.ads.google_ads.v0.proto.services.google_ads_service_pb2'
+  __module__ = 'google.ads.googleads_v0.proto.services.google_ads_service_pb2'
   ,
   __doc__ = """A returned row from the query.
   
@@ -1403,6 +1274,8 @@ GoogleAdsRow = _reflection.GeneratedProtocolMessageType('GoogleAdsRow', (_messag
           The ad group feed referenced in the query.
       age_range_view:
           The age range view referenced in the query.
+      ad_schedule_view:
+          The ad schedule view referenced in the query.
       bidding_strategy:
           The bidding strategy referenced in the query.
       billing_setup:
@@ -1419,14 +1292,14 @@ GoogleAdsRow = _reflection.GeneratedProtocolMessageType('GoogleAdsRow', (_messag
           The campaign criterion referenced in the query.
       campaign_feed:
           The campaign feed referenced in the query.
-      campaign_group:
-          Campaign Group referenced in AWQL query.
       campaign_shared_set:
           Campaign Shared Set referenced in AWQL query.
       carrier_constant:
           The carrier constant referenced in the query.
       change_status:
           The ChangeStatus referenced in the query.
+      conversion_action:
+          The conversion action referenced in the query.
       customer:
           The customer referenced in the query.
       customer_manager_link:
@@ -1469,6 +1342,14 @@ GoogleAdsRow = _reflection.GeneratedProtocolMessageType('GoogleAdsRow', (_messag
           The language constant referenced in the query.
       managed_placement_view:
           The managed placement view referenced in the query.
+      media_file:
+          The media file referenced in the query.
+      mobile_app_category_constant:
+          The mobile app category constant referenced in the query.
+      mobile_device_constant:
+          The mobile device constant referenced in the query.
+      operating_system_version_constant:
+          The operating system version constant referenced in the query.
       parental_status_view:
           The parental status view referenced in the query.
       product_group_view:
@@ -1487,66 +1368,16 @@ GoogleAdsRow = _reflection.GeneratedProtocolMessageType('GoogleAdsRow', (_messag
           The user interest referenced in the query.
       user_list:
           The user list referenced in the query.
+      remarketing_action:
+          The remarketing action referenced in the query.
       topic_constant:
           The topic constant referenced in the query.
       video:
           The video referenced in the query.
       metrics:
           The metrics.
-      ad_network_type:
-          Ad network type.
-      date:
-          Date to which metrics apply. yyyy-MM-dd format, e.g.,
-          2018-04-17.
-      day_of_week:
-          Day of the week, e.g., MONDAY.
-      device:
-          Device to which metrics apply.
-      hotel_booking_window_days:
-          Hotel booking window in days.
-      hotel_center_id:
-          Hotel center ID.
-      hotel_check_in_date:
-          Hotel check-in date. Formatted as yyyy-MM-dd.
-      hotel_check_in_day_of_week:
-          Hotel check-in day of week.
-      hotel_city:
-          Hotel city.
-      hotel_class:
-          Hotel class.
-      hotel_country:
-          Hotel country.
-      hotel_date_selection_type:
-          Hotel date selection type.
-      hotel_length_of_stay:
-          Hotel length of stay.
-      hotel_state:
-          Hotel state.
-      hour:
-          Hour of day as a number between 0 and 23, inclusive.
-      month:
-          Month as represented by the date of the first day of a month.
-          Formatted as yyyy-MM-dd.
-      month_of_year:
-          Month of the year, e.g., January.
-      partner_hotel_id:
-          Partner hotel ID.
-      placeholder_type:
-          Placeholder type. This is only used with feed item metrics.
-      quarter:
-          Quarter as represented by the date of the first day of a
-          quarter. Uses the calendar year for quarters, e.g., the second
-          quarter of 2018 starts on 2018-04-01. Formatted as yyyy-MM-dd.
-      search_term_match_type:
-          Match type of the keyword that triggered the ad, including
-          variants.
-      slot:
-          Position of the ad.
-      week:
-          Week as defined as Monday through Sunday, and represented by
-          the date of Monday. Formatted as yyyy-MM-dd.
-      year:
-          Year, formatted as yyyy.
+      segments:
+          The segments.
   """,
   # @@protoc_insertion_point(class_scope:google.ads.googleads.v0.services.GoogleAdsRow)
   ))
@@ -1554,7 +1385,7 @@ _sym_db.RegisterMessage(GoogleAdsRow)
 
 MutateGoogleAdsRequest = _reflection.GeneratedProtocolMessageType('MutateGoogleAdsRequest', (_message.Message,), dict(
   DESCRIPTOR = _MUTATEGOOGLEADSREQUEST,
-  __module__ = 'google.ads.google_ads.v0.proto.services.google_ads_service_pb2'
+  __module__ = 'google.ads.googleads_v0.proto.services.google_ads_service_pb2'
   ,
   __doc__ = """Request message for
   [GoogleAdsService.Mutate][google.ads.googleads.v0.services.GoogleAdsService.Mutate].
@@ -1565,6 +1396,14 @@ MutateGoogleAdsRequest = _reflection.GeneratedProtocolMessageType('MutateGoogleA
           The ID of the customer whose resources are being modified.
       mutate_operations:
           The list of operations to perform on individual resources.
+      partial_failure:
+          If true, successful operations will be carried out and invalid
+          operations will return errors. If false, all operations will
+          be carried out in one transaction if and only if they are all
+          valid. Default is false.
+      validate_only:
+          If true, the request is validated but not executed. Only
+          errors are returned, not results.
   """,
   # @@protoc_insertion_point(class_scope:google.ads.googleads.v0.services.MutateGoogleAdsRequest)
   ))
@@ -1572,13 +1411,19 @@ _sym_db.RegisterMessage(MutateGoogleAdsRequest)
 
 MutateGoogleAdsResponse = _reflection.GeneratedProtocolMessageType('MutateGoogleAdsResponse', (_message.Message,), dict(
   DESCRIPTOR = _MUTATEGOOGLEADSRESPONSE,
-  __module__ = 'google.ads.google_ads.v0.proto.services.google_ads_service_pb2'
+  __module__ = 'google.ads.googleads_v0.proto.services.google_ads_service_pb2'
   ,
   __doc__ = """Response message for
   [GoogleAdsService.Mutate][google.ads.googleads.v0.services.GoogleAdsService.Mutate].
   
   
   Attributes:
+      partial_failure_error:
+          Errors that pertain to operation failures in the partial
+          failure mode. Returned only when partial\_failure = true and
+          all errors occur inside the operations. If any errors occur
+          outside the operations (e.g. auth errors), we return an RPC
+          level error.
       mutate_operation_responses:
           All responses for the mutate.
   """,
@@ -1588,7 +1433,7 @@ _sym_db.RegisterMessage(MutateGoogleAdsResponse)
 
 MutateOperation = _reflection.GeneratedProtocolMessageType('MutateOperation', (_message.Message,), dict(
   DESCRIPTOR = _MUTATEOPERATION,
-  __module__ = 'google.ads.google_ads.v0.proto.services.google_ads_service_pb2'
+  __module__ = 'google.ads.googleads_v0.proto.services.google_ads_service_pb2'
   ,
   __doc__ = """A single operation (create, update, remove) on a resource.
   
@@ -1610,8 +1455,6 @@ MutateOperation = _reflection.GeneratedProtocolMessageType('MutateOperation', (_
           A campaign bid modifier mutate operation.
       campaign_budget_operation:
           A campaign budget mutate operation.
-      campaign_group_operation:
-          A campaign group mutate operation.
       campaign_operation:
           A campaign mutate operation.
       campaign_shared_set_operation:
@@ -1633,7 +1476,7 @@ _sym_db.RegisterMessage(MutateOperation)
 
 MutateOperationResponse = _reflection.GeneratedProtocolMessageType('MutateOperationResponse', (_message.Message,), dict(
   DESCRIPTOR = _MUTATEOPERATIONRESPONSE,
-  __module__ = 'google.ads.google_ads.v0.proto.services.google_ads_service_pb2'
+  __module__ = 'google.ads.googleads_v0.proto.services.google_ads_service_pb2'
   ,
   __doc__ = """Response message for the resource mutate.
   
@@ -1655,8 +1498,6 @@ MutateOperationResponse = _reflection.GeneratedProtocolMessageType('MutateOperat
           The result for the campaign bid modifier mutate.
       campaign_budget_result:
           The result for the campaign budget mutate.
-      campaign_group_result:
-          The result for the campaign group mutate.
       campaign_result:
           The result for the campaign mutate.
       campaign_shared_set_result:
@@ -1677,17 +1518,16 @@ MutateOperationResponse = _reflection.GeneratedProtocolMessageType('MutateOperat
 _sym_db.RegisterMessage(MutateOperationResponse)
 
 
-DESCRIPTOR.has_options = True
-DESCRIPTOR._options = _descriptor._ParseOptions(descriptor_pb2.FileOptions(), _b('\n$com.google.ads.googleads.v0.servicesB\025GoogleAdsServiceProtoP\001ZHgoogle.golang.org/genproto/googleapis/ads/googleads/v0/services;services\242\002\003GAA\252\002 Google.Ads.GoogleAds.V0.Services\312\002 Google\\Ads\\GoogleAds\\V0\\Services'))
+DESCRIPTOR._options = None
 
 _GOOGLEADSSERVICE = _descriptor.ServiceDescriptor(
   name='GoogleAdsService',
   full_name='google.ads.googleads.v0.services.GoogleAdsService',
   file=DESCRIPTOR,
   index=0,
-  options=None,
-  serialized_start=14275,
-  serialized_end=14667,
+  serialized_options=None,
+  serialized_start=13184,
+  serialized_end=13576,
   methods=[
   _descriptor.MethodDescriptor(
     name='Search',
@@ -1696,7 +1536,7 @@ _GOOGLEADSSERVICE = _descriptor.ServiceDescriptor(
     containing_service=None,
     input_type=_SEARCHGOOGLEADSREQUEST,
     output_type=_SEARCHGOOGLEADSRESPONSE,
-    options=_descriptor._ParseOptions(descriptor_pb2.MethodOptions(), _b('\202\323\344\223\0023\"./v0/customers/{customer_id=*}/googleAds:search:\001*')),
+    serialized_options=_b('\202\323\344\223\0023\"./v0/customers/{customer_id=*}/googleAds:search:\001*'),
   ),
   _descriptor.MethodDescriptor(
     name='Mutate',
@@ -1705,7 +1545,7 @@ _GOOGLEADSSERVICE = _descriptor.ServiceDescriptor(
     containing_service=None,
     input_type=_MUTATEGOOGLEADSREQUEST,
     output_type=_MUTATEGOOGLEADSRESPONSE,
-    options=_descriptor._ParseOptions(descriptor_pb2.MethodOptions(), _b('\202\323\344\223\0023\"./v0/customers/{customer_id=*}/googleAds:mutate:\001*')),
+    serialized_options=_b('\202\323\344\223\0023\"./v0/customers/{customer_id=*}/googleAds:mutate:\001*'),
   ),
 ])
 _sym_db.RegisterServiceDescriptor(_GOOGLEADSSERVICE)

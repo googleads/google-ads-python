@@ -7,7 +7,6 @@ from google.protobuf import descriptor as _descriptor
 from google.protobuf import message as _message
 from google.protobuf import reflection as _reflection
 from google.protobuf import symbol_database as _symbol_database
-from google.protobuf import descriptor_pb2
 # @@protoc_insertion_point(imports)
 
 _sym_db = _symbol_database.Default()
@@ -19,7 +18,8 @@ DESCRIPTOR = _descriptor.FileDescriptor(
   name='google/ads/googleads_v0/proto/enums/device.proto',
   package='google.ads.googleads.v0.enums',
   syntax='proto3',
-  serialized_pb=_b('\n0google/ads/googleads_v0/proto/enums/device.proto\x12\x1dgoogle.ads.googleads.v0.enums\"Y\n\nDeviceEnum\"K\n\x06\x44\x65vice\x12\x0f\n\x0bUNSPECIFIED\x10\x00\x12\x0b\n\x07UNKNOWN\x10\x01\x12\n\n\x06MOBILE\x10\x02\x12\n\n\x06TABLET\x10\x03\x12\x0b\n\x07\x44\x45SKTOP\x10\x04\x42\xbc\x01\n!com.google.ads.googleads.v0.enumsB\x0b\x44\x65viceProtoP\x01ZBgoogle.golang.org/genproto/googleapis/ads/googleads/v0/enums;enums\xa2\x02\x03GAA\xaa\x02\x1dGoogle.Ads.GoogleAds.V0.Enums\xca\x02\x1dGoogle\\Ads\\GoogleAds\\V0\\Enumsb\x06proto3')
+  serialized_options=_b('\n!com.google.ads.googleads.v0.enumsB\013DeviceProtoP\001ZBgoogle.golang.org/genproto/googleapis/ads/googleads/v0/enums;enums\242\002\003GAA\252\002\035Google.Ads.GoogleAds.V0.Enums\312\002\035Google\\Ads\\GoogleAds\\V0\\Enums\352\002!Google::Ads::GoogleAds::V0::Enums'),
+  serialized_pb=_b('\n0google/ads/googleads_v0/proto/enums/device.proto\x12\x1dgoogle.ads.googleads.v0.enums\"Y\n\nDeviceEnum\"K\n\x06\x44\x65vice\x12\x0f\n\x0bUNSPECIFIED\x10\x00\x12\x0b\n\x07UNKNOWN\x10\x01\x12\n\n\x06MOBILE\x10\x02\x12\n\n\x06TABLET\x10\x03\x12\x0b\n\x07\x44\x45SKTOP\x10\x04\x42\xe0\x01\n!com.google.ads.googleads.v0.enumsB\x0b\x44\x65viceProtoP\x01ZBgoogle.golang.org/genproto/googleapis/ads/googleads/v0/enums;enums\xa2\x02\x03GAA\xaa\x02\x1dGoogle.Ads.GoogleAds.V0.Enums\xca\x02\x1dGoogle\\Ads\\GoogleAds\\V0\\Enums\xea\x02!Google::Ads::GoogleAds::V0::Enumsb\x06proto3')
 )
 
 
@@ -32,27 +32,27 @@ _DEVICEENUM_DEVICE = _descriptor.EnumDescriptor(
   values=[
     _descriptor.EnumValueDescriptor(
       name='UNSPECIFIED', index=0, number=0,
-      options=None,
+      serialized_options=None,
       type=None),
     _descriptor.EnumValueDescriptor(
       name='UNKNOWN', index=1, number=1,
-      options=None,
+      serialized_options=None,
       type=None),
     _descriptor.EnumValueDescriptor(
       name='MOBILE', index=2, number=2,
-      options=None,
+      serialized_options=None,
       type=None),
     _descriptor.EnumValueDescriptor(
       name='TABLET', index=3, number=3,
-      options=None,
+      serialized_options=None,
       type=None),
     _descriptor.EnumValueDescriptor(
       name='DESKTOP', index=4, number=4,
-      options=None,
+      serialized_options=None,
       type=None),
   ],
   containing_type=None,
-  options=None,
+  serialized_options=None,
   serialized_start=97,
   serialized_end=172,
 )
@@ -73,7 +73,7 @@ _DEVICEENUM = _descriptor.Descriptor(
   enum_types=[
     _DEVICEENUM_DEVICE,
   ],
-  options=None,
+  serialized_options=None,
   is_extendable=False,
   syntax='proto3',
   extension_ranges=[],
@@ -89,7 +89,7 @@ _sym_db.RegisterFileDescriptor(DESCRIPTOR)
 
 DeviceEnum = _reflection.GeneratedProtocolMessageType('DeviceEnum', (_message.Message,), dict(
   DESCRIPTOR = _DEVICEENUM,
-  __module__ = 'google.ads.google_ads.v0.proto.enums.device_pb2'
+  __module__ = 'google.ads.googleads_v0.proto.enums.device_pb2'
   ,
   __doc__ = """Container for enumeration of Google Ads devices available for targeting.
   """,
@@ -98,6 +98,5 @@ DeviceEnum = _reflection.GeneratedProtocolMessageType('DeviceEnum', (_message.Me
 _sym_db.RegisterMessage(DeviceEnum)
 
 
-DESCRIPTOR.has_options = True
-DESCRIPTOR._options = _descriptor._ParseOptions(descriptor_pb2.FileOptions(), _b('\n!com.google.ads.googleads.v0.enumsB\013DeviceProtoP\001ZBgoogle.golang.org/genproto/googleapis/ads/googleads/v0/enums;enums\242\002\003GAA\252\002\035Google.Ads.GoogleAds.V0.Enums\312\002\035Google\\Ads\\GoogleAds\\V0\\Enums'))
+DESCRIPTOR._options = None
 # @@protoc_insertion_point(module_scope)

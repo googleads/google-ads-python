@@ -11,7 +11,7 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
-"""This example gets Hotel-ads performance statistics for the 50 Hotel ad
+"""This example gets Hotel ads performance statistics for the 50 Hotel ad
 groups with the most impressions over the last 7 days.
 """
 

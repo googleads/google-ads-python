@@ -23,9 +23,10 @@ import json
 import google.api_core.grpc_helpers
 import google.auth.transport.requests
 import google.oauth2.credentials
-import google.ads.google_ads.errors
+from google.ads.google_ads import errors, util
 from google.ads.google_ads.v0.proto.errors import errors_pb2 as error_protos
 from google.protobuf.json_format import MessageToJson
+from google.protobuf import field_mask_pb2 as field_mask
 import grpc
 
 _logger = logging.getLogger(__name__)
@@ -38,6 +39,7 @@ _PROTO_TEMPLATE = '%s_pb2'
 _DEFAULT_TOKEN_URI = 'https://accounts.google.com/o/oauth2/token'
 _DEFAULT_VERSION = 'v0'
 
+util.patch_to_json_method(field_mask.FieldMask)
 
 class GoogleAdsClient(object):
     """Google Ads client used to configure settings and fetch services."""
@@ -303,7 +305,7 @@ class ExceptionInterceptor(grpc.UnaryUnaryClientInterceptor):
             if google_ads_failure:
                 request_id = self._get_request_id(trailing_metadata)
 
-                raise google.ads.google_ads.errors.GoogleAdsException(
+                raise errors.GoogleAdsException(
                     exception, response, google_ads_failure, request_id)
             else:
                 # Raise the original exception if not a GoogleAdsFailure.

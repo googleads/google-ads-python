@@ -27,3 +27,27 @@ class UtilsTest(TestCase):
         mock_obj = mock.Mock()
         util.patch_to_json_method(mock_obj)
         self.assertTrue(callable(mock_obj.ToJsonString))
+
+    def test_patch_to_json_returns_string(self):
+        mock_obj = mock.Mock()
+        util.patch_to_json_method(mock_obj)
+        self.assertIsInstance(mock_obj.ToJsonString(mock_obj), str)
+
+    def test_patch_to_json_stringifies_paths(self):
+        mock_obj = mock.Mock()
+        mock_obj.paths = ['hello', 'goodbye']
+        util.patch_to_json_method(mock_obj)
+        self.assertEqual(mock_obj.ToJsonString(mock_obj), 'hello,goodbye')
+
+    def test_patch_to_json_camel_cases_paths(self):
+        mock_obj = mock.Mock()
+        mock_obj.paths = ['hello', '_test_test_test']
+        util.patch_to_json_method(mock_obj)
+        self.assertEqual(mock_obj.ToJsonString(mock_obj), 'hello,TestTestTest')
+
+    def test_path_to_json_camel_cases_digits(self):
+        mock_obj = mock.Mock()
+        mock_obj.paths = ['hello', '_test_25_test']
+        util.patch_to_json_method(mock_obj)
+        self.assertEqual(mock_obj.ToJsonString(mock_obj), 'hello,Test25Test')
+

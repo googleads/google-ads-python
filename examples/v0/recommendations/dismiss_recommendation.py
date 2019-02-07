@@ -28,9 +28,6 @@ import google.ads.google_ads.client
 def main(client, customer_id, recommendation_id):
     recommendation_service = client.get_service('RecommendationService')
 
-    import pdb
-    pdb.set_trace()
-
     dismiss_recommendation_request = client.get_type(
         'DismissRecommendationRequest')
 

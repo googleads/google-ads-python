@@ -53,7 +53,7 @@ def main(client, customer_id, recommendation_id):
         sys.exit(1)
 
     print('Dismissed recommendation with resource name: "%s".'
-          % recommendation_response.results[0].resource_name)
+          % dismissal_response.results[0].resource_name)
 
 
 if __name__ == '__main__':

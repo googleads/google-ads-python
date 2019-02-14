@@ -13,19 +13,19 @@
 # limitations under the License.
 
 
-# TODO - Remove implementation of MonkeyPatching ToJsonString once issue
+# TODO - Remove patching ToJsonString once issue
 # has been addressed in the protobuf library.
 def patch_to_json_method(obj):
-    """Monkey patches an object's ToJsonString method.
+    """Patches an object's ToJsonString method.
 
     Args:
-        obj: An arbitrary object.isinstance
+        obj: An arbitrary object.
     """
     obj.ToJsonString = _patched_to_json_string
 
 
 def _patched_to_json_string(self):
-    """Converts an objects paths array to a camel cased string."""
+    """Converts all string in an objects paths array to camel case."""
     try:
         iter(self.paths)
     except TypeError:
@@ -46,6 +46,12 @@ def _snake_case_to_camel_case(path_name):
 
   This is a slightly modified version of the function defined in the protobuf
   library here: https://github.com/protocolbuffers/protobuf/blob/master/python/google/protobuf/internal/well_known_types.py#L506
+
+  Args:
+    path_name: a str, typically a path from a FieldMask messages "paths" list.
+
+  Returns:
+    A camel cased str.
   """
   result = []
   after_underscore = False

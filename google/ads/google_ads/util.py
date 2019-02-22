@@ -66,7 +66,7 @@ def _snake_case_to_camel_case(path_name):
       else:
         raise Error('Fail to print FieldMask to Json string: The '
                     'character after a "_" must be a lowercase letter '
-                    'in path name {0}.'.format(path_name))
+                    'or digit in path name {0}.'.format(path_name))
     elif c == '_':
       after_underscore = True
     else:

@@ -20,16 +20,22 @@ import yaml
 import json
 import logging
 from unittest import TestCase
+from importlib import import_module
 
 import grpc
 from pyfakefs.fake_filesystem_unittest import TestCase as FileTestCase
 
 import google.ads.google_ads.client
-import google.ads.google_ads.v0
-from google.ads.google_ads.v0.proto.services import google_ads_service_pb2
-from google.ads.google_ads.v0.proto.errors import errors_pb2 as error_protos
 from google.ads.google_ads.errors import GoogleAdsException
 
+latest_version = google.ads.google_ads.client._DEFAULT_VERSION
+valid_versions = google.ads.google_ads.client._VALID_API_VERSIONS
+
+errors = import_module('google.ads.google_ads.%s.proto.errors' % latest_version)
+error_protos = errors.errors_pb2
+services = import_module('google.ads.google_ads.%s.proto.services' %
+                         latest_version)
+google_ads_service_pb2 = services.google_ads_service_pb2
 
 class ModuleLevelTest(TestCase):
 
@@ -284,16 +290,18 @@ class GoogleAdsClientTest(FileTestCase):
 
     def test_get_service(self):
         # Retrieve service names for all defined service clients.
-        service_names = [
-            '%s%s' % (name.rsplit('ServiceClient')[0], 'Service')
-            for name in dir(google.ads.google_ads.v0)
-            if 'ServiceClient' in name]
+        for ver in valid_versions:
+            services_path = 'google.ads.google_ads.%s' % ver
+            service_names = [
+                '%s%s' % (name.rsplit('ServiceClient')[0], 'Service')
+                for name in dir(import_module(services_path))
+                if 'ServiceClient' in name]
 
-        client = self._create_test_client()
+            client = self._create_test_client()
 
-        # Iterate through retrieval of all service clients by name.
-        for service_name in service_names:
-            client.get_service(service_name)
+            # Iterate through retrieval of all service clients by name.
+            for service_name in service_names:
+                client.get_service(service_name)
 
     def test_get_service_custom_endpoint(self):
         service_name = 'GoogleAdsService'
@@ -328,13 +336,23 @@ class GoogleAdsClientTest(FileTestCase):
         self.assertRaises(ValueError, client.get_service, 'GoogleAdsService',
                           version='v0_bad')
 
-    def test_get_type(self):
-        # Retrieve names for all types defined in pb2 files.
-        type_names = google.ads.google_ads.v0.types.names
+    def test_get_service_with_version(self):
+        client = self._create_test_client()
+        try:
+            client.get_service('GoogleAdsService', version=latest_version)
+        except Exception:
+            self.fail('get_service with a valid version raised an error')
 
-        # Iterate through retrieval of all types by name.
-        for name in type_names:
-            google.ads.google_ads.client.GoogleAdsClient.get_type(name)
+    def test_get_type(self):
+        for ver in valid_versions:
+            # Retrieve names for all types defined in pb2 files.
+            type_path = 'google.ads.google_ads.%s.types' % ver
+            type_names = import_module(type_path).names
+
+            # Iterate through retrieval of all types by name.
+            for name in type_names:
+                google.ads.google_ads.client.GoogleAdsClient.get_type(
+                    name, version=ver)
 
     def test_get_type_not_found(self):
         self.assertRaises(
@@ -921,7 +939,7 @@ class ExceptionInterceptorTest(TestCase):
     def test_get_google_ads_failure(self):
         """Obtains the content of a google ads failure from metadata."""
         interceptor = self._create_test_interceptor()
-        mock_metadata = ((interceptor._FAILURE_KEY, self._MOCK_FAILURE_VALUE),)
+        mock_metadata = ((interceptor._failure_key, self._MOCK_FAILURE_VALUE),)
         result = interceptor._get_google_ads_failure(mock_metadata)
         self.assertIsInstance(result, error_protos.GoogleAdsFailure)
 
@@ -929,7 +947,7 @@ class ExceptionInterceptorTest(TestCase):
         """Returns none if the google ads failure cannot be decoded."""
         interceptor = self._create_test_interceptor()
         mock_failure_value = self._MOCK_FAILURE_VALUE + b'1234'
-        mock_metadata = ((interceptor._FAILURE_KEY, mock_failure_value),)
+        mock_metadata = ((interceptor._failure_key, mock_failure_value),)
         result = interceptor._get_google_ads_failure(mock_metadata)
         self.assertEqual(result, None)
 
@@ -955,7 +973,7 @@ class ExceptionInterceptorTest(TestCase):
                 return grpc.StatusCode.INVALID_ARGUMENT
 
             def trailing_metadata(self):
-                return ((interceptor._FAILURE_KEY, mock_error_message),)
+                return ((interceptor._failure_key, mock_error_message),)
 
             def exception(self):
                 return self

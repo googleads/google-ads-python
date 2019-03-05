@@ -17,14 +17,14 @@ import logging
 import logging.config
 import os
 import yaml
-from collections import namedtuple
 import json
+from collections import namedtuple
+from importlib import import_module
 
 import google.api_core.grpc_helpers
 import google.auth.transport.requests
 import google.oauth2.credentials
 import google.ads.google_ads.errors
-from google.ads.google_ads.v0.proto.errors import errors_pb2 as error_protos
 from google.protobuf.json_format import MessageToJson
 import grpc
 
@@ -36,8 +36,8 @@ _SERVICE_CLIENT_TEMPLATE = '%sClient'
 _SERVICE_GRPC_TRANSPORT_TEMPLATE = '%sGrpcTransport'
 _PROTO_TEMPLATE = '%s_pb2'
 _DEFAULT_TOKEN_URI = 'https://accounts.google.com/o/oauth2/token'
-_DEFAULT_VERSION = 'v0'
-
+_VALID_API_VERSIONS = ['v1', 'v0']
+_DEFAULT_VERSION = _VALID_API_VERSIONS[0]
 
 class GoogleAdsClient(object):
     """Google Ads client used to configure settings and fetch services."""
@@ -186,17 +186,18 @@ class GoogleAdsClient(object):
         Raises:
             AttributeError: If the specified name doesn't exist.
         """
-        version = _get_version(version)
+        api_module = _get_version(version)
 
         try:
-            service_client = getattr(version, _SERVICE_CLIENT_TEMPLATE % name)
+            service_client = getattr(api_module,
+                                     _SERVICE_CLIENT_TEMPLATE % name)
         except AttributeError:
             raise ValueError('Specified service "%s" does not exist in Google '
                              'Ads API %s.' % (name, version))
 
         try:
             service_transport_class = getattr(
-                version, _SERVICE_GRPC_TRANSPORT_TEMPLATE % name)
+                api_module, _SERVICE_GRPC_TRANSPORT_TEMPLATE % name)
         except AttributeError:
             raise ValueError('Grpc transport does not exist for the specified '
                              'service "%s".' % name)
@@ -212,7 +213,7 @@ class GoogleAdsClient(object):
             channel,
             MetadataInterceptor(self.developer_token, self.login_customer_id),
             LoggingInterceptor(self.logging_config, endpoint),
-            ExceptionInterceptor()
+            ExceptionInterceptor(version)
         )
 
         service_transport = service_transport_class(channel=channel)
@@ -223,11 +224,21 @@ class GoogleAdsClient(object):
 class ExceptionInterceptor(grpc.UnaryUnaryClientInterceptor):
     """An interceptor that wraps rpc exceptions."""
 
-    _FAILURE_KEY = 'google.ads.googleads.v0.errors.googleadsfailure-bin'
     _REQUEST_ID_KEY = 'request-id'
     # Codes that are retried upon by google.api_core.
     _RETRY_STATUS_CODES = (
         grpc.StatusCode.INTERNAL, grpc.StatusCode.RESOURCE_EXHAUSTED)
+
+    def __init__(self, version=_DEFAULT_VERSION):
+        """Initializes the ExceptionInterceptor
+
+        Args:
+            version: a str of the API version of the request.
+        """
+        self._version = version
+        self._failure_key = (
+            'google.ads.googleads.%s.errors.googleadsfailure-bin' % version)
+
 
     def _get_google_ads_failure(self, trailing_metadata):
         """Gets the Google Ads failure details if they exist.
@@ -243,9 +254,12 @@ class ExceptionInterceptor(grpc.UnaryUnaryClientInterceptor):
         """
         if trailing_metadata is not None:
             for kv in trailing_metadata:
-                if kv[0] == self._FAILURE_KEY:
+                if kv[0] == self._failure_key:
                     try:
-                        ga_failure = error_protos.GoogleAdsFailure()
+                        error_protos = import_module(
+                            'google.ads.google_ads.%s.proto.errors' %
+                                self._version)
+                        ga_failure = error_protos.errors_pb2.GoogleAdsFailure()
                         ga_failure.ParseFromString(kv[1])
                         return ga_failure
                     except google.protobuf.message.DecodeError:
@@ -664,10 +678,11 @@ def _get_version(name):
         A module associated with the given API version.
     """
     try:
-        version = getattr(google.ads.google_ads, name)
-    except AttributeError:
-        raise ValueError('Specified Google Ads API version "%s" does not exist.'
-                         % name)
+        version = import_module('google.ads.google_ads.%s' % name)
+    except ImportError:
+        raise ValueError('Specified Google Ads API version "%s" does not '
+                         'exist. Valid API versions are: "%s"' %
+                                 (name, '", "'.join(_VALID_API_VERSIONS)))
     return version
 
 

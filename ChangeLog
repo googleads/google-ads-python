@@ -1,3 +1,9 @@
+* 1.0.0:
+- Google Ads v1_0 release.
+- Move examples out of v0 directory.
+- Add dismiss_recommendations example.
+- Add get_hotel_ads_performance example.
+
 * 0.7.0:
 - Google Ads v0_7 release.
 - Address inconsistent exception handling in Exception and Logging

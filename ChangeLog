@@ -1,3 +1,6 @@
+* 1.0.1:
+- Fix bug in import path from issues #45 and #44.
+
 * 1.0.0:
 - Google Ads v1_0 release.
 - Move examples out of v0 directory.

@@ -16,7 +16,7 @@
 from __future__ import absolute_import
 
 
-from google.ads.google_ads.1 import types
+from google.ads.google_ads.v1 import types
 from google.ads.google_ads.v1.services import account_budget_proposal_service_client
 from google.ads.google_ads.v1.services import account_budget_service_client
 from google.ads.google_ads.v1.services import ad_group_ad_label_service_client

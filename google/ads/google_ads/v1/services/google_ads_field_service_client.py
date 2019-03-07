@@ -211,6 +211,9 @@ class GoogleAdsFieldServiceClient(object):
                     client_info=self._client_info,
                 )
 
+        if resource_name[:15] != "googleAdsFields/":
+            resource_name = "googleAdsFields/" + resource_name
+
         request = google_ads_field_service_pb2.GetGoogleAdsFieldRequest(
             resource_name=resource_name, )
         return self._inner_api_calls['get_google_ads_field'](

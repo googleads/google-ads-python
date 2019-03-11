@@ -20,7 +20,7 @@ DESCRIPTOR = _descriptor.FileDescriptor(
   package='google.ads.googleads.v1.enums',
   syntax='proto3',
   serialized_options=_b('\n!com.google.ads.googleads.v1.enumsB\022BiddingSourceProtoP\001ZBgoogle.golang.org/genproto/googleapis/ads/googleads/v1/enums;enums\242\002\003GAA\252\002\035Google.Ads.GoogleAds.V1.Enums\312\002\035Google\\Ads\\GoogleAds\\V1\\Enums\352\002!Google::Ads::GoogleAds::V1::Enums'),
-  serialized_pb=_b('\n8google/ads/googleads_v1/proto/enums/bidding_source.proto\x12\x1dgoogle.ads.googleads.v1.enums\x1a\x1cgoogle/api/annotations.proto\"}\n\x11\x42iddingSourceEnum\"h\n\rBiddingSource\x12\x0f\n\x0bUNSPECIFIED\x10\x00\x12\x0b\n\x07UNKNOWN\x10\x01\x12\x0b\n\x07\x41\x44GROUP\x10\x02\x12\r\n\tCRITERION\x10\x03\x12\x1d\n\x19\x43\x41MPAIGN_BIDDING_STRATEGY\x10\x05\x42\xe7\x01\n!com.google.ads.googleads.v1.enumsB\x12\x42iddingSourceProtoP\x01ZBgoogle.golang.org/genproto/googleapis/ads/googleads/v1/enums;enums\xa2\x02\x03GAA\xaa\x02\x1dGoogle.Ads.GoogleAds.V1.Enums\xca\x02\x1dGoogle\\Ads\\GoogleAds\\V1\\Enums\xea\x02!Google::Ads::GoogleAds::V1::Enumsb\x06proto3')
+  serialized_pb=_b('\n8google/ads/googleads_v1/proto/enums/bidding_source.proto\x12\x1dgoogle.ads.googleads.v1.enums\x1a\x1cgoogle/api/annotations.proto\"\x87\x01\n\x11\x42iddingSourceEnum\"r\n\rBiddingSource\x12\x0f\n\x0bUNSPECIFIED\x10\x00\x12\x0b\n\x07UNKNOWN\x10\x01\x12\x1d\n\x19\x43\x41MPAIGN_BIDDING_STRATEGY\x10\x05\x12\x0c\n\x08\x41\x44_GROUP\x10\x06\x12\x16\n\x12\x41\x44_GROUP_CRITERION\x10\x07\x42\xe7\x01\n!com.google.ads.googleads.v1.enumsB\x12\x42iddingSourceProtoP\x01ZBgoogle.golang.org/genproto/googleapis/ads/googleads/v1/enums;enums\xa2\x02\x03GAA\xaa\x02\x1dGoogle.Ads.GoogleAds.V1.Enums\xca\x02\x1dGoogle\\Ads\\GoogleAds\\V1\\Enums\xea\x02!Google::Ads::GoogleAds::V1::Enumsb\x06proto3')
   ,
   dependencies=[google_dot_api_dot_annotations__pb2.DESCRIPTOR,])
 
@@ -41,22 +41,22 @@ _BIDDINGSOURCEENUM_BIDDINGSOURCE = _descriptor.EnumDescriptor(
       serialized_options=None,
       type=None),
     _descriptor.EnumValueDescriptor(
-      name='ADGROUP', index=2, number=2,
+      name='CAMPAIGN_BIDDING_STRATEGY', index=2, number=5,
       serialized_options=None,
       type=None),
     _descriptor.EnumValueDescriptor(
-      name='CRITERION', index=3, number=3,
+      name='AD_GROUP', index=3, number=6,
       serialized_options=None,
       type=None),
     _descriptor.EnumValueDescriptor(
-      name='CAMPAIGN_BIDDING_STRATEGY', index=4, number=5,
+      name='AD_GROUP_CRITERION', index=4, number=7,
       serialized_options=None,
       type=None),
   ],
   containing_type=None,
   serialized_options=None,
-  serialized_start=142,
-  serialized_end=246,
+  serialized_start=143,
+  serialized_end=257,
 )
 _sym_db.RegisterEnumDescriptor(_BIDDINGSOURCEENUM_BIDDINGSOURCE)
 
@@ -81,8 +81,8 @@ _BIDDINGSOURCEENUM = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=121,
-  serialized_end=246,
+  serialized_start=122,
+  serialized_end=257,
 )
 
 _BIDDINGSOURCEENUM_BIDDINGSOURCE.containing_type = _BIDDINGSOURCEENUM

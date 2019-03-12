@@ -21,6 +21,8 @@ import sys
 from google.ads.google_ads.client import GoogleAdsClient
 
 _DEFAULT_PAGE_SIZE = 100
+_DEFAULT_LOCATION_ID = '1023191' # location ID for New York, NY
+_DEFAULT_LANGUAGE_ID = '1000' # language ID for English
 
 
 def main(client, customer_id, location_ids, language_id, keywords, page_url,
@@ -30,24 +32,30 @@ def main(client, customer_id, location_ids, language_id, keywords, page_url,
                          'but neither was specified.')
     keyword_plan_idea_service = client.get_service('KeywordPlanIdeaService',
                                                    version='v1')
+    language_constant_service = client.get_service('LanguageConstantService',
+                                                   version='v1')
+    geo_target_constant_service = client.get_service('GeoTargetConstantService',
+                                                     version='v1')
     keyword_protos = []
-
     for keyword in keywords:
         string_val = client.get_type('StringValue')
         string_val.value = keyword
         keyword_protos.append(string_val)
 
     location_protos = []
-    for location in location_ids:
-        string_val = client.get_type('StringValue')
-        string_val.value = location
-        location_protos.append(string_val)
+    for location_id in location_ids:
+        location = client.get_type('StringValue')
+        location.value = geo_target_constant_service.geo_target_constant_path(
+            location_id)
+        location_protos.append(location)
 
     keyword_plan_network = client.get_type(
         'KeywordPlanNetworkEnum').GOOGLE_SEARCH_AND_PARTNERS
 
     language_proto = client.get_type('StringValue')
-    language_proto.value = language_id
+    language_proto.value = language_constant_service.language_constant_path(
+        language_id)
+
     if (not len(keywords) and page_url):
         url_seed = client.get_type('UrlSeed', version='v1')
         url_seed.url.value = str(page_url)
@@ -84,24 +92,26 @@ if __name__ == '__main__':
                         required=True, help='The Google Ads customer ID.')
 
     # For more information on determining location IDs, see:
+    parser.add_argument('-k', '--keywords', type=six.text_type, required=False,
+                        help='Comma-separated starter keywords')
+
     # https://developers.google.com/adwords/api/docs/appendix/geotargeting.
     parser.add_argument('-l', '--location_ids', type=six.text_type,
-                        required=True, help='Comma-separated location criteria '
+                        required=False, help='Comma-separated location criteria '
                                             'IDs')
 
     # A language criterion ID. For example, specify 1000 for English. For more
     # information on determining this value, see the below link:
     # https://developers.google.com/adwords/api/docs/appendix/codes-formats#languages.
     parser.add_argument('-i', '--language_id', type=six.text_type,
-                        required=True, help='A language criterion ID')
-
-    parser.add_argument('-k', '--keywords', type=six.text_type, required=False,
-                        help='Comma-separated starter keywords')
+                        required=False, help='A language criterion ID')
 
     # Optional: Specify a URL string related to your business to generate ideas.
     parser.add_argument('-p', '--page_url', type=six.text_type, required=False,
                         help='A URL string related to your business')
 
+    parser.set_defaults(location_ids=_DEFAULT_LOCATION_ID,
+                        language_id=_DEFAULT_LANGUAGE_ID)
     args = parser.parse_args()
 
     main(google_ads_client, args.customer_id, args.location_ids.split(','),

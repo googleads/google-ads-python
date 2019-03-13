@@ -30,21 +30,16 @@ def main(client, customer_id, location_ids, language_id, keywords, page_url,
          page_size):
     keyword_plan_idea_service = client.get_service('KeywordPlanIdeaService',
                                                    version='v1')
-    language_constant_service = client.get_service('LanguageConstantService',
-                                                   version='v1')
-    geo_target_constant_service = client.get_service('GeoTargetConstantService',
-                                                     version='v1')
     keyword_competition_level_enum = (
         client.get_type('KeywordPlanCompetitionLevelEnum', version='v1')
             .KeywordPlanCompetitionLevel)
     keyword_plan_network = client.get_type(
         'KeywordPlanNetworkEnum', version='v1').GOOGLE_SEARCH_AND_PARTNERS
-    keyword_protos = build_keyword_protos(client, keywords)
-    location_protos = build_geo_target_protos(client, location_ids,
-                                              geo_target_constant_service)
-    language_proto = build_language_proto(client, language_id,
-                                          language_constant_service)
+    locations = map_locations_to_string_values(client, location_ids)
+    language = map_language_to_string_value(client, language_id)
 
+    # Only one of these values will be passed to the KeywordPlanIdeaService
+    # depending on whether keywords, a page_url or both were given.
     url_seed = None
     keyword_seed = None
     keyword_url_seed = None
@@ -57,15 +52,17 @@ def main(client, customer_id, location_ids, language_id, keywords, page_url,
         url_seed.url.value = page_url
     elif (len(keywords) and not page_url):
         keyword_seed = client.get_type('KeywordSeed', version='v1')
+        keyword_protos = map_keywords_to_string_values(client, keywords)
         keyword_seed.keywords.extend(keyword_protos)
     else:
         keyword_url_seed = client.get_type('KeywordAndUrlSeed', version='v1')
         keyword_url_seed.url.value = page_url
+        keyword_protos = map_keywords_to_string_values(client, keywords)
         keyword_url_seed.keywords.extend(keyword_protos)
 
     try:
         keyword_ideas = keyword_plan_idea_service.generate_keyword_ideas(
-            customer_id, language_proto, location_protos, keyword_plan_network,
+            customer_id, language, locations, keyword_plan_network,
             url_seed=url_seed, keyword_seed=keyword_seed,
             keyword_and_url_seed=keyword_url_seed)
 
@@ -88,7 +85,7 @@ def main(client, customer_id, location_ids, language_id, keywords, page_url,
         sys.exit(1)
 
 
-def build_keyword_protos(client, keywords):
+def map_keywords_to_string_values(client, keywords):
     keyword_protos = []
     for keyword in keywords:
         string_val = client.get_type('StringValue')
@@ -97,21 +94,22 @@ def build_keyword_protos(client, keywords):
     return keyword_protos
 
 
-def build_geo_target_protos(client, location_ids, geo_target_constant_service):
-    location_protos = []
+def map_locations_to_string_values(client, location_ids):
+    gtc_service = client.get_service('GeoTargetConstantService', version='v1')
+    locations = []
     for location_id in location_ids:
         location = client.get_type('StringValue')
-        location.value = geo_target_constant_service.geo_target_constant_path(
-            location_id)
-        location_protos.append(location)
-    return location_protos
+        location.value = gtc_service.geo_target_constant_path(location_id)
+        locations.append(location)
+    return locations
 
 
-def build_language_proto(client, language_id, language_constant_service):
-    language_proto = client.get_type('StringValue')
-    language_proto.value = language_constant_service.language_constant_path(
-        language_id)
-    return language_proto
+def map_language_to_string_value(client, language_id):
+    language = client.get_type('StringValue')
+    language.value = client.get_service('LanguageConstantService',
+                                        version='v1').language_constant_path(
+                                            language_id)
+    return language
 
 
 if __name__ == '__main__':

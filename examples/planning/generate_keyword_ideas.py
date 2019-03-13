@@ -21,13 +21,11 @@ import sys
 from google.ads.google_ads.client import GoogleAdsClient
 from google.ads.google_ads.errors import GoogleAdsException
 
-_DEFAULT_PAGE_SIZE = 100
 _DEFAULT_LOCATION_IDS = '1023191' # location ID for New York, NY
 _DEFAULT_LANGUAGE_ID = '1000' # language ID for English
 
 
-def main(client, customer_id, location_ids, language_id, keywords, page_url,
-         page_size):
+def main(client, customer_id, location_ids, language_id, keywords, page_url):
     keyword_plan_idea_service = client.get_service('KeywordPlanIdeaService',
                                                    version='v1')
     keyword_competition_level_enum = (
@@ -147,5 +145,4 @@ if __name__ == '__main__':
 
     main(google_ads_client, args.customer_id,
          filter(None, args.location_ids.split(',')), args.language_id,
-         filter(None, args.keywords.split(',')), args.page_url,
-         _DEFAULT_PAGE_SIZE)
+         filter(None, args.keywords.split(',')), args.page_url)

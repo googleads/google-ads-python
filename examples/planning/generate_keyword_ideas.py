@@ -21,8 +21,8 @@ import sys
 from google.ads.google_ads.client import GoogleAdsClient
 from google.ads.google_ads.errors import GoogleAdsException
 
-_DEFAULT_LOCATION_IDS = '1023191' # location ID for New York, NY
-_DEFAULT_LANGUAGE_ID = '1000' # language ID for English
+_DEFAULT_LOCATION_IDS = '1023191'  # location ID for New York, NY
+_DEFAULT_LANGUAGE_ID = '1000'  # language ID for English
 
 
 def main(client, customer_id, location_ids, language_id, keywords, page_url):
@@ -30,7 +30,7 @@ def main(client, customer_id, location_ids, language_id, keywords, page_url):
                                                    version='v1')
     keyword_competition_level_enum = (
         client.get_type('KeywordPlanCompetitionLevelEnum', version='v1')
-            .KeywordPlanCompetitionLevel)
+        .KeywordPlanCompetitionLevel)
     keyword_plan_network = client.get_type(
         'KeywordPlanNetworkEnum', version='v1').GOOGLE_SEARCH_AND_PARTNERS
     locations = map_locations_to_string_values(client, location_ids)

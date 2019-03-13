@@ -34,8 +34,11 @@ def main(client, customer_id, location_ids, language_id, keywords, page_url,
                                                    version='v1')
     geo_target_constant_service = client.get_service('GeoTargetConstantService',
                                                      version='v1')
+    keyword_competition_level_enum = (
+        client.get_type('KeywordPlanCompetitionLevelEnum', version='v1')
+            .KeywordPlanCompetitionLevel)
     keyword_plan_network = client.get_type(
-        'KeywordPlanNetworkEnum').GOOGLE_SEARCH_AND_PARTNERS
+        'KeywordPlanNetworkEnum', version='v1').GOOGLE_SEARCH_AND_PARTNERS
     keyword_protos = build_keyword_protos(client, keywords)
     location_protos = build_geo_target_protos(client, location_ids,
                                               geo_target_constant_service)
@@ -67,11 +70,13 @@ def main(client, customer_id, location_ids, language_id, keywords, page_url,
             keyword_and_url_seed=keyword_url_seed)
 
         for idea in keyword_ideas.results:
+            competition_value = keyword_competition_level_enum.Name(
+                idea.keyword_idea_metrics.competition)
             print('Keyword idea text "%s" has %d average monthly searches and '
                   '"%s" competition.\n' % (
                       idea.text.value,
                       idea.keyword_idea_metrics.avg_monthly_searches.value,
-                      idea.keyword_idea_metrics.competition))
+                      competition_value))
     except GoogleAdsException as ex:
         print('Request with ID "%s" failed with status "%s" and includes the '
               'following errors:' % (ex.request_id, ex.error.code().name))

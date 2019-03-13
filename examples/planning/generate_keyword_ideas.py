@@ -19,6 +19,7 @@ import argparse
 import six
 import sys
 from google.ads.google_ads.client import GoogleAdsClient
+from google.ads.google_ads.errors import GoogleAdsException
 
 _DEFAULT_PAGE_SIZE = 100
 _DEFAULT_LOCATION_IDS = '1023191' # location ID for New York, NY
@@ -27,9 +28,6 @@ _DEFAULT_LANGUAGE_ID = '1000' # language ID for English
 
 def main(client, customer_id, location_ids, language_id, keywords, page_url,
          page_size):
-    if (not len(keywords) and not page_url):
-        raise ValueError('At least one of keywords or page URL is required, '
-                         'but neither was specified.')
     keyword_plan_idea_service = client.get_service('KeywordPlanIdeaService',
                                                    version='v1')
     language_constant_service = client.get_service('LanguageConstantService',
@@ -48,7 +46,10 @@ def main(client, customer_id, location_ids, language_id, keywords, page_url,
     keyword_seed = None
     keyword_url_seed = None
 
-    if (not len(keywords) and page_url):
+    if (not len(keywords) and not page_url):
+        raise ValueError('At least one of keywords or page URL is required, '
+                         'but neither was specified.')
+    elif (not len(keywords) and page_url):
         url_seed = client.get_type('UrlSeed', version='v1')
         url_seed.url.value = page_url
     elif (len(keywords) and not page_url):
@@ -59,10 +60,27 @@ def main(client, customer_id, location_ids, language_id, keywords, page_url,
         keyword_url_seed.url.value = page_url
         keyword_url_seed.keywords.extend(keyword_protos)
 
-    keyword_ideas = keyword_plan_idea_service.generate_keyword_ideas(
-        customer_id, language_proto, location_protos, keyword_plan_network,
-        url_seed=url_seed, keyword_seed=keyword_seed,
-        keyword_and_url_seed=keyword_url_seed)
+    try:
+        keyword_ideas = keyword_plan_idea_service.generate_keyword_ideas(
+            customer_id, language_proto, location_protos, keyword_plan_network,
+            url_seed=url_seed, keyword_seed=keyword_seed,
+            keyword_and_url_seed=keyword_url_seed)
+
+        for idea in keyword_ideas.results:
+            print('Keyword idea text "%s" has %d average monthly searches and '
+                  '"%s" competition.\n' % (
+                      idea.text.value,
+                      idea.keyword_idea_metrics.avg_monthly_searches.value,
+                      idea.keyword_idea_metrics.competition))
+    except GoogleAdsException as ex:
+        print('Request with ID "%s" failed with status "%s" and includes the '
+              'following errors:' % (ex.request_id, ex.error.code().name))
+        for error in ex.failure.errors:
+            print('\tError with message "%s".' % error.message)
+            if error.location:
+                for field_path_element in error.location.field_path_elements:
+                    print('\t\tOn field: %s' % field_path_element.field_name)
+        sys.exit(1)
 
 
 def build_keyword_protos(client, keywords):

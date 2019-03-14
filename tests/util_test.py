@@ -18,9 +18,8 @@ from unittest import TestCase
 
 from google.ads.google_ads.util import ResourceName
 
-class ResourceName(TestCase):
-    def test_format_composite_resource_name(self):
-        self.assertEqual(
-            ResourceName.format_composite_resource_name('test', 'test'),
-            'test~test')
+class ResourceNameTest(TestCase):
+    def test_format_composite(self):
+        composite = ResourceName.format_composite('test', 'test')
+        self.assertEqual(composite, 'test~test')
 

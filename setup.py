@@ -22,7 +22,7 @@ install_requires = [
     'google-api-core >= 1.7.0, < 2.0.0',
     'googleapis-common-protos >= 1.5.8, < 2.0.0',
     'grpcio >= 1.18.0, < 2.0.0',
-    'PyYAML >= 4.2b1, < 5.0',
+    'PyYAML >= 5.1, < 6.0',
 ]
 
 tests_require = [

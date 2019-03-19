@@ -123,7 +123,7 @@ if __name__ == '__main__':
                         required=True, help='The Google Ads customer ID.')
     # For more information on determining location IDs, see:
     parser.add_argument('-k', '--keywords', type=six.text_type, required=False,
-                        help='Comma-separated starter keywords')
+                        help='Comma-delimited starter keywords')
     # https://developers.google.com/adwords/api/docs/appendix/geotargeting.
     parser.add_argument('-l', '--location_ids', type=six.text_type,
                         required=False, help='Comma-delimited list of location '

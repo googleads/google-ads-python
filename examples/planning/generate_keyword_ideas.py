@@ -42,7 +42,7 @@ def main(client, customer_id, location_ids, language_id, keywords, page_url):
     keyword_seed = None
     keyword_url_seed = None
 
-    if (not len(keywords) and not page_url):
+    if (not (len(keywords) or page_url)):
         raise ValueError('At least one of keywords or page URL is required, '
                          'but neither was specified.')
     elif (not len(keywords) and page_url):

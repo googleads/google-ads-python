@@ -11,10 +11,7 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
-"""Demonstrates how to create a shared list of negative broad match keywords.
-
-Note that the keywords will be attached to the specified campaign.
-"""
+"""Demonstrates how to create a sitelink extension."""
 
 from __future__ import absolute_import
 

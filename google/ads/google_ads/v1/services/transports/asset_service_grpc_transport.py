@@ -16,12 +16,12 @@
 
 import google.api_core.grpc_helpers
 
-from google.ads.google_ads.v1.proto.services import campaign_criterion_simulation_service_pb2_grpc
+from google.ads.google_ads.v1.proto.services import asset_service_pb2_grpc
 
 
-class CampaignCriterionSimulationServiceGrpcTransport(object):
+class AssetServiceGrpcTransport(object):
     """gRPC transport class providing stubs for
-    google.ads.googleads.v1.services CampaignCriterionSimulationService API.
+    google.ads.googleads.v1.services AssetService API.
 
     The transport provides access to the raw gRPC stubs,
     which can be used to take advantage of advanced
@@ -67,9 +67,8 @@ class CampaignCriterionSimulationServiceGrpcTransport(object):
         # gRPC uses objects called "stubs" that are bound to the
         # channel and provide a basic method for each RPC.
         self._stubs = {
-            'campaign_criterion_simulation_service_stub':
-            campaign_criterion_simulation_service_pb2_grpc.
-            CampaignCriterionSimulationServiceStub(channel),
+            'asset_service_stub':
+            asset_service_pb2_grpc.AssetServiceStub(channel),
         }
 
     @classmethod
@@ -105,15 +104,27 @@ class CampaignCriterionSimulationServiceGrpcTransport(object):
         return self._channel
 
     @property
-    def get_campaign_criterion_simulation(self):
-        """Return the gRPC stub for :meth:`CampaignCriterionSimulationServiceClient.get_campaign_criterion_simulation`.
+    def get_asset(self):
+        """Return the gRPC stub for :meth:`AssetServiceClient.get_asset`.
 
-        Returns the requested campaign criterion simulation in full detail.
+        Returns the requested asset in full detail.
 
         Returns:
             Callable: A callable which accepts the appropriate
                 deserialized request object and returns a
                 deserialized response object.
         """
-        return self._stubs[
-            'campaign_criterion_simulation_service_stub'].GetCampaignCriterionSimulation
+        return self._stubs['asset_service_stub'].GetAsset
+
+    @property
+    def mutate_assets(self):
+        """Return the gRPC stub for :meth:`AssetServiceClient.mutate_assets`.
+
+        Creates assets. Operation statuses are returned.
+
+        Returns:
+            Callable: A callable which accepts the appropriate
+                deserialized request object and returns a
+                deserialized response object.
+        """
+        return self._stubs['asset_service_stub'].MutateAssets

@@ -128,7 +128,7 @@ SharedSet = _reflection.GeneratedProtocolMessageType('SharedSet', (_message.Mess
           The ID of this shared set. Read only.
       type:
           The type of this shared set: each shared set holds only a
-          single kind of entity. Required. Immutable.
+          single kind of resource. Required. Immutable.
       name:
           The name of this shared set. Required. Shared Sets must have
           names that are unique among active shared sets of the same

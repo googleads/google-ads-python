@@ -65,13 +65,19 @@ class ShoppingPerformanceViewServiceClient(object):
     from_service_account_json = from_service_account_file
 
     @classmethod
-    def shopping_performance_view_path(cls, customer,
-                                       shopping_performance_view):
+    def shopping_performance_view_path(cls, customer):
         """Return a fully-qualified shopping_performance_view string."""
         return google.api_core.path_template.expand(
-            'customers/{customer}/shoppingPerformanceView/{shopping_performance_view}',
+            'customers/{customer}/shoppingPerformanceView',
             customer=customer,
-            shopping_performance_view=shopping_performance_view,
+        )
+
+    @classmethod
+    def customer_path(cls, customer):
+        """Return a fully-qualified customer string."""
+        return google.api_core.path_template.expand(
+            'customers/{customer}',
+            customer=customer,
         )
 
     def __init__(self,

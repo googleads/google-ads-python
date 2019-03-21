@@ -20,7 +20,7 @@ DESCRIPTOR = _descriptor.FileDescriptor(
   package='google.ads.googleads.v1.enums',
   syntax='proto3',
   serialized_options=_b('\n!com.google.ads.googleads.v1.enumsB\027RecommendationTypeProtoP\001ZBgoogle.golang.org/genproto/googleapis/ads/googleads/v1/enums;enums\242\002\003GAA\252\002\035Google.Ads.GoogleAds.V1.Enums\312\002\035Google\\Ads\\GoogleAds\\V1\\Enums\352\002!Google::Ads::GoogleAds::V1::Enums'),
-  serialized_pb=_b('\n=google/ads/googleads_v1/proto/enums/recommendation_type.proto\x12\x1dgoogle.ads.googleads.v1.enums\x1a\x1cgoogle/api/annotations.proto\"\x9f\x02\n\x16RecommendationTypeEnum\"\x84\x02\n\x12RecommendationType\x12\x0f\n\x0bUNSPECIFIED\x10\x00\x12\x0b\n\x07UNKNOWN\x10\x01\x12\x13\n\x0f\x43\x41MPAIGN_BUDGET\x10\x02\x12\x0b\n\x07KEYWORD\x10\x03\x12\x0b\n\x07TEXT_AD\x10\x04\x12\x15\n\x11TARGET_CPA_OPT_IN\x10\x05\x12\x1f\n\x1bMAXIMIZE_CONVERSIONS_OPT_IN\x10\x06\x12\x17\n\x13\x45NHANCED_CPC_OPT_IN\x10\x07\x12\x1a\n\x16SEARCH_PARTNERS_OPT_IN\x10\x08\x12\x1a\n\x16MAXIMIZE_CLICKS_OPT_IN\x10\t\x12\x18\n\x14OPTIMIZE_AD_ROTATION\x10\nB\xec\x01\n!com.google.ads.googleads.v1.enumsB\x17RecommendationTypeProtoP\x01ZBgoogle.golang.org/genproto/googleapis/ads/googleads/v1/enums;enums\xa2\x02\x03GAA\xaa\x02\x1dGoogle.Ads.GoogleAds.V1.Enums\xca\x02\x1dGoogle\\Ads\\GoogleAds\\V1\\Enums\xea\x02!Google::Ads::GoogleAds::V1::Enumsb\x06proto3')
+  serialized_pb=_b('\n=google/ads/googleads_v1/proto/enums/recommendation_type.proto\x12\x1dgoogle.ads.googleads.v1.enums\x1a\x1cgoogle/api/annotations.proto\"\xcf\x02\n\x16RecommendationTypeEnum\"\xb4\x02\n\x12RecommendationType\x12\x0f\n\x0bUNSPECIFIED\x10\x00\x12\x0b\n\x07UNKNOWN\x10\x01\x12\x13\n\x0f\x43\x41MPAIGN_BUDGET\x10\x02\x12\x0b\n\x07KEYWORD\x10\x03\x12\x0b\n\x07TEXT_AD\x10\x04\x12\x15\n\x11TARGET_CPA_OPT_IN\x10\x05\x12\x1f\n\x1bMAXIMIZE_CONVERSIONS_OPT_IN\x10\x06\x12\x17\n\x13\x45NHANCED_CPC_OPT_IN\x10\x07\x12\x1a\n\x16SEARCH_PARTNERS_OPT_IN\x10\x08\x12\x1a\n\x16MAXIMIZE_CLICKS_OPT_IN\x10\t\x12\x18\n\x14OPTIMIZE_AD_ROTATION\x10\n\x12\x16\n\x12KEYWORD_MATCH_TYPE\x10\x0e\x12\x16\n\x12MOVE_UNUSED_BUDGET\x10\x0f\x42\xec\x01\n!com.google.ads.googleads.v1.enumsB\x17RecommendationTypeProtoP\x01ZBgoogle.golang.org/genproto/googleapis/ads/googleads/v1/enums;enums\xa2\x02\x03GAA\xaa\x02\x1dGoogle.Ads.GoogleAds.V1.Enums\xca\x02\x1dGoogle\\Ads\\GoogleAds\\V1\\Enums\xea\x02!Google::Ads::GoogleAds::V1::Enumsb\x06proto3')
   ,
   dependencies=[google_dot_api_dot_annotations__pb2.DESCRIPTOR,])
 
@@ -76,11 +76,19 @@ _RECOMMENDATIONTYPEENUM_RECOMMENDATIONTYPE = _descriptor.EnumDescriptor(
       name='OPTIMIZE_AD_ROTATION', index=10, number=10,
       serialized_options=None,
       type=None),
+    _descriptor.EnumValueDescriptor(
+      name='KEYWORD_MATCH_TYPE', index=11, number=14,
+      serialized_options=None,
+      type=None),
+    _descriptor.EnumValueDescriptor(
+      name='MOVE_UNUSED_BUDGET', index=12, number=15,
+      serialized_options=None,
+      type=None),
   ],
   containing_type=None,
   serialized_options=None,
   serialized_start=154,
-  serialized_end=414,
+  serialized_end=462,
 )
 _sym_db.RegisterEnumDescriptor(_RECOMMENDATIONTYPEENUM_RECOMMENDATIONTYPE)
 
@@ -106,7 +114,7 @@ _RECOMMENDATIONTYPEENUM = _descriptor.Descriptor(
   oneofs=[
   ],
   serialized_start=127,
-  serialized_end=414,
+  serialized_end=462,
 )
 
 _RECOMMENDATIONTYPEENUM_RECOMMENDATIONTYPE.containing_type = _RECOMMENDATIONTYPEENUM

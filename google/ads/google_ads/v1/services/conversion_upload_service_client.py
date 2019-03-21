@@ -218,3 +218,63 @@ class ConversionUploadServiceClient(object):
         )
         return self._inner_api_calls['upload_click_conversions'](
             request, retry=retry, timeout=timeout, metadata=metadata)
+
+    def upload_call_conversions(
+            self,
+            customer_id,
+            conversions,
+            partial_failure=None,
+            retry=google.api_core.gapic_v1.method.DEFAULT,
+            timeout=google.api_core.gapic_v1.method.DEFAULT,
+            metadata=None):
+        """
+        Processes the given call conversions.
+
+        Args:
+            customer_id (str): The ID of the customer performing the upload.
+            conversions (list[Union[dict, ~google.ads.googleads_v1.types.CallConversion]]): The conversions that are being uploaded.
+
+                If a dict is provided, it must be of the same form as the protobuf
+                message :class:`~google.ads.googleads_v1.types.CallConversion`
+            partial_failure (bool): If true, successful operations will be carried out and invalid
+                operations will return errors. If false, all operations will be carried
+                out in one transaction if and only if they are all valid.
+                This should always be set to true.
+            retry (Optional[google.api_core.retry.Retry]):  A retry object used
+                to retry requests. If ``None`` is specified, requests will not
+                be retried.
+            timeout (Optional[float]): The amount of time, in seconds, to wait
+                for the request to complete. Note that if ``retry`` is
+                specified, the timeout applies to each individual attempt.
+            metadata (Optional[Sequence[Tuple[str, str]]]): Additional metadata
+                that is provided to the method.
+
+        Returns:
+            A :class:`~google.ads.googleads_v1.types.UploadCallConversionsResponse` instance.
+
+        Raises:
+            google.api_core.exceptions.GoogleAPICallError: If the request
+                    failed for any reason.
+            google.api_core.exceptions.RetryError: If the request failed due
+                    to a retryable error and retry attempts failed.
+            ValueError: If the parameters are invalid.
+        """
+        # Wrap the transport method to add retry and timeout logic.
+        if 'upload_call_conversions' not in self._inner_api_calls:
+            self._inner_api_calls[
+                'upload_call_conversions'] = google.api_core.gapic_v1.method.wrap_method(
+                    self.transport.upload_call_conversions,
+                    default_retry=self.
+                    _method_configs['UploadCallConversions'].retry,
+                    default_timeout=self.
+                    _method_configs['UploadCallConversions'].timeout,
+                    client_info=self._client_info,
+                )
+
+        request = conversion_upload_service_pb2.UploadCallConversionsRequest(
+            customer_id=customer_id,
+            conversions=conversions,
+            partial_failure=partial_failure,
+        )
+        return self._inner_api_calls['upload_call_conversions'](
+            request, retry=retry, timeout=timeout, metadata=metadata)

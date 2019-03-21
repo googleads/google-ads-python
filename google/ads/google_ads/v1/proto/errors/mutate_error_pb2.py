@@ -20,7 +20,7 @@ DESCRIPTOR = _descriptor.FileDescriptor(
   package='google.ads.googleads.v1.errors',
   syntax='proto3',
   serialized_options=_b('\n\"com.google.ads.googleads.v1.errorsB\020MutateErrorProtoP\001ZDgoogle.golang.org/genproto/googleapis/ads/googleads/v1/errors;errors\242\002\003GAA\252\002\036Google.Ads.GoogleAds.V1.Errors\312\002\036Google\\Ads\\GoogleAds\\V1\\Errors\352\002\"Google::Ads::GoogleAds::V1::Errors'),
-  serialized_pb=_b('\n7google/ads/googleads_v1/proto/errors/mutate_error.proto\x12\x1egoogle.ads.googleads.v1.errors\x1a\x1cgoogle/api/annotations.proto\"\xd1\x01\n\x0fMutateErrorEnum\"\xbd\x01\n\x0bMutateError\x12\x0f\n\x0bUNSPECIFIED\x10\x00\x12\x0b\n\x07UNKNOWN\x10\x01\x12\x16\n\x12RESOURCE_NOT_FOUND\x10\x03\x12!\n\x1dID_EXISTS_IN_MULTIPLE_MUTATES\x10\x07\x12\x1d\n\x19INCONSISTENT_FIELD_VALUES\x10\x08\x12\x16\n\x12MUTATE_NOT_ALLOWED\x10\t\x12\x1e\n\x1aRESOURCE_NOT_IN_GOOGLE_ADS\x10\nB\xeb\x01\n\"com.google.ads.googleads.v1.errorsB\x10MutateErrorProtoP\x01ZDgoogle.golang.org/genproto/googleapis/ads/googleads/v1/errors;errors\xa2\x02\x03GAA\xaa\x02\x1eGoogle.Ads.GoogleAds.V1.Errors\xca\x02\x1eGoogle\\Ads\\GoogleAds\\V1\\Errors\xea\x02\"Google::Ads::GoogleAds::V1::Errorsb\x06proto3')
+  serialized_pb=_b('\n7google/ads/googleads_v1/proto/errors/mutate_error.proto\x12\x1egoogle.ads.googleads.v1.errors\x1a\x1cgoogle/api/annotations.proto\"\xee\x01\n\x0fMutateErrorEnum\"\xda\x01\n\x0bMutateError\x12\x0f\n\x0bUNSPECIFIED\x10\x00\x12\x0b\n\x07UNKNOWN\x10\x01\x12\x16\n\x12RESOURCE_NOT_FOUND\x10\x03\x12!\n\x1dID_EXISTS_IN_MULTIPLE_MUTATES\x10\x07\x12\x1d\n\x19INCONSISTENT_FIELD_VALUES\x10\x08\x12\x16\n\x12MUTATE_NOT_ALLOWED\x10\t\x12\x1e\n\x1aRESOURCE_NOT_IN_GOOGLE_ADS\x10\n\x12\x1b\n\x17RESOURCE_ALREADY_EXISTS\x10\x0b\x42\xeb\x01\n\"com.google.ads.googleads.v1.errorsB\x10MutateErrorProtoP\x01ZDgoogle.golang.org/genproto/googleapis/ads/googleads/v1/errors;errors\xa2\x02\x03GAA\xaa\x02\x1eGoogle.Ads.GoogleAds.V1.Errors\xca\x02\x1eGoogle\\Ads\\GoogleAds\\V1\\Errors\xea\x02\"Google::Ads::GoogleAds::V1::Errorsb\x06proto3')
   ,
   dependencies=[google_dot_api_dot_annotations__pb2.DESCRIPTOR,])
 
@@ -60,11 +60,15 @@ _MUTATEERRORENUM_MUTATEERROR = _descriptor.EnumDescriptor(
       name='RESOURCE_NOT_IN_GOOGLE_ADS', index=6, number=10,
       serialized_options=None,
       type=None),
+    _descriptor.EnumValueDescriptor(
+      name='RESOURCE_ALREADY_EXISTS', index=7, number=11,
+      serialized_options=None,
+      type=None),
   ],
   containing_type=None,
   serialized_options=None,
   serialized_start=142,
-  serialized_end=331,
+  serialized_end=360,
 )
 _sym_db.RegisterEnumDescriptor(_MUTATEERRORENUM_MUTATEERROR)
 
@@ -90,7 +94,7 @@ _MUTATEERRORENUM = _descriptor.Descriptor(
   oneofs=[
   ],
   serialized_start=122,
-  serialized_end=331,
+  serialized_end=360,
 )
 
 _MUTATEERRORENUM_MUTATEERROR.containing_type = _MUTATEERRORENUM

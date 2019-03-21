@@ -20,7 +20,7 @@ DESCRIPTOR = _descriptor.FileDescriptor(
   package='google.ads.googleads.v1.enums',
   syntax='proto3',
   serialized_options=_b('\n!com.google.ads.googleads.v1.enumsB\020AdGroupTypeProtoP\001ZBgoogle.golang.org/genproto/googleapis/ads/googleads/v1/enums;enums\242\002\003GAA\252\002\035Google.Ads.GoogleAds.V1.Enums\312\002\035Google\\Ads\\GoogleAds\\V1\\Enums\352\002!Google::Ads::GoogleAds::V1::Enums'),
-  serialized_pb=_b('\n7google/ads/googleads_v1/proto/enums/ad_group_type.proto\x12\x1dgoogle.ads.googleads.v1.enums\x1a\x1cgoogle/api/annotations.proto\"\xb4\x02\n\x0f\x41\x64GroupTypeEnum\"\xa0\x02\n\x0b\x41\x64GroupType\x12\x0f\n\x0bUNSPECIFIED\x10\x00\x12\x0b\n\x07UNKNOWN\x10\x01\x12\x13\n\x0fSEARCH_STANDARD\x10\x02\x12\x14\n\x10\x44ISPLAY_STANDARD\x10\x03\x12\x18\n\x14SHOPPING_PRODUCT_ADS\x10\x04\x12\r\n\tHOTEL_ADS\x10\x06\x12\x16\n\x12SHOPPING_SMART_ADS\x10\x07\x12\x10\n\x0cVIDEO_BUMPER\x10\x08\x12\x1d\n\x19VIDEO_TRUE_VIEW_IN_STREAM\x10\t\x12\x1e\n\x1aVIDEO_TRUE_VIEW_IN_DISPLAY\x10\n\x12!\n\x1dVIDEO_NON_SKIPPABLE_IN_STREAM\x10\x0b\x12\x13\n\x0fVIDEO_OUTSTREAM\x10\x0c\x42\xe5\x01\n!com.google.ads.googleads.v1.enumsB\x10\x41\x64GroupTypeProtoP\x01ZBgoogle.golang.org/genproto/googleapis/ads/googleads/v1/enums;enums\xa2\x02\x03GAA\xaa\x02\x1dGoogle.Ads.GoogleAds.V1.Enums\xca\x02\x1dGoogle\\Ads\\GoogleAds\\V1\\Enums\xea\x02!Google::Ads::GoogleAds::V1::Enumsb\x06proto3')
+  serialized_pb=_b('\n7google/ads/googleads_v1/proto/enums/ad_group_type.proto\x12\x1dgoogle.ads.googleads.v1.enums\x1a\x1cgoogle/api/annotations.proto\"\xcc\x02\n\x0f\x41\x64GroupTypeEnum\"\xb8\x02\n\x0b\x41\x64GroupType\x12\x0f\n\x0bUNSPECIFIED\x10\x00\x12\x0b\n\x07UNKNOWN\x10\x01\x12\x13\n\x0fSEARCH_STANDARD\x10\x02\x12\x14\n\x10\x44ISPLAY_STANDARD\x10\x03\x12\x18\n\x14SHOPPING_PRODUCT_ADS\x10\x04\x12\r\n\tHOTEL_ADS\x10\x06\x12\x16\n\x12SHOPPING_SMART_ADS\x10\x07\x12\x10\n\x0cVIDEO_BUMPER\x10\x08\x12\x1d\n\x19VIDEO_TRUE_VIEW_IN_STREAM\x10\t\x12\x1e\n\x1aVIDEO_TRUE_VIEW_IN_DISPLAY\x10\n\x12!\n\x1dVIDEO_NON_SKIPPABLE_IN_STREAM\x10\x0b\x12\x13\n\x0fVIDEO_OUTSTREAM\x10\x0c\x12\x16\n\x12SEARCH_DYNAMIC_ADS\x10\rB\xe5\x01\n!com.google.ads.googleads.v1.enumsB\x10\x41\x64GroupTypeProtoP\x01ZBgoogle.golang.org/genproto/googleapis/ads/googleads/v1/enums;enums\xa2\x02\x03GAA\xaa\x02\x1dGoogle.Ads.GoogleAds.V1.Enums\xca\x02\x1dGoogle\\Ads\\GoogleAds\\V1\\Enums\xea\x02!Google::Ads::GoogleAds::V1::Enumsb\x06proto3')
   ,
   dependencies=[google_dot_api_dot_annotations__pb2.DESCRIPTOR,])
 
@@ -80,11 +80,15 @@ _ADGROUPTYPEENUM_ADGROUPTYPE = _descriptor.EnumDescriptor(
       name='VIDEO_OUTSTREAM', index=11, number=12,
       serialized_options=None,
       type=None),
+    _descriptor.EnumValueDescriptor(
+      name='SEARCH_DYNAMIC_ADS', index=12, number=13,
+      serialized_options=None,
+      type=None),
   ],
   containing_type=None,
   serialized_options=None,
   serialized_start=141,
-  serialized_end=429,
+  serialized_end=453,
 )
 _sym_db.RegisterEnumDescriptor(_ADGROUPTYPEENUM_ADGROUPTYPE)
 
@@ -110,7 +114,7 @@ _ADGROUPTYPEENUM = _descriptor.Descriptor(
   oneofs=[
   ],
   serialized_start=121,
-  serialized_end=429,
+  serialized_end=453,
 )
 
 _ADGROUPTYPEENUM_ADGROUPTYPE.containing_type = _ADGROUPTYPEENUM

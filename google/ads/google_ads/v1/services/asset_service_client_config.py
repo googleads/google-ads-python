@@ -1,7 +1,6 @@
 config = {
     "interfaces": {
-        "google.ads.googleads.v1.services.CampaignCriterionSimulationService":
-        {
+        "google.ads.googleads.v1.services.AssetService": {
             "retry_codes": {
                 "idempotent": ["DEADLINE_EXCEEDED", "UNAVAILABLE"],
                 "non_idempotent": []
@@ -18,9 +17,14 @@ config = {
                 }
             },
             "methods": {
-                "GetCampaignCriterionSimulation": {
+                "GetAsset": {
                     "timeout_millis": 60000,
                     "retry_codes_name": "idempotent",
+                    "retry_params_name": "default"
+                },
+                "MutateAssets": {
+                    "timeout_millis": 60000,
+                    "retry_codes_name": "non_idempotent",
                     "retry_params_name": "default"
                 }
             }

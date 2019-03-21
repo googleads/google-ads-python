@@ -551,7 +551,7 @@ MutateJobResult = _reflection.GeneratedProtocolMessageType('MutateJobResult', (_
   
   Attributes:
       operation_index:
-          Index of the Simply operation.
+          Index of the mutate operation.
       mutate_operation_response:
           Response for the mutate. May be empty if errors occurred.
       status:

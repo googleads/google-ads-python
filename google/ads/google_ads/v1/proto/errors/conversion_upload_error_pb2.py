@@ -20,7 +20,7 @@ DESCRIPTOR = _descriptor.FileDescriptor(
   package='google.ads.googleads.v1.errors',
   syntax='proto3',
   serialized_options=_b('\n\"com.google.ads.googleads.v1.errorsB\032ConversionUploadErrorProtoP\001ZDgoogle.golang.org/genproto/googleapis/ads/googleads/v1/errors;errors\242\002\003GAA\252\002\036Google.Ads.GoogleAds.V1.Errors\312\002\036Google\\Ads\\GoogleAds\\V1\\Errors\352\002\"Google::Ads::GoogleAds::V1::Errors'),
-  serialized_pb=_b('\nBgoogle/ads/googleads_v1/proto/errors/conversion_upload_error.proto\x12\x1egoogle.ads.googleads.v1.errors\x1a\x1cgoogle/api/annotations.proto\"\xa3\x05\n\x19\x43onversionUploadErrorEnum\"\x85\x05\n\x15\x43onversionUploadError\x12\x0f\n\x0bUNSPECIFIED\x10\x00\x12\x0b\n\x07UNKNOWN\x10\x01\x12#\n\x1fTOO_MANY_CONVERSIONS_IN_REQUEST\x10\x02\x12\x15\n\x11UNPARSEABLE_GCLID\x10\x03\x12\x1d\n\x19\x43ONVERSION_PRECEDES_GCLID\x10\x04\x12\x11\n\rEXPIRED_GCLID\x10\x05\x12\x14\n\x10TOO_RECENT_GCLID\x10\x06\x12\x13\n\x0fGCLID_NOT_FOUND\x10\x07\x12\x19\n\x15UNAUTHORIZED_CUSTOMER\x10\x08\x12\x1d\n\x19INVALID_CONVERSION_ACTION\x10\t\x12 \n\x1cTOO_RECENT_CONVERSION_ACTION\x10\n\x12\x36\n2CONVERSION_TRACKING_NOT_ENABLED_AT_IMPRESSION_TIME\x10\x0b\x12Q\nMEXTERNAL_ATTRIBUTION_DATA_SET_FOR_NON_EXTERNALLY_ATTRIBUTED_CONVERSION_ACTION\x10\x0c\x12Q\nMEXTERNAL_ATTRIBUTION_DATA_NOT_SET_FOR_EXTERNALLY_ATTRIBUTED_CONVERSION_ACTION\x10\r\x12\x46\nBORDER_ID_NOT_PERMITTED_FOR_EXTERNALLY_ATTRIBUTED_CONVERSION_ACTION\x10\x0e\x12\x1b\n\x17ORDER_ID_ALREADY_IN_USE\x10\x0f\x12\x16\n\x12\x44UPLICATE_ORDER_ID\x10\x10\x42\xf5\x01\n\"com.google.ads.googleads.v1.errorsB\x1a\x43onversionUploadErrorProtoP\x01ZDgoogle.golang.org/genproto/googleapis/ads/googleads/v1/errors;errors\xa2\x02\x03GAA\xaa\x02\x1eGoogle.Ads.GoogleAds.V1.Errors\xca\x02\x1eGoogle\\Ads\\GoogleAds\\V1\\Errors\xea\x02\"Google::Ads::GoogleAds::V1::Errorsb\x06proto3')
+  serialized_pb=_b('\nBgoogle/ads/googleads_v1/proto/errors/conversion_upload_error.proto\x12\x1egoogle.ads.googleads.v1.errors\x1a\x1cgoogle/api/annotations.proto\"\xd4\x06\n\x19\x43onversionUploadErrorEnum\"\xb6\x06\n\x15\x43onversionUploadError\x12\x0f\n\x0bUNSPECIFIED\x10\x00\x12\x0b\n\x07UNKNOWN\x10\x01\x12#\n\x1fTOO_MANY_CONVERSIONS_IN_REQUEST\x10\x02\x12\x15\n\x11UNPARSEABLE_GCLID\x10\x03\x12\x1d\n\x19\x43ONVERSION_PRECEDES_GCLID\x10\x04\x12\x11\n\rEXPIRED_GCLID\x10\x05\x12\x14\n\x10TOO_RECENT_GCLID\x10\x06\x12\x13\n\x0fGCLID_NOT_FOUND\x10\x07\x12\x19\n\x15UNAUTHORIZED_CUSTOMER\x10\x08\x12\x1d\n\x19INVALID_CONVERSION_ACTION\x10\t\x12 \n\x1cTOO_RECENT_CONVERSION_ACTION\x10\n\x12\x36\n2CONVERSION_TRACKING_NOT_ENABLED_AT_IMPRESSION_TIME\x10\x0b\x12Q\nMEXTERNAL_ATTRIBUTION_DATA_SET_FOR_NON_EXTERNALLY_ATTRIBUTED_CONVERSION_ACTION\x10\x0c\x12Q\nMEXTERNAL_ATTRIBUTION_DATA_NOT_SET_FOR_EXTERNALLY_ATTRIBUTED_CONVERSION_ACTION\x10\r\x12\x46\nBORDER_ID_NOT_PERMITTED_FOR_EXTERNALLY_ATTRIBUTED_CONVERSION_ACTION\x10\x0e\x12\x1b\n\x17ORDER_ID_ALREADY_IN_USE\x10\x0f\x12\x16\n\x12\x44UPLICATE_ORDER_ID\x10\x10\x12\x13\n\x0fTOO_RECENT_CALL\x10\x11\x12\x10\n\x0c\x45XPIRED_CALL\x10\x12\x12\x12\n\x0e\x43\x41LL_NOT_FOUND\x10\x13\x12\x1c\n\x18\x43ONVERSION_PRECEDES_CALL\x10\x14\x12\x30\n,CONVERSION_TRACKING_NOT_ENABLED_AT_CALL_TIME\x10\x15\x12$\n UNPARSEABLE_CALLERS_PHONE_NUMBER\x10\x16\x42\xf5\x01\n\"com.google.ads.googleads.v1.errorsB\x1a\x43onversionUploadErrorProtoP\x01ZDgoogle.golang.org/genproto/googleapis/ads/googleads/v1/errors;errors\xa2\x02\x03GAA\xaa\x02\x1eGoogle.Ads.GoogleAds.V1.Errors\xca\x02\x1eGoogle\\Ads\\GoogleAds\\V1\\Errors\xea\x02\"Google::Ads::GoogleAds::V1::Errorsb\x06proto3')
   ,
   dependencies=[google_dot_api_dot_annotations__pb2.DESCRIPTOR,])
 
@@ -100,11 +100,35 @@ _CONVERSIONUPLOADERRORENUM_CONVERSIONUPLOADERROR = _descriptor.EnumDescriptor(
       name='DUPLICATE_ORDER_ID', index=16, number=16,
       serialized_options=None,
       type=None),
+    _descriptor.EnumValueDescriptor(
+      name='TOO_RECENT_CALL', index=17, number=17,
+      serialized_options=None,
+      type=None),
+    _descriptor.EnumValueDescriptor(
+      name='EXPIRED_CALL', index=18, number=18,
+      serialized_options=None,
+      type=None),
+    _descriptor.EnumValueDescriptor(
+      name='CALL_NOT_FOUND', index=19, number=19,
+      serialized_options=None,
+      type=None),
+    _descriptor.EnumValueDescriptor(
+      name='CONVERSION_PRECEDES_CALL', index=20, number=20,
+      serialized_options=None,
+      type=None),
+    _descriptor.EnumValueDescriptor(
+      name='CONVERSION_TRACKING_NOT_ENABLED_AT_CALL_TIME', index=21, number=21,
+      serialized_options=None,
+      type=None),
+    _descriptor.EnumValueDescriptor(
+      name='UNPARSEABLE_CALLERS_PHONE_NUMBER', index=22, number=22,
+      serialized_options=None,
+      type=None),
   ],
   containing_type=None,
   serialized_options=None,
   serialized_start=163,
-  serialized_end=808,
+  serialized_end=985,
 )
 _sym_db.RegisterEnumDescriptor(_CONVERSIONUPLOADERRORENUM_CONVERSIONUPLOADERROR)
 
@@ -130,7 +154,7 @@ _CONVERSIONUPLOADERRORENUM = _descriptor.Descriptor(
   oneofs=[
   ],
   serialized_start=133,
-  serialized_end=808,
+  serialized_end=985,
 )
 
 _CONVERSIONUPLOADERRORENUM_CONVERSIONUPLOADERROR.containing_type = _CONVERSIONUPLOADERRORENUM

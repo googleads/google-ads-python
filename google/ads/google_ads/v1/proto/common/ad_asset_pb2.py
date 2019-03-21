@@ -22,7 +22,7 @@ DESCRIPTOR = _descriptor.FileDescriptor(
   package='google.ads.googleads.v1.common',
   syntax='proto3',
   serialized_options=_b('\n\"com.google.ads.googleads.v1.commonB\014AdAssetProtoP\001ZDgoogle.golang.org/genproto/googleapis/ads/googleads/v1/common;common\242\002\003GAA\252\002\036Google.Ads.GoogleAds.V1.Common\312\002\036Google\\Ads\\GoogleAds\\V1\\Common\352\002\"Google::Ads::GoogleAds::V1::Common'),
-  serialized_pb=_b('\n3google/ads/googleads_v1/proto/common/ad_asset.proto\x12\x1egoogle.ads.googleads.v1.common\x1a\x41google/ads/googleads_v1/proto/enums/served_asset_field_type.proto\x1a\x1egoogle/protobuf/wrappers.proto\x1a\x1cgoogle/api/annotations.proto\"\x9d\x01\n\x0b\x41\x64TextAsset\x12*\n\x04text\x18\x01 \x01(\x0b\x32\x1c.google.protobuf.StringValue\x12\x62\n\x0cpinned_field\x18\x02 \x01(\x0e\x32L.google.ads.googleads.v1.enums.ServedAssetFieldTypeEnum.ServedAssetFieldTypeB\xe7\x01\n\"com.google.ads.googleads.v1.commonB\x0c\x41\x64\x41ssetProtoP\x01ZDgoogle.golang.org/genproto/googleapis/ads/googleads/v1/common;common\xa2\x02\x03GAA\xaa\x02\x1eGoogle.Ads.GoogleAds.V1.Common\xca\x02\x1eGoogle\\Ads\\GoogleAds\\V1\\Common\xea\x02\"Google::Ads::GoogleAds::V1::Commonb\x06proto3')
+  serialized_pb=_b('\n3google/ads/googleads_v1/proto/common/ad_asset.proto\x12\x1egoogle.ads.googleads.v1.common\x1a\x41google/ads/googleads_v1/proto/enums/served_asset_field_type.proto\x1a\x1egoogle/protobuf/wrappers.proto\x1a\x1cgoogle/api/annotations.proto\"\x9d\x01\n\x0b\x41\x64TextAsset\x12*\n\x04text\x18\x01 \x01(\x0b\x32\x1c.google.protobuf.StringValue\x12\x62\n\x0cpinned_field\x18\x02 \x01(\x0e\x32L.google.ads.googleads.v1.enums.ServedAssetFieldTypeEnum.ServedAssetFieldType\";\n\x0c\x41\x64ImageAsset\x12+\n\x05\x61sset\x18\x01 \x01(\x0b\x32\x1c.google.protobuf.StringValue\";\n\x0c\x41\x64VideoAsset\x12+\n\x05\x61sset\x18\x01 \x01(\x0b\x32\x1c.google.protobuf.StringValue\"A\n\x12\x41\x64MediaBundleAsset\x12+\n\x05\x61sset\x18\x01 \x01(\x0b\x32\x1c.google.protobuf.StringValueB\xe7\x01\n\"com.google.ads.googleads.v1.commonB\x0c\x41\x64\x41ssetProtoP\x01ZDgoogle.golang.org/genproto/googleapis/ads/googleads/v1/common;common\xa2\x02\x03GAA\xaa\x02\x1eGoogle.Ads.GoogleAds.V1.Common\xca\x02\x1eGoogle\\Ads\\GoogleAds\\V1\\Common\xea\x02\"Google::Ads::GoogleAds::V1::Commonb\x06proto3')
   ,
   dependencies=[google_dot_ads_dot_googleads__v1_dot_proto_dot_enums_dot_served__asset__field__type__pb2.DESCRIPTOR,google_dot_protobuf_dot_wrappers__pb2.DESCRIPTOR,google_dot_api_dot_annotations__pb2.DESCRIPTOR,])
 
@@ -66,9 +66,108 @@ _ADTEXTASSET = _descriptor.Descriptor(
   serialized_end=374,
 )
 
+
+_ADIMAGEASSET = _descriptor.Descriptor(
+  name='AdImageAsset',
+  full_name='google.ads.googleads.v1.common.AdImageAsset',
+  filename=None,
+  file=DESCRIPTOR,
+  containing_type=None,
+  fields=[
+    _descriptor.FieldDescriptor(
+      name='asset', full_name='google.ads.googleads.v1.common.AdImageAsset.asset', index=0,
+      number=1, type=11, cpp_type=10, label=1,
+      has_default_value=False, default_value=None,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR),
+  ],
+  extensions=[
+  ],
+  nested_types=[],
+  enum_types=[
+  ],
+  serialized_options=None,
+  is_extendable=False,
+  syntax='proto3',
+  extension_ranges=[],
+  oneofs=[
+  ],
+  serialized_start=376,
+  serialized_end=435,
+)
+
+
+_ADVIDEOASSET = _descriptor.Descriptor(
+  name='AdVideoAsset',
+  full_name='google.ads.googleads.v1.common.AdVideoAsset',
+  filename=None,
+  file=DESCRIPTOR,
+  containing_type=None,
+  fields=[
+    _descriptor.FieldDescriptor(
+      name='asset', full_name='google.ads.googleads.v1.common.AdVideoAsset.asset', index=0,
+      number=1, type=11, cpp_type=10, label=1,
+      has_default_value=False, default_value=None,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR),
+  ],
+  extensions=[
+  ],
+  nested_types=[],
+  enum_types=[
+  ],
+  serialized_options=None,
+  is_extendable=False,
+  syntax='proto3',
+  extension_ranges=[],
+  oneofs=[
+  ],
+  serialized_start=437,
+  serialized_end=496,
+)
+
+
+_ADMEDIABUNDLEASSET = _descriptor.Descriptor(
+  name='AdMediaBundleAsset',
+  full_name='google.ads.googleads.v1.common.AdMediaBundleAsset',
+  filename=None,
+  file=DESCRIPTOR,
+  containing_type=None,
+  fields=[
+    _descriptor.FieldDescriptor(
+      name='asset', full_name='google.ads.googleads.v1.common.AdMediaBundleAsset.asset', index=0,
+      number=1, type=11, cpp_type=10, label=1,
+      has_default_value=False, default_value=None,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR),
+  ],
+  extensions=[
+  ],
+  nested_types=[],
+  enum_types=[
+  ],
+  serialized_options=None,
+  is_extendable=False,
+  syntax='proto3',
+  extension_ranges=[],
+  oneofs=[
+  ],
+  serialized_start=498,
+  serialized_end=563,
+)
+
 _ADTEXTASSET.fields_by_name['text'].message_type = google_dot_protobuf_dot_wrappers__pb2._STRINGVALUE
 _ADTEXTASSET.fields_by_name['pinned_field'].enum_type = google_dot_ads_dot_googleads__v1_dot_proto_dot_enums_dot_served__asset__field__type__pb2._SERVEDASSETFIELDTYPEENUM_SERVEDASSETFIELDTYPE
+_ADIMAGEASSET.fields_by_name['asset'].message_type = google_dot_protobuf_dot_wrappers__pb2._STRINGVALUE
+_ADVIDEOASSET.fields_by_name['asset'].message_type = google_dot_protobuf_dot_wrappers__pb2._STRINGVALUE
+_ADMEDIABUNDLEASSET.fields_by_name['asset'].message_type = google_dot_protobuf_dot_wrappers__pb2._STRINGVALUE
 DESCRIPTOR.message_types_by_name['AdTextAsset'] = _ADTEXTASSET
+DESCRIPTOR.message_types_by_name['AdImageAsset'] = _ADIMAGEASSET
+DESCRIPTOR.message_types_by_name['AdVideoAsset'] = _ADVIDEOASSET
+DESCRIPTOR.message_types_by_name['AdMediaBundleAsset'] = _ADMEDIABUNDLEASSET
 _sym_db.RegisterFileDescriptor(DESCRIPTOR)
 
 AdTextAsset = _reflection.GeneratedProtocolMessageType('AdTextAsset', (_message.Message,), dict(
@@ -91,6 +190,51 @@ AdTextAsset = _reflection.GeneratedProtocolMessageType('AdTextAsset', (_message.
   # @@protoc_insertion_point(class_scope:google.ads.googleads.v1.common.AdTextAsset)
   ))
 _sym_db.RegisterMessage(AdTextAsset)
+
+AdImageAsset = _reflection.GeneratedProtocolMessageType('AdImageAsset', (_message.Message,), dict(
+  DESCRIPTOR = _ADIMAGEASSET,
+  __module__ = 'google.ads.googleads_v1.proto.common.ad_asset_pb2'
+  ,
+  __doc__ = """An image asset used inside an ad.
+  
+  
+  Attributes:
+      asset:
+          The Asset resource name of this image.
+  """,
+  # @@protoc_insertion_point(class_scope:google.ads.googleads.v1.common.AdImageAsset)
+  ))
+_sym_db.RegisterMessage(AdImageAsset)
+
+AdVideoAsset = _reflection.GeneratedProtocolMessageType('AdVideoAsset', (_message.Message,), dict(
+  DESCRIPTOR = _ADVIDEOASSET,
+  __module__ = 'google.ads.googleads_v1.proto.common.ad_asset_pb2'
+  ,
+  __doc__ = """A video asset used inside an ad.
+  
+  
+  Attributes:
+      asset:
+          The Asset resource name of this video.
+  """,
+  # @@protoc_insertion_point(class_scope:google.ads.googleads.v1.common.AdVideoAsset)
+  ))
+_sym_db.RegisterMessage(AdVideoAsset)
+
+AdMediaBundleAsset = _reflection.GeneratedProtocolMessageType('AdMediaBundleAsset', (_message.Message,), dict(
+  DESCRIPTOR = _ADMEDIABUNDLEASSET,
+  __module__ = 'google.ads.googleads_v1.proto.common.ad_asset_pb2'
+  ,
+  __doc__ = """A media bundle asset used inside an ad.
+  
+  
+  Attributes:
+      asset:
+          The Asset resource name of this media bundle.
+  """,
+  # @@protoc_insertion_point(class_scope:google.ads.googleads.v1.common.AdMediaBundleAsset)
+  ))
+_sym_db.RegisterMessage(AdMediaBundleAsset)
 
 
 DESCRIPTOR._options = None

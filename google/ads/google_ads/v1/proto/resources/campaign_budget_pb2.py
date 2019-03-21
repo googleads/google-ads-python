@@ -15,6 +15,7 @@ _sym_db = _symbol_database.Default()
 from google.ads.google_ads.v1.proto.enums import budget_delivery_method_pb2 as google_dot_ads_dot_googleads__v1_dot_proto_dot_enums_dot_budget__delivery__method__pb2
 from google.ads.google_ads.v1.proto.enums import budget_period_pb2 as google_dot_ads_dot_googleads__v1_dot_proto_dot_enums_dot_budget__period__pb2
 from google.ads.google_ads.v1.proto.enums import budget_status_pb2 as google_dot_ads_dot_googleads__v1_dot_proto_dot_enums_dot_budget__status__pb2
+from google.ads.google_ads.v1.proto.enums import budget_type_pb2 as google_dot_ads_dot_googleads__v1_dot_proto_dot_enums_dot_budget__type__pb2
 from google.protobuf import wrappers_pb2 as google_dot_protobuf_dot_wrappers__pb2
 from google.api import annotations_pb2 as google_dot_api_dot_annotations__pb2
 
@@ -24,9 +25,9 @@ DESCRIPTOR = _descriptor.FileDescriptor(
   package='google.ads.googleads.v1.resources',
   syntax='proto3',
   serialized_options=_b('\n%com.google.ads.googleads.v1.resourcesB\023CampaignBudgetProtoP\001ZJgoogle.golang.org/genproto/googleapis/ads/googleads/v1/resources;resources\242\002\003GAA\252\002!Google.Ads.GoogleAds.V1.Resources\312\002!Google\\Ads\\GoogleAds\\V1\\Resources\352\002%Google::Ads::GoogleAds::V1::Resources'),
-  serialized_pb=_b('\n=google/ads/googleads_v1/proto/resources/campaign_budget.proto\x12!google.ads.googleads.v1.resources\x1a@google/ads/googleads_v1/proto/enums/budget_delivery_method.proto\x1a\x37google/ads/googleads_v1/proto/enums/budget_period.proto\x1a\x37google/ads/googleads_v1/proto/enums/budget_status.proto\x1a\x1egoogle/protobuf/wrappers.proto\x1a\x1cgoogle/api/annotations.proto\"\xc7\x08\n\x0e\x43\x61mpaignBudget\x12\x15\n\rresource_name\x18\x01 \x01(\t\x12\'\n\x02id\x18\x03 \x01(\x0b\x32\x1b.google.protobuf.Int64Value\x12*\n\x04name\x18\x04 \x01(\x0b\x32\x1c.google.protobuf.StringValue\x12\x32\n\ramount_micros\x18\x05 \x01(\x0b\x32\x1b.google.protobuf.Int64Value\x12\x38\n\x13total_amount_micros\x18\n \x01(\x0b\x32\x1b.google.protobuf.Int64Value\x12L\n\x06status\x18\x06 \x01(\x0e\x32<.google.ads.googleads.v1.enums.BudgetStatusEnum.BudgetStatus\x12\x65\n\x0f\x64\x65livery_method\x18\x07 \x01(\x0e\x32L.google.ads.googleads.v1.enums.BudgetDeliveryMethodEnum.BudgetDeliveryMethod\x12\x35\n\x11\x65xplicitly_shared\x18\x08 \x01(\x0b\x32\x1a.google.protobuf.BoolValue\x12\x34\n\x0freference_count\x18\t \x01(\x0b\x32\x1b.google.protobuf.Int64Value\x12:\n\x16has_recommended_budget\x18\x0b \x01(\x0b\x32\x1a.google.protobuf.BoolValue\x12\x45\n recommended_budget_amount_micros\x18\x0c \x01(\x0b\x32\x1b.google.protobuf.Int64Value\x12L\n\x06period\x18\r \x01(\x0e\x32<.google.ads.googleads.v1.enums.BudgetPeriodEnum.BudgetPeriod\x12V\n1recommended_budget_estimated_change_weekly_clicks\x18\x0e \x01(\x0b\x32\x1b.google.protobuf.Int64Value\x12[\n6recommended_budget_estimated_change_weekly_cost_micros\x18\x0f \x01(\x0b\x32\x1b.google.protobuf.Int64Value\x12\\\n7recommended_budget_estimated_change_weekly_interactions\x18\x10 \x01(\x0b\x32\x1b.google.protobuf.Int64Value\x12U\n0recommended_budget_estimated_change_weekly_views\x18\x11 \x01(\x0b\x32\x1b.google.protobuf.Int64ValueB\x80\x02\n%com.google.ads.googleads.v1.resourcesB\x13\x43\x61mpaignBudgetProtoP\x01ZJgoogle.golang.org/genproto/googleapis/ads/googleads/v1/resources;resources\xa2\x02\x03GAA\xaa\x02!Google.Ads.GoogleAds.V1.Resources\xca\x02!Google\\Ads\\GoogleAds\\V1\\Resources\xea\x02%Google::Ads::GoogleAds::V1::Resourcesb\x06proto3')
+  serialized_pb=_b('\n=google/ads/googleads_v1/proto/resources/campaign_budget.proto\x12!google.ads.googleads.v1.resources\x1a@google/ads/googleads_v1/proto/enums/budget_delivery_method.proto\x1a\x37google/ads/googleads_v1/proto/enums/budget_period.proto\x1a\x37google/ads/googleads_v1/proto/enums/budget_status.proto\x1a\x35google/ads/googleads_v1/proto/enums/budget_type.proto\x1a\x1egoogle/protobuf/wrappers.proto\x1a\x1cgoogle/api/annotations.proto\"\x8f\t\n\x0e\x43\x61mpaignBudget\x12\x15\n\rresource_name\x18\x01 \x01(\t\x12\'\n\x02id\x18\x03 \x01(\x0b\x32\x1b.google.protobuf.Int64Value\x12*\n\x04name\x18\x04 \x01(\x0b\x32\x1c.google.protobuf.StringValue\x12\x32\n\ramount_micros\x18\x05 \x01(\x0b\x32\x1b.google.protobuf.Int64Value\x12\x38\n\x13total_amount_micros\x18\n \x01(\x0b\x32\x1b.google.protobuf.Int64Value\x12L\n\x06status\x18\x06 \x01(\x0e\x32<.google.ads.googleads.v1.enums.BudgetStatusEnum.BudgetStatus\x12\x65\n\x0f\x64\x65livery_method\x18\x07 \x01(\x0e\x32L.google.ads.googleads.v1.enums.BudgetDeliveryMethodEnum.BudgetDeliveryMethod\x12\x35\n\x11\x65xplicitly_shared\x18\x08 \x01(\x0b\x32\x1a.google.protobuf.BoolValue\x12\x34\n\x0freference_count\x18\t \x01(\x0b\x32\x1b.google.protobuf.Int64Value\x12:\n\x16has_recommended_budget\x18\x0b \x01(\x0b\x32\x1a.google.protobuf.BoolValue\x12\x45\n recommended_budget_amount_micros\x18\x0c \x01(\x0b\x32\x1b.google.protobuf.Int64Value\x12L\n\x06period\x18\r \x01(\x0e\x32<.google.ads.googleads.v1.enums.BudgetPeriodEnum.BudgetPeriod\x12V\n1recommended_budget_estimated_change_weekly_clicks\x18\x0e \x01(\x0b\x32\x1b.google.protobuf.Int64Value\x12[\n6recommended_budget_estimated_change_weekly_cost_micros\x18\x0f \x01(\x0b\x32\x1b.google.protobuf.Int64Value\x12\\\n7recommended_budget_estimated_change_weekly_interactions\x18\x10 \x01(\x0b\x32\x1b.google.protobuf.Int64Value\x12U\n0recommended_budget_estimated_change_weekly_views\x18\x11 \x01(\x0b\x32\x1b.google.protobuf.Int64Value\x12\x46\n\x04type\x18\x12 \x01(\x0e\x32\x38.google.ads.googleads.v1.enums.BudgetTypeEnum.BudgetTypeB\x80\x02\n%com.google.ads.googleads.v1.resourcesB\x13\x43\x61mpaignBudgetProtoP\x01ZJgoogle.golang.org/genproto/googleapis/ads/googleads/v1/resources;resources\xa2\x02\x03GAA\xaa\x02!Google.Ads.GoogleAds.V1.Resources\xca\x02!Google\\Ads\\GoogleAds\\V1\\Resources\xea\x02%Google::Ads::GoogleAds::V1::Resourcesb\x06proto3')
   ,
-  dependencies=[google_dot_ads_dot_googleads__v1_dot_proto_dot_enums_dot_budget__delivery__method__pb2.DESCRIPTOR,google_dot_ads_dot_googleads__v1_dot_proto_dot_enums_dot_budget__period__pb2.DESCRIPTOR,google_dot_ads_dot_googleads__v1_dot_proto_dot_enums_dot_budget__status__pb2.DESCRIPTOR,google_dot_protobuf_dot_wrappers__pb2.DESCRIPTOR,google_dot_api_dot_annotations__pb2.DESCRIPTOR,])
+  dependencies=[google_dot_ads_dot_googleads__v1_dot_proto_dot_enums_dot_budget__delivery__method__pb2.DESCRIPTOR,google_dot_ads_dot_googleads__v1_dot_proto_dot_enums_dot_budget__period__pb2.DESCRIPTOR,google_dot_ads_dot_googleads__v1_dot_proto_dot_enums_dot_budget__status__pb2.DESCRIPTOR,google_dot_ads_dot_googleads__v1_dot_proto_dot_enums_dot_budget__type__pb2.DESCRIPTOR,google_dot_protobuf_dot_wrappers__pb2.DESCRIPTOR,google_dot_api_dot_annotations__pb2.DESCRIPTOR,])
 
 
 
@@ -150,6 +151,13 @@ _CAMPAIGNBUDGET = _descriptor.Descriptor(
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       serialized_options=None, file=DESCRIPTOR),
+    _descriptor.FieldDescriptor(
+      name='type', full_name='google.ads.googleads.v1.resources.CampaignBudget.type', index=16,
+      number=18, type=14, cpp_type=8, label=1,
+      has_default_value=False, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR),
   ],
   extensions=[
   ],
@@ -162,8 +170,8 @@ _CAMPAIGNBUDGET = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=343,
-  serialized_end=1438,
+  serialized_start=398,
+  serialized_end=1565,
 )
 
 _CAMPAIGNBUDGET.fields_by_name['id'].message_type = google_dot_protobuf_dot_wrappers__pb2._INT64VALUE
@@ -181,6 +189,7 @@ _CAMPAIGNBUDGET.fields_by_name['recommended_budget_estimated_change_weekly_click
 _CAMPAIGNBUDGET.fields_by_name['recommended_budget_estimated_change_weekly_cost_micros'].message_type = google_dot_protobuf_dot_wrappers__pb2._INT64VALUE
 _CAMPAIGNBUDGET.fields_by_name['recommended_budget_estimated_change_weekly_interactions'].message_type = google_dot_protobuf_dot_wrappers__pb2._INT64VALUE
 _CAMPAIGNBUDGET.fields_by_name['recommended_budget_estimated_change_weekly_views'].message_type = google_dot_protobuf_dot_wrappers__pb2._INT64VALUE
+_CAMPAIGNBUDGET.fields_by_name['type'].enum_type = google_dot_ads_dot_googleads__v1_dot_proto_dot_enums_dot_budget__type__pb2._BUDGETTYPEENUM_BUDGETTYPE
 DESCRIPTOR.message_types_by_name['CampaignBudget'] = _CAMPAIGNBUDGET
 _sym_db.RegisterFileDescriptor(DESCRIPTOR)
 
@@ -263,6 +272,8 @@ CampaignBudget = _reflection.GeneratedProtocolMessageType('CampaignBudget', (_me
       recommended_budget_estimated_change_weekly_views:
           The estimated change in weekly views if the recommended budget
           is applied.  This field is read-only.
+      type:
+          The type of the campaign budget.
   """,
   # @@protoc_insertion_point(class_scope:google.ads.googleads.v1.resources.CampaignBudget)
   ))

@@ -98,7 +98,7 @@ SearchTermView = _reflection.GeneratedProtocolMessageType('SearchTermView', (_me
       resource_name:
           The resource name of the search term view. Search term view
           resource names have the form:  ``customers/{customer_id}/searc
-          hTermViews/{campaign_id}~{ad_group_id}_ {URL-base64 search
+          hTermViews/{campaign_id}~{ad_group_id}~ {URL-base64 search
           term}``
       search_term:
           The search term.

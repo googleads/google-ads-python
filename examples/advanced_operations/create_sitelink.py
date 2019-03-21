@@ -50,23 +50,6 @@ def main(client, customer_id):
                     print('\t\tOn field: %s' % field_path_element.field_name)
         sys.exit(1)
 
-    print('Created Sitelink %s.' % feed_response.results[0].resource_name).
-
-    # Add extension
-    try:
-        feed_response = (
-            feed_service.mutate_extension_feed_items(customer_id, [extension_feed_item_operation])
-        )
-    except google.ads.google_ads.errors.GoogleAdsException as ex:
-        print('Request with ID "%s" failed with status "%s" and includes the '
-              'following errors:' % (ex.request_id, ex.error.code().name))
-        for error in ex.failure.errors:
-            print('\tError with message "%s".' % error.message)
-            if error.location:
-                for field_path_element in error.location.field_path_elements:
-                    print('\t\tOn field: %s' % field_path_element.field_name)
-        sys.exit(1)
-
     print('Created Sitelink %s.' % feed_response.results[0].resource_name)
 
 
@@ -77,7 +60,7 @@ if __name__ == '__main__':
                          .load_from_storage())
 
     parser = argparse.ArgumentParser(
-        description='Lists all campaigns for specified customer.')
+        description='Creates sitelink for the specified customer id')
     # The following argument(s) should be provided to run the example.
     parser.add_argument('-c', '--customer_id', type=six.text_type,
                         required=True, help='The Google Ads customer ID.')

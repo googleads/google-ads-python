@@ -1,4 +1,4 @@
-# Copyright 2018 Google LLC
+# Copyright 2019 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -18,9 +18,9 @@ from __future__ import absolute_import
 import argparse
 import six
 import sys
-import uuid
 
-import google.ads.google_ads.client
+from google.ads.google_ads.client import GoogleAdsClient
+from google.ads.google_ads.errors import GoogleAdsException
 
 
 def main(client, customer_id):
@@ -40,7 +40,7 @@ def main(client, customer_id):
         feed_response = (
             feed_service.mutate_extension_feed_items(customer_id, [extension_feed_item_operation])
         )
-    except google.ads.google_ads.errors.GoogleAdsException as ex:
+    except GoogleAdsException as ex:
         print('Request with ID "%s" failed with status "%s" and includes the '
               'following errors:' % (ex.request_id, ex.error.code().name))
         for error in ex.failure.errors:
@@ -56,8 +56,7 @@ def main(client, customer_id):
 if __name__ == '__main__':
     # GoogleAdsClient will read the google-ads.yaml configuration file in the
     # home directory if none is specified.
-    google_ads_client = (google.ads.google_ads.client.GoogleAdsClient
-                         .load_from_storage())
+    google_ads_client = GoogleAdsClient.load_from_storage()
 
     parser = argparse.ArgumentParser(
         description='Creates sitelink for the specified customer id')

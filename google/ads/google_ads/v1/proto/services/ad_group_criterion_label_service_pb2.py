@@ -299,7 +299,7 @@ AdGroupCriterionLabelOperation = _reflection.GeneratedProtocolMessageType('AdGro
       remove:
           Remove operation: A resource name for the ad group criterion
           label being removed, in this format:  ``customers/{customer_id
-          }/adGroupCriterionLabels/{ad_group_id}_{criterion_id}_{label_i
+          }/adGroupCriterionLabels/{ad_group_id}~{criterion_id}~{label_i
           d}``
   """,
   # @@protoc_insertion_point(class_scope:google.ads.googleads.v1.services.AdGroupCriterionLabelOperation)

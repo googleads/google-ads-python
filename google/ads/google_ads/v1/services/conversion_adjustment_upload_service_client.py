@@ -13,7 +13,7 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
-"""Accesses the google.ads.googleads.v1.services CampaignCriterionSimulationService API."""
+"""Accesses the google.ads.googleads.v1.services ConversionAdjustmentUploadService API."""
 
 import pkg_resources
 import warnings
@@ -23,25 +23,24 @@ import google.api_core.gapic_v1.client_info
 import google.api_core.gapic_v1.config
 import google.api_core.gapic_v1.method
 import google.api_core.grpc_helpers
-import google.api_core.path_template
 
-from google.ads.google_ads.v1.services import campaign_criterion_simulation_service_client_config
-from google.ads.google_ads.v1.services.transports import campaign_criterion_simulation_service_grpc_transport
-from google.ads.google_ads.v1.proto.services import campaign_criterion_simulation_service_pb2
+from google.ads.google_ads.v1.services import conversion_adjustment_upload_service_client_config
+from google.ads.google_ads.v1.services.transports import conversion_adjustment_upload_service_grpc_transport
+from google.ads.google_ads.v1.proto.services import conversion_adjustment_upload_service_pb2
 
 _GAPIC_LIBRARY_VERSION = pkg_resources.get_distribution(
     'google-ads', ).version
 
 
-class CampaignCriterionSimulationServiceClient(object):
-    """Service to fetch campaign criterion simulations."""
+class ConversionAdjustmentUploadServiceClient(object):
+    """Service to upload conversion adjustments."""
 
     SERVICE_ADDRESS = 'googleads.googleapis.com:443'
     """The default address of the service."""
 
     # The name of the interface for this client. This is the key used to
     # find the method configuration in the client_config dictionary.
-    _INTERFACE_NAME = 'google.ads.googleads.v1.services.CampaignCriterionSimulationService'
+    _INTERFACE_NAME = 'google.ads.googleads.v1.services.ConversionAdjustmentUploadService'
 
     @classmethod
     def from_service_account_file(cls, filename, *args, **kwargs):
@@ -55,7 +54,7 @@ class CampaignCriterionSimulationServiceClient(object):
             kwargs: Additional arguments to pass to the constructor.
 
         Returns:
-            CampaignCriterionSimulationServiceClient: The constructed client.
+            ConversionAdjustmentUploadServiceClient: The constructed client.
         """
         credentials = service_account.Credentials.from_service_account_file(
             filename)
@@ -63,16 +62,6 @@ class CampaignCriterionSimulationServiceClient(object):
         return cls(*args, **kwargs)
 
     from_service_account_json = from_service_account_file
-
-    @classmethod
-    def campaign_criterion_simulation_path(cls, customer,
-                                           campaign_criterion_simulation):
-        """Return a fully-qualified campaign_criterion_simulation string."""
-        return google.api_core.path_template.expand(
-            'customers/{customer}/campaignCriterionSimulations/{campaign_criterion_simulation}',
-            customer=customer,
-            campaign_criterion_simulation=campaign_criterion_simulation,
-        )
 
     def __init__(self,
                  transport=None,
@@ -83,8 +72,8 @@ class CampaignCriterionSimulationServiceClient(object):
         """Constructor.
 
         Args:
-            transport (Union[~.CampaignCriterionSimulationServiceGrpcTransport,
-                    Callable[[~.Credentials, type], ~.CampaignCriterionSimulationServiceGrpcTransport]): A transport
+            transport (Union[~.ConversionAdjustmentUploadServiceGrpcTransport,
+                    Callable[[~.Credentials, type], ~.ConversionAdjustmentUploadServiceGrpcTransport]): A transport
                 instance, responsible for actually making the API calls.
                 The default transport uses the gRPC protocol.
                 This argument may also be a callable which returns a
@@ -117,7 +106,7 @@ class CampaignCriterionSimulationServiceClient(object):
                 PendingDeprecationWarning,
                 stacklevel=2)
         else:
-            client_config = campaign_criterion_simulation_service_client_config.config
+            client_config = conversion_adjustment_upload_service_client_config.config
 
         if channel:
             warnings.warn(
@@ -134,8 +123,8 @@ class CampaignCriterionSimulationServiceClient(object):
                 self.transport = transport(
                     credentials=credentials,
                     default_class=
-                    campaign_criterion_simulation_service_grpc_transport.
-                    CampaignCriterionSimulationServiceGrpcTransport,
+                    conversion_adjustment_upload_service_grpc_transport.
+                    ConversionAdjustmentUploadServiceGrpcTransport,
                 )
             else:
                 if credentials:
@@ -144,7 +133,7 @@ class CampaignCriterionSimulationServiceClient(object):
                         'credentials; these are mutually exclusive.')
                 self.transport = transport
         else:
-            self.transport = campaign_criterion_simulation_service_grpc_transport.CampaignCriterionSimulationServiceGrpcTransport(
+            self.transport = conversion_adjustment_upload_service_grpc_transport.ConversionAdjustmentUploadServiceGrpcTransport(
                 address=self.SERVICE_ADDRESS,
                 channel=channel,
                 credentials=credentials,
@@ -171,17 +160,27 @@ class CampaignCriterionSimulationServiceClient(object):
         self._inner_api_calls = {}
 
     # Service calls
-    def get_campaign_criterion_simulation(
+    def upload_conversion_adjustments(
             self,
-            resource_name,
+            customer_id,
+            conversion_adjustments,
+            partial_failure=None,
             retry=google.api_core.gapic_v1.method.DEFAULT,
             timeout=google.api_core.gapic_v1.method.DEFAULT,
             metadata=None):
         """
-        Returns the requested campaign criterion simulation in full detail.
+        Processes the given conversion adjustments.
 
         Args:
-            resource_name (str): The resource name of the campaign criterion simulation to fetch.
+            customer_id (str): The ID of the customer performing the upload.
+            conversion_adjustments (list[Union[dict, ~google.ads.googleads_v1.types.ConversionAdjustment]]): The conversion adjustments that are being uploaded.
+
+                If a dict is provided, it must be of the same form as the protobuf
+                message :class:`~google.ads.googleads_v1.types.ConversionAdjustment`
+            partial_failure (bool): If true, successful operations will be carried out and invalid
+                operations will return errors. If false, all operations will be carried out
+                in one transaction if and only if they are all valid. This should always be
+                set to true.
             retry (Optional[google.api_core.retry.Retry]):  A retry object used
                 to retry requests. If ``None`` is specified, requests will not
                 be retried.
@@ -192,7 +191,7 @@ class CampaignCriterionSimulationServiceClient(object):
                 that is provided to the method.
 
         Returns:
-            A :class:`~google.ads.googleads_v1.types.CampaignCriterionSimulation` instance.
+            A :class:`~google.ads.googleads_v1.types.UploadConversionAdjustmentsResponse` instance.
 
         Raises:
             google.api_core.exceptions.GoogleAPICallError: If the request
@@ -202,18 +201,21 @@ class CampaignCriterionSimulationServiceClient(object):
             ValueError: If the parameters are invalid.
         """
         # Wrap the transport method to add retry and timeout logic.
-        if 'get_campaign_criterion_simulation' not in self._inner_api_calls:
+        if 'upload_conversion_adjustments' not in self._inner_api_calls:
             self._inner_api_calls[
-                'get_campaign_criterion_simulation'] = google.api_core.gapic_v1.method.wrap_method(
-                    self.transport.get_campaign_criterion_simulation,
+                'upload_conversion_adjustments'] = google.api_core.gapic_v1.method.wrap_method(
+                    self.transport.upload_conversion_adjustments,
                     default_retry=self.
-                    _method_configs['GetCampaignCriterionSimulation'].retry,
+                    _method_configs['UploadConversionAdjustments'].retry,
                     default_timeout=self.
-                    _method_configs['GetCampaignCriterionSimulation'].timeout,
+                    _method_configs['UploadConversionAdjustments'].timeout,
                     client_info=self._client_info,
                 )
 
-        request = campaign_criterion_simulation_service_pb2.GetCampaignCriterionSimulationRequest(
-            resource_name=resource_name, )
-        return self._inner_api_calls['get_campaign_criterion_simulation'](
+        request = conversion_adjustment_upload_service_pb2.UploadConversionAdjustmentsRequest(
+            customer_id=customer_id,
+            conversion_adjustments=conversion_adjustments,
+            partial_failure=partial_failure,
+        )
+        return self._inner_api_calls['upload_conversion_adjustments'](
             request, retry=retry, timeout=timeout, metadata=metadata)

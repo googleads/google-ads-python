@@ -23,7 +23,7 @@ DESCRIPTOR = _descriptor.FileDescriptor(
   package='google.ads.googleads.v1.resources',
   syntax='proto3',
   serialized_options=_b('\n%com.google.ads.googleads.v1.resourcesB\024SharedCriterionProtoP\001ZJgoogle.golang.org/genproto/googleapis/ads/googleads/v1/resources;resources\242\002\003GAA\252\002!Google.Ads.GoogleAds.V1.Resources\312\002!Google\\Ads\\GoogleAds\\V1\\Resources\352\002%Google::Ads::GoogleAds::V1::Resources'),
-  serialized_pb=_b('\n>google/ads/googleads_v1/proto/resources/shared_criterion.proto\x12!google.ads.googleads.v1.resources\x1a\x33google/ads/googleads_v1/proto/common/criteria.proto\x1a\x38google/ads/googleads_v1/proto/enums/criterion_type.proto\x1a\x1egoogle/protobuf/wrappers.proto\x1a\x1cgoogle/api/annotations.proto\"\xdc\x04\n\x0fSharedCriterion\x12\x15\n\rresource_name\x18\x01 \x01(\t\x12\x30\n\nshared_set\x18\x02 \x01(\x0b\x32\x1c.google.protobuf.StringValue\x12\x31\n\x0c\x63riterion_id\x18\x1a \x01(\x0b\x32\x1b.google.protobuf.Int64Value\x12L\n\x04type\x18\x04 \x01(\x0e\x32>.google.ads.googleads.v1.enums.CriterionTypeEnum.CriterionType\x12>\n\x07keyword\x18\x03 \x01(\x0b\x32+.google.ads.googleads.v1.common.KeywordInfoH\x00\x12I\n\ryoutube_video\x18\x05 \x01(\x0b\x32\x30.google.ads.googleads.v1.common.YouTubeVideoInfoH\x00\x12M\n\x0fyoutube_channel\x18\x06 \x01(\x0b\x32\x32.google.ads.googleads.v1.common.YouTubeChannelInfoH\x00\x12\x42\n\tplacement\x18\x07 \x01(\x0b\x32-.google.ads.googleads.v1.common.PlacementInfoH\x00\x12T\n\x13mobile_app_category\x18\x08 \x01(\x0b\x32\x35.google.ads.googleads.v1.common.MobileAppCategoryInfoH\x00\x42\x0b\n\tcriterionB\x81\x02\n%com.google.ads.googleads.v1.resourcesB\x14SharedCriterionProtoP\x01ZJgoogle.golang.org/genproto/googleapis/ads/googleads/v1/resources;resources\xa2\x02\x03GAA\xaa\x02!Google.Ads.GoogleAds.V1.Resources\xca\x02!Google\\Ads\\GoogleAds\\V1\\Resources\xea\x02%Google::Ads::GoogleAds::V1::Resourcesb\x06proto3')
+  serialized_pb=_b('\n>google/ads/googleads_v1/proto/resources/shared_criterion.proto\x12!google.ads.googleads.v1.resources\x1a\x33google/ads/googleads_v1/proto/common/criteria.proto\x1a\x38google/ads/googleads_v1/proto/enums/criterion_type.proto\x1a\x1egoogle/protobuf/wrappers.proto\x1a\x1cgoogle/api/annotations.proto\"\xb1\x05\n\x0fSharedCriterion\x12\x15\n\rresource_name\x18\x01 \x01(\t\x12\x30\n\nshared_set\x18\x02 \x01(\x0b\x32\x1c.google.protobuf.StringValue\x12\x31\n\x0c\x63riterion_id\x18\x1a \x01(\x0b\x32\x1b.google.protobuf.Int64Value\x12L\n\x04type\x18\x04 \x01(\x0e\x32>.google.ads.googleads.v1.enums.CriterionTypeEnum.CriterionType\x12>\n\x07keyword\x18\x03 \x01(\x0b\x32+.google.ads.googleads.v1.common.KeywordInfoH\x00\x12I\n\ryoutube_video\x18\x05 \x01(\x0b\x32\x30.google.ads.googleads.v1.common.YouTubeVideoInfoH\x00\x12M\n\x0fyoutube_channel\x18\x06 \x01(\x0b\x32\x32.google.ads.googleads.v1.common.YouTubeChannelInfoH\x00\x12\x42\n\tplacement\x18\x07 \x01(\x0b\x32-.google.ads.googleads.v1.common.PlacementInfoH\x00\x12T\n\x13mobile_app_category\x18\x08 \x01(\x0b\x32\x35.google.ads.googleads.v1.common.MobileAppCategoryInfoH\x00\x12S\n\x12mobile_application\x18\t \x01(\x0b\x32\x35.google.ads.googleads.v1.common.MobileApplicationInfoH\x00\x42\x0b\n\tcriterionB\x81\x02\n%com.google.ads.googleads.v1.resourcesB\x14SharedCriterionProtoP\x01ZJgoogle.golang.org/genproto/googleapis/ads/googleads/v1/resources;resources\xa2\x02\x03GAA\xaa\x02!Google.Ads.GoogleAds.V1.Resources\xca\x02!Google\\Ads\\GoogleAds\\V1\\Resources\xea\x02%Google::Ads::GoogleAds::V1::Resourcesb\x06proto3')
   ,
   dependencies=[google_dot_ads_dot_googleads__v1_dot_proto_dot_common_dot_criteria__pb2.DESCRIPTOR,google_dot_ads_dot_googleads__v1_dot_proto_dot_enums_dot_criterion__type__pb2.DESCRIPTOR,google_dot_protobuf_dot_wrappers__pb2.DESCRIPTOR,google_dot_api_dot_annotations__pb2.DESCRIPTOR,])
 
@@ -100,6 +100,13 @@ _SHAREDCRITERION = _descriptor.Descriptor(
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       serialized_options=None, file=DESCRIPTOR),
+    _descriptor.FieldDescriptor(
+      name='mobile_application', full_name='google.ads.googleads.v1.resources.SharedCriterion.mobile_application', index=9,
+      number=9, type=11, cpp_type=10, label=1,
+      has_default_value=False, default_value=None,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR),
   ],
   extensions=[
   ],
@@ -116,7 +123,7 @@ _SHAREDCRITERION = _descriptor.Descriptor(
       index=0, containing_type=None, fields=[]),
   ],
   serialized_start=275,
-  serialized_end=879,
+  serialized_end=964,
 )
 
 _SHAREDCRITERION.fields_by_name['shared_set'].message_type = google_dot_protobuf_dot_wrappers__pb2._STRINGVALUE
@@ -127,6 +134,7 @@ _SHAREDCRITERION.fields_by_name['youtube_video'].message_type = google_dot_ads_d
 _SHAREDCRITERION.fields_by_name['youtube_channel'].message_type = google_dot_ads_dot_googleads__v1_dot_proto_dot_common_dot_criteria__pb2._YOUTUBECHANNELINFO
 _SHAREDCRITERION.fields_by_name['placement'].message_type = google_dot_ads_dot_googleads__v1_dot_proto_dot_common_dot_criteria__pb2._PLACEMENTINFO
 _SHAREDCRITERION.fields_by_name['mobile_app_category'].message_type = google_dot_ads_dot_googleads__v1_dot_proto_dot_common_dot_criteria__pb2._MOBILEAPPCATEGORYINFO
+_SHAREDCRITERION.fields_by_name['mobile_application'].message_type = google_dot_ads_dot_googleads__v1_dot_proto_dot_common_dot_criteria__pb2._MOBILEAPPLICATIONINFO
 _SHAREDCRITERION.oneofs_by_name['criterion'].fields.append(
   _SHAREDCRITERION.fields_by_name['keyword'])
 _SHAREDCRITERION.fields_by_name['keyword'].containing_oneof = _SHAREDCRITERION.oneofs_by_name['criterion']
@@ -142,6 +150,9 @@ _SHAREDCRITERION.fields_by_name['placement'].containing_oneof = _SHAREDCRITERION
 _SHAREDCRITERION.oneofs_by_name['criterion'].fields.append(
   _SHAREDCRITERION.fields_by_name['mobile_app_category'])
 _SHAREDCRITERION.fields_by_name['mobile_app_category'].containing_oneof = _SHAREDCRITERION.oneofs_by_name['criterion']
+_SHAREDCRITERION.oneofs_by_name['criterion'].fields.append(
+  _SHAREDCRITERION.fields_by_name['mobile_application'])
+_SHAREDCRITERION.fields_by_name['mobile_application'].containing_oneof = _SHAREDCRITERION.oneofs_by_name['criterion']
 DESCRIPTOR.message_types_by_name['SharedCriterion'] = _SHAREDCRITERION
 _sym_db.RegisterFileDescriptor(DESCRIPTOR)
 
@@ -175,6 +186,8 @@ SharedCriterion = _reflection.GeneratedProtocolMessageType('SharedCriterion', (_
           Placement.
       mobile_app_category:
           Mobile App Category.
+      mobile_application:
+          Mobile application.
   """,
   # @@protoc_insertion_point(class_scope:google.ads.googleads.v1.resources.SharedCriterion)
   ))

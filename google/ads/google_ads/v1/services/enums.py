@@ -590,6 +590,27 @@ class AdGroupBidModifierErrorEnum(object):
         CANNOT_OVERRIDE_OPTED_OUT_CAMPAIGN_CRITERION_BID_MODIFIER = 3
 
 
+class AdGroupCriterionApprovalStatusEnum(object):
+    class AdGroupCriterionApprovalStatus(enum.IntEnum):
+        """
+        Enumerates AdGroupCriterion approval statuses.
+
+        Attributes:
+          UNSPECIFIED (int): Not specified.
+          UNKNOWN (int): The value is unknown in this version.
+          APPROVED (int): Approved.
+          DISAPPROVED (int): Disapproved.
+          PENDING_REVIEW (int): Pending Review.
+          UNDER_REVIEW (int): Under review.
+        """
+        UNSPECIFIED = 0
+        UNKNOWN = 1
+        APPROVED = 2
+        DISAPPROVED = 3
+        PENDING_REVIEW = 4
+        UNDER_REVIEW = 5
+
+
 class AdGroupCriterionErrorEnum(object):
     class AdGroupCriterionError(enum.IntEnum):
         """
@@ -818,6 +839,7 @@ class AdGroupTypeEnum(object):
           VIDEO_TRUE_VIEW_IN_DISPLAY (int): TrueView in-display video ads.
           VIDEO_NON_SKIPPABLE_IN_STREAM (int): Unskippable in-stream video ads.
           VIDEO_OUTSTREAM (int): Outstream video ads.
+          SEARCH_DYNAMIC_ADS (int): Ad group type for Dynamic Search Ads ad groups.
         """
         UNSPECIFIED = 0
         UNKNOWN = 1
@@ -831,6 +853,7 @@ class AdGroupTypeEnum(object):
         VIDEO_TRUE_VIEW_IN_DISPLAY = 10
         VIDEO_NON_SKIPPABLE_IN_STREAM = 11
         VIDEO_OUTSTREAM = 12
+        SEARCH_DYNAMIC_ADS = 13
 
 
 class AdNetworkTypeEnum(object):
@@ -970,6 +993,9 @@ class AdTypeEnum(object):
           IMAGE_AD (int): This ad is an Image ad.
           RESPONSIVE_SEARCH_AD (int): The ad is a responsive search ad.
           LEGACY_RESPONSIVE_DISPLAY_AD (int): The ad is a legacy responsive display ad.
+          APP_AD (int): The ad is an app ad.
+          LEGACY_APP_INSTALL_AD (int): The ad is a legacy app install ad.
+          RESPONSIVE_DISPLAY_AD (int): The ad is a responsive display ad.
         """
         UNSPECIFIED = 0
         UNKNOWN = 1
@@ -985,6 +1011,9 @@ class AdTypeEnum(object):
         IMAGE_AD = 14
         RESPONSIVE_SEARCH_AD = 15
         LEGACY_RESPONSIVE_DISPLAY_AD = 16
+        APP_AD = 17
+        LEGACY_APP_INSTALL_AD = 18
+        RESPONSIVE_DISPLAY_AD = 19
 
 
 class AdvertisingChannelSubTypeEnum(object):
@@ -1005,6 +1034,7 @@ class AdvertisingChannelSubTypeEnum(object):
           VIDEO_OUTSTREAM (int): Video Outstream campaigns.
           VIDEO_ACTION (int): Video TrueView for Action campaigns.
           VIDEO_NON_SKIPPABLE (int): Video campaigns with non-skippable video ads.
+          APP_CAMPAIGN (int): Universal App Campaign.
         """
         UNSPECIFIED = 0
         UNKNOWN = 1
@@ -1018,6 +1048,7 @@ class AdvertisingChannelSubTypeEnum(object):
         VIDEO_OUTSTREAM = 9
         VIDEO_ACTION = 10
         VIDEO_NON_SKIPPABLE = 11
+        APP_CAMPAIGN = 12
 
 
 class AdvertisingChannelTypeEnum(object):
@@ -1034,6 +1065,8 @@ class AdvertisingChannelTypeEnum(object):
           and on google.com search results.
           HOTEL (int): Hotel Ads campaigns.
           VIDEO (int): Video campaigns.
+          MULTI_CHANNEL (int): Universal App Campaigns, including universal app install and universal
+          app reengagement campaigns, that run across multiple channels.
         """
         UNSPECIFIED = 0
         UNKNOWN = 1
@@ -1042,6 +1075,7 @@ class AdvertisingChannelTypeEnum(object):
         SHOPPING = 4
         HOTEL = 5
         VIDEO = 6
+        MULTI_CHANNEL = 7
 
 
 class AdxErrorEnum(object):
@@ -1136,6 +1170,51 @@ class AgeRangeTypeEnum(object):
         AGE_RANGE_UNDETERMINED = 503999
 
 
+class AppCampaignAppStoreEnum(object):
+    class AppCampaignAppStore(enum.IntEnum):
+        """
+        Enum describing app campaign app store.
+
+        Attributes:
+          UNSPECIFIED (int): Not specified.
+          UNKNOWN (int): Used for return value only. Represents value unknown in this version.
+          APPLE_APP_STORE (int): Apple app store.
+          GOOGLE_APP_STORE (int): Google play.
+        """
+        UNSPECIFIED = 0
+        UNKNOWN = 1
+        APPLE_APP_STORE = 2
+        GOOGLE_APP_STORE = 3
+
+
+class AppCampaignBiddingStrategyGoalTypeEnum(object):
+    class AppCampaignBiddingStrategyGoalType(enum.IntEnum):
+        """
+        Goal type of App campaign BiddingStrategy.
+
+        Attributes:
+          UNSPECIFIED (int): Not specified.
+          UNKNOWN (int): Used for return value only. Represents value unknown in this version.
+          OPTIMIZE_INSTALLS_TARGET_INSTALL_COST (int): Aim to maximize the number of app installs. The cpa bid is the
+          target cost per install.
+          OPTIMIZE_IN_APP_CONVERSIONS_TARGET_INSTALL_COST (int): Aim to maximize the long term number of selected in-app conversions from
+          app installs. The cpa bid is the target cost per install.
+          OPTIMIZE_IN_APP_CONVERSIONS_TARGET_CONVERSION_COST (int): Aim to maximize the long term number of selected in-app conversions from
+          app installs. The cpa bid is the target cost per in-app conversion. Note
+          that the actual cpa may seem higher than the target cpa at first, since
+          the long term conversions haven’t happened yet.
+          OPTIMIZE_RETURN_ON_ADVERTISING_SPEND (int): Aim to maximize all conversions' value, i.e. install + selected in-app
+          conversions while achieving or exceeding target return on advertising
+          spend.
+        """
+        UNSPECIFIED = 0
+        UNKNOWN = 1
+        OPTIMIZE_INSTALLS_TARGET_INSTALL_COST = 2
+        OPTIMIZE_IN_APP_CONVERSIONS_TARGET_INSTALL_COST = 3
+        OPTIMIZE_IN_APP_CONVERSIONS_TARGET_CONVERSION_COST = 4
+        OPTIMIZE_RETURN_ON_ADVERTISING_SPEND = 5
+
+
 class AppPaymentModelTypeEnum(object):
     class AppPaymentModelType(enum.IntEnum):
         """
@@ -1202,6 +1281,47 @@ class AppStoreEnum(object):
         UNKNOWN = 1
         APPLE_ITUNES = 2
         GOOGLE_PLAY = 3
+
+
+class AssetErrorEnum(object):
+    class AssetError(enum.IntEnum):
+        """
+        Enum describing possible asset errors.
+
+        Attributes:
+          UNSPECIFIED (int): Enum unspecified.
+          UNKNOWN (int): The received error code is not known in this version.
+          CUSTOMER_NOT_WHITELISTED_FOR_ASSET_TYPE (int): The customer is not whitelisted for this asset type.
+          DUPLICATE_ASSET (int): Assets are duplicated across operations.
+          DUPLICATE_ASSET_NAME (int): The asset name is duplicated, either across operations or with an
+          existing asset.
+          ASSET_DATA_IS_MISSING (int): The Asset.asset\_data oneof is empty.
+        """
+        UNSPECIFIED = 0
+        UNKNOWN = 1
+        CUSTOMER_NOT_WHITELISTED_FOR_ASSET_TYPE = 2
+        DUPLICATE_ASSET = 3
+        DUPLICATE_ASSET_NAME = 4
+        ASSET_DATA_IS_MISSING = 5
+
+
+class AssetTypeEnum(object):
+    class AssetType(enum.IntEnum):
+        """
+        Enum describing possible types of asset.
+
+        Attributes:
+          UNSPECIFIED (int): Not specified.
+          UNKNOWN (int): Used for return value only. Represents value unknown in this version.
+          YOUTUBE_VIDEO (int): YouTube video asset.
+          MEDIA_BUNDLE (int): Media bundle asset.
+          IMAGE (int): Image asset.
+        """
+        UNSPECIFIED = 0
+        UNKNOWN = 1
+        YOUTUBE_VIDEO = 2
+        MEDIA_BUNDLE = 3
+        IMAGE = 4
 
 
 class AttributionModelEnum(object):
@@ -1312,6 +1432,8 @@ class AuthorizationErrorEnum(object):
           CUSTOMER_NOT_ENABLED (int): The customer can't be used because it isn't enabled.
           MISSING_TOS (int): The developer must sign the terms of service. They can be found here:
           ads.google.com/aw/apicenter
+          DEVELOPER_TOKEN_NOT_APPROVED (int): The developer token is not approved. Non-approved developer tokens can
+          only be used with test accounts.
         """
         UNSPECIFIED = 0
         UNKNOWN = 1
@@ -1324,6 +1446,7 @@ class AuthorizationErrorEnum(object):
         INCOMPLETE_SIGNUP = 8
         CUSTOMER_NOT_ENABLED = 24
         MISSING_TOS = 9
+        DEVELOPER_TOKEN_NOT_APPROVED = 10
 
 
 class BidModifierSourceEnum(object):
@@ -1378,6 +1501,7 @@ class BiddingErrorEnum(object):
           BID_TOO_MANY_FRACTIONAL_DIGITS (int): Bid has too many fractional digit precision.
           INVALID_DOMAIN_NAME (int): Invalid domain name specified.
           NOT_COMPATIBLE_WITH_PAYMENT_MODE (int): The field is not compatible with payment mode.
+          NOT_COMPATIBLE_WITH_BUDGET_TYPE (int): Bidding strategy is incompatible with the budget type.
         """
         UNSPECIFIED = 0
         UNKNOWN = 1
@@ -1402,25 +1526,28 @@ class BiddingErrorEnum(object):
         BID_TOO_MANY_FRACTIONAL_DIGITS = 32
         INVALID_DOMAIN_NAME = 33
         NOT_COMPATIBLE_WITH_PAYMENT_MODE = 34
+        NOT_COMPATIBLE_WITH_BUDGET_TYPE = 35
 
 
 class BiddingSourceEnum(object):
     class BiddingSource(enum.IntEnum):
         """
-        Enum describing possible bidding sources.
+        Indicates where a bid or target is defined. For example, an ad group
+        criterion may define a cpc bid directly, or it can inherit its cpc bid from
+        the ad group.
 
         Attributes:
           UNSPECIFIED (int): Not specified.
           UNKNOWN (int): Used for return value only. Represents value unknown in this version.
-          ADGROUP (int): Bidding entity is defined on the ad group.
-          CRITERION (int): Bidding entity is defined on the ad group criterion.
-          CAMPAIGN_BIDDING_STRATEGY (int): Effective bidding entity is inherited from campaign bidding strategy.
+          CAMPAIGN_BIDDING_STRATEGY (int): Effective bid or target is inherited from campaign bidding strategy.
+          AD_GROUP (int): The bid or target is defined on the ad group.
+          AD_GROUP_CRITERION (int): The bid or target is defined on the ad group criterion.
         """
         UNSPECIFIED = 0
         UNKNOWN = 1
-        ADGROUP = 2
-        CRITERION = 3
         CAMPAIGN_BIDDING_STRATEGY = 5
+        AD_GROUP = 6
+        AD_GROUP_CRITERION = 7
 
 
 class BiddingStrategyErrorEnum(object):
@@ -1695,6 +1822,23 @@ class BudgetStatusEnum(object):
         REMOVED = 3
 
 
+class BudgetTypeEnum(object):
+    class BudgetType(enum.IntEnum):
+        """
+        Possible Budget types.
+
+        Attributes:
+          UNSPECIFIED (int): Not specified.
+          UNKNOWN (int): Used for return value only. Represents value unknown in this version.
+          STANDARD (int): Budget type for standard Google Ads usage.
+          HOTEL_ADS_COMMISSION (int): Budget type for Hotels Ads commission program.
+        """
+        UNSPECIFIED = 0
+        UNKNOWN = 1
+        STANDARD = 2
+        HOTEL_ADS_COMMISSION = 3
+
+
 class CallConversionReportingStateEnum(object):
     class CallConversionReportingState(enum.IntEnum):
         """
@@ -1904,6 +2048,7 @@ class CampaignErrorEnum(object):
           MISSING_HOTEL_SETTING (int): Hotel setting was not found when creating a hotel ads campaign.
           CANNOT_USE_SHARED_CAMPAIGN_BUDGET_WHILE_PART_OF_CAMPAIGN_GROUP (int): A Campaign cannot use shared campaign budgets and be part of a campaign
           group.
+          APP_NOT_FOUND (int): The app ID was not found.
         """
         UNSPECIFIED = 0
         UNKNOWN = 1
@@ -1943,6 +2088,7 @@ class CampaignErrorEnum(object):
         INVALID_HOTEL_CUSTOMER_LINK = 38
         MISSING_HOTEL_SETTING = 39
         CANNOT_USE_SHARED_CAMPAIGN_BUDGET_WHILE_PART_OF_CAMPAIGN_GROUP = 40
+        APP_NOT_FOUND = 41
 
 
 class CampaignFeedErrorEnum(object):
@@ -2175,7 +2321,7 @@ class ClickTypeEnum(object):
           SWIPEABLE_GALLERY_AD_SITELINK_FIVE (int): Sitelink 5.
           HOTEL_PRICE (int): Hotel price.
           PRICE_EXTENSION (int): Price Extension.
-          HOTEL_BOOK_ON_GOOGLE_ROOM_SELECTION (int): Hotel Book-on-Google room selection.
+          HOTEL_BOOK_ON_GOOGLE_ROOM_SELECTION (int): Book on Google hotel room selection.
         """
         UNSPECIFIED = 0
         UNKNOWN = 1
@@ -2443,6 +2589,64 @@ class ConversionActionTypeEnum(object):
         WEBSITE_CALL = 9
 
 
+class ConversionAdjustmentTypeEnum(object):
+    class ConversionAdjustmentType(enum.IntEnum):
+        """
+        The different actions advertisers can take to adjust the conversions that
+        they already reported. Retractions negate a conversion. Restatements change
+        the value of a conversion.
+
+        Attributes:
+          UNSPECIFIED (int): Not specified.
+          UNKNOWN (int): Represents value unknown in this version.
+          RETRACTION (int): Negates a conversion so that its total value and count are both zero.
+          RESTATEMENT (int): Changes the value of a conversion.
+        """
+        UNSPECIFIED = 0
+        UNKNOWN = 1
+        RETRACTION = 2
+        RESTATEMENT = 3
+
+
+class ConversionAdjustmentUploadErrorEnum(object):
+    class ConversionAdjustmentUploadError(enum.IntEnum):
+        """
+        Enum describing possible conversion adjustment upload errors.
+
+        Attributes:
+          UNSPECIFIED (int): Not specified.
+          UNKNOWN (int): The received error code is not known in this version.
+          TOO_RECENT_CONVERSION_ACTION (int): The specified conversion action was created too recently.
+          Please try the upload again after 4-6 hours have passed since the
+          conversion action was created.
+          INVALID_CONVERSION_ACTION (int): No conversion action of a supported ConversionActionType that matches the
+          provided information can be found for the customer.
+          CONVERSION_ALREADY_RETRACTED (int): A retraction was already reported for this conversion.
+          CONVERSION_NOT_FOUND (int): A conversion for the supplied combination of conversion
+          action and conversion identifier could not be found.
+          CONVERSION_EXPIRED (int): The specified conversion has already expired. Conversions expire after 55
+          days, after which adjustments cannot be reported against them.
+          ADJUSTMENT_PRECEDES_CONVERSION (int): The supplied adjustment date time precedes that of the original
+          conversion.
+          MORE_RECENT_RESTATEMENT_FOUND (int): A restatement with a more recent adjustment date time was already
+          reported for this conversion.
+          TOO_RECENT_CONVERSION (int): The conversion was created too recently.
+          CANNOT_RESTATE_CONVERSION_ACTION_THAT_ALWAYS_USES_DEFAULT_CONVERSION_VALUE (int): Restatements cannot be reported for a conversion action that always uses
+          the default value.
+        """
+        UNSPECIFIED = 0
+        UNKNOWN = 1
+        TOO_RECENT_CONVERSION_ACTION = 2
+        INVALID_CONVERSION_ACTION = 3
+        CONVERSION_ALREADY_RETRACTED = 4
+        CONVERSION_NOT_FOUND = 5
+        CONVERSION_EXPIRED = 6
+        ADJUSTMENT_PRECEDES_CONVERSION = 7
+        MORE_RECENT_RESTATEMENT_FOUND = 8
+        TOO_RECENT_CONVERSION = 9
+        CANNOT_RESTATE_CONVERSION_ACTION_THAT_ALWAYS_USES_DEFAULT_CONVERSION_VALUE = 10
+
+
 class ConversionAttributionEventTypeEnum(object):
     class ConversionAttributionEventType(enum.IntEnum):
         """
@@ -2704,6 +2908,18 @@ class ConversionUploadErrorEnum(object):
           already exists in our system.
           DUPLICATE_ORDER_ID (int): The request contained two or more conversions with the same order id and
           conversion action combination.
+          TOO_RECENT_CALL (int): The call occurred too recently. Please try uploading again after 24 hours
+          have passed since the call occurred.
+          EXPIRED_CALL (int): The click that initiated the call is too old for this conversion to be
+          imported.
+          CALL_NOT_FOUND (int): The call or the click leading to the call was not found.
+          CONVERSION_PRECEDES_CALL (int): The specified conversion\_date\_time is before the
+          call\_start\_date\_time.
+          CONVERSION_TRACKING_NOT_ENABLED_AT_CALL_TIME (int): The click associated with the call does not contain conversion tracking
+          information.
+          UNPARSEABLE_CALLERS_PHONE_NUMBER (int): The caller’s phone number cannot be parsed. It should be formatted either
+          as E.164 "+16502531234", International "+64 3-331 6005" or US national
+          number "6502531234".
         """
         UNSPECIFIED = 0
         UNKNOWN = 1
@@ -2722,6 +2938,12 @@ class ConversionUploadErrorEnum(object):
         ORDER_ID_NOT_PERMITTED_FOR_EXTERNALLY_ATTRIBUTED_CONVERSION_ACTION = 14
         ORDER_ID_ALREADY_IN_USE = 15
         DUPLICATE_ORDER_ID = 16
+        TOO_RECENT_CALL = 17
+        EXPIRED_CALL = 18
+        CALL_NOT_FOUND = 19
+        CONVERSION_PRECEDES_CALL = 20
+        CONVERSION_TRACKING_NOT_ENABLED_AT_CALL_TIME = 21
+        UNPARSEABLE_CALLERS_PHONE_NUMBER = 22
 
 
 class CountryCodeErrorEnum(object):
@@ -2833,6 +3055,8 @@ class CriterionErrorEnum(object):
           CANNOT_ADD_URLS_TO_CRITERION_TYPE_FOR_CAMPAIGN_TYPE (int): Final URLs, URL Templates and CustomParameters cannot be set for the
           criterion types of Gender, AgeRange, UserList, Placement, MobileApp, and
           MobileAppCategory in search campaigns and shopping campaigns.
+          INVALID_CUSTOM_AFFINITY (int): Invalid custom affinity criterion.
+          INVALID_CUSTOM_INTENT (int): Invalid custom intent criterion.
           INVALID_IP_ADDRESS (int): IP address is not valid.
           INVALID_IP_FORMAT (int): IP format is not valid.
           INVALID_MOBILE_APP (int): Mobile application is not valid.
@@ -2955,6 +3179,8 @@ class CriterionErrorEnum(object):
         CANNOT_ADD_USER_INTERESTS_TO_SEARCH_CAMPAIGNS = 31
         CANNOT_SET_BIDS_ON_CRITERION_TYPE_IN_SEARCH_CAMPAIGNS = 32
         CANNOT_ADD_URLS_TO_CRITERION_TYPE_FOR_CAMPAIGN_TYPE = 33
+        INVALID_CUSTOM_AFFINITY = 96
+        INVALID_CUSTOM_INTENT = 97
         INVALID_IP_ADDRESS = 34
         INVALID_IP_FORMAT = 35
         INVALID_MOBILE_APP = 36
@@ -5812,6 +6038,29 @@ class LanguageCodeErrorEnum(object):
         INVALID_LANGUAGE_CODE = 3
 
 
+class LegacyAppInstallAdAppStoreEnum(object):
+    class LegacyAppInstallAdAppStore(enum.IntEnum):
+        """
+        App store type in a legacy app install ad.
+
+        Attributes:
+          UNSPECIFIED (int): Not specified.
+          UNKNOWN (int): Used for return value only. Represents value unknown in this version.
+          APPLE_APP_STORE (int): Apple iTunes.
+          GOOGLE_PLAY (int): Google Play.
+          WINDOWS_STORE (int): Windows Store.
+          WINDOWS_PHONE_STORE (int): Windows Phone Store.
+          CN_APP_STORE (int): The app is hosted in a Chinese app store.
+        """
+        UNSPECIFIED = 0
+        UNKNOWN = 1
+        APPLE_APP_STORE = 2
+        GOOGLE_PLAY = 3
+        WINDOWS_STORE = 4
+        WINDOWS_PHONE_STORE = 5
+        CN_APP_STORE = 6
+
+
 class ListOperationErrorEnum(object):
     class ListOperationError(enum.IntEnum):
         """
@@ -6415,6 +6664,7 @@ class MutateErrorEnum(object):
           data.
           MUTATE_NOT_ALLOWED (int): Mutates are not allowed for the requested resource.
           RESOURCE_NOT_IN_GOOGLE_ADS (int): The resource isn't in Google Ads. It belongs to another ads system.
+          RESOURCE_ALREADY_EXISTS (int): The resource being created already exists.
         """
         UNSPECIFIED = 0
         UNKNOWN = 1
@@ -6423,6 +6673,7 @@ class MutateErrorEnum(object):
         INCONSISTENT_FIELD_VALUES = 8
         MUTATE_NOT_ALLOWED = 9
         RESOURCE_NOT_IN_GOOGLE_ADS = 10
+        RESOURCE_ALREADY_EXISTS = 11
 
 
 class MutateJobErrorEnum(object):
@@ -6655,6 +6906,23 @@ class PartialFailureErrorEnum(object):
         PARTIAL_FAILURE_MODE_REQUIRED = 2
 
 
+class PaymentModeEnum(object):
+    class PaymentMode(enum.IntEnum):
+        """
+        Enum describing possible payment modes.
+
+        Attributes:
+          UNSPECIFIED (int): Not specified.
+          UNKNOWN (int): Used for return value only. Represents value unknown in this version.
+          PAYMENT_MODE_CPC (int): Pay per click.
+          PAYMENT_MODE_CPA (int): Pay per acquisition.
+        """
+        UNSPECIFIED = 0
+        UNKNOWN = 1
+        PAYMENT_MODE_CPC = 2
+        PAYMENT_MODE_CPA = 3
+
+
 class PlaceholderTypeEnum(object):
     class PlaceholderType(enum.IntEnum):
         """
@@ -6876,10 +7144,15 @@ class PolicyValidationParameterErrorEnum(object):
           UNSPECIFIED (int): Enum unspecified.
           UNKNOWN (int): The received error code is not known in this version.
           UNSUPPORTED_AD_TYPE_FOR_IGNORABLE_POLICY_TOPICS (int): Ignorable policy topics are not supported for the ad type.
+          UNSUPPORTED_AD_TYPE_FOR_EXEMPT_POLICY_VIOLATION_KEYS (int): Exempt policy violation keys are not supported for the ad type.
+          CANNOT_SET_BOTH_IGNORABLE_POLICY_TOPICS_AND_EXEMPT_POLICY_VIOLATION_KEYS (int): Cannot set ignorable policy topics and exempt policy violation keys in
+          the same policy violation parameter.
         """
         UNSPECIFIED = 0
         UNKNOWN = 1
         UNSUPPORTED_AD_TYPE_FOR_IGNORABLE_POLICY_TOPICS = 2
+        UNSUPPORTED_AD_TYPE_FOR_EXEMPT_POLICY_VIOLATION_KEYS = 3
+        CANNOT_SET_BOTH_IGNORABLE_POLICY_TOPICS_AND_EXEMPT_POLICY_VIOLATION_KEYS = 4
 
 
 class PolicyViolationErrorEnum(object):
@@ -7723,6 +7996,7 @@ class RecommendationErrorEnum(object):
           partial failure mode is not enabled.
           DUPLICATE_RESOURCE_NAME (int): Request contains multiple operations with the same resource\_name.
           RECOMMENDATION_ALREADY_DISMISSED (int): The recommendation requested to dismiss has already been dismissed.
+          INVALID_APPLY_REQUEST (int): The recommendation apply request was malformed and invalid.
         """
         UNSPECIFIED = 0
         UNKNOWN = 1
@@ -7739,6 +8013,7 @@ class RecommendationErrorEnum(object):
         DIFFERENT_TYPES_NOT_SUPPORTED = 12
         DUPLICATE_RESOURCE_NAME = 13
         RECOMMENDATION_ALREADY_DISMISSED = 14
+        INVALID_APPLY_REQUEST = 15
 
 
 class RecommendationTypeEnum(object):
@@ -7762,6 +8037,10 @@ class RecommendationTypeEnum(object):
           strategy.
           OPTIMIZE_AD_ROTATION (int): Recommendation to start using the "Optimize" ad rotation setting for the
           given ad group.
+          KEYWORD_MATCH_TYPE (int): Recommendation to change an existing keyword from one match type to a
+          broader match type.
+          MOVE_UNUSED_BUDGET (int): Recommendation to move unused budget from one budget to a constrained
+          budget.
         """
         UNSPECIFIED = 0
         UNKNOWN = 1
@@ -7774,6 +8053,8 @@ class RecommendationTypeEnum(object):
         SEARCH_PARTNERS_OPT_IN = 8
         MAXIMIZE_CLICKS_OPT_IN = 9
         OPTIMIZE_AD_ROTATION = 10
+        KEYWORD_MATCH_TYPE = 14
+        MOVE_UNUSED_BUDGET = 15
 
 
 class RegionCodeErrorEnum(object):
@@ -7807,6 +8088,7 @@ class RequestErrorEnum(object):
           RESOURCE_NOT_FOUND (int): Requested resource not found.
           INVALID_PAGE_TOKEN (int): Next page token specified in user request is invalid.
           EXPIRED_PAGE_TOKEN (int): Next page token specified in user request has expired.
+          INVALID_PAGE_SIZE (int): Page size specified in user request is invalid.
           REQUIRED_FIELD_MISSING (int): Required field is missing.
           IMMUTABLE_FIELD (int): The field cannot be modified because it's immutable. It's also possible
           that the field can be modified using 'create' operation but not 'update'.
@@ -7830,6 +8112,7 @@ class RequestErrorEnum(object):
         RESOURCE_NOT_FOUND = 6
         INVALID_PAGE_TOKEN = 7
         EXPIRED_PAGE_TOKEN = 8
+        INVALID_PAGE_SIZE = 22
         REQUIRED_FIELD_MISSING = 9
         IMMUTABLE_FIELD = 11
         TOO_MANY_MUTATE_OPERATIONS = 13

@@ -20,7 +20,7 @@ DESCRIPTOR = _descriptor.FileDescriptor(
   package='google.ads.googleads.v1.errors',
   syntax='proto3',
   serialized_options=_b('\n\"com.google.ads.googleads.v1.errorsB#PolicyValidationParameterErrorProtoP\001ZDgoogle.golang.org/genproto/googleapis/ads/googleads/v1/errors;errors\242\002\003GAA\252\002\036Google.Ads.GoogleAds.V1.Errors\312\002\036Google\\Ads\\GoogleAds\\V1\\Errors\352\002\"Google::Ads::GoogleAds::V1::Errors'),
-  serialized_pb=_b('\nLgoogle/ads/googleads_v1/proto/errors/policy_validation_parameter_error.proto\x12\x1egoogle.ads.googleads.v1.errors\x1a\x1cgoogle/api/annotations.proto\"\x99\x01\n\"PolicyValidationParameterErrorEnum\"s\n\x1ePolicyValidationParameterError\x12\x0f\n\x0bUNSPECIFIED\x10\x00\x12\x0b\n\x07UNKNOWN\x10\x01\x12\x33\n/UNSUPPORTED_AD_TYPE_FOR_IGNORABLE_POLICY_TOPICS\x10\x02\x42\xfe\x01\n\"com.google.ads.googleads.v1.errorsB#PolicyValidationParameterErrorProtoP\x01ZDgoogle.golang.org/genproto/googleapis/ads/googleads/v1/errors;errors\xa2\x02\x03GAA\xaa\x02\x1eGoogle.Ads.GoogleAds.V1.Errors\xca\x02\x1eGoogle\\Ads\\GoogleAds\\V1\\Errors\xea\x02\"Google::Ads::GoogleAds::V1::Errorsb\x06proto3')
+  serialized_pb=_b('\nLgoogle/ads/googleads_v1/proto/errors/policy_validation_parameter_error.proto\x12\x1egoogle.ads.googleads.v1.errors\x1a\x1cgoogle/api/annotations.proto\"\xa2\x02\n\"PolicyValidationParameterErrorEnum\"\xfb\x01\n\x1ePolicyValidationParameterError\x12\x0f\n\x0bUNSPECIFIED\x10\x00\x12\x0b\n\x07UNKNOWN\x10\x01\x12\x33\n/UNSUPPORTED_AD_TYPE_FOR_IGNORABLE_POLICY_TOPICS\x10\x02\x12\x38\n4UNSUPPORTED_AD_TYPE_FOR_EXEMPT_POLICY_VIOLATION_KEYS\x10\x03\x12L\nHCANNOT_SET_BOTH_IGNORABLE_POLICY_TOPICS_AND_EXEMPT_POLICY_VIOLATION_KEYS\x10\x04\x42\xfe\x01\n\"com.google.ads.googleads.v1.errorsB#PolicyValidationParameterErrorProtoP\x01ZDgoogle.golang.org/genproto/googleapis/ads/googleads/v1/errors;errors\xa2\x02\x03GAA\xaa\x02\x1eGoogle.Ads.GoogleAds.V1.Errors\xca\x02\x1eGoogle\\Ads\\GoogleAds\\V1\\Errors\xea\x02\"Google::Ads::GoogleAds::V1::Errorsb\x06proto3')
   ,
   dependencies=[google_dot_api_dot_annotations__pb2.DESCRIPTOR,])
 
@@ -44,11 +44,19 @@ _POLICYVALIDATIONPARAMETERERRORENUM_POLICYVALIDATIONPARAMETERERROR = _descriptor
       name='UNSUPPORTED_AD_TYPE_FOR_IGNORABLE_POLICY_TOPICS', index=2, number=2,
       serialized_options=None,
       type=None),
+    _descriptor.EnumValueDescriptor(
+      name='UNSUPPORTED_AD_TYPE_FOR_EXEMPT_POLICY_VIOLATION_KEYS', index=3, number=3,
+      serialized_options=None,
+      type=None),
+    _descriptor.EnumValueDescriptor(
+      name='CANNOT_SET_BOTH_IGNORABLE_POLICY_TOPICS_AND_EXEMPT_POLICY_VIOLATION_KEYS', index=4, number=4,
+      serialized_options=None,
+      type=None),
   ],
   containing_type=None,
   serialized_options=None,
-  serialized_start=181,
-  serialized_end=296,
+  serialized_start=182,
+  serialized_end=433,
 )
 _sym_db.RegisterEnumDescriptor(_POLICYVALIDATIONPARAMETERERRORENUM_POLICYVALIDATIONPARAMETERERROR)
 
@@ -74,7 +82,7 @@ _POLICYVALIDATIONPARAMETERERRORENUM = _descriptor.Descriptor(
   oneofs=[
   ],
   serialized_start=143,
-  serialized_end=296,
+  serialized_end=433,
 )
 
 _POLICYVALIDATIONPARAMETERERRORENUM_POLICYVALIDATIONPARAMETERERROR.containing_type = _POLICYVALIDATIONPARAMETERERRORENUM

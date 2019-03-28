@@ -21,7 +21,7 @@ DESCRIPTOR = _descriptor.FileDescriptor(
   package='google.ads.googleads.v1.services',
   syntax='proto3',
   serialized_options=_b('\n$com.google.ads.googleads.v1.servicesB#ShoppingPerformanceViewServiceProtoP\001ZHgoogle.golang.org/genproto/googleapis/ads/googleads/v1/services;services\242\002\003GAA\252\002 Google.Ads.GoogleAds.V1.Services\312\002 Google\\Ads\\GoogleAds\\V1\\Services\352\002$Google::Ads::GoogleAds::V1::Services'),
-  serialized_pb=_b('\nNgoogle/ads/googleads_v1/proto/services/shopping_performance_view_service.proto\x12 google.ads.googleads.v1.services\x1aGgoogle/ads/googleads_v1/proto/resources/shopping_performance_view.proto\x1a\x1cgoogle/api/annotations.proto\":\n!GetShoppingPerformanceViewRequest\x12\x15\n\rresource_name\x18\x01 \x01(\t2\x83\x02\n\x1eShoppingPerformanceViewService\x12\xe0\x01\n\x1aGetShoppingPerformanceView\x12\x43.google.ads.googleads.v1.services.GetShoppingPerformanceViewRequest\x1a:.google.ads.googleads.v1.resources.ShoppingPerformanceView\"A\x82\xd3\xe4\x93\x02;\x12\x39/v1/{resource_name=customers/*/shoppingPerformanceView/*}B\x8a\x02\n$com.google.ads.googleads.v1.servicesB#ShoppingPerformanceViewServiceProtoP\x01ZHgoogle.golang.org/genproto/googleapis/ads/googleads/v1/services;services\xa2\x02\x03GAA\xaa\x02 Google.Ads.GoogleAds.V1.Services\xca\x02 Google\\Ads\\GoogleAds\\V1\\Services\xea\x02$Google::Ads::GoogleAds::V1::Servicesb\x06proto3')
+  serialized_pb=_b('\nNgoogle/ads/googleads_v1/proto/services/shopping_performance_view_service.proto\x12 google.ads.googleads.v1.services\x1aGgoogle/ads/googleads_v1/proto/resources/shopping_performance_view.proto\x1a\x1cgoogle/api/annotations.proto\":\n!GetShoppingPerformanceViewRequest\x12\x15\n\rresource_name\x18\x01 \x01(\t2\x81\x02\n\x1eShoppingPerformanceViewService\x12\xde\x01\n\x1aGetShoppingPerformanceView\x12\x43.google.ads.googleads.v1.services.GetShoppingPerformanceViewRequest\x1a:.google.ads.googleads.v1.resources.ShoppingPerformanceView\"?\x82\xd3\xe4\x93\x02\x39\x12\x37/v1/{resource_name=customers/*/shoppingPerformanceView}B\x8a\x02\n$com.google.ads.googleads.v1.servicesB#ShoppingPerformanceViewServiceProtoP\x01ZHgoogle.golang.org/genproto/googleapis/ads/googleads/v1/services;services\xa2\x02\x03GAA\xaa\x02 Google.Ads.GoogleAds.V1.Services\xca\x02 Google\\Ads\\GoogleAds\\V1\\Services\xea\x02$Google::Ads::GoogleAds::V1::Servicesb\x06proto3')
   ,
   dependencies=[google_dot_ads_dot_googleads__v1_dot_proto_dot_resources_dot_shopping__performance__view__pb2.DESCRIPTOR,google_dot_api_dot_annotations__pb2.DESCRIPTOR,])
 
@@ -87,7 +87,7 @@ _SHOPPINGPERFORMANCEVIEWSERVICE = _descriptor.ServiceDescriptor(
   index=0,
   serialized_options=None,
   serialized_start=280,
-  serialized_end=539,
+  serialized_end=537,
   methods=[
   _descriptor.MethodDescriptor(
     name='GetShoppingPerformanceView',
@@ -96,7 +96,7 @@ _SHOPPINGPERFORMANCEVIEWSERVICE = _descriptor.ServiceDescriptor(
     containing_service=None,
     input_type=_GETSHOPPINGPERFORMANCEVIEWREQUEST,
     output_type=google_dot_ads_dot_googleads__v1_dot_proto_dot_resources_dot_shopping__performance__view__pb2._SHOPPINGPERFORMANCEVIEW,
-    serialized_options=_b('\202\323\344\223\002;\0229/v1/{resource_name=customers/*/shoppingPerformanceView/*}'),
+    serialized_options=_b('\202\323\344\223\0029\0227/v1/{resource_name=customers/*/shoppingPerformanceView}'),
   ),
 ])
 _sym_db.RegisterServiceDescriptor(_SHOPPINGPERFORMANCEVIEWSERVICE)

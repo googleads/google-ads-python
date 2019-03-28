@@ -117,3 +117,17 @@ class ConversionUploadServiceGrpcTransport(object):
         """
         return self._stubs[
             'conversion_upload_service_stub'].UploadClickConversions
+
+    @property
+    def upload_call_conversions(self):
+        """Return the gRPC stub for :meth:`ConversionUploadServiceClient.upload_call_conversions`.
+
+        Processes the given call conversions.
+
+        Returns:
+            Callable: A callable which accepts the appropriate
+                deserialized request object and returns a
+                deserialized response object.
+        """
+        return self._stubs[
+            'conversion_upload_service_stub'].UploadCallConversions

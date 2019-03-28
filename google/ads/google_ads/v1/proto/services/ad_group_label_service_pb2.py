@@ -297,7 +297,7 @@ AdGroupLabelOperation = _reflection.GeneratedProtocolMessageType('AdGroupLabelOp
       remove:
           Remove operation: A resource name for the ad group label being
           removed, in this format:  ``customers/{customer_id}/adGroupLab
-          els/{ad_group_id}_{label_id}``
+          els/{ad_group_id}~{label_id}``
   """,
   # @@protoc_insertion_point(class_scope:google.ads.googleads.v1.services.AdGroupLabelOperation)
   ))

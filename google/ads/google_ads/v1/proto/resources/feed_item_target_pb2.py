@@ -176,9 +176,9 @@ FeedItemTarget = _reflection.GeneratedProtocolMessageType('FeedItemTarget', (_me
           The target type of this feed item target. This field is read-
           only.
       feed_item_target_id:
-          The ID of the targeted entity. This field is read-only.
+          The ID of the targeted resource. This field is read-only.
       target:
-          The targeted entity.
+          The targeted resource.
       campaign:
           The targeted campaign.
       ad_group:

@@ -32,6 +32,7 @@ from google.ads.google_ads.v1.services import ad_group_service_client
 from google.ads.google_ads.v1.services import ad_parameter_service_client
 from google.ads.google_ads.v1.services import ad_schedule_view_service_client
 from google.ads.google_ads.v1.services import age_range_view_service_client
+from google.ads.google_ads.v1.services import asset_service_client
 from google.ads.google_ads.v1.services import bidding_strategy_service_client
 from google.ads.google_ads.v1.services import billing_setup_service_client
 from google.ads.google_ads.v1.services import campaign_audience_view_service_client
@@ -47,6 +48,7 @@ from google.ads.google_ads.v1.services import carrier_constant_service_client
 from google.ads.google_ads.v1.services import change_status_service_client
 from google.ads.google_ads.v1.services import click_view_service_client
 from google.ads.google_ads.v1.services import conversion_action_service_client
+from google.ads.google_ads.v1.services import conversion_adjustment_upload_service_client
 from google.ads.google_ads.v1.services import conversion_upload_service_client
 from google.ads.google_ads.v1.services import customer_client_link_service_client
 from google.ads.google_ads.v1.services import customer_client_service_client
@@ -123,6 +125,7 @@ from google.ads.google_ads.v1.services.transports import ad_group_service_grpc_t
 from google.ads.google_ads.v1.services.transports import ad_parameter_service_grpc_transport
 from google.ads.google_ads.v1.services.transports import ad_schedule_view_service_grpc_transport
 from google.ads.google_ads.v1.services.transports import age_range_view_service_grpc_transport
+from google.ads.google_ads.v1.services.transports import asset_service_grpc_transport
 from google.ads.google_ads.v1.services.transports import bidding_strategy_service_grpc_transport
 from google.ads.google_ads.v1.services.transports import billing_setup_service_grpc_transport
 from google.ads.google_ads.v1.services.transports import campaign_audience_view_service_grpc_transport
@@ -138,6 +141,7 @@ from google.ads.google_ads.v1.services.transports import carrier_constant_servic
 from google.ads.google_ads.v1.services.transports import change_status_service_grpc_transport
 from google.ads.google_ads.v1.services.transports import click_view_service_grpc_transport
 from google.ads.google_ads.v1.services.transports import conversion_action_service_grpc_transport
+from google.ads.google_ads.v1.services.transports import conversion_adjustment_upload_service_grpc_transport
 from google.ads.google_ads.v1.services.transports import conversion_upload_service_grpc_transport
 from google.ads.google_ads.v1.services.transports import customer_client_link_service_grpc_transport
 from google.ads.google_ads.v1.services.transports import customer_client_service_grpc_transport
@@ -290,6 +294,12 @@ class AgeRangeViewServiceClient(
     enums = enums
 
 
+class AssetServiceClient(
+    asset_service_client.AssetServiceClient):
+    __doc__ = asset_service_client.AssetServiceClient.__doc__
+    enums = enums
+
+
 class BiddingStrategyServiceClient(
     bidding_strategy_service_client.BiddingStrategyServiceClient):
     __doc__ = bidding_strategy_service_client.BiddingStrategyServiceClient.__doc__
@@ -377,6 +387,12 @@ class ClickViewServiceClient(
 class ConversionActionServiceClient(
     conversion_action_service_client.ConversionActionServiceClient):
     __doc__ = conversion_action_service_client.ConversionActionServiceClient.__doc__
+    enums = enums
+
+
+class ConversionAdjustmentUploadServiceClient(
+    conversion_adjustment_upload_service_client.ConversionAdjustmentUploadServiceClient):
+    __doc__ = conversion_adjustment_upload_service_client.ConversionAdjustmentUploadServiceClient.__doc__
     enums = enums
 
 
@@ -815,6 +831,11 @@ class AgeRangeViewServiceGrpcTransport(
     __doc__ = age_range_view_service_grpc_transport.AgeRangeViewServiceGrpcTransport.__doc__
 
 
+class AssetServiceGrpcTransport(
+    asset_service_grpc_transport.AssetServiceGrpcTransport):
+    __doc__ = asset_service_grpc_transport.AssetServiceGrpcTransport.__doc__
+
+
 class BiddingStrategyServiceGrpcTransport(
     bidding_strategy_service_grpc_transport.BiddingStrategyServiceGrpcTransport):
     __doc__ = bidding_strategy_service_grpc_transport.BiddingStrategyServiceGrpcTransport.__doc__
@@ -888,6 +909,11 @@ class ClickViewServiceGrpcTransport(
 class ConversionActionServiceGrpcTransport(
     conversion_action_service_grpc_transport.ConversionActionServiceGrpcTransport):
     __doc__ = conversion_action_service_grpc_transport.ConversionActionServiceGrpcTransport.__doc__
+
+
+class ConversionAdjustmentUploadServiceGrpcTransport(
+    conversion_adjustment_upload_service_grpc_transport.ConversionAdjustmentUploadServiceGrpcTransport):
+    __doc__ = conversion_adjustment_upload_service_grpc_transport.ConversionAdjustmentUploadServiceGrpcTransport.__doc__
 
 
 class ConversionUploadServiceGrpcTransport(
@@ -1208,6 +1234,7 @@ __all__ = (
     'AdParameterServiceClient',
     'AdScheduleViewServiceClient',
     'AgeRangeViewServiceClient',
+    'AssetServiceClient',
     'BiddingStrategyServiceClient',
     'BillingSetupServiceClient',
     'CampaignAudienceViewServiceClient',
@@ -1223,6 +1250,7 @@ __all__ = (
     'ChangeStatusServiceClient',
     'ClickViewServiceClient',
     'ConversionActionServiceClient',
+    'ConversionAdjustmentUploadServiceClient',
     'ConversionUploadServiceClient',
     'CustomerClientLinkServiceClient',
     'CustomerClientServiceClient',
@@ -1298,6 +1326,7 @@ __all__ = (
     'AdParameterServiceGrpcTransport',
     'AdScheduleViewServiceGrpcTransport',
     'AgeRangeViewServiceGrpcTransport',
+    'AssetServiceGrpcTransport',
     'BiddingStrategyServiceGrpcTransport',
     'BillingSetupServiceGrpcTransport',
     'CampaignAudienceViewServiceGrpcTransport',
@@ -1313,6 +1342,7 @@ __all__ = (
     'ChangeStatusServiceGrpcTransport',
     'ClickViewServiceGrpcTransport',
     'ConversionActionServiceGrpcTransport',
+    'ConversionAdjustmentUploadServiceGrpcTransport',
     'ConversionUploadServiceGrpcTransport',
     'CustomerClientLinkServiceGrpcTransport',
     'CustomerClientServiceGrpcTransport',

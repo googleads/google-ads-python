@@ -12,6 +12,7 @@ from google.protobuf import symbol_database as _symbol_database
 _sym_db = _symbol_database.Default()
 
 
+from google.ads.google_ads.v1.proto.common import policy_pb2 as google_dot_ads_dot_googleads__v1_dot_proto_dot_common_dot_policy__pb2
 from google.ads.google_ads.v1.proto.resources import ad_group_criterion_pb2 as google_dot_ads_dot_googleads__v1_dot_proto_dot_resources_dot_ad__group__criterion__pb2
 from google.api import annotations_pb2 as google_dot_api_dot_annotations__pb2
 from google.protobuf import field_mask_pb2 as google_dot_protobuf_dot_field__mask__pb2
@@ -24,9 +25,9 @@ DESCRIPTOR = _descriptor.FileDescriptor(
   package='google.ads.googleads.v1.services',
   syntax='proto3',
   serialized_options=_b('\n$com.google.ads.googleads.v1.servicesB\034AdGroupCriterionServiceProtoP\001ZHgoogle.golang.org/genproto/googleapis/ads/googleads/v1/services;services\242\002\003GAA\252\002 Google.Ads.GoogleAds.V1.Services\312\002 Google\\Ads\\GoogleAds\\V1\\Services\352\002$Google::Ads::GoogleAds::V1::Services'),
-  serialized_pb=_b('\nGgoogle/ads/googleads_v1/proto/services/ad_group_criterion_service.proto\x12 google.ads.googleads.v1.services\x1a@google/ads/googleads_v1/proto/resources/ad_group_criterion.proto\x1a\x1cgoogle/api/annotations.proto\x1a google/protobuf/field_mask.proto\x1a\x1egoogle/protobuf/wrappers.proto\x1a\x17google/rpc/status.proto\"3\n\x1aGetAdGroupCriterionRequest\x12\x15\n\rresource_name\x18\x01 \x01(\t\"\xb4\x01\n\x1cMutateAdGroupCriteriaRequest\x12\x13\n\x0b\x63ustomer_id\x18\x01 \x01(\t\x12O\n\noperations\x18\x02 \x03(\x0b\x32;.google.ads.googleads.v1.services.AdGroupCriterionOperation\x12\x17\n\x0fpartial_failure\x18\x03 \x01(\x08\x12\x15\n\rvalidate_only\x18\x04 \x01(\x08\"\xf9\x01\n\x19\x41\x64GroupCriterionOperation\x12/\n\x0bupdate_mask\x18\x04 \x01(\x0b\x32\x1a.google.protobuf.FieldMask\x12\x45\n\x06\x63reate\x18\x01 \x01(\x0b\x32\x33.google.ads.googleads.v1.resources.AdGroupCriterionH\x00\x12\x45\n\x06update\x18\x02 \x01(\x0b\x32\x33.google.ads.googleads.v1.resources.AdGroupCriterionH\x00\x12\x10\n\x06remove\x18\x03 \x01(\tH\x00\x42\x0b\n\toperation\"\xa3\x01\n\x1dMutateAdGroupCriteriaResponse\x12\x31\n\x15partial_failure_error\x18\x03 \x01(\x0b\x32\x12.google.rpc.Status\x12O\n\x07results\x18\x02 \x03(\x0b\x32>.google.ads.googleads.v1.services.MutateAdGroupCriterionResult\"5\n\x1cMutateAdGroupCriterionResult\x12\x15\n\rresource_name\x18\x01 \x01(\t2\xbb\x03\n\x17\x41\x64GroupCriterionService\x12\xc3\x01\n\x13GetAdGroupCriterion\x12<.google.ads.googleads.v1.services.GetAdGroupCriterionRequest\x1a\x33.google.ads.googleads.v1.resources.AdGroupCriterion\"9\x82\xd3\xe4\x93\x02\x33\x12\x31/v1/{resource_name=customers/*/adGroupCriteria/*}\x12\xd9\x01\n\x15MutateAdGroupCriteria\x12>.google.ads.googleads.v1.services.MutateAdGroupCriteriaRequest\x1a?.google.ads.googleads.v1.services.MutateAdGroupCriteriaResponse\"?\x82\xd3\xe4\x93\x02\x39\"4/v1/customers/{customer_id=*}/adGroupCriteria:mutate:\x01*B\x83\x02\n$com.google.ads.googleads.v1.servicesB\x1c\x41\x64GroupCriterionServiceProtoP\x01ZHgoogle.golang.org/genproto/googleapis/ads/googleads/v1/services;services\xa2\x02\x03GAA\xaa\x02 Google.Ads.GoogleAds.V1.Services\xca\x02 Google\\Ads\\GoogleAds\\V1\\Services\xea\x02$Google::Ads::GoogleAds::V1::Servicesb\x06proto3')
+  serialized_pb=_b('\nGgoogle/ads/googleads_v1/proto/services/ad_group_criterion_service.proto\x12 google.ads.googleads.v1.services\x1a\x31google/ads/googleads_v1/proto/common/policy.proto\x1a@google/ads/googleads_v1/proto/resources/ad_group_criterion.proto\x1a\x1cgoogle/api/annotations.proto\x1a google/protobuf/field_mask.proto\x1a\x1egoogle/protobuf/wrappers.proto\x1a\x17google/rpc/status.proto\"3\n\x1aGetAdGroupCriterionRequest\x12\x15\n\rresource_name\x18\x01 \x01(\t\"\xb4\x01\n\x1cMutateAdGroupCriteriaRequest\x12\x13\n\x0b\x63ustomer_id\x18\x01 \x01(\t\x12O\n\noperations\x18\x02 \x03(\x0b\x32;.google.ads.googleads.v1.services.AdGroupCriterionOperation\x12\x17\n\x0fpartial_failure\x18\x03 \x01(\x08\x12\x15\n\rvalidate_only\x18\x04 \x01(\x08\"\xd3\x02\n\x19\x41\x64GroupCriterionOperation\x12/\n\x0bupdate_mask\x18\x04 \x01(\x0b\x32\x1a.google.protobuf.FieldMask\x12X\n\x1c\x65xempt_policy_violation_keys\x18\x05 \x03(\x0b\x32\x32.google.ads.googleads.v1.common.PolicyViolationKey\x12\x45\n\x06\x63reate\x18\x01 \x01(\x0b\x32\x33.google.ads.googleads.v1.resources.AdGroupCriterionH\x00\x12\x45\n\x06update\x18\x02 \x01(\x0b\x32\x33.google.ads.googleads.v1.resources.AdGroupCriterionH\x00\x12\x10\n\x06remove\x18\x03 \x01(\tH\x00\x42\x0b\n\toperation\"\xa3\x01\n\x1dMutateAdGroupCriteriaResponse\x12\x31\n\x15partial_failure_error\x18\x03 \x01(\x0b\x32\x12.google.rpc.Status\x12O\n\x07results\x18\x02 \x03(\x0b\x32>.google.ads.googleads.v1.services.MutateAdGroupCriterionResult\"5\n\x1cMutateAdGroupCriterionResult\x12\x15\n\rresource_name\x18\x01 \x01(\t2\xbb\x03\n\x17\x41\x64GroupCriterionService\x12\xc3\x01\n\x13GetAdGroupCriterion\x12<.google.ads.googleads.v1.services.GetAdGroupCriterionRequest\x1a\x33.google.ads.googleads.v1.resources.AdGroupCriterion\"9\x82\xd3\xe4\x93\x02\x33\x12\x31/v1/{resource_name=customers/*/adGroupCriteria/*}\x12\xd9\x01\n\x15MutateAdGroupCriteria\x12>.google.ads.googleads.v1.services.MutateAdGroupCriteriaRequest\x1a?.google.ads.googleads.v1.services.MutateAdGroupCriteriaResponse\"?\x82\xd3\xe4\x93\x02\x39\"4/v1/customers/{customer_id=*}/adGroupCriteria:mutate:\x01*B\x83\x02\n$com.google.ads.googleads.v1.servicesB\x1c\x41\x64GroupCriterionServiceProtoP\x01ZHgoogle.golang.org/genproto/googleapis/ads/googleads/v1/services;services\xa2\x02\x03GAA\xaa\x02 Google.Ads.GoogleAds.V1.Services\xca\x02 Google\\Ads\\GoogleAds\\V1\\Services\xea\x02$Google::Ads::GoogleAds::V1::Servicesb\x06proto3')
   ,
-  dependencies=[google_dot_ads_dot_googleads__v1_dot_proto_dot_resources_dot_ad__group__criterion__pb2.DESCRIPTOR,google_dot_api_dot_annotations__pb2.DESCRIPTOR,google_dot_protobuf_dot_field__mask__pb2.DESCRIPTOR,google_dot_protobuf_dot_wrappers__pb2.DESCRIPTOR,google_dot_rpc_dot_status__pb2.DESCRIPTOR,])
+  dependencies=[google_dot_ads_dot_googleads__v1_dot_proto_dot_common_dot_policy__pb2.DESCRIPTOR,google_dot_ads_dot_googleads__v1_dot_proto_dot_resources_dot_ad__group__criterion__pb2.DESCRIPTOR,google_dot_api_dot_annotations__pb2.DESCRIPTOR,google_dot_protobuf_dot_field__mask__pb2.DESCRIPTOR,google_dot_protobuf_dot_wrappers__pb2.DESCRIPTOR,google_dot_rpc_dot_status__pb2.DESCRIPTOR,])
 
 
 
@@ -57,8 +58,8 @@ _GETADGROUPCRITERIONREQUEST = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=296,
-  serialized_end=347,
+  serialized_start=347,
+  serialized_end=398,
 )
 
 
@@ -109,8 +110,8 @@ _MUTATEADGROUPCRITERIAREQUEST = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=350,
-  serialized_end=530,
+  serialized_start=401,
+  serialized_end=581,
 )
 
 
@@ -129,21 +130,28 @@ _ADGROUPCRITERIONOPERATION = _descriptor.Descriptor(
       is_extension=False, extension_scope=None,
       serialized_options=None, file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
-      name='create', full_name='google.ads.googleads.v1.services.AdGroupCriterionOperation.create', index=1,
+      name='exempt_policy_violation_keys', full_name='google.ads.googleads.v1.services.AdGroupCriterionOperation.exempt_policy_violation_keys', index=1,
+      number=5, type=11, cpp_type=10, label=3,
+      has_default_value=False, default_value=[],
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR),
+    _descriptor.FieldDescriptor(
+      name='create', full_name='google.ads.googleads.v1.services.AdGroupCriterionOperation.create', index=2,
       number=1, type=11, cpp_type=10, label=1,
       has_default_value=False, default_value=None,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       serialized_options=None, file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
-      name='update', full_name='google.ads.googleads.v1.services.AdGroupCriterionOperation.update', index=2,
+      name='update', full_name='google.ads.googleads.v1.services.AdGroupCriterionOperation.update', index=3,
       number=2, type=11, cpp_type=10, label=1,
       has_default_value=False, default_value=None,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       serialized_options=None, file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
-      name='remove', full_name='google.ads.googleads.v1.services.AdGroupCriterionOperation.remove', index=3,
+      name='remove', full_name='google.ads.googleads.v1.services.AdGroupCriterionOperation.remove', index=4,
       number=3, type=9, cpp_type=9, label=1,
       has_default_value=False, default_value=_b("").decode('utf-8'),
       message_type=None, enum_type=None, containing_type=None,
@@ -164,8 +172,8 @@ _ADGROUPCRITERIONOPERATION = _descriptor.Descriptor(
       name='operation', full_name='google.ads.googleads.v1.services.AdGroupCriterionOperation.operation',
       index=0, containing_type=None, fields=[]),
   ],
-  serialized_start=533,
-  serialized_end=782,
+  serialized_start=584,
+  serialized_end=923,
 )
 
 
@@ -202,8 +210,8 @@ _MUTATEADGROUPCRITERIARESPONSE = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=785,
-  serialized_end=948,
+  serialized_start=926,
+  serialized_end=1089,
 )
 
 
@@ -233,12 +241,13 @@ _MUTATEADGROUPCRITERIONRESULT = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=950,
-  serialized_end=1003,
+  serialized_start=1091,
+  serialized_end=1144,
 )
 
 _MUTATEADGROUPCRITERIAREQUEST.fields_by_name['operations'].message_type = _ADGROUPCRITERIONOPERATION
 _ADGROUPCRITERIONOPERATION.fields_by_name['update_mask'].message_type = google_dot_protobuf_dot_field__mask__pb2._FIELDMASK
+_ADGROUPCRITERIONOPERATION.fields_by_name['exempt_policy_violation_keys'].message_type = google_dot_ads_dot_googleads__v1_dot_proto_dot_common_dot_policy__pb2._POLICYVIOLATIONKEY
 _ADGROUPCRITERIONOPERATION.fields_by_name['create'].message_type = google_dot_ads_dot_googleads__v1_dot_proto_dot_resources_dot_ad__group__criterion__pb2._ADGROUPCRITERION
 _ADGROUPCRITERIONOPERATION.fields_by_name['update'].message_type = google_dot_ads_dot_googleads__v1_dot_proto_dot_resources_dot_ad__group__criterion__pb2._ADGROUPCRITERION
 _ADGROUPCRITERIONOPERATION.oneofs_by_name['operation'].fields.append(
@@ -312,6 +321,15 @@ AdGroupCriterionOperation = _reflection.GeneratedProtocolMessageType('AdGroupCri
       update_mask:
           FieldMask that determines which resource fields are modified
           in an update.
+      exempt_policy_violation_keys:
+          The list of policy violation keys that should not cause a
+          PolicyViolationError to be reported. Not all policy violations
+          are exemptable, please refer to the is\_exemptible field in
+          the returned PolicyViolationError.  Resources violating these
+          polices will be saved, but will not be eligible to serve. They
+          may begin serving at a later time due to a change in policies,
+          re-review of the resource, or a change in advertiser
+          certificates.
       operation:
           The mutate operation.
       create:
@@ -374,8 +392,8 @@ _ADGROUPCRITERIONSERVICE = _descriptor.ServiceDescriptor(
   file=DESCRIPTOR,
   index=0,
   serialized_options=None,
-  serialized_start=1006,
-  serialized_end=1449,
+  serialized_start=1147,
+  serialized_end=1590,
   methods=[
   _descriptor.MethodDescriptor(
     name='GetAdGroupCriterion',

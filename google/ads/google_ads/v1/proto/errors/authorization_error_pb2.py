@@ -20,7 +20,7 @@ DESCRIPTOR = _descriptor.FileDescriptor(
   package='google.ads.googleads.v1.errors',
   syntax='proto3',
   serialized_options=_b('\n\"com.google.ads.googleads.v1.errorsB\027AuthorizationErrorProtoP\001ZDgoogle.golang.org/genproto/googleapis/ads/googleads/v1/errors;errors\242\002\003GAA\252\002\036Google.Ads.GoogleAds.V1.Errors\312\002\036Google\\Ads\\GoogleAds\\V1\\Errors\352\002\"Google::Ads::GoogleAds::V1::Errors'),
-  serialized_pb=_b('\n>google/ads/googleads_v1/proto/errors/authorization_error.proto\x12\x1egoogle.ads.googleads.v1.errors\x1a\x1cgoogle/api/annotations.proto\"\xb9\x02\n\x16\x41uthorizationErrorEnum\"\x9e\x02\n\x12\x41uthorizationError\x12\x0f\n\x0bUNSPECIFIED\x10\x00\x12\x0b\n\x07UNKNOWN\x10\x01\x12\x1a\n\x16USER_PERMISSION_DENIED\x10\x02\x12#\n\x1f\x44\x45VELOPER_TOKEN_NOT_WHITELISTED\x10\x03\x12\x1e\n\x1a\x44\x45VELOPER_TOKEN_PROHIBITED\x10\x04\x12\x14\n\x10PROJECT_DISABLED\x10\x05\x12\x17\n\x13\x41UTHORIZATION_ERROR\x10\x06\x12\x18\n\x14\x41\x43TION_NOT_PERMITTED\x10\x07\x12\x15\n\x11INCOMPLETE_SIGNUP\x10\x08\x12\x18\n\x14\x43USTOMER_NOT_ENABLED\x10\x18\x12\x0f\n\x0bMISSING_TOS\x10\tB\xf2\x01\n\"com.google.ads.googleads.v1.errorsB\x17\x41uthorizationErrorProtoP\x01ZDgoogle.golang.org/genproto/googleapis/ads/googleads/v1/errors;errors\xa2\x02\x03GAA\xaa\x02\x1eGoogle.Ads.GoogleAds.V1.Errors\xca\x02\x1eGoogle\\Ads\\GoogleAds\\V1\\Errors\xea\x02\"Google::Ads::GoogleAds::V1::Errorsb\x06proto3')
+  serialized_pb=_b('\n>google/ads/googleads_v1/proto/errors/authorization_error.proto\x12\x1egoogle.ads.googleads.v1.errors\x1a\x1cgoogle/api/annotations.proto\"\xdb\x02\n\x16\x41uthorizationErrorEnum\"\xc0\x02\n\x12\x41uthorizationError\x12\x0f\n\x0bUNSPECIFIED\x10\x00\x12\x0b\n\x07UNKNOWN\x10\x01\x12\x1a\n\x16USER_PERMISSION_DENIED\x10\x02\x12#\n\x1f\x44\x45VELOPER_TOKEN_NOT_WHITELISTED\x10\x03\x12\x1e\n\x1a\x44\x45VELOPER_TOKEN_PROHIBITED\x10\x04\x12\x14\n\x10PROJECT_DISABLED\x10\x05\x12\x17\n\x13\x41UTHORIZATION_ERROR\x10\x06\x12\x18\n\x14\x41\x43TION_NOT_PERMITTED\x10\x07\x12\x15\n\x11INCOMPLETE_SIGNUP\x10\x08\x12\x18\n\x14\x43USTOMER_NOT_ENABLED\x10\x18\x12\x0f\n\x0bMISSING_TOS\x10\t\x12 \n\x1c\x44\x45VELOPER_TOKEN_NOT_APPROVED\x10\nB\xf2\x01\n\"com.google.ads.googleads.v1.errorsB\x17\x41uthorizationErrorProtoP\x01ZDgoogle.golang.org/genproto/googleapis/ads/googleads/v1/errors;errors\xa2\x02\x03GAA\xaa\x02\x1eGoogle.Ads.GoogleAds.V1.Errors\xca\x02\x1eGoogle\\Ads\\GoogleAds\\V1\\Errors\xea\x02\"Google::Ads::GoogleAds::V1::Errorsb\x06proto3')
   ,
   dependencies=[google_dot_api_dot_annotations__pb2.DESCRIPTOR,])
 
@@ -76,11 +76,15 @@ _AUTHORIZATIONERRORENUM_AUTHORIZATIONERROR = _descriptor.EnumDescriptor(
       name='MISSING_TOS', index=10, number=9,
       serialized_options=None,
       type=None),
+    _descriptor.EnumValueDescriptor(
+      name='DEVELOPER_TOKEN_NOT_APPROVED', index=11, number=10,
+      serialized_options=None,
+      type=None),
   ],
   containing_type=None,
   serialized_options=None,
   serialized_start=156,
-  serialized_end=442,
+  serialized_end=476,
 )
 _sym_db.RegisterEnumDescriptor(_AUTHORIZATIONERRORENUM_AUTHORIZATIONERROR)
 
@@ -106,7 +110,7 @@ _AUTHORIZATIONERRORENUM = _descriptor.Descriptor(
   oneofs=[
   ],
   serialized_start=129,
-  serialized_end=442,
+  serialized_end=476,
 )
 
 _AUTHORIZATIONERRORENUM_AUTHORIZATIONERROR.containing_type = _AUTHORIZATIONERRORENUM

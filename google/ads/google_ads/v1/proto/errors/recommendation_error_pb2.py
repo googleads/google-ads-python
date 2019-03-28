@@ -20,7 +20,7 @@ DESCRIPTOR = _descriptor.FileDescriptor(
   package='google.ads.googleads.v1.errors',
   syntax='proto3',
   serialized_options=_b('\n\"com.google.ads.googleads.v1.errorsB\030RecommendationErrorProtoP\001ZDgoogle.golang.org/genproto/googleapis/ads/googleads/v1/errors;errors\242\002\003GAA\252\002\036Google.Ads.GoogleAds.V1.Errors\312\002\036Google\\Ads\\GoogleAds\\V1\\Errors\352\002\"Google::Ads::GoogleAds::V1::Errors'),
-  serialized_pb=_b('\n?google/ads/googleads_v1/proto/errors/recommendation_error.proto\x12\x1egoogle.ads.googleads.v1.errors\x1a\x1cgoogle/api/annotations.proto\"\xbf\x03\n\x17RecommendationErrorEnum\"\xa3\x03\n\x13RecommendationError\x12\x0f\n\x0bUNSPECIFIED\x10\x00\x12\x0b\n\x07UNKNOWN\x10\x01\x12\x1b\n\x17\x42UDGET_AMOUNT_TOO_SMALL\x10\x02\x12\x1b\n\x17\x42UDGET_AMOUNT_TOO_LARGE\x10\x03\x12\x19\n\x15INVALID_BUDGET_AMOUNT\x10\x04\x12\x10\n\x0cPOLICY_ERROR\x10\x05\x12\x16\n\x12INVALID_BID_AMOUNT\x10\x06\x12\x19\n\x15\x41\x44GROUP_KEYWORD_LIMIT\x10\x07\x12\"\n\x1eRECOMMENDATION_ALREADY_APPLIED\x10\x08\x12\x1e\n\x1aRECOMMENDATION_INVALIDATED\x10\t\x12\x17\n\x13TOO_MANY_OPERATIONS\x10\n\x12\x11\n\rNO_OPERATIONS\x10\x0b\x12!\n\x1d\x44IFFERENT_TYPES_NOT_SUPPORTED\x10\x0c\x12\x1b\n\x17\x44UPLICATE_RESOURCE_NAME\x10\r\x12$\n RECOMMENDATION_ALREADY_DISMISSED\x10\x0e\x42\xf3\x01\n\"com.google.ads.googleads.v1.errorsB\x18RecommendationErrorProtoP\x01ZDgoogle.golang.org/genproto/googleapis/ads/googleads/v1/errors;errors\xa2\x02\x03GAA\xaa\x02\x1eGoogle.Ads.GoogleAds.V1.Errors\xca\x02\x1eGoogle\\Ads\\GoogleAds\\V1\\Errors\xea\x02\"Google::Ads::GoogleAds::V1::Errorsb\x06proto3')
+  serialized_pb=_b('\n?google/ads/googleads_v1/proto/errors/recommendation_error.proto\x12\x1egoogle.ads.googleads.v1.errors\x1a\x1cgoogle/api/annotations.proto\"\xda\x03\n\x17RecommendationErrorEnum\"\xbe\x03\n\x13RecommendationError\x12\x0f\n\x0bUNSPECIFIED\x10\x00\x12\x0b\n\x07UNKNOWN\x10\x01\x12\x1b\n\x17\x42UDGET_AMOUNT_TOO_SMALL\x10\x02\x12\x1b\n\x17\x42UDGET_AMOUNT_TOO_LARGE\x10\x03\x12\x19\n\x15INVALID_BUDGET_AMOUNT\x10\x04\x12\x10\n\x0cPOLICY_ERROR\x10\x05\x12\x16\n\x12INVALID_BID_AMOUNT\x10\x06\x12\x19\n\x15\x41\x44GROUP_KEYWORD_LIMIT\x10\x07\x12\"\n\x1eRECOMMENDATION_ALREADY_APPLIED\x10\x08\x12\x1e\n\x1aRECOMMENDATION_INVALIDATED\x10\t\x12\x17\n\x13TOO_MANY_OPERATIONS\x10\n\x12\x11\n\rNO_OPERATIONS\x10\x0b\x12!\n\x1d\x44IFFERENT_TYPES_NOT_SUPPORTED\x10\x0c\x12\x1b\n\x17\x44UPLICATE_RESOURCE_NAME\x10\r\x12$\n RECOMMENDATION_ALREADY_DISMISSED\x10\x0e\x12\x19\n\x15INVALID_APPLY_REQUEST\x10\x0f\x42\xf3\x01\n\"com.google.ads.googleads.v1.errorsB\x18RecommendationErrorProtoP\x01ZDgoogle.golang.org/genproto/googleapis/ads/googleads/v1/errors;errors\xa2\x02\x03GAA\xaa\x02\x1eGoogle.Ads.GoogleAds.V1.Errors\xca\x02\x1eGoogle\\Ads\\GoogleAds\\V1\\Errors\xea\x02\"Google::Ads::GoogleAds::V1::Errorsb\x06proto3')
   ,
   dependencies=[google_dot_api_dot_annotations__pb2.DESCRIPTOR,])
 
@@ -92,11 +92,15 @@ _RECOMMENDATIONERRORENUM_RECOMMENDATIONERROR = _descriptor.EnumDescriptor(
       name='RECOMMENDATION_ALREADY_DISMISSED', index=14, number=14,
       serialized_options=None,
       type=None),
+    _descriptor.EnumValueDescriptor(
+      name='INVALID_APPLY_REQUEST', index=15, number=15,
+      serialized_options=None,
+      type=None),
   ],
   containing_type=None,
   serialized_options=None,
   serialized_start=158,
-  serialized_end=577,
+  serialized_end=604,
 )
 _sym_db.RegisterEnumDescriptor(_RECOMMENDATIONERRORENUM_RECOMMENDATIONERROR)
 
@@ -122,7 +126,7 @@ _RECOMMENDATIONERRORENUM = _descriptor.Descriptor(
   oneofs=[
   ],
   serialized_start=130,
-  serialized_end=577,
+  serialized_end=604,
 )
 
 _RECOMMENDATIONERRORENUM_RECOMMENDATIONERROR.containing_type = _RECOMMENDATIONERRORENUM

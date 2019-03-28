@@ -19,8 +19,9 @@ import argparse
 import six
 import sys
 
-import google.ads.google_ads.client
 from google.api_core import protobuf_helpers
+from google.ads.google_ads.client import GoogleAdsClient
+from google.ads.google_ads.util import ResourceName
 
 
 def main(client, customer_id, ad_group_id, criterion_id):
@@ -31,7 +32,7 @@ def main(client, customer_id, ad_group_id, criterion_id):
 
     ad_group_criterion = ad_group_criterion_operation.update
     ad_group_criterion.resource_name = agc_service.ad_group_criteria_path(
-        customer_id, '%s_%s' % (ad_group_id, criterion_id))
+        customer_id, ResourceName.format_composite(ad_group_id, criterion_id))
     ad_group_criterion.status = (client.get_type('AdGroupCriterionStatusEnum',
                                                  version='v1')
                                  .ENABLED)
@@ -59,9 +60,7 @@ def main(client, customer_id, ad_group_id, criterion_id):
 if __name__ == '__main__':
     # GoogleAdsClient will read the google-ads.yaml configuration file in the
     # home directory if none is specified.
-    google_ads_client = (google.ads.google_ads.client.GoogleAdsClient
-                         .load_from_storage())
-
+    google_ads_client = GoogleAdsClient.load_from_storage()
     parser = argparse.ArgumentParser(
         description=('Pauses an ad in the specified customer\'s ad group.'))
     # The following argument(s) should be provided to run the example.

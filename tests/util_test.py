@@ -1,4 +1,4 @@
-# Copyright 2018 Google LLC
+# Copyright 2019 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -11,14 +11,15 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
+"""Tests for the Google Ads API client library utilities."""
 
 
-from __future__ import absolute_import
+from unittest import TestCase
 
+from google.ads.google_ads.util import ResourceName
 
-import google.ads.google_ads.client
-import google.ads.google_ads.errors
-import google.ads.google_ads.util
+class ResourceNameTest(TestCase):
+    def test_format_composite(self):
+        composite = ResourceName.format_composite('test', 'test')
+        self.assertEqual(composite, 'test~test')
 
-
-VERSION = '1.2.0'

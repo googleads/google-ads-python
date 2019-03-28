@@ -1,3 +1,8 @@
+* 1.3.0:
+- Update payment_mode enum with fields for v1_1
+- Update PyYAML dependency to latest stable version
+- Add utility for formatting composite resource names
+
 * 1.2.0:
 - Google Ads v1_1 release
 - Add add_sitelink example

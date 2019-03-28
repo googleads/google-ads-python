@@ -6914,13 +6914,13 @@ class PaymentModeEnum(object):
         Attributes:
           UNSPECIFIED (int): Not specified.
           UNKNOWN (int): Used for return value only. Represents value unknown in this version.
-          PAYMENT_MODE_CPC (int): Pay per click.
-          PAYMENT_MODE_CPA (int): Pay per acquisition.
+          CLICKS (int): Pay per click.
+          CONVERSION_VALUE (int): Pay per conversion value.
         """
         UNSPECIFIED = 0
         UNKNOWN = 1
-        PAYMENT_MODE_CPC = 2
-        PAYMENT_MODE_CPA = 3
+        CLICKS = 4
+        CONVERSION_VALUE = 5
 
 
 class PlaceholderTypeEnum(object):

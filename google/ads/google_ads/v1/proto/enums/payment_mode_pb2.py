@@ -20,7 +20,7 @@ DESCRIPTOR = _descriptor.FileDescriptor(
   package='google.ads.googleads.v1.enums',
   syntax='proto3',
   serialized_options=_b('\n!com.google.ads.googleads.v1.enumsB\020PaymentModeProtoP\001ZBgoogle.golang.org/genproto/googleapis/ads/googleads/v1/enums;enums\242\002\003GAA\252\002\035Google.Ads.GoogleAds.V1.Enums\312\002\035Google\\Ads\\GoogleAds\\V1\\Enums\352\002!Google::Ads::GoogleAds::V1::Enums'),
-  serialized_pb=_b('\n6google/ads/googleads_v1/proto/enums/payment_mode.proto\x12\x1dgoogle.ads.googleads.v1.enums\x1a\x1cgoogle/api/annotations.proto\"j\n\x0fPaymentModeEnum\"W\n\x0bPaymentMode\x12\x0f\n\x0bUNSPECIFIED\x10\x00\x12\x0b\n\x07UNKNOWN\x10\x01\x12\x14\n\x10PAYMENT_MODE_CPC\x10\x02\x12\x14\n\x10PAYMENT_MODE_CPA\x10\x03\x42\xe5\x01\n!com.google.ads.googleads.v1.enumsB\x10PaymentModeProtoP\x01ZBgoogle.golang.org/genproto/googleapis/ads/googleads/v1/enums;enums\xa2\x02\x03GAA\xaa\x02\x1dGoogle.Ads.GoogleAds.V1.Enums\xca\x02\x1dGoogle\\Ads\\GoogleAds\\V1\\Enums\xea\x02!Google::Ads::GoogleAds::V1::Enumsb\x06proto3')
+  serialized_pb=_b('\n6google/ads/googleads_v1/proto/enums/payment_mode.proto\x12\x1dgoogle.ads.googleads.v1.enums\x1a\x1cgoogle/api/annotations.proto\"`\n\x0fPaymentModeEnum\"M\n\x0bPaymentMode\x12\x0f\n\x0bUNSPECIFIED\x10\x00\x12\x0b\n\x07UNKNOWN\x10\x01\x12\n\n\x06\x43LICKS\x10\x04\x12\x14\n\x10\x43ONVERSION_VALUE\x10\x05\x42\xe5\x01\n!com.google.ads.googleads.v1.enumsB\x10PaymentModeProtoP\x01ZBgoogle.golang.org/genproto/googleapis/ads/googleads/v1/enums;enums\xa2\x02\x03GAA\xaa\x02\x1dGoogle.Ads.GoogleAds.V1.Enums\xca\x02\x1dGoogle\\Ads\\GoogleAds\\V1\\Enums\xea\x02!Google::Ads::GoogleAds::V1::Enumsb\x06proto3')
   ,
   dependencies=[google_dot_api_dot_annotations__pb2.DESCRIPTOR,])
 
@@ -41,18 +41,18 @@ _PAYMENTMODEENUM_PAYMENTMODE = _descriptor.EnumDescriptor(
       serialized_options=None,
       type=None),
     _descriptor.EnumValueDescriptor(
-      name='PAYMENT_MODE_CPC', index=2, number=2,
+      name='CLICKS', index=2, number=4,
       serialized_options=None,
       type=None),
     _descriptor.EnumValueDescriptor(
-      name='PAYMENT_MODE_CPA', index=3, number=3,
+      name='CONVERSION_VALUE', index=3, number=5,
       serialized_options=None,
       type=None),
   ],
   containing_type=None,
   serialized_options=None,
   serialized_start=138,
-  serialized_end=225,
+  serialized_end=215,
 )
 _sym_db.RegisterEnumDescriptor(_PAYMENTMODEENUM_PAYMENTMODE)
 
@@ -78,7 +78,7 @@ _PAYMENTMODEENUM = _descriptor.Descriptor(
   oneofs=[
   ],
   serialized_start=119,
-  serialized_end=225,
+  serialized_end=215,
 )
 
 _PAYMENTMODEENUM_PAYMENTMODE.containing_type = _PAYMENTMODEENUM

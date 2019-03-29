@@ -158,7 +158,7 @@ Authors
 .. _Wiki: https://github.com/googleads/google-ads-python/wiki
 .. _Issue tracker: https://github.com/googleads/google-ads-python/issues
 .. _API documentation: https://developers.google.com/google-ads/api/
-.. _API Support: https://developers.google.com/adwords/api/community/
+.. _API Support: https://developers.google.com/google-ads/api/support
 .. _Mark Saniscalchi: https://github.com/msaniscalchi
 .. _David Wihl: https://github.com/wihl
 .. _Ben Karl: https://github.com/BenRKarl

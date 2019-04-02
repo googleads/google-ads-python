@@ -91,7 +91,8 @@ def create_keyword_plan_campaign(client, customer_id, keyword_plan):
     keyword_plan_campaign.keyword_plan_network = network
 
     geo_target = client.get_type('KeywordPlanGeoTarget', version='v1')
-    # Constant for U.S.
+    # Constant for U.S. Other geo target constants can be referenced here:
+    # https://developers.google.com/adwords/api/docs/appendix/geotargeting
     geo_target.geo_target_constant.value = 'geoTargetConstants/2840'
     keyword_plan_campaign.geo_targets.extend([geo_target])
 

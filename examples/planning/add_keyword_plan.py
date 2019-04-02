@@ -24,9 +24,24 @@ import sys
 import uuid
 
 from google.ads.google_ads.client import GoogleAdsClient
+from google.ads.google_ads.errors import GoogleAdsException
 
 
 def main(client, customer_id):
+    try:
+        add_keyword_plan(client, customer_id)
+    except GoogleAdsException as ex:
+        print('Request with ID "%s" failed with status "%s" and includes the '
+              'following errors:' % (ex.request_id, ex.error.code().name))
+        for error in ex.failure.errors:
+            print('\tError with message "%s".' % error.message)
+            if error.location:
+                for field_path_element in error.location.field_path_elements:
+                    print('\t\tOn field: %s' % field_path_element.field_name)
+        sys.exit(1)
+
+
+def add_keyword_plan(client, customer_id):
     keyword_plan = create_keyword_plan(client, customer_id)
     keyword_plan_campaign = create_keyword_plan_campaign(client, customer_id,
                                                          keyword_plan)

@@ -34,32 +34,32 @@ def main(client, customer_id, keyword_plan_id):
     try:
         response = keyword_plan_service.generate_forecast_metrics(resource_name)
     except GoogleAdsException as ex:
-        print('Request with ID "%s" failed with status "%s" and includes the '
-              'following errors:' % (ex.request_id, ex.error.code().name))
+        print('Request with ID "{}" failed with status "%s" and includes the '
+              'following errors:'.format(ex.request_id, ex.error.code().name))
         for error in ex.failure.errors:
-            print('\tError with message "%s".' % error.message)
+            print('\tError with message "{}".'.format(error.message))
             if error.location:
                 for field_path_element in error.location.field_path_elements:
-                    print('\t\tOn field: %s' % field_path_element.field_name)
+                    print('\t\tOn field: {}'.format(field_path_element.field_name))
         sys.exit(1)
 
     for i, forecast in enumerate(response.keyword_forecasts):
-        print('#%s Keyword ID: %s' % (i + 1,
+        print('#{} Keyword ID: {}'.format(i + 1,
           forecast.keyword_plan_ad_group_keyword.value))
 
         metrics = forecast.keyword_forecast
 
-        clicks = (f'{metrics.clicks.value:.2f}' if metrics.clicks
-                  else 'unspecified')
-        print('Estimated daily clicks: %s' % clicks)
+        click_val = metrics.clicks.value
+        clicks = '{:.2f}'.format(click_val) if click_val else 'unspecified'
+        print('Estimated daily clicks: {}'.format(clicks))
 
-        impressions = (f'{metrics.impressions.value:.2f}' if metrics.impressions
-                       else 'unspecified')
-        print('Estimated daily impressions: %s' % impressions)
+        imp_val = metrics.impressions.value
+        impressions = '{:.2f}'.format(imp_val) if imp_val else 'unspecified'
+        print('Estimated daily impressions: {}'.format(impressions))
 
-        cpc = (f'{metrics.average_cpc.value:.2f}' if metrics.average_cpc
-               else 'unspecified')
-        print('Estimated average cpc: %s' % cpc, end='\n\n')
+        cpc_val = metrics.average_cpc.value
+        cpc = '{:.2f}'.format(cpc_val) if cpc_val else 'unspecified'
+        print('Estimated average cpc: {}\n'.format(cpc))
 
 
 if __name__ == '__main__':

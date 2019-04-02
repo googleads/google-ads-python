@@ -21,7 +21,13 @@ import sys
 from google.ads.google_ads.client import GoogleAdsClient
 from google.ads.google_ads.errors import GoogleAdsException
 
+# Location IDs are listed here: https://developers.google.com/adwords/api/docs/appendix/geotargeting
+# and they can also be retrieved using the GeoTargetConstantService as shown
+# here: https://developers.google.com/google-ads/api/docs/targeting/location-targeting
 _DEFAULT_LOCATION_IDS = '1023191'  # location ID for New York, NY
+# A language criterion ID. For example, specify 1000 for English. For more
+# information on determining this value, see the below link:
+# https://developers.google.com/adwords/api/docs/appendix/codes-formats#languages.
 _DEFAULT_LANGUAGE_ID = '1000'  # language ID for English
 
 
@@ -44,7 +50,7 @@ def main(client, customer_id, location_ids, language_id, keywords, page_url):
 
     # Either keywords or a page_url are required to generate keyword ideas
     # so this raises an error if neither are provided.
-    if (not (len(keywords) or page_url)):
+    if ((not (len(keywords)) or page_url)):
         raise ValueError('At least one of keywords or page URL is required, '
                          'but neither was specified.')
 
@@ -142,8 +148,6 @@ if __name__ == '__main__':
     parser.add_argument('-l', '--location_ids', type=six.text_type,
                         required=False, help='Comma-delimited list of location '
                                              'criteria IDs')
-    # A language criterion ID. For example, specify 1000 for English. For more
-    # information on determining this value, see the below link:
     # https://developers.google.com/adwords/api/docs/appendix/codes-formats#languages.
     parser.add_argument('-i', '--language_id', type=six.text_type,
                         required=False, help='Comma-delimited list of language '

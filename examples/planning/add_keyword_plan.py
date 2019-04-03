@@ -29,6 +29,14 @@ from google.ads.google_ads.errors import GoogleAdsException
 
 
 def main(client, customer_id):
+    """Adds a keyword plan, campaign, ad group, etc. to the customer account
+
+    Also handles errors from the API and prints them.
+
+    Args:
+        client: An initialized instance of GoogleAdsClient
+        customer_id: A str of the customer_id to use in requests.
+    """
     try:
         add_keyword_plan(client, customer_id)
     except GoogleAdsException as ex:
@@ -44,6 +52,15 @@ def main(client, customer_id):
 
 
 def add_keyword_plan(client, customer_id):
+    """Adds a keyword plan, campaign, ad group, etc. to the customer account.
+
+    Args:
+        client: An initialized instance of GoogleAdsClient
+        customer_id: A str of the customer_id to use in requests.
+
+    Raises:
+        GoogleAdsException: If an error is returned from the API.
+    """
     keyword_plan = create_keyword_plan(client, customer_id)
     keyword_plan_campaign = create_keyword_plan_campaign(client, customer_id,
                                                          keyword_plan)
@@ -55,6 +72,18 @@ def add_keyword_plan(client, customer_id):
 
 
 def create_keyword_plan(client, customer_id):
+    """Adds a keyword plan to the given customer account.
+
+    Args:
+        client: An initialized instance of GoogleAdsClient
+        customer_id: A str of the customer_id to use in requests.
+
+    Returns:
+        A str of the resource_name for the newly created keyword plan.
+
+    Raises:
+        GoogleAdsException: If an error is returned from the API.
+    """
     operation = client.get_type('KeywordPlanOperation', version='v1')
     keyword_plan = operation.create
 
@@ -77,6 +106,20 @@ def create_keyword_plan(client, customer_id):
 
 
 def create_keyword_plan_campaign(client, customer_id, keyword_plan):
+    """Adds a keyword plan campaign to the given keyword plan.
+
+    Args:
+        client: An initialized instance of GoogleAdsClient
+        customer_id: A str of the customer_id to use in requests.
+        keyword_plan: A str of the keyword plan resource_name this keyword plan
+            campaign should be attributed to.create_keyword_plan.
+
+    Returns:
+        A str of the resource_name for the newly created keyword plan campaign.
+
+    Raises:
+        GoogleAdsException: If an error is returned from the API.
+    """
     operation = client.get_type('KeywordPlanCampaignOperation', version='v1')
     keyword_plan_campaign = operation.create
 
@@ -115,6 +158,20 @@ def create_keyword_plan_campaign(client, customer_id, keyword_plan):
 
 
 def create_keyword_plan_ad_group(client, customer_id, keyword_plan_campaign):
+    """Adds a keyword plan ad group to the given keyword plan campaign.
+
+    Args:
+        client: An initialized instance of GoogleAdsClient
+        customer_id: A str of the customer_id to use in requests.
+        keyword_plan_campaign: A str of the keyword plan campaign resource_name
+            this keyword plan ad group should be attributed to.
+
+    Returns:
+        A str of the resource_name for the newly created keyword plan ad group.
+
+    Raises:
+        GoogleAdsException: If an error is returned from the API.
+    """
     operation = client.get_type('KeywordPlanAdGroupOperation', version='v1')
     keyword_plan_ad_group = operation.create
 
@@ -137,6 +194,17 @@ def create_keyword_plan_ad_group(client, customer_id, keyword_plan_campaign):
 
 
 def create_keyword_plan_keywords(client, customer_id, plan_ad_group):
+    """Adds keyword plan keywords to the given keyword plan ad group.
+
+    Args:
+        client: An initialized instance of GoogleAdsClient
+        customer_id: A str of the customer_id to use in requests.
+        keyword_plan_ad_group: A str of the keyword plan ad group resource_name
+            these keyword plan keywords should be attributed to.
+
+    Raises:
+        GoogleAdsException: If an error is returned from the API.
+    """
     match_types = client.get_type('KeywordMatchTypeEnum', version='v1')
 
     keyword_plan_keyword1 = client.get_type('KeywordPlanKeyword', version='v1')
@@ -176,6 +244,17 @@ def create_keyword_plan_keywords(client, customer_id, plan_ad_group):
 
 
 def create_keyword_plan_negative_keywords(client, customer_id, plan_campaign):
+    """Adds a keyword plan negative keyword to the given keyword plan campaign.
+
+    Args:
+        client: An initialized instance of GoogleAdsClient
+        customer_id: A str of the customer_id to use in requests.
+        keyword_plan_campaign: A str of the keyword plan campaign resource_name
+            this keyword plan negative keyword should be attributed to.
+
+    Raises:
+        GoogleAdsException: If an error is returned from the API.
+    """
     match_types = client.get_type('KeywordMatchTypeEnum', version='v1')
     operation = client.get_type('KeywordPlanNegativeKeywordOperation',
                                 version='v1')

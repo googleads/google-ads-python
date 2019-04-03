@@ -39,6 +39,18 @@ google_ads_service_pb2 = services.google_ads_service_pb2
 
 class ModuleLevelTest(TestCase):
 
+    def test_validate_login_customer_id_invalid(self):
+        self.assertRaises(
+            ValueError,
+            google.ads.google_ads.client._validate_login_customer_id,
+            '123-456-7890')
+
+    def test_validate_login_customer_id_too_short(self):
+        self.assertRaises(
+            ValueError,
+            google.ads.google_ads.client._validate_login_customer_id,
+            '123')
+
     def test_parse_metadata_to_json(self):
         mock_metadata = [
             ('x-goog-api-client',
@@ -87,7 +99,7 @@ class GoogleAdsClientTest(FileTestCase):
         self.refresh_token = 'refresh'
         self.login_customer_id = '1234567890'
 
-    def test_load_from_storage_login_customer_id(self):
+    def test_get_client_kwargs_login_customer_id(self):
         config = {
             'developer_token': self.developer_token,
             'client_id': self.client_id,
@@ -96,25 +108,23 @@ class GoogleAdsClientTest(FileTestCase):
             'login_customer_id': self.login_customer_id
         }
 
-        file_path = os.path.join(os.path.expanduser('~'), 'google-ads.yaml')
-        self.fs.create_file(file_path, contents=yaml.safe_dump(config))
-
-        with mock.patch('google.ads.google_ads.client.GoogleAdsClient'
-                        '.__init__') as mock_client_init, \
-            mock.patch(
-                 'google.oauth2.credentials.Credentials') as mock_credentials:
-            mock_client_init.return_value = None
+        with mock.patch(
+                'google.oauth2.credentials.Credentials') as mock_credentials:
             mock_credentials_instance = mock.Mock()
             mock_credentials.return_value = mock_credentials_instance
-            (google.ads.google_ads.client.GoogleAdsClient.load_from_storage())
-            mock_client_init.assert_called_once_with(
-                credentials=mock_credentials_instance,
-                developer_token=self.developer_token,
-                endpoint=None,
-                login_customer_id=self.login_customer_id,
-                logging_config=None)
+            result = (google.ads.google_ads.client.GoogleAdsClient.
+                      _get_client_kwargs(config, ''))
+            self.assertEqual(
+                result,
+                {
+                    'credentials': mock_credentials_instance,
+                    'developer_token': self.developer_token,
+                    'endpoint': None,
+                    'login_customer_id': self.login_customer_id,
+                    'logging_config': None
+                })
 
-    def test_load_from_storage_login_customer_id_as_None(self):
+    def test_get_client_kwargs_login_customer_id_as_None(self):
         config = {
             'developer_token': self.developer_token,
             'client_id': self.client_id,
@@ -123,65 +133,122 @@ class GoogleAdsClientTest(FileTestCase):
             'login_customer_id': None
         }
 
-        file_path = os.path.join(os.path.expanduser('~'), 'google-ads.yaml')
-        self.fs.create_file(file_path, contents=yaml.safe_dump(config))
-
-        with mock.patch('google.ads.google_ads.client.GoogleAdsClient'
-                        '.__init__') as mock_client_init, \
-            mock.patch(
-                 'google.oauth2.credentials.Credentials') as mock_credentials:
-            mock_client_init.return_value = None
+        with mock.patch(
+                'google.oauth2.credentials.Credentials') as mock_credentials:
             mock_credentials_instance = mock.Mock()
             mock_credentials.return_value = mock_credentials_instance
-            (google.ads.google_ads.client.GoogleAdsClient.load_from_storage())
-            mock_client_init.assert_called_once_with(
-                credentials=mock_credentials_instance,
-                developer_token=self.developer_token,
-                endpoint=None,
-                login_customer_id=None,
-                logging_config=None)
+            result = (google.ads.google_ads.client.GoogleAdsClient.
+                      _get_client_kwargs(config, ''))
+            self.assertEqual(
+                result,
+                {
+                    'credentials': mock_credentials_instance,
+                    'developer_token': self.developer_token,
+                    'endpoint': None,
+                    'login_customer_id': None,
+                    'logging_config': None
+                })
 
-    def test_load_from_storage_invalid_login_customer_id(self):
+    def test_get_client_kwargs(self):
         config = {
             'developer_token': self.developer_token,
             'client_id': self.client_id,
             'client_secret': self.client_secret,
-            'refresh_token': self.refresh_token,
-            'login_customer_id': '123-456-7890'
+            'refresh_token': self.refresh_token
         }
-
-        file_path = os.path.join(os.path.expanduser('~'), 'google-ads.yaml')
-        self.fs.create_file(file_path, contents=yaml.safe_dump(config))
 
         with mock.patch(
                 'google.oauth2.credentials.Credentials') as mock_credentials:
             mock_credentials_instance = mock.Mock()
             mock_credentials.return_value = mock_credentials_instance
-            self.assertRaises(
-                    ValueError,
-                    google.ads.google_ads.client.GoogleAdsClient
-                    .load_from_storage)
+            result = (google.ads.google_ads.client.GoogleAdsClient.
+                      _get_client_kwargs(config, ''))
+            self.assertEqual(
+                result,
+                {
+                    'credentials': mock_credentials_instance,
+                    'developer_token': self.developer_token,
+                    'endpoint': None,
+                    'login_customer_id': None,
+                    'logging_config': None
+                })
 
-    def test_load_from_storage_too_short_login_customer_id(self):
+    def test_get_client_kwargs_custom_endpoint(self):
+        endpoint = 'alt.endpoint.com'
         config = {
             'developer_token': self.developer_token,
             'client_id': self.client_id,
             'client_secret': self.client_secret,
             'refresh_token': self.refresh_token,
-            'login_customer_id': '123'
+            'endpoint': endpoint
         }
-
-        file_path = os.path.join(os.path.expanduser('~'), 'google-ads.yaml')
-        self.fs.create_file(file_path, contents=yaml.safe_dump(config))
 
         with mock.patch(
                 'google.oauth2.credentials.Credentials') as mock_credentials:
             mock_credentials_instance = mock.Mock()
             mock_credentials.return_value = mock_credentials_instance
-            self.assertRaises(
-                    ValueError,
-                    google.ads.google_ads.client.GoogleAdsClient
-                    .load_from_storage)
+            result = (google.ads.google_ads.client.GoogleAdsClient.
+                      _get_client_kwargs(config, ''))
+            self.assertEqual(
+                result,
+                {
+                    'credentials': mock_credentials_instance,
+                    'developer_token': self.developer_token,
+                    'endpoint': endpoint,
+                    'login_customer_id': None,
+                    'logging_config': None
+                })
+
+    def test_get_client_kwargs_from_env(self):
+        environ = {
+            'GOOGLE_ADS_DEVELOPER_TOKEN': self.developer_token,
+            'GOOGLE_ADS_CLIENT_ID': self.client_id,
+            'GOOGLE_ADS_CLIENT_SECRET': self.client_secret,
+            'GOOGLE_ADS_REFRESH_TOKEN': self.refresh_token
+        }
+        with mock.patch('os.environ', environ):
+            with mock.patch(
+                'google.oauth2.credentials.Credentials'
+            ) as mock_credentials:
+                mock_credentials_instance = mock.Mock()
+                mock_credentials.return_value = mock_credentials_instance
+                result = (google.ads.google_ads.client.GoogleAdsClient.
+                        _get_client_kwargs_from_env())
+                self.assertEqual(
+                    result,
+                    {
+                        'credentials': mock_credentials_instance,
+                        'developer_token': self.developer_token,
+                        'endpoint': None,
+                        'login_customer_id': None,
+                        'logging_config': None
+                    })
+
+    def test_get_client_kwargs_from_yaml(self):
+        config = {
+            'developer_token': self.developer_token,
+            'client_id': self.client_id,
+            'client_secret': self.client_secret,
+            'refresh_token': self.refresh_token
+        }
+
+        yaml_str = yaml.safe_dump(config)
+
+        with mock.patch(
+                'google.oauth2.credentials.Credentials') as mock_credentials:
+            mock_credentials_instance = mock.Mock()
+            mock_credentials.return_value = mock_credentials_instance
+            result = (google.ads.google_ads.client.GoogleAdsClient.
+                      _get_client_kwargs_from_yaml(yaml_str))
+            self.assertEqual(
+                result,
+                {
+                    'credentials': mock_credentials_instance,
+                    'developer_token': self.developer_token,
+                    'endpoint': None,
+                    'login_customer_id': None,
+                    'logging_config': None
+                })
 
     def test_load_from_storage(self):
         config = {
@@ -207,34 +274,6 @@ class GoogleAdsClientTest(FileTestCase):
                 credentials=mock_credentials_instance,
                 developer_token=self.developer_token,
                 endpoint=None,
-                login_customer_id=None,
-                logging_config=None)
-
-    def test_load_from_storage_custom_endpoint(self):
-        endpoint = 'alt.endpoint.com'
-        config = {
-            'developer_token': self.developer_token,
-            'client_id': self.client_id,
-            'client_secret': self.client_secret,
-            'refresh_token': self.refresh_token,
-            'endpoint': endpoint
-        }
-
-        file_path = os.path.join(os.path.expanduser('~'), 'google-ads.yaml')
-        self.fs.create_file(file_path, contents=yaml.safe_dump(config))
-
-        with mock.patch('google.ads.google_ads.client.GoogleAdsClient'
-                        '.__init__') as mock_client_init, \
-            mock.patch(
-                'google.oauth2.credentials.Credentials') as mock_credentials:
-            mock_client_init.return_value = None
-            mock_credentials_instance = mock.Mock()
-            mock_credentials.return_value = mock_credentials_instance
-            google.ads.google_ads.client.GoogleAdsClient.load_from_storage()
-            mock_client_init.assert_called_once_with(
-                credentials=mock_credentials_instance,
-                developer_token=self.developer_token,
-                endpoint=endpoint,
                 login_customer_id=None,
                 logging_config=None)
 
@@ -287,6 +326,14 @@ class GoogleAdsClientTest(FileTestCase):
             ValueError,
             google.ads.google_ads.client.GoogleAdsClient.load_from_storage,
             path=file_path)
+
+    def test_init_validate_login_customer_id(self):
+        with mock.patch(
+            'google.ads.google_ads.client._validate_login_customer_id'
+        ) as f:
+            google.ads.google_ads.client.GoogleAdsClient(
+                None, None, login_customer_id='1234567890')
+            self.assertTrue(f.called)
 
     def test_get_service(self):
         # Retrieve service names for all defined service clients.

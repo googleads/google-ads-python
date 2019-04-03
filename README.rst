@@ -46,12 +46,44 @@ is a `template`_ you can use.
 Create a GoogleAdsClient
 ########################
 
+Using yaml file
+***************
+
 You can run the following to retrieve a `GoogleAdsClient` instance using a
 configuration file named **google-ads.yaml** stored in your home directory:
 
 .. code-block:: python
 
   client = google.ads.google_ads.client.GoogleAdsClient.load_from_storage()
+
+Using environment variables
+***************************
+
+You can also retrieve it exporting environment variables.
+
+* Required:
+
+.. code:: bash
+
+  export GOOGLE_ADS_CLIENT_ID=INSERT_OAUTH2_CLIENT_ID_HERE
+  export GOOGLE_ADS_CLIENT_SECRET=INSERT_OAUTH2_CLIENT_SECRET_HERE
+  export GOOGLE_ADS_REFRESH_TOKEN=INSERT_REFRESH_TOKEN_HERE
+  export GOOGLE_ADS_DEVELOPER_TOKEN=INSERT_DEVELOPER_TOKEN_HERE
+
+* Optional:
+
+.. code:: bash
+
+  export GOOGLE_ADS_LOGIN_CUSTOMER_ID=INSERT_LOGIN_CUSTOMER_ID_HERE
+  export GOOGLE_ADS_ENDPOINT=INSERT_ALTERNATIVE_API_ENDPOINT_HERE
+  export GOOGLE_ADS_LOGGING_CONFIG=INSERT_LOGGING_CONFIG_HERE
+
+Then run the following to retrieve a GoogleAdsClient instance:
+
+.. code-block:: python
+
+  client = google.ads.google_ads.client.GoogleAdsClient.load_from_env()
+ 
 
 Get types and service clients
 #############################

@@ -50,13 +50,13 @@ def main(client, customer_id, location_ids, language_id, keywords, page_url):
 
     # Either keywords or a page_url are required to generate keyword ideas
     # so this raises an error if neither are provided.
-    if not (len(keywords) or page_url):
+    if not (keywords or page_url):
         raise ValueError('At least one of keywords or page URL is required, '
                          'but neither was specified.')
 
     # To generate keyword ideas with only a page_url and no keywords we need
     # to initialize a UrlSeed object with the page_url as the "url" field.
-    if not len(keywords) and page_url:
+    if not keywords and page_url:
         url_seed = client.get_type('UrlSeed', version='v1')
         url_seed.url.value = page_url
 
@@ -64,7 +64,7 @@ def main(client, customer_id, location_ids, language_id, keywords, page_url):
     # To generate keyword ideas with only a list of keywords and no page_url
     # we need to initialize a KeywordSeed object and set the "keywords" field
     # to be a list of StringValue objects.
-    if len(keywords) and not page_url:
+    if keywords and not page_url:
         keyword_seed = client.get_type('KeywordSeed', version='v1')
         keyword_protos = map_keywords_to_string_values(client, keywords)
         keyword_seed.keywords.extend(keyword_protos)
@@ -72,7 +72,7 @@ def main(client, customer_id, location_ids, language_id, keywords, page_url):
     # To generate keyword ideas using both a list of keywords and a page_url we
     # need to initialize a KeywordAndUrlSeed object, setting both the "url" and
     # "keywords" fields.
-    if len(keywords) and page_url:
+    if keywords and page_url:
         keyword_url_seed = client.get_type('KeywordAndUrlSeed', version='v1')
         keyword_url_seed.url.value = page_url
         keyword_protos = map_keywords_to_string_values(client, keywords)

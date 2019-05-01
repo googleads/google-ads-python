@@ -457,6 +457,9 @@ class LoggingInterceptorTest(TestCase):
     _MOCK_TRANSPORT_ERROR_MESSAGE = u'Received RST_STREAM with error code 2'
     _MOCK_DEBUG_ERROR_STRING = u'{"description":"Error received from peer"}'
     _MOCK_RESPONSE_MSG = 'test response msg'
+    _MOCK_EXCEPTION = mock.Mock()
+    _MOCK_ERROR = mock.Mock()
+    _MOCK_FAILURE = mock.Mock()
 
     def _create_test_interceptor(self, config=_MOCK_CONFIG,
                                  endpoint=_MOCK_ENDPOINT):
@@ -516,13 +519,13 @@ class LoggingInterceptorTest(TestCase):
             "error" attribute is an object with a "trailing_metadata" method
             that returns a tuble of mock metadata.
         """
-        exception = mock.Mock()
-        error = mock.Mock()
+        exception = self._MOCK_EXCEPTION
+        error = self._MOCK_ERROR
         error.message = self._MOCK_ERROR_MESSAGE
         exception.request_id = self._MOCK_REQUEST_ID
-        exception.failure = mock.Mock()
+        exception.failure = self._MOCK_FAILURE
         exception.failure.errors = [error]
-        exception.error = mock.Mock()
+        exception.error = self._MOCK_ERROR
         exception.error.trailing_metadata = self._get_trailing_metadata_fn()
         return exception
 
@@ -693,21 +696,16 @@ class LoggingInterceptorTest(TestCase):
         mock_client_call_details = self._get_mock_client_call_details()
         mock_continuation_fn = self._get_mock_continuation_fn(fail=True)
         mock_request = self._get_mock_request()
-        mock_json_message = '{"test": "request-response"}'
-        mock_response = mock_continuation_fn(
-            mock_client_call_details, mock_request)
-        mock_trailing_metadata = mock_response.trailing_metadata()
 
         with mock.patch('logging.config.dictConfig'), \
-            mock.patch('google.ads.google_ads.client._logger') as mock_logger, \
-            mock.patch(
-                'google.ads.google_ads.client.MessageToJson') as mock_formatter:
-            mock_formatter.return_value = mock_json_message
+            mock.patch('google.ads.google_ads.client._logger') as mock_logger:
             interceptor = self._create_test_interceptor()
-            interceptor.intercept_unary_unary(
+            mock_response = interceptor.intercept_unary_unary(
                 mock_continuation_fn,
                 mock_client_call_details,
                 mock_request)
+
+            mock_trailing_metadata = mock_response.trailing_metadata()
 
             mock_logger.warning.assert_called_once_with(
                 interceptor._SUMMARY_LOG_LINE
@@ -725,7 +723,7 @@ class LoggingInterceptorTest(TestCase):
             mock_logger.info.assert_called_once_with(
                 interceptor._FULL_FAULT_LOG_LINE
                 % (self._MOCK_METHOD, self._MOCK_ENDPOINT, initial_metadata,
-                    mock_json_message, trailing_metadata, mock_json_message))
+                    mock_request, trailing_metadata, mock_response.exception().failure))
 
     def test_get_initial_metadata(self):
         """_Returns a tuple of metadata from client_call_details."""

@@ -470,7 +470,7 @@ class LoggingInterceptor(grpc.UnaryUnaryClientInterceptor):
             failure = getattr(exception, 'failure', None)
 
             if failure:
-                return _parse_message_to_json(failure)
+                return failure
             else:
                 # if exception.failure isn't present then it's likely this is a
                 # transport error with a .debug_error_string method.
@@ -482,7 +482,7 @@ class LoggingInterceptor(grpc.UnaryUnaryClientInterceptor):
                     # then simply return an empty JSON string
                     return '{}'
         else:
-            return _parse_message_to_json(response.result())
+            return response.result()
 
     def _get_fault_message(self, exception):
         """Retrieves a fault/error message from an exception object.
@@ -526,9 +526,8 @@ class LoggingInterceptor(grpc.UnaryUnaryClientInterceptor):
                      method, request_id, False, None))
 
     def _log_failed_request(self, method, customer_id, metadata_json,
-                            request_id, request_json,
-                            trailing_metadata_json, response_json,
-                            fault_message):
+                            request_id, request, trailing_metadata_json,
+                            response_json, fault_message):
         """Handles logging of a failed request.
 
         Args:
@@ -536,13 +535,13 @@ class LoggingInterceptor(grpc.UnaryUnaryClientInterceptor):
             customer_id: The customer ID associated with the request.
             metadata_json: A JSON str of initial_metadata.
             request_id: A unique ID for the request provided in the response.
-            request_json: A JSON str of the request message.
+            request: An instance of a request proto message.
             trailing_metadata_json: A JSON str of trailing_metadata.
             response_json: A JSON str of the the response message.
             fault_message: A str error message from a failed request.
         """
         _logger.info(self._FULL_FAULT_LOG_LINE % (method, self.endpoint,
-                     metadata_json, request_json, trailing_metadata_json,
+                     metadata_json, request, trailing_metadata_json,
                      response_json))
 
         _logger.warning(self._SUMMARY_LOG_LINE % (customer_id, self.endpoint,

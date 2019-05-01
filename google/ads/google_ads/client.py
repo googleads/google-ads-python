@@ -375,7 +375,7 @@ class LoggingInterceptor(grpc.UnaryUnaryClientInterceptor):
         if logging_config:
             logging.config.dictConfig(logging_config)
 
-    def _get_request_id(self, response, exception):
+    def _get_request_id(self, response):
         """Retrieves the request id from a response object.
 
         Returns:
@@ -384,10 +384,9 @@ class LoggingInterceptor(grpc.UnaryUnaryClientInterceptor):
 
         Args:
             response: A grpc.Call/grpc.Future instance.
-            exception: A grpc.Call instance.
         """
-        if exception:
-            return getattr(exception, 'request_id', None)
+        if response.exception():
+            return getattr(response.exception(), 'request_id', None)
         else:
             trailing_metadata = response.trailing_metadata()
             for datum in trailing_metadata:
@@ -555,12 +554,12 @@ class LoggingInterceptor(grpc.UnaryUnaryClientInterceptor):
             request: An instance of a request proto message.
             response: A grpc.Call/grpc.Future instance.
         """
-        exception = response.exception()
         method = self._get_call_method(client_call_details)
         customer_id = self._get_customer_id(request)
         initial_metadata = self._get_initial_metadata(client_call_details)
         initial_metadata_json = _parse_metadata_to_json(initial_metadata)
-        request_id = self._get_request_id(response, exception)
+        request_id = self._get_request_id(response)
+        exception = response.exception()
         trailing_metadata = self._get_trailing_metadata(response, exception)
         trailing_metadata_json = _parse_metadata_to_json(trailing_metadata)
 

@@ -537,7 +537,7 @@ class LoggingInterceptorTest(TestCase):
 
         Returns:
             A Mock instance with mock "debug_error_string," "details," and
-            trailing_metadata" methods.
+            "trailing_metadata" methods.
         """
         def _mock_debug_error_string():
             return self._MOCK_DEBUG_ERROR_STRING
@@ -559,7 +559,7 @@ class LoggingInterceptorTest(TestCase):
         del exception.failure
         return exception
 
-    def _get_mock_response(self, failed=False):
+    def _get_mock_response(self, failed=False, transport=False):
         """Generates a mock response object for use in tests.
 
         Accepts a "failed" param that tells the returned mocked response to
@@ -571,7 +571,9 @@ class LoggingInterceptorTest(TestCase):
 
         Args:
             failed: a bool indicating whether the mock response should be in a
-            failed state or not. Default is False.
+                failed state or not. Default is False.
+            transport: a bool indicating whether the response should mock a
+                gRPC transport exception.
         """
         def mock_exception_fn():
             if failed:
@@ -610,7 +612,7 @@ class LoggingInterceptorTest(TestCase):
         """Unconfigured LoggingInterceptor should not call logging.dictConfig.
         """
         with mock.patch('logging.config.dictConfig') as mock_dictConfig:
-            interceptor = google.ads.google_ads.client.LoggingInterceptor()
+            google.ads.google_ads.client.LoggingInterceptor()
             mock_dictConfig.assert_not_called()
 
     def test_init_with_config(self):
@@ -618,8 +620,7 @@ class LoggingInterceptorTest(TestCase):
         """
         config = {'test': True}
         with mock.patch('logging.config.dictConfig') as mock_dictConfig:
-            interceptor = google.ads.google_ads.client.LoggingInterceptor(
-                config)
+            google.ads.google_ads.client.LoggingInterceptor(config)
             mock_dictConfig.assert_called_once_with(config)
 
     def test_intercept_unary_unary_unconfigured(self):
@@ -723,7 +724,8 @@ class LoggingInterceptorTest(TestCase):
             mock_logger.info.assert_called_once_with(
                 interceptor._FULL_FAULT_LOG_LINE
                 % (self._MOCK_METHOD, self._MOCK_ENDPOINT, initial_metadata,
-                    mock_request, trailing_metadata, mock_response.exception().failure))
+                    mock_request, trailing_metadata,
+                    mock_response.exception().failure))
 
     def test_get_initial_metadata(self):
         """_Returns a tuple of metadata from client_call_details."""
@@ -763,31 +765,35 @@ class LoggingInterceptorTest(TestCase):
         """Returns a request ID str from a response object."""
         with mock.patch('logging.config.dictConfig'):
             mock_response = self._get_mock_response()
-            mock_exception = None
             interceptor = self._create_test_interceptor()
-            result = interceptor._get_request_id(mock_response, mock_exception)
+            result = interceptor._get_request_id(mock_response)
             self.assertEqual(result, self._MOCK_REQUEST_ID)
 
     def test_get_request_id_google_ads_failure(self):
         """Returns a request ID str from a GoogleAdsException instance."""
         with mock.patch('logging.config.dictConfig'):
             mock_response = self._get_mock_response(failed=True)
-            mock_exception = mock_response.exception()
             interceptor = self._create_test_interceptor()
-            result = interceptor._get_request_id(mock_response, mock_exception)
+            result = interceptor._get_request_id(mock_response)
             self.assertEqual(result, self._MOCK_REQUEST_ID)
 
     def test_get_request_id_transport_failure(self):
         """Returns None if there is no request_id on the exception."""
         with mock.patch('logging.config.dictConfig'):
+            def mock_transport_exception():
+                """Returns an object without a request_id attribute"""
+                mock_exception = mock.Mock()
+                del mock_exception.request_id
+                return mock_exception
+
             mock_response = self._get_mock_response(failed=True)
-            mock_exception = mock_response.exception()
+            mock_response.exception = mock_transport_exception
             # exceptions on transport errors have no request_id because they
             # don't interact with a server that can provide one.
-            del mock_exception.request_id
             interceptor = self._create_test_interceptor()
-            result = interceptor._get_request_id(mock_response, mock_exception)
+            result = interceptor._get_request_id(mock_response)
             self.assertEqual(result, None)
+
 
     def test_parse_response_to_json_transport_failure(self):
         """ Calls _parse_to_json with transport error's debug_error_string."""

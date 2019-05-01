@@ -547,15 +547,15 @@ class LoggingInterceptor(grpc.UnaryUnaryClientInterceptor):
         _logger.warning(self._SUMMARY_LOG_LINE % (customer_id, self.endpoint,
                         method, request_id, True, fault_message))
 
-    def _log_request(self, client_call_details, request, response, exception):
+    def _log_request(self, client_call_details, request, response):
         """Handles logging all requests.
 
         Args:
             client_call_details: An instance of grpc.ClientCallDetails.
             request: An instance of a request proto message.
             response: A grpc.Call/grpc.Future instance.
-            exception: A grpc.Call instance.
         """
+        exception = response.exception()
         method = self._get_call_method(client_call_details)
         customer_id = self._get_customer_id(request)
         initial_metadata = self._get_initial_metadata(client_call_details)
@@ -586,11 +586,9 @@ class LoggingInterceptor(grpc.UnaryUnaryClientInterceptor):
             A grpc.Call/grpc.Future instance representing a service response.
         """
         response = continuation(client_call_details, request)
-        if _logger.isEnabledFor(logging.WARNING):
-            exception = response.exception()
 
-            self._log_request(client_call_details, request, response,
-                              exception)
+        if _logger.isEnabledFor(logging.WARNING):
+            self._log_request(client_call_details, request, response)
 
         return response
 

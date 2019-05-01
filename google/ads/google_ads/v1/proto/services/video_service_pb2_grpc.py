@@ -6,7 +6,9 @@ from google.ads.google_ads.v1.proto.services import video_service_pb2 as google_
 
 
 class VideoServiceStub(object):
-  """Service to manage videos.
+  """Proto file describing the Video service.
+
+  Service to manage videos.
   """
 
   def __init__(self, channel):
@@ -23,7 +25,9 @@ class VideoServiceStub(object):
 
 
 class VideoServiceServicer(object):
-  """Service to manage videos.
+  """Proto file describing the Video service.
+
+  Service to manage videos.
   """
 
   def GetVideo(self, request, context):

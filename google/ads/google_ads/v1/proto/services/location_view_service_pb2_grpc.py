@@ -6,7 +6,9 @@ from google.ads.google_ads.v1.proto.services import location_view_service_pb2 as
 
 
 class LocationViewServiceStub(object):
-  """Service to fetch location views.
+  """Proto file describing the Location View service.
+
+  Service to fetch location views.
   """
 
   def __init__(self, channel):
@@ -23,7 +25,9 @@ class LocationViewServiceStub(object):
 
 
 class LocationViewServiceServicer(object):
-  """Service to fetch location views.
+  """Proto file describing the Location View service.
+
+  Service to fetch location views.
   """
 
   def GetLocationView(self, request, context):

@@ -6,7 +6,9 @@ from google.ads.google_ads.v1.proto.services import shared_criterion_service_pb2
 
 
 class SharedCriterionServiceStub(object):
-  """Service to manage shared criteria.
+  """Proto file describing the Shared Criterion service.
+
+  Service to manage shared criteria.
   """
 
   def __init__(self, channel):
@@ -28,7 +30,9 @@ class SharedCriterionServiceStub(object):
 
 
 class SharedCriterionServiceServicer(object):
-  """Service to manage shared criteria.
+  """Proto file describing the Shared Criterion service.
+
+  Service to manage shared criteria.
   """
 
   def GetSharedCriterion(self, request, context):

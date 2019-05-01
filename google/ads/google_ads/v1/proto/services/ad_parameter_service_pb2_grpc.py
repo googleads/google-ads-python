@@ -6,7 +6,9 @@ from google.ads.google_ads.v1.proto.services import ad_parameter_service_pb2 as 
 
 
 class AdParameterServiceStub(object):
-  """Service to manage ad parameters.
+  """Proto file describing the Ad Parameter service.
+
+  Service to manage ad parameters.
   """
 
   def __init__(self, channel):
@@ -28,7 +30,9 @@ class AdParameterServiceStub(object):
 
 
 class AdParameterServiceServicer(object):
-  """Service to manage ad parameters.
+  """Proto file describing the Ad Parameter service.
+
+  Service to manage ad parameters.
   """
 
   def GetAdParameter(self, request, context):

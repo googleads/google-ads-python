@@ -6,7 +6,9 @@ from google.ads.google_ads.v1.proto.services import campaign_shared_set_service_
 
 
 class CampaignSharedSetServiceStub(object):
-  """Service to manage campaign shared sets.
+  """Proto file describing the Campaign Shared Set service.
+
+  Service to manage campaign shared sets.
   """
 
   def __init__(self, channel):
@@ -28,7 +30,9 @@ class CampaignSharedSetServiceStub(object):
 
 
 class CampaignSharedSetServiceServicer(object):
-  """Service to manage campaign shared sets.
+  """Proto file describing the Campaign Shared Set service.
+
+  Service to manage campaign shared sets.
   """
 
   def GetCampaignSharedSet(self, request, context):

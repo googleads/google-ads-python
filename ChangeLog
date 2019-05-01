@@ -1,3 +1,8 @@
+* 2.0.0:
+- Google Ads v1_2 release
+- Update example file names
+- Remove support for v0
+
 * 1.3.1:
 - Add new planning examples add_keyword_plan and generate_forecast_metrics
 - Add new example generate_keyword_ideas

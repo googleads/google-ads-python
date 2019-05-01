@@ -6,7 +6,9 @@ from google.ads.google_ads.v1.proto.services import extension_feed_item_service_
 
 
 class ExtensionFeedItemServiceStub(object):
-  """Service to manage extension feed items.
+  """Proto file describing the ExtensionFeedItem service.
+
+  Service to manage extension feed items.
   """
 
   def __init__(self, channel):
@@ -28,7 +30,9 @@ class ExtensionFeedItemServiceStub(object):
 
 
 class ExtensionFeedItemServiceServicer(object):
-  """Service to manage extension feed items.
+  """Proto file describing the ExtensionFeedItem service.
+
+  Service to manage extension feed items.
   """
 
   def GetExtensionFeedItem(self, request, context):

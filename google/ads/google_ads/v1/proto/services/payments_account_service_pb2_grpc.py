@@ -5,7 +5,9 @@ from google.ads.google_ads.v1.proto.services import payments_account_service_pb2
 
 
 class PaymentsAccountServiceStub(object):
-  """Service to provide Payments accounts that can be used to set up consolidated
+  """Proto file describing the Payments account service.
+
+  Service to provide Payments accounts that can be used to set up consolidated
   billing.
   """
 
@@ -23,7 +25,9 @@ class PaymentsAccountServiceStub(object):
 
 
 class PaymentsAccountServiceServicer(object):
-  """Service to provide Payments accounts that can be used to set up consolidated
+  """Proto file describing the Payments account service.
+
+  Service to provide Payments accounts that can be used to set up consolidated
   billing.
   """
 

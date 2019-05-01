@@ -6,7 +6,9 @@ from google.ads.google_ads.v1.proto.services import feed_service_pb2 as google_d
 
 
 class FeedServiceStub(object):
-  """Service to manage feeds.
+  """Proto file describing the Feed service.
+
+  Service to manage feeds.
   """
 
   def __init__(self, channel):
@@ -28,7 +30,9 @@ class FeedServiceStub(object):
 
 
 class FeedServiceServicer(object):
-  """Service to manage feeds.
+  """Proto file describing the Feed service.
+
+  Service to manage feeds.
   """
 
   def GetFeed(self, request, context):

@@ -6,7 +6,9 @@ from google.ads.google_ads.v1.proto.services import google_ads_field_service_pb2
 
 
 class GoogleAdsFieldServiceStub(object):
-  """Service to fetch Google Ads API fields.
+  """Proto file describing the GoogleAdsFieldService
+
+  Service to fetch Google Ads API fields.
   """
 
   def __init__(self, channel):
@@ -28,7 +30,9 @@ class GoogleAdsFieldServiceStub(object):
 
 
 class GoogleAdsFieldServiceServicer(object):
-  """Service to fetch Google Ads API fields.
+  """Proto file describing the GoogleAdsFieldService
+
+  Service to fetch Google Ads API fields.
   """
 
   def GetGoogleAdsField(self, request, context):

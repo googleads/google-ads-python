@@ -6,7 +6,9 @@ from google.ads.google_ads.v1.proto.services import keyword_plan_ad_group_servic
 
 
 class KeywordPlanAdGroupServiceStub(object):
-  """Service to manage Keyword Plan ad groups.
+  """Proto file describing the keyword plan ad group service.
+
+  Service to manage Keyword Plan ad groups.
   """
 
   def __init__(self, channel):
@@ -28,7 +30,9 @@ class KeywordPlanAdGroupServiceStub(object):
 
 
 class KeywordPlanAdGroupServiceServicer(object):
-  """Service to manage Keyword Plan ad groups.
+  """Proto file describing the keyword plan ad group service.
+
+  Service to manage Keyword Plan ad groups.
   """
 
   def GetKeywordPlanAdGroup(self, request, context):

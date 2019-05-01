@@ -6,7 +6,9 @@ from google.ads.google_ads.v1.proto.services import keyword_view_service_pb2 as 
 
 
 class KeywordViewServiceStub(object):
-  """Service to manage keyword views.
+  """Proto file describing the Keyword View service.
+
+  Service to manage keyword views.
   """
 
   def __init__(self, channel):
@@ -23,7 +25,9 @@ class KeywordViewServiceStub(object):
 
 
 class KeywordViewServiceServicer(object):
-  """Service to manage keyword views.
+  """Proto file describing the Keyword View service.
+
+  Service to manage keyword views.
   """
 
   def GetKeywordView(self, request, context):

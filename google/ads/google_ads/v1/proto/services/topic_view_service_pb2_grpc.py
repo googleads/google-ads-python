@@ -6,7 +6,9 @@ from google.ads.google_ads.v1.proto.services import topic_view_service_pb2 as go
 
 
 class TopicViewServiceStub(object):
-  """Service to manage topic views.
+  """Proto file describing the Topic View service.
+
+  Service to manage topic views.
   """
 
   def __init__(self, channel):
@@ -23,7 +25,9 @@ class TopicViewServiceStub(object):
 
 
 class TopicViewServiceServicer(object):
-  """Service to manage topic views.
+  """Proto file describing the Topic View service.
+
+  Service to manage topic views.
   """
 
   def GetTopicView(self, request, context):

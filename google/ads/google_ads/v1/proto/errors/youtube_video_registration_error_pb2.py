@@ -20,13 +20,80 @@ DESCRIPTOR = _descriptor.FileDescriptor(
   package='google.ads.googleads.v1.errors',
   syntax='proto3',
   serialized_options=_b('\n\"com.google.ads.googleads.v1.errorsB\"YoutubeVideoRegistrationErrorProtoP\001ZDgoogle.golang.org/genproto/googleapis/ads/googleads/v1/errors;errors\242\002\003GAA\252\002\036Google.Ads.GoogleAds.V1.Errors\312\002\036Google\\Ads\\GoogleAds\\V1\\Errors\352\002\"Google::Ads::GoogleAds::V1::Errors'),
-  serialized_pb=_b('\nKgoogle/ads/googleads_v1/proto/errors/youtube_video_registration_error.proto\x12\x1egoogle.ads.googleads.v1.errors\x1a\x1cgoogle/api/annotations.protoB\xfd\x01\n\"com.google.ads.googleads.v1.errorsB\"YoutubeVideoRegistrationErrorProtoP\x01ZDgoogle.golang.org/genproto/googleapis/ads/googleads/v1/errors;errors\xa2\x02\x03GAA\xaa\x02\x1eGoogle.Ads.GoogleAds.V1.Errors\xca\x02\x1eGoogle\\Ads\\GoogleAds\\V1\\Errors\xea\x02\"Google::Ads::GoogleAds::V1::Errorsb\x06proto3')
+  serialized_pb=_b('\nKgoogle/ads/googleads_v1/proto/errors/youtube_video_registration_error.proto\x12\x1egoogle.ads.googleads.v1.errors\x1a\x1cgoogle/api/annotations.proto\"\x91\x01\n!YoutubeVideoRegistrationErrorEnum\"l\n\x1dYoutubeVideoRegistrationError\x12\x0f\n\x0bUNSPECIFIED\x10\x00\x12\x0b\n\x07UNKNOWN\x10\x01\x12\x13\n\x0fVIDEO_NOT_FOUND\x10\x02\x12\x18\n\x14VIDEO_NOT_ACCESSIBLE\x10\x03\x42\xfd\x01\n\"com.google.ads.googleads.v1.errorsB\"YoutubeVideoRegistrationErrorProtoP\x01ZDgoogle.golang.org/genproto/googleapis/ads/googleads/v1/errors;errors\xa2\x02\x03GAA\xaa\x02\x1eGoogle.Ads.GoogleAds.V1.Errors\xca\x02\x1eGoogle\\Ads\\GoogleAds\\V1\\Errors\xea\x02\"Google::Ads::GoogleAds::V1::Errorsb\x06proto3')
   ,
   dependencies=[google_dot_api_dot_annotations__pb2.DESCRIPTOR,])
 
 
 
+_YOUTUBEVIDEOREGISTRATIONERRORENUM_YOUTUBEVIDEOREGISTRATIONERROR = _descriptor.EnumDescriptor(
+  name='YoutubeVideoRegistrationError',
+  full_name='google.ads.googleads.v1.errors.YoutubeVideoRegistrationErrorEnum.YoutubeVideoRegistrationError',
+  filename=None,
+  file=DESCRIPTOR,
+  values=[
+    _descriptor.EnumValueDescriptor(
+      name='UNSPECIFIED', index=0, number=0,
+      serialized_options=None,
+      type=None),
+    _descriptor.EnumValueDescriptor(
+      name='UNKNOWN', index=1, number=1,
+      serialized_options=None,
+      type=None),
+    _descriptor.EnumValueDescriptor(
+      name='VIDEO_NOT_FOUND', index=2, number=2,
+      serialized_options=None,
+      type=None),
+    _descriptor.EnumValueDescriptor(
+      name='VIDEO_NOT_ACCESSIBLE', index=3, number=3,
+      serialized_options=None,
+      type=None),
+  ],
+  containing_type=None,
+  serialized_options=None,
+  serialized_start=179,
+  serialized_end=287,
+)
+_sym_db.RegisterEnumDescriptor(_YOUTUBEVIDEOREGISTRATIONERRORENUM_YOUTUBEVIDEOREGISTRATIONERROR)
+
+
+_YOUTUBEVIDEOREGISTRATIONERRORENUM = _descriptor.Descriptor(
+  name='YoutubeVideoRegistrationErrorEnum',
+  full_name='google.ads.googleads.v1.errors.YoutubeVideoRegistrationErrorEnum',
+  filename=None,
+  file=DESCRIPTOR,
+  containing_type=None,
+  fields=[
+  ],
+  extensions=[
+  ],
+  nested_types=[],
+  enum_types=[
+    _YOUTUBEVIDEOREGISTRATIONERRORENUM_YOUTUBEVIDEOREGISTRATIONERROR,
+  ],
+  serialized_options=None,
+  is_extendable=False,
+  syntax='proto3',
+  extension_ranges=[],
+  oneofs=[
+  ],
+  serialized_start=142,
+  serialized_end=287,
+)
+
+_YOUTUBEVIDEOREGISTRATIONERRORENUM_YOUTUBEVIDEOREGISTRATIONERROR.containing_type = _YOUTUBEVIDEOREGISTRATIONERRORENUM
+DESCRIPTOR.message_types_by_name['YoutubeVideoRegistrationErrorEnum'] = _YOUTUBEVIDEOREGISTRATIONERRORENUM
 _sym_db.RegisterFileDescriptor(DESCRIPTOR)
+
+YoutubeVideoRegistrationErrorEnum = _reflection.GeneratedProtocolMessageType('YoutubeVideoRegistrationErrorEnum', (_message.Message,), dict(
+  DESCRIPTOR = _YOUTUBEVIDEOREGISTRATIONERRORENUM,
+  __module__ = 'google.ads.googleads_v1.proto.errors.youtube_video_registration_error_pb2'
+  ,
+  __doc__ = """Container for enum describing YouTube video registration errors.
+  """,
+  # @@protoc_insertion_point(class_scope:google.ads.googleads.v1.errors.YoutubeVideoRegistrationErrorEnum)
+  ))
+_sym_db.RegisterMessage(YoutubeVideoRegistrationErrorEnum)
 
 
 DESCRIPTOR._options = None

@@ -6,7 +6,9 @@ from google.ads.google_ads.v1.proto.services import feed_item_service_pb2 as goo
 
 
 class FeedItemServiceStub(object):
-  """Service to manage feed items.
+  """Proto file describing the FeedItem service.
+
+  Service to manage feed items.
   """
 
   def __init__(self, channel):
@@ -28,7 +30,9 @@ class FeedItemServiceStub(object):
 
 
 class FeedItemServiceServicer(object):
-  """Service to manage feed items.
+  """Proto file describing the FeedItem service.
+
+  Service to manage feed items.
   """
 
   def GetFeedItem(self, request, context):

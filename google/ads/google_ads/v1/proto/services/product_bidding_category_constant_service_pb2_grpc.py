@@ -6,7 +6,9 @@ from google.ads.google_ads.v1.proto.services import product_bidding_category_con
 
 
 class ProductBiddingCategoryConstantServiceStub(object):
-  """Service to fetch Product Bidding Categories.
+  """Proto file describing the Product Bidding Category constant service
+
+  Service to fetch Product Bidding Categories.
   """
 
   def __init__(self, channel):
@@ -23,7 +25,9 @@ class ProductBiddingCategoryConstantServiceStub(object):
 
 
 class ProductBiddingCategoryConstantServiceServicer(object):
-  """Service to fetch Product Bidding Categories.
+  """Proto file describing the Product Bidding Category constant service
+
+  Service to fetch Product Bidding Categories.
   """
 
   def GetProductBiddingCategoryConstant(self, request, context):

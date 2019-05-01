@@ -6,7 +6,9 @@ from google.ads.google_ads.v1.proto.services import campaign_audience_view_servi
 
 
 class CampaignAudienceViewServiceStub(object):
-  """Service to manage campaign audience views.
+  """Proto file describing the Campaign Audience View service.
+
+  Service to manage campaign audience views.
   """
 
   def __init__(self, channel):
@@ -23,7 +25,9 @@ class CampaignAudienceViewServiceStub(object):
 
 
 class CampaignAudienceViewServiceServicer(object):
-  """Service to manage campaign audience views.
+  """Proto file describing the Campaign Audience View service.
+
+  Service to manage campaign audience views.
   """
 
   def GetCampaignAudienceView(self, request, context):

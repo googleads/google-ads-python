@@ -6,7 +6,9 @@ from google.ads.google_ads.v1.proto.services import customer_extension_setting_s
 
 
 class CustomerExtensionSettingServiceStub(object):
-  """Service to manage customer extension settings.
+  """Proto file describing the CustomerExtensionSetting service.
+
+  Service to manage customer extension settings.
   """
 
   def __init__(self, channel):
@@ -28,7 +30,9 @@ class CustomerExtensionSettingServiceStub(object):
 
 
 class CustomerExtensionSettingServiceServicer(object):
-  """Service to manage customer extension settings.
+  """Proto file describing the CustomerExtensionSetting service.
+
+  Service to manage customer extension settings.
   """
 
   def GetCustomerExtensionSetting(self, request, context):

@@ -6,7 +6,9 @@ from google.ads.google_ads.v1.proto.services import bidding_strategy_service_pb2
 
 
 class BiddingStrategyServiceStub(object):
-  """Service to manage bidding strategies.
+  """Proto file describing the Bidding Strategy service.
+
+  Service to manage bidding strategies.
   """
 
   def __init__(self, channel):
@@ -28,7 +30,9 @@ class BiddingStrategyServiceStub(object):
 
 
 class BiddingStrategyServiceServicer(object):
-  """Service to manage bidding strategies.
+  """Proto file describing the Bidding Strategy service.
+
+  Service to manage bidding strategies.
   """
 
   def GetBiddingStrategy(self, request, context):

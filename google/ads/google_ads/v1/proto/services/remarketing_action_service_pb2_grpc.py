@@ -6,7 +6,9 @@ from google.ads.google_ads.v1.proto.services import remarketing_action_service_p
 
 
 class RemarketingActionServiceStub(object):
-  """Service to manage remarketing actions.
+  """Proto file describing the Remarketing Action service.
+
+  Service to manage remarketing actions.
   """
 
   def __init__(self, channel):
@@ -28,7 +30,9 @@ class RemarketingActionServiceStub(object):
 
 
 class RemarketingActionServiceServicer(object):
-  """Service to manage remarketing actions.
+  """Proto file describing the Remarketing Action service.
+
+  Service to manage remarketing actions.
   """
 
   def GetRemarketingAction(self, request, context):

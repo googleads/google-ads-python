@@ -6,7 +6,9 @@ from google.ads.google_ads.v1.proto.services import click_view_service_pb2 as go
 
 
 class ClickViewServiceStub(object):
-  """Service to fetch click views.
+  """Proto file describing the ClickView service.
+
+  Service to fetch click views.
   """
 
   def __init__(self, channel):
@@ -23,7 +25,9 @@ class ClickViewServiceStub(object):
 
 
 class ClickViewServiceServicer(object):
-  """Service to fetch click views.
+  """Proto file describing the ClickView service.
+
+  Service to fetch click views.
   """
 
   def GetClickView(self, request, context):

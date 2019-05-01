@@ -6,7 +6,9 @@ from google.ads.google_ads.v1.proto.services import ad_group_ad_label_service_pb
 
 
 class AdGroupAdLabelServiceStub(object):
-  """Service to manage labels on ad group ads.
+  """Proto file describing the Ad Group Ad Label service.
+
+  Service to manage labels on ad group ads.
   """
 
   def __init__(self, channel):
@@ -28,7 +30,9 @@ class AdGroupAdLabelServiceStub(object):
 
 
 class AdGroupAdLabelServiceServicer(object):
-  """Service to manage labels on ad group ads.
+  """Proto file describing the Ad Group Ad Label service.
+
+  Service to manage labels on ad group ads.
   """
 
   def GetAdGroupAdLabel(self, request, context):

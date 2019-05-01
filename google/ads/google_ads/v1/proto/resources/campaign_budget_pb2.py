@@ -222,7 +222,8 @@ CampaignBudget = _reflection.GeneratedProtocolMessageType('CampaignBudget', (_me
       amount_micros:
           The amount of the budget, in the local currency for the
           account. Amount is specified in micros, where one million is
-          equivalent to one currency unit.
+          equivalent to one currency unit. Monthly spend is capped at
+          30.4 times this amount.
       total_amount_micros:
           The lifetime amount of the budget, in the local currency for
           the account. Amount is specified in micros, where one million

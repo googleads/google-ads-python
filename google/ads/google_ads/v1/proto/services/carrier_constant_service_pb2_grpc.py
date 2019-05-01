@@ -6,7 +6,9 @@ from google.ads.google_ads.v1.proto.services import carrier_constant_service_pb2
 
 
 class CarrierConstantServiceStub(object):
-  """Service to fetch carrier constants.
+  """Proto file describing the carrier constant service.
+
+  Service to fetch carrier constants.
   """
 
   def __init__(self, channel):
@@ -23,7 +25,9 @@ class CarrierConstantServiceStub(object):
 
 
 class CarrierConstantServiceServicer(object):
-  """Service to fetch carrier constants.
+  """Proto file describing the carrier constant service.
+
+  Service to fetch carrier constants.
   """
 
   def GetCarrierConstant(self, request, context):

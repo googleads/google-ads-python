@@ -6,7 +6,9 @@ from google.ads.google_ads.v1.proto.services import ad_group_bid_modifier_servic
 
 
 class AdGroupBidModifierServiceStub(object):
-  """Service to manage ad group bid modifiers.
+  """Proto file describing the Ad Group Bid Modifier service.
+
+  Service to manage ad group bid modifiers.
   """
 
   def __init__(self, channel):
@@ -28,7 +30,9 @@ class AdGroupBidModifierServiceStub(object):
 
 
 class AdGroupBidModifierServiceServicer(object):
-  """Service to manage ad group bid modifiers.
+  """Proto file describing the Ad Group Bid Modifier service.
+
+  Service to manage ad group bid modifiers.
   """
 
   def GetAdGroupBidModifier(self, request, context):

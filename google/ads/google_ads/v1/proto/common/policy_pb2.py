@@ -14,6 +14,7 @@ _sym_db = _symbol_database.Default()
 
 from google.ads.google_ads.v1.proto.enums import policy_topic_entry_type_pb2 as google_dot_ads_dot_googleads__v1_dot_proto_dot_enums_dot_policy__topic__entry__type__pb2
 from google.ads.google_ads.v1.proto.enums import policy_topic_evidence_destination_mismatch_url_type_pb2 as google_dot_ads_dot_googleads__v1_dot_proto_dot_enums_dot_policy__topic__evidence__destination__mismatch__url__type__pb2
+from google.ads.google_ads.v1.proto.enums import policy_topic_evidence_destination_not_working_device_pb2 as google_dot_ads_dot_googleads__v1_dot_proto_dot_enums_dot_policy__topic__evidence__destination__not__working__device__pb2
 from google.protobuf import wrappers_pb2 as google_dot_protobuf_dot_wrappers__pb2
 from google.api import annotations_pb2 as google_dot_api_dot_annotations__pb2
 
@@ -23,9 +24,9 @@ DESCRIPTOR = _descriptor.FileDescriptor(
   package='google.ads.googleads.v1.common',
   syntax='proto3',
   serialized_options=_b('\n\"com.google.ads.googleads.v1.commonB\013PolicyProtoP\001ZDgoogle.golang.org/genproto/googleapis/ads/googleads/v1/common;common\242\002\003GAA\252\002\036Google.Ads.GoogleAds.V1.Common\312\002\036Google\\Ads\\GoogleAds\\V1\\Common\352\002\"Google::Ads::GoogleAds::V1::Common'),
-  serialized_pb=_b('\n1google/ads/googleads_v1/proto/common/policy.proto\x12\x1egoogle.ads.googleads.v1.common\x1a\x41google/ads/googleads_v1/proto/enums/policy_topic_entry_type.proto\x1a]google/ads/googleads_v1/proto/enums/policy_topic_evidence_destination_mismatch_url_type.proto\x1a\x1egoogle/protobuf/wrappers.proto\x1a\x1cgoogle/api/annotations.proto\"}\n\x12PolicyViolationKey\x12\x31\n\x0bpolicy_name\x18\x01 \x01(\x0b\x32\x1c.google.protobuf.StringValue\x12\x34\n\x0eviolating_text\x18\x02 \x01(\x0b\x32\x1c.google.protobuf.StringValue\"\xb4\x01\n\x19PolicyValidationParameter\x12=\n\x17ignorable_policy_topics\x18\x01 \x03(\x0b\x32\x1c.google.protobuf.StringValue\x12X\n\x1c\x65xempt_policy_violation_keys\x18\x02 \x03(\x0b\x32\x32.google.ads.googleads.v1.common.PolicyViolationKey\"\xaf\x02\n\x10PolicyTopicEntry\x12+\n\x05topic\x18\x01 \x01(\x0b\x32\x1c.google.protobuf.StringValue\x12Z\n\x04type\x18\x02 \x01(\x0e\x32L.google.ads.googleads.v1.enums.PolicyTopicEntryTypeEnum.PolicyTopicEntryType\x12\x46\n\tevidences\x18\x03 \x03(\x0b\x32\x33.google.ads.googleads.v1.common.PolicyTopicEvidence\x12J\n\x0b\x63onstraints\x18\x04 \x03(\x0b\x32\x35.google.ads.googleads.v1.common.PolicyTopicConstraint\"\xfa\x06\n\x13PolicyTopicEvidence\x12\x30\n\thttp_code\x18\x02 \x01(\x0b\x32\x1b.google.protobuf.Int32ValueH\x00\x12W\n\x0cwebsite_list\x18\x03 \x01(\x0b\x32?.google.ads.googleads.v1.common.PolicyTopicEvidence.WebsiteListH\x00\x12Q\n\ttext_list\x18\x04 \x01(\x0b\x32<.google.ads.googleads.v1.common.PolicyTopicEvidence.TextListH\x00\x12\x35\n\rlanguage_code\x18\x05 \x01(\x0b\x32\x1c.google.protobuf.StringValueH\x00\x12h\n\x15\x64\x65stination_text_list\x18\x06 \x01(\x0b\x32G.google.ads.googleads.v1.common.PolicyTopicEvidence.DestinationTextListH\x00\x12g\n\x14\x64\x65stination_mismatch\x18\x07 \x01(\x0b\x32G.google.ads.googleads.v1.common.PolicyTopicEvidence.DestinationMismatchH\x00\x1a\x37\n\x08TextList\x12+\n\x05texts\x18\x01 \x03(\x0b\x32\x1c.google.protobuf.StringValue\x1a=\n\x0bWebsiteList\x12.\n\x08websites\x18\x01 \x03(\x0b\x32\x1c.google.protobuf.StringValue\x1aN\n\x13\x44\x65stinationTextList\x12\x37\n\x11\x64\x65stination_texts\x18\x01 \x03(\x0b\x32\x1c.google.protobuf.StringValue\x1a\xa9\x01\n\x13\x44\x65stinationMismatch\x12\x91\x01\n\turl_types\x18\x01 \x03(\x0e\x32~.google.ads.googleads.v1.enums.PolicyTopicEvidenceDestinationMismatchUrlTypeEnum.PolicyTopicEvidenceDestinationMismatchUrlTypeB\x07\n\x05value\"\x93\x06\n\x15PolicyTopicConstraint\x12n\n\x17\x63ountry_constraint_list\x18\x01 \x01(\x0b\x32K.google.ads.googleads.v1.common.PolicyTopicConstraint.CountryConstraintListH\x00\x12g\n\x13reseller_constraint\x18\x02 \x01(\x0b\x32H.google.ads.googleads.v1.common.PolicyTopicConstraint.ResellerConstraintH\x00\x12z\n#certificate_missing_in_country_list\x18\x03 \x01(\x0b\x32K.google.ads.googleads.v1.common.PolicyTopicConstraint.CountryConstraintListH\x00\x12\x82\x01\n+certificate_domain_mismatch_in_country_list\x18\x04 \x01(\x0b\x32K.google.ads.googleads.v1.common.PolicyTopicConstraint.CountryConstraintListH\x00\x1a\xb2\x01\n\x15\x43ountryConstraintList\x12=\n\x18total_targeted_countries\x18\x01 \x01(\x0b\x32\x1b.google.protobuf.Int32Value\x12Z\n\tcountries\x18\x02 \x03(\x0b\x32G.google.ads.googleads.v1.common.PolicyTopicConstraint.CountryConstraint\x1a\x14\n\x12ResellerConstraint\x1aL\n\x11\x43ountryConstraint\x12\x37\n\x11\x63ountry_criterion\x18\x01 \x01(\x0b\x32\x1c.google.protobuf.StringValueB\x07\n\x05valueB\xe6\x01\n\"com.google.ads.googleads.v1.commonB\x0bPolicyProtoP\x01ZDgoogle.golang.org/genproto/googleapis/ads/googleads/v1/common;common\xa2\x02\x03GAA\xaa\x02\x1eGoogle.Ads.GoogleAds.V1.Common\xca\x02\x1eGoogle\\Ads\\GoogleAds\\V1\\Common\xea\x02\"Google::Ads::GoogleAds::V1::Commonb\x06proto3')
+  serialized_pb=_b('\n1google/ads/googleads_v1/proto/common/policy.proto\x12\x1egoogle.ads.googleads.v1.common\x1a\x41google/ads/googleads_v1/proto/enums/policy_topic_entry_type.proto\x1a]google/ads/googleads_v1/proto/enums/policy_topic_evidence_destination_mismatch_url_type.proto\x1a^google/ads/googleads_v1/proto/enums/policy_topic_evidence_destination_not_working_device.proto\x1a\x1egoogle/protobuf/wrappers.proto\x1a\x1cgoogle/api/annotations.proto\"}\n\x12PolicyViolationKey\x12\x31\n\x0bpolicy_name\x18\x01 \x01(\x0b\x32\x1c.google.protobuf.StringValue\x12\x34\n\x0eviolating_text\x18\x02 \x01(\x0b\x32\x1c.google.protobuf.StringValue\"\xb4\x01\n\x19PolicyValidationParameter\x12=\n\x17ignorable_policy_topics\x18\x01 \x03(\x0b\x32\x1c.google.protobuf.StringValue\x12X\n\x1c\x65xempt_policy_violation_keys\x18\x02 \x03(\x0b\x32\x32.google.ads.googleads.v1.common.PolicyViolationKey\"\xaf\x02\n\x10PolicyTopicEntry\x12+\n\x05topic\x18\x01 \x01(\x0b\x32\x1c.google.protobuf.StringValue\x12Z\n\x04type\x18\x02 \x01(\x0e\x32L.google.ads.googleads.v1.enums.PolicyTopicEntryTypeEnum.PolicyTopicEntryType\x12\x46\n\tevidences\x18\x03 \x03(\x0b\x32\x33.google.ads.googleads.v1.common.PolicyTopicEvidence\x12J\n\x0b\x63onstraints\x18\x04 \x03(\x0b\x32\x35.google.ads.googleads.v1.common.PolicyTopicConstraint\"\x88\n\n\x13PolicyTopicEvidence\x12\x30\n\thttp_code\x18\x02 \x01(\x0b\x32\x1b.google.protobuf.Int32ValueH\x00\x12W\n\x0cwebsite_list\x18\x03 \x01(\x0b\x32?.google.ads.googleads.v1.common.PolicyTopicEvidence.WebsiteListH\x00\x12Q\n\ttext_list\x18\x04 \x01(\x0b\x32<.google.ads.googleads.v1.common.PolicyTopicEvidence.TextListH\x00\x12\x35\n\rlanguage_code\x18\x05 \x01(\x0b\x32\x1c.google.protobuf.StringValueH\x00\x12h\n\x15\x64\x65stination_text_list\x18\x06 \x01(\x0b\x32G.google.ads.googleads.v1.common.PolicyTopicEvidence.DestinationTextListH\x00\x12g\n\x14\x64\x65stination_mismatch\x18\x07 \x01(\x0b\x32G.google.ads.googleads.v1.common.PolicyTopicEvidence.DestinationMismatchH\x00\x12l\n\x17\x64\x65stination_not_working\x18\x08 \x01(\x0b\x32I.google.ads.googleads.v1.common.PolicyTopicEvidence.DestinationNotWorkingH\x00\x1a\x37\n\x08TextList\x12+\n\x05texts\x18\x01 \x03(\x0b\x32\x1c.google.protobuf.StringValue\x1a=\n\x0bWebsiteList\x12.\n\x08websites\x18\x01 \x03(\x0b\x32\x1c.google.protobuf.StringValue\x1aN\n\x13\x44\x65stinationTextList\x12\x37\n\x11\x64\x65stination_texts\x18\x01 \x03(\x0b\x32\x1c.google.protobuf.StringValue\x1a\xa9\x01\n\x13\x44\x65stinationMismatch\x12\x91\x01\n\turl_types\x18\x01 \x03(\x0e\x32~.google.ads.googleads.v1.enums.PolicyTopicEvidenceDestinationMismatchUrlTypeEnum.PolicyTopicEvidenceDestinationMismatchUrlType\x1a\x9d\x02\n\x15\x44\x65stinationNotWorking\x12\x32\n\x0c\x65xpanded_url\x18\x03 \x01(\x0b\x32\x1c.google.protobuf.StringValue\x12\x91\x01\n\x06\x64\x65vice\x18\x04 \x01(\x0e\x32\x80\x01.google.ads.googleads.v1.enums.PolicyTopicEvidenceDestinationNotWorkingDeviceEnum.PolicyTopicEvidenceDestinationNotWorkingDevice\x12<\n\x16last_checked_date_time\x18\x05 \x01(\x0b\x32\x1c.google.protobuf.StringValueB\x07\n\x05value\"\x93\x06\n\x15PolicyTopicConstraint\x12n\n\x17\x63ountry_constraint_list\x18\x01 \x01(\x0b\x32K.google.ads.googleads.v1.common.PolicyTopicConstraint.CountryConstraintListH\x00\x12g\n\x13reseller_constraint\x18\x02 \x01(\x0b\x32H.google.ads.googleads.v1.common.PolicyTopicConstraint.ResellerConstraintH\x00\x12z\n#certificate_missing_in_country_list\x18\x03 \x01(\x0b\x32K.google.ads.googleads.v1.common.PolicyTopicConstraint.CountryConstraintListH\x00\x12\x82\x01\n+certificate_domain_mismatch_in_country_list\x18\x04 \x01(\x0b\x32K.google.ads.googleads.v1.common.PolicyTopicConstraint.CountryConstraintListH\x00\x1a\xb2\x01\n\x15\x43ountryConstraintList\x12=\n\x18total_targeted_countries\x18\x01 \x01(\x0b\x32\x1b.google.protobuf.Int32Value\x12Z\n\tcountries\x18\x02 \x03(\x0b\x32G.google.ads.googleads.v1.common.PolicyTopicConstraint.CountryConstraint\x1a\x14\n\x12ResellerConstraint\x1aL\n\x11\x43ountryConstraint\x12\x37\n\x11\x63ountry_criterion\x18\x01 \x01(\x0b\x32\x1c.google.protobuf.StringValueB\x07\n\x05valueB\xe6\x01\n\"com.google.ads.googleads.v1.commonB\x0bPolicyProtoP\x01ZDgoogle.golang.org/genproto/googleapis/ads/googleads/v1/common;common\xa2\x02\x03GAA\xaa\x02\x1eGoogle.Ads.GoogleAds.V1.Common\xca\x02\x1eGoogle\\Ads\\GoogleAds\\V1\\Common\xea\x02\"Google::Ads::GoogleAds::V1::Commonb\x06proto3')
   ,
-  dependencies=[google_dot_ads_dot_googleads__v1_dot_proto_dot_enums_dot_policy__topic__entry__type__pb2.DESCRIPTOR,google_dot_ads_dot_googleads__v1_dot_proto_dot_enums_dot_policy__topic__evidence__destination__mismatch__url__type__pb2.DESCRIPTOR,google_dot_protobuf_dot_wrappers__pb2.DESCRIPTOR,google_dot_api_dot_annotations__pb2.DESCRIPTOR,])
+  dependencies=[google_dot_ads_dot_googleads__v1_dot_proto_dot_enums_dot_policy__topic__entry__type__pb2.DESCRIPTOR,google_dot_ads_dot_googleads__v1_dot_proto_dot_enums_dot_policy__topic__evidence__destination__mismatch__url__type__pb2.DESCRIPTOR,google_dot_ads_dot_googleads__v1_dot_proto_dot_enums_dot_policy__topic__evidence__destination__not__working__device__pb2.DESCRIPTOR,google_dot_protobuf_dot_wrappers__pb2.DESCRIPTOR,google_dot_api_dot_annotations__pb2.DESCRIPTOR,])
 
 
 
@@ -63,8 +64,8 @@ _POLICYVIOLATIONKEY = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=309,
-  serialized_end=434,
+  serialized_start=405,
+  serialized_end=530,
 )
 
 
@@ -101,8 +102,8 @@ _POLICYVALIDATIONPARAMETER = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=437,
-  serialized_end=617,
+  serialized_start=533,
+  serialized_end=713,
 )
 
 
@@ -153,8 +154,8 @@ _POLICYTOPICENTRY = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=620,
-  serialized_end=923,
+  serialized_start=716,
+  serialized_end=1019,
 )
 
 
@@ -184,8 +185,8 @@ _POLICYTOPICEVIDENCE_TEXTLIST = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=1437,
-  serialized_end=1492,
+  serialized_start=1643,
+  serialized_end=1698,
 )
 
 _POLICYTOPICEVIDENCE_WEBSITELIST = _descriptor.Descriptor(
@@ -214,8 +215,8 @@ _POLICYTOPICEVIDENCE_WEBSITELIST = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=1494,
-  serialized_end=1555,
+  serialized_start=1700,
+  serialized_end=1761,
 )
 
 _POLICYTOPICEVIDENCE_DESTINATIONTEXTLIST = _descriptor.Descriptor(
@@ -244,8 +245,8 @@ _POLICYTOPICEVIDENCE_DESTINATIONTEXTLIST = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=1557,
-  serialized_end=1635,
+  serialized_start=1763,
+  serialized_end=1841,
 )
 
 _POLICYTOPICEVIDENCE_DESTINATIONMISMATCH = _descriptor.Descriptor(
@@ -274,8 +275,52 @@ _POLICYTOPICEVIDENCE_DESTINATIONMISMATCH = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=1638,
-  serialized_end=1807,
+  serialized_start=1844,
+  serialized_end=2013,
+)
+
+_POLICYTOPICEVIDENCE_DESTINATIONNOTWORKING = _descriptor.Descriptor(
+  name='DestinationNotWorking',
+  full_name='google.ads.googleads.v1.common.PolicyTopicEvidence.DestinationNotWorking',
+  filename=None,
+  file=DESCRIPTOR,
+  containing_type=None,
+  fields=[
+    _descriptor.FieldDescriptor(
+      name='expanded_url', full_name='google.ads.googleads.v1.common.PolicyTopicEvidence.DestinationNotWorking.expanded_url', index=0,
+      number=3, type=11, cpp_type=10, label=1,
+      has_default_value=False, default_value=None,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR),
+    _descriptor.FieldDescriptor(
+      name='device', full_name='google.ads.googleads.v1.common.PolicyTopicEvidence.DestinationNotWorking.device', index=1,
+      number=4, type=14, cpp_type=8, label=1,
+      has_default_value=False, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR),
+    _descriptor.FieldDescriptor(
+      name='last_checked_date_time', full_name='google.ads.googleads.v1.common.PolicyTopicEvidence.DestinationNotWorking.last_checked_date_time', index=2,
+      number=5, type=11, cpp_type=10, label=1,
+      has_default_value=False, default_value=None,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR),
+  ],
+  extensions=[
+  ],
+  nested_types=[],
+  enum_types=[
+  ],
+  serialized_options=None,
+  is_extendable=False,
+  syntax='proto3',
+  extension_ranges=[],
+  oneofs=[
+  ],
+  serialized_start=2016,
+  serialized_end=2301,
 )
 
 _POLICYTOPICEVIDENCE = _descriptor.Descriptor(
@@ -327,10 +372,17 @@ _POLICYTOPICEVIDENCE = _descriptor.Descriptor(
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       serialized_options=None, file=DESCRIPTOR),
+    _descriptor.FieldDescriptor(
+      name='destination_not_working', full_name='google.ads.googleads.v1.common.PolicyTopicEvidence.destination_not_working', index=6,
+      number=8, type=11, cpp_type=10, label=1,
+      has_default_value=False, default_value=None,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR),
   ],
   extensions=[
   ],
-  nested_types=[_POLICYTOPICEVIDENCE_TEXTLIST, _POLICYTOPICEVIDENCE_WEBSITELIST, _POLICYTOPICEVIDENCE_DESTINATIONTEXTLIST, _POLICYTOPICEVIDENCE_DESTINATIONMISMATCH, ],
+  nested_types=[_POLICYTOPICEVIDENCE_TEXTLIST, _POLICYTOPICEVIDENCE_WEBSITELIST, _POLICYTOPICEVIDENCE_DESTINATIONTEXTLIST, _POLICYTOPICEVIDENCE_DESTINATIONMISMATCH, _POLICYTOPICEVIDENCE_DESTINATIONNOTWORKING, ],
   enum_types=[
   ],
   serialized_options=None,
@@ -342,8 +394,8 @@ _POLICYTOPICEVIDENCE = _descriptor.Descriptor(
       name='value', full_name='google.ads.googleads.v1.common.PolicyTopicEvidence.value',
       index=0, containing_type=None, fields=[]),
   ],
-  serialized_start=926,
-  serialized_end=1816,
+  serialized_start=1022,
+  serialized_end=2310,
 )
 
 
@@ -380,8 +432,8 @@ _POLICYTOPICCONSTRAINT_COUNTRYCONSTRAINTLIST = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=2319,
-  serialized_end=2497,
+  serialized_start=2813,
+  serialized_end=2991,
 )
 
 _POLICYTOPICCONSTRAINT_RESELLERCONSTRAINT = _descriptor.Descriptor(
@@ -403,8 +455,8 @@ _POLICYTOPICCONSTRAINT_RESELLERCONSTRAINT = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=2499,
-  serialized_end=2519,
+  serialized_start=2993,
+  serialized_end=3013,
 )
 
 _POLICYTOPICCONSTRAINT_COUNTRYCONSTRAINT = _descriptor.Descriptor(
@@ -433,8 +485,8 @@ _POLICYTOPICCONSTRAINT_COUNTRYCONSTRAINT = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=2521,
-  serialized_end=2597,
+  serialized_start=3015,
+  serialized_end=3091,
 )
 
 _POLICYTOPICCONSTRAINT = _descriptor.Descriptor(
@@ -487,8 +539,8 @@ _POLICYTOPICCONSTRAINT = _descriptor.Descriptor(
       name='value', full_name='google.ads.googleads.v1.common.PolicyTopicConstraint.value',
       index=0, containing_type=None, fields=[]),
   ],
-  serialized_start=1819,
-  serialized_end=2606,
+  serialized_start=2313,
+  serialized_end=3100,
 )
 
 _POLICYVIOLATIONKEY.fields_by_name['policy_name'].message_type = google_dot_protobuf_dot_wrappers__pb2._STRINGVALUE
@@ -507,12 +559,17 @@ _POLICYTOPICEVIDENCE_DESTINATIONTEXTLIST.fields_by_name['destination_texts'].mes
 _POLICYTOPICEVIDENCE_DESTINATIONTEXTLIST.containing_type = _POLICYTOPICEVIDENCE
 _POLICYTOPICEVIDENCE_DESTINATIONMISMATCH.fields_by_name['url_types'].enum_type = google_dot_ads_dot_googleads__v1_dot_proto_dot_enums_dot_policy__topic__evidence__destination__mismatch__url__type__pb2._POLICYTOPICEVIDENCEDESTINATIONMISMATCHURLTYPEENUM_POLICYTOPICEVIDENCEDESTINATIONMISMATCHURLTYPE
 _POLICYTOPICEVIDENCE_DESTINATIONMISMATCH.containing_type = _POLICYTOPICEVIDENCE
+_POLICYTOPICEVIDENCE_DESTINATIONNOTWORKING.fields_by_name['expanded_url'].message_type = google_dot_protobuf_dot_wrappers__pb2._STRINGVALUE
+_POLICYTOPICEVIDENCE_DESTINATIONNOTWORKING.fields_by_name['device'].enum_type = google_dot_ads_dot_googleads__v1_dot_proto_dot_enums_dot_policy__topic__evidence__destination__not__working__device__pb2._POLICYTOPICEVIDENCEDESTINATIONNOTWORKINGDEVICEENUM_POLICYTOPICEVIDENCEDESTINATIONNOTWORKINGDEVICE
+_POLICYTOPICEVIDENCE_DESTINATIONNOTWORKING.fields_by_name['last_checked_date_time'].message_type = google_dot_protobuf_dot_wrappers__pb2._STRINGVALUE
+_POLICYTOPICEVIDENCE_DESTINATIONNOTWORKING.containing_type = _POLICYTOPICEVIDENCE
 _POLICYTOPICEVIDENCE.fields_by_name['http_code'].message_type = google_dot_protobuf_dot_wrappers__pb2._INT32VALUE
 _POLICYTOPICEVIDENCE.fields_by_name['website_list'].message_type = _POLICYTOPICEVIDENCE_WEBSITELIST
 _POLICYTOPICEVIDENCE.fields_by_name['text_list'].message_type = _POLICYTOPICEVIDENCE_TEXTLIST
 _POLICYTOPICEVIDENCE.fields_by_name['language_code'].message_type = google_dot_protobuf_dot_wrappers__pb2._STRINGVALUE
 _POLICYTOPICEVIDENCE.fields_by_name['destination_text_list'].message_type = _POLICYTOPICEVIDENCE_DESTINATIONTEXTLIST
 _POLICYTOPICEVIDENCE.fields_by_name['destination_mismatch'].message_type = _POLICYTOPICEVIDENCE_DESTINATIONMISMATCH
+_POLICYTOPICEVIDENCE.fields_by_name['destination_not_working'].message_type = _POLICYTOPICEVIDENCE_DESTINATIONNOTWORKING
 _POLICYTOPICEVIDENCE.oneofs_by_name['value'].fields.append(
   _POLICYTOPICEVIDENCE.fields_by_name['http_code'])
 _POLICYTOPICEVIDENCE.fields_by_name['http_code'].containing_oneof = _POLICYTOPICEVIDENCE.oneofs_by_name['value']
@@ -531,6 +588,9 @@ _POLICYTOPICEVIDENCE.fields_by_name['destination_text_list'].containing_oneof = 
 _POLICYTOPICEVIDENCE.oneofs_by_name['value'].fields.append(
   _POLICYTOPICEVIDENCE.fields_by_name['destination_mismatch'])
 _POLICYTOPICEVIDENCE.fields_by_name['destination_mismatch'].containing_oneof = _POLICYTOPICEVIDENCE.oneofs_by_name['value']
+_POLICYTOPICEVIDENCE.oneofs_by_name['value'].fields.append(
+  _POLICYTOPICEVIDENCE.fields_by_name['destination_not_working'])
+_POLICYTOPICEVIDENCE.fields_by_name['destination_not_working'].containing_oneof = _POLICYTOPICEVIDENCE.oneofs_by_name['value']
 _POLICYTOPICCONSTRAINT_COUNTRYCONSTRAINTLIST.fields_by_name['total_targeted_countries'].message_type = google_dot_protobuf_dot_wrappers__pb2._INT32VALUE
 _POLICYTOPICCONSTRAINT_COUNTRYCONSTRAINTLIST.fields_by_name['countries'].message_type = _POLICYTOPICCONSTRAINT_COUNTRYCONSTRAINT
 _POLICYTOPICCONSTRAINT_COUNTRYCONSTRAINTLIST.containing_type = _POLICYTOPICCONSTRAINT
@@ -629,8 +689,6 @@ PolicyTopicEntry = _reflection.GeneratedProtocolMessageType('PolicyTopicEntry', 
   more constraints that provide details about how serving may be
   restricted.
   
-  Next tag: 5
-  
   
   Attributes:
       topic:
@@ -660,8 +718,6 @@ PolicyTopicEvidence = _reflection.GeneratedProtocolMessageType('PolicyTopicEvide
     ,
     __doc__ = """A list of fragments of text that violated a policy.
     
-    Next Id: 2
-    
     
     Attributes:
         texts:
@@ -681,8 +737,6 @@ PolicyTopicEvidence = _reflection.GeneratedProtocolMessageType('PolicyTopicEvide
     are more than five websites, only the top five (those that appear in
     resources the most) will be listed here.
     
-    Next Id: 2
-    
     
     Attributes:
         websites:
@@ -699,8 +753,6 @@ PolicyTopicEvidence = _reflection.GeneratedProtocolMessageType('PolicyTopicEvide
     __doc__ = """A list of strings found in a destination page that caused a policy
     finding.
     
-    Next Id: 2
-    
     
     Attributes:
         destination_texts:
@@ -716,8 +768,6 @@ PolicyTopicEvidence = _reflection.GeneratedProtocolMessageType('PolicyTopicEvide
     ,
     __doc__ = """Evidence of mismatches between the URLs of a resource.
     
-    Next Id: 2
-    
     
     Attributes:
         url_types:
@@ -726,12 +776,32 @@ PolicyTopicEvidence = _reflection.GeneratedProtocolMessageType('PolicyTopicEvide
     # @@protoc_insertion_point(class_scope:google.ads.googleads.v1.common.PolicyTopicEvidence.DestinationMismatch)
     ))
   ,
+
+  DestinationNotWorking = _reflection.GeneratedProtocolMessageType('DestinationNotWorking', (_message.Message,), dict(
+    DESCRIPTOR = _POLICYTOPICEVIDENCE_DESTINATIONNOTWORKING,
+    __module__ = 'google.ads.googleads_v1.proto.common.policy_pb2'
+    ,
+    __doc__ = """Evidence details when the destination is returning an HTTP error code or
+    isn't functional in all locations for commonly used devices.
+    
+    
+    Attributes:
+        expanded_url:
+            The full URL that didn't work.
+        device:
+            The type of device that failed to load the URL.
+        last_checked_date_time:
+            The time the URL was last checked. The format is "YYYY-MM-DD
+            HH:MM:SS". Examples: "2018-03-05 09:15:00" or "2018-02-01
+            14:34:30"
+    """,
+    # @@protoc_insertion_point(class_scope:google.ads.googleads.v1.common.PolicyTopicEvidence.DestinationNotWorking)
+    ))
+  ,
   DESCRIPTOR = _POLICYTOPICEVIDENCE,
   __module__ = 'google.ads.googleads_v1.proto.common.policy_pb2'
   ,
   __doc__ = """Additional information that explains a policy finding.
-  
-  Next Id: 8
   
   
   Attributes:
@@ -751,6 +821,10 @@ PolicyTopicEvidence = _reflection.GeneratedProtocolMessageType('PolicyTopicEvide
           policy finding.
       destination_mismatch:
           Mismatch between the destinations of a resource's URLs.
+      destination_not_working:
+          Details when the destination is returning an HTTP error code
+          or isn't functional in all locations for commonly used
+          devices.
   """,
   # @@protoc_insertion_point(class_scope:google.ads.googleads.v1.common.PolicyTopicEvidence)
   ))
@@ -759,6 +833,7 @@ _sym_db.RegisterMessage(PolicyTopicEvidence.TextList)
 _sym_db.RegisterMessage(PolicyTopicEvidence.WebsiteList)
 _sym_db.RegisterMessage(PolicyTopicEvidence.DestinationTextList)
 _sym_db.RegisterMessage(PolicyTopicEvidence.DestinationMismatch)
+_sym_db.RegisterMessage(PolicyTopicEvidence.DestinationNotWorking)
 
 PolicyTopicConstraint = _reflection.GeneratedProtocolMessageType('PolicyTopicConstraint', (_message.Message,), dict(
 
@@ -767,8 +842,6 @@ PolicyTopicConstraint = _reflection.GeneratedProtocolMessageType('PolicyTopicCon
     __module__ = 'google.ads.googleads_v1.proto.common.policy_pb2'
     ,
     __doc__ = """A list of countries where a resource's serving is constrained.
-    
-    Next Id: 3
     
     
     Attributes:
@@ -787,8 +860,6 @@ PolicyTopicConstraint = _reflection.GeneratedProtocolMessageType('PolicyTopicCon
     ,
     __doc__ = """Indicates that a policy topic was constrained due to disapproval of the
     website for reseller purposes.
-    
-    Next Id: 1
     """,
     # @@protoc_insertion_point(class_scope:google.ads.googleads.v1.common.PolicyTopicConstraint.ResellerConstraint)
     ))
@@ -800,8 +871,6 @@ PolicyTopicConstraint = _reflection.GeneratedProtocolMessageType('PolicyTopicCon
     ,
     __doc__ = """Indicates that a resource's ability to serve in a particular country is
     constrained.
-    
-    Next Id: 2
     
     
     Attributes:
@@ -816,8 +885,6 @@ PolicyTopicConstraint = _reflection.GeneratedProtocolMessageType('PolicyTopicCon
   __module__ = 'google.ads.googleads_v1.proto.common.policy_pb2'
   ,
   __doc__ = """Describes the effect on serving that a policy topic entry will have.
-  
-  Next Id: 5
   
   
   Attributes:

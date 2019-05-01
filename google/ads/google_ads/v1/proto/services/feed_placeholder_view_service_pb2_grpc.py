@@ -6,7 +6,9 @@ from google.ads.google_ads.v1.proto.services import feed_placeholder_view_servic
 
 
 class FeedPlaceholderViewServiceStub(object):
-  """Service to fetch feed placeholder views.
+  """Proto file describing the FeedPlaceholderView service.
+
+  Service to fetch feed placeholder views.
   """
 
   def __init__(self, channel):
@@ -23,7 +25,9 @@ class FeedPlaceholderViewServiceStub(object):
 
 
 class FeedPlaceholderViewServiceServicer(object):
-  """Service to fetch feed placeholder views.
+  """Proto file describing the FeedPlaceholderView service.
+
+  Service to fetch feed placeholder views.
   """
 
   def GetFeedPlaceholderView(self, request, context):

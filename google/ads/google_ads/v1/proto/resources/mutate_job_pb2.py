@@ -23,7 +23,7 @@ DESCRIPTOR = _descriptor.FileDescriptor(
   package='google.ads.googleads.v1.resources',
   syntax='proto3',
   serialized_options=_b('\n%com.google.ads.googleads.v1.resourcesB\016MutateJobProtoP\001ZJgoogle.golang.org/genproto/googleapis/ads/googleads/v1/resources;resources\242\002\003GAA\252\002!Google.Ads.GoogleAds.V1.Resources\312\002!Google\\Ads\\GoogleAds\\V1\\Resources\352\002%Google::Ads::GoogleAds::V1::Resources'),
-  serialized_pb=_b('\n8google/ads/googleads_v1/proto/resources/mutate_job.proto\x12!google.ads.googleads.v1.resources\x1a;google/ads/googleads_v1/proto/enums/mutate_job_status.proto\x1a\x1egoogle/protobuf/wrappers.proto\x1a\x1cgoogle/api/annotations.proto\"\xf3\x04\n\tMutateJob\x12\x15\n\rresource_name\x18\x01 \x01(\t\x12\'\n\x02id\x18\x02 \x01(\x0b\x32\x1b.google.protobuf.Int64Value\x12=\n\x17next_add_sequence_token\x18\x03 \x01(\x0b\x32\x1c.google.protobuf.StringValue\x12P\n\x08metadata\x18\x04 \x01(\x0b\x32>.google.ads.googleads.v1.resources.MutateJob.MutateJobMetadata\x12R\n\x06status\x18\x05 \x01(\x0e\x32\x42.google.ads.googleads.v1.enums.MutateJobStatusEnum.MutateJobStatus\x1a\xc0\x02\n\x11MutateJobMetadata\x12\x38\n\x12\x63reation_date_time\x18\x01 \x01(\x0b\x32\x1c.google.protobuf.StringValue\x12:\n\x14\x63ompletion_date_time\x18\x02 \x01(\x0b\x32\x1c.google.protobuf.StringValue\x12@\n\x1a\x65stimated_completion_ratio\x18\x03 \x01(\x0b\x32\x1c.google.protobuf.DoubleValue\x12\x34\n\x0foperation_count\x18\x04 \x01(\x0b\x32\x1b.google.protobuf.Int64Value\x12=\n\x18\x65xecuted_operation_count\x18\x05 \x01(\x0b\x32\x1b.google.protobuf.Int64ValueB\xfb\x01\n%com.google.ads.googleads.v1.resourcesB\x0eMutateJobProtoP\x01ZJgoogle.golang.org/genproto/googleapis/ads/googleads/v1/resources;resources\xa2\x02\x03GAA\xaa\x02!Google.Ads.GoogleAds.V1.Resources\xca\x02!Google\\Ads\\GoogleAds\\V1\\Resources\xea\x02%Google::Ads::GoogleAds::V1::Resourcesb\x06proto3')
+  serialized_pb=_b('\n8google/ads/googleads_v1/proto/resources/mutate_job.proto\x12!google.ads.googleads.v1.resources\x1a;google/ads/googleads_v1/proto/enums/mutate_job_status.proto\x1a\x1egoogle/protobuf/wrappers.proto\x1a\x1cgoogle/api/annotations.proto\"\xb1\x05\n\tMutateJob\x12\x15\n\rresource_name\x18\x01 \x01(\t\x12\'\n\x02id\x18\x02 \x01(\x0b\x32\x1b.google.protobuf.Int64Value\x12=\n\x17next_add_sequence_token\x18\x03 \x01(\x0b\x32\x1c.google.protobuf.StringValue\x12P\n\x08metadata\x18\x04 \x01(\x0b\x32>.google.ads.googleads.v1.resources.MutateJob.MutateJobMetadata\x12R\n\x06status\x18\x05 \x01(\x0e\x32\x42.google.ads.googleads.v1.enums.MutateJobStatusEnum.MutateJobStatus\x12<\n\x16long_running_operation\x18\x06 \x01(\x0b\x32\x1c.google.protobuf.StringValue\x1a\xc0\x02\n\x11MutateJobMetadata\x12\x38\n\x12\x63reation_date_time\x18\x01 \x01(\x0b\x32\x1c.google.protobuf.StringValue\x12:\n\x14\x63ompletion_date_time\x18\x02 \x01(\x0b\x32\x1c.google.protobuf.StringValue\x12@\n\x1a\x65stimated_completion_ratio\x18\x03 \x01(\x0b\x32\x1c.google.protobuf.DoubleValue\x12\x34\n\x0foperation_count\x18\x04 \x01(\x0b\x32\x1b.google.protobuf.Int64Value\x12=\n\x18\x65xecuted_operation_count\x18\x05 \x01(\x0b\x32\x1b.google.protobuf.Int64ValueB\xfb\x01\n%com.google.ads.googleads.v1.resourcesB\x0eMutateJobProtoP\x01ZJgoogle.golang.org/genproto/googleapis/ads/googleads/v1/resources;resources\xa2\x02\x03GAA\xaa\x02!Google.Ads.GoogleAds.V1.Resources\xca\x02!Google\\Ads\\GoogleAds\\V1\\Resources\xea\x02%Google::Ads::GoogleAds::V1::Resourcesb\x06proto3')
   ,
   dependencies=[google_dot_ads_dot_googleads__v1_dot_proto_dot_enums_dot_mutate__job__status__pb2.DESCRIPTOR,google_dot_protobuf_dot_wrappers__pb2.DESCRIPTOR,google_dot_api_dot_annotations__pb2.DESCRIPTOR,])
 
@@ -84,8 +84,8 @@ _MUTATEJOB_MUTATEJOBMETADATA = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=526,
-  serialized_end=846,
+  serialized_start=588,
+  serialized_end=908,
 )
 
 _MUTATEJOB = _descriptor.Descriptor(
@@ -130,6 +130,13 @@ _MUTATEJOB = _descriptor.Descriptor(
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       serialized_options=None, file=DESCRIPTOR),
+    _descriptor.FieldDescriptor(
+      name='long_running_operation', full_name='google.ads.googleads.v1.resources.MutateJob.long_running_operation', index=5,
+      number=6, type=11, cpp_type=10, label=1,
+      has_default_value=False, default_value=None,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR),
   ],
   extensions=[
   ],
@@ -143,7 +150,7 @@ _MUTATEJOB = _descriptor.Descriptor(
   oneofs=[
   ],
   serialized_start=219,
-  serialized_end=846,
+  serialized_end=908,
 )
 
 _MUTATEJOB_MUTATEJOBMETADATA.fields_by_name['creation_date_time'].message_type = google_dot_protobuf_dot_wrappers__pb2._STRINGVALUE
@@ -156,6 +163,7 @@ _MUTATEJOB.fields_by_name['id'].message_type = google_dot_protobuf_dot_wrappers_
 _MUTATEJOB.fields_by_name['next_add_sequence_token'].message_type = google_dot_protobuf_dot_wrappers__pb2._STRINGVALUE
 _MUTATEJOB.fields_by_name['metadata'].message_type = _MUTATEJOB_MUTATEJOBMETADATA
 _MUTATEJOB.fields_by_name['status'].enum_type = google_dot_ads_dot_googleads__v1_dot_proto_dot_enums_dot_mutate__job__status__pb2._MUTATEJOBSTATUSENUM_MUTATEJOBSTATUS
+_MUTATEJOB.fields_by_name['long_running_operation'].message_type = google_dot_protobuf_dot_wrappers__pb2._STRINGVALUE
 DESCRIPTOR.message_types_by_name['MutateJob'] = _MUTATEJOB
 _sym_db.RegisterFileDescriptor(DESCRIPTOR)
 
@@ -212,6 +220,10 @@ MutateJob = _reflection.GeneratedProtocolMessageType('MutateJob', (_message.Mess
           Contains additional information about this mutate job.
       status:
           Status of this mutate job.
+      long_running_operation:
+          The resource name of the long-running operation that can be
+          used to poll for completion. Only set when the mutate job
+          status is RUNNING or DONE.
   """,
   # @@protoc_insertion_point(class_scope:google.ads.googleads.v1.resources.MutateJob)
   ))

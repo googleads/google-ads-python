@@ -12,6 +12,7 @@ Features
 Requirements
 ------------
 * Python 2.7.13+ / 3.5.3+
+        - **NOTE:** Python 2 support will cease by the end of 2019. See this `blog post`_ for more detail.
 * `pip`_
 
 
@@ -76,16 +77,15 @@ With the release of Google Ads API v1_0 it's now possible to specify an API
 version when getting services and types. The ``get_service`` and ``get_type``
 client methods accept a second named parameter, ``version`` that refers to a
 valid API version. For example, to request an instance of the
-``GoogleAdsService`` that uses Google Ads API version ``v0`` use the
+``GoogleAdsService`` that uses Google Ads API version ``v1`` use the
 following:
 
 .. code-block:: python
 
-  google_ads_service = client.get_service('GoogleAdsService', version='v0')
+  google_ads_service = client.get_service('GoogleAdsService', version='v1')
 
 The currently available list of versions is:
 
-* ``'v0'``
 * ``'v1'``
 
 Enabling and Configuring logging
@@ -149,6 +149,7 @@ Authors
 * `Ben Karl`_
 
 .. _pip: https://pip.pypa.io/en/stable/installing
+.. _blog post: https://ads-developers.googleblog.com/2019/04/python-2-deprecation-in-ads-api-client.html
 .. _template: https://github.com/googleads/google-ads-python/blob/master/google-ads.yaml
 .. _Authorization guide: https://developers.google.com/google-ads/api/docs/oauth/overview
 .. _authentication samples: https://github.com/googleads/google-ads-python/blob/master/examples/authentication

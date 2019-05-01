@@ -547,7 +547,8 @@ UploadClickConversionsResponse = _reflection.GeneratedProtocolMessageType('Uploa
           auth errors), we return an RPC level error.
       results:
           Returned for successfully processed conversions. Proto will be
-          empty for rows that received an error.
+          empty for rows that received an error. Results are not
+          returned when validate\_only is true.
   """,
   # @@protoc_insertion_point(class_scope:google.ads.googleads.v1.services.UploadClickConversionsResponse)
   ))
@@ -592,7 +593,8 @@ UploadCallConversionsResponse = _reflection.GeneratedProtocolMessageType('Upload
           auth errors), we return an RPC level error.
       results:
           Returned for successfully processed conversions. Proto will be
-          empty for rows that received an error.
+          empty for rows that received an error. Results are not
+          returned when validate\_only is true.
   """,
   # @@protoc_insertion_point(class_scope:google.ads.googleads.v1.services.UploadCallConversionsResponse)
   ))

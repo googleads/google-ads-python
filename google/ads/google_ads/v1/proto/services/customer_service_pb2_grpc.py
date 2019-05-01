@@ -6,7 +6,9 @@ from google.ads.google_ads.v1.proto.services import customer_service_pb2 as goog
 
 
 class CustomerServiceStub(object):
-  """Service to manage customers.
+  """Proto file describing the Customer service.
+
+  Service to manage customers.
   """
 
   def __init__(self, channel):
@@ -38,7 +40,9 @@ class CustomerServiceStub(object):
 
 
 class CustomerServiceServicer(object):
-  """Service to manage customers.
+  """Proto file describing the Customer service.
+
+  Service to manage customers.
   """
 
   def GetCustomer(self, request, context):

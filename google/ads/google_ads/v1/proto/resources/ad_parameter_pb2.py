@@ -113,12 +113,12 @@ AdParameter = _reflection.GeneratedProtocolMessageType('AdParameter', (_message.
           with an optional period or comma (respectively) for fractional
           values. For example, 1,000,000.00 and 2.000.000,10 are valid.
           - Can be prepended or appended with a currency symbol. For
-          example, $99.99 and 200£ are valid. - Can be prepended or
-          appended with a currency code. For example, 99.99USD and
-          EUR200 are valid. - Can use '%'. For example, 1.0% and 1,0%
-          are valid. - Can use plus or minus. For example, -10.99 and
-          25+ are valid. - Can use '/' between two numbers. For example
-          4/1 and 0.95/0.45 are valid.
+          example, $99.99 is valid. - Can be prepended or appended with
+          a currency code. For example, 99.99USD and EUR200 are valid. -
+          Can use '%'. For example, 1.0% and 1,0% are valid. - Can use
+          plus or minus. For example, -10.99 and 25+ are valid. - Can
+          use '/' between two numbers. For example 4/1 and 0.95/0.45 are
+          valid.
   """,
   # @@protoc_insertion_point(class_scope:google.ads.googleads.v1.resources.AdParameter)
   ))

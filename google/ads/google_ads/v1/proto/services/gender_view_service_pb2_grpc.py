@@ -6,7 +6,9 @@ from google.ads.google_ads.v1.proto.services import gender_view_service_pb2 as g
 
 
 class GenderViewServiceStub(object):
-  """Service to manage gender views.
+  """Proto file describing the Gender View service.
+
+  Service to manage gender views.
   """
 
   def __init__(self, channel):
@@ -23,7 +25,9 @@ class GenderViewServiceStub(object):
 
 
 class GenderViewServiceServicer(object):
-  """Service to manage gender views.
+  """Proto file describing the Gender View service.
+
+  Service to manage gender views.
   """
 
   def GetGenderView(self, request, context):

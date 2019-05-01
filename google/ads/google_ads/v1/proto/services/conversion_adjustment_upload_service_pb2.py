@@ -396,7 +396,8 @@ UploadConversionAdjustmentsResponse = _reflection.GeneratedProtocolMessageType('
           (e.g. auth errors), we return an RPC level error.
       results:
           Returned for successfully processed conversion adjustments.
-          Proto will be empty for rows that received an error.
+          Proto will be empty for rows that received an error. Results
+          are not returned when validate\_only is true.
   """,
   # @@protoc_insertion_point(class_scope:google.ads.googleads.v1.services.UploadConversionAdjustmentsResponse)
   ))

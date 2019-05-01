@@ -6,7 +6,9 @@ from google.ads.google_ads.v1.proto.services import ad_group_criterion_service_p
 
 
 class AdGroupCriterionServiceStub(object):
-  """Service to manage ad group criteria.
+  """Proto file describing the Ad Group Criterion service.
+
+  Service to manage ad group criteria.
   """
 
   def __init__(self, channel):
@@ -28,7 +30,9 @@ class AdGroupCriterionServiceStub(object):
 
 
 class AdGroupCriterionServiceServicer(object):
-  """Service to manage ad group criteria.
+  """Proto file describing the Ad Group Criterion service.
+
+  Service to manage ad group criteria.
   """
 
   def GetAdGroupCriterion(self, request, context):

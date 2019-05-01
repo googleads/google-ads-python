@@ -6,7 +6,9 @@ from google.ads.google_ads.v1.proto.services import product_group_view_service_p
 
 
 class ProductGroupViewServiceStub(object):
-  """Service to manage product group views.
+  """Proto file describing the ProductGroup View service.
+
+  Service to manage product group views.
   """
 
   def __init__(self, channel):
@@ -23,7 +25,9 @@ class ProductGroupViewServiceStub(object):
 
 
 class ProductGroupViewServiceServicer(object):
-  """Service to manage product group views.
+  """Proto file describing the ProductGroup View service.
+
+  Service to manage product group views.
   """
 
   def GetProductGroupView(self, request, context):

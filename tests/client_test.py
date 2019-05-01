@@ -334,7 +334,7 @@ class GoogleAdsClientTest(FileTestCase):
     def test_get_service_invalid_version(self):
         client = self._create_test_client()
         self.assertRaises(ValueError, client.get_service, 'GoogleAdsService',
-                          version='v0_bad')
+                          version='bad_version')
 
     def test_get_service_with_version(self):
         client = self._create_test_client()
@@ -362,7 +362,7 @@ class GoogleAdsClientTest(FileTestCase):
     def test_get_type_invalid_version(self):
         self.assertRaises(
             ValueError, google.ads.google_ads.client.GoogleAdsClient.get_type,
-            'GoogleAdsFailure', version='v0_bad')
+            'GoogleAdsFailure', version='bad_version')
 
 
 class MetadataInterceptorTest(TestCase):

@@ -6,7 +6,9 @@ from google.ads.google_ads.v1.proto.services import asset_service_pb2 as google_
 
 
 class AssetServiceStub(object):
-  """Service to manage assets.
+  """Proto file describing the Asset service.
+
+  Service to manage assets.
   """
 
   def __init__(self, channel):
@@ -28,7 +30,9 @@ class AssetServiceStub(object):
 
 
 class AssetServiceServicer(object):
-  """Service to manage assets.
+  """Proto file describing the Asset service.
+
+  Service to manage assets.
   """
 
   def GetAsset(self, request, context):

@@ -72,14 +72,6 @@ class ShoppingPerformanceViewServiceClient(object):
             customer=customer,
         )
 
-    @classmethod
-    def customer_path(cls, customer):
-        """Return a fully-qualified customer string."""
-        return google.api_core.path_template.expand(
-            'customers/{customer}',
-            customer=customer,
-        )
-
     def __init__(self,
                  transport=None,
                  channel=None,

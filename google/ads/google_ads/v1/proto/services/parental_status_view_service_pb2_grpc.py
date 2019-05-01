@@ -6,7 +6,9 @@ from google.ads.google_ads.v1.proto.services import parental_status_view_service
 
 
 class ParentalStatusViewServiceStub(object):
-  """Service to manage parental status views.
+  """Proto file describing the Parental Status View service.
+
+  Service to manage parental status views.
   """
 
   def __init__(self, channel):
@@ -23,7 +25,9 @@ class ParentalStatusViewServiceStub(object):
 
 
 class ParentalStatusViewServiceServicer(object):
-  """Service to manage parental status views.
+  """Proto file describing the Parental Status View service.
+
+  Service to manage parental status views.
   """
 
   def GetParentalStatusView(self, request, context):

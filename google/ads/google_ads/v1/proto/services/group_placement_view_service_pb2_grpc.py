@@ -6,7 +6,9 @@ from google.ads.google_ads.v1.proto.services import group_placement_view_service
 
 
 class GroupPlacementViewServiceStub(object):
-  """Service to fetch Group Placement views.
+  """Proto file describing the Group Placement View service.
+
+  Service to fetch Group Placement views.
   """
 
   def __init__(self, channel):
@@ -23,7 +25,9 @@ class GroupPlacementViewServiceStub(object):
 
 
 class GroupPlacementViewServiceServicer(object):
-  """Service to fetch Group Placement views.
+  """Proto file describing the Group Placement View service.
+
+  Service to fetch Group Placement views.
   """
 
   def GetGroupPlacementView(self, request, context):

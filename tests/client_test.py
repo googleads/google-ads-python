@@ -456,6 +456,7 @@ class LoggingInterceptorTest(TestCase):
     _MOCK_ERROR_MESSAGE = 'Test error message'
     _MOCK_TRANSPORT_ERROR_MESSAGE = u'Received RST_STREAM with error code 2'
     _MOCK_DEBUG_ERROR_STRING = u'{"description":"Error received from peer"}'
+    _MOCK_RESPONSE_MSG = 'test response msg'
 
     def _create_test_interceptor(self, config=_MOCK_CONFIG,
                                  endpoint=_MOCK_ENDPOINT):
@@ -574,9 +575,13 @@ class LoggingInterceptorTest(TestCase):
                 return self._get_mock_exception()
             return None
 
+        def mock_result_fn():
+            return self._MOCK_RESPONSE_MSG
+
         mock_response = mock.Mock()
         mock_response.exception = mock_exception_fn
         mock_response.trailing_metadata = self._get_trailing_metadata_fn()
+        mock_response.result = mock_result_fn
         return mock_response
 
     def _get_mock_continuation_fn(self, fail=False):
@@ -677,7 +682,7 @@ class LoggingInterceptorTest(TestCase):
             mock_logger.debug.assert_called_once_with(
                 interceptor._FULL_REQUEST_LOG_LINE
                 % (self._MOCK_METHOD, self._MOCK_ENDPOINT, initial_metadata,
-                    mock_request, trailing_metadata, mock_response))
+                    mock_request, trailing_metadata, mock_response.result()))
 
     def test_intercept_unary_unary_failed_request(self):
         """_logger.warning and _logger.info should be called.

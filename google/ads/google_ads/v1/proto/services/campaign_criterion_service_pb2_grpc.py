@@ -6,7 +6,9 @@ from google.ads.google_ads.v1.proto.services import campaign_criterion_service_p
 
 
 class CampaignCriterionServiceStub(object):
-  """Service to manage campaign criteria.
+  """Proto file describing the Campaign Criterion service.
+
+  Service to manage campaign criteria.
   """
 
   def __init__(self, channel):
@@ -28,7 +30,9 @@ class CampaignCriterionServiceStub(object):
 
 
 class CampaignCriterionServiceServicer(object):
-  """Service to manage campaign criteria.
+  """Proto file describing the Campaign Criterion service.
+
+  Service to manage campaign criteria.
   """
 
   def GetCampaignCriterion(self, request, context):

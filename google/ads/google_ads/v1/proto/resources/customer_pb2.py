@@ -12,6 +12,7 @@ from google.protobuf import symbol_database as _symbol_database
 _sym_db = _symbol_database.Default()
 
 
+from google.ads.google_ads.v1.proto.enums import customer_pay_per_conversion_eligibility_failure_reason_pb2 as google_dot_ads_dot_googleads__v1_dot_proto_dot_enums_dot_customer__pay__per__conversion__eligibility__failure__reason__pb2
 from google.protobuf import wrappers_pb2 as google_dot_protobuf_dot_wrappers__pb2
 from google.api import annotations_pb2 as google_dot_api_dot_annotations__pb2
 
@@ -21,9 +22,9 @@ DESCRIPTOR = _descriptor.FileDescriptor(
   package='google.ads.googleads.v1.resources',
   syntax='proto3',
   serialized_options=_b('\n%com.google.ads.googleads.v1.resourcesB\rCustomerProtoP\001ZJgoogle.golang.org/genproto/googleapis/ads/googleads/v1/resources;resources\242\002\003GAA\252\002!Google.Ads.GoogleAds.V1.Resources\312\002!Google\\Ads\\GoogleAds\\V1\\Resources\352\002%Google::Ads::GoogleAds::V1::Resources'),
-  serialized_pb=_b('\n6google/ads/googleads_v1/proto/resources/customer.proto\x12!google.ads.googleads.v1.resources\x1a\x1egoogle/protobuf/wrappers.proto\x1a\x1cgoogle/api/annotations.proto\"\xbe\x06\n\x08\x43ustomer\x12\x15\n\rresource_name\x18\x01 \x01(\t\x12\'\n\x02id\x18\x03 \x01(\x0b\x32\x1b.google.protobuf.Int64Value\x12\x36\n\x10\x64\x65scriptive_name\x18\x04 \x01(\x0b\x32\x1c.google.protobuf.StringValue\x12\x33\n\rcurrency_code\x18\x05 \x01(\x0b\x32\x1c.google.protobuf.StringValue\x12/\n\ttime_zone\x18\x06 \x01(\x0b\x32\x1c.google.protobuf.StringValue\x12;\n\x15tracking_url_template\x18\x07 \x01(\x0b\x32\x1c.google.protobuf.StringValue\x12\x36\n\x10\x66inal_url_suffix\x18\x0b \x01(\x0b\x32\x1c.google.protobuf.StringValue\x12\x38\n\x14\x61uto_tagging_enabled\x18\x08 \x01(\x0b\x32\x1a.google.protobuf.BoolValue\x12\x36\n\x12has_partners_badge\x18\t \x01(\x0b\x32\x1a.google.protobuf.BoolValue\x12+\n\x07manager\x18\x0c \x01(\x0b\x32\x1a.google.protobuf.BoolValue\x12\x30\n\x0ctest_account\x18\r \x01(\x0b\x32\x1a.google.protobuf.BoolValue\x12W\n\x16\x63\x61ll_reporting_setting\x18\n \x01(\x0b\x32\x37.google.ads.googleads.v1.resources.CallReportingSetting\x12\x61\n\x1b\x63onversion_tracking_setting\x18\x0e \x01(\x0b\x32<.google.ads.googleads.v1.resources.ConversionTrackingSetting\x12R\n\x13remarketing_setting\x18\x0f \x01(\x0b\x32\x35.google.ads.googleads.v1.resources.RemarketingSetting\"\xd7\x01\n\x14\x43\x61llReportingSetting\x12:\n\x16\x63\x61ll_reporting_enabled\x18\x01 \x01(\x0b\x32\x1a.google.protobuf.BoolValue\x12\x45\n!call_conversion_reporting_enabled\x18\x02 \x01(\x0b\x32\x1a.google.protobuf.BoolValue\x12<\n\x16\x63\x61ll_conversion_action\x18\t \x01(\x0b\x32\x1c.google.protobuf.StringValue\"\xa3\x01\n\x19\x43onversionTrackingSetting\x12;\n\x16\x63onversion_tracking_id\x18\x01 \x01(\x0b\x32\x1b.google.protobuf.Int64Value\x12I\n$cross_account_conversion_tracking_id\x18\x02 \x01(\x0b\x32\x1b.google.protobuf.Int64Value\"R\n\x12RemarketingSetting\x12<\n\x16google_global_site_tag\x18\x01 \x01(\x0b\x32\x1c.google.protobuf.StringValueB\xfa\x01\n%com.google.ads.googleads.v1.resourcesB\rCustomerProtoP\x01ZJgoogle.golang.org/genproto/googleapis/ads/googleads/v1/resources;resources\xa2\x02\x03GAA\xaa\x02!Google.Ads.GoogleAds.V1.Resources\xca\x02!Google\\Ads\\GoogleAds\\V1\\Resources\xea\x02%Google::Ads::GoogleAds::V1::Resourcesb\x06proto3')
+  serialized_pb=_b('\n6google/ads/googleads_v1/proto/resources/customer.proto\x12!google.ads.googleads.v1.resources\x1a`google/ads/googleads_v1/proto/enums/customer_pay_per_conversion_eligibility_failure_reason.proto\x1a\x1egoogle/protobuf/wrappers.proto\x1a\x1cgoogle/api/annotations.proto\"\xfe\x07\n\x08\x43ustomer\x12\x15\n\rresource_name\x18\x01 \x01(\t\x12\'\n\x02id\x18\x03 \x01(\x0b\x32\x1b.google.protobuf.Int64Value\x12\x36\n\x10\x64\x65scriptive_name\x18\x04 \x01(\x0b\x32\x1c.google.protobuf.StringValue\x12\x33\n\rcurrency_code\x18\x05 \x01(\x0b\x32\x1c.google.protobuf.StringValue\x12/\n\ttime_zone\x18\x06 \x01(\x0b\x32\x1c.google.protobuf.StringValue\x12;\n\x15tracking_url_template\x18\x07 \x01(\x0b\x32\x1c.google.protobuf.StringValue\x12\x36\n\x10\x66inal_url_suffix\x18\x0b \x01(\x0b\x32\x1c.google.protobuf.StringValue\x12\x38\n\x14\x61uto_tagging_enabled\x18\x08 \x01(\x0b\x32\x1a.google.protobuf.BoolValue\x12\x36\n\x12has_partners_badge\x18\t \x01(\x0b\x32\x1a.google.protobuf.BoolValue\x12+\n\x07manager\x18\x0c \x01(\x0b\x32\x1a.google.protobuf.BoolValue\x12\x30\n\x0ctest_account\x18\r \x01(\x0b\x32\x1a.google.protobuf.BoolValue\x12W\n\x16\x63\x61ll_reporting_setting\x18\n \x01(\x0b\x32\x37.google.ads.googleads.v1.resources.CallReportingSetting\x12\x61\n\x1b\x63onversion_tracking_setting\x18\x0e \x01(\x0b\x32<.google.ads.googleads.v1.resources.ConversionTrackingSetting\x12R\n\x13remarketing_setting\x18\x0f \x01(\x0b\x32\x35.google.ads.googleads.v1.resources.RemarketingSetting\x12\xbd\x01\n.pay_per_conversion_eligibility_failure_reasons\x18\x10 \x03(\x0e\x32\x84\x01.google.ads.googleads.v1.enums.CustomerPayPerConversionEligibilityFailureReasonEnum.CustomerPayPerConversionEligibilityFailureReason\"\xd7\x01\n\x14\x43\x61llReportingSetting\x12:\n\x16\x63\x61ll_reporting_enabled\x18\x01 \x01(\x0b\x32\x1a.google.protobuf.BoolValue\x12\x45\n!call_conversion_reporting_enabled\x18\x02 \x01(\x0b\x32\x1a.google.protobuf.BoolValue\x12<\n\x16\x63\x61ll_conversion_action\x18\t \x01(\x0b\x32\x1c.google.protobuf.StringValue\"\xa3\x01\n\x19\x43onversionTrackingSetting\x12;\n\x16\x63onversion_tracking_id\x18\x01 \x01(\x0b\x32\x1b.google.protobuf.Int64Value\x12I\n$cross_account_conversion_tracking_id\x18\x02 \x01(\x0b\x32\x1b.google.protobuf.Int64Value\"R\n\x12RemarketingSetting\x12<\n\x16google_global_site_tag\x18\x01 \x01(\x0b\x32\x1c.google.protobuf.StringValueB\xfa\x01\n%com.google.ads.googleads.v1.resourcesB\rCustomerProtoP\x01ZJgoogle.golang.org/genproto/googleapis/ads/googleads/v1/resources;resources\xa2\x02\x03GAA\xaa\x02!Google.Ads.GoogleAds.V1.Resources\xca\x02!Google\\Ads\\GoogleAds\\V1\\Resources\xea\x02%Google::Ads::GoogleAds::V1::Resourcesb\x06proto3')
   ,
-  dependencies=[google_dot_protobuf_dot_wrappers__pb2.DESCRIPTOR,google_dot_api_dot_annotations__pb2.DESCRIPTOR,])
+  dependencies=[google_dot_ads_dot_googleads__v1_dot_proto_dot_enums_dot_customer__pay__per__conversion__eligibility__failure__reason__pb2.DESCRIPTOR,google_dot_protobuf_dot_wrappers__pb2.DESCRIPTOR,google_dot_api_dot_annotations__pb2.DESCRIPTOR,])
 
 
 
@@ -133,6 +134,13 @@ _CUSTOMER = _descriptor.Descriptor(
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       serialized_options=None, file=DESCRIPTOR),
+    _descriptor.FieldDescriptor(
+      name='pay_per_conversion_eligibility_failure_reasons', full_name='google.ads.googleads.v1.resources.Customer.pay_per_conversion_eligibility_failure_reasons', index=14,
+      number=16, type=14, cpp_type=8, label=3,
+      has_default_value=False, default_value=[],
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR),
   ],
   extensions=[
   ],
@@ -145,8 +153,8 @@ _CUSTOMER = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=156,
-  serialized_end=986,
+  serialized_start=254,
+  serialized_end=1276,
 )
 
 
@@ -190,8 +198,8 @@ _CALLREPORTINGSETTING = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=989,
-  serialized_end=1204,
+  serialized_start=1279,
+  serialized_end=1494,
 )
 
 
@@ -228,8 +236,8 @@ _CONVERSIONTRACKINGSETTING = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=1207,
-  serialized_end=1370,
+  serialized_start=1497,
+  serialized_end=1660,
 )
 
 
@@ -259,8 +267,8 @@ _REMARKETINGSETTING = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=1372,
-  serialized_end=1454,
+  serialized_start=1662,
+  serialized_end=1744,
 )
 
 _CUSTOMER.fields_by_name['id'].message_type = google_dot_protobuf_dot_wrappers__pb2._INT64VALUE
@@ -276,6 +284,7 @@ _CUSTOMER.fields_by_name['test_account'].message_type = google_dot_protobuf_dot_
 _CUSTOMER.fields_by_name['call_reporting_setting'].message_type = _CALLREPORTINGSETTING
 _CUSTOMER.fields_by_name['conversion_tracking_setting'].message_type = _CONVERSIONTRACKINGSETTING
 _CUSTOMER.fields_by_name['remarketing_setting'].message_type = _REMARKETINGSETTING
+_CUSTOMER.fields_by_name['pay_per_conversion_eligibility_failure_reasons'].enum_type = google_dot_ads_dot_googleads__v1_dot_proto_dot_enums_dot_customer__pay__per__conversion__eligibility__failure__reason__pb2._CUSTOMERPAYPERCONVERSIONELIGIBILITYFAILUREREASONENUM_CUSTOMERPAYPERCONVERSIONELIGIBILITYFAILUREREASON
 _CALLREPORTINGSETTING.fields_by_name['call_reporting_enabled'].message_type = google_dot_protobuf_dot_wrappers__pb2._BOOLVALUE
 _CALLREPORTINGSETTING.fields_by_name['call_conversion_reporting_enabled'].message_type = google_dot_protobuf_dot_wrappers__pb2._BOOLVALUE
 _CALLREPORTINGSETTING.fields_by_name['call_conversion_action'].message_type = google_dot_protobuf_dot_wrappers__pb2._STRINGVALUE
@@ -330,6 +339,10 @@ Customer = _reflection.GeneratedProtocolMessageType('Customer', (_message.Messag
           Conversion tracking setting for a customer.
       remarketing_setting:
           Remarketing setting for a customer.
+      pay_per_conversion_eligibility_failure_reasons:
+          Reasons why the customer is not eligible to use
+          PaymentMode.CONVERSIONS. If the list is empty, the customer is
+          eligible. This field is read-only.
   """,
   # @@protoc_insertion_point(class_scope:google.ads.googleads.v1.resources.Customer)
   ))

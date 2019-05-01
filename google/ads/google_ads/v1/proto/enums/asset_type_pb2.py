@@ -19,8 +19,8 @@ DESCRIPTOR = _descriptor.FileDescriptor(
   name='google/ads/googleads_v1/proto/enums/asset_type.proto',
   package='google.ads.googleads.v1.enums',
   syntax='proto3',
-  serialized_options=_b('\n!com.google.ads.googleads.v1.enumsB\016AssetTypeProtoP\001ZBgoogle.golang.org/genproto/googleapis/ads/googleads/v1/enums;enums\242\002\003GAA\252\002\035Google.Ads.GoogleAds.V1.Enums\312\002\035Google\\Ads\\GoogleAds\\V1\\Enums\352\002\"Google::Ads::GoogleAds::V1::Common'),
-  serialized_pb=_b('\n4google/ads/googleads_v1/proto/enums/asset_type.proto\x12\x1dgoogle.ads.googleads.v1.enums\x1a\x1cgoogle/api/annotations.proto\"j\n\rAssetTypeEnum\"Y\n\tAssetType\x12\x0f\n\x0bUNSPECIFIED\x10\x00\x12\x0b\n\x07UNKNOWN\x10\x01\x12\x11\n\rYOUTUBE_VIDEO\x10\x02\x12\x10\n\x0cMEDIA_BUNDLE\x10\x03\x12\t\n\x05IMAGE\x10\x04\x42\xe4\x01\n!com.google.ads.googleads.v1.enumsB\x0e\x41ssetTypeProtoP\x01ZBgoogle.golang.org/genproto/googleapis/ads/googleads/v1/enums;enums\xa2\x02\x03GAA\xaa\x02\x1dGoogle.Ads.GoogleAds.V1.Enums\xca\x02\x1dGoogle\\Ads\\GoogleAds\\V1\\Enums\xea\x02\"Google::Ads::GoogleAds::V1::Commonb\x06proto3')
+  serialized_options=_b('\n!com.google.ads.googleads.v1.enumsB\016AssetTypeProtoP\001ZBgoogle.golang.org/genproto/googleapis/ads/googleads/v1/enums;enums\242\002\003GAA\252\002\035Google.Ads.GoogleAds.V1.Enums\312\002\035Google\\Ads\\GoogleAds\\V1\\Enums\352\002!Google::Ads::GoogleAds::V1::Enums'),
+  serialized_pb=_b('\n4google/ads/googleads_v1/proto/enums/asset_type.proto\x12\x1dgoogle.ads.googleads.v1.enums\x1a\x1cgoogle/api/annotations.proto\"t\n\rAssetTypeEnum\"c\n\tAssetType\x12\x0f\n\x0bUNSPECIFIED\x10\x00\x12\x0b\n\x07UNKNOWN\x10\x01\x12\x11\n\rYOUTUBE_VIDEO\x10\x02\x12\x10\n\x0cMEDIA_BUNDLE\x10\x03\x12\t\n\x05IMAGE\x10\x04\x12\x08\n\x04TEXT\x10\x05\x42\xe3\x01\n!com.google.ads.googleads.v1.enumsB\x0e\x41ssetTypeProtoP\x01ZBgoogle.golang.org/genproto/googleapis/ads/googleads/v1/enums;enums\xa2\x02\x03GAA\xaa\x02\x1dGoogle.Ads.GoogleAds.V1.Enums\xca\x02\x1dGoogle\\Ads\\GoogleAds\\V1\\Enums\xea\x02!Google::Ads::GoogleAds::V1::Enumsb\x06proto3')
   ,
   dependencies=[google_dot_api_dot_annotations__pb2.DESCRIPTOR,])
 
@@ -52,11 +52,15 @@ _ASSETTYPEENUM_ASSETTYPE = _descriptor.EnumDescriptor(
       name='IMAGE', index=4, number=4,
       serialized_options=None,
       type=None),
+    _descriptor.EnumValueDescriptor(
+      name='TEXT', index=5, number=5,
+      serialized_options=None,
+      type=None),
   ],
   containing_type=None,
   serialized_options=None,
   serialized_start=134,
-  serialized_end=223,
+  serialized_end=233,
 )
 _sym_db.RegisterEnumDescriptor(_ASSETTYPEENUM_ASSETTYPE)
 
@@ -82,7 +86,7 @@ _ASSETTYPEENUM = _descriptor.Descriptor(
   oneofs=[
   ],
   serialized_start=117,
-  serialized_end=223,
+  serialized_end=233,
 )
 
 _ASSETTYPEENUM_ASSETTYPE.containing_type = _ASSETTYPEENUM

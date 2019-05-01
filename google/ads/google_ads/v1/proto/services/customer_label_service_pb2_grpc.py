@@ -6,7 +6,9 @@ from google.ads.google_ads.v1.proto.services import customer_label_service_pb2 a
 
 
 class CustomerLabelServiceStub(object):
-  """Service to manage labels on customers.
+  """Proto file describing the Customer Label service.
+
+  Service to manage labels on customers.
   """
 
   def __init__(self, channel):
@@ -28,7 +30,9 @@ class CustomerLabelServiceStub(object):
 
 
 class CustomerLabelServiceServicer(object):
-  """Service to manage labels on customers.
+  """Proto file describing the Customer Label service.
+
+  Service to manage labels on customers.
   """
 
   def GetCustomerLabel(self, request, context):

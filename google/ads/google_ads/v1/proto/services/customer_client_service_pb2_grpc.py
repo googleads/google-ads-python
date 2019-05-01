@@ -6,7 +6,9 @@ from google.ads.google_ads.v1.proto.services import customer_client_service_pb2 
 
 
 class CustomerClientServiceStub(object):
-  """Service to get clients in a customer's hierarchy.
+  """Proto file describing the Customer Client service.
+
+  Service to get clients in a customer's hierarchy.
   """
 
   def __init__(self, channel):
@@ -23,7 +25,9 @@ class CustomerClientServiceStub(object):
 
 
 class CustomerClientServiceServicer(object):
-  """Service to get clients in a customer's hierarchy.
+  """Proto file describing the Customer Client service.
+
+  Service to get clients in a customer's hierarchy.
   """
 
   def GetCustomerClient(self, request, context):

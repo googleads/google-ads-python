@@ -6,7 +6,9 @@ from google.ads.google_ads.v1.proto.services import ad_group_extension_setting_s
 
 
 class AdGroupExtensionSettingServiceStub(object):
-  """Service to manage ad group extension settings.
+  """Proto file describing the AdGroupExtensionSetting service.
+
+  Service to manage ad group extension settings.
   """
 
   def __init__(self, channel):
@@ -28,7 +30,9 @@ class AdGroupExtensionSettingServiceStub(object):
 
 
 class AdGroupExtensionSettingServiceServicer(object):
-  """Service to manage ad group extension settings.
+  """Proto file describing the AdGroupExtensionSetting service.
+
+  Service to manage ad group extension settings.
   """
 
   def GetAdGroupExtensionSetting(self, request, context):

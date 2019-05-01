@@ -6,7 +6,9 @@ from google.ads.google_ads.v1.proto.services import ad_schedule_view_service_pb2
 
 
 class AdScheduleViewServiceStub(object):
-  """Service to fetch ad schedule views.
+  """Proto file describing the AdSchedule View service.
+
+  Service to fetch ad schedule views.
   """
 
   def __init__(self, channel):
@@ -23,7 +25,9 @@ class AdScheduleViewServiceStub(object):
 
 
 class AdScheduleViewServiceServicer(object):
-  """Service to fetch ad schedule views.
+  """Proto file describing the AdSchedule View service.
+
+  Service to fetch ad schedule views.
   """
 
   def GetAdScheduleView(self, request, context):

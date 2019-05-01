@@ -6,7 +6,9 @@ from google.ads.google_ads.v1.proto.services import ad_group_audience_view_servi
 
 
 class AdGroupAudienceViewServiceStub(object):
-  """Service to manage ad group audience views.
+  """Proto file describing the AdGroup Audience View service.
+
+  Service to manage ad group audience views.
   """
 
   def __init__(self, channel):
@@ -23,7 +25,9 @@ class AdGroupAudienceViewServiceStub(object):
 
 
 class AdGroupAudienceViewServiceServicer(object):
-  """Service to manage ad group audience views.
+  """Proto file describing the AdGroup Audience View service.
+
+  Service to manage ad group audience views.
   """
 
   def GetAdGroupAudienceView(self, request, context):

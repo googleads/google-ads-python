@@ -6,7 +6,9 @@ from google.ads.google_ads.v1.proto.services import keyword_plan_negative_keywor
 
 
 class KeywordPlanNegativeKeywordServiceStub(object):
-  """Service to manage Keyword Plan negative keywords.
+  """Proto file describing the keyword plan negative keyword service.
+
+  Service to manage Keyword Plan negative keywords.
   """
 
   def __init__(self, channel):
@@ -28,7 +30,9 @@ class KeywordPlanNegativeKeywordServiceStub(object):
 
 
 class KeywordPlanNegativeKeywordServiceServicer(object):
-  """Service to manage Keyword Plan negative keywords.
+  """Proto file describing the keyword plan negative keyword service.
+
+  Service to manage Keyword Plan negative keywords.
   """
 
   def GetKeywordPlanNegativeKeyword(self, request, context):

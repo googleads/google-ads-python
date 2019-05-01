@@ -6,7 +6,9 @@ from google.ads.google_ads.v1.proto.services import geographic_view_service_pb2 
 
 
 class GeographicViewServiceStub(object):
-  """Service to manage geographic views.
+  """Proto file describing the GeographicViewService.
+
+  Service to manage geographic views.
   """
 
   def __init__(self, channel):
@@ -23,7 +25,9 @@ class GeographicViewServiceStub(object):
 
 
 class GeographicViewServiceServicer(object):
-  """Service to manage geographic views.
+  """Proto file describing the GeographicViewService.
+
+  Service to manage geographic views.
   """
 
   def GetGeographicView(self, request, context):

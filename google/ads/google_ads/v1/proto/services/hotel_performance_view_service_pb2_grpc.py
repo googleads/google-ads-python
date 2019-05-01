@@ -6,7 +6,9 @@ from google.ads.google_ads.v1.proto.services import hotel_performance_view_servi
 
 
 class HotelPerformanceViewServiceStub(object):
-  """Service to manage Hotel Performance Views.
+  """Proto file describing the Hotel Performance View Service.
+
+  Service to manage Hotel Performance Views.
   """
 
   def __init__(self, channel):
@@ -23,7 +25,9 @@ class HotelPerformanceViewServiceStub(object):
 
 
 class HotelPerformanceViewServiceServicer(object):
-  """Service to manage Hotel Performance Views.
+  """Proto file describing the Hotel Performance View Service.
+
+  Service to manage Hotel Performance Views.
   """
 
   def GetHotelPerformanceView(self, request, context):

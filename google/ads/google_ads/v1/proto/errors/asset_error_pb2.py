@@ -20,7 +20,7 @@ DESCRIPTOR = _descriptor.FileDescriptor(
   package='google.ads.googleads.v1.errors',
   syntax='proto3',
   serialized_options=_b('\n\"com.google.ads.googleads.v1.errorsB\017AssetErrorProtoP\001ZDgoogle.golang.org/genproto/googleapis/ads/googleads/v1/errors;errors\242\002\003GAA\252\002\036Google.Ads.GoogleAds.V1.Errors\312\002\036Google\\Ads\\GoogleAds\\V1\\Errors\352\002\"Google::Ads::GoogleAds::V1::Errors'),
-  serialized_pb=_b('\n6google/ads/googleads_v1/proto/errors/asset_error.proto\x12\x1egoogle.ads.googleads.v1.errors\x1a\x1cgoogle/api/annotations.proto\"\xb4\x01\n\x0e\x41ssetErrorEnum\"\xa1\x01\n\nAssetError\x12\x0f\n\x0bUNSPECIFIED\x10\x00\x12\x0b\n\x07UNKNOWN\x10\x01\x12+\n\'CUSTOMER_NOT_WHITELISTED_FOR_ASSET_TYPE\x10\x02\x12\x13\n\x0f\x44UPLICATE_ASSET\x10\x03\x12\x18\n\x14\x44UPLICATE_ASSET_NAME\x10\x04\x12\x19\n\x15\x41SSET_DATA_IS_MISSING\x10\x05\x42\xea\x01\n\"com.google.ads.googleads.v1.errorsB\x0f\x41ssetErrorProtoP\x01ZDgoogle.golang.org/genproto/googleapis/ads/googleads/v1/errors;errors\xa2\x02\x03GAA\xaa\x02\x1eGoogle.Ads.GoogleAds.V1.Errors\xca\x02\x1eGoogle\\Ads\\GoogleAds\\V1\\Errors\xea\x02\"Google::Ads::GoogleAds::V1::Errorsb\x06proto3')
+  serialized_pb=_b('\n6google/ads/googleads_v1/proto/errors/asset_error.proto\x12\x1egoogle.ads.googleads.v1.errors\x1a\x1cgoogle/api/annotations.proto\"\xd2\x01\n\x0e\x41ssetErrorEnum\"\xbf\x01\n\nAssetError\x12\x0f\n\x0bUNSPECIFIED\x10\x00\x12\x0b\n\x07UNKNOWN\x10\x01\x12+\n\'CUSTOMER_NOT_WHITELISTED_FOR_ASSET_TYPE\x10\x02\x12\x13\n\x0f\x44UPLICATE_ASSET\x10\x03\x12\x18\n\x14\x44UPLICATE_ASSET_NAME\x10\x04\x12\x19\n\x15\x41SSET_DATA_IS_MISSING\x10\x05\x12\x1c\n\x18\x43\x41NNOT_MODIFY_ASSET_NAME\x10\x06\x42\xea\x01\n\"com.google.ads.googleads.v1.errorsB\x0f\x41ssetErrorProtoP\x01ZDgoogle.golang.org/genproto/googleapis/ads/googleads/v1/errors;errors\xa2\x02\x03GAA\xaa\x02\x1eGoogle.Ads.GoogleAds.V1.Errors\xca\x02\x1eGoogle\\Ads\\GoogleAds\\V1\\Errors\xea\x02\"Google::Ads::GoogleAds::V1::Errorsb\x06proto3')
   ,
   dependencies=[google_dot_api_dot_annotations__pb2.DESCRIPTOR,])
 
@@ -56,11 +56,15 @@ _ASSETERRORENUM_ASSETERROR = _descriptor.EnumDescriptor(
       name='ASSET_DATA_IS_MISSING', index=5, number=5,
       serialized_options=None,
       type=None),
+    _descriptor.EnumValueDescriptor(
+      name='CANNOT_MODIFY_ASSET_NAME', index=6, number=6,
+      serialized_options=None,
+      type=None),
   ],
   containing_type=None,
   serialized_options=None,
   serialized_start=140,
-  serialized_end=301,
+  serialized_end=331,
 )
 _sym_db.RegisterEnumDescriptor(_ASSETERRORENUM_ASSETERROR)
 
@@ -86,7 +90,7 @@ _ASSETERRORENUM = _descriptor.Descriptor(
   oneofs=[
   ],
   serialized_start=121,
-  serialized_end=301,
+  serialized_end=331,
 )
 
 _ASSETERRORENUM_ASSETERROR.containing_type = _ASSETERRORENUM

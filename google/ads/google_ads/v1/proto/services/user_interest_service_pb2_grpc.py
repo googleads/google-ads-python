@@ -6,7 +6,9 @@ from google.ads.google_ads.v1.proto.services import user_interest_service_pb2 as
 
 
 class UserInterestServiceStub(object):
-  """Service to fetch Google Ads User Interest.
+  """Proto file describing the user interest service
+
+  Service to fetch Google Ads User Interest.
   """
 
   def __init__(self, channel):
@@ -23,7 +25,9 @@ class UserInterestServiceStub(object):
 
 
 class UserInterestServiceServicer(object):
-  """Service to fetch Google Ads User Interest.
+  """Proto file describing the user interest service
+
+  Service to fetch Google Ads User Interest.
   """
 
   def GetUserInterest(self, request, context):

@@ -6,7 +6,9 @@ from google.ads.google_ads.v1.proto.services import user_list_service_pb2 as goo
 
 
 class UserListServiceStub(object):
-  """Service to manage user lists.
+  """Proto file describing the User List service.
+
+  Service to manage user lists.
   """
 
   def __init__(self, channel):
@@ -28,7 +30,9 @@ class UserListServiceStub(object):
 
 
 class UserListServiceServicer(object):
-  """Service to manage user lists.
+  """Proto file describing the User List service.
+
+  Service to manage user lists.
   """
 
   def GetUserList(self, request, context):

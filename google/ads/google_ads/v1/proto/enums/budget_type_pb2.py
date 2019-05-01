@@ -20,7 +20,7 @@ DESCRIPTOR = _descriptor.FileDescriptor(
   package='google.ads.googleads.v1.enums',
   syntax='proto3',
   serialized_options=_b('\n!com.google.ads.googleads.v1.enumsB\017BudgetTypeProtoP\001ZBgoogle.golang.org/genproto/googleapis/ads/googleads/v1/enums;enums\242\002\003GAA\252\002\035Google.Ads.GoogleAds.V1.Enums\312\002\035Google\\Ads\\GoogleAds\\V1\\Enums\352\002!Google::Ads::GoogleAds::V1::Enums'),
-  serialized_pb=_b('\n5google/ads/googleads_v1/proto/enums/budget_type.proto\x12\x1dgoogle.ads.googleads.v1.enums\x1a\x1cgoogle/api/annotations.proto\"d\n\x0e\x42udgetTypeEnum\"R\n\nBudgetType\x12\x0f\n\x0bUNSPECIFIED\x10\x00\x12\x0b\n\x07UNKNOWN\x10\x01\x12\x0c\n\x08STANDARD\x10\x02\x12\x18\n\x14HOTEL_ADS_COMMISSION\x10\x03\x42\xe4\x01\n!com.google.ads.googleads.v1.enumsB\x0f\x42udgetTypeProtoP\x01ZBgoogle.golang.org/genproto/googleapis/ads/googleads/v1/enums;enums\xa2\x02\x03GAA\xaa\x02\x1dGoogle.Ads.GoogleAds.V1.Enums\xca\x02\x1dGoogle\\Ads\\GoogleAds\\V1\\Enums\xea\x02!Google::Ads::GoogleAds::V1::Enumsb\x06proto3')
+  serialized_pb=_b('\n5google/ads/googleads_v1/proto/enums/budget_type.proto\x12\x1dgoogle.ads.googleads.v1.enums\x1a\x1cgoogle/api/annotations.proto\"s\n\x0e\x42udgetTypeEnum\"a\n\nBudgetType\x12\x0f\n\x0bUNSPECIFIED\x10\x00\x12\x0b\n\x07UNKNOWN\x10\x01\x12\x0c\n\x08STANDARD\x10\x02\x12\x18\n\x14HOTEL_ADS_COMMISSION\x10\x03\x12\r\n\tFIXED_CPA\x10\x04\x42\xe4\x01\n!com.google.ads.googleads.v1.enumsB\x0f\x42udgetTypeProtoP\x01ZBgoogle.golang.org/genproto/googleapis/ads/googleads/v1/enums;enums\xa2\x02\x03GAA\xaa\x02\x1dGoogle.Ads.GoogleAds.V1.Enums\xca\x02\x1dGoogle\\Ads\\GoogleAds\\V1\\Enums\xea\x02!Google::Ads::GoogleAds::V1::Enumsb\x06proto3')
   ,
   dependencies=[google_dot_api_dot_annotations__pb2.DESCRIPTOR,])
 
@@ -48,11 +48,15 @@ _BUDGETTYPEENUM_BUDGETTYPE = _descriptor.EnumDescriptor(
       name='HOTEL_ADS_COMMISSION', index=3, number=3,
       serialized_options=None,
       type=None),
+    _descriptor.EnumValueDescriptor(
+      name='FIXED_CPA', index=4, number=4,
+      serialized_options=None,
+      type=None),
   ],
   containing_type=None,
   serialized_options=None,
   serialized_start=136,
-  serialized_end=218,
+  serialized_end=233,
 )
 _sym_db.RegisterEnumDescriptor(_BUDGETTYPEENUM_BUDGETTYPE)
 
@@ -78,7 +82,7 @@ _BUDGETTYPEENUM = _descriptor.Descriptor(
   oneofs=[
   ],
   serialized_start=118,
-  serialized_end=218,
+  serialized_end=233,
 )
 
 _BUDGETTYPEENUM_BUDGETTYPE.containing_type = _BUDGETTYPEENUM

@@ -6,7 +6,9 @@ from google.ads.google_ads.v1.proto.services import ad_group_service_pb2 as goog
 
 
 class AdGroupServiceStub(object):
-  """Service to manage ad groups.
+  """Proto file describing the Ad Group service.
+
+  Service to manage ad groups.
   """
 
   def __init__(self, channel):
@@ -28,7 +30,9 @@ class AdGroupServiceStub(object):
 
 
 class AdGroupServiceServicer(object):
-  """Service to manage ad groups.
+  """Proto file describing the Ad Group service.
+
+  Service to manage ad groups.
   """
 
   def GetAdGroup(self, request, context):

@@ -6,7 +6,9 @@ from google.ads.google_ads.v1.proto.services import campaign_label_service_pb2 a
 
 
 class CampaignLabelServiceStub(object):
-  """Service to manage labels on campaigns.
+  """Proto file describing the Campaign Label service.
+
+  Service to manage labels on campaigns.
   """
 
   def __init__(self, channel):
@@ -28,7 +30,9 @@ class CampaignLabelServiceStub(object):
 
 
 class CampaignLabelServiceServicer(object):
-  """Service to manage labels on campaigns.
+  """Proto file describing the Campaign Label service.
+
+  Service to manage labels on campaigns.
   """
 
   def GetCampaignLabel(self, request, context):

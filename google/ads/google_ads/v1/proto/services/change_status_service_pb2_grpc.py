@@ -6,7 +6,9 @@ from google.ads.google_ads.v1.proto.services import change_status_service_pb2 as
 
 
 class ChangeStatusServiceStub(object):
-  """Service to fetch change statuses.
+  """Proto file describing the Change Status service.
+
+  Service to fetch change statuses.
   """
 
   def __init__(self, channel):
@@ -23,7 +25,9 @@ class ChangeStatusServiceStub(object):
 
 
 class ChangeStatusServiceServicer(object):
-  """Service to fetch change statuses.
+  """Proto file describing the Change Status service.
+
+  Service to fetch change statuses.
   """
 
   def GetChangeStatus(self, request, context):

@@ -370,6 +370,10 @@ class AdErrorEnum(object):
           MISSING_DYNAMIC_SEARCH_ADS_SETTING_DOMAIN_NAME (int): Missing domain name in campaign setting when adding expanded dynamic
           search ad.
           INCOMPATIBLE_WITH_RESTRICTION_TYPE (int): The associated ad is not compatible with restriction type.
+          CUSTOMER_CONSENT_FOR_CALL_RECORDING_REQUIRED (int): Consent for call recording is required for creating/updating call only
+          ads. Please see https://support.google.com/google-ads/answer/7412639.
+          MISSING_IMAGE_OR_MEDIA_BUNDLE (int): Either an image or a media bundle is required in a display upload ad.
+          PRODUCT_TYPE_NOT_SUPPORTED_IN_THIS_CAMPAIGN (int): The display upload product type is not supported in this campaign.
         """
         UNSPECIFIED = 0
         UNKNOWN = 1
@@ -499,6 +503,9 @@ class AdErrorEnum(object):
         CANNOT_SET_PATH2_WITHOUT_PATH1 = 128
         MISSING_DYNAMIC_SEARCH_ADS_SETTING_DOMAIN_NAME = 129
         INCOMPATIBLE_WITH_RESTRICTION_TYPE = 130
+        CUSTOMER_CONSENT_FOR_CALL_RECORDING_REQUIRED = 131
+        MISSING_IMAGE_OR_MEDIA_BUNDLE = 132
+        PRODUCT_TYPE_NOT_SUPPORTED_IN_THIS_CAMPAIGN = 133
 
 
 class AdGroupAdErrorEnum(object):
@@ -996,6 +1003,10 @@ class AdTypeEnum(object):
           APP_AD (int): The ad is an app ad.
           LEGACY_APP_INSTALL_AD (int): The ad is a legacy app install ad.
           RESPONSIVE_DISPLAY_AD (int): The ad is a responsive display ad.
+          HTML5_UPLOAD_AD (int): The ad is a display upload ad with the HTML5\_UPLOAD\_AD product type.
+          DYNAMIC_HTML5_AD (int): The ad is a display upload ad with one of the DYNAMIC\_HTML5\_\* product
+          types.
+          APP_ENGAGEMENT_AD (int): The ad is an app engagement ad.
         """
         UNSPECIFIED = 0
         UNKNOWN = 1
@@ -1014,6 +1025,9 @@ class AdTypeEnum(object):
         APP_AD = 17
         LEGACY_APP_INSTALL_AD = 18
         RESPONSIVE_DISPLAY_AD = 19
+        HTML5_UPLOAD_AD = 21
+        DYNAMIC_HTML5_AD = 22
+        APP_ENGAGEMENT_AD = 23
 
 
 class AdvertisingChannelSubTypeEnum(object):
@@ -1034,7 +1048,12 @@ class AdvertisingChannelSubTypeEnum(object):
           VIDEO_OUTSTREAM (int): Video Outstream campaigns.
           VIDEO_ACTION (int): Video TrueView for Action campaigns.
           VIDEO_NON_SKIPPABLE (int): Video campaigns with non-skippable video ads.
-          APP_CAMPAIGN (int): Universal App Campaign.
+          APP_CAMPAIGN (int): App Campaign that allows you to easily promote your Android or iOS app
+          across Google's top properties including Search, Play, YouTube, and the
+          Google Display Network.
+          APP_CAMPAIGN_FOR_ENGAGEMENT (int): App Campaign for engagement, focused on driving re-engagement with the
+          app across several of Google’s top properties including Search, YouTube,
+          and the Google Display Network.
         """
         UNSPECIFIED = 0
         UNKNOWN = 1
@@ -1049,6 +1068,7 @@ class AdvertisingChannelSubTypeEnum(object):
         VIDEO_ACTION = 10
         VIDEO_NON_SKIPPABLE = 11
         APP_CAMPAIGN = 12
+        APP_CAMPAIGN_FOR_ENGAGEMENT = 13
 
 
 class AdvertisingChannelTypeEnum(object):
@@ -1065,8 +1085,8 @@ class AdvertisingChannelTypeEnum(object):
           and on google.com search results.
           HOTEL (int): Hotel Ads campaigns.
           VIDEO (int): Video campaigns.
-          MULTI_CHANNEL (int): Universal App Campaigns, including universal app install and universal
-          app reengagement campaigns, that run across multiple channels.
+          MULTI_CHANNEL (int): App Campaigns, and App Campaigns for Engagement, that run
+          across multiple channels.
         """
         UNSPECIFIED = 0
         UNKNOWN = 1
@@ -1283,6 +1303,23 @@ class AppStoreEnum(object):
         GOOGLE_PLAY = 3
 
 
+class AppUrlOperatingSystemTypeEnum(object):
+    class AppUrlOperatingSystemType(enum.IntEnum):
+        """
+        Operating System
+
+        Attributes:
+          UNSPECIFIED (int): Not specified.
+          UNKNOWN (int): Used for return value only. Represents value unknown in this version.
+          IOS (int): The Apple IOS operating system.
+          ANDROID (int): The Android operating system.
+        """
+        UNSPECIFIED = 0
+        UNKNOWN = 1
+        IOS = 2
+        ANDROID = 3
+
+
 class AssetErrorEnum(object):
     class AssetError(enum.IntEnum):
         """
@@ -1296,6 +1333,8 @@ class AssetErrorEnum(object):
           DUPLICATE_ASSET_NAME (int): The asset name is duplicated, either across operations or with an
           existing asset.
           ASSET_DATA_IS_MISSING (int): The Asset.asset\_data oneof is empty.
+          CANNOT_MODIFY_ASSET_NAME (int): The asset has a name which is different from an existing duplicate that
+          represents the same content.
         """
         UNSPECIFIED = 0
         UNKNOWN = 1
@@ -1303,6 +1342,7 @@ class AssetErrorEnum(object):
         DUPLICATE_ASSET = 3
         DUPLICATE_ASSET_NAME = 4
         ASSET_DATA_IS_MISSING = 5
+        CANNOT_MODIFY_ASSET_NAME = 6
 
 
 class AssetTypeEnum(object):
@@ -1316,12 +1356,14 @@ class AssetTypeEnum(object):
           YOUTUBE_VIDEO (int): YouTube video asset.
           MEDIA_BUNDLE (int): Media bundle asset.
           IMAGE (int): Image asset.
+          TEXT (int): Text asset.
         """
         UNSPECIFIED = 0
         UNKNOWN = 1
         YOUTUBE_VIDEO = 2
         MEDIA_BUNDLE = 3
         IMAGE = 4
+        TEXT = 5
 
 
 class AttributionModelEnum(object):
@@ -1420,7 +1462,11 @@ class AuthorizationErrorEnum(object):
         Attributes:
           UNSPECIFIED (int): Enum unspecified.
           UNKNOWN (int): The received error code is not known in this version.
-          USER_PERMISSION_DENIED (int): User doesn't have permission to access customer.
+          USER_PERMISSION_DENIED (int): User doesn't have permission to access customer. Note: If you're
+          accessing a client customer, the manager's customer id must be set in the
+          'login-customer-id' header. See
+          https://developers.google.com/google-ads/api/docs/concepts/
+          call-structure#login-customer-id
           DEVELOPER_TOKEN_NOT_WHITELISTED (int): The developer token is not whitelisted.
           DEVELOPER_TOKEN_PROHIBITED (int): The developer token is not allowed with the project sent in the request.
           PROJECT_DISABLED (int): The Google Cloud project sent in the request does not have permission to
@@ -1563,6 +1609,8 @@ class BiddingStrategyErrorEnum(object):
           CANNOT_REMOVE_ASSOCIATED_STRATEGY (int): Only bidding strategies not linked to campaigns, adgroups or adgroup
           criteria can be removed.
           BIDDING_STRATEGY_NOT_SUPPORTED (int): The specified bidding strategy is not supported.
+          INCOMPATIBLE_BIDDING_STRATEGY_AND_BIDDING_STRATEGY_GOAL_TYPE (int): The bidding strategy is incompatible with the campaign's bidding
+          strategy goal type.
         """
         UNSPECIFIED = 0
         UNKNOWN = 1
@@ -1570,6 +1618,7 @@ class BiddingStrategyErrorEnum(object):
         CANNOT_CHANGE_BIDDING_STRATEGY_TYPE = 3
         CANNOT_REMOVE_ASSOCIATED_STRATEGY = 4
         BIDDING_STRATEGY_NOT_SUPPORTED = 5
+        INCOMPATIBLE_BIDDING_STRATEGY_AND_BIDDING_STRATEGY_GOAL_TYPE = 6
 
 
 class BiddingStrategyStatusEnum(object):
@@ -1831,12 +1880,27 @@ class BudgetTypeEnum(object):
           UNSPECIFIED (int): Not specified.
           UNKNOWN (int): Used for return value only. Represents value unknown in this version.
           STANDARD (int): Budget type for standard Google Ads usage.
-          HOTEL_ADS_COMMISSION (int): Budget type for Hotels Ads commission program.
+          Caps daily spend at two times the specified budget amount.
+          Full details: https://support.google.com/google-ads/answer/6385083
+          HOTEL_ADS_COMMISSION (int): Budget type for Hotels Ads commission program. Full details:
+          https://support.google.com/google-ads/answer/9243945
+
+          This type is only supported by campaigns with
+          AdvertisingChannelType.HOTEL, BiddingStrategyType.COMMISSION and
+          PaymentMode.CONVERSION\_VALUE.
+          FIXED_CPA (int): Budget type with a fixed cost-per-acquisition (conversion). Full
+          details: https://support.google.com/google-ads/answer/7528254
+
+          This type is only supported by campaigns with
+          AdvertisingChannelType.DISPLAY (excluding
+          AdvertisingChannelSubType.DISPLAY\_GMAIL),
+          BiddingStrategyType.TARGET\_CPA and PaymentMode.CONVERSIONS.
         """
         UNSPECIFIED = 0
         UNKNOWN = 1
         STANDARD = 2
         HOTEL_ADS_COMMISSION = 3
+        FIXED_CPA = 4
 
 
 class CallConversionReportingStateEnum(object):
@@ -2089,6 +2153,31 @@ class CampaignErrorEnum(object):
         MISSING_HOTEL_SETTING = 39
         CANNOT_USE_SHARED_CAMPAIGN_BUDGET_WHILE_PART_OF_CAMPAIGN_GROUP = 40
         APP_NOT_FOUND = 41
+
+
+class CampaignExperimentTypeEnum(object):
+    class CampaignExperimentType(enum.IntEnum):
+        """
+        Indicates if this campaign is a normal campaign,
+        a draft campaign, or an experiment campaign.
+
+        Attributes:
+          UNSPECIFIED (int): Not specified.
+          UNKNOWN (int): Used for return value only. Represents value unknown in this version.
+          BASE (int): This is a regular campaign.
+          DRAFT (int): This is a draft version of a campaign.
+          It has some modifications from a base campaign,
+          but it does not serve or accrue metrics.
+          EXPERIMENT (int): This is an experiment version of a campaign.
+          It has some modifications from a base campaign,
+          and a percentage of traffic is being diverted
+          from the BASE campaign to this experiment campaign.
+        """
+        UNSPECIFIED = 0
+        UNKNOWN = 1
+        BASE = 2
+        DRAFT = 3
+        EXPERIMENT = 4
 
 
 class CampaignFeedErrorEnum(object):
@@ -3122,6 +3211,7 @@ class CriterionErrorEnum(object):
           criteria can be added.
           INVALID_MATCHING_FUNCTION (int): Matching function is invalid.
           LOCATION_FILTER_NOT_ALLOWED (int): Filter parameters not allowed for location groups targeting.
+          INVALID_FEED_FOR_LOCATION_FILTER (int): Feed not found, or the feed is not an enabled location feed.
           LOCATION_FILTER_INVALID (int): Given location filter parameter is invalid for location groups targeting.
           CANNOT_ATTACH_CRITERIA_AT_CAMPAIGN_AND_ADGROUP (int): Criteria type cannot be associated with a campaign and its ad group(s)
           simultaneously.
@@ -3227,6 +3317,7 @@ class CriterionErrorEnum(object):
         MISSING_SHOPPING_SETTING = 77
         INVALID_MATCHING_FUNCTION = 78
         LOCATION_FILTER_NOT_ALLOWED = 79
+        INVALID_FEED_FOR_LOCATION_FILTER = 98
         LOCATION_FILTER_INVALID = 80
         CANNOT_ATTACH_CRITERIA_AT_CAMPAIGN_AND_ADGROUP = 81
         HOTEL_LENGTH_OF_STAY_OVERLAPS_WITH_EXISTING_CRITERION = 82
@@ -3299,6 +3390,7 @@ class CriterionTypeEnum(object):
           MOBILE_DEVICE (int): Mobile device.
           CUSTOM_AFFINITY (int): Custom affinity.
           CUSTOM_INTENT (int): Custom intent.
+          LOCATION_GROUP (int): Location group.
         """
         UNSPECIFIED = 0
         UNKNOWN = 1
@@ -3331,6 +3423,7 @@ class CriterionTypeEnum(object):
         MOBILE_DEVICE = 28
         CUSTOM_AFFINITY = 29
         CUSTOM_INTENT = 30
+        LOCATION_GROUP = 31
 
 
 class CustomInterestErrorEnum(object):
@@ -3615,6 +3708,35 @@ class CustomerMatchUploadKeyTypeEnum(object):
         MOBILE_ADVERTISING_ID = 4
 
 
+class CustomerPayPerConversionEligibilityFailureReasonEnum(object):
+    class CustomerPayPerConversionEligibilityFailureReason(enum.IntEnum):
+        """
+        Enum describing possible reasons a customer is not eligible to use
+        PaymentMode.CONVERSIONS.
+
+        Attributes:
+          UNSPECIFIED (int): Not specified.
+          UNKNOWN (int): Used for return value only. Represents value unknown in this version.
+          NOT_ENOUGH_CONVERSIONS (int): Customer does not have enough conversions.
+          CONVERSION_LAG_TOO_HIGH (int): Customer's conversion lag is too high.
+          HAS_CAMPAIGN_WITH_SHARED_BUDGET (int): Customer uses shared budgets.
+          HAS_UPLOAD_CLICKS_CONVERSION (int): Customer has conversions with ConversionActionType.UPLOAD\_CLICKS.
+          AVERAGE_DAILY_SPEND_TOO_HIGH (int): Customer's average daily spend is too high.
+          ANALYSIS_NOT_COMPLETE (int): Customer's eligibility has not yet been calculated by the Google Ads
+          backend. Check back soon.
+          OTHER (int): Customer is not eligible due to other reasons.
+        """
+        UNSPECIFIED = 0
+        UNKNOWN = 1
+        NOT_ENOUGH_CONVERSIONS = 2
+        CONVERSION_LAG_TOO_HIGH = 3
+        HAS_CAMPAIGN_WITH_SHARED_BUDGET = 4
+        HAS_UPLOAD_CLICKS_CONVERSION = 5
+        AVERAGE_DAILY_SPEND_TOO_HIGH = 6
+        ANALYSIS_NOT_COMPLETE = 7
+        OTHER = 8
+
+
 class DataDrivenModelStatusEnum(object):
     class DataDrivenModelStatus(enum.IntEnum):
         """
@@ -3703,7 +3825,7 @@ class DateRangeErrorEnum(object):
           START_DATE_AFTER_END_DATE (int): The start date was after the end date.
           CANNOT_SET_DATE_TO_PAST (int): Cannot set date to past time
           AFTER_MAXIMUM_ALLOWABLE_DATE (int): A date was used that is past the system "last" date.
-          CANNOT_MODIFY_START_DATE_IF_ALREADY_STARTED (int): Trying to change start date on a campaign that has started.
+          CANNOT_MODIFY_START_DATE_IF_ALREADY_STARTED (int): Trying to change start date on a resource that has started.
         """
         UNSPECIFIED = 0
         UNKNOWN = 1
@@ -3780,6 +3902,58 @@ class DisplayAdFormatSettingEnum(object):
         ALL_FORMATS = 2
         NON_NATIVE = 3
         NATIVE = 4
+
+
+class DisplayUploadProductTypeEnum(object):
+    class DisplayUploadProductType(enum.IntEnum):
+        """
+        Enumerates display upload product types.
+
+        Attributes:
+          UNSPECIFIED (int): Not specified.
+          UNKNOWN (int): The value is unknown in this version.
+          HTML5_UPLOAD_AD (int): HTML5 upload ad. This product type requires the upload\_media\_bundle
+          field in DisplayUploadAdInfo to be set.
+          DYNAMIC_HTML5_EDUCATION_AD (int): Dynamic HTML5 education ad. This product type requires the
+          upload\_media\_bundle field in DisplayUploadAdInfo to be set. Can only
+          be used in an education campaign.
+          DYNAMIC_HTML5_FLIGHT_AD (int): Dynamic HTML5 flight ad. This product type requires the
+          upload\_media\_bundle field in DisplayUploadAdInfo to be set. Can only
+          be used in a flight campaign.
+          DYNAMIC_HTML5_HOTEL_RENTAL_AD (int): Dynamic HTML5 hotel and rental ad. This product type requires the
+          upload\_media\_bundle field in DisplayUploadAdInfo to be set. Can only
+          be used in a hotel campaign.
+          DYNAMIC_HTML5_JOB_AD (int): Dynamic HTML5 job ad. This product type requires the
+          upload\_media\_bundle field in DisplayUploadAdInfo to be set. Can only
+          be used in a job campaign.
+          DYNAMIC_HTML5_LOCAL_AD (int): Dynamic HTML5 local ad. This product type requires the
+          upload\_media\_bundle field in DisplayUploadAdInfo to be set. Can only
+          be used in a local campaign.
+          DYNAMIC_HTML5_REAL_ESTATE_AD (int): Dynamic HTML5 real estate ad. This product type requires the
+          upload\_media\_bundle field in DisplayUploadAdInfo to be set. Can only
+          be used in a real estate campaign.
+          DYNAMIC_HTML5_CUSTOM_AD (int): Dynamic HTML5 custom ad. This product type requires the
+          upload\_media\_bundle field in DisplayUploadAdInfo to be set. Can only
+          be used in a custom campaign.
+          DYNAMIC_HTML5_TRAVEL_AD (int): Dynamic HTML5 travel ad. This product type requires the
+          upload\_media\_bundle field in DisplayUploadAdInfo to be set. Can only
+          be used in a travel campaign.
+          DYNAMIC_HTML5_HOTEL_AD (int): Dynamic HTML5 hotel ad. This product type requires the
+          upload\_media\_bundle field in DisplayUploadAdInfo to be set. Can only
+          be used in a hotel campaign.
+        """
+        UNSPECIFIED = 0
+        UNKNOWN = 1
+        HTML5_UPLOAD_AD = 2
+        DYNAMIC_HTML5_EDUCATION_AD = 3
+        DYNAMIC_HTML5_FLIGHT_AD = 4
+        DYNAMIC_HTML5_HOTEL_RENTAL_AD = 5
+        DYNAMIC_HTML5_JOB_AD = 6
+        DYNAMIC_HTML5_LOCAL_AD = 7
+        DYNAMIC_HTML5_REAL_ESTATE_AD = 8
+        DYNAMIC_HTML5_CUSTOM_AD = 9
+        DYNAMIC_HTML5_TRAVEL_AD = 10
+        DYNAMIC_HTML5_HOTEL_AD = 11
 
 
 class DistinctErrorEnum(object):
@@ -3923,7 +4097,8 @@ class ExtensionFeedItemErrorEnum(object):
           CALLTRACKING_NOT_SUPPORTED_FOR_COUNTRY (int): Call tracking is not supported for the given country for a call
           extension.
           CUSTOMER_CONSENT_FOR_CALL_RECORDING_REQUIRED (int): Customer hasn't consented for call recording, which is required for
-          creating/updating call feed items.
+          creating/updating call feed items. Please see
+          https://support.google.com/google-ads/answer/7412639.
           INVALID_APP_ID (int): App id provided for an app extension is invalid.
           QUOTES_IN_REVIEW_EXTENSION_SNIPPET (int): Quotation marks present in the review text for a review extension.
           HYPHENS_IN_REVIEW_EXTENSION_SNIPPET (int): Hyphen character present in the review text for a review extension.
@@ -4113,7 +4288,8 @@ class ExtensionSettingErrorEnum(object):
           INVALID_LANGUAGE_CODE (int): The language code is not valid.
           UNSUPPORTED_LANGUAGE (int): The language is not supported.
           CUSTOMER_CONSENT_FOR_CALL_RECORDING_REQUIRED (int): Customer hasn't consented for call recording, which is required for
-          adding/updating call extensions.
+          adding/updating call extensions. Please see
+          https://support.google.com/google-ads/answer/7412639.
           EXTENSION_SETTING_UPDATE_IS_A_NOOP (int): The UPDATE operation does not specify any fields other than the resource
           name in the update mask.
         """
@@ -4203,6 +4379,8 @@ class ExtensionTypeEnum(object):
           REVIEW (int): Review.
           SITELINK (int): Sitelink.
           STRUCTURED_SNIPPET (int): Structured snippet.
+          LOCATION (int): Location.
+          AFFILIATE_LOCATION (int): Affiliate location.
         """
         UNSPECIFIED = 0
         UNKNOWN = 1
@@ -4216,6 +4394,8 @@ class ExtensionTypeEnum(object):
         REVIEW = 9
         SITELINK = 10
         STRUCTURED_SNIPPET = 11
+        LOCATION = 12
+        AFFILIATE_LOCATION = 13
 
 
 class ExternalConversionSourceEnum(object):
@@ -4703,7 +4883,8 @@ class FeedItemValidationErrorEnum(object):
           INVALID_TAG_IN_FINAL_URL_SUFFIX (int): Final url suffix contains an invalid tag.
           INVALID_FINAL_URL_SUFFIX_FORMAT (int): Final url suffix is formatted incorrectly.
           CUSTOMER_CONSENT_FOR_CALL_RECORDING_REQUIRED (int): Consent for call recording, which is required for the use of call
-          extensions, was not provided by the advertiser.
+          extensions, was not provided by the advertiser. Please see
+          https://support.google.com/google-ads/answer/7412639.
           ONLY_ONE_DELIVERY_OPTION_IS_ALLOWED (int): Multiple message delivery options are set.
           NO_DELIVERY_OPTION_IS_SET (int): No message delivery option is set.
           INVALID_CONVERSION_REPORTING_STATE (int): String value of conversion reporting state field is not valid.
@@ -4712,6 +4893,12 @@ class FeedItemValidationErrorEnum(object):
           code field.
           AUTO_REPLY_NOT_AVAILABLE_IN_COUNTRY (int): Auto reply is not supported in the country specified in the country code
           field.
+          INVALID_LATITUDE_VALUE (int): Invalid value specified for latitude.
+          INVALID_LONGITUDE_VALUE (int): Invalid value specified for longitude.
+          TOO_MANY_LABELS (int): Too many label fields provided.
+          INVALID_IMAGE_URL (int): Invalid image url.
+          MISSING_LATITUDE_VALUE (int): Latitude value is missing.
+          MISSING_LONGITUDE_VALUE (int): Longitude value is missing.
         """
         UNSPECIFIED = 0
         UNKNOWN = 1
@@ -4804,6 +4991,12 @@ class FeedItemValidationErrorEnum(object):
         IMAGE_SIZE_WRONG = 88
         EMAIL_DELIVERY_NOT_AVAILABLE_IN_COUNTRY = 89
         AUTO_REPLY_NOT_AVAILABLE_IN_COUNTRY = 90
+        INVALID_LATITUDE_VALUE = 91
+        INVALID_LONGITUDE_VALUE = 92
+        TOO_MANY_LABELS = 93
+        INVALID_IMAGE_URL = 94
+        MISSING_LATITUDE_VALUE = 95
+        MISSING_LONGITUDE_VALUE = 96
 
 
 class FeedItemValidationStatusEnum(object):
@@ -4971,7 +5164,7 @@ class FieldErrorEnum(object):
         Attributes:
           UNSPECIFIED (int): Enum unspecified.
           UNKNOWN (int): The received error code is not known in this version.
-          REQUIRED (int): The required field was not present in the resource.
+          REQUIRED (int): The required field was not present.
           IMMUTABLE_FIELD (int): The field attempted to be mutated is immutable.
           INVALID_VALUE (int): The field's value is invalid.
           VALUE_MUST_BE_UNSET (int): The field cannot be set.
@@ -6211,6 +6404,23 @@ class LocationExtensionTargetingCriterionFieldEnum(object):
         COUNTRY_CODE = 7
 
 
+class LocationGroupRadiusUnitsEnum(object):
+    class LocationGroupRadiusUnits(enum.IntEnum):
+        """
+        The unit of radius distance in location group (e.g. MILES)
+
+        Attributes:
+          UNSPECIFIED (int): Not specified.
+          UNKNOWN (int): Used for return value only. Represents value unknown in this version.
+          METERS (int): Meters
+          MILES (int): Miles
+        """
+        UNSPECIFIED = 0
+        UNKNOWN = 1
+        METERS = 2
+        MILES = 3
+
+
 class LocationPlaceholderFieldEnum(object):
     class LocationPlaceholderField(enum.IntEnum):
         """
@@ -6452,6 +6662,27 @@ class MediaTypeEnum(object):
         AUDIO = 5
         VIDEO = 6
         DYNAMIC_IMAGE = 7
+
+
+class MediaUploadErrorEnum(object):
+    class MediaUploadError(enum.IntEnum):
+        """
+        Enum describing possible media uploading errors.
+
+        Attributes:
+          UNSPECIFIED (int): Enum unspecified.
+          UNKNOWN (int): The received error code is not known in this version.
+          FILE_TOO_BIG (int): The uploaded file is too big.
+          UNPARSEABLE_IMAGE (int): Image data is unparseable.
+          ANIMATED_IMAGE_NOT_ALLOWED (int): Animated images are not allowed.
+          FORMAT_NOT_ALLOWED (int): The image or media bundle format is not allowed.
+        """
+        UNSPECIFIED = 0
+        UNKNOWN = 1
+        FILE_TOO_BIG = 2
+        UNPARSEABLE_IMAGE = 3
+        ANIMATED_IMAGE_NOT_ALLOWED = 4
+        FORMAT_NOT_ALLOWED = 5
 
 
 class MerchantCenterLinkStatusEnum(object):
@@ -6915,12 +7146,21 @@ class PaymentModeEnum(object):
           UNSPECIFIED (int): Not specified.
           UNKNOWN (int): Used for return value only. Represents value unknown in this version.
           CLICKS (int): Pay per click.
-          CONVERSION_VALUE (int): Pay per conversion value.
+          CONVERSION_VALUE (int): Pay per conversion value. This mode is only supported by campaigns with
+          AdvertisingChannelType.HOTEL, BiddingStrategyType.COMMISSION, and
+          BudgetType.HOTEL\_ADS\_COMMISSION.
+          CONVERSIONS (int): Pay per conversion. This mode is only supported by campaigns with
+          AdvertisingChannelType.DISPLAY (excluding
+          AdvertisingChannelSubType.DISPLAY\_GMAIL),
+          BiddingStrategyType.TARGET\_CPA, and BudgetType.FIXED\_CPA. The customer
+          must also be eligible for this mode. See
+          Customer.eligibility\_failure\_reasons for details.
         """
         UNSPECIFIED = 0
         UNKNOWN = 1
         CLICKS = 4
         CONVERSION_VALUE = 5
+        CONVERSIONS = 6
 
 
 class PlaceholderTypeEnum(object):
@@ -7096,6 +7336,8 @@ class PolicyTopicEntryTypeEnum(object):
           This is a response-only value.
           PROHIBITED (int): The resource will not be served.
           LIMITED (int): The resource will not be served under some circumstances.
+          FULLY_LIMITED (int): The resource cannot serve at all because of the current targeting
+          criteria.
           DESCRIPTIVE (int): May be of interest, but does not limit how the resource is served.
           BROADENING (int): Could increase coverage beyond normal.
           AREA_OF_INTEREST_ONLY (int): Constrained for all targeted countries, but may serve in other countries
@@ -7105,6 +7347,7 @@ class PolicyTopicEntryTypeEnum(object):
         UNKNOWN = 1
         PROHIBITED = 2
         LIMITED = 4
+        FULLY_LIMITED = 8
         DESCRIPTIVE = 5
         BROADENING = 6
         AREA_OF_INTEREST_ONLY = 7
@@ -7133,6 +7376,27 @@ class PolicyTopicEvidenceDestinationMismatchUrlTypeEnum(object):
         FINAL_MOBILE_URL = 4
         TRACKING_URL = 5
         MOBILE_TRACKING_URL = 6
+
+
+class PolicyTopicEvidenceDestinationNotWorkingDeviceEnum(object):
+    class PolicyTopicEvidenceDestinationNotWorkingDevice(enum.IntEnum):
+        """
+        The possible policy topic evidence destination not working devices.
+
+        Attributes:
+          UNSPECIFIED (int): No value has been specified.
+          UNKNOWN (int): The received value is not known in this version.
+
+          This is a response-only value.
+          DESKTOP (int): Landing page doesn't work on desktop device.
+          ANDROID (int): Landing page doesn't work on Android device.
+          IOS (int): Landing page doesn't work on iOS device.
+        """
+        UNSPECIFIED = 0
+        UNKNOWN = 1
+        DESKTOP = 2
+        ANDROID = 3
+        IOS = 4
 
 
 class PolicyValidationParameterErrorEnum(object):
@@ -7760,6 +8024,8 @@ class QueryErrorEnum(object):
           BAD_LIMIT_VALUE (int): Limit value is invalid (i.e. not a number)
           BAD_NUMBER (int): Encountered number can not be parsed.
           BAD_OPERATOR (int): Invalid operator encountered.
+          BAD_PARAMETER_NAME (int): Parameter unknown or not supported.
+          BAD_PARAMETER_VALUE (int): Parameter have invalid value.
           BAD_RESOURCE_TYPE_IN_FROM_CLAUSE (int): Invalid resource type was specified in the FROM clause.
           BAD_SYMBOL (int): Non-ASCII symbol encountered outside of strings.
           BAD_VALUE (int): Value is invalid.
@@ -7827,6 +8093,8 @@ class QueryErrorEnum(object):
         BAD_LIMIT_VALUE = 15
         BAD_NUMBER = 5
         BAD_OPERATOR = 3
+        BAD_PARAMETER_NAME = 61
+        BAD_PARAMETER_VALUE = 62
         BAD_RESOURCE_TYPE_IN_FROM_CLAUSE = 45
         BAD_SYMBOL = 2
         BAD_VALUE = 4
@@ -8037,6 +8305,9 @@ class RecommendationTypeEnum(object):
           strategy.
           OPTIMIZE_AD_ROTATION (int): Recommendation to start using the "Optimize" ad rotation setting for the
           given ad group.
+          CALLOUT_EXTENSION (int): Recommendation to add callout extensions to a campaign.
+          SITELINK_EXTENSION (int): Recommendation to add sitelink extensions to a campaign.
+          CALL_EXTENSION (int): Recommendation to add call extensions to a campaign.
           KEYWORD_MATCH_TYPE (int): Recommendation to change an existing keyword from one match type to a
           broader match type.
           MOVE_UNUSED_BUDGET (int): Recommendation to move unused budget from one budget to a constrained
@@ -8053,6 +8324,9 @@ class RecommendationTypeEnum(object):
         SEARCH_PARTNERS_OPT_IN = 8
         MAXIMIZE_CLICKS_OPT_IN = 9
         OPTIMIZE_AD_ROTATION = 10
+        CALLOUT_EXTENSION = 11
+        SITELINK_EXTENSION = 12
+        CALL_EXTENSION = 13
         KEYWORD_MATCH_TYPE = 14
         MOVE_UNUSED_BUDGET = 15
 
@@ -8186,6 +8460,26 @@ class ResourceCountLimitExceededErrorEnum(object):
         SHARED_SET_LIMIT = 7
         MATCHING_FUNCTION_LIMIT = 8
         RESPONSE_ROW_LIMIT_EXCEEDED = 9
+
+
+class SearchEngineResultsPageTypeEnum(object):
+    class SearchEngineResultsPageType(enum.IntEnum):
+        """
+        The type of the search engine results page.
+
+        Attributes:
+          UNSPECIFIED (int): Not specified.
+          UNKNOWN (int): Used for return value only. Represents value unknown in this version.
+          ADS_ONLY (int): Only ads were contained in the search engine results page.
+          ORGANIC_ONLY (int): Only organic results were contained in the search engine results page.
+          ADS_AND_ORGANIC (int): Both ads and organic results were contained in the search engine results
+          page.
+        """
+        UNSPECIFIED = 0
+        UNKNOWN = 1
+        ADS_ONLY = 2
+        ORGANIC_ONLY = 3
+        ADS_AND_ORGANIC = 4
 
 
 class SearchTermMatchTypeEnum(object):
@@ -8385,6 +8679,47 @@ class SharedSetTypeEnum(object):
         NEGATIVE_PLACEMENTS = 3
 
 
+class SimulationModificationMethodEnum(object):
+    class SimulationModificationMethod(enum.IntEnum):
+        """
+        Enum describing the method by which a simulation modifies a field.
+
+        Attributes:
+          UNSPECIFIED (int): Not specified.
+          UNKNOWN (int): Used for return value only. Represents value unknown in this version.
+          UNIFORM (int): The values in a simulation were applied to all children of a given
+          resource uniformly. Overrides on child resources were not respected.
+          DEFAULT (int): The values in a simulation were applied to the given resource.
+          Overrides on child resources were respected, and traffic estimates
+          do not include these resources.
+        """
+        UNSPECIFIED = 0
+        UNKNOWN = 1
+        UNIFORM = 2
+        DEFAULT = 3
+
+
+class SimulationTypeEnum(object):
+    class SimulationType(enum.IntEnum):
+        """
+        Enum describing the field a simulation modifies.
+
+        Attributes:
+          UNSPECIFIED (int): Not specified.
+          UNKNOWN (int): Used for return value only. Represents value unknown in this version.
+          CPC_BID (int): The simulation is for a cpc bid.
+          CPV_BID (int): The simulation is for a cpv bid.
+          TARGET_CPA (int): The simulation is for a cpa target.
+          BID_MODIFIER (int): The simulation is for a bid modifier.
+        """
+        UNSPECIFIED = 0
+        UNKNOWN = 1
+        CPC_BID = 2
+        CPV_BID = 3
+        TARGET_CPA = 4
+        BID_MODIFIER = 5
+
+
 class SitelinkPlaceholderFieldEnum(object):
     class SitelinkPlaceholderField(enum.IntEnum):
         """
@@ -8414,6 +8749,23 @@ class SitelinkPlaceholderFieldEnum(object):
         FINAL_MOBILE_URLS = 6
         TRACKING_URL = 7
         FINAL_URL_SUFFIX = 8
+
+
+class SizeLimitErrorEnum(object):
+    class SizeLimitError(enum.IntEnum):
+        """
+        Enum describing possible size limit errors.
+
+        Attributes:
+          UNSPECIFIED (int): Enum unspecified.
+          UNKNOWN (int): The received error code is not known in this version.
+          REQUEST_SIZE_LIMIT_EXCEEDED (int): The number of entries in the request exceeds the system limit.
+          RESPONSE_SIZE_LIMIT_EXCEEDED (int): The number of entries in the response exceeds the system limit.
+        """
+        UNSPECIFIED = 0
+        UNKNOWN = 1
+        REQUEST_SIZE_LIMIT_EXCEEDED = 2
+        RESPONSE_SIZE_LIMIT_EXCEEDED = 3
 
 
 class SlotEnum(object):
@@ -9347,3 +9699,20 @@ class WebpageConditionOperatorEnum(object):
         UNKNOWN = 1
         EQUALS = 2
         CONTAINS = 3
+
+
+class YoutubeVideoRegistrationErrorEnum(object):
+    class YoutubeVideoRegistrationError(enum.IntEnum):
+        """
+        Enum describing YouTube video registration errors.
+
+        Attributes:
+          UNSPECIFIED (int): Enum unspecified.
+          UNKNOWN (int): The received error code is not known in this version.
+          VIDEO_NOT_FOUND (int): Video to be registered wasn't found.
+          VIDEO_NOT_ACCESSIBLE (int): Video to be registered is not accessible (e.g. private).
+        """
+        UNSPECIFIED = 0
+        UNKNOWN = 1
+        VIDEO_NOT_FOUND = 2
+        VIDEO_NOT_ACCESSIBLE = 3

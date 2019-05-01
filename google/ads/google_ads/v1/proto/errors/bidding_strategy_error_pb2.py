@@ -20,7 +20,7 @@ DESCRIPTOR = _descriptor.FileDescriptor(
   package='google.ads.googleads.v1.errors',
   syntax='proto3',
   serialized_options=_b('\n\"com.google.ads.googleads.v1.errorsB\031BiddingStrategyErrorProtoP\001ZDgoogle.golang.org/genproto/googleapis/ads/googleads/v1/errors;errors\242\002\003GAA\252\002\036Google.Ads.GoogleAds.V1.Errors\312\002\036Google\\Ads\\GoogleAds\\V1\\Errors\352\002\"Google::Ads::GoogleAds::V1::Errors'),
-  serialized_pb=_b('\nAgoogle/ads/googleads_v1/proto/errors/bidding_strategy_error.proto\x12\x1egoogle.ads.googleads.v1.errors\x1a\x1cgoogle/api/annotations.proto\"\xd9\x01\n\x18\x42iddingStrategyErrorEnum\"\xbc\x01\n\x14\x42iddingStrategyError\x12\x0f\n\x0bUNSPECIFIED\x10\x00\x12\x0b\n\x07UNKNOWN\x10\x01\x12\x12\n\x0e\x44UPLICATE_NAME\x10\x02\x12\'\n#CANNOT_CHANGE_BIDDING_STRATEGY_TYPE\x10\x03\x12%\n!CANNOT_REMOVE_ASSOCIATED_STRATEGY\x10\x04\x12\"\n\x1e\x42IDDING_STRATEGY_NOT_SUPPORTED\x10\x05\x42\xf4\x01\n\"com.google.ads.googleads.v1.errorsB\x19\x42iddingStrategyErrorProtoP\x01ZDgoogle.golang.org/genproto/googleapis/ads/googleads/v1/errors;errors\xa2\x02\x03GAA\xaa\x02\x1eGoogle.Ads.GoogleAds.V1.Errors\xca\x02\x1eGoogle\\Ads\\GoogleAds\\V1\\Errors\xea\x02\"Google::Ads::GoogleAds::V1::Errorsb\x06proto3')
+  serialized_pb=_b('\nAgoogle/ads/googleads_v1/proto/errors/bidding_strategy_error.proto\x12\x1egoogle.ads.googleads.v1.errors\x1a\x1cgoogle/api/annotations.proto\"\x9b\x02\n\x18\x42iddingStrategyErrorEnum\"\xfe\x01\n\x14\x42iddingStrategyError\x12\x0f\n\x0bUNSPECIFIED\x10\x00\x12\x0b\n\x07UNKNOWN\x10\x01\x12\x12\n\x0e\x44UPLICATE_NAME\x10\x02\x12\'\n#CANNOT_CHANGE_BIDDING_STRATEGY_TYPE\x10\x03\x12%\n!CANNOT_REMOVE_ASSOCIATED_STRATEGY\x10\x04\x12\"\n\x1e\x42IDDING_STRATEGY_NOT_SUPPORTED\x10\x05\x12@\n<INCOMPATIBLE_BIDDING_STRATEGY_AND_BIDDING_STRATEGY_GOAL_TYPE\x10\x06\x42\xf4\x01\n\"com.google.ads.googleads.v1.errorsB\x19\x42iddingStrategyErrorProtoP\x01ZDgoogle.golang.org/genproto/googleapis/ads/googleads/v1/errors;errors\xa2\x02\x03GAA\xaa\x02\x1eGoogle.Ads.GoogleAds.V1.Errors\xca\x02\x1eGoogle\\Ads\\GoogleAds\\V1\\Errors\xea\x02\"Google::Ads::GoogleAds::V1::Errorsb\x06proto3')
   ,
   dependencies=[google_dot_api_dot_annotations__pb2.DESCRIPTOR,])
 
@@ -56,11 +56,15 @@ _BIDDINGSTRATEGYERRORENUM_BIDDINGSTRATEGYERROR = _descriptor.EnumDescriptor(
       name='BIDDING_STRATEGY_NOT_SUPPORTED', index=5, number=5,
       serialized_options=None,
       type=None),
+    _descriptor.EnumValueDescriptor(
+      name='INCOMPATIBLE_BIDDING_STRATEGY_AND_BIDDING_STRATEGY_GOAL_TYPE', index=6, number=6,
+      serialized_options=None,
+      type=None),
   ],
   containing_type=None,
   serialized_options=None,
   serialized_start=161,
-  serialized_end=349,
+  serialized_end=415,
 )
 _sym_db.RegisterEnumDescriptor(_BIDDINGSTRATEGYERRORENUM_BIDDINGSTRATEGYERROR)
 
@@ -86,7 +90,7 @@ _BIDDINGSTRATEGYERRORENUM = _descriptor.Descriptor(
   oneofs=[
   ],
   serialized_start=132,
-  serialized_end=349,
+  serialized_end=415,
 )
 
 _BIDDINGSTRATEGYERRORENUM_BIDDINGSTRATEGYERROR.containing_type = _BIDDINGSTRATEGYERRORENUM

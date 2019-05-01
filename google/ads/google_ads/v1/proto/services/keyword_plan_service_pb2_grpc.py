@@ -6,7 +6,9 @@ from google.ads.google_ads.v1.proto.services import keyword_plan_service_pb2 as 
 
 
 class KeywordPlanServiceStub(object):
-  """Service to manage keyword plans.
+  """Proto file describing the keyword plan service.
+
+  Service to manage keyword plans.
   """
 
   def __init__(self, channel):
@@ -38,7 +40,9 @@ class KeywordPlanServiceStub(object):
 
 
 class KeywordPlanServiceServicer(object):
-  """Service to manage keyword plans.
+  """Proto file describing the keyword plan service.
+
+  Service to manage keyword plans.
   """
 
   def GetKeywordPlan(self, request, context):

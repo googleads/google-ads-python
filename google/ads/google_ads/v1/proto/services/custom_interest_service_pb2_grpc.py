@@ -6,7 +6,9 @@ from google.ads.google_ads.v1.proto.services import custom_interest_service_pb2 
 
 
 class CustomInterestServiceStub(object):
-  """Service to manage custom interests.
+  """Proto file describing the Custom Interest service.
+
+  Service to manage custom interests.
   """
 
   def __init__(self, channel):
@@ -28,7 +30,9 @@ class CustomInterestServiceStub(object):
 
 
 class CustomInterestServiceServicer(object):
-  """Service to manage custom interests.
+  """Proto file describing the Custom Interest service.
+
+  Service to manage custom interests.
   """
 
   def GetCustomInterest(self, request, context):

@@ -6,7 +6,9 @@ from google.ads.google_ads.v1.proto.services import recommendation_service_pb2 a
 
 
 class RecommendationServiceStub(object):
-  """Service to manage recommendations.
+  """Proto file describing the Recommendation service.
+
+  Service to manage recommendations.
   """
 
   def __init__(self, channel):
@@ -33,7 +35,9 @@ class RecommendationServiceStub(object):
 
 
 class RecommendationServiceServicer(object):
-  """Service to manage recommendations.
+  """Proto file describing the Recommendation service.
+
+  Service to manage recommendations.
   """
 
   def GetRecommendation(self, request, context):

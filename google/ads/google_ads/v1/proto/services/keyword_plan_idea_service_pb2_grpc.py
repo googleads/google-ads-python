@@ -5,7 +5,9 @@ from google.ads.google_ads.v1.proto.services import keyword_plan_idea_service_pb
 
 
 class KeywordPlanIdeaServiceStub(object):
-  """Service to generate keyword ideas.
+  """Proto file describing the keyword plan idea service.
+
+  Service to generate keyword ideas.
   """
 
   def __init__(self, channel):
@@ -22,7 +24,9 @@ class KeywordPlanIdeaServiceStub(object):
 
 
 class KeywordPlanIdeaServiceServicer(object):
-  """Service to generate keyword ideas.
+  """Proto file describing the keyword plan idea service.
+
+  Service to generate keyword ideas.
   """
 
   def GenerateKeywordIdeas(self, request, context):

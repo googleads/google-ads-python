@@ -6,7 +6,9 @@ from google.ads.google_ads.v1.proto.services import search_term_view_service_pb2
 
 
 class SearchTermViewServiceStub(object):
-  """Service to manage search term views.
+  """Proto file describing the Search Term View service.
+
+  Service to manage search term views.
   """
 
   def __init__(self, channel):
@@ -23,7 +25,9 @@ class SearchTermViewServiceStub(object):
 
 
 class SearchTermViewServiceServicer(object):
-  """Service to manage search term views.
+  """Proto file describing the Search Term View service.
+
+  Service to manage search term views.
   """
 
   def GetSearchTermView(self, request, context):

@@ -36,7 +36,7 @@ _SERVICE_CLIENT_TEMPLATE = '%sClient'
 _SERVICE_GRPC_TRANSPORT_TEMPLATE = '%sGrpcTransport'
 _PROTO_TEMPLATE = '%s_pb2'
 _DEFAULT_TOKEN_URI = 'https://accounts.google.com/o/oauth2/token'
-_VALID_API_VERSIONS = ['v1', 'v0']
+_VALID_API_VERSIONS = ['v1']
 _DEFAULT_VERSION = _VALID_API_VERSIONS[0]
 
 class GoogleAdsClient(object):

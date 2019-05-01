@@ -18,17 +18,17 @@ config = {
             },
             "methods": {
                 "GetRecommendation": {
-                    "timeout_millis": 600000,
+                    "timeout_millis": 60000,
                     "retry_codes_name": "idempotent",
                     "retry_params_name": "default"
                 },
                 "ApplyRecommendation": {
-                    "timeout_millis": 600000,
+                    "timeout_millis": 60000,
                     "retry_codes_name": "non_idempotent",
                     "retry_params_name": "default"
                 },
                 "DismissRecommendation": {
-                    "timeout_millis": 600000,
+                    "timeout_millis": 60000,
                     "retry_codes_name": "non_idempotent",
                     "retry_params_name": "default"
                 }

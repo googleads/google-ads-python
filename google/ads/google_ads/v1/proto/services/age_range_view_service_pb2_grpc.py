@@ -6,7 +6,9 @@ from google.ads.google_ads.v1.proto.services import age_range_view_service_pb2 a
 
 
 class AgeRangeViewServiceStub(object):
-  """Service to manage age range views.
+  """Proto file describing the Age Range View service.
+
+  Service to manage age range views.
   """
 
   def __init__(self, channel):
@@ -23,7 +25,9 @@ class AgeRangeViewServiceStub(object):
 
 
 class AgeRangeViewServiceServicer(object):
-  """Service to manage age range views.
+  """Proto file describing the Age Range View service.
+
+  Service to manage age range views.
   """
 
   def GetAgeRangeView(self, request, context):

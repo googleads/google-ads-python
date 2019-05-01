@@ -6,7 +6,9 @@ from google.ads.google_ads.v1.proto.services import conversion_action_service_pb
 
 
 class ConversionActionServiceStub(object):
-  """Service to manage conversion actions.
+  """Proto file describing the Conversion Action service.
+
+  Service to manage conversion actions.
   """
 
   def __init__(self, channel):
@@ -28,7 +30,9 @@ class ConversionActionServiceStub(object):
 
 
 class ConversionActionServiceServicer(object):
-  """Service to manage conversion actions.
+  """Proto file describing the Conversion Action service.
+
+  Service to manage conversion actions.
   """
 
   def GetConversionAction(self, request, context):

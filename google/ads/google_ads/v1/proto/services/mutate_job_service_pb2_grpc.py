@@ -7,7 +7,9 @@ from google.longrunning import operations_pb2 as google_dot_longrunning_dot_oper
 
 
 class MutateJobServiceStub(object):
-  """Service to manage mutate jobs.
+  """Proto file describing the MutateJobService.
+
+  Service to manage mutate jobs.
   """
 
   def __init__(self, channel):
@@ -44,7 +46,9 @@ class MutateJobServiceStub(object):
 
 
 class MutateJobServiceServicer(object):
-  """Service to manage mutate jobs.
+  """Proto file describing the MutateJobService.
+
+  Service to manage mutate jobs.
   """
 
   def CreateMutateJob(self, request, context):

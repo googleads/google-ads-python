@@ -6,7 +6,9 @@ from google.ads.google_ads.v1.proto.services import mobile_device_constant_servi
 
 
 class MobileDeviceConstantServiceStub(object):
-  """Service to fetch mobile device constants.
+  """Proto file describing the mobile device constant service.
+
+  Service to fetch mobile device constants.
   """
 
   def __init__(self, channel):
@@ -23,7 +25,9 @@ class MobileDeviceConstantServiceStub(object):
 
 
 class MobileDeviceConstantServiceServicer(object):
-  """Service to fetch mobile device constants.
+  """Proto file describing the mobile device constant service.
+
+  Service to fetch mobile device constants.
   """
 
   def GetMobileDeviceConstant(self, request, context):

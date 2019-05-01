@@ -789,51 +789,29 @@ class LoggingInterceptorTest(TestCase):
             result = interceptor._get_request_id(mock_response, mock_exception)
             self.assertEqual(result, None)
 
-#    def test_parse_response_to_json(self):
-#        """Calls MessageToJson with a successful response message."""
-#        with mock.patch('logging.config.dictConfig'), \
-#            mock.patch(
-#                'google.ads.google_ads.client.MessageToJson') as mock_formatter:
-#            mock_response = self._get_mock_response()
-#            mock_exception = mock_response.exception()
-#            interceptor = self._create_test_interceptor()
-#            interceptor._parse_response_to_json(mock_response, mock_exception)
-#            mock_formatter.assert_called_once_with(mock_response.result())
+    def test_parse_response_to_json_transport_failure(self):
+        """ Calls _parse_to_json with transport error's debug_error_string."""
+        with mock.patch('logging.config.dictConfig'), \
+            mock.patch(
+                'google.ads.google_ads.client._parse_to_json') as mock_parser:
+            mock_response = mock.Mock()
+            mock_exception = self._get_mock_transport_exception()
+            interceptor = self._create_test_interceptor()
+            interceptor._parse_response_to_json(mock_response, mock_exception)
+            mock_parser.assert_called_once_with(
+                json.loads(self._MOCK_DEBUG_ERROR_STRING))
 
-#    def test_parse_response_to_json_google_ads_failure(self):
-#        """Calls MessageToJson with a GoogleAdsException."""
-#        with mock.patch('logging.config.dictConfig'), \
-#            mock.patch(
-#                'google.ads.google_ads.client.MessageToJson') as mock_formatter:
-#            mock_response = mock.Mock()
-#            mock_exception = self._get_mock_exception()
-#            interceptor = self._create_test_interceptor()
-#            interceptor._parse_response_to_json(mock_response, mock_exception)
-#            mock_formatter.assert_called_once_with(mock_exception.failure)
-
-#    def test_parse_response_to_json_transport_failure(self):
-#        """ Calls _parse_to_json with transport error's debug_error_string."""
-#        with mock.patch('logging.config.dictConfig'), \
-#            mock.patch(
-#                'google.ads.google_ads.client._parse_to_json') as mock_parser:
-#            mock_response = mock.Mock()
-#            mock_exception = self._get_mock_transport_exception()
-#            interceptor = self._create_test_interceptor()
-#            interceptor._parse_response_to_json(mock_response, mock_exception)
-#            mock_parser.assert_called_once_with(
-#                json.loads(self._MOCK_DEBUG_ERROR_STRING))
-
-#    def test_parse_response_to_json_unknown_failure(self):
-#        """Returns an empty JSON string if nothing can be parsed to JSON."""
-#        with mock.patch('logging.config.dictConfig'):
-#            mock_response = mock.Mock()
-#            mock_exception = mock.Mock()
-#            del mock_exception.failure
-#            del mock_exception.debug_error_string
-#            interceptor = self._create_test_interceptor()
-#            result = interceptor._parse_response_to_json(
-#                mock_response, mock_exception)
-#            self.assertEqual(result, '{}')
+    def test_parse_response_to_json_unknown_failure(self):
+        """Returns an empty JSON string if nothing can be parsed to JSON."""
+        with mock.patch('logging.config.dictConfig'):
+            mock_response = mock.Mock()
+            mock_exception = mock.Mock()
+            del mock_exception.failure
+            del mock_exception.debug_error_string
+            interceptor = self._create_test_interceptor()
+            result = interceptor._parse_response_to_json(
+                mock_response, mock_exception)
+            self.assertEqual(result, '{}')
 
     def test_get_trailing_metadata(self):
         """Retrieves metadata from a response object."""

@@ -455,7 +455,7 @@ class LoggingInterceptor(grpc.UnaryUnaryClientInterceptor):
         return getattr(request, 'customer_id', None)
 
     def _parse_exception_to_str(self, exception):
-        """Parses response object to JSON.
+        """Parses response object to str for logging.
 
         Returns:
             A str representing a response or exception from the

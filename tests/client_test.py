@@ -790,10 +790,11 @@ class LoggingInterceptorTest(TestCase):
             self.assertEqual(result, None)
 
     def test_parse_exception_to_str_transport_failure(self):
-        """ Calls _parse_to_json with transport error's debug_error_string."""
+        """ Calls _format_json_object with error obj's debug_error_string."""
         with mock.patch('logging.config.dictConfig'), \
             mock.patch(
-                'google.ads.google_ads.client._parse_to_json') as mock_parser:
+                'google.ads.google_ads.client._format_json_object'
+                ) as mock_parser:
             mock_exception = self._get_mock_transport_exception()
             interceptor = self._create_test_interceptor()
             interceptor._parse_exception_to_str(mock_exception)

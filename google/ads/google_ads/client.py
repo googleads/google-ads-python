@@ -473,7 +473,7 @@ class LoggingInterceptor(grpc.UnaryUnaryClientInterceptor):
                 # transport error with a .debug_error_string method and the
                 # returned JSON string will need to be formatted.
                 debug_string = exception.debug_error_string()
-                return _parse_to_json(json.loads(debug_string))
+                return _format_json_object(json.loads(debug_string))
             except (AttributeError, ValueError):
                 # if both attempts to retrieve serializable error data fail
                 # then simply return an empty JSON string
@@ -696,7 +696,7 @@ def _validate_login_customer_id(login_customer_id):
                              'as a string, i.e. "1234567890"')
 
 
-def _parse_to_json(obj):
+def _format_json_object(obj):
     """Parses a serializable object into a consistently formatted JSON string.
 
     Returns:
@@ -737,4 +737,4 @@ def _parse_metadata_to_json(metadata):
             value = datum[1]
             metadata_dict[key] = value
 
-    return _parse_to_json(metadata_dict)
+    return _format_json_object(metadata_dict)

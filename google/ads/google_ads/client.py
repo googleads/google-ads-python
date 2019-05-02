@@ -25,7 +25,6 @@ import google.api_core.grpc_helpers
 import google.auth.transport.requests
 import google.oauth2.credentials
 import google.ads.google_ads.errors
-from google.protobuf.json_format import MessageToJson
 import grpc
 
 _logger = logging.getLogger(__name__)
@@ -744,15 +743,3 @@ def _parse_metadata_to_json(metadata):
             metadata_dict[key] = value
 
     return _parse_to_json(metadata_dict)
-
-
-def _parse_message_to_json(message):
-    """Parses a gRPC request object to a JSON string.
-
-    Args:
-        request: an instance of a request proto message, for example
-            a SearchGoogleAdsRequest or a MutateAdGroupAdsRequest.
-    """
-    json = MessageToJson(message)
-    json = json.replace(', \n', ',\n')
-    return json

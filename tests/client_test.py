@@ -64,6 +64,20 @@ class ModuleLevelTest(TestCase):
 
         self.assertEqual(result, '{}')
 
+    def test_get_request_id_from_metadata(self):
+        """_get_request_id obtains a request ID from a metadata tuple"""
+        mock_metadata = (('request-id', '123456'),)
+        result = (google.ads.google_ads.client.
+                  _get_request_id_from_metadata(mock_metadata))
+        self.assertEqual(result, '123456')
+
+    def test_get_request_id_no_id(self):
+        """Returns None if the given metadata does not contain a request ID."""
+        mock_metadata = (('another-key', 'another-val'),)
+        result = (google.ads.google_ads.client.
+                  _get_request_id_from_metadata(mock_metadata))
+        self.assertEqual(result, None)
+
 
 class GoogleAdsClientTest(FileTestCase):
     """Tests for the google.ads.googleads.client.GoogleAdsClient class."""
@@ -760,37 +774,6 @@ class LoggingInterceptorTest(TestCase):
             result = interceptor._get_call_method(mock_client_call_details)
             self.assertEqual(result, None)
 
-    def test_get_request_id(self):
-        """Returns a request ID str from a response object."""
-        with mock.patch('logging.config.dictConfig'):
-            mock_response = self._get_mock_response()
-            interceptor = self._create_test_interceptor()
-            result = interceptor._get_request_id(mock_response)
-            self.assertEqual(result, self._MOCK_REQUEST_ID)
-
-    def test_get_request_id_google_ads_failure(self):
-        """Returns a request ID str from a GoogleAdsException instance."""
-        with mock.patch('logging.config.dictConfig'):
-            mock_response = self._get_mock_response(failed=True)
-            interceptor = self._create_test_interceptor()
-            result = interceptor._get_request_id(mock_response)
-            self.assertEqual(result, self._MOCK_REQUEST_ID)
-
-    def test_get_request_id_transport_failure(self):
-        """Returns None if there is no request_id on the exception."""
-        with mock.patch('logging.config.dictConfig'):
-            def mock_transport_exception():
-                return self._get_mock_transport_exception()
-
-            mock_response = self._get_mock_response(failed=True)
-            del mock_response.trailing_metadata
-            mock_response.exception = mock_transport_exception
-            # exceptions on transport errors have no request_id because they
-            # don't interact with a server that can provide one.
-            interceptor = self._create_test_interceptor()
-            result = interceptor._get_request_id(mock_response)
-            self.assertEqual(result, None)
-
     def test_parse_exception_to_str_transport_failure(self):
         """ Calls _format_json_object with error obj's debug_error_string."""
         with mock.patch('logging.config.dictConfig'), \
@@ -825,6 +808,7 @@ class LoggingInterceptorTest(TestCase):
         """Retrieves metadata from a failed response."""
         with mock.patch('logging.config.dictConfig'):
             mock_response = self._get_mock_response(failed=True)
+            del mock_response.trailing_metadata
             interceptor = self._create_test_interceptor()
             result = interceptor._get_trailing_metadata(mock_response)
             self.assertEqual(result, self._MOCK_TRAILING_METADATA)
@@ -836,6 +820,7 @@ class LoggingInterceptorTest(TestCase):
                 return self._get_mock_transport_exception()
 
             mock_response = mock.Mock()
+            del mock_response.trailing_metadata
             mock_response.exception = mock_transport_exception
             interceptor = self._create_test_interceptor()
             result = interceptor._get_trailing_metadata(mock_response)
@@ -852,6 +837,7 @@ class LoggingInterceptorTest(TestCase):
                 return exception
 
             mock_response = mock.Mock()
+            del mock_response.trailing_metadata
             mock_response.exception = mock_unknown_exception
             interceptor = self._create_test_interceptor()
             result = interceptor._get_trailing_metadata(mock_response)
@@ -901,20 +887,6 @@ class ExceptionInterceptorTest(TestCase):
         self.assertEqual(interceptor._RETRY_STATUS_CODES,
                          (grpc.StatusCode.INTERNAL,
                           grpc.StatusCode.RESOURCE_EXHAUSTED))
-
-    def test_get_request_id(self):
-        """_get_request_id obtains a request ID from a metadata tuple"""
-        mock_metadata = (('request-id', '123456'),)
-        interceptor = self._create_test_interceptor()
-        result = interceptor._get_request_id(mock_metadata)
-        self.assertEqual(result, '123456')
-
-    def test_get_request_id_no_id(self):
-        """Returns None if the given metadata does not contain a request ID."""
-        mock_metadata = (('another-key', 'another-val'),)
-        interceptor = self._create_test_interceptor()
-        result = interceptor._get_request_id(mock_metadata)
-        self.assertEqual(result, None)
 
     def test_get_google_ads_failure(self):
         """Obtains the content of a google ads failure from metadata."""

@@ -21,7 +21,6 @@ import json
 from collections import namedtuple
 from importlib import import_module
 
-import google.api_core.grpc_helpers
 import google.auth.transport.requests
 import google.oauth2.credentials
 import google.ads.google_ads.errors
@@ -37,6 +36,7 @@ _PROTO_TEMPLATE = '%s_pb2'
 _DEFAULT_TOKEN_URI = 'https://accounts.google.com/o/oauth2/token'
 _VALID_API_VERSIONS = ['v1']
 _DEFAULT_VERSION = _VALID_API_VERSIONS[0]
+_REQUEST_ID_KEY = 'request-id'
 
 class GoogleAdsClient(object):
     """Google Ads client used to configure settings and fetch services."""
@@ -223,7 +223,6 @@ class GoogleAdsClient(object):
 class ExceptionInterceptor(grpc.UnaryUnaryClientInterceptor):
     """An interceptor that wraps rpc exceptions."""
 
-    _REQUEST_ID_KEY = 'request-id'
     # Codes that are retried upon by google.api_core.
     _RETRY_STATUS_CODES = (
         grpc.StatusCode.INTERNAL, grpc.StatusCode.RESOURCE_EXHAUSTED)
@@ -266,22 +265,6 @@ class ExceptionInterceptor(grpc.UnaryUnaryClientInterceptor):
 
         return None
 
-    def _get_request_id(self, trailing_metadata):
-        """Gets the request ID for the Google Ads API request.
-
-        Args:
-            trailing_metadata: a tuple of metadatum from the service response.
-
-        Returns:
-            A str request ID associated with the Google Ads API request, or None
-            if it doesn't exist.
-        """
-        for kv in trailing_metadata:
-            if kv[0] == self._REQUEST_ID_KEY:
-                return kv[1]  # Return the found request ID.
-
-        return None
-
     def _handle_grpc_failure(self, response):
         """Attempts to convert failed responses to a GoogleAdsException object.
 
@@ -314,7 +297,7 @@ class ExceptionInterceptor(grpc.UnaryUnaryClientInterceptor):
             google_ads_failure = self._get_google_ads_failure(trailing_metadata)
 
             if google_ads_failure:
-                request_id = self._get_request_id(trailing_metadata)
+                request_id = _get_request_id_from_metadata(trailing_metadata)
 
                 raise google.ads.google_ads.errors.GoogleAdsException(
                     exception, response, google_ads_failure, request_id)
@@ -374,28 +357,8 @@ class LoggingInterceptor(grpc.UnaryUnaryClientInterceptor):
         if logging_config:
             logging.config.dictConfig(logging_config)
 
-    def _get_request_id(self, response):
-        """Retrieves the request id from trailing metadata.
-
-        Returns:
-            A str of the request_id, or None if the request_id isn't present.
-
-        Args:
-            response: A grpc.Call/grpc.Future instance.
-        """
-        try:
-            trailing_metadata = response.trailing_metadata()
-        except AttributeError:
-            trailing_metadata = (
-                _get_trailing_metadata_from_interceptor_exception(
-                    response.exception()))
-
-        for datum in trailing_metadata:
-            if 'request-id' in datum:
-                return datum[1]
-
     def _get_trailing_metadata(self, response):
-        """Retrieves trailing metadata from a response or exception object.
+        """Retrieves trailing metadata from a response object.
 
         If the exception is a GoogleAdsException the trailing metadata will be
         on its error object, otherwise it will be on the response object.
@@ -406,11 +369,11 @@ class LoggingInterceptor(grpc.UnaryUnaryClientInterceptor):
         Args:
             response: A grpc.Call/grpc.Future instance.
         """
-        if response.exception():
+        try:
+            return response.trailing_metadata()
+        except AttributeError:
             return _get_trailing_metadata_from_interceptor_exception(
                 response.exception())
-        else:
-            return response.trailing_metadata()
 
     def _get_initial_metadata(self, client_call_details):
         """Retrieves the initial metadata from client_call_details.
@@ -558,8 +521,8 @@ class LoggingInterceptor(grpc.UnaryUnaryClientInterceptor):
         customer_id = self._get_customer_id(request)
         initial_metadata = self._get_initial_metadata(client_call_details)
         initial_metadata_json = _parse_metadata_to_json(initial_metadata)
-        request_id = self._get_request_id(response)
         trailing_metadata = self._get_trailing_metadata(response)
+        request_id = _get_request_id_from_metadata(trailing_metadata)
         trailing_metadata_json = _parse_metadata_to_json(trailing_metadata)
 
         if response.exception():
@@ -740,3 +703,20 @@ def _parse_metadata_to_json(metadata):
             metadata_dict[key] = value
 
     return _format_json_object(metadata_dict)
+
+
+def _get_request_id_from_metadata(trailing_metadata):
+    """Gets the request ID for the Google Ads API request.
+
+    Args:
+        trailing_metadata: a tuple of metadatum from the service response.
+
+    Returns:
+        A str request ID associated with the Google Ads API request, or None
+        if it doesn't exist.
+    """
+    for kv in trailing_metadata:
+        if kv[0] == _REQUEST_ID_KEY:
+            return kv[1]  # Return the found request ID.
+
+    return None

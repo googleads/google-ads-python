@@ -18,13 +18,14 @@ import logging.config
 import os
 import yaml
 import json
+import grpc
 from collections import namedtuple
 from importlib import import_module
 
-import google.auth.transport.requests
-import google.oauth2.credentials
-import google.ads.google_ads.errors
-import grpc
+from google.auth.transport.requests import Request
+from google.oauth2.credentials import Credentials
+from google.ads.google_ads.errors import GoogleAdsException
+from google.protobuf.message import DecodeError
 
 _logger = logging.getLogger(__name__)
 
@@ -58,13 +59,13 @@ class GoogleAdsClient(object):
         config_data = yaml.safe_load(yaml_str) or {}
 
         if all(required_key in config_data for required_key in _REQUIRED_KEYS):
-            credentials = google.oauth2.credentials.Credentials(
+            credentials = Credentials(
                 None,
                 refresh_token=config_data['refresh_token'],
                 client_id=config_data['client_id'],
                 client_secret=config_data['client_secret'],
                 token_uri=_DEFAULT_TOKEN_URI)
-            credentials.refresh(google.auth.transport.requests.Request())
+            credentials.refresh(Request())
 
             login_customer_id = config_data.get('login_customer_id')
             login_customer_id = str(
@@ -260,7 +261,7 @@ class ExceptionInterceptor(grpc.UnaryUnaryClientInterceptor):
                         ga_failure = error_protos.errors_pb2.GoogleAdsFailure()
                         ga_failure.ParseFromString(kv[1])
                         return ga_failure
-                    except google.protobuf.message.DecodeError:
+                    except DecodeError:
                         return None
 
         return None
@@ -299,8 +300,8 @@ class ExceptionInterceptor(grpc.UnaryUnaryClientInterceptor):
             if google_ads_failure:
                 request_id = _get_request_id_from_metadata(trailing_metadata)
 
-                raise google.ads.google_ads.errors.GoogleAdsException(
-                    exception, response, google_ads_failure, request_id)
+                raise GoogleAdsException(exception, response,
+                                         google_ads_failure, request_id)
             else:
                 # Raise the original exception if not a GoogleAdsFailure.
                 raise exception

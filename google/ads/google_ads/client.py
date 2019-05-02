@@ -375,22 +375,24 @@ class LoggingInterceptor(grpc.UnaryUnaryClientInterceptor):
             logging.config.dictConfig(logging_config)
 
     def _get_request_id(self, response):
-        """Retrieves the request id from a response object.
+        """Retrieves the request id from trailing metadata.
 
         Returns:
-            A str of the request_id, or None if there's an exception but the
-            request_id isn't present.
+            A str of the request_id, or None if the request_id isn't present.
 
         Args:
             response: A grpc.Call/grpc.Future instance.
         """
-        if response.exception():
-            return getattr(response.exception(), 'request_id', None)
-        else:
+        try:
             trailing_metadata = response.trailing_metadata()
-            for datum in trailing_metadata:
-                if 'request-id' in datum:
-                    return datum[1]
+        except AttributeError:
+            trailing_metadata = (
+                _get_trailing_metadata_from_interceptor_exception(
+                    response.exception()))
+
+        for datum in trailing_metadata:
+            if 'request-id' in datum:
+                return datum[1]
 
     def _get_trailing_metadata(self, response):
         """Retrieves trailing metadata from a response or exception object.

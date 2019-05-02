@@ -453,6 +453,7 @@ class LoggingInterceptorTest(TestCase):
     _MOCK_REQUEST_ID = '654321xyz'
     _MOCK_METHOD = 'test/method'
     _MOCK_TRAILING_METADATA = (('request-id', _MOCK_REQUEST_ID),)
+    _MOCK_TRANSPORT_ERROR_METADATA = tuple()
     _MOCK_ERROR_MESSAGE = 'Test error message'
     _MOCK_TRANSPORT_ERROR_MESSAGE = u'Received RST_STREAM with error code 2'
     _MOCK_DEBUG_ERROR_STRING = u'{"description":"Error received from peer"}'
@@ -546,7 +547,7 @@ class LoggingInterceptorTest(TestCase):
             return self._MOCK_TRANSPORT_ERROR_MESSAGE
 
         def _mock_trailing_metadata():
-            return self._MOCK_TRAILING_METADATA
+            return self._MOCK_TRANSPORT_ERROR_METADATA
 
         exception = mock.Mock()
         exception.debug_error_string = _mock_debug_error_string
@@ -740,7 +741,7 @@ class LoggingInterceptorTest(TestCase):
             mock_client_call_details = {}
             interceptor = self._create_test_interceptor()
             result = interceptor._get_initial_metadata(mock_client_call_details)
-            self.assertEqual(result, tuple())
+            self.assertEqual(result, self._MOCK_TRANSPORT_ERROR_METADATA)
 
     def test_get_call_method(self):
         """Returns a str of the call method from client_call_details"""
@@ -782,6 +783,7 @@ class LoggingInterceptorTest(TestCase):
                 return self._get_mock_transport_exception()
 
             mock_response = self._get_mock_response(failed=True)
+            del mock_response.trailing_metadata
             mock_response.exception = mock_transport_exception
             # exceptions on transport errors have no request_id because they
             # don't interact with a server that can provide one.
@@ -837,7 +839,7 @@ class LoggingInterceptorTest(TestCase):
             mock_response.exception = mock_transport_exception
             interceptor = self._create_test_interceptor()
             result = interceptor._get_trailing_metadata(mock_response)
-            self.assertEqual(result, self._MOCK_TRAILING_METADATA)
+            self.assertEqual(result, tuple())
 
     def test_get_trailing_metadata_unknown_failure(self):
         """Returns an empty tuple if metadata cannot be found."""

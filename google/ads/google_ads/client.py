@@ -371,7 +371,13 @@ class LoggingInterceptor(grpc.UnaryUnaryClientInterceptor):
             response: A grpc.Call/grpc.Future instance.
         """
         try:
-            return response.trailing_metadata()
+            trailing_metadata = response.trailing_metadata()
+
+            if not trailing_metadata:
+                return _get_trailing_metadata_from_interceptor_exception(
+                    response.exception())
+
+            return trailing_metadata
         except AttributeError:
             return _get_trailing_metadata_from_interceptor_exception(
                 response.exception())

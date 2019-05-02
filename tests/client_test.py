@@ -669,8 +669,8 @@ class LoggingInterceptorTest(TestCase):
                 mock_request)
 
             mock_logger.info.assert_called_once_with(
-                interceptor._SUMMARY_LOG_LINE
-                % (self._MOCK_CUSTOMER_ID, self._MOCK_ENDPOINT,
+                interceptor._SUMMARY_LOG_LINE.format(
+                    self._MOCK_CUSTOMER_ID, self._MOCK_ENDPOINT,
                     mock_client_call_details.method, self._MOCK_REQUEST_ID,
                     False, None))
 
@@ -682,8 +682,8 @@ class LoggingInterceptorTest(TestCase):
                                      mock_trailing_metadata))
 
             mock_logger.debug.assert_called_once_with(
-                interceptor._FULL_REQUEST_LOG_LINE
-                % (self._MOCK_METHOD, self._MOCK_ENDPOINT, initial_metadata,
+                interceptor._FULL_REQUEST_LOG_LINE.format(
+                    self._MOCK_METHOD, self._MOCK_ENDPOINT, initial_metadata,
                     mock_request, trailing_metadata, mock_response.result()))
 
     def test_intercept_unary_unary_failed_request(self):
@@ -707,8 +707,8 @@ class LoggingInterceptorTest(TestCase):
             mock_trailing_metadata = mock_response.trailing_metadata()
 
             mock_logger.warning.assert_called_once_with(
-                interceptor._SUMMARY_LOG_LINE
-                % (self._MOCK_CUSTOMER_ID, self._MOCK_ENDPOINT,
+                interceptor._SUMMARY_LOG_LINE.format(
+                    self._MOCK_CUSTOMER_ID, self._MOCK_ENDPOINT,
                     mock_client_call_details.method, self._MOCK_REQUEST_ID,
                     True, self._MOCK_ERROR_MESSAGE))
 
@@ -720,8 +720,8 @@ class LoggingInterceptorTest(TestCase):
                                      mock_trailing_metadata))
 
             mock_logger.info.assert_called_once_with(
-                interceptor._FULL_FAULT_LOG_LINE
-                % (self._MOCK_METHOD, self._MOCK_ENDPOINT, initial_metadata,
+                interceptor._FULL_FAULT_LOG_LINE.format(
+                    self._MOCK_METHOD, self._MOCK_ENDPOINT, initial_metadata,
                     mock_request, trailing_metadata,
                     mock_response.exception().failure))
 

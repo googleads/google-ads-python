@@ -452,35 +452,32 @@ class LoggingInterceptor(grpc.UnaryUnaryClientInterceptor):
         """
         return getattr(request, 'customer_id', None)
 
-    def _parse_response_to_json(self, response, exception):
+    def _parse_exception_to_str(self, exception):
         """Parses response object to JSON.
 
         Returns:
-            A str of JSON representing a response or exception from the
+            A str representing a response or exception from the
             service.
 
         Args:
-            response: A grpc.Call/grpc.Future instance.
             exception: A grpc.Call instance.
         """
-        if exception:
-            # try to retrieve the .failure property of a GoogleAdsFailure.
-            failure = getattr(exception, 'failure', None)
-
-            if failure:
-                return failure
-            else:
+        try:
+            # If the exception is from the Google Ads API the failure attribute
+            # will be an instance of GoogleAdsFailure and can be concatenated
+            # into a log string.
+            return exception.failure
+        except AttributeError:
+            try:
                 # if exception.failure isn't present then it's likely this is a
-                # transport error with a .debug_error_string method.
-                try:
-                    debug_string = exception.debug_error_string()
-                    return _parse_to_json(json.loads(debug_string))
-                except (AttributeError, ValueError):
-                    # if both attempts to retrieve serializable error data fail
-                    # then simply return an empty JSON string
-                    return '{}'
-        else:
-            return response.result()
+                # transport error with a .debug_error_string method and the
+                # returned JSON string will need to be formatted.
+                debug_string = exception.debug_error_string()
+                return _parse_to_json(json.loads(debug_string))
+            except (AttributeError, ValueError):
+                # if both attempts to retrieve serializable error data fail
+                # then simply return an empty JSON string
+                return '{}'
 
     def _get_fault_message(self, exception):
         """Retrieves a fault/error message from an exception object.
@@ -525,7 +522,7 @@ class LoggingInterceptor(grpc.UnaryUnaryClientInterceptor):
 
     def _log_failed_request(self, method, customer_id, metadata_json,
                             request_id, request, trailing_metadata_json,
-                            response_json, fault_message):
+                            response, fault_message):
         """Handles logging of a failed request.
 
         Args:
@@ -535,9 +532,11 @@ class LoggingInterceptor(grpc.UnaryUnaryClientInterceptor):
             request_id: A unique ID for the request provided in the response.
             request: An instance of a request proto message.
             trailing_metadata_json: A JSON str of trailing_metadata.
-            response_json: A JSON str of the the response message.
+            response: A JSON str of the the response message.
             fault_message: A str error message from a failed request.
         """
+        response_json = self._parse_exception_to_str(response.exception())
+
         _logger.info(self._FULL_FAULT_LOG_LINE % (method, self.endpoint,
                      metadata_json, request, trailing_metadata_json,
                      response_json))
@@ -561,13 +560,11 @@ class LoggingInterceptor(grpc.UnaryUnaryClientInterceptor):
         trailing_metadata = self._get_trailing_metadata(response)
         trailing_metadata_json = _parse_metadata_to_json(trailing_metadata)
 
-        exception = response.exception()
-        if exception:
-            response_json = self._parse_response_to_json(response, exception)
-            fault_message = self._get_fault_message(exception)
+        if response.exception():
+            fault_message = self._get_fault_message(response.exception())
             self._log_failed_request(method, customer_id, initial_metadata_json,
                                      request_id, request,
-                                     trailing_metadata_json, response_json,
+                                     trailing_metadata_json, response,
                                      fault_message)
         else:
             self._log_successful_request(method, customer_id,

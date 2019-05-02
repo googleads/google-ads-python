@@ -419,11 +419,10 @@ class LoggingInterceptor(grpc.UnaryUnaryClientInterceptor):
         return getattr(request, 'customer_id', None)
 
     def _parse_exception_to_str(self, exception):
-        """Parses response object to str for logging.
+        """Parses response exception object to str for logging.
 
         Returns:
-            A str representing a response or exception from the
-            service.
+            A str representing a exception from the API.
 
         Args:
             exception: A grpc.Call instance.
@@ -500,12 +499,12 @@ class LoggingInterceptor(grpc.UnaryUnaryClientInterceptor):
             trailing_metadata_json: A JSON str of trailing_metadata.
             response: A JSON str of the the response message.
         """
-        response_json = self._parse_exception_to_str(response.exception())
+        exception_str = self._parse_exception_to_str(response.exception())
         fault_message = self._get_fault_message(response.exception())
 
         _logger.info(self._FULL_FAULT_LOG_LINE.format(method, self.endpoint,
                      metadata_json, request, trailing_metadata_json,
-                     response_json))
+                     exception_str))
 
         _logger.warning(self._SUMMARY_LOG_LINE.format(customer_id, self.endpoint,
                         method, request_id, True, fault_message))

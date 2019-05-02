@@ -393,7 +393,7 @@ class LoggingInterceptor(grpc.UnaryUnaryClientInterceptor):
                 if 'request-id' in datum:
                     return datum[1]
 
-    def _get_trailing_metadata(self, response, exception):
+    def _get_trailing_metadata(self, response):
         """Retrieves trailing metadata from a response or exception object.
 
         If the exception is a GoogleAdsException the trailing metadata will be
@@ -404,10 +404,10 @@ class LoggingInterceptor(grpc.UnaryUnaryClientInterceptor):
 
         Args:
             response: A grpc.Call/grpc.Future instance.
-            exception: A grpc.Call instance.
         """
-        if exception:
-            return _get_trailing_metadata_from_interceptor_exception(exception)
+        if response.exception():
+            return _get_trailing_metadata_from_interceptor_exception(
+                response.exception())
         else:
             return response.trailing_metadata()
 
@@ -559,10 +559,10 @@ class LoggingInterceptor(grpc.UnaryUnaryClientInterceptor):
         initial_metadata = self._get_initial_metadata(client_call_details)
         initial_metadata_json = _parse_metadata_to_json(initial_metadata)
         request_id = self._get_request_id(response)
-        exception = response.exception()
-        trailing_metadata = self._get_trailing_metadata(response, exception)
+        trailing_metadata = self._get_trailing_metadata(response)
         trailing_metadata_json = _parse_metadata_to_json(trailing_metadata)
 
+        exception = response.exception()
         if exception:
             response_json = self._parse_response_to_json(response, exception)
             fault_message = self._get_fault_message(exception)
@@ -653,9 +653,13 @@ def _get_trailing_metadata_from_interceptor_exception(exception):
         A tuple of trailing metadata key value pairs.
     """
     try:
+        # GoogleAdsFailure exceptions will contain trailing metadata on the
+        # error attribute.
         return exception.error.trailing_metadata()
     except AttributeError:
         try:
+            # Transport failures, i.e. issues at the gRPC layer, will contain
+            # trailing metadata on the exception iself.
             return exception.trailing_metadata()
         except AttributeError:
             # if trailing metadata is not found in either location then

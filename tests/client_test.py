@@ -557,6 +557,7 @@ class LoggingInterceptorTest(TestCase):
         # default values in certain helper methods.
         del exception.error
         del exception.failure
+        del exception.request_id
         return exception
 
     def _get_mock_response(self, failed=False, transport=False):
@@ -781,10 +782,7 @@ class LoggingInterceptorTest(TestCase):
         """Returns None if there is no request_id on the exception."""
         with mock.patch('logging.config.dictConfig'):
             def mock_transport_exception():
-                """Returns an object without a request_id attribute"""
-                mock_exception = mock.Mock()
-                del mock_exception.request_id
-                return mock_exception
+                return self._get_mock_transport_exception()
 
             mock_response = self._get_mock_response(failed=True)
             mock_response.exception = mock_transport_exception
@@ -823,41 +821,44 @@ class LoggingInterceptorTest(TestCase):
         """Retrieves metadata from a response object."""
         with mock.patch('logging.config.dictConfig'):
             mock_response = self._get_mock_response()
-            mock_exception = mock_response.exception()
             interceptor = self._create_test_interceptor()
-            result = interceptor._get_trailing_metadata(
-                mock_response, mock_exception)
+            result = interceptor._get_trailing_metadata(mock_response)
             self.assertEqual(result, self._MOCK_TRAILING_METADATA)
 
     def test_get_trailing_metadata_google_ads_failure(self):
         """Retrieves metadata from a failed response."""
         with mock.patch('logging.config.dictConfig'):
             mock_response = self._get_mock_response(failed=True)
-            mock_exception = mock_response.exception()
             interceptor = self._create_test_interceptor()
-            result = interceptor._get_trailing_metadata(
-                mock_response, mock_exception)
+            result = interceptor._get_trailing_metadata(mock_response)
             self.assertEqual(result, self._MOCK_TRAILING_METADATA)
 
     def test_get_trailing_metadata_transport_failure(self):
         """Retrieves metadata from a transport error."""
         with mock.patch('logging.config.dictConfig'):
+            def mock_transport_exception():
+                return self._get_mock_transport_exception()
+
             mock_response = mock.Mock()
-            mock_exception = self._get_mock_transport_exception()
+            mock_response.exception = mock_transport_exception
             interceptor = self._create_test_interceptor()
-            result = interceptor._get_trailing_metadata(
-                mock_response, mock_exception)
+            result = interceptor._get_trailing_metadata(mock_response)
             self.assertEqual(result, self._MOCK_TRAILING_METADATA)
 
     def test_get_trailing_metadata_unknown_failure(self):
         """Returns an empty tuple if metadata cannot be found."""
         with mock.patch('logging.config.dictConfig'):
-            mock_response = {}
-            mock_exception = self._get_mock_transport_exception()
-            del mock_exception.trailing_metadata
+            def mock_unknown_exception():
+                # using a mock transport exception but deleting the
+                # trailing_metadata attribute to simulate an unknown error type
+                exception = self._get_mock_transport_exception()
+                del exception.trailing_metadata
+                return exception
+
+            mock_response = mock.Mock()
+            mock_response.exception = mock_unknown_exception
             interceptor = self._create_test_interceptor()
-            result = interceptor._get_trailing_metadata(
-                mock_response, mock_exception)
+            result = interceptor._get_trailing_metadata(mock_response)
             self.assertEqual(result, tuple())
 
     def test_get_fault_message(self):

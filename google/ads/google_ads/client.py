@@ -434,17 +434,17 @@ class LoggingInterceptor(grpc.UnaryUnaryClientInterceptor):
             exception: A grpc.Call instance.
         """
         try:
-            # If the exception is from the Google Ads API the failure attribute
-            # will be an instance of GoogleAdsFailure and can be concatenated
-            # into a log string.
+            # If the exception is from the Google Ads API then the failure
+            # attribute will be an instance of GoogleAdsFailure and can be
+            # concatenated into a log string.
             return exception.failure
         except AttributeError:
             try:
                 # if exception.failure isn't present then it's likely this is a
                 # transport error with a .debug_error_string method and the
                 # returned JSON string will need to be formatted.
-                debug_string = exception.debug_error_string()
-                return _format_json_object(json.loads(debug_string))
+                return _format_json_object(json.loads(
+                    exception.debug_error_string()))
             except (AttributeError, ValueError):
                 # if both attempts to retrieve serializable error data fail
                 # then simply return an empty JSON string

@@ -54,7 +54,9 @@ class GoogleAdsClient(object):
 
         Args:
             config_data: a dict containing client configuration.
-
+            error_message: error message raised when config_data lacks a
+                required key
+                
         Returns:
             A dict containing configuration data that will be provided to the
             GoogleAdsClient initializer as keyword arguments.
@@ -92,13 +94,21 @@ class GoogleAdsClient(object):
             GoogleAdsClient initializer as keyword arguments.
 
         Raises:
-            ValueError: If the environment lacks a required field.
+            ValueError: If the environment lacks a required field or
+                GOOGLE_ADS_LOGGING env variable is not in json format.
         """
         config_data = {
             key: os.environ[env_variable]
             for key, env_variable in _KEYS_ENV_VARIABLES_MAP.items()
             if env_variable in os.environ
         }
+        if 'logging' in config_data.keys():
+            try:
+                config_data['logging'] = json.loads(config_data['logging'])
+            except json.JSONDecodeError:
+                raise ValueError(
+                    'GOOGLE_ADS_LOGGING env variable should be in json format.'
+                )
         return cls._get_client_kwargs(
             config_data,
             'A required variable was not found in the environment. The '

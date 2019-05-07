@@ -204,7 +204,8 @@ class GoogleAdsClientTest(FileTestCase):
             'GOOGLE_ADS_DEVELOPER_TOKEN': self.developer_token,
             'GOOGLE_ADS_CLIENT_ID': self.client_id,
             'GOOGLE_ADS_CLIENT_SECRET': self.client_secret,
-            'GOOGLE_ADS_REFRESH_TOKEN': self.refresh_token
+            'GOOGLE_ADS_REFRESH_TOKEN': self.refresh_token,
+            'GOOGLE_ADS_LOGGING': '{"test": true}'
         }
         with mock.patch('os.environ', environ):
             with mock.patch(
@@ -213,7 +214,7 @@ class GoogleAdsClientTest(FileTestCase):
                 mock_credentials_instance = mock.Mock()
                 mock_credentials.return_value = mock_credentials_instance
                 result = (google.ads.google_ads.client.GoogleAdsClient.
-                        _get_client_kwargs_from_env())
+                          _get_client_kwargs_from_env())
                 self.assertEqual(
                     result,
                     {
@@ -221,7 +222,7 @@ class GoogleAdsClientTest(FileTestCase):
                         'developer_token': self.developer_token,
                         'endpoint': None,
                         'login_customer_id': None,
-                        'logging_config': None
+                        'logging_config': {'test': True}
                     })
 
     def test_get_client_kwargs_from_yaml(self):

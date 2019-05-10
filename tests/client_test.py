@@ -25,11 +25,11 @@ from importlib import import_module
 import grpc
 from pyfakefs.fake_filesystem_unittest import TestCase as FileTestCase
 
-import google.ads.google_ads.client
+from google.ads.google_ads import client as Client
 from google.ads.google_ads.errors import GoogleAdsException
 
-latest_version = google.ads.google_ads.client._DEFAULT_VERSION
-valid_versions = google.ads.google_ads.client._VALID_API_VERSIONS
+latest_version = Client._DEFAULT_VERSION
+valid_versions = Client._VALID_API_VERSIONS
 
 errors = import_module('google.ads.google_ads.%s.proto.errors' % latest_version)
 error_protos = errors.errors_pb2
@@ -46,8 +46,7 @@ class ModuleLevelTest(TestCase):
             ('developer-token', '0000000000'),
             ('login-customer-id', '9999999999')]
 
-        result = (google.ads.google_ads.client.
-                  _parse_metadata_to_json(mock_metadata))
+        result = (Client._parse_metadata_to_json(mock_metadata))
 
         self.assertEqual(result, '{\n'
                                  '  "developer-token": "REDACTED",\n'
@@ -59,24 +58,35 @@ class ModuleLevelTest(TestCase):
     def test_parse_metadata_to_json_with_none(self):
         mock_metadata = None
 
-        result = (google.ads.google_ads.client.
-                  _parse_metadata_to_json(mock_metadata))
+        result = (Client._parse_metadata_to_json(mock_metadata))
 
         self.assertEqual(result, '{}')
+
+    def test_get_request_id_from_metadata(self):
+        """Ensures request-id is retrieved from metadata tuple."""
+        mock_metadata = (('request-id', '123456'),)
+        result = (Client._get_request_id_from_metadata(mock_metadata))
+        self.assertEqual(result, '123456')
+
+    def test_get_request_id_no_id(self):
+        """Ensures None is returned if metadata does't contain a request ID."""
+        mock_metadata = (('another-key', 'another-val'),)
+        result = (Client._get_request_id_from_metadata(mock_metadata))
+        self.assertEqual(result, None)
 
 
 class GoogleAdsClientTest(FileTestCase):
     """Tests for the google.ads.googleads.client.GoogleAdsClient class."""
 
     def _create_test_client(self, endpoint=None):
-        with mock.patch('google.oauth2.credentials') as mock_credentials:
+        with mock.patch(
+                'google.ads.google_ads.client.Credentials') as mock_credentials:
             mock_credentials_instance = mock_credentials.return_value
             mock_credentials_instance.refresh_token = self.refresh_token
             mock_credentials_instance.client_id = self.client_id
             mock_credentials_instance.client_secret = self.client_secret
-            client = google.ads.google_ads.client.GoogleAdsClient(
-                mock_credentials_instance, self.developer_token,
-                endpoint=endpoint)
+            client = Client.GoogleAdsClient(mock_credentials_instance,
+                self.developer_token, endpoint=endpoint)
             return client
 
     def setUp(self):
@@ -102,11 +112,11 @@ class GoogleAdsClientTest(FileTestCase):
         with mock.patch('google.ads.google_ads.client.GoogleAdsClient'
                         '.__init__') as mock_client_init, \
             mock.patch(
-                 'google.oauth2.credentials.Credentials') as mock_credentials:
+                'google.ads.google_ads.client.Credentials') as mock_credentials:
             mock_client_init.return_value = None
             mock_credentials_instance = mock.Mock()
             mock_credentials.return_value = mock_credentials_instance
-            (google.ads.google_ads.client.GoogleAdsClient.load_from_storage())
+            Client.GoogleAdsClient.load_from_storage()
             mock_client_init.assert_called_once_with(
                 credentials=mock_credentials_instance,
                 developer_token=self.developer_token,
@@ -129,11 +139,11 @@ class GoogleAdsClientTest(FileTestCase):
         with mock.patch('google.ads.google_ads.client.GoogleAdsClient'
                         '.__init__') as mock_client_init, \
             mock.patch(
-                 'google.oauth2.credentials.Credentials') as mock_credentials:
+                'google.ads.google_ads.client.Credentials') as mock_credentials:
             mock_client_init.return_value = None
             mock_credentials_instance = mock.Mock()
             mock_credentials.return_value = mock_credentials_instance
-            (google.ads.google_ads.client.GoogleAdsClient.load_from_storage())
+            Client.GoogleAdsClient.load_from_storage()
             mock_client_init.assert_called_once_with(
                 credentials=mock_credentials_instance,
                 developer_token=self.developer_token,
@@ -154,12 +164,12 @@ class GoogleAdsClientTest(FileTestCase):
         self.fs.create_file(file_path, contents=yaml.safe_dump(config))
 
         with mock.patch(
-                'google.oauth2.credentials.Credentials') as mock_credentials:
+                'google.ads.google_ads.client.Credentials') as mock_credentials:
             mock_credentials_instance = mock.Mock()
             mock_credentials.return_value = mock_credentials_instance
             self.assertRaises(
                     ValueError,
-                    google.ads.google_ads.client.GoogleAdsClient
+                    Client.GoogleAdsClient
                     .load_from_storage)
 
     def test_load_from_storage_too_short_login_customer_id(self):
@@ -175,12 +185,12 @@ class GoogleAdsClientTest(FileTestCase):
         self.fs.create_file(file_path, contents=yaml.safe_dump(config))
 
         with mock.patch(
-                'google.oauth2.credentials.Credentials') as mock_credentials:
+                'google.ads.google_ads.client.Credentials') as mock_credentials:
             mock_credentials_instance = mock.Mock()
             mock_credentials.return_value = mock_credentials_instance
             self.assertRaises(
                     ValueError,
-                    google.ads.google_ads.client.GoogleAdsClient
+                    Client.GoogleAdsClient
                     .load_from_storage)
 
     def test_load_from_storage(self):
@@ -197,12 +207,11 @@ class GoogleAdsClientTest(FileTestCase):
         with mock.patch('google.ads.google_ads.client.GoogleAdsClient'
                         '.__init__') as mock_client_init, \
             mock.patch(
-                 'google.oauth2.credentials.Credentials') as mock_credentials:
+                'google.ads.google_ads.client.Credentials') as mock_credentials:
             mock_client_init.return_value = None
             mock_credentials_instance = mock.Mock()
             mock_credentials.return_value = mock_credentials_instance
-            (google.ads.google_ads.client.GoogleAdsClient
-             .load_from_storage())
+            Client.GoogleAdsClient.load_from_storage()
             mock_client_init.assert_called_once_with(
                 credentials=mock_credentials_instance,
                 developer_token=self.developer_token,
@@ -226,11 +235,11 @@ class GoogleAdsClientTest(FileTestCase):
         with mock.patch('google.ads.google_ads.client.GoogleAdsClient'
                         '.__init__') as mock_client_init, \
             mock.patch(
-                'google.oauth2.credentials.Credentials') as mock_credentials:
+                'google.ads.google_ads.client.Credentials') as mock_credentials:
             mock_client_init.return_value = None
             mock_credentials_instance = mock.Mock()
             mock_credentials.return_value = mock_credentials_instance
-            google.ads.google_ads.client.GoogleAdsClient.load_from_storage()
+            Client.GoogleAdsClient.load_from_storage()
             mock_client_init.assert_called_once_with(
                 credentials=mock_credentials_instance,
                 developer_token=self.developer_token,
@@ -252,12 +261,11 @@ class GoogleAdsClientTest(FileTestCase):
         with mock.patch('google.ads.google_ads.client.GoogleAdsClient'
                         '.__init__') as mock_client_init, \
             mock.patch(
-                'google.oauth2.credentials.Credentials') as mock_credentials:
+                'google.ads.google_ads.client.Credentials') as mock_credentials:
             mock_client_init.return_value = None
             mock_credentials_instance = mock.Mock()
             mock_credentials.return_value = mock_credentials_instance
-            (google.ads.google_ads.client.GoogleAdsClient
-             .load_from_storage(path=file_path))
+            Client.GoogleAdsClient.load_from_storage(path=file_path)
             mock_client_init.assert_called_once_with(
                 credentials=mock_credentials_instance,
                 developer_token=self.developer_token,
@@ -270,7 +278,7 @@ class GoogleAdsClientTest(FileTestCase):
 
         self.assertRaises(
             IOError,
-            google.ads.google_ads.client.GoogleAdsClient.load_from_storage,
+            Client.GoogleAdsClient.load_from_storage,
             path=wrong_file_path)
 
     def test_load_from_storage_required_config_missing(self):
@@ -285,7 +293,7 @@ class GoogleAdsClientTest(FileTestCase):
 
         self.assertRaises(
             ValueError,
-            google.ads.google_ads.client.GoogleAdsClient.load_from_storage,
+            Client.GoogleAdsClient.load_from_storage,
             path=file_path)
 
     def test_get_service(self):
@@ -310,7 +318,7 @@ class GoogleAdsClientTest(FileTestCase):
         grpc_transport_module_name = '%s_grpc_transport' % service_module_base
         transport_create_channel_path = (
             'google.ads.google_ads.%s.services.transports.%s.%s.create_channel'
-            % (google.ads.google_ads.client._DEFAULT_VERSION,
+            % (Client._DEFAULT_VERSION,
                grpc_transport_module_name,
                grpc_transport_class_name))
         endpoint = 'alt.endpoint.com'
@@ -351,17 +359,17 @@ class GoogleAdsClientTest(FileTestCase):
 
             # Iterate through retrieval of all types by name.
             for name in type_names:
-                google.ads.google_ads.client.GoogleAdsClient.get_type(
+                Client.GoogleAdsClient.get_type(
                     name, version=ver)
 
     def test_get_type_not_found(self):
         self.assertRaises(
-            ValueError, google.ads.google_ads.client.GoogleAdsClient.get_type,
+            ValueError, Client.GoogleAdsClient.get_type,
             'BadType')
 
     def test_get_type_invalid_version(self):
         self.assertRaises(
-            ValueError, google.ads.google_ads.client.GoogleAdsClient.get_type,
+            ValueError, Client.GoogleAdsClient.get_type,
             'GoogleAdsFailure', version='bad_version')
 
 
@@ -372,7 +380,7 @@ class MetadataInterceptorTest(TestCase):
         self.mock_login_customer_id = '0987654321'
 
     def test_init(self):
-        interceptor = google.ads.google_ads.client.MetadataInterceptor(
+        interceptor = Client.MetadataInterceptor(
             self.mock_developer_token,
             self.mock_login_customer_id)
 
@@ -386,7 +394,7 @@ class MetadataInterceptorTest(TestCase):
         )
 
     def test_init_no_login_customer_id(self):
-        interceptor = google.ads.google_ads.client.MetadataInterceptor(
+        interceptor = Client.MetadataInterceptor(
             self.mock_developer_token,
             None)
 
@@ -400,7 +408,7 @@ class MetadataInterceptorTest(TestCase):
         )
 
     def test_update_client_call_details_metadata(self):
-        interceptor = google.ads.google_ads.client.MetadataInterceptor(
+        interceptor = Client.MetadataInterceptor(
             self.mock_developer_token,
             self.mock_login_customer_id)
 
@@ -413,7 +421,7 @@ class MetadataInterceptorTest(TestCase):
         self.assertEqual(client_call_details.metadata, mock_metadata)
 
     def test_intercept_unary_unary(self):
-        interceptor = google.ads.google_ads.client.MetadataInterceptor(
+        interceptor = Client.MetadataInterceptor(
             self.mock_developer_token,
             self.mock_login_customer_id)
 
@@ -453,9 +461,14 @@ class LoggingInterceptorTest(TestCase):
     _MOCK_REQUEST_ID = '654321xyz'
     _MOCK_METHOD = 'test/method'
     _MOCK_TRAILING_METADATA = (('request-id', _MOCK_REQUEST_ID),)
+    _MOCK_TRANSPORT_ERROR_METADATA = tuple()
     _MOCK_ERROR_MESSAGE = 'Test error message'
     _MOCK_TRANSPORT_ERROR_MESSAGE = u'Received RST_STREAM with error code 2'
     _MOCK_DEBUG_ERROR_STRING = u'{"description":"Error received from peer"}'
+    _MOCK_RESPONSE_MSG = 'test response msg'
+    _MOCK_EXCEPTION = mock.Mock()
+    _MOCK_ERROR = mock.Mock()
+    _MOCK_FAILURE = mock.Mock()
 
     def _create_test_interceptor(self, config=_MOCK_CONFIG,
                                  endpoint=_MOCK_ENDPOINT):
@@ -471,7 +484,7 @@ class LoggingInterceptorTest(TestCase):
             config: A dict configuration
             endpoint: A str representing an endpoint
         """
-        return google.ads.google_ads.client.LoggingInterceptor(config, endpoint)
+        return Client.LoggingInterceptor(config, endpoint)
 
     def _get_mock_client_call_details(self):
         """Generates a mock client_call_details object for use in tests.
@@ -515,13 +528,13 @@ class LoggingInterceptorTest(TestCase):
             "error" attribute is an object with a "trailing_metadata" method
             that returns a tuble of mock metadata.
         """
-        exception = mock.Mock()
-        error = mock.Mock()
+        exception = self._MOCK_EXCEPTION
+        error = self._MOCK_ERROR
         error.message = self._MOCK_ERROR_MESSAGE
         exception.request_id = self._MOCK_REQUEST_ID
-        exception.failure = mock.Mock()
+        exception.failure = self._MOCK_FAILURE
         exception.failure.errors = [error]
-        exception.error = mock.Mock()
+        exception.error = self._MOCK_ERROR
         exception.error.trailing_metadata = self._get_trailing_metadata_fn()
         return exception
 
@@ -533,7 +546,7 @@ class LoggingInterceptorTest(TestCase):
 
         Returns:
             A Mock instance with mock "debug_error_string," "details," and
-            trailing_metadata" methods.
+            "trailing_metadata" methods.
         """
         def _mock_debug_error_string():
             return self._MOCK_DEBUG_ERROR_STRING
@@ -542,7 +555,7 @@ class LoggingInterceptorTest(TestCase):
             return self._MOCK_TRANSPORT_ERROR_MESSAGE
 
         def _mock_trailing_metadata():
-            return self._MOCK_TRAILING_METADATA
+            return self._MOCK_TRANSPORT_ERROR_METADATA
 
         exception = mock.Mock()
         exception.debug_error_string = _mock_debug_error_string
@@ -553,6 +566,7 @@ class LoggingInterceptorTest(TestCase):
         # default values in certain helper methods.
         del exception.error
         del exception.failure
+        del exception.request_id
         return exception
 
     def _get_mock_response(self, failed=False):
@@ -567,16 +581,20 @@ class LoggingInterceptorTest(TestCase):
 
         Args:
             failed: a bool indicating whether the mock response should be in a
-            failed state or not. Default is False.
+                failed state or not. Default is False.
         """
         def mock_exception_fn():
             if failed:
                 return self._get_mock_exception()
             return None
 
+        def mock_result_fn():
+            return self._MOCK_RESPONSE_MSG
+
         mock_response = mock.Mock()
         mock_response.exception = mock_exception_fn
         mock_response.trailing_metadata = self._get_trailing_metadata_fn()
+        mock_response.result = mock_result_fn
         return mock_response
 
     def _get_mock_continuation_fn(self, fail=False):
@@ -602,7 +620,7 @@ class LoggingInterceptorTest(TestCase):
         """Unconfigured LoggingInterceptor should not call logging.dictConfig.
         """
         with mock.patch('logging.config.dictConfig') as mock_dictConfig:
-            interceptor = google.ads.google_ads.client.LoggingInterceptor()
+            Client.LoggingInterceptor()
             mock_dictConfig.assert_not_called()
 
     def test_init_with_config(self):
@@ -610,8 +628,7 @@ class LoggingInterceptorTest(TestCase):
         """
         config = {'test': True}
         with mock.patch('logging.config.dictConfig') as mock_dictConfig:
-            interceptor = google.ads.google_ads.client.LoggingInterceptor(
-                config)
+            Client.LoggingInterceptor(config)
             mock_dictConfig.assert_called_once_with(config)
 
     def test_intercept_unary_unary_unconfigured(self):
@@ -623,22 +640,19 @@ class LoggingInterceptorTest(TestCase):
         mock_client_call_details = self._get_mock_client_call_details()
         mock_continuation_fn = self._get_mock_continuation_fn()
         mock_request = self._get_mock_request()
+        # Since logging configuration is global it needs to be reset here
+        # so that state from previous tests does not affect these assertions
+        logging.disable(logging.CRITICAL)
+        logger_spy = mock.Mock(wraps=Client._logger)
+        interceptor = Client.LoggingInterceptor()
+        interceptor.intercept_unary_unary(
+            mock_continuation_fn,
+            mock_client_call_details,
+            mock_request)
 
-        with mock.patch(
-                'google.ads.google_ads.client.MessageToJson') as mock_formatter:
-            # Since logging configuration is global it needs to be reset here
-            # so that state from previous tests does not affect these assertions
-            logging.disable(logging.CRITICAL)
-            logger_spy = mock.Mock(wraps=google.ads.google_ads.client._logger)
-            interceptor = google.ads.google_ads.client.LoggingInterceptor()
-            interceptor.intercept_unary_unary(
-                mock_continuation_fn,
-                mock_client_call_details,
-                mock_request)
-
-            logger_spy.debug.assert_not_called()
-            logger_spy.info.assert_not_called()
-            logger_spy.warning.assert_not_called()
+        logger_spy.debug.assert_not_called()
+        logger_spy.info.assert_not_called()
+        logger_spy.warning.assert_not_called()
 
     def test_intercept_unary_unary_successful_request(self):
         """_logger.info and _logger.debug should be called.
@@ -649,16 +663,12 @@ class LoggingInterceptorTest(TestCase):
         mock_client_call_details = self._get_mock_client_call_details()
         mock_continuation_fn = self._get_mock_continuation_fn()
         mock_request = self._get_mock_request()
-        mock_json_message = '{"test": "request-response"}'
         mock_response = mock_continuation_fn(
             mock_client_call_details, mock_request)
         mock_trailing_metadata = mock_response.trailing_metadata()
 
         with mock.patch('logging.config.dictConfig'), \
-            mock.patch('google.ads.google_ads.client._logger') as mock_logger, \
-            mock.patch(
-                'google.ads.google_ads.client.MessageToJson') as mock_formatter:
-            mock_formatter.return_value = mock_json_message
+            mock.patch('google.ads.google_ads.client._logger') as mock_logger:
             interceptor = self._create_test_interceptor()
             interceptor.intercept_unary_unary(
                 mock_continuation_fn,
@@ -666,22 +676,20 @@ class LoggingInterceptorTest(TestCase):
                 mock_request)
 
             mock_logger.info.assert_called_once_with(
-                interceptor._SUMMARY_LOG_LINE
-                % (self._MOCK_CUSTOMER_ID, self._MOCK_ENDPOINT,
+                interceptor._SUMMARY_LOG_LINE.format(
+                    self._MOCK_CUSTOMER_ID, self._MOCK_ENDPOINT,
                     mock_client_call_details.method, self._MOCK_REQUEST_ID,
                     False, None))
 
-            initial_metadata = (google.ads.google_ads.client.
-                                _parse_metadata_to_json(
-                                    mock_client_call_details.metadata))
-            trailing_metadata = (google.ads.google_ads.client.
-                                 _parse_metadata_to_json(
-                                     mock_trailing_metadata))
+            initial_metadata = Client._parse_metadata_to_json(
+                mock_client_call_details.metadata)
+            trailing_metadata = Client._parse_metadata_to_json(
+                mock_trailing_metadata)
 
             mock_logger.debug.assert_called_once_with(
-                interceptor._FULL_REQUEST_LOG_LINE
-                % (self._MOCK_METHOD, self._MOCK_ENDPOINT, initial_metadata,
-                    mock_json_message, trailing_metadata, mock_json_message))
+                interceptor._FULL_REQUEST_LOG_LINE.format(
+                    self._MOCK_METHOD, self._MOCK_ENDPOINT, initial_metadata,
+                    mock_request, trailing_metadata, mock_response.result()))
 
     def test_intercept_unary_unary_failed_request(self):
         """_logger.warning and _logger.info should be called.
@@ -692,39 +700,33 @@ class LoggingInterceptorTest(TestCase):
         mock_client_call_details = self._get_mock_client_call_details()
         mock_continuation_fn = self._get_mock_continuation_fn(fail=True)
         mock_request = self._get_mock_request()
-        mock_json_message = '{"test": "request-response"}'
-        mock_response = mock_continuation_fn(
-            mock_client_call_details, mock_request)
-        mock_trailing_metadata = mock_response.trailing_metadata()
 
         with mock.patch('logging.config.dictConfig'), \
-            mock.patch('google.ads.google_ads.client._logger') as mock_logger, \
-            mock.patch(
-                'google.ads.google_ads.client.MessageToJson') as mock_formatter:
-            mock_formatter.return_value = mock_json_message
+            mock.patch('google.ads.google_ads.client._logger') as mock_logger:
             interceptor = self._create_test_interceptor()
-            interceptor.intercept_unary_unary(
+            mock_response = interceptor.intercept_unary_unary(
                 mock_continuation_fn,
                 mock_client_call_details,
                 mock_request)
 
+            mock_trailing_metadata = mock_response.trailing_metadata()
+
             mock_logger.warning.assert_called_once_with(
-                interceptor._SUMMARY_LOG_LINE
-                % (self._MOCK_CUSTOMER_ID, self._MOCK_ENDPOINT,
+                interceptor._SUMMARY_LOG_LINE.format(
+                    self._MOCK_CUSTOMER_ID, self._MOCK_ENDPOINT,
                     mock_client_call_details.method, self._MOCK_REQUEST_ID,
                     True, self._MOCK_ERROR_MESSAGE))
 
-            initial_metadata = (google.ads.google_ads.client.
-                                _parse_metadata_to_json(
-                                    mock_client_call_details.metadata))
-            trailing_metadata = (google.ads.google_ads.client.
-                                 _parse_metadata_to_json(
-                                     mock_trailing_metadata))
+            initial_metadata = Client._parse_metadata_to_json(
+                mock_client_call_details.metadata)
+            trailing_metadata = Client._parse_metadata_to_json(
+                mock_trailing_metadata)
 
             mock_logger.info.assert_called_once_with(
-                interceptor._FULL_FAULT_LOG_LINE
-                % (self._MOCK_METHOD, self._MOCK_ENDPOINT, initial_metadata,
-                    mock_json_message, trailing_metadata, mock_json_message))
+                interceptor._FULL_FAULT_LOG_LINE.format(
+                    self._MOCK_METHOD, self._MOCK_ENDPOINT, initial_metadata,
+                    mock_request, trailing_metadata,
+                    mock_response.exception().failure))
 
     def test_get_initial_metadata(self):
         """_Returns a tuple of metadata from client_call_details."""
@@ -741,7 +743,7 @@ class LoggingInterceptorTest(TestCase):
             mock_client_call_details = {}
             interceptor = self._create_test_interceptor()
             result = interceptor._get_initial_metadata(mock_client_call_details)
-            self.assertEqual(result, tuple())
+            self.assertEqual(result, self._MOCK_TRANSPORT_ERROR_METADATA)
 
     def test_get_call_method(self):
         """Returns a str of the call method from client_call_details"""
@@ -760,121 +762,73 @@ class LoggingInterceptorTest(TestCase):
             result = interceptor._get_call_method(mock_client_call_details)
             self.assertEqual(result, None)
 
-    def test_get_request_id(self):
-        """Returns a request ID str from a response object."""
-        with mock.patch('logging.config.dictConfig'):
-            mock_response = self._get_mock_response()
-            mock_exception = None
-            interceptor = self._create_test_interceptor()
-            result = interceptor._get_request_id(mock_response, mock_exception)
-            self.assertEqual(result, self._MOCK_REQUEST_ID)
-
-    def test_get_request_id_google_ads_failure(self):
-        """Returns a request ID str from a GoogleAdsException instance."""
-        with mock.patch('logging.config.dictConfig'):
-            mock_response = self._get_mock_response(failed=True)
-            mock_exception = mock_response.exception()
-            interceptor = self._create_test_interceptor()
-            result = interceptor._get_request_id(mock_response, mock_exception)
-            self.assertEqual(result, self._MOCK_REQUEST_ID)
-
-    def test_get_request_id_transport_failure(self):
-        """Returns None if there is no request_id on the exception."""
-        with mock.patch('logging.config.dictConfig'):
-            mock_response = self._get_mock_response(failed=True)
-            mock_exception = mock_response.exception()
-            # exceptions on transport errors have no request_id because they
-            # don't interact with a server that can provide one.
-            del mock_exception.request_id
-            interceptor = self._create_test_interceptor()
-            result = interceptor._get_request_id(mock_response, mock_exception)
-            self.assertEqual(result, None)
-
-    def test_parse_response_to_json(self):
-        """Calls MessageToJson with a successful response message."""
+    def test_parse_exception_to_str_transport_failure(self):
+        """ Calls _format_json_object with error obj's debug_error_string."""
         with mock.patch('logging.config.dictConfig'), \
             mock.patch(
-                'google.ads.google_ads.client.MessageToJson') as mock_formatter:
-            mock_response = self._get_mock_response()
-            mock_exception = mock_response.exception()
-            interceptor = self._create_test_interceptor()
-            interceptor._parse_response_to_json(mock_response, mock_exception)
-            mock_formatter.assert_called_once_with(mock_response.result())
-
-    def test_parse_response_to_json_google_ads_failure(self):
-        """Calls MessageToJson with a GoogleAdsException."""
-        with mock.patch('logging.config.dictConfig'), \
-            mock.patch(
-                'google.ads.google_ads.client.MessageToJson') as mock_formatter:
-            mock_response = mock.Mock()
-            mock_exception = self._get_mock_exception()
-            interceptor = self._create_test_interceptor()
-            interceptor._parse_response_to_json(mock_response, mock_exception)
-            mock_formatter.assert_called_once_with(mock_exception.failure)
-
-    def test_parse_response_to_json_transport_failure(self):
-        """ Calls _parse_to_json with transport error's debug_error_string."""
-        with mock.patch('logging.config.dictConfig'), \
-            mock.patch(
-                'google.ads.google_ads.client._parse_to_json') as mock_parser:
-            mock_response = mock.Mock()
+                'google.ads.google_ads.client._format_json_object'
+                ) as mock_parser:
             mock_exception = self._get_mock_transport_exception()
             interceptor = self._create_test_interceptor()
-            interceptor._parse_response_to_json(mock_response, mock_exception)
+            interceptor._parse_exception_to_str(mock_exception)
             mock_parser.assert_called_once_with(
                 json.loads(self._MOCK_DEBUG_ERROR_STRING))
 
-    def test_parse_response_to_json_unknown_failure(self):
+    def test_parse_exception_to_str_unknown_failure(self):
         """Returns an empty JSON string if nothing can be parsed to JSON."""
         with mock.patch('logging.config.dictConfig'):
-            mock_response = mock.Mock()
             mock_exception = mock.Mock()
             del mock_exception.failure
             del mock_exception.debug_error_string
             interceptor = self._create_test_interceptor()
-            result = interceptor._parse_response_to_json(
-                mock_response, mock_exception)
+            result = interceptor._parse_exception_to_str(mock_exception)
             self.assertEqual(result, '{}')
 
     def test_get_trailing_metadata(self):
         """Retrieves metadata from a response object."""
         with mock.patch('logging.config.dictConfig'):
             mock_response = self._get_mock_response()
-            mock_exception = mock_response.exception()
             interceptor = self._create_test_interceptor()
-            result = interceptor._get_trailing_metadata(
-                mock_response, mock_exception)
+            result = interceptor._get_trailing_metadata(mock_response)
             self.assertEqual(result, self._MOCK_TRAILING_METADATA)
 
     def test_get_trailing_metadata_google_ads_failure(self):
         """Retrieves metadata from a failed response."""
         with mock.patch('logging.config.dictConfig'):
             mock_response = self._get_mock_response(failed=True)
-            mock_exception = mock_response.exception()
+            del mock_response.trailing_metadata
             interceptor = self._create_test_interceptor()
-            result = interceptor._get_trailing_metadata(
-                mock_response, mock_exception)
+            result = interceptor._get_trailing_metadata(mock_response)
             self.assertEqual(result, self._MOCK_TRAILING_METADATA)
 
     def test_get_trailing_metadata_transport_failure(self):
         """Retrieves metadata from a transport error."""
         with mock.patch('logging.config.dictConfig'):
+            def mock_transport_exception():
+                return self._get_mock_transport_exception()
+
             mock_response = mock.Mock()
-            mock_exception = self._get_mock_transport_exception()
+            del mock_response.trailing_metadata
+            mock_response.exception = mock_transport_exception
             interceptor = self._create_test_interceptor()
-            result = interceptor._get_trailing_metadata(
-                mock_response, mock_exception)
-            self.assertEqual(result, self._MOCK_TRAILING_METADATA)
+            result = interceptor._get_trailing_metadata(mock_response)
+            self.assertEqual(result, tuple())
 
     def test_get_trailing_metadata_unknown_failure(self):
         """Returns an empty tuple if metadata cannot be found."""
         with mock.patch('logging.config.dictConfig'):
-            mock_response = {}
-            mock_exception = self._get_mock_transport_exception()
-            del mock_exception.trailing_metadata
+            def mock_unknown_exception():
+                # using a mock transport exception but deleting the
+                # trailing_metadata attribute to simulate an unknown error type
+                exception = self._get_mock_transport_exception()
+                del exception.trailing_metadata
+                return exception
+
+            mock_response = mock.Mock()
+            del mock_response.trailing_metadata
+            mock_response.exception = mock_unknown_exception
             interceptor = self._create_test_interceptor()
-            result = interceptor._get_trailing_metadata(
-                mock_response, mock_exception)
+            result = interceptor._get_trailing_metadata(mock_response)
             self.assertEqual(result, tuple())
 
     def test_get_fault_message(self):
@@ -913,7 +867,7 @@ class ExceptionInterceptorTest(TestCase):
         Returns:
             An ExceptionInterceptor instance.
         """
-        return google.ads.google_ads.client.ExceptionInterceptor()
+        return Client.ExceptionInterceptor()
 
     def test_init_(self):
         """Tests that the interceptor initializes properly"""
@@ -921,20 +875,6 @@ class ExceptionInterceptorTest(TestCase):
         self.assertEqual(interceptor._RETRY_STATUS_CODES,
                          (grpc.StatusCode.INTERNAL,
                           grpc.StatusCode.RESOURCE_EXHAUSTED))
-
-    def test_get_request_id(self):
-        """_get_request_id obtains a request ID from a metadata tuple"""
-        mock_metadata = (('request-id', '123456'),)
-        interceptor = self._create_test_interceptor()
-        result = interceptor._get_request_id(mock_metadata)
-        self.assertEqual(result, '123456')
-
-    def test_get_request_id_no_id(self):
-        """Returns None if the given metadata does not contain a request ID."""
-        mock_metadata = (('another-key', 'another-val'),)
-        interceptor = self._create_test_interceptor()
-        result = interceptor._get_request_id(mock_metadata)
-        self.assertEqual(result, None)
 
     def test_get_google_ads_failure(self):
         """Obtains the content of a google ads failure from metadata."""

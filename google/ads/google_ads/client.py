@@ -18,15 +18,14 @@ import logging.config
 import os
 import yaml
 import json
+import grpc
 from collections import namedtuple
 from importlib import import_module
 
-import google.api_core.grpc_helpers
-import google.auth.transport.requests
-import google.oauth2.credentials
-import google.ads.google_ads.errors
-from google.protobuf.json_format import MessageToJson
-import grpc
+from google.auth.transport.requests import Request
+from google.oauth2.credentials import Credentials
+from google.ads.google_ads.errors import GoogleAdsException
+from google.protobuf.message import DecodeError
 
 _logger = logging.getLogger(__name__)
 
@@ -38,6 +37,7 @@ _PROTO_TEMPLATE = '%s_pb2'
 _DEFAULT_TOKEN_URI = 'https://accounts.google.com/o/oauth2/token'
 _VALID_API_VERSIONS = ['v1']
 _DEFAULT_VERSION = _VALID_API_VERSIONS[0]
+_REQUEST_ID_KEY = 'request-id'
 
 class GoogleAdsClient(object):
     """Google Ads client used to configure settings and fetch services."""
@@ -59,13 +59,13 @@ class GoogleAdsClient(object):
         config_data = yaml.safe_load(yaml_str) or {}
 
         if all(required_key in config_data for required_key in _REQUIRED_KEYS):
-            credentials = google.oauth2.credentials.Credentials(
+            credentials = Credentials(
                 None,
                 refresh_token=config_data['refresh_token'],
                 client_id=config_data['client_id'],
                 client_secret=config_data['client_secret'],
                 token_uri=_DEFAULT_TOKEN_URI)
-            credentials.refresh(google.auth.transport.requests.Request())
+            credentials.refresh(Request())
 
             login_customer_id = config_data.get('login_customer_id')
             login_customer_id = str(
@@ -224,7 +224,6 @@ class GoogleAdsClient(object):
 class ExceptionInterceptor(grpc.UnaryUnaryClientInterceptor):
     """An interceptor that wraps rpc exceptions."""
 
-    _REQUEST_ID_KEY = 'request-id'
     # Codes that are retried upon by google.api_core.
     _RETRY_STATUS_CODES = (
         grpc.StatusCode.INTERNAL, grpc.StatusCode.RESOURCE_EXHAUSTED)
@@ -262,24 +261,8 @@ class ExceptionInterceptor(grpc.UnaryUnaryClientInterceptor):
                         ga_failure = error_protos.errors_pb2.GoogleAdsFailure()
                         ga_failure.ParseFromString(kv[1])
                         return ga_failure
-                    except google.protobuf.message.DecodeError:
+                    except DecodeError:
                         return None
-
-        return None
-
-    def _get_request_id(self, trailing_metadata):
-        """Gets the request ID for the Google Ads API request.
-
-        Args:
-            trailing_metadata: a tuple of metadatum from the service response.
-
-        Returns:
-            A str request ID associated with the Google Ads API request, or None
-            if it doesn't exist.
-        """
-        for kv in trailing_metadata:
-            if kv[0] == self._REQUEST_ID_KEY:
-                return kv[1]  # Return the found request ID.
 
         return None
 
@@ -315,10 +298,10 @@ class ExceptionInterceptor(grpc.UnaryUnaryClientInterceptor):
             google_ads_failure = self._get_google_ads_failure(trailing_metadata)
 
             if google_ads_failure:
-                request_id = self._get_request_id(trailing_metadata)
+                request_id = _get_request_id_from_metadata(trailing_metadata)
 
-                raise google.ads.google_ads.errors.GoogleAdsException(
-                    exception, response, google_ads_failure, request_id)
+                raise GoogleAdsException(exception, response,
+                                         google_ads_failure, request_id)
             else:
                 # Raise the original exception if not a GoogleAdsFailure.
                 raise exception
@@ -354,15 +337,15 @@ class ExceptionInterceptor(grpc.UnaryUnaryClientInterceptor):
 class LoggingInterceptor(grpc.UnaryUnaryClientInterceptor):
     """An interceptor that logs rpc requests and responses."""
 
-    _FULL_REQUEST_LOG_LINE = ('Request\n-------\nMethod: %s\nHost: %s\n'
-                              'Headers: %s\nRequest: %s\n\nResponse\n-------\n'
-                              'Headers: %s\nResponse: %s\n')
-    _FULL_FAULT_LOG_LINE = ('Request\n-------\nMethod: %s\nHost: %s\n'
-                            'Headers: %s\nRequest: %s\n\nResponse\n-------\n'
-                            'Headers: %s\nFault: %s\n')
-    _SUMMARY_LOG_LINE = ('Request made: ClientCustomerId: %s, Host: %s, '
-                         'Method: %s, RequestId: %s, IsFault: %s, '
-                         'FaultMessage: %s')
+    _FULL_REQUEST_LOG_LINE = ('Request\n-------\nMethod: {}\nHost: {}\n'
+                              'Headers: {}\nRequest: {}\n\nResponse\n-------\n'
+                              'Headers: {}\nResponse: {}\n')
+    _FULL_FAULT_LOG_LINE = ('Request\n-------\nMethod: {}\nHost: {}\n'
+                            'Headers: {}\nRequest: {}\n\nResponse\n-------\n'
+                            'Headers: {}\nFault: {}\n')
+    _SUMMARY_LOG_LINE = ('Request made: ClientCustomerId: {}, Host: {}, '
+                         'Method: {}, RequestId: {}, IsFault: {}, '
+                         'FaultMessage: {}')
 
     def __init__(self, logging_config=None, endpoint=None):
         """Initializer for the LoggingInterceptor.
@@ -375,27 +358,8 @@ class LoggingInterceptor(grpc.UnaryUnaryClientInterceptor):
         if logging_config:
             logging.config.dictConfig(logging_config)
 
-    def _get_request_id(self, response, exception):
-        """Retrieves the request id from a response object.
-
-        Returns:
-            A str of the request_id, or None if there's an exception but the
-            request_id isn't present.
-
-        Args:
-            response: A grpc.Call/grpc.Future instance.
-            exception: A grpc.Call instance.
-        """
-        if exception:
-            return getattr(exception, 'request_id', None)
-        else:
-            trailing_metadata = response.trailing_metadata()
-            for datum in trailing_metadata:
-                if 'request-id' in datum:
-                    return datum[1]
-
-    def _get_trailing_metadata(self, response, exception):
-        """Retrieves trailing metadata from a response or exception object.
+    def _get_trailing_metadata(self, response):
+        """Retrieves trailing metadata from a response object.
 
         If the exception is a GoogleAdsException the trailing metadata will be
         on its error object, otherwise it will be on the response object.
@@ -405,12 +369,18 @@ class LoggingInterceptor(grpc.UnaryUnaryClientInterceptor):
 
         Args:
             response: A grpc.Call/grpc.Future instance.
-            exception: A grpc.Call instance.
         """
-        if exception:
-            return _get_trailing_metadata_from_interceptor_exception(exception)
-        else:
-            return response.trailing_metadata()
+        try:
+            trailing_metadata = response.trailing_metadata()
+
+            if not trailing_metadata:
+                return _get_trailing_metadata_from_interceptor_exception(
+                    response.exception())
+
+            return trailing_metadata
+        except AttributeError:
+            return _get_trailing_metadata_from_interceptor_exception(
+                response.exception())
 
     def _get_initial_metadata(self, client_call_details):
         """Retrieves the initial metadata from client_call_details.
@@ -454,35 +424,31 @@ class LoggingInterceptor(grpc.UnaryUnaryClientInterceptor):
         """
         return getattr(request, 'customer_id', None)
 
-    def _parse_response_to_json(self, response, exception):
-        """Parses response object to JSON.
+    def _parse_exception_to_str(self, exception):
+        """Parses response exception object to str for logging.
 
         Returns:
-            A str of JSON representing a response or exception from the
-            service.
+            A str representing a exception from the API.
 
         Args:
-            response: A grpc.Call/grpc.Future instance.
             exception: A grpc.Call instance.
         """
-        if exception:
-            # try to retrieve the .failure property of a GoogleAdsFailure.
-            failure = getattr(exception, 'failure', None)
-
-            if failure:
-                return _parse_message_to_json(failure)
-            else:
+        try:
+            # If the exception is from the Google Ads API then the failure
+            # attribute will be an instance of GoogleAdsFailure and can be
+            # concatenated into a log string.
+            return exception.failure
+        except AttributeError:
+            try:
                 # if exception.failure isn't present then it's likely this is a
-                # transport error with a .debug_error_string method.
-                try:
-                    debug_string = exception.debug_error_string()
-                    return _parse_to_json(json.loads(debug_string))
-                except (AttributeError, ValueError):
-                    # if both attempts to retrieve serializable error data fail
-                    # then simply return an empty JSON string
-                    return '{}'
-        else:
-            return _parse_message_to_json(response.result())
+                # transport error with a .debug_error_string method and the
+                # returned JSON string will need to be formatted.
+                return _format_json_object(json.loads(
+                    exception.debug_error_string()))
+            except (AttributeError, ValueError):
+                # if both attempts to retrieve serializable error data fail
+                # then simply return an empty JSON string
+                return '{}'
 
     def _get_fault_message(self, exception):
         """Retrieves a fault/error message from an exception object.
@@ -505,8 +471,8 @@ class LoggingInterceptor(grpc.UnaryUnaryClientInterceptor):
                 return None
 
     def _log_successful_request(self, method, customer_id, metadata_json,
-                                request_id, request_json,
-                                trailing_metadata_json, response_json):
+                                request_id, request, trailing_metadata_json,
+                                response):
         """Handles logging of a successful request.
 
         Args:
@@ -514,21 +480,20 @@ class LoggingInterceptor(grpc.UnaryUnaryClientInterceptor):
             customer_id: The customer ID associated with the request.
             metadata_json: A JSON str of initial_metadata.
             request_id: A unique ID for the request provided in the response.
-            request_json: A JSON str of the request message.
+            request: An instance of a request proto message.
             trailing_metadata_json: A JSON str of trailing_metadata.
-            response_json: A JSON str of the the response message.
+            response: A grpc.Call/grpc.Future instance.
         """
-        _logger.debug(self._FULL_REQUEST_LOG_LINE % (method, self.endpoint,
-                      metadata_json, request_json, trailing_metadata_json,
-                      response_json))
+        _logger.debug(self._FULL_REQUEST_LOG_LINE.format(method, self.endpoint,
+                      metadata_json, request, trailing_metadata_json,
+                      response.result()))
 
-        _logger.info(self._SUMMARY_LOG_LINE % (customer_id, self.endpoint,
+        _logger.info(self._SUMMARY_LOG_LINE.format(customer_id, self.endpoint,
                      method, request_id, False, None))
 
     def _log_failed_request(self, method, customer_id, metadata_json,
-                            request_id, request_json,
-                            trailing_metadata_json, response_json,
-                            fault_message):
+                            request_id, request, trailing_metadata_json,
+                            response):
         """Handles logging of a failed request.
 
         Args:
@@ -536,48 +501,45 @@ class LoggingInterceptor(grpc.UnaryUnaryClientInterceptor):
             customer_id: The customer ID associated with the request.
             metadata_json: A JSON str of initial_metadata.
             request_id: A unique ID for the request provided in the response.
-            request_json: A JSON str of the request message.
+            request: An instance of a request proto message.
             trailing_metadata_json: A JSON str of trailing_metadata.
-            response_json: A JSON str of the the response message.
-            fault_message: A str error message from a failed request.
+            response: A JSON str of the the response message.
         """
-        _logger.info(self._FULL_FAULT_LOG_LINE % (method, self.endpoint,
-                     metadata_json, request_json, trailing_metadata_json,
-                     response_json))
+        exception_str = self._parse_exception_to_str(response.exception())
+        fault_message = self._get_fault_message(response.exception())
 
-        _logger.warning(self._SUMMARY_LOG_LINE % (customer_id, self.endpoint,
+        _logger.info(self._FULL_FAULT_LOG_LINE.format(method, self.endpoint,
+                     metadata_json, request, trailing_metadata_json,
+                     exception_str))
+
+        _logger.warning(self._SUMMARY_LOG_LINE.format(customer_id, self.endpoint,
                         method, request_id, True, fault_message))
 
-    def _log_request(self, client_call_details, request, response, exception):
+    def _log_request(self, client_call_details, request, response):
         """Handles logging all requests.
 
         Args:
             client_call_details: An instance of grpc.ClientCallDetails.
             request: An instance of a request proto message.
             response: A grpc.Call/grpc.Future instance.
-            exception: A grpc.Call instance.
         """
         method = self._get_call_method(client_call_details)
         customer_id = self._get_customer_id(request)
         initial_metadata = self._get_initial_metadata(client_call_details)
         initial_metadata_json = _parse_metadata_to_json(initial_metadata)
-        request_json = _parse_message_to_json(request)
-        request_id = self._get_request_id(response, exception)
-        response_json = self._parse_response_to_json(response, exception)
-        trailing_metadata = self._get_trailing_metadata(response, exception)
+        trailing_metadata = self._get_trailing_metadata(response)
+        request_id = _get_request_id_from_metadata(trailing_metadata)
         trailing_metadata_json = _parse_metadata_to_json(trailing_metadata)
 
-        if exception:
-            fault_message = self._get_fault_message(exception)
+        if response.exception():
             self._log_failed_request(method, customer_id, initial_metadata_json,
-                                     request_id, request_json,
-                                     trailing_metadata_json, response_json,
-                                     fault_message)
+                                     request_id, request,
+                                     trailing_metadata_json, response)
         else:
             self._log_successful_request(method, customer_id,
                                          initial_metadata_json, request_id,
-                                         request_json, trailing_metadata_json,
-                                         response_json)
+                                         request, trailing_metadata_json,
+                                         response)
 
     def intercept_unary_unary(self, continuation, client_call_details, request):
         """Intercepts and logs API interactions.
@@ -588,11 +550,9 @@ class LoggingInterceptor(grpc.UnaryUnaryClientInterceptor):
             A grpc.Call/grpc.Future instance representing a service response.
         """
         response = continuation(client_call_details, request)
-        if _logger.isEnabledFor(logging.WARNING):
-            exception = response.exception()
 
-            self._log_request(client_call_details, request, response,
-                              exception)
+        if _logger.isEnabledFor(logging.WARNING):
+            self._log_request(client_call_details, request, response)
 
         return response
 
@@ -658,9 +618,13 @@ def _get_trailing_metadata_from_interceptor_exception(exception):
         A tuple of trailing metadata key value pairs.
     """
     try:
+        # GoogleAdsFailure exceptions will contain trailing metadata on the
+        # error attribute.
         return exception.error.trailing_metadata()
     except AttributeError:
         try:
+            # Transport failures, i.e. issues at the gRPC layer, will contain
+            # trailing metadata on the exception iself.
             return exception.trailing_metadata()
         except AttributeError:
             # if trailing metadata is not found in either location then
@@ -703,7 +667,7 @@ def _validate_login_customer_id(login_customer_id):
                              'as a string, i.e. "1234567890"')
 
 
-def _parse_to_json(obj):
+def _format_json_object(obj):
     """Parses a serializable object into a consistently formatted JSON string.
 
     Returns:
@@ -744,16 +708,21 @@ def _parse_metadata_to_json(metadata):
             value = datum[1]
             metadata_dict[key] = value
 
-    return _parse_to_json(metadata_dict)
+    return _format_json_object(metadata_dict)
 
 
-def _parse_message_to_json(message):
-    """Parses a gRPC request object to a JSON string.
+def _get_request_id_from_metadata(trailing_metadata):
+    """Gets the request ID for the Google Ads API request.
 
     Args:
-        request: an instance of a request proto message, for example
-            a SearchGoogleAdsRequest or a MutateAdGroupAdsRequest.
+        trailing_metadata: a tuple of metadatum from the service response.
+
+    Returns:
+        A str request ID associated with the Google Ads API request, or None
+        if it doesn't exist.
     """
-    json = MessageToJson(message)
-    json = json.replace(', \n', ',\n')
-    return json
+    for kv in trailing_metadata:
+        if kv[0] == _REQUEST_ID_KEY:
+            return kv[1]  # Return the found request ID.
+
+    return None

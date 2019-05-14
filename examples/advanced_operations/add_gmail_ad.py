@@ -94,7 +94,8 @@ def main(client, customer_id, ad_group_id):
             print('\tError with message "{}".'.format(error.message))
             if error.location:
                 for field_path_element in error.location.field_path_elements:
-                    print('\t\tOn field: {}' % field_path_element.field_name)
+                    print('\t\tOn field: {}'.format(
+                        field_path_element.field_name))
         sys.exit(1)
 
     print('Created gmail ad {}.'.format(

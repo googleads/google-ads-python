@@ -6,7 +6,9 @@ from google.ads.google_ads.v1.proto.services import customer_negative_criterion_
 
 
 class CustomerNegativeCriterionServiceStub(object):
-  """Service to manage customer negative criteria.
+  """Proto file describing the Customer Negative Criterion service.
+
+  Service to manage customer negative criteria.
   """
 
   def __init__(self, channel):
@@ -28,7 +30,9 @@ class CustomerNegativeCriterionServiceStub(object):
 
 
 class CustomerNegativeCriterionServiceServicer(object):
-  """Service to manage customer negative criteria.
+  """Proto file describing the Customer Negative Criterion service.
+
+  Service to manage customer negative criteria.
   """
 
   def GetCustomerNegativeCriterion(self, request, context):

@@ -6,7 +6,9 @@ from google.ads.google_ads.v1.proto.services import account_budget_service_pb2 a
 
 
 class AccountBudgetServiceStub(object):
-  """A service for fetching an account-level budget.
+  """Proto file describing the AccountBudget service.
+
+  A service for fetching an account-level budget.
 
   Account-level budgets are mutated by creating proposal resources.
   """
@@ -25,7 +27,9 @@ class AccountBudgetServiceStub(object):
 
 
 class AccountBudgetServiceServicer(object):
-  """A service for fetching an account-level budget.
+  """Proto file describing the AccountBudget service.
+
+  A service for fetching an account-level budget.
 
   Account-level budgets are mutated by creating proposal resources.
   """

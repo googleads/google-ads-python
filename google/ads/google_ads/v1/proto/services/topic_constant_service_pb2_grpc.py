@@ -6,7 +6,9 @@ from google.ads.google_ads.v1.proto.services import topic_constant_service_pb2 a
 
 
 class TopicConstantServiceStub(object):
-  """Service to fetch topic constants.
+  """Proto file describing the Topic constant service
+
+  Service to fetch topic constants.
   """
 
   def __init__(self, channel):
@@ -23,7 +25,9 @@ class TopicConstantServiceStub(object):
 
 
 class TopicConstantServiceServicer(object):
-  """Service to fetch topic constants.
+  """Proto file describing the Topic constant service
+
+  Service to fetch topic constants.
   """
 
   def GetTopicConstant(self, request, context):

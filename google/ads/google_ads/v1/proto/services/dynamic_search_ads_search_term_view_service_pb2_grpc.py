@@ -6,7 +6,9 @@ from google.ads.google_ads.v1.proto.services import dynamic_search_ads_search_te
 
 
 class DynamicSearchAdsSearchTermViewServiceStub(object):
-  """Service to fetch dynamic search ads views.
+  """Proto file describing the Dynamic Search Ads Search Term View service.
+
+  Service to fetch dynamic search ads views.
   """
 
   def __init__(self, channel):
@@ -23,7 +25,9 @@ class DynamicSearchAdsSearchTermViewServiceStub(object):
 
 
 class DynamicSearchAdsSearchTermViewServiceServicer(object):
-  """Service to fetch dynamic search ads views.
+  """Proto file describing the Dynamic Search Ads Search Term View service.
+
+  Service to fetch dynamic search ads views.
   """
 
   def GetDynamicSearchAdsSearchTermView(self, request, context):

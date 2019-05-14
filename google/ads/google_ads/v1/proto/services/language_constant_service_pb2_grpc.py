@@ -6,7 +6,9 @@ from google.ads.google_ads.v1.proto.services import language_constant_service_pb
 
 
 class LanguageConstantServiceStub(object):
-  """Service to fetch language constants.
+  """Proto file describing the language constant service.
+
+  Service to fetch language constants.
   """
 
   def __init__(self, channel):
@@ -23,7 +25,9 @@ class LanguageConstantServiceStub(object):
 
 
 class LanguageConstantServiceServicer(object):
-  """Service to fetch language constants.
+  """Proto file describing the language constant service.
+
+  Service to fetch language constants.
   """
 
   def GetLanguageConstant(self, request, context):

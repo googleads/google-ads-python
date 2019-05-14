@@ -15,6 +15,7 @@ _sym_db = _symbol_database.Default()
 from google.ads.google_ads.v1.proto.common import ad_asset_pb2 as google_dot_ads_dot_googleads__v1_dot_proto_dot_common_dot_ad__asset__pb2
 from google.ads.google_ads.v1.proto.enums import call_conversion_reporting_state_pb2 as google_dot_ads_dot_googleads__v1_dot_proto_dot_enums_dot_call__conversion__reporting__state__pb2
 from google.ads.google_ads.v1.proto.enums import display_ad_format_setting_pb2 as google_dot_ads_dot_googleads__v1_dot_proto_dot_enums_dot_display__ad__format__setting__pb2
+from google.ads.google_ads.v1.proto.enums import display_upload_product_type_pb2 as google_dot_ads_dot_googleads__v1_dot_proto_dot_enums_dot_display__upload__product__type__pb2
 from google.ads.google_ads.v1.proto.enums import legacy_app_install_ad_app_store_pb2 as google_dot_ads_dot_googleads__v1_dot_proto_dot_enums_dot_legacy__app__install__ad__app__store__pb2
 from google.ads.google_ads.v1.proto.enums import mime_type_pb2 as google_dot_ads_dot_googleads__v1_dot_proto_dot_enums_dot_mime__type__pb2
 from google.protobuf import wrappers_pb2 as google_dot_protobuf_dot_wrappers__pb2
@@ -26,9 +27,9 @@ DESCRIPTOR = _descriptor.FileDescriptor(
   package='google.ads.googleads.v1.common',
   syntax='proto3',
   serialized_options=_b('\n\"com.google.ads.googleads.v1.commonB\020AdTypeInfosProtoP\001ZDgoogle.golang.org/genproto/googleapis/ads/googleads/v1/common;common\242\002\003GAA\252\002\036Google.Ads.GoogleAds.V1.Common\312\002\036Google\\Ads\\GoogleAds\\V1\\Common\352\002\"Google::Ads::GoogleAds::V1::Common'),
-  serialized_pb=_b('\n8google/ads/googleads_v1/proto/common/ad_type_infos.proto\x12\x1egoogle.ads.googleads.v1.common\x1a\x33google/ads/googleads_v1/proto/common/ad_asset.proto\x1aIgoogle/ads/googleads_v1/proto/enums/call_conversion_reporting_state.proto\x1a\x43google/ads/googleads_v1/proto/enums/display_ad_format_setting.proto\x1aIgoogle/ads/googleads_v1/proto/enums/legacy_app_install_ad_app_store.proto\x1a\x33google/ads/googleads_v1/proto/enums/mime_type.proto\x1a\x1egoogle/protobuf/wrappers.proto\x1a\x1cgoogle/api/annotations.proto\"\xa4\x01\n\nTextAdInfo\x12.\n\x08headline\x18\x01 \x01(\x0b\x32\x1c.google.protobuf.StringValue\x12\x32\n\x0c\x64\x65scription1\x18\x02 \x01(\x0b\x32\x1c.google.protobuf.StringValue\x12\x32\n\x0c\x64\x65scription2\x18\x03 \x01(\x0b\x32\x1c.google.protobuf.StringValue\"\xf7\x02\n\x12\x45xpandedTextAdInfo\x12\x34\n\x0eheadline_part1\x18\x01 \x01(\x0b\x32\x1c.google.protobuf.StringValue\x12\x34\n\x0eheadline_part2\x18\x02 \x01(\x0b\x32\x1c.google.protobuf.StringValue\x12\x34\n\x0eheadline_part3\x18\x06 \x01(\x0b\x32\x1c.google.protobuf.StringValue\x12\x31\n\x0b\x64\x65scription\x18\x03 \x01(\x0b\x32\x1c.google.protobuf.StringValue\x12\x32\n\x0c\x64\x65scription2\x18\x07 \x01(\x0b\x32\x1c.google.protobuf.StringValue\x12+\n\x05path1\x18\x04 \x01(\x0b\x32\x1c.google.protobuf.StringValue\x12+\n\x05path2\x18\x05 \x01(\x0b\x32\x1c.google.protobuf.StringValue\"\xe7\x05\n\x0e\x43\x61llOnlyAdInfo\x12\x32\n\x0c\x63ountry_code\x18\x01 \x01(\x0b\x32\x1c.google.protobuf.StringValue\x12\x32\n\x0cphone_number\x18\x02 \x01(\x0b\x32\x1c.google.protobuf.StringValue\x12\x33\n\rbusiness_name\x18\x03 \x01(\x0b\x32\x1c.google.protobuf.StringValue\x12/\n\theadline1\x18\x0b \x01(\x0b\x32\x1c.google.protobuf.StringValue\x12/\n\theadline2\x18\x0c \x01(\x0b\x32\x1c.google.protobuf.StringValue\x12\x32\n\x0c\x64\x65scription1\x18\x04 \x01(\x0b\x32\x1c.google.protobuf.StringValue\x12\x32\n\x0c\x64\x65scription2\x18\x05 \x01(\x0b\x32\x1c.google.protobuf.StringValue\x12\x30\n\x0c\x63\x61ll_tracked\x18\x06 \x01(\x0b\x32\x1a.google.protobuf.BoolValue\x12;\n\x17\x64isable_call_conversion\x18\x07 \x01(\x0b\x32\x1a.google.protobuf.BoolValue\x12\x43\n\x1dphone_number_verification_url\x18\x08 \x01(\x0b\x32\x1c.google.protobuf.StringValue\x12\x37\n\x11\x63onversion_action\x18\t \x01(\x0b\x32\x1c.google.protobuf.StringValue\x12\x80\x01\n\x1a\x63onversion_reporting_state\x18\n \x01(\x0e\x32\\.google.ads.googleads.v1.enums.CallConversionReportingStateEnum.CallConversionReportingState\"P\n\x1b\x45xpandedDynamicSearchAdInfo\x12\x31\n\x0b\x64\x65scription\x18\x01 \x01(\x0b\x32\x1c.google.protobuf.StringValue\"\r\n\x0bHotelAdInfo\"\x15\n\x13ShoppingSmartAdInfo\"\x17\n\x15ShoppingProductAdInfo\"\xa9\x04\n\x0bGmailAdInfo\x12;\n\x06teaser\x18\x01 \x01(\x0b\x32+.google.ads.googleads.v1.common.GmailTeaser\x12\x32\n\x0cheader_image\x18\x02 \x01(\x0b\x32\x1c.google.protobuf.StringValue\x12\x35\n\x0fmarketing_image\x18\x03 \x01(\x0b\x32\x1c.google.protobuf.StringValue\x12>\n\x18marketing_image_headline\x18\x04 \x01(\x0b\x32\x1c.google.protobuf.StringValue\x12\x41\n\x1bmarketing_image_description\x18\x05 \x01(\x0b\x32\x1c.google.protobuf.StringValue\x12\x63\n&marketing_image_display_call_to_action\x18\x06 \x01(\x0b\x32\x33.google.ads.googleads.v1.common.DisplayCallToAction\x12\x44\n\x0eproduct_images\x18\x07 \x03(\x0b\x32,.google.ads.googleads.v1.common.ProductImage\x12\x44\n\x0eproduct_videos\x18\x08 \x03(\x0b\x32,.google.ads.googleads.v1.common.ProductVideo\"\xd7\x01\n\x0bGmailTeaser\x12.\n\x08headline\x18\x01 \x01(\x0b\x32\x1c.google.protobuf.StringValue\x12\x31\n\x0b\x64\x65scription\x18\x02 \x01(\x0b\x32\x1c.google.protobuf.StringValue\x12\x33\n\rbusiness_name\x18\x03 \x01(\x0b\x32\x1c.google.protobuf.StringValue\x12\x30\n\nlogo_image\x18\x04 \x01(\x0b\x32\x1c.google.protobuf.StringValue\"\xac\x01\n\x13\x44isplayCallToAction\x12*\n\x04text\x18\x01 \x01(\x0b\x32\x1c.google.protobuf.StringValue\x12\x30\n\ntext_color\x18\x02 \x01(\x0b\x32\x1c.google.protobuf.StringValue\x12\x37\n\x11url_collection_id\x18\x03 \x01(\x0b\x32\x1c.google.protobuf.StringValue\"\xcb\x01\n\x0cProductImage\x12\x33\n\rproduct_image\x18\x01 \x01(\x0b\x32\x1c.google.protobuf.StringValue\x12\x31\n\x0b\x64\x65scription\x18\x02 \x01(\x0b\x32\x1c.google.protobuf.StringValue\x12S\n\x16\x64isplay_call_to_action\x18\x03 \x01(\x0b\x32\x33.google.ads.googleads.v1.common.DisplayCallToAction\"C\n\x0cProductVideo\x12\x33\n\rproduct_video\x18\x01 \x01(\x0b\x32\x1c.google.protobuf.StringValue\"\xf1\x04\n\x0bImageAdInfo\x12\x30\n\x0bpixel_width\x18\x04 \x01(\x0b\x32\x1b.google.protobuf.Int64Value\x12\x31\n\x0cpixel_height\x18\x05 \x01(\x0b\x32\x1b.google.protobuf.Int64Value\x12/\n\timage_url\x18\x06 \x01(\x0b\x32\x1c.google.protobuf.StringValue\x12\x38\n\x13preview_pixel_width\x18\x07 \x01(\x0b\x32\x1b.google.protobuf.Int64Value\x12\x39\n\x14preview_pixel_height\x18\x08 \x01(\x0b\x32\x1b.google.protobuf.Int64Value\x12\x37\n\x11preview_image_url\x18\t \x01(\x0b\x32\x1c.google.protobuf.StringValue\x12G\n\tmime_type\x18\n \x01(\x0e\x32\x34.google.ads.googleads.v1.enums.MimeTypeEnum.MimeType\x12*\n\x04name\x18\x0b \x01(\x0b\x32\x1c.google.protobuf.StringValue\x12\x32\n\nmedia_file\x18\x01 \x01(\x0b\x32\x1c.google.protobuf.StringValueH\x00\x12+\n\x04\x64\x61ta\x18\x02 \x01(\x0b\x32\x1b.google.protobuf.BytesValueH\x00\x12?\n\x18\x61\x64_id_to_copy_image_from\x18\x03 \x01(\x0b\x32\x1b.google.protobuf.Int64ValueH\x00\x42\x07\n\x05image\"\x1b\n\x19VideoBumperInStreamAdInfo\"!\n\x1fVideoNonSkippableInStreamAdInfo\"\x8f\x01\n\x1bVideoTrueViewInStreamAdInfo\x12\x39\n\x13\x61\x63tion_button_label\x18\x01 \x01(\x0b\x32\x1c.google.protobuf.StringValue\x12\x35\n\x0f\x61\x63tion_headline\x18\x02 \x01(\x0b\x32\x1c.google.protobuf.StringValue\"y\n\x14VideoOutstreamAdInfo\x12.\n\x08headline\x18\x01 \x01(\x0b\x32\x1c.google.protobuf.StringValue\x12\x31\n\x0b\x64\x65scription\x18\x02 \x01(\x0b\x32\x1c.google.protobuf.StringValue\"\x8e\x03\n\x0bVideoAdInfo\x12\x30\n\nmedia_file\x18\x01 \x01(\x0b\x32\x1c.google.protobuf.StringValue\x12P\n\tin_stream\x18\x02 \x01(\x0b\x32;.google.ads.googleads.v1.common.VideoTrueViewInStreamAdInfoH\x00\x12K\n\x06\x62umper\x18\x03 \x01(\x0b\x32\x39.google.ads.googleads.v1.common.VideoBumperInStreamAdInfoH\x00\x12J\n\nout_stream\x18\x04 \x01(\x0b\x32\x34.google.ads.googleads.v1.common.VideoOutstreamAdInfoH\x00\x12X\n\rnon_skippable\x18\x05 \x01(\x0b\x32?.google.ads.googleads.v1.common.VideoNonSkippableInStreamAdInfoH\x00\x42\x08\n\x06\x66ormat\"\xf5\x01\n\x16ResponsiveSearchAdInfo\x12>\n\theadlines\x18\x01 \x03(\x0b\x32+.google.ads.googleads.v1.common.AdTextAsset\x12\x41\n\x0c\x64\x65scriptions\x18\x02 \x03(\x0b\x32+.google.ads.googleads.v1.common.AdTextAsset\x12+\n\x05path1\x18\x03 \x01(\x0b\x32\x1c.google.protobuf.StringValue\x12+\n\x05path2\x18\x04 \x01(\x0b\x32\x1c.google.protobuf.StringValue\"\xfd\x06\n\x1dLegacyResponsiveDisplayAdInfo\x12\x34\n\x0eshort_headline\x18\x01 \x01(\x0b\x32\x1c.google.protobuf.StringValue\x12\x33\n\rlong_headline\x18\x02 \x01(\x0b\x32\x1c.google.protobuf.StringValue\x12\x31\n\x0b\x64\x65scription\x18\x03 \x01(\x0b\x32\x1c.google.protobuf.StringValue\x12\x33\n\rbusiness_name\x18\x04 \x01(\x0b\x32\x1c.google.protobuf.StringValue\x12\x38\n\x14\x61llow_flexible_color\x18\x05 \x01(\x0b\x32\x1a.google.protobuf.BoolValue\x12\x32\n\x0c\x61\x63\x63\x65nt_color\x18\x06 \x01(\x0b\x32\x1c.google.protobuf.StringValue\x12\x30\n\nmain_color\x18\x07 \x01(\x0b\x32\x1c.google.protobuf.StringValue\x12\x39\n\x13\x63\x61ll_to_action_text\x18\x08 \x01(\x0b\x32\x1c.google.protobuf.StringValue\x12\x30\n\nlogo_image\x18\t \x01(\x0b\x32\x1c.google.protobuf.StringValue\x12\x37\n\x11square_logo_image\x18\n \x01(\x0b\x32\x1c.google.protobuf.StringValue\x12\x35\n\x0fmarketing_image\x18\x0b \x01(\x0b\x32\x1c.google.protobuf.StringValue\x12<\n\x16square_marketing_image\x18\x0c \x01(\x0b\x32\x1c.google.protobuf.StringValue\x12h\n\x0e\x66ormat_setting\x18\r \x01(\x0e\x32P.google.ads.googleads.v1.enums.DisplayAdFormatSettingEnum.DisplayAdFormatSetting\x12\x32\n\x0cprice_prefix\x18\x0e \x01(\x0b\x32\x1c.google.protobuf.StringValue\x12\x30\n\npromo_text\x18\x0f \x01(\x0b\x32\x1c.google.protobuf.StringValue\"\xab\x03\n\tAppAdInfo\x12\x46\n\x11mandatory_ad_text\x18\x01 \x01(\x0b\x32+.google.ads.googleads.v1.common.AdTextAsset\x12>\n\theadlines\x18\x02 \x03(\x0b\x32+.google.ads.googleads.v1.common.AdTextAsset\x12\x41\n\x0c\x64\x65scriptions\x18\x03 \x03(\x0b\x32+.google.ads.googleads.v1.common.AdTextAsset\x12<\n\x06images\x18\x04 \x03(\x0b\x32,.google.ads.googleads.v1.common.AdImageAsset\x12\x44\n\x0eyoutube_videos\x18\x05 \x03(\x0b\x32,.google.ads.googleads.v1.common.AdVideoAsset\x12O\n\x13html5_media_bundles\x18\x06 \x03(\x0b\x32\x32.google.ads.googleads.v1.common.AdMediaBundleAsset\"\xcb\x02\n\x16LegacyAppInstallAdInfo\x12,\n\x06\x61pp_id\x18\x01 \x01(\x0b\x32\x1c.google.protobuf.StringValue\x12k\n\tapp_store\x18\x02 \x01(\x0e\x32X.google.ads.googleads.v1.enums.LegacyAppInstallAdAppStoreEnum.LegacyAppInstallAdAppStore\x12.\n\x08headline\x18\x03 \x01(\x0b\x32\x1c.google.protobuf.StringValue\x12\x32\n\x0c\x64\x65scription1\x18\x04 \x01(\x0b\x32\x1c.google.protobuf.StringValue\x12\x32\n\x0c\x64\x65scription2\x18\x05 \x01(\x0b\x32\x1c.google.protobuf.StringValue\"\xaa\x08\n\x17ResponsiveDisplayAdInfo\x12\x46\n\x10marketing_images\x18\x01 \x03(\x0b\x32,.google.ads.googleads.v1.common.AdImageAsset\x12M\n\x17square_marketing_images\x18\x02 \x03(\x0b\x32,.google.ads.googleads.v1.common.AdImageAsset\x12\x41\n\x0blogo_images\x18\x03 \x03(\x0b\x32,.google.ads.googleads.v1.common.AdImageAsset\x12H\n\x12square_logo_images\x18\x04 \x03(\x0b\x32,.google.ads.googleads.v1.common.AdImageAsset\x12>\n\theadlines\x18\x05 \x03(\x0b\x32+.google.ads.googleads.v1.common.AdTextAsset\x12\x42\n\rlong_headline\x18\x06 \x01(\x0b\x32+.google.ads.googleads.v1.common.AdTextAsset\x12\x41\n\x0c\x64\x65scriptions\x18\x07 \x03(\x0b\x32+.google.ads.googleads.v1.common.AdTextAsset\x12\x44\n\x0eyoutube_videos\x18\x08 \x03(\x0b\x32,.google.ads.googleads.v1.common.AdVideoAsset\x12\x33\n\rbusiness_name\x18\t \x01(\x0b\x32\x1c.google.protobuf.StringValue\x12\x30\n\nmain_color\x18\n \x01(\x0b\x32\x1c.google.protobuf.StringValue\x12\x32\n\x0c\x61\x63\x63\x65nt_color\x18\x0b \x01(\x0b\x32\x1c.google.protobuf.StringValue\x12\x38\n\x14\x61llow_flexible_color\x18\x0c \x01(\x0b\x32\x1a.google.protobuf.BoolValue\x12\x39\n\x13\x63\x61ll_to_action_text\x18\r \x01(\x0b\x32\x1c.google.protobuf.StringValue\x12\x32\n\x0cprice_prefix\x18\x0e \x01(\x0b\x32\x1c.google.protobuf.StringValue\x12\x30\n\npromo_text\x18\x0f \x01(\x0b\x32\x1c.google.protobuf.StringValue\x12h\n\x0e\x66ormat_setting\x18\x10 \x01(\x0e\x32P.google.ads.googleads.v1.enums.DisplayAdFormatSettingEnum.DisplayAdFormatSettingB\xeb\x01\n\"com.google.ads.googleads.v1.commonB\x10\x41\x64TypeInfosProtoP\x01ZDgoogle.golang.org/genproto/googleapis/ads/googleads/v1/common;common\xa2\x02\x03GAA\xaa\x02\x1eGoogle.Ads.GoogleAds.V1.Common\xca\x02\x1eGoogle\\Ads\\GoogleAds\\V1\\Common\xea\x02\"Google::Ads::GoogleAds::V1::Commonb\x06proto3')
+  serialized_pb=_b('\n8google/ads/googleads_v1/proto/common/ad_type_infos.proto\x12\x1egoogle.ads.googleads.v1.common\x1a\x33google/ads/googleads_v1/proto/common/ad_asset.proto\x1aIgoogle/ads/googleads_v1/proto/enums/call_conversion_reporting_state.proto\x1a\x43google/ads/googleads_v1/proto/enums/display_ad_format_setting.proto\x1a\x45google/ads/googleads_v1/proto/enums/display_upload_product_type.proto\x1aIgoogle/ads/googleads_v1/proto/enums/legacy_app_install_ad_app_store.proto\x1a\x33google/ads/googleads_v1/proto/enums/mime_type.proto\x1a\x1egoogle/protobuf/wrappers.proto\x1a\x1cgoogle/api/annotations.proto\"\xa4\x01\n\nTextAdInfo\x12.\n\x08headline\x18\x01 \x01(\x0b\x32\x1c.google.protobuf.StringValue\x12\x32\n\x0c\x64\x65scription1\x18\x02 \x01(\x0b\x32\x1c.google.protobuf.StringValue\x12\x32\n\x0c\x64\x65scription2\x18\x03 \x01(\x0b\x32\x1c.google.protobuf.StringValue\"\xf7\x02\n\x12\x45xpandedTextAdInfo\x12\x34\n\x0eheadline_part1\x18\x01 \x01(\x0b\x32\x1c.google.protobuf.StringValue\x12\x34\n\x0eheadline_part2\x18\x02 \x01(\x0b\x32\x1c.google.protobuf.StringValue\x12\x34\n\x0eheadline_part3\x18\x06 \x01(\x0b\x32\x1c.google.protobuf.StringValue\x12\x31\n\x0b\x64\x65scription\x18\x03 \x01(\x0b\x32\x1c.google.protobuf.StringValue\x12\x32\n\x0c\x64\x65scription2\x18\x07 \x01(\x0b\x32\x1c.google.protobuf.StringValue\x12+\n\x05path1\x18\x04 \x01(\x0b\x32\x1c.google.protobuf.StringValue\x12+\n\x05path2\x18\x05 \x01(\x0b\x32\x1c.google.protobuf.StringValue\"\xe7\x05\n\x0e\x43\x61llOnlyAdInfo\x12\x32\n\x0c\x63ountry_code\x18\x01 \x01(\x0b\x32\x1c.google.protobuf.StringValue\x12\x32\n\x0cphone_number\x18\x02 \x01(\x0b\x32\x1c.google.protobuf.StringValue\x12\x33\n\rbusiness_name\x18\x03 \x01(\x0b\x32\x1c.google.protobuf.StringValue\x12/\n\theadline1\x18\x0b \x01(\x0b\x32\x1c.google.protobuf.StringValue\x12/\n\theadline2\x18\x0c \x01(\x0b\x32\x1c.google.protobuf.StringValue\x12\x32\n\x0c\x64\x65scription1\x18\x04 \x01(\x0b\x32\x1c.google.protobuf.StringValue\x12\x32\n\x0c\x64\x65scription2\x18\x05 \x01(\x0b\x32\x1c.google.protobuf.StringValue\x12\x30\n\x0c\x63\x61ll_tracked\x18\x06 \x01(\x0b\x32\x1a.google.protobuf.BoolValue\x12;\n\x17\x64isable_call_conversion\x18\x07 \x01(\x0b\x32\x1a.google.protobuf.BoolValue\x12\x43\n\x1dphone_number_verification_url\x18\x08 \x01(\x0b\x32\x1c.google.protobuf.StringValue\x12\x37\n\x11\x63onversion_action\x18\t \x01(\x0b\x32\x1c.google.protobuf.StringValue\x12\x80\x01\n\x1a\x63onversion_reporting_state\x18\n \x01(\x0e\x32\\.google.ads.googleads.v1.enums.CallConversionReportingStateEnum.CallConversionReportingState\"P\n\x1b\x45xpandedDynamicSearchAdInfo\x12\x31\n\x0b\x64\x65scription\x18\x01 \x01(\x0b\x32\x1c.google.protobuf.StringValue\"\r\n\x0bHotelAdInfo\"\x15\n\x13ShoppingSmartAdInfo\"\x17\n\x15ShoppingProductAdInfo\"\xa9\x04\n\x0bGmailAdInfo\x12;\n\x06teaser\x18\x01 \x01(\x0b\x32+.google.ads.googleads.v1.common.GmailTeaser\x12\x32\n\x0cheader_image\x18\x02 \x01(\x0b\x32\x1c.google.protobuf.StringValue\x12\x35\n\x0fmarketing_image\x18\x03 \x01(\x0b\x32\x1c.google.protobuf.StringValue\x12>\n\x18marketing_image_headline\x18\x04 \x01(\x0b\x32\x1c.google.protobuf.StringValue\x12\x41\n\x1bmarketing_image_description\x18\x05 \x01(\x0b\x32\x1c.google.protobuf.StringValue\x12\x63\n&marketing_image_display_call_to_action\x18\x06 \x01(\x0b\x32\x33.google.ads.googleads.v1.common.DisplayCallToAction\x12\x44\n\x0eproduct_images\x18\x07 \x03(\x0b\x32,.google.ads.googleads.v1.common.ProductImage\x12\x44\n\x0eproduct_videos\x18\x08 \x03(\x0b\x32,.google.ads.googleads.v1.common.ProductVideo\"\xd7\x01\n\x0bGmailTeaser\x12.\n\x08headline\x18\x01 \x01(\x0b\x32\x1c.google.protobuf.StringValue\x12\x31\n\x0b\x64\x65scription\x18\x02 \x01(\x0b\x32\x1c.google.protobuf.StringValue\x12\x33\n\rbusiness_name\x18\x03 \x01(\x0b\x32\x1c.google.protobuf.StringValue\x12\x30\n\nlogo_image\x18\x04 \x01(\x0b\x32\x1c.google.protobuf.StringValue\"\xac\x01\n\x13\x44isplayCallToAction\x12*\n\x04text\x18\x01 \x01(\x0b\x32\x1c.google.protobuf.StringValue\x12\x30\n\ntext_color\x18\x02 \x01(\x0b\x32\x1c.google.protobuf.StringValue\x12\x37\n\x11url_collection_id\x18\x03 \x01(\x0b\x32\x1c.google.protobuf.StringValue\"\xcb\x01\n\x0cProductImage\x12\x33\n\rproduct_image\x18\x01 \x01(\x0b\x32\x1c.google.protobuf.StringValue\x12\x31\n\x0b\x64\x65scription\x18\x02 \x01(\x0b\x32\x1c.google.protobuf.StringValue\x12S\n\x16\x64isplay_call_to_action\x18\x03 \x01(\x0b\x32\x33.google.ads.googleads.v1.common.DisplayCallToAction\"C\n\x0cProductVideo\x12\x33\n\rproduct_video\x18\x01 \x01(\x0b\x32\x1c.google.protobuf.StringValue\"\xf1\x04\n\x0bImageAdInfo\x12\x30\n\x0bpixel_width\x18\x04 \x01(\x0b\x32\x1b.google.protobuf.Int64Value\x12\x31\n\x0cpixel_height\x18\x05 \x01(\x0b\x32\x1b.google.protobuf.Int64Value\x12/\n\timage_url\x18\x06 \x01(\x0b\x32\x1c.google.protobuf.StringValue\x12\x38\n\x13preview_pixel_width\x18\x07 \x01(\x0b\x32\x1b.google.protobuf.Int64Value\x12\x39\n\x14preview_pixel_height\x18\x08 \x01(\x0b\x32\x1b.google.protobuf.Int64Value\x12\x37\n\x11preview_image_url\x18\t \x01(\x0b\x32\x1c.google.protobuf.StringValue\x12G\n\tmime_type\x18\n \x01(\x0e\x32\x34.google.ads.googleads.v1.enums.MimeTypeEnum.MimeType\x12*\n\x04name\x18\x0b \x01(\x0b\x32\x1c.google.protobuf.StringValue\x12\x32\n\nmedia_file\x18\x01 \x01(\x0b\x32\x1c.google.protobuf.StringValueH\x00\x12+\n\x04\x64\x61ta\x18\x02 \x01(\x0b\x32\x1b.google.protobuf.BytesValueH\x00\x12?\n\x18\x61\x64_id_to_copy_image_from\x18\x03 \x01(\x0b\x32\x1b.google.protobuf.Int64ValueH\x00\x42\x07\n\x05image\"\x1b\n\x19VideoBumperInStreamAdInfo\"!\n\x1fVideoNonSkippableInStreamAdInfo\"\xc7\x01\n\x1bVideoTrueViewInStreamAdInfo\x12\x39\n\x13\x61\x63tion_button_label\x18\x01 \x01(\x0b\x32\x1c.google.protobuf.StringValue\x12\x35\n\x0f\x61\x63tion_headline\x18\x02 \x01(\x0b\x32\x1c.google.protobuf.StringValue\x12\x36\n\x10\x63ompanion_banner\x18\x03 \x01(\x0b\x32\x1c.google.protobuf.StringValue\"y\n\x14VideoOutstreamAdInfo\x12.\n\x08headline\x18\x01 \x01(\x0b\x32\x1c.google.protobuf.StringValue\x12\x31\n\x0b\x64\x65scription\x18\x02 \x01(\x0b\x32\x1c.google.protobuf.StringValue\"\x8e\x03\n\x0bVideoAdInfo\x12\x30\n\nmedia_file\x18\x01 \x01(\x0b\x32\x1c.google.protobuf.StringValue\x12P\n\tin_stream\x18\x02 \x01(\x0b\x32;.google.ads.googleads.v1.common.VideoTrueViewInStreamAdInfoH\x00\x12K\n\x06\x62umper\x18\x03 \x01(\x0b\x32\x39.google.ads.googleads.v1.common.VideoBumperInStreamAdInfoH\x00\x12J\n\nout_stream\x18\x04 \x01(\x0b\x32\x34.google.ads.googleads.v1.common.VideoOutstreamAdInfoH\x00\x12X\n\rnon_skippable\x18\x05 \x01(\x0b\x32?.google.ads.googleads.v1.common.VideoNonSkippableInStreamAdInfoH\x00\x42\x08\n\x06\x66ormat\"\xf5\x01\n\x16ResponsiveSearchAdInfo\x12>\n\theadlines\x18\x01 \x03(\x0b\x32+.google.ads.googleads.v1.common.AdTextAsset\x12\x41\n\x0c\x64\x65scriptions\x18\x02 \x03(\x0b\x32+.google.ads.googleads.v1.common.AdTextAsset\x12+\n\x05path1\x18\x03 \x01(\x0b\x32\x1c.google.protobuf.StringValue\x12+\n\x05path2\x18\x04 \x01(\x0b\x32\x1c.google.protobuf.StringValue\"\xfd\x06\n\x1dLegacyResponsiveDisplayAdInfo\x12\x34\n\x0eshort_headline\x18\x01 \x01(\x0b\x32\x1c.google.protobuf.StringValue\x12\x33\n\rlong_headline\x18\x02 \x01(\x0b\x32\x1c.google.protobuf.StringValue\x12\x31\n\x0b\x64\x65scription\x18\x03 \x01(\x0b\x32\x1c.google.protobuf.StringValue\x12\x33\n\rbusiness_name\x18\x04 \x01(\x0b\x32\x1c.google.protobuf.StringValue\x12\x38\n\x14\x61llow_flexible_color\x18\x05 \x01(\x0b\x32\x1a.google.protobuf.BoolValue\x12\x32\n\x0c\x61\x63\x63\x65nt_color\x18\x06 \x01(\x0b\x32\x1c.google.protobuf.StringValue\x12\x30\n\nmain_color\x18\x07 \x01(\x0b\x32\x1c.google.protobuf.StringValue\x12\x39\n\x13\x63\x61ll_to_action_text\x18\x08 \x01(\x0b\x32\x1c.google.protobuf.StringValue\x12\x30\n\nlogo_image\x18\t \x01(\x0b\x32\x1c.google.protobuf.StringValue\x12\x37\n\x11square_logo_image\x18\n \x01(\x0b\x32\x1c.google.protobuf.StringValue\x12\x35\n\x0fmarketing_image\x18\x0b \x01(\x0b\x32\x1c.google.protobuf.StringValue\x12<\n\x16square_marketing_image\x18\x0c \x01(\x0b\x32\x1c.google.protobuf.StringValue\x12h\n\x0e\x66ormat_setting\x18\r \x01(\x0e\x32P.google.ads.googleads.v1.enums.DisplayAdFormatSettingEnum.DisplayAdFormatSetting\x12\x32\n\x0cprice_prefix\x18\x0e \x01(\x0b\x32\x1c.google.protobuf.StringValue\x12\x30\n\npromo_text\x18\x0f \x01(\x0b\x32\x1c.google.protobuf.StringValue\"\xab\x03\n\tAppAdInfo\x12\x46\n\x11mandatory_ad_text\x18\x01 \x01(\x0b\x32+.google.ads.googleads.v1.common.AdTextAsset\x12>\n\theadlines\x18\x02 \x03(\x0b\x32+.google.ads.googleads.v1.common.AdTextAsset\x12\x41\n\x0c\x64\x65scriptions\x18\x03 \x03(\x0b\x32+.google.ads.googleads.v1.common.AdTextAsset\x12<\n\x06images\x18\x04 \x03(\x0b\x32,.google.ads.googleads.v1.common.AdImageAsset\x12\x44\n\x0eyoutube_videos\x18\x05 \x03(\x0b\x32,.google.ads.googleads.v1.common.AdVideoAsset\x12O\n\x13html5_media_bundles\x18\x06 \x03(\x0b\x32\x32.google.ads.googleads.v1.common.AdMediaBundleAsset\"\x94\x02\n\x13\x41ppEngagementAdInfo\x12>\n\theadlines\x18\x01 \x03(\x0b\x32+.google.ads.googleads.v1.common.AdTextAsset\x12\x41\n\x0c\x64\x65scriptions\x18\x02 \x03(\x0b\x32+.google.ads.googleads.v1.common.AdTextAsset\x12<\n\x06images\x18\x03 \x03(\x0b\x32,.google.ads.googleads.v1.common.AdImageAsset\x12<\n\x06videos\x18\x04 \x03(\x0b\x32,.google.ads.googleads.v1.common.AdVideoAsset\"\xcb\x02\n\x16LegacyAppInstallAdInfo\x12,\n\x06\x61pp_id\x18\x01 \x01(\x0b\x32\x1c.google.protobuf.StringValue\x12k\n\tapp_store\x18\x02 \x01(\x0e\x32X.google.ads.googleads.v1.enums.LegacyAppInstallAdAppStoreEnum.LegacyAppInstallAdAppStore\x12.\n\x08headline\x18\x03 \x01(\x0b\x32\x1c.google.protobuf.StringValue\x12\x32\n\x0c\x64\x65scription1\x18\x04 \x01(\x0b\x32\x1c.google.protobuf.StringValue\x12\x32\n\x0c\x64\x65scription2\x18\x05 \x01(\x0b\x32\x1c.google.protobuf.StringValue\"\xaa\x08\n\x17ResponsiveDisplayAdInfo\x12\x46\n\x10marketing_images\x18\x01 \x03(\x0b\x32,.google.ads.googleads.v1.common.AdImageAsset\x12M\n\x17square_marketing_images\x18\x02 \x03(\x0b\x32,.google.ads.googleads.v1.common.AdImageAsset\x12\x41\n\x0blogo_images\x18\x03 \x03(\x0b\x32,.google.ads.googleads.v1.common.AdImageAsset\x12H\n\x12square_logo_images\x18\x04 \x03(\x0b\x32,.google.ads.googleads.v1.common.AdImageAsset\x12>\n\theadlines\x18\x05 \x03(\x0b\x32+.google.ads.googleads.v1.common.AdTextAsset\x12\x42\n\rlong_headline\x18\x06 \x01(\x0b\x32+.google.ads.googleads.v1.common.AdTextAsset\x12\x41\n\x0c\x64\x65scriptions\x18\x07 \x03(\x0b\x32+.google.ads.googleads.v1.common.AdTextAsset\x12\x44\n\x0eyoutube_videos\x18\x08 \x03(\x0b\x32,.google.ads.googleads.v1.common.AdVideoAsset\x12\x33\n\rbusiness_name\x18\t \x01(\x0b\x32\x1c.google.protobuf.StringValue\x12\x30\n\nmain_color\x18\n \x01(\x0b\x32\x1c.google.protobuf.StringValue\x12\x32\n\x0c\x61\x63\x63\x65nt_color\x18\x0b \x01(\x0b\x32\x1c.google.protobuf.StringValue\x12\x38\n\x14\x61llow_flexible_color\x18\x0c \x01(\x0b\x32\x1a.google.protobuf.BoolValue\x12\x39\n\x13\x63\x61ll_to_action_text\x18\r \x01(\x0b\x32\x1c.google.protobuf.StringValue\x12\x32\n\x0cprice_prefix\x18\x0e \x01(\x0b\x32\x1c.google.protobuf.StringValue\x12\x30\n\npromo_text\x18\x0f \x01(\x0b\x32\x1c.google.protobuf.StringValue\x12h\n\x0e\x66ormat_setting\x18\x10 \x01(\x0e\x32P.google.ads.googleads.v1.enums.DisplayAdFormatSettingEnum.DisplayAdFormatSetting\"\xeb\x01\n\x13\x44isplayUploadAdInfo\x12y\n\x1b\x64isplay_upload_product_type\x18\x01 \x01(\x0e\x32T.google.ads.googleads.v1.enums.DisplayUploadProductTypeEnum.DisplayUploadProductType\x12J\n\x0cmedia_bundle\x18\x02 \x01(\x0b\x32\x32.google.ads.googleads.v1.common.AdMediaBundleAssetH\x00\x42\r\n\x0bmedia_assetB\xeb\x01\n\"com.google.ads.googleads.v1.commonB\x10\x41\x64TypeInfosProtoP\x01ZDgoogle.golang.org/genproto/googleapis/ads/googleads/v1/common;common\xa2\x02\x03GAA\xaa\x02\x1eGoogle.Ads.GoogleAds.V1.Common\xca\x02\x1eGoogle\\Ads\\GoogleAds\\V1\\Common\xea\x02\"Google::Ads::GoogleAds::V1::Commonb\x06proto3')
   ,
-  dependencies=[google_dot_ads_dot_googleads__v1_dot_proto_dot_common_dot_ad__asset__pb2.DESCRIPTOR,google_dot_ads_dot_googleads__v1_dot_proto_dot_enums_dot_call__conversion__reporting__state__pb2.DESCRIPTOR,google_dot_ads_dot_googleads__v1_dot_proto_dot_enums_dot_display__ad__format__setting__pb2.DESCRIPTOR,google_dot_ads_dot_googleads__v1_dot_proto_dot_enums_dot_legacy__app__install__ad__app__store__pb2.DESCRIPTOR,google_dot_ads_dot_googleads__v1_dot_proto_dot_enums_dot_mime__type__pb2.DESCRIPTOR,google_dot_protobuf_dot_wrappers__pb2.DESCRIPTOR,google_dot_api_dot_annotations__pb2.DESCRIPTOR,])
+  dependencies=[google_dot_ads_dot_googleads__v1_dot_proto_dot_common_dot_ad__asset__pb2.DESCRIPTOR,google_dot_ads_dot_googleads__v1_dot_proto_dot_enums_dot_call__conversion__reporting__state__pb2.DESCRIPTOR,google_dot_ads_dot_googleads__v1_dot_proto_dot_enums_dot_display__ad__format__setting__pb2.DESCRIPTOR,google_dot_ads_dot_googleads__v1_dot_proto_dot_enums_dot_display__upload__product__type__pb2.DESCRIPTOR,google_dot_ads_dot_googleads__v1_dot_proto_dot_enums_dot_legacy__app__install__ad__app__store__pb2.DESCRIPTOR,google_dot_ads_dot_googleads__v1_dot_proto_dot_enums_dot_mime__type__pb2.DESCRIPTOR,google_dot_protobuf_dot_wrappers__pb2.DESCRIPTOR,google_dot_api_dot_annotations__pb2.DESCRIPTOR,])
 
 
 
@@ -73,8 +74,8 @@ _TEXTADINFO = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=480,
-  serialized_end=644,
+  serialized_start=551,
+  serialized_end=715,
 )
 
 
@@ -146,8 +147,8 @@ _EXPANDEDTEXTADINFO = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=647,
-  serialized_end=1022,
+  serialized_start=718,
+  serialized_end=1093,
 )
 
 
@@ -254,8 +255,8 @@ _CALLONLYADINFO = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=1025,
-  serialized_end=1768,
+  serialized_start=1096,
+  serialized_end=1839,
 )
 
 
@@ -285,8 +286,8 @@ _EXPANDEDDYNAMICSEARCHADINFO = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=1770,
-  serialized_end=1850,
+  serialized_start=1841,
+  serialized_end=1921,
 )
 
 
@@ -309,8 +310,8 @@ _HOTELADINFO = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=1852,
-  serialized_end=1865,
+  serialized_start=1923,
+  serialized_end=1936,
 )
 
 
@@ -333,8 +334,8 @@ _SHOPPINGSMARTADINFO = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=1867,
-  serialized_end=1888,
+  serialized_start=1938,
+  serialized_end=1959,
 )
 
 
@@ -357,8 +358,8 @@ _SHOPPINGPRODUCTADINFO = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=1890,
-  serialized_end=1913,
+  serialized_start=1961,
+  serialized_end=1984,
 )
 
 
@@ -437,8 +438,8 @@ _GMAILADINFO = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=1916,
-  serialized_end=2469,
+  serialized_start=1987,
+  serialized_end=2540,
 )
 
 
@@ -489,8 +490,8 @@ _GMAILTEASER = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=2472,
-  serialized_end=2687,
+  serialized_start=2543,
+  serialized_end=2758,
 )
 
 
@@ -534,8 +535,8 @@ _DISPLAYCALLTOACTION = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=2690,
-  serialized_end=2862,
+  serialized_start=2761,
+  serialized_end=2933,
 )
 
 
@@ -579,8 +580,8 @@ _PRODUCTIMAGE = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=2865,
-  serialized_end=3068,
+  serialized_start=2936,
+  serialized_end=3139,
 )
 
 
@@ -610,8 +611,8 @@ _PRODUCTVIDEO = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=3070,
-  serialized_end=3137,
+  serialized_start=3141,
+  serialized_end=3208,
 )
 
 
@@ -714,8 +715,8 @@ _IMAGEADINFO = _descriptor.Descriptor(
       name='image', full_name='google.ads.googleads.v1.common.ImageAdInfo.image',
       index=0, containing_type=None, fields=[]),
   ],
-  serialized_start=3140,
-  serialized_end=3765,
+  serialized_start=3211,
+  serialized_end=3836,
 )
 
 
@@ -738,8 +739,8 @@ _VIDEOBUMPERINSTREAMADINFO = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=3767,
-  serialized_end=3794,
+  serialized_start=3838,
+  serialized_end=3865,
 )
 
 
@@ -762,8 +763,8 @@ _VIDEONONSKIPPABLEINSTREAMADINFO = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=3796,
-  serialized_end=3829,
+  serialized_start=3867,
+  serialized_end=3900,
 )
 
 
@@ -788,6 +789,13 @@ _VIDEOTRUEVIEWINSTREAMADINFO = _descriptor.Descriptor(
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       serialized_options=None, file=DESCRIPTOR),
+    _descriptor.FieldDescriptor(
+      name='companion_banner', full_name='google.ads.googleads.v1.common.VideoTrueViewInStreamAdInfo.companion_banner', index=2,
+      number=3, type=11, cpp_type=10, label=1,
+      has_default_value=False, default_value=None,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR),
   ],
   extensions=[
   ],
@@ -800,8 +808,8 @@ _VIDEOTRUEVIEWINSTREAMADINFO = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=3832,
-  serialized_end=3975,
+  serialized_start=3903,
+  serialized_end=4102,
 )
 
 
@@ -838,8 +846,8 @@ _VIDEOOUTSTREAMADINFO = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=3977,
-  serialized_end=4098,
+  serialized_start=4104,
+  serialized_end=4225,
 )
 
 
@@ -900,8 +908,8 @@ _VIDEOADINFO = _descriptor.Descriptor(
       name='format', full_name='google.ads.googleads.v1.common.VideoAdInfo.format',
       index=0, containing_type=None, fields=[]),
   ],
-  serialized_start=4101,
-  serialized_end=4499,
+  serialized_start=4228,
+  serialized_end=4626,
 )
 
 
@@ -952,8 +960,8 @@ _RESPONSIVESEARCHADINFO = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=4502,
-  serialized_end=4747,
+  serialized_start=4629,
+  serialized_end=4874,
 )
 
 
@@ -1081,8 +1089,8 @@ _LEGACYRESPONSIVEDISPLAYADINFO = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=4750,
-  serialized_end=5643,
+  serialized_start=4877,
+  serialized_end=5770,
 )
 
 
@@ -1147,8 +1155,60 @@ _APPADINFO = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=5646,
-  serialized_end=6073,
+  serialized_start=5773,
+  serialized_end=6200,
+)
+
+
+_APPENGAGEMENTADINFO = _descriptor.Descriptor(
+  name='AppEngagementAdInfo',
+  full_name='google.ads.googleads.v1.common.AppEngagementAdInfo',
+  filename=None,
+  file=DESCRIPTOR,
+  containing_type=None,
+  fields=[
+    _descriptor.FieldDescriptor(
+      name='headlines', full_name='google.ads.googleads.v1.common.AppEngagementAdInfo.headlines', index=0,
+      number=1, type=11, cpp_type=10, label=3,
+      has_default_value=False, default_value=[],
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR),
+    _descriptor.FieldDescriptor(
+      name='descriptions', full_name='google.ads.googleads.v1.common.AppEngagementAdInfo.descriptions', index=1,
+      number=2, type=11, cpp_type=10, label=3,
+      has_default_value=False, default_value=[],
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR),
+    _descriptor.FieldDescriptor(
+      name='images', full_name='google.ads.googleads.v1.common.AppEngagementAdInfo.images', index=2,
+      number=3, type=11, cpp_type=10, label=3,
+      has_default_value=False, default_value=[],
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR),
+    _descriptor.FieldDescriptor(
+      name='videos', full_name='google.ads.googleads.v1.common.AppEngagementAdInfo.videos', index=3,
+      number=4, type=11, cpp_type=10, label=3,
+      has_default_value=False, default_value=[],
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR),
+  ],
+  extensions=[
+  ],
+  nested_types=[],
+  enum_types=[
+  ],
+  serialized_options=None,
+  is_extendable=False,
+  syntax='proto3',
+  extension_ranges=[],
+  oneofs=[
+  ],
+  serialized_start=6203,
+  serialized_end=6479,
 )
 
 
@@ -1206,8 +1266,8 @@ _LEGACYAPPINSTALLADINFO = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=6076,
-  serialized_end=6407,
+  serialized_start=6482,
+  serialized_end=6813,
 )
 
 
@@ -1342,8 +1402,49 @@ _RESPONSIVEDISPLAYADINFO = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=6410,
-  serialized_end=7476,
+  serialized_start=6816,
+  serialized_end=7882,
+)
+
+
+_DISPLAYUPLOADADINFO = _descriptor.Descriptor(
+  name='DisplayUploadAdInfo',
+  full_name='google.ads.googleads.v1.common.DisplayUploadAdInfo',
+  filename=None,
+  file=DESCRIPTOR,
+  containing_type=None,
+  fields=[
+    _descriptor.FieldDescriptor(
+      name='display_upload_product_type', full_name='google.ads.googleads.v1.common.DisplayUploadAdInfo.display_upload_product_type', index=0,
+      number=1, type=14, cpp_type=8, label=1,
+      has_default_value=False, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR),
+    _descriptor.FieldDescriptor(
+      name='media_bundle', full_name='google.ads.googleads.v1.common.DisplayUploadAdInfo.media_bundle', index=1,
+      number=2, type=11, cpp_type=10, label=1,
+      has_default_value=False, default_value=None,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR),
+  ],
+  extensions=[
+  ],
+  nested_types=[],
+  enum_types=[
+  ],
+  serialized_options=None,
+  is_extendable=False,
+  syntax='proto3',
+  extension_ranges=[],
+  oneofs=[
+    _descriptor.OneofDescriptor(
+      name='media_asset', full_name='google.ads.googleads.v1.common.DisplayUploadAdInfo.media_asset',
+      index=0, containing_type=None, fields=[]),
+  ],
+  serialized_start=7885,
+  serialized_end=8120,
 )
 
 _TEXTADINFO.fields_by_name['headline'].message_type = google_dot_protobuf_dot_wrappers__pb2._STRINGVALUE
@@ -1410,6 +1511,7 @@ _IMAGEADINFO.oneofs_by_name['image'].fields.append(
 _IMAGEADINFO.fields_by_name['ad_id_to_copy_image_from'].containing_oneof = _IMAGEADINFO.oneofs_by_name['image']
 _VIDEOTRUEVIEWINSTREAMADINFO.fields_by_name['action_button_label'].message_type = google_dot_protobuf_dot_wrappers__pb2._STRINGVALUE
 _VIDEOTRUEVIEWINSTREAMADINFO.fields_by_name['action_headline'].message_type = google_dot_protobuf_dot_wrappers__pb2._STRINGVALUE
+_VIDEOTRUEVIEWINSTREAMADINFO.fields_by_name['companion_banner'].message_type = google_dot_protobuf_dot_wrappers__pb2._STRINGVALUE
 _VIDEOOUTSTREAMADINFO.fields_by_name['headline'].message_type = google_dot_protobuf_dot_wrappers__pb2._STRINGVALUE
 _VIDEOOUTSTREAMADINFO.fields_by_name['description'].message_type = google_dot_protobuf_dot_wrappers__pb2._STRINGVALUE
 _VIDEOADINFO.fields_by_name['media_file'].message_type = google_dot_protobuf_dot_wrappers__pb2._STRINGVALUE
@@ -1454,6 +1556,10 @@ _APPADINFO.fields_by_name['descriptions'].message_type = google_dot_ads_dot_goog
 _APPADINFO.fields_by_name['images'].message_type = google_dot_ads_dot_googleads__v1_dot_proto_dot_common_dot_ad__asset__pb2._ADIMAGEASSET
 _APPADINFO.fields_by_name['youtube_videos'].message_type = google_dot_ads_dot_googleads__v1_dot_proto_dot_common_dot_ad__asset__pb2._ADVIDEOASSET
 _APPADINFO.fields_by_name['html5_media_bundles'].message_type = google_dot_ads_dot_googleads__v1_dot_proto_dot_common_dot_ad__asset__pb2._ADMEDIABUNDLEASSET
+_APPENGAGEMENTADINFO.fields_by_name['headlines'].message_type = google_dot_ads_dot_googleads__v1_dot_proto_dot_common_dot_ad__asset__pb2._ADTEXTASSET
+_APPENGAGEMENTADINFO.fields_by_name['descriptions'].message_type = google_dot_ads_dot_googleads__v1_dot_proto_dot_common_dot_ad__asset__pb2._ADTEXTASSET
+_APPENGAGEMENTADINFO.fields_by_name['images'].message_type = google_dot_ads_dot_googleads__v1_dot_proto_dot_common_dot_ad__asset__pb2._ADIMAGEASSET
+_APPENGAGEMENTADINFO.fields_by_name['videos'].message_type = google_dot_ads_dot_googleads__v1_dot_proto_dot_common_dot_ad__asset__pb2._ADVIDEOASSET
 _LEGACYAPPINSTALLADINFO.fields_by_name['app_id'].message_type = google_dot_protobuf_dot_wrappers__pb2._STRINGVALUE
 _LEGACYAPPINSTALLADINFO.fields_by_name['app_store'].enum_type = google_dot_ads_dot_googleads__v1_dot_proto_dot_enums_dot_legacy__app__install__ad__app__store__pb2._LEGACYAPPINSTALLADAPPSTOREENUM_LEGACYAPPINSTALLADAPPSTORE
 _LEGACYAPPINSTALLADINFO.fields_by_name['headline'].message_type = google_dot_protobuf_dot_wrappers__pb2._STRINGVALUE
@@ -1475,6 +1581,11 @@ _RESPONSIVEDISPLAYADINFO.fields_by_name['call_to_action_text'].message_type = go
 _RESPONSIVEDISPLAYADINFO.fields_by_name['price_prefix'].message_type = google_dot_protobuf_dot_wrappers__pb2._STRINGVALUE
 _RESPONSIVEDISPLAYADINFO.fields_by_name['promo_text'].message_type = google_dot_protobuf_dot_wrappers__pb2._STRINGVALUE
 _RESPONSIVEDISPLAYADINFO.fields_by_name['format_setting'].enum_type = google_dot_ads_dot_googleads__v1_dot_proto_dot_enums_dot_display__ad__format__setting__pb2._DISPLAYADFORMATSETTINGENUM_DISPLAYADFORMATSETTING
+_DISPLAYUPLOADADINFO.fields_by_name['display_upload_product_type'].enum_type = google_dot_ads_dot_googleads__v1_dot_proto_dot_enums_dot_display__upload__product__type__pb2._DISPLAYUPLOADPRODUCTTYPEENUM_DISPLAYUPLOADPRODUCTTYPE
+_DISPLAYUPLOADADINFO.fields_by_name['media_bundle'].message_type = google_dot_ads_dot_googleads__v1_dot_proto_dot_common_dot_ad__asset__pb2._ADMEDIABUNDLEASSET
+_DISPLAYUPLOADADINFO.oneofs_by_name['media_asset'].fields.append(
+  _DISPLAYUPLOADADINFO.fields_by_name['media_bundle'])
+_DISPLAYUPLOADADINFO.fields_by_name['media_bundle'].containing_oneof = _DISPLAYUPLOADADINFO.oneofs_by_name['media_asset']
 DESCRIPTOR.message_types_by_name['TextAdInfo'] = _TEXTADINFO
 DESCRIPTOR.message_types_by_name['ExpandedTextAdInfo'] = _EXPANDEDTEXTADINFO
 DESCRIPTOR.message_types_by_name['CallOnlyAdInfo'] = _CALLONLYADINFO
@@ -1496,8 +1607,10 @@ DESCRIPTOR.message_types_by_name['VideoAdInfo'] = _VIDEOADINFO
 DESCRIPTOR.message_types_by_name['ResponsiveSearchAdInfo'] = _RESPONSIVESEARCHADINFO
 DESCRIPTOR.message_types_by_name['LegacyResponsiveDisplayAdInfo'] = _LEGACYRESPONSIVEDISPLAYADINFO
 DESCRIPTOR.message_types_by_name['AppAdInfo'] = _APPADINFO
+DESCRIPTOR.message_types_by_name['AppEngagementAdInfo'] = _APPENGAGEMENTADINFO
 DESCRIPTOR.message_types_by_name['LegacyAppInstallAdInfo'] = _LEGACYAPPINSTALLADINFO
 DESCRIPTOR.message_types_by_name['ResponsiveDisplayAdInfo'] = _RESPONSIVEDISPLAYADINFO
+DESCRIPTOR.message_types_by_name['DisplayUploadAdInfo'] = _DISPLAYUPLOADADINFO
 _sym_db.RegisterFileDescriptor(DESCRIPTOR)
 
 TextAdInfo = _reflection.GeneratedProtocolMessageType('TextAdInfo', (_message.Message,), dict(
@@ -1839,6 +1952,9 @@ VideoTrueViewInStreamAdInfo = _reflection.GeneratedProtocolMessageType('VideoTru
       action_headline:
           Additional text displayed with the CTA (call-to-action) button
           to give context and encourage clicking on the button.
+      companion_banner:
+          The MediaFile resource name of the companion banner used with
+          the ad.
   """,
   # @@protoc_insertion_point(class_scope:google.ads.googleads.v1.common.VideoTrueViewInStreamAdInfo)
   ))
@@ -2009,6 +2125,32 @@ AppAdInfo = _reflection.GeneratedProtocolMessageType('AppAdInfo', (_message.Mess
   ))
 _sym_db.RegisterMessage(AppAdInfo)
 
+AppEngagementAdInfo = _reflection.GeneratedProtocolMessageType('AppEngagementAdInfo', (_message.Message,), dict(
+  DESCRIPTOR = _APPENGAGEMENTADINFO,
+  __module__ = 'google.ads.googleads_v1.proto.common.ad_type_infos_pb2'
+  ,
+  __doc__ = """App engagement ads allow you to write text encouraging a specific action
+  in the app, like checking in, making a purchase, or booking a flight.
+  They allow you to send users to a specific part of your app where they
+  can find what they're looking for easier and faster.
+  
+  
+  Attributes:
+      headlines:
+          List of text assets for headlines. When the ad serves the
+          headlines will be selected from this list.
+      descriptions:
+          List of text assets for descriptions. When the ad serves the
+          descriptions will be selected from this list.
+      images:
+          List of image assets that may be displayed with the ad.
+      videos:
+          List of video assets that may be displayed with the ad.
+  """,
+  # @@protoc_insertion_point(class_scope:google.ads.googleads.v1.common.AppEngagementAdInfo)
+  ))
+_sym_db.RegisterMessage(AppEngagementAdInfo)
+
 LegacyAppInstallAdInfo = _reflection.GeneratedProtocolMessageType('LegacyAppInstallAdInfo', (_message.Message,), dict(
   DESCRIPTOR = _LEGACYAPPINSTALLADINFO,
   __module__ = 'google.ads.googleads_v1.proto.common.ad_type_infos_pb2'
@@ -2105,6 +2247,35 @@ ResponsiveDisplayAdInfo = _reflection.GeneratedProtocolMessageType('ResponsiveDi
   # @@protoc_insertion_point(class_scope:google.ads.googleads.v1.common.ResponsiveDisplayAdInfo)
   ))
 _sym_db.RegisterMessage(ResponsiveDisplayAdInfo)
+
+DisplayUploadAdInfo = _reflection.GeneratedProtocolMessageType('DisplayUploadAdInfo', (_message.Message,), dict(
+  DESCRIPTOR = _DISPLAYUPLOADADINFO,
+  __module__ = 'google.ads.googleads_v1.proto.common.ad_type_infos_pb2'
+  ,
+  __doc__ = """A generic type of display ad. The exact ad format is controlled by the
+  display\_upload\_product\_type field, which determines what kinds of
+  data need to be included with the ad.
+  
+  
+  Attributes:
+      display_upload_product_type:
+          The product type of this ad. See comments on the enum for
+          details.
+      media_asset:
+          The asset data that makes up the ad.
+      media_bundle:
+          A media bundle asset to be used in the ad. For information
+          about the media bundle for HTML5\_UPLOAD\_AD see
+          https://support.google.com/google-ads/answer/1722096 Media
+          bundles that are part of dynamic product types use a special
+          format that needs to be created through the Google Web
+          Designer. See
+          https://support.google.com/webdesigner/answer/7543898 for more
+          information.
+  """,
+  # @@protoc_insertion_point(class_scope:google.ads.googleads.v1.common.DisplayUploadAdInfo)
+  ))
+_sym_db.RegisterMessage(DisplayUploadAdInfo)
 
 
 DESCRIPTOR._options = None

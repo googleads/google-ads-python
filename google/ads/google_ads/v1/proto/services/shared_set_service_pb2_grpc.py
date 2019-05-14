@@ -6,7 +6,9 @@ from google.ads.google_ads.v1.proto.services import shared_set_service_pb2 as go
 
 
 class SharedSetServiceStub(object):
-  """Service to manage shared sets.
+  """Proto file describing the Shared Set service.
+
+  Service to manage shared sets.
   """
 
   def __init__(self, channel):
@@ -28,7 +30,9 @@ class SharedSetServiceStub(object):
 
 
 class SharedSetServiceServicer(object):
-  """Service to manage shared sets.
+  """Proto file describing the Shared Set service.
+
+  Service to manage shared sets.
   """
 
   def GetSharedSet(self, request, context):

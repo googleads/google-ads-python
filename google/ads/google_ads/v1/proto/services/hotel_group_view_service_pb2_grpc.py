@@ -6,7 +6,9 @@ from google.ads.google_ads.v1.proto.services import hotel_group_view_service_pb2
 
 
 class HotelGroupViewServiceStub(object):
-  """Service to manage Hotel Group Views.
+  """Proto file describing the Hotel Group View Service.
+
+  Service to manage Hotel Group Views.
   """
 
   def __init__(self, channel):
@@ -23,7 +25,9 @@ class HotelGroupViewServiceStub(object):
 
 
 class HotelGroupViewServiceServicer(object):
-  """Service to manage Hotel Group Views.
+  """Proto file describing the Hotel Group View Service.
+
+  Service to manage Hotel Group Views.
   """
 
   def GetHotelGroupView(self, request, context):

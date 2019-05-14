@@ -6,7 +6,9 @@ from google.ads.google_ads.v1.proto.services import shopping_performance_view_se
 
 
 class ShoppingPerformanceViewServiceStub(object):
-  """Service to fetch Shopping performance views.
+  """Proto file describing the ShoppingPerformanceView service.
+
+  Service to fetch Shopping performance views.
   """
 
   def __init__(self, channel):
@@ -23,7 +25,9 @@ class ShoppingPerformanceViewServiceStub(object):
 
 
 class ShoppingPerformanceViewServiceServicer(object):
-  """Service to fetch Shopping performance views.
+  """Proto file describing the ShoppingPerformanceView service.
+
+  Service to fetch Shopping performance views.
   """
 
   def GetShoppingPerformanceView(self, request, context):

@@ -6,7 +6,9 @@ from google.ads.google_ads.v1.proto.services import feed_mapping_service_pb2 as 
 
 
 class FeedMappingServiceStub(object):
-  """Service to manage feed mappings.
+  """Proto file describing the FeedMapping service.
+
+  Service to manage feed mappings.
   """
 
   def __init__(self, channel):
@@ -28,7 +30,9 @@ class FeedMappingServiceStub(object):
 
 
 class FeedMappingServiceServicer(object):
-  """Service to manage feed mappings.
+  """Proto file describing the FeedMapping service.
+
+  Service to manage feed mappings.
   """
 
   def GetFeedMapping(self, request, context):

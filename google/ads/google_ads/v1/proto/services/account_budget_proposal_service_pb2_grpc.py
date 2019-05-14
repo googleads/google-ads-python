@@ -6,7 +6,9 @@ from google.ads.google_ads.v1.proto.services import account_budget_proposal_serv
 
 
 class AccountBudgetProposalServiceStub(object):
-  """A service for managing account-level budgets via proposals.
+  """Proto file describing the AccountBudgetProposal service.
+
+  A service for managing account-level budgets via proposals.
 
   A proposal is a request to create a new budget or make changes to an
   existing one.
@@ -40,7 +42,9 @@ class AccountBudgetProposalServiceStub(object):
 
 
 class AccountBudgetProposalServiceServicer(object):
-  """A service for managing account-level budgets via proposals.
+  """Proto file describing the AccountBudgetProposal service.
+
+  A service for managing account-level budgets via proposals.
 
   A proposal is a request to create a new budget or make changes to an
   existing one.

@@ -6,7 +6,9 @@ from google.ads.google_ads.v1.proto.services import ad_group_feed_service_pb2 as
 
 
 class AdGroupFeedServiceStub(object):
-  """Service to manage ad group feeds.
+  """Proto file describing the AdGroupFeed service.
+
+  Service to manage ad group feeds.
   """
 
   def __init__(self, channel):
@@ -28,7 +30,9 @@ class AdGroupFeedServiceStub(object):
 
 
 class AdGroupFeedServiceServicer(object):
-  """Service to manage ad group feeds.
+  """Proto file describing the AdGroupFeed service.
+
+  Service to manage ad group feeds.
   """
 
   def GetAdGroupFeed(self, request, context):

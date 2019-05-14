@@ -6,7 +6,9 @@ from google.ads.google_ads.v1.proto.services import merchant_center_link_service
 
 
 class MerchantCenterLinkServiceStub(object):
-  """This service allows management of links between Google Ads and Google
+  """Proto file describing the MerchantCenterLink service.
+
+  This service allows management of links between Google Ads and Google
   Merchant Center.
   """
 
@@ -34,7 +36,9 @@ class MerchantCenterLinkServiceStub(object):
 
 
 class MerchantCenterLinkServiceServicer(object):
-  """This service allows management of links between Google Ads and Google
+  """Proto file describing the MerchantCenterLink service.
+
+  This service allows management of links between Google Ads and Google
   Merchant Center.
   """
 

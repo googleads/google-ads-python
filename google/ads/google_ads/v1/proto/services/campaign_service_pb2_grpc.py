@@ -6,7 +6,9 @@ from google.ads.google_ads.v1.proto.services import campaign_service_pb2 as goog
 
 
 class CampaignServiceStub(object):
-  """Service to manage campaigns.
+  """Proto file describing the Campaign service.
+
+  Service to manage campaigns.
   """
 
   def __init__(self, channel):
@@ -28,7 +30,9 @@ class CampaignServiceStub(object):
 
 
 class CampaignServiceServicer(object):
-  """Service to manage campaigns.
+  """Proto file describing the Campaign service.
+
+  Service to manage campaigns.
   """
 
   def GetCampaign(self, request, context):

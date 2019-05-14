@@ -6,7 +6,9 @@ from google.ads.google_ads.v1.proto.services import geo_target_constant_service_
 
 
 class GeoTargetConstantServiceStub(object):
-  """Service to fetch geo target constants.
+  """Proto file describing the Geo target constant service.
+
+  Service to fetch geo target constants.
   """
 
   def __init__(self, channel):
@@ -28,7 +30,9 @@ class GeoTargetConstantServiceStub(object):
 
 
 class GeoTargetConstantServiceServicer(object):
-  """Service to fetch geo target constants.
+  """Proto file describing the Geo target constant service.
+
+  Service to fetch geo target constants.
   """
 
   def GetGeoTargetConstant(self, request, context):

@@ -30,7 +30,7 @@ DESCRIPTOR = _descriptor.FileDescriptor(
   package='google.ads.googleads.v1.common',
   syntax='proto3',
   serialized_options=_b('\n\"com.google.ads.googleads.v1.commonB\017ExtensionsProtoP\001ZDgoogle.golang.org/genproto/googleapis/ads/googleads/v1/common;common\242\002\003GAA\252\002\036Google.Ads.GoogleAds.V1.Common\312\002\036Google\\Ads\\GoogleAds\\V1\\Common\352\002\"Google::Ads::GoogleAds::V1::Common'),
-  serialized_pb=_b('\n5google/ads/googleads_v1/proto/common/extensions.proto\x12\x1egoogle.ads.googleads.v1.common\x1a;google/ads/googleads_v1/proto/common/custom_parameter.proto\x1a\x36google/ads/googleads_v1/proto/common/feed_common.proto\x1a\x33google/ads/googleads_v1/proto/enums/app_store.proto\x1aIgoogle/ads/googleads_v1/proto/enums/call_conversion_reporting_state.proto\x1aIgoogle/ads/googleads_v1/proto/enums/price_extension_price_qualifier.proto\x1a\x44google/ads/googleads_v1/proto/enums/price_extension_price_unit.proto\x1a>google/ads/googleads_v1/proto/enums/price_extension_type.proto\x1aOgoogle/ads/googleads_v1/proto/enums/promotion_extension_discount_modifier.proto\x1a\x46google/ads/googleads_v1/proto/enums/promotion_extension_occasion.proto\x1a\x1egoogle/protobuf/wrappers.proto\x1a\x1cgoogle/api/annotations.proto\"\xe5\x03\n\x0b\x41ppFeedItem\x12/\n\tlink_text\x18\x01 \x01(\x0b\x32\x1c.google.protobuf.StringValue\x12,\n\x06\x61pp_id\x18\x02 \x01(\x0b\x32\x1c.google.protobuf.StringValue\x12G\n\tapp_store\x18\x03 \x01(\x0e\x32\x34.google.ads.googleads.v1.enums.AppStoreEnum.AppStore\x12\x30\n\nfinal_urls\x18\x04 \x03(\x0b\x32\x1c.google.protobuf.StringValue\x12\x37\n\x11\x66inal_mobile_urls\x18\x05 \x03(\x0b\x32\x1c.google.protobuf.StringValue\x12;\n\x15tracking_url_template\x18\x06 \x01(\x0b\x32\x1c.google.protobuf.StringValue\x12N\n\x15url_custom_parameters\x18\x07 \x03(\x0b\x32/.google.ads.googleads.v1.common.CustomParameter\x12\x36\n\x10\x66inal_url_suffix\x18\x08 \x01(\x0b\x32\x1c.google.protobuf.StringValue\"\xbe\x03\n\x0c\x43\x61llFeedItem\x12\x32\n\x0cphone_number\x18\x01 \x01(\x0b\x32\x1c.google.protobuf.StringValue\x12\x32\n\x0c\x63ountry_code\x18\x02 \x01(\x0b\x32\x1c.google.protobuf.StringValue\x12\x39\n\x15\x63\x61ll_tracking_enabled\x18\x03 \x01(\x0b\x32\x1a.google.protobuf.BoolValue\x12<\n\x16\x63\x61ll_conversion_action\x18\x04 \x01(\x0b\x32\x1c.google.protobuf.StringValue\x12\x45\n!call_conversion_tracking_disabled\x18\x05 \x01(\x0b\x32\x1a.google.protobuf.BoolValue\x12\x85\x01\n\x1f\x63\x61ll_conversion_reporting_state\x18\x06 \x01(\x0e\x32\\.google.ads.googleads.v1.enums.CallConversionReportingStateEnum.CallConversionReportingState\"E\n\x0f\x43\x61lloutFeedItem\x12\x32\n\x0c\x63\x61llout_text\x18\x01 \x01(\x0b\x32\x1c.google.protobuf.StringValue\"\x94\x02\n\x13TextMessageFeedItem\x12\x33\n\rbusiness_name\x18\x01 \x01(\x0b\x32\x1c.google.protobuf.StringValue\x12\x32\n\x0c\x63ountry_code\x18\x02 \x01(\x0b\x32\x1c.google.protobuf.StringValue\x12\x32\n\x0cphone_number\x18\x03 \x01(\x0b\x32\x1c.google.protobuf.StringValue\x12*\n\x04text\x18\x04 \x01(\x0b\x32\x1c.google.protobuf.StringValue\x12\x34\n\x0e\x65xtension_text\x18\x05 \x01(\x0b\x32\x1c.google.protobuf.StringValue\"\xcd\x03\n\rPriceFeedItem\x12V\n\x04type\x18\x01 \x01(\x0e\x32H.google.ads.googleads.v1.enums.PriceExtensionTypeEnum.PriceExtensionType\x12u\n\x0fprice_qualifier\x18\x02 \x01(\x0e\x32\\.google.ads.googleads.v1.enums.PriceExtensionPriceQualifierEnum.PriceExtensionPriceQualifier\x12;\n\x15tracking_url_template\x18\x03 \x01(\x0b\x32\x1c.google.protobuf.StringValue\x12\x33\n\rlanguage_code\x18\x04 \x01(\x0b\x32\x1c.google.protobuf.StringValue\x12\x43\n\x0fprice_offerings\x18\x05 \x03(\x0b\x32*.google.ads.googleads.v1.common.PriceOffer\x12\x36\n\x10\x66inal_url_suffix\x18\x06 \x01(\x0b\x32\x1c.google.protobuf.StringValue\"\xf0\x02\n\nPriceOffer\x12,\n\x06header\x18\x01 \x01(\x0b\x32\x1c.google.protobuf.StringValue\x12\x31\n\x0b\x64\x65scription\x18\x02 \x01(\x0b\x32\x1c.google.protobuf.StringValue\x12\x34\n\x05price\x18\x03 \x01(\x0b\x32%.google.ads.googleads.v1.common.Money\x12`\n\x04unit\x18\x04 \x01(\x0e\x32R.google.ads.googleads.v1.enums.PriceExtensionPriceUnitEnum.PriceExtensionPriceUnit\x12\x30\n\nfinal_urls\x18\x05 \x03(\x0b\x32\x1c.google.protobuf.StringValue\x12\x37\n\x11\x66inal_mobile_urls\x18\x06 \x03(\x0b\x32\x1c.google.protobuf.StringValue\"\xb2\x08\n\x11PromotionFeedItem\x12\x36\n\x10promotion_target\x18\x01 \x01(\x0b\x32\x1c.google.protobuf.StringValue\x12\x83\x01\n\x11\x64iscount_modifier\x18\x02 \x01(\x0e\x32h.google.ads.googleads.v1.enums.PromotionExtensionDiscountModifierEnum.PromotionExtensionDiscountModifier\x12:\n\x14promotion_start_date\x18\x07 \x01(\x0b\x32\x1c.google.protobuf.StringValue\x12\x38\n\x12promotion_end_date\x18\x08 \x01(\x0b\x32\x1c.google.protobuf.StringValue\x12j\n\x08occasion\x18\t \x01(\x0e\x32X.google.ads.googleads.v1.enums.PromotionExtensionOccasionEnum.PromotionExtensionOccasion\x12\x30\n\nfinal_urls\x18\n \x03(\x0b\x32\x1c.google.protobuf.StringValue\x12\x37\n\x11\x66inal_mobile_urls\x18\x0b \x03(\x0b\x32\x1c.google.protobuf.StringValue\x12;\n\x15tracking_url_template\x18\x0c \x01(\x0b\x32\x1c.google.protobuf.StringValue\x12N\n\x15url_custom_parameters\x18\r \x03(\x0b\x32/.google.ads.googleads.v1.common.CustomParameter\x12\x36\n\x10\x66inal_url_suffix\x18\x0e \x01(\x0b\x32\x1c.google.protobuf.StringValue\x12\x33\n\rlanguage_code\x18\x0f \x01(\x0b\x32\x1c.google.protobuf.StringValue\x12\x32\n\x0bpercent_off\x18\x03 \x01(\x0b\x32\x1b.google.protobuf.Int64ValueH\x00\x12\x41\n\x10money_amount_off\x18\x04 \x01(\x0b\x32%.google.ads.googleads.v1.common.MoneyH\x00\x12\x36\n\x0epromotion_code\x18\x05 \x01(\x0b\x32\x1c.google.protobuf.StringValueH\x01\x12\x43\n\x12orders_over_amount\x18\x06 \x01(\x0b\x32%.google.ads.googleads.v1.common.MoneyH\x01\x42\x0f\n\rdiscount_typeB\x13\n\x11promotion_trigger\"w\n\x19StructuredSnippetFeedItem\x12,\n\x06header\x18\x01 \x01(\x0b\x32\x1c.google.protobuf.StringValue\x12,\n\x06values\x18\x02 \x03(\x0b\x32\x1c.google.protobuf.StringValue\"\xcd\x03\n\x10SitelinkFeedItem\x12/\n\tlink_text\x18\x01 \x01(\x0b\x32\x1c.google.protobuf.StringValue\x12+\n\x05line1\x18\x02 \x01(\x0b\x32\x1c.google.protobuf.StringValue\x12+\n\x05line2\x18\x03 \x01(\x0b\x32\x1c.google.protobuf.StringValue\x12\x30\n\nfinal_urls\x18\x04 \x03(\x0b\x32\x1c.google.protobuf.StringValue\x12\x37\n\x11\x66inal_mobile_urls\x18\x05 \x03(\x0b\x32\x1c.google.protobuf.StringValue\x12;\n\x15tracking_url_template\x18\x06 \x01(\x0b\x32\x1c.google.protobuf.StringValue\x12N\n\x15url_custom_parameters\x18\x07 \x03(\x0b\x32/.google.ads.googleads.v1.common.CustomParameter\x12\x36\n\x10\x66inal_url_suffix\x18\x08 \x01(\x0b\x32\x1c.google.protobuf.StringValueB\xea\x01\n\"com.google.ads.googleads.v1.commonB\x0f\x45xtensionsProtoP\x01ZDgoogle.golang.org/genproto/googleapis/ads/googleads/v1/common;common\xa2\x02\x03GAA\xaa\x02\x1eGoogle.Ads.GoogleAds.V1.Common\xca\x02\x1eGoogle\\Ads\\GoogleAds\\V1\\Common\xea\x02\"Google::Ads::GoogleAds::V1::Commonb\x06proto3')
+  serialized_pb=_b('\n5google/ads/googleads_v1/proto/common/extensions.proto\x12\x1egoogle.ads.googleads.v1.common\x1a;google/ads/googleads_v1/proto/common/custom_parameter.proto\x1a\x36google/ads/googleads_v1/proto/common/feed_common.proto\x1a\x33google/ads/googleads_v1/proto/enums/app_store.proto\x1aIgoogle/ads/googleads_v1/proto/enums/call_conversion_reporting_state.proto\x1aIgoogle/ads/googleads_v1/proto/enums/price_extension_price_qualifier.proto\x1a\x44google/ads/googleads_v1/proto/enums/price_extension_price_unit.proto\x1a>google/ads/googleads_v1/proto/enums/price_extension_type.proto\x1aOgoogle/ads/googleads_v1/proto/enums/promotion_extension_discount_modifier.proto\x1a\x46google/ads/googleads_v1/proto/enums/promotion_extension_occasion.proto\x1a\x1egoogle/protobuf/wrappers.proto\x1a\x1cgoogle/api/annotations.proto\"\xe5\x03\n\x0b\x41ppFeedItem\x12/\n\tlink_text\x18\x01 \x01(\x0b\x32\x1c.google.protobuf.StringValue\x12,\n\x06\x61pp_id\x18\x02 \x01(\x0b\x32\x1c.google.protobuf.StringValue\x12G\n\tapp_store\x18\x03 \x01(\x0e\x32\x34.google.ads.googleads.v1.enums.AppStoreEnum.AppStore\x12\x30\n\nfinal_urls\x18\x04 \x03(\x0b\x32\x1c.google.protobuf.StringValue\x12\x37\n\x11\x66inal_mobile_urls\x18\x05 \x03(\x0b\x32\x1c.google.protobuf.StringValue\x12;\n\x15tracking_url_template\x18\x06 \x01(\x0b\x32\x1c.google.protobuf.StringValue\x12N\n\x15url_custom_parameters\x18\x07 \x03(\x0b\x32/.google.ads.googleads.v1.common.CustomParameter\x12\x36\n\x10\x66inal_url_suffix\x18\x08 \x01(\x0b\x32\x1c.google.protobuf.StringValue\"\xbe\x03\n\x0c\x43\x61llFeedItem\x12\x32\n\x0cphone_number\x18\x01 \x01(\x0b\x32\x1c.google.protobuf.StringValue\x12\x32\n\x0c\x63ountry_code\x18\x02 \x01(\x0b\x32\x1c.google.protobuf.StringValue\x12\x39\n\x15\x63\x61ll_tracking_enabled\x18\x03 \x01(\x0b\x32\x1a.google.protobuf.BoolValue\x12<\n\x16\x63\x61ll_conversion_action\x18\x04 \x01(\x0b\x32\x1c.google.protobuf.StringValue\x12\x45\n!call_conversion_tracking_disabled\x18\x05 \x01(\x0b\x32\x1a.google.protobuf.BoolValue\x12\x85\x01\n\x1f\x63\x61ll_conversion_reporting_state\x18\x06 \x01(\x0e\x32\\.google.ads.googleads.v1.enums.CallConversionReportingStateEnum.CallConversionReportingState\"E\n\x0f\x43\x61lloutFeedItem\x12\x32\n\x0c\x63\x61llout_text\x18\x01 \x01(\x0b\x32\x1c.google.protobuf.StringValue\"\xaa\x03\n\x10LocationFeedItem\x12\x33\n\rbusiness_name\x18\x01 \x01(\x0b\x32\x1c.google.protobuf.StringValue\x12\x34\n\x0e\x61\x64\x64ress_line_1\x18\x02 \x01(\x0b\x32\x1c.google.protobuf.StringValue\x12\x34\n\x0e\x61\x64\x64ress_line_2\x18\x03 \x01(\x0b\x32\x1c.google.protobuf.StringValue\x12*\n\x04\x63ity\x18\x04 \x01(\x0b\x32\x1c.google.protobuf.StringValue\x12.\n\x08province\x18\x05 \x01(\x0b\x32\x1c.google.protobuf.StringValue\x12\x31\n\x0bpostal_code\x18\x06 \x01(\x0b\x32\x1c.google.protobuf.StringValue\x12\x32\n\x0c\x63ountry_code\x18\x07 \x01(\x0b\x32\x1c.google.protobuf.StringValue\x12\x32\n\x0cphone_number\x18\x08 \x01(\x0b\x32\x1c.google.protobuf.StringValue\"\x94\x04\n\x19\x41\x66\x66iliateLocationFeedItem\x12\x33\n\rbusiness_name\x18\x01 \x01(\x0b\x32\x1c.google.protobuf.StringValue\x12\x34\n\x0e\x61\x64\x64ress_line_1\x18\x02 \x01(\x0b\x32\x1c.google.protobuf.StringValue\x12\x34\n\x0e\x61\x64\x64ress_line_2\x18\x03 \x01(\x0b\x32\x1c.google.protobuf.StringValue\x12*\n\x04\x63ity\x18\x04 \x01(\x0b\x32\x1c.google.protobuf.StringValue\x12.\n\x08province\x18\x05 \x01(\x0b\x32\x1c.google.protobuf.StringValue\x12\x31\n\x0bpostal_code\x18\x06 \x01(\x0b\x32\x1c.google.protobuf.StringValue\x12\x32\n\x0c\x63ountry_code\x18\x07 \x01(\x0b\x32\x1c.google.protobuf.StringValue\x12\x32\n\x0cphone_number\x18\x08 \x01(\x0b\x32\x1c.google.protobuf.StringValue\x12-\n\x08\x63hain_id\x18\t \x01(\x0b\x32\x1b.google.protobuf.Int64Value\x12\x30\n\nchain_name\x18\n \x01(\x0b\x32\x1c.google.protobuf.StringValue\"\x94\x02\n\x13TextMessageFeedItem\x12\x33\n\rbusiness_name\x18\x01 \x01(\x0b\x32\x1c.google.protobuf.StringValue\x12\x32\n\x0c\x63ountry_code\x18\x02 \x01(\x0b\x32\x1c.google.protobuf.StringValue\x12\x32\n\x0cphone_number\x18\x03 \x01(\x0b\x32\x1c.google.protobuf.StringValue\x12*\n\x04text\x18\x04 \x01(\x0b\x32\x1c.google.protobuf.StringValue\x12\x34\n\x0e\x65xtension_text\x18\x05 \x01(\x0b\x32\x1c.google.protobuf.StringValue\"\xcd\x03\n\rPriceFeedItem\x12V\n\x04type\x18\x01 \x01(\x0e\x32H.google.ads.googleads.v1.enums.PriceExtensionTypeEnum.PriceExtensionType\x12u\n\x0fprice_qualifier\x18\x02 \x01(\x0e\x32\\.google.ads.googleads.v1.enums.PriceExtensionPriceQualifierEnum.PriceExtensionPriceQualifier\x12;\n\x15tracking_url_template\x18\x03 \x01(\x0b\x32\x1c.google.protobuf.StringValue\x12\x33\n\rlanguage_code\x18\x04 \x01(\x0b\x32\x1c.google.protobuf.StringValue\x12\x43\n\x0fprice_offerings\x18\x05 \x03(\x0b\x32*.google.ads.googleads.v1.common.PriceOffer\x12\x36\n\x10\x66inal_url_suffix\x18\x06 \x01(\x0b\x32\x1c.google.protobuf.StringValue\"\xf0\x02\n\nPriceOffer\x12,\n\x06header\x18\x01 \x01(\x0b\x32\x1c.google.protobuf.StringValue\x12\x31\n\x0b\x64\x65scription\x18\x02 \x01(\x0b\x32\x1c.google.protobuf.StringValue\x12\x34\n\x05price\x18\x03 \x01(\x0b\x32%.google.ads.googleads.v1.common.Money\x12`\n\x04unit\x18\x04 \x01(\x0e\x32R.google.ads.googleads.v1.enums.PriceExtensionPriceUnitEnum.PriceExtensionPriceUnit\x12\x30\n\nfinal_urls\x18\x05 \x03(\x0b\x32\x1c.google.protobuf.StringValue\x12\x37\n\x11\x66inal_mobile_urls\x18\x06 \x03(\x0b\x32\x1c.google.protobuf.StringValue\"\xb2\x08\n\x11PromotionFeedItem\x12\x36\n\x10promotion_target\x18\x01 \x01(\x0b\x32\x1c.google.protobuf.StringValue\x12\x83\x01\n\x11\x64iscount_modifier\x18\x02 \x01(\x0e\x32h.google.ads.googleads.v1.enums.PromotionExtensionDiscountModifierEnum.PromotionExtensionDiscountModifier\x12:\n\x14promotion_start_date\x18\x07 \x01(\x0b\x32\x1c.google.protobuf.StringValue\x12\x38\n\x12promotion_end_date\x18\x08 \x01(\x0b\x32\x1c.google.protobuf.StringValue\x12j\n\x08occasion\x18\t \x01(\x0e\x32X.google.ads.googleads.v1.enums.PromotionExtensionOccasionEnum.PromotionExtensionOccasion\x12\x30\n\nfinal_urls\x18\n \x03(\x0b\x32\x1c.google.protobuf.StringValue\x12\x37\n\x11\x66inal_mobile_urls\x18\x0b \x03(\x0b\x32\x1c.google.protobuf.StringValue\x12;\n\x15tracking_url_template\x18\x0c \x01(\x0b\x32\x1c.google.protobuf.StringValue\x12N\n\x15url_custom_parameters\x18\r \x03(\x0b\x32/.google.ads.googleads.v1.common.CustomParameter\x12\x36\n\x10\x66inal_url_suffix\x18\x0e \x01(\x0b\x32\x1c.google.protobuf.StringValue\x12\x33\n\rlanguage_code\x18\x0f \x01(\x0b\x32\x1c.google.protobuf.StringValue\x12\x32\n\x0bpercent_off\x18\x03 \x01(\x0b\x32\x1b.google.protobuf.Int64ValueH\x00\x12\x41\n\x10money_amount_off\x18\x04 \x01(\x0b\x32%.google.ads.googleads.v1.common.MoneyH\x00\x12\x36\n\x0epromotion_code\x18\x05 \x01(\x0b\x32\x1c.google.protobuf.StringValueH\x01\x12\x43\n\x12orders_over_amount\x18\x06 \x01(\x0b\x32%.google.ads.googleads.v1.common.MoneyH\x01\x42\x0f\n\rdiscount_typeB\x13\n\x11promotion_trigger\"w\n\x19StructuredSnippetFeedItem\x12,\n\x06header\x18\x01 \x01(\x0b\x32\x1c.google.protobuf.StringValue\x12,\n\x06values\x18\x02 \x03(\x0b\x32\x1c.google.protobuf.StringValue\"\xcd\x03\n\x10SitelinkFeedItem\x12/\n\tlink_text\x18\x01 \x01(\x0b\x32\x1c.google.protobuf.StringValue\x12+\n\x05line1\x18\x02 \x01(\x0b\x32\x1c.google.protobuf.StringValue\x12+\n\x05line2\x18\x03 \x01(\x0b\x32\x1c.google.protobuf.StringValue\x12\x30\n\nfinal_urls\x18\x04 \x03(\x0b\x32\x1c.google.protobuf.StringValue\x12\x37\n\x11\x66inal_mobile_urls\x18\x05 \x03(\x0b\x32\x1c.google.protobuf.StringValue\x12;\n\x15tracking_url_template\x18\x06 \x01(\x0b\x32\x1c.google.protobuf.StringValue\x12N\n\x15url_custom_parameters\x18\x07 \x03(\x0b\x32/.google.ads.googleads.v1.common.CustomParameter\x12\x36\n\x10\x66inal_url_suffix\x18\x08 \x01(\x0b\x32\x1c.google.protobuf.StringValueB\xea\x01\n\"com.google.ads.googleads.v1.commonB\x0f\x45xtensionsProtoP\x01ZDgoogle.golang.org/genproto/googleapis/ads/googleads/v1/common;common\xa2\x02\x03GAA\xaa\x02\x1eGoogle.Ads.GoogleAds.V1.Common\xca\x02\x1eGoogle\\Ads\\GoogleAds\\V1\\Common\xea\x02\"Google::Ads::GoogleAds::V1::Commonb\x06proto3')
   ,
   dependencies=[google_dot_ads_dot_googleads__v1_dot_proto_dot_common_dot_custom__parameter__pb2.DESCRIPTOR,google_dot_ads_dot_googleads__v1_dot_proto_dot_common_dot_feed__common__pb2.DESCRIPTOR,google_dot_ads_dot_googleads__v1_dot_proto_dot_enums_dot_app__store__pb2.DESCRIPTOR,google_dot_ads_dot_googleads__v1_dot_proto_dot_enums_dot_call__conversion__reporting__state__pb2.DESCRIPTOR,google_dot_ads_dot_googleads__v1_dot_proto_dot_enums_dot_price__extension__price__qualifier__pb2.DESCRIPTOR,google_dot_ads_dot_googleads__v1_dot_proto_dot_enums_dot_price__extension__price__unit__pb2.DESCRIPTOR,google_dot_ads_dot_googleads__v1_dot_proto_dot_enums_dot_price__extension__type__pb2.DESCRIPTOR,google_dot_ads_dot_googleads__v1_dot_proto_dot_enums_dot_promotion__extension__discount__modifier__pb2.DESCRIPTOR,google_dot_ads_dot_googleads__v1_dot_proto_dot_enums_dot_promotion__extension__occasion__pb2.DESCRIPTOR,google_dot_protobuf_dot_wrappers__pb2.DESCRIPTOR,google_dot_api_dot_annotations__pb2.DESCRIPTOR,])
 
@@ -214,6 +214,180 @@ _CALLOUTFEEDITEM = _descriptor.Descriptor(
 )
 
 
+_LOCATIONFEEDITEM = _descriptor.Descriptor(
+  name='LocationFeedItem',
+  full_name='google.ads.googleads.v1.common.LocationFeedItem',
+  filename=None,
+  file=DESCRIPTOR,
+  containing_type=None,
+  fields=[
+    _descriptor.FieldDescriptor(
+      name='business_name', full_name='google.ads.googleads.v1.common.LocationFeedItem.business_name', index=0,
+      number=1, type=11, cpp_type=10, label=1,
+      has_default_value=False, default_value=None,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR),
+    _descriptor.FieldDescriptor(
+      name='address_line_1', full_name='google.ads.googleads.v1.common.LocationFeedItem.address_line_1', index=1,
+      number=2, type=11, cpp_type=10, label=1,
+      has_default_value=False, default_value=None,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR),
+    _descriptor.FieldDescriptor(
+      name='address_line_2', full_name='google.ads.googleads.v1.common.LocationFeedItem.address_line_2', index=2,
+      number=3, type=11, cpp_type=10, label=1,
+      has_default_value=False, default_value=None,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR),
+    _descriptor.FieldDescriptor(
+      name='city', full_name='google.ads.googleads.v1.common.LocationFeedItem.city', index=3,
+      number=4, type=11, cpp_type=10, label=1,
+      has_default_value=False, default_value=None,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR),
+    _descriptor.FieldDescriptor(
+      name='province', full_name='google.ads.googleads.v1.common.LocationFeedItem.province', index=4,
+      number=5, type=11, cpp_type=10, label=1,
+      has_default_value=False, default_value=None,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR),
+    _descriptor.FieldDescriptor(
+      name='postal_code', full_name='google.ads.googleads.v1.common.LocationFeedItem.postal_code', index=5,
+      number=6, type=11, cpp_type=10, label=1,
+      has_default_value=False, default_value=None,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR),
+    _descriptor.FieldDescriptor(
+      name='country_code', full_name='google.ads.googleads.v1.common.LocationFeedItem.country_code', index=6,
+      number=7, type=11, cpp_type=10, label=1,
+      has_default_value=False, default_value=None,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR),
+    _descriptor.FieldDescriptor(
+      name='phone_number', full_name='google.ads.googleads.v1.common.LocationFeedItem.phone_number', index=7,
+      number=8, type=11, cpp_type=10, label=1,
+      has_default_value=False, default_value=None,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR),
+  ],
+  extensions=[
+  ],
+  nested_types=[],
+  enum_types=[
+  ],
+  serialized_options=None,
+  is_extendable=False,
+  syntax='proto3',
+  extension_ranges=[],
+  oneofs=[
+  ],
+  serialized_start=1767,
+  serialized_end=2193,
+)
+
+
+_AFFILIATELOCATIONFEEDITEM = _descriptor.Descriptor(
+  name='AffiliateLocationFeedItem',
+  full_name='google.ads.googleads.v1.common.AffiliateLocationFeedItem',
+  filename=None,
+  file=DESCRIPTOR,
+  containing_type=None,
+  fields=[
+    _descriptor.FieldDescriptor(
+      name='business_name', full_name='google.ads.googleads.v1.common.AffiliateLocationFeedItem.business_name', index=0,
+      number=1, type=11, cpp_type=10, label=1,
+      has_default_value=False, default_value=None,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR),
+    _descriptor.FieldDescriptor(
+      name='address_line_1', full_name='google.ads.googleads.v1.common.AffiliateLocationFeedItem.address_line_1', index=1,
+      number=2, type=11, cpp_type=10, label=1,
+      has_default_value=False, default_value=None,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR),
+    _descriptor.FieldDescriptor(
+      name='address_line_2', full_name='google.ads.googleads.v1.common.AffiliateLocationFeedItem.address_line_2', index=2,
+      number=3, type=11, cpp_type=10, label=1,
+      has_default_value=False, default_value=None,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR),
+    _descriptor.FieldDescriptor(
+      name='city', full_name='google.ads.googleads.v1.common.AffiliateLocationFeedItem.city', index=3,
+      number=4, type=11, cpp_type=10, label=1,
+      has_default_value=False, default_value=None,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR),
+    _descriptor.FieldDescriptor(
+      name='province', full_name='google.ads.googleads.v1.common.AffiliateLocationFeedItem.province', index=4,
+      number=5, type=11, cpp_type=10, label=1,
+      has_default_value=False, default_value=None,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR),
+    _descriptor.FieldDescriptor(
+      name='postal_code', full_name='google.ads.googleads.v1.common.AffiliateLocationFeedItem.postal_code', index=5,
+      number=6, type=11, cpp_type=10, label=1,
+      has_default_value=False, default_value=None,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR),
+    _descriptor.FieldDescriptor(
+      name='country_code', full_name='google.ads.googleads.v1.common.AffiliateLocationFeedItem.country_code', index=6,
+      number=7, type=11, cpp_type=10, label=1,
+      has_default_value=False, default_value=None,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR),
+    _descriptor.FieldDescriptor(
+      name='phone_number', full_name='google.ads.googleads.v1.common.AffiliateLocationFeedItem.phone_number', index=7,
+      number=8, type=11, cpp_type=10, label=1,
+      has_default_value=False, default_value=None,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR),
+    _descriptor.FieldDescriptor(
+      name='chain_id', full_name='google.ads.googleads.v1.common.AffiliateLocationFeedItem.chain_id', index=8,
+      number=9, type=11, cpp_type=10, label=1,
+      has_default_value=False, default_value=None,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR),
+    _descriptor.FieldDescriptor(
+      name='chain_name', full_name='google.ads.googleads.v1.common.AffiliateLocationFeedItem.chain_name', index=9,
+      number=10, type=11, cpp_type=10, label=1,
+      has_default_value=False, default_value=None,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR),
+  ],
+  extensions=[
+  ],
+  nested_types=[],
+  enum_types=[
+  ],
+  serialized_options=None,
+  is_extendable=False,
+  syntax='proto3',
+  extension_ranges=[],
+  oneofs=[
+  ],
+  serialized_start=2196,
+  serialized_end=2728,
+)
+
+
 _TEXTMESSAGEFEEDITEM = _descriptor.Descriptor(
   name='TextMessageFeedItem',
   full_name='google.ads.googleads.v1.common.TextMessageFeedItem',
@@ -268,8 +442,8 @@ _TEXTMESSAGEFEEDITEM = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=1767,
-  serialized_end=2043,
+  serialized_start=2731,
+  serialized_end=3007,
 )
 
 
@@ -334,8 +508,8 @@ _PRICEFEEDITEM = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=2046,
-  serialized_end=2507,
+  serialized_start=3010,
+  serialized_end=3471,
 )
 
 
@@ -400,8 +574,8 @@ _PRICEOFFER = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=2510,
-  serialized_end=2878,
+  serialized_start=3474,
+  serialized_end=3842,
 )
 
 
@@ -535,8 +709,8 @@ _PROMOTIONFEEDITEM = _descriptor.Descriptor(
       name='promotion_trigger', full_name='google.ads.googleads.v1.common.PromotionFeedItem.promotion_trigger',
       index=1, containing_type=None, fields=[]),
   ],
-  serialized_start=2881,
-  serialized_end=3955,
+  serialized_start=3845,
+  serialized_end=4919,
 )
 
 
@@ -573,8 +747,8 @@ _STRUCTUREDSNIPPETFEEDITEM = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=3957,
-  serialized_end=4076,
+  serialized_start=4921,
+  serialized_end=5040,
 )
 
 
@@ -653,8 +827,8 @@ _SITELINKFEEDITEM = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=4079,
-  serialized_end=4540,
+  serialized_start=5043,
+  serialized_end=5504,
 )
 
 _APPFEEDITEM.fields_by_name['link_text'].message_type = google_dot_protobuf_dot_wrappers__pb2._STRINGVALUE
@@ -672,6 +846,24 @@ _CALLFEEDITEM.fields_by_name['call_conversion_action'].message_type = google_dot
 _CALLFEEDITEM.fields_by_name['call_conversion_tracking_disabled'].message_type = google_dot_protobuf_dot_wrappers__pb2._BOOLVALUE
 _CALLFEEDITEM.fields_by_name['call_conversion_reporting_state'].enum_type = google_dot_ads_dot_googleads__v1_dot_proto_dot_enums_dot_call__conversion__reporting__state__pb2._CALLCONVERSIONREPORTINGSTATEENUM_CALLCONVERSIONREPORTINGSTATE
 _CALLOUTFEEDITEM.fields_by_name['callout_text'].message_type = google_dot_protobuf_dot_wrappers__pb2._STRINGVALUE
+_LOCATIONFEEDITEM.fields_by_name['business_name'].message_type = google_dot_protobuf_dot_wrappers__pb2._STRINGVALUE
+_LOCATIONFEEDITEM.fields_by_name['address_line_1'].message_type = google_dot_protobuf_dot_wrappers__pb2._STRINGVALUE
+_LOCATIONFEEDITEM.fields_by_name['address_line_2'].message_type = google_dot_protobuf_dot_wrappers__pb2._STRINGVALUE
+_LOCATIONFEEDITEM.fields_by_name['city'].message_type = google_dot_protobuf_dot_wrappers__pb2._STRINGVALUE
+_LOCATIONFEEDITEM.fields_by_name['province'].message_type = google_dot_protobuf_dot_wrappers__pb2._STRINGVALUE
+_LOCATIONFEEDITEM.fields_by_name['postal_code'].message_type = google_dot_protobuf_dot_wrappers__pb2._STRINGVALUE
+_LOCATIONFEEDITEM.fields_by_name['country_code'].message_type = google_dot_protobuf_dot_wrappers__pb2._STRINGVALUE
+_LOCATIONFEEDITEM.fields_by_name['phone_number'].message_type = google_dot_protobuf_dot_wrappers__pb2._STRINGVALUE
+_AFFILIATELOCATIONFEEDITEM.fields_by_name['business_name'].message_type = google_dot_protobuf_dot_wrappers__pb2._STRINGVALUE
+_AFFILIATELOCATIONFEEDITEM.fields_by_name['address_line_1'].message_type = google_dot_protobuf_dot_wrappers__pb2._STRINGVALUE
+_AFFILIATELOCATIONFEEDITEM.fields_by_name['address_line_2'].message_type = google_dot_protobuf_dot_wrappers__pb2._STRINGVALUE
+_AFFILIATELOCATIONFEEDITEM.fields_by_name['city'].message_type = google_dot_protobuf_dot_wrappers__pb2._STRINGVALUE
+_AFFILIATELOCATIONFEEDITEM.fields_by_name['province'].message_type = google_dot_protobuf_dot_wrappers__pb2._STRINGVALUE
+_AFFILIATELOCATIONFEEDITEM.fields_by_name['postal_code'].message_type = google_dot_protobuf_dot_wrappers__pb2._STRINGVALUE
+_AFFILIATELOCATIONFEEDITEM.fields_by_name['country_code'].message_type = google_dot_protobuf_dot_wrappers__pb2._STRINGVALUE
+_AFFILIATELOCATIONFEEDITEM.fields_by_name['phone_number'].message_type = google_dot_protobuf_dot_wrappers__pb2._STRINGVALUE
+_AFFILIATELOCATIONFEEDITEM.fields_by_name['chain_id'].message_type = google_dot_protobuf_dot_wrappers__pb2._INT64VALUE
+_AFFILIATELOCATIONFEEDITEM.fields_by_name['chain_name'].message_type = google_dot_protobuf_dot_wrappers__pb2._STRINGVALUE
 _TEXTMESSAGEFEEDITEM.fields_by_name['business_name'].message_type = google_dot_protobuf_dot_wrappers__pb2._STRINGVALUE
 _TEXTMESSAGEFEEDITEM.fields_by_name['country_code'].message_type = google_dot_protobuf_dot_wrappers__pb2._STRINGVALUE
 _TEXTMESSAGEFEEDITEM.fields_by_name['phone_number'].message_type = google_dot_protobuf_dot_wrappers__pb2._STRINGVALUE
@@ -729,6 +921,8 @@ _SITELINKFEEDITEM.fields_by_name['final_url_suffix'].message_type = google_dot_p
 DESCRIPTOR.message_types_by_name['AppFeedItem'] = _APPFEEDITEM
 DESCRIPTOR.message_types_by_name['CallFeedItem'] = _CALLFEEDITEM
 DESCRIPTOR.message_types_by_name['CalloutFeedItem'] = _CALLOUTFEEDITEM
+DESCRIPTOR.message_types_by_name['LocationFeedItem'] = _LOCATIONFEEDITEM
+DESCRIPTOR.message_types_by_name['AffiliateLocationFeedItem'] = _AFFILIATELOCATIONFEEDITEM
 DESCRIPTOR.message_types_by_name['TextMessageFeedItem'] = _TEXTMESSAGEFEEDITEM
 DESCRIPTOR.message_types_by_name['PriceFeedItem'] = _PRICEFEEDITEM
 DESCRIPTOR.message_types_by_name['PriceOffer'] = _PRICEOFFER
@@ -826,6 +1020,69 @@ CalloutFeedItem = _reflection.GeneratedProtocolMessageType('CalloutFeedItem', (_
   ))
 _sym_db.RegisterMessage(CalloutFeedItem)
 
+LocationFeedItem = _reflection.GeneratedProtocolMessageType('LocationFeedItem', (_message.Message,), dict(
+  DESCRIPTOR = _LOCATIONFEEDITEM,
+  __module__ = 'google.ads.googleads_v1.proto.common.extensions_pb2'
+  ,
+  __doc__ = """Represents a location extension.
+  
+  
+  Attributes:
+      business_name:
+          The name of the business.
+      address_line_1:
+          Line 1 of the business address.
+      address_line_2:
+          Line 2 of the business address.
+      city:
+          City of the business address.
+      province:
+          Province of the business address.
+      postal_code:
+          Postal code of the business address.
+      country_code:
+          Country code of the business address.
+      phone_number:
+          Phone number of the business.
+  """,
+  # @@protoc_insertion_point(class_scope:google.ads.googleads.v1.common.LocationFeedItem)
+  ))
+_sym_db.RegisterMessage(LocationFeedItem)
+
+AffiliateLocationFeedItem = _reflection.GeneratedProtocolMessageType('AffiliateLocationFeedItem', (_message.Message,), dict(
+  DESCRIPTOR = _AFFILIATELOCATIONFEEDITEM,
+  __module__ = 'google.ads.googleads_v1.proto.common.extensions_pb2'
+  ,
+  __doc__ = """Represents an affiliate location extension.
+  
+  
+  Attributes:
+      business_name:
+          The name of the business.
+      address_line_1:
+          Line 1 of the business address.
+      address_line_2:
+          Line 2 of the business address.
+      city:
+          City of the business address.
+      province:
+          Province of the business address.
+      postal_code:
+          Postal code of the business address.
+      country_code:
+          Country code of the business address.
+      phone_number:
+          Phone number of the business.
+      chain_id:
+          Id of the retail chain that is advertised as a seller of your
+          product.
+      chain_name:
+          Name of chain.
+  """,
+  # @@protoc_insertion_point(class_scope:google.ads.googleads.v1.common.AffiliateLocationFeedItem)
+  ))
+_sym_db.RegisterMessage(AffiliateLocationFeedItem)
+
 TextMessageFeedItem = _reflection.GeneratedProtocolMessageType('TextMessageFeedItem', (_message.Message,), dict(
   DESCRIPTOR = _TEXTMESSAGEFEEDITEM,
   __module__ = 'google.ads.googleads_v1.proto.common.extensions_pb2'
@@ -921,10 +1178,8 @@ PromotionFeedItem = _reflection.GeneratedProtocolMessageType('PromotionFeedItem'
           Enum that modifies the qualification of the discount.
       promotion_start_date:
           Start date of when the promotion is eligible to be redeemed.
-          This field is currently mutate only.
       promotion_end_date:
           End date of when the promotion is eligible to be redeemed.
-          This field is currently mutate only.
       occasion:
           The occasion the promotion was intended for. If an occasion is
           set, the redemption window will need to fall within the date

@@ -6,7 +6,9 @@ from google.ads.google_ads.v1.proto.services import campaign_feed_service_pb2 as
 
 
 class CampaignFeedServiceStub(object):
-  """Service to manage campaign feeds.
+  """Proto file describing the CampaignFeed service.
+
+  Service to manage campaign feeds.
   """
 
   def __init__(self, channel):
@@ -28,7 +30,9 @@ class CampaignFeedServiceStub(object):
 
 
 class CampaignFeedServiceServicer(object):
-  """Service to manage campaign feeds.
+  """Proto file describing the CampaignFeed service.
+
+  Service to manage campaign feeds.
   """
 
   def GetCampaignFeed(self, request, context):

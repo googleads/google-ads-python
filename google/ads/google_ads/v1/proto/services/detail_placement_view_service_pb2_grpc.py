@@ -6,7 +6,9 @@ from google.ads.google_ads.v1.proto.services import detail_placement_view_servic
 
 
 class DetailPlacementViewServiceStub(object):
-  """Service to fetch Detail Placement views.
+  """Proto file describing the Detail Placement View service.
+
+  Service to fetch Detail Placement views.
   """
 
   def __init__(self, channel):
@@ -23,7 +25,9 @@ class DetailPlacementViewServiceStub(object):
 
 
 class DetailPlacementViewServiceServicer(object):
-  """Service to fetch Detail Placement views.
+  """Proto file describing the Detail Placement View service.
+
+  Service to fetch Detail Placement views.
   """
 
   def GetDetailPlacementView(self, request, context):

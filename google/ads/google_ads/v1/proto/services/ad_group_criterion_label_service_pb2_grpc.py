@@ -6,7 +6,9 @@ from google.ads.google_ads.v1.proto.services import ad_group_criterion_label_ser
 
 
 class AdGroupCriterionLabelServiceStub(object):
-  """Service to manage labels on ad group criteria.
+  """Proto file describing the Ad Group Criterion Label service.
+
+  Service to manage labels on ad group criteria.
   """
 
   def __init__(self, channel):
@@ -28,7 +30,9 @@ class AdGroupCriterionLabelServiceStub(object):
 
 
 class AdGroupCriterionLabelServiceServicer(object):
-  """Service to manage labels on ad group criteria.
+  """Proto file describing the Ad Group Criterion Label service.
+
+  Service to manage labels on ad group criteria.
   """
 
   def GetAdGroupCriterionLabel(self, request, context):

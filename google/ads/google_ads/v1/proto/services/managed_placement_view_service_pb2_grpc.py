@@ -6,7 +6,9 @@ from google.ads.google_ads.v1.proto.services import managed_placement_view_servi
 
 
 class ManagedPlacementViewServiceStub(object):
-  """Service to manage Managed Placement views.
+  """Proto file describing the Managed Placement View service.
+
+  Service to manage Managed Placement views.
   """
 
   def __init__(self, channel):
@@ -23,7 +25,9 @@ class ManagedPlacementViewServiceStub(object):
 
 
 class ManagedPlacementViewServiceServicer(object):
-  """Service to manage Managed Placement views.
+  """Proto file describing the Managed Placement View service.
+
+  Service to manage Managed Placement views.
   """
 
   def GetManagedPlacementView(self, request, context):

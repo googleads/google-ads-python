@@ -6,7 +6,9 @@ from google.ads.google_ads.v1.proto.services import domain_category_service_pb2 
 
 
 class DomainCategoryServiceStub(object):
-  """Service to fetch domain categories.
+  """Proto file describing the DomainCategory Service.
+
+  Service to fetch domain categories.
   """
 
   def __init__(self, channel):
@@ -23,7 +25,9 @@ class DomainCategoryServiceStub(object):
 
 
 class DomainCategoryServiceServicer(object):
-  """Service to fetch domain categories.
+  """Proto file describing the DomainCategory Service.
+
+  Service to fetch domain categories.
   """
 
   def GetDomainCategory(self, request, context):

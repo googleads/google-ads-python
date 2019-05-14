@@ -25,10 +25,12 @@ from google.ads.google_ads.v1.services import ad_group_audience_view_service_cli
 from google.ads.google_ads.v1.services import ad_group_bid_modifier_service_client
 from google.ads.google_ads.v1.services import ad_group_criterion_label_service_client
 from google.ads.google_ads.v1.services import ad_group_criterion_service_client
+from google.ads.google_ads.v1.services import ad_group_criterion_simulation_service_client
 from google.ads.google_ads.v1.services import ad_group_extension_setting_service_client
 from google.ads.google_ads.v1.services import ad_group_feed_service_client
 from google.ads.google_ads.v1.services import ad_group_label_service_client
 from google.ads.google_ads.v1.services import ad_group_service_client
+from google.ads.google_ads.v1.services import ad_group_simulation_service_client
 from google.ads.google_ads.v1.services import ad_parameter_service_client
 from google.ads.google_ads.v1.services import ad_schedule_view_service_client
 from google.ads.google_ads.v1.services import age_range_view_service_client
@@ -39,6 +41,7 @@ from google.ads.google_ads.v1.services import campaign_audience_view_service_cli
 from google.ads.google_ads.v1.services import campaign_bid_modifier_service_client
 from google.ads.google_ads.v1.services import campaign_budget_service_client
 from google.ads.google_ads.v1.services import campaign_criterion_service_client
+from google.ads.google_ads.v1.services import campaign_criterion_simulation_service_client
 from google.ads.google_ads.v1.services import campaign_extension_setting_service_client
 from google.ads.google_ads.v1.services import campaign_feed_service_client
 from google.ads.google_ads.v1.services import campaign_label_service_client
@@ -64,6 +67,7 @@ from google.ads.google_ads.v1.services import display_keyword_view_service_clien
 from google.ads.google_ads.v1.services import domain_category_service_client
 from google.ads.google_ads.v1.services import dynamic_search_ads_search_term_view_service_client
 from google.ads.google_ads.v1.services import enums
+from google.ads.google_ads.v1.services import expanded_landing_page_view_service_client
 from google.ads.google_ads.v1.services import extension_feed_item_service_client
 from google.ads.google_ads.v1.services import feed_item_service_client
 from google.ads.google_ads.v1.services import feed_item_target_service_client
@@ -86,6 +90,7 @@ from google.ads.google_ads.v1.services import keyword_plan_negative_keyword_serv
 from google.ads.google_ads.v1.services import keyword_plan_service_client
 from google.ads.google_ads.v1.services import keyword_view_service_client
 from google.ads.google_ads.v1.services import label_service_client
+from google.ads.google_ads.v1.services import landing_page_view_service_client
 from google.ads.google_ads.v1.services import language_constant_service_client
 from google.ads.google_ads.v1.services import location_view_service_client
 from google.ads.google_ads.v1.services import managed_placement_view_service_client
@@ -95,6 +100,7 @@ from google.ads.google_ads.v1.services import mobile_app_category_constant_servi
 from google.ads.google_ads.v1.services import mobile_device_constant_service_client
 from google.ads.google_ads.v1.services import mutate_job_service_client
 from google.ads.google_ads.v1.services import operating_system_version_constant_service_client
+from google.ads.google_ads.v1.services import paid_organic_search_term_view_service_client
 from google.ads.google_ads.v1.services import parental_status_view_service_client
 from google.ads.google_ads.v1.services import payments_account_service_client
 from google.ads.google_ads.v1.services import product_bidding_category_constant_service_client
@@ -118,10 +124,12 @@ from google.ads.google_ads.v1.services.transports import ad_group_audience_view_
 from google.ads.google_ads.v1.services.transports import ad_group_bid_modifier_service_grpc_transport
 from google.ads.google_ads.v1.services.transports import ad_group_criterion_label_service_grpc_transport
 from google.ads.google_ads.v1.services.transports import ad_group_criterion_service_grpc_transport
+from google.ads.google_ads.v1.services.transports import ad_group_criterion_simulation_service_grpc_transport
 from google.ads.google_ads.v1.services.transports import ad_group_extension_setting_service_grpc_transport
 from google.ads.google_ads.v1.services.transports import ad_group_feed_service_grpc_transport
 from google.ads.google_ads.v1.services.transports import ad_group_label_service_grpc_transport
 from google.ads.google_ads.v1.services.transports import ad_group_service_grpc_transport
+from google.ads.google_ads.v1.services.transports import ad_group_simulation_service_grpc_transport
 from google.ads.google_ads.v1.services.transports import ad_parameter_service_grpc_transport
 from google.ads.google_ads.v1.services.transports import ad_schedule_view_service_grpc_transport
 from google.ads.google_ads.v1.services.transports import age_range_view_service_grpc_transport
@@ -132,6 +140,7 @@ from google.ads.google_ads.v1.services.transports import campaign_audience_view_
 from google.ads.google_ads.v1.services.transports import campaign_bid_modifier_service_grpc_transport
 from google.ads.google_ads.v1.services.transports import campaign_budget_service_grpc_transport
 from google.ads.google_ads.v1.services.transports import campaign_criterion_service_grpc_transport
+from google.ads.google_ads.v1.services.transports import campaign_criterion_simulation_service_grpc_transport
 from google.ads.google_ads.v1.services.transports import campaign_extension_setting_service_grpc_transport
 from google.ads.google_ads.v1.services.transports import campaign_feed_service_grpc_transport
 from google.ads.google_ads.v1.services.transports import campaign_label_service_grpc_transport
@@ -156,6 +165,7 @@ from google.ads.google_ads.v1.services.transports import detail_placement_view_s
 from google.ads.google_ads.v1.services.transports import display_keyword_view_service_grpc_transport
 from google.ads.google_ads.v1.services.transports import domain_category_service_grpc_transport
 from google.ads.google_ads.v1.services.transports import dynamic_search_ads_search_term_view_service_grpc_transport
+from google.ads.google_ads.v1.services.transports import expanded_landing_page_view_service_grpc_transport
 from google.ads.google_ads.v1.services.transports import extension_feed_item_service_grpc_transport
 from google.ads.google_ads.v1.services.transports import feed_item_service_grpc_transport
 from google.ads.google_ads.v1.services.transports import feed_item_target_service_grpc_transport
@@ -178,6 +188,7 @@ from google.ads.google_ads.v1.services.transports import keyword_plan_negative_k
 from google.ads.google_ads.v1.services.transports import keyword_plan_service_grpc_transport
 from google.ads.google_ads.v1.services.transports import keyword_view_service_grpc_transport
 from google.ads.google_ads.v1.services.transports import label_service_grpc_transport
+from google.ads.google_ads.v1.services.transports import landing_page_view_service_grpc_transport
 from google.ads.google_ads.v1.services.transports import language_constant_service_grpc_transport
 from google.ads.google_ads.v1.services.transports import location_view_service_grpc_transport
 from google.ads.google_ads.v1.services.transports import managed_placement_view_service_grpc_transport
@@ -187,6 +198,7 @@ from google.ads.google_ads.v1.services.transports import mobile_app_category_con
 from google.ads.google_ads.v1.services.transports import mobile_device_constant_service_grpc_transport
 from google.ads.google_ads.v1.services.transports import mutate_job_service_grpc_transport
 from google.ads.google_ads.v1.services.transports import operating_system_version_constant_service_grpc_transport
+from google.ads.google_ads.v1.services.transports import paid_organic_search_term_view_service_grpc_transport
 from google.ads.google_ads.v1.services.transports import parental_status_view_service_grpc_transport
 from google.ads.google_ads.v1.services.transports import payments_account_service_grpc_transport
 from google.ads.google_ads.v1.services.transports import product_bidding_category_constant_service_grpc_transport
@@ -252,6 +264,12 @@ class AdGroupCriterionServiceClient(
     enums = enums
 
 
+class AdGroupCriterionSimulationServiceClient(
+    ad_group_criterion_simulation_service_client.AdGroupCriterionSimulationServiceClient):
+    __doc__ = ad_group_criterion_simulation_service_client.AdGroupCriterionSimulationServiceClient.__doc__
+    enums = enums
+
+
 class AdGroupExtensionSettingServiceClient(
     ad_group_extension_setting_service_client.AdGroupExtensionSettingServiceClient):
     __doc__ = ad_group_extension_setting_service_client.AdGroupExtensionSettingServiceClient.__doc__
@@ -273,6 +291,12 @@ class AdGroupLabelServiceClient(
 class AdGroupServiceClient(
     ad_group_service_client.AdGroupServiceClient):
     __doc__ = ad_group_service_client.AdGroupServiceClient.__doc__
+    enums = enums
+
+
+class AdGroupSimulationServiceClient(
+    ad_group_simulation_service_client.AdGroupSimulationServiceClient):
+    __doc__ = ad_group_simulation_service_client.AdGroupSimulationServiceClient.__doc__
     enums = enums
 
 
@@ -333,6 +357,12 @@ class CampaignBudgetServiceClient(
 class CampaignCriterionServiceClient(
     campaign_criterion_service_client.CampaignCriterionServiceClient):
     __doc__ = campaign_criterion_service_client.CampaignCriterionServiceClient.__doc__
+    enums = enums
+
+
+class CampaignCriterionSimulationServiceClient(
+    campaign_criterion_simulation_service_client.CampaignCriterionSimulationServiceClient):
+    __doc__ = campaign_criterion_simulation_service_client.CampaignCriterionSimulationServiceClient.__doc__
     enums = enums
 
 
@@ -480,6 +510,12 @@ class DynamicSearchAdsSearchTermViewServiceClient(
     enums = enums
 
 
+class ExpandedLandingPageViewServiceClient(
+    expanded_landing_page_view_service_client.ExpandedLandingPageViewServiceClient):
+    __doc__ = expanded_landing_page_view_service_client.ExpandedLandingPageViewServiceClient.__doc__
+    enums = enums
+
+
 class ExtensionFeedItemServiceClient(
     extension_feed_item_service_client.ExtensionFeedItemServiceClient):
     __doc__ = extension_feed_item_service_client.ExtensionFeedItemServiceClient.__doc__
@@ -612,6 +648,12 @@ class LabelServiceClient(
     enums = enums
 
 
+class LandingPageViewServiceClient(
+    landing_page_view_service_client.LandingPageViewServiceClient):
+    __doc__ = landing_page_view_service_client.LandingPageViewServiceClient.__doc__
+    enums = enums
+
+
 class LanguageConstantServiceClient(
     language_constant_service_client.LanguageConstantServiceClient):
     __doc__ = language_constant_service_client.LanguageConstantServiceClient.__doc__
@@ -663,6 +705,12 @@ class MutateJobServiceClient(
 class OperatingSystemVersionConstantServiceClient(
     operating_system_version_constant_service_client.OperatingSystemVersionConstantServiceClient):
     __doc__ = operating_system_version_constant_service_client.OperatingSystemVersionConstantServiceClient.__doc__
+    enums = enums
+
+
+class PaidOrganicSearchTermViewServiceClient(
+    paid_organic_search_term_view_service_client.PaidOrganicSearchTermViewServiceClient):
+    __doc__ = paid_organic_search_term_view_service_client.PaidOrganicSearchTermViewServiceClient.__doc__
     enums = enums
 
 
@@ -796,6 +844,11 @@ class AdGroupCriterionServiceGrpcTransport(
     __doc__ = ad_group_criterion_service_grpc_transport.AdGroupCriterionServiceGrpcTransport.__doc__
 
 
+class AdGroupCriterionSimulationServiceGrpcTransport(
+    ad_group_criterion_simulation_service_grpc_transport.AdGroupCriterionSimulationServiceGrpcTransport):
+    __doc__ = ad_group_criterion_simulation_service_grpc_transport.AdGroupCriterionSimulationServiceGrpcTransport.__doc__
+
+
 class AdGroupExtensionSettingServiceGrpcTransport(
     ad_group_extension_setting_service_grpc_transport.AdGroupExtensionSettingServiceGrpcTransport):
     __doc__ = ad_group_extension_setting_service_grpc_transport.AdGroupExtensionSettingServiceGrpcTransport.__doc__
@@ -814,6 +867,11 @@ class AdGroupLabelServiceGrpcTransport(
 class AdGroupServiceGrpcTransport(
     ad_group_service_grpc_transport.AdGroupServiceGrpcTransport):
     __doc__ = ad_group_service_grpc_transport.AdGroupServiceGrpcTransport.__doc__
+
+
+class AdGroupSimulationServiceGrpcTransport(
+    ad_group_simulation_service_grpc_transport.AdGroupSimulationServiceGrpcTransport):
+    __doc__ = ad_group_simulation_service_grpc_transport.AdGroupSimulationServiceGrpcTransport.__doc__
 
 
 class AdParameterServiceGrpcTransport(
@@ -864,6 +922,11 @@ class CampaignBudgetServiceGrpcTransport(
 class CampaignCriterionServiceGrpcTransport(
     campaign_criterion_service_grpc_transport.CampaignCriterionServiceGrpcTransport):
     __doc__ = campaign_criterion_service_grpc_transport.CampaignCriterionServiceGrpcTransport.__doc__
+
+
+class CampaignCriterionSimulationServiceGrpcTransport(
+    campaign_criterion_simulation_service_grpc_transport.CampaignCriterionSimulationServiceGrpcTransport):
+    __doc__ = campaign_criterion_simulation_service_grpc_transport.CampaignCriterionSimulationServiceGrpcTransport.__doc__
 
 
 class CampaignExtensionSettingServiceGrpcTransport(
@@ -986,6 +1049,11 @@ class DynamicSearchAdsSearchTermViewServiceGrpcTransport(
     __doc__ = dynamic_search_ads_search_term_view_service_grpc_transport.DynamicSearchAdsSearchTermViewServiceGrpcTransport.__doc__
 
 
+class ExpandedLandingPageViewServiceGrpcTransport(
+    expanded_landing_page_view_service_grpc_transport.ExpandedLandingPageViewServiceGrpcTransport):
+    __doc__ = expanded_landing_page_view_service_grpc_transport.ExpandedLandingPageViewServiceGrpcTransport.__doc__
+
+
 class ExtensionFeedItemServiceGrpcTransport(
     extension_feed_item_service_grpc_transport.ExtensionFeedItemServiceGrpcTransport):
     __doc__ = extension_feed_item_service_grpc_transport.ExtensionFeedItemServiceGrpcTransport.__doc__
@@ -1096,6 +1164,11 @@ class LabelServiceGrpcTransport(
     __doc__ = label_service_grpc_transport.LabelServiceGrpcTransport.__doc__
 
 
+class LandingPageViewServiceGrpcTransport(
+    landing_page_view_service_grpc_transport.LandingPageViewServiceGrpcTransport):
+    __doc__ = landing_page_view_service_grpc_transport.LandingPageViewServiceGrpcTransport.__doc__
+
+
 class LanguageConstantServiceGrpcTransport(
     language_constant_service_grpc_transport.LanguageConstantServiceGrpcTransport):
     __doc__ = language_constant_service_grpc_transport.LanguageConstantServiceGrpcTransport.__doc__
@@ -1139,6 +1212,11 @@ class MutateJobServiceGrpcTransport(
 class OperatingSystemVersionConstantServiceGrpcTransport(
     operating_system_version_constant_service_grpc_transport.OperatingSystemVersionConstantServiceGrpcTransport):
     __doc__ = operating_system_version_constant_service_grpc_transport.OperatingSystemVersionConstantServiceGrpcTransport.__doc__
+
+
+class PaidOrganicSearchTermViewServiceGrpcTransport(
+    paid_organic_search_term_view_service_grpc_transport.PaidOrganicSearchTermViewServiceGrpcTransport):
+    __doc__ = paid_organic_search_term_view_service_grpc_transport.PaidOrganicSearchTermViewServiceGrpcTransport.__doc__
 
 
 class ParentalStatusViewServiceGrpcTransport(
@@ -1227,10 +1305,12 @@ __all__ = (
     'AdGroupBidModifierServiceClient',
     'AdGroupCriterionLabelServiceClient',
     'AdGroupCriterionServiceClient',
+    'AdGroupCriterionSimulationServiceClient',
     'AdGroupExtensionSettingServiceClient',
     'AdGroupFeedServiceClient',
     'AdGroupLabelServiceClient',
     'AdGroupServiceClient',
+    'AdGroupSimulationServiceClient',
     'AdParameterServiceClient',
     'AdScheduleViewServiceClient',
     'AgeRangeViewServiceClient',
@@ -1241,6 +1321,7 @@ __all__ = (
     'CampaignBidModifierServiceClient',
     'CampaignBudgetServiceClient',
     'CampaignCriterionServiceClient',
+    'CampaignCriterionSimulationServiceClient',
     'CampaignExtensionSettingServiceClient',
     'CampaignFeedServiceClient',
     'CampaignLabelServiceClient',
@@ -1265,6 +1346,7 @@ __all__ = (
     'DisplayKeywordViewServiceClient',
     'DomainCategoryServiceClient',
     'DynamicSearchAdsSearchTermViewServiceClient',
+    'ExpandedLandingPageViewServiceClient',
     'ExtensionFeedItemServiceClient',
     'FeedItemServiceClient',
     'FeedItemTargetServiceClient',
@@ -1287,6 +1369,7 @@ __all__ = (
     'KeywordPlanServiceClient',
     'KeywordViewServiceClient',
     'LabelServiceClient',
+    'LandingPageViewServiceClient',
     'LanguageConstantServiceClient',
     'LocationViewServiceClient',
     'ManagedPlacementViewServiceClient',
@@ -1296,6 +1379,7 @@ __all__ = (
     'MobileDeviceConstantServiceClient',
     'MutateJobServiceClient',
     'OperatingSystemVersionConstantServiceClient',
+    'PaidOrganicSearchTermViewServiceClient',
     'ParentalStatusViewServiceClient',
     'PaymentsAccountServiceClient',
     'ProductBiddingCategoryConstantServiceClient',
@@ -1319,10 +1403,12 @@ __all__ = (
     'AdGroupBidModifierServiceGrpcTransport',
     'AdGroupCriterionLabelServiceGrpcTransport',
     'AdGroupCriterionServiceGrpcTransport',
+    'AdGroupCriterionSimulationServiceGrpcTransport',
     'AdGroupExtensionSettingServiceGrpcTransport',
     'AdGroupFeedServiceGrpcTransport',
     'AdGroupLabelServiceGrpcTransport',
     'AdGroupServiceGrpcTransport',
+    'AdGroupSimulationServiceGrpcTransport',
     'AdParameterServiceGrpcTransport',
     'AdScheduleViewServiceGrpcTransport',
     'AgeRangeViewServiceGrpcTransport',
@@ -1333,6 +1419,7 @@ __all__ = (
     'CampaignBidModifierServiceGrpcTransport',
     'CampaignBudgetServiceGrpcTransport',
     'CampaignCriterionServiceGrpcTransport',
+    'CampaignCriterionSimulationServiceGrpcTransport',
     'CampaignExtensionSettingServiceGrpcTransport',
     'CampaignFeedServiceGrpcTransport',
     'CampaignLabelServiceGrpcTransport',
@@ -1357,6 +1444,7 @@ __all__ = (
     'DisplayKeywordViewServiceGrpcTransport',
     'DomainCategoryServiceGrpcTransport',
     'DynamicSearchAdsSearchTermViewServiceGrpcTransport',
+    'ExpandedLandingPageViewServiceGrpcTransport',
     'ExtensionFeedItemServiceGrpcTransport',
     'FeedItemServiceGrpcTransport',
     'FeedItemTargetServiceGrpcTransport',
@@ -1379,6 +1467,7 @@ __all__ = (
     'KeywordPlanServiceGrpcTransport',
     'KeywordViewServiceGrpcTransport',
     'LabelServiceGrpcTransport',
+    'LandingPageViewServiceGrpcTransport',
     'LanguageConstantServiceGrpcTransport',
     'LocationViewServiceGrpcTransport',
     'ManagedPlacementViewServiceGrpcTransport',
@@ -1388,6 +1477,7 @@ __all__ = (
     'MobileDeviceConstantServiceGrpcTransport',
     'MutateJobServiceGrpcTransport',
     'OperatingSystemVersionConstantServiceGrpcTransport',
+    'PaidOrganicSearchTermViewServiceGrpcTransport',
     'ParentalStatusViewServiceGrpcTransport',
     'PaymentsAccountServiceGrpcTransport',
     'ProductBiddingCategoryConstantServiceGrpcTransport',

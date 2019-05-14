@@ -6,7 +6,9 @@ from google.ads.google_ads.v1.proto.services import media_file_service_pb2 as go
 
 
 class MediaFileServiceStub(object):
-  """Service to manage media files.
+  """Proto file describing the Media File service.
+
+  Service to manage media files.
   """
 
   def __init__(self, channel):
@@ -28,7 +30,9 @@ class MediaFileServiceStub(object):
 
 
 class MediaFileServiceServicer(object):
-  """Service to manage media files.
+  """Proto file describing the Media File service.
+
+  Service to manage media files.
   """
 
   def GetMediaFile(self, request, context):

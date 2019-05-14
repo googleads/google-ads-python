@@ -6,7 +6,9 @@ from google.ads.google_ads.v1.proto.services import operating_system_version_con
 
 
 class OperatingSystemVersionConstantServiceStub(object):
-  """Service to fetch Operating System Version constants.
+  """Proto file describing the OS version constant service
+
+  Service to fetch Operating System Version constants.
   """
 
   def __init__(self, channel):
@@ -23,7 +25,9 @@ class OperatingSystemVersionConstantServiceStub(object):
 
 
 class OperatingSystemVersionConstantServiceServicer(object):
-  """Service to fetch Operating System Version constants.
+  """Proto file describing the OS version constant service
+
+  Service to fetch Operating System Version constants.
   """
 
   def GetOperatingSystemVersionConstant(self, request, context):

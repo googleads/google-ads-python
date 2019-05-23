@@ -941,16 +941,17 @@ AppFeedItem = _reflection.GeneratedProtocolMessageType('AppFeedItem', (_message.
   Attributes:
       link_text:
           The visible text displayed when the link is rendered in an ad.
-          The length of this string should be between 1 and 25,
-          inclusive.
+          This string must not be empty, and the length of this string
+          should be between 1 and 25, inclusive.
       app_id:
           The store-specific ID for the target application. This string
           must not be empty.
       app_store:
           The application store that the target application belongs to.
+          This field is required.
       final_urls:
           A list of possible final URLs after all cross domain
-          redirects.
+          redirects. This list must not be empty.
       final_mobile_urls:
           A list of possible final mobile URLs after all cross domain
           redirects.

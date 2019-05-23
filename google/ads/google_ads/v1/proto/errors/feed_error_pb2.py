@@ -20,7 +20,7 @@ DESCRIPTOR = _descriptor.FileDescriptor(
   package='google.ads.googleads.v1.errors',
   syntax='proto3',
   serialized_options=_b('\n\"com.google.ads.googleads.v1.errorsB\016FeedErrorProtoP\001ZDgoogle.golang.org/genproto/googleapis/ads/googleads/v1/errors;errors\242\002\003GAA\252\002\036Google.Ads.GoogleAds.V1.Errors\312\002\036Google\\Ads\\GoogleAds\\V1\\Errors\352\002\"Google::Ads::GoogleAds::V1::Errors'),
-  serialized_pb=_b('\n5google/ads/googleads_v1/proto/errors/feed_error.proto\x12\x1egoogle.ads.googleads.v1.errors\x1a\x1cgoogle/api/annotations.proto\"\xde\x05\n\rFeedErrorEnum\"\xcc\x05\n\tFeedError\x12\x0f\n\x0bUNSPECIFIED\x10\x00\x12\x0b\n\x07UNKNOWN\x10\x01\x12\x1e\n\x1a\x41TTRIBUTE_NAMES_NOT_UNIQUE\x10\x02\x12/\n+ATTRIBUTES_DO_NOT_MATCH_EXISTING_ATTRIBUTES\x10\x03\x12.\n*CANNOT_SPECIFY_USER_ORIGIN_FOR_SYSTEM_FEED\x10\x04\x12\x34\n0CANNOT_SPECIFY_GOOGLE_ORIGIN_FOR_NON_SYSTEM_FEED\x10\x05\x12\x32\n.CANNOT_SPECIFY_FEED_ATTRIBUTES_FOR_SYSTEM_FEED\x10\x06\x12\x34\n0CANNOT_UPDATE_FEED_ATTRIBUTES_WITH_ORIGIN_GOOGLE\x10\x07\x12\x10\n\x0c\x46\x45\x45\x44_REMOVED\x10\x08\x12\x18\n\x14INVALID_ORIGIN_VALUE\x10\t\x12\x1b\n\x17\x46\x45\x45\x44_ORIGIN_IS_NOT_USER\x10\n\x12 \n\x1cINVALID_AUTH_TOKEN_FOR_EMAIL\x10\x0b\x12\x11\n\rINVALID_EMAIL\x10\x0c\x12\x17\n\x13\x44UPLICATE_FEED_NAME\x10\r\x12\x15\n\x11INVALID_FEED_NAME\x10\x0e\x12\x16\n\x12MISSING_OAUTH_INFO\x10\x0f\x12.\n*NEW_ATTRIBUTE_CANNOT_BE_PART_OF_UNIQUE_KEY\x10\x10\x12\x17\n\x13TOO_MANY_ATTRIBUTES\x10\x11\x12\x1c\n\x18INVALID_BUSINESS_ACCOUNT\x10\x12\x12\x33\n/BUSINESS_ACCOUNT_CANNOT_ACCESS_LOCATION_ACCOUNT\x10\x13\x12\x1e\n\x1aINVALID_AFFILIATE_CHAIN_ID\x10\x14\x42\xe9\x01\n\"com.google.ads.googleads.v1.errorsB\x0e\x46\x65\x65\x64\x45rrorProtoP\x01ZDgoogle.golang.org/genproto/googleapis/ads/googleads/v1/errors;errors\xa2\x02\x03GAA\xaa\x02\x1eGoogle.Ads.GoogleAds.V1.Errors\xca\x02\x1eGoogle\\Ads\\GoogleAds\\V1\\Errors\xea\x02\"Google::Ads::GoogleAds::V1::Errorsb\x06proto3')
+  serialized_pb=_b('\n5google/ads/googleads_v1/proto/errors/feed_error.proto\x12\x1egoogle.ads.googleads.v1.errors\x1a\x1cgoogle/api/annotations.proto\"\xf9\x05\n\rFeedErrorEnum\"\xe7\x05\n\tFeedError\x12\x0f\n\x0bUNSPECIFIED\x10\x00\x12\x0b\n\x07UNKNOWN\x10\x01\x12\x1e\n\x1a\x41TTRIBUTE_NAMES_NOT_UNIQUE\x10\x02\x12/\n+ATTRIBUTES_DO_NOT_MATCH_EXISTING_ATTRIBUTES\x10\x03\x12.\n*CANNOT_SPECIFY_USER_ORIGIN_FOR_SYSTEM_FEED\x10\x04\x12\x34\n0CANNOT_SPECIFY_GOOGLE_ORIGIN_FOR_NON_SYSTEM_FEED\x10\x05\x12\x32\n.CANNOT_SPECIFY_FEED_ATTRIBUTES_FOR_SYSTEM_FEED\x10\x06\x12\x34\n0CANNOT_UPDATE_FEED_ATTRIBUTES_WITH_ORIGIN_GOOGLE\x10\x07\x12\x10\n\x0c\x46\x45\x45\x44_REMOVED\x10\x08\x12\x18\n\x14INVALID_ORIGIN_VALUE\x10\t\x12\x1b\n\x17\x46\x45\x45\x44_ORIGIN_IS_NOT_USER\x10\n\x12 \n\x1cINVALID_AUTH_TOKEN_FOR_EMAIL\x10\x0b\x12\x11\n\rINVALID_EMAIL\x10\x0c\x12\x17\n\x13\x44UPLICATE_FEED_NAME\x10\r\x12\x15\n\x11INVALID_FEED_NAME\x10\x0e\x12\x16\n\x12MISSING_OAUTH_INFO\x10\x0f\x12.\n*NEW_ATTRIBUTE_CANNOT_BE_PART_OF_UNIQUE_KEY\x10\x10\x12\x17\n\x13TOO_MANY_ATTRIBUTES\x10\x11\x12\x1c\n\x18INVALID_BUSINESS_ACCOUNT\x10\x12\x12\x33\n/BUSINESS_ACCOUNT_CANNOT_ACCESS_LOCATION_ACCOUNT\x10\x13\x12\x1e\n\x1aINVALID_AFFILIATE_CHAIN_ID\x10\x14\x12\x19\n\x15\x44UPLICATE_SYSTEM_FEED\x10\x15\x42\xe9\x01\n\"com.google.ads.googleads.v1.errorsB\x0e\x46\x65\x65\x64\x45rrorProtoP\x01ZDgoogle.golang.org/genproto/googleapis/ads/googleads/v1/errors;errors\xa2\x02\x03GAA\xaa\x02\x1eGoogle.Ads.GoogleAds.V1.Errors\xca\x02\x1eGoogle\\Ads\\GoogleAds\\V1\\Errors\xea\x02\"Google::Ads::GoogleAds::V1::Errorsb\x06proto3')
   ,
   dependencies=[google_dot_api_dot_annotations__pb2.DESCRIPTOR,])
 
@@ -116,11 +116,15 @@ _FEEDERRORENUM_FEEDERROR = _descriptor.EnumDescriptor(
       name='INVALID_AFFILIATE_CHAIN_ID', index=20, number=20,
       serialized_options=None,
       type=None),
+    _descriptor.EnumValueDescriptor(
+      name='DUPLICATE_SYSTEM_FEED', index=21, number=21,
+      serialized_options=None,
+      type=None),
   ],
   containing_type=None,
   serialized_options=None,
   serialized_start=138,
-  serialized_end=854,
+  serialized_end=881,
 )
 _sym_db.RegisterEnumDescriptor(_FEEDERRORENUM_FEEDERROR)
 
@@ -146,7 +150,7 @@ _FEEDERRORENUM = _descriptor.Descriptor(
   oneofs=[
   ],
   serialized_start=120,
-  serialized_end=854,
+  serialized_end=881,
 )
 
 _FEEDERRORENUM_FEEDERROR.containing_type = _FEEDERRORENUM

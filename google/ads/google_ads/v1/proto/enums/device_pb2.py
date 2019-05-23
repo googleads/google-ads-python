@@ -20,7 +20,7 @@ DESCRIPTOR = _descriptor.FileDescriptor(
   package='google.ads.googleads.v1.enums',
   syntax='proto3',
   serialized_options=_b('\n!com.google.ads.googleads.v1.enumsB\013DeviceProtoP\001ZBgoogle.golang.org/genproto/googleapis/ads/googleads/v1/enums;enums\242\002\003GAA\252\002\035Google.Ads.GoogleAds.V1.Enums\312\002\035Google\\Ads\\GoogleAds\\V1\\Enums\352\002!Google::Ads::GoogleAds::V1::Enums'),
-  serialized_pb=_b('\n0google/ads/googleads_v1/proto/enums/device.proto\x12\x1dgoogle.ads.googleads.v1.enums\x1a\x1cgoogle/api/annotations.proto\"d\n\nDeviceEnum\"V\n\x06\x44\x65vice\x12\x0f\n\x0bUNSPECIFIED\x10\x00\x12\x0b\n\x07UNKNOWN\x10\x01\x12\n\n\x06MOBILE\x10\x02\x12\n\n\x06TABLET\x10\x03\x12\x0b\n\x07\x44\x45SKTOP\x10\x04\x12\t\n\x05OTHER\x10\x05\x42\xe0\x01\n!com.google.ads.googleads.v1.enumsB\x0b\x44\x65viceProtoP\x01ZBgoogle.golang.org/genproto/googleapis/ads/googleads/v1/enums;enums\xa2\x02\x03GAA\xaa\x02\x1dGoogle.Ads.GoogleAds.V1.Enums\xca\x02\x1dGoogle\\Ads\\GoogleAds\\V1\\Enums\xea\x02!Google::Ads::GoogleAds::V1::Enumsb\x06proto3')
+  serialized_pb=_b('\n0google/ads/googleads_v1/proto/enums/device.proto\x12\x1dgoogle.ads.googleads.v1.enums\x1a\x1cgoogle/api/annotations.proto\"v\n\nDeviceEnum\"h\n\x06\x44\x65vice\x12\x0f\n\x0bUNSPECIFIED\x10\x00\x12\x0b\n\x07UNKNOWN\x10\x01\x12\n\n\x06MOBILE\x10\x02\x12\n\n\x06TABLET\x10\x03\x12\x0b\n\x07\x44\x45SKTOP\x10\x04\x12\x10\n\x0c\x43ONNECTED_TV\x10\x06\x12\t\n\x05OTHER\x10\x05\x42\xe0\x01\n!com.google.ads.googleads.v1.enumsB\x0b\x44\x65viceProtoP\x01ZBgoogle.golang.org/genproto/googleapis/ads/googleads/v1/enums;enums\xa2\x02\x03GAA\xaa\x02\x1dGoogle.Ads.GoogleAds.V1.Enums\xca\x02\x1dGoogle\\Ads\\GoogleAds\\V1\\Enums\xea\x02!Google::Ads::GoogleAds::V1::Enumsb\x06proto3')
   ,
   dependencies=[google_dot_api_dot_annotations__pb2.DESCRIPTOR,])
 
@@ -53,14 +53,18 @@ _DEVICEENUM_DEVICE = _descriptor.EnumDescriptor(
       serialized_options=None,
       type=None),
     _descriptor.EnumValueDescriptor(
-      name='OTHER', index=5, number=5,
+      name='CONNECTED_TV', index=5, number=6,
+      serialized_options=None,
+      type=None),
+    _descriptor.EnumValueDescriptor(
+      name='OTHER', index=6, number=5,
       serialized_options=None,
       type=None),
   ],
   containing_type=None,
   serialized_options=None,
   serialized_start=127,
-  serialized_end=213,
+  serialized_end=231,
 )
 _sym_db.RegisterEnumDescriptor(_DEVICEENUM_DEVICE)
 
@@ -86,7 +90,7 @@ _DEVICEENUM = _descriptor.Descriptor(
   oneofs=[
   ],
   serialized_start=113,
-  serialized_end=213,
+  serialized_end=231,
 )
 
 _DEVICEENUM_DEVICE.containing_type = _DEVICEENUM

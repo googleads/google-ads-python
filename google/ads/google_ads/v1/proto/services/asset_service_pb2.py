@@ -243,7 +243,9 @@ AssetOperation = _reflection.GeneratedProtocolMessageType('AssetOperation', (_me
   DESCRIPTOR = _ASSETOPERATION,
   __module__ = 'google.ads.googleads_v1.proto.services.asset_service_pb2'
   ,
-  __doc__ = """A single operation to create an asset.
+  __doc__ = """A single operation to create an asset. Supported asset types are
+  YoutubeVideoAsset, MediaBundleAsset and ImageAsset. TextAsset should be
+  created with Ad inline.
   
   
   Attributes:

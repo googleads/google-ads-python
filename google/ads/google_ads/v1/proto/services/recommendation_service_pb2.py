@@ -888,7 +888,7 @@ ApplyRecommendationOperation = _reflection.GeneratedProtocolMessageType('ApplyRe
     DESCRIPTOR = _APPLYRECOMMENDATIONOPERATION_SITELINKEXTENSIONPARAMETERS,
     __module__ = 'google.ads.googleads_v1.proto.services.recommendation_service_pb2'
     ,
-    __doc__ = """Parameters to use when applying call extension recommendation.
+    __doc__ = """Parameters to use when applying sitelink extension recommendation.
     
     
     Attributes:
@@ -944,7 +944,8 @@ ApplyRecommendationOperation = _reflection.GeneratedProtocolMessageType('ApplyRe
       call_extension:
           Parameters to use when applying call extension recommendation.
       sitelink_extension:
-          Parameters to use when applying call extension recommendation.
+          Parameters to use when applying sitelink extension
+          recommendation.
       move_unused_budget:
           Parameters to use when applying move unused budget
           recommendation.

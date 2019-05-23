@@ -44,6 +44,9 @@ class method, the default behavior is to load a configuration file named
 **google-ads.yaml** located in your home directory. Included in this repository
 is a `template`_ you can use.
 
+For a complete walk-through of the OAuth Installed Application flow in Python, 
+please refer to `this page of the wiki`_.
+
 Create a GoogleAdsClient
 ########################
 
@@ -151,6 +154,7 @@ Authors
 .. _pip: https://pip.pypa.io/en/stable/installing
 .. _blog post: https://ads-developers.googleblog.com/2019/04/python-2-deprecation-in-ads-api-client.html
 .. _template: https://github.com/googleads/google-ads-python/blob/master/google-ads.yaml
+.. _this page of the wiki: https://github.com/googleads/google-ads-python/wiki/OAuth-Installed-Application-Flow
 .. _Authorization guide: https://developers.google.com/google-ads/api/docs/oauth/overview
 .. _authentication samples: https://github.com/googleads/google-ads-python/blob/master/examples/authentication
 .. _Obtain your developer token: https://developers.google.com/google-ads/api/docs/first-call/dev-token

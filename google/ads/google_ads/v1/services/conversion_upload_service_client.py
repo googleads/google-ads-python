@@ -164,6 +164,7 @@ class ConversionUploadServiceClient(object):
             customer_id,
             conversions,
             partial_failure=None,
+            validate_only=None,
             retry=google.api_core.gapic_v1.method.DEFAULT,
             timeout=google.api_core.gapic_v1.method.DEFAULT,
             metadata=None):
@@ -180,6 +181,8 @@ class ConversionUploadServiceClient(object):
                 operations will return errors. If false, all operations will be carried
                 out in one transaction if and only if they are all valid.
                 This should always be set to true.
+            validate_only (bool): If true, the request is validated but not executed. Only errors are
+                returned, not results.
             retry (Optional[google.api_core.retry.Retry]):  A retry object used
                 to retry requests. If ``None`` is specified, requests will not
                 be retried.
@@ -215,6 +218,7 @@ class ConversionUploadServiceClient(object):
             customer_id=customer_id,
             conversions=conversions,
             partial_failure=partial_failure,
+            validate_only=validate_only,
         )
         return self._inner_api_calls['upload_click_conversions'](
             request, retry=retry, timeout=timeout, metadata=metadata)
@@ -224,6 +228,7 @@ class ConversionUploadServiceClient(object):
             customer_id,
             conversions,
             partial_failure=None,
+            validate_only=None,
             retry=google.api_core.gapic_v1.method.DEFAULT,
             timeout=google.api_core.gapic_v1.method.DEFAULT,
             metadata=None):
@@ -240,6 +245,8 @@ class ConversionUploadServiceClient(object):
                 operations will return errors. If false, all operations will be carried
                 out in one transaction if and only if they are all valid.
                 This should always be set to true.
+            validate_only (bool): If true, the request is validated but not executed. Only errors are
+                returned, not results.
             retry (Optional[google.api_core.retry.Retry]):  A retry object used
                 to retry requests. If ``None`` is specified, requests will not
                 be retried.
@@ -275,6 +282,7 @@ class ConversionUploadServiceClient(object):
             customer_id=customer_id,
             conversions=conversions,
             partial_failure=partial_failure,
+            validate_only=validate_only,
         )
         return self._inner_api_calls['upload_call_conversions'](
             request, retry=retry, timeout=timeout, metadata=metadata)

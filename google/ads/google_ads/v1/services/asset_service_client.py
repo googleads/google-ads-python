@@ -34,7 +34,11 @@ _GAPIC_LIBRARY_VERSION = pkg_resources.get_distribution(
 
 
 class AssetServiceClient(object):
-    """Service to manage assets."""
+    """
+    Service to manage assets. Asset types can be created with AssetService are
+    YoutubeVideoAsset, MediaBundleAsset and ImageAsset. TextAsset should be
+    created with Ad inline.
+    """
 
     SERVICE_ADDRESS = 'googleads.googleapis.com:443'
     """The default address of the service."""

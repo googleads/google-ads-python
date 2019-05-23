@@ -24,7 +24,7 @@ DESCRIPTOR = _descriptor.FileDescriptor(
   package='google.ads.googleads.v1.resources',
   syntax='proto3',
   serialized_options=_b('\n%com.google.ads.googleads.v1.resourcesB\026AdGroupSimulationProtoP\001ZJgoogle.golang.org/genproto/googleapis/ads/googleads/v1/resources;resources\242\002\003GAA\252\002!Google.Ads.GoogleAds.V1.Resources\312\002!Google\\Ads\\GoogleAds\\V1\\Resources\352\002%Google::Ads::GoogleAds::V1::Resources'),
-  serialized_pb=_b('\nAgoogle/ads/googleads_v1/proto/resources/ad_group_simulation.proto\x12!google.ads.googleads.v1.resources\x1a\x35google/ads/googleads_v1/proto/common/simulation.proto\x1aHgoogle/ads/googleads_v1/proto/enums/simulation_modification_method.proto\x1a\x39google/ads/googleads_v1/proto/enums/simulation_type.proto\x1a\x1egoogle/protobuf/wrappers.proto\x1a\x1cgoogle/api/annotations.proto\"\xcf\x04\n\x11\x41\x64GroupSimulation\x12\x15\n\rresource_name\x18\x01 \x01(\t\x12\x30\n\x0b\x61\x64_group_id\x18\x02 \x01(\x0b\x32\x1b.google.protobuf.Int64Value\x12N\n\x04type\x18\x03 \x01(\x0e\x32@.google.ads.googleads.v1.enums.SimulationTypeEnum.SimulationType\x12y\n\x13modification_method\x18\x04 \x01(\x0e\x32\\.google.ads.googleads.v1.enums.SimulationModificationMethodEnum.SimulationModificationMethod\x12\x30\n\nstart_date\x18\x05 \x01(\x0b\x32\x1c.google.protobuf.StringValue\x12.\n\x08\x65nd_date\x18\x06 \x01(\x0b\x32\x1c.google.protobuf.StringValue\x12W\n\x12\x63pc_bid_point_list\x18\x08 \x01(\x0b\x32\x39.google.ads.googleads.v1.common.CpcBidSimulationPointListH\x00\x12]\n\x15target_cpa_point_list\x18\t \x01(\x0b\x32<.google.ads.googleads.v1.common.TargetCpaSimulationPointListH\x00\x42\x0c\n\npoint_listB\x83\x02\n%com.google.ads.googleads.v1.resourcesB\x16\x41\x64GroupSimulationProtoP\x01ZJgoogle.golang.org/genproto/googleapis/ads/googleads/v1/resources;resources\xa2\x02\x03GAA\xaa\x02!Google.Ads.GoogleAds.V1.Resources\xca\x02!Google\\Ads\\GoogleAds\\V1\\Resources\xea\x02%Google::Ads::GoogleAds::V1::Resourcesb\x06proto3')
+  serialized_pb=_b('\nAgoogle/ads/googleads_v1/proto/resources/ad_group_simulation.proto\x12!google.ads.googleads.v1.resources\x1a\x35google/ads/googleads_v1/proto/common/simulation.proto\x1aHgoogle/ads/googleads_v1/proto/enums/simulation_modification_method.proto\x1a\x39google/ads/googleads_v1/proto/enums/simulation_type.proto\x1a\x1egoogle/protobuf/wrappers.proto\x1a\x1cgoogle/api/annotations.proto\"\xa8\x05\n\x11\x41\x64GroupSimulation\x12\x15\n\rresource_name\x18\x01 \x01(\t\x12\x30\n\x0b\x61\x64_group_id\x18\x02 \x01(\x0b\x32\x1b.google.protobuf.Int64Value\x12N\n\x04type\x18\x03 \x01(\x0e\x32@.google.ads.googleads.v1.enums.SimulationTypeEnum.SimulationType\x12y\n\x13modification_method\x18\x04 \x01(\x0e\x32\\.google.ads.googleads.v1.enums.SimulationModificationMethodEnum.SimulationModificationMethod\x12\x30\n\nstart_date\x18\x05 \x01(\x0b\x32\x1c.google.protobuf.StringValue\x12.\n\x08\x65nd_date\x18\x06 \x01(\x0b\x32\x1c.google.protobuf.StringValue\x12W\n\x12\x63pc_bid_point_list\x18\x08 \x01(\x0b\x32\x39.google.ads.googleads.v1.common.CpcBidSimulationPointListH\x00\x12W\n\x12\x63pv_bid_point_list\x18\n \x01(\x0b\x32\x39.google.ads.googleads.v1.common.CpvBidSimulationPointListH\x00\x12]\n\x15target_cpa_point_list\x18\t \x01(\x0b\x32<.google.ads.googleads.v1.common.TargetCpaSimulationPointListH\x00\x42\x0c\n\npoint_listB\x83\x02\n%com.google.ads.googleads.v1.resourcesB\x16\x41\x64GroupSimulationProtoP\x01ZJgoogle.golang.org/genproto/googleapis/ads/googleads/v1/resources;resources\xa2\x02\x03GAA\xaa\x02!Google.Ads.GoogleAds.V1.Resources\xca\x02!Google\\Ads\\GoogleAds\\V1\\Resources\xea\x02%Google::Ads::GoogleAds::V1::Resourcesb\x06proto3')
   ,
   dependencies=[google_dot_ads_dot_googleads__v1_dot_proto_dot_common_dot_simulation__pb2.DESCRIPTOR,google_dot_ads_dot_googleads__v1_dot_proto_dot_enums_dot_simulation__modification__method__pb2.DESCRIPTOR,google_dot_ads_dot_googleads__v1_dot_proto_dot_enums_dot_simulation__type__pb2.DESCRIPTOR,google_dot_protobuf_dot_wrappers__pb2.DESCRIPTOR,google_dot_api_dot_annotations__pb2.DESCRIPTOR,])
 
@@ -88,7 +88,14 @@ _ADGROUPSIMULATION = _descriptor.Descriptor(
       is_extension=False, extension_scope=None,
       serialized_options=None, file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
-      name='target_cpa_point_list', full_name='google.ads.googleads.v1.resources.AdGroupSimulation.target_cpa_point_list', index=7,
+      name='cpv_bid_point_list', full_name='google.ads.googleads.v1.resources.AdGroupSimulation.cpv_bid_point_list', index=7,
+      number=10, type=11, cpp_type=10, label=1,
+      has_default_value=False, default_value=None,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR),
+    _descriptor.FieldDescriptor(
+      name='target_cpa_point_list', full_name='google.ads.googleads.v1.resources.AdGroupSimulation.target_cpa_point_list', index=8,
       number=9, type=11, cpp_type=10, label=1,
       has_default_value=False, default_value=None,
       message_type=None, enum_type=None, containing_type=None,
@@ -110,7 +117,7 @@ _ADGROUPSIMULATION = _descriptor.Descriptor(
       index=0, containing_type=None, fields=[]),
   ],
   serialized_start=355,
-  serialized_end=946,
+  serialized_end=1035,
 )
 
 _ADGROUPSIMULATION.fields_by_name['ad_group_id'].message_type = google_dot_protobuf_dot_wrappers__pb2._INT64VALUE
@@ -119,10 +126,14 @@ _ADGROUPSIMULATION.fields_by_name['modification_method'].enum_type = google_dot_
 _ADGROUPSIMULATION.fields_by_name['start_date'].message_type = google_dot_protobuf_dot_wrappers__pb2._STRINGVALUE
 _ADGROUPSIMULATION.fields_by_name['end_date'].message_type = google_dot_protobuf_dot_wrappers__pb2._STRINGVALUE
 _ADGROUPSIMULATION.fields_by_name['cpc_bid_point_list'].message_type = google_dot_ads_dot_googleads__v1_dot_proto_dot_common_dot_simulation__pb2._CPCBIDSIMULATIONPOINTLIST
+_ADGROUPSIMULATION.fields_by_name['cpv_bid_point_list'].message_type = google_dot_ads_dot_googleads__v1_dot_proto_dot_common_dot_simulation__pb2._CPVBIDSIMULATIONPOINTLIST
 _ADGROUPSIMULATION.fields_by_name['target_cpa_point_list'].message_type = google_dot_ads_dot_googleads__v1_dot_proto_dot_common_dot_simulation__pb2._TARGETCPASIMULATIONPOINTLIST
 _ADGROUPSIMULATION.oneofs_by_name['point_list'].fields.append(
   _ADGROUPSIMULATION.fields_by_name['cpc_bid_point_list'])
 _ADGROUPSIMULATION.fields_by_name['cpc_bid_point_list'].containing_oneof = _ADGROUPSIMULATION.oneofs_by_name['point_list']
+_ADGROUPSIMULATION.oneofs_by_name['point_list'].fields.append(
+  _ADGROUPSIMULATION.fields_by_name['cpv_bid_point_list'])
+_ADGROUPSIMULATION.fields_by_name['cpv_bid_point_list'].containing_oneof = _ADGROUPSIMULATION.oneofs_by_name['point_list']
 _ADGROUPSIMULATION.oneofs_by_name['point_list'].fields.append(
   _ADGROUPSIMULATION.fields_by_name['target_cpa_point_list'])
 _ADGROUPSIMULATION.fields_by_name['target_cpa_point_list'].containing_oneof = _ADGROUPSIMULATION.oneofs_by_name['point_list']
@@ -139,7 +150,7 @@ AdGroupSimulation = _reflection.GeneratedProtocolMessageType('AdGroupSimulation'
   
   SEARCH CPC\_BID DEFAULT SEARCH CPC\_BID UNIFORM SEARCH TARGET\_CPA
   UNIFORM DISPLAY CPC\_BID DEFAULT DISPLAY CPC\_BID UNIFORM DISPLAY
-  TARGET\_CPA UNIFORM
+  TARGET\_CPA UNIFORM VIDEO CPV\_BID DEFAULT VIDEO CPV\_BID UNIFORM
   
   
   Attributes:
@@ -164,6 +175,8 @@ AdGroupSimulation = _reflection.GeneratedProtocolMessageType('AdGroupSimulation'
           List of simulation points.
       cpc_bid_point_list:
           Simulation points if the simulation type is CPC\_BID.
+      cpv_bid_point_list:
+          Simulation points if the simulation type is CPV\_BID.
       target_cpa_point_list:
           Simulation points if the simulation type is TARGET\_CPA.
   """,

@@ -20,7 +20,7 @@ DESCRIPTOR = _descriptor.FileDescriptor(
   package='google.ads.googleads.v1.errors',
   syntax='proto3',
   serialized_options=_b('\n\"com.google.ads.googleads.v1.errorsB\021BiddingErrorProtoP\001ZDgoogle.golang.org/genproto/googleapis/ads/googleads/v1/errors;errors\242\002\003GAA\252\002\036Google.Ads.GoogleAds.V1.Errors\312\002\036Google\\Ads\\GoogleAds\\V1\\Errors\352\002\"Google::Ads::GoogleAds::V1::Errors'),
-  serialized_pb=_b('\n8google/ads/googleads_v1/proto/errors/bidding_error.proto\x12\x1egoogle.ads.googleads.v1.errors\x1a\x1cgoogle/api/annotations.proto\"\x84\x08\n\x10\x42iddingErrorEnum\"\xef\x07\n\x0c\x42iddingError\x12\x0f\n\x0bUNSPECIFIED\x10\x00\x12\x0b\n\x07UNKNOWN\x10\x01\x12+\n\'BIDDING_STRATEGY_TRANSITION_NOT_ALLOWED\x10\x02\x12.\n*CANNOT_ATTACH_BIDDING_STRATEGY_TO_CAMPAIGN\x10\x07\x12+\n\'INVALID_ANONYMOUS_BIDDING_STRATEGY_TYPE\x10\n\x12!\n\x1dINVALID_BIDDING_STRATEGY_TYPE\x10\x0e\x12\x0f\n\x0bINVALID_BID\x10\x11\x12\x33\n/BIDDING_STRATEGY_NOT_AVAILABLE_FOR_ACCOUNT_TYPE\x10\x12\x12#\n\x1f\x43ONVERSION_TRACKING_NOT_ENABLED\x10\x13\x12\x1a\n\x16NOT_ENOUGH_CONVERSIONS\x10\x14\x12\x30\n,CANNOT_CREATE_CAMPAIGN_WITH_BIDDING_STRATEGY\x10\x15\x12O\nKCANNOT_TARGET_CONTENT_NETWORK_ONLY_WITH_CAMPAIGN_LEVEL_POP_BIDDING_STRATEGY\x10\x17\x12\x33\n/BIDDING_STRATEGY_NOT_SUPPORTED_WITH_AD_SCHEDULE\x10\x18\x12\x31\n-PAY_PER_CONVERSION_NOT_AVAILABLE_FOR_CUSTOMER\x10\x19\x12\x32\n.PAY_PER_CONVERSION_NOT_ALLOWED_WITH_TARGET_CPA\x10\x1a\x12:\n6BIDDING_STRATEGY_NOT_ALLOWED_FOR_SEARCH_ONLY_CAMPAIGNS\x10\x1b\x12;\n7BIDDING_STRATEGY_NOT_SUPPORTED_IN_DRAFTS_OR_EXPERIMENTS\x10\x1c\x12I\nEBIDDING_STRATEGY_TYPE_DOES_NOT_SUPPORT_PRODUCT_TYPE_ADGROUP_CRITERION\x10\x1d\x12\x11\n\rBID_TOO_SMALL\x10\x1e\x12\x0f\n\x0b\x42ID_TOO_BIG\x10\x1f\x12\"\n\x1e\x42ID_TOO_MANY_FRACTIONAL_DIGITS\x10 \x12\x17\n\x13INVALID_DOMAIN_NAME\x10!\x12$\n NOT_COMPATIBLE_WITH_PAYMENT_MODE\x10\"\x12#\n\x1fNOT_COMPATIBLE_WITH_BUDGET_TYPE\x10#B\xec\x01\n\"com.google.ads.googleads.v1.errorsB\x11\x42iddingErrorProtoP\x01ZDgoogle.golang.org/genproto/googleapis/ads/googleads/v1/errors;errors\xa2\x02\x03GAA\xaa\x02\x1eGoogle.Ads.GoogleAds.V1.Errors\xca\x02\x1eGoogle\\Ads\\GoogleAds\\V1\\Errors\xea\x02\"Google::Ads::GoogleAds::V1::Errorsb\x06proto3')
+  serialized_pb=_b('\n8google/ads/googleads_v1/proto/errors/bidding_error.proto\x12\x1egoogle.ads.googleads.v1.errors\x1a\x1cgoogle/api/annotations.proto\"\xb3\x08\n\x10\x42iddingErrorEnum\"\x9e\x08\n\x0c\x42iddingError\x12\x0f\n\x0bUNSPECIFIED\x10\x00\x12\x0b\n\x07UNKNOWN\x10\x01\x12+\n\'BIDDING_STRATEGY_TRANSITION_NOT_ALLOWED\x10\x02\x12.\n*CANNOT_ATTACH_BIDDING_STRATEGY_TO_CAMPAIGN\x10\x07\x12+\n\'INVALID_ANONYMOUS_BIDDING_STRATEGY_TYPE\x10\n\x12!\n\x1dINVALID_BIDDING_STRATEGY_TYPE\x10\x0e\x12\x0f\n\x0bINVALID_BID\x10\x11\x12\x33\n/BIDDING_STRATEGY_NOT_AVAILABLE_FOR_ACCOUNT_TYPE\x10\x12\x12#\n\x1f\x43ONVERSION_TRACKING_NOT_ENABLED\x10\x13\x12\x1a\n\x16NOT_ENOUGH_CONVERSIONS\x10\x14\x12\x30\n,CANNOT_CREATE_CAMPAIGN_WITH_BIDDING_STRATEGY\x10\x15\x12O\nKCANNOT_TARGET_CONTENT_NETWORK_ONLY_WITH_CAMPAIGN_LEVEL_POP_BIDDING_STRATEGY\x10\x17\x12\x33\n/BIDDING_STRATEGY_NOT_SUPPORTED_WITH_AD_SCHEDULE\x10\x18\x12\x31\n-PAY_PER_CONVERSION_NOT_AVAILABLE_FOR_CUSTOMER\x10\x19\x12\x32\n.PAY_PER_CONVERSION_NOT_ALLOWED_WITH_TARGET_CPA\x10\x1a\x12:\n6BIDDING_STRATEGY_NOT_ALLOWED_FOR_SEARCH_ONLY_CAMPAIGNS\x10\x1b\x12;\n7BIDDING_STRATEGY_NOT_SUPPORTED_IN_DRAFTS_OR_EXPERIMENTS\x10\x1c\x12I\nEBIDDING_STRATEGY_TYPE_DOES_NOT_SUPPORT_PRODUCT_TYPE_ADGROUP_CRITERION\x10\x1d\x12\x11\n\rBID_TOO_SMALL\x10\x1e\x12\x0f\n\x0b\x42ID_TOO_BIG\x10\x1f\x12\"\n\x1e\x42ID_TOO_MANY_FRACTIONAL_DIGITS\x10 \x12\x17\n\x13INVALID_DOMAIN_NAME\x10!\x12$\n NOT_COMPATIBLE_WITH_PAYMENT_MODE\x10\"\x12#\n\x1fNOT_COMPATIBLE_WITH_BUDGET_TYPE\x10#\x12-\n)NOT_COMPATIBLE_WITH_BIDDING_STRATEGY_TYPE\x10$B\xec\x01\n\"com.google.ads.googleads.v1.errorsB\x11\x42iddingErrorProtoP\x01ZDgoogle.golang.org/genproto/googleapis/ads/googleads/v1/errors;errors\xa2\x02\x03GAA\xaa\x02\x1eGoogle.Ads.GoogleAds.V1.Errors\xca\x02\x1eGoogle\\Ads\\GoogleAds\\V1\\Errors\xea\x02\"Google::Ads::GoogleAds::V1::Errorsb\x06proto3')
   ,
   dependencies=[google_dot_api_dot_annotations__pb2.DESCRIPTOR,])
 
@@ -128,11 +128,15 @@ _BIDDINGERRORENUM_BIDDINGERROR = _descriptor.EnumDescriptor(
       name='NOT_COMPATIBLE_WITH_BUDGET_TYPE', index=23, number=35,
       serialized_options=None,
       type=None),
+    _descriptor.EnumValueDescriptor(
+      name='NOT_COMPATIBLE_WITH_BIDDING_STRATEGY_TYPE', index=24, number=36,
+      serialized_options=None,
+      type=None),
   ],
   containing_type=None,
   serialized_options=None,
   serialized_start=144,
-  serialized_end=1151,
+  serialized_end=1198,
 )
 _sym_db.RegisterEnumDescriptor(_BIDDINGERRORENUM_BIDDINGERROR)
 
@@ -158,7 +162,7 @@ _BIDDINGERRORENUM = _descriptor.Descriptor(
   oneofs=[
   ],
   serialized_start=123,
-  serialized_end=1151,
+  serialized_end=1198,
 )
 
 _BIDDINGERRORENUM_BIDDINGERROR.containing_type = _BIDDINGERRORENUM

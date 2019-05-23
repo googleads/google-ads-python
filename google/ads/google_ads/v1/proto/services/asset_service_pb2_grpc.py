@@ -8,7 +8,9 @@ from google.ads.google_ads.v1.proto.services import asset_service_pb2 as google_
 class AssetServiceStub(object):
   """Proto file describing the Asset service.
 
-  Service to manage assets.
+  Service to manage assets. Asset types can be created with AssetService are
+  YoutubeVideoAsset, MediaBundleAsset and ImageAsset. TextAsset should be
+  created with Ad inline.
   """
 
   def __init__(self, channel):
@@ -32,7 +34,9 @@ class AssetServiceStub(object):
 class AssetServiceServicer(object):
   """Proto file describing the Asset service.
 
-  Service to manage assets.
+  Service to manage assets. Asset types can be created with AssetService are
+  YoutubeVideoAsset, MediaBundleAsset and ImageAsset. TextAsset should be
+  created with Ad inline.
   """
 
   def GetAsset(self, request, context):

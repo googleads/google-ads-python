@@ -326,7 +326,8 @@ CampaignExtensionSettingOperation = _reflection.GeneratedProtocolMessageType('Ca
       remove:
           Remove operation: A resource name for the removed campaign
           extension setting is expected, in this format:  ``customers/{c
-          ustomer_id}/campaignExtensionSettings/{feed_id}``
+          ustomer_id}/campaignExtensionSettings/{campaign_id}~{extension
+          _type}``
   """,
   # @@protoc_insertion_point(class_scope:google.ads.googleads.v1.services.CampaignExtensionSettingOperation)
   ))

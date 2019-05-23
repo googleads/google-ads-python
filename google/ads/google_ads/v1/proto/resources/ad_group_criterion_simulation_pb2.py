@@ -131,10 +131,10 @@ AdGroupCriterionSimulation = _reflection.GeneratedProtocolMessageType('AdGroupCr
   __module__ = 'google.ads.googleads_v1.proto.resources.ad_group_criterion_simulation_pb2'
   ,
   __doc__ = """An ad group criterion simulation. Supported combinations of advertising
-  channel type, criterion types, simulation type, and simulation
+  channel type, criterion type, simulation type, and simulation
   modification method are detailed below respectively.
   
-  SEARCH KEYWORDS CPC\_BID UNIFORM
+  SEARCH KEYWORD CPC\_BID UNIFORM
   
   
   Attributes:

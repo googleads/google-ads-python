@@ -42,6 +42,8 @@ from google.ads.google_ads.v1.services import campaign_bid_modifier_service_clie
 from google.ads.google_ads.v1.services import campaign_budget_service_client
 from google.ads.google_ads.v1.services import campaign_criterion_service_client
 from google.ads.google_ads.v1.services import campaign_criterion_simulation_service_client
+from google.ads.google_ads.v1.services import campaign_draft_service_client
+from google.ads.google_ads.v1.services import campaign_experiment_service_client
 from google.ads.google_ads.v1.services import campaign_extension_setting_service_client
 from google.ads.google_ads.v1.services import campaign_feed_service_client
 from google.ads.google_ads.v1.services import campaign_label_service_client
@@ -141,6 +143,8 @@ from google.ads.google_ads.v1.services.transports import campaign_bid_modifier_s
 from google.ads.google_ads.v1.services.transports import campaign_budget_service_grpc_transport
 from google.ads.google_ads.v1.services.transports import campaign_criterion_service_grpc_transport
 from google.ads.google_ads.v1.services.transports import campaign_criterion_simulation_service_grpc_transport
+from google.ads.google_ads.v1.services.transports import campaign_draft_service_grpc_transport
+from google.ads.google_ads.v1.services.transports import campaign_experiment_service_grpc_transport
 from google.ads.google_ads.v1.services.transports import campaign_extension_setting_service_grpc_transport
 from google.ads.google_ads.v1.services.transports import campaign_feed_service_grpc_transport
 from google.ads.google_ads.v1.services.transports import campaign_label_service_grpc_transport
@@ -363,6 +367,18 @@ class CampaignCriterionServiceClient(
 class CampaignCriterionSimulationServiceClient(
     campaign_criterion_simulation_service_client.CampaignCriterionSimulationServiceClient):
     __doc__ = campaign_criterion_simulation_service_client.CampaignCriterionSimulationServiceClient.__doc__
+    enums = enums
+
+
+class CampaignDraftServiceClient(
+    campaign_draft_service_client.CampaignDraftServiceClient):
+    __doc__ = campaign_draft_service_client.CampaignDraftServiceClient.__doc__
+    enums = enums
+
+
+class CampaignExperimentServiceClient(
+    campaign_experiment_service_client.CampaignExperimentServiceClient):
+    __doc__ = campaign_experiment_service_client.CampaignExperimentServiceClient.__doc__
     enums = enums
 
 
@@ -929,6 +945,16 @@ class CampaignCriterionSimulationServiceGrpcTransport(
     __doc__ = campaign_criterion_simulation_service_grpc_transport.CampaignCriterionSimulationServiceGrpcTransport.__doc__
 
 
+class CampaignDraftServiceGrpcTransport(
+    campaign_draft_service_grpc_transport.CampaignDraftServiceGrpcTransport):
+    __doc__ = campaign_draft_service_grpc_transport.CampaignDraftServiceGrpcTransport.__doc__
+
+
+class CampaignExperimentServiceGrpcTransport(
+    campaign_experiment_service_grpc_transport.CampaignExperimentServiceGrpcTransport):
+    __doc__ = campaign_experiment_service_grpc_transport.CampaignExperimentServiceGrpcTransport.__doc__
+
+
 class CampaignExtensionSettingServiceGrpcTransport(
     campaign_extension_setting_service_grpc_transport.CampaignExtensionSettingServiceGrpcTransport):
     __doc__ = campaign_extension_setting_service_grpc_transport.CampaignExtensionSettingServiceGrpcTransport.__doc__
@@ -1322,6 +1348,8 @@ __all__ = (
     'CampaignBudgetServiceClient',
     'CampaignCriterionServiceClient',
     'CampaignCriterionSimulationServiceClient',
+    'CampaignDraftServiceClient',
+    'CampaignExperimentServiceClient',
     'CampaignExtensionSettingServiceClient',
     'CampaignFeedServiceClient',
     'CampaignLabelServiceClient',
@@ -1420,6 +1448,8 @@ __all__ = (
     'CampaignBudgetServiceGrpcTransport',
     'CampaignCriterionServiceGrpcTransport',
     'CampaignCriterionSimulationServiceGrpcTransport',
+    'CampaignDraftServiceGrpcTransport',
+    'CampaignExperimentServiceGrpcTransport',
     'CampaignExtensionSettingServiceGrpcTransport',
     'CampaignFeedServiceGrpcTransport',
     'CampaignLabelServiceGrpcTransport',

@@ -325,8 +325,9 @@ AdGroupExtensionSettingOperation = _reflection.GeneratedProtocolMessageType('AdG
           to have a valid resource name.
       remove:
           Remove operation: A resource name for the removed ad group
-          extension setting is expected, in this format:
-          ``customers/{customer_id}/adGroupExtensionSettings/{feed_id}``
+          extension setting is expected, in this format:  ``customers/{c
+          ustomer_id}/adGroupExtensionSettings/{ad_group_id}~{extension_
+          type}``
   """,
   # @@protoc_insertion_point(class_scope:google.ads.googleads.v1.services.AdGroupExtensionSettingOperation)
   ))

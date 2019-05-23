@@ -985,7 +985,7 @@ Metrics = _reflection.GeneratedProtocolMessageType('Metrics', (_message.Message,
           ads).
       all_conversions_from_click_to_call:
           The number of times people clicked the "Call" button to call a
-          store during or after clicking an ad. This number doesn’t
+          store during or after clicking an ad. This number doesn't
           include whether or not calls were connected, or the duration
           of any calls. This metric applies to feed items only.
       all_conversions_from_directions:
@@ -996,7 +996,7 @@ Metrics = _reflection.GeneratedProtocolMessageType('Metrics', (_message.Message,
           The value of all conversions from interactions divided by the
           total number of interactions.
       all_conversions_from_menu:
-          The number of times people clicked a link to view a store’s
+          The number of times people clicked a link to view a store's
           menu after clicking an ad. This metric applies to feed items
           only.
       all_conversions_from_order:

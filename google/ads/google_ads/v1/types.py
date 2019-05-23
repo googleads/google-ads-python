@@ -87,6 +87,10 @@ from google.ads.google_ads.v1.proto.enums import budget_type_pb2
 from google.ads.google_ads.v1.proto.enums import call_conversion_reporting_state_pb2
 from google.ads.google_ads.v1.proto.enums import call_placeholder_field_pb2
 from google.ads.google_ads.v1.proto.enums import callout_placeholder_field_pb2
+from google.ads.google_ads.v1.proto.enums import campaign_criterion_status_pb2
+from google.ads.google_ads.v1.proto.enums import campaign_draft_status_pb2
+from google.ads.google_ads.v1.proto.enums import campaign_experiment_status_pb2
+from google.ads.google_ads.v1.proto.enums import campaign_experiment_traffic_split_type_pb2
 from google.ads.google_ads.v1.proto.enums import campaign_experiment_type_pb2
 from google.ads.google_ads.v1.proto.enums import campaign_serving_status_pb2
 from google.ads.google_ads.v1.proto.enums import campaign_shared_set_status_pb2
@@ -147,6 +151,7 @@ from google.ads.google_ads.v1.proto.enums import google_ads_field_category_pb2
 from google.ads.google_ads.v1.proto.enums import google_ads_field_data_type_pb2
 from google.ads.google_ads.v1.proto.enums import hotel_date_selection_type_pb2
 from google.ads.google_ads.v1.proto.enums import hotel_placeholder_field_pb2
+from google.ads.google_ads.v1.proto.enums import hotel_rate_type_pb2
 from google.ads.google_ads.v1.proto.enums import income_range_type_pb2
 from google.ads.google_ads.v1.proto.enums import interaction_event_type_pb2
 from google.ads.google_ads.v1.proto.enums import interaction_type_pb2
@@ -262,7 +267,9 @@ from google.ads.google_ads.v1.proto.errors import bidding_strategy_error_pb2
 from google.ads.google_ads.v1.proto.errors import billing_setup_error_pb2
 from google.ads.google_ads.v1.proto.errors import campaign_budget_error_pb2
 from google.ads.google_ads.v1.proto.errors import campaign_criterion_error_pb2
+from google.ads.google_ads.v1.proto.errors import campaign_draft_error_pb2
 from google.ads.google_ads.v1.proto.errors import campaign_error_pb2
+from google.ads.google_ads.v1.proto.errors import campaign_experiment_error_pb2
 from google.ads.google_ads.v1.proto.errors import campaign_feed_error_pb2
 from google.ads.google_ads.v1.proto.errors import campaign_shared_set_error_pb2
 from google.ads.google_ads.v1.proto.errors import change_status_error_pb2
@@ -310,6 +317,7 @@ from google.ads.google_ads.v1.proto.errors import keyword_plan_negative_keyword_
 from google.ads.google_ads.v1.proto.errors import label_error_pb2
 from google.ads.google_ads.v1.proto.errors import language_code_error_pb2
 from google.ads.google_ads.v1.proto.errors import list_operation_error_pb2
+from google.ads.google_ads.v1.proto.errors import manager_link_error_pb2
 from google.ads.google_ads.v1.proto.errors import media_bundle_error_pb2
 from google.ads.google_ads.v1.proto.errors import media_file_error_pb2
 from google.ads.google_ads.v1.proto.errors import media_upload_error_pb2
@@ -318,6 +326,7 @@ from google.ads.google_ads.v1.proto.errors import mutate_error_pb2
 from google.ads.google_ads.v1.proto.errors import mutate_job_error_pb2
 from google.ads.google_ads.v1.proto.errors import new_resource_creation_error_pb2
 from google.ads.google_ads.v1.proto.errors import not_empty_error_pb2
+from google.ads.google_ads.v1.proto.errors import not_whitelisted_error_pb2
 from google.ads.google_ads.v1.proto.errors import null_error_pb2
 from google.ads.google_ads.v1.proto.errors import operation_access_denied_error_pb2
 from google.ads.google_ads.v1.proto.errors import operator_error_pb2
@@ -368,6 +377,8 @@ from google.ads.google_ads.v1.proto.resources import campaign_bid_modifier_pb2
 from google.ads.google_ads.v1.proto.resources import campaign_budget_pb2
 from google.ads.google_ads.v1.proto.resources import campaign_criterion_pb2
 from google.ads.google_ads.v1.proto.resources import campaign_criterion_simulation_pb2
+from google.ads.google_ads.v1.proto.resources import campaign_draft_pb2
+from google.ads.google_ads.v1.proto.resources import campaign_experiment_pb2
 from google.ads.google_ads.v1.proto.resources import campaign_extension_setting_pb2
 from google.ads.google_ads.v1.proto.resources import campaign_feed_pb2
 from google.ads.google_ads.v1.proto.resources import campaign_label_pb2
@@ -462,6 +473,8 @@ from google.ads.google_ads.v1.proto.services import campaign_bid_modifier_servic
 from google.ads.google_ads.v1.proto.services import campaign_budget_service_pb2
 from google.ads.google_ads.v1.proto.services import campaign_criterion_service_pb2
 from google.ads.google_ads.v1.proto.services import campaign_criterion_simulation_service_pb2
+from google.ads.google_ads.v1.proto.services import campaign_draft_service_pb2
+from google.ads.google_ads.v1.proto.services import campaign_experiment_service_pb2
 from google.ads.google_ads.v1.proto.services import campaign_extension_setting_service_pb2
 from google.ads.google_ads.v1.proto.services import campaign_feed_service_pb2
 from google.ads.google_ads.v1.proto.services import campaign_label_service_pb2
@@ -537,6 +550,7 @@ from google.ads.google_ads.v1.proto.services import user_list_service_pb2
 from google.ads.google_ads.v1.proto.services import video_service_pb2
 from google.longrunning import operations_pb2
 from google.protobuf import any_pb2
+from google.protobuf import empty_pb2
 from google.protobuf import field_mask_pb2
 from google.protobuf import wrappers_pb2
 from google.rpc import status_pb2
@@ -610,6 +624,10 @@ _shared_modules = [
     call_conversion_reporting_state_pb2,
     call_placeholder_field_pb2,
     callout_placeholder_field_pb2,
+    campaign_criterion_status_pb2,
+    campaign_draft_status_pb2,
+    campaign_experiment_status_pb2,
+    campaign_experiment_traffic_split_type_pb2,
     campaign_experiment_type_pb2,
     campaign_serving_status_pb2,
     campaign_shared_set_status_pb2,
@@ -670,6 +688,7 @@ _shared_modules = [
     google_ads_field_data_type_pb2,
     hotel_date_selection_type_pb2,
     hotel_placeholder_field_pb2,
+    hotel_rate_type_pb2,
     income_range_type_pb2,
     interaction_event_type_pb2,
     interaction_type_pb2,
@@ -785,7 +804,9 @@ _shared_modules = [
     billing_setup_error_pb2,
     campaign_budget_error_pb2,
     campaign_criterion_error_pb2,
+    campaign_draft_error_pb2,
     campaign_error_pb2,
+    campaign_experiment_error_pb2,
     campaign_feed_error_pb2,
     campaign_shared_set_error_pb2,
     change_status_error_pb2,
@@ -833,6 +854,7 @@ _shared_modules = [
     label_error_pb2,
     language_code_error_pb2,
     list_operation_error_pb2,
+    manager_link_error_pb2,
     media_bundle_error_pb2,
     media_file_error_pb2,
     media_upload_error_pb2,
@@ -841,6 +863,7 @@ _shared_modules = [
     mutate_job_error_pb2,
     new_resource_creation_error_pb2,
     not_empty_error_pb2,
+    not_whitelisted_error_pb2,
     null_error_pb2,
     operation_access_denied_error_pb2,
     operator_error_pb2,
@@ -891,6 +914,8 @@ _shared_modules = [
     campaign_budget_pb2,
     campaign_criterion_pb2,
     campaign_criterion_simulation_pb2,
+    campaign_draft_pb2,
+    campaign_experiment_pb2,
     campaign_extension_setting_pb2,
     campaign_feed_pb2,
     campaign_label_pb2,
@@ -962,6 +987,7 @@ _shared_modules = [
     video_pb2,
     operations_pb2,
     any_pb2,
+    empty_pb2,
     field_mask_pb2,
     wrappers_pb2,
     status_pb2,
@@ -993,6 +1019,8 @@ _local_modules = [
     campaign_budget_service_pb2,
     campaign_criterion_service_pb2,
     campaign_criterion_simulation_service_pb2,
+    campaign_draft_service_pb2,
+    campaign_experiment_service_pb2,
     campaign_extension_setting_service_pb2,
     campaign_feed_service_pb2,
     campaign_label_service_pb2,

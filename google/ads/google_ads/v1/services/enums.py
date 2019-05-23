@@ -847,6 +847,7 @@ class AdGroupTypeEnum(object):
           VIDEO_NON_SKIPPABLE_IN_STREAM (int): Unskippable in-stream video ads.
           VIDEO_OUTSTREAM (int): Outstream video ads.
           SEARCH_DYNAMIC_ADS (int): Ad group type for Dynamic Search Ads ad groups.
+          SHOPPING_COMPARISON_LISTING_ADS (int): The type for ad groups in Shopping Comparison Listing campaigns.
         """
         UNSPECIFIED = 0
         UNKNOWN = 1
@@ -861,6 +862,7 @@ class AdGroupTypeEnum(object):
         VIDEO_NON_SKIPPABLE_IN_STREAM = 11
         VIDEO_OUTSTREAM = 12
         SEARCH_DYNAMIC_ADS = 13
+        SHOPPING_COMPARISON_LISTING_ADS = 14
 
 
 class AdNetworkTypeEnum(object):
@@ -1007,6 +1009,7 @@ class AdTypeEnum(object):
           DYNAMIC_HTML5_AD (int): The ad is a display upload ad with one of the DYNAMIC\_HTML5\_\* product
           types.
           APP_ENGAGEMENT_AD (int): The ad is an app engagement ad.
+          SHOPPING_COMPARISON_LISTING_AD (int): The ad is a Shopping Comparison Listing ad.
         """
         UNSPECIFIED = 0
         UNKNOWN = 1
@@ -1028,6 +1031,7 @@ class AdTypeEnum(object):
         HTML5_UPLOAD_AD = 21
         DYNAMIC_HTML5_AD = 22
         APP_ENGAGEMENT_AD = 23
+        SHOPPING_COMPARISON_LISTING_AD = 24
 
 
 class AdvertisingChannelSubTypeEnum(object):
@@ -1054,6 +1058,7 @@ class AdvertisingChannelSubTypeEnum(object):
           APP_CAMPAIGN_FOR_ENGAGEMENT (int): App Campaign for engagement, focused on driving re-engagement with the
           app across several of Google’s top properties including Search, YouTube,
           and the Google Display Network.
+          SHOPPING_COMPARISON_LISTING_ADS (int): Shopping Comparison Listing campaigns.
         """
         UNSPECIFIED = 0
         UNKNOWN = 1
@@ -1069,6 +1074,7 @@ class AdvertisingChannelSubTypeEnum(object):
         VIDEO_NON_SKIPPABLE = 11
         APP_CAMPAIGN = 12
         APP_CAMPAIGN_FOR_ENGAGEMENT = 13
+        SHOPPING_COMPARISON_LISTING_ADS = 15
 
 
 class AdvertisingChannelTypeEnum(object):
@@ -1546,8 +1552,9 @@ class BiddingErrorEnum(object):
           BID_TOO_BIG (int): Bid amount is too big.
           BID_TOO_MANY_FRACTIONAL_DIGITS (int): Bid has too many fractional digit precision.
           INVALID_DOMAIN_NAME (int): Invalid domain name specified.
-          NOT_COMPATIBLE_WITH_PAYMENT_MODE (int): The field is not compatible with payment mode.
-          NOT_COMPATIBLE_WITH_BUDGET_TYPE (int): Bidding strategy is incompatible with the budget type.
+          NOT_COMPATIBLE_WITH_PAYMENT_MODE (int): The field is not compatible with the payment mode.
+          NOT_COMPATIBLE_WITH_BUDGET_TYPE (int): The field is not compatible with the budget type.
+          NOT_COMPATIBLE_WITH_BIDDING_STRATEGY_TYPE (int): The field is not compatible with the bidding strategy type.
         """
         UNSPECIFIED = 0
         UNKNOWN = 1
@@ -1573,6 +1580,7 @@ class BiddingErrorEnum(object):
         INVALID_DOMAIN_NAME = 33
         NOT_COMPATIBLE_WITH_PAYMENT_MODE = 34
         NOT_COMPATIBLE_WITH_BUDGET_TYPE = 35
+        NOT_COMPATIBLE_WITH_BIDDING_STRATEGY_TYPE = 36
 
 
 class BiddingSourceEnum(object):
@@ -1648,6 +1656,8 @@ class BiddingStrategyTypeEnum(object):
         Attributes:
           UNSPECIFIED (int): Not specified.
           UNKNOWN (int): Used for return value only. Represents value unknown in this version.
+          COMMISSION (int): Commission is an automatic bidding strategy in which the advertiser pays
+          a certain portion of the conversion value.
           ENHANCED_CPC (int): Enhanced CPC is a bidding strategy that raises bids for clicks
           that seem more likely to lead to a conversion and lowers
           them for clicks where they seem less likely.
@@ -1683,6 +1693,7 @@ class BiddingStrategyTypeEnum(object):
         """
         UNSPECIFIED = 0
         UNKNOWN = 1
+        COMMISSION = 16
         ENHANCED_CPC = 2
         MANUAL_CPC = 3
         MANUAL_CPM = 4
@@ -2056,6 +2067,94 @@ class CampaignCriterionErrorEnum(object):
         CANNOT_UPDATE_NEGATIVE_CRITERION = 12
 
 
+class CampaignCriterionStatusEnum(object):
+    class CampaignCriterionStatus(enum.IntEnum):
+        """
+        The possible statuses of a CampaignCriterion.
+
+        Attributes:
+          UNSPECIFIED (int): No value has been specified.
+          UNKNOWN (int): The received value is not known in this version.
+
+          This is a response-only value.
+          ENABLED (int): The campaign criterion is enabled.
+          PAUSED (int): The campaign criterion is paused.
+          REMOVED (int): The campaign criterion is removed.
+        """
+        UNSPECIFIED = 0
+        UNKNOWN = 1
+        ENABLED = 2
+        PAUSED = 3
+        REMOVED = 4
+
+
+class CampaignDraftErrorEnum(object):
+    class CampaignDraftError(enum.IntEnum):
+        """
+        Enum describing possible campaign draft errors.
+
+        Attributes:
+          UNSPECIFIED (int): Enum unspecified.
+          UNKNOWN (int): The received error code is not known in this version.
+          DUPLICATE_DRAFT_NAME (int): A draft with this name already exists for this campaign.
+          INVALID_STATUS_TRANSITION_FROM_REMOVED (int): The draft is removed and cannot be transitioned to another status.
+          INVALID_STATUS_TRANSITION_FROM_PROMOTED (int): The draft has been promoted and cannot be transitioned to the specified
+          status.
+          INVALID_STATUS_TRANSITION_FROM_PROMOTE_FAILED (int): The draft has failed to be promoted and cannot be transitioned to the
+          specified status.
+          CUSTOMER_CANNOT_CREATE_DRAFT (int): This customer is not allowed to create drafts.
+          CAMPAIGN_CANNOT_CREATE_DRAFT (int): This campaign is not allowed to create drafts.
+          INVALID_DRAFT_CHANGE (int): This modification cannot be made on a draft.
+          INVALID_STATUS_TRANSITION (int): The draft cannot be transitioned to the specified status from its
+          current status.
+          MAX_NUMBER_OF_DRAFTS_PER_CAMPAIGN_REACHED (int): The campaign has reached the maximum number of drafts that can be created
+          for a campaign throughout its lifetime. No additional drafts can be
+          created for this campaign. Removed drafts also count towards this limit.
+          LIST_ERRORS_FOR_PROMOTED_DRAFT_ONLY (int): ListAsyncErrors was called without first promoting the draft.
+        """
+        UNSPECIFIED = 0
+        UNKNOWN = 1
+        DUPLICATE_DRAFT_NAME = 2
+        INVALID_STATUS_TRANSITION_FROM_REMOVED = 3
+        INVALID_STATUS_TRANSITION_FROM_PROMOTED = 4
+        INVALID_STATUS_TRANSITION_FROM_PROMOTE_FAILED = 5
+        CUSTOMER_CANNOT_CREATE_DRAFT = 6
+        CAMPAIGN_CANNOT_CREATE_DRAFT = 7
+        INVALID_DRAFT_CHANGE = 8
+        INVALID_STATUS_TRANSITION = 9
+        MAX_NUMBER_OF_DRAFTS_PER_CAMPAIGN_REACHED = 10
+        LIST_ERRORS_FOR_PROMOTED_DRAFT_ONLY = 11
+
+
+class CampaignDraftStatusEnum(object):
+    class CampaignDraftStatus(enum.IntEnum):
+        """
+        Possible statuses of a campaign draft.
+
+        Attributes:
+          UNSPECIFIED (int): The status has not been specified.
+          UNKNOWN (int): Used for return value only. Represents value unknown in this version.
+          PROPOSED (int): Initial state of the draft, the advertiser can start adding changes with
+          no effect on serving.
+          REMOVED (int): The campaign draft is removed.
+          PROMOTING (int): Advertiser requested to promote draft's changes back into the original
+          campaign. Advertiser can poll the long running operation returned by
+          the promote action to see the status of the promotion.
+          PROMOTED (int): The process to merge changes in the draft back to the original campaign
+          has completed successfully.
+          PROMOTE_FAILED (int): The promotion failed after it was partially applied. Promote cannot be
+          attempted again safely, so the issue must be corrected in the original
+          campaign.
+        """
+        UNSPECIFIED = 0
+        UNKNOWN = 1
+        PROPOSED = 2
+        REMOVED = 3
+        PROMOTING = 5
+        PROMOTED = 4
+        PROMOTE_FAILED = 6
+
+
 class CampaignErrorEnum(object):
     class CampaignError(enum.IntEnum):
         """
@@ -2113,6 +2212,10 @@ class CampaignErrorEnum(object):
           CANNOT_USE_SHARED_CAMPAIGN_BUDGET_WHILE_PART_OF_CAMPAIGN_GROUP (int): A Campaign cannot use shared campaign budgets and be part of a campaign
           group.
           APP_NOT_FOUND (int): The app ID was not found.
+          SHOPPING_ENABLE_LOCAL_NOT_SUPPORTED_FOR_CAMPAIGN_TYPE (int): Campaign.shopping\_setting.enable\_local is not supported for the
+          specified campaign type.
+          MERCHANT_NOT_ALLOWED_FOR_COMPARISON_LISTING_ADS (int): The merchant does not support the creation of campaigns for Shopping
+          Comparison Listing Ads.
         """
         UNSPECIFIED = 0
         UNKNOWN = 1
@@ -2153,6 +2256,105 @@ class CampaignErrorEnum(object):
         MISSING_HOTEL_SETTING = 39
         CANNOT_USE_SHARED_CAMPAIGN_BUDGET_WHILE_PART_OF_CAMPAIGN_GROUP = 40
         APP_NOT_FOUND = 41
+        SHOPPING_ENABLE_LOCAL_NOT_SUPPORTED_FOR_CAMPAIGN_TYPE = 42
+        MERCHANT_NOT_ALLOWED_FOR_COMPARISON_LISTING_ADS = 43
+
+
+class CampaignExperimentErrorEnum(object):
+    class CampaignExperimentError(enum.IntEnum):
+        """
+        Enum describing possible campaign experiment errors.
+
+        Attributes:
+          UNSPECIFIED (int): Enum unspecified.
+          UNKNOWN (int): The received error code is not known in this version.
+          DUPLICATE_NAME (int): An active campaign or experiment with this name already exists.
+          INVALID_TRANSITION (int): Experiment cannot be updated from the current state to the
+          requested target state. For example, an experiment can only graduate
+          if its status is ENABLED.
+          CANNOT_CREATE_EXPERIMENT_WITH_SHARED_BUDGET (int): Cannot create an experiment from a campaign using an explicitly shared
+          budget.
+          CANNOT_CREATE_EXPERIMENT_FOR_REMOVED_BASE_CAMPAIGN (int): Cannot create an experiment for a removed base campaign.
+          CANNOT_CREATE_EXPERIMENT_FOR_NON_PROPOSED_DRAFT (int): Cannot create an experiment from a draft, which has a status other than
+          proposed.
+          CUSTOMER_CANNOT_CREATE_EXPERIMENT (int): This customer is not allowed to create an experiment.
+          CAMPAIGN_CANNOT_CREATE_EXPERIMENT (int): This campaign is not allowed to create an experiment.
+          EXPERIMENT_DURATIONS_MUST_NOT_OVERLAP (int): Trying to set an experiment duration which overlaps with another
+          experiment.
+          EXPERIMENT_DURATION_MUST_BE_WITHIN_CAMPAIGN_DURATION (int): All non-removed experiments must start and end within their campaign's
+          duration.
+          CANNOT_MUTATE_EXPERIMENT_DUE_TO_STATUS (int): The experiment cannot be modified because its status is in a terminal
+          state, such as REMOVED.
+        """
+        UNSPECIFIED = 0
+        UNKNOWN = 1
+        DUPLICATE_NAME = 2
+        INVALID_TRANSITION = 3
+        CANNOT_CREATE_EXPERIMENT_WITH_SHARED_BUDGET = 4
+        CANNOT_CREATE_EXPERIMENT_FOR_REMOVED_BASE_CAMPAIGN = 5
+        CANNOT_CREATE_EXPERIMENT_FOR_NON_PROPOSED_DRAFT = 6
+        CUSTOMER_CANNOT_CREATE_EXPERIMENT = 7
+        CAMPAIGN_CANNOT_CREATE_EXPERIMENT = 8
+        EXPERIMENT_DURATIONS_MUST_NOT_OVERLAP = 9
+        EXPERIMENT_DURATION_MUST_BE_WITHIN_CAMPAIGN_DURATION = 10
+        CANNOT_MUTATE_EXPERIMENT_DUE_TO_STATUS = 11
+
+
+class CampaignExperimentStatusEnum(object):
+    class CampaignExperimentStatus(enum.IntEnum):
+        """
+        Possible statuses of a campaign experiment.
+
+        Attributes:
+          UNSPECIFIED (int): The status has not been specified.
+          UNKNOWN (int): Used for return value only. Represents value unknown in this version.
+          INITIALIZING (int): The experiment campaign is being initialized.
+          INITIALIZATION_FAILED (int): Initialization of the experiment campaign failed.
+          ENABLED (int): The experiment campaign is fully initialized. The experiment is currently
+          running, scheduled to run in the future or has ended based on its
+          end date. An experiment with the status INITIALIZING will be updated to
+          ENABLED when it is fully created.
+          GRADUATED (int): The experiment campaign was graduated to a stand-alone
+          campaign, existing independently of the experiment.
+          REMOVED (int): The experiment is removed.
+          PROMOTING (int): The experiment's changes are being applied to the original campaign.
+          The long running operation returned by the promote method can be polled
+          to see the status of the promotion.
+          PROMOTION_FAILED (int): Promote of the experiment campaign failed.
+          PROMOTED (int): The changes of the experiment are promoted to their original campaign.
+          ENDED_MANUALLY (int): The experiment was ended manually. It did not end based on its end date.
+        """
+        UNSPECIFIED = 0
+        UNKNOWN = 1
+        INITIALIZING = 2
+        INITIALIZATION_FAILED = 8
+        ENABLED = 3
+        GRADUATED = 4
+        REMOVED = 5
+        PROMOTING = 6
+        PROMOTION_FAILED = 9
+        PROMOTED = 7
+        ENDED_MANUALLY = 10
+
+
+class CampaignExperimentTrafficSplitTypeEnum(object):
+    class CampaignExperimentTrafficSplitType(enum.IntEnum):
+        """
+        Enum of strategies for splitting traffic between base and experiment
+        campaigns in campaign experiment.
+
+        Attributes:
+          UNSPECIFIED (int): Not specified.
+          UNKNOWN (int): Used for return value only. Represents value unknown in this version.
+          RANDOM_QUERY (int): Traffic is randomly assigned to the base or experiment arm for each
+          query, independent of previous assignments for the same user.
+          COOKIE (int): Traffic is split using cookies to keep users in the same arm (base or
+          experiment) of the experiment.
+        """
+        UNSPECIFIED = 0
+        UNKNOWN = 1
+        RANDOM_QUERY = 2
+        COOKIE = 3
 
 
 class CampaignExperimentTypeEnum(object):
@@ -2411,6 +2613,7 @@ class ClickTypeEnum(object):
           HOTEL_PRICE (int): Hotel price.
           PRICE_EXTENSION (int): Price Extension.
           HOTEL_BOOK_ON_GOOGLE_ROOM_SELECTION (int): Book on Google hotel room selection.
+          SHOPPING_COMPARISON_LISTING (int): Shopping - Comparison Listing.
         """
         UNSPECIFIED = 0
         UNKNOWN = 1
@@ -2466,6 +2669,7 @@ class ClickTypeEnum(object):
         HOTEL_PRICE = 53
         PRICE_EXTENSION = 54
         HOTEL_BOOK_ON_GOOGLE_ROOM_SELECTION = 55
+        SHOPPING_COMPARISON_LISTING = 56
 
 
 class CollectionSizeErrorEnum(object):
@@ -3874,6 +4078,7 @@ class DeviceEnum(object):
           MOBILE (int): Mobile devices with full browsers.
           TABLET (int): Tablets with full browsers.
           DESKTOP (int): Computers.
+          CONNECTED_TV (int): Smart TVs and game consoles.
           OTHER (int): Other device types.
         """
         UNSPECIFIED = 0
@@ -3881,6 +4086,7 @@ class DeviceEnum(object):
         MOBILE = 2
         TABLET = 3
         DESKTOP = 4
+        CONNECTED_TV = 6
         OTHER = 5
 
 
@@ -4578,6 +4784,7 @@ class FeedErrorEnum(object):
           INVALID_BUSINESS_ACCOUNT (int): The business account is not valid.
           BUSINESS_ACCOUNT_CANNOT_ACCESS_LOCATION_ACCOUNT (int): Business account cannot access Google My Business account.
           INVALID_AFFILIATE_CHAIN_ID (int): Invalid chain ID provided for affiliate location feed.
+          DUPLICATE_SYSTEM_FEED (int): There is already a feed with the given system feed generation data.
         """
         UNSPECIFIED = 0
         UNKNOWN = 1
@@ -4600,6 +4807,7 @@ class FeedErrorEnum(object):
         INVALID_BUSINESS_ACCOUNT = 18
         BUSINESS_ACCOUNT_CANNOT_ACCESS_LOCATION_ACCOUNT = 19
         INVALID_AFFILIATE_CHAIN_ID = 20
+        DUPLICATE_SYSTEM_FEED = 21
 
 
 class FeedItemErrorEnum(object):
@@ -5571,6 +5779,9 @@ class GoogleAdsFieldDataTypeEnum(object):
           STRING (int): Maps to google.protobuf.StringValue.
 
           Applicable operators:  =, !=, LIKE, NOT LIKE, IN, NOT IN
+          UINT64 (int): Maps to google.protobuf.UInt64Value
+
+          Applicable operators:  =, !=, <, >, <=, >=, BETWEEN, IN, NOT IN
         """
         UNSPECIFIED = 0
         UNKNOWN = 1
@@ -5584,6 +5795,7 @@ class GoogleAdsFieldDataTypeEnum(object):
         MESSAGE = 9
         RESOURCE_NAME = 10
         STRING = 11
+        UINT64 = 12
 
 
 class HeaderErrorEnum(object):
@@ -5686,6 +5898,33 @@ class HotelPlaceholderFieldEnum(object):
         SIMILAR_PROPERTY_IDS = 19
         IOS_APP_LINK = 20
         IOS_APP_STORE_ID = 21
+
+
+class HotelRateTypeEnum(object):
+    class HotelRateType(enum.IntEnum):
+        """
+        Enum describing possible hotel rate types.
+
+        Attributes:
+          UNSPECIFIED (int): Not specified.
+          UNKNOWN (int): The value is unknown in this version.
+          UNAVAILABLE (int): Rate type information is unavailable.
+          PUBLIC_RATE (int): Rates available to everyone.
+          QUALIFIED_RATE (int): A membership program rate is available and satisfies basic requirements
+          like having a public rate available. UI treatment will strikethrough the
+          public rate and indicate that a discount is available to the user. See
+          https://developers.google.com/hotels/hotel-ads/dev-guide/qualified-rates
+          for more information.
+          PRIVATE_RATE (int): Rates available to users that satisfy some eligibility criteria. e.g.
+          all signed-in users, 20% of mobile users, all mobile users in Canada,
+          etc.
+        """
+        UNSPECIFIED = 0
+        UNKNOWN = 1
+        UNAVAILABLE = 2
+        PUBLIC_RATE = 3
+        QUALIFIED_RATE = 4
+        PRIVATE_RATE = 5
 
 
 class IdErrorEnum(object):
@@ -6450,6 +6689,48 @@ class LocationPlaceholderFieldEnum(object):
         PHONE_NUMBER = 9
 
 
+class ManagerLinkErrorEnum(object):
+    class ManagerLinkError(enum.IntEnum):
+        """
+        Enum describing possible ManagerLink errors.
+
+        Attributes:
+          UNSPECIFIED (int): Enum unspecified.
+          UNKNOWN (int): The received error code is not known in this version.
+          ACCOUNTS_NOT_COMPATIBLE_FOR_LINKING (int): The manager and client have incompatible account types.
+          TOO_MANY_MANAGERS (int): Client is already linked to too many managers.
+          TOO_MANY_INVITES (int): Manager has too many pending invitations.
+          ALREADY_INVITED_BY_THIS_MANAGER (int): Client is already invited by this manager.
+          ALREADY_MANAGED_BY_THIS_MANAGER (int): The client is already managed by this manager.
+          ALREADY_MANAGED_IN_HIERARCHY (int): Client is already managed in hierarchy.
+          DUPLICATE_CHILD_FOUND (int): Manger and sub-manager to be linked have duplicate client.
+          CLIENT_HAS_NO_ADMIN_USER (int): Client has no active user that can access the client account.
+          MAX_DEPTH_EXCEEDED (int): Adding this link would exceed the maximum hierarchy depth.
+          CYCLE_NOT_ALLOWED (int): Adding this link will create a cycle.
+          TOO_MANY_ACCOUNTS (int): Manager account has the maximum number of linked clients.
+          TOO_MANY_ACCOUNTS_AT_MANAGER (int): Parent manager account has the maximum number of linked clients.
+          NON_OWNER_USER_CANNOT_MODIFY_LINK (int): The account is not authorized owner.
+          SUSPENDED_ACCOUNT_CANNOT_ADD_CLIENTS (int): Your manager account is suspended, and you are no longer allowed to link
+          to clients.
+        """
+        UNSPECIFIED = 0
+        UNKNOWN = 1
+        ACCOUNTS_NOT_COMPATIBLE_FOR_LINKING = 2
+        TOO_MANY_MANAGERS = 3
+        TOO_MANY_INVITES = 4
+        ALREADY_INVITED_BY_THIS_MANAGER = 5
+        ALREADY_MANAGED_BY_THIS_MANAGER = 6
+        ALREADY_MANAGED_IN_HIERARCHY = 7
+        DUPLICATE_CHILD_FOUND = 8
+        CLIENT_HAS_NO_ADMIN_USER = 9
+        MAX_DEPTH_EXCEEDED = 10
+        CYCLE_NOT_ALLOWED = 11
+        TOO_MANY_ACCOUNTS = 12
+        TOO_MANY_ACCOUNTS_AT_MANAGER = 13
+        NON_OWNER_USER_CANNOT_MODIFY_LINK = 14
+        SUSPENDED_ACCOUNT_CANNOT_ADD_CLIENTS = 15
+
+
 class ManagerLinkStatusEnum(object):
     class ManagerLinkStatus(enum.IntEnum):
         """
@@ -6958,11 +7239,10 @@ class NegativeGeoTargetTypeEnum(object):
         Attributes:
           UNSPECIFIED (int): Not specified.
           UNKNOWN (int): The value is unknown in this version.
-          DONT_CARE (int): Specifies that a user is excluded from seeing the ad if either their
-          Area of Interest (AOI) or their Location of Presence (LOP) matches the
-          geo target.
-          LOCATION_OF_PRESENCE (int): Specifies that a user is excluded from seeing the ad
-          only if their Location of Presence (LOP) matches the geo target.
+          DONT_CARE (int): Specifies that a user is excluded from seeing the ad if they
+          are in, or show interest in, advertiser's excluded locations.
+          LOCATION_OF_PRESENCE (int): Specifies that a user is excluded from seeing the ad if they
+          are in advertiser's excluded locations.
         """
         UNSPECIFIED = 0
         UNKNOWN = 1
@@ -7003,6 +7283,21 @@ class NotEmptyErrorEnum(object):
         UNSPECIFIED = 0
         UNKNOWN = 1
         EMPTY_LIST = 2
+
+
+class NotWhitelistedErrorEnum(object):
+    class NotWhitelistedError(enum.IntEnum):
+        """
+        Enum describing possible not whitelisted errors.
+
+        Attributes:
+          UNSPECIFIED (int): Enum unspecified.
+          UNKNOWN (int): The received error code is not known in this version.
+          CUSTOMER_NOT_WHITELISTED_FOR_THIS_FEATURE (int): Customer is not whitelisted for accessing this feature.
+        """
+        UNSPECIFIED = 0
+        UNKNOWN = 1
+        CUSTOMER_NOT_WHITELISTED_FOR_THIS_FEATURE = 2
 
 
 class NullErrorEnum(object):
@@ -7442,12 +7737,12 @@ class PositiveGeoTargetTypeEnum(object):
         Attributes:
           UNSPECIFIED (int): Not specified.
           UNKNOWN (int): The value is unknown in this version.
-          DONT_CARE (int): Specifies that either Area of Interest (AOI) or
-          Location of Presence (LOP) may trigger the ad.
-          AREA_OF_INTEREST (int): Specifies that the ad is triggered only if the user's Area of Interest
-          (AOI) matches.
-          LOCATION_OF_PRESENCE (int): Specifies that the ad is triggered only if the user's
-          Location of Presence (LOP) matches.
+          DONT_CARE (int): Specifies that an ad is triggered if the user is in,
+          or shows interest in, advertiser's targeted locations.
+          AREA_OF_INTEREST (int): Specifies that an ad is triggered if the user
+          searches for advertiser's targeted locations.
+          LOCATION_OF_PRESENCE (int): Specifies that an ad is triggered if the user is in
+          or regularly in advertiser's targeted locations.
         """
         UNSPECIFIED = 0
         UNKNOWN = 1
@@ -9164,6 +9459,7 @@ class UrlFieldErrorEnum(object):
           MALFORMED_TOP_LEVEL_DOMAIN (int): Malformed top level domain in URL.
           MALFORMED_URL (int): Malformed URL.
           MISSING_HOST (int): No host found in URL.
+          NULL_CUSTOM_PARAMETER_VALUE (int): Custom parameter value cannot be null.
         """
         UNSPECIFIED = 0
         UNKNOWN = 1
@@ -9218,6 +9514,7 @@ class UrlFieldErrorEnum(object):
         MALFORMED_TOP_LEVEL_DOMAIN = 54
         MALFORMED_URL = 55
         MISSING_HOST = 56
+        NULL_CUSTOM_PARAMETER_VALUE = 57
 
 
 class UserInterestTaxonomyTypeEnum(object):

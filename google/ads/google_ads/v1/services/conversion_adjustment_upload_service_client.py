@@ -165,6 +165,7 @@ class ConversionAdjustmentUploadServiceClient(object):
             customer_id,
             conversion_adjustments,
             partial_failure=None,
+            validate_only=None,
             retry=google.api_core.gapic_v1.method.DEFAULT,
             timeout=google.api_core.gapic_v1.method.DEFAULT,
             metadata=None):
@@ -181,6 +182,8 @@ class ConversionAdjustmentUploadServiceClient(object):
                 operations will return errors. If false, all operations will be carried out
                 in one transaction if and only if they are all valid. This should always be
                 set to true.
+            validate_only (bool): If true, the request is validated but not executed. Only errors are
+                returned, not results.
             retry (Optional[google.api_core.retry.Retry]):  A retry object used
                 to retry requests. If ``None`` is specified, requests will not
                 be retried.
@@ -216,6 +219,7 @@ class ConversionAdjustmentUploadServiceClient(object):
             customer_id=customer_id,
             conversion_adjustments=conversion_adjustments,
             partial_failure=partial_failure,
+            validate_only=validate_only,
         )
         return self._inner_api_calls['upload_conversion_adjustments'](
             request, retry=retry, timeout=timeout, metadata=metadata)

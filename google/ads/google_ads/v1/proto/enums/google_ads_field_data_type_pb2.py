@@ -20,7 +20,7 @@ DESCRIPTOR = _descriptor.FileDescriptor(
   package='google.ads.googleads.v1.enums',
   syntax='proto3',
   serialized_options=_b('\n!com.google.ads.googleads.v1.enumsB\033GoogleAdsFieldDataTypeProtoP\001ZBgoogle.golang.org/genproto/googleapis/ads/googleads/v1/enums;enums\242\002\003GAA\252\002\035Google.Ads.GoogleAds.V1.Enums\312\002\035Google\\Ads\\GoogleAds\\V1\\Enums\352\002!Google::Ads::GoogleAds::V1::Enums'),
-  serialized_pb=_b('\nDgoogle/ads/googleads_v1/proto/enums/google_ads_field_data_type.proto\x12\x1dgoogle.ads.googleads.v1.enums\x1a\x1cgoogle/api/annotations.proto\"\xcf\x01\n\x1aGoogleAdsFieldDataTypeEnum\"\xb0\x01\n\x16GoogleAdsFieldDataType\x12\x0f\n\x0bUNSPECIFIED\x10\x00\x12\x0b\n\x07UNKNOWN\x10\x01\x12\x0b\n\x07\x42OOLEAN\x10\x02\x12\x08\n\x04\x44\x41TE\x10\x03\x12\n\n\x06\x44OUBLE\x10\x04\x12\x08\n\x04\x45NUM\x10\x05\x12\t\n\x05\x46LOAT\x10\x06\x12\t\n\x05INT32\x10\x07\x12\t\n\x05INT64\x10\x08\x12\x0b\n\x07MESSAGE\x10\t\x12\x11\n\rRESOURCE_NAME\x10\n\x12\n\n\x06STRING\x10\x0b\x42\xf0\x01\n!com.google.ads.googleads.v1.enumsB\x1bGoogleAdsFieldDataTypeProtoP\x01ZBgoogle.golang.org/genproto/googleapis/ads/googleads/v1/enums;enums\xa2\x02\x03GAA\xaa\x02\x1dGoogle.Ads.GoogleAds.V1.Enums\xca\x02\x1dGoogle\\Ads\\GoogleAds\\V1\\Enums\xea\x02!Google::Ads::GoogleAds::V1::Enumsb\x06proto3')
+  serialized_pb=_b('\nDgoogle/ads/googleads_v1/proto/enums/google_ads_field_data_type.proto\x12\x1dgoogle.ads.googleads.v1.enums\x1a\x1cgoogle/api/annotations.proto\"\xdb\x01\n\x1aGoogleAdsFieldDataTypeEnum\"\xbc\x01\n\x16GoogleAdsFieldDataType\x12\x0f\n\x0bUNSPECIFIED\x10\x00\x12\x0b\n\x07UNKNOWN\x10\x01\x12\x0b\n\x07\x42OOLEAN\x10\x02\x12\x08\n\x04\x44\x41TE\x10\x03\x12\n\n\x06\x44OUBLE\x10\x04\x12\x08\n\x04\x45NUM\x10\x05\x12\t\n\x05\x46LOAT\x10\x06\x12\t\n\x05INT32\x10\x07\x12\t\n\x05INT64\x10\x08\x12\x0b\n\x07MESSAGE\x10\t\x12\x11\n\rRESOURCE_NAME\x10\n\x12\n\n\x06STRING\x10\x0b\x12\n\n\x06UINT64\x10\x0c\x42\xf0\x01\n!com.google.ads.googleads.v1.enumsB\x1bGoogleAdsFieldDataTypeProtoP\x01ZBgoogle.golang.org/genproto/googleapis/ads/googleads/v1/enums;enums\xa2\x02\x03GAA\xaa\x02\x1dGoogle.Ads.GoogleAds.V1.Enums\xca\x02\x1dGoogle\\Ads\\GoogleAds\\V1\\Enums\xea\x02!Google::Ads::GoogleAds::V1::Enumsb\x06proto3')
   ,
   dependencies=[google_dot_api_dot_annotations__pb2.DESCRIPTOR,])
 
@@ -80,11 +80,15 @@ _GOOGLEADSFIELDDATATYPEENUM_GOOGLEADSFIELDDATATYPE = _descriptor.EnumDescriptor(
       name='STRING', index=11, number=11,
       serialized_options=None,
       type=None),
+    _descriptor.EnumValueDescriptor(
+      name='UINT64', index=12, number=12,
+      serialized_options=None,
+      type=None),
   ],
   containing_type=None,
   serialized_options=None,
   serialized_start=165,
-  serialized_end=341,
+  serialized_end=353,
 )
 _sym_db.RegisterEnumDescriptor(_GOOGLEADSFIELDDATATYPEENUM_GOOGLEADSFIELDDATATYPE)
 
@@ -110,7 +114,7 @@ _GOOGLEADSFIELDDATATYPEENUM = _descriptor.Descriptor(
   oneofs=[
   ],
   serialized_start=134,
-  serialized_end=341,
+  serialized_end=353,
 )
 
 _GOOGLEADSFIELDDATATYPEENUM_GOOGLEADSFIELDDATATYPE.containing_type = _GOOGLEADSFIELDDATATYPEENUM

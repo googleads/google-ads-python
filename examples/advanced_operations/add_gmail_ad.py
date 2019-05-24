@@ -63,6 +63,7 @@ def main(client, customer_id, ad_group_id):
     image_resource_names = list(map(lambda response: response.resource_name,
                                     image_response.results))
 
+    ad_group_ad_service = client.get_service('AdGroupAdService')
     ad_group_ad_op = client.get_type('AdGroupAdOperation')
     ad_group_ad = ad_group_ad_op.create
     gmail_ad = ad_group_ad.ad.gmail_ad
@@ -79,10 +80,8 @@ def main(client, customer_id, ad_group_id):
     ad_group_ad.ad.name.value = 'Gmail Ad #{}'.format(str(uuid.uuid4())[:15])
 
     ad_group_ad.status = client.get_type('AdGroupAdStatusEnum').PAUSED
-    ad_group_ad.ad_group.value = 'customers/{}/adGroups/{}'.format(
+    ad_group_ad.ad_group.value = ad_group_ad_service.ad_group_ad_path(
         customer_id, ad_group_id)
-
-    ad_group_ad_service = client.get_service('AdGroupAdService')
 
     try:
         add_gmail_ad_response = ad_group_ad_service.mutate_ad_group_ads(

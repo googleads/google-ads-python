@@ -23,7 +23,7 @@ from __future__ import absolute_import
 import argparse
 import six
 import sys
-import uuid
+from uuid import uuid4
 import requests
 
 from google.ads.google_ads.client import GoogleAdsClient
@@ -77,7 +77,7 @@ def main(client, customer_id, ad_group_id):
 
     final_url = ad_group_ad.ad.final_urls.add()
     final_url.value = 'http://www.example.com'
-    ad_group_ad.ad.name.value = 'Gmail Ad #{}'.format(str(uuid.uuid4())[:15])
+    ad_group_ad.ad.name.value = 'Gmail Ad #{}'.format(str(uuid4())[:15])
 
     ad_group_ad.status = client.get_type('AdGroupAdStatusEnum').PAUSED
     ad_group_ad.ad_group.value = ad_group_ad_service.ad_group_ad_path(

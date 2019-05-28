@@ -47,7 +47,7 @@ is a `template`_ you can use.
 Create a GoogleAdsClient
 ########################
 
-Using yaml file
+Using YAML file
 ***************
 
 You can run the following to retrieve a `GoogleAdsClient` instance using a
@@ -76,12 +76,11 @@ You can also retrieve it exporting environment variables.
 .. code-block:: bash
 
   export GOOGLE_ADS_LOGIN_CUSTOMER_ID=INSERT_LOGIN_CUSTOMER_ID_HERE
-  export GOOGLE_ADS_ENDPOINT=INSERT_ALTERNATIVE_API_ENDPOINT_HERE
   export GOOGLE_ADS_LOGGING=INSERT_GOOGLE_ADS_LOGGING
 
 .. _GOOGLE_ADS_LOGGING:
 
-GOOGLE_ADS_LOGGING should be a json with logging configuration. Example:
+GOOGLE_ADS_LOGGING should be a JSON with logging configuration. Example:
 
 .. code-block:: json
 
@@ -133,7 +132,7 @@ Enabling and Configuring logging
 ################################
 The library uses Python's built in logging framework. You can specify your
 configuration via the configuration file (see `google-ads.yaml`_
-for an example) or GOOGLE_ADS_LOGGING_ environment variable.
+for an example) or GOOGLE_ADS_LOGGING_  environment variable.
 The library logs to ``stderr`` by default. You can easily pipe
 log messages to a file; when running an example:
 

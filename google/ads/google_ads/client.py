@@ -41,7 +41,7 @@ _REQUEST_ID_KEY = 'request-id'
 _ENV_PREFIX = 'GOOGLE_ADS_'
 _KEYS_ENV_VARIABLES_MAP = {
     key: _ENV_PREFIX + key.upper() for key in
-    list(_REQUIRED_KEYS) + ['login_customer_id', 'endpoint', 'logging']
+    list(_REQUIRED_KEYS) + ['login_customer_id', 'logging']
 }
 
 class GoogleAdsClient(object):
@@ -95,7 +95,7 @@ class GoogleAdsClient(object):
 
         Raises:
             ValueError: If the environment lacks a required field or
-                GOOGLE_ADS_LOGGING env variable is not in json format.
+                GOOGLE_ADS_LOGGING env variable is not in JSON format.
         """
         config_data = {
             key: os.environ[env_variable]
@@ -107,7 +107,7 @@ class GoogleAdsClient(object):
                 config_data['logging'] = json.loads(config_data['logging'])
             except json.JSONDecodeError:
                 raise ValueError(
-                    'GOOGLE_ADS_LOGGING env variable should be in json format.'
+                    'GOOGLE_ADS_LOGGING env variable should be in JSON format.'
                 )
         return cls._get_client_kwargs(
             config_data,

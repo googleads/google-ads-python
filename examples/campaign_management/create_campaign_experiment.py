@@ -12,8 +12,10 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
-"""Demonstrates how to begin creation of a campaign experiment from a draft
-and wait for it to complete."""
+"""This demonstrates how to create a campaign experiment.
+
+It requests the creation based on a draft and waits for completion.
+"""
 
 from __future__ import absolute_import
 
@@ -22,7 +24,8 @@ import six
 import sys
 import uuid
 
-import google.ads.google_ads.client
+from google.ads.google_ads.client import GoogleAdsClient
+from google.ads.google_ads.errors import GoogleAdsException
 
 
 def main(client, customer_id, campaign_draft_resource_name):
@@ -33,35 +36,30 @@ def main(client, customer_id, campaign_draft_resource_name):
         uuid.uuid4())
     campaign_experiment.traffic_split_percent.value = 50
     campaign_experiment.traffic_split_type = client.get_type(
-        'CampaignExperimentTrafficSplitTypeEnum',version='v1').RANDOM_QUERY
+        'CampaignExperimentTrafficSplitTypeEnum', version='v1').RANDOM_QUERY
 
     try:
         campaign_experiment_service = client.get_service(
-            'CampaignExperimentService',
-            version='v1'
-        )
+            'CampaignExperimentService', version='v1')
 
         # A Long Running Operation (LRO) is returned from this
         # asynchronous request by the API.
         campaign_experiment_lro = (
             campaign_experiment_service.create_campaign_experiment(
-                customer_id,
-                campaign_experiment
-            )
-        )
-    except google.ads.google_ads.errors.GoogleAdsException as ex:
-        print('Request with ID "%s" failed with status "%s" and includes the '
-              'following errors:' % (ex.request_id, ex.error.code().name))
+                customer_id, campaign_experiment))
+    except GoogleAdsException as ex:
+        print('Request with ID "{}" failed with status "{}" and includes the '
+              'following errors:'.format(ex.request_id, ex.error.code().name))
         for error in ex.failure.errors:
-            print('\tError with message "%s".' % error.message)
+            print('\tError with message "{}".'.format(error.message))
             if error.location:
                 for field_path_element in error.location.field_path_elements:
-                    print('\t\tOn field: %s' % field_path_element.field_name)
+                    print('\t\tOn field: {}'.format(field_path_element.field_name))
         sys.exit(1)
 
     print('Asynchronous request to create campaign experiment with '
-          'resource name "%s" started.'
-          % campaign_experiment_lro.metadata.campaign_experiment)
+          'resource name "{}" started.'.format(
+            campaign_experiment_lro.metadata.campaign_experiment))
     print('Waiting until operation completes.')
 
     # Poll until the operation completes.
@@ -72,30 +70,29 @@ def main(client, customer_id, campaign_draft_resource_name):
     query = (
         'SELECT campaign_experiment.experiment_campaign '
         'FROM campaign_experiment '
-        'WHERE campaign_experiment.resource_name = \'%s\''
-        % campaign_experiment_lro.metadata.campaign_experiment)
+        'WHERE campaign_experiment.resource_name = "{}"'.format(
+            campaign_experiment_lro.metadata.campaign_experiment))
 
     results = ga_service.search(customer_id, query=query, page_size=1)
 
     try:
         for row in results:
-            print('Experiment campaign "%s" finished creating.'
-                  % (row.campaign_experiment.experiment_campaign.value))
-    except google.ads.google_ads.errors.GoogleAdsException as ex:
-        print('Request with ID "%s" failed with status "%s" and includes the '
-              'following errors:' % (ex.request_id, ex.error.code().name))
+            print('Experiment campaign "{}" finished creating.'.format(
+                row.campaign_experiment.experiment_campaign.value))
+    except GoogleAdsException as ex:
+        print('Request with ID "{}" failed with status "{}" and includes the '
+              'following errors:'.format(ex.request_id, ex.error.code().name))
         for error in ex.failure.errors:
-            print('\tError with message "%s".' % error.message)
+            print('\tError with message "{}".'.format(error.message))
             if error.location:
                 for field_path_element in error.location.field_path_elements:
-                    print('\t\tOn field: %s' % field_path_element.field_name)
+                    print('\t\tOn field: {}'.format(field_path_element.field_name))
         sys.exit(1)
 
 if __name__ == '__main__':
     # GoogleAdsClient will read the google-ads.yaml configuration file in the
     # home directory if none is specified.
-    google_ads_client = (google.ads.google_ads.client.GoogleAdsClient
-                         .load_from_storage())
+    google_ads_client = GoogleAdsClient.load_from_storage()
 
     parser = argparse.ArgumentParser(
         description=('Create a campaign experiment based on a campaign draft.'))

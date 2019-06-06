@@ -59,7 +59,7 @@ def main(client, customer_id, campaign_draft_resource_name):
 
     print('Asynchronous request to create campaign experiment with '
           'resource name "{}" started.'.format(
-            campaign_experiment_lro.metadata.campaign_experiment))
+              campaign_experiment_lro.metadata.campaign_experiment))
     print('Waiting until operation completes.')
 
     # Poll until the operation completes.

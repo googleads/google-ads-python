@@ -77,7 +77,7 @@ def main(client, customer_id, campaign_draft_resource_name):
 
     try:
         for row in results:
-            print('Experiment campaign "{}" finished creating.'.format(
+            print('Experiment campaign "{}" creation completed.'.format(
                 row.campaign_experiment.experiment_campaign.value))
     except GoogleAdsException as ex:
         print('Request with ID "{}" failed with status "{}" and includes the '
@@ -99,7 +99,7 @@ if __name__ == '__main__':
     # The following argument(s) should be provided to run the example.
     parser.add_argument('-c', '--customer_id', type=six.text_type,
                         required=True, help='The Google Ads customer ID.')
-    parser.add_argument('-i', '--campaign_draft_resource_name',
+    parser.add_argument('-n', '--campaign_draft_resource_name',
                         type=six.text_type, required=True,
                         help='The campaign draft resource name.')
     args = parser.parse_args()

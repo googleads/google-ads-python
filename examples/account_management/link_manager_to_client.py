@@ -55,7 +55,7 @@ def main(client, customer_id, manager_customer_id):
 
     # Find the manager_link_id of the link we just created, so we can construct
     # the resource name for the link from the client side. Note that since we
-    # are filtering by resource_name, a unique identifier, only one.
+    # are filtering by resource_name, a unique identifier, only one
     # customer_client_link resource will be returned in the response
     query = '''
         SELECT

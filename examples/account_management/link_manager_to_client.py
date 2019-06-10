@@ -54,8 +54,9 @@ def main(client, customer_id, manager_customer_id):
               manager_customer_id, customer_id, resource_name))
 
     # Find the manager_link_id of the link we just created, so we can construct
-    # the resource name for the link from the client side.
-
+    # the resource name for the link from the client side. Note that since we
+    # are filtering by resource_name, a unique identifier, only one.
+    # customer_client_link resource will be returned in the response
     query = '''
         SELECT
             customer_client_link.manager_link_id
@@ -68,6 +69,9 @@ def main(client, customer_id, manager_customer_id):
     ga_service = client.get_service('GoogleAdsService', version='v1')
     response = ga_service.search(manager_customer_id, query=query)
 
+    # Since the google_ads_service.search method returns an iterator we need
+    # to initialize an iteration in order to retrieve results, even though
+    # we know the query will only return a single row.
     for row in response.result:
         manager_link_id = row.customer_client_link.manager_link_id
 

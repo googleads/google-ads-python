@@ -1,3 +1,12 @@
+* 2.2.0:
+- Update service-level timeout and idempotency configurations
+- Add link_manager_to_client example
+- Add add_dsa_campaign example
+- Add dynamic page feed example
+- Add add_gmail_ad example
+- Add create_campaign_experiment example
+- Add wiki link to README
+
 * 2.1.0:
 - Google Ads v1_3 release
 

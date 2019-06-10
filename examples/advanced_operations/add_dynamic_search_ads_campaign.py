@@ -198,8 +198,8 @@ def create_expanded_dsa(client, customer_id, ad_group_resource_name):
     ad_group_ad.status = client.get_type('AdGroupAdStatusEnum',
                                          version='v1').PAUSED
     # Set the ad description.
-    ad_group_ad.ad.expanded_dynamic_search_ad.description.value = '''
-        Buy tickets now!'''
+    ad_group_ad.ad.expanded_dynamic_search_ad.description.value = (
+        'Buy tickets now!')
     ad_group_ad.ad_group.value = ad_group_resource_name
 
     # Retrieve the ad group ad service.

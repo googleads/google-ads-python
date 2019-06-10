@@ -59,7 +59,7 @@ def main(client, customer_id, campaign_id, ad_group_id):
         # We need to look up the attribute name and ID for the feed we just
         # created so that we can give them back to the API for construction of
         # feed mappings in the next function.
-        feed_details = get_feed_details(client, feed_resource_name)
+        feed_details = get_feed_details(client, customer_id, feed_resource_name)
         create_feed_mapping(client, customer_id, feed_details)
         create_feed_items(client, customer_id, feed_details, dsa_page_url_label)
 
@@ -141,8 +141,7 @@ def get_feed_details(client, customer_id, resource_name):
             feed
         WHERE
             feed.resource_name = "{}"
-        LIMIT
-          1
+        LIMIT 1
     '''.format(resource_name)
 
     ga_service = client.get_service('GoogleAdsService', version='v1')

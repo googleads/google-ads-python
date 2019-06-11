@@ -132,7 +132,7 @@ Enabling and Configuring logging
 ################################
 The library uses Python's built in logging framework. You can specify your
 configuration via the configuration file (see `google-ads.yaml`_
-for an example) or GOOGLE_ADS_LOGGING_  environment variable.
+for an example) or GOOGLE_ADS_LOGGING_ environment variable.
 The library logs to ``stderr`` by default. You can easily pipe
 log messages to a file; when running an example:
 

@@ -41,7 +41,7 @@ _REQUEST_ID_KEY = 'request-id'
 _ENV_PREFIX = 'GOOGLE_ADS_'
 _KEYS_ENV_VARIABLES_MAP = {
     key: _ENV_PREFIX + key.upper() for key in
-    list(_REQUIRED_KEYS) + ['login_customer_id', 'logging']
+    list(_REQUIRED_KEYS) + ['login_customer_id', 'endpoint', 'logging']
 }
 
 class GoogleAdsClient(object):

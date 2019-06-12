@@ -25,8 +25,10 @@ from importlib import import_module
 from google.auth.transport.requests import Request
 from google.oauth2.credentials import Credentials as InstalledAppCredentials
 from google.oauth2.service_account import Credentials as ServiceAccountCreds
-from google.ads.google_ads.errors import GoogleAdsException
 from google.protobuf.message import DecodeError
+
+from google.ads.google_ads import config
+from google.ads.google_ads.errors import GoogleAdsException
 
 _logger = logging.getLogger(__name__)
 
@@ -237,16 +239,12 @@ class GoogleAdsClient(object):
             IOError: If the configuration file can't be loaded.
             ValueError: If the configuration file lacks a required field.
         """
-        if path is None:
-            path = os.path.join(os.path.expanduser('~'), 'google-ads.yaml')
-
-        if not os.path.isabs(path):
-            path = os.path.expanduser(path)
-
-        with open(path, 'rb') as handle:
-            yaml_str = handle.read()
-
-        return cls.load_from_string(yaml_str)
+        config_data = config.load_from_yaml_file(path)
+        kwargs = cls._get_client_kwargs(
+            config_data,
+            'A required field in the configuration data was not found. The '
+            'required fields are: %s' % str(_REQUIRED_KEYS))
+        return cls(**kwargs)
 
     def __init__(self, credentials, developer_token, endpoint=None,
                  login_customer_id=None, logging_config=None):

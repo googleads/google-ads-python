@@ -12,34 +12,33 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
-"""This example fetches the set of valid ProductBiddingCategories.
-"""
+"""This example fetches the set of valid ProductBiddingCategories."""
 
-from __future__ import absolute_import 
+
+from __future__ import absolute_import
 import argparse
-import six
-import sys
-import uuid
 import collections
-import google.ads.google_ads.client
-from google.ads.google_ads.errors import GoogleAdsException
+import sys
+import six
 from google.ads.google_ads.client import GoogleAdsClient
+from google.ads.google_ads.errors import GoogleAdsException
 
 _DEFAULT_PAGE_SIZE = 1000
- 
- 
-def display_categories(categories , prefix=''):
+
+
+def display_categories(categories, prefix=''):
   for category in categories:
-    print("{}{} [{}]".format(prefix , category.name , category.id))
+    print('{}{} [{}]'.format(prefix, category.name, category.id))
     if not category.children:
       display_categories(category.children, prefix=prefix + category.name)
+
  
- 
-def get_product_bidding_category_constant(client , customer_id , page_size):
+def main(client, customer_id, page_size):
   ga_service = client.get_service('GoogleAdsService', version='v1')
   query = ('SELECT product_bidding_category_constant.localized_name,'
            'product_bidding_category_constant.product_bidding_category_constant_parent '
-           'FROM product_bidding_category_constant WHERE product_bidding_category_constant.country_code IN ("US")')
+           'FROM product_bidding_category_constant WHERE '
+   	   'product_bidding_category_constant.country_code IN ("US")')
   
   results = ga_service.search(customer_id, query=query, page_size=page_size)
 
@@ -91,4 +90,5 @@ if __name__ == '__main__':
                       required=True, help='The Google Ads customer ID.')
   args = parser.parse_args()
  
-  get_product_bidding_category_constant(google_ads_client, args.customer_id, _DEFAULT_PAGE_SIZE)
+  main(google_ads_client, args.customer_id, _DEFAULT_PAGE_SIZE)
+

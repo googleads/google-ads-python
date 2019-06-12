@@ -13,11 +13,14 @@
 # limitations under the License.
 """A set of functions to help load configuration from various locations."""
 
+import json
 import os
 import yaml
 
+from google.ads.google_ads import client
+
 def load_from_yaml_file(path=None):
-    """Creates a GoogleAdsClient with data stored in the specified file.
+    """Loads configuration data from a YAML file and returns it as a dict.
 
     Args:
         path: a str indicating the path to a YAML file containing
@@ -56,3 +59,27 @@ def parse_yaml_document_to_dict(yaml_doc):
         yaml.YAMLError: If there is a problem parsing the YAML document.
     """
     return yaml.safe_load(yaml_doc) or {}
+
+
+def load_from_env():
+    """Loads configuration data from the environment and returns it as a dict.
+
+    Returns:
+        A dict with configuration from the environment.
+
+    Raises:
+        ValueError: If the configuration
+    """
+    config_data = {
+        key: os.environ[env_variable]
+        for key, env_variable in client._KEYS_ENV_VARIABLES_MAP.items()
+        if env_variable in os.environ
+    }
+    if 'logging' in config_data.keys():
+        try:
+            config_data['logging'] = json.loads(config_data['logging'])
+        except json.JSONDecodeError:
+            raise ValueError(
+                'GOOGLE_ADS_LOGGING env variable should be in JSON format.')
+
+    return config_data

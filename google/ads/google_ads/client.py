@@ -33,6 +33,7 @@ from google.ads.google_ads.errors import GoogleAdsException
 _logger = logging.getLogger(__name__)
 
 _REQUIRED_KEYS = ('developer_token',)
+_OPTIONAL_KEYS = ('login_customer_id', 'endpoint', 'logging')
 _OAUTH2_INSTALLED_APP_KEYS = ('client_id', 'client_secret', 'refresh_token')
 _OAUTH2_SERVICE_ACCOUNT_KEYS = ('path_to_private_key_file', 'delegated_account')
 _SERVICE_ACCOUNT_SCOPES = ['https://www.googleapis.com/auth/adwords']
@@ -47,7 +48,7 @@ _ENV_PREFIX = 'GOOGLE_ADS_'
 _KEYS_ENV_VARIABLES_MAP = {
     key: _ENV_PREFIX + key.upper() for key in
     list(_REQUIRED_KEYS) +
-    ['login_customer_id', 'endpoint', 'logging'] +
+    list(_OPTIONAL_KEYS) +
     list(_OAUTH2_INSTALLED_APP_KEYS) +
     list(_OAUTH2_SERVICE_ACCOUNT_KEYS)
 }
@@ -147,31 +148,6 @@ class GoogleAdsClient(object):
         )
 
     @classmethod
-    def get_type(cls, name, version=_DEFAULT_VERSION):
-        """Returns the specified common, enum, error, or resource type.
-
-        Args:
-            name: a str indicating the name of the type that is being retrieved;
-                e.g. you may specify "CampaignOperation" to retrieve a
-                CampaignOperation instance.
-            version: a str indicating the version of the Google Ads API to be
-                used.
-
-        Returns:
-            A Message instance representing the desired type.
-
-        Raises:
-            AttributeError: If the type for the specified name doesn't exist
-                in the given version.
-        """
-        try:
-            message_type = getattr(_get_version(version).types, name)
-        except AttributeError:
-            raise ValueError('Specified type "%s" does not exist in Google Ads '
-                             'API %s.' % (name, version))
-        return message_type()
-
-    @classmethod
     def load_from_env(cls):
         """Creates a GoogleAdsClient with data stored in the env variables.
 
@@ -204,6 +180,7 @@ class GoogleAdsClient(object):
             config_data,
             'A required field in the configuration data was not found. The '
             'required fields are: {}'.format(str(_REQUIRED_KEYS)))
+
         return cls(**kwargs)
 
     @classmethod
@@ -228,7 +205,33 @@ class GoogleAdsClient(object):
             config_data,
             'A required field in the configuration data was not found. The '
             'required fields are: {}'.format(str(_REQUIRED_KEYS)))
+
         return cls(**kwargs)
+
+    @classmethod
+    def get_type(cls, name, version=_DEFAULT_VERSION):
+        """Returns the specified common, enum, error, or resource type.
+
+        Args:
+            name: a str indicating the name of the type that is being retrieved;
+                e.g. you may specify "CampaignOperation" to retrieve a
+                CampaignOperation instance.
+            version: a str indicating the version of the Google Ads API to be
+                used.
+
+        Returns:
+            A Message instance representing the desired type.
+
+        Raises:
+            AttributeError: If the type for the specified name doesn't exist
+                in the given version.
+        """
+        try:
+            message_type = getattr(_get_version(version).types, name)
+        except AttributeError:
+            raise ValueError('Specified type "%s" does not exist in Google Ads '
+                             'API %s.' % (name, version))
+        return message_type()
 
     def __init__(self, credentials, developer_token, endpoint=None,
                  login_customer_id=None, logging_config=None):

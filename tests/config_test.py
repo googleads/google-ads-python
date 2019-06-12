@@ -13,6 +13,7 @@
 # limitations under the License.
 """Tests the configuration helper module."""
 
+import mock
 import os
 import yaml
 from pyfakefs.fake_filesystem_unittest import TestCase as FileTestCase
@@ -29,7 +30,7 @@ class ConfigTest(FileTestCase):
         self.login_customer_id = '1234567890'
         self.path_to_private_key_file = '/test/path/to/config.json'
         self.delegated_account = 'delegated@account.com'
-
+        self.endpoint = 'www.testendpoint.com'
 
     def test_load_from_yaml_file(self):
         file_path = os.path.join(os.path.expanduser('~'), 'google-ads.yaml')
@@ -76,3 +77,29 @@ class ConfigTest(FileTestCase):
         self.assertEqual(result['client_id'], self.client_id)
         self.assertEqual(result['client_secret'], self.client_secret)
         self.assertEqual(result['refresh_token'], self.refresh_token)
+
+    def test_load_from_env(self):
+        environ = {
+            'GOOGLE_ADS_DEVELOPER_TOKEN': self.developer_token,
+            'GOOGLE_ADS_CLIENT_ID': self.client_id,
+            'GOOGLE_ADS_CLIENT_SECRET': self.client_secret,
+            'GOOGLE_ADS_REFRESH_TOKEN': self.refresh_token,
+            'GOOGLE_ADS_LOGGING': '{"test": true}',
+            'GOOGLE_ADS_ENDPOINT': self.endpoint,
+            'GOOGLE_ADS_LOGIN_CUSTOMER_ID': self.login_customer_id,
+            'GOOGLE_ADS_PATH_TO_PRIVATE_KEY_FILE':
+                self.path_to_private_key_file,
+            'GOOGLE_ADS_DELEGATED_ACCOUNT': self.delegated_account}
+
+        with mock.patch('os.environ', environ):
+            result = config.load_from_env()
+            self.assertEqual(result, {
+                'developer_token': self.developer_token,
+                'client_id': self.client_id,
+                'client_secret': self.client_secret,
+                'refresh_token': self.refresh_token,
+                'logging': {'test': True},
+                'endpoint': self.endpoint,
+                'login_customer_id': self.login_customer_id,
+                'path_to_private_key_file': self.path_to_private_key_file,
+                'delegated_account': self.delegated_account})

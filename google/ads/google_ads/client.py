@@ -111,18 +111,7 @@ class GoogleAdsClient(object):
             ValueError: If the environment lacks a required field or
                 GOOGLE_ADS_LOGGING env variable is not in JSON format.
         """
-        config_data = {
-            key: os.environ[env_variable]
-            for key, env_variable in config._KEYS_ENV_VARIABLES_MAP.items()
-            if env_variable in os.environ
-        }
-        if 'logging' in config_data.keys():
-            try:
-                config_data['logging'] = json.loads(config_data['logging'])
-            except json.JSONDecodeError:
-                raise ValueError(
-                    'GOOGLE_ADS_LOGGING env variable should be in JSON format.'
-                )
+        config_data = config.load_from_env()
         return cls._get_client_kwargs(
             config_data,
             'A required variable was not found in the environment. The '
@@ -146,6 +135,7 @@ class GoogleAdsClient(object):
         Raises:
             ValueError: If the configuration lacks a required field.
         """
+
         return cls(**cls._get_client_kwargs_from_env())
 
     @classmethod

@@ -17,7 +17,18 @@ import json
 import os
 import yaml
 
-from google.ads.google_ads import client
+_ENV_PREFIX = 'GOOGLE_ADS_'
+_REQUIRED_KEYS = ('developer_token',)
+_OPTIONAL_KEYS = ('login_customer_id', 'endpoint', 'logging')
+_OAUTH2_INSTALLED_APP_KEYS = ('client_id', 'client_secret', 'refresh_token')
+_OAUTH2_SERVICE_ACCOUNT_KEYS = ('path_to_private_key_file', 'delegated_account')
+_KEYS_ENV_VARIABLES_MAP = {
+    key: _ENV_PREFIX + key.upper() for key in
+    list(_REQUIRED_KEYS) +
+    list(_OPTIONAL_KEYS) +
+    list(_OAUTH2_INSTALLED_APP_KEYS) +
+    list(_OAUTH2_SERVICE_ACCOUNT_KEYS)
+}
 
 def load_from_yaml_file(path=None):
     """Loads configuration data from a YAML file and returns it as a dict.
@@ -72,7 +83,7 @@ def load_from_env():
     """
     config_data = {
         key: os.environ[env_variable]
-        for key, env_variable in client._KEYS_ENV_VARIABLES_MAP.items()
+        for key, env_variable in _KEYS_ENV_VARIABLES_MAP.items()
         if env_variable in os.environ
     }
     if 'logging' in config_data.keys():

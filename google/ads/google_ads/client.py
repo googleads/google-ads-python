@@ -32,10 +32,6 @@ from google.ads.google_ads.errors import GoogleAdsException
 
 _logger = logging.getLogger(__name__)
 
-_REQUIRED_KEYS = ('developer_token',)
-_OPTIONAL_KEYS = ('login_customer_id', 'endpoint', 'logging')
-_OAUTH2_INSTALLED_APP_KEYS = ('client_id', 'client_secret', 'refresh_token')
-_OAUTH2_SERVICE_ACCOUNT_KEYS = ('path_to_private_key_file', 'delegated_account')
 _SERVICE_ACCOUNT_SCOPES = ['https://www.googleapis.com/auth/adwords']
 _SERVICE_CLIENT_TEMPLATE = '%sClient'
 _SERVICE_GRPC_TRANSPORT_TEMPLATE = '%sGrpcTransport'
@@ -44,14 +40,6 @@ _DEFAULT_TOKEN_URI = 'https://accounts.google.com/o/oauth2/token'
 _VALID_API_VERSIONS = ['v1']
 _DEFAULT_VERSION = _VALID_API_VERSIONS[0]
 _REQUEST_ID_KEY = 'request-id'
-_ENV_PREFIX = 'GOOGLE_ADS_'
-_KEYS_ENV_VARIABLES_MAP = {
-    key: _ENV_PREFIX + key.upper() for key in
-    list(_REQUIRED_KEYS) +
-    list(_OPTIONAL_KEYS) +
-    list(_OAUTH2_INSTALLED_APP_KEYS) +
-    list(_OAUTH2_SERVICE_ACCOUNT_KEYS)
-}
 
 class GoogleAdsClient(object):
     """Google Ads client used to configure settings and fetch services."""
@@ -73,10 +61,10 @@ class GoogleAdsClient(object):
         Raises:
             ValueError: If the configuration lacks a required field.
         """
-        if not all(key in config_data for key in _REQUIRED_KEYS):
+        if not all(key in config_data for key in config._REQUIRED_KEYS):
             raise ValueError(error_message)
 
-        if all(key in config_data for key in _OAUTH2_INSTALLED_APP_KEYS):
+        if all(key in config_data for key in config._OAUTH2_INSTALLED_APP_KEYS):
             # Using the Installed App Flow
             credentials = InstalledAppCredentials(
                 None,
@@ -84,7 +72,7 @@ class GoogleAdsClient(object):
                 client_id=config_data.get('client_id'),
                 client_secret=config_data.get('client_secret'),
                 token_uri=_DEFAULT_TOKEN_URI)
-        elif all(key in config_data for key in _OAUTH2_SERVICE_ACCOUNT_KEYS):
+        elif all(key in config_data for key in config._OAUTH2_SERVICE_ACCOUNT_KEYS):
             # Using the Service Account Flow
             credentials = ServiceAccountCreds.from_service_account_file(
                 config_data.get('path_to_private_key_file'),
@@ -95,8 +83,8 @@ class GoogleAdsClient(object):
                              'OAuth2. You need to specify credentials for '
                              'either the OAuth2 installed application flow '
                              '({}) or service account flow ({}).'.format(
-                                _OAUTH2_INSTALLED_APP_KEYS,
-                                _OAUTH2_SERVICE_ACCOUNT_KEYS))
+                                config._OAUTH2_INSTALLED_APP_KEYS,
+                                config._OAUTH2_SERVICE_ACCOUNT_KEYS))
 
         credentials.refresh(Request())
 
@@ -125,7 +113,7 @@ class GoogleAdsClient(object):
         """
         config_data = {
             key: os.environ[env_variable]
-            for key, env_variable in _KEYS_ENV_VARIABLES_MAP.items()
+            for key, env_variable in config._KEYS_ENV_VARIABLES_MAP.items()
             if env_variable in os.environ
         }
         if 'logging' in config_data.keys():
@@ -141,8 +129,8 @@ class GoogleAdsClient(object):
             'required environment variables are: %s'
             % str(
                 tuple(
-                    v for k, v in _KEYS_ENV_VARIABLES_MAP.items()
-                    if k in _REQUIRED_KEYS
+                    v for k, v in config._KEYS_ENV_VARIABLES_MAP.items()
+                    if k in config._REQUIRED_KEYS
                 )
             )
         )
@@ -179,7 +167,7 @@ class GoogleAdsClient(object):
         kwargs = cls._get_client_kwargs(
             config_data,
             'A required field in the configuration data was not found. The '
-            'required fields are: {}'.format(str(_REQUIRED_KEYS)))
+            'required fields are: {}'.format(str(config._REQUIRED_KEYS)))
 
         return cls(**kwargs)
 
@@ -204,7 +192,7 @@ class GoogleAdsClient(object):
         kwargs = cls._get_client_kwargs(
             config_data,
             'A required field in the configuration data was not found. The '
-            'required fields are: {}'.format(str(_REQUIRED_KEYS)))
+            'required fields are: {}'.format(str(config._REQUIRED_KEYS)))
 
         return cls(**kwargs)
 

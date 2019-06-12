@@ -38,7 +38,7 @@ def main(client, customer_id, page_size):
   query = ('SELECT product_bidding_category_constant.localized_name, '
            'product_bidding_category_constant.product_bidding_category_constant_parent '
            'FROM product_bidding_category_constant WHERE '
-   	       'product_bidding_category_constant.country_code IN ("US")')
+           'product_bidding_category_constant.country_code IN ("US")')
   
   results = ga_service.search(customer_id, query=query, page_size=page_size)
 

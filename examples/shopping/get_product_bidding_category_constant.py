@@ -77,7 +77,6 @@ def main(client, customer_id, page_size):
           if error.location:
               for field_path_element in error.location.field_path_elements:
                   print('\t\tOn field: %s' % field_path_element.field_name)
-      
       sys.exit(1)
 
 if __name__ == '__main__':
@@ -91,4 +90,3 @@ if __name__ == '__main__':
   args = parser.parse_args()
  
   main(google_ads_client, args.customer_id, _DEFAULT_PAGE_SIZE)
-

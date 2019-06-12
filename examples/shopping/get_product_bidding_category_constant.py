@@ -1,5 +1,21 @@
-from __future__ import absolute_import
- 
+#!/usr/bin/env python
+# Copyright 2019 Google LLC
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#     https://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+"""This example fetches the set of valid ProductBiddingCategories.
+"""
+
+from __future__ import absolute_import 
 import argparse
 import six
 import sys
@@ -12,18 +28,18 @@ from google.ads.google_ads.client import GoogleAdsClient
 _DEFAULT_PAGE_SIZE = 1000
  
  
-def display_categories(categories,prefix=''):
-  for c in categories:
-    print("{}{} [{}]".format(prefix,c.name,c.id))
-    if not c.children:
-      display_categories(c.children, prefix=prefix + c.name)
+def display_categories(categories , prefix=''):
+  for category in categories:
+    print("{}{} [{}]".format(prefix , category.name , category.id))
+    if not category.children:
+      display_categories(category.children, prefix=prefix + category.name)
  
  
-def get_product_bidding_category_constant(client,customer_id,page_size):
+def get_product_bidding_category_constant(client , customer_id , page_size):
   ga_service = client.get_service('GoogleAdsService', version='v1')
   query = ('SELECT product_bidding_category_constant.localized_name,'
-  'product_bidding_category_constant.product_bidding_category_constant_parent '
-  'FROM product_bidding_category_constant WHERE product_bidding_category_constant.country_code IN ("US")')
+           'product_bidding_category_constant.product_bidding_category_constant_parent '
+           'FROM product_bidding_category_constant WHERE product_bidding_category_constant.country_code IN ("US")')
   
   results = ga_service.search(customer_id, query=query, page_size=page_size)
 
@@ -45,8 +61,8 @@ def get_product_bidding_category_constant(client,customer_id,page_size):
                           product_bidding_category.resource_name)
       
       all_categories[category.id] = category
-      
-      parent_id = getattr(product_bidding_category.product_bidding_category_constant_parent, 'value', None)
+      parent = product_bidding_category.product_bidding_category_constant_parent
+      parent_id = getattr(parent, 'value', None)
       
       if parent_id:
         all_categories[parent_id].children.append(category)
@@ -65,11 +81,8 @@ def get_product_bidding_category_constant(client,customer_id,page_size):
       
       sys.exit(1)
 
- 
- 
 if __name__ == '__main__':
-  google_ads_client = (GoogleAdsClient
-                        .load_from_storage())
+  google_ads_client = GoogleAdsClient.load_from_storage()
  
   parser = argparse.ArgumentParser(
       description='Get Product Bidding Category Constant')

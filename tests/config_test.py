@@ -61,3 +61,18 @@ class ConfigTest(FileTestCase):
         self.assertEqual(result['client_id'], self.client_id)
         self.assertEqual(result['client_secret'], self.client_secret)
         self.assertEqual(result['refresh_token'], self.refresh_token)
+
+    def test_parse_yaml_document_to_dict(self):
+        yaml_doc = ('client_id: {}\n'
+                    'client_secret: {}\n'
+                    'developer_token: {}\n'
+                    'refresh_token: {}\n'.format(
+                        self.client_id, self.client_secret,
+                        self.developer_token, self.refresh_token))
+
+        result = config.parse_yaml_document_to_dict(yaml_doc)
+
+        self.assertEqual(result['developer_token'], self.developer_token)
+        self.assertEqual(result['client_id'], self.client_id)
+        self.assertEqual(result['client_secret'], self.client_secret)
+        self.assertEqual(result['refresh_token'], self.refresh_token)

@@ -147,27 +147,6 @@ class GoogleAdsClient(object):
         )
 
     @classmethod
-    def _get_client_kwargs_from_yaml(cls, yaml_str):
-        """Utility function used to load client kwargs from YAML string.
-
-        Args:
-            yaml_str: a str containing client configuration in YAML format.
-
-        Returns:
-            A dict containing configuration data that will be provided to the
-            GoogleAdsClient initializer as keyword arguments.
-
-        Raises:
-            ValueError: If the configuration lacks a required field.
-        """
-        config_data = yaml.safe_load(yaml_str) or {}
-        return cls._get_client_kwargs(
-            config_data,
-            'A required field in the configuration data was not found. The '
-            'required fields are: %s' % str(_REQUIRED_KEYS)
-        )
-
-    @classmethod
     def get_type(cls, name, version=_DEFAULT_VERSION):
         """Returns the specified common, enum, error, or resource type.
 
@@ -220,7 +199,12 @@ class GoogleAdsClient(object):
         Raises:
             ValueError: If the configuration lacks a required field.
         """
-        return cls(**cls._get_client_kwargs_from_yaml(yaml_str))
+        config_data = config.parse_yaml_document_to_dict(yaml_str)
+        kwargs = cls._get_client_kwargs(
+            config_data,
+            'A required field in the configuration data was not found. The '
+            'required fields are: {}'.format(str(_REQUIRED_KEYS)))
+        return cls(**kwargs)
 
     @classmethod
     def load_from_storage(cls, path=None):
@@ -243,7 +227,7 @@ class GoogleAdsClient(object):
         kwargs = cls._get_client_kwargs(
             config_data,
             'A required field in the configuration data was not found. The '
-            'required fields are: %s' % str(_REQUIRED_KEYS))
+            'required fields are: {}'.format(str(_REQUIRED_KEYS)))
         return cls(**kwargs)
 
     def __init__(self, credentials, developer_token, endpoint=None,

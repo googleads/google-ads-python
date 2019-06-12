@@ -24,12 +24,11 @@ def load_from_yaml_file(path=None):
             configuration data used to initialize a GoogleAdsClient.
 
     Returns:
-        A GoogleAdsClient initialized with the values in the specified file.
+        A dict with configuration from the specified YAML file.
 
     Raises:
         FileNotFoundError: If the specified configuration file doesn't exist.
         IOError: If the configuration file can't be loaded.
-        yaml.YAMLError: If there is a problem parsing the YAML document.
     """
     if path is None:
         path = os.path.join(os.path.expanduser('~'), 'google-ads.yaml')
@@ -38,6 +37,22 @@ def load_from_yaml_file(path=None):
         path = os.path.expanduser(path)
 
     with open(path, 'rb') as handle:
-        yaml_str = handle.read()
+        yaml_doc = handle.read()
 
-    return yaml.safe_load(yaml_str) or {}
+    return parse_yaml_document_to_dict(yaml_doc)
+
+
+def parse_yaml_document_to_dict(yaml_doc):
+    """Parses a YAML document to a dict.
+
+    Args:
+        yaml_doc: a str (in Python 2) or bytes (in Python 3) containing YAML
+            configuration data.
+
+    Returns:
+        A dict of the key/value pairs from the given YAML document.
+
+    Raises:
+        yaml.YAMLError: If there is a problem parsing the YAML document.
+    """
+    return yaml.safe_load(yaml_doc) or {}

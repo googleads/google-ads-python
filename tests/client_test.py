@@ -241,33 +241,6 @@ class GoogleAdsClientTest(FileTestCase):
                         'logging_config': {'test': True}
                     })
 
-    def test_get_client_kwargs_from_yaml(self):
-        config = {
-            'developer_token': self.developer_token,
-            'client_id': self.client_id,
-            'client_secret': self.client_secret,
-            'refresh_token': self.refresh_token
-        }
-
-        yaml_str = yaml.safe_dump(config)
-
-        with mock.patch(
-            'google.ads.google_ads.client.InstalledAppCredentials'
-        ) as mock_credentials:
-            mock_credentials_instance = mock.Mock()
-            mock_credentials.return_value = mock_credentials_instance
-            result = Client.GoogleAdsClient._get_client_kwargs_from_yaml(
-                yaml_str)
-            self.assertEqual(
-                result,
-                {
-                    'credentials': mock_credentials_instance,
-                    'developer_token': self.developer_token,
-                    'endpoint': None,
-                    'login_customer_id': None,
-                    'logging_config': None
-                })
-
     def test_load_from_storage(self):
         config = {
             'developer_token': self.developer_token,

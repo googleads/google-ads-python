@@ -92,7 +92,7 @@ class GoogleAdsClientTest(FileTestCase):
 
     def _create_test_client(self, endpoint=None):
         with mock.patch(
-                'google.ads.google_ads.client.Credentials') as mock_credentials:
+                'google.ads.google_ads.client.InstalledAppCredentials') as mock_credentials:
             mock_credentials_instance = mock_credentials.return_value
             mock_credentials_instance.refresh_token = self.refresh_token
             mock_credentials_instance.client_id = self.client_id
@@ -119,7 +119,7 @@ class GoogleAdsClientTest(FileTestCase):
         }
 
         with mock.patch(
-                'google.ads.google_ads.client.Credentials') as mock_credentials:
+                'google.ads.google_ads.client.InstalledAppCredentials') as mock_credentials:
             mock_credentials_instance = mock.Mock()
             mock_credentials.return_value = mock_credentials_instance
             result = (Client.GoogleAdsClient.
@@ -144,7 +144,7 @@ class GoogleAdsClientTest(FileTestCase):
         }
 
         with mock.patch(
-                'google.ads.google_ads.client.Credentials') as mock_credentials:
+                'google.ads.google_ads.client.InstalledAppCredentials') as mock_credentials:
             mock_credentials_instance = mock.Mock()
             mock_credentials.return_value = mock_credentials_instance
             result = (Client.GoogleAdsClient.
@@ -168,7 +168,7 @@ class GoogleAdsClientTest(FileTestCase):
         }
 
         with mock.patch(
-                'google.ads.google_ads.client.Credentials') as mock_credentials:
+                'google.ads.google_ads.client.InstalledAppCredentials') as mock_credentials:
             mock_credentials_instance = mock.Mock()
             mock_credentials.return_value = mock_credentials_instance
             result = (Client.GoogleAdsClient._get_client_kwargs(config, ''))
@@ -193,7 +193,7 @@ class GoogleAdsClientTest(FileTestCase):
         }
 
         with mock.patch(
-                'google.ads.google_ads.client.Credentials') as mock_credentials:
+                'google.ads.google_ads.client.InstalledAppCredentials') as mock_credentials:
             mock_credentials_instance = mock.Mock()
             mock_credentials.return_value = mock_credentials_instance
             result = (Client.GoogleAdsClient.
@@ -218,12 +218,11 @@ class GoogleAdsClientTest(FileTestCase):
         }
         with mock.patch('os.environ', environ):
             with mock.patch(
-                'google.ads.google_ads.client.Credentials'
+                'google.ads.google_ads.client.InstalledAppCredentials'
             ) as mock_credentials:
                 mock_credentials_instance = mock.Mock()
                 mock_credentials.return_value = mock_credentials_instance
-                result = (Client.GoogleAdsClient.
-                          _get_client_kwargs_from_env())
+                result = Client.GoogleAdsClient._get_client_kwargs_from_env()
                 self.assertEqual(
                     result,
                     {
@@ -245,7 +244,7 @@ class GoogleAdsClientTest(FileTestCase):
         yaml_str = yaml.safe_dump(config)
 
         with mock.patch(
-                'google.ads.google_ads.client.Credentials') as mock_credentials:
+                'google.ads.google_ads.client.InstalledAppCredentials') as mock_credentials:
             mock_credentials_instance = mock.Mock()
             mock_credentials.return_value = mock_credentials_instance
             result = (Client.GoogleAdsClient._get_client_kwargs_from_yaml(
@@ -274,7 +273,7 @@ class GoogleAdsClientTest(FileTestCase):
         with mock.patch('google.ads.google_ads.client.GoogleAdsClient'
                         '.__init__') as mock_client_init, \
             mock.patch(
-                'google.ads.google_ads.client.Credentials') as mock_credentials:
+                'google.ads.google_ads.client.InstalledAppCredentials') as mock_credentials:
             mock_client_init.return_value = None
             mock_credentials_instance = mock.Mock()
             mock_credentials.return_value = mock_credentials_instance
@@ -300,7 +299,7 @@ class GoogleAdsClientTest(FileTestCase):
         with mock.patch('google.ads.google_ads.client.GoogleAdsClient'
                         '.__init__') as mock_client_init, \
             mock.patch(
-                'google.ads.google_ads.client.Credentials') as mock_credentials:
+                'google.ads.google_ads.client.InstalledAppCredentials') as mock_credentials:
             mock_client_init.return_value = None
             mock_credentials_instance = mock.Mock()
             mock_credentials.return_value = mock_credentials_instance

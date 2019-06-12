@@ -23,14 +23,17 @@ from collections import namedtuple
 from importlib import import_module
 
 from google.auth.transport.requests import Request
-from google.oauth2.credentials import Credentials
+from google.oauth2.credentials import Credentials as InstalledAppCredentials
+from google.oauth2.service_account import Credentials as ServiceAccountCreds
 from google.ads.google_ads.errors import GoogleAdsException
 from google.protobuf.message import DecodeError
 
 _logger = logging.getLogger(__name__)
 
-_REQUIRED_KEYS = ('client_id', 'client_secret', 'refresh_token',
-                  'developer_token')
+_REQUIRED_KEYS = ('developer_token',)
+_OAUTH2_INSTALLED_APP_KEYS = ('client_id', 'client_secret', 'refresh_token')
+_OAUTH2_SERVICE_ACCOUNT_KEYS = ('path_to_private_key_file', 'delegated_account')
+_SERVICE_ACCOUNT_SCOPES = ['https://www.googleapis.com/auth/adwords']
 _SERVICE_CLIENT_TEMPLATE = '%sClient'
 _SERVICE_GRPC_TRANSPORT_TEMPLATE = '%sGrpcTransport'
 _PROTO_TEMPLATE = '%s_pb2'
@@ -41,7 +44,10 @@ _REQUEST_ID_KEY = 'request-id'
 _ENV_PREFIX = 'GOOGLE_ADS_'
 _KEYS_ENV_VARIABLES_MAP = {
     key: _ENV_PREFIX + key.upper() for key in
-    list(_REQUIRED_KEYS) + ['login_customer_id', 'endpoint', 'logging']
+    list(_REQUIRED_KEYS) +
+    ['login_customer_id', 'endpoint', 'logging'] +
+    list(_OAUTH2_INSTALLED_APP_KEYS) +
+    list(_OAUTH2_SERVICE_ACCOUNT_KEYS)
 }
 
 class GoogleAdsClient(object):
@@ -64,26 +70,43 @@ class GoogleAdsClient(object):
         Raises:
             ValueError: If the configuration lacks a required field.
         """
-        if all(required_key in config_data for required_key in _REQUIRED_KEYS):
-            credentials = Credentials(
-                None,
-                refresh_token=config_data['refresh_token'],
-                client_id=config_data['client_id'],
-                client_secret=config_data['client_secret'],
-                token_uri=_DEFAULT_TOKEN_URI)
-            credentials.refresh(Request())
+        if not all(key in config_data for key in _REQUIRED_KEYS):
+            raise ValueError(error_message)
 
-            login_customer_id = config_data.get('login_customer_id')
-            login_customer_id = str(
+        if all(key in config_data for key in _OAUTH2_INSTALLED_APP_KEYS):
+            # Using the Installed App Flow
+            credentials = InstalledAppCredentials(
+                None,
+                refresh_token=config_data.get('refresh_token'),
+                client_id=config_data.get('client_id'),
+                client_secret=config_data.get('client_secret'),
+                token_uri=_DEFAULT_TOKEN_URI)
+        elif all(key in config_data for key in _OAUTH2_SERVICE_ACCOUNT_KEYS):
+            # Using the Service Account Flow
+            credentials = ServiceAccountCreds.from_service_account_file(
+                config_data.get('path_to_private_key_file'),
+                scopes = _SERVICE_ACCOUNT_SCOPES,
+                subject = config_data.get('delegated_account'))
+        else:
+            raise ValueError('Your yaml file is incorrectly configured for '
+                             'OAuth2. You need to specify credentials for '
+                             'either the OAuth2 installed application flow '
+                             '({}) or service account flow ({}).'.format(
+                                _OAUTH2_INSTALLED_APP_KEYS,
+                                _OAUTH2_SERVICE_ACCOUNT_KEYS))
+
+        credentials.refresh(Request())
+
+        login_customer_id = config_data.get('login_customer_id')
+        login_customer_id = str(
                 login_customer_id) if login_customer_id else None
 
-            return {'credentials': credentials,
-                    'developer_token': config_data['developer_token'],
-                    'endpoint': config_data.get('endpoint'),
-                    'login_customer_id': login_customer_id,
-                    'logging_config': config_data.get('logging')}
-        else:
-            raise ValueError(error_message)
+        return {'credentials': credentials,
+                'developer_token': config_data['developer_token'],
+                'endpoint': config_data.get('endpoint'),
+                'login_customer_id': login_customer_id,
+                'logging_config': config_data.get('logging')}
+
 
     @classmethod
     def _get_client_kwargs_from_env(cls):

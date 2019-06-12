@@ -1,3 +1,6 @@
+* 2.3.0:
+- Allow loading client configuration from environment variables
+
 * 2.2.0:
 - Update service-level timeout and idempotency configurations
 - Add link_manager_to_client example

@@ -32,14 +32,14 @@ def display_categories(categories, prefix=''):
     if not category.children:
       display_categories(category.children, prefix=prefix + category.name)
 
- 
+
 def main(client, customer_id, page_size):
   ga_service = client.get_service('GoogleAdsService', version='v1')
   query = ('SELECT product_bidding_category_constant.localized_name, '
            'product_bidding_category_constant.product_bidding_category_constant_parent '
            'FROM product_bidding_category_constant WHERE '
            'product_bidding_category_constant.country_code IN ("US")')
-  
+
   results = ga_service.search(customer_id, query=query, page_size=page_size)
 
   class Category:
@@ -58,11 +58,11 @@ def main(client, customer_id, page_size):
 
       category = Category(product_bidding_category.localized_name.value,
                           product_bidding_category.resource_name)
-      
+
       all_categories[category.id] = category
       parent = product_bidding_category.product_bidding_category_constant_parent
       parent_id = getattr(parent, 'value', None)
-      
+
       if parent_id:
         all_categories[parent_id].children.append(category)
       else:

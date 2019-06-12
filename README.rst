@@ -50,12 +50,52 @@ please refer to `this page of the wiki`_.
 Create a GoogleAdsClient
 ########################
 
+Using YAML file
+***************
+
 You can run the following to retrieve a `GoogleAdsClient` instance using a
 configuration file named **google-ads.yaml** stored in your home directory:
 
 .. code-block:: python
 
   client = google.ads.google_ads.client.GoogleAdsClient.load_from_storage()
+
+Using environment variables
+***************************
+
+You can also retrieve it exporting environment variables.
+
+* Required:
+
+.. code-block:: bash
+
+  export GOOGLE_ADS_CLIENT_ID=INSERT_OAUTH2_CLIENT_ID_HERE
+  export GOOGLE_ADS_CLIENT_SECRET=INSERT_OAUTH2_CLIENT_SECRET_HERE
+  export GOOGLE_ADS_REFRESH_TOKEN=INSERT_REFRESH_TOKEN_HERE
+  export GOOGLE_ADS_DEVELOPER_TOKEN=INSERT_DEVELOPER_TOKEN_HERE
+
+* Optional:
+
+.. code-block:: bash
+
+  export GOOGLE_ADS_LOGIN_CUSTOMER_ID=INSERT_LOGIN_CUSTOMER_ID_HERE
+  export GOOGLE_ADS_LOGGING=INSERT_GOOGLE_ADS_LOGGING
+
+.. _GOOGLE_ADS_LOGGING:
+
+GOOGLE_ADS_LOGGING should be a JSON with logging configuration. Example:
+
+.. code-block:: json
+
+  {"version": 1, "disable_existing_loggers": false, "formatters": {"default_fmt": {"format": "[%(asctime)s - %(levelname)s] %(message).5000s", "datefmt": "%Y-%m-%d %H:%M:%S"}}, "handlers": {"default_handler": {"class": "logging.StreamHandler", "formatter": "default_fmt"}}, "loggers": {"": {"handlers": ["default_handler"], "level": "INFO"}}}
+
+
+Then run the following to retrieve a GoogleAdsClient instance:
+
+.. code-block:: python
+
+  client = google.ads.google_ads.client.GoogleAdsClient.load_from_env()
+
 
 Get types and service clients
 #############################
@@ -94,8 +134,9 @@ The currently available list of versions is:
 Enabling and Configuring logging
 ################################
 The library uses Python's built in logging framework. You can specify your
-configuration via the configuration file; see `google-ads.yaml`_
-for an example. The library logs to ``stderr`` by default. You can easily pipe
+configuration via the configuration file (see `google-ads.yaml`_
+for an example) or GOOGLE_ADS_LOGGING_ environment variable.
+The library logs to ``stderr`` by default. You can easily pipe
 log messages to a file; when running an example:
 
 .. code-block:: bash

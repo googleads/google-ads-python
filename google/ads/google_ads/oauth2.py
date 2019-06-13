@@ -20,6 +20,8 @@ from google.oauth2.service_account import Credentials as ServiceAccountCreds
 from google.oauth2.credentials import Credentials as InstalledAppCredentials
 from google.auth.transport.requests import Request
 
+from google.ads.google_ads import config
+
 _SERVICE_ACCOUNT_SCOPES = ['https://www.googleapis.com/auth/adwords']
 _DEFAULT_TOKEN_URI = 'https://accounts.google.com/o/oauth2/token'
 
@@ -72,3 +74,21 @@ def get_service_account_credentials(path_to_private_key_file, subject,
     """
     return ServiceAccountCreds.from_service_account_file(
         path_to_private_key_file, subject=subject, scopes=scopes)
+
+
+def get_credentials(config_data):
+    """Decides which type of credentials to return based on the given config.
+
+    Args:
+        config_data: a dict containing client configuration.
+
+    Returns:
+        An initialized credentials instance.
+    """
+    required_installed_app_keys = config.get_oauth2_installed_app_keys()
+    if all(key in config_data for key in required_installed_app_keys):
+        # Using the Installed App Flow
+        return get_installed_app_credentials(
+            config_data.get('client_id'),
+            config_data.get('client_secret'),
+            config_data.get('refresh_token'))

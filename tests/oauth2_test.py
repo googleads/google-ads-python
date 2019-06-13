@@ -76,3 +76,18 @@ class OAuth2Tests(TestCase):
             mock_request_class.assert_called_once()
             result.refresh.assert_called_once_with(mock_request)
 
+    def test_get_credentials_installed_application(self):
+        mock_config = {
+            'client_id': self.client_id,
+            'client_secret': self.client_secret,
+            'refresh_token': self.refresh_token}
+        mock_credentials = mock.Mock()
+
+        with mock.patch.object(
+            oauth2,
+            'get_installed_app_credentials',
+            return_value=mock_credentials
+        ) as mock_initializer:
+            result = oauth2.get_credentials(mock_config)
+            mock_initializer.assert_called_once_with(
+                self.client_id, self.client_secret, self.refresh_token)

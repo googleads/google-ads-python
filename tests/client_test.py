@@ -292,21 +292,21 @@ class GoogleAdsClientTest(FileTestCase):
 
         file_path = os.path.join(os.path.expanduser('~'), 'google-ads.yaml')
         self.fs.create_file(file_path, contents=yaml.safe_dump(config))
+        mock_credentials_instance = mock.Mock()
 
-        with mock.patch(
-            'google.ads.google_ads.client.GoogleAdsClient.__init__'
-        ) as mock_client_init, mock.patch(
-            'google.ads.google_ads.client.ServiceAccountCreds.'
-            'from_service_account_file'
+        with mock.patch.object(
+            Client.GoogleAdsClient,
+            '__init__',
+            return_value=None
+        ) as mock_client_init, mock.patch.object(
+            Client.oauth2,
+            'get_service_account_credentials',
+            return_value=mock_credentials_instance
         ) as mock_credentials:
-            mock_client_init.return_value = None
-            mock_credentials_instance = mock.Mock()
-            mock_credentials.return_value = mock_credentials_instance
             Client.GoogleAdsClient.load_from_storage()
             mock_credentials.assert_called_once_with(
                 config.get('path_to_private_key_file'),
-                scopes=Client._SERVICE_ACCOUNT_SCOPES,
-                subject=config.get('delegated_account'))
+                config.get('delegated_account'))
             mock_client_init.assert_called_once_with(
                 credentials=mock_credentials_instance,
                 developer_token=self.developer_token,
@@ -317,22 +317,19 @@ class GoogleAdsClientTest(FileTestCase):
     def test_load_from_storage_service_account_no_delegated_account(self):
         config = {
             'developer_token': self.developer_token,
-            'path_to_private_key_file': self.path_to_private_key_file
-        }
+            'path_to_private_key_file': self.path_to_private_key_file}
 
         file_path = os.path.join(os.path.expanduser('~'), 'google-ads.yaml')
         self.fs.create_file(file_path, contents=yaml.safe_dump(config))
+        mock_credentials_instance = mock.Mock()
 
-        with mock.patch(
-            'google.ads.google_ads.client.GoogleAdsClient.__init__'
-        ) as mock_client_init, mock.patch(
-            'google.ads.google_ads.client.ServiceAccountCreds.'
-            'from_service_account_file'
-        ) as mock_credentials:
-            mock_client_init.return_value = None
-            mock_credentials_instance = mock.Mock()
-            mock_credentials.return_value = mock_credentials_instance
-
+        with mock.patch.object(
+            Client.GoogleAdsClient,
+            '__init__',
+            return_value=None), mock.patch.object(
+            Client.oauth2,
+            'get_service_account_credentials',
+            return_value=mock_credentials_instance):
             self.assertRaises(
                 ValueError,
                 Client.GoogleAdsClient.load_from_storage)

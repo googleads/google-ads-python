@@ -26,6 +26,9 @@ class OAuth2Tests(TestCase):
         self.client_secret = 'client_secret_987654321'
         self.refresh_token = 'refresh'
         self.token_uri = 'www.tokenuri.com'
+        self.path_to_private_key_file = '/path/to/file'
+        self.subject = 'test@test.com'
+        self.scopes = oauth2._SERVICE_ACCOUNT_SCOPES
 
     def test_get_installed_app_credentials(self):
         mock_credentials = mock.Mock()
@@ -51,3 +54,26 @@ class OAuth2Tests(TestCase):
                 token_uri=self.token_uri)
             mock_request_class.assert_called_once()
             result.refresh.assert_called_once_with(mock_request)
+
+    def test_get_service_account_credentials(self):
+        mock_credentials = mock.Mock()
+        mock_request = mock.Mock()
+        with mock.patch.object(
+            oauth2.ServiceAccountCreds,
+            'from_service_account_file',
+            return_value=mock_credentials
+        ) as mock_initializer, mock.patch.object(
+            oauth2,
+            'Request',
+            return_value = mock_request
+        ) as mock_request_class:
+            result = oauth2.get_service_account_credentials(
+                self.path_to_private_key_file, self.subject)
+
+            mock_initializer.assert_called_once_with(
+                self.path_to_private_key_file,
+                subject=self.subject,
+                scopes=self.scopes)
+            mock_request_class.assert_called_once()
+            result.refresh.assert_called_once_with(mock_request)
+

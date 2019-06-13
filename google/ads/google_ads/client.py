@@ -20,8 +20,6 @@ import grpc
 from collections import namedtuple
 from importlib import import_module
 
-from google.auth.transport.requests import Request
-from google.oauth2.service_account import Credentials as ServiceAccountCreds
 from google.protobuf.message import DecodeError
 
 from google.ads.google_ads import config
@@ -30,7 +28,6 @@ from google.ads.google_ads.errors import GoogleAdsException
 
 _logger = logging.getLogger(__name__)
 
-_SERVICE_ACCOUNT_SCOPES = ['https://www.googleapis.com/auth/adwords']
 _SERVICE_CLIENT_TEMPLATE = '%sClient'
 _SERVICE_GRPC_TRANSPORT_TEMPLATE = '%sGrpcTransport'
 _PROTO_TEMPLATE = '%s_pb2'
@@ -66,11 +63,9 @@ class GoogleAdsClient(object):
                 _DEFAULT_TOKEN_URI)
         elif all(key in config_data for key in config._OAUTH2_SERVICE_ACCOUNT_KEYS):
             # Using the Service Account Flow
-            credentials = ServiceAccountCreds.from_service_account_file(
+            credentials = oauth2.get_service_account_credentials(
                 config_data.get('path_to_private_key_file'),
-                scopes = _SERVICE_ACCOUNT_SCOPES,
-                subject = config_data.get('delegated_account'))
-            credentials.refresh(Request())
+                config_data.get('delegated_account'))
         else:
             raise ValueError('Your yaml file is incorrectly configured for '
                              'OAuth2. You need to specify credentials for '

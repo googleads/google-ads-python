@@ -103,3 +103,19 @@ class ConfigTest(FileTestCase):
                 'login_customer_id': self.login_customer_id,
                 'path_to_private_key_file': self.path_to_private_key_file,
                 'delegated_account': self.delegated_account})
+
+    def test_validate_dict(self):
+        config_data = {'invalid': 'config'}
+
+        self.assertRaises(
+            ValueError,
+            config.validate_dict,
+            config_data
+        )
+
+    def test_validate_dict(self):
+        config_data = {key: 'test' for key in config._REQUIRED_KEYS}
+        try:
+            config.validate_dict(config_data)
+        except ValueError as ex:
+            self.fail('test_validate_dict failed unexpectedly: {}'.format(ex))

@@ -27,8 +27,10 @@ _KEYS_ENV_VARIABLES_MAP = {
     list(_REQUIRED_KEYS) +
     list(_OPTIONAL_KEYS) +
     list(_OAUTH2_INSTALLED_APP_KEYS) +
-    list(_OAUTH2_SERVICE_ACCOUNT_KEYS)
-}
+    list(_OAUTH2_SERVICE_ACCOUNT_KEYS)}
+_MISSING_CONFIG_ERROR_MESSAGE = ('A required field in the configuration data '
+                                 'was not found. The required fields are: {}'
+                                 ''.format(str(_REQUIRED_KEYS)))
 
 def load_from_yaml_file(path=None):
     """Loads configuration data from a YAML file and returns it as a dict.
@@ -94,3 +96,18 @@ def load_from_env():
                 'GOOGLE_ADS_LOGGING env variable should be in JSON format.')
 
     return config_data
+
+
+def validate_dict(config_data, error_message=_MISSING_CONFIG_ERROR_MESSAGE):
+    """Validates that all required keys are present in configuration
+
+    Args:
+        config_data: a dict with configuration data.
+        error_message: an optional error message str to raise if validation
+            fails.
+
+    Raises:
+        ValueError: If the dict does not contain all required config keys.
+    """
+    if not all(key in config_data for key in _REQUIRED_KEYS):
+        raise ValueError(error_message)

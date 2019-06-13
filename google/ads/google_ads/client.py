@@ -61,8 +61,7 @@ class GoogleAdsClient(object):
         Raises:
             ValueError: If the configuration lacks a required field.
         """
-        if not all(key in config_data for key in config._REQUIRED_KEYS):
-            raise ValueError(error_message)
+        config.validate_dict(config_data, error_message)
 
         if all(key in config_data for key in config._OAUTH2_INSTALLED_APP_KEYS):
             # Using the Installed App Flow
@@ -97,7 +96,6 @@ class GoogleAdsClient(object):
                 'endpoint': config_data.get('endpoint'),
                 'login_customer_id': login_customer_id,
                 'logging_config': config_data.get('logging')}
-
 
     @classmethod
     def _get_client_kwargs_from_env(cls):

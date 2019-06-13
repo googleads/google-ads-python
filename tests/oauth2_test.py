@@ -25,9 +25,9 @@ class OAuth2Tests(TestCase):
         self.client_id = 'client_id_123456789'
         self.client_secret = 'client_secret_987654321'
         self.refresh_token = 'refresh'
-        self.token_uri = 'www.tokenuri.com'
         self.path_to_private_key_file = '/path/to/file'
         self.subject = 'test@test.com'
+        self.token_uri = oauth2._DEFAULT_TOKEN_URI
         self.scopes = oauth2._SERVICE_ACCOUNT_SCOPES
 
     def test_get_installed_app_credentials(self):
@@ -43,8 +43,7 @@ class OAuth2Tests(TestCase):
             return_value = mock_request
         ) as mock_request_class:
             result = oauth2.get_installed_app_credentials(
-                self.client_id, self.client_secret, self.refresh_token,
-                self.token_uri)
+                self.client_id, self.client_secret, self.refresh_token)
 
             mock_initializer.assert_called_once_with(
                 None,

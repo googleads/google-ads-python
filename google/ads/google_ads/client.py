@@ -31,7 +31,6 @@ _logger = logging.getLogger(__name__)
 _SERVICE_CLIENT_TEMPLATE = '%sClient'
 _SERVICE_GRPC_TRANSPORT_TEMPLATE = '%sGrpcTransport'
 _PROTO_TEMPLATE = '%s_pb2'
-_DEFAULT_TOKEN_URI = 'https://accounts.google.com/o/oauth2/token'
 _VALID_API_VERSIONS = ['v1']
 _DEFAULT_VERSION = _VALID_API_VERSIONS[0]
 _REQUEST_ID_KEY = 'request-id'
@@ -59,8 +58,7 @@ class GoogleAdsClient(object):
             credentials = oauth2.get_installed_app_credentials(
                 config_data.get('client_id'),
                 config_data.get('client_secret'),
-                config_data.get('refresh_token'),
-                _DEFAULT_TOKEN_URI)
+                config_data.get('refresh_token'))
         elif all(key in config_data for key in config._OAUTH2_SERVICE_ACCOUNT_KEYS):
             # Using the Service Account Flow
             credentials = oauth2.get_service_account_credentials(

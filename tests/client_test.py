@@ -224,8 +224,7 @@ class GoogleAdsClientTest(FileTestCase):
             mock_credentials.assert_called_once_with(
                 config.get('client_id'),
                 config.get('client_secret'),
-                config.get('refresh_token'),
-                Client._DEFAULT_TOKEN_URI)
+                config.get('refresh_token'))
             mock_client_init.assert_called_once_with(
                 credentials=mock_credentials_instance,
                 developer_token=self.developer_token,

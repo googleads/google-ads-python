@@ -28,6 +28,7 @@ from google.oauth2.service_account import Credentials as ServiceAccountCreds
 from google.protobuf.message import DecodeError
 
 from google.ads.google_ads import config
+from google.ads.google_ads import oauth2
 from google.ads.google_ads.errors import GoogleAdsException
 
 _logger = logging.getLogger(__name__)
@@ -45,14 +46,12 @@ class GoogleAdsClient(object):
     """Google Ads client used to configure settings and fetch services."""
 
     @classmethod
-    def _get_client_kwargs(cls, config_data, error_message):
+    def _get_client_kwargs(cls, config_data):
         """Utility function used to load client kwargs from configuration data
         dictionary.
 
         Args:
             config_data: a dict containing client configuration.
-            error_message: error message raised when config_data lacks a
-                required key
 
         Returns:
             A dict containing configuration data that will be provided to the
@@ -61,31 +60,27 @@ class GoogleAdsClient(object):
         Raises:
             ValueError: If the configuration lacks a required field.
         """
-        config.validate_dict(config_data, error_message)
-
         if all(key in config_data for key in config._OAUTH2_INSTALLED_APP_KEYS):
             # Using the Installed App Flow
-            credentials = InstalledAppCredentials(
-                None,
-                refresh_token=config_data.get('refresh_token'),
-                client_id=config_data.get('client_id'),
-                client_secret=config_data.get('client_secret'),
-                token_uri=_DEFAULT_TOKEN_URI)
+            credentials = oauth2.get_installed_app_credentials(
+                config_data.get('client_id'),
+                config_data.get('client_secret'),
+                config_data.get('refresh_token'),
+                _DEFAULT_TOKEN_URI)
         elif all(key in config_data for key in config._OAUTH2_SERVICE_ACCOUNT_KEYS):
             # Using the Service Account Flow
             credentials = ServiceAccountCreds.from_service_account_file(
                 config_data.get('path_to_private_key_file'),
                 scopes = _SERVICE_ACCOUNT_SCOPES,
                 subject = config_data.get('delegated_account'))
+            credentials.refresh(Request())
         else:
             raise ValueError('Your yaml file is incorrectly configured for '
                              'OAuth2. You need to specify credentials for '
                              'either the OAuth2 installed application flow '
                              '({}) or service account flow ({}).'.format(
-                                config._OAUTH2_INSTALLED_APP_KEYS,
-                                config._OAUTH2_SERVICE_ACCOUNT_KEYS))
-
-        credentials.refresh(Request())
+                config._OAUTH2_INSTALLED_APP_KEYS,
+                config._OAUTH2_SERVICE_ACCOUNT_KEYS))
 
         login_customer_id = config_data.get('login_customer_id')
         login_customer_id = str(
@@ -109,14 +104,9 @@ class GoogleAdsClient(object):
             ValueError: If the configuration lacks a required field.
         """
         config_data = config.load_from_env()
-        return cls(cls._get_client_kwargs(
-            config_data,
-            'A required variable was not found in the environment. The '
-            'required environment variables are: %s'
-            % str(
-                tuple(
-                    v for k, v in config._KEYS_ENV_VARIABLES_MAP.items()
-                    if k in config._REQUIRED_KEYS))))
+        kwargs = cls._get_client_kwargs(config_data)
+
+        return cls(**kwargs)
 
     @classmethod
     def load_from_string(cls, yaml_str):
@@ -135,6 +125,7 @@ class GoogleAdsClient(object):
         """
         config_data = config.parse_yaml_document_to_dict(yaml_str)
         kwargs = cls._get_client_kwargs(config_data)
+
         return cls(**kwargs)
 
     @classmethod
@@ -155,10 +146,7 @@ class GoogleAdsClient(object):
             ValueError: If the configuration file lacks a required field.
         """
         config_data = config.load_from_yaml_file(path)
-        kwargs = cls._get_client_kwargs(
-            config_data,
-            'A required field in the configuration data was not found. The '
-            'required fields are: {}'.format(str(config._REQUIRED_KEYS)))
+        kwargs = cls._get_client_kwargs(config_data)
 
         return cls(**kwargs)
 

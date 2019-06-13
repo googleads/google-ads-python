@@ -47,6 +47,18 @@ class ConfigTest(FileTestCase):
         self.assertEqual(result['client_secret'], self.client_secret)
         self.assertEqual(result['refresh_token'], self.refresh_token)
 
+    def test_load_from_yaml_file_missing_required_key(self):
+        file_path = os.path.join(os.path.expanduser('~'), 'google-ads.yaml')
+        # save a YAML file without a required developer_token key
+        self.fs.create_file(file_path, contents=yaml.safe_dump({
+            'client_id': self.client_id,
+            'client_secret': self.client_secret,
+            'refresh_token': self.refresh_token}))
+
+        self.assertRaises(
+            ValueError,
+            config.load_from_yaml_file)
+
     def test_load_from_yaml_file_with_path(self):
         custom_path = os.path.expanduser('/test/custom/path')
         file_path = os.path.join(custom_path, 'google-ads.yaml')
@@ -78,6 +90,19 @@ class ConfigTest(FileTestCase):
         self.assertEqual(result['client_secret'], self.client_secret)
         self.assertEqual(result['refresh_token'], self.refresh_token)
 
+    def test_parse_yaml_document_to_dict_missing_required_key(self):
+        # YAML document is missing the required developer_token key
+        yaml_doc = ('client_id: {}\n'
+                    'client_secret: {}\n'
+                    'refresh_token: {}\n'.format(
+                        self.client_id, self.client_secret,
+                        self.developer_token, self.refresh_token))
+
+        self.assertRaises(
+            ValueError,
+            config.parse_yaml_document_to_dict,
+            yaml_doc)
+
     def test_load_from_env(self):
         environ = {
             'GOOGLE_ADS_DEVELOPER_TOKEN': self.developer_token,
@@ -103,6 +128,24 @@ class ConfigTest(FileTestCase):
                 'login_customer_id': self.login_customer_id,
                 'path_to_private_key_file': self.path_to_private_key_file,
                 'delegated_account': self.delegated_account})
+
+    def test_load_from_env_missing_required_key(self):
+        # environ is missing required developer_token key
+        environ = {
+            'GOOGLE_ADS_CLIENT_ID': self.client_id,
+            'GOOGLE_ADS_CLIENT_SECRET': self.client_secret,
+            'GOOGLE_ADS_REFRESH_TOKEN': self.refresh_token,
+            'GOOGLE_ADS_LOGGING': '{"test": true}',
+            'GOOGLE_ADS_ENDPOINT': self.endpoint,
+            'GOOGLE_ADS_LOGIN_CUSTOMER_ID': self.login_customer_id,
+            'GOOGLE_ADS_PATH_TO_PRIVATE_KEY_FILE':
+                self.path_to_private_key_file,
+            'GOOGLE_ADS_DELEGATED_ACCOUNT': self.delegated_account}
+
+        with mock.patch('os.environ', environ):
+            self.assertRaises(
+                ValueError,
+                config.load_from_env)
 
     def test_validate_dict(self):
         config_data = {'invalid': 'config'}

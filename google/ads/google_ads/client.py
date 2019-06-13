@@ -40,44 +40,24 @@ class GoogleAdsClient(object):
 
     @classmethod
     def _get_client_kwargs(cls, config_data):
-        """Utility function used to load client kwargs from configuration data
-        dictionary.
+        """Converts configuration dict into kwargs required by the client.
 
         Args:
             config_data: a dict containing client configuration.
 
         Returns:
-            A dict containing configuration data that will be provided to the
-            GoogleAdsClient initializer as keyword arguments.
+            A dict containing kwargs that will be provided to the
+            GoogleAdsClient initializer.
 
         Raises:
             ValueError: If the configuration lacks a required field.
         """
-        if all(key in config_data for key in config._OAUTH2_INSTALLED_APP_KEYS):
-            # Using the Installed App Flow
-            credentials = oauth2.get_installed_app_credentials(
-                config_data.get('client_id'),
-                config_data.get('client_secret'),
-                config_data.get('refresh_token'))
-        elif all(key in config_data for key in config._OAUTH2_SERVICE_ACCOUNT_KEYS):
-            # Using the Service Account Flow
-            credentials = oauth2.get_service_account_credentials(
-                config_data.get('path_to_private_key_file'),
-                config_data.get('delegated_account'))
-        else:
-            raise ValueError('Your yaml file is incorrectly configured for '
-                             'OAuth2. You need to specify credentials for '
-                             'either the OAuth2 installed application flow '
-                             '({}) or service account flow ({}).'.format(
-                config._OAUTH2_INSTALLED_APP_KEYS,
-                config._OAUTH2_SERVICE_ACCOUNT_KEYS))
-
         login_customer_id = config_data.get('login_customer_id')
         login_customer_id = str(
                 login_customer_id) if login_customer_id else None
 
-        return {'credentials': credentials,
-                'developer_token': config_data['developer_token'],
+        return {'credentials': oauth2.get_credentials(config_data),
+                'developer_token': config_data.get('developer_token'),
                 'endpoint': config_data.get('endpoint'),
                 'login_customer_id': login_customer_id,
                 'logging_config': config_data.get('logging')}
@@ -95,7 +75,6 @@ class GoogleAdsClient(object):
         """
         config_data = config.load_from_env()
         kwargs = cls._get_client_kwargs(config_data)
-
         return cls(**kwargs)
 
     @classmethod
@@ -115,7 +94,6 @@ class GoogleAdsClient(object):
         """
         config_data = config.parse_yaml_document_to_dict(yaml_str)
         kwargs = cls._get_client_kwargs(config_data)
-
         return cls(**kwargs)
 
     @classmethod
@@ -137,7 +115,6 @@ class GoogleAdsClient(object):
         """
         config_data = config.load_from_yaml_file(path)
         kwargs = cls._get_client_kwargs(config_data)
-
         return cls(**kwargs)
 
     @classmethod

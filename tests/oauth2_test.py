@@ -81,14 +81,13 @@ class OAuth2Tests(TestCase):
             'client_id': self.client_id,
             'client_secret': self.client_secret,
             'refresh_token': self.refresh_token}
-        mock_credentials = mock.Mock()
 
         with mock.patch.object(
             oauth2,
             'get_installed_app_credentials',
-            return_value=mock_credentials
+            return_value=None
         ) as mock_initializer:
-            result = oauth2.get_credentials(mock_config)
+            oauth2.get_credentials(mock_config)
             mock_initializer.assert_called_once_with(
                 self.client_id, self.client_secret, self.refresh_token)
 
@@ -102,3 +101,17 @@ class OAuth2Tests(TestCase):
             ValueError,
             oauth2.get_credentials,
             mock_config)
+
+    def test_get_credentials_installed_application(self):
+        mock_config = {
+            'path_to_private_key_file': self.path_to_private_key_file,
+            'delegated_account': self.subject}
+
+        with mock.patch.object(
+            oauth2,
+            'get_service_account_credentials',
+            return_value=None
+        ) as mock_initializer:
+            oauth2.get_credentials(mock_config)
+            mock_initializer.assert_called_once_with(
+                self.path_to_private_key_file, self.subject)

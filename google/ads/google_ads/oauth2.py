@@ -94,6 +94,11 @@ def get_credentials(config_data):
             config_data.get('client_id'),
             config_data.get('client_secret'),
             config_data.get('refresh_token'))
+    elif all(key in config_data for key in required_service_account_keys):
+        # Using the Service Account Flow
+        return get_service_account_credentials(
+            config_data.get('path_to_private_key_file'),
+            config_data.get('delegated_account'))
     else:
         raise ValueError('Your yaml file is incorrectly configured for OAuth2. '
                          'You need to define credentials for either the OAuth2 '

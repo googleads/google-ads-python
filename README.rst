@@ -47,6 +47,16 @@ is a `template`_ you can use.
 For a complete walk-through of the OAuth Installed Application flow in Python, 
 please refer to `this page of the wiki`_.
 
+OAuth2 Options
+##############
+
+This client library can authenticate using one of two different OAuth2 flows, either the
+`Installed Application Flow`_ or the `Service Account Flow`_. When retrieving the configuration
+for these authentication flows, if configuration is present for _both_ flows the library will
+default to using the Installed Application Flow. If you wish to use the Service Account Flow
+you must make sure that the Installed Application Flow configuration values are not present
+in your configuration.
+
 Create a GoogleAdsClient
 ########################
 
@@ -69,10 +79,20 @@ You can also retrieve it exporting environment variables.
 
 .. code-block:: bash
 
+  export GOOGLE_ADS_DEVELOPER_TOKEN=INSERT_DEVELOPER_TOKEN_HERE
+
+* Required for OAuth2 Installed Application Flow
+
+.. code-block::bash
+
   export GOOGLE_ADS_CLIENT_ID=INSERT_OAUTH2_CLIENT_ID_HERE
   export GOOGLE_ADS_CLIENT_SECRET=INSERT_OAUTH2_CLIENT_SECRET_HERE
   export GOOGLE_ADS_REFRESH_TOKEN=INSERT_REFRESH_TOKEN_HERE
-  export GOOGLE_ADS_DEVELOPER_TOKEN=INSERT_DEVELOPER_TOKEN_HERE
+
+* Required for OAuth2 Service Account Flow:
+
+  export GOOGLE_ADS_PATH_TO_PRIVATE_KEY_FILE=INSERT_PRIVATE_KEY_PATH_HERE
+  export GOOGLE_ADS_DELEGATED_ACCOUNT=INSERT_DELEGATED_ACCOUNT_HERE
 
 * Optional:
 
@@ -192,6 +212,8 @@ Authors
 * `David Wihl`_
 * `Ben Karl`_
 
+.. _Installed Application Flow: https://developers.google.com/google-ads/api/docs/client-libs/dotnet/oauth-installed
+.. _Service Account Flow: https://developers.google.com/google-ads/api/docs/client-libs/dotnet/oauth-service
 .. _pip: https://pip.pypa.io/en/stable/installing
 .. _blog post: https://ads-developers.googleblog.com/2019/04/python-2-deprecation-in-ads-api-client.html
 .. _template: https://github.com/googleads/google-ads-python/blob/master/google-ads.yaml

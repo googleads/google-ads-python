@@ -98,31 +98,6 @@ class GoogleAdsClient(object):
                 'logging_config': config_data.get('logging')}
 
     @classmethod
-    def _get_client_kwargs_from_env(cls):
-        """Utility function used to load client kwargs from env variables.
-
-        Returns:
-            A dict containing configuration data that will be provided to the
-            GoogleAdsClient initializer as keyword arguments.
-
-        Raises:
-            ValueError: If the environment lacks a required field or
-                GOOGLE_ADS_LOGGING env variable is not in JSON format.
-        """
-        config_data = config.load_from_env()
-        return cls._get_client_kwargs(
-            config_data,
-            'A required variable was not found in the environment. The '
-            'required environment variables are: %s'
-            % str(
-                tuple(
-                    v for k, v in config._KEYS_ENV_VARIABLES_MAP.items()
-                    if k in config._REQUIRED_KEYS
-                )
-            )
-        )
-
-    @classmethod
     def load_from_env(cls):
         """Creates a GoogleAdsClient with data stored in the env variables.
 
@@ -133,8 +108,15 @@ class GoogleAdsClient(object):
         Raises:
             ValueError: If the configuration lacks a required field.
         """
-
-        return cls(**cls._get_client_kwargs_from_env())
+        config_data = config.load_from_env()
+        return cls(cls._get_client_kwargs(
+            config_data,
+            'A required variable was not found in the environment. The '
+            'required environment variables are: %s'
+            % str(
+                tuple(
+                    v for k, v in config._KEYS_ENV_VARIABLES_MAP.items()
+                    if k in config._REQUIRED_KEYS))))
 
     @classmethod
     def load_from_string(cls, yaml_str):
@@ -152,11 +134,7 @@ class GoogleAdsClient(object):
             ValueError: If the configuration lacks a required field.
         """
         config_data = config.parse_yaml_document_to_dict(yaml_str)
-        kwargs = cls._get_client_kwargs(
-            config_data,
-            'A required field in the configuration data was not found. The '
-            'required fields are: {}'.format(str(config._REQUIRED_KEYS)))
-
+        kwargs = cls._get_client_kwargs(config_data)
         return cls(**kwargs)
 
     @classmethod
@@ -220,8 +198,6 @@ class GoogleAdsClient(object):
             login_customer_id: a str specifying a login customer ID.
             logging_config: a dict specifying logging config options.
         """
-        _validate_login_customer_id(login_customer_id)
-
         self.credentials = credentials
         self.developer_token = developer_token
         self.endpoint = endpoint
@@ -706,23 +682,6 @@ def _get_version(name):
                          'exist. Valid API versions are: "%s"' %
                                  (name, '", "'.join(_VALID_API_VERSIONS)))
     return version
-
-
-def _validate_login_customer_id(login_customer_id):
-    """Validates a login customer ID.
-
-    Args:
-        login_customer_id: a str from config indicating a login customer ID.
-
-    Raises:
-        ValueError: If the login customer ID is not an int in the
-            range 0 - 9999999999.
-    """
-    if login_customer_id is not None:
-        if not login_customer_id.isdigit() or len(login_customer_id) != 10:
-            raise ValueError('The specified login customer ID is invalid. '
-                             'It must be a ten digit number represented '
-                             'as a string, i.e. "1234567890"')
 
 
 def _format_json_object(obj):

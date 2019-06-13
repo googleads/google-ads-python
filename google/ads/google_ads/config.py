@@ -98,16 +98,45 @@ def load_from_env():
     return config_data
 
 
-def validate_dict(config_data, error_message=_MISSING_CONFIG_ERROR_MESSAGE):
-    """Validates that all required keys are present in configuration
+def validate_dict(config_data,
+                  required_keys_error_message=_MISSING_CONFIG_ERROR_MESSAGE):
+    """Validates the given configuration dict.
+
+    Validations that are performed include:
+        1. Ensuring all required keys are present.
+        2. If a login_customer_id is present ensure it's valid
 
     Args:
         config_data: a dict with configuration data.
-        error_message: an optional error message str to raise if validation
-            fails.
+        required_keys_error_message: an optional error message str to raise if
+            the given config does not contain all required keys. This is
+            configurable so that error messages can be more specific since key
+            names may vary depending on where config values are retrieved. For
+            example "client_id" is "GOOGLE_ADS_CLIENT_ID" when retrieved from
+            env.
 
     Raises:
         ValueError: If the dict does not contain all required config keys.
     """
     if not all(key in config_data for key in _REQUIRED_KEYS):
-        raise ValueError(error_message)
+        raise ValueError(required_keys_error_message)
+
+    if 'login_customer_id' in config_data:
+        validate_login_customer_id(config_data['login_customer_id'])
+
+
+def validate_login_customer_id(login_customer_id):
+    """Validates a login customer ID.
+
+    Args:
+        login_customer_id: a str from config indicating a login customer ID.
+
+    Raises:
+        ValueError: If the login customer ID is not an int in the
+            range 0 - 9999999999.
+    """
+    if login_customer_id is not None:
+        if not login_customer_id.isdigit() or len(login_customer_id) != 10:
+            raise ValueError('The specified login customer ID is invalid. '
+                             'It must be a ten digit number represented '
+                             'as a string, i.e. "1234567890"')

@@ -119,3 +119,32 @@ class ConfigTest(FileTestCase):
             config.validate_dict(config_data)
         except ValueError as ex:
             self.fail('test_validate_dict failed unexpectedly: {}'.format(ex))
+
+    def test_validate_dict_with_invalid_login_cid(self):
+        config_data = {key: 'test' for key in config._REQUIRED_KEYS}
+        config_data['login_customer_id'] = '123-456-5789'
+        self.assertRaises(
+            ValueError,
+            config.validate_dict,
+            config_data)
+
+    def test_validate_dict_with_valid_login_cid(self):
+        config_data = {key: 'test' for key in config._REQUIRED_KEYS}
+        config_data['login_customer_id'] = '1234567893'
+        try:
+            config.validate_dict(config_data)
+        except ValueError as ex:
+            self.fail('test_validate_dict_with_login_cid failed unexpectedly: '
+                      '{}'.format(ex))
+
+    def test_validate_login_customer_id_invalid(self):
+        self.assertRaises(
+            ValueError,
+            config.validate_login_customer_id,
+            '123-456-7890')
+
+    def test_validate_login_customer_id_too_short(self):
+        self.assertRaises(
+            ValueError,
+            config.validate_login_customer_id,
+            '123')

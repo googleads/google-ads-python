@@ -91,3 +91,14 @@ class OAuth2Tests(TestCase):
             result = oauth2.get_credentials(mock_config)
             mock_initializer.assert_called_once_with(
                 self.client_id, self.client_secret, self.refresh_token)
+
+    def test_get_credentials_installed_application_bad_config(self):
+        # using a config that is missing the refresh_token key
+        mock_config = {
+            'client_id': self.client_id,
+            'client_secret': self.client_secret}
+
+        self.assertRaises(
+            ValueError,
+            oauth2.get_credentials,
+            mock_config)

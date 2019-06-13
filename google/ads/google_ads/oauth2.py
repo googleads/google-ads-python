@@ -86,9 +86,17 @@ def get_credentials(config_data):
         An initialized credentials instance.
     """
     required_installed_app_keys = config.get_oauth2_installed_app_keys()
+    required_service_account_keys = config.get_oauth2_service_account_keys()
+
     if all(key in config_data for key in required_installed_app_keys):
         # Using the Installed App Flow
         return get_installed_app_credentials(
             config_data.get('client_id'),
             config_data.get('client_secret'),
             config_data.get('refresh_token'))
+    else:
+        raise ValueError('Your yaml file is incorrectly configured for OAuth2. '
+                         'You need to define credentials for either the OAuth2 '
+                         'installed application flow ({}) or service account '
+                         'flow ({}).'.format(required_installed_app_keys,
+                                             required_service_account_keys))

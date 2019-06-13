@@ -14,6 +14,8 @@
 """A set of functions to help initialize OAuth2 credentials."""
 
 
+import functools
+
 from google.oauth2.service_account import Credentials as ServiceAccountCreds
 from google.oauth2.credentials import Credentials as InstalledAppCredentials
 from google.auth.transport.requests import Request
@@ -21,6 +23,22 @@ from google.auth.transport.requests import Request
 _SERVICE_ACCOUNT_SCOPES = ['https://www.googleapis.com/auth/adwords']
 _DEFAULT_TOKEN_URI = 'https://accounts.google.com/o/oauth2/token'
 
+
+def _initialize_credentials_decorator(func):
+    """A decorator used to easily initialize credentials objects.
+
+    Returns:
+        An initialized credentials instance
+    """
+    @functools.wraps(func)
+    def initialize_credentials_wrapper(*args, **kwargs):
+        credentials = func(*args, **kwargs)
+        credentials.refresh(Request())
+        return credentials
+    return initialize_credentials_wrapper
+
+
+@_initialize_credentials_decorator
 def get_installed_app_credentials(
     client_id, client_secret, refresh_token, token_uri=_DEFAULT_TOKEN_URI):
     """Creates and returns an instance of oauth2.credentials.Credentials.
@@ -33,14 +51,12 @@ def get_installed_app_credentials(
     Returns:
         An instance of oauth2.credentials.Credentials
     """
-    credentials = InstalledAppCredentials(
+    return InstalledAppCredentials(
         None, client_id=client_id, client_secret=client_secret,
         refresh_token=refresh_token, token_uri=token_uri)
 
-    credentials.refresh(Request())
-    return credentials
 
-
+@_initialize_credentials_decorator
 def get_service_account_credentials(path_to_private_key_file, subject,
                                     scopes=_SERVICE_ACCOUNT_SCOPES):
     """Creates and returns an instance of oauth2.service_account.Credentials.
@@ -54,10 +70,5 @@ def get_service_account_credentials(path_to_private_key_file, subject,
     Returns:
         An instance of oauth2.credentials.Credentials
     """
-    credentials = ServiceAccountCreds.from_service_account_file(
-        path_to_private_key_file,
-        subject=subject,
-        scopes=scopes)
-
-    credentials.refresh(Request())
-    return credentials
+    return ServiceAccountCreds.from_service_account_file(
+        path_to_private_key_file, subject=subject, scopes=scopes)

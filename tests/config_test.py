@@ -191,3 +191,11 @@ class ConfigTest(FileTestCase):
             ValueError,
             config.validate_login_customer_id,
             '123')
+
+    def test_get_oauth2_installed_app_keys(self):
+        self.assertEqual(config.get_oauth2_installed_app_keys(),
+                         config._OAUTH2_INSTALLED_APP_KEYS)
+
+    def test_get_oauth2_service_account_keys(self):
+        self.assertEqual(config.get_oauth2_service_account_keys(),
+                         config._OAUTH2_SERVICE_ACCOUNT_KEYS)

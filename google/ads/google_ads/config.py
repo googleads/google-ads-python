@@ -154,3 +154,21 @@ def load_from_env():
                 'GOOGLE_ADS_LOGGING env variable should be in JSON format.')
 
     return config_data
+
+
+def get_oauth2_installed_app_keys():
+    """A getter that returns the required OAuth2 installed application keys.
+
+    Returns:
+        A tuple containing the required keys as strs.
+    """
+    return _OAUTH2_INSTALLED_APP_KEYS
+
+
+def get_oauth2_service_account_keys():
+    """A getter that returns the required OAuth2 service account keys.
+
+    Returns:
+        A tuple containing the required keys as strs.
+    """
+    return _OAUTH2_SERVICE_ACCOUNT_KEYS

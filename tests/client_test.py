@@ -81,8 +81,9 @@ class GoogleAdsClientTest(FileTestCase):
     """Tests for the google.ads.googleads.client.GoogleAdsClient class."""
 
     def _create_test_client(self, endpoint=None):
-        with mock.patch(
-            'google.ads.google_ads.client.InstalledAppCredentials'
+        with mock.patch.object(
+            Client.oauth2,
+            'get_installed_app_credentials'
         ) as mock_credentials:
             mock_credentials_instance = mock_credentials.return_value
             mock_credentials_instance.refresh_token = self.refresh_token

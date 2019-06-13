@@ -15,15 +15,12 @@
 
 import logging
 import logging.config
-import os
-import yaml
 import json
 import grpc
 from collections import namedtuple
 from importlib import import_module
 
 from google.auth.transport.requests import Request
-from google.oauth2.credentials import Credentials as InstalledAppCredentials
 from google.oauth2.service_account import Credentials as ServiceAccountCreds
 from google.protobuf.message import DecodeError
 

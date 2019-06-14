@@ -34,8 +34,7 @@ _KEYS_ENV_VARIABLES_MAP = {
 def _config_validation_decorator(func):
     """A decorator used to easily run validations on configs loaded into dicts.
 
-    Add this decorator to any new methods in this module that read library
-    configuration and return it as a dict.
+    Add this decorator to any method that returns the config as a dict.
 
     Raises:
         ValueError: If the configuration fails validation

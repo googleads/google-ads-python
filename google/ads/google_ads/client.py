@@ -125,8 +125,7 @@ class GoogleAdsClient(object):
             name: a str indicating the name of the type that is being retrieved;
                 e.g. you may specify "CampaignOperation" to retrieve a
                 CampaignOperation instance.
-            version: a str indicating the version of the Google Ads API to be
-                used.
+            version: a str indicating the the Google Ads API version to be used.
 
         Returns:
             A Message instance representing the desired type.
@@ -138,8 +137,8 @@ class GoogleAdsClient(object):
         try:
             message_type = getattr(_get_version(version).types, name)
         except AttributeError:
-            raise ValueError('Specified type "%s" does not exist in Google Ads '
-                             'API %s.' % (name, version))
+            raise ValueError('Specified type "{}" does not exist in Google Ads '
+                             'API %s.'.format(name, version))
         return message_type()
 
     def __init__(self, credentials, developer_token, endpoint=None,

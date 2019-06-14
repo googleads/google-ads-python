@@ -44,7 +44,7 @@ class method, the default behavior is to load a configuration file named
 **google-ads.yaml** located in your home directory. Included in this repository
 is a `template`_ you can use.
 
-For a complete walk-through of the OAuth Installed Application flow in Python, 
+For a complete walk-through of the OAuth Installed Application flow in Python,
 please refer to `this page of the wiki`_.
 
 OAuth2 Options
@@ -54,7 +54,7 @@ This client library can authenticate using one of two different OAuth2 flows, ei
 `Installed Application Flow`_ or the `Service Account Flow`_. When retrieving the configuration
 for these authentication flows, if configuration is present for _both_ flows the library will
 default to using the Installed Application Flow. If you wish to use the Service Account Flow
-you must make sure that the Installed Application Flow configuration values are not present
+you must make sure that the Installed Application Flow `configuration values`_ are not present
 in your configuration.
 
 Create a GoogleAdsClient
@@ -214,6 +214,7 @@ Authors
 
 .. _Installed Application Flow: https://developers.google.com/google-ads/api/docs/client-libs/dotnet/oauth-installed
 .. _Service Account Flow: https://developers.google.com/google-ads/api/docs/client-libs/dotnet/oauth-service
+.. _configuration values: https://github.com/googleads/google-ads-python/blob/master/google-ads.yaml#L1
 .. _pip: https://pip.pypa.io/en/stable/installing
 .. _blog post: https://ads-developers.googleblog.com/2019/04/python-2-deprecation-in-ads-api-client.html
 .. _template: https://github.com/googleads/google-ads-python/blob/master/google-ads.yaml

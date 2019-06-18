@@ -68,20 +68,20 @@ class MutateJobServiceGrpcTransport(object):
         # gRPC uses objects called "stubs" that are bound to the
         # channel and provide a basic method for each RPC.
         self._stubs = {
-            'mutate_job_service_stub':
-            mutate_job_service_pb2_grpc.MutateJobServiceStub(channel),
+            'mutate_job_service_stub': mutate_job_service_pb2_grpc.MutateJobServiceStub(channel),
         }
 
         # Because this API includes a method that returns a
         # long-running operation (proto: google.longrunning.Operation),
         # instantiate an LRO client.
-        self._operations_client = google.api_core.operations_v1.OperationsClient(
-            channel)
+        self._operations_client = google.api_core.operations_v1.OperationsClient(channel)
 
     @classmethod
-    def create_channel(cls,
-                       address='googleads.googleapis.com:443',
-                       credentials=None):
+    def create_channel(
+                cls,
+                address='googleads.googleapis.com:443',
+                credentials=None,
+                **kwargs):
         """Create and return a gRPC channel object.
 
         Args:
@@ -91,6 +91,8 @@ class MutateJobServiceGrpcTransport(object):
                 credentials identify this application to the service. If
                 none are specified, the client will attempt to ascertain
                 the credentials from the environment.
+            kwargs (dict): Keyword arguments, which are passed to the
+                channel creation.
 
         Returns:
             grpc.Channel: A gRPC channel object.
@@ -99,6 +101,7 @@ class MutateJobServiceGrpcTransport(object):
             address,
             credentials=credentials,
             scopes=cls._OAUTH_SCOPES,
+            **kwargs
         )
 
     @property

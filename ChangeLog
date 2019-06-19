@@ -1,3 +1,6 @@
+* 2.4.1:
+- Fix bug preventing login_customer_id to be loaded as an int
+
 * 2.4.0:
 - Add utf-8 encoding declaration in generated proto files
 - Add Service Account support

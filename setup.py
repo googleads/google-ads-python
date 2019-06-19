@@ -35,7 +35,7 @@ with io.open('README.rst', 'r', encoding='utf-8') as readme_file:
 
 setup(
     name='google-ads',
-    version='2.4.0',
+    version='2.4.1',
     author='Google LLC',
     author_email='googleapis-packages@google.com',
     classifiers=[

@@ -47,6 +47,22 @@ def _config_validation_decorator(func):
     return validation_wrapper
 
 
+def _config_parser_decorator(func):
+    """A decorator used to easily parse config values.
+
+    Since configs can be loaded from different locations such as env vars or
+    from YAML files it's possible that they may have inconsistent types that
+    need to be parsed to a different type. Add this decorator to any method
+    that returns the config as a dict.
+    """
+    @functools.wraps(func)
+    def parser_wrapper(*args, **kwargs):
+        config_dict = func(*args, **kwargs)
+        parsed_config = convert_login_customer_id_to_str(config_dict)
+        return parsed_config
+    return parser_wrapper
+
+
 def validate_dict(config_data):
     """Validates the given configuration dict.
 
@@ -87,6 +103,7 @@ def validate_login_customer_id(login_customer_id):
 
 
 @_config_validation_decorator
+@_config_parser_decorator
 def load_from_yaml_file(path=None):
     """Loads configuration data from a YAML file and returns it as a dict.
 
@@ -114,6 +131,7 @@ def load_from_yaml_file(path=None):
 
 
 @_config_validation_decorator
+@_config_parser_decorator
 def parse_yaml_document_to_dict(yaml_doc):
     """Parses a YAML document to a dict.
 
@@ -131,6 +149,7 @@ def parse_yaml_document_to_dict(yaml_doc):
 
 
 @_config_validation_decorator
+@_config_parser_decorator
 def load_from_env():
     """Loads configuration data from the environment and returns it as a dict.
 
@@ -171,3 +190,24 @@ def get_oauth2_service_account_keys():
         A tuple containing the required keys as strs.
     """
     return _OAUTH2_SERVICE_ACCOUNT_KEYS
+
+
+def convert_login_customer_id_to_str(config_data):
+    """Parses a config dict's login_customer_id attr value to a str.
+
+    Like many values from YAML it's possible for login_customer_id to
+    either be a str or an int. Since we actually run validations on this
+    value before making requests it's important to parse it to a str.
+
+    Args:
+        config_data: A config dict object.
+
+    Returns:
+        The same config dict object with a mutated login_customer_id attr.
+    """
+    login_customer_id = config_data.get('login_customer_id')
+
+    if login_customer_id:
+        config_data['login_customer_id'] = str(login_customer_id)
+
+    return config_data

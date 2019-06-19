@@ -75,6 +75,23 @@ class ConfigTest(FileTestCase):
         self.assertEqual(result['client_secret'], self.client_secret)
         self.assertEqual(result['refresh_token'], self.refresh_token)
 
+    def test_load_from_yaml_file_login_cid_int(self):
+        login_cid_int = 1234567890
+        file_path = os.path.join(os.path.expanduser('~'), 'google-ads.yaml')
+        self.fs.create_file(file_path, contents=yaml.safe_dump({
+            'login_customer_id': login_cid_int,
+            'developer_token': self.developer_token,
+            'client_id': self.client_id,
+            'client_secret': self.client_secret,
+            'refresh_token': self.refresh_token}))
+
+        result = config.load_from_yaml_file()
+
+        self.assertEqual(result['developer_token'], self.developer_token)
+        self.assertEqual(result['client_id'], self.client_id)
+        self.assertEqual(result['client_secret'], self.client_secret)
+        self.assertEqual(result['refresh_token'], self.refresh_token)
+
     def test_parse_yaml_document_to_dict(self):
         yaml_doc = ('client_id: {}\n'
                     'client_secret: {}\n'
@@ -199,3 +216,19 @@ class ConfigTest(FileTestCase):
     def test_get_oauth2_service_account_keys(self):
         self.assertEqual(config.get_oauth2_service_account_keys(),
                          config._OAUTH2_SERVICE_ACCOUNT_KEYS)
+
+    def test_convert_login_customer_id_to_str_with_int(self):
+        config_data = {'login_customer_id': 1234567890}
+        expected = {'login_customer_id': '1234567890'}
+        self.assertEqual(config.convert_login_customer_id_to_str(config_data),
+                         expected)
+
+    def test_parse_login_customer_id_with_str(self):
+        config_data = {'login_customer_id': '1234567890'}
+        self.assertEqual(config.convert_login_customer_id_to_str(config_data),
+                         config_data)
+
+    def test_parse_login_customer_id_with_none(self):
+        config_data = {'not_login_customer_id': 1234567890}
+        self.assertEqual(config.convert_login_customer_id_to_str(config_data),
+                         config_data)

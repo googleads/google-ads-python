@@ -55,14 +55,10 @@ class GoogleAdsClient(object):
         Raises:
             ValueError: If the configuration lacks a required field.
         """
-        login_customer_id = config_data.get('login_customer_id')
-        login_customer_id = str(
-                login_customer_id) if login_customer_id else None
-
         return {'credentials': oauth2.get_credentials(config_data),
                 'developer_token': config_data.get('developer_token'),
                 'endpoint': config_data.get('endpoint'),
-                'login_customer_id': login_customer_id,
+                'login_customer_id': config_data.get('login_customer_id'),
                 'logging_config': config_data.get('logging')}
 
     @classmethod

@@ -34,7 +34,6 @@ _PROTO_TEMPLATE = '%s_pb2'
 _VALID_API_VERSIONS = ['v1']
 _DEFAULT_VERSION = _VALID_API_VERSIONS[0]
 _REQUEST_ID_KEY = 'request-id'
-_ENV_PREFIX = 'GOOGLE_ADS_'
 GRPC_CHANNEL_OPTIONS = [
     ('grpc.max_metadata_size', 16 * 1024 * 1024),
     ('grpc.max_receive_message_length', 64 * 1024 * 1024)]

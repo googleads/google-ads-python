@@ -35,11 +35,8 @@ _VALID_API_VERSIONS = ['v1']
 _DEFAULT_VERSION = _VALID_API_VERSIONS[0]
 _REQUEST_ID_KEY = 'request-id'
 _ENV_PREFIX = 'GOOGLE_ADS_'
-_KEYS_ENV_VARIABLES_MAP = {
-    key: _ENV_PREFIX + key.upper() for key in
-    list(_REQUIRED_KEYS) + ['login_customer_id', 'endpoint', 'logging']}
 GRPC_CHANNEL_OPTIONS = [
-    ('grpc.max_metadata_size', 64 * 1024 * 1024),
+    ('grpc.max_metadata_size', 16 * 1024 * 1024),
     ('grpc.max_receive_message_length', 64 * 1024 * 1024)]
 
 class GoogleAdsClient(object):

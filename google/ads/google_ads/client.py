@@ -15,157 +15,52 @@
 
 import logging
 import logging.config
-import os
-import yaml
 import json
 import grpc
 from collections import namedtuple
 from importlib import import_module
 
-from google.auth.transport.requests import Request
-from google.oauth2.credentials import Credentials
-from google.ads.google_ads.errors import GoogleAdsException
 from google.protobuf.message import DecodeError
+
+from google.ads.google_ads import config
+from google.ads.google_ads import oauth2
+from google.ads.google_ads.errors import GoogleAdsException
 
 _logger = logging.getLogger(__name__)
 
-_REQUIRED_KEYS = ('client_id', 'client_secret', 'refresh_token',
-                  'developer_token')
 _SERVICE_CLIENT_TEMPLATE = '%sClient'
 _SERVICE_GRPC_TRANSPORT_TEMPLATE = '%sGrpcTransport'
 _PROTO_TEMPLATE = '%s_pb2'
-_DEFAULT_TOKEN_URI = 'https://accounts.google.com/o/oauth2/token'
 _VALID_API_VERSIONS = ['v1']
 _DEFAULT_VERSION = _VALID_API_VERSIONS[0]
 _REQUEST_ID_KEY = 'request-id'
-_ENV_PREFIX = 'GOOGLE_ADS_'
-_KEYS_ENV_VARIABLES_MAP = {
-    key: _ENV_PREFIX + key.upper() for key in
-    list(_REQUIRED_KEYS) + ['login_customer_id', 'endpoint', 'logging']
-}
 
 class GoogleAdsClient(object):
     """Google Ads client used to configure settings and fetch services."""
 
     @classmethod
-    def _get_client_kwargs(cls, config_data, error_message):
-        """Utility function used to load client kwargs from configuration data
-        dictionary.
+    def _get_client_kwargs(cls, config_data):
+        """Converts configuration dict into kwargs required by the client.
 
         Args:
             config_data: a dict containing client configuration.
-            error_message: error message raised when config_data lacks a
-                required key
 
         Returns:
-            A dict containing configuration data that will be provided to the
-            GoogleAdsClient initializer as keyword arguments.
+            A dict containing kwargs that will be provided to the
+            GoogleAdsClient initializer.
 
         Raises:
             ValueError: If the configuration lacks a required field.
         """
-        if all(required_key in config_data for required_key in _REQUIRED_KEYS):
-            credentials = Credentials(
-                None,
-                refresh_token=config_data['refresh_token'],
-                client_id=config_data['client_id'],
-                client_secret=config_data['client_secret'],
-                token_uri=_DEFAULT_TOKEN_URI)
-            credentials.refresh(Request())
-
-            login_customer_id = config_data.get('login_customer_id')
-            login_customer_id = str(
+        login_customer_id = config_data.get('login_customer_id')
+        login_customer_id = str(
                 login_customer_id) if login_customer_id else None
 
-            return {'credentials': credentials,
-                    'developer_token': config_data['developer_token'],
-                    'endpoint': config_data.get('endpoint'),
-                    'login_customer_id': login_customer_id,
-                    'logging_config': config_data.get('logging')}
-        else:
-            raise ValueError(error_message)
-
-    @classmethod
-    def _get_client_kwargs_from_env(cls):
-        """Utility function used to load client kwargs from env variables.
-
-        Returns:
-            A dict containing configuration data that will be provided to the
-            GoogleAdsClient initializer as keyword arguments.
-
-        Raises:
-            ValueError: If the environment lacks a required field or
-                GOOGLE_ADS_LOGGING env variable is not in JSON format.
-        """
-        config_data = {
-            key: os.environ[env_variable]
-            for key, env_variable in _KEYS_ENV_VARIABLES_MAP.items()
-            if env_variable in os.environ
-        }
-        if 'logging' in config_data.keys():
-            try:
-                config_data['logging'] = json.loads(config_data['logging'])
-            except json.JSONDecodeError:
-                raise ValueError(
-                    'GOOGLE_ADS_LOGGING env variable should be in JSON format.'
-                )
-        return cls._get_client_kwargs(
-            config_data,
-            'A required variable was not found in the environment. The '
-            'required environment variables are: %s'
-            % str(
-                tuple(
-                    v for k, v in _KEYS_ENV_VARIABLES_MAP.items()
-                    if k in _REQUIRED_KEYS
-                )
-            )
-        )
-
-    @classmethod
-    def _get_client_kwargs_from_yaml(cls, yaml_str):
-        """Utility function used to load client kwargs from YAML string.
-
-        Args:
-            yaml_str: a str containing client configuration in YAML format.
-
-        Returns:
-            A dict containing configuration data that will be provided to the
-            GoogleAdsClient initializer as keyword arguments.
-
-        Raises:
-            ValueError: If the configuration lacks a required field.
-        """
-        config_data = yaml.safe_load(yaml_str) or {}
-        return cls._get_client_kwargs(
-            config_data,
-            'A required field in the configuration data was not found. The '
-            'required fields are: %s' % str(_REQUIRED_KEYS)
-        )
-
-    @classmethod
-    def get_type(cls, name, version=_DEFAULT_VERSION):
-        """Returns the specified common, enum, error, or resource type.
-
-        Args:
-            name: a str indicating the name of the type that is being retrieved;
-                e.g. you may specify "CampaignOperation" to retrieve a
-                CampaignOperation instance.
-            version: a str indicating the version of the Google Ads API to be
-                used.
-
-        Returns:
-            A Message instance representing the desired type.
-
-        Raises:
-            AttributeError: If the type for the specified name doesn't exist
-                in the given version.
-        """
-        try:
-            message_type = getattr(_get_version(version).types, name)
-        except AttributeError:
-            raise ValueError('Specified type "%s" does not exist in Google Ads '
-                             'API %s.' % (name, version))
-        return message_type()
+        return {'credentials': oauth2.get_credentials(config_data),
+                'developer_token': config_data.get('developer_token'),
+                'endpoint': config_data.get('endpoint'),
+                'login_customer_id': login_customer_id,
+                'logging_config': config_data.get('logging')}
 
     @classmethod
     def load_from_env(cls):
@@ -178,7 +73,9 @@ class GoogleAdsClient(object):
         Raises:
             ValueError: If the configuration lacks a required field.
         """
-        return cls(**cls._get_client_kwargs_from_env())
+        config_data = config.load_from_env()
+        kwargs = cls._get_client_kwargs(config_data)
+        return cls(**kwargs)
 
     @classmethod
     def load_from_string(cls, yaml_str):
@@ -195,7 +92,9 @@ class GoogleAdsClient(object):
         Raises:
             ValueError: If the configuration lacks a required field.
         """
-        return cls(**cls._get_client_kwargs_from_yaml(yaml_str))
+        config_data = config.parse_yaml_document_to_dict(yaml_str)
+        kwargs = cls._get_client_kwargs(config_data)
+        return cls(**kwargs)
 
     @classmethod
     def load_from_storage(cls, path=None):
@@ -214,16 +113,33 @@ class GoogleAdsClient(object):
             IOError: If the configuration file can't be loaded.
             ValueError: If the configuration file lacks a required field.
         """
-        if path is None:
-            path = os.path.join(os.path.expanduser('~'), 'google-ads.yaml')
+        config_data = config.load_from_yaml_file(path)
+        kwargs = cls._get_client_kwargs(config_data)
+        return cls(**kwargs)
 
-        if not os.path.isabs(path):
-            path = os.path.expanduser(path)
+    @classmethod
+    def get_type(cls, name, version=_DEFAULT_VERSION):
+        """Returns the specified common, enum, error, or resource type.
 
-        with open(path, 'rb') as handle:
-            yaml_str = handle.read()
+        Args:
+            name: a str indicating the name of the type that is being retrieved;
+                e.g. you may specify "CampaignOperation" to retrieve a
+                CampaignOperation instance.
+            version: a str indicating the the Google Ads API version to be used.
 
-        return cls.load_from_string(yaml_str)
+        Returns:
+            A Message instance representing the desired type.
+
+        Raises:
+            AttributeError: If the type for the specified name doesn't exist
+                in the given version.
+        """
+        try:
+            message_type = getattr(_get_version(version).types, name)
+        except AttributeError:
+            raise ValueError('Specified type "{}" does not exist in Google Ads '
+                             'API %s.'.format(name, version))
+        return message_type()
 
     def __init__(self, credentials, developer_token, endpoint=None,
                  login_customer_id=None, logging_config=None):
@@ -236,8 +152,6 @@ class GoogleAdsClient(object):
             login_customer_id: a str specifying a login customer ID.
             logging_config: a dict specifying logging config options.
         """
-        _validate_login_customer_id(login_customer_id)
-
         self.credentials = credentials
         self.developer_token = developer_token
         self.endpoint = endpoint
@@ -722,23 +636,6 @@ def _get_version(name):
                          'exist. Valid API versions are: "%s"' %
                                  (name, '", "'.join(_VALID_API_VERSIONS)))
     return version
-
-
-def _validate_login_customer_id(login_customer_id):
-    """Validates a login customer ID.
-
-    Args:
-        login_customer_id: a str from config indicating a login customer ID.
-
-    Raises:
-        ValueError: If the login customer ID is not an int in the
-            range 0 - 9999999999.
-    """
-    if login_customer_id is not None:
-        if not login_customer_id.isdigit() or len(login_customer_id) != 10:
-            raise ValueError('The specified login customer ID is invalid. '
-                             'It must be a ten digit number represented '
-                             'as a string, i.e. "1234567890"')
 
 
 def _format_json_object(obj):

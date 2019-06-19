@@ -16,6 +16,11 @@ Requirements
 * `pip`_
 
 
+Documentation
+-------------
+This README has general information to get you started with the library, but more
+extensive documentation can be found on our `Developer Site`_.
+
 Getting started
 ---------------
 
@@ -33,8 +38,12 @@ Configuration file setup
 ########################
 
 To authenticate your API calls, you must specify your **client ID**,
-**client secret**, **refresh token**, **developer token**, and, if
-you are authenticating with a manager account, a **login customer id**.
+**client secret**, **refresh token**, **developer token**, or, if you
+are authenticating via a service account you will instead need to specify
+a **path_to_private_key_file** and **delegate_account**. If you
+are authenticating with a manager account you will need to provide a
+**login customer id** configuration value.
+
 If you have not yet created a client ID, see the `Authorization guide`_
 and the `authentication samples`_ to get started. Likewise, see
 `Obtain your developer token`_ if you do not yet have one.
@@ -44,8 +53,20 @@ class method, the default behavior is to load a configuration file named
 **google-ads.yaml** located in your home directory. Included in this repository
 is a `template`_ you can use.
 
-For a complete walk-through of the OAuth Installed Application flow in Python, 
-please refer to `this page of the wiki`_.
+For a complete walk-through of how to configure this library, please refer
+to our `configuration documentation`_.
+
+OAuth2 Options
+##############
+
+This client library can authenticate using one of three different OAuth2 flows, either the
+`Installed Application Flow`_, the `Web Application Flow`_ or the `Service Account Flow`_.
+The Installed Application Flow and Web Application Flow use the same credentials and are
+functionally identical in terms of configuring this library. When retrieving the
+configuration for these authentication flows, if configuration is present
+for _both_ types of flows the library will default to using the Installed/Web Application
+Flow. If you wish to use the Service Account Flow you must make sure that the Installed/Web
+Application Flow `configuration values`_ are not present in your configuration.
 
 Create a GoogleAdsClient
 ########################
@@ -58,21 +79,32 @@ configuration file named **google-ads.yaml** stored in your home directory:
 
 .. code-block:: python
 
-  client = google.ads.google_ads.client.GoogleAdsClient.load_from_storage()
+  from google.ads.google_ads.client import GoogleAdsClient
+  client = GoogleAdsClient.load_from_storage()
 
 Using environment variables
 ***************************
 
-You can also retrieve it exporting environment variables.
+You can also retrieve it by exporting environment variables.
 
 * Required:
 
 .. code-block:: bash
 
+  export GOOGLE_ADS_DEVELOPER_TOKEN=INSERT_DEVELOPER_TOKEN_HERE
+
+* Required for OAuth2 Installed Application Flow
+
+.. code-block::bash
+
   export GOOGLE_ADS_CLIENT_ID=INSERT_OAUTH2_CLIENT_ID_HERE
   export GOOGLE_ADS_CLIENT_SECRET=INSERT_OAUTH2_CLIENT_SECRET_HERE
   export GOOGLE_ADS_REFRESH_TOKEN=INSERT_REFRESH_TOKEN_HERE
-  export GOOGLE_ADS_DEVELOPER_TOKEN=INSERT_DEVELOPER_TOKEN_HERE
+
+* Required for OAuth2 Service Account Flow:
+
+  export GOOGLE_ADS_PATH_TO_PRIVATE_KEY_FILE=INSERT_PRIVATE_KEY_PATH_HERE
+  export GOOGLE_ADS_DELEGATED_ACCOUNT=INSERT_DELEGATED_ACCOUNT_HERE
 
 * Optional:
 
@@ -94,8 +126,11 @@ Then run the following to retrieve a GoogleAdsClient instance:
 
 .. code-block:: python
 
-  client = google.ads.google_ads.client.GoogleAdsClient.load_from_env()
+  from google.ads.google_ads.client import GoogleAdsClient
+  client = GoogleAdsClient.load_from_env()
 
+The `configuration documentation`_ has more information on how these different
+sets of variables are set and retrieved.
 
 Get types and service clients
 #############################
@@ -113,6 +148,8 @@ retrieve the corresponding service client instance:
 .. code-block:: python
 
   google_ads_service = client.get_service('GoogleAdsService')
+
+More details can be found in our `proto getters documentation`_.
 
 API versioning
 ################################
@@ -192,11 +229,17 @@ Authors
 * `David Wihl`_
 * `Ben Karl`_
 
+.. _Developer Site: https://developers.google.com/google-ads/api/docs/client-libs/python/
+.. _Installed Application Flow: https://developers.google.com/google-ads/api/docs/client-libs/python/oauth-installed
+.. _Web Application Flow: https://developers.google.com/google-ads/api/docs/client-libs/python/oauth-web
+.. _Service Account Flow: https://developers.google.com/google-ads/api/docs/client-libs/python/oauth-service
+.. _configuration values: https://github.com/googleads/google-ads-python/blob/master/google-ads.yaml#L1
 .. _pip: https://pip.pypa.io/en/stable/installing
 .. _blog post: https://ads-developers.googleblog.com/2019/04/python-2-deprecation-in-ads-api-client.html
 .. _template: https://github.com/googleads/google-ads-python/blob/master/google-ads.yaml
-.. _this page of the wiki: https://github.com/googleads/google-ads-python/wiki/OAuth-Installed-Application-Flow
+.. _configuration documentation: https://developers.google.com/google-ads/api/docs/client-libs/python/configuration
 .. _Authorization guide: https://developers.google.com/google-ads/api/docs/oauth/overview
+.. _proto getters documentation: https://developers.google.com/google-ads/api/docs/client-libs/python/proto-getters
 .. _authentication samples: https://github.com/googleads/google-ads-python/blob/master/examples/authentication
 .. _Obtain your developer token: https://developers.google.com/google-ads/api/docs/first-call/dev-token
 .. _google-ads.yaml: https://github.com/googleads/google-ads-python/blob/master/google-ads.yaml

@@ -13,7 +13,6 @@
 # limitations under the License.
 """Tests for the Google Ads API client library."""
 
-
 import os
 import mock
 import yaml
@@ -31,25 +30,16 @@ from google.ads.google_ads.errors import GoogleAdsException
 latest_version = Client._DEFAULT_VERSION
 valid_versions = Client._VALID_API_VERSIONS
 
-errors = import_module('google.ads.google_ads.%s.proto.errors' % latest_version)
+errors_path = 'google.ads.google_ads.{}.proto.errors'.format(latest_version)
+services_path = 'google.ads.google_ads.{}.proto.services'.format(latest_version)
+
+errors = import_module(errors_path)
+services = import_module(services_path)
+
 error_protos = errors.errors_pb2
-services = import_module('google.ads.google_ads.%s.proto.services' %
-                         latest_version)
 google_ads_service_pb2 = services.google_ads_service_pb2
 
 class ModuleLevelTest(TestCase):
-
-    def test_validate_login_customer_id_invalid(self):
-        self.assertRaises(
-            ValueError,
-            Client._validate_login_customer_id,
-            '123-456-7890')
-
-    def test_validate_login_customer_id_too_short(self):
-        self.assertRaises(
-            ValueError,
-            Client._validate_login_customer_id,
-            '123')
 
     def test_parse_metadata_to_json(self):
         mock_metadata = [
@@ -58,7 +48,7 @@ class ModuleLevelTest(TestCase):
             ('developer-token', '0000000000'),
             ('login-customer-id', '9999999999')]
 
-        result = (Client._parse_metadata_to_json(mock_metadata))
+        result = Client._parse_metadata_to_json(mock_metadata)
 
         self.assertEqual(result, '{\n'
                                  '  "developer-token": "REDACTED",\n'
@@ -91,8 +81,10 @@ class GoogleAdsClientTest(FileTestCase):
     """Tests for the google.ads.googleads.client.GoogleAdsClient class."""
 
     def _create_test_client(self, endpoint=None):
-        with mock.patch(
-                'google.ads.google_ads.client.Credentials') as mock_credentials:
+        with mock.patch.object(
+            Client.oauth2,
+            'get_installed_app_credentials'
+        ) as mock_credentials:
             mock_credentials_instance = mock_credentials.return_value
             mock_credentials_instance.refresh_token = self.refresh_token
             mock_credentials_instance.client_id = self.client_id
@@ -108,6 +100,9 @@ class GoogleAdsClientTest(FileTestCase):
         self.client_secret = 'client_secret_987654321'
         self.refresh_token = 'refresh'
         self.login_customer_id = '1234567890'
+        self.path_to_private_key_file = '/test/path/to/config.json'
+        self.delegated_account = 'delegated@account.com'
+
 
     def test_get_client_kwargs_login_customer_id(self):
         config = {
@@ -115,15 +110,14 @@ class GoogleAdsClientTest(FileTestCase):
             'client_id': self.client_id,
             'client_secret': self.client_secret,
             'refresh_token': self.refresh_token,
-            'login_customer_id': self.login_customer_id
-        }
+            'login_customer_id': self.login_customer_id}
+        mock_credentials_instance = mock.Mock()
 
-        with mock.patch(
-                'google.ads.google_ads.client.Credentials') as mock_credentials:
-            mock_credentials_instance = mock.Mock()
-            mock_credentials.return_value = mock_credentials_instance
-            result = (Client.GoogleAdsClient.
-                      _get_client_kwargs(config, ''))
+        with mock.patch.object(
+            Client.oauth2,
+            'get_installed_app_credentials',
+            return_value=mock_credentials_instance):
+            result = Client.GoogleAdsClient._get_client_kwargs(config)
             self.assertEqual(
                 result,
                 {
@@ -140,15 +134,14 @@ class GoogleAdsClientTest(FileTestCase):
             'client_id': self.client_id,
             'client_secret': self.client_secret,
             'refresh_token': self.refresh_token,
-            'login_customer_id': None
-        }
+            'login_customer_id': None}
+        mock_credentials_instance = mock.Mock()
 
-        with mock.patch(
-                'google.ads.google_ads.client.Credentials') as mock_credentials:
-            mock_credentials_instance = mock.Mock()
-            mock_credentials.return_value = mock_credentials_instance
-            result = (Client.GoogleAdsClient.
-                      _get_client_kwargs(config, ''))
+        with mock.patch.object(
+            Client.oauth2,
+            'get_installed_app_credentials',
+            return_value=mock_credentials_instance):
+            result = Client.GoogleAdsClient._get_client_kwargs(config)
             self.assertEqual(
                 result,
                 {
@@ -164,14 +157,14 @@ class GoogleAdsClientTest(FileTestCase):
             'developer_token': self.developer_token,
             'client_id': self.client_id,
             'client_secret': self.client_secret,
-            'refresh_token': self.refresh_token
-        }
+            'refresh_token': self.refresh_token}
+        mock_credentials_instance = mock.Mock()
 
-        with mock.patch(
-                'google.ads.google_ads.client.Credentials') as mock_credentials:
-            mock_credentials_instance = mock.Mock()
-            mock_credentials.return_value = mock_credentials_instance
-            result = (Client.GoogleAdsClient._get_client_kwargs(config, ''))
+        with mock.patch.object(
+            Client.oauth2,
+            'get_installed_app_credentials',
+            return_value=mock_credentials_instance):
+            result = Client.GoogleAdsClient._get_client_kwargs(config)
             self.assertEqual(
                 result,
                 {
@@ -189,15 +182,14 @@ class GoogleAdsClientTest(FileTestCase):
             'client_id': self.client_id,
             'client_secret': self.client_secret,
             'refresh_token': self.refresh_token,
-            'endpoint': endpoint
-        }
+            'endpoint': endpoint}
+        mock_credentials_instance = mock.Mock()
 
-        with mock.patch(
-                'google.ads.google_ads.client.Credentials') as mock_credentials:
-            mock_credentials_instance = mock.Mock()
-            mock_credentials.return_value = mock_credentials_instance
-            result = (Client.GoogleAdsClient.
-                      _get_client_kwargs(config, ''))
+        with mock.patch.object(
+            Client.oauth2,
+            'get_installed_app_credentials',
+            return_value=mock_credentials_instance):
+            result = Client.GoogleAdsClient._get_client_kwargs(config)
             self.assertEqual(
                 result,
                 {
@@ -208,77 +200,31 @@ class GoogleAdsClientTest(FileTestCase):
                     'logging_config': None
                 })
 
-    def test_get_client_kwargs_from_env(self):
-        environ = {
-            'GOOGLE_ADS_DEVELOPER_TOKEN': self.developer_token,
-            'GOOGLE_ADS_CLIENT_ID': self.client_id,
-            'GOOGLE_ADS_CLIENT_SECRET': self.client_secret,
-            'GOOGLE_ADS_REFRESH_TOKEN': self.refresh_token,
-            'GOOGLE_ADS_LOGGING': '{"test": true}'
-        }
-        with mock.patch('os.environ', environ):
-            with mock.patch(
-                'google.ads.google_ads.client.Credentials'
-            ) as mock_credentials:
-                mock_credentials_instance = mock.Mock()
-                mock_credentials.return_value = mock_credentials_instance
-                result = (Client.GoogleAdsClient.
-                          _get_client_kwargs_from_env())
-                self.assertEqual(
-                    result,
-                    {
-                        'credentials': mock_credentials_instance,
-                        'developer_token': self.developer_token,
-                        'endpoint': None,
-                        'login_customer_id': None,
-                        'logging_config': {'test': True}
-                    })
-
-    def test_get_client_kwargs_from_yaml(self):
-        config = {
-            'developer_token': self.developer_token,
-            'client_id': self.client_id,
-            'client_secret': self.client_secret,
-            'refresh_token': self.refresh_token
-        }
-
-        yaml_str = yaml.safe_dump(config)
-
-        with mock.patch(
-                'google.ads.google_ads.client.Credentials') as mock_credentials:
-            mock_credentials_instance = mock.Mock()
-            mock_credentials.return_value = mock_credentials_instance
-            result = (Client.GoogleAdsClient._get_client_kwargs_from_yaml(
-                      yaml_str))
-            self.assertEqual(
-                result,
-                {
-                    'credentials': mock_credentials_instance,
-                    'developer_token': self.developer_token,
-                    'endpoint': None,
-                    'login_customer_id': None,
-                    'logging_config': None
-                })
-
     def test_load_from_storage(self):
         config = {
             'developer_token': self.developer_token,
             'client_id': self.client_id,
             'client_secret': self.client_secret,
-            'refresh_token': self.refresh_token
-        }
+            'refresh_token': self.refresh_token}
 
         file_path = os.path.join(os.path.expanduser('~'), 'google-ads.yaml')
         self.fs.create_file(file_path, contents=yaml.safe_dump(config))
+        mock_credentials_instance = mock.Mock()
 
-        with mock.patch('google.ads.google_ads.client.GoogleAdsClient'
-                        '.__init__') as mock_client_init, \
-            mock.patch(
-                'google.ads.google_ads.client.Credentials') as mock_credentials:
-            mock_client_init.return_value = None
-            mock_credentials_instance = mock.Mock()
-            mock_credentials.return_value = mock_credentials_instance
+        with mock.patch.object(
+            Client.GoogleAdsClient,
+            '__init__',
+            return_value=None
+        ) as mock_client_init, mock.patch.object(
+            Client.oauth2,
+            'get_installed_app_credentials',
+            return_value=mock_credentials_instance
+        ) as mock_credentials:
             Client.GoogleAdsClient.load_from_storage()
+            mock_credentials.assert_called_once_with(
+                config.get('client_id'),
+                config.get('client_secret'),
+                config.get('refresh_token'))
             mock_client_init.assert_called_once_with(
                 credentials=mock_credentials_instance,
                 developer_token=self.developer_token,
@@ -291,19 +237,20 @@ class GoogleAdsClientTest(FileTestCase):
             'developer_token': self.developer_token,
             'client_id': self.client_id,
             'client_secret': self.client_secret,
-            'refresh_token': self.refresh_token
-        }
+            'refresh_token': self.refresh_token}
 
         file_path = 'test/google-ads.yaml'
         self.fs.create_file(file_path, contents=yaml.safe_dump(config))
+        mock_credentials_instance = mock.Mock()
 
-        with mock.patch('google.ads.google_ads.client.GoogleAdsClient'
-                        '.__init__') as mock_client_init, \
-            mock.patch(
-                'google.ads.google_ads.client.Credentials') as mock_credentials:
-            mock_client_init.return_value = None
-            mock_credentials_instance = mock.Mock()
-            mock_credentials.return_value = mock_credentials_instance
+        with mock.patch.object(
+            Client.GoogleAdsClient,
+            '__init__',
+            return_value=None
+        ) as mock_client_init, mock.patch.object(
+            Client.oauth2,
+            'get_installed_app_credentials',
+            return_value=mock_credentials_instance):
             Client.GoogleAdsClient.load_from_storage(path=file_path)
             mock_client_init.assert_called_once_with(
                 credentials=mock_credentials_instance,
@@ -335,13 +282,56 @@ class GoogleAdsClientTest(FileTestCase):
             Client.GoogleAdsClient.load_from_storage,
             path=file_path)
 
-    def test_init_validate_login_customer_id(self):
-        with mock.patch(
-            'google.ads.google_ads.client._validate_login_customer_id'
-        ) as f:
-            Client.GoogleAdsClient(
-                None, None, login_customer_id='1234567890')
-            self.assertTrue(f.called)
+    def test_load_from_storage_service_account_config(self):
+        config = {
+            'developer_token': self.developer_token,
+            'path_to_private_key_file': self.path_to_private_key_file,
+            'delegated_account': self.delegated_account
+        }
+
+        file_path = os.path.join(os.path.expanduser('~'), 'google-ads.yaml')
+        self.fs.create_file(file_path, contents=yaml.safe_dump(config))
+        mock_credentials_instance = mock.Mock()
+
+        with mock.patch.object(
+            Client.GoogleAdsClient,
+            '__init__',
+            return_value=None
+        ) as mock_client_init, mock.patch.object(
+            Client.oauth2,
+            'get_service_account_credentials',
+            return_value=mock_credentials_instance
+        ) as mock_credentials:
+            Client.GoogleAdsClient.load_from_storage()
+            mock_credentials.assert_called_once_with(
+                config.get('path_to_private_key_file'),
+                config.get('delegated_account'))
+            mock_client_init.assert_called_once_with(
+                credentials=mock_credentials_instance,
+                developer_token=self.developer_token,
+                endpoint=None,
+                login_customer_id=None,
+                logging_config=None)
+
+    def test_load_from_storage_service_account_no_delegated_account(self):
+        config = {
+            'developer_token': self.developer_token,
+            'path_to_private_key_file': self.path_to_private_key_file}
+
+        file_path = os.path.join(os.path.expanduser('~'), 'google-ads.yaml')
+        self.fs.create_file(file_path, contents=yaml.safe_dump(config))
+        mock_credentials_instance = mock.Mock()
+
+        with mock.patch.object(
+            Client.GoogleAdsClient,
+            '__init__',
+            return_value=None), mock.patch.object(
+            Client.oauth2,
+            'get_service_account_credentials',
+            return_value=mock_credentials_instance):
+            self.assertRaises(
+                ValueError,
+                Client.GoogleAdsClient.load_from_storage)
 
     def test_get_service(self):
         # Retrieve service names for all defined service clients.

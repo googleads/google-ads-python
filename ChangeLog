@@ -1,3 +1,8 @@
+* 2.4.0:
+- Add utf-8 encoding declaration in generated proto files
+- Add Service Account support
+- Increase default gRPC message and metadata sizes
+
 * 2.3.0:
 - Allow loading client configuration from environment variables
 

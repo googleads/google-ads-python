@@ -34,6 +34,9 @@ _PROTO_TEMPLATE = '%s_pb2'
 _VALID_API_VERSIONS = ['v1']
 _DEFAULT_VERSION = _VALID_API_VERSIONS[0]
 _REQUEST_ID_KEY = 'request-id'
+GRPC_CHANNEL_OPTIONS = [
+    ('grpc.max_metadata_size', 16 * 1024 * 1024),
+    ('grpc.max_receive_message_length', 64 * 1024 * 1024)]
 
 class GoogleAdsClient(object):
     """Google Ads client used to configure settings and fetch services."""
@@ -195,7 +198,8 @@ class GoogleAdsClient(object):
 
         channel = service_transport_class.create_channel(
             address=endpoint,
-            credentials=self.credentials)
+            credentials=self.credentials,
+            options=GRPC_CHANNEL_OPTIONS)
 
         channel = grpc.intercept_channel(
             channel,

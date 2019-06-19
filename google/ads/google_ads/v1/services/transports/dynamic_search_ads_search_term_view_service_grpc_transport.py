@@ -67,15 +67,16 @@ class DynamicSearchAdsSearchTermViewServiceGrpcTransport(object):
         # gRPC uses objects called "stubs" that are bound to the
         # channel and provide a basic method for each RPC.
         self._stubs = {
-            'dynamic_search_ads_search_term_view_service_stub':
-            dynamic_search_ads_search_term_view_service_pb2_grpc.
-            DynamicSearchAdsSearchTermViewServiceStub(channel),
+            'dynamic_search_ads_search_term_view_service_stub': dynamic_search_ads_search_term_view_service_pb2_grpc.DynamicSearchAdsSearchTermViewServiceStub(channel),
         }
 
+
     @classmethod
-    def create_channel(cls,
-                       address='googleads.googleapis.com:443',
-                       credentials=None):
+    def create_channel(
+                cls,
+                address='googleads.googleapis.com:443',
+                credentials=None,
+                **kwargs):
         """Create and return a gRPC channel object.
 
         Args:
@@ -85,6 +86,8 @@ class DynamicSearchAdsSearchTermViewServiceGrpcTransport(object):
                 credentials identify this application to the service. If
                 none are specified, the client will attempt to ascertain
                 the credentials from the environment.
+            kwargs (dict): Keyword arguments, which are passed to the
+                channel creation.
 
         Returns:
             grpc.Channel: A gRPC channel object.
@@ -93,6 +96,7 @@ class DynamicSearchAdsSearchTermViewServiceGrpcTransport(object):
             address,
             credentials=credentials,
             scopes=cls._OAUTH_SCOPES,
+            **kwargs
         )
 
     @property

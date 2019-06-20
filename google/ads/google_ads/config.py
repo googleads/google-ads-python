@@ -129,6 +129,14 @@ def load_from_yaml_file(path=None):
 
     return parse_yaml_document_to_dict(yaml_doc)
 
+@_config_validation_decorator
+@_config_parser_decorator
+def load_from_dict(config_dict):
+    if isinstance(config_dict,dict):
+	return config_dict
+    else:
+	raise ValueError('Config file should be of type dictionary')
+
 
 @_config_validation_decorator
 @_config_parser_decorator

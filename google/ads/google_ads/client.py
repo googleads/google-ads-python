@@ -94,6 +94,12 @@ class GoogleAdsClient(object):
         config_data = config.parse_yaml_document_to_dict(yaml_str)
         kwargs = cls._get_client_kwargs(config_data)
         return cls(**kwargs)
+    @classmethod  
+    def load_from_dict(cls,config_dict):
+        
+	config_data=config.load_from_dict(config_dict)
+	kwargs = cls._get_client_kwargs(config_data)
+        return cls(**kwargs)
 
     @classmethod
     def load_from_storage(cls, path=None):

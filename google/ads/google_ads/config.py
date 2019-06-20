@@ -132,10 +132,21 @@ def load_from_yaml_file(path=None):
 @_config_validation_decorator
 @_config_parser_decorator
 def load_from_dict(config_dict):
-    if isinstance(config_dict,dict):
+    """ Check if the argument is dictionary or not
+
+    Args:
+        Configuration dictonary of credentials
+
+    Returns:
+        The same input dictionary
+
+    Raises:
+        ValueError if it is not a dictionary
+    """
+    if isinstance(config_dict, dict):
 	return config_dict
     else:
-	raise ValueError('Config file should be of type dictionary')
+	raise ValueError('The configuration object passed to "load_from_dict" must be of type 'dict'".')
 
 
 @_config_validation_decorator

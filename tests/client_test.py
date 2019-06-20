@@ -199,6 +199,7 @@ class GoogleAdsClientTest(FileTestCase):
                     'login_customer_id': None,
                     'logging_config': None
                 })
+
     def test_load_from_dict(self):
         config = {
             'developer_token': self.developer_token,

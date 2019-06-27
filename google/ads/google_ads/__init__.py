@@ -21,4 +21,4 @@ import google.ads.google_ads.errors
 import google.ads.google_ads.util
 
 
-VERSION = '2.4.1'
+VERSION = '3.0.0'

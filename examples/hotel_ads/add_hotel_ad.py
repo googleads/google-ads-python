@@ -50,11 +50,11 @@ def main(client, customer_id, hotel_center_account_id,
 
 def add_budget(client, customer_id):
     campaign_budget_service = client.get_service('CampaignBudgetService',
-                                                 version='v1')
+                                                 version='v2')
 
     # Create a budget, which can be shared by multiple campaigns.
     campaign_budget_operation = client.get_type('CampaignBudgetOperation',
-                                                version='v1')
+                                                version='v2')
     campaign_budget = campaign_budget_operation.create
     campaign_budget.name.value = 'Interplanetary Budget %s' % uuid.uuid4()
     campaign_budget.delivery_method = client.get_type(
@@ -84,16 +84,16 @@ def add_budget(client, customer_id):
 
 
 def add_hotel_ad(client, customer_id, ad_group_resource_name):
-    ad_group_ad_service = client.get_service('AdGroupAdService', version='v1')
+    ad_group_ad_service = client.get_service('AdGroupAdService', version='v2')
 
     # Creates a new ad group ad and sets the hotel ad to it.
-    ad_group_ad_operation = client.get_type('AdGroupAdOperation', version='v1')
+    ad_group_ad_operation = client.get_type('AdGroupAdOperation', version='v2')
     ad_group_ad = ad_group_ad_operation.create
     ad_group_ad.ad_group.value = ad_group_resource_name
     ad_group_ad.status = client.get_type('AdGroupAdStatusEnum',
-                                         version='v1').PAUSED
+                                         version='v2').PAUSED
     ad_group_ad.ad.hotel_ad.CopyFrom(client.get_type('HotelAdInfo',
-                                                     version='v1'))
+                                                     version='v2'))
 
     # Add the ad group ad.
     try:
@@ -117,16 +117,16 @@ def add_hotel_ad(client, customer_id, ad_group_resource_name):
 
 
 def add_hotel_ad_group(client, customer_id, campaign_resource_name):
-    ad_group_service = client.get_service('AdGroupService', version='v1')
+    ad_group_service = client.get_service('AdGroupService', version='v2')
 
     # Create ad group.
-    ad_group_operation = client.get_type('AdGroupOperation', version='v1')
+    ad_group_operation = client.get_type('AdGroupOperation', version='v2')
     ad_group = ad_group_operation.create
     ad_group.name.value = 'Earth to Mars cruise %s' % uuid.uuid4()
-    ad_group.status = client.get_type('AdGroupStatusEnum', version='v1').ENABLED
+    ad_group.status = client.get_type('AdGroupStatusEnum', version='v2').ENABLED
     ad_group.campaign.value = campaign_resource_name
     # Sets the ad group type to HOTEL_ADS. This cannot be set to other types.
-    ad_group.type = client.get_type('AdGroupTypeEnum', version='v1').HOTEL_ADS
+    ad_group.type = client.get_type('AdGroupTypeEnum', version='v2').HOTEL_ADS
     ad_group.cpc_bid_micros.value = 10000000
 
     # Add the ad group.
@@ -153,10 +153,10 @@ def add_hotel_ad_group(client, customer_id, campaign_resource_name):
 
 def add_hotel_campaign(client, customer_id, budget_resource_name,
                        hotel_center_account_id, bid_ceiling_micro_amount):
-    campaign_service = client.get_service('CampaignService', version='v1')
+    campaign_service = client.get_service('CampaignService', version='v2')
 
     # Create campaign.
-    campaign_operation = client.get_type('CampaignOperation', version='v1')
+    campaign_operation = client.get_type('CampaignOperation', version='v2')
     campaign = campaign_operation.create
     campaign.name.value = 'Interplanetary Cruise Campaign %s' % uuid.uuid4()
 
@@ -169,7 +169,7 @@ def add_hotel_campaign(client, customer_id, budget_resource_name,
     # Recommendation: Set the campaign to PAUSED when creating it to prevent the
     # ads from immediately serving. Set to ENABLED once you've added targeting
     # and the ads are ready to serve.
-    campaign.status = client.get_type('CampaignStatusEnum', version='v1').PAUSED
+    campaign.status = client.get_type('CampaignStatusEnum', version='v2').PAUSED
 
     # Set the bidding strategy to PercentCpc. Only Manual CPC and Percent CPC
     # can be used for hotel campaigns.

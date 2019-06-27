@@ -24,8 +24,8 @@ import google.ads.google_ads.client
 
 
 def main(client, customer_id, ad_group_id):
-    ad_group_service = client.get_service('AdGroupService', version='v1')
-    ad_group_operation = client.get_type('AdGroupOperation', version='v1')
+    ad_group_service = client.get_service('AdGroupService', version='v2')
+    ad_group_operation = client.get_type('AdGroupOperation', version='v2')
 
     resource_name = ad_group_service.ad_group_path(customer_id, ad_group_id)
     ad_group_operation.remove = resource_name

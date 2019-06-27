@@ -29,13 +29,13 @@ from google.api_core import protobuf_helpers
 
 
 def main(client, customer_id, campaign_id):
-    campaign_service = client.get_service('CampaignService', version='v1')
+    campaign_service = client.get_service('CampaignService', version='v2')
     # Create campaign operation.
-    campaign_operation = client.get_type('CampaignOperation', version='v1')
+    campaign_operation = client.get_type('CampaignOperation', version='v2')
     campaign = campaign_operation.update
     campaign.resource_name = campaign_service.campaign_path(
         customer_id, campaign_id)
-    campaign.status = client.get_type('CampaignStatusEnum', version='v1').PAUSED
+    campaign.status = client.get_type('CampaignStatusEnum', version='v2').PAUSED
     campaign.network_settings.target_search_network.value = False
     # Retrieve a FieldMask for the fields configured in the campaign.
     fm = protobuf_helpers.field_mask(None, campaign)

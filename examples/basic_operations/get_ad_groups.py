@@ -26,7 +26,7 @@ _DEFAULT_PAGE_SIZE = 1000
 
 
 def main(client, customer_id, page_size, campaign_id=None):
-    ga_service = client.get_service('GoogleAdsService', version='v1')
+    ga_service = client.get_service('GoogleAdsService', version='v2')
 
     query = 'SELECT campaign.id, ad_group.id, ad_group.name FROM ad_group'
 

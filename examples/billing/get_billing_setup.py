@@ -27,7 +27,7 @@ _DEFAULT_PAGE_SIZE = 1000
 
 
 def main(client, customer_id, page_size):
-    ga_service = client.get_service('GoogleAdsService', version='v1')
+    ga_service = client.get_service('GoogleAdsService', version='v2')
 
     query = (
         'SELECT billing_setup.id, billing_setup.status, '
@@ -44,7 +44,7 @@ def main(client, customer_id, page_size):
     try:
         # Use the enum type to determine the enum name from the value.
         billing_setup_status_enum = (
-            client.get_type('BillingSetupStatusEnum', version='v1')
+            client.get_type('BillingSetupStatusEnum', version='v2')
                 .BillingSetupStatus)
 
         print('Found the following billing setup results:')

@@ -28,11 +28,11 @@ import google.ads.google_ads.client
 
 def main(client, customer_id, billing_setup_id):
     billing_setup_service = client.get_service('BillingSetupService',
-                                               version='v1')
+                                               version='v2')
 
     # Create billing setup operation.
     billing_setup_operation = client.get_type('BillingSetupOperation',
-                                              version='v1')
+                                              version='v2')
     billing_setup_operation.remove = billing_setup_service.billing_setup_path(
         customer_id, billing_setup_id)
 

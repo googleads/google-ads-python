@@ -28,7 +28,7 @@ import google.ads.google_ads.client
 
 
 def main(client):
-    customer_service = client.get_service('CustomerService', version='v1')
+    customer_service = client.get_service('CustomerService', version='v2')
 
     try:
         accessible_customers = customer_service.list_accessible_customers()

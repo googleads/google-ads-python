@@ -28,18 +28,18 @@ import google.ads.google_ads.client
 
 
 def main(client, customer_id, campaign_id):
-    ad_group_service = client.get_service('AdGroupService', version='v1')
-    campaign_service = client.get_service('CampaignService', version='v1')
+    ad_group_service = client.get_service('AdGroupService', version='v2')
+    campaign_service = client.get_service('CampaignService', version='v2')
 
     # Create ad group.
-    ad_group_operation = client.get_type('AdGroupOperation', version='v1')
+    ad_group_operation = client.get_type('AdGroupOperation', version='v2')
     ad_group = ad_group_operation.create
     ad_group.name.value = 'Earth to Mars cruises %s' % uuid.uuid4()
-    ad_group.status = client.get_type('AdGroupStatusEnum', version='v1').ENABLED
+    ad_group.status = client.get_type('AdGroupStatusEnum', version='v2').ENABLED
     ad_group.campaign.value = campaign_service.campaign_path(
         customer_id, campaign_id)
     ad_group.type = client.get_type('AdGroupTypeEnum',
-                                    version='v1').SEARCH_STANDARD
+                                    version='v2').SEARCH_STANDARD
     ad_group.cpc_bid_micros.value = 10000000
 
     # Add the ad group.

@@ -23,11 +23,11 @@ import google.ads.google_ads.client
 
 
 def main(client):
-    gtc_service = client.get_service('GeoTargetConstantService', version='v1')
+    gtc_service = client.get_service('GeoTargetConstantService', version='v2')
 
     location_names = (
         client.get_type('SuggestGeoTargetConstantsRequest',
-                        version='v1').LocationNames())
+                        version='v2').LocationNames())
 
     for location in ['Paris', 'Quebec', 'Spain', 'Deutschland']:
         location_name = location_names.names.add()
@@ -35,12 +35,12 @@ def main(client):
 
     # Locale is using ISO 639-1 format. If an invalid locale is given,
     # 'en' is used by default.
-    locale = client.get_type('StringValue', version='v1')
+    locale = client.get_type('StringValue', version='v2')
     locale.value = 'en'
 
     # A list of country codes can be referenced here:
     # https://developers.google.com/adwords/api/docs/appendix/geotargeting
-    country_code = client.get_type('StringValue', version='v1')
+    country_code = client.get_type('StringValue', version='v2')
     country_code.value = 'FR'
 
     results = gtc_service.suggest_geo_target_constants(

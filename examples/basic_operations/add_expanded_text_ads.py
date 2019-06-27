@@ -28,16 +28,16 @@ import google.ads.google_ads.client
 
 
 def main(client, customer_id, ad_group_id):
-    ad_group_ad_service = client.get_service('AdGroupAdService', version='v1')
-    ad_group_service = client.get_service('AdGroupService', version='v1')
+    ad_group_ad_service = client.get_service('AdGroupAdService', version='v2')
+    ad_group_service = client.get_service('AdGroupService', version='v2')
 
     # Create ad group ad.
-    ad_group_ad_operation = client.get_type('AdGroupAdOperation', version='v1')
+    ad_group_ad_operation = client.get_type('AdGroupAdOperation', version='v2')
     ad_group_ad = ad_group_ad_operation.create
     ad_group_ad.ad_group.value = ad_group_service.ad_group_path(
         customer_id, ad_group_id)
     ad_group_ad.status = client.get_type('AdGroupAdStatusEnum',
-                                         version='v1').PAUSED
+                                         version='v2').PAUSED
 
     # Set expanded text ad info
     final_url = ad_group_ad.ad.final_urls.add()

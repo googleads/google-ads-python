@@ -58,7 +58,7 @@ def resource_name_for_resource_type(resource_type, row):
 
 
 def main(client, customer_id):
-  ads_service = client.get_service('GoogleAdsService', version='v1')
+  ads_service = client.get_service('GoogleAdsService', version='v2')
   query = ('SELECT change_status.resource_name, '
            'change_status.last_change_date_time, '
            'change_status.resource_type, '
@@ -76,9 +76,9 @@ def main(client, customer_id):
                                 page_size=ADS_PAGE_SIZE)
 
   resource_type_enum = (client.get_type(
-      'ChangeStatusResourceTypeEnum', version='v1').ChangeStatusResourceType)
+      'ChangeStatusResourceTypeEnum', version='v2').ChangeStatusResourceType)
   change_status_operation_enum = (client.get_type(
-      'ChangeStatusOperationEnum', version='v1').ChangeStatusOperation)
+      'ChangeStatusOperationEnum', version='v2').ChangeStatusOperation)
 
   try:
     for row in response:

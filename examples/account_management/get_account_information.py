@@ -27,7 +27,7 @@ import google.ads.google_ads.client
 
 
 def main(client, customer_id):
-    customer_service = client.get_service('CustomerService', version='v1')
+    customer_service = client.get_service('CustomerService', version='v2')
 
     resource_name = customer_service.customer_path(customer_id)
 

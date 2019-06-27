@@ -25,8 +25,8 @@ from google.ads.google_ads.util import ResourceName
 
 
 def main(client, customer_id, ad_group_id, criteria_id):
-    agc_service = client.get_service('AdGroupCriterionService', version='v1')
-    agc_operation = client.get_type('AdGroupCriterionOperation', version='v1')
+    agc_service = client.get_service('AdGroupCriterionService', version='v2')
+    agc_operation = client.get_type('AdGroupCriterionOperation', version='v2')
 
     resource_name = agc_service.ad_group_criteria_path(
         customer_id, ResourceName.format_composite(ad_group_id, criteria_id))

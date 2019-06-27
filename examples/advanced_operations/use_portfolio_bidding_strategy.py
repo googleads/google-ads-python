@@ -26,14 +26,14 @@ import google.ads.google_ads.client
 
 def main(client, customer_id):
     campaign_budget_service = client.get_service('CampaignBudgetService',
-                                                 version='v1')
+                                                 version='v2')
     bidding_strategy_service = client.get_service('BiddingStrategyService',
-                                                  version='v1')
-    campaign_service = client.get_service('CampaignService', version='v1')
+                                                  version='v2')
+    campaign_service = client.get_service('CampaignService', version='v2')
 
     # Create a budget, which can be shared by multiple campaigns.
     campaign_budget_operation = client.get_type('CampaignBudgetOperation',
-                                                version='v1')
+                                                version='v2')
     campaign_budget = campaign_budget_operation.create
     campaign_budget.name.value = 'Interplanetary Budget %s' % uuid.uuid4()
     campaign_budget.delivery_method = client.get_type(
@@ -62,7 +62,7 @@ def main(client, customer_id):
 
     # Create a portfolio bidding strategy.
     bidding_strategy_operation = client.get_type('BiddingStrategyOperation',
-                                                 version='v1')
+                                                 version='v2')
     bidding_strategy = bidding_strategy_operation.create
     bidding_strategy.name.value = 'Enhanced CPC %s' % uuid.uuid4()
     target_spend = bidding_strategy.target_spend
@@ -89,7 +89,7 @@ def main(client, customer_id):
     print('Portfolio bidding strategy "%s" was created.' % bidding_strategy_id)
 
     # Create campaign.
-    campaign_operation = client.get_type('CampaignOperation', version='v1')
+    campaign_operation = client.get_type('CampaignOperation', version='v2')
     campaign = campaign_operation.create
     campaign.name.value = 'Interplanetary Cruise %s' % uuid.uuid4()
     campaign.advertising_channel_type = client.get_type(
@@ -98,7 +98,7 @@ def main(client, customer_id):
     # Recommendation: Set the campaign to PAUSED when creating it to prevent the
     # ads from immediately serving. Set to ENABLED once you've added targeting
     # and the ads are ready to serve.
-    campaign.status = client.get_type('CampaignStatusEnum', version='v1').PAUSED
+    campaign.status = client.get_type('CampaignStatusEnum', version='v2').PAUSED
 
     # Set the bidding strategy and budget.
     campaign.bidding_strategy.value = bidding_strategy_id

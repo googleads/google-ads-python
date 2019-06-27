@@ -27,9 +27,9 @@ _DEFAULT_PAGE_SIZE = 1000
 
 
 def main(client, customer_id, page_size, campaign_id):
-    ga_service = client.get_service('GoogleAdsService', version='v1')
+    ga_service = client.get_service('GoogleAdsService', version='v2')
     shared_criterion_service = client.get_service('SharedCriterionService',
-                                                  version='v1')
+                                                  version='v2')
 
     # First, retrieve all shared sets associated with the campaign.
     shared_sets_query = (
@@ -79,14 +79,14 @@ def main(client, customer_id, page_size, campaign_id):
 
     # Use the enum type to determine the enum name from the value.
     keyword_match_type_enum = (
-        client.get_type('KeywordMatchTypeEnum', version='v1').KeywordMatchType)
+        client.get_type('KeywordMatchTypeEnum', version='v2').KeywordMatchType)
 
     criterion_ids = []
     for row in shared_criteria_response:
         shared_criterion = row.shared_criterion
         shared_criterion_resource_name = shared_criterion.resource_name
         if (shared_criterion.type ==
-                client.get_type('CriterionTypeEnum', version='v1').KEYWORD):
+                client.get_type('CriterionTypeEnum', version='v2').KEYWORD):
             keyword = shared_criterion.keyword
             print('Shared criterion with resource name "%s" for negative '
                   'keyword with text "%s" and match type "%s" was found.'
@@ -99,7 +99,7 @@ def main(client, customer_id, page_size, campaign_id):
     # Finally, remove the criteria.
     for criteria_id in criterion_ids:
         shared_criterion_operation = client.get_type('SharedCriterionOperation',
-                                                     version='v1')
+                                                     version='v2')
         shared_criterion_operation.remove = criteria_id
         operations.append(shared_criterion_operation)
 

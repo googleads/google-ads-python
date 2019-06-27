@@ -45,7 +45,7 @@ def _is_or_is_not(bool_value):
 
 
 def main(client, artifact_name, page_size):
-    gaf_service = client.get_service('GoogleAdsFieldService', version='v1')
+    gaf_service = client.get_service('GoogleAdsFieldService', version='v2')
 
     # Searches for an artifact with the specified name.
     query = ('SELECT name, category, selectable, filterable, sortable, '

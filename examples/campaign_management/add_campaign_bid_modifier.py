@@ -25,9 +25,9 @@ import google.ads.google_ads.client
 
 
 def main(client, customer_id, campaign_id, bid_modifier_value):
-    campaign_service = client.get_service('CampaignService', version='v1')
+    campaign_service = client.get_service('CampaignService', version='v2')
     campaign_bm_service = client.get_service('CampaignBidModifierService',
-                                             version='v1')
+                                             version='v2')
 
     # Create campaign bid modifier for call interactions with the specified
     # campaign ID and bid modifier value.
@@ -44,7 +44,7 @@ def main(client, customer_id, campaign_id, bid_modifier_value):
 
     # Sets the interaction type.
     campaign_bid_modifier.interaction_type.type = (
-        client.get_type('InteractionTypeEnum', version='v1').CALLS)
+        client.get_type('InteractionTypeEnum', version='v2').CALLS)
 
     # Add the campaign bid modifier.
     try:

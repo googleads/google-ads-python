@@ -74,6 +74,7 @@ def createCampaign(client, customerId, campaignBudget):
     campaign.end_date.value = (datetime.datetime.now() + \
                               datetime.timedelta(365)).strftime('%Y%m%d')
 
+    print(operation)
     response = campaign_service.mutate_campaigns(customerId, [operation])
     
     campaignResourceName = response.results[0].resource_name

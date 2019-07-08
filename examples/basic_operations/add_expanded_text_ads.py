@@ -48,7 +48,7 @@ def main(client, customer_id, ad_group_id, number_of_ads):
         final_url.value = 'http://www.example.com'
         ad_group_ad.ad.expanded_text_ad.description.value = 'Buy your tickets now!'
         ad_group_ad.ad.expanded_text_ad.headline_part1.value = (
-            'Cruise %s to Mars %s' % (str(i), str(uuid.uuid4())[:8]))
+            'Cruise {} to Mars {}'.format(i, str(uuid.uuid4())[:8]))
         ad_group_ad.ad.expanded_text_ad.headline_part2.value = (
             'Best space cruise line')
         ad_group_ad.ad.expanded_text_ad.path1.value = 'all-inclusive'
@@ -60,17 +60,17 @@ def main(client, customer_id, ad_group_id, number_of_ads):
         ad_group_ad_response = ad_group_ad_service.mutate_ad_group_ads(
             customer_id, ad_group_ad_operations)
     except google.ads.google_ads.errors.GoogleAdsException as ex:
-        print('Request with ID "%s" failed with status "%s" and includes the '
-              'following errors:' % (ex.request_id, ex.error.code().name))
+        print('Request with ID "{}" failed with status "{}" and includes the '
+              'following errors:'.format(ex.request_id, ex.error.code().name))
         for error in ex.failure.errors:
-            print('\tError with message "%s".' % error.message)
+            print('\tError with message "{}".'.format(error.message))
             if error.location:
                 for field_path_element in error.location.field_path_elements:
-                    print('\t\tOn field: %s' % field_path_element.field_name)
+                    print('\t\tOn field: {}'.format(field_path_element.field_name))
         sys.exit(1)
 
     for result in ad_group_ad_response.results:
-        print('Created ad group ad %s.' % result.resource_name)
+        print('Created ad group ad {}.'.format(result.resource_name))
 
 
 if __name__ == '__main__':

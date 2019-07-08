@@ -54,40 +54,47 @@ def getCampaignBudget(client, customerId, resource_name):
      * @param budgetId the campaign budget ID
      * @return Campaign the newly created campaign
 '''
-def createCampaign(client, budgetId):
-    campaign_service = client.GetService('CampaignService', version='v201809')
-    campaign = {
-    'name': 'Interplanetary Cruise #%s' % uuid.uuid4(),
-    'advertisingChannelType': 'SEARCH',
-    'status': 'PAUSED',
 
-    'biddingStrategyConfiguration': {
-    'biddingStrategyType': 'MANUAL_CPC',
-    },
-    'startDate': (datetime.datetime.now() +
-    datetime.timedelta(1)).strftime('%Y%m%d'),
 
-    'endDate': (datetime.datetime.now() +
-    datetime.timedelta(365)).strftime('%Y%m%d'),
-    'budget': {
-    'budgetId': budgetId
-    },
-    'networkSetting': {
-    'targetGoogleSearch': 'true',
-    'targetSearchNetwork': 'true',
+def createCampaign(client, customerId, campaignBudget): 
+    operation = client.get_type("CampaignOperation")
+    campaign = operation.create
+    campaign_service = client.get_service("CampaignService")
+    campaign.name.value = 'Interplanetary Cruise#%s' % uuid.uuid4()
+    campaign.advertising_channel_type = client.get_type("AdvertisingChannelTypeEnum").SEARCH
+    campaign.status = client.get_type("CampaignStatusEnum").PAUSED
+    campaign.manual_cpc.enhanced_cpc_enabled.value = True
+    campaign.campaign_budget.value = campaignBudget.resource_name
+    campaign.network_settings.target_google_search.value = True
+    campaign.network_settings.target_search_network.value =True
+    campaign.network_settings.target_content_network.value =False
+    campaign.network_settings.target_partner_search_network.value =False
+    campaign.start_date.value =  (datetime.datetime.now() + \
+                                    datetime.timedelta(1)).strftime('%Y%m%d')
+    campaign.end_date.value = (datetime.datetime.now() + \
+                              datetime.timedelta(365)).strftime('%Y%m%d')
 
-    }
-    }
-    campaign_operations = [{
-                            'operator': 'ADD',
-                            'operand': campaign
-                        }]
-    results = campaign_service.mutate(campaign_operations)
-    createdCampaign = results['value'][0]
-    print("CreatedCampign with ID {} and name {} was created". \
-           format(createdCampaign['id'],createdCampaign['name']))
-    return createdCampaign['id']
+    response = campaign_service.mutate_campaigns(customerId, [operation])
+    
+    campaignResourceName = response.results[0].resource_name
+    newCampaign = getCampaign(client, customerId, campaignResourceName)
+    print("Added campaign named {}".format(newCampaign.name.value))
+    return newCampaign
+
+
+def getCampaign(client, customerId, campaignResourceName):
+    ga_service = client.get_service("GoogleAdsService")
+    query = ("SELECT campaign.id,campaign.name, campaign.resource_name "
+          "FROM campaign WHERE campaign.resource_name = '%s' "%campaignResourceName)
+    response = ga_service.search(customerId, query, PAGE_SIZE)
+    campaign = list(response)[0].campaign
+    return campaign
+
+
+
 '''
+
+
      * Creates an ad group.
      * @param adwordsclient
      * @param int $campaignId the campaign ID
@@ -209,5 +216,10 @@ if __name__ == '__main__':
   
     google_ads_client = GoogleAdsClient.load_from_storage()
     adwords_client = adwords.AdWordsClient.LoadFromStorage()
-    createCampaignBudget(google_ads_client, six.text_type(7502950076))
+    #v=createCampaignBudget(google_ads_client, six.text_type(7502950076))
+    #print(v)
+    budget = createCampaignBudget(google_ads_client, six.text_type(7502950076))
+    createCampaign(google_ads_client, six.text_type(7502950076), budget)
+
+   
 

@@ -140,7 +140,10 @@ def createTextAds(client, customerId, adGroup):
         newAdResourceNames.append(adGroupAdResponse.results[i].resource_name)
 
     newAds = getAds(client, customerId, newAdResourceNames)
-    return newAds
+    for i in range(len(newAds)):
+        print("Created expanded text ad with ID {}, status {} and headline{}.{}\n".\
+        format(newAds[i].ad.id.value,newAds[i].status,newAds[i].ad.expanded_text_ad.headline_part1.value,\
+            newAds[i].ad.expanded_text_ad.headline_part2.value))
 
 
 def getAds(client, customerId, newAdResourceNames):

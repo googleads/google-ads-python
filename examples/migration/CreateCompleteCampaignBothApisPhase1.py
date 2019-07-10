@@ -197,7 +197,6 @@ def createKeywords(client, adGroupId, keywordsToAdd):
                result['criterion']['matchType']))
 
 
-
 if __name__ == '__main__':
   # Initialize client object.
   #It will read the config file. Default file path is the Home Directory

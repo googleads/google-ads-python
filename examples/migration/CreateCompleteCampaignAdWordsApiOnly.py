@@ -52,7 +52,7 @@ def createCampaignBudget(client):
     results = budget_service.mutate(budget_operations)
     createdBudget = results['value'][0]
     print("Budget with ID {} and name {} was created".format(\
-            createdBudget['budgetId'],createdBudget['name']))
+           createdBudget['budgetId'],createdBudget['name']))
     return createdBudget['budgetId']
 
 
@@ -151,8 +151,8 @@ def createTextAds(client, adGroupId):
     results = ad_group_service.mutate(operations)
     for result in results['value']:
         print('Expanded text ad with ID {} and headline {}-{} {} was created'\
-            .format(result['ad']['id'],result['ad']['headlinePart1'],\
-                result['ad']['headlinePart2'],result['ad']['headlinePart3']))
+              .format(result['ad']['id'],result['ad']['headlinePart1'],\
+               result['ad']['headlinePart2'],result['ad']['headlinePart3']))
 
 
 def createKeywords(client, adGroupId, keywordsToAdd):
@@ -177,7 +177,7 @@ def createKeywords(client, adGroupId, keywordsToAdd):
                             'operand': operation
                          }
         operations.append(create_keyword)
-    results = adGroupCriterionService.mutate(operations)
+    results = AdGroupCriterionService.mutate(operations)
     for result in results['value']:
         print('Keyword with ad group ID {}, keyword ID {}, text {} and match\
                type {} was created'.format(result['adGroupId'], \

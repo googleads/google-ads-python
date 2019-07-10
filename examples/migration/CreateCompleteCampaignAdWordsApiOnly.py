@@ -156,11 +156,11 @@ def createTextAds(client, adGroupId):
 
 
 def createKeywords(client, adGroupId, keywordsToAdd):
-    adGroupCriterionService=client.GetService("AdGroupCriterionService", \
+    AdGroupCriterionService = client.GetService("AdGroupCriterionService", \
                                               'v201809')
     operations = []
     for keyword in KEYWORDS_TO_ADD:
-        operation ={
+        operation = {
                 'xsi_type': 'BiddableAdGroupCriterion',
                 'adGroupId': adGroupId,
                 'criterion': {
@@ -177,7 +177,7 @@ def createKeywords(client, adGroupId, keywordsToAdd):
                             'operand': operation
                          }
         operations.append(create_keyword)
-    results= adGroupCriterionService.mutate(operations)
+    results = adGroupCriterionService.mutate(operations)
     for result in results['value']:
         print('Keyword with ad group ID {}, keyword ID {}, text {} and match\
                type {} was created'.format(result['adGroupId'], \

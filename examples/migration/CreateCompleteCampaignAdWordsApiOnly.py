@@ -33,11 +33,7 @@ NUMBER_OF_ADS = 5
 KEYWORDS_TO_ADD = ["mars cruise", "space hotel" ]
 import urllib.parse
 
-'''
-     * Creates a campaign budget.
-     * @param adwordsclient 
-     * @return Budget the newly created campaign budget id
-'''
+
 def createCampaignBudget(client):
    # Create a budget, which can be shared by multiple campaigns.
     budget_service = client.GetService('BudgetService', version='v201809')
@@ -48,7 +44,6 @@ def createCampaignBudget(client):
                 },
                 'deliveryMethod': 'STANDARD'
                 }
-
     budget_operations = [{
                             'operator': 'ADD',
                             'operand': budget
@@ -60,12 +55,7 @@ def createCampaignBudget(client):
             createdBudget['budgetId'],createdBudget['name']))
     return createdBudget['budgetId']
 
-'''
-     * Creates a campaign .
-     * @param adwordsclient
-     * @param budgetId the campaign budget ID
-     * @return Campaign the newly created campaign ID
-'''
+
 def createCampaign(client, budgetId):
     campaign_service = client.GetService('CampaignService', version='v201809')
     campaign = {
@@ -75,13 +65,11 @@ def createCampaign(client, budgetId):
                 # ads from immediately serving. Set to ENABLED once you've added
                 # targeting and the ads are ready to serve.
                 'status': 'PAUSED',
-
                 'biddingStrategyConfiguration': {
                 'biddingStrategyType': 'MANUAL_CPC',
                 },
                 'startDate': (datetime.datetime.now() +
                 datetime.timedelta(1)).strftime('%Y%m%d'),
-
                 'endDate': (datetime.datetime.now() +
                 datetime.timedelta(365)).strftime('%Y%m%d'),
                 # Budget (required) - note only the budget ID is required.
@@ -102,12 +90,7 @@ def createCampaign(client, budgetId):
     print("CreatedCampign with ID {} and name {} was created". \
            format(createdCampaign['id'],createdCampaign['name']))
     return createdCampaign['id']
-'''
-     * Creates an ad group.
-     * @param adwordsclient
-     * @param int $campaignId the campaign ID
-     * @return AdGroup the newly created ad group
-'''
+
 
 def createAdGroup(client, campaign_id):
   ad_group_service = client.GetService('AdGroupService', 'v201809')
@@ -140,11 +123,6 @@ def createAdGroup(client, campaign_id):
   return createdAdgroup['id']
 
 
-'''
-     * Creates text ads.
-     * @param adwords client
-     * @param int adGroupId the ad group ID
- '''
 def createTextAds(client, adGroupId):
     ad_group_service = client.GetService('AdGroupAdService', 'v201809')
     operations = []
@@ -177,12 +155,6 @@ def createTextAds(client, adGroupId):
                 result['ad']['headlinePart2'],result['ad']['headlinePart3']))
 
 
-'''
-     * Creates keywords
-     * @param adwords client
-     * @param int adGroupId the ad group ID
-     * @param list keywordsToAdd the keywords to add
- '''
 def createKeywords(client, adGroupId, keywordsToAdd):
     adGroupCriterionService=client.GetService("AdGroupCriterionService", \
                                               'v201809')

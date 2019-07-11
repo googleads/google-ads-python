@@ -1,6 +1,5 @@
 #!/usr/bin/env python
-# Encoding: utf-8
-#
+# -*- coding: utf-8 -*-
 # Copyright 2019 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
@@ -14,15 +13,19 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
-#
-# This code example is the first in a series of code examples that shows how to create
-# a Search campaign using the AdWords API, and then migrate it to Google Ads API one
-# functionality at a time. See other examples in this directory for code examples in various
-# stages of migration.
-#
-# This code example represents the initial state, where the AdWords API is used to create a
-# campaign budget, a Search campaign, ad groups, keywords and expanded text ads. None of the
-# functionality has yet been migrated to the Google Ads API.
+"""This example creates serach campaign with the help of Adwords Api and Google Ads API"""
+
+
+"""This code example is the third in a series of code examples that shows how to create
+a Search campaign using the AdWords API, and then migrate it to the Google Ads API one
+functionality at a time. See other examples in this directory for code examples in various
+stages of migration.
+
+
+In this code example, the functionality to create campaign budget and search campaign have
+been migrated to the Google Ads API. The rest of the functionality - creating ad groups,
+keywords and expanded text ads are done using the AdWords API.
+"""
 
 import datetime
 import uuid
@@ -107,34 +110,34 @@ def getCampaign(client, customerId, campaignResourceName):
 
 
 def createAdGroup(client, campaign_id):
-  ad_group_service = client.GetService('AdGroupService', 'v201809')
-  ad_group =   {
-              'name': 'Earth to Mars Cruise #%s' % uuid.uuid4(),
-              'campaignId': campaign_id,
-              'status': 'ENABLED',
-              'biddingStrategyConfiguration' : {
-                 'bids': [{
-                  # The 'xsi_type' field allows you to specify the xsi:type of the
-                  # object being created. It's only necessary when you must provide
-                  # an explicit type that the client library can't infer.
-                      'xsi_type': 'CpcBid',
-                      'bid': {
-                          'microAmount': 10000000
-                      }
-                    }]
-                },
-                'adGroupAdRotationMode': 'OPTIMIZE'
-                }
+    ad_group_service = client.GetService('AdGroupService', 'v201809')
+    ad_group =   {
+        'name': 'Earth to Mars Cruise #%s' % uuid.uuid4(),
+        'campaignId': campaign_id,
+        'status': 'ENABLED',
+        'biddingStrategyConfiguration' : {
+        'bids': [{
+          # The 'xsi_type' field allows you to specify the xsi:type of the
+          # object being created. It's only necessary when you must provide
+          # an explicit type that the client library can't infer.
+            'xsi_type': 'CpcBid',
+            'bid': {
+                'microAmount': 10000000
+            }
+        }]
+        },
+        'adGroupAdRotationMode': 'OPTIMIZE'
+    }
 
-  adgroup_operations = [{
-                          'operator': 'ADD',
-                          'operand': ad_group
-                       }]
-  results = ad_group_service.mutate(adgroup_operations)
-  createdAdgroup = results['value'][0]
-  print("Ad group with ID {} and name {} was created".\
+    adgroup_operations = [{
+        'operator': 'ADD',
+        'operand': ad_group
+    }]
+    results = ad_group_service.mutate(adgroup_operations)
+    createdAdgroup = results['value'][0]
+    print("Ad group with ID {} and name {} was created".\
         format(createdAdgroup['id'],createdAdgroup['name']))
-  return createdAdgroup['id']
+    return createdAdgroup['id']
 
 
 def createTextAds(client, adGroupId):
@@ -142,25 +145,25 @@ def createTextAds(client, adGroupId):
     operations = []
     for i in range(NUMBER_OF_ADS):
         operation =  {
-                    'xsi_type': 'AdGroupAd',
-                    'adGroupId': adGroupId,
-                    # Additional properties (non-required).
-                    'status':  'PAUSED',
-                      'ad': {
-                          'xsi_type': 'ExpandedTextAd',
-                          'headlinePart1': ('Cruise #%s to Mars'
-                                            % str(uuid.uuid4())[:8]),
-                          'headlinePart2': 'Best Space Cruise Line',
-                          'headlinePart3': 'For Your Loved Ones',
-                          'description': 'Buy your tickets now!',
-                          'description2': 'Discount ends soon',
-                          'finalUrls': ['http://www.example.com/']
-                            }
-                      }
+            'xsi_type': 'AdGroupAd',
+            'adGroupId': adGroupId,
+            # Additional properties (non-required).
+            'status':  'PAUSED',
+            'ad': {
+                'xsi_type': 'ExpandedTextAd',
+                'headlinePart1': ('Cruise #%s to Mars'
+                            % str(uuid.uuid4())[:8]),
+                'headlinePart2': 'Best Space Cruise Line',
+                'headlinePart3': 'For Your Loved Ones',
+                'description': 'Buy your tickets now!',
+                'description2': 'Discount ends soon',
+                'finalUrls': ['http://www.example.com/']
+            }
+        }
         adgroup_operations = {
-                                'operator': 'ADD',
-                                'operand': operation
-                             }
+            'operator': 'ADD',
+            'operand': operation
+         }
         operations.append(adgroup_operations)
     results = ad_group_service.mutate(operations)
     for result in results['value']:
@@ -175,26 +178,26 @@ def createKeywords(client, adGroupId, keywordsToAdd):
     operations = []
     for keyword in KEYWORDS_TO_ADD:
         operation = {
-                'xsi_type': 'BiddableAdGroupCriterion',
-                'adGroupId': adGroupId,
-                'criterion': {
-                           'xsi_type' : 'Keyword',
-                           'text': keyword,
-                           'matchType' : 'BROAD'
-                             },
-                'userStatus': 'PAUSED',
-                'finalUrls' : ['http://www.example.com/mars/cruise/?kw=%s'% \
-                               urllib.parse.quote(keyword)]
-                    }
+        'xsi_type': 'BiddableAdGroupCriterion',
+        'adGroupId': adGroupId,
+        'criterion': {
+            'xsi_type' : 'Keyword',
+            'text': keyword,
+            'matchType' : 'BROAD'
+        },
+        'userStatus': 'PAUSED',
+        'finalUrls' : ['http://www.example.com/mars/cruise/?kw=%s'% \
+                       urllib.parse.quote(keyword)]
+        }
         create_keyword = {
-                            'operator': 'ADD',
-                            'operand': operation
-                         }
+            'operator': 'ADD',
+            'operand': operation
+        }
         operations.append(create_keyword)
     results = AdGroupCriterionService.mutate(operations)
     for result in results['value']:
-        print('Keyword with ad group ID {}, keyword ID {}, text {} and match\
-               type {} was created'.format(result['adGroupId'], \
+        print("Keyword with ad group ID {}, keyword ID {}, text {} and match"
+              "type {} was created".format(result['adGroupId'], \
                result['criterion']['id'],result['criterion']['text'],\
                result['criterion']['matchType']))
 
@@ -211,19 +214,9 @@ if __name__ == '__main__':
   parser.add_argument('-c', '--customer_id', type=six.text_type,
                         required=True, help='The Google Ads customer ID.')
   args = parser.parse_args()
-
-
   budget = createCampaignBudget(google_ads_client, args.customer_id)
   campaign = createCampaign(google_ads_client, args.customer_id, budget)
   adGroupId = createAdGroup(adwords_client, campaign.id.value)
   createTextAds(adwords_client, adGroupId)
   createKeywords(adwords_client, adGroupId, KEYWORDS_TO_ADD)
-
-
-
-
-
-
-
-
 

@@ -13,7 +13,7 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
-"""This example creates serach campaign with the help of Google-Ads Api"""
+"""This example creates serach campaign with the help of Adwords Api"""
 
 
 """This code example is the first in a series of code examples that shows how to create
@@ -187,7 +187,6 @@ def createKeywords(client, adGroupId, keywordsToAdd):
                result['criterion']['matchType']))
 
 
-
 if __name__ == '__main__':
   # Initialize client object.
   #It will read the config file from the Home Directory
@@ -197,6 +196,4 @@ if __name__ == '__main__':
   adGroupId = createAdGroup(adwords_client, campaignId)
   createTextAds(adwords_client, adGroupId)
   createKeywords(adwords_client, adGroupId, KEYWORDS_TO_ADD)
-
-
 

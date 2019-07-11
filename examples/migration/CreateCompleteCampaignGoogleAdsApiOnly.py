@@ -1,6 +1,5 @@
 #!/usr/bin/env python
-# Encoding: utf-8
-#
+# -*- coding: utf-8 -*-
 # Copyright 2019 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
@@ -14,15 +13,19 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
-#
-# This code example is the first in a series of code examples that shows how to create
-# a Search campaign using the AdWords API, and then migrate it to Google Ads API one
-# functionality at a time. See other examples in this directory for code examples in various
-# stages of migration.
-#
-# This code example represents the initial state, where the AdWords API is used to create a
-# campaign budget, a Search campaign, ad groups, keywords and expanded text ads. None of the
-# functionality has yet been migrated to the Google Ads API.
+"""This example creates serach campaign with the help of Google Ads API"""
+
+
+"""This code example is the last in a series of code examples that shows how to create
+a Search campign using the AdWords API, and then migrate it to the Google Ads API one
+functionality at a time. See Step0.cs through Step5.cs for code examples in various stages
+of migration.
+
+This code example represents the final state, where all the functionality - create a
+campaign budget, a Search campaign, ad groups, keywords and expanded text ads have been
+migrated to using the Google Ads API. The AdWords API is not used.
+"""
+
 
 import datetime
 import uuid
@@ -115,7 +118,6 @@ def createAdGroup(client, customerId, campaign):
     adgroup.status = client.get_type("AdGroupStatusEnum").ENABLED
     adgroup.type = client.get_type("AdGroupTypeEnum").SEARCH_STANDARD
     adgroup.cpc_bid_micros.value = 10000000  
-    
     response = adgroup_service.mutate_ad_groups(customerId, [operation])
     adGroupResourceName = response.results[0].resource_name
     adGroup = getAdGroup(client, customerId, adGroupResourceName)
@@ -150,7 +152,7 @@ def createTextAds(client, customerId, adGroup):
         final_urls.value = 'http://www.example.com'
         AdGroupOperation.ad.final_urls.extend([final_urls])
         operations.append(operation)
-    adgroup_service =client.get_service("AdGroupAdService")
+    adgroup_service = client.get_service("AdGroupAdService")
     adGroupAdResponse = adgroup_service.mutate_ad_group_ads(customerId, \
                                                             operations)
     newAdResourceNames = []
@@ -160,13 +162,15 @@ def createTextAds(client, customerId, adGroup):
     newAds = getAds(client, customerId, newAdResourceNames)
     for i in range(len(newAds)):
         print("Created expanded text ad with ID {}, status {} and "
-        "headline{}.{}\n".\
+               "headline {}.{}".\
         format(newAds[i].ad.id.value,\
         newAds[i].status,newAds[i].ad.expanded_text_ad.headline_part1.value,\
         newAds[i].ad.expanded_text_ad.headline_part2.value))
 
 
 def getAds(client, customerId, newAdResourceNames):
+    #Prepares the query in the form of the string 'Resource1.name','Resource2.name'
+    #for the in clause
     def formatter(myst):
         results =[]
         for i in myst:
@@ -252,21 +256,9 @@ if __name__ == '__main__':
   parser.add_argument('-c', '--customer_id', type=six.text_type,
                         required=True, help='The Google Ads customer ID.')
   args = parser.parse_args()
-
-
   budget = createCampaignBudget(google_ads_client, args.customer_id)
   campaign = createCampaign(google_ads_client, args.customer_id, budget)
   adGroup = createAdGroup(google_ads_client, args.customer_id, campaign)
   createTextAds(google_ads_client, args.customer_id, adGroup)
   createKeywords(google_ads_client, args.customer_id, adGroup, KEYWORDS_TO_ADD)
-
-
-
-
-
-
-
-
-
-
 

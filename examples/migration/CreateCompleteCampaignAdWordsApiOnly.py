@@ -38,10 +38,12 @@ KEYWORDS_TO_ADD = ["mars cruise", "space hotel" ]
 
 def createCampaignBudget(client):
     """Creates a new budget and returns the newly created budget id.
+
     Args:
-        client: Adwords client
+        client: An instance of the Adwords client
+
     Returns:
-        Budget id of the newly created budget.
+        (str)Budget id of the newly created budget.
     """
     budget_service = client.GetService('BudgetService', version='v201809')
     budget = {
@@ -65,11 +67,13 @@ def createCampaignBudget(client):
 
 def createCampaign(client, budgetId):
     """Creates a new campaign and returns the newly created campaign id.
+
     Args:
-        client: Adwords client
-        budgetId: The buget id that is referenced while creating the campaign
+        client: An instance of the Adwords client
+        budgetId: (str) Budget id to be referenced while creating Campaign
+
     Returns:
-        Campaign id of the newly created campaign.
+        (str)Campaign id of the newly created Campaign.
     """
     campaign_service = client.GetService('CampaignService', version='v201809')
     campaign = {
@@ -108,11 +112,13 @@ def createCampaign(client, budgetId):
 
 def createAdGroup(client, campaign_id):
     """Creates a new adgroup and returns the newly created adgroup id.
+
     Args:
-        client: Adwords client
-        campaign_id: The campaign id that is referenced while creating the adgroup
+        client: An instance of the Adwords client
+        campaign_id: (str) Campaign id to be referenced while creating Adgroup
+        
     Returns:
-        adgroup id of the newly created adgroup.
+        (str)Adgroup id of the newly created Adgroup.
     """
     ad_group_service = client.GetService('AdGroupService', 'v201809')
     ad_group = {
@@ -145,10 +151,12 @@ def createAdGroup(client, campaign_id):
 
 
 def createTextAds(client, adGroupId):
-    """Creates Text Ads.
+    """Creates nextTextAds on the given Adgroup ID.
+
     Args:
-        client: Adwords client
-        adGroupId: The adgroup id that is referenced while creating the Text Ads
+        client: An instance of the Adwords client
+        adGroupId: (str) adGroup id to be referenced while creating text Ads
+        
     Returns:
         None
     """
@@ -186,11 +194,13 @@ def createTextAds(client, adGroupId):
 
 
 def createKeywords(client, adGroupId, keywordsToAdd):
-    """Create Keywords
+    """Creates Keywords on the given Adgroup ID.
+
     Args:
-        client: Adwords client
-        adGroupId: The adgroup id that is referenced while creating the Text Ads
-        keywordsToAdd: The list of keywords to add
+        client: An instance of the Adwords client
+        adGroupId: (str) adGroup id to be referenced while creating text Ads
+        keywordsToAdd: (list) A list of keywords to be added to a given AdGroup
+        
     Returns:
         None
     """

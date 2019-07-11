@@ -47,7 +47,7 @@ def createCampaignBudget(client):
     """
     budget_service = client.GetService('BudgetService', version='v201809')
     budget = {
-        'name' : 'Interplanetary Cruise Budget #%s' % uuid.uuid4(),
+        'name' : 'Interplanetary Cruise Budget #{}'.format(uuid.uuid4()),
         'amount': {
             'microAmount' : '50000000'
         },

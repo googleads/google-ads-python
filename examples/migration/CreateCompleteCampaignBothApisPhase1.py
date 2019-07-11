@@ -43,7 +43,7 @@ PAGE_SIZE = 1000
 
 
 def createCampaignBudget(client, customer_id):
-    """Creates a new campaign and returns the newly created campaign.
+    """Creates a new campaign budget and returns it 
 
     Args:
         client: An instance of the Google Ads client
@@ -57,8 +57,8 @@ def createCampaignBudget(client, customer_id):
     criterion = operation.create
     criterion.name.value = 'Interplanetary Cruise Budget #{}'.format(
                             uuid.uuid4())
-    criterion.delivery_method = client.get_type("BudgetDeliveryMethodEnum").\
-                                                STANDARD
+    criterion.delivery_method = client.get_type(
+                                "BudgetDeliveryMethodEnum").STANDARD
     criterion.amount_micros.value = 500000
     response = campaign_service.mutate_campaign_budgets(customer_id, 
                                                         [operation])
@@ -70,7 +70,8 @@ def createCampaignBudget(client, customer_id):
 
 
 def getCampaignBudget(client, customerId, resource_name):
-    """Creates a new campaign and returns the newly created campaign.
+    """Retrives an instance of CampaignBudget message class associated with
+       a given resource name
 
     Args:
         client: An instance of the Google Ads client
@@ -83,7 +84,7 @@ def getCampaignBudget(client, customerId, resource_name):
     ga_service = client.get_service("GoogleAdsService")
     query = ("SELECT campaign_budget.id, campaign_budget.name, "
              "campaign_budget.resource_name FROM campaign_budget WHERE "
-             "campaign_budget.resource_name = '%s' "%resource_name)
+             "campaign_budget.resource_name = '{}'".format(resource_name))
     response = ga_service.search(customerId, query, PAGE_SIZE)
     budget = list(response)[0].campaign_budget
     return budget
@@ -170,12 +171,12 @@ def createAdGroup(client, campaign_id):
     results = ad_group_service.mutate(adgroup_operations)
     createdAdgroup = results['value'][0]
     print("Ad group with ID {} and name {} was created".format(
-         createdAdgroup['id'], createdAdgroup['name']))
+          createdAdgroup['id'], createdAdgroup['name']))
     return createdAdgroup['id']
 
 
 def createTextAds(client, adGroupId):
-    """Creates nextTextAds on the given Adgroup ID.
+    """Creates TextAds on the given Adgroup ID.
 
     Args:
         client: An instance of the Adwords client

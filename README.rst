@@ -3,6 +3,10 @@ Google Ads API Client Library for Python
 
 This project hosts the Python client library for the Google Ads API.
 
+Build Status
+------------
+|build-status|
+
 Features
 --------
 * Distributed via PyPI.
@@ -230,6 +234,7 @@ Authors
 * `David Wihl`_
 * `Ben Karl`_
 
+.. |build-status| image:: https://storage.googleapis.com/gaa-clientlibs/badges/google-ads-python/buildstatus_ubuntu.png
 .. _Developer Site: https://developers.google.com/google-ads/api/docs/client-libs/python/
 .. _Installed Application Flow: https://developers.google.com/google-ads/api/docs/client-libs/python/oauth-installed
 .. _Web Application Flow: https://developers.google.com/google-ads/api/docs/client-libs/python/oauth-web

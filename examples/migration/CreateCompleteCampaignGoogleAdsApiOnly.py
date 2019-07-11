@@ -216,7 +216,7 @@ def createKeywords(client, customerId, adGroup, keywordstoadd):
         (adGroupCriterionResponse.results[i].resource_name)
     newKeywords = getKeywords(client, customerId, newAdResourceNames)
     for i in range(len(newKeywords)):
-        print("Keyword with text {}, id = {} and match type {} was created\n".\
+        print("Keyword with text {}, id = {} and match type {} was created".\
         format(newKeywords[i].keyword.text.value, \
         newKeywords[i].criterion_id.value, newKeywords[i].keyword.match_type))
 

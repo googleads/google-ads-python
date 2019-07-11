@@ -27,44 +27,50 @@ import uuid
 import google.ads.google_ads.client
 
 
-def main(client, customer_id, ad_group_id):
+def main(client, customer_id, ad_group_id, number_of_ads):
     ad_group_ad_service = client.get_service('AdGroupAdService', version='v2')
     ad_group_service = client.get_service('AdGroupService', version='v2')
 
-    # Create ad group ad.
-    ad_group_ad_operation = client.get_type('AdGroupAdOperation', version='v2')
-    ad_group_ad = ad_group_ad_operation.create
-    ad_group_ad.ad_group.value = ad_group_service.ad_group_path(
-        customer_id, ad_group_id)
-    ad_group_ad.status = client.get_type('AdGroupAdStatusEnum',
-                                         version='v2').PAUSED
+    ad_group_ad_operations = []
 
-    # Set expanded text ad info
-    final_url = ad_group_ad.ad.final_urls.add()
-    final_url.value = 'http://www.example.com'
-    ad_group_ad.ad.expanded_text_ad.description.value = 'Buy your tickets now!'
-    ad_group_ad.ad.expanded_text_ad.headline_part1.value = (
-        'Cruise to Mars %s' % str(uuid.uuid4())[:15])
-    ad_group_ad.ad.expanded_text_ad.headline_part2.value = (
-        'Best space cruise line')
-    ad_group_ad.ad.expanded_text_ad.path1.value = 'all-inclusive'
-    ad_group_ad.ad.expanded_text_ad.path2.value = 'deals'
+    for i in range(number_of_ads):
+
+        # Create ad group ad.
+        ad_group_ad_operation = client.get_type('AdGroupAdOperation', version='v2')
+        ad_group_ad = ad_group_ad_operation.create
+        ad_group_ad.ad_group.value = ad_group_service.ad_group_path(
+            customer_id, ad_group_id)
+        ad_group_ad.status = client.get_type('AdGroupAdStatusEnum',
+                                             version='v2').PAUSED
+
+        # Set expanded text ad info
+        final_url = ad_group_ad.ad.final_urls.add()
+        final_url.value = 'http://www.example.com'
+        ad_group_ad.ad.expanded_text_ad.description.value = 'Buy your tickets now!'
+        ad_group_ad.ad.expanded_text_ad.headline_part1.value = (
+            'Cruise {} to Mars {}'.format(i, str(uuid.uuid4())[:8]))
+        ad_group_ad.ad.expanded_text_ad.headline_part2.value = (
+            'Best space cruise line')
+        ad_group_ad.ad.expanded_text_ad.path1.value = 'all-inclusive'
+        ad_group_ad.ad.expanded_text_ad.path2.value = 'deals'
+
+        ad_group_ad_operations.append(ad_group_ad_operation)
 
     try:
         ad_group_ad_response = ad_group_ad_service.mutate_ad_group_ads(
-            customer_id, [ad_group_ad_operation])
+            customer_id, ad_group_ad_operations)
     except google.ads.google_ads.errors.GoogleAdsException as ex:
-        print('Request with ID "%s" failed with status "%s" and includes the '
-              'following errors:' % (ex.request_id, ex.error.code().name))
+        print('Request with ID "{}" failed with status "{}" and includes the '
+              'following errors:'.format(ex.request_id, ex.error.code().name))
         for error in ex.failure.errors:
-            print('\tError with message "%s".' % error.message)
+            print('\tError with message "{}".'.format(error.message))
             if error.location:
                 for field_path_element in error.location.field_path_elements:
-                    print('\t\tOn field: %s' % field_path_element.field_name)
+                    print('\t\tOn field: {}'.format(field_path_element.field_name))
         sys.exit(1)
 
-    print('Created ad group ad %s.'
-          % ad_group_ad_response.results[0].resource_name)
+    for result in ad_group_ad_response.results:
+        print('Created ad group ad {}.'.format(result.resource_name))
 
 
 if __name__ == '__main__':
@@ -81,6 +87,8 @@ if __name__ == '__main__':
                         required=True, help='The Google Ads customer ID.')
     parser.add_argument('-a', '--ad_group_id', type=six.text_type,
                         required=True, help='The ad group ID.')
+    parser.add_argument('-n', '--number_of_ads', type=int,
+                        required=False, default=1, help='The number of ads.')
     args = parser.parse_args()
 
-    main(google_ads_client, args.customer_id, args.ad_group_id)
+    main(google_ads_client, args.customer_id, args.ad_group_id, args.number_of_ads)

@@ -27,36 +27,19 @@ from google.ads.google_ads.errors import GoogleAdsException
 
 
 def main(client, customer_id, campaign_id):
-    ad_group_service = client.get_service('AdGroupService', version='v2')
-    campaign_service = client.get_service('CampaignService', version='v2')
-    resource_name = campaign_service.campaign_path(customer_id, campaign_id)
-    invalid_resource_name = campaign_service.campaign_path(customer_id, 0)
-    ad_group_operations = []
+    """Runs the example code, which demonstrates how to handle partial failures.
 
-    # This AdGroup should be created successfully - assuming the campaign in
-    # the params exists.
-    ad_group_op1 = client.get_type('AdGroupOperation', version='v2')
-    ad_group_op1.create.name.value = 'Valid AdGroup: %s' % uuid.uuid4()
-    ad_group_op1.create.campaign.value = resource_name
-    ad_group_operations.append(ad_group_op1)
+    The example creates three Ad Groups, two of which intentionally fail in
+    order to generate a partial failure error. It also demonstrates how to
+    properly identify a partial error and how to log the error messages.
 
-    # This AdGroup will always fail - campaign ID 0 in resource names is
-    # never valid.
-    ad_group_op2 = client.get_type('AdGroupOperation', version='v2')
-    ad_group_op2.create.name.value = 'Broken AdGroup: %s' % (uuid.uuid4())
-    ad_group_op2.create.campaign.value = invalid_resource_name
-    ad_group_operations.append(ad_group_op2)
-
-    # This AdGroup will always fail - duplicate ad group names are not allowed.
-    ad_group_op3 = client.get_type('AdGroupOperation', version='v2')
-    ad_group_op3.create.name.value = (ad_group_op1.create.name.value)
-    ad_group_op3.create.campaign.value = resource_name
-    ad_group_operations.append(ad_group_op3)
-
+    Args:
+        client:  An initialized GoogleAdsClient instance.
+        customer_id: A valid customer account ID.
+        campaign_id: The ID for a campaign to create Ad Groups under.
+    """
     try:
-        # Issue a mutate request, setting partial_failure=True.
-        ad_group_response = ad_group_service.mutate_ad_groups(
-            customer_id, ad_group_operations, partial_failure=True)
+        ad_group_response = create_ad_groups(client, customer_id, campaign_id)
     except GoogleAdsException as ex:
         print('Request with ID "%s" failed with status "%s" and includes the '
               'following errors:' % (ex.request_id, ex.error.code().name))
@@ -68,7 +51,7 @@ def main(client, customer_id, campaign_id):
         sys.exit(1)
     else:
         # Check for existence of any partial failures in the response.
-        if ad_group_response.partial_failure_error:
+        if check_if_partial_failure_exists(ad_group_response):
             print('Partial failures occurred. Details will be shown below.\n')
             partial_failures = get_partial_failure_messages(
                 client, ad_group_response)
@@ -96,6 +79,67 @@ def main(client, customer_id, campaign_id):
 
             print('Created ad group with resource_name: %s.' % (
                 message.resource_name))
+
+
+def create_ad_groups(client, customer_id, campaign_id):
+    """Creates three Ad Groups, two of which intentionally generate errors.
+
+    Args:
+        client:  An initialized GoogleAdsClient instance.
+        customer_id: A valid customer account ID.
+        campaign_id: The ID for a campaign to create Ad Groups under.
+
+    Returns: A MutateAdGroupsResponse message instance.
+    """
+    ad_group_service = client.get_service('AdGroupService', version='v2')
+    campaign_service = client.get_service('CampaignService', version='v2')
+    resource_name = campaign_service.campaign_path(customer_id, campaign_id)
+
+    invalid_resource_name = campaign_service.campaign_path(customer_id, 0)
+    ad_group_operations = []
+
+    # This AdGroup should be created successfully - assuming the campaign in
+    # the params exists.
+    ad_group_op1 = client.get_type('AdGroupOperation', version='v2')
+    ad_group_op1.create.name.value = 'Valid AdGroup: %s' % uuid.uuid4()
+    ad_group_op1.create.campaign.value = resource_name
+    ad_group_operations.append(ad_group_op1)
+
+    # This AdGroup will always fail - campaign ID 0 in resource names is
+    # never valid.
+    ad_group_op2 = client.get_type('AdGroupOperation', version='v2')
+    ad_group_op2.create.name.value = 'Broken AdGroup: %s' % (uuid.uuid4())
+    ad_group_op2.create.campaign.value = invalid_resource_name
+    ad_group_operations.append(ad_group_op2)
+
+    # This AdGroup will always fail - duplicate ad group names are not allowed.
+    ad_group_op3 = client.get_type('AdGroupOperation', version='v2')
+    ad_group_op3.create.name.value = (ad_group_op1.create.name.value)
+    ad_group_op3.create.campaign.value = resource_name
+    ad_group_operations.append(ad_group_op3)
+
+    # Issue a mutate request, setting partial_failure=True.
+    return ad_group_service.mutate_ad_groups(customer_id, ad_group_operations,
+                                             partial_failure=True)
+
+def check_if_partial_failure_exists(response):
+    """Checks whether a response message has a partial failure error.
+
+    In Python the partial_failure_error attr is always present on a response
+    message and is represented by a google.rpc.Status message. So we can't
+    simply check whether the field is present, we must check that the code is
+    non-zero. Error codes are represented by the google.rpc.Code proto Enum:
+    https://github.com/googleapis/googleapis/blob/master/google/rpc/code.proto
+
+    Args:
+        response:  A MutateAdGroupsResponse message instance.
+
+    Returns: A boolean, whether or not the response message has a partial
+        failure error.
+    """
+    partial_failure = getattr(response, 'partial_failure_error', None)
+    code = getattr(partial_failure, 'code', None)
+    return code != 0
 
 
 def get_partial_failure_messages(client, response):

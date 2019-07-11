@@ -71,7 +71,6 @@ def createCampaign(client, budgetId):
     Returns:
         Campaign id of the newly created campaign.
     """
-    budget_serv
     campaign_service = client.GetService('CampaignService', version='v201809')
     campaign = {
         'name': 'Interplanetary Cruise #{}'.format(uuid.uuid4()),

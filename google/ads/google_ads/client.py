@@ -110,9 +110,7 @@ class GoogleAdsClient(object):
         Raises:
             ValueError: If the configuration lacks a required field.
         """
-
-
-        config_data=config.load_from_dict(config_dict)
+        config_data = config.load_from_dict(config_dict)
         kwargs = cls._get_client_kwargs(config_data)
         return cls(**kwargs)
 

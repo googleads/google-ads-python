@@ -129,26 +129,27 @@ def load_from_yaml_file(path=None):
 
     return parse_yaml_document_to_dict(yaml_doc)
 
+
 @_config_validation_decorator
 @_config_parser_decorator
 def load_from_dict(config_dict):
-    """ Check if the argument is dictionary or not. If successful it calls the parsing decorator,
+    """Check if the argument is dictionary or not. If successful it calls the parsing decorator,
 	followed by validation decorator. This validates the keys used in the config_dict, before
 	returning to its calller.
 
     Args:
-       	config_dict: a dict containing client configuration.
+        config_dict: a dict containing client configuration.
 
     Returns:
-        The same input dictionary that is passed into the function
+        The same input dictionary that is passed into the function.
 
     Raises:
-        A value error if the argument(config_dict) is not a dict
+        A value error if the argument(config_dict) is not a dict.
     """
     if isinstance(config_dict, dict):
 	return config_dict
     else:
-	raise ValueError('The configuration object passed to function(load_from_dict) must be of type dict')
+	raise ValueError('The configuration object passed to function load_from_dict must be of type dict')
 
 
 @_config_validation_decorator

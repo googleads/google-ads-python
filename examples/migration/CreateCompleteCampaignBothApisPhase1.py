@@ -13,7 +13,7 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
-"""This example creates serach campaign with the help of Adwords Api and Google Ads API
+"""This example creates serach campaign with the help of AdWords Api and Google Ads API
 
 This code example is the second in a series of code examples that shows how to create
 a Search ad_group using the AdWords API, and then migrate it to the Google Ads API one
@@ -24,17 +24,19 @@ In this code example, the functionality to create ad_group budget has been migra
 the Google Ads API. The rest of the functionality - creating a Search ad_group, ad groups,
 keywords and expanded text ads are done using the AdWords API.
 """
-
-import datetime
-import uuid
-from googleads import adwords
 import argparse
 import collections
+import datetime
 import sys
-import six
 import urllib.parse
+import uuid
+
+from googleads import adwords
+import six
+
 from google.ads.google_ads.client import GoogleAdsClient
 from google.ads.google_ads.errors import GoogleAdsException
+
 #Number of ads being added/updated in this code example.
 NUMBER_OF_ADS = 5
 #The list of keywords being added in this code example.
@@ -43,14 +45,14 @@ PAGE_SIZE = 1000
 
 
 def createCampaignBudget(client, customer_id):
-    """Creates a new campaign budget and returns it 
+    """Creates a new campaign budget and returns it.
 
     Args:
-        client: An instance of the Google Ads client
-        customer_id: (str)Customer id associated with the account
+        client: An instance of the Google Ads client.
+        customer_id: (str) Customer id associated with the account.
 
     Returns:
-        CampaignBudget message class instance of the newly created Buget, 
+        CampaignBudget message class instance of the newly created Buget. 
     """
     campaign_service = client.get_service('CampaignBudgetService')
     operation = client.get_type("CampaignBudgetOperation")
@@ -71,15 +73,15 @@ def createCampaignBudget(client, customer_id):
 
 def getCampaignBudget(client, customerId, resource_name):
     """Retrives an instance of CampaignBudget message class associated with
-       a given resource name
+       a given resource name.
 
     Args:
-        client: An instance of the Google Ads client
-        customer_id: (str)Customer id associated with the account
-        resource_name: (str)Resource Name associated with the newly created campaign. 
+        client: An instance of the Google Ads client.
+        customer_id: (str) Customer id associated with the account.
+        resource_name: (str) Resource Name associated with the newly created campaign. 
 
     Returns:
-        CampaignBudget message class instance of the newly created Buget, 
+        CampaignBudget message class instance of the newly created Buget.
     """
     ga_service = client.get_service("GoogleAdsService")
     query = ("SELECT campaign_budget.id, campaign_budget.name, "
@@ -94,11 +96,11 @@ def createCampaign(client, budgetId):
     """Creates a new campaign and returns the newly created campaign id.
 
     Args:
-        client: An instance of the Adwords client
-        budgetId: (str) Budget id to be referenced while creating Campaign
+        client: An instance of the Adwords client.
+        budgetId: (str) Budget id to be referenced while creating Campaign.
 
     Returns:
-        (str)Campaign id of the newly created Campaign.
+        (str) Campaign id of the newly created Campaign.
     """
     campaign_service = client.GetService('CampaignService', version='v201809')
     campaign = {
@@ -139,11 +141,11 @@ def createAdGroup(client, campaign_id):
     """Creates a new adgroup and returns the newly created adgroup id.
 
     Args:
-        client: An instance of the Adwords client
-        campaign_id: (str) Campaign id to be referenced while creating Adgroup
+        client: An instance of the Adwords client.
+        campaign_id: (str) Campaign id to be referenced while creating Adgroup.
         
     Returns:
-        (str)Adgroup id of the newly created Adgroup.
+        (str) Adgroup id of the newly created Adgroup.
     """
     ad_group_service = client.GetService('AdGroupService', 'v201809')
     ad_group = {
@@ -179,11 +181,11 @@ def createTextAds(client, adGroupId):
     """Creates TextAds on the given Adgroup ID.
 
     Args:
-        client: An instance of the Adwords client
-        adGroupId: (str) adGroup id to be referenced while creating text Ads
+        client: An instance of the Adwords client.
+        adGroupId: (str) adGroup id to be referenced while creating text Ads.
         
     Returns:
-        None
+        None.
     """
     ad_group_service = client.GetService('AdGroupAdService', 'v201809')
     operations = []
@@ -222,12 +224,12 @@ def createKeywords(client, adGroupId, keywordsToAdd):
     """Creates Keywords on the given Adgroup ID.
 
     Args:
-        client: An instance of the Adwords client
-        adGroupId: (str) adGroup id to be referenced while creating text Ads
-        keywordsToAdd: (list) A list of keywords to be added to a given AdGroup
+        client: An instance of the Adwords client.
+        adGroupId: (str) adGroup id to be referenced while creating text Ads.
+        keywordsToAdd: (list) A list of keywords to be added to a given AdGroup.
         
     Returns:
-        None
+        None.
     """
     ad_group_criterion_service = client.GetService('AdGroupCriterionService',
                                                    'v201809')
@@ -267,7 +269,7 @@ if __name__ == '__main__':
 
   parser = argparse.ArgumentParser(
         description='Lists all campaigns for specified customer.')
-    # The following argument(s) should be provided to run the example.
+  # The following argument(s) should be provided to run the example.
   parser.add_argument('-c', '--customer_id', type=six.text_type,
                         required=True, help='The Google Ads customer ID.')
   args = parser.parse_args()

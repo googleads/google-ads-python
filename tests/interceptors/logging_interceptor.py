@@ -42,7 +42,7 @@ class LoggingInterceptorTest(TestCase):
     _MOCK_ERROR = mock.Mock()
     _MOCK_FAILURE = mock.Mock()
 
-    def _create_test_interceptor(self, config=_MOCK_CONFIG,
+    def _create_test_interceptor(self, logger=mock.Mock(),
                                  endpoint=_MOCK_ENDPOINT):
         """Creates a LoggingInterceptor instance.
 
@@ -56,7 +56,7 @@ class LoggingInterceptorTest(TestCase):
             config: A dict configuration
             endpoint: A str representing an endpoint
         """
-        return LoggingInterceptor(config, endpoint)
+        return LoggingInterceptor(logger, endpoint)
 
     def _get_mock_client_call_details(self):
         """Generates a mock client_call_details object for use in tests.
@@ -188,21 +188,6 @@ class LoggingInterceptorTest(TestCase):
 
         return mock_continuation_fn
 
-    def test_init_no_config(self):
-        """Unconfigured LoggingInterceptor should not call logging.dictConfig.
-        """
-        with mock.patch('logging.config.dictConfig') as mock_dictConfig:
-            LoggingInterceptor()
-            mock_dictConfig.assert_not_called()
-
-    def test_init_with_config(self):
-        """Configured LoggingInterceptor should call logging.dictConfig.
-        """
-        config = {'test': True}
-        with mock.patch('logging.config.dictConfig') as mock_dictConfig:
-            LoggingInterceptor(config)
-            mock_dictConfig.assert_called_once_with(config)
-
     def test_intercept_unary_unary_unconfigured(self):
         """No _logger methods should be called.
 
@@ -216,7 +201,7 @@ class LoggingInterceptorTest(TestCase):
         # so that state from previous tests does not affect these assertions
         logging.disable(logging.CRITICAL)
         logger_spy = mock.Mock(wraps=Client._logger)
-        interceptor = LoggingInterceptor()
+        interceptor = LoggingInterceptor(logger_spy)
         interceptor.intercept_unary_unary(
             mock_continuation_fn,
             mock_client_call_details,
@@ -241,7 +226,7 @@ class LoggingInterceptorTest(TestCase):
 
         with mock.patch('logging.config.dictConfig'), \
             mock.patch('google.ads.google_ads.client._logger') as mock_logger:
-            interceptor = self._create_test_interceptor()
+            interceptor = self._create_test_interceptor(logger=mock_logger)
             interceptor.intercept_unary_unary(
                 mock_continuation_fn,
                 mock_client_call_details,
@@ -273,13 +258,14 @@ class LoggingInterceptorTest(TestCase):
         mock_continuation_fn = self._get_mock_continuation_fn(fail=True)
         mock_request = self._get_mock_request()
 
-        with mock.patch('logging.config.dictConfig'), \
-            mock.patch('google.ads.google_ads.client._logger') as mock_logger:
-            interceptor = self._create_test_interceptor()
+        with mock.patch(
+            'logging.config.dictConfig'
+        ), mock.patch(
+            'google.ads.google_ads.client._logger'
+        ) as mock_logger:
+            interceptor = self._create_test_interceptor(logger=mock_logger)
             mock_response = interceptor.intercept_unary_unary(
-                mock_continuation_fn,
-                mock_client_call_details,
-                mock_request)
+                mock_continuation_fn, mock_client_call_details, mock_request)
 
             mock_trailing_metadata = mock_response.trailing_metadata()
 
@@ -336,10 +322,12 @@ class LoggingInterceptorTest(TestCase):
 
     def test_parse_exception_to_str_transport_failure(self):
         """ Calls _format_json_object with error obj's debug_error_string."""
-        with mock.patch('logging.config.dictConfig'), \
-            mock.patch(
-                'google.ads.google_ads.client._format_json_object'
-                ) as mock_parser:
+        with mock.patch(
+            'logging.config.dictConfig'
+        ), mock.patch(
+            'google.ads.google_ads.interceptors.'
+            'logging_interceptor._format_json_object'
+        ) as mock_parser:
             mock_exception = self._get_mock_transport_exception()
             interceptor = self._create_test_interceptor()
             interceptor._parse_exception_to_str(mock_exception)

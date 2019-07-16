@@ -14,3 +14,4 @@
 
 from .metadata_interceptor import MetadataInterceptor
 from .exception_interceptor import ExceptionInterceptor
+from .logging_interceptor import LoggingInterceptor

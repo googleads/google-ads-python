@@ -81,7 +81,7 @@ class GoogleAdsClientTest(FileTestCase):
             mock_credentials_instance.client_id = self.client_id
             mock_credentials_instance.client_secret = self.client_secret
             client = Client.GoogleAdsClient(mock_credentials_instance,
-                self.developer_token, endpoint=endpoint)
+                                            self.developer_token, endpoint=endpoint)
             return client
 
     def setUp(self):
@@ -460,3 +460,38 @@ class GoogleAdsClientTest(FileTestCase):
         self.assertRaises(
             ValueError, Client.GoogleAdsClient.get_type,
             'GoogleAdsFailure', version='bad_version')
+
+    def test_init_no_logging_config(self):
+        """Should only call logging.config.dictConfig if logging config exists.
+        """
+        with mock.patch(
+            'logging.config.dictConfig'
+        ) as mock_dictConfig, mock.patch.object(
+            Client.oauth2,
+            'get_installed_app_credentials'
+        ) as mock_credentials:
+            mock_credentials_instance = mock_credentials.return_value
+            mock_credentials_instance.refresh_token = self.refresh_token
+            mock_credentials_instance.client_id = self.client_id
+            mock_credentials_instance.client_secret = self.client_secret
+            Client.GoogleAdsClient(mock_credentials_instance,
+                                   self.developer_token)
+            mock_dictConfig.assert_not_called()
+
+    def test_init_with_logging_config(self):
+        """Configured LoggingInterceptor should call logging.dictConfig.
+        """
+        config = {'test': True}
+        with mock.patch(
+            'logging.config.dictConfig'
+        ) as mock_dictConfig, mock.patch.object(
+            Client.oauth2,
+            'get_installed_app_credentials'
+        ) as mock_credentials:
+            mock_credentials_instance = mock_credentials.return_value
+            mock_credentials_instance.refresh_token = self.refresh_token
+            mock_credentials_instance.client_id = self.client_id
+            mock_credentials_instance.client_secret = self.client_secret
+            Client.GoogleAdsClient(mock_credentials_instance,
+                                   self.developer_token, logging_config=config)
+            mock_dictConfig.assert_called_once_with(config)

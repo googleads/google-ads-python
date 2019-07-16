@@ -105,7 +105,7 @@ class GoogleAdsClient(object):
 
         Returns:
             A GoogleAdsClient initialized with the values specified in the
-            dict.
+                dict.
 
         Raises:
             ValueError: If the configuration lacks a required field.

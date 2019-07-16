@@ -128,7 +128,6 @@ class ConfigTest(FileTestCase):
               'refresh_token': self.refresh_token}
         self.assertEqual(config.load_from_dict(config_data), config_data)
     
-
     def test_load_from_dict_error(self):
         config_data = 111
         self.assertRaises(ValueError, config.load_from_dict, config_data)

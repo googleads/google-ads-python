@@ -218,6 +218,7 @@ class GoogleAdsClientTest(FileTestCase):
             return_value=mock_credentials_instance
         ) as mock_credentials:
           Client.GoogleAdsClient.load_from_dict(config)
+          
           mock_client_init.assert_called_once_with(
           credentials=mock_credentials_instance,
           developer_token=self.developer_token,

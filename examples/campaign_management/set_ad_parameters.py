@@ -19,7 +19,6 @@ from __future__ import absolute_import
 import argparse
 import six
 import sys
-import uuid
 
 from google.ads.google_ads.client import GoogleAdsClient
 from google.ads.google_ads.errors import GoogleAdsException

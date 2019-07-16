@@ -23,6 +23,7 @@ from collections import namedtuple
 
 from grpc import UnaryUnaryClientInterceptor, ClientCallDetails
 
+
 class _ClientCallDetails(
         namedtuple(
             '_ClientCallDetails',
@@ -30,6 +31,7 @@ class _ClientCallDetails(
         ClientCallDetails):
     """A wrapper class for initializing a new ClientCallDetails instance."""
     pass
+
 
 class MetadataInterceptor(UnaryUnaryClientInterceptor):
     """An interceptor that appends custom metadata to requests."""

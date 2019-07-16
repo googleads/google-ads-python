@@ -38,7 +38,7 @@ class ExceptionInterceptorTest(TestCase):
         Returns:
             An ExceptionInterceptor instance.
         """
-        return ExceptionInterceptor()
+        return ExceptionInterceptor(Client._DEFAULT_VERSION)
 
     def test_init_(self):
         """Tests that the interceptor initializes properly"""

@@ -13,3 +13,4 @@
 # limitations under the License.
 
 from .metadata_interceptor import MetadataInterceptor
+from .exception_interceptor import ExceptionInterceptor

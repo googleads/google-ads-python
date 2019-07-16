@@ -24,7 +24,9 @@ from google.protobuf.message import DecodeError
 
 from google.ads.google_ads import config
 from google.ads.google_ads import oauth2
+
 from google.ads.google_ads.errors import GoogleAdsException
+from google.ads.google_ads.interceptors import MetadataInterceptor
 
 _logger = logging.getLogger(__name__)
 
@@ -562,48 +564,6 @@ class LoggingInterceptor(grpc.UnaryUnaryClientInterceptor):
             self._log_request(client_call_details, request, response)
 
         return response
-
-
-class MetadataInterceptor(grpc.UnaryUnaryClientInterceptor):
-    """An interceptor that appends custom metadata to requests."""
-
-    def __init__(self, developer_token, login_customer_id):
-        self.developer_token_meta = ('developer-token', developer_token)
-        self.login_customer_id_meta = (
-            ('login-customer-id', login_customer_id) if login_customer_id
-            else None)
-
-    def _update_client_call_details_metadata(
-            self, client_call_details, metadata):
-        client_call_details = _ClientCallDetails(
-            client_call_details.method, client_call_details.timeout, metadata,
-            client_call_details.credentials)
-
-        return client_call_details
-
-    def intercept_unary_unary(self, continuation, client_call_details, request):
-        """Intercepts and appends custom metadata.
-
-        Overrides abstract method defined in grpc.UnaryUnaryClientInterceptor.
-
-        Returns:
-            A grpc.Call/grpc.Future instance representing a service response.
-        """
-        if client_call_details.metadata is None:
-            metadata = []
-        else:
-            metadata = list(client_call_details.metadata)
-
-        metadata.append(self.developer_token_meta)
-
-        if self.login_customer_id_meta:
-            metadata.append(self.login_customer_id_meta)
-
-        client_call_details = self._update_client_call_details_metadata(
-            client_call_details,
-            metadata)
-
-        return continuation(client_call_details, request)
 
 
 class _ClientCallDetails(

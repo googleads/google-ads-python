@@ -322,14 +322,15 @@ class LoggingInterceptorTest(TestCase):
 
     def test_parse_exception_to_str_transport_failure(self):
         """ Calls _format_json_object with error obj's debug_error_string."""
+        interceptor = self._create_test_interceptor()
+
         with mock.patch(
             'logging.config.dictConfig'
-        ), mock.patch(
-            'google.ads.google_ads.interceptors.'
-            'logging_interceptor._format_json_object'
+        ), mock.patch.object(
+            interceptor,
+            'format_json_object'
         ) as mock_parser:
             mock_exception = self._get_mock_transport_exception()
-            interceptor = self._create_test_interceptor()
             interceptor._parse_exception_to_str(mock_exception)
             mock_parser.assert_called_once_with(
                 json.loads(self._MOCK_DEBUG_ERROR_STRING))

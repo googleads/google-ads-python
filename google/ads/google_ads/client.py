@@ -13,13 +13,12 @@
 # limitations under the License.
 """A client and common configurations for the Google Ads API."""
 
-import logging
 import grpc
 from importlib import import_module
+import logging.config
 
 from google.ads.google_ads import config
 from google.ads.google_ads import oauth2
-
 from google.ads.google_ads.interceptors import MetadataInterceptor, \
     ExceptionInterceptor, LoggingInterceptor
 

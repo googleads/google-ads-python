@@ -19,96 +19,11 @@ and responses, parses them into a human readable structure and logs them using
 the passed in logger instance.
 """
 
+from grpc import UnaryUnaryClientInterceptor
 import json
 import logging
-from grpc import UnaryUnaryClientInterceptor
 
 from .interceptor_mixin import InterceptorMixin
-
-
-def _get_request_id_from_metadata(trailing_metadata):
-    """Gets the request ID for the Google Ads API request.
-
-    Args:
-        trailing_metadata: a tuple of metadatum from the service response.
-
-    Returns:
-        A str request ID associated with the Google Ads API request, or None
-        if it doesn't exist.
-    """
-    for kv in trailing_metadata:
-        if kv[0] == 'request-id':
-            return kv[1]  # Return the found request ID.
-
-    return None
-
-
-def _get_trailing_metadata_from_interceptor_exception(exception):
-    """Retrieves trailing metadata from an exception object.
-
-    Args:
-        exception: an instance of grpc.Call.
-
-    Returns:
-        A tuple of trailing metadata key value pairs.
-    """
-    try:
-        # GoogleAdsFailure exceptions will contain trailing metadata on the
-        # error attribute.
-        return exception.error.trailing_metadata()
-    except AttributeError:
-        try:
-            # Transport failures, i.e. issues at the gRPC layer, will contain
-            # trailing metadata on the exception iself.
-            return exception.trailing_metadata()
-        except AttributeError:
-            # if trailing metadata is not found in either location then
-            # return an empty tuple
-            return tuple()
-
-
-def _format_json_object(obj):
-    """Parses a serializable object into a consistently formatted JSON string.
-
-    Returns:
-        A str of formatted JSON serialized from the given object.
-
-    Args:
-        obj: an object or dict.
-    """
-    def default_serializer(value):
-        if isinstance(value, bytes):
-            return value.decode(errors='ignore')
-        else:
-            return None
-
-    return str(json.dumps(obj, indent=2, sort_keys=True, ensure_ascii=False,
-                          default=default_serializer, separators=(',', ': ')))
-
-
-def _parse_metadata_to_json(metadata):
-    """Parses metadata from gRPC request and response messages to a JSON str.
-
-    Obscures the value for "developer-token".
-
-    Args:
-        metadata: a tuple of metadatum.
-    """
-    SENSITIVE_INFO_MASK = 'REDACTED'
-    metadata_dict = {}
-
-    if metadata is None:
-        return '{}'
-
-    for datum in metadata:
-        key = datum[0]
-        if key == 'developer-token':
-            metadata_dict[key] = SENSITIVE_INFO_MASK
-        else:
-            value = datum[1]
-            metadata_dict[key] = value
-
-    return _format_json_object(metadata_dict)
 
 
 class LoggingInterceptor(InterceptorMixin, UnaryUnaryClientInterceptor):
@@ -150,12 +65,12 @@ class LoggingInterceptor(InterceptorMixin, UnaryUnaryClientInterceptor):
             trailing_metadata = response.trailing_metadata()
 
             if not trailing_metadata:
-                return _get_trailing_metadata_from_interceptor_exception(
+                return self.get_trailing_metadata_from_interceptor_exception(
                     response.exception())
 
             return trailing_metadata
         except AttributeError:
-            return _get_trailing_metadata_from_interceptor_exception(
+            return self.get_trailing_metadata_from_interceptor_exception(
                 response.exception())
 
     def _get_initial_metadata(self, client_call_details):
@@ -219,7 +134,7 @@ class LoggingInterceptor(InterceptorMixin, UnaryUnaryClientInterceptor):
                 # if exception.failure isn't present then it's likely this is a
                 # transport error with a .debug_error_string method and the
                 # returned JSON string will need to be formatted.
-                return _format_json_object(json.loads(
+                return self.format_json_object(json.loads(
                     exception.debug_error_string()))
             except (AttributeError, ValueError):
                 # if both attempts to retrieve serializable error data fail
@@ -302,10 +217,10 @@ class LoggingInterceptor(InterceptorMixin, UnaryUnaryClientInterceptor):
         method = self._get_call_method(client_call_details)
         customer_id = self._get_customer_id(request)
         initial_metadata = self._get_initial_metadata(client_call_details)
-        initial_metadata_json = _parse_metadata_to_json(initial_metadata)
+        initial_metadata_json = self.parse_metadata_to_json(initial_metadata)
         trailing_metadata = self._get_trailing_metadata(response)
-        request_id = _get_request_id_from_metadata(trailing_metadata)
-        trailing_metadata_json = _parse_metadata_to_json(trailing_metadata)
+        request_id = self.get_request_id_from_metadata(trailing_metadata)
+        trailing_metadata_json = self.parse_metadata_to_json(trailing_metadata)
 
         if response.exception():
             self._log_failed_request(method, customer_id, initial_metadata_json,

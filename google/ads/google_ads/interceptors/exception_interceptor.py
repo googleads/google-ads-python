@@ -26,25 +26,10 @@ from grpc import UnaryUnaryClientInterceptor, StatusCode
 
 from google.ads.google_ads.errors import GoogleAdsException
 
-
-def _get_request_id_from_metadata(trailing_metadata):
-    """Gets the request ID for the Google Ads API request.
-
-    Args:
-        trailing_metadata: a tuple of metadatum from the service response.
-
-    Returns:
-        A str request ID associated with the Google Ads API request, or None
-        if it doesn't exist.
-    """
-    for kv in trailing_metadata:
-        if kv[0] == 'request-id':
-            return kv[1]  # Return the found request ID.
-
-    return None
+from .interceptor_mixin import InterceptorMixin
 
 
-class ExceptionInterceptor(UnaryUnaryClientInterceptor):
+class ExceptionInterceptor(InterceptorMixin, UnaryUnaryClientInterceptor):
     """An interceptor that wraps rpc exceptions."""
 
     # Codes that are retried upon by google.api_core.
@@ -120,7 +105,7 @@ class ExceptionInterceptor(UnaryUnaryClientInterceptor):
             google_ads_failure = self._get_google_ads_failure(trailing_metadata)
 
             if google_ads_failure:
-                request_id = _get_request_id_from_metadata(trailing_metadata)
+                request_id = self.get_request_id_from_metadata(trailing_metadata)
 
                 raise GoogleAdsException(exception, response,
                                          google_ads_failure, request_id)

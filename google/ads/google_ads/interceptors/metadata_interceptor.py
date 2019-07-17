@@ -19,21 +19,12 @@ and updates the metadata in order to insert the developer token and
 login-customer-id values.
 """
 
-from collections import namedtuple
+from grpc import UnaryUnaryClientInterceptor
 
-from grpc import UnaryUnaryClientInterceptor, ClientCallDetails
-
-
-class _ClientCallDetails(
-        namedtuple(
-            '_ClientCallDetails',
-            ('method', 'timeout', 'metadata', 'credentials')),
-        ClientCallDetails):
-    """A wrapper class for initializing a new ClientCallDetails instance."""
-    pass
+from .interceptor_mixin import InterceptorMixin
 
 
-class MetadataInterceptor(UnaryUnaryClientInterceptor):
+class MetadataInterceptor(InterceptorMixin, UnaryUnaryClientInterceptor):
     """An interceptor that appends custom metadata to requests."""
 
     def __init__(self, developer_token, login_customer_id):
@@ -54,7 +45,7 @@ class MetadataInterceptor(UnaryUnaryClientInterceptor):
             An new instance of grpc.ClientCallDetails with additional metadata
             from the GoogleAdsClient.
         """
-        client_call_details = _ClientCallDetails(
+        client_call_details = self.get_client_call_details_instance(
             client_call_details.method, client_call_details.timeout, metadata,
             client_call_details.credentials)
 

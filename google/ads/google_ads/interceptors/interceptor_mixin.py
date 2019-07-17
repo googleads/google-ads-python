@@ -18,6 +18,8 @@ Interceptors, including retrieving data from gRPC metadata and initializing
 instances of grpc.ClientCallDetails.
 """
 
+from collections import namedtuple
+from grpc import ClientCallDetails
 import json
 
 
@@ -86,3 +88,49 @@ class InterceptorMixin:
         return str(json.dumps(obj, indent=2, sort_keys=True, ensure_ascii=False,
                               default=default_serializer,
                               separators=(',', ': ')))
+
+    @classmethod
+    def get_trailing_metadata_from_interceptor_exception(self, exception):
+        """Retrieves trailing metadata from an exception object.
+
+        Args:
+            exception: an instance of grpc.Call.
+
+        Returns:
+            A tuple of trailing metadata key value pairs.
+        """
+        try:
+            # GoogleAdsFailure exceptions will contain trailing metadata on the
+            # error attribute.
+            return exception.error.trailing_metadata()
+        except AttributeError:
+            try:
+                # Transport failures, i.e. issues at the gRPC layer, will contain
+                # trailing metadata on the exception itself.
+                return exception.trailing_metadata()
+            except AttributeError:
+                # if trailing metadata is not found in either location then
+                # return an empty tuple
+                return tuple()
+
+    @classmethod
+    def get_client_call_details_instance(cls, method, timeout, metadata,
+                                         credentials=None):
+        """Initializes an instance of the ClientCallDetails with the given data.
+
+        Args:
+            method: A str of the service method being invoked.
+            timeout: A float of the request timeout
+            metadata: A list of metadata tuples
+            credentials: An optional grpc.CallCredentials instance for the RPC
+        """
+        class _ClientCallDetails(
+            namedtuple(
+                '_ClientCallDetails',
+                ('method', 'timeout', 'metadata', 'credentials')),
+            ClientCallDetails):
+            """Wrapper class for initializing a new ClientCallDetails instance.
+            """
+            pass
+
+        return _ClientCallDetails(method, timeout, metadata, credentials)

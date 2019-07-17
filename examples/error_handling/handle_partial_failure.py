@@ -96,6 +96,7 @@ def create_ad_groups(client, customer_id, campaign_id):
     return ad_group_service.mutate_ad_groups(customer_id, ad_group_operations,
                                              partial_failure=True)
 
+
 def check_if_partial_failure_exists(response):
     """Checks whether a response message has a partial failure error.
 
@@ -155,7 +156,7 @@ def print_results(client, response):
     """
     # Check for existence of any partial failures in the response.
     if check_if_partial_failure_exists(response):
-        print('Partial failures occurred. Details will be shown below.')
+        print('Partial failures occurred. Details will be shown below.\n')
         # Prints the details of the partial failure errors.
         partial_failure = getattr(response, 'partial_failure_error', None)
         # partial_failure_error.details is a repeated field and iterable

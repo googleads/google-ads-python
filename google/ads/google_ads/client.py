@@ -95,6 +95,25 @@ class GoogleAdsClient(object):
         kwargs = cls._get_client_kwargs(config_data)
         return cls(**kwargs)
 
+    @classmethod  
+    def load_from_dict(cls, config_dict):
+        """Creates a GoogleAdsClient with data stored in the config_dict.
+
+        Args:
+            config_dict: a dict consisting of configuration data used to
+                initialize a GoogleAdsClient.
+
+        Returns:
+            A GoogleAdsClient initialized with the values specified in the
+                dict.
+
+        Raises:
+            ValueError: If the configuration lacks a required field.
+        """
+        config_data = config.load_from_dict(config_dict)
+        kwargs = cls._get_client_kwargs(config_data)
+        return cls(**kwargs)
+
     @classmethod
     def load_from_storage(cls, path=None):
         """Creates a GoogleAdsClient with data stored in the specified file.

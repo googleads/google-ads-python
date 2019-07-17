@@ -120,6 +120,18 @@ class ConfigTest(FileTestCase):
             config.parse_yaml_document_to_dict,
             yaml_doc)
 
+    def test_load_from_dict(self):
+        config_data = {
+              'developer_token': self.developer_token,
+              'client_id': self.client_id,
+              'client_secret': self.client_secret,
+              'refresh_token': self.refresh_token}
+        self.assertEqual(config.load_from_dict(config_data), config_data)
+    
+    def test_load_from_dict_error(self):
+        config_data = 111
+        self.assertRaises(ValueError, config.load_from_dict, config_data)
+
     def test_load_from_env(self):
         environ = {
             'GOOGLE_ADS_DEVELOPER_TOKEN': self.developer_token,

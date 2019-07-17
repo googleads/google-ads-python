@@ -16,9 +16,7 @@
 import os
 import mock
 import yaml
-from unittest import TestCase
 from importlib import import_module
-
 from pyfakefs.fake_filesystem_unittest import TestCase as FileTestCase
 
 from google.ads.google_ads import client as Client
@@ -29,38 +27,6 @@ valid_versions = Client._VALID_API_VERSIONS
 services_path = 'google.ads.google_ads.{}.proto.services'.format(latest_version)
 services = import_module(services_path)
 google_ads_service_pb2 = services.google_ads_service_pb2
-
-class ModuleLevelTest(TestCase):
-
-    def test_parse_metadata_to_json(self):
-        mock_metadata = [
-            ('x-goog-api-client',
-             'gl-python/123 grpc/123 gax/123'),
-            ('developer-token', '0000000000'),
-            ('login-customer-id', '9999999999')]
-
-        result = Client._parse_metadata_to_json(mock_metadata)
-
-        self.assertEqual(result, '{\n'
-                                 '  "developer-token": "REDACTED",\n'
-                                 '  "login-customer-id": "9999999999",\n'
-                                 '  "x-goog-api-client": "gl-python/123 '
-                                 'grpc/123 gax/123"\n'
-                                 '}')
-
-    def test_parse_metadata_to_json_with_none(self):
-        mock_metadata = None
-
-        result = (Client._parse_metadata_to_json(mock_metadata))
-
-        self.assertEqual(result, '{}')
-
-    def test_get_request_id_no_id(self):
-        """Ensures None is returned if metadata does't contain a request ID."""
-        mock_metadata = (('another-key', 'another-val'),)
-        result = (Client._get_request_id_from_metadata(mock_metadata))
-        self.assertEqual(result, None)
-
 
 class GoogleAdsClientTest(FileTestCase):
     """Tests for the google.ads.googleads.client.GoogleAdsClient class."""

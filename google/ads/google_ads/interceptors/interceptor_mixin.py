@@ -18,6 +18,9 @@ Interceptors, including retrieving data from gRPC metadata and initializing
 instances of grpc.ClientCallDetails.
 """
 
+import json
+
+
 _REQUEST_ID_KEY = 'request-id'
 
 class InterceptorMixin:
@@ -37,3 +40,49 @@ class InterceptorMixin:
                 return kv[1]  # Return the found request ID.
 
         return None
+
+    @classmethod
+    def parse_metadata_to_json(self, metadata):
+        """Parses metadata from gRPC request and response messages to a JSON str.
+
+        Obscures the value for "developer-token".
+
+        Args:
+            metadata: a tuple of metadatum.
+        """
+        SENSITIVE_INFO_MASK = 'REDACTED'
+        metadata_dict = {}
+
+        if metadata is None:
+            return '{}'
+
+        for datum in metadata:
+            key = datum[0]
+            if key == 'developer-token':
+                metadata_dict[key] = SENSITIVE_INFO_MASK
+            else:
+                value = datum[1]
+                metadata_dict[key] = value
+
+        return self.format_json_object(metadata_dict)
+
+    @classmethod
+    def format_json_object(self, obj):
+        """Parses a serializable object into a consistently formatted JSON string.
+
+        Returns:
+            A str of formatted JSON serialized from the given object.
+
+        Args:
+            obj: an object or dict.
+        """
+
+        def default_serializer(value):
+            if isinstance(value, bytes):
+                return value.decode(errors='ignore')
+            else:
+                return None
+
+        return str(json.dumps(obj, indent=2, sort_keys=True, ensure_ascii=False,
+                              default=default_serializer,
+                              separators=(',', ': ')))

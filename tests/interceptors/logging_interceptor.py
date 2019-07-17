@@ -238,9 +238,9 @@ class LoggingInterceptorTest(TestCase):
                     mock_client_call_details.method, self._MOCK_REQUEST_ID,
                     False, None))
 
-            initial_metadata = Client._parse_metadata_to_json(
+            initial_metadata = interceptor.parse_metadata_to_json(
                 mock_client_call_details.metadata)
-            trailing_metadata = Client._parse_metadata_to_json(
+            trailing_metadata = interceptor.parse_metadata_to_json(
                 mock_trailing_metadata)
 
             mock_logger.debug.assert_called_once_with(
@@ -275,9 +275,9 @@ class LoggingInterceptorTest(TestCase):
                     mock_client_call_details.method, self._MOCK_REQUEST_ID,
                     True, self._MOCK_ERROR_MESSAGE))
 
-            initial_metadata = Client._parse_metadata_to_json(
+            initial_metadata = interceptor.parse_metadata_to_json(
                 mock_client_call_details.metadata)
-            trailing_metadata = Client._parse_metadata_to_json(
+            trailing_metadata = interceptor.parse_metadata_to_json(
                 mock_trailing_metadata)
 
             mock_logger.info.assert_called_once_with(

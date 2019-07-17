@@ -23,6 +23,8 @@ import json
 import logging
 from grpc import UnaryUnaryClientInterceptor
 
+from .interceptor_mixin import InterceptorMixin
+
 
 def _get_request_id_from_metadata(trailing_metadata):
     """Gets the request ID for the Google Ads API request.
@@ -109,7 +111,7 @@ def _parse_metadata_to_json(metadata):
     return _format_json_object(metadata_dict)
 
 
-class LoggingInterceptor(UnaryUnaryClientInterceptor):
+class LoggingInterceptor(InterceptorMixin, UnaryUnaryClientInterceptor):
     """An interceptor that logs rpc requests and responses."""
 
     _FULL_REQUEST_LOG_LINE = ('Request\n-------\nMethod: {}\nHost: {}\n'

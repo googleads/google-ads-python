@@ -25,3 +25,30 @@ class InterceptorMixinTest(TestCase):
         mock_metadata = (('request-id', '123456'),)
         result = InterceptorMixin.get_request_id_from_metadata(mock_metadata)
         self.assertEqual(result, '123456')
+
+    def test_get_request_id_no_id(self):
+        """Ensures None is returned if metadata does't contain a request ID."""
+        mock_metadata = (('another-key', 'another-val'),)
+        result = (InterceptorMixin.get_request_id_from_metadata(mock_metadata))
+        self.assertEqual(result, None)
+
+    def test_parse_metadata_to_json(self):
+        mock_metadata = [
+            ('x-goog-api-client',
+             'gl-python/123 grpc/123 gax/123'),
+            ('developer-token', '0000000000'),
+            ('login-customer-id', '9999999999')]
+
+        result = InterceptorMixin.parse_metadata_to_json(mock_metadata)
+
+        self.assertEqual(result, '{\n'
+                                 '  "developer-token": "REDACTED",\n'
+                                 '  "login-customer-id": "9999999999",\n'
+                                 '  "x-goog-api-client": "gl-python/123 '
+                                 'grpc/123 gax/123"\n'
+                                 '}')
+
+    def test_parse_metadata_to_json_with_none(self):
+        mock_metadata = None
+        result = InterceptorMixin.parse_metadata_to_json(mock_metadata)
+        self.assertEqual(result, '{}')

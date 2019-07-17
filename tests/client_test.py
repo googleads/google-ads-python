@@ -382,7 +382,7 @@ class GoogleAdsClientTest(FileTestCase):
             client.get_service(service_name)
             mock_create_channel.assert_called_once_with(
                 address=endpoint, credentials=client.credentials,
-                options=Client.GRPC_CHANNEL_OPTIONS)
+                options=Client._GRPC_CHANNEL_OPTIONS)
 
     def test_get_service_not_found(self):
         client = self._create_test_client()

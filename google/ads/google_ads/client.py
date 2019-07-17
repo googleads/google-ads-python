@@ -14,9 +14,7 @@
 """A client and common configurations for the Google Ads API."""
 
 import logging
-import json
 import grpc
-from collections import namedtuple
 from importlib import import_module
 
 from google.ads.google_ads import config
@@ -25,15 +23,16 @@ from google.ads.google_ads import oauth2
 from google.ads.google_ads.interceptors import MetadataInterceptor, \
     ExceptionInterceptor, LoggingInterceptor
 
+
 _logger = logging.getLogger(__name__)
 
-_SERVICE_CLIENT_TEMPLATE = '%sClient'
-_SERVICE_GRPC_TRANSPORT_TEMPLATE = '%sGrpcTransport'
-_PROTO_TEMPLATE = '%s_pb2'
+_SERVICE_CLIENT_TEMPLATE = '{}Client'
+_SERVICE_GRPC_TRANSPORT_TEMPLATE = '{}GrpcTransport'
+
 _VALID_API_VERSIONS = ['v2', 'v1']
 _DEFAULT_VERSION = _VALID_API_VERSIONS[0]
-_REQUEST_ID_KEY = 'request-id'
-GRPC_CHANNEL_OPTIONS = [
+
+_GRPC_CHANNEL_OPTIONS = [
     ('grpc.max_metadata_size', 16 * 1024 * 1024),
     ('grpc.max_receive_message_length', 64 * 1024 * 1024)]
 
@@ -59,6 +58,25 @@ class GoogleAdsClient(object):
                 'endpoint': config_data.get('endpoint'),
                 'login_customer_id': config_data.get('login_customer_id'),
                 'logging_config': config_data.get('logging')}
+
+
+    @classmethod
+    def _get_api_services_by_version(cls, version):
+        """Returns a module with all services and types for a given API version.
+
+        Args:
+            version: a str indicating the API version.
+
+        Returns:
+            A module containing all services and types for the a API version.
+        """
+        try:
+            version_module = import_module('google.ads.google_ads.%s' % version)
+        except ImportError:
+            raise ValueError('Specified Google Ads API version "{}" does not '
+                             'exist. Valid API versions are: "{}"'.format(
+                                 version, '", "'.join(_VALID_API_VERSIONS)))
+        return version_module
 
     @classmethod
     def load_from_env(cls):
@@ -152,11 +170,12 @@ class GoogleAdsClient(object):
                 in the given version.
         """
         try:
-            message_type = getattr(_get_version(version).types, name)
+            type_classes = cls._get_api_services_by_version(version).types
+            message_class = getattr(type_classes, name)
         except AttributeError:
             raise ValueError('Specified type "{}" does not exist in Google Ads '
                              'API %s.'.format(name, version))
-        return message_type()
+        return message_class()
 
     def __init__(self, credentials, developer_token, endpoint=None,
                  login_customer_id=None, logging_config=None):
@@ -176,7 +195,6 @@ class GoogleAdsClient(object):
         self.developer_token = developer_token
         self.endpoint = endpoint
         self.login_customer_id = login_customer_id
-        # self.logging_config = logging_config
 
     def get_service(self, name, version=_DEFAULT_VERSION):
         """Returns a service client instance for the specified service_name.
@@ -194,21 +212,21 @@ class GoogleAdsClient(object):
         Raises:
             AttributeError: If the specified name doesn't exist.
         """
-        api_module = _get_version(version)
+        api_module = self._get_api_services_by_version(version)
 
         try:
             service_client = getattr(api_module,
-                                     _SERVICE_CLIENT_TEMPLATE % name)
+                                     _SERVICE_CLIENT_TEMPLATE.format(name))
         except AttributeError:
-            raise ValueError('Specified service "%s" does not exist in Google '
-                             'Ads API %s.' % (name, version))
+            raise ValueError('Specified service {}" does not exist in Google '
+                             'Ads API {}.'.format(name, version))
 
         try:
             service_transport_class = getattr(
-                api_module, _SERVICE_GRPC_TRANSPORT_TEMPLATE % name)
+                api_module, _SERVICE_GRPC_TRANSPORT_TEMPLATE.format(name))
         except AttributeError:
             raise ValueError('Grpc transport does not exist for the specified '
-                             'service "%s".' % name)
+                             'service "{}".'.format(name))
 
         endpoint = (self.endpoint if self.endpoint
                     else service_client.SERVICE_ADDRESS)
@@ -216,7 +234,7 @@ class GoogleAdsClient(object):
         channel = service_transport_class.create_channel(
             address=endpoint,
             credentials=self.credentials,
-            options=GRPC_CHANNEL_OPTIONS)
+            options=_GRPC_CHANNEL_OPTIONS)
 
         channel = grpc.intercept_channel(
             channel,
@@ -228,115 +246,3 @@ class GoogleAdsClient(object):
         service_transport = service_transport_class(channel=channel)
 
         return service_client(transport=service_transport)
-
-
-class _ClientCallDetails(
-        namedtuple(
-            '_ClientCallDetails',
-            ('method', 'timeout', 'metadata', 'credentials')),
-        grpc.ClientCallDetails):
-    """A wrapper class for initializing a new ClientCallDetails instance."""
-    pass
-
-
-def _get_trailing_metadata_from_interceptor_exception(exception):
-    """Retrieves trailing metadata from an exception object.
-
-    Args:
-        exception: an instance of grpc.Call.
-
-    Returns:
-        A tuple of trailing metadata key value pairs.
-    """
-    try:
-        # GoogleAdsFailure exceptions will contain trailing metadata on the
-        # error attribute.
-        return exception.error.trailing_metadata()
-    except AttributeError:
-        try:
-            # Transport failures, i.e. issues at the gRPC layer, will contain
-            # trailing metadata on the exception iself.
-            return exception.trailing_metadata()
-        except AttributeError:
-            # if trailing metadata is not found in either location then
-            # return an empty tuple
-            return tuple()
-
-
-def _get_version(name):
-    """Returns the given API version.
-
-    Args:
-        name: a str indicating the API version.
-
-    Returns:
-        A module associated with the given API version.
-    """
-    try:
-        version = import_module('google.ads.google_ads.%s' % name)
-    except ImportError:
-        raise ValueError('Specified Google Ads API version "%s" does not '
-                         'exist. Valid API versions are: "%s"' %
-                                 (name, '", "'.join(_VALID_API_VERSIONS)))
-    return version
-
-
-def _format_json_object(obj):
-    """Parses a serializable object into a consistently formatted JSON string.
-
-    Returns:
-        A str of formatted JSON serialized from the given object.
-
-    Args:
-        obj: an object or dict.
-    """
-    def default_serializer(value):
-        if isinstance(value, bytes):
-            return value.decode(errors='ignore')
-        else:
-            return None
-
-    return str(json.dumps(obj, indent=2, sort_keys=True, ensure_ascii=False,
-                          default=default_serializer, separators=(',', ': ')))
-
-
-def _parse_metadata_to_json(metadata):
-    """Parses metadata from gRPC request and response messages to a JSON str.
-
-    Obscures the value for "developer-token".
-
-    Args:
-        metadata: a tuple of metadatum.
-    """
-    SENSITIVE_INFO_MASK = 'REDACTED'
-    metadata_dict = {}
-
-    if metadata is None:
-        return '{}'
-
-    for datum in metadata:
-        key = datum[0]
-        if key == 'developer-token':
-            metadata_dict[key] = SENSITIVE_INFO_MASK
-        else:
-            value = datum[1]
-            metadata_dict[key] = value
-
-    return _format_json_object(metadata_dict)
-
-
-def _get_request_id_from_metadata(trailing_metadata):
-    """Gets the request ID for the Google Ads API request.
-
-    Args:
-        trailing_metadata: a tuple of metadatum from the service response.
-
-    Returns:
-        A str request ID associated with the Google Ads API request, or None
-        if it doesn't exist.
-    """
-    for kv in trailing_metadata:
-        if kv[0] == _REQUEST_ID_KEY:
-            return kv[1]  # Return the found request ID.
-
-    return None

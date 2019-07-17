@@ -28,8 +28,6 @@ errors = import_module(errors_path)
 error_protos = errors.errors_pb2
 
 class ExceptionInterceptorTest(TestCase):
-    """Tests for the google.ads.googleads.client.ExceptionInterceptor class."""
-
     _MOCK_FAILURE_VALUE = b"\n \n\x02\x08\x10\x12\x1aInvalid customer ID '123'."
 
     def _create_test_interceptor(self):

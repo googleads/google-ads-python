@@ -55,12 +55,6 @@ class ModuleLevelTest(TestCase):
 
         self.assertEqual(result, '{}')
 
-    def test_get_request_id_from_metadata(self):
-        """Ensures request-id is retrieved from metadata tuple."""
-        mock_metadata = (('request-id', '123456'),)
-        result = (Client._get_request_id_from_metadata(mock_metadata))
-        self.assertEqual(result, '123456')
-
     def test_get_request_id_no_id(self):
         """Ensures None is returned if metadata does't contain a request ID."""
         mock_metadata = (('another-key', 'another-val'),)

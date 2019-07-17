@@ -58,7 +58,6 @@ class GoogleAdsClient(object):
                 'login_customer_id': config_data.get('login_customer_id'),
                 'logging_config': config_data.get('logging')}
 
-
     @classmethod
     def _get_api_services_by_version(cls, version):
         """Returns a module with all services and types for a given API version.

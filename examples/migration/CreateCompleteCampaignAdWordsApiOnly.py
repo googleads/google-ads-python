@@ -13,7 +13,7 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
-"""This example creates serach campaign with the help of AdWords Api
+"""This example creates a search campaign with the help of AdWords Api.
 
 This code example is the first in a series of code examples that shows how to create
 a Search campaign using the AdWords API, and then migrate it to Google Ads API one
@@ -35,7 +35,7 @@ from googleads import adwords
 # Number of ads being added/updated in this code example.
 NUMBER_OF_ADS = 5
 # The list of keywords being added in this code example.
-KEYWORDS_TO_ADD = ["mars cruise", "space hotel" ]
+KEYWORDS_TO_ADD = ['mars cruise', 'space hotel']
 
 
 def createCampaignBudget(client):
@@ -62,7 +62,7 @@ def createCampaignBudget(client):
     # Add budget.
     results = budget_service.mutate(budget_operations)
     createdBudget = results['value'][0]
-    print("Budget with ID {} and name {} was created".format(
+    print('Budget with ID {} and name {} was created'.format(
            createdBudget['budgetId'], createdBudget['name']))
     return createdBudget['budgetId']
 
@@ -107,7 +107,7 @@ def createCampaign(client, budgetId):
     }]
     results = campaign_service.mutate(campaign_operations)
     createdCampaign = results['value'][0]
-    print("CreatedCampign with ID {} and name {} was created".format(
+    print('CreatedCampign with ID {} and name {} was created'.format(
            createdCampaign['id'], createdCampaign['name']))
     return createdCampaign['id']
 
@@ -117,7 +117,7 @@ def createAdGroup(client, campaign_id):
 
     Args:
         client: An instance of the Adwords client.
-        campaign_id: (str) Campaign id to be referenced while creating Adgroup.
+        campaign_id: (str) campaign id to be referenced while creating Adgroup.
         
     Returns:
         (str) Adgroup id of the newly created Adgroup.
@@ -129,9 +129,9 @@ def createAdGroup(client, campaign_id):
         'status': 'ENABLED',
         'biddingStrategyConfiguration' : {
             'bids': [{
-              # The 'xsi_type' field allows you to specify the xsi:type of the
-              # object being created. It's only necessary when you must provide
-              # an explicit type that the client library can't infer.
+            # The 'xsi_type' field allows you to specify the xsi:type of the
+            # object being created. It's only necessary when you must provide
+            # an explicit type that the client library can't infer.
                 'xsi_type': 'CpcBid',
                 'bid': {
                     'microAmount': 10000000
@@ -147,20 +147,17 @@ def createAdGroup(client, campaign_id):
     }]
     results = ad_group_service.mutate(adgroup_operations)
     createdAdgroup = results['value'][0]
-    print("Ad group with ID {} and name {} was created".format(
+    print('Ad group with ID {} and name {} was created'.format(
          createdAdgroup['id'], createdAdgroup['name']))
     return createdAdgroup['id']
 
 
 def createTextAds(client, adGroupId):
-    """Creates nextTextAds on the given Adgroup ID.
+    """Creates TextAds on a given Adgroup ID.
 
     Args:
         client: An instance of the Adwords client.
-        adGroupId: (str) adGroup id to be referenced while creating text Ads.
-        
-    Returns:
-        None.
+        adGroupId: (str) AdGroup id to be referenced while creating text Ads.
     """
     ad_group_service = client.GetService('AdGroupAdService', 'v201809')
     operations = []
@@ -189,22 +186,19 @@ def createTextAds(client, adGroupId):
 
     results = ad_group_service.mutate(operations)
     for result in results['value']:
-        print("Expanded text ad with ID {} and "
-              "headline {}-{} {} was created".format(
+        print('Expanded text ad with ID {} and '
+              'headline {}-{} {} was created'.format(
                result['ad']['id'], result['ad']['headlinePart1'],
                result['ad']['headlinePart2'], result['ad']['headlinePart3']))
 
 
 def createKeywords(client, adGroupId, keywordsToAdd):
-    """Creates Keywords on the given Adgroup ID.
+    """Populates keywords on a given AdgroupId.
 
     Args:
         client: An instance of the Adwords client.
-        adGroupId: (str) adGroup id to be referenced while creating text Ads.
-        keywordsToAdd: (list) A list of keywords to be added to a given AdGroup.
-        
-    Returns:
-        None
+        adGroupId: (str) AdGroup id to be referenced while creating text ads.
+        keywordsToAdd: (list) A list of keywords to be added to a given Adgroup.
     """
     ad_group_criterion_service = client.GetService('AdGroupCriterionService',
                                                    'v201809')
@@ -230,15 +224,15 @@ def createKeywords(client, adGroupId, keywordsToAdd):
 
     results = ad_group_criterion_service.mutate(operations)
     for result in results['value']:
-        print("Keyword with ad group ID {}, keyword ID {}, text {} and match"
-              "type {} was created".format(result['adGroupId'], 
+        print('Keyword with ad group ID {}, keyword ID {}, text {} and match'
+              'type {} was created'.format(result['adGroupId'], 
                result['criterion']['id'], result['criterion']['text'],
                result['criterion']['matchType']))
 
 
 if __name__ == '__main__':
-  # Initialize client object.
-  # It will read the config file from the Home Directory
+  # Initialize the client object.
+  # By default, it will read the config file from the Home Directory.
   adwords_client = adwords.AdWordsClient.LoadFromStorage()
   budgetId = createCampaignBudget(adwords_client)
   campaignId = createCampaign(adwords_client, budgetId)

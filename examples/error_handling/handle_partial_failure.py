@@ -97,7 +97,7 @@ def create_ad_groups(client, customer_id, campaign_id):
                                              partial_failure=True)
 
 
-def check_if_partial_failure_exists(response):
+def is_partial_failure_error_present(response):
     """Checks whether a response message has a partial failure error.
 
     In Python the partial_failure_error attr is always present on a response
@@ -155,7 +155,7 @@ def print_results(client, response):
         response: a MutateAdGroupsResponse instance.
     """
     # Check for existence of any partial failures in the response.
-    if check_if_partial_failure_exists(response):
+    if is_partial_failure_error_present(response):
         print('Partial failures occurred. Details will be shown below.\n')
         # Prints the details of the partial failure errors.
         partial_failure = getattr(response, 'partial_failure_error', None)

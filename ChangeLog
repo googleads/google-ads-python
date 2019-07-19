@@ -1,3 +1,9 @@
+* 3.1.1:
+- Refactor GoogleAdsClient to isolate interceptors into individual modules
+- Update partial failure example so it can be parsed for documentation
+- Add get_campaigns_by_label example
+- Add set_ad_parameters example
+
 * 3.1.0:
 - Add load_from_dict method to the GoogleAdsClient
 - Update add_expanded_text_ads example to add multiple ads

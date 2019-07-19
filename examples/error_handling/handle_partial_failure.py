@@ -27,9 +27,48 @@ from google.ads.google_ads.errors import GoogleAdsException
 
 
 def main(client, customer_id, campaign_id):
+    """Runs the example code, which demonstrates how to handle partial failures.
+
+    The example creates three Ad Groups, two of which intentionally fail in
+    order to generate a partial failure error. It also demonstrates how to
+    properly identify a partial error and how to log the error messages.
+
+    Args:
+        client:  An initialized GoogleAdsClient instance.
+        customer_id: A valid customer account ID.
+        campaign_id: The ID for a campaign to create Ad Groups under.
+    """
+    try:
+        ad_group_response = create_ad_groups(client, customer_id, campaign_id)
+    except GoogleAdsException as ex:
+        print('Request with ID "{}" failed with status "{}" and includes the '
+              'following errors:'.format(ex.request_id, ex.error.code().name))
+        for error in ex.failure.errors:
+            print('\tError with message "{}".'.format(error.message))
+
+            if error.location:
+                for field_path_element in error.location.field_path_elements:
+                    print('\t\tOn field: {}'.format(
+                        field_path_element.field_name))
+        sys.exit(1)
+    else:
+        print_results(client, ad_group_response)
+
+
+def create_ad_groups(client, customer_id, campaign_id):
+    """Creates three Ad Groups, two of which intentionally generate errors.
+
+    Args:
+        client:  An initialized GoogleAdsClient instance.
+        customer_id: A valid customer account ID.
+        campaign_id: The ID for a campaign to create Ad Groups under.
+
+    Returns: A MutateAdGroupsResponse message instance.
+    """
     ad_group_service = client.get_service('AdGroupService', version='v2')
     campaign_service = client.get_service('CampaignService', version='v2')
     resource_name = campaign_service.campaign_path(customer_id, campaign_id)
+
     invalid_resource_name = campaign_service.campaign_path(customer_id, 0)
     ad_group_operations = []
 
@@ -53,58 +92,41 @@ def main(client, customer_id, campaign_id):
     ad_group_op3.create.campaign.value = resource_name
     ad_group_operations.append(ad_group_op3)
 
-    try:
-        # Issue a mutate request, setting partial_failure=True.
-        ad_group_response = ad_group_service.mutate_ad_groups(
-            customer_id, ad_group_operations, partial_failure=True)
-    except GoogleAdsException as ex:
-        print('Request with ID "%s" failed with status "%s" and includes the '
-              'following errors:' % (ex.request_id, ex.error.code().name))
-        for error in ex.failure.errors:
-            print('\tError with message "%s".' % error.message)
-            if error.location:
-                for field_path_element in error.location.field_path_elements:
-                    print('\t\tOn field: %s' % field_path_element.field_name)
-        sys.exit(1)
-    else:
-        # Check for existence of any partial failures in the response.
-        if ad_group_response.partial_failure_error:
-            print('Partial failures occurred. Details will be shown below.\n')
-            partial_failures = get_partial_failure_messages(
-                client, ad_group_response)
-
-            for error in partial_failures:
-                # Construct and print a string that details which element in
-                # the above ad_group_operations list failed (by index number)
-                # as well as the error message and error code.
-                print('A partial failure at index %d occured.\n'
-                      'Error message: %s\nError code: %s' % (
-                          error.location.field_path_elements[0].index.value,
-                          error.message, error.error_code))
-        else:
-            print('All operations completed successfully. No partial failure '
-                  'to show.')
-
-        # In the list of results, operations from the ad_group_operation list
-        # that failed will be represented as empty messages. This loop detects
-        # such empty messages and ignores them, while printing information about
-        # successful operations.
-        for message in ad_group_response.results:
-            # Empty messages will have a byte size of zero.
-            if message.ByteSize() == 0:
-                continue
-
-            print('Created ad group with resource_name: %s.' % (
-                message.resource_name))
+    # Issue a mutate request, setting partial_failure=True.
+    return ad_group_service.mutate_ad_groups(customer_id, ad_group_operations,
+                                             partial_failure=True)
 
 
-def get_partial_failure_messages(client, response):
-    """Get a list of all partial failure error objects for a given response.
+def is_partial_failure_error_present(response):
+    """Checks whether a response message has a partial failure error.
 
-    Shows how to retrieve partial_failure errors from a response message (in
-    the case of this example the message will be of type MutateAdGroupsResponse)
-    and how to unpack those errors to GoogleAdsError instances. As an example,
-    a GoogleAdsError object from this example will be structured similar to:
+    In Python the partial_failure_error attr is always present on a response
+    message and is represented by a google.rpc.Status message. So we can't
+    simply check whether the field is present, we must check that the code is
+    non-zero. Error codes are represented by the google.rpc.Code proto Enum:
+    https://github.com/googleapis/googleapis/blob/master/google/rpc/code.proto
+
+    Args:
+        response:  A MutateAdGroupsResponse message instance.
+
+    Returns: A boolean, whether or not the response message has a partial
+        failure error.
+    """
+    partial_failure = getattr(response, 'partial_failure_error', None)
+    code = getattr(partial_failure, 'code', None)
+    return code != 0
+
+
+def print_results(client, response):
+    """Prints partial failure errors and success messages from a response.
+
+    This function shows how to retrieve partial_failure errors from a response
+    message (in the case of this example the message will be of type
+    MutateAdGroupsResponse) and how to unpack those errors to GoogleAdsFailure
+    instances. It also shows that a response with partial failures may still
+    contain successful requests, and that those messages should be parsed
+    separately. As an example, a GoogleAdsFailure object from this example will
+    be structured similar to:
 
     error_code {
       range_error: TOO_LOW
@@ -131,17 +153,44 @@ def get_partial_failure_messages(client, response):
     Args:
         client: an initialized GoogleAdsClient.
         response: a MutateAdGroupsResponse instance.
-    Returns:
-        A list of GoogleAdsError instances each relating to an individual
-        failure from the given list of partial failures.
     """
-    # Retrieve the serialized list of errors off of the response message.
-    error_detail = response.partial_failure_error.details[0].value
-    # Retrieve the GoogleAdsFailure class from the client
-    google_ads_failure = client.get_type('GoogleAdsFailure', version='v2')
-    # Parse the string into a GoogleAdsFailure message instance.
-    err_object = google_ads_failure.FromString(error_detail)
-    return err_object.errors
+    # Check for existence of any partial failures in the response.
+    if is_partial_failure_error_present(response):
+        print('Partial failures occurred. Details will be shown below.\n')
+        # Prints the details of the partial failure errors.
+        partial_failure = getattr(response, 'partial_failure_error', None)
+        # partial_failure_error.details is a repeated field and iterable
+        error_details = getattr(partial_failure, 'details', [])
+
+        for error_detail in error_details:
+            # Retrieve an instance of the GoogleAdsFailure class from the client
+            failure_message = client.get_type('GoogleAdsFailure', version='v2')
+            # Parse the string into a GoogleAdsFailure message instance.
+            failure_object = failure_message.FromString(error_detail.value)
+
+            for error in failure_object.errors:
+                # Construct and print a string that details which element in
+                # the above ad_group_operations list failed (by index number)
+                # as well as the error message and error code.
+                print('A partial failure at index {} occurred.\n'
+                      'Error message: {}\nError code: {}'.format(
+                          error.location.field_path_elements[0].index.value,
+                          error.message, error.error_code))
+    else:
+        print('All operations completed successfully. No partial failure '
+              'to show.')
+
+    # In the list of results, operations from the ad_group_operation list
+    # that failed will be represented as empty messages. This loop detects
+    # such empty messages and ignores them, while printing information about
+    # successful operations.
+    for message in response.results:
+        # Empty messages will have a byte size of zero.
+        if message.ByteSize() == 0:
+            continue
+
+        print('Created ad group with resource_name: {}.'.format(
+            message.resource_name))
 
 
 if __name__ == '__main__':

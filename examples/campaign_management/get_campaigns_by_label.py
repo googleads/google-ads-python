@@ -12,7 +12,7 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
-"""This example illustrates how to get all campaigns with a specific label.
+"""This example illustrates how to get all campaigns with a specific label ID.
 
 To add campaigns, run add_campaigns.py.
 """

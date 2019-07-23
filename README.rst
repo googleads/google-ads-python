@@ -107,6 +107,8 @@ You can also retrieve it by exporting environment variables.
 
 * Required for OAuth2 Service Account Flow:
 
+.. code-block::bash
+
   export GOOGLE_ADS_PATH_TO_PRIVATE_KEY_FILE=INSERT_PRIVATE_KEY_PATH_HERE
   export GOOGLE_ADS_DELEGATED_ACCOUNT=INSERT_DELEGATED_ACCOUNT_HERE
 

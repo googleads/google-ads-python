@@ -1,3 +1,7 @@
+* 3.1.2:
+-  Update signature for customer_service.create_customer_client method to
+   give default values to optional parameters.
+
 * 3.1.1:
 - Refactor GoogleAdsClient to isolate interceptors into individual modules
 - Update partial failure example so it can be parsed for documentation

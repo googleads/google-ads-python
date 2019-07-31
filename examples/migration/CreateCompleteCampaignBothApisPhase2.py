@@ -86,9 +86,9 @@ def get_campaign_budget(client, customer_id, resource_name):
         An instance of google.ads.google_ads.v2.types.CampaignBudget for the newly created Budget.
     """
     ga_service = client.get_service('GoogleAdsService', version='v2')
-    query = ("SELECT campaign_budget.id, campaign_budget.name, "
-             "campaign_budget.resource_name FROM campaign_budget WHERE "
-             "campaign_budget.resource_name = '{}'".format(resource_name))
+    query = ('SELECT campaign_budget.id, campaign_budget.name, '
+             'campaign_budget.resource_name FROM campaign_budget WHERE '
+             'campaign_budget.resource_name = "{}"'.format(resource_name))
     response = ga_service.search(customer_id, query, PAGE_SIZE)
     budget = list(response)[0].campaign_budget
     return budget

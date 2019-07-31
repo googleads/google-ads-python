@@ -330,7 +330,7 @@ def get_keywords(client, customer_id, keyword_resource_names):
     Args:
         client: An instance of the google.ads.google_ads.client.GoogleAdsClient class.
         customer_id: (str) Customer ID associated with the account.
-        keywordResourceNames: (str) Resource name associated with the newly created AdgroupCriterion.
+        keywordResourceNames: (str) Resource name associated with the newly created ad group criterion.
 
     Returns:
         An instance of the google.ads.google_ads.v2.types.AdGroupCriterion message class of the newly created 

@@ -50,7 +50,7 @@ def createCampaignBudget(client, customer_id):
     """Creates a new campaign budget and returns it.
 
     Args:
-        client: An instance of the Google Ads client.
+        client: An instance of the google.ads.google_ads.client.GoogleAdsClient class.
         customer_id: (str) Customer id associated with the account.
 
     Returns:
@@ -79,7 +79,7 @@ def getCampaignBudget(client, customerId, resource_name):
        a given resource name.
 
     Args:
-        client: An instance of the Google Ads client.
+        client: An instance of the google.ads.google_ads.client.GoogleAdsClient class.
         customer_id: (str) Customer id associated with the account.
         resource_name: (str) Resource Name associated with the newly created campaign. 
 
@@ -99,12 +99,12 @@ def createCampaign(client, customerId, campaignBudget):
     """Creates a new campaign and returns it.
 
     Args:
-        client: An instance of the Google Ads client.
+        client: An instance of the google.ads.google_ads.client.GoogleAdsClient class.
         customer_id: (str) Customer id associated with the account.
         campaignBudget: An instance of CampaignBudget message class.
 
     Returns:
-        Campaign message class instance of the newly created Campaign. 
+        An instance of google.ads.google_ads.v2.types.GoogleAdsClient message class. 
     """
     operation = client.get_type('CampaignOperation', version='v2')
     campaign = operation.create
@@ -139,12 +139,12 @@ def getCampaign(client, customerId, campaignResourceName):
        a given resource name.
 
     Args:
-        client: An instance of the Google Ads client.
+        client: An instance of the google.ads.google_ads.client.GoogleAdsClient class.
         customer_id: (str) Customer id associated with the account.
         campaignResourceName: (str) Resource Name associated with the newly created campaign budget. 
 
     Returns:
-        Campaign message class instance of the newly created Campaign. 
+        An instance of google.ads.google_ads.v2.types.GoogleAdsClient message class. 
     """
     ga_service = client.get_service('GoogleAdsService', version='v2')
     query = ("SELECT campaign.id, campaign.name, campaign.resource_name "
@@ -159,7 +159,7 @@ def createAdGroup(client, customerId, campaign):
     """Creates a new Adgroup and returns it.
 
     Args:
-        client: An instance of the Google Ads client.
+        client: An instance of the google.ads.google_ads.client.GoogleAdsClient class.
         customer_id: (str) Customer id associated with the account.
         campaign: An instance of Campaign message class.
 
@@ -187,7 +187,7 @@ def getAdGroup(client, customerId, adGroupResourceName):
        a given resource name.
 
     Args:
-        client: An instance of the Google Ads client.
+        client: An instance of the google.ads.google_ads.client.GoogleAdsClient class.
         customer_id: (str) Customer id associated with the account.
         adGroupResourceName: (str) Resource Name associated with the newly created Ad group. 
 
@@ -207,7 +207,7 @@ def createTextAds(client, customerId, adGroup):
     """Creates new Text Ads on a given Adgroup. 
 
     Args:
-        client: An instance of the Google Ads client.
+        client: An instance of the google.ads.google_ads.client.GoogleAdsClient class.
         customer_id: (str) Customer id associated with the account.
         adGroup: An instance of Ad group message class.
     """
@@ -251,7 +251,7 @@ def getAds(client, customerId, newAdResourceNames):
        a given resource name.
 
     Args:
-        client: An instance of the Google Ads client.
+        client: An instance of the google.ads.google_ads.client.GoogleAdsClient class.
         customer_id: (str) Customer id associated with the account.
         newAdResourceNames: (str) Resource Name associated with the Ad Group.
 
@@ -287,7 +287,7 @@ def createKeywords(client, adGroupId, keywordsToAdd):
     """Populates Keywords on a given AdgroupId.
 
     Args:
-        client: An instance of the Adwords client.
+        client: An instance of the googleads.adwords.AdWordsClient class.
         adGroupId: (str) AdGroup id to be referenced while creating text ads.
         keywordsToAdd: (list) A list of keywords to be added to a given Adgroup.
     """

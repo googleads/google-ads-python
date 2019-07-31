@@ -33,7 +33,6 @@ import sys
 import urllib.parse
 import uuid
 
-from googleads import adwords
 import six
 
 from google.ads.google_ads.client import GoogleAdsClient
@@ -50,7 +49,7 @@ def createCampaignBudget(client, customer_id):
     """Creates a new campaign budget and returns it.
 
     Args:
-        client: An instance of the Google Ads client.
+        client: An instance of the google.ads.google_ads.client.GoogleAdsClient class.
         customer_id: (str) Customer id associated with the account.
 
     Returns:
@@ -79,7 +78,7 @@ def getCampaignBudget(client, customerId, resource_name):
        a given resource name.
 
     Args:
-        client: An instance of the Google Ads client.
+        client: An instance of the google.ads.google_ads.client.GoogleAdsClient class.
         customer_id: (str) Customer id associated with the account.
         resource_name: (str) Resource Name associated with the newly created campaign. 
 
@@ -99,7 +98,7 @@ def createCampaign(client, customerId, campaignBudget):
     """Creates a new campaign and returns it.
 
     Args:
-        client: An instance of the Google Ads client.
+        client: An instance of the google.ads.google_ads.client.GoogleAdsClient class.
         customer_id: (str) Customer id associated with the account.
         campaignBudget: An instance of CampaignBudget message class.
 
@@ -139,7 +138,7 @@ def getCampaign(client, customerId, campaignResourceName):
        a given resource name.
 
     Args:
-        client: An instance of the Google Ads client.
+        client: An instance of the google.ads.google_ads.client.GoogleAdsClient class.
         customer_id: (str) Customer id associated with the account.
         campaignResourceName: (str) Resource Name associated with the newly created campaign budget. 
 
@@ -159,7 +158,7 @@ def createAdGroup(client, customerId, campaign):
     """Creates a new Adgroup and returns it.
 
     Args:
-        client: An instance of the Google Ads client.
+        client: An instance of the google.ads.google_ads.client.GoogleAdsClient class.
         customer_id: (str) Customer id associated with the account.
         campaign: An instance of Campaign message class.
 
@@ -187,7 +186,7 @@ def getAdGroup(client, customerId, adGroupResourceName):
        a given resource name.
 
     Args:
-        client: An instance of the Google Ads client.
+        client: An instance of the google.ads.google_ads.client.GoogleAdsClient class.
         customer_id: (str) Customer id associated with the account.
         adGroupResourceName: (str) Resource Name associated with the newly created Ad group. 
 
@@ -207,7 +206,7 @@ def createTextAds(client, customerId, adGroup):
     """Creates new Text Ads on a given Adgroup. 
 
     Args:
-        client: An instance of the Google Ads client.
+        client: An instance of the google.ads.google_ads.client.GoogleAdsClient class.
         customer_id: (str) Customer id associated with the account.
         adGroup: An instance of Ad group message class.
     """
@@ -251,7 +250,7 @@ def getAds(client, customerId, newAdResourceNames):
        a given resource name.
 
     Args:
-        client: An instance of the Google Ads client.
+        client: An instance of the google.ads.google_ads.client.GoogleAdsClient class.
         customer_id: (str) Customer id associated with the account.
         newAdResourceNames: (str) Resource Name associated with the Ad Group.
 
@@ -287,7 +286,7 @@ def createKeywords(client, customerId, adGroup, keywordstoadd):
     """Creates new keywords on a given Adgroup. 
 
     Args:
-        client: An instance of the Google Ads client.
+        client: An instance of the google.ads.google_ads.client.GoogleAdsClient class.
         customer_id: (str) Customer id associated with the account.
         adGroup: An instance of Ad group message class.
         keywordstoadd: (list) A list of keywords which are to be added on a given Ad Group. 
@@ -331,7 +330,7 @@ def getKeywords(client, customerId, keywordResourceNames):
        a given resource name.
 
     Args:
-        client: An instance of the Google Ads client.
+        client: An instance of the google.ads.google_ads.client.GoogleAdsClient class.
         customer_id: (str) Customer id associated with the account.
         keywordResourceNames: (str) Resource Name associated with the newly created AdgroupCriterion.
 
@@ -367,7 +366,6 @@ if __name__ == '__main__':
   # Initialize client object.
   # It will read the config file. The default file path is the Home Directory.
   google_ads_client = GoogleAdsClient.load_from_storage()
-  adwords_client = adwords.AdWordsClient.LoadFromStorage()
 
   parser = argparse.ArgumentParser(
         description='Lists all campaigns for specified customer.')

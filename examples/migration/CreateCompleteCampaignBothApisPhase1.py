@@ -50,11 +50,11 @@ def createCampaignBudget(client, customer_id):
     """Creates a new campaign budget and returns it.
 
     Args:
-        client: An instance of the Google Ads client.
+        client: An instance of the google.ads.google_ads.client.GoogleAdsClient class.
         customer_id: (str) Customer id associated with the account.
 
     Returns:
-        CampaignBudget message class instance of the newly created Budget. 
+        An instance of google.ads.google_ads.v2.types.CampaignBudget for the newly created Budget.
     """
     campaign_service = client.get_service('CampaignBudgetService', version='v2')
     operation = client.get_type('CampaignBudgetOperation', version='v2')
@@ -79,12 +79,12 @@ def getCampaignBudget(client, customerId, resource_name):
        a given resource name.
 
     Args:
-        client: An instance of the Google Ads client.
+        client: An instance of the google.ads.google_ads.client.GoogleAdsClient class.
         customer_id: (str) Customer id associated with the account.
         resource_name: (str) Resource Name associated with the newly created campaign. 
 
     Returns:
-        CampaignBudget message class instance of the newly created Budget.
+        An instance of google.ads.google_ads.v2.types.CampaignBudget for the newly created Budget.
     """
     ga_service = client.get_service('GoogleAdsService', version='v2')
     query = ("SELECT campaign_budget.id, campaign_budget.name, "
@@ -99,7 +99,7 @@ def createCampaign(client, budgetId):
     """Creates a new campaign and returns the newly created campaign id.
 
     Args:
-        client: An instance of the Adwords client.
+        client: An instance of the googleads.adwords.AdWordsClient class.
         budgetId: (str) Budget id to be referenced while creating Campaign.
 
     Returns:
@@ -141,14 +141,14 @@ def createCampaign(client, budgetId):
 
 
 def createAdGroup(client, campaign_id):
-    """Creates a new adgroup and returns the newly created adgroup id.
+    """Creates a new ad group and returns the newly created adgroup id.
 
     Args:
-        client: An instance of the Adwords client.
+        client: The ID of the campaign under which to create a new ad group.
         campaign_id: (str) campaign id to be referenced while creating Adgroup.
         
     Returns:
-        (str) Adgroup id of the newly created Adgroup.
+        (str) Ad group ID of the newly created ad group.
     """
     ad_group_service = client.GetService('AdGroupService', 'v201809')
     ad_group = {
@@ -157,9 +157,9 @@ def createAdGroup(client, campaign_id):
         'status': 'ENABLED',
         'biddingStrategyConfiguration' : {
             'bids': [{
-            # The 'xsi_type' field allows you to specify the xsi:type of the
-            # object being created. It's only necessary when you must provide
-            # an explicit type that the client library can't infer.
+                # The 'xsi_type' field allows you to specify the xsi:type of the
+                # object being created. It's only necessary when you must provide
+                # an explicit type that the client library can't infer.
                 'xsi_type': 'CpcBid',
                 'bid': {
                     'microAmount': 10000000
@@ -181,10 +181,10 @@ def createAdGroup(client, campaign_id):
 
 
 def createTextAds(client, adGroupId):
-    """Creates TextAds on a given Adgroup ID.
+    """Creates text ads using the given ad group ID.
 
     Args:
-        client: An instance of the Adwords client.
+        client: An instance of the googleads.adwords.AdWordsClient class.
         adGroupId: (str) AdGroup id to be referenced while creating text Ads.
     """
     ad_group_service = client.GetService('AdGroupAdService', 'v201809')
@@ -224,9 +224,9 @@ def createKeywords(client, adGroupId, keywordsToAdd):
     """Populates Keywords on a given AdgroupId.
 
     Args:
-        client: An instance of the Adwords client.
-        adGroupId: (str) AdGroup id to be referenced while creating text ads.
-        keywordsToAdd: (list) A list of keywords to be added to a given Adgroup.
+        client: An instance of the googleads.adwords.AdWordsClient class.
+        adGroupId: (str) Ad group id to be referenced while creating text ads.
+        keywordsToAdd: (list) A list of keywords to be added to a given ad group.
     """
     ad_group_criterion_service = client.GetService('AdGroupCriterionService',
                                                    'v201809')

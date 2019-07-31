@@ -42,7 +42,7 @@ def createCampaignBudget(client):
     """Creates a new budget and returns the newly created budget id.
 
     Args:
-        client: An instance of the Adwords client.
+        client: An instance of googleads.adwords.AdWordsClient.
 
     Returns:
         (str) Budget id of the newly created budget.
@@ -71,7 +71,7 @@ def createCampaign(client, budgetId):
     """Creates a new campaign and returns the newly created campaign id.
 
     Args:
-        client: An instance of the Adwords client.
+        client: An instance of the google.ads.google_ads.client.GoogleAdsClient class.
         budgetId: (str) Budget id to be referenced while creating Campaign.
 
     Returns:
@@ -113,14 +113,14 @@ def createCampaign(client, budgetId):
 
 
 def createAdGroup(client, campaign_id):
-    """Creates a new adgroup and returns the newly created adgroup id.
+    """Creates a new ad group and returns the new created ad group ID.
 
     Args:
-        client: An instance of the Adwords client.
-        campaign_id: (str) campaign id to be referenced while creating Adgroup.
+        client: An instance of the google.ads.google_ads.client.GoogleAdsClient class.
+        campaign_id: (str) The ID of the campaign under which to create a new ad group.
         
     Returns:
-        (str) Adgroup id of the newly created Adgroup.
+        (str) Ad group ID of the newly created ad group.
     """
     ad_group_service = client.GetService('AdGroupService', 'v201809')
     ad_group = {
@@ -129,9 +129,9 @@ def createAdGroup(client, campaign_id):
         'status': 'ENABLED',
         'biddingStrategyConfiguration' : {
             'bids': [{
-            # The 'xsi_type' field allows you to specify the xsi:type of the
-            # object being created. It's only necessary when you must provide
-            # an explicit type that the client library can't infer.
+                # The 'xsi_type' field allows you to specify the xsi:type of the
+                # object being created. It's only necessary when you must provide
+                # an explicit type that the client library can't infer.
                 'xsi_type': 'CpcBid',
                 'bid': {
                     'microAmount': 10000000
@@ -153,11 +153,11 @@ def createAdGroup(client, campaign_id):
 
 
 def createTextAds(client, adGroupId):
-    """Creates TextAds on a given Adgroup ID.
+    """Creates text ads using the given ad group ID.
 
     Args:
-        client: An instance of the Adwords client.
-        adGroupId: (str) AdGroup id to be referenced while creating text Ads.
+        client: An instance of the google.ads.google_ads.client.GoogleAdsClient class.
+        adGroupId: (str) Ad group ID to be referenced when creating text ads.
     """
     ad_group_service = client.GetService('AdGroupAdService', 'v201809')
     operations = []
@@ -193,12 +193,12 @@ def createTextAds(client, adGroupId):
 
 
 def createKeywords(client, adGroupId, keywordsToAdd):
-    """Populates keywords on a given AdgroupId.
+    """Populates keywords on a given ad group ID.
 
     Args:
-        client: An instance of the Adwords client.
-        adGroupId: (str) AdGroup id to be referenced while creating text ads.
-        keywordsToAdd: (list) A list of keywords to be added to a given Adgroup.
+        client: An instance of the google.ads.google_ads.client.GoogleAdsClient class.
+        adGroupId: (str) Ad group ID to be referenced when creating text ads.
+        keywordsToAdd: (list) A list of keywords to be added to a given ad group.
     """
     ad_group_criterion_service = client.GetService('AdGroupCriterionService',
                                                    'v201809')

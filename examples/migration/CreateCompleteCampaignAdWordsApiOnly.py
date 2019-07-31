@@ -61,10 +61,10 @@ def create_campaign_budget(client):
     }]
     # Add budget.
     results = budget_service.mutate(budget_operations)
-    createdBudget = results['value'][0]
+    created_budget = results['value'][0]
     print('Budget with ID {} and name {} was created'.format(
-           createdBudget['budgetId'], createdBudget['name']))
-    return createdBudget['budgetId']
+           created_budget['budgetId'], created_budget['name']))
+    return created_budget['budgetId']
 
 
 def create_campaign(client, budget_id):
@@ -106,10 +106,10 @@ def create_campaign(client, budget_id):
         'operand': campaign
     }]
     results = campaign_service.mutate(campaign_operations)
-    createdCampaign = results['value'][0]
+    created_campaign = results['value'][0]
     print('CreatedCampign with ID {} and name {} was created'.format(
-           createdCampaign['id'], createdCampaign['name']))
-    return createdCampaign['id']
+           created_campaign['id'], created_campaign['name']))
+    return created_campaign['id']
 
 
 def create_ad_group(client, campaign_id):
@@ -146,10 +146,10 @@ def create_ad_group(client, campaign_id):
         'operand': ad_group
     }]
     results = ad_group_service.mutate(adgroup_operations)
-    createdAdgroup = results['value'][0]
+    created_ad_group = results['value'][0]
     print('Ad group with ID {} and name {} was created'.format(
-         createdAdgroup['id'], createdAdgroup['name']))
-    return createdAdgroup['id']
+         created_ad_group['id'], created_ad_group['name']))
+    return created_ad_group['id']
 
 
 def create_text_ads(client, ad_group_id):

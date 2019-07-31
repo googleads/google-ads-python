@@ -38,14 +38,14 @@ NUMBER_OF_ADS = 5
 KEYWORDS_TO_ADD = ['mars cruise', 'space hotel']
 
 
-def createCampaignBudget(client):
-    """Creates a new budget and returns the newly created budget id.
+def create_campaign_budget(client):
+    """Creates a new budget and returns the newly created budget ID.
 
     Args:
-        client: An instance of googleads.adwords.AdWordsClient.
+        client: An instance of the google.ads.google_ads.client.GoogleAdsClient class.
 
     Returns:
-        (str) Budget id of the newly created budget.
+        (str) Budget ID of the newly created budget.
     """
     budget_service = client.GetService('BudgetService', version='v201809')
     budget = {
@@ -67,15 +67,15 @@ def createCampaignBudget(client):
     return createdBudget['budgetId']
 
 
-def createCampaign(client, budgetId):
-    """Creates a new campaign and returns the newly created campaign id.
+def create_campaign(client, budget_id):
+    """Creates a new campaign and returns the newly created campaign ID.
 
     Args:
         client: An instance of the google.ads.google_ads.client.GoogleAdsClient class.
-        budgetId: (str) Budget id to be referenced while creating Campaign.
+        budget_id: (str) Budget ID to be referenced while creating Campaign.
 
     Returns:
-        (str) Campaign id of the newly created Campaign.
+        (str) Campaign ID of the newly created Campaign.
     """
     campaign_service = client.GetService('CampaignService', version='v201809')
     campaign = {
@@ -94,7 +94,7 @@ def createCampaign(client, budgetId):
         datetime.timedelta(365)).strftime('%Y%m%d'),
         # Budget (required) - note only the budget ID is required.
         'budget': {
-            'budgetId': budgetId
+            'budgetId': budget_id
         },
         'networkSetting': {
             'targetGoogleSearch': 'true',
@@ -112,7 +112,7 @@ def createCampaign(client, budgetId):
     return createdCampaign['id']
 
 
-def createAdGroup(client, campaign_id):
+def create_ad_group(client, campaign_id):
     """Creates a new ad group and returns the new created ad group ID.
 
     Args:
@@ -152,19 +152,19 @@ def createAdGroup(client, campaign_id):
     return createdAdgroup['id']
 
 
-def createTextAds(client, adGroupId):
+def create_text_ads(client, ad_group_id):
     """Creates text ads using the given ad group ID.
 
     Args:
         client: An instance of the google.ads.google_ads.client.GoogleAdsClient class.
-        adGroupId: (str) Ad group ID to be referenced when creating text ads.
+        ad_group_id: (str) Ad group ID to be referenced when creating text ads.
     """
     ad_group_service = client.GetService('AdGroupAdService', 'v201809')
     operations = []
     for i in range(NUMBER_OF_ADS):
         operation = {
             'xsi_type': 'AdGroupAd',
-            'adGroupId': adGroupId,
+            'adGroupId': ad_group_id,
             # Additional properties (non-required).
             'status': 'PAUSED',
             'ad': {
@@ -192,21 +192,21 @@ def createTextAds(client, adGroupId):
                result['ad']['headlinePart2'], result['ad']['headlinePart3']))
 
 
-def createKeywords(client, adGroupId, keywordsToAdd):
+def create_keywords(client, ad_group_id, keywords_to_add):
     """Populates keywords on a given ad group ID.
 
     Args:
         client: An instance of the google.ads.google_ads.client.GoogleAdsClient class.
-        adGroupId: (str) Ad group ID to be referenced when creating text ads.
-        keywordsToAdd: (list) A list of keywords to be added to a given ad group.
+        ad_group_id: (str) Ad group ID to be referenced when creating text ads.
+        keywords_to_add: (list) A list of keywords to be added to a given ad group.
     """
     ad_group_criterion_service = client.GetService('AdGroupCriterionService',
                                                    'v201809')
     operations = []
-    for keyword in KEYWORDS_TO_ADD:
+    for keyword in keywords_to_add:
         operation = {
             'xsi_type': 'BiddableAdGroupCriterion',
-            'adGroupId': adGroupId,
+            'adGroupId': ad_group_id,
             'criterion': {
                 'xsi_type' : 'Keyword',
                 'text': keyword,
@@ -234,8 +234,8 @@ if __name__ == '__main__':
   # Initialize the client object.
   # By default, it will read the config file from the Home Directory.
   adwords_client = adwords.AdWordsClient.LoadFromStorage()
-  budgetId = createCampaignBudget(adwords_client)
-  campaignId = createCampaign(adwords_client, budgetId)
-  adGroupId = createAdGroup(adwords_client, campaignId)
-  createTextAds(adwords_client, adGroupId)
-  createKeywords(adwords_client, adGroupId, KEYWORDS_TO_ADD)
+  budget_id = create_campaign_budget(adwords_client)
+  campaign_id = create_campaign(adwords_client, budget_id)
+  ad_group_id = create_ad_group(adwords_client, campaign_id)
+  create_text_ads(adwords_client, ad_group_id)
+  create_keywords(adwords_client, ad_group_id, KEYWORDS_TO_ADD)

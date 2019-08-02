@@ -103,7 +103,7 @@ def create_campaign(client, customer_id, campaign_budget):
     Args:
         client: A google.ads.google_ads.client.GoogleAdsClient instance.
         customer_id: (str) Customer ID associated with the account.
-        campaignBudget: A google.ads.google_ads.v2.types.CampaignBudget
+        campaign_budget: A google.ads.google_ads.v2.types.CampaignBudget
             instance.
 
     Returns:
@@ -143,7 +143,7 @@ def get_campaign(client, customer_id, campaign_resource_name):
     Args:
         client: A google.ads.google_ads.client.GoogleAdsClient instance.
         customer_id: (str) Customer ID associated with the account.
-        campaignResourceName: (str) Resource name associated with the newly
+        campaign_resource_name: (str) Resource name associated with the newly
             created campaign budget.
 
     Returns:
@@ -193,7 +193,7 @@ def get_ad_group(client, customer_id, ad_group_resource_name):
     Args:
         client: A google.ads.google_ads.client.GoogleAdsClient instance.
         customer_id: (str) Customer ID associated with the account.
-        adGroupResourceName: (str) Resource name associated with the newly
+        ad_group_resource_name: (str) Resource name associated with the newly
             created Ad group.
 
     Returns:
@@ -215,7 +215,7 @@ def create_text_ads(client, customer_id, ad_group):
     Args:
         client: A google.ads.google_ads.client.GoogleAdsClient instance.
         customer_id: (str) Customer ID associated with the account.
-        adGroup: A google.ads.google_ads.v2.types.AdGroup instance.
+        ad_group: A google.ads.google_ads.v2.types.AdGroup instance.
     """
     operations = []
     for i in range(0, NUMBER_OF_ADS):
@@ -297,7 +297,7 @@ def create_keywords(client, customer_id, ad_group, keywords_to_add):
     Args:
         client: A google.ads.google_ads.client.GoogleAdsClient instance.
         customer_id: (str) Customer ID associated with the account.
-        adGroup: A google.ads.google_ads.v2.types.AdGroup instance.
+        ad_group: A google.ads.google_ads.v2.types.AdGroup instance.
         keywords_to_add: keywords_to_add: (list) A list of keywords which are to
             be added to a given ad group.
     """

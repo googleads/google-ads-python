@@ -104,7 +104,7 @@ def create_campaign(client, budget_id):
 
     Args:
         client: An instance of the googleads.adwords.AdWordsClient class.
-        budgetId: (str) Budget ID to be referenced while creating Campaign.
+        budget_id: (str) Budget ID to be referenced while creating Campaign.
 
     Returns:
         (str) Campaign ID of the newly created Campaign.
@@ -189,7 +189,7 @@ def create_text_ads(client, ad_group_id):
 
     Args:
         client: An instance of the googleads.adwords.AdWordsClient class.
-        adGroupId: (str) Ad group ID to be referenced when creating text ads.
+        ad_group_id: (str) Ad group ID to be referenced when creating text ads.
     """
     ad_group_service = client.GetService('AdGroupAdService', 'v201809')
     operations = []
@@ -229,8 +229,8 @@ def create_keywords(client, ad_group_id, keywords_to_add):
 
     Args:
         client: An instance of the googleads.adwords.AdWordsClient class.
-        adGroupId: (str) ad group ID to be referenced while creating text ads.
-        keywordsToAdd: (list) A list of keywords to be added to a given ad
+        ad_group_id: (str) ad group ID to be referenced while creating text ads.
+        keywords_to_add: (list) A list of keywords to be added to a given ad
             group.
     """
     ad_group_criterion_service = client.GetService('AdGroupCriterionService',

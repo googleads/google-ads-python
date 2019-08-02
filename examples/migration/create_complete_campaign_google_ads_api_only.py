@@ -15,14 +15,15 @@
 # limitations under the License.
 """This example creates a search campaign with the help of Google Ads API only.
 
-This code example is the last in a series of code examples that shows how to create
-a Search campaign using the AdWords API, and then migrate it to the Google Ads API one
-functionality at a time. See other examples in this directory for code examples in various
-stages of migration.
+This code example is the last in a series of code examples that shows how to
+create a Search campaign using the AdWords API, and then migrate it to the
+Google Ads API one functionality at a time. See other examples in this directory
+for code examples in various stages of migration.
 
-In this code example, the functionality to create campaign budget and search campaign have
-been migrated to the Google Ads API. The rest of the functionality - creating ad groups,
-keywords and expanded text ads are done using the AdWords API.
+In this code example, the functionality to create campaign budget and search
+campaign have been migrated to the Google Ads API. The rest of the functionality
+- creating ad groups, keywords and expanded text ads are done using the AdWords
+API.
 """
 
 import argparse
@@ -49,11 +50,12 @@ def create_campaign_budget(client, customer_id):
     """Creates a new campaign budget and returns it.
 
     Args:
-        client: An instance of the google.ads.google_ads.client.GoogleAdsClient class.
+        client: A google.ads.google_ads.client.GoogleAdsClient instance.
         customer_id: (str) Customer ID associated with the account.
 
     Returns:
-        An instance of google.ads.google_ads.v2.types.CampaignBudget for the newly created Budget.
+        An instance of google.ads.google_ads.v2.types.CampaignBudget for the
+            newly created Budget.
     """
     campaign_service = client.get_service('CampaignBudgetService', version='v2')
     operation = client.get_type('CampaignBudgetOperation', version='v2')
@@ -74,15 +76,17 @@ def create_campaign_budget(client, customer_id):
 
 
 def get_campaign_budget(client, customer_id, resource_name):
-    """Retrieves an instance of google.ads.google_ads.v2.types.CampaignBudget message class.
+    """Retrieves a google.ads.google_ads.v2.types.CampaignBudget instance.
 
     Args:
-        client: An instance of the google.ads.google_ads.client.GoogleAdsClient class.
+        client: A google.ads.google_ads.client.GoogleAdsClient instance.
         customer_id: (str) Customer ID associated with the account.
-        resource_name: (str) Resource name associated with the newly created campaign.
+        resource_name: (str) Resource name associated with the newly created
+            campaign.
 
     Returns:
-        An instance of google.ads.google_ads.v2.types.CampaignBudget for the newly created Budget.
+        An instance of google.ads.google_ads.v2.types.CampaignBudget for the
+            newly created Budget.
     """
     ga_service = client.get_service('GoogleAdsService', version='v2')
     query = ('SELECT campaign_budget.id, campaign_budget.name, '
@@ -97,9 +101,10 @@ def create_campaign(client, customer_id, campaign_budget):
     """Creates a new campaign and returns it.
 
     Args:
-        client: An instance of the google.ads.google_ads.client.GoogleAdsClient class.
+        client: A google.ads.google_ads.client.GoogleAdsClient instance.
         customer_id: (str) Customer ID associated with the account.
-        campaignBudget: An instance of the google.ads.google_ads.v2.types.CampaignBudget message class.
+        campaignBudget: A google.ads.google_ads.v2.types.CampaignBudget
+            instance.
 
     Returns:
         A google.ads.google_ads.v2.types.GoogleAdsClient message class instance.
@@ -133,12 +138,13 @@ def create_campaign(client, customer_id, campaign_budget):
 
 
 def get_campaign(client, customer_id, campaign_resource_name):
-    """Retrieves an instance of the google.ads.google_ads.v2.types.Campaign message class.
+    """Retrieves a google.ads.google_ads.v2.types.Campaign instance.
 
     Args:
-        client: An instance of the google.ads.google_ads.client.GoogleAdsClient class.
+        client: A google.ads.google_ads.client.GoogleAdsClient instance.
         customer_id: (str) Customer ID associated with the account.
-        campaignResourceName: (str) Resource name associated with the newly created campaign budget.
+        campaignResourceName: (str) Resource name associated with the newly
+            created campaign budget.
 
     Returns:
         A google.ads.google_ads.v2.types.GoogleAdsClient message class instance.
@@ -156,12 +162,13 @@ def create_ad_group(client, customer_id, campaign):
     """Creates a new ad group and returns it.
 
     Args:
-        client: An instance of the google.ads.google_ads.client.GoogleAdsClient class.
+        client: A google.ads.google_ads.client.GoogleAdsClient instance.
         customer_id: (str) Customer ID associated with the account.
-        campaign: An instance of the google.ads.google_ads.v2.types.Campaign message class.
+        campaign: A google.ads.google_ads.v2.types.Campaign instance.
 
     Returns:
-        An instance of the google.ads.google_ads.v2.types.AdGroup message class of the newly created ad group.
+        An instance of the google.ads.google_ads.v2.types.AdGroup message class
+            of the newly created ad group.
     """
     operation = client.get_type('AdGroupOperation', version='v2')
     adgroup = operation.create
@@ -181,15 +188,17 @@ def create_ad_group(client, customer_id, campaign):
 
 
 def get_ad_group(client, customer_id, ad_group_resource_name):
-    """Retrieves an instance of the google.ads.googleads_v2.types.AdGroup message class.
+    """Retrieves a google.ads.googleads_v2.types.AdGroup instance.
 
     Args:
-        client: An instance of the google.ads.google_ads.client.GoogleAdsClient class.
+        client: A google.ads.google_ads.client.GoogleAdsClient instance.
         customer_id: (str) Customer ID associated with the account.
-        adGroupResourceName: (str) Resource name associated with the newly created Ad group.
+        adGroupResourceName: (str) Resource name associated with the newly
+            created Ad group.
 
     Returns:
-        An instance of the google.ads.google_ads.v2.types.AdGroup message class of the newly created ad group.
+        An instance of the google.ads.google_ads.v2.types.AdGroup message class
+            of the newly created ad group.
     """
     ga_service = client.get_service('GoogleAdsService', version='v2')
     query = ('SELECT ad_group.id, ad_group.name, ad_group.resource_name '
@@ -204,9 +213,9 @@ def create_text_ads(client, customer_id, ad_group):
     """Creates new text ads in a given ad group.
 
     Args:
-        client: An instance of the google.ads.google_ads.client.GoogleAdsClient class.
+        client: A google.ads.google_ads.client.GoogleAdsClient instance.
         customer_id: (str) Customer ID associated with the account.
-        adGroup: An instance of the google.ads.google_ads.v2.types.AdGroup message class.
+        adGroup: A google.ads.google_ads.v2.types.AdGroup instance.
     """
     operations = []
     for i in range(0, NUMBER_OF_ADS):
@@ -232,7 +241,8 @@ def create_text_ads(client, customer_id, ad_group):
                                                             operations)
     new_ad_resource_names = []
     for i in range(NUMBER_OF_ADS):
-        new_ad_resource_names.append(ad_group_ad_response.results[i].resource_name)
+        new_ad_resource_names.append(
+            ad_group_ad_response.results[i].resource_name)
 
     new_ads = get_ads(client, customer_id, new_ad_resource_names)
     for i in range(len(new_ads)):
@@ -244,15 +254,16 @@ def create_text_ads(client, customer_id, ad_group):
 
 
 def get_ads(client, customer_id, new_ad_resource_names):
-    """Retrieves an instance of the google.ads.google_ads.v2.types.AdGroupAd message class.
+    """Retrieves a google.ads.google_ads.v2.types.AdGroupAd instance.
 
     Args:
-        client: An instance of the google.ads.google_ads.client.GoogleAdsClient class.
+        client: A google.ads.google_ads.client.GoogleAdsClient instanc  e.
         customer_id: (str) Customer ID associated with the account.
-        newAdResourceNames: (str) Resource name associated with the Ad group.
+        new_ad_resource_names: (str) Resource name associated with the Ad group.
 
     Returns:
-        An instance of the google.ads.google_ads.v2.types.AdGroupAd message class of the newly created ad group ad.
+        An instance of the google.ads.google_ads.v2.types.AdGroupAd message
+            class of the newly created ad group ad.
     """
     def formatter(myst):
         results = []
@@ -280,17 +291,18 @@ def get_ads(client, customer_id, new_ad_resource_names):
     return ads
 
 
-def create_keywords(client, customer_id, ad_group, keywordstoadd):
+def create_keywords(client, customer_id, ad_group, keywords_to_add):
     """Creates new keywords on a given ad group.
 
     Args:
-        client: An instance of the google.ads.google_ads.client.GoogleAdsClient class.
+        client: A google.ads.google_ads.client.GoogleAdsClient instance.
         customer_id: (str) Customer ID associated with the account.
-        adGroup: An instance of the google.ads.google_ads.v2.types.AdGroup message class.
-        keywordstoadd: keywords_to_add: (list) A list of keywords which are to be added to a given ad group.
+        adGroup: A google.ads.google_ads.v2.types.AdGroup instance.
+        keywords_to_add: keywords_to_add: (list) A list of keywords which are to
+            be added to a given ad group.
     """
     ad_group_criterion_operations = []
-    for keyword in keywordstoadd:
+    for keyword in keywords_to_add:
         operation = client.get_type('AdGroupCriterionOperation', version='v2')
         ad_group_criterion_operation = operation.create
         ad_group_criterion_operation.ad_group.value = ad_group.resource_name
@@ -311,7 +323,7 @@ def create_keywords(client, customer_id, ad_group, keywordstoadd):
                                  ad_group_criterion_operations)
     new_ad_resource_names = []
 
-    for i in range(len(keywordstoadd)):
+    for i in range(len(keywords_to_add)):
         new_ad_resource_names.append(
         ad_group_criterion_response.results[i].resource_name)
 
@@ -325,16 +337,17 @@ def create_keywords(client, customer_id, ad_group, keywordstoadd):
 
 
 def get_keywords(client, customer_id, keyword_resource_names):
-    """Retrieves an instance of the google.ads.google_ads.v2.types.AdGroupCriterion message class.
+    """Retrieves a google.ads.google_ads.v2.types.AdGroupCriterion instance.
 
     Args:
-        client: An instance of the google.ads.google_ads.client.GoogleAdsClient class.
+        client: A google.ads.google_ads.client.GoogleAdsClient instance.
         customer_id: (str) Customer ID associated with the account.
-        keywordResourceNames: (str) Resource name associated with the newly created ad group criterion.
+        keyword_resource_names: (str) Resource name associated with the newly
+            created ad group criterion.
 
     Returns:
-        An instance of the google.ads.google_ads.v2.types.AdGroupCriterion message class of the newly created
-        ad group criterion.
+        An instance of the google.ads.google_ads.v2.types.AdGroupCriterion
+            message class of the newly created ad group criterion.
     """
     def formatter(myst):
         results =[]
@@ -376,4 +389,5 @@ if __name__ == '__main__':
   campaign = create_campaign(google_ads_client, args.customer_id, budget)
   ad_group = create_ad_group(google_ads_client, args.customer_id, campaign)
   create_text_ads(google_ads_client, args.customer_id, ad_group)
-  create_keywords(google_ads_client, args.customer_id, ad_group, KEYWORDS_TO_ADD)
+  create_keywords(google_ads_client, args.customer_id, ad_group,
+                  KEYWORDS_TO_ADD)

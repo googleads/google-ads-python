@@ -13,16 +13,17 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
-"""This example creates a search campaign with the help of AdWords Api and Google Ads API.
+"""This example creates a search campaign with the AdWords and Google Ads APIs.
 
-This code example is the second in a series of code examples that shows how to create
-a Search ad_group using the AdWords API, and then migrate it to the Google Ads API one
-functionality at a time. See other examples in this directory for code examples in various
-stages of migration.
+This code example is the second in a series of code examples that shows how to
+create a Search ad_group using the AdWords API, and then migrate it to the
+Google Ads API one functionality at a time. See other examples in this directory
+for code examples in various stages of migration.
 
-In this code example, the functionality to create ad_group budget has been migrated to
-the Google Ads API. The rest of the functionality - creating a Search ad_group, ad groups,
-keywords and expanded text ads are done using the AdWords API.
+In this code example, the functionality to create ad_group budget has been
+migrated to the Google Ads API. The rest of the functionality - creating a
+Search ad_group, ad groups, keywords and expanded text ads are done using the
+AdWords API.
 """
 
 
@@ -50,11 +51,12 @@ def create_campaign_budget(client, customer_id):
     """Creates a new campaign budget and returns it.
 
     Args:
-        client: An instance of the google.ads.google_ads.client.GoogleAdsClient class.
+        client: A google.ads.google_ads.client.GoogleAdsClient instance.
         customer_id: (str) Customer ID associated with the account.
 
     Returns:
-        An instance of google.ads.google_ads.v2.types.CampaignBudget for the newly created Budget.
+        An instance of google.ads.google_ads.v2.types.CampaignBudget for the
+            newly created Budget.
     """
     campaign_service = client.get_service('CampaignBudgetService', version='v2')
     operation = client.get_type('CampaignBudgetOperation', version='v2')
@@ -75,16 +77,18 @@ def create_campaign_budget(client, customer_id):
 
 
 def get_campaign_budget(client, customer_id, resource_name):
-    """Retrives an instance of CampaignBudget message class that is associated with
-       a given resource name.
+    """Retrieves an instance of google.ads.google_ads.v2.types.CampaignBudget
+        message class that is associated with a given resource name.
 
     Args:
-        client: An instance of the google.ads.google_ads.client.GoogleAdsClient class.
+        client: A google.ads.google_ads.client.GoogleAdsClient instance.
         customer_id: (str) Customer ID associated with the account.
-        resource_name: (str) Resource name associated with the newly created campaign.
+        resource_name: (str) Resource name associated with the newly created
+            campaign.
 
     Returns:
-        An instance of google.ads.google_ads.v2.types.CampaignBudget for the newly created Budget.
+        An instance of google.ads.google_ads.v2.types.CampaignBudget for the
+            newly created Budget.
     """
     ga_service = client.get_service('GoogleAdsService', version='v2')
     query = ('SELECT campaign_budget.id, campaign_budget.name, '
@@ -109,8 +113,8 @@ def create_campaign(client, budget_id):
     campaign = {
         'name': 'Interplanetary Cruise #{}'.format(uuid.uuid4()),
         'advertisingChannelType': 'SEARCH',
-        # Recommendation: Set the campaign to PAUSED when creating it to stop the
-        # ads from immediately serving. Set to ENABLED once you've added
+        # Recommendation: Set the campaign to PAUSED when creating it to stop
+        # the ads from immediately serving. Set to ENABLED once you've added
         # targeting and the ads are ready to serve.
         'status': 'PAUSED',
         'biddingStrategyConfiguration': {
@@ -158,8 +162,8 @@ def create_ad_group(client, campaign_id):
         'biddingStrategyConfiguration' : {
             'bids': [{
                 # The 'xsi_type' field allows you to specify the xsi:type of the
-                # object being created. It's only necessary when you must provide
-                # an explicit type that the client library can't infer.
+                # object being created. It's only necessary when you must
+                # provide an explicit type that the client library can't infer.
                 'xsi_type': 'CpcBid',
                 'bid': {
                     'microAmount': 10000000
@@ -226,7 +230,8 @@ def create_keywords(client, ad_group_id, keywords_to_add):
     Args:
         client: An instance of the googleads.adwords.AdWordsClient class.
         adGroupId: (str) ad group ID to be referenced while creating text ads.
-        keywordsToAdd: (list) A list of keywords to be added to a given ad group.
+        keywordsToAdd: (list) A list of keywords to be added to a given ad
+            group.
     """
     ad_group_criterion_service = client.GetService('AdGroupCriterionService',
                                                    'v201809')

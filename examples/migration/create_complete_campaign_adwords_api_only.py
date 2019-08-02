@@ -15,14 +15,14 @@
 # limitations under the License.
 """This example creates a search campaign with the help of AdWords Api.
 
-This code example is the first in a series of code examples that shows how to create
-a Search campaign using the AdWords API, and then migrate it to Google Ads API one
-functionality at a time. See other examples in this directory for code examples in various
-stages of migration.
+This code example is the first in a series of code examples that shows how to
+create a Search campaign using the AdWords API, and then migrate it to Google
+Ads API one functionality at a time. See other examples in this directory for
+code examples in various stages of migration.
 
-This code example represents the initial state, where the AdWords API is used to create a
-campaign budget, a Search campaign, ad groups, keywords and expanded text ads. None of the
-functionality has yet been migrated to the Google Ads API.
+This code example represents the initial state, where the AdWords API is used
+to create a campaign budget, a Search campaign, ad groups, keywords and expanded
+text ads. None of the functionality has yet been migrated to the Google Ads API.
 """
 
 
@@ -42,7 +42,8 @@ def create_campaign_budget(client):
     """Creates a new budget and returns the newly created budget ID.
 
     Args:
-        client: An instance of the google.ads.google_ads.client.GoogleAdsClient class.
+        client: An instance of the google.ads.google_ads.client.GoogleAdsClient
+        class.
 
     Returns:
         (str) Budget ID of the newly created budget.
@@ -71,7 +72,7 @@ def create_campaign(client, budget_id):
     """Creates a new campaign and returns the newly created campaign ID.
 
     Args:
-        client: An instance of the google.ads.google_ads.client.GoogleAdsClient class.
+        client: A google.ads.google_ads.client.GoogleAdsClient instance.
         budget_id: (str) Budget ID to be referenced while creating Campaign.
 
     Returns:
@@ -116,8 +117,9 @@ def create_ad_group(client, campaign_id):
     """Creates a new ad group and returns the new created ad group ID.
 
     Args:
-        client: An instance of the google.ads.google_ads.client.GoogleAdsClient class.
-        campaign_id: (str) The ID of the campaign under which to create a new ad group.
+        client: A google.ads.google_ads.client.GoogleAdsClient instance.
+        campaign_id: (str) The ID of the campaign under which to create a new
+          ad group.
 
     Returns:
         (str) Ad group ID of the newly created ad group.
@@ -156,7 +158,7 @@ def create_text_ads(client, ad_group_id):
     """Creates text ads using the given ad group ID.
 
     Args:
-        client: An instance of the google.ads.google_ads.client.GoogleAdsClient class.
+        client: A google.ads.google_ads.client.GoogleAdsClient instance.
         ad_group_id: (str) Ad group ID to be referenced when creating text ads.
     """
     ad_group_service = client.GetService('AdGroupAdService', 'v201809')
@@ -196,9 +198,10 @@ def create_keywords(client, ad_group_id, keywords_to_add):
     """Populates keywords on a given ad group ID.
 
     Args:
-        client: An instance of the google.ads.google_ads.client.GoogleAdsClient class.
+        client: A google.ads.google_ads.client.GoogleAdsClient instance.
         ad_group_id: (str) Ad group ID to be referenced when creating text ads.
-        keywords_to_add: (list) A list of keywords to be added to a given ad group.
+        keywords_to_add: (list) A list of keywords to be added to a given ad
+            group.
     """
     ad_group_criterion_service = client.GetService('AdGroupCriterionService',
                                                    'v201809')

@@ -65,10 +65,10 @@ def create_campaign_budget(client, customer_id):
                                 'BudgetDeliveryMethodEnum',
                                 version='v2').STANDARD
     criterion.amount_micros.value = 500000
-    response = campaign_service.mutate_campaign_budgets(customer_id, 
+    response = campaign_service.mutate_campaign_budgets(customer_id,
                                                         [operation])
     campaign_budget_resource_name = response.results[0].resource_name
-    new_campaign_budget = get_campaign_budget(client, customer_id, 
+    new_campaign_budget = get_campaign_budget(client, customer_id,
                                           campaign_budget_resource_name)
     print('Added budget named {}'.format(new_campaign_budget.name.value))
     return new_campaign_budget
@@ -81,7 +81,7 @@ def get_campaign_budget(client, customer_id, resource_name):
     Args:
         client: An instance of the google.ads.google_ads.client.GoogleAdsClient class.
         customer_id: (str) Customer ID associated with the account.
-        resource_name: (str) Resource name associated with the newly created campaign. 
+        resource_name: (str) Resource name associated with the newly created campaign.
 
     Returns:
         An instance of google.ads.google_ads.v2.types.CampaignBudget for the newly created Budget.
@@ -146,7 +146,7 @@ def create_ad_group(client, campaign_id):
     Args:
         client: The ID of the campaign under which to create a new ad group.
         campaign_id: (str) campaign ID to be referenced while creating ad group.
-        
+
     Returns:
         (str) Ad group ID of the newly created ad group.
     """
@@ -253,7 +253,7 @@ def create_keywords(client, ad_group_id, keywords_to_add):
     results = ad_group_criterion_service.mutate(operations)
     for result in results['value']:
         print('Keyword with ad group ID {}, keyword ID {}, text {} and match'
-              'type {} was created'.format(result['adGroupId'], 
+              'type {} was created'.format(result['adGroupId'],
                result['criterion']['id'], result['criterion']['text'],
                result['criterion']['matchType']))
 

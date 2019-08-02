@@ -118,7 +118,7 @@ def create_ad_group(client, campaign_id):
     Args:
         client: An instance of the google.ads.google_ads.client.GoogleAdsClient class.
         campaign_id: (str) The ID of the campaign under which to create a new ad group.
-        
+
     Returns:
         (str) Ad group ID of the newly created ad group.
     """
@@ -225,7 +225,7 @@ def create_keywords(client, ad_group_id, keywords_to_add):
     results = ad_group_criterion_service.mutate(operations)
     for result in results['value']:
         print('Keyword with ad group ID {}, keyword ID {}, text {} and match'
-              'type {} was created'.format(result['adGroupId'], 
+              'type {} was created'.format(result['adGroupId'],
                result['criterion']['id'], result['criterion']['text'],
                result['criterion']['matchType']))
 

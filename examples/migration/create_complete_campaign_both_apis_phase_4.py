@@ -266,7 +266,7 @@ def get_ads(client, customer_id, new_ad_resource_names):
     """
     def formatter(given_string):
         """This helper function is used to assign ' ' to names of resources
-        so that this formatted string can be used withing an IN clause.
+        so that this formatted string can be used within an IN clause.
 
         Args:
             given_string: (str) The string to be formatted.

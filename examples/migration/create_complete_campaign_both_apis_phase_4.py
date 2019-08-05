@@ -61,16 +61,16 @@ def create_campaign_budget(client, customer_id):
     operation = client.get_type('CampaignBudgetOperation', version='v2')
     criterion = operation.create
     criterion.name.value = 'Interplanetary Cruise Budget #{}'.format(
-                            uuid.uuid4())
+                           uuid.uuid4())
     criterion.delivery_method = client.get_type(
                                 'BudgetDeliveryMethodEnum',
                                 version='v2').STANDARD
     criterion.amount_micros.value = 500000
     response = campaign_service.mutate_campaign_budgets(customer_id,
-                                                        [operation])
+               [operation])
     campaign_budget_resource_name = response.results[0].resource_name
     new_campaign_budget = get_campaign_budget(client, customer_id,
-                                          campaign_budget_resource_name)
+                          campaign_budget_resource_name)
     print('Added budget named {}'.format(new_campaign_budget.name.value))
     return new_campaign_budget
 
@@ -127,9 +127,9 @@ def create_campaign(client, customer_id, campaign_budget):
     campaign.network_settings.target_content_network.value = False
     campaign.network_settings.target_partner_search_network.value = False
     campaign.start_date.value =  (datetime.datetime.now() + 
-                                    datetime.timedelta(1)).strftime('%Y%m%d')
+                                  datetime.timedelta(1)).strftime('%Y%m%d')
     campaign.end_date.value = (datetime.datetime.now() + 
-                              datetime.timedelta(365)).strftime('%Y%m%d')
+                               datetime.timedelta(365)).strftime('%Y%m%d')
     response = campaign_service.mutate_campaigns(customer_id, [operation])
     campaign_resource_name = response.results[0].resource_name
     new_campaign = get_campaign(client, customer_id, campaign_resource_name)
@@ -176,9 +176,9 @@ def create_ad_group(client, customer_id, campaign):
     adgroup.name.value  = 'Earth to Mars Cruises #{}'.format(uuid.uuid4())
     adgroup.campaign.value = campaign.resource_name
     adgroup.status = client.get_type('AdGroupStatusEnum',
-                                     version='v2').ENABLED
+                     version='v2').ENABLED
     adgroup.type = client.get_type('AdGroupTypeEnum',
-                                   version='v2').SEARCH_STANDARD
+                   version='v2').SEARCH_STANDARD
     adgroup.cpc_bid_micros.value = 10000000
     response = adgroup_service.mutate_ad_groups(customer_id, [operation])
     ad_group_resource_name = response.results[0].resource_name
@@ -311,7 +311,7 @@ def create_keywords(client, ad_group_id, keywords_to_add):
             group.
     """
     ad_group_criterion_service = client.GetService('AdGroupCriterionService',
-                                                   'v201809')
+                                 'v201809')
     operations = []
     for keyword in keywords_to_add:
         operation = {

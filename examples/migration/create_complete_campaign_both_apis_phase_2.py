@@ -67,10 +67,10 @@ def create_campaign_budget(client, customer_id):
                                 version='v2').STANDARD
     criterion.amount_micros.value = 500000
     response = campaign_service.mutate_campaign_budgets(customer_id,
-                                                        [operation])
+               [operation])
     campaign_budget_resource_name = response.results[0].resource_name
     new_campaign_budget = get_campaign_budget(client, customer_id,
-                                          campaign_budget_resource_name)
+                          campaign_budget_resource_name)
     print('Added budget named {}'.format(new_campaign_budget.name.value))
     return new_campaign_budget
 
@@ -193,7 +193,7 @@ def create_ad_group(client, campaign_id):
     results = ad_group_service.mutate(adgroup_operations)
     created_ad_group = results['value'][0]
     print('Ad group with ID {} and name {} was created'.format(
-         created_ad_group['id'], created_ad_group['name']))
+          created_ad_group['id'], created_ad_group['name']))
     return created_ad_group['id']
 
 

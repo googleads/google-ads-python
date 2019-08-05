@@ -150,7 +150,7 @@ def create_ad_group(client, campaign_id):
     results = ad_group_service.mutate(adgroup_operations)
     created_ad_group = results['value'][0]
     print('Ad group with ID {} and name {} was created'.format(
-         created_ad_group['id'], created_ad_group['name']))
+           created_ad_group['id'], created_ad_group['name']))
     return created_ad_group['id']
 
 
@@ -204,7 +204,7 @@ def create_keywords(client, ad_group_id, keywords_to_add):
             group.
     """
     ad_group_criterion_service = client.GetService('AdGroupCriterionService',
-                                                   'v201809')
+                                 'v201809')
     operations = []
     for keyword in keywords_to_add:
         operation = {

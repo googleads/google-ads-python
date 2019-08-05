@@ -127,9 +127,9 @@ def create_campaign(client, customer_id, campaign_budget):
     campaign.network_settings.target_content_network.value = False
     campaign.network_settings.target_partner_search_network.value = False
     campaign.start_date.value =  (datetime.datetime.now() + 
-                                    datetime.timedelta(1)).strftime('%Y%m%d')
+                                  datetime.timedelta(1)).strftime('%Y%m%d')
     campaign.end_date.value = (datetime.datetime.now() + 
-                              datetime.timedelta(365)).strftime('%Y%m%d')
+                               datetime.timedelta(365)).strftime('%Y%m%d')
     response = campaign_service.mutate_campaigns(customer_id, [operation])
     campaign_resource_name = response.results[0].resource_name
     new_campaign = get_campaign(client, customer_id, campaign_resource_name)

@@ -225,12 +225,11 @@ def create_text_ads(client, customer_id, ad_group):
         ad_group_operation.status = client.get_type('AdGroupAdStatusEnum',
                                     version='v2').PAUSED
         ad_group_operation.ad.expanded_text_ad.headline_part1.value = \
-                                    'Cruise to Mars #{}'.format(
-                                    str(uuid.uuid4())[:4])
+            'Cruise to Mars #{}'.format(str(uuid.uuid4())[:4])
         ad_group_operation.ad.expanded_text_ad.headline_part2.value = \
-                                    'Best Space Cruise Line'
+            'Best Space Cruise Line'
         ad_group_operation.ad.expanded_text_ad.description.value = \
-                                    'Buy your tickets now!'
+            'Buy your tickets now!'
         final_urls =  client.get_type('StringValue', version='v2')
         final_urls.value = 'http://www.example.com'
         ad_group_operation.ad.final_urls.extend([final_urls])
@@ -238,11 +237,11 @@ def create_text_ads(client, customer_id, ad_group):
 
     adgroup_service = client.get_service('AdGroupAdService', version='v2')
     ad_group_ad_response = adgroup_service.mutate_ad_group_ads(customer_id,
-                                                            operations)
+                           operations)
     new_ad_resource_names = []
     for i in range(NUMBER_OF_ADS):
         new_ad_resource_names.append(
-            ad_group_ad_response.results[i].resource_name)
+        ad_group_ad_response.results[i].resource_name)
 
     new_ads = get_ads(client, customer_id, new_ad_resource_names)
     for i in range(len(new_ads)):

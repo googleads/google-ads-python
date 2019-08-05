@@ -121,9 +121,9 @@ def create_campaign(client, budget_id):
             'biddingStrategyType': 'MANUAL_CPC',
         },
         'startDate': (datetime.datetime.now() +
-        datetime.timedelta(1)).strftime('%Y%m%d'),
+            datetime.timedelta(1)).strftime('%Y%m%d'),
         'endDate': (datetime.datetime.now() +
-        datetime.timedelta(365)).strftime('%Y%m%d'),
+            datetime.timedelta(365)).strftime('%Y%m%d'),
         # Budget (required) - note only the budget ID is required.
         'budget': {
             'budgetId': budget_id

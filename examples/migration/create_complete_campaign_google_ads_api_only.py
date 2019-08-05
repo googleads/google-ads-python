@@ -221,14 +221,13 @@ def create_text_ads(client, customer_id, ad_group):
         ad_group_operation = operation.create
         ad_group_operation.ad_group.value =  ad_group.resource_name
         ad_group_operation.status = client.get_type('AdGroupAdStatusEnum',
-                                  version='v2').PAUSED
+                                    version='v2').PAUSED
         ad_group_operation.ad.expanded_text_ad.headline_part1.value = \
-                                    'Cruise to Mars #{}'.format(
-                                    str(uuid.uuid4())[:4])
+            'Cruise to Mars #{}'.format(str(uuid.uuid4())[:4])
         ad_group_operation.ad.expanded_text_ad.headline_part2.value = \
-                                    'Best Space Cruise Line'
+            'Best Space Cruise Line'
         ad_group_operation.ad.expanded_text_ad.description.value = \
-                                    'Buy your tickets now!'
+            'Buy your tickets now!'
         final_urls =  client.get_type('StringValue', version='v2')
         final_urls.value = 'http://www.example.com'
         ad_group_operation.ad.final_urls.extend([final_urls])
@@ -236,11 +235,11 @@ def create_text_ads(client, customer_id, ad_group):
 
     adgroup_service = client.get_service('AdGroupAdService', version='v2')
     ad_group_ad_response = adgroup_service.mutate_ad_group_ads(customer_id,
-                                                            operations)
+                           operations)
     new_ad_resource_names = []
     for i in range(NUMBER_OF_ADS):
         new_ad_resource_names.append(
-            ad_group_ad_response.results[i].resource_name)
+        ad_group_ad_response.results[i].resource_name)
 
     new_ads = get_ads(client, customer_id, new_ad_resource_names)
     for i in range(len(new_ads)):
@@ -316,20 +315,18 @@ def create_keywords(client, customer_id, ad_group, keywords_to_add):
         ad_group_criterion_operation = operation.create
         ad_group_criterion_operation.ad_group.value = ad_group.resource_name
         ad_group_criterion_operation.status = client.get_type(
-                                          'AdGroupCriterionStatusEnum',
-                                           version='v2').ENABLED
+                                              'AdGroupCriterionStatusEnum',
+                                              version='v2').ENABLED
         ad_group_criterion_operation.keyword.text.value = keyword
         ad_group_criterion_operation.keyword.match_type = client.get_type(
-                                                  'KeywordMatchTypeEnum',
-                                                   version='v2').EXACT
+            'KeywordMatchTypeEnum', version='v2').EXACT
         ad_group_criterion_operations.append(operation)
 
     ad_group_criterion_service_client = client.get_service(
-                                               'AdGroupCriterionService',
-                                                version='v2')
+                                        'AdGroupCriterionService', version='v2')
     ad_group_criterion_response = ad_group_criterion_service_client.\
-                                 mutate_ad_group_criteria(customer_id,
-                                 ad_group_criterion_operations)
+                                  mutate_ad_group_criteria(customer_id,
+                                  ad_group_criterion_operations)
     new_ad_resource_names = []
 
     for i in range(len(keywords_to_add)):

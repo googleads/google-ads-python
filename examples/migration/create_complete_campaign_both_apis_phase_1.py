@@ -43,7 +43,7 @@ from google.ads.google_ads.errors import GoogleAdsException
 # Number of ads being added/updated in this code example.
 NUMBER_OF_ADS = 5
 # The list of keywords being added in this code example.
-KEYWORDS_TO_ADD = ['mars cruise', 'space hotel' ]
+KEYWORDS_TO_ADD = ['mars cruise', 'space hotel']
 PAGE_SIZE = 1000
 
 
@@ -264,19 +264,19 @@ def create_keywords(client, ad_group_id, keywords_to_add):
 
 
 if __name__ == '__main__':
-  # Initialize client object.
-  # It will read the config file. The default file path is the Home Directory.
-  google_ads_client = GoogleAdsClient.load_from_storage()
-  adwords_client = adwords.AdWordsClient.LoadFromStorage()
+    # Initialize client object.
+    # It will read the config file. The default file path is the Home Directory.
+    google_ads_client = GoogleAdsClient.load_from_storage()
+    adwords_client = adwords.AdWordsClient.LoadFromStorage()
 
-  parser = argparse.ArgumentParser(
+    parser = argparse.ArgumentParser(
         description='Lists all campaigns for specified customer.')
-  # The following argument(s) should be provided to run the example.
-  parser.add_argument('-c', '--customer_id', type=six.text_type,
+    # The following argument(s) should be provided to run the example.
+    parser.add_argument('-c', '--customer_id', type=six.text_type,
                         required=True, help='The Google Ads customer ID.')
-  args = parser.parse_args()
-  budget = create_campaign_budget(google_ads_client, args.customer_id)
-  campaign_id = create_campaign(adwords_client, budget.id.value)
-  ad_group_id = create_ad_group(adwords_client, campaign_id)
-  create_text_ads(adwords_client, ad_group_id)
-  create_keywords(adwords_client, ad_group_id, KEYWORDS_TO_ADD)
+    args = parser.parse_args()
+    budget = create_campaign_budget(google_ads_client, args.customer_id)
+    campaign_id = create_campaign(adwords_client, budget.id.value)
+    ad_group_id = create_ad_group(adwords_client, campaign_id)
+    create_text_ads(adwords_client, ad_group_id)
+    create_keywords(adwords_client, ad_group_id, KEYWORDS_TO_ADD)

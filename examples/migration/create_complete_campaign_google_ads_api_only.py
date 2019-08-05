@@ -20,10 +20,9 @@ create a Search campaign using the AdWords API, and then migrate it to the
 Google Ads API one functionality at a time. See other examples in this directory
 for code examples in various stages of migration.
 
-In this code example, the functionality to create campaign budget and search
-campaign have been migrated to the Google Ads API. The rest of the functionality
-- creating ad groups, keywords and expanded text ads are done using the AdWords
-API.
+This code example represents the final state, where all the functionality - create a
+campaign budget, a Search campaign, ad groups, keywords and expanded text ads have been
+migrated to using the Google Ads API. The AdWords API is not used.
 """
 
 import argparse
@@ -33,7 +32,6 @@ import sys
 import urllib.parse
 import uuid
 
-from googleads import adwords
 import six
 
 from google.ads.google_ads.client import GoogleAdsClient
@@ -42,7 +40,7 @@ from google.ads.google_ads.errors import GoogleAdsException
 # Number of ads being added/updated in this code example.
 NUMBER_OF_ADS = 5
 # The list of keywords being added in this code example.
-KEYWORDS_TO_ADD = ['mars cruise', 'space hotel' ]
+KEYWORDS_TO_ADD = ['mars cruise', 'space hotel']
 PAGE_SIZE = 1000
 
 
@@ -126,9 +124,9 @@ def create_campaign(client, customer_id, campaign_budget):
     campaign.network_settings.target_search_network.value = True
     campaign.network_settings.target_content_network.value = False
     campaign.network_settings.target_partner_search_network.value = False
-    campaign.start_date.value =  (datetime.datetime.now() + \
+    campaign.start_date.value =  (datetime.datetime.now() + 
                                     datetime.timedelta(1)).strftime('%Y%m%d')
-    campaign.end_date.value = (datetime.datetime.now() + \
+    campaign.end_date.value = (datetime.datetime.now() + 
                               datetime.timedelta(365)).strftime('%Y%m%d')
     response = campaign_service.mutate_campaigns(customer_id, [operation])
     campaign_resource_name = response.results[0].resource_name
@@ -265,9 +263,15 @@ def get_ads(client, customer_id, new_ad_resource_names):
         An instance of the google.ads.google_ads.v2.types.AdGroupAd message
             class of the newly created ad group ad.
     """
-    def formatter(myst):
+    def formatter(given_string):
+        """This helper function is used to assign ' ' to names of resources
+        so that this formatted string can be used withing an IN clause.
+
+        Args:
+            given_string: (str) The string to be formatted.
+        """
         results = []
-        for i in myst:
+        for i in given_string:
             results.append(repr(i))
         return ','.join(results)
     resouce_names = formatter(new_ad_resource_names)
@@ -283,10 +287,15 @@ def get_ads(client, customer_id, new_ad_resource_names):
              format(resouce_names))
 
     response = ga_service.search(customer_id, query, PAGE_SIZE)
-    ad_group = list(response)
+    response =iter(response)
     ads = []
-    for i in range(len(ad_group)):
-        ads.append(ad_group[i].ad_group_ad)
+
+    while  response:
+        try:
+            current_row = next(response)
+            ads.append(current_row.ad_group_ad)
+        except StopIteration:
+            break
 
     return ads
 
@@ -349,9 +358,15 @@ def get_keywords(client, customer_id, keyword_resource_names):
         An instance of the google.ads.google_ads.v2.types.AdGroupCriterion
             message class of the newly created ad group criterion.
     """
-    def formatter(myst):
+    def formatter(given_string):
+        """This helper function is used to assign ' ' to names of resources
+        so that this formatted string can be used withing an IN clause.
+
+        Args:
+            given_string: (str) The string to be formatted.
+        """
         results =[]
-        for i in myst:
+        for i in given_string:
             results.append(repr(i))
         return ','.join(results)
 
@@ -366,28 +381,33 @@ def get_keywords(client, customer_id, keyword_resource_names):
     'AND ad_group_criterion.resource_name IN ({})'.format(resouce_names))
 
     response = ga_service.search(customer_id, query, PAGE_SIZE)
-    ad_group_criterion = list(response)
+    response = iter(response)
     keywords = []
-    for i in range(len(ad_group_criterion)):
-        keywords.append(ad_group_criterion[i].ad_group_criterion)
+
+    while True:
+        try:
+            current_row = next(response)
+            keywords.append(current_row.ad_group_criterion)
+        except StopIteration:
+            break
 
     return keywords
 
 
 if __name__ == '__main__':
-  # Initialize client object.
-  # It will read the config file. The default file path is the Home Directory.
-  google_ads_client = GoogleAdsClient.load_from_storage()
+    # Initialize client object.
+    # It will read the config file. The default file path is the Home Directory.
+    google_ads_client = GoogleAdsClient.load_from_storage()
 
-  parser = argparse.ArgumentParser(
-        description='Lists all campaigns for specified customer.')
-  # The following argument(s) should be provided to run the example.
-  parser.add_argument('-c', '--customer_id', type=six.text_type,
-                        required=True, help='The Google Ads customer ID.')
-  args = parser.parse_args()
-  budget = create_campaign_budget(google_ads_client, args.customer_id)
-  campaign = create_campaign(google_ads_client, args.customer_id, budget)
-  ad_group = create_ad_group(google_ads_client, args.customer_id, campaign)
-  create_text_ads(google_ads_client, args.customer_id, ad_group)
-  create_keywords(google_ads_client, args.customer_id, ad_group,
-                  KEYWORDS_TO_ADD)
+    parser = argparse.ArgumentParser(
+    description='Lists all campaigns for specified customer.')
+    # The following argument(s) should be provided to run the example.
+    parser.add_argument('-c', '--customer_id', type=six.text_type,
+                    required=True, help='The Google Ads customer ID.')
+    args = parser.parse_args()
+    budget = create_campaign_budget(google_ads_client, args.customer_id)
+    campaign = create_campaign(google_ads_client, args.customer_id, budget)
+    ad_group = create_ad_group(google_ads_client, args.customer_id, campaign)
+    create_text_ads(google_ads_client, args.customer_id, ad_group)
+    create_keywords(google_ads_client, args.customer_id, ad_group,
+              KEYWORDS_TO_ADD)

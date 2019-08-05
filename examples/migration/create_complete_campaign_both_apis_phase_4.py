@@ -42,7 +42,7 @@ from google.ads.google_ads.errors import GoogleAdsException
 # Number of ads being added/updated in this code example.
 NUMBER_OF_ADS = 5
 # The list of keywords being added in this code example.
-KEYWORDS_TO_ADD = ['mars cruise', 'space hotel' ]
+KEYWORDS_TO_ADD = ['mars cruise', 'space hotel']
 PAGE_SIZE = 1000
 
 
@@ -126,9 +126,9 @@ def create_campaign(client, customer_id, campaign_budget):
     campaign.network_settings.target_search_network.value = True
     campaign.network_settings.target_content_network.value = False
     campaign.network_settings.target_partner_search_network.value = False
-    campaign.start_date.value =  (datetime.datetime.now() + \
+    campaign.start_date.value =  (datetime.datetime.now() + 
                                     datetime.timedelta(1)).strftime('%Y%m%d')
-    campaign.end_date.value = (datetime.datetime.now() + \
+    campaign.end_date.value = (datetime.datetime.now() + 
                               datetime.timedelta(365)).strftime('%Y%m%d')
     response = campaign_service.mutate_campaigns(customer_id, [operation])
     campaign_resource_name = response.results[0].resource_name
@@ -223,7 +223,7 @@ def create_text_ads(client, customer_id, ad_group):
         ad_group_operation = operation.create
         ad_group_operation.ad_group.value =  ad_group.resource_name
         ad_group_operation.status = client.get_type('AdGroupAdStatusEnum',
-                                  version='v2').PAUSED
+                                    version='v2').PAUSED
         ad_group_operation.ad.expanded_text_ad.headline_part1.value = \
                                     'Cruise to Mars #{}'.format(
                                     str(uuid.uuid4())[:4])
@@ -265,9 +265,15 @@ def get_ads(client, customer_id, new_ad_resource_names):
         An instance of the google.ads.google_ads.v2.types.AdGroupAd message
             class of the newly created ad group ad.
     """
-    def formatter(myst):
+    def formatter(given_string):
+        """This helper function is used to assign ' ' to names of resources
+        so that this formatted string can be used withing an IN clause.
+
+        Args:
+            given_string: (str) The string to be formatted.
+        """
         results = []
-        for i in myst:
+        for i in given_string:
             results.append(repr(i))
         return ','.join(results)
     resouce_names = formatter(new_ad_resource_names)
@@ -283,10 +289,15 @@ def get_ads(client, customer_id, new_ad_resource_names):
              format(resouce_names))
 
     response = ga_service.search(customer_id, query, PAGE_SIZE)
-    ad_group = list(response)
+    response =iter(response)
     ads = []
-    for i in range(len(ad_group)):
-        ads.append(ad_group[i].ad_group_ad)
+
+    while  response:
+        try:
+            current_row = next(response)
+            ads.append(current_row.ad_group_ad)
+        except StopIteration:
+            break
 
     return ads
 
@@ -331,19 +342,19 @@ def create_keywords(client, ad_group_id, keywords_to_add):
 
 
 if __name__ == '__main__':
-  # Initialize client object.
-  # It will read the config file. The default file path is the Home Directory.
-  google_ads_client = GoogleAdsClient.load_from_storage()
-  adwords_client = adwords.AdWordsClient.LoadFromStorage()
+    # Initialize client object.
+    # It will read the config file. The default file path is the Home Directory.
+    google_ads_client = GoogleAdsClient.load_from_storage()
+    adwords_client = adwords.AdWordsClient.LoadFromStorage()
 
-  parser = argparse.ArgumentParser(
+    parser = argparse.ArgumentParser(
         description='Lists all campaigns for specified customer.')
-  # The following argument(s) should be provided to run the example.
-  parser.add_argument('-c', '--customer_id', type=six.text_type,
+    # The following argument(s) should be provided to run the example.
+    parser.add_argument('-c', '--customer_id', type=six.text_type,
                         required=True, help='The Google Ads customer ID.')
-  args = parser.parse_args()
-  budget = create_campaign_budget(google_ads_client, args.customer_id)
-  campaign = create_campaign(google_ads_client, args.customer_id, budget)
-  ad_group = create_ad_group(google_ads_client, args.customer_id, campaign)
-  create_text_ads(google_ads_client, args.customer_id, ad_group)
-  create_keywords(adwords_client, ad_group.id.value, KEYWORDS_TO_ADD)
+    args = parser.parse_args()
+    budget = create_campaign_budget(google_ads_client, args.customer_id)
+    campaign = create_campaign(google_ads_client, args.customer_id, budget)
+    ad_group = create_ad_group(google_ads_client, args.customer_id, campaign)
+    create_text_ads(google_ads_client, args.customer_id, ad_group)
+    create_keywords(adwords_client, ad_group.id.value, KEYWORDS_TO_ADD)

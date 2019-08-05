@@ -25,7 +25,7 @@ create_complete_campaign_google_ads_api_pnly.py shows the code example fully
 transformed into using the Google Ads API.
 
 Running the examples:
-1. cd into /migration directory.
+1. cd into ./migration directory.
 2. Run pip install -r requirements.txt to install dependencies.
 3. Fill in the required authentication credentials, see
 [here](https://github.com/googleads/google-ads-python#configuration-file-setup)

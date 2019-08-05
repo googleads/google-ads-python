@@ -42,7 +42,7 @@ from google.ads.google_ads.errors import GoogleAdsException
 # Number of ads being added/updated in this code example.
 NUMBER_OF_ADS = 5
 # The list of keywords being added in this code example.
-KEYWORDS_TO_ADD = ['mars cruise', 'space hotel' ]
+KEYWORDS_TO_ADD = ['mars cruise', 'space hotel']
 PAGE_SIZE = 1000
 
 
@@ -126,9 +126,9 @@ def create_campaign(client, customer_id, campaign_budget):
     campaign.network_settings.target_search_network.value = True
     campaign.network_settings.target_content_network.value = False
     campaign.network_settings.target_partner_search_network.value = False
-    campaign.start_date.value =  (datetime.datetime.now() + \
+    campaign.start_date.value =  (datetime.datetime.now() + 
                                     datetime.timedelta(1)).strftime('%Y%m%d')
-    campaign.end_date.value = (datetime.datetime.now() + \
+    campaign.end_date.value = (datetime.datetime.now() + 
                               datetime.timedelta(365)).strftime('%Y%m%d')
     response = campaign_service.mutate_campaigns(customer_id, [operation])
     campaign_resource_name = response.results[0].resource_name
@@ -290,19 +290,19 @@ def create_keywords(client, ad_group_id, keywords_to_add):
 
 
 if __name__ == '__main__':
-  # Initialize client object.
-  # It will read the config file. The default file path is the Home Directory.
-  google_ads_client = GoogleAdsClient.load_from_storage()
-  adwords_client = adwords.AdWordsClient.LoadFromStorage()
+    # Initialize client object.
+    # It will read the config file. The default file path is the Home Directory.
+    google_ads_client = GoogleAdsClient.load_from_storage()
+    adwords_client = adwords.AdWordsClient.LoadFromStorage()
 
-  parser = argparse.ArgumentParser(
+    parser = argparse.ArgumentParser(
         description='Lists all campaigns for specified customer.')
-  # The following argument(s) should be provided to run the example.
-  parser.add_argument('-c', '--customer_id', type=six.text_type,
+    # The following argument(s) should be provided to run the example.
+    parser.add_argument('-c', '--customer_id', type=six.text_type,
                         required=True, help='The Google Ads customer ID.')
-  args = parser.parse_args()
-  budget = create_campaign_budget(google_ads_client, args.customer_id)
-  campaign = create_campaign(google_ads_client, args.customer_id, budget)
-  ad_group = create_ad_group(google_ads_client, args.customer_id, campaign)
-  create_text_ads(adwords_client, ad_group.id.value)
-  create_keywords(adwords_client, ad_group.id.value, KEYWORDS_TO_ADD)
+    args = parser.parse_args()
+    budget = create_campaign_budget(google_ads_client, args.customer_id)
+    campaign = create_campaign(google_ads_client, args.customer_id, budget)
+    ad_group = create_ad_group(google_ads_client, args.customer_id, campaign)
+    create_text_ads(adwords_client, ad_group.id.value)
+    create_keywords(adwords_client, ad_group.id.value, KEYWORDS_TO_ADD)

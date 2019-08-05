@@ -234,11 +234,11 @@ def create_keywords(client, ad_group_id, keywords_to_add):
 
 
 if __name__ == '__main__':
-  # Initialize the client object.
-  # By default, it will read the config file from the Home Directory.
-  adwords_client = adwords.AdWordsClient.LoadFromStorage()
-  budget_id = create_campaign_budget(adwords_client)
-  campaign_id = create_campaign(adwords_client, budget_id)
-  ad_group_id = create_ad_group(adwords_client, campaign_id)
-  create_text_ads(adwords_client, ad_group_id)
-  create_keywords(adwords_client, ad_group_id, KEYWORDS_TO_ADD)
+    # Initialize the client object.
+    # By default, it will read the config file from the Home Directory.
+    adwords_client = adwords.AdWordsClient.LoadFromStorage()
+    budget_id = create_campaign_budget(adwords_client)
+    campaign_id = create_campaign(adwords_client, budget_id)
+    ad_group_id = create_ad_group(adwords_client, campaign_id)
+    create_text_ads(adwords_client, ad_group_id)
+    create_keywords(adwords_client, ad_group_id, KEYWORDS_TO_ADD)

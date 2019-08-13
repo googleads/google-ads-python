@@ -1573,6 +1573,8 @@ class AuthorizationErrorEnum(object):
           ads.google.com/aw/apicenter
           DEVELOPER_TOKEN_NOT_APPROVED (int): The developer token is not approved. Non-approved developer tokens can
           only be used with test accounts.
+          INVALID_LOGIN_CUSTOMER_ID_SERVING_CUSTOMER_ID_COMBINATION (int): The login customer specified does not have access to the account
+          specified, so the request is invalid.
         """
         UNSPECIFIED = 0
         UNKNOWN = 1
@@ -1586,6 +1588,7 @@ class AuthorizationErrorEnum(object):
         CUSTOMER_NOT_ENABLED = 24
         MISSING_TOS = 9
         DEVELOPER_TOKEN_NOT_APPROVED = 10
+        INVALID_LOGIN_CUSTOMER_ID_SERVING_CUSTOMER_ID_COMBINATION = 11
 
 
 class BidModifierSourceEnum(object):
@@ -1807,33 +1810,31 @@ class BillingSetupErrorEnum(object):
         Attributes:
           UNSPECIFIED (int): Enum unspecified.
           UNKNOWN (int): The received error code is not known in this version.
-          CANNOT_USE_EXISTING_AND_NEW_ACCOUNT (int): Cannot use both an existing Payments account and a new Payments account
-          when setting up billing.
-          CANNOT_REMOVE_STARTED_BILLING_SETUP (int): Cannot cancel an APPROVED billing setup whose start time has passed.
-          CANNOT_CHANGE_BILLING_TO_SAME_PAYMENTS_ACCOUNT (int): Cannot perform a Change of Bill-To (CBT) to the same Payments account.
-          BILLING_SETUP_NOT_PERMITTED_FOR_CUSTOMER_STATUS (int): Billing Setups can only be used by customers with ENABLED or DRAFT
+          CANNOT_USE_EXISTING_AND_NEW_ACCOUNT (int): Cannot specify both an existing payments account and a new payments
+          account when setting up billing.
+          CANNOT_REMOVE_STARTED_BILLING_SETUP (int): Cannot cancel an approved billing setup whose start time has passed.
+          CANNOT_CHANGE_BILLING_TO_SAME_PAYMENTS_ACCOUNT (int): Cannot perform a Change of Bill-To (CBT) to the same payments account.
+          BILLING_SETUP_NOT_PERMITTED_FOR_CUSTOMER_STATUS (int): Billing setups can only be used by customers with ENABLED or DRAFT
           status.
-          INVALID_PAYMENTS_ACCOUNT (int): Billing Setups must either include a correctly formatted existing
-          Payments account id, or a non-empty new Payments account name.
+          INVALID_PAYMENTS_ACCOUNT (int): Billing setups must either include a correctly formatted existing
+          payments account id, or a non-empty new payments account name.
           BILLING_SETUP_NOT_PERMITTED_FOR_CUSTOMER_CATEGORY (int): Only billable and third-party customers can create billing setups.
-          INVALID_START_TIME_TYPE (int): Billing Setup creations can only use NOW for start time type.
-          THIRD_PARTY_ALREADY_HAS_BILLING (int): Billing Setups can only be created for a third-party customer if they do
+          INVALID_START_TIME_TYPE (int): Billing setup creations can only use NOW for start time type.
+          THIRD_PARTY_ALREADY_HAS_BILLING (int): Billing setups can only be created for a third-party customer if they do
           not already have a setup.
-          BILLING_SETUP_IN_PROGRESS (int): Billing Setups cannot be created if there is already a pending billing in
-          progress, ie. a billing known to Payments.
-          NO_SIGNUP_PERMISSION (int): Billing Setups can only be created by customers who have permission to
+          BILLING_SETUP_IN_PROGRESS (int): Billing setups cannot be created if there is already a pending billing in
+          progress.
+          NO_SIGNUP_PERMISSION (int): Billing setups can only be created by customers who have permission to
           setup billings. Users can contact a representative for help setting up
           permissions.
-          CHANGE_OF_BILL_TO_IN_PROGRESS (int): Billing Setups cannot be created if there is already a future-approved
+          CHANGE_OF_BILL_TO_IN_PROGRESS (int): Billing setups cannot be created if there is already a future-approved
           billing.
-          PAYMENTS_PROFILE_NOT_FOUND (int): Billing Setup creation failed because Payments could not find the
-          requested Payments profile.
-          PAYMENTS_ACCOUNT_NOT_FOUND (int): Billing Setup creation failed because Payments could not find the
-          requested Payments account.
-          PAYMENTS_PROFILE_INELIGIBLE (int): Billing Setup creation failed because Payments considers requested
-          Payments profile ineligible.
-          PAYMENTS_ACCOUNT_INELIGIBLE (int): Billing Setup creation failed because Payments considers requested
-          Payments account ineligible.
+          PAYMENTS_PROFILE_NOT_FOUND (int): Requested payments profile not found.
+          PAYMENTS_ACCOUNT_NOT_FOUND (int): Requested payments account not found.
+          PAYMENTS_PROFILE_INELIGIBLE (int): Billing setup creation failed because the payments profile is ineligible.
+          PAYMENTS_ACCOUNT_INELIGIBLE (int): Billing setup creation failed because the payments account is ineligible.
+          CUSTOMER_NEEDS_INTERNAL_APPROVAL (int): Billing setup creation failed because the payments profile needs internal
+          approval.
         """
         UNSPECIFIED = 0
         UNKNOWN = 1
@@ -1852,6 +1853,7 @@ class BillingSetupErrorEnum(object):
         PAYMENTS_ACCOUNT_NOT_FOUND = 14
         PAYMENTS_PROFILE_INELIGIBLE = 15
         PAYMENTS_ACCOUNT_INELIGIBLE = 16
+        CUSTOMER_NEEDS_INTERNAL_APPROVAL = 17
 
 
 class BillingSetupStatusEnum(object):
@@ -5289,6 +5291,8 @@ class FeedItemValidationErrorEnum(object):
           INVALID_IMAGE_URL (int): Invalid image url.
           MISSING_LATITUDE_VALUE (int): Latitude value is missing.
           MISSING_LONGITUDE_VALUE (int): Longitude value is missing.
+          ADDRESS_NOT_FOUND (int): Unable to find address.
+          ADDRESS_NOT_TARGETABLE (int): Cannot target provided address.
         """
         UNSPECIFIED = 0
         UNKNOWN = 1
@@ -5387,6 +5391,8 @@ class FeedItemValidationErrorEnum(object):
         INVALID_IMAGE_URL = 94
         MISSING_LATITUDE_VALUE = 95
         MISSING_LONGITUDE_VALUE = 96
+        ADDRESS_NOT_FOUND = 97
+        ADDRESS_NOT_TARGETABLE = 98
 
 
 class FeedItemValidationStatusEnum(object):
@@ -6290,8 +6296,8 @@ class InternalErrorEnum(object):
           UNSPECIFIED (int): Enum unspecified.
           UNKNOWN (int): The received error code is not known in this version.
           INTERNAL_ERROR (int): Google Ads API encountered unexpected internal error.
-          ERROR_CODE_NOT_PUBLISHED (int): The intended error code doesn't exist in any API version. This will be
-          fixed by adding a new error code as soon as possible.
+          ERROR_CODE_NOT_PUBLISHED (int): The intended error code doesn't exist in specified API version. It will
+          be released in a future API version.
           TRANSIENT_ERROR (int): Google Ads API encountered an unexpected transient error. The user
           should retry their request in these cases.
         """
@@ -7793,12 +7799,15 @@ class PolicyReviewStatusEnum(object):
           REVIEWED (int): Primary review complete. Other reviews may be continuing.
           UNDER_APPEAL (int): The resource has been resubmitted for approval or its policy decision has
           been appealed.
+          ELIGIBLE_MAY_SERVE (int): The resource is eligible and may be serving but could still undergo
+          further review.
         """
         UNSPECIFIED = 0
         UNKNOWN = 1
         REVIEW_IN_PROGRESS = 2
         REVIEWED = 3
         UNDER_APPEAL = 4
+        ELIGIBLE_MAY_SERVE = 5
 
 
 class PolicyTopicEntryTypeEnum(object):
@@ -8675,6 +8684,103 @@ class RangeErrorEnum(object):
         UNKNOWN = 1
         TOO_LOW = 2
         TOO_HIGH = 3
+
+
+class ReachPlanAdLengthEnum(object):
+    class ReachPlanAdLength(enum.IntEnum):
+        """
+        Possible ad length values.
+
+        Attributes:
+          UNSPECIFIED (int): Not specified.
+          UNKNOWN (int): The value is unknown in this version.
+          SIX_SECONDS (int): 6 seconds long ad.
+          FIFTEEN_OR_TWENTY_SECONDS (int): 15 or 20 seconds long ad.
+          TWENTY_SECONDS_OR_MORE (int): More than 20 seconds long ad.
+        """
+        UNSPECIFIED = 0
+        UNKNOWN = 1
+        SIX_SECONDS = 2
+        FIFTEEN_OR_TWENTY_SECONDS = 3
+        TWENTY_SECONDS_OR_MORE = 4
+
+
+class ReachPlanAgeRangeEnum(object):
+    class ReachPlanAgeRange(enum.IntEnum):
+        """
+        Possible plannable age range values.
+
+        Attributes:
+          UNSPECIFIED (int): Not specified.
+          UNKNOWN (int): The value is unknown in this version.
+          AGE_RANGE_18_24 (int): Between 18 and 24 years old.
+          AGE_RANGE_18_34 (int): Between 18 and 34 years old.
+          AGE_RANGE_18_44 (int): Between 18 and 44 years old.
+          AGE_RANGE_18_49 (int): Between 18 and 49 years old.
+          AGE_RANGE_18_54 (int): Between 18 and 54 years old.
+          AGE_RANGE_18_64 (int): Between 18 and 64 years old.
+          AGE_RANGE_18_65_UP (int): Between 18 and 65+ years old.
+          AGE_RANGE_21_34 (int): Between 21 and 34 years old.
+          AGE_RANGE_25_34 (int): Between 25 and 34 years old.
+          AGE_RANGE_25_44 (int): Between 25 and 44 years old.
+          AGE_RANGE_25_49 (int): Between 25 and 49 years old.
+          AGE_RANGE_25_54 (int): Between 25 and 54 years old.
+          AGE_RANGE_25_64 (int): Between 25 and 64 years old.
+          AGE_RANGE_25_65_UP (int): Between 25 and 65+ years old.
+          AGE_RANGE_35_44 (int): Between 35 and 44 years old.
+          AGE_RANGE_35_49 (int): Between 35 and 49 years old.
+          AGE_RANGE_35_54 (int): Between 35 and 54 years old.
+          AGE_RANGE_35_64 (int): Between 35 and 64 years old.
+          AGE_RANGE_35_65_UP (int): Between 35 and 65+ years old.
+          AGE_RANGE_45_54 (int): Between 45 and 54 years old.
+          AGE_RANGE_45_64 (int): Between 45 and 64 years old.
+          AGE_RANGE_45_65_UP (int): Between 45 and 65+ years old.
+          AGE_RANGE_50_65_UP (int): Between 50 and 65+ years old.
+          AGE_RANGE_55_64 (int): Between 55 and 64 years old.
+          AGE_RANGE_55_65_UP (int): Between 55 and 65+ years old.
+          AGE_RANGE_65_UP (int): 65 years old and beyond.
+        """
+        UNSPECIFIED = 0
+        UNKNOWN = 1
+        AGE_RANGE_18_24 = 503001
+        AGE_RANGE_18_34 = 2
+        AGE_RANGE_18_44 = 3
+        AGE_RANGE_18_49 = 4
+        AGE_RANGE_18_54 = 5
+        AGE_RANGE_18_64 = 6
+        AGE_RANGE_18_65_UP = 7
+        AGE_RANGE_21_34 = 8
+        AGE_RANGE_25_34 = 503002
+        AGE_RANGE_25_44 = 9
+        AGE_RANGE_25_49 = 10
+        AGE_RANGE_25_54 = 11
+        AGE_RANGE_25_64 = 12
+        AGE_RANGE_25_65_UP = 13
+        AGE_RANGE_35_44 = 503003
+        AGE_RANGE_35_49 = 14
+        AGE_RANGE_35_54 = 15
+        AGE_RANGE_35_64 = 16
+        AGE_RANGE_35_65_UP = 17
+        AGE_RANGE_45_54 = 503004
+        AGE_RANGE_45_64 = 18
+        AGE_RANGE_45_65_UP = 19
+        AGE_RANGE_50_65_UP = 20
+        AGE_RANGE_55_64 = 503005
+        AGE_RANGE_55_65_UP = 21
+        AGE_RANGE_65_UP = 503006
+
+
+class ReachPlanErrorEnum(object):
+    class ReachPlanError(enum.IntEnum):
+        """
+        Enum describing possible errors from ReachPlanService.
+
+        Attributes:
+          UNSPECIFIED (int): Enum unspecified.
+          UNKNOWN (int): The received error code is not known in this version.
+        """
+        UNSPECIFIED = 0
+        UNKNOWN = 1
 
 
 class RealEstatePlaceholderFieldEnum(object):

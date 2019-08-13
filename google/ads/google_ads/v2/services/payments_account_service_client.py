@@ -39,7 +39,7 @@ _GAPIC_LIBRARY_VERSION = pkg_resources.get_distribution(
 
 class PaymentsAccountServiceClient(object):
     """
-    Service to provide Payments accounts that can be used to set up consolidated
+    Service to provide payments accounts that can be used to set up consolidated
     billing.
     """
 
@@ -169,7 +169,7 @@ class PaymentsAccountServiceClient(object):
             timeout=google.api_core.gapic_v1.method.DEFAULT,
             metadata=None):
         """
-        Returns all Payments accounts associated with all managers
+        Returns all payments accounts associated with all managers
         between the login customer ID and specified serving customer in the
         hierarchy, inclusive.
 

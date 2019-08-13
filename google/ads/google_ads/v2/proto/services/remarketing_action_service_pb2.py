@@ -16,7 +16,6 @@ _sym_db = _symbol_database.Default()
 from google.ads.google_ads.v2.proto.resources import remarketing_action_pb2 as google_dot_ads_dot_googleads__v2_dot_proto_dot_resources_dot_remarketing__action__pb2
 from google.api import annotations_pb2 as google_dot_api_dot_annotations__pb2
 from google.protobuf import field_mask_pb2 as google_dot_protobuf_dot_field__mask__pb2
-from google.protobuf import wrappers_pb2 as google_dot_protobuf_dot_wrappers__pb2
 from google.rpc import status_pb2 as google_dot_rpc_dot_status__pb2
 from google.api import client_pb2 as google_dot_api_dot_client__pb2
 
@@ -26,9 +25,9 @@ DESCRIPTOR = _descriptor.FileDescriptor(
   package='google.ads.googleads.v2.services',
   syntax='proto3',
   serialized_options=_b('\n$com.google.ads.googleads.v2.servicesB\035RemarketingActionServiceProtoP\001ZHgoogle.golang.org/genproto/googleapis/ads/googleads/v2/services;services\242\002\003GAA\252\002 Google.Ads.GoogleAds.V2.Services\312\002 Google\\Ads\\GoogleAds\\V2\\Services\352\002$Google::Ads::GoogleAds::V2::Services'),
-  serialized_pb=_b('\nGgoogle/ads/googleads_v2/proto/services/remarketing_action_service.proto\x12 google.ads.googleads.v2.services\x1a@google/ads/googleads_v2/proto/resources/remarketing_action.proto\x1a\x1cgoogle/api/annotations.proto\x1a google/protobuf/field_mask.proto\x1a\x1egoogle/protobuf/wrappers.proto\x1a\x17google/rpc/status.proto\x1a\x17google/api/client.proto\"4\n\x1bGetRemarketingActionRequest\x12\x15\n\rresource_name\x18\x01 \x01(\t\"\xb8\x01\n\x1fMutateRemarketingActionsRequest\x12\x13\n\x0b\x63ustomer_id\x18\x01 \x01(\t\x12P\n\noperations\x18\x02 \x03(\x0b\x32<.google.ads.googleads.v2.services.RemarketingActionOperation\x12\x17\n\x0fpartial_failure\x18\x03 \x01(\x08\x12\x15\n\rvalidate_only\x18\x04 \x01(\x08\"\xea\x01\n\x1aRemarketingActionOperation\x12/\n\x0bupdate_mask\x18\x04 \x01(\x0b\x32\x1a.google.protobuf.FieldMask\x12\x46\n\x06\x63reate\x18\x01 \x01(\x0b\x32\x34.google.ads.googleads.v2.resources.RemarketingActionH\x00\x12\x46\n\x06update\x18\x02 \x01(\x0b\x32\x34.google.ads.googleads.v2.resources.RemarketingActionH\x00\x42\x0b\n\toperation\"\xa7\x01\n MutateRemarketingActionsResponse\x12\x31\n\x15partial_failure_error\x18\x03 \x01(\x0b\x32\x12.google.rpc.Status\x12P\n\x07results\x18\x02 \x03(\x0b\x32?.google.ads.googleads.v2.services.MutateRemarketingActionResult\"6\n\x1dMutateRemarketingActionResult\x12\x15\n\rresource_name\x18\x01 \x01(\t2\xeb\x03\n\x18RemarketingActionService\x12\xc9\x01\n\x14GetRemarketingAction\x12=.google.ads.googleads.v2.services.GetRemarketingActionRequest\x1a\x34.google.ads.googleads.v2.resources.RemarketingAction\"<\x82\xd3\xe4\x93\x02\x36\x12\x34/v2/{resource_name=customers/*/remarketingActions/*}\x12\xe5\x01\n\x18MutateRemarketingActions\x12\x41.google.ads.googleads.v2.services.MutateRemarketingActionsRequest\x1a\x42.google.ads.googleads.v2.services.MutateRemarketingActionsResponse\"B\x82\xd3\xe4\x93\x02<\"7/v2/customers/{customer_id=*}/remarketingActions:mutate:\x01*\x1a\x1b\xca\x41\x18googleads.googleapis.comB\x84\x02\n$com.google.ads.googleads.v2.servicesB\x1dRemarketingActionServiceProtoP\x01ZHgoogle.golang.org/genproto/googleapis/ads/googleads/v2/services;services\xa2\x02\x03GAA\xaa\x02 Google.Ads.GoogleAds.V2.Services\xca\x02 Google\\Ads\\GoogleAds\\V2\\Services\xea\x02$Google::Ads::GoogleAds::V2::Servicesb\x06proto3')
+  serialized_pb=_b('\nGgoogle/ads/googleads_v2/proto/services/remarketing_action_service.proto\x12 google.ads.googleads.v2.services\x1a@google/ads/googleads_v2/proto/resources/remarketing_action.proto\x1a\x1cgoogle/api/annotations.proto\x1a google/protobuf/field_mask.proto\x1a\x17google/rpc/status.proto\x1a\x17google/api/client.proto\"4\n\x1bGetRemarketingActionRequest\x12\x15\n\rresource_name\x18\x01 \x01(\t\"\xb8\x01\n\x1fMutateRemarketingActionsRequest\x12\x13\n\x0b\x63ustomer_id\x18\x01 \x01(\t\x12P\n\noperations\x18\x02 \x03(\x0b\x32<.google.ads.googleads.v2.services.RemarketingActionOperation\x12\x17\n\x0fpartial_failure\x18\x03 \x01(\x08\x12\x15\n\rvalidate_only\x18\x04 \x01(\x08\"\xea\x01\n\x1aRemarketingActionOperation\x12/\n\x0bupdate_mask\x18\x04 \x01(\x0b\x32\x1a.google.protobuf.FieldMask\x12\x46\n\x06\x63reate\x18\x01 \x01(\x0b\x32\x34.google.ads.googleads.v2.resources.RemarketingActionH\x00\x12\x46\n\x06update\x18\x02 \x01(\x0b\x32\x34.google.ads.googleads.v2.resources.RemarketingActionH\x00\x42\x0b\n\toperation\"\xa7\x01\n MutateRemarketingActionsResponse\x12\x31\n\x15partial_failure_error\x18\x03 \x01(\x0b\x32\x12.google.rpc.Status\x12P\n\x07results\x18\x02 \x03(\x0b\x32?.google.ads.googleads.v2.services.MutateRemarketingActionResult\"6\n\x1dMutateRemarketingActionResult\x12\x15\n\rresource_name\x18\x01 \x01(\t2\xeb\x03\n\x18RemarketingActionService\x12\xc9\x01\n\x14GetRemarketingAction\x12=.google.ads.googleads.v2.services.GetRemarketingActionRequest\x1a\x34.google.ads.googleads.v2.resources.RemarketingAction\"<\x82\xd3\xe4\x93\x02\x36\x12\x34/v2/{resource_name=customers/*/remarketingActions/*}\x12\xe5\x01\n\x18MutateRemarketingActions\x12\x41.google.ads.googleads.v2.services.MutateRemarketingActionsRequest\x1a\x42.google.ads.googleads.v2.services.MutateRemarketingActionsResponse\"B\x82\xd3\xe4\x93\x02<\"7/v2/customers/{customer_id=*}/remarketingActions:mutate:\x01*\x1a\x1b\xca\x41\x18googleads.googleapis.comB\x84\x02\n$com.google.ads.googleads.v2.servicesB\x1dRemarketingActionServiceProtoP\x01ZHgoogle.golang.org/genproto/googleapis/ads/googleads/v2/services;services\xa2\x02\x03GAA\xaa\x02 Google.Ads.GoogleAds.V2.Services\xca\x02 Google\\Ads\\GoogleAds\\V2\\Services\xea\x02$Google::Ads::GoogleAds::V2::Servicesb\x06proto3')
   ,
-  dependencies=[google_dot_ads_dot_googleads__v2_dot_proto_dot_resources_dot_remarketing__action__pb2.DESCRIPTOR,google_dot_api_dot_annotations__pb2.DESCRIPTOR,google_dot_protobuf_dot_field__mask__pb2.DESCRIPTOR,google_dot_protobuf_dot_wrappers__pb2.DESCRIPTOR,google_dot_rpc_dot_status__pb2.DESCRIPTOR,google_dot_api_dot_client__pb2.DESCRIPTOR,])
+  dependencies=[google_dot_ads_dot_googleads__v2_dot_proto_dot_resources_dot_remarketing__action__pb2.DESCRIPTOR,google_dot_api_dot_annotations__pb2.DESCRIPTOR,google_dot_protobuf_dot_field__mask__pb2.DESCRIPTOR,google_dot_rpc_dot_status__pb2.DESCRIPTOR,google_dot_api_dot_client__pb2.DESCRIPTOR,])
 
 
 
@@ -59,8 +58,8 @@ _GETREMARKETINGACTIONREQUEST = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=321,
-  serialized_end=373,
+  serialized_start=289,
+  serialized_end=341,
 )
 
 
@@ -111,8 +110,8 @@ _MUTATEREMARKETINGACTIONSREQUEST = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=376,
-  serialized_end=560,
+  serialized_start=344,
+  serialized_end=528,
 )
 
 
@@ -159,8 +158,8 @@ _REMARKETINGACTIONOPERATION = _descriptor.Descriptor(
       name='operation', full_name='google.ads.googleads.v2.services.RemarketingActionOperation.operation',
       index=0, containing_type=None, fields=[]),
   ],
-  serialized_start=563,
-  serialized_end=797,
+  serialized_start=531,
+  serialized_end=765,
 )
 
 
@@ -197,8 +196,8 @@ _MUTATEREMARKETINGACTIONSRESPONSE = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=800,
-  serialized_end=967,
+  serialized_start=768,
+  serialized_end=935,
 )
 
 
@@ -228,8 +227,8 @@ _MUTATEREMARKETINGACTIONRESULT = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=969,
-  serialized_end=1023,
+  serialized_start=937,
+  serialized_end=991,
 )
 
 _MUTATEREMARKETINGACTIONSREQUEST.fields_by_name['operations'].message_type = _REMARKETINGACTIONOPERATION
@@ -364,8 +363,8 @@ _REMARKETINGACTIONSERVICE = _descriptor.ServiceDescriptor(
   file=DESCRIPTOR,
   index=0,
   serialized_options=_b('\312A\030googleads.googleapis.com'),
-  serialized_start=1026,
-  serialized_end=1517,
+  serialized_start=994,
+  serialized_end=1485,
   methods=[
   _descriptor.MethodDescriptor(
     name='GetRemarketingAction',

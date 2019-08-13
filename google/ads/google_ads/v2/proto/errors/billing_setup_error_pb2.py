@@ -21,7 +21,7 @@ DESCRIPTOR = _descriptor.FileDescriptor(
   package='google.ads.googleads.v2.errors',
   syntax='proto3',
   serialized_options=_b('\n\"com.google.ads.googleads.v2.errorsB\026BillingSetupErrorProtoP\001ZDgoogle.golang.org/genproto/googleapis/ads/googleads/v2/errors;errors\242\002\003GAA\252\002\036Google.Ads.GoogleAds.V2.Errors\312\002\036Google\\Ads\\GoogleAds\\V2\\Errors\352\002\"Google::Ads::GoogleAds::V2::Errors'),
-  serialized_pb=_b('\n>google/ads/googleads_v2/proto/errors/billing_setup_error.proto\x12\x1egoogle.ads.googleads.v2.errors\x1a\x1cgoogle/api/annotations.proto\"\xfb\x04\n\x15\x42illingSetupErrorEnum\"\xe1\x04\n\x11\x42illingSetupError\x12\x0f\n\x0bUNSPECIFIED\x10\x00\x12\x0b\n\x07UNKNOWN\x10\x01\x12\'\n#CANNOT_USE_EXISTING_AND_NEW_ACCOUNT\x10\x02\x12\'\n#CANNOT_REMOVE_STARTED_BILLING_SETUP\x10\x03\x12\x32\n.CANNOT_CHANGE_BILLING_TO_SAME_PAYMENTS_ACCOUNT\x10\x04\x12\x33\n/BILLING_SETUP_NOT_PERMITTED_FOR_CUSTOMER_STATUS\x10\x05\x12\x1c\n\x18INVALID_PAYMENTS_ACCOUNT\x10\x06\x12\x35\n1BILLING_SETUP_NOT_PERMITTED_FOR_CUSTOMER_CATEGORY\x10\x07\x12\x1b\n\x17INVALID_START_TIME_TYPE\x10\x08\x12#\n\x1fTHIRD_PARTY_ALREADY_HAS_BILLING\x10\t\x12\x1d\n\x19\x42ILLING_SETUP_IN_PROGRESS\x10\n\x12\x18\n\x14NO_SIGNUP_PERMISSION\x10\x0b\x12!\n\x1d\x43HANGE_OF_BILL_TO_IN_PROGRESS\x10\x0c\x12\x1e\n\x1aPAYMENTS_PROFILE_NOT_FOUND\x10\r\x12\x1e\n\x1aPAYMENTS_ACCOUNT_NOT_FOUND\x10\x0e\x12\x1f\n\x1bPAYMENTS_PROFILE_INELIGIBLE\x10\x0f\x12\x1f\n\x1bPAYMENTS_ACCOUNT_INELIGIBLE\x10\x10\x42\xf1\x01\n\"com.google.ads.googleads.v2.errorsB\x16\x42illingSetupErrorProtoP\x01ZDgoogle.golang.org/genproto/googleapis/ads/googleads/v2/errors;errors\xa2\x02\x03GAA\xaa\x02\x1eGoogle.Ads.GoogleAds.V2.Errors\xca\x02\x1eGoogle\\Ads\\GoogleAds\\V2\\Errors\xea\x02\"Google::Ads::GoogleAds::V2::Errorsb\x06proto3')
+  serialized_pb=_b('\n>google/ads/googleads_v2/proto/errors/billing_setup_error.proto\x12\x1egoogle.ads.googleads.v2.errors\x1a\x1cgoogle/api/annotations.proto\"\xa1\x05\n\x15\x42illingSetupErrorEnum\"\x87\x05\n\x11\x42illingSetupError\x12\x0f\n\x0bUNSPECIFIED\x10\x00\x12\x0b\n\x07UNKNOWN\x10\x01\x12\'\n#CANNOT_USE_EXISTING_AND_NEW_ACCOUNT\x10\x02\x12\'\n#CANNOT_REMOVE_STARTED_BILLING_SETUP\x10\x03\x12\x32\n.CANNOT_CHANGE_BILLING_TO_SAME_PAYMENTS_ACCOUNT\x10\x04\x12\x33\n/BILLING_SETUP_NOT_PERMITTED_FOR_CUSTOMER_STATUS\x10\x05\x12\x1c\n\x18INVALID_PAYMENTS_ACCOUNT\x10\x06\x12\x35\n1BILLING_SETUP_NOT_PERMITTED_FOR_CUSTOMER_CATEGORY\x10\x07\x12\x1b\n\x17INVALID_START_TIME_TYPE\x10\x08\x12#\n\x1fTHIRD_PARTY_ALREADY_HAS_BILLING\x10\t\x12\x1d\n\x19\x42ILLING_SETUP_IN_PROGRESS\x10\n\x12\x18\n\x14NO_SIGNUP_PERMISSION\x10\x0b\x12!\n\x1d\x43HANGE_OF_BILL_TO_IN_PROGRESS\x10\x0c\x12\x1e\n\x1aPAYMENTS_PROFILE_NOT_FOUND\x10\r\x12\x1e\n\x1aPAYMENTS_ACCOUNT_NOT_FOUND\x10\x0e\x12\x1f\n\x1bPAYMENTS_PROFILE_INELIGIBLE\x10\x0f\x12\x1f\n\x1bPAYMENTS_ACCOUNT_INELIGIBLE\x10\x10\x12$\n CUSTOMER_NEEDS_INTERNAL_APPROVAL\x10\x11\x42\xf1\x01\n\"com.google.ads.googleads.v2.errorsB\x16\x42illingSetupErrorProtoP\x01ZDgoogle.golang.org/genproto/googleapis/ads/googleads/v2/errors;errors\xa2\x02\x03GAA\xaa\x02\x1eGoogle.Ads.GoogleAds.V2.Errors\xca\x02\x1eGoogle\\Ads\\GoogleAds\\V2\\Errors\xea\x02\"Google::Ads::GoogleAds::V2::Errorsb\x06proto3')
   ,
   dependencies=[google_dot_api_dot_annotations__pb2.DESCRIPTOR,])
 
@@ -101,11 +101,15 @@ _BILLINGSETUPERRORENUM_BILLINGSETUPERROR = _descriptor.EnumDescriptor(
       name='PAYMENTS_ACCOUNT_INELIGIBLE', index=16, number=16,
       serialized_options=None,
       type=None),
+    _descriptor.EnumValueDescriptor(
+      name='CUSTOMER_NEEDS_INTERNAL_APPROVAL', index=17, number=17,
+      serialized_options=None,
+      type=None),
   ],
   containing_type=None,
   serialized_options=None,
   serialized_start=155,
-  serialized_end=764,
+  serialized_end=802,
 )
 _sym_db.RegisterEnumDescriptor(_BILLINGSETUPERRORENUM_BILLINGSETUPERROR)
 
@@ -131,7 +135,7 @@ _BILLINGSETUPERRORENUM = _descriptor.Descriptor(
   oneofs=[
   ],
   serialized_start=129,
-  serialized_end=764,
+  serialized_end=802,
 )
 
 _BILLINGSETUPERRORENUM_BILLINGSETUPERROR.containing_type = _BILLINGSETUPERRORENUM

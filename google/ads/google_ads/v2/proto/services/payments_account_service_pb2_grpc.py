@@ -5,9 +5,9 @@ from google.ads.google_ads.v2.proto.services import payments_account_service_pb2
 
 
 class PaymentsAccountServiceStub(object):
-  """Proto file describing the Payments account service.
+  """Proto file describing the payments account service.
 
-  Service to provide Payments accounts that can be used to set up consolidated
+  Service to provide payments accounts that can be used to set up consolidated
   billing.
   """
 
@@ -25,14 +25,14 @@ class PaymentsAccountServiceStub(object):
 
 
 class PaymentsAccountServiceServicer(object):
-  """Proto file describing the Payments account service.
+  """Proto file describing the payments account service.
 
-  Service to provide Payments accounts that can be used to set up consolidated
+  Service to provide payments accounts that can be used to set up consolidated
   billing.
   """
 
   def ListPaymentsAccounts(self, request, context):
-    """Returns all Payments accounts associated with all managers
+    """Returns all payments accounts associated with all managers
     between the login customer ID and specified serving customer in the
     hierarchy, inclusive.
     """

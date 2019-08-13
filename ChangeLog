@@ -1,3 +1,8 @@
+* 3.2.0:
+- Google ads v2_1 release
+- Fix formatting typo in README
+- Add AdWords -> Google Ads migration examples
+
 * 3.1.2:
 -  Update signature for customer_service.create_customer_client method to
    give default values to optional parameters.

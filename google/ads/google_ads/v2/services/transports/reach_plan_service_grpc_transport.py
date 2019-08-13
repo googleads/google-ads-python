@@ -17,12 +17,12 @@
 
 import google.api_core.grpc_helpers
 
-from google.ads.google_ads.v2.proto.services import payments_account_service_pb2_grpc
+from google.ads.google_ads.v2.proto.services import reach_plan_service_pb2_grpc
 
 
-class PaymentsAccountServiceGrpcTransport(object):
+class ReachPlanServiceGrpcTransport(object):
     """gRPC transport class providing stubs for
-    google.ads.googleads.v2.services PaymentsAccountService API.
+    google.ads.googleads.v2.services ReachPlanService API.
 
     The transport provides access to the raw gRPC stubs,
     which can be used to take advantage of advanced
@@ -68,7 +68,7 @@ class PaymentsAccountServiceGrpcTransport(object):
         # gRPC uses objects called "stubs" that are bound to the
         # channel and provide a basic method for each RPC.
         self._stubs = {
-            'payments_account_service_stub': payments_account_service_pb2_grpc.PaymentsAccountServiceStub(channel),
+            'reach_plan_service_stub': reach_plan_service_pb2_grpc.ReachPlanServiceStub(channel),
         }
 
 
@@ -110,16 +110,56 @@ class PaymentsAccountServiceGrpcTransport(object):
         return self._channel
 
     @property
-    def list_payments_accounts(self):
-        """Return the gRPC stub for :meth:`PaymentsAccountServiceClient.list_payments_accounts`.
+    def list_plannable_locations(self):
+        """Return the gRPC stub for :meth:`ReachPlanServiceClient.list_plannable_locations`.
 
-        Returns all payments accounts associated with all managers
-        between the login customer ID and specified serving customer in the
-        hierarchy, inclusive.
+        Returns the list of plannable locations (e.g. countries, DMAs).
 
         Returns:
             Callable: A callable which accepts the appropriate
                 deserialized request object and returns a
                 deserialized response object.
         """
-        return self._stubs['payments_account_service_stub'].ListPaymentsAccounts
+        return self._stubs['reach_plan_service_stub'].ListPlannableLocations
+
+    @property
+    def list_plannable_products(self):
+        """Return the gRPC stub for :meth:`ReachPlanServiceClient.list_plannable_products`.
+
+        Returns the list of per-location plannable YouTube ad formats with allowed
+        targeting.
+
+        Returns:
+            Callable: A callable which accepts the appropriate
+                deserialized request object and returns a
+                deserialized response object.
+        """
+        return self._stubs['reach_plan_service_stub'].ListPlannableProducts
+
+    @property
+    def generate_product_mix_ideas(self):
+        """Return the gRPC stub for :meth:`ReachPlanServiceClient.generate_product_mix_ideas`.
+
+        Generates a product mix ideas given a set of preferences. This method
+        helps the advertiser to obtain a good mix of ad formats and budget
+        allocations based on its preferences.
+
+        Returns:
+            Callable: A callable which accepts the appropriate
+                deserialized request object and returns a
+                deserialized response object.
+        """
+        return self._stubs['reach_plan_service_stub'].GenerateProductMixIdeas
+
+    @property
+    def generate_reach_forecast(self):
+        """Return the gRPC stub for :meth:`ReachPlanServiceClient.generate_reach_forecast`.
+
+        Generates a reach forecast for a given targeting / product mix.
+
+        Returns:
+            Callable: A callable which accepts the appropriate
+                deserialized request object and returns a
+                deserialized response object.
+        """
+        return self._stubs['reach_plan_service_stub'].GenerateReachForecast

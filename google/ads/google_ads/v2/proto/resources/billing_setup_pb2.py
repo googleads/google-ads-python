@@ -216,25 +216,25 @@ BillingSetup = _reflection.GeneratedProtocolMessageType('BillingSetup', (_messag
     DESCRIPTOR = _BILLINGSETUP_PAYMENTSACCOUNTINFO,
     __module__ = 'google.ads.googleads_v2.proto.resources.billing_setup_pb2'
     ,
-    __doc__ = """Container of Payments account information for this billing.
+    __doc__ = """Container of payments account information for this billing.
     
     
     Attributes:
         payments_account_id:
-            A 16 digit id used to identify the Payments account associated
+            A 16 digit id used to identify the payments account associated
             with the billing setup.  This must be passed as a string with
             dashes, e.g. "1234-5678-9012-3456".
         payments_account_name:
-            The name of the Payments account associated with the billing
+            The name of the payments account associated with the billing
             setup.  This enables the user to specify a meaningful name for
-            a Payments account to aid in reconciling monthly invoices.
+            a payments account to aid in reconciling monthly invoices.
             This name will be printed in the monthly invoices.
         payments_profile_id:
-            A 12 digit id used to identify the Payments profile associated
+            A 12 digit id used to identify the payments profile associated
             with the billing setup.  This must be passed in as a string
             with dashes, e.g. "1234-5678-9012".
         payments_profile_name:
-            The name of the Payments profile associated with the billing
+            The name of the payments profile associated with the billing
             setup.
         secondary_payments_profile_id:
             A secondary payments profile id present in uncommon
@@ -247,9 +247,8 @@ BillingSetup = _reflection.GeneratedProtocolMessageType('BillingSetup', (_messag
   DESCRIPTOR = _BILLINGSETUP,
   __module__ = 'google.ads.googleads_v2.proto.resources.billing_setup_pb2'
   ,
-  __doc__ = """A billing setup across Ads and Payments systems; an association between
-  a Payments account and an advertiser. A billing setup is specific to one
-  advertiser.
+  __doc__ = """A billing setup, which associates a payments account and an advertiser.
+  A billing setup is specific to one advertiser.
   
   
   Attributes:
@@ -262,17 +261,17 @@ BillingSetup = _reflection.GeneratedProtocolMessageType('BillingSetup', (_messag
       status:
           The status of the billing setup.
       payments_account:
-          The resource name of the Payments account associated with this
+          The resource name of the payments account associated with this
           billing setup. Payments resource names have the form:  ``custo
           mers/{customer_id}/paymentsAccounts/{payments_account_id}``
           When setting up billing, this is used to signup with an
-          existing Payments account (and then payments\_account\_info
+          existing payments account (and then payments\_account\_info
           should not be set). When getting a billing setup, this and
           payments\_account\_info will be populated.
       payments_account_info:
-          The Payments account information associated with this billing
+          The payments account information associated with this billing
           setup. When setting up billing, this is used to signup with a
-          new Payments account (and then payments\_account should not be
+          new payments account (and then payments\_account should not be
           set). When getting a billing setup, this and payments\_account
           will be populated.
       start_time:

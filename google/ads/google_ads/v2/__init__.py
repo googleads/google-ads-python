@@ -110,6 +110,7 @@ from google.ads.google_ads.v2.services import parental_status_view_service_clien
 from google.ads.google_ads.v2.services import payments_account_service_client
 from google.ads.google_ads.v2.services import product_bidding_category_constant_service_client
 from google.ads.google_ads.v2.services import product_group_view_service_client
+from google.ads.google_ads.v2.services import reach_plan_service_client
 from google.ads.google_ads.v2.services import recommendation_service_client
 from google.ads.google_ads.v2.services import remarketing_action_service_client
 from google.ads.google_ads.v2.services import search_term_view_service_client
@@ -214,6 +215,7 @@ from google.ads.google_ads.v2.services.transports import parental_status_view_se
 from google.ads.google_ads.v2.services.transports import payments_account_service_grpc_transport
 from google.ads.google_ads.v2.services.transports import product_bidding_category_constant_service_grpc_transport
 from google.ads.google_ads.v2.services.transports import product_group_view_service_grpc_transport
+from google.ads.google_ads.v2.services.transports import reach_plan_service_grpc_transport
 from google.ads.google_ads.v2.services.transports import recommendation_service_grpc_transport
 from google.ads.google_ads.v2.services.transports import remarketing_action_service_grpc_transport
 from google.ads.google_ads.v2.services.transports import search_term_view_service_grpc_transport
@@ -780,6 +782,12 @@ class ProductGroupViewServiceClient(
     enums = enums
 
 
+class ReachPlanServiceClient(
+    reach_plan_service_client.ReachPlanServiceClient):
+    __doc__ = reach_plan_service_client.ReachPlanServiceClient.__doc__
+    enums = enums
+
+
 class RecommendationServiceClient(
     recommendation_service_client.RecommendationServiceClient):
     __doc__ = recommendation_service_client.RecommendationServiceClient.__doc__
@@ -1312,6 +1320,11 @@ class ProductGroupViewServiceGrpcTransport(
     __doc__ = product_group_view_service_grpc_transport.ProductGroupViewServiceGrpcTransport.__doc__
 
 
+class ReachPlanServiceGrpcTransport(
+    reach_plan_service_grpc_transport.ReachPlanServiceGrpcTransport):
+    __doc__ = reach_plan_service_grpc_transport.ReachPlanServiceGrpcTransport.__doc__
+
+
 class RecommendationServiceGrpcTransport(
     recommendation_service_grpc_transport.RecommendationServiceGrpcTransport):
     __doc__ = recommendation_service_grpc_transport.RecommendationServiceGrpcTransport.__doc__
@@ -1467,6 +1480,7 @@ __all__ = (
     'PaymentsAccountServiceClient',
     'ProductBiddingCategoryConstantServiceClient',
     'ProductGroupViewServiceClient',
+    'ReachPlanServiceClient',
     'RecommendationServiceClient',
     'RemarketingActionServiceClient',
     'SearchTermViewServiceClient',
@@ -1571,6 +1585,7 @@ __all__ = (
     'PaymentsAccountServiceGrpcTransport',
     'ProductBiddingCategoryConstantServiceGrpcTransport',
     'ProductGroupViewServiceGrpcTransport',
+    'ReachPlanServiceGrpcTransport',
     'RecommendationServiceGrpcTransport',
     'RemarketingActionServiceGrpcTransport',
     'SearchTermViewServiceGrpcTransport',

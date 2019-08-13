@@ -15,7 +15,6 @@ _sym_db = _symbol_database.Default()
 
 from google.ads.google_ads.v2.proto.resources import shared_criterion_pb2 as google_dot_ads_dot_googleads__v2_dot_proto_dot_resources_dot_shared__criterion__pb2
 from google.api import annotations_pb2 as google_dot_api_dot_annotations__pb2
-from google.protobuf import wrappers_pb2 as google_dot_protobuf_dot_wrappers__pb2
 from google.rpc import status_pb2 as google_dot_rpc_dot_status__pb2
 from google.api import client_pb2 as google_dot_api_dot_client__pb2
 
@@ -25,9 +24,9 @@ DESCRIPTOR = _descriptor.FileDescriptor(
   package='google.ads.googleads.v2.services',
   syntax='proto3',
   serialized_options=_b('\n$com.google.ads.googleads.v2.servicesB\033SharedCriterionServiceProtoP\001ZHgoogle.golang.org/genproto/googleapis/ads/googleads/v2/services;services\242\002\003GAA\252\002 Google.Ads.GoogleAds.V2.Services\312\002 Google\\Ads\\GoogleAds\\V2\\Services\352\002$Google::Ads::GoogleAds::V2::Services'),
-  serialized_pb=_b('\nEgoogle/ads/googleads_v2/proto/services/shared_criterion_service.proto\x12 google.ads.googleads.v2.services\x1a>google/ads/googleads_v2/proto/resources/shared_criterion.proto\x1a\x1cgoogle/api/annotations.proto\x1a\x1egoogle/protobuf/wrappers.proto\x1a\x17google/rpc/status.proto\x1a\x17google/api/client.proto\"2\n\x19GetSharedCriterionRequest\x12\x15\n\rresource_name\x18\x01 \x01(\t\"\xb2\x01\n\x1bMutateSharedCriteriaRequest\x12\x13\n\x0b\x63ustomer_id\x18\x01 \x01(\t\x12N\n\noperations\x18\x02 \x03(\x0b\x32:.google.ads.googleads.v2.services.SharedCriterionOperation\x12\x17\n\x0fpartial_failure\x18\x03 \x01(\x08\x12\x15\n\rvalidate_only\x18\x04 \x01(\x08\"\x7f\n\x18SharedCriterionOperation\x12\x44\n\x06\x63reate\x18\x01 \x01(\x0b\x32\x32.google.ads.googleads.v2.resources.SharedCriterionH\x00\x12\x10\n\x06remove\x18\x03 \x01(\tH\x00\x42\x0b\n\toperation\"\xa1\x01\n\x1cMutateSharedCriteriaResponse\x12\x31\n\x15partial_failure_error\x18\x03 \x01(\x0b\x32\x12.google.rpc.Status\x12N\n\x07results\x18\x02 \x03(\x0b\x32=.google.ads.googleads.v2.services.MutateSharedCriterionResult\"4\n\x1bMutateSharedCriterionResult\x12\x15\n\rresource_name\x18\x01 \x01(\t2\xcf\x03\n\x16SharedCriterionService\x12\xbf\x01\n\x12GetSharedCriterion\x12;.google.ads.googleads.v2.services.GetSharedCriterionRequest\x1a\x32.google.ads.googleads.v2.resources.SharedCriterion\"8\x82\xd3\xe4\x93\x02\x32\x12\x30/v2/{resource_name=customers/*/sharedCriteria/*}\x12\xd5\x01\n\x14MutateSharedCriteria\x12=.google.ads.googleads.v2.services.MutateSharedCriteriaRequest\x1a>.google.ads.googleads.v2.services.MutateSharedCriteriaResponse\">\x82\xd3\xe4\x93\x02\x38\"3/v2/customers/{customer_id=*}/sharedCriteria:mutate:\x01*\x1a\x1b\xca\x41\x18googleads.googleapis.comB\x82\x02\n$com.google.ads.googleads.v2.servicesB\x1bSharedCriterionServiceProtoP\x01ZHgoogle.golang.org/genproto/googleapis/ads/googleads/v2/services;services\xa2\x02\x03GAA\xaa\x02 Google.Ads.GoogleAds.V2.Services\xca\x02 Google\\Ads\\GoogleAds\\V2\\Services\xea\x02$Google::Ads::GoogleAds::V2::Servicesb\x06proto3')
+  serialized_pb=_b('\nEgoogle/ads/googleads_v2/proto/services/shared_criterion_service.proto\x12 google.ads.googleads.v2.services\x1a>google/ads/googleads_v2/proto/resources/shared_criterion.proto\x1a\x1cgoogle/api/annotations.proto\x1a\x17google/rpc/status.proto\x1a\x17google/api/client.proto\"2\n\x19GetSharedCriterionRequest\x12\x15\n\rresource_name\x18\x01 \x01(\t\"\xb2\x01\n\x1bMutateSharedCriteriaRequest\x12\x13\n\x0b\x63ustomer_id\x18\x01 \x01(\t\x12N\n\noperations\x18\x02 \x03(\x0b\x32:.google.ads.googleads.v2.services.SharedCriterionOperation\x12\x17\n\x0fpartial_failure\x18\x03 \x01(\x08\x12\x15\n\rvalidate_only\x18\x04 \x01(\x08\"\x7f\n\x18SharedCriterionOperation\x12\x44\n\x06\x63reate\x18\x01 \x01(\x0b\x32\x32.google.ads.googleads.v2.resources.SharedCriterionH\x00\x12\x10\n\x06remove\x18\x03 \x01(\tH\x00\x42\x0b\n\toperation\"\xa1\x01\n\x1cMutateSharedCriteriaResponse\x12\x31\n\x15partial_failure_error\x18\x03 \x01(\x0b\x32\x12.google.rpc.Status\x12N\n\x07results\x18\x02 \x03(\x0b\x32=.google.ads.googleads.v2.services.MutateSharedCriterionResult\"4\n\x1bMutateSharedCriterionResult\x12\x15\n\rresource_name\x18\x01 \x01(\t2\xcf\x03\n\x16SharedCriterionService\x12\xbf\x01\n\x12GetSharedCriterion\x12;.google.ads.googleads.v2.services.GetSharedCriterionRequest\x1a\x32.google.ads.googleads.v2.resources.SharedCriterion\"8\x82\xd3\xe4\x93\x02\x32\x12\x30/v2/{resource_name=customers/*/sharedCriteria/*}\x12\xd5\x01\n\x14MutateSharedCriteria\x12=.google.ads.googleads.v2.services.MutateSharedCriteriaRequest\x1a>.google.ads.googleads.v2.services.MutateSharedCriteriaResponse\">\x82\xd3\xe4\x93\x02\x38\"3/v2/customers/{customer_id=*}/sharedCriteria:mutate:\x01*\x1a\x1b\xca\x41\x18googleads.googleapis.comB\x82\x02\n$com.google.ads.googleads.v2.servicesB\x1bSharedCriterionServiceProtoP\x01ZHgoogle.golang.org/genproto/googleapis/ads/googleads/v2/services;services\xa2\x02\x03GAA\xaa\x02 Google.Ads.GoogleAds.V2.Services\xca\x02 Google\\Ads\\GoogleAds\\V2\\Services\xea\x02$Google::Ads::GoogleAds::V2::Servicesb\x06proto3')
   ,
-  dependencies=[google_dot_ads_dot_googleads__v2_dot_proto_dot_resources_dot_shared__criterion__pb2.DESCRIPTOR,google_dot_api_dot_annotations__pb2.DESCRIPTOR,google_dot_protobuf_dot_wrappers__pb2.DESCRIPTOR,google_dot_rpc_dot_status__pb2.DESCRIPTOR,google_dot_api_dot_client__pb2.DESCRIPTOR,])
+  dependencies=[google_dot_ads_dot_googleads__v2_dot_proto_dot_resources_dot_shared__criterion__pb2.DESCRIPTOR,google_dot_api_dot_annotations__pb2.DESCRIPTOR,google_dot_rpc_dot_status__pb2.DESCRIPTOR,google_dot_api_dot_client__pb2.DESCRIPTOR,])
 
 
 
@@ -58,8 +57,8 @@ _GETSHAREDCRITERIONREQUEST = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=283,
-  serialized_end=333,
+  serialized_start=251,
+  serialized_end=301,
 )
 
 
@@ -110,8 +109,8 @@ _MUTATESHAREDCRITERIAREQUEST = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=336,
-  serialized_end=514,
+  serialized_start=304,
+  serialized_end=482,
 )
 
 
@@ -151,8 +150,8 @@ _SHAREDCRITERIONOPERATION = _descriptor.Descriptor(
       name='operation', full_name='google.ads.googleads.v2.services.SharedCriterionOperation.operation',
       index=0, containing_type=None, fields=[]),
   ],
-  serialized_start=516,
-  serialized_end=643,
+  serialized_start=484,
+  serialized_end=611,
 )
 
 
@@ -189,8 +188,8 @@ _MUTATESHAREDCRITERIARESPONSE = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=646,
-  serialized_end=807,
+  serialized_start=614,
+  serialized_end=775,
 )
 
 
@@ -220,8 +219,8 @@ _MUTATESHAREDCRITERIONRESULT = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=809,
-  serialized_end=861,
+  serialized_start=777,
+  serialized_end=829,
 )
 
 _MUTATESHAREDCRITERIAREQUEST.fields_by_name['operations'].message_type = _SHAREDCRITERIONOPERATION
@@ -352,8 +351,8 @@ _SHAREDCRITERIONSERVICE = _descriptor.ServiceDescriptor(
   file=DESCRIPTOR,
   index=0,
   serialized_options=_b('\312A\030googleads.googleapis.com'),
-  serialized_start=864,
-  serialized_end=1327,
+  serialized_start=832,
+  serialized_end=1295,
   methods=[
   _descriptor.MethodDescriptor(
     name='GetSharedCriterion',

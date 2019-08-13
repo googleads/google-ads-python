@@ -10,8 +10,8 @@ class BillingSetupServiceStub(object):
 
   A service for designating the business entity responsible for accrued costs.
 
-  A billing setup is associated with a Payments account.  Billing-related
-  activity for all billing setups associated with a particular Payments account
+  A billing setup is associated with a payments account.  Billing-related
+  activity for all billing setups associated with a particular payments account
   will appear on a single invoice generated monthly.
 
   Mutates:
@@ -42,8 +42,8 @@ class BillingSetupServiceServicer(object):
 
   A service for designating the business entity responsible for accrued costs.
 
-  A billing setup is associated with a Payments account.  Billing-related
-  activity for all billing setups associated with a particular Payments account
+  A billing setup is associated with a payments account.  Billing-related
+  activity for all billing setups associated with a particular payments account
   will appear on a single invoice generated monthly.
 
   Mutates:

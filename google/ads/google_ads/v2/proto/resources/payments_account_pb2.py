@@ -106,28 +106,28 @@ PaymentsAccount = _reflection.GeneratedProtocolMessageType('PaymentsAccount', (_
   DESCRIPTOR = _PAYMENTSACCOUNT,
   __module__ = 'google.ads.googleads_v2.proto.resources.payments_account_pb2'
   ,
-  __doc__ = """A Payments account, which can be used to set up billing for an Ads
+  __doc__ = """A payments account, which can be used to set up billing for an Ads
   customer.
   
   
   Attributes:
       resource_name:
-          The resource name of the Payments account. PaymentsAccount
+          The resource name of the payments account. PaymentsAccount
           resource names have the form:  ``customers/{customer_id}/payme
           ntsAccounts/{payments_account_id}``
       payments_account_id:
-          A 16 digit ID used to identify a Payments account.
+          A 16 digit ID used to identify a payments account.
       name:
-          The name of the Payments account.
+          The name of the payments account.
       currency_code:
-          The currency code of the Payments account. A subset of the
+          The currency code of the payments account. A subset of the
           currency codes derived from the ISO 4217 standard is
           supported.
       payments_profile_id:
-          A 12 digit ID used to identify the Payments profile associated
-          with the Payments account.
+          A 12 digit ID used to identify the payments profile associated
+          with the payments account.
       secondary_payments_profile_id:
-          A secondary Payments profile ID present in uncommon
+          A secondary payments profile ID present in uncommon
           situations, e.g. when a sequential liability agreement has
           been arranged.
   """,

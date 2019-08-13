@@ -214,6 +214,8 @@ from google.ads.google_ads.v2.proto.enums import promotion_extension_occasion_pb
 from google.ads.google_ads.v2.proto.enums import promotion_placeholder_field_pb2
 from google.ads.google_ads.v2.proto.enums import proximity_radius_units_pb2
 from google.ads.google_ads.v2.proto.enums import quality_score_bucket_pb2
+from google.ads.google_ads.v2.proto.enums import reach_plan_ad_length_pb2
+from google.ads.google_ads.v2.proto.enums import reach_plan_age_range_pb2
 from google.ads.google_ads.v2.proto.enums import real_estate_placeholder_field_pb2
 from google.ads.google_ads.v2.proto.enums import recommendation_type_pb2
 from google.ads.google_ads.v2.proto.enums import search_engine_results_page_type_pb2
@@ -345,6 +347,7 @@ from google.ads.google_ads.v2.proto.errors import policy_violation_error_pb2
 from google.ads.google_ads.v2.proto.errors import query_error_pb2
 from google.ads.google_ads.v2.proto.errors import quota_error_pb2
 from google.ads.google_ads.v2.proto.errors import range_error_pb2
+from google.ads.google_ads.v2.proto.errors import reach_plan_error_pb2
 from google.ads.google_ads.v2.proto.errors import recommendation_error_pb2
 from google.ads.google_ads.v2.proto.errors import region_code_error_pb2
 from google.ads.google_ads.v2.proto.errors import request_error_pb2
@@ -551,6 +554,7 @@ from google.ads.google_ads.v2.proto.services import parental_status_view_service
 from google.ads.google_ads.v2.proto.services import payments_account_service_pb2
 from google.ads.google_ads.v2.proto.services import product_bidding_category_constant_service_pb2
 from google.ads.google_ads.v2.proto.services import product_group_view_service_pb2
+from google.ads.google_ads.v2.proto.services import reach_plan_service_pb2
 from google.ads.google_ads.v2.proto.services import recommendation_service_pb2
 from google.ads.google_ads.v2.proto.services import remarketing_action_service_pb2
 from google.ads.google_ads.v2.proto.services import search_term_view_service_pb2
@@ -766,6 +770,8 @@ _shared_modules = [
     promotion_placeholder_field_pb2,
     proximity_radius_units_pb2,
     quality_score_bucket_pb2,
+    reach_plan_ad_length_pb2,
+    reach_plan_age_range_pb2,
     real_estate_placeholder_field_pb2,
     recommendation_type_pb2,
     search_engine_results_page_type_pb2,
@@ -897,6 +903,7 @@ _shared_modules = [
     query_error_pb2,
     quota_error_pb2,
     range_error_pb2,
+    reach_plan_error_pb2,
     recommendation_error_pb2,
     region_code_error_pb2,
     request_error_pb2,
@@ -1112,6 +1119,7 @@ _local_modules = [
     payments_account_service_pb2,
     product_bidding_category_constant_service_pb2,
     product_group_view_service_pb2,
+    reach_plan_service_pb2,
     recommendation_service_pb2,
     remarketing_action_service_pb2,
     search_term_view_service_pb2,

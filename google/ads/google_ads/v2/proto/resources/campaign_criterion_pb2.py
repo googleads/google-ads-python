@@ -25,7 +25,7 @@ DESCRIPTOR = _descriptor.FileDescriptor(
   package='google.ads.googleads.v2.resources',
   syntax='proto3',
   serialized_options=_b('\n%com.google.ads.googleads.v2.resourcesB\026CampaignCriterionProtoP\001ZJgoogle.golang.org/genproto/googleapis/ads/googleads/v2/resources;resources\242\002\003GAA\252\002!Google.Ads.GoogleAds.V2.Resources\312\002!Google\\Ads\\GoogleAds\\V2\\Resources\352\002%Google::Ads::GoogleAds::V2::Resources'),
-  serialized_pb=_b('\n@google/ads/googleads_v2/proto/resources/campaign_criterion.proto\x12!google.ads.googleads.v2.resources\x1a\x33google/ads/googleads_v2/proto/common/criteria.proto\x1a\x43google/ads/googleads_v2/proto/enums/campaign_criterion_status.proto\x1a\x38google/ads/googleads_v2/proto/enums/criterion_type.proto\x1a\x1egoogle/protobuf/wrappers.proto\x1a\x1cgoogle/api/annotations.proto\"\xf5\x11\n\x11\x43\x61mpaignCriterion\x12\x15\n\rresource_name\x18\x01 \x01(\t\x12.\n\x08\x63\x61mpaign\x18\x04 \x01(\x0b\x32\x1c.google.protobuf.StringValue\x12\x31\n\x0c\x63riterion_id\x18\x05 \x01(\x0b\x32\x1b.google.protobuf.Int64Value\x12\x31\n\x0c\x62id_modifier\x18\x0e \x01(\x0b\x32\x1b.google.protobuf.FloatValue\x12,\n\x08negative\x18\x07 \x01(\x0b\x32\x1a.google.protobuf.BoolValue\x12L\n\x04type\x18\x06 \x01(\x0e\x32>.google.ads.googleads.v2.enums.CriterionTypeEnum.CriterionType\x12\x62\n\x06status\x18# \x01(\x0e\x32R.google.ads.googleads.v2.enums.CampaignCriterionStatusEnum.CampaignCriterionStatus\x12>\n\x07keyword\x18\x08 \x01(\x0b\x32+.google.ads.googleads.v2.common.KeywordInfoH\x00\x12\x42\n\tplacement\x18\t \x01(\x0b\x32-.google.ads.googleads.v2.common.PlacementInfoH\x00\x12T\n\x13mobile_app_category\x18\n \x01(\x0b\x32\x35.google.ads.googleads.v2.common.MobileAppCategoryInfoH\x00\x12S\n\x12mobile_application\x18\x0b \x01(\x0b\x32\x35.google.ads.googleads.v2.common.MobileApplicationInfoH\x00\x12@\n\x08location\x18\x0c \x01(\x0b\x32,.google.ads.googleads.v2.common.LocationInfoH\x00\x12<\n\x06\x64\x65vice\x18\r \x01(\x0b\x32*.google.ads.googleads.v2.common.DeviceInfoH\x00\x12\x45\n\x0b\x61\x64_schedule\x18\x0f \x01(\x0b\x32..google.ads.googleads.v2.common.AdScheduleInfoH\x00\x12\x41\n\tage_range\x18\x10 \x01(\x0b\x32,.google.ads.googleads.v2.common.AgeRangeInfoH\x00\x12<\n\x06gender\x18\x11 \x01(\x0b\x32*.google.ads.googleads.v2.common.GenderInfoH\x00\x12G\n\x0cincome_range\x18\x12 \x01(\x0b\x32/.google.ads.googleads.v2.common.IncomeRangeInfoH\x00\x12M\n\x0fparental_status\x18\x13 \x01(\x0b\x32\x32.google.ads.googleads.v2.common.ParentalStatusInfoH\x00\x12\x41\n\tuser_list\x18\x16 \x01(\x0b\x32,.google.ads.googleads.v2.common.UserListInfoH\x00\x12I\n\ryoutube_video\x18\x14 \x01(\x0b\x32\x30.google.ads.googleads.v2.common.YouTubeVideoInfoH\x00\x12M\n\x0fyoutube_channel\x18\x15 \x01(\x0b\x32\x32.google.ads.googleads.v2.common.YouTubeChannelInfoH\x00\x12\x42\n\tproximity\x18\x17 \x01(\x0b\x32-.google.ads.googleads.v2.common.ProximityInfoH\x00\x12:\n\x05topic\x18\x18 \x01(\x0b\x32).google.ads.googleads.v2.common.TopicInfoH\x00\x12I\n\rlisting_scope\x18\x19 \x01(\x0b\x32\x30.google.ads.googleads.v2.common.ListingScopeInfoH\x00\x12@\n\x08language\x18\x1a \x01(\x0b\x32,.google.ads.googleads.v2.common.LanguageInfoH\x00\x12?\n\x08ip_block\x18\x1b \x01(\x0b\x32+.google.ads.googleads.v2.common.IpBlockInfoH\x00\x12I\n\rcontent_label\x18\x1c \x01(\x0b\x32\x30.google.ads.googleads.v2.common.ContentLabelInfoH\x00\x12>\n\x07\x63\x61rrier\x18\x1d \x01(\x0b\x32+.google.ads.googleads.v2.common.CarrierInfoH\x00\x12I\n\ruser_interest\x18\x1e \x01(\x0b\x32\x30.google.ads.googleads.v2.common.UserInterestInfoH\x00\x12>\n\x07webpage\x18\x1f \x01(\x0b\x32+.google.ads.googleads.v2.common.WebpageInfoH\x00\x12^\n\x18operating_system_version\x18  \x01(\x0b\x32:.google.ads.googleads.v2.common.OperatingSystemVersionInfoH\x00\x12I\n\rmobile_device\x18! \x01(\x0b\x32\x30.google.ads.googleads.v2.common.MobileDeviceInfoH\x00\x12K\n\x0elocation_group\x18\" \x01(\x0b\x32\x31.google.ads.googleads.v2.common.LocationGroupInfoH\x00\x42\x0b\n\tcriterionB\x83\x02\n%com.google.ads.googleads.v2.resourcesB\x16\x43\x61mpaignCriterionProtoP\x01ZJgoogle.golang.org/genproto/googleapis/ads/googleads/v2/resources;resources\xa2\x02\x03GAA\xaa\x02!Google.Ads.GoogleAds.V2.Resources\xca\x02!Google\\Ads\\GoogleAds\\V2\\Resources\xea\x02%Google::Ads::GoogleAds::V2::Resourcesb\x06proto3')
+  serialized_pb=_b('\n@google/ads/googleads_v2/proto/resources/campaign_criterion.proto\x12!google.ads.googleads.v2.resources\x1a\x33google/ads/googleads_v2/proto/common/criteria.proto\x1a\x43google/ads/googleads_v2/proto/enums/campaign_criterion_status.proto\x1a\x38google/ads/googleads_v2/proto/enums/criterion_type.proto\x1a\x1egoogle/protobuf/wrappers.proto\x1a\x1cgoogle/api/annotations.proto\"\xc4\x12\n\x11\x43\x61mpaignCriterion\x12\x15\n\rresource_name\x18\x01 \x01(\t\x12.\n\x08\x63\x61mpaign\x18\x04 \x01(\x0b\x32\x1c.google.protobuf.StringValue\x12\x31\n\x0c\x63riterion_id\x18\x05 \x01(\x0b\x32\x1b.google.protobuf.Int64Value\x12\x31\n\x0c\x62id_modifier\x18\x0e \x01(\x0b\x32\x1b.google.protobuf.FloatValue\x12,\n\x08negative\x18\x07 \x01(\x0b\x32\x1a.google.protobuf.BoolValue\x12L\n\x04type\x18\x06 \x01(\x0e\x32>.google.ads.googleads.v2.enums.CriterionTypeEnum.CriterionType\x12\x62\n\x06status\x18# \x01(\x0e\x32R.google.ads.googleads.v2.enums.CampaignCriterionStatusEnum.CampaignCriterionStatus\x12>\n\x07keyword\x18\x08 \x01(\x0b\x32+.google.ads.googleads.v2.common.KeywordInfoH\x00\x12\x42\n\tplacement\x18\t \x01(\x0b\x32-.google.ads.googleads.v2.common.PlacementInfoH\x00\x12T\n\x13mobile_app_category\x18\n \x01(\x0b\x32\x35.google.ads.googleads.v2.common.MobileAppCategoryInfoH\x00\x12S\n\x12mobile_application\x18\x0b \x01(\x0b\x32\x35.google.ads.googleads.v2.common.MobileApplicationInfoH\x00\x12@\n\x08location\x18\x0c \x01(\x0b\x32,.google.ads.googleads.v2.common.LocationInfoH\x00\x12<\n\x06\x64\x65vice\x18\r \x01(\x0b\x32*.google.ads.googleads.v2.common.DeviceInfoH\x00\x12\x45\n\x0b\x61\x64_schedule\x18\x0f \x01(\x0b\x32..google.ads.googleads.v2.common.AdScheduleInfoH\x00\x12\x41\n\tage_range\x18\x10 \x01(\x0b\x32,.google.ads.googleads.v2.common.AgeRangeInfoH\x00\x12<\n\x06gender\x18\x11 \x01(\x0b\x32*.google.ads.googleads.v2.common.GenderInfoH\x00\x12G\n\x0cincome_range\x18\x12 \x01(\x0b\x32/.google.ads.googleads.v2.common.IncomeRangeInfoH\x00\x12M\n\x0fparental_status\x18\x13 \x01(\x0b\x32\x32.google.ads.googleads.v2.common.ParentalStatusInfoH\x00\x12\x41\n\tuser_list\x18\x16 \x01(\x0b\x32,.google.ads.googleads.v2.common.UserListInfoH\x00\x12I\n\ryoutube_video\x18\x14 \x01(\x0b\x32\x30.google.ads.googleads.v2.common.YouTubeVideoInfoH\x00\x12M\n\x0fyoutube_channel\x18\x15 \x01(\x0b\x32\x32.google.ads.googleads.v2.common.YouTubeChannelInfoH\x00\x12\x42\n\tproximity\x18\x17 \x01(\x0b\x32-.google.ads.googleads.v2.common.ProximityInfoH\x00\x12:\n\x05topic\x18\x18 \x01(\x0b\x32).google.ads.googleads.v2.common.TopicInfoH\x00\x12I\n\rlisting_scope\x18\x19 \x01(\x0b\x32\x30.google.ads.googleads.v2.common.ListingScopeInfoH\x00\x12@\n\x08language\x18\x1a \x01(\x0b\x32,.google.ads.googleads.v2.common.LanguageInfoH\x00\x12?\n\x08ip_block\x18\x1b \x01(\x0b\x32+.google.ads.googleads.v2.common.IpBlockInfoH\x00\x12I\n\rcontent_label\x18\x1c \x01(\x0b\x32\x30.google.ads.googleads.v2.common.ContentLabelInfoH\x00\x12>\n\x07\x63\x61rrier\x18\x1d \x01(\x0b\x32+.google.ads.googleads.v2.common.CarrierInfoH\x00\x12I\n\ruser_interest\x18\x1e \x01(\x0b\x32\x30.google.ads.googleads.v2.common.UserInterestInfoH\x00\x12>\n\x07webpage\x18\x1f \x01(\x0b\x32+.google.ads.googleads.v2.common.WebpageInfoH\x00\x12^\n\x18operating_system_version\x18  \x01(\x0b\x32:.google.ads.googleads.v2.common.OperatingSystemVersionInfoH\x00\x12I\n\rmobile_device\x18! \x01(\x0b\x32\x30.google.ads.googleads.v2.common.MobileDeviceInfoH\x00\x12K\n\x0elocation_group\x18\" \x01(\x0b\x32\x31.google.ads.googleads.v2.common.LocationGroupInfoH\x00\x12M\n\x0f\x63ustom_affinity\x18$ \x01(\x0b\x32\x32.google.ads.googleads.v2.common.CustomAffinityInfoH\x00\x42\x0b\n\tcriterionB\x83\x02\n%com.google.ads.googleads.v2.resourcesB\x16\x43\x61mpaignCriterionProtoP\x01ZJgoogle.golang.org/genproto/googleapis/ads/googleads/v2/resources;resources\xa2\x02\x03GAA\xaa\x02!Google.Ads.GoogleAds.V2.Resources\xca\x02!Google\\Ads\\GoogleAds\\V2\\Resources\xea\x02%Google::Ads::GoogleAds::V2::Resourcesb\x06proto3')
   ,
   dependencies=[google_dot_ads_dot_googleads__v2_dot_proto_dot_common_dot_criteria__pb2.DESCRIPTOR,google_dot_ads_dot_googleads__v2_dot_proto_dot_enums_dot_campaign__criterion__status__pb2.DESCRIPTOR,google_dot_ads_dot_googleads__v2_dot_proto_dot_enums_dot_criterion__type__pb2.DESCRIPTOR,google_dot_protobuf_dot_wrappers__pb2.DESCRIPTOR,google_dot_api_dot_annotations__pb2.DESCRIPTOR,])
 
@@ -270,6 +270,13 @@ _CAMPAIGNCRITERION = _descriptor.Descriptor(
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       serialized_options=None, file=DESCRIPTOR),
+    _descriptor.FieldDescriptor(
+      name='custom_affinity', full_name='google.ads.googleads.v2.resources.CampaignCriterion.custom_affinity', index=33,
+      number=36, type=11, cpp_type=10, label=1,
+      has_default_value=False, default_value=None,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR),
   ],
   extensions=[
   ],
@@ -286,7 +293,7 @@ _CAMPAIGNCRITERION = _descriptor.Descriptor(
       index=0, containing_type=None, fields=[]),
   ],
   serialized_start=346,
-  serialized_end=2639,
+  serialized_end=2718,
 )
 
 _CAMPAIGNCRITERION.fields_by_name['campaign'].message_type = google_dot_protobuf_dot_wrappers__pb2._STRINGVALUE
@@ -321,6 +328,7 @@ _CAMPAIGNCRITERION.fields_by_name['webpage'].message_type = google_dot_ads_dot_g
 _CAMPAIGNCRITERION.fields_by_name['operating_system_version'].message_type = google_dot_ads_dot_googleads__v2_dot_proto_dot_common_dot_criteria__pb2._OPERATINGSYSTEMVERSIONINFO
 _CAMPAIGNCRITERION.fields_by_name['mobile_device'].message_type = google_dot_ads_dot_googleads__v2_dot_proto_dot_common_dot_criteria__pb2._MOBILEDEVICEINFO
 _CAMPAIGNCRITERION.fields_by_name['location_group'].message_type = google_dot_ads_dot_googleads__v2_dot_proto_dot_common_dot_criteria__pb2._LOCATIONGROUPINFO
+_CAMPAIGNCRITERION.fields_by_name['custom_affinity'].message_type = google_dot_ads_dot_googleads__v2_dot_proto_dot_common_dot_criteria__pb2._CUSTOMAFFINITYINFO
 _CAMPAIGNCRITERION.oneofs_by_name['criterion'].fields.append(
   _CAMPAIGNCRITERION.fields_by_name['keyword'])
 _CAMPAIGNCRITERION.fields_by_name['keyword'].containing_oneof = _CAMPAIGNCRITERION.oneofs_by_name['criterion']
@@ -399,6 +407,9 @@ _CAMPAIGNCRITERION.fields_by_name['mobile_device'].containing_oneof = _CAMPAIGNC
 _CAMPAIGNCRITERION.oneofs_by_name['criterion'].fields.append(
   _CAMPAIGNCRITERION.fields_by_name['location_group'])
 _CAMPAIGNCRITERION.fields_by_name['location_group'].containing_oneof = _CAMPAIGNCRITERION.oneofs_by_name['criterion']
+_CAMPAIGNCRITERION.oneofs_by_name['criterion'].fields.append(
+  _CAMPAIGNCRITERION.fields_by_name['custom_affinity'])
+_CAMPAIGNCRITERION.fields_by_name['custom_affinity'].containing_oneof = _CAMPAIGNCRITERION.oneofs_by_name['criterion']
 DESCRIPTOR.message_types_by_name['CampaignCriterion'] = _CAMPAIGNCRITERION
 _sym_db.RegisterFileDescriptor(DESCRIPTOR)
 
@@ -484,6 +495,8 @@ CampaignCriterion = _reflection.GeneratedProtocolMessageType('CampaignCriterion'
           Mobile Device.
       location_group:
           Location Group
+      custom_affinity:
+          Custom Affinity.
   """,
   # @@protoc_insertion_point(class_scope:google.ads.googleads.v2.resources.CampaignCriterion)
   ))

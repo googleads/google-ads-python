@@ -100,7 +100,7 @@ ListPaymentsAccountsRequest = _reflection.GeneratedProtocolMessageType('ListPaym
   DESCRIPTOR = _LISTPAYMENTSACCOUNTSREQUEST,
   __module__ = 'google.ads.googleads_v2.proto.services.payments_account_service_pb2'
   ,
-  __doc__ = """Request message for fetching all accessible Payments accounts.
+  __doc__ = """Request message for fetching all accessible payments accounts.
   
   
   Attributes:
@@ -122,7 +122,7 @@ ListPaymentsAccountsResponse = _reflection.GeneratedProtocolMessageType('ListPay
   
   Attributes:
       payments_accounts:
-          The list of accessible Payments accounts.
+          The list of accessible payments accounts.
   """,
   # @@protoc_insertion_point(class_scope:google.ads.googleads.v2.services.ListPaymentsAccountsResponse)
   ))

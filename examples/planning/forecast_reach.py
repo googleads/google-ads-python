@@ -12,7 +12,7 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
-"""This code example generates a reach forecast.
+"""This code example generates a video ads reach forecast.
 """
 
 from __future__ import absolute_import
@@ -243,7 +243,7 @@ if __name__ == '__main__':
     google_ads_client = GoogleAdsClient.load_from_storage()
 
     parser = argparse.ArgumentParser(
-        description='Generates forecast metrics for a keyword plan.')
+        description='Generates video ads reach forecast.')
     # The following argument(s) should be provided to run the example.
     parser.add_argument('-c', '--customer_id', type=six.text_type,
                         required=True, help='The Google Ads customer ID.')

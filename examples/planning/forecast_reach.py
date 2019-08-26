@@ -26,22 +26,37 @@ from google.ads.google_ads.errors import GoogleAdsException
 
 
 def _string_value(client, value):
-    """Utility to convert a string to a protocol buffer string wrapper."""
-    string_val = client.get_type('StringValue')
+    """Converts a value to a protocol buffer string wrapper.
+
+    Args:
+      client: A google.ads.google_ads.client.GoogleAdsClient instance.
+      value: A string value to wrap.
+    """
+    string_val = client.get_type('StringValue', version='v2')
     string_val.value = value
     return string_val
 
 
 def _int_32_value(client, value):
-    """Utility to convert a string to a protocol buffer Int64 wrapper."""
-    int_32_val = client.get_type('Int32Value')
+    """Converts a value to a protocol buffer Int32 wrapper.
+
+    Args:
+      client: A google.ads.google_ads.client.GoogleAdsClient instance.
+      value: A 32-bit integer to wrap.
+    """
+    int_32_val = client.get_type('Int32Value', version='v2')
     int_32_val.value = int(value)
     return int_32_val
 
 
 def _int_64_value(client, value):
-    """Utility to convert a string to a protocol buffer Int64 wrapper."""
-    int_64_val = client.get_type('Int64Value')
+    """Converts a value to a protocol buffer Int64 wrapper.
+
+    Args:
+      client: A google.ads.google_ads.client.GoogleAdsClient instance.
+      value: A 64-bit integer to wrap.
+    """
+    int_64_val = client.get_type('Int64Value', version='v2')
     int_64_val.value = long(value)
     return int_64_val
 
@@ -50,7 +65,7 @@ def show_plannable_locations(client):
     """Shows map of plannable locations to their IDs.
 
     Args:
-      client: Instance of Google Ads client to generate ReachPlanService.
+      client: A google.ads.google_ads.client.GoogleAdsClient instance.
     """
     reach_plan_service = client.get_service('ReachPlanService', version='v2')
     response = reach_plan_service.list_plannable_locations()
@@ -68,7 +83,7 @@ def show_plannable_products(client, location_id):
     """Lists plannable products for a given location.
 
     Args:
-      client: Instance of Google Ads client to generate ReachPlanService.
+      client: A google.ads.google_ads.client.GoogleAdsClient instance.
       location_id: Location ID from somewhere returned by ListPlannableLocations.
     """
     reach_plan_service = client.get_service('ReachPlanService', version='v2')
@@ -83,13 +98,13 @@ def _request_reach_curve(
     """Creates a sample request for a given product mix.
 
     Args:
-      client: Instance of Google Ads client to generate ReachPlanService.
+      client: A google.ads.google_ads.client.GoogleAdsClient instance.
       customer_id: The customer ID for the reach forecast.
       product_mix: The product mix for the reach forecast.
       location_id: Location ID from somewhere returned by ListPlannableLocations.
       currency_code: Three-character ISO 4217 currency code.
     """
-    reach_request = client.get_type('GenerateReachForecastRequest', 'v2')
+    reach_request = client.get_type('GenerateReachForecastRequest', version='v2')
 
     reach_request.customer_id = customer_id
 
@@ -99,26 +114,26 @@ def _request_reach_curve(
     targeting = reach_request.targeting
     targeting.plannable_location_id.value = location_id
     targeting.age_range = client.get_type(
-            'ReachPlanAgeRangeEnum', 'v2').AGE_RANGE_18_65_UP
+            'ReachPlanAgeRangeEnum', version='v2').AGE_RANGE_18_65_UP
 
     genders = targeting.genders
     gender_types = [
-            client.get_type('GenderTypeEnum', 'v2').FEMALE,
-            client.get_type('GenderTypeEnum', 'v2').MALE,
+            client.get_type('GenderTypeEnum', version='v2').FEMALE,
+            client.get_type('GenderTypeEnum', version='v2').MALE,
     ]
     for gender_type in gender_types:
-        gender = client.get_type('GenderInfo', 'v2')
+        gender = client.get_type('GenderInfo', version='v2')
         gender.type = gender_type
         genders.append(gender)
 
     devices = targeting.devices
     device_types = [
-            client.get_type('DeviceEnum', 'v2').DESKTOP,
-            client.get_type('DeviceEnum', 'v2').MOBILE,
-            client.get_type('DeviceEnum', 'v2').TABLET,
+            client.get_type('DeviceEnum', version='v2').DESKTOP,
+            client.get_type('DeviceEnum', version='v2').MOBILE,
+            client.get_type('DeviceEnum', version='v2').TABLET,
     ]
     for device_type in device_types:
-        device = client.get_type('DeviceInfo', 'v2')
+        device = client.get_type('DeviceInfo', version='v2')
         device.type = device_type
         devices.append(device)
 
@@ -156,7 +171,7 @@ def forecast_manual_mix(
     """Pulls a forecast for product mix created manually.
 
     Args:
-      client: Instance of Google Ads client to generate ReachPlanService.
+      client: A google.ads.google_ads.client.GoogleAdsClient instance.
       customer_id: The customer ID for the reach forecast.
       location_id: Location ID returned by ListPlannableLocations.
       currency_code: Three-character ISO 4217 currency code.
@@ -165,7 +180,7 @@ def forecast_manual_mix(
     product_mix = []
     product_splits = [('TRUEVIEW_IN_STREAM', 0.15), ('BUMPER', 0.85)]
     for product, split in product_splits:
-        planned_product = client.get_type('PlannedProduct', 'v2')
+        planned_product = client.get_type('PlannedProduct', version='v2')
         planned_product.plannable_product_code.value = product
         planned_product.budget_micros.value = long(budget * 1.0e6 * split)
         product_mix.append(planned_product)
@@ -179,19 +194,19 @@ def forecast_suggested_mix(
     """Pulls a forecast for a product mix based on your set of preferences.
 
     Args:
-      client: Instance of Google Ads client to generate ReachPlanService.
+      client: A google.ads.google_ads.client.GoogleAdsClient instance.
       customer_id: The customer ID for the reach forecast.
       location_id: Location ID returned by ListPlannableLocations.
       currency_code: Three-character ISO 4217 currency code.
       budget: Budget to allocate to the plan.
     """
-    preferences = client.get_type('Preferences', 'v2')
+    preferences = client.get_type('Preferences', version='v2')
     preferences.has_guaranteed_price.value = True
     preferences.starts_with_sound.value = True
     preferences.is_skippable.value = False
     preferences.top_content_only.value = True
     preferences.ad_length = client.get_type(
-            'ReachPlanAdLengthEnum', 'v2').FIFTEEN_OR_TWENTY_SECONDS
+            'ReachPlanAdLengthEnum', version='v2').FIFTEEN_OR_TWENTY_SECONDS
 
     reach_plan_service = client.get_service('ReachPlanService', version='v2')
     mix_response = reach_plan_service.generate_product_mix_ideas(
@@ -203,7 +218,7 @@ def forecast_suggested_mix(
 
     product_mix = []
     for product in mix_response.product_allocation:
-        planned_product = client.get_type('PlannedProduct', 'v2')
+        planned_product = client.get_type('PlannedProduct', version='v2')
         planned_product.plannable_product_code.value = (
                 product.plannable_product_code.value)
         planned_product.budget_micros.value = product.budget_micros.value

@@ -31,6 +31,9 @@ def _string_value(client, value):
     Args:
       client: A google.ads.google_ads.client.GoogleAdsClient instance.
       value: A string value to wrap.
+
+    Returns:
+      The value wrapped in a google.ads.googleads_v2.types.StringValue.
     """
     string_val = client.get_type('StringValue', version='v2')
     string_val.value = value
@@ -43,6 +46,9 @@ def _int_32_value(client, value):
     Args:
       client: A google.ads.google_ads.client.GoogleAdsClient instance.
       value: A 32-bit integer to wrap.
+
+    Returns:
+      The value wrapped in a google.ads.googleads_v2.types.Int32.
     """
     int_32_val = client.get_type('Int32Value', version='v2')
     int_32_val.value = int(value)
@@ -55,6 +61,9 @@ def _int_64_value(client, value):
     Args:
       client: A google.ads.google_ads.client.GoogleAdsClient instance.
       value: A 64-bit integer to wrap.
+
+    Returns:
+      The value wrapped in a google.ads.googleads_v2.types.Int64.
     """
     int_64_val = client.get_type('Int64Value', version='v2')
     int_64_val.value = long(value)

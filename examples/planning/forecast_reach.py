@@ -51,7 +51,7 @@ def _int_32_value(client, value):
       The value wrapped in a google.ads.googleads_v2.types.Int32.
     """
     int_32_val = client.get_type('Int32Value', version='v2')
-    int_32_val.value = int(value)
+    int_32_val.value = value
     return int_32_val
 
 
@@ -66,7 +66,7 @@ def _int_64_value(client, value):
       The value wrapped in a google.ads.googleads_v2.types.Int64.
     """
     int_64_val = client.get_type('Int64Value', version='v2')
-    int_64_val.value = long(value)
+    int_64_val.value = value
     return int_64_val
 
 

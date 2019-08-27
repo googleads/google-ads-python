@@ -45,13 +45,13 @@ def _int_32_value(client, value):
 
     Args:
       client: A google.ads.google_ads.client.GoogleAdsClient instance.
-      value: A 32-bit integer to wrap.
+      value: A number to wrap, rounded to the nearest integer.
 
     Returns:
       The value wrapped in a google.ads.googleads_v2.types.Int32.
     """
     int_32_val = client.get_type('Int32Value', version='v2')
-    int_32_val.value = value
+    int_32_val.value = round(value)
     return int_32_val
 
 
@@ -60,13 +60,13 @@ def _int_64_value(client, value):
 
     Args:
       client: A google.ads.google_ads.client.GoogleAdsClient instance.
-      value: A 64-bit integer to wrap.
+      value: A number to wrap, rounded to the nearest integer.
 
     Returns:
       The value wrapped in a google.ads.googleads_v2.types.Int64.
     """
     int_64_val = client.get_type('Int64Value', version='v2')
-    int_64_val.value = value
+    int_64_val.value = round(value)
     return int_64_val
 
 
@@ -191,7 +191,7 @@ def forecast_manual_mix(
     for product, split in product_splits:
         planned_product = client.get_type('PlannedProduct', version='v2')
         planned_product.plannable_product_code.value = product
-        planned_product.budget_micros.value = long(budget * 1.0e6 * split)
+        planned_product.budget_micros.value = round(budget * 1.0e6 * split)
         product_mix.append(planned_product)
 
     _request_reach_curve(

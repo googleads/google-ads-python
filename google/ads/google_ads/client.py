@@ -204,8 +204,8 @@ class GoogleAdsClient(object):
             version: a str indicating the version of the Google Ads API to be
                 used.
             interceptors: an optional list of interceptors to include in
-                requests. NOTE: this parameter is not intended for external use
-                and is not officially supported.
+                requests. NOTE: this parameter is not intended for non-Google
+                use and is not officially supported.
 
         Returns:
             A service client instance associated with the given service_name.

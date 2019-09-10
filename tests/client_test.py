@@ -400,6 +400,22 @@ class GoogleAdsClientTest(FileTestCase):
         except Exception:
             self.fail('get_service with a valid version raised an error')
 
+    def test_get_service_with_interceptor(self):
+        client = self._create_test_client()
+
+        class Interceptor:
+            pass
+
+        interceptor = Interceptor()
+
+        with mock.patch.object(
+            Client,
+            'intercept_channel'
+        ) as mock_intercept_channel:
+            client.get_service('GoogleAdsService', interceptors=[interceptor])
+            first_interceptor = mock_intercept_channel.call_args[0][1]
+            self.assertEqual(first_interceptor, interceptor)
+
     def test_get_type(self):
         for ver in valid_versions:
             # Retrieve names for all types defined in pb2 files.

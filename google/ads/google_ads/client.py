@@ -13,7 +13,7 @@
 # limitations under the License.
 """A client and common configurations for the Google Ads API."""
 
-import grpc
+from grpc import intercept_channel
 from importlib import import_module
 import logging.config
 
@@ -194,7 +194,7 @@ class GoogleAdsClient(object):
         self.endpoint = endpoint
         self.login_customer_id = login_customer_id
 
-    def get_service(self, name, version=_DEFAULT_VERSION):
+    def get_service(self, name, version=_DEFAULT_VERSION, interceptors=[]):
         """Returns a service client instance for the specified service_name.
 
         Args:
@@ -203,6 +203,9 @@ class GoogleAdsClient(object):
                 "CampaignService" to retrieve a CampaignServiceClient instance.
             version: a str indicating the version of the Google Ads API to be
                 used.
+            interceptors: an optional list of interceptors to include in
+                requests. NOTE: this parameter is not intended for non-Google
+                use and is not officially supported.
 
         Returns:
             A service client instance associated with the given service_name.
@@ -234,12 +237,14 @@ class GoogleAdsClient(object):
             credentials=self.credentials,
             options=_GRPC_CHANNEL_OPTIONS)
 
-        channel = grpc.intercept_channel(
-            channel,
+        interceptors = interceptors + [
             MetadataInterceptor(self.developer_token, self.login_customer_id),
             LoggingInterceptor(_logger, endpoint),
-            ExceptionInterceptor(version)
-        )
+            ExceptionInterceptor(version)]
+
+        channel = intercept_channel(
+            channel,
+            *interceptors)
 
         service_transport = service_transport_class(channel=channel)
 

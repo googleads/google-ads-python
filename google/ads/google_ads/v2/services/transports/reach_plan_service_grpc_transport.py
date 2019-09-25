@@ -113,7 +113,7 @@ class ReachPlanServiceGrpcTransport(object):
     def list_plannable_locations(self):
         """Return the gRPC stub for :meth:`ReachPlanServiceClient.list_plannable_locations`.
 
-        Returns the list of plannable locations (e.g. countries, DMAs).
+        Returns the list of plannable locations (for example, countries & DMAs).
 
         Returns:
             Callable: A callable which accepts the appropriate

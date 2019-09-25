@@ -26,10 +26,17 @@ import google.api_core.gapic_v1.method
 import google.api_core.gapic_v1.routing_header
 import google.api_core.grpc_helpers
 import google.api_core.path_template
+import grpc
 
 from google.ads.google_ads.v2.services import account_budget_service_client_config
+from google.ads.google_ads.v2.services import enums
 from google.ads.google_ads.v2.services.transports import account_budget_service_grpc_transport
+from google.ads.google_ads.v2.proto.resources import account_budget_pb2
+from google.ads.google_ads.v2.proto.resources import account_budget_proposal_pb2
+from google.ads.google_ads.v2.proto.services import account_budget_proposal_service_pb2
+from google.ads.google_ads.v2.proto.services import account_budget_proposal_service_pb2_grpc
 from google.ads.google_ads.v2.proto.services import account_budget_service_pb2
+from google.ads.google_ads.v2.proto.services import account_budget_service_pb2_grpc
 
 
 

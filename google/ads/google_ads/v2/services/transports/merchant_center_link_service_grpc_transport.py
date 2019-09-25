@@ -113,7 +113,7 @@ class MerchantCenterLinkServiceGrpcTransport(object):
     def list_merchant_center_links(self):
         """Return the gRPC stub for :meth:`MerchantCenterLinkServiceClient.list_merchant_center_links`.
 
-        Returns Merchant Center links available tor this customer.
+        Returns Merchant Center links available for this customer.
 
         Returns:
             Callable: A callable which accepts the appropriate

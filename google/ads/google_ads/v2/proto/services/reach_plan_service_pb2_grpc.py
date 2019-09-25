@@ -53,7 +53,7 @@ class ReachPlanServiceServicer(object):
   """
 
   def ListPlannableLocations(self, request, context):
-    """Returns the list of plannable locations (e.g. countries, DMAs).
+    """Returns the list of plannable locations (for example, countries & DMAs).
     """
     context.set_code(grpc.StatusCode.UNIMPLEMENTED)
     context.set_details('Method not implemented!')

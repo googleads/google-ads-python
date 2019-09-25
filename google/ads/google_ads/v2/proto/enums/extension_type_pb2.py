@@ -21,7 +21,7 @@ DESCRIPTOR = _descriptor.FileDescriptor(
   package='google.ads.googleads.v2.enums',
   syntax='proto3',
   serialized_options=_b('\n!com.google.ads.googleads.v2.enumsB\022ExtensionTypeProtoP\001ZBgoogle.golang.org/genproto/googleapis/ads/googleads/v2/enums;enums\242\002\003GAA\252\002\035Google.Ads.GoogleAds.V2.Enums\312\002\035Google\\Ads\\GoogleAds\\V2\\Enums\352\002!Google::Ads::GoogleAds::V2::Enums'),
-  serialized_pb=_b('\n8google/ads/googleads_v2/proto/enums/extension_type.proto\x12\x1dgoogle.ads.googleads.v2.enums\x1a\x1cgoogle/api/annotations.proto\"\xe0\x01\n\x11\x45xtensionTypeEnum\"\xca\x01\n\rExtensionType\x12\x0f\n\x0bUNSPECIFIED\x10\x00\x12\x0b\n\x07UNKNOWN\x10\x01\x12\x08\n\x04NONE\x10\x02\x12\x07\n\x03\x41PP\x10\x03\x12\x08\n\x04\x43\x41LL\x10\x04\x12\x0b\n\x07\x43\x41LLOUT\x10\x05\x12\x0b\n\x07MESSAGE\x10\x06\x12\t\n\x05PRICE\x10\x07\x12\r\n\tPROMOTION\x10\x08\x12\x0c\n\x08SITELINK\x10\n\x12\x16\n\x12STRUCTURED_SNIPPET\x10\x0b\x12\x0c\n\x08LOCATION\x10\x0c\x12\x16\n\x12\x41\x46\x46ILIATE_LOCATION\x10\rB\xe7\x01\n!com.google.ads.googleads.v2.enumsB\x12\x45xtensionTypeProtoP\x01ZBgoogle.golang.org/genproto/googleapis/ads/googleads/v2/enums;enums\xa2\x02\x03GAA\xaa\x02\x1dGoogle.Ads.GoogleAds.V2.Enums\xca\x02\x1dGoogle\\Ads\\GoogleAds\\V2\\Enums\xea\x02!Google::Ads::GoogleAds::V2::Enumsb\x06proto3')
+  serialized_pb=_b('\n8google/ads/googleads_v2/proto/enums/extension_type.proto\x12\x1dgoogle.ads.googleads.v2.enums\x1a\x1cgoogle/api/annotations.proto\"\xf3\x01\n\x11\x45xtensionTypeEnum\"\xdd\x01\n\rExtensionType\x12\x0f\n\x0bUNSPECIFIED\x10\x00\x12\x0b\n\x07UNKNOWN\x10\x01\x12\x08\n\x04NONE\x10\x02\x12\x07\n\x03\x41PP\x10\x03\x12\x08\n\x04\x43\x41LL\x10\x04\x12\x0b\n\x07\x43\x41LLOUT\x10\x05\x12\x0b\n\x07MESSAGE\x10\x06\x12\t\n\x05PRICE\x10\x07\x12\r\n\tPROMOTION\x10\x08\x12\x0c\n\x08SITELINK\x10\n\x12\x16\n\x12STRUCTURED_SNIPPET\x10\x0b\x12\x0c\n\x08LOCATION\x10\x0c\x12\x16\n\x12\x41\x46\x46ILIATE_LOCATION\x10\r\x12\x11\n\rHOTEL_CALLOUT\x10\x0f\x42\xe7\x01\n!com.google.ads.googleads.v2.enumsB\x12\x45xtensionTypeProtoP\x01ZBgoogle.golang.org/genproto/googleapis/ads/googleads/v2/enums;enums\xa2\x02\x03GAA\xaa\x02\x1dGoogle.Ads.GoogleAds.V2.Enums\xca\x02\x1dGoogle\\Ads\\GoogleAds\\V2\\Enums\xea\x02!Google::Ads::GoogleAds::V2::Enumsb\x06proto3')
   ,
   dependencies=[google_dot_api_dot_annotations__pb2.DESCRIPTOR,])
 
@@ -85,11 +85,15 @@ _EXTENSIONTYPEENUM_EXTENSIONTYPE = _descriptor.EnumDescriptor(
       name='AFFILIATE_LOCATION', index=12, number=13,
       serialized_options=None,
       type=None),
+    _descriptor.EnumValueDescriptor(
+      name='HOTEL_CALLOUT', index=13, number=15,
+      serialized_options=None,
+      type=None),
   ],
   containing_type=None,
   serialized_options=None,
   serialized_start=144,
-  serialized_end=346,
+  serialized_end=365,
 )
 _sym_db.RegisterEnumDescriptor(_EXTENSIONTYPEENUM_EXTENSIONTYPE)
 
@@ -115,7 +119,7 @@ _EXTENSIONTYPEENUM = _descriptor.Descriptor(
   oneofs=[
   ],
   serialized_start=122,
-  serialized_end=346,
+  serialized_end=365,
 )
 
 _EXTENSIONTYPEENUM_EXTENSIONTYPE.containing_type = _EXTENSIONTYPEENUM

@@ -156,10 +156,12 @@ from google.ads.google_ads.v2.proto.enums import google_ads_field_category_pb2
 from google.ads.google_ads.v2.proto.enums import google_ads_field_data_type_pb2
 from google.ads.google_ads.v2.proto.enums import hotel_date_selection_type_pb2
 from google.ads.google_ads.v2.proto.enums import hotel_placeholder_field_pb2
+from google.ads.google_ads.v2.proto.enums import hotel_price_bucket_pb2
 from google.ads.google_ads.v2.proto.enums import hotel_rate_type_pb2
 from google.ads.google_ads.v2.proto.enums import income_range_type_pb2
 from google.ads.google_ads.v2.proto.enums import interaction_event_type_pb2
 from google.ads.google_ads.v2.proto.enums import interaction_type_pb2
+from google.ads.google_ads.v2.proto.enums import invoice_type_pb2
 from google.ads.google_ads.v2.proto.enums import job_placeholder_field_pb2
 from google.ads.google_ads.v2.proto.enums import keyword_match_type_pb2
 from google.ads.google_ads.v2.proto.enums import keyword_plan_competition_level_pb2
@@ -318,6 +320,7 @@ from google.ads.google_ads.v2.proto.errors import header_error_pb2
 from google.ads.google_ads.v2.proto.errors import id_error_pb2
 from google.ads.google_ads.v2.proto.errors import image_error_pb2
 from google.ads.google_ads.v2.proto.errors import internal_error_pb2
+from google.ads.google_ads.v2.proto.errors import invoice_error_pb2
 from google.ads.google_ads.v2.proto.errors import keyword_plan_ad_group_error_pb2
 from google.ads.google_ads.v2.proto.errors import keyword_plan_campaign_error_pb2
 from google.ads.google_ads.v2.proto.errors import keyword_plan_error_pb2
@@ -428,6 +431,7 @@ from google.ads.google_ads.v2.proto.resources import google_ads_field_pb2
 from google.ads.google_ads.v2.proto.resources import group_placement_view_pb2
 from google.ads.google_ads.v2.proto.resources import hotel_group_view_pb2
 from google.ads.google_ads.v2.proto.resources import hotel_performance_view_pb2
+from google.ads.google_ads.v2.proto.resources import invoice_pb2
 from google.ads.google_ads.v2.proto.resources import keyword_plan_ad_group_pb2
 from google.ads.google_ads.v2.proto.resources import keyword_plan_campaign_pb2
 from google.ads.google_ads.v2.proto.resources import keyword_plan_keyword_pb2
@@ -531,6 +535,7 @@ from google.ads.google_ads.v2.proto.services import google_ads_service_pb2
 from google.ads.google_ads.v2.proto.services import group_placement_view_service_pb2
 from google.ads.google_ads.v2.proto.services import hotel_group_view_service_pb2
 from google.ads.google_ads.v2.proto.services import hotel_performance_view_service_pb2
+from google.ads.google_ads.v2.proto.services import invoice_service_pb2
 from google.ads.google_ads.v2.proto.services import keyword_plan_ad_group_service_pb2
 from google.ads.google_ads.v2.proto.services import keyword_plan_campaign_service_pb2
 from google.ads.google_ads.v2.proto.services import keyword_plan_idea_service_pb2
@@ -712,10 +717,12 @@ _shared_modules = [
     google_ads_field_data_type_pb2,
     hotel_date_selection_type_pb2,
     hotel_placeholder_field_pb2,
+    hotel_price_bucket_pb2,
     hotel_rate_type_pb2,
     income_range_type_pb2,
     interaction_event_type_pb2,
     interaction_type_pb2,
+    invoice_type_pb2,
     job_placeholder_field_pb2,
     keyword_match_type_pb2,
     keyword_plan_competition_level_pb2,
@@ -874,6 +881,7 @@ _shared_modules = [
     id_error_pb2,
     image_error_pb2,
     internal_error_pb2,
+    invoice_error_pb2,
     keyword_plan_ad_group_error_pb2,
     keyword_plan_campaign_error_pb2,
     keyword_plan_error_pb2,
@@ -984,6 +992,7 @@ _shared_modules = [
     group_placement_view_pb2,
     hotel_group_view_pb2,
     hotel_performance_view_pb2,
+    invoice_pb2,
     keyword_plan_ad_group_pb2,
     keyword_plan_campaign_pb2,
     keyword_plan_keyword_pb2,
@@ -1096,6 +1105,7 @@ _local_modules = [
     group_placement_view_service_pb2,
     hotel_group_view_service_pb2,
     hotel_performance_view_service_pb2,
+    invoice_service_pb2,
     keyword_plan_ad_group_service_pb2,
     keyword_plan_campaign_service_pb2,
     keyword_plan_idea_service_pb2,

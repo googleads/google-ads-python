@@ -43,7 +43,7 @@ class MerchantCenterLinkServiceServicer(object):
   """
 
   def ListMerchantCenterLinks(self, request, context):
-    """Returns Merchant Center links available tor this customer.
+    """Returns Merchant Center links available for this customer.
     """
     context.set_code(grpc.StatusCode.UNIMPLEMENTED)
     context.set_details('Method not implemented!')

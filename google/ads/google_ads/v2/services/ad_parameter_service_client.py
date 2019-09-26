@@ -26,10 +26,59 @@ import google.api_core.gapic_v1.method
 import google.api_core.gapic_v1.routing_header
 import google.api_core.grpc_helpers
 import google.api_core.path_template
+import grpc
 
 from google.ads.google_ads.v2.services import ad_parameter_service_client_config
+from google.ads.google_ads.v2.services import enums
 from google.ads.google_ads.v2.services.transports import ad_parameter_service_grpc_transport
+from google.ads.google_ads.v2.proto.resources import account_budget_pb2
+from google.ads.google_ads.v2.proto.resources import account_budget_proposal_pb2
+from google.ads.google_ads.v2.proto.resources import ad_group_ad_asset_view_pb2
+from google.ads.google_ads.v2.proto.resources import ad_group_ad_label_pb2
+from google.ads.google_ads.v2.proto.resources import ad_group_ad_pb2
+from google.ads.google_ads.v2.proto.resources import ad_group_audience_view_pb2
+from google.ads.google_ads.v2.proto.resources import ad_group_bid_modifier_pb2
+from google.ads.google_ads.v2.proto.resources import ad_group_criterion_label_pb2
+from google.ads.google_ads.v2.proto.resources import ad_group_criterion_pb2
+from google.ads.google_ads.v2.proto.resources import ad_group_criterion_simulation_pb2
+from google.ads.google_ads.v2.proto.resources import ad_group_extension_setting_pb2
+from google.ads.google_ads.v2.proto.resources import ad_group_feed_pb2
+from google.ads.google_ads.v2.proto.resources import ad_group_label_pb2
+from google.ads.google_ads.v2.proto.resources import ad_group_pb2
+from google.ads.google_ads.v2.proto.resources import ad_group_simulation_pb2
+from google.ads.google_ads.v2.proto.resources import ad_parameter_pb2
+from google.ads.google_ads.v2.proto.services import account_budget_proposal_service_pb2
+from google.ads.google_ads.v2.proto.services import account_budget_proposal_service_pb2_grpc
+from google.ads.google_ads.v2.proto.services import account_budget_service_pb2
+from google.ads.google_ads.v2.proto.services import account_budget_service_pb2_grpc
+from google.ads.google_ads.v2.proto.services import ad_group_ad_asset_view_service_pb2
+from google.ads.google_ads.v2.proto.services import ad_group_ad_asset_view_service_pb2_grpc
+from google.ads.google_ads.v2.proto.services import ad_group_ad_label_service_pb2
+from google.ads.google_ads.v2.proto.services import ad_group_ad_label_service_pb2_grpc
+from google.ads.google_ads.v2.proto.services import ad_group_ad_service_pb2
+from google.ads.google_ads.v2.proto.services import ad_group_ad_service_pb2_grpc
+from google.ads.google_ads.v2.proto.services import ad_group_audience_view_service_pb2
+from google.ads.google_ads.v2.proto.services import ad_group_audience_view_service_pb2_grpc
+from google.ads.google_ads.v2.proto.services import ad_group_bid_modifier_service_pb2
+from google.ads.google_ads.v2.proto.services import ad_group_bid_modifier_service_pb2_grpc
+from google.ads.google_ads.v2.proto.services import ad_group_criterion_label_service_pb2
+from google.ads.google_ads.v2.proto.services import ad_group_criterion_label_service_pb2_grpc
+from google.ads.google_ads.v2.proto.services import ad_group_criterion_service_pb2
+from google.ads.google_ads.v2.proto.services import ad_group_criterion_service_pb2_grpc
+from google.ads.google_ads.v2.proto.services import ad_group_criterion_simulation_service_pb2
+from google.ads.google_ads.v2.proto.services import ad_group_criterion_simulation_service_pb2_grpc
+from google.ads.google_ads.v2.proto.services import ad_group_extension_setting_service_pb2
+from google.ads.google_ads.v2.proto.services import ad_group_extension_setting_service_pb2_grpc
+from google.ads.google_ads.v2.proto.services import ad_group_feed_service_pb2
+from google.ads.google_ads.v2.proto.services import ad_group_feed_service_pb2_grpc
+from google.ads.google_ads.v2.proto.services import ad_group_label_service_pb2
+from google.ads.google_ads.v2.proto.services import ad_group_label_service_pb2_grpc
+from google.ads.google_ads.v2.proto.services import ad_group_service_pb2
+from google.ads.google_ads.v2.proto.services import ad_group_service_pb2_grpc
+from google.ads.google_ads.v2.proto.services import ad_group_simulation_service_pb2
+from google.ads.google_ads.v2.proto.services import ad_group_simulation_service_pb2_grpc
 from google.ads.google_ads.v2.proto.services import ad_parameter_service_pb2
+from google.ads.google_ads.v2.proto.services import ad_parameter_service_pb2_grpc
 
 
 

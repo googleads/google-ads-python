@@ -87,6 +87,7 @@ from google.ads.google_ads.v2.services import google_ads_service_client
 from google.ads.google_ads.v2.services import group_placement_view_service_client
 from google.ads.google_ads.v2.services import hotel_group_view_service_client
 from google.ads.google_ads.v2.services import hotel_performance_view_service_client
+from google.ads.google_ads.v2.services import invoice_service_client
 from google.ads.google_ads.v2.services import keyword_plan_ad_group_service_client
 from google.ads.google_ads.v2.services import keyword_plan_campaign_service_client
 from google.ads.google_ads.v2.services import keyword_plan_idea_service_client
@@ -192,6 +193,7 @@ from google.ads.google_ads.v2.services.transports import google_ads_service_grpc
 from google.ads.google_ads.v2.services.transports import group_placement_view_service_grpc_transport
 from google.ads.google_ads.v2.services.transports import hotel_group_view_service_grpc_transport
 from google.ads.google_ads.v2.services.transports import hotel_performance_view_service_grpc_transport
+from google.ads.google_ads.v2.services.transports import invoice_service_grpc_transport
 from google.ads.google_ads.v2.services.transports import keyword_plan_ad_group_service_grpc_transport
 from google.ads.google_ads.v2.services.transports import keyword_plan_campaign_service_grpc_transport
 from google.ads.google_ads.v2.services.transports import keyword_plan_idea_service_grpc_transport
@@ -641,6 +643,12 @@ class HotelGroupViewServiceClient(
 class HotelPerformanceViewServiceClient(
     hotel_performance_view_service_client.HotelPerformanceViewServiceClient):
     __doc__ = hotel_performance_view_service_client.HotelPerformanceViewServiceClient.__doc__
+    enums = enums
+
+
+class InvoiceServiceClient(
+    invoice_service_client.InvoiceServiceClient):
+    __doc__ = invoice_service_client.InvoiceServiceClient.__doc__
     enums = enums
 
 
@@ -1205,6 +1213,11 @@ class HotelPerformanceViewServiceGrpcTransport(
     __doc__ = hotel_performance_view_service_grpc_transport.HotelPerformanceViewServiceGrpcTransport.__doc__
 
 
+class InvoiceServiceGrpcTransport(
+    invoice_service_grpc_transport.InvoiceServiceGrpcTransport):
+    __doc__ = invoice_service_grpc_transport.InvoiceServiceGrpcTransport.__doc__
+
+
 class KeywordPlanAdGroupServiceGrpcTransport(
     keyword_plan_ad_group_service_grpc_transport.KeywordPlanAdGroupServiceGrpcTransport):
     __doc__ = keyword_plan_ad_group_service_grpc_transport.KeywordPlanAdGroupServiceGrpcTransport.__doc__
@@ -1457,6 +1470,7 @@ __all__ = (
     'GroupPlacementViewServiceClient',
     'HotelGroupViewServiceClient',
     'HotelPerformanceViewServiceClient',
+    'InvoiceServiceClient',
     'KeywordPlanAdGroupServiceClient',
     'KeywordPlanCampaignServiceClient',
     'KeywordPlanIdeaServiceClient',
@@ -1562,6 +1576,7 @@ __all__ = (
     'GroupPlacementViewServiceGrpcTransport',
     'HotelGroupViewServiceGrpcTransport',
     'HotelPerformanceViewServiceGrpcTransport',
+    'InvoiceServiceGrpcTransport',
     'KeywordPlanAdGroupServiceGrpcTransport',
     'KeywordPlanCampaignServiceGrpcTransport',
     'KeywordPlanIdeaServiceGrpcTransport',

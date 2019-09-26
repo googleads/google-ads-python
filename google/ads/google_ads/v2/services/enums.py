@@ -4768,6 +4768,7 @@ class ExtensionTypeEnum(object):
           STRUCTURED_SNIPPET (int): Structured snippet.
           LOCATION (int): Location.
           AFFILIATE_LOCATION (int): Affiliate location.
+          HOTEL_CALLOUT (int): Hotel callout
         """
         UNSPECIFIED = 0
         UNKNOWN = 1
@@ -4782,6 +4783,7 @@ class ExtensionTypeEnum(object):
         STRUCTURED_SNIPPET = 11
         LOCATION = 12
         AFFILIATE_LOCATION = 13
+        HOTEL_CALLOUT = 15
 
 
 class ExternalConversionSourceEnum(object):
@@ -6088,6 +6090,25 @@ class HotelPlaceholderFieldEnum(object):
         IOS_APP_STORE_ID = 21
 
 
+class HotelPriceBucketEnum(object):
+    class HotelPriceBucket(enum.IntEnum):
+        """
+        Enum describing possible hotel price buckets.
+
+        Attributes:
+          UNSPECIFIED (int): Not specified.
+          UNKNOWN (int): The value is unknown in this version.
+          LOWEST_TIED (int): Tied for lowest price. Partner is within a small variance of the lowest
+          price.
+          NOT_LOWEST (int): Not lowest price. Partner is not within a small variance of the lowest
+          price.
+        """
+        UNSPECIFIED = 0
+        UNKNOWN = 1
+        LOWEST_TIED = 3
+        NOT_LOWEST = 4
+
+
 class HotelRateTypeEnum(object):
     class HotelRateType(enum.IntEnum):
         """
@@ -6306,6 +6327,40 @@ class InternalErrorEnum(object):
         INTERNAL_ERROR = 2
         ERROR_CODE_NOT_PUBLISHED = 3
         TRANSIENT_ERROR = 4
+
+
+class InvoiceErrorEnum(object):
+    class InvoiceError(enum.IntEnum):
+        """
+        Enum describing possible invoice errors.
+
+        Attributes:
+          UNSPECIFIED (int): Enum unspecified.
+          UNKNOWN (int): The received error code is not known in this version.
+          YEAR_MONTH_TOO_OLD (int): Cannot request invoices issued before 2019-01-01.
+          NOT_INVOICED_CUSTOMER (int): Cannot request invoices for customer who doesn't receive invoices.
+        """
+        UNSPECIFIED = 0
+        UNKNOWN = 1
+        YEAR_MONTH_TOO_OLD = 2
+        NOT_INVOICED_CUSTOMER = 3
+
+
+class InvoiceTypeEnum(object):
+    class InvoiceType(enum.IntEnum):
+        """
+        The possible type of invoices.
+
+        Attributes:
+          UNSPECIFIED (int): Not specified.
+          UNKNOWN (int): Used for return value only. Represents value unknown in this version.
+          CREDIT_MEMO (int): An invoice with a negative amount. The account receives a credit.
+          INVOICE (int): An invoice with a positive amount. The account owes a balance.
+        """
+        UNSPECIFIED = 0
+        UNKNOWN = 1
+        CREDIT_MEMO = 2
+        INVOICE = 3
 
 
 class JobPlaceholderFieldEnum(object):

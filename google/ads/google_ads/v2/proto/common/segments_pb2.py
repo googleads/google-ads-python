@@ -24,6 +24,7 @@ from google.ads.google_ads.v2.proto.enums import day_of_week_pb2 as google_dot_a
 from google.ads.google_ads.v2.proto.enums import device_pb2 as google_dot_ads_dot_googleads__v2_dot_proto_dot_enums_dot_device__pb2
 from google.ads.google_ads.v2.proto.enums import external_conversion_source_pb2 as google_dot_ads_dot_googleads__v2_dot_proto_dot_enums_dot_external__conversion__source__pb2
 from google.ads.google_ads.v2.proto.enums import hotel_date_selection_type_pb2 as google_dot_ads_dot_googleads__v2_dot_proto_dot_enums_dot_hotel__date__selection__type__pb2
+from google.ads.google_ads.v2.proto.enums import hotel_price_bucket_pb2 as google_dot_ads_dot_googleads__v2_dot_proto_dot_enums_dot_hotel__price__bucket__pb2
 from google.ads.google_ads.v2.proto.enums import hotel_rate_type_pb2 as google_dot_ads_dot_googleads__v2_dot_proto_dot_enums_dot_hotel__rate__type__pb2
 from google.ads.google_ads.v2.proto.enums import month_of_year_pb2 as google_dot_ads_dot_googleads__v2_dot_proto_dot_enums_dot_month__of__year__pb2
 from google.ads.google_ads.v2.proto.enums import placeholder_type_pb2 as google_dot_ads_dot_googleads__v2_dot_proto_dot_enums_dot_placeholder__type__pb2
@@ -42,9 +43,9 @@ DESCRIPTOR = _descriptor.FileDescriptor(
   package='google.ads.googleads.v2.common',
   syntax='proto3',
   serialized_options=_b('\n\"com.google.ads.googleads.v2.commonB\rSegmentsProtoP\001ZDgoogle.golang.org/genproto/googleapis/ads/googleads/v2/common;common\242\002\003GAA\252\002\036Google.Ads.GoogleAds.V2.Common\312\002\036Google\\Ads\\GoogleAds\\V2\\Common\352\002\"Google::Ads::GoogleAds::V2::Common'),
-  serialized_pb=_b('\n3google/ads/googleads_v2/proto/common/segments.proto\x12\x1egoogle.ads.googleads.v2.common\x1a\x33google/ads/googleads_v2/proto/common/criteria.proto\x1a\x39google/ads/googleads_v2/proto/enums/ad_network_type.proto\x1a\x34google/ads/googleads_v2/proto/enums/click_type.proto\x1a\x44google/ads/googleads_v2/proto/enums/conversion_action_category.proto\x1aKgoogle/ads/googleads_v2/proto/enums/conversion_attribution_event_type.proto\x1a?google/ads/googleads_v2/proto/enums/conversion_lag_bucket.proto\x1aMgoogle/ads/googleads_v2/proto/enums/conversion_or_adjustment_lag_bucket.proto\x1a\x35google/ads/googleads_v2/proto/enums/day_of_week.proto\x1a\x30google/ads/googleads_v2/proto/enums/device.proto\x1a\x44google/ads/googleads_v2/proto/enums/external_conversion_source.proto\x1a\x43google/ads/googleads_v2/proto/enums/hotel_date_selection_type.proto\x1a\x39google/ads/googleads_v2/proto/enums/hotel_rate_type.proto\x1a\x37google/ads/googleads_v2/proto/enums/month_of_year.proto\x1a:google/ads/googleads_v2/proto/enums/placeholder_type.proto\x1a\x39google/ads/googleads_v2/proto/enums/product_channel.proto\x1a\x45google/ads/googleads_v2/proto/enums/product_channel_exclusivity.proto\x1a;google/ads/googleads_v2/proto/enums/product_condition.proto\x1aIgoogle/ads/googleads_v2/proto/enums/search_engine_results_page_type.proto\x1a@google/ads/googleads_v2/proto/enums/search_term_match_type.proto\x1a.google/ads/googleads_v2/proto/enums/slot.proto\x1a\x1egoogle/protobuf/wrappers.proto\x1a\x1cgoogle/api/annotations.proto\"\xcf)\n\x08Segments\x12W\n\x0f\x61\x64_network_type\x18\x03 \x01(\x0e\x32>.google.ads.googleads.v2.enums.AdNetworkTypeEnum.AdNetworkType\x12J\n\nclick_type\x18\x1a \x01(\x0e\x32\x36.google.ads.googleads.v2.enums.ClickTypeEnum.ClickType\x12\x37\n\x11\x63onversion_action\x18\x34 \x01(\x0b\x32\x1c.google.protobuf.StringValue\x12x\n\x1a\x63onversion_action_category\x18\x35 \x01(\x0e\x32T.google.ads.googleads.v2.enums.ConversionActionCategoryEnum.ConversionActionCategory\x12<\n\x16\x63onversion_action_name\x18\x36 \x01(\x0b\x32\x1c.google.protobuf.StringValue\x12\x39\n\x15\x63onversion_adjustment\x18\x1b \x01(\x0b\x32\x1a.google.protobuf.BoolValue\x12\x8b\x01\n!conversion_attribution_event_type\x18\x02 \x01(\x0e\x32`.google.ads.googleads.v2.enums.ConversionAttributionEventTypeEnum.ConversionAttributionEventType\x12i\n\x15\x63onversion_lag_bucket\x18\x32 \x01(\x0e\x32J.google.ads.googleads.v2.enums.ConversionLagBucketEnum.ConversionLagBucket\x12\x8f\x01\n#conversion_or_adjustment_lag_bucket\x18\x33 \x01(\x0e\x32\x62.google.ads.googleads.v2.enums.ConversionOrAdjustmentLagBucketEnum.ConversionOrAdjustmentLagBucket\x12*\n\x04\x64\x61te\x18\x04 \x01(\x0b\x32\x1c.google.protobuf.StringValue\x12K\n\x0b\x64\x61y_of_week\x18\x05 \x01(\x0e\x32\x36.google.ads.googleads.v2.enums.DayOfWeekEnum.DayOfWeek\x12@\n\x06\x64\x65vice\x18\x01 \x01(\x0e\x32\x30.google.ads.googleads.v2.enums.DeviceEnum.Device\x12x\n\x1a\x65xternal_conversion_source\x18\x37 \x01(\x0e\x32T.google.ads.googleads.v2.enums.ExternalConversionSourceEnum.ExternalConversionSource\x12\x38\n\x12geo_target_airport\x18\x41 \x01(\x0b\x32\x1c.google.protobuf.StringValue\x12\x37\n\x11geo_target_canton\x18L \x01(\x0b\x32\x1c.google.protobuf.StringValue\x12\x35\n\x0fgeo_target_city\x18> \x01(\x0b\x32\x1c.google.protobuf.StringValue\x12\x38\n\x12geo_target_country\x18M \x01(\x0b\x32\x1c.google.protobuf.StringValue\x12\x37\n\x11geo_target_county\x18\x44 \x01(\x0b\x32\x1c.google.protobuf.StringValue\x12\x39\n\x13geo_target_district\x18\x45 \x01(\x0b\x32\x1c.google.protobuf.StringValue\x12\x36\n\x10geo_target_metro\x18? \x01(\x0b\x32\x1c.google.protobuf.StringValue\x12G\n!geo_target_most_specific_location\x18H \x01(\x0b\x32\x1c.google.protobuf.StringValue\x12<\n\x16geo_target_postal_code\x18G \x01(\x0b\x32\x1c.google.protobuf.StringValue\x12\x39\n\x13geo_target_province\x18K \x01(\x0b\x32\x1c.google.protobuf.StringValue\x12\x37\n\x11geo_target_region\x18@ \x01(\x0b\x32\x1c.google.protobuf.StringValue\x12\x36\n\x10geo_target_state\x18\x43 \x01(\x0b\x32\x1c.google.protobuf.StringValue\x12>\n\x19hotel_booking_window_days\x18\x06 \x01(\x0b\x32\x1b.google.protobuf.Int64Value\x12\x34\n\x0fhotel_center_id\x18\x07 \x01(\x0b\x32\x1b.google.protobuf.Int64Value\x12\x39\n\x13hotel_check_in_date\x18\x08 \x01(\x0b\x32\x1c.google.protobuf.StringValue\x12Z\n\x1ahotel_check_in_day_of_week\x18\t \x01(\x0e\x32\x36.google.ads.googleads.v2.enums.DayOfWeekEnum.DayOfWeek\x12\x30\n\nhotel_city\x18\n \x01(\x0b\x32\x1c.google.protobuf.StringValue\x12\x30\n\x0bhotel_class\x18\x0b \x01(\x0b\x32\x1b.google.protobuf.Int32Value\x12\x33\n\rhotel_country\x18\x0c \x01(\x0b\x32\x1c.google.protobuf.StringValue\x12s\n\x19hotel_date_selection_type\x18\r \x01(\x0e\x32P.google.ads.googleads.v2.enums.HotelDateSelectionTypeEnum.HotelDateSelectionType\x12\x39\n\x14hotel_length_of_stay\x18\x0e \x01(\x0b\x32\x1b.google.protobuf.Int32Value\x12\x38\n\x12hotel_rate_rule_id\x18I \x01(\x0b\x32\x1c.google.protobuf.StringValue\x12W\n\x0fhotel_rate_type\x18J \x01(\x0e\x32>.google.ads.googleads.v2.enums.HotelRateTypeEnum.HotelRateType\x12\x31\n\x0bhotel_state\x18\x0f \x01(\x0b\x32\x1c.google.protobuf.StringValue\x12)\n\x04hour\x18\x10 \x01(\x0b\x32\x1b.google.protobuf.Int32Value\x12\x41\n\x1dinteraction_on_this_extension\x18\x31 \x01(\x0b\x32\x1a.google.protobuf.BoolValue\x12\x38\n\x07keyword\x18= \x01(\x0b\x32\'.google.ads.googleads.v2.common.Keyword\x12+\n\x05month\x18\x11 \x01(\x0b\x32\x1c.google.protobuf.StringValue\x12Q\n\rmonth_of_year\x18\x12 \x01(\x0e\x32:.google.ads.googleads.v2.enums.MonthOfYearEnum.MonthOfYear\x12\x36\n\x10partner_hotel_id\x18\x13 \x01(\x0b\x32\x1c.google.protobuf.StringValue\x12\\\n\x10placeholder_type\x18\x14 \x01(\x0e\x32\x42.google.ads.googleads.v2.enums.PlaceholderTypeEnum.PlaceholderType\x12;\n\x15product_aggregator_id\x18\x1c \x01(\x0b\x32\x1c.google.protobuf.UInt64Value\x12\x45\n\x1fproduct_bidding_category_level1\x18\x38 \x01(\x0b\x32\x1c.google.protobuf.StringValue\x12\x45\n\x1fproduct_bidding_category_level2\x18\x39 \x01(\x0b\x32\x1c.google.protobuf.StringValue\x12\x45\n\x1fproduct_bidding_category_level3\x18: \x01(\x0b\x32\x1c.google.protobuf.StringValue\x12\x45\n\x1fproduct_bidding_category_level4\x18; \x01(\x0b\x32\x1c.google.protobuf.StringValue\x12\x45\n\x1fproduct_bidding_category_level5\x18< \x01(\x0b\x32\x1c.google.protobuf.StringValue\x12\x33\n\rproduct_brand\x18\x1d \x01(\x0b\x32\x1c.google.protobuf.StringValue\x12Y\n\x0fproduct_channel\x18\x1e \x01(\x0e\x32@.google.ads.googleads.v2.enums.ProductChannelEnum.ProductChannel\x12{\n\x1bproduct_channel_exclusivity\x18\x1f \x01(\x0e\x32V.google.ads.googleads.v2.enums.ProductChannelExclusivityEnum.ProductChannelExclusivity\x12_\n\x11product_condition\x18  \x01(\x0e\x32\x44.google.ads.googleads.v2.enums.ProductConditionEnum.ProductCondition\x12\x35\n\x0fproduct_country\x18! \x01(\x0b\x32\x1c.google.protobuf.StringValue\x12?\n\x19product_custom_attribute0\x18\" \x01(\x0b\x32\x1c.google.protobuf.StringValue\x12?\n\x19product_custom_attribute1\x18# \x01(\x0b\x32\x1c.google.protobuf.StringValue\x12?\n\x19product_custom_attribute2\x18$ \x01(\x0b\x32\x1c.google.protobuf.StringValue\x12?\n\x19product_custom_attribute3\x18% \x01(\x0b\x32\x1c.google.protobuf.StringValue\x12?\n\x19product_custom_attribute4\x18& \x01(\x0b\x32\x1c.google.protobuf.StringValue\x12\x35\n\x0fproduct_item_id\x18\' \x01(\x0b\x32\x1c.google.protobuf.StringValue\x12\x36\n\x10product_language\x18( \x01(\x0b\x32\x1c.google.protobuf.StringValue\x12\x39\n\x13product_merchant_id\x18) \x01(\x0b\x32\x1c.google.protobuf.UInt64Value\x12\x36\n\x10product_store_id\x18* \x01(\x0b\x32\x1c.google.protobuf.StringValue\x12\x33\n\rproduct_title\x18+ \x01(\x0b\x32\x1c.google.protobuf.StringValue\x12\x35\n\x0fproduct_type_l1\x18, \x01(\x0b\x32\x1c.google.protobuf.StringValue\x12\x35\n\x0fproduct_type_l2\x18- \x01(\x0b\x32\x1c.google.protobuf.StringValue\x12\x35\n\x0fproduct_type_l3\x18. \x01(\x0b\x32\x1c.google.protobuf.StringValue\x12\x35\n\x0fproduct_type_l4\x18/ \x01(\x0b\x32\x1c.google.protobuf.StringValue\x12\x35\n\x0fproduct_type_l5\x18\x30 \x01(\x0b\x32\x1c.google.protobuf.StringValue\x12-\n\x07quarter\x18\x15 \x01(\x0b\x32\x1c.google.protobuf.StringValue\x12\x83\x01\n\x1fsearch_engine_results_page_type\x18\x46 \x01(\x0e\x32Z.google.ads.googleads.v2.enums.SearchEngineResultsPageTypeEnum.SearchEngineResultsPageType\x12j\n\x16search_term_match_type\x18\x16 \x01(\x0e\x32J.google.ads.googleads.v2.enums.SearchTermMatchTypeEnum.SearchTermMatchType\x12:\n\x04slot\x18\x17 \x01(\x0e\x32,.google.ads.googleads.v2.enums.SlotEnum.Slot\x12-\n\x07webpage\x18\x42 \x01(\x0b\x32\x1c.google.protobuf.StringValue\x12*\n\x04week\x18\x18 \x01(\x0b\x32\x1c.google.protobuf.StringValue\x12)\n\x04year\x18\x19 \x01(\x0b\x32\x1b.google.protobuf.Int32Value\"~\n\x07Keyword\x12\x38\n\x12\x61\x64_group_criterion\x18\x01 \x01(\x0b\x32\x1c.google.protobuf.StringValue\x12\x39\n\x04info\x18\x02 \x01(\x0b\x32+.google.ads.googleads.v2.common.KeywordInfoB\xe8\x01\n\"com.google.ads.googleads.v2.commonB\rSegmentsProtoP\x01ZDgoogle.golang.org/genproto/googleapis/ads/googleads/v2/common;common\xa2\x02\x03GAA\xaa\x02\x1eGoogle.Ads.GoogleAds.V2.Common\xca\x02\x1eGoogle\\Ads\\GoogleAds\\V2\\Common\xea\x02\"Google::Ads::GoogleAds::V2::Commonb\x06proto3')
+  serialized_pb=_b('\n3google/ads/googleads_v2/proto/common/segments.proto\x12\x1egoogle.ads.googleads.v2.common\x1a\x33google/ads/googleads_v2/proto/common/criteria.proto\x1a\x39google/ads/googleads_v2/proto/enums/ad_network_type.proto\x1a\x34google/ads/googleads_v2/proto/enums/click_type.proto\x1a\x44google/ads/googleads_v2/proto/enums/conversion_action_category.proto\x1aKgoogle/ads/googleads_v2/proto/enums/conversion_attribution_event_type.proto\x1a?google/ads/googleads_v2/proto/enums/conversion_lag_bucket.proto\x1aMgoogle/ads/googleads_v2/proto/enums/conversion_or_adjustment_lag_bucket.proto\x1a\x35google/ads/googleads_v2/proto/enums/day_of_week.proto\x1a\x30google/ads/googleads_v2/proto/enums/device.proto\x1a\x44google/ads/googleads_v2/proto/enums/external_conversion_source.proto\x1a\x43google/ads/googleads_v2/proto/enums/hotel_date_selection_type.proto\x1a<google/ads/googleads_v2/proto/enums/hotel_price_bucket.proto\x1a\x39google/ads/googleads_v2/proto/enums/hotel_rate_type.proto\x1a\x37google/ads/googleads_v2/proto/enums/month_of_year.proto\x1a:google/ads/googleads_v2/proto/enums/placeholder_type.proto\x1a\x39google/ads/googleads_v2/proto/enums/product_channel.proto\x1a\x45google/ads/googleads_v2/proto/enums/product_channel_exclusivity.proto\x1a;google/ads/googleads_v2/proto/enums/product_condition.proto\x1aIgoogle/ads/googleads_v2/proto/enums/search_engine_results_page_type.proto\x1a@google/ads/googleads_v2/proto/enums/search_term_match_type.proto\x1a.google/ads/googleads_v2/proto/enums/slot.proto\x1a\x1egoogle/protobuf/wrappers.proto\x1a\x1cgoogle/api/annotations.proto\"\xb1*\n\x08Segments\x12W\n\x0f\x61\x64_network_type\x18\x03 \x01(\x0e\x32>.google.ads.googleads.v2.enums.AdNetworkTypeEnum.AdNetworkType\x12J\n\nclick_type\x18\x1a \x01(\x0e\x32\x36.google.ads.googleads.v2.enums.ClickTypeEnum.ClickType\x12\x37\n\x11\x63onversion_action\x18\x34 \x01(\x0b\x32\x1c.google.protobuf.StringValue\x12x\n\x1a\x63onversion_action_category\x18\x35 \x01(\x0e\x32T.google.ads.googleads.v2.enums.ConversionActionCategoryEnum.ConversionActionCategory\x12<\n\x16\x63onversion_action_name\x18\x36 \x01(\x0b\x32\x1c.google.protobuf.StringValue\x12\x39\n\x15\x63onversion_adjustment\x18\x1b \x01(\x0b\x32\x1a.google.protobuf.BoolValue\x12\x8b\x01\n!conversion_attribution_event_type\x18\x02 \x01(\x0e\x32`.google.ads.googleads.v2.enums.ConversionAttributionEventTypeEnum.ConversionAttributionEventType\x12i\n\x15\x63onversion_lag_bucket\x18\x32 \x01(\x0e\x32J.google.ads.googleads.v2.enums.ConversionLagBucketEnum.ConversionLagBucket\x12\x8f\x01\n#conversion_or_adjustment_lag_bucket\x18\x33 \x01(\x0e\x32\x62.google.ads.googleads.v2.enums.ConversionOrAdjustmentLagBucketEnum.ConversionOrAdjustmentLagBucket\x12*\n\x04\x64\x61te\x18\x04 \x01(\x0b\x32\x1c.google.protobuf.StringValue\x12K\n\x0b\x64\x61y_of_week\x18\x05 \x01(\x0e\x32\x36.google.ads.googleads.v2.enums.DayOfWeekEnum.DayOfWeek\x12@\n\x06\x64\x65vice\x18\x01 \x01(\x0e\x32\x30.google.ads.googleads.v2.enums.DeviceEnum.Device\x12x\n\x1a\x65xternal_conversion_source\x18\x37 \x01(\x0e\x32T.google.ads.googleads.v2.enums.ExternalConversionSourceEnum.ExternalConversionSource\x12\x38\n\x12geo_target_airport\x18\x41 \x01(\x0b\x32\x1c.google.protobuf.StringValue\x12\x37\n\x11geo_target_canton\x18L \x01(\x0b\x32\x1c.google.protobuf.StringValue\x12\x35\n\x0fgeo_target_city\x18> \x01(\x0b\x32\x1c.google.protobuf.StringValue\x12\x38\n\x12geo_target_country\x18M \x01(\x0b\x32\x1c.google.protobuf.StringValue\x12\x37\n\x11geo_target_county\x18\x44 \x01(\x0b\x32\x1c.google.protobuf.StringValue\x12\x39\n\x13geo_target_district\x18\x45 \x01(\x0b\x32\x1c.google.protobuf.StringValue\x12\x36\n\x10geo_target_metro\x18? \x01(\x0b\x32\x1c.google.protobuf.StringValue\x12G\n!geo_target_most_specific_location\x18H \x01(\x0b\x32\x1c.google.protobuf.StringValue\x12<\n\x16geo_target_postal_code\x18G \x01(\x0b\x32\x1c.google.protobuf.StringValue\x12\x39\n\x13geo_target_province\x18K \x01(\x0b\x32\x1c.google.protobuf.StringValue\x12\x37\n\x11geo_target_region\x18@ \x01(\x0b\x32\x1c.google.protobuf.StringValue\x12\x36\n\x10geo_target_state\x18\x43 \x01(\x0b\x32\x1c.google.protobuf.StringValue\x12>\n\x19hotel_booking_window_days\x18\x06 \x01(\x0b\x32\x1b.google.protobuf.Int64Value\x12\x34\n\x0fhotel_center_id\x18\x07 \x01(\x0b\x32\x1b.google.protobuf.Int64Value\x12\x39\n\x13hotel_check_in_date\x18\x08 \x01(\x0b\x32\x1c.google.protobuf.StringValue\x12Z\n\x1ahotel_check_in_day_of_week\x18\t \x01(\x0e\x32\x36.google.ads.googleads.v2.enums.DayOfWeekEnum.DayOfWeek\x12\x30\n\nhotel_city\x18\n \x01(\x0b\x32\x1c.google.protobuf.StringValue\x12\x30\n\x0bhotel_class\x18\x0b \x01(\x0b\x32\x1b.google.protobuf.Int32Value\x12\x33\n\rhotel_country\x18\x0c \x01(\x0b\x32\x1c.google.protobuf.StringValue\x12s\n\x19hotel_date_selection_type\x18\r \x01(\x0e\x32P.google.ads.googleads.v2.enums.HotelDateSelectionTypeEnum.HotelDateSelectionType\x12\x39\n\x14hotel_length_of_stay\x18\x0e \x01(\x0b\x32\x1b.google.protobuf.Int32Value\x12\x38\n\x12hotel_rate_rule_id\x18I \x01(\x0b\x32\x1c.google.protobuf.StringValue\x12W\n\x0fhotel_rate_type\x18J \x01(\x0e\x32>.google.ads.googleads.v2.enums.HotelRateTypeEnum.HotelRateType\x12`\n\x12hotel_price_bucket\x18N \x01(\x0e\x32\x44.google.ads.googleads.v2.enums.HotelPriceBucketEnum.HotelPriceBucket\x12\x31\n\x0bhotel_state\x18\x0f \x01(\x0b\x32\x1c.google.protobuf.StringValue\x12)\n\x04hour\x18\x10 \x01(\x0b\x32\x1b.google.protobuf.Int32Value\x12\x41\n\x1dinteraction_on_this_extension\x18\x31 \x01(\x0b\x32\x1a.google.protobuf.BoolValue\x12\x38\n\x07keyword\x18= \x01(\x0b\x32\'.google.ads.googleads.v2.common.Keyword\x12+\n\x05month\x18\x11 \x01(\x0b\x32\x1c.google.protobuf.StringValue\x12Q\n\rmonth_of_year\x18\x12 \x01(\x0e\x32:.google.ads.googleads.v2.enums.MonthOfYearEnum.MonthOfYear\x12\x36\n\x10partner_hotel_id\x18\x13 \x01(\x0b\x32\x1c.google.protobuf.StringValue\x12\\\n\x10placeholder_type\x18\x14 \x01(\x0e\x32\x42.google.ads.googleads.v2.enums.PlaceholderTypeEnum.PlaceholderType\x12;\n\x15product_aggregator_id\x18\x1c \x01(\x0b\x32\x1c.google.protobuf.UInt64Value\x12\x45\n\x1fproduct_bidding_category_level1\x18\x38 \x01(\x0b\x32\x1c.google.protobuf.StringValue\x12\x45\n\x1fproduct_bidding_category_level2\x18\x39 \x01(\x0b\x32\x1c.google.protobuf.StringValue\x12\x45\n\x1fproduct_bidding_category_level3\x18: \x01(\x0b\x32\x1c.google.protobuf.StringValue\x12\x45\n\x1fproduct_bidding_category_level4\x18; \x01(\x0b\x32\x1c.google.protobuf.StringValue\x12\x45\n\x1fproduct_bidding_category_level5\x18< \x01(\x0b\x32\x1c.google.protobuf.StringValue\x12\x33\n\rproduct_brand\x18\x1d \x01(\x0b\x32\x1c.google.protobuf.StringValue\x12Y\n\x0fproduct_channel\x18\x1e \x01(\x0e\x32@.google.ads.googleads.v2.enums.ProductChannelEnum.ProductChannel\x12{\n\x1bproduct_channel_exclusivity\x18\x1f \x01(\x0e\x32V.google.ads.googleads.v2.enums.ProductChannelExclusivityEnum.ProductChannelExclusivity\x12_\n\x11product_condition\x18  \x01(\x0e\x32\x44.google.ads.googleads.v2.enums.ProductConditionEnum.ProductCondition\x12\x35\n\x0fproduct_country\x18! \x01(\x0b\x32\x1c.google.protobuf.StringValue\x12?\n\x19product_custom_attribute0\x18\" \x01(\x0b\x32\x1c.google.protobuf.StringValue\x12?\n\x19product_custom_attribute1\x18# \x01(\x0b\x32\x1c.google.protobuf.StringValue\x12?\n\x19product_custom_attribute2\x18$ \x01(\x0b\x32\x1c.google.protobuf.StringValue\x12?\n\x19product_custom_attribute3\x18% \x01(\x0b\x32\x1c.google.protobuf.StringValue\x12?\n\x19product_custom_attribute4\x18& \x01(\x0b\x32\x1c.google.protobuf.StringValue\x12\x35\n\x0fproduct_item_id\x18\' \x01(\x0b\x32\x1c.google.protobuf.StringValue\x12\x36\n\x10product_language\x18( \x01(\x0b\x32\x1c.google.protobuf.StringValue\x12\x39\n\x13product_merchant_id\x18) \x01(\x0b\x32\x1c.google.protobuf.UInt64Value\x12\x36\n\x10product_store_id\x18* \x01(\x0b\x32\x1c.google.protobuf.StringValue\x12\x33\n\rproduct_title\x18+ \x01(\x0b\x32\x1c.google.protobuf.StringValue\x12\x35\n\x0fproduct_type_l1\x18, \x01(\x0b\x32\x1c.google.protobuf.StringValue\x12\x35\n\x0fproduct_type_l2\x18- \x01(\x0b\x32\x1c.google.protobuf.StringValue\x12\x35\n\x0fproduct_type_l3\x18. \x01(\x0b\x32\x1c.google.protobuf.StringValue\x12\x35\n\x0fproduct_type_l4\x18/ \x01(\x0b\x32\x1c.google.protobuf.StringValue\x12\x35\n\x0fproduct_type_l5\x18\x30 \x01(\x0b\x32\x1c.google.protobuf.StringValue\x12-\n\x07quarter\x18\x15 \x01(\x0b\x32\x1c.google.protobuf.StringValue\x12\x83\x01\n\x1fsearch_engine_results_page_type\x18\x46 \x01(\x0e\x32Z.google.ads.googleads.v2.enums.SearchEngineResultsPageTypeEnum.SearchEngineResultsPageType\x12j\n\x16search_term_match_type\x18\x16 \x01(\x0e\x32J.google.ads.googleads.v2.enums.SearchTermMatchTypeEnum.SearchTermMatchType\x12:\n\x04slot\x18\x17 \x01(\x0e\x32,.google.ads.googleads.v2.enums.SlotEnum.Slot\x12-\n\x07webpage\x18\x42 \x01(\x0b\x32\x1c.google.protobuf.StringValue\x12*\n\x04week\x18\x18 \x01(\x0b\x32\x1c.google.protobuf.StringValue\x12)\n\x04year\x18\x19 \x01(\x0b\x32\x1b.google.protobuf.Int32Value\"~\n\x07Keyword\x12\x38\n\x12\x61\x64_group_criterion\x18\x01 \x01(\x0b\x32\x1c.google.protobuf.StringValue\x12\x39\n\x04info\x18\x02 \x01(\x0b\x32+.google.ads.googleads.v2.common.KeywordInfoB\xe8\x01\n\"com.google.ads.googleads.v2.commonB\rSegmentsProtoP\x01ZDgoogle.golang.org/genproto/googleapis/ads/googleads/v2/common;common\xa2\x02\x03GAA\xaa\x02\x1eGoogle.Ads.GoogleAds.V2.Common\xca\x02\x1eGoogle\\Ads\\GoogleAds\\V2\\Common\xea\x02\"Google::Ads::GoogleAds::V2::Commonb\x06proto3')
   ,
-  dependencies=[google_dot_ads_dot_googleads__v2_dot_proto_dot_common_dot_criteria__pb2.DESCRIPTOR,google_dot_ads_dot_googleads__v2_dot_proto_dot_enums_dot_ad__network__type__pb2.DESCRIPTOR,google_dot_ads_dot_googleads__v2_dot_proto_dot_enums_dot_click__type__pb2.DESCRIPTOR,google_dot_ads_dot_googleads__v2_dot_proto_dot_enums_dot_conversion__action__category__pb2.DESCRIPTOR,google_dot_ads_dot_googleads__v2_dot_proto_dot_enums_dot_conversion__attribution__event__type__pb2.DESCRIPTOR,google_dot_ads_dot_googleads__v2_dot_proto_dot_enums_dot_conversion__lag__bucket__pb2.DESCRIPTOR,google_dot_ads_dot_googleads__v2_dot_proto_dot_enums_dot_conversion__or__adjustment__lag__bucket__pb2.DESCRIPTOR,google_dot_ads_dot_googleads__v2_dot_proto_dot_enums_dot_day__of__week__pb2.DESCRIPTOR,google_dot_ads_dot_googleads__v2_dot_proto_dot_enums_dot_device__pb2.DESCRIPTOR,google_dot_ads_dot_googleads__v2_dot_proto_dot_enums_dot_external__conversion__source__pb2.DESCRIPTOR,google_dot_ads_dot_googleads__v2_dot_proto_dot_enums_dot_hotel__date__selection__type__pb2.DESCRIPTOR,google_dot_ads_dot_googleads__v2_dot_proto_dot_enums_dot_hotel__rate__type__pb2.DESCRIPTOR,google_dot_ads_dot_googleads__v2_dot_proto_dot_enums_dot_month__of__year__pb2.DESCRIPTOR,google_dot_ads_dot_googleads__v2_dot_proto_dot_enums_dot_placeholder__type__pb2.DESCRIPTOR,google_dot_ads_dot_googleads__v2_dot_proto_dot_enums_dot_product__channel__pb2.DESCRIPTOR,google_dot_ads_dot_googleads__v2_dot_proto_dot_enums_dot_product__channel__exclusivity__pb2.DESCRIPTOR,google_dot_ads_dot_googleads__v2_dot_proto_dot_enums_dot_product__condition__pb2.DESCRIPTOR,google_dot_ads_dot_googleads__v2_dot_proto_dot_enums_dot_search__engine__results__page__type__pb2.DESCRIPTOR,google_dot_ads_dot_googleads__v2_dot_proto_dot_enums_dot_search__term__match__type__pb2.DESCRIPTOR,google_dot_ads_dot_googleads__v2_dot_proto_dot_enums_dot_slot__pb2.DESCRIPTOR,google_dot_protobuf_dot_wrappers__pb2.DESCRIPTOR,google_dot_api_dot_annotations__pb2.DESCRIPTOR,])
+  dependencies=[google_dot_ads_dot_googleads__v2_dot_proto_dot_common_dot_criteria__pb2.DESCRIPTOR,google_dot_ads_dot_googleads__v2_dot_proto_dot_enums_dot_ad__network__type__pb2.DESCRIPTOR,google_dot_ads_dot_googleads__v2_dot_proto_dot_enums_dot_click__type__pb2.DESCRIPTOR,google_dot_ads_dot_googleads__v2_dot_proto_dot_enums_dot_conversion__action__category__pb2.DESCRIPTOR,google_dot_ads_dot_googleads__v2_dot_proto_dot_enums_dot_conversion__attribution__event__type__pb2.DESCRIPTOR,google_dot_ads_dot_googleads__v2_dot_proto_dot_enums_dot_conversion__lag__bucket__pb2.DESCRIPTOR,google_dot_ads_dot_googleads__v2_dot_proto_dot_enums_dot_conversion__or__adjustment__lag__bucket__pb2.DESCRIPTOR,google_dot_ads_dot_googleads__v2_dot_proto_dot_enums_dot_day__of__week__pb2.DESCRIPTOR,google_dot_ads_dot_googleads__v2_dot_proto_dot_enums_dot_device__pb2.DESCRIPTOR,google_dot_ads_dot_googleads__v2_dot_proto_dot_enums_dot_external__conversion__source__pb2.DESCRIPTOR,google_dot_ads_dot_googleads__v2_dot_proto_dot_enums_dot_hotel__date__selection__type__pb2.DESCRIPTOR,google_dot_ads_dot_googleads__v2_dot_proto_dot_enums_dot_hotel__price__bucket__pb2.DESCRIPTOR,google_dot_ads_dot_googleads__v2_dot_proto_dot_enums_dot_hotel__rate__type__pb2.DESCRIPTOR,google_dot_ads_dot_googleads__v2_dot_proto_dot_enums_dot_month__of__year__pb2.DESCRIPTOR,google_dot_ads_dot_googleads__v2_dot_proto_dot_enums_dot_placeholder__type__pb2.DESCRIPTOR,google_dot_ads_dot_googleads__v2_dot_proto_dot_enums_dot_product__channel__pb2.DESCRIPTOR,google_dot_ads_dot_googleads__v2_dot_proto_dot_enums_dot_product__channel__exclusivity__pb2.DESCRIPTOR,google_dot_ads_dot_googleads__v2_dot_proto_dot_enums_dot_product__condition__pb2.DESCRIPTOR,google_dot_ads_dot_googleads__v2_dot_proto_dot_enums_dot_search__engine__results__page__type__pb2.DESCRIPTOR,google_dot_ads_dot_googleads__v2_dot_proto_dot_enums_dot_search__term__match__type__pb2.DESCRIPTOR,google_dot_ads_dot_googleads__v2_dot_proto_dot_enums_dot_slot__pb2.DESCRIPTOR,google_dot_protobuf_dot_wrappers__pb2.DESCRIPTOR,google_dot_api_dot_annotations__pb2.DESCRIPTOR,])
 
 
 
@@ -309,287 +310,294 @@ _SEGMENTS = _descriptor.Descriptor(
       is_extension=False, extension_scope=None,
       serialized_options=None, file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
-      name='hotel_state', full_name='google.ads.googleads.v2.common.Segments.hotel_state', index=36,
+      name='hotel_price_bucket', full_name='google.ads.googleads.v2.common.Segments.hotel_price_bucket', index=36,
+      number=78, type=14, cpp_type=8, label=1,
+      has_default_value=False, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR),
+    _descriptor.FieldDescriptor(
+      name='hotel_state', full_name='google.ads.googleads.v2.common.Segments.hotel_state', index=37,
       number=15, type=11, cpp_type=10, label=1,
       has_default_value=False, default_value=None,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       serialized_options=None, file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
-      name='hour', full_name='google.ads.googleads.v2.common.Segments.hour', index=37,
+      name='hour', full_name='google.ads.googleads.v2.common.Segments.hour', index=38,
       number=16, type=11, cpp_type=10, label=1,
       has_default_value=False, default_value=None,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       serialized_options=None, file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
-      name='interaction_on_this_extension', full_name='google.ads.googleads.v2.common.Segments.interaction_on_this_extension', index=38,
+      name='interaction_on_this_extension', full_name='google.ads.googleads.v2.common.Segments.interaction_on_this_extension', index=39,
       number=49, type=11, cpp_type=10, label=1,
       has_default_value=False, default_value=None,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       serialized_options=None, file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
-      name='keyword', full_name='google.ads.googleads.v2.common.Segments.keyword', index=39,
+      name='keyword', full_name='google.ads.googleads.v2.common.Segments.keyword', index=40,
       number=61, type=11, cpp_type=10, label=1,
       has_default_value=False, default_value=None,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       serialized_options=None, file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
-      name='month', full_name='google.ads.googleads.v2.common.Segments.month', index=40,
+      name='month', full_name='google.ads.googleads.v2.common.Segments.month', index=41,
       number=17, type=11, cpp_type=10, label=1,
       has_default_value=False, default_value=None,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       serialized_options=None, file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
-      name='month_of_year', full_name='google.ads.googleads.v2.common.Segments.month_of_year', index=41,
+      name='month_of_year', full_name='google.ads.googleads.v2.common.Segments.month_of_year', index=42,
       number=18, type=14, cpp_type=8, label=1,
       has_default_value=False, default_value=0,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       serialized_options=None, file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
-      name='partner_hotel_id', full_name='google.ads.googleads.v2.common.Segments.partner_hotel_id', index=42,
+      name='partner_hotel_id', full_name='google.ads.googleads.v2.common.Segments.partner_hotel_id', index=43,
       number=19, type=11, cpp_type=10, label=1,
       has_default_value=False, default_value=None,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       serialized_options=None, file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
-      name='placeholder_type', full_name='google.ads.googleads.v2.common.Segments.placeholder_type', index=43,
+      name='placeholder_type', full_name='google.ads.googleads.v2.common.Segments.placeholder_type', index=44,
       number=20, type=14, cpp_type=8, label=1,
       has_default_value=False, default_value=0,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       serialized_options=None, file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
-      name='product_aggregator_id', full_name='google.ads.googleads.v2.common.Segments.product_aggregator_id', index=44,
+      name='product_aggregator_id', full_name='google.ads.googleads.v2.common.Segments.product_aggregator_id', index=45,
       number=28, type=11, cpp_type=10, label=1,
       has_default_value=False, default_value=None,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       serialized_options=None, file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
-      name='product_bidding_category_level1', full_name='google.ads.googleads.v2.common.Segments.product_bidding_category_level1', index=45,
+      name='product_bidding_category_level1', full_name='google.ads.googleads.v2.common.Segments.product_bidding_category_level1', index=46,
       number=56, type=11, cpp_type=10, label=1,
       has_default_value=False, default_value=None,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       serialized_options=None, file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
-      name='product_bidding_category_level2', full_name='google.ads.googleads.v2.common.Segments.product_bidding_category_level2', index=46,
+      name='product_bidding_category_level2', full_name='google.ads.googleads.v2.common.Segments.product_bidding_category_level2', index=47,
       number=57, type=11, cpp_type=10, label=1,
       has_default_value=False, default_value=None,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       serialized_options=None, file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
-      name='product_bidding_category_level3', full_name='google.ads.googleads.v2.common.Segments.product_bidding_category_level3', index=47,
+      name='product_bidding_category_level3', full_name='google.ads.googleads.v2.common.Segments.product_bidding_category_level3', index=48,
       number=58, type=11, cpp_type=10, label=1,
       has_default_value=False, default_value=None,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       serialized_options=None, file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
-      name='product_bidding_category_level4', full_name='google.ads.googleads.v2.common.Segments.product_bidding_category_level4', index=48,
+      name='product_bidding_category_level4', full_name='google.ads.googleads.v2.common.Segments.product_bidding_category_level4', index=49,
       number=59, type=11, cpp_type=10, label=1,
       has_default_value=False, default_value=None,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       serialized_options=None, file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
-      name='product_bidding_category_level5', full_name='google.ads.googleads.v2.common.Segments.product_bidding_category_level5', index=49,
+      name='product_bidding_category_level5', full_name='google.ads.googleads.v2.common.Segments.product_bidding_category_level5', index=50,
       number=60, type=11, cpp_type=10, label=1,
       has_default_value=False, default_value=None,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       serialized_options=None, file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
-      name='product_brand', full_name='google.ads.googleads.v2.common.Segments.product_brand', index=50,
+      name='product_brand', full_name='google.ads.googleads.v2.common.Segments.product_brand', index=51,
       number=29, type=11, cpp_type=10, label=1,
       has_default_value=False, default_value=None,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       serialized_options=None, file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
-      name='product_channel', full_name='google.ads.googleads.v2.common.Segments.product_channel', index=51,
+      name='product_channel', full_name='google.ads.googleads.v2.common.Segments.product_channel', index=52,
       number=30, type=14, cpp_type=8, label=1,
       has_default_value=False, default_value=0,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       serialized_options=None, file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
-      name='product_channel_exclusivity', full_name='google.ads.googleads.v2.common.Segments.product_channel_exclusivity', index=52,
+      name='product_channel_exclusivity', full_name='google.ads.googleads.v2.common.Segments.product_channel_exclusivity', index=53,
       number=31, type=14, cpp_type=8, label=1,
       has_default_value=False, default_value=0,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       serialized_options=None, file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
-      name='product_condition', full_name='google.ads.googleads.v2.common.Segments.product_condition', index=53,
+      name='product_condition', full_name='google.ads.googleads.v2.common.Segments.product_condition', index=54,
       number=32, type=14, cpp_type=8, label=1,
       has_default_value=False, default_value=0,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       serialized_options=None, file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
-      name='product_country', full_name='google.ads.googleads.v2.common.Segments.product_country', index=54,
+      name='product_country', full_name='google.ads.googleads.v2.common.Segments.product_country', index=55,
       number=33, type=11, cpp_type=10, label=1,
       has_default_value=False, default_value=None,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       serialized_options=None, file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
-      name='product_custom_attribute0', full_name='google.ads.googleads.v2.common.Segments.product_custom_attribute0', index=55,
+      name='product_custom_attribute0', full_name='google.ads.googleads.v2.common.Segments.product_custom_attribute0', index=56,
       number=34, type=11, cpp_type=10, label=1,
       has_default_value=False, default_value=None,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       serialized_options=None, file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
-      name='product_custom_attribute1', full_name='google.ads.googleads.v2.common.Segments.product_custom_attribute1', index=56,
+      name='product_custom_attribute1', full_name='google.ads.googleads.v2.common.Segments.product_custom_attribute1', index=57,
       number=35, type=11, cpp_type=10, label=1,
       has_default_value=False, default_value=None,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       serialized_options=None, file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
-      name='product_custom_attribute2', full_name='google.ads.googleads.v2.common.Segments.product_custom_attribute2', index=57,
+      name='product_custom_attribute2', full_name='google.ads.googleads.v2.common.Segments.product_custom_attribute2', index=58,
       number=36, type=11, cpp_type=10, label=1,
       has_default_value=False, default_value=None,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       serialized_options=None, file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
-      name='product_custom_attribute3', full_name='google.ads.googleads.v2.common.Segments.product_custom_attribute3', index=58,
+      name='product_custom_attribute3', full_name='google.ads.googleads.v2.common.Segments.product_custom_attribute3', index=59,
       number=37, type=11, cpp_type=10, label=1,
       has_default_value=False, default_value=None,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       serialized_options=None, file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
-      name='product_custom_attribute4', full_name='google.ads.googleads.v2.common.Segments.product_custom_attribute4', index=59,
+      name='product_custom_attribute4', full_name='google.ads.googleads.v2.common.Segments.product_custom_attribute4', index=60,
       number=38, type=11, cpp_type=10, label=1,
       has_default_value=False, default_value=None,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       serialized_options=None, file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
-      name='product_item_id', full_name='google.ads.googleads.v2.common.Segments.product_item_id', index=60,
+      name='product_item_id', full_name='google.ads.googleads.v2.common.Segments.product_item_id', index=61,
       number=39, type=11, cpp_type=10, label=1,
       has_default_value=False, default_value=None,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       serialized_options=None, file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
-      name='product_language', full_name='google.ads.googleads.v2.common.Segments.product_language', index=61,
+      name='product_language', full_name='google.ads.googleads.v2.common.Segments.product_language', index=62,
       number=40, type=11, cpp_type=10, label=1,
       has_default_value=False, default_value=None,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       serialized_options=None, file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
-      name='product_merchant_id', full_name='google.ads.googleads.v2.common.Segments.product_merchant_id', index=62,
+      name='product_merchant_id', full_name='google.ads.googleads.v2.common.Segments.product_merchant_id', index=63,
       number=41, type=11, cpp_type=10, label=1,
       has_default_value=False, default_value=None,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       serialized_options=None, file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
-      name='product_store_id', full_name='google.ads.googleads.v2.common.Segments.product_store_id', index=63,
+      name='product_store_id', full_name='google.ads.googleads.v2.common.Segments.product_store_id', index=64,
       number=42, type=11, cpp_type=10, label=1,
       has_default_value=False, default_value=None,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       serialized_options=None, file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
-      name='product_title', full_name='google.ads.googleads.v2.common.Segments.product_title', index=64,
+      name='product_title', full_name='google.ads.googleads.v2.common.Segments.product_title', index=65,
       number=43, type=11, cpp_type=10, label=1,
       has_default_value=False, default_value=None,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       serialized_options=None, file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
-      name='product_type_l1', full_name='google.ads.googleads.v2.common.Segments.product_type_l1', index=65,
+      name='product_type_l1', full_name='google.ads.googleads.v2.common.Segments.product_type_l1', index=66,
       number=44, type=11, cpp_type=10, label=1,
       has_default_value=False, default_value=None,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       serialized_options=None, file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
-      name='product_type_l2', full_name='google.ads.googleads.v2.common.Segments.product_type_l2', index=66,
+      name='product_type_l2', full_name='google.ads.googleads.v2.common.Segments.product_type_l2', index=67,
       number=45, type=11, cpp_type=10, label=1,
       has_default_value=False, default_value=None,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       serialized_options=None, file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
-      name='product_type_l3', full_name='google.ads.googleads.v2.common.Segments.product_type_l3', index=67,
+      name='product_type_l3', full_name='google.ads.googleads.v2.common.Segments.product_type_l3', index=68,
       number=46, type=11, cpp_type=10, label=1,
       has_default_value=False, default_value=None,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       serialized_options=None, file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
-      name='product_type_l4', full_name='google.ads.googleads.v2.common.Segments.product_type_l4', index=68,
+      name='product_type_l4', full_name='google.ads.googleads.v2.common.Segments.product_type_l4', index=69,
       number=47, type=11, cpp_type=10, label=1,
       has_default_value=False, default_value=None,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       serialized_options=None, file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
-      name='product_type_l5', full_name='google.ads.googleads.v2.common.Segments.product_type_l5', index=69,
+      name='product_type_l5', full_name='google.ads.googleads.v2.common.Segments.product_type_l5', index=70,
       number=48, type=11, cpp_type=10, label=1,
       has_default_value=False, default_value=None,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       serialized_options=None, file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
-      name='quarter', full_name='google.ads.googleads.v2.common.Segments.quarter', index=70,
+      name='quarter', full_name='google.ads.googleads.v2.common.Segments.quarter', index=71,
       number=21, type=11, cpp_type=10, label=1,
       has_default_value=False, default_value=None,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       serialized_options=None, file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
-      name='search_engine_results_page_type', full_name='google.ads.googleads.v2.common.Segments.search_engine_results_page_type', index=71,
+      name='search_engine_results_page_type', full_name='google.ads.googleads.v2.common.Segments.search_engine_results_page_type', index=72,
       number=70, type=14, cpp_type=8, label=1,
       has_default_value=False, default_value=0,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       serialized_options=None, file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
-      name='search_term_match_type', full_name='google.ads.googleads.v2.common.Segments.search_term_match_type', index=72,
+      name='search_term_match_type', full_name='google.ads.googleads.v2.common.Segments.search_term_match_type', index=73,
       number=22, type=14, cpp_type=8, label=1,
       has_default_value=False, default_value=0,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       serialized_options=None, file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
-      name='slot', full_name='google.ads.googleads.v2.common.Segments.slot', index=73,
+      name='slot', full_name='google.ads.googleads.v2.common.Segments.slot', index=74,
       number=23, type=14, cpp_type=8, label=1,
       has_default_value=False, default_value=0,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       serialized_options=None, file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
-      name='webpage', full_name='google.ads.googleads.v2.common.Segments.webpage', index=74,
+      name='webpage', full_name='google.ads.googleads.v2.common.Segments.webpage', index=75,
       number=66, type=11, cpp_type=10, label=1,
       has_default_value=False, default_value=None,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       serialized_options=None, file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
-      name='week', full_name='google.ads.googleads.v2.common.Segments.week', index=75,
+      name='week', full_name='google.ads.googleads.v2.common.Segments.week', index=76,
       number=24, type=11, cpp_type=10, label=1,
       has_default_value=False, default_value=None,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       serialized_options=None, file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
-      name='year', full_name='google.ads.googleads.v2.common.Segments.year', index=76,
+      name='year', full_name='google.ads.googleads.v2.common.Segments.year', index=77,
       number=25, type=11, cpp_type=10, label=1,
       has_default_value=False, default_value=None,
       message_type=None, enum_type=None, containing_type=None,
@@ -607,8 +615,8 @@ _SEGMENTS = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=1407,
-  serialized_end=6734,
+  serialized_start=1469,
+  serialized_end=6894,
 )
 
 
@@ -645,8 +653,8 @@ _KEYWORD = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=6736,
-  serialized_end=6862,
+  serialized_start=6896,
+  serialized_end=7022,
 )
 
 _SEGMENTS.fields_by_name['ad_network_type'].enum_type = google_dot_ads_dot_googleads__v2_dot_proto_dot_enums_dot_ad__network__type__pb2._ADNETWORKTYPEENUM_ADNETWORKTYPE
@@ -685,6 +693,7 @@ _SEGMENTS.fields_by_name['hotel_date_selection_type'].enum_type = google_dot_ads
 _SEGMENTS.fields_by_name['hotel_length_of_stay'].message_type = google_dot_protobuf_dot_wrappers__pb2._INT32VALUE
 _SEGMENTS.fields_by_name['hotel_rate_rule_id'].message_type = google_dot_protobuf_dot_wrappers__pb2._STRINGVALUE
 _SEGMENTS.fields_by_name['hotel_rate_type'].enum_type = google_dot_ads_dot_googleads__v2_dot_proto_dot_enums_dot_hotel__rate__type__pb2._HOTELRATETYPEENUM_HOTELRATETYPE
+_SEGMENTS.fields_by_name['hotel_price_bucket'].enum_type = google_dot_ads_dot_googleads__v2_dot_proto_dot_enums_dot_hotel__price__bucket__pb2._HOTELPRICEBUCKETENUM_HOTELPRICEBUCKET
 _SEGMENTS.fields_by_name['hotel_state'].message_type = google_dot_protobuf_dot_wrappers__pb2._STRINGVALUE
 _SEGMENTS.fields_by_name['hour'].message_type = google_dot_protobuf_dot_wrappers__pb2._INT32VALUE
 _SEGMENTS.fields_by_name['interaction_on_this_extension'].message_type = google_dot_protobuf_dot_wrappers__pb2._BOOLVALUE
@@ -833,6 +842,8 @@ Segments = _reflection.GeneratedProtocolMessageType('Segments', (_message.Messag
           Hotel rate rule ID.
       hotel_rate_type:
           Hotel rate type.
+      hotel_price_bucket:
+          Hotel price bucket.
       hotel_state:
           Hotel state.
       hour:

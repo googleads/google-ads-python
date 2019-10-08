@@ -26,6 +26,9 @@ from google.ads.google_ads.client import GoogleAdsClient
 from google.ads.google_ads.errors import GoogleAdsException
 
 
+ONE_MILLION = 1.0e6
+
+
 def _string_value(client, value):
     """Converts a value to a protocol buffer string wrapper.
 
@@ -94,7 +97,9 @@ def show_plannable_products(client, location_id):
 
     Args:
       client: A google.ads.google_ads.client.GoogleAdsClient instance.
-      location_id: Location ID from somewhere returned by ListPlannableLocations.
+      location_id: Location ID to plan for. You can get a valid loction ID from
+        https://developers.google.com/adwords/api/docs/appendix/geotargeting or
+        by calling ListPlannableLocations on the ReachPlanService.
     """
     reach_plan_service = client.get_service('ReachPlanService', version='v2')
     response = reach_plan_service.list_plannable_products(
@@ -111,15 +116,18 @@ def _request_reach_curve(
       client: A google.ads.google_ads.client.GoogleAdsClient instance.
       customer_id: The customer ID for the reach forecast.
       product_mix: The product mix for the reach forecast.
-      location_id: Location ID from somewhere returned by ListPlannableLocations.
+      location_id: Location ID to plan for. You can get a valid loction ID from
+        https://developers.google.com/adwords/api/docs/appendix/geotargeting or
+        by calling ListPlannableLocations on the ReachPlanService.
       currency_code: Three-character ISO 4217 currency code.
     """
     reach_request = client.get_type('GenerateReachForecastRequest', version='v2')
 
     reach_request.customer_id = customer_id
 
+    # Valid durations are between 1 and 90 days.
     duration = reach_request.campaign_duration
-    duration.duration_in_days.value = 30
+    duration.duration_in_days.value = 28
 
     targeting = reach_request.targeting
     targeting.plannable_location_id.value = location_id
@@ -148,12 +156,15 @@ def _request_reach_curve(
         devices.append(device)
 
     reach_plan_service = client.get_service('ReachPlanService', version='v2')
+
+    # See the docs for defaults and valid ranges:
+    # https://developers.google.com/google-ads/api/reference/rpc/google.ads.googleads.v2.services#google.ads.googleads.v2.services.GenerateReachForecastRequest
     response = reach_plan_service.generate_reach_forecast(
             customer_id=customer_id,
             currency_code=_string_value(client, currency_code),
             campaign_duration=duration,
             cookie_frequency_cap=_int_32_value(client, 0),
-            min_effective_frequency=_int_32_value(client, 3),
+            min_effective_frequency=_int_32_value(client, 1),
             targeting=targeting,
             planned_products=product_mix
     )
@@ -165,10 +176,10 @@ def _request_reach_curve(
         for p in point.forecasted_product_allocations:
             product_splits.append({
                     p.plannable_product_code.value:
-                        p.budget_micros.value / 1.0e6})
+                        p.budget_micros.value / ONE_MILLION})
         print([
                 currency_code,
-                point.cost_micros.value / 1.0e6,
+                point.cost_micros.value / ONE_MILLION,
                 point.forecast.on_target_reach.value,
                 point.forecast.on_target_impressions.value,
                 point.forecast.total_reach.value,
@@ -183,16 +194,24 @@ def forecast_manual_mix(
     Args:
       client: A google.ads.google_ads.client.GoogleAdsClient instance.
       customer_id: The customer ID for the reach forecast.
-      location_id: Location ID returned by ListPlannableLocations.
+      location_id: Location ID to plan for. You can get a valid loction ID from
+        https://developers.google.com/adwords/api/docs/appendix/geotargeting or
+        by calling ListPlannableLocations on the ReachPlanService.
       currency_code: Three-character ISO 4217 currency code.
       budget: Budget to allocate to the plan.
     """
     product_mix = []
-    product_splits = [('TRUEVIEW_IN_STREAM', 0.15), ('BUMPER', 0.85)]
+    trueview_allocation = 0.15
+    bumper_allocation = 1 - trueview_allocation
+    product_splits = [
+        ('TRUEVIEW_IN_STREAM', trueview_allocation),
+        ('BUMPER', bumper_allocation),
+    ]
     for product, split in product_splits:
         planned_product = client.get_type('PlannedProduct', version='v2')
         planned_product.plannable_product_code.value = product
-        planned_product.budget_micros.value = math.trunc(budget * 1.0e6 * split)
+        planned_product.budget_micros.value = math.trunc(
+            budget * ONE_MILLION * split)
         product_mix.append(planned_product)
 
     _request_reach_curve(
@@ -206,7 +225,9 @@ def forecast_suggested_mix(
     Args:
       client: A google.ads.google_ads.client.GoogleAdsClient instance.
       customer_id: The customer ID for the reach forecast.
-      location_id: Location ID returned by ListPlannableLocations.
+      location_id: Location ID to plan for. You can get a valid loction ID from
+        https://developers.google.com/adwords/api/docs/appendix/geotargeting or
+        by calling ListPlannableLocations on the ReachPlanService.
       currency_code: Three-character ISO 4217 currency code.
       budget: Budget to allocate to the plan.
     """
@@ -224,7 +245,7 @@ def forecast_suggested_mix(
             plannable_location_id=_string_value(client, location_id),
             preferences=preferences,
             currency_code=_string_value(client, currency_code),
-            budget_micros=_int_64_value(client, budget * 1.0e6))
+            budget_micros=_int_64_value(client, budget * ONE_MILLION))
 
     product_mix = []
     for product in mix_response.product_allocation:
@@ -239,6 +260,9 @@ def forecast_suggested_mix(
 
 
 def main(client, customer_id):
+    # location_id: Location ID to plan for. You can get a valid loction ID from
+    # https://developers.google.com/adwords/api/docs/appendix/geotargeting or by
+    # calling ListPlannableLocations on the ReachPlanService.
     location_id = '2840'  # US
     currency_code = 'USD'
     budget = 500000

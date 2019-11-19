@@ -47,17 +47,24 @@ def main(client, customer_id, page_size):
     response = ga_service.search(customer_id, query, page_size=page_size)
 
     try:
+        keyword_match_type_enum = client.get_type(
+            'KeywordMatchTypeEnum', version='v2'
+        )
         for row in response:
             campaign = row.campaign
             ad_group = row.ad_group
             criterion = row.ad_group_criterion
             metrics = row.metrics
 
+            keyword_match_type = keyword_match_type_enum.Name(
+                criterion.keyword.match_type
+            )
+
             print('Keyword text "%s" with match type "%d" and ID %d in ad '
                   'group "%s" with ID "%d" in campaign "%s" with ID %d had %s '
                   'impression(s), %s click(s), and %s cost (in micros) during '
                   'the last 7 days.'
-                  % (criterion.keyword.text.value, criterion.keyword.match_type,
+                  % (criterion.keyword.text.value, keyword_match_type,
                      criterion.criterion_id.value,
                      ad_group.name.value, ad_group.id.value,
                      campaign.name.value, campaign.id.value,

@@ -49,7 +49,7 @@ def main(client, customer_id, page_size):
     try:
         keyword_match_type_enum = client.get_type(
             'KeywordMatchTypeEnum', version='v2'
-        )
+        ).KeywordMatchType
         for row in response:
             campaign = row.campaign
             ad_group = row.ad_group

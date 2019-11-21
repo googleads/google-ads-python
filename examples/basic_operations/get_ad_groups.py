@@ -14,10 +14,8 @@
 # limitations under the License.
 """This example illustrates how to retrieve ad groups."""
 
-from __future__ import absolute_import
 
 import argparse
-import six
 import sys
 import google.ads.google_ads.client
 
@@ -61,9 +59,9 @@ if __name__ == '__main__':
     parser = argparse.ArgumentParser(
         description='List ad groups for specified customer.')
     # The following argument(s) should be provided to run the example.
-    parser.add_argument('-c', '--customer_id', type=six.text_type,
+    parser.add_argument('-c', '--customer_id', type=str,
                         required=True, help='The Google Ads customer ID.')
-    parser.add_argument('-i', '--campaign_id', type=six.text_type,
+    parser.add_argument('-i', '--campaign_id', type=str,
                         required=False,
                         help=('The campaign ID. Specify this to list ad groups '
                               'solely for this campaign ID.'))

@@ -13,7 +13,6 @@
 # limitations under the License.
 
 
-from __future__ import absolute_import
 
 
 from google.ads.google_ads.v1 import types

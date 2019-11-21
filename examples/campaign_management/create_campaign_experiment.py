@@ -17,10 +17,8 @@
 It requests the creation based on a draft and waits for completion.
 """
 
-from __future__ import absolute_import
 
 import argparse
-import six
 import sys
 import uuid
 
@@ -97,10 +95,10 @@ if __name__ == '__main__':
     parser = argparse.ArgumentParser(
         description=('Create a campaign experiment based on a campaign draft.'))
     # The following argument(s) should be provided to run the example.
-    parser.add_argument('-c', '--customer_id', type=six.text_type,
+    parser.add_argument('-c', '--customer_id', type=str,
                         required=True, help='The Google Ads customer ID.')
     parser.add_argument('-n', '--campaign_draft_resource_name',
-                        type=six.text_type, required=True,
+                        type=str, required=True,
                         help='The campaign draft resource name.')
     args = parser.parse_args()
 

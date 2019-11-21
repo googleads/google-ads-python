@@ -18,10 +18,8 @@ Keyword plans can be reused for retrieving forecast metrics and historic
 metrics.
 """
 
-from __future__ import absolute_import
 
 import argparse
-import six
 import sys
 import uuid
 
@@ -283,7 +281,7 @@ if __name__ == '__main__':
     parser = argparse.ArgumentParser(
         description='Creates a keyword plan for specified customer.')
     # The following argument(s) should be provided to run the example.
-    parser.add_argument('-c', '--customer_id', type=six.text_type,
+    parser.add_argument('-c', '--customer_id', type=str,
                         required=True, help='The Google Ads customer ID.')
     args = parser.parse_args()
 

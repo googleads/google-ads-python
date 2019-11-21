@@ -17,11 +17,9 @@
 To get campaigns, run get_campaigns.py.
 """
 
-from __future__ import absolute_import
 
 import argparse
 import datetime
-import six
 import sys
 import uuid
 
@@ -118,7 +116,7 @@ if __name__ == '__main__':
     parser = argparse.ArgumentParser(
         description='Adds a campaign for specified customer.')
     # The following argument(s) should be provided to run the example.
-    parser.add_argument('-c', '--customer_id', type=six.text_type,
+    parser.add_argument('-c', '--customer_id', type=str,
                         required=True, help='The Google Ads customer ID.')
     args = parser.parse_args()
 

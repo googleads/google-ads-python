@@ -24,10 +24,8 @@ https://support.google.com/merchants/answer/188924.
 This account must be linked to your Google Ads account.
 """
 
-from __future__ import absolute_import
 
 import argparse
-import six
 import sys
 import uuid
 
@@ -288,7 +286,7 @@ if __name__ == '__main__':
                      'group and a shopping product ad to the specified '
                      'merchant account.'))
     # The following argument(s) should be provided to run the example.
-    parser.add_argument('-c', '--customer_id', type=six.text_type,
+    parser.add_argument('-c', '--customer_id', type=str,
                         required=True, help='The Google Ads customer ID.')
     parser.add_argument('-m', '--merchant_center_account_id', type=int,
                         required=True, help='The merchant center account ID.')

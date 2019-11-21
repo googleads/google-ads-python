@@ -20,10 +20,8 @@ be found at:
 https://support.google.com/hotelprices/answer/6101897.
 """
 
-from __future__ import absolute_import
 
 import argparse
-import six
 import sys
 import uuid
 
@@ -215,12 +213,12 @@ if __name__ == '__main__':
         description=('Adds an expanded text ad to the specified ad group ID, '
                      'for the given customer ID.'))
     # The following argument(s) should be provided to run the example.
-    parser.add_argument('-c', '--customer_id', type=six.text_type,
+    parser.add_argument('-c', '--customer_id', type=str,
                         required=True, help='The Google Ads customer ID.')
     parser.add_argument('-b', '--bid_ceiling_micro_amount', type=int,
                         required=True, help=('The bid ceiling micro amount for '
                                              'the hotel campaign.'))
-    parser.add_argument('-h', '--hotel_center_account_id', type=six.text_type,
+    parser.add_argument('-h', '--hotel_center_account_id', type=str,
                         required=True, help='The hotel center account ID.')
     args = parser.parse_args()
 

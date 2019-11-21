@@ -14,10 +14,8 @@
 # limitations under the License.
 """This example demonstrates how to add a keyword to an ad group."""
 
-from __future__ import absolute_import
 
 import argparse
-import six
 import sys
 
 import google.ads.google_ads.client
@@ -79,11 +77,11 @@ if __name__ == '__main__':
         description=('Adds a keyword to the provided ad group, for the '
                      'specified customer.'))
     # The following argument(s) should be provided to run the example.
-    parser.add_argument('-c', '--customer_id', type=six.text_type,
+    parser.add_argument('-c', '--customer_id', type=str,
                         required=True, help='The Google Ads customer ID.')
-    parser.add_argument('-a', '--ad_group_id', type=six.text_type,
+    parser.add_argument('-a', '--ad_group_id', type=str,
                         required=True, help='The ad group ID.')
-    parser.add_argument('-k', '--keyword', type=six.text_type, required=False,
+    parser.add_argument('-k', '--keyword', type=str, required=False,
                         default='mars cruise',
                         help=('The keyword to be added to the ad group. Note '
                               'that you will receive an error response if you '

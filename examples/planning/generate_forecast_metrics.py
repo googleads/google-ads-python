@@ -17,10 +17,8 @@
 To create a keyword plan, run the add_keyword_plan.py example.
 """
 
-from __future__ import absolute_import
 
 import argparse
-import six
 import sys
 
 from google.ads.google_ads.client import GoogleAdsClient
@@ -71,9 +69,9 @@ if __name__ == '__main__':
     parser = argparse.ArgumentParser(
         description='Generates forecast metrics for a keyword plan.')
     # The following argument(s) should be provided to run the example.
-    parser.add_argument('-c', '--customer_id', type=six.text_type,
+    parser.add_argument('-c', '--customer_id', type=str,
                         required=True, help='The Google Ads customer ID.')
-    parser.add_argument('-k', '--keyword_plan_id', type=six.text_type,
+    parser.add_argument('-k', '--keyword_plan_id', type=str,
                         required=True, help='A Keyword Plan ID.')
     args = parser.parse_args()
 

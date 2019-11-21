@@ -21,10 +21,8 @@ metrics.impressions, campaign.id). It also shows the data type and artifacts
 that are selectable with the artifact.
 """
 
-from __future__ import absolute_import
 
 import argparse
-import six
 import sys
 import google.ads.google_ads.client
 
@@ -108,7 +106,7 @@ if __name__ == '__main__':
     parser = argparse.ArgumentParser(
         description='Lists metadata for the specified artifact.')
     # The following argument(s) should be provided to run the example.
-    parser.add_argument('-a', '--artifact_name', type=six.text_type,
+    parser.add_argument('-a', '--artifact_name', type=str,
                         required=True,
                         help='The name of the artifact for which we are '
                         'retrieving metadata.')

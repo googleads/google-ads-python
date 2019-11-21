@@ -14,10 +14,8 @@
 # limitations under the License.
 """This example removes an existing keyword from an ad group."""
 
-from __future__ import absolute_import
 
 import argparse
-import six
 import sys
 
 from google.ads.google_ads.client import GoogleAdsClient
@@ -55,11 +53,11 @@ if __name__ == '__main__':
     parser = argparse.ArgumentParser(
         description=('Removes given campaign for the specified customer.'))
     # The following argument(s) should be provided to run the example.
-    parser.add_argument('-c', '--customer_id', type=six.text_type,
+    parser.add_argument('-c', '--customer_id', type=str,
                         required=True, help='The Google Ads customer ID.')
-    parser.add_argument('-a', '--ad_group_id', type=six.text_type,
+    parser.add_argument('-a', '--ad_group_id', type=str,
                         required=True, help='The ad group ID.')
-    parser.add_argument('-k', '--criteria_id', type=six.text_type,
+    parser.add_argument('-k', '--criteria_id', type=str,
                         required=True, help='The criteria ID, or keyword ID.')
     args = parser.parse_args()
 

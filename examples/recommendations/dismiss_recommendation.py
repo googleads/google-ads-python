@@ -17,10 +17,8 @@
 To retrieve recommendations for text ads, run get_text_ad_recommendations.py.
 """
 
-from __future__ import absolute_import
 
 import argparse
-import six
 import sys
 
 import google.ads.google_ads.client
@@ -66,9 +64,9 @@ if __name__ == '__main__':
     parser = argparse.ArgumentParser(
         description=('Dismisses a recommendation with the given ID.'))
     # The following argument(s) should be provided to run the example.
-    parser.add_argument('-c', '--customer_id', type=six.text_type,
+    parser.add_argument('-c', '--customer_id', type=str,
                         required=True, help='The Google Ads customer ID.')
-    parser.add_argument('-r', '--recommendation_id', type=six.text_type,
+    parser.add_argument('-r', '--recommendation_id', type=str,
                         required=True, help='The recommendation ID.')
     args = parser.parse_args()
 

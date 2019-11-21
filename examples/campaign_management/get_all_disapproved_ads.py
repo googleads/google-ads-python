@@ -14,10 +14,8 @@
 # limitations under the License.
 """This illustrates how to retrieve disapproved ads in a given campaign."""
 
-from __future__ import absolute_import
 
 import argparse
-import six
 import sys
 import google.ads.google_ads.client
 
@@ -92,9 +90,9 @@ if __name__ == '__main__':
         description=('Lists disapproved ads for a given customer\'s specified '
                      'campaign.'))
     # The following argument(s) should be provided to run the example.
-    parser.add_argument('-c', '--customer_id', type=six.text_type,
+    parser.add_argument('-c', '--customer_id', type=str,
                         required=True, help='The Google Ads customer ID.')
-    parser.add_argument('-i', '--campaign_id', type=six.text_type,
+    parser.add_argument('-i', '--campaign_id', type=str,
                         required=True, help='The campaign ID.')
     args = parser.parse_args()
 

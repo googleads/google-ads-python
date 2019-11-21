@@ -17,10 +17,8 @@
 To add campaigns, run add_campaigns.py.
 """
 
-from __future__ import absolute_import
 
 import argparse
-import six
 import sys
 
 from google.ads.google_ads.client import GoogleAdsClient
@@ -98,9 +96,9 @@ if __name__ == '__main__':
     parser = argparse.ArgumentParser(
         description='Lists all campaigns for specified customer.')
     # The following argument(s) should be provided to run the example.
-    parser.add_argument('-c', '--customer_id', type=six.text_type,
+    parser.add_argument('-c', '--customer_id', type=str,
                         required=True, help='The Google Ads customer ID.')
-    parser.add_argument('-l', '--label_id', type=six.text_type, required=True,
+    parser.add_argument('-l', '--label_id', type=str, required=True,
                         help='A label ID associated with a campaign.')
     args = parser.parse_args()
 

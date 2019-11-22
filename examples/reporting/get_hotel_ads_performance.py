@@ -47,8 +47,8 @@ def main(client, customer_id, page_size):
         for row in response:
             campaign = row.campaign
             ad_group = row.ad_group
-            hotel_check_in_day_of_week = row.hotel_check_in_day_of_week
-            hotel_length_of_stay = row.hotel_length_of_stay
+            hotel_check_in_day_of_week = row.segments.hotel_check_in_day_of_week
+            hotel_length_of_stay = row.segments.hotel_length_of_stay
             metrics = row.metrics
 
             print('Ad group ID "%s" in campaign ID "%s" ' % (ad_group.id.value,

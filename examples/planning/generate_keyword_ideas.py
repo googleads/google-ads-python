@@ -14,10 +14,8 @@
 # limitations under the License.
 """This example generates keyword ideas from a list of seed keywords."""
 
-from __future__ import absolute_import
 
 import argparse
-import six
 import sys
 from google.ads.google_ads.client import GoogleAdsClient
 from google.ads.google_ads.errors import GoogleAdsException
@@ -141,21 +139,21 @@ if __name__ == '__main__':
         description='Generates keyword ideas from a list of seed keywords.')
 
     # The following argument(s) should be provided to run the example.
-    parser.add_argument('-c', '--customer_id', type=six.text_type,
+    parser.add_argument('-c', '--customer_id', type=str,
                         required=True, help='The Google Ads customer ID.')
     # For more information on determining location IDs, see:
-    parser.add_argument('-k', '--keywords', type=six.text_type, required=False,
+    parser.add_argument('-k', '--keywords', type=str, required=False,
                         help='Comma-delimited starter keywords')
     # https://developers.google.com/adwords/api/docs/appendix/geotargeting.
-    parser.add_argument('-l', '--location_ids', type=six.text_type,
+    parser.add_argument('-l', '--location_ids', type=str,
                         required=False, help='Comma-delimited list of location '
                                              'criteria IDs')
     # https://developers.google.com/adwords/api/docs/appendix/codes-formats#languages.
-    parser.add_argument('-i', '--language_id', type=six.text_type,
+    parser.add_argument('-i', '--language_id', type=str,
                         required=False, help='Comma-delimited list of language '
                                              'criterion IDs')
     # Optional: Specify a URL string related to your business to generate ideas.
-    parser.add_argument('-p', '--page_url', type=six.text_type, required=False,
+    parser.add_argument('-p', '--page_url', type=str, required=False,
                         help='A URL string related to your business')
 
     parser.set_defaults(location_ids=_DEFAULT_LOCATION_IDS,

@@ -20,10 +20,8 @@ account. By default, the new account will only be accessible via the manager
 account.
 """
 
-from __future__ import absolute_import
 
 import argparse
-import six
 import sys
 from datetime import datetime
 
@@ -73,7 +71,7 @@ if __name__ == '__main__':
     parser = argparse.ArgumentParser(
         description=('Creates a new client under the given manager.'))
     # The following argument(s) should be provided to run the example.
-    parser.add_argument('-m', '--manager_customer_id', type=six.text_type,
+    parser.add_argument('-m', '--manager_customer_id', type=str,
                         required=True, help='A Google Ads customer ID for the '
                         'manager account under which the new customer will '
                         'be created.')

@@ -13,7 +13,6 @@
 # limitations under the License.
 
 
-from __future__ import absolute_import
 
 
 import google.ads.google_ads.client

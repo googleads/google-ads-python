@@ -14,10 +14,8 @@
 # limitations under the License.
 """Demonstrates how to create a sitelink extension."""
 
-from __future__ import absolute_import
 
 import argparse
-import six
 import sys
 
 from google.ads.google_ads.client import GoogleAdsClient
@@ -62,7 +60,7 @@ if __name__ == '__main__':
     parser = argparse.ArgumentParser(
         description='Creates sitelink for the specified customer id')
     # The following argument(s) should be provided to run the example.
-    parser.add_argument('-c', '--customer_id', type=six.text_type,
+    parser.add_argument('-c', '--customer_id', type=str,
                         required=True, help='The Google Ads customer ID')
     args = parser.parse_args()
 

@@ -14,10 +14,8 @@
 # limitations under the License.
 """This example shows how to link a manager customer to a client customer."""
 
-from __future__ import absolute_import
 
 import argparse
-import six
 import sys
 import uuid
 from datetime import datetime, timedelta
@@ -104,9 +102,9 @@ if __name__ == '__main__':
         description= ('Links and existing manager customer to an existing'
                       'client customer'))
     # The following argument(s) should be provided to run the example.
-    parser.add_argument('-c', '--customer_id', type=six.text_type,
+    parser.add_argument('-c', '--customer_id', type=str,
                         required=True, help='The customer ID.')
-    parser.add_argument('-m', '--manager_customer_id', type=six.text_type,
+    parser.add_argument('-m', '--manager_customer_id', type=str,
                         required=True, help='The manager customer ID.')
     args = parser.parse_args()
 

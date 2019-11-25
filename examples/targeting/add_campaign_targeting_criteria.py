@@ -14,10 +14,8 @@
 # limitations under the License.
 """This example adds campaign targeting criteria."""
 
-from __future__ import absolute_import
 
 import argparse
-import six
 import sys
 
 import google.ads.google_ads.client
@@ -123,14 +121,14 @@ if __name__ == '__main__':
         description=('Adds campaign targeting criteria for the specified '
                      'campaign under the given customer ID.'))
     # The following argument(s) should be provided to run the example.
-    parser.add_argument('-c', '--customer_id', type=six.text_type,
+    parser.add_argument('-c', '--customer_id', type=str,
                         required=True, help='The Google Ads customer ID.')
-    parser.add_argument('-i', '--campaign_id', type=six.text_type,
+    parser.add_argument('-i', '--campaign_id', type=str,
                         required=True, help='The campaign ID.')
-    parser.add_argument('-k', '--keyword', type=six.text_type, required=True,
+    parser.add_argument('-k', '--keyword', type=str, required=True,
                         help='The keyword to be added to the campaign.')
     parser.add_argument(
-        '-l', '--location_id', type=six.text_type, required=False,
+        '-l', '--location_id', type=str, required=False,
         default='21167',  # New York
         help=('A location criterion ID, this field is optional. If not '
               'specified, will default to New York. For more information on '

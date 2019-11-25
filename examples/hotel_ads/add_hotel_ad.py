@@ -20,10 +20,8 @@ be found at:
 https://support.google.com/hotelprices/answer/6101897.
 """
 
-from __future__ import absolute_import
 
 import argparse
-import six
 import sys
 import uuid
 
@@ -217,7 +215,7 @@ if __name__ == '__main__':
   parser.add_argument(
       '-c',
       '--customer_id',
-      type=six.text_type,
+      type=str,
       required=True,
       help='The Google Ads customer ID.')
   parser.add_argument(

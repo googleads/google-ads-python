@@ -20,7 +20,6 @@ the login-customer-id configuration. For more information see this
 documentation: https://developers.google.com/google-ads/api/docs/concepts/call-structure#login-customer-id
 """
 
-from __future__ import absolute_import
 
 import sys
 

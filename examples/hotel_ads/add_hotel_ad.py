@@ -91,6 +91,9 @@ def add_hotel_ad(client, customer_id, ad_group_resource_name):
   ad_group_ad_operation = client.get_type('AdGroupAdOperation', version='v2')
   ad_group_ad = ad_group_ad_operation.create
   ad_group_ad.ad_group.value = ad_group_resource_name
+  # Set the ad group ad to enabled.  Setting this to paused will cause an error
+  # for hotel campaigns.  For hotels pausing should happen at either the ad group or
+  # campaign level. 
   ad_group_ad.status = client.get_type(
       'AdGroupAdStatusEnum', version='v2').ENABLED
   ad_group_ad.ad.hotel_ad.CopyFrom(client.get_type('HotelAdInfo', version='v2'))

@@ -17,10 +17,8 @@
 To get available billing setups, run get_billing_setups.py.
 """
 
-from __future__ import absolute_import
 
 import argparse
-import six
 import sys
 
 import google.ads.google_ads.client
@@ -64,9 +62,9 @@ if __name__ == '__main__':
         description=('Removes billing setup for specified customer and billing '
                      'setup ID.'))
     # The following argument(s) should be provided to run the example.
-    parser.add_argument('-c', '--customer_id', type=six.text_type,
+    parser.add_argument('-c', '--customer_id', type=str,
                         required=True, help='The Google Ads customer ID.')
-    parser.add_argument('-b', '--billing_setup_id', type=six.text_type,
+    parser.add_argument('-b', '--billing_setup_id', type=str,
                         required=True, help='The billing setup ID.')
     args = parser.parse_args()
 

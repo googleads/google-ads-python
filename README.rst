@@ -15,8 +15,8 @@ Features
 
 Requirements
 ------------
-* Python 2.7.13+ / 3.5.3+
-        - **NOTE:** Python 2 support will cease by the end of 2019. See this `blog post`_ for more detail.
+* Python 3.6.7+
+        - **NOTE:** Python 2 support has ceased as of v4.0. See this `blog post`_ for more detail.
 * `pip`_
 
 

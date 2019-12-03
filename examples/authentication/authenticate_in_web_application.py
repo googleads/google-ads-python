@@ -20,7 +20,6 @@ application flow.
 It is intended to be run from the command line and requires user input.
 """
 
-from __future__ import absolute_import
 
 import argparse
 

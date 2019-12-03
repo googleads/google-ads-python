@@ -15,7 +15,6 @@
 """This example illustrates getting GeoTargetConstants by given location names.
 """
 
-from __future__ import absolute_import
 
 import sys
 

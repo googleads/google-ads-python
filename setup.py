@@ -17,7 +17,6 @@ from setuptools import setup, find_packages
 import io
 
 install_requires = [
-    'enum34; python_version < "3.4"',
     'google-auth-oauthlib >= 0.0.1, < 1.0.0',
     'google-api-core >= 1.7.0, < 2.0.0',
     'googleapis-common-protos >= 1.5.8, < 2.0.0',
@@ -35,7 +34,7 @@ with io.open('README.rst', 'r', encoding='utf-8') as readme_file:
 
 setup(
     name='google-ads',
-    version='3.3.0',
+    version='4.0.0',
     author='Google LLC',
     author_email='googleapis-packages@google.com',
     classifiers=[
@@ -44,15 +43,12 @@ setup(
         'Intended Audience :: Developers',
         'License :: OSI Approved :: Apache Software License',
         'Programming Language :: Python',
-        'Programming Language :: Python :: 2',
-        'Programming Language :: Python :: 2.7',
         'Programming Language :: Python :: 3',
-        'Programming Language :: Python :: 3.4',
-        'Programming Language :: Python :: 3.5',
         'Programming Language :: Python :: 3.6',
     ],
     description='Client library for the Google Ads API',
     include_package_data=True,
+    python_requires='>=3.6',
     long_description=long_description,
     install_requires=install_requires,
     tests_require=tests_require,

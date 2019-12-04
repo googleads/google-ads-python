@@ -30,19 +30,19 @@ import google.ads.google_ads.client
 
 def main(client, customer_id, hotel_center_account_id,
          bid_ceiling_micro_amount):
-    # Add budget
+
     budget_resource_name = add_budget(client, customer_id)
 
-    # Add hotel campaign
+
     campaign_resource_name = add_hotel_campaign(
         client, customer_id, budget_resource_name, hotel_center_account_id,
         bid_ceiling_micro_amount)
 
-    # Add hotel ad group
+
     ad_group_resource_name = add_hotel_ad_group(client, customer_id,
                                                 campaign_resource_name)
 
-    # Add hotel ad
+
     add_hotel_ad(client, customer_id, ad_group_resource_name)
 
 
@@ -88,8 +88,11 @@ def add_hotel_ad(client, customer_id, ad_group_resource_name):
     ad_group_ad_operation = client.get_type('AdGroupAdOperation', version='v2')
     ad_group_ad = ad_group_ad_operation.create
     ad_group_ad.ad_group.value = ad_group_resource_name
+    # Set the ad group ad to enabled.  Setting this to paused will cause an error
+    # for hotel campaigns.  For hotels pausing should happen at either the ad group or
+    # campaign level.
     ad_group_ad.status = client.get_type('AdGroupAdStatusEnum',
-                                         version='v2').PAUSED
+                                         version='v2').ENABLED
     ad_group_ad.ad.hotel_ad.CopyFrom(client.get_type('HotelAdInfo',
                                                      version='v2'))
 
@@ -218,7 +221,7 @@ if __name__ == '__main__':
     parser.add_argument('-b', '--bid_ceiling_micro_amount', type=int,
                         required=True, help=('The bid ceiling micro amount for '
                                              'the hotel campaign.'))
-    parser.add_argument('-h', '--hotel_center_account_id', type=str,
+    parser.add_argument('-a', '--hotel_center_account_id', type=int,
                         required=True, help='The hotel center account ID.')
     args = parser.parse_args()
 

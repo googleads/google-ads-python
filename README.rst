@@ -15,7 +15,7 @@ Features
 
 Requirements
 ------------
-* Python 3.6.7+
+* Python 3.7+
         - **NOTE:** Python 2 support has ceased as of v4.0. See this `blog post`_ for more detail.
 * `pip`_
 

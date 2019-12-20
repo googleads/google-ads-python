@@ -13,6 +13,12 @@
 # limitations under the License.
 """Common utilities for the Google Ads API client library."""
 
+import functools
+import re
+
+# This regex matches characters preceded by start of line or an underscore.
+_RE_FIND_CHARS_TO_UPPERCASE = re.compile(r'(?:_|^)([a-z])')
+
 
 class ResourceName:
 
@@ -41,3 +47,59 @@ class ResourceName:
         """
         return cls._COMPOSITE_DELIMITER.join(arg)
 
+
+def get_nested_attr(obj, attr, *args):
+    """Gets the value of a nested attribute from an object.
+
+    Args:
+      obj: an object to retrieve an attribute value from.
+      attr: a string of the attribute separated by dots.
+
+    Returns:
+      The object attribute value or the given *args if the attr isn't present.
+    """
+    def _getattr(obj, attr):
+        return getattr(obj, attr, *args)
+
+    return functools.reduce(_getattr, [obj] + attr.split('.'))
+
+
+def convert_upper_case_to_snake_case(string):
+    """Converts a string from UpperCase to snake_case.
+
+    Primarily used to translate module names when retrieving them from version
+    modules' __init__.py files.
+
+    Args:
+        string: an arbitrary string to convert.
+    """
+    new_string = ''
+    index = 0
+
+    for char in string:
+        if index == 0:
+            new_string += char.lower()
+        elif char.isupper():
+            new_string += f'_{char.lower()}'
+        else:
+            new_string += char
+
+        index += 1
+
+    return new_string
+
+
+def convert_snake_case_to_upper_case(string):
+    """Converts a string from snake_case to UpperCase.
+
+    Primarily used to translate module names when retrieving them from version
+    modules' __init__.py files.
+
+    Args:
+        string: an arbitrary string to convert.
+    """
+    def converter(match):
+        """Convert a string to strip underscores then uppercase it."""
+        return match.group().replace('_', '').upper()
+
+    return _RE_FIND_CHARS_TO_UPPERCASE.sub(converter, string)

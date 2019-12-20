@@ -23,9 +23,8 @@ from google.ads.google_ads import client as Client
 from google.ads.google_ads.interceptors import ExceptionInterceptor
 
 latest_version = Client._DEFAULT_VERSION
-errors_path = 'google.ads.google_ads.{}.proto.errors'.format(latest_version)
-errors = import_module(errors_path)
-error_protos = errors.errors_pb2
+errors_path = f'google.ads.google_ads.{latest_version}.proto.errors.errors_pb2'
+error_protos = import_module(errors_path)
 
 class ExceptionInterceptorTest(TestCase):
     _MOCK_FAILURE_VALUE = b"\n \n\x02\x08\x10\x12\x1aInvalid customer ID '123'."

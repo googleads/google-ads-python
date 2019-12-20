@@ -42,7 +42,7 @@ DESCRIPTOR = _descriptor.FileDescriptor(
   package='google.ads.googleads.v2.resources',
   syntax='proto3',
   serialized_options=_b('\n%com.google.ads.googleads.v2.resourcesB\rCampaignProtoP\001ZJgoogle.golang.org/genproto/googleapis/ads/googleads/v2/resources;resources\242\002\003GAA\252\002!Google.Ads.GoogleAds.V2.Resources\312\002!Google\\Ads\\GoogleAds\\V2\\Resources\352\002%Google::Ads::GoogleAds::V2::Resources'),
-  serialized_pb=_b('\n6google/ads/googleads_v2/proto/resources/campaign.proto\x12!google.ads.googleads.v2.resources\x1a\x32google/ads/googleads_v2/proto/common/bidding.proto\x1a;google/ads/googleads_v2/proto/common/custom_parameter.proto\x1a\x38google/ads/googleads_v2/proto/common/frequency_cap.proto\x1a\x44google/ads/googleads_v2/proto/common/real_time_bidding_setting.proto\x1a<google/ads/googleads_v2/proto/common/targeting_setting.proto\x1aHgoogle/ads/googleads_v2/proto/enums/ad_serving_optimization_status.proto\x1a\x46google/ads/googleads_v2/proto/enums/advertising_channel_sub_type.proto\x1a\x42google/ads/googleads_v2/proto/enums/advertising_channel_type.proto\x1a@google/ads/googleads_v2/proto/enums/app_campaign_app_store.proto\x1aQgoogle/ads/googleads_v2/proto/enums/app_campaign_bidding_strategy_goal_type.proto\x1a?google/ads/googleads_v2/proto/enums/bidding_strategy_type.proto\x1a\x42google/ads/googleads_v2/proto/enums/brand_safety_suitability.proto\x1a\x42google/ads/googleads_v2/proto/enums/campaign_experiment_type.proto\x1a\x41google/ads/googleads_v2/proto/enums/campaign_serving_status.proto\x1a\x39google/ads/googleads_v2/proto/enums/campaign_status.proto\x1a\x42google/ads/googleads_v2/proto/enums/negative_geo_target_type.proto\x1a\x36google/ads/googleads_v2/proto/enums/payment_mode.proto\x1a\x42google/ads/googleads_v2/proto/enums/positive_geo_target_type.proto\x1aHgoogle/ads/googleads_v2/proto/enums/vanity_pharma_display_url_mode.proto\x1a<google/ads/googleads_v2/proto/enums/vanity_pharma_text.proto\x1a\x1egoogle/protobuf/wrappers.proto\x1a\x1cgoogle/api/annotations.proto\"\xcf)\n\x08\x43\x61mpaign\x12\x15\n\rresource_name\x18\x01 \x01(\t\x12\'\n\x02id\x18\x03 \x01(\x0b\x32\x1b.google.protobuf.Int64Value\x12*\n\x04name\x18\x04 \x01(\x0b\x32\x1c.google.protobuf.StringValue\x12P\n\x06status\x18\x05 \x01(\x0e\x32@.google.ads.googleads.v2.enums.CampaignStatusEnum.CampaignStatus\x12\x66\n\x0eserving_status\x18\x15 \x01(\x0e\x32N.google.ads.googleads.v2.enums.CampaignServingStatusEnum.CampaignServingStatus\x12\x82\x01\n\x1e\x61\x64_serving_optimization_status\x18\x08 \x01(\x0e\x32Z.google.ads.googleads.v2.enums.AdServingOptimizationStatusEnum.AdServingOptimizationStatus\x12r\n\x18\x61\x64vertising_channel_type\x18\t \x01(\x0e\x32P.google.ads.googleads.v2.enums.AdvertisingChannelTypeEnum.AdvertisingChannelType\x12|\n\x1c\x61\x64vertising_channel_sub_type\x18\n \x01(\x0e\x32V.google.ads.googleads.v2.enums.AdvertisingChannelSubTypeEnum.AdvertisingChannelSubType\x12;\n\x15tracking_url_template\x18\x0b \x01(\x0b\x32\x1c.google.protobuf.StringValue\x12N\n\x15url_custom_parameters\x18\x0c \x03(\x0b\x32/.google.ads.googleads.v2.common.CustomParameter\x12Y\n\x19real_time_bidding_setting\x18\' \x01(\x0b\x32\x36.google.ads.googleads.v2.common.RealTimeBiddingSetting\x12U\n\x10network_settings\x18\x0e \x01(\x0b\x32;.google.ads.googleads.v2.resources.Campaign.NetworkSettings\x12S\n\rhotel_setting\x18  \x01(\x0b\x32<.google.ads.googleads.v2.resources.Campaign.HotelSettingInfo\x12g\n\x1a\x64ynamic_search_ads_setting\x18! \x01(\x0b\x32\x43.google.ads.googleads.v2.resources.Campaign.DynamicSearchAdsSetting\x12U\n\x10shopping_setting\x18$ \x01(\x0b\x32;.google.ads.googleads.v2.resources.Campaign.ShoppingSetting\x12K\n\x11targeting_setting\x18+ \x01(\x0b\x32\x30.google.ads.googleads.v2.common.TargetingSetting\x12\x61\n\x17geo_target_type_setting\x18/ \x01(\x0b\x32@.google.ads.googleads.v2.resources.Campaign.GeoTargetTypeSetting\x12\\\n\x14\x61pp_campaign_setting\x18\x33 \x01(\x0b\x32>.google.ads.googleads.v2.resources.Campaign.AppCampaignSetting\x12,\n\x06labels\x18\x35 \x03(\x0b\x32\x1c.google.protobuf.StringValue\x12i\n\x0f\x65xperiment_type\x18\x11 \x01(\x0e\x32P.google.ads.googleads.v2.enums.CampaignExperimentTypeEnum.CampaignExperimentType\x12\x33\n\rbase_campaign\x18\x1c \x01(\x0b\x32\x1c.google.protobuf.StringValue\x12\x35\n\x0f\x63\x61mpaign_budget\x18\x06 \x01(\x0b\x32\x1c.google.protobuf.StringValue\x12i\n\x15\x62idding_strategy_type\x18\x16 \x01(\x0e\x32J.google.ads.googleads.v2.enums.BiddingStrategyTypeEnum.BiddingStrategyType\x12\x30\n\nstart_date\x18\x13 \x01(\x0b\x32\x1c.google.protobuf.StringValue\x12.\n\x08\x65nd_date\x18\x14 \x01(\x0b\x32\x1c.google.protobuf.StringValue\x12\x36\n\x10\x66inal_url_suffix\x18& \x01(\x0b\x32\x1c.google.protobuf.StringValue\x12I\n\x0e\x66requency_caps\x18( \x03(\x0b\x32\x31.google.ads.googleads.v2.common.FrequencyCapEntry\x12x\n\x1evideo_brand_safety_suitability\x18* \x01(\x0e\x32P.google.ads.googleads.v2.enums.BrandSafetySuitabilityEnum.BrandSafetySuitability\x12O\n\rvanity_pharma\x18, \x01(\x0b\x32\x38.google.ads.googleads.v2.resources.Campaign.VanityPharma\x12\x61\n\x16selective_optimization\x18- \x01(\x0b\x32\x41.google.ads.googleads.v2.resources.Campaign.SelectiveOptimization\x12U\n\x10tracking_setting\x18. \x01(\x0b\x32;.google.ads.googleads.v2.resources.Campaign.TrackingSetting\x12P\n\x0cpayment_mode\x18\x34 \x01(\x0e\x32:.google.ads.googleads.v2.enums.PaymentModeEnum.PaymentMode\x12\x38\n\x10\x62idding_strategy\x18\x17 \x01(\x0b\x32\x1c.google.protobuf.StringValueH\x00\x12@\n\ncommission\x18\x31 \x01(\x0b\x32*.google.ads.googleads.v2.common.CommissionH\x00\x12?\n\nmanual_cpc\x18\x18 \x01(\x0b\x32).google.ads.googleads.v2.common.ManualCpcH\x00\x12?\n\nmanual_cpm\x18\x19 \x01(\x0b\x32).google.ads.googleads.v2.common.ManualCpmH\x00\x12?\n\nmanual_cpv\x18% \x01(\x0b\x32).google.ads.googleads.v2.common.ManualCpvH\x00\x12S\n\x14maximize_conversions\x18\x1e \x01(\x0b\x32\x33.google.ads.googleads.v2.common.MaximizeConversionsH\x00\x12\\\n\x19maximize_conversion_value\x18\x1f \x01(\x0b\x32\x37.google.ads.googleads.v2.common.MaximizeConversionValueH\x00\x12?\n\ntarget_cpa\x18\x1a \x01(\x0b\x32).google.ads.googleads.v2.common.TargetCpaH\x00\x12X\n\x17target_impression_share\x18\x30 \x01(\x0b\x32\x35.google.ads.googleads.v2.common.TargetImpressionShareH\x00\x12\x41\n\x0btarget_roas\x18\x1d \x01(\x0b\x32*.google.ads.googleads.v2.common.TargetRoasH\x00\x12\x43\n\x0ctarget_spend\x18\x1b \x01(\x0b\x32+.google.ads.googleads.v2.common.TargetSpendH\x00\x12\x41\n\x0bpercent_cpc\x18\" \x01(\x0b\x32*.google.ads.googleads.v2.common.PercentCpcH\x00\x12?\n\ntarget_cpm\x18) \x01(\x0b\x32).google.ads.googleads.v2.common.TargetCpmH\x00\x1a\x85\x02\n\x0fNetworkSettings\x12\x38\n\x14target_google_search\x18\x01 \x01(\x0b\x32\x1a.google.protobuf.BoolValue\x12\x39\n\x15target_search_network\x18\x02 \x01(\x0b\x32\x1a.google.protobuf.BoolValue\x12:\n\x16target_content_network\x18\x03 \x01(\x0b\x32\x1a.google.protobuf.BoolValue\x12\x41\n\x1dtarget_partner_search_network\x18\x04 \x01(\x0b\x32\x1a.google.protobuf.BoolValue\x1aH\n\x10HotelSettingInfo\x12\x34\n\x0fhotel_center_id\x18\x01 \x01(\x0b\x32\x1b.google.protobuf.Int64Value\x1a\xb0\x02\n\x12\x41ppCampaignSetting\x12\x8c\x01\n\x1a\x62idding_strategy_goal_type\x18\x01 \x01(\x0e\x32h.google.ads.googleads.v2.enums.AppCampaignBiddingStrategyGoalTypeEnum.AppCampaignBiddingStrategyGoalType\x12,\n\x06\x61pp_id\x18\x02 \x01(\x0b\x32\x1c.google.protobuf.StringValue\x12]\n\tapp_store\x18\x03 \x01(\x0e\x32J.google.ads.googleads.v2.enums.AppCampaignAppStoreEnum.AppCampaignAppStore\x1a\xea\x01\n\x17\x44ynamicSearchAdsSetting\x12\x31\n\x0b\x64omain_name\x18\x01 \x01(\x0b\x32\x1c.google.protobuf.StringValue\x12\x33\n\rlanguage_code\x18\x02 \x01(\x0b\x32\x1c.google.protobuf.StringValue\x12:\n\x16use_supplied_urls_only\x18\x03 \x01(\x0b\x32\x1a.google.protobuf.BoolValue\x12+\n\x05\x66\x65\x65\x64s\x18\x05 \x03(\x0b\x32\x1c.google.protobuf.StringValue\x1a\x45\n\x0fTrackingSetting\x12\x32\n\x0ctracking_url\x18\x01 \x01(\x0b\x32\x1c.google.protobuf.StringValue\x1aQ\n\x15SelectiveOptimization\x12\x38\n\x12\x63onversion_actions\x18\x01 \x03(\x0b\x32\x1c.google.protobuf.StringValue\x1a\xe2\x01\n\x0fShoppingSetting\x12\x30\n\x0bmerchant_id\x18\x01 \x01(\x0b\x32\x1b.google.protobuf.Int64Value\x12\x33\n\rsales_country\x18\x02 \x01(\x0b\x32\x1c.google.protobuf.StringValue\x12\x36\n\x11\x63\x61mpaign_priority\x18\x03 \x01(\x0b\x32\x1b.google.protobuf.Int32Value\x12\x30\n\x0c\x65nable_local\x18\x04 \x01(\x0b\x32\x1a.google.protobuf.BoolValue\x1a\xfa\x01\n\x14GeoTargetTypeSetting\x12p\n\x18positive_geo_target_type\x18\x01 \x01(\x0e\x32N.google.ads.googleads.v2.enums.PositiveGeoTargetTypeEnum.PositiveGeoTargetType\x12p\n\x18negative_geo_target_type\x18\x02 \x01(\x0e\x32N.google.ads.googleads.v2.enums.NegativeGeoTargetTypeEnum.NegativeGeoTargetType\x1a\xf3\x01\n\x0cVanityPharma\x12\x80\x01\n\x1evanity_pharma_display_url_mode\x18\x01 \x01(\x0e\x32X.google.ads.googleads.v2.enums.VanityPharmaDisplayUrlModeEnum.VanityPharmaDisplayUrlMode\x12`\n\x12vanity_pharma_text\x18\x02 \x01(\x0e\x32\x44.google.ads.googleads.v2.enums.VanityPharmaTextEnum.VanityPharmaTextB\x1b\n\x19\x63\x61mpaign_bidding_strategyB\xfa\x01\n%com.google.ads.googleads.v2.resourcesB\rCampaignProtoP\x01ZJgoogle.golang.org/genproto/googleapis/ads/googleads/v2/resources;resources\xa2\x02\x03GAA\xaa\x02!Google.Ads.GoogleAds.V2.Resources\xca\x02!Google\\Ads\\GoogleAds\\V2\\Resources\xea\x02%Google::Ads::GoogleAds::V2::Resourcesb\x06proto3')
+  serialized_pb=_b('\n6google/ads/googleads_v2/proto/resources/campaign.proto\x12!google.ads.googleads.v2.resources\x1a\x32google/ads/googleads_v2/proto/common/bidding.proto\x1a;google/ads/googleads_v2/proto/common/custom_parameter.proto\x1a\x38google/ads/googleads_v2/proto/common/frequency_cap.proto\x1a\x44google/ads/googleads_v2/proto/common/real_time_bidding_setting.proto\x1a<google/ads/googleads_v2/proto/common/targeting_setting.proto\x1aHgoogle/ads/googleads_v2/proto/enums/ad_serving_optimization_status.proto\x1a\x46google/ads/googleads_v2/proto/enums/advertising_channel_sub_type.proto\x1a\x42google/ads/googleads_v2/proto/enums/advertising_channel_type.proto\x1a@google/ads/googleads_v2/proto/enums/app_campaign_app_store.proto\x1aQgoogle/ads/googleads_v2/proto/enums/app_campaign_bidding_strategy_goal_type.proto\x1a?google/ads/googleads_v2/proto/enums/bidding_strategy_type.proto\x1a\x42google/ads/googleads_v2/proto/enums/brand_safety_suitability.proto\x1a\x42google/ads/googleads_v2/proto/enums/campaign_experiment_type.proto\x1a\x41google/ads/googleads_v2/proto/enums/campaign_serving_status.proto\x1a\x39google/ads/googleads_v2/proto/enums/campaign_status.proto\x1a\x42google/ads/googleads_v2/proto/enums/negative_geo_target_type.proto\x1a\x36google/ads/googleads_v2/proto/enums/payment_mode.proto\x1a\x42google/ads/googleads_v2/proto/enums/positive_geo_target_type.proto\x1aHgoogle/ads/googleads_v2/proto/enums/vanity_pharma_display_url_mode.proto\x1a<google/ads/googleads_v2/proto/enums/vanity_pharma_text.proto\x1a\x1egoogle/protobuf/wrappers.proto\x1a\x1cgoogle/api/annotations.proto\"\xcf)\n\x08\x43\x61mpaign\x12\x15\n\rresource_name\x18\x01 \x01(\t\x12\'\n\x02id\x18\x03 \x01(\x0b\x32\x1b.google.protobuf.Int64Value\x12*\n\x04name\x18\x04 \x01(\x0b\x32\x1c.google.protobuf.StringValue\x12P\n\x06status\x18\x05 \x01(\x0e\x32@.google.ads.googleads.v2.enums.CampaignStatusEnum.CampaignStatus\x12\x66\n\x0eserving_status\x18\x15 \x01(\x0e\x32N.google.ads.googleads.v2.enums.CampaignServingStatusEnum.CampaignServingStatus\x12\x82\x01\n\x1e\x61\x64_serving_optimization_status\x18\x08 \x01(\x0e\x32Z.google.ads.googleads.v2.enums.AdServingOptimizationStatusEnum.AdServingOptimizationStatus\x12r\n\x18\x61\x64vertising_channel_type\x18\t \x01(\x0e\x32P.google.ads.googleads.v2.enums.AdvertisingChannelTypeEnum.AdvertisingChannelType\x12|\n\x1c\x61\x64vertising_channel_sub_type\x18\n \x01(\x0e\x32V.google.ads.googleads.v2.enums.AdvertisingChannelSubTypeEnum.AdvertisingChannelSubType\x12;\n\x15tracking_url_template\x18\x0b \x01(\x0b\x32\x1c.google.protobuf.StringValue\x12N\n\x15url_custom_parameters\x18\x0c \x03(\x0b\x32/.google.ads.googleads.v2.common.CustomParameter\x12Y\n\x19real_time_bidding_setting\x18\' \x01(\x0b\x32\x36.google.ads.googleads.v2.common.RealTimeBiddingSetting\x12U\n\x10network_settings\x18\x0e \x01(\x0b\x32;.google.ads.googleads.v2.resources.Campaign.NetworkSettings\x12S\n\rhotel_setting\x18  \x01(\x0b\x32<.google.ads.googleads.v2.resources.Campaign.HotelSettingInfo\x12g\n\x1a\x64ynamic_search_ads_setting\x18! \x01(\x0b\x32\x43.google.ads.googleads.v2.resources.Campaign.DynamicSearchAdsSetting\x12U\n\x10shopping_setting\x18$ \x01(\x0b\x32;.google.ads.googleads.v2.resources.Campaign.ShoppingSetting\x12K\n\x11targeting_setting\x18+ \x01(\x0b\x32\x30.google.ads.googleads.v2.common.TargetingSetting\x12\x61\n\x17geo_target_type_setting\x18/ \x01(\x0b\x32@.google.ads.googleads.v2.resources.Campaign.GeoTargetTypeSetting\x12\\\n\x14\x61pp_campaign_setting\x18\x33 \x01(\x0b\x32>.google.ads.googleads.v2.resources.Campaign.AppCampaignSetting\x12,\n\x06labels\x18\x35 \x03(\x0b\x32\x1c.google.protobuf.StringValue\x12i\n\x0f\x65xperiment_type\x18\x11 \x01(\x0e\x32P.google.ads.googleads.v2.enums.CampaignExperimentTypeEnum.CampaignExperimentType\x12\x33\n\rbase_campaign\x18\x1c \x01(\x0b\x32\x1c.google.protobuf.StringValue\x12\x35\n\x0f\x63\x61mpaign_budget\x18\x06 \x01(\x0b\x32\x1c.google.protobuf.StringValue\x12i\n\x15\x62idding_strategy_type\x18\x16 \x01(\x0e\x32J.google.ads.googleads.v2.enums.BiddingStrategyTypeEnum.BiddingStrategyType\x12\x30\n\nstart_date\x18\x13 \x01(\x0b\x32\x1c.google.protobuf.StringValue\x12.\n\x08\x65nd_date\x18\x14 \x01(\x0b\x32\x1c.google.protobuf.StringValue\x12\x36\n\x10\x66inal_url_suffix\x18& \x01(\x0b\x32\x1c.google.protobuf.StringValue\x12I\n\x0e\x66requency_caps\x18( \x03(\x0b\x32\x31.google.ads.googleads.v2.common.FrequencyCapEntry\x12x\n\x1evideo_brand_safety_suitability\x18* \x01(\x0e\x32P.google.ads.googleads.v2.enums.BrandSafetySuitabilityEnum.BrandSafetySuitability\x12O\n\rvanity_pharma\x18, \x01(\x0b\x32\x38.google.ads.googleads.v2.resources.Campaign.VanityPharma\x12\x61\n\x16selective_optimization\x18- \x01(\x0b\x32\x41.google.ads.googleads.v2.resources.Campaign.SelectiveOptimization\x12U\n\x10tracking_setting\x18. \x01(\x0b\x32;.google.ads.googleads.v2.resources.Campaign.TrackingSetting\x12P\n\x0cpayment_mode\x18\x34 \x01(\x0e\x32:.google.ads.googleads.v2.enums.PaymentModeEnum.PaymentMode\x12\x38\n\x10\x62idding_strategy\x18\x17 \x01(\x0b\x32\x1c.google.protobuf.StringValueH\x00\x12@\n\ncommission\x18\x31 \x01(\x0b\x32*.google.ads.googleads.v2.common.CommissionH\x00\x12?\n\nmanual_cpc\x18\x18 \x01(\x0b\x32).google.ads.googleads.v2.common.ManualCpcH\x00\x12?\n\nmanual_cpm\x18\x19 \x01(\x0b\x32).google.ads.googleads.v2.common.ManualCpmH\x00\x12?\n\nmanual_cpv\x18% \x01(\x0b\x32).google.ads.googleads.v2.common.ManualCpvH\x00\x12S\n\x14maximize_conversions\x18\x1e \x01(\x0b\x32\x33.google.ads.googleads.v2.common.MaximizeConversionsH\x00\x12\\\n\x19maximize_conversion_value\x18\x1f \x01(\x0b\x32\x37.google.ads.googleads.v2.common.MaximizeConversionValueH\x00\x12?\n\ntarget_cpa\x18\x1a \x01(\x0b\x32).google.ads.googleads.v2.common.TargetCpaH\x00\x12X\n\x17target_impression_share\x18\x30 \x01(\x0b\x32\x35.google.ads.googleads.v2.common.TargetImpressionShareH\x00\x12\x41\n\x0btarget_roas\x18\x1d \x01(\x0b\x32*.google.ads.googleads.v2.common.TargetRoasH\x00\x12\x43\n\x0ctarget_spend\x18\x1b \x01(\x0b\x32+.google.ads.googleads.v2.common.TargetSpendH\x00\x12\x41\n\x0bpercent_cpc\x18\" \x01(\x0b\x32*.google.ads.googleads.v2.common.PercentCpcH\x00\x12?\n\ntarget_cpm\x18) \x01(\x0b\x32).google.ads.googleads.v2.common.TargetCpmH\x00\x1a\x85\x02\n\x0fNetworkSettings\x12\x38\n\x14target_google_search\x18\x01 \x01(\x0b\x32\x1a.google.protobuf.BoolValue\x12\x39\n\x15target_search_network\x18\x02 \x01(\x0b\x32\x1a.google.protobuf.BoolValue\x12:\n\x16target_content_network\x18\x03 \x01(\x0b\x32\x1a.google.protobuf.BoolValue\x12\x41\n\x1dtarget_partner_search_network\x18\x04 \x01(\x0b\x32\x1a.google.protobuf.BoolValue\x1aH\n\x10HotelSettingInfo\x12\x34\n\x0fhotel_center_id\x18\x01 \x01(\x0b\x32\x1b.google.protobuf.Int64Value\x1aQ\n\x15SelectiveOptimization\x12\x38\n\x12\x63onversion_actions\x18\x01 \x03(\x0b\x32\x1c.google.protobuf.StringValue\x1a\xea\x01\n\x17\x44ynamicSearchAdsSetting\x12\x31\n\x0b\x64omain_name\x18\x01 \x01(\x0b\x32\x1c.google.protobuf.StringValue\x12\x33\n\rlanguage_code\x18\x02 \x01(\x0b\x32\x1c.google.protobuf.StringValue\x12:\n\x16use_supplied_urls_only\x18\x03 \x01(\x0b\x32\x1a.google.protobuf.BoolValue\x12+\n\x05\x66\x65\x65\x64s\x18\x05 \x03(\x0b\x32\x1c.google.protobuf.StringValue\x1a\xb0\x02\n\x12\x41ppCampaignSetting\x12\x8c\x01\n\x1a\x62idding_strategy_goal_type\x18\x01 \x01(\x0e\x32h.google.ads.googleads.v2.enums.AppCampaignBiddingStrategyGoalTypeEnum.AppCampaignBiddingStrategyGoalType\x12,\n\x06\x61pp_id\x18\x02 \x01(\x0b\x32\x1c.google.protobuf.StringValue\x12]\n\tapp_store\x18\x03 \x01(\x0e\x32J.google.ads.googleads.v2.enums.AppCampaignAppStoreEnum.AppCampaignAppStore\x1a\xe2\x01\n\x0fShoppingSetting\x12\x30\n\x0bmerchant_id\x18\x01 \x01(\x0b\x32\x1b.google.protobuf.Int64Value\x12\x33\n\rsales_country\x18\x02 \x01(\x0b\x32\x1c.google.protobuf.StringValue\x12\x36\n\x11\x63\x61mpaign_priority\x18\x03 \x01(\x0b\x32\x1b.google.protobuf.Int32Value\x12\x30\n\x0c\x65nable_local\x18\x04 \x01(\x0b\x32\x1a.google.protobuf.BoolValue\x1a\x45\n\x0fTrackingSetting\x12\x32\n\x0ctracking_url\x18\x01 \x01(\x0b\x32\x1c.google.protobuf.StringValue\x1a\xfa\x01\n\x14GeoTargetTypeSetting\x12p\n\x18positive_geo_target_type\x18\x01 \x01(\x0e\x32N.google.ads.googleads.v2.enums.PositiveGeoTargetTypeEnum.PositiveGeoTargetType\x12p\n\x18negative_geo_target_type\x18\x02 \x01(\x0e\x32N.google.ads.googleads.v2.enums.NegativeGeoTargetTypeEnum.NegativeGeoTargetType\x1a\xf3\x01\n\x0cVanityPharma\x12\x80\x01\n\x1evanity_pharma_display_url_mode\x18\x01 \x01(\x0e\x32X.google.ads.googleads.v2.enums.VanityPharmaDisplayUrlModeEnum.VanityPharmaDisplayUrlMode\x12`\n\x12vanity_pharma_text\x18\x02 \x01(\x0e\x32\x44.google.ads.googleads.v2.enums.VanityPharmaTextEnum.VanityPharmaTextB\x1b\n\x19\x63\x61mpaign_bidding_strategyB\xfa\x01\n%com.google.ads.googleads.v2.resourcesB\rCampaignProtoP\x01ZJgoogle.golang.org/genproto/googleapis/ads/googleads/v2/resources;resources\xa2\x02\x03GAA\xaa\x02!Google.Ads.GoogleAds.V2.Resources\xca\x02!Google\\Ads\\GoogleAds\\V2\\Resources\xea\x02%Google::Ads::GoogleAds::V2::Resourcesb\x06proto3')
   ,
   dependencies=[google_dot_ads_dot_googleads__v2_dot_proto_dot_common_dot_bidding__pb2.DESCRIPTOR,google_dot_ads_dot_googleads__v2_dot_proto_dot_common_dot_custom__parameter__pb2.DESCRIPTOR,google_dot_ads_dot_googleads__v2_dot_proto_dot_common_dot_frequency__cap__pb2.DESCRIPTOR,google_dot_ads_dot_googleads__v2_dot_proto_dot_common_dot_real__time__bidding__setting__pb2.DESCRIPTOR,google_dot_ads_dot_googleads__v2_dot_proto_dot_common_dot_targeting__setting__pb2.DESCRIPTOR,google_dot_ads_dot_googleads__v2_dot_proto_dot_enums_dot_ad__serving__optimization__status__pb2.DESCRIPTOR,google_dot_ads_dot_googleads__v2_dot_proto_dot_enums_dot_advertising__channel__sub__type__pb2.DESCRIPTOR,google_dot_ads_dot_googleads__v2_dot_proto_dot_enums_dot_advertising__channel__type__pb2.DESCRIPTOR,google_dot_ads_dot_googleads__v2_dot_proto_dot_enums_dot_app__campaign__app__store__pb2.DESCRIPTOR,google_dot_ads_dot_googleads__v2_dot_proto_dot_enums_dot_app__campaign__bidding__strategy__goal__type__pb2.DESCRIPTOR,google_dot_ads_dot_googleads__v2_dot_proto_dot_enums_dot_bidding__strategy__type__pb2.DESCRIPTOR,google_dot_ads_dot_googleads__v2_dot_proto_dot_enums_dot_brand__safety__suitability__pb2.DESCRIPTOR,google_dot_ads_dot_googleads__v2_dot_proto_dot_enums_dot_campaign__experiment__type__pb2.DESCRIPTOR,google_dot_ads_dot_googleads__v2_dot_proto_dot_enums_dot_campaign__serving__status__pb2.DESCRIPTOR,google_dot_ads_dot_googleads__v2_dot_proto_dot_enums_dot_campaign__status__pb2.DESCRIPTOR,google_dot_ads_dot_googleads__v2_dot_proto_dot_enums_dot_negative__geo__target__type__pb2.DESCRIPTOR,google_dot_ads_dot_googleads__v2_dot_proto_dot_enums_dot_payment__mode__pb2.DESCRIPTOR,google_dot_ads_dot_googleads__v2_dot_proto_dot_enums_dot_positive__geo__target__type__pb2.DESCRIPTOR,google_dot_ads_dot_googleads__v2_dot_proto_dot_enums_dot_vanity__pharma__display__url__mode__pb2.DESCRIPTOR,google_dot_ads_dot_googleads__v2_dot_proto_dot_enums_dot_vanity__pharma__text__pb2.DESCRIPTOR,google_dot_protobuf_dot_wrappers__pb2.DESCRIPTOR,google_dot_api_dot_annotations__pb2.DESCRIPTOR,])
 
@@ -130,31 +130,17 @@ _CAMPAIGN_HOTELSETTINGINFO = _descriptor.Descriptor(
   serialized_end=5349,
 )
 
-_CAMPAIGN_APPCAMPAIGNSETTING = _descriptor.Descriptor(
-  name='AppCampaignSetting',
-  full_name='google.ads.googleads.v2.resources.Campaign.AppCampaignSetting',
+_CAMPAIGN_SELECTIVEOPTIMIZATION = _descriptor.Descriptor(
+  name='SelectiveOptimization',
+  full_name='google.ads.googleads.v2.resources.Campaign.SelectiveOptimization',
   filename=None,
   file=DESCRIPTOR,
   containing_type=None,
   fields=[
     _descriptor.FieldDescriptor(
-      name='bidding_strategy_goal_type', full_name='google.ads.googleads.v2.resources.Campaign.AppCampaignSetting.bidding_strategy_goal_type', index=0,
-      number=1, type=14, cpp_type=8, label=1,
-      has_default_value=False, default_value=0,
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR),
-    _descriptor.FieldDescriptor(
-      name='app_id', full_name='google.ads.googleads.v2.resources.Campaign.AppCampaignSetting.app_id', index=1,
-      number=2, type=11, cpp_type=10, label=1,
-      has_default_value=False, default_value=None,
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR),
-    _descriptor.FieldDescriptor(
-      name='app_store', full_name='google.ads.googleads.v2.resources.Campaign.AppCampaignSetting.app_store', index=2,
-      number=3, type=14, cpp_type=8, label=1,
-      has_default_value=False, default_value=0,
+      name='conversion_actions', full_name='google.ads.googleads.v2.resources.Campaign.SelectiveOptimization.conversion_actions', index=0,
+      number=1, type=11, cpp_type=10, label=3,
+      has_default_value=False, default_value=[],
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       serialized_options=None, file=DESCRIPTOR),
@@ -170,8 +156,8 @@ _CAMPAIGN_APPCAMPAIGNSETTING = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=5352,
-  serialized_end=5656,
+  serialized_start=5351,
+  serialized_end=5432,
 )
 
 _CAMPAIGN_DYNAMICSEARCHADSSETTING = _descriptor.Descriptor(
@@ -221,51 +207,35 @@ _CAMPAIGN_DYNAMICSEARCHADSSETTING = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=5659,
-  serialized_end=5893,
+  serialized_start=5435,
+  serialized_end=5669,
 )
 
-_CAMPAIGN_TRACKINGSETTING = _descriptor.Descriptor(
-  name='TrackingSetting',
-  full_name='google.ads.googleads.v2.resources.Campaign.TrackingSetting',
+_CAMPAIGN_APPCAMPAIGNSETTING = _descriptor.Descriptor(
+  name='AppCampaignSetting',
+  full_name='google.ads.googleads.v2.resources.Campaign.AppCampaignSetting',
   filename=None,
   file=DESCRIPTOR,
   containing_type=None,
   fields=[
     _descriptor.FieldDescriptor(
-      name='tracking_url', full_name='google.ads.googleads.v2.resources.Campaign.TrackingSetting.tracking_url', index=0,
-      number=1, type=11, cpp_type=10, label=1,
+      name='bidding_strategy_goal_type', full_name='google.ads.googleads.v2.resources.Campaign.AppCampaignSetting.bidding_strategy_goal_type', index=0,
+      number=1, type=14, cpp_type=8, label=1,
+      has_default_value=False, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR),
+    _descriptor.FieldDescriptor(
+      name='app_id', full_name='google.ads.googleads.v2.resources.Campaign.AppCampaignSetting.app_id', index=1,
+      number=2, type=11, cpp_type=10, label=1,
       has_default_value=False, default_value=None,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       serialized_options=None, file=DESCRIPTOR),
-  ],
-  extensions=[
-  ],
-  nested_types=[],
-  enum_types=[
-  ],
-  serialized_options=None,
-  is_extendable=False,
-  syntax='proto3',
-  extension_ranges=[],
-  oneofs=[
-  ],
-  serialized_start=5895,
-  serialized_end=5964,
-)
-
-_CAMPAIGN_SELECTIVEOPTIMIZATION = _descriptor.Descriptor(
-  name='SelectiveOptimization',
-  full_name='google.ads.googleads.v2.resources.Campaign.SelectiveOptimization',
-  filename=None,
-  file=DESCRIPTOR,
-  containing_type=None,
-  fields=[
     _descriptor.FieldDescriptor(
-      name='conversion_actions', full_name='google.ads.googleads.v2.resources.Campaign.SelectiveOptimization.conversion_actions', index=0,
-      number=1, type=11, cpp_type=10, label=3,
-      has_default_value=False, default_value=[],
+      name='app_store', full_name='google.ads.googleads.v2.resources.Campaign.AppCampaignSetting.app_store', index=2,
+      number=3, type=14, cpp_type=8, label=1,
+      has_default_value=False, default_value=0,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       serialized_options=None, file=DESCRIPTOR),
@@ -281,8 +251,8 @@ _CAMPAIGN_SELECTIVEOPTIMIZATION = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=5966,
-  serialized_end=6047,
+  serialized_start=5672,
+  serialized_end=5976,
 )
 
 _CAMPAIGN_SHOPPINGSETTING = _descriptor.Descriptor(
@@ -332,7 +302,37 @@ _CAMPAIGN_SHOPPINGSETTING = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=6050,
+  serialized_start=5979,
+  serialized_end=6205,
+)
+
+_CAMPAIGN_TRACKINGSETTING = _descriptor.Descriptor(
+  name='TrackingSetting',
+  full_name='google.ads.googleads.v2.resources.Campaign.TrackingSetting',
+  filename=None,
+  file=DESCRIPTOR,
+  containing_type=None,
+  fields=[
+    _descriptor.FieldDescriptor(
+      name='tracking_url', full_name='google.ads.googleads.v2.resources.Campaign.TrackingSetting.tracking_url', index=0,
+      number=1, type=11, cpp_type=10, label=1,
+      has_default_value=False, default_value=None,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR),
+  ],
+  extensions=[
+  ],
+  nested_types=[],
+  enum_types=[
+  ],
+  serialized_options=None,
+  is_extendable=False,
+  syntax='proto3',
+  extension_ranges=[],
+  oneofs=[
+  ],
+  serialized_start=6207,
   serialized_end=6276,
 )
 
@@ -735,7 +735,7 @@ _CAMPAIGN = _descriptor.Descriptor(
   ],
   extensions=[
   ],
-  nested_types=[_CAMPAIGN_NETWORKSETTINGS, _CAMPAIGN_HOTELSETTINGINFO, _CAMPAIGN_APPCAMPAIGNSETTING, _CAMPAIGN_DYNAMICSEARCHADSSETTING, _CAMPAIGN_TRACKINGSETTING, _CAMPAIGN_SELECTIVEOPTIMIZATION, _CAMPAIGN_SHOPPINGSETTING, _CAMPAIGN_GEOTARGETTYPESETTING, _CAMPAIGN_VANITYPHARMA, ],
+  nested_types=[_CAMPAIGN_NETWORKSETTINGS, _CAMPAIGN_HOTELSETTINGINFO, _CAMPAIGN_SELECTIVEOPTIMIZATION, _CAMPAIGN_DYNAMICSEARCHADSSETTING, _CAMPAIGN_APPCAMPAIGNSETTING, _CAMPAIGN_SHOPPINGSETTING, _CAMPAIGN_TRACKINGSETTING, _CAMPAIGN_GEOTARGETTYPESETTING, _CAMPAIGN_VANITYPHARMA, ],
   enum_types=[
   ],
   serialized_options=None,
@@ -758,24 +758,24 @@ _CAMPAIGN_NETWORKSETTINGS.fields_by_name['target_partner_search_network'].messag
 _CAMPAIGN_NETWORKSETTINGS.containing_type = _CAMPAIGN
 _CAMPAIGN_HOTELSETTINGINFO.fields_by_name['hotel_center_id'].message_type = google_dot_protobuf_dot_wrappers__pb2._INT64VALUE
 _CAMPAIGN_HOTELSETTINGINFO.containing_type = _CAMPAIGN
-_CAMPAIGN_APPCAMPAIGNSETTING.fields_by_name['bidding_strategy_goal_type'].enum_type = google_dot_ads_dot_googleads__v2_dot_proto_dot_enums_dot_app__campaign__bidding__strategy__goal__type__pb2._APPCAMPAIGNBIDDINGSTRATEGYGOALTYPEENUM_APPCAMPAIGNBIDDINGSTRATEGYGOALTYPE
-_CAMPAIGN_APPCAMPAIGNSETTING.fields_by_name['app_id'].message_type = google_dot_protobuf_dot_wrappers__pb2._STRINGVALUE
-_CAMPAIGN_APPCAMPAIGNSETTING.fields_by_name['app_store'].enum_type = google_dot_ads_dot_googleads__v2_dot_proto_dot_enums_dot_app__campaign__app__store__pb2._APPCAMPAIGNAPPSTOREENUM_APPCAMPAIGNAPPSTORE
-_CAMPAIGN_APPCAMPAIGNSETTING.containing_type = _CAMPAIGN
+_CAMPAIGN_SELECTIVEOPTIMIZATION.fields_by_name['conversion_actions'].message_type = google_dot_protobuf_dot_wrappers__pb2._STRINGVALUE
+_CAMPAIGN_SELECTIVEOPTIMIZATION.containing_type = _CAMPAIGN
 _CAMPAIGN_DYNAMICSEARCHADSSETTING.fields_by_name['domain_name'].message_type = google_dot_protobuf_dot_wrappers__pb2._STRINGVALUE
 _CAMPAIGN_DYNAMICSEARCHADSSETTING.fields_by_name['language_code'].message_type = google_dot_protobuf_dot_wrappers__pb2._STRINGVALUE
 _CAMPAIGN_DYNAMICSEARCHADSSETTING.fields_by_name['use_supplied_urls_only'].message_type = google_dot_protobuf_dot_wrappers__pb2._BOOLVALUE
 _CAMPAIGN_DYNAMICSEARCHADSSETTING.fields_by_name['feeds'].message_type = google_dot_protobuf_dot_wrappers__pb2._STRINGVALUE
 _CAMPAIGN_DYNAMICSEARCHADSSETTING.containing_type = _CAMPAIGN
-_CAMPAIGN_TRACKINGSETTING.fields_by_name['tracking_url'].message_type = google_dot_protobuf_dot_wrappers__pb2._STRINGVALUE
-_CAMPAIGN_TRACKINGSETTING.containing_type = _CAMPAIGN
-_CAMPAIGN_SELECTIVEOPTIMIZATION.fields_by_name['conversion_actions'].message_type = google_dot_protobuf_dot_wrappers__pb2._STRINGVALUE
-_CAMPAIGN_SELECTIVEOPTIMIZATION.containing_type = _CAMPAIGN
+_CAMPAIGN_APPCAMPAIGNSETTING.fields_by_name['bidding_strategy_goal_type'].enum_type = google_dot_ads_dot_googleads__v2_dot_proto_dot_enums_dot_app__campaign__bidding__strategy__goal__type__pb2._APPCAMPAIGNBIDDINGSTRATEGYGOALTYPEENUM_APPCAMPAIGNBIDDINGSTRATEGYGOALTYPE
+_CAMPAIGN_APPCAMPAIGNSETTING.fields_by_name['app_id'].message_type = google_dot_protobuf_dot_wrappers__pb2._STRINGVALUE
+_CAMPAIGN_APPCAMPAIGNSETTING.fields_by_name['app_store'].enum_type = google_dot_ads_dot_googleads__v2_dot_proto_dot_enums_dot_app__campaign__app__store__pb2._APPCAMPAIGNAPPSTOREENUM_APPCAMPAIGNAPPSTORE
+_CAMPAIGN_APPCAMPAIGNSETTING.containing_type = _CAMPAIGN
 _CAMPAIGN_SHOPPINGSETTING.fields_by_name['merchant_id'].message_type = google_dot_protobuf_dot_wrappers__pb2._INT64VALUE
 _CAMPAIGN_SHOPPINGSETTING.fields_by_name['sales_country'].message_type = google_dot_protobuf_dot_wrappers__pb2._STRINGVALUE
 _CAMPAIGN_SHOPPINGSETTING.fields_by_name['campaign_priority'].message_type = google_dot_protobuf_dot_wrappers__pb2._INT32VALUE
 _CAMPAIGN_SHOPPINGSETTING.fields_by_name['enable_local'].message_type = google_dot_protobuf_dot_wrappers__pb2._BOOLVALUE
 _CAMPAIGN_SHOPPINGSETTING.containing_type = _CAMPAIGN
+_CAMPAIGN_TRACKINGSETTING.fields_by_name['tracking_url'].message_type = google_dot_protobuf_dot_wrappers__pb2._STRINGVALUE
+_CAMPAIGN_TRACKINGSETTING.containing_type = _CAMPAIGN
 _CAMPAIGN_GEOTARGETTYPESETTING.fields_by_name['positive_geo_target_type'].enum_type = google_dot_ads_dot_googleads__v2_dot_proto_dot_enums_dot_positive__geo__target__type__pb2._POSITIVEGEOTARGETTYPEENUM_POSITIVEGEOTARGETTYPE
 _CAMPAIGN_GEOTARGETTYPESETTING.fields_by_name['negative_geo_target_type'].enum_type = google_dot_ads_dot_googleads__v2_dot_proto_dot_enums_dot_negative__geo__target__type__pb2._NEGATIVEGEOTARGETTYPEENUM_NEGATIVEGEOTARGETTYPE
 _CAMPAIGN_GEOTARGETTYPESETTING.containing_type = _CAMPAIGN
@@ -911,23 +911,20 @@ Campaign = _reflection.GeneratedProtocolMessageType('Campaign', (_message.Messag
     ))
   ,
 
-  AppCampaignSetting = _reflection.GeneratedProtocolMessageType('AppCampaignSetting', (_message.Message,), dict(
-    DESCRIPTOR = _CAMPAIGN_APPCAMPAIGNSETTING,
+  SelectiveOptimization = _reflection.GeneratedProtocolMessageType('SelectiveOptimization', (_message.Message,), dict(
+    DESCRIPTOR = _CAMPAIGN_SELECTIVEOPTIMIZATION,
     __module__ = 'google.ads.googleads_v2.proto.resources.campaign_pb2'
     ,
-    __doc__ = """Campaign level settings for App Campaigns.
+    __doc__ = """Selective optimization setting for this campaign, which includes a set
+    of conversion actions to optimize this campaign towards.
     
     
     Attributes:
-        bidding_strategy_goal_type:
-            Represents the goal which the bidding strategy of this app
-            campaign should optimize towards.
-        app_id:
-            A string that uniquely identifies a mobile application.
-        app_store:
-            The application store that distributes this specific app.
+        conversion_actions:
+            The selected set of conversion actions for optimizing this
+            campaign.
     """,
-    # @@protoc_insertion_point(class_scope:google.ads.googleads.v2.resources.Campaign.AppCampaignSetting)
+    # @@protoc_insertion_point(class_scope:google.ads.googleads.v2.resources.Campaign.SelectiveOptimization)
     ))
   ,
 
@@ -955,35 +952,23 @@ Campaign = _reflection.GeneratedProtocolMessageType('Campaign', (_message.Messag
     ))
   ,
 
-  TrackingSetting = _reflection.GeneratedProtocolMessageType('TrackingSetting', (_message.Message,), dict(
-    DESCRIPTOR = _CAMPAIGN_TRACKINGSETTING,
+  AppCampaignSetting = _reflection.GeneratedProtocolMessageType('AppCampaignSetting', (_message.Message,), dict(
+    DESCRIPTOR = _CAMPAIGN_APPCAMPAIGNSETTING,
     __module__ = 'google.ads.googleads_v2.proto.resources.campaign_pb2'
     ,
-    __doc__ = """Campaign level settings for tracking information.
+    __doc__ = """Campaign level settings for App Campaigns.
     
     
     Attributes:
-        tracking_url:
-            The url used for dynamic tracking.
+        bidding_strategy_goal_type:
+            Represents the goal which the bidding strategy of this app
+            campaign should optimize towards.
+        app_id:
+            A string that uniquely identifies a mobile application.
+        app_store:
+            The application store that distributes this specific app.
     """,
-    # @@protoc_insertion_point(class_scope:google.ads.googleads.v2.resources.Campaign.TrackingSetting)
-    ))
-  ,
-
-  SelectiveOptimization = _reflection.GeneratedProtocolMessageType('SelectiveOptimization', (_message.Message,), dict(
-    DESCRIPTOR = _CAMPAIGN_SELECTIVEOPTIMIZATION,
-    __module__ = 'google.ads.googleads_v2.proto.resources.campaign_pb2'
-    ,
-    __doc__ = """Selective optimization setting for this campaign, which includes a set
-    of conversion actions to optimize this campaign towards.
-    
-    
-    Attributes:
-        conversion_actions:
-            The selected set of conversion actions for optimizing this
-            campaign.
-    """,
-    # @@protoc_insertion_point(class_scope:google.ads.googleads.v2.resources.Campaign.SelectiveOptimization)
+    # @@protoc_insertion_point(class_scope:google.ads.googleads.v2.resources.Campaign.AppCampaignSetting)
     ))
   ,
 
@@ -1016,6 +1001,21 @@ Campaign = _reflection.GeneratedProtocolMessageType('Campaign', (_message.Messag
             Whether to include local products.
     """,
     # @@protoc_insertion_point(class_scope:google.ads.googleads.v2.resources.Campaign.ShoppingSetting)
+    ))
+  ,
+
+  TrackingSetting = _reflection.GeneratedProtocolMessageType('TrackingSetting', (_message.Message,), dict(
+    DESCRIPTOR = _CAMPAIGN_TRACKINGSETTING,
+    __module__ = 'google.ads.googleads_v2.proto.resources.campaign_pb2'
+    ,
+    __doc__ = """Campaign level settings for tracking information.
+    
+    
+    Attributes:
+        tracking_url:
+            The url used for dynamic tracking.
+    """,
+    # @@protoc_insertion_point(class_scope:google.ads.googleads.v2.resources.Campaign.TrackingSetting)
     ))
   ,
 
@@ -1208,11 +1208,11 @@ Campaign = _reflection.GeneratedProtocolMessageType('Campaign', (_message.Messag
 _sym_db.RegisterMessage(Campaign)
 _sym_db.RegisterMessage(Campaign.NetworkSettings)
 _sym_db.RegisterMessage(Campaign.HotelSettingInfo)
-_sym_db.RegisterMessage(Campaign.AppCampaignSetting)
-_sym_db.RegisterMessage(Campaign.DynamicSearchAdsSetting)
-_sym_db.RegisterMessage(Campaign.TrackingSetting)
 _sym_db.RegisterMessage(Campaign.SelectiveOptimization)
+_sym_db.RegisterMessage(Campaign.DynamicSearchAdsSetting)
+_sym_db.RegisterMessage(Campaign.AppCampaignSetting)
 _sym_db.RegisterMessage(Campaign.ShoppingSetting)
+_sym_db.RegisterMessage(Campaign.TrackingSetting)
 _sym_db.RegisterMessage(Campaign.GeoTargetTypeSetting)
 _sym_db.RegisterMessage(Campaign.VanityPharma)
 

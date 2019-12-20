@@ -1,6 +1,7 @@
 *.idea
 *.pyc
 *.iml
+.python-version
 
 # Distribution / packaging
 .Python

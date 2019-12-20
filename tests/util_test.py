@@ -16,10 +16,23 @@
 
 from unittest import TestCase
 
-from google.ads.google_ads.util import ResourceName
+from google.ads.google_ads import util
 
 class ResourceNameTest(TestCase):
     def test_format_composite(self):
-        composite = ResourceName.format_composite('test', 'test')
+        composite = util.ResourceName.format_composite('test', 'test')
         self.assertEqual(composite, 'test~test')
 
+
+class ConvertStringTest(TestCase):
+    def test_convert_upper_case_to_snake_case(self):
+        string = 'GoogleAdsServiceClientTransport'
+        expected = 'google_ads_service_client_transport'
+        result = util.convert_upper_case_to_snake_case(string)
+        self.assertEqual(result, expected)
+
+    def test_convert_snake_case_to_upper_case(self):
+        string = 'google_ads_service_client_transport'
+        expected = 'GoogleAdsServiceClientTransport'
+        result = util.convert_snake_case_to_upper_case(string)
+        self.assertEqual(result, expected)

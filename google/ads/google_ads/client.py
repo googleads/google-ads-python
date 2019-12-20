@@ -13,12 +13,11 @@
 # limitations under the License.
 """A client and common configurations for the Google Ads API."""
 
-from grpc import intercept_channel
+import grpc
 from importlib import import_module
 import logging.config
 
-from google.ads.google_ads import config
-from google.ads.google_ads import oauth2
+from google.ads.google_ads import config, oauth2, util
 from google.ads.google_ads.interceptors import MetadataInterceptor, \
     ExceptionInterceptor, LoggingInterceptor
 
@@ -34,6 +33,15 @@ _DEFAULT_VERSION = _VALID_API_VERSIONS[0]
 _GRPC_CHANNEL_OPTIONS = [
     ('grpc.max_metadata_size', 16 * 1024 * 1024),
     ('grpc.max_receive_message_length', 64 * 1024 * 1024)]
+
+
+unary_stream_single_threading_option = util.get_nested_attr(
+    grpc, 'experimental.ChannelOptions.SingleThreadedUnaryStream', None)
+
+if unary_stream_single_threading_option:
+    _GRPC_CHANNEL_OPTIONS.append(
+        (unary_stream_single_threading_option, 1))
+
 
 class GoogleAdsClient(object):
     """Google Ads client used to configure settings and fetch services."""
@@ -69,7 +77,7 @@ class GoogleAdsClient(object):
             A module containing all services and types for the a API version.
         """
         try:
-            version_module = import_module('google.ads.google_ads.%s' % version)
+            version_module = import_module(f'google.ads.google_ads.{version}')
         except ImportError:
             raise ValueError('Specified Google Ads API version "{}" does not '
                              'exist. Valid API versions are: "{}"'.format(
@@ -167,12 +175,16 @@ class GoogleAdsClient(object):
             AttributeError: If the type for the specified name doesn't exist
                 in the given version.
         """
+        if name.lower().endswith('pb2'):
+            raise ValueError(f'Specified type "{name}" must be a class,'
+                             f' not a module')
+        
         try:
             type_classes = cls._get_api_services_by_version(version).types
             message_class = getattr(type_classes, name)
         except AttributeError:
-            raise ValueError('Specified type "{}" does not exist in Google Ads '
-                             'API %s.'.format(name, version))
+            raise ValueError(f'Specified type "{name}" does not exist in Google Ads '
+                             f'API {version}')
         return message_class()
 
     def __init__(self, credentials, developer_token, endpoint=None,
@@ -242,7 +254,7 @@ class GoogleAdsClient(object):
             LoggingInterceptor(_logger, endpoint),
             ExceptionInterceptor(version)]
 
-        channel = intercept_channel(
+        channel = grpc.intercept_channel(
             channel,
             *interceptors)
 

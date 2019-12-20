@@ -17,10 +17,10 @@ from setuptools import setup, find_packages
 import io
 
 install_requires = [
-    'google-auth-oauthlib >= 0.0.1, < 1.0.0',
-    'google-api-core >= 1.7.0, < 2.0.0',
+    'google-auth-oauthlib >= 0.3.0, < 1.0.0',
+    'google-api-core >= 1.14.0, < 2.0.0',
     'googleapis-common-protos >= 1.5.8, < 2.0.0',
-    'grpcio >= 1.18.0, < 2.0.0',
+    'grpcio >= 1.25.0, < 2.0.0',
     'PyYAML >= 5.1, < 6.0',
 ]
 
@@ -44,11 +44,11 @@ setup(
         'License :: OSI Approved :: Apache Software License',
         'Programming Language :: Python',
         'Programming Language :: Python :: 3',
-        'Programming Language :: Python :: 3.6',
+        'Programming Language :: Python :: 3.7',
     ],
     description='Client library for the Google Ads API',
     include_package_data=True,
-    python_requires='>=3.6',
+    python_requires='>=3.7',
     long_description=long_description,
     install_requires=install_requires,
     tests_require=tests_require,

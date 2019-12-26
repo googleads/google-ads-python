@@ -18,6 +18,7 @@
 import importlib
 import re
 import sys
+from inspect import getmembers, isclass
 from itertools import chain
 
 from google.api_core.protobuf_helpers import get_messages
@@ -1626,6 +1627,27 @@ _lazy_class_to_package_map = dict(
     YoutubeVideoRegistrationErrorEnum='google.ads.google_ads.v2.proto.errors.youtube_video_registration_error_pb2'
 )
 
+DEPENDENT_MODULE_LIST = [
+                'google.longrunning.operations_pb2',
+                'google.protobuf.any_pb2',
+                'google.protobuf.empty_pb2',
+                'google.protobuf.field_mask_pb2',
+                'google.protobuf.wrappers_pb2',
+                'google.rpc.status_pb2']
+
+def _get_class_from_module(module_name):
+    module = importlib.import_module(module_name)
+    for class_name, _ in getmembers(module, isclass): # from inspect module
+        yield class_name
+
+def _populate_dependent_classes(module_list = DEPENDENT_MODULE_LIST):
+    class_list = {}
+    for module_name in module_list:
+        for cls in _get_class_from_module(module_name):
+            class_list[cls] = module_name
+    return class_list
+
+_lazy_dependent_class_to_package_map = _populate_dependent_classes()
 
 def _load_module(module_name):
     """Load a module by it's name.
@@ -1683,7 +1705,9 @@ def _get_message_class_by_name(class_name):
         a protobuf message class definition that inherits from
             google.protobuf.pyext.cpp_message.GeneratedProtocolMessageType.
     """
-    if class_name in _lazy_class_to_package_map:
+    if class_name in _lazy_dependent_class_to_package_map:
+        module_path = _lazy_dependent_class_to_package_map[class_name]
+    elif class_name in _lazy_class_to_package_map:
         module_path = _lazy_class_to_package_map[class_name]
     else:
         raise AttributeError(f'unknown sub-module {class_name!r}.')
@@ -1707,7 +1731,8 @@ def __getattr__(name):  # Requires Python >= 3.7
     if name == '__all__':
         converted = (util.convert_snake_case_to_upper_case(key) for
                      key in chain(_lazy_name_to_package_map,
-                                  _lazy_class_to_package_map))
+                                  _lazy_class_to_package_map,
+                                  _lazy_dependent_class_to_package_map))
         all_names = sorted(converted)
         globals()['__all__'] = all_names
         return all_names

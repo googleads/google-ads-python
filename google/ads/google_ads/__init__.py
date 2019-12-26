@@ -20,4 +20,4 @@ import google.ads.google_ads.errors
 import google.ads.google_ads.util
 
 
-VERSION = '4.1.0'
+VERSION = '4.1.1'

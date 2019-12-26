@@ -1,3 +1,6 @@
+* 4.1.1:
+- Fix for types.py to include classes of dependent modules
+
 * 4.1.0:
 - Performance improvements
 - Updated dependencies for more recent versions

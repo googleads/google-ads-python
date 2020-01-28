@@ -206,7 +206,7 @@ class GoogleAdsClient(object):
         self.endpoint = endpoint
         self.login_customer_id = login_customer_id
 
-    def get_service(self, name, version=_DEFAULT_VERSION, interceptors=[]):
+    def get_service(self, name, version=_DEFAULT_VERSION, interceptors=None):
         """Returns a service client instance for the specified service_name.
 
         Args:
@@ -226,6 +226,7 @@ class GoogleAdsClient(object):
             AttributeError: If the specified name doesn't exist.
         """
         api_module = self._get_api_services_by_version(version)
+        interceptors = interceptors or []
 
         try:
             service_client = getattr(api_module,

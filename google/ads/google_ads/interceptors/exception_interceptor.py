@@ -63,9 +63,9 @@ class ExceptionInterceptor(InterceptorMixin, UnaryUnaryClientInterceptor):
                 if kv[0] == self._failure_key:
                     try:
                         error_protos = import_module(
-                            'google.ads.google_ads.%s.proto.errors' %
+                            'google.ads.google_ads.%s.proto.errors.errors_pb2' %
                                 self._api_version)
-                        ga_failure = error_protos.errors_pb2.GoogleAdsFailure()
+                        ga_failure = error_protos.GoogleAdsFailure()
                         ga_failure.ParseFromString(kv[1])
                         return ga_failure
                     except DecodeError:

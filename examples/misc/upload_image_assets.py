@@ -12,42 +12,53 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
-"""This code example gets all image assets."""
+"""This code example uploads an image asset.
+
+To get image assets, run get_all_image_assets.py."""
 
 
 import argparse
 import sys
+import requests
+
 from google.ads.google_ads.client import GoogleAdsClient
 from google.ads.google_ads.errors import GoogleAdsException
 
-_DEFAULT_PAGE_SIZE = 1000
 
-
-def main(client, customer_id, page_size):
+def main(client, customer_id):
     """Main method, to run this code example as a standalone application."""
-    ga_service = client.get_service('GoogleAdsService', version='v2')
 
-    query = ('SELECT asset.name, asset.image_asset.file_size, '
-             'asset.image_asset.full_size.width_pixels, '
-             'asset.image_asset.full_size.height_pixels, '
-             'asset.image_asset.full_size.url FROM asset '
-             'WHERE asset.type = \'IMAGE\'')
+    # Download image from URL
+    URL = "https://goo.gl/3b9Wfh"
+    image_content = requests.get(URL).content
 
-    results = ga_service.search(customer_id, query=query, page_size=page_size)
+    asset_operation = client.get_type('AssetOperation', version='v2')
+    asset = asset_operation.create
+    asset.type = client.get_type('AssetTypeEnum', version='v2').IMAGE
+    asset.image_asset.data.value = image_content
+    asset.image_asset.file_size.value = len(image_content)
+    asset.image_asset.mime_type = client.get_type('MimeTypeEnum').IMAGE_JPEG
+    # Use your favorite image library to determine dimensions
+    asset.image_asset.full_size.height_pixels.value = 315
+    asset.image_asset.full_size.width_pixels.value = 600
+    asset.image_asset.full_size.url.value = URL
+    # Optional: Provide a unique friendly name to identify your asset.
+    # If you specify the name field, then both the asset name and the image
+    # being uploaded should be unique, and should not match another ACTIVE
+    # asset in this customer account.
+    # asset.name = 'Jupiter Trip #' + ExampleUtilities.GetRandomString(),
+
+    asset_service = client.get_service('AssetService', version='v2')
 
     try:
-        count = 0
-        for row in results:
-            asset = row.asset
-            image_asset = asset.image_asset
-            count += 1
-            print(f'Image with name "{asset.name}" found:\n'
-                  f'\tfile size {image_asset.file_size.value} bytes\n'
-                  f'\twidth {image_asset.full_size.width_pixels.value}px\n'
-                  f'\theight {image_asset.full_size.height_pixels.value}px\n'
-                  f'\turl "{image_asset.full_size.url.value}"')
+        mutate_asset_response = (
+            asset_service.mutate_assets(customer_id,
+                                        [asset_operation])
+        )
+        print(f'Uploaded file(s):')
+        for row in mutate_asset_response.results:
+            print(f'\tResource name: {row.resource_name}')
 
-        print(f'Total of {count} image(s) found.')
     except GoogleAdsException as ex:
         print('Request with ID "%s" failed with status "%s" and includes the '
               'following errors:' % (ex.request_id, ex.error.code().name))
@@ -65,10 +76,10 @@ if __name__ == '__main__':
     google_ads_client = GoogleAdsClient.load_from_storage()
 
     parser = argparse.ArgumentParser(
-        description='List all image assets for specified customer.')
+        description='Upload an image asset from a URL.')
     # The following argument(s) should be provided to run the example.
     parser.add_argument('-c', '--customer_id', type=str,
                         required=True, help='The Google Ads customer ID.')
     args = parser.parse_args()
 
-    main(google_ads_client, args.customer_id, _DEFAULT_PAGE_SIZE)
+    main(google_ads_client, args.customer_id)

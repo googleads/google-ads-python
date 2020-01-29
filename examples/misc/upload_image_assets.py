@@ -29,7 +29,7 @@ def main(client, customer_id):
     """Main method, to run this code example as a standalone application."""
 
     # Download image from URL
-    URL = "https://goo.gl/3b9Wfh"
+    URL = 'https://goo.gl/3b9Wfh'
     image_content = requests.get(URL).content
 
     asset_operation = client.get_type('AssetOperation', version='v2')
@@ -63,10 +63,10 @@ def main(client, customer_id):
         print(f'Request with ID "{ex.request_id}" failed with status '
               f'"{ex.error.code().name}" and includes the following errors:')
         for error in ex.failure.errors:
-            print('\tError with message "%s".' % error.message)
+            print(f'\tError with message "{error.message}".')
             if error.location:
                 for field_path_element in error.location.field_path_elements:
-                    print('\t\tOn field: %s' % field_path_element.field_name)
+                    print(f'\t\tOn field: {field_path_element.field_name}')
         sys.exit(1)
 
 

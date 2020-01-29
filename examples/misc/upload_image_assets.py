@@ -46,7 +46,7 @@ def main(client, customer_id):
     # If you specify the name field, then both the asset name and the image
     # being uploaded should be unique, and should not match another ACTIVE
     # asset in this customer account.
-    # asset.name = 'Jupiter Trip #' + ExampleUtilities.GetRandomString(),
+    # asset.name = 'Jupiter Trip #' + uuid.uuid4()
 
     asset_service = client.get_service('AssetService', version='v2')
 
@@ -55,13 +55,13 @@ def main(client, customer_id):
             asset_service.mutate_assets(customer_id,
                                         [asset_operation])
         )
-        print(f'Uploaded file(s):')
+        print('Uploaded file(s):')
         for row in mutate_asset_response.results:
             print(f'\tResource name: {row.resource_name}')
 
     except GoogleAdsException as ex:
-        print('Request with ID "%s" failed with status "%s" and includes the '
-              'following errors:' % (ex.request_id, ex.error.code().name))
+        print(f'Request with ID "{ex.request_id}" failed with status '
+              f'"{ex.error.code().name}" and includes the following errors:')
         for error in ex.failure.errors:
             print('\tError with message "%s".' % error.message)
             if error.location:

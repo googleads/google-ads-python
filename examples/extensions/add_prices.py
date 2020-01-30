@@ -43,19 +43,29 @@ def main(client, customer_id, campaign_id):
     price_extension_price_unit_enum = (
         client.get_type('PriceExtensionPriceUnitEnum'))
     price_feed_item.price_offerings.extend([
-        _create_price_offer(client, 'Scrubs', 'Body Scrub, Salt Scrub',
-            60000000,  # 60 USD
-            'USD', price_extension_price_unit_enum.PER_HOUR,
-            'http://www.example.com/scrubs', 'http://m.example.com/scrubs'),
-        _create_price_offer(client, 'Hair Cuts', 'Once a month',
-            75000000,  # 75 USD
-            'USD', price_extension_price_unit_enum.PER_MONTH,
-            'http://www.example.com/haircuts',
-            'http://m.example.com/haircuts'),
-        _create_price_offer(client, 'Skin Care Package', 'Four times a month',
-            250000000,  # 250 USD
-            'USD', price_extension_price_unit_enum.PER_MONTH,
-            'http://www.example.com/skincarepackage')
+        _create_price_offer(client,
+                            'Scrubs',
+                            'Body Scrub, Salt Scrub',
+                            60000000,  # 60 USD
+                            'USD',
+                            price_extension_price_unit_enum.PER_HOUR,
+                            'http://www.example.com/scrubs',
+                            'http://m.example.com/scrubs'),
+        _create_price_offer(client,
+                            'Hair Cuts',
+                            'Once a month',
+                            75000000,  # 75 USD
+                            'USD',
+                            price_extension_price_unit_enum.PER_MONTH,
+                            'http://www.example.com/haircuts',
+                            'http://m.example.com/haircuts'),
+        _create_price_offer(client,
+                            'Skin Care Package',
+                            'Four times a month',
+                            250000000,  # 250 USD
+                            'USD',
+                            price_extension_price_unit_enum.PER_MONTH,
+                            'http://www.example.com/skincarepackage')
     ])
 
     # Create a customer extension setting using the previously created
@@ -81,7 +91,8 @@ def main(client, customer_id, campaign_id):
 
     # Add the extension
     try:
-        feed_service = client.get_service('ExtensionFeedItemService', version='v2')
+        feed_service = client.get_service('ExtensionFeedItemService',
+                                          version='v2')
         # Issues a mutate request to add the customer extension setting and
         # print its information.
         feed_response = (

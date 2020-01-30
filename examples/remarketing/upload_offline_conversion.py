@@ -26,9 +26,6 @@ import requests
 
 from google.ads.google_ads.client import GoogleAdsClient
 from google.ads.google_ads.errors import GoogleAdsException
-from google.ads.google_ads.v2.services.conversion_action_service_client import(
-    ConversionActionServiceClient
-)
 
 def main(client,
          customer_id,
@@ -49,8 +46,10 @@ def main(client,
     """
 
     click_conversion = client.get_type('ClickConversion', version='v2')
+    conversion_action_service = client.get_service('ConversionActionService',
+                                                   version='v2')
     click_conversion.conversion_action.value = (
-        ConversionActionServiceClient.conversion_action_path(
+        conversion_action_service.conversion_action_path(
             customer_id, conversion_action_id)
     )
     click_conversion.gcl_id.value = gcl_id

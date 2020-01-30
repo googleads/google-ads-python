@@ -63,7 +63,8 @@ def main(client,
     try:
         conversion_upload_response = (
             conversion_upload_service.upload_click_conversions(customer_id,
-                                        [click_conversion])
+                                        [click_conversion],
+                                        partial_failure=True)
         )
         uploaded_click_conversion = (conversion_upload_response.results[0]
                                      .click_conversion_result)

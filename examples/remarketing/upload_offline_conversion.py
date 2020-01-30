@@ -52,7 +52,7 @@ def main(client,
         conversion_action_service.conversion_action_path(
             customer_id, conversion_action_id)
     )
-    click_conversion.gcl_id.value = gcl_id
+    click_conversion.gclid.value = gcl_id
     click_conversion.conversion_value.value = float(conversion_value)
     click_conversion.conversion_date_time.value = conversion_time
     click_conversion.currency_code.value = 'USD'

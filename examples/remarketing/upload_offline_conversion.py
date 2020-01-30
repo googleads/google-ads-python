@@ -32,7 +32,7 @@ def main(client,
          conversion_action_id,
          gcl_id,
          conversion_time,
-         conversion_action):
+         conversion_value):
     """Main method, to run this code example as a standalone application.
     Creates a click conversion with a default currency of USD.
 
@@ -42,7 +42,7 @@ def main(client,
       conversion_action_id:
       gcl_id:
       conversion_time:
-      conversion_action:
+      conversion_value:
     """
 
     click_conversion = client.get_type('ClickConversion', version='v2')

@@ -66,8 +66,7 @@ def main(client,
                                         [click_conversion],
                                         partial_failure=True)
         )
-        uploaded_click_conversion = (conversion_upload_response.results[0]
-                                     .click_conversion_result)
+        uploaded_click_conversion = (conversion_upload_response.results[0])
         print(f'Uploaded conversion that occurred at '
               f'''{uploaded_click_conversion.conversion_date_time}'' '
               f'from Google Click ID ''{uploaded_click_conversion.gclid}'' '

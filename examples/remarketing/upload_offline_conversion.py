@@ -12,38 +12,24 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
-"""This code example imports offline conversion values for specific clicks to
-your account.
+"""This example imports offline conversion values for specific clicks.
 
 To get Google Click ID for a click, use the "click_view" resource:
 https://developers.google.com/google-ads/api/fields/latest/click_view.
-To set up a conversion action, run the AddConversionAction.php example."""
+To set up a conversion action, run the AddConversionAction.php example.
+"""
 
 
 import argparse
 import sys
-import requests
 
 from google.ads.google_ads.client import GoogleAdsClient
 from google.ads.google_ads.errors import GoogleAdsException
 
-def main(client,
-         customer_id,
-         conversion_action_id,
-         gcl_id,
-         conversion_time,
-         conversion_value):
-    """Main method, to run this code example as a standalone application.
-    Creates a click conversion with a default currency of USD.
 
-    Args:
-      client: The Google Ads Client
-      customer_id: TODO
-      conversion_action_id:
-      gcl_id:
-      conversion_time:
-      conversion_value:
-    """
+def main(client, customer_id, conversion_action_id, gcl_id, conversion_time,
+         conversion_value):
+    """Creates a click conversion with a default currency of USD."""
 
     click_conversion = client.get_type('ClickConversion', version='v2')
     conversion_action_service = client.get_service('ConversionActionService',
@@ -63,14 +49,13 @@ def main(client,
     try:
         conversion_upload_response = (
             conversion_upload_service.upload_click_conversions(customer_id,
-                                        [click_conversion],
-                                        partial_failure=True)
+                [click_conversion], partial_failure=True)
         )
         uploaded_click_conversion = (conversion_upload_response.results[0])
         print(f'Uploaded conversion that occurred at '
-              f'''{uploaded_click_conversion.conversion_date_time.value}'' '
-              f'from Google Click ID ''{uploaded_click_conversion.gclid.value}'' '
-              f'to ''{uploaded_click_conversion.conversion_action.value}''')
+              f'"{uploaded_click_conversion.conversion_date_time.value}" '
+              f'from Google Click ID "{uploaded_click_conversion.gclid.value}"'
+              f' to "{uploaded_click_conversion.conversion_action.value}"')
 
     except GoogleAdsException as ex:
         print('Request with ID "%s" failed with status "%s" and includes the '
@@ -103,9 +88,5 @@ if __name__ == '__main__':
                         required=True, help='The conversion value.')
     args = parser.parse_args()
 
-    main(google_ads_client, 
-         args.customer_id,
-         args.conversion_action_id,
-         args.gcl_id,
-         args.conversion_time,
-         args.conversion_value)
+    main(google_ads_client, args.customer_id, args.conversion_action_id,
+         args.gcl_id, args.conversion_time, args.conversion_value)

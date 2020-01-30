@@ -68,9 +68,9 @@ def main(client,
         )
         uploaded_click_conversion = (conversion_upload_response.results[0])
         print(f'Uploaded conversion that occurred at '
-              f'''{uploaded_click_conversion.conversion_date_time}'' '
-              f'from Google Click ID ''{uploaded_click_conversion.gclid}'' '
-              f'to ''{uploaded_click_conversion.conversion_action}''')
+              f'''{uploaded_click_conversion.conversion_date_time.value}'' '
+              f'from Google Click ID ''{uploaded_click_conversion.gclid.value}'' '
+              f'to ''{uploaded_click_conversion.conversion_action.value}''')
 
     except GoogleAdsException as ex:
         print('Request with ID "%s" failed with status "%s" and includes the '

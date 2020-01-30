@@ -83,10 +83,18 @@ def main(client, customer_id, campaign_id):
     day_of_week_enum = client.get_type('DayOfWeekEnum', version='v2')
     minute_of_hour_enum = client.get_type('MinuteOfHourEnum', version='v2')
     extension_feed_item.ad_schedules.extend([
-        _create_ad_schedule_info(client, day_of_week_enum.SUNDAY, 10,
-            minute_of_hour_enum.ZERO, 18, minute_of_hour_enum.ZERO),
-        _create_ad_schedule_info(client, day_of_week_enum.SATURDAY, 10,
-            minute_of_hour_enum.ZERO, 22, minute_of_hour_enum.ZERO)
+        _create_ad_schedule_info(client,
+                                 day_of_week_enum.SUNDAY,
+                                 10,
+                                 minute_of_hour_enum.ZERO,
+                                 18,
+                                 minute_of_hour_enum.ZERO),
+        _create_ad_schedule_info(client,
+                                 day_of_week_enum.SATURDAY,
+                                 10,
+                                 minute_of_hour_enum.ZERO,
+                                 22,
+                                 minute_of_hour_enum.ZERO)
     ])
 
     # Add the extension

@@ -41,7 +41,7 @@ def main(client, customer_id, conversion_action_id, gcl_id, adjustment_type,
     # Create the conversion adjustment and set basic values.
     conversion_adjustment = (client.get_type('ConversionAdjustment',
                                              version='v2'))
-    conversion_action_service = (client.get_service('ConversionAction',
+    conversion_action_service = (client.get_service('ConversionActionService',
                                                    version='v2'))
     conversion_adjustment.conversion_action.value = (
         conversion_action_service.conversion_action_path(

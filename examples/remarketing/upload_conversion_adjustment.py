@@ -62,7 +62,7 @@ def main(client, customer_id, conversion_action_id, gcl_id, adjustment_type,
     gclid_date_time_pair = client.get_type('GclidDateTimePair', version='v2')
     gclid_date_time_pair.gclid.value = gcl_id
     gclid_date_time_pair.conversion_date_time.value = conversion_time
-    conversion_adjustment.gclid_date_time_pair.value = gclid_date_time_pair
+    conversion_adjustment.gclid_date_time_pair.CopyFrom(gclid_date_time_pair)
 
     # Try the upload
     conversion_adjustment_upload_service = (

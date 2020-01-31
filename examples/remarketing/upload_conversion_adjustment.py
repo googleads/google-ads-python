@@ -72,7 +72,7 @@ def main(client, customer_id, conversion_action_id, gcl_id, adjustment_type,
     try:
         response = (
             conversion_adjustment_upload_service.
-            upload_conversions_adjustments(customer_id,
+            upload_conversion_adjustments(customer_id,
                                            [conversion_adjustment],
                                            partial_failure=True)
         )

@@ -78,8 +78,8 @@ def main(client, customer_id, conversion_action_id, gcl_id, adjustment_type,
         )
         uploaded_conversion_adjustment = (response.results[0])
         print(f'Uploaded conversion that occurred at '
-              f'"{uploaded_conversion_adjustment.conversion_date_time.value}" '
-              f'from Gclid "{uploaded_conversion_adjustment.gclid.value}" '
+              f'"{uploaded_conversion_adjustment.adjustment_date_time.value}" '
+              f'from Gclid "{uploaded_conversion_adjustment.gclid_date_time_pair}" '
               f'to "{uploaded_conversion_adjustment.conversion_action.value}"')
 
     except GoogleAdsException as ex:

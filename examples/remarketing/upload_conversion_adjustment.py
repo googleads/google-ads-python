@@ -75,6 +75,7 @@ def main(client, customer_id, conversion_action_id, gcl_id, adjustment_type,
                                            [conversion_adjustment],
                                            partial_failure=True)
         )
+        print ('raw results:\n', response)
         conversion_adjustment_result = (response.results[0])
         print(f'Uploaded conversion that occurred at '
               f'"{conversion_adjustment_result.adjustment_date_time.value}" '

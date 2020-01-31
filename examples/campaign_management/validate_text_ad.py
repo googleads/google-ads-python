@@ -46,7 +46,6 @@ def main(client, customer_id, ad_group_id):
         response = ad_group_ad_service.mutate_ad_group_ads(customer_id,
                                                             [ad_group_ad_operation], 
                                                             False, True)
-                                                            #validate_only = validate_only)
     except GoogleAdsException as ex:
         print(f'Request with ID "{ex.request_id}" failed with status '
               f'"{ex.error.code().name}" and includes the following errors:')

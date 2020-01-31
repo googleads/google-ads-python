@@ -59,10 +59,9 @@ def main(client, customer_id, conversion_action_id, gcl_id, adjustment_type,
         conversion_adjustment.restatement_value.currency_code.value = 'USD'
 
     # Set the Gclid Date
-    gclid_date_time_pair = client.get_type('GclidDateTimePair', version='v2')
-    gclid_date_time_pair.gclid.value = gcl_id
-    gclid_date_time_pair.conversion_date_time.value = conversion_time
-    conversion_adjustment.gclid_date_time_pair.CopyFrom(gclid_date_time_pair)
+    conversion_adjustment.gclid_date_time_pair.gclid.value = gcl_id
+    conversion_adjustment.gclid_date_time_pair.conversion_date_time.value = (
+        conversion_time)
 
     # Try the upload
     conversion_adjustment_upload_service = (
@@ -76,11 +75,12 @@ def main(client, customer_id, conversion_action_id, gcl_id, adjustment_type,
                                            [conversion_adjustment],
                                            partial_failure=True)
         )
-        uploaded_conversion_adjustment = (response.results[0])
+        conversion_adjustment_result = (response.results[0])
         print(f'Uploaded conversion that occurred at '
-              f'"{uploaded_conversion_adjustment.adjustment_date_time.value}" '
-              f'from Gclid "{uploaded_conversion_adjustment.gclid_date_time_pair}" '
-              f'to "{uploaded_conversion_adjustment.conversion_action.value}"')
+              f'"{conversion_adjustment_result.adjustment_date_time.value}" '
+              f'from Gclid '
+              f'"{conversion_adjustment_result.gclid_date_time_pair.gclid.value}"'
+              f' to "{conversion_adjustment_result.conversion_action.value}"')
 
     except GoogleAdsException as ex:
         print(f'Request with ID "{ex.request_id}" failed with status '

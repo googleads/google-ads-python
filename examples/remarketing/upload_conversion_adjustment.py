@@ -113,11 +113,12 @@ if __name__ == '__main__':
                         required=True, help='The conversion time.')
     parser.add_argument('-v', '--adjustment_time', type=str,
                         required=True, help='The adjustment time.')
-    args = parser.parse_args()
     # Optional: Specify an adjusted value for adjustment type RESTATEMENT.
     # This value will be ignored if you specify RETRACTION as adjustment type.
-    RESTATEMENT_VALUE = None
+    parser.add_argument('-r', '--restatement_value', type=str,
+                        required=True, help='The restatement value.')
+    args = parser.parse_args()
 
     main(google_ads_client, args.customer_id, args.conversion_action_id,
          args.gcl_id, args.adjustment_type, args.conversion_time,
-         args.adjustment_time, RESTATEMENT_VALUE)
+         args.adjustment_time, args.restatement_value)

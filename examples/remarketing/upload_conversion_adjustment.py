@@ -55,7 +55,7 @@ def main(client, customer_id, conversion_action_id, gcl_id, adjustment_type,
         conversion_adjustment_type ==
         conversion_adjustment_type_enum.RESTATEMENT):
         conversion_adjustment.restatement_value.adjusted_value.value = (
-            restatement_value)
+            float(restatement_value))
         conversion_adjustment.restatement_value.currency_code.value = 'USD'
 
     # Set the Gclid Date

@@ -16,17 +16,17 @@
 
 
 import argparse
-import sys
 import requests
+import sys
+
 
 from google.ads.google_ads.client import GoogleAdsClient
 from google.ads.google_ads.errors import GoogleAdsException
 
+
 BUNDLE_URL = 'https://goo.gl/9Y7qI2'
 
 def main(client, customer_id):
-    """Main method, to run this code example as a standalone application."""
-
     media_file_operation = client.get_type('MediaFileOperation', version='v2')
     media_file = media_file_operation.create
     media_file.name.value = 'Ad Media Bundle'
@@ -42,7 +42,7 @@ def main(client, customer_id):
             media_file_service.mutate_media_files(customer_id,
                                                   [media_file_operation])
         )
-        print(f'Uploaded file(s):')
+        print('Uploaded file(s):')
         for row in mutate_media_files_response.results:
             print(f'\tResource name: {row.resource_name}')
 

@@ -42,7 +42,7 @@ def main(client, customer_id, conversion_action_id, gcl_id, adjustment_type,
     conversion_adjustment = (client.get_type('ConversionAdjustment',
                                              version='v2'))
     conversion_action_service = (client.get_service('ConversionActionService',
-                                                   version='v2'))
+                                                    version='v2'))
     conversion_adjustment.conversion_action.value = (
         conversion_action_service.conversion_action_path(
             customer_id, conversion_action_id)
@@ -72,11 +72,10 @@ def main(client, customer_id, conversion_action_id, gcl_id, adjustment_type,
         response = (
             conversion_adjustment_upload_service.
             upload_conversion_adjustments(customer_id,
-                                           [conversion_adjustment],
-                                           partial_failure=True)
+                                          [conversion_adjustment],
+                                          partial_failure=True)
         )
-        print ('raw results:\n', response)
-        conversion_adjustment_result = (response.results[0])
+        conversion_adjustment_result = response.results[0]
         print(f'Uploaded conversion that occurred at '
               f'"{conversion_adjustment_result.adjustment_date_time.value}" '
               f'from Gclid '

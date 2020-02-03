@@ -25,8 +25,8 @@ from google.ads.google_ads.client import GoogleAdsClient
 from google.ads.google_ads.errors import GoogleAdsException
 
 
-def main(client, customer_id, conversion_action_id, gcl_id, adjustment_type,
-         conversion_time, adjustment_time, restatement_value):
+def main(client, customer_id, conversion_action_id, gclid, adjustment_type,
+         conversion_date_time, adjustment_date_time, restatement_value):
     # Determine the adjustment type.
     conversion_adjustment_type_enum = (
         client.get_type('ConversionAdjustmentTypeEnum')
@@ -48,7 +48,7 @@ def main(client, customer_id, conversion_action_id, gcl_id, adjustment_type,
             customer_id, conversion_action_id)
     )
     conversion_adjustment.adjustment_type = conversion_adjustment_type
-    conversion_adjustment.adjustment_date_time.value = adjustment_time
+    conversion_adjustment.adjustment_date_time.value = adjustment_date_time
 
     # If the restatement value is specified, set it (default currency is USD).
     if (restatement_value and
@@ -59,9 +59,9 @@ def main(client, customer_id, conversion_action_id, gcl_id, adjustment_type,
         conversion_adjustment.restatement_value.currency_code.value = 'USD'
 
     # Set the Gclid Date
-    conversion_adjustment.gclid_date_time_pair.gclid.value = gcl_id
+    conversion_adjustment.gclid_date_time_pair.gclid.value = gclid
     conversion_adjustment.gclid_date_time_pair.conversion_date_time.value = (
-        conversion_time)
+        conversion_date_time)
 
     # Try the upload
     conversion_adjustment_upload_service = (
@@ -105,20 +105,28 @@ if __name__ == '__main__':
                         required=True, help='The Google Ads customer ID.')
     parser.add_argument('-a', '--conversion_action_id', type=str,
                         required=True, help='The conversion action ID.')
-    parser.add_argument('-g', '--gcl_id', type=str,
+    parser.add_argument('-g', '--gclid', type=str,
                         required=True, help='The Google Click Identifier ID.')
     parser.add_argument('-d', '--adjustment_type', type=str,
-                        required=True, help='The Adjustment type.')
-    parser.add_argument('-t', '--conversion_time', type=str,
-                        required=True, help='The conversion time.')
-    parser.add_argument('-v', '--adjustment_time', type=str,
-                        required=True, help='The adjustment time.')
+                        required=True, help='The Adjustment type, e.g. '
+                        'RETRACTION, RESTATEMENT')
+    parser.add_argument('-t', '--conversion_date_time', type=str,
+                        required=True, help='The the date and time of the '
+                        'conversion. The format is '
+                        '"yyyy-mm-dd hh:mm:ss+|-hh:mm", e.g. '
+                        '“2019-01-01 12:32:45-08:00”')
+    parser.add_argument('-v', '--adjustment_date_time', type=str,
+                        required=True, help='The the date and time of the '
+                        'adjustment. The format is '
+                        '"yyyy-mm-dd hh:mm:ss+|-hh:mm", e.g. '
+                        '“2019-01-01 12:32:45-08:00”')
     # Optional: Specify an adjusted value for adjustment type RESTATEMENT.
     # This value will be ignored if you specify RETRACTION as adjustment type.
     parser.add_argument('-r', '--restatement_value', type=str,
-                        required=True, help='The restatement value.')
+                        required=False, help='The adjusted value for '
+                        'adjustment type RESTATEMENT.')
     args = parser.parse_args()
 
     main(google_ads_client, args.customer_id, args.conversion_action_id,
-         args.gcl_id, args.adjustment_type, args.conversion_time,
-         args.adjustment_time, args.restatement_value)
+         args.gclid, args.adjustment_type, args.conversion_date_time,
+         args.adjustment_date_time, args.restatement_value)

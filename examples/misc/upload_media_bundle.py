@@ -16,9 +16,9 @@
 
 
 import argparse
-import requests
 import sys
 
+import requests
 
 from google.ads.google_ads.client import GoogleAdsClient
 from google.ads.google_ads.errors import GoogleAdsException
@@ -42,9 +42,8 @@ def main(client, customer_id):
             media_file_service.mutate_media_files(customer_id,
                                                   [media_file_operation])
         )
-        print('Uploaded file(s):')
-        for row in mutate_media_files_response.results:
-            print(f'\tResource name: {row.resource_name}')
+        print(f'Uploaded file with resource name '
+              f'"{mutate_media_files_response.results[0].resource_name}"')
 
     except GoogleAdsException as ex:
         print(f'Request with ID "{ex.request_id}" failed with status '
@@ -63,7 +62,7 @@ if __name__ == '__main__':
     google_ads_client = GoogleAdsClient.load_from_storage()
 
     parser = argparse.ArgumentParser(
-        description='Upload a media bundle.')
+        description='Uploads a media bundle.')
     # The following argument(s) should be provided to run the example.
     parser.add_argument('-c', '--customer_id', type=str,
                         required=True, help='The Google Ads customer ID.')

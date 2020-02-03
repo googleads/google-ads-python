@@ -29,52 +29,47 @@ def main(client, customer_id, conversion_action_id, gclid, adjustment_type,
          conversion_date_time, adjustment_date_time, restatement_value):
     # Determine the adjustment type.
     conversion_adjustment_type_enum = (
-        client.get_type('ConversionAdjustmentTypeEnum')
-    )
+        client.get_type('ConversionAdjustmentTypeEnum'))
     if adjustment_type.lower() == 'retraction':
         conversion_adjustment_type = conversion_adjustment_type_enum.RETRACTION
     elif adjustment_type.lower() == 'restatement':
-        conversion_adjustment_type = conversion_adjustment_type_enum.RESTATEMENT
+        conversion_adjustment_type = (
+            conversion_adjustment_type_enum.RESTATEMENT)
     else:
         raise ValueError('Invalid adjustment type specified.')
 
-    # Create the conversion adjustment and set basic values.
+    # Associates conversion adjustments with the existing conversion action.
+    # The GCLID should have been uploaded before with a conversion
     conversion_adjustment = (client.get_type('ConversionAdjustment',
                                              version='v2'))
     conversion_action_service = (client.get_service('ConversionActionService',
                                                     version='v2'))
     conversion_adjustment.conversion_action.value = (
         conversion_action_service.conversion_action_path(
-            customer_id, conversion_action_id)
-    )
+            customer_id, conversion_action_id))
     conversion_adjustment.adjustment_type = conversion_adjustment_type
     conversion_adjustment.adjustment_date_time.value = adjustment_date_time
-
-    # If the restatement value is specified, set it (default currency is USD).
-    if (restatement_value and
-        conversion_adjustment_type ==
-        conversion_adjustment_type_enum.RESTATEMENT):
-        conversion_adjustment.restatement_value.adjusted_value.value = (
-            float(restatement_value))
-        conversion_adjustment.restatement_value.currency_code.value = 'USD'
 
     # Set the Gclid Date
     conversion_adjustment.gclid_date_time_pair.gclid.value = gclid
     conversion_adjustment.gclid_date_time_pair.conversion_date_time.value = (
         conversion_date_time)
 
-    # Try the upload
-    conversion_adjustment_upload_service = (
-        client.get_service('ConversionAdjustmentUploadService', version='v2')
-    )
+    # Sets adjusted value for adjustment type RESTATEMENT.
+    if (restatement_value and
+        conversion_adjustment_type ==
+        conversion_adjustment_type_enum.RESTATEMENT):
+        conversion_adjustment.restatement_value.adjusted_value.value = (
+            float(restatement_value))
 
+    conversion_adjustment_upload_service = (
+        client.get_service('ConversionAdjustmentUploadService', version='v2'))
     try:
         response = (
             conversion_adjustment_upload_service.
             upload_conversion_adjustments(customer_id,
                                           [conversion_adjustment],
-                                          partial_failure=True)
-        )
+                                          partial_failure=True))
         conversion_adjustment_result = response.results[0]
         print(f'Uploaded conversion that occurred at '
               f'"{conversion_adjustment_result.adjustment_date_time.value}" '
@@ -99,12 +94,13 @@ if __name__ == '__main__':
     google_ads_client = GoogleAdsClient.load_from_storage()
 
     parser = argparse.ArgumentParser(
-        description='Upload an offline conversion.')
+        description='Uploads a conversion adjustment.')
     # The following argument(s) should be provided to run the example.
     parser.add_argument('-c', '--customer_id', type=str,
                         required=True, help='The Google Ads customer ID.')
     parser.add_argument('-a', '--conversion_action_id', type=str,
-                        required=True, help='The conversion action ID.')
+                        required=True, help='The conversion action ID to be '
+                        'uploaded to.')
     parser.add_argument('-g', '--gclid', type=str,
                         required=True, help='The Google Click Identifier ID.')
     parser.add_argument('-d', '--adjustment_type', type=str,

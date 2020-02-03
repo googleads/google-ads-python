@@ -16,7 +16,7 @@
 
 To get Google Click ID for a click, use the "click_view" resource:
 https://developers.google.com/google-ads/api/fields/latest/click_view.
-To set up a conversion action, run the AddConversionAction.php example.
+To set up a conversion action, run the add_conversion_action.py example.
 """
 
 
@@ -36,8 +36,7 @@ def main(client, customer_id, conversion_action_id, gclid,
                                                    version='v2')
     click_conversion.conversion_action.value = (
         conversion_action_service.conversion_action_path(
-            customer_id, conversion_action_id)
-    )
+            customer_id, conversion_action_id))
     click_conversion.gclid.value = gclid
     click_conversion.conversion_value.value = float(conversion_value)
     click_conversion.conversion_date_time.value = conversion_date_time
@@ -49,22 +48,20 @@ def main(client, customer_id, conversion_action_id, gclid,
     try:
         conversion_upload_response = (
             conversion_upload_service.upload_click_conversions(customer_id,
-                [click_conversion], partial_failure=True)
-        )
+                [click_conversion], partial_failure=True))
         uploaded_click_conversion = conversion_upload_response.results[0]
         print(f'Uploaded conversion that occurred at '
               f'"{uploaded_click_conversion.conversion_date_time.value}" from '
               f'Google Click ID "{uploaded_click_conversion.gclid.value}" '
               f'to "{uploaded_click_conversion.conversion_action.value}"')
-
     except GoogleAdsException as ex:
-        print('Request with ID "%s" failed with status "%s" and includes the '
-              'following errors:' % (ex.request_id, ex.error.code().name))
+        print(f'Request with ID "{ex.request_id}" failed with status '
+              f'"{ex.error.code().name}" and includes the following errors:')
         for error in ex.failure.errors:
-            print('\tError with message "%s".' % error.message)
+            print(f'\tError with message "{error.message}".')
             if error.location:
                 for field_path_element in error.location.field_path_elements:
-                    print('\t\tOn field: %s' % field_path_element.field_name)
+                    print(f'\t\tOn field: {field_path_element.field_name}')
         sys.exit(1)
 
 

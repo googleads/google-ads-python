@@ -31,36 +31,55 @@ def main(client, customer_id, ad_group_id):
     ad_group_ad = ad_group_ad_operation.create
     ad_group_service = client.get_service('AdGroupService', version='v2')
     ad_group_ad.ad_group.value = ad_group_service.ad_group_path(customer_id, 
-                                                                 ad_group_id)
+                                                                ad_group_id)
     ad_group_ad.status = (client.get_type('AdGroupAdStatusEnum',
                                           version='v2').PAUSED)
     ad_group_ad.ad.expanded_text_ad.description.value = 'Luxury Cruise to Mars'
-    ad_group_ad.ad.expanded_text_ad.headline_part1.value = 'Visit the Red Planet in style.'
-    ad_group_ad.ad.expanded_text_ad.headline_part2.value = 'Low-gravity fun for everyone!!'
+    ad_group_ad.ad.expanded_text_ad.headline_part1.value = (
+        'Visit the Red Planet in style.')
+    ad_group_ad.ad.expanded_text_ad.headline_part2.value = (
+        'Low-gravity fun for everyone!!')
     final_url = ad_group_ad.ad.final_urls.add()
     final_url.value ='http://www.example.com/'
 
     ad_group_ad_service = client.get_service('AdGroupAdService', version='v2')
-    # Attempt the mutate
+    # Attempt the mutate with validate_only=True
     try:
         response = ad_group_ad_service.mutate_ad_group_ads(customer_id,
-                                                            [ad_group_ad_operation], 
-                                                            False, True)
+                        [ad_group_ad_operation], False, True)
+        print('"Expanded text ad validated successfully.')
     except GoogleAdsException as ex:
-        print(f'Request with ID "{ex.request_id}" failed with status '
-              f'"{ex.error.code().name}" and includes the following errors:')
+        # This will be hit if there is a validation error from the server.
+        print('There were validation error(s) while adding expanded text ad.')
         for error in ex.failure.errors:
+            # Note: Depending on the ad type, you may get back policy violation
+            # errors as either PolicyFindingError or PolicyViolationError. 
+            # ExpandedTextAds return errors as PolicyFindingError, so only this
+            # case is illustrated here. For additional details, see
+            # https://developers.google.com/google-ads/api/docs/policy-exemption/overview
+            if (error.error_code.policy_finding_error == 
+                client.get_type('PolicyFindingErrorEnum', 
+                                version='v2').POLICY_FINDING):
+                if error.details.policy_finding_details:
+                    count = 1
+                    details = error.details.policy_finding_details
+                    for entry in details:
+                        print(f'{count}) Policy topic entry with topic '
+                              f'{entry.topic} and type {entry} ' # TODO
+                              f'was found.')
+                    count += 1
+            else:
+                   # TODO: fill in handling of non-olicy violation errors  
+        # if ex.failure:
+
+        # print(f'Request with ID "{ex.request_id}" failed with status '
+        #       f'"{ex.error.code().name}" and includes the following errors:')
+
             print(f'\tError with message "{error.message}".')
             if error.location:
                 for field_path_element in error.location.field_path_elements:
                     print(f'\t\tOn field: {field_path_element.field_name}')
         sys.exit(1)
-    else:
-
-        print(f'Set {len(response.results)} ad parameters:')
-        return
-        for row in response.results:
-            print(f'Set ad parameter with resource_name: {row.resource_name}')
             
 if __name__ == '__main__':
     # GoogleAdsClient will read the google-ads.yaml configuration file in the

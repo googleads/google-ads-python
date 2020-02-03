@@ -27,8 +27,8 @@ from google.ads.google_ads.client import GoogleAdsClient
 from google.ads.google_ads.errors import GoogleAdsException
 
 
-def main(client, customer_id, conversion_action_id, gcl_id, conversion_time,
-         conversion_value):
+def main(client, customer_id, conversion_action_id, gclid, 
+         conversion_date_time, conversion_value):
     """Creates a click conversion with a default currency of USD."""
 
     click_conversion = client.get_type('ClickConversion', version='v2')
@@ -38,9 +38,9 @@ def main(client, customer_id, conversion_action_id, gcl_id, conversion_time,
         conversion_action_service.conversion_action_path(
             customer_id, conversion_action_id)
     )
-    click_conversion.gclid.value = gcl_id
+    click_conversion.gclid.value = gclid
     click_conversion.conversion_value.value = float(conversion_value)
-    click_conversion.conversion_date_time.value = conversion_time
+    click_conversion.conversion_date_time.value = conversion_date_time
     click_conversion.currency_code.value = 'USD'
 
     conversion_upload_service = client.get_service('ConversionUploadService',
@@ -51,11 +51,11 @@ def main(client, customer_id, conversion_action_id, gcl_id, conversion_time,
             conversion_upload_service.upload_click_conversions(customer_id,
                 [click_conversion], partial_failure=True)
         )
-        uploaded_click_conversion = (conversion_upload_response.results[0])
+        uploaded_click_conversion = conversion_upload_response.results[0]
         print(f'Uploaded conversion that occurred at '
-              f'"{uploaded_click_conversion.conversion_date_time.value}" '
-              f'from Google Click ID "{uploaded_click_conversion.gclid.value}"'
-              f' to "{uploaded_click_conversion.conversion_action.value}"')
+              f'"{uploaded_click_conversion.conversion_date_time.value}" from '
+              f'Google Click ID "{uploaded_click_conversion.gclid.value}" '
+              f'to "{uploaded_click_conversion.conversion_action.value}"')
 
     except GoogleAdsException as ex:
         print('Request with ID "%s" failed with status "%s" and includes the '
@@ -74,19 +74,25 @@ if __name__ == '__main__':
     google_ads_client = GoogleAdsClient.load_from_storage()
 
     parser = argparse.ArgumentParser(
-        description='Upload an offline conversion.')
+        description='Uploads an offline conversion.')
     # The following argument(s) should be provided to run the example.
     parser.add_argument('-c', '--customer_id', type=str,
                         required=True, help='The Google Ads customer ID.')
     parser.add_argument('-a', '--conversion_action_id', type=str,
                         required=True, help='The conversion action ID.')
-    parser.add_argument('-g', '--gcl_id', type=str,
-                        required=True, help='The Google Click Identifier ID.')
-    parser.add_argument('-t', '--conversion_time', type=str,
-                        required=True, help='The conversion time.')
+    parser.add_argument('-g', '--gclid', type=str,
+                        required=True, help='The Google Click Identifier ID '
+                        '(gclid) which should be newer than the number of '
+                        'days set on the conversion window of the conversion '
+                        'action.')
+    parser.add_argument('-t', '--conversion_date_time', type=str,
+                        required=True, help='The the date and time of the '
+                        'conversion (should be after the click time). The '
+                        'format is "yyyy-mm-dd hh:mm:ss+|-hh:mm", e.g. '
+                        '“2019-01-01 12:32:45-08:00”')
     parser.add_argument('-v', '--conversion_value', type=str,
                         required=True, help='The conversion value.')
     args = parser.parse_args()
 
     main(google_ads_client, args.customer_id, args.conversion_action_id,
-         args.gcl_id, args.conversion_time, args.conversion_value)
+         args.gclid, args.conversion_date_time, args.conversion_value)

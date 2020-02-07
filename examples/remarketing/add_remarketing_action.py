@@ -41,7 +41,6 @@ def main(client, customer_id, page_size):
 def _add_remarketing_action(client, customer_id):
     remarketing_action_service = client.get_service(
         'RemarketingActionService', version='v2')
-
     remarketing_action_operation = client.get_type(
         'RemarketingActionOperation', version='v2')
 

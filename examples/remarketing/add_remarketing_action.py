@@ -21,7 +21,7 @@ associated tag snippets will be retrieved.
 
 import argparse
 import sys
-import uuid
+from uuid import uuid4
 
 import google.ads.google_ads.client
 
@@ -42,15 +42,12 @@ def _add_remarketing_action(client, customer_id):
     remarketing_action_service = client.get_service(
         'RemarketingActionService', version='v2')
 
-    # Create the operation.
     remarketing_action_operation = client.get_type(
         'RemarketingActionOperation', version='v2')
 
-    # Create remarketing action.
     remarketing_action = remarketing_action_operation.create
-    remarketing_action.name.value = f'Remarketing action #{uuid.uuid4()}'
+    remarketing_action.name.value = f'Remarketing action #{uuid4()}'
 
-    # Add the remarketing action.
     try:
         remarketing_action_response = (
             remarketing_action_service.mutate_remarketing_actions(
@@ -80,15 +77,11 @@ def _query_remarketing_action(client, customer_id, resource_name, page_size):
     google_ads_service_client = client.get_service(
         'GoogleAdsService', version='v2')
 
-    # Issues a search request by specifying page size.
     results = google_ads_service_client.search(
         customer_id, query=query, page_size=page_size)
 
     try:
-        for row in results:
-            # There is only one row because we limited the search using the
-            # resource name, which is unique.
-            return row.remarketing_action
+        return list(results)[0].remarketing_action
     except google.ads.google_ads.errors.GoogleAdsException as ex:
         print(f'Request with ID "{ex.request_id}" failed with status '
               f'"{ex.error.code().name}" and includes the following errors:')
@@ -107,8 +100,8 @@ def _print_remarketing_action_attributes(client, remarketing_action):
         'TrackingCodePageFormatEnum', version='v2').TrackingCodePageFormat
 
     print(f'Remarketing action has ID {remarketing_action.id.value} and name '
-          f'"{remarketing_action.name.value}". It has the following generated '
-          'tag snippets:\n')
+          f'"{remarketing_action.name.value}". \nIt has the following '
+          'generated tag snippets:\n')
 
     for tag_snippet in remarketing_action.tag_snippets:
         tracking_code_type = tracking_code_type_enum.Name(tag_snippet.type)

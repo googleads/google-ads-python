@@ -33,9 +33,39 @@ def main(client, customer_id):
 
     try:
         budget_resource_name = _create_budget(client, customer_id)
-        bidding_strategy_resource_name = _create_bidding_strategy(client, customer_id)
-        campaign_resource_name = _create_campaign(client, customer_id,
-                                                  budget_resource_name, bidding_strategy_resource_name)
+        campaign_operation = client.get_type('CampaignOperation', version='v2')
+        # Create a campaign.
+        campaign = campaign_operation.create
+        campaign.name.value = f'Interplanetary Cruise App #{uuid4()}'
+        # Recommendation: Set the campaign to PAUSED when creating it to prevent the
+        # ads from immediately serving. Set to ENABLED once you've added targeting
+        # and the ads are ready to serve.
+        campaign.status = client.get_type('CampaignStatusEnum',
+                                        version='v2').PAUSED
+        campaign.advertising_channel_type = client.get_type(
+            'AdvertisingChannelTypeEnum', version='v2').MULTI_CHANNEL
+        campaign.advertising_channel_sub_type = client.get_type(
+            'AdvertisingChannelSubTypeEnum', version='v2').APP_CAMPAIGN
+        campaign.bidding_strategy_type = client.get_type('BiddingStrategyTypeEnum', version='v2').TARGET_CPA
+        campaign.target_cpa.target_cpa_micros.value  = 1000000
+        campaign.campaign_budget.value = budget_resource_name
+        campaign.start_date.value = (datetime.now() +
+                        timedelta(1)).strftime('%Y%m%d')
+        campaign.end_date.value = (datetime.now() +
+                    timedelta(365)).strftime('%Y%m%d')
+
+        campaign.app_campaign_setting.app_id.value = 'com.labpixies.colordrips'
+        campaign.app_campaign_setting.app_store = (client.get_type(
+            'AppCampaignAppStoreEnum', version='v2').GOOGLE_APP_STORE)
+        campaign.app_campaign_setting.bidding_strategy_goal_type = (client.get_type(
+            'AppCampaignBiddingStrategyGoalTypeEnum', version='v2')
+            .OPTIMIZE_INSTALLS_TARGET_INSTALL_COST)
+
+
+
+        #bidding_strategy_resource_name = _create_bidding_strategy(client, customer_id)
+        #campaign_resource_name = _create_campaign(client, customer_id,
+        #                                          budget_resource_name, bidding_strategy_resource_name)
         return
         ad_group_resource_name = create_ad_group(client, customer_id,
                                                  campaign_resource_name)

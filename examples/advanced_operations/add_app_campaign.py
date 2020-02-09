@@ -12,7 +12,9 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
-"""This example adds a Universal App campaign.
+"""This example adds an App campaign.
+
+See https://developers.google.com/google-ads/api/docs/app-campaigns/overview
 
 To get campaigns, run basic_operations/get_campaigns.py.
 To upload image assets for this campaign, run misc/upload_image.py.
@@ -32,54 +34,55 @@ def main(client, customer_id):
     campaign_service = client.get_service('CampaignService', version='v2')
 
     try:
+        # Create the budget for the campaign.
         budget_resource_name = _create_budget(client, customer_id)
+
+        # Create the campaign.
         campaign_operation = client.get_type('CampaignOperation', version='v2')
-        # Create a campaign.
         campaign = campaign_operation.create
         campaign.name.value = f'Interplanetary Cruise App #{uuid4()}'
         # Recommendation: Set the campaign to PAUSED when creating it to prevent the
         # ads from immediately serving. Set to ENABLED once you've added targeting
         # and the ads are ready to serve.
         campaign.status = client.get_type('CampaignStatusEnum',
-                                        version='v2').PAUSED
+            version='v2').PAUSED
         campaign.advertising_channel_type = client.get_type(
             'AdvertisingChannelTypeEnum', version='v2').MULTI_CHANNEL
         campaign.advertising_channel_sub_type = client.get_type(
             'AdvertisingChannelSubTypeEnum', version='v2').APP_CAMPAIGN
-        campaign.bidding_strategy_type = client.get_type('BiddingStrategyTypeEnum', version='v2').TARGET_CPA
+        campaign.bidding_strategy_type = (client
+            .get_type('BiddingStrategyTypeEnum', version='v2').TARGET_CPA)
         campaign.target_cpa.target_cpa_micros.value  = 1000000
         campaign.campaign_budget.value = budget_resource_name
         campaign.start_date.value = (datetime.now() +
-                        timedelta(1)).strftime('%Y%m%d')
+            timedelta(1)).strftime('%Y%m%d')
         campaign.end_date.value = (datetime.now() +
-                    timedelta(365)).strftime('%Y%m%d')
+            timedelta(365)).strftime('%Y%m%d')
 
+        # App campaigns have additional required settings.
         campaign.app_campaign_setting.app_id.value = 'com.labpixies.colordrips'
         campaign.app_campaign_setting.app_store = (client.get_type(
             'AppCampaignAppStoreEnum', version='v2').GOOGLE_APP_STORE)
-        campaign.app_campaign_setting.bidding_strategy_goal_type = (client.get_type(
-            'AppCampaignBiddingStrategyGoalTypeEnum', version='v2')
-            .OPTIMIZE_INSTALLS_TARGET_INSTALL_COST)
+        # If you are migrating from the AdWords API, see the enum mapping at
+        # https://developers.google.com/google-ads/api/docs/migration/types
+        # TODO: the above link is waiting on cl/294016801
+        campaign.app_campaign_setting.bidding_strategy_goal_type = (client
+            .get_type('AppCampaignBiddingStrategyGoalTypeEnum',
+                      version='v2').OPTIMIZE_INSTALLS_TARGET_INSTALL_COST)
 
-
-
-        #bidding_strategy_resource_name = _create_bidding_strategy(client, customer_id)
-        #campaign_resource_name = _create_campaign(client, customer_id,
-        #                                          budget_resource_name, bidding_strategy_resource_name)
         return
         ad_group_resource_name = create_ad_group(client, customer_id,
-                                                 campaign_resource_name)
+            campaign_resource_name)
         create_expanded_dsa(client, customer_id, ad_group_resource_name)
         add_webpage_criteria(client, customer_id, ad_group_resource_name)
     except GoogleAdsException as ex:
-        print('Request with ID "{}" failed with status "{}" and includes the '
-              'following errors:'.format(ex.request_id, ex.error.code().name))
+        print(f'Request with ID "{ex.request_id}" failed with status '
+              f'"{ex.error.code().name}" and includes the following errors:')
         for error in ex.failure.errors:
-            print('\tError with message "{}".'.format(error.message))
+            print(f'\tError with message "{error.message}".')
             if error.location:
                 for field_path_element in error.location.field_path_elements:
-                    print('\t\tOn field: {}'.format(
-                        field_path_element.field_name))
+                    print(f'\t\tOn field: {field_path_element.field_name}')
         sys.exit(1)
 
 
@@ -116,149 +119,6 @@ def _create_budget(client, customer_id):
     print(f'Created campaign budget with resource_name: {resource_name}')
 
     return resource_name
-
-
-def _create_campaign(client, customer_id, budget_resource_name, bidding_strategy_resource_name):
-    """Creates a App Ad Campaign under the given customer ID.
-
-    Args:
-        client: an initialized GoogleAdsClient instance.
-        customer_id: a client customer ID str.
-        budget_resource_name: a resource name str for a Budget
-        bidding_strategy_resource_name: a resource name str for a bidding strategy
-
-    Returns:
-        A resource_name str for the newly created Campaign.
-    """
-    # Retrieve a new campaign operation object.
-    campaign_operation = client.get_type('CampaignOperation', version='v2')
-    # Create a campaign.
-    campaign = campaign_operation.create
-    campaign.name.value = f'Interplanetary Cruise #{uuid4()}'
-    campaign.advertising_channel_type = client.get_type(
-        'AdvertisingChannelTypeEnum', version='v2').MULTI_CHANNEL
-    campaign.advertising_channel_sub_type = client.get_type(
-        'AdvertisingChannelSubTypeEnum', version='v2').APP_CAMPAIGN
-    # Recommendation: Set the campaign to PAUSED when creating it to prevent the
-    # ads from immediately serving. Set to ENABLED once you've added targeting
-    # and the ads are ready to serve.
-    campaign.status = client.get_type('CampaignStatusEnum',
-                                      version='v2').PAUSED
-    campaign.bidding_strategy_type = client.get_type('BiddingStrategyTypeEnum', version='v2').TARGET_CPA
-    campaign.campaign_bidding_strategy.value = client.get_type('TargetCpa', version='v2')
-    campaign.campaign_bidding_strategy.target_cpa.target_cpa_micros.value  = 1000000
-    campaign.campaign_budget.value = budget_resource_name
-    campaign.start_date.value = (datetime.now() +
-                    timedelta(1)).strftime('%Y%m%d')
-    campaign.end_date.value = (datetime.now() +
-                  timedelta(365)).strftime('%Y%m%d')
-
-    # Retrieve the campaign service.
-    campaign_service = client.get_service('CampaignService', version='v2')
-    # Submit the campaign operation to add the campaign.
-    response = campaign_service.mutate_campaigns(
-        customer_id, [campaign_operation])
-    resource_name = response.results[0].resource_name
-
-    # Display the results
-    print('Created campaign with resource_name: {}'.format(resource_name))
-
-    return resource_name
-
-def _create_bidding_strategy(client, customer_id):
-    # Create a portfolio bidding strategy.
-    bidding_strategy_operation = client.get_type('BiddingStrategyOperation',
-                                                 version='v2')
-    bidding_strategy = bidding_strategy_operation.create
-    bidding_strategy.name.value = f'Target CPA {uuid4()}'
-    bidding_strategy.type = client.get_type('BiddingStrategyTypeEnum',version='v2').TARGET_CPA
-    bidding_strategy.target_cpa.target_cpa_micros.value = 1000000
-
-    # Add portfolio bidding strategy.
-    bidding_strategy_service = client.get_service('BiddingStrategyService',
-                                                version='v2')
-    bidding_strategy_response = (
-        bidding_strategy_service.mutate_bidding_strategies(
-            customer_id, [bidding_strategy_operation]))
-
-    resource_name = bidding_strategy_response.results[0].resource_name
-
-    print(f'Portfolio bidding strategy "{resource_name}" was created.')
-    return resource_name
-
-def create_ad_group(client, customer_id, campaign_resource_name):
-    """Creates a Dynamic Search Ad Group under the given Campaign.
-
-    Args:
-        client: an initialized GoogleAdsClient instance.
-        customer_id: a client customer ID str.
-        campaign_resource_name: a resource_name str for a Campaign.
-
-    Returns:
-        A resource_name str for the newly created Ad Group.
-    """
-    # Retrieve a new ad group operation object.
-    ad_group_operation = client.get_type('AdGroupOperation', version='v2')
-    # Create an ad group.
-    ad_group = ad_group_operation.create
-    # Required: set the ad group's type to Dynamic Search Ads.
-    ad_group.type = client.get_type('AdGroupTypeEnum',
-                                    version='v2').SEARCH_DYNAMIC_ADS
-    ad_group.name.value = 'Earth to Mars Cruises {}'.format(uuid4())
-    ad_group.campaign.value = campaign_resource_name
-    ad_group.status = client.get_type('AdGroupStatusEnum', version='v2').PAUSED
-    # Recommended: set a tracking URL template for your ad group if you want to
-    # use URL tracking software.
-    ad_group.tracking_url_template.value = (
-        'http://tracker.example.com/traveltracker/{escapedlpurl}')
-    # Set the ad group bids.
-    ad_group.cpc_bid_micros.value = 3000000
-
-    # Retrieve the ad group service.
-    ad_group_service = client.get_service('AdGroupService', version='v2')
-    # Submit the ad group ad operation to add an ad group.
-    response = ad_group_service.mutate_ad_groups(customer_id,
-                                                 [ad_group_operation])
-    resource_name = response.results[0].resource_name
-
-    # Display the results.
-    print('Created Ad Group with resource_name: {}'.format(resource_name))
-
-    return resource_name
-
-
-def create_expanded_dsa(client, customer_id, ad_group_resource_name):
-    """Creates a Dynamic Search Ad under the given Ad Group.
-
-    Args:
-        client: an initialized GoogleAdsClient instance.
-        customer_id: a client customer ID str.
-        campaign_resource_name: a resource_name str for an Ad Group.
-    """
-    # Retrieve a new ad group ad operation object.
-    ad_group_ad_operation = client.get_type('AdGroupAdOperation', version='v2')
-    # Create and Expanded Dynamic Search Ad. This ad will have its headline,
-    # display URL and final URL auto-generated at serving time according to
-    # domain name specific information provided by DynamicSearchAdSetting at
-    # the campaign level.
-    ad_group_ad = ad_group_ad_operation.create
-    # Optional: set the ad status.
-    ad_group_ad.status = client.get_type('AdGroupAdStatusEnum',
-                                         version='v2').PAUSED
-    # Set the ad description.
-    ad_group_ad.ad.expanded_dynamic_search_ad.description.value = (
-        'Buy tickets now!')
-    ad_group_ad.ad_group.value = ad_group_resource_name
-
-    # Retrieve the ad group ad service.
-    ad_group_ad_service = client.get_service('AdGroupAdService', version='v2')
-    # Submit the ad group ad operation to add the ad group ad.
-    response = ad_group_ad_service.mutate_ad_group_ads(customer_id,
-                                                    [ad_group_ad_operation])
-    resource_name = response.results[0].resource_name
-
-    # Display the results.
-    print('Created Ad Group Ad with resource_name: {}'.format(resource_name))
 
 
 def add_webpage_criteria(client, customer_id, ad_group_resource_name):

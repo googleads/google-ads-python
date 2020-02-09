@@ -41,15 +41,20 @@ def main(client, customer_id):
         campaign_operation = client.get_type('CampaignOperation', version='v2')
         campaign = campaign_operation.create
         campaign.name.value = f'Interplanetary Cruise App #{uuid4()}'
-        # Recommendation: Set the campaign to PAUSED when creating it to prevent the
-        # ads from immediately serving. Set to ENABLED once you've added targeting
-        # and the ads are ready to serve.
+        # Recommendation: Set the campaign to PAUSED when creating it to 
+        # prevent the ads from immediately serving. Set to ENABLED once you've
+        # added targeting and the ads are ready to serve.
         campaign.status = client.get_type('CampaignStatusEnum',
             version='v2').PAUSED
+        # All App campaigns have an advertising_channel_type of
+        # MULTI_CHANNEL to reflect the fact that ads from these campaigns are
+        # eligible to appear on multiple channels.
         campaign.advertising_channel_type = client.get_type(
             'AdvertisingChannelTypeEnum', version='v2').MULTI_CHANNEL
         campaign.advertising_channel_sub_type = client.get_type(
             'AdvertisingChannelSubTypeEnum', version='v2').APP_CAMPAIGN
+        # Define the bidding strategy during campaign creation. An App campaign
+        # cannot use a portfolio bidding strategy.
         campaign.bidding_strategy_type = (client
             .get_type('BiddingStrategyTypeEnum', version='v2').TARGET_CPA)
         campaign.target_cpa.target_cpa_micros.value  = 1000000
@@ -63,12 +68,24 @@ def main(client, customer_id):
         campaign.app_campaign_setting.app_id.value = 'com.labpixies.colordrips'
         campaign.app_campaign_setting.app_store = (client.get_type(
             'AppCampaignAppStoreEnum', version='v2').GOOGLE_APP_STORE)
+        # Optimize this campaign for getting new users for your app.
         # If you are migrating from the AdWords API, see the enum mapping at
         # https://developers.google.com/google-ads/api/docs/migration/types
         # TODO: the above link is waiting on cl/294016801
         campaign.app_campaign_setting.bidding_strategy_goal_type = (client
             .get_type('AppCampaignBiddingStrategyGoalTypeEnum',
                       version='v2').OPTIMIZE_INSTALLS_TARGET_INSTALL_COST)
+
+
+        # Optional: If you select the 
+        # OPTIMIZE_IN_APP_CONVERSIONS_TARGET_INSTALL_COST goal type, then also
+        # specify your in-app conversion types the Google Ads API can focus 
+        # your campaign on people who are most likely to complete the 
+        # corresponding in-app actions.
+        # selective_optimization1 = client.get_type('StringValue', version='v2')
+        # selective_optimization1.value = 'INSERT_CONVERSION_TYPE_ID(s)_HERE'
+        # campaign.selective_optimization.conversion_actions.extend(
+        #     [selective_optimization1])
 
         return
         ad_group_resource_name = create_ad_group(client, customer_id,
@@ -105,6 +122,8 @@ def _create_budget(client, customer_id):
     campaign_budget.amount_micros.value = 50000000
     campaign_budget.delivery_method = client.get_type(
         'BudgetDeliveryMethodEnum', version='v2').STANDARD
+    # An App campaign cannot use a shared campaign budget.
+    # explicitly_shared must be set to false.
     campaign_budget.explicitly_shared.value = False
 
     # Retrieve the campaign budget service.

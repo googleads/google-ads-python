@@ -16,6 +16,16 @@
 
 More information about Smart Display campaigns can be found at:
 https://support.google.com/google-ads/answer/7020281
+
+IMPORTANT: The AssetService requires you to reuse what you've uploaded
+previously. Therefore, you cannot create an image asset with the exactly same
+bytes. In case you want to run this example more than once, note down the
+created assets' resource names and specify them as command-line arguments for
+marketing and square marketing images.
+
+Alternatively, you can modify the image URLs' constants directly to use other
+images. You can find image specifications in the pydoc for
+ResponsiveDisplayAdInfo in common/ad_type_infos_pb2.py.
 """
 
 
@@ -28,15 +38,16 @@ import google.ads.google_ads.client
 import requests
 
 
-_date_format = '%Y%m%d'
-_marketing_image_url = 'https://goo.gl/3b9Wfh'
-_marketing_image_width = 600
-_marketing_image_height = 315
-_square_marketing_image_url = 'https://goo.gl/mtt54n'
-_square_marketing_image_size = 512
+_DATE_FORMAT = '%Y%m%d'
+_MARKETING_IMAGE_URL = 'https://goo.gl/3b9Wfh'
+_MARKETING_IMAGE_WIDTH = 600
+_MARKETING_IMAGE_HEIGHT = 315
+_SQUARE_MARKETING_IMAGE_URL = 'https://goo.gl/mtt54n'
+_SQUARE_MARKETING_IMAGE_SIZE = 512
 
 
-def main(client, customer_id):
+def main(client, customer_id, marketing_image_asset_resource_name=None,
+         square_marketing_image_asset_resource_name=None):
     budget_resource_name = _create_budget(client, customer_id)
     print(f'Created budget with resource name "{budget_resource_name}".')
 
@@ -49,21 +60,30 @@ def main(client, customer_id):
         client, customer_id, campaign_resource_name)
     print(f'Created ad group with resource name "{ad_group_resource_name}"')
 
-    marketing_image_resource_name = _upload_image_asset(
-        client, customer_id, _marketing_image_url, _marketing_image_width,
-        _marketing_image_height)
-    print('Created image asset with resource name '
-          f'"{marketing_image_resource_name}".')
+    if marketing_image_asset_resource_name:
+        print('Using existing marketing image asset with resource name '
+              f'"{marketing_image_asset_resource_name}".')
+    else:
+        marketing_image_asset_resource_name = _upload_image_asset(
+            client, customer_id, _MARKETING_IMAGE_URL, _MARKETING_IMAGE_WIDTH,
+            _MARKETING_IMAGE_HEIGHT)
+        print('Created marketing image asset with resource name '
+              f'"{marketing_image_asset_resource_name}".')
 
-    square_marketing_image_resource_name = _upload_image_asset(
-        client, customer_id, _square_marketing_image_url,
-        _square_marketing_image_size, _square_marketing_image_size)
-    print('Created image asset with resource name '
-          f'"{square_marketing_image_resource_name}".')
+    if square_marketing_image_asset_resource_name:
+        print('Using existing square marketing image asset with resource name '
+              f'"{square_marketing_image_asset_resource_name}".')
+    else:
+        square_marketing_image_asset_resource_name = _upload_image_asset(
+            client, customer_id, _SQUARE_MARKETING_IMAGE_URL,
+            _SQUARE_MARKETING_IMAGE_SIZE, _SQUARE_MARKETING_IMAGE_SIZE)
+        print('Created square marketing image asset with resource name '
+              f'"{square_marketing_image_asset_resource_name}".')
 
     responsive_display_ad_resource_name = _create_responsive_display_ad(
         client, customer_id, ad_group_resource_name,
-        marketing_image_resource_name, square_marketing_image_resource_name)
+        marketing_image_asset_resource_name,
+        square_marketing_image_asset_resource_name)
     print('Created responsive display ad with resource name '
           f'"{responsive_display_ad_resource_name}".')
 
@@ -115,12 +135,11 @@ def _create_smart_display_campaign(client, customer_id, budget_resource_name):
     # Smart Display campaign requires the TargetCpa bidding strategy.
     campaign.target_cpa.target_cpa_micros.value = 5000000
     campaign.campaign_budget.value = budget_resource_name
-    # Optional: Set the start date.
+    # Optional: Set the start and end date.
     start_date = datetime.date.today() + datetime.timedelta(days=1)
-    campaign.start_date.value = start_date.strftime(_date_format)
-    # Optional: Set the end date.
+    campaign.start_date.value = start_date.strftime(_DATE_FORMAT)
     end_date = start_date + datetime.timedelta(days=365)
-    campaign.end_date.value = end_date.strftime(_date_format)
+    campaign.end_date.value = end_date.strftime(_DATE_FORMAT)
 
     campaign_service = client.get_service('CampaignService', version='v2')
 
@@ -145,7 +164,7 @@ def _create_ad_group(client, customer_id, campaign_resource_name):
     ad_group = ad_group_operation.create
     ad_group.name.value = f'Earth to Mars Cruises #{uuid4()}'
     ad_group_status_enum = client.get_type('AdGroupStatusEnum', version='v2')
-    ad_group.status = ad_group_status_enum.ENABLED
+    ad_group.status = ad_group_status_enum.PAUSED
     ad_group.campaign.value = campaign_resource_name
 
     ad_group_service = client.get_service('AdGroupService', version='v2')
@@ -260,8 +279,18 @@ if __name__ == '__main__':
         description=('Creates a Smart Display campaign, and an ad group that '
                      'are then used to create a responsive display ad.'))
     # The following argument(s) should be provided to run the example.
-    parser.add_argument('-c', '--customer_id', type=str,
-                        required=True, help='The Google Ads customer ID.')
+    parser.add_argument('-c', '--customer_id', type=str, required=True,
+                        help='The Google Ads customer ID.')
+    parser.add_argument(
+        '-m', '--marketing_image_resource_name', type=str, required=False,
+        help=('The resource name for an image asset to be used as a marketing '
+              'image.'))
+    parser.add_argument(
+        '-s', '--square_marketing_image_resource_name', type=str,
+        required=False, help=('The resource name for an image asset to be used '
+                              'as a square marketing image.'))
     args = parser.parse_args()
 
-    main(google_ads_client, args.customer_id)
+    main(google_ads_client, args.customer_id,
+         args.marketing_image_resource_name,
+         args.square_marketing_image_resource_name)

@@ -1,5 +1,5 @@
 #!/usr/bin/env python
-# Copyright 2019 Google LLC
+# Copyright 2020 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -14,7 +14,8 @@
 # limitations under the License.
 """This example adds an App campaign.
 
-See https://developers.google.com/google-ads/api/docs/app-campaigns/overview
+For guidance regarding App Campaigns, see:
+https://developers.google.com/google-ads/api/docs/app-campaigns/overview
 
 To get campaigns, run basic_operations/get_campaigns.py.
 To upload image assets for this campaign, run misc/upload_image.py.
@@ -31,61 +32,25 @@ from google.ads.google_ads.errors import GoogleAdsException
 
 
 def main(client, customer_id):
-    campaign_service = client.get_service('CampaignService', version='v2')
 
     try:
         # Create the budget for the campaign.
         budget_resource_name = _create_budget(client, customer_id)
 
         # Create the campaign.
-        campaign_operation = client.get_type('CampaignOperation', version='v2')
-        campaign = campaign_operation.create
-        campaign.name.value = f'Interplanetary Cruise App #{uuid4()}'
-        # Recommendation: Set the campaign to PAUSED when creating it to 
-        # prevent the ads from immediately serving. Set to ENABLED once you've
-        # added targeting and the ads are ready to serve.
-        campaign.status = client.get_type('CampaignStatusEnum',
-            version='v2').PAUSED
-        # All App campaigns have an advertising_channel_type of
-        # MULTI_CHANNEL to reflect the fact that ads from these campaigns are
-        # eligible to appear on multiple channels.
-        campaign.advertising_channel_type = client.get_type(
-            'AdvertisingChannelTypeEnum', version='v2').MULTI_CHANNEL
-        campaign.advertising_channel_sub_type = client.get_type(
-            'AdvertisingChannelSubTypeEnum', version='v2').APP_CAMPAIGN
-        # Define the bidding strategy during campaign creation. An App campaign
-        # cannot use a portfolio bidding strategy.
-        campaign.bidding_strategy_type = (client
-            .get_type('BiddingStrategyTypeEnum', version='v2').TARGET_CPA)
-        campaign.target_cpa.target_cpa_micros.value  = 1000000
-        campaign.campaign_budget.value = budget_resource_name
-        campaign.start_date.value = (datetime.now() +
-            timedelta(1)).strftime('%Y%m%d')
-        campaign.end_date.value = (datetime.now() +
-            timedelta(365)).strftime('%Y%m%d')
+        campaign_resource_name = _create_campaign(client, customer_id,
+            budget_resource_name)
 
-        # App campaigns have additional required settings.
-        campaign.app_campaign_setting.app_id.value = 'com.labpixies.colordrips'
-        campaign.app_campaign_setting.app_store = (client.get_type(
-            'AppCampaignAppStoreEnum', version='v2').GOOGLE_APP_STORE)
-        # Optimize this campaign for getting new users for your app.
-        # If you are migrating from the AdWords API, see the enum mapping at
-        # https://developers.google.com/google-ads/api/docs/migration/types
-        # TODO: the above link is waiting on cl/294016801
-        campaign.app_campaign_setting.bidding_strategy_goal_type = (client
-            .get_type('AppCampaignBiddingStrategyGoalTypeEnum',
-                      version='v2').OPTIMIZE_INSTALLS_TARGET_INSTALL_COST)
+        # Set campaign targeting
+        _set_campaign_targeting_criteria(client, customer_id,
+            campaign_resource_name)
+        
+        # TODO: set campaign targeting criteria
+        # Set the campaign's assets and ad text ideas. These values will
+        # be used to generate ads.
 
 
-        # Optional: If you select the 
-        # OPTIMIZE_IN_APP_CONVERSIONS_TARGET_INSTALL_COST goal type, then also
-        # specify your in-app conversion types the Google Ads API can focus 
-        # your campaign on people who are most likely to complete the 
-        # corresponding in-app actions.
-        # selective_optimization1 = client.get_type('StringValue', version='v2')
-        # selective_optimization1.value = 'INSERT_CONVERSION_TYPE_ID(s)_HERE'
-        # campaign.selective_optimization.conversion_actions.extend(
-        #     [selective_optimization1])
+        # TODO: set AppAdInfo
 
         return
         ad_group_resource_name = create_ad_group(client, customer_id,
@@ -133,14 +98,129 @@ def _create_budget(client, customer_id):
     response = campaign_budget_service.mutate_campaign_budgets(
         customer_id, [campaign_budget_operation])
     resource_name = response.results[0].resource_name
-
-    # Display the results
     print(f'Created campaign budget with resource_name: {resource_name}')
+    return resource_name
 
+def _create_campaign(client, customer_id, budget_resource_name):
+    """Creates an app campaign under the given customer ID.
+
+    Args:
+        client: an initialized GoogleAdsClient instance.
+        customer_id: a client customer ID str.
+        buddget_resource_name: the budget to associate with the campaign
+
+    Returns:
+        A resource_name str for the newly created app campaign.
+    """
+    campaign_service = client.get_service('CampaignService', version='v2')
+    campaign_operation = client.get_type('CampaignOperation', version='v2')
+    campaign = campaign_operation.create
+    campaign.name.value = f'Interplanetary Cruise App #{uuid4()}'
+    campaign.campaign_budget.value = budget_resource_name
+    # Recommendation: Set the campaign to PAUSED when creating it to 
+    # prevent the ads from immediately serving. Set to ENABLED once you've
+    # added targeting and the ads are ready to serve.
+    campaign.status = (client.get_type('CampaignStatusEnum', version='v2')
+        .PAUSED)
+    # All App campaigns have an advertising_channel_type of
+    # MULTI_CHANNEL to reflect the fact that ads from these campaigns are
+    # eligible to appear on multiple channels.
+    campaign.advertising_channel_type = client.get_type(
+        'AdvertisingChannelTypeEnum', version='v2').MULTI_CHANNEL
+    campaign.advertising_channel_sub_type = client.get_type(
+        'AdvertisingChannelSubTypeEnum', version='v2').APP_CAMPAIGN
+    # Define the bidding strategy during campaign creation. An App campaign
+    # cannot use a portfolio bidding strategy.
+    # App campaigns only support the TARGET_CPA bidding strategy.
+    campaign.bidding_strategy_type = (client
+        .get_type('BiddingStrategyTypeEnum', version='v2').TARGET_CPA)
+    # Set the target CPA to $1 / app install.
+    #
+    # campaign_bidding_strategy is a 'oneof' message so setting target_cpa
+    # is mutually exclusive with other bidding strategies such as
+    # manual_cpc, commission, maximize_conversions, etc.
+    # See https://developers.google.com/google-ads/api/reference/rpc
+    # under current version / resources / Campaign
+    campaign.target_cpa.target_cpa_micros.value  = 1000000
+    # Set the App Campaign Settings. Other settings are on a per-ad basis.
+    campaign.app_campaign_setting.app_id.value = 'com.labpixies.colordrips'
+    campaign.app_campaign_setting.app_store = (client.get_type(
+        'AppCampaignAppStoreEnum', version='v2').GOOGLE_APP_STORE)
+    # Optional fields
+    campaign.start_date.value = (datetime.now() +
+        timedelta(1)).strftime('%Y%m%d')
+    campaign.end_date.value = (datetime.now() +
+        timedelta(365)).strftime('%Y%m%d')
+    # Optimize this campaign for getting new users for your app.
+    campaign.app_campaign_setting.bidding_strategy_goal_type = (client
+        .get_type('AppCampaignBiddingStrategyGoalTypeEnum',
+                  version='v2').OPTIMIZE_INSTALLS_TARGET_INSTALL_COST)
+    # Optional: If you select the 
+    # OPTIMIZE_IN_APP_CONVERSIONS_TARGET_INSTALL_COST goal type, then also
+    # specify your in-app conversion types so the Google Ads API can focus 
+    # your campaign on people who are most likely to complete the 
+    # corresponding in-app actions.
+    # selective_optimization1 = (client.get_type('StringValue',
+    #                            version='v2'))
+    # selective_optimization1.value = 'INSERT_CONVERSION_TYPE_ID_HERE'
+    # campaign.selective_optimization.conversion_actions.extend(
+    #     [selective_optimization1])
+
+    # TODO: set advanced location options
+
+    # Submit the campaign operation and print the results.
+    campaign_response = campaign_service.mutate_campaigns(customer_id,
+        [campaign_operation])
+    resource_name = campaign_response.results[0].resource_name
+    print(f'Created App campaign {resource_name}.')
     return resource_name
 
 
-def add_webpage_criteria(client, customer_id, ad_group_resource_name):
+def _set_campaign_targeting_criteria(client, customer_id,
+        campaign_resource_name):
+    campaign_criterion_service = client.get_service('CampaignCriterionService',
+                                                    version='v2')
+    campaign_criterion_operation = (client.get_type(
+        'CampaignCriterionOperation', version='v2'))
+    geo_target_constant_service = (client.get_service(
+        'GeoTargetConstantService', version='v2'))
+    language_constant_service = (client.get_service('LanguageConstantService',
+        version='v2'))
+    location_type = (client.get_type('CriterionTypeEnum',version='v2')
+        .LOCATION)
+    language_type = (client.get_type('CriterionTypeEnum',version='v2')
+        .LANGUAGE)
+
+    campaign_criterion_operations = []
+    # Create the location campaign criteria.
+    # Besides using location_id, you can also search by location names from
+    # GeoTargetConstantService.suggest_geo_target_constants() and directly
+    # apply GeoTargetConstant.resource_name here. An example can be found
+    # in get_geo_target_constant_by_names.py.
+    for location_id in ['21137', # California
+                        '2484']: # Mexico
+        campaign_criterion = campaign_criterion_operation.create
+        campaign_criterion.campaign.value = campaign_resource_name
+        campaign_criterion.type = location_type
+        campaign_criterion.location.geo_target_constant.value = (
+            geo_target_constant_service.geo_target_constant_path(location_id))
+        campaign_criterion_operations.append(campaign_criterion_operation)
+
+    # Create the language campaign criteria.
+    for language_id in ['1000', # English
+                        '1003']: # Spanish
+        campaign_criterion = campaign_criterion_operation.create
+        campaign_criterion.campaign.value = campaign_resource_name
+        campaign_criterion.type = language_type
+        campaign_criterion.language.language_constant.value = (
+            language_constant_service.language_constant_path(language_id))
+        campaign_criterion_operations.append(campaign_criterion_operation)
+
+    # Submit the criteria operations
+    campaign_criterion_response = (
+            campaign_criterion_service.mutate_campaign_criteria(
+                customer_id, campaign_criterion_operations))
+    return
     """Creates a Web Page Criteria to the given Ad Group.
 
     Args:

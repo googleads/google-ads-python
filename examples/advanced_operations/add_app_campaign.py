@@ -134,8 +134,9 @@ def _create_campaign(client, customer_id, budget_resource_name):
     # See https://developers.google.com/google-ads/api/reference/rpc
     # under current version / resources / Campaign
     campaign.target_cpa.target_cpa_micros.value = 1000000
-    # Set the App Campaign Settings. Other settings are on a per-ad basis.
-    campaign.app_campaign_setting.app_id.value = 'com.labpixies.colordrips'
+    # Set the App Campaign Settings.
+    campaign.app_campaign_setting.app_id.value = (
+        'com.google.android.apps.adwords')
     campaign.app_campaign_setting.app_store = (client.get_type(
         'AppCampaignAppStoreEnum', version='v2').GOOGLE_APP_STORE)
     # Optional fields

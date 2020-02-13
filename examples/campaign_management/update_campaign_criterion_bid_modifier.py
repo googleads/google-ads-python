@@ -28,8 +28,6 @@ def main(client, customer_id, criterion_id, bid_modifier):
     criterion_rname = campaign_criterion_service.campaign_criteria_path(
         customer_id, criterion_id)
 
-    print(f'Criterion resource name: "{criterion_rname}"')
-
     campaign_criterion_operation = client.get_type(
         'CampaignCriterionOperation', version='v2')
     campaign_criterion = campaign_criterion_operation.update

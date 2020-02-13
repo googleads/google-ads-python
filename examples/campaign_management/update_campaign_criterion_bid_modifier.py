@@ -17,7 +17,8 @@
 import argparse
 import sys
 
-import google.ads.google_ads.client
+from google.ads.google_ads.client import GoogleAdsClient
+from google.ads.google_ads.errors import GoogleAdsException
 from google.api_core import protobuf_helpers
 
 
@@ -27,8 +28,6 @@ def main(client, customer_id, criterion_id, bid_modifier):
 
     criterion_rname = campaign_criterion_service.campaign_criteria_path(
         customer_id, criterion_id)
-
-    print(f'Criterion resource name: "{criterion_rname}"')
 
     campaign_criterion_operation = client.get_type(
         'CampaignCriterionOperation', version='v2')
@@ -44,7 +43,7 @@ def main(client, customer_id, criterion_id, bid_modifier):
         campaign_criterion_response = (
             campaign_criterion_service.mutate_campaign_criteria(
                 customer_id, [campaign_criterion_operation]))
-    except google.ads.google_ads.errors.GoogleAdsException as ex:
+    except GoogleAdsException as ex:
         print(f'Request with ID "{ex.request_id}" failed with status '
               f'"{ex.error.code().name}" and includes the following errors:')
         for error in ex.failure.errors:
@@ -62,8 +61,7 @@ def main(client, customer_id, criterion_id, bid_modifier):
 if __name__ == '__main__':
     # GoogleAdsClient will read the google-ads.yaml configuration file in the
     # home directory if none is specified.
-    google_ads_client = (google.ads.google_ads.client.GoogleAdsClient
-                         .load_from_storage())
+    google_ads_client = GoogleAdsClient.load_from_storage()
 
     parser = argparse.ArgumentParser(
         description=('Updates the bid modifier and device type for the given '

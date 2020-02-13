@@ -22,20 +22,18 @@ from google.ads.google_ads.errors import GoogleAdsException
 from google.api_core import protobuf_helpers
 
 
-def main(client, customer_id, criterion_id, bid_modifier):
+def main(client, customer_id, campaign_id, criterion_id, bid_modifier):
     campaign_criterion_service = client.get_service(
         'CampaignCriterionService', version='v2')
 
     criterion_rname = campaign_criterion_service.campaign_criteria_path(
-        customer_id, criterion_id)
+        customer_id, f'{campaign_id}~{criterion_id}')
 
     campaign_criterion_operation = client.get_type(
         'CampaignCriterionOperation', version='v2')
     campaign_criterion = campaign_criterion_operation.update
     campaign_criterion.resource_name = criterion_rname
     campaign_criterion.bid_modifier.value = bid_modifier
-    campaign_criterion.device.type = client.get_type(
-        'DeviceEnum', version='v2').MOBILE
     fm = protobuf_helpers.field_mask(None, campaign_criterion)
     campaign_criterion_operation.update_mask.CopyFrom(fm)
 
@@ -69,11 +67,13 @@ if __name__ == '__main__':
     # The following argument(s) should be provided to run the example.
     parser.add_argument('-c', '--customer_id', type=str,
                         required=True, help='The Google Ads customer ID.')
+    parser.add_argument('--campaign_id', type=str, required=True,
+                        help='The campaign ID.')
     parser.add_argument('--criterion_id', type=str, required=True,
                         help='The criterion ID.')
     parser.add_argument('-b', '--bid_modifier', type=float, default=1.5,
                         help='The desired campaign criterion bid modifier.')
     args = parser.parse_args()
 
-    main(google_ads_client, args.customer_id, args.criterion_id,
-         args.bid_modifier)
+    main(google_ads_client, args.customer_id, args.campaign_id,
+         args.criterion_id, args.bid_modifier)

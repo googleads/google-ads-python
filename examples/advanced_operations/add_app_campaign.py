@@ -18,7 +18,7 @@ For guidance regarding App Campaigns, see:
 https://developers.google.com/google-ads/api/docs/app-campaigns/overview
 
 To get campaigns, run basic_operations/get_campaigns.py.
-To upload image assets for this campaign, run misc/upload_image.py.
+To upload image assets for this campaign, run misc/upload_image_asset.py.
 """
 
 
@@ -41,11 +41,11 @@ def main(client, customer_id):
         campaign_resource_name = _create_campaign(client, customer_id,
             budget_resource_name)
 
-        # Set campaign targeting
+        # Set campaign targeting.
         _set_campaign_targeting_criteria(client, customer_id,
             campaign_resource_name)
 
-        # Create Ad Group and App Ad
+        # Create Ad Group and App Ad.
         _create_app_ad(client, customer_id, campaign_resource_name)
     except GoogleAdsException as ex:
         print(f'Request with ID "{ex.request_id}" failed with status '
@@ -155,7 +155,8 @@ def _create_campaign(client, customer_id, budget_resource_name):
     # corresponding in-app actions.
     # selective_optimization1 = (client.get_type('StringValue',
     #                            version='v2'))
-    # selective_optimization1.value = 'INSERT_CONVERSION_TYPE_ID_HERE'
+    # selective_optimization1.value = (
+    #     'INSERT_CONVERSION_ACTION_RESOURCE_NAME_HERE')
     # campaign.selective_optimization.conversion_actions.extend(
     #     [selective_optimization1])
 
@@ -169,7 +170,7 @@ def _create_campaign(client, customer_id, budget_resource_name):
 
 def _set_campaign_targeting_criteria(client, customer_id,
         campaign_resource_name):
-    """Set campaign targeting criteria for a given campaign.
+    """Sets campaign targeting criteria for a given campaign.
 
     Both location and language targeting are illustrated.
 
@@ -199,7 +200,7 @@ def _set_campaign_targeting_criteria(client, customer_id,
     # Besides using location_id, you can also search by location names from
     # GeoTargetConstantService.suggest_geo_target_constants() and directly
     # apply GeoTargetConstant.resource_name here. An example can be found
-    # in get_geo_target_constant_by_names.py.
+    # in targeting/get_geo_target_constant_by_names.py.
     for location_id in ['21137',  # California
                         '2484']:  # Mexico
         campaign_criterion = campaign_criterion_operation.create
@@ -219,7 +220,8 @@ def _set_campaign_targeting_criteria(client, customer_id,
             language_constant_service.language_constant_path(language_id))
         campaign_criterion_operations.append(campaign_criterion_operation)
 
-    # Submit the criteria operations
+    # Submit the criteria operations. All four criteria will have the same
+    # resource name.
     resource_name = campaign_criterion_service.mutate_campaign_criteria(
         customer_id, campaign_criterion_operations).results[0].resource_name
     print(f'Created Campaign Criteria {resource_name}.')
@@ -227,7 +229,7 @@ def _set_campaign_targeting_criteria(client, customer_id,
 
 
 def _create_app_ad(client, customer_id, campaign_resource_name):
-    """Create an ad group and associated app ap for a given campaign.
+    """Creates an ad group and associated App ad for a given campaign.
 
     Args:
         client: an initialized GoogleAdsClient instance.
@@ -243,7 +245,7 @@ def _create_app_ad(client, customer_id, campaign_resource_name):
     # Note that the ad group type must not be set.
     # Since the advertising_channel_sub_type is APP_CAMPAIGN,
     #   1- you cannot override bid settings at the ad group level.
-    #   2- you cannot add ad group criteria
+    #   2- you cannot add ad group criteria.
     ad_group_operation = client.get_type('AdGroupOperation', version='v2')
     ad_group = ad_group_operation.create
     ad_group.name.value = f'Earth to Mars cruises {uuid4()}'
@@ -274,7 +276,8 @@ def _create_app_ad(client, customer_id, campaign_resource_name):
         _create_ad_text_asset(client, '3 difficulty levels'),
         _create_ad_text_asset(client, '4 colorful fun skins')])
     # Optional: You can set up to 20 image assets for your campaign.
-    # ad_group_ad.ad.app_ad.images.extend([INSERT_AD_IMAGE_ASSET_ID(s)_HERE])
+    # ad_group_ad.ad.app_ad.images.extend(
+    #     [INSERT_AD_IMAGE_RESOURCE_NAME(s)_HERE])
 
     ad_group_ad_response = ad_group_ad_service.mutate_ad_group_ads(
         customer_id, [ad_group_ad_operation])

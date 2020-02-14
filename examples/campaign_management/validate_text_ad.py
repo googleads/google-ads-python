@@ -14,7 +14,8 @@
 # limitations under the License.
 """This example shows use of the validateOnly header for an expanded text ad.
 
-No objects will be created, but exceptions will still be thrown."""
+No objects will be created, but exceptions will still be thrown.
+"""
 
 
 import argparse
@@ -38,7 +39,7 @@ def main(client, customer_id, ad_group_id):
     ad_group_ad.ad.expanded_text_ad.headline_part2.value = (
         'Low-gravity fun for everyone!!')
     final_url = ad_group_ad.ad.final_urls.add()
-    final_url.value ='http://www.example.com/'
+    final_url.value = 'http://www.example.com/'
 
     ad_group_ad_service = client.get_service('AdGroupAdService', version='v2')
     # Attempt the mutate with validate_only=True

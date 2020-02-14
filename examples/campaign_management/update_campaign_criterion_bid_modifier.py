@@ -12,7 +12,7 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
-"""Sets a bid modifier for the mobile platform on the given campaign."""
+"""Updates a campaign criterion with a new bid modifier."""
 
 import argparse
 import sys
@@ -34,8 +34,6 @@ def main(client, customer_id, criterion_id, bid_modifier):
     campaign_criterion = campaign_criterion_operation.update
     campaign_criterion.resource_name = criterion_rname
     campaign_criterion.bid_modifier.value = bid_modifier
-    campaign_criterion.device.type = client.get_type(
-        'DeviceEnum', version='v2').MOBILE
     fm = protobuf_helpers.field_mask(None, campaign_criterion)
     campaign_criterion_operation.update_mask.CopyFrom(fm)
 

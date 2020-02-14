@@ -14,7 +14,7 @@
 # limitations under the License.
 """This example shows use of the validateOnly header for an expanded text ad.
 
-No objects will be created, but exceptions will still be thrown.."""
+No objects will be created, but exceptions will still be thrown."""
 
 
 import argparse
@@ -22,18 +22,16 @@ import sys
 
 from google.ads.google_ads.client import GoogleAdsClient
 from google.ads.google_ads.errors import GoogleAdsException
-from google.ads.google_ads.util import ResourceName
+
 
 def main(client, customer_id, ad_group_id):
-    """Main method, to run this code example as a standalone application."""
-
     ad_group_ad_operation = client.get_type('AdGroupAdOperation', version='v2')
     ad_group_ad = ad_group_ad_operation.create
     ad_group_service = client.get_service('AdGroupService', version='v2')
-    ad_group_ad.ad_group.value = ad_group_service.ad_group_path(customer_id, 
-                                                                ad_group_id)
-    ad_group_ad.status = (client.get_type('AdGroupAdStatusEnum',
-                                          version='v2').PAUSED)
+    ad_group_ad.ad_group.value = ad_group_service.ad_group_path(customer_id,
+        ad_group_id)
+    ad_group_ad.status = client.get_type('AdGroupAdStatusEnum',
+        version='v2').PAUSED
     ad_group_ad.ad.expanded_text_ad.description.value = 'Luxury Cruise to Mars'
     ad_group_ad.ad.expanded_text_ad.headline_part1.value = (
         'Visit the Red Planet in style.')
@@ -46,41 +44,41 @@ def main(client, customer_id, ad_group_id):
     # Attempt the mutate with validate_only=True
     try:
         response = ad_group_ad_service.mutate_ad_group_ads(customer_id,
-                        [ad_group_ad_operation], False, True)
+            [ad_group_ad_operation], partial_failure=False, validate_only=True)
         print('"Expanded text ad validated successfully.')
     except GoogleAdsException as ex:
         # This will be hit if there is a validation error from the server.
-        print('There were validation error(s) while adding expanded text ad.')
+        print(f'Request with ID "{ex.request_id}" failed with status '
+              f'"{ex.error.code().name}".')
+        print('There may have been validation error(s) while adding expanded '
+              'text ad.')
         for error in ex.failure.errors:
             # Note: Depending on the ad type, you may get back policy violation
-            # errors as either PolicyFindingError or PolicyViolationError. 
+            # errors as either PolicyFindingError or PolicyViolationError.
             # ExpandedTextAds return errors as PolicyFindingError, so only this
             # case is illustrated here. For additional details, see
             # https://developers.google.com/google-ads/api/docs/policy-exemption/overview
-            if (error.error_code.policy_finding_error == 
-                client.get_type('PolicyFindingErrorEnum', 
+            if (error.error_code.policy_finding_error ==
+                client.get_type('PolicyFindingErrorEnum',
                                 version='v2').POLICY_FINDING):
                 if error.details.policy_finding_details:
                     count = 1
-                    details = error.details.policy_finding_details
+                    details = (error.details.policy_finding_details
+                               .policy_topic_entries)
                     for entry in details:
                         print(f'{count}) Policy topic entry with topic '
-                              f'{entry.topic} and type {entry} ' # TODO
+                              f'{entry.topic} and type {entry} '
                               f'was found.')
                     count += 1
             else:
-                   # TODO: fill in handling of non-olicy violation errors  
-        # if ex.failure:
-
-        # print(f'Request with ID "{ex.request_id}" failed with status '
-        #       f'"{ex.error.code().name}" and includes the following errors:')
-
-            print(f'\tError with message "{error.message}".')
-            if error.location:
-                for field_path_element in error.location.field_path_elements:
-                    print(f'\t\tOn field: {field_path_element.field_name}')
+                print(f'\tNon-policy finding error with message '
+                      f'"{error.message}".')
+                if error.location:
+                    for field_path_element in (
+                        error.location.field_path_elements):
+                        print(f'\t\tOn field: {field_path_element.field_name}')
         sys.exit(1)
-            
+
 if __name__ == '__main__':
     # GoogleAdsClient will read the google-ads.yaml configuration file in the
     # home directory if none is specified.
@@ -93,7 +91,7 @@ if __name__ == '__main__':
     parser.add_argument('-c', '--customer_id', type=str,
                         required=True, help='The Google Ads customer ID.')
     parser.add_argument('-a', '--ad_group_id', type=str,
-                        required=True, help='The ad group ID.')
+                        required=True, help='The Ad Group ID.')
     args = parser.parse_args()
 
     main(google_ads_client, args.customer_id, args.ad_group_id)

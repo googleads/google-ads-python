@@ -32,29 +32,43 @@ def main(client, customer_id, page_size, ad_group_id=None):
     ga_service = client.get_service('GoogleAdsService', version='v2')
 
     query = ('SELECT ad_group.id, ad_group_ad.ad.id, '
-             'ad_group_ad.ad.expanded_text_ad.headline_part1, '
-             'ad_group_ad.ad.expanded_text_ad.headline_part2, '
+             'ad_group_ad.ad.responsive_search_ad.headlines, '
+             'ad_group_ad.ad.responsive_search_ad.descriptions, '
              'ad_group_ad.status FROM ad_group_ad '
-             'WHERE ad_group_ad.ad.type = EXPANDED_TEXT_AD')
+             'WHERE ad_group_ad.ad.type = RESPONSIVE_SEARCH_AD '
+             'AND ad_group_ad.status != ''REMOVED''')
 
     if ad_group_id:
-        query = '%s AND ad_group.id = %s' % (query, ad_group_id)
+        query = query + f' AND ad_group.id = {ad_group_id}'
 
     results = ga_service.search(customer_id, query=query, page_size=page_size)
+    aga_status_enum = client.get_type(
+        'AdGroupAdStatusEnum', version='v2').AdGroupAdStatus
 
     try:
+        one_found = False
+
         for row in results:
+            one_found = True
             ad = row.ad_group_ad.ad
+            print(f'Responsive search ad with resource name '
+                  f'"{ad.resource_name}", '
+                  f'status {aga_status_enum.Name(row.ad_group_ad.status)} '
+                  f'was found.')
+            if ad.responsive_search_ad:
+                responsive_search_ad_info = ad.responsive_search_ad
+                print('Headlines:\n{}\n'
+                      'Descriptions:\n{}\n'.format(
+                          '\n'.join(_ad_text_assets_to_strs(
+                              client, responsive_search_ad_info.headlines)),
+                          '\n'.join(_ad_text_assets_to_strs(
+                              client, responsive_search_ad_info.descriptions))))
+            else:
+                print('\tResponsive search ad info was not found.')
 
-            if ad.expanded_text_ad:
-                expanded_text_ad_info = ad.expanded_text_ad
+        if not one_found:
+            print('No responsive search ads were found.')
 
-            print('Expanded text ad with ID %s, status %s, and headline '
-                  '%s - %s was found in ad group with ID %s.'
-                  % (ad.id, row.ad_group_ad.status,
-                     expanded_text_ad_info.headline_part1,
-                     expanded_text_ad_info.headline_part2,
-                     row.ad_group.id))
     except GoogleAdsException as ex:
         print(f'Request with ID "{ex.request_id}" failed with status '
               f'"{ex.error.code().name}" and includes the following errors:')
@@ -66,13 +80,23 @@ def main(client, customer_id, page_size, ad_group_id=None):
         sys.exit(1)
 
 
+def _ad_text_assets_to_strs(client, assets):
+    sa_field_type_enum = client.get_type(
+        'ServedAssetFieldTypeEnum', version='v2').ServedAssetFieldType
+    s = []
+    for asset in assets:
+        s.append('\t"' + asset.text.value + '" pinned to ' +
+                 sa_field_type_enum.Name(asset.pinned_field))
+    return s
+
 if __name__ == '__main__':
     # GoogleAdsClient will read the google-ads.yaml configuration file in the
     # home directory if none is specified.
     google_ads_client = GoogleAdsClient.load_from_storage()
 
     parser = argparse.ArgumentParser(
-        description='List ad groups for specified customer.')
+        description='List responsive display ads for specified customer. '
+                    'An ad_group is optional.')
     # The following argument(s) should be provided to run the example.
     parser.add_argument('-c', '--customer_id', type=str,
                         required=True, help='The Google Ads customer ID.')

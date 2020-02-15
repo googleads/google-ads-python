@@ -35,8 +35,8 @@ def main(client, customer_id, ad_group_id):
     # Set a pinning to always choose this asset for HEADLINE_1. Pinning is
     # optional; if no pinning is set, then headlines and descriptions will be
     # rotated and the ones that perform best will be used more often.
-    # pinned_headline.pinned_field = client.get_type(
-    #    'ServedAssetFieldTypeEnum', version='v2').HEADLINE_1
+    pinned_headline.pinned_field = client.get_type(
+       'ServedAssetFieldTypeEnum', version='v2').HEADLINE_1
 
     # Create the ad group ad
     ad_group_ad_operation = client.get_type('AdGroupAdOperation', version='v2')

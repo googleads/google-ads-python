@@ -31,12 +31,13 @@ _DEFAULT_PAGE_SIZE = 1000
 def main(client, customer_id, page_size, ad_group_id=None):
     ga_service = client.get_service('GoogleAdsService', version='v2')
 
-    query = ('SELECT ad_group.id, ad_group_ad.ad.id, '
-             'ad_group_ad.ad.responsive_search_ad.headlines, '
-             'ad_group_ad.ad.responsive_search_ad.descriptions, '
-             'ad_group_ad.status FROM ad_group_ad '
-             'WHERE ad_group_ad.ad.type = RESPONSIVE_SEARCH_AD '
-             'AND ad_group_ad.status != ''REMOVED''')
+    query = '''
+        SELECT ad_group.id, ad_group_ad.ad.id,
+        ad_group_ad.ad.responsive_search_ad.headlines,
+        ad_group_ad.ad.responsive_search_ad.descriptions,
+        ad_group_ad.status FROM ad_group_ad
+        WHERE ad_group_ad.ad.type = RESPONSIVE_SEARCH_AD
+        AND ad_group_ad.status != "REMOVED"'''
 
     if ad_group_id:
         query = query + f' AND ad_group.id = {ad_group_id}'
@@ -81,6 +82,7 @@ def main(client, customer_id, page_size, ad_group_id=None):
 
 
 def _ad_text_assets_to_strs(client, assets):
+    """Converts a list of AdTextAssets to a list of user-friendly strings."""
     sa_field_type_enum = client.get_type(
         'ServedAssetFieldTypeEnum', version='v2').ServedAssetFieldType
     s = []

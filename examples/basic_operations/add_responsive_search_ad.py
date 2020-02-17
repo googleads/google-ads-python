@@ -30,15 +30,15 @@ def main(client, customer_id, ad_group_id):
     ad_group_ad_service = client.get_service('AdGroupAdService', version='v2')
     ad_group_service = client.get_service('AdGroupService', version='v2')
 
-    pinned_headline = client.get_type('AdTextAsset', version='v2')
-    pinned_headline.text.value = f'Cruise to Mars #{str(uuid4())[:8]}'
     # Set a pinning to always choose this asset for HEADLINE_1. Pinning is
     # optional; if no pinning is set, then headlines and descriptions will be
     # rotated and the ones that perform best will be used more often.
-    pinned_headline.pinned_field = client.get_type(
-       'ServedAssetFieldTypeEnum', version='v2').HEADLINE_1
+    pinned_headline = _create_ad_text_asset(client,
+        f'Cruise to Mars #{str(uuid4())[:8]}',
+        client.get_type(
+            'ServedAssetFieldTypeEnum', version='v2').HEADLINE_1)
 
-    # Create the ad group ad
+    # Create the ad group ad.
     ad_group_ad_operation = client.get_type('AdGroupAdOperation', version='v2')
     ad_group_ad = ad_group_ad_operation.create
     ad_group_ad.status = client.get_type(
@@ -46,7 +46,7 @@ def main(client, customer_id, ad_group_id):
     ad_group_ad.ad_group.value = ad_group_service.ad_group_path(
         customer_id, ad_group_id)
 
-    # Set responsive search ad info
+    # Set responsive search ad info.
     final_url = ad_group_ad.ad.final_urls.add()
     final_url.value = 'http://www.example.com'
     ad_group_ad.ad.responsive_search_ad.headlines.extend([
@@ -59,6 +59,7 @@ def main(client, customer_id, ad_group_id):
     ad_group_ad.ad.responsive_search_ad.path1.value = 'all-inclusive'
     ad_group_ad.ad.responsive_search_ad.path2.value = 'deals'
 
+    # Send a request to the server to add a responsive search ad.
     try:
         ad_group_ad_response = ad_group_ad_service.mutate_ad_group_ads(
             customer_id, [ad_group_ad_operation])
@@ -73,12 +74,16 @@ def main(client, customer_id, ad_group_id):
         sys.exit(1)
 
     for result in ad_group_ad_response.results:
-        print(f'Created ad group ad {result.resource_name}')
+        print(f'Created responsive search ad with resource name '
+              f'"{result.resource_name}".')
 
 
-def _create_ad_text_asset(client, text):
+def _create_ad_text_asset(client, text, pinned_field=None):
+    """Create an AdTextAsset."""
     ad_text_asset = client.get_type('AdTextAsset', version='v2')
     ad_text_asset.text.value = text
+    if pinned_field:
+        ad_text_asset.pinned_field = pinned_field
     return ad_text_asset
 
 

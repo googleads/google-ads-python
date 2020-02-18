@@ -33,6 +33,8 @@ def main(client, customer_id, ad_group_id):
         ad_group_id)
     ad_group_ad.status = client.get_type('AdGroupAdStatusEnum',
         version='v2').PAUSED
+
+    # Create an expanded text ad.
     ad_group_ad.ad.expanded_text_ad.description.value = 'Luxury Cruise to Mars'
     ad_group_ad.ad.expanded_text_ad.headline_part1.value = (
         'Visit the Red Planet in style.')
@@ -42,7 +44,7 @@ def main(client, customer_id, ad_group_id):
     final_url.value = 'http://www.example.com/'
 
     ad_group_ad_service = client.get_service('AdGroupAdService', version='v2')
-    # Attempt the mutate with validate_only=True
+    # Attempt the mutate with validate_only=True.
     try:
         response = ad_group_ad_service.mutate_ad_group_ads(customer_id,
             [ad_group_ad_operation], partial_failure=False, validate_only=True)
@@ -67,8 +69,8 @@ def main(client, customer_id, ad_group_id):
                     details = (error.details.policy_finding_details
                                .policy_topic_entries)
                     for entry in details:
-                        print(f'{count}) Policy topic entry with topic '
-                              f'{entry.topic} and type {entry} '
+                        print(f'{count}) Policy topic entry with topic='
+                              f'"{entry.topic}" and type="{entry.type}" '
                               f'was found.')
                     count += 1
             else:

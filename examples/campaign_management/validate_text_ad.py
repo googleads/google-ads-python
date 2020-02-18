@@ -69,9 +69,7 @@ def main(client, customer_id, ad_group_id):
                     details = (error.details.policy_finding_details
                                .policy_topic_entries)
                     for entry in details:
-                        print(f'{count}) Policy topic entry with topic='
-                              f'"{entry.topic}" and type="{entry.type}" '
-                              f'was found.')
+                        print(f'{count}) Policy topic entry: \n{entry}\n')
                     count += 1
             else:
                 print(f'\tNon-policy finding error with message '

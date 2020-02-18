@@ -30,14 +30,6 @@ def main(client, customer_id, ad_group_id):
     ad_group_ad_service = client.get_service('AdGroupAdService', version='v2')
     ad_group_service = client.get_service('AdGroupService', version='v2')
 
-    # Set a pinning to always choose this asset for HEADLINE_1. Pinning is
-    # optional; if no pinning is set, then headlines and descriptions will be
-    # rotated and the ones that perform best will be used more often.
-    pinned_headline = _create_ad_text_asset(client,
-        f'Cruise to Mars #{str(uuid4())[:8]}',
-        client.get_type(
-            'ServedAssetFieldTypeEnum', version='v2').HEADLINE_1)
-
     # Create the ad group ad.
     ad_group_ad_operation = client.get_type('AdGroupAdOperation', version='v2')
     ad_group_ad = ad_group_ad_operation.create
@@ -49,6 +41,15 @@ def main(client, customer_id, ad_group_id):
     # Set responsive search ad info.
     final_url = ad_group_ad.ad.final_urls.add()
     final_url.value = 'http://www.example.com'
+
+    # Set a pinning to always choose this asset for HEADLINE_1. Pinning is
+    # optional; if no pinning is set, then headlines and descriptions will be
+    # rotated and the ones that perform best will be used more often.
+    pinned_headline = _create_ad_text_asset(client,
+        f'Cruise to Mars #{str(uuid4())[:8]}',
+        client.get_type(
+            'ServedAssetFieldTypeEnum', version='v2').HEADLINE_1)
+
     ad_group_ad.ad.responsive_search_ad.headlines.extend([
         pinned_headline,
         _create_ad_text_asset(client, 'Best Space Cruise Line'),

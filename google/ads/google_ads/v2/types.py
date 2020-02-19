@@ -1635,7 +1635,7 @@ DEPENDENT_MODULE_LIST = [
 
 def _get_class_from_module(module_name):
     module = importlib.import_module(module_name)
-    for class_name, _ in get_messages(module).items(): # from inspect module
+    for class_name in get_messages(module).keys(): # from inspect module
         yield class_name
 
 def _populate_dependent_classes(module_list = DEPENDENT_MODULE_LIST):

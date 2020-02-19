@@ -121,11 +121,6 @@ def _create_campaign(client, customer_id, budget_resource_name):
         'AdvertisingChannelTypeEnum', version='v2').MULTI_CHANNEL
     campaign.advertising_channel_sub_type = client.get_type(
         'AdvertisingChannelSubTypeEnum', version='v2').APP_CAMPAIGN
-    # Define the bidding strategy during campaign creation. An App campaign
-    # cannot use a portfolio bidding strategy.
-    # App campaigns only support the TARGET_CPA bidding strategy.
-    campaign.bidding_strategy_type = client.get_type(
-        'BiddingStrategyTypeEnum', version='v2').TARGET_CPA
     # Set the target CPA to $1 / app install.
     #
     # campaign_bidding_strategy is a 'oneof' message so setting target_cpa

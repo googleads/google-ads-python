@@ -16,9 +16,7 @@
 
 
 import importlib
-import re
 import sys
-from inspect import getmembers, isclass
 from itertools import chain
 
 from google.api_core.protobuf_helpers import get_messages
@@ -1637,7 +1635,7 @@ DEPENDENT_MODULE_LIST = [
 
 def _get_class_from_module(module_name):
     module = importlib.import_module(module_name)
-    for class_name, _ in getmembers(module, isclass): # from inspect module
+    for class_name in get_messages(module).keys(): # from inspect module
         yield class_name
 
 def _populate_dependent_classes(module_list = DEPENDENT_MODULE_LIST):

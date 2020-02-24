@@ -38,6 +38,8 @@ def main(client, customer_id, ad_group_id):
     ad_group_ad.ad.expanded_text_ad.description.value = 'Luxury Cruise to Mars'
     ad_group_ad.ad.expanded_text_ad.headline_part1.value = (
         'Visit the Red Planet in style.')
+    # Adds a headline that will trigger a policy violation to demonstrate error
+    # handling.
     ad_group_ad.ad.expanded_text_ad.headline_part2.value = (
         'Low-gravity fun for everyone!!')
     final_url = ad_group_ad.ad.final_urls.add()

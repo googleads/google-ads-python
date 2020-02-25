@@ -60,7 +60,6 @@ def main(client, customer_id):
                 for field_path_element in error.location.field_path_elements:
                     print(f'\t\tOn field: {field_path_element.field_name}')
         sys.exit(1)
-    return
 
 
 def _create_budget(client, customer_id):
@@ -177,9 +176,6 @@ def _set_campaign_targeting_criteria(client, customer_id,
         client: an initialized GoogleAdsClient instance.
         customer_id: a client customer ID str.
         campaign_resource_name: the campaign to apply targeting to
-
-    Returns:
-        None.
     """
     campaign_criterion_service = client.get_service(
         'CampaignCriterionService', version='v2')
@@ -226,7 +222,6 @@ def _set_campaign_targeting_criteria(client, customer_id,
         customer_id, campaign_criterion_operations).results:
         print('Created Campaign Criteria with resource name: '
               f'"{row.resource_name}".')
-    return
 
 
 def _create_ad_group(client, customer_id, campaign_resource_name):
@@ -269,9 +264,6 @@ def _create_app_ad(client, customer_id, ad_group_resource_name):
         client: an initialized GoogleAdsClient instance.
         customer_id: a client customer ID str.
         ad_group_resource_name: the ad group where the ad will be added.
-
-    Returns:
-        None.
     """
     # Creates the ad group ad.
     ad_group_ad_service = client.get_service('AdGroupAdService', version='v2')
@@ -298,7 +290,6 @@ def _create_app_ad(client, customer_id, ad_group_resource_name):
     ad_group_ad_resource_name = ad_group_ad_response.results[0].resource_name
     print('Ad Group App Ad created with resource name:'
           f'"{ad_group_ad_resource_name}".')
-    return
 
 
 def _create_ad_text_asset(client, text):

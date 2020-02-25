@@ -34,19 +34,23 @@ from google.ads.google_ads.errors import GoogleAdsException
 def main(client, customer_id):
     """Main function for running this example."""
     try:
-        # Create the budget for the campaign.
+        # Creates the budget for the campaign.
         budget_resource_name = _create_budget(client, customer_id)
 
-        # Create the campaign.
+        # Creates the campaign.
         campaign_resource_name = _create_campaign(client, customer_id,
             budget_resource_name)
 
-        # Set campaign targeting.
+        # Sets campaign targeting.
         _set_campaign_targeting_criteria(client, customer_id,
             campaign_resource_name)
 
-        # Create Ad Group and App Ad.
-        _create_app_ad(client, customer_id, campaign_resource_name)
+        # Creates an Ad Group.
+        ad_group_resource_name = _create_ad_group(client, customer_id,
+            campaign_resource_name)
+
+        # Creates an App Ad.
+        _create_app_ad(client, customer_id, ad_group_resource_name)
     except GoogleAdsException as ex:
         print(f'Request with ID "{ex.request_id}" failed with status '
               f'"{ex.error.code().name}" and includes the following errors:')
@@ -56,7 +60,6 @@ def main(client, customer_id):
                 for field_path_element in error.location.field_path_elements:
                     print(f'\t\tOn field: {field_path_element.field_name}')
         sys.exit(1)
-    return
 
 
 def _create_budget(client, customer_id):
@@ -69,10 +72,10 @@ def _create_budget(client, customer_id):
     Returns:
         A resource_name str for the newly created Budget.
     """
-    # Retrieve a new campaign budget operation object.
+    # Retrieves a new campaign budget operation object.
     campaign_budget_operation = client.get_type('CampaignBudgetOperation',
                                                 version='v2')
-    # Create a campaign budget.
+    # Creates a campaign budget.
     campaign_budget = campaign_budget_operation.create
     campaign_budget.name.value = f'Interplanetary Cruise #{uuid4()}'
     campaign_budget.amount_micros.value = 50000000
@@ -82,14 +85,14 @@ def _create_budget(client, customer_id):
     # explicitly_shared must be set to false.
     campaign_budget.explicitly_shared.value = False
 
-    # Retrieve the campaign budget service.
+    # Retrieves the campaign budget service.
     campaign_budget_service = client.get_service('CampaignBudgetService',
                                                  version='v2')
-    # Submit the campaign budget operation to add the campaign budget.
+    # Submits the campaign budget operation to add the campaign budget.
     response = campaign_budget_service.mutate_campaign_budgets(
         customer_id, [campaign_budget_operation])
     resource_name = response.results[0].resource_name
-    print(f'Created campaign budget with resource_name: {resource_name}')
+    print(f'Created campaign budget with resource_name: "{resource_name}"')
     return resource_name
 
 
@@ -121,7 +124,7 @@ def _create_campaign(client, customer_id, budget_resource_name):
         'AdvertisingChannelTypeEnum', version='v2').MULTI_CHANNEL
     campaign.advertising_channel_sub_type = client.get_type(
         'AdvertisingChannelSubTypeEnum', version='v2').APP_CAMPAIGN
-    # Set the target CPA to $1 / app install.
+    # Sets the target CPA to $1 / app install.
     #
     # campaign_bidding_strategy is a 'oneof' message so setting target_cpa
     # is mutually exclusive with other bidding strategies such as
@@ -129,24 +132,24 @@ def _create_campaign(client, customer_id, budget_resource_name):
     # See https://developers.google.com/google-ads/api/reference/rpc
     # under current version / resources / Campaign
     campaign.target_cpa.target_cpa_micros.value = 1000000
-    # Set the App Campaign Settings.
+    # Sets the App Campaign Settings.
     campaign.app_campaign_setting.app_id.value = (
         'com.google.android.apps.adwords')
     campaign.app_campaign_setting.app_store = client.get_type(
         'AppCampaignAppStoreEnum', version='v2').GOOGLE_APP_STORE
+    # Optimize this campaign for getting new users for your app.
+    campaign.app_campaign_setting.bidding_strategy_goal_type = (client
+        .get_type('AppCampaignBiddingStrategyGoalTypeEnum',
+                  version='v2').OPTIMIZE_INSTALLS_TARGET_INSTALL_COST)
     # Optional fields
     campaign.start_date.value = (datetime.now() +
         timedelta(1)).strftime('%Y%m%d')
     campaign.end_date.value = (datetime.now() +
         timedelta(365)).strftime('%Y%m%d')
-    # Optimize this campaign for getting new users for your app.
-    campaign.app_campaign_setting.bidding_strategy_goal_type = (client
-        .get_type('AppCampaignBiddingStrategyGoalTypeEnum',
-                  version='v2').OPTIMIZE_INSTALLS_TARGET_INSTALL_COST)
-    # Optional: If you select the 
+    # Optional: If you select the
     # OPTIMIZE_IN_APP_CONVERSIONS_TARGET_INSTALL_COST goal type, then also
-    # specify your in-app conversion types so the Google Ads API can focus 
-    # your campaign on people who are most likely to complete the 
+    # specify your in-app conversion types so the Google Ads API can focus
+    # your campaign on people who are most likely to complete the
     # corresponding in-app actions.
     # selective_optimization1 = (client.get_type('StringValue',
     #                            version='v2'))
@@ -155,11 +158,11 @@ def _create_campaign(client, customer_id, budget_resource_name):
     # campaign.selective_optimization.conversion_actions.extend(
     #     [selective_optimization1])
 
-    # Submit the campaign operation and print the results.
+    # Submits the campaign operation and print the results.
     campaign_response = campaign_service.mutate_campaigns(customer_id,
         [campaign_operation])
     resource_name = campaign_response.results[0].resource_name
-    print(f'Created App campaign {resource_name}.')
+    print(f'Created App campaign with resource name: "{resource_name}".')
     return resource_name
 
 
@@ -173,14 +176,9 @@ def _set_campaign_targeting_criteria(client, customer_id,
         client: an initialized GoogleAdsClient instance.
         customer_id: a client customer ID str.
         campaign_resource_name: the campaign to apply targeting to
-
-    Returns:
-        None.
     """
     campaign_criterion_service = client.get_service(
         'CampaignCriterionService', version='v2')
-    campaign_criterion_operation = client.get_type(
-        'CampaignCriterionOperation', version='v2')
     geo_target_constant_service = client.get_service(
         'GeoTargetConstantService', version='v2')
     language_constant_service = client.get_service(
@@ -191,13 +189,15 @@ def _set_campaign_targeting_criteria(client, customer_id,
         'CriterionTypeEnum', version='v2').LANGUAGE
 
     campaign_criterion_operations = []
-    # Create the location campaign criteria.
+    # Creates the location campaign criteria.
     # Besides using location_id, you can also search by location names from
     # GeoTargetConstantService.suggest_geo_target_constants() and directly
     # apply GeoTargetConstant.resource_name here. An example can be found
     # in targeting/get_geo_target_constant_by_names.py.
     for location_id in ['21137',  # California
                         '2484']:  # Mexico
+        campaign_criterion_operation = client.get_type(
+            'CampaignCriterionOperation', version='v2')
         campaign_criterion = campaign_criterion_operation.create
         campaign_criterion.campaign.value = campaign_resource_name
         campaign_criterion.type = location_type
@@ -205,9 +205,11 @@ def _set_campaign_targeting_criteria(client, customer_id,
             geo_target_constant_service.geo_target_constant_path(location_id))
         campaign_criterion_operations.append(campaign_criterion_operation)
 
-    # Create the language campaign criteria.
+    # Creates the language campaign criteria.
     for language_id in ['1000',   # English
                         '1003']:  # Spanish
+        campaign_criterion_operation = client.get_type(
+            'CampaignCriterionOperation', version='v2')
         campaign_criterion = campaign_criterion_operation.create
         campaign_criterion.campaign.value = campaign_resource_name
         campaign_criterion.type = language_type
@@ -215,16 +217,15 @@ def _set_campaign_targeting_criteria(client, customer_id,
             language_constant_service.language_constant_path(language_id))
         campaign_criterion_operations.append(campaign_criterion_operation)
 
-    # Submit the criteria operations. All four criteria will have the same
-    # resource name.
-    resource_name = campaign_criterion_service.mutate_campaign_criteria(
-        customer_id, campaign_criterion_operations).results[0].resource_name
-    print(f'Created Campaign Criteria {resource_name}.')
-    return
+    # Submits the criteria operations. 
+    for row in campaign_criterion_service.mutate_campaign_criteria(
+        customer_id, campaign_criterion_operations).results:
+        print('Created Campaign Criteria with resource name: '
+              f'"{row.resource_name}".')
 
 
-def _create_app_ad(client, customer_id, campaign_resource_name):
-    """Creates an ad group and associated App ad for a given campaign.
+def _create_ad_group(client, customer_id, campaign_resource_name):
+    """Creates an ad group for a given campaign.
 
     Args:
         client: an initialized GoogleAdsClient instance.
@@ -232,11 +233,11 @@ def _create_app_ad(client, customer_id, campaign_resource_name):
         campaign_resource_name: the campaign to be modified
 
     Returns:
-        None.
+        A resource_name str for the newly created ad group.
     """
     ad_group_service = client.get_service('AdGroupService', version='v2')
 
-    # Create ad group.
+    # Creates the ad group.
     # Note that the ad group type must not be set.
     # Since the advertising_channel_sub_type is APP_CAMPAIGN,
     #   1- you cannot override bid settings at the ad group level.
@@ -252,9 +253,19 @@ def _create_app_ad(client, customer_id, campaign_resource_name):
         customer_id, [ad_group_operation])
 
     ad_group_resource_name = ad_group_response.results[0].resource_name
-    print(f'Ad Group created {ad_group_resource_name}.')
+    print(f'Ad Group created with resource name: "{ad_group_resource_name}".')
+    return ad_group_resource_name
 
-    # Create the ad group ad
+
+def _create_app_ad(client, customer_id, ad_group_resource_name):
+    """Creates an App ad for a given ad group.
+
+    Args:
+        client: an initialized GoogleAdsClient instance.
+        customer_id: a client customer ID str.
+        ad_group_resource_name: the ad group where the ad will be added.
+    """
+    # Creates the ad group ad.
     ad_group_ad_service = client.get_service('AdGroupAdService', version='v2')
     ad_group_ad_operation = client.get_type('AdGroupAdOperation', version='v2')
     ad_group_ad = ad_group_ad_operation.create
@@ -277,8 +288,8 @@ def _create_app_ad(client, customer_id, campaign_resource_name):
     ad_group_ad_response = ad_group_ad_service.mutate_ad_group_ads(
         customer_id, [ad_group_ad_operation])
     ad_group_ad_resource_name = ad_group_ad_response.results[0].resource_name
-    print(f'Ad Group App Ad created {ad_group_ad_resource_name}.')
-    return
+    print('Ad Group App Ad created with resource name:'
+          f'"{ad_group_ad_resource_name}".')
 
 
 def _create_ad_text_asset(client, text):

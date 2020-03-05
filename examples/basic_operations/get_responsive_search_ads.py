@@ -39,6 +39,8 @@ def main(client, customer_id, page_size, ad_group_id=None):
         WHERE ad_group_ad.ad.type = RESPONSIVE_SEARCH_AD
         AND ad_group_ad.status != "REMOVED"'''
 
+    # Optional: Specify an ad group ID to restrict search to only a given
+    # ad group.
     if ad_group_id:
         query = query + f' AND ad_group.id = {ad_group_id}'
 
@@ -56,16 +58,11 @@ def main(client, customer_id, page_size, ad_group_id=None):
                   f'"{ad.resource_name}", '
                   f'status {aga_status_enum.Name(row.ad_group_ad.status)} '
                   f'was found.')
-            if ad.responsive_search_ad:
-                responsive_search_ad_info = ad.responsive_search_ad
-                print('Headlines:\n{}\n'
-                      'Descriptions:\n{}\n'.format(
-                          '\n'.join(_ad_text_assets_to_strs(
-                              client, responsive_search_ad_info.headlines)),
-                          '\n'.join(_ad_text_assets_to_strs(
-                              client, responsive_search_ad_info.descriptions))))
-            else:
-                print('\tResponsive search ad info was not found.')
+            print('Headlines:\n{}\nDescriptions:\n{}\n'.format(
+                  '\n'.join(_ad_text_assets_to_strs(
+                      client, ad.responsive_search_ad.headlines)),
+                  '\n'.join(_ad_text_assets_to_strs(
+                      client, ad.responsive_search_ad.descriptions))))
 
         if not one_found:
             print('No responsive search ads were found.')

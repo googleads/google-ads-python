@@ -32,12 +32,12 @@ _DEFAULT_LANGUAGE_ID = '1000'  # language ID for English
 
 def main(client, customer_id, location_ids, language_id, keywords, page_url):
     keyword_plan_idea_service = client.get_service('KeywordPlanIdeaService',
-                                                   version='v2')
+                                                   version='v3')
     keyword_competition_level_enum = (
-        client.get_type('KeywordPlanCompetitionLevelEnum', version='v2')
+        client.get_type('KeywordPlanCompetitionLevelEnum', version='v3')
         .KeywordPlanCompetitionLevel)
     keyword_plan_network = client.get_type(
-        'KeywordPlanNetworkEnum', version='v2').GOOGLE_SEARCH_AND_PARTNERS
+        'KeywordPlanNetworkEnum', version='v3').GOOGLE_SEARCH_AND_PARTNERS
     locations = map_locations_to_string_values(client, location_ids)
     language = map_language_to_string_value(client, language_id)
 
@@ -56,7 +56,7 @@ def main(client, customer_id, location_ids, language_id, keywords, page_url):
     # To generate keyword ideas with only a page_url and no keywords we need
     # to initialize a UrlSeed object with the page_url as the "url" field.
     if not keywords and page_url:
-        url_seed = client.get_type('UrlSeed', version='v2')
+        url_seed = client.get_type('UrlSeed', version='v3')
         url_seed.url.value = page_url
 
 
@@ -64,7 +64,7 @@ def main(client, customer_id, location_ids, language_id, keywords, page_url):
     # we need to initialize a KeywordSeed object and set the "keywords" field
     # to be a list of StringValue objects.
     if keywords and not page_url:
-        keyword_seed = client.get_type('KeywordSeed', version='v2')
+        keyword_seed = client.get_type('KeywordSeed', version='v3')
         keyword_protos = map_keywords_to_string_values(client, keywords)
         keyword_seed.keywords.extend(keyword_protos)
 
@@ -72,7 +72,7 @@ def main(client, customer_id, location_ids, language_id, keywords, page_url):
     # need to initialize a KeywordAndUrlSeed object, setting both the "url" and
     # "keywords" fields.
     if keywords and page_url:
-        keyword_url_seed = client.get_type('KeywordAndUrlSeed', version='v2')
+        keyword_url_seed = client.get_type('KeywordAndUrlSeed', version='v3')
         keyword_url_seed.url.value = page_url
         keyword_protos = map_keywords_to_string_values(client, keywords)
         keyword_url_seed.keywords.extend(keyword_protos)
@@ -113,7 +113,7 @@ def map_keywords_to_string_values(client, keywords):
 
 
 def map_locations_to_string_values(client, location_ids):
-    gtc_service = client.get_service('GeoTargetConstantService', version='v2')
+    gtc_service = client.get_service('GeoTargetConstantService', version='v3')
     locations = []
     for location_id in location_ids:
         location = client.get_type('StringValue')
@@ -125,7 +125,7 @@ def map_locations_to_string_values(client, location_ids):
 def map_language_to_string_value(client, language_id):
     language = client.get_type('StringValue')
     language.value = client.get_service('LanguageConstantService',
-                                        version='v2').language_constant_path(
+                                        version='v3').language_constant_path(
                                             language_id)
     return language
 

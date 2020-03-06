@@ -22,13 +22,13 @@ import google.ads.google_ads.client
 
 
 def main(client, customer_id, ad_group_id, keyword):
-    ad_group_service = client.get_service('AdGroupService', version='v2')
+    ad_group_service = client.get_service('AdGroupService', version='v3')
     ad_group_criterion_service = client.get_service('AdGroupCriterionService',
-                                                    version='v2')
+                                                    version='v3')
 
     # Create keyword.
     ad_group_criterion_operation = client.get_type('AdGroupCriterionOperation',
-                                                   version='v2')
+                                                   version='v3')
     ad_group_criterion = ad_group_criterion_operation.create
     ad_group_criterion.ad_group.value = ad_group_service.ad_group_path(
         customer_id, ad_group_id)

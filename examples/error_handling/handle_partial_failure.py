@@ -63,8 +63,8 @@ def create_ad_groups(client, customer_id, campaign_id):
 
     Returns: A MutateAdGroupsResponse message instance.
     """
-    ad_group_service = client.get_service('AdGroupService', version='v2')
-    campaign_service = client.get_service('CampaignService', version='v2')
+    ad_group_service = client.get_service('AdGroupService', version='v3')
+    campaign_service = client.get_service('CampaignService', version='v3')
     resource_name = campaign_service.campaign_path(customer_id, campaign_id)
 
     invalid_resource_name = campaign_service.campaign_path(customer_id, 0)
@@ -72,20 +72,20 @@ def create_ad_groups(client, customer_id, campaign_id):
 
     # This AdGroup should be created successfully - assuming the campaign in
     # the params exists.
-    ad_group_op1 = client.get_type('AdGroupOperation', version='v2')
+    ad_group_op1 = client.get_type('AdGroupOperation', version='v3')
     ad_group_op1.create.name.value = 'Valid AdGroup: %s' % uuid.uuid4()
     ad_group_op1.create.campaign.value = resource_name
     ad_group_operations.append(ad_group_op1)
 
     # This AdGroup will always fail - campaign ID 0 in resource names is
     # never valid.
-    ad_group_op2 = client.get_type('AdGroupOperation', version='v2')
+    ad_group_op2 = client.get_type('AdGroupOperation', version='v3')
     ad_group_op2.create.name.value = 'Broken AdGroup: %s' % (uuid.uuid4())
     ad_group_op2.create.campaign.value = invalid_resource_name
     ad_group_operations.append(ad_group_op2)
 
     # This AdGroup will always fail - duplicate ad group names are not allowed.
-    ad_group_op3 = client.get_type('AdGroupOperation', version='v2')
+    ad_group_op3 = client.get_type('AdGroupOperation', version='v3')
     ad_group_op3.create.name.value = (ad_group_op1.create.name.value)
     ad_group_op3.create.campaign.value = resource_name
     ad_group_operations.append(ad_group_op3)
@@ -162,7 +162,7 @@ def print_results(client, response):
 
         for error_detail in error_details:
             # Retrieve an instance of the GoogleAdsFailure class from the client
-            failure_message = client.get_type('GoogleAdsFailure', version='v2')
+            failure_message = client.get_type('GoogleAdsFailure', version='v3')
             # Parse the string into a GoogleAdsFailure message instance.
             failure_object = failure_message.FromString(error_detail.value)
 

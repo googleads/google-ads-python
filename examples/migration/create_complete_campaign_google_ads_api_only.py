@@ -54,14 +54,14 @@ def create_campaign_budget(client, customer_id):
         An instance of google.ads.google_ads.v2.types.CampaignBudget for the
             newly created Budget.
     """
-    campaign_service = client.get_service('CampaignBudgetService', version='v2')
-    operation = client.get_type('CampaignBudgetOperation', version='v2')
+    campaign_service = client.get_service('CampaignBudgetService', version='v3')
+    operation = client.get_type('CampaignBudgetOperation', version='v3')
     criterion = operation.create
     criterion.name.value = 'Interplanetary Cruise Budget #{}'.format(
                             uuid.uuid4())
     criterion.delivery_method = client.get_type(
                                 'BudgetDeliveryMethodEnum',
-                                version='v2').STANDARD
+                                version='v3').STANDARD
     criterion.amount_micros.value = 500000
     response = campaign_service.mutate_campaign_budgets(customer_id,
                [operation])
@@ -85,7 +85,7 @@ def get_campaign_budget(client, customer_id, resource_name):
         An instance of google.ads.google_ads.v2.types.CampaignBudget for the
             newly created Budget.
     """
-    ga_service = client.get_service('GoogleAdsService', version='v2')
+    ga_service = client.get_service('GoogleAdsService', version='v3')
     query = ('SELECT campaign_budget.id, campaign_budget.name, '
              'campaign_budget.resource_name FROM campaign_budget WHERE '
              'campaign_budget.resource_name = "{}"'.format(resource_name))
@@ -106,17 +106,17 @@ def create_campaign(client, customer_id, campaign_budget):
     Returns:
         A google.ads.google_ads.v2.types.GoogleAdsClient message class instance.
     """
-    operation = client.get_type('CampaignOperation', version='v2')
+    operation = client.get_type('CampaignOperation', version='v3')
     campaign = operation.create
-    campaign_service = client.get_service('CampaignService', version='v2')
+    campaign_service = client.get_service('CampaignService', version='v3')
     campaign.name.value = 'Interplanetary Cruise#{}'.format(uuid.uuid4())
     campaign.advertising_channel_type = client.get_type(
                                         'AdvertisingChannelTypeEnum',
-                                        version='v2').SEARCH
+                                        version='v3').SEARCH
     # Recommendation: Set the campaign to PAUSED when creating it to stop the
     # ads from immediately serving. Set to ENABLED once you've added
     # targeting and the ads are ready to serve.
-    campaign.status = client.get_type('CampaignStatusEnum', version='v2').PAUSED
+    campaign.status = client.get_type('CampaignStatusEnum', version='v3').PAUSED
     campaign.manual_cpc.enhanced_cpc_enabled.value = True
     campaign.campaign_budget.value = campaign_budget.resource_name
     campaign.network_settings.target_google_search.value = True
@@ -146,7 +146,7 @@ def get_campaign(client, customer_id, campaign_resource_name):
     Returns:
         A google.ads.google_ads.v2.types.GoogleAdsClient message class instance.
     """
-    ga_service = client.get_service('GoogleAdsService', version='v2')
+    ga_service = client.get_service('GoogleAdsService', version='v3')
     query = ('SELECT campaign.id, campaign.name, campaign.resource_name '
              'FROM campaign WHERE campaign.resource_name = "{}" '
              .format(campaign_resource_name))
@@ -167,15 +167,15 @@ def create_ad_group(client, customer_id, campaign):
         An instance of the google.ads.google_ads.v2.types.AdGroup message class
             of the newly created ad group.
     """
-    operation = client.get_type('AdGroupOperation', version='v2')
+    operation = client.get_type('AdGroupOperation', version='v3')
     adgroup = operation.create
-    adgroup_service = client.get_service('AdGroupService', version='v2')
+    adgroup_service = client.get_service('AdGroupService', version='v3')
     adgroup.name.value  = 'Earth to Mars Cruises #{}'.format(uuid.uuid4())
     adgroup.campaign.value = campaign.resource_name
     adgroup.status = client.get_type('AdGroupStatusEnum',
-                     version='v2').ENABLED
+                     version='v3').ENABLED
     adgroup.type = client.get_type('AdGroupTypeEnum',
-                   version='v2').SEARCH_STANDARD
+                   version='v3').SEARCH_STANDARD
     adgroup.cpc_bid_micros.value = 10000000
     response = adgroup_service.mutate_ad_groups(customer_id, [operation])
     ad_group_resource_name = response.results[0].resource_name
@@ -197,7 +197,7 @@ def get_ad_group(client, customer_id, ad_group_resource_name):
         An instance of the google.ads.google_ads.v2.types.AdGroup message class
             of the newly created ad group.
     """
-    ga_service = client.get_service('GoogleAdsService', version='v2')
+    ga_service = client.get_service('GoogleAdsService', version='v3')
     query = ('SELECT ad_group.id, ad_group.name, ad_group.resource_name '
              'FROM ad_group WHERE ad_group.resource_name = "{}" '
              .format(ad_group_resource_name))
@@ -216,23 +216,23 @@ def create_text_ads(client, customer_id, ad_group):
     """
     operations = []
     for i in range(0, NUMBER_OF_ADS):
-        operation = client.get_type('AdGroupAdOperation', version='v2')
+        operation = client.get_type('AdGroupAdOperation', version='v3')
         ad_group_operation = operation.create
         ad_group_operation.ad_group.value =  ad_group.resource_name
         ad_group_operation.status = client.get_type('AdGroupAdStatusEnum',
-                                    version='v2').PAUSED
+                                    version='v3').PAUSED
         ad_group_operation.ad.expanded_text_ad.headline_part1.value = \
             'Cruise to Mars #{}'.format(str(uuid.uuid4())[:4])
         ad_group_operation.ad.expanded_text_ad.headline_part2.value = \
             'Best Space Cruise Line'
         ad_group_operation.ad.expanded_text_ad.description.value = \
             'Buy your tickets now!'
-        final_urls =  client.get_type('StringValue', version='v2')
+        final_urls =  client.get_type('StringValue', version='v3')
         final_urls.value = 'http://www.example.com'
         ad_group_operation.ad.final_urls.extend([final_urls])
         operations.append(operation)
 
-    adgroup_service = client.get_service('AdGroupAdService', version='v2')
+    adgroup_service = client.get_service('AdGroupAdService', version='v3')
     ad_group_ad_response = adgroup_service.mutate_ad_group_ads(customer_id,
                            operations)
     new_ad_resource_names = []
@@ -274,7 +274,7 @@ def get_ads(client, customer_id, new_ad_resource_names):
         return ','.join(results)
     resouce_names = formatter(new_ad_resource_names)
 
-    ga_service = client.get_service('GoogleAdsService', version='v2')
+    ga_service = client.get_service('GoogleAdsService', version='v3')
     query = ('SELECT ad_group_ad.ad.id, '
              'ad_group_ad.ad.expanded_text_ad.headline_part1, '
              'ad_group_ad.ad.expanded_text_ad.headline_part2, '
@@ -310,19 +310,19 @@ def create_keywords(client, customer_id, ad_group, keywords_to_add):
     """
     ad_group_criterion_operations = []
     for keyword in keywords_to_add:
-        operation = client.get_type('AdGroupCriterionOperation', version='v2')
+        operation = client.get_type('AdGroupCriterionOperation', version='v3')
         ad_group_criterion_operation = operation.create
         ad_group_criterion_operation.ad_group.value = ad_group.resource_name
         ad_group_criterion_operation.status = client.get_type(
                                               'AdGroupCriterionStatusEnum',
-                                              version='v2').ENABLED
+                                              version='v3').ENABLED
         ad_group_criterion_operation.keyword.text.value = keyword
         ad_group_criterion_operation.keyword.match_type = client.get_type(
-            'KeywordMatchTypeEnum', version='v2').EXACT
+            'KeywordMatchTypeEnum', version='v3').EXACT
         ad_group_criterion_operations.append(operation)
 
     ad_group_criterion_service_client = client.get_service(
-                                        'AdGroupCriterionService', version='v2')
+                                        'AdGroupCriterionService', version='v3')
     ad_group_criterion_response = ad_group_criterion_service_client.\
                                   mutate_ad_group_criteria(customer_id,
                                   ad_group_criterion_operations)
@@ -367,7 +367,7 @@ def get_keywords(client, customer_id, keyword_resource_names):
         return ','.join(results)
 
     resouce_names = formatter(keyword_resource_names)
-    ga_service = client.get_service('GoogleAdsService', version='v2')
+    ga_service = client.get_service('GoogleAdsService', version='v3')
     query = ('SELECT ad_group.id, ad_group.status, '
     'ad_group_criterion.criterion_id, ad_group_criterion.keyword.text, '
     'ad_group_criterion.keyword.match_type FROM ad_group_criterion '

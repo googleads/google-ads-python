@@ -35,14 +35,14 @@ def main(client, customer_id, manager_customer_id):
 
     # Extend an invitation to the client while authenticating as the manager.
     client_link_operation = client.get_type(
-        'CustomerClientLinkOperation', version='v2')
+        'CustomerClientLinkOperation', version='v3')
     client_link = client_link_operation.create
     client_link.client_customer.value = 'customers/{}'.format(customer_id)
     client_link.status = client.get_type(
         'ManagerLinkStatusEnum').PENDING
 
     customer_client_link_service = client.get_service(
-        'CustomerClientLinkService', version='v2')
+        'CustomerClientLinkService', version='v3')
     response = customer_client_link_service.mutate_customer_client_link(
         manager_customer_id, client_link_operation)
     resource_name = response.results[0].resource_name
@@ -64,7 +64,7 @@ def main(client, customer_id, manager_customer_id):
             customer_client_link.resource_name = "{}"
     '''.format(resource_name)
 
-    ga_service = client.get_service('GoogleAdsService', version='v2')
+    ga_service = client.get_service('GoogleAdsService', version='v3')
     response = ga_service.search(manager_customer_id, query=query)
 
     # Since the google_ads_service.search method returns an iterator we need
@@ -74,18 +74,18 @@ def main(client, customer_id, manager_customer_id):
         manager_link_id = row.customer_client_link.manager_link_id
 
     manager_link_operation = client.get_type(
-        'CustomerManagerLinkOperation', version='v2')
+        'CustomerManagerLinkOperation', version='v3')
     manager_link = manager_link_operation.update
     manager_link.resource_name.value = (
         'customers/{}/customerManagerLinks/{}~{}'.format(
               customer_id, manager_customer_id, manager_link_id))
 
-    manager_link.status = client.get_type('ManagerLinkStatusEnum', version='v2')
+    manager_link.status = client.get_type('ManagerLinkStatusEnum', version='v3')
     field_mask = protobuf_helpers.field_mask(None, manager_link)
     manager_link_operation.update_mask.CopyFrom(field_mask)
 
     manager_link_service = client.get_service('ManagerLinkService',
-                                              version='v2')
+                                              version='v3')
     response = manager_link_service.mutate_manager_links(
         manager_customer_id, [manager_link_operation])
     resource_name = response.results[0].resource_name

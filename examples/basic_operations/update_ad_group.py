@@ -26,14 +26,14 @@ from google.api_core import protobuf_helpers
 
 
 def main(client, customer_id, ad_group_id, bid_micro_amount):
-    ad_group_service = client.get_service('AdGroupService', version='v2')
+    ad_group_service = client.get_service('AdGroupService', version='v3')
 
     # Create ad group operation.
-    ad_group_operation = client.get_type('AdGroupOperation', version='v2')
+    ad_group_operation = client.get_type('AdGroupOperation', version='v3')
     ad_group = ad_group_operation.update
     ad_group.resource_name = ad_group_service.ad_group_path(
         customer_id, ad_group_id)
-    ad_group.status = client.get_type('AdGroupStatusEnum', version='v2').PAUSED
+    ad_group.status = client.get_type('AdGroupStatusEnum', version='v3').PAUSED
     ad_group.cpc_bid_micros.value = bid_micro_amount
     fm = protobuf_helpers.field_mask(None, ad_group)
     ad_group_operation.update_mask.CopyFrom(fm)

@@ -26,7 +26,7 @@ _DEFAULT_PAGE_SIZE = 1000
 
 
 def main(client, customer_id, page_size):
-    ga_service = client.get_service('GoogleAdsService', version='v2')
+    ga_service = client.get_service('GoogleAdsService', version='v3')
 
     query = ('SELECT account_budget.status, '
              'account_budget.billing_setup, '

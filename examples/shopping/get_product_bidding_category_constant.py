@@ -32,7 +32,7 @@ def display_categories(categories, prefix=''):
 
 
 def main(client, customer_id, page_size):
-  ga_service = client.get_service('GoogleAdsService', version='v2')
+  ga_service = client.get_service('GoogleAdsService', version='v3')
   query = ('SELECT product_bidding_category_constant.localized_name, '
            'product_bidding_category_constant.product_bidding_category_constant_parent '
            'FROM product_bidding_category_constant WHERE '

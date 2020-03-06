@@ -1,4 +1,4 @@
-# Copyright 2018 Google LLC
+# Copyright 2020 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -13,9 +13,10 @@
 # limitations under the License.
 """A client and common configurations for the Google Ads API."""
 
-import grpc
 from importlib import import_module
 import logging.config
+
+import grpc
 
 from google.ads.google_ads import config, oauth2, util
 from google.ads.google_ads.interceptors import MetadataInterceptor, \
@@ -27,7 +28,7 @@ _logger = logging.getLogger(__name__)
 _SERVICE_CLIENT_TEMPLATE = '{}Client'
 _SERVICE_GRPC_TRANSPORT_TEMPLATE = '{}GrpcTransport'
 
-_VALID_API_VERSIONS = ['v2', 'v1']
+_VALID_API_VERSIONS = ['v3', 'v2', 'v1']
 _DEFAULT_VERSION = _VALID_API_VERSIONS[0]
 
 _GRPC_CHANNEL_OPTIONS = [
@@ -118,7 +119,7 @@ class GoogleAdsClient(object):
         kwargs = cls._get_client_kwargs(config_data)
         return cls(**kwargs)
 
-    @classmethod  
+    @classmethod
     def load_from_dict(cls, config_dict):
         """Creates a GoogleAdsClient with data stored in the config_dict.
 
@@ -178,13 +179,13 @@ class GoogleAdsClient(object):
         if name.lower().endswith('pb2'):
             raise ValueError(f'Specified type "{name}" must be a class,'
                              f' not a module')
-        
+
         try:
             type_classes = cls._get_api_services_by_version(version).types
             message_class = getattr(type_classes, name)
         except AttributeError:
-            raise ValueError(f'Specified type "{name}" does not exist in Google Ads '
-                             f'API {version}')
+            raise ValueError(f'Specified type "{name}" does not exist in '
+                             f'Google Ads API {version}')
         return message_class()
 
     def __init__(self, credentials, developer_token, endpoint=None,
@@ -252,7 +253,7 @@ class GoogleAdsClient(object):
 
         interceptors = interceptors + [
             MetadataInterceptor(self.developer_token, self.login_customer_id),
-            LoggingInterceptor(_logger, endpoint),
+            LoggingInterceptor(_logger, version, endpoint),
             ExceptionInterceptor(version)]
 
         channel = grpc.intercept_channel(

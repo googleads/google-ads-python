@@ -1,4 +1,4 @@
-# Copyright 2019 Google LLC
+# Copyright 2020 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -19,12 +19,13 @@ and updates the metadata in order to insert the developer token and
 login-customer-id values.
 """
 
-from grpc import UnaryUnaryClientInterceptor
+from grpc import UnaryUnaryClientInterceptor, UnaryStreamClientInterceptor
 
-from .interceptor_mixin import InterceptorMixin
+from .interceptor import Interceptor
 
 
-class MetadataInterceptor(InterceptorMixin, UnaryUnaryClientInterceptor):
+class MetadataInterceptor(Interceptor, UnaryUnaryClientInterceptor,
+                          UnaryStreamClientInterceptor):
     """An interceptor that appends custom metadata to requests."""
 
     def __init__(self, developer_token, login_customer_id):
@@ -51,10 +52,15 @@ class MetadataInterceptor(InterceptorMixin, UnaryUnaryClientInterceptor):
 
         return client_call_details
 
-    def intercept_unary_unary(self, continuation, client_call_details, request):
-        """Intercepts and appends custom metadata.
+    def _intercept(self, continuation, client_call_details, request):
+        """Generic interceptor used for Unary-Unary and Unary-Stream requests.
 
-        Overrides abstract method defined in grpc.UnaryUnaryClientInterceptor.
+        Args:
+            continuation: a function to continue the request process.
+            client_call_details: a grpc._interceptor._ClientCallDetails
+                instance containing request metadata.
+            request: a SearchGoogleAdsRequest or SearchGoogleAdsStreamRequest
+                message class instance.
 
         Returns:
             A grpc.Call/grpc.Future instance representing a service response.
@@ -74,3 +80,39 @@ class MetadataInterceptor(InterceptorMixin, UnaryUnaryClientInterceptor):
             metadata)
 
         return continuation(client_call_details, request)
+
+    def intercept_unary_unary(self, continuation, client_call_details, request):
+        """Intercepts and appends custom metadata for Unary-Unary requests.
+
+        Overrides abstract method defined in grpc.UnaryUnaryClientInterceptor.
+
+        Args:
+            continuation: a function to continue the request process.
+            client_call_details: a grpc._interceptor._ClientCallDetails
+                instance containing request metadata.
+            request: a SearchGoogleAdsRequest or SearchGoogleAdsStreamRequest
+                message class instance.
+
+        Returns:
+            A grpc.Call/grpc.Future instance representing a service response.
+        """
+        return self._intercept(continuation, client_call_details, request)
+
+
+    def intercept_unary_stream(self, continuation, client_call_details,
+                               request):
+        """Intercepts and appends custom metadata to Unary-Stream requests.
+
+        Overrides abstract method defined in grpc.UnaryStreamClientInterceptor.
+
+        Args:
+            continuation: a function to continue the request process.
+            client_call_details: a grpc._interceptor._ClientCallDetails
+                instance containing request metadata.
+            request: a SearchGoogleAdsRequest or SearchGoogleAdsStreamRequest
+                message class instance.
+
+        Returns:
+            A grpc.Call/grpc.Future instance representing a service response.
+        """
+        return self._intercept(continuation, client_call_details, request)

@@ -1,4 +1,4 @@
-# Copyright 2019 Google LLC
+# Copyright 2020 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -13,15 +13,19 @@
 # limitations under the License.
 """Tests for the Metadata gRPC Interceptor."""
 
-import mock
 from unittest import TestCase
+
+import mock
 
 from google.ads.google_ads.interceptors import MetadataInterceptor
 
+
 class MetadataInterceptorTest(TestCase):
+
     def setUp(self):
         self.mock_developer_token = '1234567890'
         self.mock_login_customer_id = '0987654321'
+        super(MetadataInterceptorTest, self).setUp()
 
     def test_init(self):
         interceptor = MetadataInterceptor(
@@ -82,6 +86,35 @@ class MetadataInterceptorTest(TestCase):
             wraps=interceptor._update_client_call_details_metadata
         ) as mock_updater:
             interceptor.intercept_unary_unary(
+                mock_continuation,
+                mock_client_call_details,
+                mock_request)
+
+            mock_updater.assert_called_once_with(
+                mock_client_call_details, [mock_client_call_details.metadata[0],
+                                           interceptor.developer_token_meta,
+                                           interceptor.login_customer_id_meta])
+
+            mock_continuation.assert_called_once()
+
+    def test_intercept_unary_stream(self):
+        interceptor = MetadataInterceptor(
+            self.mock_developer_token,
+            self.mock_login_customer_id)
+
+        mock_continuation = mock.Mock(return_value=None)
+        mock_client_call_details = mock.Mock()
+        mock_client_call_details.method = 'test/method'
+        mock_client_call_details.timeout = 5
+        mock_client_call_details.metadata = [('apples', 'oranges')]
+        mock_request = mock.Mock()
+
+        with mock.patch.object(
+            interceptor,
+            '_update_client_call_details_metadata',
+            wraps=interceptor._update_client_call_details_metadata
+        ) as mock_updater:
+            interceptor.intercept_unary_stream(
                 mock_continuation,
                 mock_client_call_details,
                 mock_request)

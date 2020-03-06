@@ -1,5 +1,5 @@
 #!/usr/bin/env python
-# Copyright 2018 Google LLC
+# Copyright 2020 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -21,40 +21,39 @@ To add campaigns, run add_campaigns.py.
 import argparse
 import sys
 
-import google.ads.google_ads.client
+from google.ads.google_ads.client import GoogleAdsClient
+from google.ads.google_ads.errors import GoogleAdsException
 
 
-_DEFAULT_PAGE_SIZE = 1000
-
-
-def main(client, customer_id, page_size):
-    ga_service = client.get_service('GoogleAdsService', version='v2')
+def main(client, customer_id):
+    ga_service = client.get_service('GoogleAdsService', version='v3')
 
     query = ('SELECT campaign.id, campaign.name FROM campaign '
              'ORDER BY campaign.id')
 
-    results = ga_service.search(customer_id, query=query, page_size=page_size)
+    # Issues a search request using streaming.
+    response = ga_service.search_stream(customer_id, query=query)
 
     try:
-        for row in results:
-            print('Campaign with ID %d and name "%s" was found.'
-                  % (row.campaign.id.value, row.campaign.name.value))
-    except google.ads.google_ads.errors.GoogleAdsException as ex:
-        print('Request with ID "%s" failed with status "%s" and includes the '
-              'following errors:' % (ex.request_id, ex.error.code().name))
+        for batch in response:
+            for row in batch.results:
+                print(f'Campaign with ID {row.campaign.id.value} and name '
+                      f'"{row.campaign.name.value}" was found.')
+    except GoogleAdsException as ex:
+        print(f'Request with ID "{ex.request_id}" failed with status '
+              f'"{ex.error.code().name}" and includes the following errors:')
         for error in ex.failure.errors:
-            print('\tError with message "%s".' % error.message)
+            print(f'\tError with message "{error.message}".')
             if error.location:
                 for field_path_element in error.location.field_path_elements:
-                    print('\t\tOn field: %s' % field_path_element.field_name)
+                    print(f'\t\tOn field: {field_path_element.field_name}')
         sys.exit(1)
 
 
 if __name__ == '__main__':
     # GoogleAdsClient will read the google-ads.yaml configuration file in the
     # home directory if none is specified.
-    google_ads_client = (google.ads.google_ads.client.GoogleAdsClient
-                         .load_from_storage())
+    google_ads_client = GoogleAdsClient.load_from_storage()
 
     parser = argparse.ArgumentParser(
         description='Lists all campaigns for specified customer.')
@@ -63,4 +62,4 @@ if __name__ == '__main__':
                         required=True, help='The Google Ads customer ID.')
     args = parser.parse_args()
 
-    main(google_ads_client, args.customer_id, _DEFAULT_PAGE_SIZE)
+    main(google_ads_client, args.customer_id)

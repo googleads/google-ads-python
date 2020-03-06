@@ -24,9 +24,9 @@ from google.ads.google_ads.errors import GoogleAdsException
 
 def main(client, customer_id):
     # Create an extension setting.
-    feed_service = client.get_service('ExtensionFeedItemService', version='v2')
+    feed_service = client.get_service('ExtensionFeedItemService', version='v3')
 
-    extension_feed_item_operation = client.get_type('ExtensionFeedItemOperation', version='v2')
+    extension_feed_item_operation = client.get_type('ExtensionFeedItemOperation', version='v3')
     extension_feed_item = extension_feed_item_operation.create
     extension_feed_item.sitelink_feed_item.link_text.value = 'Text'
     extension_feed_item.sitelink_feed_item.line1.value = 'Line 1 Value'

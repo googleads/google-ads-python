@@ -24,11 +24,11 @@ import google.ads.google_ads.client
 
 def main(client, customer_id):
     conversion_action_service = client.get_service('ConversionActionService',
-                                                   version='v2')
+                                                   version='v3')
 
     # Create the operation.
     conversion_action_operation = client.get_type('ConversionActionOperation',
-                                                  version='v2')
+                                                  version='v3')
 
     # Create conversion action.
     conversion_action = conversion_action_operation.create

@@ -27,15 +27,15 @@ def main(client, customer_id):
     """Main method, to run this code example as a standalone application."""
     URL = "https://goo.gl/3b9Wfh"
 
-    media_file_operation = client.get_type('MediaFileOperation', version='v2')
+    media_file_operation = client.get_type('MediaFileOperation', version='v3')
     media_file = media_file_operation.create
     media_file.name.value = "Ad Image"
-    media_file.type = client.get_type('MediaTypeEnum', version='v2').IMAGE
+    media_file.type = client.get_type('MediaTypeEnum', version='v3').IMAGE
     media_file.source_url.value = URL
     # Download the image as bytes from the URL
     media_file.image.data.value = requests.get(URL).content
 
-    media_file_service = client.get_service('MediaFileService', version='v2')
+    media_file_service = client.get_service('MediaFileService', version='v3')
 
     try:
         mutate_media_files_response = (

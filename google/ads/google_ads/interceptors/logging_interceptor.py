@@ -1,4 +1,4 @@
-# Copyright 2019 Google LLC
+# Copyright 2020 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -19,14 +19,16 @@ and responses, parses them into a human readable structure and logs them using
 the passed in logger instance.
 """
 
-from grpc import UnaryUnaryClientInterceptor
 import json
 import logging
 
-from .interceptor_mixin import InterceptorMixin
+from grpc import UnaryUnaryClientInterceptor, UnaryStreamClientInterceptor
+
+from .interceptor import Interceptor
 
 
-class LoggingInterceptor(InterceptorMixin, UnaryUnaryClientInterceptor):
+class LoggingInterceptor(Interceptor, UnaryUnaryClientInterceptor,
+                         UnaryStreamClientInterceptor):
     """An interceptor that logs rpc requests and responses."""
 
     _FULL_REQUEST_LOG_LINE = ('Request\n-------\nMethod: {}\nHost: {}\n'
@@ -39,13 +41,15 @@ class LoggingInterceptor(InterceptorMixin, UnaryUnaryClientInterceptor):
                          'Method: {}, RequestId: {}, IsFault: {}, '
                          'FaultMessage: {}')
 
-    def __init__(self, logger, endpoint=None):
+    def __init__(self, logger, api_version, endpoint=None):
         """Initializer for the LoggingInterceptor.
 
         Args:
             logger: An instance of logging.Logger.
+            api_version: a str of the API version of the request.
             endpoint: a str specifying the endpoint for requests.
         """
+        super().__init__(api_version)
         self.endpoint = endpoint
         self.logger = logger
 
@@ -175,12 +179,14 @@ class LoggingInterceptor(InterceptorMixin, UnaryUnaryClientInterceptor):
             trailing_metadata_json: A JSON str of trailing_metadata.
             response: A grpc.Call/grpc.Future instance.
         """
-        self.logger.debug(self._FULL_REQUEST_LOG_LINE.format(method, self.endpoint,
-                      metadata_json, request, trailing_metadata_json,
-                      response.result()))
+        self.logger.debug(
+            self._FULL_REQUEST_LOG_LINE.format(
+                method, self.endpoint, metadata_json, request,
+                trailing_metadata_json, response.result()))
 
-        self.logger.info(self._SUMMARY_LOG_LINE.format(customer_id, self.endpoint,
-                     method, request_id, False, None))
+        self.logger.info(
+            self._SUMMARY_LOG_LINE.format(
+                customer_id, self.endpoint, method, request_id, False, None))
 
     def _log_failed_request(self, method, customer_id, metadata_json,
                             request_id, request, trailing_metadata_json,
@@ -196,15 +202,19 @@ class LoggingInterceptor(InterceptorMixin, UnaryUnaryClientInterceptor):
             trailing_metadata_json: A JSON str of trailing_metadata.
             response: A JSON str of the the response message.
         """
-        exception_str = self._parse_exception_to_str(response.exception())
-        fault_message = self._get_fault_message(response.exception())
+        exception = self._get_error_from_response(response)
+        exception_str = self._parse_exception_to_str(exception)
+        fault_message = self._get_fault_message(exception)
 
-        self.logger.info(self._FULL_FAULT_LOG_LINE.format(method, self.endpoint,
-                     metadata_json, request, trailing_metadata_json,
-                     exception_str))
+        self.logger.info(
+            self._FULL_FAULT_LOG_LINE.format(
+                method, self.endpoint, metadata_json, request,
+                trailing_metadata_json, exception_str))
 
-        self.logger.warning(self._SUMMARY_LOG_LINE.format(customer_id, self.endpoint,
-                        method, request_id, True, fault_message))
+        self.logger.warning(
+            self._SUMMARY_LOG_LINE.format(
+                customer_id, self.endpoint, method, request_id, True,
+                fault_message))
 
     def _log_request(self, client_call_details, request, response):
         """Handles logging all requests.
@@ -223,19 +233,25 @@ class LoggingInterceptor(InterceptorMixin, UnaryUnaryClientInterceptor):
         trailing_metadata_json = self.parse_metadata_to_json(trailing_metadata)
 
         if response.exception():
-            self._log_failed_request(method, customer_id, initial_metadata_json,
-                                     request_id, request,
-                                     trailing_metadata_json, response)
+            self._log_failed_request(
+                method, customer_id, initial_metadata_json, request_id, request,
+                trailing_metadata_json, response)
         else:
-            self._log_successful_request(method, customer_id,
-                                         initial_metadata_json, request_id,
-                                         request, trailing_metadata_json,
-                                         response)
+            self._log_successful_request(
+                method, customer_id, initial_metadata_json, request_id, request,
+                trailing_metadata_json, response)
 
     def intercept_unary_unary(self, continuation, client_call_details, request):
         """Intercepts and logs API interactions.
 
         Overrides abstract method defined in grpc.UnaryUnaryClientInterceptor.
+
+        Args:
+            continuation: a function to continue the request process.
+            client_call_details: a grpc._interceptor._ClientCallDetails
+                instance containing request metadata.
+            request: a SearchGoogleAdsRequest or SearchGoogleAdsStreamRequest
+                message class instance.
 
         Returns:
             A grpc.Call/grpc.Future instance representing a service response.
@@ -244,5 +260,31 @@ class LoggingInterceptor(InterceptorMixin, UnaryUnaryClientInterceptor):
 
         if self.logger.isEnabledFor(logging.WARNING):
             self._log_request(client_call_details, request, response)
+
+        return response
+
+    def intercept_unary_stream(self, continuation, client_call_details,
+                               request):
+        """Intercepts and logs API interactions for Unary-Stream requests.
+
+        Overrides abstract method defined in grpc.UnaryStreamClientInterceptor.
+
+        Args:
+            continuation: a function to continue the request process.
+            client_call_details: a grpc._interceptor._ClientCallDetails
+                instance containing request metadata.
+            request: a SearchGoogleAdsRequest or SearchGoogleAdsStreamRequest
+                message class instance.
+
+        Returns:
+            A grpc.Call/grpc.Future instance representing a service response.
+        """
+        def on_rpc_complete(response_future):
+            if self.logger.isEnabledFor(logging.WARNING):
+                self._log_request(client_call_details, request, response_future)
+
+        response = continuation(client_call_details, request)
+
+        response.add_done_callback(on_rpc_complete)
 
         return response

@@ -25,16 +25,16 @@ import google.ads.google_ads.client
 
 
 def main(client, customer_id, ad_group_id):
-    ad_group_service = client.get_service('AdGroupService', version='v2')
+    ad_group_service = client.get_service('AdGroupService', version='v3')
     ag_bm_service = client.get_service('AdGroupBidModifierService',
-                                       version='v2')
+                                       version='v3')
 
     # Create ad group bid modifier based on hotel check-in day.
     check_in_ag_bm_operation = client.get_type('AdGroupBidModifierOperation',
-                                               version='v2')
+                                               version='v3')
     check_in_ag_bid_modifier = check_in_ag_bm_operation.create
     check_in_ag_bid_modifier.hotel_check_in_day.day_of_week = (
-        client.get_type('DayOfWeekEnum', version='v2').MONDAY)
+        client.get_type('DayOfWeekEnum', version='v3').MONDAY)
     check_in_ag_bid_modifier.ad_group.value = ad_group_service.ad_group_path(
         customer_id, ad_group_id)
     # Sets the bid modifier value to 150%.
@@ -42,7 +42,7 @@ def main(client, customer_id, ad_group_id):
 
     # Create ad group bid modifier based on hotel length of stay info.
     los_ag_bm_operation = client.get_type('AdGroupBidModifierOperation',
-                                          version='v2')
+                                          version='v3')
     los_ag_bid_modifier = los_ag_bm_operation.create
     los_ag_bid_modifier.ad_group.value = ad_group_service.ad_group_path(
         customer_id, ad_group_id)

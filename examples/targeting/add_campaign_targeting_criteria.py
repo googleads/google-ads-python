@@ -23,7 +23,7 @@ import google.ads.google_ads.client
 
 def main(client, customer_id, campaign_id, keyword, location_id):
     campaign_criterion_service = client.get_service('CampaignCriterionService',
-                                                    version='v2')
+                                                    version='v3')
 
     operations = [
         create_location_op(client, customer_id, campaign_id, location_id),
@@ -50,13 +50,13 @@ def main(client, customer_id, campaign_id, keyword, location_id):
 
 
 def create_location_op(client, customer_id, campaign_id, location_id):
-    campaign_service = client.get_service('CampaignService', version='v2')
+    campaign_service = client.get_service('CampaignService', version='v3')
     geo_target_constant_service = client.get_service('GeoTargetConstantService',
-                                                     version='v2')
+                                                     version='v3')
 
     # Create the campaign criterion.
     campaign_criterion_operation = client.get_type('CampaignCriterionOperation',
-                                                   version='v2')
+                                                   version='v3')
     campaign_criterion = campaign_criterion_operation.create
     campaign_criterion.campaign.value = campaign_service.campaign_path(
         customer_id, campaign_id)
@@ -72,11 +72,11 @@ def create_location_op(client, customer_id, campaign_id, location_id):
 
 
 def create_negative_keyword_op(client, customer_id, campaign_id, keyword):
-    campaign_service = client.get_service('CampaignService', version='v2')
+    campaign_service = client.get_service('CampaignService', version='v3')
 
     # Create the campaign criterion.
     campaign_criterion_operation = client.get_type('CampaignCriterionOperation',
-                                                   version='v2')
+                                                   version='v3')
     campaign_criterion = campaign_criterion_operation.create
     campaign_criterion.campaign.value = campaign_service.campaign_path(
         customer_id, campaign_id)
@@ -84,17 +84,17 @@ def create_negative_keyword_op(client, customer_id, campaign_id, keyword):
     criterion_keyword = campaign_criterion.keyword
     criterion_keyword.text.value = keyword
     criterion_keyword.match_type = client.get_type('KeywordMatchTypeEnum',
-                                                   version='v2').BROAD
+                                                   version='v3').BROAD
 
     return campaign_criterion_operation
 
 
 def create_proximity_op(client, customer_id, campaign_id):
-    campaign_service = client.get_service('CampaignService', version='v2')
+    campaign_service = client.get_service('CampaignService', version='v3')
 
     # Create the campaign criterion.
     campaign_criterion_operation = client.get_type('CampaignCriterionOperation',
-                                                   version='v2')
+                                                   version='v3')
     campaign_criterion = campaign_criterion_operation.create
     campaign_criterion.campaign.value = campaign_service.campaign_path(
         customer_id, campaign_id)

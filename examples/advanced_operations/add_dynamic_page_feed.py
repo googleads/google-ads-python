@@ -64,7 +64,7 @@ def main(client, customer_id, campaign_id, ad_group_id):
         # Associate the page feed with the campaign.
         update_campaign_dsa_setting(client, customer_id, campaign_id,
                                     feed_details)
-        ad_group_service = client.get_service('AdGroupService', version='v2')
+        ad_group_service = client.get_service('AdGroupService', version='v3')
         ad_group_resource_name = ad_group_service.ad_group_path(customer_id,
                                                                 ad_group_id)
 
@@ -94,14 +94,14 @@ def create_feed(client, customer_id):
         A FeedDetails instance with information about the newly created feed.
     """
     # Retrieve a new feed operation object.
-    feed_operation = client.get_type('FeedOperation', version='v2')
+    feed_operation = client.get_type('FeedOperation', version='v3')
     # Create a new feed.
     feed = feed_operation.create
     feed.name.value = 'DSA Feed #{}'.format(uuid.uuid4())
-    feed.origin = client.get_type('FeedOriginEnum', version='v2').USER
+    feed.origin = client.get_type('FeedOriginEnum', version='v3').USER
 
     feed_attribute_type_enum = client.get_type('FeedAttributeTypeEnum',
-                                               version='v2')
+                                               version='v3')
 
     # Create the feed's attributes.
     feed_attribute_url = feed.attributes.add()
@@ -113,7 +113,7 @@ def create_feed(client, customer_id):
     feed_attribute_label.name.value = 'Label'
 
     # Retrieve the feed service.
-    feed_service = client.get_service('FeedService', version='v2')
+    feed_service = client.get_service('FeedService', version='v3')
     # Send the feed operation and add the feed.
     response = feed_service.mutate_feeds(customer_id, [feed_operation])
 
@@ -142,7 +142,7 @@ def get_feed_details(client, customer_id, resource_name):
         LIMIT 1
     '''.format(resource_name)
 
-    ga_service = client.get_service('GoogleAdsService', version='v2')
+    ga_service = client.get_service('GoogleAdsService', version='v3')
     response = ga_service.search(customer_id, query=query)
 
     # Maps specific fields in each row in the response to a dict. This would
@@ -167,14 +167,14 @@ def create_feed_mapping(client, customer_id, feed_details):
     """
     # Retrieve a new feed mapping operation object.
     feed_mapping_operation = client.get_type('FeedMappingOperation',
-                                             version='v2')
+                                             version='v3')
     # Create a new feed mapping.
     feed_mapping = feed_mapping_operation.create
     feed_mapping.criterion_type = client.get_type(
-        'FeedMappingCriterionTypeEnum', version='v2').DSA_PAGE_FEED
+        'FeedMappingCriterionTypeEnum', version='v3').DSA_PAGE_FEED
     feed_mapping.feed.value = feed_details.resource_name
     dsa_page_feed_field_enum = client.get_type('DsaPageFeedCriterionFieldEnum',
-                                               version='v2')
+                                               version='v3')
 
     url_field_mapping = feed_mapping.attribute_field_mappings.add()
     url_field_mapping.feed_attribute_id.value = feed_details.url_attribute_id
@@ -187,7 +187,7 @@ def create_feed_mapping(client, customer_id, feed_details):
 
     # Retrieve the feed mapping service.
     feed_mapping_service = client.get_service('FeedMappingService',
-                                              version='v2')
+                                              version='v3')
     # Submit the feed mapping operation and add the feed mapping.
     response = feed_mapping_service.mutate_feed_mappings(
         customer_id, [feed_mapping_operation])
@@ -213,7 +213,7 @@ def create_feed_items(client, customer_id, feed_details, label):
         "http://www.example.com/discounts/flight-deals"]
 
     def map_feed_urls(url):
-        feed_item_operation = client.get_type('FeedItemOperation', version='v2')
+        feed_item_operation = client.get_type('FeedItemOperation', version='v3')
         feed_item = feed_item_operation.create
         feed_item.feed.value = feed_details.resource_name
 
@@ -235,7 +235,7 @@ def create_feed_items(client, customer_id, feed_details, label):
     feed_item_operations = list(map(map_feed_urls, urls))
 
     # Retrieve the feed item service.
-    feed_item_service = client.get_service('FeedItemService', version='v2')
+    feed_item_service = client.get_service('FeedItemService', version='v3')
     # Submit the feed item operations and add the feed items.
     response = feed_item_service.mutate_feed_items(customer_id,
                                                    feed_item_operations)
@@ -267,7 +267,7 @@ def update_campaign_dsa_setting(client, customer_id, campaign_id, feed_details):
         LIMIT 1
     '''.format(campaign_id)
 
-    ga_service = client.get_service('GoogleAdsService', version='v2')
+    ga_service = client.get_service('GoogleAdsService', version='v3')
     results = ga_service.search(customer_id, query=query)
 
     for row in results:
@@ -282,7 +282,7 @@ def update_campaign_dsa_setting(client, customer_id, campaign_id, feed_details):
                 campaign_id))
 
     # Retrieve a new campaign operation
-    campaign_operation = client.get_type('CampaignOperation', version='v2')
+    campaign_operation = client.get_type('CampaignOperation', version='v3')
     # Copy the retrieved campaign onto the new campaign operation.
     campaign_operation.update.CopyFrom(campaign)
     updated_campaign = campaign_operation.update
@@ -294,7 +294,7 @@ def update_campaign_dsa_setting(client, customer_id, campaign_id, feed_details):
     campaign_operation.update_mask.CopyFrom(field_mask)
 
     # Retrieve the campaign service.
-    campaign_service = client.get_service('CampaignService', version='v2')
+    campaign_service = client.get_service('CampaignService', version='v3')
     # Submit the campaign operation and update the campaign.
     response = campaign_service.mutate_campaigns(customer_id,
                                                  [campaign_operation])
@@ -315,7 +315,7 @@ def add_dsa_targeting(client, customer_id, ad_group_resource_name, label):
     """
     # Retrieve a new ad group criterion operation object.
     ad_group_criterion_operation = client.get_type(
-        'AdGroupCriterionOperation', version='v2')
+        'AdGroupCriterionOperation', version='v3')
     # Create a new ad group criterion.
     ad_group_criterion = ad_group_criterion_operation.create
     ad_group_criterion.ad_group.value = ad_group_resource_name
@@ -326,11 +326,11 @@ def add_dsa_targeting(client, customer_id, ad_group_resource_name, label):
     webpage_criterion_info = ad_group_criterion.webpage.conditions.add()
     webpage_criterion_info.argument.value = label
     webpage_criterion_info.operand = client.get_type(
-        'WebpageConditionOperandEnum', version='v2').CUSTOM_LABEL
+        'WebpageConditionOperandEnum', version='v3').CUSTOM_LABEL
 
     # Retrieve the ad group criterion service.
     ad_group_criterion_service = client.get_service('AdGroupCriterionService',
-                                                    version='v2')
+                                                    version='v3')
     response = ad_group_criterion_service.mutate_ad_group_criteria(
         customer_id, [ad_group_criterion_operation])
     resource_name = response.results[0].resource_name

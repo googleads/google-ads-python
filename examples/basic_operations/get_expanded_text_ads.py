@@ -25,7 +25,7 @@ _DEFAULT_PAGE_SIZE = 1000
 
 
 def main(client, customer_id, page_size, ad_group_id=None):
-    ga_service = client.get_service('GoogleAdsService', version='v2')
+    ga_service = client.get_service('GoogleAdsService', version='v3')
 
     query = ('SELECT ad_group.id, ad_group_ad.ad.id, '
              'ad_group_ad.ad.expanded_text_ad.headline_part1, '

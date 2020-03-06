@@ -1,5 +1,5 @@
 #!/usr/bin/env python
-# Copyright 2018 Google LLC
+# Copyright 2020 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -17,7 +17,6 @@
 Retrieves negative keywords in a campaign.
 """
 
-
 import argparse
 import sys
 
@@ -25,11 +24,8 @@ from google.ads.google_ads.client import GoogleAdsClient
 from google.ads.google_ads.errors import GoogleAdsException
 
 
-_DEFAULT_PAGE_SIZE = 1000
-
-
-def main(client, customer_id, page_size):
-    ga_service = client.get_service('GoogleAdsService', version='v2')
+def main(client, customer_id):
+    ga_service = client.get_service('GoogleAdsService', version='v3')
 
     query = ('SELECT campaign.id, campaign.name, ad_group.id, ad_group.name, '
              'ad_group_criterion.criterion_id, '
@@ -43,28 +39,30 @@ def main(client, customer_id, page_size):
              'ORDER BY metrics.impressions DESC '
              'LIMIT 50')
 
-    response = ga_service.search(customer_id, query, page_size=page_size)
+    # Issues a search request using streaming.
+    response = ga_service.search_stream(customer_id, query)
     keyword_match_type_enum = client.get_type(
         'KeywordMatchTypeEnum', version='v2').KeywordMatchType
     try:
-        for row in response:
-            campaign = row.campaign
-            ad_group = row.ad_group
-            criterion = row.ad_group_criterion
-            metrics = row.metrics
-            keyword_match_type = keyword_match_type_enum.Name(
-                criterion.keyword.match_type)
-            print(f'Keyword text "{criterion.keyword.text.value}" with match '
-                  f'type "{keyword_match_type}" '
-                  f'and ID {criterion.criterion_id.value} in '
-                  f'ad group "{ad_group.name.value}" '
-                  f'with ID "{ad_group.id.value}" '
-                  f'in campaign "{campaign.name.value}" '
-                  f'with ID {campaign.id.value} '
-                  f'had {metrics.impressions.value} impression(s), '
-                  f'{metrics.clicks.value} click(s), and '
-                  f'{metrics.cost_micros.value} cost (in micros) during '
-                  f'the last 7 days.')
+        for batch in response:
+            for row in batch.results:
+                campaign = row.campaign
+                ad_group = row.ad_group
+                criterion = row.ad_group_criterion
+                metrics = row.metrics
+                keyword_match_type = keyword_match_type_enum.Name(
+                    criterion.keyword.match_type)
+                print(f'Keyword text "{criterion.keyword.text.value}" with '
+                      f'match type "{keyword_match_type}" '
+                      f'and ID {criterion.criterion_id.value} in '
+                      f'ad group "{ad_group.name.value}" '
+                      f'with ID "{ad_group.id.value}" '
+                      f'in campaign "{campaign.name.value}" '
+                      f'with ID {campaign.id.value} '
+                      f'had {metrics.impressions.value} impression(s), '
+                      f'{metrics.clicks.value} click(s), and '
+                      f'{metrics.cost_micros.value} cost (in micros) during '
+                      'the last 7 days.')
     except GoogleAdsException as ex:
         print(f'Request with ID "{ex.request_id}" failed with status '
               f'"{ex.error.code().name}" and includes the following errors:')
@@ -88,4 +86,4 @@ if __name__ == '__main__':
                         required=True, help='The Google Ads customer ID.')
     args = parser.parse_args()
 
-    main(google_ads_client, args.customer_id, _DEFAULT_PAGE_SIZE)
+    main(google_ads_client, args.customer_id)

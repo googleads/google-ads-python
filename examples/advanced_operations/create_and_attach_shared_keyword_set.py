@@ -26,19 +26,19 @@ import google.ads.google_ads.client
 
 
 def main(client, customer_id, campaign_id):
-    campaign_service = client.get_service('CampaignService', version='v2')
-    shared_set_service = client.get_service('SharedSetService', version='v2')
+    campaign_service = client.get_service('CampaignService', version='v3')
+    shared_set_service = client.get_service('SharedSetService', version='v3')
     shared_criterion_service = client.get_service('SharedCriterionService',
-                                                  version='v2')
+                                                  version='v3')
     campaign_shared_set_service = client.get_service('CampaignSharedSetService',
-                                                     version='v2')
+                                                     version='v3')
 
     # Create shared negative keyword set.
-    shared_set_operation = client.get_type('SharedSetOperation', version='v2')
+    shared_set_operation = client.get_type('SharedSetOperation', version='v3')
     shared_set = shared_set_operation.create
     shared_set.name.value = 'API Negative keyword list - %s' % uuid.uuid4()
     shared_set.type = client.get_type('SharedSetTypeEnum',
-                                      version='v2').NEGATIVE_KEYWORDS
+                                      version='v3').NEGATIVE_KEYWORDS
 
     try:
         shared_set_resource_name = shared_set_service.mutate_shared_sets(
@@ -61,12 +61,12 @@ def main(client, customer_id, campaign_id):
     shared_criteria_operations = []
     for keyword in keywords:
         shared_criterion_operation = client.get_type('SharedCriterionOperation',
-                                                     version='v2')
+                                                     version='v3')
         shared_criterion = shared_criterion_operation.create
         keyword_info = shared_criterion.keyword
         keyword_info.text.value = keyword
         keyword_info.match_type = client.get_type('KeywordMatchTypeEnum',
-                                                  version='v2').BROAD
+                                                  version='v3').BROAD
         shared_criterion.shared_set.value = shared_set_resource_name
         shared_criteria_operations.append(shared_criterion_operation)
 
@@ -87,7 +87,7 @@ def main(client, customer_id, campaign_id):
         print('Created shared criterion "%s".' % shared_criterion.resource_name)
 
     campaign_set_operation = client.get_type('CampaignSharedSetOperation',
-                                             version='v2')
+                                             version='v3')
     campaign_set = campaign_set_operation.create
     campaign_set.campaign.value = campaign_service.campaign_path(
         customer_id, campaign_id)

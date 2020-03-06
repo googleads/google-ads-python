@@ -28,17 +28,17 @@ from google.ads.google_ads.errors import GoogleAdsException
 
 def main(client, customer_id, campaign_draft_resource_name):
     # Create the campaign experiment.
-    campaign_experiment = client.get_type('CampaignExperiment', version='v2')
+    campaign_experiment = client.get_type('CampaignExperiment', version='v3')
     campaign_experiment.campaign_draft.value = campaign_draft_resource_name
     campaign_experiment.name.value = 'Campaign Experiment #{}'.format(
         uuid.uuid4())
     campaign_experiment.traffic_split_percent.value = 50
     campaign_experiment.traffic_split_type = client.get_type(
-        'CampaignExperimentTrafficSplitTypeEnum', version='v2').RANDOM_QUERY
+        'CampaignExperimentTrafficSplitTypeEnum', version='v3').RANDOM_QUERY
 
     try:
         campaign_experiment_service = client.get_service(
-            'CampaignExperimentService', version='v2')
+            'CampaignExperimentService', version='v3')
 
         # A Long Running Operation (LRO) is returned from this
         # asynchronous request by the API.
@@ -64,7 +64,7 @@ def main(client, customer_id, campaign_draft_resource_name):
     campaign_experiment_lro.result()
 
     # Retrieve the campaign experiment that has been created.
-    ga_service = client.get_service('GoogleAdsService', version='v2')
+    ga_service = client.get_service('GoogleAdsService', version='v3')
     query = (
         'SELECT campaign_experiment.experiment_campaign '
         'FROM campaign_experiment '

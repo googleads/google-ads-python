@@ -236,7 +236,7 @@ Authors
 * `David Wihl`_
 * `Ben Karl`_
 
-.. |build-status| image:: https://storage.googleapis.com/gaa-clientlibs/badges/google-ads-python/buildstatus_ubuntu.png
+.. |build-status| image:: https://storage.googleapis.com/gaa-clientlibs/badges/google-ads-python/buildstatus_ubuntu.svg
 .. _Developer Site: https://developers.google.com/google-ads/api/docs/client-libs/python/
 .. _Installed Application Flow: https://developers.google.com/google-ads/api/docs/client-libs/python/oauth-installed
 .. _Web Application Flow: https://developers.google.com/google-ads/api/docs/client-libs/python/oauth-web

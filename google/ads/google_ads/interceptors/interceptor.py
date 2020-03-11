@@ -152,11 +152,11 @@ class Interceptor:
         return _ClientCallDetails(method, timeout, metadata, credentials)
 
     def __init__(self, api_version):
-        self._error_protos = import_module(
-            f'google.ads.google_ads.{api_version}.proto.errors.errors_pb2')
+        self._error_protos = None
         self._failure_key = (
             f'google.ads.googleads.{api_version}.errors.googleadsfailure-bin')
         self._exception = None
+        self._api_version = api_version
 
     def _get_error_from_response(self, response):
         """Attempts to wrap failed responses as GoogleAdsException instances.
@@ -231,6 +231,10 @@ class Interceptor:
             for kv in trailing_metadata:
                 if kv[0] == self._failure_key:
                     try:
+                        if not self._error_protos:
+                          self._error_protos = import_module(
+                            f'google.ads.google_ads.{self._api_version}.proto.'
+                            'errors.errors_pb2')
                         ga_failure = self._error_protos.GoogleAdsFailure()
                         ga_failure.ParseFromString(kv[1])
                         return ga_failure

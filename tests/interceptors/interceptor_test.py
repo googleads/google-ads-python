@@ -15,6 +15,7 @@
 
 
 from importlib import import_module
+import mock
 from unittest import TestCase
 
 from google.ads.google_ads.client import _DEFAULT_VERSION as default_version
@@ -88,3 +89,19 @@ class InterceptorTest(TestCase):
         interceptor = Interceptor(default_version)
         result = interceptor._get_google_ads_failure(None)
         self.assertEqual(result, None)
+
+    def test_init_no_error_proto_load(self):
+        """Ensures that error proto modules are not loaded on init."""
+        interceptor = Interceptor(default_version)
+        self.assertEqual(interceptor._error_protos, None)
+
+    def test_deferred_error_proto_module_load(self):
+        """Tests that import_module is called when an API error is received."""
+        with mock.patch('google.ads.google_ads.interceptors.'
+                        'interceptor.import_module') as import_mock:
+            interceptor = Interceptor(default_version)
+            mock_metadata = ((interceptor._failure_key, _MOCK_FAILURE_VALUE),)
+            interceptor._get_google_ads_failure(mock_metadata)
+            import_mock.assert_called_once_with('google.ads.google_ads.'
+                                                f'{default_version}.proto.'
+                                                'errors.errors_pb2')

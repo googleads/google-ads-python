@@ -1,3 +1,6 @@
+* 5.0.1
+- Defer loading of error_pb2 until failed response is encountered.
+
 * 5.0.0
 - Google Ads v3_0 release
 

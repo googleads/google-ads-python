@@ -59,8 +59,8 @@ def main(client, customer_id, ad_id):
                     print(f'\t\tOn field: {field_path_element.field_name}')
         sys.exit(1)
 
-    print(f'Ad with resource name {ad_response.results[0].resource_name} '
-          'was updated')
+    print(f'Ad with resource name "{ad_response.results[0].resource_name}" '
+          'was updated.')
 
 
 if __name__ == '__main__':

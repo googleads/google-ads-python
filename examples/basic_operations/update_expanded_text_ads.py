@@ -69,7 +69,7 @@ if __name__ == '__main__':
     google_ads_client = GoogleAdsClient.load_from_storage()
 
     parser = argparse.ArgumentParser(
-        description=('Updates an expanded text ad to the specified ad group ID, '
+        description=('Updates an expanded text ad to the specified ad ID, '
                      'for the given customer ID.'))
     # The following argument(s) should be provided to run the example.
     parser.add_argument('-c', '--customer_id', type=str,

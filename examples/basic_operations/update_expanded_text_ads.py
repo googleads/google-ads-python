@@ -32,11 +32,11 @@ def main(client, customer_id, ad_id):
 
     ad_operation = client.get_type('AdOperation', version='v3')
 
-    # Create ad operation
+    # Update ad operation
     ad = ad_operation.update
     ad.resource_name = ad_service.ad_path(customer_id, ad_id)
     ad.expanded_text_ad.headline_part1.value = (
-        'Cruise to Pluto {}'.format(str(uuid.uuid4())[:8]))
+        f'Cruise to Pluto {str(uuid.uuid4())[:8]}')
     ad.expanded_text_ad.headline_part2.value = 'Tickets on sale now'
     final_url = ad.final_urls.add()
     final_url.value = 'http://www.example.com'
@@ -46,7 +46,7 @@ def main(client, customer_id, ad_id):
     fm = protobuf_helpers.field_mask(None, ad)
     ad_operation.update_mask.CopyFrom(fm)
 
-    # Update the ad
+    # Updates the ad
     try:
         ad_response = ad_service.mutate_ads(customer_id, [ad_operation])
     except GoogleAdsException as ex:
@@ -59,8 +59,8 @@ def main(client, customer_id, ad_id):
                     print(f'\t\tOn field: {field_path_element.field_name}')
         sys.exit(1)
 
-    print('Ad with resource name {} was updated'.format(
-        ad_response.results[0].resource_name))
+    print(f'Ad with resource name {ad_response.results[0].resource_name} '
+          'was updated')
 
 
 if __name__ == '__main__':
@@ -69,7 +69,7 @@ if __name__ == '__main__':
     google_ads_client = GoogleAdsClient.load_from_storage()
 
     parser = argparse.ArgumentParser(
-        description=('Updates an expanded text ad to the specified ad ID, '
+        description=('Updates the specified expanded text ad, '
                      'for the given customer ID.'))
     # The following argument(s) should be provided to run the example.
     parser.add_argument('-c', '--customer_id', type=str,

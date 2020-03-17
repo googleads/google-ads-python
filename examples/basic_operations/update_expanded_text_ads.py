@@ -32,7 +32,7 @@ def main(client, customer_id, ad_id):
 
     ad_operation = client.get_type('AdOperation', version='v3')
 
-    # Update ad operation
+    # Update ad operation.
     ad = ad_operation.update
     ad.resource_name = ad_service.ad_path(customer_id, ad_id)
     ad.expanded_text_ad.headline_part1.value = (
@@ -46,7 +46,7 @@ def main(client, customer_id, ad_id):
     fm = protobuf_helpers.field_mask(None, ad)
     ad_operation.update_mask.CopyFrom(fm)
 
-    # Updates the ad
+    # Updates the ad.
     try:
         ad_response = ad_service.mutate_ads(customer_id, [ad_operation])
     except GoogleAdsException as ex:

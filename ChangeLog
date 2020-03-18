@@ -1,3 +1,6 @@
+* 5.0.2
+- Remove response error caching in streaming interceptors.
+
 * 5.0.1
 - Defer loading of error_pb2 until failed response is encountered.
 

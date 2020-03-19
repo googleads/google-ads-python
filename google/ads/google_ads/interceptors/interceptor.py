@@ -155,7 +155,6 @@ class Interceptor:
         self._error_protos = None
         self._failure_key = (
             f'google.ads.googleads.{api_version}.errors.googleadsfailure-bin')
-        self._exception = None
         self._api_version = api_version
 
     def _get_error_from_response(self, response):
@@ -182,9 +181,6 @@ class Interceptor:
             Exception: If not a GoogleAdsException or RpcException the error
                 will be raised as-is.
         """
-        if self._exception:
-            return self._exception
-
         status_code = response.code()
         response_exception = response.exception()
 
@@ -200,20 +196,19 @@ class Interceptor:
                 # library-specific Error type for easy handling. These errors
                 # originate from the Google Ads API and are often caused by
                 # invalid requests.
-                self._exception = GoogleAdsException(
+                return GoogleAdsException(
                     response_exception, response, google_ads_failure,
                     request_id)
             else:
                 # Raise the original exception if not a GoogleAdsFailure. This
                 # type of error is generally caused by problems at the request
                 # level, such as when an invalid endpoint is given.
-                self._exception = response_exception
+                return response_exception
         else:
             # Raise the original exception if error has status code
             # INTERNAL or RESOURCE_EXHAUSTED, meaning that
-            self._exception = response_exception
+            return response_exception
 
-        return self._exception
 
     def _get_google_ads_failure(self, trailing_metadata):
         """Gets the Google Ads failure details if they exist.

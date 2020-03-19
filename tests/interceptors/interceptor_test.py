@@ -18,6 +18,8 @@ from importlib import import_module
 import mock
 from unittest import TestCase
 
+import grpc
+
 from google.ads.google_ads.client import _DEFAULT_VERSION as default_version
 from google.ads.google_ads.interceptors.interceptor import Interceptor
 
@@ -105,3 +107,25 @@ class InterceptorTest(TestCase):
             import_mock.assert_called_once_with('google.ads.google_ads.'
                                                 f'{default_version}.proto.'
                                                 'errors.errors_pb2')
+
+    def test_get_error_from_response_does_not_cache_error(self):
+        """Ensures errors are not cached across requests.."""
+        interceptor = Interceptor(default_version)
+
+        class MockRpcErrorResponse(grpc.RpcError):
+            def code(self):
+                return grpc.StatusCode.INVALID_ARGUMENT
+
+            def trailing_metadata(self):
+                return ((
+                    interceptor._failure_key,
+                    b"\n \n\x02\x08\x10\x12\x1aInvalid customer ID '123'."),)
+
+            def exception(self):
+                return self
+
+        response = MockRpcErrorResponse()
+
+        first_result = interceptor._get_error_from_response(response)
+        second_result = interceptor._get_error_from_response(response)
+        self.assertIsNot(first_result, second_result)

@@ -38,6 +38,7 @@ def main(client, customer_id, ad_id):
     ad.expanded_text_ad.headline_part1.value = (
         f'Cruise to Pluto {str(uuid.uuid4())[:8]}')
     ad.expanded_text_ad.headline_part2.value = 'Tickets on sale now'
+    ad.expanded_text_ad.description.value = 'Best space cruise ever.'
     final_url = ad.final_urls.add()
     final_url.value = 'http://www.example.com'
     final_mobile_url = ad.final_mobile_urls.add()

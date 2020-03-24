@@ -13,6 +13,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 """This example adds a campaign draft for a campaign.
+
 Make sure you specify a campaign that has a non-shared budget.
 """
 
@@ -21,12 +22,12 @@ import argparse
 import sys
 from uuid import uuid4
 
-import google.ads.google_ads.client
+from google.ads.google_ads.client import GoogleAdsClient
 from google.ads.google_ads.errors import GoogleAdsException
 
 
 def main(client, customer_id, base_campaign_id):
-    campaign_service = client.get_service('CampaignService',version='v3')
+    campaign_service = client.get_service('CampaignService', version='v3')
     campaign_draft_service = client.get_service('CampaignDraftService',
                                                 version='v3')
 
@@ -54,15 +55,14 @@ def main(client, customer_id, base_campaign_id):
                     print(f'\t\tOn field: {field_path_element.field_name}')
         sys.exit(1)
 
-    print(f'Created campaign draft: '
-          f'{campaign_draft_response.results[0].resource_name}.')
+    print('Created campaign draft: '
+          f'"{campaign_draft_response.results[0].resource_name}".')
 
 
 if __name__ == '__main__':
     # GoogleAdsClient will read the google-ads.yaml configuration file in the
     # home directory if none is specified.
-    google_ads_client = (google.ads.google_ads.client.GoogleAdsClient
-                         .load_from_storage())
+    google_ads_client = GoogleAdsClient.load_from_storage()
 
     parser = argparse.ArgumentParser(
         description=('Adds a campaign draft for the specified base campaign ID, '

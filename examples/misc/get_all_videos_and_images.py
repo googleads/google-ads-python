@@ -36,6 +36,7 @@ def main(client, customer_id, page_size):
 
     media_type_enum = client.get_type('MediaTypeEnum', version='v3').MediaType
 
+    # Iterates over all rows and prints the information about each media file.
     try:
         for row in results:
             media_file = row.media_file

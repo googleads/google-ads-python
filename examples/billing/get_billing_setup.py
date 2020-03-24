@@ -46,15 +46,15 @@ def main(client, customer_id):
         for batch in response:
             for row in batch.results:
                 billing_setup = row.billing_setup
-                payments_account_info = billing_setup.payments_account_info
+                pai = billing_setup.payments_account_info
                 print(f'Billing setup with ID {billing_setup.id.value}, '
                       f'status "{billing_setup_status_enum.Name(billing_setup.status)}", '
                       f'payments_account "{billing_setup.payments_account.value}" '
-                      f'payments_account_id "{payments_account_info.payments_account_id.value}", '
-                      f'payments_account_name "{payments_account_info.payments_account_name.value}", '
-                      f'payments_profile_id {payments_account_info.payments_profile_id.value}, '
-                      f'payments_profile_name "{payments_account_info.payments_profile_name.value}", '
-                      f'secondary_payments_profile_id "{payments_account_info.secondary_payments_profile_id.value}".')
+                      f'payments_account_id "{pai.payments_account_id.value}", '
+                      f'payments_account_name "{pai.payments_account_name.value}", '
+                      f'payments_profile_id {pai.payments_profile_id.value}, '
+                      f'payments_profile_name "{pai.payments_profile_name.value}", '
+                      f'secondary_payments_profile_id "{pai.secondary_payments_profile_id.value}".')
     except GoogleAdsException as ex:
         print(f'Request with ID "{ex.request_id}" failed with status '
               f'"{ex.error.code().name}" and includes the following errors:')

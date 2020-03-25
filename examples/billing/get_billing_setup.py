@@ -50,11 +50,11 @@ def main(client, customer_id):
                 print(f'Billing setup with ID {billing_setup.id.value}, '
                       f'status "{billing_setup_status_enum.Name(billing_setup.status)}", '
                       f'payments_account "{billing_setup.payments_account.value}" '
-                      f'payments_account_id "{pai.payments_account_id.value}", '
+                      f'payments_account_id {pai.payments_account_id.value}, '
                       f'payments_account_name "{pai.payments_account_name.value}", '
                       f'payments_profile_id {pai.payments_profile_id.value}, '
                       f'payments_profile_name "{pai.payments_profile_name.value}", '
-                      f'secondary_payments_profile_id "{pai.secondary_payments_profile_id.value}".')
+                      f'secondary_payments_profile_id {pai.secondary_payments_profile_id.value}.')
     except GoogleAdsException as ex:
         print(f'Request with ID "{ex.request_id}" failed with status '
               f'"{ex.error.code().name}" and includes the following errors:')

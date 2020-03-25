@@ -44,9 +44,9 @@ def main(client, customer_id):
         add_webpage_criterion(client, customer_id, ad_group_resource_name)
     except GoogleAdsException as ex:
         print(f'Request with ID "{ex.request_id}" failed with status '
-              f'"{ex.error.code().name}" and includes the following errors:'
+              f'"{ex.error.code().name}" and includes the following errors:')
         for error in ex.failure.errors:
-            print(f'\tError with message "{error_message}".'))
+            print(f'\tError with message "{error_message}".')
             if error.location:
                 for field_path_element in error.location.field_path_elements:
                     print(f'\t\tOn field: {field_path_element.field_name}')
@@ -68,7 +68,7 @@ def create_budget(client, customer_id):
                                                 version='v3')
     # Issues a mutate request to add campaign budgets.
     campaign_budget = campaign_budget_operation.create
-    campaign_budget.name.value = f'Interplanetary Cruise #{uuid4()}')
+    campaign_budget.name.value = f'Interplanetary Cruise #{uuid4()}'
     campaign_budget.amount_micros.value = 50000000
     campaign_budget.delivery_method = client.get_type(
         'BudgetDeliveryMethodEnum', version='v3').STANDARD
@@ -169,7 +169,7 @@ def create_ad_group(client, customer_id, campaign_resource_name):
                                                  [ad_group_operation])
     resource_name = response.results[0].resource_name
 
-    print(f'Created Ad Group with resource_name: {resource_name}'))
+    print(f'Created Ad Group with resource_name: {resource_name}')
 
     return resource_name
 
@@ -204,11 +204,11 @@ def create_expanded_dsa(client, customer_id, ad_group_resource_name):
                                                     [ad_group_ad_operation])
     resource_name = response.results[0].resource_name
 
-    print(f'Created Ad Group Ad with resource_name: {resource_name}'))
+    print(f'Created Ad Group Ad with resource_name: {resource_name}')
 
 
 def add_webpage_criterion(client, customer_id, ad_group_resource_name):
-    """Creates a web page criteria to the given ad group.
+    """Creates a web page criterion to the given ad group.
 
     Args:
         client: an initialized GoogleAdsClient instance.
@@ -246,7 +246,7 @@ def add_webpage_criterion(client, customer_id, ad_group_resource_name):
         customer_id, [ad_group_criterion_operation])
     resource_name = response.results[0].resource_name
 
-    print(f'Created Ad Group Criterion with resource_name: {resource_name}'))
+    print(f'Created Ad Group Criterion with resource_name: {resource_name}')
 
 
 if __name__ == '__main__':

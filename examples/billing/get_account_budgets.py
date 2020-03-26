@@ -27,12 +27,12 @@ def main(client, customer_id):
 
     query = ('SELECT account_budget.status, '
              'account_budget.billing_setup, '
-             'account_budget.adjusted_spending_limit_micros, '
-             'account_budget.adjusted_spending_limit_type, '
              'account_budget.approved_spending_limit_micros, '
              'account_budget.approved_spending_limit_type, '
              'account_budget.proposed_spending_limit_micros, '
              'account_budget.proposed_spending_limit_type, '
+             'account_budget.adjusted_spending_limit_micros, '
+             'account_budget.adjusted_spending_limit_type, '
              'account_budget.approved_start_date_time, '
              'account_budget.proposed_start_date_time, '
              'account_budget.approved_end_date_time, '
@@ -59,6 +59,10 @@ def main(client, customer_id):
                     _micros_to_currency(budget.proposed_spending_limit_micros.value)
                     if budget.proposed_spending_limit_micros
                     else budget.proposed_spending_limit_type.name)
+                adjusted_spending_limit = (
+                    _micros_to_currency(budget.adjusted_spending_limit_micros.value)
+                    if budget.adjusted_spending_limit_micros
+                    else budget.adjusted_spending_limit_type.name)
                 approved_end_date_time = (
                     budget.approved_end_date_time.value
                     if budget.approved_end_date_time
@@ -74,7 +78,8 @@ def main(client, customer_id):
                       f'amount served {_micros_to_currency(budget.amount_served_micros.value):.2f}, '
                       f'total adjustments {_micros_to_currency(budget.total_adjustments_micros.value):.2f}, '
                       f'approved spending limit "{approved_spending_limit}" '
-                      f'(proposed "{proposed_spending_limit}"), '
+                      f'(proposed "{proposed_spending_limit}" -- '
+                      f'adjusted "{adjusted_spending_limit}"), '
                       f'approved start time "{budget.approved_start_date_time.value}" '
                       f'(proposed "{budget.proposed_start_date_time.value}"), '
                       f'approved end time "{approved_end_date_time}" '

@@ -46,7 +46,7 @@ def main(client, customer_id):
         print(f'Request with ID "{ex.request_id}" failed with status '
               f'"{ex.error.code().name}" and includes the following errors:')
         for error in ex.failure.errors:
-            print(f'\tError with message "{error_message}".')
+            print(f'\tError with message "{error.message}".')
             if error.location:
                 for field_path_element in error.location.field_path_elements:
                     print(f'\t\tOn field: {field_path_element.field_name}')
@@ -180,7 +180,7 @@ def create_expanded_dsa(client, customer_id, ad_group_resource_name):
     Args:
         client: an initialized GoogleAdsClient instance.
         customer_id: a client customer ID str.
-        campaign_resource_name: a resource_name str for an Ad Group.
+        ad_group_resource_name: a resource_name str for an Ad Group.
     """
     # Retrieve a new ad group ad operation object.
     ad_group_ad_operation = client.get_type('AdGroupAdOperation', version='v3')
@@ -201,7 +201,7 @@ def create_expanded_dsa(client, customer_id, ad_group_resource_name):
     ad_group_ad_service = client.get_service('AdGroupAdService', version='v3')
     # Submit the ad group ad operation to add the ad group ad.
     response = ad_group_ad_service.mutate_ad_group_ads(customer_id,
-                                                    [ad_group_ad_operation])
+        [ad_group_ad_operation])
     resource_name = response.results[0].resource_name
 
     print(f'Created Ad Group Ad with resource_name: "{resource_name}"')
@@ -213,7 +213,7 @@ def add_webpage_criterion(client, customer_id, ad_group_resource_name):
     Args:
         client: an initialized GoogleAdsClient instance.
         customer_id: a client customer ID str.
-        campaign_resource_name: a resource_name str for an Ad Group.
+        ad_group_resource_name: a resource_name str for an Ad Group.
     """
     # Retrieve a new ad group criterion operation.
     ad_group_criterion_operation = client.get_type(
@@ -227,7 +227,7 @@ def add_webpage_criterion(client, customer_id, ad_group_resource_name):
     criterion.status = client.get_type(
         'AdGroupCriterionStatusEnum', version='v3').PAUSED
 
-    # Sets the criterion to match a specific page URL and title. 
+    # Sets the criterion to match a specific page URL and title.
     criterion.webpage.criterion_name.value = 'Special Offers'
     webpage_info_url = criterion.webpage.conditions.add()
     webpage_info_url.operand = client.get_type(

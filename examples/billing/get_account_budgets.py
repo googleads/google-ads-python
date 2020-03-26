@@ -18,14 +18,11 @@
 import argparse
 import sys
 
-
-import google.ads.google_ads.client
-
-
-_DEFAULT_PAGE_SIZE = 1000
+from google.ads.google_ads.client import GoogleAdsClient
+from google.ads.google_ads.errors import GoogleAdsException
 
 
-def main(client, customer_id, page_size):
+def main(client, customer_id):
     ga_service = client.get_service('GoogleAdsService', version='v3')
 
     query = ('SELECT account_budget.status, '
@@ -34,6 +31,8 @@ def main(client, customer_id, page_size):
              'account_budget.approved_spending_limit_type, '
              'account_budget.proposed_spending_limit_micros, '
              'account_budget.proposed_spending_limit_type, '
+             'account_budget.adjusted_spending_limit_micros, '
+             'account_budget.adjusted_spending_limit_type, '
              'account_budget.approved_start_date_time, '
              'account_budget.proposed_start_date_time, '
              'account_budget.approved_end_date_time, '
@@ -42,68 +41,68 @@ def main(client, customer_id, page_size):
              'account_budget.proposed_end_time_type '
              'FROM account_budget')
 
-    results = ga_service.search(customer_id, query=query, page_size=page_size)
+    response = ga_service.search_stream(customer_id, query=query)
 
     try:
         # Use the enum type to determine the enum names from the values.
         budget_status_enum = client.get_type(
-            'AccountBudgetStatusEnum').AccountBudgetStatus
+            'AccountBudgetStatusEnum', version='v3').AccountBudgetStatus
 
-        for row in results:
-            budget = row.account_budget
-            approved_spending_limit = (
-                micros_to_currency(budget.approved_spending_limit_micros.value)
-                if budget.approved_spending_limit_micros
-                else budget.approved_spending_limit_type.name)
-            proposed_spending_limit = (
-                micros_to_currency(budget.proposed_spending_limit_micros.value)
-                if budget.proposed_spending_limit_micros
-                else budget.proposed_spending_limit_type.name)
-            approved_end_date_time = (
-                budget.approved_end_date_time.value
-                if budget.approved_end_date_time
-                else budget.approved_end_date_time_type)
-            proposed_end_date_time = (
-                budget.proposed_end_date_time.value
-                if budget.proposed_end_date_time
-                else budget.proposed_end_date_time_type)
+        for batch in response:
+            for row in batch.results:
+                budget = row.account_budget
+                approved_spending_limit = (
+                    _micros_to_currency(budget.approved_spending_limit_micros.value)
+                    if budget.approved_spending_limit_micros
+                    else budget.approved_spending_limit_type.name)
+                proposed_spending_limit = (
+                    _micros_to_currency(budget.proposed_spending_limit_micros.value)
+                    if budget.proposed_spending_limit_micros
+                    else budget.proposed_spending_limit_type.name)
+                adjusted_spending_limit = (
+                    _micros_to_currency(budget.adjusted_spending_limit_micros.value)
+                    if budget.adjusted_spending_limit_micros
+                    else budget.adjusted_spending_limit_type.name)
+                approved_end_date_time = (
+                    budget.approved_end_date_time.value
+                    if budget.approved_end_date_time
+                    else budget.approved_end_date_time_type)
+                proposed_end_date_time = (
+                    budget.proposed_end_date_time.value
+                    if budget.proposed_end_date_time
+                    else budget.proposed_end_date_time_type)
 
-            print('Account budget "%s", with status "%s", billing setup "%s", '
-                  'amount served %.2f, total adjustments %.2f, '
-                  'approved spending limit "%s" (proposed "%s"), '
-                  'approved start time "%s" (proposed "%s"), '
-                  'approved end time "%s" (proposed "%s").'
-                  % (budget.resource_name,
-                     budget_status_enum.Name(budget.status),
-                     budget.billing_setup.value,
-                     micros_to_currency(budget.amount_served_micros.value),
-                     micros_to_currency(budget.total_adjustments_micros.value),
-                     approved_spending_limit,
-                     proposed_spending_limit,
-                     budget.approved_start_date_time,
-                     budget.proposed_start_date_time,
-                     approved_end_date_time,
-                     proposed_end_date_time))
-    except google.ads.google_ads.errors.GoogleAdsException as ex:
-        print('Request with ID "%s" failed with status "%s" and includes the '
-              'following errors:' % (ex.request_id, ex.error.code().name))
+                print(f'Account budget "{budget.resource_name}", '
+                      f'with status "{budget_status_enum.Name(budget.status)}" ',
+                      f'billing setup "{budget.billing_setup.value}", '
+                      f'amount served {_micros_to_currency(budget.amount_served_micros.value):.2f}, '
+                      f'total adjustments {_micros_to_currency(budget.total_adjustments_micros.value):.2f}, '
+                      f'approved spending limit "{approved_spending_limit}" '
+                      f'(proposed "{proposed_spending_limit}" -- '
+                      f'adjusted "{adjusted_spending_limit}"), '
+                      f'approved start time "{budget.approved_start_date_time.value}" '
+                      f'(proposed "{budget.proposed_start_date_time.value}"), '
+                      f'approved end time "{approved_end_date_time}" '
+                      f'(proposed "{proposed_end_date_time}").')
+    except GoogleAdsException as ex:
+        print(f'Request with ID "{ex.request_id}" failed with status '
+              f'"{ex.error.code().name}" and includes the following errors:')
         for error in ex.failure.errors:
-            print('\tError with message "%s".' % error.message)
+            print(f'\tError with message "{error.message}".')
             if error.location:
                 for field_path_element in error.location.field_path_elements:
-                    print('\t\tOn field: %s' % field_path_element.field_name)
+                    print(f'\t\tOn field: {field_path_element.field_name}')
         sys.exit(1)
 
 
-def micros_to_currency(micros):
+def _micros_to_currency(micros):
     return micros / 1000000.0
 
 
 if __name__ == '__main__':
     # GoogleAdsClient will read the google-ads.yaml configuration file in the
     # home directory if none is specified.
-    google_ads_client = (google.ads.google_ads.client.GoogleAdsClient
-                         .load_from_storage())
+    google_ads_client = GoogleAdsClient.load_from_storage()
 
     parser = argparse.ArgumentParser(
         description=('Lists all account budgets for given Google Ads customer '
@@ -113,4 +112,4 @@ if __name__ == '__main__':
                         required=True, help='The Google Ads customer ID.')
     args = parser.parse_args()
 
-    main(google_ads_client, args.customer_id, _DEFAULT_PAGE_SIZE)
+    main(google_ads_client, args.customer_id)

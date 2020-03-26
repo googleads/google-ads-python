@@ -18,14 +18,14 @@
 import argparse
 import sys
 
-import google.ads.google_ads.client
+from google.ads.google_ads.client import GoogleAdsClient
+from google.ads.google_ads.errors import GoogleAdsException
 
 
-_DEFAULT_PAGE_SIZE = 1000
-
-
-def main(client, customer_id, page_size, ad_group_id=None):
+def main(client, customer_id, ad_group_id=None):
     ga_service = client.get_service('GoogleAdsService', version='v3')
+    ad_group_ad_status_enum = client.get_type(
+        'AdGroupAdStatusEnum', version='v3').AdGroupAdStatus
 
     query = ('SELECT ad_group.id, ad_group_ad.ad.id, '
              'ad_group_ad.ad.expanded_text_ad.headline_part1, '
@@ -34,39 +34,39 @@ def main(client, customer_id, page_size, ad_group_id=None):
              'WHERE ad_group_ad.ad.type = EXPANDED_TEXT_AD')
 
     if ad_group_id:
-        query = '%s AND ad_group.id = %s' % (query, ad_group_id)
+        query += f' AND ad_group.id = {ad_group_id}'
 
-    results = ga_service.search(customer_id, query=query, page_size=page_size)
+    response = ga_service.search_stream(customer_id, query=query)
 
     try:
-        for row in results:
-            ad = row.ad_group_ad.ad
+        for batch in response:
+            for row in batch.results:
+                ad = row.ad_group_ad.ad
 
-            if ad.expanded_text_ad:
-                expanded_text_ad_info = ad.expanded_text_ad
+                if ad.expanded_text_ad:
+                    expanded_text_ad_info = ad.expanded_text_ad
 
-            print('Expanded text ad with ID %s, status %s, and headline '
-                  '%s - %s was found in ad group with ID %s.'
-                  % (ad.id, row.ad_group_ad.status,
-                     expanded_text_ad_info.headline_part1,
-                     expanded_text_ad_info.headline_part2,
-                     row.ad_group.id))
-    except google.ads.google_ads.errors.GoogleAdsException as ex:
-        print('Request with ID "%s" failed with status "%s" and includes the '
-              'following errors:' % (ex.request_id, ex.error.code().name))
+                print(f'Expanded text ad with ID {ad.id.value}, status '
+                      f'"{ad_group_ad_status_enum.Name(row.ad_group_ad.status)}", '
+                      'and headline '
+                      f'"{expanded_text_ad_info.headline_part1.value}"'
+                      f' - "{expanded_text_ad_info.headline_part2.value}" was '
+                      f'found in ad group with ID {row.ad_group.id.value}.')
+    except GoogleAdsException as ex:
+        print(f'Request with ID "{ex.request_id}" failed with status '
+              f'"{ex.error.code().name}" and includes the following errors:')
         for error in ex.failure.errors:
-            print('\tError with message "%s".' % error.message)
+            print(f'\tError with message "{error.message}".')
             if error.location:
                 for field_path_element in error.location.field_path_elements:
-                    print('\t\tOn field: %s' % field_path_element.field_name)
+                    print(f'\t\tOn field: {field_path_element.field_name}')
         sys.exit(1)
 
 
 if __name__ == '__main__':
     # GoogleAdsClient will read the google-ads.yaml configuration file in the
     # home directory if none is specified.
-    google_ads_client = (google.ads.google_ads.client.GoogleAdsClient
-                         .load_from_storage())
+    google_ads_client = GoogleAdsClient.load_from_storage()
 
     parser = argparse.ArgumentParser(
         description='List ad groups for specified customer.')
@@ -77,5 +77,4 @@ if __name__ == '__main__':
                         required=False, help='The ad group ID. ')
     args = parser.parse_args()
 
-    main(google_ads_client, args.customer_id, _DEFAULT_PAGE_SIZE,
-         ad_group_id=args.ad_group_id)
+    main(google_ads_client, args.customer_id, ad_group_id=args.ad_group_id)

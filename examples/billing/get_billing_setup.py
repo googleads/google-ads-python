@@ -18,13 +18,11 @@
 import argparse
 import sys
 
-import google.ads.google_ads.client
+from google.ads.google_ads.client import GoogleAdsClient
+from google.ads.google_ads.errors import GoogleAdsException
 
 
-_DEFAULT_PAGE_SIZE = 1000
-
-
-def main(client, customer_id, page_size):
+def main(client, customer_id):
     ga_service = client.get_service('GoogleAdsService', version='v3')
 
     query = (
@@ -37,47 +35,45 @@ def main(client, customer_id, page_size):
         'billing_setup.payments_account_info.secondary_payments_profile_id '
         'FROM billing_setup')
 
-    results = ga_service.search(customer_id, query=query, page_size=page_size)
+    response = ga_service.search_stream(customer_id, query=query)
 
     try:
         # Use the enum type to determine the enum name from the value.
-        billing_setup_status_enum = (
-            client.get_type('BillingSetupStatusEnum', version='v3')
-                .BillingSetupStatus)
+        billing_setup_status_enum = client.get_type(
+            'BillingSetupStatusEnum', version='v3').BillingSetupStatus
 
         print('Found the following billing setup results:')
-        for row in results:
-            billing_setup = row.billing_setup
-            payments_account_info = billing_setup.payments_account_info
-            print('Billing setup with ID "%s", status "%s", '
-                  'payments_account "%s", payments_account_id "%s", '
-                  'payments_account_name "%s", payments_profile_id "%s", '
-                  'payments_profile_name "%s", '
-                  'secondary_payments_profile_id "%s".'
-                  % (billing_setup.id.value,
-                     billing_setup_status_enum.Name(billing_setup.status),
-                     billing_setup.payments_account.value,
-                     payments_account_info.payments_account_id.value,
-                     payments_account_info.payments_account_name.value,
-                     payments_account_info.payments_profile_id.value,
-                     payments_account_info.payments_profile_name.value,
-                     payments_account_info.secondary_payments_profile_id.value))
-    except google.ads.google_ads.errors.GoogleAdsException as ex:
-        print('Request with ID "%s" failed with status "%s" and includes the '
-              'following errors:' % (ex.request_id, ex.error.code().name))
+        for batch in response:
+            for row in batch.results:
+                billing_setup = row.billing_setup
+                pai = billing_setup.payments_account_info
+                if pai.secondary_payments_profile_id.value:
+                    secondary_payments_profile_id = pai.secondary_payments_profile_id.value
+                else:
+                    secondary_payments_profile_id = "None"
+                print(f'Billing setup with ID {billing_setup.id.value}, '
+                      f'status "{billing_setup_status_enum.Name(billing_setup.status)}", '
+                      f'payments_account "{billing_setup.payments_account.value}" '
+                      f'payments_account_id {pai.payments_account_id.value}, '
+                      f'payments_account_name "{pai.payments_account_name.value}", '
+                      f'payments_profile_id {pai.payments_profile_id.value}, '
+                      f'payments_profile_name "{pai.payments_profile_name.value}", '
+                      f'secondary_payments_profile_id {secondary_payments_profile_id}.')
+    except GoogleAdsException as ex:
+        print(f'Request with ID "{ex.request_id}" failed with status '
+              f'"{ex.error.code().name}" and includes the following errors:')
         for error in ex.failure.errors:
-            print('\tError with message "%s".' % error.message)
+            print(f'\tError with message "{error.message}".')
             if error.location:
                 for field_path_element in error.location.field_path_elements:
-                    print('\t\tOn field: %s' % field_path_element.field_name)
+                    print(f'\t\tOn field: {field_path_element.field_name}')
         sys.exit(1)
 
 
 if __name__ == '__main__':
     # GoogleAdsClient will read the google-ads.yaml configuration file in the
     # home directory if none is specified.
-    google_ads_client = (google.ads.google_ads.client.GoogleAdsClient
-                         .load_from_storage())
+    google_ads_client = GoogleAdsClient.load_from_storage()
 
     parser = argparse.ArgumentParser(
         description='Lists all billing setup objects for specified customer.')
@@ -86,4 +82,4 @@ if __name__ == '__main__':
                         required=True, help='The Google Ads customer ID.')
     args = parser.parse_args()
 
-    main(google_ads_client, args.customer_id, _DEFAULT_PAGE_SIZE)
+    main(google_ads_client, args.customer_id)

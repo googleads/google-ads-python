@@ -46,7 +46,7 @@ def main(client, customer_id):
     try:
         # Use the enum type to determine the enum names from the values.
         budget_status_enum = client.get_type(
-            'AccountBudgetStatusEnum').AccountBudgetStatus
+            'AccountBudgetStatusEnum', version='v3').AccountBudgetStatus
 
         for batch in response:
             for row in batch.results:

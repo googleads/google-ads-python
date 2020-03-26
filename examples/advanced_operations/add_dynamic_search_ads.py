@@ -12,9 +12,9 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
-"""This code example adds a Dynamic Search Ads Campaign.
+"""This code example adds a new dynamic search ad (DSA).
 
-To get campaigns, run basic_operations/get_campaigns.py
+It also creates a webpage targeting criteria for the DSA.
 """
 
 
@@ -41,16 +41,15 @@ def main(client, customer_id):
         ad_group_resource_name = create_ad_group(client, customer_id,
                                                  campaign_resource_name)
         create_expanded_dsa(client, customer_id, ad_group_resource_name)
-        add_webpage_criteria(client, customer_id, ad_group_resource_name)
+        add_webpage_criterion(client, customer_id, ad_group_resource_name)
     except GoogleAdsException as ex:
-        print('Request with ID "{}" failed with status "{}" and includes the '
-              'following errors:'.format(ex.request_id, ex.error.code().name))
+        print(f'Request with ID "{ex.request_id}" failed with status '
+              f'"{ex.error.code().name}" and includes the following errors:')
         for error in ex.failure.errors:
-            print('\tError with message "{}".'.format(error.message))
+            print(f'\tError with message "{error.message}".')
             if error.location:
                 for field_path_element in error.location.field_path_elements:
-                    print('\t\tOn field: {}'.format(
-                        field_path_element.field_name))
+                    print(f'\t\tOn field: {field_path_element.field_name}')
         sys.exit(1)
 
 
@@ -64,12 +63,12 @@ def create_budget(client, customer_id):
     Returns:
         A resource_name str for the newly created Budget.
     """
-    # Retrieve a new campaign budget operation object.
+    # Creates a campaign budget operation.
     campaign_budget_operation = client.get_type('CampaignBudgetOperation',
                                                 version='v3')
-    # Create a campaign budget.
+    # Issues a mutate request to add campaign budgets.
     campaign_budget = campaign_budget_operation.create
-    campaign_budget.name.value = 'Interplanetary Cruise #{}'.format(uuid4())
+    campaign_budget.name.value = f'Interplanetary Cruise #{uuid4()}'
     campaign_budget.amount_micros.value = 50000000
     campaign_budget.delivery_method = client.get_type(
         'BudgetDeliveryMethodEnum', version='v3').STANDARD
@@ -82,9 +81,7 @@ def create_budget(client, customer_id):
         customer_id, [campaign_budget_operation])
     resource_name = response.results[0].resource_name
 
-    # Display the results
-    print('Created campaign budget with resource_name: {}'.format(
-        resource_name))
+    print(f'Created campaign budget with resource_name: "{resource_name}"')
 
     return resource_name
 
@@ -102,9 +99,8 @@ def create_campaign(client, customer_id, budget_resource_name):
     """
     # Retrieve a new campaign operation object.
     campaign_operation = client.get_type('CampaignOperation', version='v3')
-    # Create a campaign.
     campaign = campaign_operation.create
-    campaign.name.value = 'Interplanetary Cruise #{}'.format(uuid4())
+    campaign.name.value = f'Interplanetary Cruise #{uuid4()}'
     campaign.advertising_channel_type = client.get_type(
         'AdvertisingChannelTypeEnum', version='v3').SEARCH
     # Recommendation: Set the campaign to PAUSED when creating it to prevent the
@@ -114,24 +110,25 @@ def create_campaign(client, customer_id, budget_resource_name):
                                       version='v3').PAUSED
     campaign.manual_cpc.enhanced_cpc_enabled.value = True
     campaign.campaign_budget.value = budget_resource_name
-    # Required: set the campaign's Dynamic Search Ads domain name and language.
+    # Required: Enable the campaign for DSAs by setting the campaign's dynamic
+    # search ads setting domain name and language.
     campaign.dynamic_search_ads_setting.domain_name.value = 'example.com'
     campaign.dynamic_search_ads_setting.language_code.value = 'en'
-    # Optional: set the start date.
+    # Optional: Sets the start and end dates for the campaign, beginning one day
+    # from now and ending a month from now.
     campaign.start_date.value = datetime.now().strftime('%Y%m%d')
-    # Optional: set the end date.
     campaign.end_date.value = (
         datetime.now() + timedelta(days=365)).strftime('%Y%m%d')
 
     # Retrieve the campaign service.
     campaign_service = client.get_service('CampaignService', version='v3')
-    # Submit the campaign operation to add the campaign.
+
+    # Issues a mutate request to add campaign.
     response = campaign_service.mutate_campaigns(
         customer_id, [campaign_operation])
     resource_name = response.results[0].resource_name
 
-    # Display the results
-    print('Created campaign with resource_name: {}'.format(resource_name))
+    print(f'Created campaign with resource_name: "{resource_name}"')
 
     return resource_name
 
@@ -154,40 +151,40 @@ def create_ad_group(client, customer_id, campaign_resource_name):
     # Required: set the ad group's type to Dynamic Search Ads.
     ad_group.type = client.get_type('AdGroupTypeEnum',
                                     version='v3').SEARCH_DYNAMIC_ADS
-    ad_group.name.value = 'Earth to Mars Cruises {}'.format(uuid4())
+    ad_group.name.value = f'Earth to Mars Cruises {uuid4()}'
     ad_group.campaign.value = campaign_resource_name
     ad_group.status = client.get_type('AdGroupStatusEnum', version='v3').PAUSED
     # Recommended: set a tracking URL template for your ad group if you want to
     # use URL tracking software.
     ad_group.tracking_url_template.value = (
         'http://tracker.example.com/traveltracker/{escapedlpurl}')
-    # Set the ad group bids.
-    ad_group.cpc_bid_micros.value = 3000000
+    # Optional: Set the ad group bid value.
+    ad_group.cpc_bid_micros.value = 10000000
 
     # Retrieve the ad group service.
     ad_group_service = client.get_service('AdGroupService', version='v3')
-    # Submit the ad group ad operation to add an ad group.
+
+    # Issues a mutate request to add the ad group.
     response = ad_group_service.mutate_ad_groups(customer_id,
                                                  [ad_group_operation])
     resource_name = response.results[0].resource_name
 
-    # Display the results.
-    print('Created Ad Group with resource_name: {}'.format(resource_name))
+    print(f'Created Ad Group with resource_name: "{resource_name}"')
 
     return resource_name
 
 
 def create_expanded_dsa(client, customer_id, ad_group_resource_name):
-    """Creates a Dynamic Search Ad under the given Ad Group.
+    """Creates a dynamic search ad under the given ad group.
 
     Args:
         client: an initialized GoogleAdsClient instance.
         customer_id: a client customer ID str.
-        campaign_resource_name: a resource_name str for an Ad Group.
+        ad_group_resource_name: a resource_name str for an Ad Group.
     """
     # Retrieve a new ad group ad operation object.
     ad_group_ad_operation = client.get_type('AdGroupAdOperation', version='v3')
-    # Create and Expanded Dynamic Search Ad. This ad will have its headline,
+    # Create and expanded dynamic search ad. This ad will have its headline,
     # display URL and final URL auto-generated at serving time according to
     # domain name specific information provided by DynamicSearchAdSetting at
     # the campaign level.
@@ -204,20 +201,19 @@ def create_expanded_dsa(client, customer_id, ad_group_resource_name):
     ad_group_ad_service = client.get_service('AdGroupAdService', version='v3')
     # Submit the ad group ad operation to add the ad group ad.
     response = ad_group_ad_service.mutate_ad_group_ads(customer_id,
-                                                    [ad_group_ad_operation])
+        [ad_group_ad_operation])
     resource_name = response.results[0].resource_name
 
-    # Display the results.
-    print('Created Ad Group Ad with resource_name: {}'.format(resource_name))
+    print(f'Created Ad Group Ad with resource_name: "{resource_name}"')
 
 
-def add_webpage_criteria(client, customer_id, ad_group_resource_name):
-    """Creates a Web Page Criteria to the given Ad Group.
+def add_webpage_criterion(client, customer_id, ad_group_resource_name):
+    """Creates a web page criterion to the given ad group.
 
     Args:
         client: an initialized GoogleAdsClient instance.
         customer_id: a client customer ID str.
-        campaign_resource_name: a resource_name str for an Ad Group.
+        ad_group_resource_name: a resource_name str for an Ad Group.
     """
     # Retrieve a new ad group criterion operation.
     ad_group_criterion_operation = client.get_type(
@@ -230,13 +226,13 @@ def add_webpage_criteria(client, customer_id, ad_group_resource_name):
     # Optional: set the status.
     criterion.status = client.get_type(
         'AdGroupCriterionStatusEnum', version='v3').PAUSED
-    criterion.webpage.criterion_name.value = 'Special Offers'
 
+    # Sets the criterion to match a specific page URL and title.
+    criterion.webpage.criterion_name.value = 'Special Offers'
     webpage_info_url = criterion.webpage.conditions.add()
     webpage_info_url.operand = client.get_type(
         'WebpageConditionOperandEnum', version='v3').URL
     webpage_info_url.argument.value = '/specialoffers'
-
     webpage_info_page_title = criterion.webpage.conditions.add()
     webpage_info_page_title.operand = client.get_type(
         'WebpageConditionOperandEnum', version='v3').PAGE_TITLE
@@ -245,14 +241,12 @@ def add_webpage_criteria(client, customer_id, ad_group_resource_name):
     # Retrieve the ad group criterion service.
     ad_group_criterion_service = client.get_service('AdGroupCriterionService',
                                                     version='v3')
-    # Submit the ad group criterion operation to add the ad group criterion.
+    # Issues a mutate request to add the ad group criterion.
     response = ad_group_criterion_service.mutate_ad_group_criteria(
         customer_id, [ad_group_criterion_operation])
     resource_name = response.results[0].resource_name
 
-    # Display the results.
-    print('Created Ad Group Criterion with resource_name: {}'.format(
-        resource_name))
+    print(f'Created Ad Group Criterion with resource_name: "{resource_name}"')
 
 
 if __name__ == '__main__':
@@ -261,8 +255,8 @@ if __name__ == '__main__':
     google_ads_client = GoogleAdsClient.load_from_storage()
 
     parser = argparse.ArgumentParser(
-        description=('Adds a Dynamic Search Ad campaign under the specified '
-                     'customer ID.'))
+        description=(
+            'Adds a dynamic search ad under the specified customer ID.'))
     # The following argument(s) should be provided to run the example.
     parser.add_argument('-c', '--customer_id', type=str,
                         required=True, help='The Google Ads customer ID.')

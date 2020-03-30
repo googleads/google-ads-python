@@ -26,10 +26,9 @@ from google.ads.google_ads.client import GoogleAdsClient
 from google.ads.google_ads.errors import GoogleAdsException
 
 NUMBER_OF_CAMPAIGNS_TO_ADD = 2
-NUMBER_OF_AD_GROUPS_TO_ADD = '2'
-NUMBER_OF_KEYWORDS_TO_ADD = '5'
-POLL_FREQUENCY_SECONDS = '1'
-MAX_TOTAL_POLL_INTERVAL_SECONDS = '60'
+NUMBER_OF_AD_GROUPS_TO_ADD = 2
+NUMBER_OF_KEYWORDS_TO_ADD = 4
+MAX_TOTAL_POLL_INTERVAL_SECONDS = 60
 
 PAGE_SIZE = 1000
 
@@ -96,6 +95,9 @@ def main(client, customer_id):
     resource_name = create_mutate_job(mutate_job_service, customer_id)
     operations = build_all_operations(client, customer_id)
     add_all_mutate_job_operations(mutate_job_service, operations, resource_name)
+    operations_response = run_mutate_job(mutate_job_service, resource_name)
+    poll_mutate_job(operations_response)
+    fetch_and_print_results(mutate_job_service, resource_name)
 
 
 def create_mutate_job(mutate_job_service, customer_id):
@@ -129,9 +131,19 @@ def add_all_mutate_job_operations(mutate_job_service, operations,
         operations: a list of a mutate operations.
         resource_name: a str of a resource name for a mutate job.
     """
-    operations = build_all_operations(customer_id)
-    response = mutate_job_service.add_mutate_job_operations(resource_name,
-                                                            None, operations)
+    try:
+        response = mutate_job_service.add_mutate_job_operations(
+            resource_name, None, operations)
+
+        print(f'{response.total_operations} mutate operations have been '
+              'added so far.')
+
+        # You can use this next sequence token for calling
+        # add_mutate_job_operations() next time.
+        print('Next sequence token for adding next operations is '
+              f'{response.next_sequence_token}')
+    except GoogleAdsException as exception:
+        handle_google_ads_exception(exception)
 
 
 def build_all_operations(client, customer_id):
@@ -159,7 +171,7 @@ def build_all_operations(client, customer_id):
         build_mutate_operation(client, 'campaign_operation', operation) \
         for operation in campaign_operations]
 
-    # Creates new campaign criterion operations and adds them to the array of
+    # Creates new campaign criterion operations and adds them to the list of
     # mutate operations.
     campaign_criterion_operations = build_campaign_criterion_operations(
         client, campaign_operations)
@@ -167,7 +179,33 @@ def build_all_operations(client, customer_id):
         build_mutate_operation(
             client, 'campaign_criterion_operation', operation) \
         for operation in campaign_criterion_operations]
-    breakpoint()
+
+    # Creates new ad group operations and adds them to the list of
+    # mutate operations.
+    ad_group_operations = build_ad_group_operations(
+        client, customer_id, campaign_operations)
+    operations = operations + [
+        build_mutate_operation(client, 'ad_group_operation', operation) \
+        for operation in ad_group_operations]
+
+    # Creates new ad group criterion operations and add them to the list of
+    # mutate operations.
+    ad_group_criterion_operations = build_ad_group_criterion_operations(
+        client, ad_group_operations)
+    operations = operations + [
+        build_mutate_operation(
+            client, 'ad_group_criterion_operation', operation) \
+        for operation in ad_group_criterion_operations]
+
+    # Creates new ad group ad operations and adds them to the list of
+    # mutate operations.
+    ad_group_ad_operations = build_ad_group_ad_operations(
+        client, ad_group_operations)
+    operations = operations + [
+        build_mutate_operation(client, 'ad_group_ad_operation', operation) \
+        for operation in ad_group_ad_operations]
+
+    return operations
 
 
 def build_campaign_budget_operation(client, customer_id):
@@ -282,6 +320,202 @@ def build_campaign_criterion_operation(client, campaign_operation):
     campaign_criterion.campaign.value = campaign_operation.create.resource_name
 
     return campaign_criterion_operation
+
+
+def build_ad_group_operations(client, customer_id, campaign_operations):
+    """Builds new ad group operations for the specified customer ID.
+
+    Args:
+        client: an initialized GoogleAdsClient instance.
+        customer_id: a str of a customer ID.
+        campaign_operations: a list of CampaignOperation instances.
+
+    Return: a list of AdGroupOperation instances.
+    """
+    return [
+        build_ad_group_operation(client, customer_id, campaign_operation) \
+        for campaign_operation in campaign_operations \
+        for i in range(NUMBER_OF_AD_GROUPS_TO_ADD)]
+
+
+def build_ad_group_operation(client, customer_id, campaign_operation):
+    """Builds a new ad group operation for the specified customer ID.
+
+    Args:
+        client: an initialized GoogleAdsClient instance.
+        customer_id: a str of a customer ID.
+        campaign_operations: a CampaignOperation instance.
+
+    Return: an AdGroupOperation instance.
+    """
+    ad_group_operation = client.get_type('AdGroupOperation', version='v3')
+    ad_group_service = client.get_service('AdGroupService', version='v3')
+    # Creates an ad group.
+    ad_group = ad_group_operation.create
+    ad_group_id = get_next_temporary_id()
+    # Creates a resource name using the temporary ID.
+    ad_group.resource_name = ad_group_service.ad_group_path(customer_id,
+                                                            ad_group_id)
+    ad_group.name.value = f'Mutate job ad group #{uuid4()}.{ad_group_id}'
+    ad_group.campaign.value = campaign_operation.create.resource_name
+    ad_group.type = client.get_type('AdGroupTypeEnum',
+                                    version='v3').SEARCH_STANDARD
+    ad_group.cpc_bid_micros.value = 10000000
+
+    return ad_group_operation
+
+
+def build_ad_group_criterion_operations(client, ad_group_operations):
+    """Builds new ad group criterion operations for creating keywords.
+
+    50% of keywords are created with some invalid characters to demonstrate
+    how MutateJobService returns information about such errors.
+
+    Args:
+        client: an initialized GoogleAdsClient instance.
+        ad_group_operations: a list of AdGroupOperation instances.
+
+    Returns a list of AdGroupCriterionOperation instances.
+    """
+    return [
+        # Create a keyword text by making 50% of keywords invalid to
+        # demonstrate error handling.
+        build_ad_group_criterion_operation(
+            client, ad_group_operation, i, i % 2 == 0) \
+        for ad_group_operation in ad_group_operations \
+        for i in range(NUMBER_OF_KEYWORDS_TO_ADD)]
+
+
+def build_ad_group_criterion_operation(client, ad_group_operation, number,
+                                       is_valid=True):
+    """Builds new ad group criterion operation for creating keywords.
+
+    Takes an optional param that dictates whether the keyword text should
+    intentionally generate an error with invalid characters.
+
+    Args:
+        client: an initialized GoogleAdsClient instance.
+        ad_group_operations: an AdGroupOperation instance.
+        number: an int of the number to assign to the name of the criterion.
+        is_valid: a bool of whether the keyword text should be invalid.
+
+    Returns: an AdGroupCriterionOperation instance.
+    """
+    ad_group_criterion_operation = client.get_type('AdGroupCriterionOperation',
+                                                   version='v3')
+    # Creates an ad group criterion.
+    ad_group_criterion = ad_group_criterion_operation.create
+    ad_group_criterion.keyword.text.value = f'mars{number}'
+
+    # If keyword should be invalid we add exclamation points, which will
+    # generate errors when sent to the API.
+    if not is_valid:
+        ad_group_criterion.keyword.text.value += '!!!'
+
+    ad_group_criterion.keyword.match_type = client.get_type(
+        'KeywordMatchTypeEnum', version='v3').BROAD
+    ad_group_criterion.ad_group.value = ad_group_operation.create.resource_name
+    ad_group_criterion.status = client.get_type(
+        'AdGroupCriterionStatusEnum', version='v3').ENABLED
+
+    return ad_group_criterion_operation
+
+
+def build_ad_group_ad_operations(client, ad_group_operations):
+    """Builds new ad group ad operations.
+
+    Args:
+        client: an initialized GoogleAdsClient instance.
+        ad_group_operations: a list of AdGroupOperation instances.
+
+    Returns: a list of AdGroupAdOperation instances.
+    """
+    return [
+        build_ad_group_ad_operation(client, ad_group_operation) \
+        for ad_group_operation in ad_group_operations]
+
+
+def build_ad_group_ad_operation(client, ad_group_operation):
+    """Builds a new ad group ad operation.
+
+    Args:
+        client: an initialized GoogleAdsClient instance.
+        ad_group_operations: an AdGroupOperation instance.
+
+    Returns: an AdGroupAdOperation instance.
+    """
+    ad_group_ad_operation = client.get_type('AdGroupAdOperation', version='v3')
+    # Creates an ad group ad.
+    ad_group_ad = ad_group_ad_operation.create
+    # Creates the expanded text ad info.
+    text_ad = ad_group_ad.ad.expanded_text_ad
+    text_ad.headline_part1.value = f'Cruise to Mars #{uuid4()}'
+    text_ad.headline_part2.value = 'Best Space Cruise Line'
+    text_ad.description.value = 'Buy your tickets now!'
+    final_url = ad_group_ad.ad.final_urls.add()
+    final_url.value = 'http://www.example.com'
+    ad_group_ad.ad_group.value = ad_group_operation.create.resource_name
+    ad_group_ad.status = client.get_type('AdGroupAdStatusEnum',
+                                         version='v3').PAUSED
+
+    return ad_group_ad_operation
+
+
+def run_mutate_job(mutate_job_service, resource_name):
+    """Runs the mutate job for executing all uploaded mutate job operations.
+
+    Args:
+        mutate_job_service: an instance of the MutateJobService message class.
+        resource_name: a str of a resource name for a mutate job.
+
+    Returns: a google.api_core.operation.Operation instance.
+    """
+    try:
+      response = mutate_job_service.run_mutate_job(resource_name)
+      print(f'Mutate job with resource name "{resource_name}" has been '
+            ' executed.')
+      return response
+    except GoogleAdsException as exception:
+      handle_google_ads_exception(exception)
+
+
+def poll_mutate_job(operations_response):
+    """Polls the server until the mutate job execution finishes.
+
+    Sets the initial poll delay time and the total time to wait before time-out.
+
+    Args:
+        operations_response: a google.api_core.operation.Operation instance.
+    """
+    # operations_response represents a Long-Running Operation or LRO. The class
+    # provides an interface for polling the API to check when the operation is
+    # complete. Below we use the synchronous interface, but there's also an
+    # asynchronous interface that uses the Operation.add_done_callback method.
+    # See: https://googleapis.dev/python/google-api-core/latest/operation.html
+    operations_response.result(timeout=MAX_TOTAL_POLL_INTERVAL_SECONDS)
+
+
+def fetch_and_print_results(mutate_job_service, resource_name):
+    """Prints all the results from running the mutate job.
+
+    Args:
+        mutate_job_service: an instance of the MutateJobService message class.
+        resource_name: a str of a resource name for a mutate job.
+    """
+    print(f'Mutate job with resource name "{resource_name}" has finished. '
+          'Now, printing its results...')
+
+    # Gets all the results from running mutate job and prints their information.
+    mutate_job_results = mutate_job_service.list_mutate_job_results(
+        resource_name, page_size=PAGE_SIZE)
+
+    for mutate_job_result in mutate_job_results:
+        status = mutate_job_result.status.message
+        status = status if status else 'N/A'
+        result = mutate_job_result.mutate_operation_response
+        result = result if result.ByteSize() else 'N/A'
+        print(f'Mutate job #{mutate_job_result.operation_index} '
+              f'has a status {status} and response type {result}')
 
 
 if __name__ == '__main__':

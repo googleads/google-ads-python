@@ -33,7 +33,7 @@ MAX_TOTAL_POLL_INTERVAL_SECONDS = 60
 PAGE_SIZE = 1000
 
 
-def get_next_temporary_id():
+def _get_next_temporary_id():
     """Returns the next temporary ID to use in mutate job operations.
 
     If temporary ID has not been defined, i.e. if this function has not been
@@ -52,7 +52,7 @@ def get_next_temporary_id():
         return temporary_id
 
 
-def handle_google_ads_exception(exception):
+def _handle_google_ads_exception(exception):
     """Prints the details of a GoogleAdsException object.
 
     Args:
@@ -92,15 +92,15 @@ def main(client, customer_id):
         customer_id: a str of a customer ID.
     """
     mutate_job_service = client.get_service('MutateJobService', version='v3')
-    resource_name = create_mutate_job(mutate_job_service, customer_id)
-    operations = build_all_operations(client, customer_id)
-    add_all_mutate_job_operations(mutate_job_service, operations, resource_name)
-    operations_response = run_mutate_job(mutate_job_service, resource_name)
-    poll_mutate_job(operations_response)
-    fetch_and_print_results(mutate_job_service, resource_name)
+    resource_name = _create_mutate_job(mutate_job_service, customer_id)
+    operations = _build_all_operations(client, customer_id)
+    _add_all_mutate_job_operations(mutate_job_service, operations, resource_name)
+    operations_response = _run_mutate_job(mutate_job_service, resource_name)
+    _poll_mutate_job(operations_response)
+    _fetch_and_print_results(mutate_job_service, resource_name)
 
 
-def create_mutate_job(mutate_job_service, customer_id):
+def _create_mutate_job(mutate_job_service, customer_id):
     """Creates a mutate job for the specified customer ID.
 
     Args:
@@ -115,10 +115,10 @@ def create_mutate_job(mutate_job_service, customer_id):
         print(f'Created a mutate job with resource name "{resource_name}"')
         return resource_name
     except GoogleAdsException as exception:
-        handle_google_ads_exception(exception)
+        _handle_google_ads_exception(exception)
 
 
-def add_all_mutate_job_operations(mutate_job_service, operations,
+def _add_all_mutate_job_operations(mutate_job_service, operations,
                                   resource_name):
     """Adds all mutate job operations to the mutate job.
 
@@ -143,10 +143,10 @@ def add_all_mutate_job_operations(mutate_job_service, operations,
         print('Next sequence token for adding next operations is '
               f'{response.next_sequence_token}')
     except GoogleAdsException as exception:
-        handle_google_ads_exception(exception)
+        _handle_google_ads_exception(exception)
 
 
-def build_all_operations(client, customer_id):
+def _build_all_operations(client, customer_id):
     """Builds all operations for creating a complete campaign.
 
     Args:
@@ -159,13 +159,13 @@ def build_all_operations(client, customer_id):
 
     # Creates a new campaign budget operation and adds it to the list of
     # mutate operations.
-    campaign_budget_op = build_campaign_budget_operation(client, customer_id)
+    campaign_budget_op = _build_campaign_budget_operation(client, customer_id)
     operations.append(build_mutate_operation(
         client, 'campaign_budget_operation', campaign_budget_op))
 
     # Creates new campaign operations and adds them to the list of
     # mutate operations.
-    campaign_operations = build_campaign_operations(
+    campaign_operations = _build_campaign_operations(
         client, customer_id, campaign_budget_op.create.resource_name)
     operations = operations + [
         build_mutate_operation(client, 'campaign_operation', operation) \
@@ -173,7 +173,7 @@ def build_all_operations(client, customer_id):
 
     # Creates new campaign criterion operations and adds them to the list of
     # mutate operations.
-    campaign_criterion_operations = build_campaign_criterion_operations(
+    campaign_criterion_operations = _build_campaign_criterion_operations(
         client, campaign_operations)
     operations = operations + [
         build_mutate_operation(
@@ -182,7 +182,7 @@ def build_all_operations(client, customer_id):
 
     # Creates new ad group operations and adds them to the list of
     # mutate operations.
-    ad_group_operations = build_ad_group_operations(
+    ad_group_operations = _build_ad_group_operations(
         client, customer_id, campaign_operations)
     operations = operations + [
         build_mutate_operation(client, 'ad_group_operation', operation) \
@@ -190,7 +190,7 @@ def build_all_operations(client, customer_id):
 
     # Creates new ad group criterion operations and add them to the list of
     # mutate operations.
-    ad_group_criterion_operations = build_ad_group_criterion_operations(
+    ad_group_criterion_operations = _build_ad_group_criterion_operations(
         client, ad_group_operations)
     operations = operations + [
         build_mutate_operation(
@@ -199,7 +199,7 @@ def build_all_operations(client, customer_id):
 
     # Creates new ad group ad operations and adds them to the list of
     # mutate operations.
-    ad_group_ad_operations = build_ad_group_ad_operations(
+    ad_group_ad_operations = _build_ad_group_ad_operations(
         client, ad_group_operations)
     operations = operations + [
         build_mutate_operation(client, 'ad_group_ad_operation', operation) \
@@ -208,7 +208,7 @@ def build_all_operations(client, customer_id):
     return operations
 
 
-def build_campaign_budget_operation(client, customer_id):
+def _build_campaign_budget_operation(client, customer_id):
     """Builds a new campaign budget operation for the given customer ID.
 
     Args:
@@ -218,12 +218,12 @@ def build_campaign_budget_operation(client, customer_id):
     Returns: a CampaignBudgetOperation instance.
     """
     campaign_budget_service = client.get_service('CampaignBudgetService',
-                                              version='v3')
+                                                 version='v3')
     campaign_budget_operation = client.get_type('CampaignBudgetOperation',
                                                 version='v3')
     campaign_budget = campaign_budget_operation.create
     resource_name = campaign_budget_service.campaign_budget_path(
-        customer_id, get_next_temporary_id())
+        customer_id, _get_next_temporary_id())
     campaign_budget.resource_name = resource_name
     campaign_budget.name.value = f'Interplanetary Cruise Budget #{uuid4()}'
     campaign_budget.delivery_method = client.get_type(
@@ -233,7 +233,7 @@ def build_campaign_budget_operation(client, customer_id):
     return campaign_budget_operation
 
 
-def build_campaign_operations(client, customer_id,
+def _build_campaign_operations(client, customer_id,
                               campaign_budget_resource_name):
     """Builds new campaign operations for the specified customer ID.
 
@@ -246,12 +246,12 @@ def build_campaign_operations(client, customer_id,
     Returns: a list of CampaignOperation instances.
     """
     return [
-        build_campaign_operation(
+        _build_campaign_operation(
             client, customer_id, campaign_budget_resource_name) \
         for i in range(NUMBER_OF_CAMPAIGNS_TO_ADD)]
 
 
-def build_campaign_operation(client, customer_id,
+def _build_campaign_operation(client, customer_id,
                              campaign_budget_resource_name):
     """Builds new campaign operation for the specified customer ID.
 
@@ -267,7 +267,7 @@ def build_campaign_operation(client, customer_id,
     campaign_service = client.get_service('CampaignService', version='v3')
     # Creates a campaign.
     campaign = campaign_operation.create
-    campaign_id = get_next_temporary_id()
+    campaign_id = _get_next_temporary_id()
     # Creates a resource name using the temporary ID.
     campaign.resource_name = campaign_service.campaign_path(customer_id,
                                                             campaign_id)
@@ -285,7 +285,7 @@ def build_campaign_operation(client, customer_id,
     return campaign_operation
 
 
-def build_campaign_criterion_operations(client, campaign_operations):
+def _build_campaign_criterion_operations(client, campaign_operations):
     """Builds new campaign criterion operations for negative keyword criteria.
 
     Args:
@@ -295,11 +295,11 @@ def build_campaign_criterion_operations(client, campaign_operations):
     Returns: a list of CampaignCriterionOperation instances.
     """
     return [
-        build_campaign_criterion_operation(client, campaign_operation) \
+        _build_campaign_criterion_operation(client, campaign_operation) \
         for campaign_operation in campaign_operations]
 
 
-def build_campaign_criterion_operation(client, campaign_operation):
+def _build_campaign_criterion_operation(client, campaign_operation):
     """Builds a new campaign criterion operation for negative keyword criterion.
 
     Args:
@@ -322,7 +322,7 @@ def build_campaign_criterion_operation(client, campaign_operation):
     return campaign_criterion_operation
 
 
-def build_ad_group_operations(client, customer_id, campaign_operations):
+def _build_ad_group_operations(client, customer_id, campaign_operations):
     """Builds new ad group operations for the specified customer ID.
 
     Args:
@@ -333,18 +333,18 @@ def build_ad_group_operations(client, customer_id, campaign_operations):
     Return: a list of AdGroupOperation instances.
     """
     return [
-        build_ad_group_operation(client, customer_id, campaign_operation) \
+        _build_ad_group_operation(client, customer_id, campaign_operation) \
         for campaign_operation in campaign_operations \
         for i in range(NUMBER_OF_AD_GROUPS_TO_ADD)]
 
 
-def build_ad_group_operation(client, customer_id, campaign_operation):
+def _build_ad_group_operation(client, customer_id, campaign_operation):
     """Builds a new ad group operation for the specified customer ID.
 
     Args:
         client: an initialized GoogleAdsClient instance.
         customer_id: a str of a customer ID.
-        campaign_operations: a CampaignOperation instance.
+        campaign_operation: a CampaignOperation instance.
 
     Return: an AdGroupOperation instance.
     """
@@ -352,7 +352,7 @@ def build_ad_group_operation(client, customer_id, campaign_operation):
     ad_group_service = client.get_service('AdGroupService', version='v3')
     # Creates an ad group.
     ad_group = ad_group_operation.create
-    ad_group_id = get_next_temporary_id()
+    ad_group_id = _get_next_temporary_id()
     # Creates a resource name using the temporary ID.
     ad_group.resource_name = ad_group_service.ad_group_path(customer_id,
                                                             ad_group_id)
@@ -365,7 +365,7 @@ def build_ad_group_operation(client, customer_id, campaign_operation):
     return ad_group_operation
 
 
-def build_ad_group_criterion_operations(client, ad_group_operations):
+def _build_ad_group_criterion_operations(client, ad_group_operations):
     """Builds new ad group criterion operations for creating keywords.
 
     50% of keywords are created with some invalid characters to demonstrate
@@ -380,13 +380,13 @@ def build_ad_group_criterion_operations(client, ad_group_operations):
     return [
         # Create a keyword text by making 50% of keywords invalid to
         # demonstrate error handling.
-        build_ad_group_criterion_operation(
+        _build_ad_group_criterion_operation(
             client, ad_group_operation, i, i % 2 == 0) \
         for ad_group_operation in ad_group_operations \
         for i in range(NUMBER_OF_KEYWORDS_TO_ADD)]
 
 
-def build_ad_group_criterion_operation(client, ad_group_operation, number,
+def _build_ad_group_criterion_operation(client, ad_group_operation, number,
                                        is_valid=True):
     """Builds new ad group criterion operation for creating keywords.
 
@@ -395,7 +395,7 @@ def build_ad_group_criterion_operation(client, ad_group_operation, number,
 
     Args:
         client: an initialized GoogleAdsClient instance.
-        ad_group_operations: an AdGroupOperation instance.
+        ad_group_operation: an AdGroupOperation instance.
         number: an int of the number to assign to the name of the criterion.
         is_valid: a bool of whether the keyword text should be invalid.
 
@@ -421,7 +421,7 @@ def build_ad_group_criterion_operation(client, ad_group_operation, number,
     return ad_group_criterion_operation
 
 
-def build_ad_group_ad_operations(client, ad_group_operations):
+def _build_ad_group_ad_operations(client, ad_group_operations):
     """Builds new ad group ad operations.
 
     Args:
@@ -431,11 +431,11 @@ def build_ad_group_ad_operations(client, ad_group_operations):
     Returns: a list of AdGroupAdOperation instances.
     """
     return [
-        build_ad_group_ad_operation(client, ad_group_operation) \
+        _build_ad_group_ad_operation(client, ad_group_operation) \
         for ad_group_operation in ad_group_operations]
 
 
-def build_ad_group_ad_operation(client, ad_group_operation):
+def _build_ad_group_ad_operation(client, ad_group_operation):
     """Builds a new ad group ad operation.
 
     Args:
@@ -461,7 +461,7 @@ def build_ad_group_ad_operation(client, ad_group_operation):
     return ad_group_ad_operation
 
 
-def run_mutate_job(mutate_job_service, resource_name):
+def _run_mutate_job(mutate_job_service, resource_name):
     """Runs the mutate job for executing all uploaded mutate job operations.
 
     Args:
@@ -471,15 +471,15 @@ def run_mutate_job(mutate_job_service, resource_name):
     Returns: a google.api_core.operation.Operation instance.
     """
     try:
-      response = mutate_job_service.run_mutate_job(resource_name)
-      print(f'Mutate job with resource name "{resource_name}" has been '
-            ' executed.')
-      return response
+        response = mutate_job_service.run_mutate_job(resource_name)
+        print(f'Mutate job with resource name "{resource_name}" has been '
+              'executed.')
+        return response
     except GoogleAdsException as exception:
-      handle_google_ads_exception(exception)
+        _handle_google_ads_exception(exception)
 
 
-def poll_mutate_job(operations_response):
+def _poll_mutate_job(operations_response):
     """Polls the server until the mutate job execution finishes.
 
     Sets the initial poll delay time and the total time to wait before time-out.
@@ -495,7 +495,7 @@ def poll_mutate_job(operations_response):
     operations_response.result(timeout=MAX_TOTAL_POLL_INTERVAL_SECONDS)
 
 
-def fetch_and_print_results(mutate_job_service, resource_name):
+def _fetch_and_print_results(mutate_job_service, resource_name):
     """Prints all the results from running the mutate job.
 
     Args:
@@ -515,7 +515,7 @@ def fetch_and_print_results(mutate_job_service, resource_name):
         result = mutate_job_result.mutate_operation_response
         result = result if result.ByteSize() else 'N/A'
         print(f'Mutate job #{mutate_job_result.operation_index} '
-              f'has a status {status} and response type {result}')
+              f'has a status "{status}" and response type "{result}"')
 
 
 if __name__ == '__main__':
@@ -524,8 +524,9 @@ if __name__ == '__main__':
     google_ads_client = GoogleAdsClient.load_from_storage()
 
     parser = argparse.ArgumentParser(
-        description=('Adds a bid modifier to the specified campaign ID, for '
-                     'the given customer ID.'))
+        description=('Adds complete campaigns, including campaign budgets, '
+                     'campaigns, ad groups and keywords for the given '
+                     'customer ID using MutateJobService.'))
 
     # The following argument(s) should be provided to run the example.
     parser.add_argument('-c', '--customer_id', type=str, required=True,

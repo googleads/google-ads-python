@@ -68,7 +68,7 @@ def _handle_google_ads_exception(exception):
     sys.exit(1)
 
 
-def build_mutate_operation(client, operation_type, operation):
+def _build_mutate_operation(client, operation_type, operation):
     """Builds a mutate operation with the given operation type and operation.
 
     Args:
@@ -130,7 +130,7 @@ def _create_mutate_job(mutate_job_service, customer_id):
 
 
 def _add_all_mutate_job_operations(mutate_job_service, operations,
-                                  resource_name):
+                                   resource_name):
     """Adds all mutate job operations to the mutate job.
 
     As this is the first time for this mutate job, we pass null as a sequence
@@ -171,7 +171,7 @@ def _build_all_operations(client, customer_id):
     # Creates a new campaign budget operation and adds it to the list of
     # mutate operations.
     campaign_budget_op = _build_campaign_budget_operation(client, customer_id)
-    operations.append(build_mutate_operation(
+    operations.append(_build_mutate_operation(
         client, 'campaign_budget_operation', campaign_budget_op))
 
     # Creates new campaign operations and adds them to the list of
@@ -179,7 +179,7 @@ def _build_all_operations(client, customer_id):
     campaign_operations = _build_campaign_operations(
         client, customer_id, campaign_budget_op.create.resource_name)
     operations = operations + [
-        build_mutate_operation(client, 'campaign_operation', operation) \
+        _build_mutate_operation(client, 'campaign_operation', operation) \
         for operation in campaign_operations]
 
     # Creates new campaign criterion operations and adds them to the list of
@@ -187,7 +187,7 @@ def _build_all_operations(client, customer_id):
     campaign_criterion_operations = _build_campaign_criterion_operations(
         client, campaign_operations)
     operations = operations + [
-        build_mutate_operation(
+        _build_mutate_operation(
             client, 'campaign_criterion_operation', operation) \
         for operation in campaign_criterion_operations]
 
@@ -196,7 +196,7 @@ def _build_all_operations(client, customer_id):
     ad_group_operations = _build_ad_group_operations(
         client, customer_id, campaign_operations)
     operations = operations + [
-        build_mutate_operation(client, 'ad_group_operation', operation) \
+        _build_mutate_operation(client, 'ad_group_operation', operation) \
         for operation in ad_group_operations]
 
     # Creates new ad group criterion operations and add them to the list of
@@ -204,7 +204,7 @@ def _build_all_operations(client, customer_id):
     ad_group_criterion_operations = _build_ad_group_criterion_operations(
         client, ad_group_operations)
     operations = operations + [
-        build_mutate_operation(
+        _build_mutate_operation(
             client, 'ad_group_criterion_operation', operation) \
         for operation in ad_group_criterion_operations]
 
@@ -213,7 +213,7 @@ def _build_all_operations(client, customer_id):
     ad_group_ad_operations = _build_ad_group_ad_operations(
         client, ad_group_operations)
     operations = operations + [
-        build_mutate_operation(client, 'ad_group_ad_operation', operation) \
+        _build_mutate_operation(client, 'ad_group_ad_operation', operation) \
         for operation in ad_group_ad_operations]
 
     return operations
@@ -245,7 +245,7 @@ def _build_campaign_budget_operation(client, customer_id):
 
 
 def _build_campaign_operations(client, customer_id,
-                              campaign_budget_resource_name):
+                               campaign_budget_resource_name):
     """Builds new campaign operations for the specified customer ID.
 
     Args:
@@ -263,7 +263,7 @@ def _build_campaign_operations(client, customer_id,
 
 
 def _build_campaign_operation(client, customer_id,
-                             campaign_budget_resource_name):
+                              campaign_budget_resource_name):
     """Builds new campaign operation for the specified customer ID.
 
     Args:
@@ -398,7 +398,7 @@ def _build_ad_group_criterion_operations(client, ad_group_operations):
 
 
 def _build_ad_group_criterion_operation(client, ad_group_operation, number,
-                                       is_valid=True):
+                                        is_valid=True):
     """Builds new ad group criterion operation for creating keywords.
 
     Takes an optional param that dictates whether the keyword text should
@@ -451,7 +451,7 @@ def _build_ad_group_ad_operation(client, ad_group_operation):
 
     Args:
         client: an initialized GoogleAdsClient instance.
-        ad_group_operations: an AdGroupOperation instance.
+        ad_group_operation: an AdGroupOperation instance.
 
     Returns: an AdGroupAdOperation instance.
     """

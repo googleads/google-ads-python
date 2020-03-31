@@ -19,6 +19,7 @@ Complete campaigns include campaign budgets, campaigns, ad groups and keywords.
 
 
 import argparse
+import asyncio
 import sys
 from uuid import uuid4
 
@@ -28,7 +29,6 @@ from google.ads.google_ads.errors import GoogleAdsException
 NUMBER_OF_CAMPAIGNS_TO_ADD = 2
 NUMBER_OF_AD_GROUPS_TO_ADD = 2
 NUMBER_OF_KEYWORDS_TO_ADD = 4
-MAX_TOTAL_POLL_INTERVAL_SECONDS = 60
 
 PAGE_SIZE = 1000
 
@@ -84,7 +84,7 @@ def build_mutate_operation(client, operation_type, operation):
     return mutate_operation
 
 
-def main(client, customer_id):
+async def main(client, customer_id):
     """Main function that runs the example.
 
     Args:
@@ -96,7 +96,18 @@ def main(client, customer_id):
     operations = _build_all_operations(client, customer_id)
     _add_all_mutate_job_operations(mutate_job_service, operations, resource_name)
     operations_response = _run_mutate_job(mutate_job_service, resource_name)
-    _poll_mutate_job(operations_response)
+
+    # Create an asyncio.Event instance to control execution during the
+    # asyncronous steps in _poll_mutate_job. Note that this is not important
+    # for polling asyncronously, it simply helps with execution control so we
+    # can run _fetch_and_print_results after the asyncronous operations have
+    # completed.
+    _done_event = asyncio.Event()
+    _poll_mutate_job(operations_response, _done_event)
+    # Execution will stop here and wait for the asyncronous steps in
+    # _poll_mutate_job to complete before proceeding.
+    await _done_event.wait()
+
     _fetch_and_print_results(mutate_job_service, resource_name)
 
 
@@ -479,20 +490,30 @@ def _run_mutate_job(mutate_job_service, resource_name):
         _handle_google_ads_exception(exception)
 
 
-def _poll_mutate_job(operations_response):
+def _poll_mutate_job(operations_response, event):
     """Polls the server until the mutate job execution finishes.
 
     Sets the initial poll delay time and the total time to wait before time-out.
 
     Args:
         operations_response: a google.api_core.operation.Operation instance.
+        event: an instance of asyncio.Event to invoke once the operations have
+            completed, alerting the awaiting calling code that it can proceed.
     """
+    loop = asyncio.get_event_loop()
+
+    def _done_callback(future):
+        # The operations_response object will call callbacks from a daemon
+        # thread so we must use a threadsafe method of setting the event here
+        # otherwise it will not trigger the awaiting code.
+        loop.call_soon_threadsafe(event.set)
+
     # operations_response represents a Long-Running Operation or LRO. The class
     # provides an interface for polling the API to check when the operation is
-    # complete. Below we use the synchronous interface, but there's also an
-    # asynchronous interface that uses the Operation.add_done_callback method.
+    # complete. Below we use the asynchronous interface, but there's also an
+    # synchronous interface that uses the Operation.result method.
     # See: https://googleapis.dev/python/google-api-core/latest/operation.html
-    operations_response.result(timeout=MAX_TOTAL_POLL_INTERVAL_SECONDS)
+    operations_response.add_done_callback(_done_callback)
 
 
 def _fetch_and_print_results(mutate_job_service, resource_name):
@@ -534,4 +555,4 @@ if __name__ == '__main__':
 
     args = parser.parse_args()
 
-    main(google_ads_client, args.customer_id)
+    asyncio.run(main(google_ads_client, args.customer_id))

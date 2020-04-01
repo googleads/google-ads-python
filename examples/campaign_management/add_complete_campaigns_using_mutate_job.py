@@ -32,24 +32,20 @@ NUMBER_OF_KEYWORDS_TO_ADD = 4
 
 PAGE_SIZE = 1000
 
+_temporary_id = 0
+
 
 def _get_next_temporary_id():
     """Returns the next temporary ID to use in mutate job operations.
 
-    If temporary ID has not been defined, i.e. if this function has not been
-    called before, we set the initial value as -1 and return it. Subsequent
-    calls will decrement the value by 1 before returning.
+    Decrements the temporary ID by one before returning it. The first value
+    returned for the ID is -1.
 
     Returns: an int of the next temporary ID.
     """
-    global temporary_id
-
-    try:
-        temporary_id -= 1
-        return temporary_id
-    except NameError:
-        temporary_id = -1
-        return temporary_id
+    global _temporary_id
+    _temporary_id -= 1
+    return _temporary_id
 
 
 def _handle_google_ads_exception(exception):
@@ -343,10 +339,15 @@ def _build_ad_group_operations(client, customer_id, campaign_operations):
 
     Return: a list of AdGroupOperation instances.
     """
-    return [
-        _build_ad_group_operation(client, customer_id, campaign_operation) \
-        for campaign_operation in campaign_operations \
-        for i in range(NUMBER_OF_AD_GROUPS_TO_ADD)]
+    operations = []
+
+    for campaign_operation in campaign_operations:
+        for i in range(NUMBER_OF_AD_GROUPS_TO_ADD):
+            operations.append(
+                _build_ad_group_operation(
+                    client, customer_id, campaign_operation))
+
+    return operations
 
 
 def _build_ad_group_operation(client, customer_id, campaign_operation):
@@ -388,13 +389,17 @@ def _build_ad_group_criterion_operations(client, ad_group_operations):
 
     Returns a list of AdGroupCriterionOperation instances.
     """
-    return [
-        # Create a keyword text by making 50% of keywords invalid to
-        # demonstrate error handling.
-        _build_ad_group_criterion_operation(
-            client, ad_group_operation, i, i % 2 == 0) \
-        for ad_group_operation in ad_group_operations \
-        for i in range(NUMBER_OF_KEYWORDS_TO_ADD)]
+    operations = []
+
+    for ad_group_operation in ad_group_operations:
+        for i in range(NUMBER_OF_KEYWORDS_TO_ADD):
+            operations.append(
+                _build_ad_group_criterion_operation(
+                    # Create a keyword text by making 50% of keywords invalid
+                    # to demonstrate error handling.
+                    client, ad_group_operation, i, i % 2 == 0))
+
+    return operations
 
 
 def _build_ad_group_criterion_operation(client, ad_group_operation, number,
@@ -510,7 +515,7 @@ def _poll_mutate_job(operations_response, event):
 
     # operations_response represents a Long-Running Operation or LRO. The class
     # provides an interface for polling the API to check when the operation is
-    # complete. Below we use the asynchronous interface, but there's also an
+    # complete. Below we use the asynchronous interface, but there's also a
     # synchronous interface that uses the Operation.result method.
     # See: https://googleapis.dev/python/google-api-core/latest/operation.html
     operations_response.add_done_callback(_done_callback)

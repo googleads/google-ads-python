@@ -86,7 +86,7 @@ def main(client, customer_id, location_ids, language_id, keywords, page_url):
         for idea in keyword_ideas.results:
             competition_value = keyword_competition_level_enum.Name(
                 idea.keyword_idea_metrics.competition)
-            print('Keyword idea text "{}" has %d average monthly searches and '
+            print('Keyword idea text "{}" has "{}" average monthly searches and '
                   '"{}" competition.\n'.format(
                       idea.text.value,
                       idea.keyword_idea_metrics.avg_monthly_searches.value,

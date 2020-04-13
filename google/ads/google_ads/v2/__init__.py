@@ -264,11 +264,11 @@ def __getattr__(name):  # Requires Python >= 3.7
         globals()[name] = klass
         return klass
     elif name == 'enums':
-        module = importlib.import_module('google.ads.google_ads.v3.services.enums')
+        module = importlib.import_module('google.ads.google_ads.v2.services.enums')
         globals()[name] = module
         return module
     elif name == 'types':
-        module = importlib.import_module('google.ads.google_ads.v3.types')
+        module = importlib.import_module('google.ads.google_ads.v2.types')
         globals()[name] = module
         return module
     elif name in _lazy_name_to_package_map:

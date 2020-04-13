@@ -117,7 +117,12 @@ class LoggingInterceptor(Interceptor, UnaryUnaryClientInterceptor,
         Args:
             request: An instance of a request proto message.
         """
-        return getattr(request, 'customer_id', None)
+        if hasattr(request, 'customer_id'):
+            return getattr(request, 'customer_id')
+        elif hasattr(request, 'resource_name'):
+            return getattr(request, 'resource_name').split('/')[-1]
+
+        return 'N/A'
 
     def _parse_exception_to_str(self, exception):
         """Parses response exception object to str for logging.

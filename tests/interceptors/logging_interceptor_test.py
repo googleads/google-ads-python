@@ -536,7 +536,7 @@ class LoggingInterceptorTest(TestCase):
         """Retrieves a customer_id from a request object or 'N/A' otherwise."""
         mock_request = {}
         interceptor = self._create_test_interceptor()
-        self.assertEqual(interceptor._get_customer_id(mock_request), 'N/A')
+        self.assertEqual(interceptor._get_customer_id(mock_request), None)
 
     def test_get_customer_id(self):
         """Retrieves a customer_id from a request object."""

@@ -122,8 +122,6 @@ class LoggingInterceptor(Interceptor, UnaryUnaryClientInterceptor,
         elif hasattr(request, 'resource_name'):
             return getattr(request, 'resource_name').split('/')[-1]
 
-        return 'N/A'
-
     def _parse_exception_to_str(self, exception):
         """Parses response exception object to str for logging.
 

@@ -1,3 +1,6 @@
+* 5.0.4
+- Enable logging interceptor to retrieve customer ID from resource_name.
+
 * 5.0.3
 - Fix bug in generated init files preventing import *.
 

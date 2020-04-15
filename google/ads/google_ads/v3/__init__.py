@@ -25,7 +25,6 @@ if sys.version_info < (3, 7):
 
 
 _lazy_name_to_package_map = dict(
-    types='google.ads.google_ads.v3',
     account_budget_proposal_service_client='google.ads.google_ads.v3.services',
     account_budget_service_client='google.ads.google_ads.v3.services',
     ad_group_ad_asset_view_service_client='google.ads.google_ads.v3.services',
@@ -133,7 +132,6 @@ _lazy_name_to_package_map = dict(
     user_list_service_client='google.ads.google_ads.v3.services',
     user_location_view_service_client='google.ads.google_ads.v3.services',
     video_service_client='google.ads.google_ads.v3.services',
-    enums='google.ads.google_ads.v3.services',
     account_budget_proposal_service_grpc_transport='google.ads.google_ads.v3.services.transports',
     account_budget_service_grpc_transport='google.ads.google_ads.v3.services.transports',
     ad_group_ad_asset_view_service_grpc_transport='google.ads.google_ads.v3.services.transports',
@@ -267,6 +265,14 @@ def __getattr__(name):  # Requires Python >= 3.7
                      {'__doc__': sub_mod_class.__doc__, 'enums': enums})
         globals()[name] = klass
         return klass
+    elif name == 'enums':
+        module = importlib.import_module('google.ads.google_ads.v3.services.enums')
+        globals()[name] = module
+        return module
+    elif name == 'types':
+        module = importlib.import_module('google.ads.google_ads.v3.types')
+        globals()[name] = module
+        return module
     elif name in _lazy_name_to_package_map:
         module = importlib.import_module(f'{_lazy_name_to_package_map[name]}.{name}')
         globals()[name] = module

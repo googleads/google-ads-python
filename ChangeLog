@@ -1,3 +1,6 @@
+* 5.0.3
+- Fix bug in generated init files preventing import *.
+
 * 5.0.2
 - Remove response error caching in streaming interceptors.
 

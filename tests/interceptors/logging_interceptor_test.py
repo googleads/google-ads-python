@@ -533,7 +533,7 @@ class LoggingInterceptorTest(TestCase):
             self.assertEqual(result, self._MOCK_TRANSPORT_ERROR_MESSAGE)
 
     def test_get_customer_id_not_present(self):
-        """Retrieves a customer_id from a request object or 'N/A' otherwise."""
+        """Returns None if request has no customer_id or resource_name."""
         mock_request = {}
         interceptor = self._create_test_interceptor()
         self.assertEqual(interceptor._get_customer_id(mock_request), None)
@@ -546,10 +546,18 @@ class LoggingInterceptorTest(TestCase):
                          self._MOCK_CUSTOMER_ID)
 
     def test_get_customer_id_from_resource_name(self):
-        """Retrieves a customer_id from a request object via resource name."""
-        resource_name = f'customer/{self._MOCK_CUSTOMER_ID}'
+        """Retrieves a customer_id from a request object via resource_name."""
+        resource_name = f'customers/{self._MOCK_CUSTOMER_ID}'
         mock_request = customer_service_pb2.GetCustomerRequest(
             resource_name=resource_name)
         interceptor = self._create_test_interceptor()
         self.assertEqual(interceptor._get_customer_id(mock_request),
                          self._MOCK_CUSTOMER_ID)
+
+    def test_get_customer_id_from_invalid_resource_name(self):
+        """Returns None for a resource_name not starting with 'customers'."""
+        resource_name = f'languageConstants/{self._MOCK_CUSTOMER_ID}'
+        mock_request = customer_service_pb2.GetCustomerRequest(
+            resource_name=resource_name)
+        interceptor = self._create_test_interceptor()
+        self.assertEqual(interceptor._get_customer_id(mock_request), None)

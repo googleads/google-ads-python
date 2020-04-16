@@ -17,6 +17,7 @@
 """Wrappers for protocol buffer enum types."""
 
 import enum
+from textwrap import dedent
 
 
 class _CreateEnumTypeUponFirstAccess(object):
@@ -63,7 +64,7 @@ class Thing(enum.IntEnum):
         enum_type_name = names[0]
         if name == enum_type_name:
             try:
-                class_def_src = getattr(type(self), enum_type_name)
+                class_def_src = dedent(getattr(type(self), enum_type_name))
             except AttributeError:
                 # The only way this should happen is if another thread was also
                 # executing this method at the same time and finished defining
@@ -85,7 +86,7 @@ class Thing(enum.IntEnum):
             # "first" call may wind up returning an "obsolete" type...  Not
             # great, but as they're IntEnum classes, nobody should be using
             # the class type in type checks.  Add a lock if this bothers you.
-            six.exec_(class_def_src, {'enum': enum},
+            exec(class_def_src, {'enum': enum},
                       object.__getattribute__(self, '__dict__'))
             # We've done our job, get out of the way forever.
             type(self).__getattribute__ = object.__getattribute__
@@ -110,9 +111,10 @@ class Thing(enum.IntEnum):
             raise AttributeError('%r has no attribute %r' %
                                  (type(self).__name__, name))
 
+
 class AccessInvitationErrorEnum(_CreateEnumTypeUponFirstAccess):
-    AccessInvitationErrorEnum = '''\
-class AccessInvitationError(enum.IntEnum):
+    AccessInvitationError = '''\
+    class AccessInvitationError(enum.IntEnum):
         """
         Enum describing possible AccessInvitation errors.
 
@@ -132,7 +134,7 @@ AccessInvitationErrorEnumEnum = AccessInvitationErrorEnum() # For __getattribute
 
 class AccessReasonEnum(_CreateEnumTypeUponFirstAccess):
     AccessReason = '''\
-class AccessReason(enum.IntEnum):
+    class AccessReason(enum.IntEnum):
         """
         Enum describing possible access reasons.
 
@@ -158,7 +160,7 @@ AccessReasonEnum = AccessReasonEnum() # For __getattribute__
 
 class AccessRoleEnum(_CreateEnumTypeUponFirstAccess):
     AccessRole = '''\
-class AccessRole(enum.IntEnum):
+    class AccessRole(enum.IntEnum):
         """
         Possible access role of a user.
 
@@ -180,7 +182,7 @@ AccessRoleEnum = AccessRoleEnum() # For __getattribute__
 
 class AccountBudgetProposalErrorEnum(_CreateEnumTypeUponFirstAccess):
     AccountBudgetProposalError = '''\
-class AccountBudgetProposalError(enum.IntEnum):
+    class AccountBudgetProposalError(enum.IntEnum):
         """
         Enum describing possible account budget proposal errors.
 
@@ -247,7 +249,7 @@ AccountBudgetProposalErrorEnum = AccountBudgetProposalErrorEnum() # For __getatt
 
 class AccountBudgetProposalStatusEnum(_CreateEnumTypeUponFirstAccess):
     AccountBudgetProposalStatus = '''\
-class AccountBudgetProposalStatus(enum.IntEnum):
+    class AccountBudgetProposalStatus(enum.IntEnum):
         """
         The possible statuses of an AccountBudgetProposal.
 
@@ -277,7 +279,7 @@ AccountBudgetProposalStatusEnum = AccountBudgetProposalStatusEnum() # For __geta
 
 class AccountBudgetProposalTypeEnum(_CreateEnumTypeUponFirstAccess):
     AccountBudgetProposalType = '''\
-class AccountBudgetProposalType(enum.IntEnum):
+    class AccountBudgetProposalType(enum.IntEnum):
         """
         The possible types of an AccountBudgetProposal.
 
@@ -301,7 +303,7 @@ AccountBudgetProposalTypeEnum = AccountBudgetProposalTypeEnum() # For __getattri
 
 class AccountBudgetStatusEnum(_CreateEnumTypeUponFirstAccess):
     AccountBudgetStatus = '''\
-class AccountBudgetStatus(enum.IntEnum):
+    class AccountBudgetStatus(enum.IntEnum):
         """
         The possible statuses of an AccountBudget.
 
@@ -323,7 +325,7 @@ AccountBudgetStatusEnum = AccountBudgetStatusEnum() # For __getattribute__
 
 class AdCustomizerErrorEnum(_CreateEnumTypeUponFirstAccess):
     AdCustomizerError = '''\
-class AdCustomizerError(enum.IntEnum):
+    class AdCustomizerError(enum.IntEnum):
         """
         Enum describing possible ad customizer errors.
 
@@ -349,7 +351,7 @@ AdCustomizerErrorEnum = AdCustomizerErrorEnum() # For __getattribute__
 
 class AdCustomizerFeedErrorEnum(_CreateEnumTypeUponFirstAccess):
     AdCustomizerFeedError = '''\
-class AdCustomizerFeedError(enum.IntEnum):
+    class AdCustomizerFeedError(enum.IntEnum):
         """
         Enum describing possible ad customizer feed errors.
 
@@ -365,7 +367,7 @@ AdCustomizerFeedErrorEnum = AdCustomizerFeedErrorEnum() # For __getattribute__
 
 class AdCustomizerPlaceholderFieldEnum(_CreateEnumTypeUponFirstAccess):
     AdCustomizerPlaceholderField = '''\
-class AdCustomizerPlaceholderField(enum.IntEnum):
+    class AdCustomizerPlaceholderField(enum.IntEnum):
         """
         Possible values for Ad Customizers placeholder fields.
 
@@ -389,7 +391,7 @@ AdCustomizerPlaceholderFieldEnum = AdCustomizerPlaceholderFieldEnum() # For __ge
 
 class AdErrorEnum(_CreateEnumTypeUponFirstAccess):
     AdError = '''\
-class AdError(enum.IntEnum):
+    class AdError(enum.IntEnum):
         """
         Enum describing possible ad errors.
 
@@ -687,7 +689,7 @@ AdErrorEnum = AdErrorEnum() # For __getattribute__
 
 class AdGroupAdErrorEnum(_CreateEnumTypeUponFirstAccess):
     AdGroupAdError = '''\
-class AdGroupAdError(enum.IntEnum):
+    class AdGroupAdError(enum.IntEnum):
         """
         Enum describing possible ad group ad errors.
 
@@ -721,7 +723,7 @@ AdGroupAdErrorEnum = AdGroupAdErrorEnum() # For __getattribute__
 
 class AdGroupAdRotationModeEnum(_CreateEnumTypeUponFirstAccess):
     AdGroupAdRotationMode = '''\
-class AdGroupAdRotationMode(enum.IntEnum):
+    class AdGroupAdRotationMode(enum.IntEnum):
         """
         The possible ad rotation modes of an ad group.
 
@@ -743,7 +745,7 @@ AdGroupAdRotationModeEnum = AdGroupAdRotationModeEnum() # For __getattribute__
 
 class AdGroupAdStatusEnum(_CreateEnumTypeUponFirstAccess):
     AdGroupAdStatus = '''\
-class AdGroupAdStatus(enum.IntEnum):
+    class AdGroupAdStatus(enum.IntEnum):
         """
         The possible statuses of an AdGroupAd.
 
@@ -767,7 +769,7 @@ AdGroupAdStatusEnum = AdGroupAdStatusEnum() # For __getattribute__
 
 class AdGroupBidModifierErrorEnum(_CreateEnumTypeUponFirstAccess):
     AdGroupBidModifierError = '''\
-class AdGroupBidModifierError(enum.IntEnum):
+    class AdGroupBidModifierError(enum.IntEnum):
         """
         Enum describing possible ad group bid modifier errors.
 
@@ -788,7 +790,7 @@ AdGroupBidModifierErrorEnum = AdGroupBidModifierErrorEnum() # For __getattribute
 
 class AdGroupCriterionApprovalStatusEnum(_CreateEnumTypeUponFirstAccess):
     AdGroupCriterionApprovalStatus = '''\
-class AdGroupCriterionApprovalStatus(enum.IntEnum):
+    class AdGroupCriterionApprovalStatus(enum.IntEnum):
         """
         Enumerates AdGroupCriterion approval statuses.
 
@@ -812,7 +814,7 @@ AdGroupCriterionApprovalStatusEnum = AdGroupCriterionApprovalStatusEnum() # For 
 
 class AdGroupCriterionErrorEnum(_CreateEnumTypeUponFirstAccess):
     AdGroupCriterionError = '''\
-class AdGroupCriterionError(enum.IntEnum):
+    class AdGroupCriterionError(enum.IntEnum):
         """
         Enum describing possible ad group criterion errors.
 
@@ -912,7 +914,7 @@ AdGroupCriterionErrorEnum = AdGroupCriterionErrorEnum() # For __getattribute__
 
 class AdGroupCriterionStatusEnum(_CreateEnumTypeUponFirstAccess):
     AdGroupCriterionStatus = '''\
-class AdGroupCriterionStatus(enum.IntEnum):
+    class AdGroupCriterionStatus(enum.IntEnum):
         """
         The possible statuses of an AdGroupCriterion.
 
@@ -936,7 +938,7 @@ AdGroupCriterionStatusEnum = AdGroupCriterionStatusEnum() # For __getattribute__
 
 class AdGroupErrorEnum(_CreateEnumTypeUponFirstAccess):
     AdGroupError = '''\
-class AdGroupError(enum.IntEnum):
+    class AdGroupError(enum.IntEnum):
         """
         Enum describing possible ad group errors.
 
@@ -979,7 +981,7 @@ AdGroupErrorEnum = AdGroupErrorEnum() # For __getattribute__
 
 class AdGroupFeedErrorEnum(_CreateEnumTypeUponFirstAccess):
     AdGroupFeedError = '''\
-class AdGroupFeedError(enum.IntEnum):
+    class AdGroupFeedError(enum.IntEnum):
         """
         Enum describing possible ad group feed errors.
 
@@ -1011,7 +1013,7 @@ AdGroupFeedErrorEnum = AdGroupFeedErrorEnum() # For __getattribute__
 
 class AdGroupStatusEnum(_CreateEnumTypeUponFirstAccess):
     AdGroupStatus = '''\
-class AdGroupStatus(enum.IntEnum):
+    class AdGroupStatus(enum.IntEnum):
         """
         The possible statuses of an ad group.
 
@@ -1035,7 +1037,7 @@ AdGroupStatusEnum = AdGroupStatusEnum() # For __getattribute__
 
 class AdGroupTypeEnum(_CreateEnumTypeUponFirstAccess):
     AdGroupType = '''\
-class AdGroupType(enum.IntEnum):
+    class AdGroupType(enum.IntEnum):
         """
         Enum listing the possible types of an ad group.
 
@@ -1080,7 +1082,7 @@ AdGroupTypeEnum = AdGroupTypeEnum() # For __getattribute__
 
 class AdNetworkTypeEnum(_CreateEnumTypeUponFirstAccess):
     AdNetworkType = '''\
-class AdNetworkType(enum.IntEnum):
+    class AdNetworkType(enum.IntEnum):
         """
         Enumerates Google Ads network types.
 
@@ -1108,7 +1110,7 @@ AdNetworkTypeEnum = AdNetworkTypeEnum() # For __getattribute__
 
 class AdParameterErrorEnum(_CreateEnumTypeUponFirstAccess):
     AdParameterError = '''\
-class AdParameterError(enum.IntEnum):
+    class AdParameterError(enum.IntEnum):
         """
         Enum describing possible ad parameter errors.
 
@@ -1128,7 +1130,7 @@ AdParameterErrorEnum = AdParameterErrorEnum() # For __getattribute__
 
 class AdServingOptimizationStatusEnum(_CreateEnumTypeUponFirstAccess):
     AdServingOptimizationStatus = '''\
-class AdServingOptimizationStatus(enum.IntEnum):
+    class AdServingOptimizationStatus(enum.IntEnum):
         """
         Enum describing possible serving statuses.
 
@@ -1159,7 +1161,7 @@ AdServingOptimizationStatusEnum = AdServingOptimizationStatusEnum() # For __geta
 
 class AdSharingErrorEnum(_CreateEnumTypeUponFirstAccess):
     AdSharingError = '''\
-class AdSharingError(enum.IntEnum):
+    class AdSharingError(enum.IntEnum):
         """
         Enum describing possible ad sharing errors.
 
@@ -1182,7 +1184,7 @@ AdSharingErrorEnum = AdSharingErrorEnum() # For __getattribute__
 
 class AdStrengthEnum(_CreateEnumTypeUponFirstAccess):
     AdStrength = '''\
-class AdStrength(enum.IntEnum):
+    class AdStrength(enum.IntEnum):
         """
         Enum listing the possible ad strengths.
 
@@ -1210,7 +1212,7 @@ AdStrengthEnum = AdStrengthEnum() # For __getattribute__
 
 class AdTypeEnum(_CreateEnumTypeUponFirstAccess):
     AdType = '''\
-class AdType(enum.IntEnum):
+    class AdType(enum.IntEnum):
         """
         The possible types of an ad.
 
@@ -1269,7 +1271,7 @@ AdTypeEnum = AdTypeEnum() # For __getattribute__
 
 class AdvertisingChannelSubTypeEnum(_CreateEnumTypeUponFirstAccess):
     AdvertisingChannelSubType = '''\
-class AdvertisingChannelSubType(enum.IntEnum):
+    class AdvertisingChannelSubType(enum.IntEnum):
         """
         Enum describing the different channel subtypes.
 
@@ -1317,7 +1319,7 @@ AdvertisingChannelSubTypeEnum = AdvertisingChannelSubTypeEnum() # For __getattri
 
 class AdvertisingChannelTypeEnum(_CreateEnumTypeUponFirstAccess):
     AdvertisingChannelType = '''\
-class AdvertisingChannelType(enum.IntEnum):
+    class AdvertisingChannelType(enum.IntEnum):
         """
         Enum describing the various advertising channel types.
 
@@ -1349,7 +1351,7 @@ AdvertisingChannelTypeEnum = AdvertisingChannelTypeEnum() # For __getattribute__
 
 class AdxErrorEnum(_CreateEnumTypeUponFirstAccess):
     AdxError = '''\
-class AdxError(enum.IntEnum):
+    class AdxError(enum.IntEnum):
         """
         Enum describing possible adx errors.
 
@@ -1367,7 +1369,7 @@ AdxErrorEnum = AdxErrorEnum() # For __getattribute__
 
 class AffiliateLocationFeedRelationshipTypeEnum(_CreateEnumTypeUponFirstAccess):
     AffiliateLocationFeedRelationshipType = '''\
-class AffiliateLocationFeedRelationshipType(enum.IntEnum):
+    class AffiliateLocationFeedRelationshipType(enum.IntEnum):
         """
         Possible values for a relationship type for an affiliate location feed.
 
@@ -1385,7 +1387,7 @@ AffiliateLocationFeedRelationshipTypeEnum = AffiliateLocationFeedRelationshipTyp
 
 class AffiliateLocationPlaceholderFieldEnum(_CreateEnumTypeUponFirstAccess):
     AffiliateLocationPlaceholderField = '''\
-class AffiliateLocationPlaceholderField(enum.IntEnum):
+    class AffiliateLocationPlaceholderField(enum.IntEnum):
         """
         Possible values for Affiliate Location placeholder fields.
 
@@ -1423,7 +1425,7 @@ AffiliateLocationPlaceholderFieldEnum = AffiliateLocationPlaceholderFieldEnum() 
 
 class AgeRangeTypeEnum(_CreateEnumTypeUponFirstAccess):
     AgeRangeType = '''\
-class AgeRangeType(enum.IntEnum):
+    class AgeRangeType(enum.IntEnum):
         """
         The type of demographic age ranges (e.g. between 18 and 24 years old).
 
@@ -1453,7 +1455,7 @@ AgeRangeTypeEnum = AgeRangeTypeEnum() # For __getattribute__
 
 class AppCampaignAppStoreEnum(_CreateEnumTypeUponFirstAccess):
     AppCampaignAppStore = '''\
-class AppCampaignAppStore(enum.IntEnum):
+    class AppCampaignAppStore(enum.IntEnum):
         """
         Enum describing app campaign app store.
 
@@ -1473,7 +1475,7 @@ AppCampaignAppStoreEnum = AppCampaignAppStoreEnum() # For __getattribute__
 
 class AppCampaignBiddingStrategyGoalTypeEnum(_CreateEnumTypeUponFirstAccess):
     AppCampaignBiddingStrategyGoalType = '''\
-class AppCampaignBiddingStrategyGoalType(enum.IntEnum):
+    class AppCampaignBiddingStrategyGoalType(enum.IntEnum):
         """
         Goal type of App campaign BiddingStrategy.
 
@@ -1504,7 +1506,7 @@ AppCampaignBiddingStrategyGoalTypeEnum = AppCampaignBiddingStrategyGoalTypeEnum(
 
 class AppPaymentModelTypeEnum(_CreateEnumTypeUponFirstAccess):
     AppPaymentModelType = '''\
-class AppPaymentModelType(enum.IntEnum):
+    class AppPaymentModelType(enum.IntEnum):
         """
         Enum describing possible app payment models.
 
@@ -1522,7 +1524,7 @@ AppPaymentModelTypeEnum = AppPaymentModelTypeEnum() # For __getattribute__
 
 class AppPlaceholderFieldEnum(_CreateEnumTypeUponFirstAccess):
     AppPlaceholderField = '''\
-class AppPlaceholderField(enum.IntEnum):
+    class AppPlaceholderField(enum.IntEnum):
         """
         Possible values for App placeholder fields.
 
@@ -1561,7 +1563,7 @@ AppPlaceholderFieldEnum = AppPlaceholderFieldEnum() # For __getattribute__
 
 class AppStoreEnum(_CreateEnumTypeUponFirstAccess):
     AppStore = '''\
-class AppStore(enum.IntEnum):
+    class AppStore(enum.IntEnum):
         """
         App store type in an app extension.
 
@@ -1581,7 +1583,7 @@ AppStoreEnum = AppStoreEnum() # For __getattribute__
 
 class AppUrlOperatingSystemTypeEnum(_CreateEnumTypeUponFirstAccess):
     AppUrlOperatingSystemType = '''\
-class AppUrlOperatingSystemType(enum.IntEnum):
+    class AppUrlOperatingSystemType(enum.IntEnum):
         """
         Operating System
 
@@ -1601,7 +1603,7 @@ AppUrlOperatingSystemTypeEnum = AppUrlOperatingSystemTypeEnum() # For __getattri
 
 class AssetErrorEnum(_CreateEnumTypeUponFirstAccess):
     AssetError = '''\
-class AssetError(enum.IntEnum):
+    class AssetError(enum.IntEnum):
         """
         Enum describing possible asset errors.
 
@@ -1629,7 +1631,7 @@ AssetErrorEnum = AssetErrorEnum() # For __getattribute__
 
 class AssetFieldTypeEnum(_CreateEnumTypeUponFirstAccess):
     AssetFieldType = '''\
-class AssetFieldType(enum.IntEnum):
+    class AssetFieldType(enum.IntEnum):
         """
         Enum describing the possible placements of an asset.
 
@@ -1657,7 +1659,7 @@ AssetFieldTypeEnum = AssetFieldTypeEnum() # For __getattribute__
 
 class AssetPerformanceLabelEnum(_CreateEnumTypeUponFirstAccess):
     AssetPerformanceLabel = '''\
-class AssetPerformanceLabel(enum.IntEnum):
+    class AssetPerformanceLabel(enum.IntEnum):
         """
         Enum describing the possible performance labels of an asset, usually
         computed in the context of a linkage.
@@ -1686,7 +1688,7 @@ AssetPerformanceLabelEnum = AssetPerformanceLabelEnum() # For __getattribute__
 
 class AssetTypeEnum(_CreateEnumTypeUponFirstAccess):
     AssetType = '''\
-class AssetType(enum.IntEnum):
+    class AssetType(enum.IntEnum):
         """
         Enum describing possible types of asset.
 
@@ -1710,7 +1712,7 @@ AssetTypeEnum = AssetTypeEnum() # For __getattribute__
 
 class AttributionModelEnum(_CreateEnumTypeUponFirstAccess):
     AttributionModel = '''\
-class AttributionModel(enum.IntEnum):
+    class AttributionModel(enum.IntEnum):
         """
         The attribution model that describes how to distribute credit for a
         particular conversion across potentially many prior interactions.
@@ -1747,7 +1749,7 @@ AttributionModelEnum = AttributionModelEnum() # For __getattribute__
 
 class AuthenticationErrorEnum(_CreateEnumTypeUponFirstAccess):
     AuthenticationError = '''\
-class AuthenticationError(enum.IntEnum):
+    class AuthenticationError(enum.IntEnum):
         """
         Enum describing possible authentication errors.
 
@@ -1804,7 +1806,7 @@ AuthenticationErrorEnum = AuthenticationErrorEnum() # For __getattribute__
 
 class AuthorizationErrorEnum(_CreateEnumTypeUponFirstAccess):
     AuthorizationError = '''\
-class AuthorizationError(enum.IntEnum):
+    class AuthorizationError(enum.IntEnum):
         """
         Enum describing possible authorization errors.
 
@@ -1850,7 +1852,7 @@ AuthorizationErrorEnum = AuthorizationErrorEnum() # For __getattribute__
 
 class BidModifierSourceEnum(_CreateEnumTypeUponFirstAccess):
     BidModifierSource = '''\
-class BidModifierSource(enum.IntEnum):
+    class BidModifierSource(enum.IntEnum):
         """
         Enum describing possible bid modifier sources.
 
@@ -1871,7 +1873,7 @@ BidModifierSourceEnum = BidModifierSourceEnum() # For __getattribute__
 
 class BiddingErrorEnum(_CreateEnumTypeUponFirstAccess):
     BiddingError = '''\
-class BiddingError(enum.IntEnum):
+    class BiddingError(enum.IntEnum):
         """
         Enum describing possible bidding errors.
 
@@ -1938,7 +1940,7 @@ BiddingErrorEnum = BiddingErrorEnum() # For __getattribute__
 
 class BiddingSourceEnum(_CreateEnumTypeUponFirstAccess):
     BiddingSource = '''\
-class BiddingSource(enum.IntEnum):
+    class BiddingSource(enum.IntEnum):
         """
         Indicates where a bid or target is defined. For example, an ad group
         criterion may define a cpc bid directly, or it can inherit its cpc bid from
@@ -1962,7 +1964,7 @@ BiddingSourceEnum = BiddingSourceEnum() # For __getattribute__
 
 class BiddingStrategyErrorEnum(_CreateEnumTypeUponFirstAccess):
     BiddingStrategyError = '''\
-class BiddingStrategyError(enum.IntEnum):
+    class BiddingStrategyError(enum.IntEnum):
         """
         Enum describing possible bidding strategy errors.
 
@@ -1990,7 +1992,7 @@ BiddingStrategyErrorEnum = BiddingStrategyErrorEnum() # For __getattribute__
 
 class BiddingStrategyStatusEnum(_CreateEnumTypeUponFirstAccess):
     BiddingStrategyStatus = '''\
-class BiddingStrategyStatus(enum.IntEnum):
+    class BiddingStrategyStatus(enum.IntEnum):
         """
         The possible statuses of a BiddingStrategy.
 
@@ -2012,7 +2014,7 @@ BiddingStrategyStatusEnum = BiddingStrategyStatusEnum() # For __getattribute__
 
 class BiddingStrategyTypeEnum(_CreateEnumTypeUponFirstAccess):
     BiddingStrategyType = '''\
-class BiddingStrategyType(enum.IntEnum):
+    class BiddingStrategyType(enum.IntEnum):
         """
         Enum describing possible bidding strategy types.
 
@@ -2079,7 +2081,7 @@ BiddingStrategyTypeEnum = BiddingStrategyTypeEnum() # For __getattribute__
 
 class BillingSetupErrorEnum(_CreateEnumTypeUponFirstAccess):
     BillingSetupError = '''\
-class BillingSetupError(enum.IntEnum):
+    class BillingSetupError(enum.IntEnum):
         """
         Enum describing possible billing setup errors.
 
@@ -2139,7 +2141,7 @@ BillingSetupErrorEnum = BillingSetupErrorEnum() # For __getattribute__
 
 class BillingSetupStatusEnum(_CreateEnumTypeUponFirstAccess):
     BillingSetupStatus = '''\
-class BillingSetupStatus(enum.IntEnum):
+    class BillingSetupStatus(enum.IntEnum):
         """
         The possible statuses of a BillingSetup.
 
@@ -2165,7 +2167,7 @@ BillingSetupStatusEnum = BillingSetupStatusEnum() # For __getattribute__
 
 class BrandSafetySuitabilityEnum(_CreateEnumTypeUponFirstAccess):
     BrandSafetySuitability = '''\
-class BrandSafetySuitability(enum.IntEnum):
+    class BrandSafetySuitability(enum.IntEnum):
         """
         3-Tier brand safety suitability control.
 
@@ -2207,7 +2209,7 @@ BrandSafetySuitabilityEnum = BrandSafetySuitabilityEnum() # For __getattribute__
 
 class BudgetDeliveryMethodEnum(_CreateEnumTypeUponFirstAccess):
     BudgetDeliveryMethod = '''\
-class BudgetDeliveryMethod(enum.IntEnum):
+    class BudgetDeliveryMethod(enum.IntEnum):
         """
         Possible delivery methods of a Budget.
 
@@ -2229,7 +2231,7 @@ BudgetDeliveryMethodEnum = BudgetDeliveryMethodEnum() # For __getattribute__
 
 class BudgetPeriodEnum(_CreateEnumTypeUponFirstAccess):
     BudgetPeriod = '''\
-class BudgetPeriod(enum.IntEnum):
+    class BudgetPeriod(enum.IntEnum):
         """
         Possible period of a Budget.
 
@@ -2251,7 +2253,7 @@ BudgetPeriodEnum = BudgetPeriodEnum() # For __getattribute__
 
 class BudgetStatusEnum(_CreateEnumTypeUponFirstAccess):
     BudgetStatus = '''\
-class BudgetStatus(enum.IntEnum):
+    class BudgetStatus(enum.IntEnum):
         """
         Possible statuses of a Budget.
 
@@ -2271,7 +2273,7 @@ BudgetStatusEnum = BudgetStatusEnum() # For __getattribute__
 
 class BudgetTypeEnum(_CreateEnumTypeUponFirstAccess):
     BudgetType = '''\
-class BudgetType(enum.IntEnum):
+    class BudgetType(enum.IntEnum):
         """
         Possible Budget types.
 
@@ -2306,7 +2308,7 @@ BudgetTypeEnum = BudgetTypeEnum() # For __getattribute__
 
 class CallConversionReportingStateEnum(_CreateEnumTypeUponFirstAccess):
     CallConversionReportingState = '''\
-class CallConversionReportingState(enum.IntEnum):
+    class CallConversionReportingState(enum.IntEnum):
         """
         Possible data types for a call conversion action state.
 
@@ -2330,7 +2332,7 @@ CallConversionReportingStateEnum = CallConversionReportingStateEnum() # For __ge
 
 class CallPlaceholderFieldEnum(_CreateEnumTypeUponFirstAccess):
     CallPlaceholderField = '''\
-class CallPlaceholderField(enum.IntEnum):
+    class CallPlaceholderField(enum.IntEnum):
         """
         Possible values for Call placeholder fields.
 
@@ -2363,7 +2365,7 @@ CallPlaceholderFieldEnum = CallPlaceholderFieldEnum() # For __getattribute__
 
 class CalloutPlaceholderFieldEnum(_CreateEnumTypeUponFirstAccess):
     CalloutPlaceholderField = '''\
-class CalloutPlaceholderField(enum.IntEnum):
+    class CalloutPlaceholderField(enum.IntEnum):
         """
         Possible values for Callout placeholder fields.
 
@@ -2381,7 +2383,7 @@ CalloutPlaceholderFieldEnum = CalloutPlaceholderFieldEnum() # For __getattribute
 
 class CampaignBudgetErrorEnum(_CreateEnumTypeUponFirstAccess):
     CampaignBudgetError = '''\
-class CampaignBudgetError(enum.IntEnum):
+    class CampaignBudgetError(enum.IntEnum):
         """
         Enum describing possible campaign budget errors.
 
@@ -2432,7 +2434,7 @@ CampaignBudgetErrorEnum = CampaignBudgetErrorEnum() # For __getattribute__
 
 class CampaignCriterionErrorEnum(_CreateEnumTypeUponFirstAccess):
     CampaignCriterionError = '''\
-class CampaignCriterionError(enum.IntEnum):
+    class CampaignCriterionError(enum.IntEnum):
         """
         Enum describing possible campaign criterion errors.
 
@@ -2474,7 +2476,7 @@ CampaignCriterionErrorEnum = CampaignCriterionErrorEnum() # For __getattribute__
 
 class CampaignCriterionStatusEnum(_CreateEnumTypeUponFirstAccess):
     CampaignCriterionStatus = '''\
-class CampaignCriterionStatus(enum.IntEnum):
+    class CampaignCriterionStatus(enum.IntEnum):
         """
         The possible statuses of a CampaignCriterion.
 
@@ -2498,7 +2500,7 @@ CampaignCriterionStatusEnum = CampaignCriterionStatusEnum() # For __getattribute
 
 class CampaignDraftErrorEnum(_CreateEnumTypeUponFirstAccess):
     CampaignDraftError = '''\
-class CampaignDraftError(enum.IntEnum):
+    class CampaignDraftError(enum.IntEnum):
         """
         Enum describing possible campaign draft errors.
 
@@ -2539,7 +2541,7 @@ CampaignDraftErrorEnum = CampaignDraftErrorEnum() # For __getattribute__
 
 class CampaignDraftStatusEnum(_CreateEnumTypeUponFirstAccess):
     CampaignDraftStatus = '''\
-class CampaignDraftStatus(enum.IntEnum):
+    class CampaignDraftStatus(enum.IntEnum):
         """
         Possible statuses of a campaign draft.
 
@@ -2571,7 +2573,7 @@ CampaignDraftStatusEnum = CampaignDraftStatusEnum() # For __getattribute__
 
 class CampaignErrorEnum(_CreateEnumTypeUponFirstAccess):
     CampaignError = '''\
-class CampaignError(enum.IntEnum):
+    class CampaignError(enum.IntEnum):
         """
         Enum describing possible campaign errors.
 
@@ -2682,7 +2684,7 @@ CampaignErrorEnum = CampaignErrorEnum() # For __getattribute__
 
 class CampaignExperimentErrorEnum(_CreateEnumTypeUponFirstAccess):
     CampaignExperimentError = '''\
-class CampaignExperimentError(enum.IntEnum):
+    class CampaignExperimentError(enum.IntEnum):
         """
         Enum describing possible campaign experiment errors.
 
@@ -2725,7 +2727,7 @@ CampaignExperimentErrorEnum = CampaignExperimentErrorEnum() # For __getattribute
 
 class CampaignExperimentStatusEnum(_CreateEnumTypeUponFirstAccess):
     CampaignExperimentStatus = '''\
-class CampaignExperimentStatus(enum.IntEnum):
+    class CampaignExperimentStatus(enum.IntEnum):
         """
         Possible statuses of a campaign experiment.
 
@@ -2765,7 +2767,7 @@ CampaignExperimentStatusEnum = CampaignExperimentStatusEnum() # For __getattribu
 
 class CampaignExperimentTrafficSplitTypeEnum(_CreateEnumTypeUponFirstAccess):
     CampaignExperimentTrafficSplitType = '''\
-class CampaignExperimentTrafficSplitType(enum.IntEnum):
+    class CampaignExperimentTrafficSplitType(enum.IntEnum):
         """
         Enum of strategies for splitting traffic between base and experiment
         campaigns in campaign experiment.
@@ -2788,7 +2790,7 @@ CampaignExperimentTrafficSplitTypeEnum = CampaignExperimentTrafficSplitTypeEnum(
 
 class CampaignExperimentTypeEnum(_CreateEnumTypeUponFirstAccess):
     CampaignExperimentType = '''\
-class CampaignExperimentType(enum.IntEnum):
+    class CampaignExperimentType(enum.IntEnum):
         """
         Indicates if this campaign is a normal campaign,
         a draft campaign, or an experiment campaign.
@@ -2816,7 +2818,7 @@ CampaignExperimentTypeEnum = CampaignExperimentTypeEnum() # For __getattribute__
 
 class CampaignFeedErrorEnum(_CreateEnumTypeUponFirstAccess):
     CampaignFeedError = '''\
-class CampaignFeedError(enum.IntEnum):
+    class CampaignFeedError(enum.IntEnum):
         """
         Enum describing possible campaign feed errors.
 
@@ -2845,7 +2847,7 @@ CampaignFeedErrorEnum = CampaignFeedErrorEnum() # For __getattribute__
 
 class CampaignServingStatusEnum(_CreateEnumTypeUponFirstAccess):
     CampaignServingStatus = '''\
-class CampaignServingStatus(enum.IntEnum):
+    class CampaignServingStatus(enum.IntEnum):
         """
         Possible serving statuses of a campaign.
 
@@ -2873,7 +2875,7 @@ CampaignServingStatusEnum = CampaignServingStatusEnum() # For __getattribute__
 
 class CampaignSharedSetErrorEnum(_CreateEnumTypeUponFirstAccess):
     CampaignSharedSetError = '''\
-class CampaignSharedSetError(enum.IntEnum):
+    class CampaignSharedSetError(enum.IntEnum):
         """
         Enum describing possible campaign shared set errors.
 
@@ -2891,7 +2893,7 @@ CampaignSharedSetErrorEnum = CampaignSharedSetErrorEnum() # For __getattribute__
 
 class CampaignSharedSetStatusEnum(_CreateEnumTypeUponFirstAccess):
     CampaignSharedSetStatus = '''\
-class CampaignSharedSetStatus(enum.IntEnum):
+    class CampaignSharedSetStatus(enum.IntEnum):
         """
         Enum listing the possible campaign shared set statuses.
 
@@ -2911,7 +2913,7 @@ CampaignSharedSetStatusEnum = CampaignSharedSetStatusEnum() # For __getattribute
 
 class CampaignStatusEnum(_CreateEnumTypeUponFirstAccess):
     CampaignStatus = '''\
-class CampaignStatus(enum.IntEnum):
+    class CampaignStatus(enum.IntEnum):
         """
         Possible statuses of a campaign.
 
@@ -2933,7 +2935,7 @@ CampaignStatusEnum = CampaignStatusEnum() # For __getattribute__
 
 class ChangeStatusErrorEnum(_CreateEnumTypeUponFirstAccess):
     ChangeStatusError = '''\
-class ChangeStatusError(enum.IntEnum):
+    class ChangeStatusError(enum.IntEnum):
         """
         Enum describing possible change status errors.
 
@@ -2951,7 +2953,7 @@ ChangeStatusErrorEnum = ChangeStatusErrorEnum() # For __getattribute__
 
 class ChangeStatusOperationEnum(_CreateEnumTypeUponFirstAccess):
     ChangeStatusOperation = '''\
-class ChangeStatusOperation(enum.IntEnum):
+    class ChangeStatusOperation(enum.IntEnum):
         """
         Status of the changed resource
 
@@ -2974,7 +2976,7 @@ ChangeStatusOperationEnum = ChangeStatusOperationEnum() # For __getattribute__
 
 class ChangeStatusResourceTypeEnum(_CreateEnumTypeUponFirstAccess):
     ChangeStatusResourceType = '''\
-class ChangeStatusResourceType(enum.IntEnum):
+    class ChangeStatusResourceType(enum.IntEnum):
         """
         Enum listing the resource types support by the ChangeStatus resource.
 
@@ -3011,7 +3013,7 @@ ChangeStatusResourceTypeEnum = ChangeStatusResourceTypeEnum() # For __getattribu
 
 class ClickTypeEnum(_CreateEnumTypeUponFirstAccess):
     ClickType = '''\
-class ClickType(enum.IntEnum):
+    class ClickType(enum.IntEnum):
         """
         Enumerates Google Ads click types.
 
@@ -3133,7 +3135,7 @@ ClickTypeEnum = ClickTypeEnum() # For __getattribute__
 
 class ClickViewErrorEnum(_CreateEnumTypeUponFirstAccess):
     ClickViewError = '''\
-class ClickViewError(enum.IntEnum):
+    class ClickViewError(enum.IntEnum):
         """
         Enum describing possible click view errors.
 
@@ -3153,7 +3155,7 @@ ClickViewErrorEnum = ClickViewErrorEnum() # For __getattribute__
 
 class CollectionSizeErrorEnum(_CreateEnumTypeUponFirstAccess):
     CollectionSizeError = '''\
-class CollectionSizeError(enum.IntEnum):
+    class CollectionSizeError(enum.IntEnum):
         """
         Enum describing possible collection size errors.
 
@@ -3173,7 +3175,7 @@ CollectionSizeErrorEnum = CollectionSizeErrorEnum() # For __getattribute__
 
 class ContentLabelTypeEnum(_CreateEnumTypeUponFirstAccess):
     ContentLabelType = '''\
-class ContentLabelType(enum.IntEnum):
+    class ContentLabelType(enum.IntEnum):
         """
         Enum listing the content label types supported by ContentLabel criterion.
 
@@ -3221,7 +3223,7 @@ ContentLabelTypeEnum = ContentLabelTypeEnum() # For __getattribute__
 
 class ContextErrorEnum(_CreateEnumTypeUponFirstAccess):
     ContextError = '''\
-class ContextError(enum.IntEnum):
+    class ContextError(enum.IntEnum):
         """
         Enum describing possible context errors.
 
@@ -3241,7 +3243,7 @@ ContextErrorEnum = ContextErrorEnum() # For __getattribute__
 
 class ConversionActionCategoryEnum(_CreateEnumTypeUponFirstAccess):
     ConversionActionCategory = '''\
-class ConversionActionCategory(enum.IntEnum):
+    class ConversionActionCategory(enum.IntEnum):
         """
         The category of conversions that are associated with a ConversionAction.
 
@@ -3269,7 +3271,7 @@ ConversionActionCategoryEnum = ConversionActionCategoryEnum() # For __getattribu
 
 class ConversionActionCountingTypeEnum(_CreateEnumTypeUponFirstAccess):
     ConversionActionCountingType = '''\
-class ConversionActionCountingType(enum.IntEnum):
+    class ConversionActionCountingType(enum.IntEnum):
         """
         Indicates how conversions for this action will be counted. For more
         information, see https://support.google.com/google-ads/answer/3438531.
@@ -3290,7 +3292,7 @@ ConversionActionCountingTypeEnum = ConversionActionCountingTypeEnum() # For __ge
 
 class ConversionActionErrorEnum(_CreateEnumTypeUponFirstAccess):
     ConversionActionError = '''\
-class ConversionActionError(enum.IntEnum):
+    class ConversionActionError(enum.IntEnum):
         """
         Enum describing possible conversion action errors.
 
@@ -3329,7 +3331,7 @@ ConversionActionErrorEnum = ConversionActionErrorEnum() # For __getattribute__
 
 class ConversionActionStatusEnum(_CreateEnumTypeUponFirstAccess):
     ConversionActionStatus = '''\
-class ConversionActionStatus(enum.IntEnum):
+    class ConversionActionStatus(enum.IntEnum):
         """
         Possible statuses of a conversion action.
 
@@ -3352,7 +3354,7 @@ ConversionActionStatusEnum = ConversionActionStatusEnum() # For __getattribute__
 
 class ConversionActionTypeEnum(_CreateEnumTypeUponFirstAccess):
     ConversionActionType = '''\
-class ConversionActionType(enum.IntEnum):
+    class ConversionActionType(enum.IntEnum):
         """
         Possible types of a conversion action.
 
@@ -3389,7 +3391,7 @@ ConversionActionTypeEnum = ConversionActionTypeEnum() # For __getattribute__
 
 class ConversionAdjustmentTypeEnum(_CreateEnumTypeUponFirstAccess):
     ConversionAdjustmentType = '''\
-class ConversionAdjustmentType(enum.IntEnum):
+    class ConversionAdjustmentType(enum.IntEnum):
         """
         The different actions advertisers can take to adjust the conversions that
         they already reported. Retractions negate a conversion. Restatements change
@@ -3411,7 +3413,7 @@ ConversionAdjustmentTypeEnum = ConversionAdjustmentTypeEnum() # For __getattribu
 
 class ConversionAdjustmentUploadErrorEnum(_CreateEnumTypeUponFirstAccess):
     ConversionAdjustmentUploadError = '''\
-class ConversionAdjustmentUploadError(enum.IntEnum):
+    class ConversionAdjustmentUploadError(enum.IntEnum):
         """
         Enum describing possible conversion adjustment upload errors.
 
@@ -3453,7 +3455,7 @@ ConversionAdjustmentUploadErrorEnum = ConversionAdjustmentUploadErrorEnum() # Fo
 
 class ConversionAttributionEventTypeEnum(_CreateEnumTypeUponFirstAccess):
     ConversionAttributionEventType = '''\
-class ConversionAttributionEventType(enum.IntEnum):
+    class ConversionAttributionEventType(enum.IntEnum):
         """
         The event type of conversions that are attributed to.
 
@@ -3473,7 +3475,7 @@ ConversionAttributionEventTypeEnum = ConversionAttributionEventTypeEnum() # For 
 
 class ConversionLagBucketEnum(_CreateEnumTypeUponFirstAccess):
     ConversionLagBucket = '''\
-class ConversionLagBucket(enum.IntEnum):
+    class ConversionLagBucket(enum.IntEnum):
         """
         Enum representing the number of days between impression and conversion.
 
@@ -3544,7 +3546,7 @@ ConversionLagBucketEnum = ConversionLagBucketEnum() # For __getattribute__
 
 class ConversionOrAdjustmentLagBucketEnum(_CreateEnumTypeUponFirstAccess):
     ConversionOrAdjustmentLagBucket = '''\
-class ConversionOrAdjustmentLagBucket(enum.IntEnum):
+    class ConversionOrAdjustmentLagBucket(enum.IntEnum):
         """
         Enum representing the number of days between the impression and the
         conversion or between the impression and adjustments to the conversion.
@@ -3682,7 +3684,7 @@ ConversionOrAdjustmentLagBucketEnum = ConversionOrAdjustmentLagBucketEnum() # Fo
 
 class ConversionUploadErrorEnum(_CreateEnumTypeUponFirstAccess):
     ConversionUploadError = '''\
-class ConversionUploadError(enum.IntEnum):
+    class ConversionUploadError(enum.IntEnum):
         """
         Enum describing possible conversion upload errors.
 
@@ -3764,7 +3766,7 @@ ConversionUploadErrorEnum = ConversionUploadErrorEnum() # For __getattribute__
 
 class CountryCodeErrorEnum(_CreateEnumTypeUponFirstAccess):
     CountryCodeError = '''\
-class CountryCodeError(enum.IntEnum):
+    class CountryCodeError(enum.IntEnum):
         """
         Enum describing country code errors.
 
@@ -3782,7 +3784,7 @@ CountryCodeErrorEnum = CountryCodeErrorEnum() # For __getattribute__
 
 class CriterionCategoryChannelAvailabilityModeEnum(_CreateEnumTypeUponFirstAccess):
     CriterionCategoryChannelAvailabilityMode = '''\
-class CriterionCategoryChannelAvailabilityMode(enum.IntEnum):
+    class CriterionCategoryChannelAvailabilityMode(enum.IntEnum):
         """
         Enum containing the possible CriterionCategoryChannelAvailabilityMode.
 
@@ -3806,7 +3808,7 @@ CriterionCategoryChannelAvailabilityModeEnum = CriterionCategoryChannelAvailabil
 
 class CriterionCategoryLocaleAvailabilityModeEnum(_CreateEnumTypeUponFirstAccess):
     CriterionCategoryLocaleAvailabilityMode = '''\
-class CriterionCategoryLocaleAvailabilityMode(enum.IntEnum):
+    class CriterionCategoryLocaleAvailabilityMode(enum.IntEnum):
         """
         Enum containing the possible CriterionCategoryLocaleAvailabilityMode.
 
@@ -3833,7 +3835,7 @@ CriterionCategoryLocaleAvailabilityModeEnum = CriterionCategoryLocaleAvailabilit
 
 class CriterionErrorEnum(_CreateEnumTypeUponFirstAccess):
     CriterionError = '''\
-class CriterionError(enum.IntEnum):
+    class CriterionError(enum.IntEnum):
         """
         Enum describing possible criterion errors.
 
@@ -4077,7 +4079,7 @@ CriterionErrorEnum = CriterionErrorEnum() # For __getattribute__
 
 class CriterionSystemServingStatusEnum(_CreateEnumTypeUponFirstAccess):
     CriterionSystemServingStatus = '''\
-class CriterionSystemServingStatus(enum.IntEnum):
+    class CriterionSystemServingStatus(enum.IntEnum):
         """
         Enumerates criterion system serving statuses.
 
@@ -4097,7 +4099,7 @@ CriterionSystemServingStatusEnum = CriterionSystemServingStatusEnum() # For __ge
 
 class CriterionTypeEnum(_CreateEnumTypeUponFirstAccess):
     CriterionType = '''\
-class CriterionType(enum.IntEnum):
+    class CriterionType(enum.IntEnum):
         """
         Enum describing possible criterion types.
 
@@ -4173,7 +4175,7 @@ CriterionTypeEnum = CriterionTypeEnum() # For __getattribute__
 
 class CurrencyCodeErrorEnum(_CreateEnumTypeUponFirstAccess):
     CurrencyCodeError = '''\
-class CurrencyCodeError(enum.IntEnum):
+    class CurrencyCodeError(enum.IntEnum):
         """
         Enum describing possible currency code errors.
 
@@ -4191,7 +4193,7 @@ CurrencyCodeErrorEnum = CurrencyCodeErrorEnum() # For __getattribute__
 
 class CustomInterestErrorEnum(_CreateEnumTypeUponFirstAccess):
     CustomInterestError = '''\
-class CustomInterestError(enum.IntEnum):
+    class CustomInterestError(enum.IntEnum):
         """
         Enum describing possible custom interest errors.
 
@@ -4222,7 +4224,7 @@ CustomInterestErrorEnum = CustomInterestErrorEnum() # For __getattribute__
 
 class CustomInterestMemberTypeEnum(_CreateEnumTypeUponFirstAccess):
     CustomInterestMemberType = '''\
-class CustomInterestMemberType(enum.IntEnum):
+    class CustomInterestMemberType(enum.IntEnum):
         """
         Enum containing possible custom interest member types.
 
@@ -4242,7 +4244,7 @@ CustomInterestMemberTypeEnum = CustomInterestMemberTypeEnum() # For __getattribu
 
 class CustomInterestStatusEnum(_CreateEnumTypeUponFirstAccess):
     CustomInterestStatus = '''\
-class CustomInterestStatus(enum.IntEnum):
+    class CustomInterestStatus(enum.IntEnum):
         """
         Enum containing possible custom interest types.
 
@@ -4263,7 +4265,7 @@ CustomInterestStatusEnum = CustomInterestStatusEnum() # For __getattribute__
 
 class CustomInterestTypeEnum(_CreateEnumTypeUponFirstAccess):
     CustomInterestType = '''\
-class CustomInterestType(enum.IntEnum):
+    class CustomInterestType(enum.IntEnum):
         """
         Enum containing possible custom interest types.
 
@@ -4283,7 +4285,7 @@ CustomInterestTypeEnum = CustomInterestTypeEnum() # For __getattribute__
 
 class CustomPlaceholderFieldEnum(_CreateEnumTypeUponFirstAccess):
     CustomPlaceholderField = '''\
-class CustomPlaceholderField(enum.IntEnum):
+    class CustomPlaceholderField(enum.IntEnum):
         """
         Possible values for Custom placeholder fields.
 
@@ -4360,7 +4362,7 @@ CustomPlaceholderFieldEnum = CustomPlaceholderFieldEnum() # For __getattribute__
 
 class CustomerClientLinkErrorEnum(_CreateEnumTypeUponFirstAccess):
     CustomerClientLinkError = '''\
-class CustomerClientLinkError(enum.IntEnum):
+    class CustomerClientLinkError(enum.IntEnum):
         """
         Enum describing possible CustomerClientLink errors.
 
@@ -4390,7 +4392,7 @@ CustomerClientLinkErrorEnum = CustomerClientLinkErrorEnum() # For __getattribute
 
 class CustomerErrorEnum(_CreateEnumTypeUponFirstAccess):
     CustomerError = '''\
-class CustomerError(enum.IntEnum):
+    class CustomerError(enum.IntEnum):
         """
         Set of errors that are related to requests dealing with Customer.
         Next id: 26
@@ -4412,7 +4414,7 @@ CustomerErrorEnum = CustomerErrorEnum() # For __getattribute__
 
 class CustomerFeedErrorEnum(_CreateEnumTypeUponFirstAccess):
     CustomerFeedError = '''\
-class CustomerFeedError(enum.IntEnum):
+    class CustomerFeedError(enum.IntEnum):
         """
         Enum describing possible customer feed errors.
 
@@ -4443,7 +4445,7 @@ CustomerFeedErrorEnum = CustomerFeedErrorEnum() # For __getattribute__
 
 class CustomerManagerLinkErrorEnum(_CreateEnumTypeUponFirstAccess):
     CustomerManagerLinkError = '''\
-class CustomerManagerLinkError(enum.IntEnum):
+    class CustomerManagerLinkError(enum.IntEnum):
         """
         Enum describing possible CustomerManagerLink errors.
 
@@ -4478,7 +4480,7 @@ CustomerManagerLinkErrorEnum = CustomerManagerLinkErrorEnum() # For __getattribu
 
 class CustomerMatchUploadKeyTypeEnum(_CreateEnumTypeUponFirstAccess):
     CustomerMatchUploadKeyType = '''\
-class CustomerMatchUploadKeyType(enum.IntEnum):
+    class CustomerMatchUploadKeyType(enum.IntEnum):
         """
         Enum describing possible customer match upload key types.
 
@@ -4502,7 +4504,7 @@ CustomerMatchUploadKeyTypeEnum = CustomerMatchUploadKeyTypeEnum() # For __getatt
 
 class CustomerNegativeCriterionErrorEnum(_CreateEnumTypeUponFirstAccess):
     CustomerNegativeCriterionError = '''\
-class CustomerNegativeCriterionError(enum.IntEnum):
+    class CustomerNegativeCriterionError(enum.IntEnum):
         """
         Enum describing possible customer negative criterion errors.
 
@@ -4524,7 +4526,7 @@ CustomerNegativeCriterionErrorEnum = CustomerNegativeCriterionErrorEnum() # For 
 
 class CustomerPayPerConversionEligibilityFailureReasonEnum(_CreateEnumTypeUponFirstAccess):
     CustomerPayPerConversionEligibilityFailureReason = '''\
-class CustomerPayPerConversionEligibilityFailureReason(enum.IntEnum):
+    class CustomerPayPerConversionEligibilityFailureReason(enum.IntEnum):
         """
         Enum describing possible reasons a customer is not eligible to use
         PaymentMode.CONVERSIONS.
@@ -4556,7 +4558,7 @@ CustomerPayPerConversionEligibilityFailureReasonEnum = CustomerPayPerConversionE
 
 class DataDrivenModelStatusEnum(_CreateEnumTypeUponFirstAccess):
     DataDrivenModelStatus = '''\
-class DataDrivenModelStatus(enum.IntEnum):
+    class DataDrivenModelStatus(enum.IntEnum):
         """
         Enumerates data driven model statuses.
 
@@ -4586,7 +4588,7 @@ DataDrivenModelStatusEnum = DataDrivenModelStatusEnum() # For __getattribute__
 
 class DatabaseErrorEnum(_CreateEnumTypeUponFirstAccess):
     DatabaseError = '''\
-class DatabaseError(enum.IntEnum):
+    class DatabaseError(enum.IntEnum):
         """
         Enum describing possible database errors.
 
@@ -4608,7 +4610,7 @@ DatabaseErrorEnum = DatabaseErrorEnum() # For __getattribute__
 
 class DateErrorEnum(_CreateEnumTypeUponFirstAccess):
     DateError = '''\
-class DateError(enum.IntEnum):
+    class DateError(enum.IntEnum):
         """
         Enum describing possible date errors.
 
@@ -4644,7 +4646,7 @@ DateErrorEnum = DateErrorEnum() # For __getattribute__
 
 class DateRangeErrorEnum(_CreateEnumTypeUponFirstAccess):
     DateRangeError = '''\
-class DateRangeError(enum.IntEnum):
+    class DateRangeError(enum.IntEnum):
         """
         Enum describing possible date range errors.
 
@@ -4670,7 +4672,7 @@ DateRangeErrorEnum = DateRangeErrorEnum() # For __getattribute__
 
 class DayOfWeekEnum(_CreateEnumTypeUponFirstAccess):
     DayOfWeek = '''\
-class DayOfWeek(enum.IntEnum):
+    class DayOfWeek(enum.IntEnum):
         """
         Enumerates days of the week, e.g., "Monday".
 
@@ -4700,7 +4702,7 @@ DayOfWeekEnum = DayOfWeekEnum() # For __getattribute__
 
 class DeviceEnum(_CreateEnumTypeUponFirstAccess):
     Device = '''\
-class Device(enum.IntEnum):
+    class Device(enum.IntEnum):
         """
         Enumerates Google Ads devices available for targeting.
 
@@ -4726,7 +4728,7 @@ DeviceEnum = DeviceEnum() # For __getattribute__
 
 class DisplayAdFormatSettingEnum(_CreateEnumTypeUponFirstAccess):
     DisplayAdFormatSetting = '''\
-class DisplayAdFormatSetting(enum.IntEnum):
+    class DisplayAdFormatSetting(enum.IntEnum):
         """
         Enumerates display ad format settings.
 
@@ -4749,7 +4751,7 @@ DisplayAdFormatSettingEnum = DisplayAdFormatSettingEnum() # For __getattribute__
 
 class DisplayUploadProductTypeEnum(_CreateEnumTypeUponFirstAccess):
     DisplayUploadProductType = '''\
-class DisplayUploadProductType(enum.IntEnum):
+    class DisplayUploadProductType(enum.IntEnum):
         """
         Enumerates display upload product types.
 
@@ -4804,7 +4806,7 @@ DisplayUploadProductTypeEnum = DisplayUploadProductTypeEnum() # For __getattribu
 
 class DistanceBucketEnum(_CreateEnumTypeUponFirstAccess):
     DistanceBucket = '''\
-class DistanceBucket(enum.IntEnum):
+    class DistanceBucket(enum.IntEnum):
         """
         The distance bucket for a user’s distance from an advertiser’s location
         extension.
@@ -4875,7 +4877,7 @@ DistanceBucketEnum = DistanceBucketEnum() # For __getattribute__
 
 class DistinctErrorEnum(_CreateEnumTypeUponFirstAccess):
     DistinctError = '''\
-class DistinctError(enum.IntEnum):
+    class DistinctError(enum.IntEnum):
         """
         Enum describing possible distinct errors.
 
@@ -4895,7 +4897,7 @@ DistinctErrorEnum = DistinctErrorEnum() # For __getattribute__
 
 class DsaPageFeedCriterionFieldEnum(_CreateEnumTypeUponFirstAccess):
     DsaPageFeedCriterionField = '''\
-class DsaPageFeedCriterionField(enum.IntEnum):
+    class DsaPageFeedCriterionField(enum.IntEnum):
         """
         Possible values for Dynamic Search Ad Page Feed criterion fields.
 
@@ -4916,7 +4918,7 @@ DsaPageFeedCriterionFieldEnum = DsaPageFeedCriterionFieldEnum() # For __getattri
 
 class EducationPlaceholderFieldEnum(_CreateEnumTypeUponFirstAccess):
     EducationPlaceholderField = '''\
-class EducationPlaceholderField(enum.IntEnum):
+    class EducationPlaceholderField(enum.IntEnum):
         """
         Possible values for Education placeholder fields.
 
@@ -4979,7 +4981,7 @@ EducationPlaceholderFieldEnum = EducationPlaceholderFieldEnum() # For __getattri
 
 class EnumErrorEnum(_CreateEnumTypeUponFirstAccess):
     EnumError = '''\
-class EnumError(enum.IntEnum):
+    class EnumError(enum.IntEnum):
         """
         Enum describing possible enum errors.
 
@@ -4997,7 +4999,7 @@ EnumErrorEnum = EnumErrorEnum() # For __getattribute__
 
 class ExperimentErrorEnum(_CreateEnumTypeUponFirstAccess):
     ExperimentError = '''\
-class ExperimentError(enum.IntEnum):
+    class ExperimentError(enum.IntEnum):
         """
         Enum describing possible experiment errors.
 
@@ -5013,7 +5015,7 @@ ExperimentErrorEnum = ExperimentErrorEnum() # For __getattribute__
 
 class ExtensionFeedItemErrorEnum(_CreateEnumTypeUponFirstAccess):
     ExtensionFeedItemError = '''\
-class ExtensionFeedItemError(enum.IntEnum):
+    class ExtensionFeedItemError(enum.IntEnum):
         """
         Enum describing possible extension feed item errors.
 
@@ -5130,7 +5132,7 @@ ExtensionFeedItemErrorEnum = ExtensionFeedItemErrorEnum() # For __getattribute__
 
 class ExtensionSettingDeviceEnum(_CreateEnumTypeUponFirstAccess):
     ExtensionSettingDevice = '''\
-class ExtensionSettingDevice(enum.IntEnum):
+    class ExtensionSettingDevice(enum.IntEnum):
         """
         Possbile device types for an extension setting.
 
@@ -5152,7 +5154,7 @@ ExtensionSettingDeviceEnum = ExtensionSettingDeviceEnum() # For __getattribute__
 
 class ExtensionSettingErrorEnum(_CreateEnumTypeUponFirstAccess):
     ExtensionSettingError = '''\
-class ExtensionSettingError(enum.IntEnum):
+    class ExtensionSettingError(enum.IntEnum):
         """
         Enum describing possible extension setting errors.
 
@@ -5317,7 +5319,7 @@ ExtensionSettingErrorEnum = ExtensionSettingErrorEnum() # For __getattribute__
 
 class ExtensionTypeEnum(_CreateEnumTypeUponFirstAccess):
     ExtensionType = '''\
-class ExtensionType(enum.IntEnum):
+    class ExtensionType(enum.IntEnum):
         """
         Possible data types for an extension in an extension setting.
 
@@ -5359,7 +5361,7 @@ ExtensionTypeEnum = ExtensionTypeEnum() # For __getattribute__
 
 class ExternalConversionSourceEnum(_CreateEnumTypeUponFirstAccess):
     ExternalConversionSource = '''\
-class ExternalConversionSource(enum.IntEnum):
+    class ExternalConversionSource(enum.IntEnum):
         """
         The external conversion source that is associated with a ConversionAction.
 
@@ -5441,7 +5443,7 @@ ExternalConversionSourceEnum = ExternalConversionSourceEnum() # For __getattribu
 
 class FeedAttributeOperation(_CreateEnumTypeUponFirstAccess):
     Operator = '''\
-class Operator(enum.IntEnum):
+    class Operator(enum.IntEnum):
     """
     The operator.
 
@@ -5459,7 +5461,7 @@ FeedAttributeOperation = FeedAttributeOperation()
 
 class FeedAttributeReferenceErrorEnum(_CreateEnumTypeUponFirstAccess):
     FeedAttributeReferenceError = '''\
-class FeedAttributeReferenceError(enum.IntEnum):
+    class FeedAttributeReferenceError(enum.IntEnum):
         """
         Enum describing possible feed attribute reference errors.
 
@@ -5481,7 +5483,7 @@ FeedAttributeReferenceErrorEnum = FeedAttributeReferenceErrorEnum() # For __geta
 
 class FeedAttributeTypeEnum(_CreateEnumTypeUponFirstAccess):
     FeedAttributeType = '''\
-class FeedAttributeType(enum.IntEnum):
+    class FeedAttributeType(enum.IntEnum):
         """
         Possible data types for a feed attribute.
 
@@ -5523,7 +5525,7 @@ FeedAttributeTypeEnum = FeedAttributeTypeEnum() # For __getattribute__
 
 class FeedErrorEnum(_CreateEnumTypeUponFirstAccess):
     FeedError = '''\
-class FeedError(enum.IntEnum):
+    class FeedError(enum.IntEnum):
         """
         Enum describing possible feed errors.
 
@@ -5580,7 +5582,7 @@ FeedErrorEnum = FeedErrorEnum() # For __getattribute__
 
 class FeedItemErrorEnum(_CreateEnumTypeUponFirstAccess):
     FeedItemError = '''\
-class FeedItemError(enum.IntEnum):
+    class FeedItemError(enum.IntEnum):
         """
         Enum describing possible feed item errors.
 
@@ -5614,7 +5616,7 @@ FeedItemErrorEnum = FeedItemErrorEnum() # For __getattribute__
 
 class FeedItemQualityApprovalStatusEnum(_CreateEnumTypeUponFirstAccess):
     FeedItemQualityApprovalStatus = '''\
-class FeedItemQualityApprovalStatus(enum.IntEnum):
+    class FeedItemQualityApprovalStatus(enum.IntEnum):
         """
         The possible quality evaluation approval statuses of a feed item.
 
@@ -5635,7 +5637,7 @@ FeedItemQualityApprovalStatusEnum = FeedItemQualityApprovalStatusEnum() # For __
 
 class FeedItemQualityDisapprovalReasonEnum(_CreateEnumTypeUponFirstAccess):
     FeedItemQualityDisapprovalReason = '''\
-class FeedItemQualityDisapprovalReason(enum.IntEnum):
+    class FeedItemQualityDisapprovalReason(enum.IntEnum):
         """
         The possible quality evaluation disapproval reasons of a feed item.
 
@@ -5687,7 +5689,7 @@ FeedItemQualityDisapprovalReasonEnum = FeedItemQualityDisapprovalReasonEnum() # 
 
 class FeedItemStatusEnum(_CreateEnumTypeUponFirstAccess):
     FeedItemStatus = '''\
-class FeedItemStatus(enum.IntEnum):
+    class FeedItemStatus(enum.IntEnum):
         """
         Possible statuses of a feed item.
 
@@ -5707,7 +5709,7 @@ FeedItemStatusEnum = FeedItemStatusEnum() # For __getattribute__
 
 class FeedItemTargetDeviceEnum(_CreateEnumTypeUponFirstAccess):
     FeedItemTargetDevice = '''\
-class FeedItemTargetDevice(enum.IntEnum):
+    class FeedItemTargetDevice(enum.IntEnum):
         """
         Possible data types for a feed item target device.
 
@@ -5725,7 +5727,7 @@ FeedItemTargetDeviceEnum = FeedItemTargetDeviceEnum() # For __getattribute__
 
 class FeedItemTargetErrorEnum(_CreateEnumTypeUponFirstAccess):
     FeedItemTargetError = '''\
-class FeedItemTargetError(enum.IntEnum):
+    class FeedItemTargetError(enum.IntEnum):
         """
         Enum describing possible feed item target errors.
 
@@ -5759,7 +5761,7 @@ FeedItemTargetErrorEnum = FeedItemTargetErrorEnum() # For __getattribute__
 
 class FeedItemTargetTypeEnum(_CreateEnumTypeUponFirstAccess):
     FeedItemTargetType = '''\
-class FeedItemTargetType(enum.IntEnum):
+    class FeedItemTargetType(enum.IntEnum):
         """
         Possible type of a feed item target.
 
@@ -5781,7 +5783,7 @@ FeedItemTargetTypeEnum = FeedItemTargetTypeEnum() # For __getattribute__
 
 class FeedItemValidationErrorEnum(_CreateEnumTypeUponFirstAccess):
     FeedItemValidationError = '''\
-class FeedItemValidationError(enum.IntEnum):
+    class FeedItemValidationError(enum.IntEnum):
         """
         The possible validation errors of a feed item.
 
@@ -6009,7 +6011,7 @@ FeedItemValidationErrorEnum = FeedItemValidationErrorEnum() # For __getattribute
 
 class FeedItemValidationStatusEnum(_CreateEnumTypeUponFirstAccess):
     FeedItemValidationStatus = '''\
-class FeedItemValidationStatus(enum.IntEnum):
+    class FeedItemValidationStatus(enum.IntEnum):
         """
         The possible validation statuses of a feed item.
 
@@ -6031,7 +6033,7 @@ FeedItemValidationStatusEnum = FeedItemValidationStatusEnum() # For __getattribu
 
 class FeedLinkStatusEnum(_CreateEnumTypeUponFirstAccess):
     FeedLinkStatus = '''\
-class FeedLinkStatus(enum.IntEnum):
+    class FeedLinkStatus(enum.IntEnum):
         """
         Possible statuses of a feed link.
 
@@ -6051,7 +6053,7 @@ FeedLinkStatusEnum = FeedLinkStatusEnum() # For __getattribute__
 
 class FeedMappingCriterionTypeEnum(_CreateEnumTypeUponFirstAccess):
     FeedMappingCriterionType = '''\
-class FeedMappingCriterionType(enum.IntEnum):
+    class FeedMappingCriterionType(enum.IntEnum):
         """
         Possible placeholder types for a feed mapping.
 
@@ -6071,7 +6073,7 @@ FeedMappingCriterionTypeEnum = FeedMappingCriterionTypeEnum() # For __getattribu
 
 class FeedMappingErrorEnum(_CreateEnumTypeUponFirstAccess):
     FeedMappingError = '''\
-class FeedMappingError(enum.IntEnum):
+    class FeedMappingError(enum.IntEnum):
         """
         Enum describing possible feed item errors.
 
@@ -6124,7 +6126,7 @@ FeedMappingErrorEnum = FeedMappingErrorEnum() # For __getattribute__
 
 class FeedMappingStatusEnum(_CreateEnumTypeUponFirstAccess):
     FeedMappingStatus = '''\
-class FeedMappingStatus(enum.IntEnum):
+    class FeedMappingStatus(enum.IntEnum):
         """
         Possible statuses of a feed mapping.
 
@@ -6144,7 +6146,7 @@ FeedMappingStatusEnum = FeedMappingStatusEnum() # For __getattribute__
 
 class FeedOriginEnum(_CreateEnumTypeUponFirstAccess):
     FeedOrigin = '''\
-class FeedOrigin(enum.IntEnum):
+    class FeedOrigin(enum.IntEnum):
         """
         Possible values for a feed origin.
 
@@ -6167,7 +6169,7 @@ FeedOriginEnum = FeedOriginEnum() # For __getattribute__
 
 class FeedStatusEnum(_CreateEnumTypeUponFirstAccess):
     FeedStatus = '''\
-class FeedStatus(enum.IntEnum):
+    class FeedStatus(enum.IntEnum):
         """
         Possible statuses of a feed.
 
@@ -6187,7 +6189,7 @@ FeedStatusEnum = FeedStatusEnum() # For __getattribute__
 
 class FieldErrorEnum(_CreateEnumTypeUponFirstAccess):
     FieldError = '''\
-class FieldError(enum.IntEnum):
+    class FieldError(enum.IntEnum):
         """
         Enum describing possible field errors.
 
@@ -6217,7 +6219,7 @@ FieldErrorEnum = FieldErrorEnum() # For __getattribute__
 
 class FieldMaskErrorEnum(_CreateEnumTypeUponFirstAccess):
     FieldMaskError = '''\
-class FieldMaskError(enum.IntEnum):
+    class FieldMaskError(enum.IntEnum):
         """
         Enum describing possible field mask errors.
 
@@ -6243,7 +6245,7 @@ FieldMaskErrorEnum = FieldMaskErrorEnum() # For __getattribute__
 
 class FlightPlaceholderFieldEnum(_CreateEnumTypeUponFirstAccess):
     FlightPlaceholderField = '''\
-class FlightPlaceholderField(enum.IntEnum):
+    class FlightPlaceholderField(enum.IntEnum):
         """
         Possible values for Flight placeholder fields.
 
@@ -6313,7 +6315,7 @@ FlightPlaceholderFieldEnum = FlightPlaceholderFieldEnum() # For __getattribute__
 
 class FrequencyCapEventTypeEnum(_CreateEnumTypeUponFirstAccess):
     FrequencyCapEventType = '''\
-class FrequencyCapEventType(enum.IntEnum):
+    class FrequencyCapEventType(enum.IntEnum):
         """
         The type of event that the cap applies to (e.g. impression).
 
@@ -6333,7 +6335,7 @@ FrequencyCapEventTypeEnum = FrequencyCapEventTypeEnum() # For __getattribute__
 
 class FrequencyCapLevelEnum(_CreateEnumTypeUponFirstAccess):
     FrequencyCapLevel = '''\
-class FrequencyCapLevel(enum.IntEnum):
+    class FrequencyCapLevel(enum.IntEnum):
         """
         The level on which the cap is to be applied (e.g ad group ad, ad group).
         Cap is applied to all the resources of this level.
@@ -6356,7 +6358,7 @@ FrequencyCapLevelEnum = FrequencyCapLevelEnum() # For __getattribute__
 
 class FrequencyCapTimeUnitEnum(_CreateEnumTypeUponFirstAccess):
     FrequencyCapTimeUnit = '''\
-class FrequencyCapTimeUnit(enum.IntEnum):
+    class FrequencyCapTimeUnit(enum.IntEnum):
         """
         Unit of time the cap is defined at (e.g. day, week).
 
@@ -6378,7 +6380,7 @@ FrequencyCapTimeUnitEnum = FrequencyCapTimeUnitEnum() # For __getattribute__
 
 class FunctionErrorEnum(_CreateEnumTypeUponFirstAccess):
     FunctionError = '''\
-class FunctionError(enum.IntEnum):
+    class FunctionError(enum.IntEnum):
         """
         Enum describing possible function errors.
 
@@ -6427,7 +6429,7 @@ FunctionErrorEnum = FunctionErrorEnum() # For __getattribute__
 
 class FunctionParsingErrorEnum(_CreateEnumTypeUponFirstAccess):
     FunctionParsingError = '''\
-class FunctionParsingError(enum.IntEnum):
+    class FunctionParsingError(enum.IntEnum):
         """
         Enum describing possible function parsing errors.
 
@@ -6465,7 +6467,7 @@ FunctionParsingErrorEnum = FunctionParsingErrorEnum() # For __getattribute__
 
 class GenderTypeEnum(_CreateEnumTypeUponFirstAccess):
     GenderType = '''\
-class GenderType(enum.IntEnum):
+    class GenderType(enum.IntEnum):
         """
         The type of demographic genders (e.g. female).
 
@@ -6487,7 +6489,7 @@ GenderTypeEnum = GenderTypeEnum() # For __getattribute__
 
 class GeoTargetConstantStatusEnum(_CreateEnumTypeUponFirstAccess):
     GeoTargetConstantStatus = '''\
-class GeoTargetConstantStatus(enum.IntEnum):
+    class GeoTargetConstantStatus(enum.IntEnum):
         """
         The possible statuses of a geo target constant.
 
@@ -6509,7 +6511,7 @@ GeoTargetConstantStatusEnum = GeoTargetConstantStatusEnum() # For __getattribute
 
 class GeoTargetConstantSuggestionErrorEnum(_CreateEnumTypeUponFirstAccess):
     GeoTargetConstantSuggestionError = '''\
-class GeoTargetConstantSuggestionError(enum.IntEnum):
+    class GeoTargetConstantSuggestionError(enum.IntEnum):
         """
         Enum describing possible geo target constant suggestion errors.
 
@@ -6535,7 +6537,7 @@ GeoTargetConstantSuggestionErrorEnum = GeoTargetConstantSuggestionErrorEnum() # 
 
 class GeoTargetingRestrictionEnum(_CreateEnumTypeUponFirstAccess):
     GeoTargetingRestriction = '''\
-class GeoTargetingRestriction(enum.IntEnum):
+    class GeoTargetingRestriction(enum.IntEnum):
         """
         A restriction used to determine if the request context's
         geo should be matched.
@@ -6555,7 +6557,7 @@ GeoTargetingRestrictionEnum = GeoTargetingRestrictionEnum() # For __getattribute
 
 class GeoTargetingTypeEnum(_CreateEnumTypeUponFirstAccess):
     GeoTargetingType = '''\
-class GeoTargetingType(enum.IntEnum):
+    class GeoTargetingType(enum.IntEnum):
         """
         The possible geo targeting types.
 
@@ -6575,7 +6577,7 @@ GeoTargetingTypeEnum = GeoTargetingTypeEnum() # For __getattribute__
 
 class GoogleAdsFieldCategoryEnum(_CreateEnumTypeUponFirstAccess):
     GoogleAdsFieldCategory = '''\
-class GoogleAdsFieldCategory(enum.IntEnum):
+    class GoogleAdsFieldCategory(enum.IntEnum):
         """
         The category of the artifact.
 
@@ -6603,7 +6605,7 @@ GoogleAdsFieldCategoryEnum = GoogleAdsFieldCategoryEnum() # For __getattribute__
 
 class GoogleAdsFieldDataTypeEnum(_CreateEnumTypeUponFirstAccess):
     GoogleAdsFieldDataType = '''\
-class GoogleAdsFieldDataType(enum.IntEnum):
+    class GoogleAdsFieldDataType(enum.IntEnum):
         """
         These are the various types a GoogleAdsService artifact may take on.
 
@@ -6666,7 +6668,7 @@ GoogleAdsFieldDataTypeEnum = GoogleAdsFieldDataTypeEnum() # For __getattribute__
 
 class HeaderErrorEnum(_CreateEnumTypeUponFirstAccess):
     HeaderError = '''\
-class HeaderError(enum.IntEnum):
+    class HeaderError(enum.IntEnum):
         """
         Enum describing possible header errors.
 
@@ -6684,7 +6686,7 @@ HeaderErrorEnum = HeaderErrorEnum() # For __getattribute__
 
 class HotelDateSelectionTypeEnum(_CreateEnumTypeUponFirstAccess):
     HotelDateSelectionType = '''\
-class HotelDateSelectionType(enum.IntEnum):
+    class HotelDateSelectionType(enum.IntEnum):
         """
         Enum describing possible hotel date selection types.
 
@@ -6704,7 +6706,7 @@ HotelDateSelectionTypeEnum = HotelDateSelectionTypeEnum() # For __getattribute__
 
 class HotelPlaceholderFieldEnum(_CreateEnumTypeUponFirstAccess):
     HotelPlaceholderField = '''\
-class HotelPlaceholderField(enum.IntEnum):
+    class HotelPlaceholderField(enum.IntEnum):
         """
         Possible values for Hotel placeholder fields.
 
@@ -6777,7 +6779,7 @@ HotelPlaceholderFieldEnum = HotelPlaceholderFieldEnum() # For __getattribute__
 
 class HotelPriceBucketEnum(_CreateEnumTypeUponFirstAccess):
     HotelPriceBucket = '''\
-class HotelPriceBucket(enum.IntEnum):
+    class HotelPriceBucket(enum.IntEnum):
         """
         Enum describing possible hotel price buckets.
 
@@ -6806,7 +6808,7 @@ HotelPriceBucketEnum = HotelPriceBucketEnum() # For __getattribute__
 
 class HotelRateTypeEnum(_CreateEnumTypeUponFirstAccess):
     HotelRateType = '''\
-class HotelRateType(enum.IntEnum):
+    class HotelRateType(enum.IntEnum):
         """
         Enum describing possible hotel rate types.
 
@@ -6836,7 +6838,7 @@ HotelRateTypeEnum = HotelRateTypeEnum() # For __getattribute__
 
 class IdErrorEnum(_CreateEnumTypeUponFirstAccess):
     IdError = '''\
-class IdError(enum.IntEnum):
+    class IdError(enum.IntEnum):
         """
         Enum describing possible id errors.
 
@@ -6854,7 +6856,7 @@ IdErrorEnum = IdErrorEnum() # For __getattribute__
 
 class ImageErrorEnum(_CreateEnumTypeUponFirstAccess):
     ImageError = '''\
-class ImageError(enum.IntEnum):
+    class ImageError(enum.IntEnum):
         """
         Enum describing possible image errors.
 
@@ -6945,7 +6947,7 @@ ImageErrorEnum = ImageErrorEnum() # For __getattribute__
 
 class IncomeRangeTypeEnum(_CreateEnumTypeUponFirstAccess):
     IncomeRangeType = '''\
-class IncomeRangeType(enum.IntEnum):
+    class IncomeRangeType(enum.IntEnum):
         """
         The type of demographic income ranges (e.g. between 0% to 50%).
 
@@ -6975,7 +6977,7 @@ IncomeRangeTypeEnum = IncomeRangeTypeEnum() # For __getattribute__
 
 class InteractionEventTypeEnum(_CreateEnumTypeUponFirstAccess):
     InteractionEventType = '''\
-class InteractionEventType(enum.IntEnum):
+    class InteractionEventType(enum.IntEnum):
         """
         Enum describing possible types of payable and free interactions.
 
@@ -7005,7 +7007,7 @@ InteractionEventTypeEnum = InteractionEventTypeEnum() # For __getattribute__
 
 class InteractionTypeEnum(_CreateEnumTypeUponFirstAccess):
     InteractionType = '''\
-class InteractionType(enum.IntEnum):
+    class InteractionType(enum.IntEnum):
         """
         Enum describing possible interaction types.
 
@@ -7023,7 +7025,7 @@ InteractionTypeEnum = InteractionTypeEnum() # For __getattribute__
 
 class InternalErrorEnum(_CreateEnumTypeUponFirstAccess):
     InternalError = '''\
-class InternalError(enum.IntEnum):
+    class InternalError(enum.IntEnum):
         """
         Enum describing possible internal errors.
 
@@ -7047,7 +7049,7 @@ InternalErrorEnum = InternalErrorEnum() # For __getattribute__
 
 class InvoiceErrorEnum(_CreateEnumTypeUponFirstAccess):
     InvoiceError = '''\
-class InvoiceError(enum.IntEnum):
+    class InvoiceError(enum.IntEnum):
         """
         Enum describing possible invoice errors.
 
@@ -7067,7 +7069,7 @@ InvoiceErrorEnum = InvoiceErrorEnum() # For __getattribute__
 
 class InvoiceTypeEnum(_CreateEnumTypeUponFirstAccess):
     InvoiceType = '''\
-class InvoiceType(enum.IntEnum):
+    class InvoiceType(enum.IntEnum):
         """
         The possible type of invoices.
 
@@ -7087,7 +7089,7 @@ InvoiceTypeEnum = InvoiceTypeEnum() # For __getattribute__
 
 class JobPlaceholderFieldEnum(_CreateEnumTypeUponFirstAccess):
     JobPlaceholderField = '''\
-class JobPlaceholderField(enum.IntEnum):
+    class JobPlaceholderField(enum.IntEnum):
         """
         Possible values for Job placeholder fields.
 
@@ -7153,7 +7155,7 @@ JobPlaceholderFieldEnum = JobPlaceholderFieldEnum() # For __getattribute__
 
 class KeywordMatchTypeEnum(_CreateEnumTypeUponFirstAccess):
     KeywordMatchType = '''\
-class KeywordMatchType(enum.IntEnum):
+    class KeywordMatchType(enum.IntEnum):
         """
         Possible Keyword match types.
 
@@ -7175,7 +7177,7 @@ KeywordMatchTypeEnum = KeywordMatchTypeEnum() # For __getattribute__
 
 class KeywordPlanAdGroupErrorEnum(_CreateEnumTypeUponFirstAccess):
     KeywordPlanAdGroupError = '''\
-class KeywordPlanAdGroupError(enum.IntEnum):
+    class KeywordPlanAdGroupError(enum.IntEnum):
         """
         Enum describing possible errors from applying a keyword plan ad group.
 
@@ -7197,7 +7199,7 @@ KeywordPlanAdGroupErrorEnum = KeywordPlanAdGroupErrorEnum() # For __getattribute
 
 class KeywordPlanCampaignErrorEnum(_CreateEnumTypeUponFirstAccess):
     KeywordPlanCampaignError = '''\
-class KeywordPlanCampaignError(enum.IntEnum):
+    class KeywordPlanCampaignError(enum.IntEnum):
         """
         Enum describing possible errors from applying a keyword plan campaign.
 
@@ -7225,7 +7227,7 @@ KeywordPlanCampaignErrorEnum = KeywordPlanCampaignErrorEnum() # For __getattribu
 
 class KeywordPlanCompetitionLevelEnum(_CreateEnumTypeUponFirstAccess):
     KeywordPlanCompetitionLevel = '''\
-class KeywordPlanCompetitionLevel(enum.IntEnum):
+    class KeywordPlanCompetitionLevel(enum.IntEnum):
         """
         Competition level of a keyword.
 
@@ -7247,7 +7249,7 @@ KeywordPlanCompetitionLevelEnum = KeywordPlanCompetitionLevelEnum() # For __geta
 
 class KeywordPlanErrorEnum(_CreateEnumTypeUponFirstAccess):
     KeywordPlanError = '''\
-class KeywordPlanError(enum.IntEnum):
+    class KeywordPlanError(enum.IntEnum):
         """
         Enum describing possible errors from applying a keyword plan.
 
@@ -7292,7 +7294,7 @@ KeywordPlanErrorEnum = KeywordPlanErrorEnum() # For __getattribute__
 
 class KeywordPlanForecastIntervalEnum(_CreateEnumTypeUponFirstAccess):
     KeywordPlanForecastInterval = '''\
-class KeywordPlanForecastInterval(enum.IntEnum):
+    class KeywordPlanForecastInterval(enum.IntEnum):
         """
         Forecast intervals.
 
@@ -7317,7 +7319,7 @@ KeywordPlanForecastIntervalEnum = KeywordPlanForecastIntervalEnum() # For __geta
 
 class KeywordPlanIdeaErrorEnum(_CreateEnumTypeUponFirstAccess):
     KeywordPlanIdeaError = '''\
-class KeywordPlanIdeaError(enum.IntEnum):
+    class KeywordPlanIdeaError(enum.IntEnum):
         """
         Enum describing possible errors from KeywordPlanIdeaService.
 
@@ -7337,7 +7339,7 @@ KeywordPlanIdeaErrorEnum = KeywordPlanIdeaErrorEnum() # For __getattribute__
 
 class KeywordPlanKeywordErrorEnum(_CreateEnumTypeUponFirstAccess):
     KeywordPlanKeywordError = '''\
-class KeywordPlanKeywordError(enum.IntEnum):
+    class KeywordPlanKeywordError(enum.IntEnum):
         """
         Enum describing possible errors from applying a keyword plan keyword.
 
@@ -7366,7 +7368,7 @@ KeywordPlanKeywordErrorEnum = KeywordPlanKeywordErrorEnum() # For __getattribute
 
 class KeywordPlanNegativeKeywordErrorEnum(_CreateEnumTypeUponFirstAccess):
     KeywordPlanNegativeKeywordError = '''\
-class KeywordPlanNegativeKeywordError(enum.IntEnum):
+    class KeywordPlanNegativeKeywordError(enum.IntEnum):
         """
         Enum describing possible errors from applying a keyword plan negative
         keyword.
@@ -7383,7 +7385,7 @@ KeywordPlanNegativeKeywordErrorEnum = KeywordPlanNegativeKeywordErrorEnum() # Fo
 
 class KeywordPlanNetworkEnum(_CreateEnumTypeUponFirstAccess):
     KeywordPlanNetwork = '''\
-class KeywordPlanNetwork(enum.IntEnum):
+    class KeywordPlanNetwork(enum.IntEnum):
         """
         Enumerates keyword plan forecastable network types.
 
@@ -7403,7 +7405,7 @@ KeywordPlanNetworkEnum = KeywordPlanNetworkEnum() # For __getattribute__
 
 class LabelErrorEnum(_CreateEnumTypeUponFirstAccess):
     LabelError = '''\
-class LabelError(enum.IntEnum):
+    class LabelError(enum.IntEnum):
         """
         Enum describing possible label errors.
 
@@ -7439,7 +7441,7 @@ LabelErrorEnum = LabelErrorEnum() # For __getattribute__
 
 class LabelStatusEnum(_CreateEnumTypeUponFirstAccess):
     LabelStatus = '''\
-class LabelStatus(enum.IntEnum):
+    class LabelStatus(enum.IntEnum):
         """
         Possible statuses of a label.
 
@@ -7459,7 +7461,7 @@ LabelStatusEnum = LabelStatusEnum() # For __getattribute__
 
 class LanguageCodeErrorEnum(_CreateEnumTypeUponFirstAccess):
     LanguageCodeError = '''\
-class LanguageCodeError(enum.IntEnum):
+    class LanguageCodeError(enum.IntEnum):
         """
         Enum describing language code errors.
 
@@ -7479,7 +7481,7 @@ LanguageCodeErrorEnum = LanguageCodeErrorEnum() # For __getattribute__
 
 class LegacyAppInstallAdAppStoreEnum(_CreateEnumTypeUponFirstAccess):
     LegacyAppInstallAdAppStore = '''\
-class LegacyAppInstallAdAppStore(enum.IntEnum):
+    class LegacyAppInstallAdAppStore(enum.IntEnum):
         """
         App store type in a legacy app install ad.
 
@@ -7505,7 +7507,7 @@ LegacyAppInstallAdAppStoreEnum = LegacyAppInstallAdAppStoreEnum() # For __getatt
 
 class ListOperationErrorEnum(_CreateEnumTypeUponFirstAccess):
     ListOperationError = '''\
-class ListOperationError(enum.IntEnum):
+    class ListOperationError(enum.IntEnum):
         """
         Enum describing possible list operation errors.
 
@@ -7539,7 +7541,7 @@ ListOperationErrorEnum = ListOperationErrorEnum() # For __getattribute__
 
 class ListOperator(_CreateEnumTypeUponFirstAccess):
     Enum = '''\
-class Enum(enum.IntEnum):
+    class Enum(enum.IntEnum):
         """
         Possible list operators.
 
@@ -7559,7 +7561,7 @@ ListOperator = ListOperator() # For __getattribute__
 
 class ListingCustomAttributeIndexEnum(_CreateEnumTypeUponFirstAccess):
     ListingCustomAttributeIndex = '''\
-class ListingCustomAttributeIndex(enum.IntEnum):
+    class ListingCustomAttributeIndex(enum.IntEnum):
         """
         The index of the listing custom attribute.
 
@@ -7585,7 +7587,7 @@ ListingCustomAttributeIndexEnum = ListingCustomAttributeIndexEnum() # For __geta
 
 class ListingGroupTypeEnum(_CreateEnumTypeUponFirstAccess):
     ListingGroupType = '''\
-class ListingGroupType(enum.IntEnum):
+    class ListingGroupType(enum.IntEnum):
         """
         The type of the listing group.
 
@@ -7607,7 +7609,7 @@ ListingGroupTypeEnum = ListingGroupTypeEnum() # For __getattribute__
 
 class LocalPlaceholderFieldEnum(_CreateEnumTypeUponFirstAccess):
     LocalPlaceholderField = '''\
-class LocalPlaceholderField(enum.IntEnum):
+    class LocalPlaceholderField(enum.IntEnum):
         """
         Possible values for Local placeholder fields.
 
@@ -7676,7 +7678,7 @@ LocalPlaceholderFieldEnum = LocalPlaceholderFieldEnum() # For __getattribute__
 
 class LocationExtensionTargetingCriterionFieldEnum(_CreateEnumTypeUponFirstAccess):
     LocationExtensionTargetingCriterionField = '''\
-class LocationExtensionTargetingCriterionField(enum.IntEnum):
+    class LocationExtensionTargetingCriterionField(enum.IntEnum):
         """
         Possible values for Location Extension Targeting criterion fields.
 
@@ -7704,7 +7706,7 @@ LocationExtensionTargetingCriterionFieldEnum = LocationExtensionTargetingCriteri
 
 class LocationGroupRadiusUnitsEnum(_CreateEnumTypeUponFirstAccess):
     LocationGroupRadiusUnits = '''\
-class LocationGroupRadiusUnits(enum.IntEnum):
+    class LocationGroupRadiusUnits(enum.IntEnum):
         """
         The unit of radius distance in location group (e.g. MILES)
 
@@ -7724,7 +7726,7 @@ LocationGroupRadiusUnitsEnum = LocationGroupRadiusUnitsEnum() # For __getattribu
 
 class LocationPlaceholderFieldEnum(_CreateEnumTypeUponFirstAccess):
     LocationPlaceholderField = '''\
-class LocationPlaceholderField(enum.IntEnum):
+    class LocationPlaceholderField(enum.IntEnum):
         """
         Possible values for Location placeholder fields.
 
@@ -7756,7 +7758,7 @@ LocationPlaceholderFieldEnum = LocationPlaceholderFieldEnum() # For __getattribu
 
 class LocationSourceTypeEnum(_CreateEnumTypeUponFirstAccess):
     LocationSourceType = '''\
-class LocationSourceType(enum.IntEnum):
+    class LocationSourceType(enum.IntEnum):
         """
         The possible types of a location source.
 
@@ -7777,7 +7779,7 @@ LocationSourceTypeEnum = LocationSourceTypeEnum() # For __getattribute__
 
 class ManagerLinkErrorEnum(_CreateEnumTypeUponFirstAccess):
     ManagerLinkError = '''\
-class ManagerLinkError(enum.IntEnum):
+    class ManagerLinkError(enum.IntEnum):
         """
         Enum describing possible ManagerLink errors.
 
@@ -7822,7 +7824,7 @@ ManagerLinkErrorEnum = ManagerLinkErrorEnum() # For __getattribute__
 
 class ManagerLinkStatusEnum(_CreateEnumTypeUponFirstAccess):
     ManagerLinkStatus = '''\
-class ManagerLinkStatus(enum.IntEnum):
+    class ManagerLinkStatus(enum.IntEnum):
         """
         Possible statuses of a link.
 
@@ -7850,7 +7852,7 @@ ManagerLinkStatusEnum = ManagerLinkStatusEnum() # For __getattribute__
 
 class MatchingFunctionContextTypeEnum(_CreateEnumTypeUponFirstAccess):
     MatchingFunctionContextType = '''\
-class MatchingFunctionContextType(enum.IntEnum):
+    class MatchingFunctionContextType(enum.IntEnum):
         """
         Possible context types for an operand in a matching function.
 
@@ -7870,7 +7872,7 @@ MatchingFunctionContextTypeEnum = MatchingFunctionContextTypeEnum() # For __geta
 
 class MatchingFunctionOperatorEnum(_CreateEnumTypeUponFirstAccess):
     MatchingFunctionOperator = '''\
-class MatchingFunctionOperator(enum.IntEnum):
+    class MatchingFunctionOperator(enum.IntEnum):
         """
         Possible operators in a matching function.
 
@@ -7902,7 +7904,7 @@ MatchingFunctionOperatorEnum = MatchingFunctionOperatorEnum() # For __getattribu
 
 class MediaBundleErrorEnum(_CreateEnumTypeUponFirstAccess):
     MediaBundleError = '''\
-class MediaBundleError(enum.IntEnum):
+    class MediaBundleError(enum.IntEnum):
         """
         Enum describing possible media bundle errors.
 
@@ -7962,7 +7964,7 @@ MediaBundleErrorEnum = MediaBundleErrorEnum() # For __getattribute__
 
 class MediaFileErrorEnum(_CreateEnumTypeUponFirstAccess):
     MediaFileError = '''\
-class MediaFileError(enum.IntEnum):
+    class MediaFileError(enum.IntEnum):
         """
         Enum describing possible media file errors.
 
@@ -8024,7 +8026,7 @@ MediaFileErrorEnum = MediaFileErrorEnum() # For __getattribute__
 
 class MediaTypeEnum(_CreateEnumTypeUponFirstAccess):
     MediaType = '''\
-class MediaType(enum.IntEnum):
+    class MediaType(enum.IntEnum):
         """
         The type of media.
 
@@ -8054,7 +8056,7 @@ MediaTypeEnum = MediaTypeEnum() # For __getattribute__
 
 class MediaUploadErrorEnum(_CreateEnumTypeUponFirstAccess):
     MediaUploadError = '''\
-class MediaUploadError(enum.IntEnum):
+    class MediaUploadError(enum.IntEnum):
         """
         Enum describing possible media uploading errors.
 
@@ -8078,7 +8080,7 @@ MediaUploadErrorEnum = MediaUploadErrorEnum() # For __getattribute__
 
 class MerchantCenterLinkErrorEnum(_CreateEnumTypeUponFirstAccess):
     MerchantCenterLinkError = '''\
-class MerchantCenterLinkError(enum.IntEnum):
+    class MerchantCenterLinkError(enum.IntEnum):
         """
         Enum describing possible CustomerManagerLink errors.
 
@@ -8096,7 +8098,7 @@ MerchantCenterLinkErrorEnum = MerchantCenterLinkErrorEnum() # For __getattribute
 
 class MerchantCenterLinkStatusEnum(_CreateEnumTypeUponFirstAccess):
     MerchantCenterLinkStatus = '''\
-class MerchantCenterLinkStatus(enum.IntEnum):
+    class MerchantCenterLinkStatus(enum.IntEnum):
         """
         Describes the possible statuses for a link between a Google Ads customer
         and a Google Merchant Center account.
@@ -8118,7 +8120,7 @@ MerchantCenterLinkStatusEnum = MerchantCenterLinkStatusEnum() # For __getattribu
 
 class MessagePlaceholderFieldEnum(_CreateEnumTypeUponFirstAccess):
     MessagePlaceholderField = '''\
-class MessagePlaceholderField(enum.IntEnum):
+    class MessagePlaceholderField(enum.IntEnum):
         """
         Possible values for Message placeholder fields.
 
@@ -8146,7 +8148,7 @@ MessagePlaceholderFieldEnum = MessagePlaceholderFieldEnum() # For __getattribute
 
 class MimeTypeEnum(_CreateEnumTypeUponFirstAccess):
     MimeType = '''\
-class MimeType(enum.IntEnum):
+    class MimeType(enum.IntEnum):
         """
         The mime type
 
@@ -8188,7 +8190,7 @@ MimeTypeEnum = MimeTypeEnum() # For __getattribute__
 
 class MinuteOfHourEnum(_CreateEnumTypeUponFirstAccess):
     MinuteOfHour = '''\
-class MinuteOfHour(enum.IntEnum):
+    class MinuteOfHour(enum.IntEnum):
         """
         Enumerates of quarter-hours. E.g. "FIFTEEN"
 
@@ -8212,7 +8214,7 @@ MinuteOfHourEnum = MinuteOfHourEnum() # For __getattribute__
 
 class MobileDeviceTypeEnum(_CreateEnumTypeUponFirstAccess):
     MobileDeviceType = '''\
-class MobileDeviceType(enum.IntEnum):
+    class MobileDeviceType(enum.IntEnum):
         """
         The type of mobile device.
 
@@ -8232,7 +8234,7 @@ MobileDeviceTypeEnum = MobileDeviceTypeEnum() # For __getattribute__
 
 class MonthOfYearEnum(_CreateEnumTypeUponFirstAccess):
     MonthOfYear = '''\
-class MonthOfYear(enum.IntEnum):
+    class MonthOfYear(enum.IntEnum):
         """
         Enumerates months of the year, e.g., "January".
 
@@ -8272,7 +8274,7 @@ MonthOfYearEnum = MonthOfYearEnum() # For __getattribute__
 
 class MultiplierErrorEnum(_CreateEnumTypeUponFirstAccess):
     MultiplierError = '''\
-class MultiplierError(enum.IntEnum):
+    class MultiplierError(enum.IntEnum):
         """
         Enum describing possible multiplier errors.
 
@@ -8313,7 +8315,7 @@ MultiplierErrorEnum = MultiplierErrorEnum() # For __getattribute__
 
 class MutateErrorEnum(_CreateEnumTypeUponFirstAccess):
     MutateError = '''\
-class MutateError(enum.IntEnum):
+    class MutateError(enum.IntEnum):
         """
         Enum describing possible mutate errors.
 
@@ -8342,7 +8344,7 @@ MutateErrorEnum = MutateErrorEnum() # For __getattribute__
 
 class MutateJobErrorEnum(_CreateEnumTypeUponFirstAccess):
     MutateJobError = '''\
-class MutateJobError(enum.IntEnum):
+    class MutateJobError(enum.IntEnum):
         """
         Enum describing possible request errors.
 
@@ -8369,7 +8371,7 @@ MutateJobErrorEnum = MutateJobErrorEnum() # For __getattribute__
 
 class MutateJobStatusEnum(_CreateEnumTypeUponFirstAccess):
     MutateJobStatus = '''\
-class MutateJobStatus(enum.IntEnum):
+    class MutateJobStatus(enum.IntEnum):
         """
         The mutate job statuses.
 
@@ -8391,7 +8393,7 @@ MutateJobStatusEnum = MutateJobStatusEnum() # For __getattribute__
 
 class NegativeGeoTargetTypeEnum(_CreateEnumTypeUponFirstAccess):
     NegativeGeoTargetType = '''\
-class NegativeGeoTargetType(enum.IntEnum):
+    class NegativeGeoTargetType(enum.IntEnum):
         """
         The possible negative geo target types.
 
@@ -8413,7 +8415,7 @@ NegativeGeoTargetTypeEnum = NegativeGeoTargetTypeEnum() # For __getattribute__
 
 class NewResourceCreationErrorEnum(_CreateEnumTypeUponFirstAccess):
     NewResourceCreationError = '''\
-class NewResourceCreationError(enum.IntEnum):
+    class NewResourceCreationError(enum.IntEnum):
         """
         Enum describing possible new resource creation errors.
 
@@ -8436,7 +8438,7 @@ NewResourceCreationErrorEnum = NewResourceCreationErrorEnum() # For __getattribu
 
 class NotEmptyErrorEnum(_CreateEnumTypeUponFirstAccess):
     NotEmptyError = '''\
-class NotEmptyError(enum.IntEnum):
+    class NotEmptyError(enum.IntEnum):
         """
         Enum describing possible not empty errors.
 
@@ -8454,7 +8456,7 @@ NotEmptyErrorEnum = NotEmptyErrorEnum() # For __getattribute__
 
 class NotWhitelistedErrorEnum(_CreateEnumTypeUponFirstAccess):
     NotWhitelistedError = '''\
-class NotWhitelistedError(enum.IntEnum):
+    class NotWhitelistedError(enum.IntEnum):
         """
         Enum describing possible not whitelisted errors.
 
@@ -8472,7 +8474,7 @@ NotWhitelistedErrorEnum = NotWhitelistedErrorEnum() # For __getattribute__
 
 class NullErrorEnum(_CreateEnumTypeUponFirstAccess):
     NullError = '''\
-class NullError(enum.IntEnum):
+    class NullError(enum.IntEnum):
         """
         Enum describing possible null errors.
 
@@ -8490,7 +8492,7 @@ NullErrorEnum = NullErrorEnum() # For __getattribute__
 
 class OfflineUserDataJobErrorEnum(_CreateEnumTypeUponFirstAccess):
     OfflineUserDataJobError = '''\
-class OfflineUserDataJobError(enum.IntEnum):
+    class OfflineUserDataJobError(enum.IntEnum):
         """
         Enum describing possible request errors.
 
@@ -8562,7 +8564,7 @@ OfflineUserDataJobErrorEnum = OfflineUserDataJobErrorEnum() # For __getattribute
 
 class OfflineUserDataJobFailureReasonEnum(_CreateEnumTypeUponFirstAccess):
     OfflineUserDataJobFailureReason = '''\
-class OfflineUserDataJobFailureReason(enum.IntEnum):
+    class OfflineUserDataJobFailureReason(enum.IntEnum):
         """
         The failure reason of an offline user data job.
 
@@ -8582,7 +8584,7 @@ OfflineUserDataJobFailureReasonEnum = OfflineUserDataJobFailureReasonEnum() # Fo
 
 class OfflineUserDataJobStatusEnum(_CreateEnumTypeUponFirstAccess):
     OfflineUserDataJobStatus = '''\
-class OfflineUserDataJobStatus(enum.IntEnum):
+    class OfflineUserDataJobStatus(enum.IntEnum):
         """
         The status of an offline user data job.
 
@@ -8606,7 +8608,7 @@ OfflineUserDataJobStatusEnum = OfflineUserDataJobStatusEnum() # For __getattribu
 
 class OfflineUserDataJobTypeEnum(_CreateEnumTypeUponFirstAccess):
     OfflineUserDataJobType = '''\
-class OfflineUserDataJobType(enum.IntEnum):
+    class OfflineUserDataJobType(enum.IntEnum):
         """
         The type of an offline user data job.
 
@@ -8628,7 +8630,7 @@ OfflineUserDataJobTypeEnum = OfflineUserDataJobTypeEnum() # For __getattribute__
 
 class OperatingSystemVersionOperatorTypeEnum(_CreateEnumTypeUponFirstAccess):
     OperatingSystemVersionOperatorType = '''\
-class OperatingSystemVersionOperatorType(enum.IntEnum):
+    class OperatingSystemVersionOperatorType(enum.IntEnum):
         """
         The type of operating system version.
 
@@ -8648,7 +8650,7 @@ OperatingSystemVersionOperatorTypeEnum = OperatingSystemVersionOperatorTypeEnum(
 
 class OperationAccessDeniedErrorEnum(_CreateEnumTypeUponFirstAccess):
     OperationAccessDeniedError = '''\
-class OperationAccessDeniedError(enum.IntEnum):
+    class OperationAccessDeniedError(enum.IntEnum):
         """
         Enum describing possible operation access denied errors.
 
@@ -8684,7 +8686,7 @@ OperationAccessDeniedErrorEnum = OperationAccessDeniedErrorEnum() # For __getatt
 
 class OperatorErrorEnum(_CreateEnumTypeUponFirstAccess):
     OperatorError = '''\
-class OperatorError(enum.IntEnum):
+    class OperatorError(enum.IntEnum):
         """
         Enum describing possible operator errors.
 
@@ -8702,7 +8704,7 @@ OperatorErrorEnum = OperatorErrorEnum() # For __getattribute__
 
 class PageOnePromotedStrategyGoalEnum(_CreateEnumTypeUponFirstAccess):
     PageOnePromotedStrategyGoal = '''\
-class PageOnePromotedStrategyGoal(enum.IntEnum):
+    class PageOnePromotedStrategyGoal(enum.IntEnum):
         """
         Enum describing possible strategy goals.
 
@@ -8722,7 +8724,7 @@ PageOnePromotedStrategyGoalEnum = PageOnePromotedStrategyGoalEnum() # For __geta
 
 class ParentalStatusTypeEnum(_CreateEnumTypeUponFirstAccess):
     ParentalStatusType = '''\
-class ParentalStatusType(enum.IntEnum):
+    class ParentalStatusType(enum.IntEnum):
         """
         The type of parental statuses (e.g. not a parent).
 
@@ -8744,7 +8746,7 @@ ParentalStatusTypeEnum = ParentalStatusTypeEnum() # For __getattribute__
 
 class PartialFailureErrorEnum(_CreateEnumTypeUponFirstAccess):
     PartialFailureError = '''\
-class PartialFailureError(enum.IntEnum):
+    class PartialFailureError(enum.IntEnum):
         """
         Enum describing possible partial failure errors.
 
@@ -8763,7 +8765,7 @@ PartialFailureErrorEnum = PartialFailureErrorEnum() # For __getattribute__
 
 class PaymentModeEnum(_CreateEnumTypeUponFirstAccess):
     PaymentMode = '''\
-class PaymentMode(enum.IntEnum):
+    class PaymentMode(enum.IntEnum):
         """
         Enum describing possible payment modes.
 
@@ -8792,7 +8794,7 @@ PaymentModeEnum = PaymentModeEnum() # For __getattribute__
 
 class PlaceholderTypeEnum(_CreateEnumTypeUponFirstAccess):
     PlaceholderType = '''\
-class PlaceholderType(enum.IntEnum):
+    class PlaceholderType(enum.IntEnum):
         """
         Possible placeholder types for a feed mapping.
 
@@ -8866,7 +8868,7 @@ PlaceholderTypeEnum = PlaceholderTypeEnum() # For __getattribute__
 
 class PlacementTypeEnum(_CreateEnumTypeUponFirstAccess):
     PlacementType = '''\
-class PlacementType(enum.IntEnum):
+    class PlacementType(enum.IntEnum):
         """
         Possible placement types for a feed mapping.
 
@@ -8892,7 +8894,7 @@ PlacementTypeEnum = PlacementTypeEnum() # For __getattribute__
 
 class PolicyApprovalStatusEnum(_CreateEnumTypeUponFirstAccess):
     PolicyApprovalStatus = '''\
-class PolicyApprovalStatus(enum.IntEnum):
+    class PolicyApprovalStatus(enum.IntEnum):
         """
         The possible policy approval statuses. When there are several approval
         statuses available the most severe one will be used. The order of
@@ -8922,7 +8924,7 @@ PolicyApprovalStatusEnum = PolicyApprovalStatusEnum() # For __getattribute__
 
 class PolicyFindingErrorEnum(_CreateEnumTypeUponFirstAccess):
     PolicyFindingError = '''\
-class PolicyFindingError(enum.IntEnum):
+    class PolicyFindingError(enum.IntEnum):
         """
         Enum describing possible policy finding errors.
 
@@ -8943,7 +8945,7 @@ PolicyFindingErrorEnum = PolicyFindingErrorEnum() # For __getattribute__
 
 class PolicyReviewStatusEnum(_CreateEnumTypeUponFirstAccess):
     PolicyReviewStatus = '''\
-class PolicyReviewStatus(enum.IntEnum):
+    class PolicyReviewStatus(enum.IntEnum):
         """
         The possible policy review statuses.
 
@@ -8971,7 +8973,7 @@ PolicyReviewStatusEnum = PolicyReviewStatusEnum() # For __getattribute__
 
 class PolicyTopicEntryTypeEnum(_CreateEnumTypeUponFirstAccess):
     PolicyTopicEntryType = '''\
-class PolicyTopicEntryType(enum.IntEnum):
+    class PolicyTopicEntryType(enum.IntEnum):
         """
         The possible policy topic entry types.
 
@@ -9003,7 +9005,7 @@ PolicyTopicEntryTypeEnum = PolicyTopicEntryTypeEnum() # For __getattribute__
 
 class PolicyTopicEvidenceDestinationMismatchUrlTypeEnum(_CreateEnumTypeUponFirstAccess):
     PolicyTopicEvidenceDestinationMismatchUrlType = '''\
-class PolicyTopicEvidenceDestinationMismatchUrlType(enum.IntEnum):
+    class PolicyTopicEvidenceDestinationMismatchUrlType(enum.IntEnum):
         """
         The possible policy topic evidence destination mismatch url types.
 
@@ -9031,7 +9033,7 @@ PolicyTopicEvidenceDestinationMismatchUrlTypeEnum = PolicyTopicEvidenceDestinati
 
 class PolicyTopicEvidenceDestinationNotWorkingDeviceEnum(_CreateEnumTypeUponFirstAccess):
     PolicyTopicEvidenceDestinationNotWorkingDevice = '''\
-class PolicyTopicEvidenceDestinationNotWorkingDevice(enum.IntEnum):
+    class PolicyTopicEvidenceDestinationNotWorkingDevice(enum.IntEnum):
         """
         The possible policy topic evidence destination not working devices.
 
@@ -9055,7 +9057,7 @@ PolicyTopicEvidenceDestinationNotWorkingDeviceEnum = PolicyTopicEvidenceDestinat
 
 class PolicyTopicEvidenceDestinationNotWorkingDnsErrorTypeEnum(_CreateEnumTypeUponFirstAccess):
     PolicyTopicEvidenceDestinationNotWorkingDnsErrorType = '''\
-class PolicyTopicEvidenceDestinationNotWorkingDnsErrorType(enum.IntEnum):
+    class PolicyTopicEvidenceDestinationNotWorkingDnsErrorType(enum.IntEnum):
         """
         The possible policy topic evidence destination not working DNS error types.
 
@@ -9079,7 +9081,7 @@ PolicyTopicEvidenceDestinationNotWorkingDnsErrorTypeEnum = PolicyTopicEvidenceDe
 
 class PolicyValidationParameterErrorEnum(_CreateEnumTypeUponFirstAccess):
     PolicyValidationParameterError = '''\
-class PolicyValidationParameterError(enum.IntEnum):
+    class PolicyValidationParameterError(enum.IntEnum):
         """
         Enum describing possible policy validation parameter errors.
 
@@ -9102,7 +9104,7 @@ PolicyValidationParameterErrorEnum = PolicyValidationParameterErrorEnum() # For 
 
 class PolicyViolationErrorEnum(_CreateEnumTypeUponFirstAccess):
     PolicyViolationError = '''\
-class PolicyViolationError(enum.IntEnum):
+    class PolicyViolationError(enum.IntEnum):
         """
         Enum describing possible policy violation errors.
 
@@ -9120,7 +9122,7 @@ PolicyViolationErrorEnum = PolicyViolationErrorEnum() # For __getattribute__
 
 class PositiveGeoTargetTypeEnum(_CreateEnumTypeUponFirstAccess):
     PositiveGeoTargetType = '''\
-class PositiveGeoTargetType(enum.IntEnum):
+    class PositiveGeoTargetType(enum.IntEnum):
         """
         The possible positive geo target types.
 
@@ -9145,7 +9147,7 @@ PositiveGeoTargetTypeEnum = PositiveGeoTargetTypeEnum() # For __getattribute__
 
 class PreferredContentTypeEnum(_CreateEnumTypeUponFirstAccess):
     PreferredContentType = '''\
-class PreferredContentType(enum.IntEnum):
+    class PreferredContentType(enum.IntEnum):
         """
         Enumerates preferred content criterion type.
 
@@ -9163,7 +9165,7 @@ PreferredContentTypeEnum = PreferredContentTypeEnum() # For __getattribute__
 
 class PriceExtensionPriceQualifierEnum(_CreateEnumTypeUponFirstAccess):
     PriceExtensionPriceQualifier = '''\
-class PriceExtensionPriceQualifier(enum.IntEnum):
+    class PriceExtensionPriceQualifier(enum.IntEnum):
         """
         Enums of price extension price qualifier.
 
@@ -9185,7 +9187,7 @@ PriceExtensionPriceQualifierEnum = PriceExtensionPriceQualifierEnum() # For __ge
 
 class PriceExtensionPriceUnitEnum(_CreateEnumTypeUponFirstAccess):
     PriceExtensionPriceUnit = '''\
-class PriceExtensionPriceUnit(enum.IntEnum):
+    class PriceExtensionPriceUnit(enum.IntEnum):
         """
         Price extension price unit.
 
@@ -9213,7 +9215,7 @@ PriceExtensionPriceUnitEnum = PriceExtensionPriceUnitEnum() # For __getattribute
 
 class PriceExtensionTypeEnum(_CreateEnumTypeUponFirstAccess):
     PriceExtensionType = '''\
-class PriceExtensionType(enum.IntEnum):
+    class PriceExtensionType(enum.IntEnum):
         """
         Price extension type.
 
@@ -9247,7 +9249,7 @@ PriceExtensionTypeEnum = PriceExtensionTypeEnum() # For __getattribute__
 
 class PricePlaceholderFieldEnum(_CreateEnumTypeUponFirstAccess):
     PricePlaceholderField = '''\
-class PricePlaceholderField(enum.IntEnum):
+    class PricePlaceholderField(enum.IntEnum):
         """
         Possible values for Price placeholder fields.
 
@@ -9406,7 +9408,7 @@ PricePlaceholderFieldEnum = PricePlaceholderFieldEnum() # For __getattribute__
 
 class ProductBiddingCategoryLevelEnum(_CreateEnumTypeUponFirstAccess):
     ProductBiddingCategoryLevel = '''\
-class ProductBiddingCategoryLevel(enum.IntEnum):
+    class ProductBiddingCategoryLevel(enum.IntEnum):
         """
         Enum describing the level of the product bidding category.
 
@@ -9432,7 +9434,7 @@ ProductBiddingCategoryLevelEnum = ProductBiddingCategoryLevelEnum() # For __geta
 
 class ProductBiddingCategoryStatusEnum(_CreateEnumTypeUponFirstAccess):
     ProductBiddingCategoryStatus = '''\
-class ProductBiddingCategoryStatus(enum.IntEnum):
+    class ProductBiddingCategoryStatus(enum.IntEnum):
         """
         Enum describing the status of the product bidding category.
 
@@ -9452,7 +9454,7 @@ ProductBiddingCategoryStatusEnum = ProductBiddingCategoryStatusEnum() # For __ge
 
 class ProductChannelEnum(_CreateEnumTypeUponFirstAccess):
     ProductChannel = '''\
-class ProductChannel(enum.IntEnum):
+    class ProductChannel(enum.IntEnum):
         """
         Enum describing the locality of a product offer.
 
@@ -9472,7 +9474,7 @@ ProductChannelEnum = ProductChannelEnum() # For __getattribute__
 
 class ProductChannelExclusivityEnum(_CreateEnumTypeUponFirstAccess):
     ProductChannelExclusivity = '''\
-class ProductChannelExclusivity(enum.IntEnum):
+    class ProductChannelExclusivity(enum.IntEnum):
         """
         Enum describing the availability of a product offer.
 
@@ -9494,7 +9496,7 @@ ProductChannelExclusivityEnum = ProductChannelExclusivityEnum() # For __getattri
 
 class ProductConditionEnum(_CreateEnumTypeUponFirstAccess):
     ProductCondition = '''\
-class ProductCondition(enum.IntEnum):
+    class ProductCondition(enum.IntEnum):
         """
         Enum describing the condition of a product offer.
 
@@ -9516,7 +9518,7 @@ ProductConditionEnum = ProductConditionEnum() # For __getattribute__
 
 class ProductTypeLevelEnum(_CreateEnumTypeUponFirstAccess):
     ProductTypeLevel = '''\
-class ProductTypeLevel(enum.IntEnum):
+    class ProductTypeLevel(enum.IntEnum):
         """
         Enum describing the level of the type of a product offer.
 
@@ -9542,7 +9544,7 @@ ProductTypeLevelEnum = ProductTypeLevelEnum() # For __getattribute__
 
 class PromotionExtensionDiscountModifierEnum(_CreateEnumTypeUponFirstAccess):
     PromotionExtensionDiscountModifier = '''\
-class PromotionExtensionDiscountModifier(enum.IntEnum):
+    class PromotionExtensionDiscountModifier(enum.IntEnum):
         """
         A promotion extension discount modifier.
 
@@ -9560,7 +9562,7 @@ PromotionExtensionDiscountModifierEnum = PromotionExtensionDiscountModifierEnum(
 
 class PromotionExtensionOccasionEnum(_CreateEnumTypeUponFirstAccess):
     PromotionExtensionOccasion = '''\
-class PromotionExtensionOccasion(enum.IntEnum):
+    class PromotionExtensionOccasion(enum.IntEnum):
         """
         A promotion extension occasion.
 
@@ -9650,7 +9652,7 @@ PromotionExtensionOccasionEnum = PromotionExtensionOccasionEnum() # For __getatt
 
 class PromotionPlaceholderFieldEnum(_CreateEnumTypeUponFirstAccess):
     PromotionPlaceholderField = '''\
-class PromotionPlaceholderField(enum.IntEnum):
+    class PromotionPlaceholderField(enum.IntEnum):
         """
         Possible values for Promotion placeholder fields.
 
@@ -9704,7 +9706,7 @@ PromotionPlaceholderFieldEnum = PromotionPlaceholderFieldEnum() # For __getattri
 
 class ProximityRadiusUnitsEnum(_CreateEnumTypeUponFirstAccess):
     ProximityRadiusUnits = '''\
-class ProximityRadiusUnits(enum.IntEnum):
+    class ProximityRadiusUnits(enum.IntEnum):
         """
         The unit of radius distance in proximity (e.g. MILES)
 
@@ -9724,7 +9726,7 @@ ProximityRadiusUnitsEnum = ProximityRadiusUnitsEnum() # For __getattribute__
 
 class QualityScoreBucketEnum(_CreateEnumTypeUponFirstAccess):
     QualityScoreBucket = '''\
-class QualityScoreBucket(enum.IntEnum):
+    class QualityScoreBucket(enum.IntEnum):
         """
         Enum listing the possible quality score buckets.
 
@@ -9746,7 +9748,7 @@ QualityScoreBucketEnum = QualityScoreBucketEnum() # For __getattribute__
 
 class QueryErrorEnum(_CreateEnumTypeUponFirstAccess):
     QueryError = '''\
-class QueryError(enum.IntEnum):
+    class QueryError(enum.IntEnum):
         """
         Enum describing possible query errors.
 
@@ -9883,7 +9885,7 @@ QueryErrorEnum = QueryErrorEnum() # For __getattribute__
 
 class QuotaErrorEnum(_CreateEnumTypeUponFirstAccess):
     QuotaError = '''\
-class QuotaError(enum.IntEnum):
+    class QuotaError(enum.IntEnum):
         """
         Enum describing possible quota errors.
 
@@ -9905,7 +9907,7 @@ QuotaErrorEnum = QuotaErrorEnum() # For __getattribute__
 
 class RangeErrorEnum(_CreateEnumTypeUponFirstAccess):
     RangeError = '''\
-class RangeError(enum.IntEnum):
+    class RangeError(enum.IntEnum):
         """
         Enum describing possible range errors.
 
@@ -9925,7 +9927,7 @@ RangeErrorEnum = RangeErrorEnum() # For __getattribute__
 
 class ReachPlanAdLengthEnum(_CreateEnumTypeUponFirstAccess):
     ReachPlanAdLength = '''\
-class ReachPlanAdLength(enum.IntEnum):
+    class ReachPlanAdLength(enum.IntEnum):
         """
         Possible ad length values.
 
@@ -9947,7 +9949,7 @@ ReachPlanAdLengthEnum = ReachPlanAdLengthEnum() # For __getattribute__
 
 class ReachPlanAgeRangeEnum(_CreateEnumTypeUponFirstAccess):
     ReachPlanAgeRange = '''\
-class ReachPlanAgeRange(enum.IntEnum):
+    class ReachPlanAgeRange(enum.IntEnum):
         """
         Possible plannable age range values.
 
@@ -10015,7 +10017,7 @@ ReachPlanAgeRangeEnum = ReachPlanAgeRangeEnum() # For __getattribute__
 
 class ReachPlanErrorEnum(_CreateEnumTypeUponFirstAccess):
     ReachPlanError = '''\
-class ReachPlanError(enum.IntEnum):
+    class ReachPlanError(enum.IntEnum):
         """
         Enum describing possible errors from ReachPlanService.
 
@@ -10031,7 +10033,7 @@ ReachPlanErrorEnum = ReachPlanErrorEnum() # For __getattribute__
 
 class RealEstatePlaceholderFieldEnum(_CreateEnumTypeUponFirstAccess):
     RealEstatePlaceholderField = '''\
-class RealEstatePlaceholderField(enum.IntEnum):
+    class RealEstatePlaceholderField(enum.IntEnum):
         """
         Possible values for Real Estate placeholder fields.
 
@@ -10097,7 +10099,7 @@ RealEstatePlaceholderFieldEnum = RealEstatePlaceholderFieldEnum() # For __getatt
 
 class RecommendationErrorEnum(_CreateEnumTypeUponFirstAccess):
     RecommendationError = '''\
-class RecommendationError(enum.IntEnum):
+    class RecommendationError(enum.IntEnum):
         """
         Enum describing possible errors from applying a recommendation.
 
@@ -10145,7 +10147,7 @@ RecommendationErrorEnum = RecommendationErrorEnum() # For __getattribute__
 
 class RecommendationTypeEnum(_CreateEnumTypeUponFirstAccess):
     RecommendationType = '''\
-class RecommendationType(enum.IntEnum):
+    class RecommendationType(enum.IntEnum):
         """
         Types of recommendations.
 
@@ -10195,7 +10197,7 @@ RecommendationTypeEnum = RecommendationTypeEnum() # For __getattribute__
 
 class RegionCodeErrorEnum(_CreateEnumTypeUponFirstAccess):
     RegionCodeError = '''\
-class RegionCodeError(enum.IntEnum):
+    class RegionCodeError(enum.IntEnum):
         """
         Enum describing possible region code errors.
 
@@ -10213,7 +10215,7 @@ RegionCodeErrorEnum = RegionCodeErrorEnum() # For __getattribute__
 
 class RequestErrorEnum(_CreateEnumTypeUponFirstAccess):
     RequestError = '''\
-class RequestError(enum.IntEnum):
+    class RequestError(enum.IntEnum):
         """
         Enum describing possible request errors.
 
@@ -10276,7 +10278,7 @@ RequestErrorEnum = RequestErrorEnum() # For __getattribute__
 
 class ResourceAccessDeniedErrorEnum(_CreateEnumTypeUponFirstAccess):
     ResourceAccessDeniedError = '''\
-class ResourceAccessDeniedError(enum.IntEnum):
+    class ResourceAccessDeniedError(enum.IntEnum):
         """
         Enum describing possible resource access denied errors.
 
@@ -10294,7 +10296,7 @@ ResourceAccessDeniedErrorEnum = ResourceAccessDeniedErrorEnum() # For __getattri
 
 class ResourceCountLimitExceededErrorEnum(_CreateEnumTypeUponFirstAccess):
     ResourceCountLimitExceededError = '''\
-class ResourceCountLimitExceededError(enum.IntEnum):
+    class ResourceCountLimitExceededError(enum.IntEnum):
         """
         Enum describing possible resource count limit exceeded errors.
 
@@ -10350,7 +10352,7 @@ ResourceCountLimitExceededErrorEnum = ResourceCountLimitExceededErrorEnum() # Fo
 
 class SearchEngineResultsPageTypeEnum(_CreateEnumTypeUponFirstAccess):
     SearchEngineResultsPageType = '''\
-class SearchEngineResultsPageType(enum.IntEnum):
+    class SearchEngineResultsPageType(enum.IntEnum):
         """
         The type of the search engine results page.
 
@@ -10373,7 +10375,7 @@ SearchEngineResultsPageTypeEnum = SearchEngineResultsPageTypeEnum() # For __geta
 
 class SearchTermMatchTypeEnum(_CreateEnumTypeUponFirstAccess):
     SearchTermMatchType = '''\
-class SearchTermMatchType(enum.IntEnum):
+    class SearchTermMatchType(enum.IntEnum):
         """
         Possible match types for a keyword triggering an ad, including variants.
 
@@ -10399,7 +10401,7 @@ SearchTermMatchTypeEnum = SearchTermMatchTypeEnum() # For __getattribute__
 
 class SearchTermTargetingStatusEnum(_CreateEnumTypeUponFirstAccess):
     SearchTermTargetingStatus = '''\
-class SearchTermTargetingStatus(enum.IntEnum):
+    class SearchTermTargetingStatus(enum.IntEnum):
         """
         Indicates whether the search term is one of your targeted or excluded
         keywords.
@@ -10424,7 +10426,7 @@ SearchTermTargetingStatusEnum = SearchTermTargetingStatusEnum() # For __getattri
 
 class ServedAssetFieldTypeEnum(_CreateEnumTypeUponFirstAccess):
     ServedAssetFieldType = '''\
-class ServedAssetFieldType(enum.IntEnum):
+    class ServedAssetFieldType(enum.IntEnum):
         """
         The possible asset field types.
 
@@ -10452,7 +10454,7 @@ ServedAssetFieldTypeEnum = ServedAssetFieldTypeEnum() # For __getattribute__
 
 class SettingErrorEnum(_CreateEnumTypeUponFirstAccess):
     SettingError = '''\
-class SettingError(enum.IntEnum):
+    class SettingError(enum.IntEnum):
         """
         Enum describing possible setting errors.
 
@@ -10512,7 +10514,7 @@ SettingErrorEnum = SettingErrorEnum() # For __getattribute__
 
 class SharedCriterionErrorEnum(_CreateEnumTypeUponFirstAccess):
     SharedCriterionError = '''\
-class SharedCriterionError(enum.IntEnum):
+    class SharedCriterionError(enum.IntEnum):
         """
         Enum describing possible shared criterion errors.
 
@@ -10530,7 +10532,7 @@ SharedCriterionErrorEnum = SharedCriterionErrorEnum() # For __getattribute__
 
 class SharedSetErrorEnum(_CreateEnumTypeUponFirstAccess):
     SharedSetError = '''\
-class SharedSetError(enum.IntEnum):
+    class SharedSetError(enum.IntEnum):
         """
         Enum describing possible shared set errors.
 
@@ -10554,7 +10556,7 @@ SharedSetErrorEnum = SharedSetErrorEnum() # For __getattribute__
 
 class SharedSetStatusEnum(_CreateEnumTypeUponFirstAccess):
     SharedSetStatus = '''\
-class SharedSetStatus(enum.IntEnum):
+    class SharedSetStatus(enum.IntEnum):
         """
         Enum listing the possible shared set statuses.
 
@@ -10574,7 +10576,7 @@ SharedSetStatusEnum = SharedSetStatusEnum() # For __getattribute__
 
 class SharedSetTypeEnum(_CreateEnumTypeUponFirstAccess):
     SharedSetType = '''\
-class SharedSetType(enum.IntEnum):
+    class SharedSetType(enum.IntEnum):
         """
         Enum listing the possible shared set types.
 
@@ -10594,7 +10596,7 @@ SharedSetTypeEnum = SharedSetTypeEnum() # For __getattribute__
 
 class SimulationModificationMethodEnum(_CreateEnumTypeUponFirstAccess):
     SimulationModificationMethod = '''\
-class SimulationModificationMethod(enum.IntEnum):
+    class SimulationModificationMethod(enum.IntEnum):
         """
         Enum describing the method by which a simulation modifies a field.
 
@@ -10617,7 +10619,7 @@ SimulationModificationMethodEnum = SimulationModificationMethodEnum() # For __ge
 
 class SimulationTypeEnum(_CreateEnumTypeUponFirstAccess):
     SimulationType = '''\
-class SimulationType(enum.IntEnum):
+    class SimulationType(enum.IntEnum):
         """
         Enum describing the field a simulation modifies.
 
@@ -10641,7 +10643,7 @@ SimulationTypeEnum = SimulationTypeEnum() # For __getattribute__
 
 class SitelinkPlaceholderFieldEnum(_CreateEnumTypeUponFirstAccess):
     SitelinkPlaceholderField = '''\
-class SitelinkPlaceholderField(enum.IntEnum):
+    class SitelinkPlaceholderField(enum.IntEnum):
         """
         Possible values for Sitelink placeholder fields.
 
@@ -10675,7 +10677,7 @@ SitelinkPlaceholderFieldEnum = SitelinkPlaceholderFieldEnum() # For __getattribu
 
 class SizeLimitErrorEnum(_CreateEnumTypeUponFirstAccess):
     SizeLimitError = '''\
-class SizeLimitError(enum.IntEnum):
+    class SizeLimitError(enum.IntEnum):
         """
         Enum describing possible size limit errors.
 
@@ -10695,7 +10697,7 @@ SizeLimitErrorEnum = SizeLimitErrorEnum() # For __getattribute__
 
 class SlotEnum(_CreateEnumTypeUponFirstAccess):
     Slot = '''\
-class Slot(enum.IntEnum):
+    class Slot(enum.IntEnum):
         """
         Enumerates possible positions of the Ad.
 
@@ -10725,7 +10727,7 @@ SlotEnum = SlotEnum() # For __getattribute__
 
 class SpendingLimitTypeEnum(_CreateEnumTypeUponFirstAccess):
     SpendingLimitType = '''\
-class SpendingLimitType(enum.IntEnum):
+    class SpendingLimitType(enum.IntEnum):
         """
         The possible spending limit types used by certain resources as an
         alternative to absolute money values in micros.
@@ -10744,7 +10746,7 @@ SpendingLimitTypeEnum = SpendingLimitTypeEnum() # For __getattribute__
 
 class StringFormatErrorEnum(_CreateEnumTypeUponFirstAccess):
     StringFormatError = '''\
-class StringFormatError(enum.IntEnum):
+    class StringFormatError(enum.IntEnum):
         """
         Enum describing possible string format errors.
 
@@ -10764,7 +10766,7 @@ StringFormatErrorEnum = StringFormatErrorEnum() # For __getattribute__
 
 class StringLengthErrorEnum(_CreateEnumTypeUponFirstAccess):
     StringLengthError = '''\
-class StringLengthError(enum.IntEnum):
+    class StringLengthError(enum.IntEnum):
         """
         Enum describing possible string length errors.
 
@@ -10784,7 +10786,7 @@ StringLengthErrorEnum = StringLengthErrorEnum() # For __getattribute__
 
 class StructuredSnippetPlaceholderFieldEnum(_CreateEnumTypeUponFirstAccess):
     StructuredSnippetPlaceholderField = '''\
-class StructuredSnippetPlaceholderField(enum.IntEnum):
+    class StructuredSnippetPlaceholderField(enum.IntEnum):
         """
         Possible values for Structured Snippet placeholder fields.
 
@@ -10809,7 +10811,7 @@ StructuredSnippetPlaceholderFieldEnum = StructuredSnippetPlaceholderFieldEnum() 
 
 class SummaryRowSettingEnum(_CreateEnumTypeUponFirstAccess):
     SummaryRowSetting = '''\
-class SummaryRowSetting(enum.IntEnum):
+    class SummaryRowSetting(enum.IntEnum):
         """
         Enum describing return summary row settings.
 
@@ -10832,7 +10834,7 @@ SummaryRowSettingEnum = SummaryRowSettingEnum() # For __getattribute__
 
 class SystemManagedResourceSourceEnum(_CreateEnumTypeUponFirstAccess):
     SystemManagedResourceSource = '''\
-class SystemManagedResourceSource(enum.IntEnum):
+    class SystemManagedResourceSource(enum.IntEnum):
         """
         Enum listing the possible system managed entity sources.
 
@@ -10850,7 +10852,7 @@ SystemManagedResourceSourceEnum = SystemManagedResourceSourceEnum() # For __geta
 
 class TargetCpaOptInRecommendationGoalEnum(_CreateEnumTypeUponFirstAccess):
     TargetCpaOptInRecommendationGoal = '''\
-class TargetCpaOptInRecommendationGoal(enum.IntEnum):
+    class TargetCpaOptInRecommendationGoal(enum.IntEnum):
         """
         Goal of TargetCpaOptIn recommendation.
 
@@ -10875,7 +10877,7 @@ TargetCpaOptInRecommendationGoalEnum = TargetCpaOptInRecommendationGoalEnum() # 
 
 class TargetImpressionShareLocationEnum(_CreateEnumTypeUponFirstAccess):
     TargetImpressionShareLocation = '''\
-class TargetImpressionShareLocation(enum.IntEnum):
+    class TargetImpressionShareLocation(enum.IntEnum):
         """
         Enum describing possible goals.
 
@@ -10897,7 +10899,7 @@ TargetImpressionShareLocationEnum = TargetImpressionShareLocationEnum() # For __
 
 class TargetingDimensionEnum(_CreateEnumTypeUponFirstAccess):
     TargetingDimension = '''\
-class TargetingDimension(enum.IntEnum):
+    class TargetingDimension(enum.IntEnum):
         """
         Enum describing possible targeting dimensions.
 
@@ -10935,7 +10937,7 @@ TargetingDimensionEnum = TargetingDimensionEnum() # For __getattribute__
 
 class TimeTypeEnum(_CreateEnumTypeUponFirstAccess):
     TimeType = '''\
-class TimeType(enum.IntEnum):
+    class TimeType(enum.IntEnum):
         """
         The possible time types used by certain resources as an alternative to
         absolute timestamps.
@@ -10956,7 +10958,7 @@ TimeTypeEnum = TimeTypeEnum() # For __getattribute__
 
 class TrackingCodePageFormatEnum(_CreateEnumTypeUponFirstAccess):
     TrackingCodePageFormat = '''\
-class TrackingCodePageFormat(enum.IntEnum):
+    class TrackingCodePageFormat(enum.IntEnum):
         """
         The format of the web page where the tracking tag and snippet will be
         installed.
@@ -10977,7 +10979,7 @@ TrackingCodePageFormatEnum = TrackingCodePageFormatEnum() # For __getattribute__
 
 class TrackingCodeTypeEnum(_CreateEnumTypeUponFirstAccess):
     TrackingCodeType = '''\
-class TrackingCodeType(enum.IntEnum):
+    class TrackingCodeType(enum.IntEnum):
         """
         The type of the generated tag snippets for tracking conversions.
 
@@ -11005,7 +11007,7 @@ TrackingCodeTypeEnum = TrackingCodeTypeEnum() # For __getattribute__
 
 class TravelPlaceholderFieldEnum(_CreateEnumTypeUponFirstAccess):
     TravelPlaceholderField = '''\
-class TravelPlaceholderField(enum.IntEnum):
+    class TravelPlaceholderField(enum.IntEnum):
         """
         Possible values for Travel placeholder fields.
 
@@ -11081,7 +11083,7 @@ TravelPlaceholderFieldEnum = TravelPlaceholderFieldEnum() # For __getattribute__
 
 class UrlFieldErrorEnum(_CreateEnumTypeUponFirstAccess):
     UrlFieldError = '''\
-class UrlFieldError(enum.IntEnum):
+    class UrlFieldError(enum.IntEnum):
         """
         Enum describing possible url field errors.
 
@@ -11216,7 +11218,7 @@ UrlFieldErrorEnum = UrlFieldErrorEnum() # For __getattribute__
 
 class UserInterestTaxonomyTypeEnum(_CreateEnumTypeUponFirstAccess):
     UserInterestTaxonomyType = '''\
-class UserInterestTaxonomyType(enum.IntEnum):
+    class UserInterestTaxonomyType(enum.IntEnum):
         """
         Enum containing the possible UserInterestTaxonomyTypes.
 
@@ -11242,7 +11244,7 @@ UserInterestTaxonomyTypeEnum = UserInterestTaxonomyTypeEnum() # For __getattribu
 
 class UserListAccessStatusEnum(_CreateEnumTypeUponFirstAccess):
     UserListAccessStatus = '''\
-class UserListAccessStatus(enum.IntEnum):
+    class UserListAccessStatus(enum.IntEnum):
         """
         Enum containing possible user list access statuses.
 
@@ -11262,7 +11264,7 @@ UserListAccessStatusEnum = UserListAccessStatusEnum() # For __getattribute__
 
 class UserListClosingReasonEnum(_CreateEnumTypeUponFirstAccess):
     UserListClosingReason = '''\
-class UserListClosingReason(enum.IntEnum):
+    class UserListClosingReason(enum.IntEnum):
         """
         Enum describing possible user list closing reasons.
 
@@ -11280,7 +11282,7 @@ UserListClosingReasonEnum = UserListClosingReasonEnum() # For __getattribute__
 
 class UserListCombinedRuleOperatorEnum(_CreateEnumTypeUponFirstAccess):
     UserListCombinedRuleOperator = '''\
-class UserListCombinedRuleOperator(enum.IntEnum):
+    class UserListCombinedRuleOperator(enum.IntEnum):
         """
         Enum describing possible user list combined rule operators.
 
@@ -11300,7 +11302,7 @@ UserListCombinedRuleOperatorEnum = UserListCombinedRuleOperatorEnum() # For __ge
 
 class UserListCrmDataSourceTypeEnum(_CreateEnumTypeUponFirstAccess):
     UserListCrmDataSourceType = '''\
-class UserListCrmDataSourceType(enum.IntEnum):
+    class UserListCrmDataSourceType(enum.IntEnum):
         """
         Enum describing possible user list crm data source type.
 
@@ -11322,7 +11324,7 @@ UserListCrmDataSourceTypeEnum = UserListCrmDataSourceTypeEnum() # For __getattri
 
 class UserListDateRuleItemOperatorEnum(_CreateEnumTypeUponFirstAccess):
     UserListDateRuleItemOperator = '''\
-class UserListDateRuleItemOperator(enum.IntEnum):
+    class UserListDateRuleItemOperator(enum.IntEnum):
         """
         Enum describing possible user list date rule item operators.
 
@@ -11346,7 +11348,7 @@ UserListDateRuleItemOperatorEnum = UserListDateRuleItemOperatorEnum() # For __ge
 
 class UserListErrorEnum(_CreateEnumTypeUponFirstAccess):
     UserListError = '''\
-class UserListError(enum.IntEnum):
+    class UserListError(enum.IntEnum):
         """
         Enum describing possible user list errors.
 
@@ -11421,7 +11423,7 @@ UserListErrorEnum = UserListErrorEnum() # For __getattribute__
 
 class UserListLogicalRuleOperatorEnum(_CreateEnumTypeUponFirstAccess):
     UserListLogicalRuleOperator = '''\
-class UserListLogicalRuleOperator(enum.IntEnum):
+    class UserListLogicalRuleOperator(enum.IntEnum):
         """
         Enum describing possible user list logical rule operators.
 
@@ -11443,7 +11445,7 @@ UserListLogicalRuleOperatorEnum = UserListLogicalRuleOperatorEnum() # For __geta
 
 class UserListMembershipStatusEnum(_CreateEnumTypeUponFirstAccess):
     UserListMembershipStatus = '''\
-class UserListMembershipStatus(enum.IntEnum):
+    class UserListMembershipStatus(enum.IntEnum):
         """
         Enum containing possible user list membership statuses.
 
@@ -11463,7 +11465,7 @@ UserListMembershipStatusEnum = UserListMembershipStatusEnum() # For __getattribu
 
 class UserListNumberRuleItemOperatorEnum(_CreateEnumTypeUponFirstAccess):
     UserListNumberRuleItemOperator = '''\
-class UserListNumberRuleItemOperator(enum.IntEnum):
+    class UserListNumberRuleItemOperator(enum.IntEnum):
         """
         Enum describing possible user list number rule item operators.
 
@@ -11491,7 +11493,7 @@ UserListNumberRuleItemOperatorEnum = UserListNumberRuleItemOperatorEnum() # For 
 
 class UserListPrepopulationStatusEnum(_CreateEnumTypeUponFirstAccess):
     UserListPrepopulationStatus = '''\
-class UserListPrepopulationStatus(enum.IntEnum):
+    class UserListPrepopulationStatus(enum.IntEnum):
         """
         Enum describing possible user list prepopulation status.
 
@@ -11513,7 +11515,7 @@ UserListPrepopulationStatusEnum = UserListPrepopulationStatusEnum() # For __geta
 
 class UserListRuleTypeEnum(_CreateEnumTypeUponFirstAccess):
     UserListRuleType = '''\
-class UserListRuleType(enum.IntEnum):
+    class UserListRuleType(enum.IntEnum):
         """
         Enum describing possible user list rule types.
 
@@ -11533,7 +11535,7 @@ UserListRuleTypeEnum = UserListRuleTypeEnum() # For __getattribute__
 
 class UserListSizeRangeEnum(_CreateEnumTypeUponFirstAccess):
     UserListSizeRange = '''\
-class UserListSizeRange(enum.IntEnum):
+    class UserListSizeRange(enum.IntEnum):
         """
         Enum containing possible user list size ranges.
 
@@ -11581,7 +11583,7 @@ UserListSizeRangeEnum = UserListSizeRangeEnum() # For __getattribute__
 
 class UserListStringRuleItemOperatorEnum(_CreateEnumTypeUponFirstAccess):
     UserListStringRuleItemOperator = '''\
-class UserListStringRuleItemOperator(enum.IntEnum):
+    class UserListStringRuleItemOperator(enum.IntEnum):
         """
         Enum describing possible user list string rule item operators.
 
@@ -11613,7 +11615,7 @@ UserListStringRuleItemOperatorEnum = UserListStringRuleItemOperatorEnum() # For 
 
 class UserListTypeEnum(_CreateEnumTypeUponFirstAccess):
     UserListType = '''\
-class UserListType(enum.IntEnum):
+    class UserListType(enum.IntEnum):
         """
         Enum containing possible user list types.
 
@@ -11642,7 +11644,7 @@ UserListTypeEnum = UserListTypeEnum() # For __getattribute__
 
 class VanityPharmaDisplayUrlModeEnum(_CreateEnumTypeUponFirstAccess):
     VanityPharmaDisplayUrlMode = '''\
-class VanityPharmaDisplayUrlMode(enum.IntEnum):
+    class VanityPharmaDisplayUrlMode(enum.IntEnum):
         """
         Enum describing possible display modes for vanity pharma URLs.
 
@@ -11662,7 +11664,7 @@ VanityPharmaDisplayUrlModeEnum = VanityPharmaDisplayUrlModeEnum() # For __getatt
 
 class VanityPharmaTextEnum(_CreateEnumTypeUponFirstAccess):
     VanityPharmaText = '''\
-class VanityPharmaText(enum.IntEnum):
+    class VanityPharmaText(enum.IntEnum):
         """
         Enum describing possible text.
 
@@ -11708,7 +11710,7 @@ VanityPharmaTextEnum = VanityPharmaTextEnum() # For __getattribute__
 
 class WebpageConditionOperandEnum(_CreateEnumTypeUponFirstAccess):
     WebpageConditionOperand = '''\
-class WebpageConditionOperand(enum.IntEnum):
+    class WebpageConditionOperand(enum.IntEnum):
         """
         The webpage condition operand in webpage criterion.
 
@@ -11734,7 +11736,7 @@ WebpageConditionOperandEnum = WebpageConditionOperandEnum() # For __getattribute
 
 class WebpageConditionOperatorEnum(_CreateEnumTypeUponFirstAccess):
     WebpageConditionOperator = '''\
-class WebpageConditionOperator(enum.IntEnum):
+    class WebpageConditionOperator(enum.IntEnum):
         """
         The webpage condition operator in webpage criterion.
 
@@ -11754,7 +11756,7 @@ WebpageConditionOperatorEnum = WebpageConditionOperatorEnum() # For __getattribu
 
 class YoutubeVideoRegistrationErrorEnum(_CreateEnumTypeUponFirstAccess):
     YoutubeVideoRegistrationError = '''\
-class YoutubeVideoRegistrationError(enum.IntEnum):
+    class YoutubeVideoRegistrationError(enum.IntEnum):
         """
         Enum describing YouTube video registration errors.
 

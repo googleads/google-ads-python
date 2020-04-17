@@ -22,6 +22,7 @@ import mock
 
 from google.ads.google_ads import client as Client
 from google.ads.google_ads.interceptors import LoggingInterceptor
+from google.ads.google_ads.v3.proto.services import customer_service_pb2
 
 default_version = Client._DEFAULT_VERSION
 
@@ -530,3 +531,33 @@ class LoggingInterceptorTest(TestCase):
             interceptor = self._create_test_interceptor()
             result = interceptor._get_fault_message(mock_exception)
             self.assertEqual(result, self._MOCK_TRANSPORT_ERROR_MESSAGE)
+
+    def test_get_customer_id_not_present(self):
+        """Returns None if request has no customer_id or resource_name."""
+        mock_request = {}
+        interceptor = self._create_test_interceptor()
+        self.assertEqual(interceptor._get_customer_id(mock_request), None)
+
+    def test_get_customer_id(self):
+        """Retrieves a customer_id from a request object."""
+        mock_request = self._get_mock_request()
+        interceptor = self._create_test_interceptor()
+        self.assertEqual(interceptor._get_customer_id(mock_request),
+                         self._MOCK_CUSTOMER_ID)
+
+    def test_get_customer_id_from_resource_name(self):
+        """Retrieves a customer_id from a request object via resource_name."""
+        resource_name = f'customers/{self._MOCK_CUSTOMER_ID}'
+        mock_request = customer_service_pb2.GetCustomerRequest(
+            resource_name=resource_name)
+        interceptor = self._create_test_interceptor()
+        self.assertEqual(interceptor._get_customer_id(mock_request),
+                         self._MOCK_CUSTOMER_ID)
+
+    def test_get_customer_id_from_invalid_resource_name(self):
+        """Returns None for a resource_name not starting with 'customers'."""
+        resource_name = f'languageConstants/{self._MOCK_CUSTOMER_ID}'
+        mock_request = customer_service_pb2.GetCustomerRequest(
+            resource_name=resource_name)
+        interceptor = self._create_test_interceptor()
+        self.assertEqual(interceptor._get_customer_id(mock_request), None)

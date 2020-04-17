@@ -124,6 +124,8 @@ class LoggingInterceptor(Interceptor, UnaryUnaryClientInterceptor,
             segments = resource_name.split('/')
             if segments[0] == 'customers':
                 return segments[1]
+        else:
+            return None
 
     def _parse_exception_to_str(self, exception):
         """Parses response exception object to str for logging.

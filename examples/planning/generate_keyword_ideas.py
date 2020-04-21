@@ -86,11 +86,13 @@ def main(client, customer_id, location_ids, language_id, keywords, page_url):
         for idea in keyword_ideas.results:
             competition_value = keyword_competition_level_enum.Name(
                 idea.keyword_idea_metrics.competition)
-            print(f'Keyword idea text "{idea.text.value}" has "{idea.keyword_idea_metrics.avg_monthly_searches.value}"'
-                  f'average monthly searches and "{competition_value}" competition.\n')
+            print(f'Keyword idea text "{idea.text.value}" has '
+                  f'"{idea.keyword_idea_metrics.avg_monthly_searches.value}" '
+                  f'average monthly searches and "{competition_value}" '
+                  'competition.\n')
     except GoogleAdsException as ex:
-        print(f'Request with ID "{ex.request_id}" failed with status "{ex.error.code().name}"'
-              f'and includes the following errors:')
+        print(f'Request with ID "{ex.request_id}" failed with status '
+              f'"{ex.error.code().name}" and includes the following errors:')
         for error in ex.failure.errors:
             print(f'\tError with message "{error.message}".')
             if error.location:

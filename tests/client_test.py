@@ -484,30 +484,30 @@ class GoogleAdsClientTest(FileTestCase):
             self.assertTrue(hasattr(service, 'enums'), 'GoogleAdsService in '
                             f'{ver} does not have an "enums" attribute.')
 
-            def is_enum_wrapper(obj):
-                """Determines whether the given object is an enum wrapper."""
+            def is_enum_wrapper(member):
+                """Determines whether the given memberect is an enum wrapper."""
                 # in newer API versions we can identify an enum wrapper as
                 # having no attributes because their attributes are generated
                 # dynamically when accessed.
-                if not getmembers(obj):
+                if not getmembers(member):
                     return True
                 # in older API versions we can identify an enum wrapper as being
                 # a class where at least one member is an instance of
                 # enum.EnumMeta.
-                elif isclass(obj) and \
+                elif isclass(member) and \
                     getmembers(
-                        obj, lambda name: isinstance(name, enum.EnumMeta)):
+                        member, lambda name: isinstance(name, enum.EnumMeta)):
                     return True
 
                 return False
 
-            def is_enum(obj):
-                """Determines whether the given object is an enum."""
+            def is_enum(member):
+                """Determines whether the given memberect is an enum."""
                 # Enums inherit from the base class EnumTypeWrapper, not to be
                 # confused with the enum wrappers mentioned elsewhere in this
                 # test, which are classes defined in the Ads API containing
                 # Enums.
-                return isinstance(obj, EnumTypeWrapper)
+                return isinstance(member, EnumTypeWrapper)
 
             # every enum in the API should be accessible on a service client
             # instance, for example service.enums.DeviceEnum.Device.MOBILE. Here

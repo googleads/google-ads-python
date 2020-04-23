@@ -481,8 +481,8 @@ class GoogleAdsClientTest(FileTestCase):
 
         for ver in valid_versions:
             service = client.get_service('GoogleAdsService', version=ver)
-            self.assertTrue(hasattr(service, 'enums'),
-                'GoogleAdsService does not have an "enums" attribute.')
+            self.assertTrue(hasattr(service, 'enums'), 'GoogleAdsService in '
+                            f'{ver} does not have an "enums" attribute.')
 
             def is_enum_wrapper(obj):
                 """Determines whether the given object is an enum wrapper."""
@@ -502,7 +502,7 @@ class GoogleAdsClientTest(FileTestCase):
                 return False
 
             def is_enum(obj):
-                """Determines whether the given object in an enum."""
+                """Determines whether the given object is an enum."""
                 # Enums inherit from the base class EnumTypeWrapper, not to be
                 # confused with the enum wrappers mentioned elsewhere in this
                 # test, which are classes defined in the Ads API containing

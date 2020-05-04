@@ -78,7 +78,20 @@ class Thing(enum.IntEnum):
                 # If the class attribute has been replaced with something else,
                 # another must have already executed it and created our type.
                 return class_def_src
-            assert class_def_src.startswith('class %s(enum.' % enum_type_name), 'Expected ' + enum_type_name
+
+            # Here 'class_def_src' will be the stringified definition of the
+            # inner enum. This assertion checks that the string starts with
+            # 'class AccessRole(enum.' if, for example, the outer class name
+            # is AccessRoleEnum. This follows the pattern for the majority of
+            # our API enums, where the outer message is FooBarEnum and the inner
+            # enum is named FooBar. In a few cases enums are defined on
+            # Operations, for example 'FeedAttributeOperation', and the inner
+            # enum is always called 'Operator' so this assertion also allows the
+            # pattern 'class Operator(enum.'.
+            assertion = class_def_src.startswith(
+                'class %s(enum.' % enum_type_name) or class_def_src.startswith(
+                    'class Operator(enum.')
+            assert assertion, 'Expected ' + enum_type_name
             # It is possible for multiple threads to wind up doing this exec at
             # the same time.  That'll create multiple identical types and assign
             # them into the instance dict under the same name.  One of them will
@@ -5392,7 +5405,7 @@ ExternalConversionSourceEnum = ExternalConversionSourceEnum() # For __getattribu
 
 
 class FeedAttributeOperation(_CreateEnumTypeUponFirstAccess):
-    FeedAttributeOperation = '''\
+    Operator = '''\
     class Operator(enum.IntEnum):
         """
         The operator.
@@ -10683,7 +10696,7 @@ TargetImpressionShareLocationEnum = TargetImpressionShareLocationEnum() # For __
 
 
 class TargetRestrictionOperation(_CreateEnumTypeUponFirstAccess):
-    TargetRestrictionOperation = '''\
+    Operator = '''\
     class Operator(enum.IntEnum):
         """
         The operator.

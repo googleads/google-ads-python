@@ -13,11 +13,15 @@
 # limitations under the License.
 """Tests for the Google Ads API client library."""
 
-import os
-import mock
-import yaml
+import enum
 from importlib import import_module
+from inspect import getmembers, isclass
+import mock
+import os
 from pyfakefs.fake_filesystem_unittest import TestCase as FileTestCase
+import yaml
+
+from google.protobuf.internal.enum_type_wrapper import EnumTypeWrapper
 
 from google.ads.google_ads import client as Client
 
@@ -439,8 +443,7 @@ class GoogleAdsClientTest(FileTestCase):
             'GoogleAdsFailure', version='bad_version')
 
     def test_init_no_logging_config(self):
-        """Should only call logging.config.dictConfig if logging config exists.
-        """
+        """Should call logging.config.dictConfig if logging config exists."""
         with mock.patch(
             'logging.config.dictConfig'
         ) as mock_dictConfig, mock.patch.object(
@@ -456,8 +459,7 @@ class GoogleAdsClientTest(FileTestCase):
             mock_dictConfig.assert_not_called()
 
     def test_init_with_logging_config(self):
-        """Configured LoggingInterceptor should call logging.dictConfig.
-        """
+        """Configured LoggingInterceptor should call logging.dictConfig."""
         config = {'test': True}
         with mock.patch(
             'logging.config.dictConfig'
@@ -472,3 +474,67 @@ class GoogleAdsClientTest(FileTestCase):
             Client.GoogleAdsClient(mock_credentials_instance,
                                    self.developer_token, logging_config=config)
             mock_dictConfig.assert_called_once_with(config)
+
+    def test_service_client_dot_enums_property(self):
+        """Ensures that services expose Enums via an "enums" attribute.
+
+        This tests the 'service.enum' property for a service in every version
+        of the API, which implicitly tests the 'services/enums.py' file, which
+        exposes the enums used by the property. It loops over each member of
+        'service.enum' and compares it to the raw enum 'pb2' file found by
+        calling 'client.get_type' with the enum's name.
+        """
+        client = self._create_test_client()
+
+        for ver in valid_versions:
+            service = client.get_service('GoogleAdsService', version=ver)
+            self.assertTrue(hasattr(service, 'enums'), 'GoogleAdsService in '
+                            f'{ver} does not have an "enums" attribute.')
+
+            def is_enum_wrapper(member):
+                """Determines whether the given memberect is an enum wrapper."""
+                # in newer API versions we can identify an enum wrapper as
+                # having no attributes because their attributes are generated
+                # dynamically when accessed.
+                if not getmembers(member):
+                    return True
+                # in older API versions we can identify an enum wrapper as being
+                # a class where at least one member is an instance of
+                # enum.EnumMeta.
+                elif isclass(member) and \
+                    getmembers(
+                        member, lambda name: isinstance(name, enum.EnumMeta)):
+                    return True
+
+                return False
+
+            def is_enum(member):
+                """Determines whether the given memberect is an enum."""
+                # Enums inherit from the base class EnumTypeWrapper, not to be
+                # confused with the enum wrappers mentioned elsewhere in this
+                # test, which are classes defined in the Ads API containing
+                # Enums.
+                return isinstance(member, EnumTypeWrapper)
+
+            # every enum in the API should be accessible on a service client
+            # instance, for example service.enums.DeviceEnum.Device.MOBILE. Here
+            # we loop over all the members of service.enums, filtering for enum
+            # wrappers.
+            for member in getmembers(service.enums, is_enum_wrapper):
+                enum_wrapper_name = member[0]
+                # we retrieve the raw enum class to make sure its inner enum
+                # object is accessible on the service.enums.EnumWrapper path.
+                raw_enum = client.get_type(enum_wrapper_name, version=ver)
+                # enum wrappers have at most one enum attribute so we loop over
+                # all attributes filtering for the one that is an enum and
+                # exposing its __name__ in the loop.
+                for enum_name, _ in getmembers(raw_enum, is_enum):
+                    # if enum_wrapper_name is DeviceEnum and enum_name is
+                    # Device we assert that service.enums.DeviceEnum.Device is
+                    # valid.
+                    self.assertTrue(
+                        hasattr(
+                            getattr(
+                                service.enums, enum_wrapper_name), enum_name),
+                        f'Expected enum wrapper "{enum_wrapper_name}" to '
+                        f'contain enum class "{enum_name}"')

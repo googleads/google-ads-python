@@ -78,7 +78,20 @@ class Thing(enum.IntEnum):
                 # If the class attribute has been replaced with something else,
                 # another must have already executed it and created our type.
                 return class_def_src
-            assert class_def_src.startswith('class %s(enum.' % enum_type_name), 'Expected ' + enum_type_name
+
+            # Here 'class_def_src' will be the stringified definition of the
+            # inner enum. This assertion checks that the string starts with
+            # 'class AccessRole(enum.' if, for example, the outer class name
+            # is AccessRoleEnum. This follows the pattern for the majority of
+            # our API enums, where the outer message is FooBarEnum and the inner
+            # enum is named FooBar. In a few cases enums are defined on
+            # Operations, for example 'FeedAttributeOperation', and the inner
+            # enum is always called 'Operator' so this assertion also allows the
+            # pattern 'class Operator(enum.'.
+            assertion = class_def_src.startswith(
+                'class %s(enum.' % enum_type_name) or class_def_src.startswith(
+                    'class Operator(enum.')
+            assert assertion, 'Expected ' + enum_type_name
             # It is possible for multiple threads to wind up doing this exec at
             # the same time.  That'll create multiple identical types and assign
             # them into the instance dict under the same name.  One of them will
@@ -129,7 +142,7 @@ class AccessInvitationErrorEnum(_CreateEnumTypeUponFirstAccess):
         INVALID_EMAIL_ADDRESS = 2
         EMAIL_ADDRESS_ALREADY_HAS_ACCESS = 3
 '''
-AccessInvitationErrorEnumEnum = AccessInvitationErrorEnum() # For __getattribute__
+AccessInvitationErrorEnum = AccessInvitationErrorEnum() # For __getattribute__
 
 
 class AccessReasonEnum(_CreateEnumTypeUponFirstAccess):
@@ -347,22 +360,6 @@ class AdCustomizerErrorEnum(_CreateEnumTypeUponFirstAccess):
         UNKNOWN_USER_LIST = 6
 '''
 AdCustomizerErrorEnum = AdCustomizerErrorEnum() # For __getattribute__
-
-
-class AdCustomizerFeedErrorEnum(_CreateEnumTypeUponFirstAccess):
-    AdCustomizerFeedError = '''\
-    class AdCustomizerFeedError(enum.IntEnum):
-        """
-        Enum describing possible ad customizer feed errors.
-
-        Attributes:
-          UNSPECIFIED (int): Enum unspecified.
-          UNKNOWN (int): The received error code is not known in this version.
-        """
-        UNSPECIFIED = 0
-        UNKNOWN = 1
-'''
-AdCustomizerFeedErrorEnum = AdCustomizerFeedErrorEnum() # For __getattribute__
 
 
 class AdCustomizerPlaceholderFieldEnum(_CreateEnumTypeUponFirstAccess):
@@ -3133,26 +3130,6 @@ class ClickTypeEnum(_CreateEnumTypeUponFirstAccess):
 ClickTypeEnum = ClickTypeEnum() # For __getattribute__
 
 
-class ClickViewErrorEnum(_CreateEnumTypeUponFirstAccess):
-    ClickViewError = '''\
-    class ClickViewError(enum.IntEnum):
-        """
-        Enum describing possible click view errors.
-
-        Attributes:
-          UNSPECIFIED (int): Enum unspecified.
-          UNKNOWN (int): The received error code is not known in this version.
-          EXPECTED_FILTER_ON_A_SINGLE_DAY (int): Missing filter on a single day.
-          DATE_TOO_OLD (int): The requested date is too old.
-        """
-        UNSPECIFIED = 0
-        UNKNOWN = 1
-        EXPECTED_FILTER_ON_A_SINGLE_DAY = 2
-        DATE_TOO_OLD = 3
-'''
-ClickViewErrorEnum = ClickViewErrorEnum() # For __getattribute__
-
-
 class CollectionSizeErrorEnum(_CreateEnumTypeUponFirstAccess):
     CollectionSizeError = '''\
     class CollectionSizeError(enum.IntEnum):
@@ -4502,28 +4479,6 @@ class CustomerMatchUploadKeyTypeEnum(_CreateEnumTypeUponFirstAccess):
 CustomerMatchUploadKeyTypeEnum = CustomerMatchUploadKeyTypeEnum() # For __getattribute__
 
 
-class CustomerNegativeCriterionErrorEnum(_CreateEnumTypeUponFirstAccess):
-    CustomerNegativeCriterionError = '''\
-    class CustomerNegativeCriterionError(enum.IntEnum):
-        """
-        Enum describing possible customer negative criterion errors.
-
-        Attributes:
-          UNSPECIFIED (int): Enum unspecified.
-          UNKNOWN (int): The received error code is not known in this version.
-          SHARED_SET_IS_REMOVED (int): Cannot create a criterion with a removed SharedSet.
-          INVALID_SHARED_SET_TYPE (int): Cannot create a criterion with an invalid SharedSetType.
-          MANAGER_CUSTOMER_CANNOT_CREATE (int): Manager customer is not allowed to create customer exclusion criteria.
-        """
-        UNSPECIFIED = 0
-        UNKNOWN = 1
-        SHARED_SET_IS_REMOVED = 2
-        INVALID_SHARED_SET_TYPE = 3
-        MANAGER_CUSTOMER_CANNOT_CREATE = 4
-'''
-CustomerNegativeCriterionErrorEnum = CustomerNegativeCriterionErrorEnum() # For __getattribute__
-
-
 class CustomerPayPerConversionEligibilityFailureReasonEnum(_CreateEnumTypeUponFirstAccess):
     CustomerPayPerConversionEligibilityFailureReason = '''\
     class CustomerPayPerConversionEligibilityFailureReason(enum.IntEnum):
@@ -4997,22 +4952,6 @@ class EnumErrorEnum(_CreateEnumTypeUponFirstAccess):
 EnumErrorEnum = EnumErrorEnum() # For __getattribute__
 
 
-class ExperimentErrorEnum(_CreateEnumTypeUponFirstAccess):
-    ExperimentError = '''\
-    class ExperimentError(enum.IntEnum):
-        """
-        Enum describing possible experiment errors.
-
-        Attributes:
-          UNSPECIFIED (int): Enum unspecified.
-          UNKNOWN (int): The received error code is not known in this version.
-        """
-        UNSPECIFIED = 0
-        UNKNOWN = 1
-'''
-ExperimentErrorEnum = ExperimentErrorEnum() # For __getattribute__
-
-
 class ExtensionFeedItemErrorEnum(_CreateEnumTypeUponFirstAccess):
     ExtensionFeedItemError = '''\
     class ExtensionFeedItemError(enum.IntEnum):
@@ -5444,19 +5383,19 @@ ExternalConversionSourceEnum = ExternalConversionSourceEnum() # For __getattribu
 class FeedAttributeOperation(_CreateEnumTypeUponFirstAccess):
     Operator = '''\
     class Operator(enum.IntEnum):
-    """
-    The operator.
+        """
+        The operator.
 
-    Attributes:
-      UNSPECIFIED (int): Unspecified.
-      UNKNOWN (int): Used for return value only. Represents value unknown in this version.
-      ADD (int): Add the attribute to the existing attributes.
-    """
-    UNSPECIFIED = 0
-    UNKNOWN = 1
-    ADD = 2
+        Attributes:
+          UNSPECIFIED (int): Unspecified.
+          UNKNOWN (int): Used for return value only. Represents value unknown in this version.
+          ADD (int): Add the attribute to the existing attributes.
+        """
+        UNSPECIFIED = 0
+        UNKNOWN = 1
+        ADD = 2
 '''
-FeedAttributeOperation = FeedAttributeOperation()
+FeedAttributeOperation = FeedAttributeOperation() # For __getattribute__
 
 
 class FeedAttributeReferenceErrorEnum(_CreateEnumTypeUponFirstAccess):
@@ -7539,26 +7478,6 @@ class ListOperationErrorEnum(_CreateEnumTypeUponFirstAccess):
 ListOperationErrorEnum = ListOperationErrorEnum() # For __getattribute__
 
 
-class ListOperator(_CreateEnumTypeUponFirstAccess):
-    Enum = '''\
-    class Enum(enum.IntEnum):
-        """
-        Possible list operators.
-
-        Attributes:
-          UNSPECIFIED (int): Not specified.
-          UNKNOWN (int): Used for return value only. Represents value unknown in this version.
-          ADD (int): Adds an element to the list.
-          REMOVE (int): Removes an element from the list.
-        """
-        UNSPECIFIED = 0
-        UNKNOWN = 1
-        ADD = 2
-        REMOVE = 3
-'''
-ListOperator = ListOperator() # For __getattribute__
-
-
 class ListingCustomAttributeIndexEnum(_CreateEnumTypeUponFirstAccess):
     ListingCustomAttributeIndex = '''\
     class ListingCustomAttributeIndex(enum.IntEnum):
@@ -7754,27 +7673,6 @@ class LocationPlaceholderFieldEnum(_CreateEnumTypeUponFirstAccess):
         PHONE_NUMBER = 9
 '''
 LocationPlaceholderFieldEnum = LocationPlaceholderFieldEnum() # For __getattribute__
-
-
-class LocationSourceTypeEnum(_CreateEnumTypeUponFirstAccess):
-    LocationSourceType = '''\
-    class LocationSourceType(enum.IntEnum):
-        """
-        The possible types of a location source.
-
-        Attributes:
-          UNSPECIFIED (int): No value has been specified.
-          UNKNOWN (int): Used for return value only. Represents value unknown in this version.
-          GOOGLE_MY_BUSINESS (int): Locations associated with the customer's linked Google My Business
-          account.
-          AFFILIATE (int): Affiliate (chain) store locations. For example, Best Buy store locations.
-        """
-        UNSPECIFIED = 0
-        UNKNOWN = 1
-        GOOGLE_MY_BUSINESS = 2
-        AFFILIATE = 3
-'''
-LocationSourceTypeEnum = LocationSourceTypeEnum() # For __getattribute__
 
 
 class ManagerLinkErrorEnum(_CreateEnumTypeUponFirstAccess):
@@ -8076,24 +7974,6 @@ class MediaUploadErrorEnum(_CreateEnumTypeUponFirstAccess):
         FORMAT_NOT_ALLOWED = 5
 '''
 MediaUploadErrorEnum = MediaUploadErrorEnum() # For __getattribute__
-
-
-class MerchantCenterLinkErrorEnum(_CreateEnumTypeUponFirstAccess):
-    MerchantCenterLinkError = '''\
-    class MerchantCenterLinkError(enum.IntEnum):
-        """
-        Enum describing possible CustomerManagerLink errors.
-
-        Attributes:
-          UNSPECIFIED (int): Enum unspecified.
-          UNKNOWN (int): The received error code is not known in this version.
-          CANNOT_DOWNGRADE_LINK_TO_PENDING (int): A link cannot be transitioned from enabled to pending.
-        """
-        UNSPECIFIED = 0
-        UNKNOWN = 1
-        CANNOT_DOWNGRADE_LINK_TO_PENDING = 2
-'''
-MerchantCenterLinkErrorEnum = MerchantCenterLinkErrorEnum() # For __getattribute__
 
 
 class MerchantCenterLinkStatusEnum(_CreateEnumTypeUponFirstAccess):
@@ -8488,144 +8368,6 @@ class NullErrorEnum(_CreateEnumTypeUponFirstAccess):
         NULL_CONTENT = 2
 '''
 NullErrorEnum = NullErrorEnum() # For __getattribute__
-
-
-class OfflineUserDataJobErrorEnum(_CreateEnumTypeUponFirstAccess):
-    OfflineUserDataJobError = '''\
-    class OfflineUserDataJobError(enum.IntEnum):
-        """
-        Enum describing possible request errors.
-
-        Attributes:
-          UNSPECIFIED (int): Enum unspecified.
-          UNKNOWN (int): The received error code is not known in this version.
-          ID_AND_EXTERNAL_ID_NOT_ALLOWED (int): Cannot use both ID and external ID in the same request.
-          INVALID_USER_LIST_ID (int): The user list ID provided for the job is invalid.
-          INVALID_USER_LIST_TYPE (int): Type of the user list is not applicable for the job.
-          NOT_WHITELISTED_FOR_USER_ID (int): Customer is not whitelisted for using user ID in upload data.
-          INCOMPATIBLE_UPLOAD_KEY_TYPE (int): Upload data is not compatible with the upload key type of the associated
-          user list.
-          MISSING_USER_IDENTIFIER (int): The user identifier is missing valid data.
-          INVALID_MOBILE_ID_FORMAT (int): The mobile ID is malformed.
-          TOO_MANY_USER_IDENTIFIERS (int): Request is exceeding the maximum number of user identifiers allowed.
-          NOT_WHITELISTED_FOR_STORE_SALES_DIRECT (int): Customer is not whitelisted for store sales direct data.
-          INVALID_PARTNER_ID (int): The partner ID in store sales direct metadata is invalid.
-          INVALID_ENCODING (int): The data in user identifier should not be encoded.
-          INVALID_COUNTRY_CODE (int): The country code is invalid.
-          INCOMPATIBLE_USER_IDENTIFIER (int): Incompatible user identifier when using external\_user\_id for store
-          sales direct first party data or not using external\_user\_id for store
-          sales third party data.
-          FUTURE_TRANSACTION_TIME (int): A transaction time in the future is not allowed.
-          INVALID_CONVERSION_ACTION (int): The conversion\_action specified in transaction\_attributes is used to
-          report conversions to a conversion action configured in AdWords. This
-          error indicates there is no such conversion action in the account.
-          MOBILE_ID_NOT_SUPPORTED (int): Mobile ID is not supported for store sales direct data.
-          INVALID_OPERATION_ORDER (int): When a remove-all operation is provided, it has to be the first operation
-          of the operation list.
-          CONFLICTING_OPERATION (int): Mixing creation and removal of offline data in the same job is not
-          allowed.
-          MULTIPLE_UPLOADS_NOT_ALLOWED_PER_USER_LIST (int): Multiple uploads in pending state for the same user list ID is not
-          allowed.
-          EXTERNAL_UPDATE_ID_ALREADY_EXISTS (int): The external update ID already exists.
-          JOB_ALREADY_STARTED (int): Once the upload job is started, new operations cannot be added.
-          REMOVE_NOT_SUPPORTED (int): Remove operation is not allowed for store sales direct updates.
-          REMOVE_ALL_NOT_SUPPORTED (int): Remove-all is not supported for store sales direct updates.
-          INVALID_SHA256_FORMAT (int): The SHA256 encoded value is malformed.
-        """
-        UNSPECIFIED = 0
-        UNKNOWN = 1
-        ID_AND_EXTERNAL_ID_NOT_ALLOWED = 2
-        INVALID_USER_LIST_ID = 3
-        INVALID_USER_LIST_TYPE = 4
-        NOT_WHITELISTED_FOR_USER_ID = 5
-        INCOMPATIBLE_UPLOAD_KEY_TYPE = 6
-        MISSING_USER_IDENTIFIER = 7
-        INVALID_MOBILE_ID_FORMAT = 8
-        TOO_MANY_USER_IDENTIFIERS = 9
-        NOT_WHITELISTED_FOR_STORE_SALES_DIRECT = 10
-        INVALID_PARTNER_ID = 11
-        INVALID_ENCODING = 12
-        INVALID_COUNTRY_CODE = 13
-        INCOMPATIBLE_USER_IDENTIFIER = 14
-        FUTURE_TRANSACTION_TIME = 15
-        INVALID_CONVERSION_ACTION = 16
-        MOBILE_ID_NOT_SUPPORTED = 17
-        INVALID_OPERATION_ORDER = 18
-        CONFLICTING_OPERATION = 19
-        MULTIPLE_UPLOADS_NOT_ALLOWED_PER_USER_LIST = 20
-        EXTERNAL_UPDATE_ID_ALREADY_EXISTS = 21
-        JOB_ALREADY_STARTED = 22
-        REMOVE_NOT_SUPPORTED = 23
-        REMOVE_ALL_NOT_SUPPORTED = 24
-        INVALID_SHA256_FORMAT = 25
-'''
-OfflineUserDataJobErrorEnum = OfflineUserDataJobErrorEnum() # For __getattribute__
-
-
-class OfflineUserDataJobFailureReasonEnum(_CreateEnumTypeUponFirstAccess):
-    OfflineUserDataJobFailureReason = '''\
-    class OfflineUserDataJobFailureReason(enum.IntEnum):
-        """
-        The failure reason of an offline user data job.
-
-        Attributes:
-          UNSPECIFIED (int): Not specified.
-          UNKNOWN (int): Used for return value only. Represents value unknown in this version.
-          INSUFFICIENT_MATCHED_TRANSACTIONS (int): The matched transactions are insufficient.
-          INSUFFICIENT_TRANSACTIONS (int): The uploaded transactions are insufficient.
-        """
-        UNSPECIFIED = 0
-        UNKNOWN = 1
-        INSUFFICIENT_MATCHED_TRANSACTIONS = 2
-        INSUFFICIENT_TRANSACTIONS = 3
-'''
-OfflineUserDataJobFailureReasonEnum = OfflineUserDataJobFailureReasonEnum() # For __getattribute__
-
-
-class OfflineUserDataJobStatusEnum(_CreateEnumTypeUponFirstAccess):
-    OfflineUserDataJobStatus = '''\
-    class OfflineUserDataJobStatus(enum.IntEnum):
-        """
-        The status of an offline user data job.
-
-        Attributes:
-          UNSPECIFIED (int): Not specified.
-          UNKNOWN (int): Used for return value only. Represents value unknown in this version.
-          PENDING (int): The job has been successfully created and pending for uploading.
-          RUNNING (int): Upload(s) have been accepted and data is being processed.
-          SUCCESS (int): Uploaded data has been successfully processed.
-          FAILED (int): Uploaded data has failed to be processed.
-        """
-        UNSPECIFIED = 0
-        UNKNOWN = 1
-        PENDING = 2
-        RUNNING = 3
-        SUCCESS = 4
-        FAILED = 5
-'''
-OfflineUserDataJobStatusEnum = OfflineUserDataJobStatusEnum() # For __getattribute__
-
-
-class OfflineUserDataJobTypeEnum(_CreateEnumTypeUponFirstAccess):
-    OfflineUserDataJobType = '''\
-    class OfflineUserDataJobType(enum.IntEnum):
-        """
-        The type of an offline user data job.
-
-        Attributes:
-          UNSPECIFIED (int): Not specified.
-          UNKNOWN (int): Used for return value only. Represents value unknown in this version.
-          STORE_SALES_UPLOAD_FIRST_PARTY (int): Store Sales Direct data for self service.
-          STORE_SALES_UPLOAD_THIRD_PARTY (int): Store Sales Direct data for third party.
-          CRM_USER_LIST (int): CRM-based user list data.
-        """
-        UNSPECIFIED = 0
-        UNKNOWN = 1
-        STORE_SALES_UPLOAD_FIRST_PARTY = 2
-        STORE_SALES_UPLOAD_THIRD_PARTY = 3
-        CRM_USER_LIST = 4
-'''
-OfflineUserDataJobTypeEnum = OfflineUserDataJobTypeEnum() # For __getattribute__
 
 
 class OperatingSystemVersionOperatorTypeEnum(_CreateEnumTypeUponFirstAccess):
@@ -10807,29 +10549,6 @@ class StructuredSnippetPlaceholderFieldEnum(_CreateEnumTypeUponFirstAccess):
         SNIPPETS = 3
 '''
 StructuredSnippetPlaceholderFieldEnum = StructuredSnippetPlaceholderFieldEnum() # For __getattribute__
-
-
-class SummaryRowSettingEnum(_CreateEnumTypeUponFirstAccess):
-    SummaryRowSetting = '''\
-    class SummaryRowSetting(enum.IntEnum):
-        """
-        Enum describing return summary row settings.
-
-        Attributes:
-          UNSPECIFIED (int): Not specified.
-          UNKNOWN (int): Represent unknown values of return summary row.
-          NO_SUMMARY_ROW (int): Do not return summary row.
-          SUMMARY_ROW_WITH_RESULTS (int): Return summary row along with results. The summary row will be returned
-          in the last batch alone (last batch will contain no results).
-          SUMMARY_ROW_ONLY (int): Return summary row only and return no results.
-        """
-        UNSPECIFIED = 0
-        UNKNOWN = 1
-        NO_SUMMARY_ROW = 2
-        SUMMARY_ROW_WITH_RESULTS = 3
-        SUMMARY_ROW_ONLY = 4
-'''
-SummaryRowSettingEnum = SummaryRowSettingEnum() # For __getattribute__
 
 
 class SystemManagedResourceSourceEnum(_CreateEnumTypeUponFirstAccess):

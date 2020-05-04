@@ -37,6 +37,8 @@ def main(client, customer_id, label_id, campaign_ids):
     # Get an instance of CampaignLabelService client.
     campaign_label_service = client.get_service(
         'CampaignLabelService', version='v3')
+    campaign_service = client.get_service('CampaignService', version='v3')
+    label_service = client.get_service('LabelService', version='v3')
 
     # Set the resource name of the label to be added across the campaigns.
     label_resource_name = label_service.label_path(customer_id, label_id)
@@ -86,7 +88,8 @@ if __name__ == '__main__':
                         required=True, help='The Google Ads customer ID.')
     parser.add_argument('-l', '--label_id', type=str, required=True,
                         help='A label ID associated with a campaign.')
-    parser.add_argument('-i', '--campaign_ids', nargs='+', type=str, required=True,
+    parser.add_argument('-i', '--campaign_ids', nargs='+', type=str,
+                        required=True,
                         help='The campaign IDs to receive the label.')
     args = parser.parse_args()
     print(args.campaign_ids)

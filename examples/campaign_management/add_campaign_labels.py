@@ -24,7 +24,7 @@ from google.ads.google_ads.client import GoogleAdsClient
 from google.ads.google_ads.errors import GoogleAdsException
 
 
-def main(client, customer_id, label_id, campaign_ids, page_size):
+def main(client, customer_id, label_id, campaign_ids):
     """This code example adds a campaign label to a list of campaigns.
 
     Args:
@@ -32,8 +32,6 @@ def main(client, customer_id, label_id, campaign_ids, page_size):
         customer_id: A client customer ID str.
         label_id: A label ID to use when searching for campaigns.
         campaign_ids: A list of campaign IDs to which the label will be added.
-        page_size: An int of the number of results to include in each page of
-            results.
     """
 
     # Get an instance of CampaignLabelService client.
@@ -60,7 +58,7 @@ def main(client, customer_id, label_id, campaign_ids, page_size):
     try:
         response = campaign_label_service.mutate_campaign_labels(
             customer_id, operations)
-        print(f'Added {response.results} campaign labels:')
+        print(f'Added {len(response.results)} campaign labels:')
         for result in response.results:
             print(result.resource_name)
     except GoogleAdsException as error:
@@ -88,7 +86,7 @@ if __name__ == '__main__':
                         required=True, help='The Google Ads customer ID.')
     parser.add_argument('-l', '--label_id', type=str, required=True,
                         help='A label ID associated with a campaign.')
-    parser.add_argument('--campaign_ids', nargs='+', type=str, required=True,
+    parser.add_argument('-i', '--campaign_ids', nargs='+', type=str, required=True,
                         help='The campaign IDs to receive the label.')
     args = parser.parse_args()
     print(args.campaign_ids)

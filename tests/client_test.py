@@ -478,11 +478,11 @@ class GoogleAdsClientTest(FileTestCase):
     def test_service_client_dot_enums_property(self):
         """Ensures that services expose Enums via an "enums" attribute.
 
-        This tests the `service.enum` property for a service in every version
-        of the API, which implicitly tests the `services/enums.py` file, which
+        This tests the 'service.enum' property for a service in every version
+        of the API, which implicitly tests the 'services/enums.py' file, which
         exposes the enums used by the property. It loops over each member of
-        `service.enum` and compares it to the raw enum `pb2` file found by
-        calling `client.get_type` with the enum's name.
+        'service.enum' and compares it to the raw enum 'pb2' file found by
+        calling 'client.get_type' with the enum's name.
         """
         client = self._create_test_client()
 

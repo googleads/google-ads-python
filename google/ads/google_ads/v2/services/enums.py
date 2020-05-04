@@ -79,15 +79,15 @@ class Thing(enum.IntEnum):
                 # another must have already executed it and created our type.
                 return class_def_src
 
-            # Here `class_def_src` will be the stringified definition of the
+            # Here 'class_def_src' will be the stringified definition of the
             # inner enum. This assertion checks that the string starts with
-            # `'class AccessRole(enum.'` if, for example, the outer class name
+            # 'class AccessRole(enum.' if, for example, the outer class name
             # is AccessRoleEnum. This follows the pattern for the majority of
             # our API enums, where the outer message is FooBarEnum and the inner
             # enum is named FooBar. In a few cases enums are defined on
-            # Operations, for example `FeedAttributeOperation`, and the inner
-            # enum is always called `Operator` so this assertion also allows the
-            # pattern `'class Operator(enum.'`.
+            # Operations, for example 'FeedAttributeOperation', and the inner
+            # enum is always called 'Operator' so this assertion also allows the
+            # pattern 'class Operator(enum.'.
             assertion = class_def_src.startswith(
                 'class %s(enum.' % enum_type_name) or class_def_src.startswith(
                     'class Operator(enum.')

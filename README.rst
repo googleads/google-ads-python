@@ -7,6 +7,16 @@ Build Status
 ------------
 |build-status|
 
+Requirements
+------------
+* Python 3.7+
+
+Installation
+------------
+.. code-block::
+
+  pip install google-ads
+
 Features
 --------
 * Distributed via PyPI.

@@ -177,7 +177,7 @@ class KeywordPlanIdeaServiceClient(object):
 
         Args:
             customer_id (str): The ID of the customer with the recommendation.
-            language (Union[dict, ~google.ads.googleads_v3.types.StringValue]): The resource name of the language to target.
+            language (Union[dict, ~google.ads.googleads_v3.types.StringValue]): Required. The resource name of the language to target.
                 Required
 
                 If a dict is provided, it must be of the same form as the protobuf

@@ -878,7 +878,7 @@ UserListRuleItemInfo = _reflection.GeneratedProtocolMessageType('UserListRuleIte
   DESCRIPTOR = _USERLISTRULEITEMINFO,
   __module__ = 'google.ads.googleads_v3.proto.common.user_lists_pb2'
   ,
-  __doc__ = """An atomic rule fragment.
+  __doc__ = """An atomic rule item.
   
   
   Attributes:
@@ -892,13 +892,13 @@ UserListRuleItemInfo = _reflection.GeneratedProtocolMessageType('UserListRuleIte
           'ref\_url\_\_'). This field must be populated when creating a
           new rule item.
       rule_item:
-          An atomic rule fragment.
+          An atomic rule item.
       number_rule_item:
-          An atomic rule fragment composed of a number operation.
+          An atomic rule item composed of a number operation.
       string_rule_item:
-          An atomic rule fragment composed of a string operation.
+          An atomic rule item composed of a string operation.
       date_rule_item:
-          An atomic rule fragment composed of a date operation.
+          An atomic rule item composed of a date operation.
   """,
   # @@protoc_insertion_point(class_scope:google.ads.googleads.v3.common.UserListRuleItemInfo)
   ))
@@ -908,7 +908,7 @@ UserListDateRuleItemInfo = _reflection.GeneratedProtocolMessageType('UserListDat
   DESCRIPTOR = _USERLISTDATERULEITEMINFO,
   __module__ = 'google.ads.googleads_v3.proto.common.user_lists_pb2'
   ,
-  __doc__ = """A rule item composed of date operation.
+  __doc__ = """A rule item composed of a date operation.
   
   
   Attributes:
@@ -932,7 +932,7 @@ UserListNumberRuleItemInfo = _reflection.GeneratedProtocolMessageType('UserListN
   DESCRIPTOR = _USERLISTNUMBERRULEITEMINFO,
   __module__ = 'google.ads.googleads_v3.proto.common.user_lists_pb2'
   ,
-  __doc__ = """A rule item composed of number operation.
+  __doc__ = """A rule item composed of a number operation.
   
   
   Attributes:
@@ -952,7 +952,7 @@ UserListStringRuleItemInfo = _reflection.GeneratedProtocolMessageType('UserListS
   DESCRIPTOR = _USERLISTSTRINGRULEITEMINFO,
   __module__ = 'google.ads.googleads_v3.proto.common.user_lists_pb2'
   ,
-  __doc__ = """A rule item fragment composed of date operation.
+  __doc__ = """A rule item composed of a string operation.
   
   
   Attributes:

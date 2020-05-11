@@ -17,6 +17,7 @@ from google.ads.google_ads.v3.proto.resources import ad_group_audience_view_pb2 
 from google.api import annotations_pb2 as google_dot_api_dot_annotations__pb2
 from google.api import client_pb2 as google_dot_api_dot_client__pb2
 from google.api import field_behavior_pb2 as google_dot_api_dot_field__behavior__pb2
+from google.api import resource_pb2 as google_dot_api_dot_resource__pb2
 
 
 DESCRIPTOR = _descriptor.FileDescriptor(
@@ -24,9 +25,9 @@ DESCRIPTOR = _descriptor.FileDescriptor(
   package='google.ads.googleads.v3.services',
   syntax='proto3',
   serialized_options=_b('\n$com.google.ads.googleads.v3.servicesB\037AdGroupAudienceViewServiceProtoP\001ZHgoogle.golang.org/genproto/googleapis/ads/googleads/v3/services;services\242\002\003GAA\252\002 Google.Ads.GoogleAds.V3.Services\312\002 Google\\Ads\\GoogleAds\\V3\\Services\352\002$Google::Ads::GoogleAds::V3::Services'),
-  serialized_pb=_b('\nKgoogle/ads/googleads_v3/proto/services/ad_group_audience_view_service.proto\x12 google.ads.googleads.v3.services\x1a\x44google/ads/googleads_v3/proto/resources/ad_group_audience_view.proto\x1a\x1cgoogle/api/annotations.proto\x1a\x17google/api/client.proto\x1a\x1fgoogle/api/field_behavior.proto\";\n\x1dGetAdGroupAudienceViewRequest\x12\x1a\n\rresource_name\x18\x01 \x01(\tB\x03\xe0\x41\x02\x32\x9d\x02\n\x1a\x41\x64GroupAudienceViewService\x12\xe1\x01\n\x16GetAdGroupAudienceView\x12?.google.ads.googleads.v3.services.GetAdGroupAudienceViewRequest\x1a\x36.google.ads.googleads.v3.resources.AdGroupAudienceView\"N\x82\xd3\xe4\x93\x02\x38\x12\x36/v3/{resource_name=customers/*/adGroupAudienceViews/*}\xda\x41\rresource_name\x1a\x1b\xca\x41\x18googleads.googleapis.comB\x86\x02\n$com.google.ads.googleads.v3.servicesB\x1f\x41\x64GroupAudienceViewServiceProtoP\x01ZHgoogle.golang.org/genproto/googleapis/ads/googleads/v3/services;services\xa2\x02\x03GAA\xaa\x02 Google.Ads.GoogleAds.V3.Services\xca\x02 Google\\Ads\\GoogleAds\\V3\\Services\xea\x02$Google::Ads::GoogleAds::V3::Servicesb\x06proto3')
+  serialized_pb=_b('\nKgoogle/ads/googleads_v3/proto/services/ad_group_audience_view_service.proto\x12 google.ads.googleads.v3.services\x1a\x44google/ads/googleads_v3/proto/resources/ad_group_audience_view.proto\x1a\x1cgoogle/api/annotations.proto\x1a\x17google/api/client.proto\x1a\x1fgoogle/api/field_behavior.proto\x1a\x19google/api/resource.proto\"l\n\x1dGetAdGroupAudienceViewRequest\x12K\n\rresource_name\x18\x01 \x01(\tB4\xe0\x41\x02\xfa\x41.\n,googleads.googleapis.com/AdGroupAudienceView2\x9d\x02\n\x1a\x41\x64GroupAudienceViewService\x12\xe1\x01\n\x16GetAdGroupAudienceView\x12?.google.ads.googleads.v3.services.GetAdGroupAudienceViewRequest\x1a\x36.google.ads.googleads.v3.resources.AdGroupAudienceView\"N\x82\xd3\xe4\x93\x02\x38\x12\x36/v3/{resource_name=customers/*/adGroupAudienceViews/*}\xda\x41\rresource_name\x1a\x1b\xca\x41\x18googleads.googleapis.comB\x86\x02\n$com.google.ads.googleads.v3.servicesB\x1f\x41\x64GroupAudienceViewServiceProtoP\x01ZHgoogle.golang.org/genproto/googleapis/ads/googleads/v3/services;services\xa2\x02\x03GAA\xaa\x02 Google.Ads.GoogleAds.V3.Services\xca\x02 Google\\Ads\\GoogleAds\\V3\\Services\xea\x02$Google::Ads::GoogleAds::V3::Servicesb\x06proto3')
   ,
-  dependencies=[google_dot_ads_dot_googleads__v3_dot_proto_dot_resources_dot_ad__group__audience__view__pb2.DESCRIPTOR,google_dot_api_dot_annotations__pb2.DESCRIPTOR,google_dot_api_dot_client__pb2.DESCRIPTOR,google_dot_api_dot_field__behavior__pb2.DESCRIPTOR,])
+  dependencies=[google_dot_ads_dot_googleads__v3_dot_proto_dot_resources_dot_ad__group__audience__view__pb2.DESCRIPTOR,google_dot_api_dot_annotations__pb2.DESCRIPTOR,google_dot_api_dot_client__pb2.DESCRIPTOR,google_dot_api_dot_field__behavior__pb2.DESCRIPTOR,google_dot_api_dot_resource__pb2.DESCRIPTOR,])
 
 
 
@@ -44,7 +45,7 @@ _GETADGROUPAUDIENCEVIEWREQUEST = _descriptor.Descriptor(
       has_default_value=False, default_value=_b("").decode('utf-8'),
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
-      serialized_options=_b('\340A\002'), file=DESCRIPTOR),
+      serialized_options=_b('\340A\002\372A.\n,googleads.googleapis.com/AdGroupAudienceView'), file=DESCRIPTOR),
   ],
   extensions=[
   ],
@@ -57,8 +58,8 @@ _GETADGROUPAUDIENCEVIEWREQUEST = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=271,
-  serialized_end=330,
+  serialized_start=298,
+  serialized_end=406,
 )
 
 DESCRIPTOR.message_types_by_name['GetAdGroupAudienceViewRequest'] = _GETADGROUPAUDIENCEVIEWREQUEST
@@ -91,8 +92,8 @@ _ADGROUPAUDIENCEVIEWSERVICE = _descriptor.ServiceDescriptor(
   file=DESCRIPTOR,
   index=0,
   serialized_options=_b('\312A\030googleads.googleapis.com'),
-  serialized_start=333,
-  serialized_end=618,
+  serialized_start=409,
+  serialized_end=694,
   methods=[
   _descriptor.MethodDescriptor(
     name='GetAdGroupAudienceView',

@@ -17,6 +17,7 @@ from google.ads.google_ads.v3.proto.resources import ad_parameter_pb2 as google_
 from google.api import annotations_pb2 as google_dot_api_dot_annotations__pb2
 from google.api import client_pb2 as google_dot_api_dot_client__pb2
 from google.api import field_behavior_pb2 as google_dot_api_dot_field__behavior__pb2
+from google.api import resource_pb2 as google_dot_api_dot_resource__pb2
 from google.protobuf import field_mask_pb2 as google_dot_protobuf_dot_field__mask__pb2
 from google.rpc import status_pb2 as google_dot_rpc_dot_status__pb2
 
@@ -26,9 +27,9 @@ DESCRIPTOR = _descriptor.FileDescriptor(
   package='google.ads.googleads.v3.services',
   syntax='proto3',
   serialized_options=_b('\n$com.google.ads.googleads.v3.servicesB\027AdParameterServiceProtoP\001ZHgoogle.golang.org/genproto/googleapis/ads/googleads/v3/services;services\242\002\003GAA\252\002 Google.Ads.GoogleAds.V3.Services\312\002 Google\\Ads\\GoogleAds\\V3\\Services\352\002$Google::Ads::GoogleAds::V3::Services'),
-  serialized_pb=_b('\nAgoogle/ads/googleads_v3/proto/services/ad_parameter_service.proto\x12 google.ads.googleads.v3.services\x1a:google/ads/googleads_v3/proto/resources/ad_parameter.proto\x1a\x1cgoogle/api/annotations.proto\x1a\x17google/api/client.proto\x1a\x1fgoogle/api/field_behavior.proto\x1a google/protobuf/field_mask.proto\x1a\x17google/rpc/status.proto\"3\n\x15GetAdParameterRequest\x12\x1a\n\rresource_name\x18\x01 \x01(\tB\x03\xe0\x41\x02\"\xb6\x01\n\x19MutateAdParametersRequest\x12\x18\n\x0b\x63ustomer_id\x18\x01 \x01(\tB\x03\xe0\x41\x02\x12O\n\noperations\x18\x02 \x03(\x0b\x32\x36.google.ads.googleads.v3.services.AdParameterOperationB\x03\xe0\x41\x02\x12\x17\n\x0fpartial_failure\x18\x03 \x01(\x08\x12\x15\n\rvalidate_only\x18\x04 \x01(\x08\"\xea\x01\n\x14\x41\x64ParameterOperation\x12/\n\x0bupdate_mask\x18\x04 \x01(\x0b\x32\x1a.google.protobuf.FieldMask\x12@\n\x06\x63reate\x18\x01 \x01(\x0b\x32..google.ads.googleads.v3.resources.AdParameterH\x00\x12@\n\x06update\x18\x02 \x01(\x0b\x32..google.ads.googleads.v3.resources.AdParameterH\x00\x12\x10\n\x06remove\x18\x03 \x01(\tH\x00\x42\x0b\n\toperation\"\x9b\x01\n\x1aMutateAdParametersResponse\x12\x31\n\x15partial_failure_error\x18\x03 \x01(\x0b\x32\x12.google.rpc.Status\x12J\n\x07results\x18\x02 \x03(\x0b\x32\x39.google.ads.googleads.v3.services.MutateAdParameterResult\"0\n\x17MutateAdParameterResult\x12\x15\n\rresource_name\x18\x01 \x01(\t2\xde\x03\n\x12\x41\x64ParameterService\x12\xc1\x01\n\x0eGetAdParameter\x12\x37.google.ads.googleads.v3.services.GetAdParameterRequest\x1a..google.ads.googleads.v3.resources.AdParameter\"F\x82\xd3\xe4\x93\x02\x30\x12./v3/{resource_name=customers/*/adParameters/*}\xda\x41\rresource_name\x12\xe6\x01\n\x12MutateAdParameters\x12;.google.ads.googleads.v3.services.MutateAdParametersRequest\x1a<.google.ads.googleads.v3.services.MutateAdParametersResponse\"U\x82\xd3\xe4\x93\x02\x36\"1/v3/customers/{customer_id=*}/adParameters:mutate:\x01*\xda\x41\x16\x63ustomer_id,operations\x1a\x1b\xca\x41\x18googleads.googleapis.comB\xfe\x01\n$com.google.ads.googleads.v3.servicesB\x17\x41\x64ParameterServiceProtoP\x01ZHgoogle.golang.org/genproto/googleapis/ads/googleads/v3/services;services\xa2\x02\x03GAA\xaa\x02 Google.Ads.GoogleAds.V3.Services\xca\x02 Google\\Ads\\GoogleAds\\V3\\Services\xea\x02$Google::Ads::GoogleAds::V3::Servicesb\x06proto3')
+  serialized_pb=_b('\nAgoogle/ads/googleads_v3/proto/services/ad_parameter_service.proto\x12 google.ads.googleads.v3.services\x1a:google/ads/googleads_v3/proto/resources/ad_parameter.proto\x1a\x1cgoogle/api/annotations.proto\x1a\x17google/api/client.proto\x1a\x1fgoogle/api/field_behavior.proto\x1a\x19google/api/resource.proto\x1a google/protobuf/field_mask.proto\x1a\x17google/rpc/status.proto\"\\\n\x15GetAdParameterRequest\x12\x43\n\rresource_name\x18\x01 \x01(\tB,\xe0\x41\x02\xfa\x41&\n$googleads.googleapis.com/AdParameter\"\xb6\x01\n\x19MutateAdParametersRequest\x12\x18\n\x0b\x63ustomer_id\x18\x01 \x01(\tB\x03\xe0\x41\x02\x12O\n\noperations\x18\x02 \x03(\x0b\x32\x36.google.ads.googleads.v3.services.AdParameterOperationB\x03\xe0\x41\x02\x12\x17\n\x0fpartial_failure\x18\x03 \x01(\x08\x12\x15\n\rvalidate_only\x18\x04 \x01(\x08\"\xea\x01\n\x14\x41\x64ParameterOperation\x12/\n\x0bupdate_mask\x18\x04 \x01(\x0b\x32\x1a.google.protobuf.FieldMask\x12@\n\x06\x63reate\x18\x01 \x01(\x0b\x32..google.ads.googleads.v3.resources.AdParameterH\x00\x12@\n\x06update\x18\x02 \x01(\x0b\x32..google.ads.googleads.v3.resources.AdParameterH\x00\x12\x10\n\x06remove\x18\x03 \x01(\tH\x00\x42\x0b\n\toperation\"\x9b\x01\n\x1aMutateAdParametersResponse\x12\x31\n\x15partial_failure_error\x18\x03 \x01(\x0b\x32\x12.google.rpc.Status\x12J\n\x07results\x18\x02 \x03(\x0b\x32\x39.google.ads.googleads.v3.services.MutateAdParameterResult\"0\n\x17MutateAdParameterResult\x12\x15\n\rresource_name\x18\x01 \x01(\t2\xde\x03\n\x12\x41\x64ParameterService\x12\xc1\x01\n\x0eGetAdParameter\x12\x37.google.ads.googleads.v3.services.GetAdParameterRequest\x1a..google.ads.googleads.v3.resources.AdParameter\"F\x82\xd3\xe4\x93\x02\x30\x12./v3/{resource_name=customers/*/adParameters/*}\xda\x41\rresource_name\x12\xe6\x01\n\x12MutateAdParameters\x12;.google.ads.googleads.v3.services.MutateAdParametersRequest\x1a<.google.ads.googleads.v3.services.MutateAdParametersResponse\"U\x82\xd3\xe4\x93\x02\x36\"1/v3/customers/{customer_id=*}/adParameters:mutate:\x01*\xda\x41\x16\x63ustomer_id,operations\x1a\x1b\xca\x41\x18googleads.googleapis.comB\xfe\x01\n$com.google.ads.googleads.v3.servicesB\x17\x41\x64ParameterServiceProtoP\x01ZHgoogle.golang.org/genproto/googleapis/ads/googleads/v3/services;services\xa2\x02\x03GAA\xaa\x02 Google.Ads.GoogleAds.V3.Services\xca\x02 Google\\Ads\\GoogleAds\\V3\\Services\xea\x02$Google::Ads::GoogleAds::V3::Servicesb\x06proto3')
   ,
-  dependencies=[google_dot_ads_dot_googleads__v3_dot_proto_dot_resources_dot_ad__parameter__pb2.DESCRIPTOR,google_dot_api_dot_annotations__pb2.DESCRIPTOR,google_dot_api_dot_client__pb2.DESCRIPTOR,google_dot_api_dot_field__behavior__pb2.DESCRIPTOR,google_dot_protobuf_dot_field__mask__pb2.DESCRIPTOR,google_dot_rpc_dot_status__pb2.DESCRIPTOR,])
+  dependencies=[google_dot_ads_dot_googleads__v3_dot_proto_dot_resources_dot_ad__parameter__pb2.DESCRIPTOR,google_dot_api_dot_annotations__pb2.DESCRIPTOR,google_dot_api_dot_client__pb2.DESCRIPTOR,google_dot_api_dot_field__behavior__pb2.DESCRIPTOR,google_dot_api_dot_resource__pb2.DESCRIPTOR,google_dot_protobuf_dot_field__mask__pb2.DESCRIPTOR,google_dot_rpc_dot_status__pb2.DESCRIPTOR,])
 
 
 
@@ -46,7 +47,7 @@ _GETADPARAMETERREQUEST = _descriptor.Descriptor(
       has_default_value=False, default_value=_b("").decode('utf-8'),
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
-      serialized_options=_b('\340A\002'), file=DESCRIPTOR),
+      serialized_options=_b('\340A\002\372A&\n$googleads.googleapis.com/AdParameter'), file=DESCRIPTOR),
   ],
   extensions=[
   ],
@@ -59,8 +60,8 @@ _GETADPARAMETERREQUEST = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=310,
-  serialized_end=361,
+  serialized_start=337,
+  serialized_end=429,
 )
 
 
@@ -111,8 +112,8 @@ _MUTATEADPARAMETERSREQUEST = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=364,
-  serialized_end=546,
+  serialized_start=432,
+  serialized_end=614,
 )
 
 
@@ -166,8 +167,8 @@ _ADPARAMETEROPERATION = _descriptor.Descriptor(
       name='operation', full_name='google.ads.googleads.v3.services.AdParameterOperation.operation',
       index=0, containing_type=None, fields=[]),
   ],
-  serialized_start=549,
-  serialized_end=783,
+  serialized_start=617,
+  serialized_end=851,
 )
 
 
@@ -204,8 +205,8 @@ _MUTATEADPARAMETERSRESPONSE = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=786,
-  serialized_end=941,
+  serialized_start=854,
+  serialized_end=1009,
 )
 
 
@@ -235,8 +236,8 @@ _MUTATEADPARAMETERRESULT = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=943,
-  serialized_end=991,
+  serialized_start=1011,
+  serialized_end=1059,
 )
 
 _MUTATEADPARAMETERSREQUEST.fields_by_name['operations'].message_type = _ADPARAMETEROPERATION
@@ -381,8 +382,8 @@ _ADPARAMETERSERVICE = _descriptor.ServiceDescriptor(
   file=DESCRIPTOR,
   index=0,
   serialized_options=_b('\312A\030googleads.googleapis.com'),
-  serialized_start=994,
-  serialized_end=1472,
+  serialized_start=1062,
+  serialized_end=1540,
   methods=[
   _descriptor.MethodDescriptor(
     name='GetAdParameter',

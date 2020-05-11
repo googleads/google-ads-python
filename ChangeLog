@@ -1,3 +1,8 @@
+* 5.1.0
+- Google Ads v3_1 release
+- Add add_campaign_labels example
+- Fixed issues in services/enum.py in v2 and v3
+
 * 5.0.4
 - Enable logging interceptor to retrieve customer ID from resource_name.
 - Fix bugs in services/enums.py files in v2 and v3.

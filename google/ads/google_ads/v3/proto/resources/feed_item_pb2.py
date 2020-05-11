@@ -25,6 +25,7 @@ from google.ads.google_ads.v3.proto.enums import placeholder_type_pb2 as google_
 from google.ads.google_ads.v3.proto.enums import policy_approval_status_pb2 as google_dot_ads_dot_googleads__v3_dot_proto_dot_enums_dot_policy__approval__status__pb2
 from google.ads.google_ads.v3.proto.enums import policy_review_status_pb2 as google_dot_ads_dot_googleads__v3_dot_proto_dot_enums_dot_policy__review__status__pb2
 from google.ads.google_ads.v3.proto.errors import feed_item_validation_error_pb2 as google_dot_ads_dot_googleads__v3_dot_proto_dot_errors_dot_feed__item__validation__error__pb2
+from google.api import field_behavior_pb2 as google_dot_api_dot_field__behavior__pb2
 from google.api import resource_pb2 as google_dot_api_dot_resource__pb2
 from google.protobuf import wrappers_pb2 as google_dot_protobuf_dot_wrappers__pb2
 from google.api import annotations_pb2 as google_dot_api_dot_annotations__pb2
@@ -35,9 +36,9 @@ DESCRIPTOR = _descriptor.FileDescriptor(
   package='google.ads.googleads.v3.resources',
   syntax='proto3',
   serialized_options=_b('\n%com.google.ads.googleads.v3.resourcesB\rFeedItemProtoP\001ZJgoogle.golang.org/genproto/googleapis/ads/googleads/v3/resources;resources\242\002\003GAA\252\002!Google.Ads.GoogleAds.V3.Resources\312\002!Google\\Ads\\GoogleAds\\V3\\Resources\352\002%Google::Ads::GoogleAds::V3::Resources'),
-  serialized_pb=_b('\n7google/ads/googleads_v3/proto/resources/feed_item.proto\x12!google.ads.googleads.v3.resources\x1a;google/ads/googleads_v3/proto/common/custom_parameter.proto\x1a\x36google/ads/googleads_v3/proto/common/feed_common.proto\x1a\x31google/ads/googleads_v3/proto/common/policy.proto\x1aKgoogle/ads/googleads_v3/proto/enums/feed_item_quality_approval_status.proto\x1aNgoogle/ads/googleads_v3/proto/enums/feed_item_quality_disapproval_reason.proto\x1a:google/ads/googleads_v3/proto/enums/feed_item_status.proto\x1a\x45google/ads/googleads_v3/proto/enums/feed_item_validation_status.proto\x1a\x43google/ads/googleads_v3/proto/enums/geo_targeting_restriction.proto\x1a:google/ads/googleads_v3/proto/enums/placeholder_type.proto\x1a@google/ads/googleads_v3/proto/enums/policy_approval_status.proto\x1a>google/ads/googleads_v3/proto/enums/policy_review_status.proto\x1a\x45google/ads/googleads_v3/proto/errors/feed_item_validation_error.proto\x1a\x19google/api/resource.proto\x1a\x1egoogle/protobuf/wrappers.proto\x1a\x1cgoogle/api/annotations.proto\"\xfc\x05\n\x08\x46\x65\x65\x64Item\x12\x15\n\rresource_name\x18\x01 \x01(\t\x12*\n\x04\x66\x65\x65\x64\x18\x02 \x01(\x0b\x32\x1c.google.protobuf.StringValue\x12\'\n\x02id\x18\x03 \x01(\x0b\x32\x1b.google.protobuf.Int64Value\x12\x35\n\x0fstart_date_time\x18\x04 \x01(\x0b\x32\x1c.google.protobuf.StringValue\x12\x33\n\rend_date_time\x18\x05 \x01(\x0b\x32\x1c.google.protobuf.StringValue\x12S\n\x10\x61ttribute_values\x18\x06 \x03(\x0b\x32\x39.google.ads.googleads.v3.resources.FeedItemAttributeValue\x12u\n\x19geo_targeting_restriction\x18\x07 \x01(\x0e\x32R.google.ads.googleads.v3.enums.GeoTargetingRestrictionEnum.GeoTargetingRestriction\x12N\n\x15url_custom_parameters\x18\x08 \x03(\x0b\x32/.google.ads.googleads.v3.common.CustomParameter\x12P\n\x06status\x18\t \x01(\x0e\x32@.google.ads.googleads.v3.enums.FeedItemStatusEnum.FeedItemStatus\x12V\n\x0cpolicy_infos\x18\n \x03(\x0b\x32@.google.ads.googleads.v3.resources.FeedItemPlaceholderPolicyInfo:R\xea\x41O\n!googleads.googleapis.com/FeedItem\x12*customers/{customer}/feedItems/{feed_item}\"\xae\x04\n\x16\x46\x65\x65\x64ItemAttributeValue\x12\x36\n\x11\x66\x65\x65\x64_attribute_id\x18\x01 \x01(\x0b\x32\x1b.google.protobuf.Int64Value\x12\x32\n\rinteger_value\x18\x02 \x01(\x0b\x32\x1b.google.protobuf.Int64Value\x12\x31\n\rboolean_value\x18\x03 \x01(\x0b\x32\x1a.google.protobuf.BoolValue\x12\x32\n\x0cstring_value\x18\x04 \x01(\x0b\x32\x1c.google.protobuf.StringValue\x12\x32\n\x0c\x64ouble_value\x18\x05 \x01(\x0b\x32\x1c.google.protobuf.DoubleValue\x12:\n\x0bprice_value\x18\x06 \x01(\x0b\x32%.google.ads.googleads.v3.common.Money\x12\x33\n\x0einteger_values\x18\x07 \x03(\x0b\x32\x1b.google.protobuf.Int64Value\x12\x32\n\x0e\x62oolean_values\x18\x08 \x03(\x0b\x32\x1a.google.protobuf.BoolValue\x12\x33\n\rstring_values\x18\t \x03(\x0b\x32\x1c.google.protobuf.StringValue\x12\x33\n\rdouble_values\x18\n \x03(\x0b\x32\x1c.google.protobuf.DoubleValue\"\xb1\x07\n\x1d\x46\x65\x65\x64ItemPlaceholderPolicyInfo\x12\x61\n\x15placeholder_type_enum\x18\n \x01(\x0e\x32\x42.google.ads.googleads.v3.enums.PlaceholderTypeEnum.PlaceholderType\x12@\n\x1a\x66\x65\x65\x64_mapping_resource_name\x18\x02 \x01(\x0b\x32\x1c.google.protobuf.StringValue\x12_\n\rreview_status\x18\x03 \x01(\x0e\x32H.google.ads.googleads.v3.enums.PolicyReviewStatusEnum.PolicyReviewStatus\x12\x65\n\x0f\x61pproval_status\x18\x04 \x01(\x0e\x32L.google.ads.googleads.v3.enums.PolicyApprovalStatusEnum.PolicyApprovalStatus\x12N\n\x14policy_topic_entries\x18\x05 \x03(\x0b\x32\x30.google.ads.googleads.v3.common.PolicyTopicEntry\x12o\n\x11validation_status\x18\x06 \x01(\x0e\x32T.google.ads.googleads.v3.enums.FeedItemValidationStatusEnum.FeedItemValidationStatus\x12U\n\x11validation_errors\x18\x07 \x03(\x0b\x32:.google.ads.googleads.v3.resources.FeedItemValidationError\x12\x7f\n\x17quality_approval_status\x18\x08 \x01(\x0e\x32^.google.ads.googleads.v3.enums.FeedItemQualityApprovalStatusEnum.FeedItemQualityApprovalStatus\x12\x89\x01\n\x1bquality_disapproval_reasons\x18\t \x03(\x0e\x32\x64.google.ads.googleads.v3.enums.FeedItemQualityDisapprovalReasonEnum.FeedItemQualityDisapprovalReason\"\xa6\x02\n\x17\x46\x65\x65\x64ItemValidationError\x12m\n\x10validation_error\x18\x01 \x01(\x0e\x32S.google.ads.googleads.v3.errors.FeedItemValidationErrorEnum.FeedItemValidationError\x12\x31\n\x0b\x64\x65scription\x18\x02 \x01(\x0b\x32\x1c.google.protobuf.StringValue\x12\x37\n\x12\x66\x65\x65\x64_attribute_ids\x18\x03 \x03(\x0b\x32\x1b.google.protobuf.Int64Value\x12\x30\n\nextra_info\x18\x05 \x01(\x0b\x32\x1c.google.protobuf.StringValueB\xfa\x01\n%com.google.ads.googleads.v3.resourcesB\rFeedItemProtoP\x01ZJgoogle.golang.org/genproto/googleapis/ads/googleads/v3/resources;resources\xa2\x02\x03GAA\xaa\x02!Google.Ads.GoogleAds.V3.Resources\xca\x02!Google\\Ads\\GoogleAds\\V3\\Resources\xea\x02%Google::Ads::GoogleAds::V3::Resourcesb\x06proto3')
+  serialized_pb=_b('\n7google/ads/googleads_v3/proto/resources/feed_item.proto\x12!google.ads.googleads.v3.resources\x1a;google/ads/googleads_v3/proto/common/custom_parameter.proto\x1a\x36google/ads/googleads_v3/proto/common/feed_common.proto\x1a\x31google/ads/googleads_v3/proto/common/policy.proto\x1aKgoogle/ads/googleads_v3/proto/enums/feed_item_quality_approval_status.proto\x1aNgoogle/ads/googleads_v3/proto/enums/feed_item_quality_disapproval_reason.proto\x1a:google/ads/googleads_v3/proto/enums/feed_item_status.proto\x1a\x45google/ads/googleads_v3/proto/enums/feed_item_validation_status.proto\x1a\x43google/ads/googleads_v3/proto/enums/geo_targeting_restriction.proto\x1a:google/ads/googleads_v3/proto/enums/placeholder_type.proto\x1a@google/ads/googleads_v3/proto/enums/policy_approval_status.proto\x1a>google/ads/googleads_v3/proto/enums/policy_review_status.proto\x1a\x45google/ads/googleads_v3/proto/errors/feed_item_validation_error.proto\x1a\x1fgoogle/api/field_behavior.proto\x1a\x19google/api/resource.proto\x1a\x1egoogle/protobuf/wrappers.proto\x1a\x1cgoogle/api/annotations.proto\"\xdd\x06\n\x08\x46\x65\x65\x64Item\x12@\n\rresource_name\x18\x01 \x01(\tB)\xe0\x41\x05\xfa\x41#\n!googleads.googleapis.com/FeedItem\x12Q\n\x04\x66\x65\x65\x64\x18\x02 \x01(\x0b\x32\x1c.google.protobuf.StringValueB%\xe0\x41\x05\xfa\x41\x1f\n\x1dgoogleads.googleapis.com/Feed\x12,\n\x02id\x18\x03 \x01(\x0b\x32\x1b.google.protobuf.Int64ValueB\x03\xe0\x41\x03\x12\x35\n\x0fstart_date_time\x18\x04 \x01(\x0b\x32\x1c.google.protobuf.StringValue\x12\x33\n\rend_date_time\x18\x05 \x01(\x0b\x32\x1c.google.protobuf.StringValue\x12S\n\x10\x61ttribute_values\x18\x06 \x03(\x0b\x32\x39.google.ads.googleads.v3.resources.FeedItemAttributeValue\x12u\n\x19geo_targeting_restriction\x18\x07 \x01(\x0e\x32R.google.ads.googleads.v3.enums.GeoTargetingRestrictionEnum.GeoTargetingRestriction\x12N\n\x15url_custom_parameters\x18\x08 \x03(\x0b\x32/.google.ads.googleads.v3.common.CustomParameter\x12U\n\x06status\x18\t \x01(\x0e\x32@.google.ads.googleads.v3.enums.FeedItemStatusEnum.FeedItemStatusB\x03\xe0\x41\x03\x12[\n\x0cpolicy_infos\x18\n \x03(\x0b\x32@.google.ads.googleads.v3.resources.FeedItemPlaceholderPolicyInfoB\x03\xe0\x41\x03:R\xea\x41O\n!googleads.googleapis.com/FeedItem\x12*customers/{customer}/feedItems/{feed_item}\"\xae\x04\n\x16\x46\x65\x65\x64ItemAttributeValue\x12\x36\n\x11\x66\x65\x65\x64_attribute_id\x18\x01 \x01(\x0b\x32\x1b.google.protobuf.Int64Value\x12\x32\n\rinteger_value\x18\x02 \x01(\x0b\x32\x1b.google.protobuf.Int64Value\x12\x31\n\rboolean_value\x18\x03 \x01(\x0b\x32\x1a.google.protobuf.BoolValue\x12\x32\n\x0cstring_value\x18\x04 \x01(\x0b\x32\x1c.google.protobuf.StringValue\x12\x32\n\x0c\x64ouble_value\x18\x05 \x01(\x0b\x32\x1c.google.protobuf.DoubleValue\x12:\n\x0bprice_value\x18\x06 \x01(\x0b\x32%.google.ads.googleads.v3.common.Money\x12\x33\n\x0einteger_values\x18\x07 \x03(\x0b\x32\x1b.google.protobuf.Int64Value\x12\x32\n\x0e\x62oolean_values\x18\x08 \x03(\x0b\x32\x1a.google.protobuf.BoolValue\x12\x33\n\rstring_values\x18\t \x03(\x0b\x32\x1c.google.protobuf.StringValue\x12\x33\n\rdouble_values\x18\n \x03(\x0b\x32\x1c.google.protobuf.DoubleValue\"\xdf\x07\n\x1d\x46\x65\x65\x64ItemPlaceholderPolicyInfo\x12\x66\n\x15placeholder_type_enum\x18\n \x01(\x0e\x32\x42.google.ads.googleads.v3.enums.PlaceholderTypeEnum.PlaceholderTypeB\x03\xe0\x41\x03\x12\x45\n\x1a\x66\x65\x65\x64_mapping_resource_name\x18\x02 \x01(\x0b\x32\x1c.google.protobuf.StringValueB\x03\xe0\x41\x03\x12\x64\n\rreview_status\x18\x03 \x01(\x0e\x32H.google.ads.googleads.v3.enums.PolicyReviewStatusEnum.PolicyReviewStatusB\x03\xe0\x41\x03\x12j\n\x0f\x61pproval_status\x18\x04 \x01(\x0e\x32L.google.ads.googleads.v3.enums.PolicyApprovalStatusEnum.PolicyApprovalStatusB\x03\xe0\x41\x03\x12S\n\x14policy_topic_entries\x18\x05 \x03(\x0b\x32\x30.google.ads.googleads.v3.common.PolicyTopicEntryB\x03\xe0\x41\x03\x12t\n\x11validation_status\x18\x06 \x01(\x0e\x32T.google.ads.googleads.v3.enums.FeedItemValidationStatusEnum.FeedItemValidationStatusB\x03\xe0\x41\x03\x12Z\n\x11validation_errors\x18\x07 \x03(\x0b\x32:.google.ads.googleads.v3.resources.FeedItemValidationErrorB\x03\xe0\x41\x03\x12\x84\x01\n\x17quality_approval_status\x18\x08 \x01(\x0e\x32^.google.ads.googleads.v3.enums.FeedItemQualityApprovalStatusEnum.FeedItemQualityApprovalStatusB\x03\xe0\x41\x03\x12\x8e\x01\n\x1bquality_disapproval_reasons\x18\t \x03(\x0e\x32\x64.google.ads.googleads.v3.enums.FeedItemQualityDisapprovalReasonEnum.FeedItemQualityDisapprovalReasonB\x03\xe0\x41\x03\"\xba\x02\n\x17\x46\x65\x65\x64ItemValidationError\x12r\n\x10validation_error\x18\x01 \x01(\x0e\x32S.google.ads.googleads.v3.errors.FeedItemValidationErrorEnum.FeedItemValidationErrorB\x03\xe0\x41\x03\x12\x36\n\x0b\x64\x65scription\x18\x02 \x01(\x0b\x32\x1c.google.protobuf.StringValueB\x03\xe0\x41\x03\x12<\n\x12\x66\x65\x65\x64_attribute_ids\x18\x03 \x03(\x0b\x32\x1b.google.protobuf.Int64ValueB\x03\xe0\x41\x03\x12\x35\n\nextra_info\x18\x05 \x01(\x0b\x32\x1c.google.protobuf.StringValueB\x03\xe0\x41\x03\x42\xfa\x01\n%com.google.ads.googleads.v3.resourcesB\rFeedItemProtoP\x01ZJgoogle.golang.org/genproto/googleapis/ads/googleads/v3/resources;resources\xa2\x02\x03GAA\xaa\x02!Google.Ads.GoogleAds.V3.Resources\xca\x02!Google\\Ads\\GoogleAds\\V3\\Resources\xea\x02%Google::Ads::GoogleAds::V3::Resourcesb\x06proto3')
   ,
-  dependencies=[google_dot_ads_dot_googleads__v3_dot_proto_dot_common_dot_custom__parameter__pb2.DESCRIPTOR,google_dot_ads_dot_googleads__v3_dot_proto_dot_common_dot_feed__common__pb2.DESCRIPTOR,google_dot_ads_dot_googleads__v3_dot_proto_dot_common_dot_policy__pb2.DESCRIPTOR,google_dot_ads_dot_googleads__v3_dot_proto_dot_enums_dot_feed__item__quality__approval__status__pb2.DESCRIPTOR,google_dot_ads_dot_googleads__v3_dot_proto_dot_enums_dot_feed__item__quality__disapproval__reason__pb2.DESCRIPTOR,google_dot_ads_dot_googleads__v3_dot_proto_dot_enums_dot_feed__item__status__pb2.DESCRIPTOR,google_dot_ads_dot_googleads__v3_dot_proto_dot_enums_dot_feed__item__validation__status__pb2.DESCRIPTOR,google_dot_ads_dot_googleads__v3_dot_proto_dot_enums_dot_geo__targeting__restriction__pb2.DESCRIPTOR,google_dot_ads_dot_googleads__v3_dot_proto_dot_enums_dot_placeholder__type__pb2.DESCRIPTOR,google_dot_ads_dot_googleads__v3_dot_proto_dot_enums_dot_policy__approval__status__pb2.DESCRIPTOR,google_dot_ads_dot_googleads__v3_dot_proto_dot_enums_dot_policy__review__status__pb2.DESCRIPTOR,google_dot_ads_dot_googleads__v3_dot_proto_dot_errors_dot_feed__item__validation__error__pb2.DESCRIPTOR,google_dot_api_dot_resource__pb2.DESCRIPTOR,google_dot_protobuf_dot_wrappers__pb2.DESCRIPTOR,google_dot_api_dot_annotations__pb2.DESCRIPTOR,])
+  dependencies=[google_dot_ads_dot_googleads__v3_dot_proto_dot_common_dot_custom__parameter__pb2.DESCRIPTOR,google_dot_ads_dot_googleads__v3_dot_proto_dot_common_dot_feed__common__pb2.DESCRIPTOR,google_dot_ads_dot_googleads__v3_dot_proto_dot_common_dot_policy__pb2.DESCRIPTOR,google_dot_ads_dot_googleads__v3_dot_proto_dot_enums_dot_feed__item__quality__approval__status__pb2.DESCRIPTOR,google_dot_ads_dot_googleads__v3_dot_proto_dot_enums_dot_feed__item__quality__disapproval__reason__pb2.DESCRIPTOR,google_dot_ads_dot_googleads__v3_dot_proto_dot_enums_dot_feed__item__status__pb2.DESCRIPTOR,google_dot_ads_dot_googleads__v3_dot_proto_dot_enums_dot_feed__item__validation__status__pb2.DESCRIPTOR,google_dot_ads_dot_googleads__v3_dot_proto_dot_enums_dot_geo__targeting__restriction__pb2.DESCRIPTOR,google_dot_ads_dot_googleads__v3_dot_proto_dot_enums_dot_placeholder__type__pb2.DESCRIPTOR,google_dot_ads_dot_googleads__v3_dot_proto_dot_enums_dot_policy__approval__status__pb2.DESCRIPTOR,google_dot_ads_dot_googleads__v3_dot_proto_dot_enums_dot_policy__review__status__pb2.DESCRIPTOR,google_dot_ads_dot_googleads__v3_dot_proto_dot_errors_dot_feed__item__validation__error__pb2.DESCRIPTOR,google_dot_api_dot_field__behavior__pb2.DESCRIPTOR,google_dot_api_dot_resource__pb2.DESCRIPTOR,google_dot_protobuf_dot_wrappers__pb2.DESCRIPTOR,google_dot_api_dot_annotations__pb2.DESCRIPTOR,])
 
 
 
@@ -55,21 +56,21 @@ _FEEDITEM = _descriptor.Descriptor(
       has_default_value=False, default_value=_b("").decode('utf-8'),
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR),
+      serialized_options=_b('\340A\005\372A#\n!googleads.googleapis.com/FeedItem'), file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
       name='feed', full_name='google.ads.googleads.v3.resources.FeedItem.feed', index=1,
       number=2, type=11, cpp_type=10, label=1,
       has_default_value=False, default_value=None,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR),
+      serialized_options=_b('\340A\005\372A\037\n\035googleads.googleapis.com/Feed'), file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
       name='id', full_name='google.ads.googleads.v3.resources.FeedItem.id', index=2,
       number=3, type=11, cpp_type=10, label=1,
       has_default_value=False, default_value=None,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR),
+      serialized_options=_b('\340A\003'), file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
       name='start_date_time', full_name='google.ads.googleads.v3.resources.FeedItem.start_date_time', index=3,
       number=4, type=11, cpp_type=10, label=1,
@@ -111,14 +112,14 @@ _FEEDITEM = _descriptor.Descriptor(
       has_default_value=False, default_value=0,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR),
+      serialized_options=_b('\340A\003'), file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
       name='policy_infos', full_name='google.ads.googleads.v3.resources.FeedItem.policy_infos', index=9,
       number=10, type=11, cpp_type=10, label=3,
       has_default_value=False, default_value=[],
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR),
+      serialized_options=_b('\340A\003'), file=DESCRIPTOR),
   ],
   extensions=[
   ],
@@ -131,8 +132,8 @@ _FEEDITEM = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=970,
-  serialized_end=1734,
+  serialized_start=1003,
+  serialized_end=1864,
 )
 
 
@@ -225,8 +226,8 @@ _FEEDITEMATTRIBUTEVALUE = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=1737,
-  serialized_end=2295,
+  serialized_start=1867,
+  serialized_end=2425,
 )
 
 
@@ -243,63 +244,63 @@ _FEEDITEMPLACEHOLDERPOLICYINFO = _descriptor.Descriptor(
       has_default_value=False, default_value=0,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR),
+      serialized_options=_b('\340A\003'), file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
       name='feed_mapping_resource_name', full_name='google.ads.googleads.v3.resources.FeedItemPlaceholderPolicyInfo.feed_mapping_resource_name', index=1,
       number=2, type=11, cpp_type=10, label=1,
       has_default_value=False, default_value=None,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR),
+      serialized_options=_b('\340A\003'), file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
       name='review_status', full_name='google.ads.googleads.v3.resources.FeedItemPlaceholderPolicyInfo.review_status', index=2,
       number=3, type=14, cpp_type=8, label=1,
       has_default_value=False, default_value=0,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR),
+      serialized_options=_b('\340A\003'), file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
       name='approval_status', full_name='google.ads.googleads.v3.resources.FeedItemPlaceholderPolicyInfo.approval_status', index=3,
       number=4, type=14, cpp_type=8, label=1,
       has_default_value=False, default_value=0,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR),
+      serialized_options=_b('\340A\003'), file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
       name='policy_topic_entries', full_name='google.ads.googleads.v3.resources.FeedItemPlaceholderPolicyInfo.policy_topic_entries', index=4,
       number=5, type=11, cpp_type=10, label=3,
       has_default_value=False, default_value=[],
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR),
+      serialized_options=_b('\340A\003'), file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
       name='validation_status', full_name='google.ads.googleads.v3.resources.FeedItemPlaceholderPolicyInfo.validation_status', index=5,
       number=6, type=14, cpp_type=8, label=1,
       has_default_value=False, default_value=0,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR),
+      serialized_options=_b('\340A\003'), file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
       name='validation_errors', full_name='google.ads.googleads.v3.resources.FeedItemPlaceholderPolicyInfo.validation_errors', index=6,
       number=7, type=11, cpp_type=10, label=3,
       has_default_value=False, default_value=[],
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR),
+      serialized_options=_b('\340A\003'), file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
       name='quality_approval_status', full_name='google.ads.googleads.v3.resources.FeedItemPlaceholderPolicyInfo.quality_approval_status', index=7,
       number=8, type=14, cpp_type=8, label=1,
       has_default_value=False, default_value=0,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR),
+      serialized_options=_b('\340A\003'), file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
       name='quality_disapproval_reasons', full_name='google.ads.googleads.v3.resources.FeedItemPlaceholderPolicyInfo.quality_disapproval_reasons', index=8,
       number=9, type=14, cpp_type=8, label=3,
       has_default_value=False, default_value=[],
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR),
+      serialized_options=_b('\340A\003'), file=DESCRIPTOR),
   ],
   extensions=[
   ],
@@ -312,8 +313,8 @@ _FEEDITEMPLACEHOLDERPOLICYINFO = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=2298,
-  serialized_end=3243,
+  serialized_start=2428,
+  serialized_end=3419,
 )
 
 
@@ -330,28 +331,28 @@ _FEEDITEMVALIDATIONERROR = _descriptor.Descriptor(
       has_default_value=False, default_value=0,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR),
+      serialized_options=_b('\340A\003'), file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
       name='description', full_name='google.ads.googleads.v3.resources.FeedItemValidationError.description', index=1,
       number=2, type=11, cpp_type=10, label=1,
       has_default_value=False, default_value=None,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR),
+      serialized_options=_b('\340A\003'), file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
       name='feed_attribute_ids', full_name='google.ads.googleads.v3.resources.FeedItemValidationError.feed_attribute_ids', index=2,
       number=3, type=11, cpp_type=10, label=3,
       has_default_value=False, default_value=[],
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR),
+      serialized_options=_b('\340A\003'), file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
       name='extra_info', full_name='google.ads.googleads.v3.resources.FeedItemValidationError.extra_info', index=3,
       number=5, type=11, cpp_type=10, label=1,
       has_default_value=False, default_value=None,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR),
+      serialized_options=_b('\340A\003'), file=DESCRIPTOR),
   ],
   extensions=[
   ],
@@ -364,8 +365,8 @@ _FEEDITEMVALIDATIONERROR = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=3246,
-  serialized_end=3540,
+  serialized_start=3422,
+  serialized_end=3736,
 )
 
 _FEEDITEM.fields_by_name['feed'].message_type = google_dot_protobuf_dot_wrappers__pb2._STRINGVALUE
@@ -415,13 +416,13 @@ FeedItem = _reflection.GeneratedProtocolMessageType('FeedItem', (_message.Messag
   
   Attributes:
       resource_name:
-          The resource name of the feed item. Feed item resource names
-          have the form:
+          Immutable. The resource name of the feed item. Feed item
+          resource names have the form:
           ``customers/{customer_id}/feedItems/{feed_id}~{feed_item_id}``
       feed:
-          The feed to which this feed item belongs.
+          Immutable. The feed to which this feed item belongs.
       id:
-          The ID of this feed item.
+          Output only. The ID of this feed item.
       start_date_time:
           Start time in which this feed item is effective and can begin
           serving. The time is in the customer's time zone. The format
@@ -442,14 +443,15 @@ FeedItem = _reflection.GeneratedProtocolMessageType('FeedItem', (_message.Messag
           in a ``tracking_url_template``, ``final_urls``, or
           ``mobile_final_urls``.
       status:
-          Status of the feed item. This field is read-only.
+          Output only. Status of the feed item. This field is read-only.
       policy_infos:
-          List of info about a feed item's validation and approval state
-          for active feed mappings. There will be an entry in the list
-          for each type of feed mapping associated with the feed, e.g. a
-          feed with a sitelink and a call feed mapping would cause every
-          feed item associated with that feed to have an entry in this
-          list for both sitelink and call. This field is read-only.
+          Output only. List of info about a feed item's validation and
+          approval state for active feed mappings. There will be an
+          entry in the list for each type of feed mapping associated
+          with the feed, e.g. a feed with a sitelink and a call feed
+          mapping would cause every feed item associated with that feed
+          to have an entry in this list for both sitelink and call. This
+          field is read-only.
   """,
   # @@protoc_insertion_point(class_scope:google.ads.googleads.v3.resources.FeedItem)
   ))
@@ -518,26 +520,30 @@ FeedItemPlaceholderPolicyInfo = _reflection.GeneratedProtocolMessageType('FeedIt
   
   Attributes:
       placeholder_type_enum:
-          The placeholder type.
+          Output only. The placeholder type.
       feed_mapping_resource_name:
-          The FeedMapping that contains the placeholder type.
+          Output only. The FeedMapping that contains the placeholder
+          type.
       review_status:
-          Where the placeholder type is in the review process.
+          Output only. Where the placeholder type is in the review
+          process.
       approval_status:
-          The overall approval status of the placeholder type,
-          calculated based on the status of its individual policy topic
-          entries.
+          Output only. The overall approval status of the placeholder
+          type, calculated based on the status of its individual policy
+          topic entries.
       policy_topic_entries:
-          The list of policy findings for the placeholder type.
+          Output only. The list of policy findings for the placeholder
+          type.
       validation_status:
-          The validation status of the palceholder type.
+          Output only. The validation status of the palceholder type.
       validation_errors:
-          List of placeholder type validation errors.
+          Output only. List of placeholder type validation errors.
       quality_approval_status:
-          Placeholder type quality evaluation approval status.
+          Output only. Placeholder type quality evaluation approval
+          status.
       quality_disapproval_reasons:
-          List of placeholder type quality evaluation disapproval
-          reasons.
+          Output only. List of placeholder type quality evaluation
+          disapproval reasons.
   """,
   # @@protoc_insertion_point(class_scope:google.ads.googleads.v3.resources.FeedItemPlaceholderPolicyInfo)
   ))
@@ -553,21 +559,21 @@ FeedItemValidationError = _reflection.GeneratedProtocolMessageType('FeedItemVali
   
   Attributes:
       validation_error:
-          Error code indicating what validation error was triggered. The
-          description of the error can be found in the 'description'
-          field.
+          Output only. Error code indicating what validation error was
+          triggered. The description of the error can be found in the
+          'description' field.
       description:
-          The description of the validation error.
+          Output only. The description of the validation error.
       feed_attribute_ids:
-          Set of feed attributes in the feed item flagged during
-          validation. If empty, no specific feed attributes can be
-          associated with the error (e.g. error across the entire feed
-          item).
+          Output only. Set of feed attributes in the feed item flagged
+          during validation. If empty, no specific feed attributes can
+          be associated with the error (e.g. error across the entire
+          feed item).
       extra_info:
-          Any extra information related to this error which is not
-          captured by validation\_error and feed\_attribute\_id (e.g.
-          placeholder field IDs when feed\_attribute\_id is not mapped).
-          Note that extra\_info is not localized.
+          Output only. Any extra information related to this error which
+          is not captured by validation\_error and feed\_attribute\_id
+          (e.g. placeholder field IDs when feed\_attribute\_id is not
+          mapped). Note that extra\_info is not localized.
   """,
   # @@protoc_insertion_point(class_scope:google.ads.googleads.v3.resources.FeedItemValidationError)
   ))
@@ -575,5 +581,23 @@ _sym_db.RegisterMessage(FeedItemValidationError)
 
 
 DESCRIPTOR._options = None
+_FEEDITEM.fields_by_name['resource_name']._options = None
+_FEEDITEM.fields_by_name['feed']._options = None
+_FEEDITEM.fields_by_name['id']._options = None
+_FEEDITEM.fields_by_name['status']._options = None
+_FEEDITEM.fields_by_name['policy_infos']._options = None
 _FEEDITEM._options = None
+_FEEDITEMPLACEHOLDERPOLICYINFO.fields_by_name['placeholder_type_enum']._options = None
+_FEEDITEMPLACEHOLDERPOLICYINFO.fields_by_name['feed_mapping_resource_name']._options = None
+_FEEDITEMPLACEHOLDERPOLICYINFO.fields_by_name['review_status']._options = None
+_FEEDITEMPLACEHOLDERPOLICYINFO.fields_by_name['approval_status']._options = None
+_FEEDITEMPLACEHOLDERPOLICYINFO.fields_by_name['policy_topic_entries']._options = None
+_FEEDITEMPLACEHOLDERPOLICYINFO.fields_by_name['validation_status']._options = None
+_FEEDITEMPLACEHOLDERPOLICYINFO.fields_by_name['validation_errors']._options = None
+_FEEDITEMPLACEHOLDERPOLICYINFO.fields_by_name['quality_approval_status']._options = None
+_FEEDITEMPLACEHOLDERPOLICYINFO.fields_by_name['quality_disapproval_reasons']._options = None
+_FEEDITEMVALIDATIONERROR.fields_by_name['validation_error']._options = None
+_FEEDITEMVALIDATIONERROR.fields_by_name['description']._options = None
+_FEEDITEMVALIDATIONERROR.fields_by_name['feed_attribute_ids']._options = None
+_FEEDITEMVALIDATIONERROR.fields_by_name['extra_info']._options = None
 # @@protoc_insertion_point(module_scope)

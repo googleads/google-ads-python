@@ -17,6 +17,7 @@ from google.ads.google_ads.v3.proto.resources import keyword_plan_negative_keywo
 from google.api import annotations_pb2 as google_dot_api_dot_annotations__pb2
 from google.api import client_pb2 as google_dot_api_dot_client__pb2
 from google.api import field_behavior_pb2 as google_dot_api_dot_field__behavior__pb2
+from google.api import resource_pb2 as google_dot_api_dot_resource__pb2
 from google.protobuf import field_mask_pb2 as google_dot_protobuf_dot_field__mask__pb2
 from google.rpc import status_pb2 as google_dot_rpc_dot_status__pb2
 
@@ -26,9 +27,9 @@ DESCRIPTOR = _descriptor.FileDescriptor(
   package='google.ads.googleads.v3.services',
   syntax='proto3',
   serialized_options=_b('\n$com.google.ads.googleads.v3.servicesB&KeywordPlanNegativeKeywordServiceProtoP\001ZHgoogle.golang.org/genproto/googleapis/ads/googleads/v3/services;services\242\002\003GAA\252\002 Google.Ads.GoogleAds.V3.Services\312\002 Google\\Ads\\GoogleAds\\V3\\Services\352\002$Google::Ads::GoogleAds::V3::Services'),
-  serialized_pb=_b('\nRgoogle/ads/googleads_v3/proto/services/keyword_plan_negative_keyword_service.proto\x12 google.ads.googleads.v3.services\x1aKgoogle/ads/googleads_v3/proto/resources/keyword_plan_negative_keyword.proto\x1a\x1cgoogle/api/annotations.proto\x1a\x17google/api/client.proto\x1a\x1fgoogle/api/field_behavior.proto\x1a google/protobuf/field_mask.proto\x1a\x17google/rpc/status.proto\"B\n$GetKeywordPlanNegativeKeywordRequest\x12\x1a\n\rresource_name\x18\x01 \x01(\tB\x03\xe0\x41\x02\"\xd4\x01\n(MutateKeywordPlanNegativeKeywordsRequest\x12\x18\n\x0b\x63ustomer_id\x18\x01 \x01(\tB\x03\xe0\x41\x02\x12^\n\noperations\x18\x02 \x03(\x0b\x32\x45.google.ads.googleads.v3.services.KeywordPlanNegativeKeywordOperationB\x03\xe0\x41\x02\x12\x17\n\x0fpartial_failure\x18\x03 \x01(\x08\x12\x15\n\rvalidate_only\x18\x04 \x01(\x08\"\x97\x02\n#KeywordPlanNegativeKeywordOperation\x12/\n\x0bupdate_mask\x18\x04 \x01(\x0b\x32\x1a.google.protobuf.FieldMask\x12O\n\x06\x63reate\x18\x01 \x01(\x0b\x32=.google.ads.googleads.v3.resources.KeywordPlanNegativeKeywordH\x00\x12O\n\x06update\x18\x02 \x01(\x0b\x32=.google.ads.googleads.v3.resources.KeywordPlanNegativeKeywordH\x00\x12\x10\n\x06remove\x18\x03 \x01(\tH\x00\x42\x0b\n\toperation\"\xb9\x01\n)MutateKeywordPlanNegativeKeywordsResponse\x12\x31\n\x15partial_failure_error\x18\x03 \x01(\x0b\x32\x12.google.rpc.Status\x12Y\n\x07results\x18\x02 \x03(\x0b\x32H.google.ads.googleads.v3.services.MutateKeywordPlanNegativeKeywordResult\"?\n&MutateKeywordPlanNegativeKeywordResult\x12\x15\n\rresource_name\x18\x01 \x01(\t2\xe5\x04\n!KeywordPlanNegativeKeywordService\x12\xfd\x01\n\x1dGetKeywordPlanNegativeKeyword\x12\x46.google.ads.googleads.v3.services.GetKeywordPlanNegativeKeywordRequest\x1a=.google.ads.googleads.v3.resources.KeywordPlanNegativeKeyword\"U\x82\xd3\xe4\x93\x02?\x12=/v3/{resource_name=customers/*/keywordPlanNegativeKeywords/*}\xda\x41\rresource_name\x12\xa2\x02\n!MutateKeywordPlanNegativeKeywords\x12J.google.ads.googleads.v3.services.MutateKeywordPlanNegativeKeywordsRequest\x1aK.google.ads.googleads.v3.services.MutateKeywordPlanNegativeKeywordsResponse\"d\x82\xd3\xe4\x93\x02\x45\"@/v3/customers/{customer_id=*}/keywordPlanNegativeKeywords:mutate:\x01*\xda\x41\x16\x63ustomer_id,operations\x1a\x1b\xca\x41\x18googleads.googleapis.comB\x8d\x02\n$com.google.ads.googleads.v3.servicesB&KeywordPlanNegativeKeywordServiceProtoP\x01ZHgoogle.golang.org/genproto/googleapis/ads/googleads/v3/services;services\xa2\x02\x03GAA\xaa\x02 Google.Ads.GoogleAds.V3.Services\xca\x02 Google\\Ads\\GoogleAds\\V3\\Services\xea\x02$Google::Ads::GoogleAds::V3::Servicesb\x06proto3')
+  serialized_pb=_b('\nRgoogle/ads/googleads_v3/proto/services/keyword_plan_negative_keyword_service.proto\x12 google.ads.googleads.v3.services\x1aKgoogle/ads/googleads_v3/proto/resources/keyword_plan_negative_keyword.proto\x1a\x1cgoogle/api/annotations.proto\x1a\x17google/api/client.proto\x1a\x1fgoogle/api/field_behavior.proto\x1a\x19google/api/resource.proto\x1a google/protobuf/field_mask.proto\x1a\x17google/rpc/status.proto\"z\n$GetKeywordPlanNegativeKeywordRequest\x12R\n\rresource_name\x18\x01 \x01(\tB;\xe0\x41\x02\xfa\x41\x35\n3googleads.googleapis.com/KeywordPlanNegativeKeyword\"\xd4\x01\n(MutateKeywordPlanNegativeKeywordsRequest\x12\x18\n\x0b\x63ustomer_id\x18\x01 \x01(\tB\x03\xe0\x41\x02\x12^\n\noperations\x18\x02 \x03(\x0b\x32\x45.google.ads.googleads.v3.services.KeywordPlanNegativeKeywordOperationB\x03\xe0\x41\x02\x12\x17\n\x0fpartial_failure\x18\x03 \x01(\x08\x12\x15\n\rvalidate_only\x18\x04 \x01(\x08\"\x97\x02\n#KeywordPlanNegativeKeywordOperation\x12/\n\x0bupdate_mask\x18\x04 \x01(\x0b\x32\x1a.google.protobuf.FieldMask\x12O\n\x06\x63reate\x18\x01 \x01(\x0b\x32=.google.ads.googleads.v3.resources.KeywordPlanNegativeKeywordH\x00\x12O\n\x06update\x18\x02 \x01(\x0b\x32=.google.ads.googleads.v3.resources.KeywordPlanNegativeKeywordH\x00\x12\x10\n\x06remove\x18\x03 \x01(\tH\x00\x42\x0b\n\toperation\"\xb9\x01\n)MutateKeywordPlanNegativeKeywordsResponse\x12\x31\n\x15partial_failure_error\x18\x03 \x01(\x0b\x32\x12.google.rpc.Status\x12Y\n\x07results\x18\x02 \x03(\x0b\x32H.google.ads.googleads.v3.services.MutateKeywordPlanNegativeKeywordResult\"?\n&MutateKeywordPlanNegativeKeywordResult\x12\x15\n\rresource_name\x18\x01 \x01(\t2\xe5\x04\n!KeywordPlanNegativeKeywordService\x12\xfd\x01\n\x1dGetKeywordPlanNegativeKeyword\x12\x46.google.ads.googleads.v3.services.GetKeywordPlanNegativeKeywordRequest\x1a=.google.ads.googleads.v3.resources.KeywordPlanNegativeKeyword\"U\x82\xd3\xe4\x93\x02?\x12=/v3/{resource_name=customers/*/keywordPlanNegativeKeywords/*}\xda\x41\rresource_name\x12\xa2\x02\n!MutateKeywordPlanNegativeKeywords\x12J.google.ads.googleads.v3.services.MutateKeywordPlanNegativeKeywordsRequest\x1aK.google.ads.googleads.v3.services.MutateKeywordPlanNegativeKeywordsResponse\"d\x82\xd3\xe4\x93\x02\x45\"@/v3/customers/{customer_id=*}/keywordPlanNegativeKeywords:mutate:\x01*\xda\x41\x16\x63ustomer_id,operations\x1a\x1b\xca\x41\x18googleads.googleapis.comB\x8d\x02\n$com.google.ads.googleads.v3.servicesB&KeywordPlanNegativeKeywordServiceProtoP\x01ZHgoogle.golang.org/genproto/googleapis/ads/googleads/v3/services;services\xa2\x02\x03GAA\xaa\x02 Google.Ads.GoogleAds.V3.Services\xca\x02 Google\\Ads\\GoogleAds\\V3\\Services\xea\x02$Google::Ads::GoogleAds::V3::Servicesb\x06proto3')
   ,
-  dependencies=[google_dot_ads_dot_googleads__v3_dot_proto_dot_resources_dot_keyword__plan__negative__keyword__pb2.DESCRIPTOR,google_dot_api_dot_annotations__pb2.DESCRIPTOR,google_dot_api_dot_client__pb2.DESCRIPTOR,google_dot_api_dot_field__behavior__pb2.DESCRIPTOR,google_dot_protobuf_dot_field__mask__pb2.DESCRIPTOR,google_dot_rpc_dot_status__pb2.DESCRIPTOR,])
+  dependencies=[google_dot_ads_dot_googleads__v3_dot_proto_dot_resources_dot_keyword__plan__negative__keyword__pb2.DESCRIPTOR,google_dot_api_dot_annotations__pb2.DESCRIPTOR,google_dot_api_dot_client__pb2.DESCRIPTOR,google_dot_api_dot_field__behavior__pb2.DESCRIPTOR,google_dot_api_dot_resource__pb2.DESCRIPTOR,google_dot_protobuf_dot_field__mask__pb2.DESCRIPTOR,google_dot_rpc_dot_status__pb2.DESCRIPTOR,])
 
 
 
@@ -46,7 +47,7 @@ _GETKEYWORDPLANNEGATIVEKEYWORDREQUEST = _descriptor.Descriptor(
       has_default_value=False, default_value=_b("").decode('utf-8'),
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
-      serialized_options=_b('\340A\002'), file=DESCRIPTOR),
+      serialized_options=_b('\340A\002\372A5\n3googleads.googleapis.com/KeywordPlanNegativeKeyword'), file=DESCRIPTOR),
   ],
   extensions=[
   ],
@@ -59,8 +60,8 @@ _GETKEYWORDPLANNEGATIVEKEYWORDREQUEST = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=344,
-  serialized_end=410,
+  serialized_start=371,
+  serialized_end=493,
 )
 
 
@@ -111,8 +112,8 @@ _MUTATEKEYWORDPLANNEGATIVEKEYWORDSREQUEST = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=413,
-  serialized_end=625,
+  serialized_start=496,
+  serialized_end=708,
 )
 
 
@@ -166,8 +167,8 @@ _KEYWORDPLANNEGATIVEKEYWORDOPERATION = _descriptor.Descriptor(
       name='operation', full_name='google.ads.googleads.v3.services.KeywordPlanNegativeKeywordOperation.operation',
       index=0, containing_type=None, fields=[]),
   ],
-  serialized_start=628,
-  serialized_end=907,
+  serialized_start=711,
+  serialized_end=990,
 )
 
 
@@ -204,8 +205,8 @@ _MUTATEKEYWORDPLANNEGATIVEKEYWORDSRESPONSE = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=910,
-  serialized_end=1095,
+  serialized_start=993,
+  serialized_end=1178,
 )
 
 
@@ -235,8 +236,8 @@ _MUTATEKEYWORDPLANNEGATIVEKEYWORDRESULT = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=1097,
-  serialized_end=1160,
+  serialized_start=1180,
+  serialized_end=1243,
 )
 
 _MUTATEKEYWORDPLANNEGATIVEKEYWORDSREQUEST.fields_by_name['operations'].message_type = _KEYWORDPLANNEGATIVEKEYWORDOPERATION
@@ -382,8 +383,8 @@ _KEYWORDPLANNEGATIVEKEYWORDSERVICE = _descriptor.ServiceDescriptor(
   file=DESCRIPTOR,
   index=0,
   serialized_options=_b('\312A\030googleads.googleapis.com'),
-  serialized_start=1163,
-  serialized_end=1776,
+  serialized_start=1246,
+  serialized_end=1859,
   methods=[
   _descriptor.MethodDescriptor(
     name='GetKeywordPlanNegativeKeyword',

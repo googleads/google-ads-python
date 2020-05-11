@@ -15,6 +15,7 @@ _sym_db = _symbol_database.Default()
 
 from google.ads.google_ads.v3.proto.common import dates_pb2 as google_dot_ads_dot_googleads__v3_dot_proto_dot_common_dot_dates__pb2
 from google.ads.google_ads.v3.proto.enums import keyword_plan_forecast_interval_pb2 as google_dot_ads_dot_googleads__v3_dot_proto_dot_enums_dot_keyword__plan__forecast__interval__pb2
+from google.api import field_behavior_pb2 as google_dot_api_dot_field__behavior__pb2
 from google.api import resource_pb2 as google_dot_api_dot_resource__pb2
 from google.protobuf import wrappers_pb2 as google_dot_protobuf_dot_wrappers__pb2
 from google.api import annotations_pb2 as google_dot_api_dot_annotations__pb2
@@ -25,9 +26,9 @@ DESCRIPTOR = _descriptor.FileDescriptor(
   package='google.ads.googleads.v3.resources',
   syntax='proto3',
   serialized_options=_b('\n%com.google.ads.googleads.v3.resourcesB\020KeywordPlanProtoP\001ZJgoogle.golang.org/genproto/googleapis/ads/googleads/v3/resources;resources\242\002\003GAA\252\002!Google.Ads.GoogleAds.V3.Resources\312\002!Google\\Ads\\GoogleAds\\V3\\Resources\352\002%Google::Ads::GoogleAds::V3::Resources'),
-  serialized_pb=_b('\n:google/ads/googleads_v3/proto/resources/keyword_plan.proto\x12!google.ads.googleads.v3.resources\x1a\x30google/ads/googleads_v3/proto/common/dates.proto\x1aHgoogle/ads/googleads_v3/proto/enums/keyword_plan_forecast_interval.proto\x1a\x19google/api/resource.proto\x1a\x1egoogle/protobuf/wrappers.proto\x1a\x1cgoogle/api/annotations.proto\"\xad\x02\n\x0bKeywordPlan\x12\x15\n\rresource_name\x18\x01 \x01(\t\x12\'\n\x02id\x18\x02 \x01(\x0b\x32\x1b.google.protobuf.Int64Value\x12*\n\x04name\x18\x03 \x01(\x0b\x32\x1c.google.protobuf.StringValue\x12U\n\x0f\x66orecast_period\x18\x04 \x01(\x0b\x32<.google.ads.googleads.v3.resources.KeywordPlanForecastPeriod:[\xea\x41X\n$googleads.googleapis.com/KeywordPlan\x12\x30\x63ustomers/{customer}/keywordPlans/{keyword_plan}\"\xdd\x01\n\x19KeywordPlanForecastPeriod\x12s\n\rdate_interval\x18\x01 \x01(\x0e\x32Z.google.ads.googleads.v3.enums.KeywordPlanForecastIntervalEnum.KeywordPlanForecastIntervalH\x00\x12?\n\ndate_range\x18\x02 \x01(\x0b\x32).google.ads.googleads.v3.common.DateRangeH\x00\x42\n\n\x08intervalB\xfd\x01\n%com.google.ads.googleads.v3.resourcesB\x10KeywordPlanProtoP\x01ZJgoogle.golang.org/genproto/googleapis/ads/googleads/v3/resources;resources\xa2\x02\x03GAA\xaa\x02!Google.Ads.GoogleAds.V3.Resources\xca\x02!Google\\Ads\\GoogleAds\\V3\\Resources\xea\x02%Google::Ads::GoogleAds::V3::Resourcesb\x06proto3')
+  serialized_pb=_b('\n:google/ads/googleads_v3/proto/resources/keyword_plan.proto\x12!google.ads.googleads.v3.resources\x1a\x30google/ads/googleads_v3/proto/common/dates.proto\x1aHgoogle/ads/googleads_v3/proto/enums/keyword_plan_forecast_interval.proto\x1a\x1fgoogle/api/field_behavior.proto\x1a\x19google/api/resource.proto\x1a\x1egoogle/protobuf/wrappers.proto\x1a\x1cgoogle/api/annotations.proto\"\xe0\x02\n\x0bKeywordPlan\x12\x43\n\rresource_name\x18\x01 \x01(\tB,\xe0\x41\x05\xfa\x41&\n$googleads.googleapis.com/KeywordPlan\x12,\n\x02id\x18\x02 \x01(\x0b\x32\x1b.google.protobuf.Int64ValueB\x03\xe0\x41\x03\x12*\n\x04name\x18\x03 \x01(\x0b\x32\x1c.google.protobuf.StringValue\x12U\n\x0f\x66orecast_period\x18\x04 \x01(\x0b\x32<.google.ads.googleads.v3.resources.KeywordPlanForecastPeriod:[\xea\x41X\n$googleads.googleapis.com/KeywordPlan\x12\x30\x63ustomers/{customer}/keywordPlans/{keyword_plan}\"\xdd\x01\n\x19KeywordPlanForecastPeriod\x12s\n\rdate_interval\x18\x01 \x01(\x0e\x32Z.google.ads.googleads.v3.enums.KeywordPlanForecastIntervalEnum.KeywordPlanForecastIntervalH\x00\x12?\n\ndate_range\x18\x02 \x01(\x0b\x32).google.ads.googleads.v3.common.DateRangeH\x00\x42\n\n\x08intervalB\xfd\x01\n%com.google.ads.googleads.v3.resourcesB\x10KeywordPlanProtoP\x01ZJgoogle.golang.org/genproto/googleapis/ads/googleads/v3/resources;resources\xa2\x02\x03GAA\xaa\x02!Google.Ads.GoogleAds.V3.Resources\xca\x02!Google\\Ads\\GoogleAds\\V3\\Resources\xea\x02%Google::Ads::GoogleAds::V3::Resourcesb\x06proto3')
   ,
-  dependencies=[google_dot_ads_dot_googleads__v3_dot_proto_dot_common_dot_dates__pb2.DESCRIPTOR,google_dot_ads_dot_googleads__v3_dot_proto_dot_enums_dot_keyword__plan__forecast__interval__pb2.DESCRIPTOR,google_dot_api_dot_resource__pb2.DESCRIPTOR,google_dot_protobuf_dot_wrappers__pb2.DESCRIPTOR,google_dot_api_dot_annotations__pb2.DESCRIPTOR,])
+  dependencies=[google_dot_ads_dot_googleads__v3_dot_proto_dot_common_dot_dates__pb2.DESCRIPTOR,google_dot_ads_dot_googleads__v3_dot_proto_dot_enums_dot_keyword__plan__forecast__interval__pb2.DESCRIPTOR,google_dot_api_dot_field__behavior__pb2.DESCRIPTOR,google_dot_api_dot_resource__pb2.DESCRIPTOR,google_dot_protobuf_dot_wrappers__pb2.DESCRIPTOR,google_dot_api_dot_annotations__pb2.DESCRIPTOR,])
 
 
 
@@ -45,14 +46,14 @@ _KEYWORDPLAN = _descriptor.Descriptor(
       has_default_value=False, default_value=_b("").decode('utf-8'),
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR),
+      serialized_options=_b('\340A\005\372A&\n$googleads.googleapis.com/KeywordPlan'), file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
       name='id', full_name='google.ads.googleads.v3.resources.KeywordPlan.id', index=1,
       number=2, type=11, cpp_type=10, label=1,
       has_default_value=False, default_value=None,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR),
+      serialized_options=_b('\340A\003'), file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
       name='name', full_name='google.ads.googleads.v3.resources.KeywordPlan.name', index=2,
       number=3, type=11, cpp_type=10, label=1,
@@ -79,8 +80,8 @@ _KEYWORDPLAN = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=311,
-  serialized_end=612,
+  serialized_start=344,
+  serialized_end=696,
 )
 
 
@@ -120,8 +121,8 @@ _KEYWORDPLANFORECASTPERIOD = _descriptor.Descriptor(
       name='interval', full_name='google.ads.googleads.v3.resources.KeywordPlanForecastPeriod.interval',
       index=0, containing_type=None, fields=[]),
   ],
-  serialized_start=615,
-  serialized_end=836,
+  serialized_start=699,
+  serialized_end=920,
 )
 
 _KEYWORDPLAN.fields_by_name['id'].message_type = google_dot_protobuf_dot_wrappers__pb2._INT64VALUE
@@ -149,11 +150,11 @@ KeywordPlan = _reflection.GeneratedProtocolMessageType('KeywordPlan', (_message.
   
   Attributes:
       resource_name:
-          The resource name of the Keyword Planner plan. KeywordPlan
-          resource names have the form:
+          Immutable. The resource name of the Keyword Planner plan.
+          KeywordPlan resource names have the form:
           ``customers/{customer_id}/keywordPlans/{kp_plan_id}``
       id:
-          The ID of the keyword plan.
+          Output only. The ID of the keyword plan.
       name:
           The name of the keyword plan.  This field is required and
           should not be empty when creating new keyword plans.
@@ -189,5 +190,7 @@ _sym_db.RegisterMessage(KeywordPlanForecastPeriod)
 
 
 DESCRIPTOR._options = None
+_KEYWORDPLAN.fields_by_name['resource_name']._options = None
+_KEYWORDPLAN.fields_by_name['id']._options = None
 _KEYWORDPLAN._options = None
 # @@protoc_insertion_point(module_scope)

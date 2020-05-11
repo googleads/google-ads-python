@@ -369,7 +369,7 @@ class ReachPlanServiceClient(object):
                 This is equivalent to the frequency cap exposed in Google Ads when creating
                 a campaign, it represents the maximum number of times an ad can be shown to
                 the same user.
-                If not specified no cap is applied.
+                If not specified, no cap is applied.
 
                 If a dict is provided, it must be of the same form as the protobuf
                 message :class:`~google.ads.googleads_v3.types.Int32Value`
@@ -385,9 +385,6 @@ class ReachPlanServiceClient(object):
                 This is planned targeting: execution details might vary based on the
                 advertising product, please consult an implementation specialist.
 
-                If no targeting dimensions are specified, then campaigns will target
-                everywhere and everyone.
-
                 See specific metrics for details on how targeting affects them.
 
                 In some cases, targeting may be overridden using the
@@ -395,7 +392,8 @@ class ReachPlanServiceClient(object):
 
                 If a dict is provided, it must be of the same form as the protobuf
                 message :class:`~google.ads.googleads_v3.types.Targeting`
-            planned_products (list[Union[dict, ~google.ads.googleads_v3.types.PlannedProduct]]): Required. The product to be planned.
+            planned_products (list[Union[dict, ~google.ads.googleads_v3.types.PlannedProduct]]): Required. The products to be forecast.
+                The max number of allowed planned products is 15.
 
                 If a dict is provided, it must be of the same form as the protobuf
                 message :class:`~google.ads.googleads_v3.types.PlannedProduct`

@@ -26,7 +26,7 @@ DESCRIPTOR = _descriptor.FileDescriptor(
   package='google.ads.googleads.v3.services',
   syntax='proto3',
   serialized_options=_b('\n$com.google.ads.googleads.v3.servicesB&ConversionAdjustmentUploadServiceProtoP\001ZHgoogle.golang.org/genproto/googleapis/ads/googleads/v3/services;services\242\002\003GAA\252\002 Google.Ads.GoogleAds.V3.Services\312\002 Google\\Ads\\GoogleAds\\V3\\Services\352\002$Google::Ads::GoogleAds::V3::Services'),
-  serialized_pb=_b('\nQgoogle/ads/googleads_v3/proto/services/conversion_adjustment_upload_service.proto\x12 google.ads.googleads.v3.services\x1a\x44google/ads/googleads_v3/proto/enums/conversion_adjustment_type.proto\x1a\x1cgoogle/api/annotations.proto\x1a\x17google/api/client.proto\x1a\x1fgoogle/api/field_behavior.proto\x1a\x1egoogle/protobuf/wrappers.proto\x1a\x17google/rpc/status.proto\"\xcb\x01\n\"UploadConversionAdjustmentsRequest\x12\x18\n\x0b\x63ustomer_id\x18\x01 \x01(\tB\x03\xe0\x41\x02\x12[\n\x16\x63onversion_adjustments\x18\x02 \x03(\x0b\x32\x36.google.ads.googleads.v3.services.ConversionAdjustmentB\x03\xe0\x41\x02\x12\x17\n\x0fpartial_failure\x18\x03 \x01(\x08\x12\x15\n\rvalidate_only\x18\x04 \x01(\x08\"\xa7\x01\n#UploadConversionAdjustmentsResponse\x12\x31\n\x15partial_failure_error\x18\x01 \x01(\x0b\x32\x12.google.rpc.Status\x12M\n\x07results\x18\x02 \x03(\x0b\x32<.google.ads.googleads.v3.services.ConversionAdjustmentResult\"\xe9\x03\n\x14\x43onversionAdjustment\x12\x37\n\x11\x63onversion_action\x18\x03 \x01(\x0b\x32\x1c.google.protobuf.StringValue\x12:\n\x14\x61\x64justment_date_time\x18\x04 \x01(\x0b\x32\x1c.google.protobuf.StringValue\x12m\n\x0f\x61\x64justment_type\x18\x05 \x01(\x0e\x32T.google.ads.googleads.v3.enums.ConversionAdjustmentTypeEnum.ConversionAdjustmentType\x12M\n\x11restatement_value\x18\x06 \x01(\x0b\x32\x32.google.ads.googleads.v3.services.RestatementValue\x12S\n\x14gclid_date_time_pair\x18\x01 \x01(\x0b\x32\x33.google.ads.googleads.v3.services.GclidDateTimePairH\x00\x12\x30\n\x08order_id\x18\x02 \x01(\x0b\x32\x1c.google.protobuf.StringValueH\x00\x42\x17\n\x15\x63onversion_identifier\"}\n\x10RestatementValue\x12\x34\n\x0e\x61\x64justed_value\x18\x01 \x01(\x0b\x32\x1c.google.protobuf.DoubleValue\x12\x33\n\rcurrency_code\x18\x02 \x01(\x0b\x32\x1c.google.protobuf.StringValue\"|\n\x11GclidDateTimePair\x12+\n\x05gclid\x18\x01 \x01(\x0b\x32\x1c.google.protobuf.StringValue\x12:\n\x14\x63onversion_date_time\x18\x02 \x01(\x0b\x32\x1c.google.protobuf.StringValue\"\xa0\x03\n\x1a\x43onversionAdjustmentResult\x12\x37\n\x11\x63onversion_action\x18\x03 \x01(\x0b\x32\x1c.google.protobuf.StringValue\x12:\n\x14\x61\x64justment_date_time\x18\x04 \x01(\x0b\x32\x1c.google.protobuf.StringValue\x12m\n\x0f\x61\x64justment_type\x18\x05 \x01(\x0e\x32T.google.ads.googleads.v3.enums.ConversionAdjustmentTypeEnum.ConversionAdjustmentType\x12S\n\x14gclid_date_time_pair\x18\x01 \x01(\x0b\x32\x33.google.ads.googleads.v3.services.GclidDateTimePairH\x00\x12\x30\n\x08order_id\x18\x02 \x01(\x0b\x32\x1c.google.protobuf.StringValueH\x00\x42\x17\n\x15\x63onversion_identifier2\xd8\x02\n!ConversionAdjustmentUploadService\x12\x95\x02\n\x1bUploadConversionAdjustments\x12\x44.google.ads.googleads.v3.services.UploadConversionAdjustmentsRequest\x1a\x45.google.ads.googleads.v3.services.UploadConversionAdjustmentsResponse\"i\x82\xd3\xe4\x93\x02>\"9/v3/customers/{customer_id=*}:uploadConversionAdjustments:\x01*\xda\x41\"customer_id,conversion_adjustments\x1a\x1b\xca\x41\x18googleads.googleapis.comB\x8d\x02\n$com.google.ads.googleads.v3.servicesB&ConversionAdjustmentUploadServiceProtoP\x01ZHgoogle.golang.org/genproto/googleapis/ads/googleads/v3/services;services\xa2\x02\x03GAA\xaa\x02 Google.Ads.GoogleAds.V3.Services\xca\x02 Google\\Ads\\GoogleAds\\V3\\Services\xea\x02$Google::Ads::GoogleAds::V3::Servicesb\x06proto3')
+  serialized_pb=_b('\nQgoogle/ads/googleads_v3/proto/services/conversion_adjustment_upload_service.proto\x12 google.ads.googleads.v3.services\x1a\x44google/ads/googleads_v3/proto/enums/conversion_adjustment_type.proto\x1a\x1cgoogle/api/annotations.proto\x1a\x17google/api/client.proto\x1a\x1fgoogle/api/field_behavior.proto\x1a\x1egoogle/protobuf/wrappers.proto\x1a\x17google/rpc/status.proto\"\xd0\x01\n\"UploadConversionAdjustmentsRequest\x12\x18\n\x0b\x63ustomer_id\x18\x01 \x01(\tB\x03\xe0\x41\x02\x12[\n\x16\x63onversion_adjustments\x18\x02 \x03(\x0b\x32\x36.google.ads.googleads.v3.services.ConversionAdjustmentB\x03\xe0\x41\x02\x12\x1c\n\x0fpartial_failure\x18\x03 \x01(\x08\x42\x03\xe0\x41\x02\x12\x15\n\rvalidate_only\x18\x04 \x01(\x08\"\xa7\x01\n#UploadConversionAdjustmentsResponse\x12\x31\n\x15partial_failure_error\x18\x01 \x01(\x0b\x32\x12.google.rpc.Status\x12M\n\x07results\x18\x02 \x03(\x0b\x32<.google.ads.googleads.v3.services.ConversionAdjustmentResult\"\xe9\x03\n\x14\x43onversionAdjustment\x12\x37\n\x11\x63onversion_action\x18\x03 \x01(\x0b\x32\x1c.google.protobuf.StringValue\x12:\n\x14\x61\x64justment_date_time\x18\x04 \x01(\x0b\x32\x1c.google.protobuf.StringValue\x12m\n\x0f\x61\x64justment_type\x18\x05 \x01(\x0e\x32T.google.ads.googleads.v3.enums.ConversionAdjustmentTypeEnum.ConversionAdjustmentType\x12M\n\x11restatement_value\x18\x06 \x01(\x0b\x32\x32.google.ads.googleads.v3.services.RestatementValue\x12S\n\x14gclid_date_time_pair\x18\x01 \x01(\x0b\x32\x33.google.ads.googleads.v3.services.GclidDateTimePairH\x00\x12\x30\n\x08order_id\x18\x02 \x01(\x0b\x32\x1c.google.protobuf.StringValueH\x00\x42\x17\n\x15\x63onversion_identifier\"}\n\x10RestatementValue\x12\x34\n\x0e\x61\x64justed_value\x18\x01 \x01(\x0b\x32\x1c.google.protobuf.DoubleValue\x12\x33\n\rcurrency_code\x18\x02 \x01(\x0b\x32\x1c.google.protobuf.StringValue\"|\n\x11GclidDateTimePair\x12+\n\x05gclid\x18\x01 \x01(\x0b\x32\x1c.google.protobuf.StringValue\x12:\n\x14\x63onversion_date_time\x18\x02 \x01(\x0b\x32\x1c.google.protobuf.StringValue\"\xa0\x03\n\x1a\x43onversionAdjustmentResult\x12\x37\n\x11\x63onversion_action\x18\x03 \x01(\x0b\x32\x1c.google.protobuf.StringValue\x12:\n\x14\x61\x64justment_date_time\x18\x04 \x01(\x0b\x32\x1c.google.protobuf.StringValue\x12m\n\x0f\x61\x64justment_type\x18\x05 \x01(\x0e\x32T.google.ads.googleads.v3.enums.ConversionAdjustmentTypeEnum.ConversionAdjustmentType\x12S\n\x14gclid_date_time_pair\x18\x01 \x01(\x0b\x32\x33.google.ads.googleads.v3.services.GclidDateTimePairH\x00\x12\x30\n\x08order_id\x18\x02 \x01(\x0b\x32\x1c.google.protobuf.StringValueH\x00\x42\x17\n\x15\x63onversion_identifier2\xe8\x02\n!ConversionAdjustmentUploadService\x12\xa5\x02\n\x1bUploadConversionAdjustments\x12\x44.google.ads.googleads.v3.services.UploadConversionAdjustmentsRequest\x1a\x45.google.ads.googleads.v3.services.UploadConversionAdjustmentsResponse\"y\x82\xd3\xe4\x93\x02>\"9/v3/customers/{customer_id=*}:uploadConversionAdjustments:\x01*\xda\x41\x32\x63ustomer_id,conversion_adjustments,partial_failure\x1a\x1b\xca\x41\x18googleads.googleapis.comB\x8d\x02\n$com.google.ads.googleads.v3.servicesB&ConversionAdjustmentUploadServiceProtoP\x01ZHgoogle.golang.org/genproto/googleapis/ads/googleads/v3/services;services\xa2\x02\x03GAA\xaa\x02 Google.Ads.GoogleAds.V3.Services\xca\x02 Google\\Ads\\GoogleAds\\V3\\Services\xea\x02$Google::Ads::GoogleAds::V3::Servicesb\x06proto3')
   ,
   dependencies=[google_dot_ads_dot_googleads__v3_dot_proto_dot_enums_dot_conversion__adjustment__type__pb2.DESCRIPTOR,google_dot_api_dot_annotations__pb2.DESCRIPTOR,google_dot_api_dot_client__pb2.DESCRIPTOR,google_dot_api_dot_field__behavior__pb2.DESCRIPTOR,google_dot_protobuf_dot_wrappers__pb2.DESCRIPTOR,google_dot_rpc_dot_status__pb2.DESCRIPTOR,])
 
@@ -60,7 +60,7 @@ _UPLOADCONVERSIONADJUSTMENTSREQUEST = _descriptor.Descriptor(
       has_default_value=False, default_value=False,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR),
+      serialized_options=_b('\340A\002'), file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
       name='validate_only', full_name='google.ads.googleads.v3.services.UploadConversionAdjustmentsRequest.validate_only', index=3,
       number=4, type=8, cpp_type=7, label=1,
@@ -81,7 +81,7 @@ _UPLOADCONVERSIONADJUSTMENTSREQUEST = _descriptor.Descriptor(
   oneofs=[
   ],
   serialized_start=335,
-  serialized_end=538,
+  serialized_end=543,
 )
 
 
@@ -118,8 +118,8 @@ _UPLOADCONVERSIONADJUSTMENTSRESPONSE = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=541,
-  serialized_end=708,
+  serialized_start=546,
+  serialized_end=713,
 )
 
 
@@ -187,8 +187,8 @@ _CONVERSIONADJUSTMENT = _descriptor.Descriptor(
       name='conversion_identifier', full_name='google.ads.googleads.v3.services.ConversionAdjustment.conversion_identifier',
       index=0, containing_type=None, fields=[]),
   ],
-  serialized_start=711,
-  serialized_end=1200,
+  serialized_start=716,
+  serialized_end=1205,
 )
 
 
@@ -225,8 +225,8 @@ _RESTATEMENTVALUE = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=1202,
-  serialized_end=1327,
+  serialized_start=1207,
+  serialized_end=1332,
 )
 
 
@@ -263,8 +263,8 @@ _GCLIDDATETIMEPAIR = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=1329,
-  serialized_end=1453,
+  serialized_start=1334,
+  serialized_end=1458,
 )
 
 
@@ -325,8 +325,8 @@ _CONVERSIONADJUSTMENTRESULT = _descriptor.Descriptor(
       name='conversion_identifier', full_name='google.ads.googleads.v3.services.ConversionAdjustmentResult.conversion_identifier',
       index=0, containing_type=None, fields=[]),
   ],
-  serialized_start=1456,
-  serialized_end=1872,
+  serialized_start=1461,
+  serialized_end=1877,
 )
 
 _UPLOADCONVERSIONADJUSTMENTSREQUEST.fields_by_name['conversion_adjustments'].message_type = _CONVERSIONADJUSTMENT
@@ -381,10 +381,10 @@ UploadConversionAdjustmentsRequest = _reflection.GeneratedProtocolMessageType('U
       conversion_adjustments:
           Required. The conversion adjustments that are being uploaded.
       partial_failure:
-          If true, successful operations will be carried out and invalid
-          operations will return errors. If false, all operations will
-          be carried out in one transaction if and only if they are all
-          valid. This should always be set to true.
+          Required. If true, successful operations will be carried out
+          and invalid operations will return errors. If false, all
+          operations will be carried out in one transaction if and only
+          if they are all valid. This should always be set to true.
       validate_only:
           If true, the request is validated but not executed. Only
           errors are returned, not results.
@@ -533,6 +533,7 @@ _sym_db.RegisterMessage(ConversionAdjustmentResult)
 DESCRIPTOR._options = None
 _UPLOADCONVERSIONADJUSTMENTSREQUEST.fields_by_name['customer_id']._options = None
 _UPLOADCONVERSIONADJUSTMENTSREQUEST.fields_by_name['conversion_adjustments']._options = None
+_UPLOADCONVERSIONADJUSTMENTSREQUEST.fields_by_name['partial_failure']._options = None
 
 _CONVERSIONADJUSTMENTUPLOADSERVICE = _descriptor.ServiceDescriptor(
   name='ConversionAdjustmentUploadService',
@@ -540,8 +541,8 @@ _CONVERSIONADJUSTMENTUPLOADSERVICE = _descriptor.ServiceDescriptor(
   file=DESCRIPTOR,
   index=0,
   serialized_options=_b('\312A\030googleads.googleapis.com'),
-  serialized_start=1875,
-  serialized_end=2219,
+  serialized_start=1880,
+  serialized_end=2240,
   methods=[
   _descriptor.MethodDescriptor(
     name='UploadConversionAdjustments',
@@ -550,7 +551,7 @@ _CONVERSIONADJUSTMENTUPLOADSERVICE = _descriptor.ServiceDescriptor(
     containing_service=None,
     input_type=_UPLOADCONVERSIONADJUSTMENTSREQUEST,
     output_type=_UPLOADCONVERSIONADJUSTMENTSRESPONSE,
-    serialized_options=_b('\202\323\344\223\002>\"9/v3/customers/{customer_id=*}:uploadConversionAdjustments:\001*\332A\"customer_id,conversion_adjustments'),
+    serialized_options=_b('\202\323\344\223\002>\"9/v3/customers/{customer_id=*}:uploadConversionAdjustments:\001*\332A2customer_id,conversion_adjustments,partial_failure'),
   ),
 ])
 _sym_db.RegisterServiceDescriptor(_CONVERSIONADJUSTMENTUPLOADSERVICE)

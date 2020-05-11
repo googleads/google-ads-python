@@ -14,6 +14,7 @@ _sym_db = _symbol_database.Default()
 
 
 from google.ads.google_ads.v3.proto.common import criteria_pb2 as google_dot_ads_dot_googleads__v3_dot_proto_dot_common_dot_criteria__pb2
+from google.api import field_behavior_pb2 as google_dot_api_dot_field__behavior__pb2
 from google.api import resource_pb2 as google_dot_api_dot_resource__pb2
 from google.protobuf import wrappers_pb2 as google_dot_protobuf_dot_wrappers__pb2
 from google.api import annotations_pb2 as google_dot_api_dot_annotations__pb2
@@ -24,9 +25,9 @@ DESCRIPTOR = _descriptor.FileDescriptor(
   package='google.ads.googleads.v3.resources',
   syntax='proto3',
   serialized_options=_b('\n%com.google.ads.googleads.v3.resourcesB\030CampaignBidModifierProtoP\001ZJgoogle.golang.org/genproto/googleapis/ads/googleads/v3/resources;resources\242\002\003GAA\252\002!Google.Ads.GoogleAds.V3.Resources\312\002!Google\\Ads\\GoogleAds\\V3\\Resources\352\002%Google::Ads::GoogleAds::V3::Resources'),
-  serialized_pb=_b('\nCgoogle/ads/googleads_v3/proto/resources/campaign_bid_modifier.proto\x12!google.ads.googleads.v3.resources\x1a\x33google/ads/googleads_v3/proto/common/criteria.proto\x1a\x19google/api/resource.proto\x1a\x1egoogle/protobuf/wrappers.proto\x1a\x1cgoogle/api/annotations.proto\"\x97\x03\n\x13\x43\x61mpaignBidModifier\x12\x15\n\rresource_name\x18\x01 \x01(\t\x12.\n\x08\x63\x61mpaign\x18\x02 \x01(\x0b\x32\x1c.google.protobuf.StringValue\x12\x31\n\x0c\x63riterion_id\x18\x03 \x01(\x0b\x32\x1b.google.protobuf.Int64Value\x12\x32\n\x0c\x62id_modifier\x18\x04 \x01(\x0b\x32\x1c.google.protobuf.DoubleValue\x12O\n\x10interaction_type\x18\x05 \x01(\x0b\x32\x33.google.ads.googleads.v3.common.InteractionTypeInfoH\x00:t\xea\x41q\n,googleads.googleapis.com/CampaignBidModifier\x12\x41\x63ustomers/{customer}/campaignBidModifiers/{campaign_bid_modifier}B\x0b\n\tcriterionB\x85\x02\n%com.google.ads.googleads.v3.resourcesB\x18\x43\x61mpaignBidModifierProtoP\x01ZJgoogle.golang.org/genproto/googleapis/ads/googleads/v3/resources;resources\xa2\x02\x03GAA\xaa\x02!Google.Ads.GoogleAds.V3.Resources\xca\x02!Google\\Ads\\GoogleAds\\V3\\Resources\xea\x02%Google::Ads::GoogleAds::V3::Resourcesb\x06proto3')
+  serialized_pb=_b('\nCgoogle/ads/googleads_v3/proto/resources/campaign_bid_modifier.proto\x12!google.ads.googleads.v3.resources\x1a\x33google/ads/googleads_v3/proto/common/criteria.proto\x1a\x1fgoogle/api/field_behavior.proto\x1a\x19google/api/resource.proto\x1a\x1egoogle/protobuf/wrappers.proto\x1a\x1cgoogle/api/annotations.proto\"\x82\x04\n\x13\x43\x61mpaignBidModifier\x12K\n\rresource_name\x18\x01 \x01(\tB4\xe0\x41\x05\xfa\x41.\n,googleads.googleapis.com/CampaignBidModifier\x12Y\n\x08\x63\x61mpaign\x18\x02 \x01(\x0b\x32\x1c.google.protobuf.StringValueB)\xe0\x41\x03\xfa\x41#\n!googleads.googleapis.com/Campaign\x12\x36\n\x0c\x63riterion_id\x18\x03 \x01(\x0b\x32\x1b.google.protobuf.Int64ValueB\x03\xe0\x41\x03\x12\x32\n\x0c\x62id_modifier\x18\x04 \x01(\x0b\x32\x1c.google.protobuf.DoubleValue\x12T\n\x10interaction_type\x18\x05 \x01(\x0b\x32\x33.google.ads.googleads.v3.common.InteractionTypeInfoB\x03\xe0\x41\x05H\x00:t\xea\x41q\n,googleads.googleapis.com/CampaignBidModifier\x12\x41\x63ustomers/{customer}/campaignBidModifiers/{campaign_bid_modifier}B\x0b\n\tcriterionB\x85\x02\n%com.google.ads.googleads.v3.resourcesB\x18\x43\x61mpaignBidModifierProtoP\x01ZJgoogle.golang.org/genproto/googleapis/ads/googleads/v3/resources;resources\xa2\x02\x03GAA\xaa\x02!Google.Ads.GoogleAds.V3.Resources\xca\x02!Google\\Ads\\GoogleAds\\V3\\Resources\xea\x02%Google::Ads::GoogleAds::V3::Resourcesb\x06proto3')
   ,
-  dependencies=[google_dot_ads_dot_googleads__v3_dot_proto_dot_common_dot_criteria__pb2.DESCRIPTOR,google_dot_api_dot_resource__pb2.DESCRIPTOR,google_dot_protobuf_dot_wrappers__pb2.DESCRIPTOR,google_dot_api_dot_annotations__pb2.DESCRIPTOR,])
+  dependencies=[google_dot_ads_dot_googleads__v3_dot_proto_dot_common_dot_criteria__pb2.DESCRIPTOR,google_dot_api_dot_field__behavior__pb2.DESCRIPTOR,google_dot_api_dot_resource__pb2.DESCRIPTOR,google_dot_protobuf_dot_wrappers__pb2.DESCRIPTOR,google_dot_api_dot_annotations__pb2.DESCRIPTOR,])
 
 
 
@@ -44,21 +45,21 @@ _CAMPAIGNBIDMODIFIER = _descriptor.Descriptor(
       has_default_value=False, default_value=_b("").decode('utf-8'),
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR),
+      serialized_options=_b('\340A\005\372A.\n,googleads.googleapis.com/CampaignBidModifier'), file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
       name='campaign', full_name='google.ads.googleads.v3.resources.CampaignBidModifier.campaign', index=1,
       number=2, type=11, cpp_type=10, label=1,
       has_default_value=False, default_value=None,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR),
+      serialized_options=_b('\340A\003\372A#\n!googleads.googleapis.com/Campaign'), file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
       name='criterion_id', full_name='google.ads.googleads.v3.resources.CampaignBidModifier.criterion_id', index=2,
       number=3, type=11, cpp_type=10, label=1,
       has_default_value=False, default_value=None,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR),
+      serialized_options=_b('\340A\003'), file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
       name='bid_modifier', full_name='google.ads.googleads.v3.resources.CampaignBidModifier.bid_modifier', index=3,
       number=4, type=11, cpp_type=10, label=1,
@@ -72,7 +73,7 @@ _CAMPAIGNBIDMODIFIER = _descriptor.Descriptor(
       has_default_value=False, default_value=None,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR),
+      serialized_options=_b('\340A\005'), file=DESCRIPTOR),
   ],
   extensions=[
   ],
@@ -88,8 +89,8 @@ _CAMPAIGNBIDMODIFIER = _descriptor.Descriptor(
       name='criterion', full_name='google.ads.googleads.v3.resources.CampaignBidModifier.criterion',
       index=0, containing_type=None, fields=[]),
   ],
-  serialized_start=249,
-  serialized_end=656,
+  serialized_start=282,
+  serialized_end=796,
 )
 
 _CAMPAIGNBIDMODIFIER.fields_by_name['campaign'].message_type = google_dot_protobuf_dot_wrappers__pb2._STRINGVALUE
@@ -111,21 +112,22 @@ CampaignBidModifier = _reflection.GeneratedProtocolMessageType('CampaignBidModif
   
   Attributes:
       resource_name:
-          The resource name of the campaign bid modifier. Campaign bid
-          modifier resource names have the form:  ``customers/{customer_
-          id}/campaignBidModifiers/{campaign_id}~{criterion_id}``
+          Immutable. The resource name of the campaign bid modifier.
+          Campaign bid modifier resource names have the form:  ``custome
+          rs/{customer_id}/campaignBidModifiers/{campaign_id}~{criterion
+          _id}``
       campaign:
-          The campaign to which this criterion belongs.
+          Output only. The campaign to which this criterion belongs.
       criterion_id:
-          The ID of the criterion to bid modify.  This field is ignored
-          for mutates.
+          Output only. The ID of the criterion to bid modify.  This
+          field is ignored for mutates.
       bid_modifier:
           The modifier for the bid when the criterion matches.
       criterion:
           The criterion of this campaign bid modifier.
       interaction_type:
-          Criterion for interaction type. Only supported for search
-          campaigns.
+          Immutable. Criterion for interaction type. Only supported for
+          search campaigns.
   """,
   # @@protoc_insertion_point(class_scope:google.ads.googleads.v3.resources.CampaignBidModifier)
   ))
@@ -133,5 +135,9 @@ _sym_db.RegisterMessage(CampaignBidModifier)
 
 
 DESCRIPTOR._options = None
+_CAMPAIGNBIDMODIFIER.fields_by_name['resource_name']._options = None
+_CAMPAIGNBIDMODIFIER.fields_by_name['campaign']._options = None
+_CAMPAIGNBIDMODIFIER.fields_by_name['criterion_id']._options = None
+_CAMPAIGNBIDMODIFIER.fields_by_name['interaction_type']._options = None
 _CAMPAIGNBIDMODIFIER._options = None
 # @@protoc_insertion_point(module_scope)

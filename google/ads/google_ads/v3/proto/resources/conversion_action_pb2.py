@@ -20,6 +20,7 @@ from google.ads.google_ads.v3.proto.enums import conversion_action_counting_type
 from google.ads.google_ads.v3.proto.enums import conversion_action_status_pb2 as google_dot_ads_dot_googleads__v3_dot_proto_dot_enums_dot_conversion__action__status__pb2
 from google.ads.google_ads.v3.proto.enums import conversion_action_type_pb2 as google_dot_ads_dot_googleads__v3_dot_proto_dot_enums_dot_conversion__action__type__pb2
 from google.ads.google_ads.v3.proto.enums import data_driven_model_status_pb2 as google_dot_ads_dot_googleads__v3_dot_proto_dot_enums_dot_data__driven__model__status__pb2
+from google.api import field_behavior_pb2 as google_dot_api_dot_field__behavior__pb2
 from google.api import resource_pb2 as google_dot_api_dot_resource__pb2
 from google.protobuf import wrappers_pb2 as google_dot_protobuf_dot_wrappers__pb2
 from google.api import annotations_pb2 as google_dot_api_dot_annotations__pb2
@@ -30,9 +31,9 @@ DESCRIPTOR = _descriptor.FileDescriptor(
   package='google.ads.googleads.v3.resources',
   syntax='proto3',
   serialized_options=_b('\n%com.google.ads.googleads.v3.resourcesB\025ConversionActionProtoP\001ZJgoogle.golang.org/genproto/googleapis/ads/googleads/v3/resources;resources\242\002\003GAA\252\002!Google.Ads.GoogleAds.V3.Resources\312\002!Google\\Ads\\GoogleAds\\V3\\Resources\352\002%Google::Ads::GoogleAds::V3::Resources'),
-  serialized_pb=_b('\n?google/ads/googleads_v3/proto/resources/conversion_action.proto\x12!google.ads.googleads.v3.resources\x1a\x36google/ads/googleads_v3/proto/common/tag_snippet.proto\x1a;google/ads/googleads_v3/proto/enums/attribution_model.proto\x1a\x44google/ads/googleads_v3/proto/enums/conversion_action_category.proto\x1aIgoogle/ads/googleads_v3/proto/enums/conversion_action_counting_type.proto\x1a\x42google/ads/googleads_v3/proto/enums/conversion_action_status.proto\x1a@google/ads/googleads_v3/proto/enums/conversion_action_type.proto\x1a\x42google/ads/googleads_v3/proto/enums/data_driven_model_status.proto\x1a\x19google/api/resource.proto\x1a\x1egoogle/protobuf/wrappers.proto\x1a\x1cgoogle/api/annotations.proto\"\xc0\r\n\x10\x43onversionAction\x12\x15\n\rresource_name\x18\x01 \x01(\t\x12\'\n\x02id\x18\x02 \x01(\x0b\x32\x1b.google.protobuf.Int64Value\x12*\n\x04name\x18\x03 \x01(\x0b\x32\x1c.google.protobuf.StringValue\x12`\n\x06status\x18\x04 \x01(\x0e\x32P.google.ads.googleads.v3.enums.ConversionActionStatusEnum.ConversionActionStatus\x12Z\n\x04type\x18\x05 \x01(\x0e\x32L.google.ads.googleads.v3.enums.ConversionActionTypeEnum.ConversionActionType\x12\x66\n\x08\x63\x61tegory\x18\x06 \x01(\x0e\x32T.google.ads.googleads.v3.enums.ConversionActionCategoryEnum.ConversionActionCategory\x12\x34\n\x0eowner_customer\x18\x07 \x01(\x0b\x32\x1c.google.protobuf.StringValue\x12\x41\n\x1dinclude_in_conversions_metric\x18\x08 \x01(\x0b\x32\x1a.google.protobuf.BoolValue\x12G\n\"click_through_lookback_window_days\x18\t \x01(\x0b\x32\x1b.google.protobuf.Int64Value\x12\x46\n!view_through_lookback_window_days\x18\n \x01(\x0b\x32\x1b.google.protobuf.Int64Value\x12Y\n\x0evalue_settings\x18\x0b \x01(\x0b\x32\x41.google.ads.googleads.v3.resources.ConversionAction.ValueSettings\x12s\n\rcounting_type\x18\x0c \x01(\x0e\x32\\.google.ads.googleads.v3.enums.ConversionActionCountingTypeEnum.ConversionActionCountingType\x12p\n\x1a\x61ttribution_model_settings\x18\r \x01(\x0b\x32L.google.ads.googleads.v3.resources.ConversionAction.AttributionModelSettings\x12@\n\x0ctag_snippets\x18\x0e \x03(\x0b\x32*.google.ads.googleads.v3.common.TagSnippet\x12@\n\x1bphone_call_duration_seconds\x18\x0f \x01(\x0b\x32\x1b.google.protobuf.Int64Value\x12,\n\x06\x61pp_id\x18\x10 \x01(\x0b\x32\x1c.google.protobuf.StringValue\x1a\xed\x01\n\x18\x41ttributionModelSettings\x12_\n\x11\x61ttribution_model\x18\x01 \x01(\x0e\x32\x44.google.ads.googleads.v3.enums.AttributionModelEnum.AttributionModel\x12p\n\x18\x64\x61ta_driven_model_status\x18\x02 \x01(\x0e\x32N.google.ads.googleads.v3.enums.DataDrivenModelStatusEnum.DataDrivenModelStatus\x1a\xbf\x01\n\rValueSettings\x12\x33\n\rdefault_value\x18\x01 \x01(\x0b\x32\x1c.google.protobuf.DoubleValue\x12;\n\x15\x64\x65\x66\x61ult_currency_code\x18\x02 \x01(\x0b\x32\x1c.google.protobuf.StringValue\x12<\n\x18\x61lways_use_default_value\x18\x03 \x01(\x0b\x32\x1a.google.protobuf.BoolValue:j\xea\x41g\n)googleads.googleapis.com/ConversionAction\x12:customers/{customer}/conversionActions/{conversion_action}B\x82\x02\n%com.google.ads.googleads.v3.resourcesB\x15\x43onversionActionProtoP\x01ZJgoogle.golang.org/genproto/googleapis/ads/googleads/v3/resources;resources\xa2\x02\x03GAA\xaa\x02!Google.Ads.GoogleAds.V3.Resources\xca\x02!Google\\Ads\\GoogleAds\\V3\\Resources\xea\x02%Google::Ads::GoogleAds::V3::Resourcesb\x06proto3')
+  serialized_pb=_b('\n?google/ads/googleads_v3/proto/resources/conversion_action.proto\x12!google.ads.googleads.v3.resources\x1a\x36google/ads/googleads_v3/proto/common/tag_snippet.proto\x1a;google/ads/googleads_v3/proto/enums/attribution_model.proto\x1a\x44google/ads/googleads_v3/proto/enums/conversion_action_category.proto\x1aIgoogle/ads/googleads_v3/proto/enums/conversion_action_counting_type.proto\x1a\x42google/ads/googleads_v3/proto/enums/conversion_action_status.proto\x1a@google/ads/googleads_v3/proto/enums/conversion_action_type.proto\x1a\x42google/ads/googleads_v3/proto/enums/data_driven_model_status.proto\x1a\x1fgoogle/api/field_behavior.proto\x1a\x19google/api/resource.proto\x1a\x1egoogle/protobuf/wrappers.proto\x1a\x1cgoogle/api/annotations.proto\"\x8c\x0e\n\x10\x43onversionAction\x12H\n\rresource_name\x18\x01 \x01(\tB1\xe0\x41\x05\xfa\x41+\n)googleads.googleapis.com/ConversionAction\x12,\n\x02id\x18\x02 \x01(\x0b\x32\x1b.google.protobuf.Int64ValueB\x03\xe0\x41\x03\x12*\n\x04name\x18\x03 \x01(\x0b\x32\x1c.google.protobuf.StringValue\x12`\n\x06status\x18\x04 \x01(\x0e\x32P.google.ads.googleads.v3.enums.ConversionActionStatusEnum.ConversionActionStatus\x12_\n\x04type\x18\x05 \x01(\x0e\x32L.google.ads.googleads.v3.enums.ConversionActionTypeEnum.ConversionActionTypeB\x03\xe0\x41\x05\x12\x66\n\x08\x63\x61tegory\x18\x06 \x01(\x0e\x32T.google.ads.googleads.v3.enums.ConversionActionCategoryEnum.ConversionActionCategory\x12\x39\n\x0eowner_customer\x18\x07 \x01(\x0b\x32\x1c.google.protobuf.StringValueB\x03\xe0\x41\x03\x12\x41\n\x1dinclude_in_conversions_metric\x18\x08 \x01(\x0b\x32\x1a.google.protobuf.BoolValue\x12G\n\"click_through_lookback_window_days\x18\t \x01(\x0b\x32\x1b.google.protobuf.Int64Value\x12\x46\n!view_through_lookback_window_days\x18\n \x01(\x0b\x32\x1b.google.protobuf.Int64Value\x12Y\n\x0evalue_settings\x18\x0b \x01(\x0b\x32\x41.google.ads.googleads.v3.resources.ConversionAction.ValueSettings\x12s\n\rcounting_type\x18\x0c \x01(\x0e\x32\\.google.ads.googleads.v3.enums.ConversionActionCountingTypeEnum.ConversionActionCountingType\x12p\n\x1a\x61ttribution_model_settings\x18\r \x01(\x0b\x32L.google.ads.googleads.v3.resources.ConversionAction.AttributionModelSettings\x12\x45\n\x0ctag_snippets\x18\x0e \x03(\x0b\x32*.google.ads.googleads.v3.common.TagSnippetB\x03\xe0\x41\x03\x12@\n\x1bphone_call_duration_seconds\x18\x0f \x01(\x0b\x32\x1b.google.protobuf.Int64Value\x12,\n\x06\x61pp_id\x18\x10 \x01(\x0b\x32\x1c.google.protobuf.StringValue\x1a\xf2\x01\n\x18\x41ttributionModelSettings\x12_\n\x11\x61ttribution_model\x18\x01 \x01(\x0e\x32\x44.google.ads.googleads.v3.enums.AttributionModelEnum.AttributionModel\x12u\n\x18\x64\x61ta_driven_model_status\x18\x02 \x01(\x0e\x32N.google.ads.googleads.v3.enums.DataDrivenModelStatusEnum.DataDrivenModelStatusB\x03\xe0\x41\x03\x1a\xbf\x01\n\rValueSettings\x12\x33\n\rdefault_value\x18\x01 \x01(\x0b\x32\x1c.google.protobuf.DoubleValue\x12;\n\x15\x64\x65\x66\x61ult_currency_code\x18\x02 \x01(\x0b\x32\x1c.google.protobuf.StringValue\x12<\n\x18\x61lways_use_default_value\x18\x03 \x01(\x0b\x32\x1a.google.protobuf.BoolValue:j\xea\x41g\n)googleads.googleapis.com/ConversionAction\x12:customers/{customer}/conversionActions/{conversion_action}B\x82\x02\n%com.google.ads.googleads.v3.resourcesB\x15\x43onversionActionProtoP\x01ZJgoogle.golang.org/genproto/googleapis/ads/googleads/v3/resources;resources\xa2\x02\x03GAA\xaa\x02!Google.Ads.GoogleAds.V3.Resources\xca\x02!Google\\Ads\\GoogleAds\\V3\\Resources\xea\x02%Google::Ads::GoogleAds::V3::Resourcesb\x06proto3')
   ,
-  dependencies=[google_dot_ads_dot_googleads__v3_dot_proto_dot_common_dot_tag__snippet__pb2.DESCRIPTOR,google_dot_ads_dot_googleads__v3_dot_proto_dot_enums_dot_attribution__model__pb2.DESCRIPTOR,google_dot_ads_dot_googleads__v3_dot_proto_dot_enums_dot_conversion__action__category__pb2.DESCRIPTOR,google_dot_ads_dot_googleads__v3_dot_proto_dot_enums_dot_conversion__action__counting__type__pb2.DESCRIPTOR,google_dot_ads_dot_googleads__v3_dot_proto_dot_enums_dot_conversion__action__status__pb2.DESCRIPTOR,google_dot_ads_dot_googleads__v3_dot_proto_dot_enums_dot_conversion__action__type__pb2.DESCRIPTOR,google_dot_ads_dot_googleads__v3_dot_proto_dot_enums_dot_data__driven__model__status__pb2.DESCRIPTOR,google_dot_api_dot_resource__pb2.DESCRIPTOR,google_dot_protobuf_dot_wrappers__pb2.DESCRIPTOR,google_dot_api_dot_annotations__pb2.DESCRIPTOR,])
+  dependencies=[google_dot_ads_dot_googleads__v3_dot_proto_dot_common_dot_tag__snippet__pb2.DESCRIPTOR,google_dot_ads_dot_googleads__v3_dot_proto_dot_enums_dot_attribution__model__pb2.DESCRIPTOR,google_dot_ads_dot_googleads__v3_dot_proto_dot_enums_dot_conversion__action__category__pb2.DESCRIPTOR,google_dot_ads_dot_googleads__v3_dot_proto_dot_enums_dot_conversion__action__counting__type__pb2.DESCRIPTOR,google_dot_ads_dot_googleads__v3_dot_proto_dot_enums_dot_conversion__action__status__pb2.DESCRIPTOR,google_dot_ads_dot_googleads__v3_dot_proto_dot_enums_dot_conversion__action__type__pb2.DESCRIPTOR,google_dot_ads_dot_googleads__v3_dot_proto_dot_enums_dot_data__driven__model__status__pb2.DESCRIPTOR,google_dot_api_dot_field__behavior__pb2.DESCRIPTOR,google_dot_api_dot_resource__pb2.DESCRIPTOR,google_dot_protobuf_dot_wrappers__pb2.DESCRIPTOR,google_dot_api_dot_annotations__pb2.DESCRIPTOR,])
 
 
 
@@ -57,7 +58,7 @@ _CONVERSIONACTION_ATTRIBUTIONMODELSETTINGS = _descriptor.Descriptor(
       has_default_value=False, default_value=0,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR),
+      serialized_options=_b('\340A\003'), file=DESCRIPTOR),
   ],
   extensions=[
   ],
@@ -70,8 +71,8 @@ _CONVERSIONACTION_ATTRIBUTIONMODELSETTINGS = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=1845,
-  serialized_end=2082,
+  serialized_start=1949,
+  serialized_end=2191,
 )
 
 _CONVERSIONACTION_VALUESETTINGS = _descriptor.Descriptor(
@@ -114,8 +115,8 @@ _CONVERSIONACTION_VALUESETTINGS = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=2085,
-  serialized_end=2276,
+  serialized_start=2194,
+  serialized_end=2385,
 )
 
 _CONVERSIONACTION = _descriptor.Descriptor(
@@ -131,14 +132,14 @@ _CONVERSIONACTION = _descriptor.Descriptor(
       has_default_value=False, default_value=_b("").decode('utf-8'),
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR),
+      serialized_options=_b('\340A\005\372A+\n)googleads.googleapis.com/ConversionAction'), file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
       name='id', full_name='google.ads.googleads.v3.resources.ConversionAction.id', index=1,
       number=2, type=11, cpp_type=10, label=1,
       has_default_value=False, default_value=None,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR),
+      serialized_options=_b('\340A\003'), file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
       name='name', full_name='google.ads.googleads.v3.resources.ConversionAction.name', index=2,
       number=3, type=11, cpp_type=10, label=1,
@@ -159,7 +160,7 @@ _CONVERSIONACTION = _descriptor.Descriptor(
       has_default_value=False, default_value=0,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR),
+      serialized_options=_b('\340A\005'), file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
       name='category', full_name='google.ads.googleads.v3.resources.ConversionAction.category', index=5,
       number=6, type=14, cpp_type=8, label=1,
@@ -173,7 +174,7 @@ _CONVERSIONACTION = _descriptor.Descriptor(
       has_default_value=False, default_value=None,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR),
+      serialized_options=_b('\340A\003'), file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
       name='include_in_conversions_metric', full_name='google.ads.googleads.v3.resources.ConversionAction.include_in_conversions_metric', index=7,
       number=8, type=11, cpp_type=10, label=1,
@@ -222,7 +223,7 @@ _CONVERSIONACTION = _descriptor.Descriptor(
       has_default_value=False, default_value=[],
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR),
+      serialized_options=_b('\340A\003'), file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
       name='phone_call_duration_seconds', full_name='google.ads.googleads.v3.resources.ConversionAction.phone_call_duration_seconds', index=14,
       number=15, type=11, cpp_type=10, label=1,
@@ -249,8 +250,8 @@ _CONVERSIONACTION = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=656,
-  serialized_end=2384,
+  serialized_start=689,
+  serialized_end=2493,
 )
 
 _CONVERSIONACTION_ATTRIBUTIONMODELSETTINGS.fields_by_name['attribution_model'].enum_type = google_dot_ads_dot_googleads__v3_dot_proto_dot_enums_dot_attribution__model__pb2._ATTRIBUTIONMODELENUM_ATTRIBUTIONMODEL
@@ -291,8 +292,8 @@ ConversionAction = _reflection.GeneratedProtocolMessageType('ConversionAction', 
         attribution_model:
             The attribution model type of this conversion action.
         data_driven_model_status:
-            The status of the data-driven attribution model for the
-            conversion action.
+            Output only. The status of the data-driven attribution model
+            for the conversion action.
     """,
     # @@protoc_insertion_point(class_scope:google.ads.googleads.v3.resources.ConversionAction.AttributionModelSettings)
     ))
@@ -333,11 +334,11 @@ ConversionAction = _reflection.GeneratedProtocolMessageType('ConversionAction', 
   
   Attributes:
       resource_name:
-          The resource name of the conversion action. Conversion action
-          resource names have the form:  ``customers/{customer_id}/conve
-          rsionActions/{conversion_action_id}``
+          Immutable. The resource name of the conversion action.
+          Conversion action resource names have the form:  ``customers/{
+          customer_id}/conversionActions/{conversion_action_id}``
       id:
-          The ID of the conversion action.
+          Output only. The ID of the conversion action.
       name:
           The name of the conversion action.  This field is required and
           should not be empty when creating new conversion actions.
@@ -345,13 +346,14 @@ ConversionAction = _reflection.GeneratedProtocolMessageType('ConversionAction', 
           The status of this conversion action for conversion event
           accrual.
       type:
-          The type of this conversion action.
+          Immutable. The type of this conversion action.
       category:
           The category of conversions reported for this conversion
           action.
       owner_customer:
-          The resource name of the conversion action owner customer, or
-          null if this is a system-defined conversion action.
+          Output only. The resource name of the conversion action owner
+          customer, or null if this is a system-defined conversion
+          action.
       include_in_conversions_metric:
           Whether this conversion action should be included in the
           "conversions" metric.
@@ -370,7 +372,7 @@ ConversionAction = _reflection.GeneratedProtocolMessageType('ConversionAction', 
           Settings related to this conversion action's attribution
           model.
       tag_snippets:
-          The snippets used for tracking conversions.
+          Output only. The snippets used for tracking conversions.
       phone_call_duration_seconds:
           The phone call duration in seconds after which a conversion
           should be reported for this conversion action.  The value must
@@ -386,5 +388,11 @@ _sym_db.RegisterMessage(ConversionAction.ValueSettings)
 
 
 DESCRIPTOR._options = None
+_CONVERSIONACTION_ATTRIBUTIONMODELSETTINGS.fields_by_name['data_driven_model_status']._options = None
+_CONVERSIONACTION.fields_by_name['resource_name']._options = None
+_CONVERSIONACTION.fields_by_name['id']._options = None
+_CONVERSIONACTION.fields_by_name['type']._options = None
+_CONVERSIONACTION.fields_by_name['owner_customer']._options = None
+_CONVERSIONACTION.fields_by_name['tag_snippets']._options = None
 _CONVERSIONACTION._options = None
 # @@protoc_insertion_point(module_scope)

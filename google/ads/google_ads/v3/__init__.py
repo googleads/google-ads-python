@@ -1,4 +1,4 @@
-# Copyright 2018 Google LLC
+# Copyright 2020 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -13,7 +13,6 @@
 # limitations under the License.
 
 
-from __future__ import absolute_import
 import importlib
 import sys
 
@@ -113,6 +112,7 @@ _lazy_name_to_package_map = dict(
     mobile_app_category_constant_service_client='google.ads.google_ads.v3.services',
     mobile_device_constant_service_client='google.ads.google_ads.v3.services',
     mutate_job_service_client='google.ads.google_ads.v3.services',
+    offline_user_data_job_service_client='google.ads.google_ads.v3.services',
     operating_system_version_constant_service_client='google.ads.google_ads.v3.services',
     paid_organic_search_term_view_service_client='google.ads.google_ads.v3.services',
     parental_status_view_service_client='google.ads.google_ads.v3.services',
@@ -128,6 +128,7 @@ _lazy_name_to_package_map = dict(
     shopping_performance_view_service_client='google.ads.google_ads.v3.services',
     topic_constant_service_client='google.ads.google_ads.v3.services',
     topic_view_service_client='google.ads.google_ads.v3.services',
+    user_data_service_client='google.ads.google_ads.v3.services',
     user_interest_service_client='google.ads.google_ads.v3.services',
     user_list_service_client='google.ads.google_ads.v3.services',
     user_location_view_service_client='google.ads.google_ads.v3.services',
@@ -220,6 +221,7 @@ _lazy_name_to_package_map = dict(
     mobile_app_category_constant_service_grpc_transport='google.ads.google_ads.v3.services.transports',
     mobile_device_constant_service_grpc_transport='google.ads.google_ads.v3.services.transports',
     mutate_job_service_grpc_transport='google.ads.google_ads.v3.services.transports',
+    offline_user_data_job_service_grpc_transport='google.ads.google_ads.v3.services.transports',
     operating_system_version_constant_service_grpc_transport='google.ads.google_ads.v3.services.transports',
     paid_organic_search_term_view_service_grpc_transport='google.ads.google_ads.v3.services.transports',
     parental_status_view_service_grpc_transport='google.ads.google_ads.v3.services.transports',
@@ -235,6 +237,7 @@ _lazy_name_to_package_map = dict(
     shopping_performance_view_service_grpc_transport='google.ads.google_ads.v3.services.transports',
     topic_constant_service_grpc_transport='google.ads.google_ads.v3.services.transports',
     topic_view_service_grpc_transport='google.ads.google_ads.v3.services.transports',
+    user_data_service_grpc_transport='google.ads.google_ads.v3.services.transports',
     user_interest_service_grpc_transport='google.ads.google_ads.v3.services.transports',
     user_list_service_grpc_transport='google.ads.google_ads.v3.services.transports',
     user_location_view_service_grpc_transport='google.ads.google_ads.v3.services.transports',
@@ -266,11 +269,13 @@ def __getattr__(name):  # Requires Python >= 3.7
         globals()[name] = klass
         return klass
     elif name == 'enums':
-        module = importlib.import_module('google.ads.google_ads.v3.services.enums')
+        path = 'google.ads.google_ads.v3.services.enums'
+        module = importlib.import_module(path)
         globals()[name] = module
         return module
     elif name == 'types':
-        module = importlib.import_module('google.ads.google_ads.v3.types')
+        path = 'google.ads.google_ads.v3.types'
+        module = importlib.import_module(path)
         globals()[name] = module
         return module
     elif name in _lazy_name_to_package_map:

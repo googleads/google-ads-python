@@ -17,6 +17,7 @@ from google.ads.google_ads.v3.proto.resources import campaign_criterion_pb2 as g
 from google.api import annotations_pb2 as google_dot_api_dot_annotations__pb2
 from google.api import client_pb2 as google_dot_api_dot_client__pb2
 from google.api import field_behavior_pb2 as google_dot_api_dot_field__behavior__pb2
+from google.api import resource_pb2 as google_dot_api_dot_resource__pb2
 from google.protobuf import field_mask_pb2 as google_dot_protobuf_dot_field__mask__pb2
 from google.rpc import status_pb2 as google_dot_rpc_dot_status__pb2
 
@@ -26,9 +27,9 @@ DESCRIPTOR = _descriptor.FileDescriptor(
   package='google.ads.googleads.v3.services',
   syntax='proto3',
   serialized_options=_b('\n$com.google.ads.googleads.v3.servicesB\035CampaignCriterionServiceProtoP\001ZHgoogle.golang.org/genproto/googleapis/ads/googleads/v3/services;services\242\002\003GAA\252\002 Google.Ads.GoogleAds.V3.Services\312\002 Google\\Ads\\GoogleAds\\V3\\Services\352\002$Google::Ads::GoogleAds::V3::Services'),
-  serialized_pb=_b('\nGgoogle/ads/googleads_v3/proto/services/campaign_criterion_service.proto\x12 google.ads.googleads.v3.services\x1a@google/ads/googleads_v3/proto/resources/campaign_criterion.proto\x1a\x1cgoogle/api/annotations.proto\x1a\x17google/api/client.proto\x1a\x1fgoogle/api/field_behavior.proto\x1a google/protobuf/field_mask.proto\x1a\x17google/rpc/status.proto\"9\n\x1bGetCampaignCriterionRequest\x12\x1a\n\rresource_name\x18\x01 \x01(\tB\x03\xe0\x41\x02\"\xc0\x01\n\x1dMutateCampaignCriteriaRequest\x12\x18\n\x0b\x63ustomer_id\x18\x01 \x01(\tB\x03\xe0\x41\x02\x12U\n\noperations\x18\x02 \x03(\x0b\x32<.google.ads.googleads.v3.services.CampaignCriterionOperationB\x03\xe0\x41\x02\x12\x17\n\x0fpartial_failure\x18\x03 \x01(\x08\x12\x15\n\rvalidate_only\x18\x04 \x01(\x08\"\xfc\x01\n\x1a\x43\x61mpaignCriterionOperation\x12/\n\x0bupdate_mask\x18\x04 \x01(\x0b\x32\x1a.google.protobuf.FieldMask\x12\x46\n\x06\x63reate\x18\x01 \x01(\x0b\x32\x34.google.ads.googleads.v3.resources.CampaignCriterionH\x00\x12\x46\n\x06update\x18\x02 \x01(\x0b\x32\x34.google.ads.googleads.v3.resources.CampaignCriterionH\x00\x12\x10\n\x06remove\x18\x03 \x01(\tH\x00\x42\x0b\n\toperation\"\xa5\x01\n\x1eMutateCampaignCriteriaResponse\x12\x31\n\x15partial_failure_error\x18\x03 \x01(\x0b\x32\x12.google.rpc.Status\x12P\n\x07results\x18\x02 \x03(\x0b\x32?.google.ads.googleads.v3.services.MutateCampaignCriterionResult\"6\n\x1dMutateCampaignCriterionResult\x12\x15\n\rresource_name\x18\x01 \x01(\t2\x8a\x04\n\x18\x43\x61mpaignCriterionService\x12\xd7\x01\n\x14GetCampaignCriterion\x12=.google.ads.googleads.v3.services.GetCampaignCriterionRequest\x1a\x34.google.ads.googleads.v3.resources.CampaignCriterion\"J\x82\xd3\xe4\x93\x02\x34\x12\x32/v3/{resource_name=customers/*/campaignCriteria/*}\xda\x41\rresource_name\x12\xf6\x01\n\x16MutateCampaignCriteria\x12?.google.ads.googleads.v3.services.MutateCampaignCriteriaRequest\x1a@.google.ads.googleads.v3.services.MutateCampaignCriteriaResponse\"Y\x82\xd3\xe4\x93\x02:\"5/v3/customers/{customer_id=*}/campaignCriteria:mutate:\x01*\xda\x41\x16\x63ustomer_id,operations\x1a\x1b\xca\x41\x18googleads.googleapis.comB\x84\x02\n$com.google.ads.googleads.v3.servicesB\x1d\x43\x61mpaignCriterionServiceProtoP\x01ZHgoogle.golang.org/genproto/googleapis/ads/googleads/v3/services;services\xa2\x02\x03GAA\xaa\x02 Google.Ads.GoogleAds.V3.Services\xca\x02 Google\\Ads\\GoogleAds\\V3\\Services\xea\x02$Google::Ads::GoogleAds::V3::Servicesb\x06proto3')
+  serialized_pb=_b('\nGgoogle/ads/googleads_v3/proto/services/campaign_criterion_service.proto\x12 google.ads.googleads.v3.services\x1a@google/ads/googleads_v3/proto/resources/campaign_criterion.proto\x1a\x1cgoogle/api/annotations.proto\x1a\x17google/api/client.proto\x1a\x1fgoogle/api/field_behavior.proto\x1a\x19google/api/resource.proto\x1a google/protobuf/field_mask.proto\x1a\x17google/rpc/status.proto\"h\n\x1bGetCampaignCriterionRequest\x12I\n\rresource_name\x18\x01 \x01(\tB2\xe0\x41\x02\xfa\x41,\n*googleads.googleapis.com/CampaignCriterion\"\xc0\x01\n\x1dMutateCampaignCriteriaRequest\x12\x18\n\x0b\x63ustomer_id\x18\x01 \x01(\tB\x03\xe0\x41\x02\x12U\n\noperations\x18\x02 \x03(\x0b\x32<.google.ads.googleads.v3.services.CampaignCriterionOperationB\x03\xe0\x41\x02\x12\x17\n\x0fpartial_failure\x18\x03 \x01(\x08\x12\x15\n\rvalidate_only\x18\x04 \x01(\x08\"\xfc\x01\n\x1a\x43\x61mpaignCriterionOperation\x12/\n\x0bupdate_mask\x18\x04 \x01(\x0b\x32\x1a.google.protobuf.FieldMask\x12\x46\n\x06\x63reate\x18\x01 \x01(\x0b\x32\x34.google.ads.googleads.v3.resources.CampaignCriterionH\x00\x12\x46\n\x06update\x18\x02 \x01(\x0b\x32\x34.google.ads.googleads.v3.resources.CampaignCriterionH\x00\x12\x10\n\x06remove\x18\x03 \x01(\tH\x00\x42\x0b\n\toperation\"\xa5\x01\n\x1eMutateCampaignCriteriaResponse\x12\x31\n\x15partial_failure_error\x18\x03 \x01(\x0b\x32\x12.google.rpc.Status\x12P\n\x07results\x18\x02 \x03(\x0b\x32?.google.ads.googleads.v3.services.MutateCampaignCriterionResult\"6\n\x1dMutateCampaignCriterionResult\x12\x15\n\rresource_name\x18\x01 \x01(\t2\x8a\x04\n\x18\x43\x61mpaignCriterionService\x12\xd7\x01\n\x14GetCampaignCriterion\x12=.google.ads.googleads.v3.services.GetCampaignCriterionRequest\x1a\x34.google.ads.googleads.v3.resources.CampaignCriterion\"J\x82\xd3\xe4\x93\x02\x34\x12\x32/v3/{resource_name=customers/*/campaignCriteria/*}\xda\x41\rresource_name\x12\xf6\x01\n\x16MutateCampaignCriteria\x12?.google.ads.googleads.v3.services.MutateCampaignCriteriaRequest\x1a@.google.ads.googleads.v3.services.MutateCampaignCriteriaResponse\"Y\x82\xd3\xe4\x93\x02:\"5/v3/customers/{customer_id=*}/campaignCriteria:mutate:\x01*\xda\x41\x16\x63ustomer_id,operations\x1a\x1b\xca\x41\x18googleads.googleapis.comB\x84\x02\n$com.google.ads.googleads.v3.servicesB\x1d\x43\x61mpaignCriterionServiceProtoP\x01ZHgoogle.golang.org/genproto/googleapis/ads/googleads/v3/services;services\xa2\x02\x03GAA\xaa\x02 Google.Ads.GoogleAds.V3.Services\xca\x02 Google\\Ads\\GoogleAds\\V3\\Services\xea\x02$Google::Ads::GoogleAds::V3::Servicesb\x06proto3')
   ,
-  dependencies=[google_dot_ads_dot_googleads__v3_dot_proto_dot_resources_dot_campaign__criterion__pb2.DESCRIPTOR,google_dot_api_dot_annotations__pb2.DESCRIPTOR,google_dot_api_dot_client__pb2.DESCRIPTOR,google_dot_api_dot_field__behavior__pb2.DESCRIPTOR,google_dot_protobuf_dot_field__mask__pb2.DESCRIPTOR,google_dot_rpc_dot_status__pb2.DESCRIPTOR,])
+  dependencies=[google_dot_ads_dot_googleads__v3_dot_proto_dot_resources_dot_campaign__criterion__pb2.DESCRIPTOR,google_dot_api_dot_annotations__pb2.DESCRIPTOR,google_dot_api_dot_client__pb2.DESCRIPTOR,google_dot_api_dot_field__behavior__pb2.DESCRIPTOR,google_dot_api_dot_resource__pb2.DESCRIPTOR,google_dot_protobuf_dot_field__mask__pb2.DESCRIPTOR,google_dot_rpc_dot_status__pb2.DESCRIPTOR,])
 
 
 
@@ -46,7 +47,7 @@ _GETCAMPAIGNCRITERIONREQUEST = _descriptor.Descriptor(
       has_default_value=False, default_value=_b("").decode('utf-8'),
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
-      serialized_options=_b('\340A\002'), file=DESCRIPTOR),
+      serialized_options=_b('\340A\002\372A,\n*googleads.googleapis.com/CampaignCriterion'), file=DESCRIPTOR),
   ],
   extensions=[
   ],
@@ -59,8 +60,8 @@ _GETCAMPAIGNCRITERIONREQUEST = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=322,
-  serialized_end=379,
+  serialized_start=349,
+  serialized_end=453,
 )
 
 
@@ -111,8 +112,8 @@ _MUTATECAMPAIGNCRITERIAREQUEST = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=382,
-  serialized_end=574,
+  serialized_start=456,
+  serialized_end=648,
 )
 
 
@@ -166,8 +167,8 @@ _CAMPAIGNCRITERIONOPERATION = _descriptor.Descriptor(
       name='operation', full_name='google.ads.googleads.v3.services.CampaignCriterionOperation.operation',
       index=0, containing_type=None, fields=[]),
   ],
-  serialized_start=577,
-  serialized_end=829,
+  serialized_start=651,
+  serialized_end=903,
 )
 
 
@@ -204,8 +205,8 @@ _MUTATECAMPAIGNCRITERIARESPONSE = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=832,
-  serialized_end=997,
+  serialized_start=906,
+  serialized_end=1071,
 )
 
 
@@ -235,8 +236,8 @@ _MUTATECAMPAIGNCRITERIONRESULT = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=999,
-  serialized_end=1053,
+  serialized_start=1073,
+  serialized_end=1127,
 )
 
 _MUTATECAMPAIGNCRITERIAREQUEST.fields_by_name['operations'].message_type = _CAMPAIGNCRITERIONOPERATION
@@ -381,8 +382,8 @@ _CAMPAIGNCRITERIONSERVICE = _descriptor.ServiceDescriptor(
   file=DESCRIPTOR,
   index=0,
   serialized_options=_b('\312A\030googleads.googleapis.com'),
-  serialized_start=1056,
-  serialized_end=1578,
+  serialized_start=1130,
+  serialized_end=1652,
   methods=[
   _descriptor.MethodDescriptor(
     name='GetCampaignCriterion',

@@ -1174,7 +1174,7 @@ Metrics = _reflection.GeneratedProtocolMessageType('Metrics', (_message.Message,
           expands your Lightbox ad. Also, in the future, other ad types
           may support engagement metrics.
       hotel_average_lead_value_micros:
-          Average lead value of hotel.
+          Average lead value based on clicks.
       hotel_price_difference_percentage:
           The average price difference between the price offered by
           reporting hotel advertiser and the cheapest price offered by

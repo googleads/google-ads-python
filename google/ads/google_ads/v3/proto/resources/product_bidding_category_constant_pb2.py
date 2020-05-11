@@ -15,6 +15,7 @@ _sym_db = _symbol_database.Default()
 
 from google.ads.google_ads.v3.proto.enums import product_bidding_category_level_pb2 as google_dot_ads_dot_googleads__v3_dot_proto_dot_enums_dot_product__bidding__category__level__pb2
 from google.ads.google_ads.v3.proto.enums import product_bidding_category_status_pb2 as google_dot_ads_dot_googleads__v3_dot_proto_dot_enums_dot_product__bidding__category__status__pb2
+from google.api import field_behavior_pb2 as google_dot_api_dot_field__behavior__pb2
 from google.api import resource_pb2 as google_dot_api_dot_resource__pb2
 from google.protobuf import wrappers_pb2 as google_dot_protobuf_dot_wrappers__pb2
 from google.api import annotations_pb2 as google_dot_api_dot_annotations__pb2
@@ -25,9 +26,9 @@ DESCRIPTOR = _descriptor.FileDescriptor(
   package='google.ads.googleads.v3.resources',
   syntax='proto3',
   serialized_options=_b('\n%com.google.ads.googleads.v3.resourcesB#ProductBiddingCategoryConstantProtoP\001ZJgoogle.golang.org/genproto/googleapis/ads/googleads/v3/resources;resources\242\002\003GAA\252\002!Google.Ads.GoogleAds.V3.Resources\312\002!Google\\Ads\\GoogleAds\\V3\\Resources\352\002%Google::Ads::GoogleAds::V3::Resources'),
-  serialized_pb=_b('\nOgoogle/ads/googleads_v3/proto/resources/product_bidding_category_constant.proto\x12!google.ads.googleads.v3.resources\x1aHgoogle/ads/googleads_v3/proto/enums/product_bidding_category_level.proto\x1aIgoogle/ads/googleads_v3/proto/enums/product_bidding_category_status.proto\x1a\x19google/api/resource.proto\x1a\x1egoogle/protobuf/wrappers.proto\x1a\x1cgoogle/api/annotations.proto\"\xac\x05\n\x1eProductBiddingCategoryConstant\x12\x15\n\rresource_name\x18\x01 \x01(\t\x12\'\n\x02id\x18\x02 \x01(\x0b\x32\x1b.google.protobuf.Int64Value\x12\x32\n\x0c\x63ountry_code\x18\x03 \x01(\x0b\x32\x1c.google.protobuf.StringValue\x12N\n(product_bidding_category_constant_parent\x18\x04 \x01(\x0b\x32\x1c.google.protobuf.StringValue\x12i\n\x05level\x18\x05 \x01(\x0e\x32Z.google.ads.googleads.v3.enums.ProductBiddingCategoryLevelEnum.ProductBiddingCategoryLevel\x12l\n\x06status\x18\x06 \x01(\x0e\x32\\.google.ads.googleads.v3.enums.ProductBiddingCategoryStatusEnum.ProductBiddingCategoryStatus\x12\x33\n\rlanguage_code\x18\x07 \x01(\x0b\x32\x1c.google.protobuf.StringValue\x12\x34\n\x0elocalized_name\x18\x08 \x01(\x0b\x32\x1c.google.protobuf.StringValue:\x81\x01\xea\x41~\n7googleads.googleapis.com/ProductBiddingCategoryConstant\x12\x43productBiddingCategoryConstants/{product_bidding_category_constant}B\x90\x02\n%com.google.ads.googleads.v3.resourcesB#ProductBiddingCategoryConstantProtoP\x01ZJgoogle.golang.org/genproto/googleapis/ads/googleads/v3/resources;resources\xa2\x02\x03GAA\xaa\x02!Google.Ads.GoogleAds.V3.Resources\xca\x02!Google\\Ads\\GoogleAds\\V3\\Resources\xea\x02%Google::Ads::GoogleAds::V3::Resourcesb\x06proto3')
+  serialized_pb=_b('\nOgoogle/ads/googleads_v3/proto/resources/product_bidding_category_constant.proto\x12!google.ads.googleads.v3.resources\x1aHgoogle/ads/googleads_v3/proto/enums/product_bidding_category_level.proto\x1aIgoogle/ads/googleads_v3/proto/enums/product_bidding_category_status.proto\x1a\x1fgoogle/api/field_behavior.proto\x1a\x19google/api/resource.proto\x1a\x1egoogle/protobuf/wrappers.proto\x1a\x1cgoogle/api/annotations.proto\"\xcd\x06\n\x1eProductBiddingCategoryConstant\x12V\n\rresource_name\x18\x01 \x01(\tB?\xe0\x41\x03\xfa\x41\x39\n7googleads.googleapis.com/ProductBiddingCategoryConstant\x12,\n\x02id\x18\x02 \x01(\x0b\x32\x1b.google.protobuf.Int64ValueB\x03\xe0\x41\x03\x12\x37\n\x0c\x63ountry_code\x18\x03 \x01(\x0b\x32\x1c.google.protobuf.StringValueB\x03\xe0\x41\x03\x12\x8f\x01\n(product_bidding_category_constant_parent\x18\x04 \x01(\x0b\x32\x1c.google.protobuf.StringValueB?\xe0\x41\x03\xfa\x41\x39\n7googleads.googleapis.com/ProductBiddingCategoryConstant\x12n\n\x05level\x18\x05 \x01(\x0e\x32Z.google.ads.googleads.v3.enums.ProductBiddingCategoryLevelEnum.ProductBiddingCategoryLevelB\x03\xe0\x41\x03\x12q\n\x06status\x18\x06 \x01(\x0e\x32\\.google.ads.googleads.v3.enums.ProductBiddingCategoryStatusEnum.ProductBiddingCategoryStatusB\x03\xe0\x41\x03\x12\x38\n\rlanguage_code\x18\x07 \x01(\x0b\x32\x1c.google.protobuf.StringValueB\x03\xe0\x41\x03\x12\x39\n\x0elocalized_name\x18\x08 \x01(\x0b\x32\x1c.google.protobuf.StringValueB\x03\xe0\x41\x03:\x81\x01\xea\x41~\n7googleads.googleapis.com/ProductBiddingCategoryConstant\x12\x43productBiddingCategoryConstants/{product_bidding_category_constant}B\x90\x02\n%com.google.ads.googleads.v3.resourcesB#ProductBiddingCategoryConstantProtoP\x01ZJgoogle.golang.org/genproto/googleapis/ads/googleads/v3/resources;resources\xa2\x02\x03GAA\xaa\x02!Google.Ads.GoogleAds.V3.Resources\xca\x02!Google\\Ads\\GoogleAds\\V3\\Resources\xea\x02%Google::Ads::GoogleAds::V3::Resourcesb\x06proto3')
   ,
-  dependencies=[google_dot_ads_dot_googleads__v3_dot_proto_dot_enums_dot_product__bidding__category__level__pb2.DESCRIPTOR,google_dot_ads_dot_googleads__v3_dot_proto_dot_enums_dot_product__bidding__category__status__pb2.DESCRIPTOR,google_dot_api_dot_resource__pb2.DESCRIPTOR,google_dot_protobuf_dot_wrappers__pb2.DESCRIPTOR,google_dot_api_dot_annotations__pb2.DESCRIPTOR,])
+  dependencies=[google_dot_ads_dot_googleads__v3_dot_proto_dot_enums_dot_product__bidding__category__level__pb2.DESCRIPTOR,google_dot_ads_dot_googleads__v3_dot_proto_dot_enums_dot_product__bidding__category__status__pb2.DESCRIPTOR,google_dot_api_dot_field__behavior__pb2.DESCRIPTOR,google_dot_api_dot_resource__pb2.DESCRIPTOR,google_dot_protobuf_dot_wrappers__pb2.DESCRIPTOR,google_dot_api_dot_annotations__pb2.DESCRIPTOR,])
 
 
 
@@ -45,56 +46,56 @@ _PRODUCTBIDDINGCATEGORYCONSTANT = _descriptor.Descriptor(
       has_default_value=False, default_value=_b("").decode('utf-8'),
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR),
+      serialized_options=_b('\340A\003\372A9\n7googleads.googleapis.com/ProductBiddingCategoryConstant'), file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
       name='id', full_name='google.ads.googleads.v3.resources.ProductBiddingCategoryConstant.id', index=1,
       number=2, type=11, cpp_type=10, label=1,
       has_default_value=False, default_value=None,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR),
+      serialized_options=_b('\340A\003'), file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
       name='country_code', full_name='google.ads.googleads.v3.resources.ProductBiddingCategoryConstant.country_code', index=2,
       number=3, type=11, cpp_type=10, label=1,
       has_default_value=False, default_value=None,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR),
+      serialized_options=_b('\340A\003'), file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
       name='product_bidding_category_constant_parent', full_name='google.ads.googleads.v3.resources.ProductBiddingCategoryConstant.product_bidding_category_constant_parent', index=3,
       number=4, type=11, cpp_type=10, label=1,
       has_default_value=False, default_value=None,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR),
+      serialized_options=_b('\340A\003\372A9\n7googleads.googleapis.com/ProductBiddingCategoryConstant'), file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
       name='level', full_name='google.ads.googleads.v3.resources.ProductBiddingCategoryConstant.level', index=4,
       number=5, type=14, cpp_type=8, label=1,
       has_default_value=False, default_value=0,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR),
+      serialized_options=_b('\340A\003'), file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
       name='status', full_name='google.ads.googleads.v3.resources.ProductBiddingCategoryConstant.status', index=5,
       number=6, type=14, cpp_type=8, label=1,
       has_default_value=False, default_value=0,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR),
+      serialized_options=_b('\340A\003'), file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
       name='language_code', full_name='google.ads.googleads.v3.resources.ProductBiddingCategoryConstant.language_code', index=6,
       number=7, type=11, cpp_type=10, label=1,
       has_default_value=False, default_value=None,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR),
+      serialized_options=_b('\340A\003'), file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
       name='localized_name', full_name='google.ads.googleads.v3.resources.ProductBiddingCategoryConstant.localized_name', index=7,
       number=8, type=11, cpp_type=10, label=1,
       has_default_value=False, default_value=None,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR),
+      serialized_options=_b('\340A\003'), file=DESCRIPTOR),
   ],
   extensions=[
   ],
@@ -107,8 +108,8 @@ _PRODUCTBIDDINGCATEGORYCONSTANT = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=357,
-  serialized_end=1041,
+  serialized_start=390,
+  serialized_end=1235,
 )
 
 _PRODUCTBIDDINGCATEGORYCONSTANT.fields_by_name['id'].message_type = google_dot_protobuf_dot_wrappers__pb2._INT64VALUE
@@ -130,27 +131,30 @@ ProductBiddingCategoryConstant = _reflection.GeneratedProtocolMessageType('Produ
   
   Attributes:
       resource_name:
-          The resource name of the product bidding category. Product
-          bidding category resource names have the form:  ``productBiddi
-          ngCategoryConstants/{country_code}~{level}~{id}``
+          Output only. The resource name of the product bidding
+          category. Product bidding category resource names have the
+          form:  ``productBiddingCategoryConstants/{country_code}~{level
+          }~{id}``
       id:
-          ID of the product bidding category.  This ID is equivalent to
-          the google\_product\_category ID as described in this article:
+          Output only. ID of the product bidding category.  This ID is
+          equivalent to the google\_product\_category ID as described in
+          this article:
           https://support.google.com/merchants/answer/6324436.
       country_code:
-          Two-letter upper-case country code of the product bidding
-          category.
+          Output only. Two-letter upper-case country code of the product
+          bidding category.
       product_bidding_category_constant_parent:
-          Resource name of the parent product bidding category.
+          Output only. Resource name of the parent product bidding
+          category.
       level:
-          Level of the product bidding category.
+          Output only. Level of the product bidding category.
       status:
-          Status of the product bidding category.
+          Output only. Status of the product bidding category.
       language_code:
-          Language code of the product bidding category.
+          Output only. Language code of the product bidding category.
       localized_name:
-          Display value of the product bidding category localized
-          according to language\_code.
+          Output only. Display value of the product bidding category
+          localized according to language\_code.
   """,
   # @@protoc_insertion_point(class_scope:google.ads.googleads.v3.resources.ProductBiddingCategoryConstant)
   ))
@@ -158,5 +162,13 @@ _sym_db.RegisterMessage(ProductBiddingCategoryConstant)
 
 
 DESCRIPTOR._options = None
+_PRODUCTBIDDINGCATEGORYCONSTANT.fields_by_name['resource_name']._options = None
+_PRODUCTBIDDINGCATEGORYCONSTANT.fields_by_name['id']._options = None
+_PRODUCTBIDDINGCATEGORYCONSTANT.fields_by_name['country_code']._options = None
+_PRODUCTBIDDINGCATEGORYCONSTANT.fields_by_name['product_bidding_category_constant_parent']._options = None
+_PRODUCTBIDDINGCATEGORYCONSTANT.fields_by_name['level']._options = None
+_PRODUCTBIDDINGCATEGORYCONSTANT.fields_by_name['status']._options = None
+_PRODUCTBIDDINGCATEGORYCONSTANT.fields_by_name['language_code']._options = None
+_PRODUCTBIDDINGCATEGORYCONSTANT.fields_by_name['localized_name']._options = None
 _PRODUCTBIDDINGCATEGORYCONSTANT._options = None
 # @@protoc_insertion_point(module_scope)

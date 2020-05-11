@@ -17,6 +17,7 @@ from google.ads.google_ads.v3.proto.resources import customer_manager_link_pb2 a
 from google.api import annotations_pb2 as google_dot_api_dot_annotations__pb2
 from google.api import client_pb2 as google_dot_api_dot_client__pb2
 from google.api import field_behavior_pb2 as google_dot_api_dot_field__behavior__pb2
+from google.api import resource_pb2 as google_dot_api_dot_resource__pb2
 from google.protobuf import field_mask_pb2 as google_dot_protobuf_dot_field__mask__pb2
 
 
@@ -25,9 +26,9 @@ DESCRIPTOR = _descriptor.FileDescriptor(
   package='google.ads.googleads.v3.services',
   syntax='proto3',
   serialized_options=_b('\n$com.google.ads.googleads.v3.servicesB\037CustomerManagerLinkServiceProtoP\001ZHgoogle.golang.org/genproto/googleapis/ads/googleads/v3/services;services\242\002\003GAA\252\002 Google.Ads.GoogleAds.V3.Services\312\002 Google\\Ads\\GoogleAds\\V3\\Services\352\002$Google::Ads::GoogleAds::V3::Services'),
-  serialized_pb=_b('\nJgoogle/ads/googleads_v3/proto/services/customer_manager_link_service.proto\x12 google.ads.googleads.v3.services\x1a\x43google/ads/googleads_v3/proto/resources/customer_manager_link.proto\x1a\x1cgoogle/api/annotations.proto\x1a\x17google/api/client.proto\x1a\x1fgoogle/api/field_behavior.proto\x1a google/protobuf/field_mask.proto\";\n\x1dGetCustomerManagerLinkRequest\x12\x1a\n\rresource_name\x18\x01 \x01(\tB\x03\xe0\x41\x02\"\x95\x01\n MutateCustomerManagerLinkRequest\x12\x18\n\x0b\x63ustomer_id\x18\x01 \x01(\tB\x03\xe0\x41\x02\x12W\n\noperations\x18\x02 \x03(\x0b\x32>.google.ads.googleads.v3.services.CustomerManagerLinkOperationB\x03\xe0\x41\x02\"y\n\x16MoveManagerLinkRequest\x12\x18\n\x0b\x63ustomer_id\x18\x01 \x01(\tB\x03\xe0\x41\x02\x12+\n\x1eprevious_customer_manager_link\x18\x02 \x01(\tB\x03\xe0\x41\x02\x12\x18\n\x0bnew_manager\x18\x03 \x01(\tB\x03\xe0\x41\x02\"\xa6\x01\n\x1c\x43ustomerManagerLinkOperation\x12/\n\x0bupdate_mask\x18\x04 \x01(\x0b\x32\x1a.google.protobuf.FieldMask\x12H\n\x06update\x18\x02 \x01(\x0b\x32\x36.google.ads.googleads.v3.resources.CustomerManagerLinkH\x00\x42\x0b\n\toperation\"w\n!MutateCustomerManagerLinkResponse\x12R\n\x07results\x18\x01 \x03(\x0b\x32\x41.google.ads.googleads.v3.services.MutateCustomerManagerLinkResult\"0\n\x17MoveManagerLinkResponse\x12\x15\n\rresource_name\x18\x01 \x01(\t\"8\n\x1fMutateCustomerManagerLinkResult\x12\x15\n\rresource_name\x18\x01 \x01(\t2\xb5\x06\n\x1a\x43ustomerManagerLinkService\x12\xe1\x01\n\x16GetCustomerManagerLink\x12?.google.ads.googleads.v3.services.GetCustomerManagerLinkRequest\x1a\x36.google.ads.googleads.v3.resources.CustomerManagerLink\"N\x82\xd3\xe4\x93\x02\x38\x12\x36/v3/{resource_name=customers/*/customerManagerLinks/*}\xda\x41\rresource_name\x12\x83\x02\n\x19MutateCustomerManagerLink\x12\x42.google.ads.googleads.v3.services.MutateCustomerManagerLinkRequest\x1a\x43.google.ads.googleads.v3.services.MutateCustomerManagerLinkResponse\"]\x82\xd3\xe4\x93\x02>\"9/v3/customers/{customer_id=*}/customerManagerLinks:mutate:\x01*\xda\x41\x16\x63ustomer_id,operations\x12\x8f\x02\n\x0fMoveManagerLink\x12\x38.google.ads.googleads.v3.services.MoveManagerLinkRequest\x1a\x39.google.ads.googleads.v3.services.MoveManagerLinkResponse\"\x86\x01\x82\xd3\xe4\x93\x02G\"B/v3/customers/{customer_id=*}/customerManagerLinks:moveManagerLink:\x01*\xda\x41\x36\x63ustomer_id,previous_customer_manager_link,new_manager\x1a\x1b\xca\x41\x18googleads.googleapis.comB\x86\x02\n$com.google.ads.googleads.v3.servicesB\x1f\x43ustomerManagerLinkServiceProtoP\x01ZHgoogle.golang.org/genproto/googleapis/ads/googleads/v3/services;services\xa2\x02\x03GAA\xaa\x02 Google.Ads.GoogleAds.V3.Services\xca\x02 Google\\Ads\\GoogleAds\\V3\\Services\xea\x02$Google::Ads::GoogleAds::V3::Servicesb\x06proto3')
+  serialized_pb=_b('\nJgoogle/ads/googleads_v3/proto/services/customer_manager_link_service.proto\x12 google.ads.googleads.v3.services\x1a\x43google/ads/googleads_v3/proto/resources/customer_manager_link.proto\x1a\x1cgoogle/api/annotations.proto\x1a\x17google/api/client.proto\x1a\x1fgoogle/api/field_behavior.proto\x1a\x19google/api/resource.proto\x1a google/protobuf/field_mask.proto\"l\n\x1dGetCustomerManagerLinkRequest\x12K\n\rresource_name\x18\x01 \x01(\tB4\xe0\x41\x02\xfa\x41.\n,googleads.googleapis.com/CustomerManagerLink\"\x95\x01\n MutateCustomerManagerLinkRequest\x12\x18\n\x0b\x63ustomer_id\x18\x01 \x01(\tB\x03\xe0\x41\x02\x12W\n\noperations\x18\x02 \x03(\x0b\x32>.google.ads.googleads.v3.services.CustomerManagerLinkOperationB\x03\xe0\x41\x02\"y\n\x16MoveManagerLinkRequest\x12\x18\n\x0b\x63ustomer_id\x18\x01 \x01(\tB\x03\xe0\x41\x02\x12+\n\x1eprevious_customer_manager_link\x18\x02 \x01(\tB\x03\xe0\x41\x02\x12\x18\n\x0bnew_manager\x18\x03 \x01(\tB\x03\xe0\x41\x02\"\xa6\x01\n\x1c\x43ustomerManagerLinkOperation\x12/\n\x0bupdate_mask\x18\x04 \x01(\x0b\x32\x1a.google.protobuf.FieldMask\x12H\n\x06update\x18\x02 \x01(\x0b\x32\x36.google.ads.googleads.v3.resources.CustomerManagerLinkH\x00\x42\x0b\n\toperation\"w\n!MutateCustomerManagerLinkResponse\x12R\n\x07results\x18\x01 \x03(\x0b\x32\x41.google.ads.googleads.v3.services.MutateCustomerManagerLinkResult\"0\n\x17MoveManagerLinkResponse\x12\x15\n\rresource_name\x18\x01 \x01(\t\"8\n\x1fMutateCustomerManagerLinkResult\x12\x15\n\rresource_name\x18\x01 \x01(\t2\xb5\x06\n\x1a\x43ustomerManagerLinkService\x12\xe1\x01\n\x16GetCustomerManagerLink\x12?.google.ads.googleads.v3.services.GetCustomerManagerLinkRequest\x1a\x36.google.ads.googleads.v3.resources.CustomerManagerLink\"N\x82\xd3\xe4\x93\x02\x38\x12\x36/v3/{resource_name=customers/*/customerManagerLinks/*}\xda\x41\rresource_name\x12\x83\x02\n\x19MutateCustomerManagerLink\x12\x42.google.ads.googleads.v3.services.MutateCustomerManagerLinkRequest\x1a\x43.google.ads.googleads.v3.services.MutateCustomerManagerLinkResponse\"]\x82\xd3\xe4\x93\x02>\"9/v3/customers/{customer_id=*}/customerManagerLinks:mutate:\x01*\xda\x41\x16\x63ustomer_id,operations\x12\x8f\x02\n\x0fMoveManagerLink\x12\x38.google.ads.googleads.v3.services.MoveManagerLinkRequest\x1a\x39.google.ads.googleads.v3.services.MoveManagerLinkResponse\"\x86\x01\x82\xd3\xe4\x93\x02G\"B/v3/customers/{customer_id=*}/customerManagerLinks:moveManagerLink:\x01*\xda\x41\x36\x63ustomer_id,previous_customer_manager_link,new_manager\x1a\x1b\xca\x41\x18googleads.googleapis.comB\x86\x02\n$com.google.ads.googleads.v3.servicesB\x1f\x43ustomerManagerLinkServiceProtoP\x01ZHgoogle.golang.org/genproto/googleapis/ads/googleads/v3/services;services\xa2\x02\x03GAA\xaa\x02 Google.Ads.GoogleAds.V3.Services\xca\x02 Google\\Ads\\GoogleAds\\V3\\Services\xea\x02$Google::Ads::GoogleAds::V3::Servicesb\x06proto3')
   ,
-  dependencies=[google_dot_ads_dot_googleads__v3_dot_proto_dot_resources_dot_customer__manager__link__pb2.DESCRIPTOR,google_dot_api_dot_annotations__pb2.DESCRIPTOR,google_dot_api_dot_client__pb2.DESCRIPTOR,google_dot_api_dot_field__behavior__pb2.DESCRIPTOR,google_dot_protobuf_dot_field__mask__pb2.DESCRIPTOR,])
+  dependencies=[google_dot_ads_dot_googleads__v3_dot_proto_dot_resources_dot_customer__manager__link__pb2.DESCRIPTOR,google_dot_api_dot_annotations__pb2.DESCRIPTOR,google_dot_api_dot_client__pb2.DESCRIPTOR,google_dot_api_dot_field__behavior__pb2.DESCRIPTOR,google_dot_api_dot_resource__pb2.DESCRIPTOR,google_dot_protobuf_dot_field__mask__pb2.DESCRIPTOR,])
 
 
 
@@ -45,7 +46,7 @@ _GETCUSTOMERMANAGERLINKREQUEST = _descriptor.Descriptor(
       has_default_value=False, default_value=_b("").decode('utf-8'),
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
-      serialized_options=_b('\340A\002'), file=DESCRIPTOR),
+      serialized_options=_b('\340A\002\372A.\n,googleads.googleapis.com/CustomerManagerLink'), file=DESCRIPTOR),
   ],
   extensions=[
   ],
@@ -58,8 +59,8 @@ _GETCUSTOMERMANAGERLINKREQUEST = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=303,
-  serialized_end=362,
+  serialized_start=330,
+  serialized_end=438,
 )
 
 
@@ -96,8 +97,8 @@ _MUTATECUSTOMERMANAGERLINKREQUEST = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=365,
-  serialized_end=514,
+  serialized_start=441,
+  serialized_end=590,
 )
 
 
@@ -141,8 +142,8 @@ _MOVEMANAGERLINKREQUEST = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=516,
-  serialized_end=637,
+  serialized_start=592,
+  serialized_end=713,
 )
 
 
@@ -182,8 +183,8 @@ _CUSTOMERMANAGERLINKOPERATION = _descriptor.Descriptor(
       name='operation', full_name='google.ads.googleads.v3.services.CustomerManagerLinkOperation.operation',
       index=0, containing_type=None, fields=[]),
   ],
-  serialized_start=640,
-  serialized_end=806,
+  serialized_start=716,
+  serialized_end=882,
 )
 
 
@@ -213,8 +214,8 @@ _MUTATECUSTOMERMANAGERLINKRESPONSE = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=808,
-  serialized_end=927,
+  serialized_start=884,
+  serialized_end=1003,
 )
 
 
@@ -244,8 +245,8 @@ _MOVEMANAGERLINKRESPONSE = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=929,
-  serialized_end=977,
+  serialized_start=1005,
+  serialized_end=1053,
 )
 
 
@@ -275,8 +276,8 @@ _MUTATECUSTOMERMANAGERLINKRESULT = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=979,
-  serialized_end=1035,
+  serialized_start=1055,
+  serialized_end=1111,
 )
 
 _MUTATECUSTOMERMANAGERLINKREQUEST.fields_by_name['operations'].message_type = _CUSTOMERMANAGERLINKOPERATION
@@ -445,8 +446,8 @@ _CUSTOMERMANAGERLINKSERVICE = _descriptor.ServiceDescriptor(
   file=DESCRIPTOR,
   index=0,
   serialized_options=_b('\312A\030googleads.googleapis.com'),
-  serialized_start=1038,
-  serialized_end=1859,
+  serialized_start=1114,
+  serialized_end=1935,
   methods=[
   _descriptor.MethodDescriptor(
     name='GetCustomerManagerLink',

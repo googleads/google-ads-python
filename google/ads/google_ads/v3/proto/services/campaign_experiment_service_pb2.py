@@ -17,6 +17,7 @@ from google.ads.google_ads.v3.proto.resources import campaign_experiment_pb2 as 
 from google.api import annotations_pb2 as google_dot_api_dot_annotations__pb2
 from google.api import client_pb2 as google_dot_api_dot_client__pb2
 from google.api import field_behavior_pb2 as google_dot_api_dot_field__behavior__pb2
+from google.api import resource_pb2 as google_dot_api_dot_resource__pb2
 from google.longrunning import operations_pb2 as google_dot_longrunning_dot_operations__pb2
 from google.protobuf import empty_pb2 as google_dot_protobuf_dot_empty__pb2
 from google.protobuf import field_mask_pb2 as google_dot_protobuf_dot_field__mask__pb2
@@ -28,9 +29,9 @@ DESCRIPTOR = _descriptor.FileDescriptor(
   package='google.ads.googleads.v3.services',
   syntax='proto3',
   serialized_options=_b('\n$com.google.ads.googleads.v3.servicesB\036CampaignExperimentServiceProtoP\001ZHgoogle.golang.org/genproto/googleapis/ads/googleads/v3/services;services\242\002\003GAA\252\002 Google.Ads.GoogleAds.V3.Services\312\002 Google\\Ads\\GoogleAds\\V3\\Services\352\002$Google::Ads::GoogleAds::V3::Services'),
-  serialized_pb=_b('\nHgoogle/ads/googleads_v3/proto/services/campaign_experiment_service.proto\x12 google.ads.googleads.v3.services\x1a\x41google/ads/googleads_v3/proto/resources/campaign_experiment.proto\x1a\x1cgoogle/api/annotations.proto\x1a\x17google/api/client.proto\x1a\x1fgoogle/api/field_behavior.proto\x1a#google/longrunning/operations.proto\x1a\x1bgoogle/protobuf/empty.proto\x1a google/protobuf/field_mask.proto\x1a\x17google/rpc/status.proto\":\n\x1cGetCampaignExperimentRequest\x12\x1a\n\rresource_name\x18\x01 \x01(\tB\x03\xe0\x41\x02\"\xc4\x01\n MutateCampaignExperimentsRequest\x12\x18\n\x0b\x63ustomer_id\x18\x01 \x01(\tB\x03\xe0\x41\x02\x12V\n\noperations\x18\x02 \x03(\x0b\x32=.google.ads.googleads.v3.services.CampaignExperimentOperationB\x03\xe0\x41\x02\x12\x17\n\x0fpartial_failure\x18\x03 \x01(\x08\x12\x15\n\rvalidate_only\x18\x04 \x01(\x08\"\xb6\x01\n\x1b\x43\x61mpaignExperimentOperation\x12/\n\x0bupdate_mask\x18\x03 \x01(\x0b\x32\x1a.google.protobuf.FieldMask\x12G\n\x06update\x18\x01 \x01(\x0b\x32\x35.google.ads.googleads.v3.resources.CampaignExperimentH\x00\x12\x10\n\x06remove\x18\x02 \x01(\tH\x00\x42\x0b\n\toperation\"\xa9\x01\n!MutateCampaignExperimentsResponse\x12\x31\n\x15partial_failure_error\x18\x03 \x01(\x0b\x32\x12.google.rpc.Status\x12Q\n\x07results\x18\x02 \x03(\x0b\x32@.google.ads.googleads.v3.services.MutateCampaignExperimentResult\"7\n\x1eMutateCampaignExperimentResult\x12\x15\n\rresource_name\x18\x01 \x01(\t\"\xab\x01\n\x1f\x43reateCampaignExperimentRequest\x12\x18\n\x0b\x63ustomer_id\x18\x01 \x01(\tB\x03\xe0\x41\x02\x12W\n\x13\x63\x61mpaign_experiment\x18\x02 \x01(\x0b\x32\x35.google.ads.googleads.v3.resources.CampaignExperimentB\x03\xe0\x41\x02\x12\x15\n\rvalidate_only\x18\x03 \x01(\x08\"?\n CreateCampaignExperimentMetadata\x12\x1b\n\x13\x63\x61mpaign_experiment\x18\x01 \x01(\t\"c\n!GraduateCampaignExperimentRequest\x12 \n\x13\x63\x61mpaign_experiment\x18\x01 \x01(\tB\x03\xe0\x41\x02\x12\x1c\n\x0f\x63\x61mpaign_budget\x18\x02 \x01(\tB\x03\xe0\x41\x02\"@\n\"GraduateCampaignExperimentResponse\x12\x1a\n\x12graduated_campaign\x18\x01 \x01(\t\"D\n PromoteCampaignExperimentRequest\x12 \n\x13\x63\x61mpaign_experiment\x18\x01 \x01(\tB\x03\xe0\x41\x02\"@\n\x1c\x45ndCampaignExperimentRequest\x12 \n\x13\x63\x61mpaign_experiment\x18\x01 \x01(\tB\x03\xe0\x41\x02\"m\n(ListCampaignExperimentAsyncErrorsRequest\x12\x1a\n\rresource_name\x18\x01 \x01(\tB\x03\xe0\x41\x02\x12\x12\n\npage_token\x18\x02 \x01(\t\x12\x11\n\tpage_size\x18\x03 \x01(\x05\"h\n)ListCampaignExperimentAsyncErrorsResponse\x12\"\n\x06\x65rrors\x18\x01 \x03(\x0b\x32\x12.google.rpc.Status\x12\x17\n\x0fnext_page_token\x18\x02 \x01(\t2\xf5\x0e\n\x19\x43\x61mpaignExperimentService\x12\xdd\x01\n\x15GetCampaignExperiment\x12>.google.ads.googleads.v3.services.GetCampaignExperimentRequest\x1a\x35.google.ads.googleads.v3.resources.CampaignExperiment\"M\x82\xd3\xe4\x93\x02\x37\x12\x35/v3/{resource_name=customers/*/campaignExperiments/*}\xda\x41\rresource_name\x12\xc1\x02\n\x18\x43reateCampaignExperiment\x12\x41.google.ads.googleads.v3.services.CreateCampaignExperimentRequest\x1a\x1d.google.longrunning.Operation\"\xc2\x01\x82\xd3\xe4\x93\x02=\"8/v3/customers/{customer_id=*}/campaignExperiments:create:\x01*\xda\x41\x1f\x63ustomer_id,campaign_experiment\xca\x41Z\n\x15google.protobuf.Empty\x12\x41google.ads.googleads.v3.services.CreateCampaignExperimentMetadata\x12\x82\x02\n\x19MutateCampaignExperiments\x12\x42.google.ads.googleads.v3.services.MutateCampaignExperimentsRequest\x1a\x43.google.ads.googleads.v3.services.MutateCampaignExperimentsResponse\"\\\x82\xd3\xe4\x93\x02=\"8/v3/customers/{customer_id=*}/campaignExperiments:mutate:\x01*\xda\x41\x16\x63ustomer_id,operations\x12\x9e\x02\n\x1aGraduateCampaignExperiment\x12\x43.google.ads.googleads.v3.services.GraduateCampaignExperimentRequest\x1a\x44.google.ads.googleads.v3.services.GraduateCampaignExperimentResponse\"u\x82\xd3\xe4\x93\x02I\"D/v3/{campaign_experiment=customers/*/campaignExperiments/*}:graduate:\x01*\xda\x41#campaign_experiment,campaign_budget\x12\xfe\x01\n\x19PromoteCampaignExperiment\x12\x42.google.ads.googleads.v3.services.PromoteCampaignExperimentRequest\x1a\x1d.google.longrunning.Operation\"~\x82\xd3\xe4\x93\x02H\"C/v3/{campaign_experiment=customers/*/campaignExperiments/*}:promote:\x01*\xda\x41\x13\x63\x61mpaign_experiment\xca\x41\x17\n\x15google.protobuf.Empty\x12\xd1\x01\n\x15\x45ndCampaignExperiment\x12>.google.ads.googleads.v3.services.EndCampaignExperimentRequest\x1a\x16.google.protobuf.Empty\"`\x82\xd3\xe4\x93\x02\x44\"?/v3/{campaign_experiment=customers/*/campaignExperiments/*}:end:\x01*\xda\x41\x13\x63\x61mpaign_experiment\x12\x9b\x02\n!ListCampaignExperimentAsyncErrors\x12J.google.ads.googleads.v3.services.ListCampaignExperimentAsyncErrorsRequest\x1aK.google.ads.googleads.v3.services.ListCampaignExperimentAsyncErrorsResponse\"]\x82\xd3\xe4\x93\x02G\x12\x45/v3/{resource_name=customers/*/campaignExperiments/*}:listAsyncErrors\xda\x41\rresource_name\x1a\x1b\xca\x41\x18googleads.googleapis.comB\x85\x02\n$com.google.ads.googleads.v3.servicesB\x1e\x43\x61mpaignExperimentServiceProtoP\x01ZHgoogle.golang.org/genproto/googleapis/ads/googleads/v3/services;services\xa2\x02\x03GAA\xaa\x02 Google.Ads.GoogleAds.V3.Services\xca\x02 Google\\Ads\\GoogleAds\\V3\\Services\xea\x02$Google::Ads::GoogleAds::V3::Servicesb\x06proto3')
+  serialized_pb=_b('\nHgoogle/ads/googleads_v3/proto/services/campaign_experiment_service.proto\x12 google.ads.googleads.v3.services\x1a\x41google/ads/googleads_v3/proto/resources/campaign_experiment.proto\x1a\x1cgoogle/api/annotations.proto\x1a\x17google/api/client.proto\x1a\x1fgoogle/api/field_behavior.proto\x1a\x19google/api/resource.proto\x1a#google/longrunning/operations.proto\x1a\x1bgoogle/protobuf/empty.proto\x1a google/protobuf/field_mask.proto\x1a\x17google/rpc/status.proto\"j\n\x1cGetCampaignExperimentRequest\x12J\n\rresource_name\x18\x01 \x01(\tB3\xe0\x41\x02\xfa\x41-\n+googleads.googleapis.com/CampaignExperiment\"\xc4\x01\n MutateCampaignExperimentsRequest\x12\x18\n\x0b\x63ustomer_id\x18\x01 \x01(\tB\x03\xe0\x41\x02\x12V\n\noperations\x18\x02 \x03(\x0b\x32=.google.ads.googleads.v3.services.CampaignExperimentOperationB\x03\xe0\x41\x02\x12\x17\n\x0fpartial_failure\x18\x03 \x01(\x08\x12\x15\n\rvalidate_only\x18\x04 \x01(\x08\"\xb6\x01\n\x1b\x43\x61mpaignExperimentOperation\x12/\n\x0bupdate_mask\x18\x03 \x01(\x0b\x32\x1a.google.protobuf.FieldMask\x12G\n\x06update\x18\x01 \x01(\x0b\x32\x35.google.ads.googleads.v3.resources.CampaignExperimentH\x00\x12\x10\n\x06remove\x18\x02 \x01(\tH\x00\x42\x0b\n\toperation\"\xa9\x01\n!MutateCampaignExperimentsResponse\x12\x31\n\x15partial_failure_error\x18\x03 \x01(\x0b\x32\x12.google.rpc.Status\x12Q\n\x07results\x18\x02 \x03(\x0b\x32@.google.ads.googleads.v3.services.MutateCampaignExperimentResult\"7\n\x1eMutateCampaignExperimentResult\x12\x15\n\rresource_name\x18\x01 \x01(\t\"\xab\x01\n\x1f\x43reateCampaignExperimentRequest\x12\x18\n\x0b\x63ustomer_id\x18\x01 \x01(\tB\x03\xe0\x41\x02\x12W\n\x13\x63\x61mpaign_experiment\x18\x02 \x01(\x0b\x32\x35.google.ads.googleads.v3.resources.CampaignExperimentB\x03\xe0\x41\x02\x12\x15\n\rvalidate_only\x18\x03 \x01(\x08\"?\n CreateCampaignExperimentMetadata\x12\x1b\n\x13\x63\x61mpaign_experiment\x18\x01 \x01(\t\"c\n!GraduateCampaignExperimentRequest\x12 \n\x13\x63\x61mpaign_experiment\x18\x01 \x01(\tB\x03\xe0\x41\x02\x12\x1c\n\x0f\x63\x61mpaign_budget\x18\x02 \x01(\tB\x03\xe0\x41\x02\"@\n\"GraduateCampaignExperimentResponse\x12\x1a\n\x12graduated_campaign\x18\x01 \x01(\t\"D\n PromoteCampaignExperimentRequest\x12 \n\x13\x63\x61mpaign_experiment\x18\x01 \x01(\tB\x03\xe0\x41\x02\"@\n\x1c\x45ndCampaignExperimentRequest\x12 \n\x13\x63\x61mpaign_experiment\x18\x01 \x01(\tB\x03\xe0\x41\x02\"\x9d\x01\n(ListCampaignExperimentAsyncErrorsRequest\x12J\n\rresource_name\x18\x01 \x01(\tB3\xe0\x41\x02\xfa\x41-\n+googleads.googleapis.com/CampaignExperiment\x12\x12\n\npage_token\x18\x02 \x01(\t\x12\x11\n\tpage_size\x18\x03 \x01(\x05\"h\n)ListCampaignExperimentAsyncErrorsResponse\x12\"\n\x06\x65rrors\x18\x01 \x03(\x0b\x32\x12.google.rpc.Status\x12\x17\n\x0fnext_page_token\x18\x02 \x01(\t2\x8d\x0f\n\x19\x43\x61mpaignExperimentService\x12\xdd\x01\n\x15GetCampaignExperiment\x12>.google.ads.googleads.v3.services.GetCampaignExperimentRequest\x1a\x35.google.ads.googleads.v3.resources.CampaignExperiment\"M\x82\xd3\xe4\x93\x02\x37\x12\x35/v3/{resource_name=customers/*/campaignExperiments/*}\xda\x41\rresource_name\x12\xc1\x02\n\x18\x43reateCampaignExperiment\x12\x41.google.ads.googleads.v3.services.CreateCampaignExperimentRequest\x1a\x1d.google.longrunning.Operation\"\xc2\x01\x82\xd3\xe4\x93\x02=\"8/v3/customers/{customer_id=*}/campaignExperiments:create:\x01*\xda\x41\x1f\x63ustomer_id,campaign_experiment\xca\x41Z\n\x15google.protobuf.Empty\x12\x41google.ads.googleads.v3.services.CreateCampaignExperimentMetadata\x12\x82\x02\n\x19MutateCampaignExperiments\x12\x42.google.ads.googleads.v3.services.MutateCampaignExperimentsRequest\x1a\x43.google.ads.googleads.v3.services.MutateCampaignExperimentsResponse\"\\\x82\xd3\xe4\x93\x02=\"8/v3/customers/{customer_id=*}/campaignExperiments:mutate:\x01*\xda\x41\x16\x63ustomer_id,operations\x12\x9e\x02\n\x1aGraduateCampaignExperiment\x12\x43.google.ads.googleads.v3.services.GraduateCampaignExperimentRequest\x1a\x44.google.ads.googleads.v3.services.GraduateCampaignExperimentResponse\"u\x82\xd3\xe4\x93\x02I\"D/v3/{campaign_experiment=customers/*/campaignExperiments/*}:graduate:\x01*\xda\x41#campaign_experiment,campaign_budget\x12\x96\x02\n\x19PromoteCampaignExperiment\x12\x42.google.ads.googleads.v3.services.PromoteCampaignExperimentRequest\x1a\x1d.google.longrunning.Operation\"\x95\x01\x82\xd3\xe4\x93\x02H\"C/v3/{campaign_experiment=customers/*/campaignExperiments/*}:promote:\x01*\xda\x41\x13\x63\x61mpaign_experiment\xca\x41.\n\x15google.protobuf.Empty\x12\x15google.protobuf.Empty\x12\xd1\x01\n\x15\x45ndCampaignExperiment\x12>.google.ads.googleads.v3.services.EndCampaignExperimentRequest\x1a\x16.google.protobuf.Empty\"`\x82\xd3\xe4\x93\x02\x44\"?/v3/{campaign_experiment=customers/*/campaignExperiments/*}:end:\x01*\xda\x41\x13\x63\x61mpaign_experiment\x12\x9b\x02\n!ListCampaignExperimentAsyncErrors\x12J.google.ads.googleads.v3.services.ListCampaignExperimentAsyncErrorsRequest\x1aK.google.ads.googleads.v3.services.ListCampaignExperimentAsyncErrorsResponse\"]\x82\xd3\xe4\x93\x02G\x12\x45/v3/{resource_name=customers/*/campaignExperiments/*}:listAsyncErrors\xda\x41\rresource_name\x1a\x1b\xca\x41\x18googleads.googleapis.comB\x85\x02\n$com.google.ads.googleads.v3.servicesB\x1e\x43\x61mpaignExperimentServiceProtoP\x01ZHgoogle.golang.org/genproto/googleapis/ads/googleads/v3/services;services\xa2\x02\x03GAA\xaa\x02 Google.Ads.GoogleAds.V3.Services\xca\x02 Google\\Ads\\GoogleAds\\V3\\Services\xea\x02$Google::Ads::GoogleAds::V3::Servicesb\x06proto3')
   ,
-  dependencies=[google_dot_ads_dot_googleads__v3_dot_proto_dot_resources_dot_campaign__experiment__pb2.DESCRIPTOR,google_dot_api_dot_annotations__pb2.DESCRIPTOR,google_dot_api_dot_client__pb2.DESCRIPTOR,google_dot_api_dot_field__behavior__pb2.DESCRIPTOR,google_dot_longrunning_dot_operations__pb2.DESCRIPTOR,google_dot_protobuf_dot_empty__pb2.DESCRIPTOR,google_dot_protobuf_dot_field__mask__pb2.DESCRIPTOR,google_dot_rpc_dot_status__pb2.DESCRIPTOR,])
+  dependencies=[google_dot_ads_dot_googleads__v3_dot_proto_dot_resources_dot_campaign__experiment__pb2.DESCRIPTOR,google_dot_api_dot_annotations__pb2.DESCRIPTOR,google_dot_api_dot_client__pb2.DESCRIPTOR,google_dot_api_dot_field__behavior__pb2.DESCRIPTOR,google_dot_api_dot_resource__pb2.DESCRIPTOR,google_dot_longrunning_dot_operations__pb2.DESCRIPTOR,google_dot_protobuf_dot_empty__pb2.DESCRIPTOR,google_dot_protobuf_dot_field__mask__pb2.DESCRIPTOR,google_dot_rpc_dot_status__pb2.DESCRIPTOR,])
 
 
 
@@ -48,7 +49,7 @@ _GETCAMPAIGNEXPERIMENTREQUEST = _descriptor.Descriptor(
       has_default_value=False, default_value=_b("").decode('utf-8'),
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
-      serialized_options=_b('\340A\002'), file=DESCRIPTOR),
+      serialized_options=_b('\340A\002\372A-\n+googleads.googleapis.com/CampaignExperiment'), file=DESCRIPTOR),
   ],
   extensions=[
   ],
@@ -61,8 +62,8 @@ _GETCAMPAIGNEXPERIMENTREQUEST = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=390,
-  serialized_end=448,
+  serialized_start=417,
+  serialized_end=523,
 )
 
 
@@ -113,8 +114,8 @@ _MUTATECAMPAIGNEXPERIMENTSREQUEST = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=451,
-  serialized_end=647,
+  serialized_start=526,
+  serialized_end=722,
 )
 
 
@@ -161,8 +162,8 @@ _CAMPAIGNEXPERIMENTOPERATION = _descriptor.Descriptor(
       name='operation', full_name='google.ads.googleads.v3.services.CampaignExperimentOperation.operation',
       index=0, containing_type=None, fields=[]),
   ],
-  serialized_start=650,
-  serialized_end=832,
+  serialized_start=725,
+  serialized_end=907,
 )
 
 
@@ -199,8 +200,8 @@ _MUTATECAMPAIGNEXPERIMENTSRESPONSE = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=835,
-  serialized_end=1004,
+  serialized_start=910,
+  serialized_end=1079,
 )
 
 
@@ -230,8 +231,8 @@ _MUTATECAMPAIGNEXPERIMENTRESULT = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=1006,
-  serialized_end=1061,
+  serialized_start=1081,
+  serialized_end=1136,
 )
 
 
@@ -275,8 +276,8 @@ _CREATECAMPAIGNEXPERIMENTREQUEST = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=1064,
-  serialized_end=1235,
+  serialized_start=1139,
+  serialized_end=1310,
 )
 
 
@@ -306,8 +307,8 @@ _CREATECAMPAIGNEXPERIMENTMETADATA = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=1237,
-  serialized_end=1300,
+  serialized_start=1312,
+  serialized_end=1375,
 )
 
 
@@ -344,8 +345,8 @@ _GRADUATECAMPAIGNEXPERIMENTREQUEST = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=1302,
-  serialized_end=1401,
+  serialized_start=1377,
+  serialized_end=1476,
 )
 
 
@@ -375,8 +376,8 @@ _GRADUATECAMPAIGNEXPERIMENTRESPONSE = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=1403,
-  serialized_end=1467,
+  serialized_start=1478,
+  serialized_end=1542,
 )
 
 
@@ -406,8 +407,8 @@ _PROMOTECAMPAIGNEXPERIMENTREQUEST = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=1469,
-  serialized_end=1537,
+  serialized_start=1544,
+  serialized_end=1612,
 )
 
 
@@ -437,8 +438,8 @@ _ENDCAMPAIGNEXPERIMENTREQUEST = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=1539,
-  serialized_end=1603,
+  serialized_start=1614,
+  serialized_end=1678,
 )
 
 
@@ -455,7 +456,7 @@ _LISTCAMPAIGNEXPERIMENTASYNCERRORSREQUEST = _descriptor.Descriptor(
       has_default_value=False, default_value=_b("").decode('utf-8'),
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
-      serialized_options=_b('\340A\002'), file=DESCRIPTOR),
+      serialized_options=_b('\340A\002\372A-\n+googleads.googleapis.com/CampaignExperiment'), file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
       name='page_token', full_name='google.ads.googleads.v3.services.ListCampaignExperimentAsyncErrorsRequest.page_token', index=1,
       number=2, type=9, cpp_type=9, label=1,
@@ -482,8 +483,8 @@ _LISTCAMPAIGNEXPERIMENTASYNCERRORSREQUEST = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=1605,
-  serialized_end=1714,
+  serialized_start=1681,
+  serialized_end=1838,
 )
 
 
@@ -520,8 +521,8 @@ _LISTCAMPAIGNEXPERIMENTASYNCERRORSRESPONSE = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=1716,
-  serialized_end=1820,
+  serialized_start=1840,
+  serialized_end=1944,
 )
 
 _MUTATECAMPAIGNEXPERIMENTSREQUEST.fields_by_name['operations'].message_type = _CAMPAIGNEXPERIMENTOPERATION
@@ -833,8 +834,8 @@ _CAMPAIGNEXPERIMENTSERVICE = _descriptor.ServiceDescriptor(
   file=DESCRIPTOR,
   index=0,
   serialized_options=_b('\312A\030googleads.googleapis.com'),
-  serialized_start=1823,
-  serialized_end=3732,
+  serialized_start=1947,
+  serialized_end=3880,
   methods=[
   _descriptor.MethodDescriptor(
     name='GetCampaignExperiment',
@@ -879,7 +880,7 @@ _CAMPAIGNEXPERIMENTSERVICE = _descriptor.ServiceDescriptor(
     containing_service=None,
     input_type=_PROMOTECAMPAIGNEXPERIMENTREQUEST,
     output_type=google_dot_longrunning_dot_operations__pb2._OPERATION,
-    serialized_options=_b('\202\323\344\223\002H\"C/v3/{campaign_experiment=customers/*/campaignExperiments/*}:promote:\001*\332A\023campaign_experiment\312A\027\n\025google.protobuf.Empty'),
+    serialized_options=_b('\202\323\344\223\002H\"C/v3/{campaign_experiment=customers/*/campaignExperiments/*}:promote:\001*\332A\023campaign_experiment\312A.\n\025google.protobuf.Empty\022\025google.protobuf.Empty'),
   ),
   _descriptor.MethodDescriptor(
     name='EndCampaignExperiment',

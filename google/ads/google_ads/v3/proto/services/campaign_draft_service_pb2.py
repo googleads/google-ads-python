@@ -17,6 +17,7 @@ from google.ads.google_ads.v3.proto.resources import campaign_draft_pb2 as googl
 from google.api import annotations_pb2 as google_dot_api_dot_annotations__pb2
 from google.api import client_pb2 as google_dot_api_dot_client__pb2
 from google.api import field_behavior_pb2 as google_dot_api_dot_field__behavior__pb2
+from google.api import resource_pb2 as google_dot_api_dot_resource__pb2
 from google.longrunning import operations_pb2 as google_dot_longrunning_dot_operations__pb2
 from google.protobuf import field_mask_pb2 as google_dot_protobuf_dot_field__mask__pb2
 from google.rpc import status_pb2 as google_dot_rpc_dot_status__pb2
@@ -27,9 +28,9 @@ DESCRIPTOR = _descriptor.FileDescriptor(
   package='google.ads.googleads.v3.services',
   syntax='proto3',
   serialized_options=_b('\n$com.google.ads.googleads.v3.servicesB\031CampaignDraftServiceProtoP\001ZHgoogle.golang.org/genproto/googleapis/ads/googleads/v3/services;services\242\002\003GAA\252\002 Google.Ads.GoogleAds.V3.Services\312\002 Google\\Ads\\GoogleAds\\V3\\Services\352\002$Google::Ads::GoogleAds::V3::Services'),
-  serialized_pb=_b('\nCgoogle/ads/googleads_v3/proto/services/campaign_draft_service.proto\x12 google.ads.googleads.v3.services\x1a<google/ads/googleads_v3/proto/resources/campaign_draft.proto\x1a\x1cgoogle/api/annotations.proto\x1a\x17google/api/client.proto\x1a\x1fgoogle/api/field_behavior.proto\x1a#google/longrunning/operations.proto\x1a google/protobuf/field_mask.proto\x1a\x17google/rpc/status.proto\"5\n\x17GetCampaignDraftRequest\x12\x1a\n\rresource_name\x18\x01 \x01(\tB\x03\xe0\x41\x02\"\xba\x01\n\x1bMutateCampaignDraftsRequest\x12\x18\n\x0b\x63ustomer_id\x18\x01 \x01(\tB\x03\xe0\x41\x02\x12Q\n\noperations\x18\x02 \x03(\x0b\x32\x38.google.ads.googleads.v3.services.CampaignDraftOperationB\x03\xe0\x41\x02\x12\x17\n\x0fpartial_failure\x18\x03 \x01(\x08\x12\x15\n\rvalidate_only\x18\x04 \x01(\x08\":\n\x1bPromoteCampaignDraftRequest\x12\x1b\n\x0e\x63\x61mpaign_draft\x18\x01 \x01(\tB\x03\xe0\x41\x02\"\xf0\x01\n\x16\x43\x61mpaignDraftOperation\x12/\n\x0bupdate_mask\x18\x04 \x01(\x0b\x32\x1a.google.protobuf.FieldMask\x12\x42\n\x06\x63reate\x18\x01 \x01(\x0b\x32\x30.google.ads.googleads.v3.resources.CampaignDraftH\x00\x12\x42\n\x06update\x18\x02 \x01(\x0b\x32\x30.google.ads.googleads.v3.resources.CampaignDraftH\x00\x12\x10\n\x06remove\x18\x03 \x01(\tH\x00\x42\x0b\n\toperation\"\x9f\x01\n\x1cMutateCampaignDraftsResponse\x12\x31\n\x15partial_failure_error\x18\x03 \x01(\x0b\x32\x12.google.rpc.Status\x12L\n\x07results\x18\x02 \x03(\x0b\x32;.google.ads.googleads.v3.services.MutateCampaignDraftResult\"2\n\x19MutateCampaignDraftResult\x12\x15\n\rresource_name\x18\x01 \x01(\t\"h\n#ListCampaignDraftAsyncErrorsRequest\x12\x1a\n\rresource_name\x18\x01 \x01(\tB\x03\xe0\x41\x02\x12\x12\n\npage_token\x18\x02 \x01(\t\x12\x11\n\tpage_size\x18\x03 \x01(\x05\"c\n$ListCampaignDraftAsyncErrorsResponse\x12\"\n\x06\x65rrors\x18\x01 \x03(\x0b\x32\x12.google.rpc.Status\x12\x17\n\x0fnext_page_token\x18\x02 \x01(\t2\xe2\x07\n\x14\x43\x61mpaignDraftService\x12\xc9\x01\n\x10GetCampaignDraft\x12\x39.google.ads.googleads.v3.services.GetCampaignDraftRequest\x1a\x30.google.ads.googleads.v3.resources.CampaignDraft\"H\x82\xd3\xe4\x93\x02\x32\x12\x30/v3/{resource_name=customers/*/campaignDrafts/*}\xda\x41\rresource_name\x12\xee\x01\n\x14MutateCampaignDrafts\x12=.google.ads.googleads.v3.services.MutateCampaignDraftsRequest\x1a>.google.ads.googleads.v3.services.MutateCampaignDraftsResponse\"W\x82\xd3\xe4\x93\x02\x38\"3/v3/customers/{customer_id=*}/campaignDrafts:mutate:\x01*\xda\x41\x16\x63ustomer_id,operations\x12\xe5\x01\n\x14PromoteCampaignDraft\x12=.google.ads.googleads.v3.services.PromoteCampaignDraftRequest\x1a\x1d.google.longrunning.Operation\"o\x82\xd3\xe4\x93\x02>\"9/v3/{campaign_draft=customers/*/campaignDrafts/*}:promote:\x01*\xda\x41\x0e\x63\x61mpaign_draft\xca\x41\x17\n\x15google.protobuf.Empty\x12\x87\x02\n\x1cListCampaignDraftAsyncErrors\x12\x45.google.ads.googleads.v3.services.ListCampaignDraftAsyncErrorsRequest\x1a\x46.google.ads.googleads.v3.services.ListCampaignDraftAsyncErrorsResponse\"X\x82\xd3\xe4\x93\x02\x42\x12@/v3/{resource_name=customers/*/campaignDrafts/*}:listAsyncErrors\xda\x41\rresource_name\x1a\x1b\xca\x41\x18googleads.googleapis.comB\x80\x02\n$com.google.ads.googleads.v3.servicesB\x19\x43\x61mpaignDraftServiceProtoP\x01ZHgoogle.golang.org/genproto/googleapis/ads/googleads/v3/services;services\xa2\x02\x03GAA\xaa\x02 Google.Ads.GoogleAds.V3.Services\xca\x02 Google\\Ads\\GoogleAds\\V3\\Services\xea\x02$Google::Ads::GoogleAds::V3::Servicesb\x06proto3')
+  serialized_pb=_b('\nCgoogle/ads/googleads_v3/proto/services/campaign_draft_service.proto\x12 google.ads.googleads.v3.services\x1a<google/ads/googleads_v3/proto/resources/campaign_draft.proto\x1a\x1cgoogle/api/annotations.proto\x1a\x17google/api/client.proto\x1a\x1fgoogle/api/field_behavior.proto\x1a\x19google/api/resource.proto\x1a#google/longrunning/operations.proto\x1a google/protobuf/field_mask.proto\x1a\x17google/rpc/status.proto\"`\n\x17GetCampaignDraftRequest\x12\x45\n\rresource_name\x18\x01 \x01(\tB.\xe0\x41\x02\xfa\x41(\n&googleads.googleapis.com/CampaignDraft\"\xba\x01\n\x1bMutateCampaignDraftsRequest\x12\x18\n\x0b\x63ustomer_id\x18\x01 \x01(\tB\x03\xe0\x41\x02\x12Q\n\noperations\x18\x02 \x03(\x0b\x32\x38.google.ads.googleads.v3.services.CampaignDraftOperationB\x03\xe0\x41\x02\x12\x17\n\x0fpartial_failure\x18\x03 \x01(\x08\x12\x15\n\rvalidate_only\x18\x04 \x01(\x08\":\n\x1bPromoteCampaignDraftRequest\x12\x1b\n\x0e\x63\x61mpaign_draft\x18\x01 \x01(\tB\x03\xe0\x41\x02\"\xf0\x01\n\x16\x43\x61mpaignDraftOperation\x12/\n\x0bupdate_mask\x18\x04 \x01(\x0b\x32\x1a.google.protobuf.FieldMask\x12\x42\n\x06\x63reate\x18\x01 \x01(\x0b\x32\x30.google.ads.googleads.v3.resources.CampaignDraftH\x00\x12\x42\n\x06update\x18\x02 \x01(\x0b\x32\x30.google.ads.googleads.v3.resources.CampaignDraftH\x00\x12\x10\n\x06remove\x18\x03 \x01(\tH\x00\x42\x0b\n\toperation\"\x9f\x01\n\x1cMutateCampaignDraftsResponse\x12\x31\n\x15partial_failure_error\x18\x03 \x01(\x0b\x32\x12.google.rpc.Status\x12L\n\x07results\x18\x02 \x03(\x0b\x32;.google.ads.googleads.v3.services.MutateCampaignDraftResult\"2\n\x19MutateCampaignDraftResult\x12\x15\n\rresource_name\x18\x01 \x01(\t\"\x93\x01\n#ListCampaignDraftAsyncErrorsRequest\x12\x45\n\rresource_name\x18\x01 \x01(\tB.\xe0\x41\x02\xfa\x41(\n&googleads.googleapis.com/CampaignDraft\x12\x12\n\npage_token\x18\x02 \x01(\t\x12\x11\n\tpage_size\x18\x03 \x01(\x05\"c\n$ListCampaignDraftAsyncErrorsResponse\x12\"\n\x06\x65rrors\x18\x01 \x03(\x0b\x32\x12.google.rpc.Status\x12\x17\n\x0fnext_page_token\x18\x02 \x01(\t2\xfa\x07\n\x14\x43\x61mpaignDraftService\x12\xc9\x01\n\x10GetCampaignDraft\x12\x39.google.ads.googleads.v3.services.GetCampaignDraftRequest\x1a\x30.google.ads.googleads.v3.resources.CampaignDraft\"H\x82\xd3\xe4\x93\x02\x32\x12\x30/v3/{resource_name=customers/*/campaignDrafts/*}\xda\x41\rresource_name\x12\xee\x01\n\x14MutateCampaignDrafts\x12=.google.ads.googleads.v3.services.MutateCampaignDraftsRequest\x1a>.google.ads.googleads.v3.services.MutateCampaignDraftsResponse\"W\x82\xd3\xe4\x93\x02\x38\"3/v3/customers/{customer_id=*}/campaignDrafts:mutate:\x01*\xda\x41\x16\x63ustomer_id,operations\x12\xfd\x01\n\x14PromoteCampaignDraft\x12=.google.ads.googleads.v3.services.PromoteCampaignDraftRequest\x1a\x1d.google.longrunning.Operation\"\x86\x01\x82\xd3\xe4\x93\x02>\"9/v3/{campaign_draft=customers/*/campaignDrafts/*}:promote:\x01*\xda\x41\x0e\x63\x61mpaign_draft\xca\x41.\n\x15google.protobuf.Empty\x12\x15google.protobuf.Empty\x12\x87\x02\n\x1cListCampaignDraftAsyncErrors\x12\x45.google.ads.googleads.v3.services.ListCampaignDraftAsyncErrorsRequest\x1a\x46.google.ads.googleads.v3.services.ListCampaignDraftAsyncErrorsResponse\"X\x82\xd3\xe4\x93\x02\x42\x12@/v3/{resource_name=customers/*/campaignDrafts/*}:listAsyncErrors\xda\x41\rresource_name\x1a\x1b\xca\x41\x18googleads.googleapis.comB\x80\x02\n$com.google.ads.googleads.v3.servicesB\x19\x43\x61mpaignDraftServiceProtoP\x01ZHgoogle.golang.org/genproto/googleapis/ads/googleads/v3/services;services\xa2\x02\x03GAA\xaa\x02 Google.Ads.GoogleAds.V3.Services\xca\x02 Google\\Ads\\GoogleAds\\V3\\Services\xea\x02$Google::Ads::GoogleAds::V3::Servicesb\x06proto3')
   ,
-  dependencies=[google_dot_ads_dot_googleads__v3_dot_proto_dot_resources_dot_campaign__draft__pb2.DESCRIPTOR,google_dot_api_dot_annotations__pb2.DESCRIPTOR,google_dot_api_dot_client__pb2.DESCRIPTOR,google_dot_api_dot_field__behavior__pb2.DESCRIPTOR,google_dot_longrunning_dot_operations__pb2.DESCRIPTOR,google_dot_protobuf_dot_field__mask__pb2.DESCRIPTOR,google_dot_rpc_dot_status__pb2.DESCRIPTOR,])
+  dependencies=[google_dot_ads_dot_googleads__v3_dot_proto_dot_resources_dot_campaign__draft__pb2.DESCRIPTOR,google_dot_api_dot_annotations__pb2.DESCRIPTOR,google_dot_api_dot_client__pb2.DESCRIPTOR,google_dot_api_dot_field__behavior__pb2.DESCRIPTOR,google_dot_api_dot_resource__pb2.DESCRIPTOR,google_dot_longrunning_dot_operations__pb2.DESCRIPTOR,google_dot_protobuf_dot_field__mask__pb2.DESCRIPTOR,google_dot_rpc_dot_status__pb2.DESCRIPTOR,])
 
 
 
@@ -47,7 +48,7 @@ _GETCAMPAIGNDRAFTREQUEST = _descriptor.Descriptor(
       has_default_value=False, default_value=_b("").decode('utf-8'),
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
-      serialized_options=_b('\340A\002'), file=DESCRIPTOR),
+      serialized_options=_b('\340A\002\372A(\n&googleads.googleapis.com/CampaignDraft'), file=DESCRIPTOR),
   ],
   extensions=[
   ],
@@ -60,8 +61,8 @@ _GETCAMPAIGNDRAFTREQUEST = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=351,
-  serialized_end=404,
+  serialized_start=378,
+  serialized_end=474,
 )
 
 
@@ -112,8 +113,8 @@ _MUTATECAMPAIGNDRAFTSREQUEST = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=407,
-  serialized_end=593,
+  serialized_start=477,
+  serialized_end=663,
 )
 
 
@@ -143,8 +144,8 @@ _PROMOTECAMPAIGNDRAFTREQUEST = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=595,
-  serialized_end=653,
+  serialized_start=665,
+  serialized_end=723,
 )
 
 
@@ -198,8 +199,8 @@ _CAMPAIGNDRAFTOPERATION = _descriptor.Descriptor(
       name='operation', full_name='google.ads.googleads.v3.services.CampaignDraftOperation.operation',
       index=0, containing_type=None, fields=[]),
   ],
-  serialized_start=656,
-  serialized_end=896,
+  serialized_start=726,
+  serialized_end=966,
 )
 
 
@@ -236,8 +237,8 @@ _MUTATECAMPAIGNDRAFTSRESPONSE = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=899,
-  serialized_end=1058,
+  serialized_start=969,
+  serialized_end=1128,
 )
 
 
@@ -267,8 +268,8 @@ _MUTATECAMPAIGNDRAFTRESULT = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=1060,
-  serialized_end=1110,
+  serialized_start=1130,
+  serialized_end=1180,
 )
 
 
@@ -285,7 +286,7 @@ _LISTCAMPAIGNDRAFTASYNCERRORSREQUEST = _descriptor.Descriptor(
       has_default_value=False, default_value=_b("").decode('utf-8'),
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
-      serialized_options=_b('\340A\002'), file=DESCRIPTOR),
+      serialized_options=_b('\340A\002\372A(\n&googleads.googleapis.com/CampaignDraft'), file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
       name='page_token', full_name='google.ads.googleads.v3.services.ListCampaignDraftAsyncErrorsRequest.page_token', index=1,
       number=2, type=9, cpp_type=9, label=1,
@@ -312,8 +313,8 @@ _LISTCAMPAIGNDRAFTASYNCERRORSREQUEST = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=1112,
-  serialized_end=1216,
+  serialized_start=1183,
+  serialized_end=1330,
 )
 
 
@@ -350,8 +351,8 @@ _LISTCAMPAIGNDRAFTASYNCERRORSRESPONSE = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=1218,
-  serialized_end=1317,
+  serialized_start=1332,
+  serialized_end=1431,
 )
 
 _MUTATECAMPAIGNDRAFTSREQUEST.fields_by_name['operations'].message_type = _CAMPAIGNDRAFTOPERATION
@@ -566,8 +567,8 @@ _CAMPAIGNDRAFTSERVICE = _descriptor.ServiceDescriptor(
   file=DESCRIPTOR,
   index=0,
   serialized_options=_b('\312A\030googleads.googleapis.com'),
-  serialized_start=1320,
-  serialized_end=2314,
+  serialized_start=1434,
+  serialized_end=2452,
   methods=[
   _descriptor.MethodDescriptor(
     name='GetCampaignDraft',
@@ -594,7 +595,7 @@ _CAMPAIGNDRAFTSERVICE = _descriptor.ServiceDescriptor(
     containing_service=None,
     input_type=_PROMOTECAMPAIGNDRAFTREQUEST,
     output_type=google_dot_longrunning_dot_operations__pb2._OPERATION,
-    serialized_options=_b('\202\323\344\223\002>\"9/v3/{campaign_draft=customers/*/campaignDrafts/*}:promote:\001*\332A\016campaign_draft\312A\027\n\025google.protobuf.Empty'),
+    serialized_options=_b('\202\323\344\223\002>\"9/v3/{campaign_draft=customers/*/campaignDrafts/*}:promote:\001*\332A\016campaign_draft\312A.\n\025google.protobuf.Empty\022\025google.protobuf.Empty'),
   ),
   _descriptor.MethodDescriptor(
     name='ListCampaignDraftAsyncErrors',

@@ -17,6 +17,7 @@ from google.ads.google_ads.v3.proto.resources import campaign_feed_pb2 as google
 from google.api import annotations_pb2 as google_dot_api_dot_annotations__pb2
 from google.api import client_pb2 as google_dot_api_dot_client__pb2
 from google.api import field_behavior_pb2 as google_dot_api_dot_field__behavior__pb2
+from google.api import resource_pb2 as google_dot_api_dot_resource__pb2
 from google.protobuf import field_mask_pb2 as google_dot_protobuf_dot_field__mask__pb2
 from google.rpc import status_pb2 as google_dot_rpc_dot_status__pb2
 
@@ -26,9 +27,9 @@ DESCRIPTOR = _descriptor.FileDescriptor(
   package='google.ads.googleads.v3.services',
   syntax='proto3',
   serialized_options=_b('\n$com.google.ads.googleads.v3.servicesB\030CampaignFeedServiceProtoP\001ZHgoogle.golang.org/genproto/googleapis/ads/googleads/v3/services;services\242\002\003GAA\252\002 Google.Ads.GoogleAds.V3.Services\312\002 Google\\Ads\\GoogleAds\\V3\\Services\352\002$Google::Ads::GoogleAds::V3::Services'),
-  serialized_pb=_b('\nBgoogle/ads/googleads_v3/proto/services/campaign_feed_service.proto\x12 google.ads.googleads.v3.services\x1a;google/ads/googleads_v3/proto/resources/campaign_feed.proto\x1a\x1cgoogle/api/annotations.proto\x1a\x17google/api/client.proto\x1a\x1fgoogle/api/field_behavior.proto\x1a google/protobuf/field_mask.proto\x1a\x17google/rpc/status.proto\"4\n\x16GetCampaignFeedRequest\x12\x1a\n\rresource_name\x18\x01 \x01(\tB\x03\xe0\x41\x02\"\xb8\x01\n\x1aMutateCampaignFeedsRequest\x12\x18\n\x0b\x63ustomer_id\x18\x01 \x01(\tB\x03\xe0\x41\x02\x12P\n\noperations\x18\x02 \x03(\x0b\x32\x37.google.ads.googleads.v3.services.CampaignFeedOperationB\x03\xe0\x41\x02\x12\x17\n\x0fpartial_failure\x18\x03 \x01(\x08\x12\x15\n\rvalidate_only\x18\x04 \x01(\x08\"\xed\x01\n\x15\x43\x61mpaignFeedOperation\x12/\n\x0bupdate_mask\x18\x04 \x01(\x0b\x32\x1a.google.protobuf.FieldMask\x12\x41\n\x06\x63reate\x18\x01 \x01(\x0b\x32/.google.ads.googleads.v3.resources.CampaignFeedH\x00\x12\x41\n\x06update\x18\x02 \x01(\x0b\x32/.google.ads.googleads.v3.resources.CampaignFeedH\x00\x12\x10\n\x06remove\x18\x03 \x01(\tH\x00\x42\x0b\n\toperation\"\x9d\x01\n\x1bMutateCampaignFeedsResponse\x12\x31\n\x15partial_failure_error\x18\x03 \x01(\x0b\x32\x12.google.rpc.Status\x12K\n\x07results\x18\x02 \x03(\x0b\x32:.google.ads.googleads.v3.services.MutateCampaignFeedResult\"1\n\x18MutateCampaignFeedResult\x12\x15\n\rresource_name\x18\x01 \x01(\t2\xe7\x03\n\x13\x43\x61mpaignFeedService\x12\xc5\x01\n\x0fGetCampaignFeed\x12\x38.google.ads.googleads.v3.services.GetCampaignFeedRequest\x1a/.google.ads.googleads.v3.resources.CampaignFeed\"G\x82\xd3\xe4\x93\x02\x31\x12//v3/{resource_name=customers/*/campaignFeeds/*}\xda\x41\rresource_name\x12\xea\x01\n\x13MutateCampaignFeeds\x12<.google.ads.googleads.v3.services.MutateCampaignFeedsRequest\x1a=.google.ads.googleads.v3.services.MutateCampaignFeedsResponse\"V\x82\xd3\xe4\x93\x02\x37\"2/v3/customers/{customer_id=*}/campaignFeeds:mutate:\x01*\xda\x41\x16\x63ustomer_id,operations\x1a\x1b\xca\x41\x18googleads.googleapis.comB\xff\x01\n$com.google.ads.googleads.v3.servicesB\x18\x43\x61mpaignFeedServiceProtoP\x01ZHgoogle.golang.org/genproto/googleapis/ads/googleads/v3/services;services\xa2\x02\x03GAA\xaa\x02 Google.Ads.GoogleAds.V3.Services\xca\x02 Google\\Ads\\GoogleAds\\V3\\Services\xea\x02$Google::Ads::GoogleAds::V3::Servicesb\x06proto3')
+  serialized_pb=_b('\nBgoogle/ads/googleads_v3/proto/services/campaign_feed_service.proto\x12 google.ads.googleads.v3.services\x1a;google/ads/googleads_v3/proto/resources/campaign_feed.proto\x1a\x1cgoogle/api/annotations.proto\x1a\x17google/api/client.proto\x1a\x1fgoogle/api/field_behavior.proto\x1a\x19google/api/resource.proto\x1a google/protobuf/field_mask.proto\x1a\x17google/rpc/status.proto\"^\n\x16GetCampaignFeedRequest\x12\x44\n\rresource_name\x18\x01 \x01(\tB-\xe0\x41\x02\xfa\x41\'\n%googleads.googleapis.com/CampaignFeed\"\xb8\x01\n\x1aMutateCampaignFeedsRequest\x12\x18\n\x0b\x63ustomer_id\x18\x01 \x01(\tB\x03\xe0\x41\x02\x12P\n\noperations\x18\x02 \x03(\x0b\x32\x37.google.ads.googleads.v3.services.CampaignFeedOperationB\x03\xe0\x41\x02\x12\x17\n\x0fpartial_failure\x18\x03 \x01(\x08\x12\x15\n\rvalidate_only\x18\x04 \x01(\x08\"\xed\x01\n\x15\x43\x61mpaignFeedOperation\x12/\n\x0bupdate_mask\x18\x04 \x01(\x0b\x32\x1a.google.protobuf.FieldMask\x12\x41\n\x06\x63reate\x18\x01 \x01(\x0b\x32/.google.ads.googleads.v3.resources.CampaignFeedH\x00\x12\x41\n\x06update\x18\x02 \x01(\x0b\x32/.google.ads.googleads.v3.resources.CampaignFeedH\x00\x12\x10\n\x06remove\x18\x03 \x01(\tH\x00\x42\x0b\n\toperation\"\x9d\x01\n\x1bMutateCampaignFeedsResponse\x12\x31\n\x15partial_failure_error\x18\x03 \x01(\x0b\x32\x12.google.rpc.Status\x12K\n\x07results\x18\x02 \x03(\x0b\x32:.google.ads.googleads.v3.services.MutateCampaignFeedResult\"1\n\x18MutateCampaignFeedResult\x12\x15\n\rresource_name\x18\x01 \x01(\t2\xe7\x03\n\x13\x43\x61mpaignFeedService\x12\xc5\x01\n\x0fGetCampaignFeed\x12\x38.google.ads.googleads.v3.services.GetCampaignFeedRequest\x1a/.google.ads.googleads.v3.resources.CampaignFeed\"G\x82\xd3\xe4\x93\x02\x31\x12//v3/{resource_name=customers/*/campaignFeeds/*}\xda\x41\rresource_name\x12\xea\x01\n\x13MutateCampaignFeeds\x12<.google.ads.googleads.v3.services.MutateCampaignFeedsRequest\x1a=.google.ads.googleads.v3.services.MutateCampaignFeedsResponse\"V\x82\xd3\xe4\x93\x02\x37\"2/v3/customers/{customer_id=*}/campaignFeeds:mutate:\x01*\xda\x41\x16\x63ustomer_id,operations\x1a\x1b\xca\x41\x18googleads.googleapis.comB\xff\x01\n$com.google.ads.googleads.v3.servicesB\x18\x43\x61mpaignFeedServiceProtoP\x01ZHgoogle.golang.org/genproto/googleapis/ads/googleads/v3/services;services\xa2\x02\x03GAA\xaa\x02 Google.Ads.GoogleAds.V3.Services\xca\x02 Google\\Ads\\GoogleAds\\V3\\Services\xea\x02$Google::Ads::GoogleAds::V3::Servicesb\x06proto3')
   ,
-  dependencies=[google_dot_ads_dot_googleads__v3_dot_proto_dot_resources_dot_campaign__feed__pb2.DESCRIPTOR,google_dot_api_dot_annotations__pb2.DESCRIPTOR,google_dot_api_dot_client__pb2.DESCRIPTOR,google_dot_api_dot_field__behavior__pb2.DESCRIPTOR,google_dot_protobuf_dot_field__mask__pb2.DESCRIPTOR,google_dot_rpc_dot_status__pb2.DESCRIPTOR,])
+  dependencies=[google_dot_ads_dot_googleads__v3_dot_proto_dot_resources_dot_campaign__feed__pb2.DESCRIPTOR,google_dot_api_dot_annotations__pb2.DESCRIPTOR,google_dot_api_dot_client__pb2.DESCRIPTOR,google_dot_api_dot_field__behavior__pb2.DESCRIPTOR,google_dot_api_dot_resource__pb2.DESCRIPTOR,google_dot_protobuf_dot_field__mask__pb2.DESCRIPTOR,google_dot_rpc_dot_status__pb2.DESCRIPTOR,])
 
 
 
@@ -46,7 +47,7 @@ _GETCAMPAIGNFEEDREQUEST = _descriptor.Descriptor(
       has_default_value=False, default_value=_b("").decode('utf-8'),
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
-      serialized_options=_b('\340A\002'), file=DESCRIPTOR),
+      serialized_options=_b('\340A\002\372A\'\n%googleads.googleapis.com/CampaignFeed'), file=DESCRIPTOR),
   ],
   extensions=[
   ],
@@ -59,8 +60,8 @@ _GETCAMPAIGNFEEDREQUEST = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=312,
-  serialized_end=364,
+  serialized_start=339,
+  serialized_end=433,
 )
 
 
@@ -111,8 +112,8 @@ _MUTATECAMPAIGNFEEDSREQUEST = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=367,
-  serialized_end=551,
+  serialized_start=436,
+  serialized_end=620,
 )
 
 
@@ -166,8 +167,8 @@ _CAMPAIGNFEEDOPERATION = _descriptor.Descriptor(
       name='operation', full_name='google.ads.googleads.v3.services.CampaignFeedOperation.operation',
       index=0, containing_type=None, fields=[]),
   ],
-  serialized_start=554,
-  serialized_end=791,
+  serialized_start=623,
+  serialized_end=860,
 )
 
 
@@ -204,8 +205,8 @@ _MUTATECAMPAIGNFEEDSRESPONSE = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=794,
-  serialized_end=951,
+  serialized_start=863,
+  serialized_end=1020,
 )
 
 
@@ -235,8 +236,8 @@ _MUTATECAMPAIGNFEEDRESULT = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=953,
-  serialized_end=1002,
+  serialized_start=1022,
+  serialized_end=1071,
 )
 
 _MUTATECAMPAIGNFEEDSREQUEST.fields_by_name['operations'].message_type = _CAMPAIGNFEEDOPERATION
@@ -381,8 +382,8 @@ _CAMPAIGNFEEDSERVICE = _descriptor.ServiceDescriptor(
   file=DESCRIPTOR,
   index=0,
   serialized_options=_b('\312A\030googleads.googleapis.com'),
-  serialized_start=1005,
-  serialized_end=1492,
+  serialized_start=1074,
+  serialized_end=1561,
   methods=[
   _descriptor.MethodDescriptor(
     name='GetCampaignFeed',

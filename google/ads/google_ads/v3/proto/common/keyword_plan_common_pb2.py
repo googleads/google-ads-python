@@ -76,12 +76,15 @@ KeywordPlanHistoricalMetrics = _reflection.GeneratedProtocolMessageType('Keyword
   DESCRIPTOR = _KEYWORDPLANHISTORICALMETRICS,
   __module__ = 'google.ads.googleads_v3.proto.common.keyword_plan_common_pb2'
   ,
-  __doc__ = """Historical metrics.
+  __doc__ = """Historical metrics specific to the targeting options selected. Targeting
+  options include geographies, network, etc. Refer to
+  https://support.google.com/google-ads/answer/3022575 for more details.
   
   
   Attributes:
       avg_monthly_searches:
-          Average monthly searches for the past 12 months.
+          Approximate number of monthly searches on this query averaged
+          for the past 12 months.
       competition:
           The competition level for the query.
   """,

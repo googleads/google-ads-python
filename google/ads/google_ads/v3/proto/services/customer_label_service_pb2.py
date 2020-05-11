@@ -17,6 +17,7 @@ from google.ads.google_ads.v3.proto.resources import customer_label_pb2 as googl
 from google.api import annotations_pb2 as google_dot_api_dot_annotations__pb2
 from google.api import client_pb2 as google_dot_api_dot_client__pb2
 from google.api import field_behavior_pb2 as google_dot_api_dot_field__behavior__pb2
+from google.api import resource_pb2 as google_dot_api_dot_resource__pb2
 from google.rpc import status_pb2 as google_dot_rpc_dot_status__pb2
 
 
@@ -25,9 +26,9 @@ DESCRIPTOR = _descriptor.FileDescriptor(
   package='google.ads.googleads.v3.services',
   syntax='proto3',
   serialized_options=_b('\n$com.google.ads.googleads.v3.servicesB\031CustomerLabelServiceProtoP\001ZHgoogle.golang.org/genproto/googleapis/ads/googleads/v3/services;services\242\002\003GAA\252\002 Google.Ads.GoogleAds.V3.Services\312\002 Google\\Ads\\GoogleAds\\V3\\Services\352\002$Google::Ads::GoogleAds::V3::Services'),
-  serialized_pb=_b('\nCgoogle/ads/googleads_v3/proto/services/customer_label_service.proto\x12 google.ads.googleads.v3.services\x1a<google/ads/googleads_v3/proto/resources/customer_label.proto\x1a\x1cgoogle/api/annotations.proto\x1a\x17google/api/client.proto\x1a\x1fgoogle/api/field_behavior.proto\x1a\x17google/rpc/status.proto\"5\n\x17GetCustomerLabelRequest\x12\x1a\n\rresource_name\x18\x01 \x01(\tB\x03\xe0\x41\x02\"\xba\x01\n\x1bMutateCustomerLabelsRequest\x12\x18\n\x0b\x63ustomer_id\x18\x01 \x01(\tB\x03\xe0\x41\x02\x12Q\n\noperations\x18\x02 \x03(\x0b\x32\x38.google.ads.googleads.v3.services.CustomerLabelOperationB\x03\xe0\x41\x02\x12\x17\n\x0fpartial_failure\x18\x03 \x01(\x08\x12\x15\n\rvalidate_only\x18\x04 \x01(\x08\"{\n\x16\x43ustomerLabelOperation\x12\x42\n\x06\x63reate\x18\x01 \x01(\x0b\x32\x30.google.ads.googleads.v3.resources.CustomerLabelH\x00\x12\x10\n\x06remove\x18\x02 \x01(\tH\x00\x42\x0b\n\toperation\"\x9f\x01\n\x1cMutateCustomerLabelsResponse\x12\x31\n\x15partial_failure_error\x18\x03 \x01(\x0b\x32\x12.google.rpc.Status\x12L\n\x07results\x18\x02 \x03(\x0b\x32;.google.ads.googleads.v3.services.MutateCustomerLabelResult\"2\n\x19MutateCustomerLabelResult\x12\x15\n\rresource_name\x18\x01 \x01(\t2\xf0\x03\n\x14\x43ustomerLabelService\x12\xc9\x01\n\x10GetCustomerLabel\x12\x39.google.ads.googleads.v3.services.GetCustomerLabelRequest\x1a\x30.google.ads.googleads.v3.resources.CustomerLabel\"H\x82\xd3\xe4\x93\x02\x32\x12\x30/v3/{resource_name=customers/*/customerLabels/*}\xda\x41\rresource_name\x12\xee\x01\n\x14MutateCustomerLabels\x12=.google.ads.googleads.v3.services.MutateCustomerLabelsRequest\x1a>.google.ads.googleads.v3.services.MutateCustomerLabelsResponse\"W\x82\xd3\xe4\x93\x02\x38\"3/v3/customers/{customer_id=*}/customerLabels:mutate:\x01*\xda\x41\x16\x63ustomer_id,operations\x1a\x1b\xca\x41\x18googleads.googleapis.comB\x80\x02\n$com.google.ads.googleads.v3.servicesB\x19\x43ustomerLabelServiceProtoP\x01ZHgoogle.golang.org/genproto/googleapis/ads/googleads/v3/services;services\xa2\x02\x03GAA\xaa\x02 Google.Ads.GoogleAds.V3.Services\xca\x02 Google\\Ads\\GoogleAds\\V3\\Services\xea\x02$Google::Ads::GoogleAds::V3::Servicesb\x06proto3')
+  serialized_pb=_b('\nCgoogle/ads/googleads_v3/proto/services/customer_label_service.proto\x12 google.ads.googleads.v3.services\x1a<google/ads/googleads_v3/proto/resources/customer_label.proto\x1a\x1cgoogle/api/annotations.proto\x1a\x17google/api/client.proto\x1a\x1fgoogle/api/field_behavior.proto\x1a\x19google/api/resource.proto\x1a\x17google/rpc/status.proto\"`\n\x17GetCustomerLabelRequest\x12\x45\n\rresource_name\x18\x01 \x01(\tB.\xe0\x41\x02\xfa\x41(\n&googleads.googleapis.com/CustomerLabel\"\xba\x01\n\x1bMutateCustomerLabelsRequest\x12\x18\n\x0b\x63ustomer_id\x18\x01 \x01(\tB\x03\xe0\x41\x02\x12Q\n\noperations\x18\x02 \x03(\x0b\x32\x38.google.ads.googleads.v3.services.CustomerLabelOperationB\x03\xe0\x41\x02\x12\x17\n\x0fpartial_failure\x18\x03 \x01(\x08\x12\x15\n\rvalidate_only\x18\x04 \x01(\x08\"{\n\x16\x43ustomerLabelOperation\x12\x42\n\x06\x63reate\x18\x01 \x01(\x0b\x32\x30.google.ads.googleads.v3.resources.CustomerLabelH\x00\x12\x10\n\x06remove\x18\x02 \x01(\tH\x00\x42\x0b\n\toperation\"\x9f\x01\n\x1cMutateCustomerLabelsResponse\x12\x31\n\x15partial_failure_error\x18\x03 \x01(\x0b\x32\x12.google.rpc.Status\x12L\n\x07results\x18\x02 \x03(\x0b\x32;.google.ads.googleads.v3.services.MutateCustomerLabelResult\"2\n\x19MutateCustomerLabelResult\x12\x15\n\rresource_name\x18\x01 \x01(\t2\xf0\x03\n\x14\x43ustomerLabelService\x12\xc9\x01\n\x10GetCustomerLabel\x12\x39.google.ads.googleads.v3.services.GetCustomerLabelRequest\x1a\x30.google.ads.googleads.v3.resources.CustomerLabel\"H\x82\xd3\xe4\x93\x02\x32\x12\x30/v3/{resource_name=customers/*/customerLabels/*}\xda\x41\rresource_name\x12\xee\x01\n\x14MutateCustomerLabels\x12=.google.ads.googleads.v3.services.MutateCustomerLabelsRequest\x1a>.google.ads.googleads.v3.services.MutateCustomerLabelsResponse\"W\x82\xd3\xe4\x93\x02\x38\"3/v3/customers/{customer_id=*}/customerLabels:mutate:\x01*\xda\x41\x16\x63ustomer_id,operations\x1a\x1b\xca\x41\x18googleads.googleapis.comB\x80\x02\n$com.google.ads.googleads.v3.servicesB\x19\x43ustomerLabelServiceProtoP\x01ZHgoogle.golang.org/genproto/googleapis/ads/googleads/v3/services;services\xa2\x02\x03GAA\xaa\x02 Google.Ads.GoogleAds.V3.Services\xca\x02 Google\\Ads\\GoogleAds\\V3\\Services\xea\x02$Google::Ads::GoogleAds::V3::Servicesb\x06proto3')
   ,
-  dependencies=[google_dot_ads_dot_googleads__v3_dot_proto_dot_resources_dot_customer__label__pb2.DESCRIPTOR,google_dot_api_dot_annotations__pb2.DESCRIPTOR,google_dot_api_dot_client__pb2.DESCRIPTOR,google_dot_api_dot_field__behavior__pb2.DESCRIPTOR,google_dot_rpc_dot_status__pb2.DESCRIPTOR,])
+  dependencies=[google_dot_ads_dot_googleads__v3_dot_proto_dot_resources_dot_customer__label__pb2.DESCRIPTOR,google_dot_api_dot_annotations__pb2.DESCRIPTOR,google_dot_api_dot_client__pb2.DESCRIPTOR,google_dot_api_dot_field__behavior__pb2.DESCRIPTOR,google_dot_api_dot_resource__pb2.DESCRIPTOR,google_dot_rpc_dot_status__pb2.DESCRIPTOR,])
 
 
 
@@ -45,7 +46,7 @@ _GETCUSTOMERLABELREQUEST = _descriptor.Descriptor(
       has_default_value=False, default_value=_b("").decode('utf-8'),
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
-      serialized_options=_b('\340A\002'), file=DESCRIPTOR),
+      serialized_options=_b('\340A\002\372A(\n&googleads.googleapis.com/CustomerLabel'), file=DESCRIPTOR),
   ],
   extensions=[
   ],
@@ -58,8 +59,8 @@ _GETCUSTOMERLABELREQUEST = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=280,
-  serialized_end=333,
+  serialized_start=307,
+  serialized_end=403,
 )
 
 
@@ -110,8 +111,8 @@ _MUTATECUSTOMERLABELSREQUEST = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=336,
-  serialized_end=522,
+  serialized_start=406,
+  serialized_end=592,
 )
 
 
@@ -151,8 +152,8 @@ _CUSTOMERLABELOPERATION = _descriptor.Descriptor(
       name='operation', full_name='google.ads.googleads.v3.services.CustomerLabelOperation.operation',
       index=0, containing_type=None, fields=[]),
   ],
-  serialized_start=524,
-  serialized_end=647,
+  serialized_start=594,
+  serialized_end=717,
 )
 
 
@@ -189,8 +190,8 @@ _MUTATECUSTOMERLABELSRESPONSE = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=650,
-  serialized_end=809,
+  serialized_start=720,
+  serialized_end=879,
 )
 
 
@@ -220,8 +221,8 @@ _MUTATECUSTOMERLABELRESULT = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=811,
-  serialized_end=861,
+  serialized_start=881,
+  serialized_end=931,
 )
 
 _MUTATECUSTOMERLABELSREQUEST.fields_by_name['operations'].message_type = _CUSTOMERLABELOPERATION
@@ -356,8 +357,8 @@ _CUSTOMERLABELSERVICE = _descriptor.ServiceDescriptor(
   file=DESCRIPTOR,
   index=0,
   serialized_options=_b('\312A\030googleads.googleapis.com'),
-  serialized_start=864,
-  serialized_end=1360,
+  serialized_start=934,
+  serialized_end=1430,
   methods=[
   _descriptor.MethodDescriptor(
     name='GetCustomerLabel',

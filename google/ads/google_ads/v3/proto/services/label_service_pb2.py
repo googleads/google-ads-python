@@ -17,6 +17,7 @@ from google.ads.google_ads.v3.proto.resources import label_pb2 as google_dot_ads
 from google.api import annotations_pb2 as google_dot_api_dot_annotations__pb2
 from google.api import client_pb2 as google_dot_api_dot_client__pb2
 from google.api import field_behavior_pb2 as google_dot_api_dot_field__behavior__pb2
+from google.api import resource_pb2 as google_dot_api_dot_resource__pb2
 from google.protobuf import field_mask_pb2 as google_dot_protobuf_dot_field__mask__pb2
 from google.rpc import status_pb2 as google_dot_rpc_dot_status__pb2
 
@@ -26,9 +27,9 @@ DESCRIPTOR = _descriptor.FileDescriptor(
   package='google.ads.googleads.v3.services',
   syntax='proto3',
   serialized_options=_b('\n$com.google.ads.googleads.v3.servicesB\021LabelServiceProtoP\001ZHgoogle.golang.org/genproto/googleapis/ads/googleads/v3/services;services\242\002\003GAA\252\002 Google.Ads.GoogleAds.V3.Services\312\002 Google\\Ads\\GoogleAds\\V3\\Services\352\002$Google::Ads::GoogleAds::V3::Services'),
-  serialized_pb=_b('\n:google/ads/googleads_v3/proto/services/label_service.proto\x12 google.ads.googleads.v3.services\x1a\x33google/ads/googleads_v3/proto/resources/label.proto\x1a\x1cgoogle/api/annotations.proto\x1a\x17google/api/client.proto\x1a\x1fgoogle/api/field_behavior.proto\x1a google/protobuf/field_mask.proto\x1a\x17google/rpc/status.proto\"-\n\x0fGetLabelRequest\x12\x1a\n\rresource_name\x18\x01 \x01(\tB\x03\xe0\x41\x02\"\xaa\x01\n\x13MutateLabelsRequest\x12\x18\n\x0b\x63ustomer_id\x18\x01 \x01(\tB\x03\xe0\x41\x02\x12I\n\noperations\x18\x02 \x03(\x0b\x32\x30.google.ads.googleads.v3.services.LabelOperationB\x03\xe0\x41\x02\x12\x17\n\x0fpartial_failure\x18\x03 \x01(\x08\x12\x15\n\rvalidate_only\x18\x04 \x01(\x08\"\xd8\x01\n\x0eLabelOperation\x12/\n\x0bupdate_mask\x18\x04 \x01(\x0b\x32\x1a.google.protobuf.FieldMask\x12:\n\x06\x63reate\x18\x01 \x01(\x0b\x32(.google.ads.googleads.v3.resources.LabelH\x00\x12:\n\x06update\x18\x02 \x01(\x0b\x32(.google.ads.googleads.v3.resources.LabelH\x00\x12\x10\n\x06remove\x18\x03 \x01(\tH\x00\x42\x0b\n\toperation\"\x8f\x01\n\x14MutateLabelsResponse\x12\x31\n\x15partial_failure_error\x18\x03 \x01(\x0b\x32\x12.google.rpc.Status\x12\x44\n\x07results\x18\x02 \x03(\x0b\x32\x33.google.ads.googleads.v3.services.MutateLabelResult\"*\n\x11MutateLabelResult\x12\x15\n\rresource_name\x18\x01 \x01(\t2\xa8\x03\n\x0cLabelService\x12\xa9\x01\n\x08GetLabel\x12\x31.google.ads.googleads.v3.services.GetLabelRequest\x1a(.google.ads.googleads.v3.resources.Label\"@\x82\xd3\xe4\x93\x02*\x12(/v3/{resource_name=customers/*/labels/*}\xda\x41\rresource_name\x12\xce\x01\n\x0cMutateLabels\x12\x35.google.ads.googleads.v3.services.MutateLabelsRequest\x1a\x36.google.ads.googleads.v3.services.MutateLabelsResponse\"O\x82\xd3\xe4\x93\x02\x30\"+/v3/customers/{customer_id=*}/labels:mutate:\x01*\xda\x41\x16\x63ustomer_id,operations\x1a\x1b\xca\x41\x18googleads.googleapis.comB\xf8\x01\n$com.google.ads.googleads.v3.servicesB\x11LabelServiceProtoP\x01ZHgoogle.golang.org/genproto/googleapis/ads/googleads/v3/services;services\xa2\x02\x03GAA\xaa\x02 Google.Ads.GoogleAds.V3.Services\xca\x02 Google\\Ads\\GoogleAds\\V3\\Services\xea\x02$Google::Ads::GoogleAds::V3::Servicesb\x06proto3')
+  serialized_pb=_b('\n:google/ads/googleads_v3/proto/services/label_service.proto\x12 google.ads.googleads.v3.services\x1a\x33google/ads/googleads_v3/proto/resources/label.proto\x1a\x1cgoogle/api/annotations.proto\x1a\x17google/api/client.proto\x1a\x1fgoogle/api/field_behavior.proto\x1a\x19google/api/resource.proto\x1a google/protobuf/field_mask.proto\x1a\x17google/rpc/status.proto\"P\n\x0fGetLabelRequest\x12=\n\rresource_name\x18\x01 \x01(\tB&\xe0\x41\x02\xfa\x41 \n\x1egoogleads.googleapis.com/Label\"\xaa\x01\n\x13MutateLabelsRequest\x12\x18\n\x0b\x63ustomer_id\x18\x01 \x01(\tB\x03\xe0\x41\x02\x12I\n\noperations\x18\x02 \x03(\x0b\x32\x30.google.ads.googleads.v3.services.LabelOperationB\x03\xe0\x41\x02\x12\x17\n\x0fpartial_failure\x18\x03 \x01(\x08\x12\x15\n\rvalidate_only\x18\x04 \x01(\x08\"\xd8\x01\n\x0eLabelOperation\x12/\n\x0bupdate_mask\x18\x04 \x01(\x0b\x32\x1a.google.protobuf.FieldMask\x12:\n\x06\x63reate\x18\x01 \x01(\x0b\x32(.google.ads.googleads.v3.resources.LabelH\x00\x12:\n\x06update\x18\x02 \x01(\x0b\x32(.google.ads.googleads.v3.resources.LabelH\x00\x12\x10\n\x06remove\x18\x03 \x01(\tH\x00\x42\x0b\n\toperation\"\x8f\x01\n\x14MutateLabelsResponse\x12\x31\n\x15partial_failure_error\x18\x03 \x01(\x0b\x32\x12.google.rpc.Status\x12\x44\n\x07results\x18\x02 \x03(\x0b\x32\x33.google.ads.googleads.v3.services.MutateLabelResult\"*\n\x11MutateLabelResult\x12\x15\n\rresource_name\x18\x01 \x01(\t2\xa8\x03\n\x0cLabelService\x12\xa9\x01\n\x08GetLabel\x12\x31.google.ads.googleads.v3.services.GetLabelRequest\x1a(.google.ads.googleads.v3.resources.Label\"@\x82\xd3\xe4\x93\x02*\x12(/v3/{resource_name=customers/*/labels/*}\xda\x41\rresource_name\x12\xce\x01\n\x0cMutateLabels\x12\x35.google.ads.googleads.v3.services.MutateLabelsRequest\x1a\x36.google.ads.googleads.v3.services.MutateLabelsResponse\"O\x82\xd3\xe4\x93\x02\x30\"+/v3/customers/{customer_id=*}/labels:mutate:\x01*\xda\x41\x16\x63ustomer_id,operations\x1a\x1b\xca\x41\x18googleads.googleapis.comB\xf8\x01\n$com.google.ads.googleads.v3.servicesB\x11LabelServiceProtoP\x01ZHgoogle.golang.org/genproto/googleapis/ads/googleads/v3/services;services\xa2\x02\x03GAA\xaa\x02 Google.Ads.GoogleAds.V3.Services\xca\x02 Google\\Ads\\GoogleAds\\V3\\Services\xea\x02$Google::Ads::GoogleAds::V3::Servicesb\x06proto3')
   ,
-  dependencies=[google_dot_ads_dot_googleads__v3_dot_proto_dot_resources_dot_label__pb2.DESCRIPTOR,google_dot_api_dot_annotations__pb2.DESCRIPTOR,google_dot_api_dot_client__pb2.DESCRIPTOR,google_dot_api_dot_field__behavior__pb2.DESCRIPTOR,google_dot_protobuf_dot_field__mask__pb2.DESCRIPTOR,google_dot_rpc_dot_status__pb2.DESCRIPTOR,])
+  dependencies=[google_dot_ads_dot_googleads__v3_dot_proto_dot_resources_dot_label__pb2.DESCRIPTOR,google_dot_api_dot_annotations__pb2.DESCRIPTOR,google_dot_api_dot_client__pb2.DESCRIPTOR,google_dot_api_dot_field__behavior__pb2.DESCRIPTOR,google_dot_api_dot_resource__pb2.DESCRIPTOR,google_dot_protobuf_dot_field__mask__pb2.DESCRIPTOR,google_dot_rpc_dot_status__pb2.DESCRIPTOR,])
 
 
 
@@ -46,7 +47,7 @@ _GETLABELREQUEST = _descriptor.Descriptor(
       has_default_value=False, default_value=_b("").decode('utf-8'),
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
-      serialized_options=_b('\340A\002'), file=DESCRIPTOR),
+      serialized_options=_b('\340A\002\372A \n\036googleads.googleapis.com/Label'), file=DESCRIPTOR),
   ],
   extensions=[
   ],
@@ -59,8 +60,8 @@ _GETLABELREQUEST = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=296,
-  serialized_end=341,
+  serialized_start=323,
+  serialized_end=403,
 )
 
 
@@ -111,8 +112,8 @@ _MUTATELABELSREQUEST = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=344,
-  serialized_end=514,
+  serialized_start=406,
+  serialized_end=576,
 )
 
 
@@ -166,8 +167,8 @@ _LABELOPERATION = _descriptor.Descriptor(
       name='operation', full_name='google.ads.googleads.v3.services.LabelOperation.operation',
       index=0, containing_type=None, fields=[]),
   ],
-  serialized_start=517,
-  serialized_end=733,
+  serialized_start=579,
+  serialized_end=795,
 )
 
 
@@ -204,8 +205,8 @@ _MUTATELABELSRESPONSE = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=736,
-  serialized_end=879,
+  serialized_start=798,
+  serialized_end=941,
 )
 
 
@@ -235,8 +236,8 @@ _MUTATELABELRESULT = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=881,
-  serialized_end=923,
+  serialized_start=943,
+  serialized_end=985,
 )
 
 _MUTATELABELSREQUEST.fields_by_name['operations'].message_type = _LABELOPERATION
@@ -378,8 +379,8 @@ _LABELSERVICE = _descriptor.ServiceDescriptor(
   file=DESCRIPTOR,
   index=0,
   serialized_options=_b('\312A\030googleads.googleapis.com'),
-  serialized_start=926,
-  serialized_end=1350,
+  serialized_start=988,
+  serialized_end=1412,
   methods=[
   _descriptor.MethodDescriptor(
     name='GetLabel',

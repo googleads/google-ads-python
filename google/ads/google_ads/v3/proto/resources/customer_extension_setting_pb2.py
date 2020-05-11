@@ -15,6 +15,7 @@ _sym_db = _symbol_database.Default()
 
 from google.ads.google_ads.v3.proto.enums import extension_setting_device_pb2 as google_dot_ads_dot_googleads__v3_dot_proto_dot_enums_dot_extension__setting__device__pb2
 from google.ads.google_ads.v3.proto.enums import extension_type_pb2 as google_dot_ads_dot_googleads__v3_dot_proto_dot_enums_dot_extension__type__pb2
+from google.api import field_behavior_pb2 as google_dot_api_dot_field__behavior__pb2
 from google.api import resource_pb2 as google_dot_api_dot_resource__pb2
 from google.protobuf import wrappers_pb2 as google_dot_protobuf_dot_wrappers__pb2
 from google.api import annotations_pb2 as google_dot_api_dot_annotations__pb2
@@ -25,9 +26,9 @@ DESCRIPTOR = _descriptor.FileDescriptor(
   package='google.ads.googleads.v3.resources',
   syntax='proto3',
   serialized_options=_b('\n%com.google.ads.googleads.v3.resourcesB\035CustomerExtensionSettingProtoP\001ZJgoogle.golang.org/genproto/googleapis/ads/googleads/v3/resources;resources\242\002\003GAA\252\002!Google.Ads.GoogleAds.V3.Resources\312\002!Google\\Ads\\GoogleAds\\V3\\Resources\352\002%Google::Ads::GoogleAds::V3::Resources'),
-  serialized_pb=_b('\nHgoogle/ads/googleads_v3/proto/resources/customer_extension_setting.proto\x12!google.ads.googleads.v3.resources\x1a\x42google/ads/googleads_v3/proto/enums/extension_setting_device.proto\x1a\x38google/ads/googleads_v3/proto/enums/extension_type.proto\x1a\x19google/api/resource.proto\x1a\x1egoogle/protobuf/wrappers.proto\x1a\x1cgoogle/api/annotations.proto\"\xae\x03\n\x18\x43ustomerExtensionSetting\x12\x15\n\rresource_name\x18\x01 \x01(\t\x12V\n\x0e\x65xtension_type\x18\x02 \x01(\x0e\x32>.google.ads.googleads.v3.enums.ExtensionTypeEnum.ExtensionType\x12:\n\x14\x65xtension_feed_items\x18\x03 \x03(\x0b\x32\x1c.google.protobuf.StringValue\x12`\n\x06\x64\x65vice\x18\x04 \x01(\x0e\x32P.google.ads.googleads.v3.enums.ExtensionSettingDeviceEnum.ExtensionSettingDevice:\x84\x01\xea\x41\x80\x01\n1googleads.googleapis.com/CustomerExtensionSetting\x12Kcustomers/{customer}/customerExtensionSettings/{customer_extension_setting}B\x8a\x02\n%com.google.ads.googleads.v3.resourcesB\x1d\x43ustomerExtensionSettingProtoP\x01ZJgoogle.golang.org/genproto/googleapis/ads/googleads/v3/resources;resources\xa2\x02\x03GAA\xaa\x02!Google.Ads.GoogleAds.V3.Resources\xca\x02!Google\\Ads\\GoogleAds\\V3\\Resources\xea\x02%Google::Ads::GoogleAds::V3::Resourcesb\x06proto3')
+  serialized_pb=_b('\nHgoogle/ads/googleads_v3/proto/resources/customer_extension_setting.proto\x12!google.ads.googleads.v3.resources\x1a\x42google/ads/googleads_v3/proto/enums/extension_setting_device.proto\x1a\x38google/ads/googleads_v3/proto/enums/extension_type.proto\x1a\x1fgoogle/api/field_behavior.proto\x1a\x19google/api/resource.proto\x1a\x1egoogle/protobuf/wrappers.proto\x1a\x1cgoogle/api/annotations.proto\"\x9f\x04\n\x18\x43ustomerExtensionSetting\x12P\n\rresource_name\x18\x01 \x01(\tB9\xe0\x41\x05\xfa\x41\x33\n1googleads.googleapis.com/CustomerExtensionSetting\x12[\n\x0e\x65xtension_type\x18\x02 \x01(\x0e\x32>.google.ads.googleads.v3.enums.ExtensionTypeEnum.ExtensionTypeB\x03\xe0\x41\x05\x12k\n\x14\x65xtension_feed_items\x18\x03 \x03(\x0b\x32\x1c.google.protobuf.StringValueB/\xfa\x41,\n*googleads.googleapis.com/ExtensionFeedItem\x12`\n\x06\x64\x65vice\x18\x04 \x01(\x0e\x32P.google.ads.googleads.v3.enums.ExtensionSettingDeviceEnum.ExtensionSettingDevice:\x84\x01\xea\x41\x80\x01\n1googleads.googleapis.com/CustomerExtensionSetting\x12Kcustomers/{customer}/customerExtensionSettings/{customer_extension_setting}B\x8a\x02\n%com.google.ads.googleads.v3.resourcesB\x1d\x43ustomerExtensionSettingProtoP\x01ZJgoogle.golang.org/genproto/googleapis/ads/googleads/v3/resources;resources\xa2\x02\x03GAA\xaa\x02!Google.Ads.GoogleAds.V3.Resources\xca\x02!Google\\Ads\\GoogleAds\\V3\\Resources\xea\x02%Google::Ads::GoogleAds::V3::Resourcesb\x06proto3')
   ,
-  dependencies=[google_dot_ads_dot_googleads__v3_dot_proto_dot_enums_dot_extension__setting__device__pb2.DESCRIPTOR,google_dot_ads_dot_googleads__v3_dot_proto_dot_enums_dot_extension__type__pb2.DESCRIPTOR,google_dot_api_dot_resource__pb2.DESCRIPTOR,google_dot_protobuf_dot_wrappers__pb2.DESCRIPTOR,google_dot_api_dot_annotations__pb2.DESCRIPTOR,])
+  dependencies=[google_dot_ads_dot_googleads__v3_dot_proto_dot_enums_dot_extension__setting__device__pb2.DESCRIPTOR,google_dot_ads_dot_googleads__v3_dot_proto_dot_enums_dot_extension__type__pb2.DESCRIPTOR,google_dot_api_dot_field__behavior__pb2.DESCRIPTOR,google_dot_api_dot_resource__pb2.DESCRIPTOR,google_dot_protobuf_dot_wrappers__pb2.DESCRIPTOR,google_dot_api_dot_annotations__pb2.DESCRIPTOR,])
 
 
 
@@ -45,21 +46,21 @@ _CUSTOMEREXTENSIONSETTING = _descriptor.Descriptor(
       has_default_value=False, default_value=_b("").decode('utf-8'),
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR),
+      serialized_options=_b('\340A\005\372A3\n1googleads.googleapis.com/CustomerExtensionSetting'), file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
       name='extension_type', full_name='google.ads.googleads.v3.resources.CustomerExtensionSetting.extension_type', index=1,
       number=2, type=14, cpp_type=8, label=1,
       has_default_value=False, default_value=0,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR),
+      serialized_options=_b('\340A\005'), file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
       name='extension_feed_items', full_name='google.ads.googleads.v3.resources.CustomerExtensionSetting.extension_feed_items', index=2,
       number=3, type=11, cpp_type=10, label=3,
       has_default_value=False, default_value=[],
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR),
+      serialized_options=_b('\372A,\n*googleads.googleapis.com/ExtensionFeedItem'), file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
       name='device', full_name='google.ads.googleads.v3.resources.CustomerExtensionSetting.device', index=3,
       number=4, type=14, cpp_type=8, label=1,
@@ -79,8 +80,8 @@ _CUSTOMEREXTENSIONSETTING = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=327,
-  serialized_end=757,
+  serialized_start=360,
+  serialized_end=903,
 )
 
 _CUSTOMEREXTENSIONSETTING.fields_by_name['extension_type'].enum_type = google_dot_ads_dot_googleads__v3_dot_proto_dot_enums_dot_extension__type__pb2._EXTENSIONTYPEENUM_EXTENSIONTYPE
@@ -98,12 +99,13 @@ CustomerExtensionSetting = _reflection.GeneratedProtocolMessageType('CustomerExt
   
   Attributes:
       resource_name:
-          The resource name of the customer extension setting.
-          CustomerExtensionSetting resource names have the form:  ``cust
-          omers/{customer_id}/customerExtensionSettings/{extension_type}
-          ``
+          Immutable. The resource name of the customer extension
+          setting. CustomerExtensionSetting resource names have the
+          form:  ``customers/{customer_id}/customerExtensionSettings/{ex
+          tension_type}``
       extension_type:
-          The extension type of the customer extension setting.
+          Immutable. The extension type of the customer extension
+          setting.
       extension_feed_items:
           The resource names of the extension feed items to serve under
           the customer. ExtensionFeedItem resource names have the form:
@@ -117,5 +119,8 @@ _sym_db.RegisterMessage(CustomerExtensionSetting)
 
 
 DESCRIPTOR._options = None
+_CUSTOMEREXTENSIONSETTING.fields_by_name['resource_name']._options = None
+_CUSTOMEREXTENSIONSETTING.fields_by_name['extension_type']._options = None
+_CUSTOMEREXTENSIONSETTING.fields_by_name['extension_feed_items']._options = None
 _CUSTOMEREXTENSIONSETTING._options = None
 # @@protoc_insertion_point(module_scope)

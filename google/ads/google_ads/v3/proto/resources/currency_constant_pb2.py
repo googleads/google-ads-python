@@ -13,6 +13,7 @@ from google.protobuf import symbol_database as _symbol_database
 _sym_db = _symbol_database.Default()
 
 
+from google.api import field_behavior_pb2 as google_dot_api_dot_field__behavior__pb2
 from google.api import resource_pb2 as google_dot_api_dot_resource__pb2
 from google.protobuf import wrappers_pb2 as google_dot_protobuf_dot_wrappers__pb2
 from google.api import annotations_pb2 as google_dot_api_dot_annotations__pb2
@@ -23,9 +24,9 @@ DESCRIPTOR = _descriptor.FileDescriptor(
   package='google.ads.googleads.v3.resources',
   syntax='proto3',
   serialized_options=_b('\n%com.google.ads.googleads.v3.resourcesB\025CurrencyConstantProtoP\001ZJgoogle.golang.org/genproto/googleapis/ads/googleads/v3/resources;resources\242\002\003GAA\252\002!Google.Ads.GoogleAds.V3.Resources\312\002!Google\\Ads\\GoogleAds\\V3\\Resources\352\002%Google::Ads::GoogleAds::V3::Resources'),
-  serialized_pb=_b('\n?google/ads/googleads_v3/proto/resources/currency_constant.proto\x12!google.ads.googleads.v3.resources\x1a\x19google/api/resource.proto\x1a\x1egoogle/protobuf/wrappers.proto\x1a\x1cgoogle/api/annotations.proto\"\xc1\x02\n\x10\x43urrencyConstant\x12\x15\n\rresource_name\x18\x01 \x01(\t\x12*\n\x04\x63ode\x18\x02 \x01(\x0b\x32\x1c.google.protobuf.StringValue\x12*\n\x04name\x18\x03 \x01(\x0b\x32\x1c.google.protobuf.StringValue\x12,\n\x06symbol\x18\x04 \x01(\x0b\x32\x1c.google.protobuf.StringValue\x12\x39\n\x14\x62illable_unit_micros\x18\x05 \x01(\x0b\x32\x1b.google.protobuf.Int64Value:U\xea\x41R\n)googleads.googleapis.com/CurrencyConstant\x12%currencyConstants/{currency_constant}B\x82\x02\n%com.google.ads.googleads.v3.resourcesB\x15\x43urrencyConstantProtoP\x01ZJgoogle.golang.org/genproto/googleapis/ads/googleads/v3/resources;resources\xa2\x02\x03GAA\xaa\x02!Google.Ads.GoogleAds.V3.Resources\xca\x02!Google\\Ads\\GoogleAds\\V3\\Resources\xea\x02%Google::Ads::GoogleAds::V3::Resourcesb\x06proto3')
+  serialized_pb=_b('\n?google/ads/googleads_v3/proto/resources/currency_constant.proto\x12!google.ads.googleads.v3.resources\x1a\x1fgoogle/api/field_behavior.proto\x1a\x19google/api/resource.proto\x1a\x1egoogle/protobuf/wrappers.proto\x1a\x1cgoogle/api/annotations.proto\"\x88\x03\n\x10\x43urrencyConstant\x12H\n\rresource_name\x18\x01 \x01(\tB1\xe0\x41\x03\xfa\x41+\n)googleads.googleapis.com/CurrencyConstant\x12/\n\x04\x63ode\x18\x02 \x01(\x0b\x32\x1c.google.protobuf.StringValueB\x03\xe0\x41\x03\x12/\n\x04name\x18\x03 \x01(\x0b\x32\x1c.google.protobuf.StringValueB\x03\xe0\x41\x03\x12\x31\n\x06symbol\x18\x04 \x01(\x0b\x32\x1c.google.protobuf.StringValueB\x03\xe0\x41\x03\x12>\n\x14\x62illable_unit_micros\x18\x05 \x01(\x0b\x32\x1b.google.protobuf.Int64ValueB\x03\xe0\x41\x03:U\xea\x41R\n)googleads.googleapis.com/CurrencyConstant\x12%currencyConstants/{currency_constant}B\x82\x02\n%com.google.ads.googleads.v3.resourcesB\x15\x43urrencyConstantProtoP\x01ZJgoogle.golang.org/genproto/googleapis/ads/googleads/v3/resources;resources\xa2\x02\x03GAA\xaa\x02!Google.Ads.GoogleAds.V3.Resources\xca\x02!Google\\Ads\\GoogleAds\\V3\\Resources\xea\x02%Google::Ads::GoogleAds::V3::Resourcesb\x06proto3')
   ,
-  dependencies=[google_dot_api_dot_resource__pb2.DESCRIPTOR,google_dot_protobuf_dot_wrappers__pb2.DESCRIPTOR,google_dot_api_dot_annotations__pb2.DESCRIPTOR,])
+  dependencies=[google_dot_api_dot_field__behavior__pb2.DESCRIPTOR,google_dot_api_dot_resource__pb2.DESCRIPTOR,google_dot_protobuf_dot_wrappers__pb2.DESCRIPTOR,google_dot_api_dot_annotations__pb2.DESCRIPTOR,])
 
 
 
@@ -43,35 +44,35 @@ _CURRENCYCONSTANT = _descriptor.Descriptor(
       has_default_value=False, default_value=_b("").decode('utf-8'),
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR),
+      serialized_options=_b('\340A\003\372A+\n)googleads.googleapis.com/CurrencyConstant'), file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
       name='code', full_name='google.ads.googleads.v3.resources.CurrencyConstant.code', index=1,
       number=2, type=11, cpp_type=10, label=1,
       has_default_value=False, default_value=None,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR),
+      serialized_options=_b('\340A\003'), file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
       name='name', full_name='google.ads.googleads.v3.resources.CurrencyConstant.name', index=2,
       number=3, type=11, cpp_type=10, label=1,
       has_default_value=False, default_value=None,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR),
+      serialized_options=_b('\340A\003'), file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
       name='symbol', full_name='google.ads.googleads.v3.resources.CurrencyConstant.symbol', index=3,
       number=4, type=11, cpp_type=10, label=1,
       has_default_value=False, default_value=None,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR),
+      serialized_options=_b('\340A\003'), file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
       name='billable_unit_micros', full_name='google.ads.googleads.v3.resources.CurrencyConstant.billable_unit_micros', index=4,
       number=5, type=11, cpp_type=10, label=1,
       has_default_value=False, default_value=None,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR),
+      serialized_options=_b('\340A\003'), file=DESCRIPTOR),
   ],
   extensions=[
   ],
@@ -84,8 +85,8 @@ _CURRENCYCONSTANT = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=192,
-  serialized_end=513,
+  serialized_start=225,
+  serialized_end=617,
 )
 
 _CURRENCYCONSTANT.fields_by_name['code'].message_type = google_dot_protobuf_dot_wrappers__pb2._STRINGVALUE
@@ -104,19 +105,19 @@ CurrencyConstant = _reflection.GeneratedProtocolMessageType('CurrencyConstant', 
   
   Attributes:
       resource_name:
-          The resource name of the currency constant. Currency constant
-          resource names have the form:
+          Output only. The resource name of the currency constant.
+          Currency constant resource names have the form:
           ``currencyConstants/{currency_code}``
       code:
-          ISO 4217 three-letter currency code, e.g. "USD"
+          Output only. ISO 4217 three-letter currency code, e.g. "USD"
       name:
-          Full English name of the currency.
+          Output only. Full English name of the currency.
       symbol:
-          Standard symbol for describing this currency, e.g. '$' for US
-          Dollars.
+          Output only. Standard symbol for describing this currency,
+          e.g. '$' for US Dollars.
       billable_unit_micros:
-          The billable unit for this currency. Billed amounts should be
-          multiples of this value.
+          Output only. The billable unit for this currency. Billed
+          amounts should be multiples of this value.
   """,
   # @@protoc_insertion_point(class_scope:google.ads.googleads.v3.resources.CurrencyConstant)
   ))
@@ -124,5 +125,10 @@ _sym_db.RegisterMessage(CurrencyConstant)
 
 
 DESCRIPTOR._options = None
+_CURRENCYCONSTANT.fields_by_name['resource_name']._options = None
+_CURRENCYCONSTANT.fields_by_name['code']._options = None
+_CURRENCYCONSTANT.fields_by_name['name']._options = None
+_CURRENCYCONSTANT.fields_by_name['symbol']._options = None
+_CURRENCYCONSTANT.fields_by_name['billable_unit_micros']._options = None
 _CURRENCYCONSTANT._options = None
 # @@protoc_insertion_point(module_scope)

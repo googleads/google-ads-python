@@ -17,6 +17,7 @@ from google.ads.google_ads.v3.proto.resources import asset_pb2 as google_dot_ads
 from google.api import annotations_pb2 as google_dot_api_dot_annotations__pb2
 from google.api import client_pb2 as google_dot_api_dot_client__pb2
 from google.api import field_behavior_pb2 as google_dot_api_dot_field__behavior__pb2
+from google.api import resource_pb2 as google_dot_api_dot_resource__pb2
 
 
 DESCRIPTOR = _descriptor.FileDescriptor(
@@ -24,9 +25,9 @@ DESCRIPTOR = _descriptor.FileDescriptor(
   package='google.ads.googleads.v3.services',
   syntax='proto3',
   serialized_options=_b('\n$com.google.ads.googleads.v3.servicesB\021AssetServiceProtoP\001ZHgoogle.golang.org/genproto/googleapis/ads/googleads/v3/services;services\242\002\003GAA\252\002 Google.Ads.GoogleAds.V3.Services\312\002 Google\\Ads\\GoogleAds\\V3\\Services\352\002$Google::Ads::GoogleAds::V3::Services'),
-  serialized_pb=_b('\n:google/ads/googleads_v3/proto/services/asset_service.proto\x12 google.ads.googleads.v3.services\x1a\x33google/ads/googleads_v3/proto/resources/asset.proto\x1a\x1cgoogle/api/annotations.proto\x1a\x17google/api/client.proto\x1a\x1fgoogle/api/field_behavior.proto\"-\n\x0fGetAssetRequest\x12\x1a\n\rresource_name\x18\x01 \x01(\tB\x03\xe0\x41\x02\"z\n\x13MutateAssetsRequest\x12\x18\n\x0b\x63ustomer_id\x18\x01 \x01(\tB\x03\xe0\x41\x02\x12I\n\noperations\x18\x02 \x03(\x0b\x32\x30.google.ads.googleads.v3.services.AssetOperationB\x03\xe0\x41\x02\"Y\n\x0e\x41ssetOperation\x12:\n\x06\x63reate\x18\x01 \x01(\x0b\x32(.google.ads.googleads.v3.resources.AssetH\x00\x42\x0b\n\toperation\"\\\n\x14MutateAssetsResponse\x12\x44\n\x07results\x18\x02 \x03(\x0b\x32\x33.google.ads.googleads.v3.services.MutateAssetResult\"*\n\x11MutateAssetResult\x12\x15\n\rresource_name\x18\x01 \x01(\t2\xa8\x03\n\x0c\x41ssetService\x12\xa9\x01\n\x08GetAsset\x12\x31.google.ads.googleads.v3.services.GetAssetRequest\x1a(.google.ads.googleads.v3.resources.Asset\"@\x82\xd3\xe4\x93\x02*\x12(/v3/{resource_name=customers/*/assets/*}\xda\x41\rresource_name\x12\xce\x01\n\x0cMutateAssets\x12\x35.google.ads.googleads.v3.services.MutateAssetsRequest\x1a\x36.google.ads.googleads.v3.services.MutateAssetsResponse\"O\x82\xd3\xe4\x93\x02\x30\"+/v3/customers/{customer_id=*}/assets:mutate:\x01*\xda\x41\x16\x63ustomer_id,operations\x1a\x1b\xca\x41\x18googleads.googleapis.comB\xf8\x01\n$com.google.ads.googleads.v3.servicesB\x11\x41ssetServiceProtoP\x01ZHgoogle.golang.org/genproto/googleapis/ads/googleads/v3/services;services\xa2\x02\x03GAA\xaa\x02 Google.Ads.GoogleAds.V3.Services\xca\x02 Google\\Ads\\GoogleAds\\V3\\Services\xea\x02$Google::Ads::GoogleAds::V3::Servicesb\x06proto3')
+  serialized_pb=_b('\n:google/ads/googleads_v3/proto/services/asset_service.proto\x12 google.ads.googleads.v3.services\x1a\x33google/ads/googleads_v3/proto/resources/asset.proto\x1a\x1cgoogle/api/annotations.proto\x1a\x17google/api/client.proto\x1a\x1fgoogle/api/field_behavior.proto\x1a\x19google/api/resource.proto\"P\n\x0fGetAssetRequest\x12=\n\rresource_name\x18\x01 \x01(\tB&\xe0\x41\x02\xfa\x41 \n\x1egoogleads.googleapis.com/Asset\"z\n\x13MutateAssetsRequest\x12\x18\n\x0b\x63ustomer_id\x18\x01 \x01(\tB\x03\xe0\x41\x02\x12I\n\noperations\x18\x02 \x03(\x0b\x32\x30.google.ads.googleads.v3.services.AssetOperationB\x03\xe0\x41\x02\"Y\n\x0e\x41ssetOperation\x12:\n\x06\x63reate\x18\x01 \x01(\x0b\x32(.google.ads.googleads.v3.resources.AssetH\x00\x42\x0b\n\toperation\"\\\n\x14MutateAssetsResponse\x12\x44\n\x07results\x18\x02 \x03(\x0b\x32\x33.google.ads.googleads.v3.services.MutateAssetResult\"*\n\x11MutateAssetResult\x12\x15\n\rresource_name\x18\x01 \x01(\t2\xa8\x03\n\x0c\x41ssetService\x12\xa9\x01\n\x08GetAsset\x12\x31.google.ads.googleads.v3.services.GetAssetRequest\x1a(.google.ads.googleads.v3.resources.Asset\"@\x82\xd3\xe4\x93\x02*\x12(/v3/{resource_name=customers/*/assets/*}\xda\x41\rresource_name\x12\xce\x01\n\x0cMutateAssets\x12\x35.google.ads.googleads.v3.services.MutateAssetsRequest\x1a\x36.google.ads.googleads.v3.services.MutateAssetsResponse\"O\x82\xd3\xe4\x93\x02\x30\"+/v3/customers/{customer_id=*}/assets:mutate:\x01*\xda\x41\x16\x63ustomer_id,operations\x1a\x1b\xca\x41\x18googleads.googleapis.comB\xf8\x01\n$com.google.ads.googleads.v3.servicesB\x11\x41ssetServiceProtoP\x01ZHgoogle.golang.org/genproto/googleapis/ads/googleads/v3/services;services\xa2\x02\x03GAA\xaa\x02 Google.Ads.GoogleAds.V3.Services\xca\x02 Google\\Ads\\GoogleAds\\V3\\Services\xea\x02$Google::Ads::GoogleAds::V3::Servicesb\x06proto3')
   ,
-  dependencies=[google_dot_ads_dot_googleads__v3_dot_proto_dot_resources_dot_asset__pb2.DESCRIPTOR,google_dot_api_dot_annotations__pb2.DESCRIPTOR,google_dot_api_dot_client__pb2.DESCRIPTOR,google_dot_api_dot_field__behavior__pb2.DESCRIPTOR,])
+  dependencies=[google_dot_ads_dot_googleads__v3_dot_proto_dot_resources_dot_asset__pb2.DESCRIPTOR,google_dot_api_dot_annotations__pb2.DESCRIPTOR,google_dot_api_dot_client__pb2.DESCRIPTOR,google_dot_api_dot_field__behavior__pb2.DESCRIPTOR,google_dot_api_dot_resource__pb2.DESCRIPTOR,])
 
 
 
@@ -44,7 +45,7 @@ _GETASSETREQUEST = _descriptor.Descriptor(
       has_default_value=False, default_value=_b("").decode('utf-8'),
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
-      serialized_options=_b('\340A\002'), file=DESCRIPTOR),
+      serialized_options=_b('\340A\002\372A \n\036googleads.googleapis.com/Asset'), file=DESCRIPTOR),
   ],
   extensions=[
   ],
@@ -57,8 +58,8 @@ _GETASSETREQUEST = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=237,
-  serialized_end=282,
+  serialized_start=264,
+  serialized_end=344,
 )
 
 
@@ -95,8 +96,8 @@ _MUTATEASSETSREQUEST = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=284,
-  serialized_end=406,
+  serialized_start=346,
+  serialized_end=468,
 )
 
 
@@ -129,8 +130,8 @@ _ASSETOPERATION = _descriptor.Descriptor(
       name='operation', full_name='google.ads.googleads.v3.services.AssetOperation.operation',
       index=0, containing_type=None, fields=[]),
   ],
-  serialized_start=408,
-  serialized_end=497,
+  serialized_start=470,
+  serialized_end=559,
 )
 
 
@@ -160,8 +161,8 @@ _MUTATEASSETSRESPONSE = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=499,
-  serialized_end=591,
+  serialized_start=561,
+  serialized_end=653,
 )
 
 
@@ -191,8 +192,8 @@ _MUTATEASSETRESULT = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=593,
-  serialized_end=635,
+  serialized_start=655,
+  serialized_end=697,
 )
 
 _MUTATEASSETSREQUEST.fields_by_name['operations'].message_type = _ASSETOPERATION
@@ -249,8 +250,8 @@ AssetOperation = _reflection.GeneratedProtocolMessageType('AssetOperation', (_me
   __module__ = 'google.ads.googleads_v3.proto.services.asset_service_pb2'
   ,
   __doc__ = """A single operation to create an asset. Supported asset types are
-  YoutubeVideoAsset, MediaBundleAsset and ImageAsset. TextAsset should be
-  created with Ad inline.
+  YoutubeVideoAsset, MediaBundleAsset, ImageAsset, and LeadFormAsset.
+  TextAsset should be created with Ad inline.
   
   
   Attributes:
@@ -306,8 +307,8 @@ _ASSETSERVICE = _descriptor.ServiceDescriptor(
   file=DESCRIPTOR,
   index=0,
   serialized_options=_b('\312A\030googleads.googleapis.com'),
-  serialized_start=638,
-  serialized_end=1062,
+  serialized_start=700,
+  serialized_end=1124,
   methods=[
   _descriptor.MethodDescriptor(
     name='GetAsset',

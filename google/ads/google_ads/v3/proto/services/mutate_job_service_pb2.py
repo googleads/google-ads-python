@@ -18,6 +18,7 @@ from google.ads.google_ads.v3.proto.services import google_ads_service_pb2 as go
 from google.api import annotations_pb2 as google_dot_api_dot_annotations__pb2
 from google.api import client_pb2 as google_dot_api_dot_client__pb2
 from google.api import field_behavior_pb2 as google_dot_api_dot_field__behavior__pb2
+from google.api import resource_pb2 as google_dot_api_dot_resource__pb2
 from google.longrunning import operations_pb2 as google_dot_longrunning_dot_operations__pb2
 from google.rpc import status_pb2 as google_dot_rpc_dot_status__pb2
 
@@ -27,9 +28,9 @@ DESCRIPTOR = _descriptor.FileDescriptor(
   package='google.ads.googleads.v3.services',
   syntax='proto3',
   serialized_options=_b('\n$com.google.ads.googleads.v3.servicesB\025MutateJobServiceProtoP\001ZHgoogle.golang.org/genproto/googleapis/ads/googleads/v3/services;services\242\002\003GAA\252\002 Google.Ads.GoogleAds.V3.Services\312\002 Google\\Ads\\GoogleAds\\V3\\Services\352\002$Google::Ads::GoogleAds::V3::Services'),
-  serialized_pb=_b('\n?google/ads/googleads_v3/proto/services/mutate_job_service.proto\x12 google.ads.googleads.v3.services\x1a\x38google/ads/googleads_v3/proto/resources/mutate_job.proto\x1a?google/ads/googleads_v3/proto/services/google_ads_service.proto\x1a\x1cgoogle/api/annotations.proto\x1a\x17google/api/client.proto\x1a\x1fgoogle/api/field_behavior.proto\x1a#google/longrunning/operations.proto\x1a\x17google/rpc/status.proto\"2\n\x16\x43reateMutateJobRequest\x12\x18\n\x0b\x63ustomer_id\x18\x01 \x01(\tB\x03\xe0\x41\x02\"0\n\x17\x43reateMutateJobResponse\x12\x15\n\rresource_name\x18\x01 \x01(\t\"1\n\x13GetMutateJobRequest\x12\x1a\n\rresource_name\x18\x01 \x01(\tB\x03\xe0\x41\x02\"1\n\x13RunMutateJobRequest\x12\x1a\n\rresource_name\x18\x01 \x01(\tB\x03\xe0\x41\x02\"\xa6\x01\n\x1d\x41\x64\x64MutateJobOperationsRequest\x12\x1a\n\rresource_name\x18\x01 \x01(\tB\x03\xe0\x41\x02\x12\x16\n\x0esequence_token\x18\x02 \x01(\t\x12Q\n\x11mutate_operations\x18\x03 \x03(\x0b\x32\x31.google.ads.googleads.v3.services.MutateOperationB\x03\xe0\x41\x02\"W\n\x1e\x41\x64\x64MutateJobOperationsResponse\x12\x18\n\x10total_operations\x18\x01 \x01(\x03\x12\x1b\n\x13next_sequence_token\x18\x02 \x01(\t\"`\n\x1bListMutateJobResultsRequest\x12\x1a\n\rresource_name\x18\x01 \x01(\tB\x03\xe0\x41\x02\x12\x12\n\npage_token\x18\x02 \x01(\t\x12\x11\n\tpage_size\x18\x03 \x01(\x05\"{\n\x1cListMutateJobResultsResponse\x12\x42\n\x07results\x18\x01 \x03(\x0b\x32\x31.google.ads.googleads.v3.services.MutateJobResult\x12\x17\n\x0fnext_page_token\x18\x02 \x01(\t\"\xac\x01\n\x0fMutateJobResult\x12\x17\n\x0foperation_index\x18\x01 \x01(\x03\x12\\\n\x19mutate_operation_response\x18\x02 \x01(\x0b\x32\x39.google.ads.googleads.v3.services.MutateOperationResponse\x12\"\n\x06status\x18\x03 \x01(\x0b\x32\x12.google.rpc.Status2\xef\t\n\x10MutateJobService\x12\xd0\x01\n\x0f\x43reateMutateJob\x12\x38.google.ads.googleads.v3.services.CreateMutateJobRequest\x1a\x39.google.ads.googleads.v3.services.CreateMutateJobResponse\"H\x82\xd3\xe4\x93\x02\x34\"//v3/customers/{customer_id=*}/mutateJobs:create:\x01*\xda\x41\x0b\x63ustomer_id\x12\xb9\x01\n\x0cGetMutateJob\x12\x35.google.ads.googleads.v3.services.GetMutateJobRequest\x1a,.google.ads.googleads.v3.resources.MutateJob\"D\x82\xd3\xe4\x93\x02.\x12,/v3/{resource_name=customers/*/mutateJobs/*}\xda\x41\rresource_name\x12\xe7\x01\n\x14ListMutateJobResults\x12=.google.ads.googleads.v3.services.ListMutateJobResultsRequest\x1a>.google.ads.googleads.v3.services.ListMutateJobResultsResponse\"P\x82\xd3\xe4\x93\x02:\x12\x38/v3/{resource_name=customers/*/mutateJobs/*}:listResults\xda\x41\rresource_name\x12\x8b\x02\n\x0cRunMutateJob\x12\x35.google.ads.googleads.v3.services.RunMutateJobRequest\x1a\x1d.google.longrunning.Operation\"\xa4\x01\x82\xd3\xe4\x93\x02\x35\"0/v3/{resource_name=customers/*/mutateJobs/*}:run:\x01*\xda\x41\rresource_name\xca\x41V\n\x15google.protobuf.Empty\x12=google.ads.googleads.v3.resources.MutateJob.MutateJobMetadata\x12\xb6\x02\n\x16\x41\x64\x64MutateJobOperations\x12?.google.ads.googleads.v3.services.AddMutateJobOperationsRequest\x1a@.google.ads.googleads.v3.services.AddMutateJobOperationsResponse\"\x98\x01\x82\xd3\xe4\x93\x02?\":/v3/{resource_name=customers/*/mutateJobs/*}:addOperations:\x01*\xda\x41.resource_name,sequence_token,mutate_operations\xda\x41\x1fresource_name,mutate_operations\x1a\x1b\xca\x41\x18googleads.googleapis.comB\xfc\x01\n$com.google.ads.googleads.v3.servicesB\x15MutateJobServiceProtoP\x01ZHgoogle.golang.org/genproto/googleapis/ads/googleads/v3/services;services\xa2\x02\x03GAA\xaa\x02 Google.Ads.GoogleAds.V3.Services\xca\x02 Google\\Ads\\GoogleAds\\V3\\Services\xea\x02$Google::Ads::GoogleAds::V3::Servicesb\x06proto3')
+  serialized_pb=_b('\n?google/ads/googleads_v3/proto/services/mutate_job_service.proto\x12 google.ads.googleads.v3.services\x1a\x38google/ads/googleads_v3/proto/resources/mutate_job.proto\x1a?google/ads/googleads_v3/proto/services/google_ads_service.proto\x1a\x1cgoogle/api/annotations.proto\x1a\x17google/api/client.proto\x1a\x1fgoogle/api/field_behavior.proto\x1a\x19google/api/resource.proto\x1a#google/longrunning/operations.proto\x1a\x17google/rpc/status.proto\"2\n\x16\x43reateMutateJobRequest\x12\x18\n\x0b\x63ustomer_id\x18\x01 \x01(\tB\x03\xe0\x41\x02\"0\n\x17\x43reateMutateJobResponse\x12\x15\n\rresource_name\x18\x01 \x01(\t\"X\n\x13GetMutateJobRequest\x12\x41\n\rresource_name\x18\x01 \x01(\tB*\xe0\x41\x02\xfa\x41$\n\"googleads.googleapis.com/MutateJob\"X\n\x13RunMutateJobRequest\x12\x41\n\rresource_name\x18\x01 \x01(\tB*\xe0\x41\x02\xfa\x41$\n\"googleads.googleapis.com/MutateJob\"\xcd\x01\n\x1d\x41\x64\x64MutateJobOperationsRequest\x12\x41\n\rresource_name\x18\x01 \x01(\tB*\xe0\x41\x02\xfa\x41$\n\"googleads.googleapis.com/MutateJob\x12\x16\n\x0esequence_token\x18\x02 \x01(\t\x12Q\n\x11mutate_operations\x18\x03 \x03(\x0b\x32\x31.google.ads.googleads.v3.services.MutateOperationB\x03\xe0\x41\x02\"W\n\x1e\x41\x64\x64MutateJobOperationsResponse\x12\x18\n\x10total_operations\x18\x01 \x01(\x03\x12\x1b\n\x13next_sequence_token\x18\x02 \x01(\t\"\x87\x01\n\x1bListMutateJobResultsRequest\x12\x41\n\rresource_name\x18\x01 \x01(\tB*\xe0\x41\x02\xfa\x41$\n\"googleads.googleapis.com/MutateJob\x12\x12\n\npage_token\x18\x02 \x01(\t\x12\x11\n\tpage_size\x18\x03 \x01(\x05\"{\n\x1cListMutateJobResultsResponse\x12\x42\n\x07results\x18\x01 \x03(\x0b\x32\x31.google.ads.googleads.v3.services.MutateJobResult\x12\x17\n\x0fnext_page_token\x18\x02 \x01(\t\"\xac\x01\n\x0fMutateJobResult\x12\x17\n\x0foperation_index\x18\x01 \x01(\x03\x12\\\n\x19mutate_operation_response\x18\x02 \x01(\x0b\x32\x39.google.ads.googleads.v3.services.MutateOperationResponse\x12\"\n\x06status\x18\x03 \x01(\x0b\x32\x12.google.rpc.Status2\xef\t\n\x10MutateJobService\x12\xd0\x01\n\x0f\x43reateMutateJob\x12\x38.google.ads.googleads.v3.services.CreateMutateJobRequest\x1a\x39.google.ads.googleads.v3.services.CreateMutateJobResponse\"H\x82\xd3\xe4\x93\x02\x34\"//v3/customers/{customer_id=*}/mutateJobs:create:\x01*\xda\x41\x0b\x63ustomer_id\x12\xb9\x01\n\x0cGetMutateJob\x12\x35.google.ads.googleads.v3.services.GetMutateJobRequest\x1a,.google.ads.googleads.v3.resources.MutateJob\"D\x82\xd3\xe4\x93\x02.\x12,/v3/{resource_name=customers/*/mutateJobs/*}\xda\x41\rresource_name\x12\xe7\x01\n\x14ListMutateJobResults\x12=.google.ads.googleads.v3.services.ListMutateJobResultsRequest\x1a>.google.ads.googleads.v3.services.ListMutateJobResultsResponse\"P\x82\xd3\xe4\x93\x02:\x12\x38/v3/{resource_name=customers/*/mutateJobs/*}:listResults\xda\x41\rresource_name\x12\x8b\x02\n\x0cRunMutateJob\x12\x35.google.ads.googleads.v3.services.RunMutateJobRequest\x1a\x1d.google.longrunning.Operation\"\xa4\x01\x82\xd3\xe4\x93\x02\x35\"0/v3/{resource_name=customers/*/mutateJobs/*}:run:\x01*\xda\x41\rresource_name\xca\x41V\n\x15google.protobuf.Empty\x12=google.ads.googleads.v3.resources.MutateJob.MutateJobMetadata\x12\xb6\x02\n\x16\x41\x64\x64MutateJobOperations\x12?.google.ads.googleads.v3.services.AddMutateJobOperationsRequest\x1a@.google.ads.googleads.v3.services.AddMutateJobOperationsResponse\"\x98\x01\x82\xd3\xe4\x93\x02?\":/v3/{resource_name=customers/*/mutateJobs/*}:addOperations:\x01*\xda\x41.resource_name,sequence_token,mutate_operations\xda\x41\x1fresource_name,mutate_operations\x1a\x1b\xca\x41\x18googleads.googleapis.comB\xfc\x01\n$com.google.ads.googleads.v3.servicesB\x15MutateJobServiceProtoP\x01ZHgoogle.golang.org/genproto/googleapis/ads/googleads/v3/services;services\xa2\x02\x03GAA\xaa\x02 Google.Ads.GoogleAds.V3.Services\xca\x02 Google\\Ads\\GoogleAds\\V3\\Services\xea\x02$Google::Ads::GoogleAds::V3::Servicesb\x06proto3')
   ,
-  dependencies=[google_dot_ads_dot_googleads__v3_dot_proto_dot_resources_dot_mutate__job__pb2.DESCRIPTOR,google_dot_ads_dot_googleads__v3_dot_proto_dot_services_dot_google__ads__service__pb2.DESCRIPTOR,google_dot_api_dot_annotations__pb2.DESCRIPTOR,google_dot_api_dot_client__pb2.DESCRIPTOR,google_dot_api_dot_field__behavior__pb2.DESCRIPTOR,google_dot_longrunning_dot_operations__pb2.DESCRIPTOR,google_dot_rpc_dot_status__pb2.DESCRIPTOR,])
+  dependencies=[google_dot_ads_dot_googleads__v3_dot_proto_dot_resources_dot_mutate__job__pb2.DESCRIPTOR,google_dot_ads_dot_googleads__v3_dot_proto_dot_services_dot_google__ads__service__pb2.DESCRIPTOR,google_dot_api_dot_annotations__pb2.DESCRIPTOR,google_dot_api_dot_client__pb2.DESCRIPTOR,google_dot_api_dot_field__behavior__pb2.DESCRIPTOR,google_dot_api_dot_resource__pb2.DESCRIPTOR,google_dot_longrunning_dot_operations__pb2.DESCRIPTOR,google_dot_rpc_dot_status__pb2.DESCRIPTOR,])
 
 
 
@@ -60,8 +61,8 @@ _CREATEMUTATEJOBREQUEST = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=374,
-  serialized_end=424,
+  serialized_start=401,
+  serialized_end=451,
 )
 
 
@@ -91,8 +92,8 @@ _CREATEMUTATEJOBRESPONSE = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=426,
-  serialized_end=474,
+  serialized_start=453,
+  serialized_end=501,
 )
 
 
@@ -109,7 +110,7 @@ _GETMUTATEJOBREQUEST = _descriptor.Descriptor(
       has_default_value=False, default_value=_b("").decode('utf-8'),
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
-      serialized_options=_b('\340A\002'), file=DESCRIPTOR),
+      serialized_options=_b('\340A\002\372A$\n\"googleads.googleapis.com/MutateJob'), file=DESCRIPTOR),
   ],
   extensions=[
   ],
@@ -122,8 +123,8 @@ _GETMUTATEJOBREQUEST = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=476,
-  serialized_end=525,
+  serialized_start=503,
+  serialized_end=591,
 )
 
 
@@ -140,7 +141,7 @@ _RUNMUTATEJOBREQUEST = _descriptor.Descriptor(
       has_default_value=False, default_value=_b("").decode('utf-8'),
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
-      serialized_options=_b('\340A\002'), file=DESCRIPTOR),
+      serialized_options=_b('\340A\002\372A$\n\"googleads.googleapis.com/MutateJob'), file=DESCRIPTOR),
   ],
   extensions=[
   ],
@@ -153,8 +154,8 @@ _RUNMUTATEJOBREQUEST = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=527,
-  serialized_end=576,
+  serialized_start=593,
+  serialized_end=681,
 )
 
 
@@ -171,7 +172,7 @@ _ADDMUTATEJOBOPERATIONSREQUEST = _descriptor.Descriptor(
       has_default_value=False, default_value=_b("").decode('utf-8'),
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
-      serialized_options=_b('\340A\002'), file=DESCRIPTOR),
+      serialized_options=_b('\340A\002\372A$\n\"googleads.googleapis.com/MutateJob'), file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
       name='sequence_token', full_name='google.ads.googleads.v3.services.AddMutateJobOperationsRequest.sequence_token', index=1,
       number=2, type=9, cpp_type=9, label=1,
@@ -198,8 +199,8 @@ _ADDMUTATEJOBOPERATIONSREQUEST = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=579,
-  serialized_end=745,
+  serialized_start=684,
+  serialized_end=889,
 )
 
 
@@ -236,8 +237,8 @@ _ADDMUTATEJOBOPERATIONSRESPONSE = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=747,
-  serialized_end=834,
+  serialized_start=891,
+  serialized_end=978,
 )
 
 
@@ -254,7 +255,7 @@ _LISTMUTATEJOBRESULTSREQUEST = _descriptor.Descriptor(
       has_default_value=False, default_value=_b("").decode('utf-8'),
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
-      serialized_options=_b('\340A\002'), file=DESCRIPTOR),
+      serialized_options=_b('\340A\002\372A$\n\"googleads.googleapis.com/MutateJob'), file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
       name='page_token', full_name='google.ads.googleads.v3.services.ListMutateJobResultsRequest.page_token', index=1,
       number=2, type=9, cpp_type=9, label=1,
@@ -281,8 +282,8 @@ _LISTMUTATEJOBRESULTSREQUEST = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=836,
-  serialized_end=932,
+  serialized_start=981,
+  serialized_end=1116,
 )
 
 
@@ -319,8 +320,8 @@ _LISTMUTATEJOBRESULTSRESPONSE = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=934,
-  serialized_end=1057,
+  serialized_start=1118,
+  serialized_end=1241,
 )
 
 
@@ -364,8 +365,8 @@ _MUTATEJOBRESULT = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=1060,
-  serialized_end=1232,
+  serialized_start=1244,
+  serialized_end=1416,
 )
 
 _ADDMUTATEJOBOPERATIONSREQUEST.fields_by_name['mutate_operations'].message_type = google_dot_ads_dot_googleads__v3_dot_proto_dot_services_dot_google__ads__service__pb2._MUTATEOPERATION
@@ -580,8 +581,8 @@ _MUTATEJOBSERVICE = _descriptor.ServiceDescriptor(
   file=DESCRIPTOR,
   index=0,
   serialized_options=_b('\312A\030googleads.googleapis.com'),
-  serialized_start=1235,
-  serialized_end=2498,
+  serialized_start=1419,
+  serialized_end=2682,
   methods=[
   _descriptor.MethodDescriptor(
     name='CreateMutateJob',

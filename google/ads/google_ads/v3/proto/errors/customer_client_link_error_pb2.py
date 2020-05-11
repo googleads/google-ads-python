@@ -21,7 +21,7 @@ DESCRIPTOR = _descriptor.FileDescriptor(
   package='google.ads.googleads.v3.errors',
   syntax='proto3',
   serialized_options=_b('\n\"com.google.ads.googleads.v3.errorsB\034CustomerClientLinkErrorProtoP\001ZDgoogle.golang.org/genproto/googleapis/ads/googleads/v3/errors;errors\242\002\003GAA\252\002\036Google.Ads.GoogleAds.V3.Errors\312\002\036Google\\Ads\\GoogleAds\\V3\\Errors\352\002\"Google::Ads::GoogleAds::V3::Errors'),
-  serialized_pb=_b('\nEgoogle/ads/googleads_v3/proto/errors/customer_client_link_error.proto\x12\x1egoogle.ads.googleads.v3.errors\x1a\x1cgoogle/api/annotations.proto\"\xed\x02\n\x1b\x43ustomerClientLinkErrorEnum\"\xcd\x02\n\x17\x43ustomerClientLinkError\x12\x0f\n\x0bUNSPECIFIED\x10\x00\x12\x0b\n\x07UNKNOWN\x10\x01\x12*\n&CLIENT_ALREADY_INVITED_BY_THIS_MANAGER\x10\x02\x12\'\n#CLIENT_ALREADY_MANAGED_IN_HIERARCHY\x10\x03\x12\x1b\n\x17\x43YCLIC_LINK_NOT_ALLOWED\x10\x04\x12\"\n\x1e\x43USTOMER_HAS_TOO_MANY_ACCOUNTS\x10\x05\x12#\n\x1f\x43LIENT_HAS_TOO_MANY_INVITATIONS\x10\x06\x12*\n&CANNOT_HIDE_OR_UNHIDE_MANAGER_ACCOUNTS\x10\x07\x12-\n)CUSTOMER_HAS_TOO_MANY_ACCOUNTS_AT_MANAGER\x10\x08\x42\xf7\x01\n\"com.google.ads.googleads.v3.errorsB\x1c\x43ustomerClientLinkErrorProtoP\x01ZDgoogle.golang.org/genproto/googleapis/ads/googleads/v3/errors;errors\xa2\x02\x03GAA\xaa\x02\x1eGoogle.Ads.GoogleAds.V3.Errors\xca\x02\x1eGoogle\\Ads\\GoogleAds\\V3\\Errors\xea\x02\"Google::Ads::GoogleAds::V3::Errorsb\x06proto3')
+  serialized_pb=_b('\nEgoogle/ads/googleads_v3/proto/errors/customer_client_link_error.proto\x12\x1egoogle.ads.googleads.v3.errors\x1a\x1cgoogle/api/annotations.proto\"\x8f\x03\n\x1b\x43ustomerClientLinkErrorEnum\"\xef\x02\n\x17\x43ustomerClientLinkError\x12\x0f\n\x0bUNSPECIFIED\x10\x00\x12\x0b\n\x07UNKNOWN\x10\x01\x12*\n&CLIENT_ALREADY_INVITED_BY_THIS_MANAGER\x10\x02\x12\'\n#CLIENT_ALREADY_MANAGED_IN_HIERARCHY\x10\x03\x12\x1b\n\x17\x43YCLIC_LINK_NOT_ALLOWED\x10\x04\x12\"\n\x1e\x43USTOMER_HAS_TOO_MANY_ACCOUNTS\x10\x05\x12#\n\x1f\x43LIENT_HAS_TOO_MANY_INVITATIONS\x10\x06\x12*\n&CANNOT_HIDE_OR_UNHIDE_MANAGER_ACCOUNTS\x10\x07\x12-\n)CUSTOMER_HAS_TOO_MANY_ACCOUNTS_AT_MANAGER\x10\x08\x12 \n\x1c\x43LIENT_HAS_TOO_MANY_MANAGERS\x10\tB\xf7\x01\n\"com.google.ads.googleads.v3.errorsB\x1c\x43ustomerClientLinkErrorProtoP\x01ZDgoogle.golang.org/genproto/googleapis/ads/googleads/v3/errors;errors\xa2\x02\x03GAA\xaa\x02\x1eGoogle.Ads.GoogleAds.V3.Errors\xca\x02\x1eGoogle\\Ads\\GoogleAds\\V3\\Errors\xea\x02\"Google::Ads::GoogleAds::V3::Errorsb\x06proto3')
   ,
   dependencies=[google_dot_api_dot_annotations__pb2.DESCRIPTOR,])
 
@@ -69,11 +69,15 @@ _CUSTOMERCLIENTLINKERRORENUM_CUSTOMERCLIENTLINKERROR = _descriptor.EnumDescripto
       name='CUSTOMER_HAS_TOO_MANY_ACCOUNTS_AT_MANAGER', index=8, number=8,
       serialized_options=None,
       type=None),
+    _descriptor.EnumValueDescriptor(
+      name='CLIENT_HAS_TOO_MANY_MANAGERS', index=9, number=9,
+      serialized_options=None,
+      type=None),
   ],
   containing_type=None,
   serialized_options=None,
   serialized_start=168,
-  serialized_end=501,
+  serialized_end=535,
 )
 _sym_db.RegisterEnumDescriptor(_CUSTOMERCLIENTLINKERRORENUM_CUSTOMERCLIENTLINKERROR)
 
@@ -99,7 +103,7 @@ _CUSTOMERCLIENTLINKERRORENUM = _descriptor.Descriptor(
   oneofs=[
   ],
   serialized_start=136,
-  serialized_end=501,
+  serialized_end=535,
 )
 
 _CUSTOMERCLIENTLINKERRORENUM_CUSTOMERCLIENTLINKERROR.containing_type = _CUSTOMERCLIENTLINKERRORENUM

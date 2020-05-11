@@ -20,6 +20,7 @@ from google.ads.google_ads.v3.proto.common import url_collection_pb2 as google_d
 from google.ads.google_ads.v3.proto.enums import ad_type_pb2 as google_dot_ads_dot_googleads__v3_dot_proto_dot_enums_dot_ad__type__pb2
 from google.ads.google_ads.v3.proto.enums import device_pb2 as google_dot_ads_dot_googleads__v3_dot_proto_dot_enums_dot_device__pb2
 from google.ads.google_ads.v3.proto.enums import system_managed_entity_source_pb2 as google_dot_ads_dot_googleads__v3_dot_proto_dot_enums_dot_system__managed__entity__source__pb2
+from google.api import field_behavior_pb2 as google_dot_api_dot_field__behavior__pb2
 from google.api import resource_pb2 as google_dot_api_dot_resource__pb2
 from google.protobuf import wrappers_pb2 as google_dot_protobuf_dot_wrappers__pb2
 from google.api import annotations_pb2 as google_dot_api_dot_annotations__pb2
@@ -30,9 +31,9 @@ DESCRIPTOR = _descriptor.FileDescriptor(
   package='google.ads.googleads.v3.resources',
   syntax='proto3',
   serialized_options=_b('\n%com.google.ads.googleads.v3.resourcesB\007AdProtoP\001ZJgoogle.golang.org/genproto/googleapis/ads/googleads/v3/resources;resources\242\002\003GAA\252\002!Google.Ads.GoogleAds.V3.Resources\312\002!Google\\Ads\\GoogleAds\\V3\\Resources\352\002%Google::Ads::GoogleAds::V3::Resources'),
-  serialized_pb=_b('\n0google/ads/googleads_v3/proto/resources/ad.proto\x12!google.ads.googleads.v3.resources\x1a\x38google/ads/googleads_v3/proto/common/ad_type_infos.proto\x1a;google/ads/googleads_v3/proto/common/custom_parameter.proto\x1a\x38google/ads/googleads_v3/proto/common/final_app_url.proto\x1a\x39google/ads/googleads_v3/proto/common/url_collection.proto\x1a\x31google/ads/googleads_v3/proto/enums/ad_type.proto\x1a\x30google/ads/googleads_v3/proto/enums/device.proto\x1a\x46google/ads/googleads_v3/proto/enums/system_managed_entity_source.proto\x1a\x19google/api/resource.proto\x1a\x1egoogle/protobuf/wrappers.proto\x1a\x1cgoogle/api/annotations.proto\"\x9b\x13\n\x02\x41\x64\x12\x15\n\rresource_name\x18% \x01(\t\x12\'\n\x02id\x18\x01 \x01(\x0b\x32\x1b.google.protobuf.Int64Value\x12\x30\n\nfinal_urls\x18\x02 \x03(\x0b\x32\x1c.google.protobuf.StringValue\x12\x43\n\x0e\x66inal_app_urls\x18# \x03(\x0b\x32+.google.ads.googleads.v3.common.FinalAppUrl\x12\x37\n\x11\x66inal_mobile_urls\x18\x10 \x03(\x0b\x32\x1c.google.protobuf.StringValue\x12;\n\x15tracking_url_template\x18\x0c \x01(\x0b\x32\x1c.google.protobuf.StringValue\x12\x36\n\x10\x66inal_url_suffix\x18& \x01(\x0b\x32\x1c.google.protobuf.StringValue\x12N\n\x15url_custom_parameters\x18\n \x03(\x0b\x32/.google.ads.googleads.v3.common.CustomParameter\x12\x31\n\x0b\x64isplay_url\x18\x04 \x01(\x0b\x32\x1c.google.protobuf.StringValue\x12>\n\x04type\x18\x05 \x01(\x0e\x32\x30.google.ads.googleads.v3.enums.AdTypeEnum.AdType\x12\x37\n\x13\x61\x64\x64\x65\x64_by_google_ads\x18\x13 \x01(\x0b\x32\x1a.google.protobuf.BoolValue\x12K\n\x11\x64\x65vice_preference\x18\x14 \x01(\x0e\x32\x30.google.ads.googleads.v3.enums.DeviceEnum.Device\x12\x46\n\x0furl_collections\x18\x1a \x03(\x0b\x32-.google.ads.googleads.v3.common.UrlCollection\x12*\n\x04name\x18\x17 \x01(\x0b\x32\x1c.google.protobuf.StringValue\x12\x82\x01\n\x1esystem_managed_resource_source\x18\x1b \x01(\x0e\x32Z.google.ads.googleads.v3.enums.SystemManagedResourceSourceEnum.SystemManagedResourceSource\x12=\n\x07text_ad\x18\x06 \x01(\x0b\x32*.google.ads.googleads.v3.common.TextAdInfoH\x00\x12N\n\x10\x65xpanded_text_ad\x18\x07 \x01(\x0b\x32\x32.google.ads.googleads.v3.common.ExpandedTextAdInfoH\x00\x12\x46\n\x0c\x63\x61ll_only_ad\x18\r \x01(\x0b\x32..google.ads.googleads.v3.common.CallOnlyAdInfoH\x00\x12\x61\n\x1a\x65xpanded_dynamic_search_ad\x18\x0e \x01(\x0b\x32;.google.ads.googleads.v3.common.ExpandedDynamicSearchAdInfoH\x00\x12?\n\x08hotel_ad\x18\x0f \x01(\x0b\x32+.google.ads.googleads.v3.common.HotelAdInfoH\x00\x12P\n\x11shopping_smart_ad\x18\x11 \x01(\x0b\x32\x33.google.ads.googleads.v3.common.ShoppingSmartAdInfoH\x00\x12T\n\x13shopping_product_ad\x18\x12 \x01(\x0b\x32\x35.google.ads.googleads.v3.common.ShoppingProductAdInfoH\x00\x12?\n\x08gmail_ad\x18\x15 \x01(\x0b\x32+.google.ads.googleads.v3.common.GmailAdInfoH\x00\x12?\n\x08image_ad\x18\x16 \x01(\x0b\x32+.google.ads.googleads.v3.common.ImageAdInfoH\x00\x12?\n\x08video_ad\x18\x18 \x01(\x0b\x32+.google.ads.googleads.v3.common.VideoAdInfoH\x00\x12V\n\x14responsive_search_ad\x18\x19 \x01(\x0b\x32\x36.google.ads.googleads.v3.common.ResponsiveSearchAdInfoH\x00\x12\x65\n\x1clegacy_responsive_display_ad\x18\x1c \x01(\x0b\x32=.google.ads.googleads.v3.common.LegacyResponsiveDisplayAdInfoH\x00\x12;\n\x06\x61pp_ad\x18\x1d \x01(\x0b\x32).google.ads.googleads.v3.common.AppAdInfoH\x00\x12W\n\x15legacy_app_install_ad\x18\x1e \x01(\x0b\x32\x36.google.ads.googleads.v3.common.LegacyAppInstallAdInfoH\x00\x12X\n\x15responsive_display_ad\x18\x1f \x01(\x0b\x32\x37.google.ads.googleads.v3.common.ResponsiveDisplayAdInfoH\x00\x12P\n\x11\x64isplay_upload_ad\x18! \x01(\x0b\x32\x33.google.ads.googleads.v3.common.DisplayUploadAdInfoH\x00\x12P\n\x11\x61pp_engagement_ad\x18\" \x01(\x0b\x32\x33.google.ads.googleads.v3.common.AppEngagementAdInfoH\x00\x12i\n\x1eshopping_comparison_listing_ad\x18$ \x01(\x0b\x32?.google.ads.googleads.v3.common.ShoppingComparisonListingAdInfoH\x00:?\xea\x41<\n\x1bgoogleads.googleapis.com/Ad\x12\x1d\x63ustomers/{customer}/ads/{ad}B\t\n\x07\x61\x64_dataB\xf4\x01\n%com.google.ads.googleads.v3.resourcesB\x07\x41\x64ProtoP\x01ZJgoogle.golang.org/genproto/googleapis/ads/googleads/v3/resources;resources\xa2\x02\x03GAA\xaa\x02!Google.Ads.GoogleAds.V3.Resources\xca\x02!Google\\Ads\\GoogleAds\\V3\\Resources\xea\x02%Google::Ads::GoogleAds::V3::Resourcesb\x06proto3')
+  serialized_pb=_b('\n0google/ads/googleads_v3/proto/resources/ad.proto\x12!google.ads.googleads.v3.resources\x1a\x38google/ads/googleads_v3/proto/common/ad_type_infos.proto\x1a;google/ads/googleads_v3/proto/common/custom_parameter.proto\x1a\x38google/ads/googleads_v3/proto/common/final_app_url.proto\x1a\x39google/ads/googleads_v3/proto/common/url_collection.proto\x1a\x31google/ads/googleads_v3/proto/enums/ad_type.proto\x1a\x30google/ads/googleads_v3/proto/enums/device.proto\x1a\x46google/ads/googleads_v3/proto/enums/system_managed_entity_source.proto\x1a\x1fgoogle/api/field_behavior.proto\x1a\x19google/api/resource.proto\x1a\x1egoogle/protobuf/wrappers.proto\x1a\x1cgoogle/api/annotations.proto\"\xde\x13\n\x02\x41\x64\x12:\n\rresource_name\x18% \x01(\tB#\xe0\x41\x05\xfa\x41\x1d\n\x1bgoogleads.googleapis.com/Ad\x12,\n\x02id\x18\x01 \x01(\x0b\x32\x1b.google.protobuf.Int64ValueB\x03\xe0\x41\x03\x12\x30\n\nfinal_urls\x18\x02 \x03(\x0b\x32\x1c.google.protobuf.StringValue\x12\x43\n\x0e\x66inal_app_urls\x18# \x03(\x0b\x32+.google.ads.googleads.v3.common.FinalAppUrl\x12\x37\n\x11\x66inal_mobile_urls\x18\x10 \x03(\x0b\x32\x1c.google.protobuf.StringValue\x12;\n\x15tracking_url_template\x18\x0c \x01(\x0b\x32\x1c.google.protobuf.StringValue\x12\x36\n\x10\x66inal_url_suffix\x18& \x01(\x0b\x32\x1c.google.protobuf.StringValue\x12N\n\x15url_custom_parameters\x18\n \x03(\x0b\x32/.google.ads.googleads.v3.common.CustomParameter\x12\x31\n\x0b\x64isplay_url\x18\x04 \x01(\x0b\x32\x1c.google.protobuf.StringValue\x12\x43\n\x04type\x18\x05 \x01(\x0e\x32\x30.google.ads.googleads.v3.enums.AdTypeEnum.AdTypeB\x03\xe0\x41\x03\x12<\n\x13\x61\x64\x64\x65\x64_by_google_ads\x18\x13 \x01(\x0b\x32\x1a.google.protobuf.BoolValueB\x03\xe0\x41\x03\x12K\n\x11\x64\x65vice_preference\x18\x14 \x01(\x0e\x32\x30.google.ads.googleads.v3.enums.DeviceEnum.Device\x12\x46\n\x0furl_collections\x18\x1a \x03(\x0b\x32-.google.ads.googleads.v3.common.UrlCollection\x12/\n\x04name\x18\x17 \x01(\x0b\x32\x1c.google.protobuf.StringValueB\x03\xe0\x41\x05\x12\x87\x01\n\x1esystem_managed_resource_source\x18\x1b \x01(\x0e\x32Z.google.ads.googleads.v3.enums.SystemManagedResourceSourceEnum.SystemManagedResourceSourceB\x03\xe0\x41\x03\x12=\n\x07text_ad\x18\x06 \x01(\x0b\x32*.google.ads.googleads.v3.common.TextAdInfoH\x00\x12N\n\x10\x65xpanded_text_ad\x18\x07 \x01(\x0b\x32\x32.google.ads.googleads.v3.common.ExpandedTextAdInfoH\x00\x12\x46\n\x0c\x63\x61ll_only_ad\x18\r \x01(\x0b\x32..google.ads.googleads.v3.common.CallOnlyAdInfoH\x00\x12\x61\n\x1a\x65xpanded_dynamic_search_ad\x18\x0e \x01(\x0b\x32;.google.ads.googleads.v3.common.ExpandedDynamicSearchAdInfoH\x00\x12?\n\x08hotel_ad\x18\x0f \x01(\x0b\x32+.google.ads.googleads.v3.common.HotelAdInfoH\x00\x12P\n\x11shopping_smart_ad\x18\x11 \x01(\x0b\x32\x33.google.ads.googleads.v3.common.ShoppingSmartAdInfoH\x00\x12T\n\x13shopping_product_ad\x18\x12 \x01(\x0b\x32\x35.google.ads.googleads.v3.common.ShoppingProductAdInfoH\x00\x12?\n\x08gmail_ad\x18\x15 \x01(\x0b\x32+.google.ads.googleads.v3.common.GmailAdInfoH\x00\x12?\n\x08image_ad\x18\x16 \x01(\x0b\x32+.google.ads.googleads.v3.common.ImageAdInfoH\x00\x12?\n\x08video_ad\x18\x18 \x01(\x0b\x32+.google.ads.googleads.v3.common.VideoAdInfoH\x00\x12V\n\x14responsive_search_ad\x18\x19 \x01(\x0b\x32\x36.google.ads.googleads.v3.common.ResponsiveSearchAdInfoH\x00\x12\x65\n\x1clegacy_responsive_display_ad\x18\x1c \x01(\x0b\x32=.google.ads.googleads.v3.common.LegacyResponsiveDisplayAdInfoH\x00\x12;\n\x06\x61pp_ad\x18\x1d \x01(\x0b\x32).google.ads.googleads.v3.common.AppAdInfoH\x00\x12\\\n\x15legacy_app_install_ad\x18\x1e \x01(\x0b\x32\x36.google.ads.googleads.v3.common.LegacyAppInstallAdInfoB\x03\xe0\x41\x05H\x00\x12X\n\x15responsive_display_ad\x18\x1f \x01(\x0b\x32\x37.google.ads.googleads.v3.common.ResponsiveDisplayAdInfoH\x00\x12P\n\x11\x64isplay_upload_ad\x18! \x01(\x0b\x32\x33.google.ads.googleads.v3.common.DisplayUploadAdInfoH\x00\x12P\n\x11\x61pp_engagement_ad\x18\" \x01(\x0b\x32\x33.google.ads.googleads.v3.common.AppEngagementAdInfoH\x00\x12i\n\x1eshopping_comparison_listing_ad\x18$ \x01(\x0b\x32?.google.ads.googleads.v3.common.ShoppingComparisonListingAdInfoH\x00:?\xea\x41<\n\x1bgoogleads.googleapis.com/Ad\x12\x1d\x63ustomers/{customer}/ads/{ad}B\t\n\x07\x61\x64_dataB\xf4\x01\n%com.google.ads.googleads.v3.resourcesB\x07\x41\x64ProtoP\x01ZJgoogle.golang.org/genproto/googleapis/ads/googleads/v3/resources;resources\xa2\x02\x03GAA\xaa\x02!Google.Ads.GoogleAds.V3.Resources\xca\x02!Google\\Ads\\GoogleAds\\V3\\Resources\xea\x02%Google::Ads::GoogleAds::V3::Resourcesb\x06proto3')
   ,
-  dependencies=[google_dot_ads_dot_googleads__v3_dot_proto_dot_common_dot_ad__type__infos__pb2.DESCRIPTOR,google_dot_ads_dot_googleads__v3_dot_proto_dot_common_dot_custom__parameter__pb2.DESCRIPTOR,google_dot_ads_dot_googleads__v3_dot_proto_dot_common_dot_final__app__url__pb2.DESCRIPTOR,google_dot_ads_dot_googleads__v3_dot_proto_dot_common_dot_url__collection__pb2.DESCRIPTOR,google_dot_ads_dot_googleads__v3_dot_proto_dot_enums_dot_ad__type__pb2.DESCRIPTOR,google_dot_ads_dot_googleads__v3_dot_proto_dot_enums_dot_device__pb2.DESCRIPTOR,google_dot_ads_dot_googleads__v3_dot_proto_dot_enums_dot_system__managed__entity__source__pb2.DESCRIPTOR,google_dot_api_dot_resource__pb2.DESCRIPTOR,google_dot_protobuf_dot_wrappers__pb2.DESCRIPTOR,google_dot_api_dot_annotations__pb2.DESCRIPTOR,])
+  dependencies=[google_dot_ads_dot_googleads__v3_dot_proto_dot_common_dot_ad__type__infos__pb2.DESCRIPTOR,google_dot_ads_dot_googleads__v3_dot_proto_dot_common_dot_custom__parameter__pb2.DESCRIPTOR,google_dot_ads_dot_googleads__v3_dot_proto_dot_common_dot_final__app__url__pb2.DESCRIPTOR,google_dot_ads_dot_googleads__v3_dot_proto_dot_common_dot_url__collection__pb2.DESCRIPTOR,google_dot_ads_dot_googleads__v3_dot_proto_dot_enums_dot_ad__type__pb2.DESCRIPTOR,google_dot_ads_dot_googleads__v3_dot_proto_dot_enums_dot_device__pb2.DESCRIPTOR,google_dot_ads_dot_googleads__v3_dot_proto_dot_enums_dot_system__managed__entity__source__pb2.DESCRIPTOR,google_dot_api_dot_field__behavior__pb2.DESCRIPTOR,google_dot_api_dot_resource__pb2.DESCRIPTOR,google_dot_protobuf_dot_wrappers__pb2.DESCRIPTOR,google_dot_api_dot_annotations__pb2.DESCRIPTOR,])
 
 
 
@@ -50,14 +51,14 @@ _AD = _descriptor.Descriptor(
       has_default_value=False, default_value=_b("").decode('utf-8'),
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR),
+      serialized_options=_b('\340A\005\372A\035\n\033googleads.googleapis.com/Ad'), file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
       name='id', full_name='google.ads.googleads.v3.resources.Ad.id', index=1,
       number=1, type=11, cpp_type=10, label=1,
       has_default_value=False, default_value=None,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR),
+      serialized_options=_b('\340A\003'), file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
       name='final_urls', full_name='google.ads.googleads.v3.resources.Ad.final_urls', index=2,
       number=2, type=11, cpp_type=10, label=3,
@@ -113,14 +114,14 @@ _AD = _descriptor.Descriptor(
       has_default_value=False, default_value=0,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR),
+      serialized_options=_b('\340A\003'), file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
       name='added_by_google_ads', full_name='google.ads.googleads.v3.resources.Ad.added_by_google_ads', index=10,
       number=19, type=11, cpp_type=10, label=1,
       has_default_value=False, default_value=None,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR),
+      serialized_options=_b('\340A\003'), file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
       name='device_preference', full_name='google.ads.googleads.v3.resources.Ad.device_preference', index=11,
       number=20, type=14, cpp_type=8, label=1,
@@ -141,14 +142,14 @@ _AD = _descriptor.Descriptor(
       has_default_value=False, default_value=None,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR),
+      serialized_options=_b('\340A\005'), file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
       name='system_managed_resource_source', full_name='google.ads.googleads.v3.resources.Ad.system_managed_resource_source', index=14,
       number=27, type=14, cpp_type=8, label=1,
       has_default_value=False, default_value=0,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR),
+      serialized_options=_b('\340A\003'), file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
       name='text_ad', full_name='google.ads.googleads.v3.resources.Ad.text_ad', index=15,
       number=6, type=11, cpp_type=10, label=1,
@@ -246,7 +247,7 @@ _AD = _descriptor.Descriptor(
       has_default_value=False, default_value=None,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR),
+      serialized_options=_b('\340A\005'), file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
       name='responsive_display_ad', full_name='google.ads.googleads.v3.resources.Ad.responsive_display_ad', index=29,
       number=31, type=11, cpp_type=10, label=1,
@@ -290,8 +291,8 @@ _AD = _descriptor.Descriptor(
       name='ad_data', full_name='google.ads.googleads.v3.resources.Ad.ad_data',
       index=0, containing_type=None, fields=[]),
   ],
-  serialized_start=586,
-  serialized_end=3045,
+  serialized_start=619,
+  serialized_end=3145,
 )
 
 _AD.fields_by_name['id'].message_type = google_dot_protobuf_dot_wrappers__pb2._INT64VALUE
@@ -392,10 +393,10 @@ Ad = _reflection.GeneratedProtocolMessageType('Ad', (_message.Message,), dict(
   
   Attributes:
       resource_name:
-          The resource name of the ad. Ad resource names have the form:
-          ``customers/{customer_id}/ads/{ad_id}``
+          Immutable. The resource name of the ad. Ad resource names have
+          the form:  ``customers/{customer_id}/ads/{ad_id}``
       id:
-          The ID of the ad.
+          Output only. The ID of the ad.
       final_urls:
           The list of possible final URLs after all cross-domain
           redirects for the ad.
@@ -412,17 +413,18 @@ Ad = _reflection.GeneratedProtocolMessageType('Ad', (_message.Message,), dict(
       url_custom_parameters:
           The list of mappings that can be used to substitute custom
           parameter tags in a ``tracking_url_template``, ``final_urls``,
-          or ``mobile_final_urls``.
+          or ``mobile_final_urls``. For mutates, please use url custom
+          parameter operations.
       display_url:
           The URL that appears in the ad description for some ad
           formats.
       type:
-          The type of ad.
+          Output only. The type of ad.
       added_by_google_ads:
-          Indicates if this ad was automatically added by Google Ads and
-          not by a user. For example, this could happen when ads are
-          automatically created as suggestions for new ads based on
-          knowledge of how existing ads are performing.
+          Output only. Indicates if this ad was automatically added by
+          Google Ads and not by a user. For example, this could happen
+          when ads are automatically created as suggestions for new ads
+          based on knowledge of how existing ads are performing.
       device_preference:
           The device preference for the ad. You can only specify a
           preference for mobile devices. When this preference is set the
@@ -435,12 +437,12 @@ Ad = _reflection.GeneratedProtocolMessageType('Ad', (_message.Message,), dict(
           Additional URLs for the ad that are tagged with a unique
           identifier that can be referenced from other fields in the ad.
       name:
-          The name of the ad. This is only used to be able to identify
-          the ad. It does not need to be unique and does not affect the
-          served ad.
+          Immutable. The name of the ad. This is only used to be able to
+          identify the ad. It does not need to be unique and does not
+          affect the served ad.
       system_managed_resource_source:
-          If this ad is system managed, then this field will indicate
-          the source. This field is read-only.
+          Output only. If this ad is system managed, then this field
+          will indicate the source. This field is read-only.
       ad_data:
           Details pertinent to the ad type. Exactly one value must be
           set.
@@ -475,7 +477,7 @@ Ad = _reflection.GeneratedProtocolMessageType('Ad', (_message.Message,), dict(
       app_ad:
           Details pertaining to an app ad.
       legacy_app_install_ad:
-          Details pertaining to a legacy app install ad.
+          Immutable. Details pertaining to a legacy app install ad.
       responsive_display_ad:
           Details pertaining to a responsive display ad.
       display_upload_ad:
@@ -491,5 +493,12 @@ _sym_db.RegisterMessage(Ad)
 
 
 DESCRIPTOR._options = None
+_AD.fields_by_name['resource_name']._options = None
+_AD.fields_by_name['id']._options = None
+_AD.fields_by_name['type']._options = None
+_AD.fields_by_name['added_by_google_ads']._options = None
+_AD.fields_by_name['name']._options = None
+_AD.fields_by_name['system_managed_resource_source']._options = None
+_AD.fields_by_name['legacy_app_install_ad']._options = None
 _AD._options = None
 # @@protoc_insertion_point(module_scope)

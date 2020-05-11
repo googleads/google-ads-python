@@ -14,6 +14,7 @@ _sym_db = _symbol_database.Default()
 
 
 from google.ads.google_ads.v3.proto.enums import geo_target_constant_status_pb2 as google_dot_ads_dot_googleads__v3_dot_proto_dot_enums_dot_geo__target__constant__status__pb2
+from google.api import field_behavior_pb2 as google_dot_api_dot_field__behavior__pb2
 from google.api import resource_pb2 as google_dot_api_dot_resource__pb2
 from google.protobuf import wrappers_pb2 as google_dot_protobuf_dot_wrappers__pb2
 from google.api import annotations_pb2 as google_dot_api_dot_annotations__pb2
@@ -24,9 +25,9 @@ DESCRIPTOR = _descriptor.FileDescriptor(
   package='google.ads.googleads.v3.resources',
   syntax='proto3',
   serialized_options=_b('\n%com.google.ads.googleads.v3.resourcesB\026GeoTargetConstantProtoP\001ZJgoogle.golang.org/genproto/googleapis/ads/googleads/v3/resources;resources\242\002\003GAA\252\002!Google.Ads.GoogleAds.V3.Resources\312\002!Google\\Ads\\GoogleAds\\V3\\Resources\352\002%Google::Ads::GoogleAds::V3::Resources'),
-  serialized_pb=_b('\nAgoogle/ads/googleads_v3/proto/resources/geo_target_constant.proto\x12!google.ads.googleads.v3.resources\x1a\x44google/ads/googleads_v3/proto/enums/geo_target_constant_status.proto\x1a\x19google/api/resource.proto\x1a\x1egoogle/protobuf/wrappers.proto\x1a\x1cgoogle/api/annotations.proto\"\xdb\x03\n\x11GeoTargetConstant\x12\x15\n\rresource_name\x18\x01 \x01(\t\x12\'\n\x02id\x18\x03 \x01(\x0b\x32\x1b.google.protobuf.Int64Value\x12*\n\x04name\x18\x04 \x01(\x0b\x32\x1c.google.protobuf.StringValue\x12\x32\n\x0c\x63ountry_code\x18\x05 \x01(\x0b\x32\x1c.google.protobuf.StringValue\x12\x31\n\x0btarget_type\x18\x06 \x01(\x0b\x32\x1c.google.protobuf.StringValue\x12\x62\n\x06status\x18\x07 \x01(\x0e\x32R.google.ads.googleads.v3.enums.GeoTargetConstantStatusEnum.GeoTargetConstantStatus\x12\x34\n\x0e\x63\x61nonical_name\x18\x08 \x01(\x0b\x32\x1c.google.protobuf.StringValue:Y\xea\x41V\n*googleads.googleapis.com/GeoTargetConstant\x12(geoTargetConstants/{geo_target_constant}B\x83\x02\n%com.google.ads.googleads.v3.resourcesB\x16GeoTargetConstantProtoP\x01ZJgoogle.golang.org/genproto/googleapis/ads/googleads/v3/resources;resources\xa2\x02\x03GAA\xaa\x02!Google.Ads.GoogleAds.V3.Resources\xca\x02!Google\\Ads\\GoogleAds\\V3\\Resources\xea\x02%Google::Ads::GoogleAds::V3::Resourcesb\x06proto3')
+  serialized_pb=_b('\nAgoogle/ads/googleads_v3/proto/resources/geo_target_constant.proto\x12!google.ads.googleads.v3.resources\x1a\x44google/ads/googleads_v3/proto/enums/geo_target_constant_status.proto\x1a\x1fgoogle/api/field_behavior.proto\x1a\x19google/api/resource.proto\x1a\x1egoogle/protobuf/wrappers.proto\x1a\x1cgoogle/api/annotations.proto\"\xad\x04\n\x11GeoTargetConstant\x12I\n\rresource_name\x18\x01 \x01(\tB2\xe0\x41\x03\xfa\x41,\n*googleads.googleapis.com/GeoTargetConstant\x12,\n\x02id\x18\x03 \x01(\x0b\x32\x1b.google.protobuf.Int64ValueB\x03\xe0\x41\x03\x12/\n\x04name\x18\x04 \x01(\x0b\x32\x1c.google.protobuf.StringValueB\x03\xe0\x41\x03\x12\x37\n\x0c\x63ountry_code\x18\x05 \x01(\x0b\x32\x1c.google.protobuf.StringValueB\x03\xe0\x41\x03\x12\x36\n\x0btarget_type\x18\x06 \x01(\x0b\x32\x1c.google.protobuf.StringValueB\x03\xe0\x41\x03\x12g\n\x06status\x18\x07 \x01(\x0e\x32R.google.ads.googleads.v3.enums.GeoTargetConstantStatusEnum.GeoTargetConstantStatusB\x03\xe0\x41\x03\x12\x39\n\x0e\x63\x61nonical_name\x18\x08 \x01(\x0b\x32\x1c.google.protobuf.StringValueB\x03\xe0\x41\x03:Y\xea\x41V\n*googleads.googleapis.com/GeoTargetConstant\x12(geoTargetConstants/{geo_target_constant}B\x83\x02\n%com.google.ads.googleads.v3.resourcesB\x16GeoTargetConstantProtoP\x01ZJgoogle.golang.org/genproto/googleapis/ads/googleads/v3/resources;resources\xa2\x02\x03GAA\xaa\x02!Google.Ads.GoogleAds.V3.Resources\xca\x02!Google\\Ads\\GoogleAds\\V3\\Resources\xea\x02%Google::Ads::GoogleAds::V3::Resourcesb\x06proto3')
   ,
-  dependencies=[google_dot_ads_dot_googleads__v3_dot_proto_dot_enums_dot_geo__target__constant__status__pb2.DESCRIPTOR,google_dot_api_dot_resource__pb2.DESCRIPTOR,google_dot_protobuf_dot_wrappers__pb2.DESCRIPTOR,google_dot_api_dot_annotations__pb2.DESCRIPTOR,])
+  dependencies=[google_dot_ads_dot_googleads__v3_dot_proto_dot_enums_dot_geo__target__constant__status__pb2.DESCRIPTOR,google_dot_api_dot_field__behavior__pb2.DESCRIPTOR,google_dot_api_dot_resource__pb2.DESCRIPTOR,google_dot_protobuf_dot_wrappers__pb2.DESCRIPTOR,google_dot_api_dot_annotations__pb2.DESCRIPTOR,])
 
 
 
@@ -44,49 +45,49 @@ _GEOTARGETCONSTANT = _descriptor.Descriptor(
       has_default_value=False, default_value=_b("").decode('utf-8'),
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR),
+      serialized_options=_b('\340A\003\372A,\n*googleads.googleapis.com/GeoTargetConstant'), file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
       name='id', full_name='google.ads.googleads.v3.resources.GeoTargetConstant.id', index=1,
       number=3, type=11, cpp_type=10, label=1,
       has_default_value=False, default_value=None,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR),
+      serialized_options=_b('\340A\003'), file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
       name='name', full_name='google.ads.googleads.v3.resources.GeoTargetConstant.name', index=2,
       number=4, type=11, cpp_type=10, label=1,
       has_default_value=False, default_value=None,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR),
+      serialized_options=_b('\340A\003'), file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
       name='country_code', full_name='google.ads.googleads.v3.resources.GeoTargetConstant.country_code', index=3,
       number=5, type=11, cpp_type=10, label=1,
       has_default_value=False, default_value=None,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR),
+      serialized_options=_b('\340A\003'), file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
       name='target_type', full_name='google.ads.googleads.v3.resources.GeoTargetConstant.target_type', index=4,
       number=6, type=11, cpp_type=10, label=1,
       has_default_value=False, default_value=None,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR),
+      serialized_options=_b('\340A\003'), file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
       name='status', full_name='google.ads.googleads.v3.resources.GeoTargetConstant.status', index=5,
       number=7, type=14, cpp_type=8, label=1,
       has_default_value=False, default_value=0,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR),
+      serialized_options=_b('\340A\003'), file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
       name='canonical_name', full_name='google.ads.googleads.v3.resources.GeoTargetConstant.canonical_name', index=6,
       number=8, type=11, cpp_type=10, label=1,
       has_default_value=False, default_value=None,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR),
+      serialized_options=_b('\340A\003'), file=DESCRIPTOR),
   ],
   extensions=[
   ],
@@ -99,8 +100,8 @@ _GEOTARGETCONSTANT = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=264,
-  serialized_end=739,
+  serialized_start=297,
+  serialized_end=854,
 )
 
 _GEOTARGETCONSTANT.fields_by_name['id'].message_type = google_dot_protobuf_dot_wrappers__pb2._INT64VALUE
@@ -121,23 +122,23 @@ GeoTargetConstant = _reflection.GeneratedProtocolMessageType('GeoTargetConstant'
   
   Attributes:
       resource_name:
-          The resource name of the geo target constant. Geo target
-          constant resource names have the form:
+          Output only. The resource name of the geo target constant. Geo
+          target constant resource names have the form:
           ``geoTargetConstants/{geo_target_constant_id}``
       id:
-          The ID of the geo target constant.
+          Output only. The ID of the geo target constant.
       name:
-          Geo target constant English name.
+          Output only. Geo target constant English name.
       country_code:
-          The ISO-3166-1 alpha-2 country code that is associated with
-          the target.
+          Output only. The ISO-3166-1 alpha-2 country code that is
+          associated with the target.
       target_type:
-          Geo target constant target type.
+          Output only. Geo target constant target type.
       status:
-          Geo target constant status.
+          Output only. Geo target constant status.
       canonical_name:
-          The fully qualified English name, consisting of the target's
-          name and that of its parent and country.
+          Output only. The fully qualified English name, consisting of
+          the target's name and that of its parent and country.
   """,
   # @@protoc_insertion_point(class_scope:google.ads.googleads.v3.resources.GeoTargetConstant)
   ))
@@ -145,5 +146,12 @@ _sym_db.RegisterMessage(GeoTargetConstant)
 
 
 DESCRIPTOR._options = None
+_GEOTARGETCONSTANT.fields_by_name['resource_name']._options = None
+_GEOTARGETCONSTANT.fields_by_name['id']._options = None
+_GEOTARGETCONSTANT.fields_by_name['name']._options = None
+_GEOTARGETCONSTANT.fields_by_name['country_code']._options = None
+_GEOTARGETCONSTANT.fields_by_name['target_type']._options = None
+_GEOTARGETCONSTANT.fields_by_name['status']._options = None
+_GEOTARGETCONSTANT.fields_by_name['canonical_name']._options = None
 _GEOTARGETCONSTANT._options = None
 # @@protoc_insertion_point(module_scope)

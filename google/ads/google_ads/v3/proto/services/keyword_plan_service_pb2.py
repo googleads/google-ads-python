@@ -18,6 +18,7 @@ from google.ads.google_ads.v3.proto.resources import keyword_plan_pb2 as google_
 from google.api import annotations_pb2 as google_dot_api_dot_annotations__pb2
 from google.api import client_pb2 as google_dot_api_dot_client__pb2
 from google.api import field_behavior_pb2 as google_dot_api_dot_field__behavior__pb2
+from google.api import resource_pb2 as google_dot_api_dot_resource__pb2
 from google.protobuf import field_mask_pb2 as google_dot_protobuf_dot_field__mask__pb2
 from google.protobuf import wrappers_pb2 as google_dot_protobuf_dot_wrappers__pb2
 from google.rpc import status_pb2 as google_dot_rpc_dot_status__pb2
@@ -28,9 +29,9 @@ DESCRIPTOR = _descriptor.FileDescriptor(
   package='google.ads.googleads.v3.services',
   syntax='proto3',
   serialized_options=_b('\n$com.google.ads.googleads.v3.servicesB\027KeywordPlanServiceProtoP\001ZHgoogle.golang.org/genproto/googleapis/ads/googleads/v3/services;services\242\002\003GAA\252\002 Google.Ads.GoogleAds.V3.Services\312\002 Google\\Ads\\GoogleAds\\V3\\Services\352\002$Google::Ads::GoogleAds::V3::Services'),
-  serialized_pb=_b('\nAgoogle/ads/googleads_v3/proto/services/keyword_plan_service.proto\x12 google.ads.googleads.v3.services\x1a>google/ads/googleads_v3/proto/common/keyword_plan_common.proto\x1a:google/ads/googleads_v3/proto/resources/keyword_plan.proto\x1a\x1cgoogle/api/annotations.proto\x1a\x17google/api/client.proto\x1a\x1fgoogle/api/field_behavior.proto\x1a google/protobuf/field_mask.proto\x1a\x1egoogle/protobuf/wrappers.proto\x1a\x17google/rpc/status.proto\"3\n\x15GetKeywordPlanRequest\x12\x1a\n\rresource_name\x18\x01 \x01(\tB\x03\xe0\x41\x02\"\xb6\x01\n\x19MutateKeywordPlansRequest\x12\x18\n\x0b\x63ustomer_id\x18\x01 \x01(\tB\x03\xe0\x41\x02\x12O\n\noperations\x18\x02 \x03(\x0b\x32\x36.google.ads.googleads.v3.services.KeywordPlanOperationB\x03\xe0\x41\x02\x12\x17\n\x0fpartial_failure\x18\x03 \x01(\x08\x12\x15\n\rvalidate_only\x18\x04 \x01(\x08\"\xea\x01\n\x14KeywordPlanOperation\x12/\n\x0bupdate_mask\x18\x04 \x01(\x0b\x32\x1a.google.protobuf.FieldMask\x12@\n\x06\x63reate\x18\x01 \x01(\x0b\x32..google.ads.googleads.v3.resources.KeywordPlanH\x00\x12@\n\x06update\x18\x02 \x01(\x0b\x32..google.ads.googleads.v3.resources.KeywordPlanH\x00\x12\x10\n\x06remove\x18\x03 \x01(\tH\x00\x42\x0b\n\toperation\"\x9c\x01\n\x1aMutateKeywordPlansResponse\x12\x31\n\x15partial_failure_error\x18\x03 \x01(\x0b\x32\x12.google.rpc.Status\x12K\n\x07results\x18\x02 \x03(\x0b\x32:.google.ads.googleads.v3.services.MutateKeywordPlansResult\"1\n\x18MutateKeywordPlansResult\x12\x15\n\rresource_name\x18\x01 \x01(\t\";\n\x1eGenerateForecastMetricsRequest\x12\x19\n\x0ckeyword_plan\x18\x01 \x01(\tB\x03\xe0\x41\x02\"\xaf\x02\n\x1fGenerateForecastMetricsResponse\x12Y\n\x12\x63\x61mpaign_forecasts\x18\x01 \x03(\x0b\x32=.google.ads.googleads.v3.services.KeywordPlanCampaignForecast\x12X\n\x12\x61\x64_group_forecasts\x18\x02 \x03(\x0b\x32<.google.ads.googleads.v3.services.KeywordPlanAdGroupForecast\x12W\n\x11keyword_forecasts\x18\x03 \x03(\x0b\x32<.google.ads.googleads.v3.services.KeywordPlanKeywordForecast\"\xa8\x01\n\x1bKeywordPlanCampaignForecast\x12;\n\x15keyword_plan_campaign\x18\x01 \x01(\x0b\x32\x1c.google.protobuf.StringValue\x12L\n\x11\x63\x61mpaign_forecast\x18\x02 \x01(\x0b\x32\x31.google.ads.googleads.v3.services.ForecastMetrics\"\xa7\x01\n\x1aKeywordPlanAdGroupForecast\x12;\n\x15keyword_plan_ad_group\x18\x01 \x01(\x0b\x32\x1c.google.protobuf.StringValue\x12L\n\x11\x61\x64_group_forecast\x18\x02 \x01(\x0b\x32\x31.google.ads.googleads.v3.services.ForecastMetrics\"\xae\x01\n\x1aKeywordPlanKeywordForecast\x12\x43\n\x1dkeyword_plan_ad_group_keyword\x18\x01 \x01(\x0b\x32\x1c.google.protobuf.StringValue\x12K\n\x10keyword_forecast\x18\x02 \x01(\x0b\x32\x31.google.ads.googleads.v3.services.ForecastMetrics\"\x81\x02\n\x0f\x46orecastMetrics\x12\x31\n\x0bimpressions\x18\x01 \x01(\x0b\x32\x1c.google.protobuf.DoubleValue\x12)\n\x03\x63tr\x18\x02 \x01(\x0b\x32\x1c.google.protobuf.DoubleValue\x12\x30\n\x0b\x61verage_cpc\x18\x03 \x01(\x0b\x32\x1b.google.protobuf.Int64Value\x12,\n\x06\x63licks\x18\x05 \x01(\x0b\x32\x1c.google.protobuf.DoubleValue\x12\x30\n\x0b\x63ost_micros\x18\x06 \x01(\x0b\x32\x1b.google.protobuf.Int64Value\"=\n GenerateHistoricalMetricsRequest\x12\x19\n\x0ckeyword_plan\x18\x01 \x01(\tB\x03\xe0\x41\x02\"{\n!GenerateHistoricalMetricsResponse\x12V\n\x07metrics\x18\x01 \x03(\x0b\x32\x45.google.ads.googleads.v3.services.KeywordPlanKeywordHistoricalMetrics\"\xb0\x01\n#KeywordPlanKeywordHistoricalMetrics\x12\x32\n\x0csearch_query\x18\x01 \x01(\x0b\x32\x1c.google.protobuf.StringValue\x12U\n\x0fkeyword_metrics\x18\x02 \x01(\x0b\x32<.google.ads.googleads.v3.common.KeywordPlanHistoricalMetrics2\xea\x07\n\x12KeywordPlanService\x12\xc1\x01\n\x0eGetKeywordPlan\x12\x37.google.ads.googleads.v3.services.GetKeywordPlanRequest\x1a..google.ads.googleads.v3.resources.KeywordPlan\"F\x82\xd3\xe4\x93\x02\x30\x12./v3/{resource_name=customers/*/keywordPlans/*}\xda\x41\rresource_name\x12\xe6\x01\n\x12MutateKeywordPlans\x12;.google.ads.googleads.v3.services.MutateKeywordPlansRequest\x1a<.google.ads.googleads.v3.services.MutateKeywordPlansResponse\"U\x82\xd3\xe4\x93\x02\x36\"1/v3/customers/{customer_id=*}/keywordPlans:mutate:\x01*\xda\x41\x16\x63ustomer_id,operations\x12\xff\x01\n\x17GenerateForecastMetrics\x12@.google.ads.googleads.v3.services.GenerateForecastMetricsRequest\x1a\x41.google.ads.googleads.v3.services.GenerateForecastMetricsResponse\"_\x82\xd3\xe4\x93\x02J\"E/v3/{keyword_plan=customers/*/keywordPlans/*}:generateForecastMetrics:\x01*\xda\x41\x0ckeyword_plan\x12\x87\x02\n\x19GenerateHistoricalMetrics\x12\x42.google.ads.googleads.v3.services.GenerateHistoricalMetricsRequest\x1a\x43.google.ads.googleads.v3.services.GenerateHistoricalMetricsResponse\"a\x82\xd3\xe4\x93\x02L\"G/v3/{keyword_plan=customers/*/keywordPlans/*}:generateHistoricalMetrics:\x01*\xda\x41\x0ckeyword_plan\x1a\x1b\xca\x41\x18googleads.googleapis.comB\xfe\x01\n$com.google.ads.googleads.v3.servicesB\x17KeywordPlanServiceProtoP\x01ZHgoogle.golang.org/genproto/googleapis/ads/googleads/v3/services;services\xa2\x02\x03GAA\xaa\x02 Google.Ads.GoogleAds.V3.Services\xca\x02 Google\\Ads\\GoogleAds\\V3\\Services\xea\x02$Google::Ads::GoogleAds::V3::Servicesb\x06proto3')
+  serialized_pb=_b('\nAgoogle/ads/googleads_v3/proto/services/keyword_plan_service.proto\x12 google.ads.googleads.v3.services\x1a>google/ads/googleads_v3/proto/common/keyword_plan_common.proto\x1a:google/ads/googleads_v3/proto/resources/keyword_plan.proto\x1a\x1cgoogle/api/annotations.proto\x1a\x17google/api/client.proto\x1a\x1fgoogle/api/field_behavior.proto\x1a\x19google/api/resource.proto\x1a google/protobuf/field_mask.proto\x1a\x1egoogle/protobuf/wrappers.proto\x1a\x17google/rpc/status.proto\"\\\n\x15GetKeywordPlanRequest\x12\x43\n\rresource_name\x18\x01 \x01(\tB,\xe0\x41\x02\xfa\x41&\n$googleads.googleapis.com/KeywordPlan\"\xb6\x01\n\x19MutateKeywordPlansRequest\x12\x18\n\x0b\x63ustomer_id\x18\x01 \x01(\tB\x03\xe0\x41\x02\x12O\n\noperations\x18\x02 \x03(\x0b\x32\x36.google.ads.googleads.v3.services.KeywordPlanOperationB\x03\xe0\x41\x02\x12\x17\n\x0fpartial_failure\x18\x03 \x01(\x08\x12\x15\n\rvalidate_only\x18\x04 \x01(\x08\"\xea\x01\n\x14KeywordPlanOperation\x12/\n\x0bupdate_mask\x18\x04 \x01(\x0b\x32\x1a.google.protobuf.FieldMask\x12@\n\x06\x63reate\x18\x01 \x01(\x0b\x32..google.ads.googleads.v3.resources.KeywordPlanH\x00\x12@\n\x06update\x18\x02 \x01(\x0b\x32..google.ads.googleads.v3.resources.KeywordPlanH\x00\x12\x10\n\x06remove\x18\x03 \x01(\tH\x00\x42\x0b\n\toperation\"\x9c\x01\n\x1aMutateKeywordPlansResponse\x12\x31\n\x15partial_failure_error\x18\x03 \x01(\x0b\x32\x12.google.rpc.Status\x12K\n\x07results\x18\x02 \x03(\x0b\x32:.google.ads.googleads.v3.services.MutateKeywordPlansResult\"1\n\x18MutateKeywordPlansResult\x12\x15\n\rresource_name\x18\x01 \x01(\t\";\n\x1eGenerateForecastMetricsRequest\x12\x19\n\x0ckeyword_plan\x18\x01 \x01(\tB\x03\xe0\x41\x02\"\xaf\x02\n\x1fGenerateForecastMetricsResponse\x12Y\n\x12\x63\x61mpaign_forecasts\x18\x01 \x03(\x0b\x32=.google.ads.googleads.v3.services.KeywordPlanCampaignForecast\x12X\n\x12\x61\x64_group_forecasts\x18\x02 \x03(\x0b\x32<.google.ads.googleads.v3.services.KeywordPlanAdGroupForecast\x12W\n\x11keyword_forecasts\x18\x03 \x03(\x0b\x32<.google.ads.googleads.v3.services.KeywordPlanKeywordForecast\"\xa8\x01\n\x1bKeywordPlanCampaignForecast\x12;\n\x15keyword_plan_campaign\x18\x01 \x01(\x0b\x32\x1c.google.protobuf.StringValue\x12L\n\x11\x63\x61mpaign_forecast\x18\x02 \x01(\x0b\x32\x31.google.ads.googleads.v3.services.ForecastMetrics\"\xa7\x01\n\x1aKeywordPlanAdGroupForecast\x12;\n\x15keyword_plan_ad_group\x18\x01 \x01(\x0b\x32\x1c.google.protobuf.StringValue\x12L\n\x11\x61\x64_group_forecast\x18\x02 \x01(\x0b\x32\x31.google.ads.googleads.v3.services.ForecastMetrics\"\xae\x01\n\x1aKeywordPlanKeywordForecast\x12\x43\n\x1dkeyword_plan_ad_group_keyword\x18\x01 \x01(\x0b\x32\x1c.google.protobuf.StringValue\x12K\n\x10keyword_forecast\x18\x02 \x01(\x0b\x32\x31.google.ads.googleads.v3.services.ForecastMetrics\"\x81\x02\n\x0f\x46orecastMetrics\x12\x31\n\x0bimpressions\x18\x01 \x01(\x0b\x32\x1c.google.protobuf.DoubleValue\x12)\n\x03\x63tr\x18\x02 \x01(\x0b\x32\x1c.google.protobuf.DoubleValue\x12\x30\n\x0b\x61verage_cpc\x18\x03 \x01(\x0b\x32\x1b.google.protobuf.Int64Value\x12,\n\x06\x63licks\x18\x05 \x01(\x0b\x32\x1c.google.protobuf.DoubleValue\x12\x30\n\x0b\x63ost_micros\x18\x06 \x01(\x0b\x32\x1b.google.protobuf.Int64Value\"=\n GenerateHistoricalMetricsRequest\x12\x19\n\x0ckeyword_plan\x18\x01 \x01(\tB\x03\xe0\x41\x02\"{\n!GenerateHistoricalMetricsResponse\x12V\n\x07metrics\x18\x01 \x03(\x0b\x32\x45.google.ads.googleads.v3.services.KeywordPlanKeywordHistoricalMetrics\"\xb0\x01\n#KeywordPlanKeywordHistoricalMetrics\x12\x32\n\x0csearch_query\x18\x01 \x01(\x0b\x32\x1c.google.protobuf.StringValue\x12U\n\x0fkeyword_metrics\x18\x02 \x01(\x0b\x32<.google.ads.googleads.v3.common.KeywordPlanHistoricalMetrics2\xea\x07\n\x12KeywordPlanService\x12\xc1\x01\n\x0eGetKeywordPlan\x12\x37.google.ads.googleads.v3.services.GetKeywordPlanRequest\x1a..google.ads.googleads.v3.resources.KeywordPlan\"F\x82\xd3\xe4\x93\x02\x30\x12./v3/{resource_name=customers/*/keywordPlans/*}\xda\x41\rresource_name\x12\xe6\x01\n\x12MutateKeywordPlans\x12;.google.ads.googleads.v3.services.MutateKeywordPlansRequest\x1a<.google.ads.googleads.v3.services.MutateKeywordPlansResponse\"U\x82\xd3\xe4\x93\x02\x36\"1/v3/customers/{customer_id=*}/keywordPlans:mutate:\x01*\xda\x41\x16\x63ustomer_id,operations\x12\xff\x01\n\x17GenerateForecastMetrics\x12@.google.ads.googleads.v3.services.GenerateForecastMetricsRequest\x1a\x41.google.ads.googleads.v3.services.GenerateForecastMetricsResponse\"_\x82\xd3\xe4\x93\x02J\"E/v3/{keyword_plan=customers/*/keywordPlans/*}:generateForecastMetrics:\x01*\xda\x41\x0ckeyword_plan\x12\x87\x02\n\x19GenerateHistoricalMetrics\x12\x42.google.ads.googleads.v3.services.GenerateHistoricalMetricsRequest\x1a\x43.google.ads.googleads.v3.services.GenerateHistoricalMetricsResponse\"a\x82\xd3\xe4\x93\x02L\"G/v3/{keyword_plan=customers/*/keywordPlans/*}:generateHistoricalMetrics:\x01*\xda\x41\x0ckeyword_plan\x1a\x1b\xca\x41\x18googleads.googleapis.comB\xfe\x01\n$com.google.ads.googleads.v3.servicesB\x17KeywordPlanServiceProtoP\x01ZHgoogle.golang.org/genproto/googleapis/ads/googleads/v3/services;services\xa2\x02\x03GAA\xaa\x02 Google.Ads.GoogleAds.V3.Services\xca\x02 Google\\Ads\\GoogleAds\\V3\\Services\xea\x02$Google::Ads::GoogleAds::V3::Servicesb\x06proto3')
   ,
-  dependencies=[google_dot_ads_dot_googleads__v3_dot_proto_dot_common_dot_keyword__plan__common__pb2.DESCRIPTOR,google_dot_ads_dot_googleads__v3_dot_proto_dot_resources_dot_keyword__plan__pb2.DESCRIPTOR,google_dot_api_dot_annotations__pb2.DESCRIPTOR,google_dot_api_dot_client__pb2.DESCRIPTOR,google_dot_api_dot_field__behavior__pb2.DESCRIPTOR,google_dot_protobuf_dot_field__mask__pb2.DESCRIPTOR,google_dot_protobuf_dot_wrappers__pb2.DESCRIPTOR,google_dot_rpc_dot_status__pb2.DESCRIPTOR,])
+  dependencies=[google_dot_ads_dot_googleads__v3_dot_proto_dot_common_dot_keyword__plan__common__pb2.DESCRIPTOR,google_dot_ads_dot_googleads__v3_dot_proto_dot_resources_dot_keyword__plan__pb2.DESCRIPTOR,google_dot_api_dot_annotations__pb2.DESCRIPTOR,google_dot_api_dot_client__pb2.DESCRIPTOR,google_dot_api_dot_field__behavior__pb2.DESCRIPTOR,google_dot_api_dot_resource__pb2.DESCRIPTOR,google_dot_protobuf_dot_field__mask__pb2.DESCRIPTOR,google_dot_protobuf_dot_wrappers__pb2.DESCRIPTOR,google_dot_rpc_dot_status__pb2.DESCRIPTOR,])
 
 
 
@@ -48,7 +49,7 @@ _GETKEYWORDPLANREQUEST = _descriptor.Descriptor(
       has_default_value=False, default_value=_b("").decode('utf-8'),
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
-      serialized_options=_b('\340A\002'), file=DESCRIPTOR),
+      serialized_options=_b('\340A\002\372A&\n$googleads.googleapis.com/KeywordPlan'), file=DESCRIPTOR),
   ],
   extensions=[
   ],
@@ -61,8 +62,8 @@ _GETKEYWORDPLANREQUEST = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=406,
-  serialized_end=457,
+  serialized_start=433,
+  serialized_end=525,
 )
 
 
@@ -113,8 +114,8 @@ _MUTATEKEYWORDPLANSREQUEST = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=460,
-  serialized_end=642,
+  serialized_start=528,
+  serialized_end=710,
 )
 
 
@@ -168,8 +169,8 @@ _KEYWORDPLANOPERATION = _descriptor.Descriptor(
       name='operation', full_name='google.ads.googleads.v3.services.KeywordPlanOperation.operation',
       index=0, containing_type=None, fields=[]),
   ],
-  serialized_start=645,
-  serialized_end=879,
+  serialized_start=713,
+  serialized_end=947,
 )
 
 
@@ -206,8 +207,8 @@ _MUTATEKEYWORDPLANSRESPONSE = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=882,
-  serialized_end=1038,
+  serialized_start=950,
+  serialized_end=1106,
 )
 
 
@@ -237,8 +238,8 @@ _MUTATEKEYWORDPLANSRESULT = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=1040,
-  serialized_end=1089,
+  serialized_start=1108,
+  serialized_end=1157,
 )
 
 
@@ -268,8 +269,8 @@ _GENERATEFORECASTMETRICSREQUEST = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=1091,
-  serialized_end=1150,
+  serialized_start=1159,
+  serialized_end=1218,
 )
 
 
@@ -313,8 +314,8 @@ _GENERATEFORECASTMETRICSRESPONSE = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=1153,
-  serialized_end=1456,
+  serialized_start=1221,
+  serialized_end=1524,
 )
 
 
@@ -351,8 +352,8 @@ _KEYWORDPLANCAMPAIGNFORECAST = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=1459,
-  serialized_end=1627,
+  serialized_start=1527,
+  serialized_end=1695,
 )
 
 
@@ -389,8 +390,8 @@ _KEYWORDPLANADGROUPFORECAST = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=1630,
-  serialized_end=1797,
+  serialized_start=1698,
+  serialized_end=1865,
 )
 
 
@@ -427,8 +428,8 @@ _KEYWORDPLANKEYWORDFORECAST = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=1800,
-  serialized_end=1974,
+  serialized_start=1868,
+  serialized_end=2042,
 )
 
 
@@ -486,8 +487,8 @@ _FORECASTMETRICS = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=1977,
-  serialized_end=2234,
+  serialized_start=2045,
+  serialized_end=2302,
 )
 
 
@@ -517,8 +518,8 @@ _GENERATEHISTORICALMETRICSREQUEST = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=2236,
-  serialized_end=2297,
+  serialized_start=2304,
+  serialized_end=2365,
 )
 
 
@@ -548,8 +549,8 @@ _GENERATEHISTORICALMETRICSRESPONSE = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=2299,
-  serialized_end=2422,
+  serialized_start=2367,
+  serialized_end=2490,
 )
 
 
@@ -586,8 +587,8 @@ _KEYWORDPLANKEYWORDHISTORICALMETRICS = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=2425,
-  serialized_end=2601,
+  serialized_start=2493,
+  serialized_end=2669,
 )
 
 _MUTATEKEYWORDPLANSREQUEST.fields_by_name['operations'].message_type = _KEYWORDPLANOPERATION
@@ -794,7 +795,7 @@ KeywordPlanCampaignForecast = _reflection.GeneratedProtocolMessageType('KeywordP
       keyword_plan_campaign:
           The resource name of the Keyword Plan campaign related to the
           forecast.  ``customers/{customer_id}/keywordPlanCampaigns/{key
-          word+plan_campaign_id}``
+          word_plan_campaign_id}``
       campaign_forecast:
           The forecast for the Keyword Plan campaign.
   """,
@@ -933,8 +934,8 @@ _KEYWORDPLANSERVICE = _descriptor.ServiceDescriptor(
   file=DESCRIPTOR,
   index=0,
   serialized_options=_b('\312A\030googleads.googleapis.com'),
-  serialized_start=2604,
-  serialized_end=3606,
+  serialized_start=2672,
+  serialized_end=3674,
   methods=[
   _descriptor.MethodDescriptor(
     name='GetKeywordPlan',

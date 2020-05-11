@@ -17,6 +17,7 @@ from google.ads.google_ads.v3.proto.resources import ad_group_pb2 as google_dot_
 from google.api import annotations_pb2 as google_dot_api_dot_annotations__pb2
 from google.api import client_pb2 as google_dot_api_dot_client__pb2
 from google.api import field_behavior_pb2 as google_dot_api_dot_field__behavior__pb2
+from google.api import resource_pb2 as google_dot_api_dot_resource__pb2
 from google.protobuf import field_mask_pb2 as google_dot_protobuf_dot_field__mask__pb2
 from google.rpc import status_pb2 as google_dot_rpc_dot_status__pb2
 
@@ -26,9 +27,9 @@ DESCRIPTOR = _descriptor.FileDescriptor(
   package='google.ads.googleads.v3.services',
   syntax='proto3',
   serialized_options=_b('\n$com.google.ads.googleads.v3.servicesB\023AdGroupServiceProtoP\001ZHgoogle.golang.org/genproto/googleapis/ads/googleads/v3/services;services\242\002\003GAA\252\002 Google.Ads.GoogleAds.V3.Services\312\002 Google\\Ads\\GoogleAds\\V3\\Services\352\002$Google::Ads::GoogleAds::V3::Services'),
-  serialized_pb=_b('\n=google/ads/googleads_v3/proto/services/ad_group_service.proto\x12 google.ads.googleads.v3.services\x1a\x36google/ads/googleads_v3/proto/resources/ad_group.proto\x1a\x1cgoogle/api/annotations.proto\x1a\x17google/api/client.proto\x1a\x1fgoogle/api/field_behavior.proto\x1a google/protobuf/field_mask.proto\x1a\x17google/rpc/status.proto\"/\n\x11GetAdGroupRequest\x12\x1a\n\rresource_name\x18\x01 \x01(\tB\x03\xe0\x41\x02\"\xae\x01\n\x15MutateAdGroupsRequest\x12\x18\n\x0b\x63ustomer_id\x18\x01 \x01(\tB\x03\xe0\x41\x02\x12K\n\noperations\x18\x02 \x03(\x0b\x32\x32.google.ads.googleads.v3.services.AdGroupOperationB\x03\xe0\x41\x02\x12\x17\n\x0fpartial_failure\x18\x03 \x01(\x08\x12\x15\n\rvalidate_only\x18\x04 \x01(\x08\"\xde\x01\n\x10\x41\x64GroupOperation\x12/\n\x0bupdate_mask\x18\x04 \x01(\x0b\x32\x1a.google.protobuf.FieldMask\x12<\n\x06\x63reate\x18\x01 \x01(\x0b\x32*.google.ads.googleads.v3.resources.AdGroupH\x00\x12<\n\x06update\x18\x02 \x01(\x0b\x32*.google.ads.googleads.v3.resources.AdGroupH\x00\x12\x10\n\x06remove\x18\x03 \x01(\tH\x00\x42\x0b\n\toperation\"\x93\x01\n\x16MutateAdGroupsResponse\x12\x31\n\x15partial_failure_error\x18\x03 \x01(\x0b\x32\x12.google.rpc.Status\x12\x46\n\x07results\x18\x02 \x03(\x0b\x32\x35.google.ads.googleads.v3.services.MutateAdGroupResult\",\n\x13MutateAdGroupResult\x12\x15\n\rresource_name\x18\x01 \x01(\t2\xba\x03\n\x0e\x41\x64GroupService\x12\xb1\x01\n\nGetAdGroup\x12\x33.google.ads.googleads.v3.services.GetAdGroupRequest\x1a*.google.ads.googleads.v3.resources.AdGroup\"B\x82\xd3\xe4\x93\x02,\x12*/v3/{resource_name=customers/*/adGroups/*}\xda\x41\rresource_name\x12\xd6\x01\n\x0eMutateAdGroups\x12\x37.google.ads.googleads.v3.services.MutateAdGroupsRequest\x1a\x38.google.ads.googleads.v3.services.MutateAdGroupsResponse\"Q\x82\xd3\xe4\x93\x02\x32\"-/v3/customers/{customer_id=*}/adGroups:mutate:\x01*\xda\x41\x16\x63ustomer_id,operations\x1a\x1b\xca\x41\x18googleads.googleapis.comB\xfa\x01\n$com.google.ads.googleads.v3.servicesB\x13\x41\x64GroupServiceProtoP\x01ZHgoogle.golang.org/genproto/googleapis/ads/googleads/v3/services;services\xa2\x02\x03GAA\xaa\x02 Google.Ads.GoogleAds.V3.Services\xca\x02 Google\\Ads\\GoogleAds\\V3\\Services\xea\x02$Google::Ads::GoogleAds::V3::Servicesb\x06proto3')
+  serialized_pb=_b('\n=google/ads/googleads_v3/proto/services/ad_group_service.proto\x12 google.ads.googleads.v3.services\x1a\x36google/ads/googleads_v3/proto/resources/ad_group.proto\x1a\x1cgoogle/api/annotations.proto\x1a\x17google/api/client.proto\x1a\x1fgoogle/api/field_behavior.proto\x1a\x19google/api/resource.proto\x1a google/protobuf/field_mask.proto\x1a\x17google/rpc/status.proto\"T\n\x11GetAdGroupRequest\x12?\n\rresource_name\x18\x01 \x01(\tB(\xe0\x41\x02\xfa\x41\"\n googleads.googleapis.com/AdGroup\"\xae\x01\n\x15MutateAdGroupsRequest\x12\x18\n\x0b\x63ustomer_id\x18\x01 \x01(\tB\x03\xe0\x41\x02\x12K\n\noperations\x18\x02 \x03(\x0b\x32\x32.google.ads.googleads.v3.services.AdGroupOperationB\x03\xe0\x41\x02\x12\x17\n\x0fpartial_failure\x18\x03 \x01(\x08\x12\x15\n\rvalidate_only\x18\x04 \x01(\x08\"\xde\x01\n\x10\x41\x64GroupOperation\x12/\n\x0bupdate_mask\x18\x04 \x01(\x0b\x32\x1a.google.protobuf.FieldMask\x12<\n\x06\x63reate\x18\x01 \x01(\x0b\x32*.google.ads.googleads.v3.resources.AdGroupH\x00\x12<\n\x06update\x18\x02 \x01(\x0b\x32*.google.ads.googleads.v3.resources.AdGroupH\x00\x12\x10\n\x06remove\x18\x03 \x01(\tH\x00\x42\x0b\n\toperation\"\x93\x01\n\x16MutateAdGroupsResponse\x12\x31\n\x15partial_failure_error\x18\x03 \x01(\x0b\x32\x12.google.rpc.Status\x12\x46\n\x07results\x18\x02 \x03(\x0b\x32\x35.google.ads.googleads.v3.services.MutateAdGroupResult\",\n\x13MutateAdGroupResult\x12\x15\n\rresource_name\x18\x01 \x01(\t2\xba\x03\n\x0e\x41\x64GroupService\x12\xb1\x01\n\nGetAdGroup\x12\x33.google.ads.googleads.v3.services.GetAdGroupRequest\x1a*.google.ads.googleads.v3.resources.AdGroup\"B\x82\xd3\xe4\x93\x02,\x12*/v3/{resource_name=customers/*/adGroups/*}\xda\x41\rresource_name\x12\xd6\x01\n\x0eMutateAdGroups\x12\x37.google.ads.googleads.v3.services.MutateAdGroupsRequest\x1a\x38.google.ads.googleads.v3.services.MutateAdGroupsResponse\"Q\x82\xd3\xe4\x93\x02\x32\"-/v3/customers/{customer_id=*}/adGroups:mutate:\x01*\xda\x41\x16\x63ustomer_id,operations\x1a\x1b\xca\x41\x18googleads.googleapis.comB\xfa\x01\n$com.google.ads.googleads.v3.servicesB\x13\x41\x64GroupServiceProtoP\x01ZHgoogle.golang.org/genproto/googleapis/ads/googleads/v3/services;services\xa2\x02\x03GAA\xaa\x02 Google.Ads.GoogleAds.V3.Services\xca\x02 Google\\Ads\\GoogleAds\\V3\\Services\xea\x02$Google::Ads::GoogleAds::V3::Servicesb\x06proto3')
   ,
-  dependencies=[google_dot_ads_dot_googleads__v3_dot_proto_dot_resources_dot_ad__group__pb2.DESCRIPTOR,google_dot_api_dot_annotations__pb2.DESCRIPTOR,google_dot_api_dot_client__pb2.DESCRIPTOR,google_dot_api_dot_field__behavior__pb2.DESCRIPTOR,google_dot_protobuf_dot_field__mask__pb2.DESCRIPTOR,google_dot_rpc_dot_status__pb2.DESCRIPTOR,])
+  dependencies=[google_dot_ads_dot_googleads__v3_dot_proto_dot_resources_dot_ad__group__pb2.DESCRIPTOR,google_dot_api_dot_annotations__pb2.DESCRIPTOR,google_dot_api_dot_client__pb2.DESCRIPTOR,google_dot_api_dot_field__behavior__pb2.DESCRIPTOR,google_dot_api_dot_resource__pb2.DESCRIPTOR,google_dot_protobuf_dot_field__mask__pb2.DESCRIPTOR,google_dot_rpc_dot_status__pb2.DESCRIPTOR,])
 
 
 
@@ -46,7 +47,7 @@ _GETADGROUPREQUEST = _descriptor.Descriptor(
       has_default_value=False, default_value=_b("").decode('utf-8'),
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
-      serialized_options=_b('\340A\002'), file=DESCRIPTOR),
+      serialized_options=_b('\340A\002\372A\"\n googleads.googleapis.com/AdGroup'), file=DESCRIPTOR),
   ],
   extensions=[
   ],
@@ -59,8 +60,8 @@ _GETADGROUPREQUEST = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=302,
-  serialized_end=349,
+  serialized_start=329,
+  serialized_end=413,
 )
 
 
@@ -111,8 +112,8 @@ _MUTATEADGROUPSREQUEST = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=352,
-  serialized_end=526,
+  serialized_start=416,
+  serialized_end=590,
 )
 
 
@@ -166,8 +167,8 @@ _ADGROUPOPERATION = _descriptor.Descriptor(
       name='operation', full_name='google.ads.googleads.v3.services.AdGroupOperation.operation',
       index=0, containing_type=None, fields=[]),
   ],
-  serialized_start=529,
-  serialized_end=751,
+  serialized_start=593,
+  serialized_end=815,
 )
 
 
@@ -204,8 +205,8 @@ _MUTATEADGROUPSRESPONSE = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=754,
-  serialized_end=901,
+  serialized_start=818,
+  serialized_end=965,
 )
 
 
@@ -235,8 +236,8 @@ _MUTATEADGROUPRESULT = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=903,
-  serialized_end=947,
+  serialized_start=967,
+  serialized_end=1011,
 )
 
 _MUTATEADGROUPSREQUEST.fields_by_name['operations'].message_type = _ADGROUPOPERATION
@@ -381,8 +382,8 @@ _ADGROUPSERVICE = _descriptor.ServiceDescriptor(
   file=DESCRIPTOR,
   index=0,
   serialized_options=_b('\312A\030googleads.googleapis.com'),
-  serialized_start=950,
-  serialized_end=1392,
+  serialized_start=1014,
+  serialized_end=1456,
   methods=[
   _descriptor.MethodDescriptor(
     name='GetAdGroup',

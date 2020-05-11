@@ -18,6 +18,7 @@ from google.ads.google_ads.v3.proto.resources import customer_pb2 as google_dot_
 from google.api import annotations_pb2 as google_dot_api_dot_annotations__pb2
 from google.api import client_pb2 as google_dot_api_dot_client__pb2
 from google.api import field_behavior_pb2 as google_dot_api_dot_field__behavior__pb2
+from google.api import resource_pb2 as google_dot_api_dot_resource__pb2
 from google.protobuf import field_mask_pb2 as google_dot_protobuf_dot_field__mask__pb2
 from google.protobuf import wrappers_pb2 as google_dot_protobuf_dot_wrappers__pb2
 
@@ -27,9 +28,9 @@ DESCRIPTOR = _descriptor.FileDescriptor(
   package='google.ads.googleads.v3.services',
   syntax='proto3',
   serialized_options=_b('\n$com.google.ads.googleads.v3.servicesB\024CustomerServiceProtoP\001ZHgoogle.golang.org/genproto/googleapis/ads/googleads/v3/services;services\242\002\003GAA\252\002 Google.Ads.GoogleAds.V3.Services\312\002 Google\\Ads\\GoogleAds\\V3\\Services\352\002$Google::Ads::GoogleAds::V3::Services'),
-  serialized_pb=_b('\n=google/ads/googleads_v3/proto/services/customer_service.proto\x12 google.ads.googleads.v3.services\x1a\x35google/ads/googleads_v3/proto/enums/access_role.proto\x1a\x36google/ads/googleads_v3/proto/resources/customer.proto\x1a\x1cgoogle/api/annotations.proto\x1a\x17google/api/client.proto\x1a\x1fgoogle/api/field_behavior.proto\x1a google/protobuf/field_mask.proto\x1a\x1egoogle/protobuf/wrappers.proto\"0\n\x12GetCustomerRequest\x12\x1a\n\rresource_name\x18\x01 \x01(\tB\x03\xe0\x41\x02\"\x95\x01\n\x15MutateCustomerRequest\x12\x18\n\x0b\x63ustomer_id\x18\x01 \x01(\tB\x03\xe0\x41\x02\x12K\n\toperation\x18\x04 \x01(\x0b\x32\x33.google.ads.googleads.v3.services.CustomerOperationB\x03\xe0\x41\x02\x12\x15\n\rvalidate_only\x18\x05 \x01(\x08\"\x86\x02\n\x1b\x43reateCustomerClientRequest\x12\x18\n\x0b\x63ustomer_id\x18\x01 \x01(\tB\x03\xe0\x41\x02\x12I\n\x0f\x63ustomer_client\x18\x02 \x01(\x0b\x32+.google.ads.googleads.v3.resources.CustomerB\x03\xe0\x41\x02\x12\x33\n\remail_address\x18\x03 \x01(\x0b\x32\x1c.google.protobuf.StringValue\x12M\n\x0b\x61\x63\x63\x65ss_role\x18\x04 \x01(\x0e\x32\x38.google.ads.googleads.v3.enums.AccessRoleEnum.AccessRole\"\x81\x01\n\x11\x43ustomerOperation\x12;\n\x06update\x18\x01 \x01(\x0b\x32+.google.ads.googleads.v3.resources.Customer\x12/\n\x0bupdate_mask\x18\x02 \x01(\x0b\x32\x1a.google.protobuf.FieldMask\"5\n\x1c\x43reateCustomerClientResponse\x12\x15\n\rresource_name\x18\x02 \x01(\t\"`\n\x16MutateCustomerResponse\x12\x46\n\x06result\x18\x02 \x01(\x0b\x32\x36.google.ads.googleads.v3.services.MutateCustomerResult\"-\n\x14MutateCustomerResult\x12\x15\n\rresource_name\x18\x01 \x01(\t\" \n\x1eListAccessibleCustomersRequest\"9\n\x1fListAccessibleCustomersResponse\x12\x16\n\x0eresource_names\x18\x01 \x03(\t2\xee\x06\n\x0f\x43ustomerService\x12\xa9\x01\n\x0bGetCustomer\x12\x34.google.ads.googleads.v3.services.GetCustomerRequest\x1a+.google.ads.googleads.v3.resources.Customer\"7\x82\xd3\xe4\x93\x02!\x12\x1f/v3/{resource_name=customers/*}\xda\x41\rresource_name\x12\xcc\x01\n\x0eMutateCustomer\x12\x37.google.ads.googleads.v3.services.MutateCustomerRequest\x1a\x38.google.ads.googleads.v3.services.MutateCustomerResponse\"G\x82\xd3\xe4\x93\x02)\"$/v3/customers/{customer_id=*}:mutate:\x01*\xda\x41\x15\x63ustomer_id,operation\x12\xcd\x01\n\x17ListAccessibleCustomers\x12@.google.ads.googleads.v3.services.ListAccessibleCustomersRequest\x1a\x41.google.ads.googleads.v3.services.ListAccessibleCustomersResponse\"-\x82\xd3\xe4\x93\x02\'\x12%/v3/customers:listAccessibleCustomers\x12\xf2\x01\n\x14\x43reateCustomerClient\x12=.google.ads.googleads.v3.services.CreateCustomerClientRequest\x1a>.google.ads.googleads.v3.services.CreateCustomerClientResponse\"[\x82\xd3\xe4\x93\x02\x37\"2/v3/customers/{customer_id=*}:createCustomerClient:\x01*\xda\x41\x1b\x63ustomer_id,customer_client\x1a\x1b\xca\x41\x18googleads.googleapis.comB\xfb\x01\n$com.google.ads.googleads.v3.servicesB\x14\x43ustomerServiceProtoP\x01ZHgoogle.golang.org/genproto/googleapis/ads/googleads/v3/services;services\xa2\x02\x03GAA\xaa\x02 Google.Ads.GoogleAds.V3.Services\xca\x02 Google\\Ads\\GoogleAds\\V3\\Services\xea\x02$Google::Ads::GoogleAds::V3::Servicesb\x06proto3')
+  serialized_pb=_b('\n=google/ads/googleads_v3/proto/services/customer_service.proto\x12 google.ads.googleads.v3.services\x1a\x35google/ads/googleads_v3/proto/enums/access_role.proto\x1a\x36google/ads/googleads_v3/proto/resources/customer.proto\x1a\x1cgoogle/api/annotations.proto\x1a\x17google/api/client.proto\x1a\x1fgoogle/api/field_behavior.proto\x1a\x19google/api/resource.proto\x1a google/protobuf/field_mask.proto\x1a\x1egoogle/protobuf/wrappers.proto\"V\n\x12GetCustomerRequest\x12@\n\rresource_name\x18\x01 \x01(\tB)\xe0\x41\x02\xfa\x41#\n!googleads.googleapis.com/Customer\"\x95\x01\n\x15MutateCustomerRequest\x12\x18\n\x0b\x63ustomer_id\x18\x01 \x01(\tB\x03\xe0\x41\x02\x12K\n\toperation\x18\x04 \x01(\x0b\x32\x33.google.ads.googleads.v3.services.CustomerOperationB\x03\xe0\x41\x02\x12\x15\n\rvalidate_only\x18\x05 \x01(\x08\"\x86\x02\n\x1b\x43reateCustomerClientRequest\x12\x18\n\x0b\x63ustomer_id\x18\x01 \x01(\tB\x03\xe0\x41\x02\x12I\n\x0f\x63ustomer_client\x18\x02 \x01(\x0b\x32+.google.ads.googleads.v3.resources.CustomerB\x03\xe0\x41\x02\x12\x33\n\remail_address\x18\x03 \x01(\x0b\x32\x1c.google.protobuf.StringValue\x12M\n\x0b\x61\x63\x63\x65ss_role\x18\x04 \x01(\x0e\x32\x38.google.ads.googleads.v3.enums.AccessRoleEnum.AccessRole\"\x81\x01\n\x11\x43ustomerOperation\x12;\n\x06update\x18\x01 \x01(\x0b\x32+.google.ads.googleads.v3.resources.Customer\x12/\n\x0bupdate_mask\x18\x02 \x01(\x0b\x32\x1a.google.protobuf.FieldMask\"5\n\x1c\x43reateCustomerClientResponse\x12\x15\n\rresource_name\x18\x02 \x01(\t\"`\n\x16MutateCustomerResponse\x12\x46\n\x06result\x18\x02 \x01(\x0b\x32\x36.google.ads.googleads.v3.services.MutateCustomerResult\"-\n\x14MutateCustomerResult\x12\x15\n\rresource_name\x18\x01 \x01(\t\" \n\x1eListAccessibleCustomersRequest\"9\n\x1fListAccessibleCustomersResponse\x12\x16\n\x0eresource_names\x18\x01 \x03(\t2\xee\x06\n\x0f\x43ustomerService\x12\xa9\x01\n\x0bGetCustomer\x12\x34.google.ads.googleads.v3.services.GetCustomerRequest\x1a+.google.ads.googleads.v3.resources.Customer\"7\x82\xd3\xe4\x93\x02!\x12\x1f/v3/{resource_name=customers/*}\xda\x41\rresource_name\x12\xcc\x01\n\x0eMutateCustomer\x12\x37.google.ads.googleads.v3.services.MutateCustomerRequest\x1a\x38.google.ads.googleads.v3.services.MutateCustomerResponse\"G\x82\xd3\xe4\x93\x02)\"$/v3/customers/{customer_id=*}:mutate:\x01*\xda\x41\x15\x63ustomer_id,operation\x12\xcd\x01\n\x17ListAccessibleCustomers\x12@.google.ads.googleads.v3.services.ListAccessibleCustomersRequest\x1a\x41.google.ads.googleads.v3.services.ListAccessibleCustomersResponse\"-\x82\xd3\xe4\x93\x02\'\x12%/v3/customers:listAccessibleCustomers\x12\xf2\x01\n\x14\x43reateCustomerClient\x12=.google.ads.googleads.v3.services.CreateCustomerClientRequest\x1a>.google.ads.googleads.v3.services.CreateCustomerClientResponse\"[\x82\xd3\xe4\x93\x02\x37\"2/v3/customers/{customer_id=*}:createCustomerClient:\x01*\xda\x41\x1b\x63ustomer_id,customer_client\x1a\x1b\xca\x41\x18googleads.googleapis.comB\xfb\x01\n$com.google.ads.googleads.v3.servicesB\x14\x43ustomerServiceProtoP\x01ZHgoogle.golang.org/genproto/googleapis/ads/googleads/v3/services;services\xa2\x02\x03GAA\xaa\x02 Google.Ads.GoogleAds.V3.Services\xca\x02 Google\\Ads\\GoogleAds\\V3\\Services\xea\x02$Google::Ads::GoogleAds::V3::Servicesb\x06proto3')
   ,
-  dependencies=[google_dot_ads_dot_googleads__v3_dot_proto_dot_enums_dot_access__role__pb2.DESCRIPTOR,google_dot_ads_dot_googleads__v3_dot_proto_dot_resources_dot_customer__pb2.DESCRIPTOR,google_dot_api_dot_annotations__pb2.DESCRIPTOR,google_dot_api_dot_client__pb2.DESCRIPTOR,google_dot_api_dot_field__behavior__pb2.DESCRIPTOR,google_dot_protobuf_dot_field__mask__pb2.DESCRIPTOR,google_dot_protobuf_dot_wrappers__pb2.DESCRIPTOR,])
+  dependencies=[google_dot_ads_dot_googleads__v3_dot_proto_dot_enums_dot_access__role__pb2.DESCRIPTOR,google_dot_ads_dot_googleads__v3_dot_proto_dot_resources_dot_customer__pb2.DESCRIPTOR,google_dot_api_dot_annotations__pb2.DESCRIPTOR,google_dot_api_dot_client__pb2.DESCRIPTOR,google_dot_api_dot_field__behavior__pb2.DESCRIPTOR,google_dot_api_dot_resource__pb2.DESCRIPTOR,google_dot_protobuf_dot_field__mask__pb2.DESCRIPTOR,google_dot_protobuf_dot_wrappers__pb2.DESCRIPTOR,])
 
 
 
@@ -47,7 +48,7 @@ _GETCUSTOMERREQUEST = _descriptor.Descriptor(
       has_default_value=False, default_value=_b("").decode('utf-8'),
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
-      serialized_options=_b('\340A\002'), file=DESCRIPTOR),
+      serialized_options=_b('\340A\002\372A#\n!googleads.googleapis.com/Customer'), file=DESCRIPTOR),
   ],
   extensions=[
   ],
@@ -60,8 +61,8 @@ _GETCUSTOMERREQUEST = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=364,
-  serialized_end=412,
+  serialized_start=391,
+  serialized_end=477,
 )
 
 
@@ -105,8 +106,8 @@ _MUTATECUSTOMERREQUEST = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=415,
-  serialized_end=564,
+  serialized_start=480,
+  serialized_end=629,
 )
 
 
@@ -157,8 +158,8 @@ _CREATECUSTOMERCLIENTREQUEST = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=567,
-  serialized_end=829,
+  serialized_start=632,
+  serialized_end=894,
 )
 
 
@@ -195,8 +196,8 @@ _CUSTOMEROPERATION = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=832,
-  serialized_end=961,
+  serialized_start=897,
+  serialized_end=1026,
 )
 
 
@@ -226,8 +227,8 @@ _CREATECUSTOMERCLIENTRESPONSE = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=963,
-  serialized_end=1016,
+  serialized_start=1028,
+  serialized_end=1081,
 )
 
 
@@ -257,8 +258,8 @@ _MUTATECUSTOMERRESPONSE = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=1018,
-  serialized_end=1114,
+  serialized_start=1083,
+  serialized_end=1179,
 )
 
 
@@ -288,8 +289,8 @@ _MUTATECUSTOMERRESULT = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=1116,
-  serialized_end=1161,
+  serialized_start=1181,
+  serialized_end=1226,
 )
 
 
@@ -312,8 +313,8 @@ _LISTACCESSIBLECUSTOMERSREQUEST = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=1163,
-  serialized_end=1195,
+  serialized_start=1228,
+  serialized_end=1260,
 )
 
 
@@ -343,8 +344,8 @@ _LISTACCESSIBLECUSTOMERSRESPONSE = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=1197,
-  serialized_end=1254,
+  serialized_start=1262,
+  serialized_end=1319,
 )
 
 _MUTATECUSTOMERREQUEST.fields_by_name['operation'].message_type = _CUSTOMEROPERATION
@@ -533,8 +534,8 @@ _CUSTOMERSERVICE = _descriptor.ServiceDescriptor(
   file=DESCRIPTOR,
   index=0,
   serialized_options=_b('\312A\030googleads.googleapis.com'),
-  serialized_start=1257,
-  serialized_end=2135,
+  serialized_start=1322,
+  serialized_end=2200,
   methods=[
   _descriptor.MethodDescriptor(
     name='GetCustomer',

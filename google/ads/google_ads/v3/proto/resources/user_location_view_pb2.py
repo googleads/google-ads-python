@@ -13,6 +13,7 @@ from google.protobuf import symbol_database as _symbol_database
 _sym_db = _symbol_database.Default()
 
 
+from google.api import field_behavior_pb2 as google_dot_api_dot_field__behavior__pb2
 from google.api import resource_pb2 as google_dot_api_dot_resource__pb2
 from google.protobuf import wrappers_pb2 as google_dot_protobuf_dot_wrappers__pb2
 from google.api import annotations_pb2 as google_dot_api_dot_annotations__pb2
@@ -23,9 +24,9 @@ DESCRIPTOR = _descriptor.FileDescriptor(
   package='google.ads.googleads.v3.resources',
   syntax='proto3',
   serialized_options=_b('\n%com.google.ads.googleads.v3.resourcesB\025UserLocationViewProtoP\001ZJgoogle.golang.org/genproto/googleapis/ads/googleads/v3/resources;resources\242\002\003GAA\252\002!Google.Ads.GoogleAds.V3.Resources\312\002!Google\\Ads\\GoogleAds\\V3\\Resources\352\002%Google::Ads::GoogleAds::V3::Resources'),
-  serialized_pb=_b('\n@google/ads/googleads_v3/proto/resources/user_location_view.proto\x12!google.ads.googleads.v3.resources\x1a\x19google/api/resource.proto\x1a\x1egoogle/protobuf/wrappers.proto\x1a\x1cgoogle/api/annotations.proto\"\x89\x02\n\x10UserLocationView\x12\x15\n\rresource_name\x18\x01 \x01(\t\x12\x39\n\x14\x63ountry_criterion_id\x18\x02 \x01(\x0b\x32\x1b.google.protobuf.Int64Value\x12\x36\n\x12targeting_location\x18\x03 \x01(\x0b\x32\x1a.google.protobuf.BoolValue:k\xea\x41h\n)googleads.googleapis.com/UserLocationView\x12;customers/{customer}/userLocationViews/{user_location_view}B\x82\x02\n%com.google.ads.googleads.v3.resourcesB\x15UserLocationViewProtoP\x01ZJgoogle.golang.org/genproto/googleapis/ads/googleads/v3/resources;resources\xa2\x02\x03GAA\xaa\x02!Google.Ads.GoogleAds.V3.Resources\xca\x02!Google\\Ads\\GoogleAds\\V3\\Resources\xea\x02%Google::Ads::GoogleAds::V3::Resourcesb\x06proto3')
+  serialized_pb=_b('\n@google/ads/googleads_v3/proto/resources/user_location_view.proto\x12!google.ads.googleads.v3.resources\x1a\x1fgoogle/api/field_behavior.proto\x1a\x19google/api/resource.proto\x1a\x1egoogle/protobuf/wrappers.proto\x1a\x1cgoogle/api/annotations.proto\"\xc6\x02\n\x10UserLocationView\x12H\n\rresource_name\x18\x01 \x01(\tB1\xe0\x41\x03\xfa\x41+\n)googleads.googleapis.com/UserLocationView\x12>\n\x14\x63ountry_criterion_id\x18\x02 \x01(\x0b\x32\x1b.google.protobuf.Int64ValueB\x03\xe0\x41\x03\x12;\n\x12targeting_location\x18\x03 \x01(\x0b\x32\x1a.google.protobuf.BoolValueB\x03\xe0\x41\x03:k\xea\x41h\n)googleads.googleapis.com/UserLocationView\x12;customers/{customer}/userLocationViews/{user_location_view}B\x82\x02\n%com.google.ads.googleads.v3.resourcesB\x15UserLocationViewProtoP\x01ZJgoogle.golang.org/genproto/googleapis/ads/googleads/v3/resources;resources\xa2\x02\x03GAA\xaa\x02!Google.Ads.GoogleAds.V3.Resources\xca\x02!Google\\Ads\\GoogleAds\\V3\\Resources\xea\x02%Google::Ads::GoogleAds::V3::Resourcesb\x06proto3')
   ,
-  dependencies=[google_dot_api_dot_resource__pb2.DESCRIPTOR,google_dot_protobuf_dot_wrappers__pb2.DESCRIPTOR,google_dot_api_dot_annotations__pb2.DESCRIPTOR,])
+  dependencies=[google_dot_api_dot_field__behavior__pb2.DESCRIPTOR,google_dot_api_dot_resource__pb2.DESCRIPTOR,google_dot_protobuf_dot_wrappers__pb2.DESCRIPTOR,google_dot_api_dot_annotations__pb2.DESCRIPTOR,])
 
 
 
@@ -43,21 +44,21 @@ _USERLOCATIONVIEW = _descriptor.Descriptor(
       has_default_value=False, default_value=_b("").decode('utf-8'),
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR),
+      serialized_options=_b('\340A\003\372A+\n)googleads.googleapis.com/UserLocationView'), file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
       name='country_criterion_id', full_name='google.ads.googleads.v3.resources.UserLocationView.country_criterion_id', index=1,
       number=2, type=11, cpp_type=10, label=1,
       has_default_value=False, default_value=None,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR),
+      serialized_options=_b('\340A\003'), file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
       name='targeting_location', full_name='google.ads.googleads.v3.resources.UserLocationView.targeting_location', index=2,
       number=3, type=11, cpp_type=10, label=1,
       has_default_value=False, default_value=None,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR),
+      serialized_options=_b('\340A\003'), file=DESCRIPTOR),
   ],
   extensions=[
   ],
@@ -70,8 +71,8 @@ _USERLOCATIONVIEW = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=193,
-  serialized_end=458,
+  serialized_start=226,
+  serialized_end=552,
 )
 
 _USERLOCATIONVIEW.fields_by_name['country_criterion_id'].message_type = google_dot_protobuf_dot_wrappers__pb2._INT64VALUE
@@ -93,13 +94,14 @@ UserLocationView = _reflection.GeneratedProtocolMessageType('UserLocationView', 
   
   Attributes:
       resource_name:
-          The resource name of the user location view. UserLocation view
-          resource names have the form:  ``customers/{customer_id}/userL
-          ocationViews/{country_criterion_id}~{targeting_location}``
+          Output only. The resource name of the user location view.
+          UserLocation view resource names have the form:  ``customers/{
+          customer_id}/userLocationViews/{country_criterion_id}~{targeti
+          ng_location}``
       country_criterion_id:
-          Criterion Id for the country.
+          Output only. Criterion Id for the country.
       targeting_location:
-          Indicates whether location was targeted or not.
+          Output only. Indicates whether location was targeted or not.
   """,
   # @@protoc_insertion_point(class_scope:google.ads.googleads.v3.resources.UserLocationView)
   ))
@@ -107,5 +109,8 @@ _sym_db.RegisterMessage(UserLocationView)
 
 
 DESCRIPTOR._options = None
+_USERLOCATIONVIEW.fields_by_name['resource_name']._options = None
+_USERLOCATIONVIEW.fields_by_name['country_criterion_id']._options = None
+_USERLOCATIONVIEW.fields_by_name['targeting_location']._options = None
 _USERLOCATIONVIEW._options = None
 # @@protoc_insertion_point(module_scope)

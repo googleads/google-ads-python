@@ -13,6 +13,7 @@ from google.protobuf import symbol_database as _symbol_database
 _sym_db = _symbol_database.Default()
 
 
+from google.api import field_behavior_pb2 as google_dot_api_dot_field__behavior__pb2
 from google.api import resource_pb2 as google_dot_api_dot_resource__pb2
 from google.api import annotations_pb2 as google_dot_api_dot_annotations__pb2
 
@@ -22,9 +23,9 @@ DESCRIPTOR = _descriptor.FileDescriptor(
   package='google.ads.googleads.v3.resources',
   syntax='proto3',
   serialized_options=_b('\n%com.google.ads.googleads.v3.resourcesB\034ShoppingPerformanceViewProtoP\001ZJgoogle.golang.org/genproto/googleapis/ads/googleads/v3/resources;resources\242\002\003GAA\252\002!Google.Ads.GoogleAds.V3.Resources\312\002!Google\\Ads\\GoogleAds\\V3\\Resources\352\002%Google::Ads::GoogleAds::V3::Resources'),
-  serialized_pb=_b('\nGgoogle/ads/googleads_v3/proto/resources/shopping_performance_view.proto\x12!google.ads.googleads.v3.resources\x1a\x19google/api/resource.proto\x1a\x1cgoogle/api/annotations.proto\"\x95\x01\n\x17ShoppingPerformanceView\x12\x15\n\rresource_name\x18\x01 \x01(\t:c\xea\x41`\n0googleads.googleapis.com/ShoppingPerformanceView\x12,customers/{customer}/shoppingPerformanceViewB\x89\x02\n%com.google.ads.googleads.v3.resourcesB\x1cShoppingPerformanceViewProtoP\x01ZJgoogle.golang.org/genproto/googleapis/ads/googleads/v3/resources;resources\xa2\x02\x03GAA\xaa\x02!Google.Ads.GoogleAds.V3.Resources\xca\x02!Google\\Ads\\GoogleAds\\V3\\Resources\xea\x02%Google::Ads::GoogleAds::V3::Resourcesb\x06proto3')
+  serialized_pb=_b('\nGgoogle/ads/googleads_v3/proto/resources/shopping_performance_view.proto\x12!google.ads.googleads.v3.resources\x1a\x1fgoogle/api/field_behavior.proto\x1a\x19google/api/resource.proto\x1a\x1cgoogle/api/annotations.proto\"\xcf\x01\n\x17ShoppingPerformanceView\x12O\n\rresource_name\x18\x01 \x01(\tB8\xe0\x41\x03\xfa\x41\x32\n0googleads.googleapis.com/ShoppingPerformanceView:c\xea\x41`\n0googleads.googleapis.com/ShoppingPerformanceView\x12,customers/{customer}/shoppingPerformanceViewB\x89\x02\n%com.google.ads.googleads.v3.resourcesB\x1cShoppingPerformanceViewProtoP\x01ZJgoogle.golang.org/genproto/googleapis/ads/googleads/v3/resources;resources\xa2\x02\x03GAA\xaa\x02!Google.Ads.GoogleAds.V3.Resources\xca\x02!Google\\Ads\\GoogleAds\\V3\\Resources\xea\x02%Google::Ads::GoogleAds::V3::Resourcesb\x06proto3')
   ,
-  dependencies=[google_dot_api_dot_resource__pb2.DESCRIPTOR,google_dot_api_dot_annotations__pb2.DESCRIPTOR,])
+  dependencies=[google_dot_api_dot_field__behavior__pb2.DESCRIPTOR,google_dot_api_dot_resource__pb2.DESCRIPTOR,google_dot_api_dot_annotations__pb2.DESCRIPTOR,])
 
 
 
@@ -42,7 +43,7 @@ _SHOPPINGPERFORMANCEVIEW = _descriptor.Descriptor(
       has_default_value=False, default_value=_b("").decode('utf-8'),
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR),
+      serialized_options=_b('\340A\003\372A2\n0googleads.googleapis.com/ShoppingPerformanceView'), file=DESCRIPTOR),
   ],
   extensions=[
   ],
@@ -55,8 +56,8 @@ _SHOPPINGPERFORMANCEVIEW = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=168,
-  serialized_end=317,
+  serialized_start=201,
+  serialized_end=408,
 )
 
 DESCRIPTOR.message_types_by_name['ShoppingPerformanceView'] = _SHOPPINGPERFORMANCEVIEW
@@ -75,8 +76,8 @@ ShoppingPerformanceView = _reflection.GeneratedProtocolMessageType('ShoppingPerf
   
   Attributes:
       resource_name:
-          The resource name of the Shopping performance view. Shopping
-          performance view resource names have the form:
+          Output only. The resource name of the Shopping performance
+          view. Shopping performance view resource names have the form:
           ``customers/{customer_id}/shoppingPerformanceView``
   """,
   # @@protoc_insertion_point(class_scope:google.ads.googleads.v3.resources.ShoppingPerformanceView)
@@ -85,5 +86,6 @@ _sym_db.RegisterMessage(ShoppingPerformanceView)
 
 
 DESCRIPTOR._options = None
+_SHOPPINGPERFORMANCEVIEW.fields_by_name['resource_name']._options = None
 _SHOPPINGPERFORMANCEVIEW._options = None
 # @@protoc_insertion_point(module_scope)

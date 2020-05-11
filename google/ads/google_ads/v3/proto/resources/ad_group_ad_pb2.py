@@ -19,6 +19,7 @@ from google.ads.google_ads.v3.proto.enums import ad_strength_pb2 as google_dot_a
 from google.ads.google_ads.v3.proto.enums import policy_approval_status_pb2 as google_dot_ads_dot_googleads__v3_dot_proto_dot_enums_dot_policy__approval__status__pb2
 from google.ads.google_ads.v3.proto.enums import policy_review_status_pb2 as google_dot_ads_dot_googleads__v3_dot_proto_dot_enums_dot_policy__review__status__pb2
 from google.ads.google_ads.v3.proto.resources import ad_pb2 as google_dot_ads_dot_googleads__v3_dot_proto_dot_resources_dot_ad__pb2
+from google.api import field_behavior_pb2 as google_dot_api_dot_field__behavior__pb2
 from google.api import resource_pb2 as google_dot_api_dot_resource__pb2
 from google.protobuf import wrappers_pb2 as google_dot_protobuf_dot_wrappers__pb2
 from google.api import annotations_pb2 as google_dot_api_dot_annotations__pb2
@@ -29,9 +30,9 @@ DESCRIPTOR = _descriptor.FileDescriptor(
   package='google.ads.googleads.v3.resources',
   syntax='proto3',
   serialized_options=_b('\n%com.google.ads.googleads.v3.resourcesB\016AdGroupAdProtoP\001ZJgoogle.golang.org/genproto/googleapis/ads/googleads/v3/resources;resources\242\002\003GAA\252\002!Google.Ads.GoogleAds.V3.Resources\312\002!Google\\Ads\\GoogleAds\\V3\\Resources\352\002%Google::Ads::GoogleAds::V3::Resources'),
-  serialized_pb=_b('\n9google/ads/googleads_v3/proto/resources/ad_group_ad.proto\x12!google.ads.googleads.v3.resources\x1a\x31google/ads/googleads_v3/proto/common/policy.proto\x1a<google/ads/googleads_v3/proto/enums/ad_group_ad_status.proto\x1a\x35google/ads/googleads_v3/proto/enums/ad_strength.proto\x1a@google/ads/googleads_v3/proto/enums/policy_approval_status.proto\x1a>google/ads/googleads_v3/proto/enums/policy_review_status.proto\x1a\x30google/ads/googleads_v3/proto/resources/ad.proto\x1a\x19google/api/resource.proto\x1a\x1egoogle/protobuf/wrappers.proto\x1a\x1cgoogle/api/annotations.proto\"\xd3\x03\n\tAdGroupAd\x12\x15\n\rresource_name\x18\x01 \x01(\t\x12R\n\x06status\x18\x03 \x01(\x0e\x32\x42.google.ads.googleads.v3.enums.AdGroupAdStatusEnum.AdGroupAdStatus\x12.\n\x08\x61\x64_group\x18\x04 \x01(\x0b\x32\x1c.google.protobuf.StringValue\x12\x31\n\x02\x61\x64\x18\x05 \x01(\x0b\x32%.google.ads.googleads.v3.resources.Ad\x12Q\n\x0epolicy_summary\x18\x06 \x01(\x0b\x32\x39.google.ads.googleads.v3.resources.AdGroupAdPolicySummary\x12M\n\x0b\x61\x64_strength\x18\x07 \x01(\x0e\x32\x38.google.ads.googleads.v3.enums.AdStrengthEnum.AdStrength:V\xea\x41S\n\"googleads.googleapis.com/AdGroupAd\x12-customers/{customer}/adGroupAds/{ad_group_ad}\"\xb0\x02\n\x16\x41\x64GroupAdPolicySummary\x12N\n\x14policy_topic_entries\x18\x01 \x03(\x0b\x32\x30.google.ads.googleads.v3.common.PolicyTopicEntry\x12_\n\rreview_status\x18\x02 \x01(\x0e\x32H.google.ads.googleads.v3.enums.PolicyReviewStatusEnum.PolicyReviewStatus\x12\x65\n\x0f\x61pproval_status\x18\x03 \x01(\x0e\x32L.google.ads.googleads.v3.enums.PolicyApprovalStatusEnum.PolicyApprovalStatusB\xfb\x01\n%com.google.ads.googleads.v3.resourcesB\x0e\x41\x64GroupAdProtoP\x01ZJgoogle.golang.org/genproto/googleapis/ads/googleads/v3/resources;resources\xa2\x02\x03GAA\xaa\x02!Google.Ads.GoogleAds.V3.Resources\xca\x02!Google\\Ads\\GoogleAds\\V3\\Resources\xea\x02%Google::Ads::GoogleAds::V3::Resourcesb\x06proto3')
+  serialized_pb=_b('\n9google/ads/googleads_v3/proto/resources/ad_group_ad.proto\x12!google.ads.googleads.v3.resources\x1a\x31google/ads/googleads_v3/proto/common/policy.proto\x1a<google/ads/googleads_v3/proto/enums/ad_group_ad_status.proto\x1a\x35google/ads/googleads_v3/proto/enums/ad_strength.proto\x1a@google/ads/googleads_v3/proto/enums/policy_approval_status.proto\x1a>google/ads/googleads_v3/proto/enums/policy_review_status.proto\x1a\x30google/ads/googleads_v3/proto/resources/ad.proto\x1a\x1fgoogle/api/field_behavior.proto\x1a\x19google/api/resource.proto\x1a\x1egoogle/protobuf/wrappers.proto\x1a\x1cgoogle/api/annotations.proto\"\xb8\x04\n\tAdGroupAd\x12\x41\n\rresource_name\x18\x01 \x01(\tB*\xe0\x41\x05\xfa\x41$\n\"googleads.googleapis.com/AdGroupAd\x12R\n\x06status\x18\x03 \x01(\x0e\x32\x42.google.ads.googleads.v3.enums.AdGroupAdStatusEnum.AdGroupAdStatus\x12X\n\x08\x61\x64_group\x18\x04 \x01(\x0b\x32\x1c.google.protobuf.StringValueB(\xe0\x41\x05\xfa\x41\"\n googleads.googleapis.com/AdGroup\x12\x36\n\x02\x61\x64\x18\x05 \x01(\x0b\x32%.google.ads.googleads.v3.resources.AdB\x03\xe0\x41\x05\x12V\n\x0epolicy_summary\x18\x06 \x01(\x0b\x32\x39.google.ads.googleads.v3.resources.AdGroupAdPolicySummaryB\x03\xe0\x41\x03\x12R\n\x0b\x61\x64_strength\x18\x07 \x01(\x0e\x32\x38.google.ads.googleads.v3.enums.AdStrengthEnum.AdStrengthB\x03\xe0\x41\x03:V\xea\x41S\n\"googleads.googleapis.com/AdGroupAd\x12-customers/{customer}/adGroupAds/{ad_group_ad}\"\xbf\x02\n\x16\x41\x64GroupAdPolicySummary\x12S\n\x14policy_topic_entries\x18\x01 \x03(\x0b\x32\x30.google.ads.googleads.v3.common.PolicyTopicEntryB\x03\xe0\x41\x03\x12\x64\n\rreview_status\x18\x02 \x01(\x0e\x32H.google.ads.googleads.v3.enums.PolicyReviewStatusEnum.PolicyReviewStatusB\x03\xe0\x41\x03\x12j\n\x0f\x61pproval_status\x18\x03 \x01(\x0e\x32L.google.ads.googleads.v3.enums.PolicyApprovalStatusEnum.PolicyApprovalStatusB\x03\xe0\x41\x03\x42\xfb\x01\n%com.google.ads.googleads.v3.resourcesB\x0e\x41\x64GroupAdProtoP\x01ZJgoogle.golang.org/genproto/googleapis/ads/googleads/v3/resources;resources\xa2\x02\x03GAA\xaa\x02!Google.Ads.GoogleAds.V3.Resources\xca\x02!Google\\Ads\\GoogleAds\\V3\\Resources\xea\x02%Google::Ads::GoogleAds::V3::Resourcesb\x06proto3')
   ,
-  dependencies=[google_dot_ads_dot_googleads__v3_dot_proto_dot_common_dot_policy__pb2.DESCRIPTOR,google_dot_ads_dot_googleads__v3_dot_proto_dot_enums_dot_ad__group__ad__status__pb2.DESCRIPTOR,google_dot_ads_dot_googleads__v3_dot_proto_dot_enums_dot_ad__strength__pb2.DESCRIPTOR,google_dot_ads_dot_googleads__v3_dot_proto_dot_enums_dot_policy__approval__status__pb2.DESCRIPTOR,google_dot_ads_dot_googleads__v3_dot_proto_dot_enums_dot_policy__review__status__pb2.DESCRIPTOR,google_dot_ads_dot_googleads__v3_dot_proto_dot_resources_dot_ad__pb2.DESCRIPTOR,google_dot_api_dot_resource__pb2.DESCRIPTOR,google_dot_protobuf_dot_wrappers__pb2.DESCRIPTOR,google_dot_api_dot_annotations__pb2.DESCRIPTOR,])
+  dependencies=[google_dot_ads_dot_googleads__v3_dot_proto_dot_common_dot_policy__pb2.DESCRIPTOR,google_dot_ads_dot_googleads__v3_dot_proto_dot_enums_dot_ad__group__ad__status__pb2.DESCRIPTOR,google_dot_ads_dot_googleads__v3_dot_proto_dot_enums_dot_ad__strength__pb2.DESCRIPTOR,google_dot_ads_dot_googleads__v3_dot_proto_dot_enums_dot_policy__approval__status__pb2.DESCRIPTOR,google_dot_ads_dot_googleads__v3_dot_proto_dot_enums_dot_policy__review__status__pb2.DESCRIPTOR,google_dot_ads_dot_googleads__v3_dot_proto_dot_resources_dot_ad__pb2.DESCRIPTOR,google_dot_api_dot_field__behavior__pb2.DESCRIPTOR,google_dot_api_dot_resource__pb2.DESCRIPTOR,google_dot_protobuf_dot_wrappers__pb2.DESCRIPTOR,google_dot_api_dot_annotations__pb2.DESCRIPTOR,])
 
 
 
@@ -49,7 +50,7 @@ _ADGROUPAD = _descriptor.Descriptor(
       has_default_value=False, default_value=_b("").decode('utf-8'),
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR),
+      serialized_options=_b('\340A\005\372A$\n\"googleads.googleapis.com/AdGroupAd'), file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
       name='status', full_name='google.ads.googleads.v3.resources.AdGroupAd.status', index=1,
       number=3, type=14, cpp_type=8, label=1,
@@ -63,28 +64,28 @@ _ADGROUPAD = _descriptor.Descriptor(
       has_default_value=False, default_value=None,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR),
+      serialized_options=_b('\340A\005\372A\"\n googleads.googleapis.com/AdGroup'), file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
       name='ad', full_name='google.ads.googleads.v3.resources.AdGroupAd.ad', index=3,
       number=5, type=11, cpp_type=10, label=1,
       has_default_value=False, default_value=None,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR),
+      serialized_options=_b('\340A\005'), file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
       name='policy_summary', full_name='google.ads.googleads.v3.resources.AdGroupAd.policy_summary', index=4,
       number=6, type=11, cpp_type=10, label=1,
       has_default_value=False, default_value=None,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR),
+      serialized_options=_b('\340A\003'), file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
       name='ad_strength', full_name='google.ads.googleads.v3.resources.AdGroupAd.ad_strength', index=5,
       number=7, type=14, cpp_type=8, label=1,
       has_default_value=False, default_value=0,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR),
+      serialized_options=_b('\340A\003'), file=DESCRIPTOR),
   ],
   extensions=[
   ],
@@ -97,8 +98,8 @@ _ADGROUPAD = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=534,
-  serialized_end=1001,
+  serialized_start=567,
+  serialized_end=1135,
 )
 
 
@@ -115,21 +116,21 @@ _ADGROUPADPOLICYSUMMARY = _descriptor.Descriptor(
       has_default_value=False, default_value=[],
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR),
+      serialized_options=_b('\340A\003'), file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
       name='review_status', full_name='google.ads.googleads.v3.resources.AdGroupAdPolicySummary.review_status', index=1,
       number=2, type=14, cpp_type=8, label=1,
       has_default_value=False, default_value=0,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR),
+      serialized_options=_b('\340A\003'), file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
       name='approval_status', full_name='google.ads.googleads.v3.resources.AdGroupAdPolicySummary.approval_status', index=2,
       number=3, type=14, cpp_type=8, label=1,
       has_default_value=False, default_value=0,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR),
+      serialized_options=_b('\340A\003'), file=DESCRIPTOR),
   ],
   extensions=[
   ],
@@ -142,8 +143,8 @@ _ADGROUPADPOLICYSUMMARY = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=1004,
-  serialized_end=1308,
+  serialized_start=1138,
+  serialized_end=1457,
 )
 
 _ADGROUPAD.fields_by_name['status'].enum_type = google_dot_ads_dot_googleads__v3_dot_proto_dot_enums_dot_ad__group__ad__status__pb2._ADGROUPADSTATUSENUM_ADGROUPADSTATUS
@@ -167,19 +168,19 @@ AdGroupAd = _reflection.GeneratedProtocolMessageType('AdGroupAd', (_message.Mess
   
   Attributes:
       resource_name:
-          The resource name of the ad. Ad group ad resource names have
-          the form:
+          Immutable. The resource name of the ad. Ad group ad resource
+          names have the form:
           ``customers/{customer_id}/adGroupAds/{ad_group_id}~{ad_id}``
       status:
           The status of the ad.
       ad_group:
-          The ad group to which the ad belongs.
+          Immutable. The ad group to which the ad belongs.
       ad:
-          The ad.
+          Immutable. The ad.
       policy_summary:
-          Policy information for the ad.
+          Output only. Policy information for the ad.
       ad_strength:
-          Overall ad strength for this ad group ad.
+          Output only. Overall ad strength for this ad group ad.
   """,
   # @@protoc_insertion_point(class_scope:google.ads.googleads.v3.resources.AdGroupAd)
   ))
@@ -194,12 +195,13 @@ AdGroupAdPolicySummary = _reflection.GeneratedProtocolMessageType('AdGroupAdPoli
   
   Attributes:
       policy_topic_entries:
-          The list of policy findings for this ad.
+          Output only. The list of policy findings for this ad.
       review_status:
-          Where in the review process this ad is.
+          Output only. Where in the review process this ad is.
       approval_status:
-          The overall approval status of this ad, calculated based on
-          the status of its individual policy topic entries.
+          Output only. The overall approval status of this ad,
+          calculated based on the status of its individual policy topic
+          entries.
   """,
   # @@protoc_insertion_point(class_scope:google.ads.googleads.v3.resources.AdGroupAdPolicySummary)
   ))
@@ -207,5 +209,13 @@ _sym_db.RegisterMessage(AdGroupAdPolicySummary)
 
 
 DESCRIPTOR._options = None
+_ADGROUPAD.fields_by_name['resource_name']._options = None
+_ADGROUPAD.fields_by_name['ad_group']._options = None
+_ADGROUPAD.fields_by_name['ad']._options = None
+_ADGROUPAD.fields_by_name['policy_summary']._options = None
+_ADGROUPAD.fields_by_name['ad_strength']._options = None
 _ADGROUPAD._options = None
+_ADGROUPADPOLICYSUMMARY.fields_by_name['policy_topic_entries']._options = None
+_ADGROUPADPOLICYSUMMARY.fields_by_name['review_status']._options = None
+_ADGROUPADPOLICYSUMMARY.fields_by_name['approval_status']._options = None
 # @@protoc_insertion_point(module_scope)

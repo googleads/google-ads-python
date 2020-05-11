@@ -13,6 +13,7 @@ from google.protobuf import symbol_database as _symbol_database
 _sym_db = _symbol_database.Default()
 
 
+from google.api import field_behavior_pb2 as google_dot_api_dot_field__behavior__pb2
 from google.api import resource_pb2 as google_dot_api_dot_resource__pb2
 from google.protobuf import wrappers_pb2 as google_dot_protobuf_dot_wrappers__pb2
 from google.api import annotations_pb2 as google_dot_api_dot_annotations__pb2
@@ -23,9 +24,9 @@ DESCRIPTOR = _descriptor.FileDescriptor(
   package='google.ads.googleads.v3.resources',
   syntax='proto3',
   serialized_options=_b('\n%com.google.ads.googleads.v3.resourcesB\022TopicConstantProtoP\001ZJgoogle.golang.org/genproto/googleapis/ads/googleads/v3/resources;resources\242\002\003GAA\252\002!Google.Ads.GoogleAds.V3.Resources\312\002!Google\\Ads\\GoogleAds\\V3\\Resources\352\002%Google::Ads::GoogleAds::V3::Resources'),
-  serialized_pb=_b('\n<google/ads/googleads_v3/proto/resources/topic_constant.proto\x12!google.ads.googleads.v3.resources\x1a\x19google/api/resource.proto\x1a\x1egoogle/protobuf/wrappers.proto\x1a\x1cgoogle/api/annotations.proto\"\x86\x02\n\rTopicConstant\x12\x15\n\rresource_name\x18\x01 \x01(\t\x12\'\n\x02id\x18\x02 \x01(\x0b\x32\x1b.google.protobuf.Int64Value\x12;\n\x15topic_constant_parent\x18\x03 \x01(\x0b\x32\x1c.google.protobuf.StringValue\x12*\n\x04path\x18\x04 \x03(\x0b\x32\x1c.google.protobuf.StringValue:L\xea\x41I\n&googleads.googleapis.com/TopicConstant\x12\x1ftopicConstants/{topic_constant}B\xff\x01\n%com.google.ads.googleads.v3.resourcesB\x12TopicConstantProtoP\x01ZJgoogle.golang.org/genproto/googleapis/ads/googleads/v3/resources;resources\xa2\x02\x03GAA\xaa\x02!Google.Ads.GoogleAds.V3.Resources\xca\x02!Google\\Ads\\GoogleAds\\V3\\Resources\xea\x02%Google::Ads::GoogleAds::V3::Resourcesb\x06proto3')
+  serialized_pb=_b('\n<google/ads/googleads_v3/proto/resources/topic_constant.proto\x12!google.ads.googleads.v3.resources\x1a\x1fgoogle/api/field_behavior.proto\x1a\x19google/api/resource.proto\x1a\x1egoogle/protobuf/wrappers.proto\x1a\x1cgoogle/api/annotations.proto\"\xf0\x02\n\rTopicConstant\x12\x45\n\rresource_name\x18\x01 \x01(\tB.\xe0\x41\x03\xfa\x41(\n&googleads.googleapis.com/TopicConstant\x12,\n\x02id\x18\x02 \x01(\x0b\x32\x1b.google.protobuf.Int64ValueB\x03\xe0\x41\x03\x12k\n\x15topic_constant_parent\x18\x03 \x01(\x0b\x32\x1c.google.protobuf.StringValueB.\xe0\x41\x03\xfa\x41(\n&googleads.googleapis.com/TopicConstant\x12/\n\x04path\x18\x04 \x03(\x0b\x32\x1c.google.protobuf.StringValueB\x03\xe0\x41\x03:L\xea\x41I\n&googleads.googleapis.com/TopicConstant\x12\x1ftopicConstants/{topic_constant}B\xff\x01\n%com.google.ads.googleads.v3.resourcesB\x12TopicConstantProtoP\x01ZJgoogle.golang.org/genproto/googleapis/ads/googleads/v3/resources;resources\xa2\x02\x03GAA\xaa\x02!Google.Ads.GoogleAds.V3.Resources\xca\x02!Google\\Ads\\GoogleAds\\V3\\Resources\xea\x02%Google::Ads::GoogleAds::V3::Resourcesb\x06proto3')
   ,
-  dependencies=[google_dot_api_dot_resource__pb2.DESCRIPTOR,google_dot_protobuf_dot_wrappers__pb2.DESCRIPTOR,google_dot_api_dot_annotations__pb2.DESCRIPTOR,])
+  dependencies=[google_dot_api_dot_field__behavior__pb2.DESCRIPTOR,google_dot_api_dot_resource__pb2.DESCRIPTOR,google_dot_protobuf_dot_wrappers__pb2.DESCRIPTOR,google_dot_api_dot_annotations__pb2.DESCRIPTOR,])
 
 
 
@@ -43,28 +44,28 @@ _TOPICCONSTANT = _descriptor.Descriptor(
       has_default_value=False, default_value=_b("").decode('utf-8'),
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR),
+      serialized_options=_b('\340A\003\372A(\n&googleads.googleapis.com/TopicConstant'), file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
       name='id', full_name='google.ads.googleads.v3.resources.TopicConstant.id', index=1,
       number=2, type=11, cpp_type=10, label=1,
       has_default_value=False, default_value=None,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR),
+      serialized_options=_b('\340A\003'), file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
       name='topic_constant_parent', full_name='google.ads.googleads.v3.resources.TopicConstant.topic_constant_parent', index=2,
       number=3, type=11, cpp_type=10, label=1,
       has_default_value=False, default_value=None,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR),
+      serialized_options=_b('\340A\003\372A(\n&googleads.googleapis.com/TopicConstant'), file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
       name='path', full_name='google.ads.googleads.v3.resources.TopicConstant.path', index=3,
       number=4, type=11, cpp_type=10, label=3,
       has_default_value=False, default_value=[],
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR),
+      serialized_options=_b('\340A\003'), file=DESCRIPTOR),
   ],
   extensions=[
   ],
@@ -77,8 +78,8 @@ _TOPICCONSTANT = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=189,
-  serialized_end=451,
+  serialized_start=222,
+  serialized_end=590,
 )
 
 _TOPICCONSTANT.fields_by_name['id'].message_type = google_dot_protobuf_dot_wrappers__pb2._INT64VALUE
@@ -98,19 +99,20 @@ TopicConstant = _reflection.GeneratedProtocolMessageType('TopicConstant', (_mess
   
   Attributes:
       resource_name:
-          The resource name of the topic constant. topic constant
-          resource names have the form:  ``topicConstants/{topic_id}``
+          Output only. The resource name of the topic constant. topic
+          constant resource names have the form:
+          ``topicConstants/{topic_id}``
       id:
-          The ID of the topic.
+          Output only. The ID of the topic.
       topic_constant_parent:
-          Resource name of parent of the topic constant.
+          Output only. Resource name of parent of the topic constant.
       path:
-          The category to target or exclude. Each subsequent element in
-          the array describes a more specific sub-category. For example,
-          {"Pets & Animals", "Pets", "Dogs"} represents the "Pets &
-          Animals/Pets/Dogs" category. List of available topic
-          categories at https://developers.google.com/adwords/api/docs/a
-          ppendix/verticals
+          Output only. The category to target or exclude. Each
+          subsequent element in the array describes a more specific sub-
+          category. For example, {"Pets & Animals", "Pets", "Dogs"}
+          represents the "Pets & Animals/Pets/Dogs" category. List of
+          available topic categories at https://developers.google.com/ad
+          words/api/docs/appendix/verticals
   """,
   # @@protoc_insertion_point(class_scope:google.ads.googleads.v3.resources.TopicConstant)
   ))
@@ -118,5 +120,9 @@ _sym_db.RegisterMessage(TopicConstant)
 
 
 DESCRIPTOR._options = None
+_TOPICCONSTANT.fields_by_name['resource_name']._options = None
+_TOPICCONSTANT.fields_by_name['id']._options = None
+_TOPICCONSTANT.fields_by_name['topic_constant_parent']._options = None
+_TOPICCONSTANT.fields_by_name['path']._options = None
 _TOPICCONSTANT._options = None
 # @@protoc_insertion_point(module_scope)

@@ -17,6 +17,7 @@ from google.ads.google_ads.v3.proto.resources import video_pb2 as google_dot_ads
 from google.api import annotations_pb2 as google_dot_api_dot_annotations__pb2
 from google.api import client_pb2 as google_dot_api_dot_client__pb2
 from google.api import field_behavior_pb2 as google_dot_api_dot_field__behavior__pb2
+from google.api import resource_pb2 as google_dot_api_dot_resource__pb2
 
 
 DESCRIPTOR = _descriptor.FileDescriptor(
@@ -24,9 +25,9 @@ DESCRIPTOR = _descriptor.FileDescriptor(
   package='google.ads.googleads.v3.services',
   syntax='proto3',
   serialized_options=_b('\n$com.google.ads.googleads.v3.servicesB\021VideoServiceProtoP\001ZHgoogle.golang.org/genproto/googleapis/ads/googleads/v3/services;services\242\002\003GAA\252\002 Google.Ads.GoogleAds.V3.Services\312\002 Google\\Ads\\GoogleAds\\V3\\Services\352\002$Google::Ads::GoogleAds::V3::Services'),
-  serialized_pb=_b('\n:google/ads/googleads_v3/proto/services/video_service.proto\x12 google.ads.googleads.v3.services\x1a\x33google/ads/googleads_v3/proto/resources/video.proto\x1a\x1cgoogle/api/annotations.proto\x1a\x17google/api/client.proto\x1a\x1fgoogle/api/field_behavior.proto\"-\n\x0fGetVideoRequest\x12\x1a\n\rresource_name\x18\x01 \x01(\tB\x03\xe0\x41\x02\x32\xd7\x01\n\x0cVideoService\x12\xa9\x01\n\x08GetVideo\x12\x31.google.ads.googleads.v3.services.GetVideoRequest\x1a(.google.ads.googleads.v3.resources.Video\"@\x82\xd3\xe4\x93\x02*\x12(/v3/{resource_name=customers/*/videos/*}\xda\x41\rresource_name\x1a\x1b\xca\x41\x18googleads.googleapis.comB\xf8\x01\n$com.google.ads.googleads.v3.servicesB\x11VideoServiceProtoP\x01ZHgoogle.golang.org/genproto/googleapis/ads/googleads/v3/services;services\xa2\x02\x03GAA\xaa\x02 Google.Ads.GoogleAds.V3.Services\xca\x02 Google\\Ads\\GoogleAds\\V3\\Services\xea\x02$Google::Ads::GoogleAds::V3::Servicesb\x06proto3')
+  serialized_pb=_b('\n:google/ads/googleads_v3/proto/services/video_service.proto\x12 google.ads.googleads.v3.services\x1a\x33google/ads/googleads_v3/proto/resources/video.proto\x1a\x1cgoogle/api/annotations.proto\x1a\x17google/api/client.proto\x1a\x1fgoogle/api/field_behavior.proto\x1a\x19google/api/resource.proto\"P\n\x0fGetVideoRequest\x12=\n\rresource_name\x18\x01 \x01(\tB&\xe0\x41\x02\xfa\x41 \n\x1egoogleads.googleapis.com/Video2\xd7\x01\n\x0cVideoService\x12\xa9\x01\n\x08GetVideo\x12\x31.google.ads.googleads.v3.services.GetVideoRequest\x1a(.google.ads.googleads.v3.resources.Video\"@\x82\xd3\xe4\x93\x02*\x12(/v3/{resource_name=customers/*/videos/*}\xda\x41\rresource_name\x1a\x1b\xca\x41\x18googleads.googleapis.comB\xf8\x01\n$com.google.ads.googleads.v3.servicesB\x11VideoServiceProtoP\x01ZHgoogle.golang.org/genproto/googleapis/ads/googleads/v3/services;services\xa2\x02\x03GAA\xaa\x02 Google.Ads.GoogleAds.V3.Services\xca\x02 Google\\Ads\\GoogleAds\\V3\\Services\xea\x02$Google::Ads::GoogleAds::V3::Servicesb\x06proto3')
   ,
-  dependencies=[google_dot_ads_dot_googleads__v3_dot_proto_dot_resources_dot_video__pb2.DESCRIPTOR,google_dot_api_dot_annotations__pb2.DESCRIPTOR,google_dot_api_dot_client__pb2.DESCRIPTOR,google_dot_api_dot_field__behavior__pb2.DESCRIPTOR,])
+  dependencies=[google_dot_ads_dot_googleads__v3_dot_proto_dot_resources_dot_video__pb2.DESCRIPTOR,google_dot_api_dot_annotations__pb2.DESCRIPTOR,google_dot_api_dot_client__pb2.DESCRIPTOR,google_dot_api_dot_field__behavior__pb2.DESCRIPTOR,google_dot_api_dot_resource__pb2.DESCRIPTOR,])
 
 
 
@@ -44,7 +45,7 @@ _GETVIDEOREQUEST = _descriptor.Descriptor(
       has_default_value=False, default_value=_b("").decode('utf-8'),
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
-      serialized_options=_b('\340A\002'), file=DESCRIPTOR),
+      serialized_options=_b('\340A\002\372A \n\036googleads.googleapis.com/Video'), file=DESCRIPTOR),
   ],
   extensions=[
   ],
@@ -57,8 +58,8 @@ _GETVIDEOREQUEST = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=237,
-  serialized_end=282,
+  serialized_start=264,
+  serialized_end=344,
 )
 
 DESCRIPTOR.message_types_by_name['GetVideoRequest'] = _GETVIDEOREQUEST
@@ -90,8 +91,8 @@ _VIDEOSERVICE = _descriptor.ServiceDescriptor(
   file=DESCRIPTOR,
   index=0,
   serialized_options=_b('\312A\030googleads.googleapis.com'),
-  serialized_start=285,
-  serialized_end=500,
+  serialized_start=347,
+  serialized_end=562,
   methods=[
   _descriptor.MethodDescriptor(
     name='GetVideo',

@@ -31,7 +31,6 @@ configure, and use this client library.
 Miscellaneous
 -------------
 
-* `Wiki`_
 * `Issue tracker`_
 * `API documentation`_
 * `API Support`_
@@ -45,7 +44,6 @@ Authors
 
 .. |build-status| image:: https://storage.googleapis.com/gaa-clientlibs/badges/google-ads-python/buildstatus_ubuntu.svg
 .. _Developer Site: https://developers.google.com/google-ads/api/docs/client-libs/python/
-.. _Wiki: https://github.com/googleads/google-ads-python/wiki
 .. _Issue tracker: https://github.com/googleads/google-ads-python/issues
 .. _API documentation: https://developers.google.com/google-ads/api/
 .. _API Support: https://developers.google.com/google-ads/api/support

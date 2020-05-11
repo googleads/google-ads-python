@@ -17,6 +17,7 @@ from google.ads.google_ads.v3.proto.resources import ad_group_ad_label_pb2 as go
 from google.api import annotations_pb2 as google_dot_api_dot_annotations__pb2
 from google.api import client_pb2 as google_dot_api_dot_client__pb2
 from google.api import field_behavior_pb2 as google_dot_api_dot_field__behavior__pb2
+from google.api import resource_pb2 as google_dot_api_dot_resource__pb2
 from google.rpc import status_pb2 as google_dot_rpc_dot_status__pb2
 
 
@@ -25,9 +26,9 @@ DESCRIPTOR = _descriptor.FileDescriptor(
   package='google.ads.googleads.v3.services',
   syntax='proto3',
   serialized_options=_b('\n$com.google.ads.googleads.v3.servicesB\032AdGroupAdLabelServiceProtoP\001ZHgoogle.golang.org/genproto/googleapis/ads/googleads/v3/services;services\242\002\003GAA\252\002 Google.Ads.GoogleAds.V3.Services\312\002 Google\\Ads\\GoogleAds\\V3\\Services\352\002$Google::Ads::GoogleAds::V3::Services'),
-  serialized_pb=_b('\nFgoogle/ads/googleads_v3/proto/services/ad_group_ad_label_service.proto\x12 google.ads.googleads.v3.services\x1a?google/ads/googleads_v3/proto/resources/ad_group_ad_label.proto\x1a\x1cgoogle/api/annotations.proto\x1a\x17google/api/client.proto\x1a\x1fgoogle/api/field_behavior.proto\x1a\x17google/rpc/status.proto\"6\n\x18GetAdGroupAdLabelRequest\x12\x1a\n\rresource_name\x18\x01 \x01(\tB\x03\xe0\x41\x02\"\xbc\x01\n\x1cMutateAdGroupAdLabelsRequest\x12\x18\n\x0b\x63ustomer_id\x18\x01 \x01(\tB\x03\xe0\x41\x02\x12R\n\noperations\x18\x02 \x03(\x0b\x32\x39.google.ads.googleads.v3.services.AdGroupAdLabelOperationB\x03\xe0\x41\x02\x12\x17\n\x0fpartial_failure\x18\x03 \x01(\x08\x12\x15\n\rvalidate_only\x18\x04 \x01(\x08\"}\n\x17\x41\x64GroupAdLabelOperation\x12\x43\n\x06\x63reate\x18\x01 \x01(\x0b\x32\x31.google.ads.googleads.v3.resources.AdGroupAdLabelH\x00\x12\x10\n\x06remove\x18\x02 \x01(\tH\x00\x42\x0b\n\toperation\"\xa1\x01\n\x1dMutateAdGroupAdLabelsResponse\x12\x31\n\x15partial_failure_error\x18\x03 \x01(\x0b\x32\x12.google.rpc.Status\x12M\n\x07results\x18\x02 \x03(\x0b\x32<.google.ads.googleads.v3.services.MutateAdGroupAdLabelResult\"3\n\x1aMutateAdGroupAdLabelResult\x12\x15\n\rresource_name\x18\x01 \x01(\t2\xf9\x03\n\x15\x41\x64GroupAdLabelService\x12\xcd\x01\n\x11GetAdGroupAdLabel\x12:.google.ads.googleads.v3.services.GetAdGroupAdLabelRequest\x1a\x31.google.ads.googleads.v3.resources.AdGroupAdLabel\"I\x82\xd3\xe4\x93\x02\x33\x12\x31/v3/{resource_name=customers/*/adGroupAdLabels/*}\xda\x41\rresource_name\x12\xf2\x01\n\x15MutateAdGroupAdLabels\x12>.google.ads.googleads.v3.services.MutateAdGroupAdLabelsRequest\x1a?.google.ads.googleads.v3.services.MutateAdGroupAdLabelsResponse\"X\x82\xd3\xe4\x93\x02\x39\"4/v3/customers/{customer_id=*}/adGroupAdLabels:mutate:\x01*\xda\x41\x16\x63ustomer_id,operations\x1a\x1b\xca\x41\x18googleads.googleapis.comB\x81\x02\n$com.google.ads.googleads.v3.servicesB\x1a\x41\x64GroupAdLabelServiceProtoP\x01ZHgoogle.golang.org/genproto/googleapis/ads/googleads/v3/services;services\xa2\x02\x03GAA\xaa\x02 Google.Ads.GoogleAds.V3.Services\xca\x02 Google\\Ads\\GoogleAds\\V3\\Services\xea\x02$Google::Ads::GoogleAds::V3::Servicesb\x06proto3')
+  serialized_pb=_b('\nFgoogle/ads/googleads_v3/proto/services/ad_group_ad_label_service.proto\x12 google.ads.googleads.v3.services\x1a?google/ads/googleads_v3/proto/resources/ad_group_ad_label.proto\x1a\x1cgoogle/api/annotations.proto\x1a\x17google/api/client.proto\x1a\x1fgoogle/api/field_behavior.proto\x1a\x19google/api/resource.proto\x1a\x17google/rpc/status.proto\"b\n\x18GetAdGroupAdLabelRequest\x12\x46\n\rresource_name\x18\x01 \x01(\tB/\xe0\x41\x02\xfa\x41)\n\'googleads.googleapis.com/AdGroupAdLabel\"\xbc\x01\n\x1cMutateAdGroupAdLabelsRequest\x12\x18\n\x0b\x63ustomer_id\x18\x01 \x01(\tB\x03\xe0\x41\x02\x12R\n\noperations\x18\x02 \x03(\x0b\x32\x39.google.ads.googleads.v3.services.AdGroupAdLabelOperationB\x03\xe0\x41\x02\x12\x17\n\x0fpartial_failure\x18\x03 \x01(\x08\x12\x15\n\rvalidate_only\x18\x04 \x01(\x08\"}\n\x17\x41\x64GroupAdLabelOperation\x12\x43\n\x06\x63reate\x18\x01 \x01(\x0b\x32\x31.google.ads.googleads.v3.resources.AdGroupAdLabelH\x00\x12\x10\n\x06remove\x18\x02 \x01(\tH\x00\x42\x0b\n\toperation\"\xa1\x01\n\x1dMutateAdGroupAdLabelsResponse\x12\x31\n\x15partial_failure_error\x18\x03 \x01(\x0b\x32\x12.google.rpc.Status\x12M\n\x07results\x18\x02 \x03(\x0b\x32<.google.ads.googleads.v3.services.MutateAdGroupAdLabelResult\"3\n\x1aMutateAdGroupAdLabelResult\x12\x15\n\rresource_name\x18\x01 \x01(\t2\xf9\x03\n\x15\x41\x64GroupAdLabelService\x12\xcd\x01\n\x11GetAdGroupAdLabel\x12:.google.ads.googleads.v3.services.GetAdGroupAdLabelRequest\x1a\x31.google.ads.googleads.v3.resources.AdGroupAdLabel\"I\x82\xd3\xe4\x93\x02\x33\x12\x31/v3/{resource_name=customers/*/adGroupAdLabels/*}\xda\x41\rresource_name\x12\xf2\x01\n\x15MutateAdGroupAdLabels\x12>.google.ads.googleads.v3.services.MutateAdGroupAdLabelsRequest\x1a?.google.ads.googleads.v3.services.MutateAdGroupAdLabelsResponse\"X\x82\xd3\xe4\x93\x02\x39\"4/v3/customers/{customer_id=*}/adGroupAdLabels:mutate:\x01*\xda\x41\x16\x63ustomer_id,operations\x1a\x1b\xca\x41\x18googleads.googleapis.comB\x81\x02\n$com.google.ads.googleads.v3.servicesB\x1a\x41\x64GroupAdLabelServiceProtoP\x01ZHgoogle.golang.org/genproto/googleapis/ads/googleads/v3/services;services\xa2\x02\x03GAA\xaa\x02 Google.Ads.GoogleAds.V3.Services\xca\x02 Google\\Ads\\GoogleAds\\V3\\Services\xea\x02$Google::Ads::GoogleAds::V3::Servicesb\x06proto3')
   ,
-  dependencies=[google_dot_ads_dot_googleads__v3_dot_proto_dot_resources_dot_ad__group__ad__label__pb2.DESCRIPTOR,google_dot_api_dot_annotations__pb2.DESCRIPTOR,google_dot_api_dot_client__pb2.DESCRIPTOR,google_dot_api_dot_field__behavior__pb2.DESCRIPTOR,google_dot_rpc_dot_status__pb2.DESCRIPTOR,])
+  dependencies=[google_dot_ads_dot_googleads__v3_dot_proto_dot_resources_dot_ad__group__ad__label__pb2.DESCRIPTOR,google_dot_api_dot_annotations__pb2.DESCRIPTOR,google_dot_api_dot_client__pb2.DESCRIPTOR,google_dot_api_dot_field__behavior__pb2.DESCRIPTOR,google_dot_api_dot_resource__pb2.DESCRIPTOR,google_dot_rpc_dot_status__pb2.DESCRIPTOR,])
 
 
 
@@ -45,7 +46,7 @@ _GETADGROUPADLABELREQUEST = _descriptor.Descriptor(
       has_default_value=False, default_value=_b("").decode('utf-8'),
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
-      serialized_options=_b('\340A\002'), file=DESCRIPTOR),
+      serialized_options=_b('\340A\002\372A)\n\'googleads.googleapis.com/AdGroupAdLabel'), file=DESCRIPTOR),
   ],
   extensions=[
   ],
@@ -58,8 +59,8 @@ _GETADGROUPADLABELREQUEST = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=286,
-  serialized_end=340,
+  serialized_start=313,
+  serialized_end=411,
 )
 
 
@@ -110,8 +111,8 @@ _MUTATEADGROUPADLABELSREQUEST = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=343,
-  serialized_end=531,
+  serialized_start=414,
+  serialized_end=602,
 )
 
 
@@ -151,8 +152,8 @@ _ADGROUPADLABELOPERATION = _descriptor.Descriptor(
       name='operation', full_name='google.ads.googleads.v3.services.AdGroupAdLabelOperation.operation',
       index=0, containing_type=None, fields=[]),
   ],
-  serialized_start=533,
-  serialized_end=658,
+  serialized_start=604,
+  serialized_end=729,
 )
 
 
@@ -189,8 +190,8 @@ _MUTATEADGROUPADLABELSRESPONSE = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=661,
-  serialized_end=822,
+  serialized_start=732,
+  serialized_end=893,
 )
 
 
@@ -220,8 +221,8 @@ _MUTATEADGROUPADLABELRESULT = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=824,
-  serialized_end=875,
+  serialized_start=895,
+  serialized_end=946,
 )
 
 _MUTATEADGROUPADLABELSREQUEST.fields_by_name['operations'].message_type = _ADGROUPADLABELOPERATION
@@ -355,8 +356,8 @@ _ADGROUPADLABELSERVICE = _descriptor.ServiceDescriptor(
   file=DESCRIPTOR,
   index=0,
   serialized_options=_b('\312A\030googleads.googleapis.com'),
-  serialized_start=878,
-  serialized_end=1383,
+  serialized_start=949,
+  serialized_end=1454,
   methods=[
   _descriptor.MethodDescriptor(
     name='GetAdGroupAdLabel',

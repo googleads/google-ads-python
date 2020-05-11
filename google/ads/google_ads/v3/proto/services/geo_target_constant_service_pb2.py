@@ -17,6 +17,7 @@ from google.ads.google_ads.v3.proto.resources import geo_target_constant_pb2 as 
 from google.api import annotations_pb2 as google_dot_api_dot_annotations__pb2
 from google.api import client_pb2 as google_dot_api_dot_client__pb2
 from google.api import field_behavior_pb2 as google_dot_api_dot_field__behavior__pb2
+from google.api import resource_pb2 as google_dot_api_dot_resource__pb2
 from google.protobuf import wrappers_pb2 as google_dot_protobuf_dot_wrappers__pb2
 
 
@@ -25,9 +26,9 @@ DESCRIPTOR = _descriptor.FileDescriptor(
   package='google.ads.googleads.v3.services',
   syntax='proto3',
   serialized_options=_b('\n$com.google.ads.googleads.v3.servicesB\035GeoTargetConstantServiceProtoP\001ZHgoogle.golang.org/genproto/googleapis/ads/googleads/v3/services;services\242\002\003GAA\252\002 Google.Ads.GoogleAds.V3.Services\312\002 Google\\Ads\\GoogleAds\\V3\\Services\352\002$Google::Ads::GoogleAds::V3::Services'),
-  serialized_pb=_b('\nHgoogle/ads/googleads_v3/proto/services/geo_target_constant_service.proto\x12 google.ads.googleads.v3.services\x1a\x41google/ads/googleads_v3/proto/resources/geo_target_constant.proto\x1a\x1cgoogle/api/annotations.proto\x1a\x17google/api/client.proto\x1a\x1fgoogle/api/field_behavior.proto\x1a\x1egoogle/protobuf/wrappers.proto\"9\n\x1bGetGeoTargetConstantRequest\x12\x1a\n\rresource_name\x18\x01 \x01(\tB\x03\xe0\x41\x02\"\xe7\x03\n SuggestGeoTargetConstantsRequest\x12,\n\x06locale\x18\x03 \x01(\x0b\x32\x1c.google.protobuf.StringValue\x12\x32\n\x0c\x63ountry_code\x18\x05 \x01(\x0b\x32\x1c.google.protobuf.StringValue\x12j\n\x0elocation_names\x18\x01 \x01(\x0b\x32P.google.ads.googleads.v3.services.SuggestGeoTargetConstantsRequest.LocationNamesH\x00\x12\x64\n\x0bgeo_targets\x18\x02 \x01(\x0b\x32M.google.ads.googleads.v3.services.SuggestGeoTargetConstantsRequest.GeoTargetsH\x00\x1a<\n\rLocationNames\x12+\n\x05names\x18\x01 \x03(\x0b\x32\x1c.google.protobuf.StringValue\x1aH\n\nGeoTargets\x12:\n\x14geo_target_constants\x18\x01 \x03(\x0b\x32\x1c.google.protobuf.StringValueB\x07\n\x05query\"\x8b\x01\n!SuggestGeoTargetConstantsResponse\x12\x66\n\x1fgeo_target_constant_suggestions\x18\x01 \x03(\x0b\x32=.google.ads.googleads.v3.services.GeoTargetConstantSuggestion\"\xd8\x02\n\x1bGeoTargetConstantSuggestion\x12,\n\x06locale\x18\x01 \x01(\x0b\x32\x1c.google.protobuf.StringValue\x12*\n\x05reach\x18\x02 \x01(\x0b\x32\x1b.google.protobuf.Int64Value\x12\x31\n\x0bsearch_term\x18\x03 \x01(\x0b\x32\x1c.google.protobuf.StringValue\x12Q\n\x13geo_target_constant\x18\x04 \x01(\x0b\x32\x34.google.ads.googleads.v3.resources.GeoTargetConstant\x12Y\n\x1bgeo_target_constant_parents\x18\x05 \x03(\x0b\x32\x34.google.ads.googleads.v3.resources.GeoTargetConstant2\xd9\x03\n\x18GeoTargetConstantService\x12\xcd\x01\n\x14GetGeoTargetConstant\x12=.google.ads.googleads.v3.services.GetGeoTargetConstantRequest\x1a\x34.google.ads.googleads.v3.resources.GeoTargetConstant\"@\x82\xd3\xe4\x93\x02*\x12(/v3/{resource_name=geoTargetConstants/*}\xda\x41\rresource_name\x12\xcf\x01\n\x19SuggestGeoTargetConstants\x12\x42.google.ads.googleads.v3.services.SuggestGeoTargetConstantsRequest\x1a\x43.google.ads.googleads.v3.services.SuggestGeoTargetConstantsResponse\")\x82\xd3\xe4\x93\x02#\"\x1e/v3/geoTargetConstants:suggest:\x01*\x1a\x1b\xca\x41\x18googleads.googleapis.comB\x84\x02\n$com.google.ads.googleads.v3.servicesB\x1dGeoTargetConstantServiceProtoP\x01ZHgoogle.golang.org/genproto/googleapis/ads/googleads/v3/services;services\xa2\x02\x03GAA\xaa\x02 Google.Ads.GoogleAds.V3.Services\xca\x02 Google\\Ads\\GoogleAds\\V3\\Services\xea\x02$Google::Ads::GoogleAds::V3::Servicesb\x06proto3')
+  serialized_pb=_b('\nHgoogle/ads/googleads_v3/proto/services/geo_target_constant_service.proto\x12 google.ads.googleads.v3.services\x1a\x41google/ads/googleads_v3/proto/resources/geo_target_constant.proto\x1a\x1cgoogle/api/annotations.proto\x1a\x17google/api/client.proto\x1a\x1fgoogle/api/field_behavior.proto\x1a\x19google/api/resource.proto\x1a\x1egoogle/protobuf/wrappers.proto\"h\n\x1bGetGeoTargetConstantRequest\x12I\n\rresource_name\x18\x01 \x01(\tB2\xe0\x41\x02\xfa\x41,\n*googleads.googleapis.com/GeoTargetConstant\"\xe7\x03\n SuggestGeoTargetConstantsRequest\x12,\n\x06locale\x18\x03 \x01(\x0b\x32\x1c.google.protobuf.StringValue\x12\x32\n\x0c\x63ountry_code\x18\x05 \x01(\x0b\x32\x1c.google.protobuf.StringValue\x12j\n\x0elocation_names\x18\x01 \x01(\x0b\x32P.google.ads.googleads.v3.services.SuggestGeoTargetConstantsRequest.LocationNamesH\x00\x12\x64\n\x0bgeo_targets\x18\x02 \x01(\x0b\x32M.google.ads.googleads.v3.services.SuggestGeoTargetConstantsRequest.GeoTargetsH\x00\x1a<\n\rLocationNames\x12+\n\x05names\x18\x01 \x03(\x0b\x32\x1c.google.protobuf.StringValue\x1aH\n\nGeoTargets\x12:\n\x14geo_target_constants\x18\x01 \x03(\x0b\x32\x1c.google.protobuf.StringValueB\x07\n\x05query\"\x8b\x01\n!SuggestGeoTargetConstantsResponse\x12\x66\n\x1fgeo_target_constant_suggestions\x18\x01 \x03(\x0b\x32=.google.ads.googleads.v3.services.GeoTargetConstantSuggestion\"\xd8\x02\n\x1bGeoTargetConstantSuggestion\x12,\n\x06locale\x18\x01 \x01(\x0b\x32\x1c.google.protobuf.StringValue\x12*\n\x05reach\x18\x02 \x01(\x0b\x32\x1b.google.protobuf.Int64Value\x12\x31\n\x0bsearch_term\x18\x03 \x01(\x0b\x32\x1c.google.protobuf.StringValue\x12Q\n\x13geo_target_constant\x18\x04 \x01(\x0b\x32\x34.google.ads.googleads.v3.resources.GeoTargetConstant\x12Y\n\x1bgeo_target_constant_parents\x18\x05 \x03(\x0b\x32\x34.google.ads.googleads.v3.resources.GeoTargetConstant2\xd9\x03\n\x18GeoTargetConstantService\x12\xcd\x01\n\x14GetGeoTargetConstant\x12=.google.ads.googleads.v3.services.GetGeoTargetConstantRequest\x1a\x34.google.ads.googleads.v3.resources.GeoTargetConstant\"@\x82\xd3\xe4\x93\x02*\x12(/v3/{resource_name=geoTargetConstants/*}\xda\x41\rresource_name\x12\xcf\x01\n\x19SuggestGeoTargetConstants\x12\x42.google.ads.googleads.v3.services.SuggestGeoTargetConstantsRequest\x1a\x43.google.ads.googleads.v3.services.SuggestGeoTargetConstantsResponse\")\x82\xd3\xe4\x93\x02#\"\x1e/v3/geoTargetConstants:suggest:\x01*\x1a\x1b\xca\x41\x18googleads.googleapis.comB\x84\x02\n$com.google.ads.googleads.v3.servicesB\x1dGeoTargetConstantServiceProtoP\x01ZHgoogle.golang.org/genproto/googleapis/ads/googleads/v3/services;services\xa2\x02\x03GAA\xaa\x02 Google.Ads.GoogleAds.V3.Services\xca\x02 Google\\Ads\\GoogleAds\\V3\\Services\xea\x02$Google::Ads::GoogleAds::V3::Servicesb\x06proto3')
   ,
-  dependencies=[google_dot_ads_dot_googleads__v3_dot_proto_dot_resources_dot_geo__target__constant__pb2.DESCRIPTOR,google_dot_api_dot_annotations__pb2.DESCRIPTOR,google_dot_api_dot_client__pb2.DESCRIPTOR,google_dot_api_dot_field__behavior__pb2.DESCRIPTOR,google_dot_protobuf_dot_wrappers__pb2.DESCRIPTOR,])
+  dependencies=[google_dot_ads_dot_googleads__v3_dot_proto_dot_resources_dot_geo__target__constant__pb2.DESCRIPTOR,google_dot_api_dot_annotations__pb2.DESCRIPTOR,google_dot_api_dot_client__pb2.DESCRIPTOR,google_dot_api_dot_field__behavior__pb2.DESCRIPTOR,google_dot_api_dot_resource__pb2.DESCRIPTOR,google_dot_protobuf_dot_wrappers__pb2.DESCRIPTOR,])
 
 
 
@@ -45,7 +46,7 @@ _GETGEOTARGETCONSTANTREQUEST = _descriptor.Descriptor(
       has_default_value=False, default_value=_b("").decode('utf-8'),
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
-      serialized_options=_b('\340A\002'), file=DESCRIPTOR),
+      serialized_options=_b('\340A\002\372A,\n*googleads.googleapis.com/GeoTargetConstant'), file=DESCRIPTOR),
   ],
   extensions=[
   ],
@@ -58,8 +59,8 @@ _GETGEOTARGETCONSTANTREQUEST = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=297,
-  serialized_end=354,
+  serialized_start=324,
+  serialized_end=428,
 )
 
 
@@ -89,8 +90,8 @@ _SUGGESTGEOTARGETCONSTANTSREQUEST_LOCATIONNAMES = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=701,
-  serialized_end=761,
+  serialized_start=775,
+  serialized_end=835,
 )
 
 _SUGGESTGEOTARGETCONSTANTSREQUEST_GEOTARGETS = _descriptor.Descriptor(
@@ -119,8 +120,8 @@ _SUGGESTGEOTARGETCONSTANTSREQUEST_GEOTARGETS = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=763,
-  serialized_end=835,
+  serialized_start=837,
+  serialized_end=909,
 )
 
 _SUGGESTGEOTARGETCONSTANTSREQUEST = _descriptor.Descriptor(
@@ -173,8 +174,8 @@ _SUGGESTGEOTARGETCONSTANTSREQUEST = _descriptor.Descriptor(
       name='query', full_name='google.ads.googleads.v3.services.SuggestGeoTargetConstantsRequest.query',
       index=0, containing_type=None, fields=[]),
   ],
-  serialized_start=357,
-  serialized_end=844,
+  serialized_start=431,
+  serialized_end=918,
 )
 
 
@@ -204,8 +205,8 @@ _SUGGESTGEOTARGETCONSTANTSRESPONSE = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=847,
-  serialized_end=986,
+  serialized_start=921,
+  serialized_end=1060,
 )
 
 
@@ -263,8 +264,8 @@ _GEOTARGETCONSTANTSUGGESTION = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=989,
-  serialized_end=1333,
+  serialized_start=1063,
+  serialized_end=1407,
 )
 
 _SUGGESTGEOTARGETCONSTANTSREQUEST_LOCATIONNAMES.fields_by_name['names'].message_type = google_dot_protobuf_dot_wrappers__pb2._STRINGVALUE
@@ -423,8 +424,8 @@ _GEOTARGETCONSTANTSERVICE = _descriptor.ServiceDescriptor(
   file=DESCRIPTOR,
   index=0,
   serialized_options=_b('\312A\030googleads.googleapis.com'),
-  serialized_start=1336,
-  serialized_end=1809,
+  serialized_start=1410,
+  serialized_end=1883,
   methods=[
   _descriptor.MethodDescriptor(
     name='GetGeoTargetConstant',

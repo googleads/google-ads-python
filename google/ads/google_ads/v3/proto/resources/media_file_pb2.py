@@ -15,6 +15,7 @@ _sym_db = _symbol_database.Default()
 
 from google.ads.google_ads.v3.proto.enums import media_type_pb2 as google_dot_ads_dot_googleads__v3_dot_proto_dot_enums_dot_media__type__pb2
 from google.ads.google_ads.v3.proto.enums import mime_type_pb2 as google_dot_ads_dot_googleads__v3_dot_proto_dot_enums_dot_mime__type__pb2
+from google.api import field_behavior_pb2 as google_dot_api_dot_field__behavior__pb2
 from google.api import resource_pb2 as google_dot_api_dot_resource__pb2
 from google.protobuf import wrappers_pb2 as google_dot_protobuf_dot_wrappers__pb2
 from google.api import annotations_pb2 as google_dot_api_dot_annotations__pb2
@@ -25,9 +26,9 @@ DESCRIPTOR = _descriptor.FileDescriptor(
   package='google.ads.googleads.v3.resources',
   syntax='proto3',
   serialized_options=_b('\n%com.google.ads.googleads.v3.resourcesB\016MediaFileProtoP\001ZJgoogle.golang.org/genproto/googleapis/ads/googleads/v3/resources;resources\242\002\003GAA\252\002!Google.Ads.GoogleAds.V3.Resources\312\002!Google\\Ads\\GoogleAds\\V3\\Resources\352\002%Google::Ads::GoogleAds::V3::Resources'),
-  serialized_pb=_b('\n8google/ads/googleads_v3/proto/resources/media_file.proto\x12!google.ads.googleads.v3.resources\x1a\x34google/ads/googleads_v3/proto/enums/media_type.proto\x1a\x33google/ads/googleads_v3/proto/enums/mime_type.proto\x1a\x19google/api/resource.proto\x1a\x1egoogle/protobuf/wrappers.proto\x1a\x1cgoogle/api/annotations.proto\"\xd4\x05\n\tMediaFile\x12\x15\n\rresource_name\x18\x01 \x01(\t\x12\'\n\x02id\x18\x02 \x01(\x0b\x32\x1b.google.protobuf.Int64Value\x12\x44\n\x04type\x18\x05 \x01(\x0e\x32\x36.google.ads.googleads.v3.enums.MediaTypeEnum.MediaType\x12G\n\tmime_type\x18\x06 \x01(\x0e\x32\x34.google.ads.googleads.v3.enums.MimeTypeEnum.MimeType\x12\x30\n\nsource_url\x18\x07 \x01(\x0b\x32\x1c.google.protobuf.StringValue\x12*\n\x04name\x18\x08 \x01(\x0b\x32\x1c.google.protobuf.StringValue\x12.\n\tfile_size\x18\t \x01(\x0b\x32\x1b.google.protobuf.Int64Value\x12>\n\x05image\x18\x03 \x01(\x0b\x32-.google.ads.googleads.v3.resources.MediaImageH\x00\x12\x46\n\x0cmedia_bundle\x18\x04 \x01(\x0b\x32..google.ads.googleads.v3.resources.MediaBundleH\x00\x12>\n\x05\x61udio\x18\n \x01(\x0b\x32-.google.ads.googleads.v3.resources.MediaAudioH\x00\x12>\n\x05video\x18\x0b \x01(\x0b\x32-.google.ads.googleads.v3.resources.MediaVideoH\x00:U\xea\x41R\n\"googleads.googleapis.com/MediaFile\x12,customers/{customer}/mediaFiles/{media_file}B\x0b\n\tmediatype\"7\n\nMediaImage\x12)\n\x04\x64\x61ta\x18\x01 \x01(\x0b\x32\x1b.google.protobuf.BytesValue\"8\n\x0bMediaBundle\x12)\n\x04\x64\x61ta\x18\x01 \x01(\x0b\x32\x1b.google.protobuf.BytesValue\"E\n\nMediaAudio\x12\x37\n\x12\x61\x64_duration_millis\x18\x01 \x01(\x0b\x32\x1b.google.protobuf.Int64Value\"\xe9\x01\n\nMediaVideo\x12\x37\n\x12\x61\x64_duration_millis\x18\x01 \x01(\x0b\x32\x1b.google.protobuf.Int64Value\x12\x36\n\x10youtube_video_id\x18\x02 \x01(\x0b\x32\x1c.google.protobuf.StringValue\x12\x39\n\x13\x61\x64vertising_id_code\x18\x03 \x01(\x0b\x32\x1c.google.protobuf.StringValue\x12/\n\tisci_code\x18\x04 \x01(\x0b\x32\x1c.google.protobuf.StringValueB\xfb\x01\n%com.google.ads.googleads.v3.resourcesB\x0eMediaFileProtoP\x01ZJgoogle.golang.org/genproto/googleapis/ads/googleads/v3/resources;resources\xa2\x02\x03GAA\xaa\x02!Google.Ads.GoogleAds.V3.Resources\xca\x02!Google\\Ads\\GoogleAds\\V3\\Resources\xea\x02%Google::Ads::GoogleAds::V3::Resourcesb\x06proto3')
+  serialized_pb=_b('\n8google/ads/googleads_v3/proto/resources/media_file.proto\x12!google.ads.googleads.v3.resources\x1a\x34google/ads/googleads_v3/proto/enums/media_type.proto\x1a\x33google/ads/googleads_v3/proto/enums/mime_type.proto\x1a\x1fgoogle/api/field_behavior.proto\x1a\x19google/api/resource.proto\x1a\x1egoogle/protobuf/wrappers.proto\x1a\x1cgoogle/api/annotations.proto\"\xb2\x06\n\tMediaFile\x12\x41\n\rresource_name\x18\x01 \x01(\tB*\xe0\x41\x05\xfa\x41$\n\"googleads.googleapis.com/MediaFile\x12,\n\x02id\x18\x02 \x01(\x0b\x32\x1b.google.protobuf.Int64ValueB\x03\xe0\x41\x03\x12I\n\x04type\x18\x05 \x01(\x0e\x32\x36.google.ads.googleads.v3.enums.MediaTypeEnum.MediaTypeB\x03\xe0\x41\x05\x12L\n\tmime_type\x18\x06 \x01(\x0e\x32\x34.google.ads.googleads.v3.enums.MimeTypeEnum.MimeTypeB\x03\xe0\x41\x03\x12\x35\n\nsource_url\x18\x07 \x01(\x0b\x32\x1c.google.protobuf.StringValueB\x03\xe0\x41\x05\x12/\n\x04name\x18\x08 \x01(\x0b\x32\x1c.google.protobuf.StringValueB\x03\xe0\x41\x05\x12\x33\n\tfile_size\x18\t \x01(\x0b\x32\x1b.google.protobuf.Int64ValueB\x03\xe0\x41\x03\x12\x43\n\x05image\x18\x03 \x01(\x0b\x32-.google.ads.googleads.v3.resources.MediaImageB\x03\xe0\x41\x05H\x00\x12K\n\x0cmedia_bundle\x18\x04 \x01(\x0b\x32..google.ads.googleads.v3.resources.MediaBundleB\x03\xe0\x41\x05H\x00\x12\x43\n\x05\x61udio\x18\n \x01(\x0b\x32-.google.ads.googleads.v3.resources.MediaAudioB\x03\xe0\x41\x03H\x00\x12\x43\n\x05video\x18\x0b \x01(\x0b\x32-.google.ads.googleads.v3.resources.MediaVideoB\x03\xe0\x41\x05H\x00:U\xea\x41R\n\"googleads.googleapis.com/MediaFile\x12,customers/{customer}/mediaFiles/{media_file}B\x0b\n\tmediatype\"<\n\nMediaImage\x12.\n\x04\x64\x61ta\x18\x01 \x01(\x0b\x32\x1b.google.protobuf.BytesValueB\x03\xe0\x41\x05\"=\n\x0bMediaBundle\x12.\n\x04\x64\x61ta\x18\x01 \x01(\x0b\x32\x1b.google.protobuf.BytesValueB\x03\xe0\x41\x05\"J\n\nMediaAudio\x12<\n\x12\x61\x64_duration_millis\x18\x01 \x01(\x0b\x32\x1b.google.protobuf.Int64ValueB\x03\xe0\x41\x03\"\xfd\x01\n\nMediaVideo\x12<\n\x12\x61\x64_duration_millis\x18\x01 \x01(\x0b\x32\x1b.google.protobuf.Int64ValueB\x03\xe0\x41\x03\x12;\n\x10youtube_video_id\x18\x02 \x01(\x0b\x32\x1c.google.protobuf.StringValueB\x03\xe0\x41\x05\x12>\n\x13\x61\x64vertising_id_code\x18\x03 \x01(\x0b\x32\x1c.google.protobuf.StringValueB\x03\xe0\x41\x03\x12\x34\n\tisci_code\x18\x04 \x01(\x0b\x32\x1c.google.protobuf.StringValueB\x03\xe0\x41\x03\x42\xfb\x01\n%com.google.ads.googleads.v3.resourcesB\x0eMediaFileProtoP\x01ZJgoogle.golang.org/genproto/googleapis/ads/googleads/v3/resources;resources\xa2\x02\x03GAA\xaa\x02!Google.Ads.GoogleAds.V3.Resources\xca\x02!Google\\Ads\\GoogleAds\\V3\\Resources\xea\x02%Google::Ads::GoogleAds::V3::Resourcesb\x06proto3')
   ,
-  dependencies=[google_dot_ads_dot_googleads__v3_dot_proto_dot_enums_dot_media__type__pb2.DESCRIPTOR,google_dot_ads_dot_googleads__v3_dot_proto_dot_enums_dot_mime__type__pb2.DESCRIPTOR,google_dot_api_dot_resource__pb2.DESCRIPTOR,google_dot_protobuf_dot_wrappers__pb2.DESCRIPTOR,google_dot_api_dot_annotations__pb2.DESCRIPTOR,])
+  dependencies=[google_dot_ads_dot_googleads__v3_dot_proto_dot_enums_dot_media__type__pb2.DESCRIPTOR,google_dot_ads_dot_googleads__v3_dot_proto_dot_enums_dot_mime__type__pb2.DESCRIPTOR,google_dot_api_dot_field__behavior__pb2.DESCRIPTOR,google_dot_api_dot_resource__pb2.DESCRIPTOR,google_dot_protobuf_dot_wrappers__pb2.DESCRIPTOR,google_dot_api_dot_annotations__pb2.DESCRIPTOR,])
 
 
 
@@ -45,77 +46,77 @@ _MEDIAFILE = _descriptor.Descriptor(
       has_default_value=False, default_value=_b("").decode('utf-8'),
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR),
+      serialized_options=_b('\340A\005\372A$\n\"googleads.googleapis.com/MediaFile'), file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
       name='id', full_name='google.ads.googleads.v3.resources.MediaFile.id', index=1,
       number=2, type=11, cpp_type=10, label=1,
       has_default_value=False, default_value=None,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR),
+      serialized_options=_b('\340A\003'), file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
       name='type', full_name='google.ads.googleads.v3.resources.MediaFile.type', index=2,
       number=5, type=14, cpp_type=8, label=1,
       has_default_value=False, default_value=0,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR),
+      serialized_options=_b('\340A\005'), file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
       name='mime_type', full_name='google.ads.googleads.v3.resources.MediaFile.mime_type', index=3,
       number=6, type=14, cpp_type=8, label=1,
       has_default_value=False, default_value=0,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR),
+      serialized_options=_b('\340A\003'), file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
       name='source_url', full_name='google.ads.googleads.v3.resources.MediaFile.source_url', index=4,
       number=7, type=11, cpp_type=10, label=1,
       has_default_value=False, default_value=None,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR),
+      serialized_options=_b('\340A\005'), file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
       name='name', full_name='google.ads.googleads.v3.resources.MediaFile.name', index=5,
       number=8, type=11, cpp_type=10, label=1,
       has_default_value=False, default_value=None,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR),
+      serialized_options=_b('\340A\005'), file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
       name='file_size', full_name='google.ads.googleads.v3.resources.MediaFile.file_size', index=6,
       number=9, type=11, cpp_type=10, label=1,
       has_default_value=False, default_value=None,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR),
+      serialized_options=_b('\340A\003'), file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
       name='image', full_name='google.ads.googleads.v3.resources.MediaFile.image', index=7,
       number=3, type=11, cpp_type=10, label=1,
       has_default_value=False, default_value=None,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR),
+      serialized_options=_b('\340A\005'), file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
       name='media_bundle', full_name='google.ads.googleads.v3.resources.MediaFile.media_bundle', index=8,
       number=4, type=11, cpp_type=10, label=1,
       has_default_value=False, default_value=None,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR),
+      serialized_options=_b('\340A\005'), file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
       name='audio', full_name='google.ads.googleads.v3.resources.MediaFile.audio', index=9,
       number=10, type=11, cpp_type=10, label=1,
       has_default_value=False, default_value=None,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR),
+      serialized_options=_b('\340A\003'), file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
       name='video', full_name='google.ads.googleads.v3.resources.MediaFile.video', index=10,
       number=11, type=11, cpp_type=10, label=1,
       has_default_value=False, default_value=None,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR),
+      serialized_options=_b('\340A\005'), file=DESCRIPTOR),
   ],
   extensions=[
   ],
@@ -131,8 +132,8 @@ _MEDIAFILE = _descriptor.Descriptor(
       name='mediatype', full_name='google.ads.googleads.v3.resources.MediaFile.mediatype',
       index=0, containing_type=None, fields=[]),
   ],
-  serialized_start=292,
-  serialized_end=1016,
+  serialized_start=325,
+  serialized_end=1143,
 )
 
 
@@ -149,7 +150,7 @@ _MEDIAIMAGE = _descriptor.Descriptor(
       has_default_value=False, default_value=None,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR),
+      serialized_options=_b('\340A\005'), file=DESCRIPTOR),
   ],
   extensions=[
   ],
@@ -162,8 +163,8 @@ _MEDIAIMAGE = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=1018,
-  serialized_end=1073,
+  serialized_start=1145,
+  serialized_end=1205,
 )
 
 
@@ -180,7 +181,7 @@ _MEDIABUNDLE = _descriptor.Descriptor(
       has_default_value=False, default_value=None,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR),
+      serialized_options=_b('\340A\005'), file=DESCRIPTOR),
   ],
   extensions=[
   ],
@@ -193,8 +194,8 @@ _MEDIABUNDLE = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=1075,
-  serialized_end=1131,
+  serialized_start=1207,
+  serialized_end=1268,
 )
 
 
@@ -211,7 +212,7 @@ _MEDIAAUDIO = _descriptor.Descriptor(
       has_default_value=False, default_value=None,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR),
+      serialized_options=_b('\340A\003'), file=DESCRIPTOR),
   ],
   extensions=[
   ],
@@ -224,8 +225,8 @@ _MEDIAAUDIO = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=1133,
-  serialized_end=1202,
+  serialized_start=1270,
+  serialized_end=1344,
 )
 
 
@@ -242,28 +243,28 @@ _MEDIAVIDEO = _descriptor.Descriptor(
       has_default_value=False, default_value=None,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR),
+      serialized_options=_b('\340A\003'), file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
       name='youtube_video_id', full_name='google.ads.googleads.v3.resources.MediaVideo.youtube_video_id', index=1,
       number=2, type=11, cpp_type=10, label=1,
       has_default_value=False, default_value=None,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR),
+      serialized_options=_b('\340A\005'), file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
       name='advertising_id_code', full_name='google.ads.googleads.v3.resources.MediaVideo.advertising_id_code', index=2,
       number=3, type=11, cpp_type=10, label=1,
       has_default_value=False, default_value=None,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR),
+      serialized_options=_b('\340A\003'), file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
       name='isci_code', full_name='google.ads.googleads.v3.resources.MediaVideo.isci_code', index=3,
       number=4, type=11, cpp_type=10, label=1,
       has_default_value=False, default_value=None,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR),
+      serialized_options=_b('\340A\003'), file=DESCRIPTOR),
   ],
   extensions=[
   ],
@@ -276,8 +277,8 @@ _MEDIAVIDEO = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=1205,
-  serialized_end=1438,
+  serialized_start=1347,
+  serialized_end=1600,
 )
 
 _MEDIAFILE.fields_by_name['id'].message_type = google_dot_protobuf_dot_wrappers__pb2._INT64VALUE
@@ -325,34 +326,35 @@ MediaFile = _reflection.GeneratedProtocolMessageType('MediaFile', (_message.Mess
   
   Attributes:
       resource_name:
-          The resource name of the media file. Media file resource names
-          have the form:
+          Immutable. The resource name of the media file. Media file
+          resource names have the form:
           ``customers/{customer_id}/mediaFiles/{media_file_id}``
       id:
-          The ID of the media file.
+          Output only. The ID of the media file.
       type:
-          Type of the media file.
+          Immutable. Type of the media file.
       mime_type:
-          The mime type of the media file.
+          Output only. The mime type of the media file.
       source_url:
-          The URL of where the original media file was downloaded from
-          (or a file name). Only used for media of type AUDIO and IMAGE.
+          Immutable. The URL of where the original media file was
+          downloaded from (or a file name). Only used for media of type
+          AUDIO and IMAGE.
       name:
-          The name of the media file. The name can be used by clients to
-          help identify previously uploaded media.
+          Immutable. The name of the media file. The name can be used by
+          clients to help identify previously uploaded media.
       file_size:
-          The size of the media file in bytes.
+          Output only. The size of the media file in bytes.
       mediatype:
           The specific type of the media file.
       image:
-          Encapsulates an Image.
+          Immutable. Encapsulates an Image.
       media_bundle:
-          A ZIP archive media the content of which contains HTML5
-          assets.
+          Immutable. A ZIP archive media the content of which contains
+          HTML5 assets.
       audio:
-          Encapsulates an Audio.
+          Output only. Encapsulates an Audio.
       video:
-          Encapsulates a Video.
+          Immutable. Encapsulates a Video.
   """,
   # @@protoc_insertion_point(class_scope:google.ads.googleads.v3.resources.MediaFile)
   ))
@@ -367,7 +369,7 @@ MediaImage = _reflection.GeneratedProtocolMessageType('MediaImage', (_message.Me
   
   Attributes:
       data:
-          Raw image data.
+          Immutable. Raw image data.
   """,
   # @@protoc_insertion_point(class_scope:google.ads.googleads.v3.resources.MediaImage)
   ))
@@ -383,7 +385,7 @@ MediaBundle = _reflection.GeneratedProtocolMessageType('MediaBundle', (_message.
   
   Attributes:
       data:
-          Raw zipped data.
+          Immutable. Raw zipped data.
   """,
   # @@protoc_insertion_point(class_scope:google.ads.googleads.v3.resources.MediaBundle)
   ))
@@ -398,7 +400,7 @@ MediaAudio = _reflection.GeneratedProtocolMessageType('MediaAudio', (_message.Me
   
   Attributes:
       ad_duration_millis:
-          The duration of the Audio in milliseconds.
+          Output only. The duration of the Audio in milliseconds.
   """,
   # @@protoc_insertion_point(class_scope:google.ads.googleads.v3.resources.MediaAudio)
   ))
@@ -413,16 +415,16 @@ MediaVideo = _reflection.GeneratedProtocolMessageType('MediaVideo', (_message.Me
   
   Attributes:
       ad_duration_millis:
-          The duration of the Video in milliseconds.
+          Output only. The duration of the Video in milliseconds.
       youtube_video_id:
-          The YouTube video ID (as seen in YouTube URLs).
+          Immutable. The YouTube video ID (as seen in YouTube URLs).
       advertising_id_code:
-          The Advertising Digital Identification code for this video, as
-          defined by the American Association of Advertising Agencies,
-          used mainly for television commercials.
+          Output only. The Advertising Digital Identification code for
+          this video, as defined by the American Association of
+          Advertising Agencies, used mainly for television commercials.
       isci_code:
-          The Industry Standard Commercial Identifier code for this
-          video, used mainly for television commercials.
+          Output only. The Industry Standard Commercial Identifier code
+          for this video, used mainly for television commercials.
   """,
   # @@protoc_insertion_point(class_scope:google.ads.googleads.v3.resources.MediaVideo)
   ))
@@ -430,5 +432,23 @@ _sym_db.RegisterMessage(MediaVideo)
 
 
 DESCRIPTOR._options = None
+_MEDIAFILE.fields_by_name['resource_name']._options = None
+_MEDIAFILE.fields_by_name['id']._options = None
+_MEDIAFILE.fields_by_name['type']._options = None
+_MEDIAFILE.fields_by_name['mime_type']._options = None
+_MEDIAFILE.fields_by_name['source_url']._options = None
+_MEDIAFILE.fields_by_name['name']._options = None
+_MEDIAFILE.fields_by_name['file_size']._options = None
+_MEDIAFILE.fields_by_name['image']._options = None
+_MEDIAFILE.fields_by_name['media_bundle']._options = None
+_MEDIAFILE.fields_by_name['audio']._options = None
+_MEDIAFILE.fields_by_name['video']._options = None
 _MEDIAFILE._options = None
+_MEDIAIMAGE.fields_by_name['data']._options = None
+_MEDIABUNDLE.fields_by_name['data']._options = None
+_MEDIAAUDIO.fields_by_name['ad_duration_millis']._options = None
+_MEDIAVIDEO.fields_by_name['ad_duration_millis']._options = None
+_MEDIAVIDEO.fields_by_name['youtube_video_id']._options = None
+_MEDIAVIDEO.fields_by_name['advertising_id_code']._options = None
+_MEDIAVIDEO.fields_by_name['isci_code']._options = None
 # @@protoc_insertion_point(module_scope)

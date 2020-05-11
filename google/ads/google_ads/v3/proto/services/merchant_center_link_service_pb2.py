@@ -17,6 +17,7 @@ from google.ads.google_ads.v3.proto.resources import merchant_center_link_pb2 as
 from google.api import annotations_pb2 as google_dot_api_dot_annotations__pb2
 from google.api import client_pb2 as google_dot_api_dot_client__pb2
 from google.api import field_behavior_pb2 as google_dot_api_dot_field__behavior__pb2
+from google.api import resource_pb2 as google_dot_api_dot_resource__pb2
 from google.protobuf import field_mask_pb2 as google_dot_protobuf_dot_field__mask__pb2
 
 
@@ -25,9 +26,9 @@ DESCRIPTOR = _descriptor.FileDescriptor(
   package='google.ads.googleads.v3.services',
   syntax='proto3',
   serialized_options=_b('\n$com.google.ads.googleads.v3.servicesB\036MerchantCenterLinkServiceProtoP\001ZHgoogle.golang.org/genproto/googleapis/ads/googleads/v3/services;services\242\002\003GAA\252\002 Google.Ads.GoogleAds.V3.Services\312\002 Google\\Ads\\GoogleAds\\V3\\Services\352\002$Google::Ads::GoogleAds::V3::Services'),
-  serialized_pb=_b('\nIgoogle/ads/googleads_v3/proto/services/merchant_center_link_service.proto\x12 google.ads.googleads.v3.services\x1a\x42google/ads/googleads_v3/proto/resources/merchant_center_link.proto\x1a\x1cgoogle/api/annotations.proto\x1a\x17google/api/client.proto\x1a\x1fgoogle/api/field_behavior.proto\x1a google/protobuf/field_mask.proto\":\n\x1eListMerchantCenterLinksRequest\x12\x18\n\x0b\x63ustomer_id\x18\x01 \x01(\tB\x03\xe0\x41\x02\"w\n\x1fListMerchantCenterLinksResponse\x12T\n\x15merchant_center_links\x18\x01 \x03(\x0b\x32\x35.google.ads.googleads.v3.resources.MerchantCenterLink\":\n\x1cGetMerchantCenterLinkRequest\x12\x1a\n\rresource_name\x18\x01 \x01(\tB\x03\xe0\x41\x02\"\x92\x01\n\x1fMutateMerchantCenterLinkRequest\x12\x18\n\x0b\x63ustomer_id\x18\x01 \x01(\tB\x03\xe0\x41\x02\x12U\n\toperation\x18\x02 \x01(\x0b\x32=.google.ads.googleads.v3.services.MerchantCenterLinkOperationB\x03\xe0\x41\x02\"\xb6\x01\n\x1bMerchantCenterLinkOperation\x12/\n\x0bupdate_mask\x18\x03 \x01(\x0b\x32\x1a.google.protobuf.FieldMask\x12G\n\x06update\x18\x01 \x01(\x0b\x32\x35.google.ads.googleads.v3.resources.MerchantCenterLinkH\x00\x12\x10\n\x06remove\x18\x02 \x01(\tH\x00\x42\x0b\n\toperation\"t\n MutateMerchantCenterLinkResponse\x12P\n\x06result\x18\x02 \x01(\x0b\x32@.google.ads.googleads.v3.services.MutateMerchantCenterLinkResult\"7\n\x1eMutateMerchantCenterLinkResult\x12\x15\n\rresource_name\x18\x01 \x01(\t2\x83\x06\n\x19MerchantCenterLinkService\x12\xe7\x01\n\x17ListMerchantCenterLinks\x12@.google.ads.googleads.v3.services.ListMerchantCenterLinksRequest\x1a\x41.google.ads.googleads.v3.services.ListMerchantCenterLinksResponse\"G\x82\xd3\xe4\x93\x02\x33\x12\x31/v3/customers/{customer_id=*}/merchantCenterLinks\xda\x41\x0b\x63ustomer_id\x12\xdd\x01\n\x15GetMerchantCenterLink\x12>.google.ads.googleads.v3.services.GetMerchantCenterLinkRequest\x1a\x35.google.ads.googleads.v3.resources.MerchantCenterLink\"M\x82\xd3\xe4\x93\x02\x37\x12\x35/v3/{resource_name=customers/*/merchantCenterLinks/*}\xda\x41\rresource_name\x12\xfe\x01\n\x18MutateMerchantCenterLink\x12\x41.google.ads.googleads.v3.services.MutateMerchantCenterLinkRequest\x1a\x42.google.ads.googleads.v3.services.MutateMerchantCenterLinkResponse\"[\x82\xd3\xe4\x93\x02=\"8/v3/customers/{customer_id=*}/merchantCenterLinks:mutate:\x01*\xda\x41\x15\x63ustomer_id,operation\x1a\x1b\xca\x41\x18googleads.googleapis.comB\x85\x02\n$com.google.ads.googleads.v3.servicesB\x1eMerchantCenterLinkServiceProtoP\x01ZHgoogle.golang.org/genproto/googleapis/ads/googleads/v3/services;services\xa2\x02\x03GAA\xaa\x02 Google.Ads.GoogleAds.V3.Services\xca\x02 Google\\Ads\\GoogleAds\\V3\\Services\xea\x02$Google::Ads::GoogleAds::V3::Servicesb\x06proto3')
+  serialized_pb=_b('\nIgoogle/ads/googleads_v3/proto/services/merchant_center_link_service.proto\x12 google.ads.googleads.v3.services\x1a\x42google/ads/googleads_v3/proto/resources/merchant_center_link.proto\x1a\x1cgoogle/api/annotations.proto\x1a\x17google/api/client.proto\x1a\x1fgoogle/api/field_behavior.proto\x1a\x19google/api/resource.proto\x1a google/protobuf/field_mask.proto\":\n\x1eListMerchantCenterLinksRequest\x12\x18\n\x0b\x63ustomer_id\x18\x01 \x01(\tB\x03\xe0\x41\x02\"w\n\x1fListMerchantCenterLinksResponse\x12T\n\x15merchant_center_links\x18\x01 \x03(\x0b\x32\x35.google.ads.googleads.v3.resources.MerchantCenterLink\"j\n\x1cGetMerchantCenterLinkRequest\x12J\n\rresource_name\x18\x01 \x01(\tB3\xe0\x41\x02\xfa\x41-\n+googleads.googleapis.com/MerchantCenterLink\"\x92\x01\n\x1fMutateMerchantCenterLinkRequest\x12\x18\n\x0b\x63ustomer_id\x18\x01 \x01(\tB\x03\xe0\x41\x02\x12U\n\toperation\x18\x02 \x01(\x0b\x32=.google.ads.googleads.v3.services.MerchantCenterLinkOperationB\x03\xe0\x41\x02\"\xb6\x01\n\x1bMerchantCenterLinkOperation\x12/\n\x0bupdate_mask\x18\x03 \x01(\x0b\x32\x1a.google.protobuf.FieldMask\x12G\n\x06update\x18\x01 \x01(\x0b\x32\x35.google.ads.googleads.v3.resources.MerchantCenterLinkH\x00\x12\x10\n\x06remove\x18\x02 \x01(\tH\x00\x42\x0b\n\toperation\"t\n MutateMerchantCenterLinkResponse\x12P\n\x06result\x18\x02 \x01(\x0b\x32@.google.ads.googleads.v3.services.MutateMerchantCenterLinkResult\"7\n\x1eMutateMerchantCenterLinkResult\x12\x15\n\rresource_name\x18\x01 \x01(\t2\x83\x06\n\x19MerchantCenterLinkService\x12\xe7\x01\n\x17ListMerchantCenterLinks\x12@.google.ads.googleads.v3.services.ListMerchantCenterLinksRequest\x1a\x41.google.ads.googleads.v3.services.ListMerchantCenterLinksResponse\"G\x82\xd3\xe4\x93\x02\x33\x12\x31/v3/customers/{customer_id=*}/merchantCenterLinks\xda\x41\x0b\x63ustomer_id\x12\xdd\x01\n\x15GetMerchantCenterLink\x12>.google.ads.googleads.v3.services.GetMerchantCenterLinkRequest\x1a\x35.google.ads.googleads.v3.resources.MerchantCenterLink\"M\x82\xd3\xe4\x93\x02\x37\x12\x35/v3/{resource_name=customers/*/merchantCenterLinks/*}\xda\x41\rresource_name\x12\xfe\x01\n\x18MutateMerchantCenterLink\x12\x41.google.ads.googleads.v3.services.MutateMerchantCenterLinkRequest\x1a\x42.google.ads.googleads.v3.services.MutateMerchantCenterLinkResponse\"[\x82\xd3\xe4\x93\x02=\"8/v3/customers/{customer_id=*}/merchantCenterLinks:mutate:\x01*\xda\x41\x15\x63ustomer_id,operation\x1a\x1b\xca\x41\x18googleads.googleapis.comB\x85\x02\n$com.google.ads.googleads.v3.servicesB\x1eMerchantCenterLinkServiceProtoP\x01ZHgoogle.golang.org/genproto/googleapis/ads/googleads/v3/services;services\xa2\x02\x03GAA\xaa\x02 Google.Ads.GoogleAds.V3.Services\xca\x02 Google\\Ads\\GoogleAds\\V3\\Services\xea\x02$Google::Ads::GoogleAds::V3::Servicesb\x06proto3')
   ,
-  dependencies=[google_dot_ads_dot_googleads__v3_dot_proto_dot_resources_dot_merchant__center__link__pb2.DESCRIPTOR,google_dot_api_dot_annotations__pb2.DESCRIPTOR,google_dot_api_dot_client__pb2.DESCRIPTOR,google_dot_api_dot_field__behavior__pb2.DESCRIPTOR,google_dot_protobuf_dot_field__mask__pb2.DESCRIPTOR,])
+  dependencies=[google_dot_ads_dot_googleads__v3_dot_proto_dot_resources_dot_merchant__center__link__pb2.DESCRIPTOR,google_dot_api_dot_annotations__pb2.DESCRIPTOR,google_dot_api_dot_client__pb2.DESCRIPTOR,google_dot_api_dot_field__behavior__pb2.DESCRIPTOR,google_dot_api_dot_resource__pb2.DESCRIPTOR,google_dot_protobuf_dot_field__mask__pb2.DESCRIPTOR,])
 
 
 
@@ -58,8 +59,8 @@ _LISTMERCHANTCENTERLINKSREQUEST = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=301,
-  serialized_end=359,
+  serialized_start=328,
+  serialized_end=386,
 )
 
 
@@ -89,8 +90,8 @@ _LISTMERCHANTCENTERLINKSRESPONSE = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=361,
-  serialized_end=480,
+  serialized_start=388,
+  serialized_end=507,
 )
 
 
@@ -107,7 +108,7 @@ _GETMERCHANTCENTERLINKREQUEST = _descriptor.Descriptor(
       has_default_value=False, default_value=_b("").decode('utf-8'),
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
-      serialized_options=_b('\340A\002'), file=DESCRIPTOR),
+      serialized_options=_b('\340A\002\372A-\n+googleads.googleapis.com/MerchantCenterLink'), file=DESCRIPTOR),
   ],
   extensions=[
   ],
@@ -120,8 +121,8 @@ _GETMERCHANTCENTERLINKREQUEST = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=482,
-  serialized_end=540,
+  serialized_start=509,
+  serialized_end=615,
 )
 
 
@@ -158,8 +159,8 @@ _MUTATEMERCHANTCENTERLINKREQUEST = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=543,
-  serialized_end=689,
+  serialized_start=618,
+  serialized_end=764,
 )
 
 
@@ -206,8 +207,8 @@ _MERCHANTCENTERLINKOPERATION = _descriptor.Descriptor(
       name='operation', full_name='google.ads.googleads.v3.services.MerchantCenterLinkOperation.operation',
       index=0, containing_type=None, fields=[]),
   ],
-  serialized_start=692,
-  serialized_end=874,
+  serialized_start=767,
+  serialized_end=949,
 )
 
 
@@ -237,8 +238,8 @@ _MUTATEMERCHANTCENTERLINKRESPONSE = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=876,
-  serialized_end=992,
+  serialized_start=951,
+  serialized_end=1067,
 )
 
 
@@ -268,8 +269,8 @@ _MUTATEMERCHANTCENTERLINKRESULT = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=994,
-  serialized_end=1049,
+  serialized_start=1069,
+  serialized_end=1124,
 )
 
 _LISTMERCHANTCENTERLINKSRESPONSE.fields_by_name['merchant_center_links'].message_type = google_dot_ads_dot_googleads__v3_dot_proto_dot_resources_dot_merchant__center__link__pb2._MERCHANTCENTERLINK
@@ -427,8 +428,8 @@ _MERCHANTCENTERLINKSERVICE = _descriptor.ServiceDescriptor(
   file=DESCRIPTOR,
   index=0,
   serialized_options=_b('\312A\030googleads.googleapis.com'),
-  serialized_start=1052,
-  serialized_end=1823,
+  serialized_start=1127,
+  serialized_end=1898,
   methods=[
   _descriptor.MethodDescriptor(
     name='ListMerchantCenterLinks',

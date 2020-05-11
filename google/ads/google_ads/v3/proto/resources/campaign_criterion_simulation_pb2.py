@@ -16,6 +16,7 @@ _sym_db = _symbol_database.Default()
 from google.ads.google_ads.v3.proto.common import simulation_pb2 as google_dot_ads_dot_googleads__v3_dot_proto_dot_common_dot_simulation__pb2
 from google.ads.google_ads.v3.proto.enums import simulation_modification_method_pb2 as google_dot_ads_dot_googleads__v3_dot_proto_dot_enums_dot_simulation__modification__method__pb2
 from google.ads.google_ads.v3.proto.enums import simulation_type_pb2 as google_dot_ads_dot_googleads__v3_dot_proto_dot_enums_dot_simulation__type__pb2
+from google.api import field_behavior_pb2 as google_dot_api_dot_field__behavior__pb2
 from google.api import resource_pb2 as google_dot_api_dot_resource__pb2
 from google.protobuf import wrappers_pb2 as google_dot_protobuf_dot_wrappers__pb2
 from google.api import annotations_pb2 as google_dot_api_dot_annotations__pb2
@@ -26,9 +27,9 @@ DESCRIPTOR = _descriptor.FileDescriptor(
   package='google.ads.googleads.v3.resources',
   syntax='proto3',
   serialized_options=_b('\n%com.google.ads.googleads.v3.resourcesB CampaignCriterionSimulationProtoP\001ZJgoogle.golang.org/genproto/googleapis/ads/googleads/v3/resources;resources\242\002\003GAA\252\002!Google.Ads.GoogleAds.V3.Resources\312\002!Google\\Ads\\GoogleAds\\V3\\Resources\352\002%Google::Ads::GoogleAds::V3::Resources'),
-  serialized_pb=_b('\nKgoogle/ads/googleads_v3/proto/resources/campaign_criterion_simulation.proto\x12!google.ads.googleads.v3.resources\x1a\x35google/ads/googleads_v3/proto/common/simulation.proto\x1aHgoogle/ads/googleads_v3/proto/enums/simulation_modification_method.proto\x1a\x39google/ads/googleads_v3/proto/enums/simulation_type.proto\x1a\x19google/api/resource.proto\x1a\x1egoogle/protobuf/wrappers.proto\x1a\x1cgoogle/api/annotations.proto\"\xc7\x05\n\x1b\x43\x61mpaignCriterionSimulation\x12\x15\n\rresource_name\x18\x01 \x01(\t\x12\x30\n\x0b\x63\x61mpaign_id\x18\x02 \x01(\x0b\x32\x1b.google.protobuf.Int64Value\x12\x31\n\x0c\x63riterion_id\x18\x03 \x01(\x0b\x32\x1b.google.protobuf.Int64Value\x12N\n\x04type\x18\x04 \x01(\x0e\x32@.google.ads.googleads.v3.enums.SimulationTypeEnum.SimulationType\x12y\n\x13modification_method\x18\x05 \x01(\x0e\x32\\.google.ads.googleads.v3.enums.SimulationModificationMethodEnum.SimulationModificationMethod\x12\x30\n\nstart_date\x18\x06 \x01(\x0b\x32\x1c.google.protobuf.StringValue\x12.\n\x08\x65nd_date\x18\x07 \x01(\x0b\x32\x1c.google.protobuf.StringValue\x12\x61\n\x17\x62id_modifier_point_list\x18\x08 \x01(\x0b\x32>.google.ads.googleads.v3.common.BidModifierSimulationPointListH\x00:\x8d\x01\xea\x41\x89\x01\n4googleads.googleapis.com/CampaignCriterionSimulation\x12Qcustomers/{customer}/campaignCriterionSimulations/{campaign_criterion_simulation}B\x0c\n\npoint_listB\x8d\x02\n%com.google.ads.googleads.v3.resourcesB CampaignCriterionSimulationProtoP\x01ZJgoogle.golang.org/genproto/googleapis/ads/googleads/v3/resources;resources\xa2\x02\x03GAA\xaa\x02!Google.Ads.GoogleAds.V3.Resources\xca\x02!Google\\Ads\\GoogleAds\\V3\\Resources\xea\x02%Google::Ads::GoogleAds::V3::Resourcesb\x06proto3')
+  serialized_pb=_b('\nKgoogle/ads/googleads_v3/proto/resources/campaign_criterion_simulation.proto\x12!google.ads.googleads.v3.resources\x1a\x35google/ads/googleads_v3/proto/common/simulation.proto\x1aHgoogle/ads/googleads_v3/proto/enums/simulation_modification_method.proto\x1a\x39google/ads/googleads_v3/proto/enums/simulation_type.proto\x1a\x1fgoogle/api/field_behavior.proto\x1a\x19google/api/resource.proto\x1a\x1egoogle/protobuf/wrappers.proto\x1a\x1cgoogle/api/annotations.proto\"\xa8\x06\n\x1b\x43\x61mpaignCriterionSimulation\x12S\n\rresource_name\x18\x01 \x01(\tB<\xe0\x41\x03\xfa\x41\x36\n4googleads.googleapis.com/CampaignCriterionSimulation\x12\x35\n\x0b\x63\x61mpaign_id\x18\x02 \x01(\x0b\x32\x1b.google.protobuf.Int64ValueB\x03\xe0\x41\x03\x12\x36\n\x0c\x63riterion_id\x18\x03 \x01(\x0b\x32\x1b.google.protobuf.Int64ValueB\x03\xe0\x41\x03\x12S\n\x04type\x18\x04 \x01(\x0e\x32@.google.ads.googleads.v3.enums.SimulationTypeEnum.SimulationTypeB\x03\xe0\x41\x03\x12~\n\x13modification_method\x18\x05 \x01(\x0e\x32\\.google.ads.googleads.v3.enums.SimulationModificationMethodEnum.SimulationModificationMethodB\x03\xe0\x41\x03\x12\x35\n\nstart_date\x18\x06 \x01(\x0b\x32\x1c.google.protobuf.StringValueB\x03\xe0\x41\x03\x12\x33\n\x08\x65nd_date\x18\x07 \x01(\x0b\x32\x1c.google.protobuf.StringValueB\x03\xe0\x41\x03\x12\x66\n\x17\x62id_modifier_point_list\x18\x08 \x01(\x0b\x32>.google.ads.googleads.v3.common.BidModifierSimulationPointListB\x03\xe0\x41\x03H\x00:\x8d\x01\xea\x41\x89\x01\n4googleads.googleapis.com/CampaignCriterionSimulation\x12Qcustomers/{customer}/campaignCriterionSimulations/{campaign_criterion_simulation}B\x0c\n\npoint_listB\x8d\x02\n%com.google.ads.googleads.v3.resourcesB CampaignCriterionSimulationProtoP\x01ZJgoogle.golang.org/genproto/googleapis/ads/googleads/v3/resources;resources\xa2\x02\x03GAA\xaa\x02!Google.Ads.GoogleAds.V3.Resources\xca\x02!Google\\Ads\\GoogleAds\\V3\\Resources\xea\x02%Google::Ads::GoogleAds::V3::Resourcesb\x06proto3')
   ,
-  dependencies=[google_dot_ads_dot_googleads__v3_dot_proto_dot_common_dot_simulation__pb2.DESCRIPTOR,google_dot_ads_dot_googleads__v3_dot_proto_dot_enums_dot_simulation__modification__method__pb2.DESCRIPTOR,google_dot_ads_dot_googleads__v3_dot_proto_dot_enums_dot_simulation__type__pb2.DESCRIPTOR,google_dot_api_dot_resource__pb2.DESCRIPTOR,google_dot_protobuf_dot_wrappers__pb2.DESCRIPTOR,google_dot_api_dot_annotations__pb2.DESCRIPTOR,])
+  dependencies=[google_dot_ads_dot_googleads__v3_dot_proto_dot_common_dot_simulation__pb2.DESCRIPTOR,google_dot_ads_dot_googleads__v3_dot_proto_dot_enums_dot_simulation__modification__method__pb2.DESCRIPTOR,google_dot_ads_dot_googleads__v3_dot_proto_dot_enums_dot_simulation__type__pb2.DESCRIPTOR,google_dot_api_dot_field__behavior__pb2.DESCRIPTOR,google_dot_api_dot_resource__pb2.DESCRIPTOR,google_dot_protobuf_dot_wrappers__pb2.DESCRIPTOR,google_dot_api_dot_annotations__pb2.DESCRIPTOR,])
 
 
 
@@ -46,56 +47,56 @@ _CAMPAIGNCRITERIONSIMULATION = _descriptor.Descriptor(
       has_default_value=False, default_value=_b("").decode('utf-8'),
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR),
+      serialized_options=_b('\340A\003\372A6\n4googleads.googleapis.com/CampaignCriterionSimulation'), file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
       name='campaign_id', full_name='google.ads.googleads.v3.resources.CampaignCriterionSimulation.campaign_id', index=1,
       number=2, type=11, cpp_type=10, label=1,
       has_default_value=False, default_value=None,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR),
+      serialized_options=_b('\340A\003'), file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
       name='criterion_id', full_name='google.ads.googleads.v3.resources.CampaignCriterionSimulation.criterion_id', index=2,
       number=3, type=11, cpp_type=10, label=1,
       has_default_value=False, default_value=None,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR),
+      serialized_options=_b('\340A\003'), file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
       name='type', full_name='google.ads.googleads.v3.resources.CampaignCriterionSimulation.type', index=3,
       number=4, type=14, cpp_type=8, label=1,
       has_default_value=False, default_value=0,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR),
+      serialized_options=_b('\340A\003'), file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
       name='modification_method', full_name='google.ads.googleads.v3.resources.CampaignCriterionSimulation.modification_method', index=4,
       number=5, type=14, cpp_type=8, label=1,
       has_default_value=False, default_value=0,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR),
+      serialized_options=_b('\340A\003'), file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
       name='start_date', full_name='google.ads.googleads.v3.resources.CampaignCriterionSimulation.start_date', index=5,
       number=6, type=11, cpp_type=10, label=1,
       has_default_value=False, default_value=None,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR),
+      serialized_options=_b('\340A\003'), file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
       name='end_date', full_name='google.ads.googleads.v3.resources.CampaignCriterionSimulation.end_date', index=6,
       number=7, type=11, cpp_type=10, label=1,
       has_default_value=False, default_value=None,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR),
+      serialized_options=_b('\340A\003'), file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
       name='bid_modifier_point_list', full_name='google.ads.googleads.v3.resources.CampaignCriterionSimulation.bid_modifier_point_list', index=7,
       number=8, type=11, cpp_type=10, label=1,
       has_default_value=False, default_value=None,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR),
+      serialized_options=_b('\340A\003'), file=DESCRIPTOR),
   ],
   extensions=[
   ],
@@ -111,8 +112,8 @@ _CAMPAIGNCRITERIONSIMULATION = _descriptor.Descriptor(
       name='point_list', full_name='google.ads.googleads.v3.resources.CampaignCriterionSimulation.point_list',
       index=0, containing_type=None, fields=[]),
   ],
-  serialized_start=392,
-  serialized_end=1103,
+  serialized_start=425,
+  serialized_end=1233,
 )
 
 _CAMPAIGNCRITERIONSIMULATION.fields_by_name['campaign_id'].message_type = google_dot_protobuf_dot_wrappers__pb2._INT64VALUE
@@ -143,29 +144,30 @@ CampaignCriterionSimulation = _reflection.GeneratedProtocolMessageType('Campaign
   
   Attributes:
       resource_name:
-          The resource name of the campaign criterion simulation.
-          Campaign criterion simulation resource names have the form:  `
-          `customers/{customer_id}/campaignCriterionSimulations/{campaig
-          n_id}~{criterion_id}~{type}~{modification_method}~{start_date}
-          ~{end_date}``
+          Output only. The resource name of the campaign criterion
+          simulation. Campaign criterion simulation resource names have
+          the form:  ``customers/{customer_id}/campaignCriterionSimulati
+          ons/{campaign_id}~{criterion_id}~{type}~{modification_method}~
+          {start_date}~{end_date}``
       campaign_id:
-          Campaign ID of the simulation.
+          Output only. Campaign ID of the simulation.
       criterion_id:
-          Criterion ID of the simulation.
+          Output only. Criterion ID of the simulation.
       type:
-          The field that the simulation modifies.
+          Output only. The field that the simulation modifies.
       modification_method:
-          How the simulation modifies the field.
+          Output only. How the simulation modifies the field.
       start_date:
-          First day on which the simulation is based, in YYYY-MM-DD
-          format.
+          Output only. First day on which the simulation is based, in
+          YYYY-MM-DD format.
       end_date:
-          Last day on which the simulation is based, in YYYY-MM-DD
-          format.
+          Output only. Last day on which the simulation is based, in
+          YYYY-MM-DD format.
       point_list:
           List of simulation points.
       bid_modifier_point_list:
-          Simulation points if the simulation type is BID\_MODIFIER.
+          Output only. Simulation points if the simulation type is
+          BID\_MODIFIER.
   """,
   # @@protoc_insertion_point(class_scope:google.ads.googleads.v3.resources.CampaignCriterionSimulation)
   ))
@@ -173,5 +175,13 @@ _sym_db.RegisterMessage(CampaignCriterionSimulation)
 
 
 DESCRIPTOR._options = None
+_CAMPAIGNCRITERIONSIMULATION.fields_by_name['resource_name']._options = None
+_CAMPAIGNCRITERIONSIMULATION.fields_by_name['campaign_id']._options = None
+_CAMPAIGNCRITERIONSIMULATION.fields_by_name['criterion_id']._options = None
+_CAMPAIGNCRITERIONSIMULATION.fields_by_name['type']._options = None
+_CAMPAIGNCRITERIONSIMULATION.fields_by_name['modification_method']._options = None
+_CAMPAIGNCRITERIONSIMULATION.fields_by_name['start_date']._options = None
+_CAMPAIGNCRITERIONSIMULATION.fields_by_name['end_date']._options = None
+_CAMPAIGNCRITERIONSIMULATION.fields_by_name['bid_modifier_point_list']._options = None
 _CAMPAIGNCRITERIONSIMULATION._options = None
 # @@protoc_insertion_point(module_scope)

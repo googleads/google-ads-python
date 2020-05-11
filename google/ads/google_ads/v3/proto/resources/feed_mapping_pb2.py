@@ -37,6 +37,7 @@ from google.ads.google_ads.v3.proto.enums import real_estate_placeholder_field_p
 from google.ads.google_ads.v3.proto.enums import sitelink_placeholder_field_pb2 as google_dot_ads_dot_googleads__v3_dot_proto_dot_enums_dot_sitelink__placeholder__field__pb2
 from google.ads.google_ads.v3.proto.enums import structured_snippet_placeholder_field_pb2 as google_dot_ads_dot_googleads__v3_dot_proto_dot_enums_dot_structured__snippet__placeholder__field__pb2
 from google.ads.google_ads.v3.proto.enums import travel_placeholder_field_pb2 as google_dot_ads_dot_googleads__v3_dot_proto_dot_enums_dot_travel__placeholder__field__pb2
+from google.api import field_behavior_pb2 as google_dot_api_dot_field__behavior__pb2
 from google.api import resource_pb2 as google_dot_api_dot_resource__pb2
 from google.protobuf import wrappers_pb2 as google_dot_protobuf_dot_wrappers__pb2
 from google.api import annotations_pb2 as google_dot_api_dot_annotations__pb2
@@ -47,9 +48,9 @@ DESCRIPTOR = _descriptor.FileDescriptor(
   package='google.ads.googleads.v3.resources',
   syntax='proto3',
   serialized_options=_b('\n%com.google.ads.googleads.v3.resourcesB\020FeedMappingProtoP\001ZJgoogle.golang.org/genproto/googleapis/ads/googleads/v3/resources;resources\242\002\003GAA\252\002!Google.Ads.GoogleAds.V3.Resources\312\002!Google\\Ads\\GoogleAds\\V3\\Resources\352\002%Google::Ads::GoogleAds::V3::Resources'),
-  serialized_pb=_b('\n:google/ads/googleads_v3/proto/resources/feed_mapping.proto\x12!google.ads.googleads.v3.resources\x1aIgoogle/ads/googleads_v3/proto/enums/ad_customizer_placeholder_field.proto\x1aNgoogle/ads/googleads_v3/proto/enums/affiliate_location_placeholder_field.proto\x1a?google/ads/googleads_v3/proto/enums/app_placeholder_field.proto\x1a@google/ads/googleads_v3/proto/enums/call_placeholder_field.proto\x1a\x43google/ads/googleads_v3/proto/enums/callout_placeholder_field.proto\x1a\x42google/ads/googleads_v3/proto/enums/custom_placeholder_field.proto\x1aGgoogle/ads/googleads_v3/proto/enums/dsa_page_feed_criterion_field.proto\x1a\x45google/ads/googleads_v3/proto/enums/education_placeholder_field.proto\x1a\x45google/ads/googleads_v3/proto/enums/feed_mapping_criterion_type.proto\x1a=google/ads/googleads_v3/proto/enums/feed_mapping_status.proto\x1a\x42google/ads/googleads_v3/proto/enums/flight_placeholder_field.proto\x1a\x41google/ads/googleads_v3/proto/enums/hotel_placeholder_field.proto\x1a?google/ads/googleads_v3/proto/enums/job_placeholder_field.proto\x1a\x41google/ads/googleads_v3/proto/enums/local_placeholder_field.proto\x1aVgoogle/ads/googleads_v3/proto/enums/location_extension_targeting_criterion_field.proto\x1a\x44google/ads/googleads_v3/proto/enums/location_placeholder_field.proto\x1a\x43google/ads/googleads_v3/proto/enums/message_placeholder_field.proto\x1a:google/ads/googleads_v3/proto/enums/placeholder_type.proto\x1a\x41google/ads/googleads_v3/proto/enums/price_placeholder_field.proto\x1a\x45google/ads/googleads_v3/proto/enums/promotion_placeholder_field.proto\x1aGgoogle/ads/googleads_v3/proto/enums/real_estate_placeholder_field.proto\x1a\x44google/ads/googleads_v3/proto/enums/sitelink_placeholder_field.proto\x1aNgoogle/ads/googleads_v3/proto/enums/structured_snippet_placeholder_field.proto\x1a\x42google/ads/googleads_v3/proto/enums/travel_placeholder_field.proto\x1a\x19google/api/resource.proto\x1a\x1egoogle/protobuf/wrappers.proto\x1a\x1cgoogle/api/annotations.proto\"\xbb\x04\n\x0b\x46\x65\x65\x64Mapping\x12\x15\n\rresource_name\x18\x01 \x01(\t\x12*\n\x04\x66\x65\x65\x64\x18\x02 \x01(\x0b\x32\x1c.google.protobuf.StringValue\x12Z\n\x18\x61ttribute_field_mappings\x18\x05 \x03(\x0b\x32\x38.google.ads.googleads.v3.resources.AttributeFieldMapping\x12V\n\x06status\x18\x06 \x01(\x0e\x32\x46.google.ads.googleads.v3.enums.FeedMappingStatusEnum.FeedMappingStatus\x12^\n\x10placeholder_type\x18\x03 \x01(\x0e\x32\x42.google.ads.googleads.v3.enums.PlaceholderTypeEnum.PlaceholderTypeH\x00\x12n\n\x0e\x63riterion_type\x18\x04 \x01(\x0e\x32T.google.ads.googleads.v3.enums.FeedMappingCriterionTypeEnum.FeedMappingCriterionTypeH\x00:[\xea\x41X\n$googleads.googleapis.com/FeedMapping\x12\x30\x63ustomers/{customer}/feedMappings/{feed_mapping}B\x08\n\x06target\"\xea\x13\n\x15\x41ttributeFieldMapping\x12\x36\n\x11\x66\x65\x65\x64_attribute_id\x18\x01 \x01(\x0b\x32\x1b.google.protobuf.Int64Value\x12-\n\x08\x66ield_id\x18\x02 \x01(\x0b\x32\x1b.google.protobuf.Int64Value\x12n\n\x0esitelink_field\x18\x03 \x01(\x0e\x32T.google.ads.googleads.v3.enums.SitelinkPlaceholderFieldEnum.SitelinkPlaceholderFieldH\x00\x12\x62\n\ncall_field\x18\x04 \x01(\x0e\x32L.google.ads.googleads.v3.enums.CallPlaceholderFieldEnum.CallPlaceholderFieldH\x00\x12_\n\tapp_field\x18\x05 \x01(\x0e\x32J.google.ads.googleads.v3.enums.AppPlaceholderFieldEnum.AppPlaceholderFieldH\x00\x12n\n\x0elocation_field\x18\x06 \x01(\x0e\x32T.google.ads.googleads.v3.enums.LocationPlaceholderFieldEnum.LocationPlaceholderFieldH\x00\x12\x8a\x01\n\x18\x61\x66\x66iliate_location_field\x18\x07 \x01(\x0e\x32\x66.google.ads.googleads.v3.enums.AffiliateLocationPlaceholderFieldEnum.AffiliateLocationPlaceholderFieldH\x00\x12k\n\rcallout_field\x18\x08 \x01(\x0e\x32R.google.ads.googleads.v3.enums.CalloutPlaceholderFieldEnum.CalloutPlaceholderFieldH\x00\x12\x8a\x01\n\x18structured_snippet_field\x18\t \x01(\x0e\x32\x66.google.ads.googleads.v3.enums.StructuredSnippetPlaceholderFieldEnum.StructuredSnippetPlaceholderFieldH\x00\x12k\n\rmessage_field\x18\n \x01(\x0e\x32R.google.ads.googleads.v3.enums.MessagePlaceholderFieldEnum.MessagePlaceholderFieldH\x00\x12\x65\n\x0bprice_field\x18\x0b \x01(\x0e\x32N.google.ads.googleads.v3.enums.PricePlaceholderFieldEnum.PricePlaceholderFieldH\x00\x12q\n\x0fpromotion_field\x18\x0c \x01(\x0e\x32V.google.ads.googleads.v3.enums.PromotionPlaceholderFieldEnum.PromotionPlaceholderFieldH\x00\x12{\n\x13\x61\x64_customizer_field\x18\r \x01(\x0e\x32\\.google.ads.googleads.v3.enums.AdCustomizerPlaceholderFieldEnum.AdCustomizerPlaceholderFieldH\x00\x12u\n\x13\x64sa_page_feed_field\x18\x0e \x01(\x0e\x32V.google.ads.googleads.v3.enums.DsaPageFeedCriterionFieldEnum.DsaPageFeedCriterionFieldH\x00\x12\xa2\x01\n\"location_extension_targeting_field\x18\x0f \x01(\x0e\x32t.google.ads.googleads.v3.enums.LocationExtensionTargetingCriterionFieldEnum.LocationExtensionTargetingCriterionFieldH\x00\x12q\n\x0f\x65\x64ucation_field\x18\x10 \x01(\x0e\x32V.google.ads.googleads.v3.enums.EducationPlaceholderFieldEnum.EducationPlaceholderFieldH\x00\x12h\n\x0c\x66light_field\x18\x11 \x01(\x0e\x32P.google.ads.googleads.v3.enums.FlightPlaceholderFieldEnum.FlightPlaceholderFieldH\x00\x12h\n\x0c\x63ustom_field\x18\x12 \x01(\x0e\x32P.google.ads.googleads.v3.enums.CustomPlaceholderFieldEnum.CustomPlaceholderFieldH\x00\x12\x65\n\x0bhotel_field\x18\x13 \x01(\x0e\x32N.google.ads.googleads.v3.enums.HotelPlaceholderFieldEnum.HotelPlaceholderFieldH\x00\x12u\n\x11real_estate_field\x18\x14 \x01(\x0e\x32X.google.ads.googleads.v3.enums.RealEstatePlaceholderFieldEnum.RealEstatePlaceholderFieldH\x00\x12h\n\x0ctravel_field\x18\x15 \x01(\x0e\x32P.google.ads.googleads.v3.enums.TravelPlaceholderFieldEnum.TravelPlaceholderFieldH\x00\x12\x65\n\x0blocal_field\x18\x16 \x01(\x0e\x32N.google.ads.googleads.v3.enums.LocalPlaceholderFieldEnum.LocalPlaceholderFieldH\x00\x12_\n\tjob_field\x18\x17 \x01(\x0e\x32J.google.ads.googleads.v3.enums.JobPlaceholderFieldEnum.JobPlaceholderFieldH\x00\x42\x07\n\x05\x66ieldB\xfd\x01\n%com.google.ads.googleads.v3.resourcesB\x10\x46\x65\x65\x64MappingProtoP\x01ZJgoogle.golang.org/genproto/googleapis/ads/googleads/v3/resources;resources\xa2\x02\x03GAA\xaa\x02!Google.Ads.GoogleAds.V3.Resources\xca\x02!Google\\Ads\\GoogleAds\\V3\\Resources\xea\x02%Google::Ads::GoogleAds::V3::Resourcesb\x06proto3')
+  serialized_pb=_b('\n:google/ads/googleads_v3/proto/resources/feed_mapping.proto\x12!google.ads.googleads.v3.resources\x1aIgoogle/ads/googleads_v3/proto/enums/ad_customizer_placeholder_field.proto\x1aNgoogle/ads/googleads_v3/proto/enums/affiliate_location_placeholder_field.proto\x1a?google/ads/googleads_v3/proto/enums/app_placeholder_field.proto\x1a@google/ads/googleads_v3/proto/enums/call_placeholder_field.proto\x1a\x43google/ads/googleads_v3/proto/enums/callout_placeholder_field.proto\x1a\x42google/ads/googleads_v3/proto/enums/custom_placeholder_field.proto\x1aGgoogle/ads/googleads_v3/proto/enums/dsa_page_feed_criterion_field.proto\x1a\x45google/ads/googleads_v3/proto/enums/education_placeholder_field.proto\x1a\x45google/ads/googleads_v3/proto/enums/feed_mapping_criterion_type.proto\x1a=google/ads/googleads_v3/proto/enums/feed_mapping_status.proto\x1a\x42google/ads/googleads_v3/proto/enums/flight_placeholder_field.proto\x1a\x41google/ads/googleads_v3/proto/enums/hotel_placeholder_field.proto\x1a?google/ads/googleads_v3/proto/enums/job_placeholder_field.proto\x1a\x41google/ads/googleads_v3/proto/enums/local_placeholder_field.proto\x1aVgoogle/ads/googleads_v3/proto/enums/location_extension_targeting_criterion_field.proto\x1a\x44google/ads/googleads_v3/proto/enums/location_placeholder_field.proto\x1a\x43google/ads/googleads_v3/proto/enums/message_placeholder_field.proto\x1a:google/ads/googleads_v3/proto/enums/placeholder_type.proto\x1a\x41google/ads/googleads_v3/proto/enums/price_placeholder_field.proto\x1a\x45google/ads/googleads_v3/proto/enums/promotion_placeholder_field.proto\x1aGgoogle/ads/googleads_v3/proto/enums/real_estate_placeholder_field.proto\x1a\x44google/ads/googleads_v3/proto/enums/sitelink_placeholder_field.proto\x1aNgoogle/ads/googleads_v3/proto/enums/structured_snippet_placeholder_field.proto\x1a\x42google/ads/googleads_v3/proto/enums/travel_placeholder_field.proto\x1a\x1fgoogle/api/field_behavior.proto\x1a\x19google/api/resource.proto\x1a\x1egoogle/protobuf/wrappers.proto\x1a\x1cgoogle/api/annotations.proto\"\xa4\x05\n\x0b\x46\x65\x65\x64Mapping\x12\x43\n\rresource_name\x18\x01 \x01(\tB,\xe0\x41\x05\xfa\x41&\n$googleads.googleapis.com/FeedMapping\x12Q\n\x04\x66\x65\x65\x64\x18\x02 \x01(\x0b\x32\x1c.google.protobuf.StringValueB%\xe0\x41\x05\xfa\x41\x1f\n\x1dgoogleads.googleapis.com/Feed\x12_\n\x18\x61ttribute_field_mappings\x18\x05 \x03(\x0b\x32\x38.google.ads.googleads.v3.resources.AttributeFieldMappingB\x03\xe0\x41\x05\x12[\n\x06status\x18\x06 \x01(\x0e\x32\x46.google.ads.googleads.v3.enums.FeedMappingStatusEnum.FeedMappingStatusB\x03\xe0\x41\x03\x12\x63\n\x10placeholder_type\x18\x03 \x01(\x0e\x32\x42.google.ads.googleads.v3.enums.PlaceholderTypeEnum.PlaceholderTypeB\x03\xe0\x41\x05H\x00\x12s\n\x0e\x63riterion_type\x18\x04 \x01(\x0e\x32T.google.ads.googleads.v3.enums.FeedMappingCriterionTypeEnum.FeedMappingCriterionTypeB\x03\xe0\x41\x05H\x00:[\xea\x41X\n$googleads.googleapis.com/FeedMapping\x12\x30\x63ustomers/{customer}/feedMappings/{feed_mapping}B\x08\n\x06target\"\xde\x14\n\x15\x41ttributeFieldMapping\x12;\n\x11\x66\x65\x65\x64_attribute_id\x18\x01 \x01(\x0b\x32\x1b.google.protobuf.Int64ValueB\x03\xe0\x41\x05\x12\x32\n\x08\x66ield_id\x18\x02 \x01(\x0b\x32\x1b.google.protobuf.Int64ValueB\x03\xe0\x41\x03\x12s\n\x0esitelink_field\x18\x03 \x01(\x0e\x32T.google.ads.googleads.v3.enums.SitelinkPlaceholderFieldEnum.SitelinkPlaceholderFieldB\x03\xe0\x41\x05H\x00\x12g\n\ncall_field\x18\x04 \x01(\x0e\x32L.google.ads.googleads.v3.enums.CallPlaceholderFieldEnum.CallPlaceholderFieldB\x03\xe0\x41\x05H\x00\x12\x64\n\tapp_field\x18\x05 \x01(\x0e\x32J.google.ads.googleads.v3.enums.AppPlaceholderFieldEnum.AppPlaceholderFieldB\x03\xe0\x41\x05H\x00\x12s\n\x0elocation_field\x18\x06 \x01(\x0e\x32T.google.ads.googleads.v3.enums.LocationPlaceholderFieldEnum.LocationPlaceholderFieldB\x03\xe0\x41\x03H\x00\x12\x8f\x01\n\x18\x61\x66\x66iliate_location_field\x18\x07 \x01(\x0e\x32\x66.google.ads.googleads.v3.enums.AffiliateLocationPlaceholderFieldEnum.AffiliateLocationPlaceholderFieldB\x03\xe0\x41\x03H\x00\x12p\n\rcallout_field\x18\x08 \x01(\x0e\x32R.google.ads.googleads.v3.enums.CalloutPlaceholderFieldEnum.CalloutPlaceholderFieldB\x03\xe0\x41\x05H\x00\x12\x8f\x01\n\x18structured_snippet_field\x18\t \x01(\x0e\x32\x66.google.ads.googleads.v3.enums.StructuredSnippetPlaceholderFieldEnum.StructuredSnippetPlaceholderFieldB\x03\xe0\x41\x05H\x00\x12p\n\rmessage_field\x18\n \x01(\x0e\x32R.google.ads.googleads.v3.enums.MessagePlaceholderFieldEnum.MessagePlaceholderFieldB\x03\xe0\x41\x05H\x00\x12j\n\x0bprice_field\x18\x0b \x01(\x0e\x32N.google.ads.googleads.v3.enums.PricePlaceholderFieldEnum.PricePlaceholderFieldB\x03\xe0\x41\x05H\x00\x12v\n\x0fpromotion_field\x18\x0c \x01(\x0e\x32V.google.ads.googleads.v3.enums.PromotionPlaceholderFieldEnum.PromotionPlaceholderFieldB\x03\xe0\x41\x05H\x00\x12\x80\x01\n\x13\x61\x64_customizer_field\x18\r \x01(\x0e\x32\\.google.ads.googleads.v3.enums.AdCustomizerPlaceholderFieldEnum.AdCustomizerPlaceholderFieldB\x03\xe0\x41\x05H\x00\x12z\n\x13\x64sa_page_feed_field\x18\x0e \x01(\x0e\x32V.google.ads.googleads.v3.enums.DsaPageFeedCriterionFieldEnum.DsaPageFeedCriterionFieldB\x03\xe0\x41\x05H\x00\x12\xa7\x01\n\"location_extension_targeting_field\x18\x0f \x01(\x0e\x32t.google.ads.googleads.v3.enums.LocationExtensionTargetingCriterionFieldEnum.LocationExtensionTargetingCriterionFieldB\x03\xe0\x41\x05H\x00\x12v\n\x0f\x65\x64ucation_field\x18\x10 \x01(\x0e\x32V.google.ads.googleads.v3.enums.EducationPlaceholderFieldEnum.EducationPlaceholderFieldB\x03\xe0\x41\x05H\x00\x12m\n\x0c\x66light_field\x18\x11 \x01(\x0e\x32P.google.ads.googleads.v3.enums.FlightPlaceholderFieldEnum.FlightPlaceholderFieldB\x03\xe0\x41\x05H\x00\x12m\n\x0c\x63ustom_field\x18\x12 \x01(\x0e\x32P.google.ads.googleads.v3.enums.CustomPlaceholderFieldEnum.CustomPlaceholderFieldB\x03\xe0\x41\x05H\x00\x12j\n\x0bhotel_field\x18\x13 \x01(\x0e\x32N.google.ads.googleads.v3.enums.HotelPlaceholderFieldEnum.HotelPlaceholderFieldB\x03\xe0\x41\x05H\x00\x12z\n\x11real_estate_field\x18\x14 \x01(\x0e\x32X.google.ads.googleads.v3.enums.RealEstatePlaceholderFieldEnum.RealEstatePlaceholderFieldB\x03\xe0\x41\x05H\x00\x12m\n\x0ctravel_field\x18\x15 \x01(\x0e\x32P.google.ads.googleads.v3.enums.TravelPlaceholderFieldEnum.TravelPlaceholderFieldB\x03\xe0\x41\x05H\x00\x12j\n\x0blocal_field\x18\x16 \x01(\x0e\x32N.google.ads.googleads.v3.enums.LocalPlaceholderFieldEnum.LocalPlaceholderFieldB\x03\xe0\x41\x05H\x00\x12\x64\n\tjob_field\x18\x17 \x01(\x0e\x32J.google.ads.googleads.v3.enums.JobPlaceholderFieldEnum.JobPlaceholderFieldB\x03\xe0\x41\x05H\x00\x42\x07\n\x05\x66ieldB\xfd\x01\n%com.google.ads.googleads.v3.resourcesB\x10\x46\x65\x65\x64MappingProtoP\x01ZJgoogle.golang.org/genproto/googleapis/ads/googleads/v3/resources;resources\xa2\x02\x03GAA\xaa\x02!Google.Ads.GoogleAds.V3.Resources\xca\x02!Google\\Ads\\GoogleAds\\V3\\Resources\xea\x02%Google::Ads::GoogleAds::V3::Resourcesb\x06proto3')
   ,
-  dependencies=[google_dot_ads_dot_googleads__v3_dot_proto_dot_enums_dot_ad__customizer__placeholder__field__pb2.DESCRIPTOR,google_dot_ads_dot_googleads__v3_dot_proto_dot_enums_dot_affiliate__location__placeholder__field__pb2.DESCRIPTOR,google_dot_ads_dot_googleads__v3_dot_proto_dot_enums_dot_app__placeholder__field__pb2.DESCRIPTOR,google_dot_ads_dot_googleads__v3_dot_proto_dot_enums_dot_call__placeholder__field__pb2.DESCRIPTOR,google_dot_ads_dot_googleads__v3_dot_proto_dot_enums_dot_callout__placeholder__field__pb2.DESCRIPTOR,google_dot_ads_dot_googleads__v3_dot_proto_dot_enums_dot_custom__placeholder__field__pb2.DESCRIPTOR,google_dot_ads_dot_googleads__v3_dot_proto_dot_enums_dot_dsa__page__feed__criterion__field__pb2.DESCRIPTOR,google_dot_ads_dot_googleads__v3_dot_proto_dot_enums_dot_education__placeholder__field__pb2.DESCRIPTOR,google_dot_ads_dot_googleads__v3_dot_proto_dot_enums_dot_feed__mapping__criterion__type__pb2.DESCRIPTOR,google_dot_ads_dot_googleads__v3_dot_proto_dot_enums_dot_feed__mapping__status__pb2.DESCRIPTOR,google_dot_ads_dot_googleads__v3_dot_proto_dot_enums_dot_flight__placeholder__field__pb2.DESCRIPTOR,google_dot_ads_dot_googleads__v3_dot_proto_dot_enums_dot_hotel__placeholder__field__pb2.DESCRIPTOR,google_dot_ads_dot_googleads__v3_dot_proto_dot_enums_dot_job__placeholder__field__pb2.DESCRIPTOR,google_dot_ads_dot_googleads__v3_dot_proto_dot_enums_dot_local__placeholder__field__pb2.DESCRIPTOR,google_dot_ads_dot_googleads__v3_dot_proto_dot_enums_dot_location__extension__targeting__criterion__field__pb2.DESCRIPTOR,google_dot_ads_dot_googleads__v3_dot_proto_dot_enums_dot_location__placeholder__field__pb2.DESCRIPTOR,google_dot_ads_dot_googleads__v3_dot_proto_dot_enums_dot_message__placeholder__field__pb2.DESCRIPTOR,google_dot_ads_dot_googleads__v3_dot_proto_dot_enums_dot_placeholder__type__pb2.DESCRIPTOR,google_dot_ads_dot_googleads__v3_dot_proto_dot_enums_dot_price__placeholder__field__pb2.DESCRIPTOR,google_dot_ads_dot_googleads__v3_dot_proto_dot_enums_dot_promotion__placeholder__field__pb2.DESCRIPTOR,google_dot_ads_dot_googleads__v3_dot_proto_dot_enums_dot_real__estate__placeholder__field__pb2.DESCRIPTOR,google_dot_ads_dot_googleads__v3_dot_proto_dot_enums_dot_sitelink__placeholder__field__pb2.DESCRIPTOR,google_dot_ads_dot_googleads__v3_dot_proto_dot_enums_dot_structured__snippet__placeholder__field__pb2.DESCRIPTOR,google_dot_ads_dot_googleads__v3_dot_proto_dot_enums_dot_travel__placeholder__field__pb2.DESCRIPTOR,google_dot_api_dot_resource__pb2.DESCRIPTOR,google_dot_protobuf_dot_wrappers__pb2.DESCRIPTOR,google_dot_api_dot_annotations__pb2.DESCRIPTOR,])
+  dependencies=[google_dot_ads_dot_googleads__v3_dot_proto_dot_enums_dot_ad__customizer__placeholder__field__pb2.DESCRIPTOR,google_dot_ads_dot_googleads__v3_dot_proto_dot_enums_dot_affiliate__location__placeholder__field__pb2.DESCRIPTOR,google_dot_ads_dot_googleads__v3_dot_proto_dot_enums_dot_app__placeholder__field__pb2.DESCRIPTOR,google_dot_ads_dot_googleads__v3_dot_proto_dot_enums_dot_call__placeholder__field__pb2.DESCRIPTOR,google_dot_ads_dot_googleads__v3_dot_proto_dot_enums_dot_callout__placeholder__field__pb2.DESCRIPTOR,google_dot_ads_dot_googleads__v3_dot_proto_dot_enums_dot_custom__placeholder__field__pb2.DESCRIPTOR,google_dot_ads_dot_googleads__v3_dot_proto_dot_enums_dot_dsa__page__feed__criterion__field__pb2.DESCRIPTOR,google_dot_ads_dot_googleads__v3_dot_proto_dot_enums_dot_education__placeholder__field__pb2.DESCRIPTOR,google_dot_ads_dot_googleads__v3_dot_proto_dot_enums_dot_feed__mapping__criterion__type__pb2.DESCRIPTOR,google_dot_ads_dot_googleads__v3_dot_proto_dot_enums_dot_feed__mapping__status__pb2.DESCRIPTOR,google_dot_ads_dot_googleads__v3_dot_proto_dot_enums_dot_flight__placeholder__field__pb2.DESCRIPTOR,google_dot_ads_dot_googleads__v3_dot_proto_dot_enums_dot_hotel__placeholder__field__pb2.DESCRIPTOR,google_dot_ads_dot_googleads__v3_dot_proto_dot_enums_dot_job__placeholder__field__pb2.DESCRIPTOR,google_dot_ads_dot_googleads__v3_dot_proto_dot_enums_dot_local__placeholder__field__pb2.DESCRIPTOR,google_dot_ads_dot_googleads__v3_dot_proto_dot_enums_dot_location__extension__targeting__criterion__field__pb2.DESCRIPTOR,google_dot_ads_dot_googleads__v3_dot_proto_dot_enums_dot_location__placeholder__field__pb2.DESCRIPTOR,google_dot_ads_dot_googleads__v3_dot_proto_dot_enums_dot_message__placeholder__field__pb2.DESCRIPTOR,google_dot_ads_dot_googleads__v3_dot_proto_dot_enums_dot_placeholder__type__pb2.DESCRIPTOR,google_dot_ads_dot_googleads__v3_dot_proto_dot_enums_dot_price__placeholder__field__pb2.DESCRIPTOR,google_dot_ads_dot_googleads__v3_dot_proto_dot_enums_dot_promotion__placeholder__field__pb2.DESCRIPTOR,google_dot_ads_dot_googleads__v3_dot_proto_dot_enums_dot_real__estate__placeholder__field__pb2.DESCRIPTOR,google_dot_ads_dot_googleads__v3_dot_proto_dot_enums_dot_sitelink__placeholder__field__pb2.DESCRIPTOR,google_dot_ads_dot_googleads__v3_dot_proto_dot_enums_dot_structured__snippet__placeholder__field__pb2.DESCRIPTOR,google_dot_ads_dot_googleads__v3_dot_proto_dot_enums_dot_travel__placeholder__field__pb2.DESCRIPTOR,google_dot_api_dot_field__behavior__pb2.DESCRIPTOR,google_dot_api_dot_resource__pb2.DESCRIPTOR,google_dot_protobuf_dot_wrappers__pb2.DESCRIPTOR,google_dot_api_dot_annotations__pb2.DESCRIPTOR,])
 
 
 
@@ -67,42 +68,42 @@ _FEEDMAPPING = _descriptor.Descriptor(
       has_default_value=False, default_value=_b("").decode('utf-8'),
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR),
+      serialized_options=_b('\340A\005\372A&\n$googleads.googleapis.com/FeedMapping'), file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
       name='feed', full_name='google.ads.googleads.v3.resources.FeedMapping.feed', index=1,
       number=2, type=11, cpp_type=10, label=1,
       has_default_value=False, default_value=None,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR),
+      serialized_options=_b('\340A\005\372A\037\n\035googleads.googleapis.com/Feed'), file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
       name='attribute_field_mappings', full_name='google.ads.googleads.v3.resources.FeedMapping.attribute_field_mappings', index=2,
       number=5, type=11, cpp_type=10, label=3,
       has_default_value=False, default_value=[],
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR),
+      serialized_options=_b('\340A\005'), file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
       name='status', full_name='google.ads.googleads.v3.resources.FeedMapping.status', index=3,
       number=6, type=14, cpp_type=8, label=1,
       has_default_value=False, default_value=0,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR),
+      serialized_options=_b('\340A\003'), file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
       name='placeholder_type', full_name='google.ads.googleads.v3.resources.FeedMapping.placeholder_type', index=4,
       number=3, type=14, cpp_type=8, label=1,
       has_default_value=False, default_value=0,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR),
+      serialized_options=_b('\340A\005'), file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
       name='criterion_type', full_name='google.ads.googleads.v3.resources.FeedMapping.criterion_type', index=5,
       number=4, type=14, cpp_type=8, label=1,
       has_default_value=False, default_value=0,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR),
+      serialized_options=_b('\340A\005'), file=DESCRIPTOR),
   ],
   extensions=[
   ],
@@ -118,8 +119,8 @@ _FEEDMAPPING = _descriptor.Descriptor(
       name='target', full_name='google.ads.googleads.v3.resources.FeedMapping.target',
       index=0, containing_type=None, fields=[]),
   ],
-  serialized_start=1871,
-  serialized_end=2442,
+  serialized_start=1904,
+  serialized_end=2580,
 )
 
 
@@ -136,161 +137,161 @@ _ATTRIBUTEFIELDMAPPING = _descriptor.Descriptor(
       has_default_value=False, default_value=None,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR),
+      serialized_options=_b('\340A\005'), file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
       name='field_id', full_name='google.ads.googleads.v3.resources.AttributeFieldMapping.field_id', index=1,
       number=2, type=11, cpp_type=10, label=1,
       has_default_value=False, default_value=None,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR),
+      serialized_options=_b('\340A\003'), file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
       name='sitelink_field', full_name='google.ads.googleads.v3.resources.AttributeFieldMapping.sitelink_field', index=2,
       number=3, type=14, cpp_type=8, label=1,
       has_default_value=False, default_value=0,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR),
+      serialized_options=_b('\340A\005'), file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
       name='call_field', full_name='google.ads.googleads.v3.resources.AttributeFieldMapping.call_field', index=3,
       number=4, type=14, cpp_type=8, label=1,
       has_default_value=False, default_value=0,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR),
+      serialized_options=_b('\340A\005'), file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
       name='app_field', full_name='google.ads.googleads.v3.resources.AttributeFieldMapping.app_field', index=4,
       number=5, type=14, cpp_type=8, label=1,
       has_default_value=False, default_value=0,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR),
+      serialized_options=_b('\340A\005'), file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
       name='location_field', full_name='google.ads.googleads.v3.resources.AttributeFieldMapping.location_field', index=5,
       number=6, type=14, cpp_type=8, label=1,
       has_default_value=False, default_value=0,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR),
+      serialized_options=_b('\340A\003'), file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
       name='affiliate_location_field', full_name='google.ads.googleads.v3.resources.AttributeFieldMapping.affiliate_location_field', index=6,
       number=7, type=14, cpp_type=8, label=1,
       has_default_value=False, default_value=0,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR),
+      serialized_options=_b('\340A\003'), file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
       name='callout_field', full_name='google.ads.googleads.v3.resources.AttributeFieldMapping.callout_field', index=7,
       number=8, type=14, cpp_type=8, label=1,
       has_default_value=False, default_value=0,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR),
+      serialized_options=_b('\340A\005'), file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
       name='structured_snippet_field', full_name='google.ads.googleads.v3.resources.AttributeFieldMapping.structured_snippet_field', index=8,
       number=9, type=14, cpp_type=8, label=1,
       has_default_value=False, default_value=0,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR),
+      serialized_options=_b('\340A\005'), file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
       name='message_field', full_name='google.ads.googleads.v3.resources.AttributeFieldMapping.message_field', index=9,
       number=10, type=14, cpp_type=8, label=1,
       has_default_value=False, default_value=0,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR),
+      serialized_options=_b('\340A\005'), file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
       name='price_field', full_name='google.ads.googleads.v3.resources.AttributeFieldMapping.price_field', index=10,
       number=11, type=14, cpp_type=8, label=1,
       has_default_value=False, default_value=0,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR),
+      serialized_options=_b('\340A\005'), file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
       name='promotion_field', full_name='google.ads.googleads.v3.resources.AttributeFieldMapping.promotion_field', index=11,
       number=12, type=14, cpp_type=8, label=1,
       has_default_value=False, default_value=0,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR),
+      serialized_options=_b('\340A\005'), file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
       name='ad_customizer_field', full_name='google.ads.googleads.v3.resources.AttributeFieldMapping.ad_customizer_field', index=12,
       number=13, type=14, cpp_type=8, label=1,
       has_default_value=False, default_value=0,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR),
+      serialized_options=_b('\340A\005'), file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
       name='dsa_page_feed_field', full_name='google.ads.googleads.v3.resources.AttributeFieldMapping.dsa_page_feed_field', index=13,
       number=14, type=14, cpp_type=8, label=1,
       has_default_value=False, default_value=0,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR),
+      serialized_options=_b('\340A\005'), file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
       name='location_extension_targeting_field', full_name='google.ads.googleads.v3.resources.AttributeFieldMapping.location_extension_targeting_field', index=14,
       number=15, type=14, cpp_type=8, label=1,
       has_default_value=False, default_value=0,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR),
+      serialized_options=_b('\340A\005'), file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
       name='education_field', full_name='google.ads.googleads.v3.resources.AttributeFieldMapping.education_field', index=15,
       number=16, type=14, cpp_type=8, label=1,
       has_default_value=False, default_value=0,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR),
+      serialized_options=_b('\340A\005'), file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
       name='flight_field', full_name='google.ads.googleads.v3.resources.AttributeFieldMapping.flight_field', index=16,
       number=17, type=14, cpp_type=8, label=1,
       has_default_value=False, default_value=0,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR),
+      serialized_options=_b('\340A\005'), file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
       name='custom_field', full_name='google.ads.googleads.v3.resources.AttributeFieldMapping.custom_field', index=17,
       number=18, type=14, cpp_type=8, label=1,
       has_default_value=False, default_value=0,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR),
+      serialized_options=_b('\340A\005'), file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
       name='hotel_field', full_name='google.ads.googleads.v3.resources.AttributeFieldMapping.hotel_field', index=18,
       number=19, type=14, cpp_type=8, label=1,
       has_default_value=False, default_value=0,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR),
+      serialized_options=_b('\340A\005'), file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
       name='real_estate_field', full_name='google.ads.googleads.v3.resources.AttributeFieldMapping.real_estate_field', index=19,
       number=20, type=14, cpp_type=8, label=1,
       has_default_value=False, default_value=0,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR),
+      serialized_options=_b('\340A\005'), file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
       name='travel_field', full_name='google.ads.googleads.v3.resources.AttributeFieldMapping.travel_field', index=20,
       number=21, type=14, cpp_type=8, label=1,
       has_default_value=False, default_value=0,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR),
+      serialized_options=_b('\340A\005'), file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
       name='local_field', full_name='google.ads.googleads.v3.resources.AttributeFieldMapping.local_field', index=21,
       number=22, type=14, cpp_type=8, label=1,
       has_default_value=False, default_value=0,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR),
+      serialized_options=_b('\340A\005'), file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
       name='job_field', full_name='google.ads.googleads.v3.resources.AttributeFieldMapping.job_field', index=22,
       number=23, type=14, cpp_type=8, label=1,
       has_default_value=False, default_value=0,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR),
+      serialized_options=_b('\340A\005'), file=DESCRIPTOR),
   ],
   extensions=[
   ],
@@ -306,8 +307,8 @@ _ATTRIBUTEFIELDMAPPING = _descriptor.Descriptor(
       name='field', full_name='google.ads.googleads.v3.resources.AttributeFieldMapping.field',
       index=0, containing_type=None, fields=[]),
   ],
-  serialized_start=2445,
-  serialized_end=4983,
+  serialized_start=2583,
+  serialized_end=5237,
 )
 
 _FEEDMAPPING.fields_by_name['feed'].message_type = google_dot_protobuf_dot_wrappers__pb2._STRINGVALUE
@@ -420,30 +421,31 @@ FeedMapping = _reflection.GeneratedProtocolMessageType('FeedMapping', (_message.
   
   Attributes:
       resource_name:
-          The resource name of the feed mapping. Feed mapping resource
-          names have the form:  ``customers/{customer_id}/feedMappings/{
-          feed_id}~{feed_mapping_id}``
+          Immutable. The resource name of the feed mapping. Feed mapping
+          resource names have the form:  ``customers/{customer_id}/feedM
+          appings/{feed_id}~{feed_mapping_id}``
       feed:
-          The feed of this feed mapping.
+          Immutable. The feed of this feed mapping.
       attribute_field_mappings:
-          Feed attributes to field mappings. These mappings are a one-
-          to-many relationship meaning that 1 feed attribute can be used
-          to populate multiple placeholder fields, but 1 placeholder
-          field can only draw data from 1 feed attribute. Ad Customizer
-          is an exception, 1 placeholder field can be mapped to multiple
-          feed attributes. Required.
+          Immutable. Feed attributes to field mappings. These mappings
+          are a one-to-many relationship meaning that 1 feed attribute
+          can be used to populate multiple placeholder fields, but 1
+          placeholder field can only draw data from 1 feed attribute. Ad
+          Customizer is an exception, 1 placeholder field can be mapped
+          to multiple feed attributes. Required.
       status:
-          Status of the feed mapping. This field is read-only.
+          Output only. Status of the feed mapping. This field is read-
+          only.
       target:
           Feed mapping target. Can be either a placeholder or a
           criterion. For a given feed, the active FeedMappings must have
           unique targets. Required.
       placeholder_type:
-          The placeholder type of this mapping (i.e., if the mapping
-          maps feed attributes to placeholder fields).
+          Immutable. The placeholder type of this mapping (i.e., if the
+          mapping maps feed attributes to placeholder fields).
       criterion_type:
-          The criterion type of this mapping (i.e., if the mapping maps
-          feed attributes to criterion fields).
+          Immutable. The criterion type of this mapping (i.e., if the
+          mapping maps feed attributes to criterion fields).
   """,
   # @@protoc_insertion_point(class_scope:google.ads.googleads.v3.resources.FeedMapping)
   ))
@@ -458,58 +460,59 @@ AttributeFieldMapping = _reflection.GeneratedProtocolMessageType('AttributeField
   
   Attributes:
       feed_attribute_id:
-          Feed attribute from which to map.
+          Immutable. Feed attribute from which to map.
       field_id:
-          The placeholder field ID. If a placeholder field enum is not
-          published in the current API version, then this field will be
-          populated and the field oneof will be empty. This field is
-          read-only.
+          Output only. The placeholder field ID. If a placeholder field
+          enum is not published in the current API version, then this
+          field will be populated and the field oneof will be empty.
+          This field is read-only.
       field:
           Placeholder or criterion field to be populated using data from
           the above feed attribute. Required.
       sitelink_field:
-          Sitelink Placeholder Fields.
+          Immutable. Sitelink Placeholder Fields.
       call_field:
-          Call Placeholder Fields.
+          Immutable. Call Placeholder Fields.
       app_field:
-          App Placeholder Fields.
+          Immutable. App Placeholder Fields.
       location_field:
-          Location Placeholder Fields. This field is read-only.
-      affiliate_location_field:
-          Affiliate Location Placeholder Fields. This field is read-
+          Output only. Location Placeholder Fields. This field is read-
           only.
+      affiliate_location_field:
+          Output only. Affiliate Location Placeholder Fields. This field
+          is read-only.
       callout_field:
-          Callout Placeholder Fields.
+          Immutable. Callout Placeholder Fields.
       structured_snippet_field:
-          Structured Snippet Placeholder Fields.
+          Immutable. Structured Snippet Placeholder Fields.
       message_field:
-          Message Placeholder Fields.
+          Immutable. Message Placeholder Fields.
       price_field:
-          Price Placeholder Fields.
+          Immutable. Price Placeholder Fields.
       promotion_field:
-          Promotion Placeholder Fields.
+          Immutable. Promotion Placeholder Fields.
       ad_customizer_field:
-          Ad Customizer Placeholder Fields
+          Immutable. Ad Customizer Placeholder Fields
       dsa_page_feed_field:
-          Dynamic Search Ad Page Feed Fields.
+          Immutable. Dynamic Search Ad Page Feed Fields.
       location_extension_targeting_field:
-          Location Target Fields.
+          Immutable. Location Target Fields.
       education_field:
-          Education Placeholder Fields
+          Immutable. Education Placeholder Fields
       flight_field:
-          Flight Placeholder Fields
+          Immutable. Flight Placeholder Fields
       custom_field:
-          Custom Placeholder Fields
+          Immutable. Custom Placeholder Fields
       hotel_field:
-          Hotel Placeholder Fields
+          Immutable. Hotel Placeholder Fields
       real_estate_field:
-          Real Estate Placeholder Fields
+          Immutable. Real Estate Placeholder Fields
       travel_field:
-          Travel Placeholder Fields
+          Immutable. Travel Placeholder Fields
       local_field:
-          Local Placeholder Fields
+          Immutable. Local Placeholder Fields
       job_field:
-          Job Placeholder Fields
+          Immutable. Job Placeholder Fields
   """,
   # @@protoc_insertion_point(class_scope:google.ads.googleads.v3.resources.AttributeFieldMapping)
   ))
@@ -517,5 +520,34 @@ _sym_db.RegisterMessage(AttributeFieldMapping)
 
 
 DESCRIPTOR._options = None
+_FEEDMAPPING.fields_by_name['resource_name']._options = None
+_FEEDMAPPING.fields_by_name['feed']._options = None
+_FEEDMAPPING.fields_by_name['attribute_field_mappings']._options = None
+_FEEDMAPPING.fields_by_name['status']._options = None
+_FEEDMAPPING.fields_by_name['placeholder_type']._options = None
+_FEEDMAPPING.fields_by_name['criterion_type']._options = None
 _FEEDMAPPING._options = None
+_ATTRIBUTEFIELDMAPPING.fields_by_name['feed_attribute_id']._options = None
+_ATTRIBUTEFIELDMAPPING.fields_by_name['field_id']._options = None
+_ATTRIBUTEFIELDMAPPING.fields_by_name['sitelink_field']._options = None
+_ATTRIBUTEFIELDMAPPING.fields_by_name['call_field']._options = None
+_ATTRIBUTEFIELDMAPPING.fields_by_name['app_field']._options = None
+_ATTRIBUTEFIELDMAPPING.fields_by_name['location_field']._options = None
+_ATTRIBUTEFIELDMAPPING.fields_by_name['affiliate_location_field']._options = None
+_ATTRIBUTEFIELDMAPPING.fields_by_name['callout_field']._options = None
+_ATTRIBUTEFIELDMAPPING.fields_by_name['structured_snippet_field']._options = None
+_ATTRIBUTEFIELDMAPPING.fields_by_name['message_field']._options = None
+_ATTRIBUTEFIELDMAPPING.fields_by_name['price_field']._options = None
+_ATTRIBUTEFIELDMAPPING.fields_by_name['promotion_field']._options = None
+_ATTRIBUTEFIELDMAPPING.fields_by_name['ad_customizer_field']._options = None
+_ATTRIBUTEFIELDMAPPING.fields_by_name['dsa_page_feed_field']._options = None
+_ATTRIBUTEFIELDMAPPING.fields_by_name['location_extension_targeting_field']._options = None
+_ATTRIBUTEFIELDMAPPING.fields_by_name['education_field']._options = None
+_ATTRIBUTEFIELDMAPPING.fields_by_name['flight_field']._options = None
+_ATTRIBUTEFIELDMAPPING.fields_by_name['custom_field']._options = None
+_ATTRIBUTEFIELDMAPPING.fields_by_name['hotel_field']._options = None
+_ATTRIBUTEFIELDMAPPING.fields_by_name['real_estate_field']._options = None
+_ATTRIBUTEFIELDMAPPING.fields_by_name['travel_field']._options = None
+_ATTRIBUTEFIELDMAPPING.fields_by_name['local_field']._options = None
+_ATTRIBUTEFIELDMAPPING.fields_by_name['job_field']._options = None
 # @@protoc_insertion_point(module_scope)

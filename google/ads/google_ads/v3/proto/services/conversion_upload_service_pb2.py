@@ -25,7 +25,7 @@ DESCRIPTOR = _descriptor.FileDescriptor(
   package='google.ads.googleads.v3.services',
   syntax='proto3',
   serialized_options=_b('\n$com.google.ads.googleads.v3.servicesB\034ConversionUploadServiceProtoP\001ZHgoogle.golang.org/genproto/googleapis/ads/googleads/v3/services;services\242\002\003GAA\252\002 Google.Ads.GoogleAds.V3.Services\312\002 Google\\Ads\\GoogleAds\\V3\\Services\352\002$Google::Ads::GoogleAds::V3::Services'),
-  serialized_pb=_b('\nFgoogle/ads/googleads_v3/proto/services/conversion_upload_service.proto\x12 google.ads.googleads.v3.services\x1a\x1cgoogle/api/annotations.proto\x1a\x17google/api/client.proto\x1a\x1fgoogle/api/field_behavior.proto\x1a\x1egoogle/protobuf/wrappers.proto\x1a\x17google/rpc/status.proto\"\xb6\x01\n\x1dUploadClickConversionsRequest\x12\x18\n\x0b\x63ustomer_id\x18\x01 \x01(\tB\x03\xe0\x41\x02\x12K\n\x0b\x63onversions\x18\x02 \x03(\x0b\x32\x31.google.ads.googleads.v3.services.ClickConversionB\x03\xe0\x41\x02\x12\x17\n\x0fpartial_failure\x18\x03 \x01(\x08\x12\x15\n\rvalidate_only\x18\x04 \x01(\x08\"\x9d\x01\n\x1eUploadClickConversionsResponse\x12\x31\n\x15partial_failure_error\x18\x01 \x01(\x0b\x32\x12.google.rpc.Status\x12H\n\x07results\x18\x02 \x03(\x0b\x32\x37.google.ads.googleads.v3.services.ClickConversionResult\"\xb4\x01\n\x1cUploadCallConversionsRequest\x12\x18\n\x0b\x63ustomer_id\x18\x01 \x01(\tB\x03\xe0\x41\x02\x12J\n\x0b\x63onversions\x18\x02 \x03(\x0b\x32\x30.google.ads.googleads.v3.services.CallConversionB\x03\xe0\x41\x02\x12\x17\n\x0fpartial_failure\x18\x03 \x01(\x08\x12\x15\n\rvalidate_only\x18\x04 \x01(\x08\"\x9b\x01\n\x1dUploadCallConversionsResponse\x12\x31\n\x15partial_failure_error\x18\x01 \x01(\x0b\x32\x12.google.rpc.Status\x12G\n\x07results\x18\x02 \x03(\x0b\x32\x36.google.ads.googleads.v3.services.CallConversionResult\"\xae\x03\n\x0f\x43lickConversion\x12+\n\x05gclid\x18\x01 \x01(\x0b\x32\x1c.google.protobuf.StringValue\x12\x37\n\x11\x63onversion_action\x18\x02 \x01(\x0b\x32\x1c.google.protobuf.StringValue\x12:\n\x14\x63onversion_date_time\x18\x03 \x01(\x0b\x32\x1c.google.protobuf.StringValue\x12\x36\n\x10\x63onversion_value\x18\x04 \x01(\x0b\x32\x1c.google.protobuf.DoubleValue\x12\x33\n\rcurrency_code\x18\x05 \x01(\x0b\x32\x1c.google.protobuf.StringValue\x12.\n\x08order_id\x18\x06 \x01(\x0b\x32\x1c.google.protobuf.StringValue\x12\\\n\x19\x65xternal_attribution_data\x18\x07 \x01(\x0b\x32\x39.google.ads.googleads.v3.services.ExternalAttributionData\"\xdf\x02\n\x0e\x43\x61llConversion\x12/\n\tcaller_id\x18\x01 \x01(\x0b\x32\x1c.google.protobuf.StringValue\x12:\n\x14\x63\x61ll_start_date_time\x18\x02 \x01(\x0b\x32\x1c.google.protobuf.StringValue\x12\x37\n\x11\x63onversion_action\x18\x03 \x01(\x0b\x32\x1c.google.protobuf.StringValue\x12:\n\x14\x63onversion_date_time\x18\x04 \x01(\x0b\x32\x1c.google.protobuf.StringValue\x12\x36\n\x10\x63onversion_value\x18\x05 \x01(\x0b\x32\x1c.google.protobuf.DoubleValue\x12\x33\n\rcurrency_code\x18\x06 \x01(\x0b\x32\x1c.google.protobuf.StringValue\"\x9e\x01\n\x17\x45xternalAttributionData\x12\x41\n\x1b\x65xternal_attribution_credit\x18\x01 \x01(\x0b\x32\x1c.google.protobuf.DoubleValue\x12@\n\x1a\x65xternal_attribution_model\x18\x02 \x01(\x0b\x32\x1c.google.protobuf.StringValue\"\xb9\x01\n\x15\x43lickConversionResult\x12+\n\x05gclid\x18\x01 \x01(\x0b\x32\x1c.google.protobuf.StringValue\x12\x37\n\x11\x63onversion_action\x18\x02 \x01(\x0b\x32\x1c.google.protobuf.StringValue\x12:\n\x14\x63onversion_date_time\x18\x03 \x01(\x0b\x32\x1c.google.protobuf.StringValue\"\xf8\x01\n\x14\x43\x61llConversionResult\x12/\n\tcaller_id\x18\x01 \x01(\x0b\x32\x1c.google.protobuf.StringValue\x12:\n\x14\x63\x61ll_start_date_time\x18\x02 \x01(\x0b\x32\x1c.google.protobuf.StringValue\x12\x37\n\x11\x63onversion_action\x18\x03 \x01(\x0b\x32\x1c.google.protobuf.StringValue\x12:\n\x14\x63onversion_date_time\x18\x04 \x01(\x0b\x32\x1c.google.protobuf.StringValue2\xa4\x04\n\x17\x43onversionUploadService\x12\xf6\x01\n\x16UploadClickConversions\x12?.google.ads.googleads.v3.services.UploadClickConversionsRequest\x1a@.google.ads.googleads.v3.services.UploadClickConversionsResponse\"Y\x82\xd3\xe4\x93\x02\x39\"4/v3/customers/{customer_id=*}:uploadClickConversions:\x01*\xda\x41\x17\x63ustomer_id,conversions\x12\xf2\x01\n\x15UploadCallConversions\x12>.google.ads.googleads.v3.services.UploadCallConversionsRequest\x1a?.google.ads.googleads.v3.services.UploadCallConversionsResponse\"X\x82\xd3\xe4\x93\x02\x38\"3/v3/customers/{customer_id=*}:uploadCallConversions:\x01*\xda\x41\x17\x63ustomer_id,conversions\x1a\x1b\xca\x41\x18googleads.googleapis.comB\x83\x02\n$com.google.ads.googleads.v3.servicesB\x1c\x43onversionUploadServiceProtoP\x01ZHgoogle.golang.org/genproto/googleapis/ads/googleads/v3/services;services\xa2\x02\x03GAA\xaa\x02 Google.Ads.GoogleAds.V3.Services\xca\x02 Google\\Ads\\GoogleAds\\V3\\Services\xea\x02$Google::Ads::GoogleAds::V3::Servicesb\x06proto3')
+  serialized_pb=_b('\nFgoogle/ads/googleads_v3/proto/services/conversion_upload_service.proto\x12 google.ads.googleads.v3.services\x1a\x1cgoogle/api/annotations.proto\x1a\x17google/api/client.proto\x1a\x1fgoogle/api/field_behavior.proto\x1a\x1egoogle/protobuf/wrappers.proto\x1a\x17google/rpc/status.proto\"\xbb\x01\n\x1dUploadClickConversionsRequest\x12\x18\n\x0b\x63ustomer_id\x18\x01 \x01(\tB\x03\xe0\x41\x02\x12K\n\x0b\x63onversions\x18\x02 \x03(\x0b\x32\x31.google.ads.googleads.v3.services.ClickConversionB\x03\xe0\x41\x02\x12\x1c\n\x0fpartial_failure\x18\x03 \x01(\x08\x42\x03\xe0\x41\x02\x12\x15\n\rvalidate_only\x18\x04 \x01(\x08\"\x9d\x01\n\x1eUploadClickConversionsResponse\x12\x31\n\x15partial_failure_error\x18\x01 \x01(\x0b\x32\x12.google.rpc.Status\x12H\n\x07results\x18\x02 \x03(\x0b\x32\x37.google.ads.googleads.v3.services.ClickConversionResult\"\xb9\x01\n\x1cUploadCallConversionsRequest\x12\x18\n\x0b\x63ustomer_id\x18\x01 \x01(\tB\x03\xe0\x41\x02\x12J\n\x0b\x63onversions\x18\x02 \x03(\x0b\x32\x30.google.ads.googleads.v3.services.CallConversionB\x03\xe0\x41\x02\x12\x1c\n\x0fpartial_failure\x18\x03 \x01(\x08\x42\x03\xe0\x41\x02\x12\x15\n\rvalidate_only\x18\x04 \x01(\x08\"\x9b\x01\n\x1dUploadCallConversionsResponse\x12\x31\n\x15partial_failure_error\x18\x01 \x01(\x0b\x32\x12.google.rpc.Status\x12G\n\x07results\x18\x02 \x03(\x0b\x32\x36.google.ads.googleads.v3.services.CallConversionResult\"\xae\x03\n\x0f\x43lickConversion\x12+\n\x05gclid\x18\x01 \x01(\x0b\x32\x1c.google.protobuf.StringValue\x12\x37\n\x11\x63onversion_action\x18\x02 \x01(\x0b\x32\x1c.google.protobuf.StringValue\x12:\n\x14\x63onversion_date_time\x18\x03 \x01(\x0b\x32\x1c.google.protobuf.StringValue\x12\x36\n\x10\x63onversion_value\x18\x04 \x01(\x0b\x32\x1c.google.protobuf.DoubleValue\x12\x33\n\rcurrency_code\x18\x05 \x01(\x0b\x32\x1c.google.protobuf.StringValue\x12.\n\x08order_id\x18\x06 \x01(\x0b\x32\x1c.google.protobuf.StringValue\x12\\\n\x19\x65xternal_attribution_data\x18\x07 \x01(\x0b\x32\x39.google.ads.googleads.v3.services.ExternalAttributionData\"\xdf\x02\n\x0e\x43\x61llConversion\x12/\n\tcaller_id\x18\x01 \x01(\x0b\x32\x1c.google.protobuf.StringValue\x12:\n\x14\x63\x61ll_start_date_time\x18\x02 \x01(\x0b\x32\x1c.google.protobuf.StringValue\x12\x37\n\x11\x63onversion_action\x18\x03 \x01(\x0b\x32\x1c.google.protobuf.StringValue\x12:\n\x14\x63onversion_date_time\x18\x04 \x01(\x0b\x32\x1c.google.protobuf.StringValue\x12\x36\n\x10\x63onversion_value\x18\x05 \x01(\x0b\x32\x1c.google.protobuf.DoubleValue\x12\x33\n\rcurrency_code\x18\x06 \x01(\x0b\x32\x1c.google.protobuf.StringValue\"\x9e\x01\n\x17\x45xternalAttributionData\x12\x41\n\x1b\x65xternal_attribution_credit\x18\x01 \x01(\x0b\x32\x1c.google.protobuf.DoubleValue\x12@\n\x1a\x65xternal_attribution_model\x18\x02 \x01(\x0b\x32\x1c.google.protobuf.StringValue\"\xb9\x01\n\x15\x43lickConversionResult\x12+\n\x05gclid\x18\x01 \x01(\x0b\x32\x1c.google.protobuf.StringValue\x12\x37\n\x11\x63onversion_action\x18\x02 \x01(\x0b\x32\x1c.google.protobuf.StringValue\x12:\n\x14\x63onversion_date_time\x18\x03 \x01(\x0b\x32\x1c.google.protobuf.StringValue\"\xf8\x01\n\x14\x43\x61llConversionResult\x12/\n\tcaller_id\x18\x01 \x01(\x0b\x32\x1c.google.protobuf.StringValue\x12:\n\x14\x63\x61ll_start_date_time\x18\x02 \x01(\x0b\x32\x1c.google.protobuf.StringValue\x12\x37\n\x11\x63onversion_action\x18\x03 \x01(\x0b\x32\x1c.google.protobuf.StringValue\x12:\n\x14\x63onversion_date_time\x18\x04 \x01(\x0b\x32\x1c.google.protobuf.StringValue2\xc4\x04\n\x17\x43onversionUploadService\x12\x86\x02\n\x16UploadClickConversions\x12?.google.ads.googleads.v3.services.UploadClickConversionsRequest\x1a@.google.ads.googleads.v3.services.UploadClickConversionsResponse\"i\x82\xd3\xe4\x93\x02\x39\"4/v3/customers/{customer_id=*}:uploadClickConversions:\x01*\xda\x41\'customer_id,conversions,partial_failure\x12\x82\x02\n\x15UploadCallConversions\x12>.google.ads.googleads.v3.services.UploadCallConversionsRequest\x1a?.google.ads.googleads.v3.services.UploadCallConversionsResponse\"h\x82\xd3\xe4\x93\x02\x38\"3/v3/customers/{customer_id=*}:uploadCallConversions:\x01*\xda\x41\'customer_id,conversions,partial_failure\x1a\x1b\xca\x41\x18googleads.googleapis.comB\x83\x02\n$com.google.ads.googleads.v3.servicesB\x1c\x43onversionUploadServiceProtoP\x01ZHgoogle.golang.org/genproto/googleapis/ads/googleads/v3/services;services\xa2\x02\x03GAA\xaa\x02 Google.Ads.GoogleAds.V3.Services\xca\x02 Google\\Ads\\GoogleAds\\V3\\Services\xea\x02$Google::Ads::GoogleAds::V3::Servicesb\x06proto3')
   ,
   dependencies=[google_dot_api_dot_annotations__pb2.DESCRIPTOR,google_dot_api_dot_client__pb2.DESCRIPTOR,google_dot_api_dot_field__behavior__pb2.DESCRIPTOR,google_dot_protobuf_dot_wrappers__pb2.DESCRIPTOR,google_dot_rpc_dot_status__pb2.DESCRIPTOR,])
 
@@ -59,7 +59,7 @@ _UPLOADCLICKCONVERSIONSREQUEST = _descriptor.Descriptor(
       has_default_value=False, default_value=False,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR),
+      serialized_options=_b('\340A\002'), file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
       name='validate_only', full_name='google.ads.googleads.v3.services.UploadClickConversionsRequest.validate_only', index=3,
       number=4, type=8, cpp_type=7, label=1,
@@ -80,7 +80,7 @@ _UPLOADCLICKCONVERSIONSREQUEST = _descriptor.Descriptor(
   oneofs=[
   ],
   serialized_start=254,
-  serialized_end=436,
+  serialized_end=441,
 )
 
 
@@ -117,8 +117,8 @@ _UPLOADCLICKCONVERSIONSRESPONSE = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=439,
-  serialized_end=596,
+  serialized_start=444,
+  serialized_end=601,
 )
 
 
@@ -149,7 +149,7 @@ _UPLOADCALLCONVERSIONSREQUEST = _descriptor.Descriptor(
       has_default_value=False, default_value=False,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR),
+      serialized_options=_b('\340A\002'), file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
       name='validate_only', full_name='google.ads.googleads.v3.services.UploadCallConversionsRequest.validate_only', index=3,
       number=4, type=8, cpp_type=7, label=1,
@@ -169,8 +169,8 @@ _UPLOADCALLCONVERSIONSREQUEST = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=599,
-  serialized_end=779,
+  serialized_start=604,
+  serialized_end=789,
 )
 
 
@@ -207,8 +207,8 @@ _UPLOADCALLCONVERSIONSRESPONSE = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=782,
-  serialized_end=937,
+  serialized_start=792,
+  serialized_end=947,
 )
 
 
@@ -280,8 +280,8 @@ _CLICKCONVERSION = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=940,
-  serialized_end=1370,
+  serialized_start=950,
+  serialized_end=1380,
 )
 
 
@@ -346,8 +346,8 @@ _CALLCONVERSION = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=1373,
-  serialized_end=1724,
+  serialized_start=1383,
+  serialized_end=1734,
 )
 
 
@@ -384,8 +384,8 @@ _EXTERNALATTRIBUTIONDATA = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=1727,
-  serialized_end=1885,
+  serialized_start=1737,
+  serialized_end=1895,
 )
 
 
@@ -429,8 +429,8 @@ _CLICKCONVERSIONRESULT = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=1888,
-  serialized_end=2073,
+  serialized_start=1898,
+  serialized_end=2083,
 )
 
 
@@ -481,8 +481,8 @@ _CALLCONVERSIONRESULT = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=2076,
-  serialized_end=2324,
+  serialized_start=2086,
+  serialized_end=2334,
 )
 
 _UPLOADCLICKCONVERSIONSREQUEST.fields_by_name['conversions'].message_type = _CLICKCONVERSION
@@ -538,10 +538,10 @@ UploadClickConversionsRequest = _reflection.GeneratedProtocolMessageType('Upload
       conversions:
           Required. The conversions that are being uploaded.
       partial_failure:
-          If true, successful operations will be carried out and invalid
-          operations will return errors. If false, all operations will
-          be carried out in one transaction if and only if they are all
-          valid. This should always be set to true.
+          Required. If true, successful operations will be carried out
+          and invalid operations will return errors. If false, all
+          operations will be carried out in one transaction if and only
+          if they are all valid. This should always be set to true.
       validate_only:
           If true, the request is validated but not executed. Only
           errors are returned, not results.
@@ -587,10 +587,10 @@ UploadCallConversionsRequest = _reflection.GeneratedProtocolMessageType('UploadC
       conversions:
           Required. The conversions that are being uploaded.
       partial_failure:
-          If true, successful operations will be carried out and invalid
-          operations will return errors. If false, all operations will
-          be carried out in one transaction if and only if they are all
-          valid. This should always be set to true.
+          Required. If true, successful operations will be carried out
+          and invalid operations will return errors. If false, all
+          operations will be carried out in one transaction if and only
+          if they are all valid. This should always be set to true.
       validate_only:
           If true, the request is validated but not executed. Only
           errors are returned, not results.
@@ -768,8 +768,10 @@ _sym_db.RegisterMessage(CallConversionResult)
 DESCRIPTOR._options = None
 _UPLOADCLICKCONVERSIONSREQUEST.fields_by_name['customer_id']._options = None
 _UPLOADCLICKCONVERSIONSREQUEST.fields_by_name['conversions']._options = None
+_UPLOADCLICKCONVERSIONSREQUEST.fields_by_name['partial_failure']._options = None
 _UPLOADCALLCONVERSIONSREQUEST.fields_by_name['customer_id']._options = None
 _UPLOADCALLCONVERSIONSREQUEST.fields_by_name['conversions']._options = None
+_UPLOADCALLCONVERSIONSREQUEST.fields_by_name['partial_failure']._options = None
 
 _CONVERSIONUPLOADSERVICE = _descriptor.ServiceDescriptor(
   name='ConversionUploadService',
@@ -777,8 +779,8 @@ _CONVERSIONUPLOADSERVICE = _descriptor.ServiceDescriptor(
   file=DESCRIPTOR,
   index=0,
   serialized_options=_b('\312A\030googleads.googleapis.com'),
-  serialized_start=2327,
-  serialized_end=2875,
+  serialized_start=2337,
+  serialized_end=2917,
   methods=[
   _descriptor.MethodDescriptor(
     name='UploadClickConversions',
@@ -787,7 +789,7 @@ _CONVERSIONUPLOADSERVICE = _descriptor.ServiceDescriptor(
     containing_service=None,
     input_type=_UPLOADCLICKCONVERSIONSREQUEST,
     output_type=_UPLOADCLICKCONVERSIONSRESPONSE,
-    serialized_options=_b('\202\323\344\223\0029\"4/v3/customers/{customer_id=*}:uploadClickConversions:\001*\332A\027customer_id,conversions'),
+    serialized_options=_b('\202\323\344\223\0029\"4/v3/customers/{customer_id=*}:uploadClickConversions:\001*\332A\'customer_id,conversions,partial_failure'),
   ),
   _descriptor.MethodDescriptor(
     name='UploadCallConversions',
@@ -796,7 +798,7 @@ _CONVERSIONUPLOADSERVICE = _descriptor.ServiceDescriptor(
     containing_service=None,
     input_type=_UPLOADCALLCONVERSIONSREQUEST,
     output_type=_UPLOADCALLCONVERSIONSRESPONSE,
-    serialized_options=_b('\202\323\344\223\0028\"3/v3/customers/{customer_id=*}:uploadCallConversions:\001*\332A\027customer_id,conversions'),
+    serialized_options=_b('\202\323\344\223\0028\"3/v3/customers/{customer_id=*}:uploadCallConversions:\001*\332A\'customer_id,conversions,partial_failure'),
   ),
 ])
 _sym_db.RegisterServiceDescriptor(_CONVERSIONUPLOADSERVICE)

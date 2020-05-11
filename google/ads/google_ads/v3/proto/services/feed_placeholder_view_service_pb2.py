@@ -17,6 +17,7 @@ from google.ads.google_ads.v3.proto.resources import feed_placeholder_view_pb2 a
 from google.api import annotations_pb2 as google_dot_api_dot_annotations__pb2
 from google.api import client_pb2 as google_dot_api_dot_client__pb2
 from google.api import field_behavior_pb2 as google_dot_api_dot_field__behavior__pb2
+from google.api import resource_pb2 as google_dot_api_dot_resource__pb2
 
 
 DESCRIPTOR = _descriptor.FileDescriptor(
@@ -24,9 +25,9 @@ DESCRIPTOR = _descriptor.FileDescriptor(
   package='google.ads.googleads.v3.services',
   syntax='proto3',
   serialized_options=_b('\n$com.google.ads.googleads.v3.servicesB\037FeedPlaceholderViewServiceProtoP\001ZHgoogle.golang.org/genproto/googleapis/ads/googleads/v3/services;services\242\002\003GAA\252\002 Google.Ads.GoogleAds.V3.Services\312\002 Google\\Ads\\GoogleAds\\V3\\Services\352\002$Google::Ads::GoogleAds::V3::Services'),
-  serialized_pb=_b('\nJgoogle/ads/googleads_v3/proto/services/feed_placeholder_view_service.proto\x12 google.ads.googleads.v3.services\x1a\x43google/ads/googleads_v3/proto/resources/feed_placeholder_view.proto\x1a\x1cgoogle/api/annotations.proto\x1a\x17google/api/client.proto\x1a\x1fgoogle/api/field_behavior.proto\";\n\x1dGetFeedPlaceholderViewRequest\x12\x1a\n\rresource_name\x18\x01 \x01(\tB\x03\xe0\x41\x02\x32\x9d\x02\n\x1a\x46\x65\x65\x64PlaceholderViewService\x12\xe1\x01\n\x16GetFeedPlaceholderView\x12?.google.ads.googleads.v3.services.GetFeedPlaceholderViewRequest\x1a\x36.google.ads.googleads.v3.resources.FeedPlaceholderView\"N\x82\xd3\xe4\x93\x02\x38\x12\x36/v3/{resource_name=customers/*/feedPlaceholderViews/*}\xda\x41\rresource_name\x1a\x1b\xca\x41\x18googleads.googleapis.comB\x86\x02\n$com.google.ads.googleads.v3.servicesB\x1f\x46\x65\x65\x64PlaceholderViewServiceProtoP\x01ZHgoogle.golang.org/genproto/googleapis/ads/googleads/v3/services;services\xa2\x02\x03GAA\xaa\x02 Google.Ads.GoogleAds.V3.Services\xca\x02 Google\\Ads\\GoogleAds\\V3\\Services\xea\x02$Google::Ads::GoogleAds::V3::Servicesb\x06proto3')
+  serialized_pb=_b('\nJgoogle/ads/googleads_v3/proto/services/feed_placeholder_view_service.proto\x12 google.ads.googleads.v3.services\x1a\x43google/ads/googleads_v3/proto/resources/feed_placeholder_view.proto\x1a\x1cgoogle/api/annotations.proto\x1a\x17google/api/client.proto\x1a\x1fgoogle/api/field_behavior.proto\x1a\x19google/api/resource.proto\"l\n\x1dGetFeedPlaceholderViewRequest\x12K\n\rresource_name\x18\x01 \x01(\tB4\xe0\x41\x02\xfa\x41.\n,googleads.googleapis.com/FeedPlaceholderView2\x9d\x02\n\x1a\x46\x65\x65\x64PlaceholderViewService\x12\xe1\x01\n\x16GetFeedPlaceholderView\x12?.google.ads.googleads.v3.services.GetFeedPlaceholderViewRequest\x1a\x36.google.ads.googleads.v3.resources.FeedPlaceholderView\"N\x82\xd3\xe4\x93\x02\x38\x12\x36/v3/{resource_name=customers/*/feedPlaceholderViews/*}\xda\x41\rresource_name\x1a\x1b\xca\x41\x18googleads.googleapis.comB\x86\x02\n$com.google.ads.googleads.v3.servicesB\x1f\x46\x65\x65\x64PlaceholderViewServiceProtoP\x01ZHgoogle.golang.org/genproto/googleapis/ads/googleads/v3/services;services\xa2\x02\x03GAA\xaa\x02 Google.Ads.GoogleAds.V3.Services\xca\x02 Google\\Ads\\GoogleAds\\V3\\Services\xea\x02$Google::Ads::GoogleAds::V3::Servicesb\x06proto3')
   ,
-  dependencies=[google_dot_ads_dot_googleads__v3_dot_proto_dot_resources_dot_feed__placeholder__view__pb2.DESCRIPTOR,google_dot_api_dot_annotations__pb2.DESCRIPTOR,google_dot_api_dot_client__pb2.DESCRIPTOR,google_dot_api_dot_field__behavior__pb2.DESCRIPTOR,])
+  dependencies=[google_dot_ads_dot_googleads__v3_dot_proto_dot_resources_dot_feed__placeholder__view__pb2.DESCRIPTOR,google_dot_api_dot_annotations__pb2.DESCRIPTOR,google_dot_api_dot_client__pb2.DESCRIPTOR,google_dot_api_dot_field__behavior__pb2.DESCRIPTOR,google_dot_api_dot_resource__pb2.DESCRIPTOR,])
 
 
 
@@ -44,7 +45,7 @@ _GETFEEDPLACEHOLDERVIEWREQUEST = _descriptor.Descriptor(
       has_default_value=False, default_value=_b("").decode('utf-8'),
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
-      serialized_options=_b('\340A\002'), file=DESCRIPTOR),
+      serialized_options=_b('\340A\002\372A.\n,googleads.googleapis.com/FeedPlaceholderView'), file=DESCRIPTOR),
   ],
   extensions=[
   ],
@@ -57,8 +58,8 @@ _GETFEEDPLACEHOLDERVIEWREQUEST = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=269,
-  serialized_end=328,
+  serialized_start=296,
+  serialized_end=404,
 )
 
 DESCRIPTOR.message_types_by_name['GetFeedPlaceholderViewRequest'] = _GETFEEDPLACEHOLDERVIEWREQUEST
@@ -91,8 +92,8 @@ _FEEDPLACEHOLDERVIEWSERVICE = _descriptor.ServiceDescriptor(
   file=DESCRIPTOR,
   index=0,
   serialized_options=_b('\312A\030googleads.googleapis.com'),
-  serialized_start=331,
-  serialized_end=616,
+  serialized_start=407,
+  serialized_end=692,
   methods=[
   _descriptor.MethodDescriptor(
     name='GetFeedPlaceholderView',

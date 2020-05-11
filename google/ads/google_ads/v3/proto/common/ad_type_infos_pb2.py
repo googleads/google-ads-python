@@ -2383,7 +2383,7 @@ ResponsiveDisplayAdInfo = _reflection.GeneratedProtocolMessageType('ResponsiveDi
           Descriptive texts for the ad. The maximum length is 90
           characters. At least 1 and max 5 headlines can be specified.
       youtube_videos:
-          Optional YouTube vidoes for the ad. A maximum of 5 videos can
+          Optional YouTube videos for the ad. A maximum of 5 videos can
           be specified.
       business_name:
           The advertiser/brand name. Maximum display width is 25.

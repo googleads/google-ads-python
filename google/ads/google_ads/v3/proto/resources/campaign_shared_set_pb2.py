@@ -14,6 +14,7 @@ _sym_db = _symbol_database.Default()
 
 
 from google.ads.google_ads.v3.proto.enums import campaign_shared_set_status_pb2 as google_dot_ads_dot_googleads__v3_dot_proto_dot_enums_dot_campaign__shared__set__status__pb2
+from google.api import field_behavior_pb2 as google_dot_api_dot_field__behavior__pb2
 from google.api import resource_pb2 as google_dot_api_dot_resource__pb2
 from google.protobuf import wrappers_pb2 as google_dot_protobuf_dot_wrappers__pb2
 from google.api import annotations_pb2 as google_dot_api_dot_annotations__pb2
@@ -24,9 +25,9 @@ DESCRIPTOR = _descriptor.FileDescriptor(
   package='google.ads.googleads.v3.resources',
   syntax='proto3',
   serialized_options=_b('\n%com.google.ads.googleads.v3.resourcesB\026CampaignSharedSetProtoP\001ZJgoogle.golang.org/genproto/googleapis/ads/googleads/v3/resources;resources\242\002\003GAA\252\002!Google.Ads.GoogleAds.V3.Resources\312\002!Google\\Ads\\GoogleAds\\V3\\Resources\352\002%Google::Ads::GoogleAds::V3::Resources'),
-  serialized_pb=_b('\nAgoogle/ads/googleads_v3/proto/resources/campaign_shared_set.proto\x12!google.ads.googleads.v3.resources\x1a\x44google/ads/googleads_v3/proto/enums/campaign_shared_set_status.proto\x1a\x19google/api/resource.proto\x1a\x1egoogle/protobuf/wrappers.proto\x1a\x1cgoogle/api/annotations.proto\"\xe0\x02\n\x11\x43\x61mpaignSharedSet\x12\x15\n\rresource_name\x18\x01 \x01(\t\x12.\n\x08\x63\x61mpaign\x18\x03 \x01(\x0b\x32\x1c.google.protobuf.StringValue\x12\x30\n\nshared_set\x18\x04 \x01(\x0b\x32\x1c.google.protobuf.StringValue\x12\x62\n\x06status\x18\x02 \x01(\x0e\x32R.google.ads.googleads.v3.enums.CampaignSharedSetStatusEnum.CampaignSharedSetStatus:n\xea\x41k\n*googleads.googleapis.com/CampaignSharedSet\x12=customers/{customer}/campaignSharedSets/{campaign_shared_set}B\x83\x02\n%com.google.ads.googleads.v3.resourcesB\x16\x43\x61mpaignSharedSetProtoP\x01ZJgoogle.golang.org/genproto/googleapis/ads/googleads/v3/resources;resources\xa2\x02\x03GAA\xaa\x02!Google.Ads.GoogleAds.V3.Resources\xca\x02!Google\\Ads\\GoogleAds\\V3\\Resources\xea\x02%Google::Ads::GoogleAds::V3::Resourcesb\x06proto3')
+  serialized_pb=_b('\nAgoogle/ads/googleads_v3/proto/resources/campaign_shared_set.proto\x12!google.ads.googleads.v3.resources\x1a\x44google/ads/googleads_v3/proto/enums/campaign_shared_set_status.proto\x1a\x1fgoogle/api/field_behavior.proto\x1a\x19google/api/resource.proto\x1a\x1egoogle/protobuf/wrappers.proto\x1a\x1cgoogle/api/annotations.proto\"\xf0\x03\n\x11\x43\x61mpaignSharedSet\x12I\n\rresource_name\x18\x01 \x01(\tB2\xe0\x41\x05\xfa\x41,\n*googleads.googleapis.com/CampaignSharedSet\x12Y\n\x08\x63\x61mpaign\x18\x03 \x01(\x0b\x32\x1c.google.protobuf.StringValueB)\xe0\x41\x05\xfa\x41#\n!googleads.googleapis.com/Campaign\x12\\\n\nshared_set\x18\x04 \x01(\x0b\x32\x1c.google.protobuf.StringValueB*\xe0\x41\x05\xfa\x41$\n\"googleads.googleapis.com/SharedSet\x12g\n\x06status\x18\x02 \x01(\x0e\x32R.google.ads.googleads.v3.enums.CampaignSharedSetStatusEnum.CampaignSharedSetStatusB\x03\xe0\x41\x03:n\xea\x41k\n*googleads.googleapis.com/CampaignSharedSet\x12=customers/{customer}/campaignSharedSets/{campaign_shared_set}B\x83\x02\n%com.google.ads.googleads.v3.resourcesB\x16\x43\x61mpaignSharedSetProtoP\x01ZJgoogle.golang.org/genproto/googleapis/ads/googleads/v3/resources;resources\xa2\x02\x03GAA\xaa\x02!Google.Ads.GoogleAds.V3.Resources\xca\x02!Google\\Ads\\GoogleAds\\V3\\Resources\xea\x02%Google::Ads::GoogleAds::V3::Resourcesb\x06proto3')
   ,
-  dependencies=[google_dot_ads_dot_googleads__v3_dot_proto_dot_enums_dot_campaign__shared__set__status__pb2.DESCRIPTOR,google_dot_api_dot_resource__pb2.DESCRIPTOR,google_dot_protobuf_dot_wrappers__pb2.DESCRIPTOR,google_dot_api_dot_annotations__pb2.DESCRIPTOR,])
+  dependencies=[google_dot_ads_dot_googleads__v3_dot_proto_dot_enums_dot_campaign__shared__set__status__pb2.DESCRIPTOR,google_dot_api_dot_field__behavior__pb2.DESCRIPTOR,google_dot_api_dot_resource__pb2.DESCRIPTOR,google_dot_protobuf_dot_wrappers__pb2.DESCRIPTOR,google_dot_api_dot_annotations__pb2.DESCRIPTOR,])
 
 
 
@@ -44,28 +45,28 @@ _CAMPAIGNSHAREDSET = _descriptor.Descriptor(
       has_default_value=False, default_value=_b("").decode('utf-8'),
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR),
+      serialized_options=_b('\340A\005\372A,\n*googleads.googleapis.com/CampaignSharedSet'), file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
       name='campaign', full_name='google.ads.googleads.v3.resources.CampaignSharedSet.campaign', index=1,
       number=3, type=11, cpp_type=10, label=1,
       has_default_value=False, default_value=None,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR),
+      serialized_options=_b('\340A\005\372A#\n!googleads.googleapis.com/Campaign'), file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
       name='shared_set', full_name='google.ads.googleads.v3.resources.CampaignSharedSet.shared_set', index=2,
       number=4, type=11, cpp_type=10, label=1,
       has_default_value=False, default_value=None,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR),
+      serialized_options=_b('\340A\005\372A$\n\"googleads.googleapis.com/SharedSet'), file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
       name='status', full_name='google.ads.googleads.v3.resources.CampaignSharedSet.status', index=3,
       number=2, type=14, cpp_type=8, label=1,
       has_default_value=False, default_value=0,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR),
+      serialized_options=_b('\340A\003'), file=DESCRIPTOR),
   ],
   extensions=[
   ],
@@ -78,8 +79,8 @@ _CAMPAIGNSHAREDSET = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=264,
-  serialized_end=616,
+  serialized_start=297,
+  serialized_end=793,
 )
 
 _CAMPAIGNSHAREDSET.fields_by_name['campaign'].message_type = google_dot_protobuf_dot_wrappers__pb2._STRINGVALUE
@@ -98,21 +99,24 @@ CampaignSharedSet = _reflection.GeneratedProtocolMessageType('CampaignSharedSet'
   
   Attributes:
       resource_name:
-          The resource name of the campaign shared set. Campaign shared
-          set resource names have the form:  ``customers/{customer_id}/c
-          ampaignSharedSets/{campaign_id}~{shared_set_id}``
+          Immutable. The resource name of the campaign shared set.
+          Campaign shared set resource names have the form:  ``customers
+          /{customer_id}/campaignSharedSets/{campaign_id}~{shared_set_id
+          }``
       campaign:
-          The campaign to which the campaign shared set belongs.
+          Immutable. The campaign to which the campaign shared set
+          belongs.
       shared_set:
-          The shared set associated with the campaign. This may be a
-          negative keyword shared set of another customer. This customer
-          should be a manager of the other customer, otherwise the
-          campaign shared set will exist but have no serving effect.
+          Immutable. The shared set associated with the campaign. This
+          may be a negative keyword shared set of another customer. This
+          customer should be a manager of the other customer, otherwise
+          the campaign shared set will exist but have no serving effect.
           Only negative keyword shared sets can be associated with
           Shopping campaigns. Only negative placement shared sets can be
           associated with Display mobile app campaigns.
       status:
-          The status of this campaign shared set. Read only.
+          Output only. The status of this campaign shared set. Read
+          only.
   """,
   # @@protoc_insertion_point(class_scope:google.ads.googleads.v3.resources.CampaignSharedSet)
   ))
@@ -120,5 +124,9 @@ _sym_db.RegisterMessage(CampaignSharedSet)
 
 
 DESCRIPTOR._options = None
+_CAMPAIGNSHAREDSET.fields_by_name['resource_name']._options = None
+_CAMPAIGNSHAREDSET.fields_by_name['campaign']._options = None
+_CAMPAIGNSHAREDSET.fields_by_name['shared_set']._options = None
+_CAMPAIGNSHAREDSET.fields_by_name['status']._options = None
 _CAMPAIGNSHAREDSET._options = None
 # @@protoc_insertion_point(module_scope)

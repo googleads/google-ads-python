@@ -1188,7 +1188,7 @@ GenerateReachForecastRequest = _reflection.GeneratedProtocolMessageType('Generat
           planned product. This is equivalent to the frequency cap
           exposed in Google Ads when creating a campaign, it represents
           the maximum number of times an ad can be shown to the same
-          user. If not specified no cap is applied.
+          user. If not specified, no cap is applied.
       min_effective_frequency:
           Desired minimum effective frequency (the number of times a
           person was exposed to the ad) for the reported reach metrics
@@ -1198,13 +1198,13 @@ GenerateReachForecastRequest = _reflection.GeneratedProtocolMessageType('Generat
           The targeting to be applied to all products selected in the
           product mix.  This is planned targeting: execution details
           might vary based on the advertising product, please consult an
-          implementation specialist.  If no targeting dimensions are
-          specified, then campaigns will target everywhere and everyone.
-          See specific metrics for details on how targeting affects
-          them.  In some cases, targeting may be overridden using the
+          implementation specialist.  See specific metrics for details
+          on how targeting affects them.  In some cases, targeting may
+          be overridden using the
           PlannedProduct.advanced\_product\_targeting field.
       planned_products:
-          Required. The product to be planned.
+          Required. The products to be forecast. The max number of
+          allowed planned products is 15.
   """,
   # @@protoc_insertion_point(class_scope:google.ads.googleads.v3.services.GenerateReachForecastRequest)
   ))
@@ -1222,13 +1222,18 @@ Targeting = _reflection.GeneratedProtocolMessageType('Targeting', (_message.Mess
           Required. The ID of the selected location. Plannable locations
           ID can be obtained from ListPlannableLocations.
       age_range:
-          Required Selected age range to be planned on.
+          Targeted age range. If not specified, targets all age ranges.
       genders:
-          Targetable genders for the ad product.
+          Targeted genders. If not specified, targets all genders.
       devices:
-          Targetable devices for the ad product.
+          Targeted devices. If not specified, targets all applicable
+          devices. Applicable devices vary by product and region and can
+          be obtained from ListPlannableProducts.
       network:
-          Targetable network for the ad product.
+          Targetable network for the ad product. If not specified,
+          targets all applicable networks. Applicable networks vary by
+          product and region and can be obtained from
+          ListPlannableProducts.
   """,
   # @@protoc_insertion_point(class_scope:google.ads.googleads.v3.services.Targeting)
   ))
@@ -1343,7 +1348,7 @@ Forecast = _reflection.GeneratedProtocolMessageType('Forecast', (_message.Messag
           Number of ad impressions that exactly matches the Targeting.
       total_impressions:
           Total number of ad impressions. This includes impressions that
-          may fall outside the specified Targeting, due to insufficent
+          may fall outside the specified Targeting, due to insufficient
           information on signed-in users.
   """,
   # @@protoc_insertion_point(class_scope:google.ads.googleads.v3.services.Forecast)

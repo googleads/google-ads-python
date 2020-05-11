@@ -17,6 +17,7 @@ from google.ads.google_ads.v3.proto.resources import feed_mapping_pb2 as google_
 from google.api import annotations_pb2 as google_dot_api_dot_annotations__pb2
 from google.api import client_pb2 as google_dot_api_dot_client__pb2
 from google.api import field_behavior_pb2 as google_dot_api_dot_field__behavior__pb2
+from google.api import resource_pb2 as google_dot_api_dot_resource__pb2
 from google.rpc import status_pb2 as google_dot_rpc_dot_status__pb2
 
 
@@ -25,9 +26,9 @@ DESCRIPTOR = _descriptor.FileDescriptor(
   package='google.ads.googleads.v3.services',
   syntax='proto3',
   serialized_options=_b('\n$com.google.ads.googleads.v3.servicesB\027FeedMappingServiceProtoP\001ZHgoogle.golang.org/genproto/googleapis/ads/googleads/v3/services;services\242\002\003GAA\252\002 Google.Ads.GoogleAds.V3.Services\312\002 Google\\Ads\\GoogleAds\\V3\\Services\352\002$Google::Ads::GoogleAds::V3::Services'),
-  serialized_pb=_b('\nAgoogle/ads/googleads_v3/proto/services/feed_mapping_service.proto\x12 google.ads.googleads.v3.services\x1a:google/ads/googleads_v3/proto/resources/feed_mapping.proto\x1a\x1cgoogle/api/annotations.proto\x1a\x17google/api/client.proto\x1a\x1fgoogle/api/field_behavior.proto\x1a\x17google/rpc/status.proto\"3\n\x15GetFeedMappingRequest\x12\x1a\n\rresource_name\x18\x01 \x01(\tB\x03\xe0\x41\x02\"\xb6\x01\n\x19MutateFeedMappingsRequest\x12\x18\n\x0b\x63ustomer_id\x18\x01 \x01(\tB\x03\xe0\x41\x02\x12O\n\noperations\x18\x02 \x03(\x0b\x32\x36.google.ads.googleads.v3.services.FeedMappingOperationB\x03\xe0\x41\x02\x12\x17\n\x0fpartial_failure\x18\x03 \x01(\x08\x12\x15\n\rvalidate_only\x18\x04 \x01(\x08\"w\n\x14\x46\x65\x65\x64MappingOperation\x12@\n\x06\x63reate\x18\x01 \x01(\x0b\x32..google.ads.googleads.v3.resources.FeedMappingH\x00\x12\x10\n\x06remove\x18\x03 \x01(\tH\x00\x42\x0b\n\toperation\"\x9b\x01\n\x1aMutateFeedMappingsResponse\x12\x31\n\x15partial_failure_error\x18\x03 \x01(\x0b\x32\x12.google.rpc.Status\x12J\n\x07results\x18\x02 \x03(\x0b\x32\x39.google.ads.googleads.v3.services.MutateFeedMappingResult\"0\n\x17MutateFeedMappingResult\x12\x15\n\rresource_name\x18\x01 \x01(\t2\xde\x03\n\x12\x46\x65\x65\x64MappingService\x12\xc1\x01\n\x0eGetFeedMapping\x12\x37.google.ads.googleads.v3.services.GetFeedMappingRequest\x1a..google.ads.googleads.v3.resources.FeedMapping\"F\x82\xd3\xe4\x93\x02\x30\x12./v3/{resource_name=customers/*/feedMappings/*}\xda\x41\rresource_name\x12\xe6\x01\n\x12MutateFeedMappings\x12;.google.ads.googleads.v3.services.MutateFeedMappingsRequest\x1a<.google.ads.googleads.v3.services.MutateFeedMappingsResponse\"U\x82\xd3\xe4\x93\x02\x36\"1/v3/customers/{customer_id=*}/feedMappings:mutate:\x01*\xda\x41\x16\x63ustomer_id,operations\x1a\x1b\xca\x41\x18googleads.googleapis.comB\xfe\x01\n$com.google.ads.googleads.v3.servicesB\x17\x46\x65\x65\x64MappingServiceProtoP\x01ZHgoogle.golang.org/genproto/googleapis/ads/googleads/v3/services;services\xa2\x02\x03GAA\xaa\x02 Google.Ads.GoogleAds.V3.Services\xca\x02 Google\\Ads\\GoogleAds\\V3\\Services\xea\x02$Google::Ads::GoogleAds::V3::Servicesb\x06proto3')
+  serialized_pb=_b('\nAgoogle/ads/googleads_v3/proto/services/feed_mapping_service.proto\x12 google.ads.googleads.v3.services\x1a:google/ads/googleads_v3/proto/resources/feed_mapping.proto\x1a\x1cgoogle/api/annotations.proto\x1a\x17google/api/client.proto\x1a\x1fgoogle/api/field_behavior.proto\x1a\x19google/api/resource.proto\x1a\x17google/rpc/status.proto\"\\\n\x15GetFeedMappingRequest\x12\x43\n\rresource_name\x18\x01 \x01(\tB,\xe0\x41\x02\xfa\x41&\n$googleads.googleapis.com/FeedMapping\"\xb6\x01\n\x19MutateFeedMappingsRequest\x12\x18\n\x0b\x63ustomer_id\x18\x01 \x01(\tB\x03\xe0\x41\x02\x12O\n\noperations\x18\x02 \x03(\x0b\x32\x36.google.ads.googleads.v3.services.FeedMappingOperationB\x03\xe0\x41\x02\x12\x17\n\x0fpartial_failure\x18\x03 \x01(\x08\x12\x15\n\rvalidate_only\x18\x04 \x01(\x08\"w\n\x14\x46\x65\x65\x64MappingOperation\x12@\n\x06\x63reate\x18\x01 \x01(\x0b\x32..google.ads.googleads.v3.resources.FeedMappingH\x00\x12\x10\n\x06remove\x18\x03 \x01(\tH\x00\x42\x0b\n\toperation\"\x9b\x01\n\x1aMutateFeedMappingsResponse\x12\x31\n\x15partial_failure_error\x18\x03 \x01(\x0b\x32\x12.google.rpc.Status\x12J\n\x07results\x18\x02 \x03(\x0b\x32\x39.google.ads.googleads.v3.services.MutateFeedMappingResult\"0\n\x17MutateFeedMappingResult\x12\x15\n\rresource_name\x18\x01 \x01(\t2\xde\x03\n\x12\x46\x65\x65\x64MappingService\x12\xc1\x01\n\x0eGetFeedMapping\x12\x37.google.ads.googleads.v3.services.GetFeedMappingRequest\x1a..google.ads.googleads.v3.resources.FeedMapping\"F\x82\xd3\xe4\x93\x02\x30\x12./v3/{resource_name=customers/*/feedMappings/*}\xda\x41\rresource_name\x12\xe6\x01\n\x12MutateFeedMappings\x12;.google.ads.googleads.v3.services.MutateFeedMappingsRequest\x1a<.google.ads.googleads.v3.services.MutateFeedMappingsResponse\"U\x82\xd3\xe4\x93\x02\x36\"1/v3/customers/{customer_id=*}/feedMappings:mutate:\x01*\xda\x41\x16\x63ustomer_id,operations\x1a\x1b\xca\x41\x18googleads.googleapis.comB\xfe\x01\n$com.google.ads.googleads.v3.servicesB\x17\x46\x65\x65\x64MappingServiceProtoP\x01ZHgoogle.golang.org/genproto/googleapis/ads/googleads/v3/services;services\xa2\x02\x03GAA\xaa\x02 Google.Ads.GoogleAds.V3.Services\xca\x02 Google\\Ads\\GoogleAds\\V3\\Services\xea\x02$Google::Ads::GoogleAds::V3::Servicesb\x06proto3')
   ,
-  dependencies=[google_dot_ads_dot_googleads__v3_dot_proto_dot_resources_dot_feed__mapping__pb2.DESCRIPTOR,google_dot_api_dot_annotations__pb2.DESCRIPTOR,google_dot_api_dot_client__pb2.DESCRIPTOR,google_dot_api_dot_field__behavior__pb2.DESCRIPTOR,google_dot_rpc_dot_status__pb2.DESCRIPTOR,])
+  dependencies=[google_dot_ads_dot_googleads__v3_dot_proto_dot_resources_dot_feed__mapping__pb2.DESCRIPTOR,google_dot_api_dot_annotations__pb2.DESCRIPTOR,google_dot_api_dot_client__pb2.DESCRIPTOR,google_dot_api_dot_field__behavior__pb2.DESCRIPTOR,google_dot_api_dot_resource__pb2.DESCRIPTOR,google_dot_rpc_dot_status__pb2.DESCRIPTOR,])
 
 
 
@@ -45,7 +46,7 @@ _GETFEEDMAPPINGREQUEST = _descriptor.Descriptor(
       has_default_value=False, default_value=_b("").decode('utf-8'),
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
-      serialized_options=_b('\340A\002'), file=DESCRIPTOR),
+      serialized_options=_b('\340A\002\372A&\n$googleads.googleapis.com/FeedMapping'), file=DESCRIPTOR),
   ],
   extensions=[
   ],
@@ -58,8 +59,8 @@ _GETFEEDMAPPINGREQUEST = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=276,
-  serialized_end=327,
+  serialized_start=303,
+  serialized_end=395,
 )
 
 
@@ -110,8 +111,8 @@ _MUTATEFEEDMAPPINGSREQUEST = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=330,
-  serialized_end=512,
+  serialized_start=398,
+  serialized_end=580,
 )
 
 
@@ -151,8 +152,8 @@ _FEEDMAPPINGOPERATION = _descriptor.Descriptor(
       name='operation', full_name='google.ads.googleads.v3.services.FeedMappingOperation.operation',
       index=0, containing_type=None, fields=[]),
   ],
-  serialized_start=514,
-  serialized_end=633,
+  serialized_start=582,
+  serialized_end=701,
 )
 
 
@@ -189,8 +190,8 @@ _MUTATEFEEDMAPPINGSRESPONSE = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=636,
-  serialized_end=791,
+  serialized_start=704,
+  serialized_end=859,
 )
 
 
@@ -220,8 +221,8 @@ _MUTATEFEEDMAPPINGRESULT = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=793,
-  serialized_end=841,
+  serialized_start=861,
+  serialized_end=909,
 )
 
 _MUTATEFEEDMAPPINGSREQUEST.fields_by_name['operations'].message_type = _FEEDMAPPINGOPERATION
@@ -355,8 +356,8 @@ _FEEDMAPPINGSERVICE = _descriptor.ServiceDescriptor(
   file=DESCRIPTOR,
   index=0,
   serialized_options=_b('\312A\030googleads.googleapis.com'),
-  serialized_start=844,
-  serialized_end=1322,
+  serialized_start=912,
+  serialized_end=1390,
   methods=[
   _descriptor.MethodDescriptor(
     name='GetFeedMapping',

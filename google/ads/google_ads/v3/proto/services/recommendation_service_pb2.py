@@ -20,6 +20,7 @@ from google.ads.google_ads.v3.proto.resources import recommendation_pb2 as googl
 from google.api import annotations_pb2 as google_dot_api_dot_annotations__pb2
 from google.api import client_pb2 as google_dot_api_dot_client__pb2
 from google.api import field_behavior_pb2 as google_dot_api_dot_field__behavior__pb2
+from google.api import resource_pb2 as google_dot_api_dot_resource__pb2
 from google.protobuf import wrappers_pb2 as google_dot_protobuf_dot_wrappers__pb2
 from google.rpc import status_pb2 as google_dot_rpc_dot_status__pb2
 
@@ -29,9 +30,9 @@ DESCRIPTOR = _descriptor.FileDescriptor(
   package='google.ads.googleads.v3.services',
   syntax='proto3',
   serialized_options=_b('\n$com.google.ads.googleads.v3.servicesB\032RecommendationServiceProtoP\001ZHgoogle.golang.org/genproto/googleapis/ads/googleads/v3/services;services\242\002\003GAA\252\002 Google.Ads.GoogleAds.V3.Services\312\002 Google\\Ads\\GoogleAds\\V3\\Services\352\002$Google::Ads::GoogleAds::V3::Services'),
-  serialized_pb=_b('\nCgoogle/ads/googleads_v3/proto/services/recommendation_service.proto\x12 google.ads.googleads.v3.services\x1a\x35google/ads/googleads_v3/proto/common/extensions.proto\x1a<google/ads/googleads_v3/proto/enums/keyword_match_type.proto\x1a\x30google/ads/googleads_v3/proto/resources/ad.proto\x1a<google/ads/googleads_v3/proto/resources/recommendation.proto\x1a\x1cgoogle/api/annotations.proto\x1a\x17google/api/client.proto\x1a\x1fgoogle/api/field_behavior.proto\x1a\x1egoogle/protobuf/wrappers.proto\x1a\x17google/rpc/status.proto\"6\n\x18GetRecommendationRequest\x12\x1a\n\rresource_name\x18\x01 \x01(\tB\x03\xe0\x41\x02\"\xa8\x01\n\x1a\x41pplyRecommendationRequest\x12\x18\n\x0b\x63ustomer_id\x18\x01 \x01(\tB\x03\xe0\x41\x02\x12W\n\noperations\x18\x02 \x03(\x0b\x32>.google.ads.googleads.v3.services.ApplyRecommendationOperationB\x03\xe0\x41\x02\x12\x17\n\x0fpartial_failure\x18\x03 \x01(\x08\"\x82\x0f\n\x1c\x41pplyRecommendationOperation\x12\x15\n\rresource_name\x18\x01 \x01(\t\x12r\n\x0f\x63\x61mpaign_budget\x18\x02 \x01(\x0b\x32W.google.ads.googleads.v3.services.ApplyRecommendationOperation.CampaignBudgetParametersH\x00\x12\x62\n\x07text_ad\x18\x03 \x01(\x0b\x32O.google.ads.googleads.v3.services.ApplyRecommendationOperation.TextAdParametersH\x00\x12\x63\n\x07keyword\x18\x04 \x01(\x0b\x32P.google.ads.googleads.v3.services.ApplyRecommendationOperation.KeywordParametersH\x00\x12t\n\x11target_cpa_opt_in\x18\x05 \x01(\x0b\x32W.google.ads.googleads.v3.services.ApplyRecommendationOperation.TargetCpaOptInParametersH\x00\x12v\n\x11\x63\x61llout_extension\x18\x06 \x01(\x0b\x32Y.google.ads.googleads.v3.services.ApplyRecommendationOperation.CalloutExtensionParametersH\x00\x12p\n\x0e\x63\x61ll_extension\x18\x07 \x01(\x0b\x32V.google.ads.googleads.v3.services.ApplyRecommendationOperation.CallExtensionParametersH\x00\x12x\n\x12sitelink_extension\x18\x08 \x01(\x0b\x32Z.google.ads.googleads.v3.services.ApplyRecommendationOperation.SitelinkExtensionParametersH\x00\x12w\n\x12move_unused_budget\x18\t \x01(\x0b\x32Y.google.ads.googleads.v3.services.ApplyRecommendationOperation.MoveUnusedBudgetParametersH\x00\x1aY\n\x18\x43\x61mpaignBudgetParameters\x12=\n\x18new_budget_amount_micros\x18\x01 \x01(\x0b\x32\x1b.google.protobuf.Int64Value\x1a\x45\n\x10TextAdParameters\x12\x31\n\x02\x61\x64\x18\x01 \x01(\x0b\x32%.google.ads.googleads.v3.resources.Ad\x1a\xd2\x01\n\x11KeywordParameters\x12.\n\x08\x61\x64_group\x18\x01 \x01(\x0b\x32\x1c.google.protobuf.StringValue\x12X\n\nmatch_type\x18\x02 \x01(\x0e\x32\x44.google.ads.googleads.v3.enums.KeywordMatchTypeEnum.KeywordMatchType\x12\x33\n\x0e\x63pc_bid_micros\x18\x03 \x01(\x0b\x32\x1b.google.protobuf.Int64Value\x1a\x9a\x01\n\x18TargetCpaOptInParameters\x12\x36\n\x11target_cpa_micros\x18\x01 \x01(\x0b\x32\x1b.google.protobuf.Int64Value\x12\x46\n!new_campaign_budget_amount_micros\x18\x02 \x01(\x0b\x32\x1b.google.protobuf.Int64Value\x1ai\n\x1a\x43\x61lloutExtensionParameters\x12K\n\x12\x63\x61llout_extensions\x18\x01 \x03(\x0b\x32/.google.ads.googleads.v3.common.CalloutFeedItem\x1a`\n\x17\x43\x61llExtensionParameters\x12\x45\n\x0f\x63\x61ll_extensions\x18\x01 \x03(\x0b\x32,.google.ads.googleads.v3.common.CallFeedItem\x1al\n\x1bSitelinkExtensionParameters\x12M\n\x13sitelink_extensions\x18\x01 \x03(\x0b\x32\x30.google.ads.googleads.v3.common.SitelinkFeedItem\x1aX\n\x1aMoveUnusedBudgetParameters\x12:\n\x15\x62udget_micros_to_move\x18\x01 \x01(\x0b\x32\x1b.google.protobuf.Int64ValueB\x12\n\x10\x61pply_parameters\"\x9e\x01\n\x1b\x41pplyRecommendationResponse\x12L\n\x07results\x18\x01 \x03(\x0b\x32;.google.ads.googleads.v3.services.ApplyRecommendationResult\x12\x31\n\x15partial_failure_error\x18\x02 \x01(\x0b\x32\x12.google.rpc.Status\"2\n\x19\x41pplyRecommendationResult\x12\x15\n\rresource_name\x18\x01 \x01(\t\"\x82\x02\n\x1c\x44ismissRecommendationRequest\x12\x18\n\x0b\x63ustomer_id\x18\x01 \x01(\tB\x03\xe0\x41\x02\x12v\n\noperations\x18\x03 \x03(\x0b\x32].google.ads.googleads.v3.services.DismissRecommendationRequest.DismissRecommendationOperationB\x03\xe0\x41\x02\x12\x17\n\x0fpartial_failure\x18\x02 \x01(\x08\x1a\x37\n\x1e\x44ismissRecommendationOperation\x12\x15\n\rresource_name\x18\x01 \x01(\t\"\xf6\x01\n\x1d\x44ismissRecommendationResponse\x12l\n\x07results\x18\x01 \x03(\x0b\x32[.google.ads.googleads.v3.services.DismissRecommendationResponse.DismissRecommendationResult\x12\x31\n\x15partial_failure_error\x18\x02 \x01(\x0b\x32\x12.google.rpc.Status\x1a\x34\n\x1b\x44ismissRecommendationResult\x12\x15\n\rresource_name\x18\x01 \x01(\t2\xe8\x05\n\x15RecommendationService\x12\xcd\x01\n\x11GetRecommendation\x12:.google.ads.googleads.v3.services.GetRecommendationRequest\x1a\x31.google.ads.googleads.v3.resources.Recommendation\"I\x82\xd3\xe4\x93\x02\x33\x12\x31/v3/{resource_name=customers/*/recommendations/*}\xda\x41\rresource_name\x12\xeb\x01\n\x13\x41pplyRecommendation\x12<.google.ads.googleads.v3.services.ApplyRecommendationRequest\x1a=.google.ads.googleads.v3.services.ApplyRecommendationResponse\"W\x82\xd3\xe4\x93\x02\x38\"3/v3/customers/{customer_id=*}/recommendations:apply:\x01*\xda\x41\x16\x63ustomer_id,operations\x12\xf3\x01\n\x15\x44ismissRecommendation\x12>.google.ads.googleads.v3.services.DismissRecommendationRequest\x1a?.google.ads.googleads.v3.services.DismissRecommendationResponse\"Y\x82\xd3\xe4\x93\x02:\"5/v3/customers/{customer_id=*}/recommendations:dismiss:\x01*\xda\x41\x16\x63ustomer_id,operations\x1a\x1b\xca\x41\x18googleads.googleapis.comB\x81\x02\n$com.google.ads.googleads.v3.servicesB\x1aRecommendationServiceProtoP\x01ZHgoogle.golang.org/genproto/googleapis/ads/googleads/v3/services;services\xa2\x02\x03GAA\xaa\x02 Google.Ads.GoogleAds.V3.Services\xca\x02 Google\\Ads\\GoogleAds\\V3\\Services\xea\x02$Google::Ads::GoogleAds::V3::Servicesb\x06proto3')
+  serialized_pb=_b('\nCgoogle/ads/googleads_v3/proto/services/recommendation_service.proto\x12 google.ads.googleads.v3.services\x1a\x35google/ads/googleads_v3/proto/common/extensions.proto\x1a<google/ads/googleads_v3/proto/enums/keyword_match_type.proto\x1a\x30google/ads/googleads_v3/proto/resources/ad.proto\x1a<google/ads/googleads_v3/proto/resources/recommendation.proto\x1a\x1cgoogle/api/annotations.proto\x1a\x17google/api/client.proto\x1a\x1fgoogle/api/field_behavior.proto\x1a\x19google/api/resource.proto\x1a\x1egoogle/protobuf/wrappers.proto\x1a\x17google/rpc/status.proto\"b\n\x18GetRecommendationRequest\x12\x46\n\rresource_name\x18\x01 \x01(\tB/\xe0\x41\x02\xfa\x41)\n\'googleads.googleapis.com/Recommendation\"\xa8\x01\n\x1a\x41pplyRecommendationRequest\x12\x18\n\x0b\x63ustomer_id\x18\x01 \x01(\tB\x03\xe0\x41\x02\x12W\n\noperations\x18\x02 \x03(\x0b\x32>.google.ads.googleads.v3.services.ApplyRecommendationOperationB\x03\xe0\x41\x02\x12\x17\n\x0fpartial_failure\x18\x03 \x01(\x08\"\x82\x0f\n\x1c\x41pplyRecommendationOperation\x12\x15\n\rresource_name\x18\x01 \x01(\t\x12r\n\x0f\x63\x61mpaign_budget\x18\x02 \x01(\x0b\x32W.google.ads.googleads.v3.services.ApplyRecommendationOperation.CampaignBudgetParametersH\x00\x12\x62\n\x07text_ad\x18\x03 \x01(\x0b\x32O.google.ads.googleads.v3.services.ApplyRecommendationOperation.TextAdParametersH\x00\x12\x63\n\x07keyword\x18\x04 \x01(\x0b\x32P.google.ads.googleads.v3.services.ApplyRecommendationOperation.KeywordParametersH\x00\x12t\n\x11target_cpa_opt_in\x18\x05 \x01(\x0b\x32W.google.ads.googleads.v3.services.ApplyRecommendationOperation.TargetCpaOptInParametersH\x00\x12v\n\x11\x63\x61llout_extension\x18\x06 \x01(\x0b\x32Y.google.ads.googleads.v3.services.ApplyRecommendationOperation.CalloutExtensionParametersH\x00\x12p\n\x0e\x63\x61ll_extension\x18\x07 \x01(\x0b\x32V.google.ads.googleads.v3.services.ApplyRecommendationOperation.CallExtensionParametersH\x00\x12x\n\x12sitelink_extension\x18\x08 \x01(\x0b\x32Z.google.ads.googleads.v3.services.ApplyRecommendationOperation.SitelinkExtensionParametersH\x00\x12w\n\x12move_unused_budget\x18\t \x01(\x0b\x32Y.google.ads.googleads.v3.services.ApplyRecommendationOperation.MoveUnusedBudgetParametersH\x00\x1aY\n\x18\x43\x61mpaignBudgetParameters\x12=\n\x18new_budget_amount_micros\x18\x01 \x01(\x0b\x32\x1b.google.protobuf.Int64Value\x1a\x45\n\x10TextAdParameters\x12\x31\n\x02\x61\x64\x18\x01 \x01(\x0b\x32%.google.ads.googleads.v3.resources.Ad\x1a\xd2\x01\n\x11KeywordParameters\x12.\n\x08\x61\x64_group\x18\x01 \x01(\x0b\x32\x1c.google.protobuf.StringValue\x12X\n\nmatch_type\x18\x02 \x01(\x0e\x32\x44.google.ads.googleads.v3.enums.KeywordMatchTypeEnum.KeywordMatchType\x12\x33\n\x0e\x63pc_bid_micros\x18\x03 \x01(\x0b\x32\x1b.google.protobuf.Int64Value\x1a\x9a\x01\n\x18TargetCpaOptInParameters\x12\x36\n\x11target_cpa_micros\x18\x01 \x01(\x0b\x32\x1b.google.protobuf.Int64Value\x12\x46\n!new_campaign_budget_amount_micros\x18\x02 \x01(\x0b\x32\x1b.google.protobuf.Int64Value\x1ai\n\x1a\x43\x61lloutExtensionParameters\x12K\n\x12\x63\x61llout_extensions\x18\x01 \x03(\x0b\x32/.google.ads.googleads.v3.common.CalloutFeedItem\x1a`\n\x17\x43\x61llExtensionParameters\x12\x45\n\x0f\x63\x61ll_extensions\x18\x01 \x03(\x0b\x32,.google.ads.googleads.v3.common.CallFeedItem\x1al\n\x1bSitelinkExtensionParameters\x12M\n\x13sitelink_extensions\x18\x01 \x03(\x0b\x32\x30.google.ads.googleads.v3.common.SitelinkFeedItem\x1aX\n\x1aMoveUnusedBudgetParameters\x12:\n\x15\x62udget_micros_to_move\x18\x01 \x01(\x0b\x32\x1b.google.protobuf.Int64ValueB\x12\n\x10\x61pply_parameters\"\x9e\x01\n\x1b\x41pplyRecommendationResponse\x12L\n\x07results\x18\x01 \x03(\x0b\x32;.google.ads.googleads.v3.services.ApplyRecommendationResult\x12\x31\n\x15partial_failure_error\x18\x02 \x01(\x0b\x32\x12.google.rpc.Status\"2\n\x19\x41pplyRecommendationResult\x12\x15\n\rresource_name\x18\x01 \x01(\t\"\x82\x02\n\x1c\x44ismissRecommendationRequest\x12\x18\n\x0b\x63ustomer_id\x18\x01 \x01(\tB\x03\xe0\x41\x02\x12v\n\noperations\x18\x03 \x03(\x0b\x32].google.ads.googleads.v3.services.DismissRecommendationRequest.DismissRecommendationOperationB\x03\xe0\x41\x02\x12\x17\n\x0fpartial_failure\x18\x02 \x01(\x08\x1a\x37\n\x1e\x44ismissRecommendationOperation\x12\x15\n\rresource_name\x18\x01 \x01(\t\"\xf6\x01\n\x1d\x44ismissRecommendationResponse\x12l\n\x07results\x18\x01 \x03(\x0b\x32[.google.ads.googleads.v3.services.DismissRecommendationResponse.DismissRecommendationResult\x12\x31\n\x15partial_failure_error\x18\x02 \x01(\x0b\x32\x12.google.rpc.Status\x1a\x34\n\x1b\x44ismissRecommendationResult\x12\x15\n\rresource_name\x18\x01 \x01(\t2\xe8\x05\n\x15RecommendationService\x12\xcd\x01\n\x11GetRecommendation\x12:.google.ads.googleads.v3.services.GetRecommendationRequest\x1a\x31.google.ads.googleads.v3.resources.Recommendation\"I\x82\xd3\xe4\x93\x02\x33\x12\x31/v3/{resource_name=customers/*/recommendations/*}\xda\x41\rresource_name\x12\xeb\x01\n\x13\x41pplyRecommendation\x12<.google.ads.googleads.v3.services.ApplyRecommendationRequest\x1a=.google.ads.googleads.v3.services.ApplyRecommendationResponse\"W\x82\xd3\xe4\x93\x02\x38\"3/v3/customers/{customer_id=*}/recommendations:apply:\x01*\xda\x41\x16\x63ustomer_id,operations\x12\xf3\x01\n\x15\x44ismissRecommendation\x12>.google.ads.googleads.v3.services.DismissRecommendationRequest\x1a?.google.ads.googleads.v3.services.DismissRecommendationResponse\"Y\x82\xd3\xe4\x93\x02:\"5/v3/customers/{customer_id=*}/recommendations:dismiss:\x01*\xda\x41\x16\x63ustomer_id,operations\x1a\x1b\xca\x41\x18googleads.googleapis.comB\x81\x02\n$com.google.ads.googleads.v3.servicesB\x1aRecommendationServiceProtoP\x01ZHgoogle.golang.org/genproto/googleapis/ads/googleads/v3/services;services\xa2\x02\x03GAA\xaa\x02 Google.Ads.GoogleAds.V3.Services\xca\x02 Google\\Ads\\GoogleAds\\V3\\Services\xea\x02$Google::Ads::GoogleAds::V3::Servicesb\x06proto3')
   ,
-  dependencies=[google_dot_ads_dot_googleads__v3_dot_proto_dot_common_dot_extensions__pb2.DESCRIPTOR,google_dot_ads_dot_googleads__v3_dot_proto_dot_enums_dot_keyword__match__type__pb2.DESCRIPTOR,google_dot_ads_dot_googleads__v3_dot_proto_dot_resources_dot_ad__pb2.DESCRIPTOR,google_dot_ads_dot_googleads__v3_dot_proto_dot_resources_dot_recommendation__pb2.DESCRIPTOR,google_dot_api_dot_annotations__pb2.DESCRIPTOR,google_dot_api_dot_client__pb2.DESCRIPTOR,google_dot_api_dot_field__behavior__pb2.DESCRIPTOR,google_dot_protobuf_dot_wrappers__pb2.DESCRIPTOR,google_dot_rpc_dot_status__pb2.DESCRIPTOR,])
+  dependencies=[google_dot_ads_dot_googleads__v3_dot_proto_dot_common_dot_extensions__pb2.DESCRIPTOR,google_dot_ads_dot_googleads__v3_dot_proto_dot_enums_dot_keyword__match__type__pb2.DESCRIPTOR,google_dot_ads_dot_googleads__v3_dot_proto_dot_resources_dot_ad__pb2.DESCRIPTOR,google_dot_ads_dot_googleads__v3_dot_proto_dot_resources_dot_recommendation__pb2.DESCRIPTOR,google_dot_api_dot_annotations__pb2.DESCRIPTOR,google_dot_api_dot_client__pb2.DESCRIPTOR,google_dot_api_dot_field__behavior__pb2.DESCRIPTOR,google_dot_api_dot_resource__pb2.DESCRIPTOR,google_dot_protobuf_dot_wrappers__pb2.DESCRIPTOR,google_dot_rpc_dot_status__pb2.DESCRIPTOR,])
 
 
 
@@ -49,7 +50,7 @@ _GETRECOMMENDATIONREQUEST = _descriptor.Descriptor(
       has_default_value=False, default_value=_b("").decode('utf-8'),
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
-      serialized_options=_b('\340A\002'), file=DESCRIPTOR),
+      serialized_options=_b('\340A\002\372A)\n\'googleads.googleapis.com/Recommendation'), file=DESCRIPTOR),
   ],
   extensions=[
   ],
@@ -62,8 +63,8 @@ _GETRECOMMENDATIONREQUEST = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=479,
-  serialized_end=533,
+  serialized_start=506,
+  serialized_end=604,
 )
 
 
@@ -107,8 +108,8 @@ _APPLYRECOMMENDATIONREQUEST = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=536,
-  serialized_end=704,
+  serialized_start=607,
+  serialized_end=775,
 )
 
 
@@ -138,8 +139,8 @@ _APPLYRECOMMENDATIONOPERATION_CAMPAIGNBUDGETPARAMETERS = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=1674,
-  serialized_end=1763,
+  serialized_start=1745,
+  serialized_end=1834,
 )
 
 _APPLYRECOMMENDATIONOPERATION_TEXTADPARAMETERS = _descriptor.Descriptor(
@@ -168,8 +169,8 @@ _APPLYRECOMMENDATIONOPERATION_TEXTADPARAMETERS = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=1765,
-  serialized_end=1834,
+  serialized_start=1836,
+  serialized_end=1905,
 )
 
 _APPLYRECOMMENDATIONOPERATION_KEYWORDPARAMETERS = _descriptor.Descriptor(
@@ -212,8 +213,8 @@ _APPLYRECOMMENDATIONOPERATION_KEYWORDPARAMETERS = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=1837,
-  serialized_end=2047,
+  serialized_start=1908,
+  serialized_end=2118,
 )
 
 _APPLYRECOMMENDATIONOPERATION_TARGETCPAOPTINPARAMETERS = _descriptor.Descriptor(
@@ -249,8 +250,8 @@ _APPLYRECOMMENDATIONOPERATION_TARGETCPAOPTINPARAMETERS = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=2050,
-  serialized_end=2204,
+  serialized_start=2121,
+  serialized_end=2275,
 )
 
 _APPLYRECOMMENDATIONOPERATION_CALLOUTEXTENSIONPARAMETERS = _descriptor.Descriptor(
@@ -279,8 +280,8 @@ _APPLYRECOMMENDATIONOPERATION_CALLOUTEXTENSIONPARAMETERS = _descriptor.Descripto
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=2206,
-  serialized_end=2311,
+  serialized_start=2277,
+  serialized_end=2382,
 )
 
 _APPLYRECOMMENDATIONOPERATION_CALLEXTENSIONPARAMETERS = _descriptor.Descriptor(
@@ -309,8 +310,8 @@ _APPLYRECOMMENDATIONOPERATION_CALLEXTENSIONPARAMETERS = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=2313,
-  serialized_end=2409,
+  serialized_start=2384,
+  serialized_end=2480,
 )
 
 _APPLYRECOMMENDATIONOPERATION_SITELINKEXTENSIONPARAMETERS = _descriptor.Descriptor(
@@ -339,8 +340,8 @@ _APPLYRECOMMENDATIONOPERATION_SITELINKEXTENSIONPARAMETERS = _descriptor.Descript
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=2411,
-  serialized_end=2519,
+  serialized_start=2482,
+  serialized_end=2590,
 )
 
 _APPLYRECOMMENDATIONOPERATION_MOVEUNUSEDBUDGETPARAMETERS = _descriptor.Descriptor(
@@ -369,8 +370,8 @@ _APPLYRECOMMENDATIONOPERATION_MOVEUNUSEDBUDGETPARAMETERS = _descriptor.Descripto
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=2521,
-  serialized_end=2609,
+  serialized_start=2592,
+  serialized_end=2680,
 )
 
 _APPLYRECOMMENDATIONOPERATION = _descriptor.Descriptor(
@@ -458,8 +459,8 @@ _APPLYRECOMMENDATIONOPERATION = _descriptor.Descriptor(
       name='apply_parameters', full_name='google.ads.googleads.v3.services.ApplyRecommendationOperation.apply_parameters',
       index=0, containing_type=None, fields=[]),
   ],
-  serialized_start=707,
-  serialized_end=2629,
+  serialized_start=778,
+  serialized_end=2700,
 )
 
 
@@ -496,8 +497,8 @@ _APPLYRECOMMENDATIONRESPONSE = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=2632,
-  serialized_end=2790,
+  serialized_start=2703,
+  serialized_end=2861,
 )
 
 
@@ -527,8 +528,8 @@ _APPLYRECOMMENDATIONRESULT = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=2792,
-  serialized_end=2842,
+  serialized_start=2863,
+  serialized_end=2913,
 )
 
 
@@ -558,8 +559,8 @@ _DISMISSRECOMMENDATIONREQUEST_DISMISSRECOMMENDATIONOPERATION = _descriptor.Descr
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=3048,
-  serialized_end=3103,
+  serialized_start=3119,
+  serialized_end=3174,
 )
 
 _DISMISSRECOMMENDATIONREQUEST = _descriptor.Descriptor(
@@ -602,8 +603,8 @@ _DISMISSRECOMMENDATIONREQUEST = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=2845,
-  serialized_end=3103,
+  serialized_start=2916,
+  serialized_end=3174,
 )
 
 
@@ -633,8 +634,8 @@ _DISMISSRECOMMENDATIONRESPONSE_DISMISSRECOMMENDATIONRESULT = _descriptor.Descrip
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=3300,
-  serialized_end=3352,
+  serialized_start=3371,
+  serialized_end=3423,
 )
 
 _DISMISSRECOMMENDATIONRESPONSE = _descriptor.Descriptor(
@@ -670,8 +671,8 @@ _DISMISSRECOMMENDATIONRESPONSE = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=3106,
-  serialized_end=3352,
+  serialized_start=3177,
+  serialized_end=3423,
 )
 
 _APPLYRECOMMENDATIONREQUEST.fields_by_name['operations'].message_type = _APPLYRECOMMENDATIONOPERATION
@@ -1096,8 +1097,8 @@ _RECOMMENDATIONSERVICE = _descriptor.ServiceDescriptor(
   file=DESCRIPTOR,
   index=0,
   serialized_options=_b('\312A\030googleads.googleapis.com'),
-  serialized_start=3355,
-  serialized_end=4099,
+  serialized_start=3426,
+  serialized_end=4170,
   methods=[
   _descriptor.MethodDescriptor(
     name='GetRecommendation',

@@ -14,6 +14,7 @@ _sym_db = _symbol_database.Default()
 
 
 from google.ads.google_ads.v3.proto.enums import keyword_match_type_pb2 as google_dot_ads_dot_googleads__v3_dot_proto_dot_enums_dot_keyword__match__type__pb2
+from google.api import field_behavior_pb2 as google_dot_api_dot_field__behavior__pb2
 from google.api import resource_pb2 as google_dot_api_dot_resource__pb2
 from google.protobuf import wrappers_pb2 as google_dot_protobuf_dot_wrappers__pb2
 from google.api import annotations_pb2 as google_dot_api_dot_annotations__pb2
@@ -24,9 +25,9 @@ DESCRIPTOR = _descriptor.FileDescriptor(
   package='google.ads.googleads.v3.resources',
   syntax='proto3',
   serialized_options=_b('\n%com.google.ads.googleads.v3.resourcesB\027KeywordPlanKeywordProtoP\001ZJgoogle.golang.org/genproto/googleapis/ads/googleads/v3/resources;resources\242\002\003GAA\252\002!Google.Ads.GoogleAds.V3.Resources\312\002!Google\\Ads\\GoogleAds\\V3\\Resources\352\002%Google::Ads::GoogleAds::V3::Resources'),
-  serialized_pb=_b('\nBgoogle/ads/googleads_v3/proto/resources/keyword_plan_keyword.proto\x12!google.ads.googleads.v3.resources\x1a<google/ads/googleads_v3/proto/enums/keyword_match_type.proto\x1a\x19google/api/resource.proto\x1a\x1egoogle/protobuf/wrappers.proto\x1a\x1cgoogle/api/annotations.proto\"\xbf\x03\n\x12KeywordPlanKeyword\x12\x15\n\rresource_name\x18\x01 \x01(\t\x12;\n\x15keyword_plan_ad_group\x18\x02 \x01(\x0b\x32\x1c.google.protobuf.StringValue\x12\'\n\x02id\x18\x03 \x01(\x0b\x32\x1b.google.protobuf.Int64Value\x12*\n\x04text\x18\x04 \x01(\x0b\x32\x1c.google.protobuf.StringValue\x12X\n\nmatch_type\x18\x05 \x01(\x0e\x32\x44.google.ads.googleads.v3.enums.KeywordMatchTypeEnum.KeywordMatchType\x12\x33\n\x0e\x63pc_bid_micros\x18\x06 \x01(\x0b\x32\x1b.google.protobuf.Int64Value:q\xea\x41n\n+googleads.googleapis.com/KeywordPlanKeyword\x12?customers/{customer}/keywordPlanKeywords/{keyword_plan_keyword}B\x84\x02\n%com.google.ads.googleads.v3.resourcesB\x17KeywordPlanKeywordProtoP\x01ZJgoogle.golang.org/genproto/googleapis/ads/googleads/v3/resources;resources\xa2\x02\x03GAA\xaa\x02!Google.Ads.GoogleAds.V3.Resources\xca\x02!Google\\Ads\\GoogleAds\\V3\\Resources\xea\x02%Google::Ads::GoogleAds::V3::Resourcesb\x06proto3')
+  serialized_pb=_b('\nBgoogle/ads/googleads_v3/proto/resources/keyword_plan_keyword.proto\x12!google.ads.googleads.v3.resources\x1a<google/ads/googleads_v3/proto/enums/keyword_match_type.proto\x1a\x1fgoogle/api/field_behavior.proto\x1a\x19google/api/resource.proto\x1a\x1egoogle/protobuf/wrappers.proto\x1a\x1cgoogle/api/annotations.proto\"\xab\x04\n\x12KeywordPlanKeyword\x12J\n\rresource_name\x18\x01 \x01(\tB3\xe0\x41\x05\xfa\x41-\n+googleads.googleapis.com/KeywordPlanKeyword\x12m\n\x15keyword_plan_ad_group\x18\x02 \x01(\x0b\x32\x1c.google.protobuf.StringValueB0\xfa\x41-\n+googleads.googleapis.com/KeywordPlanAdGroup\x12,\n\x02id\x18\x03 \x01(\x0b\x32\x1b.google.protobuf.Int64ValueB\x03\xe0\x41\x03\x12*\n\x04text\x18\x04 \x01(\x0b\x32\x1c.google.protobuf.StringValue\x12X\n\nmatch_type\x18\x05 \x01(\x0e\x32\x44.google.ads.googleads.v3.enums.KeywordMatchTypeEnum.KeywordMatchType\x12\x33\n\x0e\x63pc_bid_micros\x18\x06 \x01(\x0b\x32\x1b.google.protobuf.Int64Value:q\xea\x41n\n+googleads.googleapis.com/KeywordPlanKeyword\x12?customers/{customer}/keywordPlanKeywords/{keyword_plan_keyword}B\x84\x02\n%com.google.ads.googleads.v3.resourcesB\x17KeywordPlanKeywordProtoP\x01ZJgoogle.golang.org/genproto/googleapis/ads/googleads/v3/resources;resources\xa2\x02\x03GAA\xaa\x02!Google.Ads.GoogleAds.V3.Resources\xca\x02!Google\\Ads\\GoogleAds\\V3\\Resources\xea\x02%Google::Ads::GoogleAds::V3::Resourcesb\x06proto3')
   ,
-  dependencies=[google_dot_ads_dot_googleads__v3_dot_proto_dot_enums_dot_keyword__match__type__pb2.DESCRIPTOR,google_dot_api_dot_resource__pb2.DESCRIPTOR,google_dot_protobuf_dot_wrappers__pb2.DESCRIPTOR,google_dot_api_dot_annotations__pb2.DESCRIPTOR,])
+  dependencies=[google_dot_ads_dot_googleads__v3_dot_proto_dot_enums_dot_keyword__match__type__pb2.DESCRIPTOR,google_dot_api_dot_field__behavior__pb2.DESCRIPTOR,google_dot_api_dot_resource__pb2.DESCRIPTOR,google_dot_protobuf_dot_wrappers__pb2.DESCRIPTOR,google_dot_api_dot_annotations__pb2.DESCRIPTOR,])
 
 
 
@@ -44,21 +45,21 @@ _KEYWORDPLANKEYWORD = _descriptor.Descriptor(
       has_default_value=False, default_value=_b("").decode('utf-8'),
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR),
+      serialized_options=_b('\340A\005\372A-\n+googleads.googleapis.com/KeywordPlanKeyword'), file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
       name='keyword_plan_ad_group', full_name='google.ads.googleads.v3.resources.KeywordPlanKeyword.keyword_plan_ad_group', index=1,
       number=2, type=11, cpp_type=10, label=1,
       has_default_value=False, default_value=None,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR),
+      serialized_options=_b('\372A-\n+googleads.googleapis.com/KeywordPlanAdGroup'), file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
       name='id', full_name='google.ads.googleads.v3.resources.KeywordPlanKeyword.id', index=2,
       number=3, type=11, cpp_type=10, label=1,
       has_default_value=False, default_value=None,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR),
+      serialized_options=_b('\340A\003'), file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
       name='text', full_name='google.ads.googleads.v3.resources.KeywordPlanKeyword.text', index=3,
       number=4, type=11, cpp_type=10, label=1,
@@ -92,8 +93,8 @@ _KEYWORDPLANKEYWORD = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=257,
-  serialized_end=704,
+  serialized_start=290,
+  serialized_end=845,
 )
 
 _KEYWORDPLANKEYWORD.fields_by_name['keyword_plan_ad_group'].message_type = google_dot_protobuf_dot_wrappers__pb2._STRINGVALUE
@@ -114,13 +115,14 @@ KeywordPlanKeyword = _reflection.GeneratedProtocolMessageType('KeywordPlanKeywor
   
   Attributes:
       resource_name:
-          The resource name of the Keyword Plan ad group keyword.
-          KeywordPlanKeyword resource names have the form:  ``customers/
-          {customer_id}/keywordPlanKeywords/{kp_ad_group_keyword_id}``
+          Immutable. The resource name of the Keyword Plan ad group
+          keyword. KeywordPlanKeyword resource names have the form:  ``c
+          ustomers/{customer_id}/keywordPlanKeywords/{kp_ad_group_keywor
+          d_id}``
       keyword_plan_ad_group:
           The Keyword Plan ad group to which this keyword belongs.
       id:
-          The ID of the Keyword Plan keyword.
+          Output only. The ID of the Keyword Plan keyword.
       text:
           The keyword text.
       match_type:
@@ -135,5 +137,8 @@ _sym_db.RegisterMessage(KeywordPlanKeyword)
 
 
 DESCRIPTOR._options = None
+_KEYWORDPLANKEYWORD.fields_by_name['resource_name']._options = None
+_KEYWORDPLANKEYWORD.fields_by_name['keyword_plan_ad_group']._options = None
+_KEYWORDPLANKEYWORD.fields_by_name['id']._options = None
 _KEYWORDPLANKEYWORD._options = None
 # @@protoc_insertion_point(module_scope)

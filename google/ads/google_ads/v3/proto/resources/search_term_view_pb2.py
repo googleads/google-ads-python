@@ -14,6 +14,7 @@ _sym_db = _symbol_database.Default()
 
 
 from google.ads.google_ads.v3.proto.enums import search_term_targeting_status_pb2 as google_dot_ads_dot_googleads__v3_dot_proto_dot_enums_dot_search__term__targeting__status__pb2
+from google.api import field_behavior_pb2 as google_dot_api_dot_field__behavior__pb2
 from google.api import resource_pb2 as google_dot_api_dot_resource__pb2
 from google.protobuf import wrappers_pb2 as google_dot_protobuf_dot_wrappers__pb2
 from google.api import annotations_pb2 as google_dot_api_dot_annotations__pb2
@@ -24,9 +25,9 @@ DESCRIPTOR = _descriptor.FileDescriptor(
   package='google.ads.googleads.v3.resources',
   syntax='proto3',
   serialized_options=_b('\n%com.google.ads.googleads.v3.resourcesB\023SearchTermViewProtoP\001ZJgoogle.golang.org/genproto/googleapis/ads/googleads/v3/resources;resources\242\002\003GAA\252\002!Google.Ads.GoogleAds.V3.Resources\312\002!Google\\Ads\\GoogleAds\\V3\\Resources\352\002%Google::Ads::GoogleAds::V3::Resources'),
-  serialized_pb=_b('\n>google/ads/googleads_v3/proto/resources/search_term_view.proto\x12!google.ads.googleads.v3.resources\x1a\x46google/ads/googleads_v3/proto/enums/search_term_targeting_status.proto\x1a\x19google/api/resource.proto\x1a\x1egoogle/protobuf/wrappers.proto\x1a\x1cgoogle/api/annotations.proto\"\xd9\x02\n\x0eSearchTermView\x12\x15\n\rresource_name\x18\x01 \x01(\t\x12\x31\n\x0bsearch_term\x18\x02 \x01(\x0b\x32\x1c.google.protobuf.StringValue\x12.\n\x08\x61\x64_group\x18\x03 \x01(\x0b\x32\x1c.google.protobuf.StringValue\x12\x66\n\x06status\x18\x04 \x01(\x0e\x32V.google.ads.googleads.v3.enums.SearchTermTargetingStatusEnum.SearchTermTargetingStatus:e\xea\x41\x62\n\'googleads.googleapis.com/SearchTermView\x12\x37\x63ustomers/{customer}/searchTermViews/{search_term_view}B\x80\x02\n%com.google.ads.googleads.v3.resourcesB\x13SearchTermViewProtoP\x01ZJgoogle.golang.org/genproto/googleapis/ads/googleads/v3/resources;resources\xa2\x02\x03GAA\xaa\x02!Google.Ads.GoogleAds.V3.Resources\xca\x02!Google\\Ads\\GoogleAds\\V3\\Resources\xea\x02%Google::Ads::GoogleAds::V3::Resourcesb\x06proto3')
+  serialized_pb=_b('\n>google/ads/googleads_v3/proto/resources/search_term_view.proto\x12!google.ads.googleads.v3.resources\x1a\x46google/ads/googleads_v3/proto/enums/search_term_targeting_status.proto\x1a\x1fgoogle/api/field_behavior.proto\x1a\x19google/api/resource.proto\x1a\x1egoogle/protobuf/wrappers.proto\x1a\x1cgoogle/api/annotations.proto\"\xbe\x03\n\x0eSearchTermView\x12\x46\n\rresource_name\x18\x01 \x01(\tB/\xe0\x41\x03\xfa\x41)\n\'googleads.googleapis.com/SearchTermView\x12\x36\n\x0bsearch_term\x18\x02 \x01(\x0b\x32\x1c.google.protobuf.StringValueB\x03\xe0\x41\x03\x12X\n\x08\x61\x64_group\x18\x03 \x01(\x0b\x32\x1c.google.protobuf.StringValueB(\xe0\x41\x03\xfa\x41\"\n googleads.googleapis.com/AdGroup\x12k\n\x06status\x18\x04 \x01(\x0e\x32V.google.ads.googleads.v3.enums.SearchTermTargetingStatusEnum.SearchTermTargetingStatusB\x03\xe0\x41\x03:e\xea\x41\x62\n\'googleads.googleapis.com/SearchTermView\x12\x37\x63ustomers/{customer}/searchTermViews/{search_term_view}B\x80\x02\n%com.google.ads.googleads.v3.resourcesB\x13SearchTermViewProtoP\x01ZJgoogle.golang.org/genproto/googleapis/ads/googleads/v3/resources;resources\xa2\x02\x03GAA\xaa\x02!Google.Ads.GoogleAds.V3.Resources\xca\x02!Google\\Ads\\GoogleAds\\V3\\Resources\xea\x02%Google::Ads::GoogleAds::V3::Resourcesb\x06proto3')
   ,
-  dependencies=[google_dot_ads_dot_googleads__v3_dot_proto_dot_enums_dot_search__term__targeting__status__pb2.DESCRIPTOR,google_dot_api_dot_resource__pb2.DESCRIPTOR,google_dot_protobuf_dot_wrappers__pb2.DESCRIPTOR,google_dot_api_dot_annotations__pb2.DESCRIPTOR,])
+  dependencies=[google_dot_ads_dot_googleads__v3_dot_proto_dot_enums_dot_search__term__targeting__status__pb2.DESCRIPTOR,google_dot_api_dot_field__behavior__pb2.DESCRIPTOR,google_dot_api_dot_resource__pb2.DESCRIPTOR,google_dot_protobuf_dot_wrappers__pb2.DESCRIPTOR,google_dot_api_dot_annotations__pb2.DESCRIPTOR,])
 
 
 
@@ -44,28 +45,28 @@ _SEARCHTERMVIEW = _descriptor.Descriptor(
       has_default_value=False, default_value=_b("").decode('utf-8'),
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR),
+      serialized_options=_b('\340A\003\372A)\n\'googleads.googleapis.com/SearchTermView'), file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
       name='search_term', full_name='google.ads.googleads.v3.resources.SearchTermView.search_term', index=1,
       number=2, type=11, cpp_type=10, label=1,
       has_default_value=False, default_value=None,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR),
+      serialized_options=_b('\340A\003'), file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
       name='ad_group', full_name='google.ads.googleads.v3.resources.SearchTermView.ad_group', index=2,
       number=3, type=11, cpp_type=10, label=1,
       has_default_value=False, default_value=None,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR),
+      serialized_options=_b('\340A\003\372A\"\n googleads.googleapis.com/AdGroup'), file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
       name='status', full_name='google.ads.googleads.v3.resources.SearchTermView.status', index=3,
       number=4, type=14, cpp_type=8, label=1,
       has_default_value=False, default_value=0,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR),
+      serialized_options=_b('\340A\003'), file=DESCRIPTOR),
   ],
   extensions=[
   ],
@@ -78,8 +79,8 @@ _SEARCHTERMVIEW = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=263,
-  serialized_end=608,
+  serialized_start=296,
+  serialized_end=742,
 )
 
 _SEARCHTERMVIEW.fields_by_name['search_term'].message_type = google_dot_protobuf_dot_wrappers__pb2._STRINGVALUE
@@ -98,17 +99,17 @@ SearchTermView = _reflection.GeneratedProtocolMessageType('SearchTermView', (_me
   
   Attributes:
       resource_name:
-          The resource name of the search term view. Search term view
-          resource names have the form:  ``customers/{customer_id}/searc
-          hTermViews/{campaign_id}~{ad_group_id}~{URL-
+          Output only. The resource name of the search term view. Search
+          term view resource names have the form:  ``customers/{customer
+          _id}/searchTermViews/{campaign_id}~{ad_group_id}~{URL-
           base64_search_term}``
       search_term:
-          The search term.
+          Output only. The search term.
       ad_group:
-          The ad group the search term served in.
+          Output only. The ad group the search term served in.
       status:
-          Indicates whether the search term is currently one of your
-          targeted or excluded keywords.
+          Output only. Indicates whether the search term is currently
+          one of your targeted or excluded keywords.
   """,
   # @@protoc_insertion_point(class_scope:google.ads.googleads.v3.resources.SearchTermView)
   ))
@@ -116,5 +117,9 @@ _sym_db.RegisterMessage(SearchTermView)
 
 
 DESCRIPTOR._options = None
+_SEARCHTERMVIEW.fields_by_name['resource_name']._options = None
+_SEARCHTERMVIEW.fields_by_name['search_term']._options = None
+_SEARCHTERMVIEW.fields_by_name['ad_group']._options = None
+_SEARCHTERMVIEW.fields_by_name['status']._options = None
 _SEARCHTERMVIEW._options = None
 # @@protoc_insertion_point(module_scope)

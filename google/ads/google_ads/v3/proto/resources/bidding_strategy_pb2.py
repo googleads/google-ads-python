@@ -16,6 +16,7 @@ _sym_db = _symbol_database.Default()
 from google.ads.google_ads.v3.proto.common import bidding_pb2 as google_dot_ads_dot_googleads__v3_dot_proto_dot_common_dot_bidding__pb2
 from google.ads.google_ads.v3.proto.enums import bidding_strategy_status_pb2 as google_dot_ads_dot_googleads__v3_dot_proto_dot_enums_dot_bidding__strategy__status__pb2
 from google.ads.google_ads.v3.proto.enums import bidding_strategy_type_pb2 as google_dot_ads_dot_googleads__v3_dot_proto_dot_enums_dot_bidding__strategy__type__pb2
+from google.api import field_behavior_pb2 as google_dot_api_dot_field__behavior__pb2
 from google.api import resource_pb2 as google_dot_api_dot_resource__pb2
 from google.protobuf import wrappers_pb2 as google_dot_protobuf_dot_wrappers__pb2
 from google.api import annotations_pb2 as google_dot_api_dot_annotations__pb2
@@ -26,9 +27,9 @@ DESCRIPTOR = _descriptor.FileDescriptor(
   package='google.ads.googleads.v3.resources',
   syntax='proto3',
   serialized_options=_b('\n%com.google.ads.googleads.v3.resourcesB\024BiddingStrategyProtoP\001ZJgoogle.golang.org/genproto/googleapis/ads/googleads/v3/resources;resources\242\002\003GAA\252\002!Google.Ads.GoogleAds.V3.Resources\312\002!Google\\Ads\\GoogleAds\\V3\\Resources\352\002%Google::Ads::GoogleAds::V3::Resources'),
-  serialized_pb=_b('\n>google/ads/googleads_v3/proto/resources/bidding_strategy.proto\x12!google.ads.googleads.v3.resources\x1a\x32google/ads/googleads_v3/proto/common/bidding.proto\x1a\x41google/ads/googleads_v3/proto/enums/bidding_strategy_status.proto\x1a?google/ads/googleads_v3/proto/enums/bidding_strategy_type.proto\x1a\x19google/api/resource.proto\x1a\x1egoogle/protobuf/wrappers.proto\x1a\x1cgoogle/api/annotations.proto\"\x89\x07\n\x0f\x42iddingStrategy\x12\x15\n\rresource_name\x18\x01 \x01(\t\x12\'\n\x02id\x18\x03 \x01(\x0b\x32\x1b.google.protobuf.Int64Value\x12*\n\x04name\x18\x04 \x01(\x0b\x32\x1c.google.protobuf.StringValue\x12^\n\x06status\x18\x0f \x01(\x0e\x32N.google.ads.googleads.v3.enums.BiddingStrategyStatusEnum.BiddingStrategyStatus\x12X\n\x04type\x18\x05 \x01(\x0e\x32J.google.ads.googleads.v3.enums.BiddingStrategyTypeEnum.BiddingStrategyType\x12\x33\n\x0e\x63\x61mpaign_count\x18\r \x01(\x0b\x32\x1b.google.protobuf.Int64Value\x12?\n\x1anon_removed_campaign_count\x18\x0e \x01(\x0b\x32\x1b.google.protobuf.Int64Value\x12\x43\n\x0c\x65nhanced_cpc\x18\x07 \x01(\x0b\x32+.google.ads.googleads.v3.common.EnhancedCpcH\x00\x12?\n\ntarget_cpa\x18\t \x01(\x0b\x32).google.ads.googleads.v3.common.TargetCpaH\x00\x12X\n\x17target_impression_share\x18\x30 \x01(\x0b\x32\x35.google.ads.googleads.v3.common.TargetImpressionShareH\x00\x12\x41\n\x0btarget_roas\x18\x0b \x01(\x0b\x32*.google.ads.googleads.v3.common.TargetRoasH\x00\x12\x43\n\x0ctarget_spend\x18\x0c \x01(\x0b\x32+.google.ads.googleads.v3.common.TargetSpendH\x00:h\xea\x41\x65\n(googleads.googleapis.com/BiddingStrategy\x12\x39\x63ustomers/{customer}/biddingStrategies/{bidding_strategy}B\x08\n\x06schemeB\x81\x02\n%com.google.ads.googleads.v3.resourcesB\x14\x42iddingStrategyProtoP\x01ZJgoogle.golang.org/genproto/googleapis/ads/googleads/v3/resources;resources\xa2\x02\x03GAA\xaa\x02!Google.Ads.GoogleAds.V3.Resources\xca\x02!Google\\Ads\\GoogleAds\\V3\\Resources\xea\x02%Google::Ads::GoogleAds::V3::Resourcesb\x06proto3')
+  serialized_pb=_b('\n>google/ads/googleads_v3/proto/resources/bidding_strategy.proto\x12!google.ads.googleads.v3.resources\x1a\x32google/ads/googleads_v3/proto/common/bidding.proto\x1a\x41google/ads/googleads_v3/proto/enums/bidding_strategy_status.proto\x1a?google/ads/googleads_v3/proto/enums/bidding_strategy_type.proto\x1a\x1fgoogle/api/field_behavior.proto\x1a\x19google/api/resource.proto\x1a\x1egoogle/protobuf/wrappers.proto\x1a\x1cgoogle/api/annotations.proto\"\xd4\x07\n\x0f\x42iddingStrategy\x12G\n\rresource_name\x18\x01 \x01(\tB0\xe0\x41\x05\xfa\x41*\n(googleads.googleapis.com/BiddingStrategy\x12,\n\x02id\x18\x03 \x01(\x0b\x32\x1b.google.protobuf.Int64ValueB\x03\xe0\x41\x03\x12*\n\x04name\x18\x04 \x01(\x0b\x32\x1c.google.protobuf.StringValue\x12\x63\n\x06status\x18\x0f \x01(\x0e\x32N.google.ads.googleads.v3.enums.BiddingStrategyStatusEnum.BiddingStrategyStatusB\x03\xe0\x41\x03\x12]\n\x04type\x18\x05 \x01(\x0e\x32J.google.ads.googleads.v3.enums.BiddingStrategyTypeEnum.BiddingStrategyTypeB\x03\xe0\x41\x03\x12\x38\n\x0e\x63\x61mpaign_count\x18\r \x01(\x0b\x32\x1b.google.protobuf.Int64ValueB\x03\xe0\x41\x03\x12\x44\n\x1anon_removed_campaign_count\x18\x0e \x01(\x0b\x32\x1b.google.protobuf.Int64ValueB\x03\xe0\x41\x03\x12\x43\n\x0c\x65nhanced_cpc\x18\x07 \x01(\x0b\x32+.google.ads.googleads.v3.common.EnhancedCpcH\x00\x12?\n\ntarget_cpa\x18\t \x01(\x0b\x32).google.ads.googleads.v3.common.TargetCpaH\x00\x12X\n\x17target_impression_share\x18\x30 \x01(\x0b\x32\x35.google.ads.googleads.v3.common.TargetImpressionShareH\x00\x12\x41\n\x0btarget_roas\x18\x0b \x01(\x0b\x32*.google.ads.googleads.v3.common.TargetRoasH\x00\x12\x43\n\x0ctarget_spend\x18\x0c \x01(\x0b\x32+.google.ads.googleads.v3.common.TargetSpendH\x00:h\xea\x41\x65\n(googleads.googleapis.com/BiddingStrategy\x12\x39\x63ustomers/{customer}/biddingStrategies/{bidding_strategy}B\x08\n\x06schemeB\x81\x02\n%com.google.ads.googleads.v3.resourcesB\x14\x42iddingStrategyProtoP\x01ZJgoogle.golang.org/genproto/googleapis/ads/googleads/v3/resources;resources\xa2\x02\x03GAA\xaa\x02!Google.Ads.GoogleAds.V3.Resources\xca\x02!Google\\Ads\\GoogleAds\\V3\\Resources\xea\x02%Google::Ads::GoogleAds::V3::Resourcesb\x06proto3')
   ,
-  dependencies=[google_dot_ads_dot_googleads__v3_dot_proto_dot_common_dot_bidding__pb2.DESCRIPTOR,google_dot_ads_dot_googleads__v3_dot_proto_dot_enums_dot_bidding__strategy__status__pb2.DESCRIPTOR,google_dot_ads_dot_googleads__v3_dot_proto_dot_enums_dot_bidding__strategy__type__pb2.DESCRIPTOR,google_dot_api_dot_resource__pb2.DESCRIPTOR,google_dot_protobuf_dot_wrappers__pb2.DESCRIPTOR,google_dot_api_dot_annotations__pb2.DESCRIPTOR,])
+  dependencies=[google_dot_ads_dot_googleads__v3_dot_proto_dot_common_dot_bidding__pb2.DESCRIPTOR,google_dot_ads_dot_googleads__v3_dot_proto_dot_enums_dot_bidding__strategy__status__pb2.DESCRIPTOR,google_dot_ads_dot_googleads__v3_dot_proto_dot_enums_dot_bidding__strategy__type__pb2.DESCRIPTOR,google_dot_api_dot_field__behavior__pb2.DESCRIPTOR,google_dot_api_dot_resource__pb2.DESCRIPTOR,google_dot_protobuf_dot_wrappers__pb2.DESCRIPTOR,google_dot_api_dot_annotations__pb2.DESCRIPTOR,])
 
 
 
@@ -46,14 +47,14 @@ _BIDDINGSTRATEGY = _descriptor.Descriptor(
       has_default_value=False, default_value=_b("").decode('utf-8'),
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR),
+      serialized_options=_b('\340A\005\372A*\n(googleads.googleapis.com/BiddingStrategy'), file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
       name='id', full_name='google.ads.googleads.v3.resources.BiddingStrategy.id', index=1,
       number=3, type=11, cpp_type=10, label=1,
       has_default_value=False, default_value=None,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR),
+      serialized_options=_b('\340A\003'), file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
       name='name', full_name='google.ads.googleads.v3.resources.BiddingStrategy.name', index=2,
       number=4, type=11, cpp_type=10, label=1,
@@ -67,28 +68,28 @@ _BIDDINGSTRATEGY = _descriptor.Descriptor(
       has_default_value=False, default_value=0,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR),
+      serialized_options=_b('\340A\003'), file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
       name='type', full_name='google.ads.googleads.v3.resources.BiddingStrategy.type', index=4,
       number=5, type=14, cpp_type=8, label=1,
       has_default_value=False, default_value=0,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR),
+      serialized_options=_b('\340A\003'), file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
       name='campaign_count', full_name='google.ads.googleads.v3.resources.BiddingStrategy.campaign_count', index=5,
       number=13, type=11, cpp_type=10, label=1,
       has_default_value=False, default_value=None,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR),
+      serialized_options=_b('\340A\003'), file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
       name='non_removed_campaign_count', full_name='google.ads.googleads.v3.resources.BiddingStrategy.non_removed_campaign_count', index=6,
       number=14, type=11, cpp_type=10, label=1,
       has_default_value=False, default_value=None,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR),
+      serialized_options=_b('\340A\003'), file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
       name='enhanced_cpc', full_name='google.ads.googleads.v3.resources.BiddingStrategy.enhanced_cpc', index=7,
       number=7, type=11, cpp_type=10, label=1,
@@ -139,8 +140,8 @@ _BIDDINGSTRATEGY = _descriptor.Descriptor(
       name='scheme', full_name='google.ads.googleads.v3.resources.BiddingStrategy.scheme',
       index=0, containing_type=None, fields=[]),
   ],
-  serialized_start=375,
-  serialized_end=1280,
+  serialized_start=408,
+  serialized_end=1388,
 )
 
 _BIDDINGSTRATEGY.fields_by_name['id'].message_type = google_dot_protobuf_dot_wrappers__pb2._INT64VALUE
@@ -181,27 +182,29 @@ BiddingStrategy = _reflection.GeneratedProtocolMessageType('BiddingStrategy', (_
   
   Attributes:
       resource_name:
-          The resource name of the bidding strategy. Bidding strategy
-          resource names have the form:  ``customers/{customer_id}/biddi
-          ngStrategies/{bidding_strategy_id}``
+          Immutable. The resource name of the bidding strategy. Bidding
+          strategy resource names have the form:  ``customers/{customer_
+          id}/biddingStrategies/{bidding_strategy_id}``
       id:
-          The ID of the bidding strategy.
+          Output only. The ID of the bidding strategy.
       name:
           The name of the bidding strategy. All bidding strategies
           within an account must be named distinctly.  The length of
           this string should be between 1 and 255, inclusive, in UTF-8
           bytes, (trimmed).
       status:
-          The status of the bidding strategy.  This field is read-only.
+          Output only. The status of the bidding strategy.  This field
+          is read-only.
       type:
-          The type of the bidding strategy. Create a bidding strategy by
-          setting the bidding scheme.  This field is read-only.
+          Output only. The type of the bidding strategy. Create a
+          bidding strategy by setting the bidding scheme.  This field is
+          read-only.
       campaign_count:
-          The number of campaigns attached to this bidding strategy.
-          This field is read-only.
-      non_removed_campaign_count:
-          The number of non-removed campaigns attached to this bidding
+          Output only. The number of campaigns attached to this bidding
           strategy.  This field is read-only.
+      non_removed_campaign_count:
+          Output only. The number of non-removed campaigns attached to
+          this bidding strategy.  This field is read-only.
       scheme:
           The bidding scheme.  Only one can be set.
       enhanced_cpc:
@@ -228,5 +231,11 @@ _sym_db.RegisterMessage(BiddingStrategy)
 
 
 DESCRIPTOR._options = None
+_BIDDINGSTRATEGY.fields_by_name['resource_name']._options = None
+_BIDDINGSTRATEGY.fields_by_name['id']._options = None
+_BIDDINGSTRATEGY.fields_by_name['status']._options = None
+_BIDDINGSTRATEGY.fields_by_name['type']._options = None
+_BIDDINGSTRATEGY.fields_by_name['campaign_count']._options = None
+_BIDDINGSTRATEGY.fields_by_name['non_removed_campaign_count']._options = None
 _BIDDINGSTRATEGY._options = None
 # @@protoc_insertion_point(module_scope)

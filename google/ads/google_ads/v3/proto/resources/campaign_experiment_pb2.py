@@ -15,6 +15,7 @@ _sym_db = _symbol_database.Default()
 
 from google.ads.google_ads.v3.proto.enums import campaign_experiment_status_pb2 as google_dot_ads_dot_googleads__v3_dot_proto_dot_enums_dot_campaign__experiment__status__pb2
 from google.ads.google_ads.v3.proto.enums import campaign_experiment_traffic_split_type_pb2 as google_dot_ads_dot_googleads__v3_dot_proto_dot_enums_dot_campaign__experiment__traffic__split__type__pb2
+from google.api import field_behavior_pb2 as google_dot_api_dot_field__behavior__pb2
 from google.api import resource_pb2 as google_dot_api_dot_resource__pb2
 from google.protobuf import wrappers_pb2 as google_dot_protobuf_dot_wrappers__pb2
 from google.api import annotations_pb2 as google_dot_api_dot_annotations__pb2
@@ -25,9 +26,9 @@ DESCRIPTOR = _descriptor.FileDescriptor(
   package='google.ads.googleads.v3.resources',
   syntax='proto3',
   serialized_options=_b('\n%com.google.ads.googleads.v3.resourcesB\027CampaignExperimentProtoP\001ZJgoogle.golang.org/genproto/googleapis/ads/googleads/v3/resources;resources\242\002\003GAA\252\002!Google.Ads.GoogleAds.V3.Resources\312\002!Google\\Ads\\GoogleAds\\V3\\Resources\352\002%Google::Ads::GoogleAds::V3::Resources'),
-  serialized_pb=_b('\nAgoogle/ads/googleads_v3/proto/resources/campaign_experiment.proto\x12!google.ads.googleads.v3.resources\x1a\x44google/ads/googleads_v3/proto/enums/campaign_experiment_status.proto\x1aPgoogle/ads/googleads_v3/proto/enums/campaign_experiment_traffic_split_type.proto\x1a\x19google/api/resource.proto\x1a\x1egoogle/protobuf/wrappers.proto\x1a\x1cgoogle/api/annotations.proto\"\xdf\x06\n\x12\x43\x61mpaignExperiment\x12\x15\n\rresource_name\x18\x01 \x01(\t\x12\'\n\x02id\x18\x02 \x01(\x0b\x32\x1b.google.protobuf.Int64Value\x12\x34\n\x0e\x63\x61mpaign_draft\x18\x03 \x01(\x0b\x32\x1c.google.protobuf.StringValue\x12*\n\x04name\x18\x04 \x01(\x0b\x32\x1c.google.protobuf.StringValue\x12\x31\n\x0b\x64\x65scription\x18\x05 \x01(\x0b\x32\x1c.google.protobuf.StringValue\x12:\n\x15traffic_split_percent\x18\x06 \x01(\x0b\x32\x1b.google.protobuf.Int64Value\x12\x84\x01\n\x12traffic_split_type\x18\x07 \x01(\x0e\x32h.google.ads.googleads.v3.enums.CampaignExperimentTrafficSplitTypeEnum.CampaignExperimentTrafficSplitType\x12\x39\n\x13\x65xperiment_campaign\x18\x08 \x01(\x0b\x32\x1c.google.protobuf.StringValue\x12\x64\n\x06status\x18\t \x01(\x0e\x32T.google.ads.googleads.v3.enums.CampaignExperimentStatusEnum.CampaignExperimentStatus\x12<\n\x16long_running_operation\x18\n \x01(\x0b\x32\x1c.google.protobuf.StringValue\x12\x30\n\nstart_date\x18\x0b \x01(\x0b\x32\x1c.google.protobuf.StringValue\x12.\n\x08\x65nd_date\x18\x0c \x01(\x0b\x32\x1c.google.protobuf.StringValue:p\xea\x41m\n+googleads.googleapis.com/CampaignExperiment\x12>customers/{customer}/campaignExperiments/{campaign_experiment}B\x84\x02\n%com.google.ads.googleads.v3.resourcesB\x17\x43\x61mpaignExperimentProtoP\x01ZJgoogle.golang.org/genproto/googleapis/ads/googleads/v3/resources;resources\xa2\x02\x03GAA\xaa\x02!Google.Ads.GoogleAds.V3.Resources\xca\x02!Google\\Ads\\GoogleAds\\V3\\Resources\xea\x02%Google::Ads::GoogleAds::V3::Resourcesb\x06proto3')
+  serialized_pb=_b('\nAgoogle/ads/googleads_v3/proto/resources/campaign_experiment.proto\x12!google.ads.googleads.v3.resources\x1a\x44google/ads/googleads_v3/proto/enums/campaign_experiment_status.proto\x1aPgoogle/ads/googleads_v3/proto/enums/campaign_experiment_traffic_split_type.proto\x1a\x1fgoogle/api/field_behavior.proto\x1a\x19google/api/resource.proto\x1a\x1egoogle/protobuf/wrappers.proto\x1a\x1cgoogle/api/annotations.proto\"\x88\x08\n\x12\x43\x61mpaignExperiment\x12J\n\rresource_name\x18\x01 \x01(\tB3\xe0\x41\x05\xfa\x41-\n+googleads.googleapis.com/CampaignExperiment\x12,\n\x02id\x18\x02 \x01(\x0b\x32\x1b.google.protobuf.Int64ValueB\x03\xe0\x41\x03\x12\x64\n\x0e\x63\x61mpaign_draft\x18\x03 \x01(\x0b\x32\x1c.google.protobuf.StringValueB.\xe0\x41\x05\xfa\x41(\n&googleads.googleapis.com/CampaignDraft\x12*\n\x04name\x18\x04 \x01(\x0b\x32\x1c.google.protobuf.StringValue\x12\x31\n\x0b\x64\x65scription\x18\x05 \x01(\x0b\x32\x1c.google.protobuf.StringValue\x12?\n\x15traffic_split_percent\x18\x06 \x01(\x0b\x32\x1b.google.protobuf.Int64ValueB\x03\xe0\x41\x05\x12\x89\x01\n\x12traffic_split_type\x18\x07 \x01(\x0e\x32h.google.ads.googleads.v3.enums.CampaignExperimentTrafficSplitTypeEnum.CampaignExperimentTrafficSplitTypeB\x03\xe0\x41\x05\x12\x64\n\x13\x65xperiment_campaign\x18\x08 \x01(\x0b\x32\x1c.google.protobuf.StringValueB)\xe0\x41\x03\xfa\x41#\n!googleads.googleapis.com/Campaign\x12i\n\x06status\x18\t \x01(\x0e\x32T.google.ads.googleads.v3.enums.CampaignExperimentStatusEnum.CampaignExperimentStatusB\x03\xe0\x41\x03\x12\x41\n\x16long_running_operation\x18\n \x01(\x0b\x32\x1c.google.protobuf.StringValueB\x03\xe0\x41\x03\x12\x30\n\nstart_date\x18\x0b \x01(\x0b\x32\x1c.google.protobuf.StringValue\x12.\n\x08\x65nd_date\x18\x0c \x01(\x0b\x32\x1c.google.protobuf.StringValue:p\xea\x41m\n+googleads.googleapis.com/CampaignExperiment\x12>customers/{customer}/campaignExperiments/{campaign_experiment}B\x84\x02\n%com.google.ads.googleads.v3.resourcesB\x17\x43\x61mpaignExperimentProtoP\x01ZJgoogle.golang.org/genproto/googleapis/ads/googleads/v3/resources;resources\xa2\x02\x03GAA\xaa\x02!Google.Ads.GoogleAds.V3.Resources\xca\x02!Google\\Ads\\GoogleAds\\V3\\Resources\xea\x02%Google::Ads::GoogleAds::V3::Resourcesb\x06proto3')
   ,
-  dependencies=[google_dot_ads_dot_googleads__v3_dot_proto_dot_enums_dot_campaign__experiment__status__pb2.DESCRIPTOR,google_dot_ads_dot_googleads__v3_dot_proto_dot_enums_dot_campaign__experiment__traffic__split__type__pb2.DESCRIPTOR,google_dot_api_dot_resource__pb2.DESCRIPTOR,google_dot_protobuf_dot_wrappers__pb2.DESCRIPTOR,google_dot_api_dot_annotations__pb2.DESCRIPTOR,])
+  dependencies=[google_dot_ads_dot_googleads__v3_dot_proto_dot_enums_dot_campaign__experiment__status__pb2.DESCRIPTOR,google_dot_ads_dot_googleads__v3_dot_proto_dot_enums_dot_campaign__experiment__traffic__split__type__pb2.DESCRIPTOR,google_dot_api_dot_field__behavior__pb2.DESCRIPTOR,google_dot_api_dot_resource__pb2.DESCRIPTOR,google_dot_protobuf_dot_wrappers__pb2.DESCRIPTOR,google_dot_api_dot_annotations__pb2.DESCRIPTOR,])
 
 
 
@@ -45,21 +46,21 @@ _CAMPAIGNEXPERIMENT = _descriptor.Descriptor(
       has_default_value=False, default_value=_b("").decode('utf-8'),
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR),
+      serialized_options=_b('\340A\005\372A-\n+googleads.googleapis.com/CampaignExperiment'), file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
       name='id', full_name='google.ads.googleads.v3.resources.CampaignExperiment.id', index=1,
       number=2, type=11, cpp_type=10, label=1,
       has_default_value=False, default_value=None,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR),
+      serialized_options=_b('\340A\003'), file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
       name='campaign_draft', full_name='google.ads.googleads.v3.resources.CampaignExperiment.campaign_draft', index=2,
       number=3, type=11, cpp_type=10, label=1,
       has_default_value=False, default_value=None,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR),
+      serialized_options=_b('\340A\005\372A(\n&googleads.googleapis.com/CampaignDraft'), file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
       name='name', full_name='google.ads.googleads.v3.resources.CampaignExperiment.name', index=3,
       number=4, type=11, cpp_type=10, label=1,
@@ -80,35 +81,35 @@ _CAMPAIGNEXPERIMENT = _descriptor.Descriptor(
       has_default_value=False, default_value=None,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR),
+      serialized_options=_b('\340A\005'), file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
       name='traffic_split_type', full_name='google.ads.googleads.v3.resources.CampaignExperiment.traffic_split_type', index=6,
       number=7, type=14, cpp_type=8, label=1,
       has_default_value=False, default_value=0,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR),
+      serialized_options=_b('\340A\005'), file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
       name='experiment_campaign', full_name='google.ads.googleads.v3.resources.CampaignExperiment.experiment_campaign', index=7,
       number=8, type=11, cpp_type=10, label=1,
       has_default_value=False, default_value=None,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR),
+      serialized_options=_b('\340A\003\372A#\n!googleads.googleapis.com/Campaign'), file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
       name='status', full_name='google.ads.googleads.v3.resources.CampaignExperiment.status', index=8,
       number=9, type=14, cpp_type=8, label=1,
       has_default_value=False, default_value=0,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR),
+      serialized_options=_b('\340A\003'), file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
       name='long_running_operation', full_name='google.ads.googleads.v3.resources.CampaignExperiment.long_running_operation', index=9,
       number=10, type=11, cpp_type=10, label=1,
       has_default_value=False, default_value=None,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR),
+      serialized_options=_b('\340A\003'), file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
       name='start_date', full_name='google.ads.googleads.v3.resources.CampaignExperiment.start_date', index=10,
       number=11, type=11, cpp_type=10, label=1,
@@ -135,8 +136,8 @@ _CAMPAIGNEXPERIMENT = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=346,
-  serialized_end=1209,
+  serialized_start=379,
+  serialized_end=1411,
 )
 
 _CAMPAIGNEXPERIMENT.fields_by_name['id'].message_type = google_dot_protobuf_dot_wrappers__pb2._INT64VALUE
@@ -163,13 +164,15 @@ CampaignExperiment = _reflection.GeneratedProtocolMessageType('CampaignExperimen
   
   Attributes:
       resource_name:
-          The resource name of the campaign experiment. Campaign
-          experiment resource names have the form:  ``customers/{custome
-          r_id}/campaignExperiments/{campaign_experiment_id}``
+          Immutable. The resource name of the campaign experiment.
+          Campaign experiment resource names have the form:  ``customers
+          /{customer_id}/campaignExperiments/{campaign_experiment_id}``
       id:
-          The ID of the campaign experiment.  This field is read-only.
+          Output only. The ID of the campaign experiment.  This field is
+          read-only.
       campaign_draft:
-          The campaign draft with staged changes to the base campaign.
+          Immutable. The campaign draft with staged changes to the base
+          campaign.
       name:
           The name of the campaign experiment.  This field is required
           when creating new campaign experiments and must not conflict
@@ -180,21 +183,23 @@ CampaignExperiment = _reflection.GeneratedProtocolMessageType('CampaignExperimen
       description:
           The description of the experiment.
       traffic_split_percent:
-          Share of traffic directed to experiment as a percent (must be
-          between 1 and 99 inclusive. Base campaign receives the
-          remainder of the traffic (100 - traffic\_split\_percent).
-          Required for create.
+          Immutable. Share of traffic directed to experiment as a
+          percent (must be between 1 and 99 inclusive. Base campaign
+          receives the remainder of the traffic (100 -
+          traffic\_split\_percent). Required for create.
       traffic_split_type:
-          Determines the behavior of the traffic split.
+          Immutable. Determines the behavior of the traffic split.
       experiment_campaign:
-          The experiment campaign, as opposed to the base campaign.
+          Output only. The experiment campaign, as opposed to the base
+          campaign.
       status:
-          The status of the campaign experiment. This field is read-
-          only.
+          Output only. The status of the campaign experiment. This field
+          is read-only.
       long_running_operation:
-          The resource name of the long-running operation that can be
-          used to poll for completion of experiment create or promote.
-          The most recent long running operation is returned.
+          Output only. The resource name of the long-running operation
+          that can be used to poll for completion of experiment create
+          or promote. The most recent long running operation is
+          returned.
       start_date:
           Date when the campaign experiment starts. By default, the
           experiment starts now or on the campaign's start date,
@@ -215,5 +220,13 @@ _sym_db.RegisterMessage(CampaignExperiment)
 
 
 DESCRIPTOR._options = None
+_CAMPAIGNEXPERIMENT.fields_by_name['resource_name']._options = None
+_CAMPAIGNEXPERIMENT.fields_by_name['id']._options = None
+_CAMPAIGNEXPERIMENT.fields_by_name['campaign_draft']._options = None
+_CAMPAIGNEXPERIMENT.fields_by_name['traffic_split_percent']._options = None
+_CAMPAIGNEXPERIMENT.fields_by_name['traffic_split_type']._options = None
+_CAMPAIGNEXPERIMENT.fields_by_name['experiment_campaign']._options = None
+_CAMPAIGNEXPERIMENT.fields_by_name['status']._options = None
+_CAMPAIGNEXPERIMENT.fields_by_name['long_running_operation']._options = None
 _CAMPAIGNEXPERIMENT._options = None
 # @@protoc_insertion_point(module_scope)

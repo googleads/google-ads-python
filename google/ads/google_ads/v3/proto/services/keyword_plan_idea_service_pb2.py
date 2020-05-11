@@ -16,6 +16,7 @@ _sym_db = _symbol_database.Default()
 from google.ads.google_ads.v3.proto.common import keyword_plan_common_pb2 as google_dot_ads_dot_googleads__v3_dot_proto_dot_common_dot_keyword__plan__common__pb2
 from google.ads.google_ads.v3.proto.enums import keyword_plan_network_pb2 as google_dot_ads_dot_googleads__v3_dot_proto_dot_enums_dot_keyword__plan__network__pb2
 from google.api import annotations_pb2 as google_dot_api_dot_annotations__pb2
+from google.api import field_behavior_pb2 as google_dot_api_dot_field__behavior__pb2
 from google.protobuf import wrappers_pb2 as google_dot_protobuf_dot_wrappers__pb2
 from google.api import client_pb2 as google_dot_api_dot_client__pb2
 
@@ -25,9 +26,9 @@ DESCRIPTOR = _descriptor.FileDescriptor(
   package='google.ads.googleads.v3.services',
   syntax='proto3',
   serialized_options=_b('\n$com.google.ads.googleads.v3.servicesB\033KeywordPlanIdeaServiceProtoP\001ZHgoogle.golang.org/genproto/googleapis/ads/googleads/v3/services;services\242\002\003GAA\252\002 Google.Ads.GoogleAds.V3.Services\312\002 Google\\Ads\\GoogleAds\\V3\\Services\352\002$Google::Ads::GoogleAds::V3::Services'),
-  serialized_pb=_b('\nFgoogle/ads/googleads_v3/proto/services/keyword_plan_idea_service.proto\x12 google.ads.googleads.v3.services\x1a>google/ads/googleads_v3/proto/common/keyword_plan_common.proto\x1a>google/ads/googleads_v3/proto/enums/keyword_plan_network.proto\x1a\x1cgoogle/api/annotations.proto\x1a\x1egoogle/protobuf/wrappers.proto\x1a\x17google/api/client.proto\"\xe9\x03\n\x1bGenerateKeywordIdeasRequest\x12\x13\n\x0b\x63ustomer_id\x18\x01 \x01(\t\x12.\n\x08language\x18\x07 \x01(\x0b\x32\x1c.google.protobuf.StringValue\x12:\n\x14geo_target_constants\x18\x08 \x03(\x0b\x32\x1c.google.protobuf.StringValue\x12\x66\n\x14keyword_plan_network\x18\t \x01(\x0e\x32H.google.ads.googleads.v3.enums.KeywordPlanNetworkEnum.KeywordPlanNetwork\x12S\n\x14keyword_and_url_seed\x18\x02 \x01(\x0b\x32\x33.google.ads.googleads.v3.services.KeywordAndUrlSeedH\x00\x12\x45\n\x0ckeyword_seed\x18\x03 \x01(\x0b\x32-.google.ads.googleads.v3.services.KeywordSeedH\x00\x12=\n\x08url_seed\x18\x05 \x01(\x0b\x32).google.ads.googleads.v3.services.UrlSeedH\x00\x42\x06\n\x04seed\"n\n\x11KeywordAndUrlSeed\x12)\n\x03url\x18\x01 \x01(\x0b\x32\x1c.google.protobuf.StringValue\x12.\n\x08keywords\x18\x02 \x03(\x0b\x32\x1c.google.protobuf.StringValue\"=\n\x0bKeywordSeed\x12.\n\x08keywords\x18\x01 \x03(\x0b\x32\x1c.google.protobuf.StringValue\"4\n\x07UrlSeed\x12)\n\x03url\x18\x01 \x01(\x0b\x32\x1c.google.protobuf.StringValue\"k\n\x1bGenerateKeywordIdeaResponse\x12L\n\x07results\x18\x01 \x03(\x0b\x32;.google.ads.googleads.v3.services.GenerateKeywordIdeaResult\"\xa3\x01\n\x19GenerateKeywordIdeaResult\x12*\n\x04text\x18\x02 \x01(\x0b\x32\x1c.google.protobuf.StringValue\x12Z\n\x14keyword_idea_metrics\x18\x03 \x01(\x0b\x32<.google.ads.googleads.v3.common.KeywordPlanHistoricalMetrics2\x8b\x02\n\x16KeywordPlanIdeaService\x12\xd3\x01\n\x14GenerateKeywordIdeas\x12=.google.ads.googleads.v3.services.GenerateKeywordIdeasRequest\x1a=.google.ads.googleads.v3.services.GenerateKeywordIdeaResponse\"=\x82\xd3\xe4\x93\x02\x37\"2/v3/customers/{customer_id=*}:generateKeywordIdeas:\x01*\x1a\x1b\xca\x41\x18googleads.googleapis.comB\x82\x02\n$com.google.ads.googleads.v3.servicesB\x1bKeywordPlanIdeaServiceProtoP\x01ZHgoogle.golang.org/genproto/googleapis/ads/googleads/v3/services;services\xa2\x02\x03GAA\xaa\x02 Google.Ads.GoogleAds.V3.Services\xca\x02 Google\\Ads\\GoogleAds\\V3\\Services\xea\x02$Google::Ads::GoogleAds::V3::Servicesb\x06proto3')
+  serialized_pb=_b('\nFgoogle/ads/googleads_v3/proto/services/keyword_plan_idea_service.proto\x12 google.ads.googleads.v3.services\x1a>google/ads/googleads_v3/proto/common/keyword_plan_common.proto\x1a>google/ads/googleads_v3/proto/enums/keyword_plan_network.proto\x1a\x1cgoogle/api/annotations.proto\x1a\x1fgoogle/api/field_behavior.proto\x1a\x1egoogle/protobuf/wrappers.proto\x1a\x17google/api/client.proto\"\xee\x03\n\x1bGenerateKeywordIdeasRequest\x12\x13\n\x0b\x63ustomer_id\x18\x01 \x01(\t\x12\x33\n\x08language\x18\x07 \x01(\x0b\x32\x1c.google.protobuf.StringValueB\x03\xe0\x41\x02\x12:\n\x14geo_target_constants\x18\x08 \x03(\x0b\x32\x1c.google.protobuf.StringValue\x12\x66\n\x14keyword_plan_network\x18\t \x01(\x0e\x32H.google.ads.googleads.v3.enums.KeywordPlanNetworkEnum.KeywordPlanNetwork\x12S\n\x14keyword_and_url_seed\x18\x02 \x01(\x0b\x32\x33.google.ads.googleads.v3.services.KeywordAndUrlSeedH\x00\x12\x45\n\x0ckeyword_seed\x18\x03 \x01(\x0b\x32-.google.ads.googleads.v3.services.KeywordSeedH\x00\x12=\n\x08url_seed\x18\x05 \x01(\x0b\x32).google.ads.googleads.v3.services.UrlSeedH\x00\x42\x06\n\x04seed\"n\n\x11KeywordAndUrlSeed\x12)\n\x03url\x18\x01 \x01(\x0b\x32\x1c.google.protobuf.StringValue\x12.\n\x08keywords\x18\x02 \x03(\x0b\x32\x1c.google.protobuf.StringValue\"=\n\x0bKeywordSeed\x12.\n\x08keywords\x18\x01 \x03(\x0b\x32\x1c.google.protobuf.StringValue\"4\n\x07UrlSeed\x12)\n\x03url\x18\x01 \x01(\x0b\x32\x1c.google.protobuf.StringValue\"k\n\x1bGenerateKeywordIdeaResponse\x12L\n\x07results\x18\x01 \x03(\x0b\x32;.google.ads.googleads.v3.services.GenerateKeywordIdeaResult\"\xa3\x01\n\x19GenerateKeywordIdeaResult\x12*\n\x04text\x18\x02 \x01(\x0b\x32\x1c.google.protobuf.StringValue\x12Z\n\x14keyword_idea_metrics\x18\x03 \x01(\x0b\x32<.google.ads.googleads.v3.common.KeywordPlanHistoricalMetrics2\x8b\x02\n\x16KeywordPlanIdeaService\x12\xd3\x01\n\x14GenerateKeywordIdeas\x12=.google.ads.googleads.v3.services.GenerateKeywordIdeasRequest\x1a=.google.ads.googleads.v3.services.GenerateKeywordIdeaResponse\"=\x82\xd3\xe4\x93\x02\x37\"2/v3/customers/{customer_id=*}:generateKeywordIdeas:\x01*\x1a\x1b\xca\x41\x18googleads.googleapis.comB\x82\x02\n$com.google.ads.googleads.v3.servicesB\x1bKeywordPlanIdeaServiceProtoP\x01ZHgoogle.golang.org/genproto/googleapis/ads/googleads/v3/services;services\xa2\x02\x03GAA\xaa\x02 Google.Ads.GoogleAds.V3.Services\xca\x02 Google\\Ads\\GoogleAds\\V3\\Services\xea\x02$Google::Ads::GoogleAds::V3::Servicesb\x06proto3')
   ,
-  dependencies=[google_dot_ads_dot_googleads__v3_dot_proto_dot_common_dot_keyword__plan__common__pb2.DESCRIPTOR,google_dot_ads_dot_googleads__v3_dot_proto_dot_enums_dot_keyword__plan__network__pb2.DESCRIPTOR,google_dot_api_dot_annotations__pb2.DESCRIPTOR,google_dot_protobuf_dot_wrappers__pb2.DESCRIPTOR,google_dot_api_dot_client__pb2.DESCRIPTOR,])
+  dependencies=[google_dot_ads_dot_googleads__v3_dot_proto_dot_common_dot_keyword__plan__common__pb2.DESCRIPTOR,google_dot_ads_dot_googleads__v3_dot_proto_dot_enums_dot_keyword__plan__network__pb2.DESCRIPTOR,google_dot_api_dot_annotations__pb2.DESCRIPTOR,google_dot_api_dot_field__behavior__pb2.DESCRIPTOR,google_dot_protobuf_dot_wrappers__pb2.DESCRIPTOR,google_dot_api_dot_client__pb2.DESCRIPTOR,])
 
 
 
@@ -52,7 +53,7 @@ _GENERATEKEYWORDIDEASREQUEST = _descriptor.Descriptor(
       has_default_value=False, default_value=None,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR),
+      serialized_options=_b('\340A\002'), file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
       name='geo_target_constants', full_name='google.ads.googleads.v3.services.GenerateKeywordIdeasRequest.geo_target_constants', index=2,
       number=8, type=11, cpp_type=10, label=3,
@@ -103,8 +104,8 @@ _GENERATEKEYWORDIDEASREQUEST = _descriptor.Descriptor(
       name='seed', full_name='google.ads.googleads.v3.services.GenerateKeywordIdeasRequest.seed',
       index=0, containing_type=None, fields=[]),
   ],
-  serialized_start=324,
-  serialized_end=813,
+  serialized_start=357,
+  serialized_end=851,
 )
 
 
@@ -141,8 +142,8 @@ _KEYWORDANDURLSEED = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=815,
-  serialized_end=925,
+  serialized_start=853,
+  serialized_end=963,
 )
 
 
@@ -172,8 +173,8 @@ _KEYWORDSEED = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=927,
-  serialized_end=988,
+  serialized_start=965,
+  serialized_end=1026,
 )
 
 
@@ -203,8 +204,8 @@ _URLSEED = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=990,
-  serialized_end=1042,
+  serialized_start=1028,
+  serialized_end=1080,
 )
 
 
@@ -234,8 +235,8 @@ _GENERATEKEYWORDIDEARESPONSE = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=1044,
-  serialized_end=1151,
+  serialized_start=1082,
+  serialized_end=1189,
 )
 
 
@@ -272,8 +273,8 @@ _GENERATEKEYWORDIDEARESULT = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=1154,
-  serialized_end=1317,
+  serialized_start=1192,
+  serialized_end=1355,
 )
 
 _GENERATEKEYWORDIDEASREQUEST.fields_by_name['language'].message_type = google_dot_protobuf_dot_wrappers__pb2._STRINGVALUE
@@ -317,7 +318,8 @@ GenerateKeywordIdeasRequest = _reflection.GeneratedProtocolMessageType('Generate
       customer_id:
           The ID of the customer with the recommendation.
       language:
-          The resource name of the language to target. Required
+          Required. The resource name of the language to target.
+          Required
       geo_target_constants:
           The resource names of the location to target. Max 10
       keyword_plan_network:
@@ -422,6 +424,7 @@ _sym_db.RegisterMessage(GenerateKeywordIdeaResult)
 
 
 DESCRIPTOR._options = None
+_GENERATEKEYWORDIDEASREQUEST.fields_by_name['language']._options = None
 
 _KEYWORDPLANIDEASERVICE = _descriptor.ServiceDescriptor(
   name='KeywordPlanIdeaService',
@@ -429,8 +432,8 @@ _KEYWORDPLANIDEASERVICE = _descriptor.ServiceDescriptor(
   file=DESCRIPTOR,
   index=0,
   serialized_options=_b('\312A\030googleads.googleapis.com'),
-  serialized_start=1320,
-  serialized_end=1587,
+  serialized_start=1358,
+  serialized_end=1625,
   methods=[
   _descriptor.MethodDescriptor(
     name='GenerateKeywordIdeas',

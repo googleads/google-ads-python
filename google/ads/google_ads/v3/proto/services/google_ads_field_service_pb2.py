@@ -17,6 +17,7 @@ from google.ads.google_ads.v3.proto.resources import google_ads_field_pb2 as goo
 from google.api import annotations_pb2 as google_dot_api_dot_annotations__pb2
 from google.api import client_pb2 as google_dot_api_dot_client__pb2
 from google.api import field_behavior_pb2 as google_dot_api_dot_field__behavior__pb2
+from google.api import resource_pb2 as google_dot_api_dot_resource__pb2
 
 
 DESCRIPTOR = _descriptor.FileDescriptor(
@@ -24,9 +25,9 @@ DESCRIPTOR = _descriptor.FileDescriptor(
   package='google.ads.googleads.v3.services',
   syntax='proto3',
   serialized_options=_b('\n$com.google.ads.googleads.v3.servicesB\032GoogleAdsFieldServiceProtoP\001ZHgoogle.golang.org/genproto/googleapis/ads/googleads/v3/services;services\242\002\003GAA\252\002 Google.Ads.GoogleAds.V3.Services\312\002 Google\\Ads\\GoogleAds\\V3\\Services\352\002$Google::Ads::GoogleAds::V3::Services'),
-  serialized_pb=_b('\nEgoogle/ads/googleads_v3/proto/services/google_ads_field_service.proto\x12 google.ads.googleads.v3.services\x1a>google/ads/googleads_v3/proto/resources/google_ads_field.proto\x1a\x1cgoogle/api/annotations.proto\x1a\x17google/api/client.proto\x1a\x1fgoogle/api/field_behavior.proto\"6\n\x18GetGoogleAdsFieldRequest\x12\x1a\n\rresource_name\x18\x01 \x01(\tB\x03\xe0\x41\x02\"Y\n\x1cSearchGoogleAdsFieldsRequest\x12\x12\n\x05query\x18\x01 \x01(\tB\x03\xe0\x41\x02\x12\x12\n\npage_token\x18\x02 \x01(\t\x12\x11\n\tpage_size\x18\x03 \x01(\x05\"\x99\x01\n\x1dSearchGoogleAdsFieldsResponse\x12\x42\n\x07results\x18\x01 \x03(\x0b\x32\x31.google.ads.googleads.v3.resources.GoogleAdsField\x12\x17\n\x0fnext_page_token\x18\x02 \x01(\t\x12\x1b\n\x13total_results_count\x18\x03 \x01(\x03\x32\xc2\x03\n\x15GoogleAdsFieldService\x12\xc1\x01\n\x11GetGoogleAdsField\x12:.google.ads.googleads.v3.services.GetGoogleAdsFieldRequest\x1a\x31.google.ads.googleads.v3.resources.GoogleAdsField\"=\x82\xd3\xe4\x93\x02\'\x12%/v3/{resource_name=googleAdsFields/*}\xda\x41\rresource_name\x12\xc7\x01\n\x15SearchGoogleAdsFields\x12>.google.ads.googleads.v3.services.SearchGoogleAdsFieldsRequest\x1a?.google.ads.googleads.v3.services.SearchGoogleAdsFieldsResponse\"-\x82\xd3\xe4\x93\x02\x1f\"\x1a/v3/googleAdsFields:search:\x01*\xda\x41\x05query\x1a\x1b\xca\x41\x18googleads.googleapis.comB\x81\x02\n$com.google.ads.googleads.v3.servicesB\x1aGoogleAdsFieldServiceProtoP\x01ZHgoogle.golang.org/genproto/googleapis/ads/googleads/v3/services;services\xa2\x02\x03GAA\xaa\x02 Google.Ads.GoogleAds.V3.Services\xca\x02 Google\\Ads\\GoogleAds\\V3\\Services\xea\x02$Google::Ads::GoogleAds::V3::Servicesb\x06proto3')
+  serialized_pb=_b('\nEgoogle/ads/googleads_v3/proto/services/google_ads_field_service.proto\x12 google.ads.googleads.v3.services\x1a>google/ads/googleads_v3/proto/resources/google_ads_field.proto\x1a\x1cgoogle/api/annotations.proto\x1a\x17google/api/client.proto\x1a\x1fgoogle/api/field_behavior.proto\x1a\x19google/api/resource.proto\"b\n\x18GetGoogleAdsFieldRequest\x12\x46\n\rresource_name\x18\x01 \x01(\tB/\xe0\x41\x02\xfa\x41)\n\'googleads.googleapis.com/GoogleAdsField\"Y\n\x1cSearchGoogleAdsFieldsRequest\x12\x12\n\x05query\x18\x01 \x01(\tB\x03\xe0\x41\x02\x12\x12\n\npage_token\x18\x02 \x01(\t\x12\x11\n\tpage_size\x18\x03 \x01(\x05\"\x99\x01\n\x1dSearchGoogleAdsFieldsResponse\x12\x42\n\x07results\x18\x01 \x03(\x0b\x32\x31.google.ads.googleads.v3.resources.GoogleAdsField\x12\x17\n\x0fnext_page_token\x18\x02 \x01(\t\x12\x1b\n\x13total_results_count\x18\x03 \x01(\x03\x32\xc2\x03\n\x15GoogleAdsFieldService\x12\xc1\x01\n\x11GetGoogleAdsField\x12:.google.ads.googleads.v3.services.GetGoogleAdsFieldRequest\x1a\x31.google.ads.googleads.v3.resources.GoogleAdsField\"=\x82\xd3\xe4\x93\x02\'\x12%/v3/{resource_name=googleAdsFields/*}\xda\x41\rresource_name\x12\xc7\x01\n\x15SearchGoogleAdsFields\x12>.google.ads.googleads.v3.services.SearchGoogleAdsFieldsRequest\x1a?.google.ads.googleads.v3.services.SearchGoogleAdsFieldsResponse\"-\x82\xd3\xe4\x93\x02\x1f\"\x1a/v3/googleAdsFields:search:\x01*\xda\x41\x05query\x1a\x1b\xca\x41\x18googleads.googleapis.comB\x81\x02\n$com.google.ads.googleads.v3.servicesB\x1aGoogleAdsFieldServiceProtoP\x01ZHgoogle.golang.org/genproto/googleapis/ads/googleads/v3/services;services\xa2\x02\x03GAA\xaa\x02 Google.Ads.GoogleAds.V3.Services\xca\x02 Google\\Ads\\GoogleAds\\V3\\Services\xea\x02$Google::Ads::GoogleAds::V3::Servicesb\x06proto3')
   ,
-  dependencies=[google_dot_ads_dot_googleads__v3_dot_proto_dot_resources_dot_google__ads__field__pb2.DESCRIPTOR,google_dot_api_dot_annotations__pb2.DESCRIPTOR,google_dot_api_dot_client__pb2.DESCRIPTOR,google_dot_api_dot_field__behavior__pb2.DESCRIPTOR,])
+  dependencies=[google_dot_ads_dot_googleads__v3_dot_proto_dot_resources_dot_google__ads__field__pb2.DESCRIPTOR,google_dot_api_dot_annotations__pb2.DESCRIPTOR,google_dot_api_dot_client__pb2.DESCRIPTOR,google_dot_api_dot_field__behavior__pb2.DESCRIPTOR,google_dot_api_dot_resource__pb2.DESCRIPTOR,])
 
 
 
@@ -44,7 +45,7 @@ _GETGOOGLEADSFIELDREQUEST = _descriptor.Descriptor(
       has_default_value=False, default_value=_b("").decode('utf-8'),
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
-      serialized_options=_b('\340A\002'), file=DESCRIPTOR),
+      serialized_options=_b('\340A\002\372A)\n\'googleads.googleapis.com/GoogleAdsField'), file=DESCRIPTOR),
   ],
   extensions=[
   ],
@@ -57,8 +58,8 @@ _GETGOOGLEADSFIELDREQUEST = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=259,
-  serialized_end=313,
+  serialized_start=286,
+  serialized_end=384,
 )
 
 
@@ -102,8 +103,8 @@ _SEARCHGOOGLEADSFIELDSREQUEST = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=315,
-  serialized_end=404,
+  serialized_start=386,
+  serialized_end=475,
 )
 
 
@@ -147,8 +148,8 @@ _SEARCHGOOGLEADSFIELDSRESPONSE = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=407,
-  serialized_end=560,
+  serialized_start=478,
+  serialized_end=631,
 )
 
 _SEARCHGOOGLEADSFIELDSRESPONSE.fields_by_name['results'].message_type = google_dot_ads_dot_googleads__v3_dot_proto_dot_resources_dot_google__ads__field__pb2._GOOGLEADSFIELD
@@ -233,8 +234,8 @@ _GOOGLEADSFIELDSERVICE = _descriptor.ServiceDescriptor(
   file=DESCRIPTOR,
   index=0,
   serialized_options=_b('\312A\030googleads.googleapis.com'),
-  serialized_start=563,
-  serialized_end=1013,
+  serialized_start=634,
+  serialized_end=1084,
   methods=[
   _descriptor.MethodDescriptor(
     name='GetGoogleAdsField',

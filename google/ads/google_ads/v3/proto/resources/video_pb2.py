@@ -13,6 +13,7 @@ from google.protobuf import symbol_database as _symbol_database
 _sym_db = _symbol_database.Default()
 
 
+from google.api import field_behavior_pb2 as google_dot_api_dot_field__behavior__pb2
 from google.api import resource_pb2 as google_dot_api_dot_resource__pb2
 from google.protobuf import wrappers_pb2 as google_dot_protobuf_dot_wrappers__pb2
 from google.api import annotations_pb2 as google_dot_api_dot_annotations__pb2
@@ -23,9 +24,9 @@ DESCRIPTOR = _descriptor.FileDescriptor(
   package='google.ads.googleads.v3.resources',
   syntax='proto3',
   serialized_options=_b('\n%com.google.ads.googleads.v3.resourcesB\nVideoProtoP\001ZJgoogle.golang.org/genproto/googleapis/ads/googleads/v3/resources;resources\242\002\003GAA\252\002!Google.Ads.GoogleAds.V3.Resources\312\002!Google\\Ads\\GoogleAds\\V3\\Resources\352\002%Google::Ads::GoogleAds::V3::Resources'),
-  serialized_pb=_b('\n3google/ads/googleads_v3/proto/resources/video.proto\x12!google.ads.googleads.v3.resources\x1a\x19google/api/resource.proto\x1a\x1egoogle/protobuf/wrappers.proto\x1a\x1cgoogle/api/annotations.proto\"\xa7\x02\n\x05Video\x12\x15\n\rresource_name\x18\x01 \x01(\t\x12(\n\x02id\x18\x02 \x01(\x0b\x32\x1c.google.protobuf.StringValue\x12\x30\n\nchannel_id\x18\x03 \x01(\x0b\x32\x1c.google.protobuf.StringValue\x12\x34\n\x0f\x64uration_millis\x18\x04 \x01(\x0b\x32\x1b.google.protobuf.Int64Value\x12+\n\x05title\x18\x05 \x01(\x0b\x32\x1c.google.protobuf.StringValue:H\xea\x41\x45\n\x1egoogleads.googleapis.com/Video\x12#customers/{customer}/videos/{video}B\xf7\x01\n%com.google.ads.googleads.v3.resourcesB\nVideoProtoP\x01ZJgoogle.golang.org/genproto/googleapis/ads/googleads/v3/resources;resources\xa2\x02\x03GAA\xaa\x02!Google.Ads.GoogleAds.V3.Resources\xca\x02!Google\\Ads\\GoogleAds\\V3\\Resources\xea\x02%Google::Ads::GoogleAds::V3::Resourcesb\x06proto3')
+  serialized_pb=_b('\n3google/ads/googleads_v3/proto/resources/video.proto\x12!google.ads.googleads.v3.resources\x1a\x1fgoogle/api/field_behavior.proto\x1a\x19google/api/resource.proto\x1a\x1egoogle/protobuf/wrappers.proto\x1a\x1cgoogle/api/annotations.proto\"\xe3\x02\n\x05Video\x12=\n\rresource_name\x18\x01 \x01(\tB&\xe0\x41\x03\xfa\x41 \n\x1egoogleads.googleapis.com/Video\x12-\n\x02id\x18\x02 \x01(\x0b\x32\x1c.google.protobuf.StringValueB\x03\xe0\x41\x03\x12\x35\n\nchannel_id\x18\x03 \x01(\x0b\x32\x1c.google.protobuf.StringValueB\x03\xe0\x41\x03\x12\x39\n\x0f\x64uration_millis\x18\x04 \x01(\x0b\x32\x1b.google.protobuf.Int64ValueB\x03\xe0\x41\x03\x12\x30\n\x05title\x18\x05 \x01(\x0b\x32\x1c.google.protobuf.StringValueB\x03\xe0\x41\x03:H\xea\x41\x45\n\x1egoogleads.googleapis.com/Video\x12#customers/{customer}/videos/{video}B\xf7\x01\n%com.google.ads.googleads.v3.resourcesB\nVideoProtoP\x01ZJgoogle.golang.org/genproto/googleapis/ads/googleads/v3/resources;resources\xa2\x02\x03GAA\xaa\x02!Google.Ads.GoogleAds.V3.Resources\xca\x02!Google\\Ads\\GoogleAds\\V3\\Resources\xea\x02%Google::Ads::GoogleAds::V3::Resourcesb\x06proto3')
   ,
-  dependencies=[google_dot_api_dot_resource__pb2.DESCRIPTOR,google_dot_protobuf_dot_wrappers__pb2.DESCRIPTOR,google_dot_api_dot_annotations__pb2.DESCRIPTOR,])
+  dependencies=[google_dot_api_dot_field__behavior__pb2.DESCRIPTOR,google_dot_api_dot_resource__pb2.DESCRIPTOR,google_dot_protobuf_dot_wrappers__pb2.DESCRIPTOR,google_dot_api_dot_annotations__pb2.DESCRIPTOR,])
 
 
 
@@ -43,35 +44,35 @@ _VIDEO = _descriptor.Descriptor(
       has_default_value=False, default_value=_b("").decode('utf-8'),
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR),
+      serialized_options=_b('\340A\003\372A \n\036googleads.googleapis.com/Video'), file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
       name='id', full_name='google.ads.googleads.v3.resources.Video.id', index=1,
       number=2, type=11, cpp_type=10, label=1,
       has_default_value=False, default_value=None,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR),
+      serialized_options=_b('\340A\003'), file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
       name='channel_id', full_name='google.ads.googleads.v3.resources.Video.channel_id', index=2,
       number=3, type=11, cpp_type=10, label=1,
       has_default_value=False, default_value=None,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR),
+      serialized_options=_b('\340A\003'), file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
       name='duration_millis', full_name='google.ads.googleads.v3.resources.Video.duration_millis', index=3,
       number=4, type=11, cpp_type=10, label=1,
       has_default_value=False, default_value=None,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR),
+      serialized_options=_b('\340A\003'), file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
       name='title', full_name='google.ads.googleads.v3.resources.Video.title', index=4,
       number=5, type=11, cpp_type=10, label=1,
       has_default_value=False, default_value=None,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR),
+      serialized_options=_b('\340A\003'), file=DESCRIPTOR),
   ],
   extensions=[
   ],
@@ -84,8 +85,8 @@ _VIDEO = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=180,
-  serialized_end=475,
+  serialized_start=213,
+  serialized_end=568,
 )
 
 _VIDEO.fields_by_name['id'].message_type = google_dot_protobuf_dot_wrappers__pb2._STRINGVALUE
@@ -104,16 +105,17 @@ Video = _reflection.GeneratedProtocolMessageType('Video', (_message.Message,), d
   
   Attributes:
       resource_name:
-          The resource name of the video. Video resource names have the
-          form:  ``customers/{customer_id}/videos/{video_id}``
+          Output only. The resource name of the video. Video resource
+          names have the form:
+          ``customers/{customer_id}/videos/{video_id}``
       id:
-          The ID of the video.
+          Output only. The ID of the video.
       channel_id:
-          The owner channel id of the video.
+          Output only. The owner channel id of the video.
       duration_millis:
-          The duration of the video in milliseconds.
+          Output only. The duration of the video in milliseconds.
       title:
-          The title of the video.
+          Output only. The title of the video.
   """,
   # @@protoc_insertion_point(class_scope:google.ads.googleads.v3.resources.Video)
   ))
@@ -121,5 +123,10 @@ _sym_db.RegisterMessage(Video)
 
 
 DESCRIPTOR._options = None
+_VIDEO.fields_by_name['resource_name']._options = None
+_VIDEO.fields_by_name['id']._options = None
+_VIDEO.fields_by_name['channel_id']._options = None
+_VIDEO.fields_by_name['duration_millis']._options = None
+_VIDEO.fields_by_name['title']._options = None
 _VIDEO._options = None
 # @@protoc_insertion_point(module_scope)

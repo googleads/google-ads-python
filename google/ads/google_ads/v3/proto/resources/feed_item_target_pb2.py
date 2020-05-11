@@ -17,6 +17,7 @@ from google.ads.google_ads.v3.proto.common import criteria_pb2 as google_dot_ads
 from google.ads.google_ads.v3.proto.enums import feed_item_target_device_pb2 as google_dot_ads_dot_googleads__v3_dot_proto_dot_enums_dot_feed__item__target__device__pb2
 from google.ads.google_ads.v3.proto.enums import feed_item_target_status_pb2 as google_dot_ads_dot_googleads__v3_dot_proto_dot_enums_dot_feed__item__target__status__pb2
 from google.ads.google_ads.v3.proto.enums import feed_item_target_type_pb2 as google_dot_ads_dot_googleads__v3_dot_proto_dot_enums_dot_feed__item__target__type__pb2
+from google.api import field_behavior_pb2 as google_dot_api_dot_field__behavior__pb2
 from google.api import resource_pb2 as google_dot_api_dot_resource__pb2
 from google.protobuf import wrappers_pb2 as google_dot_protobuf_dot_wrappers__pb2
 from google.api import annotations_pb2 as google_dot_api_dot_annotations__pb2
@@ -27,9 +28,9 @@ DESCRIPTOR = _descriptor.FileDescriptor(
   package='google.ads.googleads.v3.resources',
   syntax='proto3',
   serialized_options=_b('\n%com.google.ads.googleads.v3.resourcesB\023FeedItemTargetProtoP\001ZJgoogle.golang.org/genproto/googleapis/ads/googleads/v3/resources;resources\242\002\003GAA\252\002!Google.Ads.GoogleAds.V3.Resources\312\002!Google\\Ads\\GoogleAds\\V3\\Resources\352\002%Google::Ads::GoogleAds::V3::Resources'),
-  serialized_pb=_b('\n>google/ads/googleads_v3/proto/resources/feed_item_target.proto\x12!google.ads.googleads.v3.resources\x1a\x33google/ads/googleads_v3/proto/common/criteria.proto\x1a\x41google/ads/googleads_v3/proto/enums/feed_item_target_device.proto\x1a\x41google/ads/googleads_v3/proto/enums/feed_item_target_status.proto\x1a?google/ads/googleads_v3/proto/enums/feed_item_target_type.proto\x1a\x19google/api/resource.proto\x1a\x1egoogle/protobuf/wrappers.proto\x1a\x1cgoogle/api/annotations.proto\"\xd2\x06\n\x0e\x46\x65\x65\x64ItemTarget\x12\x15\n\rresource_name\x18\x01 \x01(\t\x12/\n\tfeed_item\x18\x02 \x01(\x0b\x32\x1c.google.protobuf.StringValue\x12g\n\x15\x66\x65\x65\x64_item_target_type\x18\x03 \x01(\x0e\x32H.google.ads.googleads.v3.enums.FeedItemTargetTypeEnum.FeedItemTargetType\x12\x38\n\x13\x66\x65\x65\x64_item_target_id\x18\x06 \x01(\x0b\x32\x1b.google.protobuf.Int64Value\x12\\\n\x06status\x18\x0b \x01(\x0e\x32L.google.ads.googleads.v3.enums.FeedItemTargetStatusEnum.FeedItemTargetStatus\x12\x30\n\x08\x63\x61mpaign\x18\x04 \x01(\x0b\x32\x1c.google.protobuf.StringValueH\x00\x12\x30\n\x08\x61\x64_group\x18\x05 \x01(\x0b\x32\x1c.google.protobuf.StringValueH\x00\x12>\n\x07keyword\x18\x07 \x01(\x0b\x32+.google.ads.googleads.v3.common.KeywordInfoH\x00\x12;\n\x13geo_target_constant\x18\x08 \x01(\x0b\x32\x1c.google.protobuf.StringValueH\x00\x12^\n\x06\x64\x65vice\x18\t \x01(\x0e\x32L.google.ads.googleads.v3.enums.FeedItemTargetDeviceEnum.FeedItemTargetDeviceH\x00\x12\x45\n\x0b\x61\x64_schedule\x18\n \x01(\x0b\x32..google.ads.googleads.v3.common.AdScheduleInfoH\x00:e\xea\x41\x62\n\'googleads.googleapis.com/FeedItemTarget\x12\x37\x63ustomers/{customer}/feedItemTargets/{feed_item_target}B\x08\n\x06targetB\x80\x02\n%com.google.ads.googleads.v3.resourcesB\x13\x46\x65\x65\x64ItemTargetProtoP\x01ZJgoogle.golang.org/genproto/googleapis/ads/googleads/v3/resources;resources\xa2\x02\x03GAA\xaa\x02!Google.Ads.GoogleAds.V3.Resources\xca\x02!Google\\Ads\\GoogleAds\\V3\\Resources\xea\x02%Google::Ads::GoogleAds::V3::Resourcesb\x06proto3')
+  serialized_pb=_b('\n>google/ads/googleads_v3/proto/resources/feed_item_target.proto\x12!google.ads.googleads.v3.resources\x1a\x33google/ads/googleads_v3/proto/common/criteria.proto\x1a\x41google/ads/googleads_v3/proto/enums/feed_item_target_device.proto\x1a\x41google/ads/googleads_v3/proto/enums/feed_item_target_status.proto\x1a?google/ads/googleads_v3/proto/enums/feed_item_target_type.proto\x1a\x1fgoogle/api/field_behavior.proto\x1a\x19google/api/resource.proto\x1a\x1egoogle/protobuf/wrappers.proto\x1a\x1cgoogle/api/annotations.proto\"\xd5\x08\n\x0e\x46\x65\x65\x64ItemTarget\x12\x46\n\rresource_name\x18\x01 \x01(\tB/\xe0\x41\x05\xfa\x41)\n\'googleads.googleapis.com/FeedItemTarget\x12Z\n\tfeed_item\x18\x02 \x01(\x0b\x32\x1c.google.protobuf.StringValueB)\xe0\x41\x05\xfa\x41#\n!googleads.googleapis.com/FeedItem\x12l\n\x15\x66\x65\x65\x64_item_target_type\x18\x03 \x01(\x0e\x32H.google.ads.googleads.v3.enums.FeedItemTargetTypeEnum.FeedItemTargetTypeB\x03\xe0\x41\x03\x12=\n\x13\x66\x65\x65\x64_item_target_id\x18\x06 \x01(\x0b\x32\x1b.google.protobuf.Int64ValueB\x03\xe0\x41\x03\x12\x61\n\x06status\x18\x0b \x01(\x0e\x32L.google.ads.googleads.v3.enums.FeedItemTargetStatusEnum.FeedItemTargetStatusB\x03\xe0\x41\x03\x12[\n\x08\x63\x61mpaign\x18\x04 \x01(\x0b\x32\x1c.google.protobuf.StringValueB)\xe0\x41\x05\xfa\x41#\n!googleads.googleapis.com/CampaignH\x00\x12Z\n\x08\x61\x64_group\x18\x05 \x01(\x0b\x32\x1c.google.protobuf.StringValueB(\xe0\x41\x05\xfa\x41\"\n googleads.googleapis.com/AdGroupH\x00\x12\x43\n\x07keyword\x18\x07 \x01(\x0b\x32+.google.ads.googleads.v3.common.KeywordInfoB\x03\xe0\x41\x05H\x00\x12o\n\x13geo_target_constant\x18\x08 \x01(\x0b\x32\x1c.google.protobuf.StringValueB2\xe0\x41\x05\xfa\x41,\n*googleads.googleapis.com/GeoTargetConstantH\x00\x12\x63\n\x06\x64\x65vice\x18\t \x01(\x0e\x32L.google.ads.googleads.v3.enums.FeedItemTargetDeviceEnum.FeedItemTargetDeviceB\x03\xe0\x41\x05H\x00\x12J\n\x0b\x61\x64_schedule\x18\n \x01(\x0b\x32..google.ads.googleads.v3.common.AdScheduleInfoB\x03\xe0\x41\x05H\x00:e\xea\x41\x62\n\'googleads.googleapis.com/FeedItemTarget\x12\x37\x63ustomers/{customer}/feedItemTargets/{feed_item_target}B\x08\n\x06targetB\x80\x02\n%com.google.ads.googleads.v3.resourcesB\x13\x46\x65\x65\x64ItemTargetProtoP\x01ZJgoogle.golang.org/genproto/googleapis/ads/googleads/v3/resources;resources\xa2\x02\x03GAA\xaa\x02!Google.Ads.GoogleAds.V3.Resources\xca\x02!Google\\Ads\\GoogleAds\\V3\\Resources\xea\x02%Google::Ads::GoogleAds::V3::Resourcesb\x06proto3')
   ,
-  dependencies=[google_dot_ads_dot_googleads__v3_dot_proto_dot_common_dot_criteria__pb2.DESCRIPTOR,google_dot_ads_dot_googleads__v3_dot_proto_dot_enums_dot_feed__item__target__device__pb2.DESCRIPTOR,google_dot_ads_dot_googleads__v3_dot_proto_dot_enums_dot_feed__item__target__status__pb2.DESCRIPTOR,google_dot_ads_dot_googleads__v3_dot_proto_dot_enums_dot_feed__item__target__type__pb2.DESCRIPTOR,google_dot_api_dot_resource__pb2.DESCRIPTOR,google_dot_protobuf_dot_wrappers__pb2.DESCRIPTOR,google_dot_api_dot_annotations__pb2.DESCRIPTOR,])
+  dependencies=[google_dot_ads_dot_googleads__v3_dot_proto_dot_common_dot_criteria__pb2.DESCRIPTOR,google_dot_ads_dot_googleads__v3_dot_proto_dot_enums_dot_feed__item__target__device__pb2.DESCRIPTOR,google_dot_ads_dot_googleads__v3_dot_proto_dot_enums_dot_feed__item__target__status__pb2.DESCRIPTOR,google_dot_ads_dot_googleads__v3_dot_proto_dot_enums_dot_feed__item__target__type__pb2.DESCRIPTOR,google_dot_api_dot_field__behavior__pb2.DESCRIPTOR,google_dot_api_dot_resource__pb2.DESCRIPTOR,google_dot_protobuf_dot_wrappers__pb2.DESCRIPTOR,google_dot_api_dot_annotations__pb2.DESCRIPTOR,])
 
 
 
@@ -47,77 +48,77 @@ _FEEDITEMTARGET = _descriptor.Descriptor(
       has_default_value=False, default_value=_b("").decode('utf-8'),
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR),
+      serialized_options=_b('\340A\005\372A)\n\'googleads.googleapis.com/FeedItemTarget'), file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
       name='feed_item', full_name='google.ads.googleads.v3.resources.FeedItemTarget.feed_item', index=1,
       number=2, type=11, cpp_type=10, label=1,
       has_default_value=False, default_value=None,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR),
+      serialized_options=_b('\340A\005\372A#\n!googleads.googleapis.com/FeedItem'), file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
       name='feed_item_target_type', full_name='google.ads.googleads.v3.resources.FeedItemTarget.feed_item_target_type', index=2,
       number=3, type=14, cpp_type=8, label=1,
       has_default_value=False, default_value=0,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR),
+      serialized_options=_b('\340A\003'), file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
       name='feed_item_target_id', full_name='google.ads.googleads.v3.resources.FeedItemTarget.feed_item_target_id', index=3,
       number=6, type=11, cpp_type=10, label=1,
       has_default_value=False, default_value=None,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR),
+      serialized_options=_b('\340A\003'), file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
       name='status', full_name='google.ads.googleads.v3.resources.FeedItemTarget.status', index=4,
       number=11, type=14, cpp_type=8, label=1,
       has_default_value=False, default_value=0,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR),
+      serialized_options=_b('\340A\003'), file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
       name='campaign', full_name='google.ads.googleads.v3.resources.FeedItemTarget.campaign', index=5,
       number=4, type=11, cpp_type=10, label=1,
       has_default_value=False, default_value=None,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR),
+      serialized_options=_b('\340A\005\372A#\n!googleads.googleapis.com/Campaign'), file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
       name='ad_group', full_name='google.ads.googleads.v3.resources.FeedItemTarget.ad_group', index=6,
       number=5, type=11, cpp_type=10, label=1,
       has_default_value=False, default_value=None,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR),
+      serialized_options=_b('\340A\005\372A\"\n googleads.googleapis.com/AdGroup'), file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
       name='keyword', full_name='google.ads.googleads.v3.resources.FeedItemTarget.keyword', index=7,
       number=7, type=11, cpp_type=10, label=1,
       has_default_value=False, default_value=None,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR),
+      serialized_options=_b('\340A\005'), file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
       name='geo_target_constant', full_name='google.ads.googleads.v3.resources.FeedItemTarget.geo_target_constant', index=8,
       number=8, type=11, cpp_type=10, label=1,
       has_default_value=False, default_value=None,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR),
+      serialized_options=_b('\340A\005\372A,\n*googleads.googleapis.com/GeoTargetConstant'), file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
       name='device', full_name='google.ads.googleads.v3.resources.FeedItemTarget.device', index=9,
       number=9, type=14, cpp_type=8, label=1,
       has_default_value=False, default_value=0,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR),
+      serialized_options=_b('\340A\005'), file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
       name='ad_schedule', full_name='google.ads.googleads.v3.resources.FeedItemTarget.ad_schedule', index=10,
       number=10, type=11, cpp_type=10, label=1,
       has_default_value=False, default_value=None,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR),
+      serialized_options=_b('\340A\005'), file=DESCRIPTOR),
   ],
   extensions=[
   ],
@@ -133,8 +134,8 @@ _FEEDITEMTARGET = _descriptor.Descriptor(
       name='target', full_name='google.ads.googleads.v3.resources.FeedItemTarget.target',
       index=0, containing_type=None, fields=[]),
   ],
-  serialized_start=443,
-  serialized_end=1293,
+  serialized_start=476,
+  serialized_end=1585,
 )
 
 _FEEDITEMTARGET.fields_by_name['feed_item'].message_type = google_dot_protobuf_dot_wrappers__pb2._STRINGVALUE
@@ -177,33 +178,36 @@ FeedItemTarget = _reflection.GeneratedProtocolMessageType('FeedItemTarget', (_me
   
   Attributes:
       resource_name:
-          The resource name of the feed item target. Feed item target
-          resource names have the form: ``customers/{customer_id}/feedIt
-          emTargets/{feed_id}~{feed_item_id}~{feed_item_target_type}~{fe
-          ed_item_target_id}``
+          Immutable. The resource name of the feed item target. Feed
+          item target resource names have the form: ``customers/{custome
+          r_id}/feedItemTargets/{feed_id}~{feed_item_id}~{feed_item_targ
+          et_type}~{feed_item_target_id}``
       feed_item:
-          The feed item to which this feed item target belongs.
+          Immutable. The feed item to which this feed item target
+          belongs.
       feed_item_target_type:
-          The target type of this feed item target. This field is read-
-          only.
+          Output only. The target type of this feed item target. This
+          field is read-only.
       feed_item_target_id:
-          The ID of the targeted resource. This field is read-only.
+          Output only. The ID of the targeted resource. This field is
+          read-only.
       status:
-          Status of the feed item target. This field is read-only.
+          Output only. Status of the feed item target. This field is
+          read-only.
       target:
           The targeted resource.
       campaign:
-          The targeted campaign.
+          Immutable. The targeted campaign.
       ad_group:
-          The targeted ad group.
+          Immutable. The targeted ad group.
       keyword:
-          The targeted keyword.
+          Immutable. The targeted keyword.
       geo_target_constant:
-          The targeted geo target constant resource name.
+          Immutable. The targeted geo target constant resource name.
       device:
-          The targeted device.
+          Immutable. The targeted device.
       ad_schedule:
-          The targeted schedule.
+          Immutable. The targeted schedule.
   """,
   # @@protoc_insertion_point(class_scope:google.ads.googleads.v3.resources.FeedItemTarget)
   ))
@@ -211,5 +215,16 @@ _sym_db.RegisterMessage(FeedItemTarget)
 
 
 DESCRIPTOR._options = None
+_FEEDITEMTARGET.fields_by_name['resource_name']._options = None
+_FEEDITEMTARGET.fields_by_name['feed_item']._options = None
+_FEEDITEMTARGET.fields_by_name['feed_item_target_type']._options = None
+_FEEDITEMTARGET.fields_by_name['feed_item_target_id']._options = None
+_FEEDITEMTARGET.fields_by_name['status']._options = None
+_FEEDITEMTARGET.fields_by_name['campaign']._options = None
+_FEEDITEMTARGET.fields_by_name['ad_group']._options = None
+_FEEDITEMTARGET.fields_by_name['keyword']._options = None
+_FEEDITEMTARGET.fields_by_name['geo_target_constant']._options = None
+_FEEDITEMTARGET.fields_by_name['device']._options = None
+_FEEDITEMTARGET.fields_by_name['ad_schedule']._options = None
 _FEEDITEMTARGET._options = None
 # @@protoc_insertion_point(module_scope)

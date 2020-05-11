@@ -177,7 +177,7 @@ class ConversionAdjustmentUploadServiceClient(object):
 
                 If a dict is provided, it must be of the same form as the protobuf
                 message :class:`~google.ads.googleads_v3.types.ConversionAdjustment`
-            partial_failure (bool): If true, successful operations will be carried out and invalid
+            partial_failure (bool): Required. If true, successful operations will be carried out and invalid
                 operations will return errors. If false, all operations will be carried out
                 in one transaction if and only if they are all valid. This should always be
                 set to true.

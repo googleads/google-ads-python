@@ -18,6 +18,7 @@ from google.ads.google_ads.v3.proto.common import extensions_pb2 as google_dot_a
 from google.ads.google_ads.v3.proto.enums import extension_type_pb2 as google_dot_ads_dot_googleads__v3_dot_proto_dot_enums_dot_extension__type__pb2
 from google.ads.google_ads.v3.proto.enums import feed_item_status_pb2 as google_dot_ads_dot_googleads__v3_dot_proto_dot_enums_dot_feed__item__status__pb2
 from google.ads.google_ads.v3.proto.enums import feed_item_target_device_pb2 as google_dot_ads_dot_googleads__v3_dot_proto_dot_enums_dot_feed__item__target__device__pb2
+from google.api import field_behavior_pb2 as google_dot_api_dot_field__behavior__pb2
 from google.api import resource_pb2 as google_dot_api_dot_resource__pb2
 from google.protobuf import wrappers_pb2 as google_dot_protobuf_dot_wrappers__pb2
 from google.api import annotations_pb2 as google_dot_api_dot_annotations__pb2
@@ -28,9 +29,9 @@ DESCRIPTOR = _descriptor.FileDescriptor(
   package='google.ads.googleads.v3.resources',
   syntax='proto3',
   serialized_options=_b('\n%com.google.ads.googleads.v3.resourcesB\026ExtensionFeedItemProtoP\001ZJgoogle.golang.org/genproto/googleapis/ads/googleads/v3/resources;resources\242\002\003GAA\252\002!Google.Ads.GoogleAds.V3.Resources\312\002!Google\\Ads\\GoogleAds\\V3\\Resources\352\002%Google::Ads::GoogleAds::V3::Resources'),
-  serialized_pb=_b('\nAgoogle/ads/googleads_v3/proto/resources/extension_feed_item.proto\x12!google.ads.googleads.v3.resources\x1a\x33google/ads/googleads_v3/proto/common/criteria.proto\x1a\x35google/ads/googleads_v3/proto/common/extensions.proto\x1a\x38google/ads/googleads_v3/proto/enums/extension_type.proto\x1a:google/ads/googleads_v3/proto/enums/feed_item_status.proto\x1a\x41google/ads/googleads_v3/proto/enums/feed_item_target_device.proto\x1a\x19google/api/resource.proto\x1a\x1egoogle/protobuf/wrappers.proto\x1a\x1cgoogle/api/annotations.proto\"\xb7\x0e\n\x11\x45xtensionFeedItem\x12\x15\n\rresource_name\x18\x01 \x01(\t\x12\'\n\x02id\x18\x18 \x01(\x0b\x32\x1b.google.protobuf.Int64Value\x12V\n\x0e\x65xtension_type\x18\r \x01(\x0e\x32>.google.ads.googleads.v3.enums.ExtensionTypeEnum.ExtensionType\x12\x35\n\x0fstart_date_time\x18\x05 \x01(\x0b\x32\x1c.google.protobuf.StringValue\x12\x33\n\rend_date_time\x18\x06 \x01(\x0b\x32\x1c.google.protobuf.StringValue\x12\x44\n\x0c\x61\x64_schedules\x18\x10 \x03(\x0b\x32..google.ads.googleads.v3.common.AdScheduleInfo\x12\\\n\x06\x64\x65vice\x18\x11 \x01(\x0e\x32L.google.ads.googleads.v3.enums.FeedItemTargetDeviceEnum.FeedItemTargetDevice\x12\x42\n\x1ctargeted_geo_target_constant\x18\x14 \x01(\x0b\x32\x1c.google.protobuf.StringValue\x12\x45\n\x10targeted_keyword\x18\x16 \x01(\x0b\x32+.google.ads.googleads.v3.common.KeywordInfo\x12P\n\x06status\x18\x04 \x01(\x0e\x32@.google.ads.googleads.v3.enums.FeedItemStatusEnum.FeedItemStatus\x12N\n\x12sitelink_feed_item\x18\x02 \x01(\x0b\x32\x30.google.ads.googleads.v3.common.SitelinkFeedItemH\x00\x12\x61\n\x1cstructured_snippet_feed_item\x18\x03 \x01(\x0b\x32\x39.google.ads.googleads.v3.common.StructuredSnippetFeedItemH\x00\x12\x44\n\rapp_feed_item\x18\x07 \x01(\x0b\x32+.google.ads.googleads.v3.common.AppFeedItemH\x00\x12\x46\n\x0e\x63\x61ll_feed_item\x18\x08 \x01(\x0b\x32,.google.ads.googleads.v3.common.CallFeedItemH\x00\x12L\n\x11\x63\x61llout_feed_item\x18\t \x01(\x0b\x32/.google.ads.googleads.v3.common.CalloutFeedItemH\x00\x12U\n\x16text_message_feed_item\x18\n \x01(\x0b\x32\x33.google.ads.googleads.v3.common.TextMessageFeedItemH\x00\x12H\n\x0fprice_feed_item\x18\x0b \x01(\x0b\x32-.google.ads.googleads.v3.common.PriceFeedItemH\x00\x12P\n\x13promotion_feed_item\x18\x0c \x01(\x0b\x32\x31.google.ads.googleads.v3.common.PromotionFeedItemH\x00\x12N\n\x12location_feed_item\x18\x0e \x01(\x0b\x32\x30.google.ads.googleads.v3.common.LocationFeedItemH\x00\x12\x61\n\x1c\x61\x66\x66iliate_location_feed_item\x18\x0f \x01(\x0b\x32\x39.google.ads.googleads.v3.common.AffiliateLocationFeedItemH\x00\x12W\n\x17hotel_callout_feed_item\x18\x17 \x01(\x0b\x32\x34.google.ads.googleads.v3.common.HotelCalloutFeedItemH\x00\x12\x39\n\x11targeted_campaign\x18\x12 \x01(\x0b\x32\x1c.google.protobuf.StringValueH\x01\x12\x39\n\x11targeted_ad_group\x18\x13 \x01(\x0b\x32\x1c.google.protobuf.StringValueH\x01:n\xea\x41k\n*googleads.googleapis.com/ExtensionFeedItem\x12=customers/{customer}/extensionFeedItems/{extension_feed_item}B\x0b\n\textensionB\x1c\n\x1aserving_resource_targetingB\x83\x02\n%com.google.ads.googleads.v3.resourcesB\x16\x45xtensionFeedItemProtoP\x01ZJgoogle.golang.org/genproto/googleapis/ads/googleads/v3/resources;resources\xa2\x02\x03GAA\xaa\x02!Google.Ads.GoogleAds.V3.Resources\xca\x02!Google\\Ads\\GoogleAds\\V3\\Resources\xea\x02%Google::Ads::GoogleAds::V3::Resourcesb\x06proto3')
+  serialized_pb=_b('\nAgoogle/ads/googleads_v3/proto/resources/extension_feed_item.proto\x12!google.ads.googleads.v3.resources\x1a\x33google/ads/googleads_v3/proto/common/criteria.proto\x1a\x35google/ads/googleads_v3/proto/common/extensions.proto\x1a\x38google/ads/googleads_v3/proto/enums/extension_type.proto\x1a:google/ads/googleads_v3/proto/enums/feed_item_status.proto\x1a\x41google/ads/googleads_v3/proto/enums/feed_item_target_device.proto\x1a\x1fgoogle/api/field_behavior.proto\x1a\x19google/api/resource.proto\x1a\x1egoogle/protobuf/wrappers.proto\x1a\x1cgoogle/api/annotations.proto\"\x84\x10\n\x11\x45xtensionFeedItem\x12I\n\rresource_name\x18\x01 \x01(\tB2\xe0\x41\x05\xfa\x41,\n*googleads.googleapis.com/ExtensionFeedItem\x12,\n\x02id\x18\x18 \x01(\x0b\x32\x1b.google.protobuf.Int64ValueB\x03\xe0\x41\x03\x12[\n\x0e\x65xtension_type\x18\r \x01(\x0e\x32>.google.ads.googleads.v3.enums.ExtensionTypeEnum.ExtensionTypeB\x03\xe0\x41\x03\x12\x35\n\x0fstart_date_time\x18\x05 \x01(\x0b\x32\x1c.google.protobuf.StringValue\x12\x33\n\rend_date_time\x18\x06 \x01(\x0b\x32\x1c.google.protobuf.StringValue\x12\x44\n\x0c\x61\x64_schedules\x18\x10 \x03(\x0b\x32..google.ads.googleads.v3.common.AdScheduleInfo\x12\\\n\x06\x64\x65vice\x18\x11 \x01(\x0e\x32L.google.ads.googleads.v3.enums.FeedItemTargetDeviceEnum.FeedItemTargetDevice\x12s\n\x1ctargeted_geo_target_constant\x18\x14 \x01(\x0b\x32\x1c.google.protobuf.StringValueB/\xfa\x41,\n*googleads.googleapis.com/GeoTargetConstant\x12\x45\n\x10targeted_keyword\x18\x16 \x01(\x0b\x32+.google.ads.googleads.v3.common.KeywordInfo\x12U\n\x06status\x18\x04 \x01(\x0e\x32@.google.ads.googleads.v3.enums.FeedItemStatusEnum.FeedItemStatusB\x03\xe0\x41\x03\x12N\n\x12sitelink_feed_item\x18\x02 \x01(\x0b\x32\x30.google.ads.googleads.v3.common.SitelinkFeedItemH\x00\x12\x61\n\x1cstructured_snippet_feed_item\x18\x03 \x01(\x0b\x32\x39.google.ads.googleads.v3.common.StructuredSnippetFeedItemH\x00\x12\x44\n\rapp_feed_item\x18\x07 \x01(\x0b\x32+.google.ads.googleads.v3.common.AppFeedItemH\x00\x12\x46\n\x0e\x63\x61ll_feed_item\x18\x08 \x01(\x0b\x32,.google.ads.googleads.v3.common.CallFeedItemH\x00\x12L\n\x11\x63\x61llout_feed_item\x18\t \x01(\x0b\x32/.google.ads.googleads.v3.common.CalloutFeedItemH\x00\x12U\n\x16text_message_feed_item\x18\n \x01(\x0b\x32\x33.google.ads.googleads.v3.common.TextMessageFeedItemH\x00\x12H\n\x0fprice_feed_item\x18\x0b \x01(\x0b\x32-.google.ads.googleads.v3.common.PriceFeedItemH\x00\x12P\n\x13promotion_feed_item\x18\x0c \x01(\x0b\x32\x31.google.ads.googleads.v3.common.PromotionFeedItemH\x00\x12S\n\x12location_feed_item\x18\x0e \x01(\x0b\x32\x30.google.ads.googleads.v3.common.LocationFeedItemB\x03\xe0\x41\x03H\x00\x12\x66\n\x1c\x61\x66\x66iliate_location_feed_item\x18\x0f \x01(\x0b\x32\x39.google.ads.googleads.v3.common.AffiliateLocationFeedItemB\x03\xe0\x41\x03H\x00\x12W\n\x17hotel_callout_feed_item\x18\x17 \x01(\x0b\x32\x34.google.ads.googleads.v3.common.HotelCalloutFeedItemH\x00\x12\x61\n\x11targeted_campaign\x18\x12 \x01(\x0b\x32\x1c.google.protobuf.StringValueB&\xfa\x41#\n!googleads.googleapis.com/CampaignH\x01\x12`\n\x11targeted_ad_group\x18\x13 \x01(\x0b\x32\x1c.google.protobuf.StringValueB%\xfa\x41\"\n googleads.googleapis.com/AdGroupH\x01:n\xea\x41k\n*googleads.googleapis.com/ExtensionFeedItem\x12=customers/{customer}/extensionFeedItems/{extension_feed_item}B\x0b\n\textensionB\x1c\n\x1aserving_resource_targetingB\x83\x02\n%com.google.ads.googleads.v3.resourcesB\x16\x45xtensionFeedItemProtoP\x01ZJgoogle.golang.org/genproto/googleapis/ads/googleads/v3/resources;resources\xa2\x02\x03GAA\xaa\x02!Google.Ads.GoogleAds.V3.Resources\xca\x02!Google\\Ads\\GoogleAds\\V3\\Resources\xea\x02%Google::Ads::GoogleAds::V3::Resourcesb\x06proto3')
   ,
-  dependencies=[google_dot_ads_dot_googleads__v3_dot_proto_dot_common_dot_criteria__pb2.DESCRIPTOR,google_dot_ads_dot_googleads__v3_dot_proto_dot_common_dot_extensions__pb2.DESCRIPTOR,google_dot_ads_dot_googleads__v3_dot_proto_dot_enums_dot_extension__type__pb2.DESCRIPTOR,google_dot_ads_dot_googleads__v3_dot_proto_dot_enums_dot_feed__item__status__pb2.DESCRIPTOR,google_dot_ads_dot_googleads__v3_dot_proto_dot_enums_dot_feed__item__target__device__pb2.DESCRIPTOR,google_dot_api_dot_resource__pb2.DESCRIPTOR,google_dot_protobuf_dot_wrappers__pb2.DESCRIPTOR,google_dot_api_dot_annotations__pb2.DESCRIPTOR,])
+  dependencies=[google_dot_ads_dot_googleads__v3_dot_proto_dot_common_dot_criteria__pb2.DESCRIPTOR,google_dot_ads_dot_googleads__v3_dot_proto_dot_common_dot_extensions__pb2.DESCRIPTOR,google_dot_ads_dot_googleads__v3_dot_proto_dot_enums_dot_extension__type__pb2.DESCRIPTOR,google_dot_ads_dot_googleads__v3_dot_proto_dot_enums_dot_feed__item__status__pb2.DESCRIPTOR,google_dot_ads_dot_googleads__v3_dot_proto_dot_enums_dot_feed__item__target__device__pb2.DESCRIPTOR,google_dot_api_dot_field__behavior__pb2.DESCRIPTOR,google_dot_api_dot_resource__pb2.DESCRIPTOR,google_dot_protobuf_dot_wrappers__pb2.DESCRIPTOR,google_dot_api_dot_annotations__pb2.DESCRIPTOR,])
 
 
 
@@ -48,21 +49,21 @@ _EXTENSIONFEEDITEM = _descriptor.Descriptor(
       has_default_value=False, default_value=_b("").decode('utf-8'),
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR),
+      serialized_options=_b('\340A\005\372A,\n*googleads.googleapis.com/ExtensionFeedItem'), file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
       name='id', full_name='google.ads.googleads.v3.resources.ExtensionFeedItem.id', index=1,
       number=24, type=11, cpp_type=10, label=1,
       has_default_value=False, default_value=None,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR),
+      serialized_options=_b('\340A\003'), file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
       name='extension_type', full_name='google.ads.googleads.v3.resources.ExtensionFeedItem.extension_type', index=2,
       number=13, type=14, cpp_type=8, label=1,
       has_default_value=False, default_value=0,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR),
+      serialized_options=_b('\340A\003'), file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
       name='start_date_time', full_name='google.ads.googleads.v3.resources.ExtensionFeedItem.start_date_time', index=3,
       number=5, type=11, cpp_type=10, label=1,
@@ -97,7 +98,7 @@ _EXTENSIONFEEDITEM = _descriptor.Descriptor(
       has_default_value=False, default_value=None,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR),
+      serialized_options=_b('\372A,\n*googleads.googleapis.com/GeoTargetConstant'), file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
       name='targeted_keyword', full_name='google.ads.googleads.v3.resources.ExtensionFeedItem.targeted_keyword', index=8,
       number=22, type=11, cpp_type=10, label=1,
@@ -111,7 +112,7 @@ _EXTENSIONFEEDITEM = _descriptor.Descriptor(
       has_default_value=False, default_value=0,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR),
+      serialized_options=_b('\340A\003'), file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
       name='sitelink_feed_item', full_name='google.ads.googleads.v3.resources.ExtensionFeedItem.sitelink_feed_item', index=10,
       number=2, type=11, cpp_type=10, label=1,
@@ -174,14 +175,14 @@ _EXTENSIONFEEDITEM = _descriptor.Descriptor(
       has_default_value=False, default_value=None,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR),
+      serialized_options=_b('\340A\003'), file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
       name='affiliate_location_feed_item', full_name='google.ads.googleads.v3.resources.ExtensionFeedItem.affiliate_location_feed_item', index=19,
       number=15, type=11, cpp_type=10, label=1,
       has_default_value=False, default_value=None,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR),
+      serialized_options=_b('\340A\003'), file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
       name='hotel_callout_feed_item', full_name='google.ads.googleads.v3.resources.ExtensionFeedItem.hotel_callout_feed_item', index=20,
       number=23, type=11, cpp_type=10, label=1,
@@ -195,14 +196,14 @@ _EXTENSIONFEEDITEM = _descriptor.Descriptor(
       has_default_value=False, default_value=None,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR),
+      serialized_options=_b('\372A#\n!googleads.googleapis.com/Campaign'), file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
       name='targeted_ad_group', full_name='google.ads.googleads.v3.resources.ExtensionFeedItem.targeted_ad_group', index=22,
       number=19, type=11, cpp_type=10, label=1,
       has_default_value=False, default_value=None,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR),
+      serialized_options=_b('\372A\"\n googleads.googleapis.com/AdGroup'), file=DESCRIPTOR),
   ],
   extensions=[
   ],
@@ -221,8 +222,8 @@ _EXTENSIONFEEDITEM = _descriptor.Descriptor(
       name='serving_resource_targeting', full_name='google.ads.googleads.v3.resources.ExtensionFeedItem.serving_resource_targeting',
       index=1, containing_type=None, fields=[]),
   ],
-  serialized_start=487,
-  serialized_end=2334,
+  serialized_start=520,
+  serialized_end=2572,
 )
 
 _EXTENSIONFEEDITEM.fields_by_name['id'].message_type = google_dot_protobuf_dot_wrappers__pb2._INT64VALUE
@@ -298,14 +299,14 @@ ExtensionFeedItem = _reflection.GeneratedProtocolMessageType('ExtensionFeedItem'
   
   Attributes:
       resource_name:
-          The resource name of the extension feed item. Extension feed
-          item resource names have the form:
+          Immutable. The resource name of the extension feed item.
+          Extension feed item resource names have the form:
           ``customers/{customer_id}/extensionFeedItems/{feed_item_id}``
       id:
-          The ID of this feed item. Read-only.
+          Output only. The ID of this feed item. Read-only.
       extension_type:
-          The extension type of the extension feed item. This field is
-          read-only.
+          Output only. The extension type of the extension feed item.
+          This field is read-only.
       start_date_time:
           Start time in which this feed item is effective and can begin
           serving. The time is in the customer's time zone. The format
@@ -327,7 +328,7 @@ ExtensionFeedItem = _reflection.GeneratedProtocolMessageType('ExtensionFeedItem'
       targeted_keyword:
           The targeted keyword.
       status:
-          Status of the feed item. This field is read-only.
+          Output only. Status of the feed item. This field is read-only.
       extension:
           Extension type.
       sitelink_feed_item:
@@ -347,11 +348,12 @@ ExtensionFeedItem = _reflection.GeneratedProtocolMessageType('ExtensionFeedItem'
       promotion_feed_item:
           Promotion extension.
       location_feed_item:
-          Location extension. Locations are synced from a GMB account
-          into a feed. This field is read-only.
+          Output only. Location extension. Locations are synced from a
+          GMB account into a feed. This field is read-only.
       affiliate_location_feed_item:
-          Affiliate location extension. Feed locations are populated by
-          Google Ads based on a chain ID. This field is read-only.
+          Output only. Affiliate location extension. Feed locations are
+          populated by Google Ads based on a chain ID. This field is
+          read-only.
       hotel_callout_feed_item:
           Hotel Callout extension.
       serving_resource_targeting:
@@ -369,5 +371,14 @@ _sym_db.RegisterMessage(ExtensionFeedItem)
 
 
 DESCRIPTOR._options = None
+_EXTENSIONFEEDITEM.fields_by_name['resource_name']._options = None
+_EXTENSIONFEEDITEM.fields_by_name['id']._options = None
+_EXTENSIONFEEDITEM.fields_by_name['extension_type']._options = None
+_EXTENSIONFEEDITEM.fields_by_name['targeted_geo_target_constant']._options = None
+_EXTENSIONFEEDITEM.fields_by_name['status']._options = None
+_EXTENSIONFEEDITEM.fields_by_name['location_feed_item']._options = None
+_EXTENSIONFEEDITEM.fields_by_name['affiliate_location_feed_item']._options = None
+_EXTENSIONFEEDITEM.fields_by_name['targeted_campaign']._options = None
+_EXTENSIONFEEDITEM.fields_by_name['targeted_ad_group']._options = None
 _EXTENSIONFEEDITEM._options = None
 # @@protoc_insertion_point(module_scope)

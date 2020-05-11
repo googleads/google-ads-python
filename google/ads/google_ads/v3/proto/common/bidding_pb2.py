@@ -627,7 +627,7 @@ TargetImpressionShare = _reflection.GeneratedProtocolMessageType('TargetImpressi
   ,
   __doc__ = """An automated bidding strategy that sets bids so that a certain
   percentage of search ads are shown at the top of the first page (or
-  other targeted location). Next Id = 4
+  other targeted location). next tag = 4
   
   
   Attributes:

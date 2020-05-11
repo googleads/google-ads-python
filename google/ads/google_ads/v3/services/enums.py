@@ -1071,6 +1071,7 @@ class AdGroupTypeEnum(_CreateEnumTypeUponFirstAccess):
           SEARCH_DYNAMIC_ADS (int): Ad group type for Dynamic Search Ads ad groups.
           SHOPPING_COMPARISON_LISTING_ADS (int): The type for ad groups in Shopping Comparison Listing campaigns.
           PROMOTED_HOTEL_ADS (int): The ad group type for Promoted Hotel ad groups.
+          VIDEO_RESPONSIVE (int): Video responsive ad groups.
         """
         UNSPECIFIED = 0
         UNKNOWN = 1
@@ -1087,6 +1088,7 @@ class AdGroupTypeEnum(_CreateEnumTypeUponFirstAccess):
         SEARCH_DYNAMIC_ADS = 13
         SHOPPING_COMPARISON_LISTING_ADS = 14
         PROMOTED_HOTEL_ADS = 15
+        VIDEO_RESPONSIVE = 16
 '''
 AdGroupTypeEnum = AdGroupTypeEnum() # For __getattribute__
 
@@ -1252,6 +1254,7 @@ class AdTypeEnum(_CreateEnumTypeUponFirstAccess):
           types.
           APP_ENGAGEMENT_AD (int): The ad is an app engagement ad.
           SHOPPING_COMPARISON_LISTING_AD (int): The ad is a Shopping Comparison Listing ad.
+          VIDEO_RESPONSIVE_AD (int): Video responsive ad.
         """
         UNSPECIFIED = 0
         UNKNOWN = 1
@@ -1274,6 +1277,7 @@ class AdTypeEnum(_CreateEnumTypeUponFirstAccess):
         DYNAMIC_HTML5_AD = 22
         APP_ENGAGEMENT_AD = 23
         SHOPPING_COMPARISON_LISTING_AD = 24
+        VIDEO_RESPONSIVE_AD = 30
 '''
 AdTypeEnum = AdTypeEnum() # For __getattribute__
 
@@ -3242,6 +3246,23 @@ class ConversionActionCategoryEnum(_CreateEnumTypeUponFirstAccess):
           SIGNUP (int): Signup user action.
           LEAD (int): Lead-generating action.
           DOWNLOAD (int): Software download action (as for an app).
+          ADD_TO_CART (int): The addition of items to a shopping cart or bag on an advertiser site.
+          BEGIN_CHECKOUT (int): When someone enters the checkout flow on an advertiser site.
+          SUBSCRIBE_PAID (int): The start of a paid subscription for a product or service.
+          PHONE_CALL_LEAD (int): A call to indicate interest in an advertiser's offering.
+          IMPORTED_LEAD (int): A lead conversion imported from an external source into Google Ads.
+          SUBMIT_LEAD_FORM (int): A submission of a form on an advertiser site indicating business
+          interest.
+          BOOK_APPOINTMENT (int): A booking of an appointment with an advertiser's business.
+          REQUEST_QUOTE (int): A quote or price estimate request.
+          GET_DIRECTIONS (int): A search for an advertiser's business location with intention to visit.
+          OUTBOUND_CLICK (int): A click to an advertiser's partner's site.
+          CONTACT (int): A call, SMS, email, chat or other type of contact to an advertiser.
+          ENGAGEMENT (int): A website engagement event such as long site time or a Google Analytics
+          (GA) Smart Goal. Intended to be used for GA, Firebase, GA Gold goal
+          imports.
+          STORE_VISIT (int): A visit to a physical store location.
+          STORE_SALE (int): A sale occurring in a physical store.
         """
         UNSPECIFIED = 0
         UNKNOWN = 1
@@ -3251,6 +3272,20 @@ class ConversionActionCategoryEnum(_CreateEnumTypeUponFirstAccess):
         SIGNUP = 5
         LEAD = 6
         DOWNLOAD = 7
+        ADD_TO_CART = 8
+        BEGIN_CHECKOUT = 9
+        SUBSCRIBE_PAID = 10
+        PHONE_CALL_LEAD = 11
+        IMPORTED_LEAD = 12
+        SUBMIT_LEAD_FORM = 13
+        BOOK_APPOINTMENT = 14
+        REQUEST_QUOTE = 15
+        GET_DIRECTIONS = 16
+        OUTBOUND_CLICK = 17
+        CONTACT = 18
+        ENGAGEMENT = 19
+        STORE_VISIT = 20
+        STORE_SALE = 21
 '''
 ConversionActionCategoryEnum = ConversionActionCategoryEnum() # For __getattribute__
 
@@ -8383,6 +8418,72 @@ class NullErrorEnum(_CreateEnumTypeUponFirstAccess):
         NULL_CONTENT = 2
 '''
 NullErrorEnum = NullErrorEnum() # For __getattribute__
+
+
+class OfflineUserDataJobFailureReasonEnum(_CreateEnumTypeUponFirstAccess):
+  OfflineUserDataJobFailureReason = '''\
+    class OfflineUserDataJobFailureReason(enum.IntEnum):
+        """
+        The failure reason of an offline user data job.
+
+        Attributes:
+          UNSPECIFIED (int): Not specified.
+          UNKNOWN (int): Used for return value only. Represents value unknown in this version.
+          INSUFFICIENT_MATCHED_TRANSACTIONS (int): The matched transactions are insufficient.
+          INSUFFICIENT_TRANSACTIONS (int): The uploaded transactions are insufficient.
+        """
+        UNSPECIFIED = 0
+        UNKNOWN = 1
+        INSUFFICIENT_MATCHED_TRANSACTIONS = 2
+        INSUFFICIENT_TRANSACTIONS = 3
+'''
+OfflineUserDataJobFailureReasonEnum = OfflineUserDataJobFailureReasonEnum() # For __getattribute__
+
+
+class OfflineUserDataJobStatusEnum(_CreateEnumTypeUponFirstAccess):
+    OfflineUserDataJobStatus = '''\
+    class OfflineUserDataJobStatus(enum.IntEnum):
+        """
+        The status of an offline user data job.
+
+        Attributes:
+          UNSPECIFIED (int): Not specified.
+          UNKNOWN (int): Used for return value only. Represents value unknown in this version.
+          PENDING (int): The job has been successfully created and pending for uploading.
+          RUNNING (int): Upload(s) have been accepted and data is being processed.
+          SUCCESS (int): Uploaded data has been successfully processed.
+          FAILED (int): Uploaded data has failed to be processed.
+        """
+        UNSPECIFIED = 0
+        UNKNOWN = 1
+        PENDING = 2
+        RUNNING = 3
+        SUCCESS = 4
+        FAILED = 5
+'''
+OfflineUserDataJobStatusEnum = OfflineUserDataJobStatusEnum() # For __getattribute__
+
+
+class OfflineUserDataJobTypeEnum(_CreateEnumTypeUponFirstAccess):
+    OfflineUserDataJobType = '''\
+    class OfflineUserDataJobType(enum.IntEnum):
+        """
+        The type of an offline user data job.
+
+        Attributes:
+          UNSPECIFIED (int): Not specified.
+          UNKNOWN (int): Used for return value only. Represents value unknown in this version.
+          STORE_SALES_UPLOAD_FIRST_PARTY (int): Store Sales Direct data for self service.
+          STORE_SALES_UPLOAD_THIRD_PARTY (int): Store Sales Direct data for third party.
+          CUSTOMER_MATCH_USER_LIST (int): Customer Match user list data.
+        """
+        UNSPECIFIED = 0
+        UNKNOWN = 1
+        STORE_SALES_UPLOAD_FIRST_PARTY = 2
+        STORE_SALES_UPLOAD_THIRD_PARTY = 3
+        CUSTOMER_MATCH_USER_LIST = 4
+'''
+OfflineUserDataJobTypeEnum = OfflineUserDataJobTypeEnum() # For __getattribute__
 
 
 class OperatingSystemVersionOperatorTypeEnum(_CreateEnumTypeUponFirstAccess):

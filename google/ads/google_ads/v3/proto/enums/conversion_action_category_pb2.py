@@ -21,7 +21,7 @@ DESCRIPTOR = _descriptor.FileDescriptor(
   package='google.ads.googleads.v3.enums',
   syntax='proto3',
   serialized_options=_b('\n!com.google.ads.googleads.v3.enumsB\035ConversionActionCategoryProtoP\001ZBgoogle.golang.org/genproto/googleapis/ads/googleads/v3/enums;enums\242\002\003GAA\252\002\035Google.Ads.GoogleAds.V3.Enums\312\002\035Google\\Ads\\GoogleAds\\V3\\Enums\352\002!Google::Ads::GoogleAds::V3::Enums'),
-  serialized_pb=_b('\nDgoogle/ads/googleads_v3/proto/enums/conversion_action_category.proto\x12\x1dgoogle.ads.googleads.v3.enums\x1a\x1cgoogle/api/annotations.proto\"\xa7\x01\n\x1c\x43onversionActionCategoryEnum\"\x86\x01\n\x18\x43onversionActionCategory\x12\x0f\n\x0bUNSPECIFIED\x10\x00\x12\x0b\n\x07UNKNOWN\x10\x01\x12\x0b\n\x07\x44\x45\x46\x41ULT\x10\x02\x12\r\n\tPAGE_VIEW\x10\x03\x12\x0c\n\x08PURCHASE\x10\x04\x12\n\n\x06SIGNUP\x10\x05\x12\x08\n\x04LEAD\x10\x06\x12\x0c\n\x08\x44OWNLOAD\x10\x07\x42\xf2\x01\n!com.google.ads.googleads.v3.enumsB\x1d\x43onversionActionCategoryProtoP\x01ZBgoogle.golang.org/genproto/googleapis/ads/googleads/v3/enums;enums\xa2\x02\x03GAA\xaa\x02\x1dGoogle.Ads.GoogleAds.V3.Enums\xca\x02\x1dGoogle\\Ads\\GoogleAds\\V3\\Enums\xea\x02!Google::Ads::GoogleAds::V3::Enumsb\x06proto3')
+  serialized_pb=_b('\nDgoogle/ads/googleads_v3/proto/enums/conversion_action_category.proto\x12\x1dgoogle.ads.googleads.v3.enums\x1a\x1cgoogle/api/annotations.proto\"\xad\x03\n\x1c\x43onversionActionCategoryEnum\"\x8c\x03\n\x18\x43onversionActionCategory\x12\x0f\n\x0bUNSPECIFIED\x10\x00\x12\x0b\n\x07UNKNOWN\x10\x01\x12\x0b\n\x07\x44\x45\x46\x41ULT\x10\x02\x12\r\n\tPAGE_VIEW\x10\x03\x12\x0c\n\x08PURCHASE\x10\x04\x12\n\n\x06SIGNUP\x10\x05\x12\x08\n\x04LEAD\x10\x06\x12\x0c\n\x08\x44OWNLOAD\x10\x07\x12\x0f\n\x0b\x41\x44\x44_TO_CART\x10\x08\x12\x12\n\x0e\x42\x45GIN_CHECKOUT\x10\t\x12\x12\n\x0eSUBSCRIBE_PAID\x10\n\x12\x13\n\x0fPHONE_CALL_LEAD\x10\x0b\x12\x11\n\rIMPORTED_LEAD\x10\x0c\x12\x14\n\x10SUBMIT_LEAD_FORM\x10\r\x12\x14\n\x10\x42OOK_APPOINTMENT\x10\x0e\x12\x11\n\rREQUEST_QUOTE\x10\x0f\x12\x12\n\x0eGET_DIRECTIONS\x10\x10\x12\x12\n\x0eOUTBOUND_CLICK\x10\x11\x12\x0b\n\x07\x43ONTACT\x10\x12\x12\x0e\n\nENGAGEMENT\x10\x13\x12\x0f\n\x0bSTORE_VISIT\x10\x14\x12\x0e\n\nSTORE_SALE\x10\x15\x42\xf2\x01\n!com.google.ads.googleads.v3.enumsB\x1d\x43onversionActionCategoryProtoP\x01ZBgoogle.golang.org/genproto/googleapis/ads/googleads/v3/enums;enums\xa2\x02\x03GAA\xaa\x02\x1dGoogle.Ads.GoogleAds.V3.Enums\xca\x02\x1dGoogle\\Ads\\GoogleAds\\V3\\Enums\xea\x02!Google::Ads::GoogleAds::V3::Enumsb\x06proto3')
   ,
   dependencies=[google_dot_api_dot_annotations__pb2.DESCRIPTOR,])
 
@@ -65,11 +65,67 @@ _CONVERSIONACTIONCATEGORYENUM_CONVERSIONACTIONCATEGORY = _descriptor.EnumDescrip
       name='DOWNLOAD', index=7, number=7,
       serialized_options=None,
       type=None),
+    _descriptor.EnumValueDescriptor(
+      name='ADD_TO_CART', index=8, number=8,
+      serialized_options=None,
+      type=None),
+    _descriptor.EnumValueDescriptor(
+      name='BEGIN_CHECKOUT', index=9, number=9,
+      serialized_options=None,
+      type=None),
+    _descriptor.EnumValueDescriptor(
+      name='SUBSCRIBE_PAID', index=10, number=10,
+      serialized_options=None,
+      type=None),
+    _descriptor.EnumValueDescriptor(
+      name='PHONE_CALL_LEAD', index=11, number=11,
+      serialized_options=None,
+      type=None),
+    _descriptor.EnumValueDescriptor(
+      name='IMPORTED_LEAD', index=12, number=12,
+      serialized_options=None,
+      type=None),
+    _descriptor.EnumValueDescriptor(
+      name='SUBMIT_LEAD_FORM', index=13, number=13,
+      serialized_options=None,
+      type=None),
+    _descriptor.EnumValueDescriptor(
+      name='BOOK_APPOINTMENT', index=14, number=14,
+      serialized_options=None,
+      type=None),
+    _descriptor.EnumValueDescriptor(
+      name='REQUEST_QUOTE', index=15, number=15,
+      serialized_options=None,
+      type=None),
+    _descriptor.EnumValueDescriptor(
+      name='GET_DIRECTIONS', index=16, number=16,
+      serialized_options=None,
+      type=None),
+    _descriptor.EnumValueDescriptor(
+      name='OUTBOUND_CLICK', index=17, number=17,
+      serialized_options=None,
+      type=None),
+    _descriptor.EnumValueDescriptor(
+      name='CONTACT', index=18, number=18,
+      serialized_options=None,
+      type=None),
+    _descriptor.EnumValueDescriptor(
+      name='ENGAGEMENT', index=19, number=19,
+      serialized_options=None,
+      type=None),
+    _descriptor.EnumValueDescriptor(
+      name='STORE_VISIT', index=20, number=20,
+      serialized_options=None,
+      type=None),
+    _descriptor.EnumValueDescriptor(
+      name='STORE_SALE', index=21, number=21,
+      serialized_options=None,
+      type=None),
   ],
   containing_type=None,
   serialized_options=None,
   serialized_start=167,
-  serialized_end=301,
+  serialized_end=563,
 )
 _sym_db.RegisterEnumDescriptor(_CONVERSIONACTIONCATEGORYENUM_CONVERSIONACTIONCATEGORY)
 
@@ -95,7 +151,7 @@ _CONVERSIONACTIONCATEGORYENUM = _descriptor.Descriptor(
   oneofs=[
   ],
   serialized_start=134,
-  serialized_end=301,
+  serialized_end=563,
 )
 
 _CONVERSIONACTIONCATEGORYENUM_CONVERSIONACTIONCATEGORY.containing_type = _CONVERSIONACTIONCATEGORYENUM

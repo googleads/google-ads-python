@@ -14,6 +14,7 @@ _sym_db = _symbol_database.Default()
 
 
 from google.ads.google_ads.v3.proto.common import tag_snippet_pb2 as google_dot_ads_dot_googleads__v3_dot_proto_dot_common_dot_tag__snippet__pb2
+from google.api import field_behavior_pb2 as google_dot_api_dot_field__behavior__pb2
 from google.api import resource_pb2 as google_dot_api_dot_resource__pb2
 from google.protobuf import wrappers_pb2 as google_dot_protobuf_dot_wrappers__pb2
 from google.api import annotations_pb2 as google_dot_api_dot_annotations__pb2
@@ -24,9 +25,9 @@ DESCRIPTOR = _descriptor.FileDescriptor(
   package='google.ads.googleads.v3.resources',
   syntax='proto3',
   serialized_options=_b('\n%com.google.ads.googleads.v3.resourcesB\026RemarketingActionProtoP\001ZJgoogle.golang.org/genproto/googleapis/ads/googleads/v3/resources;resources\242\002\003GAA\252\002!Google.Ads.GoogleAds.V3.Resources\312\002!Google\\Ads\\GoogleAds\\V3\\Resources\352\002%Google::Ads::GoogleAds::V3::Resources'),
-  serialized_pb=_b('\n@google/ads/googleads_v3/proto/resources/remarketing_action.proto\x12!google.ads.googleads.v3.resources\x1a\x36google/ads/googleads_v3/proto/common/tag_snippet.proto\x1a\x19google/api/resource.proto\x1a\x1egoogle/protobuf/wrappers.proto\x1a\x1cgoogle/api/annotations.proto\"\xb0\x02\n\x11RemarketingAction\x12\x15\n\rresource_name\x18\x01 \x01(\t\x12\'\n\x02id\x18\x02 \x01(\x0b\x32\x1b.google.protobuf.Int64Value\x12*\n\x04name\x18\x03 \x01(\x0b\x32\x1c.google.protobuf.StringValue\x12@\n\x0ctag_snippets\x18\x04 \x03(\x0b\x32*.google.ads.googleads.v3.common.TagSnippet:m\xea\x41j\n*googleads.googleapis.com/RemarketingAction\x12<customers/{customer}/remarketingActions/{remarketing_action}B\x83\x02\n%com.google.ads.googleads.v3.resourcesB\x16RemarketingActionProtoP\x01ZJgoogle.golang.org/genproto/googleapis/ads/googleads/v3/resources;resources\xa2\x02\x03GAA\xaa\x02!Google.Ads.GoogleAds.V3.Resources\xca\x02!Google\\Ads\\GoogleAds\\V3\\Resources\xea\x02%Google::Ads::GoogleAds::V3::Resourcesb\x06proto3')
+  serialized_pb=_b('\n@google/ads/googleads_v3/proto/resources/remarketing_action.proto\x12!google.ads.googleads.v3.resources\x1a\x36google/ads/googleads_v3/proto/common/tag_snippet.proto\x1a\x1fgoogle/api/field_behavior.proto\x1a\x19google/api/resource.proto\x1a\x1egoogle/protobuf/wrappers.proto\x1a\x1cgoogle/api/annotations.proto\"\xee\x02\n\x11RemarketingAction\x12I\n\rresource_name\x18\x01 \x01(\tB2\xe0\x41\x05\xfa\x41,\n*googleads.googleapis.com/RemarketingAction\x12,\n\x02id\x18\x02 \x01(\x0b\x32\x1b.google.protobuf.Int64ValueB\x03\xe0\x41\x03\x12*\n\x04name\x18\x03 \x01(\x0b\x32\x1c.google.protobuf.StringValue\x12\x45\n\x0ctag_snippets\x18\x04 \x03(\x0b\x32*.google.ads.googleads.v3.common.TagSnippetB\x03\xe0\x41\x03:m\xea\x41j\n*googleads.googleapis.com/RemarketingAction\x12<customers/{customer}/remarketingActions/{remarketing_action}B\x83\x02\n%com.google.ads.googleads.v3.resourcesB\x16RemarketingActionProtoP\x01ZJgoogle.golang.org/genproto/googleapis/ads/googleads/v3/resources;resources\xa2\x02\x03GAA\xaa\x02!Google.Ads.GoogleAds.V3.Resources\xca\x02!Google\\Ads\\GoogleAds\\V3\\Resources\xea\x02%Google::Ads::GoogleAds::V3::Resourcesb\x06proto3')
   ,
-  dependencies=[google_dot_ads_dot_googleads__v3_dot_proto_dot_common_dot_tag__snippet__pb2.DESCRIPTOR,google_dot_api_dot_resource__pb2.DESCRIPTOR,google_dot_protobuf_dot_wrappers__pb2.DESCRIPTOR,google_dot_api_dot_annotations__pb2.DESCRIPTOR,])
+  dependencies=[google_dot_ads_dot_googleads__v3_dot_proto_dot_common_dot_tag__snippet__pb2.DESCRIPTOR,google_dot_api_dot_field__behavior__pb2.DESCRIPTOR,google_dot_api_dot_resource__pb2.DESCRIPTOR,google_dot_protobuf_dot_wrappers__pb2.DESCRIPTOR,google_dot_api_dot_annotations__pb2.DESCRIPTOR,])
 
 
 
@@ -44,14 +45,14 @@ _REMARKETINGACTION = _descriptor.Descriptor(
       has_default_value=False, default_value=_b("").decode('utf-8'),
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR),
+      serialized_options=_b('\340A\005\372A,\n*googleads.googleapis.com/RemarketingAction'), file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
       name='id', full_name='google.ads.googleads.v3.resources.RemarketingAction.id', index=1,
       number=2, type=11, cpp_type=10, label=1,
       has_default_value=False, default_value=None,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR),
+      serialized_options=_b('\340A\003'), file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
       name='name', full_name='google.ads.googleads.v3.resources.RemarketingAction.name', index=2,
       number=3, type=11, cpp_type=10, label=1,
@@ -65,7 +66,7 @@ _REMARKETINGACTION = _descriptor.Descriptor(
       has_default_value=False, default_value=[],
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR),
+      serialized_options=_b('\340A\003'), file=DESCRIPTOR),
   ],
   extensions=[
   ],
@@ -78,8 +79,8 @@ _REMARKETINGACTION = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=249,
-  serialized_end=553,
+  serialized_start=282,
+  serialized_end=648,
 )
 
 _REMARKETINGACTION.fields_by_name['id'].message_type = google_dot_protobuf_dot_wrappers__pb2._INT64VALUE
@@ -100,16 +101,17 @@ RemarketingAction = _reflection.GeneratedProtocolMessageType('RemarketingAction'
   
   Attributes:
       resource_name:
-          The resource name of the remarketing action. Remarketing
-          action resource names have the form:  ``customers/{customer_id
-          }/remarketingActions/{remarketing_action_id}``
+          Immutable. The resource name of the remarketing action.
+          Remarketing action resource names have the form:  ``customers/
+          {customer_id}/remarketingActions/{remarketing_action_id}``
       id:
-          Id of the remarketing action.
+          Output only. Id of the remarketing action.
       name:
           The name of the remarketing action.  This field is required
           and should not be empty when creating new remarketing actions.
       tag_snippets:
-          The snippets used for tracking remarketing actions.
+          Output only. The snippets used for tracking remarketing
+          actions.
   """,
   # @@protoc_insertion_point(class_scope:google.ads.googleads.v3.resources.RemarketingAction)
   ))
@@ -117,5 +119,8 @@ _sym_db.RegisterMessage(RemarketingAction)
 
 
 DESCRIPTOR._options = None
+_REMARKETINGACTION.fields_by_name['resource_name']._options = None
+_REMARKETINGACTION.fields_by_name['id']._options = None
+_REMARKETINGACTION.fields_by_name['tag_snippets']._options = None
 _REMARKETINGACTION._options = None
 # @@protoc_insertion_point(module_scope)

@@ -17,6 +17,7 @@ from google.ads.google_ads.v3.proto.resources import extension_feed_item_pb2 as 
 from google.api import annotations_pb2 as google_dot_api_dot_annotations__pb2
 from google.api import client_pb2 as google_dot_api_dot_client__pb2
 from google.api import field_behavior_pb2 as google_dot_api_dot_field__behavior__pb2
+from google.api import resource_pb2 as google_dot_api_dot_resource__pb2
 from google.protobuf import field_mask_pb2 as google_dot_protobuf_dot_field__mask__pb2
 from google.rpc import status_pb2 as google_dot_rpc_dot_status__pb2
 
@@ -26,9 +27,9 @@ DESCRIPTOR = _descriptor.FileDescriptor(
   package='google.ads.googleads.v3.services',
   syntax='proto3',
   serialized_options=_b('\n$com.google.ads.googleads.v3.servicesB\035ExtensionFeedItemServiceProtoP\001ZHgoogle.golang.org/genproto/googleapis/ads/googleads/v3/services;services\242\002\003GAA\252\002 Google.Ads.GoogleAds.V3.Services\312\002 Google\\Ads\\GoogleAds\\V3\\Services\352\002$Google::Ads::GoogleAds::V3::Services'),
-  serialized_pb=_b('\nHgoogle/ads/googleads_v3/proto/services/extension_feed_item_service.proto\x12 google.ads.googleads.v3.services\x1a\x41google/ads/googleads_v3/proto/resources/extension_feed_item.proto\x1a\x1cgoogle/api/annotations.proto\x1a\x17google/api/client.proto\x1a\x1fgoogle/api/field_behavior.proto\x1a google/protobuf/field_mask.proto\x1a\x17google/rpc/status.proto\"9\n\x1bGetExtensionFeedItemRequest\x12\x1a\n\rresource_name\x18\x01 \x01(\tB\x03\xe0\x41\x02\"\xc2\x01\n\x1fMutateExtensionFeedItemsRequest\x12\x18\n\x0b\x63ustomer_id\x18\x01 \x01(\tB\x03\xe0\x41\x02\x12U\n\noperations\x18\x02 \x03(\x0b\x32<.google.ads.googleads.v3.services.ExtensionFeedItemOperationB\x03\xe0\x41\x02\x12\x17\n\x0fpartial_failure\x18\x03 \x01(\x08\x12\x15\n\rvalidate_only\x18\x04 \x01(\x08\"\xfc\x01\n\x1a\x45xtensionFeedItemOperation\x12/\n\x0bupdate_mask\x18\x04 \x01(\x0b\x32\x1a.google.protobuf.FieldMask\x12\x46\n\x06\x63reate\x18\x01 \x01(\x0b\x32\x34.google.ads.googleads.v3.resources.ExtensionFeedItemH\x00\x12\x46\n\x06update\x18\x02 \x01(\x0b\x32\x34.google.ads.googleads.v3.resources.ExtensionFeedItemH\x00\x12\x10\n\x06remove\x18\x03 \x01(\tH\x00\x42\x0b\n\toperation\"\xa7\x01\n MutateExtensionFeedItemsResponse\x12\x31\n\x15partial_failure_error\x18\x03 \x01(\x0b\x32\x12.google.rpc.Status\x12P\n\x07results\x18\x02 \x03(\x0b\x32?.google.ads.googleads.v3.services.MutateExtensionFeedItemResult\"6\n\x1dMutateExtensionFeedItemResult\x12\x15\n\rresource_name\x18\x01 \x01(\t2\x94\x04\n\x18\x45xtensionFeedItemService\x12\xd9\x01\n\x14GetExtensionFeedItem\x12=.google.ads.googleads.v3.services.GetExtensionFeedItemRequest\x1a\x34.google.ads.googleads.v3.resources.ExtensionFeedItem\"L\x82\xd3\xe4\x93\x02\x36\x12\x34/v3/{resource_name=customers/*/extensionFeedItems/*}\xda\x41\rresource_name\x12\xfe\x01\n\x18MutateExtensionFeedItems\x12\x41.google.ads.googleads.v3.services.MutateExtensionFeedItemsRequest\x1a\x42.google.ads.googleads.v3.services.MutateExtensionFeedItemsResponse\"[\x82\xd3\xe4\x93\x02<\"7/v3/customers/{customer_id=*}/extensionFeedItems:mutate:\x01*\xda\x41\x16\x63ustomer_id,operations\x1a\x1b\xca\x41\x18googleads.googleapis.comB\x84\x02\n$com.google.ads.googleads.v3.servicesB\x1d\x45xtensionFeedItemServiceProtoP\x01ZHgoogle.golang.org/genproto/googleapis/ads/googleads/v3/services;services\xa2\x02\x03GAA\xaa\x02 Google.Ads.GoogleAds.V3.Services\xca\x02 Google\\Ads\\GoogleAds\\V3\\Services\xea\x02$Google::Ads::GoogleAds::V3::Servicesb\x06proto3')
+  serialized_pb=_b('\nHgoogle/ads/googleads_v3/proto/services/extension_feed_item_service.proto\x12 google.ads.googleads.v3.services\x1a\x41google/ads/googleads_v3/proto/resources/extension_feed_item.proto\x1a\x1cgoogle/api/annotations.proto\x1a\x17google/api/client.proto\x1a\x1fgoogle/api/field_behavior.proto\x1a\x19google/api/resource.proto\x1a google/protobuf/field_mask.proto\x1a\x17google/rpc/status.proto\"h\n\x1bGetExtensionFeedItemRequest\x12I\n\rresource_name\x18\x01 \x01(\tB2\xe0\x41\x02\xfa\x41,\n*googleads.googleapis.com/ExtensionFeedItem\"\xc2\x01\n\x1fMutateExtensionFeedItemsRequest\x12\x18\n\x0b\x63ustomer_id\x18\x01 \x01(\tB\x03\xe0\x41\x02\x12U\n\noperations\x18\x02 \x03(\x0b\x32<.google.ads.googleads.v3.services.ExtensionFeedItemOperationB\x03\xe0\x41\x02\x12\x17\n\x0fpartial_failure\x18\x03 \x01(\x08\x12\x15\n\rvalidate_only\x18\x04 \x01(\x08\"\xfc\x01\n\x1a\x45xtensionFeedItemOperation\x12/\n\x0bupdate_mask\x18\x04 \x01(\x0b\x32\x1a.google.protobuf.FieldMask\x12\x46\n\x06\x63reate\x18\x01 \x01(\x0b\x32\x34.google.ads.googleads.v3.resources.ExtensionFeedItemH\x00\x12\x46\n\x06update\x18\x02 \x01(\x0b\x32\x34.google.ads.googleads.v3.resources.ExtensionFeedItemH\x00\x12\x10\n\x06remove\x18\x03 \x01(\tH\x00\x42\x0b\n\toperation\"\xa7\x01\n MutateExtensionFeedItemsResponse\x12\x31\n\x15partial_failure_error\x18\x03 \x01(\x0b\x32\x12.google.rpc.Status\x12P\n\x07results\x18\x02 \x03(\x0b\x32?.google.ads.googleads.v3.services.MutateExtensionFeedItemResult\"6\n\x1dMutateExtensionFeedItemResult\x12\x15\n\rresource_name\x18\x01 \x01(\t2\x94\x04\n\x18\x45xtensionFeedItemService\x12\xd9\x01\n\x14GetExtensionFeedItem\x12=.google.ads.googleads.v3.services.GetExtensionFeedItemRequest\x1a\x34.google.ads.googleads.v3.resources.ExtensionFeedItem\"L\x82\xd3\xe4\x93\x02\x36\x12\x34/v3/{resource_name=customers/*/extensionFeedItems/*}\xda\x41\rresource_name\x12\xfe\x01\n\x18MutateExtensionFeedItems\x12\x41.google.ads.googleads.v3.services.MutateExtensionFeedItemsRequest\x1a\x42.google.ads.googleads.v3.services.MutateExtensionFeedItemsResponse\"[\x82\xd3\xe4\x93\x02<\"7/v3/customers/{customer_id=*}/extensionFeedItems:mutate:\x01*\xda\x41\x16\x63ustomer_id,operations\x1a\x1b\xca\x41\x18googleads.googleapis.comB\x84\x02\n$com.google.ads.googleads.v3.servicesB\x1d\x45xtensionFeedItemServiceProtoP\x01ZHgoogle.golang.org/genproto/googleapis/ads/googleads/v3/services;services\xa2\x02\x03GAA\xaa\x02 Google.Ads.GoogleAds.V3.Services\xca\x02 Google\\Ads\\GoogleAds\\V3\\Services\xea\x02$Google::Ads::GoogleAds::V3::Servicesb\x06proto3')
   ,
-  dependencies=[google_dot_ads_dot_googleads__v3_dot_proto_dot_resources_dot_extension__feed__item__pb2.DESCRIPTOR,google_dot_api_dot_annotations__pb2.DESCRIPTOR,google_dot_api_dot_client__pb2.DESCRIPTOR,google_dot_api_dot_field__behavior__pb2.DESCRIPTOR,google_dot_protobuf_dot_field__mask__pb2.DESCRIPTOR,google_dot_rpc_dot_status__pb2.DESCRIPTOR,])
+  dependencies=[google_dot_ads_dot_googleads__v3_dot_proto_dot_resources_dot_extension__feed__item__pb2.DESCRIPTOR,google_dot_api_dot_annotations__pb2.DESCRIPTOR,google_dot_api_dot_client__pb2.DESCRIPTOR,google_dot_api_dot_field__behavior__pb2.DESCRIPTOR,google_dot_api_dot_resource__pb2.DESCRIPTOR,google_dot_protobuf_dot_field__mask__pb2.DESCRIPTOR,google_dot_rpc_dot_status__pb2.DESCRIPTOR,])
 
 
 
@@ -46,7 +47,7 @@ _GETEXTENSIONFEEDITEMREQUEST = _descriptor.Descriptor(
       has_default_value=False, default_value=_b("").decode('utf-8'),
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
-      serialized_options=_b('\340A\002'), file=DESCRIPTOR),
+      serialized_options=_b('\340A\002\372A,\n*googleads.googleapis.com/ExtensionFeedItem'), file=DESCRIPTOR),
   ],
   extensions=[
   ],
@@ -59,8 +60,8 @@ _GETEXTENSIONFEEDITEMREQUEST = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=324,
-  serialized_end=381,
+  serialized_start=351,
+  serialized_end=455,
 )
 
 
@@ -111,8 +112,8 @@ _MUTATEEXTENSIONFEEDITEMSREQUEST = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=384,
-  serialized_end=578,
+  serialized_start=458,
+  serialized_end=652,
 )
 
 
@@ -166,8 +167,8 @@ _EXTENSIONFEEDITEMOPERATION = _descriptor.Descriptor(
       name='operation', full_name='google.ads.googleads.v3.services.ExtensionFeedItemOperation.operation',
       index=0, containing_type=None, fields=[]),
   ],
-  serialized_start=581,
-  serialized_end=833,
+  serialized_start=655,
+  serialized_end=907,
 )
 
 
@@ -204,8 +205,8 @@ _MUTATEEXTENSIONFEEDITEMSRESPONSE = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=836,
-  serialized_end=1003,
+  serialized_start=910,
+  serialized_end=1077,
 )
 
 
@@ -235,8 +236,8 @@ _MUTATEEXTENSIONFEEDITEMRESULT = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=1005,
-  serialized_end=1059,
+  serialized_start=1079,
+  serialized_end=1133,
 )
 
 _MUTATEEXTENSIONFEEDITEMSREQUEST.fields_by_name['operations'].message_type = _EXTENSIONFEEDITEMOPERATION
@@ -382,8 +383,8 @@ _EXTENSIONFEEDITEMSERVICE = _descriptor.ServiceDescriptor(
   file=DESCRIPTOR,
   index=0,
   serialized_options=_b('\312A\030googleads.googleapis.com'),
-  serialized_start=1062,
-  serialized_end=1594,
+  serialized_start=1136,
+  serialized_end=1668,
   methods=[
   _descriptor.MethodDescriptor(
     name='GetExtensionFeedItem',

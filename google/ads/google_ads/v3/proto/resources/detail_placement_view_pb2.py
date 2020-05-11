@@ -14,6 +14,7 @@ _sym_db = _symbol_database.Default()
 
 
 from google.ads.google_ads.v3.proto.enums import placement_type_pb2 as google_dot_ads_dot_googleads__v3_dot_proto_dot_enums_dot_placement__type__pb2
+from google.api import field_behavior_pb2 as google_dot_api_dot_field__behavior__pb2
 from google.api import resource_pb2 as google_dot_api_dot_resource__pb2
 from google.protobuf import wrappers_pb2 as google_dot_protobuf_dot_wrappers__pb2
 from google.api import annotations_pb2 as google_dot_api_dot_annotations__pb2
@@ -24,9 +25,9 @@ DESCRIPTOR = _descriptor.FileDescriptor(
   package='google.ads.googleads.v3.resources',
   syntax='proto3',
   serialized_options=_b('\n%com.google.ads.googleads.v3.resourcesB\030DetailPlacementViewProtoP\001ZJgoogle.golang.org/genproto/googleapis/ads/googleads/v3/resources;resources\242\002\003GAA\252\002!Google.Ads.GoogleAds.V3.Resources\312\002!Google\\Ads\\GoogleAds\\V3\\Resources\352\002%Google::Ads::GoogleAds::V3::Resources'),
-  serialized_pb=_b('\nCgoogle/ads/googleads_v3/proto/resources/detail_placement_view.proto\x12!google.ads.googleads.v3.resources\x1a\x38google/ads/googleads_v3/proto/enums/placement_type.proto\x1a\x19google/api/resource.proto\x1a\x1egoogle/protobuf/wrappers.proto\x1a\x1cgoogle/api/annotations.proto\"\xd3\x03\n\x13\x44\x65tailPlacementView\x12\x15\n\rresource_name\x18\x01 \x01(\t\x12/\n\tplacement\x18\x02 \x01(\x0b\x32\x1c.google.protobuf.StringValue\x12\x32\n\x0c\x64isplay_name\x18\x03 \x01(\x0b\x32\x1c.google.protobuf.StringValue\x12@\n\x1agroup_placement_target_url\x18\x04 \x01(\x0b\x32\x1c.google.protobuf.StringValue\x12\x30\n\ntarget_url\x18\x05 \x01(\x0b\x32\x1c.google.protobuf.StringValue\x12V\n\x0eplacement_type\x18\x06 \x01(\x0e\x32>.google.ads.googleads.v3.enums.PlacementTypeEnum.PlacementType:t\xea\x41q\n,googleads.googleapis.com/DetailPlacementView\x12\x41\x63ustomers/{customer}/detailPlacementViews/{detail_placement_view}B\x85\x02\n%com.google.ads.googleads.v3.resourcesB\x18\x44\x65tailPlacementViewProtoP\x01ZJgoogle.golang.org/genproto/googleapis/ads/googleads/v3/resources;resources\xa2\x02\x03GAA\xaa\x02!Google.Ads.GoogleAds.V3.Resources\xca\x02!Google\\Ads\\GoogleAds\\V3\\Resources\xea\x02%Google::Ads::GoogleAds::V3::Resourcesb\x06proto3')
+  serialized_pb=_b('\nCgoogle/ads/googleads_v3/proto/resources/detail_placement_view.proto\x12!google.ads.googleads.v3.resources\x1a\x38google/ads/googleads_v3/proto/enums/placement_type.proto\x1a\x1fgoogle/api/field_behavior.proto\x1a\x19google/api/resource.proto\x1a\x1egoogle/protobuf/wrappers.proto\x1a\x1cgoogle/api/annotations.proto\"\xa2\x04\n\x13\x44\x65tailPlacementView\x12K\n\rresource_name\x18\x01 \x01(\tB4\xe0\x41\x03\xfa\x41.\n,googleads.googleapis.com/DetailPlacementView\x12\x34\n\tplacement\x18\x02 \x01(\x0b\x32\x1c.google.protobuf.StringValueB\x03\xe0\x41\x03\x12\x37\n\x0c\x64isplay_name\x18\x03 \x01(\x0b\x32\x1c.google.protobuf.StringValueB\x03\xe0\x41\x03\x12\x45\n\x1agroup_placement_target_url\x18\x04 \x01(\x0b\x32\x1c.google.protobuf.StringValueB\x03\xe0\x41\x03\x12\x35\n\ntarget_url\x18\x05 \x01(\x0b\x32\x1c.google.protobuf.StringValueB\x03\xe0\x41\x03\x12[\n\x0eplacement_type\x18\x06 \x01(\x0e\x32>.google.ads.googleads.v3.enums.PlacementTypeEnum.PlacementTypeB\x03\xe0\x41\x03:t\xea\x41q\n,googleads.googleapis.com/DetailPlacementView\x12\x41\x63ustomers/{customer}/detailPlacementViews/{detail_placement_view}B\x85\x02\n%com.google.ads.googleads.v3.resourcesB\x18\x44\x65tailPlacementViewProtoP\x01ZJgoogle.golang.org/genproto/googleapis/ads/googleads/v3/resources;resources\xa2\x02\x03GAA\xaa\x02!Google.Ads.GoogleAds.V3.Resources\xca\x02!Google\\Ads\\GoogleAds\\V3\\Resources\xea\x02%Google::Ads::GoogleAds::V3::Resourcesb\x06proto3')
   ,
-  dependencies=[google_dot_ads_dot_googleads__v3_dot_proto_dot_enums_dot_placement__type__pb2.DESCRIPTOR,google_dot_api_dot_resource__pb2.DESCRIPTOR,google_dot_protobuf_dot_wrappers__pb2.DESCRIPTOR,google_dot_api_dot_annotations__pb2.DESCRIPTOR,])
+  dependencies=[google_dot_ads_dot_googleads__v3_dot_proto_dot_enums_dot_placement__type__pb2.DESCRIPTOR,google_dot_api_dot_field__behavior__pb2.DESCRIPTOR,google_dot_api_dot_resource__pb2.DESCRIPTOR,google_dot_protobuf_dot_wrappers__pb2.DESCRIPTOR,google_dot_api_dot_annotations__pb2.DESCRIPTOR,])
 
 
 
@@ -44,42 +45,42 @@ _DETAILPLACEMENTVIEW = _descriptor.Descriptor(
       has_default_value=False, default_value=_b("").decode('utf-8'),
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR),
+      serialized_options=_b('\340A\003\372A.\n,googleads.googleapis.com/DetailPlacementView'), file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
       name='placement', full_name='google.ads.googleads.v3.resources.DetailPlacementView.placement', index=1,
       number=2, type=11, cpp_type=10, label=1,
       has_default_value=False, default_value=None,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR),
+      serialized_options=_b('\340A\003'), file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
       name='display_name', full_name='google.ads.googleads.v3.resources.DetailPlacementView.display_name', index=2,
       number=3, type=11, cpp_type=10, label=1,
       has_default_value=False, default_value=None,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR),
+      serialized_options=_b('\340A\003'), file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
       name='group_placement_target_url', full_name='google.ads.googleads.v3.resources.DetailPlacementView.group_placement_target_url', index=3,
       number=4, type=11, cpp_type=10, label=1,
       has_default_value=False, default_value=None,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR),
+      serialized_options=_b('\340A\003'), file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
       name='target_url', full_name='google.ads.googleads.v3.resources.DetailPlacementView.target_url', index=4,
       number=5, type=11, cpp_type=10, label=1,
       has_default_value=False, default_value=None,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR),
+      serialized_options=_b('\340A\003'), file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
       name='placement_type', full_name='google.ads.googleads.v3.resources.DetailPlacementView.placement_type', index=5,
       number=6, type=14, cpp_type=8, label=1,
       has_default_value=False, default_value=0,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR),
+      serialized_options=_b('\340A\003'), file=DESCRIPTOR),
   ],
   extensions=[
   ],
@@ -92,8 +93,8 @@ _DETAILPLACEMENTVIEW = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=254,
-  serialized_end=721,
+  serialized_start=287,
+  serialized_end=833,
 )
 
 _DETAILPLACEMENTVIEW.fields_by_name['placement'].message_type = google_dot_protobuf_dot_wrappers__pb2._STRINGVALUE
@@ -113,26 +114,27 @@ DetailPlacementView = _reflection.GeneratedProtocolMessageType('DetailPlacementV
   
   Attributes:
       resource_name:
-          The resource name of the detail placement view. Detail
-          placement view resource names have the form:  ``customers/{cus
-          tomer_id}/detailPlacementViews/{ad_group_id}~{base64_placement
-          }``
+          Output only. The resource name of the detail placement view.
+          Detail placement view resource names have the form:  ``custome
+          rs/{customer_id}/detailPlacementViews/{ad_group_id}~{base64_pl
+          acement}``
       placement:
-          The automatic placement string at detail level, e. g. website
-          URL, mobile application ID, or a YouTube video ID.
+          Output only. The automatic placement string at detail level,
+          e. g. website URL, mobile application ID, or a YouTube video
+          ID.
       display_name:
-          The display name is URL name for websites, YouTube video name
-          for YouTube videos, and translated mobile app name for mobile
-          apps.
+          Output only. The display name is URL name for websites,
+          YouTube video name for YouTube videos, and translated mobile
+          app name for mobile apps.
       group_placement_target_url:
-          URL of the group placement, e.g. domain, link to the mobile
-          application in app store, or a YouTube channel URL.
+          Output only. URL of the group placement, e.g. domain, link to
+          the mobile application in app store, or a YouTube channel URL.
       target_url:
-          URL of the placement, e.g. website, link to the mobile
-          application in app store, or a YouTube video URL.
+          Output only. URL of the placement, e.g. website, link to the
+          mobile application in app store, or a YouTube video URL.
       placement_type:
-          Type of the placement, e.g. Website, YouTube Video, and Mobile
-          Application.
+          Output only. Type of the placement, e.g. Website, YouTube
+          Video, and Mobile Application.
   """,
   # @@protoc_insertion_point(class_scope:google.ads.googleads.v3.resources.DetailPlacementView)
   ))
@@ -140,5 +142,11 @@ _sym_db.RegisterMessage(DetailPlacementView)
 
 
 DESCRIPTOR._options = None
+_DETAILPLACEMENTVIEW.fields_by_name['resource_name']._options = None
+_DETAILPLACEMENTVIEW.fields_by_name['placement']._options = None
+_DETAILPLACEMENTVIEW.fields_by_name['display_name']._options = None
+_DETAILPLACEMENTVIEW.fields_by_name['group_placement_target_url']._options = None
+_DETAILPLACEMENTVIEW.fields_by_name['target_url']._options = None
+_DETAILPLACEMENTVIEW.fields_by_name['placement_type']._options = None
 _DETAILPLACEMENTVIEW._options = None
 # @@protoc_insertion_point(module_scope)

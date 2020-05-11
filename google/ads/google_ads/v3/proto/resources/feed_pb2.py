@@ -17,6 +17,7 @@ from google.ads.google_ads.v3.proto.enums import affiliate_location_feed_relatio
 from google.ads.google_ads.v3.proto.enums import feed_attribute_type_pb2 as google_dot_ads_dot_googleads__v3_dot_proto_dot_enums_dot_feed__attribute__type__pb2
 from google.ads.google_ads.v3.proto.enums import feed_origin_pb2 as google_dot_ads_dot_googleads__v3_dot_proto_dot_enums_dot_feed__origin__pb2
 from google.ads.google_ads.v3.proto.enums import feed_status_pb2 as google_dot_ads_dot_googleads__v3_dot_proto_dot_enums_dot_feed__status__pb2
+from google.api import field_behavior_pb2 as google_dot_api_dot_field__behavior__pb2
 from google.api import resource_pb2 as google_dot_api_dot_resource__pb2
 from google.protobuf import wrappers_pb2 as google_dot_protobuf_dot_wrappers__pb2
 from google.api import annotations_pb2 as google_dot_api_dot_annotations__pb2
@@ -27,9 +28,9 @@ DESCRIPTOR = _descriptor.FileDescriptor(
   package='google.ads.googleads.v3.resources',
   syntax='proto3',
   serialized_options=_b('\n%com.google.ads.googleads.v3.resourcesB\tFeedProtoP\001ZJgoogle.golang.org/genproto/googleapis/ads/googleads/v3/resources;resources\242\002\003GAA\252\002!Google.Ads.GoogleAds.V3.Resources\312\002!Google\\Ads\\GoogleAds\\V3\\Resources\352\002%Google::Ads::GoogleAds::V3::Resources'),
-  serialized_pb=_b('\n2google/ads/googleads_v3/proto/resources/feed.proto\x12!google.ads.googleads.v3.resources\x1aSgoogle/ads/googleads_v3/proto/enums/affiliate_location_feed_relationship_type.proto\x1a=google/ads/googleads_v3/proto/enums/feed_attribute_type.proto\x1a\x35google/ads/googleads_v3/proto/enums/feed_origin.proto\x1a\x35google/ads/googleads_v3/proto/enums/feed_status.proto\x1a\x19google/api/resource.proto\x1a\x1egoogle/protobuf/wrappers.proto\x1a\x1cgoogle/api/annotations.proto\"\x81\x0c\n\x04\x46\x65\x65\x64\x12\x15\n\rresource_name\x18\x01 \x01(\t\x12\'\n\x02id\x18\x02 \x01(\x0b\x32\x1b.google.protobuf.Int64Value\x12*\n\x04name\x18\x03 \x01(\x0b\x32\x1c.google.protobuf.StringValue\x12\x44\n\nattributes\x18\x04 \x03(\x0b\x32\x30.google.ads.googleads.v3.resources.FeedAttribute\x12W\n\x14\x61ttribute_operations\x18\t \x03(\x0b\x32\x39.google.ads.googleads.v3.resources.FeedAttributeOperation\x12H\n\x06origin\x18\x05 \x01(\x0e\x32\x38.google.ads.googleads.v3.enums.FeedOriginEnum.FeedOrigin\x12H\n\x06status\x18\x08 \x01(\x0e\x32\x38.google.ads.googleads.v3.enums.FeedStatusEnum.FeedStatus\x12\x63\n\x19places_location_feed_data\x18\x06 \x01(\x0b\x32>.google.ads.googleads.v3.resources.Feed.PlacesLocationFeedDataH\x00\x12i\n\x1c\x61\x66\x66iliate_location_feed_data\x18\x07 \x01(\x0b\x32\x41.google.ads.googleads.v3.resources.Feed.AffiliateLocationFeedDataH\x00\x1a\xc9\x04\n\x16PlacesLocationFeedData\x12\\\n\noauth_info\x18\x01 \x01(\x0b\x32H.google.ads.googleads.v3.resources.Feed.PlacesLocationFeedData.OAuthInfo\x12\x33\n\remail_address\x18\x02 \x01(\x0b\x32\x1c.google.protobuf.StringValue\x12\x39\n\x13\x62usiness_account_id\x18\n \x01(\x0b\x32\x1c.google.protobuf.StringValue\x12:\n\x14\x62usiness_name_filter\x18\x04 \x01(\x0b\x32\x1c.google.protobuf.StringValue\x12\x36\n\x10\x63\x61tegory_filters\x18\x05 \x03(\x0b\x32\x1c.google.protobuf.StringValue\x12\x33\n\rlabel_filters\x18\x06 \x03(\x0b\x32\x1c.google.protobuf.StringValue\x1a\xb7\x01\n\tOAuthInfo\x12\x31\n\x0bhttp_method\x18\x01 \x01(\x0b\x32\x1c.google.protobuf.StringValue\x12\x36\n\x10http_request_url\x18\x02 \x01(\x0b\x32\x1c.google.protobuf.StringValue\x12?\n\x19http_authorization_header\x18\x03 \x01(\x0b\x32\x1c.google.protobuf.StringValue\x1a\xd7\x01\n\x19\x41\x66\x66iliateLocationFeedData\x12.\n\tchain_ids\x18\x01 \x03(\x0b\x32\x1b.google.protobuf.Int64Value\x12\x89\x01\n\x11relationship_type\x18\x02 \x01(\x0e\x32n.google.ads.googleads.v3.enums.AffiliateLocationFeedRelationshipTypeEnum.AffiliateLocationFeedRelationshipType:E\xea\x41\x42\n\x1dgoogleads.googleapis.com/Feed\x12!customers/{customer}/feeds/{feed}B\x1d\n\x1bsystem_feed_generation_data\"\xee\x01\n\rFeedAttribute\x12\'\n\x02id\x18\x01 \x01(\x0b\x32\x1b.google.protobuf.Int64Value\x12*\n\x04name\x18\x02 \x01(\x0b\x32\x1c.google.protobuf.StringValue\x12T\n\x04type\x18\x03 \x01(\x0e\x32\x46.google.ads.googleads.v3.enums.FeedAttributeTypeEnum.FeedAttributeType\x12\x32\n\x0eis_part_of_key\x18\x04 \x01(\x0b\x32\x1a.google.protobuf.BoolValue\"\xe2\x01\n\x16\x46\x65\x65\x64\x41ttributeOperation\x12T\n\x08operator\x18\x01 \x01(\x0e\x32\x42.google.ads.googleads.v3.resources.FeedAttributeOperation.Operator\x12?\n\x05value\x18\x02 \x01(\x0b\x32\x30.google.ads.googleads.v3.resources.FeedAttribute\"1\n\x08Operator\x12\x0f\n\x0bUNSPECIFIED\x10\x00\x12\x0b\n\x07UNKNOWN\x10\x01\x12\x07\n\x03\x41\x44\x44\x10\x02\x42\xf6\x01\n%com.google.ads.googleads.v3.resourcesB\tFeedProtoP\x01ZJgoogle.golang.org/genproto/googleapis/ads/googleads/v3/resources;resources\xa2\x02\x03GAA\xaa\x02!Google.Ads.GoogleAds.V3.Resources\xca\x02!Google\\Ads\\GoogleAds\\V3\\Resources\xea\x02%Google::Ads::GoogleAds::V3::Resourcesb\x06proto3')
+  serialized_pb=_b('\n2google/ads/googleads_v3/proto/resources/feed.proto\x12!google.ads.googleads.v3.resources\x1aSgoogle/ads/googleads_v3/proto/enums/affiliate_location_feed_relationship_type.proto\x1a=google/ads/googleads_v3/proto/enums/feed_attribute_type.proto\x1a\x35google/ads/googleads_v3/proto/enums/feed_origin.proto\x1a\x35google/ads/googleads_v3/proto/enums/feed_status.proto\x1a\x1fgoogle/api/field_behavior.proto\x1a\x19google/api/resource.proto\x1a\x1egoogle/protobuf/wrappers.proto\x1a\x1cgoogle/api/annotations.proto\"\xc1\x0c\n\x04\x46\x65\x65\x64\x12<\n\rresource_name\x18\x01 \x01(\tB%\xe0\x41\x05\xfa\x41\x1f\n\x1dgoogleads.googleapis.com/Feed\x12,\n\x02id\x18\x02 \x01(\x0b\x32\x1b.google.protobuf.Int64ValueB\x03\xe0\x41\x03\x12/\n\x04name\x18\x03 \x01(\x0b\x32\x1c.google.protobuf.StringValueB\x03\xe0\x41\x05\x12\x44\n\nattributes\x18\x04 \x03(\x0b\x32\x30.google.ads.googleads.v3.resources.FeedAttribute\x12W\n\x14\x61ttribute_operations\x18\t \x03(\x0b\x32\x39.google.ads.googleads.v3.resources.FeedAttributeOperation\x12M\n\x06origin\x18\x05 \x01(\x0e\x32\x38.google.ads.googleads.v3.enums.FeedOriginEnum.FeedOriginB\x03\xe0\x41\x05\x12M\n\x06status\x18\x08 \x01(\x0e\x32\x38.google.ads.googleads.v3.enums.FeedStatusEnum.FeedStatusB\x03\xe0\x41\x03\x12\x63\n\x19places_location_feed_data\x18\x06 \x01(\x0b\x32>.google.ads.googleads.v3.resources.Feed.PlacesLocationFeedDataH\x00\x12i\n\x1c\x61\x66\x66iliate_location_feed_data\x18\x07 \x01(\x0b\x32\x41.google.ads.googleads.v3.resources.Feed.AffiliateLocationFeedDataH\x00\x1a\xce\x04\n\x16PlacesLocationFeedData\x12\x61\n\noauth_info\x18\x01 \x01(\x0b\x32H.google.ads.googleads.v3.resources.Feed.PlacesLocationFeedData.OAuthInfoB\x03\xe0\x41\x05\x12\x33\n\remail_address\x18\x02 \x01(\x0b\x32\x1c.google.protobuf.StringValue\x12\x39\n\x13\x62usiness_account_id\x18\n \x01(\x0b\x32\x1c.google.protobuf.StringValue\x12:\n\x14\x62usiness_name_filter\x18\x04 \x01(\x0b\x32\x1c.google.protobuf.StringValue\x12\x36\n\x10\x63\x61tegory_filters\x18\x05 \x03(\x0b\x32\x1c.google.protobuf.StringValue\x12\x33\n\rlabel_filters\x18\x06 \x03(\x0b\x32\x1c.google.protobuf.StringValue\x1a\xb7\x01\n\tOAuthInfo\x12\x31\n\x0bhttp_method\x18\x01 \x01(\x0b\x32\x1c.google.protobuf.StringValue\x12\x36\n\x10http_request_url\x18\x02 \x01(\x0b\x32\x1c.google.protobuf.StringValue\x12?\n\x19http_authorization_header\x18\x03 \x01(\x0b\x32\x1c.google.protobuf.StringValue\x1a\xd7\x01\n\x19\x41\x66\x66iliateLocationFeedData\x12.\n\tchain_ids\x18\x01 \x03(\x0b\x32\x1b.google.protobuf.Int64Value\x12\x89\x01\n\x11relationship_type\x18\x02 \x01(\x0e\x32n.google.ads.googleads.v3.enums.AffiliateLocationFeedRelationshipTypeEnum.AffiliateLocationFeedRelationshipType:E\xea\x41\x42\n\x1dgoogleads.googleapis.com/Feed\x12!customers/{customer}/feeds/{feed}B\x1d\n\x1bsystem_feed_generation_data\"\xee\x01\n\rFeedAttribute\x12\'\n\x02id\x18\x01 \x01(\x0b\x32\x1b.google.protobuf.Int64Value\x12*\n\x04name\x18\x02 \x01(\x0b\x32\x1c.google.protobuf.StringValue\x12T\n\x04type\x18\x03 \x01(\x0e\x32\x46.google.ads.googleads.v3.enums.FeedAttributeTypeEnum.FeedAttributeType\x12\x32\n\x0eis_part_of_key\x18\x04 \x01(\x0b\x32\x1a.google.protobuf.BoolValue\"\xec\x01\n\x16\x46\x65\x65\x64\x41ttributeOperation\x12Y\n\x08operator\x18\x01 \x01(\x0e\x32\x42.google.ads.googleads.v3.resources.FeedAttributeOperation.OperatorB\x03\xe0\x41\x03\x12\x44\n\x05value\x18\x02 \x01(\x0b\x32\x30.google.ads.googleads.v3.resources.FeedAttributeB\x03\xe0\x41\x03\"1\n\x08Operator\x12\x0f\n\x0bUNSPECIFIED\x10\x00\x12\x0b\n\x07UNKNOWN\x10\x01\x12\x07\n\x03\x41\x44\x44\x10\x02\x42\xf6\x01\n%com.google.ads.googleads.v3.resourcesB\tFeedProtoP\x01ZJgoogle.golang.org/genproto/googleapis/ads/googleads/v3/resources;resources\xa2\x02\x03GAA\xaa\x02!Google.Ads.GoogleAds.V3.Resources\xca\x02!Google\\Ads\\GoogleAds\\V3\\Resources\xea\x02%Google::Ads::GoogleAds::V3::Resourcesb\x06proto3')
   ,
-  dependencies=[google_dot_ads_dot_googleads__v3_dot_proto_dot_enums_dot_affiliate__location__feed__relationship__type__pb2.DESCRIPTOR,google_dot_ads_dot_googleads__v3_dot_proto_dot_enums_dot_feed__attribute__type__pb2.DESCRIPTOR,google_dot_ads_dot_googleads__v3_dot_proto_dot_enums_dot_feed__origin__pb2.DESCRIPTOR,google_dot_ads_dot_googleads__v3_dot_proto_dot_enums_dot_feed__status__pb2.DESCRIPTOR,google_dot_api_dot_resource__pb2.DESCRIPTOR,google_dot_protobuf_dot_wrappers__pb2.DESCRIPTOR,google_dot_api_dot_annotations__pb2.DESCRIPTOR,])
+  dependencies=[google_dot_ads_dot_googleads__v3_dot_proto_dot_enums_dot_affiliate__location__feed__relationship__type__pb2.DESCRIPTOR,google_dot_ads_dot_googleads__v3_dot_proto_dot_enums_dot_feed__attribute__type__pb2.DESCRIPTOR,google_dot_ads_dot_googleads__v3_dot_proto_dot_enums_dot_feed__origin__pb2.DESCRIPTOR,google_dot_ads_dot_googleads__v3_dot_proto_dot_enums_dot_feed__status__pb2.DESCRIPTOR,google_dot_api_dot_field__behavior__pb2.DESCRIPTOR,google_dot_api_dot_resource__pb2.DESCRIPTOR,google_dot_protobuf_dot_wrappers__pb2.DESCRIPTOR,google_dot_api_dot_annotations__pb2.DESCRIPTOR,])
 
 
 
@@ -54,8 +55,8 @@ _FEEDATTRIBUTEOPERATION_OPERATOR = _descriptor.EnumDescriptor(
   ],
   containing_type=None,
   serialized_options=None,
-  serialized_start=2395,
-  serialized_end=2444,
+  serialized_start=2502,
+  serialized_end=2551,
 )
 _sym_db.RegisterEnumDescriptor(_FEEDATTRIBUTEOPERATION_OPERATOR)
 
@@ -100,8 +101,8 @@ _FEED_PLACESLOCATIONFEEDDATA_OAUTHINFO = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=1471,
-  serialized_end=1654,
+  serialized_start=1568,
+  serialized_end=1751,
 )
 
 _FEED_PLACESLOCATIONFEEDDATA = _descriptor.Descriptor(
@@ -117,7 +118,7 @@ _FEED_PLACESLOCATIONFEEDDATA = _descriptor.Descriptor(
       has_default_value=False, default_value=None,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR),
+      serialized_options=_b('\340A\005'), file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
       name='email_address', full_name='google.ads.googleads.v3.resources.Feed.PlacesLocationFeedData.email_address', index=1,
       number=2, type=11, cpp_type=10, label=1,
@@ -165,8 +166,8 @@ _FEED_PLACESLOCATIONFEEDDATA = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=1069,
-  serialized_end=1654,
+  serialized_start=1161,
+  serialized_end=1751,
 )
 
 _FEED_AFFILIATELOCATIONFEEDDATA = _descriptor.Descriptor(
@@ -202,8 +203,8 @@ _FEED_AFFILIATELOCATIONFEEDDATA = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=1657,
-  serialized_end=1872,
+  serialized_start=1754,
+  serialized_end=1969,
 )
 
 _FEED = _descriptor.Descriptor(
@@ -219,21 +220,21 @@ _FEED = _descriptor.Descriptor(
       has_default_value=False, default_value=_b("").decode('utf-8'),
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR),
+      serialized_options=_b('\340A\005\372A\037\n\035googleads.googleapis.com/Feed'), file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
       name='id', full_name='google.ads.googleads.v3.resources.Feed.id', index=1,
       number=2, type=11, cpp_type=10, label=1,
       has_default_value=False, default_value=None,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR),
+      serialized_options=_b('\340A\003'), file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
       name='name', full_name='google.ads.googleads.v3.resources.Feed.name', index=2,
       number=3, type=11, cpp_type=10, label=1,
       has_default_value=False, default_value=None,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR),
+      serialized_options=_b('\340A\005'), file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
       name='attributes', full_name='google.ads.googleads.v3.resources.Feed.attributes', index=3,
       number=4, type=11, cpp_type=10, label=3,
@@ -254,14 +255,14 @@ _FEED = _descriptor.Descriptor(
       has_default_value=False, default_value=0,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR),
+      serialized_options=_b('\340A\005'), file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
       name='status', full_name='google.ads.googleads.v3.resources.Feed.status', index=6,
       number=8, type=14, cpp_type=8, label=1,
       has_default_value=False, default_value=0,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR),
+      serialized_options=_b('\340A\003'), file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
       name='places_location_feed_data', full_name='google.ads.googleads.v3.resources.Feed.places_location_feed_data', index=7,
       number=6, type=11, cpp_type=10, label=1,
@@ -291,8 +292,8 @@ _FEED = _descriptor.Descriptor(
       name='system_feed_generation_data', full_name='google.ads.googleads.v3.resources.Feed.system_feed_generation_data',
       index=0, containing_type=None, fields=[]),
   ],
-  serialized_start=437,
-  serialized_end=1974,
+  serialized_start=470,
+  serialized_end=2071,
 )
 
 
@@ -343,8 +344,8 @@ _FEEDATTRIBUTE = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=1977,
-  serialized_end=2215,
+  serialized_start=2074,
+  serialized_end=2312,
 )
 
 
@@ -361,14 +362,14 @@ _FEEDATTRIBUTEOPERATION = _descriptor.Descriptor(
       has_default_value=False, default_value=0,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR),
+      serialized_options=_b('\340A\003'), file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
       name='value', full_name='google.ads.googleads.v3.resources.FeedAttributeOperation.value', index=1,
       number=2, type=11, cpp_type=10, label=1,
       has_default_value=False, default_value=None,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR),
+      serialized_options=_b('\340A\003'), file=DESCRIPTOR),
   ],
   extensions=[
   ],
@@ -382,8 +383,8 @@ _FEEDATTRIBUTEOPERATION = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=2218,
-  serialized_end=2444,
+  serialized_start=2315,
+  serialized_end=2551,
 )
 
 _FEED_PLACESLOCATIONFEEDDATA_OAUTHINFO.fields_by_name['http_method'].message_type = google_dot_protobuf_dot_wrappers__pb2._STRINGVALUE
@@ -457,9 +458,9 @@ Feed = _reflection.GeneratedProtocolMessageType('Feed', (_message.Message,), dic
     
     Attributes:
         oauth_info:
-            Required authentication token (from OAuth API) for the email.
-            This field can only be specified in a create request. All its
-            subfields are not selectable.
+            Immutable. Required authentication token (from OAuth API) for
+            the email. This field can only be specified in a create
+            request. All its subfields are not selectable.
         email_address:
             Email address of a Google My Business account or email address
             of a manager of the Google My Business account. Required.
@@ -516,12 +517,12 @@ Feed = _reflection.GeneratedProtocolMessageType('Feed', (_message.Message,), dic
   
   Attributes:
       resource_name:
-          The resource name of the feed. Feed resource names have the
-          form:  ``customers/{customer_id}/feeds/{feed_id}``
+          Immutable. The resource name of the feed. Feed resource names
+          have the form:  ``customers/{customer_id}/feeds/{feed_id}``
       id:
-          The ID of the feed. This field is read-only.
+          Output only. The ID of the feed. This field is read-only.
       name:
-          Name of the feed. Required.
+          Immutable. Name of the feed. Required.
       attributes:
           The Feed's attributes. Required on CREATE, unless
           system\_feed\_generation\_data is provided, in which case
@@ -532,9 +533,10 @@ Feed = _reflection.GeneratedProtocolMessageType('Feed', (_message.Message,), dic
           The list of operations changing the feed attributes.
           Attributes can only be added, not removed.
       origin:
-          Specifies who manages the FeedAttributes for the Feed.
+          Immutable. Specifies who manages the FeedAttributes for the
+          Feed.
       status:
-          Status of the feed. This field is read-only.
+          Output only. Status of the feed. This field is read-only.
       system_feed_generation_data:
           The system data for the Feed. This data specifies information
           for generating the feed items of the system generated feed.
@@ -589,9 +591,9 @@ FeedAttributeOperation = _reflection.GeneratedProtocolMessageType('FeedAttribute
   
   Attributes:
       operator:
-          Type of list operation to perform.
+          Output only. Type of list operation to perform.
       value:
-          The feed attribute being added to the list.
+          Output only. The feed attribute being added to the list.
   """,
   # @@protoc_insertion_point(class_scope:google.ads.googleads.v3.resources.FeedAttributeOperation)
   ))
@@ -599,5 +601,13 @@ _sym_db.RegisterMessage(FeedAttributeOperation)
 
 
 DESCRIPTOR._options = None
+_FEED_PLACESLOCATIONFEEDDATA.fields_by_name['oauth_info']._options = None
+_FEED.fields_by_name['resource_name']._options = None
+_FEED.fields_by_name['id']._options = None
+_FEED.fields_by_name['name']._options = None
+_FEED.fields_by_name['origin']._options = None
+_FEED.fields_by_name['status']._options = None
 _FEED._options = None
+_FEEDATTRIBUTEOPERATION.fields_by_name['operator']._options = None
+_FEEDATTRIBUTEOPERATION.fields_by_name['value']._options = None
 # @@protoc_insertion_point(module_scope)

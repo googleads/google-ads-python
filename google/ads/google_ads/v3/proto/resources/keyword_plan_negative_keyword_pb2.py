@@ -14,6 +14,7 @@ _sym_db = _symbol_database.Default()
 
 
 from google.ads.google_ads.v3.proto.enums import keyword_match_type_pb2 as google_dot_ads_dot_googleads__v3_dot_proto_dot_enums_dot_keyword__match__type__pb2
+from google.api import field_behavior_pb2 as google_dot_api_dot_field__behavior__pb2
 from google.api import resource_pb2 as google_dot_api_dot_resource__pb2
 from google.protobuf import wrappers_pb2 as google_dot_protobuf_dot_wrappers__pb2
 from google.api import annotations_pb2 as google_dot_api_dot_annotations__pb2
@@ -24,9 +25,9 @@ DESCRIPTOR = _descriptor.FileDescriptor(
   package='google.ads.googleads.v3.resources',
   syntax='proto3',
   serialized_options=_b('\n%com.google.ads.googleads.v3.resourcesB\037KeywordPlanNegativeKeywordProtoP\001ZJgoogle.golang.org/genproto/googleapis/ads/googleads/v3/resources;resources\242\002\003GAA\252\002!Google.Ads.GoogleAds.V3.Resources\312\002!Google\\Ads\\GoogleAds\\V3\\Resources\352\002%Google::Ads::GoogleAds::V3::Resources'),
-  serialized_pb=_b('\nKgoogle/ads/googleads_v3/proto/resources/keyword_plan_negative_keyword.proto\x12!google.ads.googleads.v3.resources\x1a<google/ads/googleads_v3/proto/enums/keyword_match_type.proto\x1a\x19google/api/resource.proto\x1a\x1egoogle/protobuf/wrappers.proto\x1a\x1cgoogle/api/annotations.proto\"\xad\x03\n\x1aKeywordPlanNegativeKeyword\x12\x15\n\rresource_name\x18\x01 \x01(\t\x12;\n\x15keyword_plan_campaign\x18\x02 \x01(\x0b\x32\x1c.google.protobuf.StringValue\x12\'\n\x02id\x18\x03 \x01(\x0b\x32\x1b.google.protobuf.Int64Value\x12*\n\x04text\x18\x04 \x01(\x0b\x32\x1c.google.protobuf.StringValue\x12X\n\nmatch_type\x18\x05 \x01(\x0e\x32\x44.google.ads.googleads.v3.enums.KeywordMatchTypeEnum.KeywordMatchType:\x8b\x01\xea\x41\x87\x01\n3googleads.googleapis.com/KeywordPlanNegativeKeyword\x12Pcustomers/{customer}/keywordPlanNegativeKeywords/{keyword_plan_negative_keyword}B\x8c\x02\n%com.google.ads.googleads.v3.resourcesB\x1fKeywordPlanNegativeKeywordProtoP\x01ZJgoogle.golang.org/genproto/googleapis/ads/googleads/v3/resources;resources\xa2\x02\x03GAA\xaa\x02!Google.Ads.GoogleAds.V3.Resources\xca\x02!Google\\Ads\\GoogleAds\\V3\\Resources\xea\x02%Google::Ads::GoogleAds::V3::Resourcesb\x06proto3')
+  serialized_pb=_b('\nKgoogle/ads/googleads_v3/proto/resources/keyword_plan_negative_keyword.proto\x12!google.ads.googleads.v3.resources\x1a<google/ads/googleads_v3/proto/enums/keyword_match_type.proto\x1a\x1fgoogle/api/field_behavior.proto\x1a\x19google/api/resource.proto\x1a\x1egoogle/protobuf/wrappers.proto\x1a\x1cgoogle/api/annotations.proto\"\xa2\x04\n\x1aKeywordPlanNegativeKeyword\x12R\n\rresource_name\x18\x01 \x01(\tB;\xe0\x41\x05\xfa\x41\x35\n3googleads.googleapis.com/KeywordPlanNegativeKeyword\x12n\n\x15keyword_plan_campaign\x18\x02 \x01(\x0b\x32\x1c.google.protobuf.StringValueB1\xfa\x41.\n,googleads.googleapis.com/KeywordPlanCampaign\x12,\n\x02id\x18\x03 \x01(\x0b\x32\x1b.google.protobuf.Int64ValueB\x03\xe0\x41\x03\x12*\n\x04text\x18\x04 \x01(\x0b\x32\x1c.google.protobuf.StringValue\x12X\n\nmatch_type\x18\x05 \x01(\x0e\x32\x44.google.ads.googleads.v3.enums.KeywordMatchTypeEnum.KeywordMatchType:\x8b\x01\xea\x41\x87\x01\n3googleads.googleapis.com/KeywordPlanNegativeKeyword\x12Pcustomers/{customer}/keywordPlanNegativeKeywords/{keyword_plan_negative_keyword}B\x8c\x02\n%com.google.ads.googleads.v3.resourcesB\x1fKeywordPlanNegativeKeywordProtoP\x01ZJgoogle.golang.org/genproto/googleapis/ads/googleads/v3/resources;resources\xa2\x02\x03GAA\xaa\x02!Google.Ads.GoogleAds.V3.Resources\xca\x02!Google\\Ads\\GoogleAds\\V3\\Resources\xea\x02%Google::Ads::GoogleAds::V3::Resourcesb\x06proto3')
   ,
-  dependencies=[google_dot_ads_dot_googleads__v3_dot_proto_dot_enums_dot_keyword__match__type__pb2.DESCRIPTOR,google_dot_api_dot_resource__pb2.DESCRIPTOR,google_dot_protobuf_dot_wrappers__pb2.DESCRIPTOR,google_dot_api_dot_annotations__pb2.DESCRIPTOR,])
+  dependencies=[google_dot_ads_dot_googleads__v3_dot_proto_dot_enums_dot_keyword__match__type__pb2.DESCRIPTOR,google_dot_api_dot_field__behavior__pb2.DESCRIPTOR,google_dot_api_dot_resource__pb2.DESCRIPTOR,google_dot_protobuf_dot_wrappers__pb2.DESCRIPTOR,google_dot_api_dot_annotations__pb2.DESCRIPTOR,])
 
 
 
@@ -44,21 +45,21 @@ _KEYWORDPLANNEGATIVEKEYWORD = _descriptor.Descriptor(
       has_default_value=False, default_value=_b("").decode('utf-8'),
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR),
+      serialized_options=_b('\340A\005\372A5\n3googleads.googleapis.com/KeywordPlanNegativeKeyword'), file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
       name='keyword_plan_campaign', full_name='google.ads.googleads.v3.resources.KeywordPlanNegativeKeyword.keyword_plan_campaign', index=1,
       number=2, type=11, cpp_type=10, label=1,
       has_default_value=False, default_value=None,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR),
+      serialized_options=_b('\372A.\n,googleads.googleapis.com/KeywordPlanCampaign'), file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
       name='id', full_name='google.ads.googleads.v3.resources.KeywordPlanNegativeKeyword.id', index=2,
       number=3, type=11, cpp_type=10, label=1,
       has_default_value=False, default_value=None,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR),
+      serialized_options=_b('\340A\003'), file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
       name='text', full_name='google.ads.googleads.v3.resources.KeywordPlanNegativeKeyword.text', index=3,
       number=4, type=11, cpp_type=10, label=1,
@@ -85,8 +86,8 @@ _KEYWORDPLANNEGATIVEKEYWORD = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=266,
-  serialized_end=695,
+  serialized_start=299,
+  serialized_end=845,
 )
 
 _KEYWORDPLANNEGATIVEKEYWORD.fields_by_name['keyword_plan_campaign'].message_type = google_dot_protobuf_dot_wrappers__pb2._STRINGVALUE
@@ -106,15 +107,15 @@ KeywordPlanNegativeKeyword = _reflection.GeneratedProtocolMessageType('KeywordPl
   
   Attributes:
       resource_name:
-          The resource name of the Keyword Plan negative keyword.
-          KeywordPlanNegativeKeyword resource names have the form:  ``cu
-          stomers/{customer_id}/keywordPlanNegativeKeywords/{kp_negative
-          _keyword_id}``
+          Immutable. The resource name of the Keyword Plan negative
+          keyword. KeywordPlanNegativeKeyword resource names have the
+          form:  ``customers/{customer_id}/keywordPlanNegativeKeywords/{
+          kp_negative_keyword_id}``
       keyword_plan_campaign:
           The Keyword Plan campaign to which this negative keyword
           belongs.
       id:
-          The ID of the Keyword Plan negative keyword.
+          Output only. The ID of the Keyword Plan negative keyword.
       text:
           The keyword text.
       match_type:
@@ -126,5 +127,8 @@ _sym_db.RegisterMessage(KeywordPlanNegativeKeyword)
 
 
 DESCRIPTOR._options = None
+_KEYWORDPLANNEGATIVEKEYWORD.fields_by_name['resource_name']._options = None
+_KEYWORDPLANNEGATIVEKEYWORD.fields_by_name['keyword_plan_campaign']._options = None
+_KEYWORDPLANNEGATIVEKEYWORD.fields_by_name['id']._options = None
 _KEYWORDPLANNEGATIVEKEYWORD._options = None
 # @@protoc_insertion_point(module_scope)

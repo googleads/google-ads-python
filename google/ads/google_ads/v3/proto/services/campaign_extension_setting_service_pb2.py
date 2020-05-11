@@ -17,6 +17,7 @@ from google.ads.google_ads.v3.proto.resources import campaign_extension_setting_
 from google.api import annotations_pb2 as google_dot_api_dot_annotations__pb2
 from google.api import client_pb2 as google_dot_api_dot_client__pb2
 from google.api import field_behavior_pb2 as google_dot_api_dot_field__behavior__pb2
+from google.api import resource_pb2 as google_dot_api_dot_resource__pb2
 from google.protobuf import field_mask_pb2 as google_dot_protobuf_dot_field__mask__pb2
 from google.rpc import status_pb2 as google_dot_rpc_dot_status__pb2
 
@@ -26,9 +27,9 @@ DESCRIPTOR = _descriptor.FileDescriptor(
   package='google.ads.googleads.v3.services',
   syntax='proto3',
   serialized_options=_b('\n$com.google.ads.googleads.v3.servicesB$CampaignExtensionSettingServiceProtoP\001ZHgoogle.golang.org/genproto/googleapis/ads/googleads/v3/services;services\242\002\003GAA\252\002 Google.Ads.GoogleAds.V3.Services\312\002 Google\\Ads\\GoogleAds\\V3\\Services\352\002$Google::Ads::GoogleAds::V3::Services'),
-  serialized_pb=_b('\nOgoogle/ads/googleads_v3/proto/services/campaign_extension_setting_service.proto\x12 google.ads.googleads.v3.services\x1aHgoogle/ads/googleads_v3/proto/resources/campaign_extension_setting.proto\x1a\x1cgoogle/api/annotations.proto\x1a\x17google/api/client.proto\x1a\x1fgoogle/api/field_behavior.proto\x1a google/protobuf/field_mask.proto\x1a\x17google/rpc/status.proto\"@\n\"GetCampaignExtensionSettingRequest\x12\x1a\n\rresource_name\x18\x01 \x01(\tB\x03\xe0\x41\x02\"\xd0\x01\n&MutateCampaignExtensionSettingsRequest\x12\x18\n\x0b\x63ustomer_id\x18\x01 \x01(\tB\x03\xe0\x41\x02\x12\\\n\noperations\x18\x02 \x03(\x0b\x32\x43.google.ads.googleads.v3.services.CampaignExtensionSettingOperationB\x03\xe0\x41\x02\x12\x17\n\x0fpartial_failure\x18\x03 \x01(\x08\x12\x15\n\rvalidate_only\x18\x04 \x01(\x08\"\x91\x02\n!CampaignExtensionSettingOperation\x12/\n\x0bupdate_mask\x18\x04 \x01(\x0b\x32\x1a.google.protobuf.FieldMask\x12M\n\x06\x63reate\x18\x01 \x01(\x0b\x32;.google.ads.googleads.v3.resources.CampaignExtensionSettingH\x00\x12M\n\x06update\x18\x02 \x01(\x0b\x32;.google.ads.googleads.v3.resources.CampaignExtensionSettingH\x00\x12\x10\n\x06remove\x18\x03 \x01(\tH\x00\x42\x0b\n\toperation\"\xb5\x01\n\'MutateCampaignExtensionSettingsResponse\x12\x31\n\x15partial_failure_error\x18\x03 \x01(\x0b\x32\x12.google.rpc.Status\x12W\n\x07results\x18\x02 \x03(\x0b\x32\x46.google.ads.googleads.v3.services.MutateCampaignExtensionSettingResult\"=\n$MutateCampaignExtensionSettingResult\x12\x15\n\rresource_name\x18\x01 \x01(\t2\xd3\x04\n\x1f\x43\x61mpaignExtensionSettingService\x12\xf5\x01\n\x1bGetCampaignExtensionSetting\x12\x44.google.ads.googleads.v3.services.GetCampaignExtensionSettingRequest\x1a;.google.ads.googleads.v3.resources.CampaignExtensionSetting\"S\x82\xd3\xe4\x93\x02=\x12;/v3/{resource_name=customers/*/campaignExtensionSettings/*}\xda\x41\rresource_name\x12\x9a\x02\n\x1fMutateCampaignExtensionSettings\x12H.google.ads.googleads.v3.services.MutateCampaignExtensionSettingsRequest\x1aI.google.ads.googleads.v3.services.MutateCampaignExtensionSettingsResponse\"b\x82\xd3\xe4\x93\x02\x43\">/v3/customers/{customer_id=*}/campaignExtensionSettings:mutate:\x01*\xda\x41\x16\x63ustomer_id,operations\x1a\x1b\xca\x41\x18googleads.googleapis.comB\x8b\x02\n$com.google.ads.googleads.v3.servicesB$CampaignExtensionSettingServiceProtoP\x01ZHgoogle.golang.org/genproto/googleapis/ads/googleads/v3/services;services\xa2\x02\x03GAA\xaa\x02 Google.Ads.GoogleAds.V3.Services\xca\x02 Google\\Ads\\GoogleAds\\V3\\Services\xea\x02$Google::Ads::GoogleAds::V3::Servicesb\x06proto3')
+  serialized_pb=_b('\nOgoogle/ads/googleads_v3/proto/services/campaign_extension_setting_service.proto\x12 google.ads.googleads.v3.services\x1aHgoogle/ads/googleads_v3/proto/resources/campaign_extension_setting.proto\x1a\x1cgoogle/api/annotations.proto\x1a\x17google/api/client.proto\x1a\x1fgoogle/api/field_behavior.proto\x1a\x19google/api/resource.proto\x1a google/protobuf/field_mask.proto\x1a\x17google/rpc/status.proto\"v\n\"GetCampaignExtensionSettingRequest\x12P\n\rresource_name\x18\x01 \x01(\tB9\xe0\x41\x02\xfa\x41\x33\n1googleads.googleapis.com/CampaignExtensionSetting\"\xd0\x01\n&MutateCampaignExtensionSettingsRequest\x12\x18\n\x0b\x63ustomer_id\x18\x01 \x01(\tB\x03\xe0\x41\x02\x12\\\n\noperations\x18\x02 \x03(\x0b\x32\x43.google.ads.googleads.v3.services.CampaignExtensionSettingOperationB\x03\xe0\x41\x02\x12\x17\n\x0fpartial_failure\x18\x03 \x01(\x08\x12\x15\n\rvalidate_only\x18\x04 \x01(\x08\"\x91\x02\n!CampaignExtensionSettingOperation\x12/\n\x0bupdate_mask\x18\x04 \x01(\x0b\x32\x1a.google.protobuf.FieldMask\x12M\n\x06\x63reate\x18\x01 \x01(\x0b\x32;.google.ads.googleads.v3.resources.CampaignExtensionSettingH\x00\x12M\n\x06update\x18\x02 \x01(\x0b\x32;.google.ads.googleads.v3.resources.CampaignExtensionSettingH\x00\x12\x10\n\x06remove\x18\x03 \x01(\tH\x00\x42\x0b\n\toperation\"\xb5\x01\n\'MutateCampaignExtensionSettingsResponse\x12\x31\n\x15partial_failure_error\x18\x03 \x01(\x0b\x32\x12.google.rpc.Status\x12W\n\x07results\x18\x02 \x03(\x0b\x32\x46.google.ads.googleads.v3.services.MutateCampaignExtensionSettingResult\"=\n$MutateCampaignExtensionSettingResult\x12\x15\n\rresource_name\x18\x01 \x01(\t2\xd3\x04\n\x1f\x43\x61mpaignExtensionSettingService\x12\xf5\x01\n\x1bGetCampaignExtensionSetting\x12\x44.google.ads.googleads.v3.services.GetCampaignExtensionSettingRequest\x1a;.google.ads.googleads.v3.resources.CampaignExtensionSetting\"S\x82\xd3\xe4\x93\x02=\x12;/v3/{resource_name=customers/*/campaignExtensionSettings/*}\xda\x41\rresource_name\x12\x9a\x02\n\x1fMutateCampaignExtensionSettings\x12H.google.ads.googleads.v3.services.MutateCampaignExtensionSettingsRequest\x1aI.google.ads.googleads.v3.services.MutateCampaignExtensionSettingsResponse\"b\x82\xd3\xe4\x93\x02\x43\">/v3/customers/{customer_id=*}/campaignExtensionSettings:mutate:\x01*\xda\x41\x16\x63ustomer_id,operations\x1a\x1b\xca\x41\x18googleads.googleapis.comB\x8b\x02\n$com.google.ads.googleads.v3.servicesB$CampaignExtensionSettingServiceProtoP\x01ZHgoogle.golang.org/genproto/googleapis/ads/googleads/v3/services;services\xa2\x02\x03GAA\xaa\x02 Google.Ads.GoogleAds.V3.Services\xca\x02 Google\\Ads\\GoogleAds\\V3\\Services\xea\x02$Google::Ads::GoogleAds::V3::Servicesb\x06proto3')
   ,
-  dependencies=[google_dot_ads_dot_googleads__v3_dot_proto_dot_resources_dot_campaign__extension__setting__pb2.DESCRIPTOR,google_dot_api_dot_annotations__pb2.DESCRIPTOR,google_dot_api_dot_client__pb2.DESCRIPTOR,google_dot_api_dot_field__behavior__pb2.DESCRIPTOR,google_dot_protobuf_dot_field__mask__pb2.DESCRIPTOR,google_dot_rpc_dot_status__pb2.DESCRIPTOR,])
+  dependencies=[google_dot_ads_dot_googleads__v3_dot_proto_dot_resources_dot_campaign__extension__setting__pb2.DESCRIPTOR,google_dot_api_dot_annotations__pb2.DESCRIPTOR,google_dot_api_dot_client__pb2.DESCRIPTOR,google_dot_api_dot_field__behavior__pb2.DESCRIPTOR,google_dot_api_dot_resource__pb2.DESCRIPTOR,google_dot_protobuf_dot_field__mask__pb2.DESCRIPTOR,google_dot_rpc_dot_status__pb2.DESCRIPTOR,])
 
 
 
@@ -46,7 +47,7 @@ _GETCAMPAIGNEXTENSIONSETTINGREQUEST = _descriptor.Descriptor(
       has_default_value=False, default_value=_b("").decode('utf-8'),
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
-      serialized_options=_b('\340A\002'), file=DESCRIPTOR),
+      serialized_options=_b('\340A\002\372A3\n1googleads.googleapis.com/CampaignExtensionSetting'), file=DESCRIPTOR),
   ],
   extensions=[
   ],
@@ -59,8 +60,8 @@ _GETCAMPAIGNEXTENSIONSETTINGREQUEST = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=338,
-  serialized_end=402,
+  serialized_start=365,
+  serialized_end=483,
 )
 
 
@@ -111,8 +112,8 @@ _MUTATECAMPAIGNEXTENSIONSETTINGSREQUEST = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=405,
-  serialized_end=613,
+  serialized_start=486,
+  serialized_end=694,
 )
 
 
@@ -166,8 +167,8 @@ _CAMPAIGNEXTENSIONSETTINGOPERATION = _descriptor.Descriptor(
       name='operation', full_name='google.ads.googleads.v3.services.CampaignExtensionSettingOperation.operation',
       index=0, containing_type=None, fields=[]),
   ],
-  serialized_start=616,
-  serialized_end=889,
+  serialized_start=697,
+  serialized_end=970,
 )
 
 
@@ -204,8 +205,8 @@ _MUTATECAMPAIGNEXTENSIONSETTINGSRESPONSE = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=892,
-  serialized_end=1073,
+  serialized_start=973,
+  serialized_end=1154,
 )
 
 
@@ -235,8 +236,8 @@ _MUTATECAMPAIGNEXTENSIONSETTINGRESULT = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=1075,
-  serialized_end=1136,
+  serialized_start=1156,
+  serialized_end=1217,
 )
 
 _MUTATECAMPAIGNEXTENSIONSETTINGSREQUEST.fields_by_name['operations'].message_type = _CAMPAIGNEXTENSIONSETTINGOPERATION
@@ -384,8 +385,8 @@ _CAMPAIGNEXTENSIONSETTINGSERVICE = _descriptor.ServiceDescriptor(
   file=DESCRIPTOR,
   index=0,
   serialized_options=_b('\312A\030googleads.googleapis.com'),
-  serialized_start=1139,
-  serialized_end=1734,
+  serialized_start=1220,
+  serialized_end=1815,
   methods=[
   _descriptor.MethodDescriptor(
     name='GetCampaignExtensionSetting',

@@ -17,6 +17,7 @@ from google.ads.google_ads.v3.proto.resources import landing_page_view_pb2 as go
 from google.api import annotations_pb2 as google_dot_api_dot_annotations__pb2
 from google.api import client_pb2 as google_dot_api_dot_client__pb2
 from google.api import field_behavior_pb2 as google_dot_api_dot_field__behavior__pb2
+from google.api import resource_pb2 as google_dot_api_dot_resource__pb2
 
 
 DESCRIPTOR = _descriptor.FileDescriptor(
@@ -24,9 +25,9 @@ DESCRIPTOR = _descriptor.FileDescriptor(
   package='google.ads.googleads.v3.services',
   syntax='proto3',
   serialized_options=_b('\n$com.google.ads.googleads.v3.servicesB\033LandingPageViewServiceProtoP\001ZHgoogle.golang.org/genproto/googleapis/ads/googleads/v3/services;services\242\002\003GAA\252\002 Google.Ads.GoogleAds.V3.Services\312\002 Google\\Ads\\GoogleAds\\V3\\Services\352\002$Google::Ads::GoogleAds::V3::Services'),
-  serialized_pb=_b('\nFgoogle/ads/googleads_v3/proto/services/landing_page_view_service.proto\x12 google.ads.googleads.v3.services\x1a?google/ads/googleads_v3/proto/resources/landing_page_view.proto\x1a\x1cgoogle/api/annotations.proto\x1a\x17google/api/client.proto\x1a\x1fgoogle/api/field_behavior.proto\"7\n\x19GetLandingPageViewRequest\x12\x1a\n\rresource_name\x18\x01 \x01(\tB\x03\xe0\x41\x02\x32\x89\x02\n\x16LandingPageViewService\x12\xd1\x01\n\x12GetLandingPageView\x12;.google.ads.googleads.v3.services.GetLandingPageViewRequest\x1a\x32.google.ads.googleads.v3.resources.LandingPageView\"J\x82\xd3\xe4\x93\x02\x34\x12\x32/v3/{resource_name=customers/*/landingPageViews/*}\xda\x41\rresource_name\x1a\x1b\xca\x41\x18googleads.googleapis.comB\x82\x02\n$com.google.ads.googleads.v3.servicesB\x1bLandingPageViewServiceProtoP\x01ZHgoogle.golang.org/genproto/googleapis/ads/googleads/v3/services;services\xa2\x02\x03GAA\xaa\x02 Google.Ads.GoogleAds.V3.Services\xca\x02 Google\\Ads\\GoogleAds\\V3\\Services\xea\x02$Google::Ads::GoogleAds::V3::Servicesb\x06proto3')
+  serialized_pb=_b('\nFgoogle/ads/googleads_v3/proto/services/landing_page_view_service.proto\x12 google.ads.googleads.v3.services\x1a?google/ads/googleads_v3/proto/resources/landing_page_view.proto\x1a\x1cgoogle/api/annotations.proto\x1a\x17google/api/client.proto\x1a\x1fgoogle/api/field_behavior.proto\x1a\x19google/api/resource.proto\"d\n\x19GetLandingPageViewRequest\x12G\n\rresource_name\x18\x01 \x01(\tB0\xe0\x41\x02\xfa\x41*\n(googleads.googleapis.com/LandingPageView2\x89\x02\n\x16LandingPageViewService\x12\xd1\x01\n\x12GetLandingPageView\x12;.google.ads.googleads.v3.services.GetLandingPageViewRequest\x1a\x32.google.ads.googleads.v3.resources.LandingPageView\"J\x82\xd3\xe4\x93\x02\x34\x12\x32/v3/{resource_name=customers/*/landingPageViews/*}\xda\x41\rresource_name\x1a\x1b\xca\x41\x18googleads.googleapis.comB\x82\x02\n$com.google.ads.googleads.v3.servicesB\x1bLandingPageViewServiceProtoP\x01ZHgoogle.golang.org/genproto/googleapis/ads/googleads/v3/services;services\xa2\x02\x03GAA\xaa\x02 Google.Ads.GoogleAds.V3.Services\xca\x02 Google\\Ads\\GoogleAds\\V3\\Services\xea\x02$Google::Ads::GoogleAds::V3::Servicesb\x06proto3')
   ,
-  dependencies=[google_dot_ads_dot_googleads__v3_dot_proto_dot_resources_dot_landing__page__view__pb2.DESCRIPTOR,google_dot_api_dot_annotations__pb2.DESCRIPTOR,google_dot_api_dot_client__pb2.DESCRIPTOR,google_dot_api_dot_field__behavior__pb2.DESCRIPTOR,])
+  dependencies=[google_dot_ads_dot_googleads__v3_dot_proto_dot_resources_dot_landing__page__view__pb2.DESCRIPTOR,google_dot_api_dot_annotations__pb2.DESCRIPTOR,google_dot_api_dot_client__pb2.DESCRIPTOR,google_dot_api_dot_field__behavior__pb2.DESCRIPTOR,google_dot_api_dot_resource__pb2.DESCRIPTOR,])
 
 
 
@@ -44,7 +45,7 @@ _GETLANDINGPAGEVIEWREQUEST = _descriptor.Descriptor(
       has_default_value=False, default_value=_b("").decode('utf-8'),
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
-      serialized_options=_b('\340A\002'), file=DESCRIPTOR),
+      serialized_options=_b('\340A\002\372A*\n(googleads.googleapis.com/LandingPageView'), file=DESCRIPTOR),
   ],
   extensions=[
   ],
@@ -57,8 +58,8 @@ _GETLANDINGPAGEVIEWREQUEST = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=261,
-  serialized_end=316,
+  serialized_start=288,
+  serialized_end=388,
 )
 
 DESCRIPTOR.message_types_by_name['GetLandingPageViewRequest'] = _GETLANDINGPAGEVIEWREQUEST
@@ -90,8 +91,8 @@ _LANDINGPAGEVIEWSERVICE = _descriptor.ServiceDescriptor(
   file=DESCRIPTOR,
   index=0,
   serialized_options=_b('\312A\030googleads.googleapis.com'),
-  serialized_start=319,
-  serialized_end=584,
+  serialized_start=391,
+  serialized_end=656,
   methods=[
   _descriptor.MethodDescriptor(
     name='GetLandingPageView',

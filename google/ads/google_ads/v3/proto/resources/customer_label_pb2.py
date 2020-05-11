@@ -13,6 +13,7 @@ from google.protobuf import symbol_database as _symbol_database
 _sym_db = _symbol_database.Default()
 
 
+from google.api import field_behavior_pb2 as google_dot_api_dot_field__behavior__pb2
 from google.api import resource_pb2 as google_dot_api_dot_resource__pb2
 from google.protobuf import wrappers_pb2 as google_dot_protobuf_dot_wrappers__pb2
 from google.api import annotations_pb2 as google_dot_api_dot_annotations__pb2
@@ -23,9 +24,9 @@ DESCRIPTOR = _descriptor.FileDescriptor(
   package='google.ads.googleads.v3.resources',
   syntax='proto3',
   serialized_options=_b('\n%com.google.ads.googleads.v3.resourcesB\022CustomerLabelProtoP\001ZJgoogle.golang.org/genproto/googleapis/ads/googleads/v3/resources;resources\242\002\003GAA\252\002!Google.Ads.GoogleAds.V3.Resources\312\002!Google\\Ads\\GoogleAds\\V3\\Resources\352\002%Google::Ads::GoogleAds::V3::Resources'),
-  serialized_pb=_b('\n<google/ads/googleads_v3/proto/resources/customer_label.proto\x12!google.ads.googleads.v3.resources\x1a\x19google/api/resource.proto\x1a\x1egoogle/protobuf/wrappers.proto\x1a\x1cgoogle/api/annotations.proto\"\xe6\x01\n\rCustomerLabel\x12\x15\n\rresource_name\x18\x01 \x01(\t\x12.\n\x08\x63ustomer\x18\x02 \x01(\x0b\x32\x1c.google.protobuf.StringValue\x12+\n\x05label\x18\x03 \x01(\x0b\x32\x1c.google.protobuf.StringValue:a\xea\x41^\n&googleads.googleapis.com/CustomerLabel\x12\x34\x63ustomers/{customer}/customerLabels/{customer_label}B\xff\x01\n%com.google.ads.googleads.v3.resourcesB\x12\x43ustomerLabelProtoP\x01ZJgoogle.golang.org/genproto/googleapis/ads/googleads/v3/resources;resources\xa2\x02\x03GAA\xaa\x02!Google.Ads.GoogleAds.V3.Resources\xca\x02!Google\\Ads\\GoogleAds\\V3\\Resources\xea\x02%Google::Ads::GoogleAds::V3::Resourcesb\x06proto3')
+  serialized_pb=_b('\n<google/ads/googleads_v3/proto/resources/customer_label.proto\x12!google.ads.googleads.v3.resources\x1a\x1fgoogle/api/field_behavior.proto\x1a\x19google/api/resource.proto\x1a\x1egoogle/protobuf/wrappers.proto\x1a\x1cgoogle/api/annotations.proto\"\xa0\x02\n\rCustomerLabel\x12\x45\n\rresource_name\x18\x01 \x01(\tB.\xe0\x41\x05\xfa\x41(\n&googleads.googleapis.com/CustomerLabel\x12\x33\n\x08\x63ustomer\x18\x02 \x01(\x0b\x32\x1c.google.protobuf.StringValueB\x03\xe0\x41\x03\x12\x30\n\x05label\x18\x03 \x01(\x0b\x32\x1c.google.protobuf.StringValueB\x03\xe0\x41\x03:a\xea\x41^\n&googleads.googleapis.com/CustomerLabel\x12\x34\x63ustomers/{customer}/customerLabels/{customer_label}B\xff\x01\n%com.google.ads.googleads.v3.resourcesB\x12\x43ustomerLabelProtoP\x01ZJgoogle.golang.org/genproto/googleapis/ads/googleads/v3/resources;resources\xa2\x02\x03GAA\xaa\x02!Google.Ads.GoogleAds.V3.Resources\xca\x02!Google\\Ads\\GoogleAds\\V3\\Resources\xea\x02%Google::Ads::GoogleAds::V3::Resourcesb\x06proto3')
   ,
-  dependencies=[google_dot_api_dot_resource__pb2.DESCRIPTOR,google_dot_protobuf_dot_wrappers__pb2.DESCRIPTOR,google_dot_api_dot_annotations__pb2.DESCRIPTOR,])
+  dependencies=[google_dot_api_dot_field__behavior__pb2.DESCRIPTOR,google_dot_api_dot_resource__pb2.DESCRIPTOR,google_dot_protobuf_dot_wrappers__pb2.DESCRIPTOR,google_dot_api_dot_annotations__pb2.DESCRIPTOR,])
 
 
 
@@ -43,21 +44,21 @@ _CUSTOMERLABEL = _descriptor.Descriptor(
       has_default_value=False, default_value=_b("").decode('utf-8'),
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR),
+      serialized_options=_b('\340A\005\372A(\n&googleads.googleapis.com/CustomerLabel'), file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
       name='customer', full_name='google.ads.googleads.v3.resources.CustomerLabel.customer', index=1,
       number=2, type=11, cpp_type=10, label=1,
       has_default_value=False, default_value=None,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR),
+      serialized_options=_b('\340A\003'), file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
       name='label', full_name='google.ads.googleads.v3.resources.CustomerLabel.label', index=2,
       number=3, type=11, cpp_type=10, label=1,
       has_default_value=False, default_value=None,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR),
+      serialized_options=_b('\340A\003'), file=DESCRIPTOR),
   ],
   extensions=[
   ],
@@ -70,8 +71,8 @@ _CUSTOMERLABEL = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=189,
-  serialized_end=419,
+  serialized_start=222,
+  serialized_end=510,
 )
 
 _CUSTOMERLABEL.fields_by_name['customer'].message_type = google_dot_protobuf_dot_wrappers__pb2._STRINGVALUE
@@ -91,15 +92,16 @@ CustomerLabel = _reflection.GeneratedProtocolMessageType('CustomerLabel', (_mess
   
   Attributes:
       resource_name:
-          Name of the resource. Customer label resource names have the
-          form: ``customers/{customer_id}/customerLabels/{label_id}``
+          Immutable. Name of the resource. Customer label resource names
+          have the form:
+          ``customers/{customer_id}/customerLabels/{label_id}``
       customer:
-          The resource name of the customer to which the label is
-          attached. Read only.
+          Output only. The resource name of the customer to which the
+          label is attached. Read only.
       label:
-          The resource name of the label assigned to the customer.
-          Note: the Customer ID portion of the label resource name is
-          not validated when creating a new CustomerLabel.
+          Output only. The resource name of the label assigned to the
+          customer.  Note: the Customer ID portion of the label resource
+          name is not validated when creating a new CustomerLabel.
   """,
   # @@protoc_insertion_point(class_scope:google.ads.googleads.v3.resources.CustomerLabel)
   ))
@@ -107,5 +109,8 @@ _sym_db.RegisterMessage(CustomerLabel)
 
 
 DESCRIPTOR._options = None
+_CUSTOMERLABEL.fields_by_name['resource_name']._options = None
+_CUSTOMERLABEL.fields_by_name['customer']._options = None
+_CUSTOMERLABEL.fields_by_name['label']._options = None
 _CUSTOMERLABEL._options = None
 # @@protoc_insertion_point(module_scope)

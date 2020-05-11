@@ -17,6 +17,7 @@ from google.ads.google_ads.v3.proto.resources import ad_group_criterion_simulati
 from google.api import annotations_pb2 as google_dot_api_dot_annotations__pb2
 from google.api import client_pb2 as google_dot_api_dot_client__pb2
 from google.api import field_behavior_pb2 as google_dot_api_dot_field__behavior__pb2
+from google.api import resource_pb2 as google_dot_api_dot_resource__pb2
 
 
 DESCRIPTOR = _descriptor.FileDescriptor(
@@ -24,9 +25,9 @@ DESCRIPTOR = _descriptor.FileDescriptor(
   package='google.ads.googleads.v3.services',
   syntax='proto3',
   serialized_options=_b('\n$com.google.ads.googleads.v3.servicesB&AdGroupCriterionSimulationServiceProtoP\001ZHgoogle.golang.org/genproto/googleapis/ads/googleads/v3/services;services\242\002\003GAA\252\002 Google.Ads.GoogleAds.V3.Services\312\002 Google\\Ads\\GoogleAds\\V3\\Services\352\002$Google::Ads::GoogleAds::V3::Services'),
-  serialized_pb=_b('\nRgoogle/ads/googleads_v3/proto/services/ad_group_criterion_simulation_service.proto\x12 google.ads.googleads.v3.services\x1aKgoogle/ads/googleads_v3/proto/resources/ad_group_criterion_simulation.proto\x1a\x1cgoogle/api/annotations.proto\x1a\x17google/api/client.proto\x1a\x1fgoogle/api/field_behavior.proto\"B\n$GetAdGroupCriterionSimulationRequest\x12\x1a\n\rresource_name\x18\x01 \x01(\tB\x03\xe0\x41\x02\x32\xc0\x02\n!AdGroupCriterionSimulationService\x12\xfd\x01\n\x1dGetAdGroupCriterionSimulation\x12\x46.google.ads.googleads.v3.services.GetAdGroupCriterionSimulationRequest\x1a=.google.ads.googleads.v3.resources.AdGroupCriterionSimulation\"U\x82\xd3\xe4\x93\x02?\x12=/v3/{resource_name=customers/*/adGroupCriterionSimulations/*}\xda\x41\rresource_name\x1a\x1b\xca\x41\x18googleads.googleapis.comB\x8d\x02\n$com.google.ads.googleads.v3.servicesB&AdGroupCriterionSimulationServiceProtoP\x01ZHgoogle.golang.org/genproto/googleapis/ads/googleads/v3/services;services\xa2\x02\x03GAA\xaa\x02 Google.Ads.GoogleAds.V3.Services\xca\x02 Google\\Ads\\GoogleAds\\V3\\Services\xea\x02$Google::Ads::GoogleAds::V3::Servicesb\x06proto3')
+  serialized_pb=_b('\nRgoogle/ads/googleads_v3/proto/services/ad_group_criterion_simulation_service.proto\x12 google.ads.googleads.v3.services\x1aKgoogle/ads/googleads_v3/proto/resources/ad_group_criterion_simulation.proto\x1a\x1cgoogle/api/annotations.proto\x1a\x17google/api/client.proto\x1a\x1fgoogle/api/field_behavior.proto\x1a\x19google/api/resource.proto\"z\n$GetAdGroupCriterionSimulationRequest\x12R\n\rresource_name\x18\x01 \x01(\tB;\xe0\x41\x02\xfa\x41\x35\n3googleads.googleapis.com/AdGroupCriterionSimulation2\xc0\x02\n!AdGroupCriterionSimulationService\x12\xfd\x01\n\x1dGetAdGroupCriterionSimulation\x12\x46.google.ads.googleads.v3.services.GetAdGroupCriterionSimulationRequest\x1a=.google.ads.googleads.v3.resources.AdGroupCriterionSimulation\"U\x82\xd3\xe4\x93\x02?\x12=/v3/{resource_name=customers/*/adGroupCriterionSimulations/*}\xda\x41\rresource_name\x1a\x1b\xca\x41\x18googleads.googleapis.comB\x8d\x02\n$com.google.ads.googleads.v3.servicesB&AdGroupCriterionSimulationServiceProtoP\x01ZHgoogle.golang.org/genproto/googleapis/ads/googleads/v3/services;services\xa2\x02\x03GAA\xaa\x02 Google.Ads.GoogleAds.V3.Services\xca\x02 Google\\Ads\\GoogleAds\\V3\\Services\xea\x02$Google::Ads::GoogleAds::V3::Servicesb\x06proto3')
   ,
-  dependencies=[google_dot_ads_dot_googleads__v3_dot_proto_dot_resources_dot_ad__group__criterion__simulation__pb2.DESCRIPTOR,google_dot_api_dot_annotations__pb2.DESCRIPTOR,google_dot_api_dot_client__pb2.DESCRIPTOR,google_dot_api_dot_field__behavior__pb2.DESCRIPTOR,])
+  dependencies=[google_dot_ads_dot_googleads__v3_dot_proto_dot_resources_dot_ad__group__criterion__simulation__pb2.DESCRIPTOR,google_dot_api_dot_annotations__pb2.DESCRIPTOR,google_dot_api_dot_client__pb2.DESCRIPTOR,google_dot_api_dot_field__behavior__pb2.DESCRIPTOR,google_dot_api_dot_resource__pb2.DESCRIPTOR,])
 
 
 
@@ -44,7 +45,7 @@ _GETADGROUPCRITERIONSIMULATIONREQUEST = _descriptor.Descriptor(
       has_default_value=False, default_value=_b("").decode('utf-8'),
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
-      serialized_options=_b('\340A\002'), file=DESCRIPTOR),
+      serialized_options=_b('\340A\002\372A5\n3googleads.googleapis.com/AdGroupCriterionSimulation'), file=DESCRIPTOR),
   ],
   extensions=[
   ],
@@ -57,8 +58,8 @@ _GETADGROUPCRITERIONSIMULATIONREQUEST = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=285,
-  serialized_end=351,
+  serialized_start=312,
+  serialized_end=434,
 )
 
 DESCRIPTOR.message_types_by_name['GetAdGroupCriterionSimulationRequest'] = _GETADGROUPCRITERIONSIMULATIONREQUEST
@@ -91,8 +92,8 @@ _ADGROUPCRITERIONSIMULATIONSERVICE = _descriptor.ServiceDescriptor(
   file=DESCRIPTOR,
   index=0,
   serialized_options=_b('\312A\030googleads.googleapis.com'),
-  serialized_start=354,
-  serialized_end=674,
+  serialized_start=437,
+  serialized_end=757,
   methods=[
   _descriptor.MethodDescriptor(
     name='GetAdGroupCriterionSimulation',

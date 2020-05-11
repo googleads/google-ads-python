@@ -13,6 +13,7 @@ from google.protobuf import symbol_database as _symbol_database
 _sym_db = _symbol_database.Default()
 
 
+from google.api import field_behavior_pb2 as google_dot_api_dot_field__behavior__pb2
 from google.api import resource_pb2 as google_dot_api_dot_resource__pb2
 from google.protobuf import wrappers_pb2 as google_dot_protobuf_dot_wrappers__pb2
 from google.api import annotations_pb2 as google_dot_api_dot_annotations__pb2
@@ -23,9 +24,9 @@ DESCRIPTOR = _descriptor.FileDescriptor(
   package='google.ads.googleads.v3.resources',
   syntax='proto3',
   serialized_options=_b('\n%com.google.ads.googleads.v3.resourcesB#DynamicSearchAdsSearchTermViewProtoP\001ZJgoogle.golang.org/genproto/googleapis/ads/googleads/v3/resources;resources\242\002\003GAA\252\002!Google.Ads.GoogleAds.V3.Resources\312\002!Google\\Ads\\GoogleAds\\V3\\Resources\352\002%Google::Ads::GoogleAds::V3::Resources'),
-  serialized_pb=_b('\nQgoogle/ads/googleads_v3/proto/resources/dynamic_search_ads_search_term_view.proto\x12!google.ads.googleads.v3.resources\x1a\x19google/api/resource.proto\x1a\x1egoogle/protobuf/wrappers.proto\x1a\x1cgoogle/api/annotations.proto\"\xc4\x04\n\x1e\x44ynamicSearchAdsSearchTermView\x12\x15\n\rresource_name\x18\x01 \x01(\t\x12\x31\n\x0bsearch_term\x18\x02 \x01(\x0b\x32\x1c.google.protobuf.StringValue\x12.\n\x08headline\x18\x03 \x01(\x0b\x32\x1c.google.protobuf.StringValue\x12\x32\n\x0clanding_page\x18\x04 \x01(\x0b\x32\x1c.google.protobuf.StringValue\x12.\n\x08page_url\x18\x05 \x01(\x0b\x32\x1c.google.protobuf.StringValue\x12\x38\n\x14has_negative_keyword\x18\x06 \x01(\x0b\x32\x1a.google.protobuf.BoolValue\x12\x38\n\x14has_matching_keyword\x18\x07 \x01(\x0b\x32\x1a.google.protobuf.BoolValue\x12\x34\n\x10has_negative_url\x18\x08 \x01(\x0b\x32\x1a.google.protobuf.BoolValue:\x99\x01\xea\x41\x95\x01\n7googleads.googleapis.com/DynamicSearchAdsSearchTermView\x12Zcustomers/{customer}/dynamicSearchAdsSearchTermViews/{dynamic_search_ads_search_term_view}B\x90\x02\n%com.google.ads.googleads.v3.resourcesB#DynamicSearchAdsSearchTermViewProtoP\x01ZJgoogle.golang.org/genproto/googleapis/ads/googleads/v3/resources;resources\xa2\x02\x03GAA\xaa\x02!Google.Ads.GoogleAds.V3.Resources\xca\x02!Google\\Ads\\GoogleAds\\V3\\Resources\xea\x02%Google::Ads::GoogleAds::V3::Resourcesb\x06proto3')
+  serialized_pb=_b('\nQgoogle/ads/googleads_v3/proto/resources/dynamic_search_ads_search_term_view.proto\x12!google.ads.googleads.v3.resources\x1a\x1fgoogle/api/field_behavior.proto\x1a\x19google/api/resource.proto\x1a\x1egoogle/protobuf/wrappers.proto\x1a\x1cgoogle/api/annotations.proto\"\xa8\x05\n\x1e\x44ynamicSearchAdsSearchTermView\x12V\n\rresource_name\x18\x01 \x01(\tB?\xe0\x41\x03\xfa\x41\x39\n7googleads.googleapis.com/DynamicSearchAdsSearchTermView\x12\x36\n\x0bsearch_term\x18\x02 \x01(\x0b\x32\x1c.google.protobuf.StringValueB\x03\xe0\x41\x03\x12\x33\n\x08headline\x18\x03 \x01(\x0b\x32\x1c.google.protobuf.StringValueB\x03\xe0\x41\x03\x12\x37\n\x0clanding_page\x18\x04 \x01(\x0b\x32\x1c.google.protobuf.StringValueB\x03\xe0\x41\x03\x12\x33\n\x08page_url\x18\x05 \x01(\x0b\x32\x1c.google.protobuf.StringValueB\x03\xe0\x41\x03\x12=\n\x14has_negative_keyword\x18\x06 \x01(\x0b\x32\x1a.google.protobuf.BoolValueB\x03\xe0\x41\x03\x12=\n\x14has_matching_keyword\x18\x07 \x01(\x0b\x32\x1a.google.protobuf.BoolValueB\x03\xe0\x41\x03\x12\x39\n\x10has_negative_url\x18\x08 \x01(\x0b\x32\x1a.google.protobuf.BoolValueB\x03\xe0\x41\x03:\x99\x01\xea\x41\x95\x01\n7googleads.googleapis.com/DynamicSearchAdsSearchTermView\x12Zcustomers/{customer}/dynamicSearchAdsSearchTermViews/{dynamic_search_ads_search_term_view}B\x90\x02\n%com.google.ads.googleads.v3.resourcesB#DynamicSearchAdsSearchTermViewProtoP\x01ZJgoogle.golang.org/genproto/googleapis/ads/googleads/v3/resources;resources\xa2\x02\x03GAA\xaa\x02!Google.Ads.GoogleAds.V3.Resources\xca\x02!Google\\Ads\\GoogleAds\\V3\\Resources\xea\x02%Google::Ads::GoogleAds::V3::Resourcesb\x06proto3')
   ,
-  dependencies=[google_dot_api_dot_resource__pb2.DESCRIPTOR,google_dot_protobuf_dot_wrappers__pb2.DESCRIPTOR,google_dot_api_dot_annotations__pb2.DESCRIPTOR,])
+  dependencies=[google_dot_api_dot_field__behavior__pb2.DESCRIPTOR,google_dot_api_dot_resource__pb2.DESCRIPTOR,google_dot_protobuf_dot_wrappers__pb2.DESCRIPTOR,google_dot_api_dot_annotations__pb2.DESCRIPTOR,])
 
 
 
@@ -43,56 +44,56 @@ _DYNAMICSEARCHADSSEARCHTERMVIEW = _descriptor.Descriptor(
       has_default_value=False, default_value=_b("").decode('utf-8'),
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR),
+      serialized_options=_b('\340A\003\372A9\n7googleads.googleapis.com/DynamicSearchAdsSearchTermView'), file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
       name='search_term', full_name='google.ads.googleads.v3.resources.DynamicSearchAdsSearchTermView.search_term', index=1,
       number=2, type=11, cpp_type=10, label=1,
       has_default_value=False, default_value=None,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR),
+      serialized_options=_b('\340A\003'), file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
       name='headline', full_name='google.ads.googleads.v3.resources.DynamicSearchAdsSearchTermView.headline', index=2,
       number=3, type=11, cpp_type=10, label=1,
       has_default_value=False, default_value=None,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR),
+      serialized_options=_b('\340A\003'), file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
       name='landing_page', full_name='google.ads.googleads.v3.resources.DynamicSearchAdsSearchTermView.landing_page', index=3,
       number=4, type=11, cpp_type=10, label=1,
       has_default_value=False, default_value=None,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR),
+      serialized_options=_b('\340A\003'), file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
       name='page_url', full_name='google.ads.googleads.v3.resources.DynamicSearchAdsSearchTermView.page_url', index=4,
       number=5, type=11, cpp_type=10, label=1,
       has_default_value=False, default_value=None,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR),
+      serialized_options=_b('\340A\003'), file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
       name='has_negative_keyword', full_name='google.ads.googleads.v3.resources.DynamicSearchAdsSearchTermView.has_negative_keyword', index=5,
       number=6, type=11, cpp_type=10, label=1,
       has_default_value=False, default_value=None,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR),
+      serialized_options=_b('\340A\003'), file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
       name='has_matching_keyword', full_name='google.ads.googleads.v3.resources.DynamicSearchAdsSearchTermView.has_matching_keyword', index=6,
       number=7, type=11, cpp_type=10, label=1,
       has_default_value=False, default_value=None,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR),
+      serialized_options=_b('\340A\003'), file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
       name='has_negative_url', full_name='google.ads.googleads.v3.resources.DynamicSearchAdsSearchTermView.has_negative_url', index=7,
       number=8, type=11, cpp_type=10, label=1,
       has_default_value=False, default_value=None,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR),
+      serialized_options=_b('\340A\003'), file=DESCRIPTOR),
   ],
   extensions=[
   ],
@@ -105,8 +106,8 @@ _DYNAMICSEARCHADSSEARCHTERMVIEW = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=210,
-  serialized_end=790,
+  serialized_start=243,
+  serialized_end=923,
 )
 
 _DYNAMICSEARCHADSSEARCHTERMVIEW.fields_by_name['search_term'].message_type = google_dot_protobuf_dot_wrappers__pb2._STRINGVALUE
@@ -128,31 +129,31 @@ DynamicSearchAdsSearchTermView = _reflection.GeneratedProtocolMessageType('Dynam
   
   Attributes:
       resource_name:
-          The resource name of the dynamic search ads search term view.
-          Dynamic search ads search term view resource names have the
-          form:  ``customers/{customer_id}/dynamicSearchAdsSearchTermVie
-          ws/{ad_group_id}~{search_term_fp}~{headline_fp}~{landing_page_
-          fp}~{page_url_fp}``
+          Output only. The resource name of the dynamic search ads
+          search term view. Dynamic search ads search term view resource
+          names have the form:  ``customers/{customer_id}/dynamicSearchA
+          dsSearchTermViews/{ad_group_id}~{search_term_fp}~{headline_fp}
+          ~{landing_page_fp}~{page_url_fp}``
       search_term:
-          Search term  This field is read-only.
+          Output only. Search term  This field is read-only.
       headline:
-          The dynamically generated headline of the Dynamic Search Ad.
-          This field is read-only.
+          Output only. The dynamically generated headline of the Dynamic
+          Search Ad.  This field is read-only.
       landing_page:
-          The dynamically selected landing page URL of the impression.
-          This field is read-only.
+          Output only. The dynamically selected landing page URL of the
+          impression.  This field is read-only.
       page_url:
-          The URL of page feed item served for the impression.  This
-          field is read-only.
+          Output only. The URL of page feed item served for the
+          impression.  This field is read-only.
       has_negative_keyword:
-          True if query matches a negative keyword.  This field is read-
-          only.
+          Output only. True if query matches a negative keyword.  This
+          field is read-only.
       has_matching_keyword:
-          True if query is added to targeted keywords.  This field is
-          read-only.
+          Output only. True if query is added to targeted keywords.
+          This field is read-only.
       has_negative_url:
-          True if query matches a negative url.  This field is read-
-          only.
+          Output only. True if query matches a negative url.  This field
+          is read-only.
   """,
   # @@protoc_insertion_point(class_scope:google.ads.googleads.v3.resources.DynamicSearchAdsSearchTermView)
   ))
@@ -160,5 +161,13 @@ _sym_db.RegisterMessage(DynamicSearchAdsSearchTermView)
 
 
 DESCRIPTOR._options = None
+_DYNAMICSEARCHADSSEARCHTERMVIEW.fields_by_name['resource_name']._options = None
+_DYNAMICSEARCHADSSEARCHTERMVIEW.fields_by_name['search_term']._options = None
+_DYNAMICSEARCHADSSEARCHTERMVIEW.fields_by_name['headline']._options = None
+_DYNAMICSEARCHADSSEARCHTERMVIEW.fields_by_name['landing_page']._options = None
+_DYNAMICSEARCHADSSEARCHTERMVIEW.fields_by_name['page_url']._options = None
+_DYNAMICSEARCHADSSEARCHTERMVIEW.fields_by_name['has_negative_keyword']._options = None
+_DYNAMICSEARCHADSSEARCHTERMVIEW.fields_by_name['has_matching_keyword']._options = None
+_DYNAMICSEARCHADSSEARCHTERMVIEW.fields_by_name['has_negative_url']._options = None
 _DYNAMICSEARCHADSSEARCHTERMVIEW._options = None
 # @@protoc_insertion_point(module_scope)

@@ -14,6 +14,7 @@ _sym_db = _symbol_database.Default()
 
 
 from google.ads.google_ads.v3.proto.enums import customer_pay_per_conversion_eligibility_failure_reason_pb2 as google_dot_ads_dot_googleads__v3_dot_proto_dot_enums_dot_customer__pay__per__conversion__eligibility__failure__reason__pb2
+from google.api import field_behavior_pb2 as google_dot_api_dot_field__behavior__pb2
 from google.api import resource_pb2 as google_dot_api_dot_resource__pb2
 from google.protobuf import wrappers_pb2 as google_dot_protobuf_dot_wrappers__pb2
 from google.api import annotations_pb2 as google_dot_api_dot_annotations__pb2
@@ -24,9 +25,9 @@ DESCRIPTOR = _descriptor.FileDescriptor(
   package='google.ads.googleads.v3.resources',
   syntax='proto3',
   serialized_options=_b('\n%com.google.ads.googleads.v3.resourcesB\rCustomerProtoP\001ZJgoogle.golang.org/genproto/googleapis/ads/googleads/v3/resources;resources\242\002\003GAA\252\002!Google.Ads.GoogleAds.V3.Resources\312\002!Google\\Ads\\GoogleAds\\V3\\Resources\352\002%Google::Ads::GoogleAds::V3::Resources'),
-  serialized_pb=_b('\n6google/ads/googleads_v3/proto/resources/customer.proto\x12!google.ads.googleads.v3.resources\x1a`google/ads/googleads_v3/proto/enums/customer_pay_per_conversion_eligibility_failure_reason.proto\x1a\x19google/api/resource.proto\x1a\x1egoogle/protobuf/wrappers.proto\x1a\x1cgoogle/api/annotations.proto\"\xbc\x08\n\x08\x43ustomer\x12\x15\n\rresource_name\x18\x01 \x01(\t\x12\'\n\x02id\x18\x03 \x01(\x0b\x32\x1b.google.protobuf.Int64Value\x12\x36\n\x10\x64\x65scriptive_name\x18\x04 \x01(\x0b\x32\x1c.google.protobuf.StringValue\x12\x33\n\rcurrency_code\x18\x05 \x01(\x0b\x32\x1c.google.protobuf.StringValue\x12/\n\ttime_zone\x18\x06 \x01(\x0b\x32\x1c.google.protobuf.StringValue\x12;\n\x15tracking_url_template\x18\x07 \x01(\x0b\x32\x1c.google.protobuf.StringValue\x12\x36\n\x10\x66inal_url_suffix\x18\x0b \x01(\x0b\x32\x1c.google.protobuf.StringValue\x12\x38\n\x14\x61uto_tagging_enabled\x18\x08 \x01(\x0b\x32\x1a.google.protobuf.BoolValue\x12\x36\n\x12has_partners_badge\x18\t \x01(\x0b\x32\x1a.google.protobuf.BoolValue\x12+\n\x07manager\x18\x0c \x01(\x0b\x32\x1a.google.protobuf.BoolValue\x12\x30\n\x0ctest_account\x18\r \x01(\x0b\x32\x1a.google.protobuf.BoolValue\x12W\n\x16\x63\x61ll_reporting_setting\x18\n \x01(\x0b\x32\x37.google.ads.googleads.v3.resources.CallReportingSetting\x12\x61\n\x1b\x63onversion_tracking_setting\x18\x0e \x01(\x0b\x32<.google.ads.googleads.v3.resources.ConversionTrackingSetting\x12R\n\x13remarketing_setting\x18\x0f \x01(\x0b\x32\x35.google.ads.googleads.v3.resources.RemarketingSetting\x12\xbd\x01\n.pay_per_conversion_eligibility_failure_reasons\x18\x10 \x03(\x0e\x32\x84\x01.google.ads.googleads.v3.enums.CustomerPayPerConversionEligibilityFailureReasonEnum.CustomerPayPerConversionEligibilityFailureReason:<\xea\x41\x39\n!googleads.googleapis.com/Customer\x12\x14\x63ustomers/{customer}\"\xd7\x01\n\x14\x43\x61llReportingSetting\x12:\n\x16\x63\x61ll_reporting_enabled\x18\x01 \x01(\x0b\x32\x1a.google.protobuf.BoolValue\x12\x45\n!call_conversion_reporting_enabled\x18\x02 \x01(\x0b\x32\x1a.google.protobuf.BoolValue\x12<\n\x16\x63\x61ll_conversion_action\x18\t \x01(\x0b\x32\x1c.google.protobuf.StringValue\"\xa3\x01\n\x19\x43onversionTrackingSetting\x12;\n\x16\x63onversion_tracking_id\x18\x01 \x01(\x0b\x32\x1b.google.protobuf.Int64Value\x12I\n$cross_account_conversion_tracking_id\x18\x02 \x01(\x0b\x32\x1b.google.protobuf.Int64Value\"R\n\x12RemarketingSetting\x12<\n\x16google_global_site_tag\x18\x01 \x01(\x0b\x32\x1c.google.protobuf.StringValueB\xfa\x01\n%com.google.ads.googleads.v3.resourcesB\rCustomerProtoP\x01ZJgoogle.golang.org/genproto/googleapis/ads/googleads/v3/resources;resources\xa2\x02\x03GAA\xaa\x02!Google.Ads.GoogleAds.V3.Resources\xca\x02!Google\\Ads\\GoogleAds\\V3\\Resources\xea\x02%Google::Ads::GoogleAds::V3::Resourcesb\x06proto3')
+  serialized_pb=_b('\n6google/ads/googleads_v3/proto/resources/customer.proto\x12!google.ads.googleads.v3.resources\x1a`google/ads/googleads_v3/proto/enums/customer_pay_per_conversion_eligibility_failure_reason.proto\x1a\x1fgoogle/api/field_behavior.proto\x1a\x19google/api/resource.proto\x1a\x1egoogle/protobuf/wrappers.proto\x1a\x1cgoogle/api/annotations.proto\"\x94\t\n\x08\x43ustomer\x12@\n\rresource_name\x18\x01 \x01(\tB)\xe0\x41\x05\xfa\x41#\n!googleads.googleapis.com/Customer\x12,\n\x02id\x18\x03 \x01(\x0b\x32\x1b.google.protobuf.Int64ValueB\x03\xe0\x41\x03\x12\x36\n\x10\x64\x65scriptive_name\x18\x04 \x01(\x0b\x32\x1c.google.protobuf.StringValue\x12\x38\n\rcurrency_code\x18\x05 \x01(\x0b\x32\x1c.google.protobuf.StringValueB\x03\xe0\x41\x05\x12\x34\n\ttime_zone\x18\x06 \x01(\x0b\x32\x1c.google.protobuf.StringValueB\x03\xe0\x41\x05\x12;\n\x15tracking_url_template\x18\x07 \x01(\x0b\x32\x1c.google.protobuf.StringValue\x12\x36\n\x10\x66inal_url_suffix\x18\x0b \x01(\x0b\x32\x1c.google.protobuf.StringValue\x12\x38\n\x14\x61uto_tagging_enabled\x18\x08 \x01(\x0b\x32\x1a.google.protobuf.BoolValue\x12;\n\x12has_partners_badge\x18\t \x01(\x0b\x32\x1a.google.protobuf.BoolValueB\x03\xe0\x41\x03\x12\x30\n\x07manager\x18\x0c \x01(\x0b\x32\x1a.google.protobuf.BoolValueB\x03\xe0\x41\x03\x12\x35\n\x0ctest_account\x18\r \x01(\x0b\x32\x1a.google.protobuf.BoolValueB\x03\xe0\x41\x03\x12W\n\x16\x63\x61ll_reporting_setting\x18\n \x01(\x0b\x32\x37.google.ads.googleads.v3.resources.CallReportingSetting\x12\x66\n\x1b\x63onversion_tracking_setting\x18\x0e \x01(\x0b\x32<.google.ads.googleads.v3.resources.ConversionTrackingSettingB\x03\xe0\x41\x03\x12W\n\x13remarketing_setting\x18\x0f \x01(\x0b\x32\x35.google.ads.googleads.v3.resources.RemarketingSettingB\x03\xe0\x41\x03\x12\xc2\x01\n.pay_per_conversion_eligibility_failure_reasons\x18\x10 \x03(\x0e\x32\x84\x01.google.ads.googleads.v3.enums.CustomerPayPerConversionEligibilityFailureReasonEnum.CustomerPayPerConversionEligibilityFailureReasonB\x03\xe0\x41\x03:<\xea\x41\x39\n!googleads.googleapis.com/Customer\x12\x14\x63ustomers/{customer}\"\x87\x02\n\x14\x43\x61llReportingSetting\x12:\n\x16\x63\x61ll_reporting_enabled\x18\x01 \x01(\x0b\x32\x1a.google.protobuf.BoolValue\x12\x45\n!call_conversion_reporting_enabled\x18\x02 \x01(\x0b\x32\x1a.google.protobuf.BoolValue\x12l\n\x16\x63\x61ll_conversion_action\x18\t \x01(\x0b\x32\x1c.google.protobuf.StringValueB.\xfa\x41+\n)googleads.googleapis.com/ConversionAction\"\xad\x01\n\x19\x43onversionTrackingSetting\x12@\n\x16\x63onversion_tracking_id\x18\x01 \x01(\x0b\x32\x1b.google.protobuf.Int64ValueB\x03\xe0\x41\x03\x12N\n$cross_account_conversion_tracking_id\x18\x02 \x01(\x0b\x32\x1b.google.protobuf.Int64ValueB\x03\xe0\x41\x03\"W\n\x12RemarketingSetting\x12\x41\n\x16google_global_site_tag\x18\x01 \x01(\x0b\x32\x1c.google.protobuf.StringValueB\x03\xe0\x41\x03\x42\xfa\x01\n%com.google.ads.googleads.v3.resourcesB\rCustomerProtoP\x01ZJgoogle.golang.org/genproto/googleapis/ads/googleads/v3/resources;resources\xa2\x02\x03GAA\xaa\x02!Google.Ads.GoogleAds.V3.Resources\xca\x02!Google\\Ads\\GoogleAds\\V3\\Resources\xea\x02%Google::Ads::GoogleAds::V3::Resourcesb\x06proto3')
   ,
-  dependencies=[google_dot_ads_dot_googleads__v3_dot_proto_dot_enums_dot_customer__pay__per__conversion__eligibility__failure__reason__pb2.DESCRIPTOR,google_dot_api_dot_resource__pb2.DESCRIPTOR,google_dot_protobuf_dot_wrappers__pb2.DESCRIPTOR,google_dot_api_dot_annotations__pb2.DESCRIPTOR,])
+  dependencies=[google_dot_ads_dot_googleads__v3_dot_proto_dot_enums_dot_customer__pay__per__conversion__eligibility__failure__reason__pb2.DESCRIPTOR,google_dot_api_dot_field__behavior__pb2.DESCRIPTOR,google_dot_api_dot_resource__pb2.DESCRIPTOR,google_dot_protobuf_dot_wrappers__pb2.DESCRIPTOR,google_dot_api_dot_annotations__pb2.DESCRIPTOR,])
 
 
 
@@ -44,14 +45,14 @@ _CUSTOMER = _descriptor.Descriptor(
       has_default_value=False, default_value=_b("").decode('utf-8'),
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR),
+      serialized_options=_b('\340A\005\372A#\n!googleads.googleapis.com/Customer'), file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
       name='id', full_name='google.ads.googleads.v3.resources.Customer.id', index=1,
       number=3, type=11, cpp_type=10, label=1,
       has_default_value=False, default_value=None,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR),
+      serialized_options=_b('\340A\003'), file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
       name='descriptive_name', full_name='google.ads.googleads.v3.resources.Customer.descriptive_name', index=2,
       number=4, type=11, cpp_type=10, label=1,
@@ -65,14 +66,14 @@ _CUSTOMER = _descriptor.Descriptor(
       has_default_value=False, default_value=None,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR),
+      serialized_options=_b('\340A\005'), file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
       name='time_zone', full_name='google.ads.googleads.v3.resources.Customer.time_zone', index=4,
       number=6, type=11, cpp_type=10, label=1,
       has_default_value=False, default_value=None,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR),
+      serialized_options=_b('\340A\005'), file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
       name='tracking_url_template', full_name='google.ads.googleads.v3.resources.Customer.tracking_url_template', index=5,
       number=7, type=11, cpp_type=10, label=1,
@@ -100,21 +101,21 @@ _CUSTOMER = _descriptor.Descriptor(
       has_default_value=False, default_value=None,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR),
+      serialized_options=_b('\340A\003'), file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
       name='manager', full_name='google.ads.googleads.v3.resources.Customer.manager', index=9,
       number=12, type=11, cpp_type=10, label=1,
       has_default_value=False, default_value=None,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR),
+      serialized_options=_b('\340A\003'), file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
       name='test_account', full_name='google.ads.googleads.v3.resources.Customer.test_account', index=10,
       number=13, type=11, cpp_type=10, label=1,
       has_default_value=False, default_value=None,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR),
+      serialized_options=_b('\340A\003'), file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
       name='call_reporting_setting', full_name='google.ads.googleads.v3.resources.Customer.call_reporting_setting', index=11,
       number=10, type=11, cpp_type=10, label=1,
@@ -128,21 +129,21 @@ _CUSTOMER = _descriptor.Descriptor(
       has_default_value=False, default_value=None,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR),
+      serialized_options=_b('\340A\003'), file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
       name='remarketing_setting', full_name='google.ads.googleads.v3.resources.Customer.remarketing_setting', index=13,
       number=15, type=11, cpp_type=10, label=1,
       has_default_value=False, default_value=None,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR),
+      serialized_options=_b('\340A\003'), file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
       name='pay_per_conversion_eligibility_failure_reasons', full_name='google.ads.googleads.v3.resources.Customer.pay_per_conversion_eligibility_failure_reasons', index=14,
       number=16, type=14, cpp_type=8, label=3,
       has_default_value=False, default_value=[],
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR),
+      serialized_options=_b('\340A\003'), file=DESCRIPTOR),
   ],
   extensions=[
   ],
@@ -155,8 +156,8 @@ _CUSTOMER = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=281,
-  serialized_end=1365,
+  serialized_start=314,
+  serialized_end=1486,
 )
 
 
@@ -187,7 +188,7 @@ _CALLREPORTINGSETTING = _descriptor.Descriptor(
       has_default_value=False, default_value=None,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR),
+      serialized_options=_b('\372A+\n)googleads.googleapis.com/ConversionAction'), file=DESCRIPTOR),
   ],
   extensions=[
   ],
@@ -200,8 +201,8 @@ _CALLREPORTINGSETTING = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=1368,
-  serialized_end=1583,
+  serialized_start=1489,
+  serialized_end=1752,
 )
 
 
@@ -218,14 +219,14 @@ _CONVERSIONTRACKINGSETTING = _descriptor.Descriptor(
       has_default_value=False, default_value=None,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR),
+      serialized_options=_b('\340A\003'), file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
       name='cross_account_conversion_tracking_id', full_name='google.ads.googleads.v3.resources.ConversionTrackingSetting.cross_account_conversion_tracking_id', index=1,
       number=2, type=11, cpp_type=10, label=1,
       has_default_value=False, default_value=None,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR),
+      serialized_options=_b('\340A\003'), file=DESCRIPTOR),
   ],
   extensions=[
   ],
@@ -238,8 +239,8 @@ _CONVERSIONTRACKINGSETTING = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=1586,
-  serialized_end=1749,
+  serialized_start=1755,
+  serialized_end=1928,
 )
 
 
@@ -256,7 +257,7 @@ _REMARKETINGSETTING = _descriptor.Descriptor(
       has_default_value=False, default_value=None,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR),
+      serialized_options=_b('\340A\003'), file=DESCRIPTOR),
   ],
   extensions=[
   ],
@@ -269,8 +270,8 @@ _REMARKETINGSETTING = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=1751,
-  serialized_end=1833,
+  serialized_start=1930,
+  serialized_end=2017,
 )
 
 _CUSTOMER.fields_by_name['id'].message_type = google_dot_protobuf_dot_wrappers__pb2._INT64VALUE
@@ -308,17 +309,18 @@ Customer = _reflection.GeneratedProtocolMessageType('Customer', (_message.Messag
   
   Attributes:
       resource_name:
-          The resource name of the customer. Customer resource names
-          have the form:  ``customers/{customer_id}``
+          Immutable. The resource name of the customer. Customer
+          resource names have the form:  ``customers/{customer_id}``
       id:
-          The ID of the customer.
+          Output only. The ID of the customer.
       descriptive_name:
           Optional, non-unique descriptive name of the customer.
       currency_code:
-          The currency in which the account operates. A subset of the
-          currency codes from the ISO 4217 standard is supported.
+          Immutable. The currency in which the account operates. A
+          subset of the currency codes from the ISO 4217 standard is
+          supported.
       time_zone:
-          The local timezone ID of the customer.
+          Immutable. The local timezone ID of the customer.
       tracking_url_template:
           The URL template for constructing a tracking URL out of
           parameters.
@@ -327,22 +329,22 @@ Customer = _reflection.GeneratedProtocolMessageType('Customer', (_message.Messag
       auto_tagging_enabled:
           Whether auto-tagging is enabled for the customer.
       has_partners_badge:
-          Whether the Customer has a Partners program badge. If the
-          Customer is not associated with the Partners program, this
-          will be false. For more information, see
+          Output only. Whether the Customer has a Partners program
+          badge. If the Customer is not associated with the Partners
+          program, this will be false. For more information, see
           https://support.google.com/partners/answer/3125774.
       manager:
-          Whether the customer is a manager.
+          Output only. Whether the customer is a manager.
       test_account:
-          Whether the customer is a test account.
+          Output only. Whether the customer is a test account.
       call_reporting_setting:
           Call reporting setting for a customer.
       conversion_tracking_setting:
-          Conversion tracking setting for a customer.
+          Output only. Conversion tracking setting for a customer.
       remarketing_setting:
-          Remarketing setting for a customer.
+          Output only. Remarketing setting for a customer.
       pay_per_conversion_eligibility_failure_reasons:
-          Reasons why the customer is not eligible to use
+          Output only. Reasons why the customer is not eligible to use
           PaymentMode.CONVERSIONS. If the list is empty, the customer is
           eligible. This field is read-only.
   """,
@@ -383,16 +385,16 @@ ConversionTrackingSetting = _reflection.GeneratedProtocolMessageType('Conversion
   
   Attributes:
       conversion_tracking_id:
-          The conversion tracking id used for this account. This id is
-          automatically assigned after any conversion tracking feature
-          is used. If the customer doesn't use conversion tracking, this
-          is 0. This field is read-only.
+          Output only. The conversion tracking id used for this account.
+          This id is automatically assigned after any conversion
+          tracking feature is used. If the customer doesn't use
+          conversion tracking, this is 0. This field is read-only.
       cross_account_conversion_tracking_id:
-          The conversion tracking id of the customer's manager. This is
-          set when the customer is opted into cross account conversion
-          tracking, and it overrides conversion\_tracking\_id. This
-          field can only be managed through the Google Ads UI. This
-          field is read-only.
+          Output only. The conversion tracking id of the customer's
+          manager. This is set when the customer is opted into cross
+          account conversion tracking, and it overrides
+          conversion\_tracking\_id. This field can only be managed
+          through the Google Ads UI. This field is read-only.
   """,
   # @@protoc_insertion_point(class_scope:google.ads.googleads.v3.resources.ConversionTrackingSetting)
   ))
@@ -407,7 +409,7 @@ RemarketingSetting = _reflection.GeneratedProtocolMessageType('RemarketingSettin
   
   Attributes:
       google_global_site_tag:
-          The Google global site tag.
+          Output only. The Google global site tag.
   """,
   # @@protoc_insertion_point(class_scope:google.ads.googleads.v3.resources.RemarketingSetting)
   ))
@@ -415,5 +417,19 @@ _sym_db.RegisterMessage(RemarketingSetting)
 
 
 DESCRIPTOR._options = None
+_CUSTOMER.fields_by_name['resource_name']._options = None
+_CUSTOMER.fields_by_name['id']._options = None
+_CUSTOMER.fields_by_name['currency_code']._options = None
+_CUSTOMER.fields_by_name['time_zone']._options = None
+_CUSTOMER.fields_by_name['has_partners_badge']._options = None
+_CUSTOMER.fields_by_name['manager']._options = None
+_CUSTOMER.fields_by_name['test_account']._options = None
+_CUSTOMER.fields_by_name['conversion_tracking_setting']._options = None
+_CUSTOMER.fields_by_name['remarketing_setting']._options = None
+_CUSTOMER.fields_by_name['pay_per_conversion_eligibility_failure_reasons']._options = None
 _CUSTOMER._options = None
+_CALLREPORTINGSETTING.fields_by_name['call_conversion_action']._options = None
+_CONVERSIONTRACKINGSETTING.fields_by_name['conversion_tracking_id']._options = None
+_CONVERSIONTRACKINGSETTING.fields_by_name['cross_account_conversion_tracking_id']._options = None
+_REMARKETINGSETTING.fields_by_name['google_global_site_tag']._options = None
 # @@protoc_insertion_point(module_scope)

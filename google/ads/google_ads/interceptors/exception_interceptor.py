@@ -193,4 +193,5 @@ class ExceptionInterceptor(Interceptor, UnaryUnaryClientInterceptor,
                 status code of INTERNAL or RESOURCE_EXHAUSTED.
         """
         response = continuation(client_call_details, request)
+        print(f'Trailing Metadata {response.trailing_metadata()}')
         return _UnaryStreamWrapper(response, self._handle_grpc_failure)

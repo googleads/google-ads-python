@@ -22,7 +22,8 @@ import argparse
 import sys
 
 
-import google.ads.google_ads.client
+from google.ads.googleads.client import GoogleAdsClient
+from google.ads.googleads.errors import GoogleAdsException
 
 
 # [START add_account_budget_proposal]
@@ -30,9 +31,7 @@ def main(client, customer_id, billing_setup_id):
     account_budget_proposal_service = client.get_service(
         "AccountBudgetProposalService"
     )
-    billing_setup_service = client.get_service(
-        "BillingSetupService", version="v6"
-    )
+    billing_setup_service = client.get_service("BillingSetupService")
 
     account_budget_proposal_operation = client.get_type(
         "AccountBudgetProposalOperation"
@@ -41,7 +40,7 @@ def main(client, customer_id, billing_setup_id):
 
     proposal.proposal_type = client.get_type(
         "AccountBudgetProposalTypeEnum"
-    ).CREATE
+    ).AccountBudgetProposalType.CREATE
     proposal.billing_setup = billing_setup_service.billing_setup_path(
         customer_id, billing_setup_id
     )
@@ -49,8 +48,8 @@ def main(client, customer_id, billing_setup_id):
 
     # Specify the account budget starts immediately
     proposal.proposed_start_time_type = client.get_type(
-        "TimeTypeEnum", version="v6"
-    ).NOW
+        "TimeTypeEnum"
+    ).TimeType.NOW
     # Alternatively you can specify a specific start time. Refer to the
     # AccountBudgetProposal resource documentation for allowed formats.
     #
@@ -58,8 +57,8 @@ def main(client, customer_id, billing_setup_id):
 
     # Specify that the budget runs forever
     proposal.proposed_end_time_type = client.get_type(
-        "TimeTypeEnum", version="v6"
-    ).FOREVER
+        "TimeTypeEnum"
+    ).TimeType.FOREVER
     # Alternatively you can specify a specific end time. Allowed formats are as
     # above.
     #
@@ -68,29 +67,18 @@ def main(client, customer_id, billing_setup_id):
     # Optional: set notes for the budget. These are free text and do not effect
     # budget delivery.
     #
-    # proposal.proposed_notes = client.wrapper
-    #     .string('Received prepayment of $0.01')
+    # proposal.proposed_notes = 'Received prepayment of $0.01'
     proposal.proposed_spending_limit_micros = 10000
 
-    try:
-        account_budget_proposal_response = account_budget_proposal_service.mutate_account_budget_proposal(
-            customer_id, account_budget_proposal_operation
+    account_budget_proposal_response = (
+        account_budget_proposal_service.mutate_account_budget_proposal(
+            customer_id=customer_id,
+            operation=account_budget_proposal_operation,
         )
-    except google.ads.google_ads.errors.GoogleAdsException as ex:
-        print(
-            'Request with ID "%s" failed with status "%s" and includes the '
-            "following errors:" % (ex.request_id, ex.error.code().name)
-        )
-        for error in ex.failure.errors:
-            print('\tError with message "%s".' % error.message)
-            if error.location:
-                for field_path_element in error.location.field_path_elements:
-                    print("\t\tOn field: %s" % field_path_element.field_name)
-        sys.exit(1)
-
+    )
     print(
-        'Created account budget proposal "%s".'
-        % account_budget_proposal_response.result.resource_name
+        "Created account budget proposal "
+        f'"{account_budget_proposal_response.result.resource_name}".'
     )
     # [END add_account_budget_proposal]
 
@@ -98,9 +86,7 @@ def main(client, customer_id, billing_setup_id):
 if __name__ == "__main__":
     # GoogleAdsClient will read the google-ads.yaml configuration file in the
     # home directory if none is specified.
-    google_ads_client = (
-        google.ads.google_ads.client.GoogleAdsClient.load_from_storage()
-    )
+    googleads_client = GoogleAdsClient.load_from_storage(version="v6")
 
     parser = argparse.ArgumentParser(
         description="Creates an account budget proposal."
@@ -122,4 +108,16 @@ if __name__ == "__main__":
     )
     args = parser.parse_args()
 
-    main(google_ads_client, args.customer_id, args.billing_setup_id)
+    try:
+        main(googleads_client, args.customer_id, args.billing_setup_id)
+    except GoogleAdsException as ex:
+        print(
+            f'Request with ID "{ex.request_id}" failed with status '
+            f'"{ex.error.code().name}" and includes the following errors:'
+        )
+        for error in ex.failure.errors:
+            print(f'	Error with message "{error.message}".')
+            if error.location:
+                for field_path_element in error.location.field_path_elements:
+                    print(f"\t\tOn field: {field_path_element.field_name}")
+        sys.exit(1)

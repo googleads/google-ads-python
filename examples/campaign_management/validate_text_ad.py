@@ -21,20 +21,20 @@ No objects will be created, but exceptions will still be thrown.
 import argparse
 import sys
 
-from google.ads.google_ads.client import GoogleAdsClient
-from google.ads.google_ads.errors import GoogleAdsException
+from google.ads.googleads.client import GoogleAdsClient
+from google.ads.googleads.errors import GoogleAdsException
 
 
 def main(client, customer_id, ad_group_id):
-    ad_group_ad_operation = client.get_type("AdGroupAdOperation", version="v6")
+    ad_group_ad_operation = client.get_type("AdGroupAdOperation")
     ad_group_ad = ad_group_ad_operation.create
-    ad_group_service = client.get_service("AdGroupService", version="v6")
+    ad_group_service = client.get_service("AdGroupService")
     ad_group_ad.ad_group = ad_group_service.ad_group_path(
         customer_id, ad_group_id
     )
     ad_group_ad.status = client.get_type(
-        "AdGroupAdStatusEnum", version="v6"
-    ).PAUSED
+        "AdGroupAdStatusEnum"
+    ).AdGroupAdStatus.PAUSED
 
     # Create an expanded text ad.
     ad_group_ad.ad.expanded_text_ad.description = "Luxury Cruise to Mars"
@@ -46,17 +46,17 @@ def main(client, customer_id, ad_group_id):
     ad_group_ad.ad.expanded_text_ad.headline_part2 = (
         "Low-gravity fun for everyone!!"
     )
-    final_url = ad_group_ad.ad.final_urls.append("http://www.example.com/")
+    ad_group_ad.ad.final_urls.append("http://www.example.com/")
 
-    ad_group_ad_service = client.get_service("AdGroupAdService", version="v6")
+    ad_group_ad_service = client.get_service("AdGroupAdService")
     # Attempt the mutate with validate_only=True.
     try:
-        response = ad_group_ad_service.mutate_ad_group_ads(
-            customer_id,
-            [ad_group_ad_operation],
-            partial_failure=False,
-            validate_only=True,
-        )
+        request = client.get_type("MutateAdGroupAdsRequest")
+        request.customer_id = customer_id
+        request.operations.append(ad_group_ad_operation)
+        request.partial_failure = False
+        request.validate_only = True
+        response = ad_group_ad_service.mutate_ad_group_ads(request=request)
         print('"Expanded text ad validated successfully.')
     except GoogleAdsException as ex:
         # This will be hit if there is a validation error from the server.
@@ -68,24 +68,23 @@ def main(client, customer_id, ad_group_id):
             "There may have been validation error(s) while adding expanded "
             "text ad."
         )
+        policy_error_enum = client.get_type(
+            "PolicyFindingErrorEnum"
+        ).PolicyFindingError.POLICY_FINDING
+
+        count = 1
         for error in ex.failure.errors:
             # Note: Policy violation errors are returned as PolicyFindingErrors.
             # For additional details, see
             # https://developers.google.com/google-ads/api/docs/policy-exemption/overview
-            if (
-                error.error_code.policy_finding_error
-                == client.get_type(
-                    "PolicyFindingErrorEnum", version="v6"
-                ).POLICY_FINDING
-            ):
+            if error.error_code.policy_finding_error == policy_error_enum:
                 if error.details.policy_finding_details:
-                    count = 1
                     details = (
                         error.details.policy_finding_details.policy_topic_entries
                     )
                     for entry in details:
                         print(f"{count}) Policy topic entry: \n{entry}\n")
-                    count += 1
+                count += 1
             else:
                 print(
                     f"\tNon-policy finding error with message "
@@ -96,14 +95,13 @@ def main(client, customer_id, ad_group_id):
                         field_path_element
                     ) in error.location.field_path_elements:
                         print(f"\t\tOn field: {field_path_element.field_name}")
-        # Exiting with 0 because this example intentionally raises an exception.
-        sys.exit(0)
+                sys.exit(1)
 
 
 if __name__ == "__main__":
     # GoogleAdsClient will read the google-ads.yaml configuration file in the
     # home directory if none is specified.
-    google_ads_client = GoogleAdsClient.load_from_storage()
+    googleads_client = GoogleAdsClient.load_from_storage(version="v6")
 
     parser = argparse.ArgumentParser(
         description="Shows how to use the ValidateOnly header."
@@ -122,4 +120,4 @@ if __name__ == "__main__":
     )
     args = parser.parse_args()
 
-    main(google_ads_client, args.customer_id, args.ad_group_id)
+    main(googleads_client, args.customer_id, args.ad_group_id)

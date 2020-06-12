@@ -14,15 +14,16 @@
 # limitations under the License.
 """This code example uploads an image asset.
 
-To get image assets, run get_all_image_assets.py."""
+To get image assets, run get_all_image_assets.py.
+"""
 
 
 import argparse
 import sys
 import requests
 
-from google.ads.google_ads.client import GoogleAdsClient
-from google.ads.google_ads.errors import GoogleAdsException
+from google.ads.googleads.client import GoogleAdsClient
+from google.ads.googleads.errors import GoogleAdsException
 
 
 # [START upload_image_asset]
@@ -30,53 +31,42 @@ def main(client, customer_id):
     """Main method, to run this code example as a standalone application."""
 
     # Download image from URL
-    URL = "https://goo.gl/3b9Wfh"
-    image_content = requests.get(URL).content
+    url = "https://goo.gl/3b9Wfh"
+    image_content = requests.get(url).content
 
-    asset_operation = client.get_type("AssetOperation", version="v6")
+    asset_service = client.get_service("AssetService")
+    asset_operation = client.get_type("AssetOperation")
     asset = asset_operation.create
-    asset.type = client.get_type("AssetTypeEnum", version="v6").IMAGE
+    asset.type_ = client.get_type("AssetTypeEnum").AssetType.IMAGE
     asset.image_asset.data = image_content
     asset.image_asset.file_size = len(image_content)
-    asset.image_asset.mime_type = client.get_type("MimeTypeEnum").IMAGE_JPEG
+    asset.image_asset.mime_type = client.get_type(
+        "MimeTypeEnum"
+    ).MimeType.IMAGE_JPEG
     # Use your favorite image library to determine dimensions
     asset.image_asset.full_size.height_pixels = 315
     asset.image_asset.full_size.width_pixels = 600
-    asset.image_asset.full_size.url = URL
+    asset.image_asset.full_size.url = url
     # Optional: Provide a unique friendly name to identify your asset.
     # If you specify the name field, then both the asset name and the image
     # being uploaded should be unique, and should not match another ACTIVE
     # asset in this customer account.
     # asset.name = 'Jupiter Trip #' + uuid.uuid4()
 
-    asset_service = client.get_service("AssetService", version="v6")
+    mutate_asset_response = asset_service.mutate_assets(
+        customer_id=customer_id, operations=[asset_operation]
+    )
+    print("Uploaded file(s):")
+    for row in mutate_asset_response.results:
+        print(f"\tResource name: {row.resource_name}")
 
-    try:
-        mutate_asset_response = asset_service.mutate_assets(
-            customer_id, [asset_operation]
-        )
-        print("Uploaded file(s):")
-        for row in mutate_asset_response.results:
-            print(f"\tResource name: {row.resource_name}")
-
-    except GoogleAdsException as ex:
-        print(
-            f'Request with ID "{ex.request_id}" failed with status '
-            f'"{ex.error.code().name}" and includes the following errors:'
-        )
-        for error in ex.failure.errors:
-            print(f'\tError with message "{error.message}".')
-            if error.location:
-                for field_path_element in error.location.field_path_elements:
-                    print(f"\t\tOn field: {field_path_element.field_name}")
-        sys.exit(1)
-        # [END upload_image_asset]
+    # [END upload_image_asset]
 
 
 if __name__ == "__main__":
     # GoogleAdsClient will read the google-ads.yaml configuration file in the
     # home directory if none is specified.
-    google_ads_client = GoogleAdsClient.load_from_storage()
+    googleads_client = GoogleAdsClient.load_from_storage(version="v6")
 
     parser = argparse.ArgumentParser(
         description="Upload an image asset from a URL."
@@ -91,4 +81,16 @@ if __name__ == "__main__":
     )
     args = parser.parse_args()
 
-    main(google_ads_client, args.customer_id)
+    try:
+        main(googleads_client, args.customer_id)
+    except GoogleAdsException as ex:
+        print(
+            f'Request with ID "{ex.request_id}" failed with status '
+            f'"{ex.error.code().name}" and includes the following errors:'
+        )
+        for error in ex.failure.errors:
+            print(f'	Error with message "{error.message}".')
+            if error.location:
+                for field_path_element in error.location.field_path_elements:
+                    print(f"\t\tOn field: {field_path_element.field_name}")
+        sys.exit(1)

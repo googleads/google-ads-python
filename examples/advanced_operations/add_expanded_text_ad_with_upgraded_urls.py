@@ -18,22 +18,23 @@
 import argparse
 import sys
 
-import google.ads.google_ads.client
+from google.ads.googleads.client import GoogleAdsClient
+from google.ads.googleads.errors import GoogleAdsException
 
 
 def main(client, customer_id, ad_group_id):
-    ad_group_ad_service = client.get_service("AdGroupAdService", version="v6")
-    ad_group_service = client.get_service("AdGroupService", version="v6")
+    ad_group_ad_service = client.get_service("AdGroupAdService")
+    ad_group_service = client.get_service("AdGroupService")
 
     # Create ad group ad.
-    ad_group_ad_operation = client.get_type("AdGroupAdOperation", version="v6")
+    ad_group_ad_operation = client.get_type("AdGroupAdOperation")
     ad_group_ad = ad_group_ad_operation.create
     ad_group_ad.ad_group = ad_group_service.ad_group_path(
         customer_id, ad_group_id
     )
     ad_group_ad.status = client.get_type(
-        "AdGroupAdStatusEnum", version="v6"
-    ).PAUSED
+        "AdGroupAdStatusEnum"
+    ).AdGroupAdStatus.PAUSED
 
     # Set expanded text ad info
     ad_group_ad.ad.final_urls.extend(
@@ -61,13 +62,14 @@ def main(client, customer_id, ad_group_id):
     # Since your tracking URL has two custom parameters, provide their values
     # too. This can be provided at campaign, ad group, ad, criterion, or feed
     # item levels.
-    param_1 = ad_group_ad.ad.url_custom_parameters.add()
+    param_1 = client.get_type("CustomParameter")
     param_1.key = "season"
     param_1.value = "easter123"
 
-    param_2 = ad_group_ad.ad.url_custom_parameters.add()
+    param_2 = client.get_type("CustomParameter")
     param_2.key = "promocode"
     param_2.value = "nj123"
+    ad_group_ad.ad.url_custom_parameters.extend([param_1, param_2])
 
     # Specify a list of final mobile URLs. This field cannot be set if URL field
     # is set, or finalUrls is unset. This may be specified at ad, criterion, and
@@ -80,34 +82,19 @@ def main(client, customer_id, ad_group_id):
     )
 
     # Add the ad group ad.
-    try:
-        ad_group_ad_response = ad_group_ad_service.mutate_ad_group_ads(
-            customer_id, [ad_group_ad_operation]
-        )
-    except google.ads.google_ads.errors.GoogleAdsException as ex:
-        print(
-            'Request with ID "%s" failed with status "%s" and includes the '
-            "following errors:" % (ex.request_id, ex.error.code().name)
-        )
-        for error in ex.failure.errors:
-            print('\tError with message "%s".' % error.message)
-            if error.location:
-                for field_path_element in error.location.field_path_elements:
-                    print("\t\tOn field: %s" % field_path_element.field_name)
-        sys.exit(1)
+    ad_group_ad_response = ad_group_ad_service.mutate_ad_group_ads(
+        customer_id=customer_id, operations=[ad_group_ad_operation]
+    )
 
     print(
-        "Created expanded text ad %s."
-        % ad_group_ad_response.results[0].resource_name
+        f'Created expanded text ad "{ad_group_ad_response.results[0].resource_name}".'
     )
 
 
 if __name__ == "__main__":
     # GoogleAdsClient will read the google-ads.yaml configuration file in the
     # home directory if none is specified.
-    google_ads_client = (
-        google.ads.google_ads.client.GoogleAdsClient.load_from_storage()
-    )
+    googleads_client = GoogleAdsClient.load_from_storage(version="v6")
 
     parser = argparse.ArgumentParser(
         description=(
@@ -128,4 +115,16 @@ if __name__ == "__main__":
     )
     args = parser.parse_args()
 
-    main(google_ads_client, args.customer_id, args.ad_group_id)
+    try:
+        main(googleads_client, args.customer_id, args.ad_group_id)
+    except GoogleAdsException as ex:
+        print(
+            f'Request with ID "{ex.request_id}" failed with status '
+            f'"{ex.error.code().name}" and includes the following errors:'
+        )
+        for error in ex.failure.errors:
+            print(f'	Error with message "{error.message}".')
+            if error.location:
+                for field_path_element in error.location.field_path_elements:
+                    print(f"\t\tOn field: {field_path_element.field_name}")
+        sys.exit(1)

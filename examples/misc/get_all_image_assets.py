@@ -17,15 +17,16 @@
 
 import argparse
 import sys
-from google.ads.google_ads.client import GoogleAdsClient
-from google.ads.google_ads.errors import GoogleAdsException
+
+from google.ads.googleads.client import GoogleAdsClient
+from google.ads.googleads.errors import GoogleAdsException
 
 _DEFAULT_PAGE_SIZE = 1000
 
 
 def main(client, customer_id, page_size):
     """Main method, to run this code example as a standalone application."""
-    ga_service = client.get_service("GoogleAdsService", version="v6")
+    ga_service = client.get_service("GoogleAdsService")
 
     query = """
         SELECT
@@ -35,45 +36,36 @@ def main(client, customer_id, page_size):
           asset.image_asset.full_size.height_pixels,
           asset.image_asset.full_size.url
         FROM asset
-        WHERE asset.type = 'IMAGE'"""
+        WHERE asset.type = IMAGE"""
 
-    try:
-        results = ga_service.search(
-            customer_id, query=query, page_size=page_size,
-        )
+    search_request = client.get_type("SearchGoogleAdsRequest")
+    search_request.customer_id = customer_id
+    search_request.query = query
+    search_request.page_size = page_size
+    results = ga_service.search(search_request)
 
-        for row in results:
-            asset = row.asset
-            image_asset = asset.image_asset
-            print(
-                f'Image with name "{asset.name}" found:\n'
-                f"\tfile size {image_asset.file_size} bytes\n"
-                f"\twidth {image_asset.full_size.width_pixels}px\n"
-                f"\theight {image_asset.full_size.height_pixels}px\n"
-                f'\turl "{image_asset.full_size.url}"'
-            )
+    results = ga_service.search(request=search_request)
 
-        # The "num_results" field returns the number of items that have been
-        # iterated in the results not the total number of rows returned by the
-        # search query.
-        print(f"Total of {results.num_results} image(s) found.")
-    except GoogleAdsException as ex:
+    count = 0
+    for row in results:
+        asset = row.asset
+        image_asset = asset.image_asset
+        count += 1
         print(
-            'Request with ID "%s" failed with status "%s" and includes the '
-            "following errors:" % (ex.request_id, ex.error.code().name)
+            f'Image with name "{asset.name}" found:\n'
+            f"\tfile size {image_asset.file_size} bytes\n"
+            f"\twidth {image_asset.full_size.width_pixels}px\n"
+            f"\theight {image_asset.full_size.height_pixels}px\n"
+            f'\turl "{image_asset.full_size.url}"'
         )
-        for error in ex.failure.errors:
-            print('\tError with message "%s".' % error.message)
-            if error.location:
-                for field_path_element in error.location.field_path_elements:
-                    print("\t\tOn field: %s" % field_path_element.field_name)
-        sys.exit(1)
+
+    print(f"Total of {count} image(s) found.")
 
 
 if __name__ == "__main__":
     # GoogleAdsClient will read the google-ads.yaml configuration file in the
     # home directory if none is specified.
-    google_ads_client = GoogleAdsClient.load_from_storage()
+    googleads_client = GoogleAdsClient.load_from_storage(version="v6")
 
     parser = argparse.ArgumentParser(
         description="List all image assets for specified customer."
@@ -88,4 +80,16 @@ if __name__ == "__main__":
     )
     args = parser.parse_args()
 
-    main(google_ads_client, args.customer_id, _DEFAULT_PAGE_SIZE)
+    try:
+        main(googleads_client, args.customer_id, _DEFAULT_PAGE_SIZE)
+    except GoogleAdsException as ex:
+        print(
+            f'Request with ID "{ex.request_id}" failed with status '
+            f'"{ex.error.code().name}" and includes the following errors:'
+        )
+        for error in ex.failure.errors:
+            print(f'	Error with message "{error.message}".')
+            if error.location:
+                for field_path_element in error.location.field_path_elements:
+                    print(f"\t\tOn field: {field_path_element.field_name}")
+        sys.exit(1)

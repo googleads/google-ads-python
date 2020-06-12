@@ -23,8 +23,8 @@ import sys
 
 import requests
 
-from google.ads.google_ads.client import GoogleAdsClient
-from google.ads.google_ads.errors import GoogleAdsException
+from google.ads.googleads.client import GoogleAdsClient
+from google.ads.googleads.errors import GoogleAdsException
 
 
 BUNDLE_URL = "https://goo.gl/9Y7qI2"
@@ -45,27 +45,15 @@ def main(client, customer_id, ad_group_id):
     # The DisplayUploadProductType field lists the available display upload types:
     # https://developers.google.com/google-ads/api/reference/rpc/latest/DisplayUploadAdInfo
 
-    try:
-        # Creates a new media bundle asset and returns the resource name.
-        ad_asset_resource_name = _create_media_bundle_asset(client, customer_id)
+    # Creates a new media bundle asset and returns the resource name.
+    ad_asset_resource_name = _create_media_bundle_asset(client, customer_id)
 
-        # Creates a new display upload ad and associates it with the specified
-        # ad group.
-        _create_display_upload_ad_group_ad(
-            client, customer_id, ad_group_id, ad_asset_resource_name
-        )
+    # Creates a new display upload ad and associates it with the specified
+    # ad group.
+    _create_display_upload_ad_group_ad(
+        client, customer_id, ad_group_id, ad_asset_resource_name
+    )
 
-    except GoogleAdsException as ex:
-        print(
-            f'Request with ID "{ex.request_id}" failed with status '
-            f'"{ex.error.code().name}" and includes the following errors: '
-        )
-        for error in ex.failure.errors:
-            print(f'\tError with message "{error.message}".')
-            if error.location:
-                for field_path_element in error.location.field_path_elements:
-                    print(f"\t\tOn field: {field_path_element.field_name}")
-        sys.exit(1)
 
 
 def _create_media_bundle_asset(client, customer_id):
@@ -80,14 +68,14 @@ def _create_media_bundle_asset(client, customer_id):
         The string resource name of the newly uploaded media bundle.
     """
     # Get the AssetService client.
-    asset_service = client.get_service("AssetService", version="v6")
+    asset_service = client.get_service("AssetService")
 
     # Construct an asset operation and populate its fields.
-    asset_operation = client.get_type("AssetOperation", version="v6")
+    asset_operation = client.get_type("AssetOperation")
     media_bundle_asset = asset_operation.create
-    media_bundle_asset.type = client.get_type(
-        "AssetTypeEnum", version="v6"
-    ).MEDIA_BUNDLE
+    media_bundle_asset.type_ = client.get_type(
+        "AssetTypeEnum"
+    ).AssetType.MEDIA_BUNDLE
     # The HTML5 zip file contains all the HTML, CSS, and images needed for the
     # HTML5 ad. For help on creating an HTML5 zip file, check out Google Web
     # Designer (https://www.google.com/webdesigner/).
@@ -98,7 +86,7 @@ def _create_media_bundle_asset(client, customer_id):
 
     # Adds the asset to the client account.
     mutate_asset_response = asset_service.mutate_assets(
-        customer_id, [asset_operation]
+        customer_id=customer_id, operations=[asset_operation]
     )
 
     # Display and return the resulting resource name.
@@ -123,41 +111,41 @@ def _create_display_upload_ad_group_ad(
             the HTML5 components.
     """
     # Get the AdGroupAdService client.
-    ad_group_ad_service = client.get_service("AdGroupAdService", version="v6")
+    ad_group_ad_service = client.get_service("AdGroupAdService")
 
     # Create an AdGroupAdOperation.
-    ad_group_ad_operation = client.get_type("AdGroupAdOperation", version="v6")
+    ad_group_ad_operation = client.get_type("AdGroupAdOperation")
 
     # Configure the ad group ad fields.
     ad_group_ad = ad_group_ad_operation.create
     ad_group_ad.status = client.get_type(
-        "AdGroupAdStatusEnum", version="v6"
-    ).PAUSED
-    ad_group_ad.ad_group = client.get_service(
-        "AdGroupService", version="v6"
-    ).ad_group_path(customer_id, ad_group_id)
+        "AdGroupAdStatusEnum"
+    ).AdGroupAdStatus.PAUSED
+    ad_group_ad.ad_group = client.get_service("AdGroupService").ad_group_path(
+        customer_id, ad_group_id
+    )
 
     # Configured the ad as a display upload ad.
     display_upload_ad = ad_group_ad.ad
     display_upload_ad.name = "Ad for HTML5"
     display_upload_ad.final_urls.append("http://example.com/html5")
-    # Exactly one ad data field must be included to specify the ad type. See
-    # https://developers.google.com/google-ads/api/reference/rpc/latest/Ad for
-    # the full list of available types.
-    display_upload_ad.display_upload_ad.CopyFrom(
-        client.get_type("DisplayUploadAdInfo", version="v6")
-    )
+    # Exactly one of the ad_data "oneof" fields must be included to specify the
+    # ad type. See: https://developers.google.com/google-ads/api/reference/rpc/latest/Ad for
+    # the full list of available types. By setting a "display_upload_ad"
+    # subfield it sets that as the "oneof" field for the Ad.
     display_upload_ad.display_upload_ad.media_bundle.asset = (
         ad_asset_resource_name
     )
-    display_upload_ad.display_upload_ad.display_upload_product_type = client.get_type(
-        "DisplayUploadProductTypeEnum", version="v6"
-    ).HTML5_UPLOAD_AD
+    display_upload_ad.display_upload_ad.display_upload_product_type = (
+        client.get_type(
+            "DisplayUploadProductTypeEnum"
+        ).DisplayUploadProductType.HTML5_UPLOAD_AD
+    )
 
     # Add the ad group ad to the client account and display the resulting
     # ad's resource name.
     mutate_ad_group_ads_response = ad_group_ad_service.mutate_ad_group_ads(
-        customer_id, [ad_group_ad_operation]
+        customer_id=customer_id, operations=[ad_group_ad_operation]
     )
     print(
         "Created new ad group ad with resource name "
@@ -168,7 +156,7 @@ def _create_display_upload_ad_group_ad(
 if __name__ == "__main__":
     # GoogleAdsClient will read the google-ads.yaml configuration file in the
     # home directory if none is specified.
-    google_ads_client = GoogleAdsClient.load_from_storage()
+    googleads_client = GoogleAdsClient.load_from_storage(version="v6")
 
     parser = argparse.ArgumentParser(
         description="Adds a display upload ad to a given ad group."
@@ -190,4 +178,16 @@ if __name__ == "__main__":
     )
     args = parser.parse_args()
 
-    main(google_ads_client, args.customer_id, args.ad_group_id)
+    try:
+        main(googleads_client, args.customer_id, args.ad_group_id)
+    except GoogleAdsException as ex:
+        print(
+            f'Request with ID "{ex.request_id}" failed with status '
+            f'"{ex.error.code().name}" and includes the following errors:'
+        )
+        for error in ex.failure.errors:
+            print(f'	Error with message "{error.message}".')
+            if error.location:
+                for field_path_element in error.location.field_path_elements:
+                    print(f"\t\tOn field: {field_path_element.field_name}")
+        sys.exit(1)

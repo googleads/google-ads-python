@@ -24,8 +24,8 @@ import argparse
 import sys
 from uuid import uuid4
 
-from google.ads.google_ads.client import GoogleAdsClient
-from google.ads.google_ads.errors import GoogleAdsException
+from google.ads.googleads.client import GoogleAdsClient
+from google.ads.googleads.errors import GoogleAdsException
 
 
 def main(client, customer_id):
@@ -35,14 +35,10 @@ def main(client, customer_id):
         client: an initialized GoogleAdsClient instance.
         customer_id: a client customer ID.
     """
-    custom_audience_service = client.get_service(
-        "CustomAudienceService", version="v6"
-    )
+    custom_audience_service = client.get_service("CustomAudienceService")
 
     # Create a custom audience operation.
-    custom_audience_operation = client.get_type(
-        "CustomAudienceOperation", version="v6"
-    )
+    custom_audience_operation = client.get_type("CustomAudienceOperation")
 
     # Create a custom audience
     custom_audience = custom_audience_operation.create
@@ -54,49 +50,37 @@ def main(client, customer_id):
     # or "PURCHASE_INTENT" is not allowed for the type field of a newly
     # created custom audience. Use "AUTO" instead of these two options when
     # creating a new custom audience.
-    custom_audience.type = client.get_type(
-        "CustomAudienceTypeEnum", version="v6"
-    ).SEARCH
+    custom_audience.type_ = client.get_type(
+        "CustomAudienceTypeEnum"
+    ).CustomAudienceType.SEARCH
     custom_audience.status = client.get_type(
-        "CustomAudienceStatusEnum", version="v6"
-    ).ENABLED
+        "CustomAudienceStatusEnum"
+    ).CustomAudienceStatus.ENABLED
     # List of members that this custom audience is composed of. Customers that
     # meet any of the membership conditions will be reached.
     member_type_enum = client.get_type(
-        "CustomAudienceMemberTypeEnum", version="v6"
-    )
-    member1 = custom_audience.members.add()
+        "CustomAudienceMemberTypeEnum"
+    ).CustomAudienceMemberType
+    member1 = client.get_type("CustomAudienceMember")
     member1.member_type = member_type_enum.KEYWORD
     member1.keyword = "mars cruise"
-    member2 = custom_audience.members.add()
+    member2 = client.get_type("CustomAudienceMember")
     member2.member_type = member_type_enum.KEYWORD
     member2.keyword = "jupiter cruise"
-    member3 = custom_audience.members.add()
+    member3 = client.get_type("CustomAudienceMember")
     member3.member_type = member_type_enum.URL
-    member3.url = "http://www.example.com/locations/mars"
-    member4 = custom_audience.members.add()
+    member3.keyword = "http://www.example.com/locations/mars"
+    member4 = client.get_type("CustomAudienceMember")
     member4.member_type = member_type_enum.URL
-    member4.url = "http://www.example.com/locations/jupiter"
-    member5 = custom_audience.members.add()
-    member5.member_type = member_type_enum.APP
-    member5.app = "com.google.android.apps.adwords"
+    member4.keyword = "http://www.example.com/locations/jupiter"
+    custom_audience.members.extend([member1, member2, member3, member4])
 
-    try:
-        # Add the custom audience.
-        custom_audience_response = custom_audience_service.mutate_custom_audiences(
-            customer_id, [custom_audience_operation]
+    # Add the custom audience.
+    custom_audience_response = (
+        custom_audience_service.mutate_custom_audiences(
+            customer_id=customer_id, operations=[custom_audience_operation]
         )
-    except GoogleAdsException as ex:
-        print(
-            f"Request with ID '{ex.request_id}' failed with status "
-            f"'{ex.error.code().name}' and includes the following errors:"
-        )
-        for error in ex.failure.errors:
-            print(f"\tError with message '{error.message}'.")
-            if error.location:
-                for field_path_element in error.location.field_path_elements:
-                    print(f"\t\tOn field: {field_path_element.field_name}")
-        sys.exit(1)
+    )
 
     print(
         "New custom audience added with resource name: "
@@ -107,7 +91,7 @@ def main(client, customer_id):
 if __name__ == "__main__":
     # GoogleAdsClient will read the google-ads.yaml configuration file in the
     # home directory if none is specified.
-    google_ads_client = GoogleAdsClient.load_from_storage()
+    googleads_client = GoogleAdsClient.load_from_storage(version="v6")
 
     parser = argparse.ArgumentParser(
         description="Adds a custom audience for a specified customer."
@@ -122,4 +106,16 @@ if __name__ == "__main__":
     )
     args = parser.parse_args()
 
-    main(google_ads_client, args.customer_id)
+    try:
+        main(googleads_client, args.customer_id)
+    except GoogleAdsException as ex:
+        print(
+            f'Request with ID "{ex.request_id}" failed with status '
+            f'"{ex.error.code().name}" and includes the following errors:'
+        )
+        for error in ex.failure.errors:
+            print(f'	Error with message "{error.message}".')
+            if error.location:
+                for field_path_element in error.location.field_path_elements:
+                    print(f"\t\tOn field: {field_path_element.field_name}")
+        sys.exit(1)

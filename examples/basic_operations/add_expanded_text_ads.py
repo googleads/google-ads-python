@@ -22,35 +22,32 @@ import argparse
 import sys
 import uuid
 
-import google.ads.google_ads.client
+from google.ads.googleads.client import GoogleAdsClient
+from google.ads.googleads.errors import GoogleAdsException
 
 
 # [START add_expanded_text_ads]
 def main(client, customer_id, ad_group_id, number_of_ads):
-    ad_group_ad_service = client.get_service("AdGroupAdService", version="v6")
-    ad_group_service = client.get_service("AdGroupService", version="v6")
+    ad_group_ad_service = client.get_service("AdGroupAdService")
+    ad_group_service = client.get_service("AdGroupService")
 
     ad_group_ad_operations = []
-
     for i in range(number_of_ads):
-
         # Create ad group ad.
-        ad_group_ad_operation = client.get_type(
-            "AdGroupAdOperation", version="v6"
-        )
+        ad_group_ad_operation = client.get_type("AdGroupAdOperation")
         ad_group_ad = ad_group_ad_operation.create
         ad_group_ad.ad_group = ad_group_service.ad_group_path(
             customer_id, ad_group_id
         )
         ad_group_ad.status = client.get_type(
-            "AdGroupAdStatusEnum", version="v6"
-        ).PAUSED
+            "AdGroupAdStatusEnum"
+        ).AdGroupAdStatus.PAUSED
 
         # Set expanded text ad info
         ad_group_ad.ad.final_urls.append("http://www.example.com")
         ad_group_ad.ad.expanded_text_ad.description = "Buy your tickets now!"
-        ad_group_ad.ad.expanded_text_ad.headline_part1 = "Cruise {} to Mars {}".format(
-            i, str(uuid.uuid4())[:8]
+        ad_group_ad.ad.expanded_text_ad.headline_part1 = (
+            f"Cruise {i} to Mars {str(uuid.uuid4())[:8]}"
         )
         ad_group_ad.ad.expanded_text_ad.headline_part2 = (
             "Best space cruise line"
@@ -60,35 +57,19 @@ def main(client, customer_id, ad_group_id, number_of_ads):
 
         ad_group_ad_operations.append(ad_group_ad_operation)
 
-    try:
-        ad_group_ad_response = ad_group_ad_service.mutate_ad_group_ads(
-            customer_id, ad_group_ad_operations
-        )
-    except google.ads.google_ads.errors.GoogleAdsException as ex:
-        print(
-            'Request with ID "{}" failed with status "{}" and includes the '
-            "following errors:".format(ex.request_id, ex.error.code().name)
-        )
-        for error in ex.failure.errors:
-            print('\tError with message "{}".'.format(error.message))
-            if error.location:
-                for field_path_element in error.location.field_path_elements:
-                    print(
-                        "\t\tOn field: {}".format(field_path_element.field_name)
-                    )
-        sys.exit(1)
+    ad_group_ad_response = ad_group_ad_service.mutate_ad_group_ads(
+        customer_id=customer_id, operations=ad_group_ad_operations
+    )
 
     for result in ad_group_ad_response.results:
-        print("Created ad group ad {}.".format(result.resource_name))
-        # [END add_expanded_text_ads]
+        print(f'Created ad group ad "{result.resource_name}".')
+    # [END add_expanded_text_ads]
 
 
 if __name__ == "__main__":
     # GoogleAdsClient will read the google-ads.yaml configuration file in the
     # home directory if none is specified.
-    google_ads_client = (
-        google.ads.google_ads.client.GoogleAdsClient.load_from_storage()
-    )
+    googleads_client = GoogleAdsClient.load_from_storage(version="v6")
 
     parser = argparse.ArgumentParser(
         description=(
@@ -117,9 +98,18 @@ if __name__ == "__main__":
     )
     args = parser.parse_args()
 
-    main(
-        google_ads_client,
-        args.customer_id,
-        args.ad_group_id,
-        args.number_of_ads,
+    try:
+        main(
+        googleads_client, args.customer_id, args.ad_group_id, args.number_of_ads
     )
+    except GoogleAdsException as ex:
+        print(
+            f'Request with ID "{ex.request_id}" failed with status '
+            f'"{ex.error.code().name}" and includes the following errors:'
+        )
+        for error in ex.failure.errors:
+            print(f'	Error with message "{error.message}".')
+            if error.location:
+                for field_path_element in error.location.field_path_elements:
+                    print(f"\t\tOn field: {field_path_element.field_name}")
+        sys.exit(1)

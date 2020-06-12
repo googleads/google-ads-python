@@ -27,10 +27,9 @@ ExtensionType.SITELINK with the extension type you wish to remove.
 import argparse
 import sys
 
-from google.api_core import protobuf_helpers
 
-from google.ads.google_ads.client import GoogleAdsClient
-from google.ads.google_ads.errors import GoogleAdsException
+from google.ads.googleads.client import GoogleAdsClient
+from google.ads.googleads.errors import GoogleAdsException
 
 
 def main(client, customer_id, campaign_id):
@@ -43,49 +42,48 @@ def main(client, customer_id, campaign_id):
     """
     # Initialize an array of MutateOperations
     mutate_operations = []
-    sitelink_campaign_extension_setting_mutate_operation = _create_sitelink_campaign_extension_setting_mutate_operation(
-        client, customer_id, campaign_id
+    sitelink_campaign_extension_setting_mutate_operation = (
+        _create_sitelink_campaign_extension_setting_mutate_operation(
+            client, customer_id, campaign_id
+        )
     )
     mutate_operations.append(
         sitelink_campaign_extension_setting_mutate_operation
     )
 
-    ga_service = client.get_service("GoogleAdsService", version="v6")
+    ga_service = client.get_service("GoogleAdsService")
     extension_feed_item_resource_names = _get_all_sitelink_extension_feed_items(
         client, ga_service, customer_id, campaign_id
     )
-    extension_feed_item_mutate_operations = _create_extension_feed_item_mutate_operations(
-        client, extension_feed_item_resource_names
+    extension_feed_item_mutate_operations = (
+        _create_extension_feed_item_mutate_operations(
+            client, extension_feed_item_resource_names
+        )
     )
     mutate_operations.extend(extension_feed_item_mutate_operations)
 
-    try:
-        # Issue a mutate request to remove the campaign extension setting and
-        # its extension feed items.
-        response = ga_service.mutate(customer_id, mutate_operations)
-        mutate_operation_responses = response.mutate_operation_responses
+    # Issue a mutate request to remove the campaign extension setting and
+    # its extension feed items.
+    response = ga_service.mutate(
+        customer_id=customer_id, mutate_operations=mutate_operations
+    )
+    mutate_operation_responses = response.mutate_operation_responses
+    # The order of response messages corresponds to the order of operations
+    # passed into the mutate method. Since the first operation sent in the
+    # request was to remove a campaign extension setting, we can read the
+    # resource name of that object in the first message in the response list.
+    print(
+        "Removed a campaign extension setting with resource name "
+        f'"{mutate_operation_responses[0].campaign_extension_setting_result.resource_name}".'
+    )
+    # Since we read the result of the first remove operation above, next we
+    # read the results for the remaining remove operations by iterating over all
+    # but the first message in the response list.
+    for mutate_operation_response in mutate_operation_responses[1:]:
         print(
-            "Removed a campaign extension setting with resource name "
-            f'"{mutate_operation_responses[0].campaign_extension_setting_result.resource_name}".'
+            "Removed an extension feed item with resource name "
+            f'"{mutate_operation_response.extension_feed_item_result.resource_name}".'
         )
-        # Iterate through the remainder of the mutate operation responses,
-        # which are the extension feed item removal responses
-        for mutate_operation_response in mutate_operation_responses[1:]:
-            print(
-                "Removed an extension feed item with resource name "
-                f'"{mutate_operation_response.extension_feed_item_result.resource_name}".'
-            )
-    except GoogleAdsException as ex:
-        print(
-            f'Request with ID "{ex.request_id}" failed with status '
-            f'"{ex.error.code().name}" and includes the following errors:'
-        )
-        for error in ex.failure.errors:
-            print(f'\tError with message "{error.message}".')
-            if error.location:
-                for field_path_element in error.location.field_path_elements:
-                    print(f"\t\tOn field: {field_path_element.field_name}")
-        sys.exit(1)
 
 
 def _create_sitelink_campaign_extension_setting_mutate_operation(
@@ -103,21 +101,17 @@ def _create_sitelink_campaign_extension_setting_mutate_operation(
         The created MutateOperation for the sitelink campaign extension
             setting.
     """
-    extension_type_enum = client.get_type("ExtensionTypeEnum", version="v6")
+    extension_type_enum = client.get_type("ExtensionTypeEnum").ExtensionType
     # Construct the campaign extension setting resource name, in format:
     # customers/{customer_id}/campaignExtensionSettings/{campaign_id}~{extension_type}
     resource_name = client.get_service(
-        "CampaignExtensionSettingService", version="v6"
+        "CampaignExtensionSettingService"
     ).campaign_extension_setting_path(
-        customer_id,
-        campaign_id,
-        extension_type_enum.ExtensionType.Name(
-            extension_type_enum.ExtensionType.SITELINK
-        ),
+        customer_id, campaign_id, extension_type_enum.SITELINK.name
     )
 
     # Create a MutateOperation for the campaign extension setting.
-    mutate_operation = client.get_type("MutateOperation", version="v6")
+    mutate_operation = client.get_type("MutateOperation")
     mutate_operation.campaign_extension_setting_operation.remove = resource_name
     return mutate_operation
 
@@ -139,12 +133,10 @@ def _get_all_sitelink_extension_feed_items(
         An array of str resource names of extension feed items.
     """
     campaign_resource_name = client.get_service(
-        "CampaignService", version="v6"
+        "CampaignService"
     ).campaign_path(customer_id, campaign_id)
-    extension_type_enum = client.get_type("ExtensionTypeEnum", version="v6")
-    extension_type_name = extension_type_enum.ExtensionType.Name(
-        extension_type_enum.ExtensionType.SITELINK
-    )
+    extension_type_enum = client.get_type("ExtensionTypeEnum").ExtensionType
+    extension_type_name = extension_type_enum.SITELINK.name
 
     # Construct the query.
     query = f"""
@@ -153,12 +145,12 @@ def _get_all_sitelink_extension_feed_items(
           campaign_extension_setting.extension_type,
           campaign_extension_setting.extension_feed_items
         FROM campaign_extension_setting
-        WHERE campaign_extension_setting.campaign = '{campaign_resource_name}'
-        AND campaign_extension_setting.extension_type =
-          '{extension_type_name}'"""
+        WHERE
+          campaign_extension_setting.campaign = '{campaign_resource_name}'
+          AND campaign_extension_setting.extension_type = '{extension_type_name}'"""
 
     # Issue a search request using streaming.
-    response = ga_service.search_stream(customer_id, query=query)
+    response = ga_service.search_stream(customer_id=customer_id, query=query)
     extension_feed_item_resource_names = []
     # Iterate through each row and append the extension feed item resource
     # names to the return array.
@@ -195,7 +187,7 @@ def _create_extension_feed_item_mutate_operations(
     mutate_operations = []
     # Create a MutateOperation for each extension feed item to remove.
     for resource_name in extension_feed_item_resource_names:
-        mutate_operation = client.get_type("MutateOperation", version="v6")
+        mutate_operation = client.get_type("MutateOperation")
         mutate_operation.extension_feed_item_operation.remove = resource_name
         mutate_operations.append(mutate_operation)
 
@@ -205,7 +197,7 @@ def _create_extension_feed_item_mutate_operations(
 if __name__ == "__main__":
     # GoogleAdsClient will read the google-ads.yaml configuration file in the
     # home directory if none is specified.
-    google_ads_client = GoogleAdsClient.load_from_storage()
+    googleads_client = GoogleAdsClient.load_from_storage(version="v6")
 
     parser = argparse.ArgumentParser(
         description="Removes the entire sitelink campaign extension setting."
@@ -219,8 +211,24 @@ if __name__ == "__main__":
         help="The Google Ads customer ID",
     )
     parser.add_argument(
-        "-i", "--campaign_id", type=str, required=True, help="The campaign ID",
+        "-i",
+        "--campaign_id",
+        type=str,
+        required=True,
+        help="The campaign ID",
     )
     args = parser.parse_args()
 
-    main(google_ads_client, args.customer_id, args.campaign_id)
+    try:
+        main(googleads_client, args.customer_id, args.campaign_id)
+    except GoogleAdsException as ex:
+        print(
+            f'Request with ID "{ex.request_id}" failed with status '
+            f'"{ex.error.code().name}" and includes the following errors:'
+        )
+        for error in ex.failure.errors:
+            print(f'\tError with message "{error.message}".')
+            if error.location:
+                for field_path_element in error.location.field_path_elements:
+                    print(f"\t\tOn field: {field_path_element.field_name}")
+        sys.exit(1)

@@ -23,8 +23,8 @@ import asyncio
 import sys
 from uuid import uuid4
 
-from google.ads.google_ads.client import GoogleAdsClient
-from google.ads.google_ads.errors import GoogleAdsException
+from google.ads.googleads.client import GoogleAdsClient
+from google.ads.googleads.errors import GoogleAdsException
 
 NUMBER_OF_CAMPAIGNS_TO_ADD = 2
 NUMBER_OF_AD_GROUPS_TO_ADD = 2
@@ -48,24 +48,6 @@ def _get_next_temporary_id():
     return _temporary_id
 
 
-def _handle_google_ads_exception(exception):
-    """Prints the details of a GoogleAdsException object.
-
-    Args:
-        exception: an instance of GoogleAdsException.
-    """
-    print(
-        f'Request with ID "{exception.request_id}" failed with status '
-        f'"{exception.error.code().name}" and includes the following errors:'
-    )
-    for error in exception.failure.errors:
-        print(f'\tError with message "{error.message}".')
-        if error.location:
-            for field_path_element in error.location.field_path_elements:
-                print(f"\t\tOn field: {field_path_element.field_name}")
-    sys.exit(1)
-
-
 def _build_mutate_operation(client, operation_type, operation):
     """Builds a mutate operation with the given operation type and operation.
 
@@ -77,8 +59,10 @@ def _build_mutate_operation(client, operation_type, operation):
 
     Returns: a MutateOperation instance
     """
-    mutate_operation = client.get_type("MutateOperation", version="v6")
-    getattr(mutate_operation, operation_type).CopyFrom(operation)
+    mutate_operation = client.get_type("MutateOperation")
+    # Retrieve the nested operation message instance using getattr then copy the
+    # contents of the given operation into it using the client.copy_from method.
+    client.copy_from(getattr(mutate_operation, operation_type), operation)
     return mutate_operation
 
 
@@ -89,7 +73,7 @@ async def main(client, customer_id):
         client: an initialized GoogleAdsClient instance.
         customer_id: a str of a customer ID.
     """
-    batch_job_service = client.get_service("BatchJobService", version="v6")
+    batch_job_service = client.get_service("BatchJobService")
     batch_job_operation = _create_batch_job_operation(client)
     resource_name = _create_batch_job(
         batch_job_service, customer_id, batch_job_operation
@@ -109,7 +93,7 @@ async def main(client, customer_id):
     # _poll_batch_job to complete before proceeding.
     await _done_event.wait()
 
-    _fetch_and_print_results(batch_job_service, resource_name)
+    _fetch_and_print_results(client, batch_job_service, resource_name)
 
 
 def _create_batch_job_operation(client):
@@ -123,9 +107,9 @@ def _create_batch_job_operation(client):
     Returns: a BatchJobOperation with a BatchJob instance set in the "create"
         property.
     """
-    batch_job_operation = client.get_type("BatchJobOperation", version="v6")
-    batch_job = client.get_type("BatchJob", version="v6")
-    batch_job_operation.create.CopyFrom(batch_job)
+    batch_job_operation = client.get_type("BatchJobOperation")
+    batch_job = client.get_type("BatchJob")
+    client.copy_from(batch_job_operation.create, batch_job)
     return batch_job_operation
 
 
@@ -142,13 +126,13 @@ def _create_batch_job(batch_job_service, customer_id, batch_job_operation):
     """
     try:
         response = batch_job_service.mutate_batch_job(
-            customer_id, batch_job_operation
+            customer_id=customer_id, operation=batch_job_operation
         )
         resource_name = response.result.resource_name
         print(f'Created a batch job with resource name "{resource_name}"')
         return resource_name
     except GoogleAdsException as exception:
-        _handle_google_ads_exception(exception)
+        _handle_googleads_exception(exception)
         # [END add_complete_campaigns_using_batch_job]
 
 
@@ -167,7 +151,9 @@ def _add_all_batch_job_operations(batch_job_service, operations, resource_name):
     """
     try:
         response = batch_job_service.add_batch_job_operations(
-            resource_name, operations
+            resource_name=resource_name,
+            sequence_token=None,
+            mutate_operations=operations,
         )
 
         print(
@@ -182,7 +168,7 @@ def _add_all_batch_job_operations(batch_job_service, operations, resource_name):
             f"{response.next_sequence_token}"
         )
     except GoogleAdsException as exception:
-        _handle_google_ads_exception(exception)
+        _handle_googleads_exception(exception)
         # [END add_complete_campaigns_using_batch_job_1]
 
 
@@ -272,12 +258,8 @@ def _build_campaign_budget_operation(client, customer_id):
 
     Returns: a CampaignBudgetOperation instance.
     """
-    campaign_budget_service = client.get_service(
-        "CampaignBudgetService", version="v6"
-    )
-    campaign_budget_operation = client.get_type(
-        "CampaignBudgetOperation", version="v6"
-    )
+    campaign_budget_service = client.get_service("CampaignBudgetService")
+    campaign_budget_operation = client.get_type("CampaignBudgetOperation")
     campaign_budget = campaign_budget_operation.create
     resource_name = campaign_budget_service.campaign_budget_path(
         customer_id, _get_next_temporary_id()
@@ -285,8 +267,8 @@ def _build_campaign_budget_operation(client, customer_id):
     campaign_budget.resource_name = resource_name
     campaign_budget.name = f"Interplanetary Cruise Budget #{uuid4()}"
     campaign_budget.delivery_method = client.get_type(
-        "BudgetDeliveryMethodEnum", version="v6"
-    ).STANDARD
+        "BudgetDeliveryMethodEnum"
+    ).BudgetDeliveryMethod.STANDARD
     campaign_budget.amount_micros = 5000000
 
     return campaign_budget_operation
@@ -326,8 +308,8 @@ def _build_campaign_operation(
 
     Returns: a CampaignOperation instance.
     """
-    campaign_operation = client.get_type("CampaignOperation", version="v6")
-    campaign_service = client.get_service("CampaignService", version="v6")
+    campaign_operation = client.get_type("CampaignOperation")
+    campaign_service = client.get_service("CampaignService")
     # Creates a campaign.
     campaign = campaign_operation.create
     campaign_id = _get_next_temporary_id()
@@ -337,14 +319,17 @@ def _build_campaign_operation(
     )
     campaign.name = f"Batch job campaign #{customer_id}.{campaign_id}"
     campaign.advertising_channel_type = client.get_type(
-        "AdvertisingChannelTypeEnum", version="v6"
-    ).SEARCH
+        "AdvertisingChannelTypeEnum"
+    ).AdvertisingChannelType.SEARCH
     # Recommendation: Set the campaign to PAUSED when creating it to prevent
     # the ads from immediately serving. Set to ENABLED once you've added
     # targeting and the ads are ready to serve.
-    campaign.status = client.get_type("CampaignStatusEnum", version="v6").PAUSED
-    # Set the bidding strategy and type.
-    campaign.manual_cpc.CopyFrom(client.get_type("ManualCpc", version="v6"))
+    campaign.status = client.get_type(
+        "CampaignStatusEnum"
+    ).CampaignStatus.PAUSED
+    # Set the bidding strategy and type by setting manual_cpc equal to an empty
+    # ManualCpc instance.
+    client.copy_from(campaign.manual_cpc, client.get_type("ManualCpc"))
     campaign.campaign_budget = campaign_budget_resource_name
 
     return campaign_operation
@@ -374,15 +359,13 @@ def _build_campaign_criterion_operation(client, campaign_operation):
 
     Returns: a CampaignCriterionOperation instance.
     """
-    campaign_criterion_operation = client.get_type(
-        "CampaignCriterionOperation", version="v6"
-    )
+    campaign_criterion_operation = client.get_type("CampaignCriterionOperation")
     # Creates a campaign criterion.
     campaign_criterion = campaign_criterion_operation.create
     campaign_criterion.keyword.text = "venus"
     campaign_criterion.keyword.match_type = client.get_type(
-        "KeywordMatchTypeEnum", version="v6"
-    ).BROAD
+        "KeywordMatchTypeEnum"
+    ).KeywordMatchType.BROAD
     # Sets the campaign criterion as a negative criterion.
     campaign_criterion.negative = True
     campaign_criterion.campaign = campaign_operation.create.resource_name
@@ -423,8 +406,8 @@ def _build_ad_group_operation(client, customer_id, campaign_operation):
 
     Return: an AdGroupOperation instance.
     """
-    ad_group_operation = client.get_type("AdGroupOperation", version="v6")
-    ad_group_service = client.get_service("AdGroupService", version="v6")
+    ad_group_operation = client.get_type("AdGroupOperation")
+    ad_group_service = client.get_service("AdGroupService")
     # Creates an ad group.
     ad_group = ad_group_operation.create
     ad_group_id = _get_next_temporary_id()
@@ -434,9 +417,9 @@ def _build_ad_group_operation(client, customer_id, campaign_operation):
     )
     ad_group.name = f"Batch job ad group #{uuid4()}.{ad_group_id}"
     ad_group.campaign = campaign_operation.create.resource_name
-    ad_group.type = client.get_type(
-        "AdGroupTypeEnum", version="v6"
-    ).SEARCH_STANDARD
+    ad_group.type_ = client.get_type(
+        "AdGroupTypeEnum"
+    ).AdGroupType.SEARCH_STANDARD
     ad_group.cpc_bid_micros = 10000000
 
     return ad_group_operation
@@ -488,9 +471,7 @@ def _build_ad_group_criterion_operation(
 
     Returns: an AdGroupCriterionOperation instance.
     """
-    ad_group_criterion_operation = client.get_type(
-        "AdGroupCriterionOperation", version="v6"
-    )
+    ad_group_criterion_operation = client.get_type("AdGroupCriterionOperation")
     # Creates an ad group criterion.
     ad_group_criterion = ad_group_criterion_operation.create
     ad_group_criterion.keyword.text = f"mars{number}"
@@ -501,12 +482,12 @@ def _build_ad_group_criterion_operation(
         ad_group_criterion.keyword.text += "!!!"
 
     ad_group_criterion.keyword.match_type = client.get_type(
-        "KeywordMatchTypeEnum", version="v6"
-    ).BROAD
+        "KeywordMatchTypeEnum"
+    ).KeywordMatchType.BROAD
     ad_group_criterion.ad_group = ad_group_operation.create.resource_name
     ad_group_criterion.status = client.get_type(
-        "AdGroupCriterionStatusEnum", version="v6"
-    ).ENABLED
+        "AdGroupCriterionStatusEnum"
+    ).AdGroupCriterionStatus.ENABLED
 
     return ad_group_criterion_operation
 
@@ -535,7 +516,7 @@ def _build_ad_group_ad_operation(client, ad_group_operation):
 
     Returns: an AdGroupAdOperation instance.
     """
-    ad_group_ad_operation = client.get_type("AdGroupAdOperation", version="v6")
+    ad_group_ad_operation = client.get_type("AdGroupAdOperation")
     # Creates an ad group ad.
     ad_group_ad = ad_group_ad_operation.create
     # Creates the expanded text ad info.
@@ -543,11 +524,12 @@ def _build_ad_group_ad_operation(client, ad_group_operation):
     text_ad.headline_part1 = f"Cruise to Mars #{uuid4()}"
     text_ad.headline_part2 = "Best Space Cruise Line"
     text_ad.description = "Buy your tickets now!"
-    final_url = ad_group_ad.ad.final_urls.append("http://www.example.com")
+
+    ad_group_ad.ad.final_urls.append("http://www.example.com")
     ad_group_ad.ad_group = ad_group_operation.create.resource_name
     ad_group_ad.status = client.get_type(
-        "AdGroupAdStatusEnum", version="v6"
-    ).PAUSED
+        "AdGroupAdStatusEnum"
+    ).AdGroupAdStatus.PAUSED
 
     return ad_group_ad_operation
 
@@ -563,14 +545,14 @@ def _run_batch_job(batch_job_service, resource_name):
     Returns: a google.api_core.operation.Operation instance.
     """
     try:
-        response = batch_job_service.run_batch_job(resource_name)
+        response = batch_job_service.run_batch_job(resource_name=resource_name)
         print(
             f'Batch job with resource name "{resource_name}" has been '
             "executed."
         )
         return response
     except GoogleAdsException as exception:
-        _handle_google_ads_exception(exception)
+        _handle_googleads_exception(exception)
         # [END add_complete_campaigns_using_batch_job_2]
 
 
@@ -603,10 +585,11 @@ def _poll_batch_job(operations_response, event):
 
 
 # [START add_complete_campaigns_using_batch_job_4]
-def _fetch_and_print_results(batch_job_service, resource_name):
+def _fetch_and_print_results(client, batch_job_service, resource_name):
     """Prints all the results from running the batch job.
 
     Args:
+        client: an initialized GoogleAdsClient instance.
         batch_job_service: an instance of the BatchJobService message class.
         resource_name: a str of a resource name for a batch job.
     """
@@ -615,16 +598,19 @@ def _fetch_and_print_results(batch_job_service, resource_name):
         "Now, printing its results..."
     )
 
+    list_results_request = client.get_type("ListBatchJobResultsRequest")
+    list_results_request.resource_name = resource_name
+    list_results_request.page_size = PAGE_SIZE
     # Gets all the results from running batch job and prints their information.
     batch_job_results = batch_job_service.list_batch_job_results(
-        resource_name, page_size=PAGE_SIZE
+        request=list_results_request
     )
 
     for batch_job_result in batch_job_results:
         status = batch_job_result.status.message
         status = status if status else "N/A"
         result = batch_job_result.mutate_operation_response
-        result = result if result.ByteSize() else "N/A"
+        result = result or "N/A"
         print(
             f"Batch job #{batch_job_result.operation_index} "
             f'has a status "{status}" and response type "{result}"'
@@ -632,10 +618,28 @@ def _fetch_and_print_results(batch_job_service, resource_name):
         # [END add_complete_campaigns_using_batch_job_4]
 
 
+def _handle_googleads_exception(exception):
+    """Prints the details of a GoogleAdsException object.
+
+    Args:
+        exception: an instance of GoogleAdsException.
+    """
+    print(
+        f'Request with ID "{exception.request_id}" failed with status '
+        f'"{exception.error.code().name}" and includes the following errors:'
+    )
+    for error in exception.failure.errors:
+        print(f'\tError with message "{error.message}".')
+        if error.location:
+            for field_path_element in error.location.field_path_elements:
+                print(f"\t\tOn field: {field_path_element.field_name}")
+    sys.exit(1)
+
+
 if __name__ == "__main__":
     # GoogleAdsClient will read the google-ads.yaml configuration file in the
     # home directory if none is specified.
-    google_ads_client = GoogleAdsClient.load_from_storage()
+    googleads_client = GoogleAdsClient.load_from_storage(version="v6")
 
     parser = argparse.ArgumentParser(
         description=(
@@ -656,4 +660,4 @@ if __name__ == "__main__":
 
     args = parser.parse_args()
 
-    asyncio.run(main(google_ads_client, args.customer_id))
+    asyncio.run(main(googleads_client, args.customer_id))

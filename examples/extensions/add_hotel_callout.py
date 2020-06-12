@@ -22,10 +22,9 @@ the account.
 import argparse
 import sys
 
-from google.api_core import protobuf_helpers
 
-from google.ads.google_ads.client import GoogleAdsClient
-from google.ads.google_ads.errors import GoogleAdsException
+from google.ads.googleads.client import GoogleAdsClient
+from google.ads.googleads.errors import GoogleAdsException
 
 
 def main(
@@ -41,34 +40,22 @@ def main(
         callout_text: a str of text for a hotel callout feed item.
         language_code: the language of the hotel callout feed item text.
     """
-    try:
-        # Creates an extension feed item as hotel callout.
-        extension_feed_item_resource_name = _add_extension_feed_item(
-            client, customer_id, callout_text, language_code
-        )
-        # Adds the extension feed item to the account.
-        _add_extension_to_account(
-            client, customer_id, extension_feed_item_resource_name
-        )
-        # Adds the extension feed item to the campaign.
-        _add_extension_to_campaign(
-            client, customer_id, campaign_id, extension_feed_item_resource_name
-        )
-        # Adds the extension feed item to the ad group.
-        _add_extension_to_ad_group(
-            client, customer_id, ad_group_id, extension_feed_item_resource_name
-        )
-    except GoogleAdsException as ex:
-        print(
-            f'Request with ID "{ex.request_id}" failed with status '
-            f'"{ex.error.code().name}" and includes the following errors:'
-        )
-        for error in ex.failure.errors:
-            print(f'\tError with message "{error.message}".')
-            if error.location:
-                for field_path_element in error.location.field_path_elements:
-                    print(f"\t\tOn field: {field_path_element.field_name}")
-        sys.exit(1)
+    # Creates an extension feed item as hotel callout.
+    extension_feed_item_resource_name = _add_extension_feed_item(
+        client, customer_id, callout_text, language_code
+    )
+    # Adds the extension feed item to the account.
+    _add_extension_to_account(
+        client, customer_id, extension_feed_item_resource_name
+    )
+    # Adds the extension feed item to the campaign.
+    _add_extension_to_campaign(
+        client, customer_id, campaign_id, extension_feed_item_resource_name
+    )
+    # Adds the extension feed item to the ad group.
+    _add_extension_to_ad_group(
+        client, customer_id, ad_group_id, extension_feed_item_resource_name
+    )
 
 
 def _add_extension_feed_item(client, customer_id, callout_text, language_code):
@@ -84,17 +71,15 @@ def _add_extension_feed_item(client, customer_id, callout_text, language_code):
         a str resource name of the newly created extension feed item.
     """
     extension_feed_item_operation = client.get_type(
-        "ExtensionFeedItemOperation", version="v6"
+        "ExtensionFeedItemOperation"
     )
     extension_feed_item = extension_feed_item_operation.create
     extension_feed_item.hotel_callout_feed_item.text = callout_text
     extension_feed_item.hotel_callout_feed_item.language_code = language_code
 
-    extension_feed_item_service = client.get_service(
-        "ExtensionFeedItemService", version="v6"
-    )
+    extension_feed_item_service = client.get_service("ExtensionFeedItemService")
     response = extension_feed_item_service.mutate_extension_feed_items(
-        customer_id, [extension_feed_item_operation]
+        customer_id=customer_id, operations=[extension_feed_item_operation]
     )
     resource_name = response.results[0].resource_name
     print(
@@ -116,21 +101,24 @@ def _add_extension_to_account(
             feed item.
     """
     customer_extension_setting_operation = client.get_type(
-        "CustomerExtensionSettingOperation", version="v6"
+        "CustomerExtensionSettingOperation"
     )
     customer_extension_setting = customer_extension_setting_operation.create
     customer_extension_setting.extension_type = client.get_type(
-        "ExtensionTypeEnum", version="v6"
-    ).HOTEL_CALLOUT
+        "ExtensionTypeEnum"
+    ).ExtensionType.HOTEL_CALLOUT
     customer_extension_setting.extension_feed_items.append(
         extension_feed_item_resource_name
     )
 
     customer_extension_setting_service = client.get_service(
-        "CustomerExtensionSettingService", version="v6"
+        "CustomerExtensionSettingService"
     )
-    response = customer_extension_setting_service.mutate_customer_extension_settings(
-        customer_id, [customer_extension_setting_operation]
+    response = (
+        customer_extension_setting_service.mutate_customer_extension_settings(
+            customer_id=customer_id,
+            operations=[customer_extension_setting_operation],
+        )
     )
     print(
         "Created a customer extension setting with resource name: "
@@ -151,24 +139,27 @@ def _add_extension_to_campaign(
             feed item.
     """
     campaign_extension_setting_operation = client.get_type(
-        "CampaignExtensionSettingOperation", version="v6"
+        "CampaignExtensionSettingOperation"
     )
     campaign_extension_setting = campaign_extension_setting_operation.create
     campaign_extension_setting.campaign = client.get_service(
-        "CampaignService", version="v6"
+        "CampaignService"
     ).campaign_path(customer_id, campaign_id)
     campaign_extension_setting.extension_type = client.get_type(
-        "ExtensionTypeEnum", version="v6"
-    ).HOTEL_CALLOUT
+        "ExtensionTypeEnum"
+    ).ExtensionType.HOTEL_CALLOUT
     campaign_extension_setting.extension_feed_items.append(
         extension_feed_item_resource_name
     )
 
     campaign_extension_setting_service = client.get_service(
-        "CampaignExtensionSettingService", version="v6"
+        "CampaignExtensionSettingService"
     )
-    response = campaign_extension_setting_service.mutate_campaign_extension_settings(
-        customer_id, [campaign_extension_setting_operation]
+    response = (
+        campaign_extension_setting_service.mutate_campaign_extension_settings(
+            customer_id=customer_id,
+            operations=[campaign_extension_setting_operation],
+        )
     )
     print(
         "Created a campaign extension setting with resource name: "
@@ -189,24 +180,27 @@ def _add_extension_to_ad_group(
             feed item.
     """
     ad_group_extension_setting_operation = client.get_type(
-        "AdGroupExtensionSettingOperation", version="v6"
+        "AdGroupExtensionSettingOperation"
     )
     ad_group_extension_setting = ad_group_extension_setting_operation.create
     ad_group_extension_setting.ad_group = client.get_service(
-        "AdGroupService", version="v6"
+        "AdGroupService"
     ).ad_group_path(customer_id, ad_group_id)
     ad_group_extension_setting.extension_type = client.get_type(
-        "ExtensionTypeEnum", version="v6"
-    ).HOTEL_CALLOUT
+        "ExtensionTypeEnum"
+    ).ExtensionType.HOTEL_CALLOUT
     ad_group_extension_setting.extension_feed_items.append(
         extension_feed_item_resource_name
     )
 
     ad_group_extension_setting_service = client.get_service(
-        "AdGroupExtensionSettingService", version="v6"
+        "AdGroupExtensionSettingService"
     )
-    response = ad_group_extension_setting_service.mutate_ad_group_extension_settings(
-        customer_id, [ad_group_extension_setting_operation]
+    response = (
+        ad_group_extension_setting_service.mutate_ad_group_extension_settings(
+            customer_id=customer_id,
+            operations=[ad_group_extension_setting_operation],
+        )
     )
     print(
         "Created a ad_group extension setting with resource name: "
@@ -217,7 +211,7 @@ def _add_extension_to_ad_group(
 if __name__ == "__main__":
     # GoogleAdsClient will read the google-ads.yaml configuration file in the
     # home directory if none is specified.
-    google_ads_client = GoogleAdsClient.load_from_storage()
+    googleads_client = GoogleAdsClient.load_from_storage(version="v6")
 
     parser = argparse.ArgumentParser(
         description="Adds a hotel callout extension to the given account."
@@ -231,7 +225,11 @@ if __name__ == "__main__":
         help="The Google Ads customer ID",
     )
     parser.add_argument(
-        "-i", "--campaign_id", type=str, required=True, help="The campaign ID.",
+        "-i",
+        "--campaign_id",
+        type=str,
+        required=True,
+        help="The campaign ID.",
     )
     parser.add_argument(
         "-a",
@@ -263,11 +261,23 @@ if __name__ == "__main__":
     )
     args = parser.parse_args()
 
-    main(
-        google_ads_client,
-        args.customer_id,
-        args.campaign_id,
-        args.ad_group_id,
-        args.callout_text,
-        args.language_code,
-    )
+    try:
+        main(
+            googleads_client,
+            args.customer_id,
+            args.campaign_id,
+            args.ad_group_id,
+            args.callout_text,
+            args.language_code,
+        )
+    except GoogleAdsException as ex:
+        print(
+            f'Request with ID "{ex.request_id}" failed with status '
+            f'"{ex.error.code().name}" and includes the following errors:'
+        )
+        for error in ex.failure.errors:
+            print(f'\tError with message "{error.message}".')
+            if error.location:
+                for field_path_element in error.location.field_path_elements:
+                    print(f"\t\tOn field: {field_path_element.field_name}")
+        sys.exit(1)

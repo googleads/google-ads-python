@@ -42,6 +42,7 @@ Authors
 * `David Wihl`_
 * `Ben Karl`_
 * `Andrew Burke`_
+* `Laura Chevalier`_
 
 .. |build-status| image:: https://storage.googleapis.com/gaa-clientlibs/badges/google-ads-python/buildstatus_ubuntu.svg
 .. _Developer Site: https://developers.google.com/google-ads/api/docs/client-libs/python/
@@ -52,3 +53,4 @@ Authors
 .. _David Wihl: https://github.com/wihl
 .. _Ben Karl: https://github.com/BenRKarl
 .. _Andrew Burke: https://github.com/AndrewMBurke
+.. _Laura Chevalier: https://github.com/laurachevalier4

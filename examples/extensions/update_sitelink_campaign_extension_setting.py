@@ -27,8 +27,8 @@ import sys
 
 from google.api_core import protobuf_helpers
 
-from google.ads.google_ads.client import GoogleAdsClient
-from google.ads.google_ads.errors import GoogleAdsException
+from google.ads.googleads.client import GoogleAdsClient
+from google.ads.googleads.errors import GoogleAdsException
 
 
 def main(client, customer_id, campaign_id, feed_item_ids):
@@ -41,14 +41,12 @@ def main(client, customer_id, campaign_id, feed_item_ids):
         feed_item_ids: the IDs the feed items to replace.
     """
     campaign_extension_setting_service = client.get_service(
-        "CampaignExtensionSettingService", version="v6"
+        "CampaignExtensionSettingService"
     )
     campaign_extension_setting_operation = client.get_type(
-        "CampaignExtensionSettingOperation", version="v6"
+        "CampaignExtensionSettingOperation"
     )
-    extension_feed_item_service = client.get_service(
-        "ExtensionFeedItemService", version="v6"
-    )
+    extension_feed_item_service = client.get_service("ExtensionFeedItemService")
 
     campaign_extension_setting = campaign_extension_setting_operation.update
     # Replace the current extension feed items with the given list
@@ -61,46 +59,37 @@ def main(client, customer_id, campaign_id, feed_item_ids):
         ]
     )
 
-    extension_type_enum = client.get_type("ExtensionTypeEnum", version="v6")
-    resource_name = campaign_extension_setting_service.campaign_extension_setting_path(
-        customer_id,
-        campaign_id,
-        extension_type_enum.ExtensionType.Name(
-            extension_type_enum.ExtensionType.SITELINK
-        ),
+    extension_type_enum = client.get_type("ExtensionTypeEnum").ExtensionType
+    resource_name = (
+        campaign_extension_setting_service.campaign_extension_setting_path(
+            customer_id, campaign_id, extension_type_enum.SITELINK.name
+        )
     )
     campaign_extension_setting.resource_name = resource_name
 
     # Produce a field mask enumerating the changed fields
-    fm = protobuf_helpers.field_mask(None, campaign_extension_setting)
-    campaign_extension_setting_operation.update_mask.CopyFrom(fm)
+    client.copy_from(
+        campaign_extension_setting_operation.update_mask,
+        protobuf_helpers.field_mask(None, campaign_extension_setting._pb),
+    )
 
     # Update the campaign extension settings
-    try:
-        response = campaign_extension_setting_service.mutate_campaign_extension_settings(
-            customer_id, [campaign_extension_setting_operation]
+    response = (
+        campaign_extension_setting_service.mutate_campaign_extension_settings(
+            customer_id=customer_id,
+            operations=[campaign_extension_setting_operation],
         )
-        print(
-            "Updated campaign extension setting with resource name: "
-            f'"{response.results[0].resource_name}".'
-        )
-    except GoogleAdsException as ex:
-        print(
-            f'Request with ID "{ex.request_id}" failed with status '
-            f'"{ex.error.code().name}" and includes the following errors:'
-        )
-        for error in ex.failure.errors:
-            print(f'\tError with message "{error.message}".')
-            if error.location:
-                for field_path_element in error.location.field_path_elements:
-                    print(f"\t\tOn field: {field_path_element.field_name}")
-        sys.exit(1)
+    )
+    print(
+        "Updated campaign extension setting with resource name: "
+        f'"{response.results[0].resource_name}".'
+    )
 
 
 if __name__ == "__main__":
     # GoogleAdsClient will read the google-ads.yaml configuration file in the
     # home directory if none is specified.
-    google_ads_client = GoogleAdsClient.load_from_storage()
+    googleads_client = GoogleAdsClient.load_from_storage(version="v6")
 
     parser = argparse.ArgumentParser(
         description=(
@@ -117,7 +106,11 @@ if __name__ == "__main__":
         help="The Google Ads customer ID",
     )
     parser.add_argument(
-        "-i", "--campaign_id", type=str, required=True, help="The campaign ID",
+        "-i",
+        "--campaign_id",
+        type=str,
+        required=True,
+        help="The campaign ID",
     )
     parser.add_argument(
         "-f",
@@ -129,9 +122,21 @@ if __name__ == "__main__":
     )
     args = parser.parse_args()
 
-    main(
-        google_ads_client,
-        args.customer_id,
-        args.campaign_id,
-        args.feed_item_ids,
-    )
+    try:
+        main(
+            googleads_client,
+            args.customer_id,
+            args.campaign_id,
+            args.feed_item_ids,
+        )
+    except GoogleAdsException as ex:
+        print(
+            f'Request with ID "{ex.request_id}" failed with status '
+            f'"{ex.error.code().name}" and includes the following errors:'
+        )
+        for error in ex.failure.errors:
+            print(f'\tError with message "{error.message}".')
+            if error.location:
+                for field_path_element in error.location.field_path_elements:
+                    print(f"\t\tOn field: {field_path_element.field_name}")
+        sys.exit(1)

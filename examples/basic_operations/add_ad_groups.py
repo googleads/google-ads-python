@@ -22,50 +22,36 @@ import argparse
 import sys
 import uuid
 
-import google.ads.google_ads.client
+from google.ads.googleads.client import GoogleAdsClient
+from google.ads.googleads.errors import GoogleAdsException
 
 
 def main(client, customer_id, campaign_id):
-    ad_group_service = client.get_service("AdGroupService", version="v6")
-    campaign_service = client.get_service("CampaignService", version="v6")
+    ad_group_service = client.get_service("AdGroupService")
+    campaign_service = client.get_service("CampaignService")
 
     # Create ad group.
-    ad_group_operation = client.get_type("AdGroupOperation", version="v6")
+    ad_group_operation = client.get_type("AdGroupOperation")
     ad_group = ad_group_operation.create
-    ad_group.name = "Earth to Mars cruises %s" % uuid.uuid4()
-    ad_group.status = client.get_type("AdGroupStatusEnum", version="v6").ENABLED
+    ad_group.name = f"Earth to Mars cruises {uuid.uuid4()}"
+    ad_group.status = client.get_type("AdGroupStatusEnum").AdGroupStatus.ENABLED
     ad_group.campaign = campaign_service.campaign_path(customer_id, campaign_id)
-    ad_group.type = client.get_type(
-        "AdGroupTypeEnum", version="v6"
-    ).SEARCH_STANDARD
+    ad_group.type_ = client.get_type(
+        "AdGroupTypeEnum"
+    ).AdGroupType.SEARCH_STANDARD
     ad_group.cpc_bid_micros = 10000000
 
     # Add the ad group.
-    try:
-        ad_group_response = ad_group_service.mutate_ad_groups(
-            customer_id, [ad_group_operation]
-        )
-    except google.ads.google_ads.errors.GoogleAdsException as ex:
-        print(
-            'Request with ID "%s" failed with status "%s" and includes the '
-            "following errors:" % (ex.request_id, ex.error.code().name)
-        )
-        for error in ex.failure.errors:
-            print('\tError with message "%s".' % error.message)
-            if error.location:
-                for field_path_element in error.location.field_path_elements:
-                    print("\t\tOn field: %s" % field_path_element.field_name)
-        sys.exit(1)
-
-    print("Created ad group %s." % ad_group_response.results[0].resource_name)
+    ad_group_response = ad_group_service.mutate_ad_groups(
+        customer_id=customer_id, operations=[ad_group_operation]
+    )
+    print(f"Created ad group {ad_group_response.results[0].resource_name}.")
 
 
 if __name__ == "__main__":
     # GoogleAdsClient will read the google-ads.yaml configuration file in the
     # home directory if none is specified.
-    google_ads_client = (
-        google.ads.google_ads.client.GoogleAdsClient.load_from_storage()
-    )
+    googleads_client = GoogleAdsClient.load_from_storage(version="v6")
 
     parser = argparse.ArgumentParser(
         description="Adds an ad group for specified customer and campaign id."
@@ -83,4 +69,16 @@ if __name__ == "__main__":
     )
     args = parser.parse_args()
 
-    main(google_ads_client, args.customer_id, args.campaign_id)
+    try:
+        main(googleads_client, args.customer_id, args.campaign_id)
+    except GoogleAdsException as ex:
+        print(
+            f'Request with ID "{ex.request_id}" failed with status '
+            f'"{ex.error.code().name}" and includes the following errors:'
+        )
+        for error in ex.failure.errors:
+            print(f'	Error with message "{error.message}".')
+            if error.location:
+                for field_path_element in error.location.field_path_elements:
+                    print(f"\t\tOn field: {field_path_element.field_name}")
+        sys.exit(1)

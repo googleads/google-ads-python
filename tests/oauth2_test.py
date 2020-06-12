@@ -16,7 +16,7 @@
 import mock
 from unittest import TestCase
 
-from google.ads.google_ads import oauth2
+from google.ads.googleads import oauth2
 
 
 class OAuth2Tests(TestCase):

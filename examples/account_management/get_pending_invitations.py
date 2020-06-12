@@ -22,8 +22,8 @@ example.
 import argparse
 import sys
 
-from google.ads.google_ads.client import GoogleAdsClient
-from google.ads.google_ads.errors import GoogleAdsException
+from google.ads.googleads.client import GoogleAdsClient
+from google.ads.googleads.errors import GoogleAdsException
 
 
 def main(client, customer_id):
@@ -33,7 +33,7 @@ def main(client, customer_id):
         client: An initialized GoogleAdsClient instance.
         customer_id: The client customer ID str.
     """
-    google_ads_service = client.get_service("GoogleAdsService", version="v6")
+    googleads_service = client.get_service("GoogleAdsService")
     # [START get_pending_invitations]
     query = """
         SELECT
@@ -44,35 +44,26 @@ def main(client, customer_id):
         FROM customer_user_access_invitation
         WHERE customer_user_access_invitation.invitation_status = PENDING"""
 
-    try:
-        response = google_ads_service.search_stream(customer_id, query=query)
-        for batch in response:
-            for row in batch.results:
-                invite = row.customer_user_access_invitation
-                print(
-                    "A pending invitation with "
-                    f"invitation ID: '{invite.invitation_id}', "
-                    f"email address: {invite.email_address}, "
-                    f"access role: {invite.access_role}, and "
-                    f"created on: {invite.creation_date_time} was found."
-                )
-    except GoogleAdsException as ex:
-        print(
-            f'Request with ID "{ex.request_id}" failed with status '
-            f'"{ex.error.code().name}" and includes the following errors:'
-        )
-        for error in ex.failure.errors:
-            print(f'\tError with message "{error.message}".')
-            if error.location:
-                for field_path_element in error.location.field_path_elements:
-                    print(f"\t\tOn field: {field_path_element.field_name}")
-        sys.exit(1)
-    # [END get_pending_invitations]
+    response = googleads_service.search_stream(
+        customer_id=customer_id, query=query
+    )
+    for batch in response:
+        for row in batch.results:
+            invite = row.customer_user_access_invitation
+            print(
+                "A pending invitation with "
+                f"invitation ID: '{invite.invitation_id}', "
+                f"email address: {invite.email_address}, "
+                f"access role: {invite.access_role}, and "
+                f"created on: {invite.creation_date_time} was found."
+            )
+# [END get_pending_invitations]
+
 
 if __name__ == "__main__":
     # GoogleAdsClient will read the google-ads.yaml configuration file in the
     # home directory if none is specified.
-    google_ads_client = GoogleAdsClient.load_from_storage()
+    googleads_client = GoogleAdsClient.load_from_storage(version="v6")
 
     parser = argparse.ArgumentParser(
         description=("Retrieves pending invitations for a customer account.")
@@ -87,4 +78,16 @@ if __name__ == "__main__":
     )
     args = parser.parse_args()
 
-    main(google_ads_client, args.customer_id)
+    try:
+        main(googleads_client, args.customer_id)
+    except GoogleAdsException as ex:
+        print(
+            f'Request with ID "{ex.request_id}" failed with status '
+            f'"{ex.error.code().name}" and includes the following errors:'
+        )
+        for error in ex.failure.errors:
+            print(f'	Error with message "{error.message}".')
+            if error.location:
+                for field_path_element in error.location.field_path_elements:
+                    print(f"\t\tOn field: {field_path_element.field_name}")
+        sys.exit(1)

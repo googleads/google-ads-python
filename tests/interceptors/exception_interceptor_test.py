@@ -17,10 +17,10 @@ import grpc
 import mock
 from unittest import TestCase
 
-from google.ads.google_ads.errors import GoogleAdsException
-from google.ads.google_ads import client as Client
-from google.ads.google_ads.interceptors import ExceptionInterceptor
-from google.ads.google_ads.interceptors.exception_interceptor import (
+from google.ads.googleads.errors import GoogleAdsException
+from google.ads.googleads import client as Client
+from google.ads.googleads.interceptors import ExceptionInterceptor
+from google.ads.googleads.interceptors.exception_interceptor import (
     _UnaryStreamWrapper,
 )
 

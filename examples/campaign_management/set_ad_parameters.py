@@ -18,8 +18,8 @@
 import argparse
 import sys
 
-from google.ads.google_ads.client import GoogleAdsClient
-from google.ads.google_ads.errors import GoogleAdsException
+from google.ads.googleads.client import GoogleAdsClient
+from google.ads.googleads.errors import GoogleAdsException
 
 
 def main(client, customer_id, ad_group_id, criterion_id):
@@ -31,50 +31,48 @@ def main(client, customer_id, ad_group_id, criterion_id):
         ad_group_id: An ad group ID str.
         criterion_id: A criterion ID str.
     """
-    ad_group_criterion_service = client.get_service(
-        "AdGroupCriterionService", version="v6"
-    )
+    ad_group_criterion_service = client.get_service("AdGroupCriterionService")
     # Gets the resource name of the ad group criterion to be used.
     resource_name = ad_group_criterion_service.ad_group_criterion_path(
         customer_id, ad_group_id, criterion_id
     )
 
-    operations = []
-    operations.append(create_ad_parameter(client, resource_name, 1, "100"))
-    operations.append(create_ad_parameter(client, resource_name, 2, "$40"))
+    operations = [
+        _create_ad_parameter(client, resource_name, 1, "100"),
+        _create_ad_parameter(client, resource_name, 2, "$40"),
+    ]
 
-    ad_parameter_service = client.get_service(
-        "AdParameterService", version="v6"
-    )
+    ad_parameter_service = client.get_service("AdParameterService")
 
     # Add the ad parameter.
     try:
         response = ad_parameter_service.mutate_ad_parameters(
-            customer_id, operations
+            customer_id=customer_id, operations=operations
         )
     except GoogleAdsException as ex:
         print(
-            'Request with ID "%s" failed with status "%s" and includes the '
-            "following errors:" % (ex.request_id, ex.error.code().name)
+            f'Request with ID "{ex.request_id}" failed with status '
+            f'"{ex.error.code().name}" and includes the following errors:'
         )
         for error in ex.failure.errors:
-            print('\tError with message "%s".' % error.message)
+            print(f'\tError with message "{error.message}".')
             if error.location:
                 for field_path_element in error.location.field_path_elements:
-                    print("\t\tOn field: %s" % field_path_element.field_name)
+                    print(f"\t\tOn field: {field_path_element.field_name}")
         sys.exit(1)
     else:
-        print("Set {} ad parameters:".format(len(response.results)))
+        print(f"Set {len(response.results)} ad parameters:")
 
         for result in response.results:
             print(
-                "Set ad parameter with resource_name: {}".format(
-                    result.resource_name
-                )
+                "Set ad parameter with resource_name: "
+                f"{result.resource_name}"
             )
 
 
-def create_ad_parameter(client, resource_name, parameter_index, insertion_text):
+def _create_ad_parameter(
+    client, resource_name, parameter_index, insertion_text
+):
     """Creates a new ad parameter create operation and returns it.
 
     There can be a maximum of two ad parameters per ad group criterion, one
@@ -92,7 +90,7 @@ def create_ad_parameter(client, resource_name, parameter_index, insertion_text):
 
     Returns: A new AdParamterOperation message class instance.
     """
-    ad_param_operation = client.get_type("AdParameterOperation", version="v6")
+    ad_param_operation = client.get_type("AdParameterOperation")
     ad_param = ad_param_operation.create
     ad_param.ad_group_criterion = resource_name
     ad_param.parameter_index = parameter_index
@@ -103,7 +101,7 @@ def create_ad_parameter(client, resource_name, parameter_index, insertion_text):
 if __name__ == "__main__":
     # GoogleAdsClient will read the google-ads.yaml configuration file in the
     # home directory if none is specified.
-    google_ads_client = GoogleAdsClient.load_from_storage()
+    googleads_client = GoogleAdsClient.load_from_storage(version="v6")
 
     # Initializes a command line argument parser.
     parser = argparse.ArgumentParser(
@@ -131,5 +129,5 @@ if __name__ == "__main__":
     args = parser.parse_args()
 
     main(
-        google_ads_client, args.customer_id, args.ad_group_id, args.criterion_id
+        googleads_client, args.customer_id, args.ad_group_id, args.criterion_id
     )

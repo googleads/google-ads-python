@@ -22,16 +22,14 @@ import argparse
 import sys
 import uuid
 
-from google.ads.google_ads.client import GoogleAdsClient
-from google.ads.google_ads.errors import GoogleAdsException
+from google.ads.googleads.client import GoogleAdsClient
+from google.ads.googleads.errors import GoogleAdsException
 
 
 def main(client, customer_id, base_campaign_id, draft_id):
     # Create the campaign experiment.
-    campaign_experiment = client.get_type("CampaignExperiment", version="v6")
-    campaign_draft_service = client.get_service(
-        "CampaignDraftService", version="v6"
-    )
+    campaign_experiment = client.get_type("CampaignExperiment")
+    campaign_draft_service = client.get_service("CampaignDraftService")
     campaign_draft_resource_name = campaign_draft_service.campaign_draft_path(
         customer_id, base_campaign_id, draft_id
     )
@@ -40,18 +38,20 @@ def main(client, customer_id, base_campaign_id, draft_id):
     campaign_experiment.name = f"Campaign Experiment #{uuid.uuid4()}"
     campaign_experiment.traffic_split_percent = 50
     campaign_experiment.traffic_split_type = client.get_type(
-        "CampaignExperimentTrafficSplitTypeEnum", version="v6"
-    ).RANDOM_QUERY
+        "CampaignExperimentTrafficSplitTypeEnum"
+    ).CampaignExperimentTrafficSplitType.RANDOM_QUERY
 
     try:
         campaign_experiment_service = client.get_service(
-            "CampaignExperimentService", version="v6"
+            "CampaignExperimentService"
         )
 
         # A Long Running Operation (LRO) is returned from this
         # asynchronous request by the API.
-        campaign_experiment_lro = campaign_experiment_service.create_campaign_experiment(
-            customer_id, campaign_experiment
+        campaign_experiment_lro = (
+            campaign_experiment_service.create_campaign_experiment(
+                customer_id=customer_id, campaign_experiment=campaign_experiment
+            )
         )
     except GoogleAdsException as ex:
         print(
@@ -76,15 +76,16 @@ def main(client, customer_id, base_campaign_id, draft_id):
     campaign_experiment_lro.result()
 
     # Retrieve the campaign experiment that has been created.
-    ga_service = client.get_service("GoogleAdsService", version="v6")
-    query = f"""
+    ga_service = client.get_service("GoogleAdsService")
+    request = client.get_type("SearchGoogleAdsRequest")
+    request.customer_id = customer_id
+    request.query = f'''
         SELECT campaign_experiment.experiment_campaign
         FROM campaign_experiment
-        WHERE
-          campaign_experiment.resource_name =
-          '{campaign_experiment_lro.metadata.campaign_experiment}'"""
+        WHERE campaign_experiment.resource_name =
+        "{campaign_experiment_lro.metadata.campaign_experiment}"'''
 
-    results = ga_service.search(customer_id, query=query, page_size=1)
+    results = ga_service.search(request=request)
 
     try:
         for row in results:
@@ -109,7 +110,7 @@ def main(client, customer_id, base_campaign_id, draft_id):
 if __name__ == "__main__":
     # GoogleAdsClient will read the google-ads.yaml configuration file in the
     # home directory if none is specified.
-    google_ads_client = GoogleAdsClient.load_from_storage()
+    googleads_client = GoogleAdsClient.load_from_storage(version="v6")
 
     parser = argparse.ArgumentParser(
         description=("Create a campaign experiment based on a campaign draft.")
@@ -135,8 +136,5 @@ if __name__ == "__main__":
     args = parser.parse_args()
 
     main(
-        google_ads_client,
-        args.customer_id,
-        args.base_campaign_id,
-        args.draft_id,
+        googleads_client, args.customer_id, args.base_campaign_id, args.draft_id
     )

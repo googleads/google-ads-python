@@ -21,8 +21,8 @@ These criteria will be applied to all campaigns for the given customer.
 import argparse
 import sys
 
-from google.ads.google_ads.client import GoogleAdsClient
-from google.ads.google_ads.errors import GoogleAdsException
+from google.ads.googleads.client import GoogleAdsClient
+from google.ads.googleads.errors import GoogleAdsException
 
 
 def main(client, customer_id):
@@ -32,18 +32,16 @@ def main(client, customer_id):
         client: an initialized GoogleAdsClient instance.
         customer_id: a client customer ID.
     """
-    tragedy_criterion_op = client.get_type(
-        "CustomerNegativeCriterionOperation", version="v6"
-    )
+    tragedy_criterion_op = client.get_type("CustomerNegativeCriterionOperation")
     tragedy_criterion = tragedy_criterion_op.create
     # Creates a negative customer criterion excluding the content label type
     # of 'TRAGEDY'.
-    tragedy_criterion.content_label.type = client.get_type(
-        "ContentLabelTypeEnum", version="v6"
-    ).TRAGEDY
+    tragedy_criterion.content_label.type_ = client.get_type(
+        "ContentLabelTypeEnum"
+    ).ContentLabelType.TRAGEDY
 
     placement_criterion_op = client.get_type(
-        "CustomerNegativeCriterionOperation", version="v6"
+        "CustomerNegativeCriterionOperation"
     )
     placement_criterion = placement_criterion_op.create
     # Creates a negative customer criterion excluding the placement with URL
@@ -51,34 +49,23 @@ def main(client, customer_id):
     placement_criterion.placement.url = "http://www.example.com"
 
     customer_negative_criterion_service = client.get_service(
-        "CustomerNegativeCriterionService", version="v6"
+        "CustomerNegativeCriterionService"
     )
 
-    try:
-        # Issues a mutate request to add the negative customer criteria.
-        response = customer_negative_criterion_service.mutate_customer_negative_criteria(
-            customer_id, [tragedy_criterion_op, placement_criterion_op]
-        )
-        print(f"Added {len(response.results)} negative customer criteria:")
-        for negative_criterion in response.results:
-            print(f"Resource name: '{negative_criterion.resource_name}'")
-    except GoogleAdsException as ex:
-        print(
-            f'Request with ID "{ex.request_id}" failed with status '
-            f'"{ex.error.code().name}" and includes the following errors:'
-        )
-        for error in ex.failure.errors:
-            print(f'\tError with message "{error.message}".')
-            if error.location:
-                for field_path_element in error.location.field_path_elements:
-                    print(f"\t\tOn field: {field_path_element.field_name}")
-        sys.exit(1)
+    # Issues a mutate request to add the negative customer criteria.
+    response = customer_negative_criterion_service.mutate_customer_negative_criteria(
+        customer_id=customer_id,
+        operations=[tragedy_criterion_op, placement_criterion_op],
+    )
+    print(f"Added {len(response.results)} negative customer criteria:")
+    for negative_criterion in response.results:
+        print(f"Resource name: '{negative_criterion.resource_name}'")
 
 
 if __name__ == "__main__":
     # GoogleAdsClient will read the google-ads.yaml configuration file in the
     # home directory if none is specified.
-    google_ads_client = GoogleAdsClient.load_from_storage()
+    googleads_client = GoogleAdsClient.load_from_storage(version="v6")
 
     parser = argparse.ArgumentParser(
         description=(
@@ -97,6 +84,19 @@ if __name__ == "__main__":
     )
     args = parser.parse_args()
 
-    main(
-        google_ads_client, args.customer_id,
+    try:
+        main(
+        googleads_client,
+        args.customer_id,
     )
+    except GoogleAdsException as ex:
+        print(
+            f'Request with ID "{ex.request_id}" failed with status '
+            f'"{ex.error.code().name}" and includes the following errors:'
+        )
+        for error in ex.failure.errors:
+            print(f'	Error with message "{error.message}".')
+            if error.location:
+                for field_path_element in error.location.field_path_elements:
+                    print(f"\t\tOn field: {field_path_element.field_name}")
+        sys.exit(1)

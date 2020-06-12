@@ -17,14 +17,15 @@
 
 import argparse
 import sys
-import google.ads.google_ads.client
+from google.ads.googleads.client import GoogleAdsClient
+from google.ads.googleads.errors import GoogleAdsException
 
 
 _DEFAULT_PAGE_SIZE = 1000
 
 
 def main(client, customer_id, campaign_id, page_size):
-    ga_service = client.get_service("GoogleAdsService", version="v6")
+    ga_service = client.get_service("GoogleAdsService")
 
     query = f"""
         SELECT
@@ -37,73 +38,53 @@ def main(client, customer_id, campaign_id, page_size):
           campaign.id = {campaign_id}
           AND ad_group_ad.policy_summary.approval_status = DISAPPROVED"""
 
-    try:
-        results = ga_service.search(
-            customer_id, query=query, page_size=page_size,
-        )
+    request = client.get_type("SearchGoogleAdsRequest")
+    request.customer_id = customer_id
+    request.query = query
+    request.page_size = page_size
 
-        ad_type_enum = client.get_type("AdTypeEnum", version="v6").AdType
-        policy_topic_entry_type_enum = client.get_type(
-            "PolicyTopicEntryTypeEnum"
-        ).PolicyTopicEntryType
+    results = ga_service.search(request=request)
 
-        print("Disapproved ads:")
+    disapproved_ads_count = 0
+    disapproved_enum = client.get_type(
+        "PolicyApprovalStatusEnum"
+    ).PolicyApprovalStatus.DISAPPROVED
 
-        approval_status_enum = client.get_type(
-            "PolicyApprovalStatusEnum", version="v6"
-        )
+    print("Disapproved ads:")
 
-        # Iterate over all ads in all rows returned and count disapproved ads.
-        for row in results:
-            ad_group_ad = row.ad_group_ad
-            ad = ad_group_ad.ad
-            approval_status = ad_group_ad.policy_summary.approval_status
+    # Iterate over all ads in all rows returned and count disapproved ads.
+    for row in results:
+        ad_group_ad = row.ad_group_ad
+        ad = ad_group_ad.ad
+        policy_summary = ad_group_ad.policy_summary
 
-            print(
-                'Ad with ID "%s" and type "%s" was disapproved with the '
-                "following policy topic entries:"
-                % (ad.id, ad_type_enum.Name(ad.type))
-            )
+        if not policy_summary.approval_status == disapproved_enum:
+            continue
 
-            # Display the policy topic entries related to the ad disapproval.
-            for entry in ad_group_ad.policy_summary.policy_topic_entries:
-                print(
-                    '\ttopic: "%s", type "%s"'
-                    % (
-                        entry.topic,
-                        policy_topic_entry_type_enum.Name(entry.type),
-                    )
-                )
-
-                # Display the attributes and values that triggered the policy
-                # topic.
-                for evidence in entry.evidences:
-                    for index, text in enumerate(evidence.text_list.texts):
-                        print(f"\t\tevidence text[{index}]: {text}")
-
-        # The "num_results" field returns the number of items that have been
-        # iterated in the results not the total number of rows returned by the
-        # search query.
-        print("\nNumber of disapproved ads found: %d" % results.num_results)
-    except google.ads.google_ads.errors.GoogleAdsException as ex:
         print(
-            'Request with ID "%s" failed with status "%s" and includes the '
-            "following errors:" % (ex.request_id, ex.error.code().name)
+            f'Ad with ID "{ad.id}" and type "{ad.type_.name}" was '
+            "disapproved with the following policy topic entries:"
         )
-        for error in ex.failure.errors:
-            print('\tError with message "%s".' % error.message)
-            if error.location:
-                for field_path_element in error.location.field_path_elements:
-                    print("\t\tOn field: %s" % field_path_element.field_name)
-        sys.exit(1)
+
+        # Display the policy topic entries related to the ad disapproval.
+        for entry in policy_summary.policy_topic_entries:
+            print(f'\ttopic: "{entry.topic}", type "{entry.type_.name}"')
+
+        # Display the attributes and values that triggered the policy
+        # topic.
+        for evidence in entry.evidences:
+            for index, text in enumerate(evidence.text_list.texts):
+                print(f"\t\tevidence text[{index}]: {text}")
+
+    print(
+        f"\nNumber of disapproved ads found: {results.total_results_count}"
+    )
 
 
 if __name__ == "__main__":
     # GoogleAdsClient will read the google-ads.yaml configuration file in the
     # home directory if none is specified.
-    google_ads_client = (
-        google.ads.google_ads.client.GoogleAdsClient.load_from_storage()
-    )
+    googleads_client = GoogleAdsClient.load_from_storage(version="v6")
 
     parser = argparse.ArgumentParser(
         description=(
@@ -124,9 +105,18 @@ if __name__ == "__main__":
     )
     args = parser.parse_args()
 
-    main(
-        google_ads_client,
-        args.customer_id,
-        args.campaign_id,
-        _DEFAULT_PAGE_SIZE,
+    try:
+        main(
+        googleads_client, args.customer_id, args.campaign_id, _DEFAULT_PAGE_SIZE
     )
+    except GoogleAdsException as ex:
+        print(
+            f'Request with ID "{ex.request_id}" failed with status '
+            f'"{ex.error.code().name}" and includes the following errors:'
+        )
+        for error in ex.failure.errors:
+            print(f'	Error with message "{error.message}".')
+            if error.location:
+                for field_path_element in error.location.field_path_elements:
+                    print(f"\t\tOn field: {field_path_element.field_name}")
+        sys.exit(1)

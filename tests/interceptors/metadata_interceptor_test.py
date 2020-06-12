@@ -17,7 +17,7 @@ from unittest import TestCase
 
 import mock
 
-from google.ads.google_ads.interceptors import MetadataInterceptor
+from google.ads.googleads.interceptors import MetadataInterceptor
 
 
 class MetadataInterceptorTest(TestCase):

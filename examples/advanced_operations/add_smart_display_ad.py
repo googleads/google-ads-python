@@ -35,8 +35,8 @@ import requests
 import sys
 from uuid import uuid4
 
-from google.ads.google_ads.client import GoogleAdsClient
-from google.ads.google_ads.errors import GoogleAdsException
+from google.ads.googleads.client import GoogleAdsClient
+from google.ads.googleads.errors import GoogleAdsException
 
 
 _DATE_FORMAT = "%Y%m%d"
@@ -71,7 +71,7 @@ def main(
 
     if marketing_image_asset_id:
         print(
-            "Using existing marketing image asset with resource name "
+            "Using existing marketing image asset with ID "
             f'"{marketing_image_asset_id}".'
         )
     else:
@@ -83,13 +83,13 @@ def main(
             _MARKETING_IMAGE_HEIGHT,
         )
         print(
-            "Created marketing image asset with resource name "
+            "Created marketing image asset with ID "
             f'"{marketing_image_asset_id}".'
         )
 
     if square_marketing_image_asset_id:
         print(
-            "Using existing square marketing image asset with resource name "
+            "Using existing square marketing image asset with ID "
             f'"{square_marketing_image_asset_id}".'
         )
     else:
@@ -101,7 +101,7 @@ def main(
             _SQUARE_MARKETING_IMAGE_SIZE,
         )
         print(
-            "Created square marketing image asset with resource name "
+            "Created square marketing image asset with ID "
             f'"{square_marketing_image_asset_id}".'
         )
 
@@ -112,6 +112,10 @@ def main(
         marketing_image_asset_id,
         square_marketing_image_asset_id,
     )
+    print(
+        "Created responsive display ad with resource name "
+        f'"{responsive_display_ad_resource_name}".'
+    )
 
     print(
         "Created responsive display ad with resource name "
@@ -121,48 +125,48 @@ def main(
 
 # [START add_smart_display_ad_3]
 def _create_budget(client, customer_id):
-    campaign_budget_operation = client.get_type(
-        "CampaignBudgetOperation", version="v6"
-    )
+    campaign_budget_operation = client.get_type("CampaignBudgetOperation")
     campaign_budget = campaign_budget_operation.create
     campaign_budget.name = f"Interplanetary Cruise Budget #{uuid4()}"
     campaign_budget.delivery_method = client.get_type(
         "BudgetDeliveryMethodEnum"
-    ).STANDARD
+    ).BudgetDeliveryMethod.STANDARD
     campaign_budget.amount_micros = 500000
 
-    campaign_budget_service = client.get_service(
-        "CampaignBudgetService", version="v6"
-    )
+    campaign_budget_service = client.get_service("CampaignBudgetService")
 
     try:
-        campaign_budget_response = campaign_budget_service.mutate_campaign_budgets(
-            customer_id, [campaign_budget_operation]
+        campaign_budget_response = (
+            campaign_budget_service.mutate_campaign_budgets(
+                customer_id=customer_id, operations=[campaign_budget_operation]
+            )
         )
-        return campaign_budget_response.results[0].resource_name
     except GoogleAdsException as ex:
-        _handle_google_ads_exception(ex)
-        # [END add_smart_display_ad_3]
+        _handle_googleads_exception(ex)
+
+    return campaign_budget_response.results[0].resource_name
+    # [END add_smart_display_ad_3]
 
 
 # [START add_smart_display_ad_4]
 def _create_smart_display_campaign(client, customer_id, budget_resource_name):
-    campaign_operation = client.get_type("CampaignOperation", version="v6")
+    campaign_service = client.get_service("CampaignService")
+    campaign_operation = client.get_type("CampaignOperation")
     campaign = campaign_operation.create
     campaign.name = f"Smart Display Campaign #{uuid4()}"
     advertising_channel_type_enum = client.get_type(
-        "AdvertisingChannelTypeEnum", version="v6"
-    )
+        "AdvertisingChannelTypeEnum"
+    ).AdvertisingChannelType
     campaign.advertising_channel_type = advertising_channel_type_enum.DISPLAY
     advertising_channel_sub_type_enum = client.get_type(
-        "AdvertisingChannelSubTypeEnum", version="v6"
-    )
+        "AdvertisingChannelSubTypeEnum"
+    ).AdvertisingChannelSubType
     # Smart Display campaign requires the advertising_channel_sub_type as
     # "DISPLAY_SMART_CAMPAIGN".
     campaign.advertising_channel_sub_type = (
         advertising_channel_sub_type_enum.DISPLAY_SMART_CAMPAIGN
     )
-    campaign_status_enum = client.get_type("CampaignStatusEnum", version="v6")
+    campaign_status_enum = client.get_type("CampaignStatusEnum").CampaignStatus
     campaign.status = campaign_status_enum.PAUSED
     # Smart Display campaign requires the TargetCpa bidding strategy.
     campaign.target_cpa.target_cpa_micros = 5000000
@@ -173,37 +177,36 @@ def _create_smart_display_campaign(client, customer_id, budget_resource_name):
     end_date = start_date + datetime.timedelta(days=365)
     campaign.end_date = end_date.strftime(_DATE_FORMAT)
 
-    campaign_service = client.get_service("CampaignService", version="v6")
-
     try:
         campaign_response = campaign_service.mutate_campaigns(
-            customer_id, [campaign_operation]
+            customer_id=customer_id, operations=[campaign_operation]
         )
-        return campaign_response.results[0].resource_name
     except GoogleAdsException as ex:
-        _handle_google_ads_exception(ex)
-        # [END add_smart_display_ad_4]
+        _handle_googleads_exception(ex)
+
+    return campaign_response.results[0].resource_name
+    # [END add_smart_display_ad_4]
 
 
 # [START add_smart_display_ad]
 def _create_ad_group(client, customer_id, campaign_resource_name):
-    ad_group_operation = client.get_type("AdGroupOperation", version="v6")
+    ad_group_service = client.get_service("AdGroupService")
+    ad_group_operation = client.get_type("AdGroupOperation")
     ad_group = ad_group_operation.create
     ad_group.name = f"Earth to Mars Cruises #{uuid4()}"
-    ad_group_status_enum = client.get_type("AdGroupStatusEnum", version="v6")
+    ad_group_status_enum = client.get_type("AdGroupStatusEnum").AdGroupStatus
     ad_group.status = ad_group_status_enum.PAUSED
     ad_group.campaign = campaign_resource_name
 
-    ad_group_service = client.get_service("AdGroupService", version="v6")
-
     try:
         ad_group_response = ad_group_service.mutate_ad_groups(
-            customer_id, [ad_group_operation]
+            customer_id=customer_id, operations=[ad_group_operation]
         )
-        return ad_group_response.results[0].resource_name
     except GoogleAdsException as ex:
-        _handle_google_ads_exception(ex)
-        # [END add_smart_display_ad]
+        _handle_googleads_exception(ex)
+
+    return ad_group_response.results[0].resource_name
+    # [END add_smart_display_ad]
 
 
 # [START add_smart_display_ad_2]
@@ -213,38 +216,40 @@ def _upload_image_asset(
     # Download image from URL
     image_content = requests.get(image_url).content
 
-    asset_operation = client.get_type("AssetOperation", version="v6")
+    asset_operation = client.get_type("AssetOperation")
     asset = asset_operation.create
     # Optional: Provide a unique friendly name to identify your asset. If you
     # specify the name field, then both the asset name and the image being
     # uploaded should be unique, and should not match another ACTIVE asset in
     # this customer account.
     # asset.name = f'Jupiter Trip #{uuid4()}'
-    asset_type_enum = client.get_type("AssetTypeEnum", version="v6")
-    asset.type = asset_type_enum.IMAGE
+    asset_type_enum = client.get_type("AssetTypeEnum").AssetType
+    asset.type_ = asset_type_enum.IMAGE
     image_asset = asset.image_asset
     image_asset.data = image_content
     image_asset.file_size = len(image_content)
-    image_asset.mime_type = client.get_type("MimeTypeEnum").IMAGE_JPEG
+    image_asset.mime_type = client.get_type("MimeTypeEnum").MimeType.IMAGE_JPEG
     image_asset.full_size.width_pixels = image_width
     image_asset.full_size.height_pixels = image_height
     image_asset.full_size.url = image_url
 
-    asset_service = client.get_service("AssetService", version="v6")
-    content_type_enum = client.get_type("ResponseContentTypeEnum", version="v6")
+    asset_service = client.get_service("AssetService")
+    content_type_enum = client.get_type(
+        "ResponseContentTypeEnum"
+    ).ResponseContentType
+
+    request = client.get_type("MutateAssetsRequest")
+    request.customer_id = customer_id
+    request.operations = [asset_operation]
+    # Setting this parameter tells the API to return the Asset object in the
+    # response, allowing us to easily retrieve its ID.
+    request.response_content_type = content_type_enum.MUTABLE_RESOURCE
 
     try:
-        mutate_asset_response = asset_service.mutate_assets(
-            customer_id,
-            [asset_operation],
-            # Setting this parameter tells the API to return the Asset
-            # object in the response, allowing us to easily retrieve
-            # its ID.
-            response_content_type=content_type_enum.MUTABLE_RESOURCE,
-        )
+        mutate_asset_response = asset_service.mutate_assets(request=request)
         return mutate_asset_response.results[0].asset.id
     except GoogleAdsException as ex:
-        _handle_google_ads_exception(ex)
+        _handle_googleads_exception(ex)
         # [END add_smart_display_ad_2]
 
 
@@ -256,52 +261,69 @@ def _create_responsive_display_ad(
     marketing_image_asset_id,
     square_marketing_image_asset_id,
 ):
-    ad_group_ad_operation = client.get_type("AdGroupAdOperation", version="v6")
+    ad_group_ad_service = client.get_service("AdGroupAdService")
+    ad_group_ad_operation = client.get_type("AdGroupAdOperation")
     ad_group_ad = ad_group_ad_operation.create
     ad_group_ad.ad_group = ad_group_resource_name
     ad_group_ad.status = client.get_type(
-        "AdGroupAdStatusEnum", version="v6"
-    ).PAUSED
+        "AdGroupAdStatusEnum"
+    ).AdGroupAdStatus.PAUSED
     ad = ad_group_ad.ad
     ad.final_urls.append("https://www.example.com")
     responsive_display_ad = ad.responsive_display_ad
-    headline = responsive_display_ad.headlines.add()
+
+    # Add a headline
+    headline = client.get_type("AdTextAsset")
     headline.text = "Travel"
+    responsive_display_ad.headlines.append(headline)
+
+    # Add the long headline
     responsive_display_ad.long_headline.text = "Travel the World"
-    description = responsive_display_ad.descriptions.add()
+
+    # Add a description
+    description = client.get_type("AdTextAsset")
     description.text = "Take to the air!"
+    responsive_display_ad.descriptions.append(description)
+
+    # Add the business name
     responsive_display_ad.business_name = "Google"
 
-    asset_service = client.get_service("AssetService", version="v6")
-    marketing_image = responsive_display_ad.marketing_images.add()
+    asset_service = client.get_service("AssetService")
+    # Add a marketing image
+    marketing_image = client.get_type("AdImageAsset")
     marketing_image.asset = asset_service.asset_path(
         customer_id, marketing_image_asset_id
     )
-    square_marketing_image = responsive_display_ad.square_marketing_images.add()
+    responsive_display_ad.marketing_images.append(marketing_image)
+
+    # Add a square marketing image
+    square_marketing_image = client.get_type("AdImageAsset")
     square_marketing_image.asset = asset_service.asset_path(
         customer_id, square_marketing_image_asset_id
     )
-    responsive_display_ad.call_to_action_text = "Shop Now"
-    responsive_display_ad.price_prefix = "as low as"
-    responsive_display_ad.promo_text = "Free shipping!"
+    responsive_display_ad.square_marketing_images.append(square_marketing_image)
 
-    ad_group_ad_service = client.get_service("AdGroupAdService", version="v6")
+    # Add the call to action
+    responsive_display_ad.call_to_action_text = "Shop Now"
+
+    # Add the price prefix
+    responsive_display_ad.price_prefix = "as low as"
+
+    # Add the promo text
+    responsive_display_ad.promo_text = "Free shipping!"
 
     try:
         ad_group_ad_response = ad_group_ad_service.mutate_ad_group_ads(
-            customer_id, [ad_group_ad_operation]
+            customer_id=customer_id, operations=[ad_group_ad_operation]
         )
     except GoogleAdsException as ex:
-        _handle_google_ads_exception(ex)
-        # [END add_smart_display_ad_1]
+        _handle_googleads_exception(ex)
+
+    return ad_group_ad_response.results[0].resource_name
+    # [END add_smart_display_ad_1]
 
 
-def _handle_google_ads_exception(exception):
-    """Prints the details of a GoogleAdsException object.
-
-    Args:
-        exception: an instance of GoogleAdsException.
-    """
+def _handle_googleads_exception(exception):
     print(
         f'Request with ID "{exception.request_id}" failed with status '
         f'"{exception.error.code().name}" and includes the following errors:'
@@ -317,7 +339,7 @@ def _handle_google_ads_exception(exception):
 if __name__ == "__main__":
     # GoogleAdsClient will read the google-ads.yaml configuration file in the
     # home directory if none is specified.
-    google_ads_client = GoogleAdsClient.load_from_storage()
+    googleads_client = GoogleAdsClient.load_from_storage(version="v6")
 
     parser = argparse.ArgumentParser(
         description=(
@@ -353,7 +375,7 @@ if __name__ == "__main__":
     args = parser.parse_args()
 
     main(
-        google_ads_client,
+        googleads_client,
         args.customer_id,
         args.marketing_image_asset_id,
         args.square_marketing_image_asset_id,

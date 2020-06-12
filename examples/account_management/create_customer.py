@@ -25,19 +25,17 @@ import argparse
 import sys
 from datetime import datetime
 
-import google.ads.google_ads.client
-
+from google.ads.googleads.client import GoogleAdsClient
+from google.ads.googleads.errors import GoogleAdsException
 
 # [START create_customer]
 def main(client, manager_customer_id):
-    customer_service = client.get_service("CustomerService", version="v6")
-    customer = client.get_type("Customer", version="v6")
-    today = datetime.today().strftime("%Y%m%d %H:%M:%S")
-    customer.descriptive_name = (
-        "Account created with " "CustomerService on %s" % today
-    )
+    customer_service = client.get_service("CustomerService")
+    customer = client.get_type("Customer")
+    now = datetime.today().strftime("%Y%m%d %H:%M:%S")
+    customer.descriptive_name = f"Account created with CustomerService on {now}"
     # For a list of valid currency codes and time zones see this documentation:
-    # https://developers.google.com/adwords/api/docs/appendix/codes-formats
+    # https://developers.google.com/google-ads/api/reference/data/codes-formats
     customer.currency_code = "USD"
     customer.time_zone = "America/New_York"
     # The below values are optional. For more information about URL
@@ -46,39 +44,21 @@ def main(client, manager_customer_id):
     customer.final_url_suffix = (
         "keyword={keyword}&matchtype={matchtype}" "&adgroupid={adgroupid}"
     )
-    customer.has_partners_badge = False
 
-    try:
-        response = customer_service.create_customer_client(
-            manager_customer_id, customer
-        )
-        print(
-            (
-                'Customer created with resource name "%s" under manager account '
-                'with customer ID "%s"'
-            )
-            % (response.resource_name, manager_customer_id)
-        )
-    except google.ads.google_ads.errors.GoogleAdsException as ex:
-        print(
-            'Request with ID "%s" failed with status "%s" and includes the '
-            "following errors:" % (ex.request_id, ex.error.code().name)
-        )
-        for error in ex.failure.errors:
-            print('\tError with message "%s".' % error.message)
-            if error.location:
-                for field_path_element in error.location.field_path_elements:
-                    print("\t\tOn field: %s" % field_path_element.field_name)
-        sys.exit(1)
-        # [END create_customer]
+    response = customer_service.create_customer_client(
+        customer_id=manager_customer_id, customer_client=customer
+    )
+    print(
+        f'Customer created with resource name "{response.resource_name}" '
+        f'under manager account with ID "{manager_customer_id}".'
+    )
+    # [END create_customer]
 
 
 if __name__ == "__main__":
     # GoogleAdsClient will read the google-ads.yaml configuration file in the
     # home directory if none is specified.
-    google_ads_client = (
-        google.ads.google_ads.client.GoogleAdsClient.load_from_storage()
-    )
+    googleads_client = GoogleAdsClient.load_from_storage(version="v6")
 
     parser = argparse.ArgumentParser(
         description=("Creates a new client under the given manager.")
@@ -95,4 +75,16 @@ if __name__ == "__main__":
     )
     args = parser.parse_args()
 
-    main(google_ads_client, args.manager_customer_id)
+    try:
+        main(googleads_client, args.manager_customer_id)
+    except GoogleAdsException as ex:
+        print(
+            f'Request with ID "{ex.request_id}" failed with status '
+            f'"{ex.error.code().name}" and includes the following errors:'
+        )
+        for error in ex.failure.errors:
+            print(f'	Error with message "{error.message}".')
+            if error.location:
+                for field_path_element in error.location.field_path_elements:
+                    print(f"\t\tOn field: {field_path_element.field_name}")
+        sys.exit(1)

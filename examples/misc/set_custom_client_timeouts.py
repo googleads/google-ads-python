@@ -25,8 +25,8 @@ https://grpc.io/docs/what-is-grpc/core-concepts/#rpc-life-cycle
 import argparse
 import sys
 
-from google.ads.google_ads.client import GoogleAdsClient
-from google.ads.google_ads.errors import GoogleAdsException
+from google.ads.googleads.client import GoogleAdsClient
+from google.ads.googleads.errors import GoogleAdsException
 from google.api_core.exceptions import DeadlineExceeded
 from google.api_core.retry import Retry
 
@@ -48,13 +48,15 @@ def _make_server_streaming_call(client, customer_id):
         client: An initialized GoogleAds client.
         customer_id: The str Google Ads customer ID.
     """
-    ga_service = client.get_service("GoogleAdsService", version="v6")
+    ga_service = client.get_service("GoogleAdsService")
     campaign_ids = []
 
     try:
+        search_request = client.get_type("SearchGoogleAdsStreamRequest")
+        search_request.customer_id = customer_id
+        search_request.query = _QUERY
         stream = ga_service.search_stream(
-            customer_id,
-            query=_QUERY,
+            request=search_request,
             # As of v5, any server streaming call has a default timeout
             # setting. For this particular call, the default setting can be
             # found in the following file:
@@ -96,13 +98,15 @@ def _make_unary_call(client, customer_id):
         client: An initialized GoogleAds client.
         customer_id: The Google Ads customer ID.
     """
-    ga_service = client.get_service("GoogleAdsService", version="v6")
+    ga_service = client.get_service("GoogleAdsService")
     campaign_ids = []
 
     try:
+        search_request = client.get_type("SearchGoogleAdsRequest")
+        search_request.customer_id = customer_id
+        search_request.query = _QUERY
         results = ga_service.search(
-            customer_id,
-            query=_QUERY,
+            request=search_request,
             # As of v5, any unary call is retryable and has default retry
             # settings. Complete information about these settings can be found
             # here: https://googleapis.dev/python/google-api-core/latest/retry.html
@@ -154,7 +158,7 @@ def _make_unary_call(client, customer_id):
 if __name__ == "__main__":
     # GoogleAdsClient will read the google-ads.yaml configuration file in the
     # home directory if none is specified.
-    google_ads_client = GoogleAdsClient.load_from_storage()
+    googleads_client = GoogleAdsClient.load_from_storage(version="v6")
 
     parser = argparse.ArgumentParser(
         description="Demonstrates custom client timeouts in the context of "
@@ -170,4 +174,4 @@ if __name__ == "__main__":
     )
     args = parser.parse_args()
 
-    main(google_ads_client, args.customer_id)
+    main(googleads_client, args.customer_id)

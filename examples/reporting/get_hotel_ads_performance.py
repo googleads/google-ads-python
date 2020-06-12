@@ -22,14 +22,12 @@ groups with the most impressions over the last 7 days.
 import argparse
 import sys
 
-import google.ads.google_ads.client
+from google.ads.googleads.client import GoogleAdsClient
+from google.ads.googleads.errors import GoogleAdsException
 
 
-_DEFAULT_PAGE_SIZE = 50
-
-
-def main(client, customer_id, page_size):
-    ga_service = client.get_service("GoogleAdsService", version="v6")
+def main(client, customer_id):
+    ga_service = client.get_service("GoogleAdsService")
 
     query = """
         SELECT
@@ -42,56 +40,48 @@ def main(client, customer_id, page_size):
           segments.hotel_check_in_day_of_week,
           segments.hotel_length_of_stay
         FROM hotel_performance_view
-        WHERE
-          segments.date DURING LAST_7_DAYS
-          AND campaign.advertising_channel_type = 'HOTEL'
-          AND ad_group.status = 'ENABLED'
+        WHERE segments.date DURING LAST_7_DAYS
+        AND campaign.advertising_channel_type = 'HOTEL'
+        AND ad_group.status = 'ENABLED'
         ORDER BY metrics.impressions DESC
         LIMIT 50"""
 
-    response = ga_service.search(customer_id, query, page_size=page_size)
+    search_request = client.get_type("SearchGoogleAdsStreamRequest")
+    search_request.customer_id = customer_id
+    search_request.query = query
 
-    try:
-        for row in response:
+    response = ga_service.search_stream(search_request)
+
+    for batch in response:
+        for row in batch.results:
             campaign = row.campaign
             ad_group = row.ad_group
-            hotel_check_in_day_of_week = row.segments.hotel_check_in_day_of_week
+            hotel_check_in_day_of_week = (
+                row.segments.hotel_check_in_day_of_week
+            )
             hotel_length_of_stay = row.segments.hotel_length_of_stay
             metrics = row.metrics
 
             print(
-                'Ad group ID "%s" in campaign ID "%s" '
-                % (ad_group.id, campaign.id)
+                f'Ad group ID "{ad_group.id}" '
+                f'in campaign ID "{campaign.id}" '
             )
             print(
-                'with hotel check-in on "%s" and "%s" day(s) stay '
-                % (hotel_check_in_day_of_week, hotel_length_of_stay)
+                f'with hotel check-in on "{hotel_check_in_day_of_week}" '
+                f'and "{hotel_length_of_stay}" day(s) stay '
             )
             print(
-                "had %d impression(s) and %d average lead value (in micros) "
-                "during the last 7 days.\n"
-                % (metrics.impressions, metrics.hotel_average_lead_value_micros)
+                f"had {metrics.impressions:d} impression(s) and "
+                f"{metrics.hotel_average_lead_value_micros:d} average "
+                "lead value (in micros) during the last 7 days.\n"
             )
 
-    except google.ads.google_ads.errors.GoogleAdsException as ex:
-        print(
-            'Request with ID "%s" failed with status "%s" and includes the '
-            "following errors:" % (ex.request_id, ex.error.code().name)
-        )
-        for error in ex.failure.errors:
-            print('\tError with message "%s".' % error.message)
-            if error.location:
-                for field_path_element in error.location.field_path_elements:
-                    print("\t\tOn field: %s" % field_path_element.field_name)
-        sys.exit(1)
 
 
 if __name__ == "__main__":
     # GoogleAdsClient will read the google-ads.yaml configuration file in the
     # home directory if none is specified.
-    google_ads_client = (
-        google.ads.google_ads.client.GoogleAdsClient.load_from_storage()
-    )
+    googleads_client = GoogleAdsClient.load_from_storage(version="v6")
 
     parser = argparse.ArgumentParser(
         description=("Retrieves Hotel-ads performance statistics.")
@@ -106,4 +96,16 @@ if __name__ == "__main__":
     )
     args = parser.parse_args()
 
-    main(google_ads_client, args.customer_id, _DEFAULT_PAGE_SIZE)
+    try:
+        main(googleads_client, args.customer_id)
+    except GoogleAdsException as ex:
+        print(
+            f'Request with ID "{ex.request_id}" failed with status '
+            f'"{ex.error.code().name}" and includes the following errors:'
+        )
+        for error in ex.failure.errors:
+            print(f'	Error with message "{error.message}".')
+            if error.location:
+                for field_path_element in error.location.field_path_elements:
+                    print(f"\t\tOn field: {field_path_element.field_name}")
+        sys.exit(1)

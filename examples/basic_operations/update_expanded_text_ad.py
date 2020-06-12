@@ -22,16 +22,15 @@ import argparse
 import sys
 import uuid
 
-from google.ads.google_ads.client import GoogleAdsClient
-from google.ads.google_ads.errors import GoogleAdsException
+from google.ads.googleads.client import GoogleAdsClient
+from google.ads.googleads.errors import GoogleAdsException
 from google.api_core import protobuf_helpers
 
 
 # [START update_expanded_text_ad]
 def main(client, customer_id, ad_id):
-    ad_service = client.get_service("AdService", version="v6")
-
-    ad_operation = client.get_type("AdOperation", version="v6")
+    ad_service = client.get_service("AdService")
+    ad_operation = client.get_type("AdOperation")
 
     # Update ad operation.
     ad = ad_operation.update
@@ -43,25 +42,14 @@ def main(client, customer_id, ad_id):
     ad.expanded_text_ad.description = "Best space cruise ever."
     ad.final_urls.append("http://www.example.com")
     ad.final_mobile_urls.append("http://www.example.com/mobile")
-
-    fm = protobuf_helpers.field_mask(None, ad)
-    ad_operation.update_mask.CopyFrom(fm)
+    client.copy_from(
+        ad_operation.update_mask, protobuf_helpers.field_mask(None, ad._pb)
+    )
 
     # Updates the ad.
-    try:
-        ad_response = ad_service.mutate_ads(customer_id, [ad_operation])
-    except GoogleAdsException as ex:
-        print(
-            f'Request with ID "{ex.request_id}" failed with status '
-            f'"{ex.error.code().name}" and includes the following errors:'
-        )
-        for error in ex.failure.errors:
-            print(f'\tError with message "{error.message}".')
-            if error.location:
-                for field_path_element in error.location.field_path_elements:
-                    print(f"\t\tOn field: {field_path_element.field_name}")
-        sys.exit(1)
-
+    ad_response = ad_service.mutate_ads(
+        customer_id=customer_id, operations=[ad_operation]
+    )
     print(
         f'Ad with resource name "{ad_response.results[0].resource_name}" '
         "was updated."
@@ -72,7 +60,7 @@ def main(client, customer_id, ad_id):
 if __name__ == "__main__":
     # GoogleAdsClient will read the google-ads.yaml configuration file in the
     # home directory if none is specified.
-    google_ads_client = GoogleAdsClient.load_from_storage()
+    googleads_client = GoogleAdsClient.load_from_storage(version="v6")
 
     parser = argparse.ArgumentParser(
         description=(
@@ -93,4 +81,16 @@ if __name__ == "__main__":
     )
     args = parser.parse_args()
 
-    main(google_ads_client, args.customer_id, args.ad_id)
+    try:
+        main(googleads_client, args.customer_id, args.ad_id)
+    except GoogleAdsException as ex:
+        print(
+            f'Request with ID "{ex.request_id}" failed with status '
+            f'"{ex.error.code().name}" and includes the following errors:'
+        )
+        for error in ex.failure.errors:
+            print(f'	Error with message "{error.message}".')
+            if error.location:
+                for field_path_element in error.location.field_path_elements:
+                    print(f"\t\tOn field: {field_path_element.field_name}")
+        sys.exit(1)

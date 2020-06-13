@@ -12,9 +12,9 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
-"""This example illustrates how to get campaign criteria.
+"""This example illustrates how to get keyword criteria.
 
-Retrieves negative keywords in a campaign.
+Retrieves keywords and standard metrics for all but removed keywords in an account.
 """
 
 import argparse
@@ -80,7 +80,7 @@ if __name__ == '__main__':
     google_ads_client = GoogleAdsClient.load_from_storage()
 
     parser = argparse.ArgumentParser(
-        description=('Retrieves a campaign\'s negative keywords.'))
+        description=('Retrieves an account\'s keyword metrics.'))
     # The following argument(s) should be provided to run the example.
     parser.add_argument('-c', '--customer_id', type=str,
                         required=True, help='The Google Ads customer ID.')

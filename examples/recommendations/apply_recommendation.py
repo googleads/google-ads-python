@@ -26,7 +26,7 @@ import google.ads.google_ads.client
 
 def main(client, customer_id, recommendation_id):
     recommendation_service = client.get_service('RecommendationService',
-                                                version='v3')
+                                                version='v4')
 
     apply_recommendation_operation = client.get_type(
         'ApplyRecommendationOperation')

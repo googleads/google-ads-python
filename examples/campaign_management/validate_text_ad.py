@@ -26,13 +26,13 @@ from google.ads.google_ads.errors import GoogleAdsException
 
 
 def main(client, customer_id, ad_group_id):
-    ad_group_ad_operation = client.get_type('AdGroupAdOperation', version='v2')
+    ad_group_ad_operation = client.get_type('AdGroupAdOperation', version='v4')
     ad_group_ad = ad_group_ad_operation.create
-    ad_group_service = client.get_service('AdGroupService', version='v2')
+    ad_group_service = client.get_service('AdGroupService', version='v4')
     ad_group_ad.ad_group.value = ad_group_service.ad_group_path(customer_id,
         ad_group_id)
     ad_group_ad.status = client.get_type('AdGroupAdStatusEnum',
-        version='v2').PAUSED
+        version='v4').PAUSED
 
     # Create an expanded text ad.
     ad_group_ad.ad.expanded_text_ad.description.value = 'Luxury Cruise to Mars'
@@ -45,7 +45,7 @@ def main(client, customer_id, ad_group_id):
     final_url = ad_group_ad.ad.final_urls.add()
     final_url.value = 'http://www.example.com/'
 
-    ad_group_ad_service = client.get_service('AdGroupAdService', version='v2')
+    ad_group_ad_service = client.get_service('AdGroupAdService', version='v4')
     # Attempt the mutate with validate_only=True.
     try:
         response = ad_group_ad_service.mutate_ad_group_ads(customer_id,
@@ -65,7 +65,7 @@ def main(client, customer_id, ad_group_id):
             # https://developers.google.com/google-ads/api/docs/policy-exemption/overview
             if (error.error_code.policy_finding_error ==
                 client.get_type('PolicyFindingErrorEnum',
-                                version='v2').POLICY_FINDING):
+                                version='v4').POLICY_FINDING):
                 if error.details.policy_finding_details:
                     count = 1
                     details = (error.details.policy_finding_details

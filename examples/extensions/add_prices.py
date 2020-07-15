@@ -29,9 +29,9 @@ from google.ads.google_ads.errors import GoogleAdsException
 def main(client, customer_id, campaign_id):
     """The main method that creates all necessary entities for the example."""
     # Create the price extension feed item
-    price_feed_item = client.get_type('PriceFeedItem', version='v3')
+    price_feed_item = client.get_type('PriceFeedItem', version='v4')
     price_feed_item.type = (
-        client.get_type('PriceExtensionTypeEnum', version='v3').SERVICES)
+        client.get_type('PriceExtensionTypeEnum', version='v4').SERVICES)
     # Optional: set price qualifier
     price_feed_item.price_qualifier = (
         client.get_type('PriceExtensionPriceQualifierEnum').FROM)
@@ -71,17 +71,17 @@ def main(client, customer_id, campaign_id):
     # Create a customer extension setting using the previously created
     # extension feed item. This associates the price extension to your
     # account.
-    campaign_service = client.get_service('CampaignService', version='v3')
+    campaign_service = client.get_service('CampaignService', version='v4')
     extension_feed_item_operation = (
-        client.get_type('ExtensionFeedItemOperation', version='v3'))
+        client.get_type('ExtensionFeedItemOperation', version='v4'))
     extension_feed_item = extension_feed_item_operation.create
     extension_feed_item.extension_type = (
         client.get_type('ExtensionTypeEnum').PRICE)
     extension_feed_item.price_feed_item.CopyFrom(price_feed_item)
     extension_feed_item.targeted_campaign.value = (
         campaign_service.campaign_path(customer_id, campaign_id))
-    day_of_week_enum = client.get_type('DayOfWeekEnum', version='v3')
-    minute_of_hour_enum = client.get_type('MinuteOfHourEnum', version='v3')
+    day_of_week_enum = client.get_type('DayOfWeekEnum', version='v4')
+    minute_of_hour_enum = client.get_type('MinuteOfHourEnum', version='v4')
     extension_feed_item.ad_schedules.extend([
         _create_ad_schedule_info(client,
                                  day_of_week_enum.SUNDAY,
@@ -100,7 +100,7 @@ def main(client, customer_id, campaign_id):
     # Add the extension
     try:
         feed_service = client.get_service('ExtensionFeedItemService',
-                                          version='v3')
+                                          version='v4')
         # Issues a mutate request to add the customer extension setting and
         # print its information.
         feed_response = (
@@ -125,7 +125,7 @@ def _create_price_offer(client, header, description, price_in_micros,
                         currency_code, unit, in_final_url,
                         in_final_mobile_url=None):
     """Create a price offer."""
-    price_offer = client.get_type('PriceOffer', version='v3')
+    price_offer = client.get_type('PriceOffer', version='v4')
     price_offer.header.value = header
     price_offer.description.value = description
     final_url = price_offer.final_urls.add()
@@ -143,7 +143,7 @@ def _create_price_offer(client, header, description, price_in_micros,
 def _create_ad_schedule_info(client, day_of_week, start_hour, start_minute,
                              end_hour, end_minute):
     """Create a new ad schedule info with the specified parameters."""
-    ad_schedule_info = client.get_type('AdScheduleInfo', version='v3')
+    ad_schedule_info = client.get_type('AdScheduleInfo', version='v4')
     ad_schedule_info.day_of_week = day_of_week
     ad_schedule_info.start_hour.value = start_hour
     ad_schedule_info.start_minute = start_minute

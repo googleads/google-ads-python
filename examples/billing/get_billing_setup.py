@@ -23,7 +23,7 @@ from google.ads.google_ads.errors import GoogleAdsException
 
 
 def main(client, customer_id):
-    ga_service = client.get_service('GoogleAdsService', version='v3')
+    ga_service = client.get_service('GoogleAdsService', version='v4')
 
     query = (
         'SELECT billing_setup.id, billing_setup.status, '
@@ -40,7 +40,7 @@ def main(client, customer_id):
     try:
         # Use the enum type to determine the enum name from the value.
         billing_setup_status_enum = client.get_type(
-            'BillingSetupStatusEnum', version='v3').BillingSetupStatus
+            'BillingSetupStatusEnum', version='v4').BillingSetupStatus
 
         print('Found the following billing setup results:')
         for batch in response:

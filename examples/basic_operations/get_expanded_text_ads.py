@@ -23,9 +23,9 @@ from google.ads.google_ads.errors import GoogleAdsException
 
 
 def main(client, customer_id, ad_group_id=None):
-    ga_service = client.get_service('GoogleAdsService', version='v3')
+    ga_service = client.get_service('GoogleAdsService', version='v4')
     ad_group_ad_status_enum = client.get_type(
-        'AdGroupAdStatusEnum', version='v3').AdGroupAdStatus
+        'AdGroupAdStatusEnum', version='v4').AdGroupAdStatus
 
     query = ('SELECT ad_group.id, ad_group_ad.ad.id, '
              'ad_group_ad.ad.expanded_text_ad.headline_part1, '

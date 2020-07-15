@@ -25,7 +25,7 @@ from google.ads.google_ads.errors import GoogleAdsException
 
 
 def main(client, customer_id):
-    ga_service = client.get_service('GoogleAdsService', version='v3')
+    ga_service = client.get_service('GoogleAdsService', version='v4')
 
     query = ('SELECT campaign.id, campaign.name, ad_group.id, ad_group.name, '
              'ad_group_criterion.criterion_id, '
@@ -42,7 +42,7 @@ def main(client, customer_id):
     # Issues a search request using streaming.
     response = ga_service.search_stream(customer_id, query)
     keyword_match_type_enum = client.get_type(
-        'KeywordMatchTypeEnum', version='v2').KeywordMatchType
+        'KeywordMatchTypeEnum', version='v4').KeywordMatchType
     try:
         for batch in response:
             for row in batch.results:

@@ -19,31 +19,32 @@ import argparse
 import sys
 
 from google.ads.google_ads.client import GoogleAdsClient
+from google.ads.google_ads.errors import GoogleAdsException
 from google.ads.google_ads.util import ResourceName
 
 
-def main(client, customer_id, ad_group_id, criteria_id):
-    agc_service = client.get_service('AdGroupCriterionService', version='v3')
-    agc_operation = client.get_type('AdGroupCriterionOperation', version='v3')
+def main(client, customer_id, ad_group_id, criterion_id):
+    agc_service = client.get_service('AdGroupCriterionService', version='v4')
+    agc_operation = client.get_type('AdGroupCriterionOperation', version='v4')
 
     resource_name = agc_service.ad_group_criteria_path(
-        customer_id, ResourceName.format_composite(ad_group_id, criteria_id))
+        customer_id, ResourceName.format_composite(ad_group_id, criterion_id))
     agc_operation.remove = resource_name
 
     try:
         agc_response = agc_service.mutate_ad_group_criteria(
             customer_id, [agc_operation])
-    except google.ads.google_ads.errors.GoogleAdsException as ex:
-        print('Request with ID "%s" failed with status "%s" and includes the '
-              'following errors:' % (ex.request_id, ex.error.code().name))
+    except GoogleAdsException as ex:
+        print(f'Request with ID "{ex.request_id}" failed with status '
+              f'"{ex.error.code().name}" and includes the following errors:')
         for error in ex.failure.errors:
-            print('\tError with message "%s".' % error.message)
+            print(f'\tError with message "{error.message}".')
             if error.location:
                 for field_path_element in error.location.field_path_elements:
-                    print('\t\tOn field: %s' % field_path_element.field_name)
+                    print(f'\t\tOn field: {field_path_element.field_name}')
         sys.exit(1)
 
-    print('Removed keyword %s.' % agc_response.results[0].resource_name)
+    print(f'Removed keyword {agc_response.results[0].resource_name}.')
 
 
 if __name__ == '__main__':
@@ -57,9 +58,9 @@ if __name__ == '__main__':
                         required=True, help='The Google Ads customer ID.')
     parser.add_argument('-a', '--ad_group_id', type=str,
                         required=True, help='The ad group ID.')
-    parser.add_argument('-k', '--criteria_id', type=str,
-                        required=True, help='The criteria ID, or keyword ID.')
+    parser.add_argument('-k', '--criterion_id', type=str,
+                        required=True, help='The criterion ID, or keyword ID.')
     args = parser.parse_args()
 
     main(google_ads_client, args.customer_id, args.ad_group_id,
-         args.criteria_id)
+         args.criterion_id)

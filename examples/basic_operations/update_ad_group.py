@@ -21,20 +21,21 @@ To get ad groups, run get_ad_groups.py.
 import argparse
 import sys
 
-import google.ads.google_ads.client
+from google.ads.google_ads.client import GoogleAdsClient
+from google.ads.google_ads.errors import GoogleAdsException
 from google.api_core import protobuf_helpers
 
 
-def main(client, customer_id, ad_group_id, bid_micro_amount):
-    ad_group_service = client.get_service('AdGroupService', version='v3')
+def main(client, customer_id, ad_group_id, cpc_bid_micro_amount):
+    ad_group_service = client.get_service('AdGroupService', version='v4')
 
     # Create ad group operation.
-    ad_group_operation = client.get_type('AdGroupOperation', version='v3')
+    ad_group_operation = client.get_type('AdGroupOperation', version='v4')
     ad_group = ad_group_operation.update
     ad_group.resource_name = ad_group_service.ad_group_path(
         customer_id, ad_group_id)
-    ad_group.status = client.get_type('AdGroupStatusEnum', version='v3').PAUSED
-    ad_group.cpc_bid_micros.value = bid_micro_amount
+    ad_group.status = client.get_type('AdGroupStatusEnum', version='v4').PAUSED
+    ad_group.cpc_bid_micros.value = cpc_bid_micro_amount
     fm = protobuf_helpers.field_mask(None, ad_group)
     ad_group_operation.update_mask.CopyFrom(fm)
 
@@ -42,24 +43,23 @@ def main(client, customer_id, ad_group_id, bid_micro_amount):
     try:
         ad_group_response = ad_group_service.mutate_ad_groups(
             customer_id, [ad_group_operation])
-    except google.ads.google_ads.errors.GoogleAdsException as ex:
-        print('Request with ID "%s" failed with status "%s" and includes the '
-              'following errors:' % (ex.request_id, ex.error.code().name))
+    except GoogleAdsException as ex:
+        print(f'Request with ID "{ex.request_id}" failed with status '
+              f'"{ex.error.code().name}" and includes the following errors:')
         for error in ex.failure.errors:
-            print('\tError with message "%s".' % error.message)
+            print(f'\tError with message "{error.message}".')
             if error.location:
                 for field_path_element in error.location.field_path_elements:
-                    print('\t\tOn field: %s' % field_path_element.field_name)
+                    print(f'\t\tOn field: {field_path_element.field_name}')
         sys.exit(1)
 
-    print('Updated ad group %s.' % ad_group_response.results[0].resource_name)
+    print(f'Updated ad group {ad_group_response.results[0].resource_name}.')
 
 
 if __name__ == '__main__':
     # GoogleAdsClient will read the google-ads.yaml configuration file in the
     # home directory if none is specified.
-    google_ads_client = (google.ads.google_ads.client.GoogleAdsClient
-                         .load_from_storage())
+    google_ads_client = GoogleAdsClient.load_from_storage()
 
     parser = argparse.ArgumentParser(
         description=('Updates an ad group for specified customer and campaign '
@@ -69,9 +69,9 @@ if __name__ == '__main__':
                         required=True, help='The Google Ads customer ID.')
     parser.add_argument('-a', '--ad_group_id', type=str,
                         required=True, help='The ad group ID.')
-    parser.add_argument('-b', '--bid_micro_amount', type=int,
-                        required=True, help='The bid micro amount.')
+    parser.add_argument('-b', '--cpc_bid_micro_amount', type=int,
+                        required=True, help='The cpc bid micro amount.')
     args = parser.parse_args()
 
     main(google_ads_client, args.customer_id, args.ad_group_id,
-         args.bid_micro_amount)
+         args.cpc_bid_micro_amount)

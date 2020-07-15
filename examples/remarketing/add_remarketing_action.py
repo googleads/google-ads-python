@@ -40,9 +40,9 @@ def main(client, customer_id, page_size):
 
 def _add_remarketing_action(client, customer_id):
     remarketing_action_service = client.get_service(
-        'RemarketingActionService', version='v2')
+        'RemarketingActionService', version='v4')
     remarketing_action_operation = client.get_type(
-        'RemarketingActionOperation', version='v2')
+        'RemarketingActionOperation', version='v4')
 
     remarketing_action = remarketing_action_operation.create
     remarketing_action.name.value = f'Remarketing action #{uuid4()}'
@@ -74,7 +74,7 @@ def _query_remarketing_action(client, customer_id, resource_name, page_size):
              f'WHERE remarketing_action.resource_name = "{resource_name}"')
 
     google_ads_service_client = client.get_service(
-        'GoogleAdsService', version='v2')
+        'GoogleAdsService', version='v4')
 
     results = google_ads_service_client.search(
         customer_id, query=query, page_size=page_size)
@@ -94,9 +94,9 @@ def _query_remarketing_action(client, customer_id, resource_name, page_size):
 
 def _print_remarketing_action_attributes(client, remarketing_action):
     tracking_code_type_enum = client.get_type(
-        'TrackingCodeTypeEnum', version='v2').TrackingCodeType
+        'TrackingCodeTypeEnum', version='v4').TrackingCodeType
     tracking_code_page_format_enum = client.get_type(
-        'TrackingCodePageFormatEnum', version='v2').TrackingCodePageFormat
+        'TrackingCodePageFormatEnum', version='v4').TrackingCodePageFormat
 
     print(f'Remarketing action has ID {remarketing_action.id.value} and name '
           f'"{remarketing_action.name.value}". \nIt has the following '

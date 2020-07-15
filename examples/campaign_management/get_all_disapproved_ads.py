@@ -24,7 +24,7 @@ _DEFAULT_PAGE_SIZE = 1000
 
 
 def main(client, customer_id, campaign_id, page_size):
-    ga_service = client.get_service('GoogleAdsService', version='v3')
+    ga_service = client.get_service('GoogleAdsService', version='v4')
 
     query = ('SELECT ad_group_ad.ad.id, ad_group_ad.ad.type, '
              'ad_group_ad.policy_summary FROM ad_group_ad '
@@ -34,7 +34,7 @@ def main(client, customer_id, campaign_id, page_size):
 
     try:
         disapproved_ads_count = 0
-        ad_type_enum = client.get_type('AdTypeEnum', version='v3').AdType
+        ad_type_enum = client.get_type('AdTypeEnum', version='v4').AdType
         policy_topic_entry_type_enum = client.get_type(
             'PolicyTopicEntryTypeEnum').PolicyTopicEntryType
 

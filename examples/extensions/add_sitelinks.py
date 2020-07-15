@@ -34,9 +34,9 @@ _date_format = '%Y-%m-%d %H:%M:%S'
 def main(client, customer_id, campaign_id):
     """The main method that creates all necessary entities for the example."""
     # Create an extension setting.
-    campaign_service = client.get_service('CampaignService', version='v3')
+    campaign_service = client.get_service('CampaignService', version='v4')
     campaign_ext_setting_service = client.get_service(
-        'CampaignExtensionSettingService', version='v3')
+        'CampaignExtensionSettingService', version='v4')
 
     campaign_resource_name = campaign_service.campaign_path(
         customer_id, campaign_id)
@@ -45,9 +45,9 @@ def main(client, customer_id, campaign_id):
         client, customer_id, campaign_resource_name)
 
     campaign_ext_setting_operation = client.get_type(
-        'CampaignExtensionSettingOperation', version='v3')
+        'CampaignExtensionSettingOperation', version='v4')
     extension_type_enum = client.get_type(
-        'ExtensionTypeEnum', version='v3')
+        'ExtensionTypeEnum', version='v4')
 
     campaign_ext_setting = campaign_ext_setting_operation.create
     campaign_ext_setting.campaign.value = campaign_resource_name
@@ -90,16 +90,16 @@ def _create_extension_feed_items(client, customer_id, campaign_resource_name):
         feed items.
     """
     extension_feed_item_service = client.get_service(
-        'ExtensionFeedItemService', version='v3')
+        'ExtensionFeedItemService', version='v4')
     geo_target_constant_service = client.get_service(
-        'GeoTargetConstantService', version='v3')
+        'GeoTargetConstantService', version='v4')
     extension_type_enum = client.get_type('ExtensionTypeEnum')
     feed_item_target_device_enum = client.get_type('FeedItemTargetDeviceEnum')
     day_of_week_enum = client.get_type('DayOfWeekEnum')
     minute_of_hour_enum = client.get_type('MinuteOfHourEnum')
 
     extension_feed_item_operation1 = client.get_type(
-        'ExtensionFeedItemOperation', version='v3')
+        'ExtensionFeedItemOperation', version='v4')
     extension_feed_item1 = extension_feed_item_operation1.create
     extension_feed_item1.extension_type = extension_type_enum.SITELINK
     extension_feed_item1.sitelink_feed_item.link_text.value = 'Store Hours'
@@ -108,7 +108,7 @@ def _create_extension_feed_items(client, customer_id, campaign_resource_name):
     final_url1.value = 'http://www.example.com/storehours'
 
     extension_feed_item_operation2 = client.get_type(
-        'ExtensionFeedItemOperation', version='v3')
+        'ExtensionFeedItemOperation', version='v4')
     date_range = _get_thanksgiving_string_date_range()
     extension_feed_item2 = extension_feed_item_operation2.create
     extension_feed_item2.extension_type = extension_type_enum.SITELINK
@@ -126,7 +126,7 @@ def _create_extension_feed_items(client, customer_id, campaign_resource_name):
     final_url2.value = 'http://www.example.com/thanksgiving'
 
     extension_feed_item_operation3 = client.get_type(
-        'ExtensionFeedItemOperation', version='v3')
+        'ExtensionFeedItemOperation', version='v4')
     extension_feed_item3 = extension_feed_item_operation3.create
     extension_feed_item3.extension_type = extension_type_enum.SITELINK
     extension_feed_item3.sitelink_feed_item.link_text.value = 'Wifi available'
@@ -136,7 +136,7 @@ def _create_extension_feed_items(client, customer_id, campaign_resource_name):
     final_url3.value = 'http://www.example.com/mobile/wifi'
 
     extension_feed_item_operation4 = client.get_type(
-        'ExtensionFeedItemOperation', version='v3')
+        'ExtensionFeedItemOperation', version='v4')
     extension_feed_item4 = extension_feed_item_operation4.create
     extension_feed_item4.extension_type = extension_type_enum.SITELINK
     extension_feed_item4.sitelink_feed_item.link_text.value = 'Happy hours'

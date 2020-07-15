@@ -31,12 +31,12 @@ _DATE_FORMAT = '%Y%m%d'
 
 def main(client, customer_id):
     campaign_budget_service = client.get_service('CampaignBudgetService',
-                                                 version='v3')
-    campaign_service = client.get_service('CampaignService', version='v3')
+                                                 version='v4')
+    campaign_service = client.get_service('CampaignService', version='v4')
 
     # Create a budget, which can be shared by multiple campaigns.
     campaign_budget_operation = client.get_type('CampaignBudgetOperation',
-                                                version='v3')
+                                                version='v4')
     campaign_budget = campaign_budget_operation.create
     campaign_budget.name.value = 'Interplanetary Budget %s' % uuid.uuid4()
     campaign_budget.delivery_method = client.get_type(
@@ -59,7 +59,7 @@ def main(client, customer_id):
         sys.exit(1)
 
     # Create campaign.
-    campaign_operation = client.get_type('CampaignOperation', version='v3')
+    campaign_operation = client.get_type('CampaignOperation', version='v4')
     campaign = campaign_operation.create
     campaign.name.value = 'Interplanetary Cruise %s' % uuid.uuid4()
     campaign.advertising_channel_type = client.get_type(
@@ -68,7 +68,7 @@ def main(client, customer_id):
     # Recommendation: Set the campaign to PAUSED when creating it to prevent
     # the ads from immediately serving. Set to ENABLED once you've added
     # targeting and the ads are ready to serve.
-    campaign.status = client.get_type('CampaignStatusEnum', version='v3').PAUSED
+    campaign.status = client.get_type('CampaignStatusEnum', version='v4').PAUSED
 
     # Set the bidding strategy and budget.
     campaign.manual_cpc.enhanced_cpc_enabled.value = True

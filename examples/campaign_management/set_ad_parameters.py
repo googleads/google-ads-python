@@ -32,7 +32,7 @@ def main(client, customer_id, ad_group_id, criterion_id):
         criterion_id: A criterion ID str.
     """
     ad_group_criterion_service = client.get_service('AdGroupCriterionService',
-                                                    version='v3')
+                                                    version='v4')
     # Gets the resource name of the ad group criterion to be used.
     resource_name = ad_group_criterion_service.ad_group_criteria_path(
         customer_id, ResourceName.format_composite(ad_group_id, criterion_id))
@@ -42,7 +42,7 @@ def main(client, customer_id, ad_group_id, criterion_id):
     operations.append(create_ad_parameter(client, resource_name, 2, '$40'))
 
     ad_parameter_service = client.get_service('AdParameterService',
-                                              version='v3')
+                                              version='v4')
 
     # Add the ad parameter.
     try:
@@ -72,7 +72,7 @@ def create_ad_parameter(client, resource_name, parameter_index, insertion_text):
 
     Restrictions apply to the value of the "insertion_text". For more
     information, see the field documentation in the AdParameter class located
-    here: https://developers.google.com/google-ads/api/fields/v2/ad_parameter#ad_parameterinsertion_text
+    here: https://developers.google.com/google-ads/api/fields/v4/ad_parameter#ad_parameterinsertion_text
 
     Args:
         client: An initialized GoogleAdsClient instance.
@@ -82,7 +82,7 @@ def create_ad_parameter(client, resource_name, parameter_index, insertion_text):
 
     Returns: A new AdParamterOperation message class instance.
     """
-    ad_param_operation = client.get_type('AdParameterOperation', version='v3')
+    ad_param_operation = client.get_type('AdParameterOperation', version='v4')
     ad_param = ad_param_operation.create
     ad_param.ad_group_criterion.value = resource_name
     ad_param.parameter_index.value = parameter_index

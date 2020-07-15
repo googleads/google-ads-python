@@ -35,13 +35,13 @@ from google.ads.google_ads.errors import GoogleAdsException
 
 
 def main(client, customer_id, campaign_id):
-    campaign_service = client.get_service('CampaignService', version='v3')
+    campaign_service = client.get_service('CampaignService', version='v4')
 
     campaign_resource_name = campaign_service.campaign_path(
         customer_id, campaign_id)
 
     campaign_criterion_operation = client.get_type(
-        'CampaignCriterionOperation', version='v3')
+        'CampaignCriterionOperation', version='v4')
     campaign_criterion = campaign_criterion_operation.create
     campaign_criterion.campaign.value = campaign_resource_name
 
@@ -54,7 +54,7 @@ def main(client, customer_id, campaign_id):
         client, campaign_criterion.listing_scope.dimensions)
 
     campaign_criterion_service = client.get_service('CampaignCriterionService',
-                                                    version='v3')
+                                                    version='v4')
 
     try:
         campaign_criterion_response = (
@@ -81,7 +81,7 @@ def _build_listing_scope_dimensions(client, dimensions):
     product_brand_dimension.product_brand.value.value = 'google'
 
     product_custom_attribute_index_enum = client.get_type(
-        'ProductCustomAttributeIndexEnum', version='v3')
+        'ProductCustomAttributeIndexEnum', version='v4')
 
     product_custom_attribute_dimension = dimensions.add()
     product_custom_attribute = (
@@ -90,7 +90,7 @@ def _build_listing_scope_dimensions(client, dimensions):
     product_custom_attribute.value.value = 'top_selling_products'
 
     product_type_level_enum = client.get_type(
-        'ProductTypeLevelEnum', version='v3')
+        'ProductTypeLevelEnum', version='v4')
 
     product_type_dimension_1 = dimensions.add()
     product_type = product_type_dimension_1.product_type

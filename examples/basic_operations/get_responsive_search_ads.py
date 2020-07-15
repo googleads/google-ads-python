@@ -29,7 +29,7 @@ _DEFAULT_PAGE_SIZE = 1000
 
 
 def main(client, customer_id, page_size, ad_group_id=None):
-    ga_service = client.get_service('GoogleAdsService', version='v2')
+    ga_service = client.get_service('GoogleAdsService', version='v4')
 
     query = '''
         SELECT ad_group.id, ad_group_ad.ad.id,
@@ -46,7 +46,7 @@ def main(client, customer_id, page_size, ad_group_id=None):
 
     results = ga_service.search(customer_id, query=query, page_size=page_size)
     aga_status_enum = client.get_type(
-        'AdGroupAdStatusEnum', version='v2').AdGroupAdStatus
+        'AdGroupAdStatusEnum', version='v4').AdGroupAdStatus
 
     try:
         one_found = False
@@ -81,7 +81,7 @@ def main(client, customer_id, page_size, ad_group_id=None):
 def _ad_text_assets_to_strs(client, assets):
     """Converts a list of AdTextAssets to a list of user-friendly strings."""
     sa_field_type_enum = client.get_type(
-        'ServedAssetFieldTypeEnum', version='v2').ServedAssetFieldType
+        'ServedAssetFieldTypeEnum', version='v4').ServedAssetFieldType
     s = []
     for asset in assets:
         s.append('\t"' + asset.text.value + '" pinned to ' +

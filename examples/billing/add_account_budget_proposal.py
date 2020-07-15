@@ -29,7 +29,7 @@ def main(client, customer_id, billing_setup_id):
     account_budget_proposal_service = client.get_service(
         'AccountBudgetProposalService')
     billing_setup_service = client.get_service('BillingSetupService',
-                                               version='v3')
+                                               version='v4')
 
     account_budget_proposal_operation = client.get_type(
         'AccountBudgetProposalOperation')
@@ -43,7 +43,7 @@ def main(client, customer_id, billing_setup_id):
 
     # Specify the account budget starts immediately
     proposal.proposed_start_time_type = client.get_type('TimeTypeEnum',
-                                                        version='v3').NOW
+                                                        version='v4').NOW
     # Alternatively you can specify a specific start time. Refer to the
     # AccountBudgetProposal resource documentation for allowed formats.
     #
@@ -51,7 +51,7 @@ def main(client, customer_id, billing_setup_id):
 
     # Specify that the budget runs forever
     proposal.proposed_end_time_type = client.get_type('TimeTypeEnum',
-                                                      version='v3').FOREVER
+                                                      version='v4').FOREVER
     # Alternatively you can specify a specific end time. Allowed formats are as
     # above.
     #

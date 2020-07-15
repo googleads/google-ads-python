@@ -28,7 +28,7 @@ _logger = logging.getLogger(__name__)
 _SERVICE_CLIENT_TEMPLATE = '{}Client'
 _SERVICE_GRPC_TRANSPORT_TEMPLATE = '{}GrpcTransport'
 
-_VALID_API_VERSIONS = ['v3', 'v2', 'v1']
+_VALID_API_VERSIONS = ['v4', 'v3', 'v2']
 _DEFAULT_VERSION = _VALID_API_VERSIONS[0]
 
 _GRPC_CHANNEL_OPTIONS = [

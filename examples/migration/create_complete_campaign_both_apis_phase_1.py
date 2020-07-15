@@ -54,17 +54,17 @@ def create_campaign_budget(client, customer_id):
         customer_id: (str) Customer ID associated with the account.
 
     Returns:
-        An instance of google.ads.google_ads.v2.types.CampaignBudget for the
+        An instance of google.ads.google_ads.v4.types.CampaignBudget for the
             newly created Budget.
     """
-    campaign_service = client.get_service('CampaignBudgetService', version='v3')
-    operation = client.get_type('CampaignBudgetOperation', version='v3')
+    campaign_service = client.get_service('CampaignBudgetService', version='v4')
+    operation = client.get_type('CampaignBudgetOperation', version='v4')
     criterion = operation.create
     criterion.name.value = 'Interplanetary Cruise Budget #{}'.format(
                             uuid.uuid4())
     criterion.delivery_method = client.get_type(
                                 'BudgetDeliveryMethodEnum',
-                                version='v3').STANDARD
+                                version='v4').STANDARD
     criterion.amount_micros.value = 500000
     response = campaign_service.mutate_campaign_budgets(customer_id,
                [operation])
@@ -76,7 +76,7 @@ def create_campaign_budget(client, customer_id):
 
 
 def get_campaign_budget(client, customer_id, resource_name):
-    """Retrieves an instance of google.ads.google_ads.v2.types.CampaignBudget
+    """Retrieves an instance of google.ads.google_ads.v4.types.CampaignBudget
         message class that is associated with a given resource name.
 
     Args:
@@ -86,10 +86,10 @@ def get_campaign_budget(client, customer_id, resource_name):
             campaign.
 
     Returns:
-        An instance of google.ads.google_ads.v2.types.CampaignBudget for the
+        An instance of google.ads.google_ads.v4.types.CampaignBudget for the
             newly created Budget.
     """
-    ga_service = client.get_service('GoogleAdsService', version='v3')
+    ga_service = client.get_service('GoogleAdsService', version='v4')
     query = ('SELECT campaign_budget.id, campaign_budget.name, '
              'campaign_budget.resource_name FROM campaign_budget WHERE '
              'campaign_budget.resource_name = "{}"'.format(resource_name))

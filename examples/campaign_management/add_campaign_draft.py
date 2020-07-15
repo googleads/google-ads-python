@@ -27,9 +27,9 @@ from google.ads.google_ads.errors import GoogleAdsException
 
 
 def main(client, customer_id, base_campaign_id):
-    campaign_service = client.get_service('CampaignService', version='v3')
+    campaign_service = client.get_service('CampaignService', version='v4')
     campaign_draft_service = client.get_service('CampaignDraftService',
-                                                version='v3')
+                                                version='v4')
 
     # Creates a campaign draft operation.
     campaign_draft_operation = client.get_type('CampaignDraftOperation')

@@ -28,9 +28,9 @@ from google.api_core import protobuf_helpers
 
 
 def main(client, customer_id, ad_id):
-    ad_service = client.get_service('AdService', version='v3')
+    ad_service = client.get_service('AdService', version='v4')
 
-    ad_operation = client.get_type('AdOperation', version='v3')
+    ad_operation = client.get_type('AdOperation', version='v4')
 
     # Update ad operation.
     ad = ad_operation.update

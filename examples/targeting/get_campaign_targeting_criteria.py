@@ -26,7 +26,7 @@ _DEFAULT_PAGE_SIZE = 1000
 
 
 def main(client, customer_id, campaign_id, page_size):
-    ga_service = client.get_service('GoogleAdsService', version='v3')
+    ga_service = client.get_service('GoogleAdsService', version='v4')
 
     query = ('SELECT campaign.id, campaign_criterion.campaign, '
              'campaign_criterion.criterion_id, campaign_criterion.negative, '
@@ -44,7 +44,7 @@ def main(client, customer_id, campaign_id, page_size):
                   % criterion.criterion_id.value)
 
             if criterion.type == client.get_type('CriterionTypeEnum',
-                                                 version='v3').KEYWORD:
+                                                 version='v4').KEYWORD:
                 print('\t%sKeyword with text "%s" and match type %s.'
                       % ('' if criterion.negative.value else 'Negative',
                          criterion.keyword.text.value,

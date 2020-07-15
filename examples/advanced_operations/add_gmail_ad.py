@@ -42,27 +42,33 @@ def main(client, customer_id, ad_group_id):
     if marketing_img_content_type != 'image/jpeg':
         raise ValueError('Marketing image has invalid content-type.')
 
-    media_file_logo_op = client.get_type('MediaFileOperation')
+    media_file_logo_op = client.get_type('MediaFileOperation', version='v4')
     media_file_logo = media_file_logo_op.create
-    media_file_logo.type = client.get_type('MediaTypeEnum').IMAGE
+    media_file_logo.type = client.get_type('MediaTypeEnum', version='v4').IMAGE
     media_file_logo.image.data.value = logo_img_bytes
-    media_file_logo.mime_type = client.get_type('MimeTypeEnum').IMAGE_PNG
+    media_file_logo.mime_type = client.get_type('MimeTypeEnum',
+                                                version='v4').IMAGE_PNG
 
-    media_file_marketing_op = client.get_type('MediaFileOperation')
+    media_file_marketing_op = client.get_type('MediaFileOperation',
+                                              version='v4')
     media_file_marketing = media_file_marketing_op.create
-    media_file_marketing.type = client.get_type('MediaTypeEnum').IMAGE
+    media_file_marketing.type = client.get_type('MediaTypeEnum',
+                                                version='v4').IMAGE
     media_file_marketing.image.data.value = marketing_img_bytes
-    media_file_marketing.mime_type = client.get_type('MimeTypeEnum').IMAGE_JPEG
+    media_file_marketing.mime_type = client.get_type('MimeTypeEnum',
+                                                     version='v4').IMAGE_JPEG
 
-    media_file_service = client.get_service('MediaFileService')
+    media_file_service = client.get_service('MediaFileService',
+                                            version='v4')
     image_response = media_file_service.mutate_media_files(
         customer_id, [media_file_logo_op, media_file_marketing_op])
 
     image_resource_names = list(map(lambda response: response.resource_name,
                                     image_response.results))
 
-    ad_group_ad_service = client.get_service('AdGroupAdService')
-    ad_group_ad_op = client.get_type('AdGroupAdOperation')
+    ad_group_ad_service = client.get_service('AdGroupAdService', version='v4')
+    ad_group_service = client.get_service('AdGroupService', version='v4')
+    ad_group_ad_op = client.get_type('AdGroupAdOperation', version='v4')
     ad_group_ad = ad_group_ad_op.create
     gmail_ad = ad_group_ad.ad.gmail_ad
     gmail_ad.teaser.headline.value = 'Dream'
@@ -77,26 +83,25 @@ def main(client, customer_id, ad_group_id):
     final_url.value = 'http://www.example.com'
     ad_group_ad.ad.name.value = 'Gmail Ad #{}'.format(str(uuid4()))
 
-    ad_group_ad.status = client.get_type('AdGroupAdStatusEnum').PAUSED
-    ad_group_ad.ad_group.value = ad_group_ad_service.ad_group_ad_path(
+    ad_group_ad.status = client.get_type('AdGroupAdStatusEnum',
+                                         version='v4').PAUSED
+    ad_group_ad.ad_group.value = ad_group_service.ad_group_path(
         customer_id, ad_group_id)
 
     try:
         add_gmail_ad_response = ad_group_ad_service.mutate_ad_group_ads(
             customer_id, [ad_group_ad_op])
     except GoogleAdsException as ex:
-        print('Request with ID "{}" failed with status "{}" and includes the '
-              'following errors:'.format(ex.request_id, ex.error.code().name))
+        print(f'Request with ID "{ex.request_id}" failed with status '
+              f'"{ex.error.code().name}" and includes the following errors:')
         for error in ex.failure.errors:
-            print('\tError with message "{}".'.format(error.message))
+            print(f'\tError with message "{error.message}".')
             if error.location:
                 for field_path_element in error.location.field_path_elements:
-                    print('\t\tOn field: {}'.format(
-                        field_path_element.field_name))
+                    print(f'\t\tOn field: {field_path_element.field_name}')
         sys.exit(1)
 
-    print('Created gmail ad {}.'.format(
-        add_gmail_ad_response.results[0].resource_name))
+    print(f'Created gmail ad {add_gmail_ad_response.results[0].resource_name}.')
 
 
 def get_image(url):

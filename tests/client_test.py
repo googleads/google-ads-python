@@ -360,7 +360,7 @@ class GoogleAdsClientTest(FileTestCase):
 
             # Iterate through retrieval of all service clients by name.
             for service_name in service_names:
-                client.get_service(service_name)
+                client.get_service(service_name, version=ver)
 
     def test_get_service_custom_endpoint(self):
         service_name = 'GoogleAdsService'

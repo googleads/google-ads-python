@@ -25,7 +25,7 @@ _DEFAULT_PAGE_SIZE = 1000
 
 def main(client, customer_id, page_size):
     """Main method, to run this code example as a standalone application."""
-    ga_service = client.get_service('GoogleAdsService', version='v3')
+    ga_service = client.get_service('GoogleAdsService', version='v4')
 
     query = ('SELECT asset.name, asset.image_asset.file_size, '
              'asset.image_asset.full_size.width_pixels, '

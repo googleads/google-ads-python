@@ -74,20 +74,20 @@ def _create_budget(client, customer_id):
     """
     # Retrieves a new campaign budget operation object.
     campaign_budget_operation = client.get_type('CampaignBudgetOperation',
-                                                version='v2')
+                                                version='v4')
     # Creates a campaign budget.
     campaign_budget = campaign_budget_operation.create
     campaign_budget.name.value = f'Interplanetary Cruise #{uuid4()}'
     campaign_budget.amount_micros.value = 50000000
     campaign_budget.delivery_method = client.get_type(
-        'BudgetDeliveryMethodEnum', version='v2').STANDARD
+        'BudgetDeliveryMethodEnum', version='v4').STANDARD
     # An App campaign cannot use a shared campaign budget.
     # explicitly_shared must be set to false.
     campaign_budget.explicitly_shared.value = False
 
     # Retrieves the campaign budget service.
     campaign_budget_service = client.get_service('CampaignBudgetService',
-                                                 version='v2')
+                                                 version='v4')
     # Submits the campaign budget operation to add the campaign budget.
     response = campaign_budget_service.mutate_campaign_budgets(
         customer_id, [campaign_budget_operation])
@@ -107,8 +107,8 @@ def _create_campaign(client, customer_id, budget_resource_name):
     Returns:
         A resource_name str for the newly created app campaign.
     """
-    campaign_service = client.get_service('CampaignService', version='v2')
-    campaign_operation = client.get_type('CampaignOperation', version='v2')
+    campaign_service = client.get_service('CampaignService', version='v4')
+    campaign_operation = client.get_type('CampaignOperation', version='v4')
     campaign = campaign_operation.create
     campaign.name.value = f'Interplanetary Cruise App #{uuid4()}'
     campaign.campaign_budget.value = budget_resource_name
@@ -116,14 +116,14 @@ def _create_campaign(client, customer_id, budget_resource_name):
     # prevent the ads from immediately serving. Set to ENABLED once you've
     # added targeting and the ads are ready to serve.
     campaign.status = client.get_type(
-        'CampaignStatusEnum', version='v2').PAUSED
+        'CampaignStatusEnum', version='v4').PAUSED
     # All App campaigns have an advertising_channel_type of
     # MULTI_CHANNEL to reflect the fact that ads from these campaigns are
     # eligible to appear on multiple channels.
     campaign.advertising_channel_type = client.get_type(
-        'AdvertisingChannelTypeEnum', version='v2').MULTI_CHANNEL
+        'AdvertisingChannelTypeEnum', version='v4').MULTI_CHANNEL
     campaign.advertising_channel_sub_type = client.get_type(
-        'AdvertisingChannelSubTypeEnum', version='v2').APP_CAMPAIGN
+        'AdvertisingChannelSubTypeEnum', version='v4').APP_CAMPAIGN
     # Sets the target CPA to $1 / app install.
     #
     # campaign_bidding_strategy is a 'oneof' message so setting target_cpa
@@ -136,11 +136,11 @@ def _create_campaign(client, customer_id, budget_resource_name):
     campaign.app_campaign_setting.app_id.value = (
         'com.google.android.apps.adwords')
     campaign.app_campaign_setting.app_store = client.get_type(
-        'AppCampaignAppStoreEnum', version='v2').GOOGLE_APP_STORE
+        'AppCampaignAppStoreEnum', version='v4').GOOGLE_APP_STORE
     # Optimize this campaign for getting new users for your app.
     campaign.app_campaign_setting.bidding_strategy_goal_type = (client
         .get_type('AppCampaignBiddingStrategyGoalTypeEnum',
-                  version='v2').OPTIMIZE_INSTALLS_TARGET_INSTALL_COST)
+                  version='v4').OPTIMIZE_INSTALLS_TARGET_INSTALL_COST)
     # Optional fields
     campaign.start_date.value = (datetime.now() +
         timedelta(1)).strftime('%Y%m%d')
@@ -152,7 +152,7 @@ def _create_campaign(client, customer_id, budget_resource_name):
     # your campaign on people who are most likely to complete the
     # corresponding in-app actions.
     # selective_optimization1 = (client.get_type('StringValue',
-    #                            version='v2'))
+    #                            version='v4'))
     # selective_optimization1.value = (
     #     'INSERT_CONVERSION_ACTION_RESOURCE_NAME_HERE')
     # campaign.selective_optimization.conversion_actions.extend(
@@ -178,15 +178,15 @@ def _set_campaign_targeting_criteria(client, customer_id,
         campaign_resource_name: the campaign to apply targeting to
     """
     campaign_criterion_service = client.get_service(
-        'CampaignCriterionService', version='v2')
+        'CampaignCriterionService', version='v4')
     geo_target_constant_service = client.get_service(
-        'GeoTargetConstantService', version='v2')
+        'GeoTargetConstantService', version='v4')
     language_constant_service = client.get_service(
-        'LanguageConstantService', version='v2')
+        'LanguageConstantService', version='v4')
     location_type = client.get_type(
-        'CriterionTypeEnum', version='v2').LOCATION
+        'CriterionTypeEnum', version='v4').LOCATION
     language_type = client.get_type(
-        'CriterionTypeEnum', version='v2').LANGUAGE
+        'CriterionTypeEnum', version='v4').LANGUAGE
 
     campaign_criterion_operations = []
     # Creates the location campaign criteria.
@@ -197,7 +197,7 @@ def _set_campaign_targeting_criteria(client, customer_id,
     for location_id in ['21137',  # California
                         '2484']:  # Mexico
         campaign_criterion_operation = client.get_type(
-            'CampaignCriterionOperation', version='v2')
+            'CampaignCriterionOperation', version='v4')
         campaign_criterion = campaign_criterion_operation.create
         campaign_criterion.campaign.value = campaign_resource_name
         campaign_criterion.type = location_type
@@ -209,7 +209,7 @@ def _set_campaign_targeting_criteria(client, customer_id,
     for language_id in ['1000',   # English
                         '1003']:  # Spanish
         campaign_criterion_operation = client.get_type(
-            'CampaignCriterionOperation', version='v2')
+            'CampaignCriterionOperation', version='v4')
         campaign_criterion = campaign_criterion_operation.create
         campaign_criterion.campaign.value = campaign_resource_name
         campaign_criterion.type = language_type
@@ -235,18 +235,18 @@ def _create_ad_group(client, customer_id, campaign_resource_name):
     Returns:
         A resource_name str for the newly created ad group.
     """
-    ad_group_service = client.get_service('AdGroupService', version='v2')
+    ad_group_service = client.get_service('AdGroupService', version='v4')
 
     # Creates the ad group.
     # Note that the ad group type must not be set.
     # Since the advertising_channel_sub_type is APP_CAMPAIGN,
     #   1- you cannot override bid settings at the ad group level.
     #   2- you cannot add ad group criteria.
-    ad_group_operation = client.get_type('AdGroupOperation', version='v2')
+    ad_group_operation = client.get_type('AdGroupOperation', version='v4')
     ad_group = ad_group_operation.create
     ad_group.name.value = f'Earth to Mars cruises {uuid4()}'
     ad_group.status = client.get_type(
-        'AdGroupStatusEnum', version='v2').ENABLED
+        'AdGroupStatusEnum', version='v4').ENABLED
     ad_group.campaign.value = campaign_resource_name
 
     ad_group_response = ad_group_service.mutate_ad_groups(
@@ -266,11 +266,11 @@ def _create_app_ad(client, customer_id, ad_group_resource_name):
         ad_group_resource_name: the ad group where the ad will be added.
     """
     # Creates the ad group ad.
-    ad_group_ad_service = client.get_service('AdGroupAdService', version='v2')
-    ad_group_ad_operation = client.get_type('AdGroupAdOperation', version='v2')
+    ad_group_ad_service = client.get_service('AdGroupAdService', version='v4')
+    ad_group_ad_operation = client.get_type('AdGroupAdOperation', version='v4')
     ad_group_ad = ad_group_ad_operation.create
     ad_group_ad.status = client.get_type(
-        'AdGroupAdStatusEnum', version='v2').ENABLED
+        'AdGroupAdStatusEnum', version='v4').ENABLED
     ad_group_ad.ad_group.value = ad_group_resource_name
     # ad_data is a 'oneof' message so setting app_ad
     # is mutually exclusive with ad data fields such as
@@ -293,7 +293,7 @@ def _create_app_ad(client, customer_id, ad_group_resource_name):
 
 
 def _create_ad_text_asset(client, text):
-    ad_text_asset = client.get_type('AdTextAsset', version='v2')
+    ad_text_asset = client.get_type('AdTextAsset', version='v4')
     ad_text_asset.text.value = text
     return ad_text_asset
 

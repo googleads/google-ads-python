@@ -25,7 +25,7 @@ _DEFAULT_PAGE_SIZE = 1000
 
 def main(client, customer_id, page_size):
     """Main method, to run this code example as a standalone application."""
-    ga_service = client.get_service('GoogleAdsService', version='v3')
+    ga_service = client.get_service('GoogleAdsService', version='v4')
 
     # Creates a query that will retrieve all video and image files.
     query = ('SELECT media_file.id, media_file.name, media_file.type '
@@ -34,7 +34,7 @@ def main(client, customer_id, page_size):
     # Issues a search request by specifying page size.
     results = ga_service.search(customer_id, query=query, page_size=page_size)
 
-    media_type_enum = client.get_type('MediaTypeEnum', version='v3').MediaType
+    media_type_enum = client.get_type('MediaTypeEnum', version='v4').MediaType
 
     # Iterates over all rows and prints the information about each media file.
     try:

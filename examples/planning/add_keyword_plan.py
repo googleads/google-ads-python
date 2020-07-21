@@ -267,7 +267,7 @@ def create_keyword_plan_negative_campaign_keywords(client, customer_id,
     keyword_plan_campaign_keyword.keyword_plan_campaign.value = plan_campaign
     keyword_plan_campaign_keyword.negative.value = True
 
-    keyword_plan_negative_keyword_service = client.get_service(
+    keyword_plan_campaign_keyword_service = client.get_service(
         'KeywordPlanCampaignKeywordService', version='v4')
     response = (keyword_plan_campaign_keyword_service
                     .mutate_keyword_plan_campaign_keywords(

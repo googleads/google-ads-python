@@ -1,3 +1,8 @@
+* 7.0.0
+- Google Ads v5_0 release
+- Updates to examples to support addition of field presence on certain
+  resources, changing from accessing wrapper types to accessing primitives.
+
 * 6.0.0
 - Google Ads v4_0 release
 - Deprecate v1_0

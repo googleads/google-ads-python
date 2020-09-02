@@ -24,18 +24,22 @@ from grpc import UnaryUnaryClientInterceptor, UnaryStreamClientInterceptor
 from .interceptor import Interceptor
 
 
-class MetadataInterceptor(Interceptor, UnaryUnaryClientInterceptor,
-                          UnaryStreamClientInterceptor):
+class MetadataInterceptor(
+    Interceptor, UnaryUnaryClientInterceptor, UnaryStreamClientInterceptor
+):
     """An interceptor that appends custom metadata to requests."""
 
     def __init__(self, developer_token, login_customer_id):
-        self.developer_token_meta = ('developer-token', developer_token)
+        self.developer_token_meta = ("developer-token", developer_token)
         self.login_customer_id_meta = (
-            ('login-customer-id', login_customer_id) if login_customer_id
-            else None)
+            ("login-customer-id", login_customer_id)
+            if login_customer_id
+            else None
+        )
 
-    def _update_client_call_details_metadata(self, client_call_details,
-                                             metadata):
+    def _update_client_call_details_metadata(
+        self, client_call_details, metadata
+    ):
         """Updates the client call details with additional metadata.
 
         Args:
@@ -47,8 +51,11 @@ class MetadataInterceptor(Interceptor, UnaryUnaryClientInterceptor,
             from the GoogleAdsClient.
         """
         client_call_details = self.get_client_call_details_instance(
-            client_call_details.method, client_call_details.timeout, metadata,
-            client_call_details.credentials)
+            client_call_details.method,
+            client_call_details.timeout,
+            metadata,
+            client_call_details.credentials,
+        )
 
         return client_call_details
 
@@ -76,8 +83,8 @@ class MetadataInterceptor(Interceptor, UnaryUnaryClientInterceptor,
             metadata.append(self.login_customer_id_meta)
 
         client_call_details = self._update_client_call_details_metadata(
-            client_call_details,
-            metadata)
+            client_call_details, metadata
+        )
 
         return continuation(client_call_details, request)
 
@@ -98,9 +105,9 @@ class MetadataInterceptor(Interceptor, UnaryUnaryClientInterceptor,
         """
         return self._intercept(continuation, client_call_details, request)
 
-
-    def intercept_unary_stream(self, continuation, client_call_details,
-                               request):
+    def intercept_unary_stream(
+        self, continuation, client_call_details, request
+    ):
         """Intercepts and appends custom metadata to Unary-Stream requests.
 
         Overrides abstract method defined in grpc.UnaryStreamClientInterceptor.

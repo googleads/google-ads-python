@@ -47,7 +47,7 @@ def main(client, customer_id, campaign_id, ad_group_id):
         campaign_id: a campaign ID str.
         ad_group_id: an ad group ID str.
     """
-    dsa_page_url_label = 'discounts'
+    dsa_page_url_label = "discounts"
 
     try:
         # Get the page feed resource name. This code example creates a new feed,
@@ -62,24 +62,30 @@ def main(client, customer_id, campaign_id, ad_group_id):
         create_feed_items(client, customer_id, feed_details, dsa_page_url_label)
 
         # Associate the page feed with the campaign.
-        update_campaign_dsa_setting(client, customer_id, campaign_id,
-                                    feed_details)
-        ad_group_service = client.get_service('AdGroupService', version='v4')
-        ad_group_resource_name = ad_group_service.ad_group_path(customer_id,
-                                                                ad_group_id)
+        update_campaign_dsa_setting(
+            client, customer_id, campaign_id, feed_details
+        )
+        ad_group_service = client.get_service("AdGroupService", version="v5")
+        ad_group_resource_name = ad_group_service.ad_group_path(
+            customer_id, ad_group_id
+        )
 
         # Optional: Target web pages matching the feed's label in the ad group.
-        add_dsa_targeting(client, customer_id, ad_group_resource_name,
-                          dsa_page_url_label)
+        add_dsa_targeting(
+            client, customer_id, ad_group_resource_name, dsa_page_url_label
+        )
     except GoogleAdsException as ex:
-        print('Request with ID "{}" failed with status "{}" and includes the '
-              'following errors:'.format(ex.request_id, ex.error.code().name))
+        print(
+            'Request with ID "{}" failed with status "{}" and includes the '
+            "following errors:".format(ex.request_id, ex.error.code().name)
+        )
         for error in ex.failure.errors:
             print('\tError with message "{}".'.format(error.message))
             if error.location:
                 for field_path_element in error.location.field_path_elements:
-                    print('\t\tOn field: {}'.format(
-                        field_path_element.field_name))
+                    print(
+                        "\t\tOn field: {}".format(field_path_element.field_name)
+                    )
         sys.exit(1)
 
 
@@ -94,26 +100,29 @@ def create_feed(client, customer_id):
         A FeedDetails instance with information about the newly created feed.
     """
     # Retrieve a new feed operation object.
-    feed_operation = client.get_type('FeedOperation', version='v4')
+    feed_operation = client.get_type("FeedOperation", version="v5")
     # Create a new feed.
     feed = feed_operation.create
-    feed.name.value = 'DSA Feed #{}'.format(uuid.uuid4())
-    feed.origin = client.get_type('FeedOriginEnum', version='v4').USER
+    feed.name.value = "DSA Feed #{}".format(uuid.uuid4())
+    feed.origin = client.get_type("FeedOriginEnum", version="v5").USER
 
-    feed_attribute_type_enum = client.get_type('FeedAttributeTypeEnum',
-                                               version='v4')
+    feed_attribute_type_enum = client.get_type(
+        "FeedAttributeTypeEnum", version="v5"
+    )
 
     # Create the feed's attributes.
-    feed_attribute_url = feed.attributes.add()
+    feed_attribute_url = client.get_type("FeedAttribute", version="v5")
     feed_attribute_url.type = feed_attribute_type_enum.URL_LIST
-    feed_attribute_url.name.value = 'Page URL'
+    feed_attribute_url.name.value = "Page URL"
+    feed.attributes.append(feed_attribute_url)
 
-    feed_attribute_label = feed.attributes.add()
+    feed_attribute_label = client.get_type("FeedAttribute", version="v5")
     feed_attribute_label.type = feed_attribute_type_enum.STRING_LIST
-    feed_attribute_label.name.value = 'Label'
+    feed_attribute_label.name.value = "Label"
+    feed.attributes.append(feed_attribute_label)
 
     # Retrieve the feed service.
-    feed_service = client.get_service('FeedService', version='v4')
+    feed_service = client.get_service("FeedService", version="v5")
     # Send the feed operation and add the feed.
     response = feed_service.mutate_feeds(customer_id, [feed_operation])
 
@@ -132,7 +141,7 @@ def get_feed_details(client, customer_id, resource_name):
         A FeedDetails instance with information about the feed that was
         retrieved in the search request.
     """
-    query = '''
+    query = """
         SELECT
             feed.attributes
         FROM
@@ -140,9 +149,11 @@ def get_feed_details(client, customer_id, resource_name):
         WHERE
             feed.resource_name = "{}"
         LIMIT 1
-    '''.format(resource_name)
+    """.format(
+        resource_name
+    )
 
-    ga_service = client.get_service('GoogleAdsService', version='v4')
+    ga_service = client.get_service("GoogleAdsService", version="v5")
     response = ga_service.search(customer_id, query=query)
 
     # Maps specific fields in each row in the response to a dict. This would
@@ -150,11 +161,13 @@ def get_feed_details(client, customer_id, resource_name):
     # only one row will be returned.
     for row in response:
         attribute_lookup = {
-            attribute.name.value:
-                attribute.id.value for attribute in row.feed.attributes}
+            attribute.name.value: attribute.id.value
+            for attribute in row.feed.attributes
+        }
 
-    return FeedDetails(resource_name, attribute_lookup['Page URL'],
-                       attribute_lookup['Label'])
+    return FeedDetails(
+        resource_name, attribute_lookup["Page URL"], attribute_lookup["Label"]
+    )
 
 
 def create_feed_mapping(client, customer_id, feed_details):
@@ -166,35 +179,43 @@ def create_feed_mapping(client, customer_id, feed_details):
         feed_details: a FeedDetails instance with feed attribute information
     """
     # Retrieve a new feed mapping operation object.
-    feed_mapping_operation = client.get_type('FeedMappingOperation',
-                                             version='v4')
+    feed_mapping_operation = client.get_type(
+        "FeedMappingOperation", version="v5"
+    )
     # Create a new feed mapping.
     feed_mapping = feed_mapping_operation.create
     feed_mapping.criterion_type = client.get_type(
-        'FeedMappingCriterionTypeEnum', version='v4').DSA_PAGE_FEED
+        "FeedMappingCriterionTypeEnum", version="v5"
+    ).DSA_PAGE_FEED
     feed_mapping.feed.value = feed_details.resource_name
-    dsa_page_feed_field_enum = client.get_type('DsaPageFeedCriterionFieldEnum',
-                                               version='v4')
+    dsa_page_feed_field_enum = client.get_type(
+        "DsaPageFeedCriterionFieldEnum", version="v5"
+    )
 
-    url_field_mapping = feed_mapping.attribute_field_mappings.add()
+    url_field_mapping = client.get_type("AttributeFieldMapping", version="v5")
     url_field_mapping.feed_attribute_id.value = feed_details.url_attribute_id
     url_field_mapping.dsa_page_feed_field = dsa_page_feed_field_enum.PAGE_URL
+    feed_mapping.attribute_field_mappings.append(url_field_mapping)
 
-    label_field_mapping = feed_mapping.attribute_field_mappings.add()
+    label_field_mapping = client.get_type("AttributeFieldMapping", version="v5")
     label_field_mapping.feed_attribute_id.value = (
-        feed_details.label_attribute_id)
+        feed_details.label_attribute_id
+    )
     label_field_mapping.dsa_page_feed_field = dsa_page_feed_field_enum.LABEL
+    feed_mapping.attribute_field_mappings.append(label_field_mapping)
 
     # Retrieve the feed mapping service.
-    feed_mapping_service = client.get_service('FeedMappingService',
-                                              version='v4')
+    feed_mapping_service = client.get_service(
+        "FeedMappingService", version="v5"
+    )
     # Submit the feed mapping operation and add the feed mapping.
     response = feed_mapping_service.mutate_feed_mappings(
-        customer_id, [feed_mapping_operation])
+        customer_id, [feed_mapping_operation]
+    )
     resource_name = response.results[0].resource_name
 
     # Display the results.
-    print('Feed mapping created with resource_name: # {}'.format(resource_name))
+    print("Feed mapping created with resource_name: # {}".format(resource_name))
 
 
 def create_feed_items(client, customer_id, feed_details, label):
@@ -208,26 +229,38 @@ def create_feed_items(client, customer_id, feed_details, label):
     """
     # See https://support.google.com/adwords/answer/7166527 for page feed URL
     # recommendations and rules.
-    urls = ["http://www.example.com/discounts/rental-cars",
+    urls = [
+        "http://www.example.com/discounts/rental-cars",
         "http://www.example.com/discounts/hotel-deals",
-        "http://www.example.com/discounts/flight-deals"]
+        "http://www.example.com/discounts/flight-deals",
+    ]
 
     def map_feed_urls(url):
-        feed_item_operation = client.get_type('FeedItemOperation', version='v4')
+        feed_item_operation = client.get_type("FeedItemOperation", version="v5")
         feed_item = feed_item_operation.create
         feed_item.feed.value = feed_details.resource_name
 
-        url_attribute_value = feed_item.attribute_values.add()
+        url_attribute_value = client.get_type(
+            "FeedItemAttributeValue", version="v5"
+        )
         url_attribute_value.feed_attribute_id.value = (
-            feed_details.url_attribute_id)
-        url_string_val = url_attribute_value.string_values.add()
+            feed_details.url_attribute_id
+        )
+        url_string_val = client.get_type("StringValue", version="v5")
         url_string_val.value = url
+        url_attribute_value.string_values.append(url_string_val)
+        feed_item.attribute_values.append(url_attribute_value)
 
-        label_attribute_value = feed_item.attribute_values.add()
+        label_attribute_value = client.get_type(
+            "FeedItemAttributeValue", version="v5"
+        )
         label_attribute_value.feed_attribute_id.value = (
-            feed_details.label_attribute_id)
-        label_string_val = label_attribute_value.string_values.add()
+            feed_details.label_attribute_id
+        )
+        label_string_val = client.get_type("StringValue", version="v5")
         label_string_val.value = label
+        label_attribute_value.string_values.append(label_string_val)
+        feed_item.attribute_values.append(label_attribute_value)
 
         return feed_item_operation
 
@@ -235,15 +268,19 @@ def create_feed_items(client, customer_id, feed_details, label):
     feed_item_operations = list(map(map_feed_urls, urls))
 
     # Retrieve the feed item service.
-    feed_item_service = client.get_service('FeedItemService', version='v4')
+    feed_item_service = client.get_service("FeedItemService", version="v5")
     # Submit the feed item operations and add the feed items.
-    response = feed_item_service.mutate_feed_items(customer_id,
-                                                   feed_item_operations)
+    response = feed_item_service.mutate_feed_items(
+        customer_id, feed_item_operations
+    )
 
     # Display the results.
     for feed_item in response.results:
-        print('Created feed item with resource_name: # {}'.format(
-            feed_item.resource_name))
+        print(
+            "Created feed item with resource_name: # {}".format(
+                feed_item.resource_name
+            )
+        )
 
 
 def update_campaign_dsa_setting(client, customer_id, campaign_id, feed_details):
@@ -255,53 +292,73 @@ def update_campaign_dsa_setting(client, customer_id, campaign_id, feed_details):
         campaign_id: a campaign ID str;
         feed_details: a FeedDetails instance with feed attribute information.
     """
-    query = '''
+    query = """
         SELECT
-            campaign.id,
-            campaign.name,
-            campaign.dynamic_search_ads_setting.domain_name
+          campaign.id,
+          campaign.name,
+          campaign.dynamic_search_ads_setting.domain_name,
+          campaign.dynamic_search_ads_setting.language_code,
+          campaign.dynamic_search_ads_setting.use_supplied_urls_only
         FROM
-            campaign
+          campaign
         WHERE
-            campaign.id = {}
+          campaign.id = {}
         LIMIT 1
-    '''.format(campaign_id)
+    """.format(
+        campaign_id
+    )
 
-    ga_service = client.get_service('GoogleAdsService', version='v4')
+    ga_service = client.get_service("GoogleAdsService", version="v5")
     results = ga_service.search(customer_id, query=query)
 
+    campaign = None
     for row in results:
         campaign = row.campaign
 
     if not campaign:
-        raise ValueError('Campaign with id #{} not found'.format(campaign_id))
+        raise ValueError("Campaign with id #{} not found".format(campaign_id))
 
     if not campaign.dynamic_search_ads_setting.domain_name:
         raise ValueError(
-            'Campaign id #{} is not set up for Dynamic Search Ads.'.format(
-                campaign_id))
+            "Campaign id #{} is not set up for Dynamic Search Ads.".format(
+                campaign_id
+            )
+        )
 
     # Retrieve a new campaign operation
-    campaign_operation = client.get_type('CampaignOperation', version='v4')
+    campaign_operation = client.get_type("CampaignOperation", version="v5")
     # Copy the retrieved campaign onto the new campaign operation.
     campaign_operation.update.CopyFrom(campaign)
     updated_campaign = campaign_operation.update
-    feed = updated_campaign.dynamic_search_ads_setting.feeds.add()
     # Use a page feed to specify precisely which URLs to use with your Dynamic
     # Search ads.
-    feed.value = feed_details.resource_name
-    field_mask = protobuf_helpers.field_mask(campaign, updated_campaign)
+    updated_campaign.dynamic_search_ads_setting.feeds.append(
+        feed_details.resource_name
+    )
+    # Normally we would pass in "campaign" as the first parameter to generate
+    # a field mask that represents the difference between the original campaign
+    # object and the updated one, which would be a list containing
+    # "resource_name" and "dynamic_search_ads_setting.feeds."
+
+    # However, for DSA campaigns, the API currently requires "domain_name" and
+    # "language_code" fields to be present in the update request, regardless of
+    # whether they are being updated or not. This behavior is not consistent
+    # with the rest of the API. As a workaround, we pass None instead, to
+    # generate a field mask that contains these two fields, even though they are
+    # not being explicitly changed.
+    field_mask = protobuf_helpers.field_mask(None, updated_campaign)
     campaign_operation.update_mask.CopyFrom(field_mask)
 
     # Retrieve the campaign service.
-    campaign_service = client.get_service('CampaignService', version='v4')
+    campaign_service = client.get_service("CampaignService", version="v5")
     # Submit the campaign operation and update the campaign.
-    response = campaign_service.mutate_campaigns(customer_id,
-                                                 [campaign_operation])
+    response = campaign_service.mutate_campaigns(
+        customer_id, [campaign_operation]
+    )
     resource_name = response.results[0].resource_name
 
     # Display the results.
-    print('Updated campaign #{}'.format(resource_name))
+    print("Updated campaign #{}".format(resource_name))
 
 
 def add_dsa_targeting(client, customer_id, ad_group_resource_name, label):
@@ -315,47 +372,64 @@ def add_dsa_targeting(client, customer_id, ad_group_resource_name, label):
     """
     # Retrieve a new ad group criterion operation object.
     ad_group_criterion_operation = client.get_type(
-        'AdGroupCriterionOperation', version='v4')
+        "AdGroupCriterionOperation", version="v5"
+    )
     # Create a new ad group criterion.
     ad_group_criterion = ad_group_criterion_operation.create
-    ad_group_criterion.ad_group.value = ad_group_resource_name
+    ad_group_criterion.ad_group = ad_group_resource_name
     # Set the custom bid for this criterion.
-    ad_group_criterion.cpc_bid_micros.value = 1500000
-    ad_group_criterion.webpage.criterion_name.value = 'Test criterion'
+    ad_group_criterion.cpc_bid_micros = 1500000
+    ad_group_criterion.webpage.criterion_name = "Test criterion"
     # Add a condition for label=specified_label_name
     webpage_criterion_info = ad_group_criterion.webpage.conditions.add()
-    webpage_criterion_info.argument.value = label
+    webpage_criterion_info.argument = label
     webpage_criterion_info.operand = client.get_type(
-        'WebpageConditionOperandEnum', version='v4').CUSTOM_LABEL
+        "WebpageConditionOperandEnum", version="v5"
+    ).CUSTOM_LABEL
 
     # Retrieve the ad group criterion service.
-    ad_group_criterion_service = client.get_service('AdGroupCriterionService',
-                                                    version='v4')
+    ad_group_criterion_service = client.get_service(
+        "AdGroupCriterionService", version="v5"
+    )
     response = ad_group_criterion_service.mutate_ad_group_criteria(
-        customer_id, [ad_group_criterion_operation])
+        customer_id, [ad_group_criterion_operation]
+    )
     resource_name = response.results[0].resource_name
 
     # Display the results.
-    print('Created ad group criterion with resource_name: # {}'.format(
-        resource_name))
+    print(
+        "Created ad group criterion with resource_name: # {}".format(
+            resource_name
+        )
+    )
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     # GoogleAdsClient will read the google-ads.yaml configuration file in the
     # home directory if none is specified.
     google_ads_client = GoogleAdsClient.load_from_storage()
 
     parser = argparse.ArgumentParser(
-        description= ('Adds a page feed with URLs for a Dynamic Search Ads '
-                      'Campaign.'))
+        description=(
+            "Adds a page feed with URLs for a Dynamic Search Ads " "Campaign."
+        )
+    )
     # The following argument(s) should be provided to run the example.
-    parser.add_argument('-c', '--customer_id', type=str,
-                        required=True, help='The Google Ads customer ID.')
-    parser.add_argument('-i', '--campaign_id', type=str,
-                        required=True, help='The campaign ID.')
-    parser.add_argument('-a', '--ad_group_id', type=str,
-                        required=True, help='The ad group ID.')
+    parser.add_argument(
+        "-c",
+        "--customer_id",
+        type=str,
+        required=True,
+        help="The Google Ads customer ID.",
+    )
+    parser.add_argument(
+        "-i", "--campaign_id", type=str, required=True, help="The campaign ID."
+    )
+    parser.add_argument(
+        "-a", "--ad_group_id", type=str, required=True, help="The ad group ID."
+    )
     args = parser.parse_args()
 
-    main(google_ads_client, args.customer_id, args.campaign_id,
-         args.ad_group_id)
+    main(
+        google_ads_client, args.customer_id, args.campaign_id, args.ad_group_id
+    )

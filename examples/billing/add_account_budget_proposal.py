@@ -27,31 +27,38 @@ import google.ads.google_ads.client
 
 def main(client, customer_id, billing_setup_id):
     account_budget_proposal_service = client.get_service(
-        'AccountBudgetProposalService')
-    billing_setup_service = client.get_service('BillingSetupService',
-                                               version='v4')
+        "AccountBudgetProposalService"
+    )
+    billing_setup_service = client.get_service(
+        "BillingSetupService", version="v5"
+    )
 
     account_budget_proposal_operation = client.get_type(
-        'AccountBudgetProposalOperation')
+        "AccountBudgetProposalOperation"
+    )
     proposal = account_budget_proposal_operation.create
 
     proposal.proposal_type = client.get_type(
-        'AccountBudgetProposalTypeEnum').CREATE
+        "AccountBudgetProposalTypeEnum"
+    ).CREATE
     proposal.billing_setup.value = billing_setup_service.billing_setup_path(
-        customer_id, billing_setup_id)
-    proposal.proposed_name.value = 'Account Budget Proposal (example)'
+        customer_id, billing_setup_id
+    )
+    proposal.proposed_name.value = "Account Budget Proposal (example)"
 
     # Specify the account budget starts immediately
-    proposal.proposed_start_time_type = client.get_type('TimeTypeEnum',
-                                                        version='v4').NOW
+    proposal.proposed_start_time_type = client.get_type(
+        "TimeTypeEnum", version="v5"
+    ).NOW
     # Alternatively you can specify a specific start time. Refer to the
     # AccountBudgetProposal resource documentation for allowed formats.
     #
     # proposal.proposed_start_date_time = '2020-01-02 03:04:05'
 
     # Specify that the budget runs forever
-    proposal.proposed_end_time_type = client.get_type('TimeTypeEnum',
-                                                      version='v4').FOREVER
+    proposal.proposed_end_time_type = client.get_type(
+        "TimeTypeEnum", version="v5"
+    ).FOREVER
     # Alternatively you can specify a specific end time. Allowed formats are as
     # above.
     #
@@ -65,36 +72,52 @@ def main(client, customer_id, billing_setup_id):
     proposal.proposed_spending_limit_micros.value = 10000
 
     try:
-        account_budget_proposal_response = (
-          account_budget_proposal_service.mutate_account_budget_proposal(
-              customer_id, account_budget_proposal_operation))
+        account_budget_proposal_response = account_budget_proposal_service.mutate_account_budget_proposal(
+            customer_id, account_budget_proposal_operation
+        )
     except google.ads.google_ads.errors.GoogleAdsException as ex:
-        print('Request with ID "%s" failed with status "%s" and includes the '
-              'following errors:' % (ex.request_id, ex.error.code().name))
+        print(
+            'Request with ID "%s" failed with status "%s" and includes the '
+            "following errors:" % (ex.request_id, ex.error.code().name)
+        )
         for error in ex.failure.errors:
             print('\tError with message "%s".' % error.message)
             if error.location:
                 for field_path_element in error.location.field_path_elements:
-                    print('\t\tOn field: %s' % field_path_element.field_name)
+                    print("\t\tOn field: %s" % field_path_element.field_name)
         sys.exit(1)
 
-    print('Created account budget proposal "%s".'
-          % account_budget_proposal_response.result.resource_name)
+    print(
+        'Created account budget proposal "%s".'
+        % account_budget_proposal_response.result.resource_name
+    )
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     # GoogleAdsClient will read the google-ads.yaml configuration file in the
     # home directory if none is specified.
-    google_ads_client = (google.ads.google_ads.client.GoogleAdsClient
-                         .load_from_storage())
+    google_ads_client = (
+        google.ads.google_ads.client.GoogleAdsClient.load_from_storage()
+    )
 
     parser = argparse.ArgumentParser(
-        description='Creates an account budget proposal.')
+        description="Creates an account budget proposal."
+    )
     # The following argument(s) should be provided to run the example.
-    parser.add_argument('-c', '--customer_id', type=str,
-                        required=True, help='The Ads customer ID.')
-    parser.add_argument('-b', '--billing_setup_id', type=str,
-                        required=True, help='The billing setup ID.')
+    parser.add_argument(
+        "-c",
+        "--customer_id",
+        type=str,
+        required=True,
+        help="The Ads customer ID.",
+    )
+    parser.add_argument(
+        "-b",
+        "--billing_setup_id",
+        type=str,
+        required=True,
+        help="The billing setup ID.",
+    )
     args = parser.parse_args()
 
     main(google_ads_client, args.customer_id, args.billing_setup_id)

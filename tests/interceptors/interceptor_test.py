@@ -23,46 +23,48 @@ import grpc
 from google.ads.google_ads.client import _DEFAULT_VERSION as default_version
 from google.ads.google_ads.interceptors.interceptor import Interceptor
 
-errors_path = f'google.ads.google_ads.{default_version}.proto.errors.errors_pb2'
+errors_path = f"google.ads.google_ads.{default_version}.proto.errors.errors_pb2"
 error_protos = import_module(errors_path)
 
 _MOCK_FAILURE_VALUE = b"\n \n\x02\x08\x10\x12\x1aInvalid customer ID '123'."
 
 
 class InterceptorTest(TestCase):
-
     def test_get_request_id_from_metadata(self):
         """Ensures request-id is retrieved from metadata tuple."""
-        mock_metadata = (('request-id', '123456'),)
+        mock_metadata = (("request-id", "123456"),)
         result = Interceptor.get_request_id_from_metadata(mock_metadata)
-        self.assertEqual(result, '123456')
+        self.assertEqual(result, "123456")
 
     def test_get_request_id_no_id(self):
         """Ensures None is returned if metadata does't contain a request ID."""
-        mock_metadata = (('another-key', 'another-val'),)
-        result = (Interceptor.get_request_id_from_metadata(mock_metadata))
+        mock_metadata = (("another-key", "another-val"),)
+        result = Interceptor.get_request_id_from_metadata(mock_metadata)
         self.assertEqual(result, None)
 
     def test_parse_metadata_to_json(self):
         mock_metadata = [
-            ('x-goog-api-client',
-             'gl-python/123 grpc/123 gax/123'),
-            ('developer-token', '0000000000'),
-            ('login-customer-id', '9999999999')]
+            ("x-goog-api-client", "gl-python/123 grpc/123 gax/123"),
+            ("developer-token", "0000000000"),
+            ("login-customer-id", "9999999999"),
+        ]
 
         result = Interceptor.parse_metadata_to_json(mock_metadata)
 
-        self.assertEqual(result, '{\n'
-                                 '  "developer-token": "REDACTED",\n'
-                                 '  "login-customer-id": "9999999999",\n'
-                                 '  "x-goog-api-client": "gl-python/123 '
-                                 'grpc/123 gax/123"\n'
-                                 '}')
+        self.assertEqual(
+            result,
+            "{\n"
+            '  "developer-token": "REDACTED",\n'
+            '  "login-customer-id": "9999999999",\n'
+            '  "x-goog-api-client": "gl-python/123 '
+            'grpc/123 gax/123"\n'
+            "}",
+        )
 
     def test_parse_metadata_to_json_with_none(self):
         mock_metadata = None
         result = Interceptor.parse_metadata_to_json(mock_metadata)
-        self.assertEqual(result, '{}')
+        self.assertEqual(result, "{}")
 
     def test_get_google_ads_failure(self):
         """Obtains the content of a google ads failure from metadata."""
@@ -74,14 +76,14 @@ class InterceptorTest(TestCase):
     def test_get_google_ads_failure_decode_error(self):
         """Returns none if the google ads failure cannot be decoded."""
         interceptor = Interceptor(default_version)
-        mock_failure_value = _MOCK_FAILURE_VALUE + b'1234'
+        mock_failure_value = _MOCK_FAILURE_VALUE + b"1234"
         mock_metadata = ((interceptor._failure_key, mock_failure_value),)
         result = interceptor._get_google_ads_failure(mock_metadata)
         self.assertEqual(result, None)
 
     def test_get_google_ads_failure_no_failure_key(self):
         """Returns None if an error cannot be found in metadata."""
-        mock_metadata = (('another-key', 'another-val'),)
+        mock_metadata = (("another-key", "another-val"),)
         interceptor = Interceptor(default_version)
         result = interceptor._get_google_ads_failure(mock_metadata)
         self.assertEqual(result, None)
@@ -99,14 +101,17 @@ class InterceptorTest(TestCase):
 
     def test_deferred_error_proto_module_load(self):
         """Tests that import_module is called when an API error is received."""
-        with mock.patch('google.ads.google_ads.interceptors.'
-                        'interceptor.import_module') as import_mock:
+        with mock.patch(
+            "google.ads.google_ads.interceptors." "interceptor.import_module"
+        ) as import_mock:
             interceptor = Interceptor(default_version)
             mock_metadata = ((interceptor._failure_key, _MOCK_FAILURE_VALUE),)
             interceptor._get_google_ads_failure(mock_metadata)
-            import_mock.assert_called_once_with('google.ads.google_ads.'
-                                                f'{default_version}.proto.'
-                                                'errors.errors_pb2')
+            import_mock.assert_called_once_with(
+                "google.ads.google_ads."
+                f"{default_version}.proto."
+                "errors.errors_pb2"
+            )
 
     def test_get_error_from_response_does_not_cache_error(self):
         """Ensures errors are not cached across requests.."""
@@ -117,9 +122,12 @@ class InterceptorTest(TestCase):
                 return grpc.StatusCode.INVALID_ARGUMENT
 
             def trailing_metadata(self):
-                return ((
-                    interceptor._failure_key,
-                    b"\n \n\x02\x08\x10\x12\x1aInvalid customer ID '123'."),)
+                return (
+                    (
+                        interceptor._failure_key,
+                        b"\n \n\x02\x08\x10\x12\x1aInvalid customer ID '123'.",
+                    ),
+                )
 
             def exception(self):
                 return self

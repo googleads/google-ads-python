@@ -27,31 +27,34 @@ import google.ads.google_ads.client
 
 
 def main(client):
-    customer_service = client.get_service('CustomerService', version='v4')
+    customer_service = client.get_service("CustomerService", version="v5")
 
     try:
         accessible_customers = customer_service.list_accessible_customers()
         result_total = len(accessible_customers.resource_names)
-        print('Total results: %i' % result_total)
+        print("Total results: %i" % result_total)
 
         resource_names = accessible_customers.resource_names
         for resource_name in resource_names:
             print('Customer resource name: "%s"' % resource_name)
     except google.ads.google_ads.errors.GoogleAdsException as ex:
-        print('Request with ID "%s" failed with status "%s" and includes the '
-              'following errors:' % (ex.request_id, ex.error.code().name))
+        print(
+            'Request with ID "%s" failed with status "%s" and includes the '
+            "following errors:" % (ex.request_id, ex.error.code().name)
+        )
         for error in ex.failure.errors:
             print('\tError with message "%s".' % error.message)
             if error.location:
                 for field_path_element in error.location.field_path_elements:
-                    print('\t\tOn field: %s' % field_path_element.field_name)
+                    print("\t\tOn field: %s" % field_path_element.field_name)
         sys.exit(1)
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     # GoogleAdsClient will read the google-ads.yaml configuration file in the
     # home directory if none is specified.
-    google_ads_client = (google.ads.google_ads.client.GoogleAdsClient
-                         .load_from_storage())
+    google_ads_client = (
+        google.ads.google_ads.client.GoogleAdsClient.load_from_storage()
+    )
 
     main(google_ads_client)

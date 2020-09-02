@@ -22,6 +22,7 @@ from google.ads.google_ads.client import GoogleAdsClient
 from google.ads.google_ads.errors import GoogleAdsException
 from google.ads.google_ads.util import ResourceName
 
+
 def main(client, customer_id, ad_group_id, criterion_id):
     """Demonstrates how to set ad parameters on an ad group criterion.
 
@@ -31,38 +32,48 @@ def main(client, customer_id, ad_group_id, criterion_id):
         ad_group_id: An ad group ID str.
         criterion_id: A criterion ID str.
     """
-    ad_group_criterion_service = client.get_service('AdGroupCriterionService',
-                                                    version='v4')
+    ad_group_criterion_service = client.get_service(
+        "AdGroupCriterionService", version="v5"
+    )
     # Gets the resource name of the ad group criterion to be used.
     resource_name = ad_group_criterion_service.ad_group_criteria_path(
-        customer_id, ResourceName.format_composite(ad_group_id, criterion_id))
+        customer_id, ResourceName.format_composite(ad_group_id, criterion_id)
+    )
 
     operations = []
-    operations.append(create_ad_parameter(client, resource_name, 1, '100'))
-    operations.append(create_ad_parameter(client, resource_name, 2, '$40'))
+    operations.append(create_ad_parameter(client, resource_name, 1, "100"))
+    operations.append(create_ad_parameter(client, resource_name, 2, "$40"))
 
-    ad_parameter_service = client.get_service('AdParameterService',
-                                              version='v4')
+    ad_parameter_service = client.get_service(
+        "AdParameterService", version="v5"
+    )
 
     # Add the ad parameter.
     try:
-        response = ad_parameter_service.mutate_ad_parameters(customer_id,
-                                                             operations)
+        response = ad_parameter_service.mutate_ad_parameters(
+            customer_id, operations
+        )
     except GoogleAdsException as ex:
-        print('Request with ID "%s" failed with status "%s" and includes the '
-              'following errors:' % (ex.request_id, ex.error.code().name))
+        print(
+            'Request with ID "%s" failed with status "%s" and includes the '
+            "following errors:" % (ex.request_id, ex.error.code().name)
+        )
         for error in ex.failure.errors:
             print('\tError with message "%s".' % error.message)
             if error.location:
                 for field_path_element in error.location.field_path_elements:
-                    print('\t\tOn field: %s' % field_path_element.field_name)
+                    print("\t\tOn field: %s" % field_path_element.field_name)
         sys.exit(1)
     else:
-        print('Set {} ad parameters:'.format(len(response.results)))
+        print("Set {} ad parameters:".format(len(response.results)))
 
         for result in response.results:
-            print('Set ad parameter with resource_name: {}'.format(
-                result.resource_name))
+            print(
+                "Set ad parameter with resource_name: {}".format(
+                    result.resource_name
+                )
+            )
+
 
 def create_ad_parameter(client, resource_name, parameter_index, insertion_text):
     """Creates a new ad parameter create operation and returns it.
@@ -72,7 +83,7 @@ def create_ad_parameter(client, resource_name, parameter_index, insertion_text):
 
     Restrictions apply to the value of the "insertion_text". For more
     information, see the field documentation in the AdParameter class located
-    here: https://developers.google.com/google-ads/api/fields/v4/ad_parameter#ad_parameterinsertion_text
+    here: https://developers.google.com/google-ads/api/fields/latest/ad_parameter#ad_parameterinsertion_text
 
     Args:
         client: An initialized GoogleAdsClient instance.
@@ -82,31 +93,44 @@ def create_ad_parameter(client, resource_name, parameter_index, insertion_text):
 
     Returns: A new AdParamterOperation message class instance.
     """
-    ad_param_operation = client.get_type('AdParameterOperation', version='v4')
+    ad_param_operation = client.get_type("AdParameterOperation", version="v5")
     ad_param = ad_param_operation.create
-    ad_param.ad_group_criterion.value = resource_name
-    ad_param.parameter_index.value = parameter_index
-    ad_param.insertion_text.value = insertion_text
+    ad_param.ad_group_criterion = resource_name
+    ad_param.parameter_index = parameter_index
+    ad_param.insertion_text = insertion_text
     return ad_param_operation
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     # GoogleAdsClient will read the google-ads.yaml configuration file in the
     # home directory if none is specified.
     google_ads_client = GoogleAdsClient.load_from_storage()
 
     # Initializes a command line argument parser.
     parser = argparse.ArgumentParser(
-        description='Adds an ad group for specified customer and campaign id.')
+        description="Adds an ad group for specified customer and campaign id."
+    )
 
     # The following argument(s) should be provided to run the example.
-    parser.add_argument('-c', '--customer_id', type=str,
-                        required=True, help='The Google Ads customer ID.')
-    parser.add_argument('-a', '--ad_group_id', type=str,
-                        required=True, help='The ad group ID.')
-    parser.add_argument('-k', '--criterion_id', type=str,
-                        required=True, help='The criterion ID.')
+    parser.add_argument(
+        "-c",
+        "--customer_id",
+        type=str,
+        required=True,
+        help="The Google Ads customer ID.",
+    )
+    parser.add_argument(
+        "-a", "--ad_group_id", type=str, required=True, help="The ad group ID."
+    )
+    parser.add_argument(
+        "-k",
+        "--criterion_id",
+        type=str,
+        required=True,
+        help="The criterion ID.",
+    )
     args = parser.parse_args()
 
-    main(google_ads_client, args.customer_id, args.ad_group_id,
-         args.criterion_id)
+    main(
+        google_ads_client, args.customer_id, args.ad_group_id, args.criterion_id
+    )

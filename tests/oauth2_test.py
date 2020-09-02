@@ -20,13 +20,12 @@ from google.ads.google_ads import oauth2
 
 
 class OAuth2Tests(TestCase):
-
     def setUp(self):
-        self.client_id = 'client_id_123456789'
-        self.client_secret = 'client_secret_987654321'
-        self.refresh_token = 'refresh'
-        self.path_to_private_key_file = '/path/to/file'
-        self.subject = 'test@test.com'
+        self.client_id = "client_id_123456789"
+        self.client_secret = "client_secret_987654321"
+        self.refresh_token = "refresh"
+        self.path_to_private_key_file = "/path/to/file"
+        self.subject = "test@test.com"
         self.token_uri = oauth2._DEFAULT_TOKEN_URI
         self.scopes = oauth2._SERVICE_ACCOUNT_SCOPES
 
@@ -34,23 +33,21 @@ class OAuth2Tests(TestCase):
         mock_credentials = mock.Mock()
         mock_request = mock.Mock()
         with mock.patch.object(
-            oauth2,
-            'InstalledAppCredentials',
-            return_value=mock_credentials
+            oauth2, "InstalledAppCredentials", return_value=mock_credentials
         ) as mock_initializer, mock.patch.object(
-            oauth2,
-            'Request',
-            return_value = mock_request
+            oauth2, "Request", return_value=mock_request
         ) as mock_request_class:
             result = oauth2.get_installed_app_credentials(
-                self.client_id, self.client_secret, self.refresh_token)
+                self.client_id, self.client_secret, self.refresh_token
+            )
 
             mock_initializer.assert_called_once_with(
                 None,
                 client_id=self.client_id,
                 client_secret=self.client_secret,
                 refresh_token=self.refresh_token,
-                token_uri=self.token_uri)
+                token_uri=self.token_uri,
+            )
             mock_request_class.assert_called_once()
             result.refresh.assert_called_once_with(mock_request)
 
@@ -59,59 +56,57 @@ class OAuth2Tests(TestCase):
         mock_request = mock.Mock()
         with mock.patch.object(
             oauth2.ServiceAccountCreds,
-            'from_service_account_file',
-            return_value=mock_credentials
+            "from_service_account_file",
+            return_value=mock_credentials,
         ) as mock_initializer, mock.patch.object(
-            oauth2,
-            'Request',
-            return_value = mock_request
+            oauth2, "Request", return_value=mock_request
         ) as mock_request_class:
             result = oauth2.get_service_account_credentials(
-                self.path_to_private_key_file, self.subject)
+                self.path_to_private_key_file, self.subject
+            )
 
             mock_initializer.assert_called_once_with(
                 self.path_to_private_key_file,
                 subject=self.subject,
-                scopes=self.scopes)
+                scopes=self.scopes,
+            )
             mock_request_class.assert_called_once()
             result.refresh.assert_called_once_with(mock_request)
 
     def test_get_credentials_installed_application(self):
         mock_config = {
-            'client_id': self.client_id,
-            'client_secret': self.client_secret,
-            'refresh_token': self.refresh_token}
+            "client_id": self.client_id,
+            "client_secret": self.client_secret,
+            "refresh_token": self.refresh_token,
+        }
 
         with mock.patch.object(
-            oauth2,
-            'get_installed_app_credentials',
-            return_value=None
+            oauth2, "get_installed_app_credentials", return_value=None
         ) as mock_initializer:
             oauth2.get_credentials(mock_config)
             mock_initializer.assert_called_once_with(
-                self.client_id, self.client_secret, self.refresh_token)
+                self.client_id, self.client_secret, self.refresh_token
+            )
 
     def test_get_credentials_installed_application_bad_config(self):
         # using a config that is missing the refresh_token key
         mock_config = {
-            'client_id': self.client_id,
-            'client_secret': self.client_secret}
+            "client_id": self.client_id,
+            "client_secret": self.client_secret,
+        }
 
-        self.assertRaises(
-            ValueError,
-            oauth2.get_credentials,
-            mock_config)
+        self.assertRaises(ValueError, oauth2.get_credentials, mock_config)
 
     def test_get_credentials_installed_application(self):
         mock_config = {
-            'path_to_private_key_file': self.path_to_private_key_file,
-            'delegated_account': self.subject}
+            "path_to_private_key_file": self.path_to_private_key_file,
+            "delegated_account": self.subject,
+        }
 
         with mock.patch.object(
-            oauth2,
-            'get_service_account_credentials',
-            return_value=None
+            oauth2, "get_service_account_credentials", return_value=None
         ) as mock_initializer:
             oauth2.get_credentials(mock_config)
             mock_initializer.assert_called_once_with(
-                self.path_to_private_key_file, self.subject)
+                self.path_to_private_key_file, self.subject
+            )

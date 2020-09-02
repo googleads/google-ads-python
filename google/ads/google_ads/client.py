@@ -19,29 +19,33 @@ import logging.config
 import grpc
 
 from google.ads.google_ads import config, oauth2, util
-from google.ads.google_ads.interceptors import MetadataInterceptor, \
-    ExceptionInterceptor, LoggingInterceptor
+from google.ads.google_ads.interceptors import (
+    MetadataInterceptor,
+    ExceptionInterceptor,
+    LoggingInterceptor,
+)
 
 
 _logger = logging.getLogger(__name__)
 
-_SERVICE_CLIENT_TEMPLATE = '{}Client'
-_SERVICE_GRPC_TRANSPORT_TEMPLATE = '{}GrpcTransport'
+_SERVICE_CLIENT_TEMPLATE = "{}Client"
+_SERVICE_GRPC_TRANSPORT_TEMPLATE = "{}GrpcTransport"
 
-_VALID_API_VERSIONS = ['v4', 'v3', 'v2']
+_VALID_API_VERSIONS = ["v5", "v4", "v3", "v2"]
 _DEFAULT_VERSION = _VALID_API_VERSIONS[0]
 
 _GRPC_CHANNEL_OPTIONS = [
-    ('grpc.max_metadata_size', 16 * 1024 * 1024),
-    ('grpc.max_receive_message_length', 64 * 1024 * 1024)]
+    ("grpc.max_metadata_size", 16 * 1024 * 1024),
+    ("grpc.max_receive_message_length", 64 * 1024 * 1024),
+]
 
 
 unary_stream_single_threading_option = util.get_nested_attr(
-    grpc, 'experimental.ChannelOptions.SingleThreadedUnaryStream', None)
+    grpc, "experimental.ChannelOptions.SingleThreadedUnaryStream", None
+)
 
 if unary_stream_single_threading_option:
-    _GRPC_CHANNEL_OPTIONS.append(
-        (unary_stream_single_threading_option, 1))
+    _GRPC_CHANNEL_OPTIONS.append((unary_stream_single_threading_option, 1))
 
 
 class GoogleAdsClient(object):
@@ -61,11 +65,13 @@ class GoogleAdsClient(object):
         Raises:
             ValueError: If the configuration lacks a required field.
         """
-        return {'credentials': oauth2.get_credentials(config_data),
-                'developer_token': config_data.get('developer_token'),
-                'endpoint': config_data.get('endpoint'),
-                'login_customer_id': config_data.get('login_customer_id'),
-                'logging_config': config_data.get('logging')}
+        return {
+            "credentials": oauth2.get_credentials(config_data),
+            "developer_token": config_data.get("developer_token"),
+            "endpoint": config_data.get("endpoint"),
+            "login_customer_id": config_data.get("login_customer_id"),
+            "logging_config": config_data.get("logging"),
+        }
 
     @classmethod
     def _get_api_services_by_version(cls, version):
@@ -78,11 +84,14 @@ class GoogleAdsClient(object):
             A module containing all services and types for the a API version.
         """
         try:
-            version_module = import_module(f'google.ads.google_ads.{version}')
+            version_module = import_module(f"google.ads.google_ads.{version}")
         except ImportError:
-            raise ValueError('Specified Google Ads API version "{}" does not '
-                             'exist. Valid API versions are: "{}"'.format(
-                                 version, '", "'.join(_VALID_API_VERSIONS)))
+            raise ValueError(
+                'Specified Google Ads API version "{}" does not '
+                'exist. Valid API versions are: "{}"'.format(
+                    version, '", "'.join(_VALID_API_VERSIONS)
+                )
+            )
         return version_module
 
     @classmethod
@@ -176,20 +185,29 @@ class GoogleAdsClient(object):
             AttributeError: If the type for the specified name doesn't exist
                 in the given version.
         """
-        if name.lower().endswith('pb2'):
-            raise ValueError(f'Specified type "{name}" must be a class,'
-                             f' not a module')
+        if name.lower().endswith("pb2"):
+            raise ValueError(
+                f'Specified type "{name}" must be a class,' f" not a module"
+            )
 
         try:
             type_classes = cls._get_api_services_by_version(version).types
             message_class = getattr(type_classes, name)
         except AttributeError:
-            raise ValueError(f'Specified type "{name}" does not exist in '
-                             f'Google Ads API {version}')
+            raise ValueError(
+                f'Specified type "{name}" does not exist in '
+                f"Google Ads API {version}"
+            )
         return message_class()
 
-    def __init__(self, credentials, developer_token, endpoint=None,
-                 login_customer_id=None, logging_config=None):
+    def __init__(
+        self,
+        credentials,
+        developer_token,
+        endpoint=None,
+        login_customer_id=None,
+        logging_config=None,
+    ):
         """Initializer for the GoogleAdsClient.
 
         Args:
@@ -230,35 +248,42 @@ class GoogleAdsClient(object):
         interceptors = interceptors or []
 
         try:
-            service_client = getattr(api_module,
-                                     _SERVICE_CLIENT_TEMPLATE.format(name))
+            service_client = getattr(
+                api_module, _SERVICE_CLIENT_TEMPLATE.format(name)
+            )
         except AttributeError:
-            raise ValueError('Specified service {}" does not exist in Google '
-                             'Ads API {}.'.format(name, version))
+            raise ValueError(
+                'Specified service {}" does not exist in Google '
+                "Ads API {}.".format(name, version)
+            )
 
         try:
             service_transport_class = getattr(
-                api_module, _SERVICE_GRPC_TRANSPORT_TEMPLATE.format(name))
+                api_module, _SERVICE_GRPC_TRANSPORT_TEMPLATE.format(name)
+            )
         except AttributeError:
-            raise ValueError('Grpc transport does not exist for the specified '
-                             'service "{}".'.format(name))
+            raise ValueError(
+                "Grpc transport does not exist for the specified "
+                'service "{}".'.format(name)
+            )
 
-        endpoint = (self.endpoint if self.endpoint
-                    else service_client.SERVICE_ADDRESS)
+        endpoint = (
+            self.endpoint if self.endpoint else service_client.SERVICE_ADDRESS
+        )
 
         channel = service_transport_class.create_channel(
             address=endpoint,
             credentials=self.credentials,
-            options=_GRPC_CHANNEL_OPTIONS)
+            options=_GRPC_CHANNEL_OPTIONS,
+        )
 
         interceptors = interceptors + [
             MetadataInterceptor(self.developer_token, self.login_customer_id),
             LoggingInterceptor(_logger, version, endpoint),
-            ExceptionInterceptor(version)]
+            ExceptionInterceptor(version),
+        ]
 
-        channel = grpc.intercept_channel(
-            channel,
-            *interceptors)
+        channel = grpc.intercept_channel(channel, *interceptors)
 
         service_transport = service_transport_class(channel=channel)
 

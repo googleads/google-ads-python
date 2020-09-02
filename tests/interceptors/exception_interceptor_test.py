@@ -20,8 +20,9 @@ from unittest import TestCase
 from google.ads.google_ads.errors import GoogleAdsException
 from google.ads.google_ads import client as Client
 from google.ads.google_ads.interceptors import ExceptionInterceptor
-from google.ads.google_ads.interceptors.exception_interceptor import \
-    _UnaryStreamWrapper
+from google.ads.google_ads.interceptors.exception_interceptor import (
+    _UnaryStreamWrapper,
+)
 
 latest_version = Client._DEFAULT_VERSION
 
@@ -29,7 +30,6 @@ _MOCK_FAILURE_VALUE = b"\n \n\x02\x08\x10\x12\x1aInvalid customer ID '123'."
 
 
 class ExceptionInterceptorTest(TestCase):
-
     def _create_test_interceptor(self):
         """Creates and returns an ExceptionInterceptor instance
 
@@ -54,12 +54,15 @@ class ExceptionInterceptorTest(TestCase):
 
         interceptor = self._create_test_interceptor()
 
-        self.assertRaises(GoogleAdsException,
-                          interceptor._handle_grpc_failure,
-                          MockRpcErrorResponse())
+        self.assertRaises(
+            GoogleAdsException,
+            interceptor._handle_grpc_failure,
+            MockRpcErrorResponse(),
+        )
 
     def test_handle_grpc_failure_retryable(self):
         """Raises retryable exceptions as-is."""
+
         class MockRpcErrorResponse(grpc.RpcError):
             def code(self):
                 return grpc.StatusCode.INTERNAL
@@ -69,33 +72,38 @@ class ExceptionInterceptorTest(TestCase):
 
         interceptor = self._create_test_interceptor()
 
-        self.assertRaises(MockRpcErrorResponse,
-                          interceptor._handle_grpc_failure,
-                          MockRpcErrorResponse())
+        self.assertRaises(
+            MockRpcErrorResponse,
+            interceptor._handle_grpc_failure,
+            MockRpcErrorResponse(),
+        )
 
     def test_handle_grpc_failure_not_google_ads_failure(self):
         """Raises as-is non-retryable non-GoogleAdsFailure exceptions."""
+
         class MockRpcErrorResponse(grpc.RpcError):
             def code(self):
                 return grpc.StatusCode.INVALID_ARGUMENT
 
             def trailing_metadata(self):
-                return (('bad-failure-key', 'arbitrary-value'),)
+                return (("bad-failure-key", "arbitrary-value"),)
 
             def exception(self):
                 return self
 
         interceptor = self._create_test_interceptor()
 
-        self.assertRaises(MockRpcErrorResponse,
-                          interceptor._handle_grpc_failure,
-                          MockRpcErrorResponse())
+        self.assertRaises(
+            MockRpcErrorResponse,
+            interceptor._handle_grpc_failure,
+            MockRpcErrorResponse(),
+        )
 
     def test_intercept_unary_unary_response_is_exception(self):
         """If response.exception() is not None exception is handled."""
         mock_exception = grpc.RpcError()
 
-        class MockResponse():
+        class MockResponse:
             def exception(self):
                 return mock_exception
 
@@ -110,18 +118,20 @@ class ExceptionInterceptorTest(TestCase):
 
         interceptor = self._create_test_interceptor()
 
-        with mock.patch.object(interceptor, '_handle_grpc_failure'):
+        with mock.patch.object(interceptor, "_handle_grpc_failure"):
             interceptor.intercept_unary_unary(
-                mock_continuation, mock_client_call_details, mock_request)
+                mock_continuation, mock_client_call_details, mock_request
+            )
 
             interceptor._handle_grpc_failure.assert_called_once_with(
-                mock_response)
+                mock_response
+            )
 
     def test_intercept_unary_stream_response_is_exception(self):
         """Ensure errors raised from response iteration are handled/wrapped."""
         mock_exception = grpc.RpcError()
 
-        class MockResponse():
+        class MockResponse:
             # Mock the response object so that it raises an error when
             # iterated upon.
             def __next__(self):
@@ -138,9 +148,10 @@ class ExceptionInterceptorTest(TestCase):
 
         interceptor = self._create_test_interceptor()
 
-        with mock.patch.object(interceptor, '_handle_grpc_failure'):
+        with mock.patch.object(interceptor, "_handle_grpc_failure"):
             response = interceptor.intercept_unary_stream(
-                    mock_continuation, mock_client_call_details, mock_request)
+                mock_continuation, mock_client_call_details, mock_request
+            )
 
             # Ensure the returned value is a wrapped response object.
             self.assertIsInstance(response, _UnaryStreamWrapper)
@@ -151,12 +162,13 @@ class ExceptionInterceptorTest(TestCase):
             # Check that the error handler method on the interceptor instance
             # was called as a result of the iteration.
             interceptor._handle_grpc_failure.assert_called_once_with(
-                mock_response)
-
+                mock_response
+            )
 
     def test_intercept_unary_unary_response_is_successful(self):
         """If response.exception() is None response is returned."""
-        class MockResponse():
+
+        class MockResponse:
             def exception(self):
                 return None
 
@@ -172,13 +184,15 @@ class ExceptionInterceptorTest(TestCase):
         interceptor = self._create_test_interceptor()
 
         result = interceptor.intercept_unary_unary(
-            mock_continuation, mock_client_call_details, mock_request)
+            mock_continuation, mock_client_call_details, mock_request
+        )
 
         self.assertEqual(result, mock_response)
 
     def test_intercept_unary_stream_response_is_successful(self):
         """If response.exception() is None response is returned."""
-        class MockResponse():
+
+        class MockResponse:
             def exception(self):
                 return None
 
@@ -194,7 +208,8 @@ class ExceptionInterceptorTest(TestCase):
         interceptor = self._create_test_interceptor()
 
         result = interceptor.intercept_unary_stream(
-            mock_continuation, mock_client_call_details, mock_request)
+            mock_continuation, mock_client_call_details, mock_request
+        )
 
         # Ensure the returned value is a wrapped response object.
         self.assertIsInstance(result, _UnaryStreamWrapper)

@@ -24,52 +24,69 @@ from google.ads.google_ads.util import ResourceName
 
 
 def main(client, customer_id, ad_group_id, criterion_id):
-    agc_service = client.get_service('AdGroupCriterionService', version='v4')
+    agc_service = client.get_service("AdGroupCriterionService", version="v5")
 
-    ad_group_criterion_operation = client.get_type('AdGroupCriterionOperation',
-                                                   version='v4')
+    ad_group_criterion_operation = client.get_type(
+        "AdGroupCriterionOperation", version="v5"
+    )
 
     ad_group_criterion = ad_group_criterion_operation.update
     ad_group_criterion.resource_name = agc_service.ad_group_criteria_path(
-        customer_id, ResourceName.format_composite(ad_group_id, criterion_id))
-    ad_group_criterion.status = (client.get_type('AdGroupCriterionStatusEnum',
-                                                 version='v4')
-                                 .ENABLED)
-    final_url = ad_group_criterion.final_urls.add()
-    final_url.value = 'https://www.example.com'
+        customer_id, ResourceName.format_composite(ad_group_id, criterion_id)
+    )
+    ad_group_criterion.status = client.get_type(
+        "AdGroupCriterionStatusEnum", version="v5"
+    ).ENABLED
+    al_url = ad_group_criterion.final_urls.append("https://www.example.com")
     fm = protobuf_helpers.field_mask(None, ad_group_criterion)
     ad_group_criterion_operation.update_mask.CopyFrom(fm)
 
     try:
         agc_response = agc_service.mutate_ad_group_criteria(
-            customer_id, [ad_group_criterion_operation])
+            customer_id, [ad_group_criterion_operation]
+        )
     except google.ads.google_ads.errors.GoogleAdsException as ex:
-        print('Request with ID "%s" failed with status "%s" and includes the '
-              'following errors:' % (ex.request_id, ex.error.code().name))
+        print(
+            'Request with ID "%s" failed with status "%s" and includes the '
+            "following errors:" % (ex.request_id, ex.error.code().name)
+        )
         for error in ex.failure.errors:
             print('\tError with message "%s".' % error.message)
             if error.location:
                 for field_path_element in error.location.field_path_elements:
-                    print('\t\tOn field: %s' % field_path_element.field_name)
+                    print("\t\tOn field: %s" % field_path_element.field_name)
         sys.exit(1)
 
-    print('Updated keyword %s.' % agc_response.results[0].resource_name)
+    print("Updated keyword %s." % agc_response.results[0].resource_name)
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     # GoogleAdsClient will read the google-ads.yaml configuration file in the
     # home directory if none is specified.
     google_ads_client = GoogleAdsClient.load_from_storage()
     parser = argparse.ArgumentParser(
-        description=('Pauses an ad in the specified customer\'s ad group.'))
+        description=("Pauses an ad in the specified customer's ad group.")
+    )
     # The following argument(s) should be provided to run the example.
-    parser.add_argument('-c', '--customer_id', type=str,
-                        required=True, help='The Google Ads customer ID.')
-    parser.add_argument('-a', '--ad_group_id', type=str,
-                        required=True, help='The ad group ID.')
-    parser.add_argument('-k', '--criterion_id', type=str,
-                        required=True, help='The criterion ID, or keyword ID.')
+    parser.add_argument(
+        "-c",
+        "--customer_id",
+        type=str,
+        required=True,
+        help="The Google Ads customer ID.",
+    )
+    parser.add_argument(
+        "-a", "--ad_group_id", type=str, required=True, help="The ad group ID."
+    )
+    parser.add_argument(
+        "-k",
+        "--criterion_id",
+        type=str,
+        required=True,
+        help="The criterion ID, or keyword ID.",
+    )
     args = parser.parse_args()
 
-    main(google_ads_client, args.customer_id, args.ad_group_id,
-         args.criterion_id)
+    main(
+        google_ads_client, args.customer_id, args.ad_group_id, args.criterion_id
+    )

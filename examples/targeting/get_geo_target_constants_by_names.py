@@ -20,63 +20,69 @@ import sys
 
 import google.ads.google_ads.client
 
+# Locale is using ISO 639-1 format. If an invalid locale is given,
+# 'en' is used by default.
+LOCALE = "en"
+
+# A list of country codes can be referenced here:
+# https://developers.google.com/adwords/api/docs/appendix/geotargeting
+COUNTRY_CODE = "FR"
+
 
 def main(client):
-    gtc_service = client.get_service('GeoTargetConstantService', version='v4')
+    gtc_service = client.get_service("GeoTargetConstantService", version="v5")
 
-    location_names = (
-        client.get_type('SuggestGeoTargetConstantsRequest',
-                        version='v4').LocationNames())
+    location_names = client.get_type(
+        "SuggestGeoTargetConstantsRequest", version="v5"
+    ).LocationNames()
 
-    for location in ['Paris', 'Quebec', 'Spain', 'Deutschland']:
-        location_name = location_names.names.add()
-        location_name.value = location
-
-    # Locale is using ISO 639-1 format. If an invalid locale is given,
-    # 'en' is used by default.
-    locale = client.get_type('StringValue', version='v4')
-    locale.value = 'en'
-
-    # A list of country codes can be referenced here:
-    # https://developers.google.com/adwords/api/docs/appendix/geotargeting
-    country_code = client.get_type('StringValue', version='v4')
-    country_code.value = 'FR'
+    location_names.names.extend(["Paris", "Quebec", "Spain", "Deutschland"])
 
     results = gtc_service.suggest_geo_target_constants(
-        locale, country_code, location_names=location_names)
+        LOCALE, COUNTRY_CODE, location_names=location_names
+    )
 
     geo_target_constant_status_enum = client.get_type(
-        'GeoTargetConstantStatusEnum').GeoTargetConstantStatus
+        "GeoTargetConstantStatusEnum"
+    ).GeoTargetConstantStatus
 
     try:
         for suggestion in results.geo_target_constant_suggestions:
             geo_target_constant = suggestion.geo_target_constant
-            print('%s (%s, %s, %s, %s) is found in locale (%s) with reach (%d) '
-                  'from search term (%s).'
-                  % (geo_target_constant.resource_name,
-                     geo_target_constant.name.value,
-                     geo_target_constant.country_code.value,
-                     geo_target_constant.target_type.value,
-                     geo_target_constant_status_enum.Name(
-                         geo_target_constant.status),
-                     suggestion.locale.value,
-                     suggestion.reach.value,
-                     suggestion.search_term.value))
+            print(
+                "%s (%s, %s, %s, %s) is found in locale (%s) with reach (%d) "
+                "from search term (%s)."
+                % (
+                    geo_target_constant.resource_name,
+                    geo_target_constant.name,
+                    geo_target_constant.country_code,
+                    geo_target_constant.target_type,
+                    geo_target_constant_status_enum.Name(
+                        geo_target_constant.status
+                    ),
+                    suggestion.locale,
+                    suggestion.reach,
+                    suggestion.search_term,
+                )
+            )
     except google.ads.google_ads.errors.GoogleAdsException as ex:
-        print('Request with ID "%s" failed with status "%s" and includes the '
-              'following errors:' % (ex.request_id, ex.error.code().name))
+        print(
+            'Request with ID "%s" failed with status "%s" and includes the '
+            "following errors:" % (ex.request_id, ex.error.code().name)
+        )
         for error in ex.failure.errors:
             print('\tError with message "%s".' % error.message)
             if error.location:
                 for field_path_element in error.location.field_path_elements:
-                    print('\t\tOn field: %s' % field_path_element.field_name)
+                    print("\t\tOn field: %s" % field_path_element.field_name)
         sys.exit(1)
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     # GoogleAdsClient will read the google-ads.yaml configuration file in the
     # home directory if none is specified.
-    google_ads_client = (google.ads.google_ads.client.GoogleAdsClient
-                         .load_from_storage())
+    google_ads_client = (
+        google.ads.google_ads.client.GoogleAdsClient.load_from_storage()
+    )
 
     main(google_ads_client)

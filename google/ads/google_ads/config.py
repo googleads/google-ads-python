@@ -18,17 +18,18 @@ import functools
 import os
 import yaml
 
-_ENV_PREFIX = 'GOOGLE_ADS_'
-_REQUIRED_KEYS = ('developer_token',)
-_OPTIONAL_KEYS = ('login_customer_id', 'endpoint', 'logging')
-_OAUTH2_INSTALLED_APP_KEYS = ('client_id', 'client_secret', 'refresh_token')
-_OAUTH2_SERVICE_ACCOUNT_KEYS = ('path_to_private_key_file', 'delegated_account')
+_ENV_PREFIX = "GOOGLE_ADS_"
+_REQUIRED_KEYS = ("developer_token",)
+_OPTIONAL_KEYS = ("login_customer_id", "endpoint", "logging")
+_OAUTH2_INSTALLED_APP_KEYS = ("client_id", "client_secret", "refresh_token")
+_OAUTH2_SERVICE_ACCOUNT_KEYS = ("path_to_private_key_file", "delegated_account")
 _KEYS_ENV_VARIABLES_MAP = {
-    key: _ENV_PREFIX + key.upper() for key in
-    list(_REQUIRED_KEYS) +
-    list(_OPTIONAL_KEYS) +
-    list(_OAUTH2_INSTALLED_APP_KEYS) +
-    list(_OAUTH2_SERVICE_ACCOUNT_KEYS)}
+    key: _ENV_PREFIX + key.upper()
+    for key in list(_REQUIRED_KEYS)
+    + list(_OPTIONAL_KEYS)
+    + list(_OAUTH2_INSTALLED_APP_KEYS)
+    + list(_OAUTH2_SERVICE_ACCOUNT_KEYS)
+}
 
 
 def _config_validation_decorator(func):
@@ -39,11 +40,13 @@ def _config_validation_decorator(func):
     Raises:
         ValueError: If the configuration fails validation
     """
+
     @functools.wraps(func)
     def validation_wrapper(*args, **kwargs):
         config_dict = func(*args, **kwargs)
         validate_dict(config_dict)
         return config_dict
+
     return validation_wrapper
 
 
@@ -55,11 +58,13 @@ def _config_parser_decorator(func):
     need to be parsed to a different type. Add this decorator to any method
     that returns the config as a dict.
     """
+
     @functools.wraps(func)
     def parser_wrapper(*args, **kwargs):
         config_dict = func(*args, **kwargs)
         parsed_config = convert_login_customer_id_to_str(config_dict)
         return parsed_config
+
     return parser_wrapper
 
 
@@ -77,12 +82,13 @@ def validate_dict(config_data):
         ValueError: If the dict does not contain all required config keys.
     """
     if not all(key in config_data for key in _REQUIRED_KEYS):
-        raise ValueError('A required field in the configuration data was not '
-                         'found. The required fields are: {}'.format(
-                             str(_REQUIRED_KEYS)))
+        raise ValueError(
+            "A required field in the configuration data was not "
+            "found. The required fields are: {}".format(str(_REQUIRED_KEYS))
+        )
 
-    if 'login_customer_id' in config_data:
-        validate_login_customer_id(config_data['login_customer_id'])
+    if "login_customer_id" in config_data:
+        validate_login_customer_id(config_data["login_customer_id"])
 
 
 def validate_login_customer_id(login_customer_id):
@@ -97,9 +103,11 @@ def validate_login_customer_id(login_customer_id):
     """
     if login_customer_id is not None:
         if not login_customer_id.isdigit() or len(login_customer_id) != 10:
-            raise ValueError('The specified login customer ID is invalid. '
-                             'It must be a ten digit number represented '
-                             'as a string, i.e. "1234567890"')
+            raise ValueError(
+                "The specified login customer ID is invalid. "
+                "It must be a ten digit number represented "
+                'as a string, i.e. "1234567890"'
+            )
 
 
 @_config_validation_decorator
@@ -119,12 +127,12 @@ def load_from_yaml_file(path=None):
         IOError: If the configuration file can't be loaded.
     """
     if path is None:
-        path = os.path.join(os.path.expanduser('~'), 'google-ads.yaml')
+        path = os.path.join(os.path.expanduser("~"), "google-ads.yaml")
 
     if not os.path.isabs(path):
         path = os.path.expanduser(path)
 
-    with open(path, 'rb') as handle:
+    with open(path, "rb") as handle:
         yaml_doc = handle.read()
 
     return parse_yaml_document_to_dict(yaml_doc)
@@ -149,7 +157,9 @@ def load_from_dict(config_dict):
     if isinstance(config_dict, dict):
         return config_dict
     else:
-        raise ValueError("The configuration object passed to function load_from_dict must be of type dict.")
+        raise ValueError(
+            "The configuration object passed to function load_from_dict must be of type dict."
+        )
 
 
 @_config_validation_decorator
@@ -186,12 +196,13 @@ def load_from_env():
         for key, env_variable in _KEYS_ENV_VARIABLES_MAP.items()
         if env_variable in os.environ
     }
-    if 'logging' in config_data.keys():
+    if "logging" in config_data.keys():
         try:
-            config_data['logging'] = json.loads(config_data['logging'])
+            config_data["logging"] = json.loads(config_data["logging"])
         except json.JSONDecodeError:
             raise ValueError(
-                'GOOGLE_ADS_LOGGING env variable should be in JSON format.')
+                "GOOGLE_ADS_LOGGING env variable should be in JSON format."
+            )
 
     return config_data
 
@@ -227,9 +238,9 @@ def convert_login_customer_id_to_str(config_data):
     Returns:
         The same config dict object with a mutated login_customer_id attr.
     """
-    login_customer_id = config_data.get('login_customer_id')
+    login_customer_id = config_data.get("login_customer_id")
 
     if login_customer_id:
-        config_data['login_customer_id'] = str(login_customer_id)
+        config_data["login_customer_id"] = str(login_customer_id)
 
     return config_data

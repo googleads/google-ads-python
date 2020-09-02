@@ -27,81 +27,91 @@ import requests
 from google.ads.google_ads.client import GoogleAdsClient
 from google.ads.google_ads.errors import GoogleAdsException
 
-LOGO_URL = 'https://goo.gl/mtt54n'
-MARKETING_IMG_URL = 'http://goo.gl/3b9Wfh'
+LOGO_URL = "https://goo.gl/mtt54n"
+MARKETING_IMG_URL = "http://goo.gl/3b9Wfh"
 
 
 def main(client, customer_id, ad_group_id):
     logo_img_bytes, logo_img_content_type = get_image(LOGO_URL)
     marketing_img_bytes, marketing_img_content_type = get_image(
-        MARKETING_IMG_URL)
+        MARKETING_IMG_URL
+    )
 
-    if logo_img_content_type != 'image/png':
-        raise ValueError('Logo image has invalid content-type.')
+    if logo_img_content_type != "image/png":
+        raise ValueError("Logo image has invalid content-type.")
 
-    if marketing_img_content_type != 'image/jpeg':
-        raise ValueError('Marketing image has invalid content-type.')
+    if marketing_img_content_type != "image/jpeg":
+        raise ValueError("Marketing image has invalid content-type.")
 
-    media_file_logo_op = client.get_type('MediaFileOperation', version='v4')
+    media_file_logo_op = client.get_type("MediaFileOperation", version="v5")
     media_file_logo = media_file_logo_op.create
-    media_file_logo.type = client.get_type('MediaTypeEnum', version='v4').IMAGE
-    media_file_logo.image.data.value = logo_img_bytes
-    media_file_logo.mime_type = client.get_type('MimeTypeEnum',
-                                                version='v4').IMAGE_PNG
+    media_file_logo.type = client.get_type("MediaTypeEnum", version="v5").IMAGE
+    media_file_logo.image.data = logo_img_bytes
+    media_file_logo.mime_type = client.get_type(
+        "MimeTypeEnum", version="v5"
+    ).IMAGE_PNG
 
-    media_file_marketing_op = client.get_type('MediaFileOperation',
-                                              version='v4')
+    media_file_marketing_op = client.get_type(
+        "MediaFileOperation", version="v5"
+    )
     media_file_marketing = media_file_marketing_op.create
-    media_file_marketing.type = client.get_type('MediaTypeEnum',
-                                                version='v4').IMAGE
-    media_file_marketing.image.data.value = marketing_img_bytes
-    media_file_marketing.mime_type = client.get_type('MimeTypeEnum',
-                                                     version='v4').IMAGE_JPEG
+    media_file_marketing.type = client.get_type(
+        "MediaTypeEnum", version="v5"
+    ).IMAGE
+    media_file_marketing.image.data = marketing_img_bytes
+    media_file_marketing.mime_type = client.get_type(
+        "MimeTypeEnum", version="v5"
+    ).IMAGE_JPEG
 
-    media_file_service = client.get_service('MediaFileService',
-                                            version='v4')
+    media_file_service = client.get_service("MediaFileService", version="v5")
     image_response = media_file_service.mutate_media_files(
-        customer_id, [media_file_logo_op, media_file_marketing_op])
+        customer_id, [media_file_logo_op, media_file_marketing_op]
+    )
 
-    image_resource_names = list(map(lambda response: response.resource_name,
-                                    image_response.results))
+    image_resource_names = list(
+        map(lambda response: response.resource_name, image_response.results)
+    )
 
-    ad_group_ad_service = client.get_service('AdGroupAdService', version='v4')
-    ad_group_service = client.get_service('AdGroupService', version='v4')
-    ad_group_ad_op = client.get_type('AdGroupAdOperation', version='v4')
+    ad_group_ad_service = client.get_service("AdGroupAdService", version="v5")
+    ad_group_service = client.get_service("AdGroupService", version="v5")
+    ad_group_ad_op = client.get_type("AdGroupAdOperation", version="v5")
     ad_group_ad = ad_group_ad_op.create
     gmail_ad = ad_group_ad.ad.gmail_ad
-    gmail_ad.teaser.headline.value = 'Dream'
-    gmail_ad.teaser.description.value = 'Create your own adventure.'
-    gmail_ad.teaser.business_name.value = 'Interplanetary Ships'
-    gmail_ad.teaser.logo_image.value = image_resource_names[0]
-    gmail_ad.marketing_image.value = image_resource_names[1]
-    gmail_ad.marketing_image_headline.value = 'Travel'
-    gmail_ad.marketing_image_description.value = 'Take to the skies!'
+    gmail_ad.teaser.headline = "Dream"
+    gmail_ad.teaser.description = "Create your own adventure."
+    gmail_ad.teaser.business_name = "Interplanetary Ships"
+    gmail_ad.teaser.logo_image = image_resource_names[0]
+    gmail_ad.marketing_image = image_resource_names[1]
+    gmail_ad.marketing_image_headline = "Travel"
+    gmail_ad.marketing_image_description = "Take to the skies!"
 
-    final_url = ad_group_ad.ad.final_urls.add()
-    final_url.value = 'http://www.example.com'
-    ad_group_ad.ad.name.value = 'Gmail Ad #{}'.format(str(uuid4()))
+    ad_group_ad.ad.final_urls.append("http://www.example.com")
+    ad_group_ad.ad.name = "Gmail Ad #{}".format(str(uuid4()))
 
-    ad_group_ad.status = client.get_type('AdGroupAdStatusEnum',
-                                         version='v4').PAUSED
-    ad_group_ad.ad_group.value = ad_group_service.ad_group_path(
-        customer_id, ad_group_id)
+    ad_group_ad.status = client.get_type(
+        "AdGroupAdStatusEnum", version="v5"
+    ).PAUSED
+    ad_group_ad.ad_group = ad_group_service.ad_group_path(
+        customer_id, ad_group_id
+    )
 
     try:
         add_gmail_ad_response = ad_group_ad_service.mutate_ad_group_ads(
-            customer_id, [ad_group_ad_op])
+            customer_id, [ad_group_ad_op]
+        )
     except GoogleAdsException as ex:
-        print(f'Request with ID "{ex.request_id}" failed with status '
-              f'"{ex.error.code().name}" and includes the following errors:')
+        print(
+            f'Request with ID "{ex.request_id}" failed with status '
+            f'"{ex.error.code().name}" and includes the following errors:'
+        )
         for error in ex.failure.errors:
             print(f'\tError with message "{error.message}".')
             if error.location:
                 for field_path_element in error.location.field_path_elements:
-                    print(f'\t\tOn field: {field_path_element.field_name}')
+                    print(f"\t\tOn field: {field_path_element.field_name}")
         sys.exit(1)
 
-    print(f'Created gmail ad {add_gmail_ad_response.results[0].resource_name}.')
+    print(f"Created gmail ad {add_gmail_ad_response.results[0].resource_name}.")
 
 
 def get_image(url):
@@ -115,22 +125,31 @@ def get_image(url):
     """
     response = requests.get(url)
     headers = response.headers
-    return response.content, headers['content-type']
+    return response.content, headers["content-type"]
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     # GoogleAdsClient will read the google-ads.yaml configuration file in the
     # home directory if none is specified.
     google_ads_client = GoogleAdsClient.load_from_storage()
 
     parser = argparse.ArgumentParser(
-        description=('Adds a gmail ad to the specified ad group ID, '
-                     'for the given customer ID.'))
+        description=(
+            "Adds a gmail ad to the specified ad group ID, "
+            "for the given customer ID."
+        )
+    )
     # The following argument(s) should be provided to run the example.
-    parser.add_argument('-c', '--customer_id', type=str,
-                        required=True, help='The Google Ads customer ID.')
-    parser.add_argument('-a', '--ad_group_id', type=str,
-                        required=True, help='The ad group ID.')
+    parser.add_argument(
+        "-c",
+        "--customer_id",
+        type=str,
+        required=True,
+        help="The Google Ads customer ID.",
+    )
+    parser.add_argument(
+        "-a", "--ad_group_id", type=str, required=True, help="The ad group ID."
+    )
     args = parser.parse_args()
 
     main(google_ads_client, args.customer_id, args.ad_group_id)

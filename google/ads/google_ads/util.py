@@ -17,14 +17,14 @@ import functools
 import re
 
 # This regex matches characters preceded by start of line or an underscore.
-_RE_FIND_CHARS_TO_UPPERCASE = re.compile(r'(?:_|^)([a-z])')
+_RE_FIND_CHARS_TO_UPPERCASE = re.compile(r"(?:_|^)([a-z])")
 
 
 class ResourceName:
 
     # As of Google Ads API v1 composite resource names are
     # delimited by a "~" character.
-    _COMPOSITE_DELIMITER = '~'
+    _COMPOSITE_DELIMITER = "~"
 
     @classmethod
     def format_composite(cls, *arg):
@@ -58,10 +58,11 @@ def get_nested_attr(obj, attr, *args):
     Returns:
       The object attribute value or the given *args if the attr isn't present.
     """
+
     def _getattr(obj, attr):
         return getattr(obj, attr, *args)
 
-    return functools.reduce(_getattr, [obj] + attr.split('.'))
+    return functools.reduce(_getattr, [obj] + attr.split("."))
 
 
 def convert_upper_case_to_snake_case(string):
@@ -73,14 +74,14 @@ def convert_upper_case_to_snake_case(string):
     Args:
         string: an arbitrary string to convert.
     """
-    new_string = ''
+    new_string = ""
     index = 0
 
     for char in string:
         if index == 0:
             new_string += char.lower()
         elif char.isupper():
-            new_string += f'_{char.lower()}'
+            new_string += f"_{char.lower()}"
         else:
             new_string += char
 
@@ -98,8 +99,9 @@ def convert_snake_case_to_upper_case(string):
     Args:
         string: an arbitrary string to convert.
     """
+
     def converter(match):
         """Convert a string to strip underscores then uppercase it."""
-        return match.group().replace('_', '').upper()
+        return match.group().replace("_", "").upper()
 
     return _RE_FIND_CHARS_TO_UPPERCASE.sub(converter, string)

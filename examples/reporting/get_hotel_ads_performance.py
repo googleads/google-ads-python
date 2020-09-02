@@ -27,19 +27,21 @@ _DEFAULT_PAGE_SIZE = 50
 
 
 def main(client, customer_id, page_size):
-    ga_service = client.get_service('GoogleAdsService', version='v4')
+    ga_service = client.get_service("GoogleAdsService", version="v5")
 
-    query = ('SELECT campaign.id, campaign.advertising_channel_type, '
-             'ad_group.id, ad_group.status, metrics.impressions, '
-             'metrics.hotel_average_lead_value_micros, '
-             'segments.hotel_check_in_day_of_week, '
-             'segments.hotel_length_of_stay '
-             'FROM hotel_performance_view '
-             'WHERE segments.date DURING LAST_7_DAYS '
-             'AND campaign.advertising_channel_type = \'HOTEL\' '
-             'AND ad_group.status = \'ENABLED\' '
-             'ORDER BY metrics.impressions DESC '
-             'LIMIT 50')
+    query = (
+        "SELECT campaign.id, campaign.advertising_channel_type, "
+        "ad_group.id, ad_group.status, metrics.impressions, "
+        "metrics.hotel_average_lead_value_micros, "
+        "segments.hotel_check_in_day_of_week, "
+        "segments.hotel_length_of_stay "
+        "FROM hotel_performance_view "
+        "WHERE segments.date DURING LAST_7_DAYS "
+        "AND campaign.advertising_channel_type = 'HOTEL' "
+        "AND ad_group.status = 'ENABLED' "
+        "ORDER BY metrics.impressions DESC "
+        "LIMIT 50"
+    )
 
     response = ga_service.search(customer_id, query, page_size=page_size)
 
@@ -51,36 +53,51 @@ def main(client, customer_id, page_size):
             hotel_length_of_stay = row.segments.hotel_length_of_stay
             metrics = row.metrics
 
-            print('Ad group ID "%s" in campaign ID "%s" ' % (ad_group.id.value,
-                  campaign.id.value))
-            print('with hotel check-in on "%s" and "%s" day(s) stay ' % (
-                  hotel_check_in_day_of_week, hotel_length_of_stay.value))
-            print('had %d impression(s) and %d average lead value (in micros) '
-                  'during the last 7 days.\n' % (metrics.impressions.value,
-                  metrics.hotel_average_lead_value_micros.value))
+            print(
+                'Ad group ID "%s" in campaign ID "%s" '
+                % (ad_group.id, campaign.id)
+            )
+            print(
+                'with hotel check-in on "%s" and "%s" day(s) stay '
+                % (hotel_check_in_day_of_week, hotel_length_of_stay)
+            )
+            print(
+                "had %d impression(s) and %d average lead value (in micros) "
+                "during the last 7 days.\n"
+                % (metrics.impressions, metrics.hotel_average_lead_value_micros)
+            )
 
     except google.ads.google_ads.errors.GoogleAdsException as ex:
-        print('Request with ID "%s" failed with status "%s" and includes the '
-              'following errors:' % (ex.request_id, ex.error.code().name))
+        print(
+            'Request with ID "%s" failed with status "%s" and includes the '
+            "following errors:" % (ex.request_id, ex.error.code().name)
+        )
         for error in ex.failure.errors:
             print('\tError with message "%s".' % error.message)
             if error.location:
                 for field_path_element in error.location.field_path_elements:
-                    print('\t\tOn field: %s' % field_path_element.field_name)
+                    print("\t\tOn field: %s" % field_path_element.field_name)
         sys.exit(1)
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     # GoogleAdsClient will read the google-ads.yaml configuration file in the
     # home directory if none is specified.
-    google_ads_client = (google.ads.google_ads.client.GoogleAdsClient
-                         .load_from_storage())
+    google_ads_client = (
+        google.ads.google_ads.client.GoogleAdsClient.load_from_storage()
+    )
 
     parser = argparse.ArgumentParser(
-        description=('Retrieves Hotel-ads performance statistics.'))
+        description=("Retrieves Hotel-ads performance statistics.")
+    )
     # The following argument(s) should be provided to run the example.
-    parser.add_argument('-c', '--customer_id', type=str,
-                        required=True, help='The Google Ads customer ID.')
+    parser.add_argument(
+        "-c",
+        "--customer_id",
+        type=str,
+        required=True,
+        help="The Google Ads customer ID.",
+    )
     args = parser.parse_args()
 
     main(google_ads_client, args.customer_id, _DEFAULT_PAGE_SIZE)

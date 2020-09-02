@@ -28,11 +28,13 @@ _DEFAULT_PAGE_SIZE = 1000
 
 
 def main(client, customer_id, page_size):
-    ga_service = client.get_service('GoogleAdsService', version='v4')
+    ga_service = client.get_service("GoogleAdsService", version="v5")
 
-    query = ('SELECT recommendation.type, recommendation.campaign, '
-             'recommendation.text_ad_recommendation FROM recommendation '
-             'WHERE recommendation.type = TEXT_AD')
+    query = (
+        "SELECT recommendation.type, recommendation.campaign, "
+        "recommendation.text_ad_recommendation FROM recommendation "
+        "WHERE recommendation.type = TEXT_AD"
+    )
 
     results = ga_service.search(customer_id, query=query, page_size=page_size)
 
@@ -40,8 +42,10 @@ def main(client, customer_id, page_size):
         for row in results:
             recommendation = row.recommendation
             recommended_ad = recommendation.text_ad_recommendation.ad
-            print('Recommendation ("%s") was found for campaign "%s".'
-                  % (recommendation.resource_name, recommendation.campaign))
+            print(
+                'Recommendation ("%s") was found for campaign "%s".'
+                % (recommendation.resource_name, recommendation.campaign)
+            )
 
             if recommended_ad.display_url:
                 print('\tDisplay URL = "%s"' % recommended_ad.display_url)
@@ -52,27 +56,36 @@ def main(client, customer_id, page_size):
             for url in recommended_ad.final_mobile_urls:
                 print('\tFinal Mobile URL = "%s"' % url)
     except google.ads.google_ads.errors.GoogleAdsException as ex:
-        print('Request with ID "%s" failed with status "%s" and includes the '
-              'following errors:' % (ex.request_id, ex.error.code().name))
+        print(
+            'Request with ID "%s" failed with status "%s" and includes the '
+            "following errors:" % (ex.request_id, ex.error.code().name)
+        )
         for error in ex.failure.errors:
             print('\tError with message "%s".' % error.message)
             if error.location:
                 for field_path_element in error.location.field_path_elements:
-                    print('\t\tOn field: %s' % field_path_element.field_name)
+                    print("\t\tOn field: %s" % field_path_element.field_name)
         sys.exit(1)
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     # GoogleAdsClient will read the google-ads.yaml configuration file in the
     # home directory if none is specified.
-    google_ads_client = (google.ads.google_ads.client.GoogleAdsClient
-                         .load_from_storage())
+    google_ads_client = (
+        google.ads.google_ads.client.GoogleAdsClient.load_from_storage()
+    )
 
     parser = argparse.ArgumentParser(
-        description='Lists TEXT_AD recommendations for specified customer.')
+        description="Lists TEXT_AD recommendations for specified customer."
+    )
     # The following argument(s) should be provided to run the example.
-    parser.add_argument('-c', '--customer_id', type=str,
-                        required=True, help='The Google Ads customer ID.')
+    parser.add_argument(
+        "-c",
+        "--customer_id",
+        type=str,
+        required=True,
+        help="The Google Ads customer ID.",
+    )
     args = parser.parse_args()
 
     main(google_ads_client, args.customer_id, _DEFAULT_PAGE_SIZE)

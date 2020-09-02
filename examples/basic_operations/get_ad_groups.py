@@ -24,48 +24,68 @@ _DEFAULT_PAGE_SIZE = 1000
 
 
 def main(client, customer_id, page_size, campaign_id=None):
-    ga_service = client.get_service('GoogleAdsService', version='v4')
+    ga_service = client.get_service("GoogleAdsService", version="v5")
 
-    query = 'SELECT campaign.id, ad_group.id, ad_group.name FROM ad_group'
+    query = "SELECT campaign.id, ad_group.id, ad_group.name FROM ad_group"
 
     if campaign_id:
-        query = '%s WHERE campaign.id = %s' % (query, campaign_id)
+        query = "%s WHERE campaign.id = %s" % (query, campaign_id)
 
     results = ga_service.search(customer_id, query=query, page_size=page_size)
 
     try:
         for row in results:
-            print('Ad group with ID %d and name "%s" was found in campaign '
-                  'with ID %d.'
-                  % (row.ad_group.id.value, row.ad_group.name.value,
-                     row.campaign.id.value))
+            print(
+                'Ad group with ID %d and name "%s" was found in campaign '
+                "with ID %d."
+                % (row.ad_group.id, row.ad_group.name, row.campaign.id)
+            )
     except google.ads.google_ads.errors.GoogleAdsException as ex:
-        print('Request with ID "%s" failed with status "%s" and includes the '
-              'following errors:' % (ex.request_id, ex.error.code().name))
+        print(
+            'Request with ID "%s" failed with status "%s" and includes the '
+            "following errors:" % (ex.request_id, ex.error.code().name)
+        )
         for error in ex.failure.errors:
             print('\tError with message "%s".' % error.message)
             if error.location:
                 for field_path_element in error.location.field_path_elements:
-                    print('\t\tOn field: %s' % field_path_element.field_name)
+                    print("\t\tOn field: %s" % field_path_element.field_name)
         sys.exit(1)
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     # GoogleAdsClient will read the google-ads.yaml configuration file in the
     # home directory if none is specified.
-    google_ads_client = (google.ads.google_ads.client.GoogleAdsClient
-                         .load_from_storage())
+    google_ads_client = (
+        google.ads.google_ads.client.GoogleAdsClient.load_from_storage()
+    )
 
     parser = argparse.ArgumentParser(
-        description='List ad groups for specified customer.')
+        description="List ad groups for specified customer."
+    )
     # The following argument(s) should be provided to run the example.
-    parser.add_argument('-c', '--customer_id', type=str,
-                        required=True, help='The Google Ads customer ID.')
-    parser.add_argument('-i', '--campaign_id', type=str,
-                        required=False,
-                        help=('The campaign ID. Specify this to list ad groups '
-                              'solely for this campaign ID.'))
+    parser.add_argument(
+        "-c",
+        "--customer_id",
+        type=str,
+        required=True,
+        help="The Google Ads customer ID.",
+    )
+    parser.add_argument(
+        "-i",
+        "--campaign_id",
+        type=str,
+        required=False,
+        help=(
+            "The campaign ID. Specify this to list ad groups "
+            "solely for this campaign ID."
+        ),
+    )
     args = parser.parse_args()
 
-    main(google_ads_client, args.customer_id, _DEFAULT_PAGE_SIZE,
-         campaign_id=args.campaign_id)
+    main(
+        google_ads_client,
+        args.customer_id,
+        _DEFAULT_PAGE_SIZE,
+        campaign_id=args.campaign_id,
+    )

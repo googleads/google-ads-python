@@ -21,44 +21,59 @@ import sys
 from google.ads.google_ads.client import GoogleAdsClient
 from google.ads.google_ads.util import ResourceName
 
+
 def main(client, customer_id, ad_group_id, ad_id):
-    ad_group_ad_service = client.get_service('AdGroupAdService', version='v4')
-    ad_group_ad_operation = client.get_type('AdGroupAdOperation', version='v4')
+    ad_group_ad_service = client.get_service("AdGroupAdService", version="v5")
+    ad_group_ad_operation = client.get_type("AdGroupAdOperation", version="v5")
 
     resource_name = ad_group_ad_service.ad_group_ad_path(
-        customer_id, ResourceName.format_composite(ad_group_id, ad_id))
+        customer_id, ResourceName.format_composite(ad_group_id, ad_id)
+    )
     ad_group_ad_operation.remove = resource_name
 
     try:
         ad_group_ad_response = ad_group_ad_service.mutate_ad_group_ads(
-            customer_id, [ad_group_ad_operation])
+            customer_id, [ad_group_ad_operation]
+        )
     except google.ads.google_ads.errors.GoogleAdsException as ex:
-        print('Request with ID "%s" failed with status "%s" and includes the '
-              'following errors:' % (ex.request_id, ex.error.code().name))
+        print(
+            'Request with ID "%s" failed with status "%s" and includes the '
+            "following errors:" % (ex.request_id, ex.error.code().name)
+        )
         for error in ex.failure.errors:
             print('\tError with message "%s".' % error.message)
             if error.location:
                 for field_path_element in error.location.field_path_elements:
-                    print('\t\tOn field: %s' % field_path_element.field_name)
+                    print("\t\tOn field: %s" % field_path_element.field_name)
         sys.exit(1)
 
-    print('Removed ad group ad %s.'
-          % ad_group_ad_response.results[0].resource_name)
+    print(
+        "Removed ad group ad %s."
+        % ad_group_ad_response.results[0].resource_name
+    )
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     # GoogleAdsClient will read the google-ads.yaml configuration file in the
     # home directory if none is specified.
     google_ads_client = GoogleAdsClient.load_from_storage()
     parser = argparse.ArgumentParser(
-        description=('Removes an ad from the specified customer\'s ad group.'))
+        description=("Removes an ad from the specified customer's ad group.")
+    )
     # The following argument(s) should be provided to run the example.
-    parser.add_argument('-c', '--customer_id', type=str,
-                        required=True, help='The Google Ads customer ID.')
-    parser.add_argument('-a', '--ad_group_id', type=str,
-                        required=True, help='The ad group ID.')
-    parser.add_argument('-i', '--ad_id', type=str, required=True,
-                        help='The ad ID.')
+    parser.add_argument(
+        "-c",
+        "--customer_id",
+        type=str,
+        required=True,
+        help="The Google Ads customer ID.",
+    )
+    parser.add_argument(
+        "-a", "--ad_group_id", type=str, required=True, help="The ad group ID."
+    )
+    parser.add_argument(
+        "-i", "--ad_id", type=str, required=True, help="The ad ID."
+    )
     args = parser.parse_args()
 
     main(google_ads_client, args.customer_id, args.ad_group_id, args.ad_id)

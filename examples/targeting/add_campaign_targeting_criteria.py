@@ -19,32 +19,36 @@ import argparse
 import sys
 
 from google.ads.google_ads.client import GoogleAdsClient
-from google.ads.google_ads.errors import GoolgeAdsException
+from google.ads.google_ads.errors import GoogleAdsException
 
 
 def main(client, customer_id, campaign_id, keyword_text, location_id):
-    campaign_criterion_service = client.get_service('CampaignCriterionService',
-                                                    version='v4')
+    campaign_criterion_service = client.get_service(
+        "CampaignCriterionService", version="v5"
+    )
 
     operations = [
         create_location_op(client, customer_id, campaign_id, location_id),
-        create_negative_keyword_op(client, customer_id, campaign_id,
-                                   keyword_text),
-        create_proximity_op(client, customer_id, campaign_id)
+        create_negative_keyword_op(
+            client, customer_id, campaign_id, keyword_text
+        ),
+        create_proximity_op(client, customer_id, campaign_id),
     ]
 
     try:
-        campaign_criterion_response = (
-            campaign_criterion_service.mutate_campaign_criteria(
-                customer_id, operations))
+        campaign_criterion_response = campaign_criterion_service.mutate_campaign_criteria(
+            customer_id, operations
+        )
     except GoogleAdsException as ex:
-        print(f'Request with ID "{ex.request_id}" failed with status '
-              f'"{ex.error.code().name}" and includes the following errors:')
+        print(
+            f'Request with ID "{ex.request_id}" failed with status '
+            f'"{ex.error.code().name}" and includes the following errors:'
+        )
         for error in ex.failure.errors:
             print(f'\tError with message "{error.message}".')
             if error.location:
                 for field_path_element in error.location.field_path_elements:
-                    print(f'\t\tOn field: {field_path_element.field_name}')
+                    print(f"\t\tOn field: {field_path_element.field_name}")
         sys.exit(1)
 
     for result in campaign_criterion_response.results:
@@ -52,91 +56,125 @@ def main(client, customer_id, campaign_id, keyword_text, location_id):
 
 
 def create_location_op(client, customer_id, campaign_id, location_id):
-    campaign_service = client.get_service('CampaignService', version='v4')
-    geo_target_constant_service = client.get_service('GeoTargetConstantService',
-                                                     version='v4')
+    campaign_service = client.get_service("CampaignService", version="v5")
+    geo_target_constant_service = client.get_service(
+        "GeoTargetConstantService", version="v5"
+    )
 
     # Create the campaign criterion.
-    campaign_criterion_operation = client.get_type('CampaignCriterionOperation',
-                                                   version='v4')
+    campaign_criterion_operation = client.get_type(
+        "CampaignCriterionOperation", version="v5"
+    )
     campaign_criterion = campaign_criterion_operation.create
-    campaign_criterion.campaign.value = campaign_service.campaign_path(
-        customer_id, campaign_id)
+    campaign_criterion.campaign = campaign_service.campaign_path(
+        customer_id, campaign_id
+    )
 
     # Besides using location_id, you can also search by location names from
     # GeoTargetConstantService.suggest_geo_target_constants() and directly
     # apply GeoTargetConstant.resource_name here. An example can be found
     # in get_geo_target_constant_by_names.py.
-    campaign_criterion.location.geo_target_constant.value = (
-        geo_target_constant_service.geo_target_constant_path(location_id))
+    campaign_criterion.location.geo_target_constant = geo_target_constant_service.geo_target_constant_path(
+        location_id
+    )
 
     return campaign_criterion_operation
 
 
 def create_negative_keyword_op(client, customer_id, campaign_id, keyword_text):
-    campaign_service = client.get_service('CampaignService', version='v4')
+    campaign_service = client.get_service("CampaignService", version="v5")
 
     # Create the campaign criterion.
-    campaign_criterion_operation = client.get_type('CampaignCriterionOperation',
-                                                   version='v4')
+    campaign_criterion_operation = client.get_type(
+        "CampaignCriterionOperation", version="v5"
+    )
     campaign_criterion = campaign_criterion_operation.create
-    campaign_criterion.campaign.value = campaign_service.campaign_path(
-        customer_id, campaign_id)
-    campaign_criterion.negative.value = True
+    campaign_criterion.campaign = campaign_service.campaign_path(
+        customer_id, campaign_id
+    )
+    campaign_criterion.negative = True
     criterion_keyword = campaign_criterion.keyword
-    criterion_keyword.text.value = keyword_text
-    criterion_keyword.match_type = client.get_type('KeywordMatchTypeEnum',
-                                                   version='v4').BROAD
+    criterion_keyword.text = keyword_text
+    criterion_keyword.match_type = client.get_type(
+        "KeywordMatchTypeEnum", version="v5"
+    ).BROAD
 
     return campaign_criterion_operation
 
 
 def create_proximity_op(client, customer_id, campaign_id):
-    campaign_service = client.get_service('CampaignService', version='v4')
+    campaign_service = client.get_service("CampaignService", version="v5")
 
     # Create the campaign criterion.
-    campaign_criterion_operation = client.get_type('CampaignCriterionOperation',
-                                                   version='v4')
+    campaign_criterion_operation = client.get_type(
+        "CampaignCriterionOperation", version="v5"
+    )
     campaign_criterion = campaign_criterion_operation.create
-    campaign_criterion.campaign.value = campaign_service.campaign_path(
-        customer_id, campaign_id)
-    campaign_criterion.proximity.address.street_address.value = (
-        '38 avenue de l\'Opera')
-    campaign_criterion.proximity.address.city_name.value = 'Paris'
-    campaign_criterion.proximity.address.postal_code.value = '75002'
-    campaign_criterion.proximity.address.country_code.value = 'FR'
-    campaign_criterion.proximity.radius.value = 10
+    campaign_criterion.campaign = campaign_service.campaign_path(
+        customer_id, campaign_id
+    )
+    campaign_criterion.proximity.address.street_address = "38 avenue de l'Opera"
+    campaign_criterion.proximity.address.city_name = "Paris"
+    campaign_criterion.proximity.address.postal_code = "75002"
+    campaign_criterion.proximity.address.country_code = "FR"
+    campaign_criterion.proximity.radius = 10
     # Default is kilometers.
     campaign_criterion.proximity.radius_units = client.get_type(
-        'ProximityRadiusUnitsEnum').MILES
+        "ProximityRadiusUnitsEnum"
+    ).MILES
 
     return campaign_criterion_operation
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     # GoogleAdsClient will read the google-ads.yaml configuration file in the
     # home directory if none is specified.
     google_ads_client = GoogleAdsClient.load_from_storage()
 
     parser = argparse.ArgumentParser(
-        description=('Adds campaign targeting criteria for the specified '
-                     'campaign under the given customer ID.'))
+        description=(
+            "Adds campaign targeting criteria for the specified "
+            "campaign under the given customer ID."
+        )
+    )
     # The following argument(s) should be provided to run the example.
-    parser.add_argument('-c', '--customer_id', type=str,
-                        required=True, help='The Google Ads customer ID.')
-    parser.add_argument('-i', '--campaign_id', type=str,
-                        required=True, help='The campaign ID.')
-    parser.add_argument('-k', '--keyword_text', type=str, required=True,
-                        help='The keyword text to be added to the campaign.')
     parser.add_argument(
-        '-l', '--location_id', type=str, required=False,
-        default='21167',  # New York
-        help=('A location criterion ID, this field is optional. If not '
-              'specified, will default to New York. For more information on '
-              'determining this value, see: '
-              'https://developers.google.com/adwords/api/docs/appendix/'
-              'geotargeting.'))
+        "-c",
+        "--customer_id",
+        type=str,
+        required=True,
+        help="The Google Ads customer ID.",
+    )
+    parser.add_argument(
+        "-i", "--campaign_id", type=str, required=True, help="The campaign ID."
+    )
+    parser.add_argument(
+        "-k",
+        "--keyword_text",
+        type=str,
+        required=True,
+        help="The keyword text to be added to the campaign.",
+    )
+    parser.add_argument(
+        "-l",
+        "--location_id",
+        type=str,
+        required=False,
+        default="21167",  # New York
+        help=(
+            "A location criterion ID, this field is optional. If not "
+            "specified, will default to New York. For more information on "
+            "determining this value, see: "
+            "https://developers.google.com/adwords/api/docs/appendix/"
+            "geotargeting."
+        ),
+    )
     args = parser.parse_args()
 
-    main(google_ads_client, args.customer_id, args.campaign_id,
-         args.keyword_text, args.location_id)
+    main(
+        google_ads_client,
+        args.customer_id,
+        args.campaign_id,
+        args.keyword_text,
+        args.location_id,
+    )

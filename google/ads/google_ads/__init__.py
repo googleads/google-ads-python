@@ -13,11 +13,9 @@
 # limitations under the License.
 
 
-
-
 import google.ads.google_ads.client
 import google.ads.google_ads.errors
 import google.ads.google_ads.util
 
 
-VERSION = '6.0.0'
+VERSION = "7.0.0"

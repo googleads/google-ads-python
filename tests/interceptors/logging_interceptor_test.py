@@ -30,25 +30,28 @@ default_version = Client._DEFAULT_VERSION
 class LoggingInterceptorTest(TestCase):
     """Tests for the google.ads.googleads.client.LoggingInterceptor class."""
 
-    _MOCK_CONFIG = {'test': True}
-    _MOCK_ENDPOINT = 'www.test-endpoint.com'
-    _MOCK_INITIAL_METADATA = [('developer-token', '123456'),
-                              ('header', 'value')]
-    _MOCK_CUSTOMER_ID = '123456'
-    _MOCK_REQUEST_ID = '654321xyz'
-    _MOCK_METHOD = 'test/method'
-    _MOCK_TRAILING_METADATA = (('request-id', _MOCK_REQUEST_ID),)
+    _MOCK_CONFIG = {"test": True}
+    _MOCK_ENDPOINT = "www.test-endpoint.com"
+    _MOCK_INITIAL_METADATA = [
+        ("developer-token", "123456"),
+        ("header", "value"),
+    ]
+    _MOCK_CUSTOMER_ID = "123456"
+    _MOCK_REQUEST_ID = "654321xyz"
+    _MOCK_METHOD = "test/method"
+    _MOCK_TRAILING_METADATA = (("request-id", _MOCK_REQUEST_ID),)
     _MOCK_TRANSPORT_ERROR_METADATA = tuple()
-    _MOCK_ERROR_MESSAGE = 'Test error message'
-    _MOCK_TRANSPORT_ERROR_MESSAGE = u'Received RST_STREAM with error code 2'
-    _MOCK_DEBUG_ERROR_STRING = u'{"description":"Error received from peer"}'
-    _MOCK_RESPONSE_MSG = 'test response msg'
+    _MOCK_ERROR_MESSAGE = "Test error message"
+    _MOCK_TRANSPORT_ERROR_MESSAGE = "Received RST_STREAM with error code 2"
+    _MOCK_DEBUG_ERROR_STRING = '{"description":"Error received from peer"}'
+    _MOCK_RESPONSE_MSG = "test response msg"
     _MOCK_EXCEPTION = mock.Mock()
     _MOCK_ERROR = mock.Mock()
     _MOCK_FAILURE = mock.Mock()
 
-    def _create_test_interceptor(self, logger=mock.Mock(), version=None,
-                                 endpoint=_MOCK_ENDPOINT):
+    def _create_test_interceptor(
+        self, logger=mock.Mock(), version=None, endpoint=_MOCK_ENDPOINT
+    ):
         """Creates a LoggingInterceptor instance.
 
         Accepts parameters that are used to override defaults when needed
@@ -93,6 +96,7 @@ class LoggingInterceptorTest(TestCase):
         Returns:
             A function that returns a tuple of mock metadata.
         """
+
         def mock_trailing_metadata_fn():
             return self._MOCK_TRAILING_METADATA
 
@@ -128,6 +132,7 @@ class LoggingInterceptorTest(TestCase):
             A Mock instance with mock "debug_error_string," "details," and
             "trailing_metadata" methods.
         """
+
         def _mock_debug_error_string():
             return self._MOCK_DEBUG_ERROR_STRING
 
@@ -163,6 +168,7 @@ class LoggingInterceptorTest(TestCase):
             failed: a bool indicating whether the mock response should be in a
                 failed state or not. Default is False.
         """
+
         def mock_exception_fn():
             if failed:
                 return self._get_mock_exception()
@@ -190,6 +196,7 @@ class LoggingInterceptorTest(TestCase):
             failed: a bool indicating whether the function should return a
             response that mocks a failure.
         """
+
         def mock_continuation_fn(*args):
             mock_response = self._get_mock_response(fail)
             return mock_response
@@ -211,9 +218,8 @@ class LoggingInterceptorTest(TestCase):
         logger_spy = mock.Mock(wraps=Client._logger)
         interceptor = LoggingInterceptor(logger_spy, default_version)
         interceptor.intercept_unary_unary(
-            mock_continuation_fn,
-            mock_client_call_details,
-            mock_request)
+            mock_continuation_fn, mock_client_call_details, mock_request
+        )
 
         logger_spy.debug.assert_not_called()
         logger_spy.info.assert_not_called()
@@ -234,9 +240,8 @@ class LoggingInterceptorTest(TestCase):
         logger_spy = mock.Mock(wraps=Client._logger)
         interceptor = LoggingInterceptor(logger_spy, default_version)
         interceptor.intercept_unary_stream(
-            mock_continuation_fn,
-            mock_client_call_details,
-            mock_request)
+            mock_continuation_fn, mock_client_call_details, mock_request
+        )
 
         logger_spy.debug.assert_not_called()
         logger_spy.info.assert_not_called()
@@ -252,32 +257,46 @@ class LoggingInterceptorTest(TestCase):
         mock_continuation_fn = self._get_mock_continuation_fn()
         mock_request = self._get_mock_request()
         mock_response = mock_continuation_fn(
-            mock_client_call_details, mock_request)
+            mock_client_call_details, mock_request
+        )
         mock_trailing_metadata = mock_response.trailing_metadata()
 
-        with mock.patch('logging.config.dictConfig'), \
-            mock.patch('google.ads.google_ads.client._logger') as mock_logger:
+        with mock.patch("logging.config.dictConfig"), mock.patch(
+            "google.ads.google_ads.client._logger"
+        ) as mock_logger:
             interceptor = self._create_test_interceptor(logger=mock_logger)
             interceptor.intercept_unary_unary(
-                mock_continuation_fn,
-                mock_client_call_details,
-                mock_request)
+                mock_continuation_fn, mock_client_call_details, mock_request
+            )
 
             mock_logger.info.assert_called_once_with(
                 interceptor._SUMMARY_LOG_LINE.format(
-                    self._MOCK_CUSTOMER_ID, self._MOCK_ENDPOINT,
-                    mock_client_call_details.method, self._MOCK_REQUEST_ID,
-                    False, None))
+                    self._MOCK_CUSTOMER_ID,
+                    self._MOCK_ENDPOINT,
+                    mock_client_call_details.method,
+                    self._MOCK_REQUEST_ID,
+                    False,
+                    None,
+                )
+            )
 
             initial_metadata = interceptor.parse_metadata_to_json(
-                mock_client_call_details.metadata)
+                mock_client_call_details.metadata
+            )
             trailing_metadata = interceptor.parse_metadata_to_json(
-                mock_trailing_metadata)
+                mock_trailing_metadata
+            )
 
             mock_logger.debug.assert_called_once_with(
                 interceptor._FULL_REQUEST_LOG_LINE.format(
-                    self._MOCK_METHOD, self._MOCK_ENDPOINT, initial_metadata,
-                    mock_request, trailing_metadata, mock_response.result()))
+                    self._MOCK_METHOD,
+                    self._MOCK_ENDPOINT,
+                    initial_metadata,
+                    mock_request,
+                    trailing_metadata,
+                    mock_response.result(),
+                )
+            )
 
     def test_intercept_unary_stream_successful_request(self):
         """_logger.info and _logger.debug should be called.
@@ -296,29 +315,42 @@ class LoggingInterceptorTest(TestCase):
         mock_response.add_done_callback = mock_add_done_callback
         mock_continuation_fn = mock.Mock(return_value=mock_response)
 
-        with mock.patch('logging.config.dictConfig'), \
-             mock.patch('google.ads.google_ads.client._logger') as mock_logger:
+        with mock.patch("logging.config.dictConfig"), mock.patch(
+            "google.ads.google_ads.client._logger"
+        ) as mock_logger:
             interceptor = self._create_test_interceptor(logger=mock_logger)
             interceptor.intercept_unary_stream(
-                mock_continuation_fn,
-                mock_client_call_details,
-                mock_request)
+                mock_continuation_fn, mock_client_call_details, mock_request
+            )
 
             mock_logger.info.assert_called_once_with(
                 interceptor._SUMMARY_LOG_LINE.format(
-                    self._MOCK_CUSTOMER_ID, self._MOCK_ENDPOINT,
-                    mock_client_call_details.method, self._MOCK_REQUEST_ID,
-                    False, None))
+                    self._MOCK_CUSTOMER_ID,
+                    self._MOCK_ENDPOINT,
+                    mock_client_call_details.method,
+                    self._MOCK_REQUEST_ID,
+                    False,
+                    None,
+                )
+            )
 
             initial_metadata = interceptor.parse_metadata_to_json(
-                mock_client_call_details.metadata)
+                mock_client_call_details.metadata
+            )
             trailing_metadata = interceptor.parse_metadata_to_json(
-                mock_trailing_metadata)
+                mock_trailing_metadata
+            )
 
             mock_logger.debug.assert_called_once_with(
                 interceptor._FULL_REQUEST_LOG_LINE.format(
-                    self._MOCK_METHOD, self._MOCK_ENDPOINT, initial_metadata,
-                    mock_request, trailing_metadata, mock_response.result()))
+                    self._MOCK_METHOD,
+                    self._MOCK_ENDPOINT,
+                    initial_metadata,
+                    mock_request,
+                    trailing_metadata,
+                    mock_response.result(),
+                )
+            )
 
     def test_intercept_unary_unary_failed_request(self):
         """_logger.warning and _logger.info should be called.
@@ -330,33 +362,44 @@ class LoggingInterceptorTest(TestCase):
         mock_continuation_fn = self._get_mock_continuation_fn(fail=True)
         mock_request = self._get_mock_request()
 
-        with mock.patch(
-            'logging.config.dictConfig'
-        ), mock.patch(
-            'google.ads.google_ads.client._logger'
+        with mock.patch("logging.config.dictConfig"), mock.patch(
+            "google.ads.google_ads.client._logger"
         ) as mock_logger:
             interceptor = self._create_test_interceptor(logger=mock_logger)
             mock_response = interceptor.intercept_unary_unary(
-                mock_continuation_fn, mock_client_call_details, mock_request)
+                mock_continuation_fn, mock_client_call_details, mock_request
+            )
 
             mock_trailing_metadata = mock_response.trailing_metadata()
 
             mock_logger.warning.assert_called_once_with(
                 interceptor._SUMMARY_LOG_LINE.format(
-                    self._MOCK_CUSTOMER_ID, self._MOCK_ENDPOINT,
-                    mock_client_call_details.method, self._MOCK_REQUEST_ID,
-                    True, self._MOCK_ERROR_MESSAGE))
+                    self._MOCK_CUSTOMER_ID,
+                    self._MOCK_ENDPOINT,
+                    mock_client_call_details.method,
+                    self._MOCK_REQUEST_ID,
+                    True,
+                    self._MOCK_ERROR_MESSAGE,
+                )
+            )
 
             initial_metadata = interceptor.parse_metadata_to_json(
-                mock_client_call_details.metadata)
+                mock_client_call_details.metadata
+            )
             trailing_metadata = interceptor.parse_metadata_to_json(
-                mock_trailing_metadata)
+                mock_trailing_metadata
+            )
 
             mock_logger.info.assert_called_once_with(
                 interceptor._FULL_FAULT_LOG_LINE.format(
-                    self._MOCK_METHOD, self._MOCK_ENDPOINT, initial_metadata,
-                    mock_request, trailing_metadata,
-                    mock_response.exception().failure))
+                    self._MOCK_METHOD,
+                    self._MOCK_ENDPOINT,
+                    initial_metadata,
+                    mock_request,
+                    trailing_metadata,
+                    mock_response.exception().failure,
+                )
+            )
 
     def test_intercept_unary_stream_failed_request(self):
         """_logger.warning and _logger.info should be called.
@@ -374,37 +417,48 @@ class LoggingInterceptorTest(TestCase):
         mock_response.add_done_callback = mock_add_done_callback
         mock_continuation_fn = mock.Mock(return_value=mock_response)
 
-        with mock.patch(
-            'logging.config.dictConfig'
-        ), mock.patch(
-            'google.ads.google_ads.client._logger'
+        with mock.patch("logging.config.dictConfig"), mock.patch(
+            "google.ads.google_ads.client._logger"
         ) as mock_logger:
             interceptor = self._create_test_interceptor(logger=mock_logger)
             mock_response = interceptor.intercept_unary_stream(
-                mock_continuation_fn, mock_client_call_details, mock_request)
+                mock_continuation_fn, mock_client_call_details, mock_request
+            )
 
             mock_trailing_metadata = mock_response.trailing_metadata()
 
             mock_logger.warning.assert_called_once_with(
                 interceptor._SUMMARY_LOG_LINE.format(
-                    self._MOCK_CUSTOMER_ID, self._MOCK_ENDPOINT,
-                    mock_client_call_details.method, self._MOCK_REQUEST_ID,
-                    True, self._MOCK_ERROR_MESSAGE))
+                    self._MOCK_CUSTOMER_ID,
+                    self._MOCK_ENDPOINT,
+                    mock_client_call_details.method,
+                    self._MOCK_REQUEST_ID,
+                    True,
+                    self._MOCK_ERROR_MESSAGE,
+                )
+            )
 
             initial_metadata = interceptor.parse_metadata_to_json(
-                mock_client_call_details.metadata)
+                mock_client_call_details.metadata
+            )
             trailing_metadata = interceptor.parse_metadata_to_json(
-                mock_trailing_metadata)
+                mock_trailing_metadata
+            )
 
             mock_logger.info.assert_called_once_with(
                 interceptor._FULL_FAULT_LOG_LINE.format(
-                    self._MOCK_METHOD, self._MOCK_ENDPOINT, initial_metadata,
-                    mock_request, trailing_metadata,
-                    mock_response.exception().failure))
+                    self._MOCK_METHOD,
+                    self._MOCK_ENDPOINT,
+                    initial_metadata,
+                    mock_request,
+                    trailing_metadata,
+                    mock_response.exception().failure,
+                )
+            )
 
     def test_get_initial_metadata(self):
         """_Returns a tuple of metadata from client_call_details."""
-        with mock.patch('logging.config.dictConfig'):
+        with mock.patch("logging.config.dictConfig"):
             mock_client_call_details = mock.Mock()
             mock_client_call_details.metadata = self._MOCK_INITIAL_METADATA
             interceptor = self._create_test_interceptor()
@@ -413,7 +467,7 @@ class LoggingInterceptorTest(TestCase):
 
     def test_get_initial_metadata_none(self):
         """Returns an empty tuple if initial_metadata isn't present."""
-        with mock.patch('logging.config.dictConfig'):
+        with mock.patch("logging.config.dictConfig"):
             mock_client_call_details = {}
             interceptor = self._create_test_interceptor()
             result = interceptor._get_initial_metadata(mock_client_call_details)
@@ -421,7 +475,7 @@ class LoggingInterceptorTest(TestCase):
 
     def test_get_call_method(self):
         """Returns a str of the call method from client_call_details."""
-        with mock.patch('logging.config.dictConfig'):
+        with mock.patch("logging.config.dictConfig"):
             mock_client_call_details = mock.Mock()
             mock_client_call_details.method = self._MOCK_METHOD
             interceptor = self._create_test_interceptor()
@@ -430,7 +484,7 @@ class LoggingInterceptorTest(TestCase):
 
     def test_get_call_method_none(self):
         """Returns None if method is not present on client_call_details."""
-        with mock.patch('logging.config.dictConfig'):
+        with mock.patch("logging.config.dictConfig"):
             mock_client_call_details = {}
             interceptor = self._create_test_interceptor()
             result = interceptor._get_call_method(mock_client_call_details)
@@ -440,30 +494,28 @@ class LoggingInterceptorTest(TestCase):
         """ Calls _format_json_object with error obj's debug_error_string."""
         interceptor = self._create_test_interceptor()
 
-        with mock.patch(
-            'logging.config.dictConfig'
-        ), mock.patch.object(
-            interceptor,
-            'format_json_object'
+        with mock.patch("logging.config.dictConfig"), mock.patch.object(
+            interceptor, "format_json_object"
         ) as mock_parser:
             mock_exception = self._get_mock_transport_exception()
             interceptor._parse_exception_to_str(mock_exception)
             mock_parser.assert_called_once_with(
-                json.loads(self._MOCK_DEBUG_ERROR_STRING))
+                json.loads(self._MOCK_DEBUG_ERROR_STRING)
+            )
 
     def test_parse_exception_to_str_unknown_failure(self):
         """Returns an empty JSON string if nothing can be parsed to JSON."""
-        with mock.patch('logging.config.dictConfig'):
+        with mock.patch("logging.config.dictConfig"):
             mock_exception = mock.Mock()
             del mock_exception.failure
             del mock_exception.debug_error_string
             interceptor = self._create_test_interceptor()
             result = interceptor._parse_exception_to_str(mock_exception)
-            self.assertEqual(result, '{}')
+            self.assertEqual(result, "{}")
 
     def test_get_trailing_metadata(self):
         """Retrieves metadata from a response object."""
-        with mock.patch('logging.config.dictConfig'):
+        with mock.patch("logging.config.dictConfig"):
             mock_response = self._get_mock_response()
             interceptor = self._create_test_interceptor()
             result = interceptor._get_trailing_metadata(mock_response)
@@ -471,7 +523,7 @@ class LoggingInterceptorTest(TestCase):
 
     def test_get_trailing_metadata_google_ads_failure(self):
         """Retrieves metadata from a failed response."""
-        with mock.patch('logging.config.dictConfig'):
+        with mock.patch("logging.config.dictConfig"):
             mock_response = self._get_mock_response(failed=True)
             del mock_response.trailing_metadata
             interceptor = self._create_test_interceptor()
@@ -480,7 +532,8 @@ class LoggingInterceptorTest(TestCase):
 
     def test_get_trailing_metadata_transport_failure(self):
         """Retrieves metadata from a transport error."""
-        with mock.patch('logging.config.dictConfig'):
+        with mock.patch("logging.config.dictConfig"):
+
             def mock_transport_exception():
                 return self._get_mock_transport_exception()
 
@@ -493,7 +546,8 @@ class LoggingInterceptorTest(TestCase):
 
     def test_get_trailing_metadata_unknown_failure(self):
         """Returns an empty tuple if metadata cannot be found."""
-        with mock.patch('logging.config.dictConfig'):
+        with mock.patch("logging.config.dictConfig"):
+
             def mock_unknown_exception():
                 # using a mock transport exception but deleting the
                 # trailing_metadata attribute to simulate an unknown error type
@@ -510,7 +564,7 @@ class LoggingInterceptorTest(TestCase):
 
     def test_get_fault_message(self):
         """Returns None if an error message cannot be found."""
-        with mock.patch('logging.config.dictConfig'):
+        with mock.patch("logging.config.dictConfig"):
             mock_exception = None
             interceptor = self._create_test_interceptor()
             result = interceptor._get_fault_message(mock_exception)
@@ -518,7 +572,7 @@ class LoggingInterceptorTest(TestCase):
 
     def test_get_fault_message_google_ads_failure(self):
         """Retrieves an error message from a GoogleAdsException."""
-        with mock.patch('logging.config.dictConfig'):
+        with mock.patch("logging.config.dictConfig"):
             mock_exception = self._get_mock_exception()
             interceptor = self._create_test_interceptor()
             result = interceptor._get_fault_message(mock_exception)
@@ -526,7 +580,7 @@ class LoggingInterceptorTest(TestCase):
 
     def test_get_fault_message_transport_failure(self):
         """Retrieves an error message from a transport error object."""
-        with mock.patch('logging.config.dictConfig'):
+        with mock.patch("logging.config.dictConfig"):
             mock_exception = self._get_mock_transport_exception()
             interceptor = self._create_test_interceptor()
             result = interceptor._get_fault_message(mock_exception)
@@ -542,22 +596,26 @@ class LoggingInterceptorTest(TestCase):
         """Retrieves a customer_id from a request object."""
         mock_request = self._get_mock_request()
         interceptor = self._create_test_interceptor()
-        self.assertEqual(interceptor._get_customer_id(mock_request),
-                         self._MOCK_CUSTOMER_ID)
+        self.assertEqual(
+            interceptor._get_customer_id(mock_request), self._MOCK_CUSTOMER_ID
+        )
 
     def test_get_customer_id_from_resource_name(self):
         """Retrieves a customer_id from a request object via resource_name."""
-        resource_name = f'customers/{self._MOCK_CUSTOMER_ID}'
+        resource_name = f"customers/{self._MOCK_CUSTOMER_ID}"
         mock_request = customer_service_pb2.GetCustomerRequest(
-            resource_name=resource_name)
+            resource_name=resource_name
+        )
         interceptor = self._create_test_interceptor()
-        self.assertEqual(interceptor._get_customer_id(mock_request),
-                         self._MOCK_CUSTOMER_ID)
+        self.assertEqual(
+            interceptor._get_customer_id(mock_request), self._MOCK_CUSTOMER_ID
+        )
 
     def test_get_customer_id_from_invalid_resource_name(self):
         """Returns None for a resource_name not starting with 'customers'."""
-        resource_name = f'languageConstants/{self._MOCK_CUSTOMER_ID}'
+        resource_name = f"languageConstants/{self._MOCK_CUSTOMER_ID}"
         mock_request = customer_service_pb2.GetCustomerRequest(
-            resource_name=resource_name)
+            resource_name=resource_name
+        )
         interceptor = self._create_test_interceptor()
         self.assertEqual(interceptor._get_customer_id(mock_request), None)

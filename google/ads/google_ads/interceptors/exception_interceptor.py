@@ -100,8 +100,9 @@ class _UnaryStreamWrapper(grpc.Call, grpc.Future):
                 raise e
 
 
-class ExceptionInterceptor(Interceptor, UnaryUnaryClientInterceptor,
-                           UnaryStreamClientInterceptor):
+class ExceptionInterceptor(
+    Interceptor, UnaryUnaryClientInterceptor, UnaryStreamClientInterceptor
+):
     """An interceptor that wraps rpc exceptions."""
 
     def __init__(self, api_version):
@@ -169,8 +170,9 @@ class ExceptionInterceptor(Interceptor, UnaryUnaryClientInterceptor,
         else:
             return response
 
-    def intercept_unary_stream(self, continuation, client_call_details,
-                               request):
+    def intercept_unary_stream(
+        self, continuation, client_call_details, request
+    ):
         """Intercepts and wraps exceptions in the rpc response.
 
         Overrides abstract method defined in grpc.UnaryStreamClientInterceptor.

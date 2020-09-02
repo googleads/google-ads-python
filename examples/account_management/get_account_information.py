@@ -25,42 +25,53 @@ import google.ads.google_ads.client
 
 
 def main(client, customer_id):
-    customer_service = client.get_service('CustomerService', version='v4')
+    customer_service = client.get_service("CustomerService", version="v5")
 
     resource_name = customer_service.customer_path(customer_id)
 
     try:
         customer = customer_service.get_customer(resource_name=resource_name)
     except google.ads.google_ads.errors.GoogleAdsException as ex:
-        print('Request with ID "%s" failed with status "%s" and includes the '
-              'following errors:' % (ex.request_id, ex.error.code().name))
+        print(
+            'Request with ID "%s" failed with status "%s" and includes the '
+            "following errors:" % (ex.request_id, ex.error.code().name)
+        )
         for error in ex.failure.errors:
             print('\tError with message "%s".' % error.message)
             if error.location:
                 for field_path_element in error.location.field_path_elements:
-                    print('\t\tOn field: %s' % field_path_element.field_name)
+                    print("\t\tOn field: %s" % field_path_element.field_name)
         sys.exit(1)
 
-    print('Customer ID: %d' % customer.id.value)
-    print('\tDescriptive name: %s' % customer.descriptive_name.value)
-    print('\tCurrency code: %s' % customer.currency_code.value)
-    print('\tTime zone: %s' % customer.time_zone.value)
-    print('\tTracking URL template: %s' % customer.tracking_url_template.value)
-    print('\tAuto tagging enabled: %s' % customer.auto_tagging_enabled)
+    print("Customer ID: %d" % customer.id)
+    print("\tDescriptive name: %s" % customer.descriptive_name)
+    print("\tCurrency code: %s" % customer.currency_code)
+    print("\tTime zone: %s" % customer.time_zone)
+    print("\tTracking URL template: %s" % customer.tracking_url_template)
+    print("\tAuto tagging enabled: %s" % customer.auto_tagging_enabled)
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     # GoogleAdsClient will read the google-ads.yaml configuration file in the
     # home directory if none is specified.
-    google_ads_client = (google.ads.google_ads.client.GoogleAdsClient
-                         .load_from_storage())
+    google_ads_client = (
+        google.ads.google_ads.client.GoogleAdsClient.load_from_storage()
+    )
 
     parser = argparse.ArgumentParser(
-        description=('Displays basic information about the specified '
-                     'customer\'s advertising account.'))
+        description=(
+            "Displays basic information about the specified "
+            "customer's advertising account."
+        )
+    )
     # The following argument(s) should be provided to run the example.
-    parser.add_argument('-c', '--customer_id', type=str,
-                        required=True, help='The Google Ads customer ID.')
+    parser.add_argument(
+        "-c",
+        "--customer_id",
+        type=str,
+        required=True,
+        help="The Google Ads customer ID.",
+    )
     args = parser.parse_args()
 
     main(google_ads_client, args.customer_id)

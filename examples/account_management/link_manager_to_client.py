@@ -35,36 +35,43 @@ def main(client, customer_id, manager_customer_id):
 
     # Extend an invitation to the client while authenticating as the manager.
     client_link_operation = client.get_type(
-        'CustomerClientLinkOperation', version='v4')
+        "CustomerClientLinkOperation", version="v5"
+    )
     client_link = client_link_operation.create
-    client_link.client_customer.value = 'customers/{}'.format(customer_id)
-    client_link.status = client.get_type(
-        'ManagerLinkStatusEnum').PENDING
+    client_link.client_customer.value = "customers/{}".format(customer_id)
+    client_link.status = client.get_type("ManagerLinkStatusEnum").PENDING
 
     customer_client_link_service = client.get_service(
-        'CustomerClientLinkService', version='v4')
+        "CustomerClientLinkService", version="v5"
+    )
     response = customer_client_link_service.mutate_customer_client_link(
-        manager_customer_id, client_link_operation)
+        manager_customer_id, client_link_operation
+    )
     resource_name = response.results[0].resource_name
 
-    print('Extended an invitation from customer #{} to customer #{} with '
-          'client link resource_name #{}'.format(
-              manager_customer_id, customer_id, resource_name))
+    print(
+        "Extended an invitation from customer #{} to customer #{} with "
+        "client link resource_name #{}".format(
+            manager_customer_id, customer_id, resource_name
+        )
+    )
 
     # Find the manager_link_id of the link we just created, so we can construct
     # the resource name for the link from the client side. Note that since we
     # are filtering by resource_name, a unique identifier, only one
     # customer_client_link resource will be returned in the response
-    query = '''
+    query = """
         SELECT
             customer_client_link.manager_link_id
         FROM
             customer_client_link
         WHERE
             customer_client_link.resource_name = "{}"
-    '''.format(resource_name)
+    """.format(
+        resource_name
+    )
 
-    ga_service = client.get_service('GoogleAdsService', version='v4')
+    ga_service = client.get_service("GoogleAdsService", version="v5")
     response = ga_service.search(manager_customer_id, query=query)
 
     # Since the google_ads_service.search method returns an iterator we need
@@ -74,38 +81,54 @@ def main(client, customer_id, manager_customer_id):
         manager_link_id = row.customer_client_link.manager_link_id
 
     manager_link_operation = client.get_type(
-        'CustomerManagerLinkOperation', version='v4')
+        "CustomerManagerLinkOperation", version="v5"
+    )
     manager_link = manager_link_operation.update
-    manager_link.resource_name.value = (
-        'customers/{}/customerManagerLinks/{}~{}'.format(
-              customer_id, manager_customer_id, manager_link_id))
+    manager_link.resource_name = "customers/{}/customerManagerLinks/{}~{}".format(
+        customer_id, manager_customer_id, manager_link_id
+    )
 
-    manager_link.status = client.get_type('ManagerLinkStatusEnum', version='v4')
+    manager_link.status = client.get_type("ManagerLinkStatusEnum", version="v5")
     field_mask = protobuf_helpers.field_mask(None, manager_link)
     manager_link_operation.update_mask.CopyFrom(field_mask)
 
-    manager_link_service = client.get_service('ManagerLinkService',
-                                              version='v4')
+    manager_link_service = client.get_service(
+        "ManagerLinkService", version="v5"
+    )
     response = manager_link_service.mutate_manager_links(
-        manager_customer_id, [manager_link_operation])
+        manager_customer_id, [manager_link_operation]
+    )
     resource_name = response.results[0].resource_name
 
-    print('Client accepted invitation with resource_name: #{}'.format(
-        resource_name))
+    print(
+        "Client accepted invitation with resource_name: #{}".format(
+            resource_name
+        )
+    )
 
-if __name__ == '__main__':
+
+if __name__ == "__main__":
     # GoogleAdsClient will read the google-ads.yaml configuration file in the
     # home directory if none is specified.
     google_ads_client = GoogleAdsClient.load_from_storage()
 
     parser = argparse.ArgumentParser(
-        description= ('Links and existing manager customer to an existing'
-                      'client customer'))
+        description=(
+            "Links and existing manager customer to an existing"
+            "client customer"
+        )
+    )
     # The following argument(s) should be provided to run the example.
-    parser.add_argument('-c', '--customer_id', type=str,
-                        required=True, help='The customer ID.')
-    parser.add_argument('-m', '--manager_customer_id', type=str,
-                        required=True, help='The manager customer ID.')
+    parser.add_argument(
+        "-c", "--customer_id", type=str, required=True, help="The customer ID."
+    )
+    parser.add_argument(
+        "-m",
+        "--manager_customer_id",
+        type=str,
+        required=True,
+        help="The manager customer ID.",
+    )
     args = parser.parse_args()
 
     main(google_ads_client, args.customer_id, args.manager_customer_id)

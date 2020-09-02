@@ -27,51 +27,70 @@ from google.ads.google_ads.errors import GoogleAdsException
 
 
 def main(client, customer_id, base_campaign_id):
-    campaign_service = client.get_service('CampaignService', version='v4')
-    campaign_draft_service = client.get_service('CampaignDraftService',
-                                                version='v4')
+    campaign_service = client.get_service("CampaignService", version="v5")
+    campaign_draft_service = client.get_service(
+        "CampaignDraftService", version="v5"
+    )
 
     # Creates a campaign draft operation.
-    campaign_draft_operation = client.get_type('CampaignDraftOperation')
+    campaign_draft_operation = client.get_type("CampaignDraftOperation")
     campaign_draft = campaign_draft_operation.create
 
     # Creates a campaign draft.
     campaign_draft.base_campaign.value = campaign_service.campaign_path(
-        customer_id, base_campaign_id)
-    campaign_draft.name.value = f'Campaign Draft #{uuid4()}'
+        customer_id, base_campaign_id
+    )
+    campaign_draft.name.value = f"Campaign Draft #{uuid4()}"
 
     # Issues a mutate request to add the campaign draft.
     try:
-        campaign_draft_response = (
-            campaign_draft_service.mutate_campaign_drafts(
-                customer_id, [campaign_draft_operation]))
+        campaign_draft_response = campaign_draft_service.mutate_campaign_drafts(
+            customer_id, [campaign_draft_operation]
+        )
     except GoogleAdsException as ex:
-        print(f'Request with ID "{ex.request_id}" failed with status '
-              f'"{ex.error.code().name}" and includes the following errors:')
+        print(
+            f'Request with ID "{ex.request_id}" failed with status '
+            f'"{ex.error.code().name}" and includes the following errors:'
+        )
         for error in ex.failure.errors:
             print(f'\tError with message "{error.message}".')
             if error.location:
                 for field_path_element in error.location.field_path_elements:
-                    print(f'\t\tOn field: {field_path_element.field_name}')
+                    print(f"\t\tOn field: {field_path_element.field_name}")
         sys.exit(1)
 
-    print('Created campaign draft: '
-          f'"{campaign_draft_response.results[0].resource_name}".')
+    print(
+        "Created campaign draft: "
+        f'"{campaign_draft_response.results[0].resource_name}".'
+    )
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     # GoogleAdsClient will read the google-ads.yaml configuration file in the
     # home directory if none is specified.
     google_ads_client = GoogleAdsClient.load_from_storage()
 
     parser = argparse.ArgumentParser(
-        description=('Adds a campaign draft for the specified base campaign ID, '
-                     'for the given customer ID.'))
+        description=(
+            "Adds a campaign draft for the specified base campaign ID, "
+            "for the given customer ID."
+        )
+    )
     # The following argument(s) should be provided to run the example.
-    parser.add_argument('-c', '--customer_id', type=str,
-                        required=True, help='The Google Ads customer ID.')
-    parser.add_argument('-i', '--base_campaign_id', type=str,
-                        required=True, help='The base campaign ID.')
+    parser.add_argument(
+        "-c",
+        "--customer_id",
+        type=str,
+        required=True,
+        help="The Google Ads customer ID.",
+    )
+    parser.add_argument(
+        "-i",
+        "--base_campaign_id",
+        type=str,
+        required=True,
+        help="The base campaign ID.",
+    )
     args = parser.parse_args()
 
     main(google_ads_client, args.customer_id, args.base_campaign_id)

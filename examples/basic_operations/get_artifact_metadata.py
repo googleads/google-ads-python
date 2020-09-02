@@ -39,19 +39,22 @@ def _is_or_is_not(bool_value):
     Returns:
         A str with value "is" if bool_value is True, else "is not".
     """
-    return 'is' if bool_value.value else 'isn\'t'
+    return "is" if bool_value else "isn't"
 
 
 def main(client, artifact_name, page_size):
-    gaf_service = client.get_service('GoogleAdsFieldService', version='v4')
+    gaf_service = client.get_service("GoogleAdsFieldService", version="v5")
 
     # Searches for an artifact with the specified name.
-    query = ('SELECT name, category, selectable, filterable, sortable, '
-             'selectable_with, data_type, is_repeated '
-             'WHERE name = \'%s\'') % artifact_name
+    query = (
+        "SELECT name, category, selectable, filterable, sortable, "
+        "selectable_with, data_type, is_repeated "
+        "WHERE name = '%s'"
+    ) % artifact_name
 
     response = gaf_service.search_google_ads_fields(
-        query=query, page_size=page_size)
+        query=query, page_size=page_size
+    )
 
     # Iterates over all rows and prints out the metadata of the returned
     # artifacts.
@@ -69,47 +72,65 @@ def main(client, artifact_name, page_size):
             sortable = _is_or_is_not(google_ads_field.sortable)
             is_repeated = _is_or_is_not(google_ads_field.is_repeated)
 
-            print('An artifact named "%s" with category %d and data type %d %s '
-                  'selectable, %s filterable, %s sortable, and %s repeated.'
-                  % (google_ads_field.name.value, google_ads_field.category,
-                     google_ads_field.data_type, selectable, filterable,
-                     sortable, is_repeated))
+            print(
+                'An artifact named "%s" with category %d and data type %d %s '
+                "selectable, %s filterable, %s sortable, and %s repeated."
+                % (
+                    google_ads_field.name,
+                    google_ads_field.category,
+                    google_ads_field.data_type,
+                    selectable,
+                    filterable,
+                    sortable,
+                    is_repeated,
+                )
+            )
 
             if len(google_ads_field.selectable_with) > 0:
                 selectable_artifacts = [
-                    wrapped_selectable_artifact.value
-                    for wrapped_selectable_artifact
-                    in google_ads_field.selectable_with]
+                    wrapped_selectable_artifact
+                    for wrapped_selectable_artifact in google_ads_field.selectable_with
+                ]
 
-                print('')
-                print('The artifact can be selected with the following '
-                      'artifacts:')
+                print("")
+                print(
+                    "The artifact can be selected with the following "
+                    "artifacts:"
+                )
                 for artifact in selectable_artifacts:
                     print(artifact)
     except google.ads.google_ads.errors.GoogleAdsException as ex:
-        print('Request with ID "%s" failed with status "%s" and includes the '
-              'following errors:' % (ex.request_id, ex.error.code().name))
+        print(
+            'Request with ID "%s" failed with status "%s" and includes the '
+            "following errors:" % (ex.request_id, ex.error.code().name)
+        )
         for error in ex.failure.errors:
             print('\tError with message "%s".' % error.message)
             if error.location:
                 for field_path_element in error.location.field_path_elements:
-                    print('\t\tOn field: %s' % field_path_element.field_name)
+                    print("\t\tOn field: %s" % field_path_element.field_name)
         sys.exit(1)
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     # GoogleAdsClient will read the google-ads.yaml configuration file in the
     # home directory if none is specified.
-    google_ads_client = (google.ads.google_ads.client.GoogleAdsClient
-                         .load_from_storage())
+    google_ads_client = (
+        google.ads.google_ads.client.GoogleAdsClient.load_from_storage()
+    )
 
     parser = argparse.ArgumentParser(
-        description='Lists metadata for the specified artifact.')
+        description="Lists metadata for the specified artifact."
+    )
     # The following argument(s) should be provided to run the example.
-    parser.add_argument('-a', '--artifact_name', type=str,
-                        required=True,
-                        help='The name of the artifact for which we are '
-                        'retrieving metadata.')
+    parser.add_argument(
+        "-a",
+        "--artifact_name",
+        type=str,
+        required=True,
+        help="The name of the artifact for which we are "
+        "retrieving metadata.",
+    )
     args = parser.parse_args()
 
     main(google_ads_client, args.artifact_name, _DEFAULT_PAGE_SIZE)

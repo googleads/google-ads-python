@@ -26,57 +26,83 @@ _DEFAULT_PAGE_SIZE = 1000
 
 
 def main(client, customer_id, campaign_id, page_size):
-    ga_service = client.get_service('GoogleAdsService', version='v4')
+    ga_service = client.get_service("GoogleAdsService", version="v5")
 
-    query = ('SELECT campaign.id, campaign_criterion.campaign, '
-             'campaign_criterion.criterion_id, campaign_criterion.negative, '
-             'campaign_criterion.type, campaign_criterion.keyword.text, '
-             'campaign_criterion.keyword.match_type '
-             'FROM campaign_criterion '
-             'WHERE campaign.id = %s') % campaign_id
+    query = (
+        "SELECT campaign.id, campaign_criterion.campaign, "
+        "campaign_criterion.criterion_id, campaign_criterion.negative, "
+        "campaign_criterion.type, campaign_criterion.keyword.text, "
+        "campaign_criterion.keyword.match_type "
+        "FROM campaign_criterion "
+        "WHERE campaign.id = %s"
+    ) % campaign_id
 
     results = ga_service.search(customer_id, query=query, page_size=page_size)
 
     try:
         for row in results:
             criterion = row.campaign_criterion
-            print('Campaign criterion with ID "%s" was retrieved:'
-                  % criterion.criterion_id.value)
+            print(
+                'Campaign criterion with ID "%s" was retrieved:'
+                % criterion.criterion_id
+            )
 
-            if criterion.type == client.get_type('CriterionTypeEnum',
-                                                 version='v4').KEYWORD:
-                print('\t%sKeyword with text "%s" and match type %s.'
-                      % ('' if criterion.negative.value else 'Negative',
-                         criterion.keyword.text.value,
-                         criterion.keyword.match_type))
+            if (
+                criterion.type
+                == client.get_type("CriterionTypeEnum", version="v5").KEYWORD
+            ):
+                print(
+                    '\t%sKeyword with text "%s" and match type %s.'
+                    % (
+                        "" if criterion.negative else "Negative",
+                        criterion.keyword.text,
+                        criterion.keyword.match_type,
+                    )
+                )
             else:
-                print('Not a keyword!')
+                print("Not a keyword!")
     except google.ads.google_ads.errors.GoogleAdsException as ex:
-        print('Request with ID "%s" failed with status "%s" and includes the '
-              'following errors:' % (ex.request_id, ex.error.code().name))
+        print(
+            'Request with ID "%s" failed with status "%s" and includes the '
+            "following errors:" % (ex.request_id, ex.error.code().name)
+        )
         for error in ex.failure.errors:
             print('\tError with message "%s".' % error.message)
             if error.location:
                 for field_path_element in error.location.field_path_elements:
-                    print('\t\tOn field: %s' % field_path_element.field_name)
+                    print("\t\tOn field: %s" % field_path_element.field_name)
         sys.exit(1)
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     # GoogleAdsClient will read the google-ads.yaml configuration file in the
     # home directory if none is specified.
-    google_ads_client = (google.ads.google_ads.client.GoogleAdsClient
-                         .load_from_storage())
+    google_ads_client = (
+        google.ads.google_ads.client.GoogleAdsClient.load_from_storage()
+    )
 
     parser = argparse.ArgumentParser(
-        description=('List campaign criteria, or negative keywords, for a '
-                     'given campaign.'))
+        description=(
+            "List campaign criteria, or negative keywords, for a "
+            "given campaign."
+        )
+    )
     # The following argument(s) should be provided to run the example.
-    parser.add_argument('-c', '--customer_id', type=str,
-                        required=True, help='The Google Ads customer ID.')
-    parser.add_argument('-i', '--campaign_id', type=str,
-                        required=True, help='The campaign ID.')
+    parser.add_argument(
+        "-c",
+        "--customer_id",
+        type=str,
+        required=True,
+        help="The Google Ads customer ID.",
+    )
+    parser.add_argument(
+        "-i", "--campaign_id", type=str, required=True, help="The campaign ID."
+    )
     args = parser.parse_args()
 
-    main(google_ads_client, args.customer_id, args.campaign_id,
-         _DEFAULT_PAGE_SIZE)
+    main(
+        google_ads_client,
+        args.customer_id,
+        args.campaign_id,
+        _DEFAULT_PAGE_SIZE,
+    )

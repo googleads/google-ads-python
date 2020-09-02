@@ -27,10 +27,10 @@ from grpc import ClientCallDetails, StatusCode
 
 from google.ads.google_ads.errors import GoogleAdsException
 
-_REQUEST_ID_KEY = 'request-id'
+_REQUEST_ID_KEY = "request-id"
 # Codes that are retried upon by google.api_core.
 _RETRY_STATUS_CODES = (StatusCode.INTERNAL, StatusCode.RESOURCE_EXHAUSTED)
-_SENSITIVE_INFO_MASK = 'REDACTED'
+_SENSITIVE_INFO_MASK = "REDACTED"
 
 
 class Interceptor:
@@ -66,11 +66,11 @@ class Interceptor:
         metadata_dict = {}
 
         if metadata is None:
-            return '{}'
+            return "{}"
 
         for datum in metadata:
             key = datum[0]
-            if key == 'developer-token':
+            if key == "developer-token":
                 metadata_dict[key] = _SENSITIVE_INFO_MASK
             else:
                 value = datum[1]
@@ -94,13 +94,20 @@ class Interceptor:
 
         def default_serializer(value):
             if isinstance(value, bytes):
-                return value.decode(errors='ignore')
+                return value.decode(errors="ignore")
             else:
                 return None
 
-        return str(json.dumps(obj, indent=2, sort_keys=True, ensure_ascii=False,
-                              default=default_serializer,
-                              separators=(',', ': ')))
+        return str(
+            json.dumps(
+                obj,
+                indent=2,
+                sort_keys=True,
+                ensure_ascii=False,
+                default=default_serializer,
+                separators=(",", ": "),
+            )
+        )
 
     @classmethod
     def get_trailing_metadata_from_interceptor_exception(cls, exception):
@@ -127,8 +134,9 @@ class Interceptor:
                 return tuple()
 
     @classmethod
-    def get_client_call_details_instance(cls, method, timeout, metadata,
-                                         credentials=None):
+    def get_client_call_details_instance(
+        cls, method, timeout, metadata, credentials=None
+    ):
         """Initializes an instance of the ClientCallDetails with the given data.
 
         Args:
@@ -140,13 +148,17 @@ class Interceptor:
         Returns:
             An instance of _ClientCallDetails that wraps grpc.ClientCallDetails.
         """
+
         class _ClientCallDetails(
             namedtuple(
-                '_ClientCallDetails',
-                ('method', 'timeout', 'metadata', 'credentials')),
-            ClientCallDetails):
+                "_ClientCallDetails",
+                ("method", "timeout", "metadata", "credentials"),
+            ),
+            ClientCallDetails,
+        ):
             """Wrapper class for initializing a new ClientCallDetails instance.
             """
+
             pass
 
         return _ClientCallDetails(method, timeout, metadata, credentials)
@@ -154,7 +166,8 @@ class Interceptor:
     def __init__(self, api_version):
         self._error_protos = None
         self._failure_key = (
-            f'google.ads.googleads.{api_version}.errors.googleadsfailure-bin')
+            f"google.ads.googleads.{api_version}.errors.googleadsfailure-bin"
+        )
         self._api_version = api_version
 
     def _get_error_from_response(self, response):
@@ -190,15 +203,16 @@ class Interceptor:
 
             if google_ads_failure:
                 request_id = self.get_request_id_from_metadata(
-                    trailing_metadata)
+                    trailing_metadata
+                )
 
                 # If exception is a GoogleAdsFailure then it gets wrapped in a
                 # library-specific Error type for easy handling. These errors
                 # originate from the Google Ads API and are often caused by
                 # invalid requests.
                 return GoogleAdsException(
-                    response_exception, response, google_ads_failure,
-                    request_id)
+                    response_exception, response, google_ads_failure, request_id
+                )
             else:
                 # Raise the original exception if not a GoogleAdsFailure. This
                 # type of error is generally caused by problems at the request
@@ -208,7 +222,6 @@ class Interceptor:
             # Raise the original exception if error has status code
             # INTERNAL or RESOURCE_EXHAUSTED, meaning that
             return response_exception
-
 
     def _get_google_ads_failure(self, trailing_metadata):
         """Gets the Google Ads failure details if they exist.
@@ -227,9 +240,10 @@ class Interceptor:
                 if kv[0] == self._failure_key:
                     try:
                         if not self._error_protos:
-                          self._error_protos = import_module(
-                            f'google.ads.google_ads.{self._api_version}.proto.'
-                            'errors.errors_pb2')
+                            self._error_protos = import_module(
+                                f"google.ads.google_ads.{self._api_version}.proto."
+                                "errors.errors_pb2"
+                            )
                         ga_failure = self._error_protos.GoogleAdsFailure()
                         ga_failure.ParseFromString(kv[1])
                         return ga_failure

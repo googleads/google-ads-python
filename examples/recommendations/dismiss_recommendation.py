@@ -25,49 +25,67 @@ import google.ads.google_ads.client
 
 
 def main(client, customer_id, recommendation_id):
-    recommendation_service = client.get_service('RecommendationService')
+    recommendation_service = client.get_service("RecommendationService")
 
     dismiss_recommendation_request = client.get_type(
-        'DismissRecommendationRequest')
+        "DismissRecommendationRequest"
+    )
 
-    dismiss_recommendation_operation = (dismiss_recommendation_request.
-                                        DismissRecommendationOperation())
+    dismiss_recommendation_operation = (
+        dismiss_recommendation_request.DismissRecommendationOperation()
+    )
 
-    dismiss_recommendation_operation.resource_name = (
-        recommendation_service.recommendation_path(
-            customer_id, recommendation_id))
+    dismiss_recommendation_operation.resource_name = recommendation_service.recommendation_path(
+        customer_id, recommendation_id
+    )
 
     try:
         dismissal_response = recommendation_service.dismiss_recommendation(
-            customer_id,
-            [dismiss_recommendation_operation])
+            customer_id, [dismiss_recommendation_operation]
+        )
     except google.ads.google_ads.errors.GoogleAdsException as ex:
-        print('Request with ID "%s" failed with status "%s" and includes the '
-              'following errors:' % (ex.request_id, ex.error.code().name))
+        print(
+            'Request with ID "%s" failed with status "%s" and includes the '
+            "following errors:" % (ex.request_id, ex.error.code().name)
+        )
         for error in ex.failure.errors:
             print('\tError with message "%s".' % error.message)
             if error.location:
                 for field_path_element in error.location.field_path_elements:
-                    print('\t\tOn field: %s' % field_path_element.field_name)
+                    print("\t\tOn field: %s" % field_path_element.field_name)
         sys.exit(1)
 
-    print('Dismissed recommendation with resource name: "%s".'
-          % dismissal_response.results[0].resource_name)
+    print(
+        'Dismissed recommendation with resource name: "%s".'
+        % dismissal_response.results[0].resource_name
+    )
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     # GoogleAdsClient will read the google-ads.yaml configuration file in the
     # home directory if none is specified.
-    google_ads_client = (google.ads.google_ads.client.GoogleAdsClient
-                         .load_from_storage())
+    google_ads_client = (
+        google.ads.google_ads.client.GoogleAdsClient.load_from_storage()
+    )
 
     parser = argparse.ArgumentParser(
-        description=('Dismisses a recommendation with the given ID.'))
+        description=("Dismisses a recommendation with the given ID.")
+    )
     # The following argument(s) should be provided to run the example.
-    parser.add_argument('-c', '--customer_id', type=str,
-                        required=True, help='The Google Ads customer ID.')
-    parser.add_argument('-r', '--recommendation_id', type=str,
-                        required=True, help='The recommendation ID.')
+    parser.add_argument(
+        "-c",
+        "--customer_id",
+        type=str,
+        required=True,
+        help="The Google Ads customer ID.",
+    )
+    parser.add_argument(
+        "-r",
+        "--recommendation_id",
+        type=str,
+        required=True,
+        help="The recommendation ID.",
+    )
     args = parser.parse_args()
 
     main(google_ads_client, args.customer_id, args.recommendation_id)

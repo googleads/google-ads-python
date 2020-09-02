@@ -25,16 +25,18 @@ _DEFAULT_PAGE_SIZE = 1000
 
 
 def main(client, customer_id, page_size, ad_group_id=None):
-    ga_service = client.get_service('GoogleAdsService', version='v4')
+    ga_service = client.get_service("GoogleAdsService", version="v5")
 
-    query = ('SELECT ad_group.id, ad_group_criterion.type, '
-             'ad_group_criterion.criterion_id, '
-             'ad_group_criterion.keyword.text, '
-             'ad_group_criterion.keyword.match_type FROM ad_group_criterion '
-             'WHERE ad_group_criterion.type = KEYWORD')
+    query = (
+        "SELECT ad_group.id, ad_group_criterion.type, "
+        "ad_group_criterion.criterion_id, "
+        "ad_group_criterion.keyword.text, "
+        "ad_group_criterion.keyword.match_type FROM ad_group_criterion "
+        "WHERE ad_group_criterion.type = KEYWORD"
+    )
 
     if ad_group_id:
-        query = '%s AND ad_group.id = %s' % (query, ad_group_id)
+        query = "%s AND ad_group.id = %s" % (query, ad_group_id)
 
     results = ga_service.search(customer_id, query=query, page_size=page_size)
 
@@ -44,37 +46,59 @@ def main(client, customer_id, page_size, ad_group_id=None):
             ad_group_criterion = row.ad_group_criterion
             keyword = row.ad_group_criterion.keyword
 
-            print('Keyword with text "%s", match type %s, criteria type %s, '
-                  'and ID %s was found in ad group with ID %s.'
-                  % (keyword.text.value, keyword.match_type,
-                     ad_group_criterion.type,
-                     ad_group_criterion.criterion_id.value, ad_group.id.value))
+            print(
+                'Keyword with text "%s", match type %s, criteria type %s, '
+                "and ID %s was found in ad group with ID %s."
+                % (
+                    keyword.text,
+                    keyword.match_type,
+                    ad_group_criterion.type,
+                    ad_group_criterion.criterion_id,
+                    ad_group.id,
+                )
+            )
     except google.ads.google_ads.errors.GoogleAdsException as ex:
-        print('Request with ID "%s" failed with status "%s" and includes the '
-              'following errors:' % (ex.request_id, ex.error.code().name))
+        print(
+            'Request with ID "%s" failed with status "%s" and includes the '
+            "following errors:" % (ex.request_id, ex.error.code().name)
+        )
         for error in ex.failure.errors:
             print('\tError with message "%s".' % error.message)
             if error.location:
                 for field_path_element in error.location.field_path_elements:
-                    print('\t\tOn field: %s' % field_path_element.field_name)
+                    print("\t\tOn field: %s" % field_path_element.field_name)
         sys.exit(1)
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     # GoogleAdsClient will read the google-ads.yaml configuration file in the
     # home directory if none is specified.
-    google_ads_client = (google.ads.google_ads.client.GoogleAdsClient
-                         .load_from_storage())
+    google_ads_client = (
+        google.ads.google_ads.client.GoogleAdsClient.load_from_storage()
+    )
 
     parser = argparse.ArgumentParser(
-        description=('Retrieves keywords for the specified customer, or '
-                     'optionally for a specific ad group.'))
+        description=(
+            "Retrieves keywords for the specified customer, or "
+            "optionally for a specific ad group."
+        )
+    )
     # The following argument(s) should be provided to run the example.
-    parser.add_argument('-c', '--customer_id', type=str,
-                        required=True, help='The Google Ads customer ID.')
-    parser.add_argument('-a', '--ad_group_id', type=str,
-                        required=False, help='The ad group ID.')
+    parser.add_argument(
+        "-c",
+        "--customer_id",
+        type=str,
+        required=True,
+        help="The Google Ads customer ID.",
+    )
+    parser.add_argument(
+        "-a", "--ad_group_id", type=str, required=False, help="The ad group ID."
+    )
     args = parser.parse_args()
 
-    main(google_ads_client, args.customer_id, _DEFAULT_PAGE_SIZE,
-         ad_group_id=args.ad_group_id)
+    main(
+        google_ads_client,
+        args.customer_id,
+        _DEFAULT_PAGE_SIZE,
+        ad_group_id=args.ad_group_id,
+    )

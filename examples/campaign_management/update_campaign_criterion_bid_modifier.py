@@ -24,56 +24,83 @@ from google.api_core import protobuf_helpers
 
 def main(client, customer_id, campaign_id, criterion_id, bid_modifier_value):
     campaign_criterion_service = client.get_service(
-        'CampaignCriterionService', version='v4')
+        "CampaignCriterionService", version="v5"
+    )
 
     criterion_rname = campaign_criterion_service.campaign_criteria_path(
-        customer_id, f'{campaign_id}~{criterion_id}')
+        customer_id, f"{campaign_id}~{criterion_id}"
+    )
 
     campaign_criterion_operation = client.get_type(
-        'CampaignCriterionOperation', version='v4')
+        "CampaignCriterionOperation", version="v5"
+    )
     campaign_criterion = campaign_criterion_operation.update
     campaign_criterion.resource_name = criterion_rname
-    campaign_criterion.bid_modifier.value = bid_modifier_value
+    campaign_criterion.bid_modifier = bid_modifier_value
     fm = protobuf_helpers.field_mask(None, campaign_criterion)
     campaign_criterion_operation.update_mask.CopyFrom(fm)
 
     try:
-        campaign_criterion_response = (
-            campaign_criterion_service.mutate_campaign_criteria(
-                customer_id, [campaign_criterion_operation]))
+        campaign_criterion_response = campaign_criterion_service.mutate_campaign_criteria(
+            customer_id, [campaign_criterion_operation]
+        )
     except GoogleAdsException as ex:
-        print(f'Request with ID "{ex.request_id}" failed with status '
-              f'"{ex.error.code().name}" and includes the following errors:')
+        print(
+            f'Request with ID "{ex.request_id}" failed with status '
+            f'"{ex.error.code().name}" and includes the following errors:'
+        )
         for error in ex.failure.errors:
             print(f'\tError with message "{error.message}".')
             if error.location:
                 for field_path_element in error.location.field_path_elements:
-                    print(f'\t\tOn field: {field_path_element.field_name}')
+                    print(f"\t\tOn field: {field_path_element.field_name}")
         sys.exit(1)
 
-    print('Campaign criterion with resource name '
-          f'"{campaign_criterion_response.results[0].resource_name}" was '
-          'modified.')
+    print(
+        "Campaign criterion with resource name "
+        f'"{campaign_criterion_response.results[0].resource_name}" was '
+        "modified."
+    )
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     # GoogleAdsClient will read the google-ads.yaml configuration file in the
     # home directory if none is specified.
     google_ads_client = GoogleAdsClient.load_from_storage()
 
     parser = argparse.ArgumentParser(
-        description=('Updates the bid modifier and device type for the given '
-                     'customer ID and campaign criterion ID.'))
+        description=(
+            "Updates the bid modifier and device type for the given "
+            "customer ID and campaign criterion ID."
+        )
+    )
     # The following argument(s) should be provided to run the example.
-    parser.add_argument('-c', '--customer_id', type=str,
-                        required=True, help='The Google Ads customer ID.')
-    parser.add_argument('--campaign_id', type=str, required=True,
-                        help='The campaign ID.')
-    parser.add_argument('--criterion_id', type=str, required=True,
-                        help='The criterion ID.')
-    parser.add_argument('-b', '--bid_modifier_value', type=float, default=1.5,
-                        help='The desired campaign criterion bid modifier.')
+    parser.add_argument(
+        "-c",
+        "--customer_id",
+        type=str,
+        required=True,
+        help="The Google Ads customer ID.",
+    )
+    parser.add_argument(
+        "--campaign_id", type=str, required=True, help="The campaign ID."
+    )
+    parser.add_argument(
+        "--criterion_id", type=str, required=True, help="The criterion ID."
+    )
+    parser.add_argument(
+        "-b",
+        "--bid_modifier_value",
+        type=float,
+        default=1.5,
+        help="The desired campaign criterion bid modifier.",
+    )
     args = parser.parse_args()
 
-    main(google_ads_client, args.customer_id, args.campaign_id,
-         args.criterion_id, args.bid_modifier_value)
+    main(
+        google_ads_client,
+        args.customer_id,
+        args.campaign_id,
+        args.criterion_id,
+        args.bid_modifier_value,
+    )

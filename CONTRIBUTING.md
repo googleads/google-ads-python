@@ -26,3 +26,31 @@ information on using pull requests.
 
 This project follows [Google's Open Source Community
 Guidelines](https://opensource.google.com/conduct/).
+
+## Code Style
+
+This library conforms to [PEP 8](https://www.python.org/dev/peps/pep-0008/)
+style guidelines and enforces an 80 character line width. It's recommended
+that any contributor run the auto-formatter [`black`](https://github.com/psf/black),
+version 19.10b0 on the non-generated codebase whenever making changes. To get
+started, first install the appropriate version of `black`:
+
+```
+python -m pip install black==19.10b0
+```
+
+You can manually run the formatter on all non-generated code with the following
+command:
+
+```
+python -m black -l 80 -t py37 --exclude "/(v[0-9]+|\.eggs|\.git|_cache|\.nox|\.tox|\.venv|\.svn|_build|buck-out|build|dist)/" .
+```
+
+Alternatively, if you intend to contribute regularly, it might be easier to
+append this script to the `.git/hooks/pre-commit` file:
+
+```
+FILES=$(git diff --cached --name-only --diff-filter=ACMR "*.py" | grep -v "google/ads/google_ads/v.*")
+echo "${FILES}" | xargs python -m black -l 80 -t py37
+echo "${FILES}" | xargs git add
+```

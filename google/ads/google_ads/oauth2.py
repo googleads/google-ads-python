@@ -22,8 +22,8 @@ from google.auth.transport.requests import Request
 
 from google.ads.google_ads import config
 
-_SERVICE_ACCOUNT_SCOPES = ['https://www.googleapis.com/auth/adwords']
-_DEFAULT_TOKEN_URI = 'https://accounts.google.com/o/oauth2/token'
+_SERVICE_ACCOUNT_SCOPES = ["https://www.googleapis.com/auth/adwords"]
+_DEFAULT_TOKEN_URI = "https://accounts.google.com/o/oauth2/token"
 
 
 def _initialize_credentials_decorator(func):
@@ -32,17 +32,20 @@ def _initialize_credentials_decorator(func):
     Returns:
         An initialized credentials instance
     """
+
     @functools.wraps(func)
     def initialize_credentials_wrapper(*args, **kwargs):
         credentials = func(*args, **kwargs)
         credentials.refresh(Request())
         return credentials
+
     return initialize_credentials_wrapper
 
 
 @_initialize_credentials_decorator
 def get_installed_app_credentials(
-    client_id, client_secret, refresh_token, token_uri=_DEFAULT_TOKEN_URI):
+    client_id, client_secret, refresh_token, token_uri=_DEFAULT_TOKEN_URI
+):
     """Creates and returns an instance of oauth2.credentials.Credentials.
 
     Args:
@@ -54,13 +57,18 @@ def get_installed_app_credentials(
         An instance of oauth2.credentials.Credentials
     """
     return InstalledAppCredentials(
-        None, client_id=client_id, client_secret=client_secret,
-        refresh_token=refresh_token, token_uri=token_uri)
+        None,
+        client_id=client_id,
+        client_secret=client_secret,
+        refresh_token=refresh_token,
+        token_uri=token_uri,
+    )
 
 
 @_initialize_credentials_decorator
-def get_service_account_credentials(path_to_private_key_file, subject,
-                                    scopes=_SERVICE_ACCOUNT_SCOPES):
+def get_service_account_credentials(
+    path_to_private_key_file, subject, scopes=_SERVICE_ACCOUNT_SCOPES
+):
     """Creates and returns an instance of oauth2.service_account.Credentials.
 
     Args:
@@ -73,7 +81,8 @@ def get_service_account_credentials(path_to_private_key_file, subject,
         An instance of oauth2.credentials.Credentials
     """
     return ServiceAccountCreds.from_service_account_file(
-        path_to_private_key_file, subject=subject, scopes=scopes)
+        path_to_private_key_file, subject=subject, scopes=scopes
+    )
 
 
 def get_credentials(config_data):
@@ -91,17 +100,22 @@ def get_credentials(config_data):
     if all(key in config_data for key in required_installed_app_keys):
         # Using the Installed App Flow
         return get_installed_app_credentials(
-            config_data.get('client_id'),
-            config_data.get('client_secret'),
-            config_data.get('refresh_token'))
+            config_data.get("client_id"),
+            config_data.get("client_secret"),
+            config_data.get("refresh_token"),
+        )
     elif all(key in config_data for key in required_service_account_keys):
         # Using the Service Account Flow
         return get_service_account_credentials(
-            config_data.get('path_to_private_key_file'),
-            config_data.get('delegated_account'))
+            config_data.get("path_to_private_key_file"),
+            config_data.get("delegated_account"),
+        )
     else:
-        raise ValueError('Your YAML file is incorrectly configured for OAuth2. '
-                         'You need to define credentials for either the OAuth2 '
-                         'installed application flow ({}) or service account '
-                         'flow ({}).'.format(required_installed_app_keys,
-                                             required_service_account_keys))
+        raise ValueError(
+            "Your YAML file is incorrectly configured for OAuth2. "
+            "You need to define credentials for either the OAuth2 "
+            "installed application flow ({}) or service account "
+            "flow ({}).".format(
+                required_installed_app_keys, required_service_account_keys
+            )
+        )

@@ -27,19 +27,26 @@ from grpc import UnaryUnaryClientInterceptor, UnaryStreamClientInterceptor
 from .interceptor import Interceptor
 
 
-class LoggingInterceptor(Interceptor, UnaryUnaryClientInterceptor,
-                         UnaryStreamClientInterceptor):
+class LoggingInterceptor(
+    Interceptor, UnaryUnaryClientInterceptor, UnaryStreamClientInterceptor
+):
     """An interceptor that logs rpc requests and responses."""
 
-    _FULL_REQUEST_LOG_LINE = ('Request\n-------\nMethod: {}\nHost: {}\n'
-                              'Headers: {}\nRequest: {}\n\nResponse\n-------\n'
-                              'Headers: {}\nResponse: {}\n')
-    _FULL_FAULT_LOG_LINE = ('Request\n-------\nMethod: {}\nHost: {}\n'
-                            'Headers: {}\nRequest: {}\n\nResponse\n-------\n'
-                            'Headers: {}\nFault: {}\n')
-    _SUMMARY_LOG_LINE = ('Request made: ClientCustomerId: {}, Host: {}, '
-                         'Method: {}, RequestId: {}, IsFault: {}, '
-                         'FaultMessage: {}')
+    _FULL_REQUEST_LOG_LINE = (
+        "Request\n-------\nMethod: {}\nHost: {}\n"
+        "Headers: {}\nRequest: {}\n\nResponse\n-------\n"
+        "Headers: {}\nResponse: {}\n"
+    )
+    _FULL_FAULT_LOG_LINE = (
+        "Request\n-------\nMethod: {}\nHost: {}\n"
+        "Headers: {}\nRequest: {}\n\nResponse\n-------\n"
+        "Headers: {}\nFault: {}\n"
+    )
+    _SUMMARY_LOG_LINE = (
+        "Request made: ClientCustomerId: {}, Host: {}, "
+        "Method: {}, RequestId: {}, IsFault: {}, "
+        "FaultMessage: {}"
+    )
 
     def __init__(self, logger, api_version, endpoint=None):
         """Initializer for the LoggingInterceptor.
@@ -70,12 +77,14 @@ class LoggingInterceptor(Interceptor, UnaryUnaryClientInterceptor,
 
             if not trailing_metadata:
                 return self.get_trailing_metadata_from_interceptor_exception(
-                    response.exception())
+                    response.exception()
+                )
 
             return trailing_metadata
         except AttributeError:
             return self.get_trailing_metadata_from_interceptor_exception(
-                response.exception())
+                response.exception()
+            )
 
     def _get_initial_metadata(self, client_call_details):
         """Retrieves the initial metadata from client_call_details.
@@ -89,7 +98,7 @@ class LoggingInterceptor(Interceptor, UnaryUnaryClientInterceptor,
         Args:
             client_call_details: An instance of grpc.ClientCallDetails.
         """
-        return getattr(client_call_details, 'metadata', tuple())
+        return getattr(client_call_details, "metadata", tuple())
 
     def _get_call_method(self, client_call_details):
         """Retrieves the call method from client_call_details.
@@ -103,7 +112,7 @@ class LoggingInterceptor(Interceptor, UnaryUnaryClientInterceptor,
         Args:
             client_call_details: An instance of grpc.ClientCallDetails.
         """
-        return getattr(client_call_details, 'method', None)
+        return getattr(client_call_details, "method", None)
 
     def _get_customer_id(self, request):
         """Retrieves the customer_id from the grpc request.
@@ -117,12 +126,12 @@ class LoggingInterceptor(Interceptor, UnaryUnaryClientInterceptor,
         Args:
             request: An instance of a request proto message.
         """
-        if hasattr(request, 'customer_id'):
-            return getattr(request, 'customer_id')
-        elif hasattr(request, 'resource_name'):
-            resource_name = getattr(request, 'resource_name')
-            segments = resource_name.split('/')
-            if segments[0] == 'customers':
+        if hasattr(request, "customer_id"):
+            return getattr(request, "customer_id")
+        elif hasattr(request, "resource_name"):
+            resource_name = getattr(request, "resource_name")
+            segments = resource_name.split("/")
+            if segments[0] == "customers":
                 return segments[1]
         else:
             return None
@@ -146,12 +155,13 @@ class LoggingInterceptor(Interceptor, UnaryUnaryClientInterceptor,
                 # if exception.failure isn't present then it's likely this is a
                 # transport error with a .debug_error_string method and the
                 # returned JSON string will need to be formatted.
-                return self.format_json_object(json.loads(
-                    exception.debug_error_string()))
+                return self.format_json_object(
+                    json.loads(exception.debug_error_string())
+                )
             except (AttributeError, ValueError):
                 # if both attempts to retrieve serializable error data fail
                 # then simply return an empty JSON string
-                return '{}'
+                return "{}"
 
     def _get_fault_message(self, exception):
         """Retrieves a fault/error message from an exception object.
@@ -173,9 +183,16 @@ class LoggingInterceptor(Interceptor, UnaryUnaryClientInterceptor,
             except AttributeError:
                 return None
 
-    def _log_successful_request(self, method, customer_id, metadata_json,
-                                request_id, request, trailing_metadata_json,
-                                response):
+    def _log_successful_request(
+        self,
+        method,
+        customer_id,
+        metadata_json,
+        request_id,
+        request,
+        trailing_metadata_json,
+        response,
+    ):
         """Handles logging of a successful request.
 
         Args:
@@ -189,16 +206,31 @@ class LoggingInterceptor(Interceptor, UnaryUnaryClientInterceptor,
         """
         self.logger.debug(
             self._FULL_REQUEST_LOG_LINE.format(
-                method, self.endpoint, metadata_json, request,
-                trailing_metadata_json, response.result()))
+                method,
+                self.endpoint,
+                metadata_json,
+                request,
+                trailing_metadata_json,
+                response.result(),
+            )
+        )
 
         self.logger.info(
             self._SUMMARY_LOG_LINE.format(
-                customer_id, self.endpoint, method, request_id, False, None))
+                customer_id, self.endpoint, method, request_id, False, None
+            )
+        )
 
-    def _log_failed_request(self, method, customer_id, metadata_json,
-                            request_id, request, trailing_metadata_json,
-                            response):
+    def _log_failed_request(
+        self,
+        method,
+        customer_id,
+        metadata_json,
+        request_id,
+        request,
+        trailing_metadata_json,
+        response,
+    ):
         """Handles logging of a failed request.
 
         Args:
@@ -216,13 +248,25 @@ class LoggingInterceptor(Interceptor, UnaryUnaryClientInterceptor,
 
         self.logger.info(
             self._FULL_FAULT_LOG_LINE.format(
-                method, self.endpoint, metadata_json, request,
-                trailing_metadata_json, exception_str))
+                method,
+                self.endpoint,
+                metadata_json,
+                request,
+                trailing_metadata_json,
+                exception_str,
+            )
+        )
 
         self.logger.warning(
             self._SUMMARY_LOG_LINE.format(
-                customer_id, self.endpoint, method, request_id, True,
-                fault_message))
+                customer_id,
+                self.endpoint,
+                method,
+                request_id,
+                True,
+                fault_message,
+            )
+        )
 
     def _log_request(self, client_call_details, request, response):
         """Handles logging all requests.
@@ -242,12 +286,24 @@ class LoggingInterceptor(Interceptor, UnaryUnaryClientInterceptor,
 
         if response.exception():
             self._log_failed_request(
-                method, customer_id, initial_metadata_json, request_id, request,
-                trailing_metadata_json, response)
+                method,
+                customer_id,
+                initial_metadata_json,
+                request_id,
+                request,
+                trailing_metadata_json,
+                response,
+            )
         else:
             self._log_successful_request(
-                method, customer_id, initial_metadata_json, request_id, request,
-                trailing_metadata_json, response)
+                method,
+                customer_id,
+                initial_metadata_json,
+                request_id,
+                request,
+                trailing_metadata_json,
+                response,
+            )
 
     def intercept_unary_unary(self, continuation, client_call_details, request):
         """Intercepts and logs API interactions.
@@ -271,8 +327,9 @@ class LoggingInterceptor(Interceptor, UnaryUnaryClientInterceptor,
 
         return response
 
-    def intercept_unary_stream(self, continuation, client_call_details,
-                               request):
+    def intercept_unary_stream(
+        self, continuation, client_call_details, request
+    ):
         """Intercepts and logs API interactions for Unary-Stream requests.
 
         Overrides abstract method defined in grpc.UnaryStreamClientInterceptor.
@@ -287,6 +344,7 @@ class LoggingInterceptor(Interceptor, UnaryUnaryClientInterceptor,
         Returns:
             A grpc.Call/grpc.Future instance representing a service response.
         """
+
         def on_rpc_complete(response_future):
             if self.logger.isEnabledFor(logging.WARNING):
                 self._log_request(client_call_details, request, response_future)

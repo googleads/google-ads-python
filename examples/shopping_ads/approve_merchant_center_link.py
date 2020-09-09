@@ -56,13 +56,13 @@ def main(client, customer_id, merchant_center_account_id):
 
         merchant_center_link_status_enum = client.get_type(
             "MerchantCenterLinkStatusEnum", version="v5"
-        )
+        ).MerchantCenterLinkStatus
 
         # Iterate through the results and filter for links with pending states.
         for merchant_center_link in response.merchant_center_links:
             print(
                 f"Link '{merchant_center_link.resource_name}' has status "
-                f"'{merchant_center_link.status}'."
+                f"'{merchant_center_link_status_enum.Name(merchant_center_link.status)}'."
             )
 
             if (merchant_center_link.status ==
@@ -120,11 +120,16 @@ def _update_merchant_center_link_status(
         customer_id, operation
     )
 
+    merchant_center_link_status_enum = client.get_type(
+        "MerchantCenterLinkStatusEnum", version="v5"
+    ).MerchantCenterLinkStatus
+
     # Displays the result.
     print(
         "The status of Merchant Center Link with resource name "
-        + f"'{mutate_response.result.resource_name}' to Google Ads account : "
-        + f"{customer_id} was updated to {status}."
+        f"'{mutate_response.result.resource_name}' to Google Ads account : "
+        f"{customer_id} was updated to "
+        f"{merchant_center_link_status_enum.Name(status)}."
     )
 
 
@@ -149,7 +154,8 @@ if __name__ == "__main__":
         "--merchant_center_account_id",
         type=str,
         required=True,
-        help="ID of the Merchant center whose link request is to be approved.",
+        help="ID of the Merchant Center account whose link request is to be "
+        "approved.",
     )
     args = parser.parse_args()
 

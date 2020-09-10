@@ -19,7 +19,7 @@ It then adds an ad that uses the feed to populate dynamic data.
 
 
 import argparse
-from datetime import datetime, timedelta
+from datetime import datetime
 import sys
 from uuid import uuid4
 
@@ -137,8 +137,8 @@ def _get_feed_attributes(client, customer_id, feed_resource_name):
         results = ga_service.search(customer_id, query, page_size=1)
         feed = list(results)[0].feed
         print(
-            f"Found the following attributes for feed with name "
-            "{feed.name.value}"
+            "Found the following attributes for feed with name "
+            f"{feed.name.value}"
         )
     except GoogleAdsException as ex:
         _handle_google_ads_exception(ex)

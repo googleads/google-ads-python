@@ -49,7 +49,7 @@ def main(
         conversion_date_time: The the date and time of the conversion (should be
             after the click time). The format is 'yyyy-mm-dd hh:mm:ss+|-hh:mm',
             e.g. '2019-01-01 12:32:45-08:00'.
-        conversion_value: The conversion value.
+        conversion_value: The conversion value in the desired currency.
     """
     # Get the ConversionUploadService client.
     conversion_upload_service = client.get_service(

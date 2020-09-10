@@ -36,35 +36,37 @@ def main(client, customer_id, ad_group_ids):
         ad_group_ids: a list of ad group IDs.
     """
     feed_name = f"Ad customizer example feed {uuid4()}"
-    ad_customizer_feed_resource_name = create_ad_customizer_feed(
+    ad_customizer_feed_resource_name = _create_add_customizer_feed(
         client, customer_id, feed_name
     )
-    ad_customizer_feed_attributes = get_feed_attributes(
+    ad_customizer_feed_attributes = _get_feed_attributes(
         client, customer_id, ad_customizer_feed_resource_name
     )
 
-    create_ad_customizer_mapping(
+    _create_ad_customizer_mapping(
         client,
         customer_id,
         ad_customizer_feed_resource_name,
         ad_customizer_feed_attributes,
     )
 
-    feed_item_resource_names = create_feed_items(
+    feed_item_resource_names = _create_feed_items(
         client,
         customer_id,
         ad_customizer_feed_resource_name,
         ad_customizer_feed_attributes,
     )
 
-    create_feed_item_targets(
+    _create_feed_item_targets(
         client, customer_id, ad_group_ids, feed_item_resource_names
     )
 
-    create_ads_with_customizations(client, customer_id, ad_group_ids, feed_name)
+    _create_ads_with_customizations(
+        client, customer_id, ad_group_ids, feed_name
+    )
 
 
-def create_ad_customizer_feed(client, customer_id, feed_name):
+def _create_add_customizer_feed(client, customer_id, feed_name):
     """Creates a feed to be used for ad customization.
 
     Args:
@@ -110,7 +112,7 @@ def create_ad_customizer_feed(client, customer_id, feed_name):
         _handle_google_ads_exception(ex)
 
 
-def get_feed_attributes(client, customer_id, feed_resource_name):
+def _get_feed_attributes(client, customer_id, feed_resource_name):
     """Retrieves attributes for a feed.
 
     Args:
@@ -155,7 +157,7 @@ def get_feed_attributes(client, customer_id, feed_resource_name):
     return feed_details
 
 
-def create_ad_customizer_mapping(
+def _create_ad_customizer_mapping(
     client, customer_id, ad_customizer_feed_resource_name, feed_details,
 ):
     """Creates a feed mapping for a given feed.
@@ -210,7 +212,7 @@ def create_ad_customizer_mapping(
         _handle_google_ads_exception(ex)
 
 
-def create_feed_items(
+def _create_feed_items(
     client,
     customer_id,
     ad_customizer_feed_resource_name,
@@ -231,7 +233,7 @@ def create_feed_items(
     """
     feed_item_operations = []
     feed_item_operations.append(
-        create_feed_item_operation(
+        _create_feed_item_operation(
             client,
             "Mars",
             "$1234.56",
@@ -242,7 +244,7 @@ def create_feed_items(
         )
     )
     feed_item_operations.append(
-        create_feed_item_operation(
+        _create_feed_item_operation(
             client,
             "Venus",
             "$6543.21",
@@ -264,7 +266,7 @@ def create_feed_items(
         _handle_google_ads_exception(ex)
 
 
-def create_feed_item_operation(
+def _create_feed_item_operation(
     client,
     name,
     price,
@@ -315,7 +317,7 @@ def create_feed_item_operation(
     return feed_item_op
 
 
-def create_feed_item_targets(
+def _create_feed_item_targets(
     client, customer_id, ad_group_ids, feed_item_resource_names
 ):
     """Restricts the feed items to work only with a specific ad group.
@@ -337,7 +339,7 @@ def create_feed_item_targets(
     # used to customize ads inside that ad group; using the feed item elsewhere
     # will result in an error.
     for i, resource_name in enumerate(feed_item_resource_names):
-        ad_group_id = ad_group_ids[0]
+        ad_group_id = ad_group_ids[i]
 
         feed_item_target_op = client.get_type(
             "FeedItemTargetOperation", version="v5"
@@ -360,7 +362,7 @@ def create_feed_item_targets(
             _handle_google_ads_exception(ex)
 
 
-def create_ads_with_customizations(
+def _create_ads_with_customizations(
     client, customer_id, ad_group_ids, feed_name
 ):
     """Creates expanded text ads that use the ad customizer feed.
@@ -393,6 +395,8 @@ def create_ads_with_customizations(
         ad_group_ad.ad.expanded_text_ad.headline_part2 = (
             f"Only {{={feed_name}.Price}}"
         )
+        # See this documentation for an explanation of how countdown ad
+        # customizers work: https://support.google.com/google-ads/answer/6193743?hl=en
         ad_group_ad.ad.expanded_text_ad.description = (
             f"Offer ends in {{=countdown({feed_name}.Date)}}!"
         )
@@ -451,7 +455,6 @@ if __name__ == "__main__":
         nargs=2,
         type=str,
         required=True,
-        default=[],
         help="Space-delimited list of ad group IDs.",
     )
     args = parser.parse_args()

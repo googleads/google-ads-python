@@ -64,7 +64,7 @@ def main(
     call_conversion.caller_id = caller_id
     call_conversion.call_start_date_time = call_start_date_time
     call_conversion.conversion_date_time = conversion_date_time
-    call_conversion.conversion_value = float(conversion_value)
+    call_conversion.conversion_value = conversion_value
     call_conversion.currency_code = "USD"
 
     try:
@@ -157,9 +157,9 @@ if __name__ == "__main__":
     parser.add_argument(
         "-v",
         "--conversion_value",
-        type=str,
+        type=float,
         required=True,
-        help="The conversion value.",
+        help="The conversion value in the desired currency.",
     )
     args = parser.parse_args()
 

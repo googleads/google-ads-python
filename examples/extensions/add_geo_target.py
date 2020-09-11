@@ -18,9 +18,10 @@
 import argparse
 import sys
 
+from google.api_core import protobuf_helpers
+
 from google.ads.google_ads.client import GoogleAdsClient
 from google.ads.google_ads.errors import GoogleAdsException
-from google.api_core import protobuf_helpers
 
 
 def main(client, customer_id, feed_item_id, geo_target_constant_id):
@@ -37,10 +38,10 @@ def main(client, customer_id, feed_item_id, geo_target_constant_id):
         "ExtensionFeedItemService", version="v5"
     )
 
-    extension_feed_item_op = client.get_type(
+    extension_feed_item_operation = client.get_type(
         "ExtensionFeedItemOperation", version="v5"
     )
-    extension_feed_item = extension_feed_item_op.update
+    extension_feed_item = extension_feed_item_operation.update
     # Creates an extension feed item using the specified feed item ID and
     # geo target constant ID for targeting.
     extension_feed_item.resource_name = extension_feed_item_service.extension_feed_item_path(
@@ -50,11 +51,11 @@ def main(client, customer_id, feed_item_id, geo_target_constant_id):
         "GeoTargetConstantService", version="v5"
     ).geo_target_constant_path(geo_target_constant_id)
     fm = protobuf_helpers.field_mask(None, extension_feed_item)
-    extension_feed_item_op.update_mask.CopyFrom(fm)
+    extension_feed_item_operation.update_mask.CopyFrom(fm)
 
     try:
         response = extension_feed_item_service.mutate_extension_feed_items(
-            customer_id, [extension_feed_item_op]
+            customer_id, [extension_feed_item_operation]
         )
         print(
             "Updated extension feed item with resource name: "
@@ -87,7 +88,7 @@ if __name__ == "__main__":
         "--customer_id",
         type=str,
         required=True,
-        help="The Google Ads customer ID",
+        help="The Google Ads customer ID.",
     )
     parser.add_argument(
         "-f",
@@ -102,7 +103,7 @@ if __name__ == "__main__":
         type=str,
         default="2840",  # country code for "US"
         help="A geo target constant ID. A list of available IDs can be "
-        "referenced here: https://developers.google.com/adwords/api/docs/appendix/geotargeting",
+        "referenced here: https://developers.google.com/adwords/api/docs/appendix/geotargeting.",
     )
 
     args = parser.parse_args()

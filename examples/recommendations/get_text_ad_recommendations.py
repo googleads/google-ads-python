@@ -30,11 +30,13 @@ _DEFAULT_PAGE_SIZE = 1000
 def main(client, customer_id, page_size):
     ga_service = client.get_service("GoogleAdsService", version="v5")
 
-    query = (
-        "SELECT recommendation.type, recommendation.campaign, "
-        "recommendation.text_ad_recommendation FROM recommendation "
-        "WHERE recommendation.type = TEXT_AD"
-    )
+    query = """
+        SELECT
+          recommendation.type,
+          recommendation.campaign,
+          recommendation.text_ad_recommendation
+        FROM recommendation
+        WHERE recommendation.type = TEXT_AD"""
 
     results = ga_service.search(customer_id, query=query, page_size=page_size)
 

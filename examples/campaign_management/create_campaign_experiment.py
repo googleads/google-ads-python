@@ -78,12 +78,12 @@ def main(client, customer_id, base_campaign_id, draft_id):
 
     # Retrieve the campaign experiment that has been created.
     ga_service = client.get_service("GoogleAdsService", version="v5")
-    query = (
-        "SELECT campaign_experiment.experiment_campaign "
-        "FROM campaign_experiment "
-        "WHERE campaign_experiment.resource_name = "
-        f'"{campaign_experiment_lro.metadata.campaign_experiment}"'
-    )
+    query = f"""
+        SELECT campaign_experiment.experiment_campaign
+        FROM campaign_experiment
+        WHERE
+          campaign_experiment.resource_name =
+          '{campaign_experiment_lro.metadata.campaign_experiment}'"""
 
     results = ga_service.search(customer_id, query=query, page_size=1)
 

@@ -267,12 +267,9 @@ def _print_customer_match_user_list_info(
 
     # Creates a query that retrieves the user list.
     query = f"""
-      SELECT
-        user_list.size_for_display,
-        user_list.size_for_search
-      FROM user_list
-      WHERE
-        user_list.resource_name = '{user_list_resource_name}'"""
+        SELECT user_list.size_for_display, user_list.size_for_search
+        FROM user_list
+        WHERE user_list.resource_name = '{user_list_resource_name}'"""
 
     # Issues a search request.
     search_results = google_ads_service_client.search(customer_id, query)

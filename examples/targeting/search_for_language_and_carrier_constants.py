@@ -74,8 +74,7 @@ def _search_for_language_constants(client, customer_id, language_name):
           language_constant.name,
           language_constant.targetable
         FROM language_constant
-        WHERE
-          language_constant.name LIKE '%{language_name}%'"""
+        WHERE language_constant.name LIKE '%{language_name}%'"""
 
     # Issue a search request and process the stream response to print the
     # requested field values for the carrier constant in each row.
@@ -112,8 +111,7 @@ def _search_for_carrier_constants(client, customer_id, carrier_country_code):
           carrier_constant.name,
           carrier_constant.country_code
         FROM carrier_constant
-        WHERE
-          carrier_constant.country_code = '{carrier_country_code}'"""
+        WHERE carrier_constant.country_code = '{carrier_country_code}'"""
 
     # Issue a search request and process the stream response to print the
     # requested field values for the carrier constant in each row.

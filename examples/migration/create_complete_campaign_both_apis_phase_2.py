@@ -27,7 +27,6 @@ AdWords API.
 """
 
 import argparse
-import collections
 import datetime
 import sys
 import urllib.parse
@@ -76,23 +75,26 @@ def create_campaign_budget(client, customer_id):
 
 
 def get_campaign_budget(client, customer_id, resource_name):
-    """Retrieves a google.ads.google_ads.v5.types.CampaignBudget instance..
+    """Retrieves a google.ads.google_ads.v5.types.CampaignBudget instance.
 
     Args:
         client: A google.ads.google_ads.client.GoogleAdsClient instance.
         customer_id: (str) Customer ID associated with the account.
         resource_name: (str) Resource name associated with the newly
             created campaign.
-:
+    Returns:
         An instance of google.ads.google_ads.v5.types.CampaignBudget for the
             newly created Budget.
     """
     ga_service = client.get_service("GoogleAdsService", version="v5")
-    query = (
-        "SELECT campaign_budget.id, campaign_budget.name, "
-        "campaign_budget.resource_name FROM campaign_budget WHERE "
-        'campaign_budget.resource_name = "{}"'.format(resource_name)
-    )
+    query = f"""
+        SELECT
+          campaign_budget.id,
+          campaign_budget.name,
+          campaign_budget.resource_name
+        FROM campaign_budget
+        WHERE campaign_budget.resource_name = '{resource_name}'"""
+
     response = ga_service.search(customer_id, query, PAGE_SIZE)
     budget = list(response)[0].campaign_budget
     return budget
@@ -153,12 +155,11 @@ def get_campaign(client, customer_id, campaign_resource_name):
         A google.ads.google_ads.client.GoogleAdsClient message class instance.
     """
     ga_service = client.get_service("GoogleAdsService", version="v5")
-    query = (
-        "SELECT campaign.id, campaign.name, campaign.resource_name "
-        'FROM campaign WHERE campaign.resource_name = "{}" '.format(
-            campaign_resource_name
-        )
-    )
+    query = f"""
+        SELECT campaign.id, campaign.name, campaign.resource_name
+        FROM campaign
+        WHERE campaign.resource_name = '{campaign_resource_name}'"""
+
     response = ga_service.search(customer_id, query, PAGE_SIZE)
     campaign = list(response)[0].campaign
     return campaign
@@ -182,9 +183,10 @@ def create_ad_group(client, campaign_id):
         "biddingStrategyConfiguration": {
             "bids": [
                 {
-                    # The 'xsi_type' field allows you to specify the xsi:type of the
-                    # object being created. It's only necessary when you must
-                    # provide an explicit type that the client library can't infer.
+                    # The 'xsi_type' field allows you to specify the xsi:type
+                    # of the object being created. It's only necessary when you
+                    # must provide an explicit type that the client library
+                    # can't infer.
                     "xsi_type": "CpcBid",
                     "bid": {"microAmount": 10000000},
                 }
@@ -309,8 +311,21 @@ if __name__ == "__main__":
         help="The Google Ads customer ID.",
     )
     args = parser.parse_args()
-    budget = create_campaign_budget(google_ads_client, args.customer_id)
-    campaign = create_campaign(google_ads_client, args.customer_id, budget)
-    ad_group_id = create_ad_group(adwords_client, campaign.id)
-    create_text_ads(adwords_client, ad_group_id)
-    create_keywords(adwords_client, ad_group_id, KEYWORDS_TO_ADD)
+
+    try:
+        budget = create_campaign_budget(google_ads_client, args.customer_id)
+        campaign = create_campaign(google_ads_client, args.customer_id, budget)
+        ad_group_id = create_ad_group(adwords_client, campaign.id)
+        create_text_ads(adwords_client, ad_group_id)
+        create_keywords(adwords_client, ad_group_id, KEYWORDS_TO_ADD)
+    except GoogleAdsException as ex:
+        print(
+            f"Request with ID '{ex.request_id}' failed with status "
+            f"'{ex.error.code().name}' and includes the following errors:"
+        )
+        for error in ex.failure.errors:
+            print(f"\tError with message '{error.message}'.")
+            if error.location:
+                for field_path_element in error.location.field_path_elements:
+                    print(f"\t\tOn field: {field_path_element.field_name}")
+        sys.exit(1)

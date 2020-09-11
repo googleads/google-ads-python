@@ -122,8 +122,10 @@ def _create_feed(client, customer_id):
     # attribute IDs, which will be required when populating feed items.
     search_response = google_ads_service.search(
         customer_id,
-        "SELECT feed.attributes FROM feed WHERE feed.resource_name = "
-        f"'{feed_resource_name}'",
+        f"""
+        SELECT feed.attributes
+        FROM feed
+        WHERE feed.resource_name = '{feed_resource_name}'""",
     )
     return next(iter(search_response)).feed
 

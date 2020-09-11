@@ -23,7 +23,7 @@ campaigns run basic_operations/get_campaigns.py.
 import argparse
 import sys
 import uuid
-from datetime import datetime, timedelta
+
 from google.api_core import protobuf_helpers
 
 from google.ads.google_ads.client import GoogleAdsClient
@@ -32,6 +32,7 @@ from google.ads.google_ads.errors import GoogleAdsException
 
 # Class to keep track of page feed details.
 class FeedDetails(object):
+
     def __init__(self, resource_name, url_attribute_id, label_attribute_id):
         self.resource_name = resource_name
         self.url_attribute_id = url_attribute_id
@@ -90,7 +91,7 @@ def main(client, customer_id, campaign_id, ad_group_id):
 
 
 def create_feed(client, customer_id):
-    """Creates a page feed with URLs
+    """Creates a page feed with URLs.
 
     Args:
         client: an initialized GoogleAdsClient instance.
@@ -141,17 +142,10 @@ def get_feed_details(client, customer_id, resource_name):
         A FeedDetails instance with information about the feed that was
         retrieved in the search request.
     """
-    query = """
-        SELECT
-            feed.attributes
-        FROM
-            feed
-        WHERE
-            feed.resource_name = "{}"
-        LIMIT 1
-    """.format(
-        resource_name
-    )
+    query = f"""
+        SELECT feed.attributes
+        FROM feed
+        WHERE feed.resource_name = '{resource_name}'"""
 
     ga_service = client.get_service("GoogleAdsService", version="v5")
     response = ga_service.search(customer_id, query=query)
@@ -171,7 +165,7 @@ def get_feed_details(client, customer_id, resource_name):
 
 
 def create_feed_mapping(client, customer_id, feed_details):
-    """Creates feed mapping using the given feed details
+    """Creates feed mapping using the given feed details.
 
     Args:
         client: an initialized GoogleAdsClient instance.
@@ -219,7 +213,7 @@ def create_feed_mapping(client, customer_id, feed_details):
 
 
 def create_feed_items(client, customer_id, feed_details, label):
-    """Creates feed items with the given feed_details and label
+    """Creates feed items with the given feed_details and label.
 
     Args:
         client: an initialized GoogleAdsClient instance.
@@ -284,7 +278,7 @@ def create_feed_items(client, customer_id, feed_details, label):
 
 
 def update_campaign_dsa_setting(client, customer_id, campaign_id, feed_details):
-    """Updates the given campaign with the given feed details
+    """Updates the given campaign with the given feed details.
 
     Args:
         client: an initialized GoogleAdsClient instance.
@@ -292,21 +286,16 @@ def update_campaign_dsa_setting(client, customer_id, campaign_id, feed_details):
         campaign_id: a campaign ID str;
         feed_details: a FeedDetails instance with feed attribute information.
     """
-    query = """
+    query = f"""
         SELECT
           campaign.id,
           campaign.name,
           campaign.dynamic_search_ads_setting.domain_name,
           campaign.dynamic_search_ads_setting.language_code,
           campaign.dynamic_search_ads_setting.use_supplied_urls_only
-        FROM
-          campaign
-        WHERE
-          campaign.id = {}
-        LIMIT 1
-    """.format(
-        campaign_id
-    )
+        FROM campaign
+        WHERE campaign.id = {campaign_id}
+        LIMIT 1"""
 
     ga_service = client.get_service("GoogleAdsService", version="v5")
     results = ga_service.search(customer_id, query=query)
@@ -362,7 +351,7 @@ def update_campaign_dsa_setting(client, customer_id, campaign_id, feed_details):
 
 
 def add_dsa_targeting(client, customer_id, ad_group_resource_name, label):
-    """Adds Dynamic Search Ad targeting criteria to the given ad group
+    """Adds Dynamic Search Ad targeting criteria to the given ad group.
 
     Args:
         client: an initialized GoogleAdsClient instance.

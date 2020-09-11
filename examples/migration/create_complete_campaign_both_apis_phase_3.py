@@ -27,7 +27,6 @@ API.
 """
 
 import argparse
-import collections
 import datetime
 import sys
 import urllib.parse
@@ -89,11 +88,14 @@ def get_campaign_budget(client, customer_id, resource_name):
             newly created Budget.
     """
     ga_service = client.get_service("GoogleAdsService", version="v5")
-    query = (
-        "SELECT campaign_budget.id, campaign_budget.name, "
-        "campaign_budget.resource_name FROM campaign_budget WHERE "
-        'campaign_budget.resource_name = "{}"'.format(resource_name)
-    )
+    query = f"""
+        SELECT
+          campaign_budget.id,
+          campaign_budget.name,
+          campaign_budget.resource_name
+        FROM campaign_budget
+        WHERE campaign_budget.resource_name = '{resource_name}'"""
+
     response = ga_service.search(customer_id, query, PAGE_SIZE)
     budget = list(response)[0].campaign_budget
     return budget
@@ -154,12 +156,11 @@ def get_campaign(client, customer_id, campaign_resource_name):
         A google.ads.google_ads.client.GoogleAdsClient message class instance.
     """
     ga_service = client.get_service("GoogleAdsService", version="v5")
-    query = (
-        "SELECT campaign.id, campaign.name, campaign.resource_name "
-        'FROM campaign WHERE campaign.resource_name = "{}" '.format(
-            campaign_resource_name
-        )
-    )
+    query = f"""
+        SELECT campaign.id, campaign.name, campaign.resource_name
+        FROM campaign
+        WHERE campaign.resource_name = '{campaign_resource_name}'"""
+
     response = ga_service.search(customer_id, query, PAGE_SIZE)
     campaign = list(response)[0].campaign
     return campaign
@@ -209,15 +210,14 @@ def get_ad_group(client, customer_id, ad_group_resource_name):
             of the newly created ad group.
     """
     ga_service = client.get_service("GoogleAdsService", version="v5")
-    query = (
-        "SELECT ad_group.id, ad_group.name, ad_group.resource_name "
-        'FROM ad_group WHERE ad_group.resource_name = "{}" '.format(
-            ad_group_resource_name
-        )
-    )
+    query = f"""
+        SELECT ad_group.id, ad_group.name, ad_group.resource_name
+        FROM ad_group
+        WHERE ad_group.resource_name = '{ad_group_resource_name}'"""
+
     response = ga_service.search(customer_id, query, PAGE_SIZE)
-    adGroup = list(response)[0].ad_group
-    return adGroup
+    ad_group = list(response)[0].ad_group
+    return ad_group
 
 
 def create_text_ads(client, ad_group_id):
@@ -326,8 +326,23 @@ if __name__ == "__main__":
         help="The Google Ads customer ID.",
     )
     args = parser.parse_args()
-    budget = create_campaign_budget(google_ads_client, args.customer_id)
-    campaign = create_campaign(google_ads_client, args.customer_id, budget)
-    ad_group = create_ad_group(google_ads_client, args.customer_id, campaign)
-    create_text_ads(adwords_client, ad_group.id)
-    create_keywords(adwords_client, ad_group.id, KEYWORDS_TO_ADD)
+
+    try:
+        budget = create_campaign_budget(google_ads_client, args.customer_id)
+        campaign = create_campaign(google_ads_client, args.customer_id, budget)
+        ad_group = create_ad_group(
+            google_ads_client, args.customer_id, campaign
+        )
+        create_text_ads(adwords_client, ad_group.id)
+        create_keywords(adwords_client, ad_group.id, KEYWORDS_TO_ADD)
+    except GoogleAdsException as ex:
+        print(
+            f"Request with ID '{ex.request_id}' failed with status "
+            f"'{ex.error.code().name}' and includes the following errors:"
+        )
+        for error in ex.failure.errors:
+            print(f"\tError with message '{error.message}'.")
+            if error.location:
+                for field_path_element in error.location.field_path_elements:
+                    print(f"\t\tOn field: {field_path_element.field_name}")
+        sys.exit(1)

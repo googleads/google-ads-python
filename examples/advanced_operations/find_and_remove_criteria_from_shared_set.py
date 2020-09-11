@@ -32,10 +32,10 @@ def main(client, customer_id, page_size, campaign_id):
     )
 
     # First, retrieve all shared sets associated with the campaign.
-    shared_sets_query = (
-        "SELECT shared_set.id, shared_set.name FROM campaign_shared_set "
-        f"WHERE campaign.id = {campaign_id}"
-    )
+    shared_sets_query = f"""
+        SELECT shared_set.id, shared_set.name
+        FROM campaign_shared_set
+        WHERE campaign.id = {campaign_id}"""
 
     try:
         shared_set_response = ga_service.search(
@@ -64,12 +64,14 @@ def main(client, customer_id, page_size, campaign_id):
         sys.exit(1)
 
     # Next, retrieve shared criteria for all found shared sets.
-    shared_criteria_query = (
-        "SELECT shared_criterion.type, shared_criterion.keyword.text, "
-        "shared_criterion.keyword.match_type, shared_set.id "
-        "FROM shared_criterion WHERE shared_set.id IN "
-        f'({", ".join(shared_set_ids)})'
-    )
+    shared_criteria_query = f"""
+        SELECT
+          shared_criterion.type,
+          shared_criterion.keyword.text,
+          shared_criterion.keyword.match_type,
+          shared_set.id
+        FROM shared_criterion
+        WHERE shared_set.id IN ({", ".join(shared_set_ids)})"""
 
     try:
         shared_criteria_response = ga_service.search(

@@ -16,13 +16,10 @@
 
 
 import argparse
-import sys
-import uuid
-from datetime import datetime, timedelta
+
 from google.api_core import protobuf_helpers
 
 from google.ads.google_ads.client import GoogleAdsClient
-from google.ads.google_ads.errors import GoogleAdsException
 
 
 def main(client, customer_id, manager_customer_id):
@@ -60,16 +57,10 @@ def main(client, customer_id, manager_customer_id):
     # the resource name for the link from the client side. Note that since we
     # are filtering by resource_name, a unique identifier, only one
     # customer_client_link resource will be returned in the response
-    query = """
-        SELECT
-            customer_client_link.manager_link_id
-        FROM
-            customer_client_link
-        WHERE
-            customer_client_link.resource_name = "{}"
-    """.format(
-        resource_name
-    )
+    query = f"""
+        SELECT customer_client_link.manager_link_id
+        FROM customer_client_link
+        WHERE customer_client_link.resource_name = '{resource_name}'"""
 
     ga_service = client.get_service("GoogleAdsService", version="v5")
     response = ga_service.search(manager_customer_id, query=query)

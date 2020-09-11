@@ -46,11 +46,17 @@ def main(client, artifact_name, page_size):
     gaf_service = client.get_service("GoogleAdsFieldService", version="v5")
 
     # Searches for an artifact with the specified name.
-    query = (
-        "SELECT name, category, selectable, filterable, sortable, "
-        "selectable_with, data_type, is_repeated "
-        "WHERE name = '%s'"
-    ) % artifact_name
+    query = f"""
+        SELECT
+          name,
+          category,
+          selectable,
+          filterable,
+          sortable,
+          selectable_with,
+          data_type,
+          is_repeated
+        WHERE name = '{artifact_name}'"""
 
     response = gaf_service.search_google_ads_fields(
         query=query, page_size=page_size

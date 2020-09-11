@@ -27,16 +27,18 @@ _DEFAULT_PAGE_SIZE = 1000
 def main(client, customer_id, page_size, ad_group_id=None):
     ga_service = client.get_service("GoogleAdsService", version="v5")
 
-    query = (
-        "SELECT ad_group.id, ad_group_criterion.type, "
-        "ad_group_criterion.criterion_id, "
-        "ad_group_criterion.keyword.text, "
-        "ad_group_criterion.keyword.match_type FROM ad_group_criterion "
-        "WHERE ad_group_criterion.type = KEYWORD"
-    )
+    query = """
+        SELECT
+          ad_group.id,
+          ad_group_criterion.type,
+          ad_group_criterion.criterion_id,
+          ad_group_criterion.keyword.text,
+          ad_group_criterion.keyword.match_type
+        FROM ad_group_criterion
+        WHERE ad_group_criterion.type = KEYWORD"""
 
     if ad_group_id:
-        query = "%s AND ad_group.id = %s" % (query, ad_group_id)
+        query += f" AND ad_group.id = {ad_group_id}"
 
     results = ga_service.search(customer_id, query=query, page_size=page_size)
 

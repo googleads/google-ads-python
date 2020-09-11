@@ -31,13 +31,17 @@ _DEFAULT_PAGE_SIZE = 1000
 def main(client, customer_id, page_size, ad_group_id=None):
     ga_service = client.get_service("GoogleAdsService", version="v5")
 
-    query = '''
-        SELECT ad_group.id, ad_group_ad.ad.id,
-        ad_group_ad.ad.responsive_search_ad.headlines,
-        ad_group_ad.ad.responsive_search_ad.descriptions,
-        ad_group_ad.status FROM ad_group_ad
-        WHERE ad_group_ad.ad.type = RESPONSIVE_SEARCH_AD
-        AND ad_group_ad.status != "REMOVED"'''
+    query = """
+        SELECT
+          ad_group.id,
+          ad_group_ad.ad.id,
+          ad_group_ad.ad.responsive_search_ad.headlines,
+          ad_group_ad.ad.responsive_search_ad.descriptions,
+          ad_group_ad.status
+        FROM ad_group_ad
+        WHERE
+          ad_group_ad.ad.type = RESPONSIVE_SEARCH_AD
+          AND ad_group_ad.status != 'REMOVED'"""
 
     # Optional: Specify an ad group ID to restrict search to only a given
     # ad group.

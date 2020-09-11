@@ -37,16 +37,14 @@ def main(client, customer_id, campaign_id):
 
     query = f"""
         SELECT
-            campaign_criterion_simulation.criterion_id,
-            campaign_criterion_simulation.start_date,
-            campaign_criterion_simulation.end_date,
-            campaign_criterion_simulation.bid_modifier_point_list.points
-        FROM
-            campaign_criterion_simulation
+          campaign_criterion_simulation.criterion_id,
+          campaign_criterion_simulation.start_date,
+          campaign_criterion_simulation.end_date,
+          campaign_criterion_simulation.bid_modifier_point_list.points
+        FROM campaign_criterion_simulation
         WHERE
-            campaign_criterion_simulation.type = BID_MODIFIER
-        AND
-            campaign_criterion_simulation.campaign_id = {campaign_id}"""
+          campaign_criterion_simulation.type = BID_MODIFIER
+          AND campaign_criterion_simulation.campaign_id = {campaign_id}"""
 
     try:
         # Issues a search request using streaming.

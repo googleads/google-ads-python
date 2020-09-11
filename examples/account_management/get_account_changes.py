@@ -30,17 +30,17 @@ ADS_PAGE_SIZE = 1000
 def resource_name_for_resource_type(resource_type, row):
     """Return the resource name for the resource type.
 
-  Each returned row contains all possible changed fields. This function
-  returns the resource name of the changed field based on the
-  resource type. The changed field's parent is also populated but is not used.
+    Each returned row contains all possible changed fields. This function
+    returns the resource name of the changed field based on the
+    resource type. The changed field's parent is also populated but is not used.
 
-  Args:
-    resource_type: the string equivalent of the resource type
-    row: a single row returned from the service
+    Args:
+        resource_type: the string equivalent of the resource type
+        row: a single row returned from the service
 
-  Returns:
-    The resource name of the field that changed.
-  """
+    Returns:
+        The resource name of the field that changed.
+    """
     resource_name = ""  # default for UNSPECIFIED or UNKNOWN
     if resource_type == "AD_GROUP":
         resource_name = row.change_status.ad_group
@@ -57,20 +57,20 @@ def resource_name_for_resource_type(resource_type, row):
 
 def main(client, customer_id):
     ads_service = client.get_service("GoogleAdsService", version="v5")
-    query = (
-        "SELECT change_status.resource_name, "
-        "change_status.last_change_date_time, "
-        "change_status.resource_type, "
-        "change_status.campaign, "
-        "change_status.ad_group, "
-        "change_status.resource_status, "
-        "change_status.ad_group_ad, "
-        "change_status.ad_group_criterion, "
-        "change_status.campaign_criterion "
-        "FROM change_status "
-        "WHERE change_status.last_change_date_time DURING LAST_7_DAYS "
-        "ORDER BY change_status.last_change_date_time"
-    )
+    query = """
+        SELECT
+          change_status.resource_name,
+          change_status.last_change_date_time,
+          change_status.resource_type,
+          change_status.campaign,
+          change_status.ad_group,
+          change_status.resource_status,
+          change_status.ad_group_ad,
+          change_status.ad_group_criterion,
+          change_status.campaign_criterion
+        FROM change_status
+        WHERE change_status.last_change_date_time DURING LAST_7_DAYS
+        ORDER BY change_status.last_change_date_time"""
 
     response = ads_service.search(
         customer_id, query=query, page_size=ADS_PAGE_SIZE

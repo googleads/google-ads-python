@@ -46,7 +46,7 @@ def main(client, customer_id):
         "CustomerNegativeCriterionOperation", version="v5"
     )
     placement_criterion = placement_criterion_op.create
-    # Creates a negative customer criterion excluding the placement with url
+    # Creates a negative customer criterion excluding the placement with URL
     # 'http://www.example.com'.
     placement_criterion.placement.url = "http://www.example.com"
 
@@ -61,7 +61,7 @@ def main(client, customer_id):
         )
         print(f"Added {len(response.results)} negative customer criteria:")
         for negative_criterion in response.results:
-            print(negative_criterion.resource_name)
+            print(f"Resource name: '{negative_criterion.resource_name}'")
     except GoogleAdsException as ex:
         print(
             f'Request with ID "{ex.request_id}" failed with status '

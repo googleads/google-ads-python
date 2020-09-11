@@ -1,5 +1,5 @@
 #!/usr/bin/env python
-# Copyright 2020 Google LLC
+# Copyright 2019 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -17,8 +17,9 @@
 
 import argparse
 
-from google.ads.google_ads.client import GoogleAdsClient
 from google.api_core import protobuf_helpers
+
+from google.ads.google_ads.client import GoogleAdsClient
 
 
 def main(client, customer_id, manager_customer_id):

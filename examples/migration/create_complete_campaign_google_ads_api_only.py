@@ -28,9 +28,11 @@ used.
 
 import argparse
 import datetime
+import sys
 import uuid
 
 from google.ads.google_ads.client import GoogleAdsClient
+from google.ads.google_ads.errors import GoogleAdsException
 
 # Number of ads being added/updated in this code example.
 NUMBER_OF_ADS = 5
@@ -443,10 +445,25 @@ if __name__ == "__main__":
         help="The Google Ads customer ID.",
     )
     args = parser.parse_args()
-    budget = create_campaign_budget(google_ads_client, args.customer_id)
-    campaign = create_campaign(google_ads_client, args.customer_id, budget)
-    ad_group = create_ad_group(google_ads_client, args.customer_id, campaign)
-    create_text_ads(google_ads_client, args.customer_id, ad_group)
-    create_keywords(
-        google_ads_client, args.customer_id, ad_group, KEYWORDS_TO_ADD
-    )
+
+    try:
+        budget = create_campaign_budget(google_ads_client, args.customer_id)
+        campaign = create_campaign(google_ads_client, args.customer_id, budget)
+        ad_group = create_ad_group(
+            google_ads_client, args.customer_id, campaign
+        )
+        create_text_ads(google_ads_client, args.customer_id, ad_group)
+        create_keywords(
+            google_ads_client, args.customer_id, ad_group, KEYWORDS_TO_ADD
+        )
+    except GoogleAdsException as ex:
+        print(
+            f"Request with ID '{ex.request_id}' failed with status "
+            f"'{ex.error.code().name}' and includes the following errors:"
+        )
+        for error in ex.failure.errors:
+            print(f"\tError with message '{error.message}'.")
+            if error.location:
+                for field_path_element in error.location.field_path_elements:
+                    print(f"\t\tOn field: {field_path_element.field_name}")
+        sys.exit(1)

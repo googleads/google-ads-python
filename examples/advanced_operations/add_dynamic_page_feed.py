@@ -145,8 +145,7 @@ def get_feed_details(client, customer_id, resource_name):
     query = f"""
         SELECT feed.attributes
         FROM feed
-        WHERE feed.resource_name = '{resource_name}'
-        LIMIT 1"""
+        WHERE feed.resource_name = '{resource_name}'"""
 
     ga_service = client.get_service("GoogleAdsService", version="v5")
     response = ga_service.search(customer_id, query=query)

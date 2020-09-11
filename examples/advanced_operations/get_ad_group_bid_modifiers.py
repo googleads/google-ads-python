@@ -36,7 +36,7 @@ def main(client, customer_id, page_size, ad_group_id=None):
         FROM ad_group_bid_modifier"""
 
     if ad_group_id:
-        query = "%s WHERE ad_group.id = %s" % (query, ad_group_id)
+        query += f" WHERE ad_group.id = {ad_group_id}"
 
     results = ga_service.search(customer_id, query=query, page_size=page_size)
 

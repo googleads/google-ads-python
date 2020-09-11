@@ -38,7 +38,7 @@ def main(client, customer_id, page_size, ad_group_id=None):
         WHERE ad_group_criterion.type = KEYWORD"""
 
     if ad_group_id:
-        query = "%s AND ad_group.id = %s" % (query, ad_group_id)
+        query += f" AND ad_group.id = {ad_group_id}"
 
     results = ga_service.search(customer_id, query=query, page_size=page_size)
 

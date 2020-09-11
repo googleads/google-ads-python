@@ -28,10 +28,10 @@ def main(client, customer_id, page_size):
     ga_service = client.get_service("GoogleAdsService", version="v5")
 
     # Creates a query that will retrieve all video and image files.
-    query = (
-        "SELECT media_file.id, media_file.name, media_file.type "
-        "FROM media_file ORDER BY media_file.id"
-    )
+    query = """
+        SELECT media_file.id, media_file.name, media_file.type
+        FROM media_file
+        ORDER BY media_file.id"""
 
     # Issues a search request by specifying page size.
     results = ga_service.search(customer_id, query=query, page_size=page_size)

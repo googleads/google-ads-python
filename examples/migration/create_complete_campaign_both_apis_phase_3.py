@@ -27,16 +27,13 @@ API.
 """
 
 import argparse
-import collections
 import datetime
-import sys
 import urllib.parse
 import uuid
 
 from googleads import adwords
 
 from google.ads.google_ads.client import GoogleAdsClient
-from google.ads.google_ads.errors import GoogleAdsException
 
 # Number of ads being added/updated in this code example.
 NUMBER_OF_ADS = 5
@@ -89,11 +86,14 @@ def get_campaign_budget(client, customer_id, resource_name):
             newly created Budget.
     """
     ga_service = client.get_service("GoogleAdsService", version="v5")
-    query = (
-        "SELECT campaign_budget.id, campaign_budget.name, "
-        "campaign_budget.resource_name FROM campaign_budget WHERE "
-        'campaign_budget.resource_name = "{}"'.format(resource_name)
-    )
+    query = f"""
+        SELECT
+          campaign_budget.id,
+          campaign_budget.name,
+          campaign_budget.resource_name
+        FROM campaign_budget
+        WHERE campaign_budget.resource_name = '{resource_name}'"""
+
     response = ga_service.search(customer_id, query, PAGE_SIZE)
     budget = list(response)[0].campaign_budget
     return budget
@@ -154,12 +154,11 @@ def get_campaign(client, customer_id, campaign_resource_name):
         A google.ads.google_ads.client.GoogleAdsClient message class instance.
     """
     ga_service = client.get_service("GoogleAdsService", version="v5")
-    query = (
-        "SELECT campaign.id, campaign.name, campaign.resource_name "
-        'FROM campaign WHERE campaign.resource_name = "{}" '.format(
-            campaign_resource_name
-        )
-    )
+    query = f"""
+        SELECT campaign.id, campaign.name, campaign.resource_name
+        FROM campaign
+        WHERE campaign.resource_name = '{campaign_resource_name}'"""
+
     response = ga_service.search(customer_id, query, PAGE_SIZE)
     campaign = list(response)[0].campaign
     return campaign
@@ -209,15 +208,14 @@ def get_ad_group(client, customer_id, ad_group_resource_name):
             of the newly created ad group.
     """
     ga_service = client.get_service("GoogleAdsService", version="v5")
-    query = (
-        "SELECT ad_group.id, ad_group.name, ad_group.resource_name "
-        'FROM ad_group WHERE ad_group.resource_name = "{}" '.format(
-            ad_group_resource_name
-        )
-    )
+    query = f"""
+        SELECT ad_group.id, ad_group.name, ad_group.resource_name
+        FROM ad_group
+        WHERE ad_group.resource_name = '{ad_group_resource_name}'"""
+
     response = ga_service.search(customer_id, query, PAGE_SIZE)
-    adGroup = list(response)[0].ad_group
-    return adGroup
+    ad_group = list(response)[0].ad_group
+    return ad_group
 
 
 def create_text_ads(client, ad_group_id):

@@ -28,14 +28,17 @@ _DEFAULT_PAGE_SIZE = 1000
 def main(client, customer_id, campaign_id, page_size):
     ga_service = client.get_service("GoogleAdsService", version="v5")
 
-    query = (
-        "SELECT campaign.id, campaign_criterion.campaign, "
-        "campaign_criterion.criterion_id, campaign_criterion.negative, "
-        "campaign_criterion.type, campaign_criterion.keyword.text, "
-        "campaign_criterion.keyword.match_type "
-        "FROM campaign_criterion "
-        "WHERE campaign.id = %s"
-    ) % campaign_id
+    query = f"""
+        SELECT
+          campaign.id,
+          campaign_criterion.campaign,
+          campaign_criterion.criterion_id,
+          campaign_criterion.negative,
+          campaign_criterion.type,
+          campaign_criterion.keyword.text,
+          campaign_criterion.keyword.match_type
+        FROM campaign_criterion
+        WHERE campaign.id = {campaign_id}"""
 
     results = ga_service.search(customer_id, query=query, page_size=page_size)
 

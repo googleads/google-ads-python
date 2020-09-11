@@ -26,12 +26,14 @@ _DEFAULT_PAGE_SIZE = 1000
 def main(client, customer_id, page_size, ad_group_id=None):
     ga_service = client.get_service("GoogleAdsService", version="v5")
 
-    query = (
-        "SELECT campaign.id, ad_group.id, "
-        "ad_group_bid_modifier.criterion_id, "
-        "ad_group_bid_modifier.bid_modifier, "
-        "ad_group_bid_modifier.device.type FROM ad_group_bid_modifier"
-    )
+    query = """
+        SELECT
+          campaign.id,
+          ad_group.id,
+          ad_group_bid_modifier.criterion_id,
+          ad_group_bid_modifier.bid_modifier,
+          ad_group_bid_modifier.device.type
+        FROM ad_group_bid_modifier"""
 
     if ad_group_id:
         query = "%s WHERE ad_group.id = %s" % (query, ad_group_id)

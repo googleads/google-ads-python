@@ -25,23 +25,23 @@ from google.ads.google_ads.errors import GoogleAdsException
 def main(client, customer_id):
     ga_service = client.get_service("GoogleAdsService", version="v5")
 
-    query = (
-        "SELECT account_budget.status, "
-        "account_budget.billing_setup, "
-        "account_budget.approved_spending_limit_micros, "
-        "account_budget.approved_spending_limit_type, "
-        "account_budget.proposed_spending_limit_micros, "
-        "account_budget.proposed_spending_limit_type, "
-        "account_budget.adjusted_spending_limit_micros, "
-        "account_budget.adjusted_spending_limit_type, "
-        "account_budget.approved_start_date_time, "
-        "account_budget.proposed_start_date_time, "
-        "account_budget.approved_end_date_time, "
-        "account_budget.approved_end_time_type, "
-        "account_budget.proposed_end_date_time, "
-        "account_budget.proposed_end_time_type "
-        "FROM account_budget"
-    )
+    query = """
+        SELECT
+          account_budget.status,
+          account_budget.billing_setup,
+          account_budget.approved_spending_limit_micros,
+          account_budget.approved_spending_limit_type,
+          account_budget.proposed_spending_limit_micros,
+          account_budget.proposed_spending_limit_type,
+          account_budget.adjusted_spending_limit_micros,
+          account_budget.adjusted_spending_limit_type,
+          account_budget.approved_start_date_time,
+          account_budget.proposed_start_date_time,
+          account_budget.approved_end_date_time,
+          account_budget.approved_end_time_type,
+          account_budget.proposed_end_date_time,
+          account_budget.proposed_end_time_type
+       FROM account_budget"""
 
     response = ga_service.search_stream(customer_id, query=query)
 

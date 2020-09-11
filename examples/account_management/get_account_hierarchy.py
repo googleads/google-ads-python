@@ -48,18 +48,17 @@ def main(client, login_customer_id=None):
 
     # Creates a query that retrieves all child accounts of the manager
     # specified in search calls below.
-    query = """SELECT
-        customer_client.client_customer,
-        customer_client.level,
-        customer_client.manager,
-        customer_client.descriptive_name,
-        customer_client.currency_code,
-        customer_client.time_zone,
-        customer_client.id
-    FROM
-        customer_client
-    WHERE
-        customer_client.level <= 1"""
+    query = """
+        SELECT
+          customer_client.client_customer,
+          customer_client.level,
+          customer_client.manager,
+          customer_client.descriptive_name,
+          customer_client.currency_code,
+          customer_client.time_zone,
+          customer_client.id
+        FROM customer_client
+        WHERE customer_client.level <= 1"""
 
     try:
         # If a Manager ID was provided in the customerId parameter, it will be

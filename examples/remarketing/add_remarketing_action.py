@@ -73,13 +73,13 @@ def _add_remarketing_action(client, customer_id):
 def _query_remarketing_action(client, customer_id, resource_name, page_size):
     # Creates a query that retrieves the previously created remarketing action
     # with its generated tag snippets.
-    query = (
-        "SELECT remarketing_action.id, "
-        "remarketing_action.name, "
-        "remarketing_action.tag_snippets "
-        "FROM remarketing_action "
-        f'WHERE remarketing_action.resource_name = "{resource_name}"'
-    )
+    query = f"""
+        SELECT
+          remarketing_action.id,
+          remarketing_action.name,
+          remarketing_action.tag_snippets
+        FROM remarketing_action
+        WHERE remarketing_action.resource_name = '{resource_name}'"""
 
     google_ads_service_client = client.get_service(
         "GoogleAdsService", version="v5"

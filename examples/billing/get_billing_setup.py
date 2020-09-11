@@ -25,16 +25,17 @@ from google.ads.google_ads.errors import GoogleAdsException
 def main(client, customer_id):
     ga_service = client.get_service("GoogleAdsService", version="v5")
 
-    query = (
-        "SELECT billing_setup.id, billing_setup.status, "
-        "billing_setup.payments_account, "
-        "billing_setup.payments_account_info.payments_account_id, "
-        "billing_setup.payments_account_info.payments_account_name, "
-        "billing_setup.payments_account_info.payments_profile_id, "
-        "billing_setup.payments_account_info.payments_profile_name, "
-        "billing_setup.payments_account_info.secondary_payments_profile_id "
-        "FROM billing_setup"
-    )
+    query = """
+        SELECT
+          billing_setup.id,
+          billing_setup.status,
+          billing_setup.payments_account,
+          billing_setup.payments_account_info.payments_account_id,
+          billing_setup.payments_account_info.payments_account_name,
+          billing_setup.payments_account_info.payments_profile_id,
+          billing_setup.payments_account_info.payments_profile_name,
+          billing_setup.payments_account_info.secondary_payments_profile_id
+        FROM billing_setup"""
 
     response = ga_service.search_stream(customer_id, query=query)
 

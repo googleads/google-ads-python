@@ -31,19 +31,19 @@ _DEFAULT_PAGE_SIZE = 1000
 def main(client, customer_id, page_size):
     ga_service = client.get_service("GoogleAdsService", version="v5")
 
-    query = (
-        "SELECT account_budget_proposal.id, "
-        "account_budget_proposal.account_budget,"
-        "account_budget_proposal.billing_setup,"
-        "account_budget_proposal.status,"
-        "account_budget_proposal.proposed_name,"
-        "account_budget_proposal.proposed_notes,"
-        "account_budget_proposal.proposed_purchase_order_number,"
-        "account_budget_proposal.proposal_type,"
-        "account_budget_proposal.approval_date_time,"
-        "account_budget_proposal.creation_date_time "
-        "FROM account_budget_proposal"
-    )
+    query = """
+        SELECT
+          account_budget_proposal.id,
+          account_budget_proposal.account_budget,
+          account_budget_proposal.billing_setup,
+          account_budget_proposal.status,
+          account_budget_proposal.proposed_name,
+          account_budget_proposal.proposed_notes,
+          account_budget_proposal.proposed_purchase_order_number,
+          account_budget_proposal.proposal_type,
+          account_budget_proposal.approval_date_time,
+          account_budget_proposal.creation_date_time
+        FROM account_budget_proposal"""
 
     results = ga_service.search(customer_id, query=query, page_size=page_size)
 

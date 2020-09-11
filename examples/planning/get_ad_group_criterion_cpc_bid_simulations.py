@@ -29,17 +29,16 @@ def main(client, customer_id, ad_group_id):
     google_ads_service = client.get_service("GoogleAdsService", version="v5")
 
     query = f"""
-            SELECT
-                ad_group_criterion_simulation.ad_group_id,
-                ad_group_criterion_simulation.criterion_id,
-                ad_group_criterion_simulation.start_date,
-                ad_group_criterion_simulation.end_date,
-                ad_group_criterion_simulation.cpc_bid_point_list.points
-            FROM
-                ad_group_criterion_simulation
-            WHERE
-                ad_group_criterion_simulation.type = CPC_BID AND
-                ad_group_criterion_simulation.ad_group_id = {ad_group_id}"""
+        SELECT
+          ad_group_criterion_simulation.ad_group_id,
+          ad_group_criterion_simulation.criterion_id,
+          ad_group_criterion_simulation.start_date,
+          ad_group_criterion_simulation.end_date,
+          ad_group_criterion_simulation.cpc_bid_point_list.points
+        FROM ad_group_criterion_simulation
+        WHERE
+          ad_group_criterion_simulation.type = CPC_BID
+          AND ad_group_criterion_simulation.ad_group_id = {ad_group_id}"""
 
     try:
         # Issues a search request using streaming.

@@ -27,13 +27,15 @@ def main(client, customer_id, page_size):
     """Main method, to run this code example as a standalone application."""
     ga_service = client.get_service("GoogleAdsService", version="v5")
 
-    query = (
-        "SELECT asset.name, asset.image_asset.file_size, "
-        "asset.image_asset.full_size.width_pixels, "
-        "asset.image_asset.full_size.height_pixels, "
-        "asset.image_asset.full_size.url FROM asset "
-        "WHERE asset.type = 'IMAGE'"
-    )
+    query = """
+        SELECT
+          asset.name,
+          asset.image_asset.file_size,
+          asset.image_asset.full_size.width_pixels,
+          asset.image_asset.full_size.height_pixels,
+          asset.image_asset.full_size.url
+        FROM asset
+        WHERE asset.type = 'IMAGE'"""
 
     try:
         results = ga_service.search(

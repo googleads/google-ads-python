@@ -42,18 +42,11 @@ def main(client, customer_id, label_id, page_size):
 
     # Creates a query that will retrieve all campaign labels with the
     # specified label ID.
-    query = """
-            SELECT
-                campaign.id,
-                campaign.name,
-                label.id,
-                label.name
-             FROM campaign_label
-             WHERE label.id = "{}"
-             ORDER BY campaign.id
-             """.format(
-        label_id
-    )
+    query = f"""
+        SELECT campaign.id, campaign.name, label.id, label.name
+        FROM campaign_label
+        WHERE label.id = '{label_id}'
+        ORDER BY campaign.id"""
 
     # Retrieves a google.api_core.page_iterator.GRPCIterator instance
     # initialized with the specified request parameters.

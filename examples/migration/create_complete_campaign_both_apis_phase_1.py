@@ -28,16 +28,13 @@ AdWords API.
 
 
 import argparse
-import collections
 import datetime
-import sys
 import urllib.parse
 import uuid
 
 from googleads import adwords
 
 from google.ads.google_ads.client import GoogleAdsClient
-from google.ads.google_ads.errors import GoogleAdsException
 
 # Number of ads being added/updated in this code example.
 NUMBER_OF_ADS = 5
@@ -77,8 +74,7 @@ def create_campaign_budget(client, customer_id):
 
 
 def get_campaign_budget(client, customer_id, resource_name):
-    """Retrieves an instance of google.ads.google_ads.v5.types.CampaignBudget
-        message class that is associated with a given resource name.
+    """Retrieves the CampaignBudget associated with a given resource name.
 
     Args:
         client: A google.ads.google_ads.client.GoogleAdsClient instance.
@@ -91,11 +87,14 @@ def get_campaign_budget(client, customer_id, resource_name):
             newly created Budget.
     """
     ga_service = client.get_service("GoogleAdsService", version="v5")
-    query = (
-        "SELECT campaign_budget.id, campaign_budget.name, "
-        "campaign_budget.resource_name FROM campaign_budget WHERE "
-        'campaign_budget.resource_name = "{}"'.format(resource_name)
-    )
+    query = f"""
+        SELECT
+          campaign_budget.id,
+          campaign_budget.name,
+          campaign_budget.resource_name
+        FROM campaign_budget
+        WHERE campaign_budget.resource_name = '{resource_name}'"""
+
     response = ga_service.search(customer_id, query, PAGE_SIZE)
     budget = list(response)[0].campaign_budget
     return budget
@@ -162,9 +161,10 @@ def create_ad_group(client, campaign_id):
         "biddingStrategyConfiguration": {
             "bids": [
                 {
-                    # The 'xsi_type' field allows you to specify the xsi:type of the
-                    # object being created. It's only necessary when you must
-                    # provide an explicit type that the client library can't infer.
+                    # The 'xsi_type' field allows you to specify the xsi:type
+                    # of the object being created. It's only necessary when you
+                    # must provide an explicit type that the client library
+                    # can't infer.
                     "xsi_type": "CpcBid",
                     "bid": {"microAmount": 10000000},
                 }

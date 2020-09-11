@@ -28,13 +28,15 @@ def main(client, customer_id, ad_group_id=None):
         "AdGroupAdStatusEnum", version="v5"
     ).AdGroupAdStatus
 
-    query = (
-        "SELECT ad_group.id, ad_group_ad.ad.id, "
-        "ad_group_ad.ad.expanded_text_ad.headline_part1, "
-        "ad_group_ad.ad.expanded_text_ad.headline_part2, "
-        "ad_group_ad.status FROM ad_group_ad "
-        "WHERE ad_group_ad.ad.type = EXPANDED_TEXT_AD"
-    )
+    query = """
+        SELECT
+          ad_group.id,
+          ad_group_ad.ad.id,
+          ad_group_ad.ad.expanded_text_ad.headline_part1,
+          ad_group_ad.ad.expanded_text_ad.headline_part2,
+          ad_group_ad.status
+        FROM ad_group_ad
+        WHERE ad_group_ad.ad.type = EXPANDED_TEXT_AD"""
 
     if ad_group_id:
         query += f" AND ad_group.id = {ad_group_id}"

@@ -12,7 +12,9 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
-"""This example gets Hotel ads performance statistics for the 50 Hotel ad
+"""Demonstrates how to request Hotel ad performance statistics.
+
+This example gets Hotel ads performance statistics for the 50 Hotel ad
 groups with the most impressions over the last 7 days.
 """
 
@@ -29,19 +31,23 @@ _DEFAULT_PAGE_SIZE = 50
 def main(client, customer_id, page_size):
     ga_service = client.get_service("GoogleAdsService", version="v5")
 
-    query = (
-        "SELECT campaign.id, campaign.advertising_channel_type, "
-        "ad_group.id, ad_group.status, metrics.impressions, "
-        "metrics.hotel_average_lead_value_micros, "
-        "segments.hotel_check_in_day_of_week, "
-        "segments.hotel_length_of_stay "
-        "FROM hotel_performance_view "
-        "WHERE segments.date DURING LAST_7_DAYS "
-        "AND campaign.advertising_channel_type = 'HOTEL' "
-        "AND ad_group.status = 'ENABLED' "
-        "ORDER BY metrics.impressions DESC "
-        "LIMIT 50"
-    )
+    query = """
+        SELECT
+          campaign.id,
+          campaign.advertising_channel_type,
+          ad_group.id,
+          ad_group.status,
+          metrics.impressions,
+          metrics.hotel_average_lead_value_micros,
+          segments.hotel_check_in_day_of_week,
+          segments.hotel_length_of_stay
+        FROM hotel_performance_view
+        WHERE
+          segments.date DURING LAST_7_DAYS
+          AND campaign.advertising_channel_type = 'HOTEL'
+          AND ad_group.status = 'ENABLED'
+        ORDER BY metrics.impressions DESC
+        LIMIT 50"""
 
     response = ga_service.search(customer_id, query, page_size=page_size)
 

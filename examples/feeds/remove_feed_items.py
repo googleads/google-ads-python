@@ -29,7 +29,7 @@ def main(client, customer_id, feed_id, feed_item_ids):
     Args:
         client: an initialized GoogleAdsClient instance.
         customer_id: a client customer ID.
-        feed_id: the ID for a Feedi belonging to the given customer.
+        feed_id: the ID for a Feed belonging to the given customer.
         feed_item_ids: a list of FeedItem IDs belonging to the given Feed.
     """
     feed_item_service = client.get_service("FeedItemService", version="v5")

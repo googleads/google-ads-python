@@ -98,6 +98,7 @@ def main(client, customer_id, ad_group_id):
                             f"{retry_count} attempts."
                         )
         except Exception as ex:
+            # Prints any unhandled exception and bubbles up.
             print(f"Failed to validate keywords: {ex}")
             raise ex
 

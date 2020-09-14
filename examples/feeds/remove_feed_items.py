@@ -39,10 +39,10 @@ def main(client, customer_id, feed_id, feed_item_ids):
         # Constructs an operation that will remove the feed item based on the
         # resource name.
         feed_item_operation = client.get_type("FeedItemOperation", version="v5")
+        # Constructs a resource name for a feed_item, which is in the
+        # format: customers/{customer_id}/feedItems/{feed_id}~{feed_item_id}
         feed_item_operation.remove = feed_item_service.feed_item_path(
             customer_id,
-            # constructs a resource name for a feed_item, which is in the
-            # format: customers/{customer_id}/feedItems/{feed_id}~{feed_item_id}
             ResourceName.format_composite(feed_id, feed_item_id),
         )
         operations.append(feed_item_operation)
@@ -52,8 +52,8 @@ def main(client, customer_id, feed_id, feed_item_ids):
 
         for feed_item in response.results:
             print(
-                f"Removed feed item with resource name: "
-                "'{feed_item.resource_name}'"
+                "Removed feed item with resource name: "
+                f"'{feed_item.resource_name}'"
             )
     except GoogleAdsException as ex:
         print(

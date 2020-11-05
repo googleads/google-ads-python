@@ -24,6 +24,7 @@ install_requires = [
     "protobuf >= 3.13.0, < 4.0.0",
     "PyYAML >= 5.1, < 6.0",
     "setuptools>=40.3.0",
+    "pep562 >= 1.0",
 ]
 
 tests_require = [

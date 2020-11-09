@@ -35,14 +35,14 @@ from google.ads.google_ads.errors import GoogleAdsException
 
 
 def main(client, customer_id, campaign_id):
-    campaign_service = client.get_service("CampaignService", version="v5")
+    campaign_service = client.get_service("CampaignService", version="v6")
 
     campaign_resource_name = campaign_service.campaign_path(
         customer_id, campaign_id
     )
 
     campaign_criterion_operation = client.get_type(
-        "CampaignCriterionOperation", version="v5"
+        "CampaignCriterionOperation", version="v6"
     )
     campaign_criterion = campaign_criterion_operation.create
     campaign_criterion.campaign = campaign_resource_name
@@ -57,7 +57,7 @@ def main(client, customer_id, campaign_id):
     )
 
     campaign_criterion_service = client.get_service(
-        "CampaignCriterionService", version="v5"
+        "CampaignCriterionService", version="v6"
     )
 
     try:
@@ -86,21 +86,20 @@ def main(client, customer_id, campaign_id):
 
 def _build_listing_scope_dimensions(client, dimensions):
     product_brand_dimension = dimensions.add()
-    product_brand_dimension.product_brand.value = "google"
+    product_brand_dimension.product_brand = "google"
 
     product_custom_attribute_index_enum = client.get_type(
-        "ProductCustomAttributeIndexEnum", version="v5"
+        "ProductCustomAttributeIndexEnum", version="v6"
     )
 
-    product_custom_attribute_dimension = dimensions.add()
-    product_custom_attribute = (
+    dimensions.append(
         product_custom_attribute_dimension.product_custom_attribute
     )
     product_custom_attribute.index = product_custom_attribute_index_enum.INDEX0
-    product_custom_attribute.value = "top_selling_products"
+    product_custom_attribute = "top_selling_products"
 
     product_type_level_enum = client.get_type(
-        "ProductTypeLevelEnum", version="v5"
+        "ProductTypeLevelEnum", version="v6"
     )
 
     product_type_dimension_1 = dimensions.add()

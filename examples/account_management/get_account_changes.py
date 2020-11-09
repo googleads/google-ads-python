@@ -56,7 +56,7 @@ def resource_name_for_resource_type(resource_type, row):
 
 
 def main(client, customer_id):
-    ads_service = client.get_service("GoogleAdsService", version="v5")
+    ads_service = client.get_service("GoogleAdsService", version="v6")
     query = """
         SELECT
           change_status.resource_name,
@@ -77,10 +77,10 @@ def main(client, customer_id):
     )
 
     resource_type_enum = client.get_type(
-        "ChangeStatusResourceTypeEnum", version="v5"
+        "ChangeStatusResourceTypeEnum", version="v6"
     ).ChangeStatusResourceType
     change_status_operation_enum = client.get_type(
-        "ChangeStatusOperationEnum", version="v5"
+        "ChangeStatusOperationEnum", version="v6"
     ).ChangeStatusOperation
 
     try:
@@ -95,7 +95,7 @@ def main(client, customer_id):
                 'On "%s", change status "%s" shows a resource type of "%s" '
                 'with resource name "%s" was "%s".'
                 % (
-                    row.change_status.last_change_date_time.value,
+                    row.change_status.last_change_date_time,
                     row.change_status.resource_name,
                     resource_type,
                     resource_name_for_resource_type(resource_type, row),

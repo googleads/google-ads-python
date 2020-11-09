@@ -33,17 +33,17 @@ def main(client, customer_id):
         customer_id: a client customer ID.
     """
     tragedy_criterion_op = client.get_type(
-        "CustomerNegativeCriterionOperation", version="v5"
+        "CustomerNegativeCriterionOperation", version="v6"
     )
     tragedy_criterion = tragedy_criterion_op.create
     # Creates a negative customer criterion excluding the content label type
     # of 'TRAGEDY'.
     tragedy_criterion.content_label.type = client.get_type(
-        "ContentLabelTypeEnum", version="v5"
+        "ContentLabelTypeEnum", version="v6"
     ).TRAGEDY
 
     placement_criterion_op = client.get_type(
-        "CustomerNegativeCriterionOperation", version="v5"
+        "CustomerNegativeCriterionOperation", version="v6"
     )
     placement_criterion = placement_criterion_op.create
     # Creates a negative customer criterion excluding the placement with URL
@@ -51,7 +51,7 @@ def main(client, customer_id):
     placement_criterion.placement.url = "http://www.example.com"
 
     customer_negative_criterion_service = client.get_service(
-        "CustomerNegativeCriterionService", version="v5"
+        "CustomerNegativeCriterionService", version="v6"
     )
 
     try:

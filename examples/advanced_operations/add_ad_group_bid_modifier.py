@@ -25,9 +25,9 @@ import google.ads.google_ads.client
 
 
 def main(client, customer_id, ad_group_id, bid_modifier_value):
-    ad_group_service = client.get_service("AdGroupService", version="v5")
+    ad_group_service = client.get_service("AdGroupService", version="v6")
     ad_group_bm_service = client.get_service(
-        "AdGroupBidModifierService", version="v5"
+        "AdGroupBidModifierService", version="v6"
     )
 
     # Create ad group bid modifier for mobile devices with the specified ad
@@ -47,7 +47,7 @@ def main(client, customer_id, ad_group_id, bid_modifier_value):
 
     # Sets the device.
     ad_group_bid_modifier.device.type = client.get_type(
-        "DeviceEnum", version="v5"
+        "DeviceEnum", version="v6"
     ).MOBILE
 
     # Add the ad group bid modifier.

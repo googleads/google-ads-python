@@ -89,20 +89,18 @@ def create_keyword_plan(client, customer_id):
     Raises:
         GoogleAdsException: If an error is returned from the API.
     """
-    operation = client.get_type("KeywordPlanOperation", version="v5")
+    operation = client.get_type("KeywordPlanOperation", version="v6")
     keyword_plan = operation.create
 
-    keyword_plan.name.value = (
-        f"Keyword plan for traffic estimate {uuid.uuid4()}"
-    )
+    keyword_plan.name = f"Keyword plan for traffic estimate {uuid.uuid4()}"
 
     forecast_interval = client.get_type(
-        "KeywordPlanForecastIntervalEnum", version="v5"
+        "KeywordPlanForecastIntervalEnum", version="v6"
     ).NEXT_QUARTER
     keyword_plan.forecast_period.date_interval = forecast_interval
 
     keyword_plan_service = client.get_service(
-        "KeywordPlanService", version="v5"
+        "KeywordPlanService", version="v6"
     )
     response = keyword_plan_service.mutate_keyword_plans(
         customer_id, [operation]
@@ -129,32 +127,29 @@ def create_keyword_plan_campaign(client, customer_id, keyword_plan):
     Raises:
         GoogleAdsException: If an error is returned from the API.
     """
-    operation = client.get_type("KeywordPlanCampaignOperation", version="v5")
+    operation = client.get_type("KeywordPlanCampaignOperation", version="v6")
     keyword_plan_campaign = operation.create
 
-    keyword_plan_campaign.name.value = f"Keyword plan campaign {uuid.uuid4()}"
-    keyword_plan_campaign.cpc_bid_micros.value = 1000000
-    keyword_plan_campaign.keyword_plan.value = keyword_plan
+    keyword_plan_campaign.name = f"Keyword plan campaign {uuid.uuid4()}"
+    keyword_plan_campaign.cpc_bid_micros = 1000000
+    keyword_plan_campaign.keyword_plan = keyword_plan
 
     keyword_plan_network = client.get_type(
-        "KeywordPlanNetworkEnum", version="v5"
+        "KeywordPlanNetworkEnum", version="v6"
     )
     network = keyword_plan_network.GOOGLE_SEARCH
     keyword_plan_campaign.keyword_plan_network = network
 
-    geo_target = client.get_type("KeywordPlanGeoTarget", version="v5")
+    geo_target = client.get_type("KeywordPlanGeoTarget", version="v6")
     # Constant for U.S. Other geo target constants can be referenced here:
     # https://developers.google.com/adwords/api/docs/appendix/geotargeting
-    geo_target.geo_target_constant.value = "geoTargetConstants/2840"
-    keyword_plan_campaign.geo_targets.extend([geo_target])
+    geo_target.geo_target_constant = "geoTargetConstants/2840"
+    keyword_plan_campaign.geo_targets.append(geo_target)
 
-    language = client.get_type("StringValue", version="v5")
-    # Constant for English
-    language.value = "languageConstants/1000"
-    keyword_plan_campaign.language_constants.extend([language])
+    keyword_plan_campaign.language_constants.append("languageConstants/1000")
 
     keyword_plan_campaign_service = client.get_service(
-        "KeywordPlanCampaignService", version="v5"
+        "KeywordPlanCampaignService", version="v6"
     )
     response = keyword_plan_campaign_service.mutate_keyword_plan_campaigns(
         customer_id, [operation]
@@ -182,15 +177,15 @@ def create_keyword_plan_ad_group(client, customer_id, keyword_plan_campaign):
     Raises:
         GoogleAdsException: If an error is returned from the API.
     """
-    operation = client.get_type("KeywordPlanAdGroupOperation", version="v5")
+    operation = client.get_type("KeywordPlanAdGroupOperation", version="v6")
     keyword_plan_ad_group = operation.create
 
-    keyword_plan_ad_group.name.value = f"Keyword plan ad group {uuid.uuid4()}"
-    keyword_plan_ad_group.cpc_bid_micros.value = 2500000
-    keyword_plan_ad_group.keyword_plan_campaign.value = keyword_plan_campaign
+    keyword_plan_ad_group.name = f"Keyword plan ad group {uuid.uuid4()}"
+    keyword_plan_ad_group.cpc_bid_micros = 2500000
+    keyword_plan_ad_group.keyword_plan_campaign = keyword_plan_campaign
 
     keyword_plan_ad_group_service = client.get_service(
-        "KeywordPlanAdGroupService", version="v5"
+        "KeywordPlanAdGroupService", version="v6"
     )
     response = keyword_plan_ad_group_service.mutate_keyword_plan_ad_groups(
         customer_id, [operation]
@@ -215,31 +210,31 @@ def create_keyword_plan_ad_group_keywords(client, customer_id, plan_ad_group):
     Raises:
         GoogleAdsException: If an error is returned from the API.
     """
-    match_types = client.get_type("KeywordMatchTypeEnum", version="v5")
+    match_types = client.get_type("KeywordMatchTypeEnum", version="v6")
 
     keyword_plan_ad_group_keyword1 = client.get_type(
-        "KeywordPlanAdGroupKeyword", version="v5"
+        "KeywordPlanAdGroupKeyword", version="v6"
     )
-    keyword_plan_ad_group_keyword1.text.value = "mars cruise"
-    keyword_plan_ad_group_keyword1.cpc_bid_micros.value = 2000000
+    keyword_plan_ad_group_keyword1.text = "mars cruise"
+    keyword_plan_ad_group_keyword1.cpc_bid_micros = 2000000
     keyword_plan_ad_group_keyword1.match_type = match_types.BROAD
-    keyword_plan_ad_group_keyword1.keyword_plan_ad_group.value = plan_ad_group
+    keyword_plan_ad_group_keyword1.keyword_plan_ad_group = plan_ad_group
 
     keyword_plan_ad_group_keyword2 = client.get_type(
-        "KeywordPlanAdGroupKeyword", version="v5"
+        "KeywordPlanAdGroupKeyword", version="v6"
     )
-    keyword_plan_ad_group_keyword2.text.value = "cheap cruise"
-    keyword_plan_ad_group_keyword2.cpc_bid_micros.value = 1500000
+    keyword_plan_ad_group_keyword2.text = "cheap cruise"
+    keyword_plan_ad_group_keyword2.cpc_bid_micros = 1500000
     keyword_plan_ad_group_keyword2.match_type = match_types.PHRASE
-    keyword_plan_ad_group_keyword2.keyword_plan_ad_group.value = plan_ad_group
+    keyword_plan_ad_group_keyword2.keyword_plan_ad_group = plan_ad_group
 
     keyword_plan_ad_group_keyword3 = client.get_type(
-        "KeywordPlanAdGroupKeyword", version="v5"
+        "KeywordPlanAdGroupKeyword", version="v6"
     )
-    keyword_plan_ad_group_keyword3.text.value = "jupiter cruise"
-    keyword_plan_ad_group_keyword3.cpc_bid_micros.value = 1990000
+    keyword_plan_ad_group_keyword3.text = "jupiter cruise"
+    keyword_plan_ad_group_keyword3.cpc_bid_micros = 1990000
     keyword_plan_ad_group_keyword3.match_type = match_types.EXACT
-    keyword_plan_ad_group_keyword3.keyword_plan_ad_group.value = plan_ad_group
+    keyword_plan_ad_group_keyword3.keyword_plan_ad_group = plan_ad_group
 
     operations = []
     for keyword in [
@@ -248,13 +243,13 @@ def create_keyword_plan_ad_group_keywords(client, customer_id, plan_ad_group):
         keyword_plan_ad_group_keyword3,
     ]:
         operation = client.get_type(
-            "KeywordPlanAdGroupKeywordOperation", version="v5"
+            "KeywordPlanAdGroupKeywordOperation", version="v6"
         )
         operation.create.CopyFrom(keyword)
         operations.append(operation)
 
     keyword_plan_ad_group_keyword_service = client.get_service(
-        "KeywordPlanAdGroupKeywordService", version="v5"
+        "KeywordPlanAdGroupKeywordService", version="v6"
     )
 
     response = keyword_plan_ad_group_keyword_service.mutate_keyword_plan_ad_group_keywords(
@@ -283,19 +278,19 @@ def create_keyword_plan_negative_campaign_keywords(
     Raises:
         GoogleAdsException: If an error is returned from the API.
     """
-    match_types = client.get_type("KeywordMatchTypeEnum", version="v5")
+    match_types = client.get_type("KeywordMatchTypeEnum", version="v6")
     operation = client.get_type(
-        "KeywordPlanCampaignKeywordOperation", version="v5"
+        "KeywordPlanCampaignKeywordOperation", version="v6"
     )
 
     keyword_plan_campaign_keyword = operation.create
-    keyword_plan_campaign_keyword.text.value = "moon walk"
+    keyword_plan_campaign_keyword.text = "moon walk"
     keyword_plan_campaign_keyword.match_type = match_types.BROAD
-    keyword_plan_campaign_keyword.keyword_plan_campaign.value = plan_campaign
-    keyword_plan_campaign_keyword.negative.value = True
+    keyword_plan_campaign_keyword.keyword_plan_campaign = plan_campaign
+    keyword_plan_campaign_keyword.negative = True
 
     keyword_plan_campaign_keyword_service = client.get_service(
-        "KeywordPlanCampaignKeywordService", version="v5"
+        "KeywordPlanCampaignKeywordService", version="v6"
     )
     response = keyword_plan_campaign_keyword_service.mutate_keyword_plan_campaign_keywords(
         customer_id, [operation]

@@ -80,28 +80,28 @@ def _create_add_customizer_feed(client, customer_id, feed_name):
     # Creates three feed attributes: a name, a price and a date.
     # The attribute names are arbitrary choices and will be used as
     # placeholders in the ad text fields.
-    feed_attr_type_enum = client.get_type("FeedAttributeTypeEnum", version="v5")
+    feed_attr_type_enum = client.get_type("FeedAttributeTypeEnum", version="v6")
 
-    name_attr = client.get_type("FeedAttribute", version="v5")
+    name_attr = client.get_type("FeedAttribute", version="v6")
     name_attr.type = feed_attr_type_enum.STRING
-    name_attr.name.value = "Name"
+    name_attr.name = "Name"
 
-    price_attr = client.get_type("FeedAttribute", version="v5")
+    price_attr = client.get_type("FeedAttribute", version="v6")
     price_attr.type = feed_attr_type_enum.STRING
-    price_attr.name.value = "Price"
+    price_attr.name = "Price"
 
-    date_attr = client.get_type("FeedAttribute", version="v5")
+    date_attr = client.get_type("FeedAttribute", version="v6")
     date_attr.type = feed_attr_type_enum.DATE_TIME
-    date_attr.name.value = "Date"
+    date_attr.name = "Date"
 
-    feed_operation = client.get_type("FeedOperation", version="v5")
+    feed_operation = client.get_type("FeedOperation", version="v6")
     feed = feed_operation.create
 
-    feed.name.value = feed_name
+    feed.name = feed_name
     feed.attributes.extend([name_attr, price_attr, date_attr])
-    feed.origin = client.get_type("FeedOriginEnum", version="v5").USER
+    feed.origin = client.get_type("FeedOriginEnum", version="v6").USER
 
-    feed_service = client.get_service("FeedService", version="v5")
+    feed_service = client.get_service("FeedService", version="v6")
 
     try:
         response = feed_service.mutate_feeds(customer_id, [feed_operation])
@@ -131,23 +131,20 @@ def _get_feed_attributes(client, customer_id, feed_resource_name):
       WHERE
         feed.resource_name = "{feed_resource_name}"
     """
-    ga_service = client.get_service("GoogleAdsService", version="v5")
+    ga_service = client.get_service("GoogleAdsService", version="v6")
 
     try:
         results = ga_service.search(customer_id, query, page_size=1)
         feed = list(results)[0].feed
-        print(
-            "Found the following attributes for feed with name "
-            f"{feed.name.value}"
-        )
+        print(f"Found the following attributes for feed with name {feed.name}")
     except GoogleAdsException as ex:
         _handle_google_ads_exception(ex)
 
-    feed_attr_type_enum = client.get_type("FeedAttributeTypeEnum", version="v5")
+    feed_attr_type_enum = client.get_type("FeedAttributeTypeEnum", version="v6")
     feed_details = {}
     for feed_attribute in feed.attributes:
-        name = feed_attribute.name.value
-        feed_attr_id = feed_attribute.id.value
+        name = feed_attribute.name
+        feed_attr_id = feed_attribute.id
         feed_type = feed_attr_type_enum.FeedAttributeType.Name(
             feed_attribute.type
         )
@@ -170,33 +167,36 @@ def _create_ad_customizer_mapping(
         feed_details: a dict mapping feed attribute names to their IDs.
     """
     placeholder_field_enum = client.get_type(
-        "AdCustomizerPlaceholderFieldEnum", version="v5"
+        "AdCustomizerPlaceholderFieldEnum", version="v6"
     )
 
-    name_field_mapping = client.get_type("AttributeFieldMapping", version="v5")
-    name_field_mapping.feed_attribute_id.value = feed_details["Name"]
+    # Map the feed attributes to ad customizer placeholder fields. For a full
+    # list of ad customizer placeholder fields, see:
+    # https://developers.google.com/google-ads/api/reference/rpc/latest/AdCustomizerPlaceholderFieldEnum.AdCustomizerPlaceholderField
+    name_field_mapping = client.get_type("AttributeFieldMapping", version="v6")
+    name_field_mapping.feed_attribute_id = feed_details["Name"]
     name_field_mapping.ad_customizer_field = placeholder_field_enum.STRING
 
-    price_field_mapping = client.get_type("AttributeFieldMapping", version="v5")
-    price_field_mapping.feed_attribute_id.value = feed_details["Price"]
+    price_field_mapping = client.get_type("AttributeFieldMapping", version="v6")
+    price_field_mapping.feed_attribute_id = feed_details["Price"]
     price_field_mapping.ad_customizer_field = placeholder_field_enum.PRICE
 
-    date_field_mapping = client.get_type("AttributeFieldMapping", version="v5")
-    date_field_mapping.feed_attribute_id.value = feed_details["Date"]
+    date_field_mapping = client.get_type("AttributeFieldMapping", version="v6")
+    date_field_mapping.feed_attribute_id = feed_details["Date"]
     date_field_mapping.ad_customizer_field = placeholder_field_enum.DATE
 
-    feed_mapping_op = client.get_type("FeedMappingOperation", version="v5")
+    feed_mapping_op = client.get_type("FeedMappingOperation", version="v6")
     feed_mapping = feed_mapping_op.create
-    feed_mapping.feed.value = ad_customizer_feed_resource_name
+    feed_mapping.feed = ad_customizer_feed_resource_name
     feed_mapping.placeholder_type = client.get_type(
-        "PlaceholderTypeEnum", version="v5"
+        "PlaceholderTypeEnum", version="v6"
     ).AD_CUSTOMIZER
     feed_mapping.attribute_field_mappings.extend(
         [name_field_mapping, price_field_mapping, date_field_mapping]
     )
 
     feed_mapping_service = client.get_service(
-        "FeedMappingService", version="v5"
+        "FeedMappingService", version="v6"
     )
 
     try:
@@ -255,7 +255,7 @@ def _create_feed_items(
         )
     )
 
-    feed_item_service = client.get_service("FeedItemService", version="v5")
+    feed_item_service = client.get_service("FeedItemService", version="v6")
 
     try:
         response = feed_item_service.mutate_feed_items(
@@ -289,27 +289,21 @@ def _create_feed_item_operation(
     Returns:
         A FeedItemOperation that creates a FeedItem
     """
-    name_attr_value = client.get_type("FeedItemAttributeValue", version="v5")
-    name_attr_value.feed_attribute_id.value = ad_customizer_feed_attributes[
-        "Name"
-    ]
-    name_attr_value.string_value.value = name
+    name_attr_value = client.get_type("FeedItemAttributeValue", version="v6")
+    name_attr_value.feed_attribute_id = ad_customizer_feed_attributes["Name"]
+    name_attr_value.string_value = name
 
-    price_attr_value = client.get_type("FeedItemAttributeValue", version="v5")
-    price_attr_value.feed_attribute_id.value = ad_customizer_feed_attributes[
-        "Price"
-    ]
-    price_attr_value.string_value.value = price
+    price_attr_value = client.get_type("FeedItemAttributeValue", version="v6")
+    price_attr_value.feed_attribute_id = ad_customizer_feed_attributes["Price"]
+    price_attr_value.string_value = price
 
-    date_attr_value = client.get_type("FeedItemAttributeValue", version="v5")
-    date_attr_value.feed_attribute_id.value = ad_customizer_feed_attributes[
-        "Date"
-    ]
-    date_attr_value.string_value.value = date
+    date_attr_value = client.get_type("FeedItemAttributeValue", version="v6")
+    date_attr_value.feed_attribute_id = ad_customizer_feed_attributes["Date"]
+    date_attr_value.string_value = date
 
-    feed_item_op = client.get_type("FeedItemOperation", version="v5")
+    feed_item_op = client.get_type("FeedItemOperation", version="v6")
     feed_item = feed_item_op.create
-    feed_item.feed.value = ad_customizer_feed_resource_name
+    feed_item.feed = ad_customizer_feed_resource_name
     feed_item.attribute_values.extend(
         [name_attr_value, price_attr_value, date_attr_value]
     )
@@ -331,9 +325,9 @@ def _create_feed_item_targets(
         ad_group_ids: a list of ad group IDs.
         feed_item_resource_names: a list of feed item resource name strs.
     """
-    ad_group_service = client.get_service("AdGroupService", version="v5")
+    ad_group_service = client.get_service("AdGroupService", version="v6")
     feed_item_target_service = client.get_service(
-        "FeedItemTargetService", version="v5"
+        "FeedItemTargetService", version="v6"
     )
     # Bind each feed item to a specific ad group to make sure it will only be
     # used to customize ads inside that ad group; using the feed item elsewhere
@@ -342,11 +336,11 @@ def _create_feed_item_targets(
         ad_group_id = ad_group_ids[i]
 
         feed_item_target_op = client.get_type(
-            "FeedItemTargetOperation", version="v5"
+            "FeedItemTargetOperation", version="v6"
         )
         feed_item_target = feed_item_target_op.create
-        feed_item_target.feed_item.value = resource_name
-        feed_item_target.ad_group.value = ad_group_service.ad_group_path(
+        feed_item_target.feed_item = resource_name
+        feed_item_target.ad_group = ad_group_service.ad_group_path(
             customer_id, ad_group_id
         )
 
@@ -376,13 +370,13 @@ def _create_ads_with_customizations(
         ad_group_ids: a list of ad group IDs.
         feed_name: the name of the feed to create.
     """
-    ad_group_service = client.get_service("AdGroupService", version="v5")
-    ad_group_ad_service = client.get_service("AdGroupAdService", version="v5")
+    ad_group_service = client.get_service("AdGroupService", version="v6")
+    ad_group_ad_service = client.get_service("AdGroupAdService", version="v6")
     ad_group_ad_operations = []
 
     for ad_group_id in ad_group_ids:
         ad_group_ad_operation = client.get_type(
-            "AdGroupAdOperation", version="v5"
+            "AdGroupAdOperation", version="v6"
         )
         ad_group_ad = ad_group_ad_operation.create
         ad_group_ad.ad_group = ad_group_service.ad_group_path(

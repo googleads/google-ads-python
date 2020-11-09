@@ -23,7 +23,7 @@ from google.ads.google_ads.errors import GoogleAdsException
 
 
 def main(client, customer_id):
-    ga_service = client.get_service("GoogleAdsService", version="v5")
+    ga_service = client.get_service("GoogleAdsService", version="v6")
 
     query = """
         SELECT
@@ -48,8 +48,11 @@ def main(client, customer_id):
     try:
         # Use the enum type to determine the enum names from the values.
         budget_status_enum = client.get_type(
-            "AccountBudgetStatusEnum", version="v5"
+            "AccountBudgetStatusEnum", version="v6"
         ).AccountBudgetStatus
+        spending_limit_type_enum = client.get_type(
+            "SpendingLimitTypeEnum", version="v6"
+        ).SpendingLimitType
 
         for batch in response:
             for row in batch.results:
@@ -57,27 +60,33 @@ def main(client, customer_id):
                 approved_spending_limit = (
                     _micros_to_currency(budget.approved_spending_limit_micros)
                     if budget.approved_spending_limit_micros
-                    else budget.approved_spending_limit_type.name
+                    else spending_limit_type_enum.Name(
+                        budget.approved_spending_limit_type
+                    )
                 )
                 proposed_spending_limit = (
                     _micros_to_currency(budget.proposed_spending_limit_micros)
                     if budget.proposed_spending_limit_micros
-                    else budget.proposed_spending_limit_type.name
+                    else budget_status_enum.Name(
+                        budget.proposed_spending_limit_type
+                    )
                 )
                 adjusted_spending_limit = (
                     _micros_to_currency(budget.adjusted_spending_limit_micros)
                     if budget.adjusted_spending_limit_micros
-                    else budget.adjusted_spending_limit_type.name
+                    else budget_status_enum.Name(
+                        budget.adjusted_spending_limit_type
+                    )
                 )
                 approved_end_date_time = (
                     budget.approved_end_date_time
                     if budget.approved_end_date_time
-                    else budget.approved_end_date_time_type
+                    else budget.approved_end_time_type
                 )
                 proposed_end_date_time = (
                     budget.proposed_end_date_time
                     if budget.proposed_end_date_time
-                    else budget.proposed_end_date_time_type
+                    else budget.proposed_end_time_type
                 )
 
                 print(

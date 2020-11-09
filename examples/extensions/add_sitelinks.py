@@ -34,9 +34,9 @@ _date_format = "%Y-%m-%d %H:%M:%S"
 def main(client, customer_id, campaign_id):
     """The main method that creates all necessary entities for the example."""
     # Create an extension setting.
-    campaign_service = client.get_service("CampaignService", version="v5")
+    campaign_service = client.get_service("CampaignService", version="v6")
     campaign_ext_setting_service = client.get_service(
-        "CampaignExtensionSettingService", version="v5"
+        "CampaignExtensionSettingService", version="v6"
     )
 
     campaign_resource_name = campaign_service.campaign_path(
@@ -48,12 +48,12 @@ def main(client, customer_id, campaign_id):
     )
 
     campaign_ext_setting_operation = client.get_type(
-        "CampaignExtensionSettingOperation", version="v5"
+        "CampaignExtensionSettingOperation", version="v6"
     )
-    extension_type_enum = client.get_type("ExtensionTypeEnum", version="v5")
+    extension_type_enum = client.get_type("ExtensionTypeEnum", version="v6")
 
     campaign_ext_setting = campaign_ext_setting_operation.create
-    campaign_ext_setting.campaign.value = campaign_resource_name
+    campaign_ext_setting.campaign = campaign_resource_name
     campaign_ext_setting.extension_type = extension_type_enum.SITELINK
 
     campaign_ext_setting.extension_feed_items.extend(feed_item_resource_names)
@@ -92,14 +92,13 @@ def _create_extension_feed_items(client, customer_id, campaign_resource_name):
             be tracked by the created extension feed items.
 
     Returns:
-        A list containing StringValue resource names for the created extension
-        feed items.
+        A list containing resource names for the created extension feed items.
     """
     extension_feed_item_service = client.get_service(
-        "ExtensionFeedItemService", version="v5"
+        "ExtensionFeedItemService", version="v6"
     )
     geo_target_constant_service = client.get_service(
-        "GeoTargetConstantService", version="v5"
+        "GeoTargetConstantService", version="v6"
     )
     extension_type_enum = client.get_type("ExtensionTypeEnum")
     feed_item_target_device_enum = client.get_type("FeedItemTargetDeviceEnum")
@@ -107,56 +106,59 @@ def _create_extension_feed_items(client, customer_id, campaign_resource_name):
     minute_of_hour_enum = client.get_type("MinuteOfHourEnum")
 
     extension_feed_item_operation1 = client.get_type(
-        "ExtensionFeedItemOperation", version="v5"
+        "ExtensionFeedItemOperation", version="v6"
     )
     extension_feed_item1 = extension_feed_item_operation1.create
     extension_feed_item1.extension_type = extension_type_enum.SITELINK
-    extension_feed_item1.sitelink_feed_item.link_text.value = "Store Hours"
-    extension_feed_item1.targeted_campaign.value = campaign_resource_name
-    final_url1 = extension_feed_item1.sitelink_feed_item.final_urls.add()
-    final_url1.value = "http://www.example.com/storehours"
+    extension_feed_item1.sitelink_feed_item.link_text = "Store Hours"
+    extension_feed_item1.targeted_campaign = campaign_resource_name
+    extension_feed_item1.sitelink_feed_item.final_urls.append(
+        "http://www.example.com/storehours"
+    )
 
     extension_feed_item_operation2 = client.get_type(
-        "ExtensionFeedItemOperation", version="v5"
+        "ExtensionFeedItemOperation", version="v6"
     )
     date_range = _get_thanksgiving_string_date_range()
     extension_feed_item2 = extension_feed_item_operation2.create
     extension_feed_item2.extension_type = extension_type_enum.SITELINK
-    extension_feed_item2.sitelink_feed_item.link_text.value = (
-        "Thanksgiving Specials"
-    )
-    extension_feed_item2.targeted_campaign.value = campaign_resource_name
-    extension_feed_item2.start_date_time.value = date_range.start_datetime
-    extension_feed_item2.end_date_time.value = date_range.end_datetime
+    extension_feed_item2.sitelink_feed_item.link_text = "Thanksgiving Specials"
+    extension_feed_item2.targeted_campaign = campaign_resource_name
+    extension_feed_item2.start_date_time = date_range.start_datetime
+    extension_feed_item2.end_date_time = date_range.end_datetime
     # Targets this sitelink for the United States only.
     # A list of country codes can be referenced here:
     # https://developers.google.com/adwords/api/docs/appendix/geotargeting
     united_states = geo_target_constant_service.geo_target_constant_path(2048)
-    extension_feed_item2.targeted_geo_target_constant.value = united_states
-    final_url2 = extension_feed_item2.sitelink_feed_item.final_urls.add()
-    final_url2.value = "http://www.example.com/thanksgiving"
+    extension_feed_item2.targeted_geo_target_constant = united_states
+    extension_feed_item2.sitelink_feed_item.final_urls.append(
+        "http://www.example.com/thanksgiving"
+    )
 
     extension_feed_item_operation3 = client.get_type(
-        "ExtensionFeedItemOperation", version="v5"
+        "ExtensionFeedItemOperation", version="v6"
     )
     extension_feed_item3 = extension_feed_item_operation3.create
     extension_feed_item3.extension_type = extension_type_enum.SITELINK
-    extension_feed_item3.sitelink_feed_item.link_text.value = "Wifi available"
-    extension_feed_item3.targeted_campaign.value = campaign_resource_name
+    extension_feed_item3.sitelink_feed_item.link_text = "Wifi available"
+    extension_feed_item3.targeted_campaign = campaign_resource_name
     extension_feed_item3.device = feed_item_target_device_enum.MOBILE
-    final_url3 = extension_feed_item3.sitelink_feed_item.final_urls.add()
-    final_url3.value = "http://www.example.com/mobile/wifi"
+    extension_feed_item3.sitelink_feed_item.final_urls.append(
+        "http://www.example.com/mobile/wifi"
+    )
 
     extension_feed_item_operation4 = client.get_type(
-        "ExtensionFeedItemOperation", version="v5"
+        "ExtensionFeedItemOperation", version="v6"
     )
     extension_feed_item4 = extension_feed_item_operation4.create
     extension_feed_item4.extension_type = extension_type_enum.SITELINK
-    extension_feed_item4.sitelink_feed_item.link_text.value = "Happy hours"
-    extension_feed_item4.targeted_campaign.value = campaign_resource_name
+    extension_feed_item4.sitelink_feed_item.link_text = "Happy hours"
+    extension_feed_item4.targeted_campaign = campaign_resource_name
     extension_feed_item4.device = feed_item_target_device_enum.MOBILE
-    final_url4 = extension_feed_item4.sitelink_feed_item.final_urls.add()
-    final_url4.value = "http://www.example.com/happyhours"
+    extension_feed_item4.sitelink_feed_item.final_urls.append(
+        "http://www.example.com/happyhours"
+    )
+
     for day_of_week in [
         day_of_week_enum.MONDAY,
         day_of_week_enum.TUESDAY,
@@ -200,19 +202,7 @@ def _create_extension_feed_items(client, customer_id, campaign_resource_name):
     for feed_item in feed_response.results:
         print(f"\tResource name: {feed_item.resource_name}")
 
-    resource_names = [result.resource_name for result in feed_response.results]
-
-    return [
-        _to_string_value(client, resource_name)
-        for resource_name in resource_names
-    ]
-
-
-def _to_string_value(client, s):
-    """Helper method that converts a given str to a StringValue instance."""
-    str_val = client.get_type("StringValue")
-    str_val.value = s
-    return str_val
+    return [result.resource_name for result in feed_response.results]
 
 
 def _get_thanksgiving_string_date_range():

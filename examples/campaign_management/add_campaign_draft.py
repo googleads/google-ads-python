@@ -27,9 +27,9 @@ from google.ads.google_ads.errors import GoogleAdsException
 
 
 def main(client, customer_id, base_campaign_id):
-    campaign_service = client.get_service("CampaignService", version="v5")
+    campaign_service = client.get_service("CampaignService", version="v6")
     campaign_draft_service = client.get_service(
-        "CampaignDraftService", version="v5"
+        "CampaignDraftService", version="v6"
     )
 
     # Creates a campaign draft operation.
@@ -37,10 +37,10 @@ def main(client, customer_id, base_campaign_id):
     campaign_draft = campaign_draft_operation.create
 
     # Creates a campaign draft.
-    campaign_draft.base_campaign.value = campaign_service.campaign_path(
+    campaign_draft.base_campaign = campaign_service.campaign_path(
         customer_id, base_campaign_id
     )
-    campaign_draft.name.value = f"Campaign Draft #{uuid4()}"
+    campaign_draft.name = f"Campaign Draft #{uuid4()}"
 
     # Issues a mutate request to add the campaign draft.
     try:

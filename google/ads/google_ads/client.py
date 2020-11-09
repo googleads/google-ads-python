@@ -16,7 +16,7 @@
 from importlib import import_module
 import logging.config
 
-import grpc
+import grpc.experimental
 
 from google.ads.google_ads import config, oauth2, util
 from google.ads.google_ads.interceptors import (
@@ -31,7 +31,7 @@ _logger = logging.getLogger(__name__)
 _SERVICE_CLIENT_TEMPLATE = "{}Client"
 _SERVICE_GRPC_TRANSPORT_TEMPLATE = "{}GrpcTransport"
 
-_VALID_API_VERSIONS = ["v5", "v4", "v3", "v2"]
+_VALID_API_VERSIONS = ["v6", "v5", "v4", "v3"]
 _DEFAULT_VERSION = _VALID_API_VERSIONS[0]
 
 _GRPC_CHANNEL_OPTIONS = [

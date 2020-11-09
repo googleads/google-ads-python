@@ -32,9 +32,9 @@ def main(client, customer_id):
     URL = "https://goo.gl/3b9Wfh"
     image_content = requests.get(URL).content
 
-    asset_operation = client.get_type("AssetOperation", version="v5")
+    asset_operation = client.get_type("AssetOperation", version="v6")
     asset = asset_operation.create
-    asset.type = client.get_type("AssetTypeEnum", version="v5").IMAGE
+    asset.type = client.get_type("AssetTypeEnum", version="v6").IMAGE
     asset.image_asset.data = image_content
     asset.image_asset.file_size = len(image_content)
     asset.image_asset.mime_type = client.get_type("MimeTypeEnum").IMAGE_JPEG
@@ -48,7 +48,7 @@ def main(client, customer_id):
     # asset in this customer account.
     # asset.name = 'Jupiter Trip #' + uuid.uuid4()
 
-    asset_service = client.get_service("AssetService", version="v5")
+    asset_service = client.get_service("AssetService", version="v6")
 
     try:
         mutate_asset_response = asset_service.mutate_assets(

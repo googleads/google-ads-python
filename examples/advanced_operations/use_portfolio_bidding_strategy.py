@@ -24,16 +24,16 @@ import google.ads.google_ads.client
 
 def main(client, customer_id):
     campaign_budget_service = client.get_service(
-        "CampaignBudgetService", version="v5"
+        "CampaignBudgetService", version="v6"
     )
     bidding_strategy_service = client.get_service(
-        "BiddingStrategyService", version="v5"
+        "BiddingStrategyService", version="v6"
     )
-    campaign_service = client.get_service("CampaignService", version="v5")
+    campaign_service = client.get_service("CampaignService", version="v6")
 
     # Create a budget, which can be shared by multiple campaigns.
     campaign_budget_operation = client.get_type(
-        "CampaignBudgetOperation", version="v5"
+        "CampaignBudgetOperation", version="v6"
     )
     campaign_budget = campaign_budget_operation.create
     campaign_budget.name = "Interplanetary Budget %s" % uuid.uuid4()
@@ -66,7 +66,7 @@ def main(client, customer_id):
 
     # Create a portfolio bidding strategy.
     bidding_strategy_operation = client.get_type(
-        "BiddingStrategyOperation", version="v5"
+        "BiddingStrategyOperation", version="v6"
     )
     bidding_strategy = bidding_strategy_operation.create
     bidding_strategy.name = "Enhanced CPC %s" % uuid.uuid4()
@@ -95,7 +95,7 @@ def main(client, customer_id):
     print('Portfolio bidding strategy "%s" was created.' % bidding_strategy_id)
 
     # Create campaign.
-    campaign_operation = client.get_type("CampaignOperation", version="v5")
+    campaign_operation = client.get_type("CampaignOperation", version="v6")
     campaign = campaign_operation.create
     campaign.name = "Interplanetary Cruise %s" % uuid.uuid4()
     campaign.advertising_channel_type = client.get_type(
@@ -105,7 +105,7 @@ def main(client, customer_id):
     # Recommendation: Set the campaign to PAUSED when creating it to prevent the
     # ads from immediately serving. Set to ENABLED once you've added targeting
     # and the ads are ready to serve.
-    campaign.status = client.get_type("CampaignStatusEnum", version="v5").PAUSED
+    campaign.status = client.get_type("CampaignStatusEnum", version="v6").PAUSED
 
     # Set the bidding strategy and budget.
     campaign.bidding_strategy = bidding_strategy_id

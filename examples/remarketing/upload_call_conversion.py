@@ -26,14 +26,14 @@ from google.ads.google_ads.errors import GoogleAdsException
 
 
 def main(
-        client,
-        customer_id,
-        conversion_action_id,
-        caller_id,
-        call_start_date_time,
-        conversion_date_time,
-        conversion_value,
-    ):
+    client,
+    customer_id,
+    conversion_action_id,
+    caller_id,
+    call_start_date_time,
+    conversion_date_time,
+    conversion_value,
+):
     """Imports offline call conversion values for calls related to your ads.
 
     Args:
@@ -53,13 +53,13 @@ def main(
     """
     # Get the ConversionUploadService client.
     conversion_upload_service = client.get_service(
-        "ConversionUploadService", version="v5"
+        "ConversionUploadService", version="v6"
     )
 
     # Create a call conversion in USD currency.
-    call_conversion = client.get_type("CallConversion", version="v5")
+    call_conversion = client.get_type("CallConversion", version="v6")
     call_conversion.conversion_action = client.get_service(
-        "ConversionActionService", version="v5"
+        "ConversionActionService", version="v6"
     ).conversion_action_path(customer_id, conversion_action_id)
     call_conversion.caller_id = caller_id
     call_conversion.call_start_date_time = call_start_date_time
@@ -69,10 +69,9 @@ def main(
 
     try:
         # Issue a request to upload the call conversion.
-        upload_call_conversions_response = (
-            conversion_upload_service.upload_call_conversions(
-                customer_id, [call_conversion], partial_failure=True
-            ))
+        upload_call_conversions_response = conversion_upload_service.upload_call_conversions(
+            customer_id, [call_conversion], partial_failure=True
+        )
 
         # Print any partial errors returned.
         if upload_call_conversions_response.partial_failure_error:

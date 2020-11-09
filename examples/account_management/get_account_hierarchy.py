@@ -40,8 +40,8 @@ def main(client, login_customer_id=None):
     """
 
     # Gets instances of the GoogleAdsService and CustomerService clients.
-    google_ads_service = client.get_service("GoogleAdsService", version="v5")
-    customer_service = client.get_service("CustomerService", version="v5")
+    google_ads_service = client.get_service("GoogleAdsService", version="v6")
+    customer_service = client.get_service("CustomerService", version="v6")
 
     # A collection of customer IDs to handle.
     seed_customer_ids = []
@@ -99,7 +99,7 @@ def main(client, login_customer_id=None):
 
                     # The customer client that with level 0 is the specified
                     # customer.
-                    if customer_client.level.value == 0:
+                    if customer_client.level == 0:
                         if root_customer_client is None:
                             root_customer_client = customer_client
                         continue
@@ -115,23 +115,21 @@ def main(client, login_customer_id=None):
                         customer_client
                     )
 
-                    if customer_client.manager.value:
+                    if customer_client.manager:
                         # A customer can be managed by multiple managers, so to
                         # prevent visiting the same customer many times, we
                         # need to check if it's already in the Dictionary.
                         if (
-                            customer_client.id.value
+                            customer_client.id
                             not in customer_ids_to_child_accounts
-                            and customer_client.level.value == 1
+                            and customer_client.level == 1
                         ):
-                            unprocessed_customer_ids.append(
-                                customer_client.id.value
-                            )
+                            unprocessed_customer_ids.append(customer_client.id)
 
             if root_customer_client is not None:
                 print(
                     "The hierarchy of customer ID "
-                    f"{root_customer_client.id.value} is printed below:"
+                    f"{root_customer_client.id} is printed below:"
                 )
                 print_account_hierarchy(
                     root_customer_client, customer_ids_to_child_accounts, 0
@@ -172,12 +170,12 @@ def print_account_hierarchy(
     if depth == 0:
         print("Customer ID (Descriptive Name, Currency Code, Time Zone)")
 
-    customer_id = str(customer_client.id.value)
+    customer_id = str(customer_client.id)
     print("-" * (depth * 2), end="")
     print(
-        f"{customer_id} ({customer_client.descriptive_name.value}, "
-        f"{customer_client.currency_code.value}, "
-        f"{customer_client.time_zone.value})"
+        f"{customer_id} ({customer_client.descriptive_name}, "
+        f"{customer_client.currency_code}, "
+        f"{customer_client.time_zone})"
     )
 
     # Recursively call this function for all child accounts of customer_client.

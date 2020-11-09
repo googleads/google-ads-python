@@ -29,24 +29,24 @@ from google.ads.google_ads.util import ResourceName
 
 def main(client, customer_id, base_campaign_id, draft_id):
     # Create the campaign experiment.
-    campaign_experiment = client.get_type("CampaignExperiment", version="v5")
+    campaign_experiment = client.get_type("CampaignExperiment", version="v6")
     campaign_draft_service = client.get_service(
-        "CampaignDraftService", version="v5"
+        "CampaignDraftService", version="v6"
     )
     campaign_draft_resource_name = campaign_draft_service.campaign_draft_path(
         customer_id, ResourceName.format_composite(base_campaign_id, draft_id)
     )
 
-    campaign_experiment.campaign_draft.value = campaign_draft_resource_name
-    campaign_experiment.name.value = f"Campaign Experiment #{uuid.uuid4()}"
-    campaign_experiment.traffic_split_percent.value = 50
+    campaign_experiment.campaign_draft = campaign_draft_resource_name
+    campaign_experiment.name = f"Campaign Experiment #{uuid.uuid4()}"
+    campaign_experiment.traffic_split_percent = 50
     campaign_experiment.traffic_split_type = client.get_type(
-        "CampaignExperimentTrafficSplitTypeEnum", version="v5"
+        "CampaignExperimentTrafficSplitTypeEnum", version="v6"
     ).RANDOM_QUERY
 
     try:
         campaign_experiment_service = client.get_service(
-            "CampaignExperimentService", version="v5"
+            "CampaignExperimentService", version="v6"
         )
 
         # A Long Running Operation (LRO) is returned from this
@@ -77,7 +77,7 @@ def main(client, customer_id, base_campaign_id, draft_id):
     campaign_experiment_lro.result()
 
     # Retrieve the campaign experiment that has been created.
-    ga_service = client.get_service("GoogleAdsService", version="v5")
+    ga_service = client.get_service("GoogleAdsService", version="v6")
     query = f"""
         SELECT campaign_experiment.experiment_campaign
         FROM campaign_experiment
@@ -91,7 +91,7 @@ def main(client, customer_id, base_campaign_id, draft_id):
         for row in results:
             print(
                 "Experiment campaign "
-                f'"{row.campaign_experiment.experiment_campaign.value}" '
+                f'"{row.campaign_experiment.experiment_campaign}" '
                 "creation completed."
             )
     except GoogleAdsException as ex:

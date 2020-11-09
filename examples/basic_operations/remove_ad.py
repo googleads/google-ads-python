@@ -23,8 +23,8 @@ from google.ads.google_ads.util import ResourceName
 
 
 def main(client, customer_id, ad_group_id, ad_id):
-    ad_group_ad_service = client.get_service("AdGroupAdService", version="v5")
-    ad_group_ad_operation = client.get_type("AdGroupAdOperation", version="v5")
+    ad_group_ad_service = client.get_service("AdGroupAdService", version="v6")
+    ad_group_ad_operation = client.get_type("AdGroupAdOperation", version="v6")
 
     resource_name = ad_group_ad_service.ad_group_ad_path(
         customer_id, ResourceName.format_composite(ad_group_id, ad_id)

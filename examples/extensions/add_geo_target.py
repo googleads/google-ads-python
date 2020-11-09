@@ -35,11 +35,11 @@ def main(client, customer_id, feed_item_id, geo_target_constant_id):
             extension feed item.
     """
     extension_feed_item_service = client.get_service(
-        "ExtensionFeedItemService", version="v5"
+        "ExtensionFeedItemService", version="v6"
     )
 
     extension_feed_item_operation = client.get_type(
-        "ExtensionFeedItemOperation", version="v5"
+        "ExtensionFeedItemOperation", version="v6"
     )
     extension_feed_item = extension_feed_item_operation.update
     # Creates an extension feed item using the specified feed item ID and
@@ -47,8 +47,8 @@ def main(client, customer_id, feed_item_id, geo_target_constant_id):
     extension_feed_item.resource_name = extension_feed_item_service.extension_feed_item_path(
         customer_id, feed_item_id
     )
-    extension_feed_item.targeted_geo_target_constant.value = client.get_service(
-        "GeoTargetConstantService", version="v5"
+    extension_feed_item.targeted_geo_target_constant = client.get_service(
+        "GeoTargetConstantService", version="v6"
     ).geo_target_constant_path(geo_target_constant_id)
     fm = protobuf_helpers.field_mask(None, extension_feed_item)
     extension_feed_item_operation.update_mask.CopyFrom(fm)

@@ -36,10 +36,10 @@ def main(client, customer_id, label_id, campaign_ids):
 
     # Get an instance of CampaignLabelService client.
     campaign_label_service = client.get_service(
-        "CampaignLabelService", version="v5"
+        "CampaignLabelService", version="v6"
     )
-    campaign_service = client.get_service("CampaignService", version="v5")
-    label_service = client.get_service("LabelService", version="v5")
+    campaign_service = client.get_service("CampaignService", version="v6")
+    label_service = client.get_service("LabelService", version="v6")
 
     # Build the resource name of the label to be added across the campaigns.
     label_resource_name = label_service.label_path(customer_id, label_id)
@@ -51,12 +51,12 @@ def main(client, customer_id, label_id, campaign_ids):
             customer_id, campaign_id
         )
         campaign_label_operation = client.get_type(
-            "CampaignLabelOperation", version="v5"
+            "CampaignLabelOperation", version="v6"
         )
 
         campaign_label = campaign_label_operation.create
-        campaign_label.campaign.value = campaign_resource_name
-        campaign_label.label.value = label_resource_name
+        campaign_label.campaign = campaign_resource_name
+        campaign_label.label = label_resource_name
         operations.append(campaign_label_operation)
 
     try:

@@ -29,7 +29,7 @@ _DEFAULT_PAGE_SIZE = 1000
 
 
 def main(client, customer_id, page_size):
-    ga_service = client.get_service("GoogleAdsService", version="v5")
+    ga_service = client.get_service("GoogleAdsService", version="v6")
 
     query = """
         SELECT
@@ -60,23 +60,19 @@ def main(client, customer_id, page_size):
             budget_proposal = row.account_budget_proposal
 
             print(
-                'Account budget proposal with ID "%s", status "%s", '
-                'account_budget "%s", billing_setup "%s", '
-                'proposed_name "%s", proposed_notes "%s", '
-                'proposed_po_number "%s", proposal_type "%s", '
-                'approval_date_time "%s", creation_date_time "%s"'
-                % (
-                    budget_proposal.id.value,
-                    proposal_status_enum.Name(budget_proposal.status),
-                    budget_proposal.account_budget.value,
-                    budget_proposal.billing_setup.value,
-                    budget_proposal.proposed_name.value,
-                    budget_proposal.proposed_notes.value,
-                    budget_proposal.proposed_purchase_order_number.value,
-                    proposal_type_enum.Name(budget_proposal.proposal_type),
-                    budget_proposal.approval_date_time.value,
-                    budget_proposal.creation_date_time.value,
-                )
+                f'Account budget proposal with ID "{budget_proposal.id}", '
+                "status "
+                f'"{proposal_status_enum.Name(budget_proposal.status)}", '
+                f'account_budget "{budget_proposal.account_budget}", '
+                f'billing_setup "{budget_proposal.billing_setup}", '
+                f'proposed_name "{budget_proposal.proposed_name}", '
+                f'proposed_notes "{budget_proposal.proposed_notes}", '
+                "proposed_po_number "
+                f'"{budget_proposal.proposed_purchase_order_number}", '
+                "proposal_type "
+                f'"{proposal_type_enum.Name(budget_proposal.proposal_type)}", '
+                f'approval_date_time "{budget_proposal.approval_date_time}", '
+                f'creation_date_time "{budget_proposal.creation_date_time}"'
             )
     except google.ads.google_ads.errors.GoogleAdsException as ex:
         print(

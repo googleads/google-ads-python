@@ -121,7 +121,7 @@ def main(
 
 def _create_budget(client, customer_id):
     campaign_budget_operation = client.get_type(
-        "CampaignBudgetOperation", version="v5"
+        "CampaignBudgetOperation", version="v6"
     )
     campaign_budget = campaign_budget_operation.create
     campaign_budget.name = f"Interplanetary Cruise Budget #{uuid4()}"
@@ -131,7 +131,7 @@ def _create_budget(client, customer_id):
     campaign_budget.amount_micros = 500000
 
     campaign_budget_service = client.get_service(
-        "CampaignBudgetService", version="v5"
+        "CampaignBudgetService", version="v6"
     )
 
     try:
@@ -144,22 +144,22 @@ def _create_budget(client, customer_id):
 
 
 def _create_smart_display_campaign(client, customer_id, budget_resource_name):
-    campaign_operation = client.get_type("CampaignOperation", version="v5")
+    campaign_operation = client.get_type("CampaignOperation", version="v6")
     campaign = campaign_operation.create
     campaign.name = f"Smart Display Campaign #{uuid4()}"
     advertising_channel_type_enum = client.get_type(
-        "AdvertisingChannelTypeEnum", version="v5"
+        "AdvertisingChannelTypeEnum", version="v6"
     )
     campaign.advertising_channel_type = advertising_channel_type_enum.DISPLAY
     advertising_channel_sub_type_enum = client.get_type(
-        "AdvertisingChannelSubTypeEnum", version="v5"
+        "AdvertisingChannelSubTypeEnum", version="v6"
     )
     # Smart Display campaign requires the advertising_channel_sub_type as
     # "DISPLAY_SMART_CAMPAIGN".
     campaign.advertising_channel_sub_type = (
         advertising_channel_sub_type_enum.DISPLAY_SMART_CAMPAIGN
     )
-    campaign_status_enum = client.get_type("CampaignStatusEnum", version="v5")
+    campaign_status_enum = client.get_type("CampaignStatusEnum", version="v6")
     campaign.status = campaign_status_enum.PAUSED
     # Smart Display campaign requires the TargetCpa bidding strategy.
     campaign.target_cpa.target_cpa_micros = 5000000
@@ -170,7 +170,7 @@ def _create_smart_display_campaign(client, customer_id, budget_resource_name):
     end_date = start_date + datetime.timedelta(days=365)
     campaign.end_date = end_date.strftime(_DATE_FORMAT)
 
-    campaign_service = client.get_service("CampaignService", version="v5")
+    campaign_service = client.get_service("CampaignService", version="v6")
 
     try:
         campaign_response = campaign_service.mutate_campaigns(
@@ -182,14 +182,14 @@ def _create_smart_display_campaign(client, customer_id, budget_resource_name):
 
 
 def _create_ad_group(client, customer_id, campaign_resource_name):
-    ad_group_operation = client.get_type("AdGroupOperation", version="v5")
+    ad_group_operation = client.get_type("AdGroupOperation", version="v6")
     ad_group = ad_group_operation.create
     ad_group.name = f"Earth to Mars Cruises #{uuid4()}"
-    ad_group_status_enum = client.get_type("AdGroupStatusEnum", version="v5")
+    ad_group_status_enum = client.get_type("AdGroupStatusEnum", version="v6")
     ad_group.status = ad_group_status_enum.PAUSED
     ad_group.campaign = campaign_resource_name
 
-    ad_group_service = client.get_service("AdGroupService", version="v5")
+    ad_group_service = client.get_service("AdGroupService", version="v6")
 
     try:
         ad_group_response = ad_group_service.mutate_ad_groups(
@@ -206,14 +206,14 @@ def _upload_image_asset(
     # Download image from URL
     image_content = requests.get(image_url).content
 
-    asset_operation = client.get_type("AssetOperation", version="v5")
+    asset_operation = client.get_type("AssetOperation", version="v6")
     asset = asset_operation.create
     # Optional: Provide a unique friendly name to identify your asset. If you
     # specify the name field, then both the asset name and the image being
     # uploaded should be unique, and should not match another ACTIVE asset in
     # this customer account.
     # asset.name = f'Jupiter Trip #{uuid4()}'
-    asset_type_enum = client.get_type("AssetTypeEnum", version="v5")
+    asset_type_enum = client.get_type("AssetTypeEnum", version="v6")
     asset.type = asset_type_enum.IMAGE
     image_asset = asset.image_asset
     image_asset.data = image_content
@@ -223,8 +223,8 @@ def _upload_image_asset(
     image_asset.full_size.height_pixels = image_height
     image_asset.full_size.url = image_url
 
-    asset_service = client.get_service("AssetService", version="v5")
-    content_type_enum = client.get_type("ResponseContentTypeEnum", version="v5")
+    asset_service = client.get_service("AssetService", version="v6")
+    content_type_enum = client.get_type("ResponseContentTypeEnum", version="v6")
 
     try:
         mutate_asset_response = asset_service.mutate_assets(
@@ -247,11 +247,11 @@ def _create_responsive_display_ad(
     marketing_image_asset_id,
     square_marketing_image_asset_id,
 ):
-    ad_group_ad_operation = client.get_type("AdGroupAdOperation", version="v5")
+    ad_group_ad_operation = client.get_type("AdGroupAdOperation", version="v6")
     ad_group_ad = ad_group_ad_operation.create
     ad_group_ad.ad_group = ad_group_resource_name
     ad_group_ad.status = client.get_type(
-        "AdGroupAdStatusEnum", version="v5"
+        "AdGroupAdStatusEnum", version="v6"
     ).PAUSED
     ad = ad_group_ad.ad
     ad.final_urls.append("https://www.example.com")
@@ -263,7 +263,7 @@ def _create_responsive_display_ad(
     description.text = "Take to the air!"
     responsive_display_ad.business_name = "Google"
 
-    asset_service = client.get_service("AssetService", version="v5")
+    asset_service = client.get_service("AssetService", version="v6")
     marketing_image = responsive_display_ad.marketing_images.add()
     marketing_image.asset = asset_service.asset_path(
         customer_id, marketing_image_asset_id
@@ -276,7 +276,7 @@ def _create_responsive_display_ad(
     responsive_display_ad.price_prefix = "as low as"
     responsive_display_ad.promo_text = "Free shipping!"
 
-    ad_group_ad_service = client.get_service("AdGroupAdService", version="v5")
+    ad_group_ad_service = client.get_service("AdGroupAdService", version="v6")
 
     try:
         ad_group_ad_response = ad_group_ad_service.mutate_ad_group_ads(

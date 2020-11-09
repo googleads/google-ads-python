@@ -27,61 +27,13 @@ from google.ads.google_ads.errors import GoogleAdsException
 ONE_MILLION = 1.0e6
 
 
-def _string_value(client, value):
-    """Converts a value to a protocol buffer string wrapper.
-
-    Args:
-      client: A google.ads.google_ads.client.GoogleAdsClient instance.
-      value: A string value to wrap.
-
-    Returns:
-      An instance of google.protobuf.wrappers_pb2.StringValue with its "value"
-      property updates with the given value.
-    """
-    string_val = client.get_type("StringValue", version="v5")
-    string_val.value = value
-    return string_val
-
-
-def _int_32_value(client, value):
-    """Converts a value to a protocol buffer Int32 wrapper.
-
-    Args:
-      client: A google.ads.google_ads.client.GoogleAdsClient instance.
-      value: A number to wrap, truncated to the nearest integer.
-
-    Returns:
-      An instance of google.protobuf.wrappers_pb2.Int32Value with its "value"
-      property updates with the given value.
-    """
-    int_32_val = client.get_type("Int32Value", version="v5")
-    int_32_val.value = math.trunc(value)
-    return int_32_val
-
-
-def _int_64_value(client, value):
-    """Converts a value to a protocol buffer Int64 wrapper.
-
-    Args:
-      client: A google.ads.google_ads.client.GoogleAdsClient instance.
-      value: A number to wrap, truncated to the nearest integer.
-
-    Returns:
-      An instance of google.protobuf.wrappers_pb2.Int64Value with its "value"
-      property updates with the given value.
-    """
-    int_64_val = client.get_type("Int64Value", version="v5")
-    int_64_val.value = math.trunc(value)
-    return int_64_val
-
-
-def show_plannable_locations(client):
+def _show_plannable_locations(client):
     """Shows map of plannable locations to their IDs.
 
     Args:
       client: A google.ads.google_ads.client.GoogleAdsClient instance.
     """
-    reach_plan_service = client.get_service("ReachPlanService", version="v5")
+    reach_plan_service = client.get_service("ReachPlanService", version="v6")
     response = reach_plan_service.list_plannable_locations()
 
     print("Plannable Locations")
@@ -89,14 +41,12 @@ def show_plannable_locations(client):
     for location in response.plannable_locations:
         print(
             '"{}",\t{},\t{}'.format(
-                location.name.value,
-                location.id.value,
-                location.parent_country_id.value,
+                location.name, location.id, location.parent_country_id,
             )
         )
 
 
-def show_plannable_products(client, location_id):
+def _show_plannable_products(client, location_id):
     """Lists plannable products for a given location.
 
     Args:
@@ -105,12 +55,34 @@ def show_plannable_products(client, location_id):
         https://developers.google.com/adwords/api/docs/appendix/geotargeting or
         by calling ListPlannableLocations on the ReachPlanService.
     """
-    reach_plan_service = client.get_service("ReachPlanService", version="v5")
+    reach_plan_service = client.get_service("ReachPlanService", version="v6")
     response = reach_plan_service.list_plannable_products(
-        plannable_location_id=_string_value(client, location_id)
+        plannable_location_id=location_id
     )
-    print("Plannable Products for Location ID {}".format(location_id))
-    print(response)
+
+    print(f"Plannable Products for Location ID {location_id}")
+
+    age_range_enum = client.get_type("ReachPlanAgeRangeEnum", version="v6")
+    gender_type_enum = client.get_type("GenderTypeEnum", version="v6")
+    device_enum = client.get_type("DeviceEnum", version="v6")
+
+    for product_metadata in response.product_metadata:
+        print(
+            f"{product_metadata.plannable_product_code} : "
+            f"{product_metadata.plannable_product_name}"
+        )
+
+        print("Age Ranges:")
+        for age_range in product_metadata.plannable_targeting.age_ranges:
+            print(f"\t- {age_range_enum.ReachPlanAgeRange.Name(age_range)}")
+
+        print("Genders:")
+        for gender in product_metadata.plannable_targeting.genders:
+            print(f"\t- {gender_type_enum.GenderType.Name(gender.type)}")
+
+        print("Devices:")
+        for device in product_metadata.plannable_targeting.devices:
+            print(f"\t- {device_enum.Device.Name(device.type)}")
 
 
 def _request_reach_curve(
@@ -128,43 +100,43 @@ def _request_reach_curve(
       currency_code: Three-character ISO 4217 currency code.
     """
     reach_request = client.get_type(
-        "GenerateReachForecastRequest", version="v5"
+        "GenerateReachForecastRequest", version="v6"
     )
 
     reach_request.customer_id = customer_id
 
     # Valid durations are between 1 and 90 days.
     campaign_duration = reach_request.campaign_duration
-    campaign_duration.duration_in_days.value = 28
+    campaign_duration.duration_in_days = 28
 
     targeting = reach_request.targeting
-    targeting.plannable_location_id.value = location_id
+    targeting.plannable_location_id = location_id
     targeting.age_range = client.get_type(
-        "ReachPlanAgeRangeEnum", version="v5"
+        "ReachPlanAgeRangeEnum", version="v6"
     ).AGE_RANGE_18_65_UP
 
     genders = targeting.genders
     gender_types = [
-        client.get_type("GenderTypeEnum", version="v5").FEMALE,
-        client.get_type("GenderTypeEnum", version="v5").MALE,
+        client.get_type("GenderTypeEnum", version="v6").FEMALE,
+        client.get_type("GenderTypeEnum", version="v6").MALE,
     ]
     for gender_type in gender_types:
-        gender = client.get_type("GenderInfo", version="v5")
+        gender = client.get_type("GenderInfo", version="v6")
         gender.type = gender_type
         genders.append(gender)
 
     devices = targeting.devices
     device_types = [
-        client.get_type("DeviceEnum", version="v5").DESKTOP,
-        client.get_type("DeviceEnum", version="v5").MOBILE,
-        client.get_type("DeviceEnum", version="v5").TABLET,
+        client.get_type("DeviceEnum", version="v6").DESKTOP,
+        client.get_type("DeviceEnum", version="v6").MOBILE,
+        client.get_type("DeviceEnum", version="v6").TABLET,
     ]
     for device_type in device_types:
-        device = client.get_type("DeviceInfo", version="v5")
+        device = client.get_type("DeviceInfo", version="v6")
         device.type = device_type
         devices.append(device)
 
-    reach_plan_service = client.get_service("ReachPlanService", version="v5")
+    reach_plan_service = client.get_service("ReachPlanService", version="v6")
 
     # See the docs for defaults and valid ranges:
     # https://developers.google.com/google-ads/api/reference/rpc/latest/GenerateReachForecastRequest
@@ -172,34 +144,29 @@ def _request_reach_curve(
         customer_id,
         campaign_duration,
         product_mix,
-        currency_code=_string_value(client, currency_code),
-        cookie_frequency_cap=_int_32_value(client, 0),
-        min_effective_frequency=_int_32_value(client, 1),
+        currency_code=currency_code,
+        cookie_frequency_cap=0,
+        min_effective_frequency=1,
         targeting=targeting,
     )
 
     print(
-        "Currency, Cost, On-Target Reach, On-Target Imprs, Total Reach,"
+        "Currency, Cost, On-Target Reach, On-Target Imprs, Total Reach, "
         " Total Imprs, Products"
     )
     for point in response.reach_curve.reach_forecasts:
-        product_splits = []
-        for p in point.forecasted_product_allocations:
-            product_splits.append(
-                {
-                    p.plannable_product_code.value: p.budget_micros.value
-                    / ONE_MILLION
-                }
-            )
         print(
             [
                 currency_code,
-                point.cost_micros.value / ONE_MILLION,
-                point.forecast.on_target_reach.value,
-                point.forecast.on_target_impressions.value,
-                point.forecast.total_reach.value,
-                point.forecast.total_impressions.value,
-                product_splits,
+                point.cost_micros / ONE_MILLION,
+                point.forecast.on_target_reach,
+                point.forecast.on_target_impressions,
+                point.forecast.total_reach,
+                point.forecast.total_impressions,
+                [
+                    {p.plannable_product_code: p.cost_micros / ONE_MILLION}
+                    for p in point.planned_product_reach_forecasts
+                ],
             ]
         )
 
@@ -226,11 +193,9 @@ def forecast_manual_mix(
         ("BUMPER", bumper_allocation),
     ]
     for product, split in product_splits:
-        planned_product = client.get_type("PlannedProduct", version="v5")
-        planned_product.plannable_product_code.value = product
-        planned_product.budget_micros.value = math.trunc(
-            budget * ONE_MILLION * split
-        )
+        planned_product = client.get_type("PlannedProduct", version="v6")
+        planned_product.plannable_product_code = product
+        planned_product.budget_micros = math.trunc(budget * ONE_MILLION * split)
         product_mix.append(planned_product)
 
     _request_reach_curve(
@@ -252,31 +217,29 @@ def forecast_suggested_mix(
       currency_code: Three-character ISO 4217 currency code.
       budget: Budget to allocate to the plan.
     """
-    preferences = client.get_type("Preferences", version="v5")
-    preferences.has_guaranteed_price.value = True
-    preferences.starts_with_sound.value = True
-    preferences.is_skippable.value = False
-    preferences.top_content_only.value = True
+    preferences = client.get_type("Preferences", version="v6")
+    preferences.has_guaranteed_price = True
+    preferences.starts_with_sound = True
+    preferences.is_skippable = False
+    preferences.top_content_only = True
     preferences.ad_length = client.get_type(
-        "ReachPlanAdLengthEnum", version="v5"
+        "ReachPlanAdLengthEnum", version="v6"
     ).FIFTEEN_OR_TWENTY_SECONDS
 
-    reach_plan_service = client.get_service("ReachPlanService", version="v5")
+    reach_plan_service = client.get_service("ReachPlanService", version="v6")
     mix_response = reach_plan_service.generate_product_mix_ideas(
         customer_id=customer_id,
-        plannable_location_id=_string_value(client, location_id),
+        plannable_location_id=location_id,
         preferences=preferences,
-        currency_code=_string_value(client, currency_code),
-        budget_micros=_int_64_value(client, budget * ONE_MILLION),
+        currency_code=currency_code,
+        budget_micros=math.trunc(budget * ONE_MILLION),
     )
 
     product_mix = []
     for product in mix_response.product_allocation:
-        planned_product = client.get_type("PlannedProduct", version="v5")
-        planned_product.plannable_product_code.value = (
-            product.plannable_product_code.value
-        )
-        planned_product.budget_micros.value = product.budget_micros.value
+        planned_product = client.get_type("PlannedProduct", version="v6")
+        planned_product.plannable_product_code = product.plannable_product_code
+        planned_product.budget_micros = product.budget_micros
         product_mix.append(planned_product)
 
     _request_reach_curve(
@@ -293,8 +256,8 @@ def main(client, customer_id):
     budget = 500000
 
     try:
-        show_plannable_locations(client)
-        show_plannable_products(client, location_id)
+        _show_plannable_locations(client)
+        _show_plannable_products(client, location_id)
         forecast_manual_mix(
             client, customer_id, location_id, currency_code, budget
         )

@@ -36,7 +36,7 @@ def main(client, customer_id, ad_group_id):
     """
 
     ad_group_ad_service_client = client.get_service(
-        "AdGroupAdService", version="v5"
+        "AdGroupAdService", version="v6"
     )
 
     ad_group_ad_operation, ignorable_policy_topics = _create_expanded_text_ad(
@@ -79,17 +79,17 @@ def _create_expanded_text_ad(
         policy topics.
     """
     ad_group_resource_name = client.get_service(
-        "AdGroupService", version="v5"
+        "AdGroupService", version="v6"
     ).ad_group_path(customer_id, ad_group_id)
 
     # Creates an operation and ad group ad to create and hold the above ad.
-    ad_group_ad_operation = client.get_type("AdGroupAdOperation", version="v5")
+    ad_group_ad_operation = client.get_type("AdGroupAdOperation", version="v6")
     ad_group_ad = ad_group_ad_operation.create
     ad_group_ad.ad_group = ad_group_resource_name
     # Set the ad group ad to PAUSED to prevent it from immediately serving.
     # Set to ENABLED once you've added targeting and the ad are ready to serve.
     ad_group_ad.status = client.get_type(
-        "AdGroupAdStatusEnum", version="v5"
+        "AdGroupAdStatusEnum", version="v6"
     ).PAUSED
     # Sets the expanded text ad info on an ad.
     expanded_text_ad_info = ad_group_ad.ad.expanded_text_ad
@@ -136,7 +136,7 @@ def _fetch_ignorable_policy_topics(client, google_ads_exception):
         if (
             error.error_code.policy_finding_error
             != client.get_type(
-                "PolicyFindingErrorEnum", version="v5"
+                "PolicyFindingErrorEnum", version="v6"
             ).POLICY_FINDING
         ):
             print(

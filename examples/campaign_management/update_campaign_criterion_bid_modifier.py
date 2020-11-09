@@ -24,7 +24,7 @@ from google.api_core import protobuf_helpers
 
 def main(client, customer_id, campaign_id, criterion_id, bid_modifier_value):
     campaign_criterion_service = client.get_service(
-        "CampaignCriterionService", version="v5"
+        "CampaignCriterionService", version="v6"
     )
 
     criterion_rname = campaign_criterion_service.campaign_criteria_path(
@@ -32,7 +32,7 @@ def main(client, customer_id, campaign_id, criterion_id, bid_modifier_value):
     )
 
     campaign_criterion_operation = client.get_type(
-        "CampaignCriterionOperation", version="v5"
+        "CampaignCriterionOperation", version="v6"
     )
     campaign_criterion = campaign_criterion_operation.update
     campaign_criterion.resource_name = criterion_rname

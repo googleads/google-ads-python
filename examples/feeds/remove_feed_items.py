@@ -32,18 +32,17 @@ def main(client, customer_id, feed_id, feed_item_ids):
         feed_id: the ID for a Feed belonging to the given customer.
         feed_item_ids: a list of FeedItem IDs belonging to the given Feed.
     """
-    feed_item_service = client.get_service("FeedItemService", version="v5")
+    feed_item_service = client.get_service("FeedItemService", version="v6")
 
     operations = []
     for feed_item_id in feed_item_ids:
         # Constructs an operation that will remove the feed item based on the
         # resource name.
-        feed_item_operation = client.get_type("FeedItemOperation", version="v5")
+        feed_item_operation = client.get_type("FeedItemOperation", version="v6")
         # Constructs a resource name for a feed_item, which is in the
         # format: customers/{customer_id}/feedItems/{feed_id}~{feed_item_id}
         feed_item_operation.remove = feed_item_service.feed_item_path(
-            customer_id,
-            ResourceName.format_composite(feed_id, feed_item_id),
+            customer_id, ResourceName.format_composite(feed_id, feed_item_id),
         )
         operations.append(feed_item_operation)
 

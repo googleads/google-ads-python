@@ -26,14 +26,14 @@ from google.ads.google_ads.errors import GoogleAdsException
 
 
 def main(client, customer_id, ad_group_id):
-    ad_group_ad_operation = client.get_type("AdGroupAdOperation", version="v5")
+    ad_group_ad_operation = client.get_type("AdGroupAdOperation", version="v6")
     ad_group_ad = ad_group_ad_operation.create
-    ad_group_service = client.get_service("AdGroupService", version="v5")
+    ad_group_service = client.get_service("AdGroupService", version="v6")
     ad_group_ad.ad_group = ad_group_service.ad_group_path(
         customer_id, ad_group_id
     )
     ad_group_ad.status = client.get_type(
-        "AdGroupAdStatusEnum", version="v5"
+        "AdGroupAdStatusEnum", version="v6"
     ).PAUSED
 
     # Create an expanded text ad.
@@ -48,7 +48,7 @@ def main(client, customer_id, ad_group_id):
     )
     final_url = ad_group_ad.ad.final_urls.append("http://www.example.com/")
 
-    ad_group_ad_service = client.get_service("AdGroupAdService", version="v5")
+    ad_group_ad_service = client.get_service("AdGroupAdService", version="v6")
     # Attempt the mutate with validate_only=True.
     try:
         response = ad_group_ad_service.mutate_ad_group_ads(
@@ -77,7 +77,7 @@ def main(client, customer_id, ad_group_id):
             if (
                 error.error_code.policy_finding_error
                 == client.get_type(
-                    "PolicyFindingErrorEnum", version="v5"
+                    "PolicyFindingErrorEnum", version="v6"
                 ).POLICY_FINDING
             ):
                 if error.details.policy_finding_details:

@@ -24,9 +24,9 @@ import google.ads.google_ads.client
 
 
 def main(client, customer_id, ad_group_id):
-    ad_group_service = client.get_service("AdGroupService", version="v5")
+    ad_group_service = client.get_service("AdGroupService", version="v6")
     ad_group_criterion_service = client.get_service(
-        "AdGroupCriterionService", version="v5"
+        "AdGroupCriterionService", version="v6"
     )
 
     ad_group_resource_name = ad_group_service.ad_group_path(
@@ -34,7 +34,7 @@ def main(client, customer_id, ad_group_id):
     )
     # Create a positive ad group criterion for the gender MALE.
     gender_ad_group_criterion_operation = client.get_type(
-        "AdGroupCriterionOperation", version="v5"
+        "AdGroupCriterionOperation", version="v6"
     )
     gender_ad_group_criterion = gender_ad_group_criterion_operation.create
     gender_ad_group_criterion.ad_group = ad_group_resource_name
@@ -44,7 +44,7 @@ def main(client, customer_id, ad_group_id):
 
     # Create a negative ad group criterion for age range of 18 to 24.
     age_range_ad_group_criterion_operation = client.get_type(
-        "AdGroupCriterionOperation", version="v5"
+        "AdGroupCriterionOperation", version="v6"
     )
     age_range_ad_group_criterion = age_range_ad_group_criterion_operation.create
     age_range_ad_group_criterion.ad_group = ad_group_resource_name

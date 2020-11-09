@@ -30,10 +30,10 @@ COUNTRY_CODE = "FR"
 
 
 def main(client):
-    gtc_service = client.get_service("GeoTargetConstantService", version="v5")
+    gtc_service = client.get_service("GeoTargetConstantService", version="v6")
 
     location_names = client.get_type(
-        "SuggestGeoTargetConstantsRequest", version="v5"
+        "SuggestGeoTargetConstantsRequest", version="v6"
     ).LocationNames()
 
     location_names.names.extend(["Paris", "Quebec", "Spain", "Deutschland"])

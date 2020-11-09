@@ -33,7 +33,7 @@ def main(client, customer_id, ad_group_id, criterion_id):
         criterion_id: A criterion ID str.
     """
     ad_group_criterion_service = client.get_service(
-        "AdGroupCriterionService", version="v5"
+        "AdGroupCriterionService", version="v6"
     )
     # Gets the resource name of the ad group criterion to be used.
     resource_name = ad_group_criterion_service.ad_group_criteria_path(
@@ -45,7 +45,7 @@ def main(client, customer_id, ad_group_id, criterion_id):
     operations.append(create_ad_parameter(client, resource_name, 2, "$40"))
 
     ad_parameter_service = client.get_service(
-        "AdParameterService", version="v5"
+        "AdParameterService", version="v6"
     )
 
     # Add the ad parameter.
@@ -93,7 +93,7 @@ def create_ad_parameter(client, resource_name, parameter_index, insertion_text):
 
     Returns: A new AdParamterOperation message class instance.
     """
-    ad_param_operation = client.get_type("AdParameterOperation", version="v5")
+    ad_param_operation = client.get_type("AdParameterOperation", version="v6")
     ad_param = ad_param_operation.create
     ad_param.ad_group_criterion = resource_name
     ad_param.parameter_index = parameter_index

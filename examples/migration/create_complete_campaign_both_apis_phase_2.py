@@ -52,15 +52,15 @@ def create_campaign_budget(client, customer_id):
         customer_id: (str) Customer ID associated with the account.
 
     Returns:
-        An instance of google.ads.google_ads.v5.types.CampaignBudget for the
+        An instance of google.ads.google_ads.v6.types.CampaignBudget for the
             newly created Budget.
     """
-    campaign_service = client.get_service("CampaignBudgetService", version="v5")
-    operation = client.get_type("CampaignBudgetOperation", version="v5")
+    campaign_service = client.get_service("CampaignBudgetService", version="v6")
+    operation = client.get_type("CampaignBudgetOperation", version="v6")
     criterion = operation.create
     criterion.name = "Interplanetary Cruise Budget #{}".format(uuid.uuid4())
     criterion.delivery_method = client.get_type(
-        "BudgetDeliveryMethodEnum", version="v5"
+        "BudgetDeliveryMethodEnum", version="v6"
     ).STANDARD
     criterion.amount_micros = 500000
     response = campaign_service.mutate_campaign_budgets(
@@ -75,7 +75,7 @@ def create_campaign_budget(client, customer_id):
 
 
 def get_campaign_budget(client, customer_id, resource_name):
-    """Retrieves a google.ads.google_ads.v5.types.CampaignBudget instance.
+    """Retrieves a google.ads.google_ads.v6.types.CampaignBudget instance.
 
     Args:
         client: A google.ads.google_ads.client.GoogleAdsClient instance.
@@ -83,10 +83,10 @@ def get_campaign_budget(client, customer_id, resource_name):
         resource_name: (str) Resource name associated with the newly
             created campaign.
     Returns:
-        An instance of google.ads.google_ads.v5.types.CampaignBudget for the
+        An instance of google.ads.google_ads.v6.types.CampaignBudget for the
             newly created Budget.
     """
-    ga_service = client.get_service("GoogleAdsService", version="v5")
+    ga_service = client.get_service("GoogleAdsService", version="v6")
     query = f"""
         SELECT
           campaign_budget.id,
@@ -106,23 +106,23 @@ def create_campaign(client, customer_id, campaign_budget):
     Args:
         client: A google.ads.google_ads.client.GoogleAdsClient instance.
         customer_id: (str) Customer ID associated with the account.
-        campaign_budget: A google.ads.google_ads.v5.types.CampaignBudget
+        campaign_budget: A google.ads.google_ads.v6.types.CampaignBudget
             message class instance.
 
     Returns:
         A google.ads.google_ads.client.GoogleAdsClient message class instance.
     """
-    operation = client.get_type("CampaignOperation", version="v5")
+    operation = client.get_type("CampaignOperation", version="v6")
     campaign = operation.create
-    campaign_service = client.get_service("CampaignService", version="v5")
+    campaign_service = client.get_service("CampaignService", version="v6")
     campaign.name = "Interplanetary Cruise#{}".format(uuid.uuid4())
     campaign.advertising_channel_type = client.get_type(
-        "AdvertisingChannelTypeEnum", version="v5"
+        "AdvertisingChannelTypeEnum", version="v6"
     ).SEARCH
     # Recommendation: Set the campaign to PAUSED when creating it to stop the
     # ads from immediately serving. Set to ENABLED once you've added
     # targeting and the ads are ready to serve.
-    campaign.status = client.get_type("CampaignStatusEnum", version="v5").PAUSED
+    campaign.status = client.get_type("CampaignStatusEnum", version="v6").PAUSED
     campaign.manual_cpc.enhanced_cpc_enabled = True
     campaign.campaign_budget = campaign_budget.resource_name
     campaign.network_settings.target_google_search = True
@@ -143,7 +143,7 @@ def create_campaign(client, customer_id, campaign_budget):
 
 
 def get_campaign(client, customer_id, campaign_resource_name):
-    """Retrieves a google.ads.google_ads.v5.types.Campaign instance.
+    """Retrieves a google.ads.google_ads.v6.types.Campaign instance.
 
     Args:
         client: A google.ads.google_ads.client.GoogleAdsClient instance.
@@ -154,7 +154,7 @@ def get_campaign(client, customer_id, campaign_resource_name):
     Returns:
         A google.ads.google_ads.client.GoogleAdsClient message class instance.
     """
-    ga_service = client.get_service("GoogleAdsService", version="v5")
+    ga_service = client.get_service("GoogleAdsService", version="v6")
     query = f"""
         SELECT campaign.id, campaign.name, campaign.resource_name
         FROM campaign

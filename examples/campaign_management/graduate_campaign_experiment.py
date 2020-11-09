@@ -31,7 +31,7 @@ def main(client, customer_id, campaign_experiment_id):
       campaign_experiment_id: The campaign experiment ID to graduate.
     """
     campaign_experiment_service = client.get_service(
-        "CampaignExperimentService", version="v5"
+        "CampaignExperimentService", version="v6"
     )
 
     try:
@@ -84,17 +84,17 @@ def _create_budget(client, customer_id):
     """
     # Gets the CampaignBudgetService.
     campaign_budget_service = client.get_service(
-        "CampaignBudgetService", version="v5"
+        "CampaignBudgetService", version="v6"
     )
 
     # Creates the campaign budget.
     campaign_budget_operation = client.get_type(
-        "CampaignBudgetOperation", version="v5"
+        "CampaignBudgetOperation", version="v6"
     )
     campaign_budget = campaign_budget_operation.create
     campaign_budget.name = f"Interplanetary Cruise Budget {uuid.uuid4()}"
     campaign_budget.delivery_method = client.get_type(
-        "BudgetDeliveryMethodEnum", version="v5"
+        "BudgetDeliveryMethodEnum", version="v6"
     ).STANDARD
     campaign_budget.amount_micros = 5000000
 

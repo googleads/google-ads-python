@@ -29,7 +29,7 @@ _DEFAULT_PAGE_SIZE = 50
 
 
 def main(client, customer_id, page_size):
-    ga_service = client.get_service("GoogleAdsService", version="v5")
+    ga_service = client.get_service("GoogleAdsService", version="v6")
 
     query = """
         SELECT

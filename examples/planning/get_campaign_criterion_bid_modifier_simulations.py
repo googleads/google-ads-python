@@ -33,7 +33,7 @@ def main(client, customer_id, campaign_id):
       customer_id: The customer ID for which to get the simulations.
       campaign_id: The campaign ID from which to get the simulations.
     """
-    google_ads_service = client.get_service("GoogleAdsService", version="v5")
+    google_ads_service = client.get_service("GoogleAdsService", version="v6")
 
     query = f"""
         SELECT

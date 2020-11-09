@@ -24,10 +24,10 @@ from google.ads.google_ads.util import ResourceName
 
 
 def main(client, customer_id, ad_group_id, criterion_id):
-    agc_service = client.get_service("AdGroupCriterionService", version="v5")
+    agc_service = client.get_service("AdGroupCriterionService", version="v6")
 
     ad_group_criterion_operation = client.get_type(
-        "AdGroupCriterionOperation", version="v5"
+        "AdGroupCriterionOperation", version="v6"
     )
 
     ad_group_criterion = ad_group_criterion_operation.update
@@ -35,7 +35,7 @@ def main(client, customer_id, ad_group_id, criterion_id):
         customer_id, ResourceName.format_composite(ad_group_id, criterion_id)
     )
     ad_group_criterion.status = client.get_type(
-        "AdGroupCriterionStatusEnum", version="v5"
+        "AdGroupCriterionStatusEnum", version="v6"
     ).ENABLED
     al_url = ad_group_criterion.final_urls.append("https://www.example.com")
     fm = protobuf_helpers.field_mask(None, ad_group_criterion)

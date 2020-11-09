@@ -24,7 +24,7 @@ _DEFAULT_PAGE_SIZE = 1000
 
 
 def main(client, customer_id, page_size, ad_group_id=None):
-    ga_service = client.get_service("GoogleAdsService", version="v5")
+    ga_service = client.get_service("GoogleAdsService", version="v6")
 
     query = """
         SELECT
@@ -41,7 +41,7 @@ def main(client, customer_id, page_size, ad_group_id=None):
     results = ga_service.search(customer_id, query=query, page_size=page_size)
 
     # Use the enum type to determine the enum name from the value.
-    device_enum = client.get_type("DeviceEnum", version="v5").Device
+    device_enum = client.get_type("DeviceEnum", version="v6").Device
 
     try:
         for row in results:

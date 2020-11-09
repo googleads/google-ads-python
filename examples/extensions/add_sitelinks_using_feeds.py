@@ -84,18 +84,18 @@ def _create_feed(client, customer_id):
     Returns:
         The newly created feed.
     """
-    feed_service = client.get_service("FeedService", version="v5")
-    google_ads_service = client.get_service("GoogleAdsService", version="v5")
+    feed_service = client.get_service("FeedService", version="v6")
+    google_ads_service = client.get_service("GoogleAdsService", version="v6")
 
-    feed_operation = client.get_type("FeedOperation", version="v5")
+    feed_operation = client.get_type("FeedOperation", version="v6")
     feed = feed_operation.create
-    feed.name.value = f"Sitelinks Feed {uuid.uuid4()}"
-    feed.origin = client.get_type("FeedOriginEnum", version="v5").USER
+    feed.name = f"Sitelinks Feed {uuid.uuid4()}"
+    feed.origin = client.get_type("FeedOriginEnum", version="v6").USER
     # Specify the column name and data type. This is just raw data at this
     # point, and not yet linked to any particular purpose. The names are used
     # to help us remember what they are intended for later.
     feed_attribute_type_enum = client.get_type(
-        "FeedAttributeTypeEnum", version="v5"
+        "FeedAttributeTypeEnum", version="v6"
     )
     feed.attributes.extend(
         [
@@ -141,8 +141,8 @@ def _create_feed_attribute(client, name, attribute_type):
     Returns:
         A new FeedAttribute instance.
     """
-    feed_attribute = client.get_type("FeedAttribute", version="v5")
-    feed_attribute.name.value = name
+    feed_attribute = client.get_type("FeedAttribute", version="v6")
+    feed_attribute.name = name
     feed_attribute.type = attribute_type
     return feed_attribute
 
@@ -158,7 +158,7 @@ def _create_feed_items(client, customer_id, feed):
     Returns:
         A list of string Feed Item Resource Names.
     """
-    feed_item_service = client.get_service("FeedItemService", version="v5")
+    feed_item_service = client.get_service("FeedItemService", version="v6")
     operations = [
         _new_feed_item_operation(
             client,
@@ -238,26 +238,23 @@ def _new_feed_item_operation(client, feed, text, final_url, line1, line2):
     Returns:
         The newly created FeedItemOperation instance.
     """
-    final_url_string_value = client.get_type("StringValue", version="v5")
-    final_url_string_value.value = final_url
-
-    feed_item_operation = client.get_type("FeedItemOperation", version="v5")
+    feed_item_operation = client.get_type("FeedItemOperation", version="v6")
     feed_item = feed_item_operation.create
-    feed_item.feed.value = feed.resource_name
+    feed_item.feed = feed.resource_name
 
     for i in range(0, 4):
         attribute_value = client.get_type(
-            "FeedItemAttributeValue", version="v5"
+            "FeedItemAttributeValue", version="v6"
         )
-        attribute_value.feed_attribute_id.value = feed.attributes[i].id.value
+        attribute_value.feed_attribute_id = feed.attributes[i].id
 
         feed_item.attribute_values.append(attribute_value)
 
     # The attribute IDs come back in the same order that they were added.
-    feed_item.attribute_values[0].string_value.value = text
-    feed_item.attribute_values[1].string_values.append(final_url_string_value)
-    feed_item.attribute_values[2].string_value.value = line1
-    feed_item.attribute_values[3].string_value.value = line2
+    feed_item.attribute_values[0].string_value = text
+    feed_item.attribute_values[1].string_values.append(final_url)
+    feed_item.attribute_values[2].string_value = line1
+    feed_item.attribute_values[3].string_value = line2
 
     return feed_item_operation
 
@@ -274,20 +271,20 @@ def _create_feed_mapping(client, customer_id, feed):
         feed: The feed for which the operation will be created.
     """
     feed_mapping_service = client.get_service(
-        "FeedMappingService", version="v5"
+        "FeedMappingService", version="v6"
     )
 
     feed_mapping_operation = client.get_type(
-        "FeedMappingOperation", version="v5"
+        "FeedMappingOperation", version="v6"
     )
     feed_mapping = feed_mapping_operation.create
     feed_mapping.placeholder_type = client.get_type(
-        "PlaceholderTypeEnum", version="v5"
+        "PlaceholderTypeEnum", version="v6"
     ).SITELINK
-    feed_mapping.feed.value = feed.resource_name
+    feed_mapping.feed = feed.resource_name
 
     sitelink_placeholder_field_enum = client.get_type(
-        "SitelinkPlaceholderFieldEnum", version="v5"
+        "SitelinkPlaceholderFieldEnum", version="v6"
     )
     field_names_map = {
         "Link Text": sitelink_placeholder_field_enum.TEXT,
@@ -298,14 +295,12 @@ def _create_feed_mapping(client, customer_id, feed):
 
     for feed_attribute in feed.attributes:
         attribute_field_mapping = client.get_type(
-            "AttributeFieldMapping", version="v5"
+            "AttributeFieldMapping", version="v6"
         )
-        attribute_field_mapping.feed_attribute_id.value = (
-            feed_attribute.id.value
-        )
+        attribute_field_mapping.feed_attribute_id = feed_attribute.id
 
         attribute_field_mapping.sitelink_field = field_names_map[
-            feed_attribute.name.value
+            feed_attribute.name
         ]
 
         feed_mapping.attribute_field_mappings.append(attribute_field_mapping)
@@ -329,28 +324,28 @@ def _create_campaign_feed(client, customer_id, campaign_id, feed):
         feed: The feed to connect to the campaign.
     """
     campaign_feed_service = client.get_service(
-        "CampaignFeedService", version="v5"
+        "CampaignFeedService", version="v6"
     )
 
     # Fetch the feed item IDs and collapse into a single comma-separated string.
     aggregated_feed_item_ids = ",".join(
-        [str(attribute.id.value) for attribute in feed.attributes]
+        [str(attribute.id) for attribute in feed.attributes]
     )
 
     campaign_feed_operation = client.get_type(
-        "CampaignFeedOperation", version="v5"
+        "CampaignFeedOperation", version="v6"
     )
     campaign_feed = campaign_feed_operation.create
-    campaign_feed.feed.value = feed.resource_name
-    campaign_feed.campaign.value = client.get_service(
-        "CampaignService", version="v5"
+    campaign_feed.feed = feed.resource_name
+    campaign_feed.campaign = client.get_service(
+        "CampaignService", version="v6"
     ).campaign_path(customer_id, campaign_id)
-    campaign_feed.matching_function.function_string.value = (
+    campaign_feed.matching_function.function_string = (
         f"AND(IN(FEED_ITEM_ID,{{ {aggregated_feed_item_ids} }})"
         ",EQUALS(CONTEXT.DEVICE,'Mobile'))"
     )
     campaign_feed.placeholder_types.append(
-        client.get_type("PlaceholderTypeEnum", version="v5").SITELINK
+        client.get_type("PlaceholderTypeEnum", version="v6").SITELINK
     )
 
     response = campaign_feed_service.mutate_campaign_feeds(
@@ -369,16 +364,16 @@ def _create_ad_group_targeting(client, customer_id, ad_group_id, feed_item):
         feed_item: The feed item that was added to the feed.
     """
     feed_item_target_service = client.get_service(
-        "FeedItemTargetService", version="v5"
+        "FeedItemTargetService", version="v6"
     )
 
     feed_item_target_operation = client.get_type(
-        "FeedItemTargetOperation", version="v5"
+        "FeedItemTargetOperation", version="v6"
     )
     feed_item_target = feed_item_target_operation.create
-    feed_item_target.feed_item.value = feed_item
-    feed_item_target.ad_group.value = client.get_service(
-        "AdGroupService", version="v5"
+    feed_item_target.feed_item = feed_item
+    feed_item_target.ad_group = client.get_service(
+        "AdGroupService", version="v6"
     ).ad_group_path(customer_id, ad_group_id)
 
     response = feed_item_target_service.mutate_feed_item_targets(

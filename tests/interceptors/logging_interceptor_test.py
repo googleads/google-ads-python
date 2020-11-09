@@ -14,6 +14,7 @@
 """Tests for the Logging gRPC Interceptor."""
 
 
+from importlib import import_module
 import json
 import logging
 from unittest import TestCase
@@ -22,9 +23,38 @@ import mock
 
 from google.ads.google_ads import client as Client
 from google.ads.google_ads.interceptors import LoggingInterceptor
-from google.ads.google_ads.v3.proto.services import customer_service_pb2
+import google.ads.google_ads.interceptors.logging_interceptor as interceptor_module
+
 
 default_version = Client._DEFAULT_VERSION
+
+customer_service_pb2 = import_module(
+    f"google.ads.google_ads.{default_version}"
+    ".proto.services.customer_service_pb2"
+)
+
+google_ads_service_pb2 = import_module(
+    f"google.ads.google_ads.{default_version}"
+    ".proto.services.google_ads_service_pb2"
+)
+
+customer_user_access_service_pb2 = import_module(
+    f"google.ads.google_ads.{default_version}"
+    ".proto.services.customer_user_access_service_pb2"
+)
+
+customer_user_access_pb2 = import_module(
+    f"google.ads.google_ads.{default_version}"
+    ".proto.resources.customer_user_access_pb2"
+)
+
+change_event_pb2 = import_module(
+    f"google.ads.google_ads.{default_version}.proto.resources.change_event_pb2"
+)
+
+feed_pb2 = import_module(
+    f"google.ads.google_ads.{default_version}.proto.resources.feed_pb2"
+)
 
 
 class LoggingInterceptorTest(TestCase):
@@ -44,7 +74,7 @@ class LoggingInterceptorTest(TestCase):
     _MOCK_ERROR_MESSAGE = "Test error message"
     _MOCK_TRANSPORT_ERROR_MESSAGE = "Received RST_STREAM with error code 2"
     _MOCK_DEBUG_ERROR_STRING = '{"description":"Error received from peer"}'
-    _MOCK_RESPONSE_MSG = "test response msg"
+    _MOCK_RESPONSE_MSG = google_ads_service_pb2.SearchGoogleAdsResponse()
     _MOCK_EXCEPTION = mock.Mock()
     _MOCK_ERROR = mock.Mock()
     _MOCK_FAILURE = mock.Mock()
@@ -619,3 +649,209 @@ class LoggingInterceptorTest(TestCase):
         )
         interceptor = self._create_test_interceptor()
         self.assertEqual(interceptor._get_customer_id(mock_request), None)
+
+    def test_copy_message(self):
+        """Creates a copy of the given message."""
+        message = customer_user_access_pb2.CustomerUserAccess()
+        copy = interceptor_module._copy_message(message)
+        self.assertIsInstance(copy, message.__class__)
+        self.assertIsNot(message, copy)
+
+    def test_mask_message_fields(self):
+        """Returns a copy of the message with named fields masked."""
+        message = customer_user_access_pb2.CustomerUserAccess()
+        message.email_address = "test@test.com"
+        message.inviter_user_email_address = "inviter@test.com"
+        copy = interceptor_module._mask_message_fields(
+            ["email_address", "inviter_user_email_address"], message, "REDACTED"
+        )
+        self.assertIsInstance(copy, message.__class__)
+        self.assertIsNot(message, copy)
+        self.assertEqual(copy.email_address, "REDACTED")
+        self.assertEqual(copy.inviter_user_email_address, "REDACTED")
+
+    def test_mask_message_fields_nested(self):
+        """Masks nested fields on an object."""
+        message = customer_user_access_service_pb2.MutateCustomerUserAccessRequest(
+            operation=customer_user_access_service_pb2.CustomerUserAccessOperation(
+                update=customer_user_access_pb2.CustomerUserAccess(
+                    email_address="test@test.com",
+                    inviter_user_email_address="inviter@test.com",
+                )
+            )
+        )
+        copy = interceptor_module._mask_message_fields(
+            [
+                "operation.update.email_address",
+                "operation.update.inviter_user_email_address",
+            ],
+            message,
+            "REDACTED",
+        )
+        self.assertIsInstance(copy, message.__class__)
+        self.assertIsNot(message, copy)
+        self.assertEqual(copy.operation.update.email_address, "REDACTED")
+        self.assertEqual(
+            copy.operation.update.inviter_user_email_address, "REDACTED"
+        )
+
+    def test_mask_message_fields_unset_field(self):
+        """Field is not masked if it is not set."""
+        message = customer_user_access_pb2.CustomerUserAccess()
+        copy = interceptor_module._mask_message_fields(
+            ["email_address"], message, "REDACTED"
+        )
+        self.assertFalse(copy.HasField("email_address"))
+
+    def test_mask_message_fields_unset_nested(self):
+        """Nested field is not masked if it is not set."""
+        message = (
+            customer_user_access_service_pb2.MutateCustomerUserAccessRequest()
+        )
+        copy = interceptor_module._mask_message_fields(
+            [
+                "operation.update.email_address",
+                "operation.update.inviter_user_email_address",
+            ],
+            message,
+            "REDACTED",
+        )
+        self.assertFalse(copy.operation.update.HasField("email_address"))
+        self.assertFalse(
+            copy.operation.update.HasField("inviter_user_email_address")
+        )
+
+    def test_mask_message_fields_bad_field_name(self):
+        """No error is raised if a given field is not defined on the message."""
+        message = customer_user_access_pb2.CustomerUserAccess()
+        copy = interceptor_module._mask_message_fields(
+            ["bad_name"], message, "REDACTED"
+        )
+        self.assertFalse(copy.HasField("email_address"))
+        self.assertFalse(copy.HasField("inviter_user_email_address"))
+
+    def test_mask_message_fields_bad_nested_field_name(self):
+        """No error is raised if a nested field is not defined."""
+        message = customer_user_access_pb2.CustomerUserAccess()
+        copy = interceptor_module._mask_message_fields(
+            ["bad_name.another_bad.yet_another"], message, "REDACTED"
+        )
+        self.assertFalse(copy.HasField("email_address"))
+        self.assertFalse(copy.HasField("inviter_user_email_address"))
+
+    def test_mask_search_google_ads_response(self):
+        """Copies and masks a SearchGoogleAdsResponse message instance."""
+        response = google_ads_service_pb2.SearchGoogleAdsResponse()
+        row = google_ads_service_pb2.GoogleAdsRow(
+            customer_user_access=customer_user_access_pb2.CustomerUserAccess(
+                email_address="test@test.com"
+            )
+        )
+        response.results.append(row)
+        copy = interceptor_module._mask_message(response, "REDACTED")
+        self.assertIsInstance(copy, response.__class__)
+        self.assertIsNot(response, copy)
+        self.assertEqual(
+            copy.results[0].customer_user_access.email_address, "REDACTED"
+        )
+
+    def test_mask_search_google_ads_stream_response(self):
+        """Copies and masks a SearchGoogleAdsStreamResponse message instance."""
+        response = google_ads_service_pb2.SearchGoogleAdsStreamResponse()
+        row = google_ads_service_pb2.GoogleAdsRow(
+            customer_user_access=customer_user_access_pb2.CustomerUserAccess(
+                email_address="test@test.com"
+            )
+        )
+        response.results.append(row)
+        copy = interceptor_module._mask_message(response, "REDACTED")
+        self.assertIsInstance(copy, response.__class__)
+        self.assertIsNot(response, copy)
+        self.assertEqual(
+            copy.results[0].customer_user_access.email_address, "REDACTED"
+        )
+
+    def test_mask_search_change_event(self):
+        """Masks ChangeEvent messages found on a SearchStream response."""
+        response = google_ads_service_pb2.SearchGoogleAdsStreamResponse()
+        row = google_ads_service_pb2.GoogleAdsRow(
+            change_event=change_event_pb2.ChangeEvent(
+                user_email="test@test.com"
+            )
+        )
+        response.results.append(row)
+        copy = interceptor_module._mask_message(response, "REDACTED")
+        self.assertEqual(copy.results[0].change_event.user_email, "REDACTED")
+
+    def test_mask_search_places_location_feed_data(self):
+        """Masks Feed.places_location_feed_data on a SearchStream response."""
+        response = google_ads_service_pb2.SearchGoogleAdsStreamResponse()
+        row = google_ads_service_pb2.GoogleAdsRow(
+            feed=feed_pb2.Feed(
+                places_location_feed_data=feed_pb2.Feed.PlacesLocationFeedData(
+                    email_address="test@test.com"
+                )
+            )
+        )
+        response.results.append(row)
+        copy = interceptor_module._mask_message(response, "REDACTED")
+        self.assertEqual(
+            copy.results[0].feed.places_location_feed_data.email_address,
+            "REDACTED",
+        )
+
+    def test_mask_customer_user_access(self):
+        """Copies and masks a CustomerUserAccess message instance."""
+        customer_user_access = customer_user_access_pb2.CustomerUserAccess(
+            email_address="test@test.com",
+            inviter_user_email_address="inviter@test.com",
+        )
+        copy = interceptor_module._mask_message(
+            customer_user_access, "REDACTED"
+        )
+        self.assertIsInstance(copy, customer_user_access.__class__)
+        self.assertIsNot(copy, customer_user_access)
+        self.assertEqual(copy.email_address, "REDACTED")
+        self.assertEqual(copy.inviter_user_email_address, "REDACTED")
+
+    def test_mask_mutate_customer_user_access_request(self):
+        """Copies and masks a MutateCustomerUserAccessRequest instance."""
+        request = customer_user_access_service_pb2.MutateCustomerUserAccessRequest(
+            operation=customer_user_access_service_pb2.CustomerUserAccessOperation(
+                update=customer_user_access_pb2.CustomerUserAccess(
+                    email_address="test@test.com",
+                    inviter_user_email_address="inviter@test.com",
+                )
+            )
+        )
+        copy = interceptor_module._mask_message(request, "REDACTED")
+        self.assertIsInstance(copy, request.__class__)
+        self.assertIsNot(copy, request)
+        self.assertEqual(copy.operation.update.email_address, "REDACTED")
+        self.assertEqual(
+            copy.operation.update.inviter_user_email_address, "REDACTED"
+        )
+
+    def test_mask_create_customer_client_request(self):
+        """Copies and masks a CreateCustomerClientRequest instance."""
+        request = customer_service_pb2.CreateCustomerClientRequest(
+            email_address="test@test.com",
+        )
+        copy = interceptor_module._mask_message(request, "REDACTED")
+        self.assertIsInstance(copy, request.__class__)
+        self.assertIsNot(copy, request)
+        self.assertEqual(copy.email_address, "REDACTED")
+
+    def test_mask_places_location_feed_data(self):
+        """Copies and masks a PlacesLocationFeedData instance."""
+        message = feed_pb2.Feed(
+            places_location_feed_data=feed_pb2.Feed.PlacesLocationFeedData(
+                email_address="test@test.com"
+            )
+        )
+        copy = interceptor_module._mask_message(message, "REDACTED")
+        self.assertIsInstance(copy, message.__class__)
+        self.assertIsNot(copy, message)
+        self.assertEqual(
+            copy.places_location_feed_data.email_address, "REDACTED"
+        )

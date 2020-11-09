@@ -23,25 +23,25 @@ from google.ads.google_ads.errors import GoogleAdsException
 
 
 def main(client, customer_id, ad_group_id, keyword_text):
-    ad_group_service = client.get_service("AdGroupService", version="v5")
+    ad_group_service = client.get_service("AdGroupService", version="v6")
     ad_group_criterion_service = client.get_service(
-        "AdGroupCriterionService", version="v5"
+        "AdGroupCriterionService", version="v6"
     )
 
     # Create keyword.
     ad_group_criterion_operation = client.get_type(
-        "AdGroupCriterionOperation", version="v5"
+        "AdGroupCriterionOperation", version="v6"
     )
     ad_group_criterion = ad_group_criterion_operation.create
     ad_group_criterion.ad_group = ad_group_service.ad_group_path(
         customer_id, ad_group_id
     )
     ad_group_criterion.status = client.get_type(
-        "AdGroupCriterionStatusEnum", version="v5"
+        "AdGroupCriterionStatusEnum", version="v6"
     ).ENABLED
     ad_group_criterion.keyword.text = keyword_text
     ad_group_criterion.keyword.match_type = client.get_type(
-        "KeywordMatchTypeEnum", version="v5"
+        "KeywordMatchTypeEnum", version="v6"
     ).EXACT
 
     # Optional field

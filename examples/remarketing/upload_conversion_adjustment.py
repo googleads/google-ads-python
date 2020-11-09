@@ -49,10 +49,10 @@ def main(
     # Associates conversion adjustments with the existing conversion action.
     # The GCLID should have been uploaded before with a conversion
     conversion_adjustment = client.get_type(
-        "ConversionAdjustment", version="v5"
+        "ConversionAdjustment", version="v6"
     )
     conversion_action_service = client.get_service(
-        "ConversionActionService", version="v5"
+        "ConversionActionService", version="v6"
     )
     conversion_adjustment.conversion_action = conversion_action_service.conversion_action_path(
         customer_id, conversion_action_id
@@ -77,7 +77,7 @@ def main(
         )
 
     conversion_adjustment_upload_service = client.get_service(
-        "ConversionAdjustmentUploadService", version="v5"
+        "ConversionAdjustmentUploadService", version="v6"
     )
     try:
         response = conversion_adjustment_upload_service.upload_conversion_adjustments(

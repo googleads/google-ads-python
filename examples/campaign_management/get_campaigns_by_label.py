@@ -38,7 +38,7 @@ def main(client, customer_id, label_id, page_size):
         page_size: An int of the number of results to include in each page of
             results.
     """
-    ga_service = client.get_service("GoogleAdsService", version="v5")
+    ga_service = client.get_service("GoogleAdsService", version="v6")
 
     # Creates a query that will retrieve all campaign labels with the
     # specified label ID.
@@ -61,7 +61,7 @@ def main(client, customer_id, label_id, page_size):
             print(
                 'Campaign found with name "{}", ID "{}", and '
                 'label "{}".'.format(
-                    row.campaign.id, row.campaign.name, row.label.name.value
+                    row.campaign.id, row.campaign.name, row.label.name
                 )
             )
     except GoogleAdsException as ex:

@@ -43,27 +43,27 @@ def main(client, customer_id, ad_group_id):
     if marketing_img_content_type != "image/jpeg":
         raise ValueError("Marketing image has invalid content-type.")
 
-    media_file_logo_op = client.get_type("MediaFileOperation", version="v5")
+    media_file_logo_op = client.get_type("MediaFileOperation", version="v6")
     media_file_logo = media_file_logo_op.create
-    media_file_logo.type = client.get_type("MediaTypeEnum", version="v5").IMAGE
+    media_file_logo.type = client.get_type("MediaTypeEnum", version="v6").IMAGE
     media_file_logo.image.data = logo_img_bytes
     media_file_logo.mime_type = client.get_type(
-        "MimeTypeEnum", version="v5"
+        "MimeTypeEnum", version="v6"
     ).IMAGE_PNG
 
     media_file_marketing_op = client.get_type(
-        "MediaFileOperation", version="v5"
+        "MediaFileOperation", version="v6"
     )
     media_file_marketing = media_file_marketing_op.create
     media_file_marketing.type = client.get_type(
-        "MediaTypeEnum", version="v5"
+        "MediaTypeEnum", version="v6"
     ).IMAGE
     media_file_marketing.image.data = marketing_img_bytes
     media_file_marketing.mime_type = client.get_type(
-        "MimeTypeEnum", version="v5"
+        "MimeTypeEnum", version="v6"
     ).IMAGE_JPEG
 
-    media_file_service = client.get_service("MediaFileService", version="v5")
+    media_file_service = client.get_service("MediaFileService", version="v6")
     image_response = media_file_service.mutate_media_files(
         customer_id, [media_file_logo_op, media_file_marketing_op]
     )
@@ -72,9 +72,9 @@ def main(client, customer_id, ad_group_id):
         map(lambda response: response.resource_name, image_response.results)
     )
 
-    ad_group_ad_service = client.get_service("AdGroupAdService", version="v5")
-    ad_group_service = client.get_service("AdGroupService", version="v5")
-    ad_group_ad_op = client.get_type("AdGroupAdOperation", version="v5")
+    ad_group_ad_service = client.get_service("AdGroupAdService", version="v6")
+    ad_group_service = client.get_service("AdGroupService", version="v6")
+    ad_group_ad_op = client.get_type("AdGroupAdOperation", version="v6")
     ad_group_ad = ad_group_ad_op.create
     gmail_ad = ad_group_ad.ad.gmail_ad
     gmail_ad.teaser.headline = "Dream"
@@ -89,7 +89,7 @@ def main(client, customer_id, ad_group_id):
     ad_group_ad.ad.name = "Gmail Ad #{}".format(str(uuid4()))
 
     ad_group_ad.status = client.get_type(
-        "AdGroupAdStatusEnum", version="v5"
+        "AdGroupAdStatusEnum", version="v6"
     ).PAUSED
     ad_group_ad.ad_group = ad_group_service.ad_group_path(
         customer_id, ad_group_id

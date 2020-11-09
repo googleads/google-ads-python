@@ -22,8 +22,8 @@ import google.ads.google_ads.client
 
 
 def main(client, customer_id, campaign_id):
-    campaign_service = client.get_service("CampaignService", version="v5")
-    campaign_operation = client.get_type("CampaignOperation", version="v5")
+    campaign_service = client.get_service("CampaignService", version="v6")
+    campaign_operation = client.get_type("CampaignOperation", version="v6")
 
     resource_name = campaign_service.campaign_path(customer_id, campaign_id)
     campaign_operation.remove = resource_name

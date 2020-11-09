@@ -26,8 +26,8 @@ import google.ads.google_ads.client
 
 
 def main(client, customer_id, ad_group_id, number_of_ads):
-    ad_group_ad_service = client.get_service("AdGroupAdService", version="v5")
-    ad_group_service = client.get_service("AdGroupService", version="v5")
+    ad_group_ad_service = client.get_service("AdGroupAdService", version="v6")
+    ad_group_service = client.get_service("AdGroupService", version="v6")
 
     ad_group_ad_operations = []
 
@@ -35,14 +35,14 @@ def main(client, customer_id, ad_group_id, number_of_ads):
 
         # Create ad group ad.
         ad_group_ad_operation = client.get_type(
-            "AdGroupAdOperation", version="v5"
+            "AdGroupAdOperation", version="v6"
         )
         ad_group_ad = ad_group_ad_operation.create
         ad_group_ad.ad_group = ad_group_service.ad_group_path(
             customer_id, ad_group_id
         )
         ad_group_ad.status = client.get_type(
-            "AdGroupAdStatusEnum", version="v5"
+            "AdGroupAdStatusEnum", version="v6"
         ).PAUSED
 
         # Set expanded text ad info

@@ -26,7 +26,7 @@ _DEFAULT_PAGE_SIZE = 1000
 
 
 def main(client, customer_id, campaign_id, page_size):
-    ga_service = client.get_service("GoogleAdsService", version="v5")
+    ga_service = client.get_service("GoogleAdsService", version="v6")
 
     query = f"""
         SELECT
@@ -52,7 +52,7 @@ def main(client, customer_id, campaign_id, page_size):
 
             if (
                 criterion.type
-                == client.get_type("CriterionTypeEnum", version="v5").KEYWORD
+                == client.get_type("CriterionTypeEnum", version="v6").KEYWORD
             ):
                 print(
                     '\t%sKeyword with text "%s" and match type %s.'

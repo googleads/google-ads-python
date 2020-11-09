@@ -37,9 +37,9 @@ def main(
 ):
     """Creates a click conversion with a default currency of USD."""
 
-    click_conversion = client.get_type("ClickConversion", version="v5")
+    click_conversion = client.get_type("ClickConversion", version="v6")
     conversion_action_service = client.get_service(
-        "ConversionActionService", version="v5"
+        "ConversionActionService", version="v6"
     )
     click_conversion.conversion_action = conversion_action_service.conversion_action_path(
         customer_id, conversion_action_id
@@ -50,7 +50,7 @@ def main(
     click_conversion.currency_code = "USD"
 
     conversion_upload_service = client.get_service(
-        "ConversionUploadService", version="v5"
+        "ConversionUploadService", version="v6"
     )
 
     try:

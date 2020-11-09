@@ -1,3 +1,9 @@
+* 8.0.0
+- Google Ads v6_0 release
+- Deprecate v2_0
+- Update all examples to support migration from wrapper types to primitives.
+- Add masking logic to prevent PII in requests/responses from being logged.
+
 * 7.0.0
 - Google Ads v5_0 release
 - Updates to examples to support addition of field presence on certain

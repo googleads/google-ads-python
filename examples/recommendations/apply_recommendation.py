@@ -26,16 +26,23 @@ import google.ads.google_ads.client
 
 def main(client, customer_id, recommendation_id):
     recommendation_service = client.get_service(
-        "RecommendationService", version="v5"
+        "RecommendationService", version="v6"
     )
 
     apply_recommendation_operation = client.get_type(
-        "ApplyRecommendationOperation"
+        "ApplyRecommendationOperation", version="v6"
     )
 
     apply_recommendation_operation.resource_name = recommendation_service.recommendation_path(
         customer_id, recommendation_id
     )
+
+    # Each recommendation type has optional parameters to override the
+    # recommended values. Below is an example to override a recommended ad when
+    # a TextAdRecommendation is applied. For details, please read:
+    # https://developers.google.com/google-ads/api/reference/rpc/latest/ApplyRecommendationOperation
+
+    # apply_recommendation_operation.text_ad.ad.id = int(INSERT_AD_ID_HERE)
 
     try:
         recommendation_response = recommendation_service.apply_recommendation(

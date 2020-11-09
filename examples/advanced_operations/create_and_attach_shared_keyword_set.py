@@ -26,21 +26,21 @@ import google.ads.google_ads.client
 
 
 def main(client, customer_id, campaign_id):
-    campaign_service = client.get_service("CampaignService", version="v5")
-    shared_set_service = client.get_service("SharedSetService", version="v5")
+    campaign_service = client.get_service("CampaignService", version="v6")
+    shared_set_service = client.get_service("SharedSetService", version="v6")
     shared_criterion_service = client.get_service(
-        "SharedCriterionService", version="v5"
+        "SharedCriterionService", version="v6"
     )
     campaign_shared_set_service = client.get_service(
-        "CampaignSharedSetService", version="v5"
+        "CampaignSharedSetService", version="v6"
     )
 
     # Create shared negative keyword set.
-    shared_set_operation = client.get_type("SharedSetOperation", version="v5")
+    shared_set_operation = client.get_type("SharedSetOperation", version="v6")
     shared_set = shared_set_operation.create
     shared_set.name = "API Negative keyword list - %s" % uuid.uuid4()
     shared_set.type = client.get_type(
-        "SharedSetTypeEnum", version="v5"
+        "SharedSetTypeEnum", version="v6"
     ).NEGATIVE_KEYWORDS
 
     try:
@@ -71,13 +71,13 @@ def main(client, customer_id, campaign_id):
     shared_criteria_operations = []
     for keyword in keywords:
         shared_criterion_operation = client.get_type(
-            "SharedCriterionOperation", version="v5"
+            "SharedCriterionOperation", version="v6"
         )
         shared_criterion = shared_criterion_operation.create
         keyword_info = shared_criterion.keyword
         keyword_info.text = keyword
         keyword_info.match_type = client.get_type(
-            "KeywordMatchTypeEnum", version="v5"
+            "KeywordMatchTypeEnum", version="v6"
         ).BROAD
         shared_criterion.shared_set = shared_set_resource_name
         shared_criteria_operations.append(shared_criterion_operation)
@@ -102,7 +102,7 @@ def main(client, customer_id, campaign_id):
         print('Created shared criterion "%s".' % shared_criterion.resource_name)
 
     campaign_set_operation = client.get_type(
-        "CampaignSharedSetOperation", version="v5"
+        "CampaignSharedSetOperation", version="v6"
     )
     campaign_set = campaign_set_operation.create
     campaign_set.campaign = campaign_service.campaign_path(

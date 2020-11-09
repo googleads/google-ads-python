@@ -72,27 +72,27 @@ def _create_customer_match_user_list(client, customer_id):
     """
     # Creates the UserListService client.
     user_list_service_client = client.get_service(
-        "UserListService", version="v5"
+        "UserListService", version="v6"
     )
 
     # Creates the user list operation.
-    user_list_operation = client.get_type("UserListOperation", version="v5")
+    user_list_operation = client.get_type("UserListOperation", version="v6")
 
     # Creates the new user list.
     user_list = user_list_operation.create
-    user_list.name.value = f"Customer Match list #{uuid.uuid4()}"
-    user_list.description.value = (
+    user_list.name = f"Customer Match list #{uuid.uuid4()}"
+    user_list.description = (
         "A list of customers that originated from email and physical addresses"
     )
     user_list.crm_based_user_list.upload_key_type = client.get_type(
-        "CustomerMatchUploadKeyTypeEnum", version="v5"
+        "CustomerMatchUploadKeyTypeEnum", version="v6"
     ).CONTACT_INFO
     # Customer Match user lists can set an unlimited membership life span;
     # to do so, use the special life span value 10000. Otherwise, membership
     # life span must be between 0 and 540 days inclusive. See:
     # https://developers.devsite.corp.google.com/google-ads/api/reference/rpc/latest/UserList#membership_life_span
     # Sets the membership life span to 30 days.
-    user_list.membership_life_span.value = 30
+    user_list.membership_life_span = 30
 
     response = user_list_service_client.mutate_user_lists(
         customer_id, operations=[user_list_operation]
@@ -118,15 +118,15 @@ def _add_users_to_customer_match_user_list(
     """
     # Creates the OfflineUserDataJobService client.
     offline_user_data_job_service_client = client.get_service(
-        "OfflineUserDataJobService", version="v5"
+        "OfflineUserDataJobService", version="v6"
     )
 
     # Creates a new offline user data job.
-    offline_user_data_job = client.get_type("OfflineUserDataJob", version="v5")
+    offline_user_data_job = client.get_type("OfflineUserDataJob", version="v6")
     offline_user_data_job.type = client.get_type(
-        "OfflineUserDataJobTypeEnum", version="v5"
+        "OfflineUserDataJobTypeEnum", version="v6"
     ).CUSTOMER_MATCH_USER_LIST
-    offline_user_data_job.customer_match_user_list_metadata.user_list.value = (
+    offline_user_data_job.customer_match_user_list_metadata.user_list = (
         user_list_resource_name
     )
 
@@ -142,16 +142,14 @@ def _add_users_to_customer_match_user_list(
         f"'{offline_user_data_job_resource_name}'."
     )
 
-    true_value = client.get_type("BoolValue", version="v5")
-    true_value.value = True
+    true_value = client.get_type("BoolValue", version="v6")
+    true_value = True
 
     # Issues a request to add the operations to the offline user data job.
-    response = (
-        offline_user_data_job_service_client.add_offline_user_data_job_operations(
-            resource_name=offline_user_data_job_resource_name,
-            operations=_build_offline_user_data_job_operations(client),
-            enable_partial_failure=true_value,
-        )
+    response = offline_user_data_job_service_client.add_offline_user_data_job_operations(
+        resource_name=offline_user_data_job_resource_name,
+        operations=_build_offline_user_data_job_operations(client),
+        enable_partial_failure=true_value,
     )
 
     # Prints the status message if any partial failure error is returned.
@@ -163,14 +161,14 @@ def _add_users_to_customer_match_user_list(
     if getattr(partial_failure, "code", None) != 0:
         error_details = getattr(partial_failure, "details", [])
         for error_detail in error_details:
-            failure_message = client.get_type("GoogleAdsFailure", version="v5")
-            failure_object = failure_message.FromString(error_detail.value)
+            failure_message = client.get_type("GoogleAdsFailure", version="v6")
+            failure_object = failure_message.FromString(error_detail)
 
             for error in failure_object.errors:
                 print(
                     "A partial failure at index {} occurred.\n"
                     "Error message: {}\nError code: {}".format(
-                        error.location.field_path_elements[0].index.value,
+                        error.location.field_path_elements[0].index,
                         error.message,
                         error.error_code,
                     )
@@ -206,14 +204,14 @@ def _build_offline_user_data_job_operations(client):
     """
     # Creates a first user data based on an email address.
     user_data_with_email_address_operation = client.get_type(
-        "OfflineUserDataJobOperation", version="v5"
+        "OfflineUserDataJobOperation", version="v6"
     )
     user_data_with_email_address = user_data_with_email_address_operation.create
     user_identifier_with_hashed_email = client.get_type(
-        "UserIdentifier", version="v5"
+        "UserIdentifier", version="v6"
     )
     # Hash normalized email addresses based on SHA-256 hashing algorithm.
-    user_identifier_with_hashed_email.hashed_email.value = _normalize_and_hash(
+    user_identifier_with_hashed_email.hashed_email = _normalize_and_hash(
         "customer@example.com"
     )
     user_data_with_email_address.user_identifiers.append(
@@ -222,24 +220,24 @@ def _build_offline_user_data_job_operations(client):
 
     # Creates a second user data based on a physical address.
     user_data_with_physical_address_operation = client.get_type(
-        "OfflineUserDataJobOperation", version="v5"
+        "OfflineUserDataJobOperation", version="v6"
     )
     user_data_with_physical_address = (
         user_data_with_physical_address_operation.create
     )
     user_identifier_with_address = client.get_type(
-        "UserIdentifier", version="v5"
+        "UserIdentifier", version="v6"
     )
     # First and last name must be normalized and hashed.
-    user_identifier_with_address.address_info.hashed_first_name.value = _normalize_and_hash(
+    user_identifier_with_address.address_info.hashed_first_name = _normalize_and_hash(
         "John"
     )
-    user_identifier_with_address.address_info.hashed_last_name.value = _normalize_and_hash(
+    user_identifier_with_address.address_info.hashed_last_name = _normalize_and_hash(
         "Doe"
     )
     # Country and zip codes are sent in plain text.
-    user_identifier_with_address.address_info.country_code.value = "US"
-    user_identifier_with_address.address_info.postal_code.value = "10011"
+    user_identifier_with_address.address_info.country_code = "US"
+    user_identifier_with_address.address_info.postal_code = "10011"
     user_data_with_physical_address.user_identifiers.append(
         user_identifier_with_address
     )
@@ -262,7 +260,7 @@ def _print_customer_match_user_list_info(
             add users.
     """
     google_ads_service_client = client.get_service(
-        "GoogleAdsService", version="v5"
+        "GoogleAdsService", version="v6"
     )
 
     # Creates a query that retrieves the user list.
@@ -279,8 +277,8 @@ def _print_customer_match_user_list_info(
     print(
         "The estimated number of users that the user list "
         f"'{user_list.resource_name}' has is "
-        f"{user_list.size_for_display.value} for Display and "
-        f"{user_list.size_for_search.value} for Search."
+        f"{user_list.size_for_display} for Display and "
+        f"{user_list.size_for_search} for Search."
     )
     print(
         "Reminder: It may take several hours for the user list to be "

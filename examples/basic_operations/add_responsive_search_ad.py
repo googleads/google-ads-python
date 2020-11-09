@@ -27,14 +27,14 @@ from google.ads.google_ads.errors import GoogleAdsException
 
 
 def main(client, customer_id, ad_group_id):
-    ad_group_ad_service = client.get_service("AdGroupAdService", version="v5")
-    ad_group_service = client.get_service("AdGroupService", version="v5")
+    ad_group_ad_service = client.get_service("AdGroupAdService", version="v6")
+    ad_group_service = client.get_service("AdGroupService", version="v6")
 
     # Create the ad group ad.
-    ad_group_ad_operation = client.get_type("AdGroupAdOperation", version="v5")
+    ad_group_ad_operation = client.get_type("AdGroupAdOperation", version="v6")
     ad_group_ad = ad_group_ad_operation.create
     ad_group_ad.status = client.get_type(
-        "AdGroupAdStatusEnum", version="v5"
+        "AdGroupAdStatusEnum", version="v6"
     ).PAUSED
     ad_group_ad.ad_group = ad_group_service.ad_group_path(
         customer_id, ad_group_id
@@ -49,7 +49,7 @@ def main(client, customer_id, ad_group_id):
     pinned_headline = _create_ad_text_asset(
         client,
         f"Cruise to Mars #{str(uuid4())[:8]}",
-        client.get_type("ServedAssetFieldTypeEnum", version="v5").HEADLINE_1,
+        client.get_type("ServedAssetFieldTypeEnum", version="v6").HEADLINE_1,
     )
 
     ad_group_ad.ad.responsive_search_ad.headlines.extend(
@@ -94,7 +94,7 @@ def main(client, customer_id, ad_group_id):
 
 def _create_ad_text_asset(client, text, pinned_field=None):
     """Create an AdTextAsset."""
-    ad_text_asset = client.get_type("AdTextAsset", version="v5")
+    ad_text_asset = client.get_type("AdTextAsset", version="v6")
     ad_text_asset.text = text
     if pinned_field:
         ad_text_asset.pinned_field = pinned_field

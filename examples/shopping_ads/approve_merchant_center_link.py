@@ -41,7 +41,7 @@ def main(client, customer_id, merchant_center_account_id):
         is to be approved.
     """
     merchant_center_link_service = client.get_service(
-        "MerchantCenterLinkService", version="v5"
+        "MerchantCenterLinkService", version="v6"
     )
 
     try:
@@ -55,7 +55,7 @@ def main(client, customer_id, merchant_center_account_id):
         )
 
         merchant_center_link_status_enum = client.get_type(
-            "MerchantCenterLinkStatusEnum", version="v5"
+            "MerchantCenterLinkStatusEnum", version="v6"
         ).MerchantCenterLinkStatus
 
         # Iterate through the results and filter for links with pending states.
@@ -65,10 +65,11 @@ def main(client, customer_id, merchant_center_account_id):
                 f"'{merchant_center_link_status_enum.Name(merchant_center_link.status)}'."
             )
 
-            if (merchant_center_link.status ==
-                    merchant_center_link_status_enum.PENDING and
-                    str(merchant_center_link.id) == merchant_center_account_id
-               ):
+            if (
+                merchant_center_link.status
+                == merchant_center_link_status_enum.PENDING
+                and str(merchant_center_link.id) == merchant_center_account_id
+            ):
                 _update_merchant_center_link_status(
                     client,
                     customer_id,
@@ -90,12 +91,12 @@ def main(client, customer_id, merchant_center_account_id):
 
 
 def _update_merchant_center_link_status(
-        client,
-        customer_id,
-        merchant_center_link_service,
-        merchant_center_link,
-        status,
-    ):
+    client,
+    customer_id,
+    merchant_center_link_service,
+    merchant_center_link,
+    status,
+):
     """Updates the status of a Merchant Center link request.
 
     Args:
@@ -106,7 +107,7 @@ def _update_merchant_center_link_status(
         status: The updated status to apply to the merchant center link.
     """
     # Creates an operation.
-    operation = client.get_type("MerchantCenterLinkOperation", version="v5")
+    operation = client.get_type("MerchantCenterLinkOperation", version="v6")
     link_to_update = operation.update
     link_to_update.resource_name = merchant_center_link.resource_name
     # Enables the pending link.
@@ -121,7 +122,7 @@ def _update_merchant_center_link_status(
     )
 
     merchant_center_link_status_enum = client.get_type(
-        "MerchantCenterLinkStatusEnum", version="v5"
+        "MerchantCenterLinkStatusEnum", version="v6"
     ).MerchantCenterLinkStatus
 
     # Displays the result.

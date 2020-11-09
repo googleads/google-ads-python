@@ -32,7 +32,7 @@ def display_categories(categories, prefix=""):
 
 
 def main(client, customer_id, page_size):
-    ga_service = client.get_service("GoogleAdsService", version="v5")
+    ga_service = client.get_service("GoogleAdsService", version="v6")
     query = """
         SELECT
           product_bidding_category_constant.localized_name,
@@ -57,7 +57,7 @@ def main(client, customer_id, page_size):
             product_bidding_category = row.product_bidding_category_constant
 
             category = Category(
-                product_bidding_category.localized_name.value,
+                product_bidding_category.localized_name,
                 product_bidding_category.resource_name,
             )
 

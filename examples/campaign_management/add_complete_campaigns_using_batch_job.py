@@ -77,7 +77,7 @@ def _build_mutate_operation(client, operation_type, operation):
 
     Returns: a MutateOperation instance
     """
-    mutate_operation = client.get_type("MutateOperation", version="v5")
+    mutate_operation = client.get_type("MutateOperation", version="v6")
     getattr(mutate_operation, operation_type).CopyFrom(operation)
     return mutate_operation
 
@@ -89,7 +89,7 @@ async def main(client, customer_id):
         client: an initialized GoogleAdsClient instance.
         customer_id: a str of a customer ID.
     """
-    batch_job_service = client.get_service("BatchJobService", version="v5")
+    batch_job_service = client.get_service("BatchJobService", version="v6")
     batch_job_operation = _create_batch_job_operation(client)
     resource_name = _create_batch_job(
         batch_job_service, customer_id, batch_job_operation
@@ -123,8 +123,8 @@ def _create_batch_job_operation(client):
     Returns: a BatchJobOperation with a BatchJob instance set in the "create"
         property.
     """
-    batch_job_operation = client.get_type("BatchJobOperation", version="v5")
-    batch_job = client.get_type("BatchJob", version="v5")
+    batch_job_operation = client.get_type("BatchJobOperation", version="v6")
+    batch_job = client.get_type("BatchJob", version="v6")
     batch_job_operation.create.CopyFrom(batch_job)
     return batch_job_operation
 
@@ -269,10 +269,10 @@ def _build_campaign_budget_operation(client, customer_id):
     Returns: a CampaignBudgetOperation instance.
     """
     campaign_budget_service = client.get_service(
-        "CampaignBudgetService", version="v5"
+        "CampaignBudgetService", version="v6"
     )
     campaign_budget_operation = client.get_type(
-        "CampaignBudgetOperation", version="v5"
+        "CampaignBudgetOperation", version="v6"
     )
     campaign_budget = campaign_budget_operation.create
     resource_name = campaign_budget_service.campaign_budget_path(
@@ -281,7 +281,7 @@ def _build_campaign_budget_operation(client, customer_id):
     campaign_budget.resource_name = resource_name
     campaign_budget.name = f"Interplanetary Cruise Budget #{uuid4()}"
     campaign_budget.delivery_method = client.get_type(
-        "BudgetDeliveryMethodEnum", version="v5"
+        "BudgetDeliveryMethodEnum", version="v6"
     ).STANDARD
     campaign_budget.amount_micros = 5000000
 
@@ -322,8 +322,8 @@ def _build_campaign_operation(
 
     Returns: a CampaignOperation instance.
     """
-    campaign_operation = client.get_type("CampaignOperation", version="v5")
-    campaign_service = client.get_service("CampaignService", version="v5")
+    campaign_operation = client.get_type("CampaignOperation", version="v6")
+    campaign_service = client.get_service("CampaignService", version="v6")
     # Creates a campaign.
     campaign = campaign_operation.create
     campaign_id = _get_next_temporary_id()
@@ -333,14 +333,14 @@ def _build_campaign_operation(
     )
     campaign.name = f"Batch job campaign #{customer_id}.{campaign_id}"
     campaign.advertising_channel_type = client.get_type(
-        "AdvertisingChannelTypeEnum", version="v5"
+        "AdvertisingChannelTypeEnum", version="v6"
     ).SEARCH
     # Recommendation: Set the campaign to PAUSED when creating it to prevent
     # the ads from immediately serving. Set to ENABLED once you've added
     # targeting and the ads are ready to serve.
-    campaign.status = client.get_type("CampaignStatusEnum", version="v5").PAUSED
+    campaign.status = client.get_type("CampaignStatusEnum", version="v6").PAUSED
     # Set the bidding strategy and type.
-    campaign.manual_cpc.CopyFrom(client.get_type("ManualCpc", version="v5"))
+    campaign.manual_cpc.CopyFrom(client.get_type("ManualCpc", version="v6"))
     campaign.campaign_budget = campaign_budget_resource_name
 
     return campaign_operation
@@ -371,13 +371,13 @@ def _build_campaign_criterion_operation(client, campaign_operation):
     Returns: a CampaignCriterionOperation instance.
     """
     campaign_criterion_operation = client.get_type(
-        "CampaignCriterionOperation", version="v5"
+        "CampaignCriterionOperation", version="v6"
     )
     # Creates a campaign criterion.
     campaign_criterion = campaign_criterion_operation.create
     campaign_criterion.keyword.text = "venus"
     campaign_criterion.keyword.match_type = client.get_type(
-        "KeywordMatchTypeEnum", version="v5"
+        "KeywordMatchTypeEnum", version="v6"
     ).BROAD
     # Sets the campaign criterion as a negative criterion.
     campaign_criterion.negative = True
@@ -419,8 +419,8 @@ def _build_ad_group_operation(client, customer_id, campaign_operation):
 
     Return: an AdGroupOperation instance.
     """
-    ad_group_operation = client.get_type("AdGroupOperation", version="v5")
-    ad_group_service = client.get_service("AdGroupService", version="v5")
+    ad_group_operation = client.get_type("AdGroupOperation", version="v6")
+    ad_group_service = client.get_service("AdGroupService", version="v6")
     # Creates an ad group.
     ad_group = ad_group_operation.create
     ad_group_id = _get_next_temporary_id()
@@ -431,7 +431,7 @@ def _build_ad_group_operation(client, customer_id, campaign_operation):
     ad_group.name = f"Batch job ad group #{uuid4()}.{ad_group_id}"
     ad_group.campaign = campaign_operation.create.resource_name
     ad_group.type = client.get_type(
-        "AdGroupTypeEnum", version="v5"
+        "AdGroupTypeEnum", version="v6"
     ).SEARCH_STANDARD
     ad_group.cpc_bid_micros = 10000000
 
@@ -485,7 +485,7 @@ def _build_ad_group_criterion_operation(
     Returns: an AdGroupCriterionOperation instance.
     """
     ad_group_criterion_operation = client.get_type(
-        "AdGroupCriterionOperation", version="v5"
+        "AdGroupCriterionOperation", version="v6"
     )
     # Creates an ad group criterion.
     ad_group_criterion = ad_group_criterion_operation.create
@@ -497,11 +497,11 @@ def _build_ad_group_criterion_operation(
         ad_group_criterion.keyword.text += "!!!"
 
     ad_group_criterion.keyword.match_type = client.get_type(
-        "KeywordMatchTypeEnum", version="v5"
+        "KeywordMatchTypeEnum", version="v6"
     ).BROAD
     ad_group_criterion.ad_group = ad_group_operation.create.resource_name
     ad_group_criterion.status = client.get_type(
-        "AdGroupCriterionStatusEnum", version="v5"
+        "AdGroupCriterionStatusEnum", version="v6"
     ).ENABLED
 
     return ad_group_criterion_operation
@@ -531,7 +531,7 @@ def _build_ad_group_ad_operation(client, ad_group_operation):
 
     Returns: an AdGroupAdOperation instance.
     """
-    ad_group_ad_operation = client.get_type("AdGroupAdOperation", version="v5")
+    ad_group_ad_operation = client.get_type("AdGroupAdOperation", version="v6")
     # Creates an ad group ad.
     ad_group_ad = ad_group_ad_operation.create
     # Creates the expanded text ad info.
@@ -542,7 +542,7 @@ def _build_ad_group_ad_operation(client, ad_group_operation):
     final_url = ad_group_ad.ad.final_urls.append("http://www.example.com")
     ad_group_ad.ad_group = ad_group_operation.create.resource_name
     ad_group_ad.status = client.get_type(
-        "AdGroupAdStatusEnum", version="v5"
+        "AdGroupAdStatusEnum", version="v6"
     ).PAUSED
 
     return ad_group_ad_operation

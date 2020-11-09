@@ -50,21 +50,21 @@ def main(client, customer_id, keyword_plan_id):
     for i, forecast in enumerate(response.keyword_forecasts):
         print(
             "#{} Keyword ID: {}".format(
-                i + 1, forecast.keyword_plan_ad_group_keyword.value
+                i + 1, forecast.keyword_plan_ad_group_keyword
             )
         )
 
         metrics = forecast.keyword_forecast
 
-        click_val = metrics.clicks.value
+        click_val = metrics.clicks
         clicks = "{:.2f}".format(click_val) if click_val else "unspecified"
         print("Estimated daily clicks: {}".format(clicks))
 
-        imp_val = metrics.impressions.value
+        imp_val = metrics.impressions
         impressions = "{:.2f}".format(imp_val) if imp_val else "unspecified"
         print("Estimated daily impressions: {}".format(impressions))
 
-        cpc_val = metrics.average_cpc.value
+        cpc_val = metrics.average_cpc
         cpc = "{:.2f}".format(cpc_val) if cpc_val else "unspecified"
         print("Estimated average cpc: {}\n".format(cpc))
 

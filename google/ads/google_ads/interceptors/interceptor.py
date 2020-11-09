@@ -30,10 +30,11 @@ from google.ads.google_ads.errors import GoogleAdsException
 _REQUEST_ID_KEY = "request-id"
 # Codes that are retried upon by google.api_core.
 _RETRY_STATUS_CODES = (StatusCode.INTERNAL, StatusCode.RESOURCE_EXHAUSTED)
-_SENSITIVE_INFO_MASK = "REDACTED"
 
 
 class Interceptor:
+    _SENSITIVE_INFO_MASK = "REDACTED"
+
     @classmethod
     def get_request_id_from_metadata(cls, trailing_metadata):
         """Gets the request ID for the Google Ads API request.
@@ -71,7 +72,7 @@ class Interceptor:
         for datum in metadata:
             key = datum[0]
             if key == "developer-token":
-                metadata_dict[key] = _SENSITIVE_INFO_MASK
+                metadata_dict[key] = cls._SENSITIVE_INFO_MASK
             else:
                 value = datum[1]
                 metadata_dict[key] = value

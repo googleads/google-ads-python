@@ -23,7 +23,7 @@ from google.ads.google_ads.errors import GoogleAdsException
 
 
 def main(client, customer_id):
-    ga_service = client.get_service("GoogleAdsService", version="v5")
+    ga_service = client.get_service("GoogleAdsService", version="v6")
 
     query = """
         SELECT
@@ -42,7 +42,7 @@ def main(client, customer_id):
     try:
         # Use the enum type to determine the enum name from the value.
         billing_setup_status_enum = client.get_type(
-            "BillingSetupStatusEnum", version="v5"
+            "BillingSetupStatusEnum", version="v6"
         ).BillingSetupStatus
 
         print("Found the following billing setup results:")
@@ -50,20 +50,20 @@ def main(client, customer_id):
             for row in batch.results:
                 billing_setup = row.billing_setup
                 pai = billing_setup.payments_account_info
-                if pai.secondary_payments_profile_id.value:
+                if pai.secondary_payments_profile_id:
                     secondary_payments_profile_id = (
-                        pai.secondary_payments_profile_id.value
+                        pai.secondary_payments_profile_id
                     )
                 else:
                     secondary_payments_profile_id = "None"
                 print(
-                    f"Billing setup with ID {billing_setup.id.value}, "
+                    f"Billing setup with ID {billing_setup.id}, "
                     f'status "{billing_setup_status_enum.Name(billing_setup.status)}", '
-                    f'payments_account "{billing_setup.payments_account.value}" '
-                    f"payments_account_id {pai.payments_account_id.value}, "
-                    f'payments_account_name "{pai.payments_account_name.value}", '
-                    f"payments_profile_id {pai.payments_profile_id.value}, "
-                    f'payments_profile_name "{pai.payments_profile_name.value}", '
+                    f'payments_account "{billing_setup.payments_account}" '
+                    f"payments_account_id {pai.payments_account_id}, "
+                    f'payments_account_name "{pai.payments_account_name}", '
+                    f"payments_profile_id {pai.payments_profile_id}, "
+                    f'payments_profile_name "{pai.payments_profile_name}", '
                     f"secondary_payments_profile_id {secondary_payments_profile_id}."
                 )
     except GoogleAdsException as ex:

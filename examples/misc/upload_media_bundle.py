@@ -28,16 +28,16 @@ BUNDLE_URL = "https://goo.gl/9Y7qI2"
 
 
 def main(client, customer_id):
-    media_file_operation = client.get_type("MediaFileOperation", version="v5")
+    media_file_operation = client.get_type("MediaFileOperation", version="v6")
     media_file = media_file_operation.create
     media_file.name = "Ad Media Bundle"
     media_file.type = client.get_type(
-        "MediaTypeEnum", version="v5"
+        "MediaTypeEnum", version="v6"
     ).MEDIA_BUNDLE
     # Download the ZIP as bytes from the URL
     media_file.media_bundle.data = requests.get(BUNDLE_URL).content
 
-    media_file_service = client.get_service("MediaFileService", version="v5")
+    media_file_service = client.get_service("MediaFileService", version="v6")
 
     try:
         mutate_media_files_response = media_file_service.mutate_media_files(

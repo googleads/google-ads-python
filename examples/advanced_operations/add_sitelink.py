@@ -24,17 +24,16 @@ from google.ads.google_ads.errors import GoogleAdsException
 
 def main(client, customer_id):
     # Create an extension setting.
-    feed_service = client.get_service("ExtensionFeedItemService", version="v5")
+    feed_service = client.get_service("ExtensionFeedItemService", version="v6")
 
     extension_feed_item_operation = client.get_type(
-        "ExtensionFeedItemOperation", version="v5"
+        "ExtensionFeedItemOperation", version="v6"
     )
     extension_feed_item = extension_feed_item_operation.create
-    extension_feed_item.sitelink_feed_item.link_text.value = "Text"
-    extension_feed_item.sitelink_feed_item.line1.value = "Line 1 Value"
-    extension_feed_item.sitelink_feed_item.line2.value = "Line 2 Value"
-    final_url = extension_feed_item.sitelink_feed_item.final_urls.add()
-    final_url.value = "www.example.com"
+    extension_feed_item.sitelink_feed_item.link_text = "Text"
+    extension_feed_item.sitelink_feed_item.line1 = "Line 1 Value"
+    extension_feed_item.sitelink_feed_item.line2 = "Line 2 Value"
+    extension_feed_item.sitelink_feed_item.final_urls.append("www.example.com")
 
     # Add extension
     try:

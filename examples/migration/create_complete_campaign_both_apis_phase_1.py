@@ -53,15 +53,15 @@ def create_campaign_budget(client, customer_id):
         customer_id: (str) Customer ID associated with the account.
 
     Returns:
-        An instance of google.ads.google_ads.v5.types.CampaignBudget for the
+        An instance of google.ads.google_ads.v6.types.CampaignBudget for the
             newly created Budget.
     """
-    campaign_service = client.get_service("CampaignBudgetService", version="v5")
-    operation = client.get_type("CampaignBudgetOperation", version="v5")
+    campaign_service = client.get_service("CampaignBudgetService", version="v6")
+    operation = client.get_type("CampaignBudgetOperation", version="v6")
     criterion = operation.create
     criterion.name = "Interplanetary Cruise Budget #{}".format(uuid.uuid4())
     criterion.delivery_method = client.get_type(
-        "BudgetDeliveryMethodEnum", version="v5"
+        "BudgetDeliveryMethodEnum", version="v6"
     ).STANDARD
     criterion.amount_micros = 500000
     response = campaign_service.mutate_campaign_budgets(
@@ -85,10 +85,10 @@ def get_campaign_budget(client, customer_id, resource_name):
             campaign.
 
     Returns:
-        An instance of google.ads.google_ads.v5.types.CampaignBudget for the
+        An instance of google.ads.google_ads.v6.types.CampaignBudget for the
             newly created Budget.
     """
-    ga_service = client.get_service("GoogleAdsService", version="v5")
+    ga_service = client.get_service("GoogleAdsService", version="v6")
     query = f"""
         SELECT
           campaign_budget.id,

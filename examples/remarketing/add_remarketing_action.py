@@ -42,10 +42,10 @@ def main(client, customer_id, page_size):
 
 def _add_remarketing_action(client, customer_id):
     remarketing_action_service = client.get_service(
-        "RemarketingActionService", version="v5"
+        "RemarketingActionService", version="v6"
     )
     remarketing_action_operation = client.get_type(
-        "RemarketingActionOperation", version="v5"
+        "RemarketingActionOperation", version="v6"
     )
 
     remarketing_action = remarketing_action_operation.create
@@ -82,7 +82,7 @@ def _query_remarketing_action(client, customer_id, resource_name, page_size):
         WHERE remarketing_action.resource_name = '{resource_name}'"""
 
     google_ads_service_client = client.get_service(
-        "GoogleAdsService", version="v5"
+        "GoogleAdsService", version="v6"
     )
 
     results = google_ads_service_client.search(
@@ -106,10 +106,10 @@ def _query_remarketing_action(client, customer_id, resource_name, page_size):
 
 def _print_remarketing_action_attributes(client, remarketing_action):
     tracking_code_type_enum = client.get_type(
-        "TrackingCodeTypeEnum", version="v5"
+        "TrackingCodeTypeEnum", version="v6"
     ).TrackingCodeType
     tracking_code_page_format_enum = client.get_type(
-        "TrackingCodePageFormatEnum", version="v5"
+        "TrackingCodePageFormatEnum", version="v6"
     ).TrackingCodePageFormat
 
     print(

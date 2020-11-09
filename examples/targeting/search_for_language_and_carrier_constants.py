@@ -63,7 +63,7 @@ def _search_for_language_constants(client, customer_id, language_name):
         language_name: String included in the language name to search for.
     """
     # Get the GoogleAdsService client.
-    google_ads_service = client.get_service("GoogleAdsService", version="v5")
+    google_ads_service = client.get_service("GoogleAdsService", version="v6")
 
     # Create a query that retrieves the language constants where the name
     # includes a given string.
@@ -101,7 +101,7 @@ def _search_for_carrier_constants(client, customer_id, carrier_country_code):
             carriers are located.
     """
     # Get the GoogleAdsService client.
-    google_ads_service = client.get_service("GoogleAdsService", version="v5")
+    google_ads_service = client.get_service("GoogleAdsService", version="v6")
 
     # Create a query that retrieves the targetable carrier constants by country
     # code.
@@ -152,7 +152,7 @@ if __name__ == "__main__":
         type=str,
         required=False,
         default="eng",
-        help="Optional, string included in the language name to search for."
+        help="Optional, string included in the language name to search for.",
     )
     parser.add_argument(
         "-p",
@@ -173,5 +173,5 @@ if __name__ == "__main__":
         google_ads_client,
         args.customer_id,
         args.language_name,
-        args.carrier_country_code
+        args.carrier_country_code,
     )

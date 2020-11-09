@@ -26,9 +26,9 @@ _DEFAULT_PAGE_SIZE = 1000
 
 
 def main(client, customer_id, page_size, campaign_id):
-    ga_service = client.get_service("GoogleAdsService", version="v5")
+    ga_service = client.get_service("GoogleAdsService", version="v6")
     shared_criterion_service = client.get_service(
-        "SharedCriterionService", version="v5"
+        "SharedCriterionService", version="v6"
     )
 
     # First, retrieve all shared sets associated with the campaign.
@@ -91,7 +91,7 @@ def main(client, customer_id, page_size, campaign_id):
 
     # Use the enum type to determine the enum name from the value.
     keyword_match_type_enum = client.get_type(
-        "KeywordMatchTypeEnum", version="v5"
+        "KeywordMatchTypeEnum", version="v6"
     ).KeywordMatchType
 
     criterion_ids = []
@@ -100,7 +100,7 @@ def main(client, customer_id, page_size, campaign_id):
         shared_criterion_resource_name = shared_criterion.resource_name
         if (
             shared_criterion.type
-            == client.get_type("CriterionTypeEnum", version="v5").KEYWORD
+            == client.get_type("CriterionTypeEnum", version="v6").KEYWORD
         ):
             keyword = shared_criterion.keyword
             print(
@@ -119,7 +119,7 @@ def main(client, customer_id, page_size, campaign_id):
     # Finally, remove the criteria.
     for criteria_id in criterion_ids:
         shared_criterion_operation = client.get_type(
-            "SharedCriterionOperation", version="v5"
+            "SharedCriterionOperation", version="v6"
         )
         shared_criterion_operation.remove = criteria_id
         operations.append(shared_criterion_operation)

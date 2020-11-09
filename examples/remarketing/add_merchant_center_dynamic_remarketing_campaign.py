@@ -29,12 +29,12 @@ from google.ads.google_ads.errors import GoogleAdsException
 
 
 def main(
-        client,
-        customer_id,
-        merchant_center_account_id,
-        campaign_budget_id,
-        user_list_id,
-    ):
+    client,
+    customer_id,
+    merchant_center_account_id,
+    campaign_budget_id,
+    user_list_id,
+):
     """Creates a campaign associated with an existing Merchant Center account.
 
     Args:
@@ -78,8 +78,8 @@ def main(
 
 
 def _create_campaign(
-        client, customer_id, merchant_center_account_id, campaign_budget_id
-    ):
+    client, customer_id, merchant_center_account_id, campaign_budget_id
+):
     """Creates a campaign linked to a Merchant Center product feed.
 
     Args:
@@ -91,10 +91,10 @@ def _create_campaign(
         The string resource name of the newly created campaign.
     """
     # Gets the CampaignService client.
-    campaign_service = client.get_service("CampaignService", version="v5")
+    campaign_service = client.get_service("CampaignService", version="v6")
 
     # Creates a campaign operation and configures the new campaign.
-    campaign_operation = client.get_type("CampaignOperation", version="v5")
+    campaign_operation = client.get_type("CampaignOperation", version="v6")
     campaign = campaign_operation.create
     campaign.name = f"Shopping campaign #{uuid4()}"
     # Configures the settings for the shopping campaign.
@@ -110,13 +110,13 @@ def _create_campaign(
     # Dynamic remarketing campaigns are only available on the Google Display
     # Network.
     campaign.advertising_channel_type = client.get_type(
-        "AdvertisingChannelTypeEnum", version="v5"
+        "AdvertisingChannelTypeEnum", version="v6"
     ).DISPLAY
-    campaign.status = client.get_type("CampaignStatusEnum", version="v5").PAUSED
+    campaign.status = client.get_type("CampaignStatusEnum", version="v6").PAUSED
     campaign.campaign_budget = client.get_service(
-        "CampaignBudgetService", version="v5"
+        "CampaignBudgetService", version="v6"
     ).campaign_budget_path(customer_id, campaign_budget_id)
-    campaign.manual_cpc.CopyFrom(client.get_type("ManualCpc", version="v5"))
+    campaign.manual_cpc.CopyFrom(client.get_type("ManualCpc", version="v6"))
 
     # Issues a mutate request to add the campaign.
     campaign_response = campaign_service.mutate_campaigns(
@@ -139,14 +139,14 @@ def _create_ad_group(client, customer_id, campaign_resource_name):
         The string resource name of the newly created ad group.
     """
     # Gets the AdGroupService.
-    ad_group_service = client.get_service("AdGroupService", version="v5")
+    ad_group_service = client.get_service("AdGroupService", version="v6")
 
     # Creates an ad group operation and configures the new ad group.
-    ad_group_operation = client.get_type("AdGroupOperation", version="v5")
+    ad_group_operation = client.get_type("AdGroupOperation", version="v6")
     ad_group = ad_group_operation.create
     ad_group.name = "Dynamic remarketing ad group"
     ad_group.campaign = campaign_resource_name
-    ad_group.status = client.get_type("AdGroupStatusEnum", version="v5").ENABLED
+    ad_group.status = client.get_type("AdGroupStatusEnum", version="v6").ENABLED
 
     # Issues a mutate request to add the ad group.
     ad_group_response = ad_group_service.mutate_ad_groups(
@@ -166,7 +166,7 @@ def _create_ad(client, customer_id, ad_group_resource_name):
         ad_group_resource_name: The resource name of the target ad group.
     """
     # Get the AdGroupAdService client.
-    ad_group_ad_service = client.get_service("AdGroupAdService", version="v5")
+    ad_group_ad_service = client.get_service("AdGroupAdService", version="v6")
 
     # Upload image assets for the ad.
     marketing_image_resource_name = _upload_image_asset(
@@ -177,17 +177,17 @@ def _create_ad(client, customer_id, ad_group_resource_name):
     )
 
     # Create the relevant asset objects for the ad.
-    marketing_image = client.get_type("AdImageAsset", version="v5")
+    marketing_image = client.get_type("AdImageAsset", version="v6")
     marketing_image.asset = marketing_image_resource_name
-    square_marketing_image = client.get_type("AdImageAsset", version="v5")
+    square_marketing_image = client.get_type("AdImageAsset", version="v6")
     square_marketing_image.asset = square_marketing_image_resource_name
-    headline = client.get_type("AdTextAsset", version="v5")
+    headline = client.get_type("AdTextAsset", version="v6")
     headline.text = "Travel"
-    description = client.get_type("AdTextAsset", version="v5")
+    description = client.get_type("AdTextAsset", version="v6")
     description.text = "Take to the air!"
 
     # Create an ad group ad operation and set the ad group ad values.
-    ad_group_ad_operation = client.get_type("AdGroupAdOperation", version="v5")
+    ad_group_ad_operation = client.get_type("AdGroupAdOperation", version="v6")
     ad_group_ad = ad_group_ad_operation.create
     ad_group_ad.ad_group = ad_group_resource_name
     ad_group_ad.ad.final_urls.append("http://www.example.com/")
@@ -212,14 +212,14 @@ def _create_ad(client, customer_id, ad_group_resource_name):
     responsive_display_ad_info.allow_flexible_color = False
     # Optional: Set the format setting that the ad will be served in.
     responsive_display_ad_info.format_setting = client.get_type(
-        "DisplayAdFormatSettingEnum", version="v5"
+        "DisplayAdFormatSettingEnum", version="v6"
     ).NON_NATIVE
     # Optional: Create a logo image and set it to the ad.
-    # logo_image = client.get_type("AdImageAsset", version="v5")
+    # logo_image = client.get_type("AdImageAsset", version="v6")
     # logo_image.asset = "INSERT_LOGO_IMAGE_RESOURCE_NAME_HERE"
     # responsive_display_ad_info.logo_images.append(logo_image)
     # Optional: Create a square logo image and set it to the ad.
-    # square_logo_image = client.get_type("AdImageAsset", version="v5")
+    # square_logo_image = client.get_type("AdImageAsset", version="v6")
     # square_logo_image.asset = "INSERT_SQUARE_LOGO_IMAGE_RESOURCE_NAME_HERE"
     # responsive_display_ad_info.square_logo_images.append(square_logo_image)
 
@@ -245,15 +245,15 @@ def _upload_image_asset(client, customer_id, image_url, asset_name):
         The string resource name of the newly uploaded image asset.
     """
     # Get the AssetService client.
-    asset_service = client.get_service("AssetService", version="v5")
+    asset_service = client.get_service("AssetService", version="v6")
 
     # Fetch the image data.
     image_data = requests.get(image_url).content
 
     # Create an asset operation and set the image asset values.
-    asset_operation = client.get_type("AssetOperation", version="v5")
+    asset_operation = client.get_type("AssetOperation", version="v6")
     asset = asset_operation.create
-    asset.type = client.get_type("AssetTypeEnum", version="v5").IMAGE
+    asset.type = client.get_type("AssetTypeEnum", version="v6").IMAGE
     asset.image_asset.data = image_data
     asset.name = asset_name
 
@@ -270,8 +270,8 @@ def _upload_image_asset(client, customer_id, image_url, asset_name):
 
 
 def _attach_user_list(
-        client, customer_id, ad_group_resource_name, user_list_id
-    ):
+    client, customer_id, ad_group_resource_name, user_list_id
+):
     """Targets a user list with an ad group.
 
     Args:
@@ -282,18 +282,18 @@ def _attach_user_list(
     """
     # Get the AdGroupCriterionService client.
     ad_group_criterion_service = client.get_service(
-        "AdGroupCriterionService", version="v5"
+        "AdGroupCriterionService", version="v6"
     )
 
     # Create an ad group criterion operation and set the ad group criterion
     # values.
     ad_group_criterion_operation = client.get_type(
-        "AdGroupCriterionOperation", version="v5"
+        "AdGroupCriterionOperation", version="v6"
     )
     ad_group_criterion = ad_group_criterion_operation.create
     ad_group_criterion.ad_group = ad_group_resource_name
     ad_group_criterion.user_list.user_list = client.get_service(
-        "UserListService", version="v5"
+        "UserListService", version="v6"
     ).user_list_path(customer_id, user_list_id)
 
     # Issue a mutate request to add the ad group criterion.
@@ -355,4 +355,3 @@ if __name__ == "__main__":
         args.campaign_budget_id,
         args.user_list_id,
     )
-

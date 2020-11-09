@@ -26,7 +26,7 @@ from google.ads.google_ads.errors import GoogleAdsException
 
 
 def main(client, customer_id, ad_group_id):
-    google_ads_service = client.get_service("GoogleAdsService", version="v5")
+    google_ads_service = client.get_service("GoogleAdsService", version="v6")
 
     query = f"""
         SELECT

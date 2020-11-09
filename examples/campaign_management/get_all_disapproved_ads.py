@@ -24,7 +24,7 @@ _DEFAULT_PAGE_SIZE = 1000
 
 
 def main(client, customer_id, campaign_id, page_size):
-    ga_service = client.get_service("GoogleAdsService", version="v5")
+    ga_service = client.get_service("GoogleAdsService", version="v6")
 
     query = f"""
         SELECT
@@ -42,7 +42,7 @@ def main(client, customer_id, campaign_id, page_size):
             customer_id, query=query, page_size=page_size,
         )
 
-        ad_type_enum = client.get_type("AdTypeEnum", version="v5").AdType
+        ad_type_enum = client.get_type("AdTypeEnum", version="v6").AdType
         policy_topic_entry_type_enum = client.get_type(
             "PolicyTopicEntryTypeEnum"
         ).PolicyTopicEntryType
@@ -50,7 +50,7 @@ def main(client, customer_id, campaign_id, page_size):
         print("Disapproved ads:")
 
         approval_status_enum = client.get_type(
-            "PolicyApprovalStatusEnum", version="v5"
+            "PolicyApprovalStatusEnum", version="v6"
         )
 
         # Iterate over all ads in all rows returned and count disapproved ads.
@@ -79,7 +79,7 @@ def main(client, customer_id, campaign_id, page_size):
                 # topic.
                 for evidence in entry.evidences:
                     for index, text in enumerate(evidence.text_list.texts):
-                        print("\t\tevidence text[%s]: %s" % (index, text.value))
+                        print(f"\t\tevidence text[{index}]: {text}")
 
         # The "num_results" field returns the number of items that have been
         # iterated in the results not the total number of rows returned by the

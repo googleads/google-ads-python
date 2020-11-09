@@ -25,6 +25,35 @@ import logging
 from grpc import UnaryUnaryClientInterceptor, UnaryStreamClientInterceptor
 
 from .interceptor import Interceptor
+from ..util import set_nested_message_field, get_nested_attr
+
+# The keys in this dict represent messages that have fields that may contain
+# sensitive information, such as PII like an email address, that shouldn't
+# be logged. The values are a list of dot-delimited field paths on the message
+# where the sensitive information may exist. Messages listed here will have
+# their sensitive fields redacted in logs when transmitted in the following
+# scenarios:
+#     1. They are returned as part of a Search or SearchStream request.
+#     2. They are returned individually in a Get request.
+#     3. They are sent to the API as part of a Mutate request.
+_MESSAGES_WITH_SENSITIVE_FIELDS = {
+    "CustomerUserAccess": ["email_address", "inviter_user_email_address"],
+    "MutateCustomerUserAccessRequest": [
+        "operation.update.email_address",
+        "operation.update.inviter_user_email_address",
+    ],
+    "ChangeEvent": ["user_email"],
+    "CreateCustomerClientRequest": ["email_address"],
+    "Feed": ["places_location_feed_data.email_address"],
+}
+
+# This is a list of the names of messages that return search results from the
+# API. These messages contain other messages that may contain sensitive
+# information that needs to be masked before being logged.
+_SEARCH_RESPONSE_MESSAGE_NAMES = [
+    "SearchGoogleAdsResponse",
+    "SearchGoogleAdsStreamResponse",
+]
 
 
 class LoggingInterceptor(
@@ -204,6 +233,8 @@ class LoggingInterceptor(
             trailing_metadata_json: A JSON str of trailing_metadata.
             response: A grpc.Call/grpc.Future instance.
         """
+        result = _mask_message(response.result(), self._SENSITIVE_INFO_MASK)
+
         self.logger.debug(
             self._FULL_REQUEST_LOG_LINE.format(
                 method,
@@ -211,7 +242,7 @@ class LoggingInterceptor(
                 metadata_json,
                 request,
                 trailing_metadata_json,
-                response.result(),
+                result,
             )
         )
 
@@ -283,6 +314,7 @@ class LoggingInterceptor(
         trailing_metadata = self._get_trailing_metadata(response)
         request_id = self.get_request_id_from_metadata(trailing_metadata)
         trailing_metadata_json = self.parse_metadata_to_json(trailing_metadata)
+        request = _mask_message(request, self._SENSITIVE_INFO_MASK)
 
         if response.exception():
             self._log_failed_request(
@@ -354,3 +386,121 @@ class LoggingInterceptor(
         response.add_done_callback(on_rpc_complete)
 
         return response
+
+
+def _copy_message(message):
+    """Returns a copy of the given message.
+
+    Args:
+        message: An object containing information from an API request
+            or response.
+
+    Returns:
+        A copy of the given message.
+    """
+    copy = message.__class__()
+    copy.CopyFrom(message)
+
+    return copy
+
+
+def _mask_message_fields(field_list, message, mask):
+    """Copies the given message and masks sensitive fields.
+
+    Sensitive fields are given as a list of strings and are overridden
+    with the word "REDACTED" to protect PII from being logged.
+
+    Args:
+        field_list: A list of strings specifying the fields on the message
+            that should be masked.
+        message: An object containing information from an API request
+            or response.
+        mask: A str that should replace the sensitive information in the
+            message.
+
+    Returns:
+        A new instance of the message object with fields copied and masked
+            where necessary.
+    """
+    copy = _copy_message(message)
+
+    for field_path in field_list:
+        try:
+            # Only mask the field if it's been set on the message.
+            if get_nested_attr(copy, field_path):
+                set_nested_message_field(copy, field_path, mask)
+        except AttributeError:
+            # AttributeError is raised when the field is not defined on the
+            # message. In this case there's nothing to mask and the field
+            # should be skipped.
+            break
+
+    return copy
+
+
+def _mask_google_ads_search_response(message, mask):
+    """Copies and masks sensitive data in a Search response
+
+    Response messages include instances of GoogleAdsSearchResponse and
+    GoogleAdsSearchStreamResponse.
+
+    Args:
+        message: A SearchGoogleAdsResponse or SearchGoogleAdsStreamResponse
+            instance.
+        mask: A str that should replace the sensitive information in the
+            message.
+
+    Returns:
+        A copy of the message with sensitive fields masked.
+    """
+    copy = _copy_message(message)
+
+    for row in copy.results:
+        # Each row is an instance of GoogleAdsRow. The ListFields method
+        # returns a list of (FieldDescriptor, value) tuples for all fields in
+        # the message which are not empty
+        row_fields = row.ListFields()
+        for field in row_fields:
+            field_descriptor = field[0]
+            # field_name is the name of the field on the GoogleAdsRow instance,
+            # for example "campaign" or "customer_user_access"
+            field_name = field_descriptor.name
+            # message_name is the name of the message, similar to the class
+            # name, for example "Campaign" or "CustomerUserAccess"
+            message_name = field_descriptor.message_type.name
+            if message_name in _MESSAGES_WITH_SENSITIVE_FIELDS.keys():
+                nested_message = getattr(row, field_name)
+                # Overwrites the nested message with an exact copy of itself,
+                # where sensitive fields have been masked.
+                nested_message.CopyFrom(
+                    _mask_message_fields(
+                        _MESSAGES_WITH_SENSITIVE_FIELDS[message_name],
+                        nested_message,
+                        mask,
+                    )
+                )
+
+    return copy
+
+
+def _mask_message(message, mask):
+    """Copies and returns a message with sensitive fields masked.
+
+    Args:
+        message: An object containing information from an API request
+            or response.
+        mask: A str that should replace the sensitive information in the
+            message.
+
+    Returns:
+        A copy of the message instance with sensitive fields masked.
+    """
+    class_name = message.__class__.__name__
+
+    if class_name in _SEARCH_RESPONSE_MESSAGE_NAMES:
+        return _mask_google_ads_search_response(message, mask)
+    elif class_name in _MESSAGES_WITH_SENSITIVE_FIELDS.keys():
+        sensitive_fields = _MESSAGES_WITH_SENSITIVE_FIELDS[class_name]
+        return _mask_message_fields(sensitive_fields, message, mask)
+    else:
+        return message

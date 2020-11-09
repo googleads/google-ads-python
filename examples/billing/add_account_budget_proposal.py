@@ -30,7 +30,7 @@ def main(client, customer_id, billing_setup_id):
         "AccountBudgetProposalService"
     )
     billing_setup_service = client.get_service(
-        "BillingSetupService", version="v5"
+        "BillingSetupService", version="v6"
     )
 
     account_budget_proposal_operation = client.get_type(
@@ -41,14 +41,14 @@ def main(client, customer_id, billing_setup_id):
     proposal.proposal_type = client.get_type(
         "AccountBudgetProposalTypeEnum"
     ).CREATE
-    proposal.billing_setup.value = billing_setup_service.billing_setup_path(
+    proposal.billing_setup = billing_setup_service.billing_setup_path(
         customer_id, billing_setup_id
     )
-    proposal.proposed_name.value = "Account Budget Proposal (example)"
+    proposal.proposed_name = "Account Budget Proposal (example)"
 
     # Specify the account budget starts immediately
     proposal.proposed_start_time_type = client.get_type(
-        "TimeTypeEnum", version="v5"
+        "TimeTypeEnum", version="v6"
     ).NOW
     # Alternatively you can specify a specific start time. Refer to the
     # AccountBudgetProposal resource documentation for allowed formats.
@@ -57,7 +57,7 @@ def main(client, customer_id, billing_setup_id):
 
     # Specify that the budget runs forever
     proposal.proposed_end_time_type = client.get_type(
-        "TimeTypeEnum", version="v5"
+        "TimeTypeEnum", version="v6"
     ).FOREVER
     # Alternatively you can specify a specific end time. Allowed formats are as
     # above.
@@ -69,7 +69,7 @@ def main(client, customer_id, billing_setup_id):
     #
     # proposal.proposed_notes = client.wrapper
     #     .string('Received prepayment of $0.01')
-    proposal.proposed_spending_limit_micros.value = 10000
+    proposal.proposed_spending_limit_micros = 10000
 
     try:
         account_budget_proposal_response = account_budget_proposal_service.mutate_account_budget_proposal(

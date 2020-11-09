@@ -68,12 +68,12 @@ def main(
 def add_campaign_budget(client, customer_id):
     """Creates a new campaign budget in the specified client account."""
     campaign_budget_service = client.get_service(
-        "CampaignBudgetService", version="v5"
+        "CampaignBudgetService", version="v6"
     )
 
     # Create a budget, which can be shared by multiple campaigns.
     campaign_budget_operation = client.get_type(
-        "CampaignBudgetOperation", version="v5"
+        "CampaignBudgetOperation", version="v6"
     )
     campaign_budget = campaign_budget_operation.create
     campaign_budget.name = "Interplanetary Budget %s" % uuid.uuid4()
@@ -110,14 +110,14 @@ def add_shopping_product_ad_group_ad(
     client, customer_id, ad_group_resource_name
 ):
     """Creates a new shopping product ad group ad in the specified ad group."""
-    ad_group_ad_service = client.get_service("AdGroupAdService", version="v5")
+    ad_group_ad_service = client.get_service("AdGroupAdService", version="v6")
 
     # Creates a new ad group ad and sets the product ad to it.
-    ad_group_ad_operation = client.get_type("AdGroupAdOperation", version="v5")
+    ad_group_ad_operation = client.get_type("AdGroupAdOperation", version="v6")
     ad_group_ad = ad_group_ad_operation.create
     ad_group_ad.ad_group = ad_group_resource_name
     ad_group_ad.status = client.get_type(
-        "AdGroupAdStatusEnum", version="v5"
+        "AdGroupAdStatusEnum", version="v6"
     ).PAUSED
     ad_group_ad.ad.shopping_product_ad.CopyFrom(
         client.get_type("ShoppingProductAdInfo")
@@ -151,18 +151,18 @@ def add_shopping_product_ad_group_ad(
 
 def add_shopping_product_ad_group(client, customer_id, campaign_resource_name):
     """Creates a new shopping product ad group in the specified campaign."""
-    ad_group_service = client.get_service("AdGroupService", version="v5")
+    ad_group_service = client.get_service("AdGroupService", version="v6")
 
     # Create ad group.
-    ad_group_operation = client.get_type("AdGroupOperation", version="v5")
+    ad_group_operation = client.get_type("AdGroupOperation", version="v6")
     ad_group = ad_group_operation.create
     ad_group.name = "Earth to Mars cruise %s" % uuid.uuid4()
-    ad_group.status = client.get_type("AdGroupStatusEnum", version="v5").ENABLED
+    ad_group.status = client.get_type("AdGroupStatusEnum", version="v6").ENABLED
     ad_group.campaign = campaign_resource_name
     # Sets the ad group type to SHOPPING_PRODUCT_ADS. This is the only value
     # possible for ad groups that contain shopping product ads.
     ad_group.type = client.get_type(
-        "AdGroupTypeEnum", version="v5"
+        "AdGroupTypeEnum", version="v6"
     ).SHOPPING_PRODUCT_ADS
     ad_group.cpc_bid_micros = 10000000
 
@@ -198,10 +198,10 @@ def add_standard_shopping_campaign(
 ):
     """Creates a new standard shopping campaign in the specified client account.
     """
-    campaign_service = client.get_service("CampaignService", version="v5")
+    campaign_service = client.get_service("CampaignService", version="v6")
 
     # Create standard shoppping campaign.
-    campaign_operation = client.get_type("CampaignOperation", version="v5")
+    campaign_operation = client.get_type("CampaignOperation", version="v6")
     campaign = campaign_operation.create
     campaign.name = "Interplanetary Cruise Campaign %s" % uuid.uuid4()
 
@@ -226,7 +226,7 @@ def add_standard_shopping_campaign(
     # Recommendation: Set the campaign to PAUSED when creating it to prevent the
     # ads from immediately serving. Set to ENABLED once you've added targeting
     # and the ads are ready to serve.
-    campaign.status = client.get_type("CampaignStatusEnum", version="v5").PAUSED
+    campaign.status = client.get_type("CampaignStatusEnum", version="v6").PAUSED
 
     # Sets the bidding strategy to Manual CPC (with eCPC enabled)
     # Recommendation: Use one of the automated bidding strategies for Shopping
@@ -275,13 +275,13 @@ def add_default_shopping_listing_group(
     the bid for a given listing group.
     """
     ad_group_criterion_service = client.get_service(
-        "AdGroupCriterionService", version="v5"
+        "AdGroupCriterionService", version="v6"
     )
 
     # Creates a new ad group criterion. This will contain the "default" listing
     # group (All products).
     ad_group_criterion_operation = client.get_type(
-        "AdGroupCriterionOperation", version="v5"
+        "AdGroupCriterionOperation", version="v6"
     )
     ad_group_criterion = ad_group_criterion_operation.create
     ad_group_criterion.ad_group = ad_group_resource_name

@@ -212,7 +212,7 @@ def _get_thanksgiving_string_date_range():
 
     if start_dt < now:
         # Move start_dt to next year if the current date is past November 20th.
-        start_dt.year += 1
+        start_dt = start_dt + datetime.timedelta(days=365)
 
     end_dt = datetime.datetime(start_dt.year, 11, 27, 23, 59, 59)
 

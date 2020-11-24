@@ -27,6 +27,7 @@ import google.ads.google_ads.client
 _DEFAULT_PAGE_SIZE = 1000
 
 
+# [START get_text_ad_recommendations]
 def main(client, customer_id, page_size):
     ga_service = client.get_service("GoogleAdsService", version="v6")
 
@@ -68,6 +69,7 @@ def main(client, customer_id, page_size):
                 for field_path_element in error.location.field_path_elements:
                     print("\t\tOn field: %s" % field_path_element.field_name)
         sys.exit(1)
+        # [END get_text_ad_recommendations]
 
 
 if __name__ == "__main__":

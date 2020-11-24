@@ -45,6 +45,7 @@ def main(client, customer_id, merchant_center_account_id):
     )
 
     try:
+        # [START approve_merchant_center_link]
         # Retrieve all the existing Merchant Center links.
         response = merchant_center_link_service.list_merchant_center_links(
             customer_id
@@ -53,6 +54,7 @@ def main(client, customer_id, merchant_center_account_id):
             f"{len(response.merchant_center_links)} Merchant Center link(s) "
             "found with the following details:"
         )
+        # [END approve_merchant_center_link]
 
         merchant_center_link_status_enum = client.get_type(
             "MerchantCenterLinkStatusEnum", version="v6"
@@ -60,10 +62,12 @@ def main(client, customer_id, merchant_center_account_id):
 
         # Iterate through the results and filter for links with pending states.
         for merchant_center_link in response.merchant_center_links:
+            # [START approve_merchant_center_link_1]
             print(
                 f"Link '{merchant_center_link.resource_name}' has status "
                 f"'{merchant_center_link_status_enum.Name(merchant_center_link.status)}'."
             )
+            # [END approve_merchant_center_link_1]
 
             if (
                 merchant_center_link.status
@@ -90,6 +94,7 @@ def main(client, customer_id, merchant_center_account_id):
         sys.exit(1)
 
 
+# [START approve_merchant_center_link_2]
 def _update_merchant_center_link_status(
     client,
     customer_id,
@@ -132,6 +137,7 @@ def _update_merchant_center_link_status(
         f"{customer_id} was updated to "
         f"{merchant_center_link_status_enum.Name(status)}."
     )
+    # [END approve_merchant_center_link_2]
 
 
 if __name__ == "__main__":

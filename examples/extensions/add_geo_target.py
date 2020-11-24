@@ -24,6 +24,7 @@ from google.ads.google_ads.client import GoogleAdsClient
 from google.ads.google_ads.errors import GoogleAdsException
 
 
+# [START add_geo_target]
 def main(client, customer_id, feed_item_id, geo_target_constant_id):
     """The main method that creates all necessary entities for the example.
 
@@ -72,6 +73,7 @@ def main(client, customer_id, feed_item_id, geo_target_constant_id):
                 for field_path_element in error.location.field_path_elements:
                     print(f"\t\tOn field: {field_path_element.field_name}")
         sys.exit(1)
+        # [END add_geo_target]
 
 
 if __name__ == "__main__":

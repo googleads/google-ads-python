@@ -35,6 +35,7 @@ def main(client, customer_id):
     )
     campaign_service = client.get_service("CampaignService", version="v6")
 
+    # [START add_campaigns_1]
     # Create a budget, which can be shared by multiple campaigns.
     campaign_budget_operation = client.get_type(
         "CampaignBudgetOperation", version="v6"
@@ -62,7 +63,9 @@ def main(client, customer_id):
                 for field_path_element in error.location.field_path_elements:
                     print("\t\tOn field: %s" % field_path_element.field_name)
         sys.exit(1)
+        # [END add_campaigns_1]
 
+    # [START add_campaigns]
     # Create campaign.
     campaign_operation = client.get_type("CampaignOperation", version="v6")
     campaign = campaign_operation.create
@@ -85,6 +88,7 @@ def main(client, customer_id):
     campaign.network_settings.target_search_network = True
     campaign.network_settings.target_content_network = False
     campaign.network_settings.target_partner_search_network = False
+    # [END add_campaigns]
 
     # Optional: Set the start date.
     start_time = datetime.date.today() + datetime.timedelta(days=1)

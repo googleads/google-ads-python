@@ -106,6 +106,7 @@ def add_campaign_budget(client, customer_id):
     return budget_resource_name
 
 
+# [START add_shopping_product_ad]
 def add_shopping_product_ad_group_ad(
     client, customer_id, ad_group_resource_name
 ):
@@ -147,8 +148,10 @@ def add_shopping_product_ad_group_ad(
     )
 
     return ad_group_resource_name
+    # [END add_shopping_product_ad]
 
 
+# [START add_shopping_product_ad_1]
 def add_shopping_product_ad_group(client, customer_id, campaign_resource_name):
     """Creates a new shopping product ad group in the specified campaign."""
     ad_group_service = client.get_service("AdGroupService", version="v6")
@@ -191,8 +194,10 @@ def add_shopping_product_ad_group(client, customer_id, campaign_resource_name):
     )
 
     return ad_group_resource_name
+    # [END add_shopping_product_ad_1]
 
 
+# [START add_shopping_product_ad_2]
 def add_standard_shopping_campaign(
     client, customer_id, budget_resource_name, merchant_center_account_id
 ):
@@ -262,6 +267,7 @@ def add_standard_shopping_campaign(
     )
 
     return campaign_resource_name
+    # [END add_shopping_product_ad_2]
 
 
 def add_default_shopping_listing_group(

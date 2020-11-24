@@ -134,6 +134,7 @@ def _create_keyword_criterion(
     return None, ad_group_criterion_operation
 
 
+# [START handle_keyword_policy_violations]
 def _fetch_exempt_policy_violation_keys(google_ads_exception):
     """Collects all policy violation keys that can be exempted.
 
@@ -191,8 +192,10 @@ def _fetch_exempt_policy_violation_keys(google_ads_exception):
             raise google_ads_exception
 
     return exempt_policy_violation_keys
+    # [END handle_keyword_policy_violations]
 
 
+# [START handle_keyword_policy_violations_1]
 def _request_exemption(
     customer_id,
     ad_group_criterion_service,
@@ -223,6 +226,7 @@ def _request_exemption(
         f"'{response.results[0].resource_name}' by requesting a policy "
         "violation exemption."
     )
+    # [END handle_keyword_policy_violations_1]
 
 
 if __name__ == "__main__":

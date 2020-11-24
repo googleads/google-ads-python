@@ -26,6 +26,7 @@ import sys
 import google.ads.google_ads.client
 
 
+# [START list_accessible_customers]
 def main(client):
     customer_service = client.get_service("CustomerService", version="v6")
 
@@ -48,6 +49,7 @@ def main(client):
                 for field_path_element in error.location.field_path_elements:
                     print("\t\tOn field: %s" % field_path_element.field_name)
         sys.exit(1)
+        # [END list_accessible_customers]
 
 
 if __name__ == "__main__":

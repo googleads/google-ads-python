@@ -31,6 +31,7 @@ _DateRange = namedtuple("_DateRange", ["start_datetime", "end_datetime"])
 _date_format = "%Y-%m-%d %H:%M:%S"
 
 
+# [START add_sitelinks_1]
 def main(client, customer_id, campaign_id):
     """The main method that creates all necessary entities for the example."""
     # Create an extension setting.
@@ -79,8 +80,10 @@ def main(client, customer_id, campaign_id):
         "Created CampaignExtensionSetting: "
         f'"{response.results[0].resource_name}".'
     )
+    # [END add_sitelinks_1]
 
 
+# [START add_sitelinks]
 def _create_extension_feed_items(client, customer_id, campaign_resource_name):
     """Helper method that creates extension feed items.
 
@@ -203,6 +206,7 @@ def _create_extension_feed_items(client, customer_id, campaign_resource_name):
         print(f"\tResource name: {feed_item.resource_name}")
 
     return [result.resource_name for result in feed_response.results]
+    # [END add_sitelinks]
 
 
 def _get_thanksgiving_string_date_range():

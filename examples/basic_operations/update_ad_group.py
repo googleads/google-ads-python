@@ -26,6 +26,7 @@ from google.ads.google_ads.errors import GoogleAdsException
 from google.api_core import protobuf_helpers
 
 
+# [START update_ad_group]
 def main(client, customer_id, ad_group_id, cpc_bid_micro_amount):
     ad_group_service = client.get_service("AdGroupService", version="v6")
 
@@ -58,6 +59,7 @@ def main(client, customer_id, ad_group_id, cpc_bid_micro_amount):
         sys.exit(1)
 
     print(f"Updated ad group {ad_group_response.results[0].resource_name}.")
+    # [END update_ad_group]
 
 
 if __name__ == "__main__":

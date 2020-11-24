@@ -24,6 +24,7 @@ import sys
 import google.ads.google_ads.client
 
 
+# [START add_ad_group_bid_modifier]
 def main(client, customer_id, ad_group_id, bid_modifier_value):
     ad_group_service = client.get_service("AdGroupService", version="v6")
     ad_group_bm_service = client.get_service(
@@ -66,6 +67,7 @@ def main(client, customer_id, ad_group_id, bid_modifier_value):
                 for field_path_element in error.location.field_path_elements:
                     print("\t\tOn field: %s" % field_path_element.field_name)
         sys.exit(1)
+        # [END add_ad_group_bid_modifier]
 
     print(
         "Created ad group bid modifier: %s."

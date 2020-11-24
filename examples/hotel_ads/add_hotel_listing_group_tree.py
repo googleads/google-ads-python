@@ -100,10 +100,8 @@ def main(client, customer_id, ad_group_id, percent_cpc_bid_micro_amount):
         )
 
         # Adds the listing group and prints the resulting node resource names.
-        mutate_ad_group_criteria_response = (
-            ad_group_criterion_service.mutate_ad_group_criteria(
-                customer_id, operations
-            )
+        mutate_ad_group_criteria_response = ad_group_criterion_service.mutate_ad_group_criteria(
+            customer_id, operations
         )
         results = mutate_ad_group_criteria_response.results
         print(
@@ -111,8 +109,8 @@ def main(client, customer_id, ad_group_id, percent_cpc_bid_micro_amount):
             "names:"
         )
         for (
-                ad_group_criterion_result
-            ) in mutate_ad_group_criteria_response.results:
+            ad_group_criterion_result
+        ) in mutate_ad_group_criteria_response.results:
             print(f"\t'{ad_group_criterion_result.resource_name}'")
 
     except GoogleAdsException as ex:
@@ -129,12 +127,8 @@ def main(client, customer_id, ad_group_id, percent_cpc_bid_micro_amount):
 
 
 def _add_root_node(
-        client,
-        customer_id,
-        ad_group_id,
-        operations,
-        percent_cpc_bid_micro_amount
-    ):
+    client, customer_id, ad_group_id, operations, percent_cpc_bid_micro_amount
+):
     """Creates the root node of the listing group tree.
 
     Also adds its create operation to the operations list.
@@ -180,13 +174,13 @@ def _add_root_node(
 
 
 def _add_level1_nodes(
-        client,
-        customer_id,
-        ad_group_id,
-        root_resource_name,
-        operations,
-        percent_cpc_bid_micro_amount,
-    ):
+    client,
+    customer_id,
+    ad_group_id,
+    root_resource_name,
+    operations,
+    percent_cpc_bid_micro_amount,
+):
     """Creates child nodes on level 1, partitioned by the hotel class info.
 
     Args:
@@ -286,13 +280,13 @@ def _add_level1_nodes(
 
 
 def _add_level2_nodes(
-        client,
-        customer_id,
-        ad_group_id,
-        parent_resource_name,
-        operations,
-        percent_cpc_bid_micro_amount,
-    ):
+    client,
+    customer_id,
+    ad_group_id,
+    parent_resource_name,
+    operations,
+    percent_cpc_bid_micro_amount,
+):
     """Creates child nodes on level 2, partitioned by the country region.
 
     Args:
@@ -319,7 +313,10 @@ def _add_level2_nodes(
         "ListingDimensionInfo", version="v6"
     )
     japan_listing_dimension_info.hotel_country_region.country_region_criterion = client.get_service(
-        "GeoTargetConstantService", version="v6").geo_target_constant_path(2392)
+        "GeoTargetConstantService", version="v6"
+    ).geo_target_constant_path(
+        2392
+    )
 
     # Create listing group info for hotels in Japan as a UNIT node.
     japan_hotels_unit = _create_listing_group_info(
@@ -387,11 +384,11 @@ def _add_level2_nodes(
 
 
 def _create_listing_group_info(
-        client,
-        listing_group_type,
-        parent_criterion_resource_name=None,
-        case_value=None,
-    ):
+    client,
+    listing_group_type,
+    parent_criterion_resource_name=None,
+    case_value=None,
+):
     """Creates the listing group info with the provided parameters.
 
     Args:
@@ -416,12 +413,12 @@ def _create_listing_group_info(
 
 
 def _create_ad_group_criterion(
-        client,
-        customer_id,
-        ad_group_id,
-        listing_group_info,
-        percent_cpc_bid_micro_amount,
-    ):
+    client,
+    customer_id,
+    ad_group_id,
+    listing_group_info,
+    percent_cpc_bid_micro_amount,
+):
     """Creates an ad group criterion from the provided listing group info.
 
     Bid amount will be set on the created ad group criterion when listing group
@@ -450,9 +447,9 @@ def _create_ad_group_criterion(
 
     # Bids are only valid for UNIT nodes.
     if (
-            listing_group_info.type
-            == client.get_type("ListingGroupTypeEnum", version="v6").UNIT
-        ):
+        listing_group_info.type
+        == client.get_type("ListingGroupTypeEnum", version="v6").UNIT
+    ):
         ad_group_criterion.percent_cpc_bid_micros = percent_cpc_bid_micro_amount
 
     return ad_group_criterion

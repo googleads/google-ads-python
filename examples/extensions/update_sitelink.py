@@ -109,5 +109,5 @@ if __name__ == "__main__":
         google_ads_client,
         args.customer_id,
         args.feed_item_id,
-        args.sitelink_text
+        args.sitelink_text,
     )

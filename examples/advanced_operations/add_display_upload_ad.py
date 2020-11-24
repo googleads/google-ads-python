@@ -102,17 +102,17 @@ def _create_media_bundle_asset(client, customer_id):
     )
 
     # Display and return the resulting resource name.
-    uploaded_asset_resource_name = (
-        mutate_asset_response.results[0].resource_name
-    )
+    uploaded_asset_resource_name = mutate_asset_response.results[
+        0
+    ].resource_name
     print(f"Uploaded file with resource name '{uploaded_asset_resource_name}'.")
 
     return uploaded_asset_resource_name
 
 
 def _create_display_upload_ad_group_ad(
-        client, customer_id, ad_group_id, ad_asset_resource_name
-    ):
+    client, customer_id, ad_group_id, ad_asset_resource_name
+):
     """Creates a new HTML5 display upload ad and adds it to the given ad group.
 
     Args:
@@ -150,11 +150,9 @@ def _create_display_upload_ad_group_ad(
     display_upload_ad.display_upload_ad.media_bundle.asset = (
         ad_asset_resource_name
     )
-    display_upload_ad.display_upload_ad.display_upload_product_type = (
-        client.get_type(
-            "DisplayUploadProductTypeEnum", version="v6"
-        ).HTML5_UPLOAD_AD
-    )
+    display_upload_ad.display_upload_ad.display_upload_product_type = client.get_type(
+        "DisplayUploadProductTypeEnum", version="v6"
+    ).HTML5_UPLOAD_AD
 
     # Add the ad group ad to the client account and display the resulting
     # ad's resource name.

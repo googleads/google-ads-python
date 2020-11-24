@@ -70,7 +70,9 @@ def main(client, customer_id, merchant_center_account_id):
             "MerchantCenterLinkStatusEnum", version="v6"
         ).MerchantCenterLinkStatus
 
-        for merchant_center_link in list_merchant_center_links_response.merchant_center_links:
+        for (
+            merchant_center_link
+        ) in list_merchant_center_links_response.merchant_center_links:
             print(
                 f"\tLink '{merchant_center_link.resource_name}' has status "
                 f"'{merchant_center_link_status_enum.Name(merchant_center_link.status)}'."

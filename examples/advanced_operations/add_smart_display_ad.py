@@ -245,10 +245,10 @@ def _upload_image_asset(
         return mutate_asset_response.results[0].asset.id
     except GoogleAdsException as ex:
         _handle_google_ads_exception(ex)
+        # [END add_smart_display_ad_2]
 
 
 # [START add_smart_display_ad_1]
-# [END add_smart_display_ad_2]
 def _create_responsive_display_ad(
     client,
     customer_id,

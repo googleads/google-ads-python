@@ -79,7 +79,7 @@ if __name__ == "__main__":
 
     parser = argparse.ArgumentParser(
         description="Update sitelink extension feed item with the specified "
-        "link text and URL."
+        "link text."
     )
     # The following argument(s) should be provided to run the example.
     parser.add_argument(

@@ -83,7 +83,7 @@ def _query_remarketing_action(client, customer_id, resource_name, page_size):
           remarketing_action.tag_snippets
         FROM remarketing_action
         WHERE remarketing_action.resource_name = '{resource_name}'"""
-        # [END add_remarketing_action]
+    # [END add_remarketing_action]
 
     google_ads_service_client = client.get_service(
         "GoogleAdsService", version="v6"

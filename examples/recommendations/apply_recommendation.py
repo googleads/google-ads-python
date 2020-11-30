@@ -24,6 +24,7 @@ import sys
 import google.ads.google_ads.client
 
 
+# [START apply_recommendation]
 def main(client, customer_id, recommendation_id):
     recommendation_service = client.get_service(
         "RecommendationService", version="v6"
@@ -64,6 +65,7 @@ def main(client, customer_id, recommendation_id):
         'Applied recommendation with resource name: "%s".'
         % recommendation_response.results[0].resource_name
     )
+    # [END apply_recommendation]
 
 
 if __name__ == "__main__":

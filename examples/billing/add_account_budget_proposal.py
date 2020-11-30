@@ -25,6 +25,7 @@ import sys
 import google.ads.google_ads.client
 
 
+# [START add_account_budget_proposal]
 def main(client, customer_id, billing_setup_id):
     account_budget_proposal_service = client.get_service(
         "AccountBudgetProposalService"
@@ -91,6 +92,7 @@ def main(client, customer_id, billing_setup_id):
         'Created account budget proposal "%s".'
         % account_budget_proposal_response.result.resource_name
     )
+    # [END add_account_budget_proposal]
 
 
 if __name__ == "__main__":

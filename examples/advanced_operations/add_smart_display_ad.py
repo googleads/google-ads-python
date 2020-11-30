@@ -119,6 +119,7 @@ def main(
     )
 
 
+# [START add_smart_display_ad_3]
 def _create_budget(client, customer_id):
     campaign_budget_operation = client.get_type(
         "CampaignBudgetOperation", version="v6"
@@ -141,8 +142,10 @@ def _create_budget(client, customer_id):
         return campaign_budget_response.results[0].resource_name
     except GoogleAdsException as ex:
         _handle_google_ads_exception(ex)
+        # [END add_smart_display_ad_3]
 
 
+# [START add_smart_display_ad_4]
 def _create_smart_display_campaign(client, customer_id, budget_resource_name):
     campaign_operation = client.get_type("CampaignOperation", version="v6")
     campaign = campaign_operation.create
@@ -179,8 +182,10 @@ def _create_smart_display_campaign(client, customer_id, budget_resource_name):
         return campaign_response.results[0].resource_name
     except GoogleAdsException as ex:
         _handle_google_ads_exception(ex)
+        # [END add_smart_display_ad_4]
 
 
+# [START add_smart_display_ad]
 def _create_ad_group(client, customer_id, campaign_resource_name):
     ad_group_operation = client.get_type("AdGroupOperation", version="v6")
     ad_group = ad_group_operation.create
@@ -198,8 +203,10 @@ def _create_ad_group(client, customer_id, campaign_resource_name):
         return ad_group_response.results[0].resource_name
     except GoogleAdsException as ex:
         _handle_google_ads_exception(ex)
+        # [END add_smart_display_ad]
 
 
+# [START add_smart_display_ad_2]
 def _upload_image_asset(
     client, customer_id, image_url, image_width, image_height
 ):
@@ -238,8 +245,10 @@ def _upload_image_asset(
         return mutate_asset_response.results[0].asset.id
     except GoogleAdsException as ex:
         _handle_google_ads_exception(ex)
+        # [END add_smart_display_ad_2]
 
 
+# [START add_smart_display_ad_1]
 def _create_responsive_display_ad(
     client,
     customer_id,
@@ -284,6 +293,7 @@ def _create_responsive_display_ad(
         )
     except GoogleAdsException as ex:
         _handle_google_ads_exception(ex)
+        # [END add_smart_display_ad_1]
 
 
 def _handle_google_ads_exception(exception):

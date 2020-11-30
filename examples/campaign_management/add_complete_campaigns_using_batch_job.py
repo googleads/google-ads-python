@@ -129,6 +129,7 @@ def _create_batch_job_operation(client):
     return batch_job_operation
 
 
+# [START add_complete_campaigns_using_batch_job]
 def _create_batch_job(batch_job_service, customer_id, batch_job_operation):
     """Creates a batch job for the specified customer ID.
 
@@ -148,8 +149,10 @@ def _create_batch_job(batch_job_service, customer_id, batch_job_operation):
         return resource_name
     except GoogleAdsException as exception:
         _handle_google_ads_exception(exception)
+        # [END add_complete_campaigns_using_batch_job]
 
 
+# [START add_complete_campaigns_using_batch_job_1]
 def _add_all_batch_job_operations(batch_job_service, operations, resource_name):
     """Adds all mutate operations to the batch job.
 
@@ -180,6 +183,7 @@ def _add_all_batch_job_operations(batch_job_service, operations, resource_name):
         )
     except GoogleAdsException as exception:
         _handle_google_ads_exception(exception)
+        # [END add_complete_campaigns_using_batch_job_1]
 
 
 def _build_all_operations(client, customer_id):
@@ -548,6 +552,7 @@ def _build_ad_group_ad_operation(client, ad_group_operation):
     return ad_group_ad_operation
 
 
+# [START add_complete_campaigns_using_batch_job_2]
 def _run_batch_job(batch_job_service, resource_name):
     """Runs the batch job for executing all uploaded mutate operations.
 
@@ -566,8 +571,10 @@ def _run_batch_job(batch_job_service, resource_name):
         return response
     except GoogleAdsException as exception:
         _handle_google_ads_exception(exception)
+        # [END add_complete_campaigns_using_batch_job_2]
 
 
+# [START add_complete_campaigns_using_batch_job_3]
 def _poll_batch_job(operations_response, event):
     """Polls the server until the batch job execution finishes.
 
@@ -592,8 +599,10 @@ def _poll_batch_job(operations_response, event):
     # synchronous interface that uses the Operation.result method.
     # See: https://googleapis.dev/python/google-api-core/latest/operation.html
     operations_response.add_done_callback(_done_callback)
+    # [END add_complete_campaigns_using_batch_job_3]
 
 
+# [START add_complete_campaigns_using_batch_job_4]
 def _fetch_and_print_results(batch_job_service, resource_name):
     """Prints all the results from running the batch job.
 
@@ -620,6 +629,7 @@ def _fetch_and_print_results(batch_job_service, resource_name):
             f"Batch job #{batch_job_result.operation_index} "
             f'has a status "{status}" and response type "{result}"'
         )
+        # [END add_complete_campaigns_using_batch_job_4]
 
 
 if __name__ == "__main__":

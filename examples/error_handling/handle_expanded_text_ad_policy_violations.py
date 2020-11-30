@@ -118,6 +118,7 @@ def _create_expanded_text_ad(
     return ad_group_ad_operation, ignorable_policy_topics
 
 
+# [START handle_expanded_text_ad_policy_violations]
 def _fetch_ignorable_policy_topics(client, google_ads_exception):
     """Collects all ignorable policy topics to be sent for exemption request.
 
@@ -169,8 +170,10 @@ def _fetch_ignorable_policy_topics(client, google_ads_exception):
                 # - policy_topic_entry.constraints
 
     return ignorable_policy_topics
+    # [END handle_expanded_text_ad_policy_violations]
 
 
+# [START handle_expanded_text_ad_policy_violations_1]
 def _request_exemption(
     customer_id,
     ad_group_ad_service_client,
@@ -201,6 +204,7 @@ def _request_exemption(
         f"'{response.results[0].resource_name}' for policy violation "
         "exemption."
     )
+    # [END handle_expanded_text_ad_policy_violations_1]
 
 
 if __name__ == "__main__":

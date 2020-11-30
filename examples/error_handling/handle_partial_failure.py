@@ -56,6 +56,7 @@ def main(client, customer_id, campaign_id):
         print_results(client, ad_group_response)
 
 
+# [START handle_partial_failure]
 def create_ad_groups(client, customer_id, campaign_id):
     """Creates three Ad Groups, two of which intentionally generate errors.
 
@@ -97,8 +98,10 @@ def create_ad_groups(client, customer_id, campaign_id):
     return ad_group_service.mutate_ad_groups(
         customer_id, ad_group_operations, partial_failure=True
     )
+    # [END handle_partial_failure]
 
 
+# [START handle_partial_failure_1]
 def is_partial_failure_error_present(response):
     """Checks whether a response message has a partial failure error.
 
@@ -117,8 +120,10 @@ def is_partial_failure_error_present(response):
     partial_failure = getattr(response, "partial_failure_error", None)
     code = getattr(partial_failure, "code", None)
     return code != 0
+    # [END handle_partial_failure_1]
 
 
+# [START handle_partial_failure_2]
 def print_results(client, response):
     """Prints partial failure errors and success messages from a response.
 
@@ -202,6 +207,7 @@ def print_results(client, response):
                 message.resource_name
             )
         )
+        # [END handle_partial_failure_2]
 
 
 if __name__ == "__main__":

@@ -24,6 +24,7 @@ from google.ads.google_ads.client import GoogleAdsClient
 from google.ads.google_ads.errors import GoogleAdsException
 
 
+# [START get_keyword_stats]
 def main(client, customer_id):
     ga_service = client.get_service("GoogleAdsService", version="v6")
 
@@ -87,6 +88,7 @@ def main(client, customer_id):
                 for field_path_element in error.location.field_path_elements:
                     print(f"\t\tOn field: {field_path_element.field_name}")
         sys.exit(1)
+        # [END get_keyword_stats]
 
 
 if __name__ == "__main__":

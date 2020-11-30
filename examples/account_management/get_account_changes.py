@@ -27,6 +27,7 @@ import google.ads.google_ads.client
 ADS_PAGE_SIZE = 1000
 
 
+# [START get_account_changes]
 def resource_name_for_resource_type(resource_type, row):
     """Return the resource name for the resource type.
 
@@ -53,6 +54,7 @@ def resource_name_for_resource_type(resource_type, row):
     elif resource_type == "CAMPAIGN_CRITERION":
         resource_name = row.change_status.campaign_criterion
     return resource_name
+    # [END get_account_changes]
 
 
 def main(client, customer_id):

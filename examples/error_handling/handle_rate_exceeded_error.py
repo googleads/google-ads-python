@@ -86,6 +86,10 @@ def main(client, customer_id, ad_group_id):
                             sleep(retry_seconds)
                             has_rate_exceeded_error = True
                             retry_count += 1
+                            # Here exponential backoff is employed to ensure
+                            # the account doesn't get rate limited by making
+                            # too many requests too quickly. This increases the
+                            # time to wait between requests by a factor of 2.
                             retry_seconds *= 2
                             break
                     # Bubbles up when there is not a RateExceededError

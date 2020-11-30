@@ -49,7 +49,7 @@ def main(client, customer_id, ad_group_id):
         customer_id: A valid customer account ID.
         ad_group_id: The ad group ID to validate keywords from.
     """
-    quota_error_enum = client.get_type("QuotaErrorEnum", version="v5")
+    quota_error_enum = client.get_type("QuotaErrorEnum", version="v6")
     resource_exhausted = quota_error_enum.RESOURCE_EXHAUSTED
     temp_resource_exhausted = quota_error_enum.RESOURCE_TEMPORARILY_EXHAUSTED
 
@@ -122,14 +122,14 @@ def _create_ad_group_criterion_operations(
     Returns:
         A list of AdGroupCriterionOperation instances.
     """
-    ad_group_service = client.get_service("AdGroupService", version="v5")
-    status = client.get_type("AdGroupCriterionStatusEnum").ENABLED
-    match_type = client.get_type("KeywordMatchTypeEnum").EXACT
+    ad_group_service = client.get_service("AdGroupService", version="v6")
+    status = client.get_type("AdGroupCriterionStatusEnum", version="v6").ENABLED
+    match_type = client.get_type("KeywordMatchTypeEnum", version="v6").EXACT
 
     operations = []
     for i in range(NUM_KEYWORDS):
         ad_group_criterion_operation = client.get_type(
-            "AdGroupCriterionOperation", version="v5"
+            "AdGroupCriterionOperation", version="v6"
         )
         ad_group_criterion = ad_group_criterion_operation.create
         ad_group_criterion.ad_group = ad_group_service.ad_group_path(
@@ -157,7 +157,7 @@ def _request_mutate_and_display_result(client, customer_id, operations):
         operations: a list of AdGroupCriterionOperation instances.
     """
     ad_group_criterion_service = client.get_service(
-        "AdGroupCriterionService", version="v5"
+        "AdGroupCriterionService", version="v6"
     )
 
     response = ad_group_criterion_service.mutate_ad_group_criteria(

@@ -32,6 +32,7 @@ class ConfigTest(FileTestCase):
         self.path_to_private_key_file = "/test/path/to/config.json"
         self.delegated_account = "delegated@account.com"
         self.endpoint = "www.testendpoint.com"
+        self.configuration_file_path = "/usr/test/path/google-ads.yaml"
 
     def test_load_from_yaml_file(self):
         file_path = os.path.join(os.path.expanduser("~"), "google-ads.yaml")
@@ -211,9 +212,43 @@ class ConfigTest(FileTestCase):
         with mock.patch("os.environ", environ):
             self.assertRaises(ValueError, config.load_from_env)
 
+    def test_load_from_env_config_file_path(self):
+        """Should delegate to load_from_yaml_file method."""
+        environ = {
+            "GOOGLE_ADS_CONFIGURATION_FILE_PATH": self.configuration_file_path
+        }
+
+        with mock.patch("os.environ", environ):
+            with mock.patch.object(
+                config,
+                "load_from_yaml_file",
+                # Return basic config to pass validation.
+                return_value={"developer_token": "1234"}
+            ) as spy:
+                config.load_from_env()
+                spy.assert_called_once()
+
+    def test_load_from_env_config_file_path_added_vars(self):
+        """Should use config from yaml file not from env for redundant vars."""
+        env_dev_token = "abcdefg"
+        yaml_dev_token = "123456"
+        environ = {
+            "GOOGLE_ADS_CONFIGURATION_FILE_PATH": self.configuration_file_path,
+            "GOOGLE_ADS_DEVELOPER_TOKEN": env_dev_token
+        }
+
+        with mock.patch("os.environ", environ), mock.patch.object(
+            config,
+            "load_from_yaml_file",
+            # Return basic config to pass validation.
+            return_value={"developer_token": yaml_dev_token}
+        ) as spy:
+            result = config.load_from_env()
+            self.assertEqual(result["developer_token"], yaml_dev_token)
+
+
     def test_validate_dict(self):
         config_data = {"invalid": "config"}
-
         self.assertRaises(ValueError, config.validate_dict, config_data)
 
     def test_validate_dict(self):

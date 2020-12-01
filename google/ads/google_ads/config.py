@@ -20,7 +20,7 @@ import yaml
 
 _ENV_PREFIX = "GOOGLE_ADS_"
 _REQUIRED_KEYS = ("developer_token",)
-_OPTIONAL_KEYS = ("login_customer_id", "endpoint", "logging")
+_OPTIONAL_KEYS = ("login_customer_id", "endpoint", "logging", "configuration_file_path")
 _OAUTH2_INSTALLED_APP_KEYS = ("client_id", "client_secret", "refresh_token")
 _OAUTH2_SERVICE_ACCOUNT_KEYS = ("path_to_private_key_file", "delegated_account")
 _KEYS_ENV_VARIABLES_MAP = {
@@ -196,6 +196,9 @@ def load_from_env():
         for key, env_variable in _KEYS_ENV_VARIABLES_MAP.items()
         if env_variable in os.environ
     }
+    if "configuration_file_path" in config_data.keys():
+        return load_from_yaml_file(config_data["configuration_file_path"])
+
     if "logging" in config_data.keys():
         try:
             config_data["logging"] = json.loads(config_data["logging"])

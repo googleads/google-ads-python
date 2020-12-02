@@ -77,6 +77,7 @@ def _config_parser_decorator(func):
     def parser_wrapper(*args, **kwargs):
         config_dict = func(*args, **kwargs)
         parsed_config = convert_login_customer_id_to_str(config_dict)
+        parsed_config = convert_linked_customer_id_to_str(parsed_config)
         return parsed_config
 
     return parser_wrapper
@@ -104,6 +105,30 @@ def validate_dict(config_data):
     if "login_customer_id" in config_data:
         validate_login_customer_id(config_data["login_customer_id"])
 
+    if "linked_customer_id" in config_data:
+        validate_linked_customer_id(config_data["linked_customer_id"])
+
+
+def _validate_customer_id(customer_id, id_type):
+    """Validates a customer ID.
+
+    Args:
+        customer_id: a str from config indicating a login customer ID or
+            linked customer ID.
+        id_type: a str of the type of customer ID, either "login" or "linked".
+
+    Raises:
+        ValueError: If the customer ID is not an int in the
+            range 0 - 9999999999.
+    """
+    if customer_id is not None:
+        if not customer_id.isdigit() or len(customer_id) != 10:
+            raise ValueError(
+                f"The specified {id_type} customer ID is invalid. "
+                "It must be a ten digit number represented "
+                'as a string, i.e. "1234567890"'
+            )
+
 
 def validate_login_customer_id(login_customer_id):
     """Validates a login customer ID.
@@ -115,13 +140,20 @@ def validate_login_customer_id(login_customer_id):
         ValueError: If the login customer ID is not an int in the
             range 0 - 9999999999.
     """
-    if login_customer_id is not None:
-        if not login_customer_id.isdigit() or len(login_customer_id) != 10:
-            raise ValueError(
-                "The specified login customer ID is invalid. "
-                "It must be a ten digit number represented "
-                'as a string, i.e. "1234567890"'
-            )
+    _validate_customer_id(login_customer_id, "login")
+
+
+def validate_linked_customer_id(linked_customer_id):
+    """Validates a linked customer ID.
+
+    Args:
+        linked_customer_id: a str from config indicating a linked customer ID.
+
+    Raises:
+        ValueError: If the linked customer ID is not an int in the
+            range 0 - 9999999999.
+    """
+    _validate_customer_id(linked_customer_id, "linked")
 
 
 @_config_validation_decorator
@@ -298,5 +330,26 @@ def convert_login_customer_id_to_str(config_data):
 
     if login_customer_id:
         config_data["login_customer_id"] = str(login_customer_id)
+
+    return config_data
+
+
+def convert_linked_customer_id_to_str(config_data):
+    """Parses a config dict's linked_customer_id attr value to a str.
+
+    Like many values from YAML it's possible for linked_customer_id to
+    either be a str or an int. Since we actually run validations on this
+    value before making requests it's important to parse it to a str.
+
+    Args:
+        config_data: A config dict object.
+
+    Returns:
+        The same config dict object with a mutated linked_customer_id attr.
+    """
+    linked_customer_id = config_data.get("linked_customer_id")
+
+    if linked_customer_id:
+        config_data["linked_customer_id"] = str(linked_customer_id)
 
     return config_data

@@ -29,7 +29,7 @@ class ConfigTest(FileTestCase):
         self.client_secret = "client_secret_987654321"
         self.refresh_token = "refresh"
         self.login_customer_id = "1234567890"
-        self.linked_customer_id = "098321321"
+        self.linked_customer_id = "0983213218"
         self.path_to_private_key_file = "/test/path/to/config.json"
         self.json_key_file_path = "/another/test/path/to/config.json"
         self.delegated_account = "delegated@account.com"
@@ -336,6 +336,11 @@ class ConfigTest(FileTestCase):
         config_data["login_customer_id"] = "123-456-5789"
         self.assertRaises(ValueError, config.validate_dict, config_data)
 
+    def test_validate_dict_with_invalid_linked_cid(self):
+        config_data = {key: "test" for key in config._REQUIRED_KEYS}
+        config_data["linked_customer_id"] = "123-456-5789"
+        self.assertRaises(ValueError, config.validate_dict, config_data)
+
     def test_validate_dict_with_valid_login_cid(self):
         config_data = {key: "test" for key in config._REQUIRED_KEYS}
         config_data["login_customer_id"] = "1234567893"
@@ -347,13 +352,32 @@ class ConfigTest(FileTestCase):
                 "{}".format(ex)
             )
 
+    def test_validate_dict_with_valid_linked_cid(self):
+        config_data = {key: "test" for key in config._REQUIRED_KEYS}
+        config_data["linked_customer_id"] = "1234567893"
+        try:
+            config.validate_dict(config_data)
+        except ValueError as ex:
+            self.fail(
+                "test_validate_dict_with_linked_cid failed unexpectedly: "
+                "{}".format(ex)
+            )
+
     def test_validate_login_customer_id_invalid(self):
         self.assertRaises(
             ValueError, config.validate_login_customer_id, "123-456-7890"
         )
 
+    def test_validate_linked_customer_id_invalid(self):
+        self.assertRaises(
+            ValueError, config.validate_linked_customer_id, "123-456-7890"
+        )
+
     def test_validate_login_customer_id_too_short(self):
         self.assertRaises(ValueError, config.validate_login_customer_id, "123")
+
+    def test_validate_linked_customer_id_too_short(self):
+        self.assertRaises(ValueError, config.validate_linked_customer_id, "123")
 
     def test_get_oauth2_installed_app_keys(self):
         self.assertEqual(
@@ -384,4 +408,23 @@ class ConfigTest(FileTestCase):
         config_data = {"not_login_customer_id": 1234567890}
         self.assertEqual(
             config.convert_login_customer_id_to_str(config_data), config_data
+        )
+
+    def test_convert_linked_customer_id_to_str_with_int(self):
+        config_data = {"linked_customer_id": 1234567890}
+        expected = {"linked_customer_id": "1234567890"}
+        self.assertEqual(
+            config.convert_linked_customer_id_to_str(config_data), expected
+        )
+
+    def test_parse_linked_customer_id_with_str(self):
+        config_data = {"linked_customer_id": "1234567890"}
+        self.assertEqual(
+            config.convert_linked_customer_id_to_str(config_data), config_data
+        )
+
+    def test_parse_linked_customer_id_with_none(self):
+        config_data = {"not_linked_customer_id": 1234567890}
+        self.assertEqual(
+            config.convert_linked_customer_id_to_str(config_data), config_data
         )

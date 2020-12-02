@@ -96,6 +96,37 @@ class ConfigTest(FileTestCase):
         self.assertEqual(result["client_secret"], self.client_secret)
         self.assertEqual(result["refresh_token"], self.refresh_token)
 
+    def test_load_from_yaml_file_from_env_var(self):
+        """Should load from env var path if defined."""
+        env_var_path = os.path.expanduser("/test/from/env/var")
+        file_path = os.path.join(env_var_path, "google-ads.yaml")
+        mock_dev_token = "from env var path"
+        self.fs.create_file(
+            file_path,
+            contents=yaml.safe_dump({"developer_token": mock_dev_token}),
+        )
+
+        environ = {"GOOGLE_ADS_CONFIGURATION_FILE_PATH": file_path}
+        with mock.patch("os.environ", environ):
+            result = config.load_from_yaml_file()
+            self.assertEqual(result["developer_token"], mock_dev_token)
+
+    def test_load_from_yaml_file_with_path_and_env_var(self):
+        """Should load from given path if both are defined."""
+        given_path = os.path.expanduser("/test/given/path")
+        env_var_path = os.path.expanduser("/test/from/env/var")
+        file_path = os.path.join(given_path, "google-ads.yaml")
+        mock_dev_token = "from env var path"
+        self.fs.create_file(
+            file_path,
+            contents=yaml.safe_dump({"developer_token": mock_dev_token}),
+        )
+
+        environ = {"GOOGLE_ADS_CONFIGURATION_FILE_PATH": file_path}
+        with mock.patch("os.environ", environ):
+            result = config.load_from_yaml_file(path=file_path)
+            self.assertEqual(result["developer_token"], mock_dev_token)
+
     def test_load_from_yaml_file_login_cid_int(self):
         login_cid_int = 1234567890
         file_path = os.path.join(os.path.expanduser("~"), "google-ads.yaml")

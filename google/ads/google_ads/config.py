@@ -28,9 +28,9 @@ _OPTIONAL_KEYS = (
     "login_customer_id",
     "endpoint",
     "logging",
-    "configuration_file_path",
     "linked_customer_id",
 )
+_CONFIG_FILE_PATH_KEY = ("configuration_file_path",)
 _OAUTH2_INSTALLED_APP_KEYS = ("client_id", "client_secret", "refresh_token")
 _OAUTH2_SERVICE_ACCOUNT_KEYS = ("path_to_private_key_file", "delegated_account")
 # These keys are additional environment variables that can be used to specify
@@ -42,6 +42,7 @@ _KEYS_ENV_VARIABLES_MAP = {
     + list(_OPTIONAL_KEYS)
     + list(_OAUTH2_INSTALLED_APP_KEYS)
     + list(_OAUTH2_SERVICE_ACCOUNT_KEYS)
+    + list(_CONFIG_FILE_PATH_KEY)
     + list(_REDUNDANT_KEYS)
 }
 
@@ -173,7 +174,16 @@ def load_from_yaml_file(path=None):
         IOError: If the configuration file can't be loaded.
     """
     if path is None:
-        path = os.path.join(os.path.expanduser("~"), "google-ads.yaml")
+        # If no path is specified then we check for the environment variable
+        # that may define the path. If that is not defined then we use the
+        # default path.
+        path_from_env_var = os.environ.get(
+            _ENV_PREFIX + _CONFIG_FILE_PATH_KEY[0].upper()
+        )
+        if path_from_env_var:
+            path = path_from_env_var
+        else:
+            path = os.path.join(os.path.expanduser("~"), "google-ads.yaml")
 
     if not os.path.isabs(path):
         path = os.path.expanduser(path)
@@ -238,7 +248,7 @@ def load_from_env():
         ValueError: If the configuration
     """
     config_data = {
-        key: os.environ[env_variable]
+        key: os.environ.get(env_variable)
         for key, env_variable in _KEYS_ENV_VARIABLES_MAP.items()
         if env_variable in os.environ
     }

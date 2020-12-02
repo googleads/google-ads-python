@@ -74,6 +74,7 @@ def main(client, customer_id, campaign_id, feed_item_ids):
     fm = protobuf_helpers.field_mask(None, campaign_extension_setting)
     campaign_extension_setting_operation.update_mask.CopyFrom(fm)
 
+    # Update the campaign extension settings
     try:
         response = campaign_extension_setting_service.mutate_campaign_extension_settings(
             customer_id, [campaign_extension_setting_operation]

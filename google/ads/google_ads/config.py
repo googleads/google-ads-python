@@ -20,15 +20,24 @@ import yaml
 
 _ENV_PREFIX = "GOOGLE_ADS_"
 _REQUIRED_KEYS = ("developer_token",)
-_OPTIONAL_KEYS = ("login_customer_id", "endpoint", "logging", "configuration_file_path")
+_OPTIONAL_KEYS = (
+    "login_customer_id",
+    "endpoint",
+    "logging",
+    "configuration_file_path",
+)
 _OAUTH2_INSTALLED_APP_KEYS = ("client_id", "client_secret", "refresh_token")
 _OAUTH2_SERVICE_ACCOUNT_KEYS = ("path_to_private_key_file", "delegated_account")
+# These keys are additional environment variables that can be used to specify
+# some of the above configuration values.
+_REDUNDANT_KEYS = ("json_key_file_path",)
 _KEYS_ENV_VARIABLES_MAP = {
     key: _ENV_PREFIX + key.upper()
     for key in list(_REQUIRED_KEYS)
     + list(_OPTIONAL_KEYS)
     + list(_OAUTH2_INSTALLED_APP_KEYS)
     + list(_OAUTH2_SERVICE_ACCOUNT_KEYS)
+    + list(_REDUNDANT_KEYS)
 }
 
 
@@ -196,16 +205,30 @@ def load_from_env():
         for key, env_variable in _KEYS_ENV_VARIABLES_MAP.items()
         if env_variable in os.environ
     }
-    if "configuration_file_path" in config_data.keys():
+
+    specified_variable_names = config_data.keys()
+
+    # If configuration_file_path is set by the environment then configuration
+    # is retrieved from the yaml file specified in the given path.
+    if "configuration_file_path" in specified_variable_names:
         return load_from_yaml_file(config_data["configuration_file_path"])
 
-    if "logging" in config_data.keys():
+    if "logging" in specified_variable_names:
         try:
             config_data["logging"] = json.loads(config_data["logging"])
         except json.JSONDecodeError:
             raise ValueError(
                 "GOOGLE_ADS_LOGGING env variable should be in JSON format."
             )
+
+    # json_key_file_path is an alternate key that can be used in place of
+    # path_to_private_key_file. It will always override the latter, but the
+    # name will persist for compatibility purposes.
+    if "json_key_file_path" in specified_variable_names:
+        config_data["path_to_private_key_file"] = config_data[
+            "json_key_file_path"
+        ]
+        del config_data["json_key_file_path"]
 
     return config_data
 

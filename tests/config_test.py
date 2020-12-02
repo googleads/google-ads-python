@@ -30,6 +30,7 @@ class ConfigTest(FileTestCase):
         self.refresh_token = "refresh"
         self.login_customer_id = "1234567890"
         self.path_to_private_key_file = "/test/path/to/config.json"
+        self.json_key_file_path = "/another/test/path/to/config.json"
         self.delegated_account = "delegated@account.com"
         self.endpoint = "www.testendpoint.com"
         self.configuration_file_path = "/usr/test/path/google-ads.yaml"
@@ -223,7 +224,7 @@ class ConfigTest(FileTestCase):
                 config,
                 "load_from_yaml_file",
                 # Return basic config to pass validation.
-                return_value={"developer_token": "1234"}
+                return_value={"developer_token": "1234"},
             ) as spy:
                 config.load_from_env()
                 spy.assert_called_once()
@@ -234,18 +235,38 @@ class ConfigTest(FileTestCase):
         yaml_dev_token = "123456"
         environ = {
             "GOOGLE_ADS_CONFIGURATION_FILE_PATH": self.configuration_file_path,
-            "GOOGLE_ADS_DEVELOPER_TOKEN": env_dev_token
+            "GOOGLE_ADS_DEVELOPER_TOKEN": env_dev_token,
         }
 
         with mock.patch("os.environ", environ), mock.patch.object(
             config,
             "load_from_yaml_file",
             # Return basic config to pass validation.
-            return_value={"developer_token": yaml_dev_token}
+            return_value={"developer_token": yaml_dev_token},
         ) as spy:
             result = config.load_from_env()
             self.assertEqual(result["developer_token"], yaml_dev_token)
 
+    def test_load_from_env_redundant_file_path(self):
+        """JSON_KEY_FILE_PATH takes precedent if both exist."""
+        environ = {
+            "GOOGLE_ADS_DEVELOPER_TOKEN": self.developer_token,
+            "GOOGLE_ADS_CLIENT_ID": self.client_id,
+            "GOOGLE_ADS_CLIENT_SECRET": self.client_secret,
+            "GOOGLE_ADS_REFRESH_TOKEN": self.refresh_token,
+            # The two below variables represent the same key, and this test
+            # checks that only JSON_KEY_FILE_PATH takes precedent and overwrites
+            # the path_to_private_key_file_path in the returned object.
+            "GOOGLE_ADS_PATH_TO_PRIVATE_KEY_FILE": self.path_to_private_key_file,
+            "GOOGLE_ADS_JSON_KEY_FILE_PATH": self.json_key_file_path,
+            "GOOGLE_ADS_DELEGATED_ACCOUNT": self.delegated_account,
+        }
+
+        with mock.patch("os.environ", environ):
+            result = config.load_from_env()
+            self.assertEqual(
+                result["path_to_private_key_file"], self.json_key_file_path
+            )
 
     def test_validate_dict(self):
         config_data = {"invalid": "config"}

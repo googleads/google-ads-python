@@ -34,6 +34,7 @@ class ConfigTest(FileTestCase):
         self.delegated_account = "delegated@account.com"
         self.endpoint = "www.testendpoint.com"
         self.configuration_file_path = "/usr/test/path/google-ads.yaml"
+        self.impersonated_email = "impersonated@account.com"
 
     def test_load_from_yaml_file(self):
         file_path = os.path.join(os.path.expanduser("~"), "google-ads.yaml")
@@ -167,7 +168,9 @@ class ConfigTest(FileTestCase):
         config_data = 111
         self.assertRaises(ValueError, config.load_from_dict, config_data)
 
-    def test_load_from_env(self):
+    @mock.patch.object(config, "_logger", mock.Mock())
+    @mock.patch("logging.config.dictConfig")
+    def test_load_from_env(self, config_spy):
         environ = {
             "GOOGLE_ADS_DEVELOPER_TOKEN": self.developer_token,
             "GOOGLE_ADS_CLIENT_ID": self.client_id,
@@ -196,7 +199,9 @@ class ConfigTest(FileTestCase):
                     "delegated_account": self.delegated_account,
                 },
             )
+            config_spy.assert_called_once()
 
+    @mock.patch.object(config, "_logger", mock.Mock())
     def test_load_from_env_missing_required_key(self):
         # environ is missing required developer_token key
         environ = {
@@ -247,25 +252,40 @@ class ConfigTest(FileTestCase):
             result = config.load_from_env()
             self.assertEqual(result["developer_token"], yaml_dev_token)
 
+    @mock.patch.object(config, "_logger", mock.Mock())
     def test_load_from_env_redundant_file_path(self):
         """JSON_KEY_FILE_PATH takes precedent if both exist."""
         environ = {
             "GOOGLE_ADS_DEVELOPER_TOKEN": self.developer_token,
-            "GOOGLE_ADS_CLIENT_ID": self.client_id,
-            "GOOGLE_ADS_CLIENT_SECRET": self.client_secret,
-            "GOOGLE_ADS_REFRESH_TOKEN": self.refresh_token,
             # The two below variables represent the same key, and this test
-            # checks that only JSON_KEY_FILE_PATH takes precedent and overwrites
-            # the path_to_private_key_file_path in the returned object.
+            # checks that JSON_KEY_FILE_PATH takes precedent and overwrites
+            # the path_to_private_key_file_path key in the returned dict.
             "GOOGLE_ADS_PATH_TO_PRIVATE_KEY_FILE": self.path_to_private_key_file,
             "GOOGLE_ADS_JSON_KEY_FILE_PATH": self.json_key_file_path,
-            "GOOGLE_ADS_DELEGATED_ACCOUNT": self.delegated_account,
         }
 
         with mock.patch("os.environ", environ):
             result = config.load_from_env()
             self.assertEqual(
                 result["path_to_private_key_file"], self.json_key_file_path
+            )
+
+    @mock.patch.object(config, "_logger", mock.Mock())
+    def test_load_from_env_redundant_delegated_email(self):
+        """IMPERSONATED_EMAIL takes precedent if both exist."""
+        environ = {
+            "GOOGLE_ADS_DEVELOPER_TOKEN": self.developer_token,
+            # The two below variables represent the same key, and this test
+            # checks that IMPERSONATED_EMAIL takes precedent and overwrites
+            # the delegate_account key in the returned dict.
+            "GOOGLE_ADS_DELEGATED_ACCOUNT": self.delegated_account,
+            "GOOGLE_ADS_IMPERSONATED_EMAIL": self.impersonated_email,
+        }
+
+        with mock.patch("os.environ", environ):
+            result = config.load_from_env()
+            self.assertEqual(
+                result["delegated_account"], self.impersonated_email
             )
 
     def test_validate_dict(self):

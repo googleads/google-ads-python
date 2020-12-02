@@ -13,10 +13,14 @@
 # limitations under the License.
 """A set of functions to help load configuration from various locations."""
 
-import json
 import functools
+import json
+import logging.config
 import os
 import yaml
+
+
+_logger = logging.getLogger(__name__)
 
 _ENV_PREFIX = "GOOGLE_ADS_"
 _REQUIRED_KEYS = ("developer_token",)
@@ -30,7 +34,7 @@ _OAUTH2_INSTALLED_APP_KEYS = ("client_id", "client_secret", "refresh_token")
 _OAUTH2_SERVICE_ACCOUNT_KEYS = ("path_to_private_key_file", "delegated_account")
 # These keys are additional environment variables that can be used to specify
 # some of the above configuration values.
-_REDUNDANT_KEYS = ("json_key_file_path",)
+_REDUNDANT_KEYS = ("json_key_file_path", "impersonated_email")
 _KEYS_ENV_VARIABLES_MAP = {
     key: _ENV_PREFIX + key.upper()
     for key in list(_REQUIRED_KEYS)
@@ -216,10 +220,25 @@ def load_from_env():
     if "logging" in specified_variable_names:
         try:
             config_data["logging"] = json.loads(config_data["logging"])
+            logging.config.dictConfig(config_data["logging"])
         except json.JSONDecodeError:
             raise ValueError(
                 "GOOGLE_ADS_LOGGING env variable should be in JSON format."
             )
+
+    if "path_to_private_key_file" in specified_variable_names:
+        _logger.warning(
+            "The 'GOOGLE_ADS_PATH_TO_PRIVATE_KEY_FILE' environment "
+            "variable is deprecated. Please use "
+            "'GOOGLE_ADS_JSON_KEY_FILE_PATH' instead."
+        )
+
+    if "delegated_account" in specified_variable_names:
+        _logger.warning(
+            "The 'GOOGLE_ADS_DELEGATED_ACCOUNT' environment "
+            "variable is deprecated. Please use "
+            "'GOOGLE_ADS_IMPERSONATED_EMAIL' instead."
+        )
 
     # json_key_file_path is an alternate key that can be used in place of
     # path_to_private_key_file. It will always override the latter, but the
@@ -229,6 +248,13 @@ def load_from_env():
             "json_key_file_path"
         ]
         del config_data["json_key_file_path"]
+
+    # impersonated_email is an alternate key that can be used in placed of
+    # delegated_account. It will always override the latter, but the name will
+    # persist for compatibility purposes.
+    if "impersonated_email" in specified_variable_names:
+        config_data["delegated_account"] = config_data["impersonated_email"]
+        del config_data["impersonated_email"]
 
     return config_data
 

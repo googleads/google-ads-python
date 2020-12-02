@@ -67,6 +67,7 @@ def main(client, customer_id, campaign_id, feed_item_ids):
         customer_id, composite_id
     )
     campaign_extension_setting.resource_name = resource_name
+    # Replace the current extension feed items with the given list 
     campaign_extension_setting.extension_feed_items[:] = extension_feed_items
 
     # Produce a field mask enumerating the changed fields

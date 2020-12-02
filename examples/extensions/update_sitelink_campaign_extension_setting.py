@@ -12,10 +12,13 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
-"""Updates the sitelink campaign extension setting to replace its extension feed
-items. Note that this doesn't completely remove your old extension feed items.
-See https://developers.google.com/google-ads/api/docs/extensions/extension-settings/overview
-for details."""
+"""Updates the sitelink campaign extension setting.
+
+Replaces the extension feed items of the sitelink campaign extension setting
+with the given feed item IDs. Note that this doesn't completely remove your
+old extension feed items. See https://developers.google.com/google-ads/api/docs/extensions/extension-settings/overview
+for details.
+"""
 
 
 import argparse
@@ -59,15 +62,16 @@ def main(client, customer_id, campaign_id, feed_item_ids):
     composite_id = ResourceName.format_composite(
         # the docs don't make it clear that this should reference the name of the extension type and not the enum
         # e.g. just extension_type_enum.ExtensionType.SITELINK won't work, but the string 'SITELINK' will
-        campaign_id, extension_type_enum.ExtensionType.Name(
+        campaign_id,
+        extension_type_enum.ExtensionType.Name(
             extension_type_enum.ExtensionType.SITELINK
-        )
+        ),
     )
     resource_name = campaign_extension_setting_service.campaign_extension_setting_path(
         customer_id, composite_id
     )
     campaign_extension_setting.resource_name = resource_name
-    # Replace the current extension feed items with the given list 
+    # Replace the current extension feed items with the given list
     campaign_extension_setting.extension_feed_items[:] = extension_feed_items
 
     # Produce a field mask enumerating the changed fields
@@ -116,7 +120,7 @@ if __name__ == "__main__":
         help="The Google Ads customer ID",
     )
     parser.add_argument(
-        "--campaign_id", type=str, required=True, help="The campaign ID"
+        "-i", "--campaign_id", type=str, required=True, help="The campaign ID"
     )
     parser.add_argument(
         "-f",

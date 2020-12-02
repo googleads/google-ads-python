@@ -24,6 +24,7 @@ class MetadataInterceptorTest(TestCase):
     def setUp(self):
         self.mock_developer_token = "1234567890"
         self.mock_login_customer_id = "0987654321"
+        self.mock_linked_customer_id = "5555555555"
         super(MetadataInterceptorTest, self).setUp()
 
     def test_init(self):
@@ -51,6 +52,16 @@ class MetadataInterceptorTest(TestCase):
 
         self.assertEqual(interceptor.login_customer_id_meta, None)
 
+    def test_init_no_linked_customer_id(self):
+        interceptor = MetadataInterceptor(self.mock_developer_token, None, None)
+
+        self.assertEqual(
+            interceptor.developer_token_meta,
+            ("developer-token", self.mock_developer_token),
+        )
+
+        self.assertEqual(interceptor.linked_customer_id_meta, None)
+
     def test_update_client_call_details_metadata(self):
         interceptor = MetadataInterceptor(
             self.mock_developer_token, self.mock_login_customer_id
@@ -67,7 +78,9 @@ class MetadataInterceptorTest(TestCase):
 
     def test_intercept_unary_unary(self):
         interceptor = MetadataInterceptor(
-            self.mock_developer_token, self.mock_login_customer_id
+            self.mock_developer_token,
+            self.mock_login_customer_id,
+            self.mock_linked_customer_id,
         )
 
         mock_continuation = mock.Mock(return_value=None)
@@ -92,6 +105,7 @@ class MetadataInterceptorTest(TestCase):
                     mock_client_call_details.metadata[0],
                     interceptor.developer_token_meta,
                     interceptor.login_customer_id_meta,
+                    interceptor.linked_customer_id_meta,
                 ],
             )
 
@@ -99,7 +113,9 @@ class MetadataInterceptorTest(TestCase):
 
     def test_intercept_unary_stream(self):
         interceptor = MetadataInterceptor(
-            self.mock_developer_token, self.mock_login_customer_id
+            self.mock_developer_token,
+            self.mock_login_customer_id,
+            self.mock_linked_customer_id,
         )
 
         mock_continuation = mock.Mock(return_value=None)
@@ -124,6 +140,7 @@ class MetadataInterceptorTest(TestCase):
                     mock_client_call_details.metadata[0],
                     interceptor.developer_token_meta,
                     interceptor.login_customer_id_meta,
+                    interceptor.linked_customer_id_meta,
                 ],
             )
 

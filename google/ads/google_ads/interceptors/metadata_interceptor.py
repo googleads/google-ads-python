@@ -29,11 +29,25 @@ class MetadataInterceptor(
 ):
     """An interceptor that appends custom metadata to requests."""
 
-    def __init__(self, developer_token, login_customer_id):
+    def __init__(
+        self, developer_token, login_customer_id, linked_customer_id=None
+    ):
+        """Initialization method for this class.
+
+        Args:
+            developer_token: a str developer token.
+            login_customer_id: a str specifying a login customer ID.
+            linked_customer_id: a str specifying a linked customer ID.
+        """
         self.developer_token_meta = ("developer-token", developer_token)
         self.login_customer_id_meta = (
             ("login-customer-id", login_customer_id)
             if login_customer_id
+            else None
+        )
+        self.linked_customer_id_meta = (
+            ("linked-customer-id", linked_customer_id)
+            if linked_customer_id
             else None
         )
 
@@ -81,6 +95,9 @@ class MetadataInterceptor(
 
         if self.login_customer_id_meta:
             metadata.append(self.login_customer_id_meta)
+
+        if self.linked_customer_id_meta:
+            metadata.append(self.linked_customer_id_meta)
 
         client_call_details = self._update_client_call_details_metadata(
             client_call_details, metadata

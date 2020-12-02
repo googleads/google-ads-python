@@ -29,6 +29,7 @@ class ConfigTest(FileTestCase):
         self.client_secret = "client_secret_987654321"
         self.refresh_token = "refresh"
         self.login_customer_id = "1234567890"
+        self.linked_customer_id = "098321321"
         self.path_to_private_key_file = "/test/path/to/config.json"
         self.json_key_file_path = "/another/test/path/to/config.json"
         self.delegated_account = "delegated@account.com"
@@ -117,6 +118,23 @@ class ConfigTest(FileTestCase):
         self.assertEqual(result["client_id"], self.client_id)
         self.assertEqual(result["client_secret"], self.client_secret)
         self.assertEqual(result["refresh_token"], self.refresh_token)
+
+    def test_load_from_yaml_file_linked_cid(self):
+        file_path = os.path.join(os.path.expanduser("~"), "google-ads.yaml")
+        self.fs.create_file(
+            file_path,
+            contents=yaml.safe_dump(
+                {
+                    "linked_customer_id": self.linked_customer_id,
+                    "developer_token": self.developer_token,
+                }
+            ),
+        )
+
+        result = config.load_from_yaml_file()
+
+        self.assertEqual(result["developer_token"], self.developer_token)
+        self.assertEqual(result["linked_customer_id"], self.linked_customer_id)
 
     def test_parse_yaml_document_to_dict(self):
         yaml_doc = (
@@ -233,6 +251,20 @@ class ConfigTest(FileTestCase):
             ) as spy:
                 config.load_from_env()
                 spy.assert_called_once()
+
+    def test_load_from_env_linked_cid(self):
+        """Should load linked CID from environment when specified"""
+        environ = {
+            "GOOGLE_ADS_DEVELOPER_TOKEN": self.developer_token,
+            "GOOGLE_ADS_LINKED_CUSTOMER_ID": self.linked_customer_id,
+        }
+
+        with mock.patch("os.environ", environ):
+            results = config.load_from_env()
+            self.assertEqual(results["developer_token"], self.developer_token)
+            self.assertEqual(
+                results["linked_customer_id"], self.linked_customer_id
+            )
 
     def test_load_from_env_config_file_path_added_vars(self):
         """Should use config from yaml file not from env for redundant vars."""

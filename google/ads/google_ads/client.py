@@ -71,6 +71,7 @@ class GoogleAdsClient(object):
             "endpoint": config_data.get("endpoint"),
             "login_customer_id": config_data.get("login_customer_id"),
             "logging_config": config_data.get("logging"),
+            "linked_customer_id": config_data.get("linked_customer_id"),
         }
 
     @classmethod
@@ -207,6 +208,7 @@ class GoogleAdsClient(object):
         endpoint=None,
         login_customer_id=None,
         logging_config=None,
+        linked_customer_id=None,
     ):
         """Initializer for the GoogleAdsClient.
 
@@ -216,6 +218,7 @@ class GoogleAdsClient(object):
             endpoint: a str specifying an optional alternative API endpoint.
             login_customer_id: a str specifying a login customer ID.
             logging_config: a dict specifying logging config options.
+            linked_customer_id: a str specifying a linked customer ID.
         """
         if logging_config:
             logging.config.dictConfig(logging_config)
@@ -224,6 +227,7 @@ class GoogleAdsClient(object):
         self.developer_token = developer_token
         self.endpoint = endpoint
         self.login_customer_id = login_customer_id
+        self.linked_customer_id = linked_customer_id
 
     def get_service(self, name, version=_DEFAULT_VERSION, interceptors=None):
         """Returns a service client instance for the specified service_name.
@@ -278,7 +282,11 @@ class GoogleAdsClient(object):
         )
 
         interceptors = interceptors + [
-            MetadataInterceptor(self.developer_token, self.login_customer_id),
+            MetadataInterceptor(
+                self.developer_token,
+                self.login_customer_id,
+                self.linked_customer_id,
+            ),
             LoggingInterceptor(_logger, version, endpoint),
             ExceptionInterceptor(version),
         ]

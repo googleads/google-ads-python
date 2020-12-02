@@ -29,6 +29,7 @@ _OPTIONAL_KEYS = (
     "endpoint",
     "logging",
     "configuration_file_path",
+    "linked_customer_id",
 )
 _OAUTH2_INSTALLED_APP_KEYS = ("client_id", "client_secret", "refresh_token")
 _OAUTH2_SERVICE_ACCOUNT_KEYS = ("path_to_private_key_file", "delegated_account")
@@ -220,6 +221,9 @@ def load_from_env():
     if "logging" in specified_variable_names:
         try:
             config_data["logging"] = json.loads(config_data["logging"])
+            # The logger is configured here in case deprecation warnings need
+            # to be logger further down in this method. The logger is
+            # otherwise configured by the GoogleAdsClient class.
             logging.config.dictConfig(config_data["logging"])
         except json.JSONDecodeError:
             raise ValueError(

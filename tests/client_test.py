@@ -59,6 +59,7 @@ class GoogleAdsClientTest(FileTestCase):
         self.login_customer_id = "1234567890"
         self.path_to_private_key_file = "/test/path/to/config.json"
         self.delegated_account = "delegated@account.com"
+        self.linked_customer_id = "0984320943"
 
     def test_get_client_kwargs_login_customer_id(self):
         config = {
@@ -67,6 +68,7 @@ class GoogleAdsClientTest(FileTestCase):
             "client_secret": self.client_secret,
             "refresh_token": self.refresh_token,
             "login_customer_id": self.login_customer_id,
+            "linked_customer_id": self.linked_customer_id,
         }
         mock_credentials_instance = mock.Mock()
 
@@ -84,6 +86,35 @@ class GoogleAdsClientTest(FileTestCase):
                     "endpoint": None,
                     "login_customer_id": self.login_customer_id,
                     "logging_config": None,
+                    "linked_customer_id": self.linked_customer_id,
+                },
+            )
+
+    def test_get_client_kwargs_linked_customer_id(self):
+        config = {
+            "developer_token": self.developer_token,
+            "client_id": self.client_id,
+            "client_secret": self.client_secret,
+            "refresh_token": self.refresh_token,
+            "linked_customer_id": self.linked_customer_id,
+        }
+        mock_credentials_instance = mock.Mock()
+
+        with mock.patch.object(
+            Client.oauth2,
+            "get_installed_app_credentials",
+            return_value=mock_credentials_instance,
+        ):
+            result = Client.GoogleAdsClient._get_client_kwargs(config)
+            self.assertEqual(
+                result,
+                {
+                    "credentials": mock_credentials_instance,
+                    "developer_token": self.developer_token,
+                    "endpoint": None,
+                    "login_customer_id": None,
+                    "logging_config": None,
+                    "linked_customer_id": self.linked_customer_id,
                 },
             )
 
@@ -111,6 +142,35 @@ class GoogleAdsClientTest(FileTestCase):
                     "endpoint": None,
                     "login_customer_id": None,
                     "logging_config": None,
+                    "linked_customer_id": None,
+                },
+            )
+
+    def test_get_client_kwargs_linked_customer_id_as_None(self):
+        config = {
+            "developer_token": self.developer_token,
+            "client_id": self.client_id,
+            "client_secret": self.client_secret,
+            "refresh_token": self.refresh_token,
+            "linked_customer_id": None,
+        }
+        mock_credentials_instance = mock.Mock()
+
+        with mock.patch.object(
+            Client.oauth2,
+            "get_installed_app_credentials",
+            return_value=mock_credentials_instance,
+        ):
+            result = Client.GoogleAdsClient._get_client_kwargs(config)
+            self.assertEqual(
+                result,
+                {
+                    "credentials": mock_credentials_instance,
+                    "developer_token": self.developer_token,
+                    "endpoint": None,
+                    "linked_customer_id": None,
+                    "logging_config": None,
+                    "login_customer_id": None,
                 },
             )
 
@@ -137,6 +197,7 @@ class GoogleAdsClientTest(FileTestCase):
                     "endpoint": None,
                     "login_customer_id": None,
                     "logging_config": None,
+                    "linked_customer_id": None,
                 },
             )
 
@@ -165,6 +226,7 @@ class GoogleAdsClientTest(FileTestCase):
                     "endpoint": endpoint,
                     "login_customer_id": None,
                     "logging_config": None,
+                    "linked_customer_id": None,
                 },
             )
 
@@ -192,6 +254,7 @@ class GoogleAdsClientTest(FileTestCase):
                 endpoint=None,
                 login_customer_id=None,
                 logging_config=None,
+                linked_customer_id=None,
             )
 
     def test_load_from_storage(self):
@@ -225,6 +288,7 @@ class GoogleAdsClientTest(FileTestCase):
                 endpoint=None,
                 login_customer_id=None,
                 logging_config=None,
+                linked_customer_id=None,
             )
 
     def test_load_from_storage_login_cid_int(self):
@@ -260,6 +324,7 @@ class GoogleAdsClientTest(FileTestCase):
                 endpoint=None,
                 login_customer_id=str(login_cid),
                 logging_config=None,
+                linked_customer_id=None,
             )
 
     def test_load_from_storage_custom_path(self):
@@ -288,6 +353,7 @@ class GoogleAdsClientTest(FileTestCase):
                 endpoint=None,
                 login_customer_id=None,
                 logging_config=None,
+                linked_customer_id=None,
             )
 
     def test_load_from_storage_file_not_found(self):
@@ -342,6 +408,7 @@ class GoogleAdsClientTest(FileTestCase):
                 endpoint=None,
                 login_customer_id=None,
                 logging_config=None,
+                linked_customer_id=None,
             )
 
     def test_load_from_storage_service_account_no_delegated_account(self):

@@ -52,15 +52,13 @@ def main(client, customer_id, campaign_id, feed_item_ids):
     )
 
     campaign_extension_setting = campaign_extension_setting_operation.update
-    extension_feed_items = map(
-        lambda feed_item_id: extension_feed_item_service.extension_feed_item_path(
-            customer_id, feed_item_id
-        ),
-        feed_item_ids,
-    )
     # Replace the current extension feed items with the given list
-    campaign_extension_setting.extension_feed_items.extend(extension_feed_items)
-    
+    campaign_extension_setting.extension_feed_items.extend([
+        extension_feed_item_service.extension_feed_item_path(
+            customer_id, feed_item_id
+        ) for feed_item_id in feed_item_ids
+    ])
+
     extension_type_enum = client.get_type("ExtensionTypeEnum", version="v6")
     composite_id = ResourceName.format_composite(
         campaign_id,

@@ -16,7 +16,8 @@
 
 Replaces the extension feed items of the sitelink campaign extension setting
 with the given feed item IDs. Note that this doesn't completely remove your
-old extension feed items. See https://developers.google.com/google-ads/api/docs/extensions/extension-settings/overview
+old extension feed items. See
+https://developers.google.com/google-ads/api/docs/extensions/extension-settings/overview
 for details.
 """
 
@@ -25,7 +26,6 @@ import argparse
 import sys
 
 from google.api_core import protobuf_helpers
-import google.api_core.path_template
 
 from google.ads.google_ads.client import GoogleAdsClient
 from google.ads.google_ads.errors import GoogleAdsException
@@ -51,17 +51,18 @@ def main(client, customer_id, campaign_id, feed_item_ids):
         "ExtensionFeedItemService", version="v6"
     )
 
+    campaign_extension_setting = campaign_extension_setting_operation.update
     extension_feed_items = map(
         lambda feed_item_id: extension_feed_item_service.extension_feed_item_path(
             customer_id, feed_item_id
         ),
         feed_item_ids,
     )
-    campaign_extension_setting = campaign_extension_setting_operation.update
+    # Replace the current extension feed items with the given list
+    campaign_extension_setting.extension_feed_items[:] = extension_feed_items
+    
     extension_type_enum = client.get_type("ExtensionTypeEnum", version="v6")
     composite_id = ResourceName.format_composite(
-        # the docs don't make it clear that this should reference the name of the extension type and not the enum
-        # e.g. just extension_type_enum.ExtensionType.SITELINK won't work, but the string 'SITELINK' will
         campaign_id,
         extension_type_enum.ExtensionType.Name(
             extension_type_enum.ExtensionType.SITELINK
@@ -71,8 +72,6 @@ def main(client, customer_id, campaign_id, feed_item_ids):
         customer_id, composite_id
     )
     campaign_extension_setting.resource_name = resource_name
-    # Replace the current extension feed items with the given list
-    campaign_extension_setting.extension_feed_items[:] = extension_feed_items
 
     # Produce a field mask enumerating the changed fields
     fm = protobuf_helpers.field_mask(None, campaign_extension_setting)

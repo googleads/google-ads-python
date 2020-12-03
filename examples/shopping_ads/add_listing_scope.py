@@ -52,9 +52,30 @@ def main(client, customer_id, campaign_id):
     # must be met for a product to be included in a campaign.
     # A typical listing scope might only have a few dimensions. This example
     # demonstrates a range of different dimensions you could use.
-    _build_listing_scope_dimensions(
-        client, campaign_criterion.listing_scope.dimensions
+    dimensions = campaign_criterion.listing_scope.dimensions
+
+    product_brand_dimension = dimensions.add()
+    product_brand_dimension.product_brand.value = "google"
+
+    product_custom_attribute_dimension = dimensions.add()
+    product_custom_attribute_dimension.index = client.get_type(
+        "ProductCustomAttributeIndexEnum", version="v6"
+    ).INDEX0
+    product_custom_attribute_dimension.value = "top_selling_products"
+
+    product_type_level_enum = client.get_type(
+        "ProductTypeLevelEnum", version="v6"
     )
+
+    product_type_dimension_1 = dimensions.add()
+    product_type = product_type_dimension_1.product_type
+    product_type.level = product_type_level_enum.LEVEL1
+    product_type.value = "electronics"
+
+    product_type_dimension_2 = dimensions.add()
+    product_type = product_type_dimension_2.product_type
+    product_type.level = product_type_level_enum.LEVEL2
+    product_type.value = "smartphones"
 
     campaign_criterion_service = client.get_service(
         "CampaignCriterionService", version="v6"
@@ -82,35 +103,6 @@ def main(client, customer_id, campaign_id):
     )
     for campaign_criterion in campaign_criterion_response.results:
         print(campaign_criterion.resource_name)
-
-
-def _build_listing_scope_dimensions(client, dimensions):
-    product_brand_dimension = dimensions.add()
-    product_brand_dimension.product_brand.value = "google"
-
-    product_custom_attribute_index_enum = client.get_type(
-        "ProductCustomAttributeIndexEnum", version="v6"
-    )
-
-    dimensions.append(
-        product_custom_attribute_dimension.product_custom_attribute
-    )
-    product_custom_attribute.index = product_custom_attribute_index_enum.INDEX0
-    product_custom_attribute = "top_selling_products"
-
-    product_type_level_enum = client.get_type(
-        "ProductTypeLevelEnum", version="v6"
-    )
-
-    product_type_dimension_1 = dimensions.add()
-    product_type = product_type_dimension_1.product_type
-    product_type.level = product_type_level_enum.LEVEL1
-    product_type.value = "electronics"
-
-    product_type_dimension_2 = dimensions.add()
-    product_type = product_type_dimension_2.product_type
-    product_type.level = product_type_level_enum.LEVEL2
-    product_type.value = "smartphones"
 
 
 if __name__ == "__main__":

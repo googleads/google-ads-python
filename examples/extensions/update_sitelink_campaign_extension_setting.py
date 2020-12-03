@@ -59,7 +59,7 @@ def main(client, customer_id, campaign_id, feed_item_ids):
         feed_item_ids,
     )
     # Replace the current extension feed items with the given list
-    campaign_extension_setting.extension_feed_items[:] = extension_feed_items
+    campaign_extension_setting.extension_feed_items.extend(extension_feed_items)
     
     extension_type_enum = client.get_type("ExtensionTypeEnum", version="v6")
     composite_id = ResourceName.format_composite(

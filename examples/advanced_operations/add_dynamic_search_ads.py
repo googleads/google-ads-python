@@ -94,6 +94,7 @@ def create_budget(client, customer_id):
     return resource_name
 
 
+# [START add_dynamic_search_ads]
 def create_campaign(client, customer_id, budget_resource_name):
     """Creates a Dynamic Search Ad Campaign under the given customer ID.
 
@@ -139,10 +140,12 @@ def create_campaign(client, customer_id, budget_resource_name):
     resource_name = response.results[0].resource_name
 
     print(f'Created campaign with resource_name: "{resource_name}"')
+    # [END add_dynamic_search_ads]
 
     return resource_name
 
 
+# [START add_dynamic_search_ads_1]
 def create_ad_group(client, customer_id, campaign_resource_name):
     """Creates a Dynamic Search Ad Group under the given Campaign.
 
@@ -183,10 +186,12 @@ def create_ad_group(client, customer_id, campaign_resource_name):
     resource_name = response.results[0].resource_name
 
     print(f'Created Ad Group with resource_name: "{resource_name}"')
+    # [END add_dynamic_search_ads_1]
 
     return resource_name
 
 
+# [START add_dynamic_search_ads_2]
 def create_expanded_dsa(client, customer_id, ad_group_resource_name):
     """Creates a dynamic search ad under the given ad group.
 
@@ -219,6 +224,7 @@ def create_expanded_dsa(client, customer_id, ad_group_resource_name):
     resource_name = response.results[0].resource_name
 
     print(f'Created Ad Group Ad with resource_name: "{resource_name}"')
+    # [END add_dynamic_search_ads_2]
 
 
 def add_webpage_criterion(client, customer_id, ad_group_resource_name):

@@ -120,7 +120,11 @@ if __name__ == "__main__":
         help="The Google Ads customer ID",
     )
     parser.add_argument(
-        "-i", "--campaign_id", type=str, required=True, help="The campaign ID"
+        "-i",
+        "--campaign_id",
+        type=str,
+        required=True,
+        help="The campaign ID",
     )
     parser.add_argument(
         "-f",

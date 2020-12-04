@@ -182,8 +182,10 @@ def _get_location_extension_feeds(client, customer_id):
         # PlacesLocationFeedData field is set (Location extensions feeds) or
         # AffiliateLocationFeedData field is set (Affiliate location extension
         # feeds)
-        row.feed for row in search_results if row.feed.places_location_feed_data
-            or row.feed.affiliate_location_feed_data
+        row.feed
+        for row in search_results
+        if row.feed.places_location_feed_data
+        or row.feed.affiliate_location_feed_data
     ]
 
 
@@ -466,4 +468,3 @@ if __name__ == "__main__":
     main(
         google_ads_client, args.customer_id, args.chain_id, args.campaign_id,
     )
-

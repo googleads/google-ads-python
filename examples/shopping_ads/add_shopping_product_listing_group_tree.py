@@ -161,7 +161,7 @@ def main(client, customer_id, ad_group_id, replace_existing_tree):
         # Biddable Unit node: (Brand CoolBrand node)
         # * Brand: CoolBrand
         # * CPC bid: $0.90
-        brand_dimension_info.product_brand = "CoolBrand"
+        brand_dimension_info.product_brand.value = "CoolBrand"
         operations.append(
             _create_listing_group_unit_biddable(
                 client,
@@ -176,7 +176,7 @@ def main(client, customer_id, ad_group_id, replace_existing_tree):
         # Biddable Unit node: (Brand CheapBrand node)
         # * Brand: CheapBrand
         # * CPC bid: $0.01
-        brand_dimension_info.product_brand = "CheapBrand"
+        brand_dimension_info.product_brand.value = "CheapBrand"
         operations.append(
             _create_listing_group_unit_biddable(
                 client,

@@ -159,7 +159,7 @@ def _create_lead_form_extension(
         customer_id: The Google Ads customer ID.
         campaign_id: The ID for a Campaign belonging to the given customer.
     """
-    campaign_service = client.get_type("CampaignService", version="v6")
+    campaign_service = client.get_service("CampaignService", version="v6")
     campaign_asset_service = client.get_service(
         "CampaignAssetService", version="v6"
     )

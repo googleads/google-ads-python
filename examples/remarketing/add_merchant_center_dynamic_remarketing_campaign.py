@@ -28,6 +28,7 @@ from google.ads.google_ads.client import GoogleAdsClient
 from google.ads.google_ads.errors import GoogleAdsException
 
 
+# [START add_merchant_center_dynamic_remarketing_campaign]
 def main(
     client,
     customer_id,
@@ -75,6 +76,7 @@ def main(
                 for field_path_element in error.location.field_path_elements:
                     print(f"\t\tOn field: {field_path_element.field_name}")
         sys.exit(1)
+        # [END add_merchant_center_dynamic_remarketing_campaign]
 
 
 def _create_campaign(

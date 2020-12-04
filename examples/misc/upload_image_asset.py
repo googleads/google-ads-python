@@ -25,6 +25,7 @@ from google.ads.google_ads.client import GoogleAdsClient
 from google.ads.google_ads.errors import GoogleAdsException
 
 
+# [START upload_image_asset]
 def main(client, customer_id):
     """Main method, to run this code example as a standalone application."""
 
@@ -69,6 +70,7 @@ def main(client, customer_id):
                 for field_path_element in error.location.field_path_elements:
                     print(f"\t\tOn field: {field_path_element.field_name}")
         sys.exit(1)
+        # [END upload_image_asset]
 
 
 if __name__ == "__main__":

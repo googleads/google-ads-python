@@ -17,7 +17,7 @@ authenticating user has access to.
 
 The customer IDs retrieved from the resource names can be used to set
 the login-customer-id configuration. For more information see this
-documentation: https://developers.google.com/google-ads/api/docs/concepts/call-structure#login-customer-id
+documentation: https://developers.google.com/google-ads/api/docs/concepts/call-structure#cid
 """
 
 
@@ -26,6 +26,7 @@ import sys
 import google.ads.google_ads.client
 
 
+# [START list_accessible_customers]
 def main(client):
     customer_service = client.get_service("CustomerService", version="v6")
 
@@ -48,6 +49,7 @@ def main(client):
                 for field_path_element in error.location.field_path_elements:
                     print("\t\tOn field: %s" % field_path_element.field_name)
         sys.exit(1)
+        # [END list_accessible_customers]
 
 
 if __name__ == "__main__":

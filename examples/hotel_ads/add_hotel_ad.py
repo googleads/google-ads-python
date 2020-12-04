@@ -89,6 +89,7 @@ def add_budget(client, customer_id):
     return budget_resource_name
 
 
+# [START add_hotel_ad_1]
 def add_hotel_ad(client, customer_id, ad_group_resource_name):
     ad_group_ad_service = client.get_service("AdGroupAdService", version="v6")
 
@@ -128,8 +129,10 @@ def add_hotel_ad(client, customer_id, ad_group_resource_name):
     print("Created hotel ad %s." % ad_group_ad_resource_name)
 
     return ad_group_resource_name
+    # [END add_hotel_ad_1]
 
 
+# [START add_hotel_ad_2]
 def add_hotel_ad_group(client, customer_id, campaign_resource_name):
     ad_group_service = client.get_service("AdGroupService", version="v6")
 
@@ -168,8 +171,10 @@ def add_hotel_ad_group(client, customer_id, campaign_resource_name):
     )
 
     return ad_group_resource_name
+    # [END add_hotel_ad_2]
 
 
+# [START add_hotel_ad_3]
 def add_hotel_campaign(
     client,
     customer_id,
@@ -179,6 +184,7 @@ def add_hotel_campaign(
 ):
     campaign_service = client.get_service("CampaignService", version="v6")
 
+    # [START add_hotel_ad]
     # Create campaign.
     campaign_operation = client.get_type("CampaignOperation", version="v6")
     campaign = campaign_operation.create
@@ -206,6 +212,7 @@ def add_hotel_campaign(
     # Set the campaign network options. Only Google Search is allowed for hotel
     # campaigns.
     campaign.network_settings.target_google_search = True
+    # [END add_hotel_ad]
 
     # Add the campaign.
     try:
@@ -232,6 +239,7 @@ def add_hotel_campaign(
     )
 
     return campaign_resource_name
+    # [END add_hotel_ad_3]
 
 
 if __name__ == "__main__":

@@ -55,6 +55,7 @@ def main(client, customer_id, campaign_id, keyword_text, location_id):
         print(f'Added campaign criterion "{result.resource_name}".')
 
 
+# [START add_campaign_targeting_criteria]
 def create_location_op(client, customer_id, campaign_id, location_id):
     campaign_service = client.get_service("CampaignService", version="v6")
     geo_target_constant_service = client.get_service(
@@ -79,6 +80,7 @@ def create_location_op(client, customer_id, campaign_id, location_id):
     )
 
     return campaign_criterion_operation
+    # [END add_campaign_targeting_criteria]
 
 
 def create_negative_keyword_op(client, customer_id, campaign_id, keyword_text):
@@ -102,6 +104,7 @@ def create_negative_keyword_op(client, customer_id, campaign_id, keyword_text):
     return campaign_criterion_operation
 
 
+# [START add_campaign_targeting_criteria_1]
 def create_proximity_op(client, customer_id, campaign_id):
     campaign_service = client.get_service("CampaignService", version="v6")
 
@@ -124,6 +127,7 @@ def create_proximity_op(client, customer_id, campaign_id):
     ).MILES
 
     return campaign_criterion_operation
+    # [END add_campaign_targeting_criteria_1]
 
 
 if __name__ == "__main__":

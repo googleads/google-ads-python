@@ -31,6 +31,7 @@ def main(client, customer_id):
     )
     campaign_service = client.get_service("CampaignService", version="v6")
 
+    # [START use_portfolio_bidding_strategy]
     # Create a budget, which can be shared by multiple campaigns.
     campaign_budget_operation = client.get_type(
         "CampaignBudgetOperation", version="v6"
@@ -59,11 +60,13 @@ def main(client, customer_id):
                 for field_path_element in error.location.field_path_elements:
                     print("\t\tOn field: %s" % field_path_element.field_name)
         sys.exit(1)
+        # [END use_portfolio_bidding_strategy]
 
     campaign_budget_id = campaign_budget_response.results[0].resource_name
 
     print('Budget "%s" was created.' % campaign_budget_id)
 
+    # [START use_portfolio_bidding_strategy_1]
     # Create a portfolio bidding strategy.
     bidding_strategy_operation = client.get_type(
         "BiddingStrategyOperation", version="v6"
@@ -93,7 +96,9 @@ def main(client, customer_id):
     bidding_strategy_id = bidding_strategy_response.results[0].resource_name
 
     print('Portfolio bidding strategy "%s" was created.' % bidding_strategy_id)
+    # [END use_portfolio_bidding_strategy_1]
 
+    # [START use_portfolio_bidding_strategy_2]
     # Create campaign.
     campaign_operation = client.get_type("CampaignOperation", version="v6")
     campaign = campaign_operation.create
@@ -117,6 +122,7 @@ def main(client, customer_id):
     campaign.network_settings.target_search_network = True
     campaign.network_settings.target_content_network = False
     campaign.network_settings.target_partner_search_network = False
+    # [END use_portfolio_bidding_strategy_2]
 
     # Add the campaign.
     try:

@@ -66,6 +66,7 @@ def main(client, customer_id, ad_group_ids):
     )
 
 
+# [START add_ad_customizer]
 def _create_add_customizer_feed(client, customer_id, feed_name):
     """Creates a feed to be used for ad customization.
 
@@ -110,8 +111,10 @@ def _create_add_customizer_feed(client, customer_id, feed_name):
         return resource_name
     except GoogleAdsException as ex:
         _handle_google_ads_exception(ex)
+        # [END add_ad_customizer]
 
 
+# [START add_ad_customizer_1]
 def _get_feed_attributes(client, customer_id, feed_resource_name):
     """Retrieves attributes for a feed.
 
@@ -152,8 +155,10 @@ def _get_feed_attributes(client, customer_id, feed_resource_name):
         print(f"\t{name} with id {feed_attr_id} and type {feed_type}.")
 
     return feed_details
+    # [END add_ad_customizer_1]
 
 
+# [START add_ad_customizer_2]
 def _create_ad_customizer_mapping(
     client, customer_id, ad_customizer_feed_resource_name, feed_details,
 ):
@@ -210,8 +215,10 @@ def _create_ad_customizer_mapping(
             )
     except GoogleAdsException as ex:
         _handle_google_ads_exception(ex)
+        # [END add_ad_customizer_2]
 
 
+# [START add_ad_customizer_3]
 def _create_feed_items(
     client,
     customer_id,
@@ -264,8 +271,10 @@ def _create_feed_items(
         return [feed_item.resource_name for feed_item in response.results]
     except GoogleAdsException as ex:
         _handle_google_ads_exception(ex)
+        # [END add_ad_customizer_3]
 
 
+# [START add_ad_customizer_4]
 def _create_feed_item_operation(
     client,
     name,
@@ -309,8 +318,10 @@ def _create_feed_item_operation(
     )
 
     return feed_item_op
+    # [END add_ad_customizer_4]
 
 
+# [START add_ad_customizer_5]
 def _create_feed_item_targets(
     client, customer_id, ad_group_ids, feed_item_resource_names
 ):
@@ -354,8 +365,10 @@ def _create_feed_item_targets(
             )
         except GoogleAdsException as ex:
             _handle_google_ads_exception(ex)
+            # [END add_ad_customizer_5]
 
 
+# [START add_ad_customizer_6]
 def _create_ads_with_customizations(
     client, customer_id, ad_group_ids, feed_name
 ):
@@ -405,6 +418,7 @@ def _create_ads_with_customizations(
             print(f"Added an ad with resource name {ad.resource_name}")
     except GoogleAdsException as ex:
         _handle_google_ads_exception(ex)
+        # [END add_ad_customizer_6]
 
 
 def _handle_google_ads_exception(exception):

@@ -86,7 +86,7 @@ def main(client, customer_id, campaign_id):
 
 def _build_listing_scope_dimensions(client, dimensions):
     product_brand_dimension = dimensions.add()
-    product_brand_dimension.product_brand = "google"
+    product_brand_dimension.product_brand.value = "google"
 
     product_custom_attribute_index_enum = client.get_type(
         "ProductCustomAttributeIndexEnum", version="v6"

@@ -28,6 +28,7 @@ from google.ads.google_ads.errors import GoogleAdsException
 _DEFAULT_PAGE_SIZE = 1000
 
 
+# [START get_campaigns_by_label]
 def main(client, customer_id, label_id, page_size):
     """Demonstrates how to retrieve all campaigns by a given label ID.
 
@@ -66,6 +67,7 @@ def main(client, customer_id, label_id, page_size):
             )
     except GoogleAdsException as ex:
         print_error_and_exit_process(ex)
+        # [END get_campaigns_by_label]
 
 
 def print_error_and_exit_process(error):

@@ -46,6 +46,7 @@ def _show_plannable_locations(client):
         )
 
 
+# [START forecast_reach_2]
 def _show_plannable_products(client, location_id):
     """Lists plannable products for a given location.
 
@@ -83,8 +84,10 @@ def _show_plannable_products(client, location_id):
         print("Devices:")
         for device in product_metadata.plannable_targeting.devices:
             print(f"\t- {device_enum.Device.Name(device.type)}")
+            # [END forecast_reach_2]
 
 
+# [START forecast_reach]
 def _request_reach_curve(
     client, customer_id, product_mix, location_id, currency_code
 ):
@@ -169,8 +172,10 @@ def _request_reach_curve(
                 ],
             ]
         )
+        # [END forecast_reach]
 
 
+# [START forecast_reach_3]
 def forecast_manual_mix(
     client, customer_id, location_id, currency_code, budget
 ):
@@ -201,8 +206,10 @@ def forecast_manual_mix(
     _request_reach_curve(
         client, customer_id, product_mix, location_id, currency_code
     )
+    # [END forecast_reach_3]
 
 
+# [START forecast_reach_1]
 def forecast_suggested_mix(
     client, customer_id, location_id, currency_code, budget
 ):
@@ -245,6 +252,7 @@ def forecast_suggested_mix(
     _request_reach_curve(
         client, customer_id, product_mix, location_id, currency_code
     )
+    # [END forecast_reach_1]
 
 
 def main(client, customer_id):

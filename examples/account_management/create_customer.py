@@ -28,6 +28,7 @@ from datetime import datetime
 import google.ads.google_ads.client
 
 
+# [START create_customer]
 def main(client, manager_customer_id):
     customer_service = client.get_service("CustomerService", version="v6")
     customer = client.get_type("Customer", version="v6")
@@ -69,6 +70,7 @@ def main(client, manager_customer_id):
                 for field_path_element in error.location.field_path_elements:
                     print("\t\tOn field: %s" % field_path_element.field_name)
         sys.exit(1)
+        # [END create_customer]
 
 
 if __name__ == "__main__":

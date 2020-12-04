@@ -131,9 +131,9 @@ def _add_campaign_budget(client, customer_id):
     campaign_budget_response = campaign_budget_service.mutate_campaign_budgets(
         customer_id, [campaign_budget_operation]
     )
-    campaign_budget_resource_name = (
-        campaign_budget_response.results[0].resource_name
-    )
+    campaign_budget_resource_name = campaign_budget_response.results[
+        0
+    ].resource_name
     print(
         "Added a smart shopping campaign budget with resource name: "
         f"'{campaign_budget_resource_name}'."
@@ -319,14 +319,12 @@ def _add_shopping_listing_group(client, customer_id, ad_group_resource_name):
 
     # Ad the listing group criterion, then display and return the resulting
     # ad group criterion's resource name.
-    ad_group_criterion_response = (
-        ad_group_criterion_service.mutate_ad_group_criteria(
-            customer_id, [ad_group_criterion_operation]
-        )
+    ad_group_criterion_response = ad_group_criterion_service.mutate_ad_group_criteria(
+        customer_id, [ad_group_criterion_operation]
     )
-    ad_group_criterion_resource_name = (
-        ad_group_criterion_response.results[0].resource_name
-    )
+    ad_group_criterion_resource_name = ad_group_criterion_response.results[
+        0
+    ].resource_name
     print(
         "Added an ad group criterion containing a listing group with resource "
         f"name: '{ad_group_criterion_resource_name}'."

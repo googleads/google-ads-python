@@ -25,6 +25,7 @@ from google.ads.google_ads.client import GoogleAdsClient
 from google.ads.google_ads.errors import GoogleAdsException
 
 
+# [START get_ad_group_criterion_cpc_bid_simulations]
 def main(client, customer_id, ad_group_id):
     google_ads_service = client.get_service("GoogleAdsService", version="v6")
 
@@ -83,6 +84,7 @@ def main(client, customer_id, ad_group_id):
                 for field_path_element in error.location.field_path_elements:
                     print(f"\t\tOn field: {field_path_element.field_name}")
         sys.exit(1)
+        # [END get_ad_group_criterion_cpc_bid_simulations]
 
 
 if __name__ == "__main__":

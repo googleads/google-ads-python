@@ -110,10 +110,6 @@ def _create_lead_form_asset(client, customer_id):
     )
     lead_form_asset.fields.append(lead_form_field_4)
 
-    lead_form_field_5 = client.get_type("LeadFormField", version="v6")
-    lead_form_field_5.input_type = input_type_enum.PHONE_NUMBER
-    lead_form_asset.fields.append(lead_form_field_5)
-
     # Optional: You can also specify a background image asset.
     # To upload an asset, see misc/upload_image.py.
     # lead_form_asset.background_image_asset = "INSERT_IMAGE_ASSET_HERE"

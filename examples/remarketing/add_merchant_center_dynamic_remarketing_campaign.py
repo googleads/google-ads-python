@@ -76,7 +76,6 @@ def main(
                 for field_path_element in error.location.field_path_elements:
                     print(f"\t\tOn field: {field_path_element.field_name}")
         sys.exit(1)
-        # [END add_merchant_center_dynamic_remarketing_campaign]
 
 
 def _create_campaign(
@@ -306,6 +305,7 @@ def _attach_user_list(
         "Created ad group criterion with resource name "
         f"'{ad_group_criterion_response.results[0].resource_name}'."
     )
+    # [END add_merchant_center_dynamic_remarketing_campaign]
 
 
 if __name__ == "__main__":

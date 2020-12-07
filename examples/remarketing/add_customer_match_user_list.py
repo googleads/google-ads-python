@@ -192,7 +192,6 @@ def _add_users_to_customer_match_user_list(
         "Offline user data job with resource name "
         f"'{offline_user_data_job_resource_name}' has finished."
     )
-    # [END add_customer_match_user_list]
 
 
 def _build_offline_user_data_job_operations(client):
@@ -298,6 +297,7 @@ def _normalize_and_hash(s):
         A normalized (lowercase, remove whitespace) and SHA-256 hashed string.
     """
     return hashlib.sha256(s.strip().lower().encode()).hexdigest()
+    # [END add_customer_match_user_list]
 
 
 if __name__ == "__main__":

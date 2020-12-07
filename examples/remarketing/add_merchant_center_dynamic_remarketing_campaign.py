@@ -28,6 +28,7 @@ from google.ads.google_ads.client import GoogleAdsClient
 from google.ads.google_ads.errors import GoogleAdsException
 
 
+# [START add_merchant_center_dynamic_remarketing_campaign]
 def main(
     client,
     customer_id,
@@ -304,6 +305,7 @@ def _attach_user_list(
         "Created ad group criterion with resource name "
         f"'{ad_group_criterion_response.results[0].resource_name}'."
     )
+    # [END add_merchant_center_dynamic_remarketing_campaign]
 
 
 if __name__ == "__main__":

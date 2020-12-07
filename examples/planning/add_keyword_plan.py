@@ -27,6 +27,7 @@ from google.ads.google_ads.client import GoogleAdsClient
 from google.ads.google_ads.errors import GoogleAdsException
 
 
+# [START add_keyword_plan]
 def main(client, customer_id):
     """Adds a keyword plan, campaign, ad group, etc. to the customer account
 
@@ -300,6 +301,7 @@ def create_keyword_plan_negative_campaign_keywords(
         "Created keyword plan campaign keyword with resource name: "
         f"{response.results[0].resource_name}"
     )
+    # [END add_keyword_plan]
 
 
 if __name__ == "__main__":

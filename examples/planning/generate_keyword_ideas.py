@@ -30,6 +30,7 @@ _DEFAULT_LOCATION_IDS = ["1023191"]  # location ID for New York, NY
 _DEFAULT_LANGUAGE_ID = "1000"  # language ID for English
 
 
+# [START generate_keyword_ideas]
 def main(
     client, customer_id, location_ids, language_id, keyword_texts, page_url
 ):
@@ -120,6 +121,7 @@ def main(
                 for field_path_element in error.location.field_path_elements:
                     print(f"\t\tOn field: {field_path_element.field_name}")
         sys.exit(1)
+        # [END generate_keyword_ideas]
 
 
 if __name__ == "__main__":

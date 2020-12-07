@@ -105,6 +105,7 @@ def _create_customer_match_user_list(client, customer_id):
     return user_list_resource_name
 
 
+# [START add_customer_match_user_list]
 def _add_users_to_customer_match_user_list(
     client, customer_id, user_list_resource_name
 ):
@@ -296,6 +297,7 @@ def _normalize_and_hash(s):
         A normalized (lowercase, remove whitespace) and SHA-256 hashed string.
     """
     return hashlib.sha256(s.strip().lower().encode()).hexdigest()
+    # [END add_customer_match_user_list]
 
 
 if __name__ == "__main__":

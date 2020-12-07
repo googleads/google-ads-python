@@ -25,6 +25,7 @@ from google.ads.google_ads.client import GoogleAdsClient
 from google.ads.google_ads.errors import GoogleAdsException
 
 
+# [START generate_forecast_metrics]
 def main(client, customer_id, keyword_plan_id):
     keyword_plan_service = client.get_service("KeywordPlanService")
     resource_name = keyword_plan_service.keyword_plan_path(
@@ -67,6 +68,7 @@ def main(client, customer_id, keyword_plan_id):
         cpc_val = metrics.average_cpc
         cpc = "{:.2f}".format(cpc_val) if cpc_val else "unspecified"
         print("Estimated average cpc: {}\n".format(cpc))
+        # [END generate_forecast_metrics]
 
 
 if __name__ == "__main__":

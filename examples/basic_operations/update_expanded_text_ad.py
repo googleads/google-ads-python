@@ -27,6 +27,7 @@ from google.ads.google_ads.errors import GoogleAdsException
 from google.api_core import protobuf_helpers
 
 
+# [START update_expanded_text_ad]
 def main(client, customer_id, ad_id):
     ad_service = client.get_service("AdService", version="v6")
 
@@ -65,6 +66,7 @@ def main(client, customer_id, ad_id):
         f'Ad with resource name "{ad_response.results[0].resource_name}" '
         "was updated."
     )
+    # [END update_expanded_text_ad]
 
 
 if __name__ == "__main__":

@@ -267,6 +267,7 @@ def create_feed_items(client, customer_id, feed_details, label):
         )
 
 
+# [START add_dynamic_page_feed]
 def update_campaign_dsa_setting(client, customer_id, campaign_id, feed_details):
     """Updates the given campaign with the given feed details.
 
@@ -293,6 +294,7 @@ def update_campaign_dsa_setting(client, customer_id, campaign_id, feed_details):
     campaign = None
     for row in results:
         campaign = row.campaign
+        # [END add_dynamic_page_feed]
 
     if not campaign:
         raise ValueError("Campaign with id #{} not found".format(campaign_id))
@@ -304,6 +306,7 @@ def update_campaign_dsa_setting(client, customer_id, campaign_id, feed_details):
             )
         )
 
+    # [START add_dynamic_page_feed_1]
     # Retrieve a new campaign operation
     campaign_operation = client.get_type("CampaignOperation", version="v6")
     # Copy the retrieved campaign onto the new campaign operation.
@@ -338,8 +341,10 @@ def update_campaign_dsa_setting(client, customer_id, campaign_id, feed_details):
 
     # Display the results.
     print("Updated campaign #{}".format(resource_name))
+    # [END add_dynamic_page_feed_1]
 
 
+# [START add_dynamic_page_feed_2]
 def add_dsa_targeting(client, customer_id, ad_group_resource_name, label):
     """Adds Dynamic Search Ad targeting criteria to the given ad group.
 
@@ -381,6 +386,7 @@ def add_dsa_targeting(client, customer_id, ad_group_resource_name, label):
             resource_name
         )
     )
+    # [END add_dynamic_page_feed_2]
 
 
 if __name__ == "__main__":

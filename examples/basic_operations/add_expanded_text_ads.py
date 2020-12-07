@@ -25,6 +25,7 @@ import uuid
 import google.ads.google_ads.client
 
 
+# [START add_expanded_text_ads]
 def main(client, customer_id, ad_group_id, number_of_ads):
     ad_group_ad_service = client.get_service("AdGroupAdService", version="v6")
     ad_group_service = client.get_service("AdGroupService", version="v6")
@@ -79,6 +80,7 @@ def main(client, customer_id, ad_group_id, number_of_ads):
 
     for result in ad_group_ad_response.results:
         print("Created ad group ad {}.".format(result.resource_name))
+        # [END add_expanded_text_ads]
 
 
 if __name__ == "__main__":

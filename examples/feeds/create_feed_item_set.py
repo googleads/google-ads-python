@@ -64,8 +64,8 @@ def main(client, customer_id, feed_id):
         "FeedItemSetStringFilterTypeEnum", version="v6"
     ).EXACT
     """
-    """
     # 2) Affiliate Extension
+    """
     dynamic_affiliate_location_set_filter = feed_item_set.dynamic_affiliate_location_set_filter
     dynamic_affiliate_location_set_filter.chain_ids.extend([INSERT_CHAIN_IDS_HERE])
     """

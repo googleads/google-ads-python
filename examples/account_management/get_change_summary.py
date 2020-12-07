@@ -14,51 +14,25 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-"""This example gets the changes in the account made in the last 7 days."""
+"""This example gets a list of which resources have been changed in an account.
+"""
 
 
 import argparse
 import sys
 
+from google.ads.google_ads.client import GoogleAdsClient
+from google.ads.google_ads.errors import GoogleAdsException
 
-import google.ads.google_ads.client
-
-
-ADS_PAGE_SIZE = 1000
+_DEFAULT_PAGE_SIZE = 1000
 
 
 # [START get_account_changes]
-def resource_name_for_resource_type(resource_type, row):
-    """Return the resource name for the resource type.
-
-    Each returned row contains all possible changed fields. This function
-    returns the resource name of the changed field based on the
-    resource type. The changed field's parent is also populated but is not used.
-
-    Args:
-        resource_type: the string equivalent of the resource type
-        row: a single row returned from the service
-
-    Returns:
-        The resource name of the field that changed.
-    """
-    resource_name = ""  # default for UNSPECIFIED or UNKNOWN
-    if resource_type == "AD_GROUP":
-        resource_name = row.change_status.ad_group
-    elif resource_type == "AD_GROUP_AD":
-        resource_name = row.change_status.ad_group_ad
-    elif resource_type == "AD_GROUP_CRITERION":
-        resource_name = row.change_status.ad_group_criterion
-    elif resource_type == "CAMPAIGN":
-        resource_name = row.change_status.campaign
-    elif resource_type == "CAMPAIGN_CRITERION":
-        resource_name = row.change_status.campaign_criterion
-    return resource_name
-    # [END get_account_changes]
-
-
 def main(client, customer_id):
     ads_service = client.get_service("GoogleAdsService", version="v6")
+
+    # Construct a query to find information about changed resources in your
+    # account.
     query = """
         SELECT
           change_status.resource_name,
@@ -71,40 +45,46 @@ def main(client, customer_id):
           change_status.ad_group_criterion,
           change_status.campaign_criterion
         FROM change_status
-        WHERE change_status.last_change_date_time DURING LAST_7_DAYS
-        ORDER BY change_status.last_change_date_time"""
-
-    response = ads_service.search(
-        customer_id, query=query, page_size=ADS_PAGE_SIZE
-    )
+        WHERE change_status.last_change_date_time DURING LAST_14_DAYS
+        ORDER BY change_status.last_change_date_time
+        LIMIT 10000"""
 
     resource_type_enum = client.get_type(
         "ChangeStatusResourceTypeEnum", version="v6"
     ).ChangeStatusResourceType
-    change_status_operation_enum = client.get_type(
+    change_status_op_enum = client.get_type(
         "ChangeStatusOperationEnum", version="v6"
     ).ChangeStatusOperation
 
     try:
+        response = ads_service.search(
+            customer_id, query=query, page_size=_DEFAULT_PAGE_SIZE
+        )
         for row in response:
-            resource_type = resource_type_enum.Name(
-                row.change_status.resource_type
-            )
-            resource_status = change_status_operation_enum.Name(
-                row.change_status.resource_status
-            )
+            cs = row.change_status
+            resource_type = resource_type_enum.Name(cs.resource_type)
+            if resource_type == "AD_GROUP":
+                resource_name = cs.ad_group
+            if resource_type == "AD_GROUP_AD":
+                resource_name = cs.ad_group_ad
+            if resource_type == "AD_GROUP_CRITERION":
+                resource_name = cs.ad_group_criterion
+            if resource_type == "CAMPAIGN":
+                resource_name = cs.campaign
+            if resource_type == "CAMPAIGN_CRITERION":
+                resource_name = cs.campaign_criterion
+            else:
+                resource_name = "UNKNOWN"
+
+            resource_status = change_status_op_enum.Name(cs.resource_status)
             print(
-                'On "%s", change status "%s" shows a resource type of "%s" '
-                'with resource name "%s" was "%s".'
-                % (
-                    row.change_status.last_change_date_time,
-                    row.change_status.resource_name,
-                    resource_type,
-                    resource_name_for_resource_type(resource_type, row),
-                    resource_status,
-                )
+                f"On '{cs.last_change_date_time}', change status "
+                f"'{cs.resource_name}' shows that a resource type of "
+                f"'{resource_type}' with resource name '{resource_name}' was "
+                f"{resource_status}"
             )
-    except google.ads.google_ads.errors.GoogleAdsException as ex:
+            # [END get_account_changes]
+    except GoogleAdsException as ex:
         print(
             'Request with ID "%s" failed with status "%s" and includes the '
             "following errors:" % (ex.request_id, ex.error.code().name)
@@ -120,9 +100,7 @@ def main(client, customer_id):
 if __name__ == "__main__":
     # GoogleAdsClient will read a google-ads.yaml configuration file in the
     # home directory if none is specified.
-    google_ads_client = (
-        google.ads.google_ads.client.GoogleAdsClient.load_from_storage()
-    )
+    google_ads_client = GoogleAdsClient.load_from_storage()
 
     parser = argparse.ArgumentParser(
         description=(

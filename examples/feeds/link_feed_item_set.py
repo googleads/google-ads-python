@@ -44,15 +44,17 @@ def main(client, customer_id, feed_id, feed_item_id, feed_item_set_id):
         "FeedItemSetLinkOperation", version="v6"
     )
 
+    # Construct an operation that will link the feed item to the feed item set.
     feed_item_set_link = feed_item_set_link_operation.create
-    # Constructs a resource name for a feed_item_set_link, which is in the
+
+    # Construct a resource name for a feed_item_set_link, which is in the
     # format: customers/{customer_id}/feedItemSetLinks/{feed_id}~{feed_item_set_id}~{feed_item_id}
     feed_item_set_link.feed_item = client.get_service(
         "FeedItemService", version="v6"
     ).feed_item_path(
         customer_id, ResourceName.format_composite(feed_id, feed_item_id),
     )
-    # Constructs a resource name for a feed_item_set, which is in the
+    # Construct a resource name for a feed_item_set, which is in the
     # format: customers/{customer_id}/feedItemSets/{feed_id}~{feed_item_set_id}
     feed_item_set_link.feed_item_set = client.get_service(
         "FeedItemSetService", version="v6"
@@ -60,6 +62,7 @@ def main(client, customer_id, feed_id, feed_item_id, feed_item_set_id):
         customer_id, ResourceName.format_composite(feed_id, feed_item_set_id),
     )
 
+    # Issue a mutate request to add the feed_item_set_link on the server.
     try:
         response = feed_item_set_link_service.mutate_feed_item_set_links(
             customer_id, [feed_item_set_link_operation]
@@ -98,11 +101,7 @@ if __name__ == "__main__":
         help="The Google Ads customer ID.",
     )
     parser.add_argument(
-        "-f",
-        "--feed_id",
-        type=str,
-        required=True,
-        help="The feed ID.",
+        "-f", "--feed_id", type=str, required=True, help="The feed ID.",
     )
     parser.add_argument(
         "-i",

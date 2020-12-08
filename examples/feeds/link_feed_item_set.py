@@ -47,14 +47,14 @@ def main(client, customer_id, feed_id, feed_item_id, feed_item_set_id):
     # Construct an operation that will link the feed item to the feed item set.
     feed_item_set_link = feed_item_set_link_operation.create
 
-    # Construct a resource name for a feed_item_set_link, which is in the
+    # Construct a resource name for a feed item set link, which is in the
     # format: customers/{customer_id}/feedItemSetLinks/{feed_id}~{feed_item_set_id}~{feed_item_id}
     feed_item_set_link.feed_item = client.get_service(
         "FeedItemService", version="v6"
     ).feed_item_path(
         customer_id, ResourceName.format_composite(feed_id, feed_item_id),
     )
-    # Construct a resource name for a feed_item_set, which is in the
+    # Construct a resource name for a feed item set, which is in the
     # format: customers/{customer_id}/feedItemSets/{feed_id}~{feed_item_set_id}
     feed_item_set_link.feed_item_set = client.get_service(
         "FeedItemSetService", version="v6"
@@ -62,7 +62,7 @@ def main(client, customer_id, feed_id, feed_item_id, feed_item_set_id):
         customer_id, ResourceName.format_composite(feed_id, feed_item_set_id),
     )
 
-    # Issue a mutate request to add the feed_item_set_link on the server.
+    # Issue a mutate request to add the feed item set link on the server.
     try:
         response = feed_item_set_link_service.mutate_feed_item_set_links(
             customer_id, [feed_item_set_link_operation]

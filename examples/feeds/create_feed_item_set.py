@@ -47,7 +47,7 @@ def main(client, customer_id, feed_id):
         "FeedService", version="v6"
     ).feed_path(customer_id, feed_id)
     feed_item_set.feed = feed_resource_name
-    feed_item_set.display_name = "Feed Item Set #%s" % uuid.uuid4()
+    feed_item_set.display_name = f"Feed Item Set #{uuid.uuid4()}"
 
     # A feed item set can be created as a dynamic set by setting an optional
     # filter field below. If your feed is a location extension, uncomment the code

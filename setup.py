@@ -24,6 +24,7 @@ install_requires = [
     "protobuf >= 3.13.0, < 4.0.0",
     "PyYAML >= 5.1, < 6.0",
     "setuptools>=40.3.0",
+    "pep562 >= 1.0, < 2.0",
 ]
 
 tests_require = [
@@ -34,9 +35,10 @@ tests_require = [
 with io.open("README.rst", "r", encoding="utf-8") as readme_file:
     long_description = readme_file.read()
 
+
 setup(
     name="google-ads",
-    version="8.0.0",
+    version="8.1.0",
     author="Google LLC",
     author_email="googleapis-packages@google.com",
     classifiers=[
@@ -46,11 +48,11 @@ setup(
         "License :: OSI Approved :: Apache Software License",
         "Programming Language :: Python",
         "Programming Language :: Python :: 3",
-        "Programming Language :: Python :: 3.7",
+        "Programming Language :: Python :: 3.6",
     ],
     description="Client library for the Google Ads API",
     include_package_data=True,
-    python_requires=">=3.7",
+    python_requires=">=3.6",
     long_description=long_description,
     install_requires=install_requires,
     tests_require=tests_require,

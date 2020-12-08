@@ -90,7 +90,8 @@ if __name__ == "__main__":
     google_ads_client = GoogleAdsClient.load_from_storage()
 
     parser = argparse.ArgumentParser(
-        description="Creates a new feed item set for a specified feed."
+        description=
+            "Links the specified feed item set to the specified feed item."
     )
     # The following argument(s) should be provided to run the example.
     parser.add_argument(

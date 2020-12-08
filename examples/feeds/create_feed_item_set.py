@@ -49,26 +49,23 @@ def main(client, customer_id, feed_id):
     feed_item_set.feed = feed_resource_name
     feed_item_set.display_name = "Feed Item Set #%s" % uuid.uuid4()
 
-    """A feed item set can be created as a dynamic set by setting an optional
-    filter field below. If your feed is a location extension, uncomment the code
-    that sets dynamic_location_set_filter. If your feed is an affiliate
-    extension, set dynamic_affiliate_location_set_filter instead.
-    """
+    # A feed item set can be created as a dynamic set by setting an optional
+    # filter field below. If your feed is a location extension, uncomment the code
+    # that sets dynamic_location_set_filter. If your feed is an affiliate
+    # extension, set dynamic_affiliate_location_set_filter instead.
+
     # 1) Location Extension
     # NOTE: Does not support Curated location extensions.
-    """
-    dynamic_location_set_filter = feed_item_set.dynamic_location_set_filter
-    business_name_filter = dynamic_location_set_filter.business_name_filter
-    business_name_filter.business_name = 'INSERT_YOUR_BUSINESS_NAME_HERE'
-    business_name_filter.filter_type = client.get_type(
-        "FeedItemSetStringFilterTypeEnum", version="v6"
-    ).EXACT
-    """
+    # dynamic_location_set_filter = feed_item_set.dynamic_location_set_filter
+    # business_name_filter = dynamic_location_set_filter.business_name_filter
+    # business_name_filter.business_name = 'INSERT_YOUR_BUSINESS_NAME_HERE'
+    # business_name_filter.filter_type = client.get_type(
+    #     "FeedItemSetStringFilterTypeEnum", version="v6"
+    # ).EXACT
+
     # 2) Affiliate Extension
-    """
-    dynamic_affiliate_location_set_filter = feed_item_set.dynamic_affiliate_location_set_filter
-    dynamic_affiliate_location_set_filter.chain_ids.extend([INSERT_CHAIN_IDS_HERE])
-    """
+    # dynamic_affiliate_location_set_filter = feed_item_set.dynamic_affiliate_location_set_filter
+    # dynamic_affiliate_location_set_filter.chain_ids.extend([INSERT_CHAIN_IDS_HERE])
 
     try:
         response = feed_item_set_service.mutate_feed_item_sets(

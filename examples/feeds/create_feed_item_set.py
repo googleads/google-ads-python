@@ -108,7 +108,11 @@ if __name__ == "__main__":
         help="The Google Ads customer ID.",
     )
     parser.add_argument(
-        "-f", "--feed_id", type=str, required=True, help="The feed ID.",
+        "-f",
+        "--feed_id",
+        type=str,
+        required=True,
+        help="The feed ID.",
     )
     args = parser.parse_args()
 

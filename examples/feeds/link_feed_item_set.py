@@ -21,7 +21,6 @@ be set.
 
 import argparse
 import sys
-import uuid
 
 from google.ads.google_ads.client import GoogleAdsClient
 from google.ads.google_ads.errors import GoogleAdsException

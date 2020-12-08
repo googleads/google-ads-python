@@ -45,13 +45,15 @@ def main(client, customer_id, feed_id, feed_item_id, feed_item_set_id):
     )
 
     feed_item_set_link = feed_item_set_link_operation.create
-    # Constructs a resource name for a feed_item, which is in the
-    # format: customers/{customer_id}/feedItems/{feed_id}~{feed_item_id}
+    # Constructs a resource name for a feed_item set link, which is in the
+    # format: customers/{customer_id}/feedItemSetLinks/{feed_id}~{feed_item_set_id}~{feed_item_id}
     feed_item_set_link.feed_item = client.get_service(
         "FeedItemService", version="v6"
     ).feed_item_path(
         customer_id, ResourceName.format_composite(feed_id, feed_item_id),
     )
+    # Constructs a resource name for a feed_item set, which is in the
+    # format: customers/{customer_id}/feedItemSets/{feed_id}~{feed_item_set_id}
     feed_item_set_link.feed_item_set = client.get_service(
         "FeedItemSetService", version="v6"
     ).feed_item_set_path(

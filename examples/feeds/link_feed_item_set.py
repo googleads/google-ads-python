@@ -48,8 +48,8 @@ def main(client, customer_id, feed_id, feed_item_id, feed_item_set_id):
     # Construct an operation that will link the feed item to the feed item set.
     feed_item_set_link = feed_item_set_link_operation.create
 
-    # Construct a resource name for a feed item set link, which is in the
-    # format: customers/{customer_id}/feedItemSetLinks/{feed_id}~{feed_item_set_id}~{feed_item_id}
+    # Construct a resource name for a feed item, which is in the format:
+    # customers/{customer_id}/feedItems/{feed_id}~{feed_item_id}
     feed_item_set_link.feed_item = client.get_service(
         "FeedItemService", version="v6"
     ).feed_item_path(

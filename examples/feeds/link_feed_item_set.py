@@ -16,7 +16,8 @@
 
 The specified feed item set must not be created as a dynamic set, i.e. both
 dynamic_location_set_filter and dynamic_affiliate_location_set_filter must not
-be set.
+be set. Learn more here:
+https://developers.google.com/google-ads/api/docs/location-extensions/feed-item-set?hl=en#adding-feed-item
 """
 
 import argparse

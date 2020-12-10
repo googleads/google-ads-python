@@ -42,6 +42,7 @@ def main(client, customer_id, campaign_id):
         customer_id: a client customer ID.
         campaign_id: the campaign ID.
     """
+    # Initialize an array of MutateOperations
     mutate_operations = []
     sitelink_campaign_extension_setting_mutate_operation = _create_sitelink_campaign_extension_setting_mutate_operation(
         client, customer_id, campaign_id
@@ -52,7 +53,6 @@ def main(client, customer_id, campaign_id):
     extension_feed_item_resource_names = _get_all_sitelink_extension_feed_items(
         client, ga_service, customer_id, campaign_id
     )
-
     extension_feed_item_mutate_operations = _create_extension_feed_item_mutate_operations(
         client, extension_feed_item_resource_names
     )

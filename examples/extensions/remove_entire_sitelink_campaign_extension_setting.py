@@ -47,7 +47,7 @@ def main(client, customer_id, campaign_id):
     sitelink_campaign_extension_setting_mutate_operation = _create_sitelink_campaign_extension_setting_mutate_operation(
         client, customer_id, campaign_id
     )
-    mutate_operations += [sitelink_campaign_extension_setting_mutate_operation]
+    mutate_operations.extend([sitelink_campaign_extension_setting_mutate_operation])
 
     ga_service = client.get_service("GoogleAdsService", version="v6")
     extension_feed_item_resource_names = _get_all_sitelink_extension_feed_items(
@@ -56,7 +56,7 @@ def main(client, customer_id, campaign_id):
     extension_feed_item_mutate_operations = _create_extension_feed_item_mutate_operations(
         client, extension_feed_item_resource_names
     )
-    mutate_operations += extension_feed_item_mutate_operations
+    mutate_operations.extend(extension_feed_item_mutate_operations)
 
     try:
         # Issue a mutate request to remove the campaign extension setting and
@@ -163,7 +163,7 @@ def _get_all_sitelink_extension_feed_items(
     # names to the return array.
     for batch in response:
         for row in batch.results:
-            extension_feed_item_resource_names += (
+            extension_feed_item_resource_names.extend(
                 row.campaign_extension_setting.extension_feed_items
             )
 

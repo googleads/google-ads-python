@@ -59,6 +59,8 @@ def main(client, customer_id, campaign_id):
     mutate_operations += extension_feed_item_mutate_operations
 
     try:
+        # Issue a mutate request to remove the campaign extension setting and
+        # its extension feed items.
         response = ga_service.mutate(customer_id, mutate_operations)
         mutate_operation_responses = response.mutate_operation_responses
         print(
@@ -67,13 +69,11 @@ def main(client, customer_id, campaign_id):
         )
         # Iterate through the remainder of the operation responses
         # which are the extension feed item removal responses
-        response_index = 1
         for mutate_operation_response in mutate_operation_responses[1:]:
             print(
                 "Removed an extension feed item with resource name "
-                f'"{mutate_operation_responses[response_index].extension_feed_item_result}"'
+                f'"{mutate_operation_response.extension_feed_item_result}"'
             )
-            response_index += 1
     except GoogleAdsException as ex:
         print(
             f'Request with ID "{ex.request_id}" failed with status '

@@ -168,10 +168,11 @@ def _get_all_sitelink_extension_feed_items(
             )
 
     if len(extension_feed_item_resource_names) == 0:
-        raise Exception(
-            "The specified campaign does not contain a sitelink "
-            "campaign extension setting."
+        print(
+            "The specified campaign does not contain a sitelink campaign "
+            "extension setting."
         )
+        sys.exit(0)
 
     return extension_feed_item_resource_names
 

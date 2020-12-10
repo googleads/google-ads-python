@@ -72,7 +72,7 @@ def main(client, customer_id, campaign_id):
         for mutate_operation_response in mutate_operation_responses[1:]:
             print(
                 "Removed an extension feed item with resource name "
-                f'"{mutate_operation_response.extension_feed_item_result}"'
+                f'"{mutate_operation_response.extension_feed_item_result.resource_name}".'
             )
     except GoogleAdsException as ex:
         print(

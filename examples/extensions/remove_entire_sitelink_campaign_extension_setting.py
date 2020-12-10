@@ -148,13 +148,13 @@ def _get_all_sitelink_extension_feed_items(
     # Construct the query.
     query = f"""
         SELECT
-            campaign_extension_setting.campaign,
-            campaign_extension_setting.extension_type,
-            campaign_extension_setting.extension_feed_items
+          campaign_extension_setting.campaign,
+          campaign_extension_setting.extension_type,
+          campaign_extension_setting.extension_feed_items
         FROM campaign_extension_setting
         WHERE campaign_extension_setting.campaign = '{campaign_resource_name}'
         AND campaign_extension_setting.extension_type =
-            '{extension_type_name}'"""
+          '{extension_type_name}'"""
 
     # Issue a search request using streaming.
     response = ga_service.search_stream(customer_id, query=query)

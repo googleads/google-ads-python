@@ -67,7 +67,7 @@ def main(client, customer_id, campaign_id):
             "Removed a campaign extension setting with resource name "
             f'"{mutate_operation_responses[0].campaign_extension_setting_result.resource_name}".'
         )
-        # Iterate through the remainder of the operation responses
+        # Iterate through the remainder of the mutate operation responses,
         # which are the extension feed item removal responses
         for mutate_operation_response in mutate_operation_responses[1:]:
             print(

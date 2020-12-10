@@ -90,7 +90,7 @@ def main(client, customer_id, campaign_id):
 def _create_sitelink_campaign_extension_setting_mutate_operation(
     client, customer_id, campaign_id
 ):
-    """Creates an update operation for the sitelink campaign extension setting
+    """Creates a MutateOperation for the sitelink campaign extension setting
     that will be removed.
 
     Args:
@@ -101,7 +101,6 @@ def _create_sitelink_campaign_extension_setting_mutate_operation(
     Returns:
         The created MutateOperation for the sitelink campaign extension
             setting.
-
     """
     extension_type_enum = client.get_type("ExtensionTypeEnum", version="v6")
     composite_id = ResourceName.format_composite(
@@ -110,6 +109,8 @@ def _create_sitelink_campaign_extension_setting_mutate_operation(
             extension_type_enum.ExtensionType.SITELINK
         ),
     )
+    # Construct the campaign extension setting resource name, in format:
+    # customers/{customer_id}/campaignExtensionSettings/{campaign_id}~{extension_type}
     resource_name = client.get_service(
         "CampaignExtensionSettingService", version="v6"
     ).campaign_extension_setting_path(customer_id, composite_id)
@@ -144,6 +145,7 @@ def _get_all_sitelink_extension_feed_items(
         extension_type_enum.ExtensionType.SITELINK
     )
 
+    # Construct the query.
     query = f"""
         SELECT
             campaign_extension_setting.campaign,
@@ -154,11 +156,11 @@ def _get_all_sitelink_extension_feed_items(
         AND campaign_extension_setting.extension_type =
             '{extension_type_name}'"""
 
-    # Issues a search request using streaming
+    # Issue a search request using streaming.
     response = ga_service.search_stream(customer_id, query=query)
     extension_feed_item_resource_names = []
-    # Iterates through each row and appends the extension feed item resource
-    # names to the return array
+    # Iterate through each row and append the extension feed item resource
+    # names to the return array.
     for batch in response:
         for row in batch.results:
             extension_feed_item_resource_names += (
@@ -175,9 +177,9 @@ def _get_all_sitelink_extension_feed_items(
 
 
 def _create_extension_feed_item_mutate_operations(
-    client, extension_feed_item_resource_names,
+    client, extension_feed_item_resource_names
 ):
-    """Creates mutate operations for the sitelink extension feed items that will
+    """Creates MutateOperations for the sitelink extension feed items that will
     be removed.
 
     Args:
@@ -186,9 +188,10 @@ def _create_extension_feed_item_mutate_operations(
             names.
 
     Returns:
-        An array of mutate operations for the extension feed items.
+        An array of MutateOperations for the extension feed items.
     """
     mutate_operations = []
+    # Create a MutateOperation for each extension feed item to remove.
     for resource_name in extension_feed_item_resource_names:
         mutate_operation = client.get_type("MutateOperation", version="v6")
         mutate_operation.extension_feed_item_operation.remove = resource_name
@@ -223,5 +226,5 @@ if __name__ == "__main__":
     args = parser.parse_args()
 
     main(
-        google_ads_client, args.customer_id, args.campaign_id,
+        google_ads_client, args.customer_id, args.campaign_id
     )

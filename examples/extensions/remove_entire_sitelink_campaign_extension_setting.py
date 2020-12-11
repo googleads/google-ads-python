@@ -172,7 +172,7 @@ def _get_all_sitelink_extension_feed_items(
             "The specified campaign does not contain a sitelink campaign "
             "extension setting."
         )
-        sys.exit(0)
+        sys.exit(1)
 
     return extension_feed_item_resource_names
 

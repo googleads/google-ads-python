@@ -47,7 +47,7 @@ def main(client, customer_id, campaign_id):
     sitelink_campaign_extension_setting_mutate_operation = _create_sitelink_campaign_extension_setting_mutate_operation(
         client, customer_id, campaign_id
     )
-    mutate_operations.extend([sitelink_campaign_extension_setting_mutate_operation])
+    mutate_operations.append(sitelink_campaign_extension_setting_mutate_operation)
 
     ga_service = client.get_service("GoogleAdsService", version="v6")
     extension_feed_item_resource_names = _get_all_sitelink_extension_feed_items(

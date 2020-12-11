@@ -28,25 +28,40 @@ from google.ads.google_ads.util import ResourceName
 
 
 def main(client, customer_id, feed_id, feed_item_set_id):
-    ga_service = client.get_service("GoogleAdsService", version="v6")
-    feed_item_set_service = client.get_service("FeedItemSetService",
-                                               version="v6")
+    """The main method that creates all necessary entities for the example.
 
-    query = ("SELECT feed_item_set_link.feed_item FROM feed_item_set_link "
-             "WHERE feed_item_set_link.feed_item_set = '%s'"
-             % feed_item_set_service.feed_item_set_path(
-                 customer_id, ResourceName.format_composite(
-                     feed_id, feed_item_set_id)))
+    Args:
+        client: an initialized GoogleAdsClient instance.
+        customer_id: a client customer ID.
+        feed_id: the ID for a Feed belonging to the given customer.
+        feed_item_set_id: the ID for a FeedItemSet belonging to the given
+            customer.
+    """
+    ga_service = client.get_service("GoogleAdsService", version="v6")
+    feed_item_set_service = client.get_service(
+        "FeedItemSetService", version="v6"
+    )
+
+    feed_item_set_path = feed_item_set_service.feed_item_set_path(
+        customer_id, ResourceName.format_composite(feed_id, feed_item_set_id),
+    )
+    query = f"""
+        SELECT
+          feed_item_set_link.feed_item
+        FROM feed_item_set_link
+        WHERE feed_item_set_link.feed_item_set = '{feed_item_set_path}'"""
 
     # Issues a search request using streaming.
     response = ga_service.search_stream(customer_id, query=query)
 
-    print("The feed items with the following resource names are linked with "
-          f"the feed item set with ID {feed_item_set_id}:")
+    print(
+        "The feed items with the following resource names are linked with "
+        f"the feed item set with ID {feed_item_set_id}:"
+    )
     try:
         for batch in response:
             for row in batch.results:
-              print(f"'{row.feed_item_set_link.feed_item}'")
+                print(f"'{row.feed_item_set_link.feed_item}'")
     except GoogleAdsException as ex:
         print(
             f'Request with ID "{ex.request_id}" failed with status '
@@ -77,11 +92,7 @@ if __name__ == "__main__":
         help="The Google Ads customer ID.",
     )
     parser.add_argument(
-        "-i",
-        "--feed_id",
-        type=str,
-        required=True,
-        help="The Feed ID.",
+        "-i", "--feed_id", type=str, required=True, help="The Feed ID.",
     )
     parser.add_argument(
         "-s",
@@ -92,5 +103,6 @@ if __name__ == "__main__":
     )
     args = parser.parse_args()
 
-    main(google_ads_client, args.customer_id, args.feed_id,
-         args.feed_item_set_id)
+    main(
+        google_ads_client, args.customer_id, args.feed_id, args.feed_item_set_id
+    )

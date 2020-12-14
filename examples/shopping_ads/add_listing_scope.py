@@ -58,10 +58,12 @@ def main(client, customer_id, campaign_id):
     product_brand_dimension.product_brand.value = "google"
 
     product_custom_attribute_dimension = dimensions.add()
-    product_custom_attribute_dimension.index = client.get_type(
-        "ProductCustomAttributeIndexEnum", version="v6"
-    ).INDEX0
-    product_custom_attribute_dimension.value = "top_selling_products"
+    product_custom_attribute_dimension.product_custom_attribute.index = (
+        client.get_type("ProductCustomAttributeIndexEnum", version="v6").INDEX0
+    )
+    product_custom_attribute_dimension.product_custom_attribute.value = (
+        "top_selling_products"
+    )
 
     product_type_level_enum = client.get_type(
         "ProductTypeLevelEnum", version="v6"

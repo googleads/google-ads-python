@@ -61,7 +61,7 @@ def main(client, customer_id, ad_group_id):
 
     # Add the bid modifiers
     try:
-        ag_bm_response = ag_bm_service.mutate_ad_groups(
+        ag_bm_response = ag_bm_service.mutate_ad_group_bid_modifiers(
             customer_id, [check_in_ag_bm_operation, los_ag_bm_operation]
         )
     except google.ads.google_ads.errors.GoogleAdsException as ex:

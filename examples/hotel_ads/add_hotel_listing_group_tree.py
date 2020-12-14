@@ -486,8 +486,8 @@ if __name__ == "__main__":
         required=True,
         help="Specify the CPC bid micro amount to be set on a created ad group "
         "criterion. For simplicity, each ad group criterion will use the below "
-        "amount equally. In practice, you probably want to use different values "
-        "for each ad group criterion.",
+        "amount equally. In practice, you probably want to use different "
+        "values for each ad group criterion.",
     )
     args = parser.parse_args()
 

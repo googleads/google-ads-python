@@ -28,7 +28,7 @@ import uuid
 import google.ads.google_ads.client
 
 
-_CPC_BID_CEILING_MICRO_AMOUNT = 20000000
+_DEFAULT_CPC_BID_CEILING_MICRO_AMOUNT = 20000000
 
 
 def main(
@@ -271,10 +271,10 @@ if __name__ == "__main__":
         "--bid_ceiling_micro_amount",
         type=int,
         required=False,
-        default=_CPC_BID_CEILING_MICRO_AMOUNT,
+        default=_DEFAULT_CPC_BID_CEILING_MICRO_AMOUNT,
         help=(
             "The bid ceiling micro amount for the hotel campaign. "
-            "The default value is 20000000"
+            f"The default value is {_DEFAULT_CPC_BID_CEILING_MICRO_AMOUNT}"
         ),
     )
     parser.add_argument(

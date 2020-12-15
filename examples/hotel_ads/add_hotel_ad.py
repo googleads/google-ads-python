@@ -32,7 +32,7 @@ _DEFAULT_CPC_BID_CEILING_MICRO_AMOUNT = 20000000
 
 
 def main(
-    client, customer_id, hotel_center_account_id, bid_ceiling_micro_amount
+    client, customer_id, hotel_center_account_id, cpc_bid_ceiling_micro_amount
 ):
 
     budget_resource_name = add_budget(client, customer_id)
@@ -42,7 +42,7 @@ def main(
         customer_id,
         budget_resource_name,
         hotel_center_account_id,
-        bid_ceiling_micro_amount,
+        cpc_bid_ceiling_micro_amount,
     )
 
     ad_group_resource_name = add_hotel_ad_group(
@@ -183,7 +183,7 @@ def add_hotel_campaign(
     customer_id,
     budget_resource_name,
     hotel_center_account_id,
-    bid_ceiling_micro_amount,
+    cpc_bid_ceiling_micro_amount,
 ):
     campaign_service = client.get_service("CampaignService", version="v6")
 
@@ -207,7 +207,7 @@ def add_hotel_campaign(
 
     # Set the bidding strategy to PercentCpc. Only Manual CPC and Percent CPC
     # can be used for hotel campaigns.
-    campaign.percent_cpc.cpc_bid_ceiling_micros = bid_ceiling_micro_amount
+    campaign.percent_cpc.cpc_bid_ceiling_micros = cpc_bid_ceiling_micro_amount
 
     # Sets the budget.
     campaign.campaign_budget = budget_resource_name
@@ -268,7 +268,7 @@ if __name__ == "__main__":
     )
     parser.add_argument(
         "-b",
-        "--bid_ceiling_micro_amount",
+        "--cpc_bid_ceiling_micro_amount",
         type=int,
         required=False,
         default=_DEFAULT_CPC_BID_CEILING_MICRO_AMOUNT,
@@ -290,5 +290,5 @@ if __name__ == "__main__":
         google_ads_client,
         args.customer_id,
         args.hotel_center_account_id,
-        args.bid_ceiling_micro_amount,
+        args.cpc_bid_ceiling_micro_amount,
     )

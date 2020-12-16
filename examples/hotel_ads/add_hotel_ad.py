@@ -25,31 +25,44 @@ import argparse
 import sys
 import uuid
 
-import google.ads.google_ads.client
+from google.ads.google_ads.client import GoogleAdsClient
+from google.ads.google_ads.errors import GoogleAdsException
 
 
 _DEFAULT_CPC_BID_CEILING_MICRO_AMOUNT = 20000000
 
 
 def main(
-    client, customer_id, hotel_center_account_id, bid_ceiling_micro_amount
+    client, customer_id, hotel_center_account_id, cpc_bid_ceiling_micro_amount
 ):
 
-    budget_resource_name = add_budget(client, customer_id)
+    try:
+        budget_resource_name = add_budget(client, customer_id)
 
-    campaign_resource_name = add_hotel_campaign(
-        client,
-        customer_id,
-        budget_resource_name,
-        hotel_center_account_id,
-        bid_ceiling_micro_amount,
-    )
+        campaign_resource_name = add_hotel_campaign(
+            client,
+            customer_id,
+            budget_resource_name,
+            hotel_center_account_id,
+            cpc_bid_ceiling_micro_amount,
+        )
 
-    ad_group_resource_name = add_hotel_ad_group(
-        client, customer_id, campaign_resource_name
-    )
+        ad_group_resource_name = add_hotel_ad_group(
+            client, customer_id, campaign_resource_name
+        )
 
-    add_hotel_ad(client, customer_id, ad_group_resource_name)
+        add_hotel_ad(client, customer_id, ad_group_resource_name)
+    except GoogleAdsException as ex:
+        print(
+            f'Request with ID "{ex.request_id}" failed with status '
+            f'"{ex.error.code().name}" and includes the following errors:'
+        )
+        for error in ex.failure.errors:
+            print(f'\tError with message "{error.message}".')
+            if error.location:
+                for field_path_element in error.location.field_path_elements:
+                    print(f"\t\tOn field: {field_path_element.field_name}")
+        sys.exit(1)
 
 
 def add_budget(client, customer_id):
@@ -62,32 +75,19 @@ def add_budget(client, customer_id):
         "CampaignBudgetOperation", version="v6"
     )
     campaign_budget = campaign_budget_operation.create
-    campaign_budget.name = "Interplanetary Budget %s" % uuid.uuid4()
+    campaign_budget.name = f"Interplanetary Budget #{uuid.uuid4()}"
     campaign_budget.delivery_method = client.get_type(
         "BudgetDeliveryMethodEnum"
     ).STANDARD
     campaign_budget.amount_micros = 500000
 
     # Add budget.
-    try:
-        campaign_budget_response = campaign_budget_service.mutate_campaign_budgets(
-            customer_id, [campaign_budget_operation]
-        )
-    except google.ads.google_ads.errors.GoogleAdsException as ex:
-        print(
-            'Request with ID "%s" failed with status "%s" and includes the '
-            "following errors:" % (ex.request_id, ex.error.code().name)
-        )
-        for error in ex.failure.errors:
-            print('\tError with message "%s".' % error.message)
-            if error.location:
-                for field_path_element in error.location.field_path_elements:
-                    print("\t\tOn field: %s" % field_path_element.field_name)
-        sys.exit(1)
-
+    campaign_budget_response = campaign_budget_service.mutate_campaign_budgets(
+        customer_id, [campaign_budget_operation]
+    )
     budget_resource_name = campaign_budget_response.results[0].resource_name
 
-    print("Created budget %s" % budget_resource_name)
+    print(f"Created budget with resource name: '{budget_resource_name}'")
 
     return budget_resource_name
 
@@ -111,25 +111,12 @@ def add_hotel_ad(client, customer_id, ad_group_resource_name):
     )
 
     # Add the ad group ad.
-    try:
-        ad_group_ad_response = ad_group_ad_service.mutate_ad_group_ads(
-            customer_id, [ad_group_ad_operation]
-        )
-    except google.ads.google_ads.errors.GoogleAdsException as ex:
-        print(
-            'Request with ID "%s" failed with status "%s" and includes the '
-            "following errors:" % (ex.request_id, ex.error.code().name)
-        )
-        for error in ex.failure.errors:
-            print('\tError with message "%s".' % error.message)
-            if error.location:
-                for field_path_element in error.location.field_path_elements:
-                    print("\t\tOn field: %s" % field_path_element.field_name)
-        sys.exit(1)
-
+    ad_group_ad_response = ad_group_ad_service.mutate_ad_group_ads(
+        customer_id, [ad_group_ad_operation]
+    )
     ad_group_ad_resource_name = ad_group_ad_response.results[0].resource_name
 
-    print("Created hotel ad %s." % ad_group_ad_resource_name)
+    print(f"Created hotel ad with resource name: '{ad_group_ad_resource_name}'")
 
     return ad_group_resource_name
     # [END add_hotel_ad_1]
@@ -142,7 +129,7 @@ def add_hotel_ad_group(client, customer_id, campaign_resource_name):
     # Create ad group.
     ad_group_operation = client.get_type("AdGroupOperation", version="v6")
     ad_group = ad_group_operation.create
-    ad_group.name = "Earth to Mars cruise %s" % uuid.uuid4()
+    ad_group.name = f"Earth to Mars cruise #{uuid.uuid4()}"
     ad_group.status = client.get_type("AdGroupStatusEnum", version="v6").ENABLED
     ad_group.campaign = campaign_resource_name
     # Sets the ad group type to HOTEL_ADS. This cannot be set to other types.
@@ -150,27 +137,13 @@ def add_hotel_ad_group(client, customer_id, campaign_resource_name):
     ad_group.cpc_bid_micros = 10000000
 
     # Add the ad group.
-    try:
-        ad_group_response = ad_group_service.mutate_ad_groups(
-            customer_id, [ad_group_operation]
-        )
-    except google.ads.google_ads.errors.GoogleAdsException as ex:
-        print(
-            'Request with ID "%s" failed with status "%s" and includes the '
-            "following errors:" % (ex.request_id, ex.error.code().name)
-        )
-        for error in ex.failure.errors:
-            print('\tError with message "%s".' % error.message)
-            if error.location:
-                for field_path_element in error.location.field_path_elements:
-                    print("\t\tOn field: %s" % field_path_element.field_name)
-        sys.exit(1)
-
+    ad_group_response = ad_group_service.mutate_ad_groups(
+        customer_id, [ad_group_operation]
+    )
     ad_group_resource_name = ad_group_response.results[0].resource_name
 
     print(
-        'Added a hotel ad group with resource name "%s".'
-        % ad_group_resource_name
+        f"Added hotel ad group with resource name: '{ad_group_resource_name}'"
     )
 
     return ad_group_resource_name
@@ -183,7 +156,7 @@ def add_hotel_campaign(
     customer_id,
     budget_resource_name,
     hotel_center_account_id,
-    bid_ceiling_micro_amount,
+    cpc_bid_ceiling_micro_amount,
 ):
     campaign_service = client.get_service("CampaignService", version="v6")
 
@@ -191,7 +164,7 @@ def add_hotel_campaign(
     # Create campaign.
     campaign_operation = client.get_type("CampaignOperation", version="v6")
     campaign = campaign_operation.create
-    campaign.name = "Interplanetary Cruise Campaign %s" % uuid.uuid4()
+    campaign.name = f"Interplanetary Cruise Campaign #{uuid.uuid4()}"
 
     # Configures settings related to hotel campaigns including advertising
     # channel type and hotel setting info.
@@ -207,7 +180,7 @@ def add_hotel_campaign(
 
     # Set the bidding strategy to PercentCpc. Only Manual CPC and Percent CPC
     # can be used for hotel campaigns.
-    campaign.percent_cpc.cpc_bid_ceiling_micros = bid_ceiling_micro_amount
+    campaign.percent_cpc.cpc_bid_ceiling_micros = cpc_bid_ceiling_micro_amount
 
     # Sets the budget.
     campaign.campaign_budget = budget_resource_name
@@ -218,27 +191,13 @@ def add_hotel_campaign(
     # [END add_hotel_ad]
 
     # Add the campaign.
-    try:
-        campaign_response = campaign_service.mutate_campaigns(
-            customer_id, [campaign_operation]
-        )
-    except google.ads.google_ads.errors.GoogleAdsException as ex:
-        print(
-            'Request with ID "%s" failed with status "%s" and includes the '
-            "following errors:" % (ex.request_id, ex.error.code().name)
-        )
-        for error in ex.failure.errors:
-            print('\tError with message "%s".' % error.message)
-            if error.location:
-                for field_path_element in error.location.field_path_elements:
-                    print("\t\tOn field: %s" % field_path_element.field_name)
-        sys.exit(1)
-
+    campaign_response = campaign_service.mutate_campaigns(
+        customer_id, [campaign_operation]
+    )
     campaign_resource_name = campaign_response.results[0].resource_name
 
     print(
-        'Added a hotel campaign with resource name "%s".'
-        % campaign_resource_name
+        f"Added a hotel campaign with resource name: '{campaign_resource_name}'"
     )
 
     return campaign_resource_name
@@ -248,9 +207,7 @@ def add_hotel_campaign(
 if __name__ == "__main__":
     # GoogleAdsClient will read the google-ads.yaml configuration file in the
     # home directory if none is specified.
-    google_ads_client = (
-        google.ads.google_ads.client.GoogleAdsClient.load_from_storage()
-    )
+    google_ads_client = GoogleAdsClient.load_from_storage()
 
     parser = argparse.ArgumentParser(
         description=(
@@ -268,7 +225,7 @@ if __name__ == "__main__":
     )
     parser.add_argument(
         "-b",
-        "--bid_ceiling_micro_amount",
+        "--cpc_bid_ceiling_micro_amount",
         type=int,
         required=False,
         default=_DEFAULT_CPC_BID_CEILING_MICRO_AMOUNT,
@@ -290,5 +247,5 @@ if __name__ == "__main__":
         google_ads_client,
         args.customer_id,
         args.hotel_center_account_id,
-        args.bid_ceiling_micro_amount,
+        args.cpc_bid_ceiling_micro_amount,
     )

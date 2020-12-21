@@ -32,7 +32,7 @@ from google.ads.google_ads.errors import GoogleAdsException
 MAX_PROCESSES = multiprocessing.cpu_count()
 # Timeout between retries in seconds
 BACKOFF_FACTOR = 5
-# Maximum number of retries for 500 errors
+# Maximum number of retries for errors
 MAX_RETRIES = 5
 
 

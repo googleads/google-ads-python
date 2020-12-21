@@ -65,7 +65,7 @@ def main(client, customer_ids):
 def _issue_search_request(client, customer_id, query):
     """Issues a search request using streaming.
 
-    If a 500 error is received, retries until MAX_RETRIES is reached.
+    If an error is caught, retries until MAX_RETRIES is reached.
 
     Args:
         client: an initialized GoogleAdsClient instance.

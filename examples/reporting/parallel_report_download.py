@@ -79,12 +79,12 @@ def _issue_search_request(client, customer_id, query):
     while True:
         try:
             response = ga_service.search_stream(customer_id, query)
+            # Returning a list of GoogleAdsRows will result in a
+            # PicklingError, so instead we put the GoogleAdsRow data
+            # into a list of str results and return that.
             result_strings = []
             for batch in response:
                 for row in batch.results:
-                    # Returning a list of GoogleAdsRows will result in a
-                    # PicklingError, so instead we put the GoogleAdsRow data
-                    # into a list of str results and return that.
                     ad_group_id = (
                         f"Ad Group ID {row.ad_group.id} in "
                         if "ad_group.id" in query

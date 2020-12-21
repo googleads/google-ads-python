@@ -99,7 +99,7 @@ def _issue_search_request(client, customer_id, query):
                     result_strings.append(result_string)
             return result_strings
         except GoogleAdsException as ex:
-            if ex.error_code() == 500 and retry_count < MAX_RETRIES:
+            if retry_count < MAX_RETRIES:
                 retry_count += 1
                 time.sleep(retry_count * BACKOFF_FACTOR)
             else:

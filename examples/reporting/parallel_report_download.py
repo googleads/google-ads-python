@@ -89,7 +89,9 @@ def main(client, customer_ids):
             ex = failure["exception"]
             print(
                 f'Request with ID "{ex.request_id}" failed with status '
-                f'"{ex.error.code().name}" and includes the following errors:'
+                f'"{ex.error.code().name}" for customer_id '
+                f'{failure["customer_id"]} and query "{failure["query"]}" and '
+                'includes the following errors:'
             )
             for error in ex.failure.errors:
                 print(f'\tError with message "{error.message}".')
@@ -141,7 +143,14 @@ def _issue_search_request(client, customer_id, query):
                 retry_count += 1
                 time.sleep(retry_count * BACKOFF_FACTOR)
             else:
-                return (False, {"exception": ex})
+                return (
+                    False,
+                    {
+                        "exception": ex,
+                        "customer_id": customer_id,
+                        "query": query
+                    }
+                )
 
 
 def _generate_inputs(client, customer_ids, queries):

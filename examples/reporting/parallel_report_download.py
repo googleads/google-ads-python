@@ -12,7 +12,7 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
-"""Shows how to download a set of reports from a list of accounts in parallel.
+"""Shows how to download in parallel a set of reports from a list of accounts.
 
 If you need to obtain a list of accounts, please see the
 account_management/get_account_hierarchy.py or
@@ -31,9 +31,9 @@ from google.ads.google_ads.errors import GoogleAdsException
 # Maximum number of processes to spawn
 MAX_PROCESSES = multiprocessing.cpu_count()
 # Timeout between retries in seconds
-BACKOFF_FACTOR = 5
+BACKOFF_FACTOR = 2
 # Maximum number of retries for errors
-MAX_RETRIES = 5
+MAX_RETRIES = 2
 
 
 def main(client, customer_ids):
@@ -58,14 +58,52 @@ def main(client, customer_ids):
         client, customer_ids, [campaign_query, ad_group_query]
     )
     with multiprocessing.Pool(MAX_PROCESSES) as pool:
+        # Call _issue_search_request on each input, parallelizing the work
+        # across processes in the pool.
         results = pool.starmap(_issue_search_request, inputs)
-        print(results)
+
+        # Partition our results into successful and failed results.
+        successes = []
+        failures = []
+        for res in results:
+            if res[0]:
+                successes.append(res[1])
+            else:
+                failures.append(res[1])
+
+        # Output results.
+        print(
+            f"Total successful results: {len(successes)}\n"
+            f"Total failed results: {len(failures)}\n"
+        )
+
+        print("Successes:") if len(successes) else None
+        for success in successes:
+            # success["results"] represents an array of result strings for one
+            # customer ID / query combination.
+            result_str = "\n".join(success["results"])
+            print(result_str)
+
+        print("Failures:") if len(failures) else None
+        for failure in failures:
+            ex = failure["exception"]
+            print(
+                f'Request with ID "{ex.request_id}" failed with status '
+                f'"{ex.error.code().name}" and includes the following errors:'
+            )
+            for error in ex.failure.errors:
+                print(f'\tError with message "{error.message}".')
+                if error.location:
+                    for (
+                        field_path_element
+                    ) in error.location.field_path_elements:
+                        print(f"\t\tOn field: {field_path_element.field_name}")
 
 
 def _issue_search_request(client, customer_id, query):
     """Issues a search request using streaming.
 
-    If an error is caught, retries until MAX_RETRIES is reached.
+    Retries if a GoogleAdsException is caught, until MAX_RETRIES is reached.
 
     Args:
         client: an initialized GoogleAdsClient instance.
@@ -74,8 +112,8 @@ def _issue_search_request(client, customer_id, query):
     """
     ga_service = client.get_service("GoogleAdsService", version="v6")
     retry_count = 0
-    # A while loop allows us to retry until we've reached MAX_RETRIES or
-    # have successfully received a response.
+    # Retry until we've reached MAX_RETRIES or have successfully received a
+    # response.
     while True:
         try:
             response = ga_service.search_stream(customer_id, query)
@@ -94,31 +132,16 @@ def _issue_search_request(client, customer_id, query):
                         f"{ad_group_id}"
                         f"Campaign ID {row.campaign.id} "
                         f"had {row.metrics.impressions} impressions "
-                        f"and {row.metrics.clicks} clicks"
+                        f"and {row.metrics.clicks} clicks."
                     )
                     result_strings.append(result_string)
-            return result_strings
+            return (True, {"results": result_strings})
         except GoogleAdsException as ex:
             if retry_count < MAX_RETRIES:
                 retry_count += 1
                 time.sleep(retry_count * BACKOFF_FACTOR)
             else:
-                print(
-                    f"Request for customer ID {customer_id} with request ID "
-                    f"{ex.request_id} failed with status "
-                    f"{ex.error.code().name} after {retry_count + 1} "
-                    "retries and includes the following errors:"
-                )
-                for error in ex.failure.errors:
-                    print(f'\tError with message "{error.message}".')
-                    if error.location:
-                        for (
-                            field_path_element
-                        ) in error.location.field_path_elements:
-                            print(
-                                f"\t\tOn field: {field_path_element.field_name}"
-                            )
-                sys.exit(1)
+                return (False, {"exception": ex})
 
 
 def _generate_inputs(client, customer_ids, queries):
@@ -142,8 +165,8 @@ if __name__ == "__main__":
     google_ads_client = GoogleAdsClient.load_from_storage()
 
     parser = argparse.ArgumentParser(
-        description="Download a set of reports from a list of accounts in "
-        "parallel."
+        description="Download a set of reports in parallel from a list of "
+        "accounts."
     )
     # The following argument(s) should be provided to run the example.
     parser.add_argument(

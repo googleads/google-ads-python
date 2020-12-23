@@ -151,8 +151,8 @@ def _issue_search_request(client, customer_id, query):
                     {
                         "exception": ex,
                         "customer_id": customer_id,
-                        "query": query
-                    }
+                        "query": query,
+                    },
                 )
 
 

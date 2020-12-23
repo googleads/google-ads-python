@@ -73,8 +73,8 @@ def main(client, customer_ids):
 
         # Output results.
         print(
-            f"Total successful results: {len(successes)}\n"
-            f"Total failed results: {len(failures)}\n"
+            f'Total successful results: {len(successes)}\n'
+            f'Total failed results: {len(failures)}\n'
         )
 
         print("Successes:") if len(successes) else None
@@ -99,7 +99,7 @@ def main(client, customer_ids):
                     for (
                         field_path_element
                     ) in error.location.field_path_elements:
-                        print(f"\t\tOn field: {field_path_element.field_name}")
+                        print(f'\t\tOn field: {field_path_element.field_name}')
 
 
 def _issue_search_request(client, customer_id, query):
@@ -126,15 +126,15 @@ def _issue_search_request(client, customer_id, query):
             for batch in response:
                 for row in batch.results:
                     ad_group_id = (
-                        f"Ad Group ID {row.ad_group.id} in "
-                        if "ad_group.id" in query
-                        else ""
+                        f'Ad Group ID {row.ad_group.id} in '
+                        if 'ad_group.id' in query
+                        else ''
                     )
                     result_string = (
-                        f"{ad_group_id}"
-                        f"Campaign ID {row.campaign.id} "
-                        f"had {row.metrics.impressions} impressions "
-                        f"and {row.metrics.clicks} clicks."
+                        f'{ad_group_id}''
+                        f'Campaign ID {row.campaign.id} '
+                        f'had {row.metrics.impressions} impressions '
+                        f'and {row.metrics.clicks} clicks.'
                     )
                     result_strings.append(result_string)
             return (True, {"results": result_strings})

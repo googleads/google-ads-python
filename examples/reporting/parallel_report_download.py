@@ -131,7 +131,7 @@ def _issue_search_request(client, customer_id, query):
                         else ''
                     )
                     result_string = (
-                        f'{ad_group_id}''
+                        f'{ad_group_id}'
                         f'Campaign ID {row.campaign.id} '
                         f'had {row.metrics.impressions} impressions '
                         f'and {row.metrics.clicks} clicks.'
@@ -139,6 +139,9 @@ def _issue_search_request(client, customer_id, query):
                     result_strings.append(result_string)
             return (True, {"results": result_strings})
         except GoogleAdsException as ex:
+            # This example retries on all GoogleAdsExceptions. In practice,
+            # developers might want to limit retries to only those error codes
+            # they deem retriable.
             if retry_count < MAX_RETRIES:
                 retry_count += 1
                 time.sleep(retry_count * BACKOFF_FACTOR)

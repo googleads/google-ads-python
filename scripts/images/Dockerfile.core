@@ -1,0 +1,46 @@
+# Sets the Python image to extend from.
+# see https://hub.docker.com/_/python.
+ARG FROM="3.6"
+FROM python:${FROM}
+
+# Sets make flags, it uses multiple threads by default.
+ARG MAKEFLAGS="-j8"
+ENV MAKEFLAGS="${MAKEFLAGS}"
+
+##########
+# Updates, installs and configures the System.
+##########
+
+RUN apt-get -qq update \
+  && apt-get -qq install -y git
+
+##########
+# Installs and configures the client library.
+##########
+
+# Sets the working directory.
+ARG WORK_DIR="/google-ads-python"
+ENV GOOGLE_ADS_IMAGE_WORK_DIR="${WORK_DIR}"
+WORKDIR "${WORK_DIR}"
+
+# Copies the client library sources, it uses the context path by default.
+ARG LIB_SRC_PATH="."
+COPY "${LIB_SRC_PATH}" "${WORK_DIR}"
+# Works around the .dockerignore extreme slowness in Podman.
+RUN git clean -xdf
+
+# Sets Pip options.
+ARG PYTHON_PIP_OPTS="install"
+ENV GOOGLE_ADS_IMAGE_PYTHON_PIP_OPTS="${PYTHON_PIP_OPTS}"
+
+# Installs the library.
+RUN pip ${PYTHON_PIP_OPTS} .
+
+# Sets Python options.
+ARG PYTHON_PYTHON_OPTS="-m compileall"
+ENV GOOGLE_ADS_IMAGE_PYTHON_PYTHON_OPTS="${PYTHON_PYTHON_OPTS}"
+
+# Compiles the library code.
+RUN python ${PYTHON_PYTHON_OPTS} .
+
+CMD ["bash"]

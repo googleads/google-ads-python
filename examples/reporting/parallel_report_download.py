@@ -189,6 +189,15 @@ if __name__ == "__main__":
         required=True,
         help="The Google Ads customer IDs.",
     )
+    parser.add_argument(
+        "-l",
+        "--login_customer_id",
+        type=str,
+        help="The login customer ID (optional).",
+    )
     args = parser.parse_args()
+    # Override the login_customer_id on the GoogleAdsClient, if specified.
+    if args.login_customer_id is not None:
+        google_ads_client.login_customer_id = args.login_customer_id
 
     main(google_ads_client, args.customer_ids)

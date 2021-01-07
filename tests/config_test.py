@@ -228,6 +228,7 @@ class ConfigTest(FileTestCase):
             "GOOGLE_ADS_LOGGING": '{"test": true}',
             "GOOGLE_ADS_ENDPOINT": self.endpoint,
             "GOOGLE_ADS_LOGIN_CUSTOMER_ID": self.login_customer_id,
+            "GOOGLE_ADS_LINKED_CUSTOMER_ID": self.linked_customer_id,
             "GOOGLE_ADS_JSON_KEY_FILE_PATH": self.path_to_private_key_file,
             "GOOGLE_ADS_IMPERSONATED_EMAIL": self.delegated_account,
         }
@@ -244,6 +245,7 @@ class ConfigTest(FileTestCase):
                     "logging": {"test": True},
                     "endpoint": self.endpoint,
                     "login_customer_id": self.login_customer_id,
+                    "linked_customer_id": self.linked_customer_id,
                     "json_key_file_path": self.path_to_private_key_file,
                     "impersonated_email": self.delegated_account,
                 },

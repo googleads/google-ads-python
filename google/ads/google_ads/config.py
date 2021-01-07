@@ -36,7 +36,10 @@ _OAUTH2_SERVICE_ACCOUNT_KEYS = ("json_key_file_path", "impersonated_email")
 # These keys are deprecated environment variables that can be used in place of
 # the primary OAuth2 service account keys for backwards compatibility. They will
 # be removed in favor of the primary keys at some point.
-_SECONDARY_OAUTH2_SERVICE_ACCOUNT_KEYS = ("path_to_private_key_file", "delegated_account")
+_SECONDARY_OAUTH2_SERVICE_ACCOUNT_KEYS = (
+    "path_to_private_key_file",
+    "delegated_account",
+)
 _KEYS_ENV_VARIABLES_MAP = {
     key: _ENV_PREFIX + key.upper()
     for key in list(_REQUIRED_KEYS)
@@ -91,6 +94,7 @@ def validate_dict(config_data):
     Validations that are performed include:
         1. Ensuring all required keys are present.
         2. If a login_customer_id is present ensure it's valid
+        3. If a linked_customer_id is present ensure it's valid
 
     Args:
         config_data: a dict with configuration data.
@@ -265,7 +269,7 @@ def load_from_env():
         try:
             config_data["logging"] = json.loads(config_data["logging"])
             # The logger is configured here in case deprecation warnings need
-            # to be logger further down in this method. The logger is
+            # to be logged further down in this method. The logger is
             # otherwise configured by the GoogleAdsClient class.
             logging.config.dictConfig(config_data["logging"])
         except json.JSONDecodeError:
@@ -292,7 +296,10 @@ def load_from_env():
     # used to store service account credentials. It overrides the
     # 'path_to_private_key_file' variable, which exposes identical
     # functionality.
-    if "path_to_private_key_file" in specified_variable_names and "json_key_file_path" not in specified_variable_names:
+    if (
+        "path_to_private_key_file" in specified_variable_names
+        and "json_key_file_path" not in specified_variable_names
+    ):
         config_data["json_key_file_path"] = config_data[
             "path_to_private_key_file"
         ]
@@ -302,7 +309,10 @@ def load_from_env():
     # environment variable to use when setting the email address to impersonate
     # when using service account authentication. It overrides the
     # 'delegated_account' variable, which exposes identical functionality.
-    if "delegated_account" in specified_variable_names and "impersonated_email" not in specified_variable_names:
+    if (
+        "delegated_account" in specified_variable_names
+        and "impersonated_email" not in specified_variable_names
+    ):
         config_data["impersonated_email"] = config_data["delegated_account"]
         del config_data["delegated_account"]
 

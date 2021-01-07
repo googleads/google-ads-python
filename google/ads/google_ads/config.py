@@ -32,18 +32,19 @@ _OPTIONAL_KEYS = (
 )
 _CONFIG_FILE_PATH_KEY = ("configuration_file_path",)
 _OAUTH2_INSTALLED_APP_KEYS = ("client_id", "client_secret", "refresh_token")
-_OAUTH2_SERVICE_ACCOUNT_KEYS = ("path_to_private_key_file", "delegated_account")
-# These keys are additional environment variables that can be used to specify
-# some of the above configuration values.
-_REDUNDANT_KEYS = ("json_key_file_path", "impersonated_email")
+_OAUTH2_SERVICE_ACCOUNT_KEYS = ("json_key_file_path", "impersonated_email")
+# These keys are deprecated environment variables that can be used in place of
+# the primary OAuth2 service account keys for backwards compatibility. They will
+# be removed in favor of the primary keys at some point.
+_SECONDARY_OAUTH2_SERVICE_ACCOUNT_KEYS = ("path_to_private_key_file", "delegated_account")
 _KEYS_ENV_VARIABLES_MAP = {
     key: _ENV_PREFIX + key.upper()
     for key in list(_REQUIRED_KEYS)
     + list(_OPTIONAL_KEYS)
     + list(_OAUTH2_INSTALLED_APP_KEYS)
-    + list(_OAUTH2_SERVICE_ACCOUNT_KEYS)
     + list(_CONFIG_FILE_PATH_KEY)
-    + list(_REDUNDANT_KEYS)
+    + list(_OAUTH2_SERVICE_ACCOUNT_KEYS)
+    + list(_SECONDARY_OAUTH2_SERVICE_ACCOUNT_KEYS)
 }
 
 
@@ -274,33 +275,36 @@ def load_from_env():
 
     if "path_to_private_key_file" in specified_variable_names:
         _logger.warning(
-            "The 'GOOGLE_ADS_PATH_TO_PRIVATE_KEY_FILE' environment "
-            "variable is deprecated. Please use "
-            "'GOOGLE_ADS_JSON_KEY_FILE_PATH' instead."
+            "The 'GOOGLE_ADS_PATH_TO_PRIVATE_KEY_FILE' environment variable "
+            "is deprecated and support will be removed at some point in the "
+            "future. Please use 'GOOGLE_ADS_JSON_KEY_FILE_PATH' instead."
         )
 
     if "delegated_account" in specified_variable_names:
         _logger.warning(
-            "The 'GOOGLE_ADS_DELEGATED_ACCOUNT' environment "
-            "variable is deprecated. Please use "
-            "'GOOGLE_ADS_IMPERSONATED_EMAIL' instead."
+            "The 'GOOGLE_ADS_DELEGATED_ACCOUNT' environment variable "
+            "is deprecated and support will be removed at some point in the "
+            "future. Please use 'GOOGLE_ADS_IMPERSONATED_EMAIL' instead."
         )
 
-    # json_key_file_path is an alternate key that can be used in place of
-    # path_to_private_key_file. It will always override the latter, but the
-    # name will persist for compatibility purposes.
-    if "json_key_file_path" in specified_variable_names:
-        config_data["path_to_private_key_file"] = config_data[
-            "json_key_file_path"
+    # 'json_key_file_path' or GOOGLE_ADS_JSON_KEY_FILE_PATH is the preferred
+    # environment variable to use when setting the location of the json file
+    # used to store service account credentials. It overrides the
+    # 'path_to_private_key_file' variable, which exposes identical
+    # functionality.
+    if "path_to_private_key_file" in specified_variable_names and "json_key_file_path" not in specified_variable_names:
+        config_data["json_key_file_path"] = config_data[
+            "path_to_private_key_file"
         ]
-        del config_data["json_key_file_path"]
+        del config_data["path_to_private_key_file"]
 
-    # impersonated_email is an alternate key that can be used in placed of
-    # delegated_account. It will always override the latter, but the name will
-    # persist for compatibility purposes.
-    if "impersonated_email" in specified_variable_names:
-        config_data["delegated_account"] = config_data["impersonated_email"]
-        del config_data["impersonated_email"]
+    # 'impersonated_email' or GOOGLE_ADS_IMPERSONATED_EMAIL is the preferred
+    # environment variable to use when setting the email address to impersonate
+    # when using service account authentication. It overrides the
+    # 'delegated_account' variable, which exposes identical functionality.
+    if "delegated_account" in specified_variable_names and "impersonated_email" not in specified_variable_names:
+        config_data["impersonated_email"] = config_data["delegated_account"]
+        del config_data["delegated_account"]
 
     return config_data
 

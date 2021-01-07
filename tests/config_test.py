@@ -228,8 +228,8 @@ class ConfigTest(FileTestCase):
             "GOOGLE_ADS_LOGGING": '{"test": true}',
             "GOOGLE_ADS_ENDPOINT": self.endpoint,
             "GOOGLE_ADS_LOGIN_CUSTOMER_ID": self.login_customer_id,
-            "GOOGLE_ADS_PATH_TO_PRIVATE_KEY_FILE": self.path_to_private_key_file,
-            "GOOGLE_ADS_DELEGATED_ACCOUNT": self.delegated_account,
+            "GOOGLE_ADS_JSON_KEY_FILE_PATH": self.path_to_private_key_file,
+            "GOOGLE_ADS_IMPERSONATED_EMAIL": self.delegated_account,
         }
 
         with mock.patch("os.environ", environ):
@@ -244,8 +244,8 @@ class ConfigTest(FileTestCase):
                     "logging": {"test": True},
                     "endpoint": self.endpoint,
                     "login_customer_id": self.login_customer_id,
-                    "path_to_private_key_file": self.path_to_private_key_file,
-                    "delegated_account": self.delegated_account,
+                    "json_key_file_path": self.path_to_private_key_file,
+                    "impersonated_email": self.delegated_account,
                 },
             )
             config_spy.assert_called_once()
@@ -260,8 +260,8 @@ class ConfigTest(FileTestCase):
             "GOOGLE_ADS_LOGGING": '{"test": true}',
             "GOOGLE_ADS_ENDPOINT": self.endpoint,
             "GOOGLE_ADS_LOGIN_CUSTOMER_ID": self.login_customer_id,
-            "GOOGLE_ADS_PATH_TO_PRIVATE_KEY_FILE": self.path_to_private_key_file,
-            "GOOGLE_ADS_DELEGATED_ACCOUNT": self.delegated_account,
+            "GOOGLE_ADS_JSON_KEY_FILE_PATH": self.path_to_private_key_file,
+            "GOOGLE_ADS_IMPERSONATED_EMAIL": self.delegated_account,
         }
 
         with mock.patch("os.environ", environ):
@@ -298,7 +298,7 @@ class ConfigTest(FileTestCase):
             )
 
     def test_load_from_env_config_file_path_added_vars(self):
-        """Should use config from yaml file not from env for redundant vars."""
+        """Should use config from yaml when config file path env var exists."""
         env_dev_token = "abcdefg"
         yaml_dev_token = "123456"
         environ = {
@@ -330,7 +330,21 @@ class ConfigTest(FileTestCase):
         with mock.patch("os.environ", environ):
             result = config.load_from_env()
             self.assertEqual(
-                result["path_to_private_key_file"], self.json_key_file_path
+                result["json_key_file_path"], self.json_key_file_path
+            )
+
+    @mock.patch.object(config, "_logger", mock.Mock())
+    def test_load_from_env_secondary_file_path(self):
+        """JSON_KEY_FILE_PATH is used instead of secondary var name."""
+        environ = {
+            "GOOGLE_ADS_DEVELOPER_TOKEN": self.developer_token,
+            "GOOGLE_ADS_PATH_TO_PRIVATE_KEY_FILE": self.path_to_private_key_file,
+        }
+
+        with mock.patch("os.environ", environ):
+            result = config.load_from_env()
+            self.assertEqual(
+                result["json_key_file_path"], self.path_to_private_key_file
             )
 
     @mock.patch.object(config, "_logger", mock.Mock())
@@ -348,7 +362,21 @@ class ConfigTest(FileTestCase):
         with mock.patch("os.environ", environ):
             result = config.load_from_env()
             self.assertEqual(
-                result["delegated_account"], self.impersonated_email
+                result["impersonated_email"], self.impersonated_email
+            )
+
+    @mock.patch.object(config, "_logger", mock.Mock())
+    def test_load_from_env_secondary_delegated_email(self):
+        """IMPERSONATED_EMAIL is used instead of secondary var name."""
+        environ = {
+            "GOOGLE_ADS_DEVELOPER_TOKEN": self.developer_token,
+            "GOOGLE_ADS_DELEGATED_ACCOUNT": self.delegated_account,
+        }
+
+        with mock.patch("os.environ", environ):
+            result = config.load_from_env()
+            self.assertEqual(
+                result["impersonated_email"], self.delegated_account
             )
 
     def test_validate_dict(self):

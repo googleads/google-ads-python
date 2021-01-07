@@ -382,8 +382,8 @@ class GoogleAdsClientTest(FileTestCase):
     def test_load_from_storage_service_account_config(self):
         config = {
             "developer_token": self.developer_token,
-            "path_to_private_key_file": self.path_to_private_key_file,
-            "delegated_account": self.delegated_account,
+            "json_key_file_path": self.path_to_private_key_file,
+            "impersonated_email": self.delegated_account,
         }
 
         file_path = os.path.join(os.path.expanduser("~"), "google-ads.yaml")
@@ -399,8 +399,8 @@ class GoogleAdsClientTest(FileTestCase):
         ) as mock_credentials:
             Client.GoogleAdsClient.load_from_storage()
             mock_credentials.assert_called_once_with(
-                config.get("path_to_private_key_file"),
-                config.get("delegated_account"),
+                config.get("json_key_file_path"),
+                config.get("impersonated_email"),
             )
             mock_client_init.assert_called_once_with(
                 credentials=mock_credentials_instance,

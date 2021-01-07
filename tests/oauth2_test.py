@@ -24,7 +24,7 @@ class OAuth2Tests(TestCase):
         self.client_id = "client_id_123456789"
         self.client_secret = "client_secret_987654321"
         self.refresh_token = "refresh"
-        self.path_to_private_key_file = "/path/to/file"
+        self.json_key_file_path = "/path/to/file"
         self.subject = "test@test.com"
         self.token_uri = oauth2._DEFAULT_TOKEN_URI
         self.scopes = oauth2._SERVICE_ACCOUNT_SCOPES
@@ -62,11 +62,11 @@ class OAuth2Tests(TestCase):
             oauth2, "Request", return_value=mock_request
         ) as mock_request_class:
             result = oauth2.get_service_account_credentials(
-                self.path_to_private_key_file, self.subject
+                self.json_key_file_path, self.subject
             )
 
             mock_initializer.assert_called_once_with(
-                self.path_to_private_key_file,
+                self.json_key_file_path,
                 subject=self.subject,
                 scopes=self.scopes,
             )
@@ -99,8 +99,8 @@ class OAuth2Tests(TestCase):
 
     def test_get_credentials_installed_application(self):
         mock_config = {
-            "path_to_private_key_file": self.path_to_private_key_file,
-            "delegated_account": self.subject,
+            "json_key_file_path": self.json_key_file_path,
+            "impersonated_email": self.subject,
         }
 
         with mock.patch.object(
@@ -108,5 +108,5 @@ class OAuth2Tests(TestCase):
         ) as mock_initializer:
             oauth2.get_credentials(mock_config)
             mock_initializer.assert_called_once_with(
-                self.path_to_private_key_file, self.subject
+                self.json_key_file_path, self.subject
             )

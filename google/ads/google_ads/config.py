@@ -185,10 +185,11 @@ def load_from_yaml_file(path=None):
         path_from_env_var = os.environ.get(
             _ENV_PREFIX + _CONFIG_FILE_PATH_KEY[0].upper()
         )
-        if path_from_env_var:
-            path = path_from_env_var
-        else:
-            path = os.path.join(os.path.expanduser("~"), "google-ads.yaml")
+        path = (
+            path_from_env_var
+            if path_from_env_var
+            else os.path.join(os.path.expanduser("~"), "google-ads.yaml")
+        )
 
     if not os.path.isabs(path):
         path = os.path.expanduser(path)
@@ -283,6 +284,12 @@ def load_from_env():
             "is deprecated and support will be removed at some point in the "
             "future. Please use 'GOOGLE_ADS_JSON_KEY_FILE_PATH' instead."
         )
+        if "json_key_file_path" not in specified_variable_names:
+            config_data["json_key_file_path"] = config_data[
+                "path_to_private_key_file"
+            ]
+
+        del config_data["path_to_private_key_file"]
 
     if "delegated_account" in specified_variable_names:
         _logger.warning(
@@ -290,30 +297,9 @@ def load_from_env():
             "is deprecated and support will be removed at some point in the "
             "future. Please use 'GOOGLE_ADS_IMPERSONATED_EMAIL' instead."
         )
+        if "impersonated_email" not in specified_variable_names:
+            config_data["impersonated_email"] = config_data["delegated_account"]
 
-    # 'json_key_file_path' or GOOGLE_ADS_JSON_KEY_FILE_PATH is the preferred
-    # environment variable to use when setting the location of the json file
-    # used to store service account credentials. It overrides the
-    # 'path_to_private_key_file' variable, which exposes identical
-    # functionality.
-    if (
-        "path_to_private_key_file" in specified_variable_names
-        and "json_key_file_path" not in specified_variable_names
-    ):
-        config_data["json_key_file_path"] = config_data[
-            "path_to_private_key_file"
-        ]
-        del config_data["path_to_private_key_file"]
-
-    # 'impersonated_email' or GOOGLE_ADS_IMPERSONATED_EMAIL is the preferred
-    # environment variable to use when setting the email address to impersonate
-    # when using service account authentication. It overrides the
-    # 'delegated_account' variable, which exposes identical functionality.
-    if (
-        "delegated_account" in specified_variable_names
-        and "impersonated_email" not in specified_variable_names
-    ):
-        config_data["impersonated_email"] = config_data["delegated_account"]
         del config_data["delegated_account"]
 
     return config_data

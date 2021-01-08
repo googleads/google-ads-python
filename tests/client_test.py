@@ -118,7 +118,7 @@ class GoogleAdsClientTest(FileTestCase):
                 },
             )
 
-    def test_get_client_kwargs_login_customer_id_as_None(self):
+    def test_get_client_kwargs_login_customer_id_as_none(self):
         config = {
             "developer_token": self.developer_token,
             "client_id": self.client_id,
@@ -146,7 +146,7 @@ class GoogleAdsClientTest(FileTestCase):
                 },
             )
 
-    def test_get_client_kwargs_linked_customer_id_as_None(self):
+    def test_get_client_kwargs_linked_customer_id_as_none(self):
         config = {
             "developer_token": self.developer_token,
             "client_id": self.client_id,

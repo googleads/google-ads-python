@@ -83,6 +83,56 @@ def _config_parser_decorator(func):
         config_dict = func(*args, **kwargs)
         parsed_config = convert_login_customer_id_to_str(config_dict)
         parsed_config = convert_linked_customer_id_to_str(parsed_config)
+
+        config_keys = parsed_config.keys()
+
+        if "logging" in config_keys:
+            try:
+                parsed_config["logging"] = json.loads(parsed_config["logging"])
+                # The logger is configured here in case deprecation warnings
+                # need to be logged further down in this method. The logger is
+                # otherwise configured by the GoogleAdsClient class.
+                logging.config.dictConfig(parsed_config["logging"])
+            except json.JSONDecodeError:
+                raise ValueError(
+                    "Could not configure the client because the logging "
+                    "configuration defined in the 'logging' key or "
+                    "'GOOGLE_ADS_LOGGING' environment variable is invalid. "
+                    "The configuration value should be a valid JSON string."
+                )
+
+        if "path_to_private_key_file" in config_keys:
+            _logger.warning(
+                "The 'path_to_private_key_file' configuration key and "
+                "'GOOGLE_ADS_PATH_TO_PRIVATE_KEY_FILE' environment variable "
+                "are deprecated and support will be removed at some point in "
+                "the future. Please use 'json_key_file_path' configuration key "
+                "or 'GOOGLE_ADS_JSON_KEY_FILE_PATH' environment variable "
+                "instead."
+            )
+            if "json_key_file_path" not in config_keys:
+                parsed_config["json_key_file_path"] = parsed_config[
+                    "path_to_private_key_file"
+                ]
+
+            del parsed_config["path_to_private_key_file"]
+
+        if "delegated_account" in config_keys:
+            _logger.warning(
+                "The 'delegated_account' configuration key and "
+                "'GOOGLE_ADS_DELEGATED_PATH' environment variable are "
+                "deprecated and support will be removed at some point in "
+                "the future. Please use 'impersonated_email' configuration key "
+                "or 'GOOGLE_ADS_IMPERSONATED_EMAIL' environment variable "
+                "instead."
+            )
+            if "impersonated_email" not in config_keys:
+                parsed_config["impersonated_email"] = parsed_config[
+                    "delegated_account"
+                ]
+
+            del parsed_config["delegated_account"]
+
         return parsed_config
 
     return parser_wrapper
@@ -259,48 +309,10 @@ def load_from_env():
         if env_variable in os.environ
     }
 
-    specified_variable_names = config_data.keys()
-
     # If configuration_file_path is set by the environment then configuration
     # is retrieved from the yaml file specified in the given path.
-    if "configuration_file_path" in specified_variable_names:
+    if "configuration_file_path" in config_data.keys():
         return load_from_yaml_file(config_data["configuration_file_path"])
-
-    if "logging" in specified_variable_names:
-        try:
-            config_data["logging"] = json.loads(config_data["logging"])
-            # The logger is configured here in case deprecation warnings need
-            # to be logged further down in this method. The logger is
-            # otherwise configured by the GoogleAdsClient class.
-            logging.config.dictConfig(config_data["logging"])
-        except json.JSONDecodeError:
-            raise ValueError(
-                "GOOGLE_ADS_LOGGING env variable should be in JSON format."
-            )
-
-    if "path_to_private_key_file" in specified_variable_names:
-        _logger.warning(
-            "The 'GOOGLE_ADS_PATH_TO_PRIVATE_KEY_FILE' environment variable "
-            "is deprecated and support will be removed at some point in the "
-            "future. Please use 'GOOGLE_ADS_JSON_KEY_FILE_PATH' instead."
-        )
-        if "json_key_file_path" not in specified_variable_names:
-            config_data["json_key_file_path"] = config_data[
-                "path_to_private_key_file"
-            ]
-
-        del config_data["path_to_private_key_file"]
-
-    if "delegated_account" in specified_variable_names:
-        _logger.warning(
-            "The 'GOOGLE_ADS_DELEGATED_ACCOUNT' environment variable "
-            "is deprecated and support will be removed at some point in the "
-            "future. Please use 'GOOGLE_ADS_IMPERSONATED_EMAIL' instead."
-        )
-        if "impersonated_email" not in specified_variable_names:
-            config_data["impersonated_email"] = config_data["delegated_account"]
-
-        del config_data["delegated_account"]
 
     return config_data
 

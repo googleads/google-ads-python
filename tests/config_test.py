@@ -167,6 +167,28 @@ class ConfigTest(FileTestCase):
         self.assertEqual(result["developer_token"], self.developer_token)
         self.assertEqual(result["linked_customer_id"], self.linked_customer_id)
 
+    def test_load_from_yaml_file_secondary_service_account_keys(self):
+        """Should convert secondary keys to primary keys.
+
+        This test should be removed once the secondary service account keys
+        are deprecated.
+        """
+        file_path = os.path.join(os.path.expanduser("~"), "google-ads.yaml")
+        self.fs.create_file(
+            file_path,
+            contents=yaml.safe_dump(
+                {
+                    "developer_token": self.developer_token,
+                    "path_to_private_key_file": self.json_key_file_path,
+                    "delegated_account": self.impersonated_email,
+                }
+            ),
+        )
+
+        result = config.load_from_yaml_file()
+        self.assertEqual(result["json_key_file_path"], self.json_key_file_path)
+        self.assertEqual(result["impersonated_email"], self.impersonated_email)
+
     def test_parse_yaml_document_to_dict(self):
         yaml_doc = (
             "client_id: {}\n"
@@ -212,6 +234,18 @@ class ConfigTest(FileTestCase):
             "refresh_token": self.refresh_token,
         }
         self.assertEqual(config.load_from_dict(config_data), config_data)
+
+    def test_load_from_dict_secondary_service_account_keys(self):
+        """Should convert secondary keys to primary keys."""
+        config_data = {
+            "developer_token": self.developer_token,
+            "path_to_private_key_file": self.json_key_file_path,
+            "delegated_account": self.impersonated_email,
+        }
+
+        result = config.load_from_dict(config_data)
+        self.assertEqual(result["json_key_file_path"], self.json_key_file_path)
+        self.assertEqual(result["impersonated_email"], self.impersonated_email)
 
     def test_load_from_dict_error(self):
         config_data = 111

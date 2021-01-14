@@ -87,19 +87,23 @@ def _config_parser_decorator(func):
         config_keys = parsed_config.keys()
 
         if "logging" in config_keys:
-            try:
-                parsed_config["logging"] = json.loads(parsed_config["logging"])
-                # The logger is configured here in case deprecation warnings
-                # need to be logged further down in this method. The logger is
-                # otherwise configured by the GoogleAdsClient class.
-                logging.config.dictConfig(parsed_config["logging"])
-            except json.JSONDecodeError:
-                raise ValueError(
-                    "Could not configure the client because the logging "
-                    "configuration defined in the 'logging' key or "
-                    "'GOOGLE_ADS_LOGGING' environment variable is invalid. "
-                    "The configuration value should be a valid JSON string."
-                )
+            logging_config = parsed_config["logging"]
+            # If the logging config is a dict then it is already in the format
+            # that needs to be returned by this method.
+            if type(logging_config) is not dict:
+                try:
+                    parsed_config["logging"] = json.loads(logging_config)
+                    # The logger is configured here in case deprecation warnings
+                    # need to be logged further down in this method. The logger
+                    # is otherwise configured by the GoogleAdsClient class.
+                    logging.config.dictConfig(parsed_config["logging"])
+                except json.JSONDecodeError:
+                    raise ValueError(
+                        "Could not configure the client because the logging "
+                        "configuration defined in the 'logging' key or "
+                        "'GOOGLE_ADS_LOGGING' environment variable is invalid. "
+                        "The configuration value should be a valid JSON string."
+                    )
 
         if "path_to_private_key_file" in config_keys:
             _logger.warning(

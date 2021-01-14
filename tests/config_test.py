@@ -37,6 +37,44 @@ class ConfigTest(FileTestCase):
         self.configuration_file_path = "/usr/test/path/google-ads.yaml"
         self.impersonated_email = "impersonated@account.com"
 
+    def test_load_from_yaml_file_logging(self):
+        file_path = os.path.join(os.path.expanduser("~"), "google-ads.yaml")
+        self.fs.create_file(
+            file_path,
+            contents=yaml.safe_dump(
+                {
+                    "developer_token": self.developer_token,
+                    "logging": {
+                        "version": 1,
+                        "disable_existing_loggers": False,
+                        "formatters": {
+                            "default_fmt": {
+                                "format": "[%(asctime)s - %(levelname)s]",
+                                "datefmt": "%Y-%m-%d %H:%M:%S",
+                            }
+                        },
+                        "handlers": {
+                            "default_handler": {
+                                "class": "logging.StreamHandler",
+                                "formatter": "default_fmt",
+                            }
+                        },
+                        "loggers": {
+                            "": {
+                                "handlers": ["default_handler"],
+                                "level": "DEBUG",
+                            }
+                        },
+                    },
+                }
+            ),
+        )
+
+        result = config.load_from_yaml_file()
+
+        self.assertEqual(result["developer_token"], self.developer_token)
+        self.assertIsInstance(result["logging"], dict)
+
     def test_load_from_yaml_file(self):
         file_path = os.path.join(os.path.expanduser("~"), "google-ads.yaml")
         self.fs.create_file(
@@ -232,6 +270,31 @@ class ConfigTest(FileTestCase):
             "client_id": self.client_id,
             "client_secret": self.client_secret,
             "refresh_token": self.refresh_token,
+        }
+        self.assertEqual(config.load_from_dict(config_data), config_data)
+
+    def test_load_from_dict_logging(self):
+        config_data = {
+            "developer_token": self.developer_token,
+            "logging": {
+                "version": 1,
+                "disable_existing_loggers": False,
+                "formatters": {
+                    "default_fmt": {
+                        "format": "[%(asctime)s - %(levelname)s]",
+                        "datefmt": "%Y-%m-%d %H:%M:%S",
+                    }
+                },
+                "handlers": {
+                    "default_handler": {
+                        "class": "logging.StreamHandler",
+                        "formatter": "default_fmt",
+                    }
+                },
+                "loggers": {
+                    "": {"handlers": ["default_handler"], "level": "DEBUG",}
+                },
+            },
         }
         self.assertEqual(config.load_from_dict(config_data), config_data)
 

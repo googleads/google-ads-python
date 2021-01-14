@@ -67,13 +67,12 @@ def get_installed_app_credentials(
 
 @_initialize_credentials_decorator
 def get_service_account_credentials(
-    path_to_private_key_file, subject, scopes=_SERVICE_ACCOUNT_SCOPES
+    json_key_file_path, subject, scopes=_SERVICE_ACCOUNT_SCOPES
 ):
     """Creates and returns an instance of oauth2.service_account.Credentials.
 
     Args:
-        path_to_private_key_file: A str of the path to the private key file
-            location.
+        json_key_file_path: A str of the path to the private key file location.
         subject: A str of the email address of the delegated account.
         scopes: A list of additional scopes.
 
@@ -81,7 +80,7 @@ def get_service_account_credentials(
         An instance of oauth2.credentials.Credentials
     """
     return ServiceAccountCreds.from_service_account_file(
-        path_to_private_key_file, subject=subject, scopes=scopes
+        json_key_file_path, subject=subject, scopes=scopes
     )
 
 
@@ -107,8 +106,8 @@ def get_credentials(config_data):
     elif all(key in config_data for key in required_service_account_keys):
         # Using the Service Account Flow
         return get_service_account_credentials(
-            config_data.get("path_to_private_key_file"),
-            config_data.get("delegated_account"),
+            config_data.get("json_key_file_path"),
+            config_data.get("impersonated_email"),
         )
     else:
         raise ValueError(

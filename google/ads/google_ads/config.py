@@ -13,22 +13,41 @@
 # limitations under the License.
 """A set of functions to help load configuration from various locations."""
 
-import json
 import functools
+import json
+import logging.config
 import os
 import yaml
 
+
+_logger = logging.getLogger(__name__)
+
 _ENV_PREFIX = "GOOGLE_ADS_"
 _REQUIRED_KEYS = ("developer_token",)
-_OPTIONAL_KEYS = ("login_customer_id", "endpoint", "logging")
+_OPTIONAL_KEYS = (
+    "login_customer_id",
+    "endpoint",
+    "logging",
+    "linked_customer_id",
+)
+_CONFIG_FILE_PATH_KEY = ("configuration_file_path",)
 _OAUTH2_INSTALLED_APP_KEYS = ("client_id", "client_secret", "refresh_token")
-_OAUTH2_SERVICE_ACCOUNT_KEYS = ("path_to_private_key_file", "delegated_account")
+_OAUTH2_SERVICE_ACCOUNT_KEYS = ("json_key_file_path", "impersonated_email")
+# These keys are deprecated environment variables that can be used in place of
+# the primary OAuth2 service account keys for backwards compatibility. They will
+# be removed in favor of the primary keys at some point.
+_SECONDARY_OAUTH2_SERVICE_ACCOUNT_KEYS = (
+    "path_to_private_key_file",
+    "delegated_account",
+)
 _KEYS_ENV_VARIABLES_MAP = {
     key: _ENV_PREFIX + key.upper()
-    for key in list(_REQUIRED_KEYS)
-    + list(_OPTIONAL_KEYS)
-    + list(_OAUTH2_INSTALLED_APP_KEYS)
-    + list(_OAUTH2_SERVICE_ACCOUNT_KEYS)
+    for key in _REQUIRED_KEYS
+    + _OPTIONAL_KEYS
+    + _OAUTH2_INSTALLED_APP_KEYS
+    + _CONFIG_FILE_PATH_KEY
+    + _OAUTH2_SERVICE_ACCOUNT_KEYS
+    + _SECONDARY_OAUTH2_SERVICE_ACCOUNT_KEYS
 }
 
 
@@ -63,6 +82,61 @@ def _config_parser_decorator(func):
     def parser_wrapper(*args, **kwargs):
         config_dict = func(*args, **kwargs)
         parsed_config = convert_login_customer_id_to_str(config_dict)
+        parsed_config = convert_linked_customer_id_to_str(parsed_config)
+
+        config_keys = parsed_config.keys()
+
+        if "logging" in config_keys:
+            logging_config = parsed_config["logging"]
+            # If the logging config is a dict then it is already in the format
+            # that needs to be returned by this method.
+            if type(logging_config) is not dict:
+                try:
+                    parsed_config["logging"] = json.loads(logging_config)
+                    # The logger is configured here in case deprecation warnings
+                    # need to be logged further down in this method. The logger
+                    # is otherwise configured by the GoogleAdsClient class.
+                    logging.config.dictConfig(parsed_config["logging"])
+                except json.JSONDecodeError:
+                    raise ValueError(
+                        "Could not configure the client because the logging "
+                        "configuration defined in the 'logging' key or "
+                        "'GOOGLE_ADS_LOGGING' environment variable is invalid. "
+                        "The configuration value should be a valid JSON string."
+                    )
+
+        if "path_to_private_key_file" in config_keys:
+            _logger.warning(
+                "The 'path_to_private_key_file' configuration key and "
+                "'GOOGLE_ADS_PATH_TO_PRIVATE_KEY_FILE' environment variable "
+                "are deprecated and support will be removed at some point in "
+                "the future. Please use 'json_key_file_path' configuration key "
+                "or 'GOOGLE_ADS_JSON_KEY_FILE_PATH' environment variable "
+                "instead."
+            )
+            if "json_key_file_path" not in config_keys:
+                parsed_config["json_key_file_path"] = parsed_config[
+                    "path_to_private_key_file"
+                ]
+
+            del parsed_config["path_to_private_key_file"]
+
+        if "delegated_account" in config_keys:
+            _logger.warning(
+                "The 'delegated_account' configuration key and "
+                "'GOOGLE_ADS_DELEGATED_PATH' environment variable are "
+                "deprecated and support will be removed at some point in "
+                "the future. Please use 'impersonated_email' configuration key "
+                "or 'GOOGLE_ADS_IMPERSONATED_EMAIL' environment variable "
+                "instead."
+            )
+            if "impersonated_email" not in config_keys:
+                parsed_config["impersonated_email"] = parsed_config[
+                    "delegated_account"
+                ]
+
+            del parsed_config["delegated_account"]
+
         return parsed_config
 
     return parser_wrapper
@@ -74,6 +148,7 @@ def validate_dict(config_data):
     Validations that are performed include:
         1. Ensuring all required keys are present.
         2. If a login_customer_id is present ensure it's valid
+        3. If a linked_customer_id is present ensure it's valid
 
     Args:
         config_data: a dict with configuration data.
@@ -90,6 +165,30 @@ def validate_dict(config_data):
     if "login_customer_id" in config_data:
         validate_login_customer_id(config_data["login_customer_id"])
 
+    if "linked_customer_id" in config_data:
+        validate_linked_customer_id(config_data["linked_customer_id"])
+
+
+def _validate_customer_id(customer_id, id_type):
+    """Validates a customer ID.
+
+    Args:
+        customer_id: a str from config indicating a login customer ID or
+            linked customer ID.
+        id_type: a str of the type of customer ID, either "login" or "linked".
+
+    Raises:
+        ValueError: If the customer ID is not an int in the
+            range 0 - 9999999999.
+    """
+    if customer_id is not None:
+        if not customer_id.isdigit() or len(customer_id) != 10:
+            raise ValueError(
+                f"The specified {id_type} customer ID is invalid. "
+                "It must be a ten digit number represented "
+                'as a string, i.e. "1234567890"'
+            )
+
 
 def validate_login_customer_id(login_customer_id):
     """Validates a login customer ID.
@@ -101,13 +200,20 @@ def validate_login_customer_id(login_customer_id):
         ValueError: If the login customer ID is not an int in the
             range 0 - 9999999999.
     """
-    if login_customer_id is not None:
-        if not login_customer_id.isdigit() or len(login_customer_id) != 10:
-            raise ValueError(
-                "The specified login customer ID is invalid. "
-                "It must be a ten digit number represented "
-                'as a string, i.e. "1234567890"'
-            )
+    _validate_customer_id(login_customer_id, "login")
+
+
+def validate_linked_customer_id(linked_customer_id):
+    """Validates a linked customer ID.
+
+    Args:
+        linked_customer_id: a str from config indicating a linked customer ID.
+
+    Raises:
+        ValueError: If the linked customer ID is not an int in the
+            range 0 - 9999999999.
+    """
+    _validate_customer_id(linked_customer_id, "linked")
 
 
 @_config_validation_decorator
@@ -127,7 +233,17 @@ def load_from_yaml_file(path=None):
         IOError: If the configuration file can't be loaded.
     """
     if path is None:
-        path = os.path.join(os.path.expanduser("~"), "google-ads.yaml")
+        # If no path is specified then we check for the environment variable
+        # that may define the path. If that is not defined then we use the
+        # default path.
+        path_from_env_var = os.environ.get(
+            _ENV_PREFIX + _CONFIG_FILE_PATH_KEY[0].upper()
+        )
+        path = (
+            path_from_env_var
+            if path_from_env_var
+            else os.path.join(os.path.expanduser("~"), "google-ads.yaml")
+        )
 
     if not os.path.isabs(path):
         path = os.path.expanduser(path)
@@ -192,17 +308,15 @@ def load_from_env():
         ValueError: If the configuration
     """
     config_data = {
-        key: os.environ[env_variable]
+        key: os.environ.get(env_variable)
         for key, env_variable in _KEYS_ENV_VARIABLES_MAP.items()
         if env_variable in os.environ
     }
-    if "logging" in config_data.keys():
-        try:
-            config_data["logging"] = json.loads(config_data["logging"])
-        except json.JSONDecodeError:
-            raise ValueError(
-                "GOOGLE_ADS_LOGGING env variable should be in JSON format."
-            )
+
+    # If configuration_file_path is set by the environment then configuration
+    # is retrieved from the yaml file specified in the given path.
+    if "configuration_file_path" in config_data.keys():
+        return load_from_yaml_file(config_data["configuration_file_path"])
 
     return config_data
 
@@ -242,5 +356,26 @@ def convert_login_customer_id_to_str(config_data):
 
     if login_customer_id:
         config_data["login_customer_id"] = str(login_customer_id)
+
+    return config_data
+
+
+def convert_linked_customer_id_to_str(config_data):
+    """Parses a config dict's linked_customer_id attr value to a str.
+
+    Like many values from YAML it's possible for linked_customer_id to
+    either be a str or an int. Since we actually run validations on this
+    value before making requests it's important to parse it to a str.
+
+    Args:
+        config_data: A config dict object.
+
+    Returns:
+        The same config dict object with a mutated linked_customer_id attr.
+    """
+    linked_customer_id = config_data.get("linked_customer_id")
+
+    if linked_customer_id:
+        config_data["linked_customer_id"] = str(linked_customer_id)
 
     return config_data

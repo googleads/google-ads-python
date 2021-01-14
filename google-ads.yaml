@@ -23,14 +23,14 @@ login_customer_id: INSERT_LOGIN_CUSTOMER_ID_HERE
 ###############################################################################
 # To authenticate with a service account add the appropriate values to the    #
 # below configuration parameters and remove the four OAuth credentials above. #
-# The "path_to_private_key_file" value should be a path to your local private #
-# key json file, and "delegated_account" should be the email address that is  #
+# The "json_key_file_path" value should be a path to your local private       #
+# key json file, and "impersonated_email" should be the email address that is #
 # being used to impersonate the credentials making requests. for more         #
 # information on service accounts, see:                                       #
 # https://developers.google.com/google-ads/api/docs/oauth/service-accounts    #
 ###############################################################################
-# path_to_private_key_file: INSERT_PATH_TO_JSON_KEY_FILE_HERE
-# delegated_account: INSERT_DOMAIN_WIDE_DELEGATION_ACCOUNT
+# json_key_file_path: INSERT_PATH_TO_JSON_KEY_FILE_HERE
+# impersonated_email: INSERT_DOMAIN_WIDE_DELEGATION_ACCOUNT
 
 # Logging configuration
 ###############################################################################

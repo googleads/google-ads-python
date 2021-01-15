@@ -18,4 +18,4 @@ import google.ads.google_ads.errors
 import google.ads.google_ads.util
 
 
-VERSION = "8.0.0"
+VERSION = "8.2.0"

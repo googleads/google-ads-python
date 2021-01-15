@@ -1,3 +1,8 @@
+* 8.2.0
+- Added new client configuration environment variables.
+- Added ability to configure YAML file location via environment variable.
+- Added support for linked-customer-id header.
+
 * 8.1.0
 - Added support for Python 3.6 via PEP562 (Thanks @infectious!)
 

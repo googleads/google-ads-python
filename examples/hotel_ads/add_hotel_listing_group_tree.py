@@ -245,9 +245,8 @@ def _add_level1_nodes(
     other_hotels_listing_dimension_info = client.get_type(
         "ListingDimensionInfo", version="v6"
     )
-    # This is necessary to set "hotel_class" as the oneof field on the
-    # ListingDimentionInfo object without specifying the optional
-    # hotel_class.value field.
+    # Set "hotel_class" as the oneof field on the ListingDimentionInfo object
+    # without specifying the optional hotel_class.value field.
     other_hotels_listing_dimension_info.hotel_class.CopyFrom(
         client.get_type("HotelClassInfo", version="v6")
     )
@@ -357,8 +356,8 @@ def _add_level2_nodes(
     other_hotel_regions_listing_dimension_info = client.get_type(
         "ListingDimensionInfo", version="v6"
     )
-    # This is necessary to set "hotel_country_region" as the oneof field on the
-    # ListingDimentionInfo object without specifying the optional
+    # Set "hotel_country_region" as the oneof field on the ListingDimentionInfo
+    # object without specifying the optional
     # hotel_country_region.country_region_criterion field.
     other_hotel_regions_listing_dimension_info.hotel_country_region.CopyFrom(
         client.get_type("HotelCountryRegionInfo", version="v6")

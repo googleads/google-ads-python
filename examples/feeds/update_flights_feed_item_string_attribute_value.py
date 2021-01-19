@@ -14,9 +14,9 @@
 # limitations under the License.
 """Updates a feed item attribute value in a flights feed.
 
-To create a flights feed, run the AddFlightsFeed example. This example is
-specific to feeds of type DYNAMIC_FLIGHT. The attribute you are updating must
-be present on the feed.
+To create a flights feed, run the remarketing/add_flights_feed.py example.
+This example is specific to feeds of type DYNAMIC_FLIGHT. The attribute you are
+updating must be present on the feed.
 
 This example is specifically for updating the string attribute of a flights feed
 item, but it can also be changed to work with other data types of an attribute
@@ -53,7 +53,8 @@ def main(
     Args:
         client: an initialized GoogleAdsClient instance
         customer_id: a client customer ID
-        feed_id: the ID of feed containing the feed item to be updated.
+        feed_id: the ID of feed containing the feed item to be updated
+        feed_item_id: The ID of the feed item to be updated
         flight_placeholder_field_name: the flight placeholder field name for
             the attribute to be updated
         attribute_value: the new value to set the feed attribute to
@@ -197,8 +198,7 @@ def _placeholder_field_maps(
         SELECT
           feed.attributes
         FROM feed
-        WHERE feed.resource_name = '{feed_resource_name}'
-        LIMIT 1"""
+        WHERE feed.resource_name = '{feed_resource_name}'"""
     # Issues a search request. The page_size is set to 1 because we're only
     # requesting a single result.
     response = google_ads_service.search(customer_id, query, page_size=1)
@@ -231,8 +231,7 @@ def _get_feed_item(client, customer_id, feed_item_resource_name):
         SELECT
           feed_item.attribute_values
         FROM feed_item
-        WHERE feed_item.resource_name = '{feed_item_resource_name}'
-        LIMIT 1"""
+        WHERE feed_item.resource_name = '{feed_item_resource_name}'"""
 
     response = google_ads_service.search(customer_id, query, page_size=1)
 
@@ -272,7 +271,7 @@ def _get_attribute_index(target_feed_item_attribute_value, feed_item):
             break
 
     if attribute_index == -1:
-        raise Exception(
+        raise ValueError(
             "No matching feed attribute for feed item attribute "
             f"ID: {feed_item_attribute_value.feed_attribute_id}"
         )

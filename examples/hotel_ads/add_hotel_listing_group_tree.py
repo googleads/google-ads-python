@@ -245,6 +245,11 @@ def _add_level1_nodes(
     other_hotels_listing_dimension_info = client.get_type(
         "ListingDimensionInfo", version="v6"
     )
+    # Set "hotel_class" as the oneof field on the ListingDimentionInfo object
+    # without specifying the optional hotel_class.value field.
+    other_hotels_listing_dimension_info.hotel_class.CopyFrom(
+        client.get_type("HotelClassInfo", version="v6")
+    )
 
     # Create listing group info for other hotel classes as a SUBDIVISION node,
     # which will be used as a parent node for children nodes of the next level.
@@ -350,6 +355,12 @@ def _add_level2_nodes(
     # Create hotel class info and dimension info for hotels in other regions.
     other_hotel_regions_listing_dimension_info = client.get_type(
         "ListingDimensionInfo", version="v6"
+    )
+    # Set "hotel_country_region" as the oneof field on the ListingDimentionInfo
+    # object without specifying the optional
+    # hotel_country_region.country_region_criterion field.
+    other_hotel_regions_listing_dimension_info.hotel_country_region.CopyFrom(
+        client.get_type("HotelCountryRegionInfo", version="v6")
     )
 
     # Create listing group info for hotels in other regions as a UNIT node.

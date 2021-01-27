@@ -120,7 +120,7 @@ def main(client, login_customer_id=None):
                         # prevent visiting the same customer many times, we
                         # need to check if it's already in the Dictionary.
                         if (
-                            customer_client.id
+                            str(customer_client.id)
                             not in customer_ids_to_child_accounts
                             and customer_client.level == 1
                         ):

@@ -73,10 +73,13 @@ def main(client, customer_id):
     member2.keyword = "jupiter cruise"
     member3 = custom_audience.members.add()
     member3.member_type = member_type_enum.URL
-    member3.keyword = "http://www.example.com/locations/mars"
+    member3.url = "http://www.example.com/locations/mars"
     member4 = custom_audience.members.add()
     member4.member_type = member_type_enum.URL
-    member4.keyword = "http://www.example.com/locations/jupiter"
+    member4.url = "http://www.example.com/locations/jupiter"
+    member5 = custom_audience.members.add()
+    member5.member_type = member_type_enum.APP
+    member5.app = "com.google.android.apps.adwords"
 
     try:
         # Add the custom audience.

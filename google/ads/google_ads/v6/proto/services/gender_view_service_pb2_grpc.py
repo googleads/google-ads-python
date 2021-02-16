@@ -2,8 +2,8 @@
 """Client and server classes corresponding to protobuf-defined services."""
 import grpc
 
-from google.ads.google_ads.v6.proto.resources import gender_view_pb2 as google_dot_ads_dot_googleads__v6_dot_proto_dot_resources_dot_gender__view__pb2
-from google.ads.google_ads.v6.proto.services import gender_view_service_pb2 as google_dot_ads_dot_googleads__v6_dot_proto_dot_services_dot_gender__view__service__pb2
+from google.ads.google_ads.v6.proto.resources import gender_view_pb2 as google_dot_ads_dot_googleads_dot_v6_dot_resources_dot_gender__view__pb2
+from google.ads.google_ads.v6.proto.services import gender_view_service_pb2 as google_dot_ads_dot_googleads_dot_v6_dot_services_dot_gender__view__service__pb2
 
 
 class GenderViewServiceStub(object):
@@ -20,8 +20,8 @@ class GenderViewServiceStub(object):
         """
         self.GetGenderView = channel.unary_unary(
                 '/google.ads.googleads.v6.services.GenderViewService/GetGenderView',
-                request_serializer=google_dot_ads_dot_googleads__v6_dot_proto_dot_services_dot_gender__view__service__pb2.GetGenderViewRequest.SerializeToString,
-                response_deserializer=google_dot_ads_dot_googleads__v6_dot_proto_dot_resources_dot_gender__view__pb2.GenderView.FromString,
+                request_serializer=google_dot_ads_dot_googleads_dot_v6_dot_services_dot_gender__view__service__pb2.GetGenderViewRequest.SerializeToString,
+                response_deserializer=google_dot_ads_dot_googleads_dot_v6_dot_resources_dot_gender__view__pb2.GenderView.FromString,
                 )
 
 
@@ -43,8 +43,8 @@ def add_GenderViewServiceServicer_to_server(servicer, server):
     rpc_method_handlers = {
             'GetGenderView': grpc.unary_unary_rpc_method_handler(
                     servicer.GetGenderView,
-                    request_deserializer=google_dot_ads_dot_googleads__v6_dot_proto_dot_services_dot_gender__view__service__pb2.GetGenderViewRequest.FromString,
-                    response_serializer=google_dot_ads_dot_googleads__v6_dot_proto_dot_resources_dot_gender__view__pb2.GenderView.SerializeToString,
+                    request_deserializer=google_dot_ads_dot_googleads_dot_v6_dot_services_dot_gender__view__service__pb2.GetGenderViewRequest.FromString,
+                    response_serializer=google_dot_ads_dot_googleads_dot_v6_dot_resources_dot_gender__view__pb2.GenderView.SerializeToString,
             ),
     }
     generic_handler = grpc.method_handlers_generic_handler(
@@ -65,12 +65,13 @@ class GenderViewService(object):
             options=(),
             channel_credentials=None,
             call_credentials=None,
+            insecure=False,
             compression=None,
             wait_for_ready=None,
             timeout=None,
             metadata=None):
         return grpc.experimental.unary_unary(request, target, '/google.ads.googleads.v6.services.GenderViewService/GetGenderView',
-            google_dot_ads_dot_googleads__v6_dot_proto_dot_services_dot_gender__view__service__pb2.GetGenderViewRequest.SerializeToString,
-            google_dot_ads_dot_googleads__v6_dot_proto_dot_resources_dot_gender__view__pb2.GenderView.FromString,
+            google_dot_ads_dot_googleads_dot_v6_dot_services_dot_gender__view__service__pb2.GetGenderViewRequest.SerializeToString,
+            google_dot_ads_dot_googleads_dot_v6_dot_resources_dot_gender__view__pb2.GenderView.FromString,
             options, channel_credentials,
-            call_credentials, compression, wait_for_ready, timeout, metadata)
+            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)

@@ -2,8 +2,8 @@
 """Client and server classes corresponding to protobuf-defined services."""
 import grpc
 
-from google.ads.google_ads.v6.proto.resources import campaign_experiment_pb2 as google_dot_ads_dot_googleads__v6_dot_proto_dot_resources_dot_campaign__experiment__pb2
-from google.ads.google_ads.v6.proto.services import campaign_experiment_service_pb2 as google_dot_ads_dot_googleads__v6_dot_proto_dot_services_dot_campaign__experiment__service__pb2
+from google.ads.google_ads.v6.proto.resources import campaign_experiment_pb2 as google_dot_ads_dot_googleads_dot_v6_dot_resources_dot_campaign__experiment__pb2
+from google.ads.google_ads.v6.proto.services import campaign_experiment_service_pb2 as google_dot_ads_dot_googleads_dot_v6_dot_services_dot_campaign__experiment__service__pb2
 from google.longrunning import operations_pb2 as google_dot_longrunning_dot_operations__pb2
 from google.protobuf import empty_pb2 as google_dot_protobuf_dot_empty__pb2
 
@@ -31,38 +31,38 @@ class CampaignExperimentServiceStub(object):
         """
         self.GetCampaignExperiment = channel.unary_unary(
                 '/google.ads.googleads.v6.services.CampaignExperimentService/GetCampaignExperiment',
-                request_serializer=google_dot_ads_dot_googleads__v6_dot_proto_dot_services_dot_campaign__experiment__service__pb2.GetCampaignExperimentRequest.SerializeToString,
-                response_deserializer=google_dot_ads_dot_googleads__v6_dot_proto_dot_resources_dot_campaign__experiment__pb2.CampaignExperiment.FromString,
+                request_serializer=google_dot_ads_dot_googleads_dot_v6_dot_services_dot_campaign__experiment__service__pb2.GetCampaignExperimentRequest.SerializeToString,
+                response_deserializer=google_dot_ads_dot_googleads_dot_v6_dot_resources_dot_campaign__experiment__pb2.CampaignExperiment.FromString,
                 )
         self.CreateCampaignExperiment = channel.unary_unary(
                 '/google.ads.googleads.v6.services.CampaignExperimentService/CreateCampaignExperiment',
-                request_serializer=google_dot_ads_dot_googleads__v6_dot_proto_dot_services_dot_campaign__experiment__service__pb2.CreateCampaignExperimentRequest.SerializeToString,
+                request_serializer=google_dot_ads_dot_googleads_dot_v6_dot_services_dot_campaign__experiment__service__pb2.CreateCampaignExperimentRequest.SerializeToString,
                 response_deserializer=google_dot_longrunning_dot_operations__pb2.Operation.FromString,
                 )
         self.MutateCampaignExperiments = channel.unary_unary(
                 '/google.ads.googleads.v6.services.CampaignExperimentService/MutateCampaignExperiments',
-                request_serializer=google_dot_ads_dot_googleads__v6_dot_proto_dot_services_dot_campaign__experiment__service__pb2.MutateCampaignExperimentsRequest.SerializeToString,
-                response_deserializer=google_dot_ads_dot_googleads__v6_dot_proto_dot_services_dot_campaign__experiment__service__pb2.MutateCampaignExperimentsResponse.FromString,
+                request_serializer=google_dot_ads_dot_googleads_dot_v6_dot_services_dot_campaign__experiment__service__pb2.MutateCampaignExperimentsRequest.SerializeToString,
+                response_deserializer=google_dot_ads_dot_googleads_dot_v6_dot_services_dot_campaign__experiment__service__pb2.MutateCampaignExperimentsResponse.FromString,
                 )
         self.GraduateCampaignExperiment = channel.unary_unary(
                 '/google.ads.googleads.v6.services.CampaignExperimentService/GraduateCampaignExperiment',
-                request_serializer=google_dot_ads_dot_googleads__v6_dot_proto_dot_services_dot_campaign__experiment__service__pb2.GraduateCampaignExperimentRequest.SerializeToString,
-                response_deserializer=google_dot_ads_dot_googleads__v6_dot_proto_dot_services_dot_campaign__experiment__service__pb2.GraduateCampaignExperimentResponse.FromString,
+                request_serializer=google_dot_ads_dot_googleads_dot_v6_dot_services_dot_campaign__experiment__service__pb2.GraduateCampaignExperimentRequest.SerializeToString,
+                response_deserializer=google_dot_ads_dot_googleads_dot_v6_dot_services_dot_campaign__experiment__service__pb2.GraduateCampaignExperimentResponse.FromString,
                 )
         self.PromoteCampaignExperiment = channel.unary_unary(
                 '/google.ads.googleads.v6.services.CampaignExperimentService/PromoteCampaignExperiment',
-                request_serializer=google_dot_ads_dot_googleads__v6_dot_proto_dot_services_dot_campaign__experiment__service__pb2.PromoteCampaignExperimentRequest.SerializeToString,
+                request_serializer=google_dot_ads_dot_googleads_dot_v6_dot_services_dot_campaign__experiment__service__pb2.PromoteCampaignExperimentRequest.SerializeToString,
                 response_deserializer=google_dot_longrunning_dot_operations__pb2.Operation.FromString,
                 )
         self.EndCampaignExperiment = channel.unary_unary(
                 '/google.ads.googleads.v6.services.CampaignExperimentService/EndCampaignExperiment',
-                request_serializer=google_dot_ads_dot_googleads__v6_dot_proto_dot_services_dot_campaign__experiment__service__pb2.EndCampaignExperimentRequest.SerializeToString,
+                request_serializer=google_dot_ads_dot_googleads_dot_v6_dot_services_dot_campaign__experiment__service__pb2.EndCampaignExperimentRequest.SerializeToString,
                 response_deserializer=google_dot_protobuf_dot_empty__pb2.Empty.FromString,
                 )
         self.ListCampaignExperimentAsyncErrors = channel.unary_unary(
                 '/google.ads.googleads.v6.services.CampaignExperimentService/ListCampaignExperimentAsyncErrors',
-                request_serializer=google_dot_ads_dot_googleads__v6_dot_proto_dot_services_dot_campaign__experiment__service__pb2.ListCampaignExperimentAsyncErrorsRequest.SerializeToString,
-                response_deserializer=google_dot_ads_dot_googleads__v6_dot_proto_dot_services_dot_campaign__experiment__service__pb2.ListCampaignExperimentAsyncErrorsResponse.FromString,
+                request_serializer=google_dot_ads_dot_googleads_dot_v6_dot_services_dot_campaign__experiment__service__pb2.ListCampaignExperimentAsyncErrorsRequest.SerializeToString,
+                response_deserializer=google_dot_ads_dot_googleads_dot_v6_dot_services_dot_campaign__experiment__service__pb2.ListCampaignExperimentAsyncErrorsResponse.FromString,
                 )
 
 
@@ -154,38 +154,38 @@ def add_CampaignExperimentServiceServicer_to_server(servicer, server):
     rpc_method_handlers = {
             'GetCampaignExperiment': grpc.unary_unary_rpc_method_handler(
                     servicer.GetCampaignExperiment,
-                    request_deserializer=google_dot_ads_dot_googleads__v6_dot_proto_dot_services_dot_campaign__experiment__service__pb2.GetCampaignExperimentRequest.FromString,
-                    response_serializer=google_dot_ads_dot_googleads__v6_dot_proto_dot_resources_dot_campaign__experiment__pb2.CampaignExperiment.SerializeToString,
+                    request_deserializer=google_dot_ads_dot_googleads_dot_v6_dot_services_dot_campaign__experiment__service__pb2.GetCampaignExperimentRequest.FromString,
+                    response_serializer=google_dot_ads_dot_googleads_dot_v6_dot_resources_dot_campaign__experiment__pb2.CampaignExperiment.SerializeToString,
             ),
             'CreateCampaignExperiment': grpc.unary_unary_rpc_method_handler(
                     servicer.CreateCampaignExperiment,
-                    request_deserializer=google_dot_ads_dot_googleads__v6_dot_proto_dot_services_dot_campaign__experiment__service__pb2.CreateCampaignExperimentRequest.FromString,
+                    request_deserializer=google_dot_ads_dot_googleads_dot_v6_dot_services_dot_campaign__experiment__service__pb2.CreateCampaignExperimentRequest.FromString,
                     response_serializer=google_dot_longrunning_dot_operations__pb2.Operation.SerializeToString,
             ),
             'MutateCampaignExperiments': grpc.unary_unary_rpc_method_handler(
                     servicer.MutateCampaignExperiments,
-                    request_deserializer=google_dot_ads_dot_googleads__v6_dot_proto_dot_services_dot_campaign__experiment__service__pb2.MutateCampaignExperimentsRequest.FromString,
-                    response_serializer=google_dot_ads_dot_googleads__v6_dot_proto_dot_services_dot_campaign__experiment__service__pb2.MutateCampaignExperimentsResponse.SerializeToString,
+                    request_deserializer=google_dot_ads_dot_googleads_dot_v6_dot_services_dot_campaign__experiment__service__pb2.MutateCampaignExperimentsRequest.FromString,
+                    response_serializer=google_dot_ads_dot_googleads_dot_v6_dot_services_dot_campaign__experiment__service__pb2.MutateCampaignExperimentsResponse.SerializeToString,
             ),
             'GraduateCampaignExperiment': grpc.unary_unary_rpc_method_handler(
                     servicer.GraduateCampaignExperiment,
-                    request_deserializer=google_dot_ads_dot_googleads__v6_dot_proto_dot_services_dot_campaign__experiment__service__pb2.GraduateCampaignExperimentRequest.FromString,
-                    response_serializer=google_dot_ads_dot_googleads__v6_dot_proto_dot_services_dot_campaign__experiment__service__pb2.GraduateCampaignExperimentResponse.SerializeToString,
+                    request_deserializer=google_dot_ads_dot_googleads_dot_v6_dot_services_dot_campaign__experiment__service__pb2.GraduateCampaignExperimentRequest.FromString,
+                    response_serializer=google_dot_ads_dot_googleads_dot_v6_dot_services_dot_campaign__experiment__service__pb2.GraduateCampaignExperimentResponse.SerializeToString,
             ),
             'PromoteCampaignExperiment': grpc.unary_unary_rpc_method_handler(
                     servicer.PromoteCampaignExperiment,
-                    request_deserializer=google_dot_ads_dot_googleads__v6_dot_proto_dot_services_dot_campaign__experiment__service__pb2.PromoteCampaignExperimentRequest.FromString,
+                    request_deserializer=google_dot_ads_dot_googleads_dot_v6_dot_services_dot_campaign__experiment__service__pb2.PromoteCampaignExperimentRequest.FromString,
                     response_serializer=google_dot_longrunning_dot_operations__pb2.Operation.SerializeToString,
             ),
             'EndCampaignExperiment': grpc.unary_unary_rpc_method_handler(
                     servicer.EndCampaignExperiment,
-                    request_deserializer=google_dot_ads_dot_googleads__v6_dot_proto_dot_services_dot_campaign__experiment__service__pb2.EndCampaignExperimentRequest.FromString,
+                    request_deserializer=google_dot_ads_dot_googleads_dot_v6_dot_services_dot_campaign__experiment__service__pb2.EndCampaignExperimentRequest.FromString,
                     response_serializer=google_dot_protobuf_dot_empty__pb2.Empty.SerializeToString,
             ),
             'ListCampaignExperimentAsyncErrors': grpc.unary_unary_rpc_method_handler(
                     servicer.ListCampaignExperimentAsyncErrors,
-                    request_deserializer=google_dot_ads_dot_googleads__v6_dot_proto_dot_services_dot_campaign__experiment__service__pb2.ListCampaignExperimentAsyncErrorsRequest.FromString,
-                    response_serializer=google_dot_ads_dot_googleads__v6_dot_proto_dot_services_dot_campaign__experiment__service__pb2.ListCampaignExperimentAsyncErrorsResponse.SerializeToString,
+                    request_deserializer=google_dot_ads_dot_googleads_dot_v6_dot_services_dot_campaign__experiment__service__pb2.ListCampaignExperimentAsyncErrorsRequest.FromString,
+                    response_serializer=google_dot_ads_dot_googleads_dot_v6_dot_services_dot_campaign__experiment__service__pb2.ListCampaignExperimentAsyncErrorsResponse.SerializeToString,
             ),
     }
     generic_handler = grpc.method_handlers_generic_handler(
@@ -215,15 +215,16 @@ class CampaignExperimentService(object):
             options=(),
             channel_credentials=None,
             call_credentials=None,
+            insecure=False,
             compression=None,
             wait_for_ready=None,
             timeout=None,
             metadata=None):
         return grpc.experimental.unary_unary(request, target, '/google.ads.googleads.v6.services.CampaignExperimentService/GetCampaignExperiment',
-            google_dot_ads_dot_googleads__v6_dot_proto_dot_services_dot_campaign__experiment__service__pb2.GetCampaignExperimentRequest.SerializeToString,
-            google_dot_ads_dot_googleads__v6_dot_proto_dot_resources_dot_campaign__experiment__pb2.CampaignExperiment.FromString,
+            google_dot_ads_dot_googleads_dot_v6_dot_services_dot_campaign__experiment__service__pb2.GetCampaignExperimentRequest.SerializeToString,
+            google_dot_ads_dot_googleads_dot_v6_dot_resources_dot_campaign__experiment__pb2.CampaignExperiment.FromString,
             options, channel_credentials,
-            call_credentials, compression, wait_for_ready, timeout, metadata)
+            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
 
     @staticmethod
     def CreateCampaignExperiment(request,
@@ -231,15 +232,16 @@ class CampaignExperimentService(object):
             options=(),
             channel_credentials=None,
             call_credentials=None,
+            insecure=False,
             compression=None,
             wait_for_ready=None,
             timeout=None,
             metadata=None):
         return grpc.experimental.unary_unary(request, target, '/google.ads.googleads.v6.services.CampaignExperimentService/CreateCampaignExperiment',
-            google_dot_ads_dot_googleads__v6_dot_proto_dot_services_dot_campaign__experiment__service__pb2.CreateCampaignExperimentRequest.SerializeToString,
+            google_dot_ads_dot_googleads_dot_v6_dot_services_dot_campaign__experiment__service__pb2.CreateCampaignExperimentRequest.SerializeToString,
             google_dot_longrunning_dot_operations__pb2.Operation.FromString,
             options, channel_credentials,
-            call_credentials, compression, wait_for_ready, timeout, metadata)
+            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
 
     @staticmethod
     def MutateCampaignExperiments(request,
@@ -247,15 +249,16 @@ class CampaignExperimentService(object):
             options=(),
             channel_credentials=None,
             call_credentials=None,
+            insecure=False,
             compression=None,
             wait_for_ready=None,
             timeout=None,
             metadata=None):
         return grpc.experimental.unary_unary(request, target, '/google.ads.googleads.v6.services.CampaignExperimentService/MutateCampaignExperiments',
-            google_dot_ads_dot_googleads__v6_dot_proto_dot_services_dot_campaign__experiment__service__pb2.MutateCampaignExperimentsRequest.SerializeToString,
-            google_dot_ads_dot_googleads__v6_dot_proto_dot_services_dot_campaign__experiment__service__pb2.MutateCampaignExperimentsResponse.FromString,
+            google_dot_ads_dot_googleads_dot_v6_dot_services_dot_campaign__experiment__service__pb2.MutateCampaignExperimentsRequest.SerializeToString,
+            google_dot_ads_dot_googleads_dot_v6_dot_services_dot_campaign__experiment__service__pb2.MutateCampaignExperimentsResponse.FromString,
             options, channel_credentials,
-            call_credentials, compression, wait_for_ready, timeout, metadata)
+            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
 
     @staticmethod
     def GraduateCampaignExperiment(request,
@@ -263,15 +266,16 @@ class CampaignExperimentService(object):
             options=(),
             channel_credentials=None,
             call_credentials=None,
+            insecure=False,
             compression=None,
             wait_for_ready=None,
             timeout=None,
             metadata=None):
         return grpc.experimental.unary_unary(request, target, '/google.ads.googleads.v6.services.CampaignExperimentService/GraduateCampaignExperiment',
-            google_dot_ads_dot_googleads__v6_dot_proto_dot_services_dot_campaign__experiment__service__pb2.GraduateCampaignExperimentRequest.SerializeToString,
-            google_dot_ads_dot_googleads__v6_dot_proto_dot_services_dot_campaign__experiment__service__pb2.GraduateCampaignExperimentResponse.FromString,
+            google_dot_ads_dot_googleads_dot_v6_dot_services_dot_campaign__experiment__service__pb2.GraduateCampaignExperimentRequest.SerializeToString,
+            google_dot_ads_dot_googleads_dot_v6_dot_services_dot_campaign__experiment__service__pb2.GraduateCampaignExperimentResponse.FromString,
             options, channel_credentials,
-            call_credentials, compression, wait_for_ready, timeout, metadata)
+            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
 
     @staticmethod
     def PromoteCampaignExperiment(request,
@@ -279,15 +283,16 @@ class CampaignExperimentService(object):
             options=(),
             channel_credentials=None,
             call_credentials=None,
+            insecure=False,
             compression=None,
             wait_for_ready=None,
             timeout=None,
             metadata=None):
         return grpc.experimental.unary_unary(request, target, '/google.ads.googleads.v6.services.CampaignExperimentService/PromoteCampaignExperiment',
-            google_dot_ads_dot_googleads__v6_dot_proto_dot_services_dot_campaign__experiment__service__pb2.PromoteCampaignExperimentRequest.SerializeToString,
+            google_dot_ads_dot_googleads_dot_v6_dot_services_dot_campaign__experiment__service__pb2.PromoteCampaignExperimentRequest.SerializeToString,
             google_dot_longrunning_dot_operations__pb2.Operation.FromString,
             options, channel_credentials,
-            call_credentials, compression, wait_for_ready, timeout, metadata)
+            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
 
     @staticmethod
     def EndCampaignExperiment(request,
@@ -295,15 +300,16 @@ class CampaignExperimentService(object):
             options=(),
             channel_credentials=None,
             call_credentials=None,
+            insecure=False,
             compression=None,
             wait_for_ready=None,
             timeout=None,
             metadata=None):
         return grpc.experimental.unary_unary(request, target, '/google.ads.googleads.v6.services.CampaignExperimentService/EndCampaignExperiment',
-            google_dot_ads_dot_googleads__v6_dot_proto_dot_services_dot_campaign__experiment__service__pb2.EndCampaignExperimentRequest.SerializeToString,
+            google_dot_ads_dot_googleads_dot_v6_dot_services_dot_campaign__experiment__service__pb2.EndCampaignExperimentRequest.SerializeToString,
             google_dot_protobuf_dot_empty__pb2.Empty.FromString,
             options, channel_credentials,
-            call_credentials, compression, wait_for_ready, timeout, metadata)
+            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
 
     @staticmethod
     def ListCampaignExperimentAsyncErrors(request,
@@ -311,12 +317,13 @@ class CampaignExperimentService(object):
             options=(),
             channel_credentials=None,
             call_credentials=None,
+            insecure=False,
             compression=None,
             wait_for_ready=None,
             timeout=None,
             metadata=None):
         return grpc.experimental.unary_unary(request, target, '/google.ads.googleads.v6.services.CampaignExperimentService/ListCampaignExperimentAsyncErrors',
-            google_dot_ads_dot_googleads__v6_dot_proto_dot_services_dot_campaign__experiment__service__pb2.ListCampaignExperimentAsyncErrorsRequest.SerializeToString,
-            google_dot_ads_dot_googleads__v6_dot_proto_dot_services_dot_campaign__experiment__service__pb2.ListCampaignExperimentAsyncErrorsResponse.FromString,
+            google_dot_ads_dot_googleads_dot_v6_dot_services_dot_campaign__experiment__service__pb2.ListCampaignExperimentAsyncErrorsRequest.SerializeToString,
+            google_dot_ads_dot_googleads_dot_v6_dot_services_dot_campaign__experiment__service__pb2.ListCampaignExperimentAsyncErrorsResponse.FromString,
             options, channel_credentials,
-            call_credentials, compression, wait_for_ready, timeout, metadata)
+            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)

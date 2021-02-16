@@ -73,12 +73,13 @@ class GroupPlacementViewServiceClient(object):
 
 
     @classmethod
-    def group_placement_view_path(cls, customer, group_placement_view):
+    def group_placement_view_path(cls, customer_id, ad_group_id, base64_placement):
         """Return a fully-qualified group_placement_view string."""
         return google.api_core.path_template.expand(
-            'customers/{customer}/groupPlacementViews/{group_placement_view}',
-            customer=customer,
-            group_placement_view=group_placement_view,
+            'customers/{customer_id}/groupPlacementViews/{ad_group_id}~{base64_placement}',
+            customer_id=customer_id,
+            ad_group_id=ad_group_id,
+            base64_placement=base64_placement,
         )
 
     def __init__(self, transport=None, channel=None, credentials=None,
@@ -190,6 +191,15 @@ class GroupPlacementViewServiceClient(object):
             metadata=None):
         """
         Returns the requested Group Placement view in full detail.
+
+        Example:
+            >>> from google.ads import googleads_v6
+            >>>
+            >>> client = googleads_v6.GroupPlacementViewServiceClient()
+            >>>
+            >>> resource_name = client.group_placement_view_path('[CUSTOMER_ID]', '[AD_GROUP_ID]', '[BASE64_PLACEMENT]')
+            >>>
+            >>> response = client.get_group_placement_view(resource_name)
 
         Args:
             resource_name (str): Required. The resource name of the Group Placement view to fetch.

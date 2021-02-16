@@ -30,7 +30,6 @@ import sys
 
 from google.ads.google_ads.client import GoogleAdsClient
 from google.ads.google_ads.errors import GoogleAdsException
-from google.ads.google_ads.util import ResourceName
 
 last_criterion_id = 0
 
@@ -315,9 +314,7 @@ def _create_listing_group_subdivision(
     # the ID for the ad group criterion.
     ad_group_criterion.resource_name = client.get_service(
         "AdGroupCriterionService", version="v6"
-    ).ad_group_criteria_path(
-        customer_id, ResourceName.format_composite(ad_group_id, next_id())
-    )
+    ).ad_group_criterion_path(customer_id, ad_group_id, next_id())
     ad_group_criterion.status = client.get_type(
         "AdGroupCriterionStatusEnum", version="v6"
     ).ENABLED

@@ -73,12 +73,13 @@ class ClickViewServiceClient(object):
 
 
     @classmethod
-    def click_view_path(cls, customer, click_view):
+    def click_view_path(cls, customer_id, date, gclid):
         """Return a fully-qualified click_view string."""
         return google.api_core.path_template.expand(
-            'customers/{customer}/clickViews/{click_view}',
-            customer=customer,
-            click_view=click_view,
+            'customers/{customer_id}/clickViews/{date}~{gclid}',
+            customer_id=customer_id,
+            date=date,
+            gclid=gclid,
         )
 
     def __init__(self, transport=None, channel=None, credentials=None,
@@ -190,6 +191,15 @@ class ClickViewServiceClient(object):
             metadata=None):
         """
         Returns the requested click view in full detail.
+
+        Example:
+            >>> from google.ads import googleads_v6
+            >>>
+            >>> client = googleads_v6.ClickViewServiceClient()
+            >>>
+            >>> resource_name = client.click_view_path('[CUSTOMER_ID]', '[DATE]', '[GCLID]')
+            >>>
+            >>> response = client.get_click_view(resource_name)
 
         Args:
             resource_name (str): Required. The resource name of the click view to fetch.

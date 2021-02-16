@@ -73,12 +73,15 @@ class FeedItemTargetServiceClient(object):
 
 
     @classmethod
-    def feed_item_target_path(cls, customer, feed_item_target):
+    def feed_item_target_path(cls, customer_id, feed_id, feed_item_id, feed_item_target_type, feed_item_target_id):
         """Return a fully-qualified feed_item_target string."""
         return google.api_core.path_template.expand(
-            'customers/{customer}/feedItemTargets/{feed_item_target}',
-            customer=customer,
-            feed_item_target=feed_item_target,
+            'customers/{customer_id}/feedItemTargets/{feed_id}~{feed_item_id}~{feed_item_target_type}~{feed_item_target_id}',
+            customer_id=customer_id,
+            feed_id=feed_id,
+            feed_item_id=feed_item_id,
+            feed_item_target_type=feed_item_target_type,
+            feed_item_target_id=feed_item_target_id,
         )
 
     def __init__(self, transport=None, channel=None, credentials=None,
@@ -191,6 +194,15 @@ class FeedItemTargetServiceClient(object):
         """
         Returns the requested feed item targets in full detail.
 
+        Example:
+            >>> from google.ads import googleads_v6
+            >>>
+            >>> client = googleads_v6.FeedItemTargetServiceClient()
+            >>>
+            >>> resource_name = client.feed_item_target_path('[CUSTOMER_ID]', '[FEED_ID]', '[FEED_ITEM_ID]', '[FEED_ITEM_TARGET_TYPE]', '[FEED_ITEM_TARGET_ID]')
+            >>>
+            >>> response = client.get_feed_item_target(resource_name)
+
         Args:
             resource_name (str): Required. The resource name of the feed item targets to fetch.
             retry (Optional[google.api_core.retry.Retry]):  A retry object used
@@ -247,6 +259,19 @@ class FeedItemTargetServiceClient(object):
             metadata=None):
         """
         Creates or removes feed item targets. Operation statuses are returned.
+
+        Example:
+            >>> from google.ads import googleads_v6
+            >>>
+            >>> client = googleads_v6.FeedItemTargetServiceClient()
+            >>>
+            >>> # TODO: Initialize `customer_id`:
+            >>> customer_id = ''
+            >>>
+            >>> # TODO: Initialize `operations`:
+            >>> operations = []
+            >>>
+            >>> response = client.mutate_feed_item_targets(customer_id, operations)
 
         Args:
             customer_id (str): Required. The ID of the customer whose feed item targets are being modified.

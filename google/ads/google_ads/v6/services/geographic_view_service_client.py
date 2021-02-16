@@ -73,12 +73,13 @@ class GeographicViewServiceClient(object):
 
 
     @classmethod
-    def geographic_view_path(cls, customer, geographic_view):
+    def geographic_view_path(cls, customer_id, country_criterion_id, location_type):
         """Return a fully-qualified geographic_view string."""
         return google.api_core.path_template.expand(
-            'customers/{customer}/geographicViews/{geographic_view}',
-            customer=customer,
-            geographic_view=geographic_view,
+            'customers/{customer_id}/geographicViews/{country_criterion_id}~{location_type}',
+            customer_id=customer_id,
+            country_criterion_id=country_criterion_id,
+            location_type=location_type,
         )
 
     def __init__(self, transport=None, channel=None, credentials=None,
@@ -190,6 +191,15 @@ class GeographicViewServiceClient(object):
             metadata=None):
         """
         Returns the requested geographic view in full detail.
+
+        Example:
+            >>> from google.ads import googleads_v6
+            >>>
+            >>> client = googleads_v6.GeographicViewServiceClient()
+            >>>
+            >>> resource_name = client.geographic_view_path('[CUSTOMER_ID]', '[COUNTRY_CRITERION_ID]', '[LOCATION_TYPE]')
+            >>>
+            >>> response = client.get_geographic_view(resource_name)
 
         Args:
             resource_name (str): Required. The resource name of the geographic view to fetch.

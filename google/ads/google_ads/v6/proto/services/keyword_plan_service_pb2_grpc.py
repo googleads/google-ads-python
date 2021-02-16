@@ -2,8 +2,8 @@
 """Client and server classes corresponding to protobuf-defined services."""
 import grpc
 
-from google.ads.google_ads.v6.proto.resources import keyword_plan_pb2 as google_dot_ads_dot_googleads__v6_dot_proto_dot_resources_dot_keyword__plan__pb2
-from google.ads.google_ads.v6.proto.services import keyword_plan_service_pb2 as google_dot_ads_dot_googleads__v6_dot_proto_dot_services_dot_keyword__plan__service__pb2
+from google.ads.google_ads.v6.proto.resources import keyword_plan_pb2 as google_dot_ads_dot_googleads_dot_v6_dot_resources_dot_keyword__plan__pb2
+from google.ads.google_ads.v6.proto.services import keyword_plan_service_pb2 as google_dot_ads_dot_googleads_dot_v6_dot_services_dot_keyword__plan__service__pb2
 
 
 class KeywordPlanServiceStub(object):
@@ -20,33 +20,33 @@ class KeywordPlanServiceStub(object):
         """
         self.GetKeywordPlan = channel.unary_unary(
                 '/google.ads.googleads.v6.services.KeywordPlanService/GetKeywordPlan',
-                request_serializer=google_dot_ads_dot_googleads__v6_dot_proto_dot_services_dot_keyword__plan__service__pb2.GetKeywordPlanRequest.SerializeToString,
-                response_deserializer=google_dot_ads_dot_googleads__v6_dot_proto_dot_resources_dot_keyword__plan__pb2.KeywordPlan.FromString,
+                request_serializer=google_dot_ads_dot_googleads_dot_v6_dot_services_dot_keyword__plan__service__pb2.GetKeywordPlanRequest.SerializeToString,
+                response_deserializer=google_dot_ads_dot_googleads_dot_v6_dot_resources_dot_keyword__plan__pb2.KeywordPlan.FromString,
                 )
         self.MutateKeywordPlans = channel.unary_unary(
                 '/google.ads.googleads.v6.services.KeywordPlanService/MutateKeywordPlans',
-                request_serializer=google_dot_ads_dot_googleads__v6_dot_proto_dot_services_dot_keyword__plan__service__pb2.MutateKeywordPlansRequest.SerializeToString,
-                response_deserializer=google_dot_ads_dot_googleads__v6_dot_proto_dot_services_dot_keyword__plan__service__pb2.MutateKeywordPlansResponse.FromString,
+                request_serializer=google_dot_ads_dot_googleads_dot_v6_dot_services_dot_keyword__plan__service__pb2.MutateKeywordPlansRequest.SerializeToString,
+                response_deserializer=google_dot_ads_dot_googleads_dot_v6_dot_services_dot_keyword__plan__service__pb2.MutateKeywordPlansResponse.FromString,
                 )
         self.GenerateForecastCurve = channel.unary_unary(
                 '/google.ads.googleads.v6.services.KeywordPlanService/GenerateForecastCurve',
-                request_serializer=google_dot_ads_dot_googleads__v6_dot_proto_dot_services_dot_keyword__plan__service__pb2.GenerateForecastCurveRequest.SerializeToString,
-                response_deserializer=google_dot_ads_dot_googleads__v6_dot_proto_dot_services_dot_keyword__plan__service__pb2.GenerateForecastCurveResponse.FromString,
+                request_serializer=google_dot_ads_dot_googleads_dot_v6_dot_services_dot_keyword__plan__service__pb2.GenerateForecastCurveRequest.SerializeToString,
+                response_deserializer=google_dot_ads_dot_googleads_dot_v6_dot_services_dot_keyword__plan__service__pb2.GenerateForecastCurveResponse.FromString,
                 )
         self.GenerateForecastTimeSeries = channel.unary_unary(
                 '/google.ads.googleads.v6.services.KeywordPlanService/GenerateForecastTimeSeries',
-                request_serializer=google_dot_ads_dot_googleads__v6_dot_proto_dot_services_dot_keyword__plan__service__pb2.GenerateForecastTimeSeriesRequest.SerializeToString,
-                response_deserializer=google_dot_ads_dot_googleads__v6_dot_proto_dot_services_dot_keyword__plan__service__pb2.GenerateForecastTimeSeriesResponse.FromString,
+                request_serializer=google_dot_ads_dot_googleads_dot_v6_dot_services_dot_keyword__plan__service__pb2.GenerateForecastTimeSeriesRequest.SerializeToString,
+                response_deserializer=google_dot_ads_dot_googleads_dot_v6_dot_services_dot_keyword__plan__service__pb2.GenerateForecastTimeSeriesResponse.FromString,
                 )
         self.GenerateForecastMetrics = channel.unary_unary(
                 '/google.ads.googleads.v6.services.KeywordPlanService/GenerateForecastMetrics',
-                request_serializer=google_dot_ads_dot_googleads__v6_dot_proto_dot_services_dot_keyword__plan__service__pb2.GenerateForecastMetricsRequest.SerializeToString,
-                response_deserializer=google_dot_ads_dot_googleads__v6_dot_proto_dot_services_dot_keyword__plan__service__pb2.GenerateForecastMetricsResponse.FromString,
+                request_serializer=google_dot_ads_dot_googleads_dot_v6_dot_services_dot_keyword__plan__service__pb2.GenerateForecastMetricsRequest.SerializeToString,
+                response_deserializer=google_dot_ads_dot_googleads_dot_v6_dot_services_dot_keyword__plan__service__pb2.GenerateForecastMetricsResponse.FromString,
                 )
         self.GenerateHistoricalMetrics = channel.unary_unary(
                 '/google.ads.googleads.v6.services.KeywordPlanService/GenerateHistoricalMetrics',
-                request_serializer=google_dot_ads_dot_googleads__v6_dot_proto_dot_services_dot_keyword__plan__service__pb2.GenerateHistoricalMetricsRequest.SerializeToString,
-                response_deserializer=google_dot_ads_dot_googleads__v6_dot_proto_dot_services_dot_keyword__plan__service__pb2.GenerateHistoricalMetricsResponse.FromString,
+                request_serializer=google_dot_ads_dot_googleads_dot_v6_dot_services_dot_keyword__plan__service__pb2.GenerateHistoricalMetricsRequest.SerializeToString,
+                response_deserializer=google_dot_ads_dot_googleads_dot_v6_dot_services_dot_keyword__plan__service__pb2.GenerateHistoricalMetricsResponse.FromString,
                 )
 
 
@@ -115,33 +115,33 @@ def add_KeywordPlanServiceServicer_to_server(servicer, server):
     rpc_method_handlers = {
             'GetKeywordPlan': grpc.unary_unary_rpc_method_handler(
                     servicer.GetKeywordPlan,
-                    request_deserializer=google_dot_ads_dot_googleads__v6_dot_proto_dot_services_dot_keyword__plan__service__pb2.GetKeywordPlanRequest.FromString,
-                    response_serializer=google_dot_ads_dot_googleads__v6_dot_proto_dot_resources_dot_keyword__plan__pb2.KeywordPlan.SerializeToString,
+                    request_deserializer=google_dot_ads_dot_googleads_dot_v6_dot_services_dot_keyword__plan__service__pb2.GetKeywordPlanRequest.FromString,
+                    response_serializer=google_dot_ads_dot_googleads_dot_v6_dot_resources_dot_keyword__plan__pb2.KeywordPlan.SerializeToString,
             ),
             'MutateKeywordPlans': grpc.unary_unary_rpc_method_handler(
                     servicer.MutateKeywordPlans,
-                    request_deserializer=google_dot_ads_dot_googleads__v6_dot_proto_dot_services_dot_keyword__plan__service__pb2.MutateKeywordPlansRequest.FromString,
-                    response_serializer=google_dot_ads_dot_googleads__v6_dot_proto_dot_services_dot_keyword__plan__service__pb2.MutateKeywordPlansResponse.SerializeToString,
+                    request_deserializer=google_dot_ads_dot_googleads_dot_v6_dot_services_dot_keyword__plan__service__pb2.MutateKeywordPlansRequest.FromString,
+                    response_serializer=google_dot_ads_dot_googleads_dot_v6_dot_services_dot_keyword__plan__service__pb2.MutateKeywordPlansResponse.SerializeToString,
             ),
             'GenerateForecastCurve': grpc.unary_unary_rpc_method_handler(
                     servicer.GenerateForecastCurve,
-                    request_deserializer=google_dot_ads_dot_googleads__v6_dot_proto_dot_services_dot_keyword__plan__service__pb2.GenerateForecastCurveRequest.FromString,
-                    response_serializer=google_dot_ads_dot_googleads__v6_dot_proto_dot_services_dot_keyword__plan__service__pb2.GenerateForecastCurveResponse.SerializeToString,
+                    request_deserializer=google_dot_ads_dot_googleads_dot_v6_dot_services_dot_keyword__plan__service__pb2.GenerateForecastCurveRequest.FromString,
+                    response_serializer=google_dot_ads_dot_googleads_dot_v6_dot_services_dot_keyword__plan__service__pb2.GenerateForecastCurveResponse.SerializeToString,
             ),
             'GenerateForecastTimeSeries': grpc.unary_unary_rpc_method_handler(
                     servicer.GenerateForecastTimeSeries,
-                    request_deserializer=google_dot_ads_dot_googleads__v6_dot_proto_dot_services_dot_keyword__plan__service__pb2.GenerateForecastTimeSeriesRequest.FromString,
-                    response_serializer=google_dot_ads_dot_googleads__v6_dot_proto_dot_services_dot_keyword__plan__service__pb2.GenerateForecastTimeSeriesResponse.SerializeToString,
+                    request_deserializer=google_dot_ads_dot_googleads_dot_v6_dot_services_dot_keyword__plan__service__pb2.GenerateForecastTimeSeriesRequest.FromString,
+                    response_serializer=google_dot_ads_dot_googleads_dot_v6_dot_services_dot_keyword__plan__service__pb2.GenerateForecastTimeSeriesResponse.SerializeToString,
             ),
             'GenerateForecastMetrics': grpc.unary_unary_rpc_method_handler(
                     servicer.GenerateForecastMetrics,
-                    request_deserializer=google_dot_ads_dot_googleads__v6_dot_proto_dot_services_dot_keyword__plan__service__pb2.GenerateForecastMetricsRequest.FromString,
-                    response_serializer=google_dot_ads_dot_googleads__v6_dot_proto_dot_services_dot_keyword__plan__service__pb2.GenerateForecastMetricsResponse.SerializeToString,
+                    request_deserializer=google_dot_ads_dot_googleads_dot_v6_dot_services_dot_keyword__plan__service__pb2.GenerateForecastMetricsRequest.FromString,
+                    response_serializer=google_dot_ads_dot_googleads_dot_v6_dot_services_dot_keyword__plan__service__pb2.GenerateForecastMetricsResponse.SerializeToString,
             ),
             'GenerateHistoricalMetrics': grpc.unary_unary_rpc_method_handler(
                     servicer.GenerateHistoricalMetrics,
-                    request_deserializer=google_dot_ads_dot_googleads__v6_dot_proto_dot_services_dot_keyword__plan__service__pb2.GenerateHistoricalMetricsRequest.FromString,
-                    response_serializer=google_dot_ads_dot_googleads__v6_dot_proto_dot_services_dot_keyword__plan__service__pb2.GenerateHistoricalMetricsResponse.SerializeToString,
+                    request_deserializer=google_dot_ads_dot_googleads_dot_v6_dot_services_dot_keyword__plan__service__pb2.GenerateHistoricalMetricsRequest.FromString,
+                    response_serializer=google_dot_ads_dot_googleads_dot_v6_dot_services_dot_keyword__plan__service__pb2.GenerateHistoricalMetricsResponse.SerializeToString,
             ),
     }
     generic_handler = grpc.method_handlers_generic_handler(
@@ -162,15 +162,16 @@ class KeywordPlanService(object):
             options=(),
             channel_credentials=None,
             call_credentials=None,
+            insecure=False,
             compression=None,
             wait_for_ready=None,
             timeout=None,
             metadata=None):
         return grpc.experimental.unary_unary(request, target, '/google.ads.googleads.v6.services.KeywordPlanService/GetKeywordPlan',
-            google_dot_ads_dot_googleads__v6_dot_proto_dot_services_dot_keyword__plan__service__pb2.GetKeywordPlanRequest.SerializeToString,
-            google_dot_ads_dot_googleads__v6_dot_proto_dot_resources_dot_keyword__plan__pb2.KeywordPlan.FromString,
+            google_dot_ads_dot_googleads_dot_v6_dot_services_dot_keyword__plan__service__pb2.GetKeywordPlanRequest.SerializeToString,
+            google_dot_ads_dot_googleads_dot_v6_dot_resources_dot_keyword__plan__pb2.KeywordPlan.FromString,
             options, channel_credentials,
-            call_credentials, compression, wait_for_ready, timeout, metadata)
+            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
 
     @staticmethod
     def MutateKeywordPlans(request,
@@ -178,15 +179,16 @@ class KeywordPlanService(object):
             options=(),
             channel_credentials=None,
             call_credentials=None,
+            insecure=False,
             compression=None,
             wait_for_ready=None,
             timeout=None,
             metadata=None):
         return grpc.experimental.unary_unary(request, target, '/google.ads.googleads.v6.services.KeywordPlanService/MutateKeywordPlans',
-            google_dot_ads_dot_googleads__v6_dot_proto_dot_services_dot_keyword__plan__service__pb2.MutateKeywordPlansRequest.SerializeToString,
-            google_dot_ads_dot_googleads__v6_dot_proto_dot_services_dot_keyword__plan__service__pb2.MutateKeywordPlansResponse.FromString,
+            google_dot_ads_dot_googleads_dot_v6_dot_services_dot_keyword__plan__service__pb2.MutateKeywordPlansRequest.SerializeToString,
+            google_dot_ads_dot_googleads_dot_v6_dot_services_dot_keyword__plan__service__pb2.MutateKeywordPlansResponse.FromString,
             options, channel_credentials,
-            call_credentials, compression, wait_for_ready, timeout, metadata)
+            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
 
     @staticmethod
     def GenerateForecastCurve(request,
@@ -194,15 +196,16 @@ class KeywordPlanService(object):
             options=(),
             channel_credentials=None,
             call_credentials=None,
+            insecure=False,
             compression=None,
             wait_for_ready=None,
             timeout=None,
             metadata=None):
         return grpc.experimental.unary_unary(request, target, '/google.ads.googleads.v6.services.KeywordPlanService/GenerateForecastCurve',
-            google_dot_ads_dot_googleads__v6_dot_proto_dot_services_dot_keyword__plan__service__pb2.GenerateForecastCurveRequest.SerializeToString,
-            google_dot_ads_dot_googleads__v6_dot_proto_dot_services_dot_keyword__plan__service__pb2.GenerateForecastCurveResponse.FromString,
+            google_dot_ads_dot_googleads_dot_v6_dot_services_dot_keyword__plan__service__pb2.GenerateForecastCurveRequest.SerializeToString,
+            google_dot_ads_dot_googleads_dot_v6_dot_services_dot_keyword__plan__service__pb2.GenerateForecastCurveResponse.FromString,
             options, channel_credentials,
-            call_credentials, compression, wait_for_ready, timeout, metadata)
+            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
 
     @staticmethod
     def GenerateForecastTimeSeries(request,
@@ -210,15 +213,16 @@ class KeywordPlanService(object):
             options=(),
             channel_credentials=None,
             call_credentials=None,
+            insecure=False,
             compression=None,
             wait_for_ready=None,
             timeout=None,
             metadata=None):
         return grpc.experimental.unary_unary(request, target, '/google.ads.googleads.v6.services.KeywordPlanService/GenerateForecastTimeSeries',
-            google_dot_ads_dot_googleads__v6_dot_proto_dot_services_dot_keyword__plan__service__pb2.GenerateForecastTimeSeriesRequest.SerializeToString,
-            google_dot_ads_dot_googleads__v6_dot_proto_dot_services_dot_keyword__plan__service__pb2.GenerateForecastTimeSeriesResponse.FromString,
+            google_dot_ads_dot_googleads_dot_v6_dot_services_dot_keyword__plan__service__pb2.GenerateForecastTimeSeriesRequest.SerializeToString,
+            google_dot_ads_dot_googleads_dot_v6_dot_services_dot_keyword__plan__service__pb2.GenerateForecastTimeSeriesResponse.FromString,
             options, channel_credentials,
-            call_credentials, compression, wait_for_ready, timeout, metadata)
+            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
 
     @staticmethod
     def GenerateForecastMetrics(request,
@@ -226,15 +230,16 @@ class KeywordPlanService(object):
             options=(),
             channel_credentials=None,
             call_credentials=None,
+            insecure=False,
             compression=None,
             wait_for_ready=None,
             timeout=None,
             metadata=None):
         return grpc.experimental.unary_unary(request, target, '/google.ads.googleads.v6.services.KeywordPlanService/GenerateForecastMetrics',
-            google_dot_ads_dot_googleads__v6_dot_proto_dot_services_dot_keyword__plan__service__pb2.GenerateForecastMetricsRequest.SerializeToString,
-            google_dot_ads_dot_googleads__v6_dot_proto_dot_services_dot_keyword__plan__service__pb2.GenerateForecastMetricsResponse.FromString,
+            google_dot_ads_dot_googleads_dot_v6_dot_services_dot_keyword__plan__service__pb2.GenerateForecastMetricsRequest.SerializeToString,
+            google_dot_ads_dot_googleads_dot_v6_dot_services_dot_keyword__plan__service__pb2.GenerateForecastMetricsResponse.FromString,
             options, channel_credentials,
-            call_credentials, compression, wait_for_ready, timeout, metadata)
+            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
 
     @staticmethod
     def GenerateHistoricalMetrics(request,
@@ -242,12 +247,13 @@ class KeywordPlanService(object):
             options=(),
             channel_credentials=None,
             call_credentials=None,
+            insecure=False,
             compression=None,
             wait_for_ready=None,
             timeout=None,
             metadata=None):
         return grpc.experimental.unary_unary(request, target, '/google.ads.googleads.v6.services.KeywordPlanService/GenerateHistoricalMetrics',
-            google_dot_ads_dot_googleads__v6_dot_proto_dot_services_dot_keyword__plan__service__pb2.GenerateHistoricalMetricsRequest.SerializeToString,
-            google_dot_ads_dot_googleads__v6_dot_proto_dot_services_dot_keyword__plan__service__pb2.GenerateHistoricalMetricsResponse.FromString,
+            google_dot_ads_dot_googleads_dot_v6_dot_services_dot_keyword__plan__service__pb2.GenerateHistoricalMetricsRequest.SerializeToString,
+            google_dot_ads_dot_googleads_dot_v6_dot_services_dot_keyword__plan__service__pb2.GenerateHistoricalMetricsResponse.FromString,
             options, channel_credentials,
-            call_credentials, compression, wait_for_ready, timeout, metadata)
+            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)

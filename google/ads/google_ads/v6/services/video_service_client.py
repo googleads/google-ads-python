@@ -73,12 +73,12 @@ class VideoServiceClient(object):
 
 
     @classmethod
-    def video_path(cls, customer, video):
+    def video_path(cls, customer_id, video_id):
         """Return a fully-qualified video string."""
         return google.api_core.path_template.expand(
-            'customers/{customer}/videos/{video}',
-            customer=customer,
-            video=video,
+            'customers/{customer_id}/videos/{video_id}',
+            customer_id=customer_id,
+            video_id=video_id,
         )
 
     def __init__(self, transport=None, channel=None, credentials=None,
@@ -190,6 +190,15 @@ class VideoServiceClient(object):
             metadata=None):
         """
         Returns the requested video in full detail.
+
+        Example:
+            >>> from google.ads import googleads_v6
+            >>>
+            >>> client = googleads_v6.VideoServiceClient()
+            >>>
+            >>> resource_name = client.video_path('[CUSTOMER_ID]', '[VIDEO_ID]')
+            >>>
+            >>> response = client.get_video(resource_name)
 
         Args:
             resource_name (str): Required. The resource name of the video to fetch.

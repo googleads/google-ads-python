@@ -2,8 +2,8 @@
 """Client and server classes corresponding to protobuf-defined services."""
 import grpc
 
-from google.ads.google_ads.v6.proto.resources import customer_manager_link_pb2 as google_dot_ads_dot_googleads__v6_dot_proto_dot_resources_dot_customer__manager__link__pb2
-from google.ads.google_ads.v6.proto.services import customer_manager_link_service_pb2 as google_dot_ads_dot_googleads__v6_dot_proto_dot_services_dot_customer__manager__link__service__pb2
+from google.ads.google_ads.v6.proto.resources import customer_manager_link_pb2 as google_dot_ads_dot_googleads_dot_v6_dot_resources_dot_customer__manager__link__pb2
+from google.ads.google_ads.v6.proto.services import customer_manager_link_service_pb2 as google_dot_ads_dot_googleads_dot_v6_dot_services_dot_customer__manager__link__service__pb2
 
 
 class CustomerManagerLinkServiceStub(object):
@@ -18,18 +18,18 @@ class CustomerManagerLinkServiceStub(object):
         """
         self.GetCustomerManagerLink = channel.unary_unary(
                 '/google.ads.googleads.v6.services.CustomerManagerLinkService/GetCustomerManagerLink',
-                request_serializer=google_dot_ads_dot_googleads__v6_dot_proto_dot_services_dot_customer__manager__link__service__pb2.GetCustomerManagerLinkRequest.SerializeToString,
-                response_deserializer=google_dot_ads_dot_googleads__v6_dot_proto_dot_resources_dot_customer__manager__link__pb2.CustomerManagerLink.FromString,
+                request_serializer=google_dot_ads_dot_googleads_dot_v6_dot_services_dot_customer__manager__link__service__pb2.GetCustomerManagerLinkRequest.SerializeToString,
+                response_deserializer=google_dot_ads_dot_googleads_dot_v6_dot_resources_dot_customer__manager__link__pb2.CustomerManagerLink.FromString,
                 )
         self.MutateCustomerManagerLink = channel.unary_unary(
                 '/google.ads.googleads.v6.services.CustomerManagerLinkService/MutateCustomerManagerLink',
-                request_serializer=google_dot_ads_dot_googleads__v6_dot_proto_dot_services_dot_customer__manager__link__service__pb2.MutateCustomerManagerLinkRequest.SerializeToString,
-                response_deserializer=google_dot_ads_dot_googleads__v6_dot_proto_dot_services_dot_customer__manager__link__service__pb2.MutateCustomerManagerLinkResponse.FromString,
+                request_serializer=google_dot_ads_dot_googleads_dot_v6_dot_services_dot_customer__manager__link__service__pb2.MutateCustomerManagerLinkRequest.SerializeToString,
+                response_deserializer=google_dot_ads_dot_googleads_dot_v6_dot_services_dot_customer__manager__link__service__pb2.MutateCustomerManagerLinkResponse.FromString,
                 )
         self.MoveManagerLink = channel.unary_unary(
                 '/google.ads.googleads.v6.services.CustomerManagerLinkService/MoveManagerLink',
-                request_serializer=google_dot_ads_dot_googleads__v6_dot_proto_dot_services_dot_customer__manager__link__service__pb2.MoveManagerLinkRequest.SerializeToString,
-                response_deserializer=google_dot_ads_dot_googleads__v6_dot_proto_dot_services_dot_customer__manager__link__service__pb2.MoveManagerLinkResponse.FromString,
+                request_serializer=google_dot_ads_dot_googleads_dot_v6_dot_services_dot_customer__manager__link__service__pb2.MoveManagerLinkRequest.SerializeToString,
+                response_deserializer=google_dot_ads_dot_googleads_dot_v6_dot_services_dot_customer__manager__link__service__pb2.MoveManagerLinkResponse.FromString,
                 )
 
 
@@ -67,18 +67,18 @@ def add_CustomerManagerLinkServiceServicer_to_server(servicer, server):
     rpc_method_handlers = {
             'GetCustomerManagerLink': grpc.unary_unary_rpc_method_handler(
                     servicer.GetCustomerManagerLink,
-                    request_deserializer=google_dot_ads_dot_googleads__v6_dot_proto_dot_services_dot_customer__manager__link__service__pb2.GetCustomerManagerLinkRequest.FromString,
-                    response_serializer=google_dot_ads_dot_googleads__v6_dot_proto_dot_resources_dot_customer__manager__link__pb2.CustomerManagerLink.SerializeToString,
+                    request_deserializer=google_dot_ads_dot_googleads_dot_v6_dot_services_dot_customer__manager__link__service__pb2.GetCustomerManagerLinkRequest.FromString,
+                    response_serializer=google_dot_ads_dot_googleads_dot_v6_dot_resources_dot_customer__manager__link__pb2.CustomerManagerLink.SerializeToString,
             ),
             'MutateCustomerManagerLink': grpc.unary_unary_rpc_method_handler(
                     servicer.MutateCustomerManagerLink,
-                    request_deserializer=google_dot_ads_dot_googleads__v6_dot_proto_dot_services_dot_customer__manager__link__service__pb2.MutateCustomerManagerLinkRequest.FromString,
-                    response_serializer=google_dot_ads_dot_googleads__v6_dot_proto_dot_services_dot_customer__manager__link__service__pb2.MutateCustomerManagerLinkResponse.SerializeToString,
+                    request_deserializer=google_dot_ads_dot_googleads_dot_v6_dot_services_dot_customer__manager__link__service__pb2.MutateCustomerManagerLinkRequest.FromString,
+                    response_serializer=google_dot_ads_dot_googleads_dot_v6_dot_services_dot_customer__manager__link__service__pb2.MutateCustomerManagerLinkResponse.SerializeToString,
             ),
             'MoveManagerLink': grpc.unary_unary_rpc_method_handler(
                     servicer.MoveManagerLink,
-                    request_deserializer=google_dot_ads_dot_googleads__v6_dot_proto_dot_services_dot_customer__manager__link__service__pb2.MoveManagerLinkRequest.FromString,
-                    response_serializer=google_dot_ads_dot_googleads__v6_dot_proto_dot_services_dot_customer__manager__link__service__pb2.MoveManagerLinkResponse.SerializeToString,
+                    request_deserializer=google_dot_ads_dot_googleads_dot_v6_dot_services_dot_customer__manager__link__service__pb2.MoveManagerLinkRequest.FromString,
+                    response_serializer=google_dot_ads_dot_googleads_dot_v6_dot_services_dot_customer__manager__link__service__pb2.MoveManagerLinkResponse.SerializeToString,
             ),
     }
     generic_handler = grpc.method_handlers_generic_handler(
@@ -97,15 +97,16 @@ class CustomerManagerLinkService(object):
             options=(),
             channel_credentials=None,
             call_credentials=None,
+            insecure=False,
             compression=None,
             wait_for_ready=None,
             timeout=None,
             metadata=None):
         return grpc.experimental.unary_unary(request, target, '/google.ads.googleads.v6.services.CustomerManagerLinkService/GetCustomerManagerLink',
-            google_dot_ads_dot_googleads__v6_dot_proto_dot_services_dot_customer__manager__link__service__pb2.GetCustomerManagerLinkRequest.SerializeToString,
-            google_dot_ads_dot_googleads__v6_dot_proto_dot_resources_dot_customer__manager__link__pb2.CustomerManagerLink.FromString,
+            google_dot_ads_dot_googleads_dot_v6_dot_services_dot_customer__manager__link__service__pb2.GetCustomerManagerLinkRequest.SerializeToString,
+            google_dot_ads_dot_googleads_dot_v6_dot_resources_dot_customer__manager__link__pb2.CustomerManagerLink.FromString,
             options, channel_credentials,
-            call_credentials, compression, wait_for_ready, timeout, metadata)
+            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
 
     @staticmethod
     def MutateCustomerManagerLink(request,
@@ -113,15 +114,16 @@ class CustomerManagerLinkService(object):
             options=(),
             channel_credentials=None,
             call_credentials=None,
+            insecure=False,
             compression=None,
             wait_for_ready=None,
             timeout=None,
             metadata=None):
         return grpc.experimental.unary_unary(request, target, '/google.ads.googleads.v6.services.CustomerManagerLinkService/MutateCustomerManagerLink',
-            google_dot_ads_dot_googleads__v6_dot_proto_dot_services_dot_customer__manager__link__service__pb2.MutateCustomerManagerLinkRequest.SerializeToString,
-            google_dot_ads_dot_googleads__v6_dot_proto_dot_services_dot_customer__manager__link__service__pb2.MutateCustomerManagerLinkResponse.FromString,
+            google_dot_ads_dot_googleads_dot_v6_dot_services_dot_customer__manager__link__service__pb2.MutateCustomerManagerLinkRequest.SerializeToString,
+            google_dot_ads_dot_googleads_dot_v6_dot_services_dot_customer__manager__link__service__pb2.MutateCustomerManagerLinkResponse.FromString,
             options, channel_credentials,
-            call_credentials, compression, wait_for_ready, timeout, metadata)
+            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
 
     @staticmethod
     def MoveManagerLink(request,
@@ -129,12 +131,13 @@ class CustomerManagerLinkService(object):
             options=(),
             channel_credentials=None,
             call_credentials=None,
+            insecure=False,
             compression=None,
             wait_for_ready=None,
             timeout=None,
             metadata=None):
         return grpc.experimental.unary_unary(request, target, '/google.ads.googleads.v6.services.CustomerManagerLinkService/MoveManagerLink',
-            google_dot_ads_dot_googleads__v6_dot_proto_dot_services_dot_customer__manager__link__service__pb2.MoveManagerLinkRequest.SerializeToString,
-            google_dot_ads_dot_googleads__v6_dot_proto_dot_services_dot_customer__manager__link__service__pb2.MoveManagerLinkResponse.FromString,
+            google_dot_ads_dot_googleads_dot_v6_dot_services_dot_customer__manager__link__service__pb2.MoveManagerLinkRequest.SerializeToString,
+            google_dot_ads_dot_googleads_dot_v6_dot_services_dot_customer__manager__link__service__pb2.MoveManagerLinkResponse.FromString,
             options, channel_credentials,
-            call_credentials, compression, wait_for_ready, timeout, metadata)
+            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)

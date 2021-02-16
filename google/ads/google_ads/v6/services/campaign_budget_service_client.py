@@ -73,12 +73,12 @@ class CampaignBudgetServiceClient(object):
 
 
     @classmethod
-    def campaign_budget_path(cls, customer, campaign_budget):
+    def campaign_budget_path(cls, customer_id, campaign_budget_id):
         """Return a fully-qualified campaign_budget string."""
         return google.api_core.path_template.expand(
-            'customers/{customer}/campaignBudgets/{campaign_budget}',
-            customer=customer,
-            campaign_budget=campaign_budget,
+            'customers/{customer_id}/campaignBudgets/{campaign_budget_id}',
+            customer_id=customer_id,
+            campaign_budget_id=campaign_budget_id,
         )
 
     def __init__(self, transport=None, channel=None, credentials=None,
@@ -191,6 +191,15 @@ class CampaignBudgetServiceClient(object):
         """
         Returns the requested Campaign Budget in full detail.
 
+        Example:
+            >>> from google.ads import googleads_v6
+            >>>
+            >>> client = googleads_v6.CampaignBudgetServiceClient()
+            >>>
+            >>> resource_name = client.campaign_budget_path('[CUSTOMER_ID]', '[CAMPAIGN_BUDGET_ID]')
+            >>>
+            >>> response = client.get_campaign_budget(resource_name)
+
         Args:
             resource_name (str): Required. The resource name of the campaign budget to fetch.
             retry (Optional[google.api_core.retry.Retry]):  A retry object used
@@ -250,6 +259,19 @@ class CampaignBudgetServiceClient(object):
         """
         Creates, updates, or removes campaign budgets. Operation statuses are
         returned.
+
+        Example:
+            >>> from google.ads import googleads_v6
+            >>>
+            >>> client = googleads_v6.CampaignBudgetServiceClient()
+            >>>
+            >>> # TODO: Initialize `customer_id`:
+            >>> customer_id = ''
+            >>>
+            >>> # TODO: Initialize `operations`:
+            >>> operations = []
+            >>>
+            >>> response = client.mutate_campaign_budgets(customer_id, operations)
 
         Args:
             customer_id (str): Required. The ID of the customer whose campaign budgets are being modified.

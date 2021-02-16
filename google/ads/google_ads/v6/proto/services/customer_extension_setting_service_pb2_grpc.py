@@ -2,8 +2,8 @@
 """Client and server classes corresponding to protobuf-defined services."""
 import grpc
 
-from google.ads.google_ads.v6.proto.resources import customer_extension_setting_pb2 as google_dot_ads_dot_googleads__v6_dot_proto_dot_resources_dot_customer__extension__setting__pb2
-from google.ads.google_ads.v6.proto.services import customer_extension_setting_service_pb2 as google_dot_ads_dot_googleads__v6_dot_proto_dot_services_dot_customer__extension__setting__service__pb2
+from google.ads.google_ads.v6.proto.resources import customer_extension_setting_pb2 as google_dot_ads_dot_googleads_dot_v6_dot_resources_dot_customer__extension__setting__pb2
+from google.ads.google_ads.v6.proto.services import customer_extension_setting_service_pb2 as google_dot_ads_dot_googleads_dot_v6_dot_services_dot_customer__extension__setting__service__pb2
 
 
 class CustomerExtensionSettingServiceStub(object):
@@ -20,13 +20,13 @@ class CustomerExtensionSettingServiceStub(object):
         """
         self.GetCustomerExtensionSetting = channel.unary_unary(
                 '/google.ads.googleads.v6.services.CustomerExtensionSettingService/GetCustomerExtensionSetting',
-                request_serializer=google_dot_ads_dot_googleads__v6_dot_proto_dot_services_dot_customer__extension__setting__service__pb2.GetCustomerExtensionSettingRequest.SerializeToString,
-                response_deserializer=google_dot_ads_dot_googleads__v6_dot_proto_dot_resources_dot_customer__extension__setting__pb2.CustomerExtensionSetting.FromString,
+                request_serializer=google_dot_ads_dot_googleads_dot_v6_dot_services_dot_customer__extension__setting__service__pb2.GetCustomerExtensionSettingRequest.SerializeToString,
+                response_deserializer=google_dot_ads_dot_googleads_dot_v6_dot_resources_dot_customer__extension__setting__pb2.CustomerExtensionSetting.FromString,
                 )
         self.MutateCustomerExtensionSettings = channel.unary_unary(
                 '/google.ads.googleads.v6.services.CustomerExtensionSettingService/MutateCustomerExtensionSettings',
-                request_serializer=google_dot_ads_dot_googleads__v6_dot_proto_dot_services_dot_customer__extension__setting__service__pb2.MutateCustomerExtensionSettingsRequest.SerializeToString,
-                response_deserializer=google_dot_ads_dot_googleads__v6_dot_proto_dot_services_dot_customer__extension__setting__service__pb2.MutateCustomerExtensionSettingsResponse.FromString,
+                request_serializer=google_dot_ads_dot_googleads_dot_v6_dot_services_dot_customer__extension__setting__service__pb2.MutateCustomerExtensionSettingsRequest.SerializeToString,
+                response_deserializer=google_dot_ads_dot_googleads_dot_v6_dot_services_dot_customer__extension__setting__service__pb2.MutateCustomerExtensionSettingsResponse.FromString,
                 )
 
 
@@ -56,13 +56,13 @@ def add_CustomerExtensionSettingServiceServicer_to_server(servicer, server):
     rpc_method_handlers = {
             'GetCustomerExtensionSetting': grpc.unary_unary_rpc_method_handler(
                     servicer.GetCustomerExtensionSetting,
-                    request_deserializer=google_dot_ads_dot_googleads__v6_dot_proto_dot_services_dot_customer__extension__setting__service__pb2.GetCustomerExtensionSettingRequest.FromString,
-                    response_serializer=google_dot_ads_dot_googleads__v6_dot_proto_dot_resources_dot_customer__extension__setting__pb2.CustomerExtensionSetting.SerializeToString,
+                    request_deserializer=google_dot_ads_dot_googleads_dot_v6_dot_services_dot_customer__extension__setting__service__pb2.GetCustomerExtensionSettingRequest.FromString,
+                    response_serializer=google_dot_ads_dot_googleads_dot_v6_dot_resources_dot_customer__extension__setting__pb2.CustomerExtensionSetting.SerializeToString,
             ),
             'MutateCustomerExtensionSettings': grpc.unary_unary_rpc_method_handler(
                     servicer.MutateCustomerExtensionSettings,
-                    request_deserializer=google_dot_ads_dot_googleads__v6_dot_proto_dot_services_dot_customer__extension__setting__service__pb2.MutateCustomerExtensionSettingsRequest.FromString,
-                    response_serializer=google_dot_ads_dot_googleads__v6_dot_proto_dot_services_dot_customer__extension__setting__service__pb2.MutateCustomerExtensionSettingsResponse.SerializeToString,
+                    request_deserializer=google_dot_ads_dot_googleads_dot_v6_dot_services_dot_customer__extension__setting__service__pb2.MutateCustomerExtensionSettingsRequest.FromString,
+                    response_serializer=google_dot_ads_dot_googleads_dot_v6_dot_services_dot_customer__extension__setting__service__pb2.MutateCustomerExtensionSettingsResponse.SerializeToString,
             ),
     }
     generic_handler = grpc.method_handlers_generic_handler(
@@ -83,15 +83,16 @@ class CustomerExtensionSettingService(object):
             options=(),
             channel_credentials=None,
             call_credentials=None,
+            insecure=False,
             compression=None,
             wait_for_ready=None,
             timeout=None,
             metadata=None):
         return grpc.experimental.unary_unary(request, target, '/google.ads.googleads.v6.services.CustomerExtensionSettingService/GetCustomerExtensionSetting',
-            google_dot_ads_dot_googleads__v6_dot_proto_dot_services_dot_customer__extension__setting__service__pb2.GetCustomerExtensionSettingRequest.SerializeToString,
-            google_dot_ads_dot_googleads__v6_dot_proto_dot_resources_dot_customer__extension__setting__pb2.CustomerExtensionSetting.FromString,
+            google_dot_ads_dot_googleads_dot_v6_dot_services_dot_customer__extension__setting__service__pb2.GetCustomerExtensionSettingRequest.SerializeToString,
+            google_dot_ads_dot_googleads_dot_v6_dot_resources_dot_customer__extension__setting__pb2.CustomerExtensionSetting.FromString,
             options, channel_credentials,
-            call_credentials, compression, wait_for_ready, timeout, metadata)
+            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
 
     @staticmethod
     def MutateCustomerExtensionSettings(request,
@@ -99,12 +100,13 @@ class CustomerExtensionSettingService(object):
             options=(),
             channel_credentials=None,
             call_credentials=None,
+            insecure=False,
             compression=None,
             wait_for_ready=None,
             timeout=None,
             metadata=None):
         return grpc.experimental.unary_unary(request, target, '/google.ads.googleads.v6.services.CustomerExtensionSettingService/MutateCustomerExtensionSettings',
-            google_dot_ads_dot_googleads__v6_dot_proto_dot_services_dot_customer__extension__setting__service__pb2.MutateCustomerExtensionSettingsRequest.SerializeToString,
-            google_dot_ads_dot_googleads__v6_dot_proto_dot_services_dot_customer__extension__setting__service__pb2.MutateCustomerExtensionSettingsResponse.FromString,
+            google_dot_ads_dot_googleads_dot_v6_dot_services_dot_customer__extension__setting__service__pb2.MutateCustomerExtensionSettingsRequest.SerializeToString,
+            google_dot_ads_dot_googleads_dot_v6_dot_services_dot_customer__extension__setting__service__pb2.MutateCustomerExtensionSettingsResponse.FromString,
             options, channel_credentials,
-            call_credentials, compression, wait_for_ready, timeout, metadata)
+            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)

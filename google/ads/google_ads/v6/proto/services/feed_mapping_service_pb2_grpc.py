@@ -2,8 +2,8 @@
 """Client and server classes corresponding to protobuf-defined services."""
 import grpc
 
-from google.ads.google_ads.v6.proto.resources import feed_mapping_pb2 as google_dot_ads_dot_googleads__v6_dot_proto_dot_resources_dot_feed__mapping__pb2
-from google.ads.google_ads.v6.proto.services import feed_mapping_service_pb2 as google_dot_ads_dot_googleads__v6_dot_proto_dot_services_dot_feed__mapping__service__pb2
+from google.ads.google_ads.v6.proto.resources import feed_mapping_pb2 as google_dot_ads_dot_googleads_dot_v6_dot_resources_dot_feed__mapping__pb2
+from google.ads.google_ads.v6.proto.services import feed_mapping_service_pb2 as google_dot_ads_dot_googleads_dot_v6_dot_services_dot_feed__mapping__service__pb2
 
 
 class FeedMappingServiceStub(object):
@@ -20,13 +20,13 @@ class FeedMappingServiceStub(object):
         """
         self.GetFeedMapping = channel.unary_unary(
                 '/google.ads.googleads.v6.services.FeedMappingService/GetFeedMapping',
-                request_serializer=google_dot_ads_dot_googleads__v6_dot_proto_dot_services_dot_feed__mapping__service__pb2.GetFeedMappingRequest.SerializeToString,
-                response_deserializer=google_dot_ads_dot_googleads__v6_dot_proto_dot_resources_dot_feed__mapping__pb2.FeedMapping.FromString,
+                request_serializer=google_dot_ads_dot_googleads_dot_v6_dot_services_dot_feed__mapping__service__pb2.GetFeedMappingRequest.SerializeToString,
+                response_deserializer=google_dot_ads_dot_googleads_dot_v6_dot_resources_dot_feed__mapping__pb2.FeedMapping.FromString,
                 )
         self.MutateFeedMappings = channel.unary_unary(
                 '/google.ads.googleads.v6.services.FeedMappingService/MutateFeedMappings',
-                request_serializer=google_dot_ads_dot_googleads__v6_dot_proto_dot_services_dot_feed__mapping__service__pb2.MutateFeedMappingsRequest.SerializeToString,
-                response_deserializer=google_dot_ads_dot_googleads__v6_dot_proto_dot_services_dot_feed__mapping__service__pb2.MutateFeedMappingsResponse.FromString,
+                request_serializer=google_dot_ads_dot_googleads_dot_v6_dot_services_dot_feed__mapping__service__pb2.MutateFeedMappingsRequest.SerializeToString,
+                response_deserializer=google_dot_ads_dot_googleads_dot_v6_dot_services_dot_feed__mapping__service__pb2.MutateFeedMappingsResponse.FromString,
                 )
 
 
@@ -56,13 +56,13 @@ def add_FeedMappingServiceServicer_to_server(servicer, server):
     rpc_method_handlers = {
             'GetFeedMapping': grpc.unary_unary_rpc_method_handler(
                     servicer.GetFeedMapping,
-                    request_deserializer=google_dot_ads_dot_googleads__v6_dot_proto_dot_services_dot_feed__mapping__service__pb2.GetFeedMappingRequest.FromString,
-                    response_serializer=google_dot_ads_dot_googleads__v6_dot_proto_dot_resources_dot_feed__mapping__pb2.FeedMapping.SerializeToString,
+                    request_deserializer=google_dot_ads_dot_googleads_dot_v6_dot_services_dot_feed__mapping__service__pb2.GetFeedMappingRequest.FromString,
+                    response_serializer=google_dot_ads_dot_googleads_dot_v6_dot_resources_dot_feed__mapping__pb2.FeedMapping.SerializeToString,
             ),
             'MutateFeedMappings': grpc.unary_unary_rpc_method_handler(
                     servicer.MutateFeedMappings,
-                    request_deserializer=google_dot_ads_dot_googleads__v6_dot_proto_dot_services_dot_feed__mapping__service__pb2.MutateFeedMappingsRequest.FromString,
-                    response_serializer=google_dot_ads_dot_googleads__v6_dot_proto_dot_services_dot_feed__mapping__service__pb2.MutateFeedMappingsResponse.SerializeToString,
+                    request_deserializer=google_dot_ads_dot_googleads_dot_v6_dot_services_dot_feed__mapping__service__pb2.MutateFeedMappingsRequest.FromString,
+                    response_serializer=google_dot_ads_dot_googleads_dot_v6_dot_services_dot_feed__mapping__service__pb2.MutateFeedMappingsResponse.SerializeToString,
             ),
     }
     generic_handler = grpc.method_handlers_generic_handler(
@@ -83,15 +83,16 @@ class FeedMappingService(object):
             options=(),
             channel_credentials=None,
             call_credentials=None,
+            insecure=False,
             compression=None,
             wait_for_ready=None,
             timeout=None,
             metadata=None):
         return grpc.experimental.unary_unary(request, target, '/google.ads.googleads.v6.services.FeedMappingService/GetFeedMapping',
-            google_dot_ads_dot_googleads__v6_dot_proto_dot_services_dot_feed__mapping__service__pb2.GetFeedMappingRequest.SerializeToString,
-            google_dot_ads_dot_googleads__v6_dot_proto_dot_resources_dot_feed__mapping__pb2.FeedMapping.FromString,
+            google_dot_ads_dot_googleads_dot_v6_dot_services_dot_feed__mapping__service__pb2.GetFeedMappingRequest.SerializeToString,
+            google_dot_ads_dot_googleads_dot_v6_dot_resources_dot_feed__mapping__pb2.FeedMapping.FromString,
             options, channel_credentials,
-            call_credentials, compression, wait_for_ready, timeout, metadata)
+            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
 
     @staticmethod
     def MutateFeedMappings(request,
@@ -99,12 +100,13 @@ class FeedMappingService(object):
             options=(),
             channel_credentials=None,
             call_credentials=None,
+            insecure=False,
             compression=None,
             wait_for_ready=None,
             timeout=None,
             metadata=None):
         return grpc.experimental.unary_unary(request, target, '/google.ads.googleads.v6.services.FeedMappingService/MutateFeedMappings',
-            google_dot_ads_dot_googleads__v6_dot_proto_dot_services_dot_feed__mapping__service__pb2.MutateFeedMappingsRequest.SerializeToString,
-            google_dot_ads_dot_googleads__v6_dot_proto_dot_services_dot_feed__mapping__service__pb2.MutateFeedMappingsResponse.FromString,
+            google_dot_ads_dot_googleads_dot_v6_dot_services_dot_feed__mapping__service__pb2.MutateFeedMappingsRequest.SerializeToString,
+            google_dot_ads_dot_googleads_dot_v6_dot_services_dot_feed__mapping__service__pb2.MutateFeedMappingsResponse.FromString,
             options, channel_credentials,
-            call_credentials, compression, wait_for_ready, timeout, metadata)
+            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)

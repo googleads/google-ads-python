@@ -73,12 +73,13 @@ class CampaignLabelServiceClient(object):
 
 
     @classmethod
-    def campaign_label_path(cls, customer, campaign_label):
+    def campaign_label_path(cls, customer_id, campaign_id, label_id):
         """Return a fully-qualified campaign_label string."""
         return google.api_core.path_template.expand(
-            'customers/{customer}/campaignLabels/{campaign_label}',
-            customer=customer,
-            campaign_label=campaign_label,
+            'customers/{customer_id}/campaignLabels/{campaign_id}~{label_id}',
+            customer_id=customer_id,
+            campaign_id=campaign_id,
+            label_id=label_id,
         )
 
     def __init__(self, transport=None, channel=None, credentials=None,
@@ -191,6 +192,15 @@ class CampaignLabelServiceClient(object):
         """
         Returns the requested campaign-label relationship in full detail.
 
+        Example:
+            >>> from google.ads import googleads_v6
+            >>>
+            >>> client = googleads_v6.CampaignLabelServiceClient()
+            >>>
+            >>> resource_name = client.campaign_label_path('[CUSTOMER_ID]', '[CAMPAIGN_ID]', '[LABEL_ID]')
+            >>>
+            >>> response = client.get_campaign_label(resource_name)
+
         Args:
             resource_name (str): Required. The resource name of the campaign-label relationship to fetch.
             retry (Optional[google.api_core.retry.Retry]):  A retry object used
@@ -249,6 +259,19 @@ class CampaignLabelServiceClient(object):
         """
         Creates and removes campaign-label relationships.
         Operation statuses are returned.
+
+        Example:
+            >>> from google.ads import googleads_v6
+            >>>
+            >>> client = googleads_v6.CampaignLabelServiceClient()
+            >>>
+            >>> # TODO: Initialize `customer_id`:
+            >>> customer_id = ''
+            >>>
+            >>> # TODO: Initialize `operations`:
+            >>> operations = []
+            >>>
+            >>> response = client.mutate_campaign_labels(customer_id, operations)
 
         Args:
             customer_id (str): Required. ID of the customer whose campaign-label relationships are being modified.

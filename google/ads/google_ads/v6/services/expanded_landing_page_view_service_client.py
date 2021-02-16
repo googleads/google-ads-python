@@ -73,12 +73,12 @@ class ExpandedLandingPageViewServiceClient(object):
 
 
     @classmethod
-    def expanded_landing_page_view_path(cls, customer, expanded_landing_page_view):
+    def expanded_landing_page_view_path(cls, customer_id, expanded_final_url_fingerprint):
         """Return a fully-qualified expanded_landing_page_view string."""
         return google.api_core.path_template.expand(
-            'customers/{customer}/expandedLandingPageViews/{expanded_landing_page_view}',
-            customer=customer,
-            expanded_landing_page_view=expanded_landing_page_view,
+            'customers/{customer_id}/expandedLandingPageViews/{expanded_final_url_fingerprint}',
+            customer_id=customer_id,
+            expanded_final_url_fingerprint=expanded_final_url_fingerprint,
         )
 
     def __init__(self, transport=None, channel=None, credentials=None,
@@ -190,6 +190,15 @@ class ExpandedLandingPageViewServiceClient(object):
             metadata=None):
         """
         Returns the requested expanded landing page view in full detail.
+
+        Example:
+            >>> from google.ads import googleads_v6
+            >>>
+            >>> client = googleads_v6.ExpandedLandingPageViewServiceClient()
+            >>>
+            >>> resource_name = client.expanded_landing_page_view_path('[CUSTOMER_ID]', '[EXPANDED_FINAL_URL_FINGERPRINT]')
+            >>>
+            >>> response = client.get_expanded_landing_page_view(resource_name)
 
         Args:
             resource_name (str): Required. The resource name of the expanded landing page view to fetch.

@@ -73,12 +73,12 @@ class UserListServiceClient(object):
 
 
     @classmethod
-    def user_list_path(cls, customer, user_list):
+    def user_list_path(cls, customer_id, user_list_id):
         """Return a fully-qualified user_list string."""
         return google.api_core.path_template.expand(
-            'customers/{customer}/userLists/{user_list}',
-            customer=customer,
-            user_list=user_list,
+            'customers/{customer_id}/userLists/{user_list_id}',
+            customer_id=customer_id,
+            user_list_id=user_list_id,
         )
 
     def __init__(self, transport=None, channel=None, credentials=None,
@@ -191,6 +191,15 @@ class UserListServiceClient(object):
         """
         Returns the requested user list.
 
+        Example:
+            >>> from google.ads import googleads_v6
+            >>>
+            >>> client = googleads_v6.UserListServiceClient()
+            >>>
+            >>> resource_name = client.user_list_path('[CUSTOMER_ID]', '[USER_LIST_ID]')
+            >>>
+            >>> response = client.get_user_list(resource_name)
+
         Args:
             resource_name (str): Required. The resource name of the user list to fetch.
             retry (Optional[google.api_core.retry.Retry]):  A retry object used
@@ -248,6 +257,19 @@ class UserListServiceClient(object):
             metadata=None):
         """
         Creates or updates user lists. Operation statuses are returned.
+
+        Example:
+            >>> from google.ads import googleads_v6
+            >>>
+            >>> client = googleads_v6.UserListServiceClient()
+            >>>
+            >>> # TODO: Initialize `customer_id`:
+            >>> customer_id = ''
+            >>>
+            >>> # TODO: Initialize `operations`:
+            >>> operations = []
+            >>>
+            >>> response = client.mutate_user_lists(customer_id, operations)
 
         Args:
             customer_id (str): Required. The ID of the customer whose user lists are being modified.

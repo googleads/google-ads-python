@@ -73,12 +73,13 @@ class CampaignSharedSetServiceClient(object):
 
 
     @classmethod
-    def campaign_shared_set_path(cls, customer, campaign_shared_set):
+    def campaign_shared_set_path(cls, customer_id, campaign_id, shared_set_id):
         """Return a fully-qualified campaign_shared_set string."""
         return google.api_core.path_template.expand(
-            'customers/{customer}/campaignSharedSets/{campaign_shared_set}',
-            customer=customer,
-            campaign_shared_set=campaign_shared_set,
+            'customers/{customer_id}/campaignSharedSets/{campaign_id}~{shared_set_id}',
+            customer_id=customer_id,
+            campaign_id=campaign_id,
+            shared_set_id=shared_set_id,
         )
 
     def __init__(self, transport=None, channel=None, credentials=None,
@@ -191,6 +192,15 @@ class CampaignSharedSetServiceClient(object):
         """
         Returns the requested campaign shared set in full detail.
 
+        Example:
+            >>> from google.ads import googleads_v6
+            >>>
+            >>> client = googleads_v6.CampaignSharedSetServiceClient()
+            >>>
+            >>> resource_name = client.campaign_shared_set_path('[CUSTOMER_ID]', '[CAMPAIGN_ID]', '[SHARED_SET_ID]')
+            >>>
+            >>> response = client.get_campaign_shared_set(resource_name)
+
         Args:
             resource_name (str): Required. The resource name of the campaign shared set to fetch.
             retry (Optional[google.api_core.retry.Retry]):  A retry object used
@@ -243,11 +253,25 @@ class CampaignSharedSetServiceClient(object):
             operations,
             partial_failure=None,
             validate_only=None,
+            response_content_type=None,
             retry=google.api_core.gapic_v1.method.DEFAULT,
             timeout=google.api_core.gapic_v1.method.DEFAULT,
             metadata=None):
         """
         Creates or removes campaign shared sets. Operation statuses are returned.
+
+        Example:
+            >>> from google.ads import googleads_v6
+            >>>
+            >>> client = googleads_v6.CampaignSharedSetServiceClient()
+            >>>
+            >>> # TODO: Initialize `customer_id`:
+            >>> customer_id = ''
+            >>>
+            >>> # TODO: Initialize `operations`:
+            >>> operations = []
+            >>>
+            >>> response = client.mutate_campaign_shared_sets(customer_id, operations)
 
         Args:
             customer_id (str): Required. The ID of the customer whose campaign shared sets are being modified.
@@ -261,6 +285,8 @@ class CampaignSharedSetServiceClient(object):
                 Default is false.
             validate_only (bool): If true, the request is validated but not executed. Only errors are
                 returned, not results.
+            response_content_type (~google.ads.googleads_v6.types.ResponseContentType): The response content type setting. Determines whether the mutable resource
+                or just the resource name should be returned post mutation.
             retry (Optional[google.api_core.retry.Retry]):  A retry object used
                 to retry requests. If ``None`` is specified, requests will
                 be retried using a default configuration.
@@ -294,6 +320,7 @@ class CampaignSharedSetServiceClient(object):
             operations=operations,
             partial_failure=partial_failure,
             validate_only=validate_only,
+            response_content_type=response_content_type,
         )
         if metadata is None:
             metadata = []

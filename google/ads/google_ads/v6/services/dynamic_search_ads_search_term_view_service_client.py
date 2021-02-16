@@ -73,12 +73,16 @@ class DynamicSearchAdsSearchTermViewServiceClient(object):
 
 
     @classmethod
-    def dynamic_search_ads_search_term_view_path(cls, customer, dynamic_search_ads_search_term_view):
+    def dynamic_search_ads_search_term_view_path(cls, customer_id, ad_group_id, search_term_fingerprint, headline_fingerprint, landing_page_fingerprint, page_url_fingerprint):
         """Return a fully-qualified dynamic_search_ads_search_term_view string."""
         return google.api_core.path_template.expand(
-            'customers/{customer}/dynamicSearchAdsSearchTermViews/{dynamic_search_ads_search_term_view}',
-            customer=customer,
-            dynamic_search_ads_search_term_view=dynamic_search_ads_search_term_view,
+            'customers/{customer_id}/dynamicSearchAdsSearchTermViews/{ad_group_id}~{search_term_fingerprint}~{headline_fingerprint}~{landing_page_fingerprint}~{page_url_fingerprint}',
+            customer_id=customer_id,
+            ad_group_id=ad_group_id,
+            search_term_fingerprint=search_term_fingerprint,
+            headline_fingerprint=headline_fingerprint,
+            landing_page_fingerprint=landing_page_fingerprint,
+            page_url_fingerprint=page_url_fingerprint,
         )
 
     def __init__(self, transport=None, channel=None, credentials=None,
@@ -190,6 +194,15 @@ class DynamicSearchAdsSearchTermViewServiceClient(object):
             metadata=None):
         """
         Returns the requested dynamic search ads search term view in full detail.
+
+        Example:
+            >>> from google.ads import googleads_v6
+            >>>
+            >>> client = googleads_v6.DynamicSearchAdsSearchTermViewServiceClient()
+            >>>
+            >>> resource_name = client.dynamic_search_ads_search_term_view_path('[CUSTOMER_ID]', '[AD_GROUP_ID]', '[SEARCH_TERM_FINGERPRINT]', '[HEADLINE_FINGERPRINT]', '[LANDING_PAGE_FINGERPRINT]', '[PAGE_URL_FINGERPRINT]')
+            >>>
+            >>> response = client.get_dynamic_search_ads_search_term_view(resource_name)
 
         Args:
             resource_name (str): Required. The resource name of the dynamic search ads search term view to fetch.

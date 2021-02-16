@@ -2,8 +2,8 @@
 """Client and server classes corresponding to protobuf-defined services."""
 import grpc
 
-from google.ads.google_ads.v6.proto.resources import feed_placeholder_view_pb2 as google_dot_ads_dot_googleads__v6_dot_proto_dot_resources_dot_feed__placeholder__view__pb2
-from google.ads.google_ads.v6.proto.services import feed_placeholder_view_service_pb2 as google_dot_ads_dot_googleads__v6_dot_proto_dot_services_dot_feed__placeholder__view__service__pb2
+from google.ads.google_ads.v6.proto.resources import feed_placeholder_view_pb2 as google_dot_ads_dot_googleads_dot_v6_dot_resources_dot_feed__placeholder__view__pb2
+from google.ads.google_ads.v6.proto.services import feed_placeholder_view_service_pb2 as google_dot_ads_dot_googleads_dot_v6_dot_services_dot_feed__placeholder__view__service__pb2
 
 
 class FeedPlaceholderViewServiceStub(object):
@@ -20,8 +20,8 @@ class FeedPlaceholderViewServiceStub(object):
         """
         self.GetFeedPlaceholderView = channel.unary_unary(
                 '/google.ads.googleads.v6.services.FeedPlaceholderViewService/GetFeedPlaceholderView',
-                request_serializer=google_dot_ads_dot_googleads__v6_dot_proto_dot_services_dot_feed__placeholder__view__service__pb2.GetFeedPlaceholderViewRequest.SerializeToString,
-                response_deserializer=google_dot_ads_dot_googleads__v6_dot_proto_dot_resources_dot_feed__placeholder__view__pb2.FeedPlaceholderView.FromString,
+                request_serializer=google_dot_ads_dot_googleads_dot_v6_dot_services_dot_feed__placeholder__view__service__pb2.GetFeedPlaceholderViewRequest.SerializeToString,
+                response_deserializer=google_dot_ads_dot_googleads_dot_v6_dot_resources_dot_feed__placeholder__view__pb2.FeedPlaceholderView.FromString,
                 )
 
 
@@ -43,8 +43,8 @@ def add_FeedPlaceholderViewServiceServicer_to_server(servicer, server):
     rpc_method_handlers = {
             'GetFeedPlaceholderView': grpc.unary_unary_rpc_method_handler(
                     servicer.GetFeedPlaceholderView,
-                    request_deserializer=google_dot_ads_dot_googleads__v6_dot_proto_dot_services_dot_feed__placeholder__view__service__pb2.GetFeedPlaceholderViewRequest.FromString,
-                    response_serializer=google_dot_ads_dot_googleads__v6_dot_proto_dot_resources_dot_feed__placeholder__view__pb2.FeedPlaceholderView.SerializeToString,
+                    request_deserializer=google_dot_ads_dot_googleads_dot_v6_dot_services_dot_feed__placeholder__view__service__pb2.GetFeedPlaceholderViewRequest.FromString,
+                    response_serializer=google_dot_ads_dot_googleads_dot_v6_dot_resources_dot_feed__placeholder__view__pb2.FeedPlaceholderView.SerializeToString,
             ),
     }
     generic_handler = grpc.method_handlers_generic_handler(
@@ -65,12 +65,13 @@ class FeedPlaceholderViewService(object):
             options=(),
             channel_credentials=None,
             call_credentials=None,
+            insecure=False,
             compression=None,
             wait_for_ready=None,
             timeout=None,
             metadata=None):
         return grpc.experimental.unary_unary(request, target, '/google.ads.googleads.v6.services.FeedPlaceholderViewService/GetFeedPlaceholderView',
-            google_dot_ads_dot_googleads__v6_dot_proto_dot_services_dot_feed__placeholder__view__service__pb2.GetFeedPlaceholderViewRequest.SerializeToString,
-            google_dot_ads_dot_googleads__v6_dot_proto_dot_resources_dot_feed__placeholder__view__pb2.FeedPlaceholderView.FromString,
+            google_dot_ads_dot_googleads_dot_v6_dot_services_dot_feed__placeholder__view__service__pb2.GetFeedPlaceholderViewRequest.SerializeToString,
+            google_dot_ads_dot_googleads_dot_v6_dot_resources_dot_feed__placeholder__view__pb2.FeedPlaceholderView.FromString,
             options, channel_credentials,
-            call_credentials, compression, wait_for_ready, timeout, metadata)
+            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)

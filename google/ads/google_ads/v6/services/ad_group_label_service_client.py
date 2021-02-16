@@ -73,12 +73,13 @@ class AdGroupLabelServiceClient(object):
 
 
     @classmethod
-    def ad_group_label_path(cls, customer, ad_group_label):
+    def ad_group_label_path(cls, customer_id, ad_group_id, label_id):
         """Return a fully-qualified ad_group_label string."""
         return google.api_core.path_template.expand(
-            'customers/{customer}/adGroupLabels/{ad_group_label}',
-            customer=customer,
-            ad_group_label=ad_group_label,
+            'customers/{customer_id}/adGroupLabels/{ad_group_id}~{label_id}',
+            customer_id=customer_id,
+            ad_group_id=ad_group_id,
+            label_id=label_id,
         )
 
     def __init__(self, transport=None, channel=None, credentials=None,
@@ -191,6 +192,15 @@ class AdGroupLabelServiceClient(object):
         """
         Returns the requested ad group label in full detail.
 
+        Example:
+            >>> from google.ads import googleads_v6
+            >>>
+            >>> client = googleads_v6.AdGroupLabelServiceClient()
+            >>>
+            >>> resource_name = client.ad_group_label_path('[CUSTOMER_ID]', '[AD_GROUP_ID]', '[LABEL_ID]')
+            >>>
+            >>> response = client.get_ad_group_label(resource_name)
+
         Args:
             resource_name (str): Required. The resource name of the ad group label to fetch.
             retry (Optional[google.api_core.retry.Retry]):  A retry object used
@@ -249,6 +259,19 @@ class AdGroupLabelServiceClient(object):
         """
         Creates and removes ad group labels.
         Operation statuses are returned.
+
+        Example:
+            >>> from google.ads import googleads_v6
+            >>>
+            >>> client = googleads_v6.AdGroupLabelServiceClient()
+            >>>
+            >>> # TODO: Initialize `customer_id`:
+            >>> customer_id = ''
+            >>>
+            >>> # TODO: Initialize `operations`:
+            >>> operations = []
+            >>>
+            >>> response = client.mutate_ad_group_labels(customer_id, operations)
 
         Args:
             customer_id (str): Required. ID of the customer whose ad group labels are being modified.

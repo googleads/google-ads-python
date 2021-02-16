@@ -2,8 +2,8 @@
 """Client and server classes corresponding to protobuf-defined services."""
 import grpc
 
-from google.ads.google_ads.v6.proto.resources import merchant_center_link_pb2 as google_dot_ads_dot_googleads__v6_dot_proto_dot_resources_dot_merchant__center__link__pb2
-from google.ads.google_ads.v6.proto.services import merchant_center_link_service_pb2 as google_dot_ads_dot_googleads__v6_dot_proto_dot_services_dot_merchant__center__link__service__pb2
+from google.ads.google_ads.v6.proto.resources import merchant_center_link_pb2 as google_dot_ads_dot_googleads_dot_v6_dot_resources_dot_merchant__center__link__pb2
+from google.ads.google_ads.v6.proto.services import merchant_center_link_service_pb2 as google_dot_ads_dot_googleads_dot_v6_dot_services_dot_merchant__center__link__service__pb2
 
 
 class MerchantCenterLinkServiceStub(object):
@@ -21,18 +21,18 @@ class MerchantCenterLinkServiceStub(object):
         """
         self.ListMerchantCenterLinks = channel.unary_unary(
                 '/google.ads.googleads.v6.services.MerchantCenterLinkService/ListMerchantCenterLinks',
-                request_serializer=google_dot_ads_dot_googleads__v6_dot_proto_dot_services_dot_merchant__center__link__service__pb2.ListMerchantCenterLinksRequest.SerializeToString,
-                response_deserializer=google_dot_ads_dot_googleads__v6_dot_proto_dot_services_dot_merchant__center__link__service__pb2.ListMerchantCenterLinksResponse.FromString,
+                request_serializer=google_dot_ads_dot_googleads_dot_v6_dot_services_dot_merchant__center__link__service__pb2.ListMerchantCenterLinksRequest.SerializeToString,
+                response_deserializer=google_dot_ads_dot_googleads_dot_v6_dot_services_dot_merchant__center__link__service__pb2.ListMerchantCenterLinksResponse.FromString,
                 )
         self.GetMerchantCenterLink = channel.unary_unary(
                 '/google.ads.googleads.v6.services.MerchantCenterLinkService/GetMerchantCenterLink',
-                request_serializer=google_dot_ads_dot_googleads__v6_dot_proto_dot_services_dot_merchant__center__link__service__pb2.GetMerchantCenterLinkRequest.SerializeToString,
-                response_deserializer=google_dot_ads_dot_googleads__v6_dot_proto_dot_resources_dot_merchant__center__link__pb2.MerchantCenterLink.FromString,
+                request_serializer=google_dot_ads_dot_googleads_dot_v6_dot_services_dot_merchant__center__link__service__pb2.GetMerchantCenterLinkRequest.SerializeToString,
+                response_deserializer=google_dot_ads_dot_googleads_dot_v6_dot_resources_dot_merchant__center__link__pb2.MerchantCenterLink.FromString,
                 )
         self.MutateMerchantCenterLink = channel.unary_unary(
                 '/google.ads.googleads.v6.services.MerchantCenterLinkService/MutateMerchantCenterLink',
-                request_serializer=google_dot_ads_dot_googleads__v6_dot_proto_dot_services_dot_merchant__center__link__service__pb2.MutateMerchantCenterLinkRequest.SerializeToString,
-                response_deserializer=google_dot_ads_dot_googleads__v6_dot_proto_dot_services_dot_merchant__center__link__service__pb2.MutateMerchantCenterLinkResponse.FromString,
+                request_serializer=google_dot_ads_dot_googleads_dot_v6_dot_services_dot_merchant__center__link__service__pb2.MutateMerchantCenterLinkRequest.SerializeToString,
+                response_deserializer=google_dot_ads_dot_googleads_dot_v6_dot_services_dot_merchant__center__link__service__pb2.MutateMerchantCenterLinkResponse.FromString,
                 )
 
 
@@ -69,18 +69,18 @@ def add_MerchantCenterLinkServiceServicer_to_server(servicer, server):
     rpc_method_handlers = {
             'ListMerchantCenterLinks': grpc.unary_unary_rpc_method_handler(
                     servicer.ListMerchantCenterLinks,
-                    request_deserializer=google_dot_ads_dot_googleads__v6_dot_proto_dot_services_dot_merchant__center__link__service__pb2.ListMerchantCenterLinksRequest.FromString,
-                    response_serializer=google_dot_ads_dot_googleads__v6_dot_proto_dot_services_dot_merchant__center__link__service__pb2.ListMerchantCenterLinksResponse.SerializeToString,
+                    request_deserializer=google_dot_ads_dot_googleads_dot_v6_dot_services_dot_merchant__center__link__service__pb2.ListMerchantCenterLinksRequest.FromString,
+                    response_serializer=google_dot_ads_dot_googleads_dot_v6_dot_services_dot_merchant__center__link__service__pb2.ListMerchantCenterLinksResponse.SerializeToString,
             ),
             'GetMerchantCenterLink': grpc.unary_unary_rpc_method_handler(
                     servicer.GetMerchantCenterLink,
-                    request_deserializer=google_dot_ads_dot_googleads__v6_dot_proto_dot_services_dot_merchant__center__link__service__pb2.GetMerchantCenterLinkRequest.FromString,
-                    response_serializer=google_dot_ads_dot_googleads__v6_dot_proto_dot_resources_dot_merchant__center__link__pb2.MerchantCenterLink.SerializeToString,
+                    request_deserializer=google_dot_ads_dot_googleads_dot_v6_dot_services_dot_merchant__center__link__service__pb2.GetMerchantCenterLinkRequest.FromString,
+                    response_serializer=google_dot_ads_dot_googleads_dot_v6_dot_resources_dot_merchant__center__link__pb2.MerchantCenterLink.SerializeToString,
             ),
             'MutateMerchantCenterLink': grpc.unary_unary_rpc_method_handler(
                     servicer.MutateMerchantCenterLink,
-                    request_deserializer=google_dot_ads_dot_googleads__v6_dot_proto_dot_services_dot_merchant__center__link__service__pb2.MutateMerchantCenterLinkRequest.FromString,
-                    response_serializer=google_dot_ads_dot_googleads__v6_dot_proto_dot_services_dot_merchant__center__link__service__pb2.MutateMerchantCenterLinkResponse.SerializeToString,
+                    request_deserializer=google_dot_ads_dot_googleads_dot_v6_dot_services_dot_merchant__center__link__service__pb2.MutateMerchantCenterLinkRequest.FromString,
+                    response_serializer=google_dot_ads_dot_googleads_dot_v6_dot_services_dot_merchant__center__link__service__pb2.MutateMerchantCenterLinkResponse.SerializeToString,
             ),
     }
     generic_handler = grpc.method_handlers_generic_handler(
@@ -102,15 +102,16 @@ class MerchantCenterLinkService(object):
             options=(),
             channel_credentials=None,
             call_credentials=None,
+            insecure=False,
             compression=None,
             wait_for_ready=None,
             timeout=None,
             metadata=None):
         return grpc.experimental.unary_unary(request, target, '/google.ads.googleads.v6.services.MerchantCenterLinkService/ListMerchantCenterLinks',
-            google_dot_ads_dot_googleads__v6_dot_proto_dot_services_dot_merchant__center__link__service__pb2.ListMerchantCenterLinksRequest.SerializeToString,
-            google_dot_ads_dot_googleads__v6_dot_proto_dot_services_dot_merchant__center__link__service__pb2.ListMerchantCenterLinksResponse.FromString,
+            google_dot_ads_dot_googleads_dot_v6_dot_services_dot_merchant__center__link__service__pb2.ListMerchantCenterLinksRequest.SerializeToString,
+            google_dot_ads_dot_googleads_dot_v6_dot_services_dot_merchant__center__link__service__pb2.ListMerchantCenterLinksResponse.FromString,
             options, channel_credentials,
-            call_credentials, compression, wait_for_ready, timeout, metadata)
+            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
 
     @staticmethod
     def GetMerchantCenterLink(request,
@@ -118,15 +119,16 @@ class MerchantCenterLinkService(object):
             options=(),
             channel_credentials=None,
             call_credentials=None,
+            insecure=False,
             compression=None,
             wait_for_ready=None,
             timeout=None,
             metadata=None):
         return grpc.experimental.unary_unary(request, target, '/google.ads.googleads.v6.services.MerchantCenterLinkService/GetMerchantCenterLink',
-            google_dot_ads_dot_googleads__v6_dot_proto_dot_services_dot_merchant__center__link__service__pb2.GetMerchantCenterLinkRequest.SerializeToString,
-            google_dot_ads_dot_googleads__v6_dot_proto_dot_resources_dot_merchant__center__link__pb2.MerchantCenterLink.FromString,
+            google_dot_ads_dot_googleads_dot_v6_dot_services_dot_merchant__center__link__service__pb2.GetMerchantCenterLinkRequest.SerializeToString,
+            google_dot_ads_dot_googleads_dot_v6_dot_resources_dot_merchant__center__link__pb2.MerchantCenterLink.FromString,
             options, channel_credentials,
-            call_credentials, compression, wait_for_ready, timeout, metadata)
+            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
 
     @staticmethod
     def MutateMerchantCenterLink(request,
@@ -134,12 +136,13 @@ class MerchantCenterLinkService(object):
             options=(),
             channel_credentials=None,
             call_credentials=None,
+            insecure=False,
             compression=None,
             wait_for_ready=None,
             timeout=None,
             metadata=None):
         return grpc.experimental.unary_unary(request, target, '/google.ads.googleads.v6.services.MerchantCenterLinkService/MutateMerchantCenterLink',
-            google_dot_ads_dot_googleads__v6_dot_proto_dot_services_dot_merchant__center__link__service__pb2.MutateMerchantCenterLinkRequest.SerializeToString,
-            google_dot_ads_dot_googleads__v6_dot_proto_dot_services_dot_merchant__center__link__service__pb2.MutateMerchantCenterLinkResponse.FromString,
+            google_dot_ads_dot_googleads_dot_v6_dot_services_dot_merchant__center__link__service__pb2.MutateMerchantCenterLinkRequest.SerializeToString,
+            google_dot_ads_dot_googleads_dot_v6_dot_services_dot_merchant__center__link__service__pb2.MutateMerchantCenterLinkResponse.FromString,
             options, channel_credentials,
-            call_credentials, compression, wait_for_ready, timeout, metadata)
+            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)

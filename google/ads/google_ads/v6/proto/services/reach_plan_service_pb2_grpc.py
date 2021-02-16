@@ -2,7 +2,7 @@
 """Client and server classes corresponding to protobuf-defined services."""
 import grpc
 
-from google.ads.google_ads.v6.proto.services import reach_plan_service_pb2 as google_dot_ads_dot_googleads__v6_dot_proto_dot_services_dot_reach__plan__service__pb2
+from google.ads.google_ads.v6.proto.services import reach_plan_service_pb2 as google_dot_ads_dot_googleads_dot_v6_dot_services_dot_reach__plan__service__pb2
 
 
 class ReachPlanServiceStub(object):
@@ -23,23 +23,23 @@ class ReachPlanServiceStub(object):
         """
         self.ListPlannableLocations = channel.unary_unary(
                 '/google.ads.googleads.v6.services.ReachPlanService/ListPlannableLocations',
-                request_serializer=google_dot_ads_dot_googleads__v6_dot_proto_dot_services_dot_reach__plan__service__pb2.ListPlannableLocationsRequest.SerializeToString,
-                response_deserializer=google_dot_ads_dot_googleads__v6_dot_proto_dot_services_dot_reach__plan__service__pb2.ListPlannableLocationsResponse.FromString,
+                request_serializer=google_dot_ads_dot_googleads_dot_v6_dot_services_dot_reach__plan__service__pb2.ListPlannableLocationsRequest.SerializeToString,
+                response_deserializer=google_dot_ads_dot_googleads_dot_v6_dot_services_dot_reach__plan__service__pb2.ListPlannableLocationsResponse.FromString,
                 )
         self.ListPlannableProducts = channel.unary_unary(
                 '/google.ads.googleads.v6.services.ReachPlanService/ListPlannableProducts',
-                request_serializer=google_dot_ads_dot_googleads__v6_dot_proto_dot_services_dot_reach__plan__service__pb2.ListPlannableProductsRequest.SerializeToString,
-                response_deserializer=google_dot_ads_dot_googleads__v6_dot_proto_dot_services_dot_reach__plan__service__pb2.ListPlannableProductsResponse.FromString,
+                request_serializer=google_dot_ads_dot_googleads_dot_v6_dot_services_dot_reach__plan__service__pb2.ListPlannableProductsRequest.SerializeToString,
+                response_deserializer=google_dot_ads_dot_googleads_dot_v6_dot_services_dot_reach__plan__service__pb2.ListPlannableProductsResponse.FromString,
                 )
         self.GenerateProductMixIdeas = channel.unary_unary(
                 '/google.ads.googleads.v6.services.ReachPlanService/GenerateProductMixIdeas',
-                request_serializer=google_dot_ads_dot_googleads__v6_dot_proto_dot_services_dot_reach__plan__service__pb2.GenerateProductMixIdeasRequest.SerializeToString,
-                response_deserializer=google_dot_ads_dot_googleads__v6_dot_proto_dot_services_dot_reach__plan__service__pb2.GenerateProductMixIdeasResponse.FromString,
+                request_serializer=google_dot_ads_dot_googleads_dot_v6_dot_services_dot_reach__plan__service__pb2.GenerateProductMixIdeasRequest.SerializeToString,
+                response_deserializer=google_dot_ads_dot_googleads_dot_v6_dot_services_dot_reach__plan__service__pb2.GenerateProductMixIdeasResponse.FromString,
                 )
         self.GenerateReachForecast = channel.unary_unary(
                 '/google.ads.googleads.v6.services.ReachPlanService/GenerateReachForecast',
-                request_serializer=google_dot_ads_dot_googleads__v6_dot_proto_dot_services_dot_reach__plan__service__pb2.GenerateReachForecastRequest.SerializeToString,
-                response_deserializer=google_dot_ads_dot_googleads__v6_dot_proto_dot_services_dot_reach__plan__service__pb2.GenerateReachForecastResponse.FromString,
+                request_serializer=google_dot_ads_dot_googleads_dot_v6_dot_services_dot_reach__plan__service__pb2.GenerateReachForecastRequest.SerializeToString,
+                response_deserializer=google_dot_ads_dot_googleads_dot_v6_dot_services_dot_reach__plan__service__pb2.GenerateReachForecastResponse.FromString,
                 )
 
 
@@ -89,23 +89,23 @@ def add_ReachPlanServiceServicer_to_server(servicer, server):
     rpc_method_handlers = {
             'ListPlannableLocations': grpc.unary_unary_rpc_method_handler(
                     servicer.ListPlannableLocations,
-                    request_deserializer=google_dot_ads_dot_googleads__v6_dot_proto_dot_services_dot_reach__plan__service__pb2.ListPlannableLocationsRequest.FromString,
-                    response_serializer=google_dot_ads_dot_googleads__v6_dot_proto_dot_services_dot_reach__plan__service__pb2.ListPlannableLocationsResponse.SerializeToString,
+                    request_deserializer=google_dot_ads_dot_googleads_dot_v6_dot_services_dot_reach__plan__service__pb2.ListPlannableLocationsRequest.FromString,
+                    response_serializer=google_dot_ads_dot_googleads_dot_v6_dot_services_dot_reach__plan__service__pb2.ListPlannableLocationsResponse.SerializeToString,
             ),
             'ListPlannableProducts': grpc.unary_unary_rpc_method_handler(
                     servicer.ListPlannableProducts,
-                    request_deserializer=google_dot_ads_dot_googleads__v6_dot_proto_dot_services_dot_reach__plan__service__pb2.ListPlannableProductsRequest.FromString,
-                    response_serializer=google_dot_ads_dot_googleads__v6_dot_proto_dot_services_dot_reach__plan__service__pb2.ListPlannableProductsResponse.SerializeToString,
+                    request_deserializer=google_dot_ads_dot_googleads_dot_v6_dot_services_dot_reach__plan__service__pb2.ListPlannableProductsRequest.FromString,
+                    response_serializer=google_dot_ads_dot_googleads_dot_v6_dot_services_dot_reach__plan__service__pb2.ListPlannableProductsResponse.SerializeToString,
             ),
             'GenerateProductMixIdeas': grpc.unary_unary_rpc_method_handler(
                     servicer.GenerateProductMixIdeas,
-                    request_deserializer=google_dot_ads_dot_googleads__v6_dot_proto_dot_services_dot_reach__plan__service__pb2.GenerateProductMixIdeasRequest.FromString,
-                    response_serializer=google_dot_ads_dot_googleads__v6_dot_proto_dot_services_dot_reach__plan__service__pb2.GenerateProductMixIdeasResponse.SerializeToString,
+                    request_deserializer=google_dot_ads_dot_googleads_dot_v6_dot_services_dot_reach__plan__service__pb2.GenerateProductMixIdeasRequest.FromString,
+                    response_serializer=google_dot_ads_dot_googleads_dot_v6_dot_services_dot_reach__plan__service__pb2.GenerateProductMixIdeasResponse.SerializeToString,
             ),
             'GenerateReachForecast': grpc.unary_unary_rpc_method_handler(
                     servicer.GenerateReachForecast,
-                    request_deserializer=google_dot_ads_dot_googleads__v6_dot_proto_dot_services_dot_reach__plan__service__pb2.GenerateReachForecastRequest.FromString,
-                    response_serializer=google_dot_ads_dot_googleads__v6_dot_proto_dot_services_dot_reach__plan__service__pb2.GenerateReachForecastResponse.SerializeToString,
+                    request_deserializer=google_dot_ads_dot_googleads_dot_v6_dot_services_dot_reach__plan__service__pb2.GenerateReachForecastRequest.FromString,
+                    response_serializer=google_dot_ads_dot_googleads_dot_v6_dot_services_dot_reach__plan__service__pb2.GenerateReachForecastResponse.SerializeToString,
             ),
     }
     generic_handler = grpc.method_handlers_generic_handler(
@@ -130,15 +130,16 @@ class ReachPlanService(object):
             options=(),
             channel_credentials=None,
             call_credentials=None,
+            insecure=False,
             compression=None,
             wait_for_ready=None,
             timeout=None,
             metadata=None):
         return grpc.experimental.unary_unary(request, target, '/google.ads.googleads.v6.services.ReachPlanService/ListPlannableLocations',
-            google_dot_ads_dot_googleads__v6_dot_proto_dot_services_dot_reach__plan__service__pb2.ListPlannableLocationsRequest.SerializeToString,
-            google_dot_ads_dot_googleads__v6_dot_proto_dot_services_dot_reach__plan__service__pb2.ListPlannableLocationsResponse.FromString,
+            google_dot_ads_dot_googleads_dot_v6_dot_services_dot_reach__plan__service__pb2.ListPlannableLocationsRequest.SerializeToString,
+            google_dot_ads_dot_googleads_dot_v6_dot_services_dot_reach__plan__service__pb2.ListPlannableLocationsResponse.FromString,
             options, channel_credentials,
-            call_credentials, compression, wait_for_ready, timeout, metadata)
+            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
 
     @staticmethod
     def ListPlannableProducts(request,
@@ -146,15 +147,16 @@ class ReachPlanService(object):
             options=(),
             channel_credentials=None,
             call_credentials=None,
+            insecure=False,
             compression=None,
             wait_for_ready=None,
             timeout=None,
             metadata=None):
         return grpc.experimental.unary_unary(request, target, '/google.ads.googleads.v6.services.ReachPlanService/ListPlannableProducts',
-            google_dot_ads_dot_googleads__v6_dot_proto_dot_services_dot_reach__plan__service__pb2.ListPlannableProductsRequest.SerializeToString,
-            google_dot_ads_dot_googleads__v6_dot_proto_dot_services_dot_reach__plan__service__pb2.ListPlannableProductsResponse.FromString,
+            google_dot_ads_dot_googleads_dot_v6_dot_services_dot_reach__plan__service__pb2.ListPlannableProductsRequest.SerializeToString,
+            google_dot_ads_dot_googleads_dot_v6_dot_services_dot_reach__plan__service__pb2.ListPlannableProductsResponse.FromString,
             options, channel_credentials,
-            call_credentials, compression, wait_for_ready, timeout, metadata)
+            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
 
     @staticmethod
     def GenerateProductMixIdeas(request,
@@ -162,15 +164,16 @@ class ReachPlanService(object):
             options=(),
             channel_credentials=None,
             call_credentials=None,
+            insecure=False,
             compression=None,
             wait_for_ready=None,
             timeout=None,
             metadata=None):
         return grpc.experimental.unary_unary(request, target, '/google.ads.googleads.v6.services.ReachPlanService/GenerateProductMixIdeas',
-            google_dot_ads_dot_googleads__v6_dot_proto_dot_services_dot_reach__plan__service__pb2.GenerateProductMixIdeasRequest.SerializeToString,
-            google_dot_ads_dot_googleads__v6_dot_proto_dot_services_dot_reach__plan__service__pb2.GenerateProductMixIdeasResponse.FromString,
+            google_dot_ads_dot_googleads_dot_v6_dot_services_dot_reach__plan__service__pb2.GenerateProductMixIdeasRequest.SerializeToString,
+            google_dot_ads_dot_googleads_dot_v6_dot_services_dot_reach__plan__service__pb2.GenerateProductMixIdeasResponse.FromString,
             options, channel_credentials,
-            call_credentials, compression, wait_for_ready, timeout, metadata)
+            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
 
     @staticmethod
     def GenerateReachForecast(request,
@@ -178,12 +181,13 @@ class ReachPlanService(object):
             options=(),
             channel_credentials=None,
             call_credentials=None,
+            insecure=False,
             compression=None,
             wait_for_ready=None,
             timeout=None,
             metadata=None):
         return grpc.experimental.unary_unary(request, target, '/google.ads.googleads.v6.services.ReachPlanService/GenerateReachForecast',
-            google_dot_ads_dot_googleads__v6_dot_proto_dot_services_dot_reach__plan__service__pb2.GenerateReachForecastRequest.SerializeToString,
-            google_dot_ads_dot_googleads__v6_dot_proto_dot_services_dot_reach__plan__service__pb2.GenerateReachForecastResponse.FromString,
+            google_dot_ads_dot_googleads_dot_v6_dot_services_dot_reach__plan__service__pb2.GenerateReachForecastRequest.SerializeToString,
+            google_dot_ads_dot_googleads_dot_v6_dot_services_dot_reach__plan__service__pb2.GenerateReachForecastResponse.FromString,
             options, channel_credentials,
-            call_credentials, compression, wait_for_ready, timeout, metadata)
+            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)

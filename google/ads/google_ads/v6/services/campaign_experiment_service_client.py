@@ -89,12 +89,31 @@ class CampaignExperimentServiceClient(object):
 
 
     @classmethod
-    def campaign_experiment_path(cls, customer, campaign_experiment):
+    def campaign_path(cls, customer_id, campaign_id):
+        """Return a fully-qualified campaign string."""
+        return google.api_core.path_template.expand(
+            'customers/{customer_id}/campaigns/{campaign_id}',
+            customer_id=customer_id,
+            campaign_id=campaign_id,
+        )
+
+    @classmethod
+    def campaign_draft_path(cls, customer_id, base_campaign_id, draft_id):
+        """Return a fully-qualified campaign_draft string."""
+        return google.api_core.path_template.expand(
+            'customers/{customer_id}/campaignDrafts/{base_campaign_id}~{draft_id}',
+            customer_id=customer_id,
+            base_campaign_id=base_campaign_id,
+            draft_id=draft_id,
+        )
+
+    @classmethod
+    def campaign_experiment_path(cls, customer_id, campaign_experiment_id):
         """Return a fully-qualified campaign_experiment string."""
         return google.api_core.path_template.expand(
-            'customers/{customer}/campaignExperiments/{campaign_experiment}',
-            customer=customer,
-            campaign_experiment=campaign_experiment,
+            'customers/{customer_id}/campaignExperiments/{campaign_experiment_id}',
+            customer_id=customer_id,
+            campaign_experiment_id=campaign_experiment_id,
         )
 
     def __init__(self, transport=None, channel=None, credentials=None,
@@ -207,6 +226,15 @@ class CampaignExperimentServiceClient(object):
         """
         Returns the requested campaign experiment in full detail.
 
+        Example:
+            >>> from google.ads import googleads_v6
+            >>>
+            >>> client = googleads_v6.CampaignExperimentServiceClient()
+            >>>
+            >>> resource_name = client.campaign_experiment_path('[CUSTOMER_ID]', '[CAMPAIGN_EXPERIMENT_ID]')
+            >>>
+            >>> response = client.get_campaign_experiment(resource_name)
+
         Args:
             resource_name (str): Required. The resource name of the campaign experiment to fetch.
             retry (Optional[google.api_core.retry.Retry]):  A retry object used
@@ -272,6 +300,28 @@ class CampaignExperimentServiceClient(object):
         using the ListCampaignExperimentAsyncErrors method. The operation's
         metadata will be a StringValue containing the resource name of the created
         campaign experiment.
+
+        Example:
+            >>> from google.ads import googleads_v6
+            >>>
+            >>> client = googleads_v6.CampaignExperimentServiceClient()
+            >>>
+            >>> # TODO: Initialize `customer_id`:
+            >>> customer_id = ''
+            >>>
+            >>> # TODO: Initialize `campaign_experiment`:
+            >>> campaign_experiment = {}
+            >>>
+            >>> response = client.create_campaign_experiment(customer_id, campaign_experiment)
+            >>>
+            >>> def callback(operation_future):
+            ...     # Handle result.
+            ...     result = operation_future.result()
+            >>>
+            >>> response.add_done_callback(callback)
+            >>>
+            >>> # Handle metadata.
+            >>> metadata = response.metadata()
 
         Args:
             customer_id (str): Required. The ID of the customer whose campaign experiment is being created.
@@ -346,6 +396,19 @@ class CampaignExperimentServiceClient(object):
         """
         Updates campaign experiments. Operation statuses are returned.
 
+        Example:
+            >>> from google.ads import googleads_v6
+            >>>
+            >>> client = googleads_v6.CampaignExperimentServiceClient()
+            >>>
+            >>> # TODO: Initialize `customer_id`:
+            >>> customer_id = ''
+            >>>
+            >>> # TODO: Initialize `operations`:
+            >>> operations = []
+            >>>
+            >>> response = client.mutate_campaign_experiments(customer_id, operations)
+
         Args:
             customer_id (str): Required. The ID of the customer whose campaign experiments are being modified.
             operations (list[Union[dict, ~google.ads.googleads_v6.types.CampaignExperimentOperation]]): Required. The list of operations to perform on individual campaign experiments.
@@ -419,6 +482,19 @@ class CampaignExperimentServiceClient(object):
         Graduates a campaign experiment to a full campaign. The base and experiment
         campaigns will start running independently with their own budgets.
 
+        Example:
+            >>> from google.ads import googleads_v6
+            >>>
+            >>> client = googleads_v6.CampaignExperimentServiceClient()
+            >>>
+            >>> # TODO: Initialize `campaign_experiment`:
+            >>> campaign_experiment = ''
+            >>>
+            >>> # TODO: Initialize `campaign_budget`:
+            >>> campaign_budget = ''
+            >>>
+            >>> response = client.graduate_campaign_experiment(campaign_experiment, campaign_budget)
+
         Args:
             campaign_experiment (str): Required. The resource name of the campaign experiment to graduate.
             campaign_budget (str): Required. Resource name of the budget to attach to the campaign graduated from the
@@ -481,6 +557,25 @@ class CampaignExperimentServiceClient(object):
         This method return a long running operation that tracks the promoting of
         the experiment campaign. If the promoting fails, a list of errors can be
         retrieved using the ListCampaignExperimentAsyncErrors method.
+
+        Example:
+            >>> from google.ads import googleads_v6
+            >>>
+            >>> client = googleads_v6.CampaignExperimentServiceClient()
+            >>>
+            >>> # TODO: Initialize `campaign_experiment`:
+            >>> campaign_experiment = ''
+            >>>
+            >>> response = client.promote_campaign_experiment(campaign_experiment)
+            >>>
+            >>> def callback(operation_future):
+            ...     # Handle result.
+            ...     result = operation_future.result()
+            >>>
+            >>> response.add_done_callback(callback)
+            >>>
+            >>> # Handle metadata.
+            >>> metadata = response.metadata()
 
         Args:
             campaign_experiment (str): Required. The resource name of the campaign experiment to promote.
@@ -545,6 +640,16 @@ class CampaignExperimentServiceClient(object):
         end date and without waiting for end of day. End date is updated to be the
         time of the request.
 
+        Example:
+            >>> from google.ads import googleads_v6
+            >>>
+            >>> client = googleads_v6.CampaignExperimentServiceClient()
+            >>>
+            >>> # TODO: Initialize `campaign_experiment`:
+            >>> campaign_experiment = ''
+            >>>
+            >>> client.end_campaign_experiment(campaign_experiment)
+
         Args:
             campaign_experiment (str): Required. The resource name of the campaign experiment to end.
             retry (Optional[google.api_core.retry.Retry]):  A retry object used
@@ -599,6 +704,27 @@ class CampaignExperimentServiceClient(object):
         Returns all errors that occurred during CampaignExperiment create or
         promote (whichever occurred last).
         Supports standard list paging.
+
+        Example:
+            >>> from google.ads import googleads_v6
+            >>>
+            >>> client = googleads_v6.CampaignExperimentServiceClient()
+            >>>
+            >>> resource_name = client.campaign_experiment_path('[CUSTOMER_ID]', '[CAMPAIGN_EXPERIMENT_ID]')
+            >>>
+            >>> # Iterate over all results
+            >>> for element in client.list_campaign_experiment_async_errors(resource_name):
+            ...     # process element
+            ...     pass
+            >>>
+            >>>
+            >>> # Alternatively:
+            >>>
+            >>> # Iterate over results one page at a time
+            >>> for page in client.list_campaign_experiment_async_errors(resource_name).pages:
+            ...     for element in page:
+            ...         # process element
+            ...         pass
 
         Args:
             resource_name (str): Required. The name of the campaign experiment from which to retrieve the async

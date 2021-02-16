@@ -73,12 +73,12 @@ class CustomerFeedServiceClient(object):
 
 
     @classmethod
-    def customer_feed_path(cls, customer, customer_feed):
+    def customer_feed_path(cls, customer_id, feed_id):
         """Return a fully-qualified customer_feed string."""
         return google.api_core.path_template.expand(
-            'customers/{customer}/customerFeeds/{customer_feed}',
-            customer=customer,
-            customer_feed=customer_feed,
+            'customers/{customer_id}/customerFeeds/{feed_id}',
+            customer_id=customer_id,
+            feed_id=feed_id,
         )
 
     def __init__(self, transport=None, channel=None, credentials=None,
@@ -191,6 +191,15 @@ class CustomerFeedServiceClient(object):
         """
         Returns the requested customer feed in full detail.
 
+        Example:
+            >>> from google.ads import googleads_v6
+            >>>
+            >>> client = googleads_v6.CustomerFeedServiceClient()
+            >>>
+            >>> resource_name = client.customer_feed_path('[CUSTOMER_ID]', '[FEED_ID]')
+            >>>
+            >>> response = client.get_customer_feed(resource_name)
+
         Args:
             resource_name (str): Required. The resource name of the customer feed to fetch.
             retry (Optional[google.api_core.retry.Retry]):  A retry object used
@@ -250,6 +259,19 @@ class CustomerFeedServiceClient(object):
         """
         Creates, updates, or removes customer feeds. Operation statuses are
         returned.
+
+        Example:
+            >>> from google.ads import googleads_v6
+            >>>
+            >>> client = googleads_v6.CustomerFeedServiceClient()
+            >>>
+            >>> # TODO: Initialize `customer_id`:
+            >>> customer_id = ''
+            >>>
+            >>> # TODO: Initialize `operations`:
+            >>> operations = []
+            >>>
+            >>> response = client.mutate_customer_feeds(customer_id, operations)
 
         Args:
             customer_id (str): Required. The ID of the customer whose customer feeds are being modified.

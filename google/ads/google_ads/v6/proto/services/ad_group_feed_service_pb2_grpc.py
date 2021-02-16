@@ -2,8 +2,8 @@
 """Client and server classes corresponding to protobuf-defined services."""
 import grpc
 
-from google.ads.google_ads.v6.proto.resources import ad_group_feed_pb2 as google_dot_ads_dot_googleads__v6_dot_proto_dot_resources_dot_ad__group__feed__pb2
-from google.ads.google_ads.v6.proto.services import ad_group_feed_service_pb2 as google_dot_ads_dot_googleads__v6_dot_proto_dot_services_dot_ad__group__feed__service__pb2
+from google.ads.google_ads.v6.proto.resources import ad_group_feed_pb2 as google_dot_ads_dot_googleads_dot_v6_dot_resources_dot_ad__group__feed__pb2
+from google.ads.google_ads.v6.proto.services import ad_group_feed_service_pb2 as google_dot_ads_dot_googleads_dot_v6_dot_services_dot_ad__group__feed__service__pb2
 
 
 class AdGroupFeedServiceStub(object):
@@ -20,13 +20,13 @@ class AdGroupFeedServiceStub(object):
         """
         self.GetAdGroupFeed = channel.unary_unary(
                 '/google.ads.googleads.v6.services.AdGroupFeedService/GetAdGroupFeed',
-                request_serializer=google_dot_ads_dot_googleads__v6_dot_proto_dot_services_dot_ad__group__feed__service__pb2.GetAdGroupFeedRequest.SerializeToString,
-                response_deserializer=google_dot_ads_dot_googleads__v6_dot_proto_dot_resources_dot_ad__group__feed__pb2.AdGroupFeed.FromString,
+                request_serializer=google_dot_ads_dot_googleads_dot_v6_dot_services_dot_ad__group__feed__service__pb2.GetAdGroupFeedRequest.SerializeToString,
+                response_deserializer=google_dot_ads_dot_googleads_dot_v6_dot_resources_dot_ad__group__feed__pb2.AdGroupFeed.FromString,
                 )
         self.MutateAdGroupFeeds = channel.unary_unary(
                 '/google.ads.googleads.v6.services.AdGroupFeedService/MutateAdGroupFeeds',
-                request_serializer=google_dot_ads_dot_googleads__v6_dot_proto_dot_services_dot_ad__group__feed__service__pb2.MutateAdGroupFeedsRequest.SerializeToString,
-                response_deserializer=google_dot_ads_dot_googleads__v6_dot_proto_dot_services_dot_ad__group__feed__service__pb2.MutateAdGroupFeedsResponse.FromString,
+                request_serializer=google_dot_ads_dot_googleads_dot_v6_dot_services_dot_ad__group__feed__service__pb2.MutateAdGroupFeedsRequest.SerializeToString,
+                response_deserializer=google_dot_ads_dot_googleads_dot_v6_dot_services_dot_ad__group__feed__service__pb2.MutateAdGroupFeedsResponse.FromString,
                 )
 
 
@@ -56,13 +56,13 @@ def add_AdGroupFeedServiceServicer_to_server(servicer, server):
     rpc_method_handlers = {
             'GetAdGroupFeed': grpc.unary_unary_rpc_method_handler(
                     servicer.GetAdGroupFeed,
-                    request_deserializer=google_dot_ads_dot_googleads__v6_dot_proto_dot_services_dot_ad__group__feed__service__pb2.GetAdGroupFeedRequest.FromString,
-                    response_serializer=google_dot_ads_dot_googleads__v6_dot_proto_dot_resources_dot_ad__group__feed__pb2.AdGroupFeed.SerializeToString,
+                    request_deserializer=google_dot_ads_dot_googleads_dot_v6_dot_services_dot_ad__group__feed__service__pb2.GetAdGroupFeedRequest.FromString,
+                    response_serializer=google_dot_ads_dot_googleads_dot_v6_dot_resources_dot_ad__group__feed__pb2.AdGroupFeed.SerializeToString,
             ),
             'MutateAdGroupFeeds': grpc.unary_unary_rpc_method_handler(
                     servicer.MutateAdGroupFeeds,
-                    request_deserializer=google_dot_ads_dot_googleads__v6_dot_proto_dot_services_dot_ad__group__feed__service__pb2.MutateAdGroupFeedsRequest.FromString,
-                    response_serializer=google_dot_ads_dot_googleads__v6_dot_proto_dot_services_dot_ad__group__feed__service__pb2.MutateAdGroupFeedsResponse.SerializeToString,
+                    request_deserializer=google_dot_ads_dot_googleads_dot_v6_dot_services_dot_ad__group__feed__service__pb2.MutateAdGroupFeedsRequest.FromString,
+                    response_serializer=google_dot_ads_dot_googleads_dot_v6_dot_services_dot_ad__group__feed__service__pb2.MutateAdGroupFeedsResponse.SerializeToString,
             ),
     }
     generic_handler = grpc.method_handlers_generic_handler(
@@ -83,15 +83,16 @@ class AdGroupFeedService(object):
             options=(),
             channel_credentials=None,
             call_credentials=None,
+            insecure=False,
             compression=None,
             wait_for_ready=None,
             timeout=None,
             metadata=None):
         return grpc.experimental.unary_unary(request, target, '/google.ads.googleads.v6.services.AdGroupFeedService/GetAdGroupFeed',
-            google_dot_ads_dot_googleads__v6_dot_proto_dot_services_dot_ad__group__feed__service__pb2.GetAdGroupFeedRequest.SerializeToString,
-            google_dot_ads_dot_googleads__v6_dot_proto_dot_resources_dot_ad__group__feed__pb2.AdGroupFeed.FromString,
+            google_dot_ads_dot_googleads_dot_v6_dot_services_dot_ad__group__feed__service__pb2.GetAdGroupFeedRequest.SerializeToString,
+            google_dot_ads_dot_googleads_dot_v6_dot_resources_dot_ad__group__feed__pb2.AdGroupFeed.FromString,
             options, channel_credentials,
-            call_credentials, compression, wait_for_ready, timeout, metadata)
+            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
 
     @staticmethod
     def MutateAdGroupFeeds(request,
@@ -99,12 +100,13 @@ class AdGroupFeedService(object):
             options=(),
             channel_credentials=None,
             call_credentials=None,
+            insecure=False,
             compression=None,
             wait_for_ready=None,
             timeout=None,
             metadata=None):
         return grpc.experimental.unary_unary(request, target, '/google.ads.googleads.v6.services.AdGroupFeedService/MutateAdGroupFeeds',
-            google_dot_ads_dot_googleads__v6_dot_proto_dot_services_dot_ad__group__feed__service__pb2.MutateAdGroupFeedsRequest.SerializeToString,
-            google_dot_ads_dot_googleads__v6_dot_proto_dot_services_dot_ad__group__feed__service__pb2.MutateAdGroupFeedsResponse.FromString,
+            google_dot_ads_dot_googleads_dot_v6_dot_services_dot_ad__group__feed__service__pb2.MutateAdGroupFeedsRequest.SerializeToString,
+            google_dot_ads_dot_googleads_dot_v6_dot_services_dot_ad__group__feed__service__pb2.MutateAdGroupFeedsResponse.FromString,
             options, channel_credentials,
-            call_credentials, compression, wait_for_ready, timeout, metadata)
+            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)

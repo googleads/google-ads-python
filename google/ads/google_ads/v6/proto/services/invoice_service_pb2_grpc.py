@@ -2,7 +2,7 @@
 """Client and server classes corresponding to protobuf-defined services."""
 import grpc
 
-from google.ads.google_ads.v6.proto.services import invoice_service_pb2 as google_dot_ads_dot_googleads__v6_dot_proto_dot_services_dot_invoice__service__pb2
+from google.ads.google_ads.v6.proto.services import invoice_service_pb2 as google_dot_ads_dot_googleads_dot_v6_dot_services_dot_invoice__service__pb2
 
 
 class InvoiceServiceStub(object):
@@ -19,8 +19,8 @@ class InvoiceServiceStub(object):
         """
         self.ListInvoices = channel.unary_unary(
                 '/google.ads.googleads.v6.services.InvoiceService/ListInvoices',
-                request_serializer=google_dot_ads_dot_googleads__v6_dot_proto_dot_services_dot_invoice__service__pb2.ListInvoicesRequest.SerializeToString,
-                response_deserializer=google_dot_ads_dot_googleads__v6_dot_proto_dot_services_dot_invoice__service__pb2.ListInvoicesResponse.FromString,
+                request_serializer=google_dot_ads_dot_googleads_dot_v6_dot_services_dot_invoice__service__pb2.ListInvoicesRequest.SerializeToString,
+                response_deserializer=google_dot_ads_dot_googleads_dot_v6_dot_services_dot_invoice__service__pb2.ListInvoicesResponse.FromString,
                 )
 
 
@@ -42,8 +42,8 @@ def add_InvoiceServiceServicer_to_server(servicer, server):
     rpc_method_handlers = {
             'ListInvoices': grpc.unary_unary_rpc_method_handler(
                     servicer.ListInvoices,
-                    request_deserializer=google_dot_ads_dot_googleads__v6_dot_proto_dot_services_dot_invoice__service__pb2.ListInvoicesRequest.FromString,
-                    response_serializer=google_dot_ads_dot_googleads__v6_dot_proto_dot_services_dot_invoice__service__pb2.ListInvoicesResponse.SerializeToString,
+                    request_deserializer=google_dot_ads_dot_googleads_dot_v6_dot_services_dot_invoice__service__pb2.ListInvoicesRequest.FromString,
+                    response_serializer=google_dot_ads_dot_googleads_dot_v6_dot_services_dot_invoice__service__pb2.ListInvoicesResponse.SerializeToString,
             ),
     }
     generic_handler = grpc.method_handlers_generic_handler(
@@ -64,12 +64,13 @@ class InvoiceService(object):
             options=(),
             channel_credentials=None,
             call_credentials=None,
+            insecure=False,
             compression=None,
             wait_for_ready=None,
             timeout=None,
             metadata=None):
         return grpc.experimental.unary_unary(request, target, '/google.ads.googleads.v6.services.InvoiceService/ListInvoices',
-            google_dot_ads_dot_googleads__v6_dot_proto_dot_services_dot_invoice__service__pb2.ListInvoicesRequest.SerializeToString,
-            google_dot_ads_dot_googleads__v6_dot_proto_dot_services_dot_invoice__service__pb2.ListInvoicesResponse.FromString,
+            google_dot_ads_dot_googleads_dot_v6_dot_services_dot_invoice__service__pb2.ListInvoicesRequest.SerializeToString,
+            google_dot_ads_dot_googleads_dot_v6_dot_services_dot_invoice__service__pb2.ListInvoicesResponse.FromString,
             options, channel_credentials,
-            call_credentials, compression, wait_for_ready, timeout, metadata)
+            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)

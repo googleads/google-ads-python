@@ -73,12 +73,12 @@ class KeywordPlanServiceClient(object):
 
 
     @classmethod
-    def keyword_plan_path(cls, customer, keyword_plan):
+    def keyword_plan_path(cls, customer_id, keyword_plan_id):
         """Return a fully-qualified keyword_plan string."""
         return google.api_core.path_template.expand(
-            'customers/{customer}/keywordPlans/{keyword_plan}',
-            customer=customer,
-            keyword_plan=keyword_plan,
+            'customers/{customer_id}/keywordPlans/{keyword_plan_id}',
+            customer_id=customer_id,
+            keyword_plan_id=keyword_plan_id,
         )
 
     def __init__(self, transport=None, channel=None, credentials=None,
@@ -191,6 +191,15 @@ class KeywordPlanServiceClient(object):
         """
         Returns the requested plan in full detail.
 
+        Example:
+            >>> from google.ads import googleads_v6
+            >>>
+            >>> client = googleads_v6.KeywordPlanServiceClient()
+            >>>
+            >>> resource_name = client.keyword_plan_path('[CUSTOMER_ID]', '[KEYWORD_PLAN_ID]')
+            >>>
+            >>> response = client.get_keyword_plan(resource_name)
+
         Args:
             resource_name (str): Required. The resource name of the plan to fetch.
             retry (Optional[google.api_core.retry.Retry]):  A retry object used
@@ -249,6 +258,19 @@ class KeywordPlanServiceClient(object):
         """
         Creates, updates, or removes keyword plans. Operation statuses are
         returned.
+
+        Example:
+            >>> from google.ads import googleads_v6
+            >>>
+            >>> client = googleads_v6.KeywordPlanServiceClient()
+            >>>
+            >>> # TODO: Initialize `customer_id`:
+            >>> customer_id = ''
+            >>>
+            >>> # TODO: Initialize `operations`:
+            >>> operations = []
+            >>>
+            >>> response = client.mutate_keyword_plans(customer_id, operations)
 
         Args:
             customer_id (str): Required. The ID of the customer whose keyword plans are being modified.
@@ -323,6 +345,15 @@ class KeywordPlanServiceClient(object):
         To generate a forecast at a value specified in the plan, use
         KeywordPlanService.GenerateForecastMetrics.
 
+        Example:
+            >>> from google.ads import googleads_v6
+            >>>
+            >>> client = googleads_v6.KeywordPlanServiceClient()
+            >>>
+            >>> keyword_plan = client.keyword_plan_path('[CUSTOMER_ID]', '[KEYWORD_PLAN_ID]')
+            >>>
+            >>> response = client.generate_forecast_curve(keyword_plan)
+
         Args:
             keyword_plan (str): Required. The resource name of the keyword plan to be forecasted.
             retry (Optional[google.api_core.retry.Retry]):  A retry object used
@@ -384,6 +415,15 @@ class KeywordPlanServiceClient(object):
         (2) The forecast reflects seasonal trends using current and
         prior traffic patterns. The forecast period of the plan is ignored.
 
+        Example:
+            >>> from google.ads import googleads_v6
+            >>>
+            >>> client = googleads_v6.KeywordPlanServiceClient()
+            >>>
+            >>> keyword_plan = client.keyword_plan_path('[CUSTOMER_ID]', '[KEYWORD_PLAN_ID]')
+            >>>
+            >>> response = client.generate_forecast_time_series(keyword_plan)
+
         Args:
             keyword_plan (str): Required. The resource name of the keyword plan to be forecasted.
             retry (Optional[google.api_core.retry.Retry]):  A retry object used
@@ -439,6 +479,15 @@ class KeywordPlanServiceClient(object):
         """
         Returns the requested Keyword Plan forecasts.
 
+        Example:
+            >>> from google.ads import googleads_v6
+            >>>
+            >>> client = googleads_v6.KeywordPlanServiceClient()
+            >>>
+            >>> keyword_plan = client.keyword_plan_path('[CUSTOMER_ID]', '[KEYWORD_PLAN_ID]')
+            >>>
+            >>> response = client.generate_forecast_metrics(keyword_plan)
+
         Args:
             keyword_plan (str): Required. The resource name of the keyword plan to be forecasted.
             retry (Optional[google.api_core.retry.Retry]):  A retry object used
@@ -493,6 +542,15 @@ class KeywordPlanServiceClient(object):
             metadata=None):
         """
         Returns the requested Keyword Plan historical metrics.
+
+        Example:
+            >>> from google.ads import googleads_v6
+            >>>
+            >>> client = googleads_v6.KeywordPlanServiceClient()
+            >>>
+            >>> keyword_plan = client.keyword_plan_path('[CUSTOMER_ID]', '[KEYWORD_PLAN_ID]')
+            >>>
+            >>> response = client.generate_historical_metrics(keyword_plan)
 
         Args:
             keyword_plan (str): Required. The resource name of the keyword plan of which historical metrics are

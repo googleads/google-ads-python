@@ -2,8 +2,8 @@
 """Client and server classes corresponding to protobuf-defined services."""
 import grpc
 
-from google.ads.google_ads.v6.proto.resources import shared_criterion_pb2 as google_dot_ads_dot_googleads__v6_dot_proto_dot_resources_dot_shared__criterion__pb2
-from google.ads.google_ads.v6.proto.services import shared_criterion_service_pb2 as google_dot_ads_dot_googleads__v6_dot_proto_dot_services_dot_shared__criterion__service__pb2
+from google.ads.google_ads.v6.proto.resources import shared_criterion_pb2 as google_dot_ads_dot_googleads_dot_v6_dot_resources_dot_shared__criterion__pb2
+from google.ads.google_ads.v6.proto.services import shared_criterion_service_pb2 as google_dot_ads_dot_googleads_dot_v6_dot_services_dot_shared__criterion__service__pb2
 
 
 class SharedCriterionServiceStub(object):
@@ -20,13 +20,13 @@ class SharedCriterionServiceStub(object):
         """
         self.GetSharedCriterion = channel.unary_unary(
                 '/google.ads.googleads.v6.services.SharedCriterionService/GetSharedCriterion',
-                request_serializer=google_dot_ads_dot_googleads__v6_dot_proto_dot_services_dot_shared__criterion__service__pb2.GetSharedCriterionRequest.SerializeToString,
-                response_deserializer=google_dot_ads_dot_googleads__v6_dot_proto_dot_resources_dot_shared__criterion__pb2.SharedCriterion.FromString,
+                request_serializer=google_dot_ads_dot_googleads_dot_v6_dot_services_dot_shared__criterion__service__pb2.GetSharedCriterionRequest.SerializeToString,
+                response_deserializer=google_dot_ads_dot_googleads_dot_v6_dot_resources_dot_shared__criterion__pb2.SharedCriterion.FromString,
                 )
         self.MutateSharedCriteria = channel.unary_unary(
                 '/google.ads.googleads.v6.services.SharedCriterionService/MutateSharedCriteria',
-                request_serializer=google_dot_ads_dot_googleads__v6_dot_proto_dot_services_dot_shared__criterion__service__pb2.MutateSharedCriteriaRequest.SerializeToString,
-                response_deserializer=google_dot_ads_dot_googleads__v6_dot_proto_dot_services_dot_shared__criterion__service__pb2.MutateSharedCriteriaResponse.FromString,
+                request_serializer=google_dot_ads_dot_googleads_dot_v6_dot_services_dot_shared__criterion__service__pb2.MutateSharedCriteriaRequest.SerializeToString,
+                response_deserializer=google_dot_ads_dot_googleads_dot_v6_dot_services_dot_shared__criterion__service__pb2.MutateSharedCriteriaResponse.FromString,
                 )
 
 
@@ -55,13 +55,13 @@ def add_SharedCriterionServiceServicer_to_server(servicer, server):
     rpc_method_handlers = {
             'GetSharedCriterion': grpc.unary_unary_rpc_method_handler(
                     servicer.GetSharedCriterion,
-                    request_deserializer=google_dot_ads_dot_googleads__v6_dot_proto_dot_services_dot_shared__criterion__service__pb2.GetSharedCriterionRequest.FromString,
-                    response_serializer=google_dot_ads_dot_googleads__v6_dot_proto_dot_resources_dot_shared__criterion__pb2.SharedCriterion.SerializeToString,
+                    request_deserializer=google_dot_ads_dot_googleads_dot_v6_dot_services_dot_shared__criterion__service__pb2.GetSharedCriterionRequest.FromString,
+                    response_serializer=google_dot_ads_dot_googleads_dot_v6_dot_resources_dot_shared__criterion__pb2.SharedCriterion.SerializeToString,
             ),
             'MutateSharedCriteria': grpc.unary_unary_rpc_method_handler(
                     servicer.MutateSharedCriteria,
-                    request_deserializer=google_dot_ads_dot_googleads__v6_dot_proto_dot_services_dot_shared__criterion__service__pb2.MutateSharedCriteriaRequest.FromString,
-                    response_serializer=google_dot_ads_dot_googleads__v6_dot_proto_dot_services_dot_shared__criterion__service__pb2.MutateSharedCriteriaResponse.SerializeToString,
+                    request_deserializer=google_dot_ads_dot_googleads_dot_v6_dot_services_dot_shared__criterion__service__pb2.MutateSharedCriteriaRequest.FromString,
+                    response_serializer=google_dot_ads_dot_googleads_dot_v6_dot_services_dot_shared__criterion__service__pb2.MutateSharedCriteriaResponse.SerializeToString,
             ),
     }
     generic_handler = grpc.method_handlers_generic_handler(
@@ -82,15 +82,16 @@ class SharedCriterionService(object):
             options=(),
             channel_credentials=None,
             call_credentials=None,
+            insecure=False,
             compression=None,
             wait_for_ready=None,
             timeout=None,
             metadata=None):
         return grpc.experimental.unary_unary(request, target, '/google.ads.googleads.v6.services.SharedCriterionService/GetSharedCriterion',
-            google_dot_ads_dot_googleads__v6_dot_proto_dot_services_dot_shared__criterion__service__pb2.GetSharedCriterionRequest.SerializeToString,
-            google_dot_ads_dot_googleads__v6_dot_proto_dot_resources_dot_shared__criterion__pb2.SharedCriterion.FromString,
+            google_dot_ads_dot_googleads_dot_v6_dot_services_dot_shared__criterion__service__pb2.GetSharedCriterionRequest.SerializeToString,
+            google_dot_ads_dot_googleads_dot_v6_dot_resources_dot_shared__criterion__pb2.SharedCriterion.FromString,
             options, channel_credentials,
-            call_credentials, compression, wait_for_ready, timeout, metadata)
+            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
 
     @staticmethod
     def MutateSharedCriteria(request,
@@ -98,12 +99,13 @@ class SharedCriterionService(object):
             options=(),
             channel_credentials=None,
             call_credentials=None,
+            insecure=False,
             compression=None,
             wait_for_ready=None,
             timeout=None,
             metadata=None):
         return grpc.experimental.unary_unary(request, target, '/google.ads.googleads.v6.services.SharedCriterionService/MutateSharedCriteria',
-            google_dot_ads_dot_googleads__v6_dot_proto_dot_services_dot_shared__criterion__service__pb2.MutateSharedCriteriaRequest.SerializeToString,
-            google_dot_ads_dot_googleads__v6_dot_proto_dot_services_dot_shared__criterion__service__pb2.MutateSharedCriteriaResponse.FromString,
+            google_dot_ads_dot_googleads_dot_v6_dot_services_dot_shared__criterion__service__pb2.MutateSharedCriteriaRequest.SerializeToString,
+            google_dot_ads_dot_googleads_dot_v6_dot_services_dot_shared__criterion__service__pb2.MutateSharedCriteriaResponse.FromString,
             options, channel_credentials,
-            call_credentials, compression, wait_for_ready, timeout, metadata)
+            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)

@@ -73,12 +73,13 @@ class DistanceViewServiceClient(object):
 
 
     @classmethod
-    def distance_view_path(cls, customer, distance_view):
+    def distance_view_path(cls, customer_id, placeholder_chain_id, distance_bucket):
         """Return a fully-qualified distance_view string."""
         return google.api_core.path_template.expand(
-            'customers/{customer}/distanceViews/{distance_view}',
-            customer=customer,
-            distance_view=distance_view,
+            'customers/{customer_id}/distanceViews/{placeholder_chain_id}~{distance_bucket}',
+            customer_id=customer_id,
+            placeholder_chain_id=placeholder_chain_id,
+            distance_bucket=distance_bucket,
         )
 
     def __init__(self, transport=None, channel=None, credentials=None,
@@ -190,6 +191,15 @@ class DistanceViewServiceClient(object):
             metadata=None):
         """
         Returns the attributes of the requested distance view.
+
+        Example:
+            >>> from google.ads import googleads_v6
+            >>>
+            >>> client = googleads_v6.DistanceViewServiceClient()
+            >>>
+            >>> resource_name = client.distance_view_path('[CUSTOMER_ID]', '[PLACEHOLDER_CHAIN_ID]', '[DISTANCE_BUCKET]')
+            >>>
+            >>> response = client.get_distance_view(resource_name)
 
         Args:
             resource_name (str): Required. The resource name of the distance view to fetch.

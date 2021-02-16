@@ -1,3 +1,9 @@
+* 9.0.0
+- Google Ads v6_1 release
+- Deprecate v3_0
+- Add log masking for CustomerUserAccessInvitation.email_address field.
+- Update examples to reflect changes to resource name helper methods.
+
 * 8.2.0
 - Added new client configuration environment variables.
 - Added ability to configure YAML file location via environment variable.

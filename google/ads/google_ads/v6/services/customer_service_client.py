@@ -74,11 +74,11 @@ class CustomerServiceClient(object):
 
 
     @classmethod
-    def customer_path(cls, customer):
+    def customer_path(cls, customer_id):
         """Return a fully-qualified customer string."""
         return google.api_core.path_template.expand(
-            'customers/{customer}',
-            customer=customer,
+            'customers/{customer_id}',
+            customer_id=customer_id,
         )
 
     def __init__(self, transport=None, channel=None, credentials=None,
@@ -191,6 +191,15 @@ class CustomerServiceClient(object):
         """
         Returns the requested customer in full detail.
 
+        Example:
+            >>> from google.ads import googleads_v6
+            >>>
+            >>> client = googleads_v6.CustomerServiceClient()
+            >>>
+            >>> resource_name = client.customer_path('[CUSTOMER_ID]')
+            >>>
+            >>> response = client.get_customer(resource_name)
+
         Args:
             resource_name (str): Required. The resource name of the customer to fetch.
             retry (Optional[google.api_core.retry.Retry]):  A retry object used
@@ -248,6 +257,19 @@ class CustomerServiceClient(object):
             metadata=None):
         """
         Updates a customer. Operation statuses are returned.
+
+        Example:
+            >>> from google.ads import googleads_v6
+            >>>
+            >>> client = googleads_v6.CustomerServiceClient()
+            >>>
+            >>> # TODO: Initialize `customer_id`:
+            >>> customer_id = ''
+            >>>
+            >>> # TODO: Initialize `operation_`:
+            >>> operation_ = {}
+            >>>
+            >>> response = client.mutate_customer(customer_id, operation_)
 
         Args:
             customer_id (str): Required. The ID of the customer being modified.
@@ -315,6 +337,13 @@ class CustomerServiceClient(object):
         Returns resource names of customers directly accessible by the
         user authenticating the call.
 
+        Example:
+            >>> from google.ads import googleads_v6
+            >>>
+            >>> client = googleads_v6.CustomerServiceClient()
+            >>>
+            >>> response = client.list_accessible_customers()
+
         Args:
             retry (Optional[google.api_core.retry.Retry]):  A retry object used
                 to retry requests. If ``None`` is specified, requests will
@@ -357,6 +386,19 @@ class CustomerServiceClient(object):
             metadata=None):
         """
         Creates a new client under manager. The new client customer is returned.
+
+        Example:
+            >>> from google.ads import googleads_v6
+            >>>
+            >>> client = googleads_v6.CustomerServiceClient()
+            >>>
+            >>> # TODO: Initialize `customer_id`:
+            >>> customer_id = ''
+            >>>
+            >>> # TODO: Initialize `customer_client`:
+            >>> customer_client = {}
+            >>>
+            >>> response = client.create_customer_client(customer_id, customer_client)
 
         Args:
             customer_id (str): Required. The ID of the Manager under whom client customer is being created.

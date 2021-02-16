@@ -73,12 +73,12 @@ class AdGroupServiceClient(object):
 
 
     @classmethod
-    def ad_group_path(cls, customer, ad_group):
+    def ad_group_path(cls, customer_id, ad_group_id):
         """Return a fully-qualified ad_group string."""
         return google.api_core.path_template.expand(
-            'customers/{customer}/adGroups/{ad_group}',
-            customer=customer,
-            ad_group=ad_group,
+            'customers/{customer_id}/adGroups/{ad_group_id}',
+            customer_id=customer_id,
+            ad_group_id=ad_group_id,
         )
 
     def __init__(self, transport=None, channel=None, credentials=None,
@@ -191,6 +191,15 @@ class AdGroupServiceClient(object):
         """
         Returns the requested ad group in full detail.
 
+        Example:
+            >>> from google.ads import googleads_v6
+            >>>
+            >>> client = googleads_v6.AdGroupServiceClient()
+            >>>
+            >>> resource_name = client.ad_group_path('[CUSTOMER_ID]', '[AD_GROUP_ID]')
+            >>>
+            >>> response = client.get_ad_group(resource_name)
+
         Args:
             resource_name (str): Required. The resource name of the ad group to fetch.
             retry (Optional[google.api_core.retry.Retry]):  A retry object used
@@ -249,6 +258,19 @@ class AdGroupServiceClient(object):
             metadata=None):
         """
         Creates, updates, or removes ad groups. Operation statuses are returned.
+
+        Example:
+            >>> from google.ads import googleads_v6
+            >>>
+            >>> client = googleads_v6.AdGroupServiceClient()
+            >>>
+            >>> # TODO: Initialize `customer_id`:
+            >>> customer_id = ''
+            >>>
+            >>> # TODO: Initialize `operations`:
+            >>> operations = []
+            >>>
+            >>> response = client.mutate_ad_groups(customer_id, operations)
 
         Args:
             customer_id (str): Required. The ID of the customer whose ad groups are being modified.

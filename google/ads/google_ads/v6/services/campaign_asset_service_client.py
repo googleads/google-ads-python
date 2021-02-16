@@ -73,12 +73,14 @@ class CampaignAssetServiceClient(object):
 
 
     @classmethod
-    def campaign_asset_path(cls, customer, campaign_asset):
+    def campaign_asset_path(cls, customer_id, campaign_id, asset_id, field_type):
         """Return a fully-qualified campaign_asset string."""
         return google.api_core.path_template.expand(
-            'customers/{customer}/campaignAssets/{campaign_asset}',
-            customer=customer,
-            campaign_asset=campaign_asset,
+            'customers/{customer_id}/campaignAssets/{campaign_id}~{asset_id}~{field_type}',
+            customer_id=customer_id,
+            campaign_id=campaign_id,
+            asset_id=asset_id,
+            field_type=field_type,
         )
 
     def __init__(self, transport=None, channel=None, credentials=None,
@@ -191,6 +193,15 @@ class CampaignAssetServiceClient(object):
         """
         Returns the requested campaign asset in full detail.
 
+        Example:
+            >>> from google.ads import googleads_v6
+            >>>
+            >>> client = googleads_v6.CampaignAssetServiceClient()
+            >>>
+            >>> resource_name = client.campaign_asset_path('[CUSTOMER_ID]', '[CAMPAIGN_ID]', '[ASSET_ID]', '[FIELD_TYPE]')
+            >>>
+            >>> response = client.get_campaign_asset(resource_name)
+
         Args:
             resource_name (str): Required. The resource name of the campaign asset to fetch.
             retry (Optional[google.api_core.retry.Retry]):  A retry object used
@@ -248,6 +259,19 @@ class CampaignAssetServiceClient(object):
             metadata=None):
         """
         Creates or removes campaign assets. Operation statuses are returned.
+
+        Example:
+            >>> from google.ads import googleads_v6
+            >>>
+            >>> client = googleads_v6.CampaignAssetServiceClient()
+            >>>
+            >>> # TODO: Initialize `customer_id`:
+            >>> customer_id = ''
+            >>>
+            >>> # TODO: Initialize `operations`:
+            >>> operations = []
+            >>>
+            >>> response = client.mutate_campaign_assets(customer_id, operations)
 
         Args:
             customer_id (str): Required. The ID of the customer whose campaign assets are being modified.

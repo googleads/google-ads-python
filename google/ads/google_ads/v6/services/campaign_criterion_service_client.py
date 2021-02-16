@@ -73,12 +73,13 @@ class CampaignCriterionServiceClient(object):
 
 
     @classmethod
-    def campaign_criteria_path(cls, customer, campaign_criteria):
-        """Return a fully-qualified campaign_criteria string."""
+    def campaign_criterion_path(cls, customer_id, campaign_id, criterion_id):
+        """Return a fully-qualified campaign_criterion string."""
         return google.api_core.path_template.expand(
-            'customers/{customer}/campaignCriteria/{campaign_criteria}',
-            customer=customer,
-            campaign_criteria=campaign_criteria,
+            'customers/{customer_id}/campaignCriteria/{campaign_id}~{criterion_id}',
+            customer_id=customer_id,
+            campaign_id=campaign_id,
+            criterion_id=criterion_id,
         )
 
     def __init__(self, transport=None, channel=None, credentials=None,
@@ -191,6 +192,15 @@ class CampaignCriterionServiceClient(object):
         """
         Returns the requested criterion in full detail.
 
+        Example:
+            >>> from google.ads import googleads_v6
+            >>>
+            >>> client = googleads_v6.CampaignCriterionServiceClient()
+            >>>
+            >>> resource_name = client.campaign_criterion_path('[CUSTOMER_ID]', '[CAMPAIGN_ID]', '[CRITERION_ID]')
+            >>>
+            >>> response = client.get_campaign_criterion(resource_name)
+
         Args:
             resource_name (str): Required. The resource name of the criterion to fetch.
             retry (Optional[google.api_core.retry.Retry]):  A retry object used
@@ -249,6 +259,19 @@ class CampaignCriterionServiceClient(object):
             metadata=None):
         """
         Creates, updates, or removes criteria. Operation statuses are returned.
+
+        Example:
+            >>> from google.ads import googleads_v6
+            >>>
+            >>> client = googleads_v6.CampaignCriterionServiceClient()
+            >>>
+            >>> # TODO: Initialize `customer_id`:
+            >>> customer_id = ''
+            >>>
+            >>> # TODO: Initialize `operations`:
+            >>> operations = []
+            >>>
+            >>> response = client.mutate_campaign_criteria(customer_id, operations)
 
         Args:
             customer_id (str): Required. The ID of the customer whose criteria are being modified.

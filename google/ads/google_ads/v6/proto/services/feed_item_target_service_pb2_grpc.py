@@ -2,8 +2,8 @@
 """Client and server classes corresponding to protobuf-defined services."""
 import grpc
 
-from google.ads.google_ads.v6.proto.resources import feed_item_target_pb2 as google_dot_ads_dot_googleads__v6_dot_proto_dot_resources_dot_feed__item__target__pb2
-from google.ads.google_ads.v6.proto.services import feed_item_target_service_pb2 as google_dot_ads_dot_googleads__v6_dot_proto_dot_services_dot_feed__item__target__service__pb2
+from google.ads.google_ads.v6.proto.resources import feed_item_target_pb2 as google_dot_ads_dot_googleads_dot_v6_dot_resources_dot_feed__item__target__pb2
+from google.ads.google_ads.v6.proto.services import feed_item_target_service_pb2 as google_dot_ads_dot_googleads_dot_v6_dot_services_dot_feed__item__target__service__pb2
 
 
 class FeedItemTargetServiceStub(object):
@@ -20,13 +20,13 @@ class FeedItemTargetServiceStub(object):
         """
         self.GetFeedItemTarget = channel.unary_unary(
                 '/google.ads.googleads.v6.services.FeedItemTargetService/GetFeedItemTarget',
-                request_serializer=google_dot_ads_dot_googleads__v6_dot_proto_dot_services_dot_feed__item__target__service__pb2.GetFeedItemTargetRequest.SerializeToString,
-                response_deserializer=google_dot_ads_dot_googleads__v6_dot_proto_dot_resources_dot_feed__item__target__pb2.FeedItemTarget.FromString,
+                request_serializer=google_dot_ads_dot_googleads_dot_v6_dot_services_dot_feed__item__target__service__pb2.GetFeedItemTargetRequest.SerializeToString,
+                response_deserializer=google_dot_ads_dot_googleads_dot_v6_dot_resources_dot_feed__item__target__pb2.FeedItemTarget.FromString,
                 )
         self.MutateFeedItemTargets = channel.unary_unary(
                 '/google.ads.googleads.v6.services.FeedItemTargetService/MutateFeedItemTargets',
-                request_serializer=google_dot_ads_dot_googleads__v6_dot_proto_dot_services_dot_feed__item__target__service__pb2.MutateFeedItemTargetsRequest.SerializeToString,
-                response_deserializer=google_dot_ads_dot_googleads__v6_dot_proto_dot_services_dot_feed__item__target__service__pb2.MutateFeedItemTargetsResponse.FromString,
+                request_serializer=google_dot_ads_dot_googleads_dot_v6_dot_services_dot_feed__item__target__service__pb2.MutateFeedItemTargetsRequest.SerializeToString,
+                response_deserializer=google_dot_ads_dot_googleads_dot_v6_dot_services_dot_feed__item__target__service__pb2.MutateFeedItemTargetsResponse.FromString,
                 )
 
 
@@ -55,13 +55,13 @@ def add_FeedItemTargetServiceServicer_to_server(servicer, server):
     rpc_method_handlers = {
             'GetFeedItemTarget': grpc.unary_unary_rpc_method_handler(
                     servicer.GetFeedItemTarget,
-                    request_deserializer=google_dot_ads_dot_googleads__v6_dot_proto_dot_services_dot_feed__item__target__service__pb2.GetFeedItemTargetRequest.FromString,
-                    response_serializer=google_dot_ads_dot_googleads__v6_dot_proto_dot_resources_dot_feed__item__target__pb2.FeedItemTarget.SerializeToString,
+                    request_deserializer=google_dot_ads_dot_googleads_dot_v6_dot_services_dot_feed__item__target__service__pb2.GetFeedItemTargetRequest.FromString,
+                    response_serializer=google_dot_ads_dot_googleads_dot_v6_dot_resources_dot_feed__item__target__pb2.FeedItemTarget.SerializeToString,
             ),
             'MutateFeedItemTargets': grpc.unary_unary_rpc_method_handler(
                     servicer.MutateFeedItemTargets,
-                    request_deserializer=google_dot_ads_dot_googleads__v6_dot_proto_dot_services_dot_feed__item__target__service__pb2.MutateFeedItemTargetsRequest.FromString,
-                    response_serializer=google_dot_ads_dot_googleads__v6_dot_proto_dot_services_dot_feed__item__target__service__pb2.MutateFeedItemTargetsResponse.SerializeToString,
+                    request_deserializer=google_dot_ads_dot_googleads_dot_v6_dot_services_dot_feed__item__target__service__pb2.MutateFeedItemTargetsRequest.FromString,
+                    response_serializer=google_dot_ads_dot_googleads_dot_v6_dot_services_dot_feed__item__target__service__pb2.MutateFeedItemTargetsResponse.SerializeToString,
             ),
     }
     generic_handler = grpc.method_handlers_generic_handler(
@@ -82,15 +82,16 @@ class FeedItemTargetService(object):
             options=(),
             channel_credentials=None,
             call_credentials=None,
+            insecure=False,
             compression=None,
             wait_for_ready=None,
             timeout=None,
             metadata=None):
         return grpc.experimental.unary_unary(request, target, '/google.ads.googleads.v6.services.FeedItemTargetService/GetFeedItemTarget',
-            google_dot_ads_dot_googleads__v6_dot_proto_dot_services_dot_feed__item__target__service__pb2.GetFeedItemTargetRequest.SerializeToString,
-            google_dot_ads_dot_googleads__v6_dot_proto_dot_resources_dot_feed__item__target__pb2.FeedItemTarget.FromString,
+            google_dot_ads_dot_googleads_dot_v6_dot_services_dot_feed__item__target__service__pb2.GetFeedItemTargetRequest.SerializeToString,
+            google_dot_ads_dot_googleads_dot_v6_dot_resources_dot_feed__item__target__pb2.FeedItemTarget.FromString,
             options, channel_credentials,
-            call_credentials, compression, wait_for_ready, timeout, metadata)
+            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
 
     @staticmethod
     def MutateFeedItemTargets(request,
@@ -98,12 +99,13 @@ class FeedItemTargetService(object):
             options=(),
             channel_credentials=None,
             call_credentials=None,
+            insecure=False,
             compression=None,
             wait_for_ready=None,
             timeout=None,
             metadata=None):
         return grpc.experimental.unary_unary(request, target, '/google.ads.googleads.v6.services.FeedItemTargetService/MutateFeedItemTargets',
-            google_dot_ads_dot_googleads__v6_dot_proto_dot_services_dot_feed__item__target__service__pb2.MutateFeedItemTargetsRequest.SerializeToString,
-            google_dot_ads_dot_googleads__v6_dot_proto_dot_services_dot_feed__item__target__service__pb2.MutateFeedItemTargetsResponse.FromString,
+            google_dot_ads_dot_googleads_dot_v6_dot_services_dot_feed__item__target__service__pb2.MutateFeedItemTargetsRequest.SerializeToString,
+            google_dot_ads_dot_googleads_dot_v6_dot_services_dot_feed__item__target__service__pb2.MutateFeedItemTargetsResponse.FromString,
             options, channel_credentials,
-            call_credentials, compression, wait_for_ready, timeout, metadata)
+            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)

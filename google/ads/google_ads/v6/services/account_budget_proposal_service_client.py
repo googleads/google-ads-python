@@ -88,12 +88,12 @@ class AccountBudgetProposalServiceClient(object):
 
 
     @classmethod
-    def account_budget_proposal_path(cls, customer, account_budget_proposal):
+    def account_budget_proposal_path(cls, customer_id, account_budget_proposal_id):
         """Return a fully-qualified account_budget_proposal string."""
         return google.api_core.path_template.expand(
-            'customers/{customer}/accountBudgetProposals/{account_budget_proposal}',
-            customer=customer,
-            account_budget_proposal=account_budget_proposal,
+            'customers/{customer_id}/accountBudgetProposals/{account_budget_proposal_id}',
+            customer_id=customer_id,
+            account_budget_proposal_id=account_budget_proposal_id,
         )
 
     def __init__(self, transport=None, channel=None, credentials=None,
@@ -206,6 +206,15 @@ class AccountBudgetProposalServiceClient(object):
         """
         Returns an account-level budget proposal in full detail.
 
+        Example:
+            >>> from google.ads import googleads_v6
+            >>>
+            >>> client = googleads_v6.AccountBudgetProposalServiceClient()
+            >>>
+            >>> resource_name = client.account_budget_proposal_path('[CUSTOMER_ID]', '[ACCOUNT_BUDGET_PROPOSAL_ID]')
+            >>>
+            >>> response = client.get_account_budget_proposal(resource_name)
+
         Args:
             resource_name (str): Required. The resource name of the account-level budget proposal to fetch.
             retry (Optional[google.api_core.retry.Retry]):  A retry object used
@@ -263,6 +272,19 @@ class AccountBudgetProposalServiceClient(object):
         """
         Creates, updates, or removes account budget proposals.  Operation statuses
         are returned.
+
+        Example:
+            >>> from google.ads import googleads_v6
+            >>>
+            >>> client = googleads_v6.AccountBudgetProposalServiceClient()
+            >>>
+            >>> # TODO: Initialize `customer_id`:
+            >>> customer_id = ''
+            >>>
+            >>> # TODO: Initialize `operation_`:
+            >>> operation_ = {}
+            >>>
+            >>> response = client.mutate_account_budget_proposal(customer_id, operation_)
 
         Args:
             customer_id (str): Required. The ID of the customer.

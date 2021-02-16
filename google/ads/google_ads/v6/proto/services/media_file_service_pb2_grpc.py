@@ -2,8 +2,8 @@
 """Client and server classes corresponding to protobuf-defined services."""
 import grpc
 
-from google.ads.google_ads.v6.proto.resources import media_file_pb2 as google_dot_ads_dot_googleads__v6_dot_proto_dot_resources_dot_media__file__pb2
-from google.ads.google_ads.v6.proto.services import media_file_service_pb2 as google_dot_ads_dot_googleads__v6_dot_proto_dot_services_dot_media__file__service__pb2
+from google.ads.google_ads.v6.proto.resources import media_file_pb2 as google_dot_ads_dot_googleads_dot_v6_dot_resources_dot_media__file__pb2
+from google.ads.google_ads.v6.proto.services import media_file_service_pb2 as google_dot_ads_dot_googleads_dot_v6_dot_services_dot_media__file__service__pb2
 
 
 class MediaFileServiceStub(object):
@@ -20,13 +20,13 @@ class MediaFileServiceStub(object):
         """
         self.GetMediaFile = channel.unary_unary(
                 '/google.ads.googleads.v6.services.MediaFileService/GetMediaFile',
-                request_serializer=google_dot_ads_dot_googleads__v6_dot_proto_dot_services_dot_media__file__service__pb2.GetMediaFileRequest.SerializeToString,
-                response_deserializer=google_dot_ads_dot_googleads__v6_dot_proto_dot_resources_dot_media__file__pb2.MediaFile.FromString,
+                request_serializer=google_dot_ads_dot_googleads_dot_v6_dot_services_dot_media__file__service__pb2.GetMediaFileRequest.SerializeToString,
+                response_deserializer=google_dot_ads_dot_googleads_dot_v6_dot_resources_dot_media__file__pb2.MediaFile.FromString,
                 )
         self.MutateMediaFiles = channel.unary_unary(
                 '/google.ads.googleads.v6.services.MediaFileService/MutateMediaFiles',
-                request_serializer=google_dot_ads_dot_googleads__v6_dot_proto_dot_services_dot_media__file__service__pb2.MutateMediaFilesRequest.SerializeToString,
-                response_deserializer=google_dot_ads_dot_googleads__v6_dot_proto_dot_services_dot_media__file__service__pb2.MutateMediaFilesResponse.FromString,
+                request_serializer=google_dot_ads_dot_googleads_dot_v6_dot_services_dot_media__file__service__pb2.MutateMediaFilesRequest.SerializeToString,
+                response_deserializer=google_dot_ads_dot_googleads_dot_v6_dot_services_dot_media__file__service__pb2.MutateMediaFilesResponse.FromString,
                 )
 
 
@@ -55,13 +55,13 @@ def add_MediaFileServiceServicer_to_server(servicer, server):
     rpc_method_handlers = {
             'GetMediaFile': grpc.unary_unary_rpc_method_handler(
                     servicer.GetMediaFile,
-                    request_deserializer=google_dot_ads_dot_googleads__v6_dot_proto_dot_services_dot_media__file__service__pb2.GetMediaFileRequest.FromString,
-                    response_serializer=google_dot_ads_dot_googleads__v6_dot_proto_dot_resources_dot_media__file__pb2.MediaFile.SerializeToString,
+                    request_deserializer=google_dot_ads_dot_googleads_dot_v6_dot_services_dot_media__file__service__pb2.GetMediaFileRequest.FromString,
+                    response_serializer=google_dot_ads_dot_googleads_dot_v6_dot_resources_dot_media__file__pb2.MediaFile.SerializeToString,
             ),
             'MutateMediaFiles': grpc.unary_unary_rpc_method_handler(
                     servicer.MutateMediaFiles,
-                    request_deserializer=google_dot_ads_dot_googleads__v6_dot_proto_dot_services_dot_media__file__service__pb2.MutateMediaFilesRequest.FromString,
-                    response_serializer=google_dot_ads_dot_googleads__v6_dot_proto_dot_services_dot_media__file__service__pb2.MutateMediaFilesResponse.SerializeToString,
+                    request_deserializer=google_dot_ads_dot_googleads_dot_v6_dot_services_dot_media__file__service__pb2.MutateMediaFilesRequest.FromString,
+                    response_serializer=google_dot_ads_dot_googleads_dot_v6_dot_services_dot_media__file__service__pb2.MutateMediaFilesResponse.SerializeToString,
             ),
     }
     generic_handler = grpc.method_handlers_generic_handler(
@@ -82,15 +82,16 @@ class MediaFileService(object):
             options=(),
             channel_credentials=None,
             call_credentials=None,
+            insecure=False,
             compression=None,
             wait_for_ready=None,
             timeout=None,
             metadata=None):
         return grpc.experimental.unary_unary(request, target, '/google.ads.googleads.v6.services.MediaFileService/GetMediaFile',
-            google_dot_ads_dot_googleads__v6_dot_proto_dot_services_dot_media__file__service__pb2.GetMediaFileRequest.SerializeToString,
-            google_dot_ads_dot_googleads__v6_dot_proto_dot_resources_dot_media__file__pb2.MediaFile.FromString,
+            google_dot_ads_dot_googleads_dot_v6_dot_services_dot_media__file__service__pb2.GetMediaFileRequest.SerializeToString,
+            google_dot_ads_dot_googleads_dot_v6_dot_resources_dot_media__file__pb2.MediaFile.FromString,
             options, channel_credentials,
-            call_credentials, compression, wait_for_ready, timeout, metadata)
+            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
 
     @staticmethod
     def MutateMediaFiles(request,
@@ -98,12 +99,13 @@ class MediaFileService(object):
             options=(),
             channel_credentials=None,
             call_credentials=None,
+            insecure=False,
             compression=None,
             wait_for_ready=None,
             timeout=None,
             metadata=None):
         return grpc.experimental.unary_unary(request, target, '/google.ads.googleads.v6.services.MediaFileService/MutateMediaFiles',
-            google_dot_ads_dot_googleads__v6_dot_proto_dot_services_dot_media__file__service__pb2.MutateMediaFilesRequest.SerializeToString,
-            google_dot_ads_dot_googleads__v6_dot_proto_dot_services_dot_media__file__service__pb2.MutateMediaFilesResponse.FromString,
+            google_dot_ads_dot_googleads_dot_v6_dot_services_dot_media__file__service__pb2.MutateMediaFilesRequest.SerializeToString,
+            google_dot_ads_dot_googleads_dot_v6_dot_services_dot_media__file__service__pb2.MutateMediaFilesResponse.FromString,
             options, channel_credentials,
-            call_credentials, compression, wait_for_ready, timeout, metadata)
+            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)

@@ -73,12 +73,14 @@ class FeedItemSetLinkServiceClient(object):
 
 
     @classmethod
-    def feed_item_set_link_path(cls, customer, feed_item_set_link):
+    def feed_item_set_link_path(cls, customer_id, feed_id, feed_item_set_id, feed_item_id):
         """Return a fully-qualified feed_item_set_link string."""
         return google.api_core.path_template.expand(
-            'customers/{customer}/feedItemSetLinks/{feed_item_set_link}',
-            customer=customer,
-            feed_item_set_link=feed_item_set_link,
+            'customers/{customer_id}/feedItemSetLinks/{feed_id}~{feed_item_set_id}~{feed_item_id}',
+            customer_id=customer_id,
+            feed_id=feed_id,
+            feed_item_set_id=feed_item_set_id,
+            feed_item_id=feed_item_id,
         )
 
     def __init__(self, transport=None, channel=None, credentials=None,
@@ -191,6 +193,15 @@ class FeedItemSetLinkServiceClient(object):
         """
         Returns the requested feed item set link in full detail.
 
+        Example:
+            >>> from google.ads import googleads_v6
+            >>>
+            >>> client = googleads_v6.FeedItemSetLinkServiceClient()
+            >>>
+            >>> resource_name = client.feed_item_set_link_path('[CUSTOMER_ID]', '[FEED_ID]', '[FEED_ITEM_SET_ID]', '[FEED_ITEM_ID]')
+            >>>
+            >>> response = client.get_feed_item_set_link(resource_name)
+
         Args:
             resource_name (str): Required. The resource name of the feed item set link to fetch.
             retry (Optional[google.api_core.retry.Retry]):  A retry object used
@@ -248,6 +259,19 @@ class FeedItemSetLinkServiceClient(object):
             metadata=None):
         """
         Creates, updates, or removes feed item set links.
+
+        Example:
+            >>> from google.ads import googleads_v6
+            >>>
+            >>> client = googleads_v6.FeedItemSetLinkServiceClient()
+            >>>
+            >>> # TODO: Initialize `customer_id`:
+            >>> customer_id = ''
+            >>>
+            >>> # TODO: Initialize `operations`:
+            >>> operations = []
+            >>>
+            >>> response = client.mutate_feed_item_set_links(customer_id, operations)
 
         Args:
             customer_id (str): Required. The ID of the customer whose feed item set links are being modified.

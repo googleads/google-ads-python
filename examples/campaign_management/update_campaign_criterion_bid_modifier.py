@@ -27,8 +27,8 @@ def main(client, customer_id, campaign_id, criterion_id, bid_modifier_value):
         "CampaignCriterionService", version="v6"
     )
 
-    criterion_rname = campaign_criterion_service.campaign_criteria_path(
-        customer_id, f"{campaign_id}~{criterion_id}"
+    criterion_rname = campaign_criterion_service.campaign_criterion_path(
+        customer_id, campaign_id, criterion_id
     )
 
     campaign_criterion_operation = client.get_type(

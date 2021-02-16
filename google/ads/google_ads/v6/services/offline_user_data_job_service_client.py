@@ -77,12 +77,12 @@ class OfflineUserDataJobServiceClient(object):
 
 
     @classmethod
-    def offline_user_data_job_path(cls, customer, offline_user_data_job):
+    def offline_user_data_job_path(cls, customer_id, offline_user_data_update_id):
         """Return a fully-qualified offline_user_data_job string."""
         return google.api_core.path_template.expand(
-            'customers/{customer}/offlineUserDataJobs/{offline_user_data_job}',
-            customer=customer,
-            offline_user_data_job=offline_user_data_job,
+            'customers/{customer_id}/offlineUserDataJobs/{offline_user_data_update_id}',
+            customer_id=customer_id,
+            offline_user_data_update_id=offline_user_data_update_id,
         )
 
     def __init__(self, transport=None, channel=None, credentials=None,
@@ -186,6 +186,88 @@ class OfflineUserDataJobServiceClient(object):
         self._inner_api_calls = {}
 
     # Service calls
+    def run_offline_user_data_job(
+            self,
+            resource_name,
+            retry=google.api_core.gapic_v1.method.DEFAULT,
+            timeout=google.api_core.gapic_v1.method.DEFAULT,
+            metadata=None):
+        """
+        Runs the offline user data job.
+
+        When finished, the long running operation will contain the processing
+        result or failure information, if any.
+
+        Example:
+            >>> from google.ads import googleads_v6
+            >>>
+            >>> client = googleads_v6.OfflineUserDataJobServiceClient()
+            >>>
+            >>> resource_name = client.offline_user_data_job_path('[CUSTOMER_ID]', '[OFFLINE_USER_DATA_UPDATE_ID]')
+            >>>
+            >>> response = client.run_offline_user_data_job(resource_name)
+            >>>
+            >>> def callback(operation_future):
+            ...     # Handle result.
+            ...     result = operation_future.result()
+            >>>
+            >>> response.add_done_callback(callback)
+            >>>
+            >>> # Handle metadata.
+            >>> metadata = response.metadata()
+
+        Args:
+            resource_name (str): Required. The resource name of the OfflineUserDataJob to run.
+            retry (Optional[google.api_core.retry.Retry]):  A retry object used
+                to retry requests. If ``None`` is specified, requests will
+                be retried using a default configuration.
+            timeout (Optional[float]): The amount of time, in seconds, to wait
+                for the request to complete. Note that if ``retry`` is
+                specified, the timeout applies to each individual attempt.
+            metadata (Optional[Sequence[Tuple[str, str]]]): Additional metadata
+                that is provided to the method.
+
+        Returns:
+            A :class:`~google.ads.googleads_v6.types._OperationFuture` instance.
+
+        Raises:
+            google.api_core.exceptions.GoogleAPICallError: If the request
+                    failed for any reason.
+            google.api_core.exceptions.RetryError: If the request failed due
+                    to a retryable error and retry attempts failed.
+            ValueError: If the parameters are invalid.
+        """
+        # Wrap the transport method to add retry and timeout logic.
+        if 'run_offline_user_data_job' not in self._inner_api_calls:
+            self._inner_api_calls['run_offline_user_data_job'] = google.api_core.gapic_v1.method.wrap_method(
+                self.transport.run_offline_user_data_job,
+                default_retry=self._method_configs['RunOfflineUserDataJob'].retry,
+                default_timeout=self._method_configs['RunOfflineUserDataJob'].timeout,
+                client_info=self._client_info,
+            )
+
+        request = offline_user_data_job_service_pb2.RunOfflineUserDataJobRequest(
+            resource_name=resource_name,
+        )
+        if metadata is None:
+            metadata = []
+        metadata = list(metadata)
+        try:
+            routing_header = [('resource_name', resource_name)]
+        except AttributeError:
+            pass
+        else:
+            routing_metadata = google.api_core.gapic_v1.routing_header.to_grpc_metadata(routing_header)
+            metadata.append(routing_metadata)
+
+        operation = self._inner_api_calls['run_offline_user_data_job'](request, retry=retry, timeout=timeout, metadata=metadata)
+        return google.api_core.operation.from_gapic(
+            operation,
+            self.transport._operations_client,
+            empty_pb2.Empty,
+            metadata_type=empty_pb2.Empty,
+        )
+
     def create_offline_user_data_job(
             self,
             customer_id,
@@ -195,6 +277,19 @@ class OfflineUserDataJobServiceClient(object):
             metadata=None):
         """
         Creates an offline user data job.
+
+        Example:
+            >>> from google.ads import googleads_v6
+            >>>
+            >>> client = googleads_v6.OfflineUserDataJobServiceClient()
+            >>>
+            >>> # TODO: Initialize `customer_id`:
+            >>> customer_id = ''
+            >>>
+            >>> # TODO: Initialize `job`:
+            >>> job = {}
+            >>>
+            >>> response = client.create_offline_user_data_job(customer_id, job)
 
         Args:
             customer_id (str): Required. The ID of the customer for which to create an offline user data job.
@@ -256,6 +351,15 @@ class OfflineUserDataJobServiceClient(object):
         """
         Returns the offline user data job.
 
+        Example:
+            >>> from google.ads import googleads_v6
+            >>>
+            >>> client = googleads_v6.OfflineUserDataJobServiceClient()
+            >>>
+            >>> resource_name = client.offline_user_data_job_path('[CUSTOMER_ID]', '[OFFLINE_USER_DATA_UPDATE_ID]')
+            >>>
+            >>> response = client.get_offline_user_data_job(resource_name)
+
         Args:
             resource_name (str): Required. The resource name of the OfflineUserDataJob to get.
             retry (Optional[google.api_core.retry.Retry]):  A retry object used
@@ -312,6 +416,18 @@ class OfflineUserDataJobServiceClient(object):
             metadata=None):
         """
         Adds operations to the offline user data job.
+
+        Example:
+            >>> from google.ads import googleads_v6
+            >>>
+            >>> client = googleads_v6.OfflineUserDataJobServiceClient()
+            >>>
+            >>> resource_name = client.offline_user_data_job_path('[CUSTOMER_ID]', '[OFFLINE_USER_DATA_UPDATE_ID]')
+            >>>
+            >>> # TODO: Initialize `operations`:
+            >>> operations = []
+            >>>
+            >>> response = client.add_offline_user_data_job_operations(resource_name, operations)
 
         Args:
             resource_name (str): Required. The resource name of the OfflineUserDataJob.
@@ -371,67 +487,3 @@ class OfflineUserDataJobServiceClient(object):
             metadata.append(routing_metadata)
 
         return self._inner_api_calls['add_offline_user_data_job_operations'](request, retry=retry, timeout=timeout, metadata=metadata)
-
-    def run_offline_user_data_job(
-            self,
-            resource_name,
-            retry=google.api_core.gapic_v1.method.DEFAULT,
-            timeout=google.api_core.gapic_v1.method.DEFAULT,
-            metadata=None):
-        """
-        Runs the offline user data job.
-
-        When finished, the long running operation will contain the processing
-        result or failure information, if any.
-
-        Args:
-            resource_name (str): Required. The resource name of the OfflineUserDataJob to run.
-            retry (Optional[google.api_core.retry.Retry]):  A retry object used
-                to retry requests. If ``None`` is specified, requests will
-                be retried using a default configuration.
-            timeout (Optional[float]): The amount of time, in seconds, to wait
-                for the request to complete. Note that if ``retry`` is
-                specified, the timeout applies to each individual attempt.
-            metadata (Optional[Sequence[Tuple[str, str]]]): Additional metadata
-                that is provided to the method.
-
-        Returns:
-            A :class:`~google.ads.googleads_v6.types._OperationFuture` instance.
-
-        Raises:
-            google.api_core.exceptions.GoogleAPICallError: If the request
-                    failed for any reason.
-            google.api_core.exceptions.RetryError: If the request failed due
-                    to a retryable error and retry attempts failed.
-            ValueError: If the parameters are invalid.
-        """
-        # Wrap the transport method to add retry and timeout logic.
-        if 'run_offline_user_data_job' not in self._inner_api_calls:
-            self._inner_api_calls['run_offline_user_data_job'] = google.api_core.gapic_v1.method.wrap_method(
-                self.transport.run_offline_user_data_job,
-                default_retry=self._method_configs['RunOfflineUserDataJob'].retry,
-                default_timeout=self._method_configs['RunOfflineUserDataJob'].timeout,
-                client_info=self._client_info,
-            )
-
-        request = offline_user_data_job_service_pb2.RunOfflineUserDataJobRequest(
-            resource_name=resource_name,
-        )
-        if metadata is None:
-            metadata = []
-        metadata = list(metadata)
-        try:
-            routing_header = [('resource_name', resource_name)]
-        except AttributeError:
-            pass
-        else:
-            routing_metadata = google.api_core.gapic_v1.routing_header.to_grpc_metadata(routing_header)
-            metadata.append(routing_metadata)
-
-        operation = self._inner_api_calls['run_offline_user_data_job'](request, retry=retry, timeout=timeout, metadata=metadata)
-        return google.api_core.operation.from_gapic(
-            operation,
-            self.transport._operations_client,
-            empty_pb2.Empty,
-            metadata_type=empty_pb2.Empty,
-        )

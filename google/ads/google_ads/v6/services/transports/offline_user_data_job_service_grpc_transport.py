@@ -32,6 +32,7 @@ class OfflineUserDataJobServiceGrpcTransport(object):
     # The scopes needed to make gRPC calls to all of the methods defined
     # in this service.
     _OAUTH_SCOPES = (
+        'https://www.googleapis.com/auth/adwords',
     )
 
     def __init__(self, channel=None, credentials=None,
@@ -119,6 +120,22 @@ class OfflineUserDataJobServiceGrpcTransport(object):
         return self._channel
 
     @property
+    def run_offline_user_data_job(self):
+        """Return the gRPC stub for :meth:`OfflineUserDataJobServiceClient.run_offline_user_data_job`.
+
+        Runs the offline user data job.
+
+        When finished, the long running operation will contain the processing
+        result or failure information, if any.
+
+        Returns:
+            Callable: A callable which accepts the appropriate
+                deserialized request object and returns a
+                deserialized response object.
+        """
+        return self._stubs['offline_user_data_job_service_stub'].RunOfflineUserDataJob
+
+    @property
     def create_offline_user_data_job(self):
         """Return the gRPC stub for :meth:`OfflineUserDataJobServiceClient.create_offline_user_data_job`.
 
@@ -156,19 +173,3 @@ class OfflineUserDataJobServiceGrpcTransport(object):
                 deserialized response object.
         """
         return self._stubs['offline_user_data_job_service_stub'].AddOfflineUserDataJobOperations
-
-    @property
-    def run_offline_user_data_job(self):
-        """Return the gRPC stub for :meth:`OfflineUserDataJobServiceClient.run_offline_user_data_job`.
-
-        Runs the offline user data job.
-
-        When finished, the long running operation will contain the processing
-        result or failure information, if any.
-
-        Returns:
-            Callable: A callable which accepts the appropriate
-                deserialized request object and returns a
-                deserialized response object.
-        """
-        return self._stubs['offline_user_data_job_service_stub'].RunOfflineUserDataJob

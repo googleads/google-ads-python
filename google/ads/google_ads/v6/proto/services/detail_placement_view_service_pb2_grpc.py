@@ -2,8 +2,8 @@
 """Client and server classes corresponding to protobuf-defined services."""
 import grpc
 
-from google.ads.google_ads.v6.proto.resources import detail_placement_view_pb2 as google_dot_ads_dot_googleads__v6_dot_proto_dot_resources_dot_detail__placement__view__pb2
-from google.ads.google_ads.v6.proto.services import detail_placement_view_service_pb2 as google_dot_ads_dot_googleads__v6_dot_proto_dot_services_dot_detail__placement__view__service__pb2
+from google.ads.google_ads.v6.proto.resources import detail_placement_view_pb2 as google_dot_ads_dot_googleads_dot_v6_dot_resources_dot_detail__placement__view__pb2
+from google.ads.google_ads.v6.proto.services import detail_placement_view_service_pb2 as google_dot_ads_dot_googleads_dot_v6_dot_services_dot_detail__placement__view__service__pb2
 
 
 class DetailPlacementViewServiceStub(object):
@@ -20,8 +20,8 @@ class DetailPlacementViewServiceStub(object):
         """
         self.GetDetailPlacementView = channel.unary_unary(
                 '/google.ads.googleads.v6.services.DetailPlacementViewService/GetDetailPlacementView',
-                request_serializer=google_dot_ads_dot_googleads__v6_dot_proto_dot_services_dot_detail__placement__view__service__pb2.GetDetailPlacementViewRequest.SerializeToString,
-                response_deserializer=google_dot_ads_dot_googleads__v6_dot_proto_dot_resources_dot_detail__placement__view__pb2.DetailPlacementView.FromString,
+                request_serializer=google_dot_ads_dot_googleads_dot_v6_dot_services_dot_detail__placement__view__service__pb2.GetDetailPlacementViewRequest.SerializeToString,
+                response_deserializer=google_dot_ads_dot_googleads_dot_v6_dot_resources_dot_detail__placement__view__pb2.DetailPlacementView.FromString,
                 )
 
 
@@ -43,8 +43,8 @@ def add_DetailPlacementViewServiceServicer_to_server(servicer, server):
     rpc_method_handlers = {
             'GetDetailPlacementView': grpc.unary_unary_rpc_method_handler(
                     servicer.GetDetailPlacementView,
-                    request_deserializer=google_dot_ads_dot_googleads__v6_dot_proto_dot_services_dot_detail__placement__view__service__pb2.GetDetailPlacementViewRequest.FromString,
-                    response_serializer=google_dot_ads_dot_googleads__v6_dot_proto_dot_resources_dot_detail__placement__view__pb2.DetailPlacementView.SerializeToString,
+                    request_deserializer=google_dot_ads_dot_googleads_dot_v6_dot_services_dot_detail__placement__view__service__pb2.GetDetailPlacementViewRequest.FromString,
+                    response_serializer=google_dot_ads_dot_googleads_dot_v6_dot_resources_dot_detail__placement__view__pb2.DetailPlacementView.SerializeToString,
             ),
     }
     generic_handler = grpc.method_handlers_generic_handler(
@@ -65,12 +65,13 @@ class DetailPlacementViewService(object):
             options=(),
             channel_credentials=None,
             call_credentials=None,
+            insecure=False,
             compression=None,
             wait_for_ready=None,
             timeout=None,
             metadata=None):
         return grpc.experimental.unary_unary(request, target, '/google.ads.googleads.v6.services.DetailPlacementViewService/GetDetailPlacementView',
-            google_dot_ads_dot_googleads__v6_dot_proto_dot_services_dot_detail__placement__view__service__pb2.GetDetailPlacementViewRequest.SerializeToString,
-            google_dot_ads_dot_googleads__v6_dot_proto_dot_resources_dot_detail__placement__view__pb2.DetailPlacementView.FromString,
+            google_dot_ads_dot_googleads_dot_v6_dot_services_dot_detail__placement__view__service__pb2.GetDetailPlacementViewRequest.SerializeToString,
+            google_dot_ads_dot_googleads_dot_v6_dot_resources_dot_detail__placement__view__pb2.DetailPlacementView.FromString,
             options, channel_credentials,
-            call_credentials, compression, wait_for_ready, timeout, metadata)
+            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)

@@ -2,8 +2,8 @@
 """Client and server classes corresponding to protobuf-defined services."""
 import grpc
 
-from google.ads.google_ads.v6.proto.resources import account_budget_proposal_pb2 as google_dot_ads_dot_googleads__v6_dot_proto_dot_resources_dot_account__budget__proposal__pb2
-from google.ads.google_ads.v6.proto.services import account_budget_proposal_service_pb2 as google_dot_ads_dot_googleads__v6_dot_proto_dot_services_dot_account__budget__proposal__service__pb2
+from google.ads.google_ads.v6.proto.resources import account_budget_proposal_pb2 as google_dot_ads_dot_googleads_dot_v6_dot_resources_dot_account__budget__proposal__pb2
+from google.ads.google_ads.v6.proto.services import account_budget_proposal_service_pb2 as google_dot_ads_dot_googleads_dot_v6_dot_services_dot_account__budget__proposal__service__pb2
 
 
 class AccountBudgetProposalServiceStub(object):
@@ -33,13 +33,13 @@ class AccountBudgetProposalServiceStub(object):
         """
         self.GetAccountBudgetProposal = channel.unary_unary(
                 '/google.ads.googleads.v6.services.AccountBudgetProposalService/GetAccountBudgetProposal',
-                request_serializer=google_dot_ads_dot_googleads__v6_dot_proto_dot_services_dot_account__budget__proposal__service__pb2.GetAccountBudgetProposalRequest.SerializeToString,
-                response_deserializer=google_dot_ads_dot_googleads__v6_dot_proto_dot_resources_dot_account__budget__proposal__pb2.AccountBudgetProposal.FromString,
+                request_serializer=google_dot_ads_dot_googleads_dot_v6_dot_services_dot_account__budget__proposal__service__pb2.GetAccountBudgetProposalRequest.SerializeToString,
+                response_deserializer=google_dot_ads_dot_googleads_dot_v6_dot_resources_dot_account__budget__proposal__pb2.AccountBudgetProposal.FromString,
                 )
         self.MutateAccountBudgetProposal = channel.unary_unary(
                 '/google.ads.googleads.v6.services.AccountBudgetProposalService/MutateAccountBudgetProposal',
-                request_serializer=google_dot_ads_dot_googleads__v6_dot_proto_dot_services_dot_account__budget__proposal__service__pb2.MutateAccountBudgetProposalRequest.SerializeToString,
-                response_deserializer=google_dot_ads_dot_googleads__v6_dot_proto_dot_services_dot_account__budget__proposal__service__pb2.MutateAccountBudgetProposalResponse.FromString,
+                request_serializer=google_dot_ads_dot_googleads_dot_v6_dot_services_dot_account__budget__proposal__service__pb2.MutateAccountBudgetProposalRequest.SerializeToString,
+                response_deserializer=google_dot_ads_dot_googleads_dot_v6_dot_services_dot_account__budget__proposal__service__pb2.MutateAccountBudgetProposalResponse.FromString,
                 )
 
 
@@ -82,13 +82,13 @@ def add_AccountBudgetProposalServiceServicer_to_server(servicer, server):
     rpc_method_handlers = {
             'GetAccountBudgetProposal': grpc.unary_unary_rpc_method_handler(
                     servicer.GetAccountBudgetProposal,
-                    request_deserializer=google_dot_ads_dot_googleads__v6_dot_proto_dot_services_dot_account__budget__proposal__service__pb2.GetAccountBudgetProposalRequest.FromString,
-                    response_serializer=google_dot_ads_dot_googleads__v6_dot_proto_dot_resources_dot_account__budget__proposal__pb2.AccountBudgetProposal.SerializeToString,
+                    request_deserializer=google_dot_ads_dot_googleads_dot_v6_dot_services_dot_account__budget__proposal__service__pb2.GetAccountBudgetProposalRequest.FromString,
+                    response_serializer=google_dot_ads_dot_googleads_dot_v6_dot_resources_dot_account__budget__proposal__pb2.AccountBudgetProposal.SerializeToString,
             ),
             'MutateAccountBudgetProposal': grpc.unary_unary_rpc_method_handler(
                     servicer.MutateAccountBudgetProposal,
-                    request_deserializer=google_dot_ads_dot_googleads__v6_dot_proto_dot_services_dot_account__budget__proposal__service__pb2.MutateAccountBudgetProposalRequest.FromString,
-                    response_serializer=google_dot_ads_dot_googleads__v6_dot_proto_dot_services_dot_account__budget__proposal__service__pb2.MutateAccountBudgetProposalResponse.SerializeToString,
+                    request_deserializer=google_dot_ads_dot_googleads_dot_v6_dot_services_dot_account__budget__proposal__service__pb2.MutateAccountBudgetProposalRequest.FromString,
+                    response_serializer=google_dot_ads_dot_googleads_dot_v6_dot_services_dot_account__budget__proposal__service__pb2.MutateAccountBudgetProposalResponse.SerializeToString,
             ),
     }
     generic_handler = grpc.method_handlers_generic_handler(
@@ -122,15 +122,16 @@ class AccountBudgetProposalService(object):
             options=(),
             channel_credentials=None,
             call_credentials=None,
+            insecure=False,
             compression=None,
             wait_for_ready=None,
             timeout=None,
             metadata=None):
         return grpc.experimental.unary_unary(request, target, '/google.ads.googleads.v6.services.AccountBudgetProposalService/GetAccountBudgetProposal',
-            google_dot_ads_dot_googleads__v6_dot_proto_dot_services_dot_account__budget__proposal__service__pb2.GetAccountBudgetProposalRequest.SerializeToString,
-            google_dot_ads_dot_googleads__v6_dot_proto_dot_resources_dot_account__budget__proposal__pb2.AccountBudgetProposal.FromString,
+            google_dot_ads_dot_googleads_dot_v6_dot_services_dot_account__budget__proposal__service__pb2.GetAccountBudgetProposalRequest.SerializeToString,
+            google_dot_ads_dot_googleads_dot_v6_dot_resources_dot_account__budget__proposal__pb2.AccountBudgetProposal.FromString,
             options, channel_credentials,
-            call_credentials, compression, wait_for_ready, timeout, metadata)
+            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
 
     @staticmethod
     def MutateAccountBudgetProposal(request,
@@ -138,12 +139,13 @@ class AccountBudgetProposalService(object):
             options=(),
             channel_credentials=None,
             call_credentials=None,
+            insecure=False,
             compression=None,
             wait_for_ready=None,
             timeout=None,
             metadata=None):
         return grpc.experimental.unary_unary(request, target, '/google.ads.googleads.v6.services.AccountBudgetProposalService/MutateAccountBudgetProposal',
-            google_dot_ads_dot_googleads__v6_dot_proto_dot_services_dot_account__budget__proposal__service__pb2.MutateAccountBudgetProposalRequest.SerializeToString,
-            google_dot_ads_dot_googleads__v6_dot_proto_dot_services_dot_account__budget__proposal__service__pb2.MutateAccountBudgetProposalResponse.FromString,
+            google_dot_ads_dot_googleads_dot_v6_dot_services_dot_account__budget__proposal__service__pb2.MutateAccountBudgetProposalRequest.SerializeToString,
+            google_dot_ads_dot_googleads_dot_v6_dot_services_dot_account__budget__proposal__service__pb2.MutateAccountBudgetProposalResponse.FromString,
             options, channel_credentials,
-            call_credentials, compression, wait_for_ready, timeout, metadata)
+            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)

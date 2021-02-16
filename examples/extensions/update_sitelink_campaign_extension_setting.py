@@ -29,7 +29,6 @@ from google.api_core import protobuf_helpers
 
 from google.ads.google_ads.client import GoogleAdsClient
 from google.ads.google_ads.errors import GoogleAdsException
-from google.ads.google_ads.util import ResourceName
 
 
 def main(client, customer_id, campaign_id, feed_item_ids):
@@ -53,21 +52,22 @@ def main(client, customer_id, campaign_id, feed_item_ids):
 
     campaign_extension_setting = campaign_extension_setting_operation.update
     # Replace the current extension feed items with the given list
-    campaign_extension_setting.extension_feed_items.extend([
-        extension_feed_item_service.extension_feed_item_path(
-            customer_id, feed_item_id
-        ) for feed_item_id in feed_item_ids
-    ])
+    campaign_extension_setting.extension_feed_items.extend(
+        [
+            extension_feed_item_service.extension_feed_item_path(
+                customer_id, feed_item_id
+            )
+            for feed_item_id in feed_item_ids
+        ]
+    )
 
     extension_type_enum = client.get_type("ExtensionTypeEnum", version="v6")
-    composite_id = ResourceName.format_composite(
+    resource_name = campaign_extension_setting_service.campaign_extension_setting_path(
+        customer_id,
         campaign_id,
         extension_type_enum.ExtensionType.Name(
             extension_type_enum.ExtensionType.SITELINK
         ),
-    )
-    resource_name = campaign_extension_setting_service.campaign_extension_setting_path(
-        customer_id, composite_id
     )
     campaign_extension_setting.resource_name = resource_name
 
@@ -117,11 +117,7 @@ if __name__ == "__main__":
         help="The Google Ads customer ID",
     )
     parser.add_argument(
-        "-i",
-        "--campaign_id",
-        type=str,
-        required=True,
-        help="The campaign ID",
+        "-i", "--campaign_id", type=str, required=True, help="The campaign ID",
     )
     parser.add_argument(
         "-f",

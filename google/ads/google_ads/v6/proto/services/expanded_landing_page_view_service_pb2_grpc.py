@@ -2,8 +2,8 @@
 """Client and server classes corresponding to protobuf-defined services."""
 import grpc
 
-from google.ads.google_ads.v6.proto.resources import expanded_landing_page_view_pb2 as google_dot_ads_dot_googleads__v6_dot_proto_dot_resources_dot_expanded__landing__page__view__pb2
-from google.ads.google_ads.v6.proto.services import expanded_landing_page_view_service_pb2 as google_dot_ads_dot_googleads__v6_dot_proto_dot_services_dot_expanded__landing__page__view__service__pb2
+from google.ads.google_ads.v6.proto.resources import expanded_landing_page_view_pb2 as google_dot_ads_dot_googleads_dot_v6_dot_resources_dot_expanded__landing__page__view__pb2
+from google.ads.google_ads.v6.proto.services import expanded_landing_page_view_service_pb2 as google_dot_ads_dot_googleads_dot_v6_dot_services_dot_expanded__landing__page__view__service__pb2
 
 
 class ExpandedLandingPageViewServiceStub(object):
@@ -20,8 +20,8 @@ class ExpandedLandingPageViewServiceStub(object):
         """
         self.GetExpandedLandingPageView = channel.unary_unary(
                 '/google.ads.googleads.v6.services.ExpandedLandingPageViewService/GetExpandedLandingPageView',
-                request_serializer=google_dot_ads_dot_googleads__v6_dot_proto_dot_services_dot_expanded__landing__page__view__service__pb2.GetExpandedLandingPageViewRequest.SerializeToString,
-                response_deserializer=google_dot_ads_dot_googleads__v6_dot_proto_dot_resources_dot_expanded__landing__page__view__pb2.ExpandedLandingPageView.FromString,
+                request_serializer=google_dot_ads_dot_googleads_dot_v6_dot_services_dot_expanded__landing__page__view__service__pb2.GetExpandedLandingPageViewRequest.SerializeToString,
+                response_deserializer=google_dot_ads_dot_googleads_dot_v6_dot_resources_dot_expanded__landing__page__view__pb2.ExpandedLandingPageView.FromString,
                 )
 
 
@@ -43,8 +43,8 @@ def add_ExpandedLandingPageViewServiceServicer_to_server(servicer, server):
     rpc_method_handlers = {
             'GetExpandedLandingPageView': grpc.unary_unary_rpc_method_handler(
                     servicer.GetExpandedLandingPageView,
-                    request_deserializer=google_dot_ads_dot_googleads__v6_dot_proto_dot_services_dot_expanded__landing__page__view__service__pb2.GetExpandedLandingPageViewRequest.FromString,
-                    response_serializer=google_dot_ads_dot_googleads__v6_dot_proto_dot_resources_dot_expanded__landing__page__view__pb2.ExpandedLandingPageView.SerializeToString,
+                    request_deserializer=google_dot_ads_dot_googleads_dot_v6_dot_services_dot_expanded__landing__page__view__service__pb2.GetExpandedLandingPageViewRequest.FromString,
+                    response_serializer=google_dot_ads_dot_googleads_dot_v6_dot_resources_dot_expanded__landing__page__view__pb2.ExpandedLandingPageView.SerializeToString,
             ),
     }
     generic_handler = grpc.method_handlers_generic_handler(
@@ -65,12 +65,13 @@ class ExpandedLandingPageViewService(object):
             options=(),
             channel_credentials=None,
             call_credentials=None,
+            insecure=False,
             compression=None,
             wait_for_ready=None,
             timeout=None,
             metadata=None):
         return grpc.experimental.unary_unary(request, target, '/google.ads.googleads.v6.services.ExpandedLandingPageViewService/GetExpandedLandingPageView',
-            google_dot_ads_dot_googleads__v6_dot_proto_dot_services_dot_expanded__landing__page__view__service__pb2.GetExpandedLandingPageViewRequest.SerializeToString,
-            google_dot_ads_dot_googleads__v6_dot_proto_dot_resources_dot_expanded__landing__page__view__pb2.ExpandedLandingPageView.FromString,
+            google_dot_ads_dot_googleads_dot_v6_dot_services_dot_expanded__landing__page__view__service__pb2.GetExpandedLandingPageViewRequest.SerializeToString,
+            google_dot_ads_dot_googleads_dot_v6_dot_resources_dot_expanded__landing__page__view__pb2.ExpandedLandingPageView.FromString,
             options, channel_credentials,
-            call_credentials, compression, wait_for_ready, timeout, metadata)
+            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)

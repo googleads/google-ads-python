@@ -176,12 +176,12 @@ class KeywordPlanIdeaServiceClient(object):
     # Service calls
     def generate_keyword_ideas(
             self,
-            customer_id,
-            geo_target_constants,
-            include_adult_keywords,
-            keyword_plan_network,
+            customer_id=None,
             language=None,
+            geo_target_constants=None,
+            include_adult_keywords=None,
             page_size=None,
+            keyword_plan_network=None,
             keyword_and_url_seed=None,
             keyword_seed=None,
             url_seed=None,
@@ -192,20 +192,39 @@ class KeywordPlanIdeaServiceClient(object):
         """
         Returns a list of keyword ideas.
 
+        Example:
+            >>> from google.ads import googleads_v6
+            >>>
+            >>> client = googleads_v6.KeywordPlanIdeaServiceClient()
+            >>>
+            >>> # Iterate over all results
+            >>> for element in client.generate_keyword_ideas():
+            ...     # process element
+            ...     pass
+            >>>
+            >>>
+            >>> # Alternatively:
+            >>>
+            >>> # Iterate over results one page at a time
+            >>> for page in client.generate_keyword_ideas().pages:
+            ...     for element in page:
+            ...         # process element
+            ...         pass
+
         Args:
             customer_id (str): The ID of the customer with the recommendation.
+            language (str): The resource name of the language to target.
+                Required
             geo_target_constants (list[str]): The resource names of the location to target.
                 Max 10
             include_adult_keywords (bool): If true, adult keywords will be included in response.
                 The default value is false.
-            keyword_plan_network (~google.ads.googleads_v6.types.KeywordPlanNetwork): Targeting network.
-            language (str): The resource name of the language to target.
-                Required
             page_size (int): The maximum number of resources contained in the
                 underlying API response. If page streaming is performed per-
                 resource, this parameter does not affect the return value. If page
                 streaming is performed per-page, this determines the maximum number
                 of resources in a page.
+            keyword_plan_network (~google.ads.googleads_v6.types.KeywordPlanNetwork): Targeting network.
             keyword_and_url_seed (Union[dict, ~google.ads.googleads_v6.types.KeywordAndUrlSeed]): A Keyword and a specific Url to generate ideas from
                 e.g. cars, www.example.com/cars.
 
@@ -271,11 +290,11 @@ class KeywordPlanIdeaServiceClient(object):
 
         request = keyword_plan_idea_service_pb2.GenerateKeywordIdeasRequest(
             customer_id=customer_id,
+            language=language,
             geo_target_constants=geo_target_constants,
             include_adult_keywords=include_adult_keywords,
-            keyword_plan_network=keyword_plan_network,
-            language=language,
             page_size=page_size,
+            keyword_plan_network=keyword_plan_network,
             keyword_and_url_seed=keyword_and_url_seed,
             keyword_seed=keyword_seed,
             url_seed=url_seed,

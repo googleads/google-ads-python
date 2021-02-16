@@ -73,12 +73,12 @@ class CustomerClientServiceClient(object):
 
 
     @classmethod
-    def customer_client_path(cls, customer, customer_client):
+    def customer_client_path(cls, customer_id, client_customer_id):
         """Return a fully-qualified customer_client string."""
         return google.api_core.path_template.expand(
-            'customers/{customer}/customerClients/{customer_client}',
-            customer=customer,
-            customer_client=customer_client,
+            'customers/{customer_id}/customerClients/{client_customer_id}',
+            customer_id=customer_id,
+            client_customer_id=client_customer_id,
         )
 
     def __init__(self, transport=None, channel=None, credentials=None,
@@ -190,6 +190,15 @@ class CustomerClientServiceClient(object):
             metadata=None):
         """
         Returns the requested client in full detail.
+
+        Example:
+            >>> from google.ads import googleads_v6
+            >>>
+            >>> client = googleads_v6.CustomerClientServiceClient()
+            >>>
+            >>> resource_name = client.customer_client_path('[CUSTOMER_ID]', '[CLIENT_CUSTOMER_ID]')
+            >>>
+            >>> response = client.get_customer_client(resource_name)
 
         Args:
             resource_name (str): Required. The resource name of the client to fetch.

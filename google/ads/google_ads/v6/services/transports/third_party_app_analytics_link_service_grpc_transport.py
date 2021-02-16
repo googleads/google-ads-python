@@ -31,6 +31,7 @@ class ThirdPartyAppAnalyticsLinkServiceGrpcTransport(object):
     # The scopes needed to make gRPC calls to all of the methods defined
     # in this service.
     _OAUTH_SCOPES = (
+        'https://www.googleapis.com/auth/adwords',
     )
 
     def __init__(self, channel=None, credentials=None,
@@ -130,8 +131,8 @@ class ThirdPartyAppAnalyticsLinkServiceGrpcTransport(object):
     def regenerate_shareable_link_id(self):
         """Return the gRPC stub for :meth:`ThirdPartyAppAnalyticsLinkServiceClient.regenerate_shareable_link_id`.
 
-        Regenerate ThirdPartyAppAnalyticsLink.shareable\_link\_id that should be
-        provided to the third party when setting up app analytics.
+        Regenerate ThirdPartyAppAnalyticsLink.shareable_link_id that should
+        be provided to the third party when setting up app analytics.
 
         Returns:
             Callable: A callable which accepts the appropriate

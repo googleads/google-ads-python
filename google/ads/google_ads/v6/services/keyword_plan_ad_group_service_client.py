@@ -73,12 +73,12 @@ class KeywordPlanAdGroupServiceClient(object):
 
 
     @classmethod
-    def keyword_plan_ad_group_path(cls, customer, keyword_plan_ad_group):
+    def keyword_plan_ad_group_path(cls, customer_id, keyword_plan_ad_group_id):
         """Return a fully-qualified keyword_plan_ad_group string."""
         return google.api_core.path_template.expand(
-            'customers/{customer}/keywordPlanAdGroups/{keyword_plan_ad_group}',
-            customer=customer,
-            keyword_plan_ad_group=keyword_plan_ad_group,
+            'customers/{customer_id}/keywordPlanAdGroups/{keyword_plan_ad_group_id}',
+            customer_id=customer_id,
+            keyword_plan_ad_group_id=keyword_plan_ad_group_id,
         )
 
     def __init__(self, transport=None, channel=None, credentials=None,
@@ -191,6 +191,15 @@ class KeywordPlanAdGroupServiceClient(object):
         """
         Returns the requested Keyword Plan ad group in full detail.
 
+        Example:
+            >>> from google.ads import googleads_v6
+            >>>
+            >>> client = googleads_v6.KeywordPlanAdGroupServiceClient()
+            >>>
+            >>> resource_name = client.keyword_plan_ad_group_path('[CUSTOMER_ID]', '[KEYWORD_PLAN_AD_GROUP_ID]')
+            >>>
+            >>> response = client.get_keyword_plan_ad_group(resource_name)
+
         Args:
             resource_name (str): Required. The resource name of the Keyword Plan ad group to fetch.
             retry (Optional[google.api_core.retry.Retry]):  A retry object used
@@ -249,6 +258,19 @@ class KeywordPlanAdGroupServiceClient(object):
         """
         Creates, updates, or removes Keyword Plan ad groups. Operation statuses are
         returned.
+
+        Example:
+            >>> from google.ads import googleads_v6
+            >>>
+            >>> client = googleads_v6.KeywordPlanAdGroupServiceClient()
+            >>>
+            >>> # TODO: Initialize `customer_id`:
+            >>> customer_id = ''
+            >>>
+            >>> # TODO: Initialize `operations`:
+            >>> operations = []
+            >>>
+            >>> response = client.mutate_keyword_plan_ad_groups(customer_id, operations)
 
         Args:
             customer_id (str): Required. The ID of the customer whose Keyword Plan ad groups are being modified.

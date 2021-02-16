@@ -73,12 +73,13 @@ class AdScheduleViewServiceClient(object):
 
 
     @classmethod
-    def ad_schedule_view_path(cls, customer, ad_schedule_view):
+    def ad_schedule_view_path(cls, customer_id, campaign_id, criterion_id):
         """Return a fully-qualified ad_schedule_view string."""
         return google.api_core.path_template.expand(
-            'customers/{customer}/adScheduleViews/{ad_schedule_view}',
-            customer=customer,
-            ad_schedule_view=ad_schedule_view,
+            'customers/{customer_id}/adScheduleViews/{campaign_id}~{criterion_id}',
+            customer_id=customer_id,
+            campaign_id=campaign_id,
+            criterion_id=criterion_id,
         )
 
     def __init__(self, transport=None, channel=None, credentials=None,
@@ -190,6 +191,15 @@ class AdScheduleViewServiceClient(object):
             metadata=None):
         """
         Returns the requested ad schedule view in full detail.
+
+        Example:
+            >>> from google.ads import googleads_v6
+            >>>
+            >>> client = googleads_v6.AdScheduleViewServiceClient()
+            >>>
+            >>> resource_name = client.ad_schedule_view_path('[CUSTOMER_ID]', '[CAMPAIGN_ID]', '[CRITERION_ID]')
+            >>>
+            >>> response = client.get_ad_schedule_view(resource_name)
 
         Args:
             resource_name (str): Required. The resource name of the ad schedule view to fetch.

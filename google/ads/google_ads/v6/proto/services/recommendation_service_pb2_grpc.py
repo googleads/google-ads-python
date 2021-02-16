@@ -2,8 +2,8 @@
 """Client and server classes corresponding to protobuf-defined services."""
 import grpc
 
-from google.ads.google_ads.v6.proto.resources import recommendation_pb2 as google_dot_ads_dot_googleads__v6_dot_proto_dot_resources_dot_recommendation__pb2
-from google.ads.google_ads.v6.proto.services import recommendation_service_pb2 as google_dot_ads_dot_googleads__v6_dot_proto_dot_services_dot_recommendation__service__pb2
+from google.ads.google_ads.v6.proto.resources import recommendation_pb2 as google_dot_ads_dot_googleads_dot_v6_dot_resources_dot_recommendation__pb2
+from google.ads.google_ads.v6.proto.services import recommendation_service_pb2 as google_dot_ads_dot_googleads_dot_v6_dot_services_dot_recommendation__service__pb2
 
 
 class RecommendationServiceStub(object):
@@ -20,18 +20,18 @@ class RecommendationServiceStub(object):
         """
         self.GetRecommendation = channel.unary_unary(
                 '/google.ads.googleads.v6.services.RecommendationService/GetRecommendation',
-                request_serializer=google_dot_ads_dot_googleads__v6_dot_proto_dot_services_dot_recommendation__service__pb2.GetRecommendationRequest.SerializeToString,
-                response_deserializer=google_dot_ads_dot_googleads__v6_dot_proto_dot_resources_dot_recommendation__pb2.Recommendation.FromString,
+                request_serializer=google_dot_ads_dot_googleads_dot_v6_dot_services_dot_recommendation__service__pb2.GetRecommendationRequest.SerializeToString,
+                response_deserializer=google_dot_ads_dot_googleads_dot_v6_dot_resources_dot_recommendation__pb2.Recommendation.FromString,
                 )
         self.ApplyRecommendation = channel.unary_unary(
                 '/google.ads.googleads.v6.services.RecommendationService/ApplyRecommendation',
-                request_serializer=google_dot_ads_dot_googleads__v6_dot_proto_dot_services_dot_recommendation__service__pb2.ApplyRecommendationRequest.SerializeToString,
-                response_deserializer=google_dot_ads_dot_googleads__v6_dot_proto_dot_services_dot_recommendation__service__pb2.ApplyRecommendationResponse.FromString,
+                request_serializer=google_dot_ads_dot_googleads_dot_v6_dot_services_dot_recommendation__service__pb2.ApplyRecommendationRequest.SerializeToString,
+                response_deserializer=google_dot_ads_dot_googleads_dot_v6_dot_services_dot_recommendation__service__pb2.ApplyRecommendationResponse.FromString,
                 )
         self.DismissRecommendation = channel.unary_unary(
                 '/google.ads.googleads.v6.services.RecommendationService/DismissRecommendation',
-                request_serializer=google_dot_ads_dot_googleads__v6_dot_proto_dot_services_dot_recommendation__service__pb2.DismissRecommendationRequest.SerializeToString,
-                response_deserializer=google_dot_ads_dot_googleads__v6_dot_proto_dot_services_dot_recommendation__service__pb2.DismissRecommendationResponse.FromString,
+                request_serializer=google_dot_ads_dot_googleads_dot_v6_dot_services_dot_recommendation__service__pb2.DismissRecommendationRequest.SerializeToString,
+                response_deserializer=google_dot_ads_dot_googleads_dot_v6_dot_services_dot_recommendation__service__pb2.DismissRecommendationResponse.FromString,
                 )
 
 
@@ -67,18 +67,18 @@ def add_RecommendationServiceServicer_to_server(servicer, server):
     rpc_method_handlers = {
             'GetRecommendation': grpc.unary_unary_rpc_method_handler(
                     servicer.GetRecommendation,
-                    request_deserializer=google_dot_ads_dot_googleads__v6_dot_proto_dot_services_dot_recommendation__service__pb2.GetRecommendationRequest.FromString,
-                    response_serializer=google_dot_ads_dot_googleads__v6_dot_proto_dot_resources_dot_recommendation__pb2.Recommendation.SerializeToString,
+                    request_deserializer=google_dot_ads_dot_googleads_dot_v6_dot_services_dot_recommendation__service__pb2.GetRecommendationRequest.FromString,
+                    response_serializer=google_dot_ads_dot_googleads_dot_v6_dot_resources_dot_recommendation__pb2.Recommendation.SerializeToString,
             ),
             'ApplyRecommendation': grpc.unary_unary_rpc_method_handler(
                     servicer.ApplyRecommendation,
-                    request_deserializer=google_dot_ads_dot_googleads__v6_dot_proto_dot_services_dot_recommendation__service__pb2.ApplyRecommendationRequest.FromString,
-                    response_serializer=google_dot_ads_dot_googleads__v6_dot_proto_dot_services_dot_recommendation__service__pb2.ApplyRecommendationResponse.SerializeToString,
+                    request_deserializer=google_dot_ads_dot_googleads_dot_v6_dot_services_dot_recommendation__service__pb2.ApplyRecommendationRequest.FromString,
+                    response_serializer=google_dot_ads_dot_googleads_dot_v6_dot_services_dot_recommendation__service__pb2.ApplyRecommendationResponse.SerializeToString,
             ),
             'DismissRecommendation': grpc.unary_unary_rpc_method_handler(
                     servicer.DismissRecommendation,
-                    request_deserializer=google_dot_ads_dot_googleads__v6_dot_proto_dot_services_dot_recommendation__service__pb2.DismissRecommendationRequest.FromString,
-                    response_serializer=google_dot_ads_dot_googleads__v6_dot_proto_dot_services_dot_recommendation__service__pb2.DismissRecommendationResponse.SerializeToString,
+                    request_deserializer=google_dot_ads_dot_googleads_dot_v6_dot_services_dot_recommendation__service__pb2.DismissRecommendationRequest.FromString,
+                    response_serializer=google_dot_ads_dot_googleads_dot_v6_dot_services_dot_recommendation__service__pb2.DismissRecommendationResponse.SerializeToString,
             ),
     }
     generic_handler = grpc.method_handlers_generic_handler(
@@ -99,15 +99,16 @@ class RecommendationService(object):
             options=(),
             channel_credentials=None,
             call_credentials=None,
+            insecure=False,
             compression=None,
             wait_for_ready=None,
             timeout=None,
             metadata=None):
         return grpc.experimental.unary_unary(request, target, '/google.ads.googleads.v6.services.RecommendationService/GetRecommendation',
-            google_dot_ads_dot_googleads__v6_dot_proto_dot_services_dot_recommendation__service__pb2.GetRecommendationRequest.SerializeToString,
-            google_dot_ads_dot_googleads__v6_dot_proto_dot_resources_dot_recommendation__pb2.Recommendation.FromString,
+            google_dot_ads_dot_googleads_dot_v6_dot_services_dot_recommendation__service__pb2.GetRecommendationRequest.SerializeToString,
+            google_dot_ads_dot_googleads_dot_v6_dot_resources_dot_recommendation__pb2.Recommendation.FromString,
             options, channel_credentials,
-            call_credentials, compression, wait_for_ready, timeout, metadata)
+            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
 
     @staticmethod
     def ApplyRecommendation(request,
@@ -115,15 +116,16 @@ class RecommendationService(object):
             options=(),
             channel_credentials=None,
             call_credentials=None,
+            insecure=False,
             compression=None,
             wait_for_ready=None,
             timeout=None,
             metadata=None):
         return grpc.experimental.unary_unary(request, target, '/google.ads.googleads.v6.services.RecommendationService/ApplyRecommendation',
-            google_dot_ads_dot_googleads__v6_dot_proto_dot_services_dot_recommendation__service__pb2.ApplyRecommendationRequest.SerializeToString,
-            google_dot_ads_dot_googleads__v6_dot_proto_dot_services_dot_recommendation__service__pb2.ApplyRecommendationResponse.FromString,
+            google_dot_ads_dot_googleads_dot_v6_dot_services_dot_recommendation__service__pb2.ApplyRecommendationRequest.SerializeToString,
+            google_dot_ads_dot_googleads_dot_v6_dot_services_dot_recommendation__service__pb2.ApplyRecommendationResponse.FromString,
             options, channel_credentials,
-            call_credentials, compression, wait_for_ready, timeout, metadata)
+            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
 
     @staticmethod
     def DismissRecommendation(request,
@@ -131,12 +133,13 @@ class RecommendationService(object):
             options=(),
             channel_credentials=None,
             call_credentials=None,
+            insecure=False,
             compression=None,
             wait_for_ready=None,
             timeout=None,
             metadata=None):
         return grpc.experimental.unary_unary(request, target, '/google.ads.googleads.v6.services.RecommendationService/DismissRecommendation',
-            google_dot_ads_dot_googleads__v6_dot_proto_dot_services_dot_recommendation__service__pb2.DismissRecommendationRequest.SerializeToString,
-            google_dot_ads_dot_googleads__v6_dot_proto_dot_services_dot_recommendation__service__pb2.DismissRecommendationResponse.FromString,
+            google_dot_ads_dot_googleads_dot_v6_dot_services_dot_recommendation__service__pb2.DismissRecommendationRequest.SerializeToString,
+            google_dot_ads_dot_googleads_dot_v6_dot_services_dot_recommendation__service__pb2.DismissRecommendationResponse.FromString,
             options, channel_credentials,
-            call_credentials, compression, wait_for_ready, timeout, metadata)
+            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)

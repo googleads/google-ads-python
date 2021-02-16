@@ -73,12 +73,13 @@ class AgeRangeViewServiceClient(object):
 
 
     @classmethod
-    def age_range_view_path(cls, customer, age_range_view):
+    def age_range_view_path(cls, customer_id, ad_group_id, criterion_id):
         """Return a fully-qualified age_range_view string."""
         return google.api_core.path_template.expand(
-            'customers/{customer}/ageRangeViews/{age_range_view}',
-            customer=customer,
-            age_range_view=age_range_view,
+            'customers/{customer_id}/ageRangeViews/{ad_group_id}~{criterion_id}',
+            customer_id=customer_id,
+            ad_group_id=ad_group_id,
+            criterion_id=criterion_id,
         )
 
     def __init__(self, transport=None, channel=None, credentials=None,
@@ -190,6 +191,15 @@ class AgeRangeViewServiceClient(object):
             metadata=None):
         """
         Returns the requested age range view in full detail.
+
+        Example:
+            >>> from google.ads import googleads_v6
+            >>>
+            >>> client = googleads_v6.AgeRangeViewServiceClient()
+            >>>
+            >>> resource_name = client.age_range_view_path('[CUSTOMER_ID]', '[AD_GROUP_ID]', '[CRITERION_ID]')
+            >>>
+            >>> response = client.get_age_range_view(resource_name)
 
         Args:
             resource_name (str): Required. The resource name of the age range view to fetch.

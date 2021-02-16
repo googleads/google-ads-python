@@ -73,12 +73,13 @@ class AdGroupExtensionSettingServiceClient(object):
 
 
     @classmethod
-    def ad_group_extension_setting_path(cls, customer, ad_group_extension_setting):
+    def ad_group_extension_setting_path(cls, customer_id, ad_group_id, extension_type):
         """Return a fully-qualified ad_group_extension_setting string."""
         return google.api_core.path_template.expand(
-            'customers/{customer}/adGroupExtensionSettings/{ad_group_extension_setting}',
-            customer=customer,
-            ad_group_extension_setting=ad_group_extension_setting,
+            'customers/{customer_id}/adGroupExtensionSettings/{ad_group_id}~{extension_type}',
+            customer_id=customer_id,
+            ad_group_id=ad_group_id,
+            extension_type=extension_type,
         )
 
     def __init__(self, transport=None, channel=None, credentials=None,
@@ -191,6 +192,15 @@ class AdGroupExtensionSettingServiceClient(object):
         """
         Returns the requested ad group extension setting in full detail.
 
+        Example:
+            >>> from google.ads import googleads_v6
+            >>>
+            >>> client = googleads_v6.AdGroupExtensionSettingServiceClient()
+            >>>
+            >>> resource_name = client.ad_group_extension_setting_path('[CUSTOMER_ID]', '[AD_GROUP_ID]', '[EXTENSION_TYPE]')
+            >>>
+            >>> response = client.get_ad_group_extension_setting(resource_name)
+
         Args:
             resource_name (str): Required. The resource name of the ad group extension setting to fetch.
             retry (Optional[google.api_core.retry.Retry]):  A retry object used
@@ -249,6 +259,19 @@ class AdGroupExtensionSettingServiceClient(object):
         """
         Creates, updates, or removes ad group extension settings. Operation
         statuses are returned.
+
+        Example:
+            >>> from google.ads import googleads_v6
+            >>>
+            >>> client = googleads_v6.AdGroupExtensionSettingServiceClient()
+            >>>
+            >>> # TODO: Initialize `customer_id`:
+            >>> customer_id = ''
+            >>>
+            >>> # TODO: Initialize `operations`:
+            >>> operations = []
+            >>>
+            >>> response = client.mutate_ad_group_extension_settings(customer_id, operations)
 
         Args:
             customer_id (str): Required. The ID of the customer whose ad group extension settings are being

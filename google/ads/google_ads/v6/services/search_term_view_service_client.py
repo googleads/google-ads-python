@@ -73,12 +73,14 @@ class SearchTermViewServiceClient(object):
 
 
     @classmethod
-    def search_term_view_path(cls, customer, search_term_view):
+    def search_term_view_path(cls, customer_id, campaign_id, ad_group_id, query):
         """Return a fully-qualified search_term_view string."""
         return google.api_core.path_template.expand(
-            'customers/{customer}/searchTermViews/{search_term_view}',
-            customer=customer,
-            search_term_view=search_term_view,
+            'customers/{customer_id}/searchTermViews/{campaign_id}~{ad_group_id}~{query}',
+            customer_id=customer_id,
+            campaign_id=campaign_id,
+            ad_group_id=ad_group_id,
+            query=query,
         )
 
     def __init__(self, transport=None, channel=None, credentials=None,
@@ -190,6 +192,15 @@ class SearchTermViewServiceClient(object):
             metadata=None):
         """
         Returns the attributes of the requested search term view.
+
+        Example:
+            >>> from google.ads import googleads_v6
+            >>>
+            >>> client = googleads_v6.SearchTermViewServiceClient()
+            >>>
+            >>> resource_name = client.search_term_view_path('[CUSTOMER_ID]', '[CAMPAIGN_ID]', '[AD_GROUP_ID]', '[QUERY]')
+            >>>
+            >>> response = client.get_search_term_view(resource_name)
 
         Args:
             resource_name (str): Required. The resource name of the search term view to fetch.

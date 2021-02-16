@@ -73,12 +73,13 @@ class FeedMappingServiceClient(object):
 
 
     @classmethod
-    def feed_mapping_path(cls, customer, feed_mapping):
+    def feed_mapping_path(cls, customer_id, feed_id, feed_mapping_id):
         """Return a fully-qualified feed_mapping string."""
         return google.api_core.path_template.expand(
-            'customers/{customer}/feedMappings/{feed_mapping}',
-            customer=customer,
-            feed_mapping=feed_mapping,
+            'customers/{customer_id}/feedMappings/{feed_id}~{feed_mapping_id}',
+            customer_id=customer_id,
+            feed_id=feed_id,
+            feed_mapping_id=feed_mapping_id,
         )
 
     def __init__(self, transport=None, channel=None, credentials=None,
@@ -191,6 +192,15 @@ class FeedMappingServiceClient(object):
         """
         Returns the requested feed mapping in full detail.
 
+        Example:
+            >>> from google.ads import googleads_v6
+            >>>
+            >>> client = googleads_v6.FeedMappingServiceClient()
+            >>>
+            >>> resource_name = client.feed_mapping_path('[CUSTOMER_ID]', '[FEED_ID]', '[FEED_MAPPING_ID]')
+            >>>
+            >>> response = client.get_feed_mapping(resource_name)
+
         Args:
             resource_name (str): Required. The resource name of the feed mapping to fetch.
             retry (Optional[google.api_core.retry.Retry]):  A retry object used
@@ -243,12 +253,26 @@ class FeedMappingServiceClient(object):
             operations,
             partial_failure=None,
             validate_only=None,
+            response_content_type=None,
             retry=google.api_core.gapic_v1.method.DEFAULT,
             timeout=google.api_core.gapic_v1.method.DEFAULT,
             metadata=None):
         """
         Creates or removes feed mappings. Operation statuses are
         returned.
+
+        Example:
+            >>> from google.ads import googleads_v6
+            >>>
+            >>> client = googleads_v6.FeedMappingServiceClient()
+            >>>
+            >>> # TODO: Initialize `customer_id`:
+            >>> customer_id = ''
+            >>>
+            >>> # TODO: Initialize `operations`:
+            >>> operations = []
+            >>>
+            >>> response = client.mutate_feed_mappings(customer_id, operations)
 
         Args:
             customer_id (str): Required. The ID of the customer whose feed mappings are being modified.
@@ -262,6 +286,8 @@ class FeedMappingServiceClient(object):
                 Default is false.
             validate_only (bool): If true, the request is validated but not executed. Only errors are
                 returned, not results.
+            response_content_type (~google.ads.googleads_v6.types.ResponseContentType): The response content type setting. Determines whether the mutable resource
+                or just the resource name should be returned post mutation.
             retry (Optional[google.api_core.retry.Retry]):  A retry object used
                 to retry requests. If ``None`` is specified, requests will
                 be retried using a default configuration.
@@ -295,6 +321,7 @@ class FeedMappingServiceClient(object):
             operations=operations,
             partial_failure=partial_failure,
             validate_only=validate_only,
+            response_content_type=response_content_type,
         )
         if metadata is None:
             metadata = []

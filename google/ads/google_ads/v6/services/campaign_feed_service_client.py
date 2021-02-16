@@ -73,12 +73,13 @@ class CampaignFeedServiceClient(object):
 
 
     @classmethod
-    def campaign_feed_path(cls, customer, campaign_feed):
+    def campaign_feed_path(cls, customer_id, campaign_id, feed_id):
         """Return a fully-qualified campaign_feed string."""
         return google.api_core.path_template.expand(
-            'customers/{customer}/campaignFeeds/{campaign_feed}',
-            customer=customer,
-            campaign_feed=campaign_feed,
+            'customers/{customer_id}/campaignFeeds/{campaign_id}~{feed_id}',
+            customer_id=customer_id,
+            campaign_id=campaign_id,
+            feed_id=feed_id,
         )
 
     def __init__(self, transport=None, channel=None, credentials=None,
@@ -191,6 +192,15 @@ class CampaignFeedServiceClient(object):
         """
         Returns the requested campaign feed in full detail.
 
+        Example:
+            >>> from google.ads import googleads_v6
+            >>>
+            >>> client = googleads_v6.CampaignFeedServiceClient()
+            >>>
+            >>> resource_name = client.campaign_feed_path('[CUSTOMER_ID]', '[CAMPAIGN_ID]', '[FEED_ID]')
+            >>>
+            >>> response = client.get_campaign_feed(resource_name)
+
         Args:
             resource_name (str): Required. The resource name of the campaign feed to fetch.
             retry (Optional[google.api_core.retry.Retry]):  A retry object used
@@ -250,6 +260,19 @@ class CampaignFeedServiceClient(object):
         """
         Creates, updates, or removes campaign feeds. Operation statuses are
         returned.
+
+        Example:
+            >>> from google.ads import googleads_v6
+            >>>
+            >>> client = googleads_v6.CampaignFeedServiceClient()
+            >>>
+            >>> # TODO: Initialize `customer_id`:
+            >>> customer_id = ''
+            >>>
+            >>> # TODO: Initialize `operations`:
+            >>> operations = []
+            >>>
+            >>> response = client.mutate_campaign_feeds(customer_id, operations)
 
         Args:
             customer_id (str): Required. The ID of the customer whose campaign feeds are being modified.

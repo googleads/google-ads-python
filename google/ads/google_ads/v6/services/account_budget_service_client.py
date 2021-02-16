@@ -77,12 +77,12 @@ class AccountBudgetServiceClient(object):
 
 
     @classmethod
-    def account_budget_path(cls, customer, account_budget):
+    def account_budget_path(cls, customer_id, account_budget_id):
         """Return a fully-qualified account_budget string."""
         return google.api_core.path_template.expand(
-            'customers/{customer}/accountBudgets/{account_budget}',
-            customer=customer,
-            account_budget=account_budget,
+            'customers/{customer_id}/accountBudgets/{account_budget_id}',
+            customer_id=customer_id,
+            account_budget_id=account_budget_id,
         )
 
     def __init__(self, transport=None, channel=None, credentials=None,
@@ -194,6 +194,15 @@ class AccountBudgetServiceClient(object):
             metadata=None):
         """
         Returns an account-level budget in full detail.
+
+        Example:
+            >>> from google.ads import googleads_v6
+            >>>
+            >>> client = googleads_v6.AccountBudgetServiceClient()
+            >>>
+            >>> resource_name = client.account_budget_path('[CUSTOMER_ID]', '[ACCOUNT_BUDGET_ID]')
+            >>>
+            >>> response = client.get_account_budget(resource_name)
 
         Args:
             resource_name (str): Required. The resource name of the account-level budget to fetch.

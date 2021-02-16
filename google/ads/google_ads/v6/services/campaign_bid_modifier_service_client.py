@@ -73,12 +73,13 @@ class CampaignBidModifierServiceClient(object):
 
 
     @classmethod
-    def campaign_bid_modifier_path(cls, customer, campaign_bid_modifier):
+    def campaign_bid_modifier_path(cls, customer_id, campaign_id, criterion_id):
         """Return a fully-qualified campaign_bid_modifier string."""
         return google.api_core.path_template.expand(
-            'customers/{customer}/campaignBidModifiers/{campaign_bid_modifier}',
-            customer=customer,
-            campaign_bid_modifier=campaign_bid_modifier,
+            'customers/{customer_id}/campaignBidModifiers/{campaign_id}~{criterion_id}',
+            customer_id=customer_id,
+            campaign_id=campaign_id,
+            criterion_id=criterion_id,
         )
 
     def __init__(self, transport=None, channel=None, credentials=None,
@@ -191,6 +192,15 @@ class CampaignBidModifierServiceClient(object):
         """
         Returns the requested campaign bid modifier in full detail.
 
+        Example:
+            >>> from google.ads import googleads_v6
+            >>>
+            >>> client = googleads_v6.CampaignBidModifierServiceClient()
+            >>>
+            >>> resource_name = client.campaign_bid_modifier_path('[CUSTOMER_ID]', '[CAMPAIGN_ID]', '[CRITERION_ID]')
+            >>>
+            >>> response = client.get_campaign_bid_modifier(resource_name)
+
         Args:
             resource_name (str): Required. The resource name of the campaign bid modifier to fetch.
             retry (Optional[google.api_core.retry.Retry]):  A retry object used
@@ -243,12 +253,26 @@ class CampaignBidModifierServiceClient(object):
             operations,
             partial_failure=None,
             validate_only=None,
+            response_content_type=None,
             retry=google.api_core.gapic_v1.method.DEFAULT,
             timeout=google.api_core.gapic_v1.method.DEFAULT,
             metadata=None):
         """
         Creates, updates, or removes campaign bid modifiers.
         Operation statuses are returned.
+
+        Example:
+            >>> from google.ads import googleads_v6
+            >>>
+            >>> client = googleads_v6.CampaignBidModifierServiceClient()
+            >>>
+            >>> # TODO: Initialize `customer_id`:
+            >>> customer_id = ''
+            >>>
+            >>> # TODO: Initialize `operations`:
+            >>> operations = []
+            >>>
+            >>> response = client.mutate_campaign_bid_modifiers(customer_id, operations)
 
         Args:
             customer_id (str): Required. ID of the customer whose campaign bid modifiers are being modified.
@@ -262,6 +286,8 @@ class CampaignBidModifierServiceClient(object):
                 Default is false.
             validate_only (bool): If true, the request is validated but not executed. Only errors are
                 returned, not results.
+            response_content_type (~google.ads.googleads_v6.types.ResponseContentType): The response content type setting. Determines whether the mutable resource
+                or just the resource name should be returned post mutation.
             retry (Optional[google.api_core.retry.Retry]):  A retry object used
                 to retry requests. If ``None`` is specified, requests will
                 be retried using a default configuration.
@@ -295,6 +321,7 @@ class CampaignBidModifierServiceClient(object):
             operations=operations,
             partial_failure=partial_failure,
             validate_only=validate_only,
+            response_content_type=response_content_type,
         )
         if metadata is None:
             metadata = []

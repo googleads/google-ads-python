@@ -73,12 +73,16 @@ class AdGroupSimulationServiceClient(object):
 
 
     @classmethod
-    def ad_group_simulation_path(cls, customer, ad_group_simulation):
+    def ad_group_simulation_path(cls, customer_id, ad_group_id, type_, modification_method, start_date, end_date):
         """Return a fully-qualified ad_group_simulation string."""
         return google.api_core.path_template.expand(
-            'customers/{customer}/adGroupSimulations/{ad_group_simulation}',
-            customer=customer,
-            ad_group_simulation=ad_group_simulation,
+            'customers/{customer_id}/adGroupSimulations/{ad_group_id}~{type}~{modification_method}~{start_date}~{end_date}',
+            customer_id=customer_id,
+            ad_group_id=ad_group_id,
+            type=type_,
+            modification_method=modification_method,
+            start_date=start_date,
+            end_date=end_date,
         )
 
     def __init__(self, transport=None, channel=None, credentials=None,
@@ -190,6 +194,15 @@ class AdGroupSimulationServiceClient(object):
             metadata=None):
         """
         Returns the requested ad group simulation in full detail.
+
+        Example:
+            >>> from google.ads import googleads_v6
+            >>>
+            >>> client = googleads_v6.AdGroupSimulationServiceClient()
+            >>>
+            >>> resource_name = client.ad_group_simulation_path('[CUSTOMER_ID]', '[AD_GROUP_ID]', '[TYPE]', '[MODIFICATION_METHOD]', '[START_DATE]', '[END_DATE]')
+            >>>
+            >>> response = client.get_ad_group_simulation(resource_name)
 
         Args:
             resource_name (str): Required. The resource name of the ad group simulation to fetch.

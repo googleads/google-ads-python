@@ -73,12 +73,14 @@ class PaidOrganicSearchTermViewServiceClient(object):
 
 
     @classmethod
-    def paid_organic_search_term_view_path(cls, customer, paid_organic_search_term_view):
+    def paid_organic_search_term_view_path(cls, customer_id, campaign_id, ad_group_id, base64_search_term):
         """Return a fully-qualified paid_organic_search_term_view string."""
         return google.api_core.path_template.expand(
-            'customers/{customer}/paidOrganicSearchTermViews/{paid_organic_search_term_view}',
-            customer=customer,
-            paid_organic_search_term_view=paid_organic_search_term_view,
+            'customers/{customer_id}/paidOrganicSearchTermViews/{campaign_id}~{ad_group_id}~{base64_search_term}',
+            customer_id=customer_id,
+            campaign_id=campaign_id,
+            ad_group_id=ad_group_id,
+            base64_search_term=base64_search_term,
         )
 
     def __init__(self, transport=None, channel=None, credentials=None,
@@ -190,6 +192,15 @@ class PaidOrganicSearchTermViewServiceClient(object):
             metadata=None):
         """
         Returns the requested paid organic search term view in full detail.
+
+        Example:
+            >>> from google.ads import googleads_v6
+            >>>
+            >>> client = googleads_v6.PaidOrganicSearchTermViewServiceClient()
+            >>>
+            >>> resource_name = client.paid_organic_search_term_view_path('[CUSTOMER_ID]', '[CAMPAIGN_ID]', '[AD_GROUP_ID]', '[BASE64_SEARCH_TERM]')
+            >>>
+            >>> response = client.get_paid_organic_search_term_view(resource_name)
 
         Args:
             resource_name (str): Required. The resource name of the paid organic search term view to fetch.

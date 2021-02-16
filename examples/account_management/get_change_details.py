@@ -87,12 +87,18 @@ def main(client, customer_id):
             elif resource_type == "AD_GROUP":
                 old_resource = event.old_resource.ad_group
                 new_resource = event.new_resource.ad_group
+            elif resource_type == "AD_GROUP_AD":
+                old_resource = event.old_resource.ad_group_ad
+                new_resource = event.new_resource.ad_group_ad
             elif resource_type == "AD_GROUP_CRITERION":
                 old_resource = event.old_resource.ad_group_criterion
                 new_resource = event.new_resource.ad_group_criterion
             elif resource_type == "AD_GROUP_BID_MODIFIER":
                 old_resource = event.old_resource.ad_group_bid_modifier
                 new_resource = event.new_resource.ad_group_bid_modifier
+            elif resource_type == "AD_GROUP_FEED":
+                old_resource = event.old_resource.ad_group_feed
+                new_resource = event.new_resource.ad_group_feed
             elif resource_type == "CAMPAIGN":
                 old_resource = event.old_resource.campaign
                 new_resource = event.new_resource.campaign
@@ -102,6 +108,15 @@ def main(client, customer_id):
             elif resource_type == "CAMPAIGN_CRITERION":
                 old_resource = event.old_resource.campaign_criterion
                 new_resource = event.new_resource.campaign_criterion
+            elif resource_type == "CAMPAIGN_FEED":
+                old_resource = event.old_resource.campaign_feed
+                new_resource = event.new_resource.campaign_feed
+            elif resource_type == "FEED":
+                old_resource = event.old_resource.feed
+                new_resource = event.new_resource.feed
+            elif resource_type == "FEED_ITEM":
+                old_resource = event.old_resource.feed_item
+                new_resource = event.new_resource.feed_item
             else:
                 print(
                     "Unknown change_resource_type: '{event.change_resource_type}'"

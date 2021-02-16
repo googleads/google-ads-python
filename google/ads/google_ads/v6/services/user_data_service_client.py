@@ -186,6 +186,19 @@ class UserDataServiceClient(object):
         """
         Uploads the given user data.
 
+        Example:
+            >>> from google.ads import googleads_v6
+            >>>
+            >>> client = googleads_v6.UserDataServiceClient()
+            >>>
+            >>> # TODO: Initialize `customer_id`:
+            >>> customer_id = ''
+            >>>
+            >>> # TODO: Initialize `operations`:
+            >>> operations = []
+            >>>
+            >>> response = client.upload_user_data(customer_id, operations)
+
         Args:
             customer_id (str): Required. The ID of the customer for which to update the user data.
             operations (list[Union[dict, ~google.ads.googleads_v6.types.UserDataOperation]]): Required. The list of operations to be done.

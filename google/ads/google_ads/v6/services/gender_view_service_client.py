@@ -73,12 +73,13 @@ class GenderViewServiceClient(object):
 
 
     @classmethod
-    def gender_view_path(cls, customer, gender_view):
+    def gender_view_path(cls, customer_id, ad_group_id, criterion_id):
         """Return a fully-qualified gender_view string."""
         return google.api_core.path_template.expand(
-            'customers/{customer}/genderViews/{gender_view}',
-            customer=customer,
-            gender_view=gender_view,
+            'customers/{customer_id}/genderViews/{ad_group_id}~{criterion_id}',
+            customer_id=customer_id,
+            ad_group_id=ad_group_id,
+            criterion_id=criterion_id,
         )
 
     def __init__(self, transport=None, channel=None, credentials=None,
@@ -190,6 +191,15 @@ class GenderViewServiceClient(object):
             metadata=None):
         """
         Returns the requested gender view in full detail.
+
+        Example:
+            >>> from google.ads import googleads_v6
+            >>>
+            >>> client = googleads_v6.GenderViewServiceClient()
+            >>>
+            >>> resource_name = client.gender_view_path('[CUSTOMER_ID]', '[AD_GROUP_ID]', '[CRITERION_ID]')
+            >>>
+            >>> response = client.get_gender_view(resource_name)
 
         Args:
             resource_name (str): Required. The resource name of the gender view to fetch.

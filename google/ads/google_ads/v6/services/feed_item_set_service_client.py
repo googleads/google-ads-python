@@ -73,12 +73,13 @@ class FeedItemSetServiceClient(object):
 
 
     @classmethod
-    def feed_item_set_path(cls, customer, feed_item_set):
+    def feed_item_set_path(cls, customer_id, feed_id, feed_item_set_id):
         """Return a fully-qualified feed_item_set string."""
         return google.api_core.path_template.expand(
-            'customers/{customer}/feedItemSets/{feed_item_set}',
-            customer=customer,
-            feed_item_set=feed_item_set,
+            'customers/{customer_id}/feedItemSets/{feed_id}~{feed_item_set_id}',
+            customer_id=customer_id,
+            feed_id=feed_id,
+            feed_item_set_id=feed_item_set_id,
         )
 
     def __init__(self, transport=None, channel=None, credentials=None,
@@ -191,6 +192,15 @@ class FeedItemSetServiceClient(object):
         """
         Returns the requested feed item set in full detail.
 
+        Example:
+            >>> from google.ads import googleads_v6
+            >>>
+            >>> client = googleads_v6.FeedItemSetServiceClient()
+            >>>
+            >>> resource_name = client.feed_item_set_path('[CUSTOMER_ID]', '[FEED_ID]', '[FEED_ITEM_SET_ID]')
+            >>>
+            >>> response = client.get_feed_item_set(resource_name)
+
         Args:
             resource_name (str): Required. The resource name of the feed item set to fetch.
             retry (Optional[google.api_core.retry.Retry]):  A retry object used
@@ -249,6 +259,19 @@ class FeedItemSetServiceClient(object):
         """
         Creates, updates or removes feed item sets. Operation statuses are
         returned.
+
+        Example:
+            >>> from google.ads import googleads_v6
+            >>>
+            >>> client = googleads_v6.FeedItemSetServiceClient()
+            >>>
+            >>> # TODO: Initialize `customer_id`:
+            >>> customer_id = ''
+            >>>
+            >>> # TODO: Initialize `operations`:
+            >>> operations = []
+            >>>
+            >>> response = client.mutate_feed_item_sets(customer_id, operations)
 
         Args:
             customer_id (str): Required. The ID of the customer whose feed item sets are being modified.

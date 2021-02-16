@@ -73,12 +73,12 @@ class RemarketingActionServiceClient(object):
 
 
     @classmethod
-    def remarketing_action_path(cls, customer, remarketing_action):
+    def remarketing_action_path(cls, customer_id, remarketing_action_id):
         """Return a fully-qualified remarketing_action string."""
         return google.api_core.path_template.expand(
-            'customers/{customer}/remarketingActions/{remarketing_action}',
-            customer=customer,
-            remarketing_action=remarketing_action,
+            'customers/{customer_id}/remarketingActions/{remarketing_action_id}',
+            customer_id=customer_id,
+            remarketing_action_id=remarketing_action_id,
         )
 
     def __init__(self, transport=None, channel=None, credentials=None,
@@ -191,6 +191,15 @@ class RemarketingActionServiceClient(object):
         """
         Returns the requested remarketing action in full detail.
 
+        Example:
+            >>> from google.ads import googleads_v6
+            >>>
+            >>> client = googleads_v6.RemarketingActionServiceClient()
+            >>>
+            >>> resource_name = client.remarketing_action_path('[CUSTOMER_ID]', '[REMARKETING_ACTION_ID]')
+            >>>
+            >>> response = client.get_remarketing_action(resource_name)
+
         Args:
             resource_name (str): Required. The resource name of the remarketing action to fetch.
             retry (Optional[google.api_core.retry.Retry]):  A retry object used
@@ -248,6 +257,19 @@ class RemarketingActionServiceClient(object):
             metadata=None):
         """
         Creates or updates remarketing actions. Operation statuses are returned.
+
+        Example:
+            >>> from google.ads import googleads_v6
+            >>>
+            >>> client = googleads_v6.RemarketingActionServiceClient()
+            >>>
+            >>> # TODO: Initialize `customer_id`:
+            >>> customer_id = ''
+            >>>
+            >>> # TODO: Initialize `operations`:
+            >>> operations = []
+            >>>
+            >>> response = client.mutate_remarketing_actions(customer_id, operations)
 
         Args:
             customer_id (str): Required. The ID of the customer whose remarketing actions are being modified.

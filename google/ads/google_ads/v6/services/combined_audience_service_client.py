@@ -77,12 +77,12 @@ class CombinedAudienceServiceClient(object):
 
 
     @classmethod
-    def combined_audience_path(cls, customer, combined_audience):
+    def combined_audience_path(cls, customer_id, combined_audience_id):
         """Return a fully-qualified combined_audience string."""
         return google.api_core.path_template.expand(
-            'customers/{customer}/combinedAudiences/{combined_audience}',
-            customer=customer,
-            combined_audience=combined_audience,
+            'customers/{customer_id}/combinedAudiences/{combined_audience_id}',
+            customer_id=customer_id,
+            combined_audience_id=combined_audience_id,
         )
 
     def __init__(self, transport=None, channel=None, credentials=None,
@@ -194,6 +194,15 @@ class CombinedAudienceServiceClient(object):
             metadata=None):
         """
         Returns the requested combined audience in full detail.
+
+        Example:
+            >>> from google.ads import googleads_v6
+            >>>
+            >>> client = googleads_v6.CombinedAudienceServiceClient()
+            >>>
+            >>> resource_name = client.combined_audience_path('[CUSTOMER_ID]', '[COMBINED_AUDIENCE_ID]')
+            >>>
+            >>> response = client.get_combined_audience(resource_name)
 
         Args:
             resource_name (str): Required. The resource name of the combined audience to fetch.

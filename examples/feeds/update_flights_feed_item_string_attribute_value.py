@@ -36,7 +36,6 @@ import sys
 
 from google.ads.google_ads.client import GoogleAdsClient
 from google.ads.google_ads.errors import GoogleAdsException
-from google.ads.google_ads.util import ResourceName
 from google.api_core import protobuf_helpers
 
 
@@ -92,8 +91,7 @@ def main(
             client,
             customer_id,
             feed_item_service.feed_item_path(
-                customer_id,
-                ResourceName.format_composite(feed_id, feed_item_id),
+                customer_id, feed_id, feed_item_id
             ),
         )
 

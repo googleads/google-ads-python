@@ -73,12 +73,12 @@ class ExtensionFeedItemServiceClient(object):
 
 
     @classmethod
-    def extension_feed_item_path(cls, customer, extension_feed_item):
+    def extension_feed_item_path(cls, customer_id, feed_item_id):
         """Return a fully-qualified extension_feed_item string."""
         return google.api_core.path_template.expand(
-            'customers/{customer}/extensionFeedItems/{extension_feed_item}',
-            customer=customer,
-            extension_feed_item=extension_feed_item,
+            'customers/{customer_id}/extensionFeedItems/{feed_item_id}',
+            customer_id=customer_id,
+            feed_item_id=feed_item_id,
         )
 
     def __init__(self, transport=None, channel=None, credentials=None,
@@ -191,6 +191,15 @@ class ExtensionFeedItemServiceClient(object):
         """
         Returns the requested extension feed item in full detail.
 
+        Example:
+            >>> from google.ads import googleads_v6
+            >>>
+            >>> client = googleads_v6.ExtensionFeedItemServiceClient()
+            >>>
+            >>> resource_name = client.extension_feed_item_path('[CUSTOMER_ID]', '[FEED_ITEM_ID]')
+            >>>
+            >>> response = client.get_extension_feed_item(resource_name)
+
         Args:
             resource_name (str): Required. The resource name of the extension feed item to fetch.
             retry (Optional[google.api_core.retry.Retry]):  A retry object used
@@ -250,6 +259,19 @@ class ExtensionFeedItemServiceClient(object):
         """
         Creates, updates, or removes extension feed items. Operation
         statuses are returned.
+
+        Example:
+            >>> from google.ads import googleads_v6
+            >>>
+            >>> client = googleads_v6.ExtensionFeedItemServiceClient()
+            >>>
+            >>> # TODO: Initialize `customer_id`:
+            >>> customer_id = ''
+            >>>
+            >>> # TODO: Initialize `operations`:
+            >>> operations = []
+            >>>
+            >>> response = client.mutate_extension_feed_items(customer_id, operations)
 
         Args:
             customer_id (str): Required. The ID of the customer whose extension feed items are being

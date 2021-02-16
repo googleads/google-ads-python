@@ -73,12 +73,12 @@ class CustomInterestServiceClient(object):
 
 
     @classmethod
-    def custom_interest_path(cls, customer, custom_interest):
+    def custom_interest_path(cls, customer_id, custom_interest_id):
         """Return a fully-qualified custom_interest string."""
         return google.api_core.path_template.expand(
-            'customers/{customer}/customInterests/{custom_interest}',
-            customer=customer,
-            custom_interest=custom_interest,
+            'customers/{customer_id}/customInterests/{custom_interest_id}',
+            customer_id=customer_id,
+            custom_interest_id=custom_interest_id,
         )
 
     def __init__(self, transport=None, channel=None, credentials=None,
@@ -191,6 +191,15 @@ class CustomInterestServiceClient(object):
         """
         Returns the requested custom interest in full detail.
 
+        Example:
+            >>> from google.ads import googleads_v6
+            >>>
+            >>> client = googleads_v6.CustomInterestServiceClient()
+            >>>
+            >>> resource_name = client.custom_interest_path('[CUSTOMER_ID]', '[CUSTOM_INTEREST_ID]')
+            >>>
+            >>> response = client.get_custom_interest(resource_name)
+
         Args:
             resource_name (str): Required. The resource name of the custom interest to fetch.
             retry (Optional[google.api_core.retry.Retry]):  A retry object used
@@ -247,6 +256,19 @@ class CustomInterestServiceClient(object):
             metadata=None):
         """
         Creates or updates custom interests. Operation statuses are returned.
+
+        Example:
+            >>> from google.ads import googleads_v6
+            >>>
+            >>> client = googleads_v6.CustomInterestServiceClient()
+            >>>
+            >>> # TODO: Initialize `customer_id`:
+            >>> customer_id = ''
+            >>>
+            >>> # TODO: Initialize `operations`:
+            >>> operations = []
+            >>>
+            >>> response = client.mutate_custom_interests(customer_id, operations)
 
         Args:
             customer_id (str): Required. The ID of the customer whose custom interests are being modified.

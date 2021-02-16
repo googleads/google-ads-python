@@ -79,12 +79,12 @@ class KeywordPlanAdGroupKeywordServiceClient(object):
 
 
     @classmethod
-    def keyword_plan_ad_group_keyword_path(cls, customer, keyword_plan_ad_group_keyword):
+    def keyword_plan_ad_group_keyword_path(cls, customer_id, keyword_plan_ad_group_keyword_id):
         """Return a fully-qualified keyword_plan_ad_group_keyword string."""
         return google.api_core.path_template.expand(
-            'customers/{customer}/keywordPlanAdGroupKeywords/{keyword_plan_ad_group_keyword}',
-            customer=customer,
-            keyword_plan_ad_group_keyword=keyword_plan_ad_group_keyword,
+            'customers/{customer_id}/keywordPlanAdGroupKeywords/{keyword_plan_ad_group_keyword_id}',
+            customer_id=customer_id,
+            keyword_plan_ad_group_keyword_id=keyword_plan_ad_group_keyword_id,
         )
 
     def __init__(self, transport=None, channel=None, credentials=None,
@@ -197,6 +197,15 @@ class KeywordPlanAdGroupKeywordServiceClient(object):
         """
         Returns the requested Keyword Plan ad group keyword in full detail.
 
+        Example:
+            >>> from google.ads import googleads_v6
+            >>>
+            >>> client = googleads_v6.KeywordPlanAdGroupKeywordServiceClient()
+            >>>
+            >>> resource_name = client.keyword_plan_ad_group_keyword_path('[CUSTOMER_ID]', '[KEYWORD_PLAN_AD_GROUP_KEYWORD_ID]')
+            >>>
+            >>> response = client.get_keyword_plan_ad_group_keyword(resource_name)
+
         Args:
             resource_name (str): Required. The resource name of the ad group keyword to fetch.
             retry (Optional[google.api_core.retry.Retry]):  A retry object used
@@ -255,6 +264,19 @@ class KeywordPlanAdGroupKeywordServiceClient(object):
         """
         Creates, updates, or removes Keyword Plan ad group keywords. Operation
         statuses are returned.
+
+        Example:
+            >>> from google.ads import googleads_v6
+            >>>
+            >>> client = googleads_v6.KeywordPlanAdGroupKeywordServiceClient()
+            >>>
+            >>> # TODO: Initialize `customer_id`:
+            >>> customer_id = ''
+            >>>
+            >>> # TODO: Initialize `operations`:
+            >>> operations = []
+            >>>
+            >>> response = client.mutate_keyword_plan_ad_group_keywords(customer_id, operations)
 
         Args:
             customer_id (str): Required. The ID of the customer whose Keyword Plan ad group keywords are being

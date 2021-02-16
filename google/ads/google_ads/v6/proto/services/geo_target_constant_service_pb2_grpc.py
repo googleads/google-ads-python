@@ -2,8 +2,8 @@
 """Client and server classes corresponding to protobuf-defined services."""
 import grpc
 
-from google.ads.google_ads.v6.proto.resources import geo_target_constant_pb2 as google_dot_ads_dot_googleads__v6_dot_proto_dot_resources_dot_geo__target__constant__pb2
-from google.ads.google_ads.v6.proto.services import geo_target_constant_service_pb2 as google_dot_ads_dot_googleads__v6_dot_proto_dot_services_dot_geo__target__constant__service__pb2
+from google.ads.google_ads.v6.proto.resources import geo_target_constant_pb2 as google_dot_ads_dot_googleads_dot_v6_dot_resources_dot_geo__target__constant__pb2
+from google.ads.google_ads.v6.proto.services import geo_target_constant_service_pb2 as google_dot_ads_dot_googleads_dot_v6_dot_services_dot_geo__target__constant__service__pb2
 
 
 class GeoTargetConstantServiceStub(object):
@@ -20,13 +20,13 @@ class GeoTargetConstantServiceStub(object):
         """
         self.GetGeoTargetConstant = channel.unary_unary(
                 '/google.ads.googleads.v6.services.GeoTargetConstantService/GetGeoTargetConstant',
-                request_serializer=google_dot_ads_dot_googleads__v6_dot_proto_dot_services_dot_geo__target__constant__service__pb2.GetGeoTargetConstantRequest.SerializeToString,
-                response_deserializer=google_dot_ads_dot_googleads__v6_dot_proto_dot_resources_dot_geo__target__constant__pb2.GeoTargetConstant.FromString,
+                request_serializer=google_dot_ads_dot_googleads_dot_v6_dot_services_dot_geo__target__constant__service__pb2.GetGeoTargetConstantRequest.SerializeToString,
+                response_deserializer=google_dot_ads_dot_googleads_dot_v6_dot_resources_dot_geo__target__constant__pb2.GeoTargetConstant.FromString,
                 )
         self.SuggestGeoTargetConstants = channel.unary_unary(
                 '/google.ads.googleads.v6.services.GeoTargetConstantService/SuggestGeoTargetConstants',
-                request_serializer=google_dot_ads_dot_googleads__v6_dot_proto_dot_services_dot_geo__target__constant__service__pb2.SuggestGeoTargetConstantsRequest.SerializeToString,
-                response_deserializer=google_dot_ads_dot_googleads__v6_dot_proto_dot_services_dot_geo__target__constant__service__pb2.SuggestGeoTargetConstantsResponse.FromString,
+                request_serializer=google_dot_ads_dot_googleads_dot_v6_dot_services_dot_geo__target__constant__service__pb2.SuggestGeoTargetConstantsRequest.SerializeToString,
+                response_deserializer=google_dot_ads_dot_googleads_dot_v6_dot_services_dot_geo__target__constant__service__pb2.SuggestGeoTargetConstantsResponse.FromString,
                 )
 
 
@@ -55,13 +55,13 @@ def add_GeoTargetConstantServiceServicer_to_server(servicer, server):
     rpc_method_handlers = {
             'GetGeoTargetConstant': grpc.unary_unary_rpc_method_handler(
                     servicer.GetGeoTargetConstant,
-                    request_deserializer=google_dot_ads_dot_googleads__v6_dot_proto_dot_services_dot_geo__target__constant__service__pb2.GetGeoTargetConstantRequest.FromString,
-                    response_serializer=google_dot_ads_dot_googleads__v6_dot_proto_dot_resources_dot_geo__target__constant__pb2.GeoTargetConstant.SerializeToString,
+                    request_deserializer=google_dot_ads_dot_googleads_dot_v6_dot_services_dot_geo__target__constant__service__pb2.GetGeoTargetConstantRequest.FromString,
+                    response_serializer=google_dot_ads_dot_googleads_dot_v6_dot_resources_dot_geo__target__constant__pb2.GeoTargetConstant.SerializeToString,
             ),
             'SuggestGeoTargetConstants': grpc.unary_unary_rpc_method_handler(
                     servicer.SuggestGeoTargetConstants,
-                    request_deserializer=google_dot_ads_dot_googleads__v6_dot_proto_dot_services_dot_geo__target__constant__service__pb2.SuggestGeoTargetConstantsRequest.FromString,
-                    response_serializer=google_dot_ads_dot_googleads__v6_dot_proto_dot_services_dot_geo__target__constant__service__pb2.SuggestGeoTargetConstantsResponse.SerializeToString,
+                    request_deserializer=google_dot_ads_dot_googleads_dot_v6_dot_services_dot_geo__target__constant__service__pb2.SuggestGeoTargetConstantsRequest.FromString,
+                    response_serializer=google_dot_ads_dot_googleads_dot_v6_dot_services_dot_geo__target__constant__service__pb2.SuggestGeoTargetConstantsResponse.SerializeToString,
             ),
     }
     generic_handler = grpc.method_handlers_generic_handler(
@@ -82,15 +82,16 @@ class GeoTargetConstantService(object):
             options=(),
             channel_credentials=None,
             call_credentials=None,
+            insecure=False,
             compression=None,
             wait_for_ready=None,
             timeout=None,
             metadata=None):
         return grpc.experimental.unary_unary(request, target, '/google.ads.googleads.v6.services.GeoTargetConstantService/GetGeoTargetConstant',
-            google_dot_ads_dot_googleads__v6_dot_proto_dot_services_dot_geo__target__constant__service__pb2.GetGeoTargetConstantRequest.SerializeToString,
-            google_dot_ads_dot_googleads__v6_dot_proto_dot_resources_dot_geo__target__constant__pb2.GeoTargetConstant.FromString,
+            google_dot_ads_dot_googleads_dot_v6_dot_services_dot_geo__target__constant__service__pb2.GetGeoTargetConstantRequest.SerializeToString,
+            google_dot_ads_dot_googleads_dot_v6_dot_resources_dot_geo__target__constant__pb2.GeoTargetConstant.FromString,
             options, channel_credentials,
-            call_credentials, compression, wait_for_ready, timeout, metadata)
+            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
 
     @staticmethod
     def SuggestGeoTargetConstants(request,
@@ -98,12 +99,13 @@ class GeoTargetConstantService(object):
             options=(),
             channel_credentials=None,
             call_credentials=None,
+            insecure=False,
             compression=None,
             wait_for_ready=None,
             timeout=None,
             metadata=None):
         return grpc.experimental.unary_unary(request, target, '/google.ads.googleads.v6.services.GeoTargetConstantService/SuggestGeoTargetConstants',
-            google_dot_ads_dot_googleads__v6_dot_proto_dot_services_dot_geo__target__constant__service__pb2.SuggestGeoTargetConstantsRequest.SerializeToString,
-            google_dot_ads_dot_googleads__v6_dot_proto_dot_services_dot_geo__target__constant__service__pb2.SuggestGeoTargetConstantsResponse.FromString,
+            google_dot_ads_dot_googleads_dot_v6_dot_services_dot_geo__target__constant__service__pb2.SuggestGeoTargetConstantsRequest.SerializeToString,
+            google_dot_ads_dot_googleads_dot_v6_dot_services_dot_geo__target__constant__service__pb2.SuggestGeoTargetConstantsResponse.FromString,
             options, channel_credentials,
-            call_credentials, compression, wait_for_ready, timeout, metadata)
+            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)

@@ -2,8 +2,8 @@
 """Client and server classes corresponding to protobuf-defined services."""
 import grpc
 
-from google.ads.google_ads.v6.proto.resources import campaign_asset_pb2 as google_dot_ads_dot_googleads__v6_dot_proto_dot_resources_dot_campaign__asset__pb2
-from google.ads.google_ads.v6.proto.services import campaign_asset_service_pb2 as google_dot_ads_dot_googleads__v6_dot_proto_dot_services_dot_campaign__asset__service__pb2
+from google.ads.google_ads.v6.proto.resources import campaign_asset_pb2 as google_dot_ads_dot_googleads_dot_v6_dot_resources_dot_campaign__asset__pb2
+from google.ads.google_ads.v6.proto.services import campaign_asset_service_pb2 as google_dot_ads_dot_googleads_dot_v6_dot_services_dot_campaign__asset__service__pb2
 
 
 class CampaignAssetServiceStub(object):
@@ -20,13 +20,13 @@ class CampaignAssetServiceStub(object):
         """
         self.GetCampaignAsset = channel.unary_unary(
                 '/google.ads.googleads.v6.services.CampaignAssetService/GetCampaignAsset',
-                request_serializer=google_dot_ads_dot_googleads__v6_dot_proto_dot_services_dot_campaign__asset__service__pb2.GetCampaignAssetRequest.SerializeToString,
-                response_deserializer=google_dot_ads_dot_googleads__v6_dot_proto_dot_resources_dot_campaign__asset__pb2.CampaignAsset.FromString,
+                request_serializer=google_dot_ads_dot_googleads_dot_v6_dot_services_dot_campaign__asset__service__pb2.GetCampaignAssetRequest.SerializeToString,
+                response_deserializer=google_dot_ads_dot_googleads_dot_v6_dot_resources_dot_campaign__asset__pb2.CampaignAsset.FromString,
                 )
         self.MutateCampaignAssets = channel.unary_unary(
                 '/google.ads.googleads.v6.services.CampaignAssetService/MutateCampaignAssets',
-                request_serializer=google_dot_ads_dot_googleads__v6_dot_proto_dot_services_dot_campaign__asset__service__pb2.MutateCampaignAssetsRequest.SerializeToString,
-                response_deserializer=google_dot_ads_dot_googleads__v6_dot_proto_dot_services_dot_campaign__asset__service__pb2.MutateCampaignAssetsResponse.FromString,
+                request_serializer=google_dot_ads_dot_googleads_dot_v6_dot_services_dot_campaign__asset__service__pb2.MutateCampaignAssetsRequest.SerializeToString,
+                response_deserializer=google_dot_ads_dot_googleads_dot_v6_dot_services_dot_campaign__asset__service__pb2.MutateCampaignAssetsResponse.FromString,
                 )
 
 
@@ -55,13 +55,13 @@ def add_CampaignAssetServiceServicer_to_server(servicer, server):
     rpc_method_handlers = {
             'GetCampaignAsset': grpc.unary_unary_rpc_method_handler(
                     servicer.GetCampaignAsset,
-                    request_deserializer=google_dot_ads_dot_googleads__v6_dot_proto_dot_services_dot_campaign__asset__service__pb2.GetCampaignAssetRequest.FromString,
-                    response_serializer=google_dot_ads_dot_googleads__v6_dot_proto_dot_resources_dot_campaign__asset__pb2.CampaignAsset.SerializeToString,
+                    request_deserializer=google_dot_ads_dot_googleads_dot_v6_dot_services_dot_campaign__asset__service__pb2.GetCampaignAssetRequest.FromString,
+                    response_serializer=google_dot_ads_dot_googleads_dot_v6_dot_resources_dot_campaign__asset__pb2.CampaignAsset.SerializeToString,
             ),
             'MutateCampaignAssets': grpc.unary_unary_rpc_method_handler(
                     servicer.MutateCampaignAssets,
-                    request_deserializer=google_dot_ads_dot_googleads__v6_dot_proto_dot_services_dot_campaign__asset__service__pb2.MutateCampaignAssetsRequest.FromString,
-                    response_serializer=google_dot_ads_dot_googleads__v6_dot_proto_dot_services_dot_campaign__asset__service__pb2.MutateCampaignAssetsResponse.SerializeToString,
+                    request_deserializer=google_dot_ads_dot_googleads_dot_v6_dot_services_dot_campaign__asset__service__pb2.MutateCampaignAssetsRequest.FromString,
+                    response_serializer=google_dot_ads_dot_googleads_dot_v6_dot_services_dot_campaign__asset__service__pb2.MutateCampaignAssetsResponse.SerializeToString,
             ),
     }
     generic_handler = grpc.method_handlers_generic_handler(
@@ -82,15 +82,16 @@ class CampaignAssetService(object):
             options=(),
             channel_credentials=None,
             call_credentials=None,
+            insecure=False,
             compression=None,
             wait_for_ready=None,
             timeout=None,
             metadata=None):
         return grpc.experimental.unary_unary(request, target, '/google.ads.googleads.v6.services.CampaignAssetService/GetCampaignAsset',
-            google_dot_ads_dot_googleads__v6_dot_proto_dot_services_dot_campaign__asset__service__pb2.GetCampaignAssetRequest.SerializeToString,
-            google_dot_ads_dot_googleads__v6_dot_proto_dot_resources_dot_campaign__asset__pb2.CampaignAsset.FromString,
+            google_dot_ads_dot_googleads_dot_v6_dot_services_dot_campaign__asset__service__pb2.GetCampaignAssetRequest.SerializeToString,
+            google_dot_ads_dot_googleads_dot_v6_dot_resources_dot_campaign__asset__pb2.CampaignAsset.FromString,
             options, channel_credentials,
-            call_credentials, compression, wait_for_ready, timeout, metadata)
+            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
 
     @staticmethod
     def MutateCampaignAssets(request,
@@ -98,12 +99,13 @@ class CampaignAssetService(object):
             options=(),
             channel_credentials=None,
             call_credentials=None,
+            insecure=False,
             compression=None,
             wait_for_ready=None,
             timeout=None,
             metadata=None):
         return grpc.experimental.unary_unary(request, target, '/google.ads.googleads.v6.services.CampaignAssetService/MutateCampaignAssets',
-            google_dot_ads_dot_googleads__v6_dot_proto_dot_services_dot_campaign__asset__service__pb2.MutateCampaignAssetsRequest.SerializeToString,
-            google_dot_ads_dot_googleads__v6_dot_proto_dot_services_dot_campaign__asset__service__pb2.MutateCampaignAssetsResponse.FromString,
+            google_dot_ads_dot_googleads_dot_v6_dot_services_dot_campaign__asset__service__pb2.MutateCampaignAssetsRequest.SerializeToString,
+            google_dot_ads_dot_googleads_dot_v6_dot_services_dot_campaign__asset__service__pb2.MutateCampaignAssetsResponse.FromString,
             options, channel_credentials,
-            call_credentials, compression, wait_for_ready, timeout, metadata)
+            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)

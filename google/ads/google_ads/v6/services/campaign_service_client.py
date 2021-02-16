@@ -73,12 +73,12 @@ class CampaignServiceClient(object):
 
 
     @classmethod
-    def campaign_path(cls, customer, campaign):
+    def campaign_path(cls, customer_id, campaign_id):
         """Return a fully-qualified campaign string."""
         return google.api_core.path_template.expand(
-            'customers/{customer}/campaigns/{campaign}',
-            customer=customer,
-            campaign=campaign,
+            'customers/{customer_id}/campaigns/{campaign_id}',
+            customer_id=customer_id,
+            campaign_id=campaign_id,
         )
 
     def __init__(self, transport=None, channel=None, credentials=None,
@@ -191,6 +191,15 @@ class CampaignServiceClient(object):
         """
         Returns the requested campaign in full detail.
 
+        Example:
+            >>> from google.ads import googleads_v6
+            >>>
+            >>> client = googleads_v6.CampaignServiceClient()
+            >>>
+            >>> resource_name = client.campaign_path('[CUSTOMER_ID]', '[CAMPAIGN_ID]')
+            >>>
+            >>> response = client.get_campaign(resource_name)
+
         Args:
             resource_name (str): Required. The resource name of the campaign to fetch.
             retry (Optional[google.api_core.retry.Retry]):  A retry object used
@@ -249,6 +258,19 @@ class CampaignServiceClient(object):
             metadata=None):
         """
         Creates, updates, or removes campaigns. Operation statuses are returned.
+
+        Example:
+            >>> from google.ads import googleads_v6
+            >>>
+            >>> client = googleads_v6.CampaignServiceClient()
+            >>>
+            >>> # TODO: Initialize `customer_id`:
+            >>> customer_id = ''
+            >>>
+            >>> # TODO: Initialize `operations`:
+            >>> operations = []
+            >>>
+            >>> response = client.mutate_campaigns(customer_id, operations)
 
         Args:
             customer_id (str): Required. The ID of the customer whose campaigns are being modified.

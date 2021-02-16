@@ -73,12 +73,13 @@ class AdGroupAudienceViewServiceClient(object):
 
 
     @classmethod
-    def ad_group_audience_view_path(cls, customer, ad_group_audience_view):
+    def ad_group_audience_view_path(cls, customer_id, ad_group_id, criterion_id):
         """Return a fully-qualified ad_group_audience_view string."""
         return google.api_core.path_template.expand(
-            'customers/{customer}/adGroupAudienceViews/{ad_group_audience_view}',
-            customer=customer,
-            ad_group_audience_view=ad_group_audience_view,
+            'customers/{customer_id}/adGroupAudienceViews/{ad_group_id}~{criterion_id}',
+            customer_id=customer_id,
+            ad_group_id=ad_group_id,
+            criterion_id=criterion_id,
         )
 
     def __init__(self, transport=None, channel=None, credentials=None,
@@ -190,6 +191,15 @@ class AdGroupAudienceViewServiceClient(object):
             metadata=None):
         """
         Returns the requested ad group audience view in full detail.
+
+        Example:
+            >>> from google.ads import googleads_v6
+            >>>
+            >>> client = googleads_v6.AdGroupAudienceViewServiceClient()
+            >>>
+            >>> resource_name = client.ad_group_audience_view_path('[CUSTOMER_ID]', '[AD_GROUP_ID]', '[CRITERION_ID]')
+            >>>
+            >>> response = client.get_ad_group_audience_view(resource_name)
 
         Args:
             resource_name (str): Required. The resource name of the ad group audience view to fetch.

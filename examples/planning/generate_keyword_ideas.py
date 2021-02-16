@@ -90,10 +90,10 @@ def main(
 
     try:
         keyword_ideas = keyword_plan_idea_service.generate_keyword_ideas(
-            customer_id,
-            locations,
-            False,
-            keyword_plan_network,
+            customer_id=customer_id,
+            geo_target_constants=locations,
+            include_adult_keywords=False,
+            keyword_plan_network=keyword_plan_network,
             language=language,
             url_seed=url_seed,
             keyword_seed=keyword_seed,

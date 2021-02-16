@@ -2,8 +2,8 @@
 """Client and server classes corresponding to protobuf-defined services."""
 import grpc
 
-from google.ads.google_ads.v6.proto.resources import keyword_plan_campaign_pb2 as google_dot_ads_dot_googleads__v6_dot_proto_dot_resources_dot_keyword__plan__campaign__pb2
-from google.ads.google_ads.v6.proto.services import keyword_plan_campaign_service_pb2 as google_dot_ads_dot_googleads__v6_dot_proto_dot_services_dot_keyword__plan__campaign__service__pb2
+from google.ads.google_ads.v6.proto.resources import keyword_plan_campaign_pb2 as google_dot_ads_dot_googleads_dot_v6_dot_resources_dot_keyword__plan__campaign__pb2
+from google.ads.google_ads.v6.proto.services import keyword_plan_campaign_service_pb2 as google_dot_ads_dot_googleads_dot_v6_dot_services_dot_keyword__plan__campaign__service__pb2
 
 
 class KeywordPlanCampaignServiceStub(object):
@@ -20,13 +20,13 @@ class KeywordPlanCampaignServiceStub(object):
         """
         self.GetKeywordPlanCampaign = channel.unary_unary(
                 '/google.ads.googleads.v6.services.KeywordPlanCampaignService/GetKeywordPlanCampaign',
-                request_serializer=google_dot_ads_dot_googleads__v6_dot_proto_dot_services_dot_keyword__plan__campaign__service__pb2.GetKeywordPlanCampaignRequest.SerializeToString,
-                response_deserializer=google_dot_ads_dot_googleads__v6_dot_proto_dot_resources_dot_keyword__plan__campaign__pb2.KeywordPlanCampaign.FromString,
+                request_serializer=google_dot_ads_dot_googleads_dot_v6_dot_services_dot_keyword__plan__campaign__service__pb2.GetKeywordPlanCampaignRequest.SerializeToString,
+                response_deserializer=google_dot_ads_dot_googleads_dot_v6_dot_resources_dot_keyword__plan__campaign__pb2.KeywordPlanCampaign.FromString,
                 )
         self.MutateKeywordPlanCampaigns = channel.unary_unary(
                 '/google.ads.googleads.v6.services.KeywordPlanCampaignService/MutateKeywordPlanCampaigns',
-                request_serializer=google_dot_ads_dot_googleads__v6_dot_proto_dot_services_dot_keyword__plan__campaign__service__pb2.MutateKeywordPlanCampaignsRequest.SerializeToString,
-                response_deserializer=google_dot_ads_dot_googleads__v6_dot_proto_dot_services_dot_keyword__plan__campaign__service__pb2.MutateKeywordPlanCampaignsResponse.FromString,
+                request_serializer=google_dot_ads_dot_googleads_dot_v6_dot_services_dot_keyword__plan__campaign__service__pb2.MutateKeywordPlanCampaignsRequest.SerializeToString,
+                response_deserializer=google_dot_ads_dot_googleads_dot_v6_dot_services_dot_keyword__plan__campaign__service__pb2.MutateKeywordPlanCampaignsResponse.FromString,
                 )
 
 
@@ -56,13 +56,13 @@ def add_KeywordPlanCampaignServiceServicer_to_server(servicer, server):
     rpc_method_handlers = {
             'GetKeywordPlanCampaign': grpc.unary_unary_rpc_method_handler(
                     servicer.GetKeywordPlanCampaign,
-                    request_deserializer=google_dot_ads_dot_googleads__v6_dot_proto_dot_services_dot_keyword__plan__campaign__service__pb2.GetKeywordPlanCampaignRequest.FromString,
-                    response_serializer=google_dot_ads_dot_googleads__v6_dot_proto_dot_resources_dot_keyword__plan__campaign__pb2.KeywordPlanCampaign.SerializeToString,
+                    request_deserializer=google_dot_ads_dot_googleads_dot_v6_dot_services_dot_keyword__plan__campaign__service__pb2.GetKeywordPlanCampaignRequest.FromString,
+                    response_serializer=google_dot_ads_dot_googleads_dot_v6_dot_resources_dot_keyword__plan__campaign__pb2.KeywordPlanCampaign.SerializeToString,
             ),
             'MutateKeywordPlanCampaigns': grpc.unary_unary_rpc_method_handler(
                     servicer.MutateKeywordPlanCampaigns,
-                    request_deserializer=google_dot_ads_dot_googleads__v6_dot_proto_dot_services_dot_keyword__plan__campaign__service__pb2.MutateKeywordPlanCampaignsRequest.FromString,
-                    response_serializer=google_dot_ads_dot_googleads__v6_dot_proto_dot_services_dot_keyword__plan__campaign__service__pb2.MutateKeywordPlanCampaignsResponse.SerializeToString,
+                    request_deserializer=google_dot_ads_dot_googleads_dot_v6_dot_services_dot_keyword__plan__campaign__service__pb2.MutateKeywordPlanCampaignsRequest.FromString,
+                    response_serializer=google_dot_ads_dot_googleads_dot_v6_dot_services_dot_keyword__plan__campaign__service__pb2.MutateKeywordPlanCampaignsResponse.SerializeToString,
             ),
     }
     generic_handler = grpc.method_handlers_generic_handler(
@@ -83,15 +83,16 @@ class KeywordPlanCampaignService(object):
             options=(),
             channel_credentials=None,
             call_credentials=None,
+            insecure=False,
             compression=None,
             wait_for_ready=None,
             timeout=None,
             metadata=None):
         return grpc.experimental.unary_unary(request, target, '/google.ads.googleads.v6.services.KeywordPlanCampaignService/GetKeywordPlanCampaign',
-            google_dot_ads_dot_googleads__v6_dot_proto_dot_services_dot_keyword__plan__campaign__service__pb2.GetKeywordPlanCampaignRequest.SerializeToString,
-            google_dot_ads_dot_googleads__v6_dot_proto_dot_resources_dot_keyword__plan__campaign__pb2.KeywordPlanCampaign.FromString,
+            google_dot_ads_dot_googleads_dot_v6_dot_services_dot_keyword__plan__campaign__service__pb2.GetKeywordPlanCampaignRequest.SerializeToString,
+            google_dot_ads_dot_googleads_dot_v6_dot_resources_dot_keyword__plan__campaign__pb2.KeywordPlanCampaign.FromString,
             options, channel_credentials,
-            call_credentials, compression, wait_for_ready, timeout, metadata)
+            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
 
     @staticmethod
     def MutateKeywordPlanCampaigns(request,
@@ -99,12 +100,13 @@ class KeywordPlanCampaignService(object):
             options=(),
             channel_credentials=None,
             call_credentials=None,
+            insecure=False,
             compression=None,
             wait_for_ready=None,
             timeout=None,
             metadata=None):
         return grpc.experimental.unary_unary(request, target, '/google.ads.googleads.v6.services.KeywordPlanCampaignService/MutateKeywordPlanCampaigns',
-            google_dot_ads_dot_googleads__v6_dot_proto_dot_services_dot_keyword__plan__campaign__service__pb2.MutateKeywordPlanCampaignsRequest.SerializeToString,
-            google_dot_ads_dot_googleads__v6_dot_proto_dot_services_dot_keyword__plan__campaign__service__pb2.MutateKeywordPlanCampaignsResponse.FromString,
+            google_dot_ads_dot_googleads_dot_v6_dot_services_dot_keyword__plan__campaign__service__pb2.MutateKeywordPlanCampaignsRequest.SerializeToString,
+            google_dot_ads_dot_googleads_dot_v6_dot_services_dot_keyword__plan__campaign__service__pb2.MutateKeywordPlanCampaignsResponse.FromString,
             options, channel_credentials,
-            call_credentials, compression, wait_for_ready, timeout, metadata)
+            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)

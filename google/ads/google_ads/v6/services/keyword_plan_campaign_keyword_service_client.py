@@ -78,12 +78,12 @@ class KeywordPlanCampaignKeywordServiceClient(object):
 
 
     @classmethod
-    def keyword_plan_campaign_keyword_path(cls, customer, keyword_plan_campaign_keyword):
+    def keyword_plan_campaign_keyword_path(cls, customer_id, keyword_plan_campaign_keyword_id):
         """Return a fully-qualified keyword_plan_campaign_keyword string."""
         return google.api_core.path_template.expand(
-            'customers/{customer}/keywordPlanCampaignKeywords/{keyword_plan_campaign_keyword}',
-            customer=customer,
-            keyword_plan_campaign_keyword=keyword_plan_campaign_keyword,
+            'customers/{customer_id}/keywordPlanCampaignKeywords/{keyword_plan_campaign_keyword_id}',
+            customer_id=customer_id,
+            keyword_plan_campaign_keyword_id=keyword_plan_campaign_keyword_id,
         )
 
     def __init__(self, transport=None, channel=None, credentials=None,
@@ -196,6 +196,15 @@ class KeywordPlanCampaignKeywordServiceClient(object):
         """
         Returns the requested plan in full detail.
 
+        Example:
+            >>> from google.ads import googleads_v6
+            >>>
+            >>> client = googleads_v6.KeywordPlanCampaignKeywordServiceClient()
+            >>>
+            >>> resource_name = client.keyword_plan_campaign_keyword_path('[CUSTOMER_ID]', '[KEYWORD_PLAN_CAMPAIGN_KEYWORD_ID]')
+            >>>
+            >>> response = client.get_keyword_plan_campaign_keyword(resource_name)
+
         Args:
             resource_name (str): Required. The resource name of the plan to fetch.
             retry (Optional[google.api_core.retry.Retry]):  A retry object used
@@ -254,6 +263,19 @@ class KeywordPlanCampaignKeywordServiceClient(object):
         """
         Creates, updates, or removes Keyword Plan campaign keywords. Operation
         statuses are returned.
+
+        Example:
+            >>> from google.ads import googleads_v6
+            >>>
+            >>> client = googleads_v6.KeywordPlanCampaignKeywordServiceClient()
+            >>>
+            >>> # TODO: Initialize `customer_id`:
+            >>> customer_id = ''
+            >>>
+            >>> # TODO: Initialize `operations`:
+            >>> operations = []
+            >>>
+            >>> response = client.mutate_keyword_plan_campaign_keywords(customer_id, operations)
 
         Args:
             customer_id (str): Required. The ID of the customer whose campaign keywords are being modified.

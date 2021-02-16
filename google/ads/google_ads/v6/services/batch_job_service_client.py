@@ -79,12 +79,12 @@ class BatchJobServiceClient(object):
 
 
     @classmethod
-    def batch_job_path(cls, customer, batch_job):
+    def batch_job_path(cls, customer_id, batch_job_id):
         """Return a fully-qualified batch_job string."""
         return google.api_core.path_template.expand(
-            'customers/{customer}/batchJobs/{batch_job}',
-            customer=customer,
-            batch_job=batch_job,
+            'customers/{customer_id}/batchJobs/{batch_job_id}',
+            customer_id=customer_id,
+            batch_job_id=batch_job_id,
         )
 
     def __init__(self, transport=None, channel=None, credentials=None,
@@ -198,6 +198,19 @@ class BatchJobServiceClient(object):
         """
         Mutates a batch job.
 
+        Example:
+            >>> from google.ads import googleads_v6
+            >>>
+            >>> client = googleads_v6.BatchJobServiceClient()
+            >>>
+            >>> # TODO: Initialize `customer_id`:
+            >>> customer_id = ''
+            >>>
+            >>> # TODO: Initialize `operation_`:
+            >>> operation_ = {}
+            >>>
+            >>> response = client.mutate_batch_job(customer_id, operation_)
+
         Args:
             customer_id (str): Required. The ID of the customer for which to create a batch job.
             operation_ (Union[dict, ~google.ads.googleads_v6.types.BatchJobOperation]): Required. The operation to perform on an individual batch job.
@@ -258,6 +271,15 @@ class BatchJobServiceClient(object):
         """
         Returns the batch job.
 
+        Example:
+            >>> from google.ads import googleads_v6
+            >>>
+            >>> client = googleads_v6.BatchJobServiceClient()
+            >>>
+            >>> resource_name = client.batch_job_path('[CUSTOMER_ID]', '[BATCH_JOB_ID]')
+            >>>
+            >>> response = client.get_batch_job(resource_name)
+
         Args:
             resource_name (str): Required. The resource name of the batch job to get.
             retry (Optional[google.api_core.retry.Retry]):  A retry object used
@@ -314,6 +336,27 @@ class BatchJobServiceClient(object):
         """
         Returns the results of the batch job. The job must be done.
         Supports standard list paging.
+
+        Example:
+            >>> from google.ads import googleads_v6
+            >>>
+            >>> client = googleads_v6.BatchJobServiceClient()
+            >>>
+            >>> resource_name = client.batch_job_path('[CUSTOMER_ID]', '[BATCH_JOB_ID]')
+            >>>
+            >>> # Iterate over all results
+            >>> for element in client.list_batch_job_results(resource_name):
+            ...     # process element
+            ...     pass
+            >>>
+            >>>
+            >>> # Alternatively:
+            >>>
+            >>> # Iterate over results one page at a time
+            >>> for page in client.list_batch_job_results(resource_name).pages:
+            ...     for element in page:
+            ...         # process element
+            ...         pass
 
         Args:
             resource_name (str): Required. The resource name of the batch job whose results are being listed.
@@ -391,6 +434,24 @@ class BatchJobServiceClient(object):
         long running operation will not contain errors or a response. Instead, use
         ListBatchJobResults to get the results of the job.
 
+        Example:
+            >>> from google.ads import googleads_v6
+            >>>
+            >>> client = googleads_v6.BatchJobServiceClient()
+            >>>
+            >>> resource_name = client.batch_job_path('[CUSTOMER_ID]', '[BATCH_JOB_ID]')
+            >>>
+            >>> response = client.run_batch_job(resource_name)
+            >>>
+            >>> def callback(operation_future):
+            ...     # Handle result.
+            ...     result = operation_future.result()
+            >>>
+            >>> response.add_done_callback(callback)
+            >>>
+            >>> # Handle metadata.
+            >>> metadata = response.metadata()
+
         Args:
             resource_name (str): Required. The resource name of the BatchJob to run.
             retry (Optional[google.api_core.retry.Retry]):  A retry object used
@@ -446,22 +507,28 @@ class BatchJobServiceClient(object):
     def add_batch_job_operations(
             self,
             resource_name,
-            sequence_token,
             mutate_operations,
+            sequence_token=None,
             retry=google.api_core.gapic_v1.method.DEFAULT,
             timeout=google.api_core.gapic_v1.method.DEFAULT,
             metadata=None):
         """
         Add operations to the batch job.
 
+        Example:
+            >>> from google.ads import googleads_v6
+            >>>
+            >>> client = googleads_v6.BatchJobServiceClient()
+            >>>
+            >>> resource_name = client.batch_job_path('[CUSTOMER_ID]', '[BATCH_JOB_ID]')
+            >>>
+            >>> # TODO: Initialize `mutate_operations`:
+            >>> mutate_operations = []
+            >>>
+            >>> response = client.add_batch_job_operations(resource_name, mutate_operations)
+
         Args:
             resource_name (str): Required. The resource name of the batch job.
-            sequence_token (str): A token used to enforce sequencing.
-
-                The first AddBatchJobOperations request for a batch job should not set
-                sequence\_token. Subsequent requests must set sequence\_token to the
-                value of next\_sequence\_token received in the previous
-                AddBatchJobOperations response.
             mutate_operations (list[Union[dict, ~google.ads.googleads_v6.types.MutateOperation]]): Required. The list of mutates being added.
 
                 Operations can use negative integers as temp ids to signify dependencies
@@ -474,6 +541,12 @@ class BatchJobServiceClient(object):
 
                 If a dict is provided, it must be of the same form as the protobuf
                 message :class:`~google.ads.googleads_v6.types.MutateOperation`
+            sequence_token (str): A token used to enforce sequencing.
+
+                The first AddBatchJobOperations request for a batch job should not set
+                sequence_token. Subsequent requests must set sequence_token to the value
+                of next_sequence_token received in the previous AddBatchJobOperations
+                response.
             retry (Optional[google.api_core.retry.Retry]):  A retry object used
                 to retry requests. If ``None`` is specified, requests will
                 be retried using a default configuration.
@@ -504,8 +577,8 @@ class BatchJobServiceClient(object):
 
         request = batch_job_service_pb2.AddBatchJobOperationsRequest(
             resource_name=resource_name,
-            sequence_token=sequence_token,
             mutate_operations=mutate_operations,
+            sequence_token=sequence_token,
         )
         if metadata is None:
             metadata = []

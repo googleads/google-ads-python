@@ -73,12 +73,12 @@ class FeedPlaceholderViewServiceClient(object):
 
 
     @classmethod
-    def feed_placeholder_view_path(cls, customer, feed_placeholder_view):
+    def feed_placeholder_view_path(cls, customer_id, placeholder_type):
         """Return a fully-qualified feed_placeholder_view string."""
         return google.api_core.path_template.expand(
-            'customers/{customer}/feedPlaceholderViews/{feed_placeholder_view}',
-            customer=customer,
-            feed_placeholder_view=feed_placeholder_view,
+            'customers/{customer_id}/feedPlaceholderViews/{placeholder_type}',
+            customer_id=customer_id,
+            placeholder_type=placeholder_type,
         )
 
     def __init__(self, transport=None, channel=None, credentials=None,
@@ -190,6 +190,15 @@ class FeedPlaceholderViewServiceClient(object):
             metadata=None):
         """
         Returns the requested feed placeholder view in full detail.
+
+        Example:
+            >>> from google.ads import googleads_v6
+            >>>
+            >>> client = googleads_v6.FeedPlaceholderViewServiceClient()
+            >>>
+            >>> resource_name = client.feed_placeholder_view_path('[CUSTOMER_ID]', '[PLACEHOLDER_TYPE]')
+            >>>
+            >>> response = client.get_feed_placeholder_view(resource_name)
 
         Args:
             resource_name (str): Required. The resource name of the feed placeholder view to fetch.

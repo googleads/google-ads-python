@@ -19,7 +19,7 @@ import argparse
 import sys
 
 from google.ads.google_ads.client import GoogleAdsClient
-from google.ads.google_ads.util import ResourceName
+from google.ads.google_ads.errors import GoogleAdsException
 
 
 def main(client, customer_id, ad_group_id, ad_id):
@@ -27,7 +27,7 @@ def main(client, customer_id, ad_group_id, ad_id):
     ad_group_ad_operation = client.get_type("AdGroupAdOperation", version="v6")
 
     resource_name = ad_group_ad_service.ad_group_ad_path(
-        customer_id, ResourceName.format_composite(ad_group_id, ad_id)
+        customer_id, ad_group_id, ad_id
     )
     ad_group_ad_operation.remove = resource_name
 
@@ -35,7 +35,7 @@ def main(client, customer_id, ad_group_id, ad_id):
         ad_group_ad_response = ad_group_ad_service.mutate_ad_group_ads(
             customer_id, [ad_group_ad_operation]
         )
-    except google.ads.google_ads.errors.GoogleAdsException as ex:
+    except GoogleAdsException as ex:
         print(
             'Request with ID "%s" failed with status "%s" and includes the '
             "following errors:" % (ex.request_id, ex.error.code().name)

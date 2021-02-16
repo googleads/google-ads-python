@@ -73,12 +73,13 @@ class KeywordViewServiceClient(object):
 
 
     @classmethod
-    def keyword_view_path(cls, customer, keyword_view):
+    def keyword_view_path(cls, customer_id, ad_group_id, criterion_id):
         """Return a fully-qualified keyword_view string."""
         return google.api_core.path_template.expand(
-            'customers/{customer}/keywordViews/{keyword_view}',
-            customer=customer,
-            keyword_view=keyword_view,
+            'customers/{customer_id}/keywordViews/{ad_group_id}~{criterion_id}',
+            customer_id=customer_id,
+            ad_group_id=ad_group_id,
+            criterion_id=criterion_id,
         )
 
     def __init__(self, transport=None, channel=None, credentials=None,
@@ -190,6 +191,15 @@ class KeywordViewServiceClient(object):
             metadata=None):
         """
         Returns the requested keyword view in full detail.
+
+        Example:
+            >>> from google.ads import googleads_v6
+            >>>
+            >>> client = googleads_v6.KeywordViewServiceClient()
+            >>>
+            >>> resource_name = client.keyword_view_path('[CUSTOMER_ID]', '[AD_GROUP_ID]', '[CRITERION_ID]')
+            >>>
+            >>> response = client.get_keyword_view(resource_name)
 
         Args:
             resource_name (str): Required. The resource name of the keyword view to fetch.

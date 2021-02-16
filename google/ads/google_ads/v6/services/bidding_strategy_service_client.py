@@ -73,12 +73,12 @@ class BiddingStrategyServiceClient(object):
 
 
     @classmethod
-    def bidding_strategy_path(cls, customer, bidding_strategy):
+    def bidding_strategy_path(cls, customer_id, bidding_strategy_id):
         """Return a fully-qualified bidding_strategy string."""
         return google.api_core.path_template.expand(
-            'customers/{customer}/biddingStrategies/{bidding_strategy}',
-            customer=customer,
-            bidding_strategy=bidding_strategy,
+            'customers/{customer_id}/biddingStrategies/{bidding_strategy_id}',
+            customer_id=customer_id,
+            bidding_strategy_id=bidding_strategy_id,
         )
 
     def __init__(self, transport=None, channel=None, credentials=None,
@@ -191,6 +191,15 @@ class BiddingStrategyServiceClient(object):
         """
         Returns the requested bidding strategy in full detail.
 
+        Example:
+            >>> from google.ads import googleads_v6
+            >>>
+            >>> client = googleads_v6.BiddingStrategyServiceClient()
+            >>>
+            >>> resource_name = client.bidding_strategy_path('[CUSTOMER_ID]', '[BIDDING_STRATEGY_ID]')
+            >>>
+            >>> response = client.get_bidding_strategy(resource_name)
+
         Args:
             resource_name (str): Required. The resource name of the bidding strategy to fetch.
             retry (Optional[google.api_core.retry.Retry]):  A retry object used
@@ -249,6 +258,19 @@ class BiddingStrategyServiceClient(object):
         """
         Creates, updates, or removes bidding strategies. Operation statuses are
         returned.
+
+        Example:
+            >>> from google.ads import googleads_v6
+            >>>
+            >>> client = googleads_v6.BiddingStrategyServiceClient()
+            >>>
+            >>> # TODO: Initialize `customer_id`:
+            >>> customer_id = ''
+            >>>
+            >>> # TODO: Initialize `operations`:
+            >>> operations = []
+            >>>
+            >>> response = client.mutate_bidding_strategies(customer_id, operations)
 
         Args:
             customer_id (str): Required. The ID of the customer whose bidding strategies are being modified.

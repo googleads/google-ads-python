@@ -73,12 +73,12 @@ class RecommendationServiceClient(object):
 
 
     @classmethod
-    def recommendation_path(cls, customer, recommendation):
+    def recommendation_path(cls, customer_id, recommendation_id):
         """Return a fully-qualified recommendation string."""
         return google.api_core.path_template.expand(
-            'customers/{customer}/recommendations/{recommendation}',
-            customer=customer,
-            recommendation=recommendation,
+            'customers/{customer_id}/recommendations/{recommendation_id}',
+            customer_id=customer_id,
+            recommendation_id=recommendation_id,
         )
 
     def __init__(self, transport=None, channel=None, credentials=None,
@@ -191,6 +191,15 @@ class RecommendationServiceClient(object):
         """
         Returns the requested recommendation in full detail.
 
+        Example:
+            >>> from google.ads import googleads_v6
+            >>>
+            >>> client = googleads_v6.RecommendationServiceClient()
+            >>>
+            >>> resource_name = client.recommendation_path('[CUSTOMER_ID]', '[RECOMMENDATION_ID]')
+            >>>
+            >>> response = client.get_recommendation(resource_name)
+
         Args:
             resource_name (str): Required. The resource name of the recommendation to fetch.
             retry (Optional[google.api_core.retry.Retry]):  A retry object used
@@ -248,10 +257,23 @@ class RecommendationServiceClient(object):
         """
         Applies given recommendations with corresponding apply parameters.
 
+        Example:
+            >>> from google.ads import googleads_v6
+            >>>
+            >>> client = googleads_v6.RecommendationServiceClient()
+            >>>
+            >>> # TODO: Initialize `customer_id`:
+            >>> customer_id = ''
+            >>>
+            >>> # TODO: Initialize `operations`:
+            >>> operations = []
+            >>>
+            >>> response = client.apply_recommendation(customer_id, operations)
+
         Args:
             customer_id (str): Required. The ID of the customer with the recommendation.
             operations (list[Union[dict, ~google.ads.googleads_v6.types.ApplyRecommendationOperation]]): Required. The list of operations to apply recommendations. If
-                partial\_failure=false all recommendations should be of the same type
+                partial_failure=false all recommendations should be of the same type
                 There is a limit of 100 operations per request.
 
                 If a dict is provided, it must be of the same form as the protobuf
@@ -317,10 +339,23 @@ class RecommendationServiceClient(object):
         """
         Dismisses given recommendations.
 
+        Example:
+            >>> from google.ads import googleads_v6
+            >>>
+            >>> client = googleads_v6.RecommendationServiceClient()
+            >>>
+            >>> # TODO: Initialize `customer_id`:
+            >>> customer_id = ''
+            >>>
+            >>> # TODO: Initialize `operations`:
+            >>> operations = []
+            >>>
+            >>> response = client.dismiss_recommendation(customer_id, operations)
+
         Args:
             customer_id (str): Required. The ID of the customer with the recommendation.
             operations (list[Union[dict, ~google.ads.googleads_v6.types.DismissRecommendationOperation]]): Required. The list of operations to dismiss recommendations. If
-                partial\_failure=false all recommendations should be of the same type
+                partial_failure=false all recommendations should be of the same type
                 There is a limit of 100 operations per request.
 
                 If a dict is provided, it must be of the same form as the protobuf

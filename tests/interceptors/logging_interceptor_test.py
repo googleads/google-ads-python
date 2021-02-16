@@ -48,6 +48,11 @@ customer_user_access_pb2 = import_module(
     ".proto.resources.customer_user_access_pb2"
 )
 
+customer_user_access_invitation_pb2 = import_module(
+    f"google.ads.google_ads.{default_version}"
+    ".proto.resources.customer_user_access_invitation_pb2"
+)
+
 change_event_pb2 = import_module(
     f"google.ads.google_ads.{default_version}.proto.resources.change_event_pb2"
 )
@@ -855,3 +860,12 @@ class LoggingInterceptorTest(TestCase):
         self.assertEqual(
             copy.places_location_feed_data.email_address, "REDACTED"
         )
+
+    def test_mask_customer_user_access_invitation_email(self):
+        """Copies and masks a CustomerUserAccessInvitation instance."""
+        message = customer_user_access_invitation_pb2.CustomerUserAccessInvitation(
+            email_address="test@test.com"
+        )
+        copy = interceptor_module._mask_message(message, "REDACTED")
+        self.assertIsInstance(copy, message.__class__)
+        self.assertEqual(copy.email_address, "REDACTED")

@@ -76,12 +76,12 @@ class AccountLinkServiceClient(object):
 
 
     @classmethod
-    def account_link_path(cls, customer, account_link):
+    def account_link_path(cls, customer_id, account_link_id):
         """Return a fully-qualified account_link string."""
         return google.api_core.path_template.expand(
-            'customers/{customer}/accountLinks/{account_link}',
-            customer=customer,
-            account_link=account_link,
+            'customers/{customer_id}/accountLinks/{account_link_id}',
+            customer_id=customer_id,
+            account_link_id=account_link_id,
         )
 
     def __init__(self, transport=None, channel=None, credentials=None,
@@ -194,6 +194,15 @@ class AccountLinkServiceClient(object):
         """
         Returns the account link in full detail.
 
+        Example:
+            >>> from google.ads import googleads_v6
+            >>>
+            >>> client = googleads_v6.AccountLinkServiceClient()
+            >>>
+            >>> resource_name = client.account_link_path('[CUSTOMER_ID]', '[ACCOUNT_LINK_ID]')
+            >>>
+            >>> response = client.get_account_link(resource_name)
+
         Args:
             resource_name (str): Required. Resource name of the account link.
             retry (Optional[google.api_core.retry.Retry]):  A retry object used
@@ -249,6 +258,19 @@ class AccountLinkServiceClient(object):
             metadata=None):
         """
         Creates an account link.
+
+        Example:
+            >>> from google.ads import googleads_v6
+            >>>
+            >>> client = googleads_v6.AccountLinkServiceClient()
+            >>>
+            >>> # TODO: Initialize `customer_id`:
+            >>> customer_id = ''
+            >>>
+            >>> # TODO: Initialize `account_link`:
+            >>> account_link = {}
+            >>>
+            >>> response = client.create_account_link(customer_id, account_link)
 
         Args:
             customer_id (str): Required. The ID of the customer for which the account link is created.
@@ -315,6 +337,19 @@ class AccountLinkServiceClient(object):
         From V5, create is not supported through
         AccountLinkService.MutateAccountLink. Please use
         AccountLinkService.CreateAccountLink instead.
+
+        Example:
+            >>> from google.ads import googleads_v6
+            >>>
+            >>> client = googleads_v6.AccountLinkServiceClient()
+            >>>
+            >>> # TODO: Initialize `customer_id`:
+            >>> customer_id = ''
+            >>>
+            >>> # TODO: Initialize `operation_`:
+            >>> operation_ = {}
+            >>>
+            >>> response = client.mutate_account_link(customer_id, operation_)
 
         Args:
             customer_id (str): Required. The ID of the customer being modified.

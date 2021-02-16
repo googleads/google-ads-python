@@ -73,12 +73,12 @@ class CustomerUserAccessServiceClient(object):
 
 
     @classmethod
-    def customer_user_access_path(cls, customer, customer_user_access):
+    def customer_user_access_path(cls, customer_id, user_id):
         """Return a fully-qualified customer_user_access string."""
         return google.api_core.path_template.expand(
-            'customers/{customer}/customerUserAccesses/{customer_user_access}',
-            customer=customer,
-            customer_user_access=customer_user_access,
+            'customers/{customer_id}/customerUserAccesses/{user_id}',
+            customer_id=customer_id,
+            user_id=user_id,
         )
 
     def __init__(self, transport=None, channel=None, credentials=None,
@@ -191,6 +191,15 @@ class CustomerUserAccessServiceClient(object):
         """
         Returns the CustomerUserAccess in full detail.
 
+        Example:
+            >>> from google.ads import googleads_v6
+            >>>
+            >>> client = googleads_v6.CustomerUserAccessServiceClient()
+            >>>
+            >>> resource_name = client.customer_user_access_path('[CUSTOMER_ID]', '[USER_ID]')
+            >>>
+            >>> response = client.get_customer_user_access(resource_name)
+
         Args:
             resource_name (str): Required. Resource name of the customer user access.
             retry (Optional[google.api_core.retry.Retry]):  A retry object used
@@ -247,6 +256,19 @@ class CustomerUserAccessServiceClient(object):
         """
         Updates, removes permission of a user on a given customer. Operation
         statuses are returned.
+
+        Example:
+            >>> from google.ads import googleads_v6
+            >>>
+            >>> client = googleads_v6.CustomerUserAccessServiceClient()
+            >>>
+            >>> # TODO: Initialize `customer_id`:
+            >>> customer_id = ''
+            >>>
+            >>> # TODO: Initialize `operation_`:
+            >>> operation_ = {}
+            >>>
+            >>> response = client.mutate_customer_user_access(customer_id, operation_)
 
         Args:
             customer_id (str): Required. The ID of the customer being modified.

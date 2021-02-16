@@ -2,8 +2,8 @@
 """Client and server classes corresponding to protobuf-defined services."""
 import grpc
 
-from google.ads.google_ads.v6.proto.resources import ad_group_criterion_simulation_pb2 as google_dot_ads_dot_googleads__v6_dot_proto_dot_resources_dot_ad__group__criterion__simulation__pb2
-from google.ads.google_ads.v6.proto.services import ad_group_criterion_simulation_service_pb2 as google_dot_ads_dot_googleads__v6_dot_proto_dot_services_dot_ad__group__criterion__simulation__service__pb2
+from google.ads.google_ads.v6.proto.resources import ad_group_criterion_simulation_pb2 as google_dot_ads_dot_googleads_dot_v6_dot_resources_dot_ad__group__criterion__simulation__pb2
+from google.ads.google_ads.v6.proto.services import ad_group_criterion_simulation_service_pb2 as google_dot_ads_dot_googleads_dot_v6_dot_services_dot_ad__group__criterion__simulation__service__pb2
 
 
 class AdGroupCriterionSimulationServiceStub(object):
@@ -20,8 +20,8 @@ class AdGroupCriterionSimulationServiceStub(object):
         """
         self.GetAdGroupCriterionSimulation = channel.unary_unary(
                 '/google.ads.googleads.v6.services.AdGroupCriterionSimulationService/GetAdGroupCriterionSimulation',
-                request_serializer=google_dot_ads_dot_googleads__v6_dot_proto_dot_services_dot_ad__group__criterion__simulation__service__pb2.GetAdGroupCriterionSimulationRequest.SerializeToString,
-                response_deserializer=google_dot_ads_dot_googleads__v6_dot_proto_dot_resources_dot_ad__group__criterion__simulation__pb2.AdGroupCriterionSimulation.FromString,
+                request_serializer=google_dot_ads_dot_googleads_dot_v6_dot_services_dot_ad__group__criterion__simulation__service__pb2.GetAdGroupCriterionSimulationRequest.SerializeToString,
+                response_deserializer=google_dot_ads_dot_googleads_dot_v6_dot_resources_dot_ad__group__criterion__simulation__pb2.AdGroupCriterionSimulation.FromString,
                 )
 
 
@@ -43,8 +43,8 @@ def add_AdGroupCriterionSimulationServiceServicer_to_server(servicer, server):
     rpc_method_handlers = {
             'GetAdGroupCriterionSimulation': grpc.unary_unary_rpc_method_handler(
                     servicer.GetAdGroupCriterionSimulation,
-                    request_deserializer=google_dot_ads_dot_googleads__v6_dot_proto_dot_services_dot_ad__group__criterion__simulation__service__pb2.GetAdGroupCriterionSimulationRequest.FromString,
-                    response_serializer=google_dot_ads_dot_googleads__v6_dot_proto_dot_resources_dot_ad__group__criterion__simulation__pb2.AdGroupCriterionSimulation.SerializeToString,
+                    request_deserializer=google_dot_ads_dot_googleads_dot_v6_dot_services_dot_ad__group__criterion__simulation__service__pb2.GetAdGroupCriterionSimulationRequest.FromString,
+                    response_serializer=google_dot_ads_dot_googleads_dot_v6_dot_resources_dot_ad__group__criterion__simulation__pb2.AdGroupCriterionSimulation.SerializeToString,
             ),
     }
     generic_handler = grpc.method_handlers_generic_handler(
@@ -65,12 +65,13 @@ class AdGroupCriterionSimulationService(object):
             options=(),
             channel_credentials=None,
             call_credentials=None,
+            insecure=False,
             compression=None,
             wait_for_ready=None,
             timeout=None,
             metadata=None):
         return grpc.experimental.unary_unary(request, target, '/google.ads.googleads.v6.services.AdGroupCriterionSimulationService/GetAdGroupCriterionSimulation',
-            google_dot_ads_dot_googleads__v6_dot_proto_dot_services_dot_ad__group__criterion__simulation__service__pb2.GetAdGroupCriterionSimulationRequest.SerializeToString,
-            google_dot_ads_dot_googleads__v6_dot_proto_dot_resources_dot_ad__group__criterion__simulation__pb2.AdGroupCriterionSimulation.FromString,
+            google_dot_ads_dot_googleads_dot_v6_dot_services_dot_ad__group__criterion__simulation__service__pb2.GetAdGroupCriterionSimulationRequest.SerializeToString,
+            google_dot_ads_dot_googleads_dot_v6_dot_resources_dot_ad__group__criterion__simulation__pb2.AdGroupCriterionSimulation.FromString,
             options, channel_credentials,
-            call_credentials, compression, wait_for_ready, timeout, metadata)
+            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)

@@ -76,12 +76,12 @@ class ThirdPartyAppAnalyticsLinkServiceClient(object):
 
 
     @classmethod
-    def third_party_app_analytics_link_path(cls, customer, third_party_app_analytics_link):
+    def third_party_app_analytics_link_path(cls, customer_id, customer_link_id):
         """Return a fully-qualified third_party_app_analytics_link string."""
         return google.api_core.path_template.expand(
-            'customers/{customer}/thirdPartyAppAnalyticsLinks/{third_party_app_analytics_link}',
-            customer=customer,
-            third_party_app_analytics_link=third_party_app_analytics_link,
+            'customers/{customer_id}/thirdPartyAppAnalyticsLinks/{customer_link_id}',
+            customer_id=customer_id,
+            customer_link_id=customer_link_id,
         )
 
     def __init__(self, transport=None, channel=None, credentials=None,
@@ -187,12 +187,19 @@ class ThirdPartyAppAnalyticsLinkServiceClient(object):
     # Service calls
     def get_third_party_app_analytics_link(
             self,
-            resource_name,
+            resource_name=None,
             retry=google.api_core.gapic_v1.method.DEFAULT,
             timeout=google.api_core.gapic_v1.method.DEFAULT,
             metadata=None):
         """
         Returns the third party app analytics link in full detail.
+
+        Example:
+            >>> from google.ads import googleads_v6
+            >>>
+            >>> client = googleads_v6.ThirdPartyAppAnalyticsLinkServiceClient()
+            >>>
+            >>> response = client.get_third_party_app_analytics_link()
 
         Args:
             resource_name (str): Resource name of the third party app analytics link.
@@ -242,13 +249,20 @@ class ThirdPartyAppAnalyticsLinkServiceClient(object):
 
     def regenerate_shareable_link_id(
             self,
-            resource_name,
+            resource_name=None,
             retry=google.api_core.gapic_v1.method.DEFAULT,
             timeout=google.api_core.gapic_v1.method.DEFAULT,
             metadata=None):
         """
-        Regenerate ThirdPartyAppAnalyticsLink.shareable\_link\_id that should be
-        provided to the third party when setting up app analytics.
+        Regenerate ThirdPartyAppAnalyticsLink.shareable_link_id that should
+        be provided to the third party when setting up app analytics.
+
+        Example:
+            >>> from google.ads import googleads_v6
+            >>>
+            >>> client = googleads_v6.ThirdPartyAppAnalyticsLinkServiceClient()
+            >>>
+            >>> response = client.regenerate_shareable_link_id()
 
         Args:
             resource_name (str): Resource name of the third party app analytics link.

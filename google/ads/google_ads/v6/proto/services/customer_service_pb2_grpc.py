@@ -2,8 +2,8 @@
 """Client and server classes corresponding to protobuf-defined services."""
 import grpc
 
-from google.ads.google_ads.v6.proto.resources import customer_pb2 as google_dot_ads_dot_googleads__v6_dot_proto_dot_resources_dot_customer__pb2
-from google.ads.google_ads.v6.proto.services import customer_service_pb2 as google_dot_ads_dot_googleads__v6_dot_proto_dot_services_dot_customer__service__pb2
+from google.ads.google_ads.v6.proto.resources import customer_pb2 as google_dot_ads_dot_googleads_dot_v6_dot_resources_dot_customer__pb2
+from google.ads.google_ads.v6.proto.services import customer_service_pb2 as google_dot_ads_dot_googleads_dot_v6_dot_services_dot_customer__service__pb2
 
 
 class CustomerServiceStub(object):
@@ -20,23 +20,23 @@ class CustomerServiceStub(object):
         """
         self.GetCustomer = channel.unary_unary(
                 '/google.ads.googleads.v6.services.CustomerService/GetCustomer',
-                request_serializer=google_dot_ads_dot_googleads__v6_dot_proto_dot_services_dot_customer__service__pb2.GetCustomerRequest.SerializeToString,
-                response_deserializer=google_dot_ads_dot_googleads__v6_dot_proto_dot_resources_dot_customer__pb2.Customer.FromString,
+                request_serializer=google_dot_ads_dot_googleads_dot_v6_dot_services_dot_customer__service__pb2.GetCustomerRequest.SerializeToString,
+                response_deserializer=google_dot_ads_dot_googleads_dot_v6_dot_resources_dot_customer__pb2.Customer.FromString,
                 )
         self.MutateCustomer = channel.unary_unary(
                 '/google.ads.googleads.v6.services.CustomerService/MutateCustomer',
-                request_serializer=google_dot_ads_dot_googleads__v6_dot_proto_dot_services_dot_customer__service__pb2.MutateCustomerRequest.SerializeToString,
-                response_deserializer=google_dot_ads_dot_googleads__v6_dot_proto_dot_services_dot_customer__service__pb2.MutateCustomerResponse.FromString,
+                request_serializer=google_dot_ads_dot_googleads_dot_v6_dot_services_dot_customer__service__pb2.MutateCustomerRequest.SerializeToString,
+                response_deserializer=google_dot_ads_dot_googleads_dot_v6_dot_services_dot_customer__service__pb2.MutateCustomerResponse.FromString,
                 )
         self.ListAccessibleCustomers = channel.unary_unary(
                 '/google.ads.googleads.v6.services.CustomerService/ListAccessibleCustomers',
-                request_serializer=google_dot_ads_dot_googleads__v6_dot_proto_dot_services_dot_customer__service__pb2.ListAccessibleCustomersRequest.SerializeToString,
-                response_deserializer=google_dot_ads_dot_googleads__v6_dot_proto_dot_services_dot_customer__service__pb2.ListAccessibleCustomersResponse.FromString,
+                request_serializer=google_dot_ads_dot_googleads_dot_v6_dot_services_dot_customer__service__pb2.ListAccessibleCustomersRequest.SerializeToString,
+                response_deserializer=google_dot_ads_dot_googleads_dot_v6_dot_services_dot_customer__service__pb2.ListAccessibleCustomersResponse.FromString,
                 )
         self.CreateCustomerClient = channel.unary_unary(
                 '/google.ads.googleads.v6.services.CustomerService/CreateCustomerClient',
-                request_serializer=google_dot_ads_dot_googleads__v6_dot_proto_dot_services_dot_customer__service__pb2.CreateCustomerClientRequest.SerializeToString,
-                response_deserializer=google_dot_ads_dot_googleads__v6_dot_proto_dot_services_dot_customer__service__pb2.CreateCustomerClientResponse.FromString,
+                request_serializer=google_dot_ads_dot_googleads_dot_v6_dot_services_dot_customer__service__pb2.CreateCustomerClientRequest.SerializeToString,
+                response_deserializer=google_dot_ads_dot_googleads_dot_v6_dot_services_dot_customer__service__pb2.CreateCustomerClientResponse.FromString,
                 )
 
 
@@ -80,23 +80,23 @@ def add_CustomerServiceServicer_to_server(servicer, server):
     rpc_method_handlers = {
             'GetCustomer': grpc.unary_unary_rpc_method_handler(
                     servicer.GetCustomer,
-                    request_deserializer=google_dot_ads_dot_googleads__v6_dot_proto_dot_services_dot_customer__service__pb2.GetCustomerRequest.FromString,
-                    response_serializer=google_dot_ads_dot_googleads__v6_dot_proto_dot_resources_dot_customer__pb2.Customer.SerializeToString,
+                    request_deserializer=google_dot_ads_dot_googleads_dot_v6_dot_services_dot_customer__service__pb2.GetCustomerRequest.FromString,
+                    response_serializer=google_dot_ads_dot_googleads_dot_v6_dot_resources_dot_customer__pb2.Customer.SerializeToString,
             ),
             'MutateCustomer': grpc.unary_unary_rpc_method_handler(
                     servicer.MutateCustomer,
-                    request_deserializer=google_dot_ads_dot_googleads__v6_dot_proto_dot_services_dot_customer__service__pb2.MutateCustomerRequest.FromString,
-                    response_serializer=google_dot_ads_dot_googleads__v6_dot_proto_dot_services_dot_customer__service__pb2.MutateCustomerResponse.SerializeToString,
+                    request_deserializer=google_dot_ads_dot_googleads_dot_v6_dot_services_dot_customer__service__pb2.MutateCustomerRequest.FromString,
+                    response_serializer=google_dot_ads_dot_googleads_dot_v6_dot_services_dot_customer__service__pb2.MutateCustomerResponse.SerializeToString,
             ),
             'ListAccessibleCustomers': grpc.unary_unary_rpc_method_handler(
                     servicer.ListAccessibleCustomers,
-                    request_deserializer=google_dot_ads_dot_googleads__v6_dot_proto_dot_services_dot_customer__service__pb2.ListAccessibleCustomersRequest.FromString,
-                    response_serializer=google_dot_ads_dot_googleads__v6_dot_proto_dot_services_dot_customer__service__pb2.ListAccessibleCustomersResponse.SerializeToString,
+                    request_deserializer=google_dot_ads_dot_googleads_dot_v6_dot_services_dot_customer__service__pb2.ListAccessibleCustomersRequest.FromString,
+                    response_serializer=google_dot_ads_dot_googleads_dot_v6_dot_services_dot_customer__service__pb2.ListAccessibleCustomersResponse.SerializeToString,
             ),
             'CreateCustomerClient': grpc.unary_unary_rpc_method_handler(
                     servicer.CreateCustomerClient,
-                    request_deserializer=google_dot_ads_dot_googleads__v6_dot_proto_dot_services_dot_customer__service__pb2.CreateCustomerClientRequest.FromString,
-                    response_serializer=google_dot_ads_dot_googleads__v6_dot_proto_dot_services_dot_customer__service__pb2.CreateCustomerClientResponse.SerializeToString,
+                    request_deserializer=google_dot_ads_dot_googleads_dot_v6_dot_services_dot_customer__service__pb2.CreateCustomerClientRequest.FromString,
+                    response_serializer=google_dot_ads_dot_googleads_dot_v6_dot_services_dot_customer__service__pb2.CreateCustomerClientResponse.SerializeToString,
             ),
     }
     generic_handler = grpc.method_handlers_generic_handler(
@@ -117,15 +117,16 @@ class CustomerService(object):
             options=(),
             channel_credentials=None,
             call_credentials=None,
+            insecure=False,
             compression=None,
             wait_for_ready=None,
             timeout=None,
             metadata=None):
         return grpc.experimental.unary_unary(request, target, '/google.ads.googleads.v6.services.CustomerService/GetCustomer',
-            google_dot_ads_dot_googleads__v6_dot_proto_dot_services_dot_customer__service__pb2.GetCustomerRequest.SerializeToString,
-            google_dot_ads_dot_googleads__v6_dot_proto_dot_resources_dot_customer__pb2.Customer.FromString,
+            google_dot_ads_dot_googleads_dot_v6_dot_services_dot_customer__service__pb2.GetCustomerRequest.SerializeToString,
+            google_dot_ads_dot_googleads_dot_v6_dot_resources_dot_customer__pb2.Customer.FromString,
             options, channel_credentials,
-            call_credentials, compression, wait_for_ready, timeout, metadata)
+            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
 
     @staticmethod
     def MutateCustomer(request,
@@ -133,15 +134,16 @@ class CustomerService(object):
             options=(),
             channel_credentials=None,
             call_credentials=None,
+            insecure=False,
             compression=None,
             wait_for_ready=None,
             timeout=None,
             metadata=None):
         return grpc.experimental.unary_unary(request, target, '/google.ads.googleads.v6.services.CustomerService/MutateCustomer',
-            google_dot_ads_dot_googleads__v6_dot_proto_dot_services_dot_customer__service__pb2.MutateCustomerRequest.SerializeToString,
-            google_dot_ads_dot_googleads__v6_dot_proto_dot_services_dot_customer__service__pb2.MutateCustomerResponse.FromString,
+            google_dot_ads_dot_googleads_dot_v6_dot_services_dot_customer__service__pb2.MutateCustomerRequest.SerializeToString,
+            google_dot_ads_dot_googleads_dot_v6_dot_services_dot_customer__service__pb2.MutateCustomerResponse.FromString,
             options, channel_credentials,
-            call_credentials, compression, wait_for_ready, timeout, metadata)
+            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
 
     @staticmethod
     def ListAccessibleCustomers(request,
@@ -149,15 +151,16 @@ class CustomerService(object):
             options=(),
             channel_credentials=None,
             call_credentials=None,
+            insecure=False,
             compression=None,
             wait_for_ready=None,
             timeout=None,
             metadata=None):
         return grpc.experimental.unary_unary(request, target, '/google.ads.googleads.v6.services.CustomerService/ListAccessibleCustomers',
-            google_dot_ads_dot_googleads__v6_dot_proto_dot_services_dot_customer__service__pb2.ListAccessibleCustomersRequest.SerializeToString,
-            google_dot_ads_dot_googleads__v6_dot_proto_dot_services_dot_customer__service__pb2.ListAccessibleCustomersResponse.FromString,
+            google_dot_ads_dot_googleads_dot_v6_dot_services_dot_customer__service__pb2.ListAccessibleCustomersRequest.SerializeToString,
+            google_dot_ads_dot_googleads_dot_v6_dot_services_dot_customer__service__pb2.ListAccessibleCustomersResponse.FromString,
             options, channel_credentials,
-            call_credentials, compression, wait_for_ready, timeout, metadata)
+            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
 
     @staticmethod
     def CreateCustomerClient(request,
@@ -165,12 +168,13 @@ class CustomerService(object):
             options=(),
             channel_credentials=None,
             call_credentials=None,
+            insecure=False,
             compression=None,
             wait_for_ready=None,
             timeout=None,
             metadata=None):
         return grpc.experimental.unary_unary(request, target, '/google.ads.googleads.v6.services.CustomerService/CreateCustomerClient',
-            google_dot_ads_dot_googleads__v6_dot_proto_dot_services_dot_customer__service__pb2.CreateCustomerClientRequest.SerializeToString,
-            google_dot_ads_dot_googleads__v6_dot_proto_dot_services_dot_customer__service__pb2.CreateCustomerClientResponse.FromString,
+            google_dot_ads_dot_googleads_dot_v6_dot_services_dot_customer__service__pb2.CreateCustomerClientRequest.SerializeToString,
+            google_dot_ads_dot_googleads_dot_v6_dot_services_dot_customer__service__pb2.CreateCustomerClientResponse.FromString,
             options, channel_credentials,
-            call_credentials, compression, wait_for_ready, timeout, metadata)
+            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)

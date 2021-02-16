@@ -73,11 +73,11 @@ class TopicConstantServiceClient(object):
 
 
     @classmethod
-    def topic_constant_path(cls, topic_constant):
+    def topic_constant_path(cls, topic_id):
         """Return a fully-qualified topic_constant string."""
         return google.api_core.path_template.expand(
-            'topicConstants/{topic_constant}',
-            topic_constant=topic_constant,
+            'topicConstants/{topic_id}',
+            topic_id=topic_id,
         )
 
     def __init__(self, transport=None, channel=None, credentials=None,
@@ -189,6 +189,15 @@ class TopicConstantServiceClient(object):
             metadata=None):
         """
         Returns the requested topic constant in full detail.
+
+        Example:
+            >>> from google.ads import googleads_v6
+            >>>
+            >>> client = googleads_v6.TopicConstantServiceClient()
+            >>>
+            >>> resource_name = client.topic_constant_path('[TOPIC_ID]')
+            >>>
+            >>> response = client.get_topic_constant(resource_name)
 
         Args:
             resource_name (str): Required. Resource name of the Topic to fetch.

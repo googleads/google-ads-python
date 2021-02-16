@@ -185,6 +185,16 @@ class PaymentsAccountServiceClient(object):
         between the login customer ID and specified serving customer in the
         hierarchy, inclusive.
 
+        Example:
+            >>> from google.ads import googleads_v6
+            >>>
+            >>> client = googleads_v6.PaymentsAccountServiceClient()
+            >>>
+            >>> # TODO: Initialize `customer_id`:
+            >>> customer_id = ''
+            >>>
+            >>> response = client.list_payments_accounts(customer_id)
+
         Args:
             customer_id (str): Required. The ID of the customer to apply the PaymentsAccount list operation to.
             retry (Optional[google.api_core.retry.Retry]):  A retry object used

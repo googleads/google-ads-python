@@ -2,8 +2,8 @@
 """Client and server classes corresponding to protobuf-defined services."""
 import grpc
 
-from google.ads.google_ads.v6.proto.resources import batch_job_pb2 as google_dot_ads_dot_googleads__v6_dot_proto_dot_resources_dot_batch__job__pb2
-from google.ads.google_ads.v6.proto.services import batch_job_service_pb2 as google_dot_ads_dot_googleads__v6_dot_proto_dot_services_dot_batch__job__service__pb2
+from google.ads.google_ads.v6.proto.resources import batch_job_pb2 as google_dot_ads_dot_googleads_dot_v6_dot_resources_dot_batch__job__pb2
+from google.ads.google_ads.v6.proto.services import batch_job_service_pb2 as google_dot_ads_dot_googleads_dot_v6_dot_services_dot_batch__job__service__pb2
 from google.longrunning import operations_pb2 as google_dot_longrunning_dot_operations__pb2
 
 
@@ -21,28 +21,28 @@ class BatchJobServiceStub(object):
         """
         self.MutateBatchJob = channel.unary_unary(
                 '/google.ads.googleads.v6.services.BatchJobService/MutateBatchJob',
-                request_serializer=google_dot_ads_dot_googleads__v6_dot_proto_dot_services_dot_batch__job__service__pb2.MutateBatchJobRequest.SerializeToString,
-                response_deserializer=google_dot_ads_dot_googleads__v6_dot_proto_dot_services_dot_batch__job__service__pb2.MutateBatchJobResponse.FromString,
+                request_serializer=google_dot_ads_dot_googleads_dot_v6_dot_services_dot_batch__job__service__pb2.MutateBatchJobRequest.SerializeToString,
+                response_deserializer=google_dot_ads_dot_googleads_dot_v6_dot_services_dot_batch__job__service__pb2.MutateBatchJobResponse.FromString,
                 )
         self.GetBatchJob = channel.unary_unary(
                 '/google.ads.googleads.v6.services.BatchJobService/GetBatchJob',
-                request_serializer=google_dot_ads_dot_googleads__v6_dot_proto_dot_services_dot_batch__job__service__pb2.GetBatchJobRequest.SerializeToString,
-                response_deserializer=google_dot_ads_dot_googleads__v6_dot_proto_dot_resources_dot_batch__job__pb2.BatchJob.FromString,
+                request_serializer=google_dot_ads_dot_googleads_dot_v6_dot_services_dot_batch__job__service__pb2.GetBatchJobRequest.SerializeToString,
+                response_deserializer=google_dot_ads_dot_googleads_dot_v6_dot_resources_dot_batch__job__pb2.BatchJob.FromString,
                 )
         self.ListBatchJobResults = channel.unary_unary(
                 '/google.ads.googleads.v6.services.BatchJobService/ListBatchJobResults',
-                request_serializer=google_dot_ads_dot_googleads__v6_dot_proto_dot_services_dot_batch__job__service__pb2.ListBatchJobResultsRequest.SerializeToString,
-                response_deserializer=google_dot_ads_dot_googleads__v6_dot_proto_dot_services_dot_batch__job__service__pb2.ListBatchJobResultsResponse.FromString,
+                request_serializer=google_dot_ads_dot_googleads_dot_v6_dot_services_dot_batch__job__service__pb2.ListBatchJobResultsRequest.SerializeToString,
+                response_deserializer=google_dot_ads_dot_googleads_dot_v6_dot_services_dot_batch__job__service__pb2.ListBatchJobResultsResponse.FromString,
                 )
         self.RunBatchJob = channel.unary_unary(
                 '/google.ads.googleads.v6.services.BatchJobService/RunBatchJob',
-                request_serializer=google_dot_ads_dot_googleads__v6_dot_proto_dot_services_dot_batch__job__service__pb2.RunBatchJobRequest.SerializeToString,
+                request_serializer=google_dot_ads_dot_googleads_dot_v6_dot_services_dot_batch__job__service__pb2.RunBatchJobRequest.SerializeToString,
                 response_deserializer=google_dot_longrunning_dot_operations__pb2.Operation.FromString,
                 )
         self.AddBatchJobOperations = channel.unary_unary(
                 '/google.ads.googleads.v6.services.BatchJobService/AddBatchJobOperations',
-                request_serializer=google_dot_ads_dot_googleads__v6_dot_proto_dot_services_dot_batch__job__service__pb2.AddBatchJobOperationsRequest.SerializeToString,
-                response_deserializer=google_dot_ads_dot_googleads__v6_dot_proto_dot_services_dot_batch__job__service__pb2.AddBatchJobOperationsResponse.FromString,
+                request_serializer=google_dot_ads_dot_googleads_dot_v6_dot_services_dot_batch__job__service__pb2.AddBatchJobOperationsRequest.SerializeToString,
+                response_deserializer=google_dot_ads_dot_googleads_dot_v6_dot_services_dot_batch__job__service__pb2.AddBatchJobOperationsResponse.FromString,
                 )
 
 
@@ -97,28 +97,28 @@ def add_BatchJobServiceServicer_to_server(servicer, server):
     rpc_method_handlers = {
             'MutateBatchJob': grpc.unary_unary_rpc_method_handler(
                     servicer.MutateBatchJob,
-                    request_deserializer=google_dot_ads_dot_googleads__v6_dot_proto_dot_services_dot_batch__job__service__pb2.MutateBatchJobRequest.FromString,
-                    response_serializer=google_dot_ads_dot_googleads__v6_dot_proto_dot_services_dot_batch__job__service__pb2.MutateBatchJobResponse.SerializeToString,
+                    request_deserializer=google_dot_ads_dot_googleads_dot_v6_dot_services_dot_batch__job__service__pb2.MutateBatchJobRequest.FromString,
+                    response_serializer=google_dot_ads_dot_googleads_dot_v6_dot_services_dot_batch__job__service__pb2.MutateBatchJobResponse.SerializeToString,
             ),
             'GetBatchJob': grpc.unary_unary_rpc_method_handler(
                     servicer.GetBatchJob,
-                    request_deserializer=google_dot_ads_dot_googleads__v6_dot_proto_dot_services_dot_batch__job__service__pb2.GetBatchJobRequest.FromString,
-                    response_serializer=google_dot_ads_dot_googleads__v6_dot_proto_dot_resources_dot_batch__job__pb2.BatchJob.SerializeToString,
+                    request_deserializer=google_dot_ads_dot_googleads_dot_v6_dot_services_dot_batch__job__service__pb2.GetBatchJobRequest.FromString,
+                    response_serializer=google_dot_ads_dot_googleads_dot_v6_dot_resources_dot_batch__job__pb2.BatchJob.SerializeToString,
             ),
             'ListBatchJobResults': grpc.unary_unary_rpc_method_handler(
                     servicer.ListBatchJobResults,
-                    request_deserializer=google_dot_ads_dot_googleads__v6_dot_proto_dot_services_dot_batch__job__service__pb2.ListBatchJobResultsRequest.FromString,
-                    response_serializer=google_dot_ads_dot_googleads__v6_dot_proto_dot_services_dot_batch__job__service__pb2.ListBatchJobResultsResponse.SerializeToString,
+                    request_deserializer=google_dot_ads_dot_googleads_dot_v6_dot_services_dot_batch__job__service__pb2.ListBatchJobResultsRequest.FromString,
+                    response_serializer=google_dot_ads_dot_googleads_dot_v6_dot_services_dot_batch__job__service__pb2.ListBatchJobResultsResponse.SerializeToString,
             ),
             'RunBatchJob': grpc.unary_unary_rpc_method_handler(
                     servicer.RunBatchJob,
-                    request_deserializer=google_dot_ads_dot_googleads__v6_dot_proto_dot_services_dot_batch__job__service__pb2.RunBatchJobRequest.FromString,
+                    request_deserializer=google_dot_ads_dot_googleads_dot_v6_dot_services_dot_batch__job__service__pb2.RunBatchJobRequest.FromString,
                     response_serializer=google_dot_longrunning_dot_operations__pb2.Operation.SerializeToString,
             ),
             'AddBatchJobOperations': grpc.unary_unary_rpc_method_handler(
                     servicer.AddBatchJobOperations,
-                    request_deserializer=google_dot_ads_dot_googleads__v6_dot_proto_dot_services_dot_batch__job__service__pb2.AddBatchJobOperationsRequest.FromString,
-                    response_serializer=google_dot_ads_dot_googleads__v6_dot_proto_dot_services_dot_batch__job__service__pb2.AddBatchJobOperationsResponse.SerializeToString,
+                    request_deserializer=google_dot_ads_dot_googleads_dot_v6_dot_services_dot_batch__job__service__pb2.AddBatchJobOperationsRequest.FromString,
+                    response_serializer=google_dot_ads_dot_googleads_dot_v6_dot_services_dot_batch__job__service__pb2.AddBatchJobOperationsResponse.SerializeToString,
             ),
     }
     generic_handler = grpc.method_handlers_generic_handler(
@@ -139,15 +139,16 @@ class BatchJobService(object):
             options=(),
             channel_credentials=None,
             call_credentials=None,
+            insecure=False,
             compression=None,
             wait_for_ready=None,
             timeout=None,
             metadata=None):
         return grpc.experimental.unary_unary(request, target, '/google.ads.googleads.v6.services.BatchJobService/MutateBatchJob',
-            google_dot_ads_dot_googleads__v6_dot_proto_dot_services_dot_batch__job__service__pb2.MutateBatchJobRequest.SerializeToString,
-            google_dot_ads_dot_googleads__v6_dot_proto_dot_services_dot_batch__job__service__pb2.MutateBatchJobResponse.FromString,
+            google_dot_ads_dot_googleads_dot_v6_dot_services_dot_batch__job__service__pb2.MutateBatchJobRequest.SerializeToString,
+            google_dot_ads_dot_googleads_dot_v6_dot_services_dot_batch__job__service__pb2.MutateBatchJobResponse.FromString,
             options, channel_credentials,
-            call_credentials, compression, wait_for_ready, timeout, metadata)
+            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
 
     @staticmethod
     def GetBatchJob(request,
@@ -155,15 +156,16 @@ class BatchJobService(object):
             options=(),
             channel_credentials=None,
             call_credentials=None,
+            insecure=False,
             compression=None,
             wait_for_ready=None,
             timeout=None,
             metadata=None):
         return grpc.experimental.unary_unary(request, target, '/google.ads.googleads.v6.services.BatchJobService/GetBatchJob',
-            google_dot_ads_dot_googleads__v6_dot_proto_dot_services_dot_batch__job__service__pb2.GetBatchJobRequest.SerializeToString,
-            google_dot_ads_dot_googleads__v6_dot_proto_dot_resources_dot_batch__job__pb2.BatchJob.FromString,
+            google_dot_ads_dot_googleads_dot_v6_dot_services_dot_batch__job__service__pb2.GetBatchJobRequest.SerializeToString,
+            google_dot_ads_dot_googleads_dot_v6_dot_resources_dot_batch__job__pb2.BatchJob.FromString,
             options, channel_credentials,
-            call_credentials, compression, wait_for_ready, timeout, metadata)
+            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
 
     @staticmethod
     def ListBatchJobResults(request,
@@ -171,15 +173,16 @@ class BatchJobService(object):
             options=(),
             channel_credentials=None,
             call_credentials=None,
+            insecure=False,
             compression=None,
             wait_for_ready=None,
             timeout=None,
             metadata=None):
         return grpc.experimental.unary_unary(request, target, '/google.ads.googleads.v6.services.BatchJobService/ListBatchJobResults',
-            google_dot_ads_dot_googleads__v6_dot_proto_dot_services_dot_batch__job__service__pb2.ListBatchJobResultsRequest.SerializeToString,
-            google_dot_ads_dot_googleads__v6_dot_proto_dot_services_dot_batch__job__service__pb2.ListBatchJobResultsResponse.FromString,
+            google_dot_ads_dot_googleads_dot_v6_dot_services_dot_batch__job__service__pb2.ListBatchJobResultsRequest.SerializeToString,
+            google_dot_ads_dot_googleads_dot_v6_dot_services_dot_batch__job__service__pb2.ListBatchJobResultsResponse.FromString,
             options, channel_credentials,
-            call_credentials, compression, wait_for_ready, timeout, metadata)
+            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
 
     @staticmethod
     def RunBatchJob(request,
@@ -187,15 +190,16 @@ class BatchJobService(object):
             options=(),
             channel_credentials=None,
             call_credentials=None,
+            insecure=False,
             compression=None,
             wait_for_ready=None,
             timeout=None,
             metadata=None):
         return grpc.experimental.unary_unary(request, target, '/google.ads.googleads.v6.services.BatchJobService/RunBatchJob',
-            google_dot_ads_dot_googleads__v6_dot_proto_dot_services_dot_batch__job__service__pb2.RunBatchJobRequest.SerializeToString,
+            google_dot_ads_dot_googleads_dot_v6_dot_services_dot_batch__job__service__pb2.RunBatchJobRequest.SerializeToString,
             google_dot_longrunning_dot_operations__pb2.Operation.FromString,
             options, channel_credentials,
-            call_credentials, compression, wait_for_ready, timeout, metadata)
+            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
 
     @staticmethod
     def AddBatchJobOperations(request,
@@ -203,12 +207,13 @@ class BatchJobService(object):
             options=(),
             channel_credentials=None,
             call_credentials=None,
+            insecure=False,
             compression=None,
             wait_for_ready=None,
             timeout=None,
             metadata=None):
         return grpc.experimental.unary_unary(request, target, '/google.ads.googleads.v6.services.BatchJobService/AddBatchJobOperations',
-            google_dot_ads_dot_googleads__v6_dot_proto_dot_services_dot_batch__job__service__pb2.AddBatchJobOperationsRequest.SerializeToString,
-            google_dot_ads_dot_googleads__v6_dot_proto_dot_services_dot_batch__job__service__pb2.AddBatchJobOperationsResponse.FromString,
+            google_dot_ads_dot_googleads_dot_v6_dot_services_dot_batch__job__service__pb2.AddBatchJobOperationsRequest.SerializeToString,
+            google_dot_ads_dot_googleads_dot_v6_dot_services_dot_batch__job__service__pb2.AddBatchJobOperationsResponse.FromString,
             options, channel_credentials,
-            call_credentials, compression, wait_for_ready, timeout, metadata)
+            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)

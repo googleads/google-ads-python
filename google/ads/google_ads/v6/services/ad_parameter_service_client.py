@@ -73,12 +73,14 @@ class AdParameterServiceClient(object):
 
 
     @classmethod
-    def ad_parameter_path(cls, customer, ad_parameter):
+    def ad_parameter_path(cls, customer_id, ad_group_id, criterion_id, parameter_index):
         """Return a fully-qualified ad_parameter string."""
         return google.api_core.path_template.expand(
-            'customers/{customer}/adParameters/{ad_parameter}',
-            customer=customer,
-            ad_parameter=ad_parameter,
+            'customers/{customer_id}/adParameters/{ad_group_id}~{criterion_id}~{parameter_index}',
+            customer_id=customer_id,
+            ad_group_id=ad_group_id,
+            criterion_id=criterion_id,
+            parameter_index=parameter_index,
         )
 
     def __init__(self, transport=None, channel=None, credentials=None,
@@ -191,6 +193,15 @@ class AdParameterServiceClient(object):
         """
         Returns the requested ad parameter in full detail.
 
+        Example:
+            >>> from google.ads import googleads_v6
+            >>>
+            >>> client = googleads_v6.AdParameterServiceClient()
+            >>>
+            >>> resource_name = client.ad_parameter_path('[CUSTOMER_ID]', '[AD_GROUP_ID]', '[CRITERION_ID]', '[PARAMETER_INDEX]')
+            >>>
+            >>> response = client.get_ad_parameter(resource_name)
+
         Args:
             resource_name (str): Required. The resource name of the ad parameter to fetch.
             retry (Optional[google.api_core.retry.Retry]):  A retry object used
@@ -243,12 +254,26 @@ class AdParameterServiceClient(object):
             operations,
             partial_failure=None,
             validate_only=None,
+            response_content_type=None,
             retry=google.api_core.gapic_v1.method.DEFAULT,
             timeout=google.api_core.gapic_v1.method.DEFAULT,
             metadata=None):
         """
         Creates, updates, or removes ad parameters. Operation statuses are
         returned.
+
+        Example:
+            >>> from google.ads import googleads_v6
+            >>>
+            >>> client = googleads_v6.AdParameterServiceClient()
+            >>>
+            >>> # TODO: Initialize `customer_id`:
+            >>> customer_id = ''
+            >>>
+            >>> # TODO: Initialize `operations`:
+            >>> operations = []
+            >>>
+            >>> response = client.mutate_ad_parameters(customer_id, operations)
 
         Args:
             customer_id (str): Required. The ID of the customer whose ad parameters are being modified.
@@ -262,6 +287,8 @@ class AdParameterServiceClient(object):
                 Default is false.
             validate_only (bool): If true, the request is validated but not executed. Only errors are
                 returned, not results.
+            response_content_type (~google.ads.googleads_v6.types.ResponseContentType): The response content type setting. Determines whether the mutable resource
+                or just the resource name should be returned post mutation.
             retry (Optional[google.api_core.retry.Retry]):  A retry object used
                 to retry requests. If ``None`` is specified, requests will
                 be retried using a default configuration.
@@ -295,6 +322,7 @@ class AdParameterServiceClient(object):
             operations=operations,
             partial_failure=partial_failure,
             validate_only=validate_only,
+            response_content_type=response_content_type,
         )
         if metadata is None:
             metadata = []

@@ -24,7 +24,6 @@ import uuid
 
 from google.ads.google_ads.client import GoogleAdsClient
 from google.ads.google_ads.errors import GoogleAdsException
-from google.ads.google_ads.util import ResourceName
 
 
 def main(client, customer_id, base_campaign_id, draft_id):
@@ -34,7 +33,7 @@ def main(client, customer_id, base_campaign_id, draft_id):
         "CampaignDraftService", version="v6"
     )
     campaign_draft_resource_name = campaign_draft_service.campaign_draft_path(
-        customer_id, ResourceName.format_composite(base_campaign_id, draft_id)
+        customer_id, base_campaign_id, draft_id
     )
 
     campaign_experiment.campaign_draft = campaign_draft_resource_name

@@ -24,7 +24,6 @@ import sys
 
 from google.ads.google_ads.client import GoogleAdsClient
 from google.ads.google_ads.errors import GoogleAdsException
-from google.ads.google_ads.util import ResourceName
 
 
 def main(client, customer_id, feed_id, feed_item_set_id):
@@ -43,7 +42,7 @@ def main(client, customer_id, feed_id, feed_item_set_id):
     )
 
     feed_item_set_path = feed_item_set_service.feed_item_set_path(
-        customer_id, ResourceName.format_composite(feed_id, feed_item_set_id),
+        customer_id, feed_id, feed_item_set_id
     )
     query = f"""
         SELECT

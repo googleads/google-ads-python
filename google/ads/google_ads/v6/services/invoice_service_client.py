@@ -183,6 +183,26 @@ class InvoiceServiceClient(object):
         """
         Returns all invoices associated with a billing setup, for a given month.
 
+        Example:
+            >>> from google.ads import googleads_v6
+            >>> from google.ads.googleads_v6 import enums
+            >>>
+            >>> client = googleads_v6.InvoiceServiceClient()
+            >>>
+            >>> # TODO: Initialize `customer_id`:
+            >>> customer_id = ''
+            >>>
+            >>> # TODO: Initialize `billing_setup`:
+            >>> billing_setup = ''
+            >>>
+            >>> # TODO: Initialize `issue_year`:
+            >>> issue_year = ''
+            >>>
+            >>> # TODO: Initialize `issue_month`:
+            >>> issue_month = enums.MonthOfYearEnum.MonthOfYear.UNSPECIFIED
+            >>>
+            >>> response = client.list_invoices(customer_id, billing_setup, issue_year, issue_month)
+
         Args:
             customer_id (str): Required. The ID of the customer to fetch invoices for.
             billing_setup (str): Required. The billing setup resource name of the requested invoices.

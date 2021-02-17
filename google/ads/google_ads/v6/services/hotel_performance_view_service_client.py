@@ -73,11 +73,11 @@ class HotelPerformanceViewServiceClient(object):
 
 
     @classmethod
-    def hotel_performance_view_path(cls, customer):
+    def hotel_performance_view_path(cls, customer_id):
         """Return a fully-qualified hotel_performance_view string."""
         return google.api_core.path_template.expand(
-            'customers/{customer}/hotelPerformanceView',
-            customer=customer,
+            'customers/{customer_id}/hotelPerformanceView',
+            customer_id=customer_id,
         )
 
     def __init__(self, transport=None, channel=None, credentials=None,
@@ -189,6 +189,15 @@ class HotelPerformanceViewServiceClient(object):
             metadata=None):
         """
         Returns the requested Hotel Performance View in full detail.
+
+        Example:
+            >>> from google.ads import googleads_v6
+            >>>
+            >>> client = googleads_v6.HotelPerformanceViewServiceClient()
+            >>>
+            >>> resource_name = client.hotel_performance_view_path('[CUSTOMER_ID]')
+            >>>
+            >>> response = client.get_hotel_performance_view(resource_name)
 
         Args:
             resource_name (str): Required. Resource name of the Hotel Performance View to fetch.

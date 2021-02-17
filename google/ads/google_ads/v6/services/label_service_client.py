@@ -73,12 +73,12 @@ class LabelServiceClient(object):
 
 
     @classmethod
-    def label_path(cls, customer, label):
+    def label_path(cls, customer_id, label_id):
         """Return a fully-qualified label string."""
         return google.api_core.path_template.expand(
-            'customers/{customer}/labels/{label}',
-            customer=customer,
-            label=label,
+            'customers/{customer_id}/labels/{label_id}',
+            customer_id=customer_id,
+            label_id=label_id,
         )
 
     def __init__(self, transport=None, channel=None, credentials=None,
@@ -191,6 +191,15 @@ class LabelServiceClient(object):
         """
         Returns the requested label in full detail.
 
+        Example:
+            >>> from google.ads import googleads_v6
+            >>>
+            >>> client = googleads_v6.LabelServiceClient()
+            >>>
+            >>> resource_name = client.label_path('[CUSTOMER_ID]', '[LABEL_ID]')
+            >>>
+            >>> response = client.get_label(resource_name)
+
         Args:
             resource_name (str): Required. The resource name of the label to fetch.
             retry (Optional[google.api_core.retry.Retry]):  A retry object used
@@ -249,6 +258,19 @@ class LabelServiceClient(object):
             metadata=None):
         """
         Creates, updates, or removes labels. Operation statuses are returned.
+
+        Example:
+            >>> from google.ads import googleads_v6
+            >>>
+            >>> client = googleads_v6.LabelServiceClient()
+            >>>
+            >>> # TODO: Initialize `customer_id`:
+            >>> customer_id = ''
+            >>>
+            >>> # TODO: Initialize `operations`:
+            >>> operations = []
+            >>>
+            >>> response = client.mutate_labels(customer_id, operations)
 
         Args:
             customer_id (str): Required. ID of the customer whose labels are being modified.

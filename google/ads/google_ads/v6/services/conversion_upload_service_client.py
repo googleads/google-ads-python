@@ -175,13 +175,29 @@ class ConversionUploadServiceClient(object):
             self,
             customer_id,
             conversions,
-            partial_failure=None,
+            partial_failure,
             validate_only=None,
             retry=google.api_core.gapic_v1.method.DEFAULT,
             timeout=google.api_core.gapic_v1.method.DEFAULT,
             metadata=None):
         """
         Processes the given click conversions.
+
+        Example:
+            >>> from google.ads import googleads_v6
+            >>>
+            >>> client = googleads_v6.ConversionUploadServiceClient()
+            >>>
+            >>> # TODO: Initialize `customer_id`:
+            >>> customer_id = ''
+            >>>
+            >>> # TODO: Initialize `conversions`:
+            >>> conversions = []
+            >>>
+            >>> # TODO: Initialize `partial_failure`:
+            >>> partial_failure = False
+            >>>
+            >>> response = client.upload_click_conversions(customer_id, conversions, partial_failure)
 
         Args:
             customer_id (str): Required. The ID of the customer performing the upload.
@@ -249,13 +265,29 @@ class ConversionUploadServiceClient(object):
             self,
             customer_id,
             conversions,
-            partial_failure=None,
+            partial_failure,
             validate_only=None,
             retry=google.api_core.gapic_v1.method.DEFAULT,
             timeout=google.api_core.gapic_v1.method.DEFAULT,
             metadata=None):
         """
         Processes the given call conversions.
+
+        Example:
+            >>> from google.ads import googleads_v6
+            >>>
+            >>> client = googleads_v6.ConversionUploadServiceClient()
+            >>>
+            >>> # TODO: Initialize `customer_id`:
+            >>> customer_id = ''
+            >>>
+            >>> # TODO: Initialize `conversions`:
+            >>> conversions = []
+            >>>
+            >>> # TODO: Initialize `partial_failure`:
+            >>> partial_failure = False
+            >>>
+            >>> response = client.upload_call_conversions(customer_id, conversions, partial_failure)
 
         Args:
             customer_id (str): Required. The ID of the customer performing the upload.

@@ -2,8 +2,8 @@
 """Client and server classes corresponding to protobuf-defined services."""
 import grpc
 
-from google.ads.google_ads.v6.proto.resources import ad_parameter_pb2 as google_dot_ads_dot_googleads__v6_dot_proto_dot_resources_dot_ad__parameter__pb2
-from google.ads.google_ads.v6.proto.services import ad_parameter_service_pb2 as google_dot_ads_dot_googleads__v6_dot_proto_dot_services_dot_ad__parameter__service__pb2
+from google.ads.google_ads.v6.proto.resources import ad_parameter_pb2 as google_dot_ads_dot_googleads_dot_v6_dot_resources_dot_ad__parameter__pb2
+from google.ads.google_ads.v6.proto.services import ad_parameter_service_pb2 as google_dot_ads_dot_googleads_dot_v6_dot_services_dot_ad__parameter__service__pb2
 
 
 class AdParameterServiceStub(object):
@@ -20,13 +20,13 @@ class AdParameterServiceStub(object):
         """
         self.GetAdParameter = channel.unary_unary(
                 '/google.ads.googleads.v6.services.AdParameterService/GetAdParameter',
-                request_serializer=google_dot_ads_dot_googleads__v6_dot_proto_dot_services_dot_ad__parameter__service__pb2.GetAdParameterRequest.SerializeToString,
-                response_deserializer=google_dot_ads_dot_googleads__v6_dot_proto_dot_resources_dot_ad__parameter__pb2.AdParameter.FromString,
+                request_serializer=google_dot_ads_dot_googleads_dot_v6_dot_services_dot_ad__parameter__service__pb2.GetAdParameterRequest.SerializeToString,
+                response_deserializer=google_dot_ads_dot_googleads_dot_v6_dot_resources_dot_ad__parameter__pb2.AdParameter.FromString,
                 )
         self.MutateAdParameters = channel.unary_unary(
                 '/google.ads.googleads.v6.services.AdParameterService/MutateAdParameters',
-                request_serializer=google_dot_ads_dot_googleads__v6_dot_proto_dot_services_dot_ad__parameter__service__pb2.MutateAdParametersRequest.SerializeToString,
-                response_deserializer=google_dot_ads_dot_googleads__v6_dot_proto_dot_services_dot_ad__parameter__service__pb2.MutateAdParametersResponse.FromString,
+                request_serializer=google_dot_ads_dot_googleads_dot_v6_dot_services_dot_ad__parameter__service__pb2.MutateAdParametersRequest.SerializeToString,
+                response_deserializer=google_dot_ads_dot_googleads_dot_v6_dot_services_dot_ad__parameter__service__pb2.MutateAdParametersResponse.FromString,
                 )
 
 
@@ -56,13 +56,13 @@ def add_AdParameterServiceServicer_to_server(servicer, server):
     rpc_method_handlers = {
             'GetAdParameter': grpc.unary_unary_rpc_method_handler(
                     servicer.GetAdParameter,
-                    request_deserializer=google_dot_ads_dot_googleads__v6_dot_proto_dot_services_dot_ad__parameter__service__pb2.GetAdParameterRequest.FromString,
-                    response_serializer=google_dot_ads_dot_googleads__v6_dot_proto_dot_resources_dot_ad__parameter__pb2.AdParameter.SerializeToString,
+                    request_deserializer=google_dot_ads_dot_googleads_dot_v6_dot_services_dot_ad__parameter__service__pb2.GetAdParameterRequest.FromString,
+                    response_serializer=google_dot_ads_dot_googleads_dot_v6_dot_resources_dot_ad__parameter__pb2.AdParameter.SerializeToString,
             ),
             'MutateAdParameters': grpc.unary_unary_rpc_method_handler(
                     servicer.MutateAdParameters,
-                    request_deserializer=google_dot_ads_dot_googleads__v6_dot_proto_dot_services_dot_ad__parameter__service__pb2.MutateAdParametersRequest.FromString,
-                    response_serializer=google_dot_ads_dot_googleads__v6_dot_proto_dot_services_dot_ad__parameter__service__pb2.MutateAdParametersResponse.SerializeToString,
+                    request_deserializer=google_dot_ads_dot_googleads_dot_v6_dot_services_dot_ad__parameter__service__pb2.MutateAdParametersRequest.FromString,
+                    response_serializer=google_dot_ads_dot_googleads_dot_v6_dot_services_dot_ad__parameter__service__pb2.MutateAdParametersResponse.SerializeToString,
             ),
     }
     generic_handler = grpc.method_handlers_generic_handler(
@@ -83,15 +83,16 @@ class AdParameterService(object):
             options=(),
             channel_credentials=None,
             call_credentials=None,
+            insecure=False,
             compression=None,
             wait_for_ready=None,
             timeout=None,
             metadata=None):
         return grpc.experimental.unary_unary(request, target, '/google.ads.googleads.v6.services.AdParameterService/GetAdParameter',
-            google_dot_ads_dot_googleads__v6_dot_proto_dot_services_dot_ad__parameter__service__pb2.GetAdParameterRequest.SerializeToString,
-            google_dot_ads_dot_googleads__v6_dot_proto_dot_resources_dot_ad__parameter__pb2.AdParameter.FromString,
+            google_dot_ads_dot_googleads_dot_v6_dot_services_dot_ad__parameter__service__pb2.GetAdParameterRequest.SerializeToString,
+            google_dot_ads_dot_googleads_dot_v6_dot_resources_dot_ad__parameter__pb2.AdParameter.FromString,
             options, channel_credentials,
-            call_credentials, compression, wait_for_ready, timeout, metadata)
+            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
 
     @staticmethod
     def MutateAdParameters(request,
@@ -99,12 +100,13 @@ class AdParameterService(object):
             options=(),
             channel_credentials=None,
             call_credentials=None,
+            insecure=False,
             compression=None,
             wait_for_ready=None,
             timeout=None,
             metadata=None):
         return grpc.experimental.unary_unary(request, target, '/google.ads.googleads.v6.services.AdParameterService/MutateAdParameters',
-            google_dot_ads_dot_googleads__v6_dot_proto_dot_services_dot_ad__parameter__service__pb2.MutateAdParametersRequest.SerializeToString,
-            google_dot_ads_dot_googleads__v6_dot_proto_dot_services_dot_ad__parameter__service__pb2.MutateAdParametersResponse.FromString,
+            google_dot_ads_dot_googleads_dot_v6_dot_services_dot_ad__parameter__service__pb2.MutateAdParametersRequest.SerializeToString,
+            google_dot_ads_dot_googleads_dot_v6_dot_services_dot_ad__parameter__service__pb2.MutateAdParametersResponse.FromString,
             options, channel_credentials,
-            call_credentials, compression, wait_for_ready, timeout, metadata)
+            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)

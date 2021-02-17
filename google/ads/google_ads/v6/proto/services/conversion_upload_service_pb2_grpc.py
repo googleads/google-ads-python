@@ -2,7 +2,7 @@
 """Client and server classes corresponding to protobuf-defined services."""
 import grpc
 
-from google.ads.google_ads.v6.proto.services import conversion_upload_service_pb2 as google_dot_ads_dot_googleads__v6_dot_proto_dot_services_dot_conversion__upload__service__pb2
+from google.ads.google_ads.v6.proto.services import conversion_upload_service_pb2 as google_dot_ads_dot_googleads_dot_v6_dot_services_dot_conversion__upload__service__pb2
 
 
 class ConversionUploadServiceStub(object):
@@ -17,13 +17,13 @@ class ConversionUploadServiceStub(object):
         """
         self.UploadClickConversions = channel.unary_unary(
                 '/google.ads.googleads.v6.services.ConversionUploadService/UploadClickConversions',
-                request_serializer=google_dot_ads_dot_googleads__v6_dot_proto_dot_services_dot_conversion__upload__service__pb2.UploadClickConversionsRequest.SerializeToString,
-                response_deserializer=google_dot_ads_dot_googleads__v6_dot_proto_dot_services_dot_conversion__upload__service__pb2.UploadClickConversionsResponse.FromString,
+                request_serializer=google_dot_ads_dot_googleads_dot_v6_dot_services_dot_conversion__upload__service__pb2.UploadClickConversionsRequest.SerializeToString,
+                response_deserializer=google_dot_ads_dot_googleads_dot_v6_dot_services_dot_conversion__upload__service__pb2.UploadClickConversionsResponse.FromString,
                 )
         self.UploadCallConversions = channel.unary_unary(
                 '/google.ads.googleads.v6.services.ConversionUploadService/UploadCallConversions',
-                request_serializer=google_dot_ads_dot_googleads__v6_dot_proto_dot_services_dot_conversion__upload__service__pb2.UploadCallConversionsRequest.SerializeToString,
-                response_deserializer=google_dot_ads_dot_googleads__v6_dot_proto_dot_services_dot_conversion__upload__service__pb2.UploadCallConversionsResponse.FromString,
+                request_serializer=google_dot_ads_dot_googleads_dot_v6_dot_services_dot_conversion__upload__service__pb2.UploadCallConversionsRequest.SerializeToString,
+                response_deserializer=google_dot_ads_dot_googleads_dot_v6_dot_services_dot_conversion__upload__service__pb2.UploadCallConversionsResponse.FromString,
                 )
 
 
@@ -50,13 +50,13 @@ def add_ConversionUploadServiceServicer_to_server(servicer, server):
     rpc_method_handlers = {
             'UploadClickConversions': grpc.unary_unary_rpc_method_handler(
                     servicer.UploadClickConversions,
-                    request_deserializer=google_dot_ads_dot_googleads__v6_dot_proto_dot_services_dot_conversion__upload__service__pb2.UploadClickConversionsRequest.FromString,
-                    response_serializer=google_dot_ads_dot_googleads__v6_dot_proto_dot_services_dot_conversion__upload__service__pb2.UploadClickConversionsResponse.SerializeToString,
+                    request_deserializer=google_dot_ads_dot_googleads_dot_v6_dot_services_dot_conversion__upload__service__pb2.UploadClickConversionsRequest.FromString,
+                    response_serializer=google_dot_ads_dot_googleads_dot_v6_dot_services_dot_conversion__upload__service__pb2.UploadClickConversionsResponse.SerializeToString,
             ),
             'UploadCallConversions': grpc.unary_unary_rpc_method_handler(
                     servicer.UploadCallConversions,
-                    request_deserializer=google_dot_ads_dot_googleads__v6_dot_proto_dot_services_dot_conversion__upload__service__pb2.UploadCallConversionsRequest.FromString,
-                    response_serializer=google_dot_ads_dot_googleads__v6_dot_proto_dot_services_dot_conversion__upload__service__pb2.UploadCallConversionsResponse.SerializeToString,
+                    request_deserializer=google_dot_ads_dot_googleads_dot_v6_dot_services_dot_conversion__upload__service__pb2.UploadCallConversionsRequest.FromString,
+                    response_serializer=google_dot_ads_dot_googleads_dot_v6_dot_services_dot_conversion__upload__service__pb2.UploadCallConversionsResponse.SerializeToString,
             ),
     }
     generic_handler = grpc.method_handlers_generic_handler(
@@ -75,15 +75,16 @@ class ConversionUploadService(object):
             options=(),
             channel_credentials=None,
             call_credentials=None,
+            insecure=False,
             compression=None,
             wait_for_ready=None,
             timeout=None,
             metadata=None):
         return grpc.experimental.unary_unary(request, target, '/google.ads.googleads.v6.services.ConversionUploadService/UploadClickConversions',
-            google_dot_ads_dot_googleads__v6_dot_proto_dot_services_dot_conversion__upload__service__pb2.UploadClickConversionsRequest.SerializeToString,
-            google_dot_ads_dot_googleads__v6_dot_proto_dot_services_dot_conversion__upload__service__pb2.UploadClickConversionsResponse.FromString,
+            google_dot_ads_dot_googleads_dot_v6_dot_services_dot_conversion__upload__service__pb2.UploadClickConversionsRequest.SerializeToString,
+            google_dot_ads_dot_googleads_dot_v6_dot_services_dot_conversion__upload__service__pb2.UploadClickConversionsResponse.FromString,
             options, channel_credentials,
-            call_credentials, compression, wait_for_ready, timeout, metadata)
+            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
 
     @staticmethod
     def UploadCallConversions(request,
@@ -91,12 +92,13 @@ class ConversionUploadService(object):
             options=(),
             channel_credentials=None,
             call_credentials=None,
+            insecure=False,
             compression=None,
             wait_for_ready=None,
             timeout=None,
             metadata=None):
         return grpc.experimental.unary_unary(request, target, '/google.ads.googleads.v6.services.ConversionUploadService/UploadCallConversions',
-            google_dot_ads_dot_googleads__v6_dot_proto_dot_services_dot_conversion__upload__service__pb2.UploadCallConversionsRequest.SerializeToString,
-            google_dot_ads_dot_googleads__v6_dot_proto_dot_services_dot_conversion__upload__service__pb2.UploadCallConversionsResponse.FromString,
+            google_dot_ads_dot_googleads_dot_v6_dot_services_dot_conversion__upload__service__pb2.UploadCallConversionsRequest.SerializeToString,
+            google_dot_ads_dot_googleads_dot_v6_dot_services_dot_conversion__upload__service__pb2.UploadCallConversionsResponse.FromString,
             options, channel_credentials,
-            call_credentials, compression, wait_for_ready, timeout, metadata)
+            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)

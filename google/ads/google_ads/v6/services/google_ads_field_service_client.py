@@ -192,6 +192,15 @@ class GoogleAdsFieldServiceClient(object):
         """
         Returns just the requested field.
 
+        Example:
+            >>> from google.ads import googleads_v6
+            >>>
+            >>> client = googleads_v6.GoogleAdsFieldServiceClient()
+            >>>
+            >>> resource_name = client.google_ads_field_path('[GOOGLE_ADS_FIELD]')
+            >>>
+            >>> response = client.get_google_ads_field(resource_name)
+
         Args:
             resource_name (str): Required. The resource name of the field to get.
             retry (Optional[google.api_core.retry.Retry]):  A retry object used
@@ -247,6 +256,28 @@ class GoogleAdsFieldServiceClient(object):
             metadata=None):
         """
         Returns all fields that match the search query.
+
+        Example:
+            >>> from google.ads import googleads_v6
+            >>>
+            >>> client = googleads_v6.GoogleAdsFieldServiceClient()
+            >>>
+            >>> # TODO: Initialize `query`:
+            >>> query = ''
+            >>>
+            >>> # Iterate over all results
+            >>> for element in client.search_google_ads_fields(query):
+            ...     # process element
+            ...     pass
+            >>>
+            >>>
+            >>> # Alternatively:
+            >>>
+            >>> # Iterate over results one page at a time
+            >>> for page in client.search_google_ads_fields(query).pages:
+            ...     for element in page:
+            ...         # process element
+            ...         pass
 
         Args:
             query (str): Required. The query string.

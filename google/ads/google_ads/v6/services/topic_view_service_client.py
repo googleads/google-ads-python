@@ -73,12 +73,13 @@ class TopicViewServiceClient(object):
 
 
     @classmethod
-    def topic_view_path(cls, customer, topic_view):
+    def topic_view_path(cls, customer_id, ad_group_id, criterion_id):
         """Return a fully-qualified topic_view string."""
         return google.api_core.path_template.expand(
-            'customers/{customer}/topicViews/{topic_view}',
-            customer=customer,
-            topic_view=topic_view,
+            'customers/{customer_id}/topicViews/{ad_group_id}~{criterion_id}',
+            customer_id=customer_id,
+            ad_group_id=ad_group_id,
+            criterion_id=criterion_id,
         )
 
     def __init__(self, transport=None, channel=None, credentials=None,
@@ -190,6 +191,15 @@ class TopicViewServiceClient(object):
             metadata=None):
         """
         Returns the requested topic view in full detail.
+
+        Example:
+            >>> from google.ads import googleads_v6
+            >>>
+            >>> client = googleads_v6.TopicViewServiceClient()
+            >>>
+            >>> resource_name = client.topic_view_path('[CUSTOMER_ID]', '[AD_GROUP_ID]', '[CRITERION_ID]')
+            >>>
+            >>> response = client.get_topic_view(resource_name)
 
         Args:
             resource_name (str): Required. The resource name of the topic view to fetch.

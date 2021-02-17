@@ -73,12 +73,15 @@ class AdGroupAdAssetViewServiceClient(object):
 
 
     @classmethod
-    def ad_group_ad_asset_view_path(cls, customer, ad_group_ad_asset_view):
+    def ad_group_ad_asset_view_path(cls, customer_id, ad_group_id, ad_id, asset_id, field_type):
         """Return a fully-qualified ad_group_ad_asset_view string."""
         return google.api_core.path_template.expand(
-            'customers/{customer}/adGroupAdAssetViews/{ad_group_ad_asset_view}',
-            customer=customer,
-            ad_group_ad_asset_view=ad_group_ad_asset_view,
+            'customers/{customer_id}/adGroupAdAssetViews/{ad_group_id}~{ad_id}~{asset_id}~{field_type}',
+            customer_id=customer_id,
+            ad_group_id=ad_group_id,
+            ad_id=ad_id,
+            asset_id=asset_id,
+            field_type=field_type,
         )
 
     def __init__(self, transport=None, channel=None, credentials=None,
@@ -190,6 +193,15 @@ class AdGroupAdAssetViewServiceClient(object):
             metadata=None):
         """
         Returns the requested ad group ad asset view in full detail.
+
+        Example:
+            >>> from google.ads import googleads_v6
+            >>>
+            >>> client = googleads_v6.AdGroupAdAssetViewServiceClient()
+            >>>
+            >>> resource_name = client.ad_group_ad_asset_view_path('[CUSTOMER_ID]', '[AD_GROUP_ID]', '[AD_ID]', '[ASSET_ID]', '[FIELD_TYPE]')
+            >>>
+            >>> response = client.get_ad_group_ad_asset_view(resource_name)
 
         Args:
             resource_name (str): Required. The resource name of the ad group ad asset view to fetch.

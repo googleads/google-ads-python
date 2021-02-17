@@ -187,6 +187,31 @@ class GoogleAdsServiceClient(object):
         """
         Returns all rows that match the search query.
 
+        Example:
+            >>> from google.ads import googleads_v6
+            >>>
+            >>> client = googleads_v6.GoogleAdsServiceClient()
+            >>>
+            >>> # TODO: Initialize `customer_id`:
+            >>> customer_id = ''
+            >>>
+            >>> # TODO: Initialize `query`:
+            >>> query = ''
+            >>>
+            >>> # Iterate over all results
+            >>> for element in client.search(customer_id, query):
+            ...     # process element
+            ...     pass
+            >>>
+            >>>
+            >>> # Alternatively:
+            >>>
+            >>> # Iterate over results one page at a time
+            >>> for page in client.search(customer_id, query).pages:
+            ...     for element in page:
+            ...         # process element
+            ...         pass
+
         Args:
             customer_id (str): Required. The ID of the customer being queried.
             query (str): Required. The query string.
@@ -272,6 +297,21 @@ class GoogleAdsServiceClient(object):
             metadata=None):
         """
         Returns all rows that match the search stream query.
+
+        Example:
+            >>> from google.ads import googleads_v6
+            >>>
+            >>> client = googleads_v6.GoogleAdsServiceClient()
+            >>>
+            >>> # TODO: Initialize `customer_id`:
+            >>> customer_id = ''
+            >>>
+            >>> # TODO: Initialize `query`:
+            >>> query = ''
+            >>>
+            >>> for element in client.search_stream(customer_id, query):
+            ...     # process element
+            ...     pass
 
         Args:
             customer_id (str): Required. The ID of the customer being queried.
@@ -388,6 +428,19 @@ class GoogleAdsServiceClient(object):
         call. For example, mutating 10 campaigns then 10 ad groups is like 2
         calls, while mutating 1 campaign, 1 ad group, 1 campaign, 1 ad group is
         like 4 calls.
+
+        Example:
+            >>> from google.ads import googleads_v6
+            >>>
+            >>> client = googleads_v6.GoogleAdsServiceClient()
+            >>>
+            >>> # TODO: Initialize `customer_id`:
+            >>> customer_id = ''
+            >>>
+            >>> # TODO: Initialize `mutate_operations`:
+            >>> mutate_operations = []
+            >>>
+            >>> response = client.mutate(customer_id, mutate_operations)
 
         Args:
             customer_id (str): Required. The ID of the customer whose resources are being modified.

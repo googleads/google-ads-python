@@ -73,12 +73,12 @@ class UserInterestServiceClient(object):
 
 
     @classmethod
-    def user_interest_path(cls, customer, user_interest):
+    def user_interest_path(cls, customer_id, user_interest_id):
         """Return a fully-qualified user_interest string."""
         return google.api_core.path_template.expand(
-            'customers/{customer}/userInterests/{user_interest}',
-            customer=customer,
-            user_interest=user_interest,
+            'customers/{customer_id}/userInterests/{user_interest_id}',
+            customer_id=customer_id,
+            user_interest_id=user_interest_id,
         )
 
     def __init__(self, transport=None, channel=None, credentials=None,
@@ -190,6 +190,15 @@ class UserInterestServiceClient(object):
             metadata=None):
         """
         Returns the requested user interest in full detail
+
+        Example:
+            >>> from google.ads import googleads_v6
+            >>>
+            >>> client = googleads_v6.UserInterestServiceClient()
+            >>>
+            >>> resource_name = client.user_interest_path('[CUSTOMER_ID]', '[USER_INTEREST_ID]')
+            >>>
+            >>> response = client.get_user_interest(resource_name)
 
         Args:
             resource_name (str): Required. Resource name of the UserInterest to fetch.

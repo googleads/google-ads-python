@@ -2,8 +2,8 @@
 """Client and server classes corresponding to protobuf-defined services."""
 import grpc
 
-from google.ads.google_ads.v6.proto.resources import language_constant_pb2 as google_dot_ads_dot_googleads__v6_dot_proto_dot_resources_dot_language__constant__pb2
-from google.ads.google_ads.v6.proto.services import language_constant_service_pb2 as google_dot_ads_dot_googleads__v6_dot_proto_dot_services_dot_language__constant__service__pb2
+from google.ads.google_ads.v6.proto.resources import language_constant_pb2 as google_dot_ads_dot_googleads_dot_v6_dot_resources_dot_language__constant__pb2
+from google.ads.google_ads.v6.proto.services import language_constant_service_pb2 as google_dot_ads_dot_googleads_dot_v6_dot_services_dot_language__constant__service__pb2
 
 
 class LanguageConstantServiceStub(object):
@@ -20,8 +20,8 @@ class LanguageConstantServiceStub(object):
         """
         self.GetLanguageConstant = channel.unary_unary(
                 '/google.ads.googleads.v6.services.LanguageConstantService/GetLanguageConstant',
-                request_serializer=google_dot_ads_dot_googleads__v6_dot_proto_dot_services_dot_language__constant__service__pb2.GetLanguageConstantRequest.SerializeToString,
-                response_deserializer=google_dot_ads_dot_googleads__v6_dot_proto_dot_resources_dot_language__constant__pb2.LanguageConstant.FromString,
+                request_serializer=google_dot_ads_dot_googleads_dot_v6_dot_services_dot_language__constant__service__pb2.GetLanguageConstantRequest.SerializeToString,
+                response_deserializer=google_dot_ads_dot_googleads_dot_v6_dot_resources_dot_language__constant__pb2.LanguageConstant.FromString,
                 )
 
 
@@ -43,8 +43,8 @@ def add_LanguageConstantServiceServicer_to_server(servicer, server):
     rpc_method_handlers = {
             'GetLanguageConstant': grpc.unary_unary_rpc_method_handler(
                     servicer.GetLanguageConstant,
-                    request_deserializer=google_dot_ads_dot_googleads__v6_dot_proto_dot_services_dot_language__constant__service__pb2.GetLanguageConstantRequest.FromString,
-                    response_serializer=google_dot_ads_dot_googleads__v6_dot_proto_dot_resources_dot_language__constant__pb2.LanguageConstant.SerializeToString,
+                    request_deserializer=google_dot_ads_dot_googleads_dot_v6_dot_services_dot_language__constant__service__pb2.GetLanguageConstantRequest.FromString,
+                    response_serializer=google_dot_ads_dot_googleads_dot_v6_dot_resources_dot_language__constant__pb2.LanguageConstant.SerializeToString,
             ),
     }
     generic_handler = grpc.method_handlers_generic_handler(
@@ -65,12 +65,13 @@ class LanguageConstantService(object):
             options=(),
             channel_credentials=None,
             call_credentials=None,
+            insecure=False,
             compression=None,
             wait_for_ready=None,
             timeout=None,
             metadata=None):
         return grpc.experimental.unary_unary(request, target, '/google.ads.googleads.v6.services.LanguageConstantService/GetLanguageConstant',
-            google_dot_ads_dot_googleads__v6_dot_proto_dot_services_dot_language__constant__service__pb2.GetLanguageConstantRequest.SerializeToString,
-            google_dot_ads_dot_googleads__v6_dot_proto_dot_resources_dot_language__constant__pb2.LanguageConstant.FromString,
+            google_dot_ads_dot_googleads_dot_v6_dot_services_dot_language__constant__service__pb2.GetLanguageConstantRequest.SerializeToString,
+            google_dot_ads_dot_googleads_dot_v6_dot_resources_dot_language__constant__pb2.LanguageConstant.FromString,
             options, channel_credentials,
-            call_credentials, compression, wait_for_ready, timeout, metadata)
+            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)

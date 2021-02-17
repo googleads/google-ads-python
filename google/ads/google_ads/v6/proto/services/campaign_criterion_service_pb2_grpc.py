@@ -2,8 +2,8 @@
 """Client and server classes corresponding to protobuf-defined services."""
 import grpc
 
-from google.ads.google_ads.v6.proto.resources import campaign_criterion_pb2 as google_dot_ads_dot_googleads__v6_dot_proto_dot_resources_dot_campaign__criterion__pb2
-from google.ads.google_ads.v6.proto.services import campaign_criterion_service_pb2 as google_dot_ads_dot_googleads__v6_dot_proto_dot_services_dot_campaign__criterion__service__pb2
+from google.ads.google_ads.v6.proto.resources import campaign_criterion_pb2 as google_dot_ads_dot_googleads_dot_v6_dot_resources_dot_campaign__criterion__pb2
+from google.ads.google_ads.v6.proto.services import campaign_criterion_service_pb2 as google_dot_ads_dot_googleads_dot_v6_dot_services_dot_campaign__criterion__service__pb2
 
 
 class CampaignCriterionServiceStub(object):
@@ -20,13 +20,13 @@ class CampaignCriterionServiceStub(object):
         """
         self.GetCampaignCriterion = channel.unary_unary(
                 '/google.ads.googleads.v6.services.CampaignCriterionService/GetCampaignCriterion',
-                request_serializer=google_dot_ads_dot_googleads__v6_dot_proto_dot_services_dot_campaign__criterion__service__pb2.GetCampaignCriterionRequest.SerializeToString,
-                response_deserializer=google_dot_ads_dot_googleads__v6_dot_proto_dot_resources_dot_campaign__criterion__pb2.CampaignCriterion.FromString,
+                request_serializer=google_dot_ads_dot_googleads_dot_v6_dot_services_dot_campaign__criterion__service__pb2.GetCampaignCriterionRequest.SerializeToString,
+                response_deserializer=google_dot_ads_dot_googleads_dot_v6_dot_resources_dot_campaign__criterion__pb2.CampaignCriterion.FromString,
                 )
         self.MutateCampaignCriteria = channel.unary_unary(
                 '/google.ads.googleads.v6.services.CampaignCriterionService/MutateCampaignCriteria',
-                request_serializer=google_dot_ads_dot_googleads__v6_dot_proto_dot_services_dot_campaign__criterion__service__pb2.MutateCampaignCriteriaRequest.SerializeToString,
-                response_deserializer=google_dot_ads_dot_googleads__v6_dot_proto_dot_services_dot_campaign__criterion__service__pb2.MutateCampaignCriteriaResponse.FromString,
+                request_serializer=google_dot_ads_dot_googleads_dot_v6_dot_services_dot_campaign__criterion__service__pb2.MutateCampaignCriteriaRequest.SerializeToString,
+                response_deserializer=google_dot_ads_dot_googleads_dot_v6_dot_services_dot_campaign__criterion__service__pb2.MutateCampaignCriteriaResponse.FromString,
                 )
 
 
@@ -55,13 +55,13 @@ def add_CampaignCriterionServiceServicer_to_server(servicer, server):
     rpc_method_handlers = {
             'GetCampaignCriterion': grpc.unary_unary_rpc_method_handler(
                     servicer.GetCampaignCriterion,
-                    request_deserializer=google_dot_ads_dot_googleads__v6_dot_proto_dot_services_dot_campaign__criterion__service__pb2.GetCampaignCriterionRequest.FromString,
-                    response_serializer=google_dot_ads_dot_googleads__v6_dot_proto_dot_resources_dot_campaign__criterion__pb2.CampaignCriterion.SerializeToString,
+                    request_deserializer=google_dot_ads_dot_googleads_dot_v6_dot_services_dot_campaign__criterion__service__pb2.GetCampaignCriterionRequest.FromString,
+                    response_serializer=google_dot_ads_dot_googleads_dot_v6_dot_resources_dot_campaign__criterion__pb2.CampaignCriterion.SerializeToString,
             ),
             'MutateCampaignCriteria': grpc.unary_unary_rpc_method_handler(
                     servicer.MutateCampaignCriteria,
-                    request_deserializer=google_dot_ads_dot_googleads__v6_dot_proto_dot_services_dot_campaign__criterion__service__pb2.MutateCampaignCriteriaRequest.FromString,
-                    response_serializer=google_dot_ads_dot_googleads__v6_dot_proto_dot_services_dot_campaign__criterion__service__pb2.MutateCampaignCriteriaResponse.SerializeToString,
+                    request_deserializer=google_dot_ads_dot_googleads_dot_v6_dot_services_dot_campaign__criterion__service__pb2.MutateCampaignCriteriaRequest.FromString,
+                    response_serializer=google_dot_ads_dot_googleads_dot_v6_dot_services_dot_campaign__criterion__service__pb2.MutateCampaignCriteriaResponse.SerializeToString,
             ),
     }
     generic_handler = grpc.method_handlers_generic_handler(
@@ -82,15 +82,16 @@ class CampaignCriterionService(object):
             options=(),
             channel_credentials=None,
             call_credentials=None,
+            insecure=False,
             compression=None,
             wait_for_ready=None,
             timeout=None,
             metadata=None):
         return grpc.experimental.unary_unary(request, target, '/google.ads.googleads.v6.services.CampaignCriterionService/GetCampaignCriterion',
-            google_dot_ads_dot_googleads__v6_dot_proto_dot_services_dot_campaign__criterion__service__pb2.GetCampaignCriterionRequest.SerializeToString,
-            google_dot_ads_dot_googleads__v6_dot_proto_dot_resources_dot_campaign__criterion__pb2.CampaignCriterion.FromString,
+            google_dot_ads_dot_googleads_dot_v6_dot_services_dot_campaign__criterion__service__pb2.GetCampaignCriterionRequest.SerializeToString,
+            google_dot_ads_dot_googleads_dot_v6_dot_resources_dot_campaign__criterion__pb2.CampaignCriterion.FromString,
             options, channel_credentials,
-            call_credentials, compression, wait_for_ready, timeout, metadata)
+            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
 
     @staticmethod
     def MutateCampaignCriteria(request,
@@ -98,12 +99,13 @@ class CampaignCriterionService(object):
             options=(),
             channel_credentials=None,
             call_credentials=None,
+            insecure=False,
             compression=None,
             wait_for_ready=None,
             timeout=None,
             metadata=None):
         return grpc.experimental.unary_unary(request, target, '/google.ads.googleads.v6.services.CampaignCriterionService/MutateCampaignCriteria',
-            google_dot_ads_dot_googleads__v6_dot_proto_dot_services_dot_campaign__criterion__service__pb2.MutateCampaignCriteriaRequest.SerializeToString,
-            google_dot_ads_dot_googleads__v6_dot_proto_dot_services_dot_campaign__criterion__service__pb2.MutateCampaignCriteriaResponse.FromString,
+            google_dot_ads_dot_googleads_dot_v6_dot_services_dot_campaign__criterion__service__pb2.MutateCampaignCriteriaRequest.SerializeToString,
+            google_dot_ads_dot_googleads_dot_v6_dot_services_dot_campaign__criterion__service__pb2.MutateCampaignCriteriaResponse.FromString,
             options, channel_credentials,
-            call_credentials, compression, wait_for_ready, timeout, metadata)
+            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)

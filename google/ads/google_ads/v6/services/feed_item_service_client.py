@@ -73,12 +73,13 @@ class FeedItemServiceClient(object):
 
 
     @classmethod
-    def feed_item_path(cls, customer, feed_item):
+    def feed_item_path(cls, customer_id, feed_id, feed_item_id):
         """Return a fully-qualified feed_item string."""
         return google.api_core.path_template.expand(
-            'customers/{customer}/feedItems/{feed_item}',
-            customer=customer,
-            feed_item=feed_item,
+            'customers/{customer_id}/feedItems/{feed_id}~{feed_item_id}',
+            customer_id=customer_id,
+            feed_id=feed_id,
+            feed_item_id=feed_item_id,
         )
 
     def __init__(self, transport=None, channel=None, credentials=None,
@@ -191,6 +192,15 @@ class FeedItemServiceClient(object):
         """
         Returns the requested feed item in full detail.
 
+        Example:
+            >>> from google.ads import googleads_v6
+            >>>
+            >>> client = googleads_v6.FeedItemServiceClient()
+            >>>
+            >>> resource_name = client.feed_item_path('[CUSTOMER_ID]', '[FEED_ID]', '[FEED_ITEM_ID]')
+            >>>
+            >>> response = client.get_feed_item(resource_name)
+
         Args:
             resource_name (str): Required. The resource name of the feed item to fetch.
             retry (Optional[google.api_core.retry.Retry]):  A retry object used
@@ -250,6 +260,19 @@ class FeedItemServiceClient(object):
         """
         Creates, updates, or removes feed items. Operation statuses are
         returned.
+
+        Example:
+            >>> from google.ads import googleads_v6
+            >>>
+            >>> client = googleads_v6.FeedItemServiceClient()
+            >>>
+            >>> # TODO: Initialize `customer_id`:
+            >>> customer_id = ''
+            >>>
+            >>> # TODO: Initialize `operations`:
+            >>> operations = []
+            >>>
+            >>> response = client.mutate_feed_items(customer_id, operations)
 
         Args:
             customer_id (str): Required. The ID of the customer whose feed items are being modified.

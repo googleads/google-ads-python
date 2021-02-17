@@ -76,12 +76,12 @@ class MerchantCenterLinkServiceClient(object):
 
 
     @classmethod
-    def merchant_center_link_path(cls, customer, merchant_center_link):
+    def merchant_center_link_path(cls, customer_id, merchant_center_id):
         """Return a fully-qualified merchant_center_link string."""
         return google.api_core.path_template.expand(
-            'customers/{customer}/merchantCenterLinks/{merchant_center_link}',
-            customer=customer,
-            merchant_center_link=merchant_center_link,
+            'customers/{customer_id}/merchantCenterLinks/{merchant_center_id}',
+            customer_id=customer_id,
+            merchant_center_id=merchant_center_id,
         )
 
     def __init__(self, transport=None, channel=None, credentials=None,
@@ -194,6 +194,16 @@ class MerchantCenterLinkServiceClient(object):
         """
         Returns Merchant Center links available for this customer.
 
+        Example:
+            >>> from google.ads import googleads_v6
+            >>>
+            >>> client = googleads_v6.MerchantCenterLinkServiceClient()
+            >>>
+            >>> # TODO: Initialize `customer_id`:
+            >>> customer_id = ''
+            >>>
+            >>> response = client.list_merchant_center_links(customer_id)
+
         Args:
             customer_id (str): Required. The ID of the customer onto which to apply the Merchant Center link list
                 operation.
@@ -250,6 +260,15 @@ class MerchantCenterLinkServiceClient(object):
         """
         Returns the Merchant Center link in full detail.
 
+        Example:
+            >>> from google.ads import googleads_v6
+            >>>
+            >>> client = googleads_v6.MerchantCenterLinkServiceClient()
+            >>>
+            >>> resource_name = client.merchant_center_link_path('[CUSTOMER_ID]', '[MERCHANT_CENTER_ID]')
+            >>>
+            >>> response = client.get_merchant_center_link(resource_name)
+
         Args:
             resource_name (str): Required. Resource name of the Merchant Center link.
             retry (Optional[google.api_core.retry.Retry]):  A retry object used
@@ -305,6 +324,19 @@ class MerchantCenterLinkServiceClient(object):
             metadata=None):
         """
         Updates status or removes a Merchant Center link.
+
+        Example:
+            >>> from google.ads import googleads_v6
+            >>>
+            >>> client = googleads_v6.MerchantCenterLinkServiceClient()
+            >>>
+            >>> # TODO: Initialize `customer_id`:
+            >>> customer_id = ''
+            >>>
+            >>> # TODO: Initialize `operation_`:
+            >>> operation_ = {}
+            >>>
+            >>> response = client.mutate_merchant_center_link(customer_id, operation_)
 
         Args:
             customer_id (str): Required. The ID of the customer being modified.

@@ -20,15 +20,14 @@ import sys
 
 from google.ads.google_ads.client import GoogleAdsClient
 from google.ads.google_ads.errors import GoogleAdsException
-from google.ads.google_ads.util import ResourceName
 
 
 def main(client, customer_id, ad_group_id, criterion_id):
     agc_service = client.get_service("AdGroupCriterionService", version="v6")
     agc_operation = client.get_type("AdGroupCriterionOperation", version="v6")
 
-    resource_name = agc_service.ad_group_criteria_path(
-        customer_id, ResourceName.format_composite(ad_group_id, criterion_id)
+    resource_name = agc_service.ad_group_criterion_path(
+        customer_id, ad_group_id, criterion_id
     )
     agc_operation.remove = resource_name
 

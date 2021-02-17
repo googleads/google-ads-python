@@ -73,11 +73,11 @@ class ShoppingPerformanceViewServiceClient(object):
 
 
     @classmethod
-    def shopping_performance_view_path(cls, customer):
+    def shopping_performance_view_path(cls, customer_id):
         """Return a fully-qualified shopping_performance_view string."""
         return google.api_core.path_template.expand(
-            'customers/{customer}/shoppingPerformanceView',
-            customer=customer,
+            'customers/{customer_id}/shoppingPerformanceView',
+            customer_id=customer_id,
         )
 
     def __init__(self, transport=None, channel=None, credentials=None,
@@ -189,6 +189,15 @@ class ShoppingPerformanceViewServiceClient(object):
             metadata=None):
         """
         Returns the requested Shopping performance view in full detail.
+
+        Example:
+            >>> from google.ads import googleads_v6
+            >>>
+            >>> client = googleads_v6.ShoppingPerformanceViewServiceClient()
+            >>>
+            >>> resource_name = client.shopping_performance_view_path('[CUSTOMER_ID]')
+            >>>
+            >>> response = client.get_shopping_performance_view(resource_name)
 
         Args:
             resource_name (str): Required. The resource name of the Shopping performance view to fetch.

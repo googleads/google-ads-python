@@ -73,12 +73,14 @@ class DomainCategoryServiceClient(object):
 
 
     @classmethod
-    def domain_category_path(cls, customer, domain_category):
+    def domain_category_path(cls, customer_id, campaign_id, base64_category, language_code):
         """Return a fully-qualified domain_category string."""
         return google.api_core.path_template.expand(
-            'customers/{customer}/domainCategories/{domain_category}',
-            customer=customer,
-            domain_category=domain_category,
+            'customers/{customer_id}/domainCategories/{campaign_id}~{base64_category}~{language_code}',
+            customer_id=customer_id,
+            campaign_id=campaign_id,
+            base64_category=base64_category,
+            language_code=language_code,
         )
 
     def __init__(self, transport=None, channel=None, credentials=None,
@@ -190,6 +192,15 @@ class DomainCategoryServiceClient(object):
             metadata=None):
         """
         Returns the requested domain category.
+
+        Example:
+            >>> from google.ads import googleads_v6
+            >>>
+            >>> client = googleads_v6.DomainCategoryServiceClient()
+            >>>
+            >>> resource_name = client.domain_category_path('[CUSTOMER_ID]', '[CAMPAIGN_ID]', '[BASE64_CATEGORY]', '[LANGUAGE_CODE]')
+            >>>
+            >>> response = client.get_domain_category(resource_name)
 
         Args:
             resource_name (str): Required. Resource name of the domain category to fetch.

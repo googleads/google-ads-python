@@ -73,11 +73,13 @@ class ProductBiddingCategoryConstantServiceClient(object):
 
 
     @classmethod
-    def product_bidding_category_constant_path(cls, product_bidding_category_constant):
+    def product_bidding_category_constant_path(cls, country_code, level, id_):
         """Return a fully-qualified product_bidding_category_constant string."""
         return google.api_core.path_template.expand(
-            'productBiddingCategoryConstants/{product_bidding_category_constant}',
-            product_bidding_category_constant=product_bidding_category_constant,
+            'productBiddingCategoryConstants/{country_code}~{level}~{id}',
+            country_code=country_code,
+            level=level,
+            id=id_,
         )
 
     def __init__(self, transport=None, channel=None, credentials=None,
@@ -189,6 +191,15 @@ class ProductBiddingCategoryConstantServiceClient(object):
             metadata=None):
         """
         Returns the requested Product Bidding Category in full detail.
+
+        Example:
+            >>> from google.ads import googleads_v6
+            >>>
+            >>> client = googleads_v6.ProductBiddingCategoryConstantServiceClient()
+            >>>
+            >>> resource_name = client.product_bidding_category_constant_path('[COUNTRY_CODE]', '[LEVEL]', '[ID]')
+            >>>
+            >>> response = client.get_product_bidding_category_constant(resource_name)
 
         Args:
             resource_name (str): Required. Resource name of the Product Bidding Category to fetch.

@@ -2,8 +2,8 @@
 """Client and server classes corresponding to protobuf-defined services."""
 import grpc
 
-from google.ads.google_ads.v6.proto.resources import income_range_view_pb2 as google_dot_ads_dot_googleads__v6_dot_proto_dot_resources_dot_income__range__view__pb2
-from google.ads.google_ads.v6.proto.services import income_range_view_service_pb2 as google_dot_ads_dot_googleads__v6_dot_proto_dot_services_dot_income__range__view__service__pb2
+from google.ads.google_ads.v6.proto.resources import income_range_view_pb2 as google_dot_ads_dot_googleads_dot_v6_dot_resources_dot_income__range__view__pb2
+from google.ads.google_ads.v6.proto.services import income_range_view_service_pb2 as google_dot_ads_dot_googleads_dot_v6_dot_services_dot_income__range__view__service__pb2
 
 
 class IncomeRangeViewServiceStub(object):
@@ -20,8 +20,8 @@ class IncomeRangeViewServiceStub(object):
         """
         self.GetIncomeRangeView = channel.unary_unary(
                 '/google.ads.googleads.v6.services.IncomeRangeViewService/GetIncomeRangeView',
-                request_serializer=google_dot_ads_dot_googleads__v6_dot_proto_dot_services_dot_income__range__view__service__pb2.GetIncomeRangeViewRequest.SerializeToString,
-                response_deserializer=google_dot_ads_dot_googleads__v6_dot_proto_dot_resources_dot_income__range__view__pb2.IncomeRangeView.FromString,
+                request_serializer=google_dot_ads_dot_googleads_dot_v6_dot_services_dot_income__range__view__service__pb2.GetIncomeRangeViewRequest.SerializeToString,
+                response_deserializer=google_dot_ads_dot_googleads_dot_v6_dot_resources_dot_income__range__view__pb2.IncomeRangeView.FromString,
                 )
 
 
@@ -43,8 +43,8 @@ def add_IncomeRangeViewServiceServicer_to_server(servicer, server):
     rpc_method_handlers = {
             'GetIncomeRangeView': grpc.unary_unary_rpc_method_handler(
                     servicer.GetIncomeRangeView,
-                    request_deserializer=google_dot_ads_dot_googleads__v6_dot_proto_dot_services_dot_income__range__view__service__pb2.GetIncomeRangeViewRequest.FromString,
-                    response_serializer=google_dot_ads_dot_googleads__v6_dot_proto_dot_resources_dot_income__range__view__pb2.IncomeRangeView.SerializeToString,
+                    request_deserializer=google_dot_ads_dot_googleads_dot_v6_dot_services_dot_income__range__view__service__pb2.GetIncomeRangeViewRequest.FromString,
+                    response_serializer=google_dot_ads_dot_googleads_dot_v6_dot_resources_dot_income__range__view__pb2.IncomeRangeView.SerializeToString,
             ),
     }
     generic_handler = grpc.method_handlers_generic_handler(
@@ -65,12 +65,13 @@ class IncomeRangeViewService(object):
             options=(),
             channel_credentials=None,
             call_credentials=None,
+            insecure=False,
             compression=None,
             wait_for_ready=None,
             timeout=None,
             metadata=None):
         return grpc.experimental.unary_unary(request, target, '/google.ads.googleads.v6.services.IncomeRangeViewService/GetIncomeRangeView',
-            google_dot_ads_dot_googleads__v6_dot_proto_dot_services_dot_income__range__view__service__pb2.GetIncomeRangeViewRequest.SerializeToString,
-            google_dot_ads_dot_googleads__v6_dot_proto_dot_resources_dot_income__range__view__pb2.IncomeRangeView.FromString,
+            google_dot_ads_dot_googleads_dot_v6_dot_services_dot_income__range__view__service__pb2.GetIncomeRangeViewRequest.SerializeToString,
+            google_dot_ads_dot_googleads_dot_v6_dot_resources_dot_income__range__view__pb2.IncomeRangeView.FromString,
             options, channel_credentials,
-            call_credentials, compression, wait_for_ready, timeout, metadata)
+            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)

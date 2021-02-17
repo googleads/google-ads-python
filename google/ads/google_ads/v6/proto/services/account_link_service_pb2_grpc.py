@@ -2,8 +2,8 @@
 """Client and server classes corresponding to protobuf-defined services."""
 import grpc
 
-from google.ads.google_ads.v6.proto.resources import account_link_pb2 as google_dot_ads_dot_googleads__v6_dot_proto_dot_resources_dot_account__link__pb2
-from google.ads.google_ads.v6.proto.services import account_link_service_pb2 as google_dot_ads_dot_googleads__v6_dot_proto_dot_services_dot_account__link__service__pb2
+from google.ads.google_ads.v6.proto.resources import account_link_pb2 as google_dot_ads_dot_googleads_dot_v6_dot_resources_dot_account__link__pb2
+from google.ads.google_ads.v6.proto.services import account_link_service_pb2 as google_dot_ads_dot_googleads_dot_v6_dot_services_dot_account__link__service__pb2
 
 
 class AccountLinkServiceStub(object):
@@ -19,18 +19,18 @@ class AccountLinkServiceStub(object):
         """
         self.GetAccountLink = channel.unary_unary(
                 '/google.ads.googleads.v6.services.AccountLinkService/GetAccountLink',
-                request_serializer=google_dot_ads_dot_googleads__v6_dot_proto_dot_services_dot_account__link__service__pb2.GetAccountLinkRequest.SerializeToString,
-                response_deserializer=google_dot_ads_dot_googleads__v6_dot_proto_dot_resources_dot_account__link__pb2.AccountLink.FromString,
+                request_serializer=google_dot_ads_dot_googleads_dot_v6_dot_services_dot_account__link__service__pb2.GetAccountLinkRequest.SerializeToString,
+                response_deserializer=google_dot_ads_dot_googleads_dot_v6_dot_resources_dot_account__link__pb2.AccountLink.FromString,
                 )
         self.CreateAccountLink = channel.unary_unary(
                 '/google.ads.googleads.v6.services.AccountLinkService/CreateAccountLink',
-                request_serializer=google_dot_ads_dot_googleads__v6_dot_proto_dot_services_dot_account__link__service__pb2.CreateAccountLinkRequest.SerializeToString,
-                response_deserializer=google_dot_ads_dot_googleads__v6_dot_proto_dot_services_dot_account__link__service__pb2.CreateAccountLinkResponse.FromString,
+                request_serializer=google_dot_ads_dot_googleads_dot_v6_dot_services_dot_account__link__service__pb2.CreateAccountLinkRequest.SerializeToString,
+                response_deserializer=google_dot_ads_dot_googleads_dot_v6_dot_services_dot_account__link__service__pb2.CreateAccountLinkResponse.FromString,
                 )
         self.MutateAccountLink = channel.unary_unary(
                 '/google.ads.googleads.v6.services.AccountLinkService/MutateAccountLink',
-                request_serializer=google_dot_ads_dot_googleads__v6_dot_proto_dot_services_dot_account__link__service__pb2.MutateAccountLinkRequest.SerializeToString,
-                response_deserializer=google_dot_ads_dot_googleads__v6_dot_proto_dot_services_dot_account__link__service__pb2.MutateAccountLinkResponse.FromString,
+                request_serializer=google_dot_ads_dot_googleads_dot_v6_dot_services_dot_account__link__service__pb2.MutateAccountLinkRequest.SerializeToString,
+                response_deserializer=google_dot_ads_dot_googleads_dot_v6_dot_services_dot_account__link__service__pb2.MutateAccountLinkResponse.FromString,
                 )
 
 
@@ -68,18 +68,18 @@ def add_AccountLinkServiceServicer_to_server(servicer, server):
     rpc_method_handlers = {
             'GetAccountLink': grpc.unary_unary_rpc_method_handler(
                     servicer.GetAccountLink,
-                    request_deserializer=google_dot_ads_dot_googleads__v6_dot_proto_dot_services_dot_account__link__service__pb2.GetAccountLinkRequest.FromString,
-                    response_serializer=google_dot_ads_dot_googleads__v6_dot_proto_dot_resources_dot_account__link__pb2.AccountLink.SerializeToString,
+                    request_deserializer=google_dot_ads_dot_googleads_dot_v6_dot_services_dot_account__link__service__pb2.GetAccountLinkRequest.FromString,
+                    response_serializer=google_dot_ads_dot_googleads_dot_v6_dot_resources_dot_account__link__pb2.AccountLink.SerializeToString,
             ),
             'CreateAccountLink': grpc.unary_unary_rpc_method_handler(
                     servicer.CreateAccountLink,
-                    request_deserializer=google_dot_ads_dot_googleads__v6_dot_proto_dot_services_dot_account__link__service__pb2.CreateAccountLinkRequest.FromString,
-                    response_serializer=google_dot_ads_dot_googleads__v6_dot_proto_dot_services_dot_account__link__service__pb2.CreateAccountLinkResponse.SerializeToString,
+                    request_deserializer=google_dot_ads_dot_googleads_dot_v6_dot_services_dot_account__link__service__pb2.CreateAccountLinkRequest.FromString,
+                    response_serializer=google_dot_ads_dot_googleads_dot_v6_dot_services_dot_account__link__service__pb2.CreateAccountLinkResponse.SerializeToString,
             ),
             'MutateAccountLink': grpc.unary_unary_rpc_method_handler(
                     servicer.MutateAccountLink,
-                    request_deserializer=google_dot_ads_dot_googleads__v6_dot_proto_dot_services_dot_account__link__service__pb2.MutateAccountLinkRequest.FromString,
-                    response_serializer=google_dot_ads_dot_googleads__v6_dot_proto_dot_services_dot_account__link__service__pb2.MutateAccountLinkResponse.SerializeToString,
+                    request_deserializer=google_dot_ads_dot_googleads_dot_v6_dot_services_dot_account__link__service__pb2.MutateAccountLinkRequest.FromString,
+                    response_serializer=google_dot_ads_dot_googleads_dot_v6_dot_services_dot_account__link__service__pb2.MutateAccountLinkResponse.SerializeToString,
             ),
     }
     generic_handler = grpc.method_handlers_generic_handler(
@@ -99,15 +99,16 @@ class AccountLinkService(object):
             options=(),
             channel_credentials=None,
             call_credentials=None,
+            insecure=False,
             compression=None,
             wait_for_ready=None,
             timeout=None,
             metadata=None):
         return grpc.experimental.unary_unary(request, target, '/google.ads.googleads.v6.services.AccountLinkService/GetAccountLink',
-            google_dot_ads_dot_googleads__v6_dot_proto_dot_services_dot_account__link__service__pb2.GetAccountLinkRequest.SerializeToString,
-            google_dot_ads_dot_googleads__v6_dot_proto_dot_resources_dot_account__link__pb2.AccountLink.FromString,
+            google_dot_ads_dot_googleads_dot_v6_dot_services_dot_account__link__service__pb2.GetAccountLinkRequest.SerializeToString,
+            google_dot_ads_dot_googleads_dot_v6_dot_resources_dot_account__link__pb2.AccountLink.FromString,
             options, channel_credentials,
-            call_credentials, compression, wait_for_ready, timeout, metadata)
+            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
 
     @staticmethod
     def CreateAccountLink(request,
@@ -115,15 +116,16 @@ class AccountLinkService(object):
             options=(),
             channel_credentials=None,
             call_credentials=None,
+            insecure=False,
             compression=None,
             wait_for_ready=None,
             timeout=None,
             metadata=None):
         return grpc.experimental.unary_unary(request, target, '/google.ads.googleads.v6.services.AccountLinkService/CreateAccountLink',
-            google_dot_ads_dot_googleads__v6_dot_proto_dot_services_dot_account__link__service__pb2.CreateAccountLinkRequest.SerializeToString,
-            google_dot_ads_dot_googleads__v6_dot_proto_dot_services_dot_account__link__service__pb2.CreateAccountLinkResponse.FromString,
+            google_dot_ads_dot_googleads_dot_v6_dot_services_dot_account__link__service__pb2.CreateAccountLinkRequest.SerializeToString,
+            google_dot_ads_dot_googleads_dot_v6_dot_services_dot_account__link__service__pb2.CreateAccountLinkResponse.FromString,
             options, channel_credentials,
-            call_credentials, compression, wait_for_ready, timeout, metadata)
+            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
 
     @staticmethod
     def MutateAccountLink(request,
@@ -131,12 +133,13 @@ class AccountLinkService(object):
             options=(),
             channel_credentials=None,
             call_credentials=None,
+            insecure=False,
             compression=None,
             wait_for_ready=None,
             timeout=None,
             metadata=None):
         return grpc.experimental.unary_unary(request, target, '/google.ads.googleads.v6.services.AccountLinkService/MutateAccountLink',
-            google_dot_ads_dot_googleads__v6_dot_proto_dot_services_dot_account__link__service__pb2.MutateAccountLinkRequest.SerializeToString,
-            google_dot_ads_dot_googleads__v6_dot_proto_dot_services_dot_account__link__service__pb2.MutateAccountLinkResponse.FromString,
+            google_dot_ads_dot_googleads_dot_v6_dot_services_dot_account__link__service__pb2.MutateAccountLinkRequest.SerializeToString,
+            google_dot_ads_dot_googleads_dot_v6_dot_services_dot_account__link__service__pb2.MutateAccountLinkResponse.FromString,
             options, channel_credentials,
-            call_credentials, compression, wait_for_ready, timeout, metadata)
+            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)

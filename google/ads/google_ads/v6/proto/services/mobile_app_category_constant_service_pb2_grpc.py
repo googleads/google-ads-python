@@ -2,8 +2,8 @@
 """Client and server classes corresponding to protobuf-defined services."""
 import grpc
 
-from google.ads.google_ads.v6.proto.resources import mobile_app_category_constant_pb2 as google_dot_ads_dot_googleads__v6_dot_proto_dot_resources_dot_mobile__app__category__constant__pb2
-from google.ads.google_ads.v6.proto.services import mobile_app_category_constant_service_pb2 as google_dot_ads_dot_googleads__v6_dot_proto_dot_services_dot_mobile__app__category__constant__service__pb2
+from google.ads.google_ads.v6.proto.resources import mobile_app_category_constant_pb2 as google_dot_ads_dot_googleads_dot_v6_dot_resources_dot_mobile__app__category__constant__pb2
+from google.ads.google_ads.v6.proto.services import mobile_app_category_constant_service_pb2 as google_dot_ads_dot_googleads_dot_v6_dot_services_dot_mobile__app__category__constant__service__pb2
 
 
 class MobileAppCategoryConstantServiceStub(object):
@@ -18,8 +18,8 @@ class MobileAppCategoryConstantServiceStub(object):
         """
         self.GetMobileAppCategoryConstant = channel.unary_unary(
                 '/google.ads.googleads.v6.services.MobileAppCategoryConstantService/GetMobileAppCategoryConstant',
-                request_serializer=google_dot_ads_dot_googleads__v6_dot_proto_dot_services_dot_mobile__app__category__constant__service__pb2.GetMobileAppCategoryConstantRequest.SerializeToString,
-                response_deserializer=google_dot_ads_dot_googleads__v6_dot_proto_dot_resources_dot_mobile__app__category__constant__pb2.MobileAppCategoryConstant.FromString,
+                request_serializer=google_dot_ads_dot_googleads_dot_v6_dot_services_dot_mobile__app__category__constant__service__pb2.GetMobileAppCategoryConstantRequest.SerializeToString,
+                response_deserializer=google_dot_ads_dot_googleads_dot_v6_dot_resources_dot_mobile__app__category__constant__pb2.MobileAppCategoryConstant.FromString,
                 )
 
 
@@ -39,8 +39,8 @@ def add_MobileAppCategoryConstantServiceServicer_to_server(servicer, server):
     rpc_method_handlers = {
             'GetMobileAppCategoryConstant': grpc.unary_unary_rpc_method_handler(
                     servicer.GetMobileAppCategoryConstant,
-                    request_deserializer=google_dot_ads_dot_googleads__v6_dot_proto_dot_services_dot_mobile__app__category__constant__service__pb2.GetMobileAppCategoryConstantRequest.FromString,
-                    response_serializer=google_dot_ads_dot_googleads__v6_dot_proto_dot_resources_dot_mobile__app__category__constant__pb2.MobileAppCategoryConstant.SerializeToString,
+                    request_deserializer=google_dot_ads_dot_googleads_dot_v6_dot_services_dot_mobile__app__category__constant__service__pb2.GetMobileAppCategoryConstantRequest.FromString,
+                    response_serializer=google_dot_ads_dot_googleads_dot_v6_dot_resources_dot_mobile__app__category__constant__pb2.MobileAppCategoryConstant.SerializeToString,
             ),
     }
     generic_handler = grpc.method_handlers_generic_handler(
@@ -59,12 +59,13 @@ class MobileAppCategoryConstantService(object):
             options=(),
             channel_credentials=None,
             call_credentials=None,
+            insecure=False,
             compression=None,
             wait_for_ready=None,
             timeout=None,
             metadata=None):
         return grpc.experimental.unary_unary(request, target, '/google.ads.googleads.v6.services.MobileAppCategoryConstantService/GetMobileAppCategoryConstant',
-            google_dot_ads_dot_googleads__v6_dot_proto_dot_services_dot_mobile__app__category__constant__service__pb2.GetMobileAppCategoryConstantRequest.SerializeToString,
-            google_dot_ads_dot_googleads__v6_dot_proto_dot_resources_dot_mobile__app__category__constant__pb2.MobileAppCategoryConstant.FromString,
+            google_dot_ads_dot_googleads_dot_v6_dot_services_dot_mobile__app__category__constant__service__pb2.GetMobileAppCategoryConstantRequest.SerializeToString,
+            google_dot_ads_dot_googleads_dot_v6_dot_resources_dot_mobile__app__category__constant__pb2.MobileAppCategoryConstant.FromString,
             options, channel_credentials,
-            call_credentials, compression, wait_for_ready, timeout, metadata)
+            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)

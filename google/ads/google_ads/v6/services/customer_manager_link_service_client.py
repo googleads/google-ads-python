@@ -73,12 +73,13 @@ class CustomerManagerLinkServiceClient(object):
 
 
     @classmethod
-    def customer_manager_link_path(cls, customer, customer_manager_link):
+    def customer_manager_link_path(cls, customer_id, manager_customer_id, manager_link_id):
         """Return a fully-qualified customer_manager_link string."""
         return google.api_core.path_template.expand(
-            'customers/{customer}/customerManagerLinks/{customer_manager_link}',
-            customer=customer,
-            customer_manager_link=customer_manager_link,
+            'customers/{customer_id}/customerManagerLinks/{manager_customer_id}~{manager_link_id}',
+            customer_id=customer_id,
+            manager_customer_id=manager_customer_id,
+            manager_link_id=manager_link_id,
         )
 
     def __init__(self, transport=None, channel=None, credentials=None,
@@ -191,6 +192,15 @@ class CustomerManagerLinkServiceClient(object):
         """
         Returns the requested CustomerManagerLink in full detail.
 
+        Example:
+            >>> from google.ads import googleads_v6
+            >>>
+            >>> client = googleads_v6.CustomerManagerLinkServiceClient()
+            >>>
+            >>> resource_name = client.customer_manager_link_path('[CUSTOMER_ID]', '[MANAGER_CUSTOMER_ID]', '[MANAGER_LINK_ID]')
+            >>>
+            >>> response = client.get_customer_manager_link(resource_name)
+
         Args:
             resource_name (str): Required. The resource name of the CustomerManagerLink to fetch.
             retry (Optional[google.api_core.retry.Retry]):  A retry object used
@@ -246,6 +256,19 @@ class CustomerManagerLinkServiceClient(object):
             metadata=None):
         """
         Creates or updates customer manager links. Operation statuses are returned.
+
+        Example:
+            >>> from google.ads import googleads_v6
+            >>>
+            >>> client = googleads_v6.CustomerManagerLinkServiceClient()
+            >>>
+            >>> # TODO: Initialize `customer_id`:
+            >>> customer_id = ''
+            >>>
+            >>> # TODO: Initialize `operations`:
+            >>> operations = []
+            >>>
+            >>> response = client.mutate_customer_manager_link(customer_id, operations)
 
         Args:
             customer_id (str): Required. The ID of the customer whose customer manager links are being modified.
@@ -313,14 +336,30 @@ class CustomerManagerLinkServiceClient(object):
         1. Update operation with Status INACTIVE (previous manager) and,
         2. Update operation with Status ACTIVE (new manager).
 
+        Example:
+            >>> from google.ads import googleads_v6
+            >>>
+            >>> client = googleads_v6.CustomerManagerLinkServiceClient()
+            >>>
+            >>> # TODO: Initialize `customer_id`:
+            >>> customer_id = ''
+            >>>
+            >>> # TODO: Initialize `previous_customer_manager_link`:
+            >>> previous_customer_manager_link = ''
+            >>>
+            >>> # TODO: Initialize `new_manager`:
+            >>> new_manager = ''
+            >>>
+            >>> response = client.move_manager_link(customer_id, previous_customer_manager_link, new_manager)
+
         Args:
             customer_id (str): Required. The ID of the client customer that is being moved.
             previous_customer_manager_link (str): Required. The resource name of the previous CustomerManagerLink. The
                 resource name has the form:
                 ``customers/{customer_id}/customerManagerLinks/{manager_customer_id}~{manager_link_id}``
-            new_manager (str): Required. The resource name of the new manager customer that the client
-                wants to move to. Customer resource names have the format:
-                "customers/{customer\_id}"
+            new_manager (str): Required. The resource name of the new manager customer that the
+                client wants to move to. Customer resource names have the format:
+                "customers/{customer_id}"
             retry (Optional[google.api_core.retry.Retry]):  A retry object used
                 to retry requests. If ``None`` is specified, requests will
                 be retried using a default configuration.

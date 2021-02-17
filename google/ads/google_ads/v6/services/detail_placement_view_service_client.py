@@ -73,12 +73,13 @@ class DetailPlacementViewServiceClient(object):
 
 
     @classmethod
-    def detail_placement_view_path(cls, customer, detail_placement_view):
+    def detail_placement_view_path(cls, customer_id, ad_group_id, base64_placement):
         """Return a fully-qualified detail_placement_view string."""
         return google.api_core.path_template.expand(
-            'customers/{customer}/detailPlacementViews/{detail_placement_view}',
-            customer=customer,
-            detail_placement_view=detail_placement_view,
+            'customers/{customer_id}/detailPlacementViews/{ad_group_id}~{base64_placement}',
+            customer_id=customer_id,
+            ad_group_id=ad_group_id,
+            base64_placement=base64_placement,
         )
 
     def __init__(self, transport=None, channel=None, credentials=None,
@@ -190,6 +191,15 @@ class DetailPlacementViewServiceClient(object):
             metadata=None):
         """
         Returns the requested Detail Placement view in full detail.
+
+        Example:
+            >>> from google.ads import googleads_v6
+            >>>
+            >>> client = googleads_v6.DetailPlacementViewServiceClient()
+            >>>
+            >>> resource_name = client.detail_placement_view_path('[CUSTOMER_ID]', '[AD_GROUP_ID]', '[BASE64_PLACEMENT]')
+            >>>
+            >>> response = client.get_detail_placement_view(resource_name)
 
         Args:
             resource_name (str): Required. The resource name of the Detail Placement view to fetch.

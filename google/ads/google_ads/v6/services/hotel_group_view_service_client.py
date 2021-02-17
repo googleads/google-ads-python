@@ -73,12 +73,13 @@ class HotelGroupViewServiceClient(object):
 
 
     @classmethod
-    def hotel_group_view_path(cls, customer, hotel_group_view):
+    def hotel_group_view_path(cls, customer_id, ad_group_id, criterion_id):
         """Return a fully-qualified hotel_group_view string."""
         return google.api_core.path_template.expand(
-            'customers/{customer}/hotelGroupViews/{hotel_group_view}',
-            customer=customer,
-            hotel_group_view=hotel_group_view,
+            'customers/{customer_id}/hotelGroupViews/{ad_group_id}~{criterion_id}',
+            customer_id=customer_id,
+            ad_group_id=ad_group_id,
+            criterion_id=criterion_id,
         )
 
     def __init__(self, transport=None, channel=None, credentials=None,
@@ -190,6 +191,15 @@ class HotelGroupViewServiceClient(object):
             metadata=None):
         """
         Returns the requested Hotel Group View in full detail.
+
+        Example:
+            >>> from google.ads import googleads_v6
+            >>>
+            >>> client = googleads_v6.HotelGroupViewServiceClient()
+            >>>
+            >>> resource_name = client.hotel_group_view_path('[CUSTOMER_ID]', '[AD_GROUP_ID]', '[CRITERION_ID]')
+            >>>
+            >>> response = client.get_hotel_group_view(resource_name)
 
         Args:
             resource_name (str): Required. Resource name of the Hotel Group View to fetch.

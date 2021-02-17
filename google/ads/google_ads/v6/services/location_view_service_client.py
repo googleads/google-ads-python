@@ -73,12 +73,13 @@ class LocationViewServiceClient(object):
 
 
     @classmethod
-    def location_view_path(cls, customer, location_view):
+    def location_view_path(cls, customer_id, campaign_id, criterion_id):
         """Return a fully-qualified location_view string."""
         return google.api_core.path_template.expand(
-            'customers/{customer}/locationViews/{location_view}',
-            customer=customer,
-            location_view=location_view,
+            'customers/{customer_id}/locationViews/{campaign_id}~{criterion_id}',
+            customer_id=customer_id,
+            campaign_id=campaign_id,
+            criterion_id=criterion_id,
         )
 
     def __init__(self, transport=None, channel=None, credentials=None,
@@ -190,6 +191,15 @@ class LocationViewServiceClient(object):
             metadata=None):
         """
         Returns the requested location view in full detail.
+
+        Example:
+            >>> from google.ads import googleads_v6
+            >>>
+            >>> client = googleads_v6.LocationViewServiceClient()
+            >>>
+            >>> resource_name = client.location_view_path('[CUSTOMER_ID]', '[CAMPAIGN_ID]', '[CRITERION_ID]')
+            >>>
+            >>> response = client.get_location_view(resource_name)
 
         Args:
             resource_name (str): Required. The resource name of the location view to fetch.

@@ -2,8 +2,8 @@
 """Client and server classes corresponding to protobuf-defined services."""
 import grpc
 
-from google.ads.google_ads.v6.proto.resources import customer_negative_criterion_pb2 as google_dot_ads_dot_googleads__v6_dot_proto_dot_resources_dot_customer__negative__criterion__pb2
-from google.ads.google_ads.v6.proto.services import customer_negative_criterion_service_pb2 as google_dot_ads_dot_googleads__v6_dot_proto_dot_services_dot_customer__negative__criterion__service__pb2
+from google.ads.google_ads.v6.proto.resources import customer_negative_criterion_pb2 as google_dot_ads_dot_googleads_dot_v6_dot_resources_dot_customer__negative__criterion__pb2
+from google.ads.google_ads.v6.proto.services import customer_negative_criterion_service_pb2 as google_dot_ads_dot_googleads_dot_v6_dot_services_dot_customer__negative__criterion__service__pb2
 
 
 class CustomerNegativeCriterionServiceStub(object):
@@ -20,13 +20,13 @@ class CustomerNegativeCriterionServiceStub(object):
         """
         self.GetCustomerNegativeCriterion = channel.unary_unary(
                 '/google.ads.googleads.v6.services.CustomerNegativeCriterionService/GetCustomerNegativeCriterion',
-                request_serializer=google_dot_ads_dot_googleads__v6_dot_proto_dot_services_dot_customer__negative__criterion__service__pb2.GetCustomerNegativeCriterionRequest.SerializeToString,
-                response_deserializer=google_dot_ads_dot_googleads__v6_dot_proto_dot_resources_dot_customer__negative__criterion__pb2.CustomerNegativeCriterion.FromString,
+                request_serializer=google_dot_ads_dot_googleads_dot_v6_dot_services_dot_customer__negative__criterion__service__pb2.GetCustomerNegativeCriterionRequest.SerializeToString,
+                response_deserializer=google_dot_ads_dot_googleads_dot_v6_dot_resources_dot_customer__negative__criterion__pb2.CustomerNegativeCriterion.FromString,
                 )
         self.MutateCustomerNegativeCriteria = channel.unary_unary(
                 '/google.ads.googleads.v6.services.CustomerNegativeCriterionService/MutateCustomerNegativeCriteria',
-                request_serializer=google_dot_ads_dot_googleads__v6_dot_proto_dot_services_dot_customer__negative__criterion__service__pb2.MutateCustomerNegativeCriteriaRequest.SerializeToString,
-                response_deserializer=google_dot_ads_dot_googleads__v6_dot_proto_dot_services_dot_customer__negative__criterion__service__pb2.MutateCustomerNegativeCriteriaResponse.FromString,
+                request_serializer=google_dot_ads_dot_googleads_dot_v6_dot_services_dot_customer__negative__criterion__service__pb2.MutateCustomerNegativeCriteriaRequest.SerializeToString,
+                response_deserializer=google_dot_ads_dot_googleads_dot_v6_dot_services_dot_customer__negative__criterion__service__pb2.MutateCustomerNegativeCriteriaResponse.FromString,
                 )
 
 
@@ -55,13 +55,13 @@ def add_CustomerNegativeCriterionServiceServicer_to_server(servicer, server):
     rpc_method_handlers = {
             'GetCustomerNegativeCriterion': grpc.unary_unary_rpc_method_handler(
                     servicer.GetCustomerNegativeCriterion,
-                    request_deserializer=google_dot_ads_dot_googleads__v6_dot_proto_dot_services_dot_customer__negative__criterion__service__pb2.GetCustomerNegativeCriterionRequest.FromString,
-                    response_serializer=google_dot_ads_dot_googleads__v6_dot_proto_dot_resources_dot_customer__negative__criterion__pb2.CustomerNegativeCriterion.SerializeToString,
+                    request_deserializer=google_dot_ads_dot_googleads_dot_v6_dot_services_dot_customer__negative__criterion__service__pb2.GetCustomerNegativeCriterionRequest.FromString,
+                    response_serializer=google_dot_ads_dot_googleads_dot_v6_dot_resources_dot_customer__negative__criterion__pb2.CustomerNegativeCriterion.SerializeToString,
             ),
             'MutateCustomerNegativeCriteria': grpc.unary_unary_rpc_method_handler(
                     servicer.MutateCustomerNegativeCriteria,
-                    request_deserializer=google_dot_ads_dot_googleads__v6_dot_proto_dot_services_dot_customer__negative__criterion__service__pb2.MutateCustomerNegativeCriteriaRequest.FromString,
-                    response_serializer=google_dot_ads_dot_googleads__v6_dot_proto_dot_services_dot_customer__negative__criterion__service__pb2.MutateCustomerNegativeCriteriaResponse.SerializeToString,
+                    request_deserializer=google_dot_ads_dot_googleads_dot_v6_dot_services_dot_customer__negative__criterion__service__pb2.MutateCustomerNegativeCriteriaRequest.FromString,
+                    response_serializer=google_dot_ads_dot_googleads_dot_v6_dot_services_dot_customer__negative__criterion__service__pb2.MutateCustomerNegativeCriteriaResponse.SerializeToString,
             ),
     }
     generic_handler = grpc.method_handlers_generic_handler(
@@ -82,15 +82,16 @@ class CustomerNegativeCriterionService(object):
             options=(),
             channel_credentials=None,
             call_credentials=None,
+            insecure=False,
             compression=None,
             wait_for_ready=None,
             timeout=None,
             metadata=None):
         return grpc.experimental.unary_unary(request, target, '/google.ads.googleads.v6.services.CustomerNegativeCriterionService/GetCustomerNegativeCriterion',
-            google_dot_ads_dot_googleads__v6_dot_proto_dot_services_dot_customer__negative__criterion__service__pb2.GetCustomerNegativeCriterionRequest.SerializeToString,
-            google_dot_ads_dot_googleads__v6_dot_proto_dot_resources_dot_customer__negative__criterion__pb2.CustomerNegativeCriterion.FromString,
+            google_dot_ads_dot_googleads_dot_v6_dot_services_dot_customer__negative__criterion__service__pb2.GetCustomerNegativeCriterionRequest.SerializeToString,
+            google_dot_ads_dot_googleads_dot_v6_dot_resources_dot_customer__negative__criterion__pb2.CustomerNegativeCriterion.FromString,
             options, channel_credentials,
-            call_credentials, compression, wait_for_ready, timeout, metadata)
+            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
 
     @staticmethod
     def MutateCustomerNegativeCriteria(request,
@@ -98,12 +99,13 @@ class CustomerNegativeCriterionService(object):
             options=(),
             channel_credentials=None,
             call_credentials=None,
+            insecure=False,
             compression=None,
             wait_for_ready=None,
             timeout=None,
             metadata=None):
         return grpc.experimental.unary_unary(request, target, '/google.ads.googleads.v6.services.CustomerNegativeCriterionService/MutateCustomerNegativeCriteria',
-            google_dot_ads_dot_googleads__v6_dot_proto_dot_services_dot_customer__negative__criterion__service__pb2.MutateCustomerNegativeCriteriaRequest.SerializeToString,
-            google_dot_ads_dot_googleads__v6_dot_proto_dot_services_dot_customer__negative__criterion__service__pb2.MutateCustomerNegativeCriteriaResponse.FromString,
+            google_dot_ads_dot_googleads_dot_v6_dot_services_dot_customer__negative__criterion__service__pb2.MutateCustomerNegativeCriteriaRequest.SerializeToString,
+            google_dot_ads_dot_googleads_dot_v6_dot_services_dot_customer__negative__criterion__service__pb2.MutateCustomerNegativeCriteriaResponse.FromString,
             options, channel_credentials,
-            call_credentials, compression, wait_for_ready, timeout, metadata)
+            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)

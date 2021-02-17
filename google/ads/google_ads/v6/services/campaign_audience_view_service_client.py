@@ -73,12 +73,13 @@ class CampaignAudienceViewServiceClient(object):
 
 
     @classmethod
-    def campaign_audience_view_path(cls, customer, campaign_audience_view):
+    def campaign_audience_view_path(cls, customer_id, campaign_id, criterion_id):
         """Return a fully-qualified campaign_audience_view string."""
         return google.api_core.path_template.expand(
-            'customers/{customer}/campaignAudienceViews/{campaign_audience_view}',
-            customer=customer,
-            campaign_audience_view=campaign_audience_view,
+            'customers/{customer_id}/campaignAudienceViews/{campaign_id}~{criterion_id}',
+            customer_id=customer_id,
+            campaign_id=campaign_id,
+            criterion_id=criterion_id,
         )
 
     def __init__(self, transport=None, channel=None, credentials=None,
@@ -190,6 +191,15 @@ class CampaignAudienceViewServiceClient(object):
             metadata=None):
         """
         Returns the requested campaign audience view in full detail.
+
+        Example:
+            >>> from google.ads import googleads_v6
+            >>>
+            >>> client = googleads_v6.CampaignAudienceViewServiceClient()
+            >>>
+            >>> resource_name = client.campaign_audience_view_path('[CUSTOMER_ID]', '[CAMPAIGN_ID]', '[CRITERION_ID]')
+            >>>
+            >>> response = client.get_campaign_audience_view(resource_name)
 
         Args:
             resource_name (str): Required. The resource name of the campaign audience view to fetch.

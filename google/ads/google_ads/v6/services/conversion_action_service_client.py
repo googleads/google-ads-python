@@ -73,12 +73,12 @@ class ConversionActionServiceClient(object):
 
 
     @classmethod
-    def conversion_action_path(cls, customer, conversion_action):
+    def conversion_action_path(cls, customer_id, conversion_action_id):
         """Return a fully-qualified conversion_action string."""
         return google.api_core.path_template.expand(
-            'customers/{customer}/conversionActions/{conversion_action}',
-            customer=customer,
-            conversion_action=conversion_action,
+            'customers/{customer_id}/conversionActions/{conversion_action_id}',
+            customer_id=customer_id,
+            conversion_action_id=conversion_action_id,
         )
 
     def __init__(self, transport=None, channel=None, credentials=None,
@@ -191,6 +191,15 @@ class ConversionActionServiceClient(object):
         """
         Returns the requested conversion action.
 
+        Example:
+            >>> from google.ads import googleads_v6
+            >>>
+            >>> client = googleads_v6.ConversionActionServiceClient()
+            >>>
+            >>> resource_name = client.conversion_action_path('[CUSTOMER_ID]', '[CONVERSION_ACTION_ID]')
+            >>>
+            >>> response = client.get_conversion_action(resource_name)
+
         Args:
             resource_name (str): Required. The resource name of the conversion action to fetch.
             retry (Optional[google.api_core.retry.Retry]):  A retry object used
@@ -249,6 +258,19 @@ class ConversionActionServiceClient(object):
         """
         Creates, updates or removes conversion actions. Operation statuses are
         returned.
+
+        Example:
+            >>> from google.ads import googleads_v6
+            >>>
+            >>> client = googleads_v6.ConversionActionServiceClient()
+            >>>
+            >>> # TODO: Initialize `customer_id`:
+            >>> customer_id = ''
+            >>>
+            >>> # TODO: Initialize `operations`:
+            >>> operations = []
+            >>>
+            >>> response = client.mutate_conversion_actions(customer_id, operations)
 
         Args:
             customer_id (str): Required. The ID of the customer whose conversion actions are being modified.

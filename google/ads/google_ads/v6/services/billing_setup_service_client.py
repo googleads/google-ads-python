@@ -83,12 +83,12 @@ class BillingSetupServiceClient(object):
 
 
     @classmethod
-    def billing_setup_path(cls, customer, billing_setup):
+    def billing_setup_path(cls, customer_id, billing_setup_id):
         """Return a fully-qualified billing_setup string."""
         return google.api_core.path_template.expand(
-            'customers/{customer}/billingSetups/{billing_setup}',
-            customer=customer,
-            billing_setup=billing_setup,
+            'customers/{customer_id}/billingSetups/{billing_setup_id}',
+            customer_id=customer_id,
+            billing_setup_id=billing_setup_id,
         )
 
     def __init__(self, transport=None, channel=None, credentials=None,
@@ -201,6 +201,15 @@ class BillingSetupServiceClient(object):
         """
         Returns a billing setup.
 
+        Example:
+            >>> from google.ads import googleads_v6
+            >>>
+            >>> client = googleads_v6.BillingSetupServiceClient()
+            >>>
+            >>> resource_name = client.billing_setup_path('[CUSTOMER_ID]', '[BILLING_SETUP_ID]')
+            >>>
+            >>> response = client.get_billing_setup(resource_name)
+
         Args:
             resource_name (str): Required. The resource name of the billing setup to fetch.
             retry (Optional[google.api_core.retry.Retry]):  A retry object used
@@ -256,6 +265,19 @@ class BillingSetupServiceClient(object):
             metadata=None):
         """
         Creates a billing setup, or cancels an existing billing setup.
+
+        Example:
+            >>> from google.ads import googleads_v6
+            >>>
+            >>> client = googleads_v6.BillingSetupServiceClient()
+            >>>
+            >>> # TODO: Initialize `customer_id`:
+            >>> customer_id = ''
+            >>>
+            >>> # TODO: Initialize `operation_`:
+            >>> operation_ = {}
+            >>>
+            >>> response = client.mutate_billing_setup(customer_id, operation_)
 
         Args:
             customer_id (str): Required. Id of the customer to apply the billing setup mutate operation to.

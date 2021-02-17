@@ -25,7 +25,6 @@ import sys
 
 from google.ads.google_ads.client import GoogleAdsClient
 from google.ads.google_ads.errors import GoogleAdsException
-from google.ads.google_ads.util import ResourceName
 
 
 def main(client, customer_id, feed_id, feed_item_id, feed_item_set_id):
@@ -52,16 +51,12 @@ def main(client, customer_id, feed_id, feed_item_id, feed_item_set_id):
     # customers/{customer_id}/feedItems/{feed_id}~{feed_item_id}
     feed_item_set_link.feed_item = client.get_service(
         "FeedItemService", version="v6"
-    ).feed_item_path(
-        customer_id, ResourceName.format_composite(feed_id, feed_item_id),
-    )
+    ).feed_item_path(customer_id, feed_id, feed_item_id)
     # Construct a resource name for a feed item set, which is in the
     # format: customers/{customer_id}/feedItemSets/{feed_id}~{feed_item_set_id}
     feed_item_set_link.feed_item_set = client.get_service(
         "FeedItemSetService", version="v6"
-    ).feed_item_set_path(
-        customer_id, ResourceName.format_composite(feed_id, feed_item_set_id),
-    )
+    ).feed_item_set_path(customer_id, feed_id, feed_item_set_id)
 
     # Issue a mutate request to add the feed item set link on the server.
     try:
@@ -91,8 +86,7 @@ if __name__ == "__main__":
     google_ads_client = GoogleAdsClient.load_from_storage()
 
     parser = argparse.ArgumentParser(
-        description=
-            "Links the specified feed item set to the specified feed item."
+        description="Links the specified feed item set to the specified feed item."
     )
     # The following argument(s) should be provided to run the example.
     parser.add_argument(
@@ -103,11 +97,7 @@ if __name__ == "__main__":
         help="The Google Ads customer ID.",
     )
     parser.add_argument(
-        "-f",
-        "--feed_id",
-        type=str,
-        required=True,
-        help="The feed ID.",
+        "-f", "--feed_id", type=str, required=True, help="The feed ID.",
     )
     parser.add_argument(
         "-i",

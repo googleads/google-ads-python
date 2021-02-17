@@ -2,8 +2,8 @@
 """Client and server classes corresponding to protobuf-defined services."""
 import grpc
 
-from google.ads.google_ads.v6.proto.resources import customer_client_link_pb2 as google_dot_ads_dot_googleads__v6_dot_proto_dot_resources_dot_customer__client__link__pb2
-from google.ads.google_ads.v6.proto.services import customer_client_link_service_pb2 as google_dot_ads_dot_googleads__v6_dot_proto_dot_services_dot_customer__client__link__service__pb2
+from google.ads.google_ads.v6.proto.resources import customer_client_link_pb2 as google_dot_ads_dot_googleads_dot_v6_dot_resources_dot_customer__client__link__pb2
+from google.ads.google_ads.v6.proto.services import customer_client_link_service_pb2 as google_dot_ads_dot_googleads_dot_v6_dot_services_dot_customer__client__link__service__pb2
 
 
 class CustomerClientLinkServiceStub(object):
@@ -18,13 +18,13 @@ class CustomerClientLinkServiceStub(object):
         """
         self.GetCustomerClientLink = channel.unary_unary(
                 '/google.ads.googleads.v6.services.CustomerClientLinkService/GetCustomerClientLink',
-                request_serializer=google_dot_ads_dot_googleads__v6_dot_proto_dot_services_dot_customer__client__link__service__pb2.GetCustomerClientLinkRequest.SerializeToString,
-                response_deserializer=google_dot_ads_dot_googleads__v6_dot_proto_dot_resources_dot_customer__client__link__pb2.CustomerClientLink.FromString,
+                request_serializer=google_dot_ads_dot_googleads_dot_v6_dot_services_dot_customer__client__link__service__pb2.GetCustomerClientLinkRequest.SerializeToString,
+                response_deserializer=google_dot_ads_dot_googleads_dot_v6_dot_resources_dot_customer__client__link__pb2.CustomerClientLink.FromString,
                 )
         self.MutateCustomerClientLink = channel.unary_unary(
                 '/google.ads.googleads.v6.services.CustomerClientLinkService/MutateCustomerClientLink',
-                request_serializer=google_dot_ads_dot_googleads__v6_dot_proto_dot_services_dot_customer__client__link__service__pb2.MutateCustomerClientLinkRequest.SerializeToString,
-                response_deserializer=google_dot_ads_dot_googleads__v6_dot_proto_dot_services_dot_customer__client__link__service__pb2.MutateCustomerClientLinkResponse.FromString,
+                request_serializer=google_dot_ads_dot_googleads_dot_v6_dot_services_dot_customer__client__link__service__pb2.MutateCustomerClientLinkRequest.SerializeToString,
+                response_deserializer=google_dot_ads_dot_googleads_dot_v6_dot_services_dot_customer__client__link__service__pb2.MutateCustomerClientLinkResponse.FromString,
                 )
 
 
@@ -51,13 +51,13 @@ def add_CustomerClientLinkServiceServicer_to_server(servicer, server):
     rpc_method_handlers = {
             'GetCustomerClientLink': grpc.unary_unary_rpc_method_handler(
                     servicer.GetCustomerClientLink,
-                    request_deserializer=google_dot_ads_dot_googleads__v6_dot_proto_dot_services_dot_customer__client__link__service__pb2.GetCustomerClientLinkRequest.FromString,
-                    response_serializer=google_dot_ads_dot_googleads__v6_dot_proto_dot_resources_dot_customer__client__link__pb2.CustomerClientLink.SerializeToString,
+                    request_deserializer=google_dot_ads_dot_googleads_dot_v6_dot_services_dot_customer__client__link__service__pb2.GetCustomerClientLinkRequest.FromString,
+                    response_serializer=google_dot_ads_dot_googleads_dot_v6_dot_resources_dot_customer__client__link__pb2.CustomerClientLink.SerializeToString,
             ),
             'MutateCustomerClientLink': grpc.unary_unary_rpc_method_handler(
                     servicer.MutateCustomerClientLink,
-                    request_deserializer=google_dot_ads_dot_googleads__v6_dot_proto_dot_services_dot_customer__client__link__service__pb2.MutateCustomerClientLinkRequest.FromString,
-                    response_serializer=google_dot_ads_dot_googleads__v6_dot_proto_dot_services_dot_customer__client__link__service__pb2.MutateCustomerClientLinkResponse.SerializeToString,
+                    request_deserializer=google_dot_ads_dot_googleads_dot_v6_dot_services_dot_customer__client__link__service__pb2.MutateCustomerClientLinkRequest.FromString,
+                    response_serializer=google_dot_ads_dot_googleads_dot_v6_dot_services_dot_customer__client__link__service__pb2.MutateCustomerClientLinkResponse.SerializeToString,
             ),
     }
     generic_handler = grpc.method_handlers_generic_handler(
@@ -76,15 +76,16 @@ class CustomerClientLinkService(object):
             options=(),
             channel_credentials=None,
             call_credentials=None,
+            insecure=False,
             compression=None,
             wait_for_ready=None,
             timeout=None,
             metadata=None):
         return grpc.experimental.unary_unary(request, target, '/google.ads.googleads.v6.services.CustomerClientLinkService/GetCustomerClientLink',
-            google_dot_ads_dot_googleads__v6_dot_proto_dot_services_dot_customer__client__link__service__pb2.GetCustomerClientLinkRequest.SerializeToString,
-            google_dot_ads_dot_googleads__v6_dot_proto_dot_resources_dot_customer__client__link__pb2.CustomerClientLink.FromString,
+            google_dot_ads_dot_googleads_dot_v6_dot_services_dot_customer__client__link__service__pb2.GetCustomerClientLinkRequest.SerializeToString,
+            google_dot_ads_dot_googleads_dot_v6_dot_resources_dot_customer__client__link__pb2.CustomerClientLink.FromString,
             options, channel_credentials,
-            call_credentials, compression, wait_for_ready, timeout, metadata)
+            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
 
     @staticmethod
     def MutateCustomerClientLink(request,
@@ -92,12 +93,13 @@ class CustomerClientLinkService(object):
             options=(),
             channel_credentials=None,
             call_credentials=None,
+            insecure=False,
             compression=None,
             wait_for_ready=None,
             timeout=None,
             metadata=None):
         return grpc.experimental.unary_unary(request, target, '/google.ads.googleads.v6.services.CustomerClientLinkService/MutateCustomerClientLink',
-            google_dot_ads_dot_googleads__v6_dot_proto_dot_services_dot_customer__client__link__service__pb2.MutateCustomerClientLinkRequest.SerializeToString,
-            google_dot_ads_dot_googleads__v6_dot_proto_dot_services_dot_customer__client__link__service__pb2.MutateCustomerClientLinkResponse.FromString,
+            google_dot_ads_dot_googleads_dot_v6_dot_services_dot_customer__client__link__service__pb2.MutateCustomerClientLinkRequest.SerializeToString,
+            google_dot_ads_dot_googleads_dot_v6_dot_services_dot_customer__client__link__service__pb2.MutateCustomerClientLinkResponse.FromString,
             options, channel_credentials,
-            call_credentials, compression, wait_for_ready, timeout, metadata)
+            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)

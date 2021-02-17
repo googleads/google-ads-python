@@ -2,8 +2,8 @@
 """Client and server classes corresponding to protobuf-defined services."""
 import grpc
 
-from google.ads.google_ads.v6.proto.resources import asset_pb2 as google_dot_ads_dot_googleads__v6_dot_proto_dot_resources_dot_asset__pb2
-from google.ads.google_ads.v6.proto.services import asset_service_pb2 as google_dot_ads_dot_googleads__v6_dot_proto_dot_services_dot_asset__service__pb2
+from google.ads.google_ads.v6.proto.resources import asset_pb2 as google_dot_ads_dot_googleads_dot_v6_dot_resources_dot_asset__pb2
+from google.ads.google_ads.v6.proto.services import asset_service_pb2 as google_dot_ads_dot_googleads_dot_v6_dot_services_dot_asset__service__pb2
 
 
 class AssetServiceStub(object):
@@ -22,13 +22,13 @@ class AssetServiceStub(object):
         """
         self.GetAsset = channel.unary_unary(
                 '/google.ads.googleads.v6.services.AssetService/GetAsset',
-                request_serializer=google_dot_ads_dot_googleads__v6_dot_proto_dot_services_dot_asset__service__pb2.GetAssetRequest.SerializeToString,
-                response_deserializer=google_dot_ads_dot_googleads__v6_dot_proto_dot_resources_dot_asset__pb2.Asset.FromString,
+                request_serializer=google_dot_ads_dot_googleads_dot_v6_dot_services_dot_asset__service__pb2.GetAssetRequest.SerializeToString,
+                response_deserializer=google_dot_ads_dot_googleads_dot_v6_dot_resources_dot_asset__pb2.Asset.FromString,
                 )
         self.MutateAssets = channel.unary_unary(
                 '/google.ads.googleads.v6.services.AssetService/MutateAssets',
-                request_serializer=google_dot_ads_dot_googleads__v6_dot_proto_dot_services_dot_asset__service__pb2.MutateAssetsRequest.SerializeToString,
-                response_deserializer=google_dot_ads_dot_googleads__v6_dot_proto_dot_services_dot_asset__service__pb2.MutateAssetsResponse.FromString,
+                request_serializer=google_dot_ads_dot_googleads_dot_v6_dot_services_dot_asset__service__pb2.MutateAssetsRequest.SerializeToString,
+                response_deserializer=google_dot_ads_dot_googleads_dot_v6_dot_services_dot_asset__service__pb2.MutateAssetsResponse.FromString,
                 )
 
 
@@ -59,13 +59,13 @@ def add_AssetServiceServicer_to_server(servicer, server):
     rpc_method_handlers = {
             'GetAsset': grpc.unary_unary_rpc_method_handler(
                     servicer.GetAsset,
-                    request_deserializer=google_dot_ads_dot_googleads__v6_dot_proto_dot_services_dot_asset__service__pb2.GetAssetRequest.FromString,
-                    response_serializer=google_dot_ads_dot_googleads__v6_dot_proto_dot_resources_dot_asset__pb2.Asset.SerializeToString,
+                    request_deserializer=google_dot_ads_dot_googleads_dot_v6_dot_services_dot_asset__service__pb2.GetAssetRequest.FromString,
+                    response_serializer=google_dot_ads_dot_googleads_dot_v6_dot_resources_dot_asset__pb2.Asset.SerializeToString,
             ),
             'MutateAssets': grpc.unary_unary_rpc_method_handler(
                     servicer.MutateAssets,
-                    request_deserializer=google_dot_ads_dot_googleads__v6_dot_proto_dot_services_dot_asset__service__pb2.MutateAssetsRequest.FromString,
-                    response_serializer=google_dot_ads_dot_googleads__v6_dot_proto_dot_services_dot_asset__service__pb2.MutateAssetsResponse.SerializeToString,
+                    request_deserializer=google_dot_ads_dot_googleads_dot_v6_dot_services_dot_asset__service__pb2.MutateAssetsRequest.FromString,
+                    response_serializer=google_dot_ads_dot_googleads_dot_v6_dot_services_dot_asset__service__pb2.MutateAssetsResponse.SerializeToString,
             ),
     }
     generic_handler = grpc.method_handlers_generic_handler(
@@ -88,15 +88,16 @@ class AssetService(object):
             options=(),
             channel_credentials=None,
             call_credentials=None,
+            insecure=False,
             compression=None,
             wait_for_ready=None,
             timeout=None,
             metadata=None):
         return grpc.experimental.unary_unary(request, target, '/google.ads.googleads.v6.services.AssetService/GetAsset',
-            google_dot_ads_dot_googleads__v6_dot_proto_dot_services_dot_asset__service__pb2.GetAssetRequest.SerializeToString,
-            google_dot_ads_dot_googleads__v6_dot_proto_dot_resources_dot_asset__pb2.Asset.FromString,
+            google_dot_ads_dot_googleads_dot_v6_dot_services_dot_asset__service__pb2.GetAssetRequest.SerializeToString,
+            google_dot_ads_dot_googleads_dot_v6_dot_resources_dot_asset__pb2.Asset.FromString,
             options, channel_credentials,
-            call_credentials, compression, wait_for_ready, timeout, metadata)
+            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
 
     @staticmethod
     def MutateAssets(request,
@@ -104,12 +105,13 @@ class AssetService(object):
             options=(),
             channel_credentials=None,
             call_credentials=None,
+            insecure=False,
             compression=None,
             wait_for_ready=None,
             timeout=None,
             metadata=None):
         return grpc.experimental.unary_unary(request, target, '/google.ads.googleads.v6.services.AssetService/MutateAssets',
-            google_dot_ads_dot_googleads__v6_dot_proto_dot_services_dot_asset__service__pb2.MutateAssetsRequest.SerializeToString,
-            google_dot_ads_dot_googleads__v6_dot_proto_dot_services_dot_asset__service__pb2.MutateAssetsResponse.FromString,
+            google_dot_ads_dot_googleads_dot_v6_dot_services_dot_asset__service__pb2.MutateAssetsRequest.SerializeToString,
+            google_dot_ads_dot_googleads_dot_v6_dot_services_dot_asset__service__pb2.MutateAssetsResponse.FromString,
             options, channel_credentials,
-            call_credentials, compression, wait_for_ready, timeout, metadata)
+            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)

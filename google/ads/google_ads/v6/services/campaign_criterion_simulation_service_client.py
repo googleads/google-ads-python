@@ -73,12 +73,17 @@ class CampaignCriterionSimulationServiceClient(object):
 
 
     @classmethod
-    def campaign_criterion_simulation_path(cls, customer, campaign_criterion_simulation):
+    def campaign_criterion_simulation_path(cls, customer_id, campaign_id, criterion_id, type_, modification_method, start_date, end_date):
         """Return a fully-qualified campaign_criterion_simulation string."""
         return google.api_core.path_template.expand(
-            'customers/{customer}/campaignCriterionSimulations/{campaign_criterion_simulation}',
-            customer=customer,
-            campaign_criterion_simulation=campaign_criterion_simulation,
+            'customers/{customer_id}/campaignCriterionSimulations/{campaign_id}~{criterion_id}~{type}~{modification_method}~{start_date}~{end_date}',
+            customer_id=customer_id,
+            campaign_id=campaign_id,
+            criterion_id=criterion_id,
+            type=type_,
+            modification_method=modification_method,
+            start_date=start_date,
+            end_date=end_date,
         )
 
     def __init__(self, transport=None, channel=None, credentials=None,
@@ -190,6 +195,15 @@ class CampaignCriterionSimulationServiceClient(object):
             metadata=None):
         """
         Returns the requested campaign criterion simulation in full detail.
+
+        Example:
+            >>> from google.ads import googleads_v6
+            >>>
+            >>> client = googleads_v6.CampaignCriterionSimulationServiceClient()
+            >>>
+            >>> resource_name = client.campaign_criterion_simulation_path('[CUSTOMER_ID]', '[CAMPAIGN_ID]', '[CRITERION_ID]', '[TYPE]', '[MODIFICATION_METHOD]', '[START_DATE]', '[END_DATE]')
+            >>>
+            >>> response = client.get_campaign_criterion_simulation(resource_name)
 
         Args:
             resource_name (str): Required. The resource name of the campaign criterion simulation to fetch.

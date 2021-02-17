@@ -73,12 +73,12 @@ class MediaFileServiceClient(object):
 
 
     @classmethod
-    def media_file_path(cls, customer, media_file):
+    def media_file_path(cls, customer_id, media_file_id):
         """Return a fully-qualified media_file string."""
         return google.api_core.path_template.expand(
-            'customers/{customer}/mediaFiles/{media_file}',
-            customer=customer,
-            media_file=media_file,
+            'customers/{customer_id}/mediaFiles/{media_file_id}',
+            customer_id=customer_id,
+            media_file_id=media_file_id,
         )
 
     def __init__(self, transport=None, channel=None, credentials=None,
@@ -191,6 +191,15 @@ class MediaFileServiceClient(object):
         """
         Returns the requested media file in full detail.
 
+        Example:
+            >>> from google.ads import googleads_v6
+            >>>
+            >>> client = googleads_v6.MediaFileServiceClient()
+            >>>
+            >>> resource_name = client.media_file_path('[CUSTOMER_ID]', '[MEDIA_FILE_ID]')
+            >>>
+            >>> response = client.get_media_file(resource_name)
+
         Args:
             resource_name (str): Required. The resource name of the media file to fetch.
             retry (Optional[google.api_core.retry.Retry]):  A retry object used
@@ -249,6 +258,19 @@ class MediaFileServiceClient(object):
             metadata=None):
         """
         Creates media files. Operation statuses are returned.
+
+        Example:
+            >>> from google.ads import googleads_v6
+            >>>
+            >>> client = googleads_v6.MediaFileServiceClient()
+            >>>
+            >>> # TODO: Initialize `customer_id`:
+            >>> customer_id = ''
+            >>>
+            >>> # TODO: Initialize `operations`:
+            >>> operations = []
+            >>>
+            >>> response = client.mutate_media_files(customer_id, operations)
 
         Args:
             customer_id (str): Required. The ID of the customer whose media files are being modified.

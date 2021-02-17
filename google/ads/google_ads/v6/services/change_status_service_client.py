@@ -73,12 +73,12 @@ class ChangeStatusServiceClient(object):
 
 
     @classmethod
-    def change_status_path(cls, customer, change_status):
+    def change_status_path(cls, customer_id, change_status_id):
         """Return a fully-qualified change_status string."""
         return google.api_core.path_template.expand(
-            'customers/{customer}/changeStatus/{change_status}',
-            customer=customer,
-            change_status=change_status,
+            'customers/{customer_id}/changeStatus/{change_status_id}',
+            customer_id=customer_id,
+            change_status_id=change_status_id,
         )
 
     def __init__(self, transport=None, channel=None, credentials=None,
@@ -190,6 +190,15 @@ class ChangeStatusServiceClient(object):
             metadata=None):
         """
         Returns the requested change status in full detail.
+
+        Example:
+            >>> from google.ads import googleads_v6
+            >>>
+            >>> client = googleads_v6.ChangeStatusServiceClient()
+            >>>
+            >>> resource_name = client.change_status_path('[CUSTOMER_ID]', '[CHANGE_STATUS_ID]')
+            >>>
+            >>> response = client.get_change_status(resource_name)
 
         Args:
             resource_name (str): Required. The resource name of the change status to fetch.

@@ -2,8 +2,8 @@
 """Client and server classes corresponding to protobuf-defined services."""
 import grpc
 
-from google.ads.google_ads.v6.proto.resources import landing_page_view_pb2 as google_dot_ads_dot_googleads__v6_dot_proto_dot_resources_dot_landing__page__view__pb2
-from google.ads.google_ads.v6.proto.services import landing_page_view_service_pb2 as google_dot_ads_dot_googleads__v6_dot_proto_dot_services_dot_landing__page__view__service__pb2
+from google.ads.google_ads.v6.proto.resources import landing_page_view_pb2 as google_dot_ads_dot_googleads_dot_v6_dot_resources_dot_landing__page__view__pb2
+from google.ads.google_ads.v6.proto.services import landing_page_view_service_pb2 as google_dot_ads_dot_googleads_dot_v6_dot_services_dot_landing__page__view__service__pb2
 
 
 class LandingPageViewServiceStub(object):
@@ -20,8 +20,8 @@ class LandingPageViewServiceStub(object):
         """
         self.GetLandingPageView = channel.unary_unary(
                 '/google.ads.googleads.v6.services.LandingPageViewService/GetLandingPageView',
-                request_serializer=google_dot_ads_dot_googleads__v6_dot_proto_dot_services_dot_landing__page__view__service__pb2.GetLandingPageViewRequest.SerializeToString,
-                response_deserializer=google_dot_ads_dot_googleads__v6_dot_proto_dot_resources_dot_landing__page__view__pb2.LandingPageView.FromString,
+                request_serializer=google_dot_ads_dot_googleads_dot_v6_dot_services_dot_landing__page__view__service__pb2.GetLandingPageViewRequest.SerializeToString,
+                response_deserializer=google_dot_ads_dot_googleads_dot_v6_dot_resources_dot_landing__page__view__pb2.LandingPageView.FromString,
                 )
 
 
@@ -43,8 +43,8 @@ def add_LandingPageViewServiceServicer_to_server(servicer, server):
     rpc_method_handlers = {
             'GetLandingPageView': grpc.unary_unary_rpc_method_handler(
                     servicer.GetLandingPageView,
-                    request_deserializer=google_dot_ads_dot_googleads__v6_dot_proto_dot_services_dot_landing__page__view__service__pb2.GetLandingPageViewRequest.FromString,
-                    response_serializer=google_dot_ads_dot_googleads__v6_dot_proto_dot_resources_dot_landing__page__view__pb2.LandingPageView.SerializeToString,
+                    request_deserializer=google_dot_ads_dot_googleads_dot_v6_dot_services_dot_landing__page__view__service__pb2.GetLandingPageViewRequest.FromString,
+                    response_serializer=google_dot_ads_dot_googleads_dot_v6_dot_resources_dot_landing__page__view__pb2.LandingPageView.SerializeToString,
             ),
     }
     generic_handler = grpc.method_handlers_generic_handler(
@@ -65,12 +65,13 @@ class LandingPageViewService(object):
             options=(),
             channel_credentials=None,
             call_credentials=None,
+            insecure=False,
             compression=None,
             wait_for_ready=None,
             timeout=None,
             metadata=None):
         return grpc.experimental.unary_unary(request, target, '/google.ads.googleads.v6.services.LandingPageViewService/GetLandingPageView',
-            google_dot_ads_dot_googleads__v6_dot_proto_dot_services_dot_landing__page__view__service__pb2.GetLandingPageViewRequest.SerializeToString,
-            google_dot_ads_dot_googleads__v6_dot_proto_dot_resources_dot_landing__page__view__pb2.LandingPageView.FromString,
+            google_dot_ads_dot_googleads_dot_v6_dot_services_dot_landing__page__view__service__pb2.GetLandingPageViewRequest.SerializeToString,
+            google_dot_ads_dot_googleads_dot_v6_dot_resources_dot_landing__page__view__pb2.LandingPageView.FromString,
             options, channel_credentials,
-            call_credentials, compression, wait_for_ready, timeout, metadata)
+            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)

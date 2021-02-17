@@ -73,12 +73,14 @@ class AdGroupAdLabelServiceClient(object):
 
 
     @classmethod
-    def ad_group_ad_label_path(cls, customer, ad_group_ad_label):
+    def ad_group_ad_label_path(cls, customer_id, ad_group_id, ad_id, label_id):
         """Return a fully-qualified ad_group_ad_label string."""
         return google.api_core.path_template.expand(
-            'customers/{customer}/adGroupAdLabels/{ad_group_ad_label}',
-            customer=customer,
-            ad_group_ad_label=ad_group_ad_label,
+            'customers/{customer_id}/adGroupAdLabels/{ad_group_id}~{ad_id}~{label_id}',
+            customer_id=customer_id,
+            ad_group_id=ad_group_id,
+            ad_id=ad_id,
+            label_id=label_id,
         )
 
     def __init__(self, transport=None, channel=None, credentials=None,
@@ -191,6 +193,15 @@ class AdGroupAdLabelServiceClient(object):
         """
         Returns the requested ad group ad label in full detail.
 
+        Example:
+            >>> from google.ads import googleads_v6
+            >>>
+            >>> client = googleads_v6.AdGroupAdLabelServiceClient()
+            >>>
+            >>> resource_name = client.ad_group_ad_label_path('[CUSTOMER_ID]', '[AD_GROUP_ID]', '[AD_ID]', '[LABEL_ID]')
+            >>>
+            >>> response = client.get_ad_group_ad_label(resource_name)
+
         Args:
             resource_name (str): Required. The resource name of the ad group ad label to fetch.
             retry (Optional[google.api_core.retry.Retry]):  A retry object used
@@ -249,6 +260,19 @@ class AdGroupAdLabelServiceClient(object):
         """
         Creates and removes ad group ad labels.
         Operation statuses are returned.
+
+        Example:
+            >>> from google.ads import googleads_v6
+            >>>
+            >>> client = googleads_v6.AdGroupAdLabelServiceClient()
+            >>>
+            >>> # TODO: Initialize `customer_id`:
+            >>> customer_id = ''
+            >>>
+            >>> # TODO: Initialize `operations`:
+            >>> operations = []
+            >>>
+            >>> response = client.mutate_ad_group_ad_labels(customer_id, operations)
 
         Args:
             customer_id (str): Required. ID of the customer whose ad group ad labels are being modified.

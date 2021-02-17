@@ -2,7 +2,7 @@
 """Client and server classes corresponding to protobuf-defined services."""
 import grpc
 
-from google.ads.google_ads.v6.proto.services import conversion_adjustment_upload_service_pb2 as google_dot_ads_dot_googleads__v6_dot_proto_dot_services_dot_conversion__adjustment__upload__service__pb2
+from google.ads.google_ads.v6.proto.services import conversion_adjustment_upload_service_pb2 as google_dot_ads_dot_googleads_dot_v6_dot_services_dot_conversion__adjustment__upload__service__pb2
 
 
 class ConversionAdjustmentUploadServiceStub(object):
@@ -17,8 +17,8 @@ class ConversionAdjustmentUploadServiceStub(object):
         """
         self.UploadConversionAdjustments = channel.unary_unary(
                 '/google.ads.googleads.v6.services.ConversionAdjustmentUploadService/UploadConversionAdjustments',
-                request_serializer=google_dot_ads_dot_googleads__v6_dot_proto_dot_services_dot_conversion__adjustment__upload__service__pb2.UploadConversionAdjustmentsRequest.SerializeToString,
-                response_deserializer=google_dot_ads_dot_googleads__v6_dot_proto_dot_services_dot_conversion__adjustment__upload__service__pb2.UploadConversionAdjustmentsResponse.FromString,
+                request_serializer=google_dot_ads_dot_googleads_dot_v6_dot_services_dot_conversion__adjustment__upload__service__pb2.UploadConversionAdjustmentsRequest.SerializeToString,
+                response_deserializer=google_dot_ads_dot_googleads_dot_v6_dot_services_dot_conversion__adjustment__upload__service__pb2.UploadConversionAdjustmentsResponse.FromString,
                 )
 
 
@@ -38,8 +38,8 @@ def add_ConversionAdjustmentUploadServiceServicer_to_server(servicer, server):
     rpc_method_handlers = {
             'UploadConversionAdjustments': grpc.unary_unary_rpc_method_handler(
                     servicer.UploadConversionAdjustments,
-                    request_deserializer=google_dot_ads_dot_googleads__v6_dot_proto_dot_services_dot_conversion__adjustment__upload__service__pb2.UploadConversionAdjustmentsRequest.FromString,
-                    response_serializer=google_dot_ads_dot_googleads__v6_dot_proto_dot_services_dot_conversion__adjustment__upload__service__pb2.UploadConversionAdjustmentsResponse.SerializeToString,
+                    request_deserializer=google_dot_ads_dot_googleads_dot_v6_dot_services_dot_conversion__adjustment__upload__service__pb2.UploadConversionAdjustmentsRequest.FromString,
+                    response_serializer=google_dot_ads_dot_googleads_dot_v6_dot_services_dot_conversion__adjustment__upload__service__pb2.UploadConversionAdjustmentsResponse.SerializeToString,
             ),
     }
     generic_handler = grpc.method_handlers_generic_handler(
@@ -58,12 +58,13 @@ class ConversionAdjustmentUploadService(object):
             options=(),
             channel_credentials=None,
             call_credentials=None,
+            insecure=False,
             compression=None,
             wait_for_ready=None,
             timeout=None,
             metadata=None):
         return grpc.experimental.unary_unary(request, target, '/google.ads.googleads.v6.services.ConversionAdjustmentUploadService/UploadConversionAdjustments',
-            google_dot_ads_dot_googleads__v6_dot_proto_dot_services_dot_conversion__adjustment__upload__service__pb2.UploadConversionAdjustmentsRequest.SerializeToString,
-            google_dot_ads_dot_googleads__v6_dot_proto_dot_services_dot_conversion__adjustment__upload__service__pb2.UploadConversionAdjustmentsResponse.FromString,
+            google_dot_ads_dot_googleads_dot_v6_dot_services_dot_conversion__adjustment__upload__service__pb2.UploadConversionAdjustmentsRequest.SerializeToString,
+            google_dot_ads_dot_googleads_dot_v6_dot_services_dot_conversion__adjustment__upload__service__pb2.UploadConversionAdjustmentsResponse.FromString,
             options, channel_credentials,
-            call_credentials, compression, wait_for_ready, timeout, metadata)
+            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)

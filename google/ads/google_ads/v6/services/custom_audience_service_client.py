@@ -73,12 +73,12 @@ class CustomAudienceServiceClient(object):
 
 
     @classmethod
-    def custom_audience_path(cls, customer, custom_audience):
+    def custom_audience_path(cls, customer_id, custom_audience_id):
         """Return a fully-qualified custom_audience string."""
         return google.api_core.path_template.expand(
-            'customers/{customer}/customAudiences/{custom_audience}',
-            customer=customer,
-            custom_audience=custom_audience,
+            'customers/{customer_id}/customAudiences/{custom_audience_id}',
+            customer_id=customer_id,
+            custom_audience_id=custom_audience_id,
         )
 
     def __init__(self, transport=None, channel=None, credentials=None,
@@ -191,6 +191,15 @@ class CustomAudienceServiceClient(object):
         """
         Returns the requested custom audience in full detail.
 
+        Example:
+            >>> from google.ads import googleads_v6
+            >>>
+            >>> client = googleads_v6.CustomAudienceServiceClient()
+            >>>
+            >>> resource_name = client.custom_audience_path('[CUSTOMER_ID]', '[CUSTOM_AUDIENCE_ID]')
+            >>>
+            >>> response = client.get_custom_audience(resource_name)
+
         Args:
             resource_name (str): Required. The resource name of the custom audience to fetch.
             retry (Optional[google.api_core.retry.Retry]):  A retry object used
@@ -247,6 +256,19 @@ class CustomAudienceServiceClient(object):
             metadata=None):
         """
         Creates or updates custom audiences. Operation statuses are returned.
+
+        Example:
+            >>> from google.ads import googleads_v6
+            >>>
+            >>> client = googleads_v6.CustomAudienceServiceClient()
+            >>>
+            >>> # TODO: Initialize `customer_id`:
+            >>> customer_id = ''
+            >>>
+            >>> # TODO: Initialize `operations`:
+            >>> operations = []
+            >>>
+            >>> response = client.mutate_custom_audiences(customer_id, operations)
 
         Args:
             customer_id (str): Required. The ID of the customer whose custom audiences are being modified.

@@ -2,8 +2,8 @@
 """Client and server classes corresponding to protobuf-defined services."""
 import grpc
 
-from google.ads.google_ads.v6.proto.resources import ad_group_label_pb2 as google_dot_ads_dot_googleads__v6_dot_proto_dot_resources_dot_ad__group__label__pb2
-from google.ads.google_ads.v6.proto.services import ad_group_label_service_pb2 as google_dot_ads_dot_googleads__v6_dot_proto_dot_services_dot_ad__group__label__service__pb2
+from google.ads.google_ads.v6.proto.resources import ad_group_label_pb2 as google_dot_ads_dot_googleads_dot_v6_dot_resources_dot_ad__group__label__pb2
+from google.ads.google_ads.v6.proto.services import ad_group_label_service_pb2 as google_dot_ads_dot_googleads_dot_v6_dot_services_dot_ad__group__label__service__pb2
 
 
 class AdGroupLabelServiceStub(object):
@@ -20,13 +20,13 @@ class AdGroupLabelServiceStub(object):
         """
         self.GetAdGroupLabel = channel.unary_unary(
                 '/google.ads.googleads.v6.services.AdGroupLabelService/GetAdGroupLabel',
-                request_serializer=google_dot_ads_dot_googleads__v6_dot_proto_dot_services_dot_ad__group__label__service__pb2.GetAdGroupLabelRequest.SerializeToString,
-                response_deserializer=google_dot_ads_dot_googleads__v6_dot_proto_dot_resources_dot_ad__group__label__pb2.AdGroupLabel.FromString,
+                request_serializer=google_dot_ads_dot_googleads_dot_v6_dot_services_dot_ad__group__label__service__pb2.GetAdGroupLabelRequest.SerializeToString,
+                response_deserializer=google_dot_ads_dot_googleads_dot_v6_dot_resources_dot_ad__group__label__pb2.AdGroupLabel.FromString,
                 )
         self.MutateAdGroupLabels = channel.unary_unary(
                 '/google.ads.googleads.v6.services.AdGroupLabelService/MutateAdGroupLabels',
-                request_serializer=google_dot_ads_dot_googleads__v6_dot_proto_dot_services_dot_ad__group__label__service__pb2.MutateAdGroupLabelsRequest.SerializeToString,
-                response_deserializer=google_dot_ads_dot_googleads__v6_dot_proto_dot_services_dot_ad__group__label__service__pb2.MutateAdGroupLabelsResponse.FromString,
+                request_serializer=google_dot_ads_dot_googleads_dot_v6_dot_services_dot_ad__group__label__service__pb2.MutateAdGroupLabelsRequest.SerializeToString,
+                response_deserializer=google_dot_ads_dot_googleads_dot_v6_dot_services_dot_ad__group__label__service__pb2.MutateAdGroupLabelsResponse.FromString,
                 )
 
 
@@ -56,13 +56,13 @@ def add_AdGroupLabelServiceServicer_to_server(servicer, server):
     rpc_method_handlers = {
             'GetAdGroupLabel': grpc.unary_unary_rpc_method_handler(
                     servicer.GetAdGroupLabel,
-                    request_deserializer=google_dot_ads_dot_googleads__v6_dot_proto_dot_services_dot_ad__group__label__service__pb2.GetAdGroupLabelRequest.FromString,
-                    response_serializer=google_dot_ads_dot_googleads__v6_dot_proto_dot_resources_dot_ad__group__label__pb2.AdGroupLabel.SerializeToString,
+                    request_deserializer=google_dot_ads_dot_googleads_dot_v6_dot_services_dot_ad__group__label__service__pb2.GetAdGroupLabelRequest.FromString,
+                    response_serializer=google_dot_ads_dot_googleads_dot_v6_dot_resources_dot_ad__group__label__pb2.AdGroupLabel.SerializeToString,
             ),
             'MutateAdGroupLabels': grpc.unary_unary_rpc_method_handler(
                     servicer.MutateAdGroupLabels,
-                    request_deserializer=google_dot_ads_dot_googleads__v6_dot_proto_dot_services_dot_ad__group__label__service__pb2.MutateAdGroupLabelsRequest.FromString,
-                    response_serializer=google_dot_ads_dot_googleads__v6_dot_proto_dot_services_dot_ad__group__label__service__pb2.MutateAdGroupLabelsResponse.SerializeToString,
+                    request_deserializer=google_dot_ads_dot_googleads_dot_v6_dot_services_dot_ad__group__label__service__pb2.MutateAdGroupLabelsRequest.FromString,
+                    response_serializer=google_dot_ads_dot_googleads_dot_v6_dot_services_dot_ad__group__label__service__pb2.MutateAdGroupLabelsResponse.SerializeToString,
             ),
     }
     generic_handler = grpc.method_handlers_generic_handler(
@@ -83,15 +83,16 @@ class AdGroupLabelService(object):
             options=(),
             channel_credentials=None,
             call_credentials=None,
+            insecure=False,
             compression=None,
             wait_for_ready=None,
             timeout=None,
             metadata=None):
         return grpc.experimental.unary_unary(request, target, '/google.ads.googleads.v6.services.AdGroupLabelService/GetAdGroupLabel',
-            google_dot_ads_dot_googleads__v6_dot_proto_dot_services_dot_ad__group__label__service__pb2.GetAdGroupLabelRequest.SerializeToString,
-            google_dot_ads_dot_googleads__v6_dot_proto_dot_resources_dot_ad__group__label__pb2.AdGroupLabel.FromString,
+            google_dot_ads_dot_googleads_dot_v6_dot_services_dot_ad__group__label__service__pb2.GetAdGroupLabelRequest.SerializeToString,
+            google_dot_ads_dot_googleads_dot_v6_dot_resources_dot_ad__group__label__pb2.AdGroupLabel.FromString,
             options, channel_credentials,
-            call_credentials, compression, wait_for_ready, timeout, metadata)
+            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
 
     @staticmethod
     def MutateAdGroupLabels(request,
@@ -99,12 +100,13 @@ class AdGroupLabelService(object):
             options=(),
             channel_credentials=None,
             call_credentials=None,
+            insecure=False,
             compression=None,
             wait_for_ready=None,
             timeout=None,
             metadata=None):
         return grpc.experimental.unary_unary(request, target, '/google.ads.googleads.v6.services.AdGroupLabelService/MutateAdGroupLabels',
-            google_dot_ads_dot_googleads__v6_dot_proto_dot_services_dot_ad__group__label__service__pb2.MutateAdGroupLabelsRequest.SerializeToString,
-            google_dot_ads_dot_googleads__v6_dot_proto_dot_services_dot_ad__group__label__service__pb2.MutateAdGroupLabelsResponse.FromString,
+            google_dot_ads_dot_googleads_dot_v6_dot_services_dot_ad__group__label__service__pb2.MutateAdGroupLabelsRequest.SerializeToString,
+            google_dot_ads_dot_googleads_dot_v6_dot_services_dot_ad__group__label__service__pb2.MutateAdGroupLabelsResponse.FromString,
             options, channel_credentials,
-            call_credentials, compression, wait_for_ready, timeout, metadata)
+            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)

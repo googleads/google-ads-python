@@ -2,8 +2,8 @@
 """Client and server classes corresponding to protobuf-defined services."""
 import grpc
 
-from google.ads.google_ads.v6.proto.resources import ad_group_criterion_label_pb2 as google_dot_ads_dot_googleads__v6_dot_proto_dot_resources_dot_ad__group__criterion__label__pb2
-from google.ads.google_ads.v6.proto.services import ad_group_criterion_label_service_pb2 as google_dot_ads_dot_googleads__v6_dot_proto_dot_services_dot_ad__group__criterion__label__service__pb2
+from google.ads.google_ads.v6.proto.resources import ad_group_criterion_label_pb2 as google_dot_ads_dot_googleads_dot_v6_dot_resources_dot_ad__group__criterion__label__pb2
+from google.ads.google_ads.v6.proto.services import ad_group_criterion_label_service_pb2 as google_dot_ads_dot_googleads_dot_v6_dot_services_dot_ad__group__criterion__label__service__pb2
 
 
 class AdGroupCriterionLabelServiceStub(object):
@@ -20,13 +20,13 @@ class AdGroupCriterionLabelServiceStub(object):
         """
         self.GetAdGroupCriterionLabel = channel.unary_unary(
                 '/google.ads.googleads.v6.services.AdGroupCriterionLabelService/GetAdGroupCriterionLabel',
-                request_serializer=google_dot_ads_dot_googleads__v6_dot_proto_dot_services_dot_ad__group__criterion__label__service__pb2.GetAdGroupCriterionLabelRequest.SerializeToString,
-                response_deserializer=google_dot_ads_dot_googleads__v6_dot_proto_dot_resources_dot_ad__group__criterion__label__pb2.AdGroupCriterionLabel.FromString,
+                request_serializer=google_dot_ads_dot_googleads_dot_v6_dot_services_dot_ad__group__criterion__label__service__pb2.GetAdGroupCriterionLabelRequest.SerializeToString,
+                response_deserializer=google_dot_ads_dot_googleads_dot_v6_dot_resources_dot_ad__group__criterion__label__pb2.AdGroupCriterionLabel.FromString,
                 )
         self.MutateAdGroupCriterionLabels = channel.unary_unary(
                 '/google.ads.googleads.v6.services.AdGroupCriterionLabelService/MutateAdGroupCriterionLabels',
-                request_serializer=google_dot_ads_dot_googleads__v6_dot_proto_dot_services_dot_ad__group__criterion__label__service__pb2.MutateAdGroupCriterionLabelsRequest.SerializeToString,
-                response_deserializer=google_dot_ads_dot_googleads__v6_dot_proto_dot_services_dot_ad__group__criterion__label__service__pb2.MutateAdGroupCriterionLabelsResponse.FromString,
+                request_serializer=google_dot_ads_dot_googleads_dot_v6_dot_services_dot_ad__group__criterion__label__service__pb2.MutateAdGroupCriterionLabelsRequest.SerializeToString,
+                response_deserializer=google_dot_ads_dot_googleads_dot_v6_dot_services_dot_ad__group__criterion__label__service__pb2.MutateAdGroupCriterionLabelsResponse.FromString,
                 )
 
 
@@ -56,13 +56,13 @@ def add_AdGroupCriterionLabelServiceServicer_to_server(servicer, server):
     rpc_method_handlers = {
             'GetAdGroupCriterionLabel': grpc.unary_unary_rpc_method_handler(
                     servicer.GetAdGroupCriterionLabel,
-                    request_deserializer=google_dot_ads_dot_googleads__v6_dot_proto_dot_services_dot_ad__group__criterion__label__service__pb2.GetAdGroupCriterionLabelRequest.FromString,
-                    response_serializer=google_dot_ads_dot_googleads__v6_dot_proto_dot_resources_dot_ad__group__criterion__label__pb2.AdGroupCriterionLabel.SerializeToString,
+                    request_deserializer=google_dot_ads_dot_googleads_dot_v6_dot_services_dot_ad__group__criterion__label__service__pb2.GetAdGroupCriterionLabelRequest.FromString,
+                    response_serializer=google_dot_ads_dot_googleads_dot_v6_dot_resources_dot_ad__group__criterion__label__pb2.AdGroupCriterionLabel.SerializeToString,
             ),
             'MutateAdGroupCriterionLabels': grpc.unary_unary_rpc_method_handler(
                     servicer.MutateAdGroupCriterionLabels,
-                    request_deserializer=google_dot_ads_dot_googleads__v6_dot_proto_dot_services_dot_ad__group__criterion__label__service__pb2.MutateAdGroupCriterionLabelsRequest.FromString,
-                    response_serializer=google_dot_ads_dot_googleads__v6_dot_proto_dot_services_dot_ad__group__criterion__label__service__pb2.MutateAdGroupCriterionLabelsResponse.SerializeToString,
+                    request_deserializer=google_dot_ads_dot_googleads_dot_v6_dot_services_dot_ad__group__criterion__label__service__pb2.MutateAdGroupCriterionLabelsRequest.FromString,
+                    response_serializer=google_dot_ads_dot_googleads_dot_v6_dot_services_dot_ad__group__criterion__label__service__pb2.MutateAdGroupCriterionLabelsResponse.SerializeToString,
             ),
     }
     generic_handler = grpc.method_handlers_generic_handler(
@@ -83,15 +83,16 @@ class AdGroupCriterionLabelService(object):
             options=(),
             channel_credentials=None,
             call_credentials=None,
+            insecure=False,
             compression=None,
             wait_for_ready=None,
             timeout=None,
             metadata=None):
         return grpc.experimental.unary_unary(request, target, '/google.ads.googleads.v6.services.AdGroupCriterionLabelService/GetAdGroupCriterionLabel',
-            google_dot_ads_dot_googleads__v6_dot_proto_dot_services_dot_ad__group__criterion__label__service__pb2.GetAdGroupCriterionLabelRequest.SerializeToString,
-            google_dot_ads_dot_googleads__v6_dot_proto_dot_resources_dot_ad__group__criterion__label__pb2.AdGroupCriterionLabel.FromString,
+            google_dot_ads_dot_googleads_dot_v6_dot_services_dot_ad__group__criterion__label__service__pb2.GetAdGroupCriterionLabelRequest.SerializeToString,
+            google_dot_ads_dot_googleads_dot_v6_dot_resources_dot_ad__group__criterion__label__pb2.AdGroupCriterionLabel.FromString,
             options, channel_credentials,
-            call_credentials, compression, wait_for_ready, timeout, metadata)
+            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
 
     @staticmethod
     def MutateAdGroupCriterionLabels(request,
@@ -99,12 +100,13 @@ class AdGroupCriterionLabelService(object):
             options=(),
             channel_credentials=None,
             call_credentials=None,
+            insecure=False,
             compression=None,
             wait_for_ready=None,
             timeout=None,
             metadata=None):
         return grpc.experimental.unary_unary(request, target, '/google.ads.googleads.v6.services.AdGroupCriterionLabelService/MutateAdGroupCriterionLabels',
-            google_dot_ads_dot_googleads__v6_dot_proto_dot_services_dot_ad__group__criterion__label__service__pb2.MutateAdGroupCriterionLabelsRequest.SerializeToString,
-            google_dot_ads_dot_googleads__v6_dot_proto_dot_services_dot_ad__group__criterion__label__service__pb2.MutateAdGroupCriterionLabelsResponse.FromString,
+            google_dot_ads_dot_googleads_dot_v6_dot_services_dot_ad__group__criterion__label__service__pb2.MutateAdGroupCriterionLabelsRequest.SerializeToString,
+            google_dot_ads_dot_googleads_dot_v6_dot_services_dot_ad__group__criterion__label__service__pb2.MutateAdGroupCriterionLabelsResponse.FromString,
             options, channel_credentials,
-            call_credentials, compression, wait_for_ready, timeout, metadata)
+            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)

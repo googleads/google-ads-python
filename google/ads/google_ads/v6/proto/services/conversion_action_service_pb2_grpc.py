@@ -2,8 +2,8 @@
 """Client and server classes corresponding to protobuf-defined services."""
 import grpc
 
-from google.ads.google_ads.v6.proto.resources import conversion_action_pb2 as google_dot_ads_dot_googleads__v6_dot_proto_dot_resources_dot_conversion__action__pb2
-from google.ads.google_ads.v6.proto.services import conversion_action_service_pb2 as google_dot_ads_dot_googleads__v6_dot_proto_dot_services_dot_conversion__action__service__pb2
+from google.ads.google_ads.v6.proto.resources import conversion_action_pb2 as google_dot_ads_dot_googleads_dot_v6_dot_resources_dot_conversion__action__pb2
+from google.ads.google_ads.v6.proto.services import conversion_action_service_pb2 as google_dot_ads_dot_googleads_dot_v6_dot_services_dot_conversion__action__service__pb2
 
 
 class ConversionActionServiceStub(object):
@@ -20,13 +20,13 @@ class ConversionActionServiceStub(object):
         """
         self.GetConversionAction = channel.unary_unary(
                 '/google.ads.googleads.v6.services.ConversionActionService/GetConversionAction',
-                request_serializer=google_dot_ads_dot_googleads__v6_dot_proto_dot_services_dot_conversion__action__service__pb2.GetConversionActionRequest.SerializeToString,
-                response_deserializer=google_dot_ads_dot_googleads__v6_dot_proto_dot_resources_dot_conversion__action__pb2.ConversionAction.FromString,
+                request_serializer=google_dot_ads_dot_googleads_dot_v6_dot_services_dot_conversion__action__service__pb2.GetConversionActionRequest.SerializeToString,
+                response_deserializer=google_dot_ads_dot_googleads_dot_v6_dot_resources_dot_conversion__action__pb2.ConversionAction.FromString,
                 )
         self.MutateConversionActions = channel.unary_unary(
                 '/google.ads.googleads.v6.services.ConversionActionService/MutateConversionActions',
-                request_serializer=google_dot_ads_dot_googleads__v6_dot_proto_dot_services_dot_conversion__action__service__pb2.MutateConversionActionsRequest.SerializeToString,
-                response_deserializer=google_dot_ads_dot_googleads__v6_dot_proto_dot_services_dot_conversion__action__service__pb2.MutateConversionActionsResponse.FromString,
+                request_serializer=google_dot_ads_dot_googleads_dot_v6_dot_services_dot_conversion__action__service__pb2.MutateConversionActionsRequest.SerializeToString,
+                response_deserializer=google_dot_ads_dot_googleads_dot_v6_dot_services_dot_conversion__action__service__pb2.MutateConversionActionsResponse.FromString,
                 )
 
 
@@ -56,13 +56,13 @@ def add_ConversionActionServiceServicer_to_server(servicer, server):
     rpc_method_handlers = {
             'GetConversionAction': grpc.unary_unary_rpc_method_handler(
                     servicer.GetConversionAction,
-                    request_deserializer=google_dot_ads_dot_googleads__v6_dot_proto_dot_services_dot_conversion__action__service__pb2.GetConversionActionRequest.FromString,
-                    response_serializer=google_dot_ads_dot_googleads__v6_dot_proto_dot_resources_dot_conversion__action__pb2.ConversionAction.SerializeToString,
+                    request_deserializer=google_dot_ads_dot_googleads_dot_v6_dot_services_dot_conversion__action__service__pb2.GetConversionActionRequest.FromString,
+                    response_serializer=google_dot_ads_dot_googleads_dot_v6_dot_resources_dot_conversion__action__pb2.ConversionAction.SerializeToString,
             ),
             'MutateConversionActions': grpc.unary_unary_rpc_method_handler(
                     servicer.MutateConversionActions,
-                    request_deserializer=google_dot_ads_dot_googleads__v6_dot_proto_dot_services_dot_conversion__action__service__pb2.MutateConversionActionsRequest.FromString,
-                    response_serializer=google_dot_ads_dot_googleads__v6_dot_proto_dot_services_dot_conversion__action__service__pb2.MutateConversionActionsResponse.SerializeToString,
+                    request_deserializer=google_dot_ads_dot_googleads_dot_v6_dot_services_dot_conversion__action__service__pb2.MutateConversionActionsRequest.FromString,
+                    response_serializer=google_dot_ads_dot_googleads_dot_v6_dot_services_dot_conversion__action__service__pb2.MutateConversionActionsResponse.SerializeToString,
             ),
     }
     generic_handler = grpc.method_handlers_generic_handler(
@@ -83,15 +83,16 @@ class ConversionActionService(object):
             options=(),
             channel_credentials=None,
             call_credentials=None,
+            insecure=False,
             compression=None,
             wait_for_ready=None,
             timeout=None,
             metadata=None):
         return grpc.experimental.unary_unary(request, target, '/google.ads.googleads.v6.services.ConversionActionService/GetConversionAction',
-            google_dot_ads_dot_googleads__v6_dot_proto_dot_services_dot_conversion__action__service__pb2.GetConversionActionRequest.SerializeToString,
-            google_dot_ads_dot_googleads__v6_dot_proto_dot_resources_dot_conversion__action__pb2.ConversionAction.FromString,
+            google_dot_ads_dot_googleads_dot_v6_dot_services_dot_conversion__action__service__pb2.GetConversionActionRequest.SerializeToString,
+            google_dot_ads_dot_googleads_dot_v6_dot_resources_dot_conversion__action__pb2.ConversionAction.FromString,
             options, channel_credentials,
-            call_credentials, compression, wait_for_ready, timeout, metadata)
+            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
 
     @staticmethod
     def MutateConversionActions(request,
@@ -99,12 +100,13 @@ class ConversionActionService(object):
             options=(),
             channel_credentials=None,
             call_credentials=None,
+            insecure=False,
             compression=None,
             wait_for_ready=None,
             timeout=None,
             metadata=None):
         return grpc.experimental.unary_unary(request, target, '/google.ads.googleads.v6.services.ConversionActionService/MutateConversionActions',
-            google_dot_ads_dot_googleads__v6_dot_proto_dot_services_dot_conversion__action__service__pb2.MutateConversionActionsRequest.SerializeToString,
-            google_dot_ads_dot_googleads__v6_dot_proto_dot_services_dot_conversion__action__service__pb2.MutateConversionActionsResponse.FromString,
+            google_dot_ads_dot_googleads_dot_v6_dot_services_dot_conversion__action__service__pb2.MutateConversionActionsRequest.SerializeToString,
+            google_dot_ads_dot_googleads_dot_v6_dot_services_dot_conversion__action__service__pb2.MutateConversionActionsResponse.FromString,
             options, channel_credentials,
-            call_credentials, compression, wait_for_ready, timeout, metadata)
+            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)

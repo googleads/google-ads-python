@@ -73,12 +73,12 @@ class FeedServiceClient(object):
 
 
     @classmethod
-    def feed_path(cls, customer, feed):
+    def feed_path(cls, customer_id, feed_id):
         """Return a fully-qualified feed string."""
         return google.api_core.path_template.expand(
-            'customers/{customer}/feeds/{feed}',
-            customer=customer,
-            feed=feed,
+            'customers/{customer_id}/feeds/{feed_id}',
+            customer_id=customer_id,
+            feed_id=feed_id,
         )
 
     def __init__(self, transport=None, channel=None, credentials=None,
@@ -191,6 +191,15 @@ class FeedServiceClient(object):
         """
         Returns the requested feed in full detail.
 
+        Example:
+            >>> from google.ads import googleads_v6
+            >>>
+            >>> client = googleads_v6.FeedServiceClient()
+            >>>
+            >>> resource_name = client.feed_path('[CUSTOMER_ID]', '[FEED_ID]')
+            >>>
+            >>> response = client.get_feed(resource_name)
+
         Args:
             resource_name (str): Required. The resource name of the feed to fetch.
             retry (Optional[google.api_core.retry.Retry]):  A retry object used
@@ -250,6 +259,19 @@ class FeedServiceClient(object):
         """
         Creates, updates, or removes feeds. Operation statuses are
         returned.
+
+        Example:
+            >>> from google.ads import googleads_v6
+            >>>
+            >>> client = googleads_v6.FeedServiceClient()
+            >>>
+            >>> # TODO: Initialize `customer_id`:
+            >>> customer_id = ''
+            >>>
+            >>> # TODO: Initialize `operations`:
+            >>> operations = []
+            >>>
+            >>> response = client.mutate_feeds(customer_id, operations)
 
         Args:
             customer_id (str): Required. The ID of the customer whose feeds are being modified.

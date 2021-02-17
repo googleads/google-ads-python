@@ -73,11 +73,11 @@ class CurrencyConstantServiceClient(object):
 
 
     @classmethod
-    def currency_constant_path(cls, currency_constant):
+    def currency_constant_path(cls, code):
         """Return a fully-qualified currency_constant string."""
         return google.api_core.path_template.expand(
-            'currencyConstants/{currency_constant}',
-            currency_constant=currency_constant,
+            'currencyConstants/{code}',
+            code=code,
         )
 
     def __init__(self, transport=None, channel=None, credentials=None,
@@ -189,6 +189,15 @@ class CurrencyConstantServiceClient(object):
             metadata=None):
         """
         Returns the requested currency constant.
+
+        Example:
+            >>> from google.ads import googleads_v6
+            >>>
+            >>> client = googleads_v6.CurrencyConstantServiceClient()
+            >>>
+            >>> resource_name = client.currency_constant_path('[CODE]')
+            >>>
+            >>> response = client.get_currency_constant(resource_name)
 
         Args:
             resource_name (str): Required. Resource name of the currency constant to fetch.

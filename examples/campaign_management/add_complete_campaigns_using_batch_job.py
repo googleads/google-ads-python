@@ -167,7 +167,7 @@ def _add_all_batch_job_operations(batch_job_service, operations, resource_name):
     """
     try:
         response = batch_job_service.add_batch_job_operations(
-            resource_name, None, operations
+            resource_name, operations
         )
 
         print(

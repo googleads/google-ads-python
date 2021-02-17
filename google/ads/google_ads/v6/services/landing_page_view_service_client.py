@@ -73,12 +73,12 @@ class LandingPageViewServiceClient(object):
 
 
     @classmethod
-    def landing_page_view_path(cls, customer, landing_page_view):
+    def landing_page_view_path(cls, customer_id, unexpanded_final_url_fingerprint):
         """Return a fully-qualified landing_page_view string."""
         return google.api_core.path_template.expand(
-            'customers/{customer}/landingPageViews/{landing_page_view}',
-            customer=customer,
-            landing_page_view=landing_page_view,
+            'customers/{customer_id}/landingPageViews/{unexpanded_final_url_fingerprint}',
+            customer_id=customer_id,
+            unexpanded_final_url_fingerprint=unexpanded_final_url_fingerprint,
         )
 
     def __init__(self, transport=None, channel=None, credentials=None,
@@ -190,6 +190,15 @@ class LandingPageViewServiceClient(object):
             metadata=None):
         """
         Returns the requested landing page view in full detail.
+
+        Example:
+            >>> from google.ads import googleads_v6
+            >>>
+            >>> client = googleads_v6.LandingPageViewServiceClient()
+            >>>
+            >>> resource_name = client.landing_page_view_path('[CUSTOMER_ID]', '[UNEXPANDED_FINAL_URL_FINGERPRINT]')
+            >>>
+            >>> response = client.get_landing_page_view(resource_name)
 
         Args:
             resource_name (str): Required. The resource name of the landing page view to fetch.

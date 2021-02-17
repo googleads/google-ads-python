@@ -2,8 +2,8 @@
 """Client and server classes corresponding to protobuf-defined services."""
 import grpc
 
-from google.ads.google_ads.v6.proto.resources import customer_label_pb2 as google_dot_ads_dot_googleads__v6_dot_proto_dot_resources_dot_customer__label__pb2
-from google.ads.google_ads.v6.proto.services import customer_label_service_pb2 as google_dot_ads_dot_googleads__v6_dot_proto_dot_services_dot_customer__label__service__pb2
+from google.ads.google_ads.v6.proto.resources import customer_label_pb2 as google_dot_ads_dot_googleads_dot_v6_dot_resources_dot_customer__label__pb2
+from google.ads.google_ads.v6.proto.services import customer_label_service_pb2 as google_dot_ads_dot_googleads_dot_v6_dot_services_dot_customer__label__service__pb2
 
 
 class CustomerLabelServiceStub(object):
@@ -20,13 +20,13 @@ class CustomerLabelServiceStub(object):
         """
         self.GetCustomerLabel = channel.unary_unary(
                 '/google.ads.googleads.v6.services.CustomerLabelService/GetCustomerLabel',
-                request_serializer=google_dot_ads_dot_googleads__v6_dot_proto_dot_services_dot_customer__label__service__pb2.GetCustomerLabelRequest.SerializeToString,
-                response_deserializer=google_dot_ads_dot_googleads__v6_dot_proto_dot_resources_dot_customer__label__pb2.CustomerLabel.FromString,
+                request_serializer=google_dot_ads_dot_googleads_dot_v6_dot_services_dot_customer__label__service__pb2.GetCustomerLabelRequest.SerializeToString,
+                response_deserializer=google_dot_ads_dot_googleads_dot_v6_dot_resources_dot_customer__label__pb2.CustomerLabel.FromString,
                 )
         self.MutateCustomerLabels = channel.unary_unary(
                 '/google.ads.googleads.v6.services.CustomerLabelService/MutateCustomerLabels',
-                request_serializer=google_dot_ads_dot_googleads__v6_dot_proto_dot_services_dot_customer__label__service__pb2.MutateCustomerLabelsRequest.SerializeToString,
-                response_deserializer=google_dot_ads_dot_googleads__v6_dot_proto_dot_services_dot_customer__label__service__pb2.MutateCustomerLabelsResponse.FromString,
+                request_serializer=google_dot_ads_dot_googleads_dot_v6_dot_services_dot_customer__label__service__pb2.MutateCustomerLabelsRequest.SerializeToString,
+                response_deserializer=google_dot_ads_dot_googleads_dot_v6_dot_services_dot_customer__label__service__pb2.MutateCustomerLabelsResponse.FromString,
                 )
 
 
@@ -56,13 +56,13 @@ def add_CustomerLabelServiceServicer_to_server(servicer, server):
     rpc_method_handlers = {
             'GetCustomerLabel': grpc.unary_unary_rpc_method_handler(
                     servicer.GetCustomerLabel,
-                    request_deserializer=google_dot_ads_dot_googleads__v6_dot_proto_dot_services_dot_customer__label__service__pb2.GetCustomerLabelRequest.FromString,
-                    response_serializer=google_dot_ads_dot_googleads__v6_dot_proto_dot_resources_dot_customer__label__pb2.CustomerLabel.SerializeToString,
+                    request_deserializer=google_dot_ads_dot_googleads_dot_v6_dot_services_dot_customer__label__service__pb2.GetCustomerLabelRequest.FromString,
+                    response_serializer=google_dot_ads_dot_googleads_dot_v6_dot_resources_dot_customer__label__pb2.CustomerLabel.SerializeToString,
             ),
             'MutateCustomerLabels': grpc.unary_unary_rpc_method_handler(
                     servicer.MutateCustomerLabels,
-                    request_deserializer=google_dot_ads_dot_googleads__v6_dot_proto_dot_services_dot_customer__label__service__pb2.MutateCustomerLabelsRequest.FromString,
-                    response_serializer=google_dot_ads_dot_googleads__v6_dot_proto_dot_services_dot_customer__label__service__pb2.MutateCustomerLabelsResponse.SerializeToString,
+                    request_deserializer=google_dot_ads_dot_googleads_dot_v6_dot_services_dot_customer__label__service__pb2.MutateCustomerLabelsRequest.FromString,
+                    response_serializer=google_dot_ads_dot_googleads_dot_v6_dot_services_dot_customer__label__service__pb2.MutateCustomerLabelsResponse.SerializeToString,
             ),
     }
     generic_handler = grpc.method_handlers_generic_handler(
@@ -83,15 +83,16 @@ class CustomerLabelService(object):
             options=(),
             channel_credentials=None,
             call_credentials=None,
+            insecure=False,
             compression=None,
             wait_for_ready=None,
             timeout=None,
             metadata=None):
         return grpc.experimental.unary_unary(request, target, '/google.ads.googleads.v6.services.CustomerLabelService/GetCustomerLabel',
-            google_dot_ads_dot_googleads__v6_dot_proto_dot_services_dot_customer__label__service__pb2.GetCustomerLabelRequest.SerializeToString,
-            google_dot_ads_dot_googleads__v6_dot_proto_dot_resources_dot_customer__label__pb2.CustomerLabel.FromString,
+            google_dot_ads_dot_googleads_dot_v6_dot_services_dot_customer__label__service__pb2.GetCustomerLabelRequest.SerializeToString,
+            google_dot_ads_dot_googleads_dot_v6_dot_resources_dot_customer__label__pb2.CustomerLabel.FromString,
             options, channel_credentials,
-            call_credentials, compression, wait_for_ready, timeout, metadata)
+            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
 
     @staticmethod
     def MutateCustomerLabels(request,
@@ -99,12 +100,13 @@ class CustomerLabelService(object):
             options=(),
             channel_credentials=None,
             call_credentials=None,
+            insecure=False,
             compression=None,
             wait_for_ready=None,
             timeout=None,
             metadata=None):
         return grpc.experimental.unary_unary(request, target, '/google.ads.googleads.v6.services.CustomerLabelService/MutateCustomerLabels',
-            google_dot_ads_dot_googleads__v6_dot_proto_dot_services_dot_customer__label__service__pb2.MutateCustomerLabelsRequest.SerializeToString,
-            google_dot_ads_dot_googleads__v6_dot_proto_dot_services_dot_customer__label__service__pb2.MutateCustomerLabelsResponse.FromString,
+            google_dot_ads_dot_googleads_dot_v6_dot_services_dot_customer__label__service__pb2.MutateCustomerLabelsRequest.SerializeToString,
+            google_dot_ads_dot_googleads_dot_v6_dot_services_dot_customer__label__service__pb2.MutateCustomerLabelsResponse.FromString,
             options, channel_credentials,
-            call_credentials, compression, wait_for_ready, timeout, metadata)
+            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)

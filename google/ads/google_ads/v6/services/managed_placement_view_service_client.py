@@ -73,12 +73,13 @@ class ManagedPlacementViewServiceClient(object):
 
 
     @classmethod
-    def managed_placement_view_path(cls, customer, managed_placement_view):
+    def managed_placement_view_path(cls, customer_id, ad_group_id, criterion_id):
         """Return a fully-qualified managed_placement_view string."""
         return google.api_core.path_template.expand(
-            'customers/{customer}/managedPlacementViews/{managed_placement_view}',
-            customer=customer,
-            managed_placement_view=managed_placement_view,
+            'customers/{customer_id}/managedPlacementViews/{ad_group_id}~{criterion_id}',
+            customer_id=customer_id,
+            ad_group_id=ad_group_id,
+            criterion_id=criterion_id,
         )
 
     def __init__(self, transport=None, channel=None, credentials=None,
@@ -190,6 +191,15 @@ class ManagedPlacementViewServiceClient(object):
             metadata=None):
         """
         Returns the requested Managed Placement view in full detail.
+
+        Example:
+            >>> from google.ads import googleads_v6
+            >>>
+            >>> client = googleads_v6.ManagedPlacementViewServiceClient()
+            >>>
+            >>> resource_name = client.managed_placement_view_path('[CUSTOMER_ID]', '[AD_GROUP_ID]', '[CRITERION_ID]')
+            >>>
+            >>> response = client.get_managed_placement_view(resource_name)
 
         Args:
             resource_name (str): Required. The resource name of the Managed Placement View to fetch.

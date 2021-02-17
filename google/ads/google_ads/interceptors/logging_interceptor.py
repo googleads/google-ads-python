@@ -38,6 +38,7 @@ from ..util import set_nested_message_field, get_nested_attr
 #     3. They are sent to the API as part of a Mutate request.
 _MESSAGES_WITH_SENSITIVE_FIELDS = {
     "CustomerUserAccess": ["email_address", "inviter_user_email_address"],
+    "CustomerUserAccessInvitation": ["email_address"],
     "MutateCustomerUserAccessRequest": [
         "operation.update.email_address",
         "operation.update.inviter_user_email_address",

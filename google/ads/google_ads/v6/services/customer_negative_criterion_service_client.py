@@ -73,12 +73,12 @@ class CustomerNegativeCriterionServiceClient(object):
 
 
     @classmethod
-    def customer_negative_criteria_path(cls, customer, customer_negative_criteria):
-        """Return a fully-qualified customer_negative_criteria string."""
+    def customer_negative_criterion_path(cls, customer_id, criterion_id):
+        """Return a fully-qualified customer_negative_criterion string."""
         return google.api_core.path_template.expand(
-            'customers/{customer}/customerNegativeCriteria/{customer_negative_criteria}',
-            customer=customer,
-            customer_negative_criteria=customer_negative_criteria,
+            'customers/{customer_id}/customerNegativeCriteria/{criterion_id}',
+            customer_id=customer_id,
+            criterion_id=criterion_id,
         )
 
     def __init__(self, transport=None, channel=None, credentials=None,
@@ -191,6 +191,15 @@ class CustomerNegativeCriterionServiceClient(object):
         """
         Returns the requested criterion in full detail.
 
+        Example:
+            >>> from google.ads import googleads_v6
+            >>>
+            >>> client = googleads_v6.CustomerNegativeCriterionServiceClient()
+            >>>
+            >>> resource_name = client.customer_negative_criterion_path('[CUSTOMER_ID]', '[CRITERION_ID]')
+            >>>
+            >>> response = client.get_customer_negative_criterion(resource_name)
+
         Args:
             resource_name (str): Required. The resource name of the criterion to fetch.
             retry (Optional[google.api_core.retry.Retry]):  A retry object used
@@ -243,11 +252,25 @@ class CustomerNegativeCriterionServiceClient(object):
             operations,
             partial_failure=None,
             validate_only=None,
+            response_content_type=None,
             retry=google.api_core.gapic_v1.method.DEFAULT,
             timeout=google.api_core.gapic_v1.method.DEFAULT,
             metadata=None):
         """
         Creates or removes criteria. Operation statuses are returned.
+
+        Example:
+            >>> from google.ads import googleads_v6
+            >>>
+            >>> client = googleads_v6.CustomerNegativeCriterionServiceClient()
+            >>>
+            >>> # TODO: Initialize `customer_id`:
+            >>> customer_id = ''
+            >>>
+            >>> # TODO: Initialize `operations`:
+            >>> operations = []
+            >>>
+            >>> response = client.mutate_customer_negative_criteria(customer_id, operations)
 
         Args:
             customer_id (str): Required. The ID of the customer whose criteria are being modified.
@@ -261,6 +284,8 @@ class CustomerNegativeCriterionServiceClient(object):
                 Default is false.
             validate_only (bool): If true, the request is validated but not executed. Only errors are
                 returned, not results.
+            response_content_type (~google.ads.googleads_v6.types.ResponseContentType): The response content type setting. Determines whether the mutable resource
+                or just the resource name should be returned post mutation.
             retry (Optional[google.api_core.retry.Retry]):  A retry object used
                 to retry requests. If ``None`` is specified, requests will
                 be retried using a default configuration.
@@ -294,6 +319,7 @@ class CustomerNegativeCriterionServiceClient(object):
             operations=operations,
             partial_failure=partial_failure,
             validate_only=validate_only,
+            response_content_type=response_content_type,
         )
         if metadata is None:
             metadata = []

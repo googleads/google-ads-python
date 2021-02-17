@@ -2,8 +2,8 @@
 """Client and server classes corresponding to protobuf-defined services."""
 import grpc
 
-from google.ads.google_ads.v6.proto.resources import custom_audience_pb2 as google_dot_ads_dot_googleads__v6_dot_proto_dot_resources_dot_custom__audience__pb2
-from google.ads.google_ads.v6.proto.services import custom_audience_service_pb2 as google_dot_ads_dot_googleads__v6_dot_proto_dot_services_dot_custom__audience__service__pb2
+from google.ads.google_ads.v6.proto.resources import custom_audience_pb2 as google_dot_ads_dot_googleads_dot_v6_dot_resources_dot_custom__audience__pb2
+from google.ads.google_ads.v6.proto.services import custom_audience_service_pb2 as google_dot_ads_dot_googleads_dot_v6_dot_services_dot_custom__audience__service__pb2
 
 
 class CustomAudienceServiceStub(object):
@@ -20,13 +20,13 @@ class CustomAudienceServiceStub(object):
         """
         self.GetCustomAudience = channel.unary_unary(
                 '/google.ads.googleads.v6.services.CustomAudienceService/GetCustomAudience',
-                request_serializer=google_dot_ads_dot_googleads__v6_dot_proto_dot_services_dot_custom__audience__service__pb2.GetCustomAudienceRequest.SerializeToString,
-                response_deserializer=google_dot_ads_dot_googleads__v6_dot_proto_dot_resources_dot_custom__audience__pb2.CustomAudience.FromString,
+                request_serializer=google_dot_ads_dot_googleads_dot_v6_dot_services_dot_custom__audience__service__pb2.GetCustomAudienceRequest.SerializeToString,
+                response_deserializer=google_dot_ads_dot_googleads_dot_v6_dot_resources_dot_custom__audience__pb2.CustomAudience.FromString,
                 )
         self.MutateCustomAudiences = channel.unary_unary(
                 '/google.ads.googleads.v6.services.CustomAudienceService/MutateCustomAudiences',
-                request_serializer=google_dot_ads_dot_googleads__v6_dot_proto_dot_services_dot_custom__audience__service__pb2.MutateCustomAudiencesRequest.SerializeToString,
-                response_deserializer=google_dot_ads_dot_googleads__v6_dot_proto_dot_services_dot_custom__audience__service__pb2.MutateCustomAudiencesResponse.FromString,
+                request_serializer=google_dot_ads_dot_googleads_dot_v6_dot_services_dot_custom__audience__service__pb2.MutateCustomAudiencesRequest.SerializeToString,
+                response_deserializer=google_dot_ads_dot_googleads_dot_v6_dot_services_dot_custom__audience__service__pb2.MutateCustomAudiencesResponse.FromString,
                 )
 
 
@@ -55,13 +55,13 @@ def add_CustomAudienceServiceServicer_to_server(servicer, server):
     rpc_method_handlers = {
             'GetCustomAudience': grpc.unary_unary_rpc_method_handler(
                     servicer.GetCustomAudience,
-                    request_deserializer=google_dot_ads_dot_googleads__v6_dot_proto_dot_services_dot_custom__audience__service__pb2.GetCustomAudienceRequest.FromString,
-                    response_serializer=google_dot_ads_dot_googleads__v6_dot_proto_dot_resources_dot_custom__audience__pb2.CustomAudience.SerializeToString,
+                    request_deserializer=google_dot_ads_dot_googleads_dot_v6_dot_services_dot_custom__audience__service__pb2.GetCustomAudienceRequest.FromString,
+                    response_serializer=google_dot_ads_dot_googleads_dot_v6_dot_resources_dot_custom__audience__pb2.CustomAudience.SerializeToString,
             ),
             'MutateCustomAudiences': grpc.unary_unary_rpc_method_handler(
                     servicer.MutateCustomAudiences,
-                    request_deserializer=google_dot_ads_dot_googleads__v6_dot_proto_dot_services_dot_custom__audience__service__pb2.MutateCustomAudiencesRequest.FromString,
-                    response_serializer=google_dot_ads_dot_googleads__v6_dot_proto_dot_services_dot_custom__audience__service__pb2.MutateCustomAudiencesResponse.SerializeToString,
+                    request_deserializer=google_dot_ads_dot_googleads_dot_v6_dot_services_dot_custom__audience__service__pb2.MutateCustomAudiencesRequest.FromString,
+                    response_serializer=google_dot_ads_dot_googleads_dot_v6_dot_services_dot_custom__audience__service__pb2.MutateCustomAudiencesResponse.SerializeToString,
             ),
     }
     generic_handler = grpc.method_handlers_generic_handler(
@@ -82,15 +82,16 @@ class CustomAudienceService(object):
             options=(),
             channel_credentials=None,
             call_credentials=None,
+            insecure=False,
             compression=None,
             wait_for_ready=None,
             timeout=None,
             metadata=None):
         return grpc.experimental.unary_unary(request, target, '/google.ads.googleads.v6.services.CustomAudienceService/GetCustomAudience',
-            google_dot_ads_dot_googleads__v6_dot_proto_dot_services_dot_custom__audience__service__pb2.GetCustomAudienceRequest.SerializeToString,
-            google_dot_ads_dot_googleads__v6_dot_proto_dot_resources_dot_custom__audience__pb2.CustomAudience.FromString,
+            google_dot_ads_dot_googleads_dot_v6_dot_services_dot_custom__audience__service__pb2.GetCustomAudienceRequest.SerializeToString,
+            google_dot_ads_dot_googleads_dot_v6_dot_resources_dot_custom__audience__pb2.CustomAudience.FromString,
             options, channel_credentials,
-            call_credentials, compression, wait_for_ready, timeout, metadata)
+            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
 
     @staticmethod
     def MutateCustomAudiences(request,
@@ -98,12 +99,13 @@ class CustomAudienceService(object):
             options=(),
             channel_credentials=None,
             call_credentials=None,
+            insecure=False,
             compression=None,
             wait_for_ready=None,
             timeout=None,
             metadata=None):
         return grpc.experimental.unary_unary(request, target, '/google.ads.googleads.v6.services.CustomAudienceService/MutateCustomAudiences',
-            google_dot_ads_dot_googleads__v6_dot_proto_dot_services_dot_custom__audience__service__pb2.MutateCustomAudiencesRequest.SerializeToString,
-            google_dot_ads_dot_googleads__v6_dot_proto_dot_services_dot_custom__audience__service__pb2.MutateCustomAudiencesResponse.FromString,
+            google_dot_ads_dot_googleads_dot_v6_dot_services_dot_custom__audience__service__pb2.MutateCustomAudiencesRequest.SerializeToString,
+            google_dot_ads_dot_googleads_dot_v6_dot_services_dot_custom__audience__service__pb2.MutateCustomAudiencesResponse.FromString,
             options, channel_credentials,
-            call_credentials, compression, wait_for_ready, timeout, metadata)
+            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)

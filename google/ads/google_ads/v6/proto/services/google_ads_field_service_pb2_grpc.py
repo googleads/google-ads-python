@@ -2,8 +2,8 @@
 """Client and server classes corresponding to protobuf-defined services."""
 import grpc
 
-from google.ads.google_ads.v6.proto.resources import google_ads_field_pb2 as google_dot_ads_dot_googleads__v6_dot_proto_dot_resources_dot_google__ads__field__pb2
-from google.ads.google_ads.v6.proto.services import google_ads_field_service_pb2 as google_dot_ads_dot_googleads__v6_dot_proto_dot_services_dot_google__ads__field__service__pb2
+from google.ads.google_ads.v6.proto.resources import google_ads_field_pb2 as google_dot_ads_dot_googleads_dot_v6_dot_resources_dot_google__ads__field__pb2
+from google.ads.google_ads.v6.proto.services import google_ads_field_service_pb2 as google_dot_ads_dot_googleads_dot_v6_dot_services_dot_google__ads__field__service__pb2
 
 
 class GoogleAdsFieldServiceStub(object):
@@ -20,13 +20,13 @@ class GoogleAdsFieldServiceStub(object):
         """
         self.GetGoogleAdsField = channel.unary_unary(
                 '/google.ads.googleads.v6.services.GoogleAdsFieldService/GetGoogleAdsField',
-                request_serializer=google_dot_ads_dot_googleads__v6_dot_proto_dot_services_dot_google__ads__field__service__pb2.GetGoogleAdsFieldRequest.SerializeToString,
-                response_deserializer=google_dot_ads_dot_googleads__v6_dot_proto_dot_resources_dot_google__ads__field__pb2.GoogleAdsField.FromString,
+                request_serializer=google_dot_ads_dot_googleads_dot_v6_dot_services_dot_google__ads__field__service__pb2.GetGoogleAdsFieldRequest.SerializeToString,
+                response_deserializer=google_dot_ads_dot_googleads_dot_v6_dot_resources_dot_google__ads__field__pb2.GoogleAdsField.FromString,
                 )
         self.SearchGoogleAdsFields = channel.unary_unary(
                 '/google.ads.googleads.v6.services.GoogleAdsFieldService/SearchGoogleAdsFields',
-                request_serializer=google_dot_ads_dot_googleads__v6_dot_proto_dot_services_dot_google__ads__field__service__pb2.SearchGoogleAdsFieldsRequest.SerializeToString,
-                response_deserializer=google_dot_ads_dot_googleads__v6_dot_proto_dot_services_dot_google__ads__field__service__pb2.SearchGoogleAdsFieldsResponse.FromString,
+                request_serializer=google_dot_ads_dot_googleads_dot_v6_dot_services_dot_google__ads__field__service__pb2.SearchGoogleAdsFieldsRequest.SerializeToString,
+                response_deserializer=google_dot_ads_dot_googleads_dot_v6_dot_services_dot_google__ads__field__service__pb2.SearchGoogleAdsFieldsResponse.FromString,
                 )
 
 
@@ -55,13 +55,13 @@ def add_GoogleAdsFieldServiceServicer_to_server(servicer, server):
     rpc_method_handlers = {
             'GetGoogleAdsField': grpc.unary_unary_rpc_method_handler(
                     servicer.GetGoogleAdsField,
-                    request_deserializer=google_dot_ads_dot_googleads__v6_dot_proto_dot_services_dot_google__ads__field__service__pb2.GetGoogleAdsFieldRequest.FromString,
-                    response_serializer=google_dot_ads_dot_googleads__v6_dot_proto_dot_resources_dot_google__ads__field__pb2.GoogleAdsField.SerializeToString,
+                    request_deserializer=google_dot_ads_dot_googleads_dot_v6_dot_services_dot_google__ads__field__service__pb2.GetGoogleAdsFieldRequest.FromString,
+                    response_serializer=google_dot_ads_dot_googleads_dot_v6_dot_resources_dot_google__ads__field__pb2.GoogleAdsField.SerializeToString,
             ),
             'SearchGoogleAdsFields': grpc.unary_unary_rpc_method_handler(
                     servicer.SearchGoogleAdsFields,
-                    request_deserializer=google_dot_ads_dot_googleads__v6_dot_proto_dot_services_dot_google__ads__field__service__pb2.SearchGoogleAdsFieldsRequest.FromString,
-                    response_serializer=google_dot_ads_dot_googleads__v6_dot_proto_dot_services_dot_google__ads__field__service__pb2.SearchGoogleAdsFieldsResponse.SerializeToString,
+                    request_deserializer=google_dot_ads_dot_googleads_dot_v6_dot_services_dot_google__ads__field__service__pb2.SearchGoogleAdsFieldsRequest.FromString,
+                    response_serializer=google_dot_ads_dot_googleads_dot_v6_dot_services_dot_google__ads__field__service__pb2.SearchGoogleAdsFieldsResponse.SerializeToString,
             ),
     }
     generic_handler = grpc.method_handlers_generic_handler(
@@ -82,15 +82,16 @@ class GoogleAdsFieldService(object):
             options=(),
             channel_credentials=None,
             call_credentials=None,
+            insecure=False,
             compression=None,
             wait_for_ready=None,
             timeout=None,
             metadata=None):
         return grpc.experimental.unary_unary(request, target, '/google.ads.googleads.v6.services.GoogleAdsFieldService/GetGoogleAdsField',
-            google_dot_ads_dot_googleads__v6_dot_proto_dot_services_dot_google__ads__field__service__pb2.GetGoogleAdsFieldRequest.SerializeToString,
-            google_dot_ads_dot_googleads__v6_dot_proto_dot_resources_dot_google__ads__field__pb2.GoogleAdsField.FromString,
+            google_dot_ads_dot_googleads_dot_v6_dot_services_dot_google__ads__field__service__pb2.GetGoogleAdsFieldRequest.SerializeToString,
+            google_dot_ads_dot_googleads_dot_v6_dot_resources_dot_google__ads__field__pb2.GoogleAdsField.FromString,
             options, channel_credentials,
-            call_credentials, compression, wait_for_ready, timeout, metadata)
+            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
 
     @staticmethod
     def SearchGoogleAdsFields(request,
@@ -98,12 +99,13 @@ class GoogleAdsFieldService(object):
             options=(),
             channel_credentials=None,
             call_credentials=None,
+            insecure=False,
             compression=None,
             wait_for_ready=None,
             timeout=None,
             metadata=None):
         return grpc.experimental.unary_unary(request, target, '/google.ads.googleads.v6.services.GoogleAdsFieldService/SearchGoogleAdsFields',
-            google_dot_ads_dot_googleads__v6_dot_proto_dot_services_dot_google__ads__field__service__pb2.SearchGoogleAdsFieldsRequest.SerializeToString,
-            google_dot_ads_dot_googleads__v6_dot_proto_dot_services_dot_google__ads__field__service__pb2.SearchGoogleAdsFieldsResponse.FromString,
+            google_dot_ads_dot_googleads_dot_v6_dot_services_dot_google__ads__field__service__pb2.SearchGoogleAdsFieldsRequest.SerializeToString,
+            google_dot_ads_dot_googleads_dot_v6_dot_services_dot_google__ads__field__service__pb2.SearchGoogleAdsFieldsResponse.FromString,
             options, channel_credentials,
-            call_credentials, compression, wait_for_ready, timeout, metadata)
+            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)

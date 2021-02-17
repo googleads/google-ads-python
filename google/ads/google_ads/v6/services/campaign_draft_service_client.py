@@ -78,12 +78,13 @@ class CampaignDraftServiceClient(object):
 
 
     @classmethod
-    def campaign_draft_path(cls, customer, campaign_draft):
+    def campaign_draft_path(cls, customer_id, base_campaign_id, draft_id):
         """Return a fully-qualified campaign_draft string."""
         return google.api_core.path_template.expand(
-            'customers/{customer}/campaignDrafts/{campaign_draft}',
-            customer=customer,
-            campaign_draft=campaign_draft,
+            'customers/{customer_id}/campaignDrafts/{base_campaign_id}~{draft_id}',
+            customer_id=customer_id,
+            base_campaign_id=base_campaign_id,
+            draft_id=draft_id,
         )
 
     def __init__(self, transport=None, channel=None, credentials=None,
@@ -196,6 +197,15 @@ class CampaignDraftServiceClient(object):
         """
         Returns the requested campaign draft in full detail.
 
+        Example:
+            >>> from google.ads import googleads_v6
+            >>>
+            >>> client = googleads_v6.CampaignDraftServiceClient()
+            >>>
+            >>> resource_name = client.campaign_draft_path('[CUSTOMER_ID]', '[BASE_CAMPAIGN_ID]', '[DRAFT_ID]')
+            >>>
+            >>> response = client.get_campaign_draft(resource_name)
+
         Args:
             resource_name (str): Required. The resource name of the campaign draft to fetch.
             retry (Optional[google.api_core.retry.Retry]):  A retry object used
@@ -255,6 +265,19 @@ class CampaignDraftServiceClient(object):
         """
         Creates, updates, or removes campaign drafts. Operation statuses are
         returned.
+
+        Example:
+            >>> from google.ads import googleads_v6
+            >>>
+            >>> client = googleads_v6.CampaignDraftServiceClient()
+            >>>
+            >>> # TODO: Initialize `customer_id`:
+            >>> customer_id = ''
+            >>>
+            >>> # TODO: Initialize `operations`:
+            >>> operations = []
+            >>>
+            >>> response = client.mutate_campaign_drafts(customer_id, operations)
 
         Args:
             customer_id (str): Required. The ID of the customer whose campaign drafts are being modified.
@@ -335,6 +358,25 @@ class CampaignDraftServiceClient(object):
         ``CampaignDraftService.ListCampaignDraftAsyncErrors`` to view the list
         of error reasons.
 
+        Example:
+            >>> from google.ads import googleads_v6
+            >>>
+            >>> client = googleads_v6.CampaignDraftServiceClient()
+            >>>
+            >>> # TODO: Initialize `campaign_draft`:
+            >>> campaign_draft = ''
+            >>>
+            >>> response = client.promote_campaign_draft(campaign_draft)
+            >>>
+            >>> def callback(operation_future):
+            ...     # Handle result.
+            ...     result = operation_future.result()
+            >>>
+            >>> response.add_done_callback(callback)
+            >>>
+            >>> # Handle metadata.
+            >>> metadata = response.metadata()
+
         Args:
             campaign_draft (str): Required. The resource name of the campaign draft to promote.
             retry (Optional[google.api_core.retry.Retry]):  A retry object used
@@ -398,6 +440,27 @@ class CampaignDraftServiceClient(object):
         Returns all errors that occurred during CampaignDraft promote. Throws an
         error if called before campaign draft is promoted.
         Supports standard list paging.
+
+        Example:
+            >>> from google.ads import googleads_v6
+            >>>
+            >>> client = googleads_v6.CampaignDraftServiceClient()
+            >>>
+            >>> resource_name = client.campaign_draft_path('[CUSTOMER_ID]', '[BASE_CAMPAIGN_ID]', '[DRAFT_ID]')
+            >>>
+            >>> # Iterate over all results
+            >>> for element in client.list_campaign_draft_async_errors(resource_name):
+            ...     # process element
+            ...     pass
+            >>>
+            >>>
+            >>> # Alternatively:
+            >>>
+            >>> # Iterate over results one page at a time
+            >>> for page in client.list_campaign_draft_async_errors(resource_name).pages:
+            ...     for element in page:
+            ...         # process element
+            ...         pass
 
         Args:
             resource_name (str): Required. The name of the campaign draft from which to retrieve the async errors.

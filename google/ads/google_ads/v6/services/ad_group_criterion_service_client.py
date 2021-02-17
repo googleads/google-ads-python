@@ -73,12 +73,13 @@ class AdGroupCriterionServiceClient(object):
 
 
     @classmethod
-    def ad_group_criteria_path(cls, customer, ad_group_criteria):
-        """Return a fully-qualified ad_group_criteria string."""
+    def ad_group_criterion_path(cls, customer_id, ad_group_id, criterion_id):
+        """Return a fully-qualified ad_group_criterion string."""
         return google.api_core.path_template.expand(
-            'customers/{customer}/adGroupCriteria/{ad_group_criteria}',
-            customer=customer,
-            ad_group_criteria=ad_group_criteria,
+            'customers/{customer_id}/adGroupCriteria/{ad_group_id}~{criterion_id}',
+            customer_id=customer_id,
+            ad_group_id=ad_group_id,
+            criterion_id=criterion_id,
         )
 
     def __init__(self, transport=None, channel=None, credentials=None,
@@ -191,6 +192,15 @@ class AdGroupCriterionServiceClient(object):
         """
         Returns the requested criterion in full detail.
 
+        Example:
+            >>> from google.ads import googleads_v6
+            >>>
+            >>> client = googleads_v6.AdGroupCriterionServiceClient()
+            >>>
+            >>> resource_name = client.ad_group_criterion_path('[CUSTOMER_ID]', '[AD_GROUP_ID]', '[CRITERION_ID]')
+            >>>
+            >>> response = client.get_ad_group_criterion(resource_name)
+
         Args:
             resource_name (str): Required. The resource name of the criterion to fetch.
             retry (Optional[google.api_core.retry.Retry]):  A retry object used
@@ -249,6 +259,19 @@ class AdGroupCriterionServiceClient(object):
             metadata=None):
         """
         Creates, updates, or removes criteria. Operation statuses are returned.
+
+        Example:
+            >>> from google.ads import googleads_v6
+            >>>
+            >>> client = googleads_v6.AdGroupCriterionServiceClient()
+            >>>
+            >>> # TODO: Initialize `customer_id`:
+            >>> customer_id = ''
+            >>>
+            >>> # TODO: Initialize `operations`:
+            >>> operations = []
+            >>>
+            >>> response = client.mutate_ad_group_criteria(customer_id, operations)
 
         Args:
             customer_id (str): Required. ID of the customer whose criteria are being modified.

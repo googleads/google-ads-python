@@ -73,12 +73,12 @@ class CustomerExtensionSettingServiceClient(object):
 
 
     @classmethod
-    def customer_extension_setting_path(cls, customer, customer_extension_setting):
+    def customer_extension_setting_path(cls, customer_id, extension_type):
         """Return a fully-qualified customer_extension_setting string."""
         return google.api_core.path_template.expand(
-            'customers/{customer}/customerExtensionSettings/{customer_extension_setting}',
-            customer=customer,
-            customer_extension_setting=customer_extension_setting,
+            'customers/{customer_id}/customerExtensionSettings/{extension_type}',
+            customer_id=customer_id,
+            extension_type=extension_type,
         )
 
     def __init__(self, transport=None, channel=None, credentials=None,
@@ -191,6 +191,15 @@ class CustomerExtensionSettingServiceClient(object):
         """
         Returns the requested customer extension setting in full detail.
 
+        Example:
+            >>> from google.ads import googleads_v6
+            >>>
+            >>> client = googleads_v6.CustomerExtensionSettingServiceClient()
+            >>>
+            >>> resource_name = client.customer_extension_setting_path('[CUSTOMER_ID]', '[EXTENSION_TYPE]')
+            >>>
+            >>> response = client.get_customer_extension_setting(resource_name)
+
         Args:
             resource_name (str): Required. The resource name of the customer extension setting to fetch.
             retry (Optional[google.api_core.retry.Retry]):  A retry object used
@@ -249,6 +258,19 @@ class CustomerExtensionSettingServiceClient(object):
         """
         Creates, updates, or removes customer extension settings. Operation
         statuses are returned.
+
+        Example:
+            >>> from google.ads import googleads_v6
+            >>>
+            >>> client = googleads_v6.CustomerExtensionSettingServiceClient()
+            >>>
+            >>> # TODO: Initialize `customer_id`:
+            >>> customer_id = ''
+            >>>
+            >>> # TODO: Initialize `operations`:
+            >>> operations = []
+            >>>
+            >>> response = client.mutate_customer_extension_settings(customer_id, operations)
 
         Args:
             customer_id (str): Required. The ID of the customer whose customer extension settings are being

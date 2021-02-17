@@ -73,11 +73,11 @@ class MobileDeviceConstantServiceClient(object):
 
 
     @classmethod
-    def mobile_device_constant_path(cls, mobile_device_constant):
+    def mobile_device_constant_path(cls, criterion_id):
         """Return a fully-qualified mobile_device_constant string."""
         return google.api_core.path_template.expand(
-            'mobileDeviceConstants/{mobile_device_constant}',
-            mobile_device_constant=mobile_device_constant,
+            'mobileDeviceConstants/{criterion_id}',
+            criterion_id=criterion_id,
         )
 
     def __init__(self, transport=None, channel=None, credentials=None,
@@ -189,6 +189,15 @@ class MobileDeviceConstantServiceClient(object):
             metadata=None):
         """
         Returns the requested mobile device constant in full detail.
+
+        Example:
+            >>> from google.ads import googleads_v6
+            >>>
+            >>> client = googleads_v6.MobileDeviceConstantServiceClient()
+            >>>
+            >>> resource_name = client.mobile_device_constant_path('[CRITERION_ID]')
+            >>>
+            >>> response = client.get_mobile_device_constant(resource_name)
 
         Args:
             resource_name (str): Required. Resource name of the mobile device to fetch.

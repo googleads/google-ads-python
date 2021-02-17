@@ -73,12 +73,13 @@ class AdGroupFeedServiceClient(object):
 
 
     @classmethod
-    def ad_group_feed_path(cls, customer, ad_group_feed):
+    def ad_group_feed_path(cls, customer_id, ad_group_id, feed_id):
         """Return a fully-qualified ad_group_feed string."""
         return google.api_core.path_template.expand(
-            'customers/{customer}/adGroupFeeds/{ad_group_feed}',
-            customer=customer,
-            ad_group_feed=ad_group_feed,
+            'customers/{customer_id}/adGroupFeeds/{ad_group_id}~{feed_id}',
+            customer_id=customer_id,
+            ad_group_id=ad_group_id,
+            feed_id=feed_id,
         )
 
     def __init__(self, transport=None, channel=None, credentials=None,
@@ -191,6 +192,15 @@ class AdGroupFeedServiceClient(object):
         """
         Returns the requested ad group feed in full detail.
 
+        Example:
+            >>> from google.ads import googleads_v6
+            >>>
+            >>> client = googleads_v6.AdGroupFeedServiceClient()
+            >>>
+            >>> resource_name = client.ad_group_feed_path('[CUSTOMER_ID]', '[AD_GROUP_ID]', '[FEED_ID]')
+            >>>
+            >>> response = client.get_ad_group_feed(resource_name)
+
         Args:
             resource_name (str): Required. The resource name of the ad group feed to fetch.
             retry (Optional[google.api_core.retry.Retry]):  A retry object used
@@ -250,6 +260,19 @@ class AdGroupFeedServiceClient(object):
         """
         Creates, updates, or removes ad group feeds. Operation statuses are
         returned.
+
+        Example:
+            >>> from google.ads import googleads_v6
+            >>>
+            >>> client = googleads_v6.AdGroupFeedServiceClient()
+            >>>
+            >>> # TODO: Initialize `customer_id`:
+            >>> customer_id = ''
+            >>>
+            >>> # TODO: Initialize `operations`:
+            >>> operations = []
+            >>>
+            >>> response = client.mutate_ad_group_feeds(customer_id, operations)
 
         Args:
             customer_id (str): Required. The ID of the customer whose ad group feeds are being modified.

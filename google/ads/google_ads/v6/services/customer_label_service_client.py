@@ -73,12 +73,12 @@ class CustomerLabelServiceClient(object):
 
 
     @classmethod
-    def customer_label_path(cls, customer, customer_label):
+    def customer_label_path(cls, customer_id, label_id):
         """Return a fully-qualified customer_label string."""
         return google.api_core.path_template.expand(
-            'customers/{customer}/customerLabels/{customer_label}',
-            customer=customer,
-            customer_label=customer_label,
+            'customers/{customer_id}/customerLabels/{label_id}',
+            customer_id=customer_id,
+            label_id=label_id,
         )
 
     def __init__(self, transport=None, channel=None, credentials=None,
@@ -191,6 +191,15 @@ class CustomerLabelServiceClient(object):
         """
         Returns the requested customer-label relationship in full detail.
 
+        Example:
+            >>> from google.ads import googleads_v6
+            >>>
+            >>> client = googleads_v6.CustomerLabelServiceClient()
+            >>>
+            >>> resource_name = client.customer_label_path('[CUSTOMER_ID]', '[LABEL_ID]')
+            >>>
+            >>> response = client.get_customer_label(resource_name)
+
         Args:
             resource_name (str): Required. The resource name of the customer-label relationship to fetch.
             retry (Optional[google.api_core.retry.Retry]):  A retry object used
@@ -249,6 +258,19 @@ class CustomerLabelServiceClient(object):
         """
         Creates and removes customer-label relationships.
         Operation statuses are returned.
+
+        Example:
+            >>> from google.ads import googleads_v6
+            >>>
+            >>> client = googleads_v6.CustomerLabelServiceClient()
+            >>>
+            >>> # TODO: Initialize `customer_id`:
+            >>> customer_id = ''
+            >>>
+            >>> # TODO: Initialize `operations`:
+            >>> operations = []
+            >>>
+            >>> response = client.mutate_customer_labels(customer_id, operations)
 
         Args:
             customer_id (str): Required. ID of the customer whose customer-label relationships are being modified.

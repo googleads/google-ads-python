@@ -73,12 +73,13 @@ class ProductGroupViewServiceClient(object):
 
 
     @classmethod
-    def product_group_view_path(cls, customer, product_group_view):
+    def product_group_view_path(cls, customer_id, adgroup_id, criterion_id):
         """Return a fully-qualified product_group_view string."""
         return google.api_core.path_template.expand(
-            'customers/{customer}/productGroupViews/{product_group_view}',
-            customer=customer,
-            product_group_view=product_group_view,
+            'customers/{customer_id}/productGroupViews/{adgroup_id}~{criterion_id}',
+            customer_id=customer_id,
+            adgroup_id=adgroup_id,
+            criterion_id=criterion_id,
         )
 
     def __init__(self, transport=None, channel=None, credentials=None,
@@ -190,6 +191,15 @@ class ProductGroupViewServiceClient(object):
             metadata=None):
         """
         Returns the requested product group view in full detail.
+
+        Example:
+            >>> from google.ads import googleads_v6
+            >>>
+            >>> client = googleads_v6.ProductGroupViewServiceClient()
+            >>>
+            >>> resource_name = client.product_group_view_path('[CUSTOMER_ID]', '[ADGROUP_ID]', '[CRITERION_ID]')
+            >>>
+            >>> response = client.get_product_group_view(resource_name)
 
         Args:
             resource_name (str): Required. The resource name of the product group view to fetch.

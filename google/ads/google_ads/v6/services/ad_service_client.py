@@ -73,12 +73,12 @@ class AdServiceClient(object):
 
 
     @classmethod
-    def ad_path(cls, customer, ad):
+    def ad_path(cls, customer_id, ad_id):
         """Return a fully-qualified ad string."""
         return google.api_core.path_template.expand(
-            'customers/{customer}/ads/{ad}',
-            customer=customer,
-            ad=ad,
+            'customers/{customer_id}/ads/{ad_id}',
+            customer_id=customer_id,
+            ad_id=ad_id,
         )
 
     def __init__(self, transport=None, channel=None, credentials=None,
@@ -191,6 +191,15 @@ class AdServiceClient(object):
         """
         Returns the requested ad in full detail.
 
+        Example:
+            >>> from google.ads import googleads_v6
+            >>>
+            >>> client = googleads_v6.AdServiceClient()
+            >>>
+            >>> resource_name = client.ad_path('[CUSTOMER_ID]', '[AD_ID]')
+            >>>
+            >>> response = client.get_ad(resource_name)
+
         Args:
             resource_name (str): Required. The resource name of the ad to fetch.
             retry (Optional[google.api_core.retry.Retry]):  A retry object used
@@ -248,6 +257,19 @@ class AdServiceClient(object):
         """
         Updates ads. Operation statuses are returned. Updating ads is not supported
         for TextAd, ExpandedDynamicSearchAd, GmailAd and ImageAd.
+
+        Example:
+            >>> from google.ads import googleads_v6
+            >>>
+            >>> client = googleads_v6.AdServiceClient()
+            >>>
+            >>> # TODO: Initialize `customer_id`:
+            >>> customer_id = ''
+            >>>
+            >>> # TODO: Initialize `operations`:
+            >>> operations = []
+            >>>
+            >>> response = client.mutate_ads(customer_id, operations)
 
         Args:
             customer_id (str): Required. The ID of the customer whose ads are being modified.

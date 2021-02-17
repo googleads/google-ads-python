@@ -2,8 +2,8 @@
 """Client and server classes corresponding to protobuf-defined services."""
 import grpc
 
-from google.ads.google_ads.v6.proto.resources import third_party_app_analytics_link_pb2 as google_dot_ads_dot_googleads__v6_dot_proto_dot_resources_dot_third__party__app__analytics__link__pb2
-from google.ads.google_ads.v6.proto.services import third_party_app_analytics_link_service_pb2 as google_dot_ads_dot_googleads__v6_dot_proto_dot_services_dot_third__party__app__analytics__link__service__pb2
+from google.ads.google_ads.v6.proto.resources import third_party_app_analytics_link_pb2 as google_dot_ads_dot_googleads_dot_v6_dot_resources_dot_third__party__app__analytics__link__pb2
+from google.ads.google_ads.v6.proto.services import third_party_app_analytics_link_service_pb2 as google_dot_ads_dot_googleads_dot_v6_dot_services_dot_third__party__app__analytics__link__service__pb2
 
 
 class ThirdPartyAppAnalyticsLinkServiceStub(object):
@@ -19,13 +19,13 @@ class ThirdPartyAppAnalyticsLinkServiceStub(object):
         """
         self.GetThirdPartyAppAnalyticsLink = channel.unary_unary(
                 '/google.ads.googleads.v6.services.ThirdPartyAppAnalyticsLinkService/GetThirdPartyAppAnalyticsLink',
-                request_serializer=google_dot_ads_dot_googleads__v6_dot_proto_dot_services_dot_third__party__app__analytics__link__service__pb2.GetThirdPartyAppAnalyticsLinkRequest.SerializeToString,
-                response_deserializer=google_dot_ads_dot_googleads__v6_dot_proto_dot_resources_dot_third__party__app__analytics__link__pb2.ThirdPartyAppAnalyticsLink.FromString,
+                request_serializer=google_dot_ads_dot_googleads_dot_v6_dot_services_dot_third__party__app__analytics__link__service__pb2.GetThirdPartyAppAnalyticsLinkRequest.SerializeToString,
+                response_deserializer=google_dot_ads_dot_googleads_dot_v6_dot_resources_dot_third__party__app__analytics__link__pb2.ThirdPartyAppAnalyticsLink.FromString,
                 )
         self.RegenerateShareableLinkId = channel.unary_unary(
                 '/google.ads.googleads.v6.services.ThirdPartyAppAnalyticsLinkService/RegenerateShareableLinkId',
-                request_serializer=google_dot_ads_dot_googleads__v6_dot_proto_dot_services_dot_third__party__app__analytics__link__service__pb2.RegenerateShareableLinkIdRequest.SerializeToString,
-                response_deserializer=google_dot_ads_dot_googleads__v6_dot_proto_dot_services_dot_third__party__app__analytics__link__service__pb2.RegenerateShareableLinkIdResponse.FromString,
+                request_serializer=google_dot_ads_dot_googleads_dot_v6_dot_services_dot_third__party__app__analytics__link__service__pb2.RegenerateShareableLinkIdRequest.SerializeToString,
+                response_deserializer=google_dot_ads_dot_googleads_dot_v6_dot_services_dot_third__party__app__analytics__link__service__pb2.RegenerateShareableLinkIdResponse.FromString,
                 )
 
 
@@ -54,13 +54,13 @@ def add_ThirdPartyAppAnalyticsLinkServiceServicer_to_server(servicer, server):
     rpc_method_handlers = {
             'GetThirdPartyAppAnalyticsLink': grpc.unary_unary_rpc_method_handler(
                     servicer.GetThirdPartyAppAnalyticsLink,
-                    request_deserializer=google_dot_ads_dot_googleads__v6_dot_proto_dot_services_dot_third__party__app__analytics__link__service__pb2.GetThirdPartyAppAnalyticsLinkRequest.FromString,
-                    response_serializer=google_dot_ads_dot_googleads__v6_dot_proto_dot_resources_dot_third__party__app__analytics__link__pb2.ThirdPartyAppAnalyticsLink.SerializeToString,
+                    request_deserializer=google_dot_ads_dot_googleads_dot_v6_dot_services_dot_third__party__app__analytics__link__service__pb2.GetThirdPartyAppAnalyticsLinkRequest.FromString,
+                    response_serializer=google_dot_ads_dot_googleads_dot_v6_dot_resources_dot_third__party__app__analytics__link__pb2.ThirdPartyAppAnalyticsLink.SerializeToString,
             ),
             'RegenerateShareableLinkId': grpc.unary_unary_rpc_method_handler(
                     servicer.RegenerateShareableLinkId,
-                    request_deserializer=google_dot_ads_dot_googleads__v6_dot_proto_dot_services_dot_third__party__app__analytics__link__service__pb2.RegenerateShareableLinkIdRequest.FromString,
-                    response_serializer=google_dot_ads_dot_googleads__v6_dot_proto_dot_services_dot_third__party__app__analytics__link__service__pb2.RegenerateShareableLinkIdResponse.SerializeToString,
+                    request_deserializer=google_dot_ads_dot_googleads_dot_v6_dot_services_dot_third__party__app__analytics__link__service__pb2.RegenerateShareableLinkIdRequest.FromString,
+                    response_serializer=google_dot_ads_dot_googleads_dot_v6_dot_services_dot_third__party__app__analytics__link__service__pb2.RegenerateShareableLinkIdResponse.SerializeToString,
             ),
     }
     generic_handler = grpc.method_handlers_generic_handler(
@@ -80,15 +80,16 @@ class ThirdPartyAppAnalyticsLinkService(object):
             options=(),
             channel_credentials=None,
             call_credentials=None,
+            insecure=False,
             compression=None,
             wait_for_ready=None,
             timeout=None,
             metadata=None):
         return grpc.experimental.unary_unary(request, target, '/google.ads.googleads.v6.services.ThirdPartyAppAnalyticsLinkService/GetThirdPartyAppAnalyticsLink',
-            google_dot_ads_dot_googleads__v6_dot_proto_dot_services_dot_third__party__app__analytics__link__service__pb2.GetThirdPartyAppAnalyticsLinkRequest.SerializeToString,
-            google_dot_ads_dot_googleads__v6_dot_proto_dot_resources_dot_third__party__app__analytics__link__pb2.ThirdPartyAppAnalyticsLink.FromString,
+            google_dot_ads_dot_googleads_dot_v6_dot_services_dot_third__party__app__analytics__link__service__pb2.GetThirdPartyAppAnalyticsLinkRequest.SerializeToString,
+            google_dot_ads_dot_googleads_dot_v6_dot_resources_dot_third__party__app__analytics__link__pb2.ThirdPartyAppAnalyticsLink.FromString,
             options, channel_credentials,
-            call_credentials, compression, wait_for_ready, timeout, metadata)
+            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
 
     @staticmethod
     def RegenerateShareableLinkId(request,
@@ -96,12 +97,13 @@ class ThirdPartyAppAnalyticsLinkService(object):
             options=(),
             channel_credentials=None,
             call_credentials=None,
+            insecure=False,
             compression=None,
             wait_for_ready=None,
             timeout=None,
             metadata=None):
         return grpc.experimental.unary_unary(request, target, '/google.ads.googleads.v6.services.ThirdPartyAppAnalyticsLinkService/RegenerateShareableLinkId',
-            google_dot_ads_dot_googleads__v6_dot_proto_dot_services_dot_third__party__app__analytics__link__service__pb2.RegenerateShareableLinkIdRequest.SerializeToString,
-            google_dot_ads_dot_googleads__v6_dot_proto_dot_services_dot_third__party__app__analytics__link__service__pb2.RegenerateShareableLinkIdResponse.FromString,
+            google_dot_ads_dot_googleads_dot_v6_dot_services_dot_third__party__app__analytics__link__service__pb2.RegenerateShareableLinkIdRequest.SerializeToString,
+            google_dot_ads_dot_googleads_dot_v6_dot_services_dot_third__party__app__analytics__link__service__pb2.RegenerateShareableLinkIdResponse.FromString,
             options, channel_credentials,
-            call_credentials, compression, wait_for_ready, timeout, metadata)
+            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)

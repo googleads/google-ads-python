@@ -2,8 +2,8 @@
 """Client and server classes corresponding to protobuf-defined services."""
 import grpc
 
-from google.ads.google_ads.v6.proto.resources import managed_placement_view_pb2 as google_dot_ads_dot_googleads__v6_dot_proto_dot_resources_dot_managed__placement__view__pb2
-from google.ads.google_ads.v6.proto.services import managed_placement_view_service_pb2 as google_dot_ads_dot_googleads__v6_dot_proto_dot_services_dot_managed__placement__view__service__pb2
+from google.ads.google_ads.v6.proto.resources import managed_placement_view_pb2 as google_dot_ads_dot_googleads_dot_v6_dot_resources_dot_managed__placement__view__pb2
+from google.ads.google_ads.v6.proto.services import managed_placement_view_service_pb2 as google_dot_ads_dot_googleads_dot_v6_dot_services_dot_managed__placement__view__service__pb2
 
 
 class ManagedPlacementViewServiceStub(object):
@@ -20,8 +20,8 @@ class ManagedPlacementViewServiceStub(object):
         """
         self.GetManagedPlacementView = channel.unary_unary(
                 '/google.ads.googleads.v6.services.ManagedPlacementViewService/GetManagedPlacementView',
-                request_serializer=google_dot_ads_dot_googleads__v6_dot_proto_dot_services_dot_managed__placement__view__service__pb2.GetManagedPlacementViewRequest.SerializeToString,
-                response_deserializer=google_dot_ads_dot_googleads__v6_dot_proto_dot_resources_dot_managed__placement__view__pb2.ManagedPlacementView.FromString,
+                request_serializer=google_dot_ads_dot_googleads_dot_v6_dot_services_dot_managed__placement__view__service__pb2.GetManagedPlacementViewRequest.SerializeToString,
+                response_deserializer=google_dot_ads_dot_googleads_dot_v6_dot_resources_dot_managed__placement__view__pb2.ManagedPlacementView.FromString,
                 )
 
 
@@ -43,8 +43,8 @@ def add_ManagedPlacementViewServiceServicer_to_server(servicer, server):
     rpc_method_handlers = {
             'GetManagedPlacementView': grpc.unary_unary_rpc_method_handler(
                     servicer.GetManagedPlacementView,
-                    request_deserializer=google_dot_ads_dot_googleads__v6_dot_proto_dot_services_dot_managed__placement__view__service__pb2.GetManagedPlacementViewRequest.FromString,
-                    response_serializer=google_dot_ads_dot_googleads__v6_dot_proto_dot_resources_dot_managed__placement__view__pb2.ManagedPlacementView.SerializeToString,
+                    request_deserializer=google_dot_ads_dot_googleads_dot_v6_dot_services_dot_managed__placement__view__service__pb2.GetManagedPlacementViewRequest.FromString,
+                    response_serializer=google_dot_ads_dot_googleads_dot_v6_dot_resources_dot_managed__placement__view__pb2.ManagedPlacementView.SerializeToString,
             ),
     }
     generic_handler = grpc.method_handlers_generic_handler(
@@ -65,12 +65,13 @@ class ManagedPlacementViewService(object):
             options=(),
             channel_credentials=None,
             call_credentials=None,
+            insecure=False,
             compression=None,
             wait_for_ready=None,
             timeout=None,
             metadata=None):
         return grpc.experimental.unary_unary(request, target, '/google.ads.googleads.v6.services.ManagedPlacementViewService/GetManagedPlacementView',
-            google_dot_ads_dot_googleads__v6_dot_proto_dot_services_dot_managed__placement__view__service__pb2.GetManagedPlacementViewRequest.SerializeToString,
-            google_dot_ads_dot_googleads__v6_dot_proto_dot_resources_dot_managed__placement__view__pb2.ManagedPlacementView.FromString,
+            google_dot_ads_dot_googleads_dot_v6_dot_services_dot_managed__placement__view__service__pb2.GetManagedPlacementViewRequest.SerializeToString,
+            google_dot_ads_dot_googleads_dot_v6_dot_resources_dot_managed__placement__view__pb2.ManagedPlacementView.FromString,
             options, channel_credentials,
-            call_credentials, compression, wait_for_ready, timeout, metadata)
+            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)

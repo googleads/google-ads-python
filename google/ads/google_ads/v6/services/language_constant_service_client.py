@@ -73,11 +73,11 @@ class LanguageConstantServiceClient(object):
 
 
     @classmethod
-    def language_constant_path(cls, language_constant):
+    def language_constant_path(cls, criterion_id):
         """Return a fully-qualified language_constant string."""
         return google.api_core.path_template.expand(
-            'languageConstants/{language_constant}',
-            language_constant=language_constant,
+            'languageConstants/{criterion_id}',
+            criterion_id=criterion_id,
         )
 
     def __init__(self, transport=None, channel=None, credentials=None,
@@ -189,6 +189,15 @@ class LanguageConstantServiceClient(object):
             metadata=None):
         """
         Returns the requested language constant.
+
+        Example:
+            >>> from google.ads import googleads_v6
+            >>>
+            >>> client = googleads_v6.LanguageConstantServiceClient()
+            >>>
+            >>> resource_name = client.language_constant_path('[CRITERION_ID]')
+            >>>
+            >>> response = client.get_language_constant(resource_name)
 
         Args:
             resource_name (str): Required. Resource name of the language constant to fetch.

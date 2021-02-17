@@ -31,7 +31,6 @@ from google.api_core import protobuf_helpers
 
 from google.ads.google_ads.client import GoogleAdsClient
 from google.ads.google_ads.errors import GoogleAdsException
-from google.ads.google_ads.util import ResourceName
 
 
 def main(client, customer_id, campaign_id):
@@ -47,7 +46,9 @@ def main(client, customer_id, campaign_id):
     sitelink_campaign_extension_setting_mutate_operation = _create_sitelink_campaign_extension_setting_mutate_operation(
         client, customer_id, campaign_id
     )
-    mutate_operations.append(sitelink_campaign_extension_setting_mutate_operation)
+    mutate_operations.append(
+        sitelink_campaign_extension_setting_mutate_operation
+    )
 
     ga_service = client.get_service("GoogleAdsService", version="v6")
     extension_feed_item_resource_names = _get_all_sitelink_extension_feed_items(
@@ -103,17 +104,17 @@ def _create_sitelink_campaign_extension_setting_mutate_operation(
             setting.
     """
     extension_type_enum = client.get_type("ExtensionTypeEnum", version="v6")
-    composite_id = ResourceName.format_composite(
+    # Construct the campaign extension setting resource name, in format:
+    # customers/{customer_id}/campaignExtensionSettings/{campaign_id}~{extension_type}
+    resource_name = client.get_service(
+        "CampaignExtensionSettingService", version="v6"
+    ).campaign_extension_setting_path(
+        customer_id,
         campaign_id,
         extension_type_enum.ExtensionType.Name(
             extension_type_enum.ExtensionType.SITELINK
         ),
     )
-    # Construct the campaign extension setting resource name, in format:
-    # customers/{customer_id}/campaignExtensionSettings/{campaign_id}~{extension_type}
-    resource_name = client.get_service(
-        "CampaignExtensionSettingService", version="v6"
-    ).campaign_extension_setting_path(customer_id, composite_id)
 
     # Create a MutateOperation for the campaign extension setting.
     mutate_operation = client.get_type("MutateOperation", version="v6")
@@ -218,14 +219,8 @@ if __name__ == "__main__":
         help="The Google Ads customer ID",
     )
     parser.add_argument(
-        "-i",
-        "--campaign_id",
-        type=str,
-        required=True,
-        help="The campaign ID",
+        "-i", "--campaign_id", type=str, required=True, help="The campaign ID",
     )
     args = parser.parse_args()
 
-    main(
-        google_ads_client, args.customer_id, args.campaign_id
-    )
+    main(google_ads_client, args.customer_id, args.campaign_id)

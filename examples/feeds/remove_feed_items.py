@@ -20,7 +20,6 @@ import sys
 
 from google.ads.google_ads.client import GoogleAdsClient
 from google.ads.google_ads.errors import GoogleAdsException
-from google.ads.google_ads.util import ResourceName
 
 
 def main(client, customer_id, feed_id, feed_item_ids):
@@ -42,7 +41,7 @@ def main(client, customer_id, feed_id, feed_item_ids):
         # Constructs a resource name for a feed_item, which is in the
         # format: customers/{customer_id}/feedItems/{feed_id}~{feed_item_id}
         feed_item_operation.remove = feed_item_service.feed_item_path(
-            customer_id, ResourceName.format_composite(feed_id, feed_item_id),
+            customer_id, feed_id, feed_item_id
         )
         operations.append(feed_item_operation)
 

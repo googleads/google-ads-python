@@ -73,11 +73,11 @@ class OperatingSystemVersionConstantServiceClient(object):
 
 
     @classmethod
-    def operating_system_version_constant_path(cls, operating_system_version_constant):
+    def operating_system_version_constant_path(cls, criterion_id):
         """Return a fully-qualified operating_system_version_constant string."""
         return google.api_core.path_template.expand(
-            'operatingSystemVersionConstants/{operating_system_version_constant}',
-            operating_system_version_constant=operating_system_version_constant,
+            'operatingSystemVersionConstants/{criterion_id}',
+            criterion_id=criterion_id,
         )
 
     def __init__(self, transport=None, channel=None, credentials=None,
@@ -189,6 +189,15 @@ class OperatingSystemVersionConstantServiceClient(object):
             metadata=None):
         """
         Returns the requested OS version constant in full detail.
+
+        Example:
+            >>> from google.ads import googleads_v6
+            >>>
+            >>> client = googleads_v6.OperatingSystemVersionConstantServiceClient()
+            >>>
+            >>> resource_name = client.operating_system_version_constant_path('[CRITERION_ID]')
+            >>>
+            >>> response = client.get_operating_system_version_constant(resource_name)
 
         Args:
             resource_name (str): Required. Resource name of the OS version to fetch.

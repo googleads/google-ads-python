@@ -186,6 +186,13 @@ class ReachPlanServiceClient(object):
         """
         Returns the list of plannable locations (for example, countries & DMAs).
 
+        Example:
+            >>> from google.ads import googleads_v6
+            >>>
+            >>> client = googleads_v6.ReachPlanServiceClient()
+            >>>
+            >>> response = client.list_plannable_locations()
+
         Args:
             retry (Optional[google.api_core.retry.Retry]):  A retry object used
                 to retry requests. If ``None`` is specified, requests will
@@ -226,6 +233,16 @@ class ReachPlanServiceClient(object):
         """
         Returns the list of per-location plannable YouTube ad formats with allowed
         targeting.
+
+        Example:
+            >>> from google.ads import googleads_v6
+            >>>
+            >>> client = googleads_v6.ReachPlanServiceClient()
+            >>>
+            >>> # TODO: Initialize `plannable_location_id`:
+            >>> plannable_location_id = ''
+            >>>
+            >>> response = client.list_plannable_products(plannable_location_id)
 
         Args:
             plannable_location_id (str): Required. The ID of the selected location for planning. To list the available
@@ -277,6 +294,25 @@ class ReachPlanServiceClient(object):
         Generates a product mix ideas given a set of preferences. This method
         helps the advertiser to obtain a good mix of ad formats and budget
         allocations based on its preferences.
+
+        Example:
+            >>> from google.ads import googleads_v6
+            >>>
+            >>> client = googleads_v6.ReachPlanServiceClient()
+            >>>
+            >>> # TODO: Initialize `customer_id`:
+            >>> customer_id = ''
+            >>>
+            >>> # TODO: Initialize `plannable_location_id`:
+            >>> plannable_location_id = ''
+            >>>
+            >>> # TODO: Initialize `currency_code`:
+            >>> currency_code = ''
+            >>>
+            >>> # TODO: Initialize `budget_micros`:
+            >>> budget_micros = 0
+            >>>
+            >>> response = client.generate_product_mix_ideas(customer_id, plannable_location_id, currency_code, budget_micros)
 
         Args:
             customer_id (str): Required. The ID of the customer.
@@ -356,6 +392,22 @@ class ReachPlanServiceClient(object):
         """
         Generates a reach forecast for a given targeting / product mix.
 
+        Example:
+            >>> from google.ads import googleads_v6
+            >>>
+            >>> client = googleads_v6.ReachPlanServiceClient()
+            >>>
+            >>> # TODO: Initialize `customer_id`:
+            >>> customer_id = ''
+            >>>
+            >>> # TODO: Initialize `campaign_duration`:
+            >>> campaign_duration = {}
+            >>>
+            >>> # TODO: Initialize `planned_products`:
+            >>> planned_products = []
+            >>>
+            >>> response = client.generate_reach_forecast(customer_id, campaign_duration, planned_products)
+
         Args:
             customer_id (str): Required. The ID of the customer.
             campaign_duration (Union[dict, ~google.ads.googleads_v6.types.CampaignDuration]): Required. Campaign duration.
@@ -375,22 +427,23 @@ class ReachPlanServiceClient(object):
                 ad can be shown to the same user. If not specified no cap is applied.
 
                 This field is deprecated in v4 and will eventually be removed. Please
-                use cookie\_frequency\_cap\_setting instead.
+                use cookie_frequency_cap_setting instead.
             cookie_frequency_cap_setting (Union[dict, ~google.ads.googleads_v6.types.FrequencyCap]): Desired cookie frequency cap that will be applied to each planned
                 product. This is equivalent to the frequency cap exposed in Google Ads
                 when creating a campaign, it represents the maximum number of times an
                 ad can be shown to the same user during a specified time interval. If
                 not specified, no cap is applied.
 
-                This field replaces the deprecated cookie\_frequency\_cap field.
+                This field replaces the deprecated cookie_frequency_cap field.
 
                 If a dict is provided, it must be of the same form as the protobuf
                 message :class:`~google.ads.googleads_v6.types.FrequencyCap`
-            min_effective_frequency (int): Desired minimum effective frequency (the number of times a person was
-                exposed to the ad) for the reported reach metrics [1-10]. This won't
+            min_effective_frequency (int): Desired minimum effective frequency (the number of times a person
+                was exposed to the ad) for the reported reach metrics [1-10]. This won't
                 affect the targeting, but just the reporting. If not specified, a
                 default of 1 is applied.
-            targeting (Union[dict, ~google.ads.googleads_v6.types.Targeting]): The targeting to be applied to all products selected in the product mix.
+            targeting (Union[dict, ~google.ads.googleads_v6.types.Targeting]): The targeting to be applied to all products selected in the product
+                mix.
 
                 This is planned targeting: execution details might vary based on the
                 advertising product, please consult an implementation specialist.
@@ -398,7 +451,7 @@ class ReachPlanServiceClient(object):
                 See specific metrics for details on how targeting affects them.
 
                 In some cases, targeting may be overridden using the
-                PlannedProduct.advanced\_product\_targeting field.
+                PlannedProduct.advanced_product_targeting field.
 
                 If a dict is provided, it must be of the same form as the protobuf
                 message :class:`~google.ads.googleads_v6.types.Targeting`

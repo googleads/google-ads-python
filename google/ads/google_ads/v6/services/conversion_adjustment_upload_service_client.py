@@ -175,13 +175,29 @@ class ConversionAdjustmentUploadServiceClient(object):
             self,
             customer_id,
             conversion_adjustments,
-            partial_failure=None,
+            partial_failure,
             validate_only=None,
             retry=google.api_core.gapic_v1.method.DEFAULT,
             timeout=google.api_core.gapic_v1.method.DEFAULT,
             metadata=None):
         """
         Processes the given conversion adjustments.
+
+        Example:
+            >>> from google.ads import googleads_v6
+            >>>
+            >>> client = googleads_v6.ConversionAdjustmentUploadServiceClient()
+            >>>
+            >>> # TODO: Initialize `customer_id`:
+            >>> customer_id = ''
+            >>>
+            >>> # TODO: Initialize `conversion_adjustments`:
+            >>> conversion_adjustments = []
+            >>>
+            >>> # TODO: Initialize `partial_failure`:
+            >>> partial_failure = False
+            >>>
+            >>> response = client.upload_conversion_adjustments(customer_id, conversion_adjustments, partial_failure)
 
         Args:
             customer_id (str): Required. The ID of the customer performing the upload.

@@ -73,12 +73,13 @@ class CustomerClientLinkServiceClient(object):
 
 
     @classmethod
-    def customer_client_link_path(cls, customer, customer_client_link):
+    def customer_client_link_path(cls, customer_id, client_customer_id, manager_link_id):
         """Return a fully-qualified customer_client_link string."""
         return google.api_core.path_template.expand(
-            'customers/{customer}/customerClientLinks/{customer_client_link}',
-            customer=customer,
-            customer_client_link=customer_client_link,
+            'customers/{customer_id}/customerClientLinks/{client_customer_id}~{manager_link_id}',
+            customer_id=customer_id,
+            client_customer_id=client_customer_id,
+            manager_link_id=manager_link_id,
         )
 
     def __init__(self, transport=None, channel=None, credentials=None,
@@ -191,6 +192,15 @@ class CustomerClientLinkServiceClient(object):
         """
         Returns the requested CustomerClientLink in full detail.
 
+        Example:
+            >>> from google.ads import googleads_v6
+            >>>
+            >>> client = googleads_v6.CustomerClientLinkServiceClient()
+            >>>
+            >>> resource_name = client.customer_client_link_path('[CUSTOMER_ID]', '[CLIENT_CUSTOMER_ID]', '[MANAGER_LINK_ID]')
+            >>>
+            >>> response = client.get_customer_client_link(resource_name)
+
         Args:
             resource_name (str): Required. The resource name of the customer client link to fetch.
             retry (Optional[google.api_core.retry.Retry]):  A retry object used
@@ -246,6 +256,19 @@ class CustomerClientLinkServiceClient(object):
             metadata=None):
         """
         Creates or updates a customer client link. Operation statuses are returned.
+
+        Example:
+            >>> from google.ads import googleads_v6
+            >>>
+            >>> client = googleads_v6.CustomerClientLinkServiceClient()
+            >>>
+            >>> # TODO: Initialize `customer_id`:
+            >>> customer_id = ''
+            >>>
+            >>> # TODO: Initialize `operation_`:
+            >>> operation_ = {}
+            >>>
+            >>> response = client.mutate_customer_client_link(customer_id, operation_)
 
         Args:
             customer_id (str): Required. The ID of the customer whose customer link are being modified.

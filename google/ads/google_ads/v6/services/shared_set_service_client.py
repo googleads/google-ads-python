@@ -73,12 +73,12 @@ class SharedSetServiceClient(object):
 
 
     @classmethod
-    def shared_set_path(cls, customer, shared_set):
+    def shared_set_path(cls, customer_id, shared_set_id):
         """Return a fully-qualified shared_set string."""
         return google.api_core.path_template.expand(
-            'customers/{customer}/sharedSets/{shared_set}',
-            customer=customer,
-            shared_set=shared_set,
+            'customers/{customer_id}/sharedSets/{shared_set_id}',
+            customer_id=customer_id,
+            shared_set_id=shared_set_id,
         )
 
     def __init__(self, transport=None, channel=None, credentials=None,
@@ -191,6 +191,15 @@ class SharedSetServiceClient(object):
         """
         Returns the requested shared set in full detail.
 
+        Example:
+            >>> from google.ads import googleads_v6
+            >>>
+            >>> client = googleads_v6.SharedSetServiceClient()
+            >>>
+            >>> resource_name = client.shared_set_path('[CUSTOMER_ID]', '[SHARED_SET_ID]')
+            >>>
+            >>> response = client.get_shared_set(resource_name)
+
         Args:
             resource_name (str): Required. The resource name of the shared set to fetch.
             retry (Optional[google.api_core.retry.Retry]):  A retry object used
@@ -249,6 +258,19 @@ class SharedSetServiceClient(object):
             metadata=None):
         """
         Creates, updates, or removes shared sets. Operation statuses are returned.
+
+        Example:
+            >>> from google.ads import googleads_v6
+            >>>
+            >>> client = googleads_v6.SharedSetServiceClient()
+            >>>
+            >>> # TODO: Initialize `customer_id`:
+            >>> customer_id = ''
+            >>>
+            >>> # TODO: Initialize `operations`:
+            >>> operations = []
+            >>>
+            >>> response = client.mutate_shared_sets(customer_id, operations)
 
         Args:
             customer_id (str): Required. The ID of the customer whose shared sets are being modified.

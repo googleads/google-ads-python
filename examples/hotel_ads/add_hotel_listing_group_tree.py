@@ -356,7 +356,7 @@ def _add_level2_nodes(
     other_hotel_regions_listing_dimension_info = client.get_type(
         "ListingDimensionInfo", version="v6"
     )
-    # Set "hotel_country_region" as the oneof field on the ListingDimentionInfo
+    # Set "hotel_country_region" as the oneof field on the ListingDimensionInfo
     # object without specifying the optional
     # hotel_country_region.country_region_criterion field.
     other_hotel_regions_listing_dimension_info.hotel_country_region.CopyFrom(
@@ -454,7 +454,7 @@ def _create_ad_group_criterion(
     ad_group_criterion.listing_group.CopyFrom(listing_group_info)
     ad_group_criterion.resource_name = client.get_service(
         "AdGroupCriterionService", version="v6"
-    ).ad_group_criteria_path(customer_id, f"{ad_group_id}~{next_temp_id}")
+    ).ad_group_criterion_path(customer_id, ad_group_id, next_temp_id)
 
     # Bids are only valid for UNIT nodes.
     if (

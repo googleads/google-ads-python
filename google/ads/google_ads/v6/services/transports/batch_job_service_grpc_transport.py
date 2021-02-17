@@ -32,6 +32,7 @@ class BatchJobServiceGrpcTransport(object):
     # The scopes needed to make gRPC calls to all of the methods defined
     # in this service.
     _OAUTH_SCOPES = (
+        'https://www.googleapis.com/auth/adwords',
     )
 
     def __init__(self, channel=None, credentials=None,

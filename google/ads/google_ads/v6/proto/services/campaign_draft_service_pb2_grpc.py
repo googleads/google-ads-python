@@ -2,8 +2,8 @@
 """Client and server classes corresponding to protobuf-defined services."""
 import grpc
 
-from google.ads.google_ads.v6.proto.resources import campaign_draft_pb2 as google_dot_ads_dot_googleads__v6_dot_proto_dot_resources_dot_campaign__draft__pb2
-from google.ads.google_ads.v6.proto.services import campaign_draft_service_pb2 as google_dot_ads_dot_googleads__v6_dot_proto_dot_services_dot_campaign__draft__service__pb2
+from google.ads.google_ads.v6.proto.resources import campaign_draft_pb2 as google_dot_ads_dot_googleads_dot_v6_dot_resources_dot_campaign__draft__pb2
+from google.ads.google_ads.v6.proto.services import campaign_draft_service_pb2 as google_dot_ads_dot_googleads_dot_v6_dot_services_dot_campaign__draft__service__pb2
 from google.longrunning import operations_pb2 as google_dot_longrunning_dot_operations__pb2
 
 
@@ -21,23 +21,23 @@ class CampaignDraftServiceStub(object):
         """
         self.GetCampaignDraft = channel.unary_unary(
                 '/google.ads.googleads.v6.services.CampaignDraftService/GetCampaignDraft',
-                request_serializer=google_dot_ads_dot_googleads__v6_dot_proto_dot_services_dot_campaign__draft__service__pb2.GetCampaignDraftRequest.SerializeToString,
-                response_deserializer=google_dot_ads_dot_googleads__v6_dot_proto_dot_resources_dot_campaign__draft__pb2.CampaignDraft.FromString,
+                request_serializer=google_dot_ads_dot_googleads_dot_v6_dot_services_dot_campaign__draft__service__pb2.GetCampaignDraftRequest.SerializeToString,
+                response_deserializer=google_dot_ads_dot_googleads_dot_v6_dot_resources_dot_campaign__draft__pb2.CampaignDraft.FromString,
                 )
         self.MutateCampaignDrafts = channel.unary_unary(
                 '/google.ads.googleads.v6.services.CampaignDraftService/MutateCampaignDrafts',
-                request_serializer=google_dot_ads_dot_googleads__v6_dot_proto_dot_services_dot_campaign__draft__service__pb2.MutateCampaignDraftsRequest.SerializeToString,
-                response_deserializer=google_dot_ads_dot_googleads__v6_dot_proto_dot_services_dot_campaign__draft__service__pb2.MutateCampaignDraftsResponse.FromString,
+                request_serializer=google_dot_ads_dot_googleads_dot_v6_dot_services_dot_campaign__draft__service__pb2.MutateCampaignDraftsRequest.SerializeToString,
+                response_deserializer=google_dot_ads_dot_googleads_dot_v6_dot_services_dot_campaign__draft__service__pb2.MutateCampaignDraftsResponse.FromString,
                 )
         self.PromoteCampaignDraft = channel.unary_unary(
                 '/google.ads.googleads.v6.services.CampaignDraftService/PromoteCampaignDraft',
-                request_serializer=google_dot_ads_dot_googleads__v6_dot_proto_dot_services_dot_campaign__draft__service__pb2.PromoteCampaignDraftRequest.SerializeToString,
+                request_serializer=google_dot_ads_dot_googleads_dot_v6_dot_services_dot_campaign__draft__service__pb2.PromoteCampaignDraftRequest.SerializeToString,
                 response_deserializer=google_dot_longrunning_dot_operations__pb2.Operation.FromString,
                 )
         self.ListCampaignDraftAsyncErrors = channel.unary_unary(
                 '/google.ads.googleads.v6.services.CampaignDraftService/ListCampaignDraftAsyncErrors',
-                request_serializer=google_dot_ads_dot_googleads__v6_dot_proto_dot_services_dot_campaign__draft__service__pb2.ListCampaignDraftAsyncErrorsRequest.SerializeToString,
-                response_deserializer=google_dot_ads_dot_googleads__v6_dot_proto_dot_services_dot_campaign__draft__service__pb2.ListCampaignDraftAsyncErrorsResponse.FromString,
+                request_serializer=google_dot_ads_dot_googleads_dot_v6_dot_services_dot_campaign__draft__service__pb2.ListCampaignDraftAsyncErrorsRequest.SerializeToString,
+                response_deserializer=google_dot_ads_dot_googleads_dot_v6_dot_services_dot_campaign__draft__service__pb2.ListCampaignDraftAsyncErrorsResponse.FromString,
                 )
 
 
@@ -91,23 +91,23 @@ def add_CampaignDraftServiceServicer_to_server(servicer, server):
     rpc_method_handlers = {
             'GetCampaignDraft': grpc.unary_unary_rpc_method_handler(
                     servicer.GetCampaignDraft,
-                    request_deserializer=google_dot_ads_dot_googleads__v6_dot_proto_dot_services_dot_campaign__draft__service__pb2.GetCampaignDraftRequest.FromString,
-                    response_serializer=google_dot_ads_dot_googleads__v6_dot_proto_dot_resources_dot_campaign__draft__pb2.CampaignDraft.SerializeToString,
+                    request_deserializer=google_dot_ads_dot_googleads_dot_v6_dot_services_dot_campaign__draft__service__pb2.GetCampaignDraftRequest.FromString,
+                    response_serializer=google_dot_ads_dot_googleads_dot_v6_dot_resources_dot_campaign__draft__pb2.CampaignDraft.SerializeToString,
             ),
             'MutateCampaignDrafts': grpc.unary_unary_rpc_method_handler(
                     servicer.MutateCampaignDrafts,
-                    request_deserializer=google_dot_ads_dot_googleads__v6_dot_proto_dot_services_dot_campaign__draft__service__pb2.MutateCampaignDraftsRequest.FromString,
-                    response_serializer=google_dot_ads_dot_googleads__v6_dot_proto_dot_services_dot_campaign__draft__service__pb2.MutateCampaignDraftsResponse.SerializeToString,
+                    request_deserializer=google_dot_ads_dot_googleads_dot_v6_dot_services_dot_campaign__draft__service__pb2.MutateCampaignDraftsRequest.FromString,
+                    response_serializer=google_dot_ads_dot_googleads_dot_v6_dot_services_dot_campaign__draft__service__pb2.MutateCampaignDraftsResponse.SerializeToString,
             ),
             'PromoteCampaignDraft': grpc.unary_unary_rpc_method_handler(
                     servicer.PromoteCampaignDraft,
-                    request_deserializer=google_dot_ads_dot_googleads__v6_dot_proto_dot_services_dot_campaign__draft__service__pb2.PromoteCampaignDraftRequest.FromString,
+                    request_deserializer=google_dot_ads_dot_googleads_dot_v6_dot_services_dot_campaign__draft__service__pb2.PromoteCampaignDraftRequest.FromString,
                     response_serializer=google_dot_longrunning_dot_operations__pb2.Operation.SerializeToString,
             ),
             'ListCampaignDraftAsyncErrors': grpc.unary_unary_rpc_method_handler(
                     servicer.ListCampaignDraftAsyncErrors,
-                    request_deserializer=google_dot_ads_dot_googleads__v6_dot_proto_dot_services_dot_campaign__draft__service__pb2.ListCampaignDraftAsyncErrorsRequest.FromString,
-                    response_serializer=google_dot_ads_dot_googleads__v6_dot_proto_dot_services_dot_campaign__draft__service__pb2.ListCampaignDraftAsyncErrorsResponse.SerializeToString,
+                    request_deserializer=google_dot_ads_dot_googleads_dot_v6_dot_services_dot_campaign__draft__service__pb2.ListCampaignDraftAsyncErrorsRequest.FromString,
+                    response_serializer=google_dot_ads_dot_googleads_dot_v6_dot_services_dot_campaign__draft__service__pb2.ListCampaignDraftAsyncErrorsResponse.SerializeToString,
             ),
     }
     generic_handler = grpc.method_handlers_generic_handler(
@@ -128,15 +128,16 @@ class CampaignDraftService(object):
             options=(),
             channel_credentials=None,
             call_credentials=None,
+            insecure=False,
             compression=None,
             wait_for_ready=None,
             timeout=None,
             metadata=None):
         return grpc.experimental.unary_unary(request, target, '/google.ads.googleads.v6.services.CampaignDraftService/GetCampaignDraft',
-            google_dot_ads_dot_googleads__v6_dot_proto_dot_services_dot_campaign__draft__service__pb2.GetCampaignDraftRequest.SerializeToString,
-            google_dot_ads_dot_googleads__v6_dot_proto_dot_resources_dot_campaign__draft__pb2.CampaignDraft.FromString,
+            google_dot_ads_dot_googleads_dot_v6_dot_services_dot_campaign__draft__service__pb2.GetCampaignDraftRequest.SerializeToString,
+            google_dot_ads_dot_googleads_dot_v6_dot_resources_dot_campaign__draft__pb2.CampaignDraft.FromString,
             options, channel_credentials,
-            call_credentials, compression, wait_for_ready, timeout, metadata)
+            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
 
     @staticmethod
     def MutateCampaignDrafts(request,
@@ -144,15 +145,16 @@ class CampaignDraftService(object):
             options=(),
             channel_credentials=None,
             call_credentials=None,
+            insecure=False,
             compression=None,
             wait_for_ready=None,
             timeout=None,
             metadata=None):
         return grpc.experimental.unary_unary(request, target, '/google.ads.googleads.v6.services.CampaignDraftService/MutateCampaignDrafts',
-            google_dot_ads_dot_googleads__v6_dot_proto_dot_services_dot_campaign__draft__service__pb2.MutateCampaignDraftsRequest.SerializeToString,
-            google_dot_ads_dot_googleads__v6_dot_proto_dot_services_dot_campaign__draft__service__pb2.MutateCampaignDraftsResponse.FromString,
+            google_dot_ads_dot_googleads_dot_v6_dot_services_dot_campaign__draft__service__pb2.MutateCampaignDraftsRequest.SerializeToString,
+            google_dot_ads_dot_googleads_dot_v6_dot_services_dot_campaign__draft__service__pb2.MutateCampaignDraftsResponse.FromString,
             options, channel_credentials,
-            call_credentials, compression, wait_for_ready, timeout, metadata)
+            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
 
     @staticmethod
     def PromoteCampaignDraft(request,
@@ -160,15 +162,16 @@ class CampaignDraftService(object):
             options=(),
             channel_credentials=None,
             call_credentials=None,
+            insecure=False,
             compression=None,
             wait_for_ready=None,
             timeout=None,
             metadata=None):
         return grpc.experimental.unary_unary(request, target, '/google.ads.googleads.v6.services.CampaignDraftService/PromoteCampaignDraft',
-            google_dot_ads_dot_googleads__v6_dot_proto_dot_services_dot_campaign__draft__service__pb2.PromoteCampaignDraftRequest.SerializeToString,
+            google_dot_ads_dot_googleads_dot_v6_dot_services_dot_campaign__draft__service__pb2.PromoteCampaignDraftRequest.SerializeToString,
             google_dot_longrunning_dot_operations__pb2.Operation.FromString,
             options, channel_credentials,
-            call_credentials, compression, wait_for_ready, timeout, metadata)
+            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
 
     @staticmethod
     def ListCampaignDraftAsyncErrors(request,
@@ -176,12 +179,13 @@ class CampaignDraftService(object):
             options=(),
             channel_credentials=None,
             call_credentials=None,
+            insecure=False,
             compression=None,
             wait_for_ready=None,
             timeout=None,
             metadata=None):
         return grpc.experimental.unary_unary(request, target, '/google.ads.googleads.v6.services.CampaignDraftService/ListCampaignDraftAsyncErrors',
-            google_dot_ads_dot_googleads__v6_dot_proto_dot_services_dot_campaign__draft__service__pb2.ListCampaignDraftAsyncErrorsRequest.SerializeToString,
-            google_dot_ads_dot_googleads__v6_dot_proto_dot_services_dot_campaign__draft__service__pb2.ListCampaignDraftAsyncErrorsResponse.FromString,
+            google_dot_ads_dot_googleads_dot_v6_dot_services_dot_campaign__draft__service__pb2.ListCampaignDraftAsyncErrorsRequest.SerializeToString,
+            google_dot_ads_dot_googleads_dot_v6_dot_services_dot_campaign__draft__service__pb2.ListCampaignDraftAsyncErrorsResponse.FromString,
             options, channel_credentials,
-            call_credentials, compression, wait_for_ready, timeout, metadata)
+            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)

@@ -74,11 +74,11 @@ class GeoTargetConstantServiceClient(object):
 
 
     @classmethod
-    def geo_target_constant_path(cls, geo_target_constant):
+    def geo_target_constant_path(cls, criterion_id):
         """Return a fully-qualified geo_target_constant string."""
         return google.api_core.path_template.expand(
-            'geoTargetConstants/{geo_target_constant}',
-            geo_target_constant=geo_target_constant,
+            'geoTargetConstants/{criterion_id}',
+            criterion_id=criterion_id,
         )
 
     def __init__(self, transport=None, channel=None, credentials=None,
@@ -191,6 +191,15 @@ class GeoTargetConstantServiceClient(object):
         """
         Returns the requested geo target constant in full detail.
 
+        Example:
+            >>> from google.ads import googleads_v6
+            >>>
+            >>> client = googleads_v6.GeoTargetConstantServiceClient()
+            >>>
+            >>> resource_name = client.geo_target_constant_path('[CRITERION_ID]')
+            >>>
+            >>> response = client.get_geo_target_constant(resource_name)
+
         Args:
             resource_name (str): Required. The resource name of the geo target constant to fetch.
             retry (Optional[google.api_core.retry.Retry]):  A retry object used
@@ -248,6 +257,13 @@ class GeoTargetConstantServiceClient(object):
             metadata=None):
         """
         Returns GeoTargetConstant suggestions by location name or by resource name.
+
+        Example:
+            >>> from google.ads import googleads_v6
+            >>>
+            >>> client = googleads_v6.GeoTargetConstantServiceClient()
+            >>>
+            >>> response = client.suggest_geo_target_constants()
 
         Args:
             locale (str): If possible, returned geo targets are translated using this locale. If not,

@@ -69,10 +69,8 @@ def main(client, customer_id, ad_group_id):
             "text ad."
         )
         for error in ex.failure.errors:
-            # Note: Depending on the ad type, you may get back policy violation
-            # errors as either PolicyFindingError or PolicyViolationError.
-            # ExpandedTextAds return errors as PolicyFindingError, so only this
-            # case is illustrated here. For additional details, see
+            # Note: Policy violation errors are returned as PolicyFindingErrors.
+            # For additional details, see
             # https://developers.google.com/google-ads/api/docs/policy-exemption/overview
             if (
                 error.error_code.policy_finding_error

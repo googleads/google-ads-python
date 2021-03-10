@@ -30,34 +30,20 @@ from google.ads.google_ads.client import GoogleAdsClient
 from google.ads.google_ads.errors import GoogleAdsException
 
 
-def main(client, customer_id):
+def main(client, customer_id, skip_polling):
     """Uses Customer Match to create and add users to a new user list.
 
     Args:
         client: The Google Ads client.
         customer_id: The customer ID for which to add the user list.
+        skip_polling: A bool dictating whether to poll the API for completion.
     """
-    try:
-        user_list_resource_name = _create_customer_match_user_list(
-            client, customer_id
-        )
-        _add_users_to_customer_match_user_list(
-            client, customer_id, user_list_resource_name
-        )
-        _print_customer_match_user_list_info(
-            client, customer_id, user_list_resource_name
-        )
-    except GoogleAdsException as ex:
-        print(
-            f"Request with ID '{ex.request_id}' failed with status "
-            f"'{ex.error.code().name}' and includes the following errors:"
-        )
-        for error in ex.failure.errors:
-            print(f"\tError with message '{error.message}'.")
-            if error.location:
-                for field_path_element in error.location.field_path_elements:
-                    print(f"\t\tOn field: {field_path_element.field_name}")
-        sys.exit(1)
+    user_list_resource_name = _create_customer_match_user_list(
+        client, customer_id
+    )
+    _add_users_to_customer_match_user_list(
+        client, customer_id, user_list_resource_name, skip_polling
+    )
 
 
 def _create_customer_match_user_list(client, customer_id):
@@ -107,7 +93,7 @@ def _create_customer_match_user_list(client, customer_id):
 
 # [START add_customer_match_user_list]
 def _add_users_to_customer_match_user_list(
-    client, customer_id, user_list_resource_name
+    client, customer_id, user_list_resource_name, skip_polling
 ):
     """Uses Customer Match to create and add users to a new user list.
 
@@ -116,6 +102,7 @@ def _add_users_to_customer_match_user_list(
         customer_id: The customer ID for which to add the user list.
         user_list_resource_name: The resource name of the user list to which to
             add users.
+        skip_polling: A bool dictating whether to poll the API for completion.
     """
     # Creates the OfflineUserDataJobService client.
     offline_user_data_job_service_client = client.get_service(
@@ -183,15 +170,21 @@ def _add_users_to_customer_match_user_list(
         offline_user_data_job_resource_name
     )
 
-    # Wait until the operation has finished.
-    print("Request to execute the added operations started.")
-    print("Waiting until operation completes...")
-    operation_response.result()
-
-    print(
-        "Offline user data job with resource name "
-        f"'{offline_user_data_job_resource_name}' has finished."
-    )
+    if skip_polling:
+        _check_job_status(
+            client,
+            customer_id,
+            offline_user_data_job_resource_name,
+            user_list_resource_name,
+        )
+    else:
+        # Wait until the operation has finished.
+        print("Request to execute the added operations started.")
+        print("Waiting until operation completes...")
+        operation_response.result()
+        _print_customer_match_user_list_info(
+            client, customer_id, user_list_resource_name
+        )
 
 
 def _build_offline_user_data_job_operations(client):
@@ -247,6 +240,66 @@ def _build_offline_user_data_job_operations(client):
         user_data_with_email_address_operation,
         user_data_with_physical_address_operation,
     ]
+
+
+def _check_job_status(
+    client,
+    customer_id,
+    offline_user_data_job_resource_name,
+    user_list_resource_name,
+):
+    """Retrieves, checks, and prints the status of the offline user data job.
+
+    Args:
+        client: The Google Ads client.
+        customer_id: The customer ID for which to add the user list.
+        offline_user_data_job_resource_name: The resource name of the offline
+            user data job to get the status of.
+        user_list_resource_name: The resource name of the customer match user
+            list
+    """
+    job_status_enum = client.get_type(
+        "OfflineUserDataJobStatusEnum", version="v6"
+    ).OfflineUserDataJobStatus
+    job_type_enum = client.get_type(
+        "OfflineUserDataJobTypeEnum", version="v6"
+    ).OfflineUserDataJobType
+    query = f"""
+        SELECT
+          offline_user_data_job.resource_name,
+          offline_user_data_job.id,
+          offline_user_data_job.status,
+          offline_user_data_job.type,
+          offline_user_data_job.failure_reason
+        FROM offline_user_data_job
+        WHERE offline_user_data_job.resource_name =
+          '{offline_user_data_job_resource_name}'
+        LIMIT 1"""
+
+    # Issues a search request using streaming.
+    google_ads_service = client.get_service("GoogleAdsService", version="v6")
+    results = google_ads_service.search(customer_id, query=query)
+    offline_user_data_job = next(iter(results)).offline_user_data_job
+    status = offline_user_data_job.status
+    status_name = job_status_enum.Name(status)
+
+    print(
+        f"Offline user data job ID '{offline_user_data_job.id}' with type "
+        f"'{job_type_enum.Name(offline_user_data_job.type)}' has status: "
+        f"{status_name}"
+    )
+
+    if status_name == "SUCCESS":
+        _print_customer_match_user_list_info(
+            client, customer_id, user_list_resource_name
+        )
+    elif status_name == "FAILED":
+        print(f"\tFailure Reason: {offline_user_data_job.failure_reason}")
+    elif status_name in ("PENDING", "RUNNING"):
+        print(
+            "To check the status of the job periodically, use the following "
+            f"GAQL query with GoogleAdsService.Search: {query}"
+        )
 
 
 def _print_customer_match_user_list_info(
@@ -316,6 +369,28 @@ if __name__ == "__main__":
         required=True,
         help="The Google Ads customer ID.",
     )
+    parser.add_argument(
+        "-s",
+        "--skip_polling",
+        action="store_true",
+        help="Whether the example should skip polling the API for completion, "
+        "which can take several hours. If the '-s' flag is set the example "
+        "will demonstrate how to use a search query to check the status of "
+        "the uploaded user list.",
+    )
+
     args = parser.parse_args()
 
-    main(google_ads_client, args.customer_id)
+    try:
+        main(google_ads_client, args.customer_id, args.skip_polling)
+    except GoogleAdsException as ex:
+        print(
+            f"Request with ID '{ex.request_id}' failed with status "
+            f"'{ex.error.code().name}' and includes the following errors:"
+        )
+        for error in ex.failure.errors:
+            print(f"\tError with message '{error.message}'.")
+            if error.location:
+                for field_path_element in error.location.field_path_elements:
+                    print(f"\t\tOn field: {field_path_element.field_name}")
+        sys.exit(1)

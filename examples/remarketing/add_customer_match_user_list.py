@@ -298,7 +298,7 @@ def _check_job_status(
     elif status_name in ("PENDING", "RUNNING"):
         print(
             "To check the status of the job periodically, use the following "
-            f"GAQL query with GoogleAdsService.search: {query}"
+            f"GAQL query with GoogleAdsService.Search: {query}"
         )
 
 

@@ -90,7 +90,7 @@ def main(client, login_customer_id=None):
         root_customer_client = None
 
         while unprocessed_customer_ids:
-            customer_id = unprocessed_customer_ids.pop(0)
+            customer_id = int(unprocessed_customer_ids.pop(0))
             response = googleads_service.search(
                 customer_id=str(customer_id), query=query
             )
@@ -123,8 +123,7 @@ def main(client, login_customer_id=None):
                     # prevent visiting the same customer many times, we
                     # need to check if it's already in the Dictionary.
                     if (
-                        customer_client.id
-                        not in customer_ids_to_child_accounts
+                        customer_client.id not in customer_ids_to_child_accounts
                         and customer_client.level == 1
                     ):
                         unprocessed_customer_ids.append(customer_client.id)
@@ -145,7 +144,6 @@ def main(client, login_customer_id=None):
             )
 
 
-
 def _print_account_hierarchy(
     customer_client, customer_ids_to_child_accounts, depth
 ):
@@ -162,7 +160,7 @@ def _print_account_hierarchy(
     if depth == 0:
         print("Customer ID (Descriptive Name, Currency Code, Time Zone)")
 
-    customer_id = str(customer_client.id)
+    customer_id = customer_client.id
     print("-" * (depth * 2), end="")
     print(
         f"{customer_id} ({customer_client.descriptive_name}, "

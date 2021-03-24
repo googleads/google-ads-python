@@ -108,5 +108,66 @@ class OAuth2Tests(TestCase):
         ) as mock_initializer:
             oauth2.get_credentials(mock_config)
             mock_initializer.assert_called_once_with(
-                self.json_key_file_path, self.subject
+                self.json_key_file_path, self.subject, http_proxy=None,
             )
+
+    def test_get_credentials_with_proxy(self):
+        http_proxy = "https://localhost:8000"
+        mock_request = mock.Mock()
+        mock_session = mock.Mock()
+        mock_config = {
+            "client_id": self.client_id,
+            "client_secret": self.client_secret,
+            "refresh_token": self.refresh_token,
+            "http_proxy": http_proxy,
+        }
+
+        with mock.patch.object(
+            oauth2, "get_installed_app_credentials", return_value=None
+        ) as mock_initializer:
+            oauth2.get_credentials(mock_config)
+
+            mock_initializer.assert_called_once_with(
+                self.client_id,
+                self.client_secret,
+                self.refresh_token,
+                http_proxy=http_proxy,
+            )
+
+    def test_get_installed_app_credentials_with_proxy(self):
+        http_proxy = "https://localhost:8000"
+        mock_request = mock.Mock()
+        mock_session = mock.Mock()
+        mock_credentials = mock.Mock()
+
+        with mock.patch.object(
+            oauth2, "InstalledAppCredentials", return_value=mock_credentials
+        ) as mock_initializer, mock.patch.object(
+            oauth2, "Request", return_value=mock_request
+        ) as mock_request_class, mock.patch.object(
+            oauth2, "Session", return_value=mock_session
+        ) as mock_session_initializer:
+
+            oauth2.get_installed_app_credentials(
+                self.client_id,
+                self.client_secret,
+                self.refresh_token,
+                http_proxy=http_proxy,
+            )
+            mock_request_class.assert_called_once_with(session=mock_session)
+
+    def test_get_installed_app_credentials_without_proxy(self):
+        mock_request = mock.Mock()
+        mock_session = mock.Mock()
+        mock_credentials = mock.Mock()
+
+        with mock.patch.object(
+            oauth2, "InstalledAppCredentials", return_value=mock_credentials
+        ) as mock_initializer, mock.patch.object(
+            oauth2, "Request", return_value=mock_request
+        ) as mock_request_class:
+
+            oauth2.get_installed_app_credentials(
+                self.client_id, self.client_secret, self.refresh_token
+            )
+            mock_request_class.assert_called_once_with()

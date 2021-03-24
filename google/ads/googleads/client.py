@@ -36,6 +36,7 @@ _SERVICE_CLIENT_TEMPLATE = "{}Client"
 _VALID_API_VERSIONS = ["v6", "v5", "v4"]
 _DEFAULT_VERSION = _VALID_API_VERSIONS[0]
 
+# See options at grpc.github.io/grpc/core/group__grpc__arg__keys.html
 _GRPC_CHANNEL_OPTIONS = [
     ("grpc.max_metadata_size", 16 * 1024 * 1024),
     ("grpc.max_receive_message_length", 64 * 1024 * 1024),
@@ -185,6 +186,7 @@ class GoogleAdsClient:
             "login_customer_id": config_data.get("login_customer_id"),
             "logging_config": config_data.get("logging"),
             "linked_customer_id": config_data.get("linked_customer_id"),
+            "http_proxy": config_data.get("http_proxy"),
         }
 
     @classmethod
@@ -297,6 +299,7 @@ class GoogleAdsClient:
         logging_config=None,
         linked_customer_id=None,
         version=None,
+        http_proxy=None,
     ):
         """Initializer for the GoogleAdsClient.
 
@@ -308,6 +311,7 @@ class GoogleAdsClient:
             logging_config: a dict specifying logging config options.
             linked_customer_id: a str specifying a linked customer ID.
             version: a str indicating the Google Ads API version to be used.
+            http_proxy: a str specifying the proxy URI through which to connect.
         """
         if logging_config:
             logging.config.dictConfig(logging_config)
@@ -319,6 +323,11 @@ class GoogleAdsClient:
         self.linked_customer_id = linked_customer_id
         self.version = version
         self.enums = _EnumGetter(self)
+        self.http_proxy = http_proxy
+
+        # If given, write the http_proxy channel option for GRPC to use
+        if http_proxy:
+            _GRPC_CHANNEL_OPTIONS.append(("grpc.http_proxy", http_proxy)),
 
     def get_service(self, name, version=_DEFAULT_VERSION, interceptors=None):
         """Returns a service client instance for the specified service_name.

@@ -31,6 +31,7 @@ _OPTIONAL_KEYS = (
     "endpoint",
     "logging",
     "linked_customer_id",
+    "http_proxy",
 )
 _CONFIG_FILE_PATH_KEY = ("configuration_file_path",)
 _OAUTH2_INSTALLED_APP_KEYS = ("client_id", "client_secret", "refresh_token")

@@ -23,8 +23,8 @@ To set up a conversion action, run the add_conversion_action.py example.
 import argparse
 import sys
 
-from google.ads.google_ads.client import GoogleAdsClient
-from google.ads.google_ads.errors import GoogleAdsException
+from google.ads.googleads.client import GoogleAdsClient
+from google.ads.googleads.errors import GoogleAdsException
 
 
 # [START upload_offline_conversion]
@@ -37,52 +37,42 @@ def main(
     conversion_value,
 ):
     """Creates a click conversion with a default currency of USD."""
-
-    click_conversion = client.get_type("ClickConversion", version="v6")
-    conversion_action_service = client.get_service(
-        "ConversionActionService", version="v6"
-    )
-    click_conversion.conversion_action = conversion_action_service.conversion_action_path(
-        customer_id, conversion_action_id
+    click_conversion = client.get_type("ClickConversion")
+    conversion_action_service = client.get_service("ConversionActionService")
+    click_conversion.conversion_action = (
+        conversion_action_service.conversion_action_path(
+            customer_id, conversion_action_id
+        )
     )
     click_conversion.gclid = gclid
     click_conversion.conversion_value = float(conversion_value)
     click_conversion.conversion_date_time = conversion_date_time
     click_conversion.currency_code = "USD"
 
-    conversion_upload_service = client.get_service(
-        "ConversionUploadService", version="v6"
+    conversion_upload_service = client.get_service("ConversionUploadService")
+    request = client.get_type("UploadClickConversionsRequest")
+    request.customer_id = customer_id
+    request.conversions = [click_conversion]
+    request.partial_failure = True
+    conversion_upload_response = (
+        conversion_upload_service.upload_click_conversions(
+            request=request,
+        )
     )
-
-    try:
-        conversion_upload_response = conversion_upload_service.upload_click_conversions(
-            customer_id, [click_conversion], partial_failure=True
-        )
-        uploaded_click_conversion = conversion_upload_response.results[0]
-        print(
-            f"Uploaded conversion that occurred at "
-            f'"{uploaded_click_conversion.conversion_date_time}" from '
-            f'Google Click ID "{uploaded_click_conversion.gclid}" '
-            f'to "{uploaded_click_conversion.conversion_action}"'
-        )
-    except GoogleAdsException as ex:
-        print(
-            f'Request with ID "{ex.request_id}" failed with status '
-            f'"{ex.error.code().name}" and includes the following errors:'
-        )
-        for error in ex.failure.errors:
-            print(f'\tError with message "{error.message}".')
-            if error.location:
-                for field_path_element in error.location.field_path_elements:
-                    print(f"\t\tOn field: {field_path_element.field_name}")
-        sys.exit(1)
-        # [END upload_offline_conversion]
+    uploaded_click_conversion = conversion_upload_response.results[0]
+    print(
+        f"Uploaded conversion that occurred at "
+        f'"{uploaded_click_conversion.conversion_date_time}" from '
+        f'Google Click ID "{uploaded_click_conversion.gclid}" '
+        f'to "{uploaded_click_conversion.conversion_action}"'
+    )
+    # [END upload_offline_conversion]
 
 
 if __name__ == "__main__":
     # GoogleAdsClient will read the google-ads.yaml configuration file in the
     # home directory if none is specified.
-    google_ads_client = GoogleAdsClient.load_from_storage()
+    googleads_client = GoogleAdsClient.load_from_storage(version="v6")
 
     parser = argparse.ArgumentParser(
         description="Uploads an offline conversion."
@@ -131,11 +121,23 @@ if __name__ == "__main__":
     )
     args = parser.parse_args()
 
-    main(
-        google_ads_client,
-        args.customer_id,
-        args.conversion_action_id,
-        args.gclid,
-        args.conversion_date_time,
-        args.conversion_value,
-    )
+    try:
+        main(
+            googleads_client,
+            args.customer_id,
+            args.conversion_action_id,
+            args.gclid,
+            args.conversion_date_time,
+            args.conversion_value,
+        )
+    except GoogleAdsException as ex:
+        print(
+            f'Request with ID "{ex.request_id}" failed with status '
+            f'"{ex.error.code().name}" and includes the following errors:'
+        )
+        for error in ex.failure.errors:
+            print(f'\tError with message "{error.message}".')
+            if error.location:
+                for field_path_element in error.location.field_path_elements:
+                    print(f"\t\tOn field: {field_path_element.field_name}")
+        sys.exit(1)

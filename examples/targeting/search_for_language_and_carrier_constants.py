@@ -24,8 +24,8 @@ Specifically, this example illustrates how to:
 import argparse
 import sys
 
-from google.ads.google_ads.client import GoogleAdsClient
-from google.ads.google_ads.errors import GoogleAdsException
+from google.ads.googleads.client import GoogleAdsClient
+from google.ads.googleads.errors import GoogleAdsException
 
 
 def main(client, customer_id, language_name, carrier_country_code):
@@ -38,20 +38,8 @@ def main(client, customer_id, language_name, carrier_country_code):
         carrier_country_code: String code of the country where the mobile
             carriers are located.
     """
-    try:
-        _search_for_language_constants(client, customer_id, language_name)
-        _search_for_carrier_constants(client, customer_id, carrier_country_code)
-    except GoogleAdsException as ex:
-        print(
-            f'Request with ID "{ex.request_id}" failed with status '
-            f'"{ex.error.code().name}" and includes the following errors:'
-        )
-        for error in ex.failure.errors:
-            print(f'\tError with message "{error.message}".')
-            if error.location:
-                for field_path_element in error.location.field_path_elements:
-                    print(f"\t\tOn field: {field_path_element.field_name}")
-        sys.exit(1)
+    _search_for_language_constants(client, customer_id, language_name)
+    _search_for_carrier_constants(client, customer_id, carrier_country_code)
 
 
 def _search_for_language_constants(client, customer_id, language_name):
@@ -63,7 +51,7 @@ def _search_for_language_constants(client, customer_id, language_name):
         language_name: String included in the language name to search for.
     """
     # Get the GoogleAdsService client.
-    google_ads_service = client.get_service("GoogleAdsService", version="v6")
+    googleads_service = client.get_service("GoogleAdsService")
 
     # Create a query that retrieves the language constants where the name
     # includes a given string.
@@ -78,7 +66,9 @@ def _search_for_language_constants(client, customer_id, language_name):
 
     # Issue a search request and process the stream response to print the
     # requested field values for the carrier constant in each row.
-    response = google_ads_service.search_stream(customer_id, query=query)
+    response = googleads_service.search_stream(
+        customer_id=customer_id, query=query
+    )
 
     for batch in response:
         for row in batch.results:
@@ -101,7 +91,7 @@ def _search_for_carrier_constants(client, customer_id, carrier_country_code):
             carriers are located.
     """
     # Get the GoogleAdsService client.
-    google_ads_service = client.get_service("GoogleAdsService", version="v6")
+    googleads_service = client.get_service("GoogleAdsService")
 
     # Create a query that retrieves the targetable carrier constants by country
     # code.
@@ -115,7 +105,9 @@ def _search_for_carrier_constants(client, customer_id, carrier_country_code):
 
     # Issue a search request and process the stream response to print the
     # requested field values for the carrier constant in each row.
-    response = google_ads_service.search_stream(customer_id, query=query)
+    response = googleads_service.search_stream(
+        customer_id=customer_id, query=query
+    )
 
     for batch in response:
         for row in batch.results:
@@ -130,7 +122,7 @@ def _search_for_carrier_constants(client, customer_id, carrier_country_code):
 if __name__ == "__main__":
     # GoogleAdsClient will read the google-ads.yaml configuration file in the
     # home directory if none is specified.
-    google_ads_client = GoogleAdsClient.load_from_storage()
+    googleads_client = GoogleAdsClient.load_from_storage(version="v6")
 
     parser = argparse.ArgumentParser(
         description=(
@@ -164,14 +156,26 @@ if __name__ == "__main__":
             "Optional, string code of the country where the mobile carriers "
             "are located, e.g. 'US', 'ES', etc. "
             "A list of country codes can be referenced here: "
-            "https://developers.google.com/adwords/api/docs/appendix/geotargeting."
+            "https://developers.google.com/google-ads/api/reference/data/geotargets"
         ),
     )
     args = parser.parse_args()
 
-    main(
-        google_ads_client,
+    try:
+        main(
+        googleads_client,
         args.customer_id,
         args.language_name,
         args.carrier_country_code,
     )
+    except GoogleAdsException as ex:
+        print(
+            f'Request with ID "{ex.request_id}" failed with status '
+            f'"{ex.error.code().name}" and includes the following errors:'
+        )
+        for error in ex.failure.errors:
+            print(f'	Error with message "{error.message}".')
+            if error.location:
+                for field_path_element in error.location.field_path_elements:
+                    print(f"\t\tOn field: {field_path_element.field_name}")
+        sys.exit(1)

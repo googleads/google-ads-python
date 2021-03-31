@@ -19,7 +19,8 @@ import argparse
 
 from google.api_core import protobuf_helpers
 
-from google.ads.google_ads.client import GoogleAdsClient
+from google.ads.googleads.client import GoogleAdsClient
+from google.ads.googleads.errors import GoogleAdsException
 
 
 # [START link_manager_to_client]
@@ -30,80 +31,107 @@ def main(client, customer_id, manager_customer_id):
     # configuration or instantiate two clients, where at least one points to
     # a specific configuration file so that both clients don't read the same
     # file located in the $HOME dir.
+    customer_client_link_service = client.get_service(
+        "CustomerClientLinkService"
+    )
 
     # Extend an invitation to the client while authenticating as the manager.
-    client_link_operation = client.get_type(
-        "CustomerClientLinkOperation", version="v6"
-    )
+    client_link_operation = client.get_type("CustomerClientLinkOperation")
     client_link = client_link_operation.create
-    client_link.client_customer = "customers/{}".format(customer_id)
-    client_link.status = client.get_type("ManagerLinkStatusEnum").PENDING
+    client_link.client_customer = f"customers/{customer_id}"
+    client_link.status = client.get_type(
+        "ManagerLinkStatusEnum"
+    ).ManagerLinkStatus.PENDING
 
-    customer_client_link_service = client.get_service(
-        "CustomerClientLinkService", version="v6"
-    )
     response = customer_client_link_service.mutate_customer_client_link(
-        manager_customer_id, client_link_operation
+        customer_id=manager_customer_id, operation=client_link_operation
     )
     resource_name = response.results[0].resource_name
 
     print(
-        "Extended an invitation from customer #{} to customer #{} with "
-        "client link resource_name #{}".format(
-            manager_customer_id, customer_id, resource_name
-        )
+        f'Extended an invitation from customer "{manager_customer_id}" to '
+        f'customer "{customer_id}" with client link resource_name '
+        f'"{resource_name}"'
     )
 
     # Find the manager_link_id of the link we just created, so we can construct
     # the resource name for the link from the client side. Note that since we
     # are filtering by resource_name, a unique identifier, only one
     # customer_client_link resource will be returned in the response
-    query = f"""
-        SELECT customer_client_link.manager_link_id
-        FROM customer_client_link
-        WHERE customer_client_link.resource_name = '{resource_name}'"""
+    query = f'''
+        SELECT
+            customer_client_link.manager_link_id
+        FROM
+            customer_client_link
+        WHERE
+            customer_client_link.resource_name = "{resource_name}"'''
 
-    ga_service = client.get_service("GoogleAdsService", version="v6")
-    response = ga_service.search(manager_customer_id, query=query)
+    ga_service = client.get_service("GoogleAdsService")
 
-    # Since the google_ads_service.search method returns an iterator we need
-    # to initialize an iteration in order to retrieve results, even though
-    # we know the query will only return a single row.
-    for row in response.result:
-        manager_link_id = row.customer_client_link.manager_link_id
+    try:
+        response = ga_service.search(
+            customer_id=manager_customer_id, query=query
+        )
+        # Since the googleads_service.search method returns an iterator we need
+        # to initialize an iteration in order to retrieve results, even though
+        # we know the query will only return a single row.
+        for row in response.result:
+            manager_link_id = row.customer_client_link.manager_link_id
+    except GoogleAdsException as ex:
+        _handle_googleads_exception(ex)
 
-    manager_link_operation = client.get_type(
-        "CustomerManagerLinkOperation", version="v6"
+    customer_manager_link_service = client.get_service(
+        "CustomerManagerLinkService"
     )
+    manager_link_operation = client.get_type("CustomerManagerLinkOperation")
     manager_link = manager_link_operation.update
-    manager_link.resource_name = "customers/{}/customerManagerLinks/{}~{}".format(
-        customer_id, manager_customer_id, manager_link_id
-    )
-
-    manager_link.status = client.get_type("ManagerLinkStatusEnum", version="v6")
-    field_mask = protobuf_helpers.field_mask(None, manager_link)
-    manager_link_operation.update_mask.CopyFrom(field_mask)
-
-    manager_link_service = client.get_service(
-        "ManagerLinkService", version="v6"
-    )
-    response = manager_link_service.mutate_manager_links(
-        manager_customer_id, [manager_link_operation]
-    )
-    resource_name = response.results[0].resource_name
-
-    print(
-        "Client accepted invitation with resource_name: #{}".format(
-            resource_name
+    manager_link.resource_name = (
+        customer_manager_link_service.customer_manager_link_path(
+            customer_id,
+            manager_customer_id,
+            manager_link_id,
         )
     )
-    # [END link_manager_to_client]
+
+    manager_link.status = client.get_type(
+        "ManagerLinkStatusEnum"
+    ).ManagerLinkStatus.PENDING
+    client.copy_from(
+        manager_link_operation.update_mask,
+        protobuf_helpers.field_mask(None, manager_link._pb),
+    )
+
+    try:
+        response = customer_manager_link_service.mutate_customer_manager_link(
+            customer_id=manager_customer_id, operations=[manager_link_operation]
+        )
+        resource_name = response.results[0].resource_name
+        print(
+            "Client accepted invitation with resource_name: "
+            f'"{resource_name}"'
+        )
+    except GoogleAdsException as ex:
+        _handle_googleads_exception(ex)
+        # [END link_manager_to_client]
+
+
+def _handle_googleads_exception(exception):
+    print(
+        f'Request with ID "{exception.request_id}" failed with status '
+        f'"{exception.error.code().name}" and includes the following errors:'
+    )
+    for error in exception.failure.errors:
+        print(f'\tError with message "{error.message}".')
+        if error.location:
+            for field_path_element in error.location.field_path_elements:
+                print(f"\t\tOn field: {field_path_element.field_name}")
+    sys.exit(1)
 
 
 if __name__ == "__main__":
     # GoogleAdsClient will read the google-ads.yaml configuration file in the
     # home directory if none is specified.
-    google_ads_client = GoogleAdsClient.load_from_storage()
+    googleads_client = GoogleAdsClient.load_from_storage(version="v6")
 
     parser = argparse.ArgumentParser(
         description=(
@@ -123,5 +151,7 @@ if __name__ == "__main__":
         help="The manager customer ID.",
     )
     args = parser.parse_args()
-
-    main(google_ads_client, args.customer_id, args.manager_customer_id)
+    try:
+        main(googleads_client, args.customer_id, args.manager_customer_id)
+    except GoogleAdsException as ex:
+        _handle_googleads_exception(ex)

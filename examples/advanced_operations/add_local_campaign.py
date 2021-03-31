@@ -26,10 +26,9 @@ import requests
 import sys
 from uuid import uuid4
 
-from google.api_core import protobuf_helpers
 
-from google.ads.google_ads.client import GoogleAdsClient
-from google.ads.google_ads.errors import GoogleAdsException
+from google.ads.googleads.client import GoogleAdsClient
+from google.ads.googleads.errors import GoogleAdsException
 
 
 _MARKETING_IMAGE_URL = "https://goo.gl/3b9Wfh"
@@ -44,28 +43,16 @@ def main(client, customer_id):
         client: an initialized GoogleAdsClient instance.
         customer_id: a client customer ID str.
     """
-    try:
-        budget_resource_name = _create_campaign_budget(client, customer_id)
-        campaign_resource_name = _create_campaign(
-            client, customer_id, budget_resource_name
-        )
-        ad_group_resource_name = _create_ad_group(
-            client, customer_id, campaign_resource_name
-        )
-        create_local_ad = _create_local_ad(
-            client, customer_id, ad_group_resource_name
-        )
-    except GoogleAdsException as ex:
-        print(
-            f'Request with ID "{ex.request_id}" failed with status '
-            f'"{ex.error.code().name}" and includes the following errors:'
-        )
-        for error in ex.failure.errors:
-            print(f'\tError with message "{error.message}".')
-            if error.location:
-                for field_path_element in error.location.field_path_elements:
-                    print(f"\t\tOn field: {field_path_element.field_name}")
-        sys.exit(1)
+    budget_resource_name = _create_campaign_budget(client, customer_id)
+    campaign_resource_name = _create_campaign(
+        client, customer_id, budget_resource_name
+    )
+    ad_group_resource_name = _create_ad_group(
+        client, customer_id, campaign_resource_name
+    )
+    create_local_ad = _create_local_ad(
+        client, customer_id, ad_group_resource_name
+    )
 
 
 def _create_campaign_budget(client, customer_id):
@@ -79,24 +66,20 @@ def _create_campaign_budget(client, customer_id):
         A str of the resource name for the newly created campaign budget.
     """
     # Create a CampaignBudgetOperation.
-    campaign_budget_operation = client.get_type(
-        "CampaignBudgetOperation", version="v6"
-    )
+    campaign_budget_operation = client.get_type("CampaignBudgetOperation")
     campaign_budget = campaign_budget_operation.create
     campaign_budget.name = f"Interplanetary Cruise Budget #{uuid4()}"
     campaign_budget.amount_micros = 50000000
     campaign_budget.delivery_method = client.get_type(
-        "BudgetDeliveryMethodEnum", version="v6"
-    ).STANDARD
+        "BudgetDeliveryMethodEnum"
+    ).BudgetDeliveryMethod.STANDARD
     # A Local campaign cannot use a shared campaign budget.
     campaign_budget.explicitly_shared = False
 
     # Issue a mutate request to add the campaign budget.
-    campaign_budget_service = client.get_service(
-        "CampaignBudgetService", version="v6"
-    )
+    campaign_budget_service = client.get_service("CampaignBudgetService")
     response = campaign_budget_service.mutate_campaign_budgets(
-        customer_id, [campaign_budget_operation]
+        customer_id=customer_id, operations=[campaign_budget_operation]
     )
     resource_name = response.results[0].resource_name
     print(f"Created campaign budget with resource name: '{resource_name}'")
@@ -115,7 +98,7 @@ def _create_campaign(client, customer_id, budget_resource_name):
         A str of the resource name for the newly created campaign.
     """
     # Create a CampaignOperation.
-    campaign_operation = client.get_type("CampaignOperation", version="v6")
+    campaign_operation = client.get_type("CampaignOperation")
     # Create a Campaign.
     campaign = campaign_operation.create
     campaign.name = f"Interplanetary Cruise Local #{uuid4()}"
@@ -123,15 +106,17 @@ def _create_campaign(client, customer_id, budget_resource_name):
     # Recommendation: Set the campaign to PAUSED when creating it to prevent
     # the ads from immediately serving. Set to ENABLED once you've added
     # targeting and the ads are ready to serve.
-    campaign.status = client.get_type("CampaignStatusEnum", version="v6").PAUSED
+    campaign.status = client.get_type(
+        "CampaignStatusEnum"
+    ).CampaignStatus.PAUSED
     # All Local campaigns have an advertising_channel_type of LOCAL and
     # advertising_channel_sub_type of LOCAL_CAMPAIGN.
     campaign.advertising_channel_type = client.get_type(
-        "AdvertisingChannelTypeEnum", version="v6"
-    ).LOCAL
+        "AdvertisingChannelTypeEnum"
+    ).AdvertisingChannelType.LOCAL
     campaign.advertising_channel_sub_type = client.get_type(
-        "AdvertisingChannelSubTypeEnum", version="v6"
-    ).LOCAL_CAMPAIGN
+        "AdvertisingChannelSubTypeEnum"
+    ).AdvertisingChannelSubType.LOCAL_CAMPAIGN
     # Bidding strategy must be set directly on the campaign.
     # Setting a portfolio bidding strategy by resource name is not supported.
     # Maximize conversion value is the only strategy supported for Local
@@ -145,13 +130,13 @@ def _create_campaign(client, customer_id, budget_resource_name):
     # Configure the Local campaign setting. Use the locations associated with
     # the customer's linked Google My Business account.
     campaign.local_campaign_setting.location_source_type = client.get_type(
-        "LocationSourceTypeEnum", version="v6"
-    ).GOOGLE_MY_BUSINESS
+        "LocationSourceTypeEnum"
+    ).LocationSourceType.GOOGLE_MY_BUSINESS
     # Optimization goal setting is mandatory for Local campaigns. This example
     # selects driving directions and call clicks as goals.
     optimization_goal_type_enum = client.get_type(
-        "OptimizationGoalTypeEnum", version="v6"
-    )
+        "OptimizationGoalTypeEnum"
+    ).OptimizationGoalType
     campaign.optimization_goal_setting.optimization_goal_types.extend(
         [
             optimization_goal_type_enum.CALL_CLICKS,
@@ -159,9 +144,9 @@ def _create_campaign(client, customer_id, budget_resource_name):
         ]
     )
 
-    campaign_service = client.get_service("CampaignService", version="v6")
+    campaign_service = client.get_service("CampaignService")
     response = campaign_service.mutate_campaigns(
-        customer_id, [campaign_operation]
+        customer_id=customer_id, operations=[campaign_operation]
     )
     resource_name = response.results[0].resource_name
     print(f"Created Local Campaign with resource name: '{resource_name}'")
@@ -179,19 +164,19 @@ def _create_ad_group(client, customer_id, campaign_resource_name):
     Returns:
         A str of the resource name for the newly created ad group.
     """
-    ad_group_operation = client.get_type("AdGroupOperation", version="v6")
+    ad_group_operation = client.get_type("AdGroupOperation")
     ad_group = ad_group_operation.create
     # Note that the ad group type must not be set.
     # Since the advertising_channel_subType is LOCAL_CAMPAIGN:
     #   1. you cannot override bid settings at the ad group level.
     #   2. you cannot add ad group criteria.
     ad_group.name = f"Earth to Mars Cruises #{uuid4()}"
-    ad_group.status = client.get_type("AdGroupStatusEnum", version="v6").ENABLED
+    ad_group.status = client.get_type("AdGroupStatusEnum").AdGroupStatus.ENABLED
     ad_group.campaign = campaign_resource_name
 
-    ad_group_service = client.get_service("AdGroupService", version="v6")
+    ad_group_service = client.get_service("AdGroupService")
     response = ad_group_service.mutate_ad_groups(
-        customer_id, [ad_group_operation]
+        customer_id=customer_id, operations=[ad_group_operation]
     )
     resource_name = response.results[0].resource_name
     print(f"Created AdGroup with resource name: '{resource_name}'")
@@ -206,12 +191,12 @@ def _create_local_ad(client, customer_id, ad_group_resource_name):
         customer_id: a client customer ID str.
         ad_group_resource_name: the resource name str for a ad group.
     """
-    ad_group_ad_operation = client.get_type("AdGroupAdOperation", version="v6")
+    ad_group_ad_operation = client.get_type("AdGroupAdOperation")
     ad_group_ad = ad_group_ad_operation.create
     ad_group_ad.ad_group = ad_group_resource_name
     ad_group_ad.status = client.get_type(
-        "AdGroupAdStatusEnum", version="v6"
-    ).ENABLED
+        "AdGroupAdStatusEnum"
+    ).AdGroupAdStatus.ENABLED
     ad_group_ad.ad.final_urls.append("https://www.example.com")
     ad_group_ad.ad.local_ad.headlines.extend(
         [
@@ -228,22 +213,27 @@ def _create_local_ad(client, customer_id, ad_group_resource_name):
     ad_group_ad.ad.local_ad.call_to_actions.append(
         _create_ad_text_asset(client, "Shop Now")
     )
-    marketing_image = ad_group_ad.ad.local_ad.marketing_images.add()
+    marketing_image = client.get_type("AdImageAsset")
     marketing_image.asset = _create_image_asset(
         client, customer_id, _MARKETING_IMAGE_URL, "Marketing Image"
     )
-    logo_image = ad_group_ad.ad.local_ad.logo_images.add()
+    ad_group_ad.ad.local_ad.marketing_images.append(marketing_image)
+
+    logo_image = client.get_type("AdImageAsset")
     logo_image.asset = _create_image_asset(
         client, customer_id, _LOGO_IMAGE_URL, "Square Marketing Image"
     )
-    video = ad_group_ad.ad.local_ad.videos.add()
+    ad_group_ad.ad.local_ad.logo_images.append(logo_image)
+
+    video = client.get_type("AdVideoAsset")
     video.asset = _create_youtube_video_asset(
         client, customer_id, _YOUTUBE_VIDEO_ID, "Local Campaigns"
     )
+    ad_group_ad.ad.local_ad.videos.append(video)
 
-    ad_group_ad_service = client.get_service("AdGroupAdService", version="v6")
+    ad_group_ad_service = client.get_service("AdGroupAdService")
     response = ad_group_ad_service.mutate_ad_group_ads(
-        customer_id, [ad_group_ad_operation]
+        customer_id=customer_id, operations=[ad_group_ad_operation]
     )
     resource_name = response.results[0].resource_name
     print(f"Created ad group ad with resource name: '{resource_name}'")
@@ -259,7 +249,7 @@ def _create_ad_text_asset(client, text):
     Returns:
         an ad text asset.
     """
-    ad_text_asset = client.get_type("AdTextAsset", version="v6")
+    ad_text_asset = client.get_type("AdTextAsset")
     ad_text_asset.text = text
     return ad_text_asset
 
@@ -276,14 +266,15 @@ def _create_image_asset(client, customer_id, image_url, image_name):
     Returns:
         an asset.
     """
-    asset_operation = client.get_type("AssetOperation", version="v6")
+    asset_operation = client.get_type("AssetOperation")
     asset = asset_operation.create
     asset.name = image_name
-    asset.type = client.get_type("AssetTypeEnum", version="v6").IMAGE
-    asset.image_asset.data = get_image_bytes(image_url)
-
-    asset_service = client.get_service("AssetService", version="v6")
-    response = asset_service.mutate_assets(customer_id, [asset_operation])
+    asset.type_ = client.get_type("AssetTypeEnum").AssetType.IMAGE
+    asset.image_asset.data = _get_image_bytes(image_url)
+    asset_service = client.get_service("AssetService")
+    response = asset_service.mutate_assets(
+        customer_id=customer_id, operations=[asset_operation]
+    )
     resource_name = response.results[0].resource_name
     print(
         "A new image asset has been added with resource name: "
@@ -292,7 +283,7 @@ def _create_image_asset(client, customer_id, image_url, image_name):
     return resource_name
 
 
-def get_image_bytes(url):
+def _get_image_bytes(url):
     """Loads image data from a URL.
 
     Args:
@@ -319,14 +310,16 @@ def _create_youtube_video_asset(
     Returns:
         an Asset.
     """
-    asset_operation = client.get_type("AssetOperation", version="v6")
+    asset_operation = client.get_type("AssetOperation")
     asset = asset_operation.create
     asset.name = youtube_video_name
-    asset.type = client.get_type("AssetTypeEnum", version="v6").YOUTUBE_VIDEO
+    asset.type_ = client.get_type("AssetTypeEnum").AssetType.YOUTUBE_VIDEO
     asset.youtube_video_asset.youtube_video_id = youtube_video_id
 
-    asset_service = client.get_service("AssetService", version="v6")
-    response = asset_service.mutate_assets(customer_id, [asset_operation])
+    asset_service = client.get_service("AssetService")
+    response = asset_service.mutate_assets(
+        customer_id=customer_id, operations=[asset_operation]
+    )
     resource_name = response.results[0].resource_name
     print(
         "A new YouTube video asset has been added with resource name: "
@@ -338,7 +331,7 @@ def _create_youtube_video_asset(
 if __name__ == "__main__":
     # GoogleAdsClient will read the google-ads.yaml configuration file in the
     # home directory if none is specified.
-    google_ads_client = GoogleAdsClient.load_from_storage()
+    googleads_client = GoogleAdsClient.load_from_storage(version="v6")
 
     parser = argparse.ArgumentParser(
         description="Adds a Local Campaign to the given account."
@@ -352,4 +345,16 @@ if __name__ == "__main__":
         help="The Google Ads customer ID.",
     )
     args = parser.parse_args()
-    main(google_ads_client, args.customer_id)
+    try:
+        main(googleads_client, args.customer_id)
+    except GoogleAdsException as ex:
+        print(
+            f'Request with ID "{ex.request_id}" failed with status '
+            f'"{ex.error.code().name}" and includes the following errors:'
+        )
+        for error in ex.failure.errors:
+            print(f'	Error with message "{error.message}".')
+            if error.location:
+                for field_path_element in error.location.field_path_elements:
+                    print(f"\t\tOn field: {field_path_element.field_name}")
+        sys.exit(1)

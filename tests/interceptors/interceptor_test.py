@@ -20,10 +20,10 @@ from unittest import TestCase
 
 import grpc
 
-from google.ads.google_ads.client import _DEFAULT_VERSION as default_version
-from google.ads.google_ads.interceptors.interceptor import Interceptor
+from google.ads.googleads.client import _DEFAULT_VERSION as default_version
+from google.ads.googleads.interceptors.interceptor import Interceptor
 
-errors_path = f"google.ads.google_ads.{default_version}.proto.errors.errors_pb2"
+errors_path = f"google.ads.googleads.{default_version}.errors.types.errors"
 error_protos = import_module(errors_path)
 
 _MOCK_FAILURE_VALUE = b"\n \n\x02\x08\x10\x12\x1aInvalid customer ID '123'."
@@ -102,15 +102,13 @@ class InterceptorTest(TestCase):
     def test_deferred_error_proto_module_load(self):
         """Tests that import_module is called when an API error is received."""
         with mock.patch(
-            "google.ads.google_ads.interceptors." "interceptor.import_module"
+            "google.ads.googleads.interceptors." "interceptor.import_module"
         ) as import_mock:
             interceptor = Interceptor(default_version)
             mock_metadata = ((interceptor._failure_key, _MOCK_FAILURE_VALUE),)
             interceptor._get_google_ads_failure(mock_metadata)
             import_mock.assert_called_once_with(
-                "google.ads.google_ads."
-                f"{default_version}.proto."
-                "errors.errors_pb2"
+                f"google.ads.googleads.{default_version}.errors.types.errors"
             )
 
     def test_get_error_from_response_does_not_cache_error(self):

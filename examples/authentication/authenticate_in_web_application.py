@@ -36,8 +36,8 @@ def main(client_secrets_path, scopes):
 
     flow.run_local_server()
 
-    print("Access token: %s" % flow.credentials.token)
-    print("Refresh token: %s" % flow.credentials.refresh_token)
+    print(f"Access token: {flow.credentials.token}")
+    print(f"Refresh token: {flow.credentials.refresh_token}")
 
 
 if __name__ == "__main__":
@@ -49,6 +49,7 @@ if __name__ == "__main__":
     parser.add_argument(
         "--client_secrets_path",
         required=True,
+        type=str,
         help=(
             "Path to the client secrets JSON file from the "
             "Google Developers Console that contains your "
@@ -58,19 +59,15 @@ if __name__ == "__main__":
     parser.add_argument(
         "--additional_scopes",
         default=None,
-        help=(
-            "Additional scopes to apply when generating the "
-            "refresh token. Each scope should be separated "
-            "by a comma."
-        ),
+        type=str,
+        nargs="+",
+        help=("Additional scopes to apply when generating the refresh token."),
     )
     args = parser.parse_args()
 
     configured_scopes = [SCOPE]
 
     if args.additional_scopes:
-        configured_scopes.extend(
-            args.additional_scopes.replace(" ", "").split(",")
-        )
+        configured_scopes.extend(args.additional_scopes)
 
     main(args.client_secrets_path, configured_scopes)

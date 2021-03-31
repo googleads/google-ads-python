@@ -29,8 +29,8 @@ from datetime import datetime, timedelta
 import sys
 from uuid import uuid4
 
-from google.ads.google_ads.client import GoogleAdsClient
-from google.ads.google_ads.errors import GoogleAdsException
+from google.ads.googleads.client import GoogleAdsClient
+from google.ads.googleads.errors import GoogleAdsException
 
 
 def main(
@@ -47,36 +47,20 @@ def main(
             account and to the new billing setup. If provided it must be
             formatted as "1234-5678-9012".
     """
-    try:
-        billing_setup = _create_billing_setup(
-            client, customer_id, payments_account_id, payments_profile_id
-        )
-        _set_billing_setup_date_times(client, customer_id, billing_setup)
-        billing_setup_operation = client.get_type(
-            "BillingSetupOperation", version="v6"
-        )
-        billing_setup_operation.create.CopyFrom(billing_setup)
-        billing_setup_service = client.get_service(
-            "BillingSetupService", version="v6"
-        )
-        response = billing_setup_service.mutate_billing_setup(
-            customer_id, billing_setup_operation
-        )
-        print(
-            "Added new billing setup with resource name "
-            f"{response.result.resource_name}"
-        )
-    except GoogleAdsException as ex:
-        print(
-            f'Request with ID "{ex.request_id}" failed with status '
-            f'"{ex.error.code().name}" and includes the following errors:'
-        )
-        for error in ex.failure.errors:
-            print(f'\tError with message "{error.message}".')
-            if error.location:
-                for field_path_element in error.location.field_path_elements:
-                    print(f"\t\tOn field: {field_path_element.field_name}")
-        sys.exit(1)
+    billing_setup = _create_billing_setup(
+        client, customer_id, payments_account_id, payments_profile_id
+    )
+    _set_billing_setup_date_times(client, customer_id, billing_setup)
+    billing_setup_operation = client.get_type("BillingSetupOperation")
+    client.copy_from(billing_setup_operation.create, billing_setup)
+    billing_setup_service = client.get_service("BillingSetupService")
+    response = billing_setup_service.mutate_billing_setup(
+        customer_id=customer_id, operation=billing_setup_operation
+    )
+    print(
+        "Added new billing setup with resource name "
+        f"{response.result.resource_name}"
+    )
 
 
 def _create_billing_setup(
@@ -99,7 +83,7 @@ def _create_billing_setup(
     Returns:
         A newly created BillingSetup instance.
     """
-    billing_setup = client.get_type("BillingSetup", version="v6")
+    billing_setup = client.get_type("BillingSetup")
 
     # Sets the appropriate payments account field.
     if payments_account_id != None:
@@ -107,9 +91,9 @@ def _create_billing_setup(
         # field to the full resource name of the given payments account ID.
         # You can list available payments accounts via the
         # PaymentsAccountService's ListPaymentsAccounts method.
-        billing_setup.payments_account = (
-            f"customers/{customer_id}/paymentsAccounts/{payments_account_id}"
-        )
+        billing_setup.payments_account = client.get_service(
+            "BillingSetupService"
+        ).payments_account_path(customer_id, payments_account_id)
     elif payments_profile_id != None:
         # Otherwise, create a new payments account by setting the
         # payments_account_info field
@@ -150,8 +134,8 @@ def _set_billing_setup_date_times(client, customer_id, billing_setup):
       ORDER BY billing_setup.end_date_time DESC
       LIMIT 1"""
 
-    ga_service = client.get_service("GoogleAdsService", version="v6")
-    response = ga_service.search_stream(customer_id, query)
+    ga_service = client.get_service("GoogleAdsService")
+    response = ga_service.search_stream(customer_id=customer_id, query=query)
     # Coercing the response iterator to a list causes the stream to be fully
     # consumed so that we can easily access the last row in the request.
     batches = list(response)
@@ -201,7 +185,7 @@ def _set_billing_setup_date_times(client, customer_id, billing_setup):
 if __name__ == "__main__":
     # GoogleAdsClient will read the google-ads.yaml configuration file in the
     # home directory if none is specified.
-    google_ads_client = GoogleAdsClient.load_from_storage()
+    googleads_client = GoogleAdsClient.load_from_storage(version="v6")
 
     parser = argparse.ArgumentParser(
         description=("Creates a billing setup for a given customer.")
@@ -240,9 +224,21 @@ if __name__ == "__main__":
     )
     args = parser.parse_args()
 
-    main(
-        google_ads_client,
-        args.customer_id,
-        args.payments_account_id,
-        args.payments_profile_id,
-    )
+    try:
+        main(
+            googleads_client,
+            args.customer_id,
+            args.payments_account_id,
+            args.payments_profile_id,
+        )
+    except GoogleAdsException as ex:
+        print(
+            f'Request with ID "{ex.request_id}" failed with status '
+            f'"{ex.error.code().name}" and includes the following errors:'
+        )
+        for error in ex.failure.errors:
+            print(f'\tError with message "{error.message}".')
+            if error.location:
+                for field_path_element in error.location.field_path_elements:
+                    print(f"\t\tOn field: {field_path_element.field_name}")
+        sys.exit(1)

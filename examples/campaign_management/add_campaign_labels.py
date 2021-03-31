@@ -20,8 +20,8 @@ This example assumes that a label has already been prepared.
 import argparse
 import sys
 
-from google.ads.google_ads.client import GoogleAdsClient
-from google.ads.google_ads.errors import GoogleAdsException
+from google.ads.googleads.client import GoogleAdsClient
+from google.ads.googleads.errors import GoogleAdsException
 
 
 # [START add_campaign_labels]
@@ -36,11 +36,9 @@ def main(client, customer_id, label_id, campaign_ids):
     """
 
     # Get an instance of CampaignLabelService client.
-    campaign_label_service = client.get_service(
-        "CampaignLabelService", version="v6"
-    )
-    campaign_service = client.get_service("CampaignService", version="v6")
-    label_service = client.get_service("LabelService", version="v6")
+    campaign_label_service = client.get_service("CampaignLabelService")
+    campaign_service = client.get_service("CampaignService")
+    label_service = client.get_service("LabelService")
 
     # Build the resource name of the label to be added across the campaigns.
     label_resource_name = label_service.label_path(customer_id, label_id)
@@ -51,44 +49,26 @@ def main(client, customer_id, label_id, campaign_ids):
         campaign_resource_name = campaign_service.campaign_path(
             customer_id, campaign_id
         )
-        campaign_label_operation = client.get_type(
-            "CampaignLabelOperation", version="v6"
-        )
+        campaign_label_operation = client.get_type("CampaignLabelOperation")
 
         campaign_label = campaign_label_operation.create
         campaign_label.campaign = campaign_resource_name
         campaign_label.label = label_resource_name
         operations.append(campaign_label_operation)
 
-    try:
-        response = campaign_label_service.mutate_campaign_labels(
-            customer_id, operations
-        )
-        print(f"Added {len(response.results)} campaign labels:")
-        for result in response.results:
-            print(result.resource_name)
-    except GoogleAdsException as error:
-        print(
-            'Request with ID "{}" failed with status "{}" and includes the '
-            "following errors:".format(
-                error.request_id, error.error.code().name
-            )
-        )
-        for error in error.failure.errors:
-            print('\tError with message "{}".'.format(error.message))
-            if error.location:
-                for field_path_element in error.location.field_path_elements:
-                    print(
-                        "\t\tOn field: {}".format(field_path_element.field_name)
-                    )
-        sys.exit(1)
-        # [END add_campaign_labels]
+    response = campaign_label_service.mutate_campaign_labels(
+        customer_id=customer_id, operations=operations
+    )
+    print(f"Added {len(response.results)} campaign labels:")
+    for result in response.results:
+        print(result.resource_name)
+    # [END add_campaign_labels]
 
 
 if __name__ == "__main__":
     # GoogleAdsClient will read the google-ads.yaml configuration file in the
     # home directory if none is specified.
-    google_ads_client = GoogleAdsClient.load_from_storage()
+    googleads_client = GoogleAdsClient.load_from_storage(version="v6")
 
     parser = argparse.ArgumentParser(
         description="This code example adds a campaign label to a list of "
@@ -118,4 +98,16 @@ if __name__ == "__main__":
         help="The campaign IDs to receive the label.",
     )
     args = parser.parse_args()
-    main(google_ads_client, args.customer_id, args.label_id, args.campaign_ids)
+    try:
+        main(googleads_client, args.customer_id, args.label_id, args.campaign_ids)
+    except GoogleAdsException as ex:
+        print(
+            f'Request with ID "{ex.request_id}" failed with status '
+            f'"{ex.error.code().name}" and includes the following errors:'
+        )
+        for error in ex.failure.errors:
+            print(f'	Error with message "{error.message}".')
+            if error.location:
+                for field_path_element in error.location.field_path_elements:
+                    print(f"\t\tOn field: {field_path_element.field_name}")
+        sys.exit(1)

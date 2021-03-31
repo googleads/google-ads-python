@@ -18,57 +18,44 @@
 import argparse
 import sys
 
-from google.ads.google_ads.client import GoogleAdsClient
-from google.ads.google_ads.errors import GoogleAdsException
+from google.ads.googleads.client import GoogleAdsClient
+from google.ads.googleads.errors import GoogleAdsException
 
 
 def main(client, customer_id, ad_group_id, keyword_text):
-    ad_group_service = client.get_service("AdGroupService", version="v6")
-    ad_group_criterion_service = client.get_service(
-        "AdGroupCriterionService", version="v6"
-    )
+    ad_group_service = client.get_service("AdGroupService")
+    ad_group_criterion_service = client.get_service("AdGroupCriterionService")
 
     # Create keyword.
-    ad_group_criterion_operation = client.get_type(
-        "AdGroupCriterionOperation", version="v6"
-    )
+    ad_group_criterion_operation = client.get_type("AdGroupCriterionOperation")
     ad_group_criterion = ad_group_criterion_operation.create
     ad_group_criterion.ad_group = ad_group_service.ad_group_path(
         customer_id, ad_group_id
     )
     ad_group_criterion.status = client.get_type(
-        "AdGroupCriterionStatusEnum", version="v6"
-    ).ENABLED
+        "AdGroupCriterionStatusEnum"
+    ).AdGroupCriterionStatus.ENABLED
     ad_group_criterion.keyword.text = keyword_text
     ad_group_criterion.keyword.match_type = client.get_type(
-        "KeywordMatchTypeEnum", version="v6"
-    ).EXACT
+        "KeywordMatchTypeEnum"
+    ).KeywordMatchType.EXACT
 
     # Optional field
     # All fields can be referenced from the protos directly.
-    # The protos are located in subdirectories under
-    # google/ads/googleads/v0/proto.
+    # The protos are located in subdirectories under:
+    # https://github.com/googleapis/googleapis/tree/master/google/ads/googleads
     # ad_group_criterion.negative = True
 
     # Optional repeated field
     # ad_group_criterion.final_urls.append('https://www.example.com')
 
     # Add keyword
-    try:
-        ad_group_criterion_response = ad_group_criterion_service.mutate_ad_group_criteria(
-            customer_id, [ad_group_criterion_operation]
+    ad_group_criterion_response = (
+        ad_group_criterion_service.mutate_ad_group_criteria(
+            customer_id=customer_id,
+            operations=[ad_group_criterion_operation],
         )
-    except GoogleAdsException as ex:
-        print(
-            f'Request with ID "{ex.request_id}" failed with status '
-            f'"{ex.error.code().name}" and includes the following errors:'
-        )
-        for error in ex.failure.errors:
-            print(f'\tError with message "{error.message}".')
-            if error.location:
-                for field_path_element in error.location.field_path_elements:
-                    print("\t\tOn field: {field_path_element.field_name}")
-        sys.exit(1)
+    )
 
     print(
         "Created keyword "
@@ -79,7 +66,7 @@ def main(client, customer_id, ad_group_id, keyword_text):
 if __name__ == "__main__":
     # GoogleAdsClient will read the google-ads.yaml configuration file in the
     # home directory if none is specified.
-    google_ads_client = GoogleAdsClient.load_from_storage()
+    googleads_client = GoogleAdsClient.load_from_storage(version="v6")
 
     parser = argparse.ArgumentParser(
         description=(
@@ -112,6 +99,18 @@ if __name__ == "__main__":
     )
     args = parser.parse_args()
 
-    main(
-        google_ads_client, args.customer_id, args.ad_group_id, args.keyword_text
+    try:
+        main(
+        googleads_client, args.customer_id, args.ad_group_id, args.keyword_text
     )
+    except GoogleAdsException as ex:
+        print(
+            f'Request with ID "{ex.request_id}" failed with status '
+            f'"{ex.error.code().name}" and includes the following errors:'
+        )
+        for error in ex.failure.errors:
+            print(f'	Error with message "{error.message}".')
+            if error.location:
+                for field_path_element in error.location.field_path_elements:
+                    print(f"\t\tOn field: {field_path_element.field_name}")
+        sys.exit(1)

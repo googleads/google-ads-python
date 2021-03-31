@@ -23,8 +23,8 @@ from datetime import datetime
 import hashlib
 import sys
 
-from google.ads.google_ads.client import GoogleAdsClient
-from google.ads.google_ads.errors import GoogleAdsException
+from google.ads.googleads.client import GoogleAdsClient
+from google.ads.googleads.errors import GoogleAdsException
 
 
 def main(
@@ -36,6 +36,8 @@ def main(
     advertiser_upload_date_time,
     bridge_map_version_id,
     partner_id,
+    custom_key,
+    custom_value,
 ):
     """Uploads offline conversion data for store sales transactions.
 
@@ -57,57 +59,51 @@ def main(
             uploads. Only required for third party uploads.
         partner_id: Optional ID of the third party partner. Only required for
             third party uploads.
+        custom_key: A custom key str to segment store sales conversions. Only
+            required after creating a custom key and custom values in the
+            account.
+        custom_value: A custom value str to segment store sales conversions.
+            Only required after creating a custom key and custom values in the
+            account.
     """
     # Get the OfflineUserDataJobService and OperationService clients.
     offline_user_data_job_service = client.get_service(
-        "OfflineUserDataJobService", version="v6"
+        "OfflineUserDataJobService"
     )
 
-    try:
-        # Create an offline user data job for uploading transactions.
-        offline_user_data_job_resource_name = _create_offline_user_data_job(
-            client,
-            offline_user_data_job_service,
-            customer_id,
-            offline_user_data_job_type,
-            external_id,
-            advertiser_upload_date_time,
-            bridge_map_version_id,
-            partner_id,
-        )
+    # Create an offline user data job for uploading transactions.
+    offline_user_data_job_resource_name = _create_offline_user_data_job(
+        client,
+        offline_user_data_job_service,
+        customer_id,
+        offline_user_data_job_type,
+        external_id,
+        advertiser_upload_date_time,
+        bridge_map_version_id,
+        partner_id,
+        custom_key,
+    )
 
-        # Add transactions to the job.
-        _add_transactions_to_offline_user_data_job(
-            client,
-            offline_user_data_job_service,
-            customer_id,
-            offline_user_data_job_resource_name,
-            conversion_action_id,
-        )
+    # Add transactions to the job.
+    _add_transactions_to_offline_user_data_job(
+        client,
+        offline_user_data_job_service,
+        customer_id,
+        offline_user_data_job_resource_name,
+        conversion_action_id,
+        custom_value,
+    )
 
-        # Issue an asynchronous request to run the offline user data job.
-        offline_user_data_job_service.run_offline_user_data_job(
-            offline_user_data_job_resource_name
-        )
+    # Issue an asynchronous request to run the offline user data job.
+    offline_user_data_job_service.run_offline_user_data_job(
+        resource_name=offline_user_data_job_resource_name
+    )
 
-        # Offline user data jobs may take up to 24 hours to complete, so
-        # instead of waiting for the job to complete, retrieves and displays
-        # the job status once and then prints the query to use to check the job
-        # again later.
-        _check_job_status(
-            client, customer_id, offline_user_data_job_resource_name
-        )
-    except GoogleAdsException as ex:
-        print(
-            f"Request with ID '{ex.request_id}' failed with status "
-            f"'{ex.error.code().name}' and includes the following errors:"
-        )
-        for error in ex.failure.errors:
-            print(f"\tError with message '{error.message}'.")
-            if error.location:
-                for field_path_element in error.location.field_path_elements:
-                    print(f"\t\tOn field: {field_path_element.field_name}")
-        sys.exit(1)
+    # Offline user data jobs may take up to 24 hours to complete, so
+    # instead of waiting for the job to complete, retrieves and displays
+    # the job status once and then prints the query to use to check the job
+    # again later.
+    _check_job_status(client, customer_id, offline_user_data_job_resource_name)
 
 
 def _create_offline_user_data_job(
@@ -119,6 +115,7 @@ def _create_offline_user_data_job(
     advertiser_upload_date_time,
     bridge_map_version_id,
     partner_id,
+    custom_key,
 ):
     """Creates an offline user data job for uploading store sales transactions.
 
@@ -135,6 +132,10 @@ def _create_offline_user_data_job(
             uploads. Only required for third party uploads.
         partner_id: Optional ID of the third party partner. Only required for
             third party uploads.
+        custom_key: A custom key str to segment store sales conversions. Only
+            required after creating a custom key and custom values in the
+            account.
+
     Returns:
         The string resource name of the created job.
     """
@@ -144,8 +145,8 @@ def _create_offline_user_data_job(
     # Ads API.
 
     # Create a new offline user data job.
-    offline_user_data_job = client.get_type("OfflineUserDataJob", version="v6")
-    offline_user_data_job.type = offline_user_data_job_type
+    offline_user_data_job = client.get_type("OfflineUserDataJob")
+    offline_user_data_job.type_ = offline_user_data_job_type
     if external_id is not None:
         offline_user_data_job.external_id = external_id
 
@@ -167,11 +168,14 @@ def _create_offline_user_data_job(
     # be identified by an email address or phone number.
     store_sales_metadata.transaction_upload_fraction = 1.0
 
+    if custom_key:
+        store_sales_metadata.custom_key = custom_key
+
     if (
         offline_user_data_job_type
         == client.get_type(
-            "OfflineUserDataJobTypeEnum", version="v6"
-        ).STORE_SALES_UPLOAD_THIRD_PARTY
+            "OfflineUserDataJobTypeEnum"
+        ).OfflineUserDataJobType.STORE_SALES_UPLOAD_THIRD_PARTY
     ):
         # Create additional metadata required for uploading third party data.
         store_sales_third_party_metadata = (
@@ -210,8 +214,10 @@ def _create_offline_user_data_job(
         # Set the third party partner ID uploading the transactions.
         store_sales_third_party_metadata.partner_id = partner_id
 
-    create_offline_user_data_job_response = offline_user_data_job_service.create_offline_user_data_job(
-        customer_id, offline_user_data_job
+    create_offline_user_data_job_response = (
+        offline_user_data_job_service.create_offline_user_data_job(
+            customer_id=customer_id, job=offline_user_data_job
+        )
     )
     offline_user_data_job_resource_name = (
         create_offline_user_data_job_response.resource_name
@@ -229,6 +235,7 @@ def _add_transactions_to_offline_user_data_job(
     customer_id,
     offline_user_data_job_resource_name,
     conversion_action_id,
+    custom_value,
 ):
     """Add operations to the job for a set of sample transactions.
 
@@ -239,6 +246,9 @@ def _add_transactions_to_offline_user_data_job(
         offline_user_data_job_resource_name: The string resource name of the
             offline user data job that will receive the transactions.
         conversion_action_id: The ID of a store sales conversion action.
+        custom_value: A custom value str to segment store sales conversions.
+            Only required after creating a custom key and custom values in the
+            account.
     """
     # Construct some sample transactions.
     operations = _build_offline_user_data_job_operations(
@@ -246,10 +256,14 @@ def _add_transactions_to_offline_user_data_job(
     )
 
     # Issue a request to add the operations to the offline user data job.
-    response = offline_user_data_job_service.add_offline_user_data_job_operations(
-        resource_name=offline_user_data_job_resource_name,
-        enable_partial_failure=True,
-        operations=operations,
+    request = client.get_type("AddOfflineUserDataJobOperationsRequest")
+    request.resource_name = offline_user_data_job_resource_name
+    request.enable_partial_failure = True
+    request.operations = operations
+    response = (
+        offline_user_data_job_service.add_offline_user_data_job_operations(
+            request=request,
+        )
     )
 
     # Print the status message if any partial failure error is returned.
@@ -269,7 +283,7 @@ def _add_transactions_to_offline_user_data_job(
 
 
 def _build_offline_user_data_job_operations(
-    client, customer_id, conversion_action_id
+    client, customer_id, conversion_action_id, custom_value
 ):
     """Create offline user data job operations for sample transactions.
 
@@ -277,26 +291,30 @@ def _build_offline_user_data_job_operations(
         client: An initialized Google Ads API client.
         customer_id: The Google Ads customer ID.
         conversion_action_id: The ID of a store sales conversion action.
+        custom_value: A custom value str to segment store sales conversions.
+            Only required after creating a custom key and custom values in the
+            account.
+
     Returns:
         A list of OfflineUserDataJobOperations.
     """
     # Create the first transaction for upload with an email address and state.
     user_data_with_email_address_operation = client.get_type(
-        "OfflineUserDataJobOperation", version="v6"
+        "OfflineUserDataJobOperation"
     )
     user_data_with_email_address = user_data_with_email_address_operation.create
-    email_identifier = client.get_type("UserIdentifier", version="v6")
+    email_identifier = client.get_type("UserIdentifier")
     # Hash normalized email addresses based on SHA-256 hashing algorithm.
     email_identifier.hashed_email = _normalize_and_hash("customer@example.com")
-    state_identifier = client.get_type("UserIdentifier", version="v6")
+    state_identifier = client.get_type("UserIdentifier")
     state_identifier.address_info.state = "NY"
     user_data_with_email_address.user_identifiers.extend(
         [email_identifier, state_identifier]
     )
-    user_data_with_email_address.transaction_attribute.conversion_action = client.get_service(
-        "ConversionActionService", version="v6"
-    ).conversion_action_path(
-        customer_id, conversion_action_id
+    user_data_with_email_address.transaction_attribute.conversion_action = (
+        client.get_service("ConversionActionService").conversion_action_path(
+            customer_id, conversion_action_id
+        )
     )
     user_data_with_email_address.transaction_attribute.currency_code = "USD"
     # Convert the transaction amount from $200 USD to micros.
@@ -314,12 +332,12 @@ def _build_offline_user_data_job_operations(
 
     # Create the second transaction for upload based on a physical address.
     user_data_with_physical_address_operation = client.get_type(
-        "OfflineUserDataJobOperation", version="v6"
+        "OfflineUserDataJobOperation"
     )
     user_data_with_physical_address = (
         user_data_with_physical_address_operation.create
     )
-    address_identifier = client.get_type("UserIdentifier", version="v6")
+    address_identifier = client.get_type("UserIdentifier")
     # First and last name must be normalized and hashed.
     address_identifier.address_info.hashed_first_name = _normalize_and_hash(
         "John"
@@ -331,10 +349,10 @@ def _build_offline_user_data_job_operations(
     address_identifier.address_info.country_code = "US"
     address_identifier.address_info.postal_code = "10011"
     user_data_with_physical_address.user_identifiers.append(address_identifier)
-    user_data_with_physical_address.transaction_attribute.conversion_action = client.get_service(
-        "ConversionActionService", version="v6"
-    ).conversion_action_path(
-        customer_id, conversion_action_id
+    user_data_with_physical_address.transaction_attribute.conversion_action = (
+        client.get_service("ConversionActionService").conversion_action_path(
+            customer_id, conversion_action_id
+        )
     )
     user_data_with_physical_address.transaction_attribute.currency_code = "EUR"
     # Convert the transaction amount from 450 EUR to micros.
@@ -350,6 +368,14 @@ def _build_offline_user_data_job_operations(
     ).strftime(
         "%Y-%m-%d %H:%M:%S"
     )
+
+    if custom_value:
+        user_data_with_email_address.transaction_attribute.custom_value = (
+            custom_value
+        )
+        user_data_with_physical_address.transaction_attribute.custom_value = (
+            custom_value
+        )
 
     return [
         user_data_with_email_address_operation,
@@ -379,7 +405,7 @@ def _check_job_status(client, customer_id, offline_user_data_job_resource_name):
             status you wish to check.
     """
     # Get the GoogleAdsService client.
-    google_ads_service = client.get_service("GoogleAdsService", version="v6")
+    googleads_service = client.get_service("GoogleAdsService")
 
     # Construct a query to fetch the job status.
     query = f"""
@@ -394,15 +420,17 @@ def _check_job_status(client, customer_id, offline_user_data_job_resource_name):
           '{offline_user_data_job_resource_name}'"""
 
     # Issue the query and get the GoogleAdsRow containing the job.
-    google_ads_row = next(iter(google_ads_service.search(customer_id, query)))
-    offline_user_data_job = google_ads_row.offline_user_data_job
+    googleads_row = next(
+        iter(googleads_service.search(customer_id=customer_id, query=query))
+    )
+    offline_user_data_job = googleads_row.offline_user_data_job
 
     offline_user_data_job_type_enum = client.get_type(
-        "OfflineUserDataJobTypeEnum", version="v6"
-    ).OfflineUserDataJobType
+        "OfflineUserDataJobTypeEnum"
+    ).OfflineUserDataJobType.OfflineUserDataJobType
     offline_user_data_job_status_enum = client.get_type(
-        "OfflineUserDataJobStatusEnum", version="v6"
-    ).OfflineUserDataJobStatus
+        "OfflineUserDataJobStatusEnum"
+    ).OfflineUserDataJobStatus.OfflineUserDataJobStatus
 
     job_status = offline_user_data_job.status
     print(
@@ -412,8 +440,8 @@ def _check_job_status(client, customer_id, offline_user_data_job_resource_name):
     )
 
     offline_user_data_job_status_enum = client.get_type(
-        "OfflineUserDataJobStatusEnum", version="v6"
-    )
+        "OfflineUserDataJobStatusEnum"
+    ).OfflineUserDataJobStatus
     if job_status == offline_user_data_job_status_enum.FAILED:
         print(f"\tFailure reason: {offline_user_data_job.failure_reason}")
     elif (
@@ -433,7 +461,7 @@ def _check_job_status(client, customer_id, offline_user_data_job_resource_name):
 if __name__ == "__main__":
     # GoogleAdsClient will read the google-ads.yaml configuration file in the
     # home directory if none is specified.
-    google_ads_client = GoogleAdsClient.load_from_storage()
+    googleads_client = GoogleAdsClient.load_from_storage(version="v6")
 
     parser = argparse.ArgumentParser(
         description="This example uploads offline data for store sales "
@@ -455,13 +483,33 @@ if __name__ == "__main__":
         help="The ID of a store sales conversion action.",
     )
     parser.add_argument(
+        "-k",
+        "--custom_key",
+        type=str,
+        required=False,
+        help="Only required after creating a custom key and custom values in "
+        "the account. Custom key and values are used to segment store sales "
+        "conversions. This measurement can be used to provide more advanced "
+        "insights. If provided, a custom value must also be provided",
+    )
+    parser.add_argument(
+        "-v",
+        "--custom_value",
+        type=str,
+        required=False,
+        help="Only required after creating a custom key and custom values in "
+        "the account. Custom key and values are used to segment store sales "
+        "conversions. This measurement can be used to provide more advanced "
+        "insights. If provided, a custom key must also be provided",
+    )
+    parser.add_argument(
         "-o",
         "--offline_user_data_job_type",
         type=int,
         required=False,
-        default=google_ads_client.get_type(
-            "OfflineUserDataJobTypeEnum", version="v6"
-        ).STORE_SALES_UPLOAD_FIRST_PARTY,
+        default=googleads_client.get_type(
+            "OfflineUserDataJobTypeEnum"
+        ).OfflineUserDataJobType.STORE_SALES_UPLOAD_FIRST_PARTY,
         help="Optional type of offline user data in the job (first party or "
         "third party). If you have an official store sales partnership with "
         "Google, use STORE_SALES_UPLOAD_THIRD_PARTY. Otherwise, defaults to "
@@ -484,7 +532,7 @@ if __name__ == "__main__":
         default=None,
         help="Optional date and time the advertiser uploaded data to the "
         "partner. Only required for third party uploads. The format is "
-        "'yyyy-mm-dd hh:mm:ss+|-hh:mm', e.g. '2019-01-01 12:32:45-08:00'.",
+        "'yyyy-mm-dd hh:mm:ss+|-hh:mm', e.g. '2021-01-01 12:32:45-08:00'.",
     )
     parser.add_argument(
         "-b",
@@ -505,13 +553,40 @@ if __name__ == "__main__":
         "party uploads.",
     )
     args = parser.parse_args()
-    main(
-        google_ads_client,
-        args.customer_id,
-        args.conversion_action_id,
-        args.offline_user_data_job_type,
-        args.external_id,
-        args.advertiser_upload_date_time,
-        args.bridge_map_version_id,
-        args.partner_id,
-    )
+
+    # Additional check to make sure that custom_key and custom_value are either
+    # not provided or both provided together.
+    required_together = ("custom_key", "custom_value")
+    required_custom_vals = [
+        getattr(args, field, None) for field in required_together
+    ]
+    if any(required_custom_vals) and not all(required_custom_vals):
+        parser.error(
+            "--custom_key (-k) and --custom_value (-v) must be passed "
+            "in together"
+        )
+
+    try:
+        main(
+            googleads_client,
+            args.customer_id,
+            args.conversion_action_id,
+            args.offline_user_data_job_type,
+            args.external_id,
+            args.advertiser_upload_date_time,
+            args.bridge_map_version_id,
+            args.partner_id,
+            args.custom_key,
+            args.custom_value,
+        )
+    except GoogleAdsException as ex:
+        print(
+            f"Request with ID '{ex.request_id}' failed with status "
+            f"'{ex.error.code().name}' and includes the following errors:"
+        )
+        for error in ex.failure.errors:
+            print(f"\tError with message '{error.message}'.")
+            if error.location:
+                for field_path_element in error.location.field_path_elements:
+                    print(f"\t\tOn field: {field_path_element.field_name}")
+        sys.exit(1)

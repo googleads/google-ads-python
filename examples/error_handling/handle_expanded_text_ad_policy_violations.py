@@ -22,8 +22,8 @@ import argparse
 import sys
 import uuid
 
-from google.ads.google_ads.client import GoogleAdsClient
-from google.ads.google_ads.errors import GoogleAdsException
+from google.ads.googleads.client import GoogleAdsClient
+from google.ads.googleads.errors import GoogleAdsException
 
 
 def main(client, customer_id, ad_group_id):
@@ -35,9 +35,7 @@ def main(client, customer_id, ad_group_id):
         ad_group_id: The ad group ID to which to add an expanded text ad.
     """
 
-    ad_group_ad_service_client = client.get_service(
-        "AdGroupAdService", version="v6"
-    )
+    ad_group_ad_service_client = client.get_service("AdGroupAdService")
 
     ad_group_ad_operation, ignorable_policy_topics = _create_expanded_text_ad(
         client, ad_group_ad_service_client, customer_id, ad_group_id
@@ -78,19 +76,19 @@ def _create_expanded_text_ad(
         The attempted AdGroupAdOperation instance and a list of ignorable
         policy topics.
     """
-    ad_group_resource_name = client.get_service(
-        "AdGroupService", version="v6"
-    ).ad_group_path(customer_id, ad_group_id)
+    ad_group_resource_name = client.get_service("AdGroupService").ad_group_path(
+        customer_id, ad_group_id
+    )
 
     # Creates an operation and ad group ad to create and hold the above ad.
-    ad_group_ad_operation = client.get_type("AdGroupAdOperation", version="v6")
+    ad_group_ad_operation = client.get_type("AdGroupAdOperation")
     ad_group_ad = ad_group_ad_operation.create
     ad_group_ad.ad_group = ad_group_resource_name
     # Set the ad group ad to PAUSED to prevent it from immediately serving.
     # Set to ENABLED once you've added targeting and the ad are ready to serve.
     ad_group_ad.status = client.get_type(
-        "AdGroupAdStatusEnum", version="v6"
-    ).PAUSED
+        "AdGroupAdStatusEnum"
+    ).AdGroupAdStatus.PAUSED
     # Sets the expanded text ad info on an ad.
     expanded_text_ad_info = ad_group_ad.ad.expanded_text_ad
     expanded_text_ad_info.headline_part1 = (
@@ -106,25 +104,25 @@ def _create_expanded_text_ad(
     try:
         # Try sending a mutate request to add the ad group ad.
         ad_group_ad_service_client.mutate_ad_group_ads(
-            customer_id, [ad_group_ad_operation]
+            customer_id=customer_id, operations=[ad_group_ad_operation]
         )
-    except GoogleAdsException as google_ads_exception:
+    except GoogleAdsException as googleads_exception:
         # The request will always fail due to the policy violation in the
         # ad's description.
         ignorable_policy_topics = _fetch_ignorable_policy_topics(
-            client, google_ads_exception
+            client, googleads_exception
         )
 
     return ad_group_ad_operation, ignorable_policy_topics
 
 
 # [START handle_expanded_text_ad_policy_violations]
-def _fetch_ignorable_policy_topics(client, google_ads_exception):
+def _fetch_ignorable_policy_topics(client, googleads_exception):
     """Collects all ignorable policy topics to be sent for exemption request.
 
     Args:
         client: The GoogleAds client instance.
-        google_ads_exception: The exception that contains the policy
+        googleads_exception: The exception that contains the policy
             violation(s).
 
     Returns:
@@ -133,18 +131,18 @@ def _fetch_ignorable_policy_topics(client, google_ads_exception):
     ignorable_policy_topics = []
 
     print("Google Ads failure details:")
-    for error in google_ads_exception.failure.errors:
+    for error in googleads_exception.failure.errors:
         if (
             error.error_code.policy_finding_error
             != client.get_type(
-                "PolicyFindingErrorEnum", version="v6"
-            ).POLICY_FINDING
+                "PolicyFindingErrorEnum"
+            ).PolicyFindingError.POLICY_FINDING
         ):
             print(
                 "This example supports sending exemption request for the "
                 "policy finding error only."
             )
-            raise google_ads_exception
+            raise googleads_exception
 
         print(f"\t{error.error_code.policy_finding_error}: {error.message}")
 
@@ -161,7 +159,7 @@ def _fetch_ignorable_policy_topics(client, google_ads_exception):
                 ignorable_policy_topics.append(policy_topic_entry.topic)
                 print(f"\t\tPolicy topic name: '{policy_topic_entry.topic}'")
                 print(
-                    f"\t\tPolicy topic entry type: '{policy_topic_entry.type}'"
+                    f"\t\tPolicy topic entry type: '{policy_topic_entry.type_}'"
                 )
                 # For the sake of brevity, we exclude printing "policy topic
                 # evidences" and "policy topic constraints" here. You can fetch
@@ -197,7 +195,7 @@ def _request_exemption(
         ignorable_policy_topics
     )
     response = ad_group_ad_service_client.mutate_ad_group_ads(
-        customer_id, [ad_group_ad_operation]
+        customer_id=customer_id, operations=[ad_group_ad_operation]
     )
     print(
         "Successfully added an expanded text ad with resource name "
@@ -210,7 +208,7 @@ def _request_exemption(
 if __name__ == "__main__":
     # GoogleAdsClient will read the google-ads.yaml configuration file in the
     # home directory if none is specified.
-    google_ads_client = GoogleAdsClient.load_from_storage()
+    googleads_client = GoogleAdsClient.load_from_storage(version="v6")
 
     parser = argparse.ArgumentParser(
         description="Requests an exemption for expanded text ad policy "
@@ -233,4 +231,4 @@ if __name__ == "__main__":
     )
     args = parser.parse_args()
 
-    main(google_ads_client, args.customer_id, args.ad_group_id)
+    main(googleads_client, args.customer_id, args.ad_group_id)

@@ -18,14 +18,15 @@
 import argparse
 import sys
 
-import google.ads.google_ads.client
+from google.ads.googleads.client import GoogleAdsClient
+from google.ads.googleads.errors import GoogleAdsException
 
 
 _DEFAULT_PAGE_SIZE = 1000
 
 
 def main(client, customer_id, page_size, ad_group_id=None):
-    ga_service = client.get_service("GoogleAdsService", version="v6")
+    ga_service = client.get_service("GoogleAdsService")
 
     query = """
         SELECT
@@ -40,44 +41,31 @@ def main(client, customer_id, page_size, ad_group_id=None):
     if ad_group_id:
         query += f" AND ad_group.id = {ad_group_id}"
 
-    results = ga_service.search(customer_id, query=query, page_size=page_size)
+    search_request = client.get_type("SearchGoogleAdsRequest")
+    search_request.customer_id = customer_id
+    search_request.query = query
+    search_request.page_size = page_size
 
-    try:
-        for row in results:
-            ad_group = row.ad_group
-            ad_group_criterion = row.ad_group_criterion
-            keyword = row.ad_group_criterion.keyword
+    results = ga_service.search(request=search_request)
 
-            print(
-                'Keyword with text "%s", match type %s, criteria type %s, '
-                "and ID %s was found in ad group with ID %s."
-                % (
-                    keyword.text,
-                    keyword.match_type,
-                    ad_group_criterion.type,
-                    ad_group_criterion.criterion_id,
-                    ad_group.id,
-                )
-            )
-    except google.ads.google_ads.errors.GoogleAdsException as ex:
+    for row in results:
+        ad_group = row.ad_group
+        ad_group_criterion = row.ad_group_criterion
+        keyword = row.ad_group_criterion.keyword
+
         print(
-            'Request with ID "%s" failed with status "%s" and includes the '
-            "following errors:" % (ex.request_id, ex.error.code().name)
+            f'Keyword with text "{keyword.text}", match type '
+            f"{keyword.match_type}, criteria type "
+            f"{ad_group_criterion.type_}, and ID "
+            f"{ad_group_criterion.criterion_id} was found in ad group "
+            f"with ID {ad_group.id}."
         )
-        for error in ex.failure.errors:
-            print('\tError with message "%s".' % error.message)
-            if error.location:
-                for field_path_element in error.location.field_path_elements:
-                    print("\t\tOn field: %s" % field_path_element.field_name)
-        sys.exit(1)
 
 
 if __name__ == "__main__":
     # GoogleAdsClient will read the google-ads.yaml configuration file in the
     # home directory if none is specified.
-    google_ads_client = (
-        google.ads.google_ads.client.GoogleAdsClient.load_from_storage()
-    )
+    googleads_client = GoogleAdsClient.load_from_storage(version="v6")
 
     parser = argparse.ArgumentParser(
         description=(
@@ -98,9 +86,21 @@ if __name__ == "__main__":
     )
     args = parser.parse_args()
 
-    main(
-        google_ads_client,
+    try:
+        main(
+        googleads_client,
         args.customer_id,
         _DEFAULT_PAGE_SIZE,
         ad_group_id=args.ad_group_id,
     )
+    except GoogleAdsException as ex:
+        print(
+            f'Request with ID "{ex.request_id}" failed with status '
+            f'"{ex.error.code().name}" and includes the following errors:'
+        )
+        for error in ex.failure.errors:
+            print(f'	Error with message "{error.message}".')
+            if error.location:
+                for field_path_element in error.location.field_path_elements:
+                    print(f"\t\tOn field: {field_path_element.field_name}")
+        sys.exit(1)

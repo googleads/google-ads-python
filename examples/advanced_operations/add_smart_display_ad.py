@@ -123,7 +123,7 @@ def main(
     )
 
 
-# [START add_smart_display_ad_3]
+# [START add_smart_display_ad]
 def _create_budget(client, customer_id):
     campaign_budget_operation = client.get_type("CampaignBudgetOperation")
     campaign_budget = campaign_budget_operation.create
@@ -145,10 +145,10 @@ def _create_budget(client, customer_id):
         _handle_googleads_exception(ex)
 
     return campaign_budget_response.results[0].resource_name
-    # [END add_smart_display_ad_3]
+    # [END add_smart_display_ad]
 
 
-# [START add_smart_display_ad_4]
+# [START add_smart_display_ad_1]
 def _create_smart_display_campaign(client, customer_id, budget_resource_name):
     campaign_service = client.get_service("CampaignService")
     campaign_operation = client.get_type("CampaignOperation")
@@ -185,10 +185,10 @@ def _create_smart_display_campaign(client, customer_id, budget_resource_name):
         _handle_googleads_exception(ex)
 
     return campaign_response.results[0].resource_name
-    # [END add_smart_display_ad_4]
+    # [END add_smart_display_ad_1]
 
 
-# [START add_smart_display_ad]
+# [START add_smart_display_ad_4]
 def _create_ad_group(client, customer_id, campaign_resource_name):
     ad_group_service = client.get_service("AdGroupService")
     ad_group_operation = client.get_type("AdGroupOperation")
@@ -206,10 +206,10 @@ def _create_ad_group(client, customer_id, campaign_resource_name):
         _handle_googleads_exception(ex)
 
     return ad_group_response.results[0].resource_name
-    # [END add_smart_display_ad]
+    # [END add_smart_display_ad_4]
 
 
-# [START add_smart_display_ad_2]
+# [START add_smart_display_ad_3]
 def _upload_image_asset(
     client, customer_id, image_url, image_width, image_height
 ):
@@ -250,10 +250,10 @@ def _upload_image_asset(
         return mutate_asset_response.results[0].asset.id
     except GoogleAdsException as ex:
         _handle_googleads_exception(ex)
-        # [END add_smart_display_ad_2]
+        # [END add_smart_display_ad_3]
 
 
-# [START add_smart_display_ad_1]
+# [START add_smart_display_ad_2]
 def _create_responsive_display_ad(
     client,
     customer_id,
@@ -320,7 +320,7 @@ def _create_responsive_display_ad(
         _handle_googleads_exception(ex)
 
     return ad_group_ad_response.results[0].resource_name
-    # [END add_smart_display_ad_1]
+    # [END add_smart_display_ad_2]
 
 
 def _handle_googleads_exception(exception):

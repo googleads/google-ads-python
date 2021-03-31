@@ -34,7 +34,7 @@ def main(client, customer_id):
     campaign_budget_service = client.get_service("CampaignBudgetService")
     campaign_service = client.get_service("CampaignService")
 
-    # [START add_campaigns_1]
+    # [START add_campaigns]
     # Create a budget, which can be shared by multiple campaigns.
     campaign_budget_operation = client.get_type("CampaignBudgetOperation")
     campaign_budget = campaign_budget_operation.create
@@ -53,9 +53,9 @@ def main(client, customer_id):
         )
     except GoogleAdsException as ex:
         _handle_googleads_exception(ex)
-        # [END add_campaigns_1]
+        # [END add_campaigns]
 
-    # [START add_campaigns]
+    # [START add_campaigns_1]
     # Create campaign.
     campaign_operation = client.get_type("CampaignOperation")
     campaign = campaign_operation.create
@@ -80,7 +80,7 @@ def main(client, customer_id):
     campaign.network_settings.target_search_network = True
     campaign.network_settings.target_content_network = False
     campaign.network_settings.target_partner_search_network = False
-    # [END add_campaigns]
+    # [END add_campaigns_1]
 
     # Optional: Set the start date.
     start_time = datetime.date.today() + datetime.timedelta(days=1)

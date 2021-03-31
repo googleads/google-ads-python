@@ -27,7 +27,7 @@ from google.ads.googleads.errors import GoogleAdsException
 _DEFAULT_PAGE_SIZE = 1000
 
 
-# [START get_account_changes]
+# [START get_change_summary]
 def main(client, customer_id):
     ads_service = client.get_service("GoogleAdsService")
 
@@ -79,7 +79,7 @@ def main(client, customer_id):
             f"'{resource_type}' with resource name '{resource_name}' was "
             f"{resource_status}"
         )
-        # [END get_account_changes]
+        # [END get_change_summary]
 
 
 if __name__ == "__main__":

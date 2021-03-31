@@ -23,8 +23,8 @@ import sys
 import time
 from uuid import uuid4
 
-from google.ads.google_ads.client import GoogleAdsClient
-from google.ads.google_ads.errors import GoogleAdsException
+from google.ads.googleads.client import GoogleAdsClient
+from google.ads.googleads.errors import GoogleAdsException
 
 MAX_CUSTOMER_FEED_ADD_ATTEMPTS = 9
 DEFAULT_OAUTH2_SCOPE = "https://www.googleapis.com/auth/adwords"
@@ -51,10 +51,8 @@ def main(
             associated with the GMB account.
     """
     # Get the FeedService and CustomerFeedService clients.
-    feed_service = client.get_service("FeedService", version="v6")
-    customer_feed_service = client.get_service(
-        "CustomerFeedService", version="v6"
-    )
+    feed_service = client.get_service("FeedService")
+    customer_feed_service = client.get_service("CustomerFeedService")
 
     # Create a feed operation and configure the new feed.
     # The feed will sync to the Google My Business account specified by
@@ -62,7 +60,7 @@ def main(
     # will add them automatically because this will be a system generated feed.
     # See here for more details:
     # https://developers.google.com/google-ads/api/docs/location-extensions/google-ads-location-extensions
-    feed_operation = client.get_type("FeedOperation", version="v6")
+    feed_operation = client.get_type("FeedOperation")
     gmb_feed = feed_operation.create
     gmb_feed.name = f"Google My Business Feed #{uuid4()}"
     # Configure the location feed populated from Google My Business Locations.
@@ -92,106 +90,94 @@ def main(
     )
     # Since this feed's feed items will be managed by Google, you must set its
     # origin to GOOGLE.
-    gmb_feed.origin = client.get_type("FeedOriginEnum", version="v6").GOOGLE
+    gmb_feed.origin = client.get_type("FeedOriginEnum").FeedOrigin.GOOGLE
 
-    try:
-        # Optional: Delete all existing location extension feeds. This is an
-        # optional step, and is required for this code example to run correctly
-        # more than once; Google Ads only allows one location extension feed
-        # per email address, and a Google Ads account cannot have a location
-        # extension feed and an affiliate location extension feed at the same
-        # time.
-        _delete_location_extension_feeds(client, customer_id)
+    # Optional: Delete all existing location extension feeds. This is an
+    # optional step, and is required for this code example to run correctly
+    # more than once; Google Ads only allows one location extension feed
+    # per email address, and a Google Ads account cannot have a location
+    # extension feed and an affiliate location extension feed at the same
+    # time.
+    _delete_location_extension_feeds(client, customer_id)
 
-        # Add the feed. Since it is a system generated feed, Google Ads will
-        # automatically:
-        # 1. Set up the FeedAttributes on the feed.
-        # 2. Set up a FeedMapping that associates the FeedAttributes of the feed
-        #   with the placeholder fields of the LOCATION placeholder type.
-        feed_response = feed_service.mutate_feeds(customer_id, [feed_operation])
-        feed_resource_name = feed_response.results[0].resource_name
-        print(f"GMB feed created with resource name '{feed_resource_name}'.")
+    # Add the feed. Since it is a system generated feed, Google Ads will
+    # automatically:
+    # 1. Set up the FeedAttributes on the feed.
+    # 2. Set up a FeedMapping that associates the FeedAttributes of the feed
+    #   with the placeholder fields of the LOCATION placeholder type.
+    feed_response = feed_service.mutate_feeds(
+        customer_id=customer_id, operations=[feed_operation]
+    )
+    feed_resource_name = feed_response.results[0].resource_name
+    print(f"GMB feed created with resource name '{feed_resource_name}'.")
 
-        # After the completion of the Feed ADD operation above the added feed
-        # will not be available for usage in a CustomerFeed until the sync
-        # between the Google Ads and GMB accounts completes.
-        # This process is asynchronous, so we wait until the feed mapping is
-        # created, performing exponential backoff.
-        customer_feed_resource_name = None
-        number_of_attempts = 0
+    # After the completion of the Feed ADD operation above the added feed
+    # will not be available for usage in a CustomerFeed until the sync
+    # between the Google Ads and GMB accounts completes.
+    # This process is asynchronous, so we wait until the feed mapping is
+    # created, performing exponential backoff.
+    customer_feed_resource_name = None
+    number_of_attempts = 0
 
-        while number_of_attempts < MAX_CUSTOMER_FEED_ADD_ATTEMPTS:
-            feed_mapping = _get_gmb_feed_mapping(
-                client, customer_id, feed_resource_name
-            )
+    while number_of_attempts < MAX_CUSTOMER_FEED_ADD_ATTEMPTS:
+        feed_mapping = _get_gmb_feed_mapping(
+            client, customer_id, feed_resource_name
+        )
 
-            if feed_mapping is None:
-                number_of_attempts += 1
-                sleep_seconds = 5 * (2 ** number_of_attempts)
+        if feed_mapping is None:
+            number_of_attempts += 1
+            sleep_seconds = 5 * (2 ** number_of_attempts)
 
-                print(
-                    f"Attempt #{number_of_attempts} was not successful. "
-                    f"Waiting {sleep_seconds}s before trying again."
-                )
-
-                time.sleep(sleep_seconds)
-            else:
-                customer_feed_resource_name = feed_mapping.resource_name
-                print(f"GMB feed {feed_resource_name} is now ready.")
-                break
-
-        if customer_feed_resource_name is None:
             print(
-                "Could not create the CustomerFeed after "
-                f"{MAX_CUSTOMER_FEED_ADD_ATTEMPTS} attempts. Please retry "
-                "the CustomerFeed ADD operation later."
+                f"Attempt #{number_of_attempts} was not successful. "
+                f"Waiting {sleep_seconds}s before trying again."
             )
-            sys.exit(1)
+
+            time.sleep(sleep_seconds)
         else:
-            # Create a CustomerFeed operation and configure the CustomerFeed to
-            # associate the feed with this customer for the LOCATION placeholder
-            # type.
-            customer_feed_operation = client.get_type(
-                "CustomerFeedOperation", version="v6"
-            )
-            customer_feed = customer_feed_operation.create
-            customer_feed.feed = feed_resource_name
-            customer_feed.placeholder_types.append(
-                client.get_type("PlaceholderTypeEnum", version="v6").LOCATION
-            )
-            # The function string IDENTITY(true) will enable this feed.
-            true_operand = client.get_type("Operand", version="v6")
-            true_operand.constant_operand.boolean_value = True
-            customer_feed.matching_function.left_operands.append(true_operand)
-            customer_feed.matching_function.function_string = "IDENTITY(true)"
-            customer_feed.matching_function.operator = client.get_type(
-                "MatchingFunctionOperatorEnum", version="v6"
-            ).IDENTITY
+            customer_feed_resource_name = feed_mapping.resource_name
+            print(f"GMB feed {feed_resource_name} is now ready.")
+            break
 
-            customer_feed_response = customer_feed_service.mutate_customer_feeds(
-                customer_id, [customer_feed_operation]
-            )
-            print(
-                "Customer feed created with resource name "
-                f"'{customer_feed_response.results[0].resource_name}'."
-            )
+    if customer_feed_resource_name is None:
+        print(
+            "Could not create the CustomerFeed after "
+            f"{MAX_CUSTOMER_FEED_ADD_ATTEMPTS} attempts. Please retry "
+            "the CustomerFeed ADD operation later."
+        )
+        sys.exit(1)
+    else:
+        # Create a CustomerFeed operation and configure the CustomerFeed to
+        # associate the feed with this customer for the LOCATION placeholder
+        # type.
 
         # OPTIONAL: Create a CampaignFeed to specify which FeedItems to use at
         # the Campaign level.
 
         # OPTIONAL: Create an AdGroupFeed for even more fine grained control
         # over which feed items are used at the AdGroup level.
-    except GoogleAdsException as ex:
-        print(
-            f"Request with ID '{ex.request_id}' failed with status "
-            f"'{ex.error.code().name}' and includes the following errors:"
+        customer_feed_operation = client.get_type("CustomerFeedOperation")
+        customer_feed = customer_feed_operation.create
+        customer_feed.feed = feed_resource_name
+        customer_feed.placeholder_types.append(
+            client.get_type("PlaceholderTypeEnum").PlaceholderType.LOCATION
         )
-        for error in ex.failure.errors:
-            print(f"\tError with message '{error.message}'.")
-            if error.location:
-                for field_path_element in error.location.field_path_elements:
-                    print(f"\t\tOn field: {field_path_element.field_name}")
-        sys.exit(1)
+        # The function string "IDENTITY(true)" will enable this feed.
+        true_operand = client.get_type("Operand")
+        true_operand.constant_operand.boolean_value = True
+        customer_feed.matching_function.left_operands.append(true_operand)
+        customer_feed.matching_function.function_string = "IDENTITY(true)"
+        customer_feed.matching_function.operator = client.get_type(
+            "MatchingFunctionOperatorEnum"
+        ).MatchingFunctionOperator.IDENTITY
+
+        customer_feed_response = customer_feed_service.mutate_customer_feeds(
+            customer_id=customer_id, operations=[customer_feed_operation]
+        )
+        print(
+            "Customer feed created with resource name "
+            f"'{customer_feed_response.results[0].resource_name}'."
+        )
 
 
 def _delete_location_extension_feeds(client, customer_id):
@@ -226,9 +212,7 @@ def _get_location_extension_customer_feeds(client, customer_id):
     Returns:
         A list of location extension feeds.
     """
-
-    customer_feeds = []
-    google_ads_service = client.get_service("GoogleAdsService", version="v6")
+    googleads_service = client.get_service("GoogleAdsService")
 
     # Create the query. A location extension customer feed can be identified by
     # filtering for placeholder_types=LOCATION (location extension feeds) or
@@ -242,14 +226,11 @@ def _get_location_extension_customer_feeds(client, customer_id):
         FROM customer_feed
         WHERE
           customer_feed.placeholder_types CONTAINS ANY(LOCATION, AFFILIATE_LOCATION)
-          AND customer_feed.status=ENABLED"""
+          AND customer_feed.status = ENABLED"""
 
-    result = google_ads_service.search(customer_id, query)
+    result = googleads_service.search(customer_id=customer_id, query=query)
 
-    for row in result:
-        customer_feeds.append(row.customer_feed)
-
-    return customer_feeds
+    return [row.customer_feed for row in result]
 
 
 def _get_location_extension_feeds(client, customer_id):
@@ -261,9 +242,7 @@ def _get_location_extension_feeds(client, customer_id):
     Returns:
         A list of location extension feeds.
     """
-
-    feeds = []
-    google_ads_service = client.get_service("GoogleAdsService", version="v6")
+    googleads_service = client.get_service("GoogleAdsService")
 
     # Create the query.
     query = """
@@ -275,19 +254,17 @@ def _get_location_extension_feeds(client, customer_id):
         FROM feed
         WHERE feed.status = ENABLED"""
 
-    result = google_ads_service.search(customer_id, query)
+    result = googleads_service.search(customer_id=customer_id, query=query)
 
-    for row in result:
-        # A location extension feed can be identified by checking whether the
-        # places_location_feed_data field is set or the
-        # affiliate_location_feed_data field is set.
-        if (
-            row.feed.places_location_feed_data
-            or row.feed.affiliate_location_feed_data
-        ):
-            feeds.append(row.feed)
-
-    return feeds
+    # A location extension feed can be identified by checking whether the
+    # places_location_feed_data field is set or the
+    # affiliate_location_feed_data field is set.
+    return [
+        row.feed
+        for row in result
+        if row.feed.places_location_feed_data
+        or row.feed.affiliate_location_feed_data
+    ]
 
 
 def _delete_customer_feeds(client, customer_id, old_customer_feeds):
@@ -299,16 +276,16 @@ def _delete_customer_feeds(client, customer_id, old_customer_feeds):
         old_customer_feeds: The list of customer feeds to delete.
     """
     operations = []
-    customer_feed_service = client.get_service(
-        "CustomerFeedService", version="v6"
-    )
+    customer_feed_service = client.get_service("CustomerFeedService")
 
     for customer_feed in old_customer_feeds:
-        operation = client.get_type("CustomerFeedOperation", version="v6")
+        operation = client.get_type("CustomerFeedOperation")
         operation.remove = customer_feed.resource_name
         operations.append(operation)
 
-    customer_feed_service.mutate_customer_feeds(customer_id, operations)
+    customer_feed_service.mutate_customer_feeds(
+        customer_id=customer_id, operations=operations
+    )
 
 
 def _delete_feeds(client, customer_id, old_feeds):
@@ -320,14 +297,14 @@ def _delete_feeds(client, customer_id, old_feeds):
         old_feeds: The list of feeds to delete.
     """
     operations = []
-    feed_service = client.get_service("FeedService", version="v6")
+    feed_service = client.get_service("FeedService")
 
     for feed in old_feeds:
-        operation = client.get_type("FeedOperation", version="v6")
+        operation = client.get_type("FeedOperation")
         operation.remove = feed.resource_name
         operations.append(operation)
 
-    feed_service.mutate_feeds(customer_id, operations)
+    feed_service.mutate_feeds(customer_id=customer_id, operations=operations)
 
 
 def _get_gmb_feed_mapping(client, customer_id, feed_resource_name):
@@ -341,7 +318,7 @@ def _get_gmb_feed_mapping(client, customer_id, feed_resource_name):
     Returns:
         The requested FeedMapping, or None if it is not available.
     """
-    google_ads_service = client.get_service("GoogleAdsService", version="v6")
+    googleads_service = client.get_service("GoogleAdsService")
 
     query = f"""
         SELECT feed_mapping.resource_name, feed_mapping.status
@@ -352,7 +329,8 @@ def _get_gmb_feed_mapping(client, customer_id, feed_resource_name):
           AND feed_mapping.placeholder_type = LOCATION
         LIMIT 1"""
 
-    result = google_ads_service.search(customer_id, query)
+    result = googleads_service.search(customer_id=customer_id, query=query)
+
     try:
         return next(iter(result)).feed_mapping
     except StopIteration:
@@ -362,7 +340,7 @@ def _get_gmb_feed_mapping(client, customer_id, feed_resource_name):
 if __name__ == "__main__":
     # GoogleAdsClient will read the google-ads.yaml configuration file in the
     # home directory if none is specified.
-    google_ads_client = GoogleAdsClient.load_from_storage()
+    googleads_client = GoogleAdsClient.load_from_storage(version="v6")
 
     parser = argparse.ArgumentParser(
         description="Adds a feed that syncs feed items from a Google My "
@@ -401,7 +379,7 @@ if __name__ == "__main__":
         "--gmb_access_token",
         type=str,
         required=False,
-        default=google_ads_client.credentials.token,
+        default=googleads_client.credentials.token,
         help="If the gmb_email_address above is the same user you used to "
         "generate your Google Ads API refresh token, do not pass a value to "
         "this argument.\nOtherwise, to obtain an access token for your GMB "
@@ -412,10 +390,22 @@ if __name__ == "__main__":
 
     args = parser.parse_args()
 
-    main(
-        google_ads_client,
-        args.customer_id,
-        args.gmb_email_address,
-        args.business_account_id,
-        args.gmb_access_token,
-    )
+    try:
+        main(
+            googleads_client,
+            args.customer_id,
+            args.gmb_email_address,
+            args.business_account_id,
+            args.gmb_access_token,
+        )
+    except GoogleAdsException as ex:
+        print(
+            f"Request with ID '{ex.request_id}' failed with status "
+            f"'{ex.error.code().name}' and includes the following errors:"
+        )
+        for error in ex.failure.errors:
+            print(f"\tError with message '{error.message}'.")
+            if error.location:
+                for field_path_element in error.location.field_path_elements:
+                    print(f"\t\tOn field: {field_path_element.field_name}")
+        sys.exit(1)

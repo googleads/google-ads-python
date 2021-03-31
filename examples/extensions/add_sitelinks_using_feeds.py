@@ -21,8 +21,8 @@ import argparse
 import sys
 import uuid
 
-from google.ads.google_ads.client import GoogleAdsClient
-from google.ads.google_ads.errors import GoogleAdsException
+from google.ads.googleads.client import GoogleAdsClient
+from google.ads.googleads.errors import GoogleAdsException
 
 
 def main(client, customer_id, campaign_id, ad_group_id):
@@ -36,42 +36,28 @@ def main(client, customer_id, campaign_id, ad_group_id):
             to None if you do not wish to limit targeting to a specific ad
             group.
     """
+    # Create a feed, which acts as a table to store data.
+    feed = _create_feed(client, customer_id)
 
-    try:
-        # Create a feed, which acts as a table to store data.
-        feed = _create_feed(client, customer_id)
+    # Create feed items, which fill out the feed table with data.
+    feed_items = _create_feed_items(client, customer_id, feed)
 
-        # Create feed items, which fill out the feed table with data.
-        feed_items = _create_feed_items(client, customer_id, feed)
+    # Create a feed mapping, which tells Google Ads how to interpret this
+    # data to display additional sitelink information on ads.
+    _create_feed_mapping(client, customer_id, feed)
 
-        # Create a feed mapping, which tells Google Ads how to interpret this
-        # data to display additional sitelink information on ads.
-        _create_feed_mapping(client, customer_id, feed)
+    # Create a campaign feed, which tells Google Ads which campaigns to
+    # use the provided data with.
+    _create_campaign_feed(client, customer_id, campaign_id, feed)
 
-        # Create a campaign feed, which tells Google Ads which campaigns to
-        # use the provided data with.
-        _create_campaign_feed(client, customer_id, campaign_id, feed)
-
-        # If an ad group is specified, limit targeting only to the given ad
-        # group. You must set targeting on a per-feed-item basis. This will
-        # restrict the first feed item we added to only serve for the given
-        # ad group.
-        if ad_group_id is not None:
-            _create_ad_group_targeting(
-                client, customer_id, ad_group_id, feed_items[0]
-            )
-
-    except GoogleAdsException as ex:
-        print(
-            f"Request with ID '{ex.request_id}' failed with status "
-            f"'{ex.error.code().name}' and includes the following errors:"
+    # If an ad group is specified, limit targeting only to the given ad
+    # group. You must set targeting on a per-feed-item basis. This will
+    # restrict the first feed item we added to only serve for the given
+    # ad group.
+    if ad_group_id is not None:
+        _create_ad_group_targeting(
+            client, customer_id, ad_group_id, feed_items[0]
         )
-        for error in ex.failure.errors:
-            print(f"\tError with message '{error.message}'.")
-            if error.location:
-                for field_path_element in error.location.field_path_elements:
-                    print(f"\t\tOn field: {field_path_element.field_name}")
-        sys.exit(1)
 
 
 def _create_feed(client, customer_id):
@@ -84,19 +70,19 @@ def _create_feed(client, customer_id):
     Returns:
         The newly created feed.
     """
-    feed_service = client.get_service("FeedService", version="v6")
-    google_ads_service = client.get_service("GoogleAdsService", version="v6")
+    feed_service = client.get_service("FeedService")
+    googleads_service = client.get_service("GoogleAdsService")
 
-    feed_operation = client.get_type("FeedOperation", version="v6")
+    feed_operation = client.get_type("FeedOperation")
     feed = feed_operation.create
     feed.name = f"Sitelinks Feed {uuid.uuid4()}"
-    feed.origin = client.get_type("FeedOriginEnum", version="v6").USER
+    feed.origin = client.get_type("FeedOriginEnum").FeedOrigin.USER
     # Specify the column name and data type. This is just raw data at this
     # point, and not yet linked to any particular purpose. The names are used
     # to help us remember what they are intended for later.
     feed_attribute_type_enum = client.get_type(
-        "FeedAttributeTypeEnum", version="v6"
-    )
+        "FeedAttributeTypeEnum"
+    ).FeedAttributeType
     feed.attributes.extend(
         [
             _create_feed_attribute(
@@ -114,16 +100,19 @@ def _create_feed(client, customer_id):
         ]
     )
 
-    response = feed_service.mutate_feeds(customer_id, [feed_operation])
+    response = feed_service.mutate_feeds(
+        customer_id=customer_id, operations=[feed_operation]
+    )
     feed_resource_name = response.results[0].resource_name
     print(f"Created feed with resource name '{feed_resource_name}'.")
 
     # After we create the feed, we need to fetch it so we can determine the
     # attribute IDs, which will be required when populating feed items.
-    search_response = google_ads_service.search(
-        customer_id,
-        f"""
-        SELECT feed.attributes
+    search_response = googleads_service.search(
+        customer_id=customer_id,
+        query=f"""
+        SELECT
+          feed.attributes
         FROM feed
         WHERE feed.resource_name = '{feed_resource_name}'""",
     )
@@ -141,9 +130,9 @@ def _create_feed_attribute(client, name, attribute_type):
     Returns:
         A new FeedAttribute instance.
     """
-    feed_attribute = client.get_type("FeedAttribute", version="v6")
+    feed_attribute = client.get_type("FeedAttribute")
     feed_attribute.name = name
-    feed_attribute.type = attribute_type
+    feed_attribute.type_ = attribute_type
     return feed_attribute
 
 
@@ -158,7 +147,7 @@ def _create_feed_items(client, customer_id, feed):
     Returns:
         A list of string Feed Item Resource Names.
     """
-    feed_item_service = client.get_service("FeedItemService", version="v6")
+    feed_item_service = client.get_service("FeedItemService")
     operations = [
         _new_feed_item_operation(
             client,
@@ -210,7 +199,9 @@ def _create_feed_items(client, customer_id, feed):
         ),
     ]
 
-    response = feed_item_service.mutate_feed_items(customer_id, operations)
+    response = feed_item_service.mutate_feed_items(
+        customer_id=customer_id, operations=operations
+    )
 
     # We will need the resource name of each feed item to use in targeting.
     feed_item_resource_names = []
@@ -238,14 +229,12 @@ def _new_feed_item_operation(client, feed, text, final_url, line1, line2):
     Returns:
         The newly created FeedItemOperation instance.
     """
-    feed_item_operation = client.get_type("FeedItemOperation", version="v6")
+    feed_item_operation = client.get_type("FeedItemOperation")
     feed_item = feed_item_operation.create
     feed_item.feed = feed.resource_name
 
     for i in range(0, 4):
-        attribute_value = client.get_type(
-            "FeedItemAttributeValue", version="v6"
-        )
+        attribute_value = client.get_type("FeedItemAttributeValue")
         attribute_value.feed_attribute_id = feed.attributes[i].id
 
         feed_item.attribute_values.append(attribute_value)
@@ -270,22 +259,18 @@ def _create_feed_mapping(client, customer_id, feed):
         customer_id: The customer ID for which the call is made.
         feed: The feed for which the operation will be created.
     """
-    feed_mapping_service = client.get_service(
-        "FeedMappingService", version="v6"
-    )
+    feed_mapping_service = client.get_service("FeedMappingService")
 
-    feed_mapping_operation = client.get_type(
-        "FeedMappingOperation", version="v6"
-    )
+    feed_mapping_operation = client.get_type("FeedMappingOperation")
     feed_mapping = feed_mapping_operation.create
     feed_mapping.placeholder_type = client.get_type(
-        "PlaceholderTypeEnum", version="v6"
-    ).SITELINK
+        "PlaceholderTypeEnum"
+    ).PlaceholderType.SITELINK
     feed_mapping.feed = feed.resource_name
 
     sitelink_placeholder_field_enum = client.get_type(
-        "SitelinkPlaceholderFieldEnum", version="v6"
-    )
+        "SitelinkPlaceholderFieldEnum"
+    ).SitelinkPlaceholderField
     field_names_map = {
         "Link Text": sitelink_placeholder_field_enum.TEXT,
         "Link Final URL": sitelink_placeholder_field_enum.FINAL_URLS,
@@ -294,9 +279,7 @@ def _create_feed_mapping(client, customer_id, feed):
     }
 
     for feed_attribute in feed.attributes:
-        attribute_field_mapping = client.get_type(
-            "AttributeFieldMapping", version="v6"
-        )
+        attribute_field_mapping = client.get_type("AttributeFieldMapping")
         attribute_field_mapping.feed_attribute_id = feed_attribute.id
 
         attribute_field_mapping.sitelink_field = field_names_map[
@@ -306,7 +289,7 @@ def _create_feed_mapping(client, customer_id, feed):
         feed_mapping.attribute_field_mappings.append(attribute_field_mapping)
 
     response = feed_mapping_service.mutate_feed_mappings(
-        customer_id, [feed_mapping_operation]
+        customer_id=customer_id, operations=[feed_mapping_operation]
     )
     print(f"Created feed mapping '{response.results[0].resource_name}'.")
 
@@ -323,33 +306,29 @@ def _create_campaign_feed(client, customer_id, campaign_id, feed):
         campaign_id: The campaign to receive the feed.
         feed: The feed to connect to the campaign.
     """
-    campaign_feed_service = client.get_service(
-        "CampaignFeedService", version="v6"
-    )
+    campaign_feed_service = client.get_service("CampaignFeedService")
 
     # Fetch the feed item IDs and collapse into a single comma-separated string.
     aggregated_feed_item_ids = ",".join(
         [str(attribute.id) for attribute in feed.attributes]
     )
 
-    campaign_feed_operation = client.get_type(
-        "CampaignFeedOperation", version="v6"
-    )
+    campaign_feed_operation = client.get_type("CampaignFeedOperation")
     campaign_feed = campaign_feed_operation.create
     campaign_feed.feed = feed.resource_name
     campaign_feed.campaign = client.get_service(
-        "CampaignService", version="v6"
+        "CampaignService"
     ).campaign_path(customer_id, campaign_id)
     campaign_feed.matching_function.function_string = (
         f"AND(IN(FEED_ITEM_ID,{{ {aggregated_feed_item_ids} }})"
         ",EQUALS(CONTEXT.DEVICE,'Mobile'))"
     )
     campaign_feed.placeholder_types.append(
-        client.get_type("PlaceholderTypeEnum", version="v6").SITELINK
+        client.get_type("PlaceholderTypeEnum").PlaceholderType.SITELINK
     )
 
     response = campaign_feed_service.mutate_campaign_feeds(
-        customer_id, [campaign_feed_operation]
+        customer_id=customer_id, operations=[campaign_feed_operation]
     )
     print(f"Created campaign feed '{response.results[0].resource_name}'.")
 
@@ -363,21 +342,17 @@ def _create_ad_group_targeting(client, customer_id, ad_group_id, feed_item):
         ad_group_id: The ID of the Ad Group being targeted.
         feed_item: The feed item that was added to the feed.
     """
-    feed_item_target_service = client.get_service(
-        "FeedItemTargetService", version="v6"
-    )
+    feed_item_target_service = client.get_service("FeedItemTargetService")
 
-    feed_item_target_operation = client.get_type(
-        "FeedItemTargetOperation", version="v6"
-    )
+    feed_item_target_operation = client.get_type("FeedItemTargetOperation")
     feed_item_target = feed_item_target_operation.create
     feed_item_target.feed_item = feed_item
     feed_item_target.ad_group = client.get_service(
-        "AdGroupService", version="v6"
+        "AdGroupService"
     ).ad_group_path(customer_id, ad_group_id)
 
     response = feed_item_target_service.mutate_feed_item_targets(
-        customer_id, [feed_item_target_operation]
+        customer_id=customer_id, operations=[feed_item_target_operation]
     )
     print(
         f"Created feed item target '{response.results[0].resource_name}' "
@@ -388,7 +363,7 @@ def _create_ad_group_targeting(client, customer_id, ad_group_id, feed_item):
 if __name__ == "__main__":
     # GoogleAdsClient will read the google-ads.yaml configuration file in the
     # home directory if none is specified.
-    google_ads_client = GoogleAdsClient.load_from_storage()
+    googleads_client = GoogleAdsClient.load_from_storage(version="v6")
 
     parser = argparse.ArgumentParser(
         description="Adds sitelinks to a campaign using feed services."
@@ -418,6 +393,21 @@ if __name__ == "__main__":
     )
     args = parser.parse_args()
 
-    main(
-        google_ads_client, args.customer_id, args.campaign_id, args.ad_group_id
-    )
+    try:
+        main(
+            googleads_client,
+            args.customer_id,
+            args.campaign_id,
+            args.ad_group_id,
+        )
+    except GoogleAdsException as ex:
+        print(
+            f"Request with ID '{ex.request_id}' failed with status "
+            f"'{ex.error.code().name}' and includes the following errors:"
+        )
+        for error in ex.failure.errors:
+            print(f"\tError with message '{error.message}'.")
+            if error.location:
+                for field_path_element in error.location.field_path_elements:
+                    print(f"\t\tOn field: {field_path_element.field_name}")
+        sys.exit(1)

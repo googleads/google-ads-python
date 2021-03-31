@@ -24,8 +24,8 @@ account access levels.
 import argparse
 import sys
 
-from google.ads.google_ads.client import GoogleAdsClient
-from google.ads.google_ads.errors import GoogleAdsException
+from google.ads.googleads.client import GoogleAdsClient
+from google.ads.googleads.errors import GoogleAdsException
 
 from google.api_core import protobuf_helpers
 
@@ -43,22 +43,10 @@ def main(client, customer_id, email_address, access_role):
       access_role: The updated access role.
     """
 
-    try:
-        user_id = _get_user_access(client, customer_id, email_address)
+    user_id = _get_user_access(client, customer_id, email_address)
 
-        if user_id:
-            _modify_user_access(client, customer_id, user_id, access_role)
-    except GoogleAdsException as ex:
-        print(
-            f"Request with ID '{ex.request_id}' failed with status "
-            f"'{ex.error.code().name}' and includes the following errors:"
-        )
-        for error in ex.failure.errors:
-            print(f"\tError with message '{error.message}'.")
-            if error.location:
-                for field_path_element in error.location.field_path_elements:
-                    print(f"\t\tOn field: {field_path_element.field_name}")
-        sys.exit(1)
+    if user_id:
+        _modify_user_access(client, customer_id, user_id, access_role)
 
 
 def _get_user_access(client, customer_id, email_address):
@@ -73,7 +61,7 @@ def _get_user_access(client, customer_id, email_address):
     Returns:
       The user ID integer if a customer is found, otherwise None.
     """
-    google_ads_service = client.get_service("GoogleAdsService", version="v6")
+    googleads_service = client.get_service("GoogleAdsService")
 
     # Creates a query that retrieves all customer user accesses.
     # Use the LIKE query for filtering to ignore the text case for email
@@ -87,7 +75,11 @@ def _get_user_access(client, customer_id, email_address):
         FROM customer_user_access
         WHERE customer_user_access.email_address LIKE '{email_address}'"""
 
-    response = google_ads_service.search(customer_id, query)
+    search_request = client.get_type("SearchGoogleAdsRequest")
+    search_request.customer_id = customer_id
+    search_request.query = query
+
+    response = googleads_service.search(request=search_request)
 
     try:
         user_access = next(iter(response)).customer_user_access
@@ -116,22 +108,24 @@ def _modify_user_access(client, customer_id, user_id, access_role):
       access_role: The updated access role.
     """
     customer_user_access_service = client.get_service(
-        "CustomerUserAccessService", version="v6"
+        "CustomerUserAccessService"
     )
-    customer_user_access_op = client.get_type(
-        "CustomerUserAccessOperation", version="v6"
-    )
-    access_role_enum = client.get_type("AccessRoleEnum", version="v6")
+    customer_user_access_op = client.get_type("CustomerUserAccessOperation")
+    access_role_enum = client.get_type("AccessRoleEnum").AccessRole
     customer_user_access = customer_user_access_op.update
-    customer_user_access.resource_name = customer_user_access_service.customer_user_access_path(
-        customer_id, user_id
+    customer_user_access.resource_name = (
+        customer_user_access_service.customer_user_access_path(
+            customer_id, user_id
+        )
     )
     customer_user_access.access_role = getattr(access_role_enum, access_role)
-    field_mask = protobuf_helpers.field_mask(None, customer_user_access)
-    customer_user_access_op.update_mask.CopyFrom(field_mask)
+    client.copy_from(
+        customer_user_access_op.update_mask,
+        protobuf_helpers.field_mask(None, customer_user_access._pb),
+    )
 
     response = customer_user_access_service.mutate_customer_user_access(
-        customer_id, customer_user_access_op
+        customer_id=customer_id, operation=customer_user_access_op
     )
 
     print(
@@ -143,7 +137,7 @@ def _modify_user_access(client, customer_id, user_id, access_role):
 if __name__ == "__main__":
     # GoogleAdsClient will read the google-ads.yaml configuration file in the
     # home directory if none is specified.
-    google_ads_client = GoogleAdsClient.load_from_storage()
+    googleads_client = GoogleAdsClient.load_from_storage(version="v6")
 
     parser = argparse.ArgumentParser(
         description="This code example updates the access role of a user, "
@@ -174,9 +168,21 @@ if __name__ == "__main__":
         choices=_ACCESS_ROLES,
     )
     args = parser.parse_args()
-    main(
-        google_ads_client,
-        args.customer_id,
-        args.email_address,
-        args.access_role,
-    )
+    try:
+        main(
+            googleads_client,
+            args.customer_id,
+            args.email_address,
+            args.access_role,
+        )
+    except GoogleAdsException as ex:
+        print(
+            f"Request with ID '{ex.request_id}' failed with status "
+            f"'{ex.error.code().name}' and includes the following errors:"
+        )
+        for error in ex.failure.errors:
+            print(f"\tError with message '{error.message}'.")
+            if error.location:
+                for field_path_element in error.location.field_path_elements:
+                    print(f"\t\tOn field: {field_path_element.field_name}")
+        sys.exit(1)

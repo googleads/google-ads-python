@@ -22,11 +22,10 @@ account_management/list_accessible_customers.py examples.
 import argparse
 from itertools import product
 import multiprocessing
-import sys
 import time
 
-from google.ads.google_ads.client import GoogleAdsClient
-from google.ads.google_ads.errors import GoogleAdsException
+from google.ads.googleads.client import GoogleAdsClient
+from google.ads.googleads.errors import GoogleAdsException
 
 # Maximum number of processes to spawn.
 MAX_PROCESSES = multiprocessing.cpu_count()
@@ -73,8 +72,8 @@ def main(client, customer_ids):
 
         # Output results.
         print(
-            f'Total successful results: {len(successes)}\n'
-            f'Total failed results: {len(failures)}\n'
+            f"Total successful results: {len(successes)}\n"
+            f"Total failed results: {len(failures)}\n"
         )
 
         print("Successes:") if len(successes) else None
@@ -91,7 +90,7 @@ def main(client, customer_ids):
                 f'Request with ID "{ex.request_id}" failed with status '
                 f'"{ex.error.code().name}" for customer_id '
                 f'{failure["customer_id"]} and query "{failure["query"]}" and '
-                'includes the following errors:'
+                "includes the following errors:"
             )
             for error in ex.failure.errors:
                 print(f'\tError with message "{error.message}".')
@@ -99,7 +98,7 @@ def main(client, customer_ids):
                     for (
                         field_path_element
                     ) in error.location.field_path_elements:
-                        print(f'\t\tOn field: {field_path_element.field_name}')
+                        print(f"\t\tOn field: {field_path_element.field_name}")
 
 
 def _issue_search_request(client, customer_id, query):
@@ -112,13 +111,15 @@ def _issue_search_request(client, customer_id, query):
         customer_id: a client customer ID str.
         query: a GAQL query str.
     """
-    ga_service = client.get_service("GoogleAdsService", version="v6")
+    ga_service = client.get_service("GoogleAdsService")
     retry_count = 0
     # Retry until we've reached MAX_RETRIES or have successfully received a
     # response.
     while True:
         try:
-            response = ga_service.search_stream(customer_id, query)
+            response = ga_service.search_stream(
+                customer_id=customer_id, query=query
+            )
             # Returning a list of GoogleAdsRows will result in a
             # PicklingError, so instead we put the GoogleAdsRow data
             # into a list of str results and return that.
@@ -126,15 +127,15 @@ def _issue_search_request(client, customer_id, query):
             for batch in response:
                 for row in batch.results:
                     ad_group_id = (
-                        f'Ad Group ID {row.ad_group.id} in '
-                        if 'ad_group.id' in query
-                        else ''
+                        f"Ad Group ID {row.ad_group.id} in "
+                        if "ad_group.id" in query
+                        else ""
                     )
                     result_string = (
-                        f'{ad_group_id}'
-                        f'Campaign ID {row.campaign.id} '
-                        f'had {row.metrics.impressions} impressions '
-                        f'and {row.metrics.clicks} clicks.'
+                        f"{ad_group_id}"
+                        f"Campaign ID {row.campaign.id} "
+                        f"had {row.metrics.impressions} impressions "
+                        f"and {row.metrics.clicks} clicks."
                     )
                     result_strings.append(result_string)
             return (True, {"results": result_strings})
@@ -174,7 +175,7 @@ def _generate_inputs(client, customer_ids, queries):
 if __name__ == "__main__":
     # GoogleAdsClient will read the google-ads.yaml configuration file in the
     # home directory if none is specified.
-    google_ads_client = GoogleAdsClient.load_from_storage()
+    googleads_client = GoogleAdsClient.load_from_storage(version="v6")
 
     parser = argparse.ArgumentParser(
         description="Download a set of reports in parallel from a list of "
@@ -198,6 +199,6 @@ if __name__ == "__main__":
     args = parser.parse_args()
     # Override the login_customer_id on the GoogleAdsClient, if specified.
     if args.login_customer_id is not None:
-        google_ads_client.login_customer_id = args.login_customer_id
+        googleads_client.login_customer_id = args.login_customer_id
 
-    main(google_ads_client, args.customer_ids)
+    main(googleads_client, args.customer_ids)

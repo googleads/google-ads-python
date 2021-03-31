@@ -21,13 +21,13 @@ To get ad groups, run get_ad_groups.py.
 import argparse
 import sys
 
-from google.ads.google_ads.client import GoogleAdsClient
-from google.ads.google_ads.errors import GoogleAdsException
+from google.ads.googleads.client import GoogleAdsClient
+from google.ads.googleads.errors import GoogleAdsException
 
 
 # [START get_ad_group_criterion_cpc_bid_simulations]
 def main(client, customer_id, ad_group_id):
-    google_ads_service = client.get_service("GoogleAdsService", version="v6")
+    googleads_service = client.get_service("GoogleAdsService")
 
     query = f"""
         SELECT
@@ -41,56 +41,45 @@ def main(client, customer_id, ad_group_id):
           ad_group_criterion_simulation.type = CPC_BID
           AND ad_group_criterion_simulation.ad_group_id = {ad_group_id}"""
 
-    try:
-        # Issues a search request using streaming.
-        response = google_ads_service.search_stream(customer_id, query=query)
+    # Issues a search request using streaming.
+    response = googleads_service.search_stream(
+        customer_id=customer_id, query=query
+    )
 
-        # Iterates over all rows in all messages and prints the requested field
-        # values for the ad group criterion CPC bid simulation in each row.
-        for batch in response:
-            for row in batch.results:
-                simulation = row.ad_group_criterion_simulation
+    # Iterates over all rows in all messages and prints the requested field
+    # values for the ad group criterion CPC bid simulation in each row.
+    for batch in response:
+        for row in batch.results:
+            simulation = row.ad_group_criterion_simulation
 
+            print(
+                "found ad group criterion CPC bid simulation for "
+                f"ad group ID {simulation.ad_group_id}, "
+                f"criterion ID {simulation.criterion_id}, "
+                f"start date {simulation.start_date}, "
+                f"end date {simulation.end_date}"
+            )
+
+            for point in simulation.cpc_bid_point_list.points:
                 print(
-                    "found ad group criterion CPC bid simulation for "
-                    f"ad group ID {simulation.ad_group_id}, "
-                    f"criterion ID {simulation.criterion_id}, "
-                    f"start date {simulation.start_date}, "
-                    f"end date {simulation.end_date}"
+                    f"\tbid: {point.cpc_bid_micros} => "
+                    f"clicks: {point.clicks}",
+                    f"cost: {point.cost_micros}, "
+                    f"impressions: {point.impressions},"
+                    "biddable conversions: "
+                    f"{point.biddable_conversions},"
+                    f"biddable conversions value: "
+                    f"{point.biddable_conversions_value}",
                 )
 
-                for point in simulation.cpc_bid_point_list.points:
-                    print(
-                        f"\tbid: {point.cpc_bid_micros} => "
-                        f"clicks: {point.clicks}",
-                        f"cost: {point.cost_micros}, "
-                        f"impressions: {point.impressions},"
-                        "biddable conversions: "
-                        f"{point.biddable_conversions},"
-                        f"biddable conversions value: "
-                        f"{point.biddable_conversions_value}",
-                    )
-
-                print()
-
-    except GoogleAdsException as ex:
-        print(
-            f'Request with ID "{ex.request_id}" failed with status '
-            f'"{ex.error.code().name}" and includes the following errors:'
-        )
-        for error in ex.failure.errors:
-            print(f'\tError with message "{error.message}".')
-            if error.location:
-                for field_path_element in error.location.field_path_elements:
-                    print(f"\t\tOn field: {field_path_element.field_name}")
-        sys.exit(1)
-        # [END get_ad_group_criterion_cpc_bid_simulations]
+            print()
+            # [END get_ad_group_criterion_cpc_bid_simulations]
 
 
 if __name__ == "__main__":
     # GoogleAdsClient will read the google-ads.yaml configuration file in the
     # home directory if none is specified.
-    google_ads_client = GoogleAdsClient.load_from_storage()
+    googleads_client = GoogleAdsClient.load_from_storage(version="v6")
 
     parser = argparse.ArgumentParser(
         description="Gets all available ad group criterion CPC bid "
@@ -109,8 +98,20 @@ if __name__ == "__main__":
         "--ad_group_id",
         type=str,
         required=True,
-        help="The ad group ID for which to get available bid " "simulations.",
+        help="The ad group ID for which to get available bid simulations.",
     )
     args = parser.parse_args()
 
-    main(google_ads_client, args.customer_id, args.ad_group_id)
+    try:
+        main(googleads_client, args.customer_id, args.ad_group_id)
+    except GoogleAdsException as ex:
+        print(
+            f'Request with ID "{ex.request_id}" failed with status '
+            f'"{ex.error.code().name}" and includes the following errors:'
+        )
+        for error in ex.failure.errors:
+            print(f'\tError with message "{error.message}".')
+            if error.location:
+                for field_path_element in error.location.field_path_elements:
+                    print(f"\t\tOn field: {field_path_element.field_name}")
+        sys.exit(1)

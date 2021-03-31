@@ -14,15 +14,17 @@
 """Tests for the Google Ads API client library utilities."""
 
 
+from importlib import import_module
 from unittest import TestCase
 
-from google.ads.google_ads import util
+from google.ads.googleads import util
+from google.ads.googleads import client
 
+default_version = client._DEFAULT_VERSION
 
-class ResourceNameTest(TestCase):
-    def test_format_composite(self):
-        composite = util.ResourceName.format_composite("test", "test")
-        self.assertEqual(composite, "test~test")
+feed_module = import_module(
+    f"google.ads.googleads.{default_version}.resources.types.feed"
+)
 
 
 class ConvertStringTest(TestCase):
@@ -37,3 +39,26 @@ class ConvertStringTest(TestCase):
         expected = "GoogleAdsServiceClientTransport"
         result = util.convert_snake_case_to_upper_case(string)
         self.assertEqual(result, expected)
+
+
+class SetNestedMessageFieldTest(TestCase):
+    def test_set_nested_message_field(self):
+        val = "test value"
+        feed = feed_module.Feed()
+        util.set_nested_message_field(
+            feed, "places_location_feed_data.email_address", val
+        )
+        self.assertEqual(feed.places_location_feed_data.email_address, val)
+
+
+class GetNestedMessageFieldTest(TestCase):
+    def test_get_nested_message_field(self):
+        val = "test value"
+        feed = feed_module.Feed()
+        feed.places_location_feed_data.email_address = val
+        self.assertEqual(
+            util.get_nested_attr(
+                feed, "places_location_feed_data.email_address"
+            ),
+            val,
+        )

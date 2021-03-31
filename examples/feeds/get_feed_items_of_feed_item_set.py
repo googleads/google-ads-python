@@ -22,8 +22,8 @@ To link a feed item to a feed item set, run link_feed_item_set.py.
 import argparse
 import sys
 
-from google.ads.google_ads.client import GoogleAdsClient
-from google.ads.google_ads.errors import GoogleAdsException
+from google.ads.googleads.client import GoogleAdsClient
+from google.ads.googleads.errors import GoogleAdsException
 
 
 def main(client, customer_id, feed_id, feed_item_set_id):
@@ -36,10 +36,8 @@ def main(client, customer_id, feed_id, feed_item_set_id):
         feed_item_set_id: the ID for a FeedItemSet belonging to the given
             customer.
     """
-    ga_service = client.get_service("GoogleAdsService", version="v6")
-    feed_item_set_service = client.get_service(
-        "FeedItemSetService", version="v6"
-    )
+    ga_service = client.get_service("GoogleAdsService")
+    feed_item_set_service = client.get_service("FeedItemSetService")
 
     feed_item_set_path = feed_item_set_service.feed_item_set_path(
         customer_id, feed_id, feed_item_set_id
@@ -51,33 +49,24 @@ def main(client, customer_id, feed_id, feed_item_set_id):
         WHERE feed_item_set_link.feed_item_set = '{feed_item_set_path}'"""
 
     # Issues a search request using streaming.
-    response = ga_service.search_stream(customer_id, query=query)
+    search_request = client.get_type("SearchGoogleAdsStreamRequest")
+    search_request.customer_id = customer_id
+    search_request.query = query
+    response = ga_service.search_stream(request=search_request)
 
     print(
         "The feed items with the following resource names are linked with "
         f"the feed item set with ID {feed_item_set_id}:"
     )
-    try:
-        for batch in response:
-            for row in batch.results:
-                print(f"'{row.feed_item_set_link.feed_item}'")
-    except GoogleAdsException as ex:
-        print(
-            f'Request with ID "{ex.request_id}" failed with status '
-            f'"{ex.error.code().name}" and includes the following errors:'
-        )
-        for error in ex.failure.errors:
-            print(f'\tError with message "{error.message}".')
-            if error.location:
-                for field_path_element in error.location.field_path_elements:
-                    print(f"\t\tOn field: {field_path_element.field_name}")
-        sys.exit(1)
+    for batch in response:
+        for row in batch.results:
+            print(f"'{row.feed_item_set_link.feed_item}'")
 
 
 if __name__ == "__main__":
     # GoogleAdsClient will read the google-ads.yaml configuration file in the
     # home directory if none is specified.
-    google_ads_client = GoogleAdsClient.load_from_storage()
+    googleads_client = GoogleAdsClient.load_from_storage(version="v6")
 
     parser = argparse.ArgumentParser(
         description="Gets all feed items of the specified feed item set."
@@ -91,7 +80,11 @@ if __name__ == "__main__":
         help="The Google Ads customer ID.",
     )
     parser.add_argument(
-        "-i", "--feed_id", type=str, required=True, help="The Feed ID.",
+        "-i",
+        "--feed_id",
+        type=str,
+        required=True,
+        help="The Feed ID.",
     )
     parser.add_argument(
         "-s",
@@ -102,6 +95,18 @@ if __name__ == "__main__":
     )
     args = parser.parse_args()
 
-    main(
-        google_ads_client, args.customer_id, args.feed_id, args.feed_item_set_id
+    try:
+        main(
+        googleads_client, args.customer_id, args.feed_id, args.feed_item_set_id
     )
+    except GoogleAdsException as ex:
+        print(
+            f'Request with ID "{ex.request_id}" failed with status '
+            f'"{ex.error.code().name}" and includes the following errors:'
+        )
+        for error in ex.failure.errors:
+            print(f'	Error with message "{error.message}".')
+            if error.location:
+                for field_path_element in error.location.field_path_elements:
+                    print(f"\t\tOn field: {field_path_element.field_name}")
+        sys.exit(1)

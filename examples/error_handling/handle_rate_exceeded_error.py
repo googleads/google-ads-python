@@ -24,12 +24,10 @@ application.
 
 
 import argparse
-import sys
 from time import sleep
-import uuid
 
-from google.ads.google_ads.client import GoogleAdsClient
-from google.ads.google_ads.errors import GoogleAdsException
+from google.ads.googleads.client import GoogleAdsClient
+from google.ads.googleads.errors import GoogleAdsException
 
 # Number of requests to be run.
 NUM_REQUESTS = 5
@@ -49,7 +47,7 @@ def main(client, customer_id, ad_group_id):
         customer_id: A valid customer account ID.
         ad_group_id: The ad group ID to validate keywords from.
     """
-    quota_error_enum = client.get_type("QuotaErrorEnum", version="v6")
+    quota_error_enum = client.get_type("QuotaErrorEnum").QuotaError
     resource_exhausted = quota_error_enum.RESOURCE_EXHAUSTED
     temp_resource_exhausted = quota_error_enum.RESOURCE_TEMPORARILY_EXHAUSTED
 
@@ -70,11 +68,11 @@ def main(client, customer_id, ad_group_id):
                     break
                 except GoogleAdsException as ex:
                     has_rate_exceeded_error = False
-                    for google_ads_error in ex.failure.errors:
+                    for googleads_error in ex.failure.errors:
                         # Checks if any of the errors are
                         # QuotaError.RESOURCE_EXHAUSTED or
                         # QuotaError.RESOURCE_TEMPORARILY_EXHAUSTED.
-                        quota_error = google_ads_error.error_code.quota_error
+                        quota_error = googleads_error.error_code.quota_error
                         if (
                             quota_error == resource_exhausted
                             or quota_error == temp_resource_exhausted
@@ -126,14 +124,16 @@ def _create_ad_group_criterion_operations(
     Returns:
         A list of AdGroupCriterionOperation instances.
     """
-    ad_group_service = client.get_service("AdGroupService", version="v6")
-    status = client.get_type("AdGroupCriterionStatusEnum", version="v6").ENABLED
-    match_type = client.get_type("KeywordMatchTypeEnum", version="v6").EXACT
+    ad_group_service = client.get_service("AdGroupService")
+    status = client.get_type(
+        "AdGroupCriterionStatusEnum"
+    ).AdGroupCriterionStatus.ENABLED
+    match_type = client.get_type("KeywordMatchTypeEnum").KeywordMatchType.EXACT
 
     operations = []
     for i in range(NUM_KEYWORDS):
         ad_group_criterion_operation = client.get_type(
-            "AdGroupCriterionOperation", version="v6"
+            "AdGroupCriterionOperation"
         )
         ad_group_criterion = ad_group_criterion_operation.create
         ad_group_criterion.ad_group = ad_group_service.ad_group_path(
@@ -160,12 +160,13 @@ def _request_mutate_and_display_result(client, customer_id, operations):
         customer_id: A valid customer account ID.
         operations: a list of AdGroupCriterionOperation instances.
     """
-    ad_group_criterion_service = client.get_service(
-        "AdGroupCriterionService", version="v6"
-    )
-
+    ad_group_criterion_service = client.get_service("AdGroupCriterionService")
+    request = client.get_type("MutateAdGroupCriteriaRequest")
+    request.customer_id = customer_id
+    request.operations = operations
+    request.validate_only = True
     response = ad_group_criterion_service.mutate_ad_group_criteria(
-        customer_id, operations, validate_only=True
+        request=request
     )
     print(f"Added {len(response.results)} ad group criteria:")
     for ad_group_criterion in response.results:
@@ -175,7 +176,7 @@ def _request_mutate_and_display_result(client, customer_id, operations):
 if __name__ == "__main__":
     # GoogleAdsClient will read the google-ads.yaml configuration file in the
     # home directory if none is specified.
-    google_ads_client = GoogleAdsClient.load_from_storage()
+    googleads_client = GoogleAdsClient.load_from_storage(version="v6")
 
     parser = argparse.ArgumentParser(
         description="Handles RateExceededError in an application.."
@@ -197,4 +198,4 @@ if __name__ == "__main__":
     )
     args = parser.parse_args()
 
-    main(google_ads_client, args.customer_id, args.ad_group_id)
+    main(googleads_client, args.customer_id, args.ad_group_id)

@@ -18,8 +18,8 @@
 import argparse
 import sys
 import uuid
-from google.ads.google_ads.client import GoogleAdsClient
-from google.ads.google_ads.errors import GoogleAdsException
+from google.ads.googleads.client import GoogleAdsClient
+from google.ads.googleads.errors import GoogleAdsException
 
 
 def main(client, customer_id, campaign_experiment_id):
@@ -31,45 +31,33 @@ def main(client, customer_id, campaign_experiment_id):
       campaign_experiment_id: The campaign experiment ID to graduate.
     """
     campaign_experiment_service = client.get_service(
-        "CampaignExperimentService", version="v6"
+        "CampaignExperimentService"
     )
 
-    try:
-        # Graduating a campaign experiment requires a new budget. Since the
-        # budget for the base campaign has explicitly_shared set to false, the
-        # budget cannot be shared with the campaign after it is made
-        # independent by graduation.
-        budget_resource_name = _create_budget(client, customer_id)
+    # Graduating a campaign experiment requires a new budget. Since the
+    # budget for the base campaign has explicitly_shared set to false, the
+    # budget cannot be shared with the campaign after it is made
+    # independent by graduation.
+    budget_resource_name = _create_budget(client, customer_id)
 
-        # Prints out some information about the created campaign budget.
-        print(
-            f"Created new budget with resource name '{budget_resource_name} '"
-            "for adding to the experiment campaign during graduation."
-        )
+    # Prints out some information about the created campaign budget.
+    print(
+        f"Created new budget with resource name '{budget_resource_name} '"
+        "for adding to the experiment campaign during graduation."
+    )
 
-        # Graduates the experiment campaign using the newly created budget.
-        response = campaign_experiment_service.graduate_campaign_experiment(
-            campaign_experiment_service.campaign_experiment_path(
-                customer_id, campaign_experiment_id
-            ),
-            budget_resource_name,
-        )
-        print(
-            f"Campaign with resource name {response.graduated_campaign} is "
-            "now graduated."
-        )
+    # Graduates the experiment campaign using the newly created budget.
+    response = campaign_experiment_service.graduate_campaign_experiment(
+        campaign_experiment=campaign_experiment_service.campaign_experiment_path(
+            customer_id, campaign_experiment_id
+        ),
+        campaign_budget=budget_resource_name,
+    )
+    print(
+        f"Campaign with resource name {response.graduated_campaign} is "
+        "now graduated."
+    )
 
-    except GoogleAdsException as ex:
-        print(
-            f"Request with ID '{ex.request_id}' failed with status "
-            f"'{ex.error.code().name}' and includes the following errors:"
-        )
-        for error in ex.failure.errors:
-            print(f"\tError with message '{error.message}'.")
-            if error.location:
-                for field_path_element in error.location.field_path_elements:
-                    print(f"\t\tOn field: {field_path_element.field_name}")
-        sys.exit(1)
 
 
 def _create_budget(client, customer_id):
@@ -83,23 +71,19 @@ def _create_budget(client, customer_id):
         The resource name of the newly created campaign budget.
     """
     # Gets the CampaignBudgetService.
-    campaign_budget_service = client.get_service(
-        "CampaignBudgetService", version="v6"
-    )
+    campaign_budget_service = client.get_service("CampaignBudgetService")
 
     # Creates the campaign budget.
-    campaign_budget_operation = client.get_type(
-        "CampaignBudgetOperation", version="v6"
-    )
+    campaign_budget_operation = client.get_type("CampaignBudgetOperation")
     campaign_budget = campaign_budget_operation.create
     campaign_budget.name = f"Interplanetary Cruise Budget {uuid.uuid4()}"
     campaign_budget.delivery_method = client.get_type(
-        "BudgetDeliveryMethodEnum", version="v6"
-    ).STANDARD
+        "BudgetDeliveryMethodEnum"
+    ).BudgetDeliveryMethod.STANDARD
     campaign_budget.amount_micros = 5000000
 
     campaign_budget_response = campaign_budget_service.mutate_campaign_budgets(
-        customer_id, [campaign_budget_operation]
+        customer_id=customer_id, operations=[campaign_budget_operation]
     )
 
     return campaign_budget_response.results[0].resource_name
@@ -108,7 +92,7 @@ def _create_budget(client, customer_id):
 if __name__ == "__main__":
     # GoogleAdsClient will read the google-ads.yaml configuration file in the
     # home directory if none is specified.
-    google_ads_client = GoogleAdsClient.load_from_storage()
+    googleads_client = GoogleAdsClient.load_from_storage(version="v6")
 
     parser = argparse.ArgumentParser(
         description="Gets all available ad group criterion CPC bid "
@@ -131,4 +115,16 @@ if __name__ == "__main__":
     )
     args = parser.parse_args()
 
-    main(google_ads_client, args.customer_id, args.campaign_experiment_id)
+    try:
+        main(googleads_client, args.customer_id, args.campaign_experiment_id)
+    except GoogleAdsException as ex:
+        print(
+            f'Request with ID "{ex.request_id}" failed with status '
+            f'"{ex.error.code().name}" and includes the following errors:'
+        )
+        for error in ex.failure.errors:
+            print(f'	Error with message "{error.message}".')
+            if error.location:
+                for field_path_element in error.location.field_path_elements:
+                    print(f"\t\tOn field: {field_path_element.field_name}")
+        sys.exit(1)

@@ -30,8 +30,8 @@ names in the _get_feeds method.
 import argparse
 import sys
 
-from google.ads.google_ads.client import GoogleAdsClient
-from google.ads.google_ads.errors import GoogleAdsException
+from google.ads.googleads.client import GoogleAdsClient
+from google.ads.googleads.errors import GoogleAdsException
 from google.api_core import protobuf_helpers
 
 
@@ -49,58 +49,47 @@ def main(
             attribute to be removed.
     """
     # Get the FeedItemService client.
-    feed_item_service = client.get_service("FeedItemService", version="v6")
+    feed_item_service = client.get_service("FeedItemService")
 
     # Create the FeedItemOperation.
-    feed_item_operation = client.get_type("FeedItemOperation", version="v6")
-    feed_item = feed_item_operation.update
+    feed_item_operation = client.get_type("FeedItemOperation")
 
-    try:
-        # Get a map of the FlightPlaceholderFields to FeedAttributes.
-        placeholders_to_feed_attributes_map = _get_feed(
-            client, customer_id, feed_id
-        )
+    # Get a map of the FlightPlaceholderFields to FeedAttributes.
+    placeholders_to_feed_attributes_map = _get_feed(
+        client, customer_id, feed_id
+    )
 
-        # Remove the attribute from the feed item.
-        flight_placeholder_field = client.get_type(
-            "FlightPlaceholderFieldEnum", version="v6"
-        ).FlightPlaceholderField.Value(flight_placeholder_field_name)
-        feed_item.CopyFrom(
-            _remove_attribute_value_from_feed_item(
-                client,
-                customer_id,
-                feed_id,
-                feed_item_id,
-                placeholders_to_feed_attributes_map,
-                flight_placeholder_field,
-            )
-        )
+    # Remove the attribute from the feed item.
+    flight_placeholder_field = (
+        client.get_type("FlightPlaceholderFieldEnum")
+        .FlightPlaceholderField[flight_placeholder_field_name]
+        .value
+    )
+    feed_item = _remove_attribute_value_from_feed_item(
+        client,
+        customer_id,
+        feed_id,
+        feed_item_id,
+        placeholders_to_feed_attributes_map,
+        flight_placeholder_field,
+    )
+    client.copy_from(feed_item_operation.update, feed_item)
+    # Configure the operation.
+    client.copy_from(
+        feed_item_operation.update_mask,
+        protobuf_helpers.field_mask(None, feed_item._pb),
+    )
 
-        # Configure the operation.
-        field_mask = protobuf_helpers.field_mask(None, feed_item)
-        feed_item_operation.update_mask.CopyFrom(field_mask)
+    # Update the feed item and print the results.
+    response = feed_item_service.mutate_feed_items(
+        customer_id=customer_id, operations=[feed_item_operation]
+    )
 
-        # Update the feed item and print the results.
-        response = feed_item_service.mutate_feed_items(
-            customer_id, [feed_item_operation]
-        )
-
-        for result in response.results:
-            print(
-                "Updated feed item with resource name: "
-                f"'{result.resource_name}'."
-            )
-    except GoogleAdsException as ex:
+    for result in response.results:
         print(
-            f'Request with ID "{ex.request_id}" failed with status '
-            f'"{ex.error.code().name}" and includes the following errors:'
+            "Updated feed item with resource name: "
+            f"'{result.resource_name}'."
         )
-        for error in ex.failure.errors:
-            print(f'\tError with message "{error.message}".')
-            if error.location:
-                for field_path_element in error.location.field_path_elements:
-                    print(f"\t\tOn field: {field_path_element.field_name}")
-        sys.exit(1)
 
 
 def _get_feed(client, customer_id, feed_id):
@@ -115,11 +104,11 @@ def _get_feed(client, customer_id, feed_id):
         requested Feed's FeedAttributes.
     """
     # Get the GoogleAdsService client.
-    google_ads_service = client.get_service("GoogleAdsService", version="v6")
+    googleads_service = client.get_service("GoogleAdsService")
 
-    feed_resource_name = client.get_service(
-        "FeedService", version="v6"
-    ).feed_path(customer_id, feed_id)
+    feed_resource_name = client.get_service("FeedService").feed_path(
+        customer_id, feed_id
+    )
 
     # Construct the query.
     query = f"""
@@ -129,13 +118,16 @@ def _get_feed(client, customer_id, feed_id):
 
     # Issue the search request and get the first result, since we only need the
     # single feed item we created previously.
-    row = next(iter(google_ads_service.search(customer_id, query=query)))
+    search_request = client.get_type("SearchGoogleAdsRequest")
+    search_request.customer_id = customer_id
+    search_request.query = query
+    row = next(iter(googleads_service.search(request=search_request)))
 
     # Get the attributes list from the feed and create a map with keys of each
     # attribute and values of each corresponding ID.
     flight_placeholder_field_enum = client.get_type(
-        "FlightPlaceholderFieldEnum", version="v6"
-    )
+        "FlightPlaceholderFieldEnum"
+    ).FlightPlaceholderField
     feed_attributes = dict()
 
     # Loop through the feed attributes to populate the map.
@@ -198,9 +190,7 @@ def _remove_attribute_value_from_feed_item(
     feed_item = _get_feed_item(client, customer_id, feed_id, feed_item_id)
 
     # Create the FeedItemAttributeValue that will be updated.
-    feed_item_attribute_value = client.get_type(
-        "FeedItemAttributeValue", version="v6"
-    )
+    feed_item_attribute_value = client.get_type("FeedItemAttributeValue")
     feed_item_attribute_value.feed_attribute_id = attribute_id
 
     # Loop through the attribute values to find the index of the
@@ -240,11 +230,11 @@ def _get_feed_item(client, customer_id, feed_id, feed_item_id):
         A FeedItem with the given resource name.
     """
     # Get the GoogleAdsService client.
-    google_ads_service = client.get_service("GoogleAdsService", version="v6")
+    googleads_service = client.get_service("GoogleAdsService")
 
     # Construct the resource name for the feed item.
     feed_item_resource_name = client.get_service(
-        "FeedItemService", version="v6"
+        "FeedItemService"
     ).feed_item_path(customer_id, feed_id, feed_item_id)
 
     # Construct the query.
@@ -255,15 +245,19 @@ def _get_feed_item(client, customer_id, feed_id, feed_item_id):
 
     # Issue the search request and return the first result, since the query will
     # match only a single feed item.
+    search_request = client.get_type("SearchGoogleAdsRequest")
+    search_request.customer_id = customer_id
+    search_request.query = query
+
     return next(
-        iter(google_ads_service.search(customer_id, query=query))
+        iter(googleads_service.search(request=search_request))
     ).feed_item
 
 
 if __name__ == "__main__":
     # GoogleAdsClient will read the google-ads.yaml configuration file in the
     # home directory if none is specified.
-    google_ads_client = GoogleAdsClient.load_from_storage()
+    googleads_client = GoogleAdsClient.load_from_storage(version="v6")
 
     parser = argparse.ArgumentParser(
         description="Removes a feed item attribute value of a feed item in a "
@@ -300,10 +294,22 @@ if __name__ == "__main__":
     )
     args = parser.parse_args()
 
-    main(
-        google_ads_client,
-        args.customer_id,
-        args.feed_id,
-        args.feed_item_id,
-        args.flight_placeholder_field_name,
-    )
+    try:
+        main(
+            googleads_client,
+            args.customer_id,
+            args.feed_id,
+            args.feed_item_id,
+            args.flight_placeholder_field_name,
+        )
+    except GoogleAdsException as ex:
+        print(
+            f'Request with ID "{ex.request_id}" failed with status '
+            f'"{ex.error.code().name}" and includes the following errors:'
+        )
+        for error in ex.failure.errors:
+            print(f'	Error with message "{error.message}".')
+            if error.location:
+                for field_path_element in error.location.field_path_elements:
+                    print(f"\t\tOn field: {field_path_element.field_name}")
+        sys.exit(1)

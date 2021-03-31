@@ -19,50 +19,37 @@ import argparse
 import sys
 
 from google.api_core import protobuf_helpers
-from google.ads.google_ads.client import GoogleAdsClient
+from google.ads.googleads.client import GoogleAdsClient
+from google.ads.googleads.errors import GoogleAdsException
 
 
 def main(client, customer_id, ad_group_id, criterion_id):
-    agc_service = client.get_service("AdGroupCriterionService", version="v6")
-
-    ad_group_criterion_operation = client.get_type(
-        "AdGroupCriterionOperation", version="v6"
-    )
+    agc_service = client.get_service("AdGroupCriterionService")
+    ad_group_criterion_operation = client.get_type("AdGroupCriterionOperation")
 
     ad_group_criterion = ad_group_criterion_operation.update
     ad_group_criterion.resource_name = agc_service.ad_group_criterion_path(
         customer_id, ad_group_id, criterion_id
     )
     ad_group_criterion.status = client.get_type(
-        "AdGroupCriterionStatusEnum", version="v6"
-    ).ENABLED
-    al_url = ad_group_criterion.final_urls.append("https://www.example.com")
-    fm = protobuf_helpers.field_mask(None, ad_group_criterion)
-    ad_group_criterion_operation.update_mask.CopyFrom(fm)
+        "AdGroupCriterionStatusEnum"
+    ).AdGroupCriterionStatus.ENABLED
+    ad_group_criterion.final_urls.append("https://www.example.com")
+    client.copy_from(
+        ad_group_criterion_operation.update_mask,
+        protobuf_helpers.field_mask(None, ad_group_criterion._pb),
+    )
 
-    try:
-        agc_response = agc_service.mutate_ad_group_criteria(
-            customer_id, [ad_group_criterion_operation]
-        )
-    except google.ads.google_ads.errors.GoogleAdsException as ex:
-        print(
-            'Request with ID "%s" failed with status "%s" and includes the '
-            "following errors:" % (ex.request_id, ex.error.code().name)
-        )
-        for error in ex.failure.errors:
-            print('\tError with message "%s".' % error.message)
-            if error.location:
-                for field_path_element in error.location.field_path_elements:
-                    print("\t\tOn field: %s" % field_path_element.field_name)
-        sys.exit(1)
-
-    print("Updated keyword %s." % agc_response.results[0].resource_name)
+    agc_response = agc_service.mutate_ad_group_criteria(
+        customer_id=customer_id, operations=[ad_group_criterion_operation]
+    )
+    print(f"Updated keyword {agc_response.results[0].resource_name}.")
 
 
 if __name__ == "__main__":
     # GoogleAdsClient will read the google-ads.yaml configuration file in the
     # home directory if none is specified.
-    google_ads_client = GoogleAdsClient.load_from_storage()
+    googleads_client = GoogleAdsClient.load_from_storage(version="v6")
     parser = argparse.ArgumentParser(
         description=("Pauses an ad in the specified customer's ad group.")
     )
@@ -86,6 +73,18 @@ if __name__ == "__main__":
     )
     args = parser.parse_args()
 
-    main(
-        google_ads_client, args.customer_id, args.ad_group_id, args.criterion_id
+    try:
+        main(
+        googleads_client, args.customer_id, args.ad_group_id, args.criterion_id
     )
+    except GoogleAdsException as ex:
+        print(
+            f'Request with ID "{ex.request_id}" failed with status '
+            f'"{ex.error.code().name}" and includes the following errors:'
+        )
+        for error in ex.failure.errors:
+            print(f'	Error with message "{error.message}".')
+            if error.location:
+                for field_path_element in error.location.field_path_elements:
+                    print(f"\t\tOn field: {field_path_element.field_name}")
+        sys.exit(1)

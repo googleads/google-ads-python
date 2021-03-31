@@ -21,51 +21,43 @@ To get campaigns, run get_campaigns.py.
 import argparse
 import sys
 
-import google.ads.google_ads.errors
-import google.ads.google_ads.client
+from google.ads.googleads.errors import GoogleAdsException
+from google.ads.googleads.client import GoogleAdsClient
 from google.api_core import protobuf_helpers
 
 
 def main(client, customer_id, campaign_id):
-    campaign_service = client.get_service("CampaignService", version="v6")
+    campaign_service = client.get_service("CampaignService")
     # Create campaign operation.
-    campaign_operation = client.get_type("CampaignOperation", version="v6")
+    campaign_operation = client.get_type("CampaignOperation")
     campaign = campaign_operation.update
+
     campaign.resource_name = campaign_service.campaign_path(
         customer_id, campaign_id
     )
-    campaign.status = client.get_type("CampaignStatusEnum", version="v6").PAUSED
+
+    campaign_status_enum = client.get_type(
+        "CampaignStatusEnum"
+    ).CampaignStatus.PAUSED
+
     campaign.network_settings.target_search_network = False
     # Retrieve a FieldMask for the fields configured in the campaign.
-    fm = protobuf_helpers.field_mask(None, campaign)
-    campaign_operation.update_mask.CopyFrom(fm)
+    client.copy_from(
+        campaign_operation.update_mask,
+        protobuf_helpers.field_mask(None, campaign._pb),
+    )
 
-    # Update the campaign.
-    try:
-        campaign_response = campaign_service.mutate_campaigns(
-            customer_id, [campaign_operation]
-        )
-    except google.ads.google_ads.errors.GoogleAdsException as ex:
-        print(
-            'Request with ID "%s" failed with status "%s" and includes the '
-            "following errors:" % (ex.request_id, ex.error.code().name)
-        )
-        for error in ex.failure.errors:
-            print('\tError with message "%s".' % error.message)
-            if error.location:
-                for field_path_element in error.location.field_path_elements:
-                    print("\t\tOn field: %s" % field_path_element.field_name)
-        sys.exit(1)
+    campaign_response = campaign_service.mutate_campaigns(
+        customer_id=customer_id, operations=[campaign_operation]
+    )
 
-    print("Updated campaign %s." % campaign_response.results[0].resource_name)
+    print(f"Updated campaign {campaign_response.results[0].resource_name}.")
 
 
 if __name__ == "__main__":
     # GoogleAdsClient will read the google-ads.yaml configuration file in the
     # home directory if none is specified.
-    google_ads_client = (
-        google.ads.google_ads.client.GoogleAdsClient.load_from_storage()
-    )
+    googleads_client = GoogleAdsClient.load_from_storage(version="v6")
 
     parser = argparse.ArgumentParser(
         description="Updates the given campaign for the specified customer."
@@ -83,4 +75,16 @@ if __name__ == "__main__":
     )
     args = parser.parse_args()
 
-    main(google_ads_client, args.customer_id, args.campaign_id)
+    try:
+        main(googleads_client, args.customer_id, args.campaign_id)
+    except GoogleAdsException as ex:
+        print(
+            f'Request with ID "{ex.request_id}" failed with status '
+            f'"{ex.error.code().name}" and includes the following errors:'
+        )
+        for error in ex.failure.errors:
+            print(f'	Error with message "{error.message}".')
+            if error.location:
+                for field_path_element in error.location.field_path_elements:
+                    print(f"\t\tOn field: {field_path_element.field_name}")
+        sys.exit(1)

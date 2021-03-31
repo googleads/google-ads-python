@@ -20,8 +20,8 @@ import sys
 
 from google.api_core import protobuf_helpers
 
-from google.ads.google_ads.client import GoogleAdsClient
-from google.ads.google_ads.errors import GoogleAdsException
+from google.ads.googleads.client import GoogleAdsClient
+from google.ads.googleads.errors import GoogleAdsException
 
 
 # [START add_geo_target]
@@ -35,51 +35,41 @@ def main(client, customer_id, feed_item_id, geo_target_constant_id):
         geo_target_constant_id: the geo target constant ID to add to the
             extension feed item.
     """
-    extension_feed_item_service = client.get_service(
-        "ExtensionFeedItemService", version="v6"
-    )
+    extension_feed_item_service = client.get_service("ExtensionFeedItemService")
 
     extension_feed_item_operation = client.get_type(
-        "ExtensionFeedItemOperation", version="v6"
+        "ExtensionFeedItemOperation"
     )
     extension_feed_item = extension_feed_item_operation.update
     # Creates an extension feed item using the specified feed item ID and
     # geo target constant ID for targeting.
-    extension_feed_item.resource_name = extension_feed_item_service.extension_feed_item_path(
-        customer_id, feed_item_id
+    extension_feed_item.resource_name = (
+        extension_feed_item_service.extension_feed_item_path(
+            customer_id, feed_item_id
+        )
     )
     extension_feed_item.targeted_geo_target_constant = client.get_service(
-        "GeoTargetConstantService", version="v6"
+        "GeoTargetConstantService"
     ).geo_target_constant_path(geo_target_constant_id)
-    fm = protobuf_helpers.field_mask(None, extension_feed_item)
-    extension_feed_item_operation.update_mask.CopyFrom(fm)
+    client.copy_from(
+        extension_feed_item_operation.update_mask,
+        protobuf_helpers.field_mask(None, extension_feed_item._pb),
+    )
 
-    try:
-        response = extension_feed_item_service.mutate_extension_feed_items(
-            customer_id, [extension_feed_item_operation]
-        )
-        print(
-            "Updated extension feed item with resource name: "
-            f'"{response.results[0].resource_name}".'
-        )
-    except GoogleAdsException as ex:
-        print(
-            f'Request with ID "{ex.request_id}" failed with status '
-            f'"{ex.error.code().name}" and includes the following errors:'
-        )
-        for error in ex.failure.errors:
-            print(f'\tError with message "{error.message}".')
-            if error.location:
-                for field_path_element in error.location.field_path_elements:
-                    print(f"\t\tOn field: {field_path_element.field_name}")
-        sys.exit(1)
-        # [END add_geo_target]
+    response = extension_feed_item_service.mutate_extension_feed_items(
+        customer_id=customer_id, operations=[extension_feed_item_operation]
+    )
+    print(
+        "Updated extension feed item with resource name: "
+        f"'{response.results[0].resource_name}'."
+    )
+    # [END add_geo_target]
 
 
 if __name__ == "__main__":
     # GoogleAdsClient will read the google-ads.yaml configuration file in the
     # home directory if none is specified.
-    google_ads_client = GoogleAdsClient.load_from_storage()
+    googleads_client = GoogleAdsClient.load_from_storage(version="v6")
 
     parser = argparse.ArgumentParser(
         description="Adds a geo target to an extension feed item for targeting."
@@ -105,14 +95,26 @@ if __name__ == "__main__":
         type=str,
         default="2840",  # country code for "US"
         help="A geo target constant ID. A list of available IDs can be "
-        "referenced here: https://developers.google.com/adwords/api/docs/appendix/geotargeting.",
+        "referenced here: https://developers.google.com/google-ads/api/reference/data/geotargets",
     )
 
     args = parser.parse_args()
 
-    main(
-        google_ads_client,
+    try:
+        main(
+        googleads_client,
         args.customer_id,
         args.feed_item_id,
         args.geo_target_constant_id,
     )
+    except GoogleAdsException as ex:
+        print(
+            f'Request with ID "{ex.request_id}" failed with status '
+            f'"{ex.error.code().name}" and includes the following errors:'
+        )
+        for error in ex.failure.errors:
+            print(f'	Error with message "{error.message}".')
+            if error.location:
+                for field_path_element in error.location.field_path_elements:
+                    print(f"\t\tOn field: {field_path_element.field_name}")
+        sys.exit(1)

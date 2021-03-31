@@ -21,15 +21,14 @@ To get ad group bid modifiers, run get_ad_group_bid_modifiers.py
 import argparse
 import sys
 
-import google.ads.google_ads.client
+from google.ads.googleads.client import GoogleAdsClient
+from google.ads.googleads.errors import GoogleAdsException
 
 
 # [START add_ad_group_bid_modifier]
 def main(client, customer_id, ad_group_id, bid_modifier_value):
-    ad_group_service = client.get_service("AdGroupService", version="v6")
-    ad_group_bm_service = client.get_service(
-        "AdGroupBidModifierService", version="v6"
-    )
+    ad_group_service = client.get_service("AdGroupService")
+    ad_group_bm_service = client.get_service("AdGroupBidModifierService")
 
     # Create ad group bid modifier for mobile devices with the specified ad
     # group ID and bid modifier value.
@@ -47,40 +46,28 @@ def main(client, customer_id, ad_group_id, bid_modifier_value):
     ad_group_bid_modifier.bid_modifier = bid_modifier_value
 
     # Sets the device.
-    ad_group_bid_modifier.device.type = client.get_type(
-        "DeviceEnum", version="v6"
-    ).MOBILE
+    device_enum = client.get_type("DeviceEnum").Device
+    ad_group_bid_modifier.device.type_ = device_enum.MOBILE
 
     # Add the ad group bid modifier.
-    try:
-        ad_group_bm_response = ad_group_bm_service.mutate_ad_group_bid_modifiers(
-            customer_id, [ad_group_bid_modifier_operation]
+    ad_group_bm_response = (
+        ad_group_bm_service.mutate_ad_group_bid_modifiers(
+            customer_id=customer_id,
+            operations=[ad_group_bid_modifier_operation],
         )
-    except google.ads.google_ads.errors.GoogleAdsException as ex:
-        print(
-            'Request with ID "%s" failed with status "%s" and includes the '
-            "following errors:" % (ex.request_id, ex.error.code().name)
-        )
-        for error in ex.failure.errors:
-            print('\tError with message "%s".' % error.message)
-            if error.location:
-                for field_path_element in error.location.field_path_elements:
-                    print("\t\tOn field: %s" % field_path_element.field_name)
-        sys.exit(1)
-        # [END add_ad_group_bid_modifier]
+    )
+    # [END add_ad_group_bid_modifier]
 
     print(
-        "Created ad group bid modifier: %s."
-        % ad_group_bm_response.results[0].resource_name
+        "Created ad group bid modifier: "
+        f"{ad_group_bm_response.results[0].resource_name}."
     )
 
 
 if __name__ == "__main__":
     # GoogleAdsClient will read the google-ads.yaml configuration file in the
     # home directory if none is specified.
-    google_ads_client = (
-        google.ads.google_ads.client.GoogleAdsClient.load_from_storage()
-    )
+    googleads_client = GoogleAdsClient.load_from_storage(version="v6")
 
     parser = argparse.ArgumentParser(
         description=(
@@ -109,9 +96,21 @@ if __name__ == "__main__":
     )
     args = parser.parse_args()
 
-    main(
-        google_ads_client,
+    try:
+        main(
+        googleads_client,
         args.customer_id,
         args.ad_group_id,
         args.bid_modifier_value,
     )
+    except GoogleAdsException as ex:
+        print(
+            f'Request with ID "{ex.request_id}" failed with status '
+            f'"{ex.error.code().name}" and includes the following errors:'
+        )
+        for error in ex.failure.errors:
+            print(f'	Error with message "{error.message}".')
+            if error.location:
+                for field_path_element in error.location.field_path_elements:
+                    print(f"\t\tOn field: {field_path_element.field_name}")
+        sys.exit(1)

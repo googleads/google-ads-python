@@ -1,3 +1,14 @@
+* 10.0.0
+- Revamp of protobuf message interface to improve usability. See:
+https://developers.google.com/google-ads/api/docs/client-libs/python/library-version-10
+- Remove ResourceName utility
+- Add ability to specify API version at client level, which overrides setting
+  at service or type level.
+- GoogleAdsClient.get_type is now an instance, not class, level method
+- Add copy_from helper method to GoogleAdsClient.
+- Add "enums" attribute to GoogleAdsClient for easier Enum accessing.
+- Various updates to all examples
+
 * 9.0.0
 - Google Ads v6_1 release
 - Deprecate v3_0

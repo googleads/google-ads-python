@@ -21,8 +21,8 @@ To set up a conversion action, run the add_conversion_action.py example.
 import argparse
 import sys
 
-from google.ads.google_ads.client import GoogleAdsClient
-from google.ads.google_ads.errors import GoogleAdsException
+from google.ads.googleads.client import GoogleAdsClient
+from google.ads.googleads.errors import GoogleAdsException
 
 
 # [START upload_call_conversion]
@@ -46,21 +46,19 @@ def main(
             e.g. '+16502531234'.
         call_start_date_time: The date and time at which the call occurred. The
             format is 'yyyy-mm-dd hh:mm:ss+|-hh:mm',
-            e.g. '2019-01-01 12:32:45-08:00'.
+            e.g. '2021-01-01 12:32:45-08:00'.
         conversion_date_time: The the date and time of the conversion (should be
             after the click time). The format is 'yyyy-mm-dd hh:mm:ss+|-hh:mm',
-            e.g. '2019-01-01 12:32:45-08:00'.
+            e.g. '2021-01-01 12:32:45-08:00'.
         conversion_value: The conversion value in the desired currency.
     """
     # Get the ConversionUploadService client.
-    conversion_upload_service = client.get_service(
-        "ConversionUploadService", version="v6"
-    )
+    conversion_upload_service = client.get_service("ConversionUploadService")
 
     # Create a call conversion in USD currency.
-    call_conversion = client.get_type("CallConversion", version="v6")
+    call_conversion = client.get_type("CallConversion")
     call_conversion.conversion_action = client.get_service(
-        "ConversionActionService", version="v6"
+        "ConversionActionService"
     ).conversion_action_path(customer_id, conversion_action_id)
     call_conversion.caller_id = caller_id
     call_conversion.call_start_date_time = call_start_date_time
@@ -68,47 +66,39 @@ def main(
     call_conversion.conversion_value = conversion_value
     call_conversion.currency_code = "USD"
 
-    try:
-        # Issue a request to upload the call conversion.
-        upload_call_conversions_response = conversion_upload_service.upload_call_conversions(
-            customer_id, [call_conversion], partial_failure=True
-        )
+    # Issue a request to upload the call conversion.
+    request = client.get_type("UploadCallConversionsRequest")
+    request.customer_id = customer_id
+    request.conversions = [call_conversion]
+    request.partial_failure = True
+    upload_call_conversions_response = (
+        conversion_upload_service.upload_call_conversions(request=request)
+    )
 
-        # Print any partial errors returned.
-        if upload_call_conversions_response.partial_failure_error:
-            print(
-                "Partial error ocurred: "
-                f"'{upload_call_conversions_response.partial_failure_error.message}'"
-            )
-
-        # Print the result if valid.
-        uploaded_call_conversion = upload_call_conversions_response.results[0]
-        if uploaded_call_conversion.call_start_date_time:
-            print(
-                "Uploaded call conversion that occurred at "
-                f"'{uploaded_call_conversion.call_start_date_time}' "
-                f"for caller ID '{uploaded_call_conversion.caller_id}' "
-                "to the conversion action with resource name "
-                f"'{uploaded_call_conversion.conversion_action}'."
-            )
-    except GoogleAdsException as ex:
+    # Print any partial errors returned.
+    if upload_call_conversions_response.partial_failure_error:
         print(
-            f"Request with ID '{ex.request_id}'' failed with status "
-            f"'{ex.error.code().name}' and includes the following errors:"
+            "Partial error ocurred: "
+            f"'{upload_call_conversions_response.partial_failure_error.message}'"
         )
-        for error in ex.failure.errors:
-            print(f"\tError with message '{error.message}'.")
-            if error.location:
-                for field_path_element in error.location.field_path_elements:
-                    print(f"\t\tOn field: {field_path_element.field_name}")
-        sys.exit(1)
-        # [END upload_call_conversion]
+
+    # Print the result if valid.
+    uploaded_call_conversion = upload_call_conversions_response.results[0]
+    if uploaded_call_conversion.call_start_date_time:
+        print(
+            "Uploaded call conversion that occurred at "
+            f"'{uploaded_call_conversion.call_start_date_time}' "
+            f"for caller ID '{uploaded_call_conversion.caller_id}' "
+            "to the conversion action with resource name "
+            f"'{uploaded_call_conversion.conversion_action}'."
+        )
+    # [END upload_call_conversion]
 
 
 if __name__ == "__main__":
     # GoogleAdsClient will read the google-ads.yaml configuration file in the
     # home directory if none is specified.
-    google_ads_client = GoogleAdsClient.load_from_storage()
+    googleads_client = GoogleAdsClient.load_from_storage(version="v6")
 
     parser = argparse.ArgumentParser(
         description="Imports offline call conversion values for calls related "
@@ -164,12 +154,24 @@ if __name__ == "__main__":
     )
     args = parser.parse_args()
 
-    main(
-        google_ads_client,
-        args.customer_id,
-        args.conversion_action_id,
-        args.caller_id,
-        args.call_start_date_time,
-        args.conversion_date_time,
-        args.conversion_value,
-    )
+    try:
+        main(
+            googleads_client,
+            args.customer_id,
+            args.conversion_action_id,
+            args.caller_id,
+            args.call_start_date_time,
+            args.conversion_date_time,
+            args.conversion_value,
+        )
+    except GoogleAdsException as ex:
+        print(
+            f"Request with ID '{ex.request_id}'' failed with status "
+            f"'{ex.error.code().name}' and includes the following errors:"
+        )
+        for error in ex.failure.errors:
+            print(f"\tError with message '{error.message}'.")
+            if error.location:
+                for field_path_element in error.location.field_path_elements:
+                    print(f"\t\tOn field: {field_path_element.field_name}")
+        sys.exit(1)

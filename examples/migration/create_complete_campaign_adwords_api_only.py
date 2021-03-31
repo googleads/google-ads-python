@@ -38,11 +38,11 @@ NUMBER_OF_ADS = 5
 KEYWORDS_TO_ADD = ["mars cruise", "space hotel"]
 
 
-def create_campaign_budget(client):
+def _create_campaign_budget(client):
     """Creates a new budget and returns the newly created budget ID.
 
     Args:
-        client: An instance of the google.ads.google_ads.client.GoogleAdsClient
+        client: An instance of the google.ads.googleads.client.GoogleAdsClient
         class.
 
     Returns:
@@ -66,11 +66,11 @@ def create_campaign_budget(client):
     return created_budget["budgetId"]
 
 
-def create_campaign(client, budget_id):
+def _create_campaign(client, budget_id):
     """Creates a new campaign and returns the newly created campaign ID.
 
     Args:
-        client: A google.ads.google_ads.client.GoogleAdsClient instance.
+        client: A google.ads.googleads.client.GoogleAdsClient instance.
         budget_id: (str) Budget ID to be referenced while creating Campaign.
 
     Returns:
@@ -84,7 +84,9 @@ def create_campaign(client, budget_id):
         # ads from immediately serving. Set to ENABLED once you've added
         # targeting and the ads are ready to serve.
         "status": "PAUSED",
-        "biddingStrategyConfiguration": {"biddingStrategyType": "MANUAL_CPC",},
+        "biddingStrategyConfiguration": {
+            "biddingStrategyType": "MANUAL_CPC",
+        },
         "startDate": (datetime.datetime.now() + datetime.timedelta(1)).strftime(
             "%Y%m%d"
         ),
@@ -109,11 +111,11 @@ def create_campaign(client, budget_id):
     return created_campaign["id"]
 
 
-def create_ad_group(client, campaign_id):
+def _create_ad_group(client, campaign_id):
     """Creates a new ad group and returns the new created ad group ID.
 
     Args:
-        client: A google.ads.google_ads.client.GoogleAdsClient instance.
+        client: A google.ads.googleads.client.GoogleAdsClient instance.
         campaign_id: (str) The ID of the campaign under which to create a new
           ad group.
 
@@ -150,11 +152,11 @@ def create_ad_group(client, campaign_id):
     return created_ad_group["id"]
 
 
-def create_text_ads(client, ad_group_id):
+def _create_text_ads(client, ad_group_id):
     """Creates text ads using the given ad group ID.
 
     Args:
-        client: A google.ads.google_ads.client.GoogleAdsClient instance.
+        client: A google.ads.googleads.client.GoogleAdsClient instance.
         ad_group_id: (str) Ad group ID to be referenced when creating text ads.
     """
     ad_group_service = client.GetService("AdGroupAdService", "v201809")
@@ -193,11 +195,11 @@ def create_text_ads(client, ad_group_id):
         )
 
 
-def create_keywords(client, ad_group_id, keywords_to_add):
+def _create_keywords(client, ad_group_id, keywords_to_add):
     """Populates keywords on a given ad group ID.
 
     Args:
-        client: A google.ads.google_ads.client.GoogleAdsClient instance.
+        client: A google.ads.googleads.client.GoogleAdsClient instance.
         ad_group_id: (str) Ad group ID to be referenced when creating text ads.
         keywords_to_add: (list) A list of keywords to be added to a given ad
             group.
@@ -242,8 +244,8 @@ if __name__ == "__main__":
     # Initialize the client object.
     # By default, it will read the config file from the Home Directory.
     adwords_client = adwords.AdWordsClient.LoadFromStorage()
-    budget_id = create_campaign_budget(adwords_client)
-    campaign_id = create_campaign(adwords_client, budget_id)
-    ad_group_id = create_ad_group(adwords_client, campaign_id)
-    create_text_ads(adwords_client, ad_group_id)
-    create_keywords(adwords_client, ad_group_id, KEYWORDS_TO_ADD)
+    budget_id = _create_campaign_budget(adwords_client)
+    campaign_id = _create_campaign(adwords_client, budget_id)
+    ad_group_id = _create_ad_group(adwords_client, campaign_id)
+    _create_text_ads(adwords_client, ad_group_id)
+    _create_keywords(adwords_client, ad_group_id, KEYWORDS_TO_ADD)

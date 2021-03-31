@@ -22,88 +22,62 @@ import argparse
 import sys
 import uuid
 
-import google.ads.google_ads.client
+from google.ads.googleads.client import GoogleAdsClient
+from google.ads.googleads.errors import GoogleAdsException
 
 
 def main(client, customer_id, campaign_id):
-    campaign_service = client.get_service("CampaignService", version="v6")
-    shared_set_service = client.get_service("SharedSetService", version="v6")
-    shared_criterion_service = client.get_service(
-        "SharedCriterionService", version="v6"
-    )
-    campaign_shared_set_service = client.get_service(
-        "CampaignSharedSetService", version="v6"
-    )
+    campaign_service = client.get_service("CampaignService")
+    shared_set_service = client.get_service("SharedSetService")
+    shared_criterion_service = client.get_service("SharedCriterionService")
+    campaign_shared_set_service = client.get_service("CampaignSharedSetService")
 
     # Create shared negative keyword set.
-    shared_set_operation = client.get_type("SharedSetOperation", version="v6")
+    shared_set_operation = client.get_type("SharedSetOperation")
     shared_set = shared_set_operation.create
-    shared_set.name = "API Negative keyword list - %s" % uuid.uuid4()
-    shared_set.type = client.get_type(
-        "SharedSetTypeEnum", version="v6"
-    ).NEGATIVE_KEYWORDS
+    shared_set.name = f"API Negative keyword list - {uuid.uuid4()}"
+    shared_set.type_ = client.get_type(
+        "SharedSetTypeEnum"
+    ).SharedSetType.NEGATIVE_KEYWORDS
 
     try:
-        shared_set_resource_name = (
-            shared_set_service.mutate_shared_sets(
-                customer_id, [shared_set_operation]
-            )
-            .results[0]
-            .resource_name
+        shared_set_response = shared_set_service.mutate_shared_sets(
+            customer_id=customer_id, operations=[shared_set_operation]
         )
-    except google.ads.google_ads.errors.GoogleAdsException as ex:
-        print(
-            'Request with ID "%s" failed with status "%s" and includes the '
-            "following errors:" % (ex.request_id, ex.error.code().name)
-        )
-        for error in ex.failure.errors:
-            print('\tError with message "%s".' % error.message)
-            if error.location:
-                for field_path_element in error.location.field_path_elements:
-                    print("\t\tOn field: %s" % field_path_element.field_name)
-        sys.exit(1)
+        shared_set_resource_name = shared_set_response.results[0].resource_name
 
-    print('Created shared set "%s".' % shared_set_resource_name)
+        print(f'Created shared set "{shared_set_resource_name}".')
+    except GoogleAdsException as ex:
+        _handle_googleads_exception(ex)
 
     # Keywords to create a shared set of.
     keywords = ["mars cruise", "mars hotels"]
-
     shared_criteria_operations = []
     for keyword in keywords:
-        shared_criterion_operation = client.get_type(
-            "SharedCriterionOperation", version="v6"
-        )
+        shared_criterion_operation = client.get_type("SharedCriterionOperation")
         shared_criterion = shared_criterion_operation.create
         keyword_info = shared_criterion.keyword
         keyword_info.text = keyword
         keyword_info.match_type = client.get_type(
-            "KeywordMatchTypeEnum", version="v6"
-        ).BROAD
+            "KeywordMatchTypeEnum"
+        ).KeywordMatchType.BROAD
         shared_criterion.shared_set = shared_set_resource_name
         shared_criteria_operations.append(shared_criterion_operation)
 
     try:
         response = shared_criterion_service.mutate_shared_criteria(
-            customer_id, shared_criteria_operations
+            customer_id=customer_id, operations=shared_criteria_operations
         )
-    except google.ads.google_ads.errors.GoogleAdsException as ex:
-        print(
-            'Request with ID "%s" failed with status "%s" and includes the '
-            "following errors:" % (ex.request_id, ex.error.code().name)
-        )
-        for error in ex.failure.errors:
-            print('\tError with message "%s".' % error.message)
-            if error.location:
-                for field_path_element in error.location.field_path_elements:
-                    print("\t\tOn field: %s" % field_path_element.field_name)
-        sys.exit(1)
 
-    for shared_criterion in response.results:
-        print('Created shared criterion "%s".' % shared_criterion.resource_name)
+        for shared_criterion in response.results:
+            print(
+                "Created shared criterion "
+                f'"{shared_criterion.resource_name}".'
+            )
+    except GoogleAdsException as ex:
+        _handle_googleads_exception(ex)
 
-    campaign_set_operation = client.get_type(
-        "CampaignSharedSetOperation", version="v6"
-    )
+    campaign_set_operation = client.get_type("CampaignSharedSetOperation")
     campaign_set = campaign_set_operation.create
     campaign_set.campaign = campaign_service.campaign_path(
         customer_id, campaign_id
@@ -113,34 +87,35 @@ def main(client, customer_id, campaign_id):
     try:
         campaign_shared_set_resource_name = (
             campaign_shared_set_service.mutate_campaign_shared_sets(
-                customer_id, [campaign_set_operation]
+                customer_id=customer_id, operations=[campaign_set_operation]
             )
-            .results[0]
-            .resource_name
         )
-    except google.ads.google_ads.errors.GoogleAdsException as ex:
-        print(
-            'Request with ID "%s" failed with status "%s" and includes the '
-            "following errors:" % (ex.request_id, ex.error.code().name)
-        )
-        for error in ex.failure.errors:
-            print('\tError with message "%s".' % error.message)
-            if error.location:
-                for field_path_element in error.location.field_path_elements:
-                    print("\t\tOn field: %s" % field_path_element.field_name)
-        sys.exit(1)
 
+        print(
+            "Created campaign shared set "
+            '"{campaign_shared_set_resource_name.results[0].resource_name}".'
+        )
+    except GoogleAdsException as ex:
+        _handle_googleads_exception(ex)
+
+
+def _handle_googleads_exception(exception):
     print(
-        'Created campaign shared set "%s".' % campaign_shared_set_resource_name
+        f'Request with ID "{exception.request_id}" failed with status '
+        f'"{exception.error.code().name}" and includes the following errors:'
     )
+    for error in exception.failure.errors:
+        print(f'\tError with message "{error.message}".')
+        if error.location:
+            for field_path_element in error.location.field_path_elements:
+                print(f"\t\tOn field: {field_path_element.field_name}")
+    sys.exit(1)
 
 
 if __name__ == "__main__":
     # GoogleAdsClient will read the google-ads.yaml configuration file in the
     # home directory if none is specified.
-    google_ads_client = (
-        google.ads.google_ads.client.GoogleAdsClient.load_from_storage()
-    )
+    googleads_client = GoogleAdsClient.load_from_storage(version="v6")
 
     parser = argparse.ArgumentParser(
         description=(
@@ -161,4 +136,4 @@ if __name__ == "__main__":
     )
     args = parser.parse_args()
 
-    main(google_ads_client, args.customer_id, args.campaign_id)
+    main(googleads_client, args.customer_id, args.campaign_id)

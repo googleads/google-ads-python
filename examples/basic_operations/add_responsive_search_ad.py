@@ -22,34 +22,35 @@ import argparse
 import sys
 from uuid import uuid4
 
-from google.ads.google_ads.client import GoogleAdsClient
-from google.ads.google_ads.errors import GoogleAdsException
+from google.ads.googleads.client import GoogleAdsClient
+from google.ads.googleads.errors import GoogleAdsException
 
 
 def main(client, customer_id, ad_group_id):
-    ad_group_ad_service = client.get_service("AdGroupAdService", version="v6")
-    ad_group_service = client.get_service("AdGroupService", version="v6")
+    ad_group_ad_service = client.get_service("AdGroupAdService")
+    ad_group_service = client.get_service("AdGroupService")
 
     # Create the ad group ad.
-    ad_group_ad_operation = client.get_type("AdGroupAdOperation", version="v6")
+    ad_group_ad_operation = client.get_type("AdGroupAdOperation")
     ad_group_ad = ad_group_ad_operation.create
     ad_group_ad.status = client.get_type(
-        "AdGroupAdStatusEnum", version="v6"
-    ).PAUSED
+        "AdGroupAdStatusEnum"
+    ).AdGroupAdStatus.PAUSED
     ad_group_ad.ad_group = ad_group_service.ad_group_path(
         customer_id, ad_group_id
     )
 
     # Set responsive search ad info.
-    final_url = ad_group_ad.ad.final_urls.append("http://www.example.com")
+    ad_group_ad.ad.final_urls.append("http://www.example.com")
 
     # Set a pinning to always choose this asset for HEADLINE_1. Pinning is
     # optional; if no pinning is set, then headlines and descriptions will be
     # rotated and the ones that perform best will be used more often.
+    served_asset_enum = client.get_type(
+        "ServedAssetFieldTypeEnum"
+    ).ServedAssetFieldType.HEADLINE_1
     pinned_headline = _create_ad_text_asset(
-        client,
-        f"Cruise to Mars #{str(uuid4())[:8]}",
-        client.get_type("ServedAssetFieldTypeEnum", version="v6").HEADLINE_1,
+        client, f"Cruise to Mars #{str(uuid4())[:8]}", served_asset_enum
     )
 
     ad_group_ad.ad.responsive_search_ad.headlines.extend(
@@ -69,21 +70,9 @@ def main(client, customer_id, ad_group_id):
     ad_group_ad.ad.responsive_search_ad.path2 = "deals"
 
     # Send a request to the server to add a responsive search ad.
-    try:
-        ad_group_ad_response = ad_group_ad_service.mutate_ad_group_ads(
-            customer_id, [ad_group_ad_operation]
-        )
-    except GoogleAdsException as ex:
-        print(
-            f'Request with ID "{ex.request_id}" failed with status '
-            f'"{ex.error.code().name}" and includes the following errors:'
-        )
-        for error in ex.failure.errors:
-            print(f'\tError with message "{error.message}".')
-            if error.location:
-                for field_path_element in error.location.field_path_elements:
-                    print(f"\t\tOn field: {field_path_element.field_name}")
-        sys.exit(1)
+    ad_group_ad_response = ad_group_ad_service.mutate_ad_group_ads(
+        customer_id=customer_id, operations=[ad_group_ad_operation]
+    )
 
     for result in ad_group_ad_response.results:
         print(
@@ -94,7 +83,7 @@ def main(client, customer_id, ad_group_id):
 
 def _create_ad_text_asset(client, text, pinned_field=None):
     """Create an AdTextAsset."""
-    ad_text_asset = client.get_type("AdTextAsset", version="v6")
+    ad_text_asset = client.get_type("AdTextAsset")
     ad_text_asset.text = text
     if pinned_field:
         ad_text_asset.pinned_field = pinned_field
@@ -104,7 +93,7 @@ def _create_ad_text_asset(client, text, pinned_field=None):
 if __name__ == "__main__":
     # GoogleAdsClient will read the google-ads.yaml configuration file in the
     # home directory if none is specified.
-    google_ads_client = GoogleAdsClient.load_from_storage()
+    googleads_client = GoogleAdsClient.load_from_storage(version="v6")
 
     parser = argparse.ArgumentParser(
         description=(
@@ -125,4 +114,16 @@ if __name__ == "__main__":
     )
     args = parser.parse_args()
 
-    main(google_ads_client, args.customer_id, args.ad_group_id)
+    try:
+        main(googleads_client, args.customer_id, args.ad_group_id)
+    except GoogleAdsException as ex:
+        print(
+            f'Request with ID "{ex.request_id}" failed with status '
+            f'"{ex.error.code().name}" and includes the following errors:'
+        )
+        for error in ex.failure.errors:
+            print(f'	Error with message "{error.message}".')
+            if error.location:
+                for field_path_element in error.location.field_path_elements:
+                    print(f"\t\tOn field: {field_path_element.field_name}")
+        sys.exit(1)

@@ -21,7 +21,7 @@ shows the whole functionality developed in AdWords API.
 create_complete_campaign_both_apis_phase_1.py through
 create_complete_campaign_both_apis_phase_4.py shows how to migrate functionality
 incrementally from the AdWords API to the Google Ads API.
-create_complete_campaign_google_ads_api_pnly.py shows the code example fully
+create_complete_campaign_googleads_api_only.py shows the code example fully
 transformed into using the Google Ads API.
 
 Running the examples:

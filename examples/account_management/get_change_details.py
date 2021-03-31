@@ -22,9 +22,9 @@ import argparse
 from datetime import datetime, timedelta
 import sys
 
-from google.ads.google_ads.client import GoogleAdsClient
-from google.ads.google_ads.errors import GoogleAdsException
-from google.ads.google_ads.util import get_nested_attr
+from google.ads.googleads.client import GoogleAdsClient
+from google.ads.googleads.errors import GoogleAdsException
+from google.ads.googleads.util import get_nested_attr
 
 
 _DEFAULT_PAGE_SIZE = 1000
@@ -37,7 +37,7 @@ def main(client, customer_id):
       client: The Google Ads client.
       customer_id: The Google Ads customer ID.
     """
-    google_ads_service = client.get_service("GoogleAdsService", version="v6")
+    googleads_service = client.get_service("GoogleAdsService")
 
     # Construct a query to find details for recent changes in your account.
     # The LIMIT clause is required for the change_event resource.
@@ -66,105 +66,87 @@ def main(client, customer_id):
         ORDER BY change_event.change_date_time DESC
         LIMIT 5"""
 
-    resource_type_enum = client.get_type(
-        "ChangeEventResourceTypeEnum", version="v6"
-    ).ChangeEventResourceType
-    operation_type_enum = client.get_type(
-        "ResourceChangeOperationEnum", version="v6"
-    ).ResourceChangeOperation
+    search_request = client.get_type("SearchGoogleAdsRequest")
+    search_request.customer_id = customer_id
+    search_request.query = query
+    search_request.page_size = _DEFAULT_PAGE_SIZE
 
-    try:
-        results = google_ads_service.search(
-            customer_id, query=query, page_size=_DEFAULT_PAGE_SIZE
-        )
+    results = googleads_service.search(request=search_request)
 
-        for row in results:
-            event = row.change_event
-            resource_type = resource_type_enum.Name(event.change_resource_type)
-            if resource_type == "AD":
-                old_resource = event.old_resource.ad
-                new_resource = event.new_resource.ad
-            elif resource_type == "AD_GROUP":
-                old_resource = event.old_resource.ad_group
-                new_resource = event.new_resource.ad_group
-            elif resource_type == "AD_GROUP_AD":
-                old_resource = event.old_resource.ad_group_ad
-                new_resource = event.new_resource.ad_group_ad
-            elif resource_type == "AD_GROUP_CRITERION":
-                old_resource = event.old_resource.ad_group_criterion
-                new_resource = event.new_resource.ad_group_criterion
-            elif resource_type == "AD_GROUP_BID_MODIFIER":
-                old_resource = event.old_resource.ad_group_bid_modifier
-                new_resource = event.new_resource.ad_group_bid_modifier
-            elif resource_type == "AD_GROUP_FEED":
-                old_resource = event.old_resource.ad_group_feed
-                new_resource = event.new_resource.ad_group_feed
-            elif resource_type == "CAMPAIGN":
-                old_resource = event.old_resource.campaign
-                new_resource = event.new_resource.campaign
-            elif resource_type == "CAMPAIGN_BUDGET":
-                old_resource = event.old_resource.campaign_budget
-                new_resource = event.new_resource.campaign_budget
-            elif resource_type == "CAMPAIGN_CRITERION":
-                old_resource = event.old_resource.campaign_criterion
-                new_resource = event.new_resource.campaign_criterion
-            elif resource_type == "CAMPAIGN_FEED":
-                old_resource = event.old_resource.campaign_feed
-                new_resource = event.new_resource.campaign_feed
-            elif resource_type == "FEED":
-                old_resource = event.old_resource.feed
-                new_resource = event.new_resource.feed
-            elif resource_type == "FEED_ITEM":
-                old_resource = event.old_resource.feed_item
-                new_resource = event.new_resource.feed_item
-            else:
-                print(
-                    "Unknown change_resource_type: '{event.change_resource_type}'"
-                )
-                # If the resource type is unrecognized then we continue to
-                # the next row.
-                continue
-
+    for row in results:
+        event = row.change_event
+        resource_type = event.change_resource_type.name
+        if resource_type == "AD":
+            old_resource = event.old_resource.ad
+            new_resource = event.new_resource.ad
+        elif resource_type == "AD_GROUP":
+            old_resource = event.old_resource.ad_group
+            new_resource = event.new_resource.ad_group
+        elif resource_type == "AD_GROUP_AD":
+            old_resource = event.old_resource.ad_group_ad
+            new_resource = event.new_resource.ad_group_ad
+        elif resource_type == "AD_GROUP_CRITERION":
+            old_resource = event.old_resource.ad_group_criterion
+            new_resource = event.new_resource.ad_group_criterion
+        elif resource_type == "AD_GROUP_BID_MODIFIER":
+            old_resource = event.old_resource.ad_group_bid_modifier
+            new_resource = event.new_resource.ad_group_bid_modifier
+        elif resource_type == "AD_GROUP_FEED":
+            old_resource = event.old_resource.ad_group_feed
+            new_resource = event.new_resource.ad_group_feed
+        elif resource_type == "CAMPAIGN":
+            old_resource = event.old_resource.campaign
+            new_resource = event.new_resource.campaign
+        elif resource_type == "CAMPAIGN_BUDGET":
+            old_resource = event.old_resource.campaign_budget
+            new_resource = event.new_resource.campaign_budget
+        elif resource_type == "CAMPAIGN_CRITERION":
+            old_resource = event.old_resource.campaign_criterion
+            new_resource = event.new_resource.campaign_criterion
+        elif resource_type == "CAMPAIGN_FEED":
+            old_resource = event.old_resource.campaign_feed
+            new_resource = event.new_resource.campaign_feed
+        elif resource_type == "FEED":
+            old_resource = event.old_resource.feed
+            new_resource = event.new_resource.feed
+        elif resource_type == "FEED_ITEM":
+            old_resource = event.old_resource.feed_item
+            new_resource = event.new_resource.feed_item
+        else:
             print(
-                f"On {event.change_date_time}, user {event.user_email} "
-                f"used interface {event.client_type} to perform a(n) "
-                f"{event.resource_change_operation} operation on a "
-                f"{event.change_resource_type} with resource name "
-                f"'{event.change_resource_name}'"
+                "Unknown change_resource_type: '{event.change_resource_type}'"
             )
+            # If the resource type is unrecognized then we continue to
+            # the next row.
+            continue
 
-            operation_type = operation_type_enum.Name(
-                event.resource_change_operation
-            )
-
-            if operation_type in ("UPDATE", "CREATE"):
-                for changed_field in event.changed_fields.paths:
-                    new_value = get_nested_attr(new_resource, changed_field)
-                    if operation_type == "CREATE":
-                        print(f"\t{changed_field} set to {new_value}")
-                    else:
-                        old_value = get_nested_attr(old_resource, changed_field)
-                        print(
-                            f"\t{changed_field} changed from {old_value} to {new_value}"
-                        )
-
-    except GoogleAdsException as ex:
         print(
-            f"Request with ID '{ex.request_id}' failed with status "
-            f"'{ex.error.code().name}' and includes the following errors:"
+            f"On {event.change_date_time}, user {event.user_email} "
+            f"used interface {event.client_type} to perform a(n) "
+            f"{event.resource_change_operation} operation on a "
+            f"{event.change_resource_type} with resource name "
+            f"'{event.change_resource_name}'"
         )
-        for error in ex.failure.errors:
-            print(f"\tError with message '{error.message}'.")
-            if error.location:
-                for field_path_element in error.location.field_path_elements:
-                    print(f"\t\tOn field: {field_path_element.field_name}")
-        sys.exit(1)
+
+        operation_type = event.resource_change_operation.name
+
+        if operation_type in ("UPDATE", "CREATE"):
+            for changed_field in event.changed_fields.paths:
+                new_value = get_nested_attr(new_resource, changed_field)
+                if operation_type == "CREATE":
+                    print(f"\t{changed_field} set to {new_value}")
+                else:
+                    old_value = get_nested_attr(old_resource, changed_field)
+                    print(
+                        f"\t{changed_field} changed from {old_value} to {new_value}"
+                    )
+
 
 
 if __name__ == "__main__":
     # GoogleAdsClient will read the google-ads.yaml configuration file in the
     # home directory if none is specified.
-    google_ads_client = GoogleAdsClient.load_from_storage()
+    googleads_client = GoogleAdsClient.load_from_storage(version="v6")
 
     parser = argparse.ArgumentParser(
         description="This example gets specific details about the most recent "
@@ -179,4 +161,16 @@ if __name__ == "__main__":
         help="The Google Ads customer ID.",
     )
     args = parser.parse_args()
-    main(google_ads_client, args.customer_id)
+    try:
+        main(googleads_client, args.customer_id)
+    except GoogleAdsException as ex:
+        print(
+            f'Request with ID "{ex.request_id}" failed with status '
+            f'"{ex.error.code().name}" and includes the following errors:'
+        )
+        for error in ex.failure.errors:
+            print(f'	Error with message "{error.message}".')
+            if error.location:
+                for field_path_element in error.location.field_path_elements:
+                    print(f"\t\tOn field: {field_path_element.field_name}")
+        sys.exit(1)

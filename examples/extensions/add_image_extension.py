@@ -22,8 +22,8 @@ image asset, run misc/upload_image_asset.py.
 import argparse
 import sys
 
-from google.ads.google_ads.client import GoogleAdsClient
-from google.ads.google_ads.errors import GoogleAdsException
+from google.ads.googleads.client import GoogleAdsClient
+from google.ads.googleads.errors import GoogleAdsException
 
 
 def main(client, customer_id, campaign_id, image_asset_id):
@@ -35,66 +35,55 @@ def main(client, customer_id, campaign_id, image_asset_id):
         campaign_id: A str of a campaign ID.
         image_asset_id: A str of an image asset ID.
     """
-    extension_feed_item_service = client.get_service(
-        "ExtensionFeedItemService", version="v6"
-    )
+    extension_feed_item_service = client.get_service("ExtensionFeedItemService")
     extension_feed_item_operation = client.get_type(
-        "ExtensionFeedItemOperation", version="v6"
+        "ExtensionFeedItemOperation"
     )
     extension_feed_item = extension_feed_item_operation.create
     extension_feed_item.image_feed_item.image_asset = client.get_service(
-        "AssetService", version="v6"
+        "AssetService"
     ).asset_path(customer_id, image_asset_id)
 
-    try:
-        response = extension_feed_item_service.mutate_extension_feed_items(
-            customer_id, [extension_feed_item_operation]
-        )
-        image_resource_name = response.results[0].resource_name
-        print(
-            "Created an image extension with resource name: "
-            f"'{image_resource_name}'"
-        )
+    response = extension_feed_item_service.mutate_extension_feed_items(
+        customer_id=customer_id, operations=[extension_feed_item_operation]
+    )
+    image_resource_name = response.results[0].resource_name
+    print(
+        "Created an image extension with resource name: "
+        f"'{image_resource_name}'"
+    )
 
-        campaign_extension_setting_service = client.get_service(
-            "CampaignExtensionSettingService", version="v6"
-        )
-        campaign_extension_setting_operation = client.get_type(
-            "CampaignExtensionSettingOperation", version="v6"
-        )
-        ces = campaign_extension_setting_operation.create
-        ces.campaign = client.get_service(
-            "CampaignService", version="v6"
-        ).campaign_path(customer_id, campaign_id)
-        ces.extension_type = client.get_type(
-            "ExtensionTypeEnum", version="v6"
-        ).IMAGE
-        ces.extension_feed_items.append(image_resource_name)
+    campaign_extension_setting_service = client.get_service(
+        "CampaignExtensionSettingService"
+    )
+    campaign_extension_setting_operation = client.get_type(
+        "CampaignExtensionSettingOperation"
+    )
+    ces = campaign_extension_setting_operation.create
+    ces.campaign = client.get_service("CampaignService").campaign_path(
+        customer_id, campaign_id
+    )
+    ces.extension_type = client.get_type(
+        "ExtensionTypeEnum"
+    ).ExtensionType.IMAGE
+    ces.extension_feed_items.append(image_resource_name)
 
-        response = campaign_extension_setting_service.mutate_campaign_extension_settings(
-            customer_id, [campaign_extension_setting_operation]
+    response = (
+        campaign_extension_setting_service.mutate_campaign_extension_settings(
+            customer_id=customer_id,
+            operations=[campaign_extension_setting_operation],
         )
-        print(
-            "Created a campaign extension setting with resource name: "
-            f"'{response.results[0].resource_name}'"
-        )
-    except GoogleAdsException as ex:
-        print(
-            f'Request with ID "{ex.request_id}" failed with status '
-            f'"{ex.error.code().name}" and includes the following errors:'
-        )
-        for error in ex.failure.errors:
-            print(f'\tError with message "{error.message}".')
-            if error.location:
-                for field_path_element in error.location.field_path_elements:
-                    print(f"\t\tOn field: {field_path_element.field_name}")
-        sys.exit(1)
+    )
+    print(
+        "Created a campaign extension setting with resource name: "
+        f"'{response.results[0].resource_name}'"
+    )
 
 
 if __name__ == "__main__":
     # GoogleAdsClient will read the google-ads.yaml configuration file in the
     # home directory if none is specified.
-    google_ads_client = GoogleAdsClient.load_from_storage()
+    googleads_client = GoogleAdsClient.load_from_storage(version="v6")
 
     parser = argparse.ArgumentParser(
         description=("Adds an image extension to a campaign.")
@@ -123,9 +112,21 @@ if __name__ == "__main__":
     )
     args = parser.parse_args()
 
-    main(
-        google_ads_client,
-        args.customer_id,
-        args.campaign_id,
-        args.image_asset_id,
-    )
+    try:
+        main(
+            googleads_client,
+            args.customer_id,
+            args.campaign_id,
+            args.image_asset_id,
+        )
+    except GoogleAdsException as ex:
+        print(
+            f'Request with ID "{ex.request_id}" failed with status '
+            f'"{ex.error.code().name}" and includes the following errors:'
+        )
+        for error in ex.failure.errors:
+            print(f'\tError with message "{error.message}".')
+            if error.location:
+                for field_path_element in error.location.field_path_elements:
+                    print(f"\t\tOn field: {field_path_element.field_name}")
+        sys.exit(1)

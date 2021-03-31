@@ -26,8 +26,8 @@ Ads accounts.
 import argparse
 import sys
 
-from google.ads.google_ads.client import GoogleAdsClient
-from google.ads.google_ads.errors import GoogleAdsException
+from google.ads.googleads.client import GoogleAdsClient
+from google.ads.googleads.errors import GoogleAdsException
 from google.api_core import protobuf_helpers
 
 
@@ -41,57 +41,45 @@ def main(client, customer_id, merchant_center_account_id):
         is to be approved.
     """
     merchant_center_link_service = client.get_service(
-        "MerchantCenterLinkService", version="v6"
+        "MerchantCenterLinkService"
     )
 
-    try:
-        # [START approve_merchant_center_link]
-        # Retrieve all the existing Merchant Center links.
-        response = merchant_center_link_service.list_merchant_center_links(
-            customer_id
-        )
+    # [START approve_merchant_center_link]
+    # Retrieve all the existing Merchant Center links.
+    response = merchant_center_link_service.list_merchant_center_links(
+        customer_id=customer_id
+    )
+    print(
+        f"{len(response.merchant_center_links)} Merchant Center link(s) "
+        "found with the following details:"
+    )
+    # [END approve_merchant_center_link]
+
+    merchant_center_link_status_enum = client.get_type(
+        "MerchantCenterLinkStatusEnum"
+    ).MerchantCenterLinkStatus
+
+    # Iterate through the results and filter for links with pending statuses.
+    for merchant_center_link in response.merchant_center_links:
+        # [START approve_merchant_center_link_1]
         print(
-            f"{len(response.merchant_center_links)} Merchant Center link(s) "
-            "found with the following details:"
+            f"Link '{merchant_center_link.resource_name}' has status "
+            f"'{merchant_center_link.status.name}'."
         )
-        # [END approve_merchant_center_link]
+        # [END approve_merchant_center_link_1]
 
-        merchant_center_link_status_enum = client.get_type(
-            "MerchantCenterLinkStatusEnum", version="v6"
-        ).MerchantCenterLinkStatus
-
-        # Iterate through the results and filter for links with pending states.
-        for merchant_center_link in response.merchant_center_links:
-            # [START approve_merchant_center_link_1]
-            print(
-                f"Link '{merchant_center_link.resource_name}' has status "
-                f"'{merchant_center_link_status_enum.Name(merchant_center_link.status)}'."
+        if (
+            merchant_center_link.status
+            == merchant_center_link_status_enum.PENDING
+            and str(merchant_center_link.id) == merchant_center_account_id
+        ):
+            _update_merchant_center_link_status(
+                client,
+                customer_id,
+                merchant_center_link_service,
+                merchant_center_link,
+                merchant_center_link_status_enum.ENABLED,
             )
-            # [END approve_merchant_center_link_1]
-
-            if (
-                merchant_center_link.status
-                == merchant_center_link_status_enum.PENDING
-                and str(merchant_center_link.id) == merchant_center_account_id
-            ):
-                _update_merchant_center_link_status(
-                    client,
-                    customer_id,
-                    merchant_center_link_service,
-                    merchant_center_link,
-                    merchant_center_link_status_enum.ENABLED,
-                )
-    except GoogleAdsException as ex:
-        print(
-            f'Request with ID "{ex.request_id}" failed with status'
-            f'"{ex.error.code().name}" and includes the following errors:'
-        )
-        for error in ex.failure.errors:
-            print(f'\tError with message "{error.message}".')
-            if error.location:
-                for field_path_element in error.location.field_path_elements:
-                    print(f"\t\tOn field: {field_path_element.field_name}")
-        sys.exit(1)
 
 
 # [START approve_merchant_center_link_2]
@@ -112,30 +100,26 @@ def _update_merchant_center_link_status(
         status: The updated status to apply to the merchant center link.
     """
     # Creates an operation.
-    operation = client.get_type("MerchantCenterLinkOperation", version="v6")
+    operation = client.get_type("MerchantCenterLinkOperation")
     link_to_update = operation.update
     link_to_update.resource_name = merchant_center_link.resource_name
     # Enables the pending link.
     link_to_update.status = status
-
-    field_mask = protobuf_helpers.field_mask(None, link_to_update)
-    operation.update_mask.CopyFrom(field_mask)
+    client.copy_from(
+        operation.update_mask,
+        protobuf_helpers.field_mask(None, link_to_update._pb),
+    )
 
     # Updates the link.
     mutate_response = merchant_center_link_service.mutate_merchant_center_link(
-        customer_id, operation
+        customer_id=customer_id, operation=operation
     )
-
-    merchant_center_link_status_enum = client.get_type(
-        "MerchantCenterLinkStatusEnum", version="v6"
-    ).MerchantCenterLinkStatus
 
     # Displays the result.
     print(
         "The status of Merchant Center Link with resource name "
         f"'{mutate_response.result.resource_name}' to Google Ads account : "
-        f"{customer_id} was updated to "
-        f"{merchant_center_link_status_enum.Name(status)}."
+        f"{customer_id} was updated to {status.name}."
     )
     # [END approve_merchant_center_link_2]
 
@@ -143,7 +127,7 @@ def _update_merchant_center_link_status(
 if __name__ == "__main__":
     # GoogleAdsClient will read the google-ads.yaml configuration file in the
     # home directory if none is specified.
-    google_ads_client = GoogleAdsClient.load_from_storage()
+    googleads_client = GoogleAdsClient.load_from_storage(version="v6")
 
     parser = argparse.ArgumentParser(
         description=("Approves a Merchant Center link request.")
@@ -166,4 +150,18 @@ if __name__ == "__main__":
     )
     args = parser.parse_args()
 
-    main(google_ads_client, args.customer_id, args.merchant_center_account_id)
+    try:
+        main(
+            googleads_client, args.customer_id, args.merchant_center_account_id
+        )
+    except GoogleAdsException as ex:
+        print(
+            f'Request with ID "{ex.request_id}" failed with status'
+            f'"{ex.error.code().name}" and includes the following errors:'
+        )
+        for error in ex.failure.errors:
+            print(f'\tError with message "{error.message}".')
+            if error.location:
+                for field_path_element in error.location.field_path_elements:
+                    print(f"\t\tOn field: {field_path_element.field_name}")
+        sys.exit(1)

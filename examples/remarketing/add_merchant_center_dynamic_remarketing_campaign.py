@@ -24,8 +24,8 @@ import requests
 import sys
 from uuid import uuid4
 
-from google.ads.google_ads.client import GoogleAdsClient
-from google.ads.google_ads.errors import GoogleAdsException
+from google.ads.googleads.client import GoogleAdsClient
+from google.ads.googleads.errors import GoogleAdsException
 
 
 # [START add_merchant_center_dynamic_remarketing_campaign]
@@ -45,37 +45,22 @@ def main(
         campaign_budget_id: The ID of the campaign budget to utilize.
         user_list_id: The ID of the user list to target for remarketing.
     """
-    try:
-        # Create a shopping campaign associated with a given Merchant Center
-        # account.
-        campaign_resource_name = _create_campaign(
-            client, customer_id, merchant_center_account_id, campaign_budget_id
-        )
+    # Create a shopping campaign associated with a given Merchant Center
+    # account.
+    campaign_resource_name = _create_campaign(
+        client, customer_id, merchant_center_account_id, campaign_budget_id
+    )
 
-        # Create an ad group for the campaign.
-        ad_group_resource_name = _create_ad_group(
-            client, customer_id, campaign_resource_name
-        )
+    # Create an ad group for the campaign.
+    ad_group_resource_name = _create_ad_group(
+        client, customer_id, campaign_resource_name
+    )
 
-        # Create a dynamic display ad in the ad group.
-        _create_ad(client, customer_id, ad_group_resource_name)
+    # Create a dynamic display ad in the ad group.
+    _create_ad(client, customer_id, ad_group_resource_name)
 
-        # Target a specific user list for remarketing.
-        _attach_user_list(
-            client, customer_id, ad_group_resource_name, user_list_id
-        )
-
-    except GoogleAdsException as ex:
-        print(
-            f"Request with ID '{ex.request_id}' failed with status "
-            f"'{ex.error.code().name}' and includes the following errors:"
-        )
-        for error in ex.failure.errors:
-            print(f"\tError with message '{error.message}'.")
-            if error.location:
-                for field_path_element in error.location.field_path_elements:
-                    print(f"\t\tOn field: {field_path_element.field_name}")
-        sys.exit(1)
+    # Target a specific user list for remarketing.
+    _attach_user_list(client, customer_id, ad_group_resource_name, user_list_id)
 
 
 def _create_campaign(
@@ -92,10 +77,10 @@ def _create_campaign(
         The string resource name of the newly created campaign.
     """
     # Gets the CampaignService client.
-    campaign_service = client.get_service("CampaignService", version="v6")
+    campaign_service = client.get_service("CampaignService")
 
     # Creates a campaign operation and configures the new campaign.
-    campaign_operation = client.get_type("CampaignOperation", version="v6")
+    campaign_operation = client.get_type("CampaignOperation")
     campaign = campaign_operation.create
     campaign.name = f"Shopping campaign #{uuid4()}"
     # Configures the settings for the shopping campaign.
@@ -111,17 +96,19 @@ def _create_campaign(
     # Dynamic remarketing campaigns are only available on the Google Display
     # Network.
     campaign.advertising_channel_type = client.get_type(
-        "AdvertisingChannelTypeEnum", version="v6"
-    ).DISPLAY
-    campaign.status = client.get_type("CampaignStatusEnum", version="v6").PAUSED
+        "AdvertisingChannelTypeEnum"
+    ).AdvertisingChannelType.DISPLAY
+    campaign.status = client.get_type(
+        "CampaignStatusEnum"
+    ).CampaignStatus.PAUSED
     campaign.campaign_budget = client.get_service(
-        "CampaignBudgetService", version="v6"
+        "CampaignBudgetService"
     ).campaign_budget_path(customer_id, campaign_budget_id)
-    campaign.manual_cpc.CopyFrom(client.get_type("ManualCpc", version="v6"))
+    client.copy_from(campaign.manual_cpc, client.get_type("ManualCpc"))
 
     # Issues a mutate request to add the campaign.
     campaign_response = campaign_service.mutate_campaigns(
-        customer_id, [campaign_operation]
+        customer_id=customer_id, operations=[campaign_operation]
     )
     campaign_resource_name = campaign_response.results[0].resource_name
     print(f"Created campaign with resource name '{campaign_resource_name}'.")
@@ -140,18 +127,18 @@ def _create_ad_group(client, customer_id, campaign_resource_name):
         The string resource name of the newly created ad group.
     """
     # Gets the AdGroupService.
-    ad_group_service = client.get_service("AdGroupService", version="v6")
+    ad_group_service = client.get_service("AdGroupService")
 
     # Creates an ad group operation and configures the new ad group.
-    ad_group_operation = client.get_type("AdGroupOperation", version="v6")
+    ad_group_operation = client.get_type("AdGroupOperation")
     ad_group = ad_group_operation.create
     ad_group.name = "Dynamic remarketing ad group"
     ad_group.campaign = campaign_resource_name
-    ad_group.status = client.get_type("AdGroupStatusEnum", version="v6").ENABLED
+    ad_group.status = client.get_type("AdGroupStatusEnum").AdGroupStatus.ENABLED
 
     # Issues a mutate request to add the ad group.
     ad_group_response = ad_group_service.mutate_ad_groups(
-        customer_id, [ad_group_operation]
+        customer_id=customer_id, operations=[ad_group_operation]
     )
     ad_group_resource_name = ad_group_response.results[0].resource_name
 
@@ -167,7 +154,7 @@ def _create_ad(client, customer_id, ad_group_resource_name):
         ad_group_resource_name: The resource name of the target ad group.
     """
     # Get the AdGroupAdService client.
-    ad_group_ad_service = client.get_service("AdGroupAdService", version="v6")
+    ad_group_ad_service = client.get_service("AdGroupAdService")
 
     # Upload image assets for the ad.
     marketing_image_resource_name = _upload_image_asset(
@@ -178,17 +165,17 @@ def _create_ad(client, customer_id, ad_group_resource_name):
     )
 
     # Create the relevant asset objects for the ad.
-    marketing_image = client.get_type("AdImageAsset", version="v6")
+    marketing_image = client.get_type("AdImageAsset")
     marketing_image.asset = marketing_image_resource_name
-    square_marketing_image = client.get_type("AdImageAsset", version="v6")
+    square_marketing_image = client.get_type("AdImageAsset")
     square_marketing_image.asset = square_marketing_image_resource_name
-    headline = client.get_type("AdTextAsset", version="v6")
+    headline = client.get_type("AdTextAsset")
     headline.text = "Travel"
-    description = client.get_type("AdTextAsset", version="v6")
+    description = client.get_type("AdTextAsset")
     description.text = "Take to the air!"
 
     # Create an ad group ad operation and set the ad group ad values.
-    ad_group_ad_operation = client.get_type("AdGroupAdOperation", version="v6")
+    ad_group_ad_operation = client.get_type("AdGroupAdOperation")
     ad_group_ad = ad_group_ad_operation.create
     ad_group_ad.ad_group = ad_group_resource_name
     ad_group_ad.ad.final_urls.append("http://www.example.com/")
@@ -213,20 +200,20 @@ def _create_ad(client, customer_id, ad_group_resource_name):
     responsive_display_ad_info.allow_flexible_color = False
     # Optional: Set the format setting that the ad will be served in.
     responsive_display_ad_info.format_setting = client.get_type(
-        "DisplayAdFormatSettingEnum", version="v6"
-    ).NON_NATIVE
+        "DisplayAdFormatSettingEnum"
+    ).DisplayAdFormatSetting.NON_NATIVE
     # Optional: Create a logo image and set it to the ad.
-    # logo_image = client.get_type("AdImageAsset", version="v6")
+    # logo_image = client.get_type("AdImageAsset")
     # logo_image.asset = "INSERT_LOGO_IMAGE_RESOURCE_NAME_HERE"
     # responsive_display_ad_info.logo_images.append(logo_image)
     # Optional: Create a square logo image and set it to the ad.
-    # square_logo_image = client.get_type("AdImageAsset", version="v6")
+    # square_logo_image = client.get_type("AdImageAsset")
     # square_logo_image.asset = "INSERT_SQUARE_LOGO_IMAGE_RESOURCE_NAME_HERE"
     # responsive_display_ad_info.square_logo_images.append(square_logo_image)
 
     # Issue a mutate request to add the ad group ad.
     ad_group_ad_response = ad_group_ad_service.mutate_ad_group_ads(
-        customer_id, [ad_group_ad_operation]
+        customer_id=customer_id, operations=[ad_group_ad_operation]
     )
     print(
         "Created ad group ad with resource name "
@@ -246,20 +233,20 @@ def _upload_image_asset(client, customer_id, image_url, asset_name):
         The string resource name of the newly uploaded image asset.
     """
     # Get the AssetService client.
-    asset_service = client.get_service("AssetService", version="v6")
+    asset_service = client.get_service("AssetService")
 
     # Fetch the image data.
     image_data = requests.get(image_url).content
 
     # Create an asset operation and set the image asset values.
-    asset_operation = client.get_type("AssetOperation", version="v6")
+    asset_operation = client.get_type("AssetOperation")
     asset = asset_operation.create
-    asset.type = client.get_type("AssetTypeEnum", version="v6").IMAGE
+    asset.type_ = client.get_type("AssetTypeEnum").AssetType.IMAGE
     asset.image_asset.data = image_data
     asset.name = asset_name
 
     mutate_asset_response = asset_service.mutate_assets(
-        customer_id, [asset_operation]
+        customer_id=customer_id, operations=[asset_operation]
     )
     image_asset_resource_name = mutate_asset_response.results[0].resource_name
     print(
@@ -282,24 +269,22 @@ def _attach_user_list(
         user_list_id: The ID of the user list to target for remarketing.
     """
     # Get the AdGroupCriterionService client.
-    ad_group_criterion_service = client.get_service(
-        "AdGroupCriterionService", version="v6"
-    )
+    ad_group_criterion_service = client.get_service("AdGroupCriterionService")
 
     # Create an ad group criterion operation and set the ad group criterion
     # values.
-    ad_group_criterion_operation = client.get_type(
-        "AdGroupCriterionOperation", version="v6"
-    )
+    ad_group_criterion_operation = client.get_type("AdGroupCriterionOperation")
     ad_group_criterion = ad_group_criterion_operation.create
     ad_group_criterion.ad_group = ad_group_resource_name
     ad_group_criterion.user_list.user_list = client.get_service(
-        "UserListService", version="v6"
+        "UserListService"
     ).user_list_path(customer_id, user_list_id)
 
     # Issue a mutate request to add the ad group criterion.
-    ad_group_criterion_response = ad_group_criterion_service.mutate_ad_group_criteria(
-        customer_id, [ad_group_criterion_operation]
+    ad_group_criterion_response = (
+        ad_group_criterion_service.mutate_ad_group_criteria(
+            customer_id=customer_id, operations=[ad_group_criterion_operation]
+        )
     )
     print(
         "Created ad group criterion with resource name "
@@ -311,7 +296,7 @@ def _attach_user_list(
 if __name__ == "__main__":
     # GoogleAdsClient will read the google-ads.yaml configuration file in the
     # home directory if none is specified.
-    google_ads_client = GoogleAdsClient.load_from_storage()
+    googleads_client = GoogleAdsClient.load_from_storage(version="v6")
 
     parser = argparse.ArgumentParser(
         description=(
@@ -350,10 +335,22 @@ if __name__ == "__main__":
     )
     args = parser.parse_args()
 
-    main(
-        google_ads_client,
-        args.customer_id,
-        args.merchant_center_account_id,
-        args.campaign_budget_id,
-        args.user_list_id,
-    )
+    try:
+        main(
+            googleads_client,
+            args.customer_id,
+            args.merchant_center_account_id,
+            args.campaign_budget_id,
+            args.user_list_id,
+        )
+    except GoogleAdsException as ex:
+        print(
+            f"Request with ID '{ex.request_id}' failed with status "
+            f"'{ex.error.code().name}' and includes the following errors:"
+        )
+        for error in ex.failure.errors:
+            print(f"\tError with message '{error.message}'.")
+            if error.location:
+                for field_path_element in error.location.field_path_elements:
+                    print(f"\t\tOn field: {field_path_element.field_name}")
+        sys.exit(1)

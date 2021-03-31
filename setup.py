@@ -18,10 +18,10 @@ import io
 
 install_requires = [
     "google-auth-oauthlib >= 0.3.0, < 1.0.0",
-    "google-api-core >= 1.14.0, < 2.0.0",
+    "google-api-core >= 1.21.0, < 2.0.0",
     "googleapis-common-protos >= 1.5.8, < 2.0.0",
     "grpcio >= 1.33.2, < 2.0.0",
-    "protobuf >= 3.13.0, < 4.0.0",
+    "proto-plus >= 1.18.0, < 2.0.0",
     "PyYAML >= 5.1, < 6.0",
     "setuptools>=40.3.0",
     "pep562 >= 1.0, < 2.0",
@@ -38,7 +38,7 @@ with io.open("README.rst", "r", encoding="utf-8") as readme_file:
 
 setup(
     name="google-ads",
-    version="9.0.0",
+    version="10.0.0",
     author="Google LLC",
     author_email="googleapis-packages@google.com",
     classifiers=[

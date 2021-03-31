@@ -25,8 +25,8 @@ import sys
 from time import sleep
 from uuid import uuid4
 
-from google.ads.google_ads.client import GoogleAdsClient
-from google.ads.google_ads.errors import GoogleAdsException
+from google.ads.googleads.client import GoogleAdsClient
+from google.ads.googleads.errors import GoogleAdsException
 
 # The maximum number of attempts to retrieve the FeedMappings before throwing an
 # exception.
@@ -39,42 +39,30 @@ def main(client, customer_id, chain_id, campaign_id):
     Args:
         client: An initialized instance.
         customer_id: The client customer ID.
-        chain_id: The retail chain ID. See
-            https://developers.google.com/adwords/api/docs/appendix/codes-formats#chain-ids
+        chain_id: The retail chain ID. See:
+            https://developers.google.com/google-ads/api/reference/data/codes-formats#chain-ids
             for a complete list of valid retail chain IDs.
         campaign_id: The campaign ID for which the affiliate location extensions
             will be added.
     """
-    try:
-        feed_resource_name = _create_affiliate_location_extension_feed(
-            client, customer_id, chain_id
-        )
-        # After the completion of the feed creation operation above, the added
-        # feed will not be available for usage in a campaign feed until the feed
-        # mappings are created. We will wait with an exponential back-off policy
-        # until the feed mappings have been created.
-        feed_mapping = _wait_for_feed_to_be_ready(
-            client, customer_id, feed_resource_name
-        )
-        _create_campaign_feed(
-            client,
-            customer_id,
-            campaign_id,
-            feed_mapping,
-            feed_resource_name,
-            chain_id,
-        )
-    except GoogleAdsException as ex:
-        print(
-            f"Request with ID '{ex.request_id}'' failed with status "
-            f"'{ex.error.code().name}' and includes the following errors:"
-        )
-        for error in ex.failure.errors:
-            print(f"\tError with message '{error.message}'.")
-            if error.location:
-                for field_path_element in error.location.field_path_elements:
-                    print(f"\t\tOn field: {field_path_element.field_name}")
-        sys.exit(1)
+    feed_resource_name = _create_affiliate_location_extension_feed(
+        client, customer_id, chain_id
+    )
+    # After the completion of the feed creation operation above, the added
+    # feed will not be available for usage in a campaign feed until the feed
+    # mappings are created. We will wait with an exponential back-off policy
+    # until the feed mappings have been created.
+    feed_mapping = _wait_for_feed_to_be_ready(
+        client, customer_id, feed_resource_name
+    )
+    _create_campaign_feed(
+        client,
+        customer_id,
+        campaign_id,
+        feed_mapping,
+        feed_resource_name,
+        chain_id,
+    )
 
 
 def _create_affiliate_location_extension_feed(client, customer_id, chain_id):
@@ -98,25 +86,25 @@ def _create_affiliate_location_extension_feed(client, customer_id, chain_id):
     _remove_location_extension_feeds(client, customer_id)
 
     # Get the FeedServiceClient.
-    feed_service = client.get_service("FeedService", version="v6")
+    feed_service = client.get_service("FeedService")
 
     # Create a feed that will sync to retail addresses for a given retail chain
     # ID. Do not add FeedAttributes to this object as Google Ads will add
     # them automatically as this will be a system generated feed.
-    feed_operation = client.get_type("FeedOperation", version="v6")
+    feed_operation = client.get_type("FeedOperation")
     feed = feed_operation.create
     feed.name = f"Affiliate Location Extension feed #{uuid4()}"
     feed.affiliate_location_feed_data.chain_ids.append(chain_id)
     feed.affiliate_location_feed_data.relationship_type = client.get_type(
-        "AffiliateLocationFeedRelationshipTypeEnum", version="v6"
-    ).GENERAL_RETAILER
+        "AffiliateLocationFeedRelationshipTypeEnum"
+    ).AffiliateLocationFeedRelationshipType.GENERAL_RETAILER
     # Since this feed's contents will be managed by Google, you must set its
     # origin to GOOGLE.
-    feed.origin = client.get_type("FeedOriginEnum", version="v6").GOOGLE
+    feed.origin = client.get_type("FeedOriginEnum").FeedOrigin.GOOGLE
 
     # Add the feed.
     mutate_feeds_response = feed_service.mutate_feeds(
-        customer_id, [feed_operation]
+        customer_id=customer_id, operations=[feed_operation]
     )
 
     # Display the results.
@@ -163,7 +151,7 @@ def _get_location_extension_feeds(client, customer_id):
     Returns:
         The list of location extension feeds.
     """
-    google_ads_service = client.get_service("GoogleAdsService", version="v6")
+    googleads_service = client.get_service("GoogleAdsService")
 
     # Create the query.
     query = """
@@ -175,13 +163,15 @@ def _get_location_extension_feeds(client, customer_id):
         FROM feed
         WHERE feed.status = ENABLED"""
 
-    search_results = google_ads_service.search(customer_id, query)
+    search_results = googleads_service.search(
+        customer_id=customer_id, query=query
+    )
 
+    # A location extension feed can be identified by checking whether the
+    # PlacesLocationFeedData field is set (Location extensions feeds) or
+    # AffiliateLocationFeedData field is set (Affiliate location extension
+    # feeds)
     return [
-        # A location extension feed can be identified by checking whether the
-        # PlacesLocationFeedData field is set (Location extensions feeds) or
-        # AffiliateLocationFeedData field is set (Affiliate location extension
-        # feeds)
         row.feed
         for row in search_results
         if row.feed.places_location_feed_data
@@ -200,12 +190,12 @@ def _remove_feeds(client, customer_id, feeds):
     operations = []
 
     for feed in feeds:
-        operation = client.get_type("FeedOperation", version="v6")
+        operation = client.get_type("FeedOperation")
         operation.remove = feed.resource_name
         operations.append(operation)
 
-    feed_service = client.get_service("FeedService", version="v6")
-    feed_service.mutate_feeds(customer_id, operations)
+    feed_service = client.get_service("FeedService")
+    feed_service.mutate_feeds(customer_id=customer_id, operations=operations)
 
 
 def _get_location_extension_customer_feeds(client, customer_id):
@@ -218,7 +208,7 @@ def _get_location_extension_customer_feeds(client, customer_id):
         A list of location extension customer feeds.
 
     """
-    google_ads_service = client.get_service("GoogleAdsService", version="v6")
+    googleads_service = client.get_service("GoogleAdsService")
 
     # Create the query. A location extension customer feed can be identified by
     # filtering for placeholder_types=LOCATION (location extension feeds) or
@@ -234,7 +224,9 @@ def _get_location_extension_customer_feeds(client, customer_id):
           customer_feed.placeholder_types CONTAINS ANY(LOCATION, AFFILIATE_LOCATION)
           AND customer_feed.status=ENABLED"""
 
-    search_results = google_ads_service.search(customer_id, query)
+    search_results = googleads_service.search(
+        customer_id=customer_id, query=query
+    )
 
     return [row.customer_feed for row in search_results]
 
@@ -250,14 +242,14 @@ def _remove_customer_feeds(client, customer_id, customer_feeds):
     operations = []
 
     for customer_feed in customer_feeds:
-        operation = client.get_type("CustomerFeedOperation", version="v6")
+        operation = client.get_type("CustomerFeedOperation")
         operation.remove = customer_feed.resource_name
         operations.append(operation)
 
-    customer_feed_service = client.get_service(
-        "CustomerFeedService", version="v6"
+    customer_feed_service = client.get_service("CustomerFeedService")
+    customer_feed_service.mutate_customer_feeds(
+        customer_id=customer_id, operations=operations
     )
-    customer_feed_service.mutate_customer_feeds(customer_id, operations)
 
 
 def _get_affiliate_location_extension_feed_mapping(
@@ -273,7 +265,7 @@ def _get_affiliate_location_extension_feed_mapping(
         The newly created feed mapping.
     """
     # Get the GoogleAdsService.
-    google_ads_service = client.get_service("GoogleAdsService", version="v6")
+    googleads_service = client.get_service("GoogleAdsService")
 
     # Create the query.
     query = f"""
@@ -289,7 +281,9 @@ def _get_affiliate_location_extension_feed_mapping(
         LIMIT 1"""
 
     # Issue a search request.
-    search_results = google_ads_service.search(customer_id, query)
+    search_results = googleads_service.search(
+        customer_id=customer_id, query=query
+    )
 
     # Return the feed mapping that results from the search.
     # It is possible that the feed is not yet ready, so we catch the exception
@@ -364,14 +358,13 @@ def _create_campaign_feed(
         chain_id: The retail chain ID.
     """
     # Get the CampaignFeedService.
-    campaign_feed_service = client.get_service(
-        "CampaignFeedService", version="v6"
-    )
+    campaign_feed_service = client.get_service("CampaignFeedService")
+    feed_service = client.get_service("FeedService", versions="v6")
 
     attribute_id_for_chain_id = _get_attribute_id_for_chain_id(
         client, feed_mapping
     )
-    feed_id = feed_resource_name[feed_resource_name.rindex("/") + 1 :]
+    feed_id = feed_service.parse_feed_path(feed_resource_name)["feed_id"]
 
     matching_function = (
         f"IN(FeedAttribute[{feed_id}, {attribute_id_for_chain_id}], {chain_id})"
@@ -379,21 +372,23 @@ def _create_campaign_feed(
 
     # Add a CampaignFeed that associates the feed with this campaign for
     # the AFFILIATE_LOCATION placeholder type.
-    campaign_feed_operation = client.get_type(
-        "CampaignFeedOperation", version="v6"
-    )
+    campaign_feed_operation = client.get_type("CampaignFeedOperation")
     campaign_feed = campaign_feed_operation.create
     campaign_feed.feed = feed_resource_name
     campaign_feed.placeholder_types.append(
-        client.get_type("PlaceholderTypeEnum", version="v6").AFFILIATE_LOCATION
+        client.get_type(
+            "PlaceholderTypeEnum"
+        ).PlaceholderType.AFFILIATE_LOCATION
     )
     campaign_feed.matching_function.function_string = matching_function
     campaign_feed.campaign = client.get_service(
-        "CampaignService", version="v6"
+        "CampaignService"
     ).campaign_path(customer_id, campaign_id)
 
-    mutate_campaign_feeds_response = campaign_feed_service.mutate_campaign_feeds(
-        customer_id, [campaign_feed_operation]
+    mutate_campaign_feeds_response = (
+        campaign_feed_service.mutate_campaign_feeds(
+            customer_id=customer_id, operations=[campaign_feed_operation]
+        )
     )
 
     # Display the result.
@@ -419,8 +414,8 @@ def _get_attribute_id_for_chain_id(client, feed_mapping):
         if (
             field_mapping.affiliate_location_field
             == client.get_type(
-                "AffiliateLocationPlaceholderFieldEnum", version="v6"
-            ).CHAIN_ID
+                "AffiliateLocationPlaceholderFieldEnum"
+            ).AffiliateLocationPlaceholderField.CHAIN_ID
         ):
             return field_mapping.feed_attribute_id
 
@@ -433,7 +428,7 @@ def _get_attribute_id_for_chain_id(client, feed_mapping):
 if __name__ == "__main__":
     # will read the google-ads.yaml configuration file in the
     # home directory if none is specified.
-    google_ads_client = GoogleAdsClient.load_from_storage()
+    googleads_client = GoogleAdsClient.load_from_storage(version="v6")
 
     parser = argparse.ArgumentParser(
         description="Demonstrates how to add Affiliate Location extensions."
@@ -451,8 +446,8 @@ if __name__ == "__main__":
         "--chain_id",
         type=int,
         required=True,
-        help="The retail chain ID. See "
-        "https://developers.google.com/adwords/api/docs/appendix/codes-formats#chain-ids "
+        help="The retail chain ID. See: "
+        "https://developers.google.com/google-ads/api/reference/data/codes-formats#chain-ids "
         "for a complete list of valid retail chain IDs.",
     )
     parser.add_argument(
@@ -465,6 +460,21 @@ if __name__ == "__main__":
     )
     args = parser.parse_args()
 
-    main(
-        google_ads_client, args.customer_id, args.chain_id, args.campaign_id,
-    )
+    try:
+        main(
+            googleads_client,
+            args.customer_id,
+            args.chain_id,
+            args.campaign_id,
+        )
+    except GoogleAdsException as ex:
+        print(
+            f"Request with ID '{ex.request_id}'' failed with status "
+            f"'{ex.error.code().name}' and includes the following errors:"
+        )
+        for error in ex.failure.errors:
+            print(f"\tError with message '{error.message}'.")
+            if error.location:
+                for field_path_element in error.location.field_path_elements:
+                    print(f"\t\tOn field: {field_path_element.field_name}")
+        sys.exit(1)

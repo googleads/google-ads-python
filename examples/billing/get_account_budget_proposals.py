@@ -22,77 +22,59 @@ import argparse
 import sys
 
 
-import google.ads.google_ads.client
+from google.ads.googleads.client import GoogleAdsClient
+from google.ads.googleads.errors import GoogleAdsException
 
 
 _DEFAULT_PAGE_SIZE = 1000
 
 
 def main(client, customer_id, page_size):
-    ga_service = client.get_service("GoogleAdsService", version="v6")
+    ga_service = client.get_service("GoogleAdsService")
 
-    query = """
-        SELECT
-          account_budget_proposal.id,
-          account_budget_proposal.account_budget,
-          account_budget_proposal.billing_setup,
-          account_budget_proposal.status,
-          account_budget_proposal.proposed_name,
-          account_budget_proposal.proposed_notes,
-          account_budget_proposal.proposed_purchase_order_number,
-          account_budget_proposal.proposal_type,
-          account_budget_proposal.approval_date_time,
-          account_budget_proposal.creation_date_time
-        FROM account_budget_proposal"""
+    query = (
+        "SELECT account_budget_proposal.id, "
+        "account_budget_proposal.account_budget,"
+        "account_budget_proposal.billing_setup,"
+        "account_budget_proposal.status,"
+        "account_budget_proposal.proposed_name,"
+        "account_budget_proposal.proposed_notes,"
+        "account_budget_proposal.proposed_purchase_order_number,"
+        "account_budget_proposal.proposal_type,"
+        "account_budget_proposal.approval_date_time,"
+        "account_budget_proposal.creation_date_time "
+        "FROM account_budget_proposal"
+    )
 
-    results = ga_service.search(customer_id, query=query, page_size=page_size)
+    search_request = client.get_type("SearchGoogleAdsRequest")
+    search_request.customer_id = customer_id
+    search_request.query = query
+    search_request.page_size = page_size
 
-    try:
-        # Use the enum types to determine the enum names from the values.
-        proposal_status_enum = client.get_type(
-            "AccountBudgetProposalStatusEnum"
-        ).AccountBudgetProposalStatus
-        proposal_type_enum = client.get_type(
-            "AccountBudgetProposalTypeEnum"
-        ).AccountBudgetProposalType
+    results = ga_service.search(request=search_request)
 
-        for row in results:
-            budget_proposal = row.account_budget_proposal
+    for row in results:
+        budget_proposal = row.account_budget_proposal
 
-            print(
-                f'Account budget proposal with ID "{budget_proposal.id}", '
-                "status "
-                f'"{proposal_status_enum.Name(budget_proposal.status)}", '
-                f'account_budget "{budget_proposal.account_budget}", '
-                f'billing_setup "{budget_proposal.billing_setup}", '
-                f'proposed_name "{budget_proposal.proposed_name}", '
-                f'proposed_notes "{budget_proposal.proposed_notes}", '
-                "proposed_po_number "
-                f'"{budget_proposal.proposed_purchase_order_number}", '
-                "proposal_type "
-                f'"{proposal_type_enum.Name(budget_proposal.proposal_type)}", '
-                f'approval_date_time "{budget_proposal.approval_date_time}", '
-                f'creation_date_time "{budget_proposal.creation_date_time}"'
-            )
-    except google.ads.google_ads.errors.GoogleAdsException as ex:
         print(
-            'Request with ID "%s" failed with status "%s" and includes the '
-            "following errors:" % (ex.request_id, ex.error.code().name)
+            'Account budget proposal with ID "{budget_proposal.id}", '
+            'status "{budget_proposal.status.name}", '
+            'account_budget "{budget_proposal.account_budget}", '
+            'billing_setup "{budget_proposal.billing_setup}", '
+            'proposed_name "{budget_proposal.proposed_name}", '
+            'proposed_notes "{budget_proposal.proposed_notes}", '
+            "proposed_po_number "
+            '"{budget_proposal.proposed_purchase_order_number}", '
+            'proposal_type "{budget_proposal.proposal_type.name}", '
+            'approval_date_time "{budget_proposal.approval_date_time}", '
+            'creation_date_time "{budget_proposal.creation_date_time}"'
         )
-        for error in ex.failure.errors:
-            print('\tError with message "%s".' % error.message)
-            if error.location:
-                for field_path_element in error.location.field_path_elements:
-                    print("\t\tOn field: %s" % field_path_element.field_name)
-        sys.exit(1)
 
 
 if __name__ == "__main__":
     # GoogleAdsClient will read the google-ads.yaml configuration file in the
     # home directory if none is specified.
-    google_ads_client = (
-        google.ads.google_ads.client.GoogleAdsClient.load_from_storage()
-    )
+    googleads_client = GoogleAdsClient.load_from_storage(version="v6")
 
     parser = argparse.ArgumentParser(
         description="Lists all account budget proposals."
@@ -107,4 +89,16 @@ if __name__ == "__main__":
     )
     args = parser.parse_args()
 
-    main(google_ads_client, args.customer_id, _DEFAULT_PAGE_SIZE)
+    try:
+        main(googleads_client, args.customer_id, _DEFAULT_PAGE_SIZE)
+    except GoogleAdsException as ex:
+        print(
+            f'Request with ID "{ex.request_id}" failed with status '
+            f'"{ex.error.code().name}" and includes the following errors:'
+        )
+        for error in ex.failure.errors:
+            print(f'	Error with message "{error.message}".')
+            if error.location:
+                for field_path_element in error.location.field_path_elements:
+                    print(f"\t\tOn field: {field_path_element.field_name}")
+        sys.exit(1)

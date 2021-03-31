@@ -21,23 +21,20 @@ The bid modifiers will be based on hotel check-in day and length of stay.
 import argparse
 import sys
 
-import google.ads.google_ads.client
+from google.ads.googleads.client import GoogleAdsClient
+from google.ads.googleads.errors import GoogleAdsException
 
 
 def main(client, customer_id, ad_group_id):
-    ad_group_service = client.get_service("AdGroupService", version="v6")
-    ag_bm_service = client.get_service(
-        "AdGroupBidModifierService", version="v6"
-    )
+    ad_group_service = client.get_service("AdGroupService")
+    ag_bm_service = client.get_service("AdGroupBidModifierService")
 
     # Create ad group bid modifier based on hotel check-in day.
-    check_in_ag_bm_operation = client.get_type(
-        "AdGroupBidModifierOperation", version="v6"
-    )
+    check_in_ag_bm_operation = client.get_type("AdGroupBidModifierOperation")
     check_in_ag_bid_modifier = check_in_ag_bm_operation.create
     check_in_ag_bid_modifier.hotel_check_in_day.day_of_week = client.get_type(
-        "DayOfWeekEnum", version="v6"
-    ).MONDAY
+        "DayOfWeekEnum"
+    ).DayOfWeek.MONDAY
     check_in_ag_bid_modifier.ad_group = ad_group_service.ad_group_path(
         customer_id, ad_group_id
     )
@@ -45,9 +42,7 @@ def main(client, customer_id, ad_group_id):
     check_in_ag_bid_modifier.bid_modifier = 1.5
 
     # Create ad group bid modifier based on hotel length of stay info.
-    los_ag_bm_operation = client.get_type(
-        "AdGroupBidModifierOperation", version="v6"
-    )
+    los_ag_bm_operation = client.get_type("AdGroupBidModifierOperation")
     los_ag_bid_modifier = los_ag_bm_operation.create
     los_ag_bid_modifier.ad_group = ad_group_service.ad_group_path(
         customer_id, ad_group_id
@@ -60,26 +55,13 @@ def main(client, customer_id, ad_group_id):
     los_ag_bid_modifier.bid_modifier = 1.7
 
     # Add the bid modifiers
-    try:
-        ag_bm_response = ag_bm_service.mutate_ad_group_bid_modifiers(
-            customer_id, [check_in_ag_bm_operation, los_ag_bm_operation]
-        )
-    except google.ads.google_ads.errors.GoogleAdsException as ex:
-        print(
-            'Request with ID "%s" failed with status "%s" and includes the '
-            "following errors:" % (ex.request_id, ex.error.code().name)
-        )
-        for error in ex.failure.errors:
-            print('\tError with message "%s".' % error.message)
-            if error.location:
-                for field_path_element in error.location.field_path_elements:
-                    print("\t\tOn field: %s" % field_path_element.field_name)
-        sys.exit(1)
+    ag_bm_response = ag_bm_service.mutate_ad_group_bid_modifiers(
+        customer_id=customer_id,
+        operations=[check_in_ag_bm_operation, los_ag_bm_operation],
+    )
 
     # Print out resource names of the added ad group bid modifiers.
-    print(
-        "Added %d hotel ad group bid modifiers:" % len(ag_bm_response.results)
-    )
+    print(f"Added {len(ag_bm_response.results)} hotel ad group bid modifiers:")
 
     for result in ag_bm_response.results:
         print(result.resource_name)
@@ -88,9 +70,7 @@ def main(client, customer_id, ad_group_id):
 if __name__ == "__main__":
     # GoogleAdsClient will read the google-ads.yaml configuration file in the
     # home directory if none is specified.
-    google_ads_client = (
-        google.ads.google_ads.client.GoogleAdsClient.load_from_storage()
-    )
+    googleads_client = GoogleAdsClient.load_from_storage(version="v6")
 
     parser = argparse.ArgumentParser(
         description=("Adds an ad group bid modifier to a hotel ad group.")
@@ -112,4 +92,16 @@ if __name__ == "__main__":
     )
     args = parser.parse_args()
 
-    main(google_ads_client, args.customer_id, args.ad_group_id)
+    try:
+        main(googleads_client, args.customer_id, args.ad_group_id)
+    except GoogleAdsException as ex:
+        print(
+            f'Request with ID "{ex.request_id}" failed with status '
+            f'"{ex.error.code().name}" and includes the following errors:'
+        )
+        for error in ex.failure.errors:
+            print(f'\tError with message "{error.message}".')
+            if error.location:
+                for field_path_element in error.location.field_path_elements:
+                    print(f"\t\tOn field: {field_path_element.field_name}")
+        sys.exit(1)

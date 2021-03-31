@@ -21,45 +21,31 @@ from unittest import TestCase
 
 import mock
 
-from google.ads.google_ads import client as Client
-from google.ads.google_ads.interceptors import LoggingInterceptor
-import google.ads.google_ads.interceptors.logging_interceptor as interceptor_module
+from google.ads.googleads import client as Client
+from google.ads.googleads.interceptors import LoggingInterceptor
+import google.ads.googleads.interceptors.logging_interceptor as interceptor_module
 
 
 default_version = Client._DEFAULT_VERSION
+module_prefix = f"google.ads.googleads.{default_version}"
 
-customer_service_pb2 = import_module(
-    f"google.ads.google_ads.{default_version}"
-    ".proto.services.customer_service_pb2"
+customer_service = import_module(
+    f"{module_prefix}.services.types.customer_service"
 )
-
-google_ads_service_pb2 = import_module(
-    f"google.ads.google_ads.{default_version}"
-    ".proto.services.google_ads_service_pb2"
+google_ads_service = import_module(
+    f"{module_prefix}.services.types.google_ads_service"
 )
-
-customer_user_access_service_pb2 = import_module(
-    f"google.ads.google_ads.{default_version}"
-    ".proto.services.customer_user_access_service_pb2"
+customer_user_access_service = import_module(
+    f"{module_prefix}.services.types.customer_user_access_service"
 )
-
-customer_user_access_pb2 = import_module(
-    f"google.ads.google_ads.{default_version}"
-    ".proto.resources.customer_user_access_pb2"
+customer_user_access = import_module(
+    f"{module_prefix}.resources.types.customer_user_access"
 )
-
-customer_user_access_invitation_pb2 = import_module(
-    f"google.ads.google_ads.{default_version}"
-    ".proto.resources.customer_user_access_invitation_pb2"
+customer_user_access_invitation = import_module(
+    f"{module_prefix}.resources.types.customer_user_access_invitation"
 )
-
-change_event_pb2 = import_module(
-    f"google.ads.google_ads.{default_version}.proto.resources.change_event_pb2"
-)
-
-feed_pb2 = import_module(
-    f"google.ads.google_ads.{default_version}.proto.resources.feed_pb2"
-)
+change_event = import_module(f"{module_prefix}.resources.types.change_event")
+feed = import_module(f"{module_prefix}.resources.types.feed")
 
 
 class LoggingInterceptorTest(TestCase):
@@ -79,7 +65,7 @@ class LoggingInterceptorTest(TestCase):
     _MOCK_ERROR_MESSAGE = "Test error message"
     _MOCK_TRANSPORT_ERROR_MESSAGE = "Received RST_STREAM with error code 2"
     _MOCK_DEBUG_ERROR_STRING = '{"description":"Error received from peer"}'
-    _MOCK_RESPONSE_MSG = google_ads_service_pb2.SearchGoogleAdsResponse()
+    _MOCK_RESPONSE_MSG = google_ads_service.SearchGoogleAdsResponse()
     _MOCK_EXCEPTION = mock.Mock()
     _MOCK_ERROR = mock.Mock()
     _MOCK_FAILURE = mock.Mock()
@@ -297,7 +283,7 @@ class LoggingInterceptorTest(TestCase):
         mock_trailing_metadata = mock_response.trailing_metadata()
 
         with mock.patch("logging.config.dictConfig"), mock.patch(
-            "google.ads.google_ads.client._logger"
+            "google.ads.googleads.client._logger"
         ) as mock_logger:
             interceptor = self._create_test_interceptor(logger=mock_logger)
             interceptor.intercept_unary_unary(
@@ -351,7 +337,7 @@ class LoggingInterceptorTest(TestCase):
         mock_continuation_fn = mock.Mock(return_value=mock_response)
 
         with mock.patch("logging.config.dictConfig"), mock.patch(
-            "google.ads.google_ads.client._logger"
+            "google.ads.googleads.client._logger"
         ) as mock_logger:
             interceptor = self._create_test_interceptor(logger=mock_logger)
             interceptor.intercept_unary_stream(
@@ -398,7 +384,7 @@ class LoggingInterceptorTest(TestCase):
         mock_request = self._get_mock_request()
 
         with mock.patch("logging.config.dictConfig"), mock.patch(
-            "google.ads.google_ads.client._logger"
+            "google.ads.googleads.client._logger"
         ) as mock_logger:
             interceptor = self._create_test_interceptor(logger=mock_logger)
             mock_response = interceptor.intercept_unary_unary(
@@ -453,7 +439,7 @@ class LoggingInterceptorTest(TestCase):
         mock_continuation_fn = mock.Mock(return_value=mock_response)
 
         with mock.patch("logging.config.dictConfig"), mock.patch(
-            "google.ads.google_ads.client._logger"
+            "google.ads.googleads.client._logger"
         ) as mock_logger:
             interceptor = self._create_test_interceptor(logger=mock_logger)
             mock_response = interceptor.intercept_unary_stream(
@@ -638,7 +624,7 @@ class LoggingInterceptorTest(TestCase):
     def test_get_customer_id_from_resource_name(self):
         """Retrieves a customer_id from a request object via resource_name."""
         resource_name = f"customers/{self._MOCK_CUSTOMER_ID}"
-        mock_request = customer_service_pb2.GetCustomerRequest(
+        mock_request = customer_service.GetCustomerRequest(
             resource_name=resource_name
         )
         interceptor = self._create_test_interceptor()
@@ -649,7 +635,7 @@ class LoggingInterceptorTest(TestCase):
     def test_get_customer_id_from_invalid_resource_name(self):
         """Returns None for a resource_name not starting with 'customers'."""
         resource_name = f"languageConstants/{self._MOCK_CUSTOMER_ID}"
-        mock_request = customer_service_pb2.GetCustomerRequest(
+        mock_request = customer_service.GetCustomerRequest(
             resource_name=resource_name
         )
         interceptor = self._create_test_interceptor()
@@ -657,14 +643,14 @@ class LoggingInterceptorTest(TestCase):
 
     def test_copy_message(self):
         """Creates a copy of the given message."""
-        message = customer_user_access_pb2.CustomerUserAccess()
+        message = customer_user_access.CustomerUserAccess()
         copy = interceptor_module._copy_message(message)
         self.assertIsInstance(copy, message.__class__)
         self.assertIsNot(message, copy)
 
     def test_mask_message_fields(self):
         """Returns a copy of the message with named fields masked."""
-        message = customer_user_access_pb2.CustomerUserAccess()
+        message = customer_user_access.CustomerUserAccess()
         message.email_address = "test@test.com"
         message.inviter_user_email_address = "inviter@test.com"
         copy = interceptor_module._mask_message_fields(
@@ -677,9 +663,9 @@ class LoggingInterceptorTest(TestCase):
 
     def test_mask_message_fields_nested(self):
         """Masks nested fields on an object."""
-        message = customer_user_access_service_pb2.MutateCustomerUserAccessRequest(
-            operation=customer_user_access_service_pb2.CustomerUserAccessOperation(
-                update=customer_user_access_pb2.CustomerUserAccess(
+        message = customer_user_access_service.MutateCustomerUserAccessRequest(
+            operation=customer_user_access_service.CustomerUserAccessOperation(
+                update=customer_user_access.CustomerUserAccess(
                     email_address="test@test.com",
                     inviter_user_email_address="inviter@test.com",
                 )
@@ -702,17 +688,15 @@ class LoggingInterceptorTest(TestCase):
 
     def test_mask_message_fields_unset_field(self):
         """Field is not masked if it is not set."""
-        message = customer_user_access_pb2.CustomerUserAccess()
+        message = customer_user_access.CustomerUserAccess()
         copy = interceptor_module._mask_message_fields(
             ["email_address"], message, "REDACTED"
         )
-        self.assertFalse(copy.HasField("email_address"))
+        self.assertFalse("email_address" in copy)
 
     def test_mask_message_fields_unset_nested(self):
         """Nested field is not masked if it is not set."""
-        message = (
-            customer_user_access_service_pb2.MutateCustomerUserAccessRequest()
-        )
+        message = customer_user_access_service.MutateCustomerUserAccessRequest()
         copy = interceptor_module._mask_message_fields(
             [
                 "operation.update.email_address",
@@ -721,34 +705,32 @@ class LoggingInterceptorTest(TestCase):
             message,
             "REDACTED",
         )
-        self.assertFalse(copy.operation.update.HasField("email_address"))
-        self.assertFalse(
-            copy.operation.update.HasField("inviter_user_email_address")
-        )
+        self.assertFalse("email_address" in copy.operation.update)
+        self.assertFalse("inviter_user_email_address" in copy.operation.update)
 
     def test_mask_message_fields_bad_field_name(self):
         """No error is raised if a given field is not defined on the message."""
-        message = customer_user_access_pb2.CustomerUserAccess()
+        message = customer_user_access.CustomerUserAccess()
         copy = interceptor_module._mask_message_fields(
             ["bad_name"], message, "REDACTED"
         )
-        self.assertFalse(copy.HasField("email_address"))
-        self.assertFalse(copy.HasField("inviter_user_email_address"))
+        self.assertFalse("email_address" in copy)
+        self.assertFalse("inviter_user_email_address" in copy)
 
     def test_mask_message_fields_bad_nested_field_name(self):
         """No error is raised if a nested field is not defined."""
-        message = customer_user_access_pb2.CustomerUserAccess()
+        message = customer_user_access.CustomerUserAccess()
         copy = interceptor_module._mask_message_fields(
             ["bad_name.another_bad.yet_another"], message, "REDACTED"
         )
-        self.assertFalse(copy.HasField("email_address"))
-        self.assertFalse(copy.HasField("inviter_user_email_address"))
+        self.assertFalse("email_address" in copy)
+        self.assertFalse("inviter_user_email_address" in copy)
 
     def test_mask_search_google_ads_response(self):
         """Copies and masks a SearchGoogleAdsResponse message instance."""
-        response = google_ads_service_pb2.SearchGoogleAdsResponse()
-        row = google_ads_service_pb2.GoogleAdsRow(
-            customer_user_access=customer_user_access_pb2.CustomerUserAccess(
+        response = google_ads_service.SearchGoogleAdsResponse()
+        row = google_ads_service.GoogleAdsRow(
+            customer_user_access=customer_user_access.CustomerUserAccess(
                 email_address="test@test.com"
             )
         )
@@ -762,9 +744,9 @@ class LoggingInterceptorTest(TestCase):
 
     def test_mask_search_google_ads_stream_response(self):
         """Copies and masks a SearchGoogleAdsStreamResponse message instance."""
-        response = google_ads_service_pb2.SearchGoogleAdsStreamResponse()
-        row = google_ads_service_pb2.GoogleAdsRow(
-            customer_user_access=customer_user_access_pb2.CustomerUserAccess(
+        response = google_ads_service.SearchGoogleAdsStreamResponse()
+        row = google_ads_service.GoogleAdsRow(
+            customer_user_access=customer_user_access.CustomerUserAccess(
                 email_address="test@test.com"
             )
         )
@@ -778,11 +760,9 @@ class LoggingInterceptorTest(TestCase):
 
     def test_mask_search_change_event(self):
         """Masks ChangeEvent messages found on a SearchStream response."""
-        response = google_ads_service_pb2.SearchGoogleAdsStreamResponse()
-        row = google_ads_service_pb2.GoogleAdsRow(
-            change_event=change_event_pb2.ChangeEvent(
-                user_email="test@test.com"
-            )
+        response = google_ads_service.SearchGoogleAdsStreamResponse()
+        row = google_ads_service.GoogleAdsRow(
+            change_event=change_event.ChangeEvent(user_email="test@test.com")
         )
         response.results.append(row)
         copy = interceptor_module._mask_message(response, "REDACTED")
@@ -790,10 +770,10 @@ class LoggingInterceptorTest(TestCase):
 
     def test_mask_search_places_location_feed_data(self):
         """Masks Feed.places_location_feed_data on a SearchStream response."""
-        response = google_ads_service_pb2.SearchGoogleAdsStreamResponse()
-        row = google_ads_service_pb2.GoogleAdsRow(
-            feed=feed_pb2.Feed(
-                places_location_feed_data=feed_pb2.Feed.PlacesLocationFeedData(
+        response = google_ads_service.SearchGoogleAdsStreamResponse()
+        row = google_ads_service.GoogleAdsRow(
+            feed=feed.Feed(
+                places_location_feed_data=feed.Feed.PlacesLocationFeedData(
                     email_address="test@test.com"
                 )
             )
@@ -807,23 +787,23 @@ class LoggingInterceptorTest(TestCase):
 
     def test_mask_customer_user_access(self):
         """Copies and masks a CustomerUserAccess message instance."""
-        customer_user_access = customer_user_access_pb2.CustomerUserAccess(
+        customer_user_access_obj = customer_user_access.CustomerUserAccess(
             email_address="test@test.com",
             inviter_user_email_address="inviter@test.com",
         )
         copy = interceptor_module._mask_message(
-            customer_user_access, "REDACTED"
+            customer_user_access_obj, "REDACTED"
         )
-        self.assertIsInstance(copy, customer_user_access.__class__)
-        self.assertIsNot(copy, customer_user_access)
+        self.assertIsInstance(copy, customer_user_access_obj.__class__)
+        self.assertIsNot(copy, customer_user_access_obj)
         self.assertEqual(copy.email_address, "REDACTED")
         self.assertEqual(copy.inviter_user_email_address, "REDACTED")
 
     def test_mask_mutate_customer_user_access_request(self):
         """Copies and masks a MutateCustomerUserAccessRequest instance."""
-        request = customer_user_access_service_pb2.MutateCustomerUserAccessRequest(
-            operation=customer_user_access_service_pb2.CustomerUserAccessOperation(
-                update=customer_user_access_pb2.CustomerUserAccess(
+        request = customer_user_access_service.MutateCustomerUserAccessRequest(
+            operation=customer_user_access_service.CustomerUserAccessOperation(
+                update=customer_user_access.CustomerUserAccess(
                     email_address="test@test.com",
                     inviter_user_email_address="inviter@test.com",
                 )
@@ -839,7 +819,7 @@ class LoggingInterceptorTest(TestCase):
 
     def test_mask_create_customer_client_request(self):
         """Copies and masks a CreateCustomerClientRequest instance."""
-        request = customer_service_pb2.CreateCustomerClientRequest(
+        request = customer_service.CreateCustomerClientRequest(
             email_address="test@test.com",
         )
         copy = interceptor_module._mask_message(request, "REDACTED")
@@ -849,8 +829,8 @@ class LoggingInterceptorTest(TestCase):
 
     def test_mask_places_location_feed_data(self):
         """Copies and masks a PlacesLocationFeedData instance."""
-        message = feed_pb2.Feed(
-            places_location_feed_data=feed_pb2.Feed.PlacesLocationFeedData(
+        message = feed.Feed(
+            places_location_feed_data=feed.Feed.PlacesLocationFeedData(
                 email_address="test@test.com"
             )
         )
@@ -863,7 +843,7 @@ class LoggingInterceptorTest(TestCase):
 
     def test_mask_customer_user_access_invitation_email(self):
         """Copies and masks a CustomerUserAccessInvitation instance."""
-        message = customer_user_access_invitation_pb2.CustomerUserAccessInvitation(
+        message = customer_user_access_invitation.CustomerUserAccessInvitation(
             email_address="test@test.com"
         )
         copy = interceptor_module._mask_message(message, "REDACTED")

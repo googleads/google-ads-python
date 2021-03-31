@@ -19,34 +19,29 @@ import argparse
 import sys
 import uuid
 
-import google.ads.google_ads.client
+from google.ads.googleads.client import GoogleAdsClient
+from google.ads.googleads.errors import GoogleAdsException
 
 
 # [START add_conversion_action]
 def main(client, customer_id):
-    conversion_action_service = client.get_service(
-        "ConversionActionService", version="v6"
-    )
+    conversion_action_service = client.get_service("ConversionActionService")
 
     # Create the operation.
-    conversion_action_operation = client.get_type(
-        "ConversionActionOperation", version="v6"
-    )
+    conversion_action_operation = client.get_type("ConversionActionOperation")
 
     # Create conversion action.
     conversion_action = conversion_action_operation.create
-    conversion_action.name = (
-        "Earth to Mars Cruises Conversion %s" % uuid.uuid4()
-    )
-    conversion_action.type = client.get_type(
+    conversion_action.name = f"Earth to Mars Cruises Conversion {uuid.uuid4()}"
+    conversion_action.type_ = client.get_type(
         "ConversionActionTypeEnum"
-    ).UPLOAD_CLICKS
+    ).ConversionActionType.UPLOAD_CLICKS
     conversion_action.category = client.get_type(
         "ConversionActionCategoryEnum"
-    ).DEFAULT
+    ).ConversionActionCategory.DEFAULT
     conversion_action.status = client.get_type(
         "ConversionActionStatusEnum"
-    ).ENABLED
+    ).ConversionActionStatus.ENABLED
     conversion_action.view_through_lookback_window_days = 15
 
     # Create a value settings object.
@@ -55,25 +50,16 @@ def main(client, customer_id):
     value_settings.always_use_default_value = True
 
     # Add the conversion action.
-    try:
-        conversion_action_response = conversion_action_service.mutate_conversion_actions(
-            customer_id, [conversion_action_operation]
+    conversion_action_response = (
+        conversion_action_service.mutate_conversion_actions(
+            customer_id=customer_id,
+            operations=[conversion_action_operation],
         )
-    except google.ads.google_ads.errors.GoogleAdsException as ex:
-        print(
-            'Request with ID "%s" failed with status "%s" and includes the '
-            "following errors:" % (ex.request_id, ex.error.code().name)
-        )
-        for error in ex.failure.errors:
-            print('\tError with message "%s".' % error.message)
-            if error.location:
-                for field_path_element in error.location.field_path_elements:
-                    print("\t\tOn field: %s" % field_path_element.field_name)
-        sys.exit(1)
+    )
 
     print(
-        'Created conversion action "%s".'
-        % conversion_action_response.results[0].resource_name
+        "Created conversion action "
+        f'"{conversion_action_response.results[0].resource_name}".'
     )
     # [END add_conversion_action]
 
@@ -81,9 +67,7 @@ def main(client, customer_id):
 if __name__ == "__main__":
     # GoogleAdsClient will read the google-ads.yaml configuration file in the
     # home directory if none is specified.
-    google_ads_client = (
-        google.ads.google_ads.client.GoogleAdsClient.load_from_storage()
-    )
+    googleads_client = GoogleAdsClient.load_from_storage(version="v6")
 
     parser = argparse.ArgumentParser(
         description="Adds a conversion action for specified customer."
@@ -98,4 +82,16 @@ if __name__ == "__main__":
     )
     args = parser.parse_args()
 
-    main(google_ads_client, args.customer_id)
+    try:
+        main(googleads_client, args.customer_id)
+    except GoogleAdsException as ex:
+        print(
+            f'Request with ID "{ex.request_id}" failed with status '
+            f'"{ex.error.code().name}" and includes the following errors:'
+        )
+        for error in ex.failure.errors:
+            print(f'	Error with message "{error.message}".')
+            if error.location:
+                for field_path_element in error.location.field_path_elements:
+                    print(f"\t\tOn field: {field_path_element.field_name}")
+        sys.exit(1)

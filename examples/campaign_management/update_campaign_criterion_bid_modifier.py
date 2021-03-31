@@ -17,44 +17,33 @@
 import argparse
 import sys
 
-from google.ads.google_ads.client import GoogleAdsClient
-from google.ads.google_ads.errors import GoogleAdsException
+from google.ads.googleads.client import GoogleAdsClient
+from google.ads.googleads.errors import GoogleAdsException
 from google.api_core import protobuf_helpers
 
 
 def main(client, customer_id, campaign_id, criterion_id, bid_modifier_value):
-    campaign_criterion_service = client.get_service(
-        "CampaignCriterionService", version="v6"
-    )
+    campaign_criterion_service = client.get_service("CampaignCriterionService")
 
     criterion_rname = campaign_criterion_service.campaign_criterion_path(
         customer_id, campaign_id, criterion_id
     )
 
-    campaign_criterion_operation = client.get_type(
-        "CampaignCriterionOperation", version="v6"
-    )
+    campaign_criterion_operation = client.get_type("CampaignCriterionOperation")
     campaign_criterion = campaign_criterion_operation.update
     campaign_criterion.resource_name = criterion_rname
     campaign_criterion.bid_modifier = bid_modifier_value
-    fm = protobuf_helpers.field_mask(None, campaign_criterion)
-    campaign_criterion_operation.update_mask.CopyFrom(fm)
+    client.copy_from(
+        campaign_criterion_operation.update_mask,
+        protobuf_helpers.field_mask(None, campaign_criterion._pb),
+    )
 
-    try:
-        campaign_criterion_response = campaign_criterion_service.mutate_campaign_criteria(
-            customer_id, [campaign_criterion_operation]
+    campaign_criterion_response = (
+        campaign_criterion_service.mutate_campaign_criteria(
+            customer_id=customer_id,
+            operations=[campaign_criterion_operation],
         )
-    except GoogleAdsException as ex:
-        print(
-            f'Request with ID "{ex.request_id}" failed with status '
-            f'"{ex.error.code().name}" and includes the following errors:'
-        )
-        for error in ex.failure.errors:
-            print(f'\tError with message "{error.message}".')
-            if error.location:
-                for field_path_element in error.location.field_path_elements:
-                    print(f"\t\tOn field: {field_path_element.field_name}")
-        sys.exit(1)
+    )
 
     print(
         "Campaign criterion with resource name "
@@ -66,7 +55,7 @@ def main(client, customer_id, campaign_id, criterion_id, bid_modifier_value):
 if __name__ == "__main__":
     # GoogleAdsClient will read the google-ads.yaml configuration file in the
     # home directory if none is specified.
-    google_ads_client = GoogleAdsClient.load_from_storage()
+    googleads_client = GoogleAdsClient.load_from_storage(version="v6")
 
     parser = argparse.ArgumentParser(
         description=(
@@ -83,10 +72,14 @@ if __name__ == "__main__":
         help="The Google Ads customer ID.",
     )
     parser.add_argument(
-        "--campaign_id", type=str, required=True, help="The campaign ID."
+        "-i", "--campaign_id", type=str, required=True, help="The campaign ID."
     )
     parser.add_argument(
-        "--criterion_id", type=str, required=True, help="The criterion ID."
+        "-k",
+        "--criterion_id",
+        type=str,
+        required=True,
+        help="The criterion ID.",
     )
     parser.add_argument(
         "-b",
@@ -97,10 +90,22 @@ if __name__ == "__main__":
     )
     args = parser.parse_args()
 
-    main(
-        google_ads_client,
+    try:
+        main(
+        googleads_client,
         args.customer_id,
         args.campaign_id,
         args.criterion_id,
         args.bid_modifier_value,
     )
+    except GoogleAdsException as ex:
+        print(
+            f'Request with ID "{ex.request_id}" failed with status '
+            f'"{ex.error.code().name}" and includes the following errors:'
+        )
+        for error in ex.failure.errors:
+            print(f'	Error with message "{error.message}".')
+            if error.location:
+                for field_path_element in error.location.field_path_elements:
+                    print(f"\t\tOn field: {field_path_element.field_name}")
+        sys.exit(1)

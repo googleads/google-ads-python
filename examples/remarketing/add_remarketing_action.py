@@ -23,7 +23,8 @@ import argparse
 import sys
 from uuid import uuid4
 
-import google.ads.google_ads.client
+from google.ads.googleads.client import GoogleAdsClient
+from google.ads.googleads.errors import GoogleAdsException
 
 
 def main(client, customer_id, page_size):
@@ -37,26 +38,25 @@ def main(client, customer_id, page_size):
         client, customer_id, remarketing_action_resource_name, page_size
     )
 
-    _print_remarketing_action_attributes(client, queried_remarketing_action)
+    _print_remarketing_action_attributes(queried_remarketing_action)
 
 
 # [START add_remarketing_action_1]
 def _add_remarketing_action(client, customer_id):
-    remarketing_action_service = client.get_service(
-        "RemarketingActionService", version="v6"
-    )
-    remarketing_action_operation = client.get_type(
-        "RemarketingActionOperation", version="v6"
-    )
+    remarketing_action_service = client.get_service("RemarketingActionService")
+    remarketing_action_operation = client.get_type("RemarketingActionOperation")
 
     remarketing_action = remarketing_action_operation.create
     remarketing_action.name = f"Remarketing action #{uuid4()}"
 
     try:
-        remarketing_action_response = remarketing_action_service.mutate_remarketing_actions(
-            customer_id, [remarketing_action_operation]
+        remarketing_action_response = (
+            remarketing_action_service.mutate_remarketing_actions(
+                customer_id=customer_id,
+                operations=[remarketing_action_operation],
+            )
         )
-    except google.ads.google_ads.errors.GoogleAdsException as ex:
+    except GoogleAdsException as ex:
         print(
             f'Request with ID "{ex.request_id}" failed with status '
             f'"{ex.error.code().name}" and includes the following errors:'
@@ -73,8 +73,17 @@ def _add_remarketing_action(client, customer_id):
 
 
 def _query_remarketing_action(client, customer_id, resource_name, page_size):
-    # Creates a query that retrieves the previously created remarketing action
-    # with its generated tag snippets.
+    """Retrieves the previously created remarketing action with tag snippets.
+
+    Args:
+      client: the Google Ads client
+      customer_id: the Google Ads customer ID
+      resource_name: the resource name of the remarketing action to query
+      page_size: the number of rows to return per page
+
+    Returns:
+      the found remarketing action
+    """
     # [START add_remarketing_action]
     query = f"""
         SELECT
@@ -85,17 +94,18 @@ def _query_remarketing_action(client, customer_id, resource_name, page_size):
         WHERE remarketing_action.resource_name = '{resource_name}'"""
     # [END add_remarketing_action]
 
-    google_ads_service_client = client.get_service(
-        "GoogleAdsService", version="v6"
-    )
+    googleads_service_client = client.get_service("GoogleAdsService")
+    search_request = client.get_type("SearchGoogleAdsRequest")
 
-    results = google_ads_service_client.search(
-        customer_id, query=query, page_size=page_size
-    )
+    search_request.customer_id = customer_id
+    search_request.query = query
+    search_request.page_size = page_size
+
+    results = googleads_service_client.search(search_request)
 
     try:
         return list(results)[0].remarketing_action
-    except google.ads.google_ads.errors.GoogleAdsException as ex:
+    except GoogleAdsException as ex:
         print(
             f'Request with ID "{ex.request_id}" failed with status '
             f'"{ex.error.code().name}" and includes the following errors:'
@@ -108,14 +118,7 @@ def _query_remarketing_action(client, customer_id, resource_name, page_size):
         sys.exit(1)
 
 
-def _print_remarketing_action_attributes(client, remarketing_action):
-    tracking_code_type_enum = client.get_type(
-        "TrackingCodeTypeEnum", version="v6"
-    ).TrackingCodeType
-    tracking_code_page_format_enum = client.get_type(
-        "TrackingCodePageFormatEnum", version="v6"
-    ).TrackingCodePageFormat
-
+def _print_remarketing_action_attributes(remarketing_action):
     print(
         f"Remarketing action has ID {remarketing_action.id} and name "
         f'"{remarketing_action.name}". \nIt has the following '
@@ -123,10 +126,8 @@ def _print_remarketing_action_attributes(client, remarketing_action):
     )
 
     for tag_snippet in remarketing_action.tag_snippets:
-        tracking_code_type = tracking_code_type_enum.Name(tag_snippet.type)
-        tracking_code_page_format = tracking_code_page_format_enum.Name(
-            tag_snippet.page_format
-        )
+        tracking_code_type = tag_snippet.type_.name
+        tracking_code_page_format = tag_snippet.page_format.name
 
         print("=" * 80)
         print(
@@ -142,9 +143,7 @@ def _print_remarketing_action_attributes(client, remarketing_action):
 if __name__ == "__main__":
     # GoogleAdsClient will read the google-ads.yaml configuration file in the
     # home directory if none is specified.
-    google_ads_client = (
-        google.ads.google_ads.client.GoogleAdsClient.load_from_storage()
-    )
+    googleads_client = GoogleAdsClient.load_from_storage(version="v6")
 
     parser = argparse.ArgumentParser(
         description="Adds a remarketing action for specified customer."
@@ -167,4 +166,4 @@ if __name__ == "__main__":
     )
     args = parser.parse_args()
 
-    main(google_ads_client, args.customer_id, args.page_size)
+    main(googleads_client, args.customer_id, args.page_size)

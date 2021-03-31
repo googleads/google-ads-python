@@ -21,8 +21,8 @@ To set up a conversion action, run the add_conversion_action.py example.
 import argparse
 import sys
 
-from google.ads.google_ads.client import GoogleAdsClient
-from google.ads.google_ads.errors import GoogleAdsException
+from google.ads.googleads.client import GoogleAdsClient
+from google.ads.googleads.errors import GoogleAdsException
 
 
 # [START upload_conversion_adjustment]
@@ -36,27 +36,24 @@ def main(
     adjustment_date_time,
     restatement_value,
 ):
-    # Determine the adjustment type.
     conversion_adjustment_type_enum = client.get_type(
         "ConversionAdjustmentTypeEnum"
     )
-    if adjustment_type.lower() == "retraction":
-        conversion_adjustment_type = conversion_adjustment_type_enum.RETRACTION
-    elif adjustment_type.lower() == "restatement":
-        conversion_adjustment_type = conversion_adjustment_type_enum.RESTATEMENT
-    else:
-        raise ValueError("Invalid adjustment type specified.")
+    # Determine the adjustment type.
+    conversion_adjustment_type = (
+        conversion_adjustment_type_enum._pb.ConversionAdjustmentType.Value(
+            adjustment_type
+        )
+    )
 
     # Associates conversion adjustments with the existing conversion action.
     # The GCLID should have been uploaded before with a conversion
-    conversion_adjustment = client.get_type(
-        "ConversionAdjustment", version="v6"
-    )
-    conversion_action_service = client.get_service(
-        "ConversionActionService", version="v6"
-    )
-    conversion_adjustment.conversion_action = conversion_action_service.conversion_action_path(
-        customer_id, conversion_action_id
+    conversion_adjustment = client.get_type("ConversionAdjustment")
+    conversion_action_service = client.get_service("ConversionActionService")
+    conversion_adjustment.conversion_action = (
+        conversion_action_service.conversion_action_path(
+            customer_id, conversion_action_id
+        )
     )
     conversion_adjustment.adjustment_type = conversion_adjustment_type
     conversion_adjustment.adjustment_date_time = adjustment_date_time
@@ -71,46 +68,39 @@ def main(
     if (
         restatement_value
         and conversion_adjustment_type
-        == conversion_adjustment_type_enum.RESTATEMENT
+        == conversion_adjustment_type_enum.ConversionAdjustmentType.RESTATEMENT
     ):
         conversion_adjustment.restatement_value.adjusted_value = float(
             restatement_value
         )
 
     conversion_adjustment_upload_service = client.get_service(
-        "ConversionAdjustmentUploadService", version="v6"
+        "ConversionAdjustmentUploadService"
     )
-    try:
-        response = conversion_adjustment_upload_service.upload_conversion_adjustments(
-            customer_id, [conversion_adjustment], partial_failure=True
+    request = client.get_type("UploadConversionAdjustmentsRequest")
+    request.customer_id = customer_id
+    request.conversion_adjustments = [conversion_adjustment]
+    request.partial_failure = True
+    response = (
+        conversion_adjustment_upload_service.upload_conversion_adjustments(
+            request=request,
         )
-        conversion_adjustment_result = response.results[0]
-        print(
-            f"Uploaded conversion that occurred at "
-            f'"{conversion_adjustment_result.adjustment_date_time}" '
-            f"from Gclid "
-            f'"{conversion_adjustment_result.gclid_date_time_pair.gclid}" '
-            f'to "{conversion_adjustment_result.conversion_action}"'
-        )
-
-    except GoogleAdsException as ex:
-        print(
-            f'Request with ID "{ex.request_id}" failed with status '
-            f'"{ex.error.code().name}" and includes the following errors:'
-        )
-        for error in ex.failure.errors:
-            print(f'\tError with message "{error.message}".')
-            if error.location:
-                for field_path_element in error.location.field_path_elements:
-                    print(f"\t\tOn field: {field_path_element.field_name}")
-        sys.exit(1)
-        # [END upload_conversion_adjustment]
+    )
+    conversion_adjustment_result = response.results[0]
+    print(
+        f"Uploaded conversion that occurred at "
+        f'"{conversion_adjustment_result.adjustment_date_time}" '
+        f"from Gclid "
+        f'"{conversion_adjustment_result.gclid_date_time_pair.gclid}"'
+        f' to "{conversion_adjustment_result.conversion_action}"'
+    )
+    # [END upload_conversion_adjustment]
 
 
 if __name__ == "__main__":
     # GoogleAdsClient will read the google-ads.yaml configuration file in the
     # home directory if none is specified.
-    google_ads_client = GoogleAdsClient.load_from_storage()
+    googleads_client = GoogleAdsClient.load_from_storage(version="v6")
 
     parser = argparse.ArgumentParser(
         description="Uploads a conversion adjustment."
@@ -142,6 +132,9 @@ if __name__ == "__main__":
         "--adjustment_type",
         type=str,
         required=True,
+        choices=googleads_client.get_type(
+            "ConversionAdjustmentTypeEnum"
+        )._pb.ConversionAdjustmentType.keys(),
         help="The Adjustment type, e.g. " "RETRACTION, RESTATEMENT",
     )
     parser.add_argument(
@@ -175,13 +168,25 @@ if __name__ == "__main__":
     )
     args = parser.parse_args()
 
-    main(
-        google_ads_client,
-        args.customer_id,
-        args.conversion_action_id,
-        args.gclid,
-        args.adjustment_type,
-        args.conversion_date_time,
-        args.adjustment_date_time,
-        args.restatement_value,
-    )
+    try:
+        main(
+            googleads_client,
+            args.customer_id,
+            args.conversion_action_id,
+            args.gclid,
+            args.adjustment_type,
+            args.conversion_date_time,
+            args.adjustment_date_time,
+            args.restatement_value,
+        )
+    except GoogleAdsException as ex:
+        print(
+            f'Request with ID "{ex.request_id}" failed with status '
+            f'"{ex.error.code().name}" and includes the following errors:'
+        )
+        for error in ex.failure.errors:
+            print(f'\tError with message "{error.message}".')
+            if error.location:
+                for field_path_element in error.location.field_path_elements:
+                    print(f"\t\tOn field: {field_path_element.field_name}")
+        sys.exit(1)

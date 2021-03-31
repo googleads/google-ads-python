@@ -22,8 +22,8 @@ import argparse
 import sys
 from uuid import uuid4
 
-from google.ads.google_ads.client import GoogleAdsClient
-from google.ads.google_ads.errors import GoogleAdsException
+from google.ads.googleads.client import GoogleAdsClient
+from google.ads.googleads.errors import GoogleAdsException
 
 
 def main(client, customer_id, user_list_ids):
@@ -35,67 +35,56 @@ def main(client, customer_id, user_list_ids):
         user_list_ids: A list of user list IDs to logically combine.
     """
     # Get the UserListService client.
-    user_list_service = client.get_service("UserListService", version="v6")
+    user_list_service = client.get_service("UserListService")
 
     # Add each of the provided list IDs to a list of rule operands specifying
     # which lists the operator should target.
     logical_user_list_operand_info_list = []
     for user_list_id in user_list_ids:
         logical_user_list_operand_info = client.get_type(
-            "LogicalUserListOperandInfo", version="v6"
+            "LogicalUserListOperandInfo"
         )
-        logical_user_list_operand_info.user_list = user_list_service.user_list_path(
-            customer_id, user_list_id
+        logical_user_list_operand_info.user_list = (
+            user_list_service.user_list_path(customer_id, user_list_id)
         )
         logical_user_list_operand_info_list.append(
             logical_user_list_operand_info
         )
 
     # Create a UserListOperation and populate the UserList.
-    user_list_operation = client.get_type("UserListOperation", version="v6")
+    user_list_operation = client.get_type("UserListOperation")
     user_list = user_list_operation.create
     user_list.name = f"My combination list of other user lists #{uuid4()}"
     # Create a UserListLogicalRuleInfo specifying that a user should be added to
     # the new list if they are present in any of the provided lists.
-    user_list_logical_rule_info = user_list.logical_user_list.rules.add()
+    user_list_logical_rule_info = client.get_type("UserListLogicalRuleInfo")
     # Using ANY means that a user should be added to the combined list if they
     # are present on any of the lists targeted in the
     # LogicalUserListOperandInfo. Use ALL to add users present on all of the
     # provided lists or NONE to add users that aren't present on any of the
     # targeted lists.
     user_list_logical_rule_info.operator = client.get_type(
-        "UserListLogicalRuleOperatorEnum", version="v6"
-    ).ANY
+        "UserListLogicalRuleOperatorEnum"
+    ).UserListLogicalRuleOperator.ANY
     user_list_logical_rule_info.rule_operands.extend(
         logical_user_list_operand_info_list
     )
+    user_list.logical_user_list.rules.append(user_list_logical_rule_info)
 
-    try:
-        # Issue a mutate request to add the user list, then print the results.
-        response = user_list_service.mutate_user_lists(
-            customer_id, [user_list_operation]
-        )
-        print(
-            "Created logical user list with resource name "
-            f"'{response.results[0].resource_name}.'"
-        )
-    except GoogleAdsException as ex:
-        print(
-            f"Request with ID '{ex.request_id}' failed with status "
-            f"'{ex.error.code().name}' and includes the following errors:"
-        )
-        for error in ex.failure.errors:
-            print(f"\tError with message '{error.message}'.")
-            if error.location:
-                for field_path_element in error.location.field_path_elements:
-                    print(f"\t\tOn field: {field_path_element.field_name}")
-        sys.exit(1)
+    # Issue a mutate request to add the user list, then print the results.
+    response = user_list_service.mutate_user_lists(
+        customer_id=customer_id, operations=[user_list_operation]
+    )
+    print(
+        "Created logical user list with resource name "
+        f"'{response.results[0].resource_name}.'"
+    )
 
 
 if __name__ == "__main__":
     # GoogleAdsClient will read the google-ads.yaml configuration file in the
     # home directory if none is specified.
-    google_ads_client = GoogleAdsClient.load_from_storage()
+    googleads_client = GoogleAdsClient.load_from_storage(version="v6")
 
     parser = argparse.ArgumentParser(
         description="Creates a combination user list containing users that are "
@@ -119,4 +108,16 @@ if __name__ == "__main__":
     )
     args = parser.parse_args()
 
-    main(google_ads_client, args.customer_id, args.user_list_ids)
+    try:
+        main(googleads_client, args.customer_id, args.user_list_ids)
+    except GoogleAdsException as ex:
+        print(
+            f'Request with ID "{ex.request_id}" failed with status '
+            f'"{ex.error.code().name}" and includes the following errors:'
+        )
+        for error in ex.failure.errors:
+            print(f'	Error with message "{error.message}".')
+            if error.location:
+                for field_path_element in error.location.field_path_elements:
+                    print(f"\t\tOn field: {field_path_element.field_name}")
+        sys.exit(1)

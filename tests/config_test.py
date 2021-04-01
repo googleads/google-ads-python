@@ -18,7 +18,7 @@ import os
 import yaml
 from pyfakefs.fake_filesystem_unittest import TestCase as FileTestCase
 
-from google.ads.google_ads import config
+from google.ads.googleads import config
 
 
 class ConfigTest(FileTestCase):
@@ -29,7 +29,7 @@ class ConfigTest(FileTestCase):
         self.client_secret = "client_secret_987654321"
         self.refresh_token = "refresh"
         self.login_customer_id = "1234567890"
-        self.linked_customer_id = "0983213218"
+        self.linked_customer_id = "0987654321"
         self.path_to_private_key_file = "/test/path/to/config.json"
         self.json_key_file_path = "/another/test/path/to/config.json"
         self.delegated_account = "delegated@account.com"
@@ -74,6 +74,17 @@ class ConfigTest(FileTestCase):
 
         self.assertEqual(result["developer_token"], self.developer_token)
         self.assertIsInstance(result["logging"], dict)
+
+    def test_load_from_yaml_file_logging_invalid_json(self):
+        file_path = os.path.join(os.path.expanduser("~"), "google-ads.yaml")
+        self.fs.create_file(
+            file_path,
+            contents=yaml.safe_dump(
+                {"developer_token": self.developer_token, "logging": "not JSON"}
+            ),
+        )
+
+        self.assertRaises(ValueError, config.load_from_yaml_file)
 
     def test_load_from_yaml_file(self):
         file_path = os.path.join(os.path.expanduser("~"), "google-ads.yaml")
@@ -207,7 +218,6 @@ class ConfigTest(FileTestCase):
 
     def test_load_from_yaml_file_secondary_service_account_keys(self):
         """Should convert secondary keys to primary keys.
-
         This test should be removed once the secondary service account keys
         are deprecated.
         """
@@ -326,8 +336,9 @@ class ConfigTest(FileTestCase):
             "GOOGLE_ADS_ENDPOINT": self.endpoint,
             "GOOGLE_ADS_LOGIN_CUSTOMER_ID": self.login_customer_id,
             "GOOGLE_ADS_LINKED_CUSTOMER_ID": self.linked_customer_id,
-            "GOOGLE_ADS_JSON_KEY_FILE_PATH": self.path_to_private_key_file,
-            "GOOGLE_ADS_IMPERSONATED_EMAIL": self.delegated_account,
+            "GOOGLE_ADS_LINKED_CUSTOMER_ID": self.linked_customer_id,
+            "GOOGLE_ADS_JSON_KEY_FILE_PATH": self.json_key_file_path,
+            "GOOGLE_ADS_IMPERSONATED_EMAIL": self.impersonated_email,
         }
 
         with mock.patch("os.environ", environ):
@@ -343,8 +354,8 @@ class ConfigTest(FileTestCase):
                     "endpoint": self.endpoint,
                     "login_customer_id": self.login_customer_id,
                     "linked_customer_id": self.linked_customer_id,
-                    "json_key_file_path": self.path_to_private_key_file,
-                    "impersonated_email": self.delegated_account,
+                    "json_key_file_path": self.json_key_file_path,
+                    "impersonated_email": self.impersonated_email,
                 },
             )
             config_spy.assert_called_once()
@@ -359,8 +370,8 @@ class ConfigTest(FileTestCase):
             "GOOGLE_ADS_LOGGING": '{"test": true}',
             "GOOGLE_ADS_ENDPOINT": self.endpoint,
             "GOOGLE_ADS_LOGIN_CUSTOMER_ID": self.login_customer_id,
-            "GOOGLE_ADS_JSON_KEY_FILE_PATH": self.path_to_private_key_file,
-            "GOOGLE_ADS_IMPERSONATED_EMAIL": self.delegated_account,
+            "GOOGLE_ADS_JSON_KEY_FILE_PATH": self.json_key_file_path,
+            "GOOGLE_ADS_IMPERSONATED_EMAIL": self.impersonated_email,
         }
 
         with mock.patch("os.environ", environ):
@@ -526,9 +537,19 @@ class ConfigTest(FileTestCase):
             ValueError, config.validate_login_customer_id, "123-456-7890"
         )
 
-    def test_validate_linked_customer_id_invalid(self):
+    def test_validate_login_customer_id_unicode(self):
         self.assertRaises(
-            ValueError, config.validate_linked_customer_id, "123-456-7890"
+            ValueError, config.validate_login_customer_id, "1230\u00B2"
+        )
+
+    def test_validate_login_customer_id_embedded(self):
+        self.assertRaises(
+            ValueError, config.validate_login_customer_id, "abc1234567890def"
+        )
+
+    def test_validate_login_customer_id_negative(self):
+        self.assertRaises(
+            ValueError, config.validate_login_customer_id, "-1234567890"
         )
 
     def test_validate_login_customer_id_too_short(self):

@@ -21,15 +21,15 @@
 import argparse
 import sys
 
-from google.ads.google_ads.client import GoogleAdsClient
-from google.ads.google_ads.errors import GoogleAdsException
+from google.ads.googleads.client import GoogleAdsClient
+from google.ads.googleads.errors import GoogleAdsException
 
 _DEFAULT_PAGE_SIZE = 1000
 
 
 # [START get_account_changes]
 def main(client, customer_id):
-    ads_service = client.get_service("GoogleAdsService", version="v6")
+    ads_service = client.get_service("GoogleAdsService")
 
     # Construct a query to find information about changed resources in your
     # account.
@@ -49,58 +49,43 @@ def main(client, customer_id):
         ORDER BY change_status.last_change_date_time
         LIMIT 10000"""
 
-    resource_type_enum = client.get_type(
-        "ChangeStatusResourceTypeEnum", version="v6"
-    ).ChangeStatusResourceType
-    change_status_op_enum = client.get_type(
-        "ChangeStatusOperationEnum", version="v6"
-    ).ChangeStatusOperation
+    search_request = client.get_type("SearchGoogleAdsRequest")
+    search_request.customer_id = customer_id
+    search_request.query = query
+    search_request.page_size = _DEFAULT_PAGE_SIZE
 
-    try:
-        response = ads_service.search(
-            customer_id, query=query, page_size=_DEFAULT_PAGE_SIZE
-        )
-        for row in response:
-            cs = row.change_status
-            resource_type = resource_type_enum.Name(cs.resource_type)
-            if resource_type == "AD_GROUP":
-                resource_name = cs.ad_group
-            if resource_type == "AD_GROUP_AD":
-                resource_name = cs.ad_group_ad
-            if resource_type == "AD_GROUP_CRITERION":
-                resource_name = cs.ad_group_criterion
-            if resource_type == "CAMPAIGN":
-                resource_name = cs.campaign
-            if resource_type == "CAMPAIGN_CRITERION":
-                resource_name = cs.campaign_criterion
-            else:
-                resource_name = "UNKNOWN"
+    response = ads_service.search(request=search_request)
 
-            resource_status = change_status_op_enum.Name(cs.resource_status)
-            print(
-                f"On '{cs.last_change_date_time}', change status "
-                f"'{cs.resource_name}' shows that a resource type of "
-                f"'{resource_type}' with resource name '{resource_name}' was "
-                f"{resource_status}"
-            )
-            # [END get_account_changes]
-    except GoogleAdsException as ex:
+    for row in response:
+        cs = row.change_status
+        resource_type = cs.resource_type.name
+        if resource_type == "AD_GROUP":
+            resource_name = cs.ad_group
+        if resource_type == "AD_GROUP_AD":
+            resource_name = cs.ad_group_ad
+        if resource_type == "AD_GROUP_CRITERION":
+            resource_name = cs.ad_group_criterion
+        if resource_type == "CAMPAIGN":
+            resource_name = cs.campaign
+        if resource_type == "CAMPAIGN_CRITERION":
+            resource_name = cs.campaign_criterion
+        else:
+            resource_name = "UNKNOWN"
+
+        resource_status = cs.resource_status.name
         print(
-            'Request with ID "%s" failed with status "%s" and includes the '
-            "following errors:" % (ex.request_id, ex.error.code().name)
+            f"On '{cs.last_change_date_time}', change status "
+            f"'{cs.resource_name}' shows that a resource type of "
+            f"'{resource_type}' with resource name '{resource_name}' was "
+            f"{resource_status}"
         )
-        for error in ex.failure.errors:
-            print('\tError with message "%s".' % error.message)
-            if error.location:
-                for field_path_element in error.location.field_path_elements:
-                    print("\t\tOn field: %s" % field_path_element.field_name)
-        sys.exit(1)
+        # [END get_account_changes]
 
 
 if __name__ == "__main__":
     # GoogleAdsClient will read a google-ads.yaml configuration file in the
     # home directory if none is specified.
-    google_ads_client = GoogleAdsClient.load_from_storage()
+    googleads_client = GoogleAdsClient.load_from_storage(version="v6")
 
     parser = argparse.ArgumentParser(
         description=(
@@ -117,4 +102,16 @@ if __name__ == "__main__":
     )
     args = parser.parse_args()
 
-    main(google_ads_client, args.customer_id)
+    try:
+        main(googleads_client, args.customer_id)
+    except GoogleAdsException as ex:
+        print(
+            f'Request with ID "{ex.request_id}" failed with status '
+            f'"{ex.error.code().name}" and includes the following errors:'
+        )
+        for error in ex.failure.errors:
+            print(f'\tError with message "{error.message}".')
+            if error.location:
+                for field_path_element in error.location.field_path_elements:
+                    print(f"\t\tOn field: {field_path_element.field_name}")
+        sys.exit(1)

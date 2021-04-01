@@ -21,8 +21,8 @@ To create a keyword plan, run the add_keyword_plan.py example.
 import argparse
 import sys
 
-from google.ads.google_ads.client import GoogleAdsClient
-from google.ads.google_ads.errors import GoogleAdsException
+from google.ads.googleads.client import GoogleAdsClient
+from google.ads.googleads.errors import GoogleAdsException
 
 
 # [START generate_forecast_metrics]
@@ -32,49 +32,33 @@ def main(client, customer_id, keyword_plan_id):
         customer_id, keyword_plan_id
     )
 
-    try:
-        response = keyword_plan_service.generate_forecast_metrics(resource_name)
-    except GoogleAdsException as ex:
-        print(
-            'Request with ID "{}" failed with status "%s" and includes the '
-            "following errors:".format(ex.request_id, ex.error.code().name)
-        )
-        for error in ex.failure.errors:
-            print('\tError with message "{}".'.format(error.message))
-            if error.location:
-                for field_path_element in error.location.field_path_elements:
-                    print(
-                        "\t\tOn field: {}".format(field_path_element.field_name)
-                    )
-        sys.exit(1)
+    response = keyword_plan_service.generate_forecast_metrics(
+        keyword_plan=resource_name
+    )
 
     for i, forecast in enumerate(response.keyword_forecasts):
-        print(
-            "#{} Keyword ID: {}".format(
-                i + 1, forecast.keyword_plan_ad_group_keyword
-            )
-        )
+        print(f"#{i+1} Keyword ID: {forecast.keyword_plan_ad_group_keyword}")
 
         metrics = forecast.keyword_forecast
 
         click_val = metrics.clicks
-        clicks = "{:.2f}".format(click_val) if click_val else "unspecified"
-        print("Estimated daily clicks: {}".format(clicks))
+        clicks = f"{click_val:.2f}" if click_val else "unspecified"
+        print(f"Estimated daily clicks: {clicks}")
 
         imp_val = metrics.impressions
-        impressions = "{:.2f}".format(imp_val) if imp_val else "unspecified"
-        print("Estimated daily impressions: {}".format(impressions))
+        impressions = f"{imp_val:.2f}" if imp_val else "unspecified"
+        print(f"Estimated daily impressions: {impressions}")
 
         cpc_val = metrics.average_cpc
-        cpc = "{:.2f}".format(cpc_val) if cpc_val else "unspecified"
-        print("Estimated average cpc: {}\n".format(cpc))
+        cpc = f"{cpc_val:.2f}" if cpc_val else "unspecified"
+        print(f"Estimated average cpc: {cpc}\n")
         # [END generate_forecast_metrics]
 
 
 if __name__ == "__main__":
     # GoogleAdsClient will read the google-ads.yaml configuration file in the
     # home directory if none is specified.
-    google_ads_client = GoogleAdsClient.load_from_storage()
+    googleads_client = GoogleAdsClient.load_from_storage(version="v6")
 
     parser = argparse.ArgumentParser(
         description="Generates forecast metrics for a keyword plan."
@@ -96,4 +80,16 @@ if __name__ == "__main__":
     )
     args = parser.parse_args()
 
-    main(google_ads_client, args.customer_id, args.keyword_plan_id)
+    try:
+        main(googleads_client, args.customer_id, args.keyword_plan_id)
+    except GoogleAdsException as ex:
+        print(
+            f'Request with ID "{ex.request_id}" failed with status '
+            f'"{ex.error.code().name}" and includes the following errors:'
+        )
+        for error in ex.failure.errors:
+            print(f'	Error with message "{error.message}".')
+            if error.location:
+                for field_path_element in error.location.field_path_elements:
+                    print(f"\t\tOn field: {field_path_element.field_name}")
+        sys.exit(1)

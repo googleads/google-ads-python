@@ -20,8 +20,10 @@ import argparse
 import sys
 from uuid import uuid4
 
-from google.ads.google_ads.client import GoogleAdsClient
-from google.ads.google_ads.errors import GoogleAdsException
+from google.ads.googleads.client import GoogleAdsClient
+from google.ads.googleads.errors import GoogleAdsException
+
+_DEFAULT_PAGE_SIZE = 10000
 
 
 def main(client, customer_id):
@@ -79,53 +81,58 @@ def _create_feed(client, customer_id):
     Returns:
         A str resource name of the newly created feed.
     """
-    feed_service = client.get_service("FeedService", version="v6")
+    feed_service = client.get_service("FeedService")
+    feed_attribute_type_enum = client.get_type(
+        "FeedAttributeTypeEnum"
+    ).FeedAttributeType
 
     # Creates the feed operation.
-    feed_operation = client.get_type("FeedOperation", version="v6")
+    feed_operation = client.get_type("FeedOperation")
 
     # Create the feed with feed attributes defined below.
     feed = feed_operation.create
     feed.name = f"Flights Feed #{uuid4()}"
 
     # Creates a flight description attribute.
-    flight_description_attribute = feed.attributes.add()
+    flight_description_attribute = client.get_type("FeedAttribute")
     flight_description_attribute.name = "Flight Description"
-    flight_description_attribute.type = client.get_type(
-        "FeedAttributeTypeEnum", version="v6"
-    ).STRING
+    flight_description_attribute.type_ = feed_attribute_type_enum.STRING
 
     # Creates a destination ID attribute.
-    destination_id_attribute = feed.attributes.add()
+    destination_id_attribute = client.get_type("FeedAttribute")
     destination_id_attribute.name = "Destination ID"
-    destination_id_attribute.type = client.get_type(
-        "FeedAttributeTypeEnum", version="v6"
-    ).STRING
+    destination_id_attribute.type_ = feed_attribute_type_enum.STRING
 
     # Creates a flight price attribute.
-    flight_price_attribute = feed.attributes.add()
+    flight_price_attribute = client.get_type("FeedAttribute")
     flight_price_attribute.name = "Flight Price"
-    flight_price_attribute.type = client.get_type(
-        "FeedAttributeTypeEnum", version="v6"
-    ).STRING
+    flight_price_attribute.type_ = feed_attribute_type_enum.STRING
 
     # Creates a flight sale price attribute.
-    flight_sale_price_attribute = feed.attributes.add()
+    flight_sale_price_attribute = client.get_type("FeedAttribute")
     flight_sale_price_attribute.name = "Flight Sale Price"
-    flight_sale_price_attribute.type = client.get_type(
-        "FeedAttributeTypeEnum", version="v6"
-    ).STRING
+    flight_sale_price_attribute.type_ = feed_attribute_type_enum.STRING
 
     # Creates a final URLs attribute.
-    final_urls_attribute = feed.attributes.add()
+    final_urls_attribute = client.get_type("FeedAttribute")
     final_urls_attribute.name = "Final URLs"
-    final_urls_attribute.type = client.get_type(
-        "FeedAttributeTypeEnum", version="v6"
-    ).URL_LIST
+    final_urls_attribute.type_ = feed_attribute_type_enum.URL_LIST
 
+    # append FeedAttributes to feed.attributes
+    feed.attributes.extend(
+        [
+            flight_description_attribute,
+            destination_id_attribute,
+            flight_price_attribute,
+            flight_sale_price_attribute,
+            final_urls_attribute,
+        ]
+    )
     try:
         # Issues a mutate request to add the feed.
-        feed_response = feed_service.mutate_feeds(customer_id, [feed_operation])
+        feed_response = feed_service.mutate_feeds(
+            customer_id=customer_id, operations=[feed_operation]
+        )
     except GoogleAdsException as ex:
         print(
             f"Request with ID '{ex.request_id}' failed with status "
@@ -157,65 +164,71 @@ def _create_feed_mapping(
     Returns:
         A str resource name of the newly created feed mapping.
     """
-    feed_mapping_service = client.get_service(
-        "FeedMappingService", version="v6"
-    )
+    feed_mapping_service = client.get_service("FeedMappingService")
 
     # Creates the feed mapping operation.
-    feed_mapping_operation = client.get_type(
-        "FeedMappingOperation", version="v6"
-    )
+    feed_mapping_operation = client.get_type("FeedMappingOperation")
 
     # Create the feed with feed attributes defined below.
     feed_mapping = feed_mapping_operation.create
     feed_mapping.feed = feed_resource_name
     feed_mapping.placeholder_type = client.get_type(
-        "PlaceholderTypeEnum", version="v6"
-    ).DYNAMIC_FLIGHT
+        "PlaceholderTypeEnum"
+    ).PlaceholderType.DYNAMIC_FLIGHT
 
     # Maps the feed attribute IDs to the field ID constants.
     placeholder_field_enum = client.get_type(
-        "FlightPlaceholderFieldEnum", version="v6"
-    )
+        "FlightPlaceholderFieldEnum"
+    ).FlightPlaceholderField
     flight_desc_enum_value = placeholder_field_enum.FLIGHT_DESCRIPTION
-    desc_mapping = feed_mapping.attribute_field_mappings.add()
+    desc_mapping = client.get_type("AttributeFieldMapping", "v6")
     desc_mapping.feed_attribute_id = placeholders_to_feed_attribute_map[
         flight_desc_enum_value
     ].id
     desc_mapping.flight_field = flight_desc_enum_value
 
     flight_dest_id_enum_value = placeholder_field_enum.DESTINATION_ID
-    dest_id_mapping = feed_mapping.attribute_field_mappings.add()
+    dest_id_mapping = client.get_type("AttributeFieldMapping", "v6")
     dest_id_mapping.feed_attribute_id = placeholders_to_feed_attribute_map[
         flight_dest_id_enum_value
     ].id
     dest_id_mapping.flight_field = flight_dest_id_enum_value
 
     flight_price_enum_value = placeholder_field_enum.FLIGHT_PRICE
-    price_mapping = feed_mapping.attribute_field_mappings.add()
+    price_mapping = client.get_type("AttributeFieldMapping", "v6")
     price_mapping.feed_attribute_id = placeholders_to_feed_attribute_map[
         flight_price_enum_value
     ].id
     price_mapping.flight_field = flight_price_enum_value
 
     flight_sale_price_enum_value = placeholder_field_enum.FLIGHT_SALE_PRICE
-    price_mapping = feed_mapping.attribute_field_mappings.add()
-    price_mapping.feed_attribute_id = placeholders_to_feed_attribute_map[
+    sale_price_mapping = client.get_type("AttributeFieldMapping", "v6")
+    sale_price_mapping.feed_attribute_id = placeholders_to_feed_attribute_map[
         flight_sale_price_enum_value
     ].id
-    price_mapping.flight_field = flight_sale_price_enum_value
+    sale_price_mapping.flight_field = flight_sale_price_enum_value
 
     flight_final_urls_enum_value = placeholder_field_enum.FINAL_URLS
-    final_urls_mapping = feed_mapping.attribute_field_mappings.add()
+    final_urls_mapping = client.get_type("AttributeFieldMapping", "v6")
     final_urls_mapping.feed_attribute_id = placeholders_to_feed_attribute_map[
         flight_final_urls_enum_value
     ].id
     final_urls_mapping.flight_field = flight_final_urls_enum_value
 
+    feed_mapping.attribute_field_mappings.extend(
+        [
+            desc_mapping,
+            dest_id_mapping,
+            price_mapping,
+            sale_price_mapping,
+            final_urls_mapping,
+        ]
+    )
+
     try:
         # Issues a mutate request to add the feed mapping.
         feed_mapping_response = feed_mapping_service.mutate_feed_mappings(
-            customer_id, [feed_mapping_operation]
+            customer_id=customer_id, operations=[feed_mapping_operation]
         )
     except GoogleAdsException as ex:
         print(
@@ -247,22 +260,29 @@ def _create_feed_item(
     Returns:
         A str resource name of the newly created feed item.
     """
-    feed_item_service = client.get_service("FeedItemService", version="v6")
+    feed_item_service = client.get_service("FeedItemService")
 
     # Creates the feed mapping operation.
-    feed_item_operation = client.get_type("FeedItemOperation", version="v6")
+    feed_item_operation = client.get_type("FeedItemOperation")
 
     # Create the feed item, with feed attributes created below.
     feed_item = feed_item_operation.create
     feed_item.feed = feed_resource_name
 
     placeholder_field_enum = client.get_type(
-        "FlightPlaceholderFieldEnum", version="v6"
+        "FlightPlaceholderFieldEnum"
+    ).FlightPlaceholderField
+
+    # Returns a new instance of FeedItemAttributeValue when called.
+    # This prevents the need to repeat these lines every time we need a new
+    # FeedItemAttributeValue. Instead, we call feed_item_attribute_value()
+    feed_item_attribute_value = lambda: client.get_type(
+        "FeedItemAttributeValue"
     )
 
     # Creates the flight description feed attribute value.
     flight_desc_enum_value = placeholder_field_enum.FLIGHT_DESCRIPTION
-    desc_mapping = feed_item.attribute_values.add()
+    desc_mapping = feed_item_attribute_value()
     desc_mapping.feed_attribute_id = placeholders_to_feed_attribute_map[
         flight_desc_enum_value
     ].id
@@ -270,7 +290,7 @@ def _create_feed_item(
 
     # Creates the destination ID feed attribute value.
     flight_dest_id_enum_value = placeholder_field_enum.DESTINATION_ID
-    dest_id_mapping = feed_item.attribute_values.add()
+    dest_id_mapping = feed_item_attribute_value()
     dest_id_mapping.feed_attribute_id = placeholders_to_feed_attribute_map[
         flight_dest_id_enum_value
     ].id
@@ -278,7 +298,7 @@ def _create_feed_item(
 
     # Creates the flight price feed attribute value.
     flight_price_enum_value = placeholder_field_enum.FLIGHT_PRICE
-    price_mapping = feed_item.attribute_values.add()
+    price_mapping = feed_item_attribute_value()
     price_mapping.feed_attribute_id = placeholders_to_feed_attribute_map[
         flight_price_enum_value
     ].id
@@ -286,24 +306,34 @@ def _create_feed_item(
 
     # Creates the flight sale price feed attribute value.
     flight_sale_price_enum_value = placeholder_field_enum.FLIGHT_SALE_PRICE
-    price_mapping = feed_item.attribute_values.add()
-    price_mapping.feed_attribute_id = placeholders_to_feed_attribute_map[
+    sale_price_mapping = feed_item_attribute_value()
+    sale_price_mapping.feed_attribute_id = placeholders_to_feed_attribute_map[
         flight_sale_price_enum_value
     ].id
-    price_mapping.string_value = "299.99 USD"
+    sale_price_mapping.string_value = "299.99 USD"
 
     # Creates the final URLs feed attribute value.
     flight_final_urls_enum_value = placeholder_field_enum.FINAL_URLS
-    final_urls_mapping = feed_item.attribute_values.add()
+    final_urls_mapping = feed_item_attribute_value()
     final_urls_mapping.feed_attribute_id = placeholders_to_feed_attribute_map[
         flight_final_urls_enum_value
     ].id
     final_urls_mapping.string_values.append("http://www.example.com/flights")
 
+    feed_item.attribute_values.extend(
+        [
+            desc_mapping,
+            dest_id_mapping,
+            price_mapping,
+            sale_price_mapping,
+            final_urls_mapping,
+        ]
+    )
+
     try:
         # Issues a mutate request to add the feed item.
         feed_item_response = feed_item_service.mutate_feed_items(
-            customer_id, [feed_item_operation]
+            customer_id=customer_id, operations=[feed_item_operation]
         )
     except GoogleAdsException as ex:
         print(
@@ -331,7 +361,7 @@ def _get_placeholder_fields_map(client, customer_id, feed_resource_name):
     Returns:
         A dict mapping placeholder fields to feed attributes.
     """
-    google_ads_service = client.get_service("GoogleAdsService", version="v6")
+    googleads_service = client.get_service("GoogleAdsService")
 
     # Constructs the query to get the feed attributes for the specified
     # resource name.
@@ -344,30 +374,46 @@ def _get_placeholder_fields_map(client, customer_id, feed_resource_name):
           feed.resource_name = '{feed_resource_name}'"""
 
     # Issues a search request by specifying a page size.
-    response = google_ads_service.search(customer_id, query=query)
+    search_request = client.get_type("SearchGoogleAdsRequest")
+    search_request.customer_id = customer_id
+    search_request.query = query
+    search_request.page_size = _DEFAULT_PAGE_SIZE
+    response = googleads_service.search(request=search_request)
 
-    # Gets the first result because we only need the single feed we created
-    # previously.
-    row = list(response)[0]
-    feed_attributes = row.feed.attributes
+    try:
+        # Gets the first result because we only need the single feed we created
+        # previously.
+        row = list(response)[0]
+        feed_attributes = row.feed.attributes
 
-    flight_placeholder_field_enum = client.get_type(
-        "FlightPlaceholderFieldEnum", version="v6"
-    )
-    feed_attribute_names_map = {
-        "Flight Description": flight_placeholder_field_enum.FLIGHT_DESCRIPTION,
-        "Destination ID": flight_placeholder_field_enum.DESTINATION_ID,
-        "Flight Price": flight_placeholder_field_enum.FLIGHT_PRICE,
-        "Flight Sale Price": flight_placeholder_field_enum.FLIGHT_SALE_PRICE,
-        "Final URLs": flight_placeholder_field_enum.FINAL_URLS,
-    }
+        flight_placeholder_field_enum = client.get_type(
+            "FlightPlaceholderFieldEnum"
+        ).FlightPlaceholderField
+        feed_attribute_names_map = {
+            "Flight Description": flight_placeholder_field_enum.FLIGHT_DESCRIPTION,
+            "Destination ID": flight_placeholder_field_enum.DESTINATION_ID,
+            "Flight Price": flight_placeholder_field_enum.FLIGHT_PRICE,
+            "Flight Sale Price": flight_placeholder_field_enum.FLIGHT_SALE_PRICE,
+            "Final URLs": flight_placeholder_field_enum.FINAL_URLS,
+        }
 
-    # Creates map with keys of placeholder fields and values of feed
-    # attributes.
-    placeholder_fields_map = {
-        feed_attribute_names_map[feed_attribute.name]: feed_attribute
-        for feed_attribute in feed_attributes
-    }
+        # Creates map with keys of placeholder fields and values of feed
+        # attributes.
+        placeholder_fields_map = {
+            feed_attribute_names_map[feed_attribute.name]: feed_attribute
+            for feed_attribute in feed_attributes
+        }
+    except GoogleAdsException as ex:
+        print(
+            f"Request with ID '{ex.request_id}' failed with status "
+            f"'{ex.error.code().name}' and includes the following errors:"
+        )
+        for error in ex.failure.errors:
+            print(f"\tError with message '{error.message}'.")
+            if error.location:
+                for field_path_element in error.location.field_path_elements:
+                    print(f"\t\tOn field: {field_path_element.field_name}")
+        sys.exit(1)
 
     return placeholder_fields_map
 
@@ -375,7 +421,7 @@ def _get_placeholder_fields_map(client, customer_id, feed_resource_name):
 if __name__ == "__main__":
     # GoogleAdsClient will read the google-ads.yaml configuration file in the
     # home directory if none is specified.
-    google_ads_client = GoogleAdsClient.load_from_storage()
+    googleads_client = GoogleAdsClient.load_from_storage(version="v6")
 
     parser = argparse.ArgumentParser(
         description="Adds a flights feed for specified customer."
@@ -390,4 +436,4 @@ if __name__ == "__main__":
     )
     args = parser.parse_args()
 
-    main(google_ads_client, args.customer_id)
+    main(googleads_client, args.customer_id)

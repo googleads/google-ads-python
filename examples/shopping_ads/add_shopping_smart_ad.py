@@ -22,7 +22,7 @@ Prerequisites:
   https://support.google.com/merchants/answer/188924.
   This account must be linked to your Google Ads account. The integration
   instructions can be found at:
-  https://developers.google.com/adwords/shopping/full-automation/articles/t15.
+  https://developers.google.com/google-ads/api/docs/shopping-ads/merchant-center
 - You need your Google Ads account to track conversions. The different ways
   to track conversions can be found here:
   https://support.google.com/google-ads/answer/1722054.
@@ -33,8 +33,8 @@ import argparse
 import sys
 from uuid import uuid4
 
-from google.ads.google_ads.client import GoogleAdsClient
-from google.ads.google_ads.errors import GoogleAdsException
+from google.ads.googleads.client import GoogleAdsClient
+from google.ads.googleads.errors import GoogleAdsException
 
 
 def main(
@@ -52,48 +52,32 @@ def main(
         create_default_listing_group: Boolean, whether to create a default
             listing group.
     """
-    try:
-        # Create a budget to be used by the campaign that will be created below.
-        budget_resource_name = _add_campaign_budget(client, customer_id)
+    # Create a budget to be used by the campaign that will be created below.
+    budget_resource_name = _add_campaign_budget(client, customer_id)
 
-        # Create a smart shopping campaign.
-        campaign_resource_name = _add_smart_shopping_campaign(
-            client,
-            customer_id,
-            budget_resource_name,
-            merchant_center_account_id,
-        )
+    # Create a smart shopping campaign.
+    campaign_resource_name = _add_smart_shopping_campaign(
+        client,
+        customer_id,
+        budget_resource_name,
+        merchant_center_account_id,
+    )
 
-        # Create a smart shopping ad group.
-        ad_group_resource_name = _add_smart_shopping_ad_group(
-            client, customer_id, campaign_resource_name
-        )
+    # Create a smart shopping ad group.
+    ad_group_resource_name = _add_smart_shopping_ad_group(
+        client, customer_id, campaign_resource_name
+    )
 
-        # Creates a smart shopping ad group ad.
-        _add_smart_shopping_ad_group_ad(
-            client, customer_id, ad_group_resource_name
-        )
+    # Creates a smart shopping ad group ad.
+    _add_smart_shopping_ad_group_ad(client, customer_id, ad_group_resource_name)
 
-        if create_default_listing_group:
-            # A product group is a subset of inventory. Listing groups are the
-            # equivalent of product groups in the API and allow you to bid on
-            # the chosen group or exclude a group from bidding.
-            # This method creates an ad group criterion containing a listing
-            # group.
-            _add_shopping_listing_group(
-                client, customer_id, ad_group_resource_name
-            )
-    except GoogleAdsException as ex:
-        print(
-            f"Request with ID '{ex.request_id}' failed with status "
-            f"'{ex.error.code().name}' and includes the following errors:"
-        )
-        for error in ex.failure.errors:
-            print(f"\tError with message '{error.message}'.")
-            if error.location:
-                for field_path_element in error.location.field_path_elements:
-                    print(f"\t\tOn field: {field_path_element.field_name}")
-        sys.exit(1)
+    if create_default_listing_group:
+        # A product group is a subset of inventory. Listing groups are the
+        # equivalent of product groups in the API and allow you to bid on
+        # the chosen group or exclude a group from bidding.
+        # This method creates an ad group criterion containing a listing
+        # group.
+        _add_shopping_listing_group(client, customer_id, ad_group_resource_name)
 
 
 def _add_campaign_budget(client, customer_id):
@@ -102,24 +86,21 @@ def _add_campaign_budget(client, customer_id):
     Args:
         client: An initialized Google Ads client.
         customer_id: The Google Ads customer ID.
+
     Returns:
         The string resource name of the newly created campaign budget.
     """
     # Get the CampaignBudgetService client.
-    campaign_budget_service = client.get_service(
-        "CampaignBudgetService", version="v6"
-    )
+    campaign_budget_service = client.get_service("CampaignBudgetService")
 
     # Create a campaign budget operation and configure the smart shopping
     # campaign budget.
-    campaign_budget_operation = client.get_type(
-        "CampaignBudgetOperation", version="v6"
-    )
+    campaign_budget_operation = client.get_type("CampaignBudgetOperation")
     campaign_budget = campaign_budget_operation.create
     campaign_budget.name = f"Interplanetary Cruise Budget #{uuid4()}"
     campaign_budget.delivery_method = client.get_type(
         "BudgetDeliveryMethodEnum"
-    ).STANDARD
+    ).BudgetDeliveryMethod.STANDARD
     # The budget is specified in the local currency of the account. The amount
     # should be specified in micros; one million is equivalent to one unit.
     campaign_budget.amount_micros = 5000000
@@ -129,7 +110,7 @@ def _add_campaign_budget(client, customer_id):
     # Add the campaign budget, then print and return the resulting campaign
     # budget's resource name.
     campaign_budget_response = campaign_budget_service.mutate_campaign_budgets(
-        customer_id, [campaign_budget_operation]
+        customer_id=customer_id, operations=[campaign_budget_operation]
     )
     campaign_budget_resource_name = campaign_budget_response.results[
         0
@@ -158,10 +139,10 @@ def _add_smart_shopping_campaign(
         The string resource name of the newly created ad group.
     """
     # Get the CampaignService client.
-    campaign_service = client.get_service("CampaignService", version="v6")
+    campaign_service = client.get_service("CampaignService")
 
     # Create a campaign operation and configure the smart shopping campaign.
-    campaign_operation = client.get_type("CampaignOperation", version="v6")
+    campaign_operation = client.get_type("CampaignOperation")
     campaign = campaign_operation.create
     campaign.name = f"Interplanetary Cruise Campaign #{uuid4()}"
     campaign.campaign_budget = budget_resource_name
@@ -169,10 +150,10 @@ def _add_smart_shopping_campaign(
     # channel type, advertising channel sub-type and shopping setting.
     campaign.advertising_channel_type = client.get_type(
         "AdvertisingChannelTypeEnum"
-    ).SHOPPING
+    ).AdvertisingChannelType.SHOPPING
     campaign.advertising_channel_sub_type = client.get_type(
         "AdvertisingChannelSubTypeEnum"
-    ).SHOPPING_SMART_ADS
+    ).AdvertisingChannelSubType.SHOPPING_SMART_ADS
     campaign.shopping_setting.merchant_id = merchant_center_account_id
     # Set the sales country of products to include in the campaign.
     # Only products from Merchant Center targeting this country will
@@ -181,7 +162,9 @@ def _add_smart_shopping_campaign(
     # Recommendation: Set the campaign to PAUSED when creating it to prevent
     # the ads from immediately serving. Set to ENABLED once you've added
     # targeting and the ads are ready to serve.
-    campaign.status = client.get_type("CampaignStatusEnum").PAUSED
+    campaign.status = client.get_type(
+        "CampaignStatusEnum"
+    ).CampaignStatus.PAUSED
     # Bidding strategy must be set directly on the campaign.
     # Setting a portfolio bidding strategy by resource name is not supported.
     # Maximize conversion value is the only strategy supported for smart
@@ -195,7 +178,7 @@ def _add_smart_shopping_campaign(
     # Add the campaign, then print and return the resulting campaign's resource
     # name.
     campaign_response = campaign_service.mutate_campaigns(
-        customer_id, [campaign_operation]
+        customer_id=customer_id, operations=[campaign_operation]
     )
     campaign_resource_name = campaign_response.results[0].resource_name
     print(
@@ -213,25 +196,28 @@ def _add_smart_shopping_ad_group(client, customer_id, campaign_resource_name):
         client: An initialized Google Ads client.
         customer_id: The Google Ads customer ID.
         campaign_resource_name: The target campaign for the new ad group.
+
     Returns:
         The string resource name of the newly created ad group.
     """
     # Get the AdGroupCriterionService client.
-    ad_group_service = client.get_service("AdGroupService", version="v6")
+    ad_group_service = client.get_service("AdGroupService")
 
     # Create an ad group operation and configure the new ad group.
-    ad_group_operation = client.get_type("AdGroupOperation", version="v6")
+    ad_group_operation = client.get_type("AdGroupOperation")
     ad_group = ad_group_operation.create
     ad_group.name = f"Earth to Mars Cruises #{uuid4()}"
     ad_group.campaign = campaign_resource_name
     # Set the ad group type to SHOPPING_SMART_ADS.
-    ad_group.type = client.get_type("AdGroupTypeEnum").SHOPPING_SMART_ADS
-    ad_group.status = client.get_type("AdGroupStatusEnum").ENABLED
+    ad_group.type_ = client.get_type(
+        "AdGroupTypeEnum"
+    ).AdGroupType.SHOPPING_SMART_ADS
+    ad_group.status = client.get_type("AdGroupStatusEnum").AdGroupStatus.ENABLED
 
     # Add the ad group, then print and return the resulting ad group's resource
     # name.
     ad_group_response = ad_group_service.mutate_ad_groups(
-        customer_id, [ad_group_operation]
+        customer_id=customer_id, operations=[ad_group_operation]
     )
     ad_group_resource_name = ad_group_response.results[0].resource_name
     print(
@@ -251,27 +237,30 @@ def _add_smart_shopping_ad_group_ad(
         client: An initialized Google Ads client.
         customer_id: The Google Ads customer ID.
         ad_group_resource_name: The target ad group for the new listing group.
+
     Returns:
         The string resource name of the newly created ad group ad.
     """
     # Get the AdGroupCriterionService client.
-    ad_group_ad_service = client.get_service("AdGroupAdService", version="v6")
+    ad_group_ad_service = client.get_service("AdGroupAdService")
 
     # Create an ad group ad operation and configure the ad group ad.
-    ad_group_ad_operation = client.get_type("AdGroupAdOperation", version="v6")
+    ad_group_ad_operation = client.get_type("AdGroupAdOperation")
     ad_group_ad = ad_group_ad_operation.create
     # Set the ad group.
     ad_group_ad.ad_group = ad_group_resource_name
     # Set a new smart shopping ad.
-    ad_group_ad.ad.shopping_smart_ad.CopyFrom(
-        client.get_type("ShoppingSmartAdInfo", version="v6")
+    client.copy_from(
+        ad_group_ad.ad.shopping_smart_ad, client.get_type("ShoppingSmartAdInfo")
     )
-    ad_group_ad.status = client.get_type("AdGroupAdStatusEnum").PAUSED
+    ad_group_ad.status = client.get_type(
+        "AdGroupAdStatusEnum"
+    ).AdGroupAdStatus.PAUSED
 
     # Add the ad group ad, then print and return the resulting ad group ad's
     # resource name.
     ad_group_ad_response = ad_group_ad_service.mutate_ad_group_ads(
-        customer_id, [ad_group_ad_operation]
+        customer_id=customer_id, operations=[ad_group_ad_operation]
     )
     ad_group_ad_resource_name = ad_group_ad_response.results[0].resource_name
     print(
@@ -294,33 +283,32 @@ def _add_shopping_listing_group(client, customer_id, ad_group_resource_name):
         client: An initialized Google Ads client.
         customer_id: The Google Ads customer ID.
         ad_group_resource_name: The target ad group for the new listing group.
+
     Returns:
         The string resource name of the newly created ad group criterion.
     """
     # Get the AdGroupCriterionService client.
-    ad_group_criterion_service = client.get_service(
-        "AdGroupCriterionService", version="v6"
-    )
+    ad_group_criterion_service = client.get_service("AdGroupCriterionService")
 
     # Creates a new ad group criterion. This will contain a listing group.
     # This will be the listing group for 'All products' and will contain a
     # single root node.
-    ad_group_criterion_operation = client.get_type(
-        "AdGroupCriterionOperation", version="v6"
-    )
+    ad_group_criterion_operation = client.get_type("AdGroupCriterionOperation")
     ad_group_criterion = ad_group_criterion_operation.create
     ad_group_criterion.ad_group = ad_group_resource_name
     ad_group_criterion.status = client.get_type(
         "AdGroupCriterionStatusEnum"
-    ).ENABLED
-    ad_group_criterion.listing_group.type = client.get_type(
+    ).AdGroupCriterionStatus.ENABLED
+    ad_group_criterion.listing_group.type_ = client.get_type(
         "ListingGroupTypeEnum"
-    ).UNIT
+    ).ListingGroupType.UNIT
 
     # Ad the listing group criterion, then display and return the resulting
     # ad group criterion's resource name.
-    ad_group_criterion_response = ad_group_criterion_service.mutate_ad_group_criteria(
-        customer_id, [ad_group_criterion_operation]
+    ad_group_criterion_response = (
+        ad_group_criterion_service.mutate_ad_group_criteria(
+            customer_id=customer_id, operations=[ad_group_criterion_operation]
+        )
     )
     ad_group_criterion_resource_name = ad_group_criterion_response.results[
         0
@@ -336,7 +324,7 @@ def _add_shopping_listing_group(client, customer_id, ad_group_resource_name):
 if __name__ == "__main__":
     # GoogleAdsClient will read the google-ads.yaml configuration file in the
     # home directory if none is specified.
-    google_ads_client = GoogleAdsClient.load_from_storage()
+    googleads_client = GoogleAdsClient.load_from_storage(version="v6")
 
     parser = argparse.ArgumentParser(
         description=(
@@ -369,9 +357,21 @@ if __name__ == "__main__":
     )
     args = parser.parse_args()
 
-    main(
-        google_ads_client,
-        args.customer_id,
-        args.merchant_center_account_id,
-        args.create_default_listing_group,
-    )
+    try:
+        main(
+            googleads_client,
+            args.customer_id,
+            args.merchant_center_account_id,
+            args.create_default_listing_group,
+        )
+    except GoogleAdsException as ex:
+        print(
+            f"Request with ID '{ex.request_id}' failed with status "
+            f"'{ex.error.code().name}' and includes the following errors:"
+        )
+        for error in ex.failure.errors:
+            print(f"\tError with message '{error.message}'.")
+            if error.location:
+                for field_path_element in error.location.field_path_elements:
+                    print(f"\t\tOn field: {field_path_element.field_name}")
+        sys.exit(1)

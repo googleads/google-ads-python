@@ -18,42 +18,58 @@
 import argparse
 import collections
 import sys
-from google.ads.google_ads.client import GoogleAdsClient
-from google.ads.google_ads.errors import GoogleAdsException
-
-_DEFAULT_PAGE_SIZE = 1000
+from google.ads.googleads.client import GoogleAdsClient
+from google.ads.googleads.errors import GoogleAdsException
 
 
-def display_categories(categories, prefix=""):
+def _display_categories(categories, prefix=""):
+    """Recursively prints out each category and its children.
+
+    Args:
+      categories: the map of categories to print
+      prefix: the string to print at the beginning of each line of output
+
+    Returns: None
+    """
     for category in categories:
-        print("{}{} [{}]".format(prefix, category.name, category.id))
+        print(f"{prefix}{category.name} [{category.category_id}]")
         if not category.children:
-            display_categories(category.children, prefix=prefix + category.name)
+            _display_categories(
+                category.children, prefix=prefix + category.name
+            )
 
 
-def main(client, customer_id, page_size):
-    ga_service = client.get_service("GoogleAdsService", version="v6")
-    query = """
-        SELECT
-          product_bidding_category_constant.localized_name,
-          product_bidding_category_constant.product_bidding_category_constant_parent
-        FROM product_bidding_category_constant
-        WHERE product_bidding_category_constant.country_code IN ('US')"""
-
-    results = ga_service.search(customer_id, query=query, page_size=page_size)
+def main(client, customer_id):
+    """Fetches the set of valid ProductBiddingCategories."""
 
     class Category:
-        def __init__(self, name=None, id=None, children=[]):
+        def __init__(self, name=None, category_id=None, children=None):
             self.name = name
-            self.id = id
-            self.children = children
+            self.category_id = category_id
+            if children is None:
+                self.children = []
+            else:
+                self.children = children
+
+    ga_service = client.get_service("GoogleAdsService")
+    query = """
+        SELECT product_bidding_category_constant.localized_name,
+        product_bidding_category_constant.product_bidding_category_constant_parent
+        FROM product_bidding_category_constant WHERE
+        product_bidding_category_constant.country_code IN ("US")"""
+
+    search_request = client.get_type("SearchGoogleAdsStreamRequest")
+    search_request.customer_id = customer_id
+    search_request.query = query
+    response = ga_service.search_stream(search_request)
 
     all_categories = collections.defaultdict(lambda: Category())
 
+    # Creates a map of top level categories.
     root_categories = []
 
-    try:
-        for row in results:
+    for batch in response:
+        for row in batch.results:
             product_bidding_category = row.product_bidding_category_constant
 
             category = Category(
@@ -61,33 +77,26 @@ def main(client, customer_id, page_size):
                 product_bidding_category.resource_name,
             )
 
-            all_categories[category.id] = category
+            all_categories[category.category_id] = category
             parent = (
                 product_bidding_category.product_bidding_category_constant_parent
             )
             parent_id = getattr(parent, "value", None)
 
+            # Links the category to the parent category if any.
             if parent_id:
+                # Adds the category as a child category of the parent
+                # category.
                 all_categories[parent_id].children.append(category)
             else:
+                # Otherwise adds the category as a root category.
                 root_categories.append(category)
 
-        display_categories(root_categories)
-    except GoogleAdsException as ex:
-        print(
-            'Request with ID "%s" failed with status "%s" and includes the '
-            "following errors:" % (ex.request_id, ex.error.code().name)
-        )
-        for error in ex.failure.errors:
-            print('\tError with message "%s".' % error.message)
-            if error.location:
-                for field_path_element in error.location.field_path_elements:
-                    print("\t\tOn field: %s" % field_path_element.field_name)
-        sys.exit(1)
+    _display_categories(root_categories)
 
 
 if __name__ == "__main__":
-    google_ads_client = GoogleAdsClient.load_from_storage()
+    googleads_client = GoogleAdsClient.load_from_storage(version="v6")
 
     parser = argparse.ArgumentParser(
         description="Get Product Bidding Category Constant"
@@ -102,4 +111,16 @@ if __name__ == "__main__":
     )
     args = parser.parse_args()
 
-    main(google_ads_client, args.customer_id, _DEFAULT_PAGE_SIZE)
+    try:
+        main(googleads_client, args.customer_id)
+    except GoogleAdsException as ex:
+        print(
+            f'Request with ID "{ex.request_id}" failed with status '
+            f'"{ex.error.code().name}" and includes the following errors:'
+        )
+        for error in ex.failure.errors:
+            print(f'	Error with message "{error.message}".')
+            if error.location:
+                for field_path_element in error.location.field_path_elements:
+                    print(f"\t\tOn field: {field_path_element.field_name}")
+        sys.exit(1)

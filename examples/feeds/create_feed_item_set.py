@@ -23,8 +23,8 @@ import argparse
 import sys
 import uuid
 
-from google.ads.google_ads.client import GoogleAdsClient
-from google.ads.google_ads.errors import GoogleAdsException
+from google.ads.googleads.client import GoogleAdsClient
+from google.ads.googleads.errors import GoogleAdsException
 
 
 def main(client, customer_id, feed_id):
@@ -35,17 +35,13 @@ def main(client, customer_id, feed_id):
         customer_id: a client customer ID.
         feed_id: the ID for a Feed belonging to the given customer.
     """
-    feed_item_set_service = client.get_service(
-        "FeedItemSetService", version="v6"
-    )
-    feed_item_set_operation = client.get_type(
-        "FeedItemSetOperation", version="v6"
-    )
+    feed_item_set_service = client.get_service("FeedItemSetService")
+    feed_item_set_operation = client.get_type("FeedItemSetOperation")
 
     feed_item_set = feed_item_set_operation.create
-    feed_resource_name = client.get_service(
-        "FeedService", version="v6"
-    ).feed_path(customer_id, feed_id)
+    feed_resource_name = client.get_service("FeedService").feed_path(
+        customer_id, feed_id
+    )
     feed_item_set.feed = feed_resource_name
     feed_item_set.display_name = f"Feed Item Set #{uuid.uuid4()}"
 
@@ -60,38 +56,26 @@ def main(client, customer_id, feed_id):
     # business_name_filter = dynamic_location_set_filter.business_name_filter
     # business_name_filter.business_name = 'INSERT_YOUR_BUSINESS_NAME_HERE'
     # business_name_filter.filter_type = client.get_type(
-    #     "FeedItemSetStringFilterTypeEnum", version="v6"
-    # ).EXACT
+    #     "FeedItemSetStringFilterTypeEnum"
+    # ).FeedItemSetStringFilterType.EXACT
 
     # 2) Affiliate Extension
     # dynamic_affiliate_location_set_filter = feed_item_set.dynamic_affiliate_location_set_filter
     # dynamic_affiliate_location_set_filter.chain_ids.extend([INSERT_CHAIN_IDS_HERE])
 
-    try:
-        response = feed_item_set_service.mutate_feed_item_sets(
-            customer_id, [feed_item_set_operation]
-        )
-        print(
-            "Created a feed item set with resource name: "
-            f"'{response.results[0].resource_name}'"
-        )
-    except GoogleAdsException as ex:
-        print(
-            f'Request with ID "{ex.request_id}" failed with status '
-            f'"{ex.error.code().name}" and includes the following errors:'
-        )
-        for error in ex.failure.errors:
-            print(f'\tError with message "{error.message}".')
-            if error.location:
-                for field_path_element in error.location.field_path_elements:
-                    print(f"\t\tOn field: {field_path_element.field_name}")
-        sys.exit(1)
+    response = feed_item_set_service.mutate_feed_item_sets(
+        customer_id=customer_id, operations=[feed_item_set_operation]
+    )
+    print(
+        "Created a feed item set with resource name: "
+        f"'{response.results[0].resource_name}'"
+    )
 
 
 if __name__ == "__main__":
     # GoogleAdsClient will read the google-ads.yaml configuration file in the
     # home directory if none is specified.
-    google_ads_client = GoogleAdsClient.load_from_storage()
+    googleads_client = GoogleAdsClient.load_from_storage(version="v6")
 
     parser = argparse.ArgumentParser(
         description="Creates a new feed item set for a specified feed."
@@ -113,6 +97,20 @@ if __name__ == "__main__":
     )
     args = parser.parse_args()
 
-    main(
-        google_ads_client, args.customer_id, args.feed_id,
+    try:
+        main(
+        googleads_client,
+        args.customer_id,
+        args.feed_id,
     )
+    except GoogleAdsException as ex:
+        print(
+            f'Request with ID "{ex.request_id}" failed with status '
+            f'"{ex.error.code().name}" and includes the following errors:'
+        )
+        for error in ex.failure.errors:
+            print(f'	Error with message "{error.message}".')
+            if error.location:
+                for field_path_element in error.location.field_path_elements:
+                    print(f"\t\tOn field: {field_path_element.field_name}")
+        sys.exit(1)

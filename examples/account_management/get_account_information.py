@@ -21,42 +21,28 @@ For example, its name, currency, time zone, etc.
 import argparse
 import sys
 
-import google.ads.google_ads.client
+from google.ads.googleads.client import GoogleAdsClient
+from google.ads.googleads.errors import GoogleAdsException
 
 
 def main(client, customer_id):
-    customer_service = client.get_service("CustomerService", version="v6")
-
+    customer_service = client.get_service("CustomerService")
     resource_name = customer_service.customer_path(customer_id)
 
-    try:
-        customer = customer_service.get_customer(resource_name=resource_name)
-    except google.ads.google_ads.errors.GoogleAdsException as ex:
-        print(
-            'Request with ID "%s" failed with status "%s" and includes the '
-            "following errors:" % (ex.request_id, ex.error.code().name)
-        )
-        for error in ex.failure.errors:
-            print('\tError with message "%s".' % error.message)
-            if error.location:
-                for field_path_element in error.location.field_path_elements:
-                    print("\t\tOn field: %s" % field_path_element.field_name)
-        sys.exit(1)
+    customer = customer_service.get_customer(resource_name=resource_name)
 
-    print("Customer ID: %d" % customer.id)
-    print("\tDescriptive name: %s" % customer.descriptive_name)
-    print("\tCurrency code: %s" % customer.currency_code)
-    print("\tTime zone: %s" % customer.time_zone)
-    print("\tTracking URL template: %s" % customer.tracking_url_template)
-    print("\tAuto tagging enabled: %s" % customer.auto_tagging_enabled)
+    print(f"Customer ID: {customer.id}")
+    print(f"\tDescriptive name: {customer.descriptive_name}")
+    print(f"\tCurrency code: {customer.currency_code}")
+    print(f"\tTime zone: {customer.time_zone}")
+    print(f"\tTracking URL template: {customer.tracking_url_template}")
+    print(f"\tAuto tagging enabled: {customer.auto_tagging_enabled}")
 
 
 if __name__ == "__main__":
     # GoogleAdsClient will read the google-ads.yaml configuration file in the
     # home directory if none is specified.
-    google_ads_client = (
-        google.ads.google_ads.client.GoogleAdsClient.load_from_storage()
-    )
+    googleads_client = GoogleAdsClient.load_from_storage(version="v6")
 
     parser = argparse.ArgumentParser(
         description=(
@@ -74,4 +60,16 @@ if __name__ == "__main__":
     )
     args = parser.parse_args()
 
-    main(google_ads_client, args.customer_id)
+    try:
+        main(googleads_client, args.customer_id)
+    except GoogleAdsException as ex:
+        print(
+            f'Request with ID "{ex.request_id}" failed with status '
+            f'"{ex.error.code().name}" and includes the following errors:'
+        )
+        for error in ex.failure.errors:
+            print(f'	Error with message "{error.message}".')
+            if error.location:
+                for field_path_element in error.location.field_path_elements:
+                    print(f"\t\tOn field: {field_path_element.field_name}")
+        sys.exit(1)

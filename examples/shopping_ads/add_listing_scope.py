@@ -30,22 +30,17 @@ scopes before running this example.
 import argparse
 import sys
 
-from google.ads.google_ads.client import GoogleAdsClient
-from google.ads.google_ads.errors import GoogleAdsException
+from google.ads.googleads.client import GoogleAdsClient
+from google.ads.googleads.errors import GoogleAdsException
 
 
 def main(client, customer_id, campaign_id):
-    campaign_service = client.get_service("CampaignService", version="v6")
-
-    campaign_resource_name = campaign_service.campaign_path(
+    campaign_service = client.get_service("CampaignService")
+    campaign_criterion_operation = client.get_type("CampaignCriterionOperation")
+    campaign_criterion = campaign_criterion_operation.create
+    campaign_criterion.campaign = campaign_service.campaign_path(
         customer_id, campaign_id
     )
-
-    campaign_criterion_operation = client.get_type(
-        "CampaignCriterionOperation", version="v6"
-    )
-    campaign_criterion = campaign_criterion_operation.create
-    campaign_criterion.campaign = campaign_resource_name
 
     # A listing scope allows you to filter the products that will be included in
     # a given campaign. You can specify multiple dimensions with conditions that
@@ -54,50 +49,43 @@ def main(client, customer_id, campaign_id):
     # demonstrates a range of different dimensions you could use.
     dimensions = campaign_criterion.listing_scope.dimensions
 
-    product_brand_dimension = dimensions.add()
+    product_brand_dimension = client.get_type("ListingDimensionInfo")
     product_brand_dimension.product_brand.value = "google"
+    dimensions.append(product_brand_dimension)
 
-    product_custom_attribute_dimension = dimensions.add()
-    product_custom_attribute_dimension.product_custom_attribute.index = (
-        client.get_type("ProductCustomAttributeIndexEnum", version="v6").INDEX0
+    product_custom_attribute_index_enum = client.get_type(
+        "ProductCustomAttributeIndexEnum"
+    ).ProductCustomAttributeIndex
+    product_custom_attribute_dimension = client.get_type("ListingDimensionInfo")
+    product_custom_attribute = (
+        product_custom_attribute_dimension.product_custom_attribute
     )
-    product_custom_attribute_dimension.product_custom_attribute.value = (
-        "top_selling_products"
-    )
+    product_custom_attribute.index = product_custom_attribute_index_enum.INDEX0
+    product_custom_attribute.value = "top_selling_products"
+    dimensions.append(product_custom_attribute_dimension)
 
     product_type_level_enum = client.get_type(
-        "ProductTypeLevelEnum", version="v6"
-    )
-
-    product_type_dimension_1 = dimensions.add()
+        "ProductTypeLevelEnum"
+    ).ProductTypeLevel
+    product_type_dimension_1 = client.get_type("ListingDimensionInfo")
     product_type = product_type_dimension_1.product_type
     product_type.level = product_type_level_enum.LEVEL1
     product_type.value = "electronics"
+    dimensions.append(product_type_dimension_1)
 
-    product_type_dimension_2 = dimensions.add()
+    product_type_dimension_2 = client.get_type("ListingDimensionInfo")
     product_type = product_type_dimension_2.product_type
     product_type.level = product_type_level_enum.LEVEL2
     product_type.value = "smartphones"
+    dimensions.append(product_type_dimension_2)
 
-    campaign_criterion_service = client.get_service(
-        "CampaignCriterionService", version="v6"
+    campaign_criterion_service = client.get_service("CampaignCriterionService")
+
+    campaign_criterion_response = (
+        campaign_criterion_service.mutate_campaign_criteria(
+            customer_id=customer_id, operations=[campaign_criterion_operation]
+        )
     )
-
-    try:
-        campaign_criterion_response = campaign_criterion_service.mutate_campaign_criteria(
-            customer_id, [campaign_criterion_operation]
-        )
-    except GoogleAdsException as ex:
-        print(
-            f'Request with ID "{ex.request_id}" failed with status'
-            f'"{ex.error.code().name}" and includes the following errors:'
-        )
-        for error in ex.failure.errors:
-            print(f'\tError with message "{error.message}".')
-            if error.location:
-                for field_path_element in error.location.field_path_elements:
-                    print(f"\t\tOn field: {field_path_element.field_name}")
-        sys.exit(1)
 
     print(
         f"Added {len(campaign_criterion_response.results)} campaign "
@@ -110,7 +98,7 @@ def main(client, customer_id, campaign_id):
 if __name__ == "__main__":
     # GoogleAdsClient will read the google-ads.yaml configuration file in the
     # home directory if none is specified.
-    google_ads_client = GoogleAdsClient.load_from_storage()
+    googleads_client = GoogleAdsClient.load_from_storage(version="v6")
 
     parser = argparse.ArgumentParser(
         description=("Adds a shopping listing scope to a shopping campaign.")
@@ -128,4 +116,16 @@ if __name__ == "__main__":
     )
     args = parser.parse_args()
 
-    main(google_ads_client, args.customer_id, args.campaign_id)
+    try:
+        main(googleads_client, args.customer_id, args.campaign_id)
+    except GoogleAdsException as ex:
+        print(
+            f'Request with ID "{ex.request_id}" failed with status'
+            f'"{ex.error.code().name}" and includes the following errors:'
+        )
+        for error in ex.failure.errors:
+            print(f'\tError with message "{error.message}".')
+            if error.location:
+                for field_path_element in error.location.field_path_elements:
+                    print(f"\t\tOn field: {field_path_element.field_name}")
+        sys.exit(1)

@@ -13,29 +13,29 @@
 # limitations under the License.
 """Tests for the Google Ads API client library."""
 
-import enum
 from importlib import import_module
-from inspect import getmembers, isclass
+from inspect import getmembers
 import mock
 import os
+import pickle
 from pyfakefs.fake_filesystem_unittest import TestCase as FileTestCase
 import yaml
 
-from google.protobuf.internal.enum_type_wrapper import EnumTypeWrapper
+from proto.enums import ProtoEnumMeta
 
-from google.ads.google_ads import client as Client
+from google.ads.googleads import client as Client
 
 latest_version = Client._DEFAULT_VERSION
 valid_versions = Client._VALID_API_VERSIONS
 
-services_path = "google.ads.google_ads.{}.proto.services".format(latest_version)
+services_path = f"google.ads.googleads.{latest_version}.services.services"
 services = import_module(services_path)
 
 
 class GoogleAdsClientTest(FileTestCase):
     """Tests for the google.ads.googleads.client.GoogleAdsClient class."""
 
-    def _create_test_client(self, endpoint=None):
+    def _create_test_client(self, endpoint=None, version=None):
         with mock.patch.object(
             Client.oauth2, "get_installed_app_credentials"
         ) as mock_credentials:
@@ -47,6 +47,7 @@ class GoogleAdsClientTest(FileTestCase):
                 mock_credentials_instance,
                 self.developer_token,
                 endpoint=endpoint,
+                version=version,
             )
             return client
 
@@ -57,9 +58,10 @@ class GoogleAdsClientTest(FileTestCase):
         self.client_secret = "client_secret_987654321"
         self.refresh_token = "refresh"
         self.login_customer_id = "1234567890"
-        self.path_to_private_key_file = "/test/path/to/config.json"
-        self.delegated_account = "delegated@account.com"
-        self.linked_customer_id = "0984320943"
+        self.json_key_file_path = "/test/path/to/config.json"
+        self.impersonated_email = "delegated@account.com"
+        self.linked_customer_id = "0987654321"
+        self.version = latest_version
 
     def test_get_client_kwargs_login_customer_id(self):
         config = {
@@ -90,6 +92,34 @@ class GoogleAdsClientTest(FileTestCase):
                 },
             )
 
+    def test_get_client_kwargs_login_customer_id_as_None(self):
+        config = {
+            "developer_token": self.developer_token,
+            "client_id": self.client_id,
+            "client_secret": self.client_secret,
+            "refresh_token": self.refresh_token,
+            "login_customer_id": None,
+        }
+        mock_credentials_instance = mock.Mock()
+
+        with mock.patch.object(
+            Client.oauth2,
+            "get_installed_app_credentials",
+            return_value=mock_credentials_instance,
+        ):
+            result = Client.GoogleAdsClient._get_client_kwargs(config)
+            self.assertEqual(
+                result,
+                {
+                    "credentials": mock_credentials_instance,
+                    "developer_token": self.developer_token,
+                    "endpoint": None,
+                    "login_customer_id": None,
+                    "logging_config": None,
+                    "linked_customer_id": None,
+                },
+            )
+
     def test_get_client_kwargs_linked_customer_id(self):
         config = {
             "developer_token": self.developer_token,
@@ -115,34 +145,6 @@ class GoogleAdsClientTest(FileTestCase):
                     "login_customer_id": None,
                     "logging_config": None,
                     "linked_customer_id": self.linked_customer_id,
-                },
-            )
-
-    def test_get_client_kwargs_login_customer_id_as_none(self):
-        config = {
-            "developer_token": self.developer_token,
-            "client_id": self.client_id,
-            "client_secret": self.client_secret,
-            "refresh_token": self.refresh_token,
-            "login_customer_id": None,
-        }
-        mock_credentials_instance = mock.Mock()
-
-        with mock.patch.object(
-            Client.oauth2,
-            "get_installed_app_credentials",
-            return_value=mock_credentials_instance,
-        ):
-            result = Client.GoogleAdsClient._get_client_kwargs(config)
-            self.assertEqual(
-                result,
-                {
-                    "credentials": mock_credentials_instance,
-                    "developer_token": self.developer_token,
-                    "endpoint": None,
-                    "login_customer_id": None,
-                    "logging_config": None,
-                    "linked_customer_id": None,
                 },
             )
 
@@ -230,6 +232,54 @@ class GoogleAdsClientTest(FileTestCase):
                 },
             )
 
+    def test_load_from_env(self):
+        mock_credentials_instance = mock.Mock()
+
+        with mock.patch.object(
+            Client.GoogleAdsClient, "__init__", return_value=None
+        ) as mock_client_init, mock.patch.object(
+            Client.oauth2,
+            "get_installed_app_credentials",
+            return_value=mock_credentials_instance,
+        ) as mock_credentials, mock.patch.dict(
+            os.environ, {"GOOGLE_ADS_DEVELOPER_TOKEN": self.developer_token}
+        ) as mock_os_environ:
+            Client.GoogleAdsClient.load_from_env()
+
+            mock_client_init.assert_called_once_with(
+                credentials=mock_credentials_instance,
+                developer_token=self.developer_token,
+                endpoint=None,
+                login_customer_id=None,
+                logging_config=None,
+                linked_customer_id=None,
+                version=None,
+            )
+
+    def test_load_from_env_versioned(self):
+        mock_credentials_instance = mock.Mock()
+
+        with mock.patch.object(
+            Client.GoogleAdsClient, "__init__", return_value=None
+        ) as mock_client_init, mock.patch.object(
+            Client.oauth2,
+            "get_installed_app_credentials",
+            return_value=mock_credentials_instance,
+        ) as mock_credentials, mock.patch.dict(
+            os.environ, {"GOOGLE_ADS_DEVELOPER_TOKEN": self.developer_token}
+        ) as mock_os_environ:
+            Client.GoogleAdsClient.load_from_env(version="v4")
+
+            mock_client_init.assert_called_once_with(
+                credentials=mock_credentials_instance,
+                developer_token=self.developer_token,
+                endpoint=None,
+                login_customer_id=None,
+                logging_config=None,
+                linked_customer_id=None,
+                version="v4",
+            )
+
     def test_load_from_dict(self):
         config = {
             "developer_token": self.developer_token,
@@ -255,6 +305,93 @@ class GoogleAdsClientTest(FileTestCase):
                 login_customer_id=None,
                 logging_config=None,
                 linked_customer_id=None,
+                version=None,
+            )
+
+    def test_load_from_dict_versioned(self):
+        config = {
+            "developer_token": self.developer_token,
+            "client_id": self.client_id,
+            "client_secret": self.client_secret,
+            "refresh_token": self.refresh_token,
+        }
+        mock_credentials_instance = mock.Mock()
+
+        with mock.patch.object(
+            Client.GoogleAdsClient, "__init__", return_value=None
+        ) as mock_client_init, mock.patch.object(
+            Client.oauth2,
+            "get_installed_app_credentials",
+            return_value=mock_credentials_instance,
+        ) as mock_credentials:
+            Client.GoogleAdsClient.load_from_dict(config, version="v4")
+
+            mock_client_init.assert_called_once_with(
+                credentials=mock_credentials_instance,
+                developer_token=self.developer_token,
+                endpoint=None,
+                login_customer_id=None,
+                logging_config=None,
+                linked_customer_id=None,
+                version="v4",
+            )
+
+    def test_load_from_string(self):
+        config = {
+            "developer_token": self.developer_token,
+            "client_id": self.client_id,
+            "client_secret": self.client_secret,
+            "refresh_token": self.refresh_token,
+        }
+        mock_credentials_instance = mock.Mock()
+
+        with mock.patch.object(
+            Client.GoogleAdsClient, "__init__", return_value=None
+        ) as mock_client_init, mock.patch.object(
+            Client.oauth2,
+            "get_installed_app_credentials",
+            return_value=mock_credentials_instance,
+        ) as mock_credentials:
+            Client.GoogleAdsClient.load_from_string(yaml.dump(config))
+
+            mock_client_init.assert_called_once_with(
+                credentials=mock_credentials_instance,
+                developer_token=self.developer_token,
+                endpoint=None,
+                login_customer_id=None,
+                logging_config=None,
+                linked_customer_id=None,
+                version=None,
+            )
+
+    def test_load_from_string_versioned(self):
+        config = {
+            "developer_token": self.developer_token,
+            "client_id": self.client_id,
+            "client_secret": self.client_secret,
+            "refresh_token": self.refresh_token,
+        }
+        mock_credentials_instance = mock.Mock()
+
+        with mock.patch.object(
+            Client.GoogleAdsClient, "__init__", return_value=None
+        ) as mock_client_init, mock.patch.object(
+            Client.oauth2,
+            "get_installed_app_credentials",
+            return_value=mock_credentials_instance,
+        ) as mock_credentials:
+            Client.GoogleAdsClient.load_from_string(
+                yaml.dump(config), version="v4"
+            )
+
+            mock_client_init.assert_called_once_with(
+                credentials=mock_credentials_instance,
+                developer_token=self.developer_token,
+                endpoint=None,
+                login_customer_id=None,
+                logging_config=None,
+                linked_customer_id=None,
+                version="v4",
             )
 
     def test_load_from_storage(self):
@@ -289,6 +426,42 @@ class GoogleAdsClientTest(FileTestCase):
                 login_customer_id=None,
                 logging_config=None,
                 linked_customer_id=None,
+                version=None,
+            )
+
+    def test_load_from_storage_versioned(self):
+        config = {
+            "developer_token": self.developer_token,
+            "client_id": self.client_id,
+            "client_secret": self.client_secret,
+            "refresh_token": self.refresh_token,
+        }
+
+        file_path = os.path.join(os.path.expanduser("~"), "google-ads.yaml")
+        self.fs.create_file(file_path, contents=yaml.safe_dump(config))
+        mock_credentials_instance = mock.Mock()
+
+        with mock.patch.object(
+            Client.GoogleAdsClient, "__init__", return_value=None
+        ) as mock_client_init, mock.patch.object(
+            Client.oauth2,
+            "get_installed_app_credentials",
+            return_value=mock_credentials_instance,
+        ) as mock_credentials:
+            Client.GoogleAdsClient.load_from_storage(version="v4")
+            mock_credentials.assert_called_once_with(
+                config.get("client_id"),
+                config.get("client_secret"),
+                config.get("refresh_token"),
+            )
+            mock_client_init.assert_called_once_with(
+                credentials=mock_credentials_instance,
+                developer_token=self.developer_token,
+                endpoint=None,
+                login_customer_id=None,
+                logging_config=None,
+                linked_customer_id=None,
+                version="v4",
             )
 
     def test_load_from_storage_login_cid_int(self):
@@ -325,6 +498,7 @@ class GoogleAdsClientTest(FileTestCase):
                 login_customer_id=str(login_cid),
                 logging_config=None,
                 linked_customer_id=None,
+                version=None,
             )
 
     def test_load_from_storage_custom_path(self):
@@ -354,6 +528,7 @@ class GoogleAdsClientTest(FileTestCase):
                 login_customer_id=None,
                 logging_config=None,
                 linked_customer_id=None,
+                version=None,
             )
 
     def test_load_from_storage_file_not_found(self):
@@ -382,8 +557,8 @@ class GoogleAdsClientTest(FileTestCase):
     def test_load_from_storage_service_account_config(self):
         config = {
             "developer_token": self.developer_token,
-            "json_key_file_path": self.path_to_private_key_file,
-            "impersonated_email": self.delegated_account,
+            "json_key_file_path": self.json_key_file_path,
+            "impersonated_email": self.impersonated_email,
         }
 
         file_path = os.path.join(os.path.expanduser("~"), "google-ads.yaml")
@@ -397,7 +572,7 @@ class GoogleAdsClientTest(FileTestCase):
             "get_service_account_credentials",
             return_value=mock_credentials_instance,
         ) as mock_credentials:
-            Client.GoogleAdsClient.load_from_storage()
+            Client.GoogleAdsClient.load_from_storage(version=latest_version)
             mock_credentials.assert_called_once_with(
                 config.get("json_key_file_path"),
                 config.get("impersonated_email"),
@@ -409,12 +584,13 @@ class GoogleAdsClientTest(FileTestCase):
                 login_customer_id=None,
                 logging_config=None,
                 linked_customer_id=None,
+                version=latest_version,
             )
 
-    def test_load_from_storage_service_account_no_delegated_account(self):
+    def test_load_from_storage_service_account_no_impersonated_email(self):
         config = {
             "developer_token": self.developer_token,
-            "path_to_private_key_file": self.path_to_private_key_file,
+            "json_key_file_path": self.json_key_file_path,
         }
 
         file_path = os.path.join(os.path.expanduser("~"), "google-ads.yaml")
@@ -435,9 +611,9 @@ class GoogleAdsClientTest(FileTestCase):
     def test_get_service(self):
         # Retrieve service names for all defined service clients.
         for ver in valid_versions:
-            services_path = "google.ads.google_ads.%s" % ver
+            services_path = f"google.ads.googleads.{ver}"
             service_names = [
-                "%s%s" % (name.rsplit("ServiceClient")[0], "Service")
+                f'{name.rsplit("ServiceClient")[0]}Service'
                 for name in dir(import_module(services_path))
                 if "ServiceClient" in name
             ]
@@ -451,15 +627,12 @@ class GoogleAdsClientTest(FileTestCase):
     def test_get_service_custom_endpoint(self):
         service_name = "GoogleAdsService"
         service_module_base = "google_ads_service"
-        grpc_transport_class_name = "%sGrpcTransport" % service_name
-        grpc_transport_module_name = "%s_grpc_transport" % service_module_base
+        grpc_transport_class_name = f"{service_name}GrpcTransport"
+        grpc_transport_module_name = f"{service_module_base}_grpc_transport"
         transport_create_channel_path = (
-            "google.ads.google_ads.%s.services.transports.%s.%s.create_channel"
-            % (
-                Client._DEFAULT_VERSION,
-                grpc_transport_module_name,
-                grpc_transport_class_name,
-            )
+            f"google.ads.googleads.{Client._DEFAULT_VERSION}.services.services."
+            f"{service_module_base}.transports.{grpc_transport_class_name}."
+            "create_channel"
         )
         endpoint = "alt.endpoint.com"
         client = self._create_test_client(endpoint=endpoint)
@@ -473,7 +646,7 @@ class GoogleAdsClientTest(FileTestCase):
             # client.
             client.get_service(service_name)
             mock_create_channel.assert_called_once_with(
-                address=endpoint,
+                host=endpoint,
                 credentials=client.credentials,
                 options=Client._GRPC_CHANNEL_OPTIONS,
             )
@@ -498,43 +671,36 @@ class GoogleAdsClientTest(FileTestCase):
         except Exception:
             self.fail("get_service with a valid version raised an error")
 
-    # XXX: deferred test for fixing lazy loading
-    #    def test_get_service_with_interceptor(self):
-    #        client = self._create_test_client()
-    #
-    #        class Interceptor:
-    #            pass
-    #
-    #        interceptor = Interceptor()
-    #
-    #        with mock.patch.object(
-    #            Client,
-    #            'intercept_channel'
-    #        ) as mock_intercept_channel:
-    #            client.get_service('GoogleAdsService', interceptors=[interceptor])
-    #            first_interceptor = mock_intercept_channel.call_args[0][1]
-    #            self.assertEqual(first_interceptor, interceptor)
-    #
     def test_get_type(self):
         for ver in valid_versions:
             # Retrieve names for all types defined in pb2 files.
-            type_path = f"google.ads.google_ads.{ver}.types"
+            type_path = f"google.ads.googleads.{ver}"
             type_names = import_module(type_path).__all__
+            client = self._create_test_client()
             # Iterate through retrieval of all types by name.
             for name in type_names:
-                if name.lower().endswith("pb2"):
+                if name.lower().endswith(
+                    "serviceclient"
+                ) or name.lower().endswith("transport"):
                     continue
-                Client.GoogleAdsClient.get_type(name, version=ver)
+
+                try:
+                    client.get_type(name, version=ver)
+                except ValueError as error:
+                    self.fail(
+                        f"Expected {name} in {ver} to be importable via "
+                        f"the client.get_type method: {error}"
+                    )
 
     def test_get_type_not_found(self):
-        self.assertRaises(
-            ValueError, Client.GoogleAdsClient.get_type, "BadType"
-        )
+        client = self._create_test_client()
+        self.assertRaises(ValueError, client.get_type, "BadType")
 
     def test_get_type_invalid_version(self):
+        client = self._create_test_client()
         self.assertRaises(
             ValueError,
-            Client.GoogleAdsClient.get_type,
+            client.get_type,
             "GoogleAdsFailure",
             version="bad_version",
         )
@@ -551,7 +717,7 @@ class GoogleAdsClientTest(FileTestCase):
             mock_credentials_instance.client_id = self.client_id
             mock_credentials_instance.client_secret = self.client_secret
             Client.GoogleAdsClient(
-                mock_credentials_instance, self.developer_token
+                latest_version, mock_credentials_instance, self.developer_token
             )
             mock_dictConfig.assert_not_called()
 
@@ -568,76 +734,157 @@ class GoogleAdsClientTest(FileTestCase):
             mock_credentials_instance.client_id = self.client_id
             mock_credentials_instance.client_secret = self.client_secret
             Client.GoogleAdsClient(
+                latest_version,
                 mock_credentials_instance,
                 self.developer_token,
                 logging_config=config,
             )
             mock_dictConfig.assert_called_once_with(config)
 
-    def test_service_client_dot_enums_property(self):
-        """Ensures that services expose Enums via an "enums" attribute.
-
-        This tests the 'service.enum' property for a service in every version
-        of the API, which implicitly tests the 'services/enums.py' file, which
-        exposes the enums used by the property. It loops over each member of
-        'service.enum' and compares it to the raw enum 'pb2' file found by
-        calling 'client.get_type' with the enum's name.
-        """
+    def test_client_dot_enums_hasattr(self):
+        """Ensures hasattr works as expected with real Enum."""
         client = self._create_test_client()
+        self.assertTrue(hasattr(client.enums, "CampaignStatusEnum"))
 
+    def test_client_dot_enums_only_enums(self):
+        """Ensures non-Enum name raises AttributeError."""
+        client = self._create_test_client()
+        self.assertRaises(AttributeError, getattr, client.enums, "Campaign")
+
+    def test_client_dot_enums_property(self):
+        """Ensures that GoogleAdsClient  exposes Enums via an "enums" attribute.
+
+        This tests the 'client.enums' property for a service in every version
+        of the API. It loops over the names of all properties on 'client.enums',
+        imports them using client.get_type to ensure they're part of the API,
+        and ensures the enum fields are directly accessible wihout needing to
+        access the inner Enum object.
+        """
         for ver in valid_versions:
-            service = client.get_service("GoogleAdsService", version=ver)
+            client = self._create_test_client(version=ver)
             self.assertTrue(
-                hasattr(service, "enums"),
+                hasattr(client, "enums"),
                 "GoogleAdsService in "
                 f'{ver} does not have an "enums" attribute.',
             )
 
-            def is_enum_wrapper(member):
-                """Determines whether the given memberect is an enum wrapper."""
-                # in newer API versions we can identify an enum wrapper as
-                # having no attributes because their attributes are generated
-                # dynamically when accessed.
-                if not getmembers(member):
-                    return True
-                # in older API versions we can identify an enum wrapper as being
-                # a class where at least one member is an instance of
-                # enum.EnumMeta.
-                elif isclass(member) and getmembers(
-                    member, lambda name: isinstance(name, enum.EnumMeta)
-                ):
-                    return True
+            enum_names = import_module(
+                f"google.ads.googleads.{ver}.enums"
+            ).__all__
 
-                return False
+            for name in enum_names:
+                self.assertTrue(hasattr(client.enums, name))
+                self.assertIsInstance(
+                    getattr(client.enums, name), ProtoEnumMeta
+                )
 
-            def is_enum(member):
-                """Determines whether the given memberect is an enum."""
-                # Enums inherit from the base class EnumTypeWrapper, not to be
-                # confused with the enum wrappers mentioned elsewhere in this
-                # test, which are classes defined in the Ads API containing
-                # Enums.
-                return isinstance(member, EnumTypeWrapper)
+    def test_client_copy_from_both_wrapped(self):
+        """client.copy_from works with two wrapped proto messages."""
+        client = self._create_test_client()
+        destination = client.get_type("Campaign", version=latest_version)
+        origin = client.get_type("Campaign", version=latest_version)
+        origin.name = "Test"
 
-            # every enum in the API should be accessible on a service client
-            # instance, for example service.enums.DeviceEnum.Device.MOBILE. Here
-            # we loop over all the members of service.enums, filtering for enum
-            # wrappers.
-            for member in getmembers(service.enums, is_enum_wrapper):
-                enum_wrapper_name = member[0]
-                # we retrieve the raw enum class to make sure its inner enum
-                # object is accessible on the service.enums.EnumWrapper path.
-                raw_enum = client.get_type(enum_wrapper_name, version=ver)
-                # enum wrappers have at most one enum attribute so we loop over
-                # all attributes filtering for the one that is an enum and
-                # exposing its __name__ in the loop.
-                for enum_name, _ in getmembers(raw_enum, is_enum):
-                    # if enum_wrapper_name is DeviceEnum and enum_name is
-                    # Device we assert that service.enums.DeviceEnum.Device is
-                    # valid.
-                    self.assertTrue(
-                        hasattr(
-                            getattr(service.enums, enum_wrapper_name), enum_name
-                        ),
-                        f'Expected enum wrapper "{enum_wrapper_name}" to '
-                        f'contain enum class "{enum_name}"',
-                    )
+        client.copy_from(destination, origin)
+
+        self.assertEqual(destination.name, "Test")
+        self.assertIsNot(destination, origin)
+
+    def test_client_copy_from_both_native(self):
+        """client.copy_from works with two native proto messages."""
+        client = self._create_test_client()
+        destination = client.get_type("Campaign", version=latest_version)
+        native_dest = type(destination).pb(destination)
+        origin = client.get_type("Campaign", version=latest_version)
+        native_orig = type(origin).pb(origin)
+        origin.name = "Test"
+
+        client.copy_from(native_dest, native_orig)
+
+        self.assertEqual(destination.name, "Test")
+        self.assertIsNot(destination, origin)
+
+    def test_client_copy_from_native_origin(self):
+        """client.copy_from works with a wrapped dest and a native origin."""
+        client = self._create_test_client()
+        destination = client.get_type("Campaign", version=latest_version)
+        origin = client.get_type("Campaign", version=latest_version)
+        native_orig = type(origin).pb(origin)
+        origin.name = "Test"
+
+        client.copy_from(destination, native_orig)
+
+        self.assertEqual(destination.name, "Test")
+        self.assertIsNot(destination, origin)
+
+    def test_client_copy_from_native_destination(self):
+        """client.copy_from works with a native dest and a wrapped origin."""
+        client = self._create_test_client()
+        destination = client.get_type("Campaign", version=latest_version)
+        native_dest = type(destination).pb(destination)
+        origin = client.get_type("Campaign", version=latest_version)
+        origin.name = "Test"
+
+        client.copy_from(native_dest, origin)
+
+        self.assertEqual(destination.name, "Test")
+        self.assertIsNot(destination, origin)
+
+    def test_client_copy_from_different_types_wrapped(self):
+        """TypeError is raised with different types of wrapped messasges."""
+        client = self._create_test_client()
+        destination = client.get_type("AdGroup", version=latest_version)
+        origin = client.get_type("Campaign", version=latest_version)
+        origin.name = "Test"
+
+        self.assertRaises(TypeError, client.copy_from, destination, origin)
+
+    def test_client_copy_from_different_types_native(self):
+        """TypeError is raised with different types of native messasges."""
+        client = self._create_test_client()
+        destination = client.get_type("AdGroup", version=latest_version)
+        native_dest = type(destination).pb(destination)
+        origin = client.get_type("Campaign", version=latest_version)
+        native_orig = type(origin).pb(origin)
+        origin.name = "Test"
+
+        self.assertRaises(TypeError, client.copy_from, native_dest, native_orig)
+
+    def test_client_copy_from_different_types_native_origin(self):
+        """TypeError is raised with different types and native origin."""
+        client = self._create_test_client()
+        destination = client.get_type("AdGroup", version=latest_version)
+        origin = client.get_type("Campaign", version=latest_version)
+        native_orig = type(origin).pb(origin)
+        origin.name = "Test"
+
+        self.assertRaises(TypeError, client.copy_from, destination, native_orig)
+
+    def test_client_copy_from_different_types_native_destination(self):
+        """TypeError is raised with different types and native destination."""
+        client = self._create_test_client()
+        destination = client.get_type("AdGroup", version=latest_version)
+        native_dest = type(destination).pb(destination)
+        origin = client.get_type("Campaign", version=latest_version)
+        origin.name = "Test"
+
+        self.assertRaises(TypeError, client.copy_from, native_dest, origin)
+
+    def test_client_copy_from_non_proto_message(self):
+        """ValueError is raised if an object other than a protobuf is given"""
+        client = self._create_test_client()
+        destination = client.get_type("AdGroup", version=latest_version)
+        origin = {"name": "Test"}
+
+        self.assertRaises(ValueError, client.copy_from, destination, origin)
+
+    def test_client_is_picklable(self):
+        client = Client.GoogleAdsClient(
+            {}, self.developer_token, endpoint=None, version=None,
+        )
+
+        try:
+            pickled = pickle.dumps(client)
+            pickle.loads(pickled)
+        except:
+            self.fail("Exception occurred when pickling GoogleAdsClient")

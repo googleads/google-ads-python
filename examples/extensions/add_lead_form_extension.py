@@ -22,8 +22,8 @@ import argparse
 import sys
 from uuid import uuid4
 
-from google.ads.google_ads.client import GoogleAdsClient
-from google.ads.google_ads.errors import GoogleAdsException
+from google.ads.googleads.client import GoogleAdsClient
+from google.ads.googleads.errors import GoogleAdsException
 
 
 def main(client, customer_id, campaign_id):
@@ -34,24 +34,10 @@ def main(client, customer_id, campaign_id):
         customer_id: The Google Ads customer ID.
         campaign_id: The ID for a Campaign belonging to the given customer.
     """
-    try:
-        lead_form_asset_resource_name = _create_lead_form_asset(
-            client, customer_id
-        )
-        _create_lead_form_extension(
-            client, customer_id, campaign_id, lead_form_asset_resource_name
-        )
-    except GoogleAdsException as ex:
-        print(
-            f'Request with ID "{ex.request_id}" failed with status '
-            f'"{ex.error.code().name}" and includes the following errors:'
-        )
-        for error in ex.failure.errors:
-            print(f'\tError with message "{error.message}".')
-            if error.location:
-                for field_path_element in error.location.field_path_elements:
-                    print(f"\t\tOn field: {field_path_element.field_name}")
-        sys.exit(1)
+    lead_form_asset_resource_name = _create_lead_form_asset(client, customer_id)
+    _create_lead_form_extension(
+        client, customer_id, campaign_id, lead_form_asset_resource_name
+    )
 
 
 def _create_lead_form_asset(client, customer_id):
@@ -64,8 +50,8 @@ def _create_lead_form_asset(client, customer_id):
     Returns:
         A str of the resource name for the newly created lead form asset.
     """
-    asset_service = client.get_service("AssetService", version="v6")
-    asset_operation = client.get_type("AssetOperation", version="v6")
+    asset_service = client.get_service("AssetService")
+    asset_operation = client.get_type("AssetOperation")
     asset = asset_operation.create
     asset.name = f"Interplanetary Cruise #{uuid4()} Lead Form"
     asset.final_urls.append("http://example.com/jupiter")
@@ -75,8 +61,8 @@ def _create_lead_form_asset(client, customer_id):
 
     # Specify the details of the extension that the users will see.
     lead_form_asset.call_to_action_type = client.get_type(
-        "LeadFormCallToActionTypeEnum", version="v6"
-    ).BOOK_NOW
+        "LeadFormCallToActionTypeEnum"
+    ).LeadFormCallToActionType.BOOK_NOW
     lead_form_asset.call_to_action_description = "Latest trip to Jupiter!"
 
     # Define the form details.
@@ -89,21 +75,21 @@ def _create_lead_form_asset(client, customer_id):
 
     # Define the fields to be displayed to the user.
     input_type_enum = client.get_type(
-        "LeadFormFieldUserInputTypeEnum", version="v6"
-    )
-    lead_form_field_1 = client.get_type("LeadFormField", version="v6")
+        "LeadFormFieldUserInputTypeEnum"
+    ).LeadFormFieldUserInputType
+    lead_form_field_1 = client.get_type("LeadFormField")
     lead_form_field_1.input_type = input_type_enum.FULL_NAME
     lead_form_asset.fields.append(lead_form_field_1)
 
-    lead_form_field_2 = client.get_type("LeadFormField", version="v6")
+    lead_form_field_2 = client.get_type("LeadFormField")
     lead_form_field_2.input_type = input_type_enum.EMAIL
     lead_form_asset.fields.append(lead_form_field_2)
 
-    lead_form_field_3 = client.get_type("LeadFormField", version="v6")
+    lead_form_field_3 = client.get_type("LeadFormField")
     lead_form_field_3.input_type = input_type_enum.PHONE_NUMBER
     lead_form_asset.fields.append(lead_form_field_3)
 
-    lead_form_field_4 = client.get_type("LeadFormField", version="v6")
+    lead_form_field_4 = client.get_type("LeadFormField")
     lead_form_field_4.input_type = input_type_enum.PREFERRED_CONTACT_TIME
     lead_form_field_4.single_choice_answers.answers.extend(
         ["Before 9 AM", "Anytime", "After 5 PM"]
@@ -121,8 +107,8 @@ def _create_lead_form_asset(client, customer_id):
         "details."
     )
     lead_form_asset.post_submit_call_to_action_type = client.get_type(
-        "LeadFormPostSubmitCallToActionTypeEnum", version="v6"
-    ).VISIT_SITE
+        "LeadFormPostSubmitCallToActionTypeEnum"
+    ).LeadFormPostSubmitCallToActionType.VISIT_SITE
 
     # Optional: Display a custom disclosure that displays along with the Google
     # disclaimer on the form.
@@ -133,15 +119,18 @@ def _create_lead_form_asset(client, customer_id):
     # Optional: Define a delivery method for the form response. See
     # https://developers.google.com/google-ads/webhook/docs/overview for more
     # details on how to define a webhook.
-    delivery_method = lead_form_asset.delivery_methods.add()
+    delivery_method = client.get_type("LeadFormDeliveryMethod")
     delivery_method.webhook.advertiser_webhook_url = (
         "http://example.com/webhook"
     )
     delivery_method.webhook.google_secret = "interplanetary google secret"
     delivery_method.webhook.payload_schema_version = 3
+    lead_form_asset.delivery_methods.append(delivery_method)
 
-    asset_service = client.get_service("AssetService", version="v6")
-    response = asset_service.mutate_assets(customer_id, [asset_operation])
+    asset_service = client.get_service("AssetService")
+    response = asset_service.mutate_assets(
+        customer_id=customer_id, operations=[asset_operation]
+    )
     resource_name = response.results[0].resource_name
 
     print(f"Asset with resource name {resource_name} was created.")
@@ -159,24 +148,20 @@ def _create_lead_form_extension(
         customer_id: The Google Ads customer ID.
         campaign_id: The ID for a Campaign belonging to the given customer.
     """
-    campaign_service = client.get_service("CampaignService", version="v6")
-    campaign_asset_service = client.get_service(
-        "CampaignAssetService", version="v6"
-    )
-    campaign_asset_operation = client.get_type(
-        "CampaignAssetOperation", version="v6"
-    )
+    campaign_service = client.get_service("CampaignService")
+    campaign_asset_service = client.get_service("CampaignAssetService")
+    campaign_asset_operation = client.get_type("CampaignAssetOperation")
     campaign_asset = campaign_asset_operation.create
     campaign_asset.asset = lead_form_asset_resource_name
     campaign_asset.field_type = client.get_type(
-        "AssetFieldTypeEnum", version="v6"
-    ).LEAD_FORM
+        "AssetFieldTypeEnum"
+    ).AssetFieldType.LEAD_FORM
     campaign_asset.campaign = campaign_service.campaign_path(
         customer_id, campaign_id
     )
 
     response = campaign_asset_service.mutate_campaign_assets(
-        customer_id, [campaign_asset_operation]
+        customer_id=customer_id, operations=[campaign_asset_operation]
     )
     for result in response.results:
         print(
@@ -188,7 +173,7 @@ def _create_lead_form_extension(
 if __name__ == "__main__":
     # GoogleAdsClient will read the google-ads.yaml configuration file in the
     # home directory if none is specified.
-    google_ads_client = GoogleAdsClient.load_from_storage()
+    googleads_client = GoogleAdsClient.load_from_storage(version="v6")
 
     parser = argparse.ArgumentParser(
         description="This code example creates a lead form and a lead form "
@@ -212,4 +197,16 @@ if __name__ == "__main__":
     )
     args = parser.parse_args()
 
-    main(google_ads_client, args.customer_id, args.campaign_id)
+    try:
+        main(googleads_client, args.customer_id, args.campaign_id)
+    except GoogleAdsException as ex:
+        print(
+            f'Request with ID "{ex.request_id}" failed with status '
+            f'"{ex.error.code().name}" and includes the following errors:'
+        )
+        for error in ex.failure.errors:
+            print(f'\tError with message "{error.message}".')
+            if error.location:
+                for field_path_element in error.location.field_path_elements:
+                    print(f"\t\tOn field: {field_path_element.field_name}")
+        sys.exit(1)

@@ -17,15 +17,16 @@
 
 import argparse
 import sys
-from google.ads.google_ads.client import GoogleAdsClient
-from google.ads.google_ads.errors import GoogleAdsException
+
+from google.ads.googleads.client import GoogleAdsClient
+from google.ads.googleads.errors import GoogleAdsException
 
 _DEFAULT_PAGE_SIZE = 1000
 
 
 def main(client, customer_id, page_size):
     """Main method, to run this code example as a standalone application."""
-    ga_service = client.get_service("GoogleAdsService", version="v6")
+    ga_service = client.get_service("GoogleAdsService")
 
     # Creates a query that will retrieve all video and image files.
     query = """
@@ -34,36 +35,26 @@ def main(client, customer_id, page_size):
         ORDER BY media_file.id"""
 
     # Issues a search request by specifying page size.
-    results = ga_service.search(customer_id, query=query, page_size=page_size)
-
-    media_type_enum = client.get_type("MediaTypeEnum", version="v6").MediaType
+    search_request = client.get_type("SearchGoogleAdsRequest")
+    search_request.customer_id = customer_id
+    search_request.query = query
+    search_request.page_size = page_size
+    results = ga_service.search(request=search_request)
 
     # Iterates over all rows and prints the information about each media file.
-    try:
-        for row in results:
-            media_file = row.media_file
-            print(
-                f"Media file with ID {media_file.id}, "
-                f'name "{media_file.name}", '
-                f"type {media_type_enum.Name(media_file.type)} was found."
-            )
-    except GoogleAdsException as ex:
+    for row in results:
+        media_file = row.media_file
         print(
-            f'Request with ID "{ex.request_id}" failed with status '
-            f'"{ex.error.code().name}" and includes the following errors:'
+            f"Media file with ID {media_file.id}, "
+            f'name "{media_file.name}", '
+            f"type {media_file.type_.name} was found."
         )
-        for error in ex.failure.errors:
-            print(f'\tError with message "{error.message}".')
-            if error.location:
-                for field_path_element in error.location.field_path_elements:
-                    print(f"\t\tOn field: {field_path_element.field_name}")
-        sys.exit(1)
 
 
 if __name__ == "__main__":
     # GoogleAdsClient will read the google-ads.yaml configuration file in the
     # home directory if none is specified.
-    google_ads_client = GoogleAdsClient.load_from_storage()
+    googleads_client = GoogleAdsClient.load_from_storage(version="v6")
 
     parser = argparse.ArgumentParser(
         description="List all videos and images for specified customer."
@@ -78,4 +69,16 @@ if __name__ == "__main__":
     )
     args = parser.parse_args()
 
-    main(google_ads_client, args.customer_id, _DEFAULT_PAGE_SIZE)
+    try:
+        main(googleads_client, args.customer_id, _DEFAULT_PAGE_SIZE)
+    except GoogleAdsException as ex:
+        print(
+            f'Request with ID "{ex.request_id}" failed with status '
+            f'"{ex.error.code().name}" and includes the following errors:'
+        )
+        for error in ex.failure.errors:
+            print(f'	Error with message "{error.message}".')
+            if error.location:
+                for field_path_element in error.location.field_path_elements:
+                    print(f"\t\tOn field: {field_path_element.field_name}")
+        sys.exit(1)

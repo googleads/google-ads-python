@@ -27,8 +27,8 @@ Google Ads accounts here: https://support.google.com/merchants/answer/6159060.
 import argparse
 import sys
 
-from google.ads.google_ads.client import GoogleAdsClient
-from google.ads.google_ads.errors import GoogleAdsException
+from google.ads.googleads.client import GoogleAdsClient
+from google.ads.googleads.errors import GoogleAdsException
 
 
 def main(client, customer_id, merchant_center_account_id):
@@ -42,75 +42,60 @@ def main(client, customer_id, merchant_center_account_id):
     """
     # Get the MerchantCenterLinkService client.
     merchant_center_link_service = client.get_service(
-        "MerchantCenterLinkService", version="v6"
+        "MerchantCenterLinkService"
     )
-    try:
-        # Get the extant customer account to Merchant Center account links.
-        list_merchant_center_links_response = merchant_center_link_service.list_merchant_center_links(
-            customer_id
+    # Get the extant customer account to Merchant Center account links.
+    list_merchant_center_links_response = (
+        merchant_center_link_service.list_merchant_center_links(
+            customer_id=customer_id
+        )
+    )
+
+    number_of_links = len(
+        list_merchant_center_links_response.merchant_center_links
+    )
+
+    if number_of_links == 0:
+        print(
+            "There are no current merchant center links to Google Ads "
+            f"account {customer_id}. This example will now exit."
+        )
+        return
+
+    print(
+        f"{number_of_links} Merchant Center link(s) found with the "
+        "following details:"
+    )
+
+    for (
+        merchant_center_link
+    ) in list_merchant_center_links_response.merchant_center_links:
+        print(
+            f"\tLink '{merchant_center_link.resource_name}' has status "
+            f"'{merchant_center_link.status.name}'."
         )
 
-        number_of_links = len(
-            list_merchant_center_links_response.merchant_center_links
-        )
-
-        if number_of_links <= 0:
-            print(
-                "There are no current merchant center links to Google Ads "
-                f"account {customer_id}. This example will now exit."
+        # Check if this is the link to the target Merchant Center account.
+        if merchant_center_link.id == merchant_center_account_id:
+            # A Merchant Center link can be pending or enabled; in both
+            # cases, we reject it by removing the link.
+            _remove_merchant_center_link(
+                client,
+                merchant_center_link_service,
+                customer_id,
+                merchant_center_link,
             )
+
+            # We can terminate early since this example concerns only one
+            # Google Ads account to Merchant Center account link.
             return
 
-        print(
-            f"{number_of_links} Merchant Center link(s) found with the "
-            "following details:"
-        )
-
-        merchant_center_link_status_enum = client.get_type(
-            "MerchantCenterLinkStatusEnum", version="v6"
-        ).MerchantCenterLinkStatus
-
-        for (
-            merchant_center_link
-        ) in list_merchant_center_links_response.merchant_center_links:
-            print(
-                f"\tLink '{merchant_center_link.resource_name}' has status "
-                f"'{merchant_center_link_status_enum.Name(merchant_center_link.status)}'."
-            )
-
-            # Check if this is the link to the target Merchant Center account.
-            if merchant_center_link.id == merchant_center_account_id:
-                # A Merchant Center link can be pending or enabled; in both
-                # cases, we reject it by removing the link.
-                _remove_merchant_center_link(
-                    client,
-                    merchant_center_link_service,
-                    customer_id,
-                    merchant_center_link,
-                )
-
-                # We can terminate early since this example concerns only one
-                # Google Ads account to Merchant Center account link.
-                return
-
-        # Raise an exception if no matching Merchant Center link was found.
-        raise ValueError(
-            "No link could was found between Google Ads account "
-            f"{customer_id} and Merchant Center account "
-            f"{merchant_center_account_id}."
-        )
-
-    except GoogleAdsException as ex:
-        print(
-            f'Request with ID "{ex.request_id}" failed with status '
-            f'"{ex.error.code().name}" and includes the following errors:'
-        )
-        for error in ex.failure.errors:
-            print(f'\tError with message "{error.message}".')
-            if error.location:
-                for field_path_element in error.location.field_path_elements:
-                    print(f"\t\tOn field: {field_path_element.field_name}")
-        sys.exit(1)
+    # Raise an exception if no matching Merchant Center link was found.
+    raise ValueError(
+        "No link could was found between Google Ads account "
+        f"{customer_id} and Merchant Center account "
+        f"{merchant_center_account_id}."
+    )
 
 
 def _remove_merchant_center_link(
@@ -128,12 +113,12 @@ def _remove_merchant_center_link(
     """
     # Create a single remove operation, specifying the Merchant Center link
     # resource name.
-    operation = client.get_type("MerchantCenterLinkOperation", version="v6")
+    operation = client.get_type("MerchantCenterLinkOperation")
     operation.remove = merchant_center_link.resource_name
 
     # Send the operation in a mutate request.
     response = merchant_center_link_service.mutate_merchant_center_link(
-        customer_id, operation
+        customer_id=customer_id, operation=operation
     )
     print(
         "Removed Merchant Center link with resource name "
@@ -144,7 +129,7 @@ def _remove_merchant_center_link(
 if __name__ == "__main__":
     # GoogleAdsClient will read the google-ads.yaml configuration file in the
     # home directory if none is specified.
-    google_ads_client = GoogleAdsClient.load_from_storage()
+    googleads_client = GoogleAdsClient.load_from_storage(version="v6")
 
     parser = argparse.ArgumentParser(
         description=(
@@ -169,4 +154,18 @@ if __name__ == "__main__":
     )
     args = parser.parse_args()
 
-    main(google_ads_client, args.customer_id, args.merchant_center_account_id)
+    try:
+        main(
+            googleads_client, args.customer_id, args.merchant_center_account_id
+        )
+    except GoogleAdsException as ex:
+        print(
+            f'Request with ID "{ex.request_id}" failed with status '
+            f'"{ex.error.code().name}" and includes the following errors:'
+        )
+        for error in ex.failure.errors:
+            print(f'\tError with message "{error.message}".')
+            if error.location:
+                for field_path_element in error.location.field_path_elements:
+                    print(f"\t\tOn field: {field_path_element.field_name}")
+        sys.exit(1)

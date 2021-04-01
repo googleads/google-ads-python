@@ -21,8 +21,8 @@ To get campaigns, run get_campaigns.py.
 import argparse
 import sys
 
-from google.ads.google_ads.client import GoogleAdsClient
-from google.ads.google_ads.errors import GoogleAdsException
+from google.ads.googleads.client import GoogleAdsClient
+from google.ads.googleads.errors import GoogleAdsException
 
 
 def main(client, customer_id, campaign_id):
@@ -33,7 +33,7 @@ def main(client, customer_id, campaign_id):
       customer_id: The customer ID for which to get the simulations.
       campaign_id: The campaign ID from which to get the simulations.
     """
-    google_ads_service = client.get_service("GoogleAdsService", version="v6")
+    googleads_service = client.get_service("GoogleAdsService")
 
     query = f"""
         SELECT
@@ -46,55 +46,44 @@ def main(client, customer_id, campaign_id):
           campaign_criterion_simulation.type = BID_MODIFIER
           AND campaign_criterion_simulation.campaign_id = {campaign_id}"""
 
-    try:
-        # Issues a search request using streaming.
-        response = google_ads_service.search_stream(customer_id, query=query)
+    # Issues a search request using streaming.
+    response = googleads_service.search_stream(
+        customer_id=customer_id, query=query
+    )
 
-        # Iterates over all rows in all messages and prints the requested field
-        # values for the ad group criterion CPC bid simulation in each row.
-        for batch in response:
-            for row in batch.results:
-                simulation = row.campaign_criterion_simulation
+    # Iterates over all rows in all messages and prints the requested field
+    # values for the ad group criterion CPC bid simulation in each row.
+    for batch in response:
+        for row in batch.results:
+            simulation = row.campaign_criterion_simulation
 
+            print(
+                "Found campaign-level criterion bid modifier simulation "
+                f"for criterion with ID {simulation.criterion_id}, start "
+                f"date {simulation.start_date}, end date "
+                f"{simulation.end_date}, and points:"
+            )
+
+            for point in simulation.bid_modifier_point_list.points:
                 print(
-                    "Found campaign-level criterion bid modifier simulation "
-                    f"for criterion with ID {simulation.criterion_id}, start "
-                    f"date {simulation.start_date}, end date "
-                    f"{simulation.end_date}, and points:"
+                    f"\tbid modifier: {'{point.bid_modifier:.2f}'} "
+                    f"=> clicks: {point.clicks}, "
+                    f"cost: {point.cost_micros}, "
+                    f"impressions: {point.impressions}, "
+                    f"parent clicks: {point.parent_clicks}, "
+                    f"parent cost: {point.parent_cost_micros}, "
+                    f"parent impressions: {point.parent_impressions}, "
+                    "parent required budget: "
+                    f"{point.parent_required_budget_micros}",
                 )
 
-                for point in simulation.bid_modifier_point_list.points:
-                    print(
-                        f"\tbid modifier: {'{point.bid_modifier:.2f}'} "
-                        f"=> clicks: {point.clicks}, "
-                        f"cost: {point.cost_micros}, "
-                        f"impressions: {point.impressions}, "
-                        f"parent clicks: {point.parent_clicks}, "
-                        f"parent cost: {point.parent_cost_micros}, "
-                        f"parent impressions: {point.parent_impressions}, "
-                        "parent required budget: "
-                        f"{point.parent_required_budget_micros}",
-                    )
-
-                print()
-
-    except GoogleAdsException as ex:
-        print(
-            f"Request with ID '{ex.request_id}' failed with status "
-            f"'{ex.error.code().name}' and includes the following errors:"
-        )
-        for error in ex.failure.errors:
-            print(f"\tError with message '{error.message}'.")
-            if error.location:
-                for field_path_element in error.location.field_path_elements:
-                    print(f"\t\tOn field: {field_path_element.field_name}")
-        sys.exit(1)
+            print()
 
 
 if __name__ == "__main__":
     # GoogleAdsClient will read the google-ads.yaml configuration file in the
     # home directory if none is specified.
-    google_ads_client = GoogleAdsClient.load_from_storage()
+    googleads_client = GoogleAdsClient.load_from_storage(version="v6")
 
     parser = argparse.ArgumentParser(
         description="Gets all available criterion bid modifier simulations "
@@ -117,4 +106,16 @@ if __name__ == "__main__":
     )
     args = parser.parse_args()
 
-    main(google_ads_client, args.customer_id, args.campaign_id)
+    try:
+        main(googleads_client, args.customer_id, args.campaign_id)
+    except GoogleAdsException as ex:
+        print(
+            f"Request with ID '{ex.request_id}' failed with status "
+            f"'{ex.error.code().name}' and includes the following errors:"
+        )
+        for error in ex.failure.errors:
+            print(f"\tError with message '{error.message}'.")
+            if error.location:
+                for field_path_element in error.location.field_path_elements:
+                    print(f"\t\tOn field: {field_path_element.field_name}")
+        sys.exit(1)

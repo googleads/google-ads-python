@@ -41,7 +41,7 @@ def main(client, customer_id, page_size):
     _print_remarketing_action_attributes(queried_remarketing_action)
 
 
-# [START add_remarketing_action_1]
+# [START add_remarketing_action]
 def _add_remarketing_action(client, customer_id):
     remarketing_action_service = client.get_service("RemarketingActionService")
     remarketing_action_operation = client.get_type("RemarketingActionOperation")
@@ -69,7 +69,7 @@ def _add_remarketing_action(client, customer_id):
         sys.exit(1)
 
     return remarketing_action_response.results[0].resource_name
-    # [END add_remarketing_action_1]
+    # [END add_remarketing_action]
 
 
 def _query_remarketing_action(client, customer_id, resource_name, page_size):
@@ -84,7 +84,7 @@ def _query_remarketing_action(client, customer_id, resource_name, page_size):
     Returns:
       the found remarketing action
     """
-    # [START add_remarketing_action]
+    # [START add_remarketing_action_1]
     query = f"""
         SELECT
           remarketing_action.id,
@@ -92,7 +92,7 @@ def _query_remarketing_action(client, customer_id, resource_name, page_size):
           remarketing_action.tag_snippets
         FROM remarketing_action
         WHERE remarketing_action.resource_name = '{resource_name}'"""
-    # [END add_remarketing_action]
+    # [END add_remarketing_action_1]
 
     googleads_service_client = client.get_service("GoogleAdsService")
     search_request = client.get_type("SearchGoogleAdsRequest")

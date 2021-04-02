@@ -28,7 +28,6 @@ from google.ads.googleads.client import GoogleAdsClient
 from google.ads.googleads.errors import GoogleAdsException
 
 
-# [START add_merchant_center_dynamic_remarketing_campaign]
 def main(
     client,
     customer_id,
@@ -145,6 +144,7 @@ def _create_ad_group(client, customer_id, campaign_resource_name):
     return ad_group_resource_name
 
 
+# [START add_merchant_center_dynamic_remarketing_campaign]
 def _create_ad(client, customer_id, ad_group_resource_name):
     """Creates the responsive display ad.
 
@@ -219,6 +219,7 @@ def _create_ad(client, customer_id, ad_group_resource_name):
         "Created ad group ad with resource name "
         f"'{ad_group_ad_response.results[0].resource_name}'."
     )
+    # [END add_merchant_center_dynamic_remarketing_campaign]
 
 
 def _upload_image_asset(client, customer_id, image_url, asset_name):
@@ -290,7 +291,6 @@ def _attach_user_list(
         "Created ad group criterion with resource name "
         f"'{ad_group_criterion_response.results[0].resource_name}'."
     )
-    # [END add_merchant_center_dynamic_remarketing_campaign]
 
 
 if __name__ == "__main__":

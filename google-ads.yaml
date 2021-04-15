@@ -56,3 +56,11 @@ login_customer_id: INSERT_LOGIN_CUSTOMER_ID_HERE
     # "":
       # handlers: [default_handler]
       # level: INFO
+
+# Proxy configuration
+###############################################################################
+# Below you can specify an optional proxy configuration to be used by         #
+# requests. If you don't have username and password, just specify host and    #
+# port.                                                                       #
+# #############################################################################
+# http_proxy: http://user:password@localhost:8000

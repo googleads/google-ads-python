@@ -1,17 +1,35 @@
 ---
 name: Bug report
-about: Create a report to help us improve
+about: Report a problem with this library that needs to be fixed.
 title: ''
 labels: triage
 assignees: ''
 
 ---
 
+**Before filing this issue**
+Make sure you've carefully reviewed the
+[documentation](https://developers.google.com/google-ads/api/docs/client-libs/python)
+for this library.
+
+This library is only used for the
+[Google Ads API](https://developers.google.com/google-ads/api/docs/start), for
+the [AdWords API](https://developers.google.com/adwords/api/docs/guides/start)
+client library report your issue
+[here](https://github.com/googleads/googleads-python-lib/issues).
+
+Only use this page to report problems with this library. If you are unsure
+whether your issue is related to this library or the Google Ads API itself,
+please first reach out to one of the below resources before filing an issue here:
+
+* [Post in the Support Forum](https://support.google.com/google-ads/thread/new)
+* [Email the Support Team](https://support.google.com/google-ads/gethelp)
+
 **Describe the bug**
 A clear and concise description of what the bug is.
 
 **To Reproduce**
-Steps to reproduce the behavior:
+Specific steps to reproduce the behavior.
 
 **Expected behavior**
 A clear and concise description of what you expected to happen.

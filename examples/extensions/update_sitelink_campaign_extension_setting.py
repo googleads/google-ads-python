@@ -31,6 +31,7 @@ from google.ads.googleads.client import GoogleAdsClient
 from google.ads.googleads.errors import GoogleAdsException
 
 
+# [START update_sitelink_campaign_extension_setting]
 def main(client, customer_id, campaign_id, feed_item_ids):
     """The main method that creates all necessary entities for the example.
 
@@ -60,10 +61,8 @@ def main(client, customer_id, campaign_id, feed_item_ids):
     )
 
     extension_type_enum = client.get_type("ExtensionTypeEnum").ExtensionType
-    resource_name = (
-        campaign_extension_setting_service.campaign_extension_setting_path(
-            customer_id, campaign_id, extension_type_enum.SITELINK.name
-        )
+    resource_name = campaign_extension_setting_service.campaign_extension_setting_path(
+        customer_id, campaign_id, extension_type_enum.SITELINK.name
     )
     campaign_extension_setting.resource_name = resource_name
 
@@ -74,16 +73,15 @@ def main(client, customer_id, campaign_id, feed_item_ids):
     )
 
     # Update the campaign extension settings
-    response = (
-        campaign_extension_setting_service.mutate_campaign_extension_settings(
-            customer_id=customer_id,
-            operations=[campaign_extension_setting_operation],
-        )
+    response = campaign_extension_setting_service.mutate_campaign_extension_settings(
+        customer_id=customer_id,
+        operations=[campaign_extension_setting_operation],
     )
     print(
         "Updated campaign extension setting with resource name: "
         f'"{response.results[0].resource_name}".'
     )
+    # [END update_sitelink_campaign_extension_setting]
 
 
 if __name__ == "__main__":
@@ -106,11 +104,7 @@ if __name__ == "__main__":
         help="The Google Ads customer ID",
     )
     parser.add_argument(
-        "-i",
-        "--campaign_id",
-        type=str,
-        required=True,
-        help="The campaign ID",
+        "-i", "--campaign_id", type=str, required=True, help="The campaign ID",
     )
     parser.add_argument(
         "-f",

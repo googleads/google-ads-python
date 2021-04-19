@@ -55,6 +55,7 @@ def main(client, customer_id):
     )
 
 
+# [START add_local_campaign]
 def _create_campaign_budget(client, customer_id):
     """Adds a campaign budget to the given client account.
 
@@ -84,8 +85,10 @@ def _create_campaign_budget(client, customer_id):
     resource_name = response.results[0].resource_name
     print(f"Created campaign budget with resource name: '{resource_name}'")
     return resource_name
+    # [END add_local_campaign]
 
 
+# [START add_local_campaign_1]
 def _create_campaign(client, customer_id, budget_resource_name):
     """Adds a Local campaign to the given client account using the given budget.
 
@@ -151,8 +154,10 @@ def _create_campaign(client, customer_id, budget_resource_name):
     resource_name = response.results[0].resource_name
     print(f"Created Local Campaign with resource name: '{resource_name}'")
     return resource_name
+    # [END add_local_campaign_1]
 
 
+# [START add_local_campaign_2]
 def _create_ad_group(client, customer_id, campaign_resource_name):
     """Adds an ad group to the given client account under the given campaign.
 
@@ -181,8 +186,10 @@ def _create_ad_group(client, customer_id, campaign_resource_name):
     resource_name = response.results[0].resource_name
     print(f"Created AdGroup with resource name: '{resource_name}'")
     return resource_name
+    # [END add_local_campaign_2]
 
 
+# [START add_local_campaign_3]
 def _create_local_ad(client, customer_id, ad_group_resource_name):
     """Adds a local ad to the given client account under the given ad group.
 
@@ -252,8 +259,10 @@ def _create_ad_text_asset(client, text):
     ad_text_asset = client.get_type("AdTextAsset")
     ad_text_asset.text = text
     return ad_text_asset
+    # [END add_local_campaign_3]
 
 
+# [START add_local_campaign_4]
 def _create_image_asset(client, customer_id, image_url, image_name):
     """Creates an asset with the given image URL and name.
 
@@ -294,8 +303,10 @@ def _get_image_bytes(url):
     """
     response = requests.get(url)
     return response.content
+    # [END add_local_campaign_4]
 
 
+# [START add_local_campaign_5]
 def _create_youtube_video_asset(
     client, customer_id, youtube_video_id, youtube_video_name
 ):
@@ -326,6 +337,7 @@ def _create_youtube_video_asset(
         f"'{resource_name}'"
     )
     return resource_name
+    # [END add_local_campaign_5]
 
 
 if __name__ == "__main__":

@@ -75,6 +75,7 @@ def main(client, customer_id):
         "UserListRuleItemGroupInfo"
     )
     # Creates a rule targeting any user that visited the checkout page.
+    # [START setup_advanced_remarketing]
     checkout_rule = client.get_type("UserListRuleItemInfo")
 
     # The rule variable name must match a corresponding key name fired from a
@@ -89,9 +90,11 @@ def main(client, customer_id):
         "UserListStringRuleItemOperatorEnum"
     ).UserListStringRuleItemOperator.EQUALS
     checkout_string_rule_item.value = "checkout"
+    # [END setup_advanced_remarketing]
 
     # Creates a rule targeting any user that had more than one item in their
     # cart.
+    # [START setup_advanced_remarketing_1]
     cart_size_rule = client.get_type("UserListRuleItemInfo")
     # The rule variable name must match a corresponding key name fired from a
     # pixel.
@@ -101,6 +104,7 @@ def main(client, customer_id):
         "UserListNumberRuleItemOperatorEnum"
     ).UserListNumberRuleItemOperator.GREATER_THAN
     cart_size_number_rule_item.value = 1.0
+    # [END setup_advanced_remarketing_1]
 
     # Creates a rule group targeting users who checked out between November
     # and December by using the start and end date rules. Combining the two
@@ -112,6 +116,7 @@ def main(client, customer_id):
     # Creates the rule item for checkout start date.
     # The tags and keys used below must have been in place in the past for the
     # date range specified in the rules.
+    # [START setup_advanced_remarketing_3]
     start_date_rule = client.get_type("UserListRuleItemInfo")
     start_date_rule.name = "checkoutdate"
     start_date_rule_item = start_date_rule.date_rule_item
@@ -122,32 +127,32 @@ def main(client, customer_id):
     ).UserListDateRuleItemOperator
     start_date_rule_item.operator = user_list_data_rule_item_operator_enum.AFTER
     start_date_rule_item.value = "20191031"
+    # [END setup_advanced_remarketing_3]
 
     # Creates the rule item for checkout end date.
+    # [START setup_advanced_remarketing_4]
     end_date_rule = client.get_type("UserListRuleItemInfo")
     end_date_rule.name = "checkoutdate"
     end_date_rule_item = end_date_rule.date_rule_item
     end_date_rule_item.operator = user_list_data_rule_item_operator_enum.BEFORE
     end_date_rule_item.value = "20200101"
+    # [END setup_advanced_remarketing_4]
 
+    # [START setup_advanced_remarketing_2]
     checkout_and_cart_size_rule_group.rule_items.extend(
-        [
-            checkout_rule,
-            cart_size_rule,
-        ]
+        [checkout_rule, cart_size_rule,]
     )
+    # [END setup_advanced_remarketing_2]
+    # [START setup_advanced_remarketing_5]
     checkout_date_rule_group.rule_items.extend(
-        [
-            start_date_rule,
-            end_date_rule,
-        ]
+        [start_date_rule, end_date_rule,]
     )
+    # [END setup_advanced_remarketing_5]
+    # [START setup_advanced_remarketing_6]
     expression_rule_user_list_info.rule.rule_item_groups.extend(
-        [
-            checkout_and_cart_size_rule_group,
-            checkout_date_rule_group,
-        ]
+        [checkout_and_cart_size_rule_group, checkout_date_rule_group,]
     )
+    # [END setup_advanced_remarketing_6]
 
     # Issue a mutate request to add the user list, then print the results.
     response = user_list_service.mutate_user_lists(

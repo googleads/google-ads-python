@@ -28,6 +28,7 @@ from google.ads.googleads.errors import GoogleAdsException
 URL_LIST = ["http://example.com/section1", "http://example.com/section2"]
 
 
+# [START add_expression_rule_user_list]
 def main(client, customer_id):
     """Creates a rule-based user list.
 
@@ -119,6 +120,7 @@ def _build_visited_site_rule_info(client, url):
     user_visited_site_rule.string_rule_item.value = url
 
     return user_visited_site_rule
+    # [END add_expression_rule_user_list]
 
 
 if __name__ == "__main__":

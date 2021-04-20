@@ -37,6 +37,7 @@ def main(client, customer_id, ad_group_id):
 
     # Create a search request that retrieves the targeting settings from a given
     # ad group.
+    # [START update_audience_target_restriction]
     query = f"""
         SELECT
           ad_group.id,
@@ -44,6 +45,7 @@ def main(client, customer_id, ad_group_id):
           ad_group.targeting_setting.target_restrictions
         FROM ad_group
         WHERE ad_group.id = {ad_group_id}"""
+    # [END update_audience_target_restriction]
 
     # Issue the search request.
     search_response = googleads_service.search(
@@ -76,6 +78,7 @@ def main(client, customer_id, ad_group_id):
     # target restriction because Google Ads will overwrite the entire
     # targeting_setting field of the ad group when the field mask
     # includes targeting_setting in an update operation.
+    # [START update_audience_target_restriction_1]
     for target_restriction in target_restrictions:
         targeting_dimension = target_restriction.targeting_dimension
         bid_only = target_restriction.bid_only
@@ -100,13 +103,12 @@ def main(client, customer_id, ad_group_id):
             # "Observation". For more details about the targeting
             # setting, visit
             # https://support.google.com/google-ads/answer/7365594.
-            new_target_restriction = (
-                targeting_setting.target_restrictions.add()
-            )
+            new_target_restriction = targeting_setting.target_restrictions.add()
             new_target_restriction.targeting_dimension = (
                 targeting_dimension_enum.AUDIENCE
             )
             new_target_restriction.bid_only = True
+            # [END update_audience_target_restriction_1]
 
     # Only update the TargetSetting on the ad group if there is an audience
     # TargetRestriction with bid_only set to false.
@@ -118,7 +120,7 @@ def main(client, customer_id, ad_group_id):
         print("No target restrictions to update.")
 
 
-
+# [START update_audience_target_restriction_2]
 def _update_targeting_setting(
     client, customer_id, ad_group_id, targeting_setting
 ):
@@ -162,6 +164,7 @@ def _update_targeting_setting(
         f"'{mutate_ad_groups_response.results[0].resource_name}'; set the "
         "audience target restriction to 'Observation'."
     )
+    # [END update_audience_target_restriction_2]
 
 
 if __name__ == "__main__":

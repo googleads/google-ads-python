@@ -48,6 +48,7 @@ def _next_id():
     return str(last_criterion_id)
 
 
+# [START add_shopping_product_listing_group_tree]
 def main(client, customer_id, ad_group_id, replace_existing_tree):
     """Adds a shopping listing group tree to a shopping ad group.
 
@@ -198,10 +199,8 @@ def main(client, customer_id, ad_group_id, replace_existing_tree):
     )
 
     # Add the ad group criteria.
-    mutate_ad_group_criteria_response = (
-        ad_group_criterion_service.mutate_ad_group_criteria(
-            customer_id=customer_id, operations=operations
-        )
+    mutate_ad_group_criteria_response = ad_group_criterion_service.mutate_ad_group_criteria(
+        customer_id=customer_id, operations=operations
     )
 
     # Print the results of the successful mutates.
@@ -213,6 +212,7 @@ def main(client, customer_id, ad_group_id, replace_existing_tree):
         print(f"\t{result.resource_name}")
 
     print(f"{len(mutate_ad_group_criteria_response.results)} criteria added.")
+    # [END add_shopping_product_listing_group_tree]
 
 
 def _remove_listing_group_tree(client, customer_id, ad_group_id):

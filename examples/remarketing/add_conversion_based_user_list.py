@@ -27,6 +27,7 @@ from google.ads.googleads.client import GoogleAdsClient
 from google.ads.googleads.errors import GoogleAdsException
 
 
+# [START add_conversion_based_user_list]
 def main(client, customer_id, conversion_action_ids):
     """Creates a combination user list.
 
@@ -46,10 +47,8 @@ def main(client, customer_id, conversion_action_ids):
     user_list_action_info_list = []
     for conversion_action_id in conversion_action_ids:
         user_list_action_info = client.get_type("UserListActionInfo")
-        user_list_action_info.conversion_action = (
-            conversion_action_service.conversion_action_path(
-                customer_id, conversion_action_id
-            )
+        user_list_action_info.conversion_action = conversion_action_service.conversion_action_path(
+            customer_id, conversion_action_id
         )
         user_list_action_info_list.append(user_list_action_info)
 
@@ -75,6 +74,7 @@ def main(client, customer_id, conversion_action_ids):
         "Created basic user list with resource name "
         f"'{response.results[0].resource_name}.'"
     )
+    # [END add_conversion_based_user_list]
 
 
 if __name__ == "__main__":

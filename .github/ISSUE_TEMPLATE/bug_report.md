@@ -39,7 +39,7 @@ filing an issue here:
 <!-- Insert a clear and concise description of what the bug is. -->
 
 **Steps to Reproduce:**
-<!-- Inset specific steps to reproduce the behavior. -->
+<!-- Insert specific steps to reproduce the behavior. -->
 
 **Expected behavior:**
 <!-- Write a clear and concise description of what you expected to happen. -->

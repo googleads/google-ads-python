@@ -65,6 +65,7 @@ def main(client, customer_id, chain_id, campaign_id):
     )
 
 
+# [START add_affiliate_location_extensions]
 def _create_affiliate_location_extension_feed(client, customer_id, chain_id):
     """Creates the Affiliate Location Extension feed.
 
@@ -114,6 +115,7 @@ def _create_affiliate_location_extension_feed(client, customer_id, chain_id):
         f"{feed_resource_name}."
     )
     return feed_resource_name
+    # [END add_affiliate_location_extensions]
 
 
 def _remove_location_extension_feeds(client, customer_id):
@@ -252,6 +254,7 @@ def _remove_customer_feeds(client, customer_id, customer_feeds):
     )
 
 
+# [START add_affiliate_location_extensions_1]
 def _get_affiliate_location_extension_feed_mapping(
     client, customer_id, feed_resource_name
 ):
@@ -294,8 +297,10 @@ def _get_affiliate_location_extension_feed_mapping(
         return None
     else:
         return row.feed_mapping
+        # [END add_affiliate_location_extensions_1]
 
 
+# [START add_affiliate_location_extensions_2]
 def _wait_for_feed_to_be_ready(client, customer_id, feed_resource_name):
     """Waits for the Affliate location extension feed to be ready.
 
@@ -340,8 +345,10 @@ def _wait_for_feed_to_be_ready(client, customer_id, feed_resource_name):
         f"Feed is not ready after "
         f"{MAX_FEEDMAPPING_RETRIEVAL_ATTEMPTS} retries."
     )
+    # [END add_affiliate_location_extensions_2]
 
 
+# [START add_affiliate_location_extensions_3]
 def _create_campaign_feed(
     client, customer_id, campaign_id, feed_mapping, feed_resource_name, chain_id
 ):
@@ -385,10 +392,8 @@ def _create_campaign_feed(
         "CampaignService"
     ).campaign_path(customer_id, campaign_id)
 
-    mutate_campaign_feeds_response = (
-        campaign_feed_service.mutate_campaign_feeds(
-            customer_id=customer_id, operations=[campaign_feed_operation]
-        )
+    mutate_campaign_feeds_response = campaign_feed_service.mutate_campaign_feeds(
+        customer_id=customer_id, operations=[campaign_feed_operation]
     )
 
     # Display the result.
@@ -396,8 +401,10 @@ def _create_campaign_feed(
         "Campaign feed created with resource name: "
         f"{mutate_campaign_feeds_response.results[0].resource_name}."
     )
+    # [END add_affiliate_location_extensions_3]
 
 
+# [START add_affiliate_location_extensions_4]
 def _get_attribute_id_for_chain_id(client, feed_mapping):
     """Gets the feed attribute ID for the retail chain ID.
 
@@ -423,6 +430,7 @@ def _get_attribute_id_for_chain_id(client, feed_mapping):
         "No AffiliateLocationField with a retail chain ID was "
         "found in the FeedMapping."
     )
+    # [END add_affiliate_location_extensions_4]
 
 
 if __name__ == "__main__":
@@ -462,10 +470,7 @@ if __name__ == "__main__":
 
     try:
         main(
-            googleads_client,
-            args.customer_id,
-            args.chain_id,
-            args.campaign_id,
+            googleads_client, args.customer_id, args.chain_id, args.campaign_id,
         )
     except GoogleAdsException as ex:
         print(

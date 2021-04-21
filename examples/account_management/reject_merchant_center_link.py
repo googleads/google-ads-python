@@ -45,10 +45,8 @@ def main(client, customer_id, merchant_center_account_id):
         "MerchantCenterLinkService"
     )
     # Get the extant customer account to Merchant Center account links.
-    list_merchant_center_links_response = (
-        merchant_center_link_service.list_merchant_center_links(
-            customer_id=customer_id
-        )
+    list_merchant_center_links_response = merchant_center_link_service.list_merchant_center_links(
+        customer_id=customer_id
     )
 
     number_of_links = len(
@@ -98,6 +96,7 @@ def main(client, customer_id, merchant_center_account_id):
     )
 
 
+# [START reject_merchant_center_link]
 def _remove_merchant_center_link(
     client, merchant_center_link_service, customer_id, merchant_center_link
 ):
@@ -124,6 +123,7 @@ def _remove_merchant_center_link(
         "Removed Merchant Center link with resource name "
         f"'{response.result.resource_name}'."
     )
+    # [END reject_merchant_center_link]
 
 
 if __name__ == "__main__":

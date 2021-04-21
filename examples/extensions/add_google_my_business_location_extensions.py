@@ -60,6 +60,7 @@ def main(
     # will add them automatically because this will be a system generated feed.
     # See here for more details:
     # https://developers.google.com/google-ads/api/docs/location-extensions/google-ads-location-extensions
+    # [START add_google_my_business_location_extensions]
     feed_operation = client.get_type("FeedOperation")
     gmb_feed = feed_operation.create
     gmb_feed.name = f"Google My Business Feed #{uuid4()}"
@@ -100,6 +101,7 @@ def main(
     # time.
     _delete_location_extension_feeds(client, customer_id)
 
+    # [START add_google_my_business_location_extensions_1]
     # Add the feed. Since it is a system generated feed, Google Ads will
     # automatically:
     # 1. Set up the FeedAttributes on the feed.
@@ -110,7 +112,10 @@ def main(
     )
     feed_resource_name = feed_response.results[0].resource_name
     print(f"GMB feed created with resource name '{feed_resource_name}'.")
+    # [END add_google_my_business_location_extensions_1]
+    # [END add_google_my_business_location_extensions]
 
+    # [START add_google_my_business_location_extensions_2]
     # After the completion of the Feed ADD operation above the added feed
     # will not be available for usage in a CustomerFeed until the sync
     # between the Google Ads and GMB accounts completes.
@@ -138,6 +143,7 @@ def main(
             customer_feed_resource_name = feed_mapping.resource_name
             print(f"GMB feed {feed_resource_name} is now ready.")
             break
+            # [END add_google_my_business_location_extensions_2]
 
     if customer_feed_resource_name is None:
         print(
@@ -147,6 +153,7 @@ def main(
         )
         sys.exit(1)
     else:
+        # [START add_google_my_business_location_extensions_3]
         # Create a CustomerFeed operation and configure the CustomerFeed to
         # associate the feed with this customer for the LOCATION placeholder
         # type.
@@ -178,6 +185,7 @@ def main(
             "Customer feed created with resource name "
             f"'{customer_feed_response.results[0].resource_name}'."
         )
+        # [END add_google_my_business_location_extensions_3]
 
 
 def _delete_location_extension_feeds(client, customer_id):

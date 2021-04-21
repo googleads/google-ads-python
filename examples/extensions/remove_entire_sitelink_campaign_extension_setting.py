@@ -32,6 +32,7 @@ from google.ads.googleads.client import GoogleAdsClient
 from google.ads.googleads.errors import GoogleAdsException
 
 
+# [START remove_entire_sitelink_campaign_extension_setting]
 def main(client, customer_id, campaign_id):
     """The main method that creates all necessary entities for the example.
 
@@ -42,10 +43,8 @@ def main(client, customer_id, campaign_id):
     """
     # Initialize an array of MutateOperations
     mutate_operations = []
-    sitelink_campaign_extension_setting_mutate_operation = (
-        _create_sitelink_campaign_extension_setting_mutate_operation(
-            client, customer_id, campaign_id
-        )
+    sitelink_campaign_extension_setting_mutate_operation = _create_sitelink_campaign_extension_setting_mutate_operation(
+        client, customer_id, campaign_id
     )
     mutate_operations.append(
         sitelink_campaign_extension_setting_mutate_operation
@@ -55,10 +54,8 @@ def main(client, customer_id, campaign_id):
     extension_feed_item_resource_names = _get_all_sitelink_extension_feed_items(
         client, ga_service, customer_id, campaign_id
     )
-    extension_feed_item_mutate_operations = (
-        _create_extension_feed_item_mutate_operations(
-            client, extension_feed_item_resource_names
-        )
+    extension_feed_item_mutate_operations = _create_extension_feed_item_mutate_operations(
+        client, extension_feed_item_resource_names
     )
     mutate_operations.extend(extension_feed_item_mutate_operations)
 
@@ -84,6 +81,7 @@ def main(client, customer_id, campaign_id):
             "Removed an extension feed item with resource name "
             f'"{mutate_operation_response.extension_feed_item_result.resource_name}".'
         )
+        # [END remove_entire_sitelink_campaign_extension_setting]
 
 
 def _create_sitelink_campaign_extension_setting_mutate_operation(
@@ -116,6 +114,7 @@ def _create_sitelink_campaign_extension_setting_mutate_operation(
     return mutate_operation
 
 
+# [START remove_entire_sitelink_campaign_extension_setting_1]
 def _get_all_sitelink_extension_feed_items(
     client, ga_service, customer_id, campaign_id
 ):
@@ -168,6 +167,7 @@ def _get_all_sitelink_extension_feed_items(
         sys.exit(1)
 
     return extension_feed_item_resource_names
+    # [END remove_entire_sitelink_campaign_extension_setting_1]
 
 
 def _create_extension_feed_item_mutate_operations(
@@ -211,11 +211,7 @@ if __name__ == "__main__":
         help="The Google Ads customer ID",
     )
     parser.add_argument(
-        "-i",
-        "--campaign_id",
-        type=str,
-        required=True,
-        help="The campaign ID",
+        "-i", "--campaign_id", type=str, required=True, help="The campaign ID",
     )
     args = parser.parse_args()
 

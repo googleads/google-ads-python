@@ -26,6 +26,7 @@ from google.ads.googleads.client import GoogleAdsClient
 from google.ads.googleads.errors import GoogleAdsException
 
 
+# [START add_logical_user_list]
 def main(client, customer_id, user_list_ids):
     """Creates a combination user list.
 
@@ -44,8 +45,8 @@ def main(client, customer_id, user_list_ids):
         logical_user_list_operand_info = client.get_type(
             "LogicalUserListOperandInfo"
         )
-        logical_user_list_operand_info.user_list = (
-            user_list_service.user_list_path(customer_id, user_list_id)
+        logical_user_list_operand_info.user_list = user_list_service.user_list_path(
+            customer_id, user_list_id
         )
         logical_user_list_operand_info_list.append(
             logical_user_list_operand_info
@@ -79,6 +80,7 @@ def main(client, customer_id, user_list_ids):
         "Created logical user list with resource name "
         f"'{response.results[0].resource_name}.'"
     )
+    # [END add_logical_user_list]
 
 
 if __name__ == "__main__":

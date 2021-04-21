@@ -224,9 +224,9 @@ def _create_feed_mapping(
 
     contextual_keywords_enum_value = placeholder_field_enum.CONTEXTUAL_KEYWORDS
     contextual_keywords_mapping = attribute_field_mapping()
-    contextual_keywords_mapping.feed_attribute_id = (
-        placeholders_to_feed_attribute_map[contextual_keywords_enum_value].id
-    )
+    contextual_keywords_mapping.feed_attribute_id = placeholders_to_feed_attribute_map[
+        contextual_keywords_enum_value
+    ].id
     contextual_keywords_mapping.real_estate_field = (
         contextual_keywords_enum_value
     )
@@ -261,6 +261,7 @@ def _create_feed_mapping(
     return feed_mapping_response.results[0].resource_name
 
 
+# [START add_real_estate_feed_1]
 def _create_feed_item(
     client, customer_id, feed_resource_name, placeholders_to_feed_attribute_map
 ):
@@ -326,9 +327,9 @@ def _create_feed_item(
     # Creates the contextual keywords feed attribute value.
     contextual_keywords_enum_value = placeholder_field_enum.CONTEXTUAL_KEYWORDS
     contextual_keywords_mapping = client.get_type("FeedItemAttributeValue")
-    contextual_keywords_mapping.feed_attribute_id = (
-        placeholders_to_feed_attribute_map[contextual_keywords_enum_value].id
-    )
+    contextual_keywords_mapping.feed_attribute_id = placeholders_to_feed_attribute_map[
+        contextual_keywords_enum_value
+    ].id
     contextual_keywords_mapping.string_values.extend(
         ["beach community", "ocean view", "two bedroom"]
     )
@@ -361,8 +362,10 @@ def _create_feed_item(
         sys.exit(1)
 
     return feed_item_response.results[0].resource_name
+    # [END add_real_estate_feed_1]
 
 
+# [START add_real_estate_feed]
 def _get_placeholder_fields_map(client, customer_id, feed_resource_name):
     """Get mapping of placeholder fields to feed attributes.
 
@@ -431,6 +434,7 @@ def _get_placeholder_fields_map(client, customer_id, feed_resource_name):
         sys.exit(1)
 
     return placeholder_fields_map
+    # [END add_real_estate_feed]
 
 
 if __name__ == "__main__":

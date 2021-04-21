@@ -39,6 +39,7 @@ from google.ads.googleads.errors import GoogleAdsException
 from google.api_core import protobuf_helpers
 
 
+# [START update_flights_feed_item_string_attribute_value]
 def main(
     client,
     customer_id,
@@ -127,6 +128,7 @@ def main(
         "Feed item with resource name: "
         f"'{response.results[0].resource_name}' was updated."
     )
+    # [END update_flights_feed_item_string_attribute_value]
 
 
 def _flight_placeholder_fields_map(client, customer_id, feed_resource_name):

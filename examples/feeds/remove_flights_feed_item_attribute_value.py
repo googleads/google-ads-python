@@ -48,6 +48,7 @@ def main(
         flight_placeholder_field_name: The flight placeholder field name for the
             attribute to be removed.
     """
+    # [START remove_flights_feed_item_attribute_value]
     # Get the FeedItemService client.
     feed_item_service = client.get_service("FeedItemService")
 
@@ -84,6 +85,7 @@ def main(
     response = feed_item_service.mutate_feed_items(
         customer_id=customer_id, operations=[feed_item_operation]
     )
+    # [END remove_flights_feed_item_attribute_value]
 
     for result in response.results:
         print(
@@ -180,6 +182,7 @@ def _remove_attribute_value_from_feed_item(
     Returns:
         The modified FeedItem.
     """
+    # [START remove_flights_feed_item_attribute_value_1]
     # Gets the ID of the FeedAttribute for the placeholder field.
     attribute_id = placeholders_to_feed_attributes_map[
         flight_placeholder_field_name
@@ -216,6 +219,7 @@ def _remove_attribute_value_from_feed_item(
     # items from the AttributeValues list.
     feed_item.attribute_values.pop(attribute_index)
     return feed_item
+    # [END remove_flights_feed_item_attribute_value_1]
 
 
 def _get_feed_item(client, customer_id, feed_id, feed_item_id):

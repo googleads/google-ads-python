@@ -57,10 +57,7 @@ def main(
 
     # Create a smart shopping campaign.
     campaign_resource_name = _add_smart_shopping_campaign(
-        client,
-        customer_id,
-        budget_resource_name,
-        merchant_center_account_id,
+        client, customer_id, budget_resource_name, merchant_center_account_id,
     )
 
     # Create a smart shopping ad group.
@@ -123,6 +120,7 @@ def _add_campaign_budget(client, customer_id):
     return campaign_budget_resource_name
 
 
+# [START add_shopping_smart_ad_3]
 def _add_smart_shopping_campaign(
     client, customer_id, budget_resource_name, merchant_center_account_id
 ):
@@ -141,6 +139,7 @@ def _add_smart_shopping_campaign(
     # Get the CampaignService client.
     campaign_service = client.get_service("CampaignService")
 
+    # [START add_shopping_smart_ad]
     # Create a campaign operation and configure the smart shopping campaign.
     campaign_operation = client.get_type("CampaignOperation")
     campaign = campaign_operation.create
@@ -174,6 +173,7 @@ def _add_smart_shopping_campaign(
     # "total spend". For more information on maximize conversion value, see the
     # support article: http://support.google.com/google-ads/answer/7684216.
     campaign.maximize_conversion_value.target_roas = 3.5
+    # [END add_shopping_smart_ad]
 
     # Add the campaign, then print and return the resulting campaign's resource
     # name.
@@ -187,8 +187,10 @@ def _add_smart_shopping_campaign(
     )
 
     return campaign_resource_name
+    # [END add_shopping_smart_ad_3]
 
 
+# [START add_shopping_smart_ad_2]
 def _add_smart_shopping_ad_group(client, customer_id, campaign_resource_name):
     """Creates a new ad group in the specified smart shopping campaign.
 
@@ -226,8 +228,10 @@ def _add_smart_shopping_ad_group(client, customer_id, campaign_resource_name):
     )
 
     return ad_group_resource_name
+    # [END add_shopping_smart_ad_2]
 
 
+# [START add_shopping_smart_ad_1]
 def _add_smart_shopping_ad_group_ad(
     client, customer_id, ad_group_resource_name
 ):
@@ -269,6 +273,7 @@ def _add_smart_shopping_ad_group_ad(
     )
 
     return ad_group_ad_resource_name
+    # [END add_shopping_smart_ad_1]
 
 
 def _add_shopping_listing_group(client, customer_id, ad_group_resource_name):
@@ -305,10 +310,8 @@ def _add_shopping_listing_group(client, customer_id, ad_group_resource_name):
 
     # Ad the listing group criterion, then display and return the resulting
     # ad group criterion's resource name.
-    ad_group_criterion_response = (
-        ad_group_criterion_service.mutate_ad_group_criteria(
-            customer_id=customer_id, operations=[ad_group_criterion_operation]
-        )
+    ad_group_criterion_response = ad_group_criterion_service.mutate_ad_group_criteria(
+        customer_id=customer_id, operations=[ad_group_criterion_operation]
     )
     ad_group_criterion_resource_name = ad_group_criterion_response.results[
         0

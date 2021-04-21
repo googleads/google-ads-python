@@ -62,9 +62,7 @@ def main(client, customer_id, campaign_id, ad_group_id, bid_modifier_value):
         ad_group_criterion_resource_name,
         bid_modifier_value,
     )
-    _remove_existing_criteria_from_ad_group(
-        client, customer_id, campaign_id
-    )
+    _remove_existing_criteria_from_ad_group(client, customer_id, campaign_id)
     campaign_criterion_resource_name = _target_ads_in_campaign_to_user_list(
         client, customer_id, campaign_id, user_list_resource_name
     )
@@ -76,6 +74,7 @@ def main(client, customer_id, campaign_id, ad_group_id, bid_modifier_value):
     )
 
 
+# [START setup_remarketing]
 def _create_user_list(client, customer_id):
     """Creates a user list targeting users that have visited a given URL.
 
@@ -125,8 +124,10 @@ def _create_user_list(client, customer_id):
     resource_name = response.results[0].resource_name
     print(f"Created user list with resource name: '{resource_name}'")
     return resource_name
+    # [END setup_remarketing]
 
 
+# [START setup_remarketing_1]
 def _target_ads_in_ad_group_to_user_list(
     client, customer_id, ad_group_id, user_list_resource_name
 ):
@@ -163,6 +164,7 @@ def _target_ads_in_ad_group_to_user_list(
         f"{ad_group_id}."
     )
     return resource_name
+    # [END setup_remarketing_1]
 
 
 def _modify_ad_group_bids(
@@ -202,6 +204,7 @@ def _modify_ad_group_bids(
     )
 
 
+# [START setup_remarketing_3]
 def _remove_existing_criteria_from_ad_group(client, customer_id, campaign_id):
     """Removes all ad group criteria targeting a user list under a campaign.
 
@@ -233,8 +236,10 @@ def _remove_existing_criteria_from_ad_group(client, customer_id, campaign_id):
         "Successfully removed ad group criterion with resource name: "
         f"'{response.results[0].resource_name}'"
     )
+    # [END setup_remarketing_3]
 
 
+# [START setup_remarketing_2]
 def _get_user_list_ad_group_criteria(client, customer_id, campaign_id):
     """Finds all of user list ad group criteria under a campaign.
 
@@ -274,8 +279,10 @@ def _get_user_list_ad_group_criteria(client, customer_id, campaign_id):
         user_list_criteria.append(resource_name)
 
     return user_list_criteria
+    # [END setup_remarketing_2]
 
 
+# [START setup_remarketing_4]
 def _target_ads_in_campaign_to_user_list(
     client, customer_id, campaign_id, user_list_resource_name
 ):
@@ -310,6 +317,7 @@ def _target_ads_in_campaign_to_user_list(
         f"'{user_list_resource_name}' with campaign with ID {campaign_id}"
     )
     return resource_name
+    # [END setup_remarketing_4]
 
 
 def _modify_campaign_bids(
@@ -403,12 +411,12 @@ if __name__ == "__main__":
 
     try:
         main(
-        googleads_client,
-        args.customer_id,
-        args.campaign_id,
-        args.ad_group_id,
-        args.bid_modifier_value,
-    )
+            googleads_client,
+            args.customer_id,
+            args.campaign_id,
+            args.ad_group_id,
+            args.bid_modifier_value,
+        )
     except GoogleAdsException as ex:
         print(
             f'Request with ID "{ex.request_id}" failed with status '

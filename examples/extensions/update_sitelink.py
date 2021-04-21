@@ -24,6 +24,7 @@ from google.ads.googleads.client import GoogleAdsClient
 from google.ads.googleads.errors import GoogleAdsException
 
 
+# [START update_sitelink]
 def main(client, customer_id, feed_item_id, sitelink_text):
     """The main method that creates all necessary entities for the example.
 
@@ -39,10 +40,8 @@ def main(client, customer_id, feed_item_id, sitelink_text):
     )
     extension_feed_item = extension_feed_item_operation.update
     # Update the extension feed item using the specified feed item ID
-    extension_feed_item.resource_name = (
-        extension_feed_item_service.extension_feed_item_path(
-            customer_id, feed_item_id
-        )
+    extension_feed_item.resource_name = extension_feed_item_service.extension_feed_item_path(
+        customer_id, feed_item_id
     )
     extension_feed_item.sitelink_feed_item.link_text = sitelink_text
 
@@ -60,6 +59,7 @@ def main(client, customer_id, feed_item_id, sitelink_text):
         "Updated extension feed item with resource name: "
         f'"{response.results[0].resource_name}".'
     )
+    # [END update_sitelink]
 
 
 if __name__ == "__main__":

@@ -97,10 +97,8 @@ def main(client, customer_id, ad_group_id, percent_cpc_bid_micro_amount):
     )
 
     # Adds the listing group and prints the resulting node resource names.
-    mutate_ad_group_criteria_response = (
-        ad_group_criterion_service.mutate_ad_group_criteria(
-            customer_id=customer_id, operations=operations
-        )
+    mutate_ad_group_criteria_response = ad_group_criterion_service.mutate_ad_group_criteria(
+        customer_id=customer_id, operations=operations
     )
     results = mutate_ad_group_criteria_response.results
     print(
@@ -161,6 +159,7 @@ def _add_root_node(
     return root_ad_group_criterion.resource_name
 
 
+# [START add_hotel_listing_group_tree]
 def _add_level1_nodes(
     client,
     customer_id,
@@ -239,7 +238,7 @@ def _add_level1_nodes(
     # without specifying the optional hotel_class field.
     client.copy_from(
         other_hotels_listing_dimension_info.hotel_class,
-        client.get_type("HotelClassInfo")
+        client.get_type("HotelClassInfo"),
     )
 
     # Create listing group info for other hotel classes as a SUBDIVISION node,
@@ -274,6 +273,7 @@ def _add_level1_nodes(
     next_temp_id -= 1
 
     return other_hotels_ad_group_criterion.resource_name
+    # [END add_hotel_listing_group_tree]
 
 
 def _add_level2_nodes(
@@ -352,7 +352,7 @@ def _add_level2_nodes(
     # hotel_country_region.country_region_criterion field.
     client.copy_from(
         other_hotel_regions_listing_dimension_info.hotel_country_region,
-        client.get_type("HotelCountryRegionInfo")
+        client.get_type("HotelCountryRegionInfo"),
     )
 
     # Create listing group info for hotels in other regions as a UNIT node.

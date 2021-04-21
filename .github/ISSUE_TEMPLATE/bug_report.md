@@ -19,13 +19,19 @@ library report your issue here:
 
 https://github.com/googleads/googleads-python-lib/issues
 
-Only use this page to report problems with this library. If you are unsure
-whether your issue is related to this library or the Google Ads API itself,
-please first reach out to one of the below resources before filing an issue
-here:
+Only use this page to report problems with this library, which is designed for
+the Python language.
+
+If you are looking for help with a different language, see:
+
+https://developers.google.com/google-ads/api/docs/client-libs
+
+If you are unsure whether your issue is related to this library or the Google
+Ads API itself, please first reach out to one of the below resources before
+filing an issue here:
 
 * Support Forum: https://groups.google.com/forum/#!forum/adwords-api
-* Email the Support Team: https://support.google.com/google-ads/gethelp
+* Email the Support Team: googleadsapi-support@google.com
 ==============================================================================
 -->
 

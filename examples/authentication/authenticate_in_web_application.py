@@ -12,12 +12,14 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
-"""This example creates an OAuth 2.0 refresh token for the Google Ads API.
+"""This example creates an OAuth2 refresh token using the Web application flow.
 
-This illustrates how to step through the OAuth 2.0 native / installed
-application flow.
+This example will start a basic server that listens for requests at
+http://localhost:PORT, where PORT is passed into the example via a command line
+argument.
 
-It is intended to be run from the command line and requires user input.
+Note: You must add `http://localhost/oauth2callback` to the "Authorize redirect
+URIs" list in your Google Cloud Console project before running this example.
 """
 
 
@@ -42,8 +44,13 @@ def main(client_secrets_path, scopes):
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(
-        description="Generates OAuth 2.0 credentials with the specified "
-        "client secrets file."
+        description=(
+            "Generates OAuth2 refresh token using the Web application flow. "
+            "To retrieve the necessary tokens, generate a client ID and client "
+            "secret in the Google Cloud Console "
+            "(https://console.cloud.google.com) by creating credentials for a "
+            "Web application. Set the 'Authorized redirect URIs' "
+            "to: http://localhost:[PORT]"
     )
     # The following argument(s) should be provided to run the example.
     parser.add_argument(

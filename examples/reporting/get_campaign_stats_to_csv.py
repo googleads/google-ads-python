@@ -13,41 +13,33 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
-
-"""This examples gets a basic campaign stats report for a given customer ID
-and writes them to a CSV file.
-
-The LoadFromStorage method is pulling credentials and properties from a
-"googleads.yaml" file. By default, it looks for this file in your home
-directory. For more information, see the "Caching authentication information"
-section of our README.
+"""Shows how to write data from a basic campaign stats report to a CSV file.
 
 Examples:
     Write to file output.csv in the same directory as script with headers.
         $ python get_campaign_stats_to_csv.py -c 0123456789 -o output.csv -w
 
     Write to file output.csv in the same directory as script without headers.
-        $ python get_campaign_stats_to_csv.py -c 0123456789 -o output.csv -w
+        $ python get_campaign_stats_to_csv.py -c 0123456789 -o output.csv
 """
 
 import argparse
 import csv
 import sys
 
-from google.ads.google_ads.client import GoogleAdsClient
-from google.ads.google_ads.errors import GoogleAdsException
+from google.ads.googleads.client import GoogleAdsClient
+from google.ads.googleads.errors import GoogleAdsException
 
 
 def main(client, customer_id, output_file, write_headers):
-    """Demonstrates how to write rows returned from a Google Ads search_stream
-    request to a CSV file.
+    """Writes rows returned from a search_stream request to a CSV file.
     Args:
         client: An initialized GoogleAdsClient instance.
         customer_id (str): The client customer ID string.
         output_file (str): Filename of the file to write the report data to.
-        write_headers (bool): From argparse, True if provided, False otherwise.
+        write_headers (bool): From argparse, True if arg is provided.
     """
-    ga_service = client.get_service("GoogleAdsService", version="v6")
+    ga_service = client.get_service("GoogleAdsService")
 
     query = """
         SELECT
@@ -61,11 +53,13 @@ def main(client, customer_id, output_file, write_headers):
         WHERE
           segments.date DURING LAST_7_DAYS
         ORDER BY metrics.impressions DESC
-        LIMIT 25
-        """
+        LIMIT 25"""
 
     # Issues a search request using streaming.
-    response = ga_service.search_stream(customer_id, query)
+    search_request = client.get_type("SearchGoogleAdsStreamRequest")
+    search_request.customer_id = customer_id
+    search_request.query = query
+    response = ga_service.search_stream(search_request)
     try:
         with open(output_file, "w", newline="") as f:
             writer = csv.writer(f)
@@ -111,7 +105,7 @@ def main(client, customer_id, output_file, write_headers):
 if __name__ == "__main__":
     # GoogleAdsClient will read the google-ads.yaml configuration file in the
     # home directory if none is specified.
-    google_ads_client = GoogleAdsClient.load_from_storage()
+    google_ads_client = GoogleAdsClient.load_from_storage(version="v7")
 
     parser = argparse.ArgumentParser(
         description="Retrieves a campaign stats and writes to CSV file."

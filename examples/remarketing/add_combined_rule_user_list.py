@@ -26,6 +26,7 @@ from google.ads.googleads.client import GoogleAdsClient
 from google.ads.googleads.errors import GoogleAdsException
 
 
+# [START add_combined_rule_user_list]
 def main(client, customer_id):
     """Creates a rule-based user list.
 
@@ -122,12 +123,13 @@ def _build_visited_site_rule_info(client, url):
     user_visited_site_rule_info.rule_item_groups.append(rule_item_group_info)
 
     return user_visited_site_rule_info
+    # [END add_combined_rule_user_list]
 
 
 if __name__ == "__main__":
     # GoogleAdsClient will read the google-ads.yaml configuration file in the
     # home directory if none is specified.
-    googleads_client = GoogleAdsClient.load_from_storage(version="v6")
+    googleads_client = GoogleAdsClient.load_from_storage(version="v7")
 
     parser = argparse.ArgumentParser(
         description="Creates a combination user list containing users that are "

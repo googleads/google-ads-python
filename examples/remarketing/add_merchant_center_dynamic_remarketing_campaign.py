@@ -28,7 +28,6 @@ from google.ads.googleads.client import GoogleAdsClient
 from google.ads.googleads.errors import GoogleAdsException
 
 
-# [START add_merchant_center_dynamic_remarketing_campaign]
 def main(
     client,
     customer_id,
@@ -63,6 +62,7 @@ def main(
     _attach_user_list(client, customer_id, ad_group_resource_name, user_list_id)
 
 
+# [START add_merchant_center_dynamic_remarketing_campaign_2]
 def _create_campaign(
     client, customer_id, merchant_center_account_id, campaign_budget_id
 ):
@@ -114,8 +114,10 @@ def _create_campaign(
     print(f"Created campaign with resource name '{campaign_resource_name}'.")
 
     return campaign_resource_name
+    # [END add_merchant_center_dynamic_remarketing_campaign_2]
 
 
+# [START add_merchant_center_dynamic_remarketing_campaign_1]
 def _create_ad_group(client, customer_id, campaign_resource_name):
     """Creates an ad group for the remarketing campaign.
 
@@ -143,8 +145,10 @@ def _create_ad_group(client, customer_id, campaign_resource_name):
     ad_group_resource_name = ad_group_response.results[0].resource_name
 
     return ad_group_resource_name
+    # [END add_merchant_center_dynamic_remarketing_campaign_1]
 
 
+# [START add_merchant_center_dynamic_remarketing_campaign]
 def _create_ad(client, customer_id, ad_group_resource_name):
     """Creates the responsive display ad.
 
@@ -219,6 +223,7 @@ def _create_ad(client, customer_id, ad_group_resource_name):
         "Created ad group ad with resource name "
         f"'{ad_group_ad_response.results[0].resource_name}'."
     )
+    # [END add_merchant_center_dynamic_remarketing_campaign]
 
 
 def _upload_image_asset(client, customer_id, image_url, asset_name):
@@ -257,6 +262,7 @@ def _upload_image_asset(client, customer_id, image_url, asset_name):
     return image_asset_resource_name
 
 
+# [START add_merchant_center_dynamic_remarketing_campaign_3]
 def _attach_user_list(
     client, customer_id, ad_group_resource_name, user_list_id
 ):
@@ -281,22 +287,20 @@ def _attach_user_list(
     ).user_list_path(customer_id, user_list_id)
 
     # Issue a mutate request to add the ad group criterion.
-    ad_group_criterion_response = (
-        ad_group_criterion_service.mutate_ad_group_criteria(
-            customer_id=customer_id, operations=[ad_group_criterion_operation]
-        )
+    ad_group_criterion_response = ad_group_criterion_service.mutate_ad_group_criteria(
+        customer_id=customer_id, operations=[ad_group_criterion_operation]
     )
     print(
         "Created ad group criterion with resource name "
         f"'{ad_group_criterion_response.results[0].resource_name}'."
     )
-    # [END add_merchant_center_dynamic_remarketing_campaign]
+    # [END add_merchant_center_dynamic_remarketing_campaign_3]
 
 
 if __name__ == "__main__":
     # GoogleAdsClient will read the google-ads.yaml configuration file in the
     # home directory if none is specified.
-    googleads_client = GoogleAdsClient.load_from_storage(version="v6")
+    googleads_client = GoogleAdsClient.load_from_storage(version="v7")
 
     parser = argparse.ArgumentParser(
         description=(

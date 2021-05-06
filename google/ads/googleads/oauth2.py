@@ -15,6 +15,7 @@
 
 
 import functools
+from requests import Session
 
 from google.oauth2.service_account import Credentials as ServiceAccountCreds
 from google.oauth2.credentials import Credentials as InstalledAppCredentials
@@ -36,7 +37,14 @@ def _initialize_credentials_decorator(func):
     @functools.wraps(func)
     def initialize_credentials_wrapper(*args, **kwargs):
         credentials = func(*args, **kwargs)
-        credentials.refresh(Request())
+        # If the configs contain an http_proxy, refresh credentials through the
+        # proxy URI
+        if kwargs.get("http_proxy"):
+            session = Session()
+            session.proxies.update({"http": kwargs.get("http_proxy")})
+            credentials.refresh(Request(session=session))
+        else:
+            credentials.refresh(Request())
         return credentials
 
     return initialize_credentials_wrapper
@@ -44,7 +52,11 @@ def _initialize_credentials_decorator(func):
 
 @_initialize_credentials_decorator
 def get_installed_app_credentials(
-    client_id, client_secret, refresh_token, token_uri=_DEFAULT_TOKEN_URI
+    client_id,
+    client_secret,
+    refresh_token,
+    http_proxy=None,
+    token_uri=_DEFAULT_TOKEN_URI,
 ):
     """Creates and returns an instance of oauth2.credentials.Credentials.
 
@@ -67,7 +79,7 @@ def get_installed_app_credentials(
 
 @_initialize_credentials_decorator
 def get_service_account_credentials(
-    json_key_file_path, subject, scopes=_SERVICE_ACCOUNT_SCOPES
+    json_key_file_path, subject, http_proxy=None, scopes=_SERVICE_ACCOUNT_SCOPES
 ):
     """Creates and returns an instance of oauth2.service_account.Credentials.
 
@@ -102,12 +114,14 @@ def get_credentials(config_data):
             config_data.get("client_id"),
             config_data.get("client_secret"),
             config_data.get("refresh_token"),
+            http_proxy=config_data.get("http_proxy"),
         )
     elif all(key in config_data for key in required_service_account_keys):
         # Using the Service Account Flow
         return get_service_account_credentials(
             config_data.get("json_key_file_path"),
             config_data.get("impersonated_email"),
+            http_proxy=config_data.get("http_proxy"),
         )
     else:
         raise ValueError(

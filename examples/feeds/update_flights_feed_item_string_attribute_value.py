@@ -39,6 +39,7 @@ from google.ads.googleads.errors import GoogleAdsException
 from google.api_core import protobuf_helpers
 
 
+# [START update_flights_feed_item_string_attribute_value]
 def main(
     client,
     customer_id,
@@ -127,6 +128,7 @@ def main(
         "Feed item with resource name: "
         f"'{response.results[0].resource_name}' was updated."
     )
+    # [END update_flights_feed_item_string_attribute_value]
 
 
 def _flight_placeholder_fields_map(client, customer_id, feed_resource_name):
@@ -283,7 +285,7 @@ def _get_attribute_index(target_feed_item_attribute_value, feed_item):
 if __name__ == "__main__":
     # GoogleAdsClient will read the google-ads.yaml configuration file in the
     # home directory if none is specified.
-    googleads_client = GoogleAdsClient.load_from_storage(version="v6")
+    googleads_client = GoogleAdsClient.load_from_storage(version="v7")
 
     parser = argparse.ArgumentParser(
         description="Updates a feed item attribute value in a flights feed."

@@ -30,6 +30,7 @@ from google.ads.googleads.util import get_nested_attr
 _DEFAULT_PAGE_SIZE = 1000
 
 
+# [START get_change_details]
 def main(client, customer_id):
     """Gets specific details about the most recent changes in the given account.
 
@@ -140,13 +141,13 @@ def main(client, customer_id):
                     print(
                         f"\t{changed_field} changed from {old_value} to {new_value}"
                     )
-
+                    # [END get_change_details]
 
 
 if __name__ == "__main__":
     # GoogleAdsClient will read the google-ads.yaml configuration file in the
     # home directory if none is specified.
-    googleads_client = GoogleAdsClient.load_from_storage(version="v6")
+    googleads_client = GoogleAdsClient.load_from_storage(version="v7")
 
     parser = argparse.ArgumentParser(
         description="This example gets specific details about the most recent "

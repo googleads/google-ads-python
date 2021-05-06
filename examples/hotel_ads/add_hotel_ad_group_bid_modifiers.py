@@ -25,6 +25,7 @@ from google.ads.googleads.client import GoogleAdsClient
 from google.ads.googleads.errors import GoogleAdsException
 
 
+# [START add_hotel_ad_group_bid_modifiers]
 def main(client, customer_id, ad_group_id):
     ad_group_service = client.get_service("AdGroupService")
     ag_bm_service = client.get_service("AdGroupBidModifierService")
@@ -65,12 +66,13 @@ def main(client, customer_id, ad_group_id):
 
     for result in ag_bm_response.results:
         print(result.resource_name)
+        # [END add_hotel_ad_group_bid_modifiers]
 
 
 if __name__ == "__main__":
     # GoogleAdsClient will read the google-ads.yaml configuration file in the
     # home directory if none is specified.
-    googleads_client = GoogleAdsClient.load_from_storage(version="v6")
+    googleads_client = GoogleAdsClient.load_from_storage(version="v7")
 
     parser = argparse.ArgumentParser(
         description=("Adds an ad group bid modifier to a hotel ad group.")

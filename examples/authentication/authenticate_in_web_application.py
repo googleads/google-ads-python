@@ -12,7 +12,7 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
-"""This example creates  an OAuth2 refresh token using the Web application flow.
+"""This example creates an OAuth2 refresh token using the Web application flow.
 
 To retrieve the necessary client_secrets JSON file, first generate an OAuth 2.0
 client ID of type 'Web application' in the Google Cloud Console:

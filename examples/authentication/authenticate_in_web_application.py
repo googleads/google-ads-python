@@ -24,15 +24,19 @@ URIs for this client ID.
 
 Once complete, download the credentials and save the file path so it can be
 passed into this example.
+
+This example is a very simply implementation, for a more detailed example see:
+https://developers.google.com/identity/protocols/oauth2/web-server#python
 """
 
 
 import argparse
 import hashlib
 import http.server
-import socketserver
-from urllib.parse import urlparse, parse_qs
 import os
+import re
+import socket
+import sys
 
 from google_auth_oauthlib.flow import Flow
 
@@ -63,20 +67,95 @@ def main(client_secrets_path, scopes):
         include_granted_scopes='true'
     )
 
+    # Prints the authorization URL so you can paste into your browser. In a
+    # typical web application you would redirect the user to this URL, and they
+    # would be redirected back to "redirect_url" provided earlier after
+    # granting permission.
     print(authorization_url)
-    _get_authorization_code()
+
+    try:
+        # Retrieves an authorization code by opening a socket to receive the
+        # redirect request and parsing the query parameters set in the URL.
+        code = _get_authorization_code(passthrough_val)
+    except ValueError as error:
+        print(error)
+        sys.exit(1)
+
+    # Pass the code back into the OAuth module to get a refresh token.
+    flow.fetch_token(code=code)
+    refresh_token = flow.credentials.refresh_token
+
+    print(f"\nYour refresh token is: {refresh_token}\n")
+    print(
+        "Add your refresh token to your client library configuration as "
+        "described here: "
+        "https://developers.google.com/google-ads/api/docs/client-libs/python/configuration"
+    )
 
 
-class rootHttpHandler(http.server.SimpleHTTPRequestHandler):
-    def do_GET(self):
-        query_params = parse_qs(urlparse(self.path).query)
-        code = query_params["code"]
+def _get_authorization_code(passthrough_val):
+    """Opens a socket to handle a single HTTP request containing auth tokens.
+
+    Args:
+        passthrough_val: an anti-forgery token used to verify the request
+            received by the socket.
+
+    Returns:
+        a str access token from the Google Auth service.
+    """
+    # Open a socket at localhost:8080 and listen for a request
+    sock = socket.socket()
+    sock.bind(('localhost', 8080))
+    sock.listen(1)
+    connection, address = sock.accept()
+    data = connection.recv(1024)
+    # Parse the raw request to retrieve the URL query parameters.
+    params = _parse_raw_query_params(data)
+
+    try:
+        if not params.get("code"):
+            message = "Failed to retrieve authorization code."
+            raise ValueError(message)
+        elif params.get("state") != passthrough_val:
+            message = "State token does not match the expected state."
+            raise ValueError(message)
+        else:
+            message = "Authorization code was successfully retrieved."
+    finally:
+        response = f"""
+            HTTP/1.1 200 OK\n
+            Content-Type: text/html\n\n
+            <b>{message}</b>
+            <p>Please check the console output.</p>\n"""
+
+        connection.sendall(response.encode())
+        connection.close()
+
+    return params.get("code")
 
 
-def _get_authorization_code():
-    """Initializes a basic http server to listen for auth requests."""
-    server = socketserver.TCPServer(("", 8080), rootHttpHandler)
-    server.handle_request()
+def _parse_raw_query_params(data):
+    """Parses a raw HTTP request to extract its query params as a dict.
+
+    Note that this logic is likely irrelevant if you're building OAuth logic
+    into complete web application, where response parsing is handled by a
+    framework.
+
+    Args:
+        data: raw request data as bytes.
+
+    Returns:
+        a dict of query parameter key value pairs.
+    """
+    # Decode the request into a utf-8 encoded string
+    decoded = data.decode("utf-8")
+    # Use a regular expression to extract the URL query parameters string
+    match = re.search("GET\s\/\?(.*) ", decoded)
+    params = match.group(1)
+    # Split the parameters to isolate the key/value pairs
+    pairs = [ pair.split("=") for pair in params.split("&") ]
+    # Convert pairs to a dict to make it easy to access the values
+    return { key: val for key, val in pairs }
 
 
 if __name__ == "__main__":

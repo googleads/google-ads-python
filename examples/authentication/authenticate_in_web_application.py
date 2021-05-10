@@ -25,14 +25,13 @@ URIs for this client ID.
 Once complete, download the credentials and save the file path so it can be
 passed into this example.
 
-This example is a very simply implementation, for a more detailed example see:
+This example is a very simple implementation, for a more detailed example see:
 https://developers.google.com/identity/protocols/oauth2/web-server#python
 """
 
 
 import argparse
 import hashlib
-import http.server
 import os
 import re
 import socket
@@ -49,7 +48,7 @@ def main(client_secrets_path, scopes):
     """The main method, starts a basic server and initializes an auth request.
 
     Args:
-        client_secrets_path: a path to where the client secrete JSON file is
+        client_secrets_path: a path to where the client secrets JSON file is
             located on the machine running this example.
         scopes: a list of API scopes to include in the auth request, see:
             https://developers.google.com/identity/protocols/oauth2/scopes

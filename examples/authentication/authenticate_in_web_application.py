@@ -113,7 +113,10 @@ def _get_authorization_code(passthrough_val):
 
     try:
         if not params.get("code"):
-            message = "Failed to retrieve authorization code."
+            # If no code is present in the query params then there will be an
+            # error message with more details.
+            error = params.get("error")
+            message = f"Failed to retrieve authorization code. Error: {error}"
             raise ValueError(message)
         elif params.get("state") != passthrough_val:
             message = "State token does not match the expected state."
@@ -137,7 +140,7 @@ def _parse_raw_query_params(data):
     """Parses a raw HTTP request to extract its query params as a dict.
 
     Note that this logic is likely irrelevant if you're building OAuth logic
-    into complete web application, where response parsing is handled by a
+    into a complete web application, where response parsing is handled by a
     framework.
 
     Args:

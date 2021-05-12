@@ -30,6 +30,7 @@ install_requires = [
 tests_require = [
     "mock >= 3.0.0, < 4.0.0",
     "pyfakefs >= 3.5, < 3.6",
+    "coverage >= 5.5",
 ]
 
 with io.open("README.rst", "r", encoding="utf-8") as readme_file:

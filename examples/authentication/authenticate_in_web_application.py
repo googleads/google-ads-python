@@ -20,7 +20,8 @@ client ID of type 'Web application' in the Google Cloud Console:
 https://console.cloud.google.com
 
 Make sure 'http://localhost:8080' is included the list of authorized redirect
-URIs for this client ID.
+URIs for this client ID. If you choose a different port, make sure to update the
+hardcoded _PORT variable below.
 
 Once complete, download the credentials and save the file path so it can be
 passed into this example.
@@ -41,7 +42,8 @@ from google_auth_oauthlib.flow import Flow
 
 
 _SCOPE = "https://www.googleapis.com/auth/adwords"
-_REDIRECT_URI = "http://localhost:8080"
+_PORT = 8080
+_REDIRECT_URI = f"http://localhost:{_PORT}"
 
 
 def main(client_secrets_path, scopes):
@@ -70,15 +72,13 @@ def main(client_secrets_path, scopes):
     # typical web application you would redirect the user to this URL, and they
     # would be redirected back to "redirect_url" provided earlier after
     # granting permission.
+    print("Paste this URL into your browser: ")
     print(authorization_url)
+    print(f"\nWaiting for authorization and callback to: {_REDIRECT_URI}...")
 
-    try:
-        # Retrieves an authorization code by opening a socket to receive the
-        # redirect request and parsing the query parameters set in the URL.
-        code = _get_authorization_code(passthrough_val)
-    except ValueError as error:
-        print(error)
-        sys.exit(1)
+    # Retrieves an authorization code by opening a socket to receive the
+    # redirect request and parsing the query parameters set in the URL.
+    code = _get_authorization_code(passthrough_val)
 
     # Pass the code back into the OAuth module to get a refresh token.
     flow.fetch_token(code=code)
@@ -102,9 +102,9 @@ def _get_authorization_code(passthrough_val):
     Returns:
         a str access token from the Google Auth service.
     """
-    # Open a socket at localhost:8080 and listen for a request
+    # Open a socket at localhost:PORT and listen for a request
     sock = socket.socket()
-    sock.bind(('localhost', 8080))
+    sock.bind(('localhost', _PORT))
     sock.listen(1)
     connection, address = sock.accept()
     data = connection.recv(1024)
@@ -123,12 +123,16 @@ def _get_authorization_code(passthrough_val):
             raise ValueError(message)
         else:
             message = "Authorization code was successfully retrieved."
+    except ValueError as error:
+        print(error)
+        sys.exit(1)
     finally:
-        response = f"""
-            HTTP/1.1 200 OK\n
-            Content-Type: text/html\n\n
-            <b>{message}</b>
-            <p>Please check the console output.</p>\n"""
+        response = (
+            "HTTP/1.1 200 OK\n"
+            "Content-Type: text/html\n\n"
+            f"<b>{message}</b>"
+            "<p>Please check the console output.</p>\n"
+        )
 
         connection.sendall(response.encode())
         connection.close()
@@ -165,9 +169,9 @@ if __name__ == "__main__":
         description=(
             "Generates OAuth2 refresh token using the Web application flow. "
             "To retrieve the necessary client_secrets JSON file, first "
-            "generate an OAuth 2.0 client ID of type Web application in the "
+            "generate OAuth 2.0 credentials of type Web application in the "
             "Google Cloud Console (https://console.cloud.google.com). "
-            "Make sure 'http://localhost:8080' is included the list of "
+            "Make sure 'http://localhost:PORT' is included the list of "
             "'Authorized redirect URIs' for this client ID."
         ),
     )

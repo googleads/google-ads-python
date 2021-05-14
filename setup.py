@@ -25,11 +25,7 @@ install_requires = [
     "PyYAML >= 5.1, < 6.0",
     "setuptools>=40.3.0",
     "pep562 >= 1.0, < 2.0",
-]
-
-tests_require = [
-    "mock >= 3.0.0, < 4.0.0",
-    "pyfakefs >= 3.5, < 3.6",
+    "nox == 2020.12.31",
 ]
 
 with io.open("README.rst", "r", encoding="utf-8") as readme_file:
@@ -55,8 +51,6 @@ setup(
     python_requires=">=3.6",
     long_description=long_description,
     install_requires=install_requires,
-    tests_require=tests_require,
-    test_suite="tests",
     license="Apache 2.0",
     packages=find_packages(
         exclude=["examples", "examples.*", "tests", "tests.*"]

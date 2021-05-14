@@ -32,7 +32,16 @@ def main(client, customer_id, page_size, ad_group_id=None):
           ad_group.id,
           ad_group_bid_modifier.criterion_id,
           ad_group_bid_modifier.bid_modifier,
-          ad_group_bid_modifier.device.type
+          ad_group_bid_modifier.device.type,
+          ad_group_bid_modifier.hotel_date_selection_type.type,
+          ad_group_bid_modifier.hotel_advance_booking_window.min_days,
+          ad_group_bid_modifier.hotel_advance_booking_window.max_days,
+          ad_group_bid_modifier.hotel_length_of_stay.min_nights,
+          ad_group_bid_modifier.hotel_length_of_stay.max_nights,
+          ad_group_bid_modifier.hotel_check_in_day.day_of_week,
+          ad_group_bid_modifier.hotel_check_in_date_range.start_date,
+          ad_group_bid_modifier.hotel_check_in_date_range.end_date,
+          ad_group_bid_modifier.preferred_content.type
         FROM ad_group_bid_modifier"""
 
     if ad_group_id:
@@ -49,18 +58,45 @@ def main(client, customer_id, page_size, ad_group_id=None):
         modifier = row.ad_group_bid_modifier
         print(
             "Ad group bid modifier with criterion ID "
-            '"{modifier.criterion_id.value}", bid modifier value '
-            '"{modifier.bid_modifier.value}", device type '
-            '"{modifier.device.type.name}" was found in ad group ID '
-            '"{row.ad_group.id.value}" of campaign with ID '
-            '"{row.campaign.id.value}".'
+            f"'{modifier.criterion_id}', bid modifier value "
+            f"'{modifier.bid_modifier or 0.00}', device type "
+            f"'{modifier.device.type_.name}' was found in ad group with ID "
+            f"'{row.ad_group.id}' of campaign with ID '{row.campaign.id}'."
         )
+
+        criterion_field = type(modifier).pb(modifier).WhichOneof("criterion")
+        criterion_details = f"  - Criterion type: {criterion_field}, "
+
+        if criterion_field == "device":
+            criterion_details += f"Type: {modifier.device.type_}"
+        elif criterion_field == "hotel_advance_booking_window":
+            criterion_details += (
+                f"Min Days: {modifier.hotel_advance_booking_window.min_days}, "
+                f"Max Days: {modifier.hotel_advance_booking_window.max_days}"
+            )
+        elif criterion_field == "hotel_check_in_day":
+            criterion_details += (
+                f"Day of the week: {modifier.hotel_check_in_day.day_of_week}"
+            )
+        elif criterion_field == "hotel_date_selection_type":
+            criterion_details += f"Date selection type: {modifier.hotel_date_selection_type.type_}"
+        elif criterion_field == "hotel_length_of_stay":
+            criterion_details += (
+                f"Min Nights: {modifier.hotel_length_of_stay.min_nights}, "
+                f"Max Nights: {modifier.hotel_length_of_stay.max_nights}"
+            )
+        elif criterion_field == "preferred_content":
+            criterion_details += f"Type: {modifier.preferred_content.type_}"
+        else:
+            criterion_details = "  - No Criterion type found."
+
+        print(criterion_details)
 
 
 if __name__ == "__main__":
     # GoogleAdsClient will read the google-ads.yaml configuration file in the
     # home directory if none is specified.
-    googleads_client = GoogleAdsClient.load_from_storage(version="v6")
+    googleads_client = GoogleAdsClient.load_from_storage(version="v7")
 
     parser = argparse.ArgumentParser(
         description="List ad group bid modifiers for specified customer."
@@ -87,11 +123,11 @@ if __name__ == "__main__":
 
     try:
         main(
-        googleads_client,
-        args.customer_id,
-        _DEFAULT_PAGE_SIZE,
-        ad_group_id=args.ad_group_id,
-    )
+            googleads_client,
+            args.customer_id,
+            _DEFAULT_PAGE_SIZE,
+            ad_group_id=args.ad_group_id,
+        )
     except GoogleAdsException as ex:
         print(
             f'Request with ID "{ex.request_id}" failed with status '

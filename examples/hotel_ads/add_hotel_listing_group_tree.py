@@ -462,7 +462,7 @@ def _create_ad_group_criterion(
 if __name__ == "__main__":
     # GoogleAdsClient will read the google-ads.yaml configuration file in the
     # home directory if none is specified.
-    googleads_client = GoogleAdsClient.load_from_storage(version="v6")
+    googleads_client = GoogleAdsClient.load_from_storage(version="v7")
 
     parser = argparse.ArgumentParser(
         description="Shows how to add a hotel listing group tree with two "

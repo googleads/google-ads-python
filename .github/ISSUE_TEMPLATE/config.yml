@@ -1,1 +1,5 @@
 blank_issues_enabled: false
+contact_links:
+  - name: Google Ads API support
+    url: https://developers.google.com/google-ads/api/support
+    about: Please ask general Google Ads API questions to the dedicated support channels.

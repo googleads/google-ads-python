@@ -14,8 +14,8 @@
 # limitations under the License.
 """This example creates an OAuth2 refresh token using the Web application flow.
 
-To retrieve the necessary client_secrets JSON file, first generate an OAuth 2.0
-client ID of type 'Web application' in the Google Cloud Console:
+To retrieve the necessary client_secrets JSON file, first generate OAuth 2.0
+credentials of type 'Web application' in the Google Cloud Console:
 
 https://console.cloud.google.com
 

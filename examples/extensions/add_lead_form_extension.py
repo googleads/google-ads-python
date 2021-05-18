@@ -40,6 +40,7 @@ def main(client, customer_id, campaign_id):
     )
 
 
+# [START add_lead_form_extension]
 def _create_lead_form_asset(client, customer_id):
     """Creates a lead form asset using the given customer ID.
 
@@ -136,8 +137,10 @@ def _create_lead_form_asset(client, customer_id):
     print(f"Asset with resource name {resource_name} was created.")
 
     return resource_name
+    # [END add_lead_form_extension]
 
 
+# [START add_lead_form_extension_1]
 def _create_lead_form_extension(
     client, customer_id, campaign_id, lead_form_asset_resource_name
 ):
@@ -168,6 +171,7 @@ def _create_lead_form_extension(
             "Created campaign asset with resource name "
             f'"{result.resource_name}" for campaign with ID {campaign_id}'
         )
+        # [END add_lead_form_extension_1]
 
 
 if __name__ == "__main__":

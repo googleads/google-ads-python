@@ -9,7 +9,7 @@ assignees: ''
 <!-- PLEASE READ
 This form is for usage questions specific to this library.
 
-For questions that are related to the Google Ads API itself and not specific to this library, please reach out to one of our support channels at https://developers.google.com/google-ads/api/support. 
+For questions that are related to the Google Ads API itself and not specific to this library, please reach out to one of our support channels: https://developers.google.com/google-ads/api/support. 
 
 For troubleshooting tips, see: https://developers.google.com/google-ads/api/docs/best-practices/troubleshooting
 -->

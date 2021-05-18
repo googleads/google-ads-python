@@ -11,7 +11,7 @@ This form is for bug reports specific to this library.
 
 For troubleshooting tips, see: https://developers.google.com/google-ads/api/docs/best-practices/troubleshooting
 
-For issues that are related to the Google Ads API itself and not specific to this library, please reach out to one of our support channels at https://developers.google.com/google-ads/api/support.
+For issues that are related to the Google Ads API itself and not specific to this library, please reach out to one of our support channels: https://developers.google.com/google-ads/api/support.
 
 Please check existing issues to see if your bug has already been reported before
 creating a new issue. We encourage you to add any relevant information to the existing issue if one already exists.

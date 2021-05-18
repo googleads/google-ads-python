@@ -40,5 +40,5 @@ identifiable information, including developer tokens, client IDs, customer IDs, 
 -->
 
  
-**Anything else we should know about your project / environment**
+**Anything else we should know about your project / environment:**
 

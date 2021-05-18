@@ -24,12 +24,9 @@ creating a new issue. We encourage you to add any relevant information to the ex
 **Expected behavior:**
 
 **Client library version and API version:**
-<!--
- - Which Google Ads API version are you using [e.g. v6]
- - Paste the list of dependencies you're using (i.e. `pip freeze`)
--->
 Client library version:
 Google Ads API version:
+<!-- Paste the list of dependencies you're using (i.e. `pip freeze`) -->
 
 **Request/Response Logs:**
 <!--

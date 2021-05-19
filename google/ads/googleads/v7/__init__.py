@@ -17,8 +17,8 @@ import importlib
 import sys
 
 
-if sys.version_info < (3, 7):
-    raise ImportError("This module requires Python 3.7 or later.")
+if sys.version_info < (3, 6):
+    raise ImportError("This module requires Python 3.6 or later.")
 
 
 _lazy_type_to_package_map = {
@@ -1656,3 +1656,9 @@ def __getattr__(name):  # Requires Python >= 3.7
 
 def __dir__():
     return globals().get("__all__") or __getattr__("__all__")
+
+
+if not sys.version_info >= (3, 7):
+    from pep562 import Pep562
+
+    Pep562(__name__)

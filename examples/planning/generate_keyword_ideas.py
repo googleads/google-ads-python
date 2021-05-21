@@ -68,7 +68,7 @@ def main(
     # To generate keyword ideas with only a page_url and no keywords we need
     # to initialize a UrlSeed object with the page_url as the "url" field.
     if not keyword_texts and page_url:
-        request.url_seed.url = url_seed
+        request.url_seed.url = page_url
 
     # To generate keyword ideas with only a list of keywords and no page_url
     # we need to initialize a KeywordSeed object and set the "keywords" field

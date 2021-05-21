@@ -56,7 +56,7 @@ if __name__ == "__main__":
     googleads_client = GoogleAdsClient.load_from_storage(version="v7")
 
     parser = argparse.ArgumentParser(
-        description=("Pauses an ad in the specified customer's ad group.")
+        description=("Applies a specified recommendation.")
     )
     # The following argument(s) should be provided to run the example.
     parser.add_argument(

@@ -17,7 +17,7 @@ from setuptools import setup, find_packages
 import io
 
 install_requires = [
-    "dataclasses >= 0.6, < 1.0.0",
+    "dataclasses >= 0.6, < 1.0.0; python_version < '3.7'",
     "google-auth-oauthlib >= 0.3.0, < 1.0.0",
     "google-api-core >= 1.21.0, < 2.0.0",
     "googleapis-common-protos >= 1.5.8, < 2.0.0",
@@ -35,7 +35,7 @@ with io.open("README.rst", "r", encoding="utf-8") as readme_file:
 
 setup(
     name="google-ads",
-    version="11.0.1",
+    version="11.0.2",
     author="Google LLC",
     author_email="googleapis-packages@google.com",
     classifiers=[

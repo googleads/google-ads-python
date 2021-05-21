@@ -1,3 +1,6 @@
+* 11.0.2
+- Update dataclasses dependency so it's only installed when using Python < 3.7
+
 * 11.0.1
 - Fix bug breaking Python 3.6 compatibility.
 - Update unit test framework to Nox and add test coverage.

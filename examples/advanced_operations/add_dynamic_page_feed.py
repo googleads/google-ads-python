@@ -56,18 +56,12 @@ def main(client, customer_id, campaign_id, ad_group_id):
     # We need to look up the attribute name and ID for the feed we just
     # created so that we can give them back to the API for construction of
     # feed mappings in the next function.
-    feed_details = _get_feed_details(
-        client, customer_id, feed_resource_name
-    )
+    feed_details = _get_feed_details(client, customer_id, feed_resource_name)
     _create_feed_mapping(client, customer_id, feed_details)
-    _create_feed_items(
-        client, customer_id, feed_details, dsa_page_url_label
-    )
+    _create_feed_items(client, customer_id, feed_details, dsa_page_url_label)
 
     # Associate the page feed with the campaign.
-    _update_campaign_dsa_setting(
-        client, customer_id, campaign_id, feed_details
-    )
+    _update_campaign_dsa_setting(client, customer_id, campaign_id, feed_details)
     ad_group_service = client.get_service("AdGroupService")
     ad_group_resource_name = ad_group_service.ad_group_path(
         customer_id, ad_group_id
@@ -369,7 +363,7 @@ def _add_dsa_targeting(client, customer_id, ad_group_resource_name, label):
 if __name__ == "__main__":
     # GoogleAdsClient will read the google-ads.yaml configuration file in the
     # home directory if none is specified.
-    googleads_client = GoogleAdsClient.load_from_storage(version="v7")
+    googleads_client = GoogleAdsClient.load_from_storage(version="v8")
 
     parser = argparse.ArgumentParser(
         description=(
@@ -393,7 +387,12 @@ if __name__ == "__main__":
     args = parser.parse_args()
 
     try:
-        main(googleads_client, args.customer_id, args.campaign_id, args.ad_group_id)
+        main(
+            googleads_client,
+            args.customer_id,
+            args.campaign_id,
+            args.ad_group_id,
+        )
     except GoogleAdsException as ex:
         print(
             f'Request with ID "{ex.request_id}" failed with status '

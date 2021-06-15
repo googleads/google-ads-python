@@ -76,7 +76,7 @@ def main(client, customer_id, label_id, page_size):
 if __name__ == "__main__":
     # GoogleAdsClient will read the google-ads.yaml configuration file in the
     # home directory if none is specified.
-    googleads_client = GoogleAdsClient.load_from_storage(version="v7")
+    googleads_client = GoogleAdsClient.load_from_storage(version="v8")
 
     parser = argparse.ArgumentParser(
         description="Lists all campaigns for specified customer."
@@ -99,7 +99,12 @@ if __name__ == "__main__":
     args = parser.parse_args()
 
     try:
-        main(googleads_client, args.customer_id, args.label_id, _DEFAULT_PAGE_SIZE)
+        main(
+            googleads_client,
+            args.customer_id,
+            args.label_id,
+            _DEFAULT_PAGE_SIZE,
+        )
     except GoogleAdsException as ex:
         print(
             f'Request with ID "{ex.request_id}" failed with status '

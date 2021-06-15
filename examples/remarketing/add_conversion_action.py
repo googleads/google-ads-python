@@ -50,11 +50,8 @@ def main(client, customer_id):
     value_settings.always_use_default_value = True
 
     # Add the conversion action.
-    conversion_action_response = (
-        conversion_action_service.mutate_conversion_actions(
-            customer_id=customer_id,
-            operations=[conversion_action_operation],
-        )
+    conversion_action_response = conversion_action_service.mutate_conversion_actions(
+        customer_id=customer_id, operations=[conversion_action_operation],
     )
 
     print(
@@ -67,7 +64,7 @@ def main(client, customer_id):
 if __name__ == "__main__":
     # GoogleAdsClient will read the google-ads.yaml configuration file in the
     # home directory if none is specified.
-    googleads_client = GoogleAdsClient.load_from_storage(version="v7")
+    googleads_client = GoogleAdsClient.load_from_storage(version="v8")
 
     parser = argparse.ArgumentParser(
         description="Adds a conversion action for specified customer."

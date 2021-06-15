@@ -114,11 +114,9 @@ def _add_extension_to_account(
     customer_extension_setting_service = client.get_service(
         "CustomerExtensionSettingService"
     )
-    response = (
-        customer_extension_setting_service.mutate_customer_extension_settings(
-            customer_id=customer_id,
-            operations=[customer_extension_setting_operation],
-        )
+    response = customer_extension_setting_service.mutate_customer_extension_settings(
+        customer_id=customer_id,
+        operations=[customer_extension_setting_operation],
     )
     print(
         "Created a customer extension setting with resource name: "
@@ -155,11 +153,9 @@ def _add_extension_to_campaign(
     campaign_extension_setting_service = client.get_service(
         "CampaignExtensionSettingService"
     )
-    response = (
-        campaign_extension_setting_service.mutate_campaign_extension_settings(
-            customer_id=customer_id,
-            operations=[campaign_extension_setting_operation],
-        )
+    response = campaign_extension_setting_service.mutate_campaign_extension_settings(
+        customer_id=customer_id,
+        operations=[campaign_extension_setting_operation],
     )
     print(
         "Created a campaign extension setting with resource name: "
@@ -196,11 +192,9 @@ def _add_extension_to_ad_group(
     ad_group_extension_setting_service = client.get_service(
         "AdGroupExtensionSettingService"
     )
-    response = (
-        ad_group_extension_setting_service.mutate_ad_group_extension_settings(
-            customer_id=customer_id,
-            operations=[ad_group_extension_setting_operation],
-        )
+    response = ad_group_extension_setting_service.mutate_ad_group_extension_settings(
+        customer_id=customer_id,
+        operations=[ad_group_extension_setting_operation],
     )
     print(
         "Created a ad_group extension setting with resource name: "
@@ -211,7 +205,7 @@ def _add_extension_to_ad_group(
 if __name__ == "__main__":
     # GoogleAdsClient will read the google-ads.yaml configuration file in the
     # home directory if none is specified.
-    googleads_client = GoogleAdsClient.load_from_storage(version="v7")
+    googleads_client = GoogleAdsClient.load_from_storage(version="v8")
 
     parser = argparse.ArgumentParser(
         description="Adds a hotel callout extension to the given account."
@@ -225,11 +219,7 @@ if __name__ == "__main__":
         help="The Google Ads customer ID",
     )
     parser.add_argument(
-        "-i",
-        "--campaign_id",
-        type=str,
-        required=True,
-        help="The campaign ID.",
+        "-i", "--campaign_id", type=str, required=True, help="The campaign ID.",
     )
     parser.add_argument(
         "-a",

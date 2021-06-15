@@ -53,14 +53,12 @@ def main(client, customer_id, ad_group_id):
     ).AgeRangeType.AGE_RANGE_18_24
 
     # Add two ad group criteria
-    ad_group_criterion_response = (
-        ad_group_criterion_service.mutate_ad_group_criteria(
-            customer_id=customer_id,
-            operations=[
-                gender_ad_group_criterion_operation,
-                age_range_ad_group_criterion_operation,
-            ],
-        )
+    ad_group_criterion_response = ad_group_criterion_service.mutate_ad_group_criteria(
+        customer_id=customer_id,
+        operations=[
+            gender_ad_group_criterion_operation,
+            age_range_ad_group_criterion_operation,
+        ],
     )
 
     for result in ad_group_criterion_response.results:
@@ -70,7 +68,7 @@ def main(client, customer_id, ad_group_id):
 if __name__ == "__main__":
     # GoogleAdsClient will read the google-ads.yaml configuration file in the
     # home directory if none is specified.
-    googleads_client = GoogleAdsClient.load_from_storage(version="v7")
+    googleads_client = GoogleAdsClient.load_from_storage(version="v8")
 
     parser = argparse.ArgumentParser(
         description=(

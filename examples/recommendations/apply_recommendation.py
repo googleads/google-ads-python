@@ -33,10 +33,8 @@ def main(client, customer_id, recommendation_id):
         "ApplyRecommendationOperation"
     )
 
-    apply_recommendation_operation.resource_name = (
-        recommendation_service.recommendation_path(
-            customer_id, recommendation_id
-        )
+    apply_recommendation_operation.resource_name = recommendation_service.recommendation_path(
+        customer_id, recommendation_id
     )
 
     recommendation_response = recommendation_service.apply_recommendation(
@@ -53,7 +51,7 @@ def main(client, customer_id, recommendation_id):
 if __name__ == "__main__":
     # GoogleAdsClient will read the google-ads.yaml configuration file in the
     # home directory if none is specified.
-    googleads_client = GoogleAdsClient.load_from_storage(version="v7")
+    googleads_client = GoogleAdsClient.load_from_storage(version="v8")
 
     parser = argparse.ArgumentParser(
         description=("Applies a specified recommendation.")

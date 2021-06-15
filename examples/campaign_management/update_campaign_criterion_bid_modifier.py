@@ -38,11 +38,8 @@ def main(client, customer_id, campaign_id, criterion_id, bid_modifier_value):
         protobuf_helpers.field_mask(None, campaign_criterion._pb),
     )
 
-    campaign_criterion_response = (
-        campaign_criterion_service.mutate_campaign_criteria(
-            customer_id=customer_id,
-            operations=[campaign_criterion_operation],
-        )
+    campaign_criterion_response = campaign_criterion_service.mutate_campaign_criteria(
+        customer_id=customer_id, operations=[campaign_criterion_operation],
     )
 
     print(
@@ -55,7 +52,7 @@ def main(client, customer_id, campaign_id, criterion_id, bid_modifier_value):
 if __name__ == "__main__":
     # GoogleAdsClient will read the google-ads.yaml configuration file in the
     # home directory if none is specified.
-    googleads_client = GoogleAdsClient.load_from_storage(version="v7")
+    googleads_client = GoogleAdsClient.load_from_storage(version="v8")
 
     parser = argparse.ArgumentParser(
         description=(
@@ -92,12 +89,12 @@ if __name__ == "__main__":
 
     try:
         main(
-        googleads_client,
-        args.customer_id,
-        args.campaign_id,
-        args.criterion_id,
-        args.bid_modifier_value,
-    )
+            googleads_client,
+            args.customer_id,
+            args.campaign_id,
+            args.criterion_id,
+            args.bid_modifier_value,
+        )
     except GoogleAdsException as ex:
         print(
             f'Request with ID "{ex.request_id}" failed with status '

@@ -75,7 +75,7 @@ def main(client, customer_id, feed_id):
 if __name__ == "__main__":
     # GoogleAdsClient will read the google-ads.yaml configuration file in the
     # home directory if none is specified.
-    googleads_client = GoogleAdsClient.load_from_storage(version="v7")
+    googleads_client = GoogleAdsClient.load_from_storage(version="v8")
 
     parser = argparse.ArgumentParser(
         description="Creates a new feed item set for a specified feed."
@@ -89,20 +89,14 @@ if __name__ == "__main__":
         help="The Google Ads customer ID.",
     )
     parser.add_argument(
-        "-f",
-        "--feed_id",
-        type=str,
-        required=True,
-        help="The feed ID.",
+        "-f", "--feed_id", type=str, required=True, help="The feed ID.",
     )
     args = parser.parse_args()
 
     try:
         main(
-        googleads_client,
-        args.customer_id,
-        args.feed_id,
-    )
+            googleads_client, args.customer_id, args.feed_id,
+        )
     except GoogleAdsException as ex:
         print(
             f'Request with ID "{ex.request_id}" failed with status '

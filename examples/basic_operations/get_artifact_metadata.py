@@ -96,8 +96,7 @@ def main(client, artifact_name, page_size):
 
             print("")
             print(
-                "The artifact can be selected with the following "
-                "artifacts:"
+                "The artifact can be selected with the following " "artifacts:"
             )
             for artifact in selectable_artifacts:
                 print(artifact)
@@ -106,7 +105,7 @@ def main(client, artifact_name, page_size):
 if __name__ == "__main__":
     # GoogleAdsClient will read the google-ads.yaml configuration file in the
     # home directory if none is specified.
-    googleads_client = GoogleAdsClient.load_from_storage(version="v7")
+    googleads_client = GoogleAdsClient.load_from_storage(version="v8")
 
     parser = argparse.ArgumentParser(
         description="Lists metadata for the specified artifact."

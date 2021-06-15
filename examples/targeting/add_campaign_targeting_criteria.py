@@ -33,10 +33,8 @@ def main(client, customer_id, campaign_id, keyword_text, location_id):
         _create_proximity_op(client, customer_id, campaign_id),
     ]
 
-    campaign_criterion_response = (
-        campaign_criterion_service.mutate_campaign_criteria(
-            customer_id=customer_id, operations=operations
-        )
+    campaign_criterion_response = campaign_criterion_service.mutate_campaign_criteria(
+        customer_id=customer_id, operations=operations
     )
 
     for result in campaign_criterion_response.results:
@@ -59,8 +57,8 @@ def _create_location_op(client, customer_id, campaign_id, location_id):
     # GeoTargetConstantService.suggest_geo_target_constants() and directly
     # apply GeoTargetConstant.resource_name here. An example can be found
     # in get_geo_target_constant_by_names.py.
-    campaign_criterion.location.geo_target_constant = (
-        geo_target_constant_service.geo_target_constant_path(location_id)
+    campaign_criterion.location.geo_target_constant = geo_target_constant_service.geo_target_constant_path(
+        location_id
     )
 
     return campaign_criterion_operation
@@ -113,7 +111,7 @@ def _create_proximity_op(client, customer_id, campaign_id):
 if __name__ == "__main__":
     # GoogleAdsClient will read the google-ads.yaml configuration file in the
     # home directory if none is specified.
-    googleads_client = GoogleAdsClient.load_from_storage(version="v7")
+    googleads_client = GoogleAdsClient.load_from_storage(version="v8")
 
     parser = argparse.ArgumentParser(
         description=(
@@ -156,12 +154,12 @@ if __name__ == "__main__":
 
     try:
         main(
-        googleads_client,
-        args.customer_id,
-        args.campaign_id,
-        args.keyword_text,
-        args.location_id,
-    )
+            googleads_client,
+            args.customer_id,
+            args.campaign_id,
+            args.keyword_text,
+            args.location_id,
+        )
     except GoogleAdsException as ex:
         print(
             f'Request with ID "{ex.request_id}" failed with status '

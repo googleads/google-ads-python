@@ -33,7 +33,7 @@ _logger = logging.getLogger(__name__)
 
 _SERVICE_CLIENT_TEMPLATE = "{}Client"
 
-_VALID_API_VERSIONS = ["v7", "v6", "v5"]
+_VALID_API_VERSIONS = ["v8", "v7", "v6"]
 _DEFAULT_VERSION = _VALID_API_VERSIONS[0]
 
 # See options at grpc.github.io/grpc/core/group__grpc__arg__keys.html

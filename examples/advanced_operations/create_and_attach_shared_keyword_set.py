@@ -56,14 +56,12 @@ def main(client, customer_id, campaign_id):
     for keyword in keywords:
         shared_criterion_operation = client.get_type("SharedCriterionOperation")
         shared_criterion = shared_criterion_operation.create
-        keyword_info = shared_criterion.keyword
-        keyword_info.text = keyword
-        keyword_info.match_type = client.get_type(
+        shared_criterion.keyword.text = keyword
+        shared_criterion.keyword.match_type = client.get_type(
             "KeywordMatchTypeEnum"
         ).KeywordMatchType.BROAD
         shared_criterion.shared_set = shared_set_resource_name
         shared_criteria_operations.append(shared_criterion_operation)
-
     try:
         response = shared_criterion_service.mutate_shared_criteria(
             customer_id=customer_id, operations=shared_criteria_operations
@@ -85,10 +83,8 @@ def main(client, customer_id, campaign_id):
     campaign_set.shared_set = shared_set_resource_name
 
     try:
-        campaign_shared_set_resource_name = (
-            campaign_shared_set_service.mutate_campaign_shared_sets(
-                customer_id=customer_id, operations=[campaign_set_operation]
-            )
+        campaign_shared_set_resource_name = campaign_shared_set_service.mutate_campaign_shared_sets(
+            customer_id=customer_id, operations=[campaign_set_operation]
         )
 
         print(
@@ -115,7 +111,7 @@ def _handle_googleads_exception(exception):
 if __name__ == "__main__":
     # GoogleAdsClient will read the google-ads.yaml configuration file in the
     # home directory if none is specified.
-    googleads_client = GoogleAdsClient.load_from_storage(version="v7")
+    googleads_client = GoogleAdsClient.load_from_storage(version="v8")
 
     parser = argparse.ArgumentParser(
         description=(

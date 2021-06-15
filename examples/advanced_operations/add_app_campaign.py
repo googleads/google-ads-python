@@ -190,8 +190,8 @@ def _set_campaign_targeting_criteria(
         campaign_criterion = campaign_criterion_operation.create
         campaign_criterion.campaign = campaign_resource_name
         campaign_criterion.type_ = location_type
-        campaign_criterion.location.geo_target_constant = (
-            geo_target_constant_service.geo_target_constant_path(location_id)
+        campaign_criterion.location.geo_target_constant = geo_target_constant_service.geo_target_constant_path(
+            location_id
         )
         campaign_criterion_operations.append(campaign_criterion_operation)
 
@@ -203,8 +203,8 @@ def _set_campaign_targeting_criteria(
         campaign_criterion = campaign_criterion_operation.create
         campaign_criterion.campaign = campaign_resource_name
         campaign_criterion.type_ = language_type
-        campaign_criterion.language.language_constant = (
-            language_constant_service.language_constant_path(language_id)
+        campaign_criterion.language.language_constant = language_constant_service.language_constant_path(
+            language_id
         )
         campaign_criterion_operations.append(campaign_criterion_operation)
 
@@ -305,7 +305,7 @@ def _create_ad_text_asset(client, text):
 if __name__ == "__main__":
     # GoogleAdsClient will read the google-ads.yaml configuration file in the
     # home directory if none is specified.
-    googleads_client = GoogleAdsClient.load_from_storage(version="v7")
+    googleads_client = GoogleAdsClient.load_from_storage(version="v8")
 
     parser = argparse.ArgumentParser(
         description=(

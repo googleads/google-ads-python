@@ -50,11 +50,8 @@ def main(client, customer_id, ad_group_id, bid_modifier_value):
     ad_group_bid_modifier.device.type_ = device_enum.MOBILE
 
     # Add the ad group bid modifier.
-    ad_group_bm_response = (
-        ad_group_bm_service.mutate_ad_group_bid_modifiers(
-            customer_id=customer_id,
-            operations=[ad_group_bid_modifier_operation],
-        )
+    ad_group_bm_response = ad_group_bm_service.mutate_ad_group_bid_modifiers(
+        customer_id=customer_id, operations=[ad_group_bid_modifier_operation],
     )
     # [END add_ad_group_bid_modifier]
 
@@ -67,7 +64,7 @@ def main(client, customer_id, ad_group_id, bid_modifier_value):
 if __name__ == "__main__":
     # GoogleAdsClient will read the google-ads.yaml configuration file in the
     # home directory if none is specified.
-    googleads_client = GoogleAdsClient.load_from_storage(version="v7")
+    googleads_client = GoogleAdsClient.load_from_storage(version="v8")
 
     parser = argparse.ArgumentParser(
         description=(
@@ -98,11 +95,11 @@ if __name__ == "__main__":
 
     try:
         main(
-        googleads_client,
-        args.customer_id,
-        args.ad_group_id,
-        args.bid_modifier_value,
-    )
+            googleads_client,
+            args.customer_id,
+            args.ad_group_id,
+            args.bid_modifier_value,
+        )
     except GoogleAdsException as ex:
         print(
             f'Request with ID "{ex.request_id}" failed with status '

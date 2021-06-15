@@ -71,8 +71,8 @@ def main(
     request.customer_id = customer_id
     request.conversions = [call_conversion]
     request.partial_failure = True
-    upload_call_conversions_response = (
-        conversion_upload_service.upload_call_conversions(request=request)
+    upload_call_conversions_response = conversion_upload_service.upload_call_conversions(
+        request=request
     )
 
     # Print any partial errors returned.
@@ -98,7 +98,7 @@ def main(
 if __name__ == "__main__":
     # GoogleAdsClient will read the google-ads.yaml configuration file in the
     # home directory if none is specified.
-    googleads_client = GoogleAdsClient.load_from_storage(version="v7")
+    googleads_client = GoogleAdsClient.load_from_storage(version="v8")
 
     parser = argparse.ArgumentParser(
         description="Imports offline call conversion values for calls related "

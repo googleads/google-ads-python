@@ -41,10 +41,8 @@ def main(client, customer_id):
 
     # Add budget.
     try:
-        campaign_budget_response = (
-            campaign_budget_service.mutate_campaign_budgets(
-                customer_id=customer_id, operations=[campaign_budget_operation]
-            )
+        campaign_budget_response = campaign_budget_service.mutate_campaign_budgets(
+            customer_id=customer_id, operations=[campaign_budget_operation]
         )
         campaign_budget_id = campaign_budget_response.results[0].resource_name
         print(f'Budget "{campaign_budget_id}" was created.')
@@ -62,10 +60,8 @@ def main(client, customer_id):
 
     # Add portfolio bidding strategy.
     try:
-        bidding_strategy_response = (
-            bidding_strategy_service.mutate_bidding_strategies(
-                customer_id=customer_id, operations=[bidding_strategy_operation]
-            )
+        bidding_strategy_response = bidding_strategy_service.mutate_bidding_strategies(
+            customer_id=customer_id, operations=[bidding_strategy_operation]
         )
         bidding_strategy_id = bidding_strategy_response.results[0].resource_name
         print(f'Created portfolio bidding strategy "{bidding_strategy_id}".')
@@ -127,7 +123,7 @@ def _handle_googleads_exception(exception):
 if __name__ == "__main__":
     # GoogleAdsClient will read the google-ads.yaml configuration file in the
     # home directory if none is specified.
-    googleads_client = GoogleAdsClient.load_from_storage(version="v7")
+    googleads_client = GoogleAdsClient.load_from_storage(version="v8")
 
     parser = argparse.ArgumentParser(
         description="Adds a campaign for specified customer."

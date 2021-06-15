@@ -58,8 +58,8 @@ def main(client, customer_id, campaign_id, bid_modifier_value):
         "ResponseContentTypeEnum"
     ).ResponseContentType.MUTABLE_RESOURCE
 
-    campaign_bm_response = (
-        campaign_bm_service.mutate_campaign_bid_modifiers(request=request)
+    campaign_bm_response = campaign_bm_service.mutate_campaign_bid_modifiers(
+        request=request
     )
 
     # The resource returned in the response can be accessed directly in the
@@ -80,7 +80,7 @@ def main(client, customer_id, campaign_id, bid_modifier_value):
 if __name__ == "__main__":
     # GoogleAdsClient will read the google-ads.yaml configuration file in the
     # home directory if none is specified.
-    googleads_client = GoogleAdsClient.load_from_storage(version="v7")
+    googleads_client = GoogleAdsClient.load_from_storage(version="v8")
 
     parser = argparse.ArgumentParser(
         description=(
@@ -111,11 +111,11 @@ if __name__ == "__main__":
 
     try:
         main(
-        googleads_client,
-        args.customer_id,
-        args.campaign_id,
-        args.bid_modifier_value,
-    )
+            googleads_client,
+            args.customer_id,
+            args.campaign_id,
+            args.bid_modifier_value,
+        )
     except GoogleAdsException as ex:
         print(
             f'Request with ID "{ex.request_id}" failed with status '

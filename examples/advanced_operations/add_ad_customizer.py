@@ -166,10 +166,7 @@ def _get_feed_attributes(client, customer_id, feed_resource_name):
 
 # [START add_ad_customizer_2]
 def _create_ad_customizer_mapping(
-    client,
-    customer_id,
-    ad_customizer_feed_resource_name,
-    feed_details,
+    client, customer_id, ad_customizer_feed_resource_name, feed_details,
 ):
     """Creates a feed mapping for a given feed.
 
@@ -443,7 +440,7 @@ def _handle_googleads_exception(exception):
 if __name__ == "__main__":
     # GoogleAdsClient will read the google-ads.yaml configuration file in the
     # home directory if none is specified.
-    googleads_client = GoogleAdsClient.load_from_storage(version="v7")
+    googleads_client = GoogleAdsClient.load_from_storage(version="v8")
 
     parser = argparse.ArgumentParser(
         description=(

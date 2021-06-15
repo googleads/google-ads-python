@@ -57,13 +57,15 @@ def main(client, customer_id):
                 f"access role: {invite.access_role}, and "
                 f"created on: {invite.creation_date_time} was found."
             )
+
+
 # [END get_pending_invitations]
 
 
 if __name__ == "__main__":
     # GoogleAdsClient will read the google-ads.yaml configuration file in the
     # home directory if none is specified.
-    googleads_client = GoogleAdsClient.load_from_storage(version="v7")
+    googleads_client = GoogleAdsClient.load_from_storage(version="v8")
 
     parser = argparse.ArgumentParser(
         description=("Retrieves pending invitations for a customer account.")

@@ -65,8 +65,14 @@ def main(client, customer_id, output_file, write_headers):
             writer = csv.writer(f)
 
             # Define a list of headers for the first row.
-            headers = ["Account", "Date", "Campaign", "Impressions", "Clicks",
-                       "Cost"]
+            headers = [
+                "Account",
+                "Date",
+                "Campaign",
+                "Impressions",
+                "Clicks",
+                "Cost",
+            ]
 
             # If the write_headers flag was passed, write header row to the CSV
             if write_headers:
@@ -105,7 +111,7 @@ def main(client, customer_id, output_file, write_headers):
 if __name__ == "__main__":
     # GoogleAdsClient will read the google-ads.yaml configuration file in the
     # home directory if none is specified.
-    google_ads_client = GoogleAdsClient.load_from_storage(version="v7")
+    google_ads_client = GoogleAdsClient.load_from_storage(version="v8")
 
     parser = argparse.ArgumentParser(
         description="Retrieves a campaign stats and writes to CSV file."
@@ -117,7 +123,7 @@ if __name__ == "__main__":
         type=str,
         required=True,
         help="The Google Ads customer ID of the account you would like to get "
-             "the report for to write to CSV.",
+        "the report for to write to CSV.",
     )
     parser.add_argument(
         "-o",
@@ -125,7 +131,7 @@ if __name__ == "__main__":
         type=str,
         required=True,
         help="Name of the local CSV file to save the report to. File will be "
-             "saved in the same directory as the script.",
+        "saved in the same directory as the script.",
     )
     # Optional boolean argument for writing headers.
     parser.add_argument(
@@ -133,8 +139,8 @@ if __name__ == "__main__":
         "--write_headers",
         action="store_true",
         help="Writes headers to the CSV file if argument is supplied. Simply "
-             "add -w if you want the headers defined in the script to be "
-             "added as the first row in the CSV file.",
+        "add -w if you want the headers defined in the script to be "
+        "added as the first row in the CSV file.",
     )
     args = parser.parse_args()
 
@@ -142,5 +148,5 @@ if __name__ == "__main__":
         google_ads_client,
         args.customer_id,
         args.output_file,
-        args.write_headers
+        args.write_headers,
     )

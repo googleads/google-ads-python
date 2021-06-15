@@ -76,15 +76,13 @@ def main(client, customer_id, campaign_id, page_size):
             for index, text in enumerate(evidence.text_list.texts):
                 print(f"\t\tevidence text[{index}]: {text}")
 
-    print(
-        f"\nNumber of disapproved ads found: {results.total_results_count}"
-    )
+    print(f"\nNumber of disapproved ads found: {results.total_results_count}")
 
 
 if __name__ == "__main__":
     # GoogleAdsClient will read the google-ads.yaml configuration file in the
     # home directory if none is specified.
-    googleads_client = GoogleAdsClient.load_from_storage(version="v7")
+    googleads_client = GoogleAdsClient.load_from_storage(version="v8")
 
     parser = argparse.ArgumentParser(
         description=(
@@ -107,8 +105,11 @@ if __name__ == "__main__":
 
     try:
         main(
-        googleads_client, args.customer_id, args.campaign_id, _DEFAULT_PAGE_SIZE
-    )
+            googleads_client,
+            args.customer_id,
+            args.campaign_id,
+            _DEFAULT_PAGE_SIZE,
+        )
     except GoogleAdsException as ex:
         print(
             f'Request with ID "{ex.request_id}" failed with status '

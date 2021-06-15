@@ -123,9 +123,9 @@ def main(client, customer_id):
 
         print(
             f"On {event.change_date_time}, user {event.user_email} "
-            f"used interface {event.client_type} to perform a(n) "
-            f"{event.resource_change_operation} operation on a "
-            f"{event.change_resource_type} with resource name "
+            f"used interface {event.client_type.name} to perform a(n) "
+            f"{event.resource_change_operation.name} operation on a "
+            f"{event.change_resource_type.name} with resource name "
             f"'{event.change_resource_name}'"
         )
 
@@ -133,6 +133,11 @@ def main(client, customer_id):
 
         if operation_type in ("UPDATE", "CREATE"):
             for changed_field in event.changed_fields.paths:
+                # Change field name from "type" to "type_" so that it doesn't
+                # raise an exception when accessed on the protobuf object, see:
+                # https://developers.google.com/google-ads/api/docs/client-libs/python/library-version-10#field_names_that_are_reserved_words
+                if changed_field == "type":
+                    changed_field = "type_"
                 new_value = get_nested_attr(new_resource, changed_field)
                 if operation_type == "CREATE":
                     print(f"\t{changed_field} set to {new_value}")
@@ -147,7 +152,7 @@ def main(client, customer_id):
 if __name__ == "__main__":
     # GoogleAdsClient will read the google-ads.yaml configuration file in the
     # home directory if none is specified.
-    googleads_client = GoogleAdsClient.load_from_storage(version="v7")
+    googleads_client = GoogleAdsClient.load_from_storage(version="v8")
 
     parser = argparse.ArgumentParser(
         description="This example gets specific details about the most recent "

@@ -50,11 +50,8 @@ def _add_remarketing_action(client, customer_id):
     remarketing_action.name = f"Remarketing action #{uuid4()}"
 
     try:
-        remarketing_action_response = (
-            remarketing_action_service.mutate_remarketing_actions(
-                customer_id=customer_id,
-                operations=[remarketing_action_operation],
-            )
+        remarketing_action_response = remarketing_action_service.mutate_remarketing_actions(
+            customer_id=customer_id, operations=[remarketing_action_operation],
         )
     except GoogleAdsException as ex:
         print(
@@ -143,7 +140,7 @@ def _print_remarketing_action_attributes(remarketing_action):
 if __name__ == "__main__":
     # GoogleAdsClient will read the google-ads.yaml configuration file in the
     # home directory if none is specified.
-    googleads_client = GoogleAdsClient.load_from_storage(version="v7")
+    googleads_client = GoogleAdsClient.load_from_storage(version="v8")
 
     parser = argparse.ArgumentParser(
         description="Adds a remarketing action for specified customer."

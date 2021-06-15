@@ -55,7 +55,6 @@ def main(client, customer_id, ad_group_id):
     )
 
 
-
 def _create_media_bundle_asset(client, customer_id):
     """Creates a media bundle from the assets in a zip file.
 
@@ -136,11 +135,9 @@ def _create_display_upload_ad_group_ad(
     display_upload_ad.display_upload_ad.media_bundle.asset = (
         ad_asset_resource_name
     )
-    display_upload_ad.display_upload_ad.display_upload_product_type = (
-        client.get_type(
-            "DisplayUploadProductTypeEnum"
-        ).DisplayUploadProductType.HTML5_UPLOAD_AD
-    )
+    display_upload_ad.display_upload_ad.display_upload_product_type = client.get_type(
+        "DisplayUploadProductTypeEnum"
+    ).DisplayUploadProductType.HTML5_UPLOAD_AD
 
     # Add the ad group ad to the client account and display the resulting
     # ad's resource name.
@@ -156,7 +153,7 @@ def _create_display_upload_ad_group_ad(
 if __name__ == "__main__":
     # GoogleAdsClient will read the google-ads.yaml configuration file in the
     # home directory if none is specified.
-    googleads_client = GoogleAdsClient.load_from_storage(version="v7")
+    googleads_client = GoogleAdsClient.load_from_storage(version="v8")
 
     parser = argparse.ArgumentParser(
         description="Adds a display upload ad to a given ad group."

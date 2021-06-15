@@ -85,12 +85,8 @@ def main(client, customer_id, manager_customer_id):
     )
     manager_link_operation = client.get_type("CustomerManagerLinkOperation")
     manager_link = manager_link_operation.update
-    manager_link.resource_name = (
-        customer_manager_link_service.customer_manager_link_path(
-            customer_id,
-            manager_customer_id,
-            manager_link_id,
-        )
+    manager_link.resource_name = customer_manager_link_service.customer_manager_link_path(
+        customer_id, manager_customer_id, manager_link_id,
     )
 
     manager_link.status = client.get_type(
@@ -131,7 +127,7 @@ def _handle_googleads_exception(exception):
 if __name__ == "__main__":
     # GoogleAdsClient will read the google-ads.yaml configuration file in the
     # home directory if none is specified.
-    googleads_client = GoogleAdsClient.load_from_storage(version="v7")
+    googleads_client = GoogleAdsClient.load_from_storage(version="v8")
 
     parser = argparse.ArgumentParser(
         description=(

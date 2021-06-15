@@ -48,10 +48,8 @@ def main(client, customer_id, base_campaign_id, draft_id):
 
         # A Long Running Operation (LRO) is returned from this
         # asynchronous request by the API.
-        campaign_experiment_lro = (
-            campaign_experiment_service.create_campaign_experiment(
-                customer_id=customer_id, campaign_experiment=campaign_experiment
-            )
+        campaign_experiment_lro = campaign_experiment_service.create_campaign_experiment(
+            customer_id=customer_id, campaign_experiment=campaign_experiment
         )
     except GoogleAdsException as ex:
         print(
@@ -110,7 +108,7 @@ def main(client, customer_id, base_campaign_id, draft_id):
 if __name__ == "__main__":
     # GoogleAdsClient will read the google-ads.yaml configuration file in the
     # home directory if none is specified.
-    googleads_client = GoogleAdsClient.load_from_storage(version="v7")
+    googleads_client = GoogleAdsClient.load_from_storage(version="v8")
 
     parser = argparse.ArgumentParser(
         description=("Create a campaign experiment based on a campaign draft.")

@@ -56,9 +56,7 @@ def main(client, customer_id):
         for row in batch.results:
             campaign = row.campaign
             ad_group = row.ad_group
-            hotel_check_in_day_of_week = (
-                row.segments.hotel_check_in_day_of_week
-            )
+            hotel_check_in_day_of_week = row.segments.hotel_check_in_day_of_week
             hotel_length_of_stay = row.segments.hotel_length_of_stay
             metrics = row.metrics
 
@@ -77,11 +75,10 @@ def main(client, customer_id):
             )
 
 
-
 if __name__ == "__main__":
     # GoogleAdsClient will read the google-ads.yaml configuration file in the
     # home directory if none is specified.
-    googleads_client = GoogleAdsClient.load_from_storage(version="v7")
+    googleads_client = GoogleAdsClient.load_from_storage(version="v8")
 
     parser = argparse.ArgumentParser(
         description=("Retrieves Hotel-ads performance statistics.")

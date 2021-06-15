@@ -1,3 +1,8 @@
+* 12.0.0
+- Google Ads API v8_0 release.
+- Deprecate Google Ads API v5_0.
+- *NOTE* This will be the last release to support Python 3.6.
+
 * 11.0.2
 - Update dataclasses dependency so it's only installed when using Python < 3.7
 

@@ -128,7 +128,7 @@ def _remove_location_extension_feeds(client, customer_id):
     # To remove a location extension feed, you need to:
     # 1. Remove the CustomerFeed so that the location extensions from the feed
     # stop serving.
-    # 2. Remove the feed so that Google Ads will no longer sync from the GM
+    # 2. Remove the feed so that Google Ads will no longer sync from the GMB
     # account.
     # Optional: You may also want to remove the CampaignFeeds and AdGroupFeeds.
     old_customer_feeds = _get_location_extension_customer_feeds(
@@ -290,7 +290,7 @@ def _get_affiliate_location_extension_feed_mapping(
 
     # Return the feed mapping that results from the search.
     # It is possible that the feed is not yet ready, so we catch the exception
-    # if there the feed mapping is not yet available.
+    # if the feed mapping is not yet available.
     try:
         row = next(iter(search_results))
     except StopIteration:
@@ -392,8 +392,10 @@ def _create_campaign_feed(
         "CampaignService"
     ).campaign_path(customer_id, campaign_id)
 
-    mutate_campaign_feeds_response = campaign_feed_service.mutate_campaign_feeds(
-        customer_id=customer_id, operations=[campaign_feed_operation]
+    mutate_campaign_feeds_response = (
+        campaign_feed_service.mutate_campaign_feeds(
+            customer_id=customer_id, operations=[campaign_feed_operation]
+        )
     )
 
     # Display the result.
@@ -470,7 +472,10 @@ if __name__ == "__main__":
 
     try:
         main(
-            googleads_client, args.customer_id, args.chain_id, args.campaign_id,
+            googleads_client,
+            args.customer_id,
+            args.chain_id,
+            args.campaign_id,
         )
     except GoogleAdsException as ex:
         print(

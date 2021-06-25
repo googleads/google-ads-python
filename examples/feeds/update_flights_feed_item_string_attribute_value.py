@@ -116,11 +116,6 @@ def main(
         protobuf_helpers.field_mask(feed_item._pb, updated_feed_item._pb),
     )
 
-    # Create a field mask using the old feed_item and the updated_feed_item.
-    feed_item_operation.update_mask.CopyFrom(
-        protobuf_helpers.field_mask(feed_item._pb, updated_feed_item._pb)
-    )
-
     response = feed_item_service.mutate_feed_items(
         customer_id=customer_id, operations=[feed_item_operation]
     )

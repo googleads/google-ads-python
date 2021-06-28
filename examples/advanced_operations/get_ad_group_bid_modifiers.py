@@ -47,6 +47,9 @@ def main(client, customer_id, page_size, ad_group_id=None):
     if ad_group_id:
         query += f" WHERE ad_group.id = {ad_group_id}"
 
+    # Limit results to 10,000 rows as the number of bid modifiers can be large.
+    query += " LIMIT 10000"
+
     search_request = client.get_type("SearchGoogleAdsRequest")
     search_request.customer_id = customer_id
     search_request.query = query

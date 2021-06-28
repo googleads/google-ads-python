@@ -22,6 +22,8 @@ import argparse
 from datetime import datetime, timedelta
 import sys
 
+from proto.enums import ProtoEnumMeta
+
 from google.ads.googleads.client import GoogleAdsClient
 from google.ads.googleads.errors import GoogleAdsException
 from google.ads.googleads.util import get_nested_attr
@@ -86,6 +88,9 @@ def main(client, customer_id):
         elif resource_type == "AD_GROUP_AD":
             old_resource = event.old_resource.ad_group_ad
             new_resource = event.new_resource.ad_group_ad
+        elif resource_type == "AD_GROUP_ASSET":
+            old_resource = event.old_resource.ad_group_asset
+            new_resource = event.new_resource.ad_group_asset
         elif resource_type == "AD_GROUP_CRITERION":
             old_resource = event.old_resource.ad_group_criterion
             new_resource = event.new_resource.ad_group_criterion
@@ -95,9 +100,15 @@ def main(client, customer_id):
         elif resource_type == "AD_GROUP_FEED":
             old_resource = event.old_resource.ad_group_feed
             new_resource = event.new_resource.ad_group_feed
+        elif resource_type == "ASSET":
+            old_resource = event.old_resource.asset
+            new_resource = event.new_resource.asset
         elif resource_type == "CAMPAIGN":
             old_resource = event.old_resource.campaign
             new_resource = event.new_resource.campaign
+        elif resource_type == "CAMPAIGN_ASSET":
+            old_resource = event.old_resource.campaign_asset
+            new_resource = event.new_resource.campaign_asset
         elif resource_type == "CAMPAIGN_BUDGET":
             old_resource = event.old_resource.campaign_budget
             new_resource = event.new_resource.campaign_budget
@@ -107,6 +118,9 @@ def main(client, customer_id):
         elif resource_type == "CAMPAIGN_FEED":
             old_resource = event.old_resource.campaign_feed
             new_resource = event.new_resource.campaign_feed
+        elif resource_type == "CUSTOMER_ASSET":
+            old_resource = event.old_resource.customer_asset
+            new_resource = event.new_resource.customer_asset
         elif resource_type == "FEED":
             old_resource = event.old_resource.feed
             new_resource = event.new_resource.feed
@@ -138,11 +152,22 @@ def main(client, customer_id):
                 # https://developers.google.com/google-ads/api/docs/client-libs/python/library-version-10#field_names_that_are_reserved_words
                 if changed_field == "type":
                     changed_field = "type_"
+
                 new_value = get_nested_attr(new_resource, changed_field)
+                # If the field value is an Enum get the human readable name
+                # so that it is printed instead of the field ID integer.
+                if isinstance(type(new_value), ProtoEnumMeta):
+                    new_value = new_value.name
+
                 if operation_type == "CREATE":
                     print(f"\t{changed_field} set to {new_value}")
                 else:
                     old_value = get_nested_attr(old_resource, changed_field)
+                    # If the field value is an Enum get the human readable name
+                    # so that it is printed instead of the field ID integer.
+                    if isinstance(type(old_value), ProtoEnumMeta):
+                        old_value = old_value.name
+
                     print(
                         f"\t{changed_field} changed from {old_value} to {new_value}"
                     )

@@ -95,12 +95,10 @@ def _create_campaign(
     campaign.shopping_setting.enable_local = True
     # Dynamic remarketing campaigns are only available on the Google Display
     # Network.
-    campaign.advertising_channel_type = client.get_type(
-        "AdvertisingChannelTypeEnum"
-    ).AdvertisingChannelType.DISPLAY
-    campaign.status = client.get_type(
-        "CampaignStatusEnum"
-    ).CampaignStatus.PAUSED
+    campaign.advertising_channel_type = (
+        client.enums.AdvertisingChannelTypeEnum.DISPLAY
+    )
+    campaign.status = client.enums.CampaignStatusEnum.PAUSED
     campaign.campaign_budget = client.get_service(
         "CampaignBudgetService"
     ).campaign_budget_path(customer_id, campaign_budget_id)
@@ -203,9 +201,9 @@ def _create_ad(client, customer_id, ad_group_resource_name):
     # Optional: Set to false to strictly render the ad using the colors.
     responsive_display_ad_info.allow_flexible_color = False
     # Optional: Set the format setting that the ad will be served in.
-    responsive_display_ad_info.format_setting = client.get_type(
-        "DisplayAdFormatSettingEnum"
-    ).DisplayAdFormatSetting.NON_NATIVE
+    responsive_display_ad_info.format_setting = (
+        client.enums.DisplayAdFormatSettingEnum.NON_NATIVE
+    )
     # Optional: Create a logo image and set it to the ad.
     # logo_image = client.get_type("AdImageAsset")
     # logo_image.asset = "INSERT_LOGO_IMAGE_RESOURCE_NAME_HERE"

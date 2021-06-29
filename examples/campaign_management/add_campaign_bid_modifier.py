@@ -43,9 +43,9 @@ def main(client, customer_id, campaign_id, bid_modifier_value):
     campaign_bid_modifier.bid_modifier = bid_modifier_value
 
     # Sets the interaction type.
-    campaign_bid_modifier.interaction_type.type_ = client.get_type(
-        "InteractionTypeEnum"
-    ).InteractionType.CALLS
+    campaign_bid_modifier.interaction_type.type_ = (
+        client.enums.InteractionTypeEnum.CALLS
+    )
 
     # [START mutable_resource]
     # Add the campaign bid modifier. Here we pass the optional parameter
@@ -54,9 +54,9 @@ def main(client, customer_id, campaign_id, bid_modifier_value):
     request = client.get_type("MutateCampaignBidModifiersRequest")
     request.customer_id = customer_id
     request.operations = [campaign_bid_modifier_operation]
-    request.response_content_type = client.get_type(
-        "ResponseContentTypeEnum"
-    ).ResponseContentType.MUTABLE_RESOURCE
+    request.response_content_type = (
+        client.enums.ResponseContentTypeEnum.MUTABLE_RESOURCE
+    )
 
     campaign_bm_response = campaign_bm_service.mutate_campaign_bid_modifiers(
         request=request

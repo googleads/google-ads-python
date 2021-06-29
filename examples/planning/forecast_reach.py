@@ -127,9 +127,9 @@ def _request_reach_curve(
     request.planned_products = product_mix
 
     request.targeting.plannable_location_id = location_id
-    request.targeting.age_range = client.get_type(
-        "ReachPlanAgeRangeEnum"
-    ).ReachPlanAgeRange.AGE_RANGE_18_65_UP
+    request.targeting.age_range = (
+        client.enums.ReachPlanAgeRangeEnum.AGE_RANGE_18_65_UP
+    )
 
     # Add gender targeting to the request.
     for gender_type in [

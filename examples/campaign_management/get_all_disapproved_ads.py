@@ -46,9 +46,7 @@ def main(client, customer_id, campaign_id, page_size):
     results = ga_service.search(request=request)
 
     disapproved_ads_count = 0
-    disapproved_enum = client.get_type(
-        "PolicyApprovalStatusEnum"
-    ).PolicyApprovalStatus.DISAPPROVED
+    disapproved_enum = client.enums.PolicyApprovalStatusEnum.DISAPPROVED
 
     print("Disapproved ads:")
 

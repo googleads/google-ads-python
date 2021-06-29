@@ -55,9 +55,7 @@ def main(client, customer_id, merchant_center_account_id):
     )
     # [END approve_merchant_center_link]
 
-    merchant_center_link_status_enum = client.get_type(
-        "MerchantCenterLinkStatusEnum"
-    ).MerchantCenterLinkStatus
+    merchant_center_link_status_enum = client.enums.MerchantCenterLinkStatusEnum
 
     # Iterate through the results and filter for links with pending statuses.
     for merchant_center_link in response.merchant_center_links:

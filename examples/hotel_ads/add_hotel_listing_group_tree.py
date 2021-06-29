@@ -443,9 +443,7 @@ def _create_ad_group_criterion(
         A populated AdGroupCriterion object.
     """
     ad_group_criterion = client.get_type("AdGroupCriterion")
-    ad_group_criterion.status = client.get_type(
-        "AdGroupCriterionStatusEnum"
-    ).AdGroupCriterionStatus.ENABLED
+    ad_group_criterion.status = client.enums.AdGroupCriterionStatusEnum.ENABLED
     client.copy_from(ad_group_criterion.listing_group, listing_group_info)
     ad_group_criterion.resource_name = client.get_service(
         "AdGroupCriterionService"

@@ -174,9 +174,9 @@ def main(
         true_operand.constant_operand.boolean_value = True
         customer_feed.matching_function.left_operands.append(true_operand)
         customer_feed.matching_function.function_string = "IDENTITY(true)"
-        customer_feed.matching_function.operator = client.get_type(
-            "MatchingFunctionOperatorEnum"
-        ).MatchingFunctionOperator.IDENTITY
+        customer_feed.matching_function.operator = (
+            client.enums.MatchingFunctionOperatorEnum.IDENTITY
+        )
 
         customer_feed_response = customer_feed_service.mutate_customer_feeds(
             customer_id=customer_id, operations=[customer_feed_operation]

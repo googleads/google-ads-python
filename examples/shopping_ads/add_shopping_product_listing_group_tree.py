@@ -87,9 +87,7 @@ def main(client, customer_id, ad_group_id, replace_existing_tree):
     operations.append(ad_group_criterion_root_operation)
 
     # Construct the listing group unit nodes for NEW, USED, and other.
-    product_condition_enum = client.get_type(
-        "ProductConditionEnum"
-    ).ProductCondition
+    product_condition_enum = client.enums.ProductConditionEnum
     condition_dimension_info = client.get_type("ListingDimensionInfo")
 
     # Biddable Unit node: (Condition NEW node)
@@ -185,7 +183,8 @@ def main(client, customer_id, ad_group_id, replace_existing_tree):
     # Biddable Unit node: (Brand other node)
     # * CPC bid: $0.05
     client.copy_from(
-        brand_dimension_info.product_brand, client.get_type("ProductBrandInfo"),
+        brand_dimension_info.product_brand,
+        client.get_type("ProductBrandInfo"),
     )
     operations.append(
         _create_listing_group_unit_biddable(
@@ -199,8 +198,10 @@ def main(client, customer_id, ad_group_id, replace_existing_tree):
     )
 
     # Add the ad group criteria.
-    mutate_ad_group_criteria_response = ad_group_criterion_service.mutate_ad_group_criteria(
-        customer_id=customer_id, operations=operations
+    mutate_ad_group_criteria_response = (
+        ad_group_criterion_service.mutate_ad_group_criteria(
+            customer_id=customer_id, operations=operations
+        )
     )
 
     # Print the results of the successful mutates.
@@ -298,16 +299,12 @@ def _create_listing_group_subdivision(
     ad_group_criterion.resource_name = client.get_service(
         "AdGroupCriterionService"
     ).ad_group_criterion_path(customer_id, ad_group_id, _next_id())
-    ad_group_criterion.status = client.get_type(
-        "AdGroupCriterionStatusEnum"
-    ).AdGroupCriterionStatus.ENABLED
+    ad_group_criterion.status = client.enums.AdGroupCriterionStatusEnum.ENABLED
 
     listing_group_info = ad_group_criterion.listing_group
     # Set the type as a SUBDIVISION, which will allow the node to be the
     # parent of another sub-tree.
-    listing_group_info.type_ = client.get_type(
-        "ListingGroupTypeEnum"
-    ).ListingGroupType.SUBDIVISION
+    listing_group_info.type_ = client.enums.ListingGroupTypeEnum.SUBDIVISION
     # If parent_ad_group_criterion_resource_name and listing_dimension_info
     # are not null, create a non-root division by setting its parent and case
     # value.
@@ -365,9 +362,7 @@ def _create_listing_group_unit_biddable(
     criterion.ad_group = client.get_service("AdGroupService").ad_group_path(
         customer_id, ad_group_id
     )
-    criterion.status = client.get_type(
-        "AdGroupCriterionStatusEnum"
-    ).AdGroupCriterionStatus.ENABLED
+    criterion.status = client.enums.AdGroupCriterionStatusEnum.ENABLED
     # Set the bid for this listing group unit.
     # This will be used as the CPC bid for items that are included in this
     # listing group.
@@ -376,9 +371,7 @@ def _create_listing_group_unit_biddable(
 
     listing_group = criterion.listing_group
     # Set the type as a UNIT, which will allow the group to be biddable.
-    listing_group.type_ = client.get_type(
-        "ListingGroupTypeEnum"
-    ).ListingGroupType.UNIT
+    listing_group.type_ = client.enums.ListingGroupTypeEnum.UNIT
     # Set the ad group criterion resource name for the parent listing group.
     # This can have a temporary ID if the parent criterion is not yet created.
     listing_group.parent_ad_group_criterion = (

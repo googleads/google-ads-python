@@ -82,9 +82,7 @@ def _create_feed(client, customer_id):
         A str resource name of the newly created feed.
     """
     feed_service = client.get_service("FeedService")
-    feed_attribute_type_enum = client.get_type(
-        "FeedAttributeTypeEnum"
-    ).FeedAttributeType
+    feed_attribute_type_enum = client.enums.FeedAttributeTypeEnum
 
     # Creates the feed operation.
     feed_operation = client.get_type("FeedOperation")
@@ -172,14 +170,12 @@ def _create_feed_mapping(
     # Create the feed with feed attributes defined below.
     feed_mapping = feed_mapping_operation.create
     feed_mapping.feed = feed_resource_name
-    feed_mapping.placeholder_type = client.get_type(
-        "PlaceholderTypeEnum"
-    ).PlaceholderType.DYNAMIC_FLIGHT
+    feed_mapping.placeholder_type = (
+        client.enums.PlaceholderTypeEnum.DYNAMIC_FLIGHT
+    )
 
     # Maps the feed attribute IDs to the field ID constants.
-    placeholder_field_enum = client.get_type(
-        "FlightPlaceholderFieldEnum"
-    ).FlightPlaceholderField
+    placeholder_field_enum = client.enums.FlightPlaceholderFieldEnum
     flight_desc_enum_value = placeholder_field_enum.FLIGHT_DESCRIPTION
     desc_mapping = client.get_type("AttributeFieldMapping", "v6")
     desc_mapping.feed_attribute_id = placeholders_to_feed_attribute_map[
@@ -269,9 +265,7 @@ def _create_feed_item(
     feed_item = feed_item_operation.create
     feed_item.feed = feed_resource_name
 
-    placeholder_field_enum = client.get_type(
-        "FlightPlaceholderFieldEnum"
-    ).FlightPlaceholderField
+    placeholder_field_enum = client.enums.FlightPlaceholderFieldEnum
 
     # Returns a new instance of FeedItemAttributeValue when called.
     # This prevents the need to repeat these lines every time we need a new
@@ -386,9 +380,7 @@ def _get_placeholder_fields_map(client, customer_id, feed_resource_name):
         row = list(response)[0]
         feed_attributes = row.feed.attributes
 
-        flight_placeholder_field_enum = client.get_type(
-            "FlightPlaceholderFieldEnum"
-        ).FlightPlaceholderField
+        flight_placeholder_field_enum = client.enums.FlightPlaceholderFieldEnum
         feed_attribute_names_map = {
             "Flight Description": flight_placeholder_field_enum.FLIGHT_DESCRIPTION,
             "Destination ID": flight_placeholder_field_enum.DESTINATION_ID,

@@ -33,9 +33,9 @@ def main(client, customer_id, ad_group_id):
     # Create ad group bid modifier based on hotel check-in day.
     check_in_ag_bm_operation = client.get_type("AdGroupBidModifierOperation")
     check_in_ag_bid_modifier = check_in_ag_bm_operation.create
-    check_in_ag_bid_modifier.hotel_check_in_day.day_of_week = client.get_type(
-        "DayOfWeekEnum"
-    ).DayOfWeek.MONDAY
+    check_in_ag_bid_modifier.hotel_check_in_day.day_of_week = (
+        client.enums.DayOfWeekEnum.MONDAY
+    )
     check_in_ag_bid_modifier.ad_group = ad_group_service.ad_group_path(
         customer_id, ad_group_id
     )

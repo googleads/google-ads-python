@@ -31,9 +31,7 @@ def main(client, customer_id, ad_group_id, criterion_id):
     ad_group_criterion.resource_name = agc_service.ad_group_criterion_path(
         customer_id, ad_group_id, criterion_id
     )
-    ad_group_criterion.status = client.get_type(
-        "AdGroupCriterionStatusEnum"
-    ).AdGroupCriterionStatus.ENABLED
+    ad_group_criterion.status = client.enums.AdGroupCriterionStatusEnum.ENABLED
     ad_group_criterion.final_urls.append("https://www.example.com")
     client.copy_from(
         ad_group_criterion_operation.update_mask,

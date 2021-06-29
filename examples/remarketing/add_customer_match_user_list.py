@@ -68,9 +68,9 @@ def _create_customer_match_user_list(client, customer_id):
     user_list.description = (
         "A list of customers that originated from email and physical addresses"
     )
-    user_list.crm_based_user_list.upload_key_type = client.get_type(
-        "CustomerMatchUploadKeyTypeEnum"
-    ).CustomerMatchUploadKeyType.CONTACT_INFO
+    user_list.crm_based_user_list.upload_key_type = (
+        client.enums.CustomerMatchUploadKeyTypeEnum.CONTACT_INFO
+    )
     # Customer Match user lists can set an unlimited membership life span;
     # to do so, use the special life span value 10000. Otherwise, membership
     # life span must be between 0 and 540 days inclusive. See:
@@ -109,16 +109,18 @@ def _add_users_to_customer_match_user_list(
 
     # Creates a new offline user data job.
     offline_user_data_job = client.get_type("OfflineUserDataJob")
-    offline_user_data_job.type_ = client.get_type(
-        "OfflineUserDataJobTypeEnum"
-    ).OfflineUserDataJobType.CUSTOMER_MATCH_USER_LIST
+    offline_user_data_job.type_ = (
+        client.enums.OfflineUserDataJobTypeEnum.CUSTOMER_MATCH_USER_LIST
+    )
     offline_user_data_job.customer_match_user_list_metadata.user_list = (
         user_list_resource_name
     )
 
     # Issues a request to create an offline user data job.
-    create_offline_user_data_job_response = offline_user_data_job_service_client.create_offline_user_data_job(
-        customer_id=customer_id, job=offline_user_data_job
+    create_offline_user_data_job_response = (
+        offline_user_data_job_service_client.create_offline_user_data_job(
+            customer_id=customer_id, job=offline_user_data_job
+        )
     )
     offline_user_data_job_resource_name = (
         create_offline_user_data_job_response.resource_name
@@ -165,8 +167,10 @@ def _add_users_to_customer_match_user_list(
 
     # Issues an request to run the offline user data job for executing all
     # added operations.
-    operation_response = offline_user_data_job_service_client.run_offline_user_data_job(
-        resource_name=offline_user_data_job_resource_name
+    operation_response = (
+        offline_user_data_job_service_client.run_offline_user_data_job(
+            resource_name=offline_user_data_job_resource_name
+        )
     )
 
     if skip_polling:
@@ -218,11 +222,11 @@ def _build_offline_user_data_job_operations(client):
     )
     user_identifier_with_address = client.get_type("UserIdentifier")
     # First and last name must be normalized and hashed.
-    user_identifier_with_address.address_info.hashed_first_name = _normalize_and_hash(
-        "John"
+    user_identifier_with_address.address_info.hashed_first_name = (
+        _normalize_and_hash("John")
     )
-    user_identifier_with_address.address_info.hashed_last_name = _normalize_and_hash(
-        "Doe"
+    user_identifier_with_address.address_info.hashed_last_name = (
+        _normalize_and_hash("Doe")
     )
     # Country and zip codes are sent in plain text.
     user_identifier_with_address.address_info.country_code = "US"

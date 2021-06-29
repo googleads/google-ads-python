@@ -36,9 +36,7 @@ def main(client, customer_id, campaign_id):
     ad_group.name = f"Earth to Mars cruises {uuid.uuid4()}"
     ad_group.status = client.enums.AdGroupStatusEnum.ENABLED
     ad_group.campaign = campaign_service.campaign_path(customer_id, campaign_id)
-    ad_group.type_ = client.get_type(
-        "AdGroupTypeEnum"
-    ).AdGroupType.SEARCH_STANDARD
+    ad_group.type_ = client.enums.AdGroupTypeEnum.SEARCH_STANDARD
     ad_group.cpc_bid_micros = 10000000
 
     # Add the ad group.

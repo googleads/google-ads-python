@@ -33,9 +33,7 @@ def main(client, customer_id, ad_group_id):
     # Create the ad group ad.
     ad_group_ad_operation = client.get_type("AdGroupAdOperation")
     ad_group_ad = ad_group_ad_operation.create
-    ad_group_ad.status = client.get_type(
-        "AdGroupAdStatusEnum"
-    ).AdGroupAdStatus.PAUSED
+    ad_group_ad.status = client.enums.AdGroupAdStatusEnum.PAUSED
     ad_group_ad.ad_group = ad_group_service.ad_group_path(
         customer_id, ad_group_id
     )
@@ -46,9 +44,7 @@ def main(client, customer_id, ad_group_id):
     # Set a pinning to always choose this asset for HEADLINE_1. Pinning is
     # optional; if no pinning is set, then headlines and descriptions will be
     # rotated and the ones that perform best will be used more often.
-    served_asset_enum = client.get_type(
-        "ServedAssetFieldTypeEnum"
-    ).ServedAssetFieldType.HEADLINE_1
+    served_asset_enum = client.enums.ServedAssetFieldTypeEnum.HEADLINE_1
     pinned_headline = _create_ad_text_asset(
         client, f"Cruise to Mars #{str(uuid4())[:8]}", served_asset_enum
     )

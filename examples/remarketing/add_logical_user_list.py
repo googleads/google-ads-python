@@ -45,8 +45,8 @@ def main(client, customer_id, user_list_ids):
         logical_user_list_operand_info = client.get_type(
             "LogicalUserListOperandInfo"
         )
-        logical_user_list_operand_info.user_list = user_list_service.user_list_path(
-            customer_id, user_list_id
+        logical_user_list_operand_info.user_list = (
+            user_list_service.user_list_path(customer_id, user_list_id)
         )
         logical_user_list_operand_info_list.append(
             logical_user_list_operand_info
@@ -64,9 +64,9 @@ def main(client, customer_id, user_list_ids):
     # LogicalUserListOperandInfo. Use ALL to add users present on all of the
     # provided lists or NONE to add users that aren't present on any of the
     # targeted lists.
-    user_list_logical_rule_info.operator = client.get_type(
-        "UserListLogicalRuleOperatorEnum"
-    ).UserListLogicalRuleOperator.ANY
+    user_list_logical_rule_info.operator = (
+        client.enums.UserListLogicalRuleOperatorEnum.ANY
+    )
     user_list_logical_rule_info.rule_operands.extend(
         logical_user_list_operand_info_list
     )

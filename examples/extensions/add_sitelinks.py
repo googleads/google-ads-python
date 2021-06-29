@@ -88,9 +88,7 @@ def _create_extension_feed_items(client, customer_id, campaign_resource_name):
     extension_feed_item_service = client.get_service("ExtensionFeedItemService")
     geo_target_constant_service = client.get_service("GeoTargetConstantService")
     extension_type_enum = client.enums.ExtensionTypeEnum
-    feed_item_target_device_enum = client.get_type(
-        "FeedItemTargetDeviceEnum"
-    ).FeedItemTargetDevice
+    feed_item_target_device_enum = client.enums.FeedItemTargetDeviceEnum
     day_of_week_enum = client.enums.DayOfWeekEnum
     minute_of_hour_enum = client.enums.MinuteOfHourEnum
 

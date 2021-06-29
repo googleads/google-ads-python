@@ -32,9 +32,7 @@ def main(client, customer_id, ad_group_id):
     ad_group_ad.ad_group = ad_group_service.ad_group_path(
         customer_id, ad_group_id
     )
-    ad_group_ad.status = client.get_type(
-        "AdGroupAdStatusEnum"
-    ).AdGroupAdStatus.PAUSED
+    ad_group_ad.status = client.enums.AdGroupAdStatusEnum.PAUSED
 
     # Create an expanded text ad.
     ad_group_ad.ad.expanded_text_ad.description = "Luxury Cruise to Mars"
@@ -68,9 +66,7 @@ def main(client, customer_id, ad_group_id):
             "There may have been validation error(s) while adding expanded "
             "text ad."
         )
-        policy_error_enum = client.get_type(
-            "PolicyFindingErrorEnum"
-        ).PolicyFindingError.POLICY_FINDING
+        policy_error_enum = client.enums.PolicyFindingErrorEnum.POLICY_FINDING
 
         count = 1
         for error in ex.failure.errors:

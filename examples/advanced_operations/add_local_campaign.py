@@ -71,9 +71,9 @@ def _create_campaign_budget(client, customer_id):
     campaign_budget = campaign_budget_operation.create
     campaign_budget.name = f"Interplanetary Cruise Budget #{uuid4()}"
     campaign_budget.amount_micros = 50000000
-    campaign_budget.delivery_method = client.get_type(
-        "BudgetDeliveryMethodEnum"
-    ).BudgetDeliveryMethod.STANDARD
+    campaign_budget.delivery_method = (
+        client.enums.BudgetDeliveryMethodEnum.STANDARD
+    )
     # A Local campaign cannot use a shared campaign budget.
     campaign_budget.explicitly_shared = False
 
@@ -109,17 +109,15 @@ def _create_campaign(client, customer_id, budget_resource_name):
     # Recommendation: Set the campaign to PAUSED when creating it to prevent
     # the ads from immediately serving. Set to ENABLED once you've added
     # targeting and the ads are ready to serve.
-    campaign.status = client.get_type(
-        "CampaignStatusEnum"
-    ).CampaignStatus.PAUSED
+    campaign.status = client.enums.CampaignStatusEnum.PAUSED
     # All Local campaigns have an advertising_channel_type of LOCAL and
     # advertising_channel_sub_type of LOCAL_CAMPAIGN.
-    campaign.advertising_channel_type = client.get_type(
-        "AdvertisingChannelTypeEnum"
-    ).AdvertisingChannelType.LOCAL
-    campaign.advertising_channel_sub_type = client.get_type(
-        "AdvertisingChannelSubTypeEnum"
-    ).AdvertisingChannelSubType.LOCAL_CAMPAIGN
+    campaign.advertising_channel_type = (
+        client.enums.AdvertisingChannelTypeEnum.LOCAL
+    )
+    campaign.advertising_channel_sub_type = (
+        client.enums.AdvertisingChannelSubTypeEnum.LOCAL_CAMPAIGN
+    )
     # Bidding strategy must be set directly on the campaign.
     # Setting a portfolio bidding strategy by resource name is not supported.
     # Maximize conversion value is the only strategy supported for Local
@@ -132,14 +130,12 @@ def _create_campaign(client, customer_id, budget_resource_name):
     campaign.maximize_conversion_value.target_roas = 3.5
     # Configure the Local campaign setting. Use the locations associated with
     # the customer's linked Google My Business account.
-    campaign.local_campaign_setting.location_source_type = client.get_type(
-        "LocationSourceTypeEnum"
-    ).LocationSourceType.GOOGLE_MY_BUSINESS
+    campaign.local_campaign_setting.location_source_type = (
+        client.enums.LocationSourceTypeEnum.GOOGLE_MY_BUSINESS
+    )
     # Optimization goal setting is mandatory for Local campaigns. This example
     # selects driving directions and call clicks as goals.
-    optimization_goal_type_enum = client.get_type(
-        "OptimizationGoalTypeEnum"
-    ).OptimizationGoalType
+    optimization_goal_type_enum = client.enums.OptimizationGoalTypeEnum
     campaign.optimization_goal_setting.optimization_goal_types.extend(
         [
             optimization_goal_type_enum.CALL_CLICKS,
@@ -201,9 +197,7 @@ def _create_local_ad(client, customer_id, ad_group_resource_name):
     ad_group_ad_operation = client.get_type("AdGroupAdOperation")
     ad_group_ad = ad_group_ad_operation.create
     ad_group_ad.ad_group = ad_group_resource_name
-    ad_group_ad.status = client.get_type(
-        "AdGroupAdStatusEnum"
-    ).AdGroupAdStatus.ENABLED
+    ad_group_ad.status = client.enums.AdGroupAdStatusEnum.ENABLED
     ad_group_ad.ad.final_urls.append("https://www.example.com")
     ad_group_ad.ad.local_ad.headlines.extend(
         [

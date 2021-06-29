@@ -39,9 +39,7 @@ def main(client, customer_id, manager_customer_id):
     client_link_operation = client.get_type("CustomerClientLinkOperation")
     client_link = client_link_operation.create
     client_link.client_customer = f"customers/{customer_id}"
-    client_link.status = client.get_type(
-        "ManagerLinkStatusEnum"
-    ).ManagerLinkStatus.PENDING
+    client_link.status = client.enums.ManagerLinkStatusEnum.PENDING
 
     response = customer_client_link_service.mutate_customer_client_link(
         customer_id=manager_customer_id, operation=client_link_operation
@@ -85,13 +83,15 @@ def main(client, customer_id, manager_customer_id):
     )
     manager_link_operation = client.get_type("CustomerManagerLinkOperation")
     manager_link = manager_link_operation.update
-    manager_link.resource_name = customer_manager_link_service.customer_manager_link_path(
-        customer_id, manager_customer_id, manager_link_id,
+    manager_link.resource_name = (
+        customer_manager_link_service.customer_manager_link_path(
+            customer_id,
+            manager_customer_id,
+            manager_link_id,
+        )
     )
 
-    manager_link.status = client.get_type(
-        "ManagerLinkStatusEnum"
-    ).ManagerLinkStatus.PENDING
+    manager_link.status = client.enums.ManagerLinkStatusEnum.PENDING
     client.copy_from(
         manager_link_operation.update_mask,
         protobuf_helpers.field_mask(None, manager_link._pb),

@@ -58,9 +58,7 @@ def _create_campaign_budget(client, customer_id):
     operation = client.get_type("CampaignBudgetOperation")
     criterion = operation.create
     criterion.name = f"Interplanetary Cruise Budget {uuid.uuid4()}"
-    criterion.delivery_method = client.get_type(
-        "BudgetDeliveryMethodEnum"
-    ).BudgetDeliveryMethod.STANDARD
+    criterion.delivery_method = client.enums.BudgetDeliveryMethodEnum.STANDARD
     criterion.amount_micros = 500000
 
     try:

@@ -52,9 +52,7 @@ def main(client, customer_id, ad_group_id):
         customer_id=customer_id, query=query
     )
 
-    targeting_dimension_enum = client.get_type(
-        "TargetingDimensionEnum"
-    ).TargetingDimension
+    targeting_dimension_enum = client.enums.TargetingDimensionEnum
 
     # Create an empty TargetingSetting instance.
     targeting_setting = client.get_type("TargetingSetting")

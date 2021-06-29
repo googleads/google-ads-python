@@ -47,8 +47,10 @@ def main(client, customer_id, conversion_action_ids):
     user_list_action_info_list = []
     for conversion_action_id in conversion_action_ids:
         user_list_action_info = client.get_type("UserListActionInfo")
-        user_list_action_info.conversion_action = conversion_action_service.conversion_action_path(
-            customer_id, conversion_action_id
+        user_list_action_info.conversion_action = (
+            conversion_action_service.conversion_action_path(
+                customer_id, conversion_action_id
+            )
         )
         user_list_action_info_list.append(user_list_action_info)
 
@@ -59,9 +61,7 @@ def main(client, customer_id, conversion_action_ids):
     user_list.description = (
         "A list of people who have triggered one or more conversion actions"
     )
-    user_list.membership_status = client.get_type(
-        "UserListMembershipStatusEnum"
-    ).UserListMembershipStatus.OPEN
+    user_list.membership_status = client.enums.UserListMembershipStatusEnum.OPEN
     user_list.membership_life_span = 365
     # The basic user list info object contains the conversion action info.
     user_list.basic_user_list.actions.extend(user_list_action_info_list)

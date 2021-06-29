@@ -37,9 +37,7 @@ def main(client, customer_id, ad_group_id):
     )
     gender_ad_group_criterion = gender_ad_group_criterion_operation.create
     gender_ad_group_criterion.ad_group = ad_group_resource_name
-    gender_ad_group_criterion.gender.type_ = client.get_type(
-        "GenderTypeEnum"
-    ).GenderType.MALE
+    gender_ad_group_criterion.gender.type_ = client.enums.GenderTypeEnum.MALE
 
     # Create a negative ad group criterion for age range of 18 to 24.
     age_range_ad_group_criterion_operation = client.get_type(
@@ -48,17 +46,19 @@ def main(client, customer_id, ad_group_id):
     age_range_ad_group_criterion = age_range_ad_group_criterion_operation.create
     age_range_ad_group_criterion.ad_group = ad_group_resource_name
     age_range_ad_group_criterion.negative = True
-    age_range_ad_group_criterion.age_range.type_ = client.get_type(
-        "AgeRangeTypeEnum"
-    ).AgeRangeType.AGE_RANGE_18_24
+    age_range_ad_group_criterion.age_range.type_ = (
+        client.enums.AgeRangeTypeEnum.AGE_RANGE_18_24
+    )
 
     # Add two ad group criteria
-    ad_group_criterion_response = ad_group_criterion_service.mutate_ad_group_criteria(
-        customer_id=customer_id,
-        operations=[
-            gender_ad_group_criterion_operation,
-            age_range_ad_group_criterion_operation,
-        ],
+    ad_group_criterion_response = (
+        ad_group_criterion_service.mutate_ad_group_criteria(
+            customer_id=customer_id,
+            operations=[
+                gender_ad_group_criterion_operation,
+                age_range_ad_group_criterion_operation,
+            ],
+        )
     )
 
     for result in ad_group_criterion_response.results:

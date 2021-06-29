@@ -172,8 +172,8 @@ def _set_campaign_targeting_criteria(
         campaign_resource_name: the campaign to apply targeting to
     """
     campaign_criterion_service = client.get_service("CampaignCriterionService")
-    location_type = client.get_type("CriterionTypeEnum").CriterionType.LOCATION
-    language_type = client.get_type("CriterionTypeEnum").CriterionType.LANGUAGE
+    location_type = client.enums.CriterionTypeEnum.LOCATION
+    language_type = client.enums.CriterionTypeEnum.LANGUAGE
     geo_target_constant_service = client.get_service("GeoTargetConstantService")
     language_constant_service = client.get_service("LanguageConstantService")
 
@@ -190,8 +190,8 @@ def _set_campaign_targeting_criteria(
         campaign_criterion = campaign_criterion_operation.create
         campaign_criterion.campaign = campaign_resource_name
         campaign_criterion.type_ = location_type
-        campaign_criterion.location.geo_target_constant = geo_target_constant_service.geo_target_constant_path(
-            location_id
+        campaign_criterion.location.geo_target_constant = (
+            geo_target_constant_service.geo_target_constant_path(location_id)
         )
         campaign_criterion_operations.append(campaign_criterion_operation)
 
@@ -203,8 +203,8 @@ def _set_campaign_targeting_criteria(
         campaign_criterion = campaign_criterion_operation.create
         campaign_criterion.campaign = campaign_resource_name
         campaign_criterion.type_ = language_type
-        campaign_criterion.language.language_constant = language_constant_service.language_constant_path(
-            language_id
+        campaign_criterion.language.language_constant = (
+            language_constant_service.language_constant_path(language_id)
         )
         campaign_criterion_operations.append(campaign_criterion_operation)
 
@@ -239,7 +239,7 @@ def _create_ad_group(client, customer_id, campaign_resource_name):
     ad_group_operation = client.get_type("AdGroupOperation")
     ad_group = ad_group_operation.create
     ad_group.name = f"Earth to Mars cruises {uuid4()}"
-    ad_group.status = client.get_type("AdGroupStatusEnum").AdGroupStatus.ENABLED
+    ad_group.status = client.enums.AdGroupStatusEnum.ENABLED
     ad_group.campaign = campaign_resource_name
 
     ad_group_response = ad_group_service.mutate_ad_groups(

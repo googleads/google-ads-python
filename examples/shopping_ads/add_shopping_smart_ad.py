@@ -57,7 +57,10 @@ def main(
 
     # Create a smart shopping campaign.
     campaign_resource_name = _add_smart_shopping_campaign(
-        client, customer_id, budget_resource_name, merchant_center_account_id,
+        client,
+        customer_id,
+        budget_resource_name,
+        merchant_center_account_id,
     )
 
     # Create a smart shopping ad group.
@@ -214,7 +217,7 @@ def _add_smart_shopping_ad_group(client, customer_id, campaign_resource_name):
     ad_group.type_ = client.get_type(
         "AdGroupTypeEnum"
     ).AdGroupType.SHOPPING_SMART_ADS
-    ad_group.status = client.get_type("AdGroupStatusEnum").AdGroupStatus.ENABLED
+    ad_group.status = client.enums.AdGroupStatusEnum.ENABLED
 
     # Add the ad group, then print and return the resulting ad group's resource
     # name.
@@ -310,8 +313,10 @@ def _add_shopping_listing_group(client, customer_id, ad_group_resource_name):
 
     # Ad the listing group criterion, then display and return the resulting
     # ad group criterion's resource name.
-    ad_group_criterion_response = ad_group_criterion_service.mutate_ad_group_criteria(
-        customer_id=customer_id, operations=[ad_group_criterion_operation]
+    ad_group_criterion_response = (
+        ad_group_criterion_service.mutate_ad_group_criteria(
+            customer_id=customer_id, operations=[ad_group_criterion_operation]
+        )
     )
     ad_group_criterion_resource_name = ad_group_criterion_response.results[
         0

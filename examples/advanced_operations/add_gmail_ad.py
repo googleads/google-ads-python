@@ -46,7 +46,7 @@ def main(client, customer_id, ad_group_id):
     media_file_service = client.get_service("MediaFileService")
     media_file_logo_op = client.get_type("MediaFileOperation")
     media_file_logo = media_file_logo_op.create
-    media_file_logo.type_ = client.get_type("MediaTypeEnum").MediaType.IMAGE
+    media_file_logo.type_ = client.enums.MediaTypeEnum.IMAGE
     media_file_logo.image.data = logo_img_bytes
     media_file_logo.mime_type = client.get_type(
         "MimeTypeEnum"

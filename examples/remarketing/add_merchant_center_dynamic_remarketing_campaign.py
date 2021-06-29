@@ -136,7 +136,7 @@ def _create_ad_group(client, customer_id, campaign_resource_name):
     ad_group = ad_group_operation.create
     ad_group.name = "Dynamic remarketing ad group"
     ad_group.campaign = campaign_resource_name
-    ad_group.status = client.get_type("AdGroupStatusEnum").AdGroupStatus.ENABLED
+    ad_group.status = client.enums.AdGroupStatusEnum.ENABLED
 
     # Issues a mutate request to add the ad group.
     ad_group_response = ad_group_service.mutate_ad_groups(
@@ -246,7 +246,7 @@ def _upload_image_asset(client, customer_id, image_url, asset_name):
     # Create an asset operation and set the image asset values.
     asset_operation = client.get_type("AssetOperation")
     asset = asset_operation.create
-    asset.type_ = client.get_type("AssetTypeEnum").AssetType.IMAGE
+    asset.type_ = client.enums.AssetTypeEnum.IMAGE
     asset.image_asset.data = image_data
     asset.name = asset_name
 
@@ -287,8 +287,10 @@ def _attach_user_list(
     ).user_list_path(customer_id, user_list_id)
 
     # Issue a mutate request to add the ad group criterion.
-    ad_group_criterion_response = ad_group_criterion_service.mutate_ad_group_criteria(
-        customer_id=customer_id, operations=[ad_group_criterion_operation]
+    ad_group_criterion_response = (
+        ad_group_criterion_service.mutate_ad_group_criteria(
+            customer_id=customer_id, operations=[ad_group_criterion_operation]
+        )
     )
     print(
         "Created ad group criterion with resource name "

@@ -88,7 +88,7 @@ def _create_feed(client, customer_id):
     # Create a new feed.
     feed = feed_operation.create
     feed.name = f"DSA Feed #{uuid.uuid4()}"
-    feed.origin = client.get_type("FeedOriginEnum").FeedOrigin.USER
+    feed.origin = client.enums.FeedOriginEnum.USER
 
     feed_attribute_type_enum = client.get_type(
         "FeedAttributeTypeEnum"

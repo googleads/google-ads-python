@@ -176,7 +176,7 @@ def _create_ad_group(client, customer_id, campaign_resource_name):
     #   1. you cannot override bid settings at the ad group level.
     #   2. you cannot add ad group criteria.
     ad_group.name = f"Earth to Mars Cruises #{uuid4()}"
-    ad_group.status = client.get_type("AdGroupStatusEnum").AdGroupStatus.ENABLED
+    ad_group.status = client.enums.AdGroupStatusEnum.ENABLED
     ad_group.campaign = campaign_resource_name
 
     ad_group_service = client.get_service("AdGroupService")
@@ -278,7 +278,7 @@ def _create_image_asset(client, customer_id, image_url, image_name):
     asset_operation = client.get_type("AssetOperation")
     asset = asset_operation.create
     asset.name = image_name
-    asset.type_ = client.get_type("AssetTypeEnum").AssetType.IMAGE
+    asset.type_ = client.enums.AssetTypeEnum.IMAGE
     asset.image_asset.data = _get_image_bytes(image_url)
     asset_service = client.get_service("AssetService")
     response = asset_service.mutate_assets(
@@ -324,7 +324,7 @@ def _create_youtube_video_asset(
     asset_operation = client.get_type("AssetOperation")
     asset = asset_operation.create
     asset.name = youtube_video_name
-    asset.type_ = client.get_type("AssetTypeEnum").AssetType.YOUTUBE_VIDEO
+    asset.type_ = client.enums.AssetTypeEnum.YOUTUBE_VIDEO
     asset.youtube_video_asset.youtube_video_id = youtube_video_id
 
     asset_service = client.get_service("AssetService")

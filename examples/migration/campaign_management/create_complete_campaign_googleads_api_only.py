@@ -209,7 +209,7 @@ def _create_ad_group(client, customer_id, campaign):
     adgroup_service = client.get_service("AdGroupService")
     adgroup.name = f"Earth to Mars Cruises #{uuid.uuid4()}"
     adgroup.campaign = campaign.resource_name
-    adgroup.status = client.get_type("AdGroupStatusEnum").AdGroupStatus.ENABLED
+    adgroup.status = client.enums.AdGroupStatusEnum.ENABLED
     adgroup.type = client.get_type(
         "AdGroupTypeEnum"
     ).AdGroupType.SEARCH_STANDARD

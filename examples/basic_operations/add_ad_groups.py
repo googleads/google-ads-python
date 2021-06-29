@@ -34,7 +34,7 @@ def main(client, customer_id, campaign_id):
     ad_group_operation = client.get_type("AdGroupOperation")
     ad_group = ad_group_operation.create
     ad_group.name = f"Earth to Mars cruises {uuid.uuid4()}"
-    ad_group.status = client.get_type("AdGroupStatusEnum").AdGroupStatus.ENABLED
+    ad_group.status = client.enums.AdGroupStatusEnum.ENABLED
     ad_group.campaign = campaign_service.campaign_path(customer_id, campaign_id)
     ad_group.type_ = client.get_type(
         "AdGroupTypeEnum"

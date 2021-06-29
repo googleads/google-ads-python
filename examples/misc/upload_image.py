@@ -31,7 +31,7 @@ def main(client, customer_id):
     media_file_operation = client.get_type("MediaFileOperation")
     media_file = media_file_operation.create
     media_file.name = "Ad Image"
-    media_file.type_ = client.get_type("MediaTypeEnum").MediaType.IMAGE
+    media_file.type_ = client.enums.MediaTypeEnum.IMAGE
     media_file.source_url = url
     # Download the image as bytes from the URL
     media_file.image.data = requests.get(url).content

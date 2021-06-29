@@ -153,7 +153,7 @@ def _create_ad_group(client, customer_id, campaign_resource_name):
     ).AdGroupType.SEARCH_DYNAMIC_ADS
     ad_group.name = f"Earth to Mars Cruises {uuid4()}"
     ad_group.campaign = campaign_resource_name
-    ad_group.status = client.get_type("AdGroupStatusEnum").AdGroupStatus.PAUSED
+    ad_group.status = client.enums.AdGroupStatusEnum.PAUSED
     # Recommended: set a tracking URL template for your ad group if you want to
     # use URL tracking software.
     ad_group.tracking_url_template = (

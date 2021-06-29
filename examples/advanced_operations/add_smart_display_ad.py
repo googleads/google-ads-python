@@ -136,8 +136,10 @@ def _create_budget(client, customer_id):
     campaign_budget_service = client.get_service("CampaignBudgetService")
 
     try:
-        campaign_budget_response = campaign_budget_service.mutate_campaign_budgets(
-            customer_id=customer_id, operations=[campaign_budget_operation]
+        campaign_budget_response = (
+            campaign_budget_service.mutate_campaign_budgets(
+                customer_id=customer_id, operations=[campaign_budget_operation]
+            )
         )
     except GoogleAdsException as ex:
         _handle_googleads_exception(ex)
@@ -226,7 +228,7 @@ def _upload_image_asset(
     image_asset = asset.image_asset
     image_asset.data = image_content
     image_asset.file_size = len(image_content)
-    image_asset.mime_type = client.get_type("MimeTypeEnum").MimeType.IMAGE_JPEG
+    image_asset.mime_type = client.enums.MimeTypeEnum.IMAGE_JPEG
     image_asset.full_size.width_pixels = image_width
     image_asset.full_size.height_pixels = image_height
     image_asset.full_size.url = image_url

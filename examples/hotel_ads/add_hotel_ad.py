@@ -110,10 +110,10 @@ def _add_hotel_ad_group(client, customer_id, campaign_resource_name):
     ad_group_operation = client.get_type("AdGroupOperation")
     ad_group = ad_group_operation.create
     ad_group.name = f"Earth to Mars cruise {uuid.uuid4()}"
-    ad_group.status = client.get_type("AdGroupStatusEnum").AdGroupStatus.ENABLED
+    ad_group.status = client.enums.AdGroupStatusEnum.ENABLED
     ad_group.campaign = campaign_resource_name
     # Sets the ad group type to HOTEL_ADS. This cannot be set to other types.
-    ad_group.type_ = client.get_type("AdGroupTypeEnum").AdGroupType.HOTEL_ADS
+    ad_group.type_ = client.enums.AdGroupTypeEnum.HOTEL_ADS
     ad_group.cpc_bid_micros = 10000000
 
     # Add the ad group.

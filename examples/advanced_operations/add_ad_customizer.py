@@ -102,7 +102,7 @@ def _create_add_customizer_feed(client, customer_id, feed_name):
 
     feed.name = feed_name
     feed.attributes.extend([name_attr, price_attr, date_attr])
-    feed.origin = client.get_type("FeedOriginEnum").FeedOrigin.USER
+    feed.origin = client.enums.FeedOriginEnum.USER
 
     feed_service = client.get_service("FeedService")
 
@@ -166,7 +166,10 @@ def _get_feed_attributes(client, customer_id, feed_resource_name):
 
 # [START add_ad_customizer_2]
 def _create_ad_customizer_mapping(
-    client, customer_id, ad_customizer_feed_resource_name, feed_details,
+    client,
+    customer_id,
+    ad_customizer_feed_resource_name,
+    feed_details,
 ):
     """Creates a feed mapping for a given feed.
 

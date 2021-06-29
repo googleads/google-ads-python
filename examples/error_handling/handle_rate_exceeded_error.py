@@ -128,7 +128,7 @@ def _create_ad_group_criterion_operations(
     status = client.get_type(
         "AdGroupCriterionStatusEnum"
     ).AdGroupCriterionStatus.ENABLED
-    match_type = client.get_type("KeywordMatchTypeEnum").KeywordMatchType.EXACT
+    match_type = client.enums.KeywordMatchTypeEnum.EXACT
 
     operations = []
     for i in range(NUM_KEYWORDS):

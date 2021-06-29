@@ -134,7 +134,7 @@ def _add_shopping_product_ad_group(client, customer_id, campaign_resource_name):
     ad_group_operation = client.get_type("AdGroupOperation")
     ad_group = ad_group_operation.create
     ad_group.name = f"Earth to Mars cruise {uuid.uuid4()}"
-    ad_group.status = client.get_type("AdGroupStatusEnum").AdGroupStatus.ENABLED
+    ad_group.status = client.enums.AdGroupStatusEnum.ENABLED
     ad_group.campaign = campaign_resource_name
     # Sets the ad group type to SHOPPING_PRODUCT_ADS. This is the only value
     # possible for ad groups that contain shopping product ads.
@@ -247,8 +247,10 @@ def _add_default_shopping_listing_group(
     #  Set the bid for products in this listing group unit.
     ad_group_criterion.cpc_bid_micros = 500000
 
-    ad_group_criterion_response = ad_group_criterion_service.mutate_ad_group_criteria(
-        customer_id=customer_id, operations=[ad_group_criterion_operation]
+    ad_group_criterion_response = (
+        ad_group_criterion_service.mutate_ad_group_criteria(
+            customer_id=customer_id, operations=[ad_group_criterion_operation]
+        )
     )
 
     print(

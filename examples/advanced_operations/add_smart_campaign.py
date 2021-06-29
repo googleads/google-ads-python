@@ -62,7 +62,10 @@ def main(
         client, keyword_theme_constants
     )
     suggested_budget_amount = _get_budget_suggestion(
-        client, customer_id, business_location_id, keyword_theme_infos,
+        client,
+        customer_id,
+        business_location_id,
+        keyword_theme_infos,
     )
     # [START add_smart_campaign_7]
     # The below methods create and return MutateOperations that we later
@@ -145,7 +148,10 @@ def _get_keyword_theme_constants(client, keyword_text):
 
 # [START add_smart_campaign_1]
 def _get_budget_suggestion(
-    client, customer_id, business_location_id, keyword_theme_infos,
+    client,
+    customer_id,
+    business_location_id,
+    keyword_theme_infos,
 ):
     """Retrieves a suggested budget amount for a new budget.
 
@@ -223,7 +229,7 @@ def _get_budget_suggestion(
     # Set the end hour to 5pm.
     ad_schedule_info.end_hour = 17
     # Set the start and end minute of zero, for example: 9:00 and 5:00.
-    zero_minute_of_hour = client.get_type("MinuteOfHourEnum").MinuteOfHour.ZERO
+    zero_minute_of_hour = client.enums.MinuteOfHourEnum.ZERO
     ad_schedule_info.start_minute = zero_minute_of_hour
     ad_schedule_info.end_minute = zero_minute_of_hour
     suggestion_info.ad_schedules.append(ad_schedule_info)

@@ -133,8 +133,8 @@ def _request_reach_curve(
 
     # Add gender targeting to the request.
     for gender_type in [
-        client.get_type("GenderTypeEnum").GenderType.FEMALE,
-        client.get_type("GenderTypeEnum").GenderType.MALE,
+        client.enums.GenderTypeEnum.FEMALE,
+        client.enums.GenderTypeEnum.MALE,
     ]:
         gender = client.get_type("GenderInfo")
         gender.type_ = gender_type
@@ -142,9 +142,9 @@ def _request_reach_curve(
 
     # Add device targeting to the request.
     for device_type in [
-        client.get_type("DeviceEnum").Device.DESKTOP,
-        client.get_type("DeviceEnum").Device.MOBILE,
-        client.get_type("DeviceEnum").Device.TABLET,
+        client.enums.DeviceEnum.DESKTOP,
+        client.enums.DeviceEnum.MOBILE,
+        client.enums.DeviceEnum.TABLET,
     ]:
         device = client.get_type("DeviceInfo")
         device.type_ = device_type

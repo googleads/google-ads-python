@@ -101,7 +101,7 @@ def _create_affiliate_location_extension_feed(client, customer_id, chain_id):
     ).AffiliateLocationFeedRelationshipType.GENERAL_RETAILER
     # Since this feed's contents will be managed by Google, you must set its
     # origin to GOOGLE.
-    feed.origin = client.get_type("FeedOriginEnum").FeedOrigin.GOOGLE
+    feed.origin = client.enums.FeedOriginEnum.GOOGLE
 
     # Add the feed.
     mutate_feeds_response = feed_service.mutate_feeds(

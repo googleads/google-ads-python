@@ -47,7 +47,7 @@ def main(client, customer_id, ad_group_id):
         customer_id: A valid customer account ID.
         ad_group_id: The ad group ID to validate keywords from.
     """
-    quota_error_enum = client.get_type("QuotaErrorEnum").QuotaError
+    quota_error_enum = client.enums.QuotaErrorEnum
     resource_exhausted = quota_error_enum.RESOURCE_EXHAUSTED
     temp_resource_exhausted = quota_error_enum.RESOURCE_TEMPORARILY_EXHAUSTED
 

@@ -95,8 +95,8 @@ def main(client, customer_id, campaign_id):
     extension_feed_item.targeted_campaign = campaign_service.campaign_path(
         customer_id, campaign_id
     )
-    day_of_week_enum = client.get_type("DayOfWeekEnum").DayOfWeek
-    minute_of_hour_enum = client.get_type("MinuteOfHourEnum").MinuteOfHour
+    day_of_week_enum = client.enums.DayOfWeekEnum
+    minute_of_hour_enum = client.enums.MinuteOfHourEnum
     extension_feed_item.ad_schedules.extend(
         [
             _create_ad_schedule_info(

@@ -46,12 +46,13 @@ def main(client, customer_id, ad_group_id, bid_modifier_value):
     ad_group_bid_modifier.bid_modifier = bid_modifier_value
 
     # Sets the device.
-    device_enum = client.get_type("DeviceEnum").Device
+    device_enum = client.enums.DeviceEnum
     ad_group_bid_modifier.device.type_ = device_enum.MOBILE
 
     # Add the ad group bid modifier.
     ad_group_bm_response = ad_group_bm_service.mutate_ad_group_bid_modifiers(
-        customer_id=customer_id, operations=[ad_group_bid_modifier_operation],
+        customer_id=customer_id,
+        operations=[ad_group_bid_modifier_operation],
     )
     # [END add_ad_group_bid_modifier]
 

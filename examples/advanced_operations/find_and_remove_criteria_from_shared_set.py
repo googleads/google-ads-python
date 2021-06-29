@@ -83,7 +83,7 @@ def main(client, customer_id, page_size, campaign_id):
     except GoogleAdsException as ex:
         _handle_googleads_exception(ex)
 
-    criterion_type_enum = client.get_type("CriterionTypeEnum").CriterionType
+    criterion_type_enum = client.enums.CriterionTypeEnum
     criterion_ids = []
     for row in shared_criteria_response:
         shared_criterion = row.shared_criterion

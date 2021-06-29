@@ -166,7 +166,7 @@ def _create_smart_display_campaign(client, customer_id, budget_resource_name):
     campaign.advertising_channel_sub_type = (
         advertising_channel_sub_type_enum.DISPLAY_SMART_CAMPAIGN
     )
-    campaign_status_enum = client.get_type("CampaignStatusEnum").CampaignStatus
+    campaign_status_enum = client.enums.CampaignStatusEnum
     campaign.status = campaign_status_enum.PAUSED
     # Smart Display campaign requires the TargetCpa bidding strategy.
     campaign.target_cpa.target_cpa_micros = 5000000
@@ -194,7 +194,7 @@ def _create_ad_group(client, customer_id, campaign_resource_name):
     ad_group_operation = client.get_type("AdGroupOperation")
     ad_group = ad_group_operation.create
     ad_group.name = f"Earth to Mars Cruises #{uuid4()}"
-    ad_group_status_enum = client.get_type("AdGroupStatusEnum").AdGroupStatus
+    ad_group_status_enum = client.enums.AdGroupStatusEnum
     ad_group.status = ad_group_status_enum.PAUSED
     ad_group.campaign = campaign_resource_name
 
@@ -223,7 +223,7 @@ def _upload_image_asset(
     # uploaded should be unique, and should not match another ACTIVE asset in
     # this customer account.
     # asset.name = f'Jupiter Trip #{uuid4()}'
-    asset_type_enum = client.get_type("AssetTypeEnum").AssetType
+    asset_type_enum = client.enums.AssetTypeEnum
     asset.type_ = asset_type_enum.IMAGE
     image_asset = asset.image_asset
     image_asset.data = image_content

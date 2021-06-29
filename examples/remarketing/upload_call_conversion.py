@@ -34,6 +34,8 @@ def main(
     call_start_date_time,
     conversion_date_time,
     conversion_value,
+    conversion_custom_variable_id,
+    conversion_custom_variable_value,
 ):
     """Imports offline call conversion values for calls related to your ads.
 
@@ -51,6 +53,10 @@ def main(
             after the click time). The format is 'yyyy-mm-dd hh:mm:ss+|-hh:mm',
             e.g. '2021-01-01 12:32:45-08:00'.
         conversion_value: The conversion value in the desired currency.
+        conversion_custom_variable_id: The ID of the conversion custom
+            variable to associate with the upload.
+        conversion_custom_variable_value: The str value of the conversion custom
+            variable to associate with the upload.
     """
     # Get the ConversionUploadService client.
     conversion_upload_service = client.get_service("ConversionUploadService")
@@ -66,13 +72,21 @@ def main(
     call_conversion.conversion_value = conversion_value
     call_conversion.currency_code = "USD"
 
+    if conversion_custom_variable_id and conversion_custom_variable_value:
+        conversion_custom_variable = client.get_type("CustomVariable")
+        conversion_custom_variable.conversion_custom_variable = (
+            conversion_custom_variable_id
+        )
+        conversion_custom_variable.value = conversion_custom_variable_value
+        call_conversion.custom_variables.append(conversion_custom_variable)
+
     # Issue a request to upload the call conversion.
     request = client.get_type("UploadCallConversionsRequest")
     request.customer_id = customer_id
     request.conversions = [call_conversion]
     request.partial_failure = True
-    upload_call_conversions_response = conversion_upload_service.upload_call_conversions(
-        request=request
+    upload_call_conversions_response = (
+        conversion_upload_service.upload_call_conversions(request=request)
     )
 
     # Print any partial errors returned.
@@ -141,7 +155,7 @@ if __name__ == "__main__":
         "--conversion_date_time",
         type=str,
         required=True,
-        help="The the date and time of the conversion (should be after the "
+        help="The date and time of the conversion (should be after the "
         "click time). The format is 'yyyy-mm-dd hh:mm:ss+|-hh:mm', e.g. "
         "'2019-01-01 12:32:45-08:00'.",
     )
@@ -151,6 +165,18 @@ if __name__ == "__main__":
         type=float,
         required=True,
         help="The conversion value in the desired currency.",
+    )
+    parser.add_argument(
+        "-w",
+        "--conversion_custom_variable_id",
+        type=str,
+        help="The ID of the conversion custom variable to associate with the upload.",
+    )
+    parser.add_argument(
+        "-x",
+        "--conversion_custom_variable_value",
+        type=str,
+        help="The value of the conversion custom variable to associate with the upload.",
     )
     args = parser.parse_args()
 
@@ -163,6 +189,8 @@ if __name__ == "__main__":
             args.call_start_date_time,
             args.conversion_date_time,
             args.conversion_value,
+            args.conversion_custom_variable_id,
+            args.conversion_custom_variable_value,
         )
     except GoogleAdsException as ex:
         print(

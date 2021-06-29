@@ -98,9 +98,9 @@ def _add_campaign_budget(client, customer_id):
     campaign_budget_operation = client.get_type("CampaignBudgetOperation")
     campaign_budget = campaign_budget_operation.create
     campaign_budget.name = f"Interplanetary Cruise Budget #{uuid4()}"
-    campaign_budget.delivery_method = client.get_type(
-        "BudgetDeliveryMethodEnum"
-    ).BudgetDeliveryMethod.STANDARD
+    campaign_budget.delivery_method = (
+        client.enums.BudgetDeliveryMethodEnum.STANDARD
+    )
     # The budget is specified in the local currency of the account. The amount
     # should be specified in micros; one million is equivalent to one unit.
     campaign_budget.amount_micros = 5000000
@@ -150,12 +150,12 @@ def _add_smart_shopping_campaign(
     campaign.campaign_budget = budget_resource_name
     # Configure settings related to shopping campaigns including advertising
     # channel type, advertising channel sub-type and shopping setting.
-    campaign.advertising_channel_type = client.get_type(
-        "AdvertisingChannelTypeEnum"
-    ).AdvertisingChannelType.SHOPPING
-    campaign.advertising_channel_sub_type = client.get_type(
-        "AdvertisingChannelSubTypeEnum"
-    ).AdvertisingChannelSubType.SHOPPING_SMART_ADS
+    campaign.advertising_channel_type = (
+        client.enums.AdvertisingChannelTypeEnum.SHOPPING
+    )
+    campaign.advertising_channel_sub_type = (
+        client.enums.AdvertisingChannelSubTypeEnum.SHOPPING_SMART_ADS
+    )
     campaign.shopping_setting.merchant_id = merchant_center_account_id
     # Set the sales country of products to include in the campaign.
     # Only products from Merchant Center targeting this country will
@@ -164,9 +164,7 @@ def _add_smart_shopping_campaign(
     # Recommendation: Set the campaign to PAUSED when creating it to prevent
     # the ads from immediately serving. Set to ENABLED once you've added
     # targeting and the ads are ready to serve.
-    campaign.status = client.get_type(
-        "CampaignStatusEnum"
-    ).CampaignStatus.PAUSED
+    campaign.status = client.enums.CampaignStatusEnum.PAUSED
     # Bidding strategy must be set directly on the campaign.
     # Setting a portfolio bidding strategy by resource name is not supported.
     # Maximize conversion value is the only strategy supported for smart
@@ -214,9 +212,7 @@ def _add_smart_shopping_ad_group(client, customer_id, campaign_resource_name):
     ad_group.name = f"Earth to Mars Cruises #{uuid4()}"
     ad_group.campaign = campaign_resource_name
     # Set the ad group type to SHOPPING_SMART_ADS.
-    ad_group.type_ = client.get_type(
-        "AdGroupTypeEnum"
-    ).AdGroupType.SHOPPING_SMART_ADS
+    ad_group.type_ = client.enums.AdGroupTypeEnum.SHOPPING_SMART_ADS
     ad_group.status = client.enums.AdGroupStatusEnum.ENABLED
 
     # Add the ad group, then print and return the resulting ad group's resource
@@ -260,9 +256,7 @@ def _add_smart_shopping_ad_group_ad(
     client.copy_from(
         ad_group_ad.ad.shopping_smart_ad, client.get_type("ShoppingSmartAdInfo")
     )
-    ad_group_ad.status = client.get_type(
-        "AdGroupAdStatusEnum"
-    ).AdGroupAdStatus.PAUSED
+    ad_group_ad.status = client.enums.AdGroupAdStatusEnum.PAUSED
 
     # Add the ad group ad, then print and return the resulting ad group ad's
     # resource name.
@@ -304,12 +298,10 @@ def _add_shopping_listing_group(client, customer_id, ad_group_resource_name):
     ad_group_criterion_operation = client.get_type("AdGroupCriterionOperation")
     ad_group_criterion = ad_group_criterion_operation.create
     ad_group_criterion.ad_group = ad_group_resource_name
-    ad_group_criterion.status = client.get_type(
-        "AdGroupCriterionStatusEnum"
-    ).AdGroupCriterionStatus.ENABLED
-    ad_group_criterion.listing_group.type_ = client.get_type(
-        "ListingGroupTypeEnum"
-    ).ListingGroupType.UNIT
+    ad_group_criterion.status = client.enums.AdGroupCriterionStatusEnum.ENABLED
+    ad_group_criterion.listing_group.type_ = (
+        client.enums.ListingGroupTypeEnum.UNIT
+    )
 
     # Ad the listing group criterion, then display and return the resulting
     # ad group criterion's resource name.

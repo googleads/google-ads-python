@@ -38,27 +38,21 @@ def main(client, customer_id, billing_setup_id):
     )
     proposal = account_budget_proposal_operation.create
 
-    proposal.proposal_type = client.get_type(
-        "AccountBudgetProposalTypeEnum"
-    ).AccountBudgetProposalType.CREATE
+    proposal.proposal_type = client.enums.AccountBudgetProposalTypeEnum.CREATE
     proposal.billing_setup = billing_setup_service.billing_setup_path(
         customer_id, billing_setup_id
     )
     proposal.proposed_name = "Account Budget Proposal (example)"
 
     # Specify the account budget starts immediately
-    proposal.proposed_start_time_type = client.get_type(
-        "TimeTypeEnum"
-    ).TimeType.NOW
+    proposal.proposed_start_time_type = client.enums.TimeTypeEnum.NOW
     # Alternatively you can specify a specific start time. Refer to the
     # AccountBudgetProposal resource documentation for allowed formats.
     #
     # proposal.proposed_start_date_time = '2020-01-02 03:04:05'
 
     # Specify that the budget runs forever
-    proposal.proposed_end_time_type = client.get_type(
-        "TimeTypeEnum"
-    ).TimeType.FOREVER
+    proposal.proposed_end_time_type = client.enums.TimeTypeEnum.FOREVER
     # Alternatively you can specify a specific end time. Allowed formats are as
     # above.
     #
@@ -70,8 +64,11 @@ def main(client, customer_id, billing_setup_id):
     # proposal.proposed_notes = 'Received prepayment of $0.01'
     proposal.proposed_spending_limit_micros = 10000
 
-    account_budget_proposal_response = account_budget_proposal_service.mutate_account_budget_proposal(
-        customer_id=customer_id, operation=account_budget_proposal_operation,
+    account_budget_proposal_response = (
+        account_budget_proposal_service.mutate_account_budget_proposal(
+            customer_id=customer_id,
+            operation=account_budget_proposal_operation,
+        )
     )
     print(
         "Created account budget proposal "

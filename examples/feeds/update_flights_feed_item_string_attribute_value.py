@@ -67,9 +67,7 @@ def main(
     # Gets the ID of the feed attribute for the placeholder field. This is
     # needed to specify which feed item attribute value will be updated in
     # the given feed item.
-    flight_placeholder_field_enum = client.get_type(
-        "FlightPlaceholderFieldEnum"
-    ).FlightPlaceholderField
+    flight_placeholder_field_enum = client.enums.FlightPlaceholderFieldEnum
     flight_placeholder_enum_value = getattr(
         flight_placeholder_field_enum, flight_placeholder_field_name
     )
@@ -139,9 +137,7 @@ def _flight_placeholder_fields_map(client, customer_id, feed_resource_name):
     Returns:
         a dict mapping placeholder fields to feed attributes
     """
-    flight_placeholder_field_enum = client.get_type(
-        "FlightPlaceholderFieldEnum"
-    ).FlightPlaceholderField
+    flight_placeholder_field_enum = client.enums.FlightPlaceholderFieldEnum
 
     return _placeholder_field_maps(
         client,

@@ -61,11 +61,9 @@ def main(
     )
 
     # Remove the attribute from the feed item.
-    flight_placeholder_field = (
-        client.get_type("FlightPlaceholderFieldEnum")
-        .FlightPlaceholderField[flight_placeholder_field_name]
-        .value
-    )
+    flight_placeholder_field = client.enums.FlightPlaceholderFieldEnum[
+        flight_placeholder_field_name
+    ].value
     feed_item = _remove_attribute_value_from_feed_item(
         client,
         customer_id,
@@ -127,9 +125,7 @@ def _get_feed(client, customer_id, feed_id):
 
     # Get the attributes list from the feed and create a map with keys of each
     # attribute and values of each corresponding ID.
-    flight_placeholder_field_enum = client.get_type(
-        "FlightPlaceholderFieldEnum"
-    ).FlightPlaceholderField
+    flight_placeholder_field_enum = client.enums.FlightPlaceholderFieldEnum
     feed_attributes = dict()
 
     # Loop through the feed attributes to populate the map.

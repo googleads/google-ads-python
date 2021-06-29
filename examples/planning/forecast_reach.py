@@ -229,9 +229,9 @@ def _forecast_suggested_mix(
     preferences.starts_with_sound = True
     preferences.is_skippable = False
     preferences.top_content_only = True
-    preferences.ad_length = client.get_type(
-        "ReachPlanAdLengthEnum"
-    ).ReachPlanAdLength.FIFTEEN_OR_TWENTY_SECONDS
+    preferences.ad_length = (
+        client.enums.ReachPlanAdLengthEnum.FIFTEEN_OR_TWENTY_SECONDS
+    )
 
     reach_plan_service = client.get_service("ReachPlanService")
     request = client.get_type("GenerateProductMixIdeasRequest")

@@ -151,7 +151,6 @@ def _get_feed_attributes(client, customer_id, feed_resource_name):
     except GoogleAdsException as ex:
         _handle_googleads_exception(ex)
 
-    feed_attr_type_enum = client.get_type("FeedAttributeTypeEnum")
     feed_details = {}
     for feed_attribute in feed.attributes:
         name = feed_attribute.name

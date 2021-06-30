@@ -38,11 +38,9 @@ def main(
 ):
     conversion_adjustment_type_enum = client.enums.ConversionAdjustmentTypeEnum
     # Determine the adjustment type.
-    conversion_adjustment_type = (
-        conversion_adjustment_type_enum._pb.ConversionAdjustmentType.Value(
-            adjustment_type
-        )
-    )
+    conversion_adjustment_type = conversion_adjustment_type_enum[
+        adjustment_type
+    ].value
 
     # Associates conversion adjustments with the existing conversion action.
     # The GCLID should have been uploaded before with a conversion
@@ -66,7 +64,7 @@ def main(
     if (
         restatement_value
         and conversion_adjustment_type
-        == conversion_adjustment_type_enum.ConversionAdjustmentType.RESTATEMENT
+        == conversion_adjustment_type_enum.RESTATEMENT.value
     ):
         conversion_adjustment.restatement_value.adjusted_value = float(
             restatement_value

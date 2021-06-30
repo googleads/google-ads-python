@@ -64,9 +64,7 @@ def main(client, customer_id, campaign_id):
     product_custom_attribute.value = "top_selling_products"
     dimensions.append(product_custom_attribute_dimension)
 
-    product_type_level_enum = client.get_type(
-        "ProductTypeLevelEnum"
-    ).ProductTypeLevel
+    product_type_level_enum = client.enums.ProductTypeLevelEnum
     product_type_dimension_1 = client.get_type("ListingDimensionInfo")
     product_type = product_type_dimension_1.product_type
     product_type.level = product_type_level_enum.LEVEL1

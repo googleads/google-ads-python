@@ -41,9 +41,7 @@ def main(client, customer_id, email_address, access_role):
     )
     invitation = invitation_operation.create
     invitation.email_address = email_address
-    invitation.access_role = client.get_type(
-        "AccessRoleEnum"
-    )._pb.AccessRole.Value(access_role)
+    invitation.access_role = client.enums.AccessRoleEnum[access_role].value
 
     response = service.mutate_customer_user_access_invitation(
         customer_id=customer_id, operation=invitation_operation
@@ -89,9 +87,7 @@ if __name__ == "__main__":
         "--access_role",
         type=str,
         required=True,
-        choices=googleads_client.get_type(
-            "AccessRoleEnum"
-        )._pb.AccessRole.keys(),
+        choices=[e.name for e in googleads_client.enums.AccessRoleEnum],
         help="The updated user access role.",
     )
     args = parser.parse_args()

@@ -130,9 +130,9 @@ if __name__ == "__main__":
         "--adjustment_type",
         type=str,
         required=True,
-        choices=googleads_client.get_type(
-            "ConversionAdjustmentTypeEnum"
-        )._pb.ConversionAdjustmentType.keys(),
+        choices=[
+            e.name for e in googleads_client.enum.ConversionAdjustmentTypeEnum
+        ],
         help="The Adjustment type, e.g. " "RETRACTION, RESTATEMENT",
     )
     parser.add_argument(

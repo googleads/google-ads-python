@@ -40,7 +40,7 @@ def main(client, customer_id):
     asset.type_ = client.enums.AssetTypeEnum.IMAGE
     asset.image_asset.data = image_content
     asset.image_asset.file_size = len(image_content)
-    asset.image_asset.mime_type = client.MimeTypeEnum.IMAGE_JPEG
+    asset.image_asset.mime_type = client.enums.MimeTypeEnum.IMAGE_JPEG
     # Use your favorite image library to determine dimensions
     asset.image_asset.full_size.height_pixels = 315
     asset.image_asset.full_size.width_pixels = 600

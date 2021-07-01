@@ -66,7 +66,9 @@ def main(client, customer_id, ad_group_id):
             "There may have been validation error(s) while adding expanded "
             "text ad."
         )
-        policy_error_enum = client.enums.PolicyFindingErrorEnum.POLICY_FINDING
+        policy_error_enum = client.get_type(
+            "PolicyFindingErrorEnum"
+        ).PolicyFindingError.POLICY_FINDING
 
         count = 1
         for error in ex.failure.errors:

@@ -132,7 +132,9 @@ def _fetch_ignorable_policy_topics(client, googleads_exception):
     for error in googleads_exception.failure.errors:
         if (
             error.error_code.policy_finding_error
-            != client.enums.PolicyFindingErrorEnum.POLICY_FINDING
+            != client.get_type(
+                "PolicyFindingErrorEnum"
+            ).PolicyFindingError.POLICY_FINDING
         ):
             print(
                 "This example supports sending exemption request for the "

@@ -15,6 +15,10 @@
 # limitations under the License.
 """Shows how to write data from a basic campaign stats report to a CSV file.
 
+This is important for migration because reports from the AdWords API are
+returned in CSV format, so clients that are migrating may want to temporarily
+convert Google Ads API reports to CSV while migrating their applications.
+
 Examples:
     Write to file output.csv in the same directory as script with headers.
         $ python get_campaign_stats_to_csv.py -c 0123456789 -o output.csv -w

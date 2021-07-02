@@ -33,8 +33,10 @@ def main(client, customer_id, campaign_id, keyword_text, location_id):
         _create_proximity_op(client, customer_id, campaign_id),
     ]
 
-    campaign_criterion_response = campaign_criterion_service.mutate_campaign_criteria(
-        customer_id=customer_id, operations=operations
+    campaign_criterion_response = (
+        campaign_criterion_service.mutate_campaign_criteria(
+            customer_id=customer_id, operations=operations
+        )
     )
 
     for result in campaign_criterion_response.results:
@@ -57,8 +59,8 @@ def _create_location_op(client, customer_id, campaign_id, location_id):
     # GeoTargetConstantService.suggest_geo_target_constants() and directly
     # apply GeoTargetConstant.resource_name here. An example can be found
     # in get_geo_target_constant_by_names.py.
-    campaign_criterion.location.geo_target_constant = geo_target_constant_service.geo_target_constant_path(
-        location_id
+    campaign_criterion.location.geo_target_constant = (
+        geo_target_constant_service.geo_target_constant_path(location_id)
     )
 
     return campaign_criterion_operation
@@ -77,9 +79,7 @@ def _create_negative_keyword_op(client, customer_id, campaign_id, keyword_text):
     campaign_criterion.negative = True
     criterion_keyword = campaign_criterion.keyword
     criterion_keyword.text = keyword_text
-    criterion_keyword.match_type = client.get_type(
-        "KeywordMatchTypeEnum"
-    ).KeywordMatchType.BROAD
+    criterion_keyword.match_type = client.enums.KeywordMatchTypeEnum.BROAD
 
     return campaign_criterion_operation
 
@@ -100,9 +100,9 @@ def _create_proximity_op(client, customer_id, campaign_id):
     campaign_criterion.proximity.address.country_code = "FR"
     campaign_criterion.proximity.radius = 10
     # Default is kilometers.
-    campaign_criterion.proximity.radius_units = client.get_type(
-        "ProximityRadiusUnitsEnum"
-    ).ProximityRadiusUnits.MILES
+    campaign_criterion.proximity.radius_units = (
+        client.enums.ProximityRadiusUnitsEnum.MILES
+    )
 
     return campaign_criterion_operation
     # [END add_campaign_targeting_criteria_1]

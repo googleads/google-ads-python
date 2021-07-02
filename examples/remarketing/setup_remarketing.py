@@ -91,15 +91,13 @@ def _create_user_list(client, customer_id):
     user_list = user_list_operation.create
     user_list.name = f"All visitors to example.com #{uuid4()}"
     user_list.description = "Any visitor to any page of example.com"
-    user_list.membership_status = client.get_type(
-        "UserListMembershipStatusEnum"
-    ).UserListMembershipStatus.OPEN
+    user_list.membership_status = client.enums.UserListMembershipStatusEnum.OPEN
     user_list.membership_life_span = 365
     # Optional: To include past users in the user list, set the
     # prepopulation_status to REQUESTED.
-    user_list.rule_based_user_list.prepopulation_status = client.get_type(
-        "UserListPrepopulationStatusEnum"
-    ).UserListPrepopulationStatus.REQUESTED
+    user_list.rule_based_user_list.prepopulation_status = (
+        client.enums.UserListPrepopulationStatusEnum.REQUESTED
+    )
     # Specifies that the user list targets visitors of a page with a URL that
     # contains 'example.com'.
     user_list_rule_item_group_info = client.get_type(
@@ -108,9 +106,9 @@ def _create_user_list(client, customer_id):
     user_list_rule_item_info = client.get_type("UserListRuleItemInfo")
     # Uses a built-in parameter to create a domain URL rule.
     user_list_rule_item_info.name = "url__"
-    user_list_rule_item_info.string_rule_item.operator = client.get_type(
-        "UserListStringRuleItemOperatorEnum"
-    ).UserListStringRuleItemOperator.CONTAINS
+    user_list_rule_item_info.string_rule_item.operator = (
+        client.enums.UserListStringRuleItemOperatorEnum.CONTAINS
+    )
     user_list_rule_item_info.string_rule_item.value = "example.com"
     user_list_rule_item_group_info.rule_items.append(user_list_rule_item_info)
     user_list.rule_based_user_list.expression_rule_user_list.rule.rule_item_groups.append(

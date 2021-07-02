@@ -104,9 +104,9 @@ def _add_extension_to_account(
         "CustomerExtensionSettingOperation"
     )
     customer_extension_setting = customer_extension_setting_operation.create
-    customer_extension_setting.extension_type = client.get_type(
-        "ExtensionTypeEnum"
-    ).ExtensionType.HOTEL_CALLOUT
+    customer_extension_setting.extension_type = (
+        client.enums.ExtensionTypeEnum.HOTEL_CALLOUT
+    )
     customer_extension_setting.extension_feed_items.append(
         extension_feed_item_resource_name
     )
@@ -114,9 +114,11 @@ def _add_extension_to_account(
     customer_extension_setting_service = client.get_service(
         "CustomerExtensionSettingService"
     )
-    response = customer_extension_setting_service.mutate_customer_extension_settings(
-        customer_id=customer_id,
-        operations=[customer_extension_setting_operation],
+    response = (
+        customer_extension_setting_service.mutate_customer_extension_settings(
+            customer_id=customer_id,
+            operations=[customer_extension_setting_operation],
+        )
     )
     print(
         "Created a customer extension setting with resource name: "
@@ -143,9 +145,9 @@ def _add_extension_to_campaign(
     campaign_extension_setting.campaign = client.get_service(
         "CampaignService"
     ).campaign_path(customer_id, campaign_id)
-    campaign_extension_setting.extension_type = client.get_type(
-        "ExtensionTypeEnum"
-    ).ExtensionType.HOTEL_CALLOUT
+    campaign_extension_setting.extension_type = (
+        client.enums.ExtensionTypeEnum.HOTEL_CALLOUT
+    )
     campaign_extension_setting.extension_feed_items.append(
         extension_feed_item_resource_name
     )
@@ -153,9 +155,11 @@ def _add_extension_to_campaign(
     campaign_extension_setting_service = client.get_service(
         "CampaignExtensionSettingService"
     )
-    response = campaign_extension_setting_service.mutate_campaign_extension_settings(
-        customer_id=customer_id,
-        operations=[campaign_extension_setting_operation],
+    response = (
+        campaign_extension_setting_service.mutate_campaign_extension_settings(
+            customer_id=customer_id,
+            operations=[campaign_extension_setting_operation],
+        )
     )
     print(
         "Created a campaign extension setting with resource name: "
@@ -182,9 +186,9 @@ def _add_extension_to_ad_group(
     ad_group_extension_setting.ad_group = client.get_service(
         "AdGroupService"
     ).ad_group_path(customer_id, ad_group_id)
-    ad_group_extension_setting.extension_type = client.get_type(
-        "ExtensionTypeEnum"
-    ).ExtensionType.HOTEL_CALLOUT
+    ad_group_extension_setting.extension_type = (
+        client.enums.ExtensionTypeEnum.HOTEL_CALLOUT
+    )
     ad_group_extension_setting.extension_feed_items.append(
         extension_feed_item_resource_name
     )
@@ -192,9 +196,11 @@ def _add_extension_to_ad_group(
     ad_group_extension_setting_service = client.get_service(
         "AdGroupExtensionSettingService"
     )
-    response = ad_group_extension_setting_service.mutate_ad_group_extension_settings(
-        customer_id=customer_id,
-        operations=[ad_group_extension_setting_operation],
+    response = (
+        ad_group_extension_setting_service.mutate_ad_group_extension_settings(
+            customer_id=customer_id,
+            operations=[ad_group_extension_setting_operation],
+        )
     )
     print(
         "Created a ad_group extension setting with resource name: "
@@ -219,7 +225,11 @@ if __name__ == "__main__":
         help="The Google Ads customer ID",
     )
     parser.add_argument(
-        "-i", "--campaign_id", type=str, required=True, help="The campaign ID.",
+        "-i",
+        "--campaign_id",
+        type=str,
+        required=True,
+        help="The campaign ID.",
     )
     parser.add_argument(
         "-a",

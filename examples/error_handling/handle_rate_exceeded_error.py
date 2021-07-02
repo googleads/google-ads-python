@@ -125,10 +125,8 @@ def _create_ad_group_criterion_operations(
         A list of AdGroupCriterionOperation instances.
     """
     ad_group_service = client.get_service("AdGroupService")
-    status = client.get_type(
-        "AdGroupCriterionStatusEnum"
-    ).AdGroupCriterionStatus.ENABLED
-    match_type = client.get_type("KeywordMatchTypeEnum").KeywordMatchType.EXACT
+    status = client.enums.AdGroupCriterionStatusEnum.ENABLED
+    match_type = client.enums.KeywordMatchTypeEnum.EXACT
 
     operations = []
     for i in range(NUM_KEYWORDS):

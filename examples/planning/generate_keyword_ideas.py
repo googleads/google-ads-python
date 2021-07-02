@@ -36,12 +36,12 @@ def main(
     client, customer_id, location_ids, language_id, keyword_texts, page_url
 ):
     keyword_plan_idea_service = client.get_service("KeywordPlanIdeaService")
-    keyword_competition_level_enum = client.get_type(
-        "KeywordPlanCompetitionLevelEnum"
-    ).KeywordPlanCompetitionLevel
-    keyword_plan_network = client.get_type(
-        "KeywordPlanNetworkEnum"
-    ).KeywordPlanNetwork.GOOGLE_SEARCH_AND_PARTNERS
+    keyword_competition_level_enum = (
+        client.enums.KeywordPlanCompetitionLevelEnum
+    )
+    keyword_plan_network = (
+        client.enums.KeywordPlanNetworkEnum.GOOGLE_SEARCH_AND_PARTNERS
+    )
     location_rns = _map_locations_ids_to_resource_names(client, location_ids)
     language_rn = client.get_service(
         "LanguageConstantService"

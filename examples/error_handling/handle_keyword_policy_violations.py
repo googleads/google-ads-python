@@ -104,13 +104,11 @@ def _create_keyword_criterion(
     ad_group_criterion.ad_group = client.get_service(
         "AdGroupService"
     ).ad_group_path(customer_id, ad_group_id)
-    ad_group_criterion.status = client.get_type(
-        "AdGroupCriterionStatusEnum"
-    ).AdGroupCriterionStatus.ENABLED
+    ad_group_criterion.status = client.enums.AdGroupCriterionStatusEnum.ENABLED
     ad_group_criterion.keyword.text = keyword_text
-    ad_group_criterion.keyword.match_type = client.get_type(
-        "KeywordMatchTypeEnum"
-    ).KeywordMatchType.EXACT
+    ad_group_criterion.keyword.match_type = (
+        client.enums.KeywordMatchTypeEnum.EXACT
+    )
 
     try:
         # Try sending a mutate request to add the keyword.

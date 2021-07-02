@@ -72,9 +72,9 @@ def main(client, customer_id):
     rule_based_user_list_info = client.get_type("RuleBasedUserListInfo")
     # Optional: To include past users in the user list, set the
     # prepopulation_status to REQUESTED.
-    rule_based_user_list_info.prepopulation_status = client.get_type(
-        "UserListPrepopulationStatusEnum"
-    ).UserListPrepopulationStatus.REQUESTED
+    rule_based_user_list_info.prepopulation_status = (
+        client.enums.UserListPrepopulationStatusEnum.REQUESTED
+    )
     client.copy_from(
         rule_based_user_list_info.expression_rule_user_list,
         expression_rule_user_list_info,
@@ -86,9 +86,7 @@ def main(client, customer_id):
     joined_urls = " AND ".join(URL_LIST)
     user_list.name = f"All visitors to {joined_urls} #{uuid4()}"
     user_list.description = f"Visitors of {joined_urls}"
-    user_list.membership_status = client.get_type(
-        "UserListMembershipStatusEnum"
-    ).UserListMembershipStatus.OPEN
+    user_list.membership_status = client.enums.UserListMembershipStatusEnum.OPEN
     user_list.membership_life_span = 365
     client.copy_from(user_list.rule_based_user_list, rule_based_user_list_info)
 
@@ -114,9 +112,9 @@ def _build_visited_site_rule_info(client, url):
     user_visited_site_rule = client.get_type("UserListRuleItemInfo")
     # Use a built-in parameter to create a domain URL rule.
     user_visited_site_rule.name = "url__"
-    user_visited_site_rule.string_rule_item.operator = client.get_type(
-        "UserListStringRuleItemOperatorEnum"
-    ).UserListStringRuleItemOperator.CONTAINS
+    user_visited_site_rule.string_rule_item.operator = (
+        client.enums.UserListStringRuleItemOperatorEnum.CONTAINS
+    )
     user_visited_site_rule.string_rule_item.value = url
 
     return user_visited_site_rule

@@ -32,13 +32,11 @@ def main(client, customer_id, ad_group_id, keyword_text):
     ad_group_criterion.ad_group = ad_group_service.ad_group_path(
         customer_id, ad_group_id
     )
-    ad_group_criterion.status = client.get_type(
-        "AdGroupCriterionStatusEnum"
-    ).AdGroupCriterionStatus.ENABLED
+    ad_group_criterion.status = client.enums.AdGroupCriterionStatusEnum.ENABLED
     ad_group_criterion.keyword.text = keyword_text
-    ad_group_criterion.keyword.match_type = client.get_type(
-        "KeywordMatchTypeEnum"
-    ).KeywordMatchType.EXACT
+    ad_group_criterion.keyword.match_type = (
+        client.enums.KeywordMatchTypeEnum.EXACT
+    )
 
     # Optional field
     # All fields can be referenced from the protos directly.
@@ -50,8 +48,11 @@ def main(client, customer_id, ad_group_id, keyword_text):
     # ad_group_criterion.final_urls.append('https://www.example.com')
 
     # Add keyword
-    ad_group_criterion_response = ad_group_criterion_service.mutate_ad_group_criteria(
-        customer_id=customer_id, operations=[ad_group_criterion_operation],
+    ad_group_criterion_response = (
+        ad_group_criterion_service.mutate_ad_group_criteria(
+            customer_id=customer_id,
+            operations=[ad_group_criterion_operation],
+        )
     )
 
     print(

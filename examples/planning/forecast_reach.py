@@ -127,14 +127,14 @@ def _request_reach_curve(
     request.planned_products = product_mix
 
     request.targeting.plannable_location_id = location_id
-    request.targeting.age_range = client.get_type(
-        "ReachPlanAgeRangeEnum"
-    ).ReachPlanAgeRange.AGE_RANGE_18_65_UP
+    request.targeting.age_range = (
+        client.enums.ReachPlanAgeRangeEnum.AGE_RANGE_18_65_UP
+    )
 
     # Add gender targeting to the request.
     for gender_type in [
-        client.get_type("GenderTypeEnum").GenderType.FEMALE,
-        client.get_type("GenderTypeEnum").GenderType.MALE,
+        client.enums.GenderTypeEnum.FEMALE,
+        client.enums.GenderTypeEnum.MALE,
     ]:
         gender = client.get_type("GenderInfo")
         gender.type_ = gender_type
@@ -142,9 +142,9 @@ def _request_reach_curve(
 
     # Add device targeting to the request.
     for device_type in [
-        client.get_type("DeviceEnum").Device.DESKTOP,
-        client.get_type("DeviceEnum").Device.MOBILE,
-        client.get_type("DeviceEnum").Device.TABLET,
+        client.enums.DeviceEnum.DESKTOP,
+        client.enums.DeviceEnum.MOBILE,
+        client.enums.DeviceEnum.TABLET,
     ]:
         device = client.get_type("DeviceInfo")
         device.type_ = device_type
@@ -229,9 +229,9 @@ def _forecast_suggested_mix(
     preferences.starts_with_sound = True
     preferences.is_skippable = False
     preferences.top_content_only = True
-    preferences.ad_length = client.get_type(
-        "ReachPlanAdLengthEnum"
-    ).ReachPlanAdLength.FIFTEEN_OR_TWENTY_SECONDS
+    preferences.ad_length = (
+        client.enums.ReachPlanAdLengthEnum.FIFTEEN_OR_TWENTY_SECONDS
+    )
 
     reach_plan_service = client.get_service("ReachPlanService")
     request = client.get_type("GenerateProductMixIdeasRequest")

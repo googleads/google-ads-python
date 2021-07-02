@@ -39,15 +39,17 @@ def main(client, customer_id):
     campaign_budget_operation = client.get_type("CampaignBudgetOperation")
     campaign_budget = campaign_budget_operation.create
     campaign_budget.name = f"Interplanetary Budget {uuid.uuid4()}"
-    campaign_budget.delivery_method = client.get_type(
-        "BudgetDeliveryMethodEnum"
-    ).BudgetDeliveryMethod.STANDARD
+    campaign_budget.delivery_method = (
+        client.enums.BudgetDeliveryMethodEnum.STANDARD
+    )
     campaign_budget.amount_micros = 500000
 
     # Add budget.
     try:
-        campaign_budget_response = campaign_budget_service.mutate_campaign_budgets(
-            customer_id=customer_id, operations=[campaign_budget_operation]
+        campaign_budget_response = (
+            campaign_budget_service.mutate_campaign_budgets(
+                customer_id=customer_id, operations=[campaign_budget_operation]
+            )
         )
     except GoogleAdsException as ex:
         _handle_googleads_exception(ex)
@@ -58,16 +60,14 @@ def main(client, customer_id):
     campaign_operation = client.get_type("CampaignOperation")
     campaign = campaign_operation.create
     campaign.name = f"Interplanetary Cruise {uuid.uuid4()}"
-    campaign.advertising_channel_type = client.get_type(
-        "AdvertisingChannelTypeEnum"
-    ).AdvertisingChannelType.SEARCH
+    campaign.advertising_channel_type = (
+        client.enums.AdvertisingChannelTypeEnum.SEARCH
+    )
 
     # Recommendation: Set the campaign to PAUSED when creating it to prevent
     # the ads from immediately serving. Set to ENABLED once you've added
     # targeting and the ads are ready to serve.
-    campaign.status = client.get_type(
-        "CampaignStatusEnum"
-    ).CampaignStatus.PAUSED
+    campaign.status = client.enums.CampaignStatusEnum.PAUSED
 
     # Set the bidding strategy and budget.
     campaign.manual_cpc.enhanced_cpc_enabled = True

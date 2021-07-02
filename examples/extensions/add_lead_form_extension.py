@@ -61,9 +61,9 @@ def _create_lead_form_asset(client, customer_id):
     lead_form_asset = asset.lead_form_asset
 
     # Specify the details of the extension that the users will see.
-    lead_form_asset.call_to_action_type = client.get_type(
-        "LeadFormCallToActionTypeEnum"
-    ).LeadFormCallToActionType.BOOK_NOW
+    lead_form_asset.call_to_action_type = (
+        client.enums.LeadFormCallToActionTypeEnum.BOOK_NOW
+    )
     lead_form_asset.call_to_action_description = "Latest trip to Jupiter!"
 
     # Define the form details.
@@ -75,9 +75,7 @@ def _create_lead_form_asset(client, customer_id):
     lead_form_asset.privacy_policy_url = "http://example.com/privacy"
 
     # Define the fields to be displayed to the user.
-    input_type_enum = client.get_type(
-        "LeadFormFieldUserInputTypeEnum"
-    ).LeadFormFieldUserInputType
+    input_type_enum = client.enums.LeadFormFieldUserInputTypeEnum
     lead_form_field_1 = client.get_type("LeadFormField")
     lead_form_field_1.input_type = input_type_enum.FULL_NAME
     lead_form_asset.fields.append(lead_form_field_1)
@@ -107,9 +105,9 @@ def _create_lead_form_asset(client, customer_id):
         "We will reach out to you shortly. Visit our website to see past trip "
         "details."
     )
-    lead_form_asset.post_submit_call_to_action_type = client.get_type(
-        "LeadFormPostSubmitCallToActionTypeEnum"
-    ).LeadFormPostSubmitCallToActionType.VISIT_SITE
+    lead_form_asset.post_submit_call_to_action_type = (
+        client.enums.LeadFormPostSubmitCallToActionTypeEnum.VISIT_SITE
+    )
 
     # Optional: Display a custom disclosure that displays along with the Google
     # disclaimer on the form.
@@ -156,9 +154,7 @@ def _create_lead_form_extension(
     campaign_asset_operation = client.get_type("CampaignAssetOperation")
     campaign_asset = campaign_asset_operation.create
     campaign_asset.asset = lead_form_asset_resource_name
-    campaign_asset.field_type = client.get_type(
-        "AssetFieldTypeEnum"
-    ).AssetFieldType.LEAD_FORM
+    campaign_asset.field_type = client.enums.AssetFieldTypeEnum.LEAD_FORM
     campaign_asset.campaign = campaign_service.campaign_path(
         customer_id, campaign_id
     )

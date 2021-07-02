@@ -92,9 +92,7 @@ def _create_feed(client, customer_id):
     feed = feed_operation.create
     feed.name = f"Real Estate Feed #{uuid4()}"
 
-    feed_attribute_type_enum = client.get_type(
-        "FeedAttributeTypeEnum"
-    ).FeedAttributeType
+    feed_attribute_type_enum = client.enums.FeedAttributeTypeEnum
 
     # Creates a listing ID attribute.
     listing_id_attribute = client.get_type("FeedAttribute")
@@ -175,9 +173,9 @@ def _create_feed_mapping(
     # Creates the feed mapping.
     feed_mapping = feed_mapping_operation.create
     feed_mapping.feed = feed_resource_name
-    feed_mapping.placeholder_type = client.get_type(
-        "PlaceholderTypeEnum"
-    ).PlaceholderType.DYNAMIC_REAL_ESTATE
+    feed_mapping.placeholder_type = (
+        client.enums.PlaceholderTypeEnum.DYNAMIC_REAL_ESTATE
+    )
 
     # Returns a new instance of AttributeFieldMapping when called.
     # This prevents the need to repeat these lines every time we need a new
@@ -191,9 +189,7 @@ def _create_feed_mapping(
     # of a real estate feed (e.g. a LISTING_ID or LISTING_NAME). The feed
     # mapping associates the feed column by ID to this type and controls how
     # the feed attributes are presented in dynamic content.
-    placeholder_field_enum = client.get_type(
-        "RealEstatePlaceholderFieldEnum"
-    ).RealEstatePlaceholderField
+    placeholder_field_enum = client.enums.RealEstatePlaceholderFieldEnum
     listing_id_enum_value = placeholder_field_enum.LISTING_ID
     listing_id_mapping = attribute_field_mapping()
     listing_id_mapping.feed_attribute_id = placeholders_to_feed_attribute_map[
@@ -224,9 +220,9 @@ def _create_feed_mapping(
 
     contextual_keywords_enum_value = placeholder_field_enum.CONTEXTUAL_KEYWORDS
     contextual_keywords_mapping = attribute_field_mapping()
-    contextual_keywords_mapping.feed_attribute_id = placeholders_to_feed_attribute_map[
-        contextual_keywords_enum_value
-    ].id
+    contextual_keywords_mapping.feed_attribute_id = (
+        placeholders_to_feed_attribute_map[contextual_keywords_enum_value].id
+    )
     contextual_keywords_mapping.real_estate_field = (
         contextual_keywords_enum_value
     )
@@ -286,9 +282,7 @@ def _create_feed_item(
     feed_item = feed_item_operation.create
     feed_item.feed = feed_resource_name
 
-    placeholder_field_enum = client.get_type(
-        "RealEstatePlaceholderFieldEnum"
-    ).RealEstatePlaceholderField
+    placeholder_field_enum = client.enums.RealEstatePlaceholderFieldEnum
 
     # Creates the listing ID feed attribute value.
     listing_id_enum_value = placeholder_field_enum.LISTING_ID
@@ -327,9 +321,9 @@ def _create_feed_item(
     # Creates the contextual keywords feed attribute value.
     contextual_keywords_enum_value = placeholder_field_enum.CONTEXTUAL_KEYWORDS
     contextual_keywords_mapping = client.get_type("FeedItemAttributeValue")
-    contextual_keywords_mapping.feed_attribute_id = placeholders_to_feed_attribute_map[
-        contextual_keywords_enum_value
-    ].id
+    contextual_keywords_mapping.feed_attribute_id = (
+        placeholders_to_feed_attribute_map[contextual_keywords_enum_value].id
+    )
     contextual_keywords_mapping.string_values.extend(
         ["beach community", "ocean view", "two bedroom"]
     )
@@ -404,9 +398,9 @@ def _get_placeholder_fields_map(client, customer_id, feed_resource_name):
         row = list(response)[0]
         feed_attributes = row.feed.attributes
 
-        real_estate_placeholder_field_enum = client.get_type(
-            "RealEstatePlaceholderFieldEnum"
-        ).RealEstatePlaceholderField
+        real_estate_placeholder_field_enum = (
+            client.enums.RealEstatePlaceholderFieldEnum
+        )
         feed_attribute_names_map = {
             "Listing ID": real_estate_placeholder_field_enum.LISTING_ID,
             "Listing Name": real_estate_placeholder_field_enum.LISTING_NAME,

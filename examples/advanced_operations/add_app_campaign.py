@@ -73,9 +73,9 @@ def _create_budget(client, customer_id):
     campaign_budget = campaign_budget_operation.create
     campaign_budget.name = f"Interplanetary Cruise #{uuid4()}"
     campaign_budget.amount_micros = 50000000
-    campaign_budget.delivery_method = client.get_type(
-        "BudgetDeliveryMethodEnum"
-    ).BudgetDeliveryMethod.STANDARD
+    campaign_budget.delivery_method = (
+        client.enums.BudgetDeliveryMethodEnum.STANDARD
+    )
     # An App campaign cannot use a shared campaign budget.
     # explicitly_shared must be set to false.
     campaign_budget.explicitly_shared = False
@@ -108,18 +108,16 @@ def _create_campaign(client, customer_id, budget_resource_name):
     # Recommendation: Set the campaign to PAUSED when creating it to
     # prevent the ads from immediately serving. Set to ENABLED once you've
     # added targeting and the ads are ready to serve.
-    campaign.status = client.get_type(
-        "CampaignStatusEnum"
-    ).CampaignStatus.PAUSED
+    campaign.status = client.enums.CampaignStatusEnum.PAUSED
     # All App campaigns have an advertising_channel_type of
     # MULTI_CHANNEL to reflect the fact that ads from these campaigns are
     # eligible to appear on multiple channels.
-    campaign.advertising_channel_type = client.get_type(
-        "AdvertisingChannelTypeEnum"
-    ).AdvertisingChannelType.MULTI_CHANNEL
-    campaign.advertising_channel_sub_type = client.get_type(
-        "AdvertisingChannelSubTypeEnum"
-    ).AdvertisingChannelSubType.APP_CAMPAIGN
+    campaign.advertising_channel_type = (
+        client.enums.AdvertisingChannelTypeEnum.MULTI_CHANNEL
+    )
+    campaign.advertising_channel_sub_type = (
+        client.enums.AdvertisingChannelSubTypeEnum.APP_CAMPAIGN
+    )
     # Sets the target CPA to $1 / app install.
     #
     # campaign_bidding_strategy is a 'oneof' message so setting target_cpa
@@ -130,13 +128,13 @@ def _create_campaign(client, customer_id, budget_resource_name):
     campaign.target_cpa.target_cpa_micros = 1000000
     # Sets the App Campaign Settings.
     campaign.app_campaign_setting.app_id = "com.google.android.apps.adwords"
-    campaign.app_campaign_setting.app_store = client.get_type(
-        "AppCampaignAppStoreEnum"
-    ).AppCampaignAppStore.GOOGLE_APP_STORE
+    campaign.app_campaign_setting.app_store = (
+        client.enums.AppCampaignAppStoreEnum.GOOGLE_APP_STORE
+    )
     # Optimize this campaign for getting new users for your app.
-    campaign.app_campaign_setting.bidding_strategy_goal_type = client.get_type(
-        "AppCampaignBiddingStrategyGoalTypeEnum"
-    ).AppCampaignBiddingStrategyGoalType.OPTIMIZE_INSTALLS_TARGET_INSTALL_COST
+    campaign.app_campaign_setting.bidding_strategy_goal_type = (
+        client.enums.AppCampaignBiddingStrategyGoalTypeEnum.OPTIMIZE_INSTALLS_TARGET_INSTALL_COST
+    )
     # Optional fields
     campaign.start_date = (datetime.now() + timedelta(1)).strftime("%Y%m%d")
     campaign.end_date = (datetime.now() + timedelta(365)).strftime("%Y%m%d")
@@ -172,8 +170,8 @@ def _set_campaign_targeting_criteria(
         campaign_resource_name: the campaign to apply targeting to
     """
     campaign_criterion_service = client.get_service("CampaignCriterionService")
-    location_type = client.get_type("CriterionTypeEnum").CriterionType.LOCATION
-    language_type = client.get_type("CriterionTypeEnum").CriterionType.LANGUAGE
+    location_type = client.enums.CriterionTypeEnum.LOCATION
+    language_type = client.enums.CriterionTypeEnum.LANGUAGE
     geo_target_constant_service = client.get_service("GeoTargetConstantService")
     language_constant_service = client.get_service("LanguageConstantService")
 
@@ -190,8 +188,8 @@ def _set_campaign_targeting_criteria(
         campaign_criterion = campaign_criterion_operation.create
         campaign_criterion.campaign = campaign_resource_name
         campaign_criterion.type_ = location_type
-        campaign_criterion.location.geo_target_constant = geo_target_constant_service.geo_target_constant_path(
-            location_id
+        campaign_criterion.location.geo_target_constant = (
+            geo_target_constant_service.geo_target_constant_path(location_id)
         )
         campaign_criterion_operations.append(campaign_criterion_operation)
 
@@ -203,8 +201,8 @@ def _set_campaign_targeting_criteria(
         campaign_criterion = campaign_criterion_operation.create
         campaign_criterion.campaign = campaign_resource_name
         campaign_criterion.type_ = language_type
-        campaign_criterion.language.language_constant = language_constant_service.language_constant_path(
-            language_id
+        campaign_criterion.language.language_constant = (
+            language_constant_service.language_constant_path(language_id)
         )
         campaign_criterion_operations.append(campaign_criterion_operation)
 
@@ -239,7 +237,7 @@ def _create_ad_group(client, customer_id, campaign_resource_name):
     ad_group_operation = client.get_type("AdGroupOperation")
     ad_group = ad_group_operation.create
     ad_group.name = f"Earth to Mars cruises {uuid4()}"
-    ad_group.status = client.get_type("AdGroupStatusEnum").AdGroupStatus.ENABLED
+    ad_group.status = client.enums.AdGroupStatusEnum.ENABLED
     ad_group.campaign = campaign_resource_name
 
     ad_group_response = ad_group_service.mutate_ad_groups(
@@ -263,9 +261,7 @@ def _create_app_ad(client, customer_id, ad_group_resource_name):
     ad_group_ad_service = client.get_service("AdGroupAdService")
     ad_group_ad_operation = client.get_type("AdGroupAdOperation")
     ad_group_ad = ad_group_ad_operation.create
-    ad_group_ad.status = client.get_type(
-        "AdGroupAdStatusEnum"
-    ).AdGroupAdStatus.ENABLED
+    ad_group_ad.status = client.enums.AdGroupAdStatusEnum.ENABLED
     ad_group_ad.ad_group = ad_group_resource_name
     # ad_data is a 'oneof' message so setting app_ad
     # is mutually exclusive with ad data fields such as

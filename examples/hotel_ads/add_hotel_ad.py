@@ -56,9 +56,9 @@ def _add_budget(client, customer_id):
     campaign_budget_operation = client.get_type("CampaignBudgetOperation")
     campaign_budget = campaign_budget_operation.create
     campaign_budget.name = f"Interplanetary Budget {uuid.uuid4()}"
-    campaign_budget.delivery_method = client.get_type(
-        "BudgetDeliveryMethodEnum"
-    ).BudgetDeliveryMethod.STANDARD
+    campaign_budget.delivery_method = (
+        client.enums.BudgetDeliveryMethodEnum.STANDARD
+    )
     campaign_budget.amount_micros = 500000
 
     # Add budget.
@@ -84,9 +84,7 @@ def _add_hotel_ad(client, customer_id, ad_group_resource_name):
     # Set the ad group ad to enabled.  Setting this to paused will cause an error
     # for hotel campaigns.  For hotels pausing should happen at either the ad group or
     # campaign level.
-    ad_group_ad.status = client.get_type(
-        "AdGroupAdStatusEnum"
-    ).AdGroupAdStatus.ENABLED
+    ad_group_ad.status = client.enums.AdGroupAdStatusEnum.ENABLED
     client.copy_from(ad_group_ad.ad.hotel_ad, client.get_type("HotelAdInfo"))
 
     # Add the ad group ad.
@@ -110,10 +108,10 @@ def _add_hotel_ad_group(client, customer_id, campaign_resource_name):
     ad_group_operation = client.get_type("AdGroupOperation")
     ad_group = ad_group_operation.create
     ad_group.name = f"Earth to Mars cruise {uuid.uuid4()}"
-    ad_group.status = client.get_type("AdGroupStatusEnum").AdGroupStatus.ENABLED
+    ad_group.status = client.enums.AdGroupStatusEnum.ENABLED
     ad_group.campaign = campaign_resource_name
     # Sets the ad group type to HOTEL_ADS. This cannot be set to other types.
-    ad_group.type_ = client.get_type("AdGroupTypeEnum").AdGroupType.HOTEL_ADS
+    ad_group.type_ = client.enums.AdGroupTypeEnum.HOTEL_ADS
     ad_group.cpc_bid_micros = 10000000
 
     # Add the ad group.
@@ -149,17 +147,15 @@ def _add_hotel_campaign(
 
     # Configures settings related to hotel campaigns including advertising
     # channel type and hotel setting info.
-    campaign.advertising_channel_type = client.get_type(
-        "AdvertisingChannelTypeEnum"
-    ).AdvertisingChannelType.HOTEL
+    campaign.advertising_channel_type = (
+        client.enums.AdvertisingChannelTypeEnum.HOTEL
+    )
     campaign.hotel_setting.hotel_center_id = hotel_center_account_id
 
     # Recommendation: Set the campaign to PAUSED when creating it to prevent the
     # ads from immediately serving. Set to ENABLED once you've added targeting
     # and the ads are ready to serve.
-    campaign.status = client.get_type(
-        "CampaignStatusEnum"
-    ).CampaignStatus.PAUSED
+    campaign.status = client.enums.CampaignStatusEnum.PAUSED
 
     # Set the bidding strategy to PercentCpc. Only Manual CPC and Percent CPC
     # can be used for hotel campaigns.

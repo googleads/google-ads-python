@@ -74,9 +74,9 @@ def _add_campaign_budget(client, customer_id):
     campaign_budget_operation = client.get_type("CampaignBudgetOperation")
     campaign_budget = campaign_budget_operation.create
     campaign_budget.name = f"Interplanetary Budget {uuid.uuid4()}"
-    campaign_budget.delivery_method = client.get_type(
-        "BudgetDeliveryMethodEnum"
-    ).BudgetDeliveryMethod.STANDARD
+    campaign_budget.delivery_method = (
+        client.enums.BudgetDeliveryMethodEnum.STANDARD
+    )
     campaign_budget.amount_micros = 500000
 
     # Add budget.
@@ -102,9 +102,7 @@ def _add_shopping_product_ad_group_ad(
     ad_group_ad_operation = client.get_type("AdGroupAdOperation")
     ad_group_ad = ad_group_ad_operation.create
     ad_group_ad.ad_group = ad_group_resource_name
-    ad_group_ad.status = client.get_type(
-        "AdGroupAdStatusEnum"
-    ).AdGroupAdStatus.PAUSED
+    ad_group_ad.status = client.enums.AdGroupAdStatusEnum.PAUSED
     client.copy_from(
         ad_group_ad.ad.shopping_product_ad,
         client.get_type("ShoppingProductAdInfo"),
@@ -134,13 +132,11 @@ def _add_shopping_product_ad_group(client, customer_id, campaign_resource_name):
     ad_group_operation = client.get_type("AdGroupOperation")
     ad_group = ad_group_operation.create
     ad_group.name = f"Earth to Mars cruise {uuid.uuid4()}"
-    ad_group.status = client.get_type("AdGroupStatusEnum").AdGroupStatus.ENABLED
+    ad_group.status = client.enums.AdGroupStatusEnum.ENABLED
     ad_group.campaign = campaign_resource_name
     # Sets the ad group type to SHOPPING_PRODUCT_ADS. This is the only value
     # possible for ad groups that contain shopping product ads.
-    ad_group.type_ = client.get_type(
-        "AdGroupTypeEnum"
-    ).AdGroupType.SHOPPING_PRODUCT_ADS
+    ad_group.type_ = client.enums.AdGroupTypeEnum.SHOPPING_PRODUCT_ADS
     ad_group.cpc_bid_micros = 10000000
 
     # Add the ad group.
@@ -173,9 +169,9 @@ def _add_standard_shopping_campaign(
 
     # Configures settings related to shopping campaigns including advertising
     # channel type and shopping setting.
-    campaign.advertising_channel_type = client.get_type(
-        "AdvertisingChannelTypeEnum"
-    ).AdvertisingChannelType.SHOPPING
+    campaign.advertising_channel_type = (
+        client.enums.AdvertisingChannelTypeEnum.SHOPPING
+    )
     campaign.shopping_setting.merchant_id = merchant_center_account_id
 
     # Sets the sales country of products to include in the campaign.
@@ -192,9 +188,7 @@ def _add_standard_shopping_campaign(
     # Recommendation: Set the campaign to PAUSED when creating it to prevent the
     # ads from immediately serving. Set to ENABLED once you've added targeting
     # and the ads are ready to serve.
-    campaign.status = client.get_type(
-        "CampaignStatusEnum"
-    ).CampaignStatus.PAUSED
+    campaign.status = client.enums.CampaignStatusEnum.PAUSED
 
     # Sets the bidding strategy to Manual CPC (with eCPC enabled)
     # Recommendation: Use one of the automated bidding strategies for Shopping
@@ -238,17 +232,17 @@ def _add_default_shopping_listing_group(
     ad_group_criterion_operation = client.get_type("AdGroupCriterionOperation")
     ad_group_criterion = ad_group_criterion_operation.create
     ad_group_criterion.ad_group = ad_group_resource_name
-    ad_group_criterion.status = client.get_type(
-        "AdGroupCriterionStatusEnum"
-    ).AdGroupCriterionStatus.ENABLED
-    ad_group_criterion.listing_group.type_ = client.get_type(
-        "ListingGroupTypeEnum"
-    ).ListingGroupType.UNIT
+    ad_group_criterion.status = client.enums.AdGroupCriterionStatusEnum.ENABLED
+    ad_group_criterion.listing_group.type_ = (
+        client.enums.ListingGroupTypeEnum.UNIT
+    )
     #  Set the bid for products in this listing group unit.
     ad_group_criterion.cpc_bid_micros = 500000
 
-    ad_group_criterion_response = ad_group_criterion_service.mutate_ad_group_criteria(
-        customer_id=customer_id, operations=[ad_group_criterion_operation]
+    ad_group_criterion_response = (
+        ad_group_criterion_service.mutate_ad_group_criteria(
+            customer_id=customer_id, operations=[ad_group_criterion_operation]
+        )
     )
 
     print(

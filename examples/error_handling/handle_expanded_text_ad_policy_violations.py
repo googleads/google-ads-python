@@ -86,9 +86,7 @@ def _create_expanded_text_ad(
     ad_group_ad.ad_group = ad_group_resource_name
     # Set the ad group ad to PAUSED to prevent it from immediately serving.
     # Set to ENABLED once you've added targeting and the ad are ready to serve.
-    ad_group_ad.status = client.get_type(
-        "AdGroupAdStatusEnum"
-    ).AdGroupAdStatus.PAUSED
+    ad_group_ad.status = client.enums.AdGroupAdStatusEnum.PAUSED
     # Sets the expanded text ad info on an ad.
     expanded_text_ad_info = ad_group_ad.ad.expanded_text_ad
     expanded_text_ad_info.headline_part1 = (

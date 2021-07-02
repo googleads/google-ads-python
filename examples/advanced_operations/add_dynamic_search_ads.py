@@ -63,9 +63,9 @@ def _create_budget(client, customer_id):
     campaign_budget = campaign_budget_operation.create
     campaign_budget.name = f"Interplanetary Cruise #{uuid4()}"
     campaign_budget.amount_micros = 50000000
-    campaign_budget.delivery_method = client.get_type(
-        "BudgetDeliveryMethodEnum"
-    ).BudgetDeliveryMethod.STANDARD
+    campaign_budget.delivery_method = (
+        client.enums.BudgetDeliveryMethodEnum.STANDARD
+    )
 
     # Submit the campaign budget operation to add the campaign budget.
     response = campaign_budget_service.mutate_campaign_budgets(
@@ -94,15 +94,13 @@ def _create_campaign(client, customer_id, budget_resource_name):
     campaign_operation = client.get_type("CampaignOperation")
     campaign = campaign_operation.create
     campaign.name = f"Interplanetary Cruise #{uuid4()}"
-    campaign.advertising_channel_type = client.get_type(
-        "AdvertisingChannelTypeEnum"
-    ).AdvertisingChannelType.SEARCH
+    campaign.advertising_channel_type = (
+        client.enums.AdvertisingChannelTypeEnum.SEARCH
+    )
     # Recommendation: Set the campaign to PAUSED when creating it to prevent the
     # ads from immediately serving. Set to ENABLED once you've added targeting
     # and the ads are ready to serve.
-    campaign.status = client.get_type(
-        "CampaignStatusEnum"
-    ).CampaignStatus.PAUSED
+    campaign.status = client.enums.CampaignStatusEnum.PAUSED
     campaign.manual_cpc.enhanced_cpc_enabled = True
     campaign.campaign_budget = budget_resource_name
     # Required: Enable the campaign for DSAs by setting the campaign's dynamic
@@ -148,12 +146,10 @@ def _create_ad_group(client, customer_id, campaign_resource_name):
     # Create an ad group.
     ad_group = ad_group_operation.create
     # Required: set the ad group's type to Dynamic Search Ads.
-    ad_group.type_ = client.get_type(
-        "AdGroupTypeEnum"
-    ).AdGroupType.SEARCH_DYNAMIC_ADS
+    ad_group.type_ = client.enums.AdGroupTypeEnum.SEARCH_DYNAMIC_ADS
     ad_group.name = f"Earth to Mars Cruises {uuid4()}"
     ad_group.campaign = campaign_resource_name
-    ad_group.status = client.get_type("AdGroupStatusEnum").AdGroupStatus.PAUSED
+    ad_group.status = client.enums.AdGroupStatusEnum.PAUSED
     # Recommended: set a tracking URL template for your ad group if you want to
     # use URL tracking software.
     ad_group.tracking_url_template = (
@@ -194,9 +190,7 @@ def _create_expanded_dsa(client, customer_id, ad_group_resource_name):
     # the campaign level.
     ad_group_ad = ad_group_ad_operation.create
     # Optional: set the ad status.
-    ad_group_ad.status = client.get_type(
-        "AdGroupAdStatusEnum"
-    ).AdGroupAdStatus.PAUSED
+    ad_group_ad.status = client.enums.AdGroupAdStatusEnum.PAUSED
     # Set the ad description.
     ad_group_ad.ad.expanded_dynamic_search_ad.description = "Buy tickets now!"
     ad_group_ad.ad_group = ad_group_resource_name
@@ -230,23 +224,21 @@ def _add_webpage_criterion(client, customer_id, ad_group_resource_name):
     # Optional: set custom bid amount.
     criterion.cpc_bid_micros = 10000000
     # Optional: set the status.
-    criterion.status = client.get_type(
-        "AdGroupCriterionStatusEnum"
-    ).AdGroupCriterionStatus.PAUSED
+    criterion.status = client.enums.AdGroupCriterionStatusEnum.PAUSED
 
     # Sets the criterion to match a specific page URL and title.
     criterion.webpage.criterion_name = "Special Offers"
     # First condition info - URL
     webpage_condition_info_url = client.get_type("WebpageConditionInfo")
-    webpage_condition_info_url.operand = client.get_type(
-        "WebpageConditionOperandEnum"
-    ).WebpageConditionOperand.URL
+    webpage_condition_info_url.operand = (
+        client.enums.WebpageConditionOperandEnum.URL
+    )
     webpage_condition_info_url.argument = "/specialoffers"
     # Second condition info - Page title
     webpage_condition_info_page_title = client.get_type("WebpageConditionInfo")
-    webpage_condition_info_page_title.operand = client.get_type(
-        "WebpageConditionOperandEnum"
-    ).WebpageConditionOperand.PAGE_TITLE
+    webpage_condition_info_page_title.operand = (
+        client.enums.WebpageConditionOperandEnum.PAGE_TITLE
+    )
     webpage_condition_info_page_title.argument = "Special Offer"
     # Add first and second condition info
     criterion.webpage.conditions.extend(

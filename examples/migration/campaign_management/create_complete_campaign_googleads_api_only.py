@@ -55,9 +55,7 @@ def _create_campaign_budget(client, customer_id):
     operation = client.get_type("CampaignBudgetOperation")
     criterion = operation.create
     criterion.name = f"Interplanetary Cruise Budget {uuid.uuid4()}"
-    criterion.delivery_method = client.get_type(
-        "BudgetDeliveryMethodEnum"
-    ).BudgetDeliveryMethod.STANDARD
+    criterion.delivery_method = client.enums.BudgetDeliveryMethodEnum.STANDARD
     criterion.amount_micros = 500000
 
     try:
@@ -123,15 +121,13 @@ def _create_campaign(client, customer_id, campaign_budget):
     campaign = operation.create
     campaign_service = client.get_service("CampaignService")
     campaign.name = f"Interplanetary Cruise#{uuid.uuid4()}"
-    campaign.advertising_channel_type = client.get_type(
-        "AdvertisingChannelTypeEnum"
-    ).AdvertisingChannelType.SEARCH
+    campaign.advertising_channel_type = (
+        client.enums.AdvertisingChannelTypeEnum.SEARCH
+    )
     # Recommendation: Set the campaign to PAUSED when creating it to stop the
     # ads from immediately serving. Set to ENABLED once you've added
     # targeting and the ads are ready to serve.
-    campaign.status = client.get_type(
-        "CampaignStatusEnum"
-    ).CampaignStatus.PAUSED
+    campaign.status = client.enums.CampaignStatusEnum.PAUSED
     campaign.manual_cpc.enhanced_cpc_enabled = True
     campaign.campaign_budget = campaign_budget.resource_name
     campaign.network_settings.target_google_search = True
@@ -209,10 +205,8 @@ def _create_ad_group(client, customer_id, campaign):
     adgroup_service = client.get_service("AdGroupService")
     adgroup.name = f"Earth to Mars Cruises #{uuid.uuid4()}"
     adgroup.campaign = campaign.resource_name
-    adgroup.status = client.get_type("AdGroupStatusEnum").AdGroupStatus.ENABLED
-    adgroup.type = client.get_type(
-        "AdGroupTypeEnum"
-    ).AdGroupType.SEARCH_STANDARD
+    adgroup.status = client.enums.AdGroupStatusEnum.ENABLED
+    adgroup.type = client.enums.AdGroupTypeEnum.SEARCH_STANDARD
     adgroup.cpc_bid_micros = 10000000
 
     try:
@@ -276,9 +270,7 @@ def _create_text_ads(client, customer_id, ad_group):
         operation = client.get_type("AdGroupAdOperation")
         ad_group_operation = operation.create
         ad_group_operation.ad_group = ad_group.resource_name
-        ad_group_operation.status = client.get_type(
-            "AdGroupAdStatusEnum"
-        ).AdGroupAdStatus.PAUSED
+        ad_group_operation.status = client.enums.AdGroupAdStatusEnum.PAUSED
         ad_group_operation.ad.expanded_text_ad.headline_part1 = (
             f"Cruise to Mars #{str(uuid.uuid4())[:4]}"
         )
@@ -382,13 +374,13 @@ def _create_keywords(client, customer_id, ad_group, keywords_to_add):
         operation = client.get_type("AdGroupCriterionOperation", version="v4")
         ad_group_criterion_operation = operation.create
         ad_group_criterion_operation.ad_group = ad_group.resource_name
-        ad_group_criterion_operation.status = client.get_type(
-            "AdGroupCriterionStatusEnum"
-        ).AdGroupCriterionStatus.ENABLED
+        ad_group_criterion_operation.status = (
+            client.enums.AdGroupCriterionStatusEnum.ENABLED
+        )
         ad_group_criterion_operation.keyword.text = keyword
-        ad_group_criterion_operation.keyword.match_type = client.get_type(
-            "KeywordMatchTypeEnum"
-        ).KeywordMatchType.EXACT
+        ad_group_criterion_operation.keyword.match_type = (
+            client.enums.KeywordMatchTypeEnum.EXACT
+        )
         ad_group_criterion_operations.append(operation)
 
     try:

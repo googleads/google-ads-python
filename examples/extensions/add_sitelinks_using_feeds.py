@@ -76,13 +76,11 @@ def _create_feed(client, customer_id):
     feed_operation = client.get_type("FeedOperation")
     feed = feed_operation.create
     feed.name = f"Sitelinks Feed {uuid.uuid4()}"
-    feed.origin = client.get_type("FeedOriginEnum").FeedOrigin.USER
+    feed.origin = client.enums.FeedOriginEnum.USER
     # Specify the column name and data type. This is just raw data at this
     # point, and not yet linked to any particular purpose. The names are used
     # to help us remember what they are intended for later.
-    feed_attribute_type_enum = client.get_type(
-        "FeedAttributeTypeEnum"
-    ).FeedAttributeType
+    feed_attribute_type_enum = client.enums.FeedAttributeTypeEnum
     feed.attributes.extend(
         [
             _create_feed_attribute(
@@ -263,14 +261,10 @@ def _create_feed_mapping(client, customer_id, feed):
 
     feed_mapping_operation = client.get_type("FeedMappingOperation")
     feed_mapping = feed_mapping_operation.create
-    feed_mapping.placeholder_type = client.get_type(
-        "PlaceholderTypeEnum"
-    ).PlaceholderType.SITELINK
+    feed_mapping.placeholder_type = client.enums.PlaceholderTypeEnum.SITELINK
     feed_mapping.feed = feed.resource_name
 
-    sitelink_placeholder_field_enum = client.get_type(
-        "SitelinkPlaceholderFieldEnum"
-    ).SitelinkPlaceholderField
+    sitelink_placeholder_field_enum = client.enums.SitelinkPlaceholderFieldEnum
     field_names_map = {
         "Link Text": sitelink_placeholder_field_enum.TEXT,
         "Link Final URL": sitelink_placeholder_field_enum.FINAL_URLS,
@@ -324,7 +318,7 @@ def _create_campaign_feed(client, customer_id, campaign_id, feed):
         ",EQUALS(CONTEXT.DEVICE,'Mobile'))"
     )
     campaign_feed.placeholder_types.append(
-        client.get_type("PlaceholderTypeEnum").PlaceholderType.SITELINK
+        client.enums.PlaceholderTypeEnum.SITELINK
     )
 
     response = campaign_feed_service.mutate_campaign_feeds(

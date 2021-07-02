@@ -46,21 +46,15 @@ def main(client, customer_id, ad_group_id):
     media_file_service = client.get_service("MediaFileService")
     media_file_logo_op = client.get_type("MediaFileOperation")
     media_file_logo = media_file_logo_op.create
-    media_file_logo.type_ = client.get_type("MediaTypeEnum").MediaType.IMAGE
+    media_file_logo.type_ = client.enums.MediaTypeEnum.IMAGE
     media_file_logo.image.data = logo_img_bytes
-    media_file_logo.mime_type = client.get_type(
-        "MimeTypeEnum"
-    ).MimeType.IMAGE_PNG
+    media_file_logo.mime_type = client.enums.MimeTypeEnum.IMAGE_PNG
 
     media_file_marketing_op = client.get_type("MediaFileOperation")
     media_file_marketing = media_file_marketing_op.create
-    media_file_marketing.type_ = client.get_type(
-        "MediaTypeEnum"
-    ).MediaType.IMAGE
+    media_file_marketing.type_ = client.enums.MediaTypeEnum.IMAGE
     media_file_marketing.image.data = marketing_img_bytes
-    media_file_marketing.mime_type = client.get_type(
-        "MimeTypeEnum"
-    ).MimeType.IMAGE_JPEG
+    media_file_marketing.mime_type = client.enums.MimeTypeEnum.IMAGE_JPEG
 
     image_response = media_file_service.mutate_media_files(
         customer_id=customer_id,
@@ -87,9 +81,7 @@ def main(client, customer_id, ad_group_id):
     ad_group_ad.ad.final_urls.append("http://www.example.com")
     ad_group_ad.ad.name = f"Gmail Ad #{uuid4()}"
 
-    ad_group_ad.status = client.get_type(
-        "AdGroupAdStatusEnum"
-    ).AdGroupAdStatus.PAUSED
+    ad_group_ad.status = client.enums.AdGroupAdStatusEnum.PAUSED
     ad_group_ad.ad_group = ad_group_service.ad_group_path(
         customer_id, ad_group_id
     )

@@ -33,15 +33,13 @@ def main(client, customer_id):
     # Create conversion action.
     conversion_action = conversion_action_operation.create
     conversion_action.name = f"Earth to Mars Cruises Conversion {uuid.uuid4()}"
-    conversion_action.type_ = client.get_type(
-        "ConversionActionTypeEnum"
-    ).ConversionActionType.UPLOAD_CLICKS
-    conversion_action.category = client.get_type(
-        "ConversionActionCategoryEnum"
-    ).ConversionActionCategory.DEFAULT
-    conversion_action.status = client.get_type(
-        "ConversionActionStatusEnum"
-    ).ConversionActionStatus.ENABLED
+    conversion_action.type_ = (
+        client.enums.ConversionActionTypeEnum.UPLOAD_CLICKS
+    )
+    conversion_action.category = (
+        client.enums.ConversionActionCategoryEnum.DEFAULT
+    )
+    conversion_action.status = client.enums.ConversionActionStatusEnum.ENABLED
     conversion_action.view_through_lookback_window_days = 15
 
     # Create a value settings object.
@@ -50,8 +48,11 @@ def main(client, customer_id):
     value_settings.always_use_default_value = True
 
     # Add the conversion action.
-    conversion_action_response = conversion_action_service.mutate_conversion_actions(
-        customer_id=customer_id, operations=[conversion_action_operation],
+    conversion_action_response = (
+        conversion_action_service.mutate_conversion_actions(
+            customer_id=customer_id,
+            operations=[conversion_action_operation],
+        )
     )
 
     print(

@@ -81,9 +81,7 @@ def _create_add_customizer_feed(client, customer_id, feed_name):
     # Creates three feed attributes: a name, a price and a date.
     # The attribute names are arbitrary choices and will be used as
     # placeholders in the ad text fields.
-    feed_attr_type_enum = client.get_type(
-        "FeedAttributeTypeEnum"
-    ).FeedAttributeType
+    feed_attr_type_enum = client.enums.FeedAttributeTypeEnum
 
     name_attr = client.get_type("FeedAttribute")
     name_attr.type_ = feed_attr_type_enum.STRING
@@ -102,7 +100,7 @@ def _create_add_customizer_feed(client, customer_id, feed_name):
 
     feed.name = feed_name
     feed.attributes.extend([name_attr, price_attr, date_attr])
-    feed.origin = client.get_type("FeedOriginEnum").FeedOrigin.USER
+    feed.origin = client.enums.FeedOriginEnum.USER
 
     feed_service = client.get_service("FeedService")
 
@@ -151,7 +149,6 @@ def _get_feed_attributes(client, customer_id, feed_resource_name):
     except GoogleAdsException as ex:
         _handle_googleads_exception(ex)
 
-    feed_attr_type_enum = client.get_type("FeedAttributeTypeEnum")
     feed_details = {}
     for feed_attribute in feed.attributes:
         name = feed_attribute.name
@@ -166,7 +163,10 @@ def _get_feed_attributes(client, customer_id, feed_resource_name):
 
 # [START add_ad_customizer_2]
 def _create_ad_customizer_mapping(
-    client, customer_id, ad_customizer_feed_resource_name, feed_details,
+    client,
+    customer_id,
+    ad_customizer_feed_resource_name,
+    feed_details,
 ):
     """Creates a feed mapping for a given feed.
 
@@ -177,9 +177,7 @@ def _create_ad_customizer_mapping(
             feed.
         feed_details: a dict mapping feed attribute names to their IDs.
     """
-    placeholder_field_enum = client.get_type(
-        "AdCustomizerPlaceholderFieldEnum"
-    ).AdCustomizerPlaceholderField
+    placeholder_field_enum = client.enums.AdCustomizerPlaceholderFieldEnum
 
     # Map the feed attributes to ad customizer placeholder fields. For a full
     # list of ad customizer placeholder fields, see:
@@ -199,9 +197,9 @@ def _create_ad_customizer_mapping(
     feed_mapping_op = client.get_type("FeedMappingOperation")
     feed_mapping = feed_mapping_op.create
     feed_mapping.feed = ad_customizer_feed_resource_name
-    feed_mapping.placeholder_type = client.get_type(
-        "PlaceholderTypeEnum"
-    ).PlaceholderType.AD_CUSTOMIZER
+    feed_mapping.placeholder_type = (
+        client.enums.PlaceholderTypeEnum.AD_CUSTOMIZER
+    )
     feed_mapping.attribute_field_mappings.extend(
         [name_field_mapping, price_field_mapping, date_field_mapping]
     )

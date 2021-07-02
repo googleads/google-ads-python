@@ -36,7 +36,7 @@ def main(client, customer_id, ad_group_id, cpc_bid_micro_amount):
     ad_group.resource_name = ad_group_service.ad_group_path(
         customer_id, ad_group_id
     )
-    ad_group.status = client.get_type("AdGroupStatusEnum").AdGroupStatus.PAUSED
+    ad_group.status = client.enums.AdGroupStatusEnum.PAUSED
     ad_group.cpc_bid_micros = cpc_bid_micro_amount
     client.copy_from(
         ad_group_operation.update_mask,

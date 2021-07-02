@@ -266,9 +266,9 @@ def _build_campaign_budget_operation(client, customer_id):
     )
     campaign_budget.resource_name = resource_name
     campaign_budget.name = f"Interplanetary Cruise Budget #{uuid4()}"
-    campaign_budget.delivery_method = client.get_type(
-        "BudgetDeliveryMethodEnum"
-    ).BudgetDeliveryMethod.STANDARD
+    campaign_budget.delivery_method = (
+        client.enums.BudgetDeliveryMethodEnum.STANDARD
+    )
     campaign_budget.amount_micros = 5000000
 
     return campaign_budget_operation
@@ -318,15 +318,13 @@ def _build_campaign_operation(
         customer_id, campaign_id
     )
     campaign.name = f"Batch job campaign #{customer_id}.{campaign_id}"
-    campaign.advertising_channel_type = client.get_type(
-        "AdvertisingChannelTypeEnum"
-    ).AdvertisingChannelType.SEARCH
+    campaign.advertising_channel_type = (
+        client.enums.AdvertisingChannelTypeEnum.SEARCH
+    )
     # Recommendation: Set the campaign to PAUSED when creating it to prevent
     # the ads from immediately serving. Set to ENABLED once you've added
     # targeting and the ads are ready to serve.
-    campaign.status = client.get_type(
-        "CampaignStatusEnum"
-    ).CampaignStatus.PAUSED
+    campaign.status = client.enums.CampaignStatusEnum.PAUSED
     # Set the bidding strategy and type by setting manual_cpc equal to an empty
     # ManualCpc instance.
     client.copy_from(campaign.manual_cpc, client.get_type("ManualCpc"))
@@ -363,9 +361,9 @@ def _build_campaign_criterion_operation(client, campaign_operation):
     # Creates a campaign criterion.
     campaign_criterion = campaign_criterion_operation.create
     campaign_criterion.keyword.text = "venus"
-    campaign_criterion.keyword.match_type = client.get_type(
-        "KeywordMatchTypeEnum"
-    ).KeywordMatchType.BROAD
+    campaign_criterion.keyword.match_type = (
+        client.enums.KeywordMatchTypeEnum.BROAD
+    )
     # Sets the campaign criterion as a negative criterion.
     campaign_criterion.negative = True
     campaign_criterion.campaign = campaign_operation.create.resource_name
@@ -417,9 +415,7 @@ def _build_ad_group_operation(client, customer_id, campaign_operation):
     )
     ad_group.name = f"Batch job ad group #{uuid4()}.{ad_group_id}"
     ad_group.campaign = campaign_operation.create.resource_name
-    ad_group.type_ = client.get_type(
-        "AdGroupTypeEnum"
-    ).AdGroupType.SEARCH_STANDARD
+    ad_group.type_ = client.enums.AdGroupTypeEnum.SEARCH_STANDARD
     ad_group.cpc_bid_micros = 10000000
 
     return ad_group_operation
@@ -481,13 +477,11 @@ def _build_ad_group_criterion_operation(
     if not is_valid:
         ad_group_criterion.keyword.text += "!!!"
 
-    ad_group_criterion.keyword.match_type = client.get_type(
-        "KeywordMatchTypeEnum"
-    ).KeywordMatchType.BROAD
+    ad_group_criterion.keyword.match_type = (
+        client.enums.KeywordMatchTypeEnum.BROAD
+    )
     ad_group_criterion.ad_group = ad_group_operation.create.resource_name
-    ad_group_criterion.status = client.get_type(
-        "AdGroupCriterionStatusEnum"
-    ).AdGroupCriterionStatus.ENABLED
+    ad_group_criterion.status = client.enums.AdGroupCriterionStatusEnum.ENABLED
 
     return ad_group_criterion_operation
 
@@ -527,9 +521,7 @@ def _build_ad_group_ad_operation(client, ad_group_operation):
 
     ad_group_ad.ad.final_urls.append("http://www.example.com")
     ad_group_ad.ad_group = ad_group_operation.create.resource_name
-    ad_group_ad.status = client.get_type(
-        "AdGroupAdStatusEnum"
-    ).AdGroupAdStatus.PAUSED
+    ad_group_ad.status = client.enums.AdGroupAdStatusEnum.PAUSED
 
     return ad_group_ad_operation
 

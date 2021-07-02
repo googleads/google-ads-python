@@ -32,9 +32,7 @@ def main(client, customer_id, ad_group_id):
     ad_group_ad.ad_group = ad_group_service.ad_group_path(
         customer_id, ad_group_id
     )
-    ad_group_ad.status = client.get_type(
-        "AdGroupAdStatusEnum"
-    ).AdGroupAdStatus.PAUSED
+    ad_group_ad.status = client.enums.AdGroupAdStatusEnum.PAUSED
 
     # Create an expanded text ad.
     ad_group_ad.ad.expanded_text_ad.description = "Luxury Cruise to Mars"

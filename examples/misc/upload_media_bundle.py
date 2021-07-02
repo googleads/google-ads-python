@@ -32,7 +32,7 @@ def main(client, customer_id):
     media_file_operation = client.get_type("MediaFileOperation")
     media_file = media_file_operation.create
     media_file.name = "Ad Media Bundle"
-    media_file.type_ = client.get_type("MediaTypeEnum").MediaType.MEDIA_BUNDLE
+    media_file.type_ = client.enums.MediaTypeEnum.MEDIA_BUNDLE
     # Download the ZIP as bytes from the URL
     media_file.media_bundle.data = requests.get(BUNDLE_URL).content
 

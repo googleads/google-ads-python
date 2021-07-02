@@ -72,9 +72,7 @@ def _create_media_bundle_asset(client, customer_id):
     # Construct an asset operation and populate its fields.
     asset_operation = client.get_type("AssetOperation")
     media_bundle_asset = asset_operation.create
-    media_bundle_asset.type_ = client.get_type(
-        "AssetTypeEnum"
-    ).AssetType.MEDIA_BUNDLE
+    media_bundle_asset.type_ = client.enums.AssetTypeEnum.MEDIA_BUNDLE
     # The HTML5 zip file contains all the HTML, CSS, and images needed for the
     # HTML5 ad. For help on creating an HTML5 zip file, check out Google Web
     # Designer (https://www.google.com/webdesigner/).
@@ -117,9 +115,7 @@ def _create_display_upload_ad_group_ad(
 
     # Configure the ad group ad fields.
     ad_group_ad = ad_group_ad_operation.create
-    ad_group_ad.status = client.get_type(
-        "AdGroupAdStatusEnum"
-    ).AdGroupAdStatus.PAUSED
+    ad_group_ad.status = client.enums.AdGroupAdStatusEnum.PAUSED
     ad_group_ad.ad_group = client.get_service("AdGroupService").ad_group_path(
         customer_id, ad_group_id
     )
@@ -135,9 +131,9 @@ def _create_display_upload_ad_group_ad(
     display_upload_ad.display_upload_ad.media_bundle.asset = (
         ad_asset_resource_name
     )
-    display_upload_ad.display_upload_ad.display_upload_product_type = client.get_type(
-        "DisplayUploadProductTypeEnum"
-    ).DisplayUploadProductType.HTML5_UPLOAD_AD
+    display_upload_ad.display_upload_ad.display_upload_product_type = (
+        client.enums.DisplayUploadProductTypeEnum.HTML5_UPLOAD_AD
+    )
 
     # Add the ad group ad to the client account and display the resulting
     # ad's resource name.

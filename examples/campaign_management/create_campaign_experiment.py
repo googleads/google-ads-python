@@ -37,9 +37,9 @@ def main(client, customer_id, base_campaign_id, draft_id):
     campaign_experiment.campaign_draft = campaign_draft_resource_name
     campaign_experiment.name = f"Campaign Experiment #{uuid.uuid4()}"
     campaign_experiment.traffic_split_percent = 50
-    campaign_experiment.traffic_split_type = client.get_type(
-        "CampaignExperimentTrafficSplitTypeEnum"
-    ).CampaignExperimentTrafficSplitType.RANDOM_QUERY
+    campaign_experiment.traffic_split_type = (
+        client.enums.CampaignExperimentTrafficSplitTypeEnum.RANDOM_QUERY
+    )
 
     try:
         campaign_experiment_service = client.get_service(
@@ -48,8 +48,10 @@ def main(client, customer_id, base_campaign_id, draft_id):
 
         # A Long Running Operation (LRO) is returned from this
         # asynchronous request by the API.
-        campaign_experiment_lro = campaign_experiment_service.create_campaign_experiment(
-            customer_id=customer_id, campaign_experiment=campaign_experiment
+        campaign_experiment_lro = (
+            campaign_experiment_service.create_campaign_experiment(
+                customer_id=customer_id, campaign_experiment=campaign_experiment
+            )
         )
     except GoogleAdsException as ex:
         print(

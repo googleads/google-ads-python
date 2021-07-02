@@ -63,14 +63,14 @@ def main(client, customer_id, campaign_id, image_asset_id):
     ces.campaign = client.get_service("CampaignService").campaign_path(
         customer_id, campaign_id
     )
-    ces.extension_type = client.get_type(
-        "ExtensionTypeEnum"
-    ).ExtensionType.IMAGE
+    ces.extension_type = client.enums.ExtensionTypeEnum.IMAGE
     ces.extension_feed_items.append(image_resource_name)
 
-    response = campaign_extension_setting_service.mutate_campaign_extension_settings(
-        customer_id=customer_id,
-        operations=[campaign_extension_setting_operation],
+    response = (
+        campaign_extension_setting_service.mutate_campaign_extension_settings(
+            customer_id=customer_id,
+            operations=[campaign_extension_setting_operation],
+        )
     )
     print(
         "Created a campaign extension setting with resource name: "

@@ -91,7 +91,7 @@ def main(
     )
     # Since this feed's feed items will be managed by Google, you must set its
     # origin to GOOGLE.
-    gmb_feed.origin = client.get_type("FeedOriginEnum").FeedOrigin.GOOGLE
+    gmb_feed.origin = client.enums.FeedOriginEnum.GOOGLE
 
     # Optional: Delete all existing location extension feeds. This is an
     # optional step, and is required for this code example to run correctly
@@ -167,16 +167,16 @@ def main(
         customer_feed = customer_feed_operation.create
         customer_feed.feed = feed_resource_name
         customer_feed.placeholder_types.append(
-            client.get_type("PlaceholderTypeEnum").PlaceholderType.LOCATION
+            client.enums.PlaceholderTypeEnum.LOCATION
         )
         # The function string "IDENTITY(true)" will enable this feed.
         true_operand = client.get_type("Operand")
         true_operand.constant_operand.boolean_value = True
         customer_feed.matching_function.left_operands.append(true_operand)
         customer_feed.matching_function.function_string = "IDENTITY(true)"
-        customer_feed.matching_function.operator = client.get_type(
-            "MatchingFunctionOperatorEnum"
-        ).MatchingFunctionOperator.IDENTITY
+        customer_feed.matching_function.operator = (
+            client.enums.MatchingFunctionOperatorEnum.IDENTITY
+        )
 
         customer_feed_response = customer_feed_service.mutate_customer_feeds(
             customer_id=customer_id, operations=[customer_feed_operation]

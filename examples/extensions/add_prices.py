@@ -30,22 +30,18 @@ def main(client, customer_id, campaign_id):
     """The main method that creates all necessary entities for the example."""
     # Create the price extension feed item
     price_feed_item = client.get_type("PriceFeedItem")
-    price_feed_item.type_ = client.get_type(
-        "PriceExtensionTypeEnum"
-    ).PriceExtensionType.SERVICES
+    price_feed_item.type_ = client.enums.PriceExtensionTypeEnum.SERVICES
     # Optional: set price qualifier
-    price_feed_item.price_qualifier = client.get_type(
-        "PriceExtensionPriceQualifierEnum"
-    ).PriceExtensionPriceQualifier.FROM
+    price_feed_item.price_qualifier = (
+        client.enums.PriceExtensionPriceQualifierEnum.FROM
+    )
     price_feed_item.tracking_url_template = (
         "http://tracker.example.com/?u={lpurl}"
     )
     price_feed_item.language_code = "en"
 
     # To create a price extension, at least three price offerings are needed.
-    price_extension_price_unit_enum = client.get_type(
-        "PriceExtensionPriceUnitEnum"
-    ).PriceExtensionPriceUnit
+    price_extension_price_unit_enum = client.enums.PriceExtensionPriceUnitEnum
     price_feed_item.price_offerings.extend(
         [
             _create_price_offer(
@@ -88,15 +84,13 @@ def main(client, customer_id, campaign_id):
         "ExtensionFeedItemOperation"
     )
     extension_feed_item = extension_feed_item_operation.create
-    extension_feed_item.extension_type = client.get_type(
-        "ExtensionTypeEnum"
-    ).ExtensionType.PRICE
+    extension_feed_item.extension_type = client.enums.ExtensionTypeEnum.PRICE
     client.copy_from(extension_feed_item.price_feed_item, price_feed_item)
     extension_feed_item.targeted_campaign = campaign_service.campaign_path(
         customer_id, campaign_id
     )
-    day_of_week_enum = client.get_type("DayOfWeekEnum").DayOfWeek
-    minute_of_hour_enum = client.get_type("MinuteOfHourEnum").MinuteOfHour
+    day_of_week_enum = client.enums.DayOfWeekEnum
+    minute_of_hour_enum = client.enums.MinuteOfHourEnum
     extension_feed_item.ad_schedules.extend(
         [
             _create_ad_schedule_info(

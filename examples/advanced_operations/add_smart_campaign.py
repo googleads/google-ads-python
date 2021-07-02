@@ -62,7 +62,10 @@ def main(
         client, keyword_theme_constants
     )
     suggested_budget_amount = _get_budget_suggestion(
-        client, customer_id, business_location_id, keyword_theme_infos,
+        client,
+        customer_id,
+        business_location_id,
+        keyword_theme_infos,
     )
     # [START add_smart_campaign_7]
     # The below methods create and return MutateOperations that we later
@@ -145,7 +148,10 @@ def _get_keyword_theme_constants(client, keyword_text):
 
 # [START add_smart_campaign_1]
 def _get_budget_suggestion(
-    client, customer_id, business_location_id, keyword_theme_infos,
+    client,
+    customer_id,
+    business_location_id,
+    keyword_theme_infos,
 ):
     """Retrieves a suggested budget amount for a new budget.
 
@@ -215,15 +221,13 @@ def _get_budget_suggestion(
     # Mondays from 9am to 5pm.
     ad_schedule_info = client.get_type("AdScheduleInfo")
     # Set the day of this schedule as Monday.
-    ad_schedule_info.day_of_week = client.get_type(
-        "DayOfWeekEnum"
-    ).DayOfWeek.MONDAY
+    ad_schedule_info.day_of_week = client.enums.DayOfWeekEnum.MONDAY
     # Set the start hour to 9am.
     ad_schedule_info.start_hour = 9
     # Set the end hour to 5pm.
     ad_schedule_info.end_hour = 17
     # Set the start and end minute of zero, for example: 9:00 and 5:00.
-    zero_minute_of_hour = client.get_type("MinuteOfHourEnum").MinuteOfHour.ZERO
+    zero_minute_of_hour = client.enums.MinuteOfHourEnum.ZERO
     ad_schedule_info.start_minute = zero_minute_of_hour
     ad_schedule_info.end_minute = zero_minute_of_hour
     suggestion_info.ad_schedules.append(ad_schedule_info)
@@ -291,9 +295,7 @@ def _create_campaign_budget_operation(
     # A budget used for Smart campaigns must have the type SMART_CAMPAIGN.
     # Note that the field name "type_" is an implementation detail in Python,
     # the field's actual name is "type".
-    campaign_budget.type_ = client.get_type(
-        "BudgetTypeEnum"
-    ).BudgetType.SMART_CAMPAIGN
+    campaign_budget.type_ = client.enums.BudgetTypeEnum.SMART_CAMPAIGN
     # The suggested budget amount from the SmartCampaignSuggestService is
     # a daily budget. We don't need to specify that here, because the budget
     # period already defaults to DAILY.
@@ -327,17 +329,15 @@ def _create_smart_campaign_operation(client, customer_id):
     campaign.name = f"Smart campaign #{uuid4()}"
     # Set the campaign status as PAUSED. The campaign is the only entity in
     # the mutate request that should have its' status set.
-    campaign.status = client.get_type(
-        "CampaignStatusEnum"
-    ).CampaignStatus.PAUSED
+    campaign.status = client.enums.CampaignStatusEnum.PAUSED
     # Campaign.AdvertisingChannelType is required to be SMART.
-    campaign.advertising_channel_type = client.get_type(
-        "AdvertisingChannelTypeEnum"
-    ).AdvertisingChannelType.SMART
+    campaign.advertising_channel_type = (
+        client.enums.AdvertisingChannelTypeEnum.SMART
+    )
     # Campaign.AdvertisingChannelSubType is required to be SMART_CAMPAIGN.
-    campaign.advertising_channel_sub_type = client.get_type(
-        "AdvertisingChannelSubTypeEnum"
-    ).AdvertisingChannelSubType.SMART_CAMPAIGN
+    campaign.advertising_channel_sub_type = (
+        client.enums.AdvertisingChannelSubTypeEnum.SMART_CAMPAIGN
+    )
     # Assign the resource name with a temporary ID.
     campaign_service = client.get_service("CampaignService")
     campaign.resource_name = campaign_service.campaign_path(
@@ -436,9 +436,7 @@ def _create_campaign_criterion_operations(
             customer_id, _SMART_CAMPAIGN_TEMPORARY_ID
         )
         # Set the criterion type to KEYWORD_THEME.
-        campaign_criterion.type_ = client.get_type(
-            "CriterionTypeEnum"
-        ).CriterionType.KEYWORD_THEME
+        campaign_criterion.type_ = client.enums.CriterionTypeEnum.KEYWORD_THEME
         # Set the keyword theme to the given KeywordThemeInfo.
         campaign_criterion.keyword_theme = info
         # Add the mutate operation to the list of other operations.
@@ -478,9 +476,7 @@ def _create_ad_group_operation(client, customer_id):
         customer_id, _SMART_CAMPAIGN_TEMPORARY_ID
     )
     # The ad group type must be set to SMART_CAMPAIGN_ADS.
-    ad_group.type_ = client.get_type(
-        "AdGroupTypeEnum"
-    ).AdGroupType.SMART_CAMPAIGN_ADS
+    ad_group.type_ = client.enums.AdGroupTypeEnum.SMART_CAMPAIGN_ADS
 
     return mutate_operation
     # [END add_smart_campaign_5]
@@ -507,9 +503,7 @@ def _create_ad_group_ad_operation(client, customer_id):
         customer_id, _AD_GROUP_TEMPORARY_ID
     )
     # Set the type to SMART_CAMPAIGN_AD.
-    ad_group_ad.ad.type_ = client.get_type(
-        "AdTypeEnum"
-    ).AdType.SMART_CAMPAIGN_AD
+    ad_group_ad.ad.type_ = client.enums.AdTypeEnum.SMART_CAMPAIGN_AD
     ad = ad_group_ad.ad.smart_campaign_ad
     # At most, three headlines can be specified for a Smart campaign ad.
     headline_1 = client.get_type("AdTextAsset")

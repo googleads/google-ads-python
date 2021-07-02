@@ -88,11 +88,9 @@ def _create_feed(client, customer_id):
     # Create a new feed.
     feed = feed_operation.create
     feed.name = f"DSA Feed #{uuid.uuid4()}"
-    feed.origin = client.get_type("FeedOriginEnum").FeedOrigin.USER
+    feed.origin = client.enums.FeedOriginEnum.USER
 
-    feed_attribute_type_enum = client.get_type(
-        "FeedAttributeTypeEnum"
-    ).FeedAttributeType
+    feed_attribute_type_enum = client.enums.FeedAttributeTypeEnum
 
     # Create the feed's attributes.
     feed_attribute_url = client.get_type("FeedAttribute")
@@ -169,13 +167,11 @@ def _create_feed_mapping(client, customer_id, feed_details):
     feed_mapping_operation = client.get_type("FeedMappingOperation")
     # Create a new feed mapping.
     feed_mapping = feed_mapping_operation.create
-    feed_mapping.criterion_type = client.get_type(
-        "FeedMappingCriterionTypeEnum"
-    ).FeedMappingCriterionType.DSA_PAGE_FEED
+    feed_mapping.criterion_type = (
+        client.enums.FeedMappingCriterionTypeEnum.DSA_PAGE_FEED
+    )
     feed_mapping.feed = feed_details.resource_name
-    dsa_page_feed_field_enum = client.get_type(
-        "DsaPageFeedCriterionFieldEnum"
-    ).DsaPageFeedCriterionField
+    dsa_page_feed_field_enum = client.enums.DsaPageFeedCriterionFieldEnum
 
     url_field_mapping = client.get_type("AttributeFieldMapping")
     url_field_mapping.feed_attribute_id = feed_details.url_attribute_id
@@ -343,9 +339,9 @@ def _add_dsa_targeting(client, customer_id, ad_group_resource_name, label):
         "WebpageConditionInfo"
     )  # ad_group_criterion.webpage.conditions.add()
     webpage_criterion_info.argument = label
-    webpage_criterion_info.operand = client.get_type(
-        "WebpageConditionOperandEnum"
-    ).WebpageConditionOperand.CUSTOM_LABEL
+    webpage_criterion_info.operand = (
+        client.enums.WebpageConditionOperandEnum.CUSTOM_LABEL
+    )
     ad_group_criterion.webpage.conditions.append(webpage_criterion_info)
 
     # Retrieve the ad group criterion service.

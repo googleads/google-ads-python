@@ -128,16 +128,18 @@ def _create_budget(client, customer_id):
     campaign_budget_operation = client.get_type("CampaignBudgetOperation")
     campaign_budget = campaign_budget_operation.create
     campaign_budget.name = f"Interplanetary Cruise Budget #{uuid4()}"
-    campaign_budget.delivery_method = client.get_type(
-        "BudgetDeliveryMethodEnum"
-    ).BudgetDeliveryMethod.STANDARD
+    campaign_budget.delivery_method = (
+        client.enums.BudgetDeliveryMethodEnum.STANDARD
+    )
     campaign_budget.amount_micros = 500000
 
     campaign_budget_service = client.get_service("CampaignBudgetService")
 
     try:
-        campaign_budget_response = campaign_budget_service.mutate_campaign_budgets(
-            customer_id=customer_id, operations=[campaign_budget_operation]
+        campaign_budget_response = (
+            campaign_budget_service.mutate_campaign_budgets(
+                customer_id=customer_id, operations=[campaign_budget_operation]
+            )
         )
     except GoogleAdsException as ex:
         _handle_googleads_exception(ex)
@@ -152,19 +154,17 @@ def _create_smart_display_campaign(client, customer_id, budget_resource_name):
     campaign_operation = client.get_type("CampaignOperation")
     campaign = campaign_operation.create
     campaign.name = f"Smart Display Campaign #{uuid4()}"
-    advertising_channel_type_enum = client.get_type(
-        "AdvertisingChannelTypeEnum"
-    ).AdvertisingChannelType
+    advertising_channel_type_enum = client.enums.AdvertisingChannelTypeEnum
     campaign.advertising_channel_type = advertising_channel_type_enum.DISPLAY
-    advertising_channel_sub_type_enum = client.get_type(
-        "AdvertisingChannelSubTypeEnum"
-    ).AdvertisingChannelSubType
+    advertising_channel_sub_type_enum = (
+        client.enums.AdvertisingChannelSubTypeEnum
+    )
     # Smart Display campaign requires the advertising_channel_sub_type as
     # "DISPLAY_SMART_CAMPAIGN".
     campaign.advertising_channel_sub_type = (
         advertising_channel_sub_type_enum.DISPLAY_SMART_CAMPAIGN
     )
-    campaign_status_enum = client.get_type("CampaignStatusEnum").CampaignStatus
+    campaign_status_enum = client.enums.CampaignStatusEnum
     campaign.status = campaign_status_enum.PAUSED
     # Smart Display campaign requires the TargetCpa bidding strategy.
     campaign.target_cpa.target_cpa_micros = 5000000
@@ -192,7 +192,7 @@ def _create_ad_group(client, customer_id, campaign_resource_name):
     ad_group_operation = client.get_type("AdGroupOperation")
     ad_group = ad_group_operation.create
     ad_group.name = f"Earth to Mars Cruises #{uuid4()}"
-    ad_group_status_enum = client.get_type("AdGroupStatusEnum").AdGroupStatus
+    ad_group_status_enum = client.enums.AdGroupStatusEnum
     ad_group.status = ad_group_status_enum.PAUSED
     ad_group.campaign = campaign_resource_name
 
@@ -221,20 +221,18 @@ def _upload_image_asset(
     # uploaded should be unique, and should not match another ACTIVE asset in
     # this customer account.
     # asset.name = f'Jupiter Trip #{uuid4()}'
-    asset_type_enum = client.get_type("AssetTypeEnum").AssetType
+    asset_type_enum = client.enums.AssetTypeEnum
     asset.type_ = asset_type_enum.IMAGE
     image_asset = asset.image_asset
     image_asset.data = image_content
     image_asset.file_size = len(image_content)
-    image_asset.mime_type = client.get_type("MimeTypeEnum").MimeType.IMAGE_JPEG
+    image_asset.mime_type = client.enums.MimeTypeEnum.IMAGE_JPEG
     image_asset.full_size.width_pixels = image_width
     image_asset.full_size.height_pixels = image_height
     image_asset.full_size.url = image_url
 
     asset_service = client.get_service("AssetService")
-    content_type_enum = client.get_type(
-        "ResponseContentTypeEnum"
-    ).ResponseContentType
+    content_type_enum = client.enums.ResponseContentTypeEnum
 
     request = client.get_type("MutateAssetsRequest")
     request.customer_id = customer_id
@@ -263,9 +261,7 @@ def _create_responsive_display_ad(
     ad_group_ad_operation = client.get_type("AdGroupAdOperation")
     ad_group_ad = ad_group_ad_operation.create
     ad_group_ad.ad_group = ad_group_resource_name
-    ad_group_ad.status = client.get_type(
-        "AdGroupAdStatusEnum"
-    ).AdGroupAdStatus.PAUSED
+    ad_group_ad.status = client.enums.AdGroupAdStatusEnum.PAUSED
     ad = ad_group_ad.ad
     ad.final_urls.append("https://www.example.com")
     responsive_display_ad = ad.responsive_display_ad

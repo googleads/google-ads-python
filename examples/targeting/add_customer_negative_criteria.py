@@ -36,9 +36,9 @@ def main(client, customer_id):
     tragedy_criterion = tragedy_criterion_op.create
     # Creates a negative customer criterion excluding the content label type
     # of 'TRAGEDY'.
-    tragedy_criterion.content_label.type_ = client.get_type(
-        "ContentLabelTypeEnum"
-    ).ContentLabelType.TRAGEDY
+    tragedy_criterion.content_label.type_ = (
+        client.enums.ContentLabelTypeEnum.TRAGEDY
+    )
 
     placement_criterion_op = client.get_type(
         "CustomerNegativeCriterionOperation"
@@ -53,9 +53,11 @@ def main(client, customer_id):
     )
 
     # Issues a mutate request to add the negative customer criteria.
-    response = customer_negative_criterion_service.mutate_customer_negative_criteria(
-        customer_id=customer_id,
-        operations=[tragedy_criterion_op, placement_criterion_op],
+    response = (
+        customer_negative_criterion_service.mutate_customer_negative_criteria(
+            customer_id=customer_id,
+            operations=[tragedy_criterion_op, placement_criterion_op],
+        )
     )
     print(f"Added {len(response.results)} negative customer criteria:")
     for negative_criterion in response.results:
@@ -86,7 +88,8 @@ if __name__ == "__main__":
 
     try:
         main(
-            googleads_client, args.customer_id,
+            googleads_client,
+            args.customer_id,
         )
     except GoogleAdsException as ex:
         print(

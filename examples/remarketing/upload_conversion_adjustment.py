@@ -36,20 +36,20 @@ def main(
     adjustment_date_time,
     restatement_value,
 ):
-    conversion_adjustment_type_enum = client.get_type(
-        "ConversionAdjustmentTypeEnum"
-    )
+    conversion_adjustment_type_enum = client.enums.ConversionAdjustmentTypeEnum
     # Determine the adjustment type.
-    conversion_adjustment_type = conversion_adjustment_type_enum._pb.ConversionAdjustmentType.Value(
+    conversion_adjustment_type = conversion_adjustment_type_enum[
         adjustment_type
-    )
+    ].value
 
     # Associates conversion adjustments with the existing conversion action.
     # The GCLID should have been uploaded before with a conversion
     conversion_adjustment = client.get_type("ConversionAdjustment")
     conversion_action_service = client.get_service("ConversionActionService")
-    conversion_adjustment.conversion_action = conversion_action_service.conversion_action_path(
-        customer_id, conversion_action_id
+    conversion_adjustment.conversion_action = (
+        conversion_action_service.conversion_action_path(
+            customer_id, conversion_action_id
+        )
     )
     conversion_adjustment.adjustment_type = conversion_adjustment_type
     conversion_adjustment.adjustment_date_time = adjustment_date_time
@@ -64,7 +64,7 @@ def main(
     if (
         restatement_value
         and conversion_adjustment_type
-        == conversion_adjustment_type_enum.ConversionAdjustmentType.RESTATEMENT
+        == conversion_adjustment_type_enum.RESTATEMENT.value
     ):
         conversion_adjustment.restatement_value.adjusted_value = float(
             restatement_value
@@ -77,8 +77,10 @@ def main(
     request.customer_id = customer_id
     request.conversion_adjustments = [conversion_adjustment]
     request.partial_failure = True
-    response = conversion_adjustment_upload_service.upload_conversion_adjustments(
-        request=request,
+    response = (
+        conversion_adjustment_upload_service.upload_conversion_adjustments(
+            request=request,
+        )
     )
     conversion_adjustment_result = response.results[0]
     print(
@@ -126,9 +128,9 @@ if __name__ == "__main__":
         "--adjustment_type",
         type=str,
         required=True,
-        choices=googleads_client.get_type(
-            "ConversionAdjustmentTypeEnum"
-        )._pb.ConversionAdjustmentType.keys(),
+        choices=[
+            e.name for e in googleads_client.enum.ConversionAdjustmentTypeEnum
+        ],
         help="The Adjustment type, e.g. " "RETRACTION, RESTATEMENT",
     )
     parser.add_argument(

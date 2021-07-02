@@ -55,9 +55,7 @@ def main(client, customer_id, feed_id):
     # dynamic_location_set_filter = feed_item_set.dynamic_location_set_filter
     # business_name_filter = dynamic_location_set_filter.business_name_filter
     # business_name_filter.business_name = 'INSERT_YOUR_BUSINESS_NAME_HERE'
-    # business_name_filter.filter_type = client.get_type(
-    #     "FeedItemSetStringFilterTypeEnum"
-    # ).FeedItemSetStringFilterType.EXACT
+    # business_name_filter.filter_type = client.enums.FeedItemSetStringFilterTypeEnum.EXACT
 
     # 2) Affiliate Extension
     # dynamic_affiliate_location_set_filter = feed_item_set.dynamic_affiliate_location_set_filter
@@ -89,13 +87,19 @@ if __name__ == "__main__":
         help="The Google Ads customer ID.",
     )
     parser.add_argument(
-        "-f", "--feed_id", type=str, required=True, help="The feed ID.",
+        "-f",
+        "--feed_id",
+        type=str,
+        required=True,
+        help="The feed ID.",
     )
     args = parser.parse_args()
 
     try:
         main(
-            googleads_client, args.customer_id, args.feed_id,
+            googleads_client,
+            args.customer_id,
+            args.feed_id,
         )
     except GoogleAdsException as ex:
         print(

@@ -32,9 +32,7 @@ def main(client, customer_id, ad_group_id, ad_id):
     ad_group_ad.resource_name = ad_group_ad_service.ad_group_ad_path(
         customer_id, ad_group_id, ad_id
     )
-    ad_group_ad.status = client.get_type(
-        "AdGroupStatusEnum"
-    ).AdGroupStatus.PAUSED
+    ad_group_ad.status = client.enums.AdGroupStatusEnum.PAUSED
     client.copy_from(
         ad_group_ad_operation.update_mask,
         protobuf_helpers.field_mask(None, ad_group_ad._pb),

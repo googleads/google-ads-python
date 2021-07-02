@@ -96,12 +96,12 @@ def _create_affiliate_location_extension_feed(client, customer_id, chain_id):
     feed = feed_operation.create
     feed.name = f"Affiliate Location Extension feed #{uuid4()}"
     feed.affiliate_location_feed_data.chain_ids.append(chain_id)
-    feed.affiliate_location_feed_data.relationship_type = client.get_type(
-        "AffiliateLocationFeedRelationshipTypeEnum"
-    ).AffiliateLocationFeedRelationshipType.GENERAL_RETAILER
+    feed.affiliate_location_feed_data.relationship_type = (
+        client.enums.AffiliateLocationFeedRelationshipTypeEnum.GENERAL_RETAILER
+    )
     # Since this feed's contents will be managed by Google, you must set its
     # origin to GOOGLE.
-    feed.origin = client.get_type("FeedOriginEnum").FeedOrigin.GOOGLE
+    feed.origin = client.enums.FeedOriginEnum.GOOGLE
 
     # Add the feed.
     mutate_feeds_response = feed_service.mutate_feeds(
@@ -383,9 +383,7 @@ def _create_campaign_feed(
     campaign_feed = campaign_feed_operation.create
     campaign_feed.feed = feed_resource_name
     campaign_feed.placeholder_types.append(
-        client.get_type(
-            "PlaceholderTypeEnum"
-        ).PlaceholderType.AFFILIATE_LOCATION
+        client.enums.PlaceholderTypeEnum.AFFILIATE_LOCATION
     )
     campaign_feed.matching_function.function_string = matching_function
     campaign_feed.campaign = client.get_service(
@@ -422,9 +420,7 @@ def _get_attribute_id_for_chain_id(client, feed_mapping):
     for field_mapping in feed_mapping.attribute_field_mappings:
         if (
             field_mapping.affiliate_location_field
-            == client.get_type(
-                "AffiliateLocationPlaceholderFieldEnum"
-            ).AffiliateLocationPlaceholderField.CHAIN_ID
+            == client.enums.AffiliateLocationPlaceholderFieldEnum.CHAIN_ID
         ):
             return field_mapping.feed_attribute_id
 

@@ -97,8 +97,10 @@ def main(client, customer_id, ad_group_id, percent_cpc_bid_micro_amount):
     )
 
     # Adds the listing group and prints the resulting node resource names.
-    mutate_ad_group_criteria_response = ad_group_criterion_service.mutate_ad_group_criteria(
-        customer_id=customer_id, operations=operations
+    mutate_ad_group_criteria_response = (
+        ad_group_criterion_service.mutate_ad_group_criteria(
+            customer_id=customer_id, operations=operations
+        )
     )
     results = mutate_ad_group_criteria_response.results
     print(
@@ -133,7 +135,7 @@ def _add_root_node(
     # Create the root of the tree as a SUBDIVISION node.
     root_listing_group_info = _create_listing_group_info(
         client,
-        client.get_type("ListingGroupTypeEnum").ListingGroupType.SUBDIVISION,
+        client.enums.ListingGroupTypeEnum.SUBDIVISION,
     )
 
     root_ad_group_criterion = _create_ad_group_criterion(
@@ -196,7 +198,7 @@ def _add_level1_nodes(
     # Create a listing group info for 5-star hotels as a UNIT node.
     five_starred_unit = _create_listing_group_info(
         client,
-        client.get_type("ListingGroupTypeEnum").ListingGroupType.UNIT,
+        client.enums.ListingGroupTypeEnum.UNIT,
         root_resource_name,
         five_starred_listing_dimension_info,
     )
@@ -245,7 +247,7 @@ def _add_level1_nodes(
     # which will be used as a parent node for children nodes of the next level.
     other_hotels_subdivision_listing_group_info = _create_listing_group_info(
         client,
-        client.get_type("ListingGroupTypeEnum").ListingGroupType.SUBDIVISION,
+        client.enums.ListingGroupTypeEnum.SUBDIVISION,
         root_resource_name,
         other_hotels_listing_dimension_info,
     )
@@ -316,7 +318,7 @@ def _add_level2_nodes(
     # Create listing group info for hotels in Japan as a UNIT node.
     japan_hotels_unit = _create_listing_group_info(
         client,
-        client.get_type("ListingGroupTypeEnum").ListingGroupType.UNIT,
+        client.enums.ListingGroupTypeEnum.UNIT,
         parent_resource_name,
         japan_listing_dimension_info,
     )
@@ -359,7 +361,7 @@ def _add_level2_nodes(
     # The "others" node is always required for every level of the tree.
     other_hotel_regions_unit = _create_listing_group_info(
         client,
-        client.get_type("ListingGroupTypeEnum").ListingGroupType.UNIT,
+        client.enums.ListingGroupTypeEnum.UNIT,
         parent_resource_name,
         other_hotel_regions_listing_dimension_info,
     )
@@ -441,19 +443,14 @@ def _create_ad_group_criterion(
         A populated AdGroupCriterion object.
     """
     ad_group_criterion = client.get_type("AdGroupCriterion")
-    ad_group_criterion.status = client.get_type(
-        "AdGroupCriterionStatusEnum"
-    ).AdGroupCriterionStatus.ENABLED
+    ad_group_criterion.status = client.enums.AdGroupCriterionStatusEnum.ENABLED
     client.copy_from(ad_group_criterion.listing_group, listing_group_info)
     ad_group_criterion.resource_name = client.get_service(
         "AdGroupCriterionService"
     ).ad_group_criterion_path(customer_id, ad_group_id, next_temp_id)
 
     # Bids are only valid for UNIT nodes.
-    if (
-        listing_group_info.type_
-        == client.get_type("ListingGroupTypeEnum").ListingGroupType.UNIT
-    ):
+    if listing_group_info.type_ == client.enums.ListingGroupTypeEnum.UNIT:
         ad_group_criterion.percent_cpc_bid_micros = percent_cpc_bid_micro_amount
 
     return ad_group_criterion

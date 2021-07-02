@@ -53,9 +53,9 @@ def main(client, customer_id, campaign_id):
     product_brand_dimension.product_brand.value = "google"
     dimensions.append(product_brand_dimension)
 
-    product_custom_attribute_index_enum = client.get_type(
-        "ProductCustomAttributeIndexEnum"
-    ).ProductCustomAttributeIndex
+    product_custom_attribute_index_enum = (
+        client.enums.ProductCustomAttributeIndexEnum
+    )
     product_custom_attribute_dimension = client.get_type("ListingDimensionInfo")
     product_custom_attribute = (
         product_custom_attribute_dimension.product_custom_attribute
@@ -64,9 +64,7 @@ def main(client, customer_id, campaign_id):
     product_custom_attribute.value = "top_selling_products"
     dimensions.append(product_custom_attribute_dimension)
 
-    product_type_level_enum = client.get_type(
-        "ProductTypeLevelEnum"
-    ).ProductTypeLevel
+    product_type_level_enum = client.enums.ProductTypeLevelEnum
     product_type_dimension_1 = client.get_type("ListingDimensionInfo")
     product_type = product_type_dimension_1.product_type
     product_type.level = product_type_level_enum.LEVEL1
@@ -81,8 +79,10 @@ def main(client, customer_id, campaign_id):
 
     campaign_criterion_service = client.get_service("CampaignCriterionService")
 
-    campaign_criterion_response = campaign_criterion_service.mutate_campaign_criteria(
-        customer_id=customer_id, operations=[campaign_criterion_operation]
+    campaign_criterion_response = (
+        campaign_criterion_service.mutate_campaign_criteria(
+            customer_id=customer_id, operations=[campaign_criterion_operation]
+        )
     )
 
     print(

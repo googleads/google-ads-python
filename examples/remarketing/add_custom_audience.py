@@ -50,17 +50,11 @@ def main(client, customer_id):
     # or "PURCHASE_INTENT" is not allowed for the type field of a newly
     # created custom audience. Use "AUTO" instead of these two options when
     # creating a new custom audience.
-    custom_audience.type_ = client.get_type(
-        "CustomAudienceTypeEnum"
-    ).CustomAudienceType.SEARCH
-    custom_audience.status = client.get_type(
-        "CustomAudienceStatusEnum"
-    ).CustomAudienceStatus.ENABLED
+    custom_audience.type_ = client.enums.CustomAudienceTypeEnum.SEARCH
+    custom_audience.status = client.enums.CustomAudienceStatusEnum.ENABLED
     # List of members that this custom audience is composed of. Customers that
     # meet any of the membership conditions will be reached.
-    member_type_enum = client.get_type(
-        "CustomAudienceMemberTypeEnum"
-    ).CustomAudienceMemberType
+    member_type_enum = client.enums.CustomAudienceMemberTypeEnum
 
     member1 = _create_custom_audience_member(
         client, member_type_enum.KEYWORD, "mars cruise"
@@ -111,9 +105,7 @@ def _create_custom_audience_member(client, member_type, value):
     member = client.get_type("CustomAudienceMember")
     member.member_type = member_type
 
-    member_type_enum = client.get_type(
-        "CustomAudienceMemberTypeEnum"
-    ).CustomAudienceMemberType
+    member_type_enum = client.enums.CustomAudienceMemberTypeEnum
 
     if member_type == member_type_enum.KEYWORD:
         member.keyword = value

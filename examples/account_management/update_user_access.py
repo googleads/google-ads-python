@@ -111,10 +111,12 @@ def _modify_user_access(client, customer_id, user_id, access_role):
         "CustomerUserAccessService"
     )
     customer_user_access_op = client.get_type("CustomerUserAccessOperation")
-    access_role_enum = client.get_type("AccessRoleEnum").AccessRole
+    access_role_enum = client.enums.AccessRoleEnum
     customer_user_access = customer_user_access_op.update
-    customer_user_access.resource_name = customer_user_access_service.customer_user_access_path(
-        customer_id, user_id
+    customer_user_access.resource_name = (
+        customer_user_access_service.customer_user_access_path(
+            customer_id, user_id
+        )
     )
     customer_user_access.access_role = getattr(access_role_enum, access_role)
     client.copy_from(

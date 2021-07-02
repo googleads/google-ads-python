@@ -36,9 +36,7 @@ def main(client, customer_id, campaign_id):
     shared_set_operation = client.get_type("SharedSetOperation")
     shared_set = shared_set_operation.create
     shared_set.name = f"API Negative keyword list - {uuid.uuid4()}"
-    shared_set.type_ = client.get_type(
-        "SharedSetTypeEnum"
-    ).SharedSetType.NEGATIVE_KEYWORDS
+    shared_set.type_ = client.enums.SharedSetTypeEnum.NEGATIVE_KEYWORDS
 
     try:
         shared_set_response = shared_set_service.mutate_shared_sets(
@@ -57,9 +55,9 @@ def main(client, customer_id, campaign_id):
         shared_criterion_operation = client.get_type("SharedCriterionOperation")
         shared_criterion = shared_criterion_operation.create
         shared_criterion.keyword.text = keyword
-        shared_criterion.keyword.match_type = client.get_type(
-            "KeywordMatchTypeEnum"
-        ).KeywordMatchType.BROAD
+        shared_criterion.keyword.match_type = (
+            client.enums.KeywordMatchTypeEnum.BROAD
+        )
         shared_criterion.shared_set = shared_set_resource_name
         shared_criteria_operations.append(shared_criterion_operation)
     try:
@@ -83,8 +81,10 @@ def main(client, customer_id, campaign_id):
     campaign_set.shared_set = shared_set_resource_name
 
     try:
-        campaign_shared_set_resource_name = campaign_shared_set_service.mutate_campaign_shared_sets(
-            customer_id=customer_id, operations=[campaign_set_operation]
+        campaign_shared_set_resource_name = (
+            campaign_shared_set_service.mutate_campaign_shared_sets(
+                customer_id=customer_id, operations=[campaign_set_operation]
+            )
         )
 
         print(

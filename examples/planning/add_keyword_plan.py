@@ -84,9 +84,9 @@ def _create_keyword_plan(client, customer_id):
 
     keyword_plan.name = f"Keyword plan for traffic estimate {uuid.uuid4()}"
 
-    forecast_interval = client.get_type(
-        "KeywordPlanForecastIntervalEnum"
-    ).KeywordPlanForecastInterval.NEXT_QUARTER
+    forecast_interval = (
+        client.enums.KeywordPlanForecastIntervalEnum.NEXT_QUARTER
+    )
     keyword_plan.forecast_period.date_interval = forecast_interval
 
     response = keyword_plan_service.mutate_keyword_plans(
@@ -124,9 +124,7 @@ def _create_keyword_plan_campaign(client, customer_id, keyword_plan):
     keyword_plan_campaign.cpc_bid_micros = 1000000
     keyword_plan_campaign.keyword_plan = keyword_plan
 
-    network = client.get_type(
-        "KeywordPlanNetworkEnum"
-    ).KeywordPlanNetwork.GOOGLE_SEARCH
+    network = client.enums.KeywordPlanNetworkEnum.GOOGLE_SEARCH
     keyword_plan_campaign.keyword_plan_network = network
 
     geo_target = client.get_type("KeywordPlanGeoTarget")
@@ -208,9 +206,9 @@ def _create_keyword_plan_ad_group_keywords(client, customer_id, plan_ad_group):
     keyword_plan_ad_group_keyword1 = operation.create
     keyword_plan_ad_group_keyword1.text = "mars cruise"
     keyword_plan_ad_group_keyword1.cpc_bid_micros = 2000000
-    keyword_plan_ad_group_keyword1.match_type = client.get_type(
-        "KeywordMatchTypeEnum"
-    ).KeywordMatchType.BROAD
+    keyword_plan_ad_group_keyword1.match_type = (
+        client.enums.KeywordMatchTypeEnum.BROAD
+    )
     keyword_plan_ad_group_keyword1.keyword_plan_ad_group = plan_ad_group
     operations.append(operation)
 
@@ -218,9 +216,9 @@ def _create_keyword_plan_ad_group_keywords(client, customer_id, plan_ad_group):
     keyword_plan_ad_group_keyword2 = operation.create
     keyword_plan_ad_group_keyword2.text = "cheap cruise"
     keyword_plan_ad_group_keyword2.cpc_bid_micros = 1500000
-    keyword_plan_ad_group_keyword2.match_type = client.get_type(
-        "KeywordMatchTypeEnum"
-    ).KeywordMatchType.PHRASE
+    keyword_plan_ad_group_keyword2.match_type = (
+        client.enums.KeywordMatchTypeEnum.PHRASE
+    )
     keyword_plan_ad_group_keyword2.keyword_plan_ad_group = plan_ad_group
     operations.append(operation)
 
@@ -228,9 +226,9 @@ def _create_keyword_plan_ad_group_keywords(client, customer_id, plan_ad_group):
     keyword_plan_ad_group_keyword3 = operation.create
     keyword_plan_ad_group_keyword3.text = "jupiter cruise"
     keyword_plan_ad_group_keyword3.cpc_bid_micros = 1990000
-    keyword_plan_ad_group_keyword3.match_type = client.get_type(
-        "KeywordMatchTypeEnum"
-    ).KeywordMatchType.EXACT
+    keyword_plan_ad_group_keyword3.match_type = (
+        client.enums.KeywordMatchTypeEnum.EXACT
+    )
     keyword_plan_ad_group_keyword3.keyword_plan_ad_group = plan_ad_group
     operations.append(operation)
 
@@ -266,9 +264,9 @@ def _create_keyword_plan_negative_campaign_keywords(
 
     keyword_plan_campaign_keyword = operation.create
     keyword_plan_campaign_keyword.text = "moon walk"
-    keyword_plan_campaign_keyword.match_type = client.get_type(
-        "KeywordMatchTypeEnum"
-    ).KeywordMatchType.BROAD
+    keyword_plan_campaign_keyword.match_type = (
+        client.enums.KeywordMatchTypeEnum.BROAD
+    )
     keyword_plan_campaign_keyword.keyword_plan_campaign = plan_campaign
     keyword_plan_campaign_keyword.negative = True
 

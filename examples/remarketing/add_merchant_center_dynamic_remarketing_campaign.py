@@ -95,12 +95,10 @@ def _create_campaign(
     campaign.shopping_setting.enable_local = True
     # Dynamic remarketing campaigns are only available on the Google Display
     # Network.
-    campaign.advertising_channel_type = client.get_type(
-        "AdvertisingChannelTypeEnum"
-    ).AdvertisingChannelType.DISPLAY
-    campaign.status = client.get_type(
-        "CampaignStatusEnum"
-    ).CampaignStatus.PAUSED
+    campaign.advertising_channel_type = (
+        client.enums.AdvertisingChannelTypeEnum.DISPLAY
+    )
+    campaign.status = client.enums.CampaignStatusEnum.PAUSED
     campaign.campaign_budget = client.get_service(
         "CampaignBudgetService"
     ).campaign_budget_path(customer_id, campaign_budget_id)
@@ -136,7 +134,7 @@ def _create_ad_group(client, customer_id, campaign_resource_name):
     ad_group = ad_group_operation.create
     ad_group.name = "Dynamic remarketing ad group"
     ad_group.campaign = campaign_resource_name
-    ad_group.status = client.get_type("AdGroupStatusEnum").AdGroupStatus.ENABLED
+    ad_group.status = client.enums.AdGroupStatusEnum.ENABLED
 
     # Issues a mutate request to add the ad group.
     ad_group_response = ad_group_service.mutate_ad_groups(
@@ -203,9 +201,9 @@ def _create_ad(client, customer_id, ad_group_resource_name):
     # Optional: Set to false to strictly render the ad using the colors.
     responsive_display_ad_info.allow_flexible_color = False
     # Optional: Set the format setting that the ad will be served in.
-    responsive_display_ad_info.format_setting = client.get_type(
-        "DisplayAdFormatSettingEnum"
-    ).DisplayAdFormatSetting.NON_NATIVE
+    responsive_display_ad_info.format_setting = (
+        client.enums.DisplayAdFormatSettingEnum.NON_NATIVE
+    )
     # Optional: Create a logo image and set it to the ad.
     # logo_image = client.get_type("AdImageAsset")
     # logo_image.asset = "INSERT_LOGO_IMAGE_RESOURCE_NAME_HERE"
@@ -246,7 +244,7 @@ def _upload_image_asset(client, customer_id, image_url, asset_name):
     # Create an asset operation and set the image asset values.
     asset_operation = client.get_type("AssetOperation")
     asset = asset_operation.create
-    asset.type_ = client.get_type("AssetTypeEnum").AssetType.IMAGE
+    asset.type_ = client.enums.AssetTypeEnum.IMAGE
     asset.image_asset.data = image_data
     asset.name = asset_name
 
@@ -287,8 +285,10 @@ def _attach_user_list(
     ).user_list_path(customer_id, user_list_id)
 
     # Issue a mutate request to add the ad group criterion.
-    ad_group_criterion_response = ad_group_criterion_service.mutate_ad_group_criteria(
-        customer_id=customer_id, operations=[ad_group_criterion_operation]
+    ad_group_criterion_response = (
+        ad_group_criterion_service.mutate_ad_group_criteria(
+            customer_id=customer_id, operations=[ad_group_criterion_operation]
+        )
     )
     print(
         "Created ad group criterion with resource name "

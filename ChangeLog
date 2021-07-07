@@ -1,5 +1,5 @@
 * 13.0.0
-- Deprecate support for Python 3.6
+- Bump the minimum Python version requirement to 3.7+
 - Fix package name in base transport files
 - Update examples to new "client.enums" syntax
 - Move CSV reporting example to migration directory

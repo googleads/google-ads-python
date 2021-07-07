@@ -1,3 +1,10 @@
+* 13.0.0
+- Bump the minimum Python version requirement to 3.7+
+- Fix package name in base transport files
+- Update examples to new "client.enums" syntax
+- Move CSV reporting example to migration directory
+- Various minor updates to examples and documentation.
+
 * 12.0.0
 - Google Ads API v8_0 release.
 - Deprecate Google Ads API v5_0.

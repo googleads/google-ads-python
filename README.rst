@@ -9,7 +9,7 @@ Build Status
 
 Requirements
 ------------
-* Python 3.6+
+* Python 3.7+
 
 Installation
 ------------
@@ -27,6 +27,22 @@ Documentation
 -------------
 Please refer to our `Developer Site`_ for documentation on how to install,
 configure, and use this client library.
+
+For Python 3.6 Users
+--------------------
+Version [12.0.0](https://pypi.org/project/google-ads/12.0.0/) of this library
+is the last version that is compatible with Python 3.6. It contains support for
+[`v6`](https://developers.google.com/google-ads/api/reference/rpc/v6/overview),
+[`v7`](https://developers.google.com/google-ads/api/reference/rpc/v7/overview),
+and [`v8`](https://developers.google.com/google-ads/api/reference/rpc/v8/overview)
+of the Google Ads API. The newest API version, `v8`, will be supported until
+the Spring of 2022. Given that the [EOL](https://endoflife.date/python) for
+Python 3.6 is December 23, 2021, we encourage our users to upgrade to Python 3.7
+or above as soon as possible to avoid issues. Users who cannot upgrade can
+continue to safely use version 12.0.0 until `v8` of the Google Ads API is
+deprecated. Please follow the
+[Google Ads Developer Blog](https://ads-developers.googleblog.com/) for
+announcements of the specific deprecation dates for the above API versions.
 
 Miscellaneous
 -------------

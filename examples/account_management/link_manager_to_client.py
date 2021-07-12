@@ -38,7 +38,7 @@ def main(client, customer_id, manager_customer_id):
     # Extend an invitation to the client while authenticating as the manager.
     client_link_operation = client.get_type("CustomerClientLinkOperation")
     client_link = client_link_operation.create
-    client_link.client_customer = f"customers/{customer_id}"
+    client_link.client_customer = customer_client_link_service.customer_path(customer_id)
     client_link.status = client.enums.ManagerLinkStatusEnum.PENDING
 
     response = customer_client_link_service.mutate_customer_client_link(
@@ -97,31 +97,14 @@ def main(client, customer_id, manager_customer_id):
         protobuf_helpers.field_mask(None, manager_link._pb),
     )
 
-    try:
-        response = customer_manager_link_service.mutate_customer_manager_link(
-            customer_id=manager_customer_id, operations=[manager_link_operation]
-        )
-        resource_name = response.results[0].resource_name
-        print(
-            "Client accepted invitation with resource_name: "
-            f'"{resource_name}"'
-        )
-    except GoogleAdsException as ex:
-        _handle_googleads_exception(ex)
-        # [END link_manager_to_client]
-
-
-def _handle_googleads_exception(exception):
-    print(
-        f'Request with ID "{exception.request_id}" failed with status '
-        f'"{exception.error.code().name}" and includes the following errors:'
+    response = customer_manager_link_service.mutate_customer_manager_link(
+        customer_id=manager_customer_id, operations=[manager_link_operation]
     )
-    for error in exception.failure.errors:
-        print(f'\tError with message "{error.message}".')
-        if error.location:
-            for field_path_element in error.location.field_path_elements:
-                print(f"\t\tOn field: {field_path_element.field_name}")
-    sys.exit(1)
+    print(
+        "Client accepted invitation with resource_name: "
+        f'"{response.results[0].resource_name}"'
+    )
+    # [END link_manager_to_client]
 
 
 if __name__ == "__main__":
@@ -150,4 +133,13 @@ if __name__ == "__main__":
     try:
         main(googleads_client, args.customer_id, args.manager_customer_id)
     except GoogleAdsException as ex:
-        _handle_googleads_exception(ex)
+        print(
+            f'Request with ID "{exception.request_id}" failed with status '
+            f'"{exception.error.code().name}" and includes the following errors:'
+        )
+        for error in exception.failure.errors:
+            print(f'\tError with message "{error.message}".')
+            if error.location:
+                for field_path_element in error.location.field_path_elements:
+                    print(f"\t\tOn field: {field_path_element.field_name}")
+        sys.exit(1)

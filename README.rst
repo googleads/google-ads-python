@@ -37,7 +37,7 @@ Given that the `EOL`_ for Python 3.6 is December 23, 2021, we encourage our
 users to upgrade to Python 3.7 or above as soon as possible to avoid issues.
 Users who cannot upgrade can continue to safely use version `12.0.0`_ until
 `v8`_ of the Google Ads API is deprecated. Please follow the
-`Google Ads Developer Blog` for announcements of the specific deprecation
+`Google Ads Developer Blog`_ for announcements of the specific deprecation
 dates for the above API versions.
 
 Miscellaneous

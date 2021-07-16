@@ -93,7 +93,7 @@ if __name__ == "__main__":
             f'"{ex.error.code().name}" and includes the following errors:'
         )
         for error in ex.failure.errors:
-            print(f'	Error with message "{error.message}".')
+            print(f'\tError with message "{error.message}".')
             if error.location:
                 for field_path_element in error.location.field_path_elements:
                     print(f"\t\tOn field: {field_path_element.field_name}")

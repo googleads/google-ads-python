@@ -18,7 +18,10 @@ import io
 
 install_requires = [
     "google-auth-oauthlib >= 0.3.0, < 1.0.0",
-    "google-api-core >= 1.21.0, < 2.0.0",
+    # NOTE: Maintainers, please do not require google-api-core>=2.x.x
+    # Until this issue is closed
+    # https://github.com/googleapis/google-cloud-python/issues/10566
+    "google-api-core >= 1.21.0, < 3.0.0",
     "googleapis-common-protos >= 1.5.8, < 2.0.0",
     "grpcio >= 1.38.1, < 2.0.0",
     "proto-plus >= 1.18.0, < 2.0.0",

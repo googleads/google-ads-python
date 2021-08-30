@@ -33,7 +33,7 @@ from google.ads.googleads.errors import GoogleAdsException
 
 _MARKETING_IMAGE_URL = "https://goo.gl/3b9Wfh"
 _LOGO_IMAGE_URL = "https://goo.gl/mtt54n"
-_YOUTUBE_VIDEO_ID = "t1fDo0VyeEo"
+_YOUTUBE_VIDEO_ID = "ECpDzH9gXh8"
 
 
 def main(client, customer_id):

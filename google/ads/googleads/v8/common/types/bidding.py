@@ -135,11 +135,13 @@ class TargetCpa(proto.Message):
         cpc_bid_ceiling_micros (int):
             Maximum bid limit that can be set by the bid
             strategy. The limit applies to all keywords
-            managed by the strategy.
+            managed by the strategy. This should only be set
+            for portfolio bid strategies.
         cpc_bid_floor_micros (int):
             Minimum bid limit that can be set by the bid
             strategy. The limit applies to all keywords
-            managed by the strategy.
+            managed by the strategy. This should only be set
+            for portfolio bid strategies.
     """
 
     target_cpa_micros = proto.Field(proto.INT64, number=4, optional=True,)
@@ -197,11 +199,13 @@ class TargetRoas(proto.Message):
         cpc_bid_ceiling_micros (int):
             Maximum bid limit that can be set by the bid
             strategy. The limit applies to all keywords
-            managed by the strategy.
+            managed by the strategy. This should only be set
+            for portfolio bid strategies.
         cpc_bid_floor_micros (int):
             Minimum bid limit that can be set by the bid
             strategy. The limit applies to all keywords
-            managed by the strategy.
+            managed by the strategy. This should only be set
+            for portfolio bid strategies.
     """
 
     target_roas = proto.Field(proto.DOUBLE, number=4, optional=True,)

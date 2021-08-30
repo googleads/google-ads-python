@@ -13,6 +13,7 @@
 # limitations under the License.
 """A set of functions to help load configuration from various locations."""
 
+from distutils.util import strtobool
 import functools
 import json
 import logging.config
@@ -25,7 +26,7 @@ _logger = logging.getLogger(__name__)
 
 
 _ENV_PREFIX = "GOOGLE_ADS_"
-_REQUIRED_KEYS = ("developer_token",)
+_REQUIRED_KEYS = ("developer_token", "use_proto_plus")
 _OPTIONAL_KEYS = (
     "login_customer_id",
     "endpoint",
@@ -140,6 +141,16 @@ def _config_parser_decorator(func):
 
             del parsed_config["delegated_account"]
 
+        if "use_proto_plus" in config_keys:
+            # When loaded from YAML, YAML string or a dict, this value is
+            # evaluated as a bool. If it's loaded from an environment variable
+            # it's evaluated as a string. If set to "False" as an environment
+            # variable we need to manually change it to the bool False because
+            # the string "False" is truthy and can easily be incorrectly
+            # converted to the boolean True.
+            value = parsed_config.get("use_proto_plus", False)
+            parsed_config["use_proto_plus"] = disambiguate_string_bool(value)
+
         return parsed_config
 
     return parser_wrapper
@@ -159,6 +170,15 @@ def validate_dict(config_data):
     Raises:
         ValueError: If the dict does not contain all required config keys.
     """
+    if not "use_proto_plus" in config_data.keys():
+        raise ValueError(
+            "The client library configuration is missing the required "
+            '"use_proto_plus" key. Please set this option to either "True" '
+            'or "False". For more information about this option see the '
+            "Protobuf Messages guide: "
+            "https://developers.google.com/google-ads/api/docs/client-libs/python/protobuf-messages"
+        )
+
     if not all(key in config_data for key in _REQUIRED_KEYS):
         raise ValueError(
             "A required field in the configuration data was not "
@@ -379,3 +399,33 @@ def convert_linked_customer_id_to_str(config_data):
         config_data["linked_customer_id"] = str(linked_customer_id)
 
     return config_data
+
+
+def disambiguate_string_bool(value):
+    """Converts a stringified boolean to its bool representation.
+
+    Args:
+        value: A boolean or a string representing a boolean.
+
+    Returns:
+        A boolean.
+
+    Raises:
+        TypeError: If the string is not a valid boolean representation.
+    """
+    if isinstance(value, bool):
+        return value
+    elif isinstance(value, str):
+        try:
+            return bool(strtobool(value))
+        except ValueError:
+            raise ValueError(
+                'The "use_proto_plus" configuration key value should be'
+                f'explicitly set to "True" or "False" but "{value}" '
+                "was given."
+            )
+    else:
+        raise TypeError(
+            'The "use_proto_plus" configuration key is invalid. Expected '
+            f"Union[bool, str] but received {type(value)}"
+        )

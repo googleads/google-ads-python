@@ -76,6 +76,24 @@ class ChangeStatus(proto.Message):
         ad_group_bid_modifier (str):
             Output only. The AdGroupBidModifier affected
             by this change.
+        shared_set (str):
+            Output only. The SharedSet affected by this
+            change.
+        campaign_shared_set (str):
+            Output only. The CampaignSharedSet affected
+            by this change.
+        asset (str):
+            Output only. The Asset affected by this
+            change.
+        customer_asset (str):
+            Output only. The CustomerAsset affected by
+            this change.
+        campaign_asset (str):
+            Output only. The CampaignAsset affected by
+            this change.
+        ad_group_asset (str):
+            Output only. The AdGroupAsset affected by
+            this change.
     """
 
     resource_name = proto.Field(proto.STRING, number=1,)
@@ -100,6 +118,12 @@ class ChangeStatus(proto.Message):
     ad_group_feed = proto.Field(proto.STRING, number=30, optional=True,)
     campaign_feed = proto.Field(proto.STRING, number=31, optional=True,)
     ad_group_bid_modifier = proto.Field(proto.STRING, number=32, optional=True,)
+    shared_set = proto.Field(proto.STRING, number=33,)
+    campaign_shared_set = proto.Field(proto.STRING, number=34,)
+    asset = proto.Field(proto.STRING, number=35,)
+    customer_asset = proto.Field(proto.STRING, number=36,)
+    campaign_asset = proto.Field(proto.STRING, number=37,)
+    ad_group_asset = proto.Field(proto.STRING, number=38,)
 
 
 __all__ = tuple(sorted(__protobuf__.manifest))

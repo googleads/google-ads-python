@@ -1,3 +1,9 @@
+* 14.0.0
+- New required configuration value to specify protobuf message types, see:
+  https://developers.google.com/google-ads/api/docs/client-libs/python/protobuf-messages
+- Google Ads API v8_1 release.
+- Remove support for Google Ads API v6.
+
 * 13.0.0
 - Bump the minimum Python version requirement to 3.7+
 - Fix package name in base transport files

@@ -26,7 +26,12 @@ import logging
 from grpc import UnaryUnaryClientInterceptor, UnaryStreamClientInterceptor
 
 from .interceptor import Interceptor
-from ..util import set_nested_message_field, get_nested_attr
+from ..util import (
+    set_nested_message_field,
+    get_nested_attr,
+    convert_proto_plus_to_protobuf,
+    proto_copy_from,
+)
 
 # The keys in this dict represent messages that have fields that may contain
 # sensitive information, such as PII like an email address, that shouldn't
@@ -457,8 +462,14 @@ def _mask_google_ads_search_response(message, mask):
     for row in copy.results:
         # Each row is an instance of GoogleAdsRow. The ListFields method
         # returns a list of (FieldDescriptor, value) tuples for all fields in
-        # the message which are not empty
-        row_fields = row._pb.ListFields()
+        # the message which are not empty. If this message is a proto_plus proto
+        # then we need to access the natve proto to call ListFields. If it's
+        # not proto_plus we can assume it's protobuf and can access ListFields
+        # directly.
+        if hasattr(row, "_pb"):
+            row_fields = convert_proto_plus_to_protobuf(row).ListFields()
+        else:
+            row_fields = row.ListFields()
         for field in row_fields:
             field_descriptor = field[0]
             # field_name is the name of the field on the GoogleAdsRow instance,
@@ -476,7 +487,7 @@ def _mask_google_ads_search_response(message, mask):
                 )
                 # Overwrites the nested message with an exact copy of itself,
                 # where sensitive fields have been masked.
-                setattr(row, field_name, masked_message)
+                proto_copy_from(getattr(row, field_name), masked_message)
 
     return copy
 

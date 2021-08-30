@@ -24,6 +24,7 @@ import mock
 from google.ads.googleads import client as Client
 from google.ads.googleads.interceptors import LoggingInterceptor
 import google.ads.googleads.interceptors.logging_interceptor as interceptor_module
+from google.ads.googleads import util
 
 
 default_version = Client._DEFAULT_VERSION
@@ -512,7 +513,7 @@ class LoggingInterceptorTest(TestCase):
             self.assertEqual(result, None)
 
     def test_parse_exception_to_str_transport_failure(self):
-        """ Calls _format_json_object with error obj's debug_error_string."""
+        """Calls _format_json_object with error obj's debug_error_string."""
         interceptor = self._create_test_interceptor()
 
         with mock.patch("logging.config.dictConfig"), mock.patch.object(
@@ -738,6 +739,23 @@ class LoggingInterceptorTest(TestCase):
         copy = interceptor_module._mask_message(response, "REDACTED")
         self.assertIsInstance(copy, response.__class__)
         self.assertIsNot(response, copy)
+        self.assertEqual(
+            copy.results[0].customer_user_access.email_address, "REDACTED"
+        )
+
+    def test_mask_search_google_ads_response_protobuf(self):
+        """Copies and masks a SearchGoogleAdsResponse message instance."""
+        response = google_ads_service.SearchGoogleAdsResponse()
+        row = google_ads_service.GoogleAdsRow(
+            customer_user_access=customer_user_access.CustomerUserAccess(
+                email_address="test@test.com"
+            )
+        )
+        response.results.append(row)
+        protobuf = util.convert_proto_plus_to_protobuf(response)
+        copy = interceptor_module._mask_message(protobuf, "REDACTED")
+        self.assertIsInstance(copy, protobuf.__class__)
+        self.assertIsNot(protobuf, copy)
         self.assertEqual(
             copy.results[0].customer_user_access.email_address, "REDACTED"
         )

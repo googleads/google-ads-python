@@ -246,5 +246,38 @@ class SmartCampaignSuggestServiceGrpcTransport(
             )
         return self._stubs["suggest_smart_campaign_budget_options"]
 
+    @property
+    def suggest_smart_campaign_ad(
+        self,
+    ) -> Callable[
+        [smart_campaign_suggest_service.SuggestSmartCampaignAdRequest],
+        smart_campaign_suggest_service.SuggestSmartCampaignAdResponse,
+    ]:
+        r"""Return a callable for the suggest smart campaign ad method over gRPC.
+
+        Suggests a Smart campaign ad compatible with the Ad
+        family of resources, based on data points such as
+        targeting and the business to advertise.
+
+        Returns:
+            Callable[[~.SuggestSmartCampaignAdRequest],
+                    ~.SuggestSmartCampaignAdResponse]:
+                A function that, when called, will call the underlying RPC
+                on the server.
+        """
+        # Generate a "stub function" on-the-fly which will actually make
+        # the request.
+        # gRPC handles serialization and deserialization, so we just need
+        # to pass in the functions for each.
+        if "suggest_smart_campaign_ad" not in self._stubs:
+            self._stubs[
+                "suggest_smart_campaign_ad"
+            ] = self.grpc_channel.unary_unary(
+                "/google.ads.googleads.v8.services.SmartCampaignSuggestService/SuggestSmartCampaignAd",
+                request_serializer=smart_campaign_suggest_service.SuggestSmartCampaignAdRequest.serialize,
+                response_deserializer=smart_campaign_suggest_service.SuggestSmartCampaignAdResponse.deserialize,
+            )
+        return self._stubs["suggest_smart_campaign_ad"]
+
 
 __all__ = ("SmartCampaignSuggestServiceGrpcTransport",)

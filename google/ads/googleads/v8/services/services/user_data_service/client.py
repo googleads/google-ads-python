@@ -69,9 +69,7 @@ class UserDataServiceClientMeta(type):
 
 
 class UserDataServiceClient(metaclass=UserDataServiceClientMeta):
-    """Service to manage user data uploads.
-    Accessible only to customers on the allow-list.
-    """
+    """Service to manage user data uploads."""
 
     @staticmethod
     def _get_default_mtls_endpoint(api_endpoint):

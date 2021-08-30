@@ -38,6 +38,9 @@ from google.ads.googleads.v8.enums.types import (
 from google.ads.googleads.v8.enums.types import (
     conversion_or_adjustment_lag_bucket as gage_conversion_or_adjustment_lag_bucket,
 )
+from google.ads.googleads.v8.enums.types import (
+    conversion_value_rule_primary_dimension as gage_conversion_value_rule_primary_dimension,
+)
 from google.ads.googleads.v8.enums.types import day_of_week as gage_day_of_week
 from google.ads.googleads.v8.enums.types import device as gage_device
 from google.ads.googleads.v8.enums.types import (
@@ -285,6 +288,13 @@ class Segments(proto.Message):
             ad, including variants.
         slot (google.ads.googleads.v8.enums.types.SlotEnum.Slot):
             Position of the ad.
+        conversion_value_rule_primary_dimension (google.ads.googleads.v8.enums.types.ConversionValueRulePrimaryDimensionEnum.ConversionValueRulePrimaryDimension):
+            Primary dimension of applied conversion value rules.
+            NO_RULE_APPLIED shows the total recorded value of
+            conversions that do not have a value rule applied. ORIGINAL
+            shows the original value of conversions to which a value
+            rule has been applied. GEO_LOCATION, DEVICE, AUDIENCE show
+            the net adjustment after value rules were applied.
         webpage (str):
             Resource name of the ad group criterion that
             represents webpage criterion.
@@ -502,6 +512,11 @@ class Segments(proto.Message):
         enum=gage_search_term_match_type.SearchTermMatchTypeEnum.SearchTermMatchType,
     )
     slot = proto.Field(proto.ENUM, number=23, enum=gage_slot.SlotEnum.Slot,)
+    conversion_value_rule_primary_dimension = proto.Field(
+        proto.ENUM,
+        number=138,
+        enum=gage_conversion_value_rule_primary_dimension.ConversionValueRulePrimaryDimensionEnum.ConversionValueRulePrimaryDimension,
+    )
     webpage = proto.Field(proto.STRING, number=129, optional=True,)
     week = proto.Field(proto.STRING, number=130, optional=True,)
     year = proto.Field(proto.INT32, number=131, optional=True,)

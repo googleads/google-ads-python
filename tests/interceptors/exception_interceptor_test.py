@@ -17,11 +17,16 @@ import grpc
 import mock
 from unittest import TestCase
 
+from google.protobuf.message import Message as ProtobufMessageType
+import proto
+
+from fixtures.proto_plus_fixture import ProtoPlusFixture
 from google.ads.googleads.errors import GoogleAdsException
 from google.ads.googleads import client as Client
 from google.ads.googleads.interceptors import ExceptionInterceptor
 from google.ads.googleads.interceptors.exception_interceptor import (
     _UnaryStreamWrapper,
+    _UnaryUnaryWrapper,
 )
 
 latest_version = Client._DEFAULT_VERSION
@@ -30,13 +35,13 @@ _MOCK_FAILURE_VALUE = b"\n \n\x02\x08\x10\x12\x1aInvalid customer ID '123'."
 
 
 class ExceptionInterceptorTest(TestCase):
-    def _create_test_interceptor(self):
+    def _create_test_interceptor(self, **kwargs):
         """Creates and returns an ExceptionInterceptor instance
 
         Returns:
             An ExceptionInterceptor instance.
         """
-        return ExceptionInterceptor(Client._DEFAULT_VERSION)
+        return ExceptionInterceptor(Client._DEFAULT_VERSION, **kwargs)
 
     def test_handle_grpc_failure(self):
         """Raises non-retryable GoogleAdsFailures as GoogleAdsExceptions."""
@@ -187,7 +192,67 @@ class ExceptionInterceptorTest(TestCase):
             mock_continuation, mock_client_call_details, mock_request
         )
 
-        self.assertEqual(result, mock_response)
+        self.assertIsInstance(result, _UnaryUnaryWrapper)
+
+    def test_intercept_unary_unary_proto_plus_proto(self):
+        """Returns a proto_plus proto if use_proto_plus is True"""
+
+        class MockResponse:
+            def exception(self):
+                return None
+
+            def result(self):
+                return ProtoPlusFixture()
+
+        mock_request = mock.Mock()
+        mock_client_call_details = mock.Mock()
+        mock_response = MockResponse()
+
+        def mock_continuation(client_call_details, request):
+            del client_call_details
+            del request
+            return mock_response
+
+        interceptor = self._create_test_interceptor(use_proto_plus=True)
+
+        result = interceptor.intercept_unary_unary(
+            mock_continuation, mock_client_call_details, mock_request
+        )
+
+        # Ensure the returned value is a wrapped response object.
+        self.assertIsInstance(result, _UnaryUnaryWrapper)
+        message = result.result()
+        self.assertIsInstance(message, proto.Message)
+
+    def test_intercept_unary_unary_protobuf_proto(self):
+        """__next__ returns a protobuf proto if use_proto_plus is False"""
+
+        class MockResponse:
+            def exception(self):
+                return None
+
+            def result(self):
+                return ProtoPlusFixture()
+
+        mock_request = mock.Mock()
+        mock_client_call_details = mock.Mock()
+        mock_response = MockResponse()
+
+        def mock_continuation(client_call_details, request):
+            del client_call_details
+            del request
+            return mock_response
+
+        interceptor = self._create_test_interceptor(use_proto_plus=False)
+
+        result = interceptor.intercept_unary_unary(
+            mock_continuation, mock_client_call_details, mock_request
+        )
+
+        # Ensure the returned value is a wrapped response object.
+        self.assertIsInstance(result, _UnaryUnaryWrapper)
+        message = result.result()
+        self.assertIsInstance(message, ProtobufMessageType)
 
     def test_intercept_unary_stream_response_is_successful(self):
         """If response.exception() is None response is returned."""
@@ -213,3 +278,67 @@ class ExceptionInterceptorTest(TestCase):
 
         # Ensure the returned value is a wrapped response object.
         self.assertIsInstance(result, _UnaryStreamWrapper)
+
+    def test_intercept_unary_stream_proto_plus_proto(self):
+        """__next__ returns a proto_plus proto if use_proto_plus is True"""
+
+        class MockResponse:
+            def exception(self):
+                return None
+
+            def __next__(self):
+                # Return a proto_plus proto object just as the current
+                # generated services do.
+                return ProtoPlusFixture()
+
+        mock_request = mock.Mock()
+        mock_client_call_details = mock.Mock()
+        mock_response = MockResponse()
+
+        def mock_continuation(client_call_details, request):
+            del client_call_details
+            del request
+            return mock_response
+
+        interceptor = self._create_test_interceptor(use_proto_plus=True)
+
+        result = interceptor.intercept_unary_stream(
+            mock_continuation, mock_client_call_details, mock_request
+        )
+
+        # Ensure the returned value is a wrapped response object.
+        self.assertIsInstance(result, _UnaryStreamWrapper)
+        message = next(result)
+        self.assertIsInstance(message, proto.Message)
+
+    def test_intercept_unary_stream_protobuf_proto(self):
+        """__next__ returns a protobuf proto if use_proto_plus is False"""
+
+        class MockResponse:
+            def exception(self):
+                return None
+
+            def __next__(self):
+                # Return a proto_plus proto object just as the current
+                # generated services do.
+                return ProtoPlusFixture()
+
+        mock_request = mock.Mock()
+        mock_client_call_details = mock.Mock()
+        mock_response = MockResponse()
+
+        def mock_continuation(client_call_details, request):
+            del client_call_details
+            del request
+            return mock_response
+
+        interceptor = self._create_test_interceptor(use_proto_plus=False)
+
+        result = interceptor.intercept_unary_stream(
+            mock_continuation, mock_client_call_details, mock_request
+        )
+
+        # Ensure the returned value is a wrapped response object.
+        self.assertIsInstance(result, _UnaryStreamWrapper)
+        message = next(result)
+        self.assertIsInstance(message, ProtobufMessageType)

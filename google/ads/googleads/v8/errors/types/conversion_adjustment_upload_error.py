@@ -45,6 +45,11 @@ class ConversionAdjustmentUploadErrorEnum(proto.Message):
         )
         TOO_MANY_ADJUSTMENTS_IN_REQUEST = 11
         TOO_MANY_ADJUSTMENTS = 12
+        CUSTOMER_NOT_ACCEPTED_CUSTOMER_DATA_TERMS = 15
+        CONVERSION_ACTION_NOT_ELIGIBLE_FOR_ENHANCEMENT = 16
+        INVALID_USER_IDENTIFIER = 17
+        UNSUPPORTED_USER_IDENTIFIER = 18
+        INVALID_USER_IDENTIFIER_SOURCE = 19
 
 
 __all__ = tuple(sorted(__protobuf__.manifest))

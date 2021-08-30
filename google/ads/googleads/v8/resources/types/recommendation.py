@@ -247,23 +247,28 @@ class Recommendation(proto.Message):
             proto.INT64, number=3, optional=True,
         )
 
-    class MoveUnusedBudgetRecommendation(proto.Message):
-        r"""The move unused budget recommendation.
+    class MaximizeConversionsOptInRecommendation(proto.Message):
+        r"""The Maximize Conversions Opt-In recommendation.
         Attributes:
-            excess_campaign_budget (str):
-                Output only. The excess budget's resource_name.
-            budget_recommendation (google.ads.googleads.v8.resources.types.Recommendation.CampaignBudgetRecommendation):
-                Output only. The recommendation for the
-                constrained budget to increase.
+            recommended_budget_amount_micros (int):
+                Output only. The recommended new budget
+                amount.
         """
 
-        excess_campaign_budget = proto.Field(
-            proto.STRING, number=3, optional=True,
+        recommended_budget_amount_micros = proto.Field(
+            proto.INT64, number=2, optional=True,
         )
-        budget_recommendation = proto.Field(
-            proto.MESSAGE,
-            number=2,
-            message="Recommendation.CampaignBudgetRecommendation",
+
+    class CalloutExtensionRecommendation(proto.Message):
+        r"""The Callout extension recommendation.
+        Attributes:
+            recommended_extensions (Sequence[google.ads.googleads.v8.common.types.CalloutFeedItem]):
+                Output only. Callout extensions recommended
+                to be added.
+        """
+
+        recommended_extensions = proto.RepeatedField(
+            proto.MESSAGE, number=1, message=extensions.CalloutFeedItem,
         )
 
     class TextAdRecommendation(proto.Message):
@@ -283,6 +288,25 @@ class Recommendation(proto.Message):
         ad = proto.Field(proto.MESSAGE, number=1, message=gagr_ad.Ad,)
         creation_date = proto.Field(proto.STRING, number=4, optional=True,)
         auto_apply_date = proto.Field(proto.STRING, number=5, optional=True,)
+
+    class MoveUnusedBudgetRecommendation(proto.Message):
+        r"""The move unused budget recommendation.
+        Attributes:
+            excess_campaign_budget (str):
+                Output only. The excess budget's resource_name.
+            budget_recommendation (google.ads.googleads.v8.resources.types.Recommendation.CampaignBudgetRecommendation):
+                Output only. The recommendation for the
+                constrained budget to increase.
+        """
+
+        excess_campaign_budget = proto.Field(
+            proto.STRING, number=3, optional=True,
+        )
+        budget_recommendation = proto.Field(
+            proto.MESSAGE,
+            number=2,
+            message="Recommendation.CampaignBudgetRecommendation",
+        )
 
     class TargetCpaOptInRecommendation(proto.Message):
         r"""The Target CPA opt-in recommendation.
@@ -341,8 +365,42 @@ class Recommendation(proto.Message):
             proto.INT64, number=3, optional=True,
         )
 
-    class OptimizeAdRotationRecommendation(proto.Message):
-        r"""The Optimize Ad Rotation recommendation.    """
+    class KeywordMatchTypeRecommendation(proto.Message):
+        r"""The keyword match type recommendation.
+        Attributes:
+            keyword (google.ads.googleads.v8.common.types.KeywordInfo):
+                Output only. The existing keyword where the
+                match type should be more broad.
+            recommended_match_type (google.ads.googleads.v8.enums.types.KeywordMatchTypeEnum.KeywordMatchType):
+                Output only. The recommended new match type.
+        """
+
+        keyword = proto.Field(
+            proto.MESSAGE, number=1, message=criteria.KeywordInfo,
+        )
+        recommended_match_type = proto.Field(
+            proto.ENUM,
+            number=2,
+            enum=keyword_match_type.KeywordMatchTypeEnum.KeywordMatchType,
+        )
+
+    class EnhancedCpcOptInRecommendation(proto.Message):
+        r"""The Enhanced Cost-Per-Click Opt-In recommendation.    """
+
+    class SearchPartnersOptInRecommendation(proto.Message):
+        r"""The Search Partners Opt-In recommendation.    """
+
+    class CallExtensionRecommendation(proto.Message):
+        r"""The Call extension recommendation.
+        Attributes:
+            recommended_extensions (Sequence[google.ads.googleads.v8.common.types.CallFeedItem]):
+                Output only. Call extensions recommended to
+                be added.
+        """
+
+        recommended_extensions = proto.RepeatedField(
+            proto.MESSAGE, number=1, message=extensions.CallFeedItem,
+        )
 
     class TargetRoasOptInRecommendation(proto.Message):
         r"""The Target ROAS opt-in recommendation.
@@ -366,24 +424,6 @@ class Recommendation(proto.Message):
             proto.INT64, number=2, optional=True,
         )
 
-    class MaximizeConversionsOptInRecommendation(proto.Message):
-        r"""The Maximize Conversions Opt-In recommendation.
-        Attributes:
-            recommended_budget_amount_micros (int):
-                Output only. The recommended new budget
-                amount.
-        """
-
-        recommended_budget_amount_micros = proto.Field(
-            proto.INT64, number=2, optional=True,
-        )
-
-    class EnhancedCpcOptInRecommendation(proto.Message):
-        r"""The Enhanced Cost-Per-Click Opt-In recommendation.    """
-
-    class SearchPartnersOptInRecommendation(proto.Message):
-        r"""The Search Partners Opt-In recommendation.    """
-
     class ResponsiveSearchAdRecommendation(proto.Message):
         r"""The add responsive search ad recommendation.
         Attributes:
@@ -406,17 +446,8 @@ class Recommendation(proto.Message):
             proto.INT64, number=2, optional=True,
         )
 
-    class CalloutExtensionRecommendation(proto.Message):
-        r"""The Callout extension recommendation.
-        Attributes:
-            recommended_extensions (Sequence[google.ads.googleads.v8.common.types.CalloutFeedItem]):
-                Output only. Callout extensions recommended
-                to be added.
-        """
-
-        recommended_extensions = proto.RepeatedField(
-            proto.MESSAGE, number=1, message=extensions.CalloutFeedItem,
-        )
+    class OptimizeAdRotationRecommendation(proto.Message):
+        r"""The Optimize Ad Rotation recommendation.    """
 
     class SitelinkExtensionRecommendation(proto.Message):
         r"""The Sitelink extension recommendation.
@@ -428,37 +459,6 @@ class Recommendation(proto.Message):
 
         recommended_extensions = proto.RepeatedField(
             proto.MESSAGE, number=1, message=extensions.SitelinkFeedItem,
-        )
-
-    class CallExtensionRecommendation(proto.Message):
-        r"""The Call extension recommendation.
-        Attributes:
-            recommended_extensions (Sequence[google.ads.googleads.v8.common.types.CallFeedItem]):
-                Output only. Call extensions recommended to
-                be added.
-        """
-
-        recommended_extensions = proto.RepeatedField(
-            proto.MESSAGE, number=1, message=extensions.CallFeedItem,
-        )
-
-    class KeywordMatchTypeRecommendation(proto.Message):
-        r"""The keyword match type recommendation.
-        Attributes:
-            keyword (google.ads.googleads.v8.common.types.KeywordInfo):
-                Output only. The existing keyword where the
-                match type should be more broad.
-            recommended_match_type (google.ads.googleads.v8.enums.types.KeywordMatchTypeEnum.KeywordMatchType):
-                Output only. The recommended new match type.
-        """
-
-        keyword = proto.Field(
-            proto.MESSAGE, number=1, message=criteria.KeywordInfo,
-        )
-        recommended_match_type = proto.Field(
-            proto.ENUM,
-            number=2,
-            enum=keyword_match_type.KeywordMatchTypeEnum.KeywordMatchType,
         )
 
     resource_name = proto.Field(proto.STRING, number=1,)

@@ -35,6 +35,7 @@ class ConversionAdjustmentTypeEnum(proto.Message):
         UNKNOWN = 1
         RETRACTION = 2
         RESTATEMENT = 3
+        ENHANCEMENT = 4
 
 
 __all__ = tuple(sorted(__protobuf__.manifest))

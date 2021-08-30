@@ -16,7 +16,6 @@
 from importlib import import_module
 import logging.config
 
-from google.protobuf.message import Message as NativeMessageType
 import grpc.experimental
 import proto
 from proto.enums import ProtoEnumMeta
@@ -33,7 +32,7 @@ _logger = logging.getLogger(__name__)
 
 _SERVICE_CLIENT_TEMPLATE = "{}Client"
 
-_VALID_API_VERSIONS = ["v8", "v7", "v6"]
+_VALID_API_VERSIONS = ["v8", "v7"]
 _DEFAULT_VERSION = _VALID_API_VERSIONS[0]
 
 # See options at grpc.github.io/grpc/core/group__grpc__arg__keys.html
@@ -68,6 +67,7 @@ class _EnumGetter:
         self._client = client
         self._version = client.version or _DEFAULT_VERSION
         self._enums = None
+        self._use_proto_plus = client.use_proto_plus
 
     def __dir__(self):
         """Overrides behavior when dir() is called on instances of this class.
@@ -98,10 +98,14 @@ class _EnumGetter:
             )
         try:
             enum_class = self._client.get_type(name)
-            for attr in dir(enum_class):
-                attr_val = getattr(enum_class, attr)
-                if isinstance(attr_val, ProtoEnumMeta):
-                    return attr_val
+
+            if self._use_proto_plus == True:
+                for attr in dir(enum_class):
+                    attr_val = getattr(enum_class, attr)
+                    if isinstance(attr_val, ProtoEnumMeta):
+                        return attr_val
+            else:
+                return enum_class
         except ValueError:
             raise AttributeError(
                 f"'{type(self).__name__}' object has no attribute '{name}'"
@@ -137,33 +141,17 @@ class GoogleAdsClient:
 
     @classmethod
     def copy_from(cls, destination, origin):
-        """A convenience method that wraps native CopyFrom methods.
+        """Copies protobuf and proto-plus messages into one-another.
 
-        This method consolidates the CopyFrom logic of native and proto-plus
-        wrapped protobuf messages into a single helper method.
+        This method consolidates the CopyFrom logic of protobuf and proto-plus
+        messages into a single helper method. The destination message will be
+        updated with the exact state of the origin message.
 
         Args:
-            destination: The protobuf message where changes are being copied.
-            origin: The protobuf message where changes are being copied from.
+            destination: The message where changes are being copied.
+            origin: The message where changes are being copied from.
         """
-        is_dest_wrapped = isinstance(destination, proto.Message)
-        is_orig_wrapped = isinstance(origin, proto.Message)
-        is_dest_native = isinstance(destination, NativeMessageType)
-        is_orig_native = isinstance(origin, NativeMessageType)
-
-        if is_dest_wrapped and is_orig_wrapped:
-            proto.Message.copy_from(destination, origin)
-        elif is_dest_native and is_orig_native:
-            destination.CopyFrom(origin)
-        elif is_dest_wrapped and is_orig_native:
-            proto.Message.copy_from(destination, type(destination)(origin))
-        elif is_dest_native and is_orig_wrapped:
-            destination.CopyFrom(type(origin).pb(origin))
-        else:
-            raise ValueError(
-                "Only protobuf message instances can be used for copying. "
-                f"A {type(destination)} and a {type(origin)} were given."
-            )
+        return util.proto_copy_from(destination, origin)
 
     @classmethod
     def _get_client_kwargs(cls, config_data):
@@ -187,6 +175,7 @@ class GoogleAdsClient:
             "logging_config": config_data.get("logging"),
             "linked_customer_id": config_data.get("linked_customer_id"),
             "http_proxy": config_data.get("http_proxy"),
+            "use_proto_plus": config_data.get("use_proto_plus"),
         }
 
     @classmethod
@@ -300,6 +289,7 @@ class GoogleAdsClient:
         linked_customer_id=None,
         version=None,
         http_proxy=None,
+        use_proto_plus=False,
     ):
         """Initializer for the GoogleAdsClient.
 
@@ -322,8 +312,9 @@ class GoogleAdsClient:
         self.login_customer_id = login_customer_id
         self.linked_customer_id = linked_customer_id
         self.version = version
-        self.enums = _EnumGetter(self)
         self.http_proxy = http_proxy
+        self.use_proto_plus = use_proto_plus
+        self.enums = _EnumGetter(self)
 
         # If given, write the http_proxy channel option for GRPC to use
         if http_proxy:
@@ -385,7 +376,7 @@ class GoogleAdsClient:
                 self.linked_customer_id,
             ),
             LoggingInterceptor(_logger, version, endpoint),
-            ExceptionInterceptor(version),
+            ExceptionInterceptor(version, use_proto_plus=self.use_proto_plus),
         ]
 
         channel = grpc.intercept_channel(channel, *interceptors)
@@ -439,4 +430,7 @@ class GoogleAdsClient:
                 f"Google Ads API {version}"
             )
 
-        return message_class()
+        if self.use_proto_plus == True:
+            return message_class()
+        else:
+            return util.convert_proto_plus_to_protobuf(message_class())

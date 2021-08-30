@@ -51,6 +51,8 @@ __all__ = (
     "ConversionAdjustmentUploadErrorEnum",
     "ConversionCustomVariableErrorEnum",
     "ConversionUploadErrorEnum",
+    "ConversionValueRuleErrorEnum",
+    "ConversionValueRuleSetErrorEnum",
     "CountryCodeErrorEnum",
     "CriterionErrorEnum",
     "CurrencyCodeErrorEnum",

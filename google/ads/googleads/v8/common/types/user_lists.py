@@ -76,11 +76,11 @@ class CrmBasedUserListInfo(proto.Message):
     Attributes:
         app_id (str):
             A string that uniquely identifies a mobile
-            application from which the data was collected to
-            the Google Ads API. For iOS, the ID string is
-            the 9 digit string that appears at the end of an
-            App Store URL (e.g., "476943146" for "Flood-It!
-            2" whose App Store link is
+            application from which the data was collected.
+            For iOS, the ID string is the 9 digit string
+            that appears at the end of an App Store URL
+            (e.g., "476943146" for "Flood-It! 2" whose App
+            Store link is
             http://itunes.apple.com/us/app/flood-
             it!-2/id476943146). For Android, the ID string
             is the application's package name (e.g.,

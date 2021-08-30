@@ -21,7 +21,9 @@ import pickle
 from pyfakefs.fake_filesystem_unittest import TestCase as FileTestCase
 import yaml
 
+from google.protobuf.message import Message as ProtobufMessageType
 from proto.enums import ProtoEnumMeta
+from proto import Message
 
 from google.ads.googleads import client as Client
 
@@ -49,12 +51,14 @@ class GoogleAdsClientTest(FileTestCase):
                 endpoint=kwargs.get("endpoint"),
                 version=kwargs.get("version"),
                 http_proxy=kwargs.get("http_proxy"),
+                use_proto_plus=kwargs.get("use_proto_plus"),
             )
             return client
 
     def setUp(self):
         self.setUpPyfakefs()
         self.developer_token = "abc123"
+        self.use_proto_plus = True
         self.client_id = "client_id_123456789"
         self.client_secret = "client_secret_987654321"
         self.refresh_token = "refresh"
@@ -64,15 +68,28 @@ class GoogleAdsClientTest(FileTestCase):
         self.linked_customer_id = "0987654321"
         self.version = latest_version
         self.http_proxy = "https://localhost:8000"
+        # The below fields are defaults that include required keys.
+        # They are merged with other keys in individual tests, and isolated
+        # here so that new required keys don't need to be added to each test.
+        self.default_config = {
+            "developer_token": self.developer_token,
+            "use_proto_plus": self.use_proto_plus,
+        }
+        self.default_env_var_config = {
+            "GOOGLE_ADS_DEVELOPER_TOKEN": self.developer_token,
+            "GOOGLE_ADS_USE_PROTO_PLUS": str(self.use_proto_plus),
+        }
 
     def test_get_client_kwargs_login_customer_id(self):
         config = {
-            "developer_token": self.developer_token,
-            "client_id": self.client_id,
-            "client_secret": self.client_secret,
-            "refresh_token": self.refresh_token,
-            "login_customer_id": self.login_customer_id,
-            "linked_customer_id": self.linked_customer_id,
+            **self.default_config,
+            **{
+                "client_id": self.client_id,
+                "client_secret": self.client_secret,
+                "refresh_token": self.refresh_token,
+                "login_customer_id": self.login_customer_id,
+                "linked_customer_id": self.linked_customer_id,
+            },
         }
         mock_credentials_instance = mock.Mock()
 
@@ -87,6 +104,7 @@ class GoogleAdsClientTest(FileTestCase):
                 {
                     "credentials": mock_credentials_instance,
                     "developer_token": self.developer_token,
+                    "use_proto_plus": self.use_proto_plus,
                     "endpoint": None,
                     "login_customer_id": self.login_customer_id,
                     "logging_config": None,
@@ -97,11 +115,13 @@ class GoogleAdsClientTest(FileTestCase):
 
     def test_get_client_kwargs_login_customer_id_as_None(self):
         config = {
-            "developer_token": self.developer_token,
-            "client_id": self.client_id,
-            "client_secret": self.client_secret,
-            "refresh_token": self.refresh_token,
-            "login_customer_id": None,
+            **self.default_config,
+            **{
+                "client_id": self.client_id,
+                "client_secret": self.client_secret,
+                "refresh_token": self.refresh_token,
+                "login_customer_id": None,
+            },
         }
         mock_credentials_instance = mock.Mock()
 
@@ -116,6 +136,7 @@ class GoogleAdsClientTest(FileTestCase):
                 {
                     "credentials": mock_credentials_instance,
                     "developer_token": self.developer_token,
+                    "use_proto_plus": self.use_proto_plus,
                     "endpoint": None,
                     "login_customer_id": None,
                     "logging_config": None,
@@ -126,11 +147,13 @@ class GoogleAdsClientTest(FileTestCase):
 
     def test_get_client_kwargs_linked_customer_id(self):
         config = {
-            "developer_token": self.developer_token,
-            "client_id": self.client_id,
-            "client_secret": self.client_secret,
-            "refresh_token": self.refresh_token,
-            "linked_customer_id": self.linked_customer_id,
+            **self.default_config,
+            **{
+                "client_id": self.client_id,
+                "client_secret": self.client_secret,
+                "refresh_token": self.refresh_token,
+                "linked_customer_id": self.linked_customer_id,
+            },
         }
         mock_credentials_instance = mock.Mock()
 
@@ -145,6 +168,7 @@ class GoogleAdsClientTest(FileTestCase):
                 {
                     "credentials": mock_credentials_instance,
                     "developer_token": self.developer_token,
+                    "use_proto_plus": self.use_proto_plus,
                     "endpoint": None,
                     "login_customer_id": None,
                     "logging_config": None,
@@ -155,11 +179,13 @@ class GoogleAdsClientTest(FileTestCase):
 
     def test_get_client_kwargs_linked_customer_id_as_none(self):
         config = {
-            "developer_token": self.developer_token,
-            "client_id": self.client_id,
-            "client_secret": self.client_secret,
-            "refresh_token": self.refresh_token,
-            "linked_customer_id": None,
+            **self.default_config,
+            **{
+                "client_id": self.client_id,
+                "client_secret": self.client_secret,
+                "refresh_token": self.refresh_token,
+                "linked_customer_id": None,
+            },
         }
         mock_credentials_instance = mock.Mock()
 
@@ -174,6 +200,7 @@ class GoogleAdsClientTest(FileTestCase):
                 {
                     "credentials": mock_credentials_instance,
                     "developer_token": self.developer_token,
+                    "use_proto_plus": self.use_proto_plus,
                     "endpoint": None,
                     "linked_customer_id": None,
                     "logging_config": None,
@@ -184,11 +211,13 @@ class GoogleAdsClientTest(FileTestCase):
 
     def test_get_client_kwargs(self):
         config = {
-            "developer_token": self.developer_token,
-            "client_id": self.client_id,
-            "client_secret": self.client_secret,
-            "refresh_token": self.refresh_token,
-            "http_proxy": self.http_proxy,
+            **self.default_config,
+            **{
+                "client_id": self.client_id,
+                "client_secret": self.client_secret,
+                "refresh_token": self.refresh_token,
+                "http_proxy": self.http_proxy,
+            },
         }
         mock_credentials_instance = mock.Mock()
 
@@ -203,6 +232,7 @@ class GoogleAdsClientTest(FileTestCase):
                 {
                     "credentials": mock_credentials_instance,
                     "developer_token": self.developer_token,
+                    "use_proto_plus": self.use_proto_plus,
                     "endpoint": None,
                     "login_customer_id": None,
                     "logging_config": None,
@@ -214,11 +244,13 @@ class GoogleAdsClientTest(FileTestCase):
     def test_get_client_kwargs_custom_endpoint(self):
         endpoint = "alt.endpoint.com"
         config = {
-            "developer_token": self.developer_token,
-            "client_id": self.client_id,
-            "client_secret": self.client_secret,
-            "refresh_token": self.refresh_token,
-            "endpoint": endpoint,
+            **self.default_config,
+            **{
+                "client_id": self.client_id,
+                "client_secret": self.client_secret,
+                "refresh_token": self.refresh_token,
+                "endpoint": endpoint,
+            },
         }
         mock_credentials_instance = mock.Mock()
 
@@ -232,6 +264,7 @@ class GoogleAdsClientTest(FileTestCase):
                 result,
                 {
                     "credentials": mock_credentials_instance,
+                    "use_proto_plus": self.use_proto_plus,
                     "developer_token": self.developer_token,
                     "endpoint": endpoint,
                     "login_customer_id": None,
@@ -243,6 +276,14 @@ class GoogleAdsClientTest(FileTestCase):
 
     def test_load_from_env(self):
         mock_credentials_instance = mock.Mock()
+        config = {
+            **self.default_env_var_config,
+            **{
+                "GOOGLE_ADS_CLIENT_ID": self.client_id,
+                "GOOGLE_ADS_CLIENT_SECRET": self.client_secret,
+                "GOOGLE_ADS_REFRESH_TOKEN": self.refresh_token,
+            },
+        }
 
         with mock.patch.object(
             Client.GoogleAdsClient, "__init__", return_value=None
@@ -251,19 +292,14 @@ class GoogleAdsClientTest(FileTestCase):
             "get_installed_app_credentials",
             return_value=mock_credentials_instance,
         ) as mock_credentials, mock.patch.dict(
-            os.environ,
-            {
-                "GOOGLE_ADS_DEVELOPER_TOKEN": self.developer_token,
-                "GOOGLE_ADS_CLIENT_ID": self.client_id,
-                "GOOGLE_ADS_CLIENT_SECRET": self.client_secret,
-                "GOOGLE_ADS_REFRESH_TOKEN": self.refresh_token,
-            },
+            os.environ, config
         ) as mock_os_environ:
             Client.GoogleAdsClient.load_from_env()
 
             mock_client_init.assert_called_once_with(
                 credentials=mock_credentials_instance,
                 developer_token=self.developer_token,
+                use_proto_plus=self.use_proto_plus,
                 endpoint=None,
                 login_customer_id=None,
                 logging_config=None,
@@ -274,6 +310,14 @@ class GoogleAdsClientTest(FileTestCase):
 
     def test_load_from_env_versioned(self):
         mock_credentials_instance = mock.Mock()
+        config = {
+            **self.default_env_var_config,
+            **{
+                "GOOGLE_ADS_CLIENT_ID": self.client_id,
+                "GOOGLE_ADS_CLIENT_SECRET": self.client_secret,
+                "GOOGLE_ADS_REFRESH_TOKEN": self.refresh_token,
+            },
+        }
 
         with mock.patch.object(
             Client.GoogleAdsClient, "__init__", return_value=None
@@ -282,19 +326,14 @@ class GoogleAdsClientTest(FileTestCase):
             "get_installed_app_credentials",
             return_value=mock_credentials_instance,
         ) as mock_credentials, mock.patch.dict(
-            os.environ,
-            {
-                "GOOGLE_ADS_DEVELOPER_TOKEN": self.developer_token,
-                "GOOGLE_ADS_CLIENT_ID": self.client_id,
-                "GOOGLE_ADS_CLIENT_SECRET": self.client_secret,
-                "GOOGLE_ADS_REFRESH_TOKEN": self.refresh_token,
-            },
+            os.environ, config
         ) as mock_os_environ:
             Client.GoogleAdsClient.load_from_env(version="v4")
 
             mock_client_init.assert_called_once_with(
                 credentials=mock_credentials_instance,
                 developer_token=self.developer_token,
+                use_proto_plus=self.use_proto_plus,
                 endpoint=None,
                 login_customer_id=None,
                 logging_config=None,
@@ -305,10 +344,12 @@ class GoogleAdsClientTest(FileTestCase):
 
     def test_load_from_dict(self):
         config = {
-            "developer_token": self.developer_token,
-            "client_id": self.client_id,
-            "client_secret": self.client_secret,
-            "refresh_token": self.refresh_token,
+            **self.default_config,
+            **{
+                "client_id": self.client_id,
+                "client_secret": self.client_secret,
+                "refresh_token": self.refresh_token,
+            },
         }
         mock_credentials_instance = mock.Mock()
 
@@ -324,6 +365,7 @@ class GoogleAdsClientTest(FileTestCase):
             mock_client_init.assert_called_once_with(
                 credentials=mock_credentials_instance,
                 developer_token=self.developer_token,
+                use_proto_plus=self.use_proto_plus,
                 endpoint=None,
                 login_customer_id=None,
                 logging_config=None,
@@ -334,10 +376,12 @@ class GoogleAdsClientTest(FileTestCase):
 
     def test_load_from_dict_versioned(self):
         config = {
-            "developer_token": self.developer_token,
-            "client_id": self.client_id,
-            "client_secret": self.client_secret,
-            "refresh_token": self.refresh_token,
+            **self.default_config,
+            **{
+                "client_id": self.client_id,
+                "client_secret": self.client_secret,
+                "refresh_token": self.refresh_token,
+            },
         }
         mock_credentials_instance = mock.Mock()
 
@@ -353,6 +397,7 @@ class GoogleAdsClientTest(FileTestCase):
             mock_client_init.assert_called_once_with(
                 credentials=mock_credentials_instance,
                 developer_token=self.developer_token,
+                use_proto_plus=self.use_proto_plus,
                 endpoint=None,
                 login_customer_id=None,
                 logging_config=None,
@@ -363,10 +408,12 @@ class GoogleAdsClientTest(FileTestCase):
 
     def test_load_from_string(self):
         config = {
-            "developer_token": self.developer_token,
-            "client_id": self.client_id,
-            "client_secret": self.client_secret,
-            "refresh_token": self.refresh_token,
+            **self.default_config,
+            **{
+                "client_id": self.client_id,
+                "client_secret": self.client_secret,
+                "refresh_token": self.refresh_token,
+            },
         }
         mock_credentials_instance = mock.Mock()
 
@@ -382,6 +429,7 @@ class GoogleAdsClientTest(FileTestCase):
             mock_client_init.assert_called_once_with(
                 credentials=mock_credentials_instance,
                 developer_token=self.developer_token,
+                use_proto_plus=self.use_proto_plus,
                 endpoint=None,
                 login_customer_id=None,
                 logging_config=None,
@@ -392,10 +440,12 @@ class GoogleAdsClientTest(FileTestCase):
 
     def test_load_from_string_versioned(self):
         config = {
-            "developer_token": self.developer_token,
-            "client_id": self.client_id,
-            "client_secret": self.client_secret,
-            "refresh_token": self.refresh_token,
+            **self.default_config,
+            **{
+                "client_id": self.client_id,
+                "client_secret": self.client_secret,
+                "refresh_token": self.refresh_token,
+            },
         }
         mock_credentials_instance = mock.Mock()
 
@@ -413,6 +463,7 @@ class GoogleAdsClientTest(FileTestCase):
             mock_client_init.assert_called_once_with(
                 credentials=mock_credentials_instance,
                 developer_token=self.developer_token,
+                use_proto_plus=self.use_proto_plus,
                 endpoint=None,
                 login_customer_id=None,
                 logging_config=None,
@@ -423,10 +474,12 @@ class GoogleAdsClientTest(FileTestCase):
 
     def test_load_from_storage(self):
         config = {
-            "developer_token": self.developer_token,
-            "client_id": self.client_id,
-            "client_secret": self.client_secret,
-            "refresh_token": self.refresh_token,
+            **self.default_config,
+            **{
+                "client_id": self.client_id,
+                "client_secret": self.client_secret,
+                "refresh_token": self.refresh_token,
+            },
         }
 
         file_path = os.path.join(os.path.expanduser("~"), "google-ads.yaml")
@@ -450,6 +503,7 @@ class GoogleAdsClientTest(FileTestCase):
             mock_client_init.assert_called_once_with(
                 credentials=mock_credentials_instance,
                 developer_token=self.developer_token,
+                use_proto_plus=self.use_proto_plus,
                 endpoint=None,
                 login_customer_id=None,
                 logging_config=None,
@@ -460,10 +514,12 @@ class GoogleAdsClientTest(FileTestCase):
 
     def test_load_from_storage_versioned(self):
         config = {
-            "developer_token": self.developer_token,
-            "client_id": self.client_id,
-            "client_secret": self.client_secret,
-            "refresh_token": self.refresh_token,
+            **self.default_config,
+            **{
+                "client_id": self.client_id,
+                "client_secret": self.client_secret,
+                "refresh_token": self.refresh_token,
+            },
         }
 
         file_path = os.path.join(os.path.expanduser("~"), "google-ads.yaml")
@@ -487,6 +543,7 @@ class GoogleAdsClientTest(FileTestCase):
             mock_client_init.assert_called_once_with(
                 credentials=mock_credentials_instance,
                 developer_token=self.developer_token,
+                use_proto_plus=self.use_proto_plus,
                 endpoint=None,
                 login_customer_id=None,
                 logging_config=None,
@@ -498,11 +555,13 @@ class GoogleAdsClientTest(FileTestCase):
     def test_load_from_storage_login_cid_int(self):
         login_cid = 1234567890
         config = {
-            "developer_token": self.developer_token,
-            "client_id": self.client_id,
-            "client_secret": self.client_secret,
-            "refresh_token": self.refresh_token,
-            "login_customer_id": login_cid,
+            **self.default_config,
+            **{
+                "client_id": self.client_id,
+                "client_secret": self.client_secret,
+                "refresh_token": self.refresh_token,
+                "login_customer_id": login_cid,
+            },
         }
 
         file_path = os.path.join(os.path.expanduser("~"), "google-ads.yaml")
@@ -526,6 +585,7 @@ class GoogleAdsClientTest(FileTestCase):
             mock_client_init.assert_called_once_with(
                 credentials=mock_credentials_instance,
                 developer_token=self.developer_token,
+                use_proto_plus=self.use_proto_plus,
                 endpoint=None,
                 login_customer_id=str(login_cid),
                 logging_config=None,
@@ -536,10 +596,12 @@ class GoogleAdsClientTest(FileTestCase):
 
     def test_load_from_storage_custom_path(self):
         config = {
-            "developer_token": self.developer_token,
-            "client_id": self.client_id,
-            "client_secret": self.client_secret,
-            "refresh_token": self.refresh_token,
+            **self.default_config,
+            **{
+                "client_id": self.client_id,
+                "client_secret": self.client_secret,
+                "refresh_token": self.refresh_token,
+            },
         }
 
         file_path = "test/google-ads.yaml"
@@ -557,6 +619,7 @@ class GoogleAdsClientTest(FileTestCase):
             mock_client_init.assert_called_once_with(
                 credentials=mock_credentials_instance,
                 developer_token=self.developer_token,
+                use_proto_plus=self.use_proto_plus,
                 endpoint=None,
                 login_customer_id=None,
                 logging_config=None,
@@ -590,9 +653,11 @@ class GoogleAdsClientTest(FileTestCase):
 
     def test_load_from_storage_service_account_config(self):
         config = {
-            "developer_token": self.developer_token,
-            "json_key_file_path": self.json_key_file_path,
-            "impersonated_email": self.impersonated_email,
+            **self.default_config,
+            **{
+                "json_key_file_path": self.json_key_file_path,
+                "impersonated_email": self.impersonated_email,
+            },
         }
 
         file_path = os.path.join(os.path.expanduser("~"), "google-ads.yaml")
@@ -615,6 +680,7 @@ class GoogleAdsClientTest(FileTestCase):
             mock_client_init.assert_called_once_with(
                 credentials=mock_credentials_instance,
                 developer_token=self.developer_token,
+                use_proto_plus=self.use_proto_plus,
                 endpoint=None,
                 login_customer_id=None,
                 logging_config=None,
@@ -625,8 +691,10 @@ class GoogleAdsClientTest(FileTestCase):
 
     def test_load_from_storage_service_account_no_impersonated_email(self):
         config = {
-            "developer_token": self.developer_token,
-            "json_key_file_path": self.json_key_file_path,
+            **self.default_config,
+            **{
+                "json_key_file_path": self.json_key_file_path,
+            },
         }
 
         file_path = os.path.join(os.path.expanduser("~"), "google-ads.yaml")
@@ -741,6 +809,18 @@ class GoogleAdsClientTest(FileTestCase):
             version="bad_version",
         )
 
+    def test_get_type_proto_plus_proto(self):
+        """Returns a proto.Message instance when use_proto_plus is true."""
+        client = self._create_test_client(use_proto_plus=True)
+        message = client.get_type("Campaign")
+        self.assertIsInstance(message, Message)
+
+    def test_get_type_protobuf_proto(self):
+        """Returns a protobuf instance when use_proto_plus is false."""
+        client = self._create_test_client(use_proto_plus=False)
+        message = client.get_type("Campaign")
+        self.assertIsInstance(message, ProtobufMessageType)
+
     def test_init_no_logging_config(self):
         """Should call logging.config.dictConfig if logging config exists."""
         with mock.patch(
@@ -779,12 +859,12 @@ class GoogleAdsClientTest(FileTestCase):
 
     def test_client_dot_enums_hasattr(self):
         """Ensures hasattr works as expected with real Enum."""
-        client = self._create_test_client()
+        client = self._create_test_client(use_proto_plus=True)
         self.assertTrue(hasattr(client.enums, "CampaignStatusEnum"))
 
     def test_client_dot_enums_only_enums(self):
         """Ensures non-Enum name raises AttributeError."""
-        client = self._create_test_client()
+        client = self._create_test_client(use_proto_plus=True)
         self.assertRaises(AttributeError, getattr, client.enums, "Campaign")
 
     def test_client_dot_enums_property(self):
@@ -797,7 +877,7 @@ class GoogleAdsClientTest(FileTestCase):
         access the inner Enum object.
         """
         for ver in valid_versions:
-            client = self._create_test_client(version=ver)
+            client = self._create_test_client(version=ver, use_proto_plus=True)
             self.assertTrue(
                 hasattr(client, "enums"),
                 "GoogleAdsService in "
@@ -814,8 +894,22 @@ class GoogleAdsClientTest(FileTestCase):
                     getattr(client.enums, name), ProtoEnumMeta
                 )
 
-    def test_client_copy_from_both_wrapped(self):
-        """client.copy_from works with two wrapped proto messages."""
+    def test_client_dot_enums_use_proto_plus(self):
+        """Should return a protobuf proto if use_proto_plus is set to true."""
+        client = self._create_test_client(use_proto_plus=True)
+        enum = client.enums.CampaignStatusEnum
+        self.assertTrue(hasattr(enum, "PAUSED"))
+        self.assertIsInstance(enum, ProtoEnumMeta)
+
+    def test_client_dot_enums_protobuf_protos(self):
+        """Should return protobuf protos if use_proto_plus is set to false."""
+        client = self._create_test_client(use_proto_plus=False)
+        enum = client.enums.CampaignStatusEnum
+        self.assertTrue(hasattr(enum, "PAUSED"))
+        self.assertIsInstance(enum, ProtobufMessageType)
+
+    def test_client_copy_from_both_proto_plus(self):
+        """client.copy_from works with two proto_plus proto messages."""
         client = self._create_test_client()
         destination = client.get_type("Campaign", version=latest_version)
         origin = client.get_type("Campaign", version=latest_version)
@@ -826,89 +920,93 @@ class GoogleAdsClientTest(FileTestCase):
         self.assertEqual(destination.name, "Test")
         self.assertIsNot(destination, origin)
 
-    def test_client_copy_from_both_native(self):
-        """client.copy_from works with two native proto messages."""
-        client = self._create_test_client()
+    def test_client_copy_from_both_protobuf(self):
+        """client.copy_from works with two protobuf proto messages."""
+        client = self._create_test_client(use_proto_plus=True)
         destination = client.get_type("Campaign", version=latest_version)
-        native_dest = type(destination).pb(destination)
+        protobuf_dest = type(destination).pb(destination)
         origin = client.get_type("Campaign", version=latest_version)
-        native_orig = type(origin).pb(origin)
+        protobuf_orig = type(origin).pb(origin)
         origin.name = "Test"
 
-        client.copy_from(native_dest, native_orig)
+        client.copy_from(protobuf_dest, protobuf_orig)
 
         self.assertEqual(destination.name, "Test")
         self.assertIsNot(destination, origin)
 
-    def test_client_copy_from_native_origin(self):
-        """client.copy_from works with a wrapped dest and a native origin."""
-        client = self._create_test_client()
+    def test_client_copy_from_protobuf_origin(self):
+        """client.copy_from works with a proto_plus dest and a protobuf origin."""
+        client = self._create_test_client(use_proto_plus=True)
         destination = client.get_type("Campaign", version=latest_version)
         origin = client.get_type("Campaign", version=latest_version)
-        native_orig = type(origin).pb(origin)
+        protobuf_orig = type(origin).pb(origin)
         origin.name = "Test"
 
-        client.copy_from(destination, native_orig)
+        client.copy_from(destination, protobuf_orig)
 
         self.assertEqual(destination.name, "Test")
         self.assertIsNot(destination, origin)
 
-    def test_client_copy_from_native_destination(self):
-        """client.copy_from works with a native dest and a wrapped origin."""
-        client = self._create_test_client()
+    def test_client_copy_from_protobuf_destination(self):
+        """client.copy_from works with a protobuf dest and a proto_plus origin."""
+        client = self._create_test_client(use_proto_plus=True)
         destination = client.get_type("Campaign", version=latest_version)
-        native_dest = type(destination).pb(destination)
+        protobuf_dest = type(destination).pb(destination)
         origin = client.get_type("Campaign", version=latest_version)
         origin.name = "Test"
 
-        client.copy_from(native_dest, origin)
+        client.copy_from(protobuf_dest, origin)
 
         self.assertEqual(destination.name, "Test")
         self.assertIsNot(destination, origin)
 
-    def test_client_copy_from_different_types_wrapped(self):
-        """TypeError is raised with different types of wrapped messasges."""
-        client = self._create_test_client()
+    def test_client_copy_from_different_types_proto_plus(self):
+        """TypeError is raised with different types of proto_plus messasges."""
+        client = self._create_test_client(use_proto_plus=True)
         destination = client.get_type("AdGroup", version=latest_version)
         origin = client.get_type("Campaign", version=latest_version)
         origin.name = "Test"
 
         self.assertRaises(TypeError, client.copy_from, destination, origin)
 
-    def test_client_copy_from_different_types_native(self):
-        """TypeError is raised with different types of native messasges."""
-        client = self._create_test_client()
+    def test_client_copy_from_different_types_protobuf(self):
+        """TypeError is raised with different types of protobuf messasges."""
+        client = self._create_test_client(use_proto_plus=True)
         destination = client.get_type("AdGroup", version=latest_version)
-        native_dest = type(destination).pb(destination)
+        protobuf_dest = type(destination).pb(destination)
         origin = client.get_type("Campaign", version=latest_version)
-        native_orig = type(origin).pb(origin)
+        protobuf_orig = type(origin).pb(origin)
         origin.name = "Test"
 
-        self.assertRaises(TypeError, client.copy_from, native_dest, native_orig)
+        self.assertRaises(
+            TypeError, client.copy_from, protobuf_dest, protobuf_orig
+        )
 
-    def test_client_copy_from_different_types_native_origin(self):
-        """TypeError is raised with different types and native origin."""
-        client = self._create_test_client()
+    def test_client_copy_from_different_types_protobuf_origin(self):
+        """TypeError is raised with different types and protobuf origin."""
+        client = self._create_test_client(use_proto_plus=True)
         destination = client.get_type("AdGroup", version=latest_version)
         origin = client.get_type("Campaign", version=latest_version)
-        native_orig = type(origin).pb(origin)
+        protobuf_orig = type(origin).pb(origin)
         origin.name = "Test"
 
-        self.assertRaises(TypeError, client.copy_from, destination, native_orig)
+        self.assertRaises(
+            TypeError, client.copy_from, destination, protobuf_orig
+        )
 
-    def test_client_copy_from_different_types_native_destination(self):
-        """TypeError is raised with different types and native destination."""
-        client = self._create_test_client()
+    def test_client_copy_from_different_types_protobuf_destination(self):
+        """TypeError is raised with different types and protobuf destination."""
+        client = self._create_test_client(use_proto_plus=True)
         destination = client.get_type("AdGroup", version=latest_version)
-        native_dest = type(destination).pb(destination)
+        protobuf_dest = type(destination).pb(destination)
         origin = client.get_type("Campaign", version=latest_version)
         origin.name = "Test"
 
-        self.assertRaises(TypeError, client.copy_from, native_dest, origin)
+        self.assertRaises(TypeError, client.copy_from, protobuf_dest, origin)
 
     def test_client_copy_from_non_proto_message(self):
         """ValueError is raised if an object other than a protobuf is given"""
-        client = self._create_test_client()
+        client = self._create_test_client(use_proto_plus=True)
         destination = client.get_type("AdGroup", version=latest_version)
         origin = {"name": "Test"}
 
@@ -916,7 +1014,10 @@ class GoogleAdsClientTest(FileTestCase):
 
     def test_client_is_picklable(self):
         client = Client.GoogleAdsClient(
-            {}, self.developer_token, endpoint=None, version=None,
+            {},
+            self.developer_token,
+            endpoint=None,
+            version=None,
         )
 
         try:
@@ -935,6 +1036,16 @@ class GoogleAdsClientTest(FileTestCase):
 
     def test_load_http_proxy_from_env(self):
         mock_credentials_instance = mock.Mock()
+        config = {
+            **self.default_env_var_config,
+            **{
+                "GOOGLE_ADS_DEVELOPER_TOKEN": self.developer_token,
+                "GOOGLE_ADS_CLIENT_ID": self.client_id,
+                "GOOGLE_ADS_CLIENT_SECRET": self.client_secret,
+                "GOOGLE_ADS_REFRESH_TOKEN": self.refresh_token,
+                "GOOGLE_ADS_HTTP_PROXY": self.http_proxy,
+            },
+        }
 
         with mock.patch.object(
             Client.GoogleAdsClient, "__init__", return_value=None
@@ -943,20 +1054,14 @@ class GoogleAdsClientTest(FileTestCase):
             "get_installed_app_credentials",
             return_value=mock_credentials_instance,
         ) as mock_credentials, mock.patch.dict(
-            os.environ,
-            {
-                "GOOGLE_ADS_DEVELOPER_TOKEN": self.developer_token,
-                "GOOGLE_ADS_CLIENT_ID": self.client_id,
-                "GOOGLE_ADS_CLIENT_SECRET": self.client_secret,
-                "GOOGLE_ADS_REFRESH_TOKEN": self.refresh_token,
-                "GOOGLE_ADS_HTTP_PROXY": self.http_proxy,
-            },
+            os.environ, config
         ) as mock_os_environ:
             Client.GoogleAdsClient.load_from_env()
 
             mock_client_init.assert_called_once_with(
                 credentials=mock_credentials_instance,
                 developer_token=self.developer_token,
+                use_proto_plus=self.use_proto_plus,
                 endpoint=None,
                 login_customer_id=None,
                 logging_config=None,
@@ -967,11 +1072,13 @@ class GoogleAdsClientTest(FileTestCase):
 
     def test_load_http_proxy_from_dict(self):
         config = {
-            "developer_token": self.developer_token,
-            "client_id": self.client_id,
-            "client_secret": self.client_secret,
-            "refresh_token": self.refresh_token,
-            "http_proxy": self.http_proxy,
+            **self.default_config,
+            **{
+                "client_id": self.client_id,
+                "client_secret": self.client_secret,
+                "refresh_token": self.refresh_token,
+                "http_proxy": self.http_proxy,
+            },
         }
         mock_credentials_instance = mock.Mock()
 
@@ -987,6 +1094,7 @@ class GoogleAdsClientTest(FileTestCase):
             mock_client_init.assert_called_once_with(
                 credentials=mock_credentials_instance,
                 developer_token=self.developer_token,
+                use_proto_plus=self.use_proto_plus,
                 endpoint=None,
                 login_customer_id=None,
                 logging_config=None,
@@ -997,11 +1105,13 @@ class GoogleAdsClientTest(FileTestCase):
 
     def test_load_http_proxy_from_string(self):
         config = {
-            "developer_token": self.developer_token,
-            "client_id": self.client_id,
-            "client_secret": self.client_secret,
-            "refresh_token": self.refresh_token,
-            "http_proxy": self.http_proxy,
+            **self.default_config,
+            **{
+                "client_id": self.client_id,
+                "client_secret": self.client_secret,
+                "refresh_token": self.refresh_token,
+                "http_proxy": self.http_proxy,
+            },
         }
         mock_credentials_instance = mock.Mock()
 
@@ -1017,6 +1127,7 @@ class GoogleAdsClientTest(FileTestCase):
             mock_client_init.assert_called_once_with(
                 credentials=mock_credentials_instance,
                 developer_token=self.developer_token,
+                use_proto_plus=self.use_proto_plus,
                 endpoint=None,
                 login_customer_id=None,
                 logging_config=None,
@@ -1025,13 +1136,15 @@ class GoogleAdsClientTest(FileTestCase):
                 http_proxy=self.http_proxy,
             )
 
-    def test_load_from_storage(self):
+    def test_load_http_proxy_from_storage(self):
         config = {
-            "developer_token": self.developer_token,
-            "client_id": self.client_id,
-            "client_secret": self.client_secret,
-            "refresh_token": self.refresh_token,
-            "http_proxy": self.http_proxy,
+            **self.default_config,
+            **{
+                "client_id": self.client_id,
+                "client_secret": self.client_secret,
+                "refresh_token": self.refresh_token,
+                "http_proxy": self.http_proxy,
+            },
         }
 
         file_path = os.path.join(os.path.expanduser("~"), "google-ads.yaml")
@@ -1055,6 +1168,7 @@ class GoogleAdsClientTest(FileTestCase):
             mock_client_init.assert_called_once_with(
                 credentials=mock_credentials_instance,
                 developer_token=self.developer_token,
+                use_proto_plus=self.use_proto_plus,
                 endpoint=None,
                 login_customer_id=None,
                 logging_config=None,

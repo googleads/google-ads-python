@@ -32,7 +32,6 @@ class UserDataServiceGrpcTransport(UserDataServiceTransport):
     """gRPC backend transport for UserDataService.
 
     Service to manage user data uploads.
-    Accessible only to customers on the allow-list.
 
     This class defines the same methods as the primary client, so the
     primary client can load the underlying transport implementation

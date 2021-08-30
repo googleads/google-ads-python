@@ -15,6 +15,7 @@
 #
 import proto  # type: ignore
 
+from google.ads.googleads.v8.common.types import offline_user_data
 from google.ads.googleads.v8.enums.types import conversion_adjustment_type
 from google.rpc import status_pb2  # type: ignore
 
@@ -125,6 +126,18 @@ class ConversionAdjustment(proto.Message):
             new, more recent, adjustment occurrence time.
             Otherwise, it will be treated as a duplicate of
             the previous restatement and ignored.
+        user_identifiers (Sequence[google.ads.googleads.v8.common.types.UserIdentifier]):
+            The user identifiers to enhance the original
+            conversion. ConversionAdjustmentUploadService
+            only accepts user identifiers in enhancements.
+            The maximum number of user identifiers for each
+            enhancement is 5.
+        user_agent (str):
+            The user agent to enhance the original conversion. This can
+            be found in your user's HTTP request header when they
+            convert on your web page. Example, "Mozilla/5.0 (iPhone; CPU
+            iPhone OS 12_2 like Mac OS X)". User agent can only be
+            specified in enhancements with user identifiers.
         gclid_date_time_pair (google.ads.googleads.v8.services.types.GclidDateTimePair):
             Uniquely identifies a conversion that was
             reported without an order ID specified.
@@ -132,7 +145,8 @@ class ConversionAdjustment(proto.Message):
             The order ID of the conversion to be
             adjusted. If the conversion was reported with an
             order ID specified, that order ID must be used
-            as the identifier here.
+            as the identifier here. The order ID is required
+            for enhancements.
     """
 
     conversion_action = proto.Field(proto.STRING, number=8, optional=True,)
@@ -145,6 +159,10 @@ class ConversionAdjustment(proto.Message):
     restatement_value = proto.Field(
         proto.MESSAGE, number=6, message="RestatementValue",
     )
+    user_identifiers = proto.RepeatedField(
+        proto.MESSAGE, number=10, message=offline_user_data.UserIdentifier,
+    )
+    user_agent = proto.Field(proto.STRING, number=11, optional=True,)
     gclid_date_time_pair = proto.Field(
         proto.MESSAGE,
         number=1,

@@ -50,6 +50,12 @@ class AdGroupAd(proto.Message):
         ad_strength (google.ads.googleads.v8.enums.types.AdStrengthEnum.AdStrength):
             Output only. Overall ad strength for this ad
             group ad.
+        action_items (Sequence[str]):
+            Output only. A list of recommendations to
+            improve the ad strength. For example, a
+            recommendation could be "Your headlines are a
+            little too similar. Try adding more distinct
+            headlines.".
         labels (Sequence[str]):
             Output only. The resource names of labels
             attached to this ad group ad.
@@ -69,6 +75,7 @@ class AdGroupAd(proto.Message):
     ad_strength = proto.Field(
         proto.ENUM, number=7, enum=gage_ad_strength.AdStrengthEnum.AdStrength,
     )
+    action_items = proto.RepeatedField(proto.STRING, number=13,)
     labels = proto.RepeatedField(proto.STRING, number=10,)
 
 

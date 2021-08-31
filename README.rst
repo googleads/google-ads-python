@@ -42,7 +42,7 @@ dates for the above API versions.
 
 Protobuf Messages
 -----------------
-Version `14.0.0_` of this library introduced the **required** `use_proto_plus`
+Version `14.0.0`_ of this library introduced the **required** `use_proto_plus`
 configuration option that specifies which type of protobuf message to use. For
 information on why this flag is important and what the differences are between
 the two message types, see the `Protobuf Messages`_ guide.

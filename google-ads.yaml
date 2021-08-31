@@ -7,6 +7,16 @@
 ###############################################################################
 developer_token: INSERT_DEVELOPER_TOKEN_HERE
 
+# Use proto plus
+###############################################################################
+# This parameter specifies whether the client library should return           #
+# proto-plus messages or protobuf messages. This value should be explicitly   #
+# set to either "True" or "False", For more information on the                #
+# differences between these two types, see our Protobuf Messages guide:       #
+# https://developers.google.com/google-ads/api/docs/client-libs/python/protobuf-messages #
+###############################################################################
+use_proto_plus: INSERT_USE_PROTO_PLUS_FLAG_HERE
+
 # OAuth2 configuration
 ###############################################################################
 # The below configuration parameters are used to authenticate using the       #

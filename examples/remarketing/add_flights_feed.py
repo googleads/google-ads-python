@@ -177,35 +177,35 @@ def _create_feed_mapping(
     # Maps the feed attribute IDs to the field ID constants.
     placeholder_field_enum = client.enums.FlightPlaceholderFieldEnum
     flight_desc_enum_value = placeholder_field_enum.FLIGHT_DESCRIPTION
-    desc_mapping = client.get_type("AttributeFieldMapping", "v6")
+    desc_mapping = client.get_type("AttributeFieldMapping")
     desc_mapping.feed_attribute_id = placeholders_to_feed_attribute_map[
         flight_desc_enum_value
     ].id
     desc_mapping.flight_field = flight_desc_enum_value
 
     flight_dest_id_enum_value = placeholder_field_enum.DESTINATION_ID
-    dest_id_mapping = client.get_type("AttributeFieldMapping", "v6")
+    dest_id_mapping = client.get_type("AttributeFieldMapping")
     dest_id_mapping.feed_attribute_id = placeholders_to_feed_attribute_map[
         flight_dest_id_enum_value
     ].id
     dest_id_mapping.flight_field = flight_dest_id_enum_value
 
     flight_price_enum_value = placeholder_field_enum.FLIGHT_PRICE
-    price_mapping = client.get_type("AttributeFieldMapping", "v6")
+    price_mapping = client.get_type("AttributeFieldMapping")
     price_mapping.feed_attribute_id = placeholders_to_feed_attribute_map[
         flight_price_enum_value
     ].id
     price_mapping.flight_field = flight_price_enum_value
 
     flight_sale_price_enum_value = placeholder_field_enum.FLIGHT_SALE_PRICE
-    sale_price_mapping = client.get_type("AttributeFieldMapping", "v6")
+    sale_price_mapping = client.get_type("AttributeFieldMapping")
     sale_price_mapping.feed_attribute_id = placeholders_to_feed_attribute_map[
         flight_sale_price_enum_value
     ].id
     sale_price_mapping.flight_field = flight_sale_price_enum_value
 
     flight_final_urls_enum_value = placeholder_field_enum.FINAL_URLS
-    final_urls_mapping = client.get_type("AttributeFieldMapping", "v6")
+    final_urls_mapping = client.get_type("AttributeFieldMapping")
     final_urls_mapping.feed_attribute_id = placeholders_to_feed_attribute_map[
         flight_final_urls_enum_value
     ].id

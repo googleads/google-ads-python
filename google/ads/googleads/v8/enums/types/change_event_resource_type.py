@@ -46,6 +46,10 @@ class ChangeEventResourceTypeEnum(proto.Message):
         CAMPAIGN_FEED = 11
         AD_GROUP_FEED = 12
         AD_GROUP_AD = 13
+        ASSET = 14
+        CUSTOMER_ASSET = 15
+        CAMPAIGN_ASSET = 16
+        AD_GROUP_ASSET = 17
 
 
 __all__ = tuple(sorted(__protobuf__.manifest))

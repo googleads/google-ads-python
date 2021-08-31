@@ -61,12 +61,14 @@ def main(
     keyword_theme_infos = _map_keyword_theme_constants_to_infos(
         client, keyword_theme_constants
     )
-    suggested_budget_amount = _get_budget_suggestion(
-        client,
-        customer_id,
-        business_location_id,
-        keyword_theme_infos,
+    suggestion_info = _get_smart_campaign_suggestion_info(
+        client, business_location_id, business_name, keyword_theme_infos
     )
+    suggested_budget_amount = _get_budget_suggestion(
+        client, customer_id, suggestion_info
+    )
+    ad_suggestions = _get_ad_suggestions(client, customer_id, suggestion_info)
+
     # [START add_smart_campaign_7]
     # The below methods create and return MutateOperations that we later
     # provide to the GoogleAdsService.Mutate method in order to create the
@@ -88,7 +90,9 @@ def main(
         client, customer_id, keyword_theme_infos
     )
     ad_group_operation = _create_ad_group_operation(client, customer_id)
-    ad_group_ad_operation = _create_ad_group_ad_operation(client, customer_id)
+    ad_group_ad_operation = _create_ad_group_ad_operation(
+        client, customer_id, ad_suggestions
+    )
 
     googleads_service = client.get_service("GoogleAdsService")
 
@@ -146,42 +150,54 @@ def _get_keyword_theme_constants(client, keyword_text):
     # [END add_smart_campaign]
 
 
-# [START add_smart_campaign_1]
-def _get_budget_suggestion(
-    client,
-    customer_id,
-    business_location_id,
-    keyword_theme_infos,
-):
-    """Retrieves a suggested budget amount for a new budget.
-
-    Using the SmartCampaignSuggestService to determine a daily budget for new
-    and existing Smart campaigns is highly recommended because it helps the
-    campaigns achieve optimal performance.
+def _map_keyword_theme_constants_to_infos(client, keyword_theme_constants):
+    """Maps a list of KeywordThemeConstants to KeywordThemeInfos.
 
     Args:
         client: an initialized GoogleAdsClient instance.
-        customer_id: a client customer ID.
+        keyword_theme_constants: a list of KeywordThemeConstants.
+
+    Returns:
+        a list of KeywordThemeInfos.
+    """
+    infos = []
+    for constant in keyword_theme_constants:
+        info = client.get_type("KeywordThemeInfo")
+        info.keyword_theme_constant = constant.resource_name
+        infos.append(info)
+
+    return infos
+
+
+# [START add_smart_campaign_9]
+def _get_smart_campaign_suggestion_info(
+    client, business_location_id, business_name, keyword_theme_infos
+):
+    """Builds a SmartCampaignSuggestionInfo object with business details.
+
+    The details are used by the SmartCampaignSuggestService to suggest a
+    budget amount as well as creatives for the ad.
+
+    Note that when retrieving ad creative suggestions it's required that the
+    "final_url", "language_code" and "keyword_themes" fields are set on the
+    SmartCampaignSuggestionInfo instance.
+
+    Args:
+        client: an initialized GoogleAdsClient instance.
         business_location_id: the ID of a Google My Business location.
+        business_name: the name of a Google My Business.
         keyword_theme_infos: a list of KeywordThemeInfos.
 
     Returns:
-        a daily budget amount in micros.
+        A SmartCampaignSuggestionInfo instance.
     """
-    sc_suggest_service = client.get_service("SmartCampaignSuggestService")
-    request = client.get_type("SuggestSmartCampaignBudgetOptionsRequest")
-    request.customer_id = customer_id
-    # You can retrieve suggestions for an existing campaign by setting the
-    # "campaign" field of the request equal to the resource name of a campaign
-    # and leaving the rest of the request fields below unset:
-    # request.campaign = INSERT_CAMPAIGN_RESOURCE_NAME_HERE
-
-    # Since these suggestions are for a new campaign, we're going to
-    # use the suggestion_info field instead.
-    suggestion_info = request.suggestion_info
+    suggestion_info = client.get_type("SmartCampaignSuggestionInfo")
 
     # Add the URL of the campaign's landing page.
     suggestion_info.final_url = _LANDING_PAGE_URL
+
+    # Add the language code for the campaign.
+    suggestion_info.language_code = _LANGUAGE_CODE
 
     # Construct location information using the given geo target constant. It's
     # also possible to provide a geographic proximity using the "proximity"
@@ -212,9 +228,12 @@ def _get_budget_suggestion(
     # Add the KeywordThemeInfo objects to the SuggestionInfo object.
     suggestion_info.keyword_themes.extend(keyword_theme_infos)
 
-    # If provided, add the GMB location ID.
+    # Set either of the business_location_id or business_name, depending on
+    # whichever is provided.
     if business_location_id:
         suggestion_info.business_location_id = business_location_id
+    else:
+        suggestion_info.business_context.business_name = business_name
 
     # Add a schedule detailing which days of the week the business is open.
     # This schedule describes a schedule in which the business is open on
@@ -231,6 +250,39 @@ def _get_budget_suggestion(
     ad_schedule_info.start_minute = zero_minute_of_hour
     ad_schedule_info.end_minute = zero_minute_of_hour
     suggestion_info.ad_schedules.append(ad_schedule_info)
+
+    return suggestion_info
+    # [END add_smart_campaign_9]
+
+
+# [START add_smart_campaign_1]
+def _get_budget_suggestion(client, customer_id, suggestion_info):
+    """Retrieves a suggested budget amount for a new budget.
+
+    Using the SmartCampaignSuggestService to determine a daily budget for new
+    and existing Smart campaigns is highly recommended because it helps the
+    campaigns achieve optimal performance.
+
+    Args:
+        client: an initialized GoogleAdsClient instance.
+        customer_id: a client customer ID.
+        suggestion_info: a SmartCampaignSuggestionInfo instance with details
+            about the business being advertised.
+
+    Returns:
+        a daily budget amount in micros.
+    """
+    sc_suggest_service = client.get_service("SmartCampaignSuggestService")
+    request = client.get_type("SuggestSmartCampaignBudgetOptionsRequest")
+    request.customer_id = customer_id
+    # You can retrieve suggestions for an existing campaign by setting the
+    # "campaign" field of the request equal to the resource name of a campaign
+    # and leaving the rest of the request fields below unset:
+    # request.campaign = INSERT_CAMPAIGN_RESOURCE_NAME_HERE
+
+    # Since these suggestions are for a new campaign, we're going to
+    # use the suggestion_info field instead.
+    request.suggestion_info = suggestion_info
 
     # Issue a request to retrieve a budget suggestion.
     response = sc_suggest_service.suggest_smart_campaign_budget_options(
@@ -252,23 +304,51 @@ def _get_budget_suggestion(
     # [END add_smart_campaign_1]
 
 
-def _map_keyword_theme_constants_to_infos(client, keyword_theme_constants):
-    """Maps a list of KeywordThemeConstants to KeywordThemeInfos.
+# [START add_smart_campaign_10]
+def _get_ad_suggestions(client, customer_id, suggestion_info):
+    """Retrieves creative suggestions for a Smart campaign ad.
+
+    Using the SmartCampaignSuggestService to suggest creatives for new and
+    existing Smart campaigns is highly recommended because it helps the
+    campaigns achieve optimal performance.
 
     Args:
         client: an initialized GoogleAdsClient instance.
-        keyword_theme_constants: a list of KeywordThemeConstants.
+        customer_id: a client customer ID.
+        suggestion_info: a SmartCampaignSuggestionInfo instance with details
+            about the business being advertised.
 
     Returns:
-        a list of KeywordThemeInfos.
+        a SmartCampaignAdInfo instance with suggested headlines and
+            descriptions.
     """
-    infos = []
-    for constant in keyword_theme_constants:
-        info = client.get_type("KeywordThemeInfo")
-        info.keyword_theme_constant = constant.resource_name
-        infos.append(info)
+    sc_suggest_service = client.get_service("SmartCampaignSuggestService")
+    request = client.get_type("SuggestSmartCampaignAdRequest")
+    request.customer_id = customer_id
 
-    return infos
+    # Unlike the SuggestSmartCampaignBudgetOptions method, it's only possible
+    # to use suggestion_info to retrieve ad creative suggestions.
+    request.suggestion_info = suggestion_info
+
+    # Issue a request to retrieve ad creative suggestions.
+    response = sc_suggest_service.suggest_smart_campaign_ad(request=request)
+
+    # The SmartCampaignAdInfo object in the response contains a list of up to
+    # three headlines and two descriptions. Note that some of the suggestions
+    # may have empty strings as text. Before setting these on the ad you should
+    # review them and filter out any empty values.
+    ad_suggestions = response.ad_info
+
+    print("The following headlines were suggested:")
+    for headline in ad_suggestions.headlines:
+        print(f"\t{headline.text or '<None>'}")
+
+    print("And the following descriptions were suggested:")
+    for description in ad_suggestions.descriptions:
+        print(f"\t{description.text or '<None>'}")
+
+    return ad_suggestions
+    # [END add_smart_campaign_10]
 
 
 # [START add_smart_campaign_2]
@@ -483,7 +563,7 @@ def _create_ad_group_operation(client, customer_id):
 
 
 # [START add_smart_campaign_6]
-def _create_ad_group_ad_operation(client, customer_id):
+def _create_ad_group_ad_operation(client, customer_id, ad_suggestions):
     """Creates a MutateOperation that creates a new ad group ad.
 
     A temporary ID will be used in the ad group resource name for this
@@ -492,6 +572,8 @@ def _create_ad_group_ad_operation(client, customer_id):
     Args:
         client: an initialized GoogleAdsClient instance.
         customer_id: a client customer ID.
+        ad_suggestions: a SmartCampaignAdInfo object with ad creative
+            suggestions.
 
     Returns:
         a MutateOperation that creates a new ad group ad.
@@ -505,20 +587,19 @@ def _create_ad_group_ad_operation(client, customer_id):
     # Set the type to SMART_CAMPAIGN_AD.
     ad_group_ad.ad.type_ = client.enums.AdTypeEnum.SMART_CAMPAIGN_AD
     ad = ad_group_ad.ad.smart_campaign_ad
-    # At most, three headlines can be specified for a Smart campaign ad.
-    headline_1 = client.get_type("AdTextAsset")
-    headline_1.text = "Headline number one"
-    headline_2 = client.get_type("AdTextAsset")
-    headline_2.text = "Headline number two"
-    headline_3 = client.get_type("AdTextAsset")
-    headline_3.text = "Headline number three"
-    ad.headlines.extend([headline_1, headline_2, headline_3])
-    # At most, two descriptions can be specified for a Smart campaign ad.
-    description_1 = client.get_type("AdTextAsset")
-    description_1.text = "Description number one"
-    description_2 = client.get_type("AdTextAsset")
-    description_2.text = "Description number two"
-    ad.descriptions.extend([description_1, description_2])
+
+    # The SmartCampaignAdInfo object includes headlines and descriptions
+    # retrieved from the SmartCampaignSuggestService.SuggestSmartCampaignAd
+    # method. It's recommended that users review and approve or update these
+    # creatives before they're set on the ad. It's possible that some or all of
+    # these assets may contain empty texts, which should not be set on the ad
+    # and instead should be replaced with meaninful texts from the user. Below
+    # we just accept the creatives that were suggested while filtering out empty
+    # assets, but individual workflows will vary here.
+    ad.headlines = [asset for asset in ad_suggestions.headlines if asset.text]
+    ad.descriptions = [
+        asset for asset in ad_suggestions.descriptions if asset.text
+    ]
 
     return mutate_operation
     # [END add_smart_campaign_6]

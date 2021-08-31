@@ -89,7 +89,12 @@ class AdGroup(proto.Message):
             The maximum CPM (cost-per-thousand viewable
             impressions) bid.
         target_cpa_micros (int):
-            The target CPA (cost-per-acquisition).
+            The target CPA (cost-per-acquisition). If the ad group's
+            campaign bidding strategy is TargetCpa or
+            MaximizeConversions (with its target_cpa field set), then
+            this field overrides the target CPA specified in the
+            campaign's bidding strategy. Otherwise, this value is
+            ignored.
         cpv_bid_micros (int):
             Output only. The CPV (cost-per-view) bid.
         target_cpm_micros (int):
@@ -97,12 +102,12 @@ class AdGroup(proto.Message):
             is willing to pay for every thousand times the
             ad is shown.
         target_roas (float):
-            The target ROAS (return-on-ad-spend)
-            override. If the ad group's campaign bidding
-            strategy is a standard Target ROAS strategy,
-            then this field overrides the target ROAS
-            specified in the campaign's bidding strategy.
-            Otherwise, this value is ignored.
+            The target ROAS (return-on-ad-spend) override. If the ad
+            group's campaign bidding strategy is TargetRoas or
+            MaximizeConversionValue (with its target_roas field set),
+            then this field overrides the target ROAS specified in the
+            campaign's bidding strategy. Otherwise, this value is
+            ignored.
         percent_cpc_bid_micros (int):
             The percent cpc bid amount, expressed as a fraction of the
             advertised price for some good or service. The valid range

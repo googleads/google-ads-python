@@ -16,6 +16,9 @@
 import functools
 import re
 
+from google.protobuf.message import Message as ProtobufMessageType
+import proto
+
 # This regex matches characters preceded by start of line or an underscore.
 _RE_FIND_CHARS_TO_UPPERCASE = re.compile(r"(?:_|^)([a-z])")
 
@@ -122,3 +125,72 @@ def convert_snake_case_to_upper_case(string):
         return match.group().replace("_", "").upper()
 
     return _RE_FIND_CHARS_TO_UPPERCASE.sub(converter, string)
+
+
+def convert_proto_plus_to_protobuf(message):
+    """Converts a proto-plus  message to its protobuf counterpart.
+
+    Args:
+        message: an instance of proto.Message
+
+    Returns:
+        The protobuf version of the proto_plus proto.
+    """
+    if isinstance(message, proto.Message):
+        return type(message).pb(message)
+    elif isinstance(message, ProtobufMessageType):
+        return message
+    else:
+        raise TypeError(
+            f"Cannot convert type {type(message)} to protobuf protobuf."
+        )
+
+
+def convert_protobuf_to_proto_plus(message):
+    """Converts a protobuf message to a proto-plus message.
+
+    Args:
+        message: an instance of google.protobuf.message.Message
+
+    Returns:
+        A proto_plus version of the protobuf proto.
+    """
+    if isinstance(message, ProtobufMessageType):
+        return proto.Message.wrap(message)
+    elif isinstance(message, proto.Message):
+        return message
+    else:
+        raise TypeError(
+            f"Cannot convert type {type(message)} to a proto_plus protobuf."
+        )
+
+
+def proto_copy_from(destination, origin):
+    """Copies protobuf and proto-plus messages into one-another.
+
+    This method consolidates the CopyFrom logic of protobuf and proto-plus
+    messages into a single helper method. The destination message will be
+    updated with the exact state of the origin message.
+
+    Args:
+        destination: The protobuf message where changes are being copied.
+        origin: The protobuf message where changes are being copied from.
+    """
+    is_dest_proto_plus = isinstance(destination, proto.Message)
+    is_orig_proto_plus = isinstance(origin, proto.Message)
+    is_dest_protobuf = isinstance(destination, ProtobufMessageType)
+    is_orig_protobuf = isinstance(origin, ProtobufMessageType)
+
+    if is_dest_proto_plus and is_orig_proto_plus:
+        proto.Message.copy_from(destination, origin)
+    elif is_dest_protobuf and is_orig_protobuf:
+        destination.CopyFrom(origin)
+    elif is_dest_proto_plus and is_orig_protobuf:
+        proto.Message.copy_from(destination, type(destination)(origin))
+    elif is_dest_protobuf and is_orig_proto_plus:
+        destination.CopyFrom(type(origin).pb(origin))
+    else:
+        raise ValueError(
+            "Only protobuf message instances can be used for copying. "
+            f"A {type(destination)} and a {type(origin)} were given."
+        )

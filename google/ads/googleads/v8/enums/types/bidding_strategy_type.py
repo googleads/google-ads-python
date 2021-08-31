@@ -34,6 +34,7 @@ class BiddingStrategyTypeEnum(proto.Message):
         UNKNOWN = 1
         COMMISSION = 16
         ENHANCED_CPC = 2
+        INVALID = 17
         MANUAL_CPC = 3
         MANUAL_CPM = 4
         MANUAL_CPV = 13

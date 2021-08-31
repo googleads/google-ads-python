@@ -38,6 +38,7 @@ __protobuf__ = proto.module(
         "GenerateProductMixIdeasResponse",
         "ProductAllocation",
         "GenerateReachForecastRequest",
+        "EffectiveFrequencyLimit",
         "FrequencyCap",
         "Targeting",
         "CampaignDuration",
@@ -49,6 +50,7 @@ __protobuf__ = proto.module(
         "PlannedProductReachForecast",
         "PlannedProductForecast",
         "OnTargetAudienceMetrics",
+        "EffectiveFrequencyBreakdown",
     },
 )
 
@@ -309,6 +311,22 @@ class GenerateReachForecastRequest(proto.Message):
             person was exposed to the ad) for the reported reach metrics
             [1-10]. This won't affect the targeting, but just the
             reporting. If not specified, a default of 1 is applied.
+
+            This field cannot be combined with the
+            effective_frequency_limit field.
+        effective_frequency_limit (google.ads.googleads.v8.services.types.EffectiveFrequencyLimit):
+            The highest minimum effective frequency (the number of times
+            a person was exposed to the ad) value [1-10] to include in
+            Forecast.effective_frequency_breakdowns. If not specified,
+            Forecast.effective_frequency_breakdowns will not be
+            provided.
+
+            The effective frequency value provided here will also be
+            used as the minimum effective frequency for the reported
+            reach metrics.
+
+            This field cannot be combined with the
+            min_effective_frequency field.
         targeting (google.ads.googleads.v8.services.types.Targeting):
             The targeting to be applied to all products
             selected in the product mix.
@@ -335,10 +353,28 @@ class GenerateReachForecastRequest(proto.Message):
     min_effective_frequency = proto.Field(
         proto.INT32, number=11, optional=True,
     )
+    effective_frequency_limit = proto.Field(
+        proto.MESSAGE,
+        number=12,
+        optional=True,
+        message="EffectiveFrequencyLimit",
+    )
     targeting = proto.Field(proto.MESSAGE, number=6, message="Targeting",)
     planned_products = proto.RepeatedField(
         proto.MESSAGE, number=7, message="PlannedProduct",
     )
+
+
+class EffectiveFrequencyLimit(proto.Message):
+    r"""Effective frequency limit.
+    Attributes:
+        effective_frequency_breakdown_limit (int):
+            The highest effective frequency value to include in
+            Forecast.effective_frequency_breakdowns. This field supports
+            frequencies 1-10, inclusive.
+    """
+
+    effective_frequency_breakdown_limit = proto.Field(proto.INT32, number=1,)
 
 
 class FrequencyCap(proto.Message):
@@ -491,13 +527,23 @@ class Forecast(proto.Message):
     Attributes:
         on_target_reach (int):
             Number of unique people reached at least
-            GenerateReachForecastRequest.min_effective_frequency times
+            GenerateReachForecastRequest.min_effective_frequency or
+            GenerateReachForecastRequest.effective_frequency_limit times
             that exactly matches the Targeting.
+
+            Note that a minimum number of unique people must be reached
+            in order for data to be reported. If the minimum number is
+            not met, the on_target_reach value will be rounded to 0.
         total_reach (int):
             Total number of unique people reached at least
-            GenerateReachForecastRequest.min_effective_frequency times.
-            This includes people that may fall outside the specified
-            Targeting.
+            GenerateReachForecastRequest.min_effective_frequency or
+            GenerateReachForecastRequest.effective_frequency_limit
+            times. This includes people that may fall outside the
+            specified Targeting.
+
+            Note that a minimum number of unique people must be reached
+            in order for data to be reported. If the minimum number is
+            not met, the total_reach value will be rounded to 0.
         on_target_impressions (int):
             Number of ad impressions that exactly matches
             the Targeting.
@@ -513,6 +559,12 @@ class Forecast(proto.Message):
             ads/answer/7029393 for more information about
             what makes an ad viewable and how viewability is
             measured.
+        effective_frequency_breakdowns (Sequence[google.ads.googleads.v8.services.types.EffectiveFrequencyBreakdown]):
+            A list of effective frequency forecasts. The list is ordered
+            starting with 1+ and ending with the value set in
+            GenerateReachForecastRequest.effective_frequency_limit. If
+            no effective_frequency_limit was set, this list will be
+            empty.
     """
 
     on_target_reach = proto.Field(proto.INT64, number=5, optional=True,)
@@ -520,6 +572,9 @@ class Forecast(proto.Message):
     on_target_impressions = proto.Field(proto.INT64, number=7, optional=True,)
     total_impressions = proto.Field(proto.INT64, number=8, optional=True,)
     viewable_impressions = proto.Field(proto.INT64, number=9, optional=True,)
+    effective_frequency_breakdowns = proto.RepeatedField(
+        proto.MESSAGE, number=10, message="EffectiveFrequencyBreakdown",
+    )
 
 
 class PlannedProductReachForecast(proto.Message):
@@ -552,12 +607,19 @@ class PlannedProductForecast(proto.Message):
     r"""Forecasted traffic metrics for a planned product.
     Attributes:
         on_target_reach (int):
-            Number of unique people reached that exactly
-            matches the Targeting.
+            Number of unique people reached that exactly matches the
+            Targeting.
+
+            Note that a minimum number of unique people must be reached
+            in order for data to be reported. If the minimum number is
+            not met, the on_target_reach value will be rounded to 0.
         total_reach (int):
-            Number of unique people reached. This
-            includes people that may fall outside the
-            specified Targeting.
+            Number of unique people reached. This includes people that
+            may fall outside the specified Targeting.
+
+            Note that a minimum number of unique people must be reached
+            in order for data to be reported. If the minimum number is
+            not met, the total_reach value will be rounded to 0.
         on_target_impressions (int):
             Number of ad impressions that exactly matches
             the Targeting.
@@ -600,6 +662,36 @@ class OnTargetAudienceMetrics(proto.Message):
 
     youtube_audience_size = proto.Field(proto.INT64, number=3, optional=True,)
     census_audience_size = proto.Field(proto.INT64, number=4, optional=True,)
+
+
+class EffectiveFrequencyBreakdown(proto.Message):
+    r"""A breakdown of the number of unique people reached at a given
+    effective frequency.
+
+    Attributes:
+        effective_frequency (int):
+            The effective frequency [1-10].
+        on_target_reach (int):
+            The number of unique people reached at least
+            effective_frequency times that exactly matches the
+            Targeting.
+
+            Note that a minimum number of unique people must be reached
+            in order for data to be reported. If the minimum number is
+            not met, the on_target_reach value will be rounded to 0.
+        total_reach (int):
+            Total number of unique people reached at least
+            effective_frequency times. This includes people that may
+            fall outside the specified Targeting.
+
+            Note that a minimum number of unique people must be reached
+            in order for data to be reported. If the minimum number is
+            not met, the total_reach value will be rounded to 0.
+    """
+
+    effective_frequency = proto.Field(proto.INT32, number=1,)
+    on_target_reach = proto.Field(proto.INT64, number=2,)
+    total_reach = proto.Field(proto.INT64, number=3,)
 
 
 __all__ = tuple(sorted(__protobuf__.manifest))

@@ -155,6 +155,7 @@ class CriterionErrorEnum(proto.Message):
         HOTEL_CHECK_IN_DATE_RANGE_START_DATE_TOO_EARLY = 132
         HOTEL_CHECK_IN_DATE_RANGE_END_DATE_TOO_LATE = 133
         HOTEL_CHECK_IN_DATE_RANGE_REVERSED = 134
+        BROAD_MATCH_MODIFIER_KEYWORD_NOT_ALLOWED = 135
 
 
 __all__ = tuple(sorted(__protobuf__.manifest))

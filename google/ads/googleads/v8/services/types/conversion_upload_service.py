@@ -15,6 +15,7 @@
 #
 import proto  # type: ignore
 
+from google.ads.googleads.v8.common.types import offline_user_data
 from google.rpc import status_pb2  # type: ignore
 
 
@@ -204,6 +205,11 @@ class ClickConversion(proto.Message):
         cart_data (google.ads.googleads.v8.services.types.CartData):
             The cart data associated with this
             conversion.
+        user_identifiers (Sequence[google.ads.googleads.v8.common.types.UserIdentifier]):
+            The user identifiers associated with this conversion. Only
+            hashed_email and hashed_phone_number are supported for
+            conversion uploads. The maximum number of user identifiers
+            for each conversion is 5.
     """
 
     gclid = proto.Field(proto.STRING, number=9, optional=True,)
@@ -219,6 +225,9 @@ class ClickConversion(proto.Message):
         proto.MESSAGE, number=15, message="CustomVariable",
     )
     cart_data = proto.Field(proto.MESSAGE, number=16, message="CartData",)
+    user_identifiers = proto.RepeatedField(
+        proto.MESSAGE, number=17, message=offline_user_data.UserIdentifier,
+    )
 
 
 class CallConversion(proto.Message):
@@ -303,11 +312,19 @@ class ClickConversionResult(proto.Message):
             The date time at which the conversion occurred. The format
             is "yyyy-mm-dd hh:mm:ss+|-hh:mm", e.g. “2019-01-01
             12:32:45-08:00”.
+        user_identifiers (Sequence[google.ads.googleads.v8.common.types.UserIdentifier]):
+            The user identifiers associated with this conversion. Only
+            hashed_email and hashed_phone_number are supported for
+            conversion uploads. The maximum number of user identifiers
+            for each conversion is 5.
     """
 
     gclid = proto.Field(proto.STRING, number=4, optional=True,)
     conversion_action = proto.Field(proto.STRING, number=5, optional=True,)
     conversion_date_time = proto.Field(proto.STRING, number=6, optional=True,)
+    user_identifiers = proto.RepeatedField(
+        proto.MESSAGE, number=7, message=offline_user_data.UserIdentifier,
+    )
 
 
 class CallConversionResult(proto.Message):

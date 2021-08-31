@@ -650,6 +650,42 @@ class GoogleAdsServiceClient(metaclass=GoogleAdsServiceClientMeta):
         return m.groupdict() if m else {}
 
     @staticmethod
+    def bidding_data_exclusion_path(
+        customer_id: str, seasonality_event_id: str,
+    ) -> str:
+        """Return a fully-qualified bidding_data_exclusion string."""
+        return "customers/{customer_id}/biddingDataExclusions/{seasonality_event_id}".format(
+            customer_id=customer_id, seasonality_event_id=seasonality_event_id,
+        )
+
+    @staticmethod
+    def parse_bidding_data_exclusion_path(path: str) -> Dict[str, str]:
+        """Parse a bidding_data_exclusion path into its component segments."""
+        m = re.match(
+            r"^customers/(?P<customer_id>.+?)/biddingDataExclusions/(?P<seasonality_event_id>.+?)$",
+            path,
+        )
+        return m.groupdict() if m else {}
+
+    @staticmethod
+    def bidding_seasonality_adjustment_path(
+        customer_id: str, seasonality_event_id: str,
+    ) -> str:
+        """Return a fully-qualified bidding_seasonality_adjustment string."""
+        return "customers/{customer_id}/biddingSeasonalityAdjustments/{seasonality_event_id}".format(
+            customer_id=customer_id, seasonality_event_id=seasonality_event_id,
+        )
+
+    @staticmethod
+    def parse_bidding_seasonality_adjustment_path(path: str) -> Dict[str, str]:
+        """Parse a bidding_seasonality_adjustment path into its component segments."""
+        m = re.match(
+            r"^customers/(?P<customer_id>.+?)/biddingSeasonalityAdjustments/(?P<seasonality_event_id>.+?)$",
+            path,
+        )
+        return m.groupdict() if m else {}
+
+    @staticmethod
     def bidding_strategy_path(
         customer_id: str, bidding_strategy_id: str,
     ) -> str:
@@ -1133,6 +1169,44 @@ class GoogleAdsServiceClient(metaclass=GoogleAdsServiceClientMeta):
         """Parse a conversion_custom_variable path into its component segments."""
         m = re.match(
             r"^customers/(?P<customer_id>.+?)/conversionCustomVariables/(?P<conversion_custom_variable_id>.+?)$",
+            path,
+        )
+        return m.groupdict() if m else {}
+
+    @staticmethod
+    def conversion_value_rule_path(
+        customer_id: str, conversion_value_rule_id: str,
+    ) -> str:
+        """Return a fully-qualified conversion_value_rule string."""
+        return "customers/{customer_id}/conversionValueRules/{conversion_value_rule_id}".format(
+            customer_id=customer_id,
+            conversion_value_rule_id=conversion_value_rule_id,
+        )
+
+    @staticmethod
+    def parse_conversion_value_rule_path(path: str) -> Dict[str, str]:
+        """Parse a conversion_value_rule path into its component segments."""
+        m = re.match(
+            r"^customers/(?P<customer_id>.+?)/conversionValueRules/(?P<conversion_value_rule_id>.+?)$",
+            path,
+        )
+        return m.groupdict() if m else {}
+
+    @staticmethod
+    def conversion_value_rule_set_path(
+        customer_id: str, conversion_value_rule_set_id: str,
+    ) -> str:
+        """Return a fully-qualified conversion_value_rule_set string."""
+        return "customers/{customer_id}/conversionValueRuleSets/{conversion_value_rule_set_id}".format(
+            customer_id=customer_id,
+            conversion_value_rule_set_id=conversion_value_rule_set_id,
+        )
+
+    @staticmethod
+    def parse_conversion_value_rule_set_path(path: str) -> Dict[str, str]:
+        """Parse a conversion_value_rule_set path into its component segments."""
+        m = re.match(
+            r"^customers/(?P<customer_id>.+?)/conversionValueRuleSets/(?P<conversion_value_rule_set_id>.+?)$",
             path,
         )
         return m.groupdict() if m else {}

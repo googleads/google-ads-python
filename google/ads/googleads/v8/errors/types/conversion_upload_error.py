@@ -62,6 +62,13 @@ class ConversionUploadErrorEnum(proto.Message):
         INVALID_CUSTOMER_FOR_CLICK = 30
         INVALID_CUSTOMER_FOR_CALL = 31
         CONVERSION_NOT_COMPLIANT_WITH_ATT_POLICY = 32
+        CLICK_NOT_FOUND = 33
+        INVALID_USER_IDENTIFIER = 34
+        EXTERNALLY_ATTRIBUTED_CONVERSION_ACTION_NOT_PERMITTED_WITH_USER_IDENTIFIER = (
+            35
+        )
+        UNSUPPORTED_USER_IDENTIFIER = 36
+        INVALID_USER_IDENTIFIER_SOURCE = 37
 
 
 __all__ = tuple(sorted(__protobuf__.manifest))

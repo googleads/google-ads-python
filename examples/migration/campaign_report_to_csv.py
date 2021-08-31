@@ -30,9 +30,13 @@ Examples:
 import argparse
 import csv
 import sys
+import os
 
 from google.ads.googleads.client import GoogleAdsClient
 from google.ads.googleads.errors import GoogleAdsException
+
+
+_DEFAULT_FILE_NAME = "campaign_report_to_csv_results.csv"
 
 
 def main(client, customer_id, output_file, write_headers):
@@ -43,6 +47,8 @@ def main(client, customer_id, output_file, write_headers):
         output_file (str): Filename of the file to write the report data to.
         write_headers (bool): From argparse, True if arg is provided.
     """
+    file_dir = os.path.dirname(os.path.abspath(__file__))
+    file_path = os.path.join(file_dir, output_file)
     ga_service = client.get_service("GoogleAdsService")
 
     query = """
@@ -65,7 +71,7 @@ def main(client, customer_id, output_file, write_headers):
     search_request.query = query
     response = ga_service.search_stream(search_request)
     try:
-        with open(output_file, "w", newline="") as f:
+        with open(file_path, "w", newline="") as f:
             writer = csv.writer(f)
 
             # Define a list of headers for the first row.
@@ -133,7 +139,8 @@ if __name__ == "__main__":
         "-o",
         "--output_file",
         type=str,
-        required=True,
+        required=False,
+        default=_DEFAULT_FILE_NAME,
         help="Name of the local CSV file to save the report to. File will be "
         "saved in the same directory as the script.",
     )

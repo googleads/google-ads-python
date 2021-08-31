@@ -114,6 +114,21 @@ class AccessibleBiddingStrategy(proto.Message):
 
         target_cpa = proto.Field(proto.INT64, number=1,)
 
+    class TargetCpa(proto.Message):
+        r"""An automated bid strategy that sets bids to help get as many
+        conversions as possible at the target cost-per-acquisition (CPA)
+        you set.
+
+        Attributes:
+            target_cpa_micros (int):
+                Output only. Average CPA target.
+                This target should be greater than or equal to
+                minimum billable unit based on the currency for
+                the account.
+        """
+
+        target_cpa_micros = proto.Field(proto.INT64, number=1, optional=True,)
+
     class TargetSpend(proto.Message):
         r"""An automated bid strategy that sets your bids to help get as
         many clicks as possible within your budget.
@@ -139,33 +154,6 @@ class AccessibleBiddingStrategy(proto.Message):
         cpc_bid_ceiling_micros = proto.Field(
             proto.INT64, number=2, optional=True,
         )
-
-    class TargetCpa(proto.Message):
-        r"""An automated bid strategy that sets bids to help get as many
-        conversions as possible at the target cost-per-acquisition (CPA)
-        you set.
-
-        Attributes:
-            target_cpa_micros (int):
-                Output only. Average CPA target.
-                This target should be greater than or equal to
-                minimum billable unit based on the currency for
-                the account.
-        """
-
-        target_cpa_micros = proto.Field(proto.INT64, number=1, optional=True,)
-
-    class TargetRoas(proto.Message):
-        r"""An automated bidding strategy that helps you maximize revenue
-        while averaging a specific target return on ad spend (ROAS).
-
-        Attributes:
-            target_roas (float):
-                Output only. The desired revenue (based on
-                conversion data) per unit of spend.
-        """
-
-        target_roas = proto.Field(proto.DOUBLE, number=1, optional=True,)
 
     class TargetImpressionShare(proto.Message):
         r"""An automated bidding strategy that sets bids so that a
@@ -199,6 +187,18 @@ class AccessibleBiddingStrategy(proto.Message):
         cpc_bid_ceiling_micros = proto.Field(
             proto.INT64, number=3, optional=True,
         )
+
+    class TargetRoas(proto.Message):
+        r"""An automated bidding strategy that helps you maximize revenue
+        while averaging a specific target return on ad spend (ROAS).
+
+        Attributes:
+            target_roas (float):
+                Output only. The desired revenue (based on
+                conversion data) per unit of spend.
+        """
+
+        target_roas = proto.Field(proto.DOUBLE, number=1, optional=True,)
 
     resource_name = proto.Field(proto.STRING, number=1,)
     id = proto.Field(proto.INT64, number=2,)

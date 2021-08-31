@@ -24,80 +24,7 @@ import grpc
 from grpc import UnaryUnaryClientInterceptor, UnaryStreamClientInterceptor
 
 from .interceptor import Interceptor
-
-
-class _UnaryStreamWrapper(grpc.Call, grpc.Future):
-    def __init__(self, underlay_call, failure_handler):
-        super().__init__()
-        self._underlay_call = underlay_call
-        self._failure_handler = failure_handler
-        self._exception = None
-
-    def initial_metadata(self):
-        return self._underlay_call.initial_metadata()
-
-    def trailing_metadata(self):
-        return self._underlay_call.initial_metadata()
-
-    def code(self):
-        return self._underlay_call.code()
-
-    def details(self):
-        return self._underlay_call.details()
-
-    def debug_error_string(self):
-        return self._underlay_call.debug_error_string()
-
-    def cancelled(self):
-        return self._underlay_call.cancelled()
-
-    def running(self):
-        return self._underlay_call.running()
-
-    def done(self):
-        return self._underlay_call.done()
-
-    def result(self, timeout=None):
-        return self._underlay_call.result(timeout=timeout)
-
-    def exception(self, timeout=None):
-        if self._exception:
-            return self._exception
-        else:
-            return self._underlay_call.exception(timeout=timeout)
-
-    def traceback(self, timeout=None):
-        return self._underlay_call.traceback(timeout=timeout)
-
-    def add_done_callback(self, fn):
-        return self._underlay_call.add_done_callback(fn)
-
-    def add_callback(self, callback):
-        return self._underlay_call.add_callback(callback)
-
-    def is_active(self):
-        return self._underlay_call.is_active()
-
-    def time_remaining(self):
-        return self._underlay_call.time_remaining()
-
-    def cancel(self):
-        return self._underlay_call.cancel()
-
-    def __iter__(self):
-        return self
-
-    def __next__(self):
-        try:
-            return next(self._underlay_call)
-        except StopIteration:
-            raise
-        except Exception:
-            try:
-                self._failure_handler(self._underlay_call)
-            except Exception as e:
-                self._exception = e
-                raise e
+from .response_wrappers import _UnaryStreamWrapper, _UnaryUnaryWrapper
 
 
 class ExceptionInterceptor(
@@ -105,14 +32,17 @@ class ExceptionInterceptor(
 ):
     """An interceptor that wraps rpc exceptions."""
 
-    def __init__(self, api_version):
+    def __init__(self, api_version, use_proto_plus=False):
         """Initializes the ExceptionInterceptor.
 
         Args:
             api_version: a str of the API version of the request.
+            use_proto_plus: a boolean of whether returned messages should be
+                proto_plus or protobuf.
         """
         super().__init__(api_version)
         self._api_version = api_version
+        self._use_proto_plus = use_proto_plus
 
     def _handle_grpc_failure(self, response):
         """Attempts to convert failed responses to a GoogleAdsException object.
@@ -168,7 +98,9 @@ class ExceptionInterceptor(
         if exception:
             self._handle_grpc_failure(response)
         else:
-            return response
+            return _UnaryUnaryWrapper(
+                response, use_proto_plus=self._use_proto_plus
+            )
 
     def intercept_unary_stream(
         self, continuation, client_call_details, request
@@ -195,4 +127,8 @@ class ExceptionInterceptor(
                 status code of INTERNAL or RESOURCE_EXHAUSTED.
         """
         response = continuation(client_call_details, request)
-        return _UnaryStreamWrapper(response, self._handle_grpc_failure)
+        return _UnaryStreamWrapper(
+            response,
+            self._handle_grpc_failure,
+            use_proto_plus=self._use_proto_plus,
+        )

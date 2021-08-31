@@ -322,30 +322,18 @@ class Campaign(proto.Message):
 
         hotel_center_id = proto.Field(proto.INT64, number=2, optional=True,)
 
-    class TrackingSetting(proto.Message):
-        r"""Campaign-level settings for tracking information.
-        Attributes:
-            tracking_url (str):
-                Output only. The url used for dynamic
-                tracking.
-        """
-
-        tracking_url = proto.Field(proto.STRING, number=2, optional=True,)
-
-    class OptimizationGoalSetting(proto.Message):
-        r"""Optimization goal setting for this campaign, which includes a
-        set of optimization goal types.
+    class SelectiveOptimization(proto.Message):
+        r"""Selective optimization setting for this campaign, which
+        includes a set of conversion actions to optimize this campaign
+        towards.
 
         Attributes:
-            optimization_goal_types (Sequence[google.ads.googleads.v8.enums.types.OptimizationGoalTypeEnum.OptimizationGoalType]):
-                The list of optimization goal types.
+            conversion_actions (Sequence[str]):
+                The selected set of conversion actions for
+                optimizing this campaign.
         """
 
-        optimization_goal_types = proto.RepeatedField(
-            proto.ENUM,
-            number=1,
-            enum=optimization_goal_type.OptimizationGoalTypeEnum.OptimizationGoalType,
-        )
+        conversion_actions = proto.RepeatedField(proto.STRING, number=2,)
 
     class DynamicSearchAdsSetting(proto.Message):
         r"""The setting for controlling Dynamic Search Ads (DSA).
@@ -405,18 +393,29 @@ class Campaign(proto.Message):
         campaign_priority = proto.Field(proto.INT32, number=7, optional=True,)
         enable_local = proto.Field(proto.BOOL, number=8, optional=True,)
 
-    class SelectiveOptimization(proto.Message):
-        r"""Selective optimization setting for this campaign, which
-        includes a set of conversion actions to optimize this campaign
-        towards.
-
+    class TrackingSetting(proto.Message):
+        r"""Campaign-level settings for tracking information.
         Attributes:
-            conversion_actions (Sequence[str]):
-                The selected set of conversion actions for
-                optimizing this campaign.
+            tracking_url (str):
+                Output only. The url used for dynamic
+                tracking.
         """
 
-        conversion_actions = proto.RepeatedField(proto.STRING, number=2,)
+        tracking_url = proto.Field(proto.STRING, number=2, optional=True,)
+
+    class LocalCampaignSetting(proto.Message):
+        r"""Campaign setting for local campaigns.
+        Attributes:
+            location_source_type (google.ads.googleads.v8.enums.types.LocationSourceTypeEnum.LocationSourceType):
+                The location source type for this local
+                campaign.
+        """
+
+        location_source_type = proto.Field(
+            proto.ENUM,
+            number=1,
+            enum=gage_location_source_type.LocationSourceTypeEnum.LocationSourceType,
+        )
 
     class GeoTargetTypeSetting(proto.Message):
         r"""Represents a collection of settings related to ads
@@ -440,20 +439,6 @@ class Campaign(proto.Message):
             proto.ENUM,
             number=2,
             enum=gage_negative_geo_target_type.NegativeGeoTargetTypeEnum.NegativeGeoTargetType,
-        )
-
-    class LocalCampaignSetting(proto.Message):
-        r"""Campaign setting for local campaigns.
-        Attributes:
-            location_source_type (google.ads.googleads.v8.enums.types.LocationSourceTypeEnum.LocationSourceType):
-                The location source type for this local
-                campaign.
-        """
-
-        location_source_type = proto.Field(
-            proto.ENUM,
-            number=1,
-            enum=gage_location_source_type.LocationSourceTypeEnum.LocationSourceType,
         )
 
     class AppCampaignSetting(proto.Message):
@@ -504,6 +489,21 @@ class Campaign(proto.Message):
             proto.ENUM,
             number=2,
             enum=gage_vanity_pharma_text.VanityPharmaTextEnum.VanityPharmaText,
+        )
+
+    class OptimizationGoalSetting(proto.Message):
+        r"""Optimization goal setting for this campaign, which includes a
+        set of optimization goal types.
+
+        Attributes:
+            optimization_goal_types (Sequence[google.ads.googleads.v8.enums.types.OptimizationGoalTypeEnum.OptimizationGoalType]):
+                The list of optimization goal types.
+        """
+
+        optimization_goal_types = proto.RepeatedField(
+            proto.ENUM,
+            number=1,
+            enum=optimization_goal_type.OptimizationGoalTypeEnum.OptimizationGoalType,
         )
 
     resource_name = proto.Field(proto.STRING, number=1,)

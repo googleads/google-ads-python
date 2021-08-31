@@ -370,7 +370,7 @@ class SmartCampaignSuggestServiceClient(
         Args:
             request (:class:`google.ads.googleads.v8.services.types.SuggestSmartCampaignBudgetOptionsRequest`):
                 The request object. Request message for
-                [SmartCampaignBudgetSuggestService.SuggestSmartCampaignBudgets][].
+                [SmartCampaignSuggestService.SuggestSmartCampaignBudgets][].
             retry (google.api_core.retry.Retry): Designation of what errors, if any,
                 should be retried.
             timeout (float): The timeout for this request.
@@ -380,7 +380,7 @@ class SmartCampaignSuggestServiceClient(
         Returns:
             google.ads.googleads.v8.services.types.SuggestSmartCampaignBudgetOptionsResponse:
                 Response message for
-                   [SmartCampaignBudgetSuggestService.SuggestSmartCampaignBudgets][].
+                   [SmartCampaignSuggestService.SuggestSmartCampaignBudgets][].
                    Depending on whether the system could suggest the
                    options, either all of the options or none of them
                    might be returned.
@@ -403,6 +403,69 @@ class SmartCampaignSuggestServiceClient(
         # and friendly error handling.
         rpc = self._transport._wrapped_methods[
             self._transport.suggest_smart_campaign_budget_options
+        ]
+
+        # Certain fields should be provided within the metadata header;
+        # add these here.
+        metadata = tuple(metadata) + (
+            gapic_v1.routing_header.to_grpc_metadata(
+                (("customer_id", request.customer_id),)
+            ),
+        )
+
+        # Send the request.
+        response = rpc(
+            request, retry=retry, timeout=timeout, metadata=metadata,
+        )
+
+        # Done; return the response.
+        return response
+
+    def suggest_smart_campaign_ad(
+        self,
+        request: smart_campaign_suggest_service.SuggestSmartCampaignAdRequest = None,
+        *,
+        retry: retries.Retry = gapic_v1.method.DEFAULT,
+        timeout: float = None,
+        metadata: Sequence[Tuple[str, str]] = (),
+    ) -> smart_campaign_suggest_service.SuggestSmartCampaignAdResponse:
+        r"""Suggests a Smart campaign ad compatible with the Ad
+        family of resources, based on data points such as
+        targeting and the business to advertise.
+
+        Args:
+            request (:class:`google.ads.googleads.v8.services.types.SuggestSmartCampaignAdRequest`):
+                The request object. Request message for
+                [SmartCampaignSuggestService.SuggestSmartCampaignAd][google.ads.googleads.v8.services.SmartCampaignSuggestService.SuggestSmartCampaignAd].
+            retry (google.api_core.retry.Retry): Designation of what errors, if any,
+                should be retried.
+            timeout (float): The timeout for this request.
+            metadata (Sequence[Tuple[str, str]]): Strings which should be
+                sent along with the request as metadata.
+
+        Returns:
+            google.ads.googleads.v8.services.types.SuggestSmartCampaignAdResponse:
+                Response message for
+                   [SmartCampaignSuggestService.SuggestSmartCampaignAd][google.ads.googleads.v8.services.SmartCampaignSuggestService.SuggestSmartCampaignAd].
+
+        """
+        # Create or coerce a protobuf request object.
+        # Minor optimization to avoid making a copy if the user passes
+        # in a smart_campaign_suggest_service.SuggestSmartCampaignAdRequest.
+        # There's no risk of modifying the input as we've already verified
+        # there are no flattened fields.
+        if not isinstance(
+            request,
+            smart_campaign_suggest_service.SuggestSmartCampaignAdRequest,
+        ):
+            request = smart_campaign_suggest_service.SuggestSmartCampaignAdRequest(
+                request
+            )
+
+        # Wrap the RPC method; this adds retry and timeout information,
+        # and friendly error handling.
+        rpc = self._transport._wrapped_methods[
+            self._transport.suggest_smart_campaign_ad
         ]
 
         # Certain fields should be provided within the metadata header;

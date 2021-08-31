@@ -52,15 +52,21 @@ class OfflineUserAddressInfo(proto.Message):
             punctuation).
         city (str):
             City of the address. Only accepted for Store
-            Sales Direct data.
+            Sales and ConversionAdjustmentUploadService.
         state (str):
             State code of the address. Only accepted for
-            Store Sales Direct data.
+            Store Sales and
+            ConversionAdjustmentUploadService.
         country_code (str):
             2-letter country code in ISO-3166-1 alpha-2
             of the user's address.
         postal_code (str):
             Postal code of the user's address.
+        hashed_street_address (str):
+            The street address of the user hashed using
+            SHA-256 hash function after normalization (lower
+            case only). Only accepted for
+            ConversionAdjustmentUploadService.
     """
 
     hashed_first_name = proto.Field(proto.STRING, number=7, optional=True,)
@@ -69,28 +75,44 @@ class OfflineUserAddressInfo(proto.Message):
     state = proto.Field(proto.STRING, number=10, optional=True,)
     country_code = proto.Field(proto.STRING, number=11, optional=True,)
     postal_code = proto.Field(proto.STRING, number=12, optional=True,)
+    hashed_street_address = proto.Field(proto.STRING, number=13, optional=True,)
 
 
 class UserIdentifier(proto.Message):
-    r"""Hashed user identifying information.
+    r"""User identifying information.
     Attributes:
         user_identifier_source (google.ads.googleads.v8.enums.types.UserIdentifierSourceEnum.UserIdentifierSource):
-            Source of the user identifier when the upload
-            is from Store Sales third party partners.
+            Source of the user identifier when the upload is from Store
+            Sales, ConversionUploadService, or
+            ConversionAdjustmentUploadService. For
+            ConversionUploadService and
+            ConversionAdjustmentUploadService, the source of the user
+            identifier must be specified as FIRST_PARTY, otherwise an
+            error will be returned.
         hashed_email (str):
             Hashed email address using SHA-256 hash
-            function after normalization.
+            function after normalization. Accepted for
+            Customer Match, Store Sales,
+            ConversionUploadService, and
+            ConversionAdjustmentUploadService.
         hashed_phone_number (str):
             Hashed phone number using SHA-256 hash
             function after normalization (E164 standard).
+            Accepted for Customer Match, Store Sales,
+            ConversionUploadService, and
+            ConversionAdjustmentUploadService.
         mobile_id (str):
             Mobile device ID (advertising ID/IDFA).
+            Accepted only for Customer Match.
         third_party_user_id (str):
             Advertiser-assigned user ID for Customer
             Match upload, or third-party-assigned user ID
-            for SSD.
+            for Store Sales. Accepted only for Customer
+            Match and Store Sales.
         address_info (google.ads.googleads.v8.common.types.OfflineUserAddressInfo):
-            Address information.
+            Address information. Accepted only for
+            Customer Match, Store Sales, and
+            ConversionAdjustmentUploadService.
     """
 
     user_identifier_source = proto.Field(
@@ -126,10 +148,11 @@ class TransactionAttribute(proto.Message):
             14:34:30+03:00".
         transaction_amount_micros (float):
             Transaction amount in micros. Required.
-            If item Attributes are provided, it represents
-            the total value of the items, after multiplying
-            the unit price per item by the quantity provided
-            in the ItemAttributes.
+            Transaction amount in micros needs to be greater
+            than 1000. If item Attributes are provided, it
+            represents the total value of the items, after
+            multiplying the unit price per item by the
+            quantity provided in the ItemAttributes.
         currency_code (str):
             Transaction currency code. ISO 4217 three-
             etter code is used. Required.

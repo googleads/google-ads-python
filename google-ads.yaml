@@ -1,54 +1,62 @@
 # Developer token
-###############################################################################
-# A developer token is required when making requests to the Google Ads API    #
-# regardless of whether you're using the OAuth2 or Service Account            #
-# configurations. To obtain a developer token see:                            #
-# https://developers.google.com/google-ads/api/docs/first-call/dev-token      #
-###############################################################################
+##########################################################################################
+# A developer token is required when making requests to the Google Ads API regardless of #
+# whether you're using the OAuth2 or Service Account configurations. To obtain a         #
+# developer token see:                                                                   #
+# https://developers.google.com/google-ads/api/docs/first-call/dev-token                 #
+##########################################################################################
 developer_token: INSERT_DEVELOPER_TOKEN_HERE
 
+# Use proto plus
+##########################################################################################
+# This parameter specifies whether the client library should return proto-plus messages  #
+# or protobuf messages. This value should be explicitly set to either "True" or "False", #
+# For more information on the differences between these two types, see our Protobuf      #
+# Messages guide:                                                                        #
+# https://developers.google.com/google-ads/api/docs/client-libs/python/protobuf-messages #
+##########################################################################################
+use_proto_plus: INSERT_USE_PROTO_PLUS_FLAG_HERE
+
 # OAuth2 configuration
-###############################################################################
-# The below configuration parameters are used to authenticate using the       #
-# recommended OAuth2 flow. For more information on authenticating with OAuth2 #
-# see: https://developers.google.com/google-ads/api/docs/oauth/overview       #
-###############################################################################
+##########################################################################################
+# The below configuration parameters are used to authenticate using the recommended      #
+# OAuth2 flow. For more information on authenticating with OAuth2 see:                   #
+# https://developers.google.com/google-ads/api/docs/oauth/overview                       #
+##########################################################################################
 client_id: INSERT_OAUTH2_CLIENT_ID_HERE
 client_secret: INSERT_OAUTH2_CLIENT_SECRET_HERE
 refresh_token: INSERT_REFRESH_TOKEN_HERE
 
 # Service Account configuration
-###############################################################################
-# To authenticate with a service account add the appropriate values to the    #
-# below configuration parameters and remove the three OAuth2 credentials      #
-# above. The "json_key_file_path" value should be a path to your local        #
-# private key json file, and "impersonated_email" should be the email address #
-# that is being used to impersonate the credentials making requests. for more #
-# information on service accounts, see:                                       #
-# https://developers.google.com/google-ads/api/docs/oauth/service-accounts    #
-###############################################################################
+##########################################################################################
+# To authenticate with a service account add the appropriate values to the below         #
+# configuration parameters and remove the three OAuth2 credentials above. The            #
+# "json_key_file_path" value should be a path to your local private key json file, and   #
+# "impersonated_email" should be the email address that is being used to impersonate the #
+# credentials making requests. for more information on service accounts, see:            #
+# https://developers.google.com/google-ads/api/docs/oauth/service-accounts               #
+##########################################################################################
 # json_key_file_path: INSERT_PATH_TO_JSON_KEY_FILE_HERE
 # impersonated_email: INSERT_DOMAIN_WIDE_DELEGATION_ACCOUNT
 
 # Login customer ID configuration
-###############################################################################
-# Required for manager accounts only: Specify the login customer ID used to   #
-# authenticate API calls. This will be the customer ID of the authenticated   #
-# manager account. It should be set without dashes, for example: 1234567890   #
-# instead of 123-456-7890. You can also specify this later in code if your    #
-# application uses multiple manager account + OAuth pairs.                    #
-###############################################################################
+##########################################################################################
+# Required for manager accounts only: Specify the login customer ID used to authenticate #
+# API calls. This will be the customer ID of the authenticated manager account. It       #
+# should be set without dashes, for example: 1234567890 instead of 123-456-7890. You can #
+# also specify this later in code if your application uses multiple manager account +    #
+# OAuth pairs.                                                                           #
+##########################################################################################
 login_customer_id: INSERT_LOGIN_CUSTOMER_ID_HERE
 
 # Logging configuration
-###############################################################################
-# Below you may specify the logging configuration. This will be provided as   #
-# an input to logging.config.dictConfig. Use the "level" block under the root #
-# logger configuration to adjust the logging level. Note in the "format"      #
-# field that log messages are truncated to 5000 characters by default. You    #
-# can change this to any length by removing the ".5000" portion or changing   #
-# it to a different number.                                                   #
-# #############################################################################
+##########################################################################################
+# Below you may specify the logging configuration. This will be provided as an input to  #
+# logging.config.dictConfig. Use the "level" block under the root logger configuration   #
+# to adjust the logging level. Note in the "format" field that log messages are          #
+# truncated to 5000 characters by default. You can change this to any length by removing #
+# the ".5000" portion or changing it to a different number.                              #
+# ########################################################################################
 # logging:
   # version: 1
   # disable_existing_loggers: False
@@ -66,9 +74,8 @@ login_customer_id: INSERT_LOGIN_CUSTOMER_ID_HERE
       # level: INFO
 
 # Proxy configuration
-###############################################################################
-# Below you can specify an optional proxy configuration to be used by         #
-# requests. If you don't have username and password, just specify host and    #
-# port.                                                                       #
-# #############################################################################
+##########################################################################################
+# Below you can specify an optional proxy configuration to be used by requests. If you   #
+# don't have username and password, just specify host and port.                          #
+# ########################################################################################
 # http_proxy: http://user:password@localhost:8000

@@ -91,7 +91,7 @@ def main(client, customer_id, manager_customer_id):
         )
     )
 
-    manager_link.status = client.enums.ManagerLinkStatusEnum.PENDING
+    manager_link.status = client.enums.ManagerLinkStatusEnum.ACTIVE
     client.copy_from(
         manager_link_operation.update_mask,
         protobuf_helpers.field_mask(None, manager_link._pb),

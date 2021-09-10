@@ -27,7 +27,7 @@ install_requires = [
     "proto-plus == 1.18.1",
     "PyYAML >= 5.1, < 6.0",
     "setuptools >= 40.3.0",
-    "nox == 2020.12.31",
+    "nox >= 2020.12.31, < 2022.6",
 ]
 
 with io.open("README.rst", "r", encoding="utf-8") as readme_file:

@@ -35,7 +35,7 @@ feed_module = import_module(
 class ConvertStringTest(TestCase):
     def test_convert_upper_case_to_snake_case(self):
         string = "GoogleAdsServiceClientTransport"
-        expected = "google_ads_service_client_transport test me"
+        expected = "google_ads_service_client_transport"
         result = util.convert_upper_case_to_snake_case(string)
         self.assertEqual(result, expected)
 

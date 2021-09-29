@@ -43,9 +43,9 @@ def main(client, customer_id):
           account_budget.proposed_end_time_type
         FROM account_budget"""
 
-    response = ga_service.search_stream(customer_id=customer_id, query=query)
+    stream = ga_service.search_stream(customer_id=customer_id, query=query)
 
-    for batch in response:
+    for batch in stream:
         for row in batch.results:
             budget = row.account_budget
 

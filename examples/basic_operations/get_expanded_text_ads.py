@@ -38,9 +38,9 @@ def main(client, customer_id, ad_group_id=None):
     if ad_group_id:
         query += f" AND ad_group.id = {ad_group_id}"
 
-    response = ga_service.search_stream(customer_id=customer_id, query=query)
+    stream = ga_service.search_stream(customer_id=customer_id, query=query)
 
-    for batch in response:
+    for batch in stream:
         for row in batch.results:
             ad = row.ad_group_ad.ad
 

@@ -36,9 +36,9 @@ def main(client, customer_id):
         ORDER BY campaign.id"""
 
     # Issues a search request using streaming.
-    response = ga_service.search_stream(customer_id=customer_id, query=query)
+    stream = ga_service.search_stream(customer_id=customer_id, query=query)
 
-    for batch in response:
+    for batch in stream:
         for row in batch.results:
             print(
                 f"Campaign with ID {row.campaign.id} and name "

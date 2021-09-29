@@ -24,7 +24,7 @@ from google.ads.googleads.client import GoogleAdsClient
 from google.ads.googleads.errors import GoogleAdsException
 
 
-BUNDLE_URL = "https://goo.gl/9Y7qI2"
+BUNDLE_URL = "https://gaagl.page.link/ib87"
 
 
 def main(client, customer_id):

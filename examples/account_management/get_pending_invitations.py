@@ -44,10 +44,10 @@ def main(client, customer_id):
         FROM customer_user_access_invitation
         WHERE customer_user_access_invitation.invitation_status = PENDING"""
 
-    response = googleads_service.search_stream(
+    stream = googleads_service.search_stream(
         customer_id=customer_id, query=query
     )
-    for batch in response:
+    for batch in stream:
         for row in batch.results:
             invite = row.customer_user_access_invitation
             print(

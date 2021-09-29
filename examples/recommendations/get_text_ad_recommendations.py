@@ -40,9 +40,9 @@ def main(client, customer_id):
     search_request = client.get_type("SearchGoogleAdsStreamRequest")
     search_request.customer_id = customer_id
     search_request.query = query
-    response = ga_service.search_stream(request=search_request)
+    stream = ga_service.search_stream(request=search_request)
 
-    for batch in response:
+    for batch in stream:
         for row in batch.results:
             recommendation = row.recommendation
             recommended_ad = recommendation.text_ad_recommendation.ad

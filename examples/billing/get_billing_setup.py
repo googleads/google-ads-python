@@ -38,10 +38,10 @@ def main(client, customer_id):
           billing_setup.payments_account_info.secondary_payments_profile_id
         FROM billing_setup"""
 
-    response = ga_service.search_stream(customer_id=customer_id, query=query)
+    stream = ga_service.search_stream(customer_id=customer_id, query=query)
 
     print("Found the following billing setup results:")
-    for batch in response:
+    for batch in stream:
         for row in batch.results:
             billing_setup = row.billing_setup
             pai = billing_setup.payments_account_info

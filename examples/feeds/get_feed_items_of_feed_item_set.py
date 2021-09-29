@@ -52,13 +52,13 @@ def main(client, customer_id, feed_id, feed_item_set_id):
     search_request = client.get_type("SearchGoogleAdsStreamRequest")
     search_request.customer_id = customer_id
     search_request.query = query
-    response = ga_service.search_stream(request=search_request)
+    stream = ga_service.search_stream(request=search_request)
 
     print(
         "The feed items with the following resource names are linked with "
         f"the feed item set with ID {feed_item_set_id}:"
     )
-    for batch in response:
+    for batch in stream:
         for row in batch.results:
             print(f"'{row.feed_item_set_link.feed_item}'")
 

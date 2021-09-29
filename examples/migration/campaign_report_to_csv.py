@@ -69,7 +69,7 @@ def main(client, customer_id, output_file, write_headers):
     search_request = client.get_type("SearchGoogleAdsStreamRequest")
     search_request.customer_id = customer_id
     search_request.query = query
-    response = ga_service.search_stream(search_request)
+    stream = ga_service.search_stream(search_request)
     try:
         with open(file_path, "w", newline="") as f:
             writer = csv.writer(f)
@@ -88,7 +88,7 @@ def main(client, customer_id, output_file, write_headers):
             if write_headers:
                 writer.writerow(headers)
 
-            for batch in response:
+            for batch in stream:
                 for row in batch.results:
                     # Use the CSV writer to write the individual GoogleAdsRow
                     # fields returned in the SearchGoogleAdsStreamResponse.

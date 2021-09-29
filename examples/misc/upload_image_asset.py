@@ -31,7 +31,7 @@ def main(client, customer_id):
     """Main method, to run this code example as a standalone application."""
 
     # Download image from URL
-    url = "https://goo.gl/3b9Wfh"
+    url = "https://gaagl.page.link/Eit5"
     image_content = requests.get(url).content
 
     asset_service = client.get_service("AssetService")

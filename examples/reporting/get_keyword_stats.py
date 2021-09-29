@@ -51,8 +51,8 @@ def main(client, customer_id):
     search_request = client.get_type("SearchGoogleAdsStreamRequest")
     search_request.customer_id = customer_id
     search_request.query = query
-    response = ga_service.search_stream(search_request)
-    for batch in response:
+    stream = ga_service.search_stream(search_request)
+    for batch in stream:
         for row in batch.results:
             campaign = row.campaign
             ad_group = row.ad_group

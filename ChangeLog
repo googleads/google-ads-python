@@ -1,3 +1,9 @@
+* 14.0.1
+- Pin protobuf to < 3.18.0
+- Add examples add_bidding_data_exclusion, add_bidding_seasonality_adjustment
+- Style updates for examples that use search_stream
+- Fix hardcoded URLs for media in various examples
+
 * 14.0.0
 - New required configuration value to specify protobuf message types, see:
   https://developers.google.com/google-ads/api/docs/client-libs/python/protobuf-messages

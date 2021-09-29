@@ -31,8 +31,8 @@ from google.ads.googleads.client import GoogleAdsClient
 from google.ads.googleads.errors import GoogleAdsException
 
 
-_MARKETING_IMAGE_URL = "https://goo.gl/3b9Wfh"
-_LOGO_IMAGE_URL = "https://goo.gl/mtt54n"
+_MARKETING_IMAGE_URL = "https://gaagl.page.link/Eit5"
+_LOGO_IMAGE_URL = "https://gaagl.page.link/bjYi"
 _YOUTUBE_VIDEO_ID = "ECpDzH9gXh8"
 
 

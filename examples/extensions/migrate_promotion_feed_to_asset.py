@@ -121,10 +121,10 @@ def _get_extension_feed_item(client, customer_id, feed_item_id):
     LIMIT 1"""
 
     # Issue a search request to get the extension feed item contents.
-    response = ga_service.search_stream(customer_id=customer_id, query=query)
+    stream = ga_service.search_stream(customer_id=customer_id, query=query)
 
     try:
-        stream_response = next(response)
+        stream_response = next(stream)
     except StopIteration:
         print(f"Error: No ExtensionFeedItem found with ID {feed_item_id}.")
         sys.exit(1)
@@ -143,12 +143,12 @@ def _get_extension_feed_item(client, customer_id, feed_item_id):
       WHERE feed_item.id = {extension_feed_item.id}"""
 
     # Issue a search request to get any URL custom parameters.
-    response = ga_service.search_stream(
+    stream = ga_service.search_stream(
         customer_id=customer_id, query=url_custom_params_query
     )
 
     try:
-        url_stream_response = next(response)
+        url_stream_response = next(stream)
     except StopIteration:
         print(f"Error: No FeedItems found with ID {feed_item_id}.")
         sys.exit(1)
@@ -189,11 +189,11 @@ def _get_targeted_campaign_ids(client, customer_id, resource_name):
         campaign_extension_setting.extension_type = 'PROMOTION'
         AND campaign.status != 'REMOVED'"""
 
-    response = ga_service.search_stream(customer_id=customer_id, query=query)
+    stream = ga_service.search_stream(customer_id=customer_id, query=query)
 
     campaign_ids = []
 
-    for batch in response:
+    for batch in stream:
         for row in batch.results:
             feed_items = row.campaign_extension_setting.extension_feed_items
             if resource_name in feed_items:
@@ -228,11 +228,11 @@ def _get_targeted_ad_group_ids(client, customer_id, resource_name):
         ad_group_extension_setting.extension_type = 'PROMOTION'
         AND ad_group.status != 'REMOVED'"""
 
-    response = ga_service.search_stream(customer_id=customer_id, query=query)
+    stream = ga_service.search_stream(customer_id=customer_id, query=query)
 
     ad_group_ids = []
 
-    for batch in response:
+    for batch in stream:
         for row in batch.results:
             feed_items = row.ad_group_extension_setting.extension_feed_items
             if resource_name in feed_items:

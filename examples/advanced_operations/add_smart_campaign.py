@@ -491,7 +491,7 @@ def _create_smart_campaign_setting_operation(
 
 # [START add_smart_campaign_8]
 def _create_campaign_criterion_operations(
-    client, customer_id, keyword_theme_infos
+    client, customer_id, keyword_theme_infos, suggestion_info
 ):
     """Creates a list of MutateOperations that create new campaign criteria.
 
@@ -499,6 +499,7 @@ def _create_campaign_criterion_operations(
         client: an initialized GoogleAdsClient instance.
         customer_id: a client customer ID.
         keyword_theme_infos: a list of KeywordThemeInfos.
+        suggestion_info: A SmartCampaignSuggestionInfo instance.
 
     Returns:
         a list of MutateOperations that create new campaign criteria.
@@ -521,6 +522,22 @@ def _create_campaign_criterion_operations(
         campaign_criterion.keyword_theme = info
         # Add the mutate operation to the list of other operations.
         operations.append(mutate_operation)
+
+    # Create location criterion to add location to target with the campaign
+    mutate_operation = client.get_type("MutateOperation")
+    campaign_criterion = (
+        mutate_operation.campaign_criterion_operation.create
+    )
+    # Set the campaign ID to a temporary ID.
+    campaign_criterion.campaign = campaign_service.campaign_path(
+        customer_id, _SMART_CAMPAIGN_TEMPORARY_ID
+    )
+    # Set the criterion type to LOCATION.
+    campaign_criterion.type_ = client.enums.CriterionTypeEnum.LOCATION
+    # Set the location to the given location.
+    campaign_criterion.location = suggestion_info.location_list.locations
+    # Add the mutate operation to the list of other operations.
+    operations.append(mutate_operation)
 
     return operations
     # [END add_smart_campaign_8]

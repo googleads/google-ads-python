@@ -516,8 +516,6 @@ def _create_campaign_criterion_operations(
         campaign_criterion.campaign = campaign_service.campaign_path(
             customer_id, _SMART_CAMPAIGN_TEMPORARY_ID
         )
-        # Set the criterion type to KEYWORD_THEME.
-        campaign_criterion.type_ = client.enums.CriterionTypeEnum.KEYWORD_THEME
         # Set the keyword theme to the given KeywordThemeInfo.
         campaign_criterion.keyword_theme = info
         # Add the mutate operation to the list of other operations.
@@ -534,8 +532,6 @@ def _create_campaign_criterion_operations(
         campaign_criterion.campaign = campaign_service.campaign_path(
             customer_id, _SMART_CAMPAIGN_TEMPORARY_ID
         )
-        # Set the criterion type to LOCATION.
-        campaign_criterion.type_ = client.enums.CriterionTypeEnum.LOCATION
         # Set the location to the given location.
         campaign_criterion.location = location_info
         # Add the mutate operation to the list of other operations.

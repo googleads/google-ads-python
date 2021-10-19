@@ -87,7 +87,7 @@ def main(
         client, customer_id, business_location_id, business_name
     )
     campaign_criterion_operations = _create_campaign_criterion_operations(
-        client, customer_id, keyword_theme_infos
+        client, customer_id, keyword_theme_infos, suggestion_info
     )
     ad_group_operation = _create_ad_group_operation(client, customer_id)
     ad_group_ad_operation = _create_ad_group_ad_operation(
@@ -516,28 +516,26 @@ def _create_campaign_criterion_operations(
         campaign_criterion.campaign = campaign_service.campaign_path(
             customer_id, _SMART_CAMPAIGN_TEMPORARY_ID
         )
-        # Set the criterion type to KEYWORD_THEME.
-        campaign_criterion.type_ = client.enums.CriterionTypeEnum.KEYWORD_THEME
         # Set the keyword theme to the given KeywordThemeInfo.
         campaign_criterion.keyword_theme = info
         # Add the mutate operation to the list of other operations.
         operations.append(mutate_operation)
 
-    # Create location criterion to add location to target with the campaign
-    mutate_operation = client.get_type("MutateOperation")
-    campaign_criterion = (
-        mutate_operation.campaign_criterion_operation.create
-    )
-    # Set the campaign ID to a temporary ID.
-    campaign_criterion.campaign = campaign_service.campaign_path(
-        customer_id, _SMART_CAMPAIGN_TEMPORARY_ID
-    )
-    # Set the criterion type to LOCATION.
-    campaign_criterion.type_ = client.enums.CriterionTypeEnum.LOCATION
-    # Set the location to the given location.
-    campaign_criterion.location = suggestion_info.location_list.locations
-    # Add the mutate operation to the list of other operations.
-    operations.append(mutate_operation)
+    # Create a location criterion for each location in the suggestion info
+    # object to add corresponding location targeting to the Smart campaign
+    for location_info in suggestion_info.location_list.locations:
+        mutate_operation = client.get_type("MutateOperation")
+        campaign_criterion = (
+            mutate_operation.campaign_criterion_operation.create
+        )
+        # Set the campaign ID to a temporary ID.
+        campaign_criterion.campaign = campaign_service.campaign_path(
+            customer_id, _SMART_CAMPAIGN_TEMPORARY_ID
+        )
+        # Set the location to the given location.
+        campaign_criterion.location = location_info
+        # Add the mutate operation to the list of other operations.
+        operations.append(mutate_operation)
 
     return operations
     # [END add_smart_campaign_8]

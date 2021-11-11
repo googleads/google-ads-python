@@ -219,7 +219,7 @@ def _attach_cross_account_bidding_strategy_to_campaign(
 if __name__ == "__main__":
     # GoogleAdsClient will read the google-ads.yaml configuration file in the
     # home directory if none is specified.
-    googleads_client = GoogleAdsClient.load_from_storage(version="v8")
+    googleads_client = GoogleAdsClient.load_from_storage(version="v9")
 
     parser = argparse.ArgumentParser(description=("Creates a Smart campaign."))
     # The following argument(s) should be provided to run the example.

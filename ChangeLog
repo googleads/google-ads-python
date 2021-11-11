@@ -1,3 +1,11 @@
+* 14.1.0
+- Google Ads API v9_0 release
+- Update gRPC transport logic to replace "gapic" user-agent with "gccl"
+- Update examples to support v9 changes
+- Add new Performance Max examples
+  advanced_operations/add_performance_max_campaign.py and
+  shopping_ads/add_performance_max_retail_campaign.py
+
 * 14.0.1
 - Pin protobuf to < 3.18.0
 - Add examples add_bidding_data_exclusion, add_bidding_seasonality_adjustment

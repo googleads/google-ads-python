@@ -25,7 +25,7 @@ install_requires = [
     "PyYAML >= 5.1, < 6.0",
     "setuptools >= 40.3.0",
     "nox >= 2020.12.31, < 2022.6",
-    "protobuf >= 3.12.0, < 3.18.0"
+    "protobuf >= 3.12.0, < 3.18.0",
 ]
 
 with io.open("README.rst", "r", encoding="utf-8") as readme_file:
@@ -34,12 +34,12 @@ with io.open("README.rst", "r", encoding="utf-8") as readme_file:
 
 setup(
     name="google-ads",
-    version="14.0.1",
+    version="14.1.0",
     author="Google LLC",
     author_email="googleapis-packages@google.com",
     classifiers=[
         "Intended Audience :: Developers",
-        "Development Status :: 3 - Alpha",
+        "Development Status :: 5 - Production/Stable",
         "Intended Audience :: Developers",
         "License :: OSI Approved :: Apache Software License",
         "Programming Language :: Python",

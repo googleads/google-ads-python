@@ -96,7 +96,7 @@ def main(client, customer_id):
 
 
 if __name__ == "__main__":
-    googleads_client = GoogleAdsClient.load_from_storage(version="v8")
+    googleads_client = GoogleAdsClient.load_from_storage(version="v9")
 
     parser = argparse.ArgumentParser(
         description="Get Product Bidding Category Constant"

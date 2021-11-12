@@ -787,7 +787,7 @@ def _print_response_details(response):
         )
 
 
-# [START smart_campaign_14]
+# [START add_smart_campaign_14]
 def _convert_business_location_id(business_location_id):
     """Converts a business location ID to a signed 64 bit integer, if necessary.
 
@@ -822,7 +822,7 @@ def _convert_business_location_id(business_location_id):
         return ctypes.c_int64(business_location_id).value
     else:
         return business_location_id
-        # [END smart_campaign_14]
+        # [END add_smart_campaign_14]
 
 
 if __name__ == "__main__":

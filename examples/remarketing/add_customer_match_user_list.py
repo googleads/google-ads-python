@@ -186,8 +186,10 @@ def _add_users_to_customer_match_user_list(
         _print_customer_match_user_list_info(
             client, customer_id, user_list_resource_name
         )
+        # [END add_customer_match_user_list]
 
 
+# [START add_customer_match_user_list_2]
 def _build_offline_user_data_job_operations(client):
     """Builds and returns two sample offline user data job operations.
 
@@ -237,6 +239,7 @@ def _build_offline_user_data_job_operations(client):
         user_data_with_email_address_operation,
         user_data_with_physical_address_operation,
     ]
+    # [END add_customer_match_user_list_2]
 
 
 def _check_job_status(
@@ -341,7 +344,6 @@ def _normalize_and_hash(s):
         A normalized (lowercase, remove whitespace) and SHA-256 hashed string.
     """
     return hashlib.sha256(s.strip().lower().encode()).hexdigest()
-    # [END add_customer_match_user_list]
 
 
 if __name__ == "__main__":

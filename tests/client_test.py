@@ -102,7 +102,7 @@ class GoogleAdsClientTest(FileTestCase):
             self.assertEqual(
                 result,
                 {
-                    "credentials": mock_credentials_instance,
+                    "credentialds": mock_credentials_instance,
                     "developer_token": self.developer_token,
                     "use_proto_plus": self.use_proto_plus,
                     "endpoint": None,

@@ -24,8 +24,11 @@ install_requires = [
     "proto-plus == 1.18.1",
     "PyYAML >= 5.1, < 6.0",
     "setuptools >= 40.3.0",
-    "nox >= 2020.12.31, < 2022.6",
     "protobuf >= 3.12.0, < 3.18.0",
+]
+
+tests_require = [
+    "nox >= 2020.12.31, < 2022.6",
 ]
 
 with io.open("README.rst", "r", encoding="utf-8") as readme_file:
@@ -51,6 +54,8 @@ setup(
     python_requires=">=3.7",
     long_description=long_description,
     install_requires=install_requires,
+    tests_require=tests_require,
+    test_suite="noxfile",
     license="Apache 2.0",
     packages=find_packages(
         exclude=["examples", "examples.*", "tests", "tests.*"]

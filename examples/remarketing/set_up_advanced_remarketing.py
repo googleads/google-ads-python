@@ -12,7 +12,7 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
-"""This example illustrates how to setup advanced remarketing.
+"""This example illustrates how to set up advanced remarketing.
 
 Creates a rule-based user list defined by an expression rule for users who have
 either checked out in November, or December, OR visited the checkout page with
@@ -138,26 +138,17 @@ def main(client, customer_id):
 
     # [START setup_advanced_remarketing_2]
     checkout_and_cart_size_rule_group.rule_items.extend(
-        [
-            checkout_rule,
-            cart_size_rule,
-        ]
+        [checkout_rule, cart_size_rule,]
     )
     # [END setup_advanced_remarketing_2]
     # [START setup_advanced_remarketing_5]
     checkout_date_rule_group.rule_items.extend(
-        [
-            start_date_rule,
-            end_date_rule,
-        ]
+        [start_date_rule, end_date_rule,]
     )
     # [END setup_advanced_remarketing_5]
     # [START setup_advanced_remarketing_6]
     expression_rule_user_list_info.rule.rule_item_groups.extend(
-        [
-            checkout_and_cart_size_rule_group,
-            checkout_date_rule_group,
-        ]
+        [checkout_and_cart_size_rule_group, checkout_date_rule_group,]
     )
     # [END setup_advanced_remarketing_6]
 

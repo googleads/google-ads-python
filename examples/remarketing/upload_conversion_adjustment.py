@@ -129,7 +129,7 @@ if __name__ == "__main__":
         type=str,
         required=True,
         choices=[
-            e.name for e in googleads_client.enum.ConversionAdjustmentTypeEnum
+            e.name for e in googleads_client.enums.ConversionAdjustmentTypeEnum
         ],
         help="The Adjustment type, e.g. " "RETRACTION, RESTATEMENT",
     )

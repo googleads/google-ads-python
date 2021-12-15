@@ -66,8 +66,8 @@ def main(
         keyword_text: a keyword used for generating keyword themes.
         freeform_keyword_text: a keyword used to create a free-form keyword
             theme.
-        business_location_id: the ID of a Google My Business location.
-        business_name: the name of a Google My Business.
+        business_location_id: the ID of a Business Profile location.
+        business_name: the name of a Business Profile.
     """
     # [START add_smart_campaign_12]
     # The SmartCampaignSuggestionInfo object acts as the basis for many of the
@@ -292,8 +292,8 @@ def _get_smart_campaign_suggestion_info(
 
     Args:
         client: an initialized GoogleAdsClient instance.
-        business_location_id: the ID of a Google My Business location.
-        business_name: the name of a Google My Business.
+        business_location_id: the ID of a Business Profile location.
+        business_name: the name of a Business Profile.
 
     Returns:
         A SmartCampaignSuggestionInfo instance.
@@ -552,8 +552,8 @@ def _create_smart_campaign_setting_operation(
     Args:
         client: an initialized GoogleAdsClient instance.
         customer_id: a client customer ID.
-        business_location_id: the ID of a Google My Business location.
-        business_name: the name of a Google My Business.
+        business_location_id: the ID of a Business Profile location.
+        business_name: the name of a Business Profile.
 
     Returns:
         a MutateOperation that creates a SmartCampaignSetting.
@@ -791,7 +791,7 @@ def _print_response_details(response):
 def _convert_business_location_id(business_location_id):
     """Converts a business location ID to a signed 64 bit integer, if necessary.
 
-    A Google My business location ID may be outside of the range for a signed
+    A Business Profile location ID may be outside of the range for a signed
     64 bit int (>= 2^63), which will cause an error to be raised when it's set
     to the business_location_id field on a SmartCampaignSuggestionInfo
     or SmartCampaignSetting instance. If that's the case this method will
@@ -803,7 +803,7 @@ def _convert_business_location_id(business_location_id):
     will be returned as-is.
 
     Args:
-        business_location_id: the ID of a Google My Business location.
+        business_location_id: the ID of a Business Profile location.
 
     Returns:
         a business location ID as a signed 64 bit integer.
@@ -872,9 +872,9 @@ if __name__ == "__main__":
         "--business_location_id",
         type=int,
         help=(
-            "The ID of a Google My Business (GMB) location. This is required "
+            "The ID of a Business Profile location. This is required "
             "if a business name is not provided. It can be retrieved using the "
-            "GMB API, for details see: "
+            "Business Profile API, for details see: "
             "https://developers.google.com/my-business/reference/rest/v4/accounts.locations"
         ),
     )
@@ -883,7 +883,7 @@ if __name__ == "__main__":
         "--business_name",
         type=str,
         help=(
-            "The name of a Google My Business (GMB) business. This is required "
+            "The name of a Business Profile business. This is required "
             "if a business location ID is not provided."
         ),
     )

@@ -128,8 +128,8 @@ def _remove_location_extension_feeds(client, customer_id):
     # To remove a location extension feed, you need to:
     # 1. Remove the CustomerFeed so that the location extensions from the feed
     # stop serving.
-    # 2. Remove the feed so that Google Ads will no longer sync from the GMB
-    # account.
+    # 2. Remove the feed so that Google Ads will no longer sync from the
+    # Business Profile account.
     # Optional: You may also want to remove the CampaignFeeds and AdGroupFeeds.
     old_customer_feeds = _get_location_extension_customer_feeds(
         client, customer_id

@@ -12,7 +12,7 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
-"""Adds a feed that syncs feed items from a Google My Business (GMB) account.
+"""Adds a feed that syncs feed items from a Business Profile account.
 
 The feed will also be associated with a customer.
 """
@@ -33,65 +33,66 @@ DEFAULT_OAUTH2_SCOPE = "https://www.googleapis.com/auth/adwords"
 def main(
     client,
     customer_id,
-    gmb_email_address,
+    business_profile_email,
     business_account_id,
-    gmb_access_token,
+    business_profile_access_token,
 ):
-    """Adds a feed that syncs feed items from a Google My Business (GMB) account.
+    """Adds a feed that syncs feed items from a Business Profile account.
 
     The feed will also be associated with a customer.
 
     Args:
         client: An initialized GoogleAdsClient instance.
         customer_id: The Google Ads customer ID.
-        gmb_email_address: The email address associated with the GMB account.
+        business_profile_email: The email address associated with the Business
+            Profile account.
         business_account_id: The account ID of the managed business.
-        gmb_access_token: The access token created using the 'AdWords' scope
+        business_profile_access_token: The access token created using the 'AdWords' scope
             and the client ID and client secret of with the Cloud project
-            associated with the GMB account.
+            associated with the Business Profile account.
     """
     # Get the FeedService and CustomerFeedService clients.
     feed_service = client.get_service("FeedService")
     customer_feed_service = client.get_service("CustomerFeedService")
 
     # Create a feed operation and configure the new feed.
-    # The feed will sync to the Google My Business account specified by
-    # gmb_email_address. Do not add FeedAttributes to this object as Google Ads
+    # The feed will sync to the Business Profile account specified by
+    # business_profile_email. Do not add FeedAttributes to this object as Google Ads
     # will add them automatically because this will be a system generated feed.
     # See here for more details:
     # https://developers.google.com/google-ads/api/docs/location-extensions/google-ads-location-extensions
-    # [START add_google_my_business_location_extensions]
+    # [START add_business_profile_location_extensions]
     feed_operation = client.get_type("FeedOperation")
-    gmb_feed = feed_operation.create
-    gmb_feed.name = f"Google My Business Feed #{uuid4()}"
-    # Configure the location feed populated from Google My Business Locations.
-    gmb_feed.places_location_feed_data.email_address = gmb_email_address
+    business_profile_feed = feed_operation.create
+    business_profile_feed.name = f"Business Profile Feed #{uuid4()}"
+    # Configure the location feed populated from Business Profile Locations.
+    business_profile_feed.places_location_feed_data.email_address = business_profile_email
 
     if business_account_id is not None:
-        gmb_feed.places_location_feed_data.business_account_id = (
+        business_profile_feed.places_location_feed_data.business_account_id = (
             business_account_id
         )
 
-    # Used to filter Google My Business listings by labels. If entries exist in
+    # Used to filter Business Profile listings by labels. If entries exist in
     # label_filters, only listings that have at least one of the labels set are
     # candidates to be synchronized into FeedItems. If no entries exist in
     # label_filters, then all listings are candidates for syncing.
-    gmb_feed.places_location_feed_data.label_filters.append(
+    business_profile_feed.places_location_feed_data.label_filters.append(
         "Stores in New York"
     )
 
-    # Set the authentication info to be able to connect Google Ads to the GMB
-    # account.
-    gmb_feed.places_location_feed_data.oauth_info.http_method = "GET"
-    gmb_feed.places_location_feed_data.oauth_info.http_request_url = (
+    # Set the authentication info to be able to connect Google Ads to the
+    # Business Profile account.
+    business_profile_feed.places_location_feed_data.oauth_info.http_method = "GET"
+    business_profile_feed.places_location_feed_data.oauth_info.http_request_url = (
         DEFAULT_OAUTH2_SCOPE
     )
-    gmb_feed.places_location_feed_data.oauth_info.http_authorization_header = (
-        f"Bearer {gmb_access_token}"
+    business_profile_feed.places_location_feed_data.oauth_info.http_authorization_header = (
+        f"Bearer {business_profile_access_token}"
     )
     # Since this feed's feed items will be managed by Google, you must set its
     # origin to GOOGLE.
-    gmb_feed.origin = client.enums.FeedOriginEnum.GOOGLE
+    business_profile_feed.origin = client.enums.FeedOriginEnum.GOOGLE
 
     # Optional: Delete all existing location extension feeds. This is an
     # optional step, and is required for this code example to run correctly
@@ -101,7 +102,7 @@ def main(
     # time.
     _delete_location_extension_feeds(client, customer_id)
 
-    # [START add_google_my_business_location_extensions_1]
+    # [START add_business_profile_location_extensions_1]
     # Add the feed. Since it is a system generated feed, Google Ads will
     # automatically:
     # 1. Set up the FeedAttributes on the feed.
@@ -111,21 +112,24 @@ def main(
         customer_id=customer_id, operations=[feed_operation]
     )
     feed_resource_name = feed_response.results[0].resource_name
-    print(f"GMB feed created with resource name '{feed_resource_name}'.")
-    # [END add_google_my_business_location_extensions_1]
-    # [END add_google_my_business_location_extensions]
+    print(
+        "Business Profile feed created with resource name "
+        f"'{feed_resource_name}'."
+    )
+    # [END add_business_profile_location_extensions_1]
+    # [END add_business_profile_location_extensions]
 
-    # [START add_google_my_business_location_extensions_2]
+    # [START add_business_profile_location_extensions_2]
     # After the completion of the Feed ADD operation above the added feed
     # will not be available for usage in a CustomerFeed until the sync
-    # between the Google Ads and GMB accounts completes.
+    # between the Google Ads and Business Profile accounts completes.
     # This process is asynchronous, so we wait until the feed mapping is
     # created, performing exponential backoff.
     customer_feed_resource_name = None
     number_of_attempts = 0
 
     while number_of_attempts < MAX_CUSTOMER_FEED_ADD_ATTEMPTS:
-        feed_mapping = _get_gmb_feed_mapping(
+        feed_mapping = _get_business_profile_feed_mapping(
             client, customer_id, feed_resource_name
         )
 
@@ -141,9 +145,9 @@ def main(
             time.sleep(sleep_seconds)
         else:
             customer_feed_resource_name = feed_mapping.resource_name
-            print(f"GMB feed {feed_resource_name} is now ready.")
+            print(f"Business Profile feed {feed_resource_name} is now ready.")
             break
-            # [END add_google_my_business_location_extensions_2]
+            # [END add_business_profile_location_extensions_2]
 
     if customer_feed_resource_name is None:
         print(
@@ -153,7 +157,7 @@ def main(
         )
         sys.exit(1)
     else:
-        # [START add_google_my_business_location_extensions_3]
+        # [START add_business_profile_location_extensions_3]
         # Create a CustomerFeed operation and configure the CustomerFeed to
         # associate the feed with this customer for the LOCATION placeholder
         # type.
@@ -185,7 +189,7 @@ def main(
             "Customer feed created with resource name "
             f"'{customer_feed_response.results[0].resource_name}'."
         )
-        # [END add_google_my_business_location_extensions_3]
+        # [END add_business_profile_location_extensions_3]
 
 
 def _delete_location_extension_feeds(client, customer_id):
@@ -198,8 +202,8 @@ def _delete_location_extension_feeds(client, customer_id):
     # To delete a location extension feed, you need to:
     # 1. Delete the CustomerFeed so that the location extensions from the feed
     # stop serving.
-    # 2. Delete the feed so that Google Ads will no longer sync from the GMB
-    # account.
+    # 2. Delete the feed so that Google Ads will no longer sync from the
+    # Business Profile account.
     old_customer_feeds = _get_location_extension_customer_feeds(
         client, customer_id
     )
@@ -315,13 +319,13 @@ def _delete_feeds(client, customer_id, old_feeds):
     feed_service.mutate_feeds(customer_id=customer_id, operations=operations)
 
 
-def _get_gmb_feed_mapping(client, customer_id, feed_resource_name):
-    """Gets a Google My Business Feed mapping.
+def _get_business_profile_feed_mapping(client, customer_id, feed_resource_name):
+    """Gets a Business Profile Feed mapping.
 
     Args:
         client: An initialized Google Ads client.
         customer_id: The customer ID for which the call is made.
-        feed_resource_name: The string Google My Business feed resource name.
+        feed_resource_name: The string Business Profile feed resource name.
 
     Returns:
         The requested FeedMapping, or None if it is not available.
@@ -351,8 +355,8 @@ if __name__ == "__main__":
     googleads_client = GoogleAdsClient.load_from_storage(version="v9")
 
     parser = argparse.ArgumentParser(
-        description="Adds a feed that syncs feed items from a Google My "
-        "Business (GMB) account."
+        description="Adds a feed that syncs feed items from a Business Profile "
+        "account."
     )
     # The following argument(s) should be provided to run the example.
     parser.add_argument(
@@ -364,10 +368,10 @@ if __name__ == "__main__":
     )
     parser.add_argument(
         "-e",
-        "--gmb_email_address",
+        "--business_profile_email",
         type=str,
         required=True,
-        help="The email address associated with the GMB account.",
+        help="The email address associated with the Business Profile account.",
     )
     parser.add_argument(
         "-b",
@@ -375,24 +379,25 @@ if __name__ == "__main__":
         type=str,
         required=False,
         help="The account ID of the managed business.\n"
-        "If the email_address is for a GMB manager instead of the GMB account "
-        "owner, then set business_account_id to the Google+ Page ID of a "
-        "location for which the manager has access. This information is "
-        "available through the Google My Business API. See "
+        "If the email_address is for a Business Profile manager instead of the "
+        "Business Profile account owner, then set business_account_id to the
+        Google+ Page ID of a location for which the manager has access. This "
+        "information is available through the Business Profile API. See "
         "https://developers.google.com/my-business/reference/rest/v4/accounts.locations#locationkey"
         "for details.",
     )
     parser.add_argument(
         "-t",
-        "--gmb_access_token",
+        "--business_profile_access_token",
         type=str,
         required=False,
         default=googleads_client.credentials.token,
-        help="If the gmb_email_address above is the same user you used to "
+        help="If the business_profile_email above is the same user you used to "
         "generate your Google Ads API refresh token, do not pass a value to "
-        "this argument.\nOtherwise, to obtain an access token for your GMB "
-        "account, run the authenticate_in_standalone_application code example "
-        "while logged in as the same user as gmb_email_address. Pass the "
+        "this argument.\nOtherwise, to obtain an access token for your "
+        "Business Profile account, run the "
+        "authenticate_in_standalone_application code example while logged in "
+        "as the same user as business_profile_email. Pass the "
         "Access Token value to this argument.",
     )
 
@@ -402,9 +407,9 @@ if __name__ == "__main__":
         main(
             googleads_client,
             args.customer_id,
-            args.gmb_email_address,
+            args.business_profile_email,
             args.business_account_id,
-            args.gmb_access_token,
+            args.business_profile_access_token,
         )
     except GoogleAdsException as ex:
         print(

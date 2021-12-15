@@ -104,16 +104,13 @@ def _create_add_customizer_feed(client, customer_id, feed_name):
 
     feed_service = client.get_service("FeedService")
 
-    try:
-        response = feed_service.mutate_feeds(
-            customer_id=customer_id, operations=[feed_operation]
-        )
-        resource_name = response.results[0].resource_name
-        print(f"Added feed with resource name {resource_name}")
-        return resource_name
-    except GoogleAdsException as ex:
-        _handle_googleads_exception(ex)
-        # [END add_ad_customizer]
+    response = feed_service.mutate_feeds(
+        customer_id=customer_id, operations=[feed_operation]
+    )
+    resource_name = response.results[0].resource_name
+    print(f"Added feed with resource name {resource_name}")
+    return resource_name
+    # [END add_ad_customizer]
 
 
 # [START add_ad_customizer_1]
@@ -142,12 +139,9 @@ def _get_feed_attributes(client, customer_id, feed_resource_name):
     search_request.query = query
     search_request.page_size = 1
 
-    try:
-        results = ga_service.search(request=search_request)
-        feed = list(results)[0].feed
-        print(f"Found the following attributes for feed with name {feed.name}")
-    except GoogleAdsException as ex:
-        _handle_googleads_exception(ex)
+    results = ga_service.search(request=search_request)
+    feed = list(results)[0].feed
+    print(f"Found the following attributes for feed with name {feed.name}")
 
     feed_details = {}
     for feed_attribute in feed.attributes:
@@ -206,17 +200,14 @@ def _create_ad_customizer_mapping(
 
     feed_mapping_service = client.get_service("FeedMappingService")
 
-    try:
-        response = feed_mapping_service.mutate_feed_mappings(
-            customer_id=customer_id, operations=[feed_mapping_op]
+    response = feed_mapping_service.mutate_feed_mappings(
+        customer_id=customer_id, operations=[feed_mapping_op]
+    )
+    for result in response.results:
+        print(
+            "Created feed mapping with resource name "
+            f"{result.resource_name}"
         )
-        for result in response.results:
-            print(
-                "Created feed mapping with resource name "
-                f"{result.resource_name}"
-            )
-    except GoogleAdsException as ex:
-        _handle_googleads_exception(ex)
         # [END add_ad_customizer_2]
 
 
@@ -266,14 +257,11 @@ def _create_feed_items(
 
     feed_item_service = client.get_service("FeedItemService")
 
-    try:
-        response = feed_item_service.mutate_feed_items(
-            customer_id=customer_id, operations=feed_item_operations
-        )
-        return [feed_item.resource_name for feed_item in response.results]
-    except GoogleAdsException as ex:
-        _handle_googleads_exception(ex)
-        # [END add_ad_customizer_3]
+    response = feed_item_service.mutate_feed_items(
+        customer_id=customer_id, operations=feed_item_operations
+    )
+    return [feed_item.resource_name for feed_item in response.results]
+    # [END add_ad_customizer_3]
 
 
 # [START add_ad_customizer_4]
@@ -353,17 +341,14 @@ def _create_feed_item_targets(
             customer_id, ad_group_id
         )
 
-        try:
-            response = feed_item_target_service.mutate_feed_item_targets(
-                customer_id=customer_id, operations=[feed_item_target_op]
-            )
-            print(
-                "Added feed item target with resource name "
-                f"{response.results[0].resource_name}"
-            )
-        except GoogleAdsException as ex:
-            _handle_googleads_exception(ex)
-            # [END add_ad_customizer_5]
+        response = feed_item_target_service.mutate_feed_item_targets(
+            customer_id=customer_id, operations=[feed_item_target_op]
+        )
+        print(
+            "Added feed item target with resource name "
+            f"{response.results[0].resource_name}"
+        )
+        # [END add_ad_customizer_5]
 
 
 # [START add_ad_customizer_6]
@@ -405,34 +390,13 @@ def _create_ads_with_customizations(
         )
         ad_group_ad_operations.append(ad_group_ad_operation)
 
-    try:
-        response = ad_group_ad_service.mutate_ad_group_ads(
-            customer_id=customer_id, operations=ad_group_ad_operations
-        )
-        print(f"Added {len(response.results)} ads:")
-        for ad in response.results:
-            print(f"Added an ad with resource name {ad.resource_name}")
-    except GoogleAdsException as ex:
-        _handle_googleads_exception(ex)
-        # [END add_ad_customizer_6]
-
-
-def _handle_googleads_exception(exception):
-    """Prints the details of a GoogleAdsException object.
-
-    Args:
-        exception: an instance of GoogleAdsException.
-    """
-    print(
-        f'Request with ID "{exception.request_id}" failed with status '
-        f'"{exception.error.code().name}" and includes the following errors:'
+    response = ad_group_ad_service.mutate_ad_group_ads(
+        customer_id=customer_id, operations=ad_group_ad_operations
     )
-    for error in exception.failure.errors:
-        print(f'\tError with message "{error.message}".')
-        if error.location:
-            for field_path_element in error.location.field_path_elements:
-                print(f"\t\tOn field: {field_path_element.field_name}")
-    sys.exit(1)
+    print(f"Added {len(response.results)} ads:")
+    for ad in response.results:
+        print(f"Added an ad with resource name {ad.resource_name}")
+        # [END add_ad_customizer_6]
 
 
 if __name__ == "__main__":
@@ -463,4 +427,16 @@ if __name__ == "__main__":
     )
     args = parser.parse_args()
 
-    main(googleads_client, args.customer_id, args.ad_group_ids)
+    try:
+        main(googleads_client, args.customer_id, args.ad_group_ids)
+    except GoogleAdsException as ex:
+        print(
+            f'Request with ID "{ex.request_id}" failed with status '
+            f'"{ex.error.code().name}" and includes the following errors:'
+        )
+        for error in ex.failure.errors:
+            print(f'Error with message "{error.message}".')
+            if error.location:
+                for field_path_element in error.location.field_path_elements:
+                    print(f"\t\tOn field: {field_path_element.field_name}")
+        sys.exit(1)

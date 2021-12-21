@@ -117,14 +117,14 @@ def _issue_search_request(client, customer_id, query):
     # response.
     while True:
         try:
-            response = ga_service.search_stream(
+            stream = ga_service.search_stream(
                 customer_id=customer_id, query=query
             )
             # Returning a list of GoogleAdsRows will result in a
             # PicklingError, so instead we put the GoogleAdsRow data
             # into a list of str results and return that.
             result_strings = []
-            for batch in response:
+            for batch in stream:
                 for row in batch.results:
                     ad_group_id = (
                         f"Ad Group ID {row.ad_group.id} in "
@@ -175,7 +175,7 @@ def _generate_inputs(client, customer_ids, queries):
 if __name__ == "__main__":
     # GoogleAdsClient will read the google-ads.yaml configuration file in the
     # home directory if none is specified.
-    googleads_client = GoogleAdsClient.load_from_storage(version="v8")
+    googleads_client = GoogleAdsClient.load_from_storage(version="v9")
 
     parser = argparse.ArgumentParser(
         description="Download a set of reports in parallel from a list of "

@@ -43,9 +43,9 @@ def main(client, customer_id):
           account_budget.proposed_end_time_type
         FROM account_budget"""
 
-    response = ga_service.search_stream(customer_id=customer_id, query=query)
+    stream = ga_service.search_stream(customer_id=customer_id, query=query)
 
-    for batch in response:
+    for batch in stream:
         for row in batch.results:
             budget = row.account_budget
 
@@ -108,7 +108,7 @@ def _micros_to_currency(micros):
 if __name__ == "__main__":
     # GoogleAdsClient will read the google-ads.yaml configuration file in the
     # home directory if none is specified.
-    googleads_client = GoogleAdsClient.load_from_storage(version="v8")
+    googleads_client = GoogleAdsClient.load_from_storage(version="v9")
 
     parser = argparse.ArgumentParser(
         description=(

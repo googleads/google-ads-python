@@ -42,13 +42,13 @@ def main(client, customer_id, ad_group_id):
           AND ad_group_criterion_simulation.ad_group_id = {ad_group_id}"""
 
     # Issues a search request using streaming.
-    response = googleads_service.search_stream(
+    stream = googleads_service.search_stream(
         customer_id=customer_id, query=query
     )
 
     # Iterates over all rows in all messages and prints the requested field
     # values for the ad group criterion CPC bid simulation in each row.
-    for batch in response:
+    for batch in stream:
         for row in batch.results:
             simulation = row.ad_group_criterion_simulation
 
@@ -79,7 +79,7 @@ def main(client, customer_id, ad_group_id):
 if __name__ == "__main__":
     # GoogleAdsClient will read the google-ads.yaml configuration file in the
     # home directory if none is specified.
-    googleads_client = GoogleAdsClient.load_from_storage(version="v8")
+    googleads_client = GoogleAdsClient.load_from_storage(version="v9")
 
     parser = argparse.ArgumentParser(
         description="Gets all available ad group criterion CPC bid "

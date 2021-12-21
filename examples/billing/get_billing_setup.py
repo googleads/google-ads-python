@@ -38,10 +38,10 @@ def main(client, customer_id):
           billing_setup.payments_account_info.secondary_payments_profile_id
         FROM billing_setup"""
 
-    response = ga_service.search_stream(customer_id=customer_id, query=query)
+    stream = ga_service.search_stream(customer_id=customer_id, query=query)
 
     print("Found the following billing setup results:")
-    for batch in response:
+    for batch in stream:
         for row in batch.results:
             billing_setup = row.billing_setup
             pai = billing_setup.payments_account_info
@@ -70,7 +70,7 @@ def main(client, customer_id):
 if __name__ == "__main__":
     # GoogleAdsClient will read the google-ads.yaml configuration file in the
     # home directory if none is specified.
-    googleads_client = GoogleAdsClient.load_from_storage(version="v8")
+    googleads_client = GoogleAdsClient.load_from_storage(version="v9")
 
     parser = argparse.ArgumentParser(
         description="Lists all billing setup objects for specified customer."

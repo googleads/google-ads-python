@@ -117,10 +117,8 @@ def _add_users_to_customer_match_user_list(
     )
 
     # Issues a request to create an offline user data job.
-    create_offline_user_data_job_response = (
-        offline_user_data_job_service_client.create_offline_user_data_job(
-            customer_id=customer_id, job=offline_user_data_job
-        )
+    create_offline_user_data_job_response = offline_user_data_job_service_client.create_offline_user_data_job(
+        customer_id=customer_id, job=offline_user_data_job
     )
     offline_user_data_job_resource_name = (
         create_offline_user_data_job_response.resource_name
@@ -153,7 +151,9 @@ def _add_users_to_customer_match_user_list(
             # Retrieve the class definition of the GoogleAdsFailure instance
             # in order to use the "deserialize" class method to parse the
             # error_detail string into a protobuf message object.
-            failure_object = type(failure_message).deserialize(error_detail)
+            failure_object = type(failure_message).deserialize(
+                error_detail.value
+            )
 
             for error in failure_object.errors:
                 print(
@@ -167,10 +167,8 @@ def _add_users_to_customer_match_user_list(
 
     # Issues an request to run the offline user data job for executing all
     # added operations.
-    operation_response = (
-        offline_user_data_job_service_client.run_offline_user_data_job(
-            resource_name=offline_user_data_job_resource_name
-        )
+    operation_response = offline_user_data_job_service_client.run_offline_user_data_job(
+        resource_name=offline_user_data_job_resource_name
     )
 
     if skip_polling:
@@ -188,8 +186,10 @@ def _add_users_to_customer_match_user_list(
         _print_customer_match_user_list_info(
             client, customer_id, user_list_resource_name
         )
+        # [END add_customer_match_user_list]
 
 
+# [START add_customer_match_user_list_2]
 def _build_offline_user_data_job_operations(client):
     """Builds and returns two sample offline user data job operations.
 
@@ -222,11 +222,11 @@ def _build_offline_user_data_job_operations(client):
     )
     user_identifier_with_address = client.get_type("UserIdentifier")
     # First and last name must be normalized and hashed.
-    user_identifier_with_address.address_info.hashed_first_name = (
-        _normalize_and_hash("John")
+    user_identifier_with_address.address_info.hashed_first_name = _normalize_and_hash(
+        "John"
     )
-    user_identifier_with_address.address_info.hashed_last_name = (
-        _normalize_and_hash("Doe")
+    user_identifier_with_address.address_info.hashed_last_name = _normalize_and_hash(
+        "Doe"
     )
     # Country and zip codes are sent in plain text.
     user_identifier_with_address.address_info.country_code = "US"
@@ -239,6 +239,7 @@ def _build_offline_user_data_job_operations(client):
         user_data_with_email_address_operation,
         user_data_with_physical_address_operation,
     ]
+    # [END add_customer_match_user_list_2]
 
 
 def _check_job_status(
@@ -343,13 +344,12 @@ def _normalize_and_hash(s):
         A normalized (lowercase, remove whitespace) and SHA-256 hashed string.
     """
     return hashlib.sha256(s.strip().lower().encode()).hexdigest()
-    # [END add_customer_match_user_list]
 
 
 if __name__ == "__main__":
     # GoogleAdsClient will read the google-ads.yaml configuration file in the
     # home directory if none is specified.
-    googleads_client = GoogleAdsClient.load_from_storage(version="v8")
+    googleads_client = GoogleAdsClient.load_from_storage(version="v9")
 
     parser = argparse.ArgumentParser(
         description="Adds a customer match user list for specified customer."

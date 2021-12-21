@@ -61,14 +61,14 @@ def main(client, customer_id):
     search_request = client.get_type("SearchGoogleAdsStreamRequest")
     search_request.customer_id = customer_id
     search_request.query = query
-    response = ga_service.search_stream(search_request)
+    stream = ga_service.search_stream(search_request)
 
     all_categories = collections.defaultdict(lambda: Category())
 
     # Creates a map of top level categories.
     root_categories = []
 
-    for batch in response:
+    for batch in stream:
         for row in batch.results:
             product_bidding_category = row.product_bidding_category_constant
 
@@ -96,7 +96,7 @@ def main(client, customer_id):
 
 
 if __name__ == "__main__":
-    googleads_client = GoogleAdsClient.load_from_storage(version="v8")
+    googleads_client = GoogleAdsClient.load_from_storage(version="v9")
 
     parser = argparse.ArgumentParser(
         description="Get Product Bidding Category Constant"

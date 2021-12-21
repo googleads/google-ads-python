@@ -31,7 +31,7 @@ def main(client, customer_id):
     """Main method, to run this code example as a standalone application."""
 
     # Download image from URL
-    url = "https://goo.gl/3b9Wfh"
+    url = "https://gaagl.page.link/Eit5"
     image_content = requests.get(url).content
 
     asset_service = client.get_service("AssetService")
@@ -64,7 +64,7 @@ def main(client, customer_id):
 if __name__ == "__main__":
     # GoogleAdsClient will read the google-ads.yaml configuration file in the
     # home directory if none is specified.
-    googleads_client = GoogleAdsClient.load_from_storage(version="v8")
+    googleads_client = GoogleAdsClient.load_from_storage(version="v9")
 
     parser = argparse.ArgumentParser(
         description="Upload an image asset from a URL."

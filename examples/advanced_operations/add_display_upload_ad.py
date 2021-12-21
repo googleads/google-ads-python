@@ -27,7 +27,7 @@ from google.ads.googleads.client import GoogleAdsClient
 from google.ads.googleads.errors import GoogleAdsException
 
 
-BUNDLE_URL = "https://goo.gl/9Y7qI2"
+BUNDLE_URL = "https://gaagl.page.link/ib87"
 
 
 def main(client, customer_id, ad_group_id):
@@ -149,7 +149,7 @@ def _create_display_upload_ad_group_ad(
 if __name__ == "__main__":
     # GoogleAdsClient will read the google-ads.yaml configuration file in the
     # home directory if none is specified.
-    googleads_client = GoogleAdsClient.load_from_storage(version="v8")
+    googleads_client = GoogleAdsClient.load_from_storage(version="v9")
 
     parser = argparse.ArgumentParser(
         description="Adds a display upload ad to a given ad group."

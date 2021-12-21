@@ -25,7 +25,7 @@ from google.ads.googleads.errors import GoogleAdsException
 
 def main(client, customer_id):
     """Main method, to run this code example as a standalone application."""
-    url = "https://goo.gl/3b9Wfh"
+    url = "https://gaagl.page.link/Eit5"
 
     media_file_service = client.get_service("MediaFileService")
     media_file_operation = client.get_type("MediaFileOperation")
@@ -47,7 +47,7 @@ def main(client, customer_id):
 if __name__ == "__main__":
     # GoogleAdsClient will read the google-ads.yaml configuration file in the
     # home directory if none is specified.
-    googleads_client = GoogleAdsClient.load_from_storage(version="v8")
+    googleads_client = GoogleAdsClient.load_from_storage(version="v9")
 
     parser = argparse.ArgumentParser(description="Upload an image from a URL.")
     # The following argument(s) should be provided to run the example.

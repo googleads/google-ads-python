@@ -40,10 +40,10 @@ from google.ads.googleads.errors import GoogleAdsException
 
 
 _DATE_FORMAT = "%Y%m%d"
-_MARKETING_IMAGE_URL = "https://goo.gl/3b9Wfh"
+_MARKETING_IMAGE_URL = "https://gaagl.page.link/Eit5"
 _MARKETING_IMAGE_WIDTH = 600
 _MARKETING_IMAGE_HEIGHT = 315
-_SQUARE_MARKETING_IMAGE_URL = "https://goo.gl/mtt54n"
+_SQUARE_MARKETING_IMAGE_URL = "https://gaagl.page.link/bjYi"
 _SQUARE_MARKETING_IMAGE_SIZE = 512
 
 
@@ -333,7 +333,7 @@ def _handle_googleads_exception(exception):
 if __name__ == "__main__":
     # GoogleAdsClient will read the google-ads.yaml configuration file in the
     # home directory if none is specified.
-    googleads_client = GoogleAdsClient.load_from_storage(version="v8")
+    googleads_client = GoogleAdsClient.load_from_storage(version="v9")
 
     parser = argparse.ArgumentParser(
         description=(

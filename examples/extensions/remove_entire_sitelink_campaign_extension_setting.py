@@ -43,10 +43,8 @@ def main(client, customer_id, campaign_id):
     """
     # Initialize an array of MutateOperations
     mutate_operations = []
-    sitelink_campaign_extension_setting_mutate_operation = (
-        _create_sitelink_campaign_extension_setting_mutate_operation(
-            client, customer_id, campaign_id
-        )
+    sitelink_campaign_extension_setting_mutate_operation = _create_sitelink_campaign_extension_setting_mutate_operation(
+        client, customer_id, campaign_id
     )
     mutate_operations.append(
         sitelink_campaign_extension_setting_mutate_operation
@@ -56,10 +54,8 @@ def main(client, customer_id, campaign_id):
     extension_feed_item_resource_names = _get_all_sitelink_extension_feed_items(
         client, ga_service, customer_id, campaign_id
     )
-    extension_feed_item_mutate_operations = (
-        _create_extension_feed_item_mutate_operations(
-            client, extension_feed_item_resource_names
-        )
+    extension_feed_item_mutate_operations = _create_extension_feed_item_mutate_operations(
+        client, extension_feed_item_resource_names
     )
     mutate_operations.extend(extension_feed_item_mutate_operations)
 
@@ -153,11 +149,11 @@ def _get_all_sitelink_extension_feed_items(
           AND campaign_extension_setting.extension_type = '{extension_type_name}'"""
 
     # Issue a search request using streaming.
-    response = ga_service.search_stream(customer_id=customer_id, query=query)
+    stream = ga_service.search_stream(customer_id=customer_id, query=query)
     extension_feed_item_resource_names = []
     # Iterate through each row and append the extension feed item resource
     # names to the return array.
-    for batch in response:
+    for batch in stream:
         for row in batch.results:
             extension_feed_item_resource_names.extend(
                 row.campaign_extension_setting.extension_feed_items
@@ -201,7 +197,7 @@ def _create_extension_feed_item_mutate_operations(
 if __name__ == "__main__":
     # GoogleAdsClient will read the google-ads.yaml configuration file in the
     # home directory if none is specified.
-    googleads_client = GoogleAdsClient.load_from_storage(version="v8")
+    googleads_client = GoogleAdsClient.load_from_storage(version="v9")
 
     parser = argparse.ArgumentParser(
         description="Removes the entire sitelink campaign extension setting."
@@ -215,11 +211,7 @@ if __name__ == "__main__":
         help="The Google Ads customer ID",
     )
     parser.add_argument(
-        "-i",
-        "--campaign_id",
-        type=str,
-        required=True,
-        help="The campaign ID",
+        "-i", "--campaign_id", type=str, required=True, help="The campaign ID",
     )
     args = parser.parse_args()
 

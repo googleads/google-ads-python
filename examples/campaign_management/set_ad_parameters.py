@@ -101,7 +101,7 @@ def _create_ad_parameter(
 if __name__ == "__main__":
     # GoogleAdsClient will read the google-ads.yaml configuration file in the
     # home directory if none is specified.
-    googleads_client = GoogleAdsClient.load_from_storage(version="v8")
+    googleads_client = GoogleAdsClient.load_from_storage(version="v9")
 
     # Initializes a command line argument parser.
     parser = argparse.ArgumentParser(

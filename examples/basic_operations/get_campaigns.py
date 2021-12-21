@@ -36,9 +36,9 @@ def main(client, customer_id):
         ORDER BY campaign.id"""
 
     # Issues a search request using streaming.
-    response = ga_service.search_stream(customer_id=customer_id, query=query)
+    stream = ga_service.search_stream(customer_id=customer_id, query=query)
 
-    for batch in response:
+    for batch in stream:
         for row in batch.results:
             print(
                 f"Campaign with ID {row.campaign.id} and name "
@@ -49,7 +49,7 @@ def main(client, customer_id):
 if __name__ == "__main__":
     # GoogleAdsClient will read the google-ads.yaml configuration file in the
     # home directory if none is specified.
-    googleads_client = GoogleAdsClient.load_from_storage(version="v8")
+    googleads_client = GoogleAdsClient.load_from_storage(version="v9")
 
     parser = argparse.ArgumentParser(
         description="Lists all campaigns for specified customer."

@@ -135,10 +135,10 @@ def _set_billing_setup_date_times(client, customer_id, billing_setup):
       LIMIT 1"""
 
     ga_service = client.get_service("GoogleAdsService")
-    response = ga_service.search_stream(customer_id=customer_id, query=query)
+    stream = ga_service.search_stream(customer_id=customer_id, query=query)
     # Coercing the response iterator to a list causes the stream to be fully
     # consumed so that we can easily access the last row in the request.
-    batches = list(response)
+    batches = list(stream)
     # Checks if any results were included in the response.
     if batches:
         # Retrieves the ending_date_time of the last BillingSetup.
@@ -185,7 +185,7 @@ def _set_billing_setup_date_times(client, customer_id, billing_setup):
 if __name__ == "__main__":
     # GoogleAdsClient will read the google-ads.yaml configuration file in the
     # home directory if none is specified.
-    googleads_client = GoogleAdsClient.load_from_storage(version="v8")
+    googleads_client = GoogleAdsClient.load_from_storage(version="v9")
 
     parser = argparse.ArgumentParser(
         description=("Creates a billing setup for a given customer.")

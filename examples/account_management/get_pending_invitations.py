@@ -44,10 +44,10 @@ def main(client, customer_id):
         FROM customer_user_access_invitation
         WHERE customer_user_access_invitation.invitation_status = PENDING"""
 
-    response = googleads_service.search_stream(
+    stream = googleads_service.search_stream(
         customer_id=customer_id, query=query
     )
-    for batch in response:
+    for batch in stream:
         for row in batch.results:
             invite = row.customer_user_access_invitation
             print(
@@ -65,7 +65,7 @@ def main(client, customer_id):
 if __name__ == "__main__":
     # GoogleAdsClient will read the google-ads.yaml configuration file in the
     # home directory if none is specified.
-    googleads_client = GoogleAdsClient.load_from_storage(version="v8")
+    googleads_client = GoogleAdsClient.load_from_storage(version="v9")
 
     parser = argparse.ArgumentParser(
         description=("Retrieves pending invitations for a customer account.")

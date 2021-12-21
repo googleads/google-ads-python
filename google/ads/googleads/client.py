@@ -15,7 +15,9 @@
 
 from importlib import import_module
 import logging.config
+import pkg_resources
 
+from google.api_core.gapic_v1.client_info import ClientInfo
 import grpc.experimental
 import proto
 from proto.enums import ProtoEnumMeta
@@ -32,8 +34,19 @@ _logger = logging.getLogger(__name__)
 
 _SERVICE_CLIENT_TEMPLATE = "{}Client"
 
-_VALID_API_VERSIONS = ["v8", "v7"]
+_VALID_API_VERSIONS = ["v9", "v8", "v7"]
 _DEFAULT_VERSION = _VALID_API_VERSIONS[0]
+
+# Retrieve the version of this client library to be sent in the user-agent
+# information of API calls.
+try:
+    _CLIENT_INFO = ClientInfo(
+        client_library_version=pkg_resources.get_distribution(
+            "google-ads",
+        ).version,
+    )
+except pkg_resources.DistributionNotFound:
+    _CLIENT_INFO = ClientInfo()
 
 # See options at grpc.github.io/grpc/core/group__grpc__arg__keys.html
 _GRPC_CHANNEL_OPTIONS = [
@@ -381,7 +394,9 @@ class GoogleAdsClient:
 
         channel = grpc.intercept_channel(channel, *interceptors)
 
-        service_transport = service_transport_class(channel=channel)
+        service_transport = service_transport_class(
+            channel=channel, client_info=_CLIENT_INFO
+        )
 
         return service_client_class(transport=service_transport)
 

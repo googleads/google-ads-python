@@ -66,11 +66,11 @@ def _search_for_language_constants(client, customer_id, language_name):
 
     # Issue a search request and process the stream response to print the
     # requested field values for the carrier constant in each row.
-    response = googleads_service.search_stream(
+    stream = googleads_service.search_stream(
         customer_id=customer_id, query=query
     )
 
-    for batch in response:
+    for batch in stream:
         for row in batch.results:
             print(
                 f"Language with ID {row.language_constant.id}, "
@@ -105,11 +105,11 @@ def _search_for_carrier_constants(client, customer_id, carrier_country_code):
 
     # Issue a search request and process the stream response to print the
     # requested field values for the carrier constant in each row.
-    response = googleads_service.search_stream(
+    stream = googleads_service.search_stream(
         customer_id=customer_id, query=query
     )
 
-    for batch in response:
+    for batch in stream:
         for row in batch.results:
             print(
                 f"Carrier with ID {row.carrier_constant.id}, "
@@ -122,7 +122,7 @@ def _search_for_carrier_constants(client, customer_id, carrier_country_code):
 if __name__ == "__main__":
     # GoogleAdsClient will read the google-ads.yaml configuration file in the
     # home directory if none is specified.
-    googleads_client = GoogleAdsClient.load_from_storage(version="v8")
+    googleads_client = GoogleAdsClient.load_from_storage(version="v9")
 
     parser = argparse.ArgumentParser(
         description=(

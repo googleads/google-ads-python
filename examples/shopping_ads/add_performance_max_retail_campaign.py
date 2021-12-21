@@ -439,6 +439,22 @@ def _create_asset_group_operation(
     )
     operations.append(mutate_operation)
 
+    # Create a ListingGroupFilter and link it to the AssetGroup.
+    # This is necessary for the campaign to run.
+    # https://developers.google.com/google-ads/api/reference/rpc/v9/AssetGroupListingGroupFilter
+    mutate_operation = client.get_type("MutateOperation")
+    asset_group_listing_group = mutate_operation.asset_group_listing_group_filter_operation.create
+    asset_group_listing_group.asset_group = asset_group_service.asset_group_path(
+            customer_id,
+            _ASSET_GROUP_TEMPORARY_ID,
+        )
+    asset_group_listing_group.type_ = client.enums.ListingGroupFilterTypeEnum.UNIT_INCLUDED
+    # Here are other options for ListingGroupFilterTypeEnum
+    # https://developers.google.com/google-ads/api/reference/rpc/v9/ListingGroupFilterTypeEnum.ListingGroupFilterType
+    asset_group_listing_group.vertical = client.enums.ListingGroupFilterVerticalEnum.SHOPPING
+    
+    operations.append(mutate_operation)
+
     # For the list of required assets for a Performance Max campaign, see
     # https://developers.google.com/google-ads/api/docs/performance-max/assets
 

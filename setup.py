@@ -21,6 +21,7 @@ install_requires = [
     "google-api-core >= 2.0.1, < 3.0.0",
     "googleapis-common-protos >= 1.5.8, < 2.0.0",
     "grpcio >= 1.38.1, < 2.0.0",
+    "grpcio-status >= 1.38.1, < 2.0.0",
     "proto-plus == 1.18.1",
     "PyYAML >= 5.1, < 6.0",
     "setuptools >= 40.3.0",

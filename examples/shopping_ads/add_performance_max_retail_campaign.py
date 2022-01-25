@@ -263,11 +263,14 @@ def _create_performance_max_campaign_operation(
     # Set the Final URL expansion opt out. This flag is specific to
     # Performance Max campaigns. If opted out (True), only the final URLs in
     # the asset group or URLs specified in the advertiser's Google Merchant
-    # Center or business data feeds are targeted.
+    # Center or business data feeds are targeted. This is the recommended
+    # way for accounts that use their Merchant Center feed. As this is an
+    # example of PMax for Retail that uses a Merchant Center feed, we will
+    # set True the URL expansion opt out.
     # If opted in (False), the entire domain will be targeted. For best
     # results, set this value to false to opt in and allow URL expansions. You
     # can optionally add exclusions to limit traffic to parts of your website.
-    campaign.url_expansion_opt_out = False
+    campaign.url_expansion_opt_out = True
 
     # Assign the resource name with a temporary ID.
     campaign_service = client.get_service("CampaignService")

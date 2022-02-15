@@ -59,7 +59,6 @@ Authors
 * `Mark Saniscalchi`_
 * `David Wihl`_
 * `Ben Karl`_
-* `Andrew Burke`_
 * `Laura Chevalier`_
 
 .. |build-status| image:: https://storage.googleapis.com/gaa-clientlibs/badges/google-ads-python/buildstatus_ubuntu.svg

@@ -26,10 +26,23 @@ from google.ads.googleads.errors import GoogleAdsException
 
 
 def main(client, customer_id):
-    customer_service = client.get_service("CustomerService")
-    resource_name = customer_service.customer_path(customer_id)
+    ga_service = client.get_service("GoogleAdsService")
+    query = """
+        SELECT
+            customer.id,
+            customer.descriptive_name,
+            customer.currency_code,
+            customer.time_zone,
+            customer.tracking_url_template,
+            customer.auto_tagging_enabled
+        FROM customer
+        LIMIT 1"""
 
-    customer = customer_service.get_customer(resource_name=resource_name)
+    request = client.get_type("SearchGoogleAdsRequest")
+    request.customer_id = customer_id
+    request.query = query
+    response = ga_service.search(request=request)
+    customer = list(response)[0].customer
 
     print(f"Customer ID: {customer.id}")
     print(f"\tDescriptive name: {customer.descriptive_name}")
@@ -42,7 +55,7 @@ def main(client, customer_id):
 if __name__ == "__main__":
     # GoogleAdsClient will read the google-ads.yaml configuration file in the
     # home directory if none is specified.
-    googleads_client = GoogleAdsClient.load_from_storage(version="v9")
+    googleads_client = GoogleAdsClient.load_from_storage(version="v10")
 
     parser = argparse.ArgumentParser(
         description=(

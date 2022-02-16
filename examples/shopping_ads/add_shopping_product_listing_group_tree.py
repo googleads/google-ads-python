@@ -385,7 +385,7 @@ def _create_listing_group_unit_biddable(
 
 
 if __name__ == "__main__":
-    googleads_client = GoogleAdsClient.load_from_storage(version="v9")
+    googleads_client = GoogleAdsClient.load_from_storage(version="v10")
 
     parser = argparse.ArgumentParser(
         description="Add shopping product listing group tree to a shopping ad "

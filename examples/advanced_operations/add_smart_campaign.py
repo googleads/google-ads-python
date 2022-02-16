@@ -578,8 +578,8 @@ def _create_smart_campaign_setting_operation(
     # Set either of the business_location_id or business_name, depending on
     # whichever is provided.
     if business_location_id:
-        smart_campaign_setting.business_location_id = _convert_business_location_id(
-            business_location_id
+        smart_campaign_setting.business_location_id = (
+            _convert_business_location_id(business_location_id)
         )
     else:
         smart_campaign_setting.business_name = business_name
@@ -828,7 +828,7 @@ def _convert_business_location_id(business_location_id):
 if __name__ == "__main__":
     # GoogleAdsClient will read the google-ads.yaml configuration file in the
     # home directory if none is specified.
-    googleads_client = GoogleAdsClient.load_from_storage(version="v9")
+    googleads_client = GoogleAdsClient.load_from_storage(version="v10")
 
     parser = argparse.ArgumentParser(description=("Creates a Smart campaign."))
     # The following argument(s) should be provided to run the example.

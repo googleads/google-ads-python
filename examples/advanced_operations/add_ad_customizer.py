@@ -205,8 +205,7 @@ def _create_ad_customizer_mapping(
     )
     for result in response.results:
         print(
-            "Created feed mapping with resource name "
-            f"{result.resource_name}"
+            "Created feed mapping with resource name " f"{result.resource_name}"
         )
         # [END add_ad_customizer_2]
 
@@ -402,7 +401,7 @@ def _create_ads_with_customizations(
 if __name__ == "__main__":
     # GoogleAdsClient will read the google-ads.yaml configuration file in the
     # home directory if none is specified.
-    googleads_client = GoogleAdsClient.load_from_storage(version="v9")
+    googleads_client = GoogleAdsClient.load_from_storage(version="v10")
 
     parser = argparse.ArgumentParser(
         description=(

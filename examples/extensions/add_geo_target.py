@@ -43,8 +43,10 @@ def main(client, customer_id, feed_item_id, geo_target_constant_id):
     extension_feed_item = extension_feed_item_operation.update
     # Creates an extension feed item using the specified feed item ID and
     # geo target constant ID for targeting.
-    extension_feed_item.resource_name = extension_feed_item_service.extension_feed_item_path(
-        customer_id, feed_item_id
+    extension_feed_item.resource_name = (
+        extension_feed_item_service.extension_feed_item_path(
+            customer_id, feed_item_id
+        )
     )
     extension_feed_item.targeted_geo_target_constant = client.get_service(
         "GeoTargetConstantService"
@@ -67,7 +69,7 @@ def main(client, customer_id, feed_item_id, geo_target_constant_id):
 if __name__ == "__main__":
     # GoogleAdsClient will read the google-ads.yaml configuration file in the
     # home directory if none is specified.
-    googleads_client = GoogleAdsClient.load_from_storage(version="v9")
+    googleads_client = GoogleAdsClient.load_from_storage(version="v10")
 
     parser = argparse.ArgumentParser(
         description="Adds a geo target to an extension feed item for targeting."

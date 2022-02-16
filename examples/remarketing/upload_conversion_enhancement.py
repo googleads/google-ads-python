@@ -50,8 +50,10 @@ def main(
     # [START create_adjustment]
     conversion_action_service = client.get_service("ConversionActionService")
     conversion_adjustment = client.get_type("ConversionAdjustment")
-    conversion_adjustment.conversion_action = conversion_action_service.conversion_action_path(
-        customer_id, conversion_action_id
+    conversion_adjustment.conversion_action = (
+        conversion_action_service.conversion_action_path(
+            customer_id, conversion_action_id
+        )
     )
     conversion_adjustment.adjustment_type = (
         client.enums.ConversionAdjustmentTypeEnum.ENHANCEMENT
@@ -207,7 +209,7 @@ def _normalize_and_hash(s):
 if __name__ == "__main__":
     # GoogleAdsClient will read the google-ads.yaml configuration file in the
     # home directory if none is specified.
-    googleads_client = GoogleAdsClient.load_from_storage(version="v9")
+    googleads_client = GoogleAdsClient.load_from_storage(version="v10")
 
     parser = argparse.ArgumentParser(
         description="Imports offline call conversion values for calls related "
@@ -252,7 +254,10 @@ if __name__ == "__main__":
         help="The HTTP user agent of the conversion.",
     )
     parser.add_argument(
-        "-v", "--restatement_value", type=float, help="The enhancement value.",
+        "-v",
+        "--restatement_value",
+        type=float,
+        help="The enhancement value.",
     )
     parser.add_argument(
         "-y",

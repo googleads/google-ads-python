@@ -266,7 +266,7 @@ def _create_campaign_criterion_operations(
     """
     campaign_service = client.get_service("CampaignService")
     geo_target_constant_service = client.get_service("GeoTargetConstantService")
-    language_constant_service = client.get_service("LanguageConstantService")
+    googleads_service = client.get_service("GoogleAdsService")
 
     operations = []
     # Set the LOCATION campaign criteria.
@@ -312,7 +312,7 @@ def _create_campaign_criterion_operations(
     # For a list of all language codes, see:
     # https://developers.google.com/google-ads/api/reference/data/codes-formats#expandable-7
     campaign_criterion.language.language_constant = (
-        language_constant_service.language_constant_path("1000")  # English
+        googleads_service.language_constant_path("1000")  # English
     )
     operations.append(mutate_operation)
 
@@ -466,6 +466,7 @@ def _create_asset_group_operation(
         customer_id,
         "https://gaagl.page.link/bjYi",
         client.enums.AssetFieldTypeEnum.LOGO,
+        "Marketing Logo",
     )
     operations.extend(mutate_operations)
 
@@ -475,6 +476,7 @@ def _create_asset_group_operation(
         customer_id,
         "https://gaagl.page.link/Eit5",
         client.enums.AssetFieldTypeEnum.MARKETING_IMAGE,
+        "Marketing Image",
     )
     operations.extend(mutate_operations)
 
@@ -484,6 +486,7 @@ def _create_asset_group_operation(
         customer_id,
         "https://gaagl.page.link/bjYi",
         client.enums.AssetFieldTypeEnum.SQUARE_MARKETING_IMAGE,
+        "Square Marketing Image",
     )
     operations.extend(mutate_operations)
     return operations
@@ -534,7 +537,9 @@ def _create_and_link_text_asset(client, customer_id, text, field_type):
 
 
 # [START add_performance_max_campaign_8]
-def _create_and_link_image_asset(client, customer_id, url, field_type):
+def _create_and_link_image_asset(
+    client, customer_id, url, field_type, asset_name
+):
     """Creates a list of MutateOperations that create a new linked image asset.
 
     Args:
@@ -542,6 +547,7 @@ def _create_and_link_image_asset(client, customer_id, url, field_type):
         customer_id: a client customer ID.
         url: the url of the image to be retrieved and put into an asset.
         field_type: the field_type of the new asset in the AssetGroupAsset.
+        asset_name: the asset name.
 
     Returns:
         MutateOperations that create a new linked image asset.
@@ -555,6 +561,10 @@ def _create_and_link_image_asset(client, customer_id, url, field_type):
     mutate_operation = client.get_type("MutateOperation")
     asset = mutate_operation.asset_operation.create
     asset.resource_name = asset_service.asset_path(customer_id, next_temp_id)
+    # Provide a unique friendly name to identify your asset.
+    # When there is an existing image asset with the same content but a different
+    # name, the new name will be dropped silently.
+    asset.name = asset_name
     asset.type_ = client.enums.AssetTypeEnum.IMAGE
     asset.image_asset.data = _get_image_bytes(url)
     operations.append(mutate_operation)
@@ -619,7 +629,7 @@ def _print_response_details(response):
 if __name__ == "__main__":
     # GoogleAdsClient will read the google-ads.yaml configuration file in the
     # home directory if none is specified.
-    googleads_client = GoogleAdsClient.load_from_storage(version="v9")
+    googleads_client = GoogleAdsClient.load_from_storage(version="v10")
 
     parser = argparse.ArgumentParser(
         description=("Creates a Performance Max campaign.")

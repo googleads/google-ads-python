@@ -417,7 +417,7 @@ def _handle_googleads_exception(exception):
 if __name__ == "__main__":
     # Initialize client object.
     # It will read the config file. The default file path is the Home Directory.
-    googleads_client = GoogleAdsClient.load_from_storage(version="v9")
+    googleads_client = GoogleAdsClient.load_from_storage(version="v10")
     adwords_client = adwords.AdWordsClient.LoadFromStorage()
 
     parser = argparse.ArgumentParser(

@@ -81,6 +81,7 @@ def main(
             _MARKETING_IMAGE_URL,
             _MARKETING_IMAGE_WIDTH,
             _MARKETING_IMAGE_HEIGHT,
+            "Marketing Image",
         )
         print(
             "Created marketing image asset with ID "
@@ -99,6 +100,7 @@ def main(
             _SQUARE_MARKETING_IMAGE_URL,
             _SQUARE_MARKETING_IMAGE_SIZE,
             _SQUARE_MARKETING_IMAGE_SIZE,
+            "Square Marketing Image",
         )
         print(
             "Created square marketing image asset with ID "
@@ -209,7 +211,7 @@ def _create_ad_group(client, customer_id, campaign_resource_name):
 
 # [START add_smart_display_ad_3]
 def _upload_image_asset(
-    client, customer_id, image_url, image_width, image_height
+    client, customer_id, image_url, image_width, image_height, image_name
 ):
     # Download image from URL
     image_content = requests.get(image_url).content
@@ -223,6 +225,7 @@ def _upload_image_asset(
     # asset.name = f'Jupiter Trip #{uuid4()}'
     asset_type_enum = client.enums.AssetTypeEnum
     asset.type_ = asset_type_enum.IMAGE
+    asset.name = image_name
     image_asset = asset.image_asset
     image_asset.data = image_content
     image_asset.file_size = len(image_content)
@@ -333,7 +336,7 @@ def _handle_googleads_exception(exception):
 if __name__ == "__main__":
     # GoogleAdsClient will read the google-ads.yaml configuration file in the
     # home directory if none is specified.
-    googleads_client = GoogleAdsClient.load_from_storage(version="v9")
+    googleads_client = GoogleAdsClient.load_from_storage(version="v10")
 
     parser = argparse.ArgumentParser(
         description=(

@@ -38,8 +38,11 @@ def main(client, customer_id, campaign_id, criterion_id, bid_modifier_value):
         protobuf_helpers.field_mask(None, campaign_criterion._pb),
     )
 
-    campaign_criterion_response = campaign_criterion_service.mutate_campaign_criteria(
-        customer_id=customer_id, operations=[campaign_criterion_operation],
+    campaign_criterion_response = (
+        campaign_criterion_service.mutate_campaign_criteria(
+            customer_id=customer_id,
+            operations=[campaign_criterion_operation],
+        )
     )
 
     print(
@@ -52,7 +55,7 @@ def main(client, customer_id, campaign_id, criterion_id, bid_modifier_value):
 if __name__ == "__main__":
     # GoogleAdsClient will read the google-ads.yaml configuration file in the
     # home directory if none is specified.
-    googleads_client = GoogleAdsClient.load_from_storage(version="v9")
+    googleads_client = GoogleAdsClient.load_from_storage(version="v10")
 
     parser = argparse.ArgumentParser(
         description=(

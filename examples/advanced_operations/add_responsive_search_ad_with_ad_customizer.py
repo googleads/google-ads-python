@@ -149,7 +149,7 @@ def _link_customizer_attribute_to_customer(
 
 # [START add_responsive_search_ad_with_ad_customizer_3]
 def _create_responsive_search_ad_with_customization(
-    client, customer_id, ad_group_id, customizer_attribute_resource_name
+    client, customer_id, ad_group_id, customizer_attribute_name
 ):
     """Creates a responsive search ad using the specified customizer attribute.
 
@@ -157,8 +157,7 @@ def _create_responsive_search_ad_with_customization(
         client: an initialized GoogleAdsClient instance.
         customer_id: a client customer ID.
         ad_group_id: an ad group ID.
-        customizer_attribute_resource_name: a resource name for customizer
-            attribute.
+        customizer_attribute_name: the name for the customizer attribute.
     """
     # Creates an ad group ad operation.
     operation = client.get_type("AdGroupAdOperation")
@@ -191,7 +190,9 @@ def _create_responsive_search_ad_with_customization(
     # placeholder with the value we previously created and linked to the
     # customer using CustomerCustomizer.
     description_2 = client.get_type("AdTextAsset")
-    description_2.text = "Just {CUSTOMIZER.$customizerAttributeName:10USD}"
+    description_2.text = (
+        f"Just {{CUSTOMIZER.{customizer_attribute_name}:10USD}}"
+    )
     ad.responsive_search_ad.descriptions.extend([description_1, description_2])
 
     ad.responsive_search_ad.path1 = "all-inclusive"
@@ -211,7 +212,7 @@ def _create_responsive_search_ad_with_customization(
 if __name__ == "__main__":
     # GoogleAdsClient will read the google-ads.yaml configuration file in the
     # home directory if none is specified.
-    googleads_client = GoogleAdsClient.load_from_storage(version="v9")
+    googleads_client = GoogleAdsClient.load_from_storage(version="v10")
 
     parser = argparse.ArgumentParser(
         description=(

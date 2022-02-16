@@ -390,8 +390,10 @@ def _create_campaign_feed(
         "CampaignService"
     ).campaign_path(customer_id, campaign_id)
 
-    mutate_campaign_feeds_response = campaign_feed_service.mutate_campaign_feeds(
-        customer_id=customer_id, operations=[campaign_feed_operation]
+    mutate_campaign_feeds_response = (
+        campaign_feed_service.mutate_campaign_feeds(
+            customer_id=customer_id, operations=[campaign_feed_operation]
+        )
     )
 
     # Display the result.
@@ -432,7 +434,7 @@ def _get_attribute_id_for_chain_id(client, feed_mapping):
 if __name__ == "__main__":
     # will read the google-ads.yaml configuration file in the
     # home directory if none is specified.
-    googleads_client = GoogleAdsClient.load_from_storage(version="v9")
+    googleads_client = GoogleAdsClient.load_from_storage(version="v10")
 
     parser = argparse.ArgumentParser(
         description="Demonstrates how to add Affiliate Location extensions."
@@ -466,7 +468,10 @@ if __name__ == "__main__":
 
     try:
         main(
-            googleads_client, args.customer_id, args.chain_id, args.campaign_id,
+            googleads_client,
+            args.customer_id,
+            args.chain_id,
+            args.campaign_id,
         )
     except GoogleAdsException as ex:
         print(

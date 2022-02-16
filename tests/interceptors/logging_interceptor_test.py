@@ -625,9 +625,8 @@ class LoggingInterceptorTest(TestCase):
     def test_get_customer_id_from_resource_name(self):
         """Retrieves a customer_id from a request object via resource_name."""
         resource_name = f"customers/{self._MOCK_CUSTOMER_ID}"
-        mock_request = customer_service.GetCustomerRequest(
-            resource_name=resource_name
-        )
+        mock_request = self._get_mock_request()
+        mock_request.resource_name = resource_name
         interceptor = self._create_test_interceptor()
         self.assertEqual(
             interceptor._get_customer_id(mock_request), self._MOCK_CUSTOMER_ID
@@ -636,9 +635,10 @@ class LoggingInterceptorTest(TestCase):
     def test_get_customer_id_from_invalid_resource_name(self):
         """Returns None for a resource_name not starting with 'customers'."""
         resource_name = f"languageConstants/{self._MOCK_CUSTOMER_ID}"
-        mock_request = customer_service.GetCustomerRequest(
-            resource_name=resource_name
-        )
+        # Wraps an empty dict so that accessing arbitrary fields raises an
+        # error instead of returning another mock instance.
+        mock_request = mock.Mock(wraps=dict)
+        mock_request.resource_name = resource_name
         interceptor = self._create_test_interceptor()
         self.assertEqual(interceptor._get_customer_id(mock_request), None)
 

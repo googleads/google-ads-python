@@ -14,8 +14,9 @@
 # limitations under the License.
 """This example illustrates the use of custom client timeouts.
 
-This demonstrates custom client timeouts in the context of server streaming and
-unary calls.
+Even though this example demonstrates custom client timeouts in the context of
+streaming and unary calls separately, the behavior can be applied to any request
+method exposed by this library.
 
 For more information about the concepts, see this documentation:
 https://grpc.io/docs/what-is-grpc/core-concepts/#rpc-life-cycle
@@ -57,14 +58,11 @@ def _make_server_streaming_call(client, customer_id):
         search_request.query = _QUERY
         stream = ga_service.search_stream(
             request=search_request,
-            # As of v5, any server streaming call has a default timeout
-            # setting. For this particular call, the default setting can be
-            # found in the following file:
-            # https://github.com/googleads/google-ads-python/blob/master/google/ads/google_ads/v6/services/google_ads_service_client_config.py
-            #
-            # When making a server streaming call, an optional argument is
-            # provided and can be used to override the default timeout setting
-            # with a given value.
+            # When making any request, an optional "timeout" parameter can be
+            # provided to specify a client-side response deadline in seconds.
+            # If not set, then no timeout will be enforced by the client and
+            # the channel will remain open until the response is completed or
+            # severed, either manually or by the server.
             timeout=_CLIENT_TIMEOUT_SECONDS,
         )
 
@@ -107,17 +105,10 @@ def _make_unary_call(client, customer_id):
         search_request.query = _QUERY
         results = ga_service.search(
             request=search_request,
-            # As of v5, any unary call is retryable and has default retry
-            # settings. Complete information about these settings can be found
-            # here: https://googleapis.dev/python/google-api-core/latest/retry.html
-            #
-            # For this particular call, the default retry settings can be found
-            # in the following file:
-            # https://github.com/googleads/google-ads-python/blob/master/google/ads/google_ads/v6/services/google_ads_service_client_config.py
-            #
-            # When making a unary call, an optional argument is provided and
-            # can be used to override the default retry settings with given
-            # values.
+            # When making any request, an optional "retry" parameter can be
+            # provided to specify its retry behavior. Complete information about
+            # these settings can be found here:
+            # https://googleapis.dev/python/google-api-core/latest/retry.html
             retry=Retry(
                 # Sets the maximum accumulative timeout of the call; it
                 # includes all tries.

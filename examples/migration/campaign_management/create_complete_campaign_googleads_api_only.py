@@ -384,8 +384,11 @@ def _create_keywords(client, customer_id, ad_group, keywords_to_add):
         ad_group_criterion_operations.append(operation)
 
     try:
-        ad_group_criterion_response = ad_group_criterion_service.mutate_ad_group_criteria(
-            customer_id=customer_id, operations=ad_group_criterion_operations,
+        ad_group_criterion_response = (
+            ad_group_criterion_service.mutate_ad_group_criteria(
+                customer_id=customer_id,
+                operations=ad_group_criterion_operations,
+            )
         )
         new_ad_resource_names = [
             row.resource_name for row in ad_group_criterion_response.results
@@ -471,7 +474,7 @@ def _handle_googleads_exception(exception):
 if __name__ == "__main__":
     # Initialize client object.
     # It will read the config file. The default file path is the Home Directory.
-    googleads_client = GoogleAdsClient.load_from_storage(version="v9")
+    googleads_client = GoogleAdsClient.load_from_storage(version="v10")
 
     parser = argparse.ArgumentParser(
         description="Lists all campaigns for specified customer."

@@ -127,7 +127,9 @@ def _create_campaign(client, budget_id):
         # the ads from immediately serving. Set to ENABLED once you've added
         # targeting and the ads are ready to serve.
         "status": "PAUSED",
-        "biddingStrategyConfiguration": {"biddingStrategyType": "MANUAL_CPC",},
+        "biddingStrategyConfiguration": {
+            "biddingStrategyType": "MANUAL_CPC",
+        },
         "startDate": (datetime.datetime.now() + datetime.timedelta(1)).strftime(
             "%Y%m%d"
         ),
@@ -287,7 +289,7 @@ def _handle_googleads_exception(exception):
 if __name__ == "__main__":
     # Initialize client object.
     # It will read the config file. The default file path is the Home Directory.
-    googleads_client = GoogleAdsClient.load_from_storage(version="v9")
+    googleads_client = GoogleAdsClient.load_from_storage(version="v10")
     adwords_client = adwords.AdWordsClient.LoadFromStorage()
 
     parser = argparse.ArgumentParser(

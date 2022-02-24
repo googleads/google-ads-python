@@ -105,8 +105,8 @@ def main(
     if result:
         print(
             "Uploaded conversion that occurred at "
-            f"{result.conversion_data_time} from Google Click ID "
-            f"{result.gclid} to {result.conversion_action}."
+            f"{result.conversion_data_time} "
+            f"to {result.conversion_action}."
         )
     # [END upload_conversion_with_identifiers]
 

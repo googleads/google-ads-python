@@ -15,7 +15,7 @@
 """This example adds a Local campaign.
 
 Prerequisite: To create a Local campaign, you need to define the store locations
-you want to promote by linking your Google My Business account or selecting
+you want to promote by linking your Business Profile account or selecting
 affiliate locations. More information about Local campaigns can be found at:
 https://support.google.com/google-ads/answer/9118422.
 """
@@ -31,8 +31,8 @@ from google.ads.googleads.client import GoogleAdsClient
 from google.ads.googleads.errors import GoogleAdsException
 
 
-_MARKETING_IMAGE_URL = "https://goo.gl/3b9Wfh"
-_LOGO_IMAGE_URL = "https://goo.gl/mtt54n"
+_MARKETING_IMAGE_URL = "https://gaagl.page.link/Eit5"
+_LOGO_IMAGE_URL = "https://gaagl.page.link/bjYi"
 _YOUTUBE_VIDEO_ID = "ECpDzH9gXh8"
 
 
@@ -129,7 +129,7 @@ def _create_campaign(client, customer_id, budget_resource_name):
     # A target_roas of 3.5 corresponds to a 350% return on ad spend.
     campaign.maximize_conversion_value.target_roas = 3.5
     # Configure the Local campaign setting. Use the locations associated with
-    # the customer's linked Google My Business account.
+    # the customer's linked Business Profile account.
     campaign.local_campaign_setting.location_source_type = (
         client.enums.LocationSourceTypeEnum.GOOGLE_MY_BUSINESS
     )
@@ -337,7 +337,7 @@ def _create_youtube_video_asset(
 if __name__ == "__main__":
     # GoogleAdsClient will read the google-ads.yaml configuration file in the
     # home directory if none is specified.
-    googleads_client = GoogleAdsClient.load_from_storage(version="v8")
+    googleads_client = GoogleAdsClient.load_from_storage(version="v10")
 
     parser = argparse.ArgumentParser(
         description="Adds a Local Campaign to the given account."

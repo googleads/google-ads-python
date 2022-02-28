@@ -296,31 +296,63 @@ def _add_transactions_to_offline_user_data_job(
         quantity,
     )
 
-    # Issue a request to add the operations to the offline user data job.
+    # [START enable_warnings_1]
+    # Constructs a request with partial failure enabled to add the operations
+    # to the offline user data job, and enable_warnings set to true to retrieve
+    # warnings.
     request = client.get_type("AddOfflineUserDataJobOperationsRequest")
     request.resource_name = offline_user_data_job_resource_name
     request.enable_partial_failure = True
+    request.enable_warnings = True
     request.operations = operations
+
     response = (
         offline_user_data_job_service.add_offline_user_data_job_operations(
             request=request,
         )
     )
+    # [END enable_warnings_1]
 
-    # Print the status message if any partial failure error is returned.
-    # Note: The details of each partial failure error are not printed here, you
-    # can refer to the example handle_partial_failure.py to learn more.
-    num_partial_failures = len(response.partial_failure_error.details)
+    # Print the error message for any partial failure error that is returned.
     if response.partial_failure_error:
+        _print_google_ads_failures(response.partial_failure_error)
+    else:
         print(
-            f"{num_partial_failures} partial failure error(s) occurred: "
-            f"{response.partial_failure_error.message}."
+            f"Successfully added {len(operations)} to the offline user data "
+            "job."
         )
 
-    print(
-        f"{len(operations) - num_partial_failures} operations were "
-        "successfully added to the offline user data job."
-    )
+    # Print the message for any warnings that are returned.
+    if response.warning:
+        _print_google_ads_failures(response.warning)
+
+
+# [START enable_warnings_2]
+def _print_google_ads_failures(client, status):
+    """Prints the details for partial failure errors and warnings.
+
+    Both partial failure errors and warnings are returned as Status instances,
+    which include serialized GoogleAdsFailure objects. Here we deserialize
+    each GoogleAdsFailure and print the error details it includes.
+
+    Args:
+        client: An initialized Google Ads API client.
+        status: a google.rpc.Status instance.
+    """
+    for detail in status.details:
+        google_ads_failure = client.get_type("GoogleAdsFailure")
+        # Retrieve the class definition of the GoogleAdsFailure instance
+        # with type() in order to use the "deserialize" class method to parse
+        # the detail string into a protobuf message instance.
+        failure_instance = type(google_ads_failure).deserialize(detail.value)
+        for error in failure_instance.errors:
+            print(
+                "A partial failure or warning at index "
+                f"{error.location.field_path_elements[0].index} occurred.\n"
+                f"Message: {error.message}\n"
+                f"Code: {error.error_code}"
+            )
+            # [END enable_warnings_2]
 
 
 def _build_offline_user_data_job_operations(
@@ -535,7 +567,7 @@ def _check_job_status(client, customer_id, offline_user_data_job_resource_name):
 if __name__ == "__main__":
     # GoogleAdsClient will read the google-ads.yaml configuration file in the
     # home directory if none is specified.
-    googleads_client = GoogleAdsClient.load_from_storage(version="v8")
+    googleads_client = GoogleAdsClient.load_from_storage(version="v10")
 
     parser = argparse.ArgumentParser(
         description="This example uploads offline data for store sales "

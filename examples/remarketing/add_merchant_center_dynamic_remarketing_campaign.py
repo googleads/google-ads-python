@@ -160,10 +160,13 @@ def _create_ad(client, customer_id, ad_group_resource_name):
 
     # Upload image assets for the ad.
     marketing_image_resource_name = _upload_image_asset(
-        client, customer_id, "https://goo.gl/3b9Wfh", "Marketing Image"
+        client, customer_id, "https://gaagl.page.link/Eit5", "Marketing Image"
     )
     square_marketing_image_resource_name = _upload_image_asset(
-        client, customer_id, "https://goo.gl/mtt54n", "Square Marketing Image"
+        client,
+        customer_id,
+        "https://gaagl.page.link/bjYi",
+        "Square Marketing Image",
     )
 
     # Create the relevant asset objects for the ad.
@@ -300,7 +303,7 @@ def _attach_user_list(
 if __name__ == "__main__":
     # GoogleAdsClient will read the google-ads.yaml configuration file in the
     # home directory if none is specified.
-    googleads_client = GoogleAdsClient.load_from_storage(version="v8")
+    googleads_client = GoogleAdsClient.load_from_storage(version="v10")
 
     parser = argparse.ArgumentParser(
         description=(

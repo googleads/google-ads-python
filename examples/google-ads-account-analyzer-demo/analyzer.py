@@ -21,13 +21,15 @@ import sys
 from google.ads.googleads.client import GoogleAdsClient
 from google.ads.googleads.errors import GoogleAdsException
 
+_DEFAULT_LOG_SPACE_LENGTH = 4
+
 
 def account_hierarchy_module(google_ads_client, customer_id):
-    """Print the account hierarchy for the given login customer ID
+    """Print the account hierarchy for the given login customer ID.
 
     Args:
         client: an initialized GoogleAdsClient instance.
-        customer_id: the given customer ID for getting the hierarchy info
+        customer_id: the given customer ID for getting the hierarchy info.
     """
     googleads_service = google_ads_client.get_service("GoogleAdsService")
     customer_service = google_ads_client.get_service("CustomerService")
@@ -44,9 +46,9 @@ def account_hierarchy_module(google_ads_client, customer_id):
             "No manager ID is specified. The example will print the "
             "hierarchies of all accessible customer IDs."
         )
-        # Starting v10 this will list all customers, not just customers with ENABLED status.
-        # If you wish to only show ENABLED customers, you can further filter by
-        # Customer.status field.
+        # Starting in v10 this will list all customers, not just customers with
+        # ENABLED status. If you wish to only show ENABLED customers, you can
+        # further filter by the Customer.status field.
         accessible_customers = customer_service.list_accessible_customers()
         customer_resource_names = accessible_customers.resource_names
         print(f"Total results: {len(customer_resource_names)}")
@@ -70,7 +72,7 @@ def account_hierarchy_module(google_ads_client, customer_id):
 
     for seed_customer_id in seed_customer_ids:
         # Performs a breadth-first search to build a Dictionary that maps
-        # managers to their child accounts (customerIdsToChildAccounts).
+        # managers to their child accounts (customer_ids_to_child_accounts).
         unprocessed_customer_ids = [seed_customer_id]
         customer_ids_to_child_accounts = dict()
         root_customer_client = None
@@ -86,15 +88,14 @@ def account_hierarchy_module(google_ads_client, customer_id):
             for row in response:
                 customer_client = row.customer_client
 
-                # The customer client that with level 0 is the specified
-                # customer.
+                # The customer client with level 0 is the specified customer.
                 if customer_client.level == 0:
                     if root_customer_client is None:
                         root_customer_client = customer_client
-                    # if it's level 0, we need to skip this round of loop
+                    # If it's level 0, we need to skip this round of loop.
                     continue
 
-                # For all level-1 (direct child) accounts that are a
+                # For all level 1 (direct child) accounts that are a
                 # manager account, the above query will be run against them
                 # to create a dictionary of managers mapped to their child
                 # accounts for printing the hierarchy afterwards.
@@ -108,7 +109,7 @@ def account_hierarchy_module(google_ads_client, customer_id):
                 if customer_client.manager:
                     # A customer can be managed by multiple managers, so to
                     # prevent visiting the same customer many times, we
-                    # need to check if it's already in the Dictionary.
+                    # need to check if it's already in the dictionary.
                     if (
                         customer_client.id not in customer_ids_to_child_accounts
                         and customer_client.level == 1
@@ -124,9 +125,8 @@ def account_hierarchy_module(google_ads_client, customer_id):
                 root_customer_client, customer_ids_to_child_accounts, 0
             )
         else:
-            print(
-                f"No hierarchy info was found for Customer ID {customer_id}."
-            )
+            print(f"No hierarchy info was found for Customer ID {customer_id}.")
+
 
 def _print_account_hierarchy(
     customer_client, customer_ids_to_child_accounts, depth
@@ -134,14 +134,16 @@ def _print_account_hierarchy(
     """Prints the specified account's hierarchy using recursion.
 
     Args:
-        customer_client: a customer_client resource that contains current account information
-        customer_ids_to_child_accounts: a mapping between customer_ids and their child accounts
-        depth: the current depth from the root node
+        customer_client: a customer_client resource that contains current
+            account information.
+        customer_ids_to_child_accounts: a mapping between customer_ids and
+            their child accounts.
+        depth: the current depth from the root node.
     """
     if depth == 0:
         print("Customer ID (Descriptive Name, Currency Code, Time Zone)")
     customer_id = str(customer_client.id)
-    print("-" * (depth * SPACE_LENGTH + 1), end="")
+    print("-" * (depth * _DEFAULT_LOG_SPACE_LENGTH + 1), end="")
     print(
         f"{customer_id} ({customer_client.descriptive_name}, "
         f"{customer_client.currency_code}, "
@@ -156,11 +158,12 @@ def _print_account_hierarchy(
 
 
 def get_users_module(google_ads_client, customer_id):
-    """Prints the user access informaion for the given customer_id
+    """Prints the user access informaion for the given customer_id.
 
     Args:
         client: an initialized GoogleAdsClient instance.
-        customer_id: the given customer ID for retrieving customer user access info
+        customer_id: the given customer ID for retrieving customer user access
+            info.
     """
     googleads_service = google_ads_client.get_service("GoogleAdsService")
     customer_service = google_ads_client.get_service("CustomerService")
@@ -186,8 +189,6 @@ def get_users_module(google_ads_client, customer_id):
 
 
 if __name__ == "__main__":
-    SPACE_LENGTH = 4
-
     # GoogleAdsClient will read the google-ads.yaml configuration file in the
     # home directory if none is specified.
     parser = argparse.ArgumentParser(
@@ -206,19 +207,17 @@ if __name__ == "__main__":
 
     try:
         googleads_client = GoogleAdsClient.load_from_storage()
-        account_hierarchy_module(
-            googleads_client, args.customer_id
-        )
+        account_hierarchy_module(googleads_client, args.customer_id)
         get_users_module(googleads_client, args.customer_id)
     except GoogleAdsException as ex:
-      print(
-          f'Request with ID "{ex.request_id}" failed with status '
-          f'"{ex.error.code().name}" '
-      )
-      print(f"And includes the following errors:")
-      for error in ex.failure.errors:
-          print(f'\tError with message "{error.message}".')
-          if error.location:
-              for field_path_element in error.location.field_path_elements:
-                  print(f"\t\tOn field: {field_path_element.field_name}")
-      sys.exit(1)
+        print(
+            f'Request with ID "{ex.request_id}" failed with status '
+            f'"{ex.error.code().name}" '
+        )
+        print(f"And includes the following errors:")
+        for error in ex.failure.errors:
+            print(f'\tError with message "{error.message}".')
+            if error.location:
+                for field_path_element in error.location.field_path_elements:
+                    print(f"\t\tOn field: {field_path_element.field_name}")
+        sys.exit(1)

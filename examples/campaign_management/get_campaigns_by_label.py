@@ -68,7 +68,7 @@ def main(client, customer_id, label_id, page_size):
     # search criteria.
     for row in iterator:
         print(
-            f'Campaign found with name "{row.campaign.id}", ID '
+            f'Campaign found with ID "{row.campaign.id}", name '
             f'"{row.campaign.name}", and label "{row.label.name}".'
         )
 

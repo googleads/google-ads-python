@@ -92,7 +92,7 @@ def main(
     # Print any partial errors returned.
     if upload_call_conversions_response.partial_failure_error:
         print(
-            "Partial error ocurred: "
+            "Partial error occurred: "
             f"'{upload_call_conversions_response.partial_failure_error.message}'"
         )
 

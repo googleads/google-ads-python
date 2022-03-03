@@ -308,7 +308,7 @@ if __name__ == "__main__":
     parser = argparse.ArgumentParser(
         description=(
             "Creates a shopping campaign associated with an existing "
-            "Merchant Center acconut."
+            "Merchant Center account."
         )
     )
     # The following argument(s) should be provided to run the example.

@@ -329,7 +329,7 @@ def _get_ads(client, customer_id, new_ad_resource_names):
             results.append(repr(i))
         return ",".join(results)
 
-    resouce_names = _formatter(new_ad_resource_names)
+    resource_names = _formatter(new_ad_resource_names)
 
     ga_service = client.get_service("GoogleAdsService")
     query = f"""
@@ -341,7 +341,7 @@ def _get_ads(client, customer_id, new_ad_resource_names):
             ad_group_ad.ad.final_urls,
             ad_group_ad.resource_name
         FROM ad_group_ad
-        WHERE ad_group_ad.resource_name in ({resouce_names})"""
+        WHERE ad_group_ad.resource_name in ({resource_names})"""
 
     request = client.get_type("SearchGoogleAdsRequest")
     request.customer_id = customer_id

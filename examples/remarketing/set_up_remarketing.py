@@ -173,7 +173,7 @@ def _modify_ad_group_bids(
     Args:
         client: an initialized GoogleAdsClient instance.
         customer_id: a str client customer ID.
-        ad_group_criterion_resoure_name: a str resource name for an ad group
+        ad_group_criterion.resource_name: a str resource name for an ad group
             criterion.
         bid_modifier_value: a float value specifying an ad group criterion
             bid modifier.

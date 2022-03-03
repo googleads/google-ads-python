@@ -150,7 +150,7 @@ def _print_account_hierarchy(
     """Prints the specified account's hierarchy using recursion.
 
     Args:
-      customer_client: The customer cliant whose info will be printed; its
+      customer_client: The customer client whose info will be printed; its
       child accounts will be processed if it's a manager.
       customer_ids_to_child_accounts: A dictionary mapping customer IDs to
       child accounts.

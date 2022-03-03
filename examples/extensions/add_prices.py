@@ -158,7 +158,7 @@ def _add_asset_to_account(client, customer_id, price_asset_resource_name):
     Args:
         client: an initialized GoogleAdsClient instance.
         customer_id: a client customer ID.
-        price_asset_resource_name: a resource name for an Assset containing
+        price_asset_resource_name: a resource name for an Asset containing
             a PriceAsset.
     """
     # Create a customer asset operation.

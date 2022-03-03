@@ -88,7 +88,7 @@ def _create_ad_parameter(
         parameter_index: The unique index int of this ad parameter..
         insertion_text: A numeric str value to insert into the ad text.
 
-    Returns: A new AdParamterOperation message class instance.
+    Returns: A new AdParameterOperation message class instance.
     """
     ad_param_operation = client.get_type("AdParameterOperation")
     ad_param = ad_param_operation.create

@@ -104,7 +104,7 @@ def _create_campaign(client, budget_id):
     results = campaign_service.mutate(campaign_operations)
     created_campaign = results["value"][0]
     print(
-        "CreatedCampign with ID {} and name {} was created".format(
+        "Created Campaign with ID {} and name {} was created".format(
             created_campaign["id"], created_campaign["name"]
         )
     )

@@ -172,7 +172,7 @@ def _set_billing_setup_date_times(client, customer_id, billing_setup):
         # Sets the new billing setup start date to one day after the end date.
         start_date = end_date_time_obj + timedelta(days=1)
     else:
-        # If there are no BillingSetup objecst to retrieve, the only acceptable
+        # If there are no BillingSetup objects to retrieve, the only acceptable
         # start date time is today.
         start_date = datetime.now()
 

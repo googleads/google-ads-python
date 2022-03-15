@@ -3188,7 +3188,7 @@ class GoogleAdsServiceClient(metaclass=GoogleAdsServiceClientMeta):
         # This method is paged; wrap the response in a pager, which provides
         # an `__iter__` convenience method.
         response = pagers.SearchPager(
-            method=rpc, request=request, response=response, metadata=metadata,
+            method=rpc, request=request, response=response, retry=retry, timeout=timeout, metadata=metadata,
         )
 
         # Done; return the response.

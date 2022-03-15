@@ -15,8 +15,10 @@
 #
 from typing import Any, Callable, Iterable, Iterator, Sequence, Tuple
 
+from google.api_core import gapic_v1
 from google.ads.googleads.v10.services.types import google_ads_service
 
+from .client import OptionalRetry
 
 class SearchPager:
     """A pager for iterating through ``search`` requests.
@@ -41,6 +43,8 @@ class SearchPager:
         method: Callable[..., google_ads_service.SearchGoogleAdsResponse],
         request: google_ads_service.SearchGoogleAdsRequest,
         response: google_ads_service.SearchGoogleAdsResponse,
+        retry: OptionalRetry = gapic_v1.method.DEFAULT,
+        timeout: float = None,
         metadata: Sequence[Tuple[str, str]] = (),
     ):
         """Instantiate the pager.
@@ -58,6 +62,8 @@ class SearchPager:
         self._method = method
         self._request = google_ads_service.SearchGoogleAdsRequest(request)
         self._response = response
+        self._retry = retry
+        self._timeout = timeout
         self._metadata = metadata
 
     def __getattr__(self, name: str) -> Any:
@@ -69,7 +75,7 @@ class SearchPager:
         while self._response.next_page_token:
             self._request.page_token = self._response.next_page_token
             self._response = self._method(
-                self._request, metadata=self._metadata
+                self._request, retry=self._retry, timeout=self._timeout, metadata=self._metadata,
             )
             yield self._response
 

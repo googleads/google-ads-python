@@ -42,7 +42,6 @@ class SearchPager:
         self,
         method: Callable[..., google_ads_service.SearchGoogleAdsResponse],
         request: google_ads_service.SearchGoogleAdsRequest,
-        response: google_ads_service.SearchGoogleAdsResponse,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
         timeout: float = None,
         metadata: Sequence[Tuple[str, str]] = (),
@@ -61,7 +60,7 @@ class SearchPager:
         """
         self._method = method
         self._request = google_ads_service.SearchGoogleAdsRequest(request)
-        self._response = response
+        self._response = None
         self._retry = retry
         self._timeout = timeout
         self._metadata = metadata
@@ -71,13 +70,14 @@ class SearchPager:
 
     @property
     def pages(self) -> Iterable[google_ads_service.SearchGoogleAdsResponse]:
-        yield self._response
-        while self._response.next_page_token:
-            self._request.page_token = self._response.next_page_token
+        while True:
             self._response = self._method(
                 self._request, retry=self._retry, timeout=self._timeout, metadata=self._metadata,
             )
             yield self._response
+            if not self._response.next_page_token:
+                break
+            self._request.page_token = self._response.next_page_token
 
     def __iter__(self) -> Iterator[google_ads_service.GoogleAdsRow]:
         for page in self.pages:

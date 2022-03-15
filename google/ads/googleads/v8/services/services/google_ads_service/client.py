@@ -2833,15 +2833,10 @@ class GoogleAdsServiceClient(metaclass=GoogleAdsServiceClientMeta):
             ),
         )
 
-        # Send the request.
-        response = rpc(
-            request, retry=retry, timeout=timeout, metadata=metadata,
-        )
-
         # This method is paged; wrap the response in a pager, which provides
         # an `__iter__` convenience method.
         response = pagers.SearchPager(
-            method=rpc, request=request, response=response, retry=retry, timeout=timeout, metadata=metadata,
+            method=rpc, request=request, retry=retry, timeout=timeout, metadata=metadata,
         )
 
         # Done; return the response.

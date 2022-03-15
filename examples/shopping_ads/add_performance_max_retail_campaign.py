@@ -245,16 +245,20 @@ def _create_performance_max_campaign_operation(
     # Setting a portfolio bidding strategy by resource name is not supported.
     # Max Conversion and Max Conversion Value are the only strategies supported
     # for Performance Max campaigns.
+    campaign.bidding_strategy_type = (
+        client.enums.BiddingStrategyTypeEnum.MAXIMIZE_CONVERSION_VALUE
+    )
     # An optional ROAS (Return on Advertising Spend) can be set for
     # maximize_conversion_value. The ROAS value must be specified as a ratio in
     # the API. It is calculated by dividing "total value" by "total spend".
     # For more information on Max Conversion Value, see the support article:
     # http://support.google.com/google-ads/answer/7684216.
     # A target_roas of 3.5 corresponds to a 350% return on ad spend.
-    campaign.bidding_strategy_type = (
-        client.enums.BiddingStrategyTypeEnum.MAXIMIZE_CONVERSION_VALUE
-    )
-    campaign.maximize_conversion_value.target_roas = 3.5
+    # campaign.maximize_conversion_value.target_roas = 3.5
+    # For first time users, it's recommended not to set a target ROAS.
+    # Although target ROAS is optional, you still need to define it
+    # even if you do not want to use it.
+    campaign.maximize_conversion_value.target_roas = None
 
     # Set the shopping settings.
     campaign.shopping_setting.merchant_id = merchant_center_account_id

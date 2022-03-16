@@ -245,9 +245,6 @@ def _create_performance_max_campaign_operation(
     # Setting a portfolio bidding strategy by resource name is not supported.
     # Max Conversion and Max Conversion Value are the only strategies supported
     # for Performance Max campaigns.
-    campaign.bidding_strategy_type = (
-        client.enums.BiddingStrategyTypeEnum.MAXIMIZE_CONVERSION_VALUE
-    )
     # An optional ROAS (Return on Advertising Spend) can be set for
     # maximize_conversion_value. The ROAS value must be specified as a ratio in
     # the API. It is calculated by dividing "total value" by "total spend".
@@ -259,6 +256,10 @@ def _create_performance_max_campaign_operation(
     # Although target ROAS is optional, you still need to define it
     # even if you do not want to use it.
     campaign.maximize_conversion_value.target_roas = None
+    # Below is what you would use if you want to maximize conversions
+    # campaign.maximize_conversions.target_cpa = None
+    # The target CPA is optional. This is the average amount that you would 
+    # like to spend per conversion action.
 
     # Set the shopping settings.
     campaign.shopping_setting.merchant_id = merchant_center_account_id
@@ -267,13 +268,11 @@ def _create_performance_max_campaign_operation(
     # Set the Final URL expansion opt out. This flag is specific to
     # Performance Max campaigns. If opted out (True), only the final URLs in
     # the asset group or URLs specified in the advertiser's Google Merchant
-    # Center or business data feeds are targeted. This is the recommended
-    # way for accounts that use their Merchant Center feed. As this is an
-    # example of PMax for Retail that uses a Merchant Center feed, we will
-    # set True the URL expansion opt out.
     # If opted in (False), the entire domain will be targeted. For best
     # results, set this value to false to opt in and allow URL expansions. You
     # can optionally add exclusions to limit traffic to parts of your website.
+    # For a Retail campaign, we want the final URL's to be limited to 
+    # those explicitly surfaced via GMC.
     campaign.url_expansion_opt_out = True
 
     # Assign the resource name with a temporary ID.
@@ -446,9 +445,7 @@ def _create_asset_group_operation(
     )
     operations.append(mutate_operation)
 
-    # Create a ListingGroupFilter and link it to the AssetGroup.
-    # This is necessary for the campaign to run.
-    # https://developers.google.com/google-ads/api/reference/rpc/v9/AssetGroupListingGroupFilter
+    # Creates a new ad group criterion containing the "default" listing group (All products).
     mutate_operation = client.get_type("MutateOperation")
     asset_group_listing_group = mutate_operation.asset_group_listing_group_filter_operation.create
     asset_group_listing_group.asset_group = asset_group_service.asset_group_path(
@@ -456,8 +453,8 @@ def _create_asset_group_operation(
             _ASSET_GROUP_TEMPORARY_ID,
         )
     asset_group_listing_group.type_ = client.enums.ListingGroupFilterTypeEnum.UNIT_INCLUDED
-    # Here are other options for ListingGroupFilterTypeEnum
-    # https://developers.google.com/google-ads/api/reference/rpc/v9/ListingGroupFilterTypeEnum.ListingGroupFilterType
+    # Because this is a Performance Max campaign for retail, we need to specify that this is 
+    # in the shopping vertical.
     asset_group_listing_group.vertical = client.enums.ListingGroupFilterVerticalEnum.SHOPPING
     
     operations.append(mutate_operation)

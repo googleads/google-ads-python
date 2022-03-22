@@ -26,13 +26,19 @@ from google.ads.googleads.errors import GoogleAdsException
 
 
 def main(client, customer_id, recommendation_id):
-    rec_service = client.get_service("RecommendationService")
-    operation = client.get_type("DismissRecommendationOperation")
+    recommendation_service = client.get_service("RecommendationService")
+
+    # The DismissRecommendationOperation type is defined on the
+    # DismissRecommendationRequest type, so it cannot be retrieved directly
+    # with the get_type method.
+    request = client.get_type("DismissRecommendationRequest")
+    operation = request.DismissRecommendationOperation()
+
     operation.resource_name = recommendation_service.recommendation_path(
         customer_id, recommendation_id
     )
 
-    response = rec_service.dismiss_recommendation(
+    response = recommendation_service.dismiss_recommendation(
         customer_id=customer_id, operations=[operation]
     )
 

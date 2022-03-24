@@ -236,7 +236,7 @@ def _add_level1_nodes(
     other_hotels_listing_dimension_info = client.get_type(
         "ListingDimensionInfo"
     )
-    # Set "hotel_class" as the oneof field on the ListingDimentionInfo object
+    # Set "hotel_class" as the oneof field on the ListingDimensionInfo object
     # without specifying the optional hotel_class field.
     client.copy_from(
         other_hotels_listing_dimension_info.hotel_class,
@@ -459,7 +459,7 @@ def _create_ad_group_criterion(
 if __name__ == "__main__":
     # GoogleAdsClient will read the google-ads.yaml configuration file in the
     # home directory if none is specified.
-    googleads_client = GoogleAdsClient.load_from_storage(version="v9")
+    googleads_client = GoogleAdsClient.load_from_storage(version="v10")
 
     parser = argparse.ArgumentParser(
         description="Shows how to add a hotel listing group tree with two "

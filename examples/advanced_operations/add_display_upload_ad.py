@@ -73,6 +73,7 @@ def _create_media_bundle_asset(client, customer_id):
     asset_operation = client.get_type("AssetOperation")
     media_bundle_asset = asset_operation.create
     media_bundle_asset.type_ = client.enums.AssetTypeEnum.MEDIA_BUNDLE
+    media_bundle_asset.name = "Ad Media Bundle"
     # The HTML5 zip file contains all the HTML, CSS, and images needed for the
     # HTML5 ad. For help on creating an HTML5 zip file, check out Google Web
     # Designer (https://www.google.com/webdesigner/).
@@ -149,7 +150,7 @@ def _create_display_upload_ad_group_ad(
 if __name__ == "__main__":
     # GoogleAdsClient will read the google-ads.yaml configuration file in the
     # home directory if none is specified.
-    googleads_client = GoogleAdsClient.load_from_storage(version="v9")
+    googleads_client = GoogleAdsClient.load_from_storage(version="v10")
 
     parser = argparse.ArgumentParser(
         description="Adds a display upload ad to a given ad group."

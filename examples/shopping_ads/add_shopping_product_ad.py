@@ -47,7 +47,7 @@ def main(
         client, customer_id, budget_resource_name, merchant_center_account_id
     )
 
-    # Create a shoppng product ad group.
+    # Create a shopping product ad group.
     ad_group_resource_name = _add_shopping_product_ad_group(
         client, customer_id, campaign_resource_name
     )
@@ -162,7 +162,7 @@ def _add_standard_shopping_campaign(
     """Creates a new standard shopping campaign in the specified client account."""
     campaign_service = client.get_service("CampaignService")
 
-    # Create standard shoppping campaign.
+    # Create standard shopping campaign.
     campaign_operation = client.get_type("CampaignOperation")
     campaign = campaign_operation.create
     campaign.name = f"Interplanetary Cruise Campaign {uuid.uuid4()}"
@@ -254,7 +254,7 @@ def _add_default_shopping_listing_group(
 if __name__ == "__main__":
     # GoogleAdsClient will read the google-ads.yaml configuration file in the
     # home directory if none is specified.
-    googleads_client = GoogleAdsClient.load_from_storage(version="v9")
+    googleads_client = GoogleAdsClient.load_from_storage(version="v10")
 
     parser = argparse.ArgumentParser(
         description=(

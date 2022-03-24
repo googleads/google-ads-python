@@ -19,6 +19,12 @@ a Dynamic Search Ads Campaign run add_dynamic_search_ads_campaign.py. To get
 campaigns run basic_operations/get_campaigns.py.
 """
 
+# DEPRECATION WARNING!
+# Feed-services based DSA page feeds are deprecated and being replaced with
+# assets, see: advanced_operations/add_dynamic_page_feed_asset.py for an
+# example of how to create page feeds using assets. For details on the
+# deprecation schedule for feed-based page feeds, see our developer blog:
+# https://ads-developers.googleblog.com
 
 import argparse
 import sys
@@ -359,7 +365,7 @@ def _add_dsa_targeting(client, customer_id, ad_group_resource_name, label):
 if __name__ == "__main__":
     # GoogleAdsClient will read the google-ads.yaml configuration file in the
     # home directory if none is specified.
-    googleads_client = GoogleAdsClient.load_from_storage(version="v9")
+    googleads_client = GoogleAdsClient.load_from_storage(version="v10")
 
     parser = argparse.ArgumentParser(
         description=(

@@ -43,9 +43,9 @@ def main(
         client.enums.KeywordPlanNetworkEnum.GOOGLE_SEARCH_AND_PARTNERS
     )
     location_rns = _map_locations_ids_to_resource_names(client, location_ids)
-    language_rn = client.get_service(
-        "LanguageConstantService"
-    ).language_constant_path(language_id)
+    language_rn = client.get_service("GoogleAdsService").language_constant_path(
+        language_id
+    )
 
     # Either keywords or a page_url are required to generate keyword ideas
     # so this raises an error if neither are provided.
@@ -126,7 +126,7 @@ def _map_locations_ids_to_resource_names(client, location_ids):
 if __name__ == "__main__":
     # GoogleAdsClient will read the google-ads.yaml configuration file in the
     # home directory if none is specified.
-    googleads_client = GoogleAdsClient.load_from_storage(version="v9")
+    googleads_client = GoogleAdsClient.load_from_storage(version="v10")
 
     parser = argparse.ArgumentParser(
         description="Generates keyword ideas from a list of seed keywords."

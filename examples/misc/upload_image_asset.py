@@ -45,11 +45,10 @@ def main(client, customer_id):
     asset.image_asset.full_size.height_pixels = 315
     asset.image_asset.full_size.width_pixels = 600
     asset.image_asset.full_size.url = url
-    # Optional: Provide a unique friendly name to identify your asset.
-    # If you specify the name field, then both the asset name and the image
-    # being uploaded should be unique, and should not match another ACTIVE
-    # asset in this customer account.
-    # asset.name = 'Jupiter Trip #' + uuid.uuid4()
+    # Provide a unique friendly name to identify your asset.
+    # When there is an existing image asset with the same content but a different
+    # name, the new name will be dropped silently.
+    asset.name = "Marketing Image"
 
     mutate_asset_response = asset_service.mutate_assets(
         customer_id=customer_id, operations=[asset_operation]
@@ -64,7 +63,7 @@ def main(client, customer_id):
 if __name__ == "__main__":
     # GoogleAdsClient will read the google-ads.yaml configuration file in the
     # home directory if none is specified.
-    googleads_client = GoogleAdsClient.load_from_storage(version="v9")
+    googleads_client = GoogleAdsClient.load_from_storage(version="v10")
 
     parser = argparse.ArgumentParser(
         description="Upload an image asset from a URL."

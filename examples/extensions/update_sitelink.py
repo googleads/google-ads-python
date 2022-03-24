@@ -40,8 +40,10 @@ def main(client, customer_id, feed_item_id, sitelink_text):
     )
     extension_feed_item = extension_feed_item_operation.update
     # Update the extension feed item using the specified feed item ID
-    extension_feed_item.resource_name = extension_feed_item_service.extension_feed_item_path(
-        customer_id, feed_item_id
+    extension_feed_item.resource_name = (
+        extension_feed_item_service.extension_feed_item_path(
+            customer_id, feed_item_id
+        )
     )
     extension_feed_item.sitelink_feed_item.link_text = sitelink_text
 
@@ -65,7 +67,7 @@ def main(client, customer_id, feed_item_id, sitelink_text):
 if __name__ == "__main__":
     # GoogleAdsClient will read the google-ads.yaml configuration file in the
     # home directory if none is specified.
-    googleads_client = GoogleAdsClient.load_from_storage(version="v9")
+    googleads_client = GoogleAdsClient.load_from_storage(version="v10")
 
     parser = argparse.ArgumentParser(
         description="Update sitelink extension feed item with the specified "

@@ -76,11 +76,11 @@ def main(client, login_customer_id=None):
         )
 
         for customer_resource_name in customer_resource_names:
-            customer = customer_service.get_customer(
-                resource_name=customer_resource_name
-            )
-            print(customer.id)
-            seed_customer_ids.append(customer.id)
+            customer_id = googleads_service.parse_customer_path(
+                customer_resource_name
+            )["customer_id"]
+            print(customer_id)
+            seed_customer_ids.append(customer_id)
 
     for seed_customer_id in seed_customer_ids:
         # Performs a breadth-first search to build a Dictionary that maps
@@ -150,7 +150,7 @@ def _print_account_hierarchy(
     """Prints the specified account's hierarchy using recursion.
 
     Args:
-      customer_client: The customer cliant whose info will be printed; its
+      customer_client: The customer client whose info will be printed; its
       child accounts will be processed if it's a manager.
       customer_ids_to_child_accounts: A dictionary mapping customer IDs to
       child accounts.
@@ -179,7 +179,7 @@ def _print_account_hierarchy(
 if __name__ == "__main__":
     # GoogleAdsClient will read the google-ads.yaml configuration file in the
     # home directory if none is specified.
-    googleads_client = GoogleAdsClient.load_from_storage(version="v9")
+    googleads_client = GoogleAdsClient.load_from_storage(version="v10")
 
     parser = argparse.ArgumentParser(
         description="This example gets the account hierarchy of the specified "

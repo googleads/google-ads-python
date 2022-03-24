@@ -158,7 +158,7 @@ def _add_asset_to_account(client, customer_id, price_asset_resource_name):
     Args:
         client: an initialized GoogleAdsClient instance.
         customer_id: a client customer ID.
-        price_asset_resource_name: a resource name for an Assset containing
+        price_asset_resource_name: a resource name for an Asset containing
             a PriceAsset.
     """
     # Create a customer asset operation.
@@ -184,7 +184,7 @@ def _add_asset_to_account(client, customer_id, price_asset_resource_name):
 if __name__ == "__main__":
     # GoogleAdsClient will read the google-ads.yaml configuration file in the
     # home directory if none is specified.
-    googleads_client = GoogleAdsClient.load_from_storage(version="v9")
+    googleads_client = GoogleAdsClient.load_from_storage(version="v10")
 
     parser = argparse.ArgumentParser(
         description="Add price asset for the specified customer id."

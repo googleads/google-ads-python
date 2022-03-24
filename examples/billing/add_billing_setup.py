@@ -172,7 +172,7 @@ def _set_billing_setup_date_times(client, customer_id, billing_setup):
         # Sets the new billing setup start date to one day after the end date.
         start_date = end_date_time_obj + timedelta(days=1)
     else:
-        # If there are no BillingSetup objecst to retrieve, the only acceptable
+        # If there are no BillingSetup objects to retrieve, the only acceptable
         # start date time is today.
         start_date = datetime.now()
 
@@ -185,7 +185,7 @@ def _set_billing_setup_date_times(client, customer_id, billing_setup):
 if __name__ == "__main__":
     # GoogleAdsClient will read the google-ads.yaml configuration file in the
     # home directory if none is specified.
-    googleads_client = GoogleAdsClient.load_from_storage(version="v9")
+    googleads_client = GoogleAdsClient.load_from_storage(version="v10")
 
     parser = argparse.ArgumentParser(
         description=("Creates a billing setup for a given customer.")

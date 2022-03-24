@@ -111,7 +111,7 @@ def _create_affiliate_location_extension_feed(client, customer_id, chain_id):
     # Display the results.
     feed_resource_name = mutate_feeds_response.results[0].resource_name
     print(
-        "Affliate location extension feed created with resource name: "
+        "Affiliate location extension feed created with resource name: "
         f"{feed_resource_name}."
     )
     return feed_resource_name
@@ -302,7 +302,7 @@ def _get_affiliate_location_extension_feed_mapping(
 
 # [START add_affiliate_location_extensions_2]
 def _wait_for_feed_to_be_ready(client, customer_id, feed_resource_name):
-    """Waits for the Affliate location extension feed to be ready.
+    """Waits for the Affiliate location extension feed to be ready.
 
     Args:
         client: The Google Ads API client.
@@ -324,7 +324,7 @@ def _wait_for_feed_to_be_ready(client, customer_id, feed_resource_name):
         # creating feed attributes and feed mapping. Once the feed mapping is
         # created, it is ready to be used for creating customer feed.
         # This process is asynchronous, so we wait until the feed mapping is
-        # created, peforming exponential backoff.
+        # created, performing exponential backoff.
         feed_mapping = _get_affiliate_location_extension_feed_mapping(
             client, customer_id, feed_resource_name
         )
@@ -359,7 +359,7 @@ def _create_campaign_feed(
         customer_id: The Google Ads customer ID.
         campaign_id: The campaign ID to which the affiliate location extensions
             will be added.
-        feed_mapping: The affliate location extension feedmapping for the feed
+        feed_mapping: The affiliate location extension feedmapping for the feed
             resource name.
         feed_resource_name: The feed resource name.
         chain_id: The retail chain ID.
@@ -390,8 +390,10 @@ def _create_campaign_feed(
         "CampaignService"
     ).campaign_path(customer_id, campaign_id)
 
-    mutate_campaign_feeds_response = campaign_feed_service.mutate_campaign_feeds(
-        customer_id=customer_id, operations=[campaign_feed_operation]
+    mutate_campaign_feeds_response = (
+        campaign_feed_service.mutate_campaign_feeds(
+            customer_id=customer_id, operations=[campaign_feed_operation]
+        )
     )
 
     # Display the result.
@@ -432,7 +434,7 @@ def _get_attribute_id_for_chain_id(client, feed_mapping):
 if __name__ == "__main__":
     # will read the google-ads.yaml configuration file in the
     # home directory if none is specified.
-    googleads_client = GoogleAdsClient.load_from_storage(version="v9")
+    googleads_client = GoogleAdsClient.load_from_storage(version="v10")
 
     parser = argparse.ArgumentParser(
         description="Demonstrates how to add Affiliate Location extensions."
@@ -466,7 +468,10 @@ if __name__ == "__main__":
 
     try:
         main(
-            googleads_client, args.customer_id, args.chain_id, args.campaign_id,
+            googleads_client,
+            args.customer_id,
+            args.chain_id,
+            args.campaign_id,
         )
     except GoogleAdsException as ex:
         print(

@@ -173,7 +173,7 @@ def _modify_ad_group_bids(
     Args:
         client: an initialized GoogleAdsClient instance.
         customer_id: a str client customer ID.
-        ad_group_criterion_resoure_name: a str resource name for an ad group
+        ad_group_criterion.resource_name: a str resource name for an ad group
             criterion.
         bid_modifier_value: a float value specifying an ad group criterion
             bid modifier.
@@ -358,7 +358,7 @@ def _modify_campaign_bids(
 if __name__ == "__main__":
     # GoogleAdsClient will read the google-ads.yaml configuration file in the
     # home directory if none is specified.
-    googleads_client = GoogleAdsClient.load_from_storage(version="v9")
+    googleads_client = GoogleAdsClient.load_from_storage(version="v10")
 
     parser = argparse.ArgumentParser(
         description="Demonstrates various operations involved in remarketing."

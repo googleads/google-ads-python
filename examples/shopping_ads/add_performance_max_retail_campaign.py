@@ -251,10 +251,15 @@ def _create_performance_max_campaign_operation(
     # For more information on Max Conversion Value, see the support article:
     # http://support.google.com/google-ads/answer/7684216.
     # A target_roas of 3.5 corresponds to a 350% return on ad spend.
-    campaign.bidding_strategy_type = (
-        client.enums.BiddingStrategyTypeEnum.MAXIMIZE_CONVERSION_VALUE
-    )
-    campaign.maximize_conversion_value.target_roas = 3.5
+    # campaign.maximize_conversion_value.target_roas = 3.5
+    # For first time users, it's recommended not to set a target ROAS.
+    # Although target ROAS is optional, you still need to define it
+    # even if you do not want to use it.
+    campaign.maximize_conversion_value.target_roas = None
+    # Below is what you would use if you want to maximize conversions
+    # campaign.maximize_conversions.target_cpa = None
+    # The target CPA is optional. This is the average amount that you would 
+    # like to spend per conversion action.
 
     # Set the shopping settings.
     campaign.shopping_setting.merchant_id = merchant_center_account_id
@@ -263,11 +268,12 @@ def _create_performance_max_campaign_operation(
     # Set the Final URL expansion opt out. This flag is specific to
     # Performance Max campaigns. If opted out (True), only the final URLs in
     # the asset group or URLs specified in the advertiser's Google Merchant
-    # Center or business data feeds are targeted.
     # If opted in (False), the entire domain will be targeted. For best
     # results, set this value to false to opt in and allow URL expansions. You
     # can optionally add exclusions to limit traffic to parts of your website.
-    campaign.url_expansion_opt_out = False
+    # For a Retail campaign, we want the final URL's to be limited to 
+    # those explicitly surfaced via GMC.
+    campaign.url_expansion_opt_out = True
 
     # Assign the resource name with a temporary ID.
     campaign_service = client.get_service("CampaignService")
@@ -437,6 +443,20 @@ def _create_asset_group_operation(
         customer_id,
         _ASSET_GROUP_TEMPORARY_ID,
     )
+    operations.append(mutate_operation)
+
+    # Creates a new ad group criterion containing the "default" listing group (All products).
+    mutate_operation = client.get_type("MutateOperation")
+    asset_group_listing_group = mutate_operation.asset_group_listing_group_filter_operation.create
+    asset_group_listing_group.asset_group = asset_group_service.asset_group_path(
+            customer_id,
+            _ASSET_GROUP_TEMPORARY_ID,
+        )
+    asset_group_listing_group.type_ = client.enums.ListingGroupFilterTypeEnum.UNIT_INCLUDED
+    # Because this is a Performance Max campaign for retail, we need to specify that this is 
+    # in the shopping vertical.
+    asset_group_listing_group.vertical = client.enums.ListingGroupFilterVerticalEnum.SHOPPING
+    
     operations.append(mutate_operation)
 
     # For the list of required assets for a Performance Max campaign, see

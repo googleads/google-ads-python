@@ -1,3 +1,14 @@
+* 15.1.0
+- Fix issue preventing streaming responses from being logged.
+- Expose logging utilities for external interceptor logic.
+- Various example updates and improvements.
+
+* 15.0.0
+- Google Ads API v10_0 release.
+- Remove all "get" methods from services.
+- Remove services that only contained "get" methods.
+- Remove support got Google Ads API v7_0.
+
 * 14.1.0
 - Google Ads API v9_0 release
 - Update gRPC transport logic to replace "gapic" user-agent with "gccl"

@@ -59,7 +59,10 @@ def _create_asset(client, customer_id):
     """
     # Creates an operation to add the asset.
     operation = client.get_type("AssetOperation")
-    education_asset = operation.create.dynamic_education_asset
+    asset = operation.create
+    # The final_urls list must not be empty
+    asset.final_urls.append("https://www.example.com")
+    education_asset = asset.dynamic_education_asset
     # Defines meta-information about the school and program.
     education_asset.school_name = "The University of Unknown"
     education_asset.address = "Building 1, New York, 12345, USA"

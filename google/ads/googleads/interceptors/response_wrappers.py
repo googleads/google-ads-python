@@ -1,4 +1,4 @@
-# Copyright 2021 Google LLC
+# Copyright 2022 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -14,8 +14,10 @@
 """Wrapper classes used to modify the behavior of response objects."""
 
 import grpc
+import time
 
 from google.ads.googleads import util
+from types import SimpleNamespace
 
 
 class _UnaryStreamWrapper(grpc.Call, grpc.Future):
@@ -25,6 +27,7 @@ class _UnaryStreamWrapper(grpc.Call, grpc.Future):
         self._failure_handler = failure_handler
         self._exception = None
         self._use_proto_plus = use_proto_plus
+        self._cache = SimpleNamespace(**{"initial_response_object": None})
 
     def initial_metadata(self):
         return self._underlay_call.initial_metadata()
@@ -83,6 +86,13 @@ class _UnaryStreamWrapper(grpc.Call, grpc.Future):
     def __next__(self):
         try:
             message = next(self._underlay_call)
+            # Store only the first streaming response object in _cache.initial_response_object.
+            # Each streaming response object captures 10,000 rows.
+            # The default log character limit is 5,000, so caching multiple
+            # streaming response objects does not make sense in most cases,
+            # as only [part of] 1 will get logged.
+            if self._cache.initial_response_object == None:
+                self._cache.initial_response_object = message
             if self._use_proto_plus == True:
                 # By default this message is wrapped by proto-plus
                 return message
@@ -96,6 +106,9 @@ class _UnaryStreamWrapper(grpc.Call, grpc.Future):
             except Exception as e:
                 self._exception = e
                 raise e
+
+    def get_cache(self):
+        return self._cache
 
 
 class _UnaryUnaryWrapper(grpc.Call, grpc.Future):

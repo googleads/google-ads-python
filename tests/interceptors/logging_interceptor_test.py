@@ -1,4 +1,4 @@
-# Copyright 2020 Google LLC
+# Copyright 2022 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -18,11 +18,13 @@ from importlib import import_module
 import json
 import logging
 from unittest import TestCase
+from types import SimpleNamespace
 
 import mock
 
 from google.ads.googleads import client as Client
 from google.ads.googleads.interceptors import LoggingInterceptor
+from google.ads.googleads.interceptors.helpers import mask_message, _mask_message_fields, _copy_message
 import google.ads.googleads.interceptors.logging_interceptor as interceptor_module
 from google.ads.googleads import util
 
@@ -61,6 +63,7 @@ class LoggingInterceptorTest(TestCase):
     _MOCK_CUSTOMER_ID = "123456"
     _MOCK_REQUEST_ID = "654321xyz"
     _MOCK_METHOD = "test/method"
+    _MOCK_STREAM = "Testing 123"
     _MOCK_TRAILING_METADATA = (("request-id", _MOCK_REQUEST_ID),)
     _MOCK_TRANSPORT_ERROR_METADATA = tuple()
     _MOCK_ERROR_MESSAGE = "Test error message"
@@ -80,8 +83,8 @@ class LoggingInterceptorTest(TestCase):
         for testing.
 
         Args:
-            config: A dict configuration
-            endpoint: A str representing an endpoint
+            version: A str representing the API version of the request.
+            endpoint: A str representing an endpoint.
 
         Returns:
             A LoggingInterceptor instance.
@@ -176,11 +179,8 @@ class LoggingInterceptorTest(TestCase):
         del exception.request_id
         return exception
 
-    def _get_mock_response(self, failed=False):
+    def _get_mock_response(self, failed=False, streaming=False):
         """Generates a mock response object for use in tests.
-
-        Accepts a "failed" param that tells the returned mocked response to
-        mimic a failed response.
 
         Returns:
             A Mock instance with mock "exception" and "trailing_metadata"
@@ -189,6 +189,8 @@ class LoggingInterceptorTest(TestCase):
         Args:
             failed: a bool indicating whether the mock response should be in a
                 failed state or not. Default is False.
+            streaming: a bool indicating whether the mock response should
+                represent a streaming response.
         """
 
         def mock_exception_fn():
@@ -197,11 +199,21 @@ class LoggingInterceptorTest(TestCase):
             return None
 
         def mock_result_fn():
+            if streaming:
+                response = self._MOCK_STREAM
+                return response
             return self._MOCK_RESPONSE_MSG
+
+        def mock_get_cache():
+            if failed:
+                return SimpleNamespace(**{"initial_response_object": None})
+            else:
+                return SimpleNamespace(**{"initial_response_object": self._MOCK_STREAM})
 
         mock_response = mock.Mock()
         mock_response.exception = mock_exception_fn
         mock_response.trailing_metadata = self._get_trailing_metadata_fn()
+        mock_response.get_cache = mock_get_cache
         mock_response.result = mock_result_fn
         return mock_response
 
@@ -328,13 +340,14 @@ class LoggingInterceptorTest(TestCase):
         """
         mock_client_call_details = self._get_mock_client_call_details()
         mock_request = self._get_mock_request()
-        mock_response = self._get_mock_response()
+        mock_response = self._get_mock_response(streaming=True)
         mock_trailing_metadata = mock_response.trailing_metadata()
 
         def mock_add_done_callback(fn):
             fn(mock_response)
 
         mock_response.add_done_callback = mock_add_done_callback
+
         mock_continuation_fn = mock.Mock(return_value=mock_response)
 
         with mock.patch("logging.config.dictConfig"), mock.patch(
@@ -345,6 +358,7 @@ class LoggingInterceptorTest(TestCase):
                 mock_continuation_fn, mock_client_call_details, mock_request
             )
 
+            mock_logger.info.assert_called()
             mock_logger.info.assert_called_once_with(
                 interceptor._SUMMARY_LOG_LINE.format(
                     self._MOCK_CUSTOMER_ID,
@@ -362,6 +376,10 @@ class LoggingInterceptorTest(TestCase):
             trailing_metadata = interceptor.parse_metadata_to_json(
                 mock_trailing_metadata
             )
+
+            # Assert that the cache is added to the interceptor
+            self.assertIsInstance(interceptor._cache, SimpleNamespace)
+            self.assertEqual(interceptor._cache.initial_response_object, self._MOCK_STREAM)
 
             mock_logger.debug.assert_called_once_with(
                 interceptor._FULL_REQUEST_LOG_LINE.format(
@@ -429,7 +447,7 @@ class LoggingInterceptorTest(TestCase):
         LoggingInterceptor should call _logger.warning and _logger.info with
         a specific str parameter when a request fails.
         """
-        mock_response = self._get_mock_response(failed=True)
+        mock_response = self._get_mock_response(failed=True, streaming=True)
 
         def mock_add_done_callback(fn):
             fn(mock_response)
@@ -466,6 +484,10 @@ class LoggingInterceptorTest(TestCase):
             trailing_metadata = interceptor.parse_metadata_to_json(
                 mock_trailing_metadata
             )
+
+            # Assert that the cache is added to the interceptor
+            self.assertIsInstance(interceptor._cache, SimpleNamespace)
+            self.assertEqual(interceptor._cache.initial_response_object, None)
 
             mock_logger.info.assert_called_once_with(
                 interceptor._FULL_FAULT_LOG_LINE.format(
@@ -645,7 +667,7 @@ class LoggingInterceptorTest(TestCase):
     def test_copy_message(self):
         """Creates a copy of the given message."""
         message = customer_user_access.CustomerUserAccess()
-        copy = interceptor_module._copy_message(message)
+        copy = _copy_message(message)
         self.assertIsInstance(copy, message.__class__)
         self.assertIsNot(message, copy)
 
@@ -654,7 +676,7 @@ class LoggingInterceptorTest(TestCase):
         message = customer_user_access.CustomerUserAccess()
         message.email_address = "test@test.com"
         message.inviter_user_email_address = "inviter@test.com"
-        copy = interceptor_module._mask_message_fields(
+        copy = _mask_message_fields(
             ["email_address", "inviter_user_email_address"], message, "REDACTED"
         )
         self.assertIsInstance(copy, message.__class__)
@@ -672,7 +694,7 @@ class LoggingInterceptorTest(TestCase):
                 )
             )
         )
-        copy = interceptor_module._mask_message_fields(
+        copy = _mask_message_fields(
             [
                 "operation.update.email_address",
                 "operation.update.inviter_user_email_address",
@@ -690,7 +712,7 @@ class LoggingInterceptorTest(TestCase):
     def test_mask_message_fields_unset_field(self):
         """Field is not masked if it is not set."""
         message = customer_user_access.CustomerUserAccess()
-        copy = interceptor_module._mask_message_fields(
+        copy = _mask_message_fields(
             ["email_address"], message, "REDACTED"
         )
         self.assertFalse("email_address" in copy)
@@ -698,7 +720,7 @@ class LoggingInterceptorTest(TestCase):
     def test_mask_message_fields_unset_nested(self):
         """Nested field is not masked if it is not set."""
         message = customer_user_access_service.MutateCustomerUserAccessRequest()
-        copy = interceptor_module._mask_message_fields(
+        copy = _mask_message_fields(
             [
                 "operation.update.email_address",
                 "operation.update.inviter_user_email_address",
@@ -712,7 +734,7 @@ class LoggingInterceptorTest(TestCase):
     def test_mask_message_fields_bad_field_name(self):
         """No error is raised if a given field is not defined on the message."""
         message = customer_user_access.CustomerUserAccess()
-        copy = interceptor_module._mask_message_fields(
+        copy = _mask_message_fields(
             ["bad_name"], message, "REDACTED"
         )
         self.assertFalse("email_address" in copy)
@@ -721,7 +743,7 @@ class LoggingInterceptorTest(TestCase):
     def test_mask_message_fields_bad_nested_field_name(self):
         """No error is raised if a nested field is not defined."""
         message = customer_user_access.CustomerUserAccess()
-        copy = interceptor_module._mask_message_fields(
+        copy = _mask_message_fields(
             ["bad_name.another_bad.yet_another"], message, "REDACTED"
         )
         self.assertFalse("email_address" in copy)
@@ -736,7 +758,7 @@ class LoggingInterceptorTest(TestCase):
             )
         )
         response.results.append(row)
-        copy = interceptor_module._mask_message(response, "REDACTED")
+        copy = mask_message(response, "REDACTED")
         self.assertIsInstance(copy, response.__class__)
         self.assertIsNot(response, copy)
         self.assertEqual(
@@ -753,7 +775,7 @@ class LoggingInterceptorTest(TestCase):
         )
         response.results.append(row)
         protobuf = util.convert_proto_plus_to_protobuf(response)
-        copy = interceptor_module._mask_message(protobuf, "REDACTED")
+        copy = mask_message(protobuf, "REDACTED")
         self.assertIsInstance(copy, protobuf.__class__)
         self.assertIsNot(protobuf, copy)
         self.assertEqual(
@@ -769,7 +791,7 @@ class LoggingInterceptorTest(TestCase):
             )
         )
         response.results.append(row)
-        copy = interceptor_module._mask_message(response, "REDACTED")
+        copy = mask_message(response, "REDACTED")
         self.assertIsInstance(copy, response.__class__)
         self.assertIsNot(response, copy)
         self.assertEqual(
@@ -783,7 +805,7 @@ class LoggingInterceptorTest(TestCase):
             change_event=change_event.ChangeEvent(user_email="test@test.com")
         )
         response.results.append(row)
-        copy = interceptor_module._mask_message(response, "REDACTED")
+        copy = mask_message(response, "REDACTED")
         self.assertEqual(copy.results[0].change_event.user_email, "REDACTED")
 
     def test_mask_search_places_location_feed_data(self):
@@ -797,7 +819,7 @@ class LoggingInterceptorTest(TestCase):
             )
         )
         response.results.append(row)
-        copy = interceptor_module._mask_message(response, "REDACTED")
+        copy = mask_message(response, "REDACTED")
         self.assertEqual(
             copy.results[0].feed.places_location_feed_data.email_address,
             "REDACTED",
@@ -809,7 +831,7 @@ class LoggingInterceptorTest(TestCase):
             email_address="test@test.com",
             inviter_user_email_address="inviter@test.com",
         )
-        copy = interceptor_module._mask_message(
+        copy = mask_message(
             customer_user_access_obj, "REDACTED"
         )
         self.assertIsInstance(copy, customer_user_access_obj.__class__)
@@ -827,7 +849,7 @@ class LoggingInterceptorTest(TestCase):
                 )
             )
         )
-        copy = interceptor_module._mask_message(request, "REDACTED")
+        copy = mask_message(request, "REDACTED")
         self.assertIsInstance(copy, request.__class__)
         self.assertIsNot(copy, request)
         self.assertEqual(copy.operation.update.email_address, "REDACTED")
@@ -840,7 +862,7 @@ class LoggingInterceptorTest(TestCase):
         request = customer_service.CreateCustomerClientRequest(
             email_address="test@test.com",
         )
-        copy = interceptor_module._mask_message(request, "REDACTED")
+        copy = mask_message(request, "REDACTED")
         self.assertIsInstance(copy, request.__class__)
         self.assertIsNot(copy, request)
         self.assertEqual(copy.email_address, "REDACTED")
@@ -852,7 +874,7 @@ class LoggingInterceptorTest(TestCase):
                 email_address="test@test.com"
             )
         )
-        copy = interceptor_module._mask_message(message, "REDACTED")
+        copy = mask_message(message, "REDACTED")
         self.assertIsInstance(copy, message.__class__)
         self.assertIsNot(copy, message)
         self.assertEqual(
@@ -864,6 +886,6 @@ class LoggingInterceptorTest(TestCase):
         message = customer_user_access_invitation.CustomerUserAccessInvitation(
             email_address="test@test.com"
         )
-        copy = interceptor_module._mask_message(message, "REDACTED")
+        copy = mask_message(message, "REDACTED")
         self.assertIsInstance(copy, message.__class__)
         self.assertEqual(copy.email_address, "REDACTED")

@@ -18,4 +18,4 @@ import google.ads.googleads.errors
 import google.ads.googleads.util
 
 
-VERSION = "14.1.0"
+VERSION = "15.1.0"

@@ -1,3 +1,7 @@
+* 15.1.1
+- Bump protobuf dependency to 3.20.0 excluding 3.18.* and 3.19.*.
+- Remove duplicate google-api-core dependency.
+
 * 15.1.0
 - Fix issue preventing streaming responses from being logged.
 - Expose logging utilities for external interceptor logic.

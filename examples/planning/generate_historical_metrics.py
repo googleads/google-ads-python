@@ -67,7 +67,7 @@ def main(client, customer_id, keyword_plan_id):
         # how competitive ad placement is for a keyword. The level of
         # competition from 0-100 is determined by the number of ad slots filled
         # divided by the total number of ad slots available. If not enough data
-        # is available this will be None.
+        # is available, None will be returned.
         print(
             f"\tCompetition index: {metric.keyword_metrics.competition_index}."
         )

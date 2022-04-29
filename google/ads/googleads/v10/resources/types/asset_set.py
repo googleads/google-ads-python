@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-# Copyright 2020 Google LLC
+# Copyright 2022 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -31,6 +31,8 @@ class AssetSet(proto.Message):
     Use AssetSetAsset to link an asset to the asset set.
 
     Attributes:
+        id (int):
+            Output only. The ID of the asset set.
         resource_name (str):
             Immutable. The resource name of the asset set. Asset set
             resource names have the form:
@@ -68,6 +70,7 @@ class AssetSet(proto.Message):
         merchant_id = proto.Field(proto.INT64, number=1,)
         feed_label = proto.Field(proto.STRING, number=2, optional=True,)
 
+    id = proto.Field(proto.INT64, number=6,)
     resource_name = proto.Field(proto.STRING, number=1,)
     name = proto.Field(proto.STRING, number=2,)
     type_ = proto.Field(

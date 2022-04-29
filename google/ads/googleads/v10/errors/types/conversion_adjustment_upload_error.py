@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-# Copyright 2020 Google LLC
+# Copyright 2022 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -56,6 +56,7 @@ class ConversionAdjustmentUploadErrorEnum(proto.Message):
         CONVERSION_ALREADY_ENHANCED = 21
         DUPLICATE_ENHANCEMENT_IN_REQUEST = 22
         CUSTOMER_DATA_POLICY_PROHIBITS_ENHANCEMENT = 23
+        MISSING_ORDER_ID_FOR_WEBPAGE = 24
 
 
 __all__ = tuple(sorted(__protobuf__.manifest))

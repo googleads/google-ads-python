@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-# Copyright 2020 Google LLC
+# Copyright 2022 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -101,12 +101,13 @@ class MaximizeConversions(proto.Message):
         target_cpa (int):
             The target cost-per-action (CPA) option. This
             is the average amount that you would like to
-            spend per conversion action. If set, the bid
-            strategy will get as many conversions as
-            possible at or below the target cost-per-action.
-            If the target CPA is not set, the bid strategy
-            will aim to achieve the lowest possible CPA
-            given the budget.
+            spend per conversion action specified in micro
+            units of the bidding strategy's currency. If
+            set, the bid strategy will get as many
+            conversions as possible at or below the target
+            cost-per-action. If the target CPA is not set,
+            the bid strategy will aim to achieve the lowest
+            possible CPA given the budget.
         cpc_bid_ceiling_micros (int):
             Maximum bid limit that can be set by the bid
             strategy. The limit applies to all keywords

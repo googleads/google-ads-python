@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-# Copyright 2020 Google LLC
+# Copyright 2022 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -211,6 +211,10 @@ class Campaign(proto.Message):
             customer's timezone in YYYY-MM-DD format.
 
             This field is a member of `oneof`_ ``_start_date``.
+        campaign_group (str):
+            The campaign group this campaign belongs to.
+
+            This field is a member of `oneof`_ ``_campaign_group``.
         end_date (str):
             The last day of the campaign in serving
             customer's timezone in YYYY-MM-DD format.
@@ -707,6 +711,7 @@ class Campaign(proto.Message):
     )
     accessible_bidding_strategy = proto.Field(proto.STRING, number=71,)
     start_date = proto.Field(proto.STRING, number=63, optional=True,)
+    campaign_group = proto.Field(proto.STRING, number=76, optional=True,)
     end_date = proto.Field(proto.STRING, number=64, optional=True,)
     final_url_suffix = proto.Field(proto.STRING, number=65, optional=True,)
     frequency_caps = proto.RepeatedField(

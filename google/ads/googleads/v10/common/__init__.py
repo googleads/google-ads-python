@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-# Copyright 2020 Google LLC
+# Copyright 2022 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -16,6 +16,7 @@
 
 __all__ = (
     "AdAssetPolicySummary",
+    "AdDiscoveryCarouselCardAsset",
     "AdImageAsset",
     "AdMediaBundleAsset",
     "AdScheduleInfo",
@@ -78,11 +79,21 @@ __all__ = (
     "DateSpecificRuleUserListInfo",
     "DetailedDemographicSegment",
     "DeviceInfo",
+    "DiscoveryCarouselAdInfo",
+    "DiscoveryCarouselCardAsset",
+    "DiscoveryMultiAssetAdInfo",
     "DisplayCallToAction",
     "DisplayUploadAdInfo",
     "DynamicAffiliateLocationSetFilter",
+    "DynamicCustomAsset",
     "DynamicEducationAsset",
+    "DynamicFlightsAsset",
+    "DynamicHotelsAndRentalsAsset",
+    "DynamicJobsAsset",
+    "DynamicLocalAsset",
     "DynamicLocationSetFilter",
+    "DynamicRealEstateAsset",
+    "DynamicTravelAsset",
     "EnhancedCpc",
     "ExclusionSegment",
     "ExpandedDynamicSearchAdInfo",
@@ -132,6 +143,7 @@ __all__ = (
     "KeywordThemeInfo",
     "LanguageInfo",
     "LeadFormAsset",
+    "LeadFormCustomQuestionField",
     "LeadFormDeliveryMethod",
     "LeadFormField",
     "LeadFormSingleChoiceAnswers",
@@ -189,8 +201,12 @@ __all__ = (
     "ProductChannelInfo",
     "ProductConditionInfo",
     "ProductCustomAttributeInfo",
+    "ProductGroupingInfo",
     "ProductImage",
     "ProductItemIdInfo",
+    "ProductLabelsInfo",
+    "ProductLegacyConditionInfo",
+    "ProductTypeFullInfo",
     "ProductTypeInfo",
     "ProductVideo",
     "PromotionAsset",

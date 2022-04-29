@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-# Copyright 2020 Google LLC
+# Copyright 2022 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -62,6 +62,8 @@ __protobuf__ = proto.module(
         "ResponsiveDisplayAdControlSpec",
         "SmartCampaignAdInfo",
         "CallAdInfo",
+        "DiscoveryMultiAssetAdInfo",
+        "DiscoveryCarouselAdInfo",
     },
 )
 
@@ -613,6 +615,12 @@ class VideoResponsiveAdInfo(proto.Message):
             List of image assets used for the companion
             banner. Currently, only a single value for the
             companion banner asset is supported.
+        breadcrumb1 (str):
+            First part of text that appears in the ad
+            with the displayed URL.
+        breadcrumb2 (str):
+            Second part of text that appears in the ad
+            with the displayed URL.
     """
 
     headlines = proto.RepeatedField(
@@ -633,6 +641,8 @@ class VideoResponsiveAdInfo(proto.Message):
     companion_banners = proto.RepeatedField(
         proto.MESSAGE, number=6, message=ad_asset.AdImageAsset,
     )
+    breadcrumb1 = proto.Field(proto.STRING, number=7,)
+    breadcrumb2 = proto.Field(proto.STRING, number=8,)
 
 
 class ResponsiveSearchAdInfo(proto.Message):
@@ -1283,6 +1293,120 @@ class CallAdInfo(proto.Message):
     )
     path1 = proto.Field(proto.STRING, number=13,)
     path2 = proto.Field(proto.STRING, number=14,)
+
+
+class DiscoveryMultiAssetAdInfo(proto.Message):
+    r"""A discovery multi asset ad.
+
+    Attributes:
+        marketing_images (Sequence[google.ads.googleads.v10.common.types.AdImageAsset]):
+            Marketing image assets to be used in the ad. Valid image
+            types are GIF, JPEG, and PNG. The minimum size is 600x314
+            and the aspect ratio must be 1.91:1 (+-1%). Required if
+            square_marketing_images is not present. Combined with
+            ``square_marketing_images`` and
+            ``portrait_marketing_images`` the maximum is 20.
+        square_marketing_images (Sequence[google.ads.googleads.v10.common.types.AdImageAsset]):
+            Square marketing image assets to be used in the ad. Valid
+            image types are GIF, JPEG, and PNG. The minimum size is
+            300x300 and the aspect ratio must be 1:1 (+-1%). Required if
+            marketing_images is not present. Combined with
+            ``marketing_images`` and ``portrait_marketing_images`` the
+            maximum is 20.
+        portrait_marketing_images (Sequence[google.ads.googleads.v10.common.types.AdImageAsset]):
+            Portrait marketing image assets to be used in the ad. Valid
+            image types are GIF, JPEG, and PNG. The minimum size is
+            480x600 and the aspect ratio must be 4:5 (+-1%). Combined
+            with ``marketing_images`` and ``square_marketing_images``
+            the maximum is 20.
+        logo_images (Sequence[google.ads.googleads.v10.common.types.AdImageAsset]):
+            Logo image assets to be used in the ad. Valid
+            image types are GIF, JPEG, and PNG. The minimum
+            size is 128x128 and the aspect ratio must be
+            1:1(+-1%). At least 1 and max 5 logo images can
+            be specified.
+        headlines (Sequence[google.ads.googleads.v10.common.types.AdTextAsset]):
+            Headline text asset of the ad. Maximum
+            display width is 30. At least 1 and max 5
+            headlines can be specified.
+        descriptions (Sequence[google.ads.googleads.v10.common.types.AdTextAsset]):
+            The descriptive text of the ad. Maximum
+            display width is 90. At least 1 and max 5
+            descriptions can be specified.
+        business_name (str):
+            The Advertiser/brand name. Maximum display
+            width is 25. Required.
+
+            This field is a member of `oneof`_ ``_business_name``.
+        call_to_action_text (str):
+            Call to action text.
+
+            This field is a member of `oneof`_ ``_call_to_action_text``.
+        lead_form_only (bool):
+            Boolean flag that indicates if this ad must
+            be served with lead form.
+
+            This field is a member of `oneof`_ ``_lead_form_only``.
+    """
+
+    marketing_images = proto.RepeatedField(
+        proto.MESSAGE, number=1, message=ad_asset.AdImageAsset,
+    )
+    square_marketing_images = proto.RepeatedField(
+        proto.MESSAGE, number=2, message=ad_asset.AdImageAsset,
+    )
+    portrait_marketing_images = proto.RepeatedField(
+        proto.MESSAGE, number=3, message=ad_asset.AdImageAsset,
+    )
+    logo_images = proto.RepeatedField(
+        proto.MESSAGE, number=4, message=ad_asset.AdImageAsset,
+    )
+    headlines = proto.RepeatedField(
+        proto.MESSAGE, number=5, message=ad_asset.AdTextAsset,
+    )
+    descriptions = proto.RepeatedField(
+        proto.MESSAGE, number=6, message=ad_asset.AdTextAsset,
+    )
+    business_name = proto.Field(proto.STRING, number=7, optional=True,)
+    call_to_action_text = proto.Field(proto.STRING, number=8, optional=True,)
+    lead_form_only = proto.Field(proto.BOOL, number=9, optional=True,)
+
+
+class DiscoveryCarouselAdInfo(proto.Message):
+    r"""A discovery carousel ad.
+
+    Attributes:
+        business_name (str):
+            Required. The Advertiser/brand name.
+        logo_image (google.ads.googleads.v10.common.types.AdImageAsset):
+            Required. Logo image to be used in the ad.
+            The minimum size is 128x128 and the aspect ratio
+            must be 1:1(+-1%).
+        headline (google.ads.googleads.v10.common.types.AdTextAsset):
+            Required. Headline of the ad.
+        description (google.ads.googleads.v10.common.types.AdTextAsset):
+            Required. The descriptive text of the ad.
+        call_to_action_text (str):
+            Call to action text.
+        carousel_cards (Sequence[google.ads.googleads.v10.common.types.AdDiscoveryCarouselCardAsset]):
+            Required. Carousel cards that will display
+            with the ad. Min 2 max 10.
+    """
+
+    business_name = proto.Field(proto.STRING, number=1,)
+    logo_image = proto.Field(
+        proto.MESSAGE, number=2, message=ad_asset.AdImageAsset,
+    )
+    headline = proto.Field(
+        proto.MESSAGE, number=3, message=ad_asset.AdTextAsset,
+    )
+    description = proto.Field(
+        proto.MESSAGE, number=4, message=ad_asset.AdTextAsset,
+    )
+    call_to_action_text = proto.Field(proto.STRING, number=5,)
+    carousel_cards = proto.RepeatedField(
+        proto.MESSAGE, number=6, message=ad_asset.AdDiscoveryCarouselCardAsset,
+    )
 
 
 __all__ = tuple(sorted(__protobuf__.manifest))

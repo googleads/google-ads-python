@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-# Copyright 2020 Google LLC
+# Copyright 2022 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -16,6 +16,7 @@
 import proto  # type: ignore
 
 from google.ads.googleads.v10.common.types import offline_user_data
+from google.ads.googleads.v10.enums.types import conversion_environment_enum
 from google.rpc import status_pb2  # type: ignore
 
 
@@ -227,6 +228,9 @@ class ClickConversion(proto.Message):
             hashed_email and hashed_phone_number are supported for
             conversion uploads. The maximum number of user identifiers
             for each conversion is 5.
+        conversion_environment (google.ads.googleads.v10.enums.types.ConversionEnvironmentEnum.ConversionEnvironment):
+            The environment this conversion was recorded
+            on. e.g. App or Web.
     """
 
     gclid = proto.Field(proto.STRING, number=9, optional=True,)
@@ -246,6 +250,11 @@ class ClickConversion(proto.Message):
     cart_data = proto.Field(proto.MESSAGE, number=16, message="CartData",)
     user_identifiers = proto.RepeatedField(
         proto.MESSAGE, number=17, message=offline_user_data.UserIdentifier,
+    )
+    conversion_environment = proto.Field(
+        proto.ENUM,
+        number=20,
+        enum=conversion_environment_enum.ConversionEnvironmentEnum.ConversionEnvironment,
     )
 
 

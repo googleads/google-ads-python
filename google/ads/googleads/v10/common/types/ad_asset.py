@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-# Copyright 2020 Google LLC
+# Copyright 2022 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -30,6 +30,7 @@ __protobuf__ = proto.module(
         "AdImageAsset",
         "AdVideoAsset",
         "AdMediaBundleAsset",
+        "AdDiscoveryCarouselCardAsset",
     },
 )
 
@@ -108,6 +109,20 @@ class AdMediaBundleAsset(proto.Message):
     """
 
     asset = proto.Field(proto.STRING, number=2, optional=True,)
+
+
+class AdDiscoveryCarouselCardAsset(proto.Message):
+    r"""A discovery carousel card asset used inside an ad.
+
+    Attributes:
+        asset (str):
+            The Asset resource name of this discovery
+            carousel card.
+
+            This field is a member of `oneof`_ ``_asset``.
+    """
+
+    asset = proto.Field(proto.STRING, number=1, optional=True,)
 
 
 __all__ = tuple(sorted(__protobuf__.manifest))

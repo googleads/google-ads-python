@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-# Copyright 2020 Google LLC
+# Copyright 2022 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -59,6 +59,8 @@ class AdTypeEnum(proto.Message):
         CALL_AD = 32
         APP_PRE_REGISTRATION_AD = 33
         IN_FEED_VIDEO_AD = 34
+        DISCOVERY_MULTI_ASSET_AD = 35
+        DISCOVERY_CAROUSEL_AD = 36
 
 
 __all__ = tuple(sorted(__protobuf__.manifest))

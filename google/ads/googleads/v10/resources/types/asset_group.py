@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-# Copyright 2020 Google LLC
+# Copyright 2022 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -27,9 +27,9 @@ __protobuf__ = proto.module(
 
 class AssetGroup(proto.Message):
     r"""An asset group.
-    AssetGroupAsset will be used to link an asset to the asset
-    group. AssetGroupHint will be used to associate a hint to an
-    asset group.
+    AssetGroupAsset is used to link an asset to the asset group.
+    AssetGroupSignal is used to associate a signal to an asset
+    group.
 
     Attributes:
         resource_name (str):
@@ -51,12 +51,12 @@ class AssetGroup(proto.Message):
         final_urls (Sequence[str]):
             A list of final URLs after all cross domain
             redirects. In performance max, by default, the
-            urls will be eligible for expansion unless opted
+            urls are eligible for expansion unless opted
             out.
         final_mobile_urls (Sequence[str]):
             A list of final mobile URLs after all cross
             domain redirects. In performance max, by
-            default, the urls will be eligible for expansion
+            default, the urls are eligible for expansion
             unless opted out.
         status (google.ads.googleads.v10.enums.types.AssetGroupStatusEnum.AssetGroupStatus):
             The status of the asset group.

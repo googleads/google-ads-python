@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-# Copyright 2020 Google LLC
+# Copyright 2022 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -245,6 +245,10 @@ class ConversionTrackingSetting(proto.Message):
             cross-account conversion tracking, this value is
             inherited from the manager. This field is
             read-only.
+        google_ads_conversion_customer (str):
+            Output only. The resource name of the
+            customer where conversions are created and
+            managed. This field is read-only.
     """
 
     conversion_tracking_id = proto.Field(proto.INT64, number=3, optional=True,)
@@ -258,6 +262,7 @@ class ConversionTrackingSetting(proto.Message):
         enum=conversion_tracking_status_enum.ConversionTrackingStatusEnum.ConversionTrackingStatus,
     )
     enhanced_conversions_for_leads_enabled = proto.Field(proto.BOOL, number=7,)
+    google_ads_conversion_customer = proto.Field(proto.STRING, number=8,)
 
 
 class RemarketingSetting(proto.Message):
@@ -265,7 +270,7 @@ class RemarketingSetting(proto.Message):
 
     Attributes:
         google_global_site_tag (str):
-            Output only. The Google global site tag.
+            Output only. The Google tag.
 
             This field is a member of `oneof`_ ``_google_global_site_tag``.
     """

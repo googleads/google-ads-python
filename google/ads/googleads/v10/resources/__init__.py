@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-# Copyright 2020 Google LLC
+# Copyright 2022 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -76,6 +76,7 @@ __all__ = (
     "CampaignExperiment",
     "CampaignExtensionSetting",
     "CampaignFeed",
+    "CampaignGroup",
     "CampaignLabel",
     "CampaignSharedSet",
     "CampaignSimulation",
@@ -139,6 +140,7 @@ __all__ = (
     "GoogleAdsField",
     "GoogleAdsLinkIdentifier",
     "GroupPlacementView",
+    "HotelCenterLinkIdentifier",
     "HotelGroupView",
     "HotelPerformanceView",
     "HotelReconciliation",
@@ -156,6 +158,8 @@ __all__ = (
     "Label",
     "LandingPageView",
     "LanguageConstant",
+    "LeadFormSubmissionData",
+    "LeadFormSubmissionField",
     "LifeEvent",
     "ListingGroupFilterDimension",
     "LocationView",

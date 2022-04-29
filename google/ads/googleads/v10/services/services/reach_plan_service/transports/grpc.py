@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-# Copyright 2020 Google LLC
+# Copyright 2022 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -246,8 +246,8 @@ class ReachPlanServiceGrpcTransport(ReachPlanServiceTransport):
     ]:
         r"""Return a callable for the list plannable locations method over gRPC.
 
-        Returns the list of plannable locations (for example, countries
-        & DMAs).
+        Returns the list of plannable locations (for example,
+        countries).
 
         List of thrown errors: `AuthenticationError <>`__
         `AuthorizationError <>`__ `HeaderError <>`__

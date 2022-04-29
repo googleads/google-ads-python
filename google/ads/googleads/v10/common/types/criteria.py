@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-# Copyright 2020 Google LLC
+# Copyright 2022 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -74,6 +74,10 @@ __protobuf__ = proto.module(
         "ProductCustomAttributeInfo",
         "ProductItemIdInfo",
         "ProductTypeInfo",
+        "ProductGroupingInfo",
+        "ProductLabelsInfo",
+        "ProductLegacyConditionInfo",
+        "ProductTypeFullInfo",
         "UnknownListingDimensionInfo",
         "HotelDateSelectionTypeInfo",
         "HotelAdvanceBookingWindowInfo",
@@ -349,6 +353,22 @@ class ListingDimensionInfo(proto.Message):
             Type of a product offer.
 
             This field is a member of `oneof`_ ``dimension``.
+        product_grouping (google.ads.googleads.v10.common.types.ProductGroupingInfo):
+            Grouping of a product offer.
+
+            This field is a member of `oneof`_ ``dimension``.
+        product_labels (google.ads.googleads.v10.common.types.ProductLabelsInfo):
+            Labels of a product offer.
+
+            This field is a member of `oneof`_ ``dimension``.
+        product_legacy_condition (google.ads.googleads.v10.common.types.ProductLegacyConditionInfo):
+            Legacy condition of a product offer.
+
+            This field is a member of `oneof`_ ``dimension``.
+        product_type_full (google.ads.googleads.v10.common.types.ProductTypeFullInfo):
+            Full type of a product offer.
+
+            This field is a member of `oneof`_ ``dimension``.
         unknown_listing_dimension (google.ads.googleads.v10.common.types.UnknownListingDimensionInfo):
             Unknown dimension. Set when no other listing
             dimension is set.
@@ -415,6 +435,30 @@ class ListingDimensionInfo(proto.Message):
     )
     product_type = proto.Field(
         proto.MESSAGE, number=12, oneof="dimension", message="ProductTypeInfo",
+    )
+    product_grouping = proto.Field(
+        proto.MESSAGE,
+        number=17,
+        oneof="dimension",
+        message="ProductGroupingInfo",
+    )
+    product_labels = proto.Field(
+        proto.MESSAGE,
+        number=18,
+        oneof="dimension",
+        message="ProductLabelsInfo",
+    )
+    product_legacy_condition = proto.Field(
+        proto.MESSAGE,
+        number=19,
+        oneof="dimension",
+        message="ProductLegacyConditionInfo",
+    )
+    product_type_full = proto.Field(
+        proto.MESSAGE,
+        number=20,
+        oneof="dimension",
+        message="ProductTypeFullInfo",
     )
     unknown_listing_dimension = proto.Field(
         proto.MESSAGE,
@@ -631,6 +675,62 @@ class ProductTypeInfo(proto.Message):
         number=2,
         enum=product_type_level.ProductTypeLevelEnum.ProductTypeLevel,
     )
+
+
+class ProductGroupingInfo(proto.Message):
+    r"""Grouping of a product offer. This listing dimension is
+    deprecated and it is supported only in Display campaigns.
+
+    Attributes:
+        value (str):
+            String value of the product grouping.
+
+            This field is a member of `oneof`_ ``_value``.
+    """
+
+    value = proto.Field(proto.STRING, number=1, optional=True,)
+
+
+class ProductLabelsInfo(proto.Message):
+    r"""Labels of a product offer. This listing dimension is
+    deprecated and it is supported only in Display campaigns.
+
+    Attributes:
+        value (str):
+            String value of the product labels.
+
+            This field is a member of `oneof`_ ``_value``.
+    """
+
+    value = proto.Field(proto.STRING, number=1, optional=True,)
+
+
+class ProductLegacyConditionInfo(proto.Message):
+    r"""Legacy condition of a product offer. This listing dimension
+    is deprecated and it is supported only in Display campaigns.
+
+    Attributes:
+        value (str):
+            String value of the product legacy condition.
+
+            This field is a member of `oneof`_ ``_value``.
+    """
+
+    value = proto.Field(proto.STRING, number=1, optional=True,)
+
+
+class ProductTypeFullInfo(proto.Message):
+    r"""Full type of a product offer. This listing dimension is
+    deprecated and it is supported only in Display campaigns.
+
+    Attributes:
+        value (str):
+            String value of the product full type.
+
+            This field is a member of `oneof`_ ``_value``.
+    """
+
+    value = proto.Field(proto.STRING, number=1, optional=True,)
 
 
 class UnknownListingDimensionInfo(proto.Message):

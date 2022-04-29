@@ -103,12 +103,21 @@ def main(client, customer_id):
         elif resource_type == "ASSET":
             old_resource = event.old_resource.asset
             new_resource = event.new_resource.asset
+        elif resource_type == "ASSET_SET":
+            old_resource = event.old_resource.asset_set
+            new_resource = event.new_resource.asset_set
+        elif resource_type == "ASSET_SET_ASSET":
+            old_resource = event.old_resource.asset_set_asset
+            new_resource = event.new_resource.asset_set_asset
         elif resource_type == "CAMPAIGN":
             old_resource = event.old_resource.campaign
             new_resource = event.new_resource.campaign
         elif resource_type == "CAMPAIGN_ASSET":
             old_resource = event.old_resource.campaign_asset
             new_resource = event.new_resource.campaign_asset
+        elif resource_type == "CAMPAIGN_ASSET_SET":
+            old_resource = event.old_resource.campaign_asset_set
+            new_resource = event.new_resource.campaign_asset_set
         elif resource_type == "CAMPAIGN_BUDGET":
             old_resource = event.old_resource.campaign_budget
             new_resource = event.new_resource.campaign_budget

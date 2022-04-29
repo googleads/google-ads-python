@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-# Copyright 2020 Google LLC
+# Copyright 2022 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -917,6 +917,22 @@ class BatchJobServiceClient(metaclass=BatchJobServiceClientMeta):
         """Parses a campaign_feed path into its component segments."""
         m = re.match(
             r"^customers/(?P<customer_id>.+?)/campaignFeeds/(?P<campaign_id>.+?)~(?P<feed_id>.+?)$",
+            path,
+        )
+        return m.groupdict() if m else {}
+
+    @staticmethod
+    def campaign_group_path(customer_id: str, campaign_group_id: str,) -> str:
+        """Returns a fully-qualified campaign_group string."""
+        return "customers/{customer_id}/campaignGroups/{campaign_group_id}".format(
+            customer_id=customer_id, campaign_group_id=campaign_group_id,
+        )
+
+    @staticmethod
+    def parse_campaign_group_path(path: str) -> Dict[str, str]:
+        """Parses a campaign_group path into its component segments."""
+        m = re.match(
+            r"^customers/(?P<customer_id>.+?)/campaignGroups/(?P<campaign_group_id>.+?)$",
             path,
         )
         return m.groupdict() if m else {}

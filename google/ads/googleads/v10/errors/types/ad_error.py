@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-# Copyright 2020 Google LLC
+# Copyright 2022 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -181,6 +181,8 @@ class AdErrorEnum(proto.Message):
         INVALID_CUSTOMIZER_ATTRIBUTE_NAME = 151
         STORE_MISMATCH = 152
         MISSING_REQUIRED_IMAGE_ASPECT_RATIO = 153
+        MISMATCHED_ASPECT_RATIOS = 155
+        DUPLICATE_IMAGE_ACROSS_CAROUSEL_CARDS = 156
 
 
 __all__ = tuple(sorted(__protobuf__.manifest))

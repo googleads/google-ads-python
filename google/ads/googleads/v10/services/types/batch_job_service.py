@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-# Copyright 2020 Google LLC
+# Copyright 2022 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -63,6 +63,11 @@ class MutateBatchJobRequest(proto.Message):
 class BatchJobOperation(proto.Message):
     r"""A single operation on a batch job.
 
+    This message has `oneof`_ fields (mutually exclusive fields).
+    For each oneof, at most one member field can be set at the same time.
+    Setting any member of the oneof automatically clears all other
+    members.
+
     .. _oneof: https://proto-plus-python.readthedocs.io/en/stable/fields.html#oneofs-mutually-exclusive-fields
 
     Attributes:
@@ -71,11 +76,20 @@ class BatchJobOperation(proto.Message):
             expected for the new batch job.
 
             This field is a member of `oneof`_ ``operation``.
+        remove (str):
+            Remove operation: The batch job must not have been run. A
+            resource name for the removed batch job is expected, in this
+            format:
+
+            ``customers/{customer_id}/batchJobs/{batch_job_id}``
+
+            This field is a member of `oneof`_ ``operation``.
     """
 
     create = proto.Field(
         proto.MESSAGE, number=1, oneof="operation", message=batch_job.BatchJob,
     )
+    remove = proto.Field(proto.STRING, number=4, oneof="operation",)
 
 
 class MutateBatchJobResponse(proto.Message):

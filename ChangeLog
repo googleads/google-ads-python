@@ -1,3 +1,8 @@
+* 16.0.0
+- Add support for fog Google Ads API v10_1.
+- Remove support for Google Ads API v8.
+- Replace authentication examples with one file generate_user_credentials.py.
+
 * 15.1.1
 - Bump protobuf dependency to 3.20.0 excluding 3.18.* and 3.19.*.
 - Remove duplicate google-api-core dependency.

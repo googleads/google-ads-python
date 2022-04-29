@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-# Copyright 2020 Google LLC
+# Copyright 2022 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -68,11 +68,10 @@ class ListPlannableLocationsResponse(proto.Message):
 
     Attributes:
         plannable_locations (Sequence[google.ads.googleads.v10.services.types.PlannableLocation]):
-            The list of locations available for planning
-            (Countries, DMAs, sub-countries).
-            For locations like Countries and DMAs see
+            The list of locations available for planning.
+            See
             https://developers.google.com/google-ads/api/reference/data/geotargets
-            for more information.
+            for sample locations.
     """
 
     plannable_locations = proto.RepeatedField(
@@ -81,8 +80,7 @@ class ListPlannableLocationsResponse(proto.Message):
 
 
 class PlannableLocation(proto.Message):
-    r"""A plannable location: a country, a DMA, a metro region, a tv
-    region, a province.
+    r"""A plannable location: country, metro region, province, etc.
 
     Attributes:
         id (str):
@@ -90,13 +88,13 @@ class PlannableLocation(proto.Message):
 
             This field is a member of `oneof`_ ``_id``.
         name (str):
-            The unique location name in english.
+            The unique location name in English.
 
             This field is a member of `oneof`_ ``_name``.
         parent_country_id (int):
-            The parent country, not present if location is a country. If
-            present will always be a GeoTargetConstant ID. Additional
-            information, such as country name is provided by
+            The parent country (not present if location is a country).
+            If present, will always be a GeoTargetConstant ID.
+            Additional information such as country name is provided by
             [ReachPlanService.ListPlannableLocations][google.ads.googleads.v10.services.ReachPlanService.ListPlannableLocations]
             or [GoogleAdsService.Search/SearchStream][].
 
@@ -127,7 +125,7 @@ class ListPlannableProductsRequest(proto.Message):
     Attributes:
         plannable_location_id (str):
             Required. The ID of the selected location for planning. To
-            list the available plannable location ids use
+            list the available plannable location IDs use
             [ReachPlanService.ListPlannableLocations][google.ads.googleads.v10.services.ReachPlanService.ListPlannableLocations].
     """
 
@@ -153,9 +151,10 @@ class ProductMetadata(proto.Message):
 
     Attributes:
         plannable_product_code (str):
-            The code associated with the ad product. E.g. BUMPER,
-            TRUEVIEW_IN_STREAM To list the available plannable product
-            codes use ListPlannableProducts.
+            The code associated with the ad product (for example:
+            BUMPER, TRUEVIEW_IN_STREAM). To list the available plannable
+            product codes use
+            [ReachPlanService.ListPlannableProducts][google.ads.googleads.v10.services.ReachPlanService.ListPlannableProducts].
 
             This field is a member of `oneof`_ ``_plannable_product_code``.
         plannable_product_name (str):
@@ -187,7 +186,8 @@ class PlannableTargeting(proto.Message):
             Targetable devices for the ad product. TABLET device
             targeting is automatically applied to reported metrics when
             MOBILE targeting is selected for CPM_MASTHEAD,
-            GOOGLE_PREFERRED_BUMPER and GOOGLE_PREFERRED_SHORT products.
+            GOOGLE_PREFERRED_BUMPER, and GOOGLE_PREFERRED_SHORT
+            products.
         networks (Sequence[google.ads.googleads.v10.enums.types.ReachPlanNetworkEnum.ReachPlanNetwork]):
             Targetable networks for the ad product.
     """
@@ -218,7 +218,7 @@ class GenerateProductMixIdeasRequest(proto.Message):
         customer_id (str):
             Required. The ID of the customer.
         plannable_location_id (str):
-            Required. The ID of the location, this is one of the ids
+            Required. The ID of the location, this is one of the IDs
             returned by
             [ReachPlanService.ListPlannableLocations][google.ads.googleads.v10.services.ReachPlanService.ListPlannableLocations].
         currency_code (str):
@@ -265,7 +265,7 @@ class Preferences(proto.Message):
 
             This field is a member of `oneof`_ ``_top_content_only``.
         has_guaranteed_price (bool):
-            True if the price guaranteed. The cost of
+            True if the price is guaranteed. The cost of
             serving the ad is agreed upfront and not subject
             to an auction. If not set, default is any value.
 
@@ -335,23 +335,23 @@ class GenerateReachForecastRequest(proto.Message):
         campaign_duration (google.ads.googleads.v10.services.types.CampaignDuration):
             Required. Campaign duration.
         cookie_frequency_cap (int):
-            Desired cookie frequency cap that will be applied to each
-            planned product. This is equivalent to the frequency cap
-            exposed in Google Ads when creating a campaign, it
-            represents the maximum number of times an ad can be shown to
-            the same user. If not specified no cap is applied.
+            Desired cookie frequency cap to be applied to each planned
+            product. This is equivalent to the frequency cap exposed in
+            Google Ads when creating a campaign, it represents the
+            maximum number of times an ad can be shown to the same user.
+            If not specified, no cap is applied.
 
             This field is deprecated in v4 and will eventually be
             removed. Please use cookie_frequency_cap_setting instead.
 
             This field is a member of `oneof`_ ``_cookie_frequency_cap``.
         cookie_frequency_cap_setting (google.ads.googleads.v10.services.types.FrequencyCap):
-            Desired cookie frequency cap that will be applied to each
-            planned product. This is equivalent to the frequency cap
-            exposed in Google Ads when creating a campaign, it
-            represents the maximum number of times an ad can be shown to
-            the same user during a specified time interval. If not
-            specified, a default of 0 (no cap) is applied.
+            Desired cookie frequency cap to be applied to each planned
+            product. This is equivalent to the frequency cap exposed in
+            Google Ads when creating a campaign, it represents the
+            maximum number of times an ad can be shown to the same user
+            during a specified time interval. If not specified, a
+            default of 0 (no cap) is applied.
 
             This field replaces the deprecated cookie_frequency_cap
             field.
@@ -529,16 +529,16 @@ class PlannedProduct(proto.Message):
     Attributes:
         plannable_product_code (str):
             Required. Selected product for planning. The code associated
-            with the ad product. E.g. Trueview, Bumper To list the
-            available plannable product codes use
+            with the ad product (for example: Trueview, Bumper). To list
+            the available plannable product codes use
             [ReachPlanService.ListPlannableProducts][google.ads.googleads.v10.services.ReachPlanService.ListPlannableProducts].
 
             This field is a member of `oneof`_ ``_plannable_product_code``.
         budget_micros (int):
             Required. Maximum budget allocation in micros for the
             selected product. The value is specified in the selected
-            planning currency_code. E.g. 1 000 000$ = 1 000 000 000 000
-            micros.
+            planning currency_code. For example: 1 000 000$ = 1 000 000
+            000 000 micros.
 
             This field is a member of `oneof`_ ``_budget_micros``.
     """

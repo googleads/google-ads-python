@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-# Copyright 2020 Google LLC
+# Copyright 2022 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -51,6 +51,7 @@ __protobuf__ = proto.module(
         "TextAsset",
         "LeadFormAsset",
         "LeadFormField",
+        "LeadFormCustomQuestionField",
         "LeadFormSingleChoiceAnswers",
         "LeadFormDeliveryMethod",
         "WebhookDelivery",
@@ -67,6 +68,14 @@ __protobuf__ = proto.module(
         "PriceAsset",
         "PriceOffering",
         "CallToActionAsset",
+        "DynamicRealEstateAsset",
+        "DynamicCustomAsset",
+        "DynamicHotelsAndRentalsAsset",
+        "DynamicFlightsAsset",
+        "DiscoveryCarouselCardAsset",
+        "DynamicTravelAsset",
+        "DynamicLocalAsset",
+        "DynamicJobsAsset",
     },
 )
 
@@ -211,6 +220,8 @@ class LeadFormAsset(proto.Message):
             This field is a member of `oneof`_ ``_post_submit_description``.
         fields (Sequence[google.ads.googleads.v10.common.types.LeadFormField]):
             Ordered list of input fields.
+        custom_question_fields (Sequence[google.ads.googleads.v10.common.types.LeadFormCustomQuestionField]):
+            Ordered list of custom question fields.
         delivery_methods (Sequence[google.ads.googleads.v10.common.types.LeadFormDeliveryMethod]):
             Configured methods for collected lead data to
             be delivered to advertiser. Only one method
@@ -251,6 +262,9 @@ class LeadFormAsset(proto.Message):
     )
     fields = proto.RepeatedField(
         proto.MESSAGE, number=8, message="LeadFormField",
+    )
+    custom_question_fields = proto.RepeatedField(
+        proto.MESSAGE, number=23, message="LeadFormCustomQuestionField",
     )
     delivery_methods = proto.RepeatedField(
         proto.MESSAGE, number=9, message="LeadFormDeliveryMethod",
@@ -295,6 +309,32 @@ class LeadFormField(proto.Message):
         number=1,
         enum=lead_form_field_user_input_type.LeadFormFieldUserInputTypeEnum.LeadFormFieldUserInputType,
     )
+    single_choice_answers = proto.Field(
+        proto.MESSAGE,
+        number=2,
+        oneof="answers",
+        message="LeadFormSingleChoiceAnswers",
+    )
+
+
+class LeadFormCustomQuestionField(proto.Message):
+    r"""One custom question input field instance within a form.
+
+    .. _oneof: https://proto-plus-python.readthedocs.io/en/stable/fields.html#oneofs-mutually-exclusive-fields
+
+    Attributes:
+        custom_question_text (str):
+            The exact custom question field text (e.g.
+            "Do you own a car?").
+        single_choice_answers (google.ads.googleads.v10.common.types.LeadFormSingleChoiceAnswers):
+            Answer configuration for a single choice
+            question. Minimum of 2 answers and maximum of 12
+            allowed.
+
+            This field is a member of `oneof`_ ``answers``.
+    """
+
+    custom_question_text = proto.Field(proto.STRING, number=1,)
     single_choice_answers = proto.Field(
         proto.MESSAGE,
         number=2,
@@ -828,6 +868,605 @@ class CallToActionAsset(proto.Message):
         number=1,
         enum=gage_call_to_action_type.CallToActionTypeEnum.CallToActionType,
     )
+
+
+class DynamicRealEstateAsset(proto.Message):
+    r"""A dynamic real estate asset.
+
+    Attributes:
+        listing_id (str):
+            Required. Listing ID which can be any
+            sequence of letters and digits, and must be
+            unique and match the values of remarketing tag.
+            Required.
+        listing_name (str):
+            Required. Listing name, e.g. Boulevard
+            Bungalow. Required.
+        city_name (str):
+            City name, e.g. Mountain View, California.
+        description (str):
+            Description, e.g. 3 beds, 2 baths, 1568 sq.
+            ft.
+        address (str):
+            Address which can be specified in one of the
+            following formats. (1) City, state, code,
+            country, e.g. Mountain View, CA, USA. (2) Full
+            address, e.g. 123 Boulevard St, Mountain View,
+            CA 94043. (3) Latitude-longitude in the DDD
+            format, e.g. 41.40338, 2.17403
+        price (str):
+            Price which can be number followed by the
+            alphabetic currency code, ISO 4217 standard. Use
+            '.' as the decimal mark. e.g. 200,000.00 USD.
+        image_url (str):
+            Image URL, e.g.
+            http://www.example.com/image.png. The image will
+            not be uploaded as image asset.
+        property_type (str):
+            Property type, e.g. House.
+        listing_type (str):
+            Listing type, e.g. For sale.
+        contextual_keywords (Sequence[str]):
+            Contextual keywords, e.g. For sale; Houses
+            for sale.
+        formatted_price (str):
+            Formatted price which can be any characters.
+            If set, this attribute will be used instead of
+            'price', e.g. Starting at $200,000.00.
+        android_app_link (str):
+            Android deep link, e.g.
+            android-app://com.example.android/http/example.com/gizmos?1234.
+        ios_app_link (str):
+            iOS deep link, e.g.
+            exampleApp://content/page.
+        ios_app_store_id (int):
+            iOS app store ID. This is used to check if the user has the
+            app installed on their device before deep linking. If this
+            field is set, then the ios_app_link field must also be
+            present.
+        similar_listing_ids (Sequence[str]):
+            Similar listing IDs.
+    """
+
+    listing_id = proto.Field(proto.STRING, number=1,)
+    listing_name = proto.Field(proto.STRING, number=2,)
+    city_name = proto.Field(proto.STRING, number=3,)
+    description = proto.Field(proto.STRING, number=4,)
+    address = proto.Field(proto.STRING, number=5,)
+    price = proto.Field(proto.STRING, number=6,)
+    image_url = proto.Field(proto.STRING, number=7,)
+    property_type = proto.Field(proto.STRING, number=8,)
+    listing_type = proto.Field(proto.STRING, number=9,)
+    contextual_keywords = proto.RepeatedField(proto.STRING, number=10,)
+    formatted_price = proto.Field(proto.STRING, number=11,)
+    android_app_link = proto.Field(proto.STRING, number=12,)
+    ios_app_link = proto.Field(proto.STRING, number=13,)
+    ios_app_store_id = proto.Field(proto.INT64, number=14,)
+    similar_listing_ids = proto.RepeatedField(proto.STRING, number=15,)
+
+
+class DynamicCustomAsset(proto.Message):
+    r"""A dynamic custom asset.
+
+    Attributes:
+        id (str):
+            Required. ID which can be any sequence of
+            letters and digits, and must be unique and match
+            the values of remarketing tag, e.g. sedan.
+            Required.
+        id2 (str):
+            ID2 which can be any sequence of letters and
+            digits, e.g. red. ID sequence (ID + ID2) must be
+            unique.
+        item_title (str):
+            Required. Item title, e.g. Mid-size sedan.
+            Required.
+        item_subtitle (str):
+            Item subtitle, e.g. At your Mountain View
+            dealership.
+        item_description (str):
+            Item description, e.g. Best selling mid-size
+            car.
+        item_address (str):
+            Item address which can be specified in one of
+            the following formats. (1) City, state, code,
+            country, e.g. Mountain View, CA, USA. (2) Full
+            address, e.g. 123 Boulevard St, Mountain View,
+            CA 94043. (3) Latitude-longitude in the DDD
+            format, e.g. 41.40338, 2.17403
+        item_category (str):
+            Item category, e.g. Sedans.
+        price (str):
+            Price which can be number followed by the
+            alphabetic currency code, ISO 4217 standard. Use
+            '.' as the decimal mark, e.g. 20,000.00 USD.
+        sale_price (str):
+            Sale price which can be number followed by
+            the alphabetic currency code, ISO 4217 standard.
+            Use '.' as the decimal mark, e.g. 15,000.00 USD.
+            Must be less than the 'price' field.
+        formatted_price (str):
+            Formatted price which can be any characters.
+            If set, this attribute will be used instead of
+            'price', e.g. Starting at $20,000.00.
+        formatted_sale_price (str):
+            Formatted sale price which can be any
+            characters. If set, this attribute will be used
+            instead of 'sale price', e.g. On sale for
+            $15,000.00.
+        image_url (str):
+            Image URL, e.g.
+            http://www.example.com/image.png. The image will
+            not be uploaded as image asset.
+        contextual_keywords (Sequence[str]):
+            Contextual keywords, e.g. Sedans, 4 door
+            sedans.
+        android_app_link (str):
+            Android deep link, e.g.
+            android-app://com.example.android/http/example.com/gizmos?1234.
+        ios_app_link (str):
+            iOS deep link, e.g.
+            exampleApp://content/page.
+        ios_app_store_id (int):
+            iOS app store ID. This is used to check if the user has the
+            app installed on their device before deep linking. If this
+            field is set, then the ios_app_link field must also be
+            present.
+        similar_ids (Sequence[str]):
+            Similar IDs.
+    """
+
+    id = proto.Field(proto.STRING, number=1,)
+    id2 = proto.Field(proto.STRING, number=2,)
+    item_title = proto.Field(proto.STRING, number=3,)
+    item_subtitle = proto.Field(proto.STRING, number=4,)
+    item_description = proto.Field(proto.STRING, number=5,)
+    item_address = proto.Field(proto.STRING, number=6,)
+    item_category = proto.Field(proto.STRING, number=7,)
+    price = proto.Field(proto.STRING, number=8,)
+    sale_price = proto.Field(proto.STRING, number=9,)
+    formatted_price = proto.Field(proto.STRING, number=10,)
+    formatted_sale_price = proto.Field(proto.STRING, number=11,)
+    image_url = proto.Field(proto.STRING, number=12,)
+    contextual_keywords = proto.RepeatedField(proto.STRING, number=13,)
+    android_app_link = proto.Field(proto.STRING, number=14,)
+    ios_app_link = proto.Field(proto.STRING, number=16,)
+    ios_app_store_id = proto.Field(proto.INT64, number=17,)
+    similar_ids = proto.RepeatedField(proto.STRING, number=15,)
+
+
+class DynamicHotelsAndRentalsAsset(proto.Message):
+    r"""A dynamic hotels and rentals asset.
+
+    Attributes:
+        property_id (str):
+            Required. Property ID which can be any
+            sequence of letters and digits, and must be
+            unique and match the values of remarketing tag.
+            Required.
+        property_name (str):
+            Required. Property name, e.g. Mountain View
+            Hotel. Required.
+        image_url (str):
+            Image URL, e.g.
+            http://www.example.com/image.png. The image will
+            not be uploaded as image asset.
+        destination_name (str):
+            Destination name, e.g. Downtown Mountain
+            View.
+        description (str):
+            Description, e.g. Close to SJC Airport.
+        price (str):
+            Price which can be number followed by the
+            alphabetic currency code, ISO 4217 standard. Use
+            '.' as the decimal mark, e.g. 100.00 USD.
+        sale_price (str):
+            ISO 4217 standard. Use '.' as the decimal
+            mark, e.g. 80.00 USD. Must be less than the
+            'price' field.
+        star_rating (int):
+            Star rating. Must be a number between 1–5,
+            inclusive.
+        category (str):
+            Category, e.g. Hotel suite.
+        contextual_keywords (Sequence[str]):
+            Contextual keywords, e.g. Mountain View
+            "Hotels", South Bay hotels.
+        address (str):
+            Address which can be specified in one of the
+            following formats. (1) City, state, code,
+            country, e.g. Mountain View, CA, USA. (2) Full
+            address, e.g. 123 Boulevard St, Mountain View,
+            CA 94043. (3) Latitude-longitude in the DDD
+            format, e.g. 41.40338, 2.17403
+        android_app_link (str):
+            Android deep link, e.g.
+            android-app://com.example.android/http/example.com/gizmos?1234.
+        ios_app_link (str):
+            iOS deep link, e.g.
+            exampleApp://content/page.
+        ios_app_store_id (int):
+            iOS app store ID. This is used to check if the user has the
+            app installed on their device before deep linking. If this
+            field is set, then the ios_app_link field must also be
+            present.
+        formatted_price (str):
+            Formatted price which can be any characters.
+            If set, this attribute will be used instead of
+            'price', e.g. Starting at $100.00.
+        formatted_sale_price (str):
+            Formatted sale price which can be any
+            characters. If set, this attribute will be used
+            instead of 'sale price', e.g. On sale for
+            $80.00.
+        similar_property_ids (Sequence[str]):
+            Similar property IDs.
+    """
+
+    property_id = proto.Field(proto.STRING, number=1,)
+    property_name = proto.Field(proto.STRING, number=2,)
+    image_url = proto.Field(proto.STRING, number=3,)
+    destination_name = proto.Field(proto.STRING, number=4,)
+    description = proto.Field(proto.STRING, number=5,)
+    price = proto.Field(proto.STRING, number=6,)
+    sale_price = proto.Field(proto.STRING, number=7,)
+    star_rating = proto.Field(proto.INT64, number=8,)
+    category = proto.Field(proto.STRING, number=9,)
+    contextual_keywords = proto.RepeatedField(proto.STRING, number=10,)
+    address = proto.Field(proto.STRING, number=11,)
+    android_app_link = proto.Field(proto.STRING, number=12,)
+    ios_app_link = proto.Field(proto.STRING, number=13,)
+    ios_app_store_id = proto.Field(proto.INT64, number=14,)
+    formatted_price = proto.Field(proto.STRING, number=15,)
+    formatted_sale_price = proto.Field(proto.STRING, number=16,)
+    similar_property_ids = proto.RepeatedField(proto.STRING, number=17,)
+
+
+class DynamicFlightsAsset(proto.Message):
+    r"""A dynamic flights asset.
+
+    Attributes:
+        destination_id (str):
+            Required. Destination ID which can be any
+            sequence of letters and digits, and must be
+            unique and match the values of remarketing tag.
+            Required.
+        origin_id (str):
+            Origin ID which can be any sequence of
+            letters and digits. The ID sequence (destination
+            ID + origin ID) must be unique.
+        flight_description (str):
+            Required. Flight description, e.g. Book your
+            ticket. Required.
+        image_url (str):
+            Image URL, e.g.
+            http://www.example.com/image.png. The image will
+            not be uploaded as image asset.
+        destination_name (str):
+            Destination name, e.g. Paris.
+        origin_name (str):
+            Origin name, e.g. London.
+        flight_price (str):
+            Flight price which can be number followed by
+            the alphabetic currency code, ISO 4217 standard.
+            Use '.' as the decimal mark. e.g. 100.00 USD.
+        flight_sale_price (str):
+            Flight sale price which can be number followed by the
+            alphabetic currency code, ISO 4217 standard. Use '.' as the
+            decimal mark, e.g. 80.00 USD. Must be less than the
+            'flight_price' field.
+        formatted_price (str):
+            Formatted price which can be any characters.
+            If set, this attribute will be used instead of
+            'price', e.g. Starting at $100.00.
+        formatted_sale_price (str):
+            Formatted sale price which can be any
+            characters. If set, this attribute will be used
+            instead of 'sale price', e.g. On sale for
+            $80.00.
+        android_app_link (str):
+            Android deep link, e.g.
+            android-app://com.example.android/http/example.com/gizmos?1234.
+        ios_app_link (str):
+            iOS deep link, e.g.
+            exampleApp://content/page.
+        ios_app_store_id (int):
+            iOS app store ID. This is used to check if the user has the
+            app installed on their device before deep linking. If this
+            field is set, then the ios_app_link field must also be
+            present.
+        similar_destination_ids (Sequence[str]):
+            Similar destination IDs, e.g. PAR,LON.
+        custom_mapping (str):
+            A custom field which can be multiple key to values mapping
+            separated by delimiters (",", "|" and ":"), in the forms of
+            "<KEY_1>: <VALUE_1>, <VALUE_2>, ... ,<VALUE_N> \| <KEY_2>:
+            <VALUE_1>, ... ,<VALUE_N> \| ... \| <KEY_N>: <VALUE_1>, ...
+            ,<VALUE_N>" e.g. wifi: most \| aircraft: 320, 77W \|
+            flights: 42 \| legroom: 32".
+    """
+
+    destination_id = proto.Field(proto.STRING, number=1,)
+    origin_id = proto.Field(proto.STRING, number=2,)
+    flight_description = proto.Field(proto.STRING, number=3,)
+    image_url = proto.Field(proto.STRING, number=4,)
+    destination_name = proto.Field(proto.STRING, number=5,)
+    origin_name = proto.Field(proto.STRING, number=6,)
+    flight_price = proto.Field(proto.STRING, number=7,)
+    flight_sale_price = proto.Field(proto.STRING, number=8,)
+    formatted_price = proto.Field(proto.STRING, number=9,)
+    formatted_sale_price = proto.Field(proto.STRING, number=10,)
+    android_app_link = proto.Field(proto.STRING, number=11,)
+    ios_app_link = proto.Field(proto.STRING, number=12,)
+    ios_app_store_id = proto.Field(proto.INT64, number=13,)
+    similar_destination_ids = proto.RepeatedField(proto.STRING, number=14,)
+    custom_mapping = proto.Field(proto.STRING, number=15,)
+
+
+class DiscoveryCarouselCardAsset(proto.Message):
+    r"""A Discovery Carousel Card asset.
+
+    Attributes:
+        marketing_image_asset (str):
+            Asset resource name of the associated 1.91:1
+            marketing image. This and/or square marketing
+            image asset is required.
+        square_marketing_image_asset (str):
+            Asset resource name of the associated square
+            marketing image. This and/or a marketing image
+            asset is required.
+        portrait_marketing_image_asset (str):
+            Asset resource name of the associated 4:5
+            portrait marketing image.
+        headline (str):
+            Required. Headline of the carousel card.
+        call_to_action_text (str):
+            Call to action text.
+    """
+
+    marketing_image_asset = proto.Field(proto.STRING, number=1,)
+    square_marketing_image_asset = proto.Field(proto.STRING, number=2,)
+    portrait_marketing_image_asset = proto.Field(proto.STRING, number=3,)
+    headline = proto.Field(proto.STRING, number=4,)
+    call_to_action_text = proto.Field(proto.STRING, number=5,)
+
+
+class DynamicTravelAsset(proto.Message):
+    r"""A dynamic travel asset.
+
+    Attributes:
+        destination_id (str):
+            Required. Destination ID which can be any
+            sequence of letters and digits, and must be
+            unique and match the values of remarketing tag.
+            Required.
+        origin_id (str):
+            Origin ID which can be any sequence of
+            letters and digits. The ID sequence (destination
+            ID + origin ID) must be unique.
+        title (str):
+            Required. Title, e.g. Book your train ticket.
+            Required.
+        destination_name (str):
+            Destination name, e.g. Paris.
+        destination_address (str):
+            Destination address which can be specified in
+            one of the following formats. (1) City, state,
+            code, country, e.g. Mountain View, CA, USA. (2)
+            Full address, e.g. 123 Boulevard St, Mountain
+            View, CA 94043. (3) Latitude-longitude in the
+            DDD format, e.g. 41.40338, 2.17403.
+        origin_name (str):
+            Origin name, e.g. London.
+        price (str):
+            Price which can be a number followed by the
+            alphabetic currency code, ISO 4217 standard. Use
+            '.' as the decimal mark. e.g. 100.00 USD.
+        sale_price (str):
+            Sale price which can be a number followed by
+            the alphabetic currency code, ISO 4217 standard.
+            Use '.' as the decimal mark, e.g. 80.00 USD.
+            Must be less than the 'price' field.
+        formatted_price (str):
+            Formatted price which can be any characters.
+            If set, this attribute will be used instead of
+            'price', e.g. Starting at $100.00.
+        formatted_sale_price (str):
+            Formatted sale price which can be any
+            characters. If set, this attribute will be used
+            instead of 'sale price', e.g. On sale for
+            $80.00.
+        category (str):
+            Category, e.g. Express.
+        contextual_keywords (Sequence[str]):
+            Contextual keywords, e.g. Paris trains.
+        similar_destination_ids (Sequence[str]):
+            Similar destination IDs, e.g. NYC.
+        image_url (str):
+            Image URL, e.g.
+            http://www.example.com/image.png. The image will
+            not be uploaded as image asset.
+        android_app_link (str):
+            Android deep link, e.g.
+            android-app://com.example.android/http/example.com/gizmos?1234.
+        ios_app_link (str):
+            iOS deep link, e.g.
+            exampleApp://content/page.
+        ios_app_store_id (int):
+            iOS app store ID. This is used to check if the user has the
+            app installed on their device before deep linking. If this
+            field is set, then the ios_app_link field must also be
+            present.
+    """
+
+    destination_id = proto.Field(proto.STRING, number=1,)
+    origin_id = proto.Field(proto.STRING, number=2,)
+    title = proto.Field(proto.STRING, number=3,)
+    destination_name = proto.Field(proto.STRING, number=4,)
+    destination_address = proto.Field(proto.STRING, number=5,)
+    origin_name = proto.Field(proto.STRING, number=6,)
+    price = proto.Field(proto.STRING, number=7,)
+    sale_price = proto.Field(proto.STRING, number=8,)
+    formatted_price = proto.Field(proto.STRING, number=9,)
+    formatted_sale_price = proto.Field(proto.STRING, number=10,)
+    category = proto.Field(proto.STRING, number=11,)
+    contextual_keywords = proto.RepeatedField(proto.STRING, number=12,)
+    similar_destination_ids = proto.RepeatedField(proto.STRING, number=13,)
+    image_url = proto.Field(proto.STRING, number=14,)
+    android_app_link = proto.Field(proto.STRING, number=15,)
+    ios_app_link = proto.Field(proto.STRING, number=16,)
+    ios_app_store_id = proto.Field(proto.INT64, number=17,)
+
+
+class DynamicLocalAsset(proto.Message):
+    r"""A dynamic local asset.
+
+    Attributes:
+        deal_id (str):
+            Required. Deal ID which can be any sequence
+            of letters and digits, and must be unique and
+            match the values of remarketing tag. Required.
+        deal_name (str):
+            Required. Deal name, e.g. 50% off at Mountain
+            View Grocers. Required.
+        subtitle (str):
+            Subtitle, e.g. Groceries.
+        description (str):
+            Description, e.g. Save on your weekly bill.
+        price (str):
+            Price which can be a number followed by the
+            alphabetic currency code, ISO 4217 standard. Use
+            '.' as the decimal mark, e.g. 100.00 USD.
+        sale_price (str):
+            Sale price which can be number followed by
+            the alphabetic currency code, ISO 4217 standard.
+            Use '.' as the decimal mark, e.g. 80.00 USD.
+            Must be less than the 'price' field.
+        image_url (str):
+            Image URL, e.g.
+            http://www.example.com/image.png. The image will
+            not be uploaded as image asset.
+        address (str):
+            Address which can be specified in one of the
+            following formats. (1) City, state, code,
+            country, e.g. Mountain View, CA, USA. (2) Full
+            address, e.g. 123 Boulevard St, Mountain View,
+            CA 94043. (3) Latitude-longitude in the DDD
+            format, e.g. 41.40338, 2.17403.
+        category (str):
+            Category, e.g. Food.
+        contextual_keywords (Sequence[str]):
+            Contextual keywords, e.g. Save groceries
+            coupons.
+        formatted_price (str):
+            Formatted price which can be any characters.
+            If set, this attribute will be used instead of
+            'price', e.g. Starting at $100.00.
+        formatted_sale_price (str):
+            Formatted sale price which can be any
+            characters. If set, this attribute will be used
+            instead of 'sale price', e.g. On sale for
+            $80.00.
+        android_app_link (str):
+            Android deep link, e.g.
+            android-app://com.example.android/http/example.com/gizmos?1234.
+        similar_deal_ids (Sequence[str]):
+            Similar deal IDs, e.g. 1275.
+        ios_app_link (str):
+            iOS deep link, e.g.
+            exampleApp://content/page.
+        ios_app_store_id (int):
+            iOS app store ID. This is used to check if the user has the
+            app installed on their device before deep linking. If this
+            field is set, then the ios_app_link field must also be
+            present.
+    """
+
+    deal_id = proto.Field(proto.STRING, number=1,)
+    deal_name = proto.Field(proto.STRING, number=2,)
+    subtitle = proto.Field(proto.STRING, number=3,)
+    description = proto.Field(proto.STRING, number=4,)
+    price = proto.Field(proto.STRING, number=5,)
+    sale_price = proto.Field(proto.STRING, number=6,)
+    image_url = proto.Field(proto.STRING, number=7,)
+    address = proto.Field(proto.STRING, number=8,)
+    category = proto.Field(proto.STRING, number=9,)
+    contextual_keywords = proto.RepeatedField(proto.STRING, number=10,)
+    formatted_price = proto.Field(proto.STRING, number=11,)
+    formatted_sale_price = proto.Field(proto.STRING, number=12,)
+    android_app_link = proto.Field(proto.STRING, number=13,)
+    similar_deal_ids = proto.RepeatedField(proto.STRING, number=14,)
+    ios_app_link = proto.Field(proto.STRING, number=15,)
+    ios_app_store_id = proto.Field(proto.INT64, number=16,)
+
+
+class DynamicJobsAsset(proto.Message):
+    r"""A dynamic jobs asset.
+
+    Attributes:
+        job_id (str):
+            Required. Job ID which can be any sequence of
+            letters and digits, and must be unique and match
+            the values of remarketing tag. Required.
+        location_id (str):
+            Location ID which can be any sequence of
+            letters and digits. The ID sequence (job ID +
+            location ID) must be unique.
+        job_title (str):
+            Required. Job title, e.g. Software engineer.
+            Required.
+        job_subtitle (str):
+            Job subtitle, e.g. Level II.
+        description (str):
+            Description, e.g. Apply your technical
+            skills.
+        image_url (str):
+            Image URL, e.g.
+            http://www.example.com/image.png. The image will
+            not be uploaded as image asset.
+        job_category (str):
+            Job category, e.g. Technical.
+        contextual_keywords (Sequence[str]):
+            Contextual keywords, e.g. Software
+            engineering job.
+        address (str):
+            Address which can be specified in one of the
+            following formats. (1) City, state, code,
+            country, e.g. Mountain View, CA, USA. (2) Full
+            address, e.g. 123 Boulevard St, Mountain View,
+            CA 94043. (3) Latitude-longitude in the DDD
+            format, e.g. 41.40338, 2.17403.
+        salary (str):
+            Salary, e.g. $100,000.
+        android_app_link (str):
+            Android deep link, e.g.
+            android-app://com.example.android/http/example.com/gizmos?1234.
+        similar_job_ids (Sequence[str]):
+            Similar job IDs, e.g. 1275.
+        ios_app_link (str):
+            iOS deep link, e.g.
+            exampleApp://content/page.
+        ios_app_store_id (int):
+            iOS app store ID. This is used to check if the user has the
+            app installed on their device before deep linking. If this
+            field is set, then the ios_app_link field must also be
+            present.
+    """
+
+    job_id = proto.Field(proto.STRING, number=1,)
+    location_id = proto.Field(proto.STRING, number=2,)
+    job_title = proto.Field(proto.STRING, number=3,)
+    job_subtitle = proto.Field(proto.STRING, number=4,)
+    description = proto.Field(proto.STRING, number=5,)
+    image_url = proto.Field(proto.STRING, number=6,)
+    job_category = proto.Field(proto.STRING, number=7,)
+    contextual_keywords = proto.RepeatedField(proto.STRING, number=8,)
+    address = proto.Field(proto.STRING, number=9,)
+    salary = proto.Field(proto.STRING, number=10,)
+    android_app_link = proto.Field(proto.STRING, number=11,)
+    similar_job_ids = proto.RepeatedField(proto.STRING, number=12,)
+    ios_app_link = proto.Field(proto.STRING, number=13,)
+    ios_app_store_id = proto.Field(proto.INT64, number=14,)
 
 
 __all__ = tuple(sorted(__protobuf__.manifest))

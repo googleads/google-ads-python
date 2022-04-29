@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-# Copyright 2020 Google LLC
+# Copyright 2022 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -78,6 +78,8 @@ class ConversionUploadErrorEnum(proto.Message):
         UNPARSEABLE_GBRAID = 40
         EXTERNALLY_ATTRIBUTED_CONVERSION_TYPE_NOT_PERMITTED_WITH_BRAID = 41
         ONE_PER_CLICK_CONVERSION_ACTION_NOT_PERMITTED_WITH_BRAID = 46
+        CUSTOMER_DATA_POLICY_PROHIBITS_ENHANCED_CONVERSIONS = 47
+        CUSTOMER_NOT_ACCEPTED_CUSTOMER_DATA_TERMS = 48
 
 
 __all__ = tuple(sorted(__protobuf__.manifest))

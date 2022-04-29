@@ -30,19 +30,18 @@ from google.ads.googleads.client import GoogleAdsClient
 from google.ads.googleads.errors import GoogleAdsException
 
 
-def main(client, customer_id, skip_polling):
+def main(client, customer_id):
     """Uses Customer Match to create and add users to a new user list.
 
     Args:
         client: The Google Ads client.
         customer_id: The customer ID for which to add the user list.
-        skip_polling: A bool dictating whether to poll the API for completion.
     """
     user_list_resource_name = _create_customer_match_user_list(
         client, customer_id
     )
     _add_users_to_customer_match_user_list(
-        client, customer_id, user_list_resource_name, skip_polling
+        client, customer_id, user_list_resource_name
     )
 
 
@@ -91,7 +90,7 @@ def _create_customer_match_user_list(client, customer_id):
 
 # [START add_customer_match_user_list]
 def _add_users_to_customer_match_user_list(
-    client, customer_id, user_list_resource_name, skip_polling
+    client, customer_id, user_list_resource_name
 ):
     """Uses Customer Match to create and add users to a new user list.
 
@@ -100,7 +99,6 @@ def _add_users_to_customer_match_user_list(
         customer_id: The customer ID for which to add the user list.
         user_list_resource_name: The resource name of the user list to which to
             add users.
-        skip_polling: A bool dictating whether to poll the API for completion.
     """
     # Creates the OfflineUserDataJobService client.
     offline_user_data_job_service_client = client.get_service(
@@ -167,30 +165,24 @@ def _add_users_to_customer_match_user_list(
 
     print("The operations are added to the offline user data job.")
 
-    # Issues an request to run the offline user data job for executing all
+    # Issues a request to run the offline user data job for executing all
     # added operations.
-    operation_response = (
-        offline_user_data_job_service_client.run_offline_user_data_job(
-            resource_name=offline_user_data_job_resource_name
-        )
+    offline_user_data_job_service_client.run_offline_user_data_job(
+        resource_name=offline_user_data_job_resource_name
     )
 
-    if skip_polling:
-        _check_job_status(
-            client,
-            customer_id,
-            offline_user_data_job_resource_name,
-            user_list_resource_name,
-        )
-    else:
-        # Wait until the operation has finished.
-        print("Request to execute the added operations started.")
-        print("Waiting until operation completes...")
-        operation_response.result()
-        _print_customer_match_user_list_info(
-            client, customer_id, user_list_resource_name
-        )
-        # [END add_customer_match_user_list]
+    # Offline user data jobs may take 6 hours or more to complete, so instead of
+    # waiting for the job to complete, retrieves and displays the job status
+    # once. If the job is completed successfully, prints information about the
+    # user list. Otherwise, prints the query to use to check the job again
+    # later.
+    _check_job_status(
+        client,
+        customer_id,
+        offline_user_data_job_resource_name,
+        user_list_resource_name,
+    )
+    # [END add_customer_match_user_list]
 
 
 # [START add_customer_match_user_list_2]
@@ -366,20 +358,11 @@ if __name__ == "__main__":
         required=True,
         help="The Google Ads customer ID.",
     )
-    parser.add_argument(
-        "-s",
-        "--skip_polling",
-        action="store_true",
-        help="Whether the example should skip polling the API for completion, "
-        "which can take several hours. If the '-s' flag is set the example "
-        "will demonstrate how to use a search query to check the status of "
-        "the uploaded user list.",
-    )
 
     args = parser.parse_args()
 
     try:
-        main(googleads_client, args.customer_id, args.skip_polling)
+        main(googleads_client, args.customer_id)
     except GoogleAdsException as ex:
         print(
             f"Request with ID '{ex.request_id}' failed with status "

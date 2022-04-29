@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-# Copyright 2020 Google LLC
+# Copyright 2022 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -376,8 +376,8 @@ class ReachPlanServiceClient(metaclass=ReachPlanServiceClientMeta):
         timeout: float = None,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> reach_plan_service.ListPlannableLocationsResponse:
-        r"""Returns the list of plannable locations (for example, countries
-        & DMAs).
+        r"""Returns the list of plannable locations (for example,
+        countries).
 
         List of thrown errors: `AuthenticationError <>`__
         `AuthorizationError <>`__ `HeaderError <>`__
@@ -445,7 +445,7 @@ class ReachPlanServiceClient(metaclass=ReachPlanServiceClientMeta):
                 in a given location.
             plannable_location_id (str):
                 Required. The ID of the selected location for planning.
-                To list the available plannable location ids use
+                To list the available plannable location IDs use
                 [ReachPlanService.ListPlannableLocations][google.ads.googleads.v10.services.ReachPlanService.ListPlannableLocations].
 
                 This corresponds to the ``plannable_location_id`` field
@@ -533,7 +533,7 @@ class ReachPlanServiceClient(metaclass=ReachPlanServiceClientMeta):
                 on the ``request`` instance; if ``request`` is provided, this
                 should not be set.
             plannable_location_id (str):
-                Required. The ID of the location, this is one of the ids
+                Required. The ID of the location, this is one of the IDs
                 returned by
                 [ReachPlanService.ListPlannableLocations][google.ads.googleads.v10.services.ReachPlanService.ListPlannableLocations].
 

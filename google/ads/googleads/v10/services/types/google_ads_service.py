@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-# Copyright 2020 Google LLC
+# Copyright 2022 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -173,6 +173,9 @@ from google.ads.googleads.v10.resources.types import (
 )
 from google.ads.googleads.v10.resources.types import (
     campaign_feed as gagr_campaign_feed,
+)
+from google.ads.googleads.v10.resources.types import (
+    campaign_group as gagr_campaign_group,
 )
 from google.ads.googleads.v10.resources.types import (
     campaign_label as gagr_campaign_label,
@@ -365,6 +368,9 @@ from google.ads.googleads.v10.resources.types import (
     language_constant as gagr_language_constant,
 )
 from google.ads.googleads.v10.resources.types import (
+    lead_form_submission_data as gagr_lead_form_submission_data,
+)
+from google.ads.googleads.v10.resources.types import (
     life_event as gagr_life_event,
 )
 from google.ads.googleads.v10.resources.types import (
@@ -500,6 +506,7 @@ from google.ads.googleads.v10.services.types import (
     campaign_extension_setting_service,
 )
 from google.ads.googleads.v10.services.types import campaign_feed_service
+from google.ads.googleads.v10.services.types import campaign_group_service
 from google.ads.googleads.v10.services.types import campaign_label_service
 from google.ads.googleads.v10.services.types import campaign_service
 from google.ads.googleads.v10.services.types import campaign_shared_set_service
@@ -870,6 +877,8 @@ class GoogleAdsRow(proto.Message):
             the query.
         campaign_feed (google.ads.googleads.v10.resources.types.CampaignFeed):
             The campaign feed referenced in the query.
+        campaign_group (google.ads.googleads.v10.resources.types.CampaignGroup):
+            Campaign Group referenced in AWQL query.
         campaign_label (google.ads.googleads.v10.resources.types.CampaignLabel):
             The campaign label referenced in the query.
         campaign_shared_set (google.ads.googleads.v10.resources.types.CampaignSharedSet):
@@ -1112,6 +1121,9 @@ class GoogleAdsRow(proto.Message):
             The video referenced in the query.
         webpage_view (google.ads.googleads.v10.resources.types.WebpageView):
             The webpage view referenced in the query.
+        lead_form_submission_data (google.ads.googleads.v10.resources.types.LeadFormSubmissionData):
+            The lead form user submission referenced in
+            the query.
         metrics (google.ads.googleads.v10.common.types.Metrics):
             The metrics.
         segments (google.ads.googleads.v10.common.types.Segments):
@@ -1337,6 +1349,9 @@ class GoogleAdsRow(proto.Message):
     )
     campaign_feed = proto.Field(
         proto.MESSAGE, number=63, message=gagr_campaign_feed.CampaignFeed,
+    )
+    campaign_group = proto.Field(
+        proto.MESSAGE, number=25, message=gagr_campaign_group.CampaignGroup,
     )
     campaign_label = proto.Field(
         proto.MESSAGE, number=108, message=gagr_campaign_label.CampaignLabel,
@@ -1727,6 +1742,11 @@ class GoogleAdsRow(proto.Message):
     webpage_view = proto.Field(
         proto.MESSAGE, number=162, message=gagr_webpage_view.WebpageView,
     )
+    lead_form_submission_data = proto.Field(
+        proto.MESSAGE,
+        number=192,
+        message=gagr_lead_form_submission_data.LeadFormSubmissionData,
+    )
     metrics = proto.Field(
         proto.MESSAGE, number=4, message=gagc_metrics.Metrics,
     )
@@ -1958,6 +1978,10 @@ class MutateOperation(proto.Message):
             This field is a member of `oneof`_ ``operation``.
         campaign_feed_operation (google.ads.googleads.v10.services.types.CampaignFeedOperation):
             A campaign feed mutate operation.
+
+            This field is a member of `oneof`_ ``operation``.
+        campaign_group_operation (google.ads.googleads.v10.services.types.CampaignGroupOperation):
+            A campaign group mutate operation.
 
             This field is a member of `oneof`_ ``operation``.
         campaign_label_operation (google.ads.googleads.v10.services.types.CampaignLabelOperation):
@@ -2337,6 +2361,12 @@ class MutateOperation(proto.Message):
         number=27,
         oneof="operation",
         message=campaign_feed_service.CampaignFeedOperation,
+    )
+    campaign_group_operation = proto.Field(
+        proto.MESSAGE,
+        number=9,
+        oneof="operation",
+        message=campaign_group_service.CampaignGroupOperation,
     )
     campaign_label_operation = proto.Field(
         proto.MESSAGE,
@@ -2742,6 +2772,10 @@ class MutateOperationResponse(proto.Message):
             The result for the campaign feed mutate.
 
             This field is a member of `oneof`_ ``response``.
+        campaign_group_result (google.ads.googleads.v10.services.types.MutateCampaignGroupResult):
+            The result for the campaign group mutate.
+
+            This field is a member of `oneof`_ ``response``.
         campaign_label_result (google.ads.googleads.v10.services.types.MutateCampaignLabelResult):
             The result for the campaign label mutate.
 
@@ -3124,6 +3158,12 @@ class MutateOperationResponse(proto.Message):
         number=27,
         oneof="response",
         message=campaign_feed_service.MutateCampaignFeedResult,
+    )
+    campaign_group_result = proto.Field(
+        proto.MESSAGE,
+        number=9,
+        oneof="response",
+        message=campaign_group_service.MutateCampaignGroupResult,
     )
     campaign_label_result = proto.Field(
         proto.MESSAGE,

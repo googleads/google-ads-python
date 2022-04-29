@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-# Copyright 2020 Google LLC
+# Copyright 2022 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -245,8 +245,7 @@ class CustomerManagerLinkServiceGrpcTransport(
     ]:
         r"""Return a callable for the mutate customer manager link method over gRPC.
 
-        Creates or updates customer manager links. Operation statuses
-        are returned.
+        Updates customer manager links. Operation statuses are returned.
 
         List of thrown errors: `AuthenticationError <>`__
         `AuthorizationError <>`__ `DatabaseError <>`__ `FieldError <>`__

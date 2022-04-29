@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-# Copyright 2020 Google LLC
+# Copyright 2022 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -108,6 +108,9 @@ from google.ads.googleads.v10.errors.types import (
     campaign_budget_error as gage_campaign_budget_error,
 )
 from google.ads.googleads.v10.errors.types import (
+    campaign_conversion_goal_error as gage_campaign_conversion_goal_error,
+)
+from google.ads.googleads.v10.errors.types import (
     campaign_criterion_error as gage_campaign_criterion_error,
 )
 from google.ads.googleads.v10.errors.types import (
@@ -148,6 +151,9 @@ from google.ads.googleads.v10.errors.types import (
 )
 from google.ads.googleads.v10.errors.types import (
     conversion_custom_variable_error as gage_conversion_custom_variable_error,
+)
+from google.ads.googleads.v10.errors.types import (
+    conversion_goal_campaign_config_error as gage_conversion_goal_campaign_config_error,
 )
 from google.ads.googleads.v10.errors.types import (
     conversion_upload_error as gage_conversion_upload_error,
@@ -621,6 +627,11 @@ class ErrorCode(proto.Message):
             The reasons for the campaign criterion error
 
             This field is a member of `oneof`_ ``error_code``.
+        campaign_conversion_goal_error (google.ads.googleads.v10.errors.types.CampaignConversionGoalErrorEnum.CampaignConversionGoalError):
+            The reasons for the campaign conversion goal
+            error
+
+            This field is a member of `oneof`_ ``error_code``.
         campaign_customizer_error (google.ads.googleads.v10.errors.types.CampaignCustomizerErrorEnum.CampaignCustomizerError):
             The reasons for the campaign customizer
             error.
@@ -628,6 +639,11 @@ class ErrorCode(proto.Message):
             This field is a member of `oneof`_ ``error_code``.
         collection_size_error (google.ads.googleads.v10.errors.types.CollectionSizeErrorEnum.CollectionSizeError):
             The reasons for the collection size error
+
+            This field is a member of `oneof`_ ``error_code``.
+        conversion_goal_campaign_config_error (google.ads.googleads.v10.errors.types.ConversionGoalCampaignConfigErrorEnum.ConversionGoalCampaignConfigError):
+            The reasons for the conversion goal campaign
+            config error
 
             This field is a member of `oneof`_ ``error_code``.
         country_code_error (google.ads.googleads.v10.errors.types.CountryCodeErrorEnum.CountryCodeError):
@@ -1263,6 +1279,12 @@ class ErrorCode(proto.Message):
         oneof="error_code",
         enum=gage_campaign_criterion_error.CampaignCriterionErrorEnum.CampaignCriterionError,
     )
+    campaign_conversion_goal_error = proto.Field(
+        proto.ENUM,
+        number=166,
+        oneof="error_code",
+        enum=gage_campaign_conversion_goal_error.CampaignConversionGoalErrorEnum.CampaignConversionGoalError,
+    )
     campaign_customizer_error = proto.Field(
         proto.ENUM,
         number=160,
@@ -1274,6 +1296,12 @@ class ErrorCode(proto.Message):
         number=31,
         oneof="error_code",
         enum=gage_collection_size_error.CollectionSizeErrorEnum.CollectionSizeError,
+    )
+    conversion_goal_campaign_config_error = proto.Field(
+        proto.ENUM,
+        number=165,
+        oneof="error_code",
+        enum=gage_conversion_goal_campaign_config_error.ConversionGoalCampaignConfigErrorEnum.ConversionGoalCampaignConfigError,
     )
     country_code_error = proto.Field(
         proto.ENUM,

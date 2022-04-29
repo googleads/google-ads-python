@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-# Copyright 2020 Google LLC
+# Copyright 2022 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -33,6 +33,9 @@ __protobuf__ = proto.module(
         "UrlSeed",
         "GenerateKeywordIdeaResponse",
         "GenerateKeywordIdeaResult",
+        "GenerateKeywordHistoricalMetricsRequest",
+        "GenerateKeywordHistoricalMetricsResponse",
+        "GenerateKeywordHistoricalMetricsResult",
     },
 )
 
@@ -258,6 +261,12 @@ class GenerateKeywordIdeaResult(proto.Message):
             The annotations for the keyword.
             The annotation data is only provided if
             requested.
+        close_variants (Sequence[str]):
+            The list of close variants from the requested
+            keywords that are combined into this
+            GenerateKeywordIdeaResult. See
+            https://support.google.com/google-ads/answer/9342105
+            for the definition of "close variants".
     """
 
     text = proto.Field(proto.STRING, number=5, optional=True,)
@@ -268,6 +277,84 @@ class GenerateKeywordIdeaResult(proto.Message):
     )
     keyword_annotations = proto.Field(
         proto.MESSAGE, number=6, message=keyword_plan_common.KeywordAnnotations,
+    )
+    close_variants = proto.RepeatedField(proto.STRING, number=7,)
+
+
+class GenerateKeywordHistoricalMetricsRequest(proto.Message):
+    r"""Request message for
+    [KeywordPlanIdeaService.GenerateKeywordHistoricalMetrics][google.ads.googleads.v10.services.KeywordPlanIdeaService.GenerateKeywordHistoricalMetrics].
+
+    Attributes:
+        customer_id (str):
+            The ID of the customer with the
+            recommendation.
+        keywords (Sequence[str]):
+            A list of keywords to get historical metrics.
+            Not all inputs will be returned as a result of
+            near-exact deduplication. For example, if stats
+            for "car" and "cars" are requested, only "car"
+            will be returned.
+            A maximum of 10,000 keywords can be used.
+        historical_metrics_options (google.ads.googleads.v10.common.types.HistoricalMetricsOptions):
+            The options for historical metrics data.
+    """
+
+    customer_id = proto.Field(proto.STRING, number=1,)
+    keywords = proto.RepeatedField(proto.STRING, number=2,)
+    historical_metrics_options = proto.Field(
+        proto.MESSAGE,
+        number=3,
+        message=keyword_plan_common.HistoricalMetricsOptions,
+    )
+
+
+class GenerateKeywordHistoricalMetricsResponse(proto.Message):
+    r"""Response message for
+    [KeywordPlanIdeaService.GenerateKeywordHistoricalMetrics][google.ads.googleads.v10.services.KeywordPlanIdeaService.GenerateKeywordHistoricalMetrics].
+
+    Attributes:
+        results (Sequence[google.ads.googleads.v10.services.types.GenerateKeywordHistoricalMetricsResult]):
+            List of keywords and their historical
+            metrics.
+    """
+
+    results = proto.RepeatedField(
+        proto.MESSAGE,
+        number=1,
+        message="GenerateKeywordHistoricalMetricsResult",
+    )
+
+
+class GenerateKeywordHistoricalMetricsResult(proto.Message):
+    r"""The result of generating keyword historical metrics.
+
+    Attributes:
+        text (str):
+            The text of the query associated with one or more keywords.
+            Note that we de-dupe your keywords list, eliminating close
+            variants before returning the keywords as text. For example,
+            if your request originally contained the keywords "car" and
+            "cars", the returned search query will only contain "cars".
+            The list of de-duped queries will be included in
+            close_variants field.
+
+            This field is a member of `oneof`_ ``_text``.
+        close_variants (Sequence[str]):
+            The list of close variants from the requested
+            keywords whose stats are combined into this
+            GenerateKeywordHistoricalMetricsResult.
+        keyword_metrics (google.ads.googleads.v10.common.types.KeywordPlanHistoricalMetrics):
+            The historical metrics for text and its close
+            variants
+    """
+
+    text = proto.Field(proto.STRING, number=1, optional=True,)
+    close_variants = proto.RepeatedField(proto.STRING, number=3,)
+    keyword_metrics = proto.Field(
+        proto.MESSAGE,
+        number=2,
+        message=keyword_plan_common.KeywordPlanHistoricalMetrics,
     )
 
 

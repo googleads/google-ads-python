@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-# Copyright 2020 Google LLC
+# Copyright 2022 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -81,6 +81,9 @@ from google.ads.googleads.v10.enums.types import (
 )
 from google.ads.googleads.v10.enums.types import (
     sk_ad_network_ad_event_type as gage_sk_ad_network_ad_event_type,
+)
+from google.ads.googleads.v10.enums.types import (
+    sk_ad_network_attribution_credit as gage_sk_ad_network_attribution_credit,
 )
 from google.ads.googleads.v10.enums.types import (
     sk_ad_network_user_type as gage_sk_ad_network_user_type,
@@ -442,6 +445,8 @@ class Segments(proto.Message):
             sent by Apple.
 
             This field is a member of `oneof`_ ``_sk_ad_network_source_app``.
+        sk_ad_network_attribution_credit (google.ads.googleads.v10.enums.types.SkAdNetworkAttributionCreditEnum.SkAdNetworkAttributionCredit):
+            iOS Store Kit Ad Network attribution credit
         asset_interaction_target (google.ads.googleads.v10.common.types.AssetInteractionTarget):
             Only used with CustomerAsset, CampaignAsset and AdGroupAsset
             metrics. Indicates whether the interaction metrics occurred
@@ -674,6 +679,11 @@ class Segments(proto.Message):
         number=143,
         optional=True,
         message="SkAdNetworkSourceApp",
+    )
+    sk_ad_network_attribution_credit = proto.Field(
+        proto.ENUM,
+        number=144,
+        enum=gage_sk_ad_network_attribution_credit.SkAdNetworkAttributionCreditEnum.SkAdNetworkAttributionCredit,
     )
     asset_interaction_target = proto.Field(
         proto.MESSAGE,

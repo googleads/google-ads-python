@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-# Copyright 2020 Google LLC
+# Copyright 2022 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -161,11 +161,14 @@ class AgeSegment(proto.Message):
     Attributes:
         min_age (int):
             Minimum age to include. A minimum age must be
-            specified and must be at least 18.
+            specified and must be at least 18. Allowed
+            values are 18, 25, 35, 45, 55, and 65.
 
             This field is a member of `oneof`_ ``_min_age``.
         max_age (int):
-            Maximum age to include.
+            Maximum age to include. A maximum age need not be specified.
+            If specified, max_age must be greater than min_age, and
+            allowed values are 24, 34, 44, 54, and 64.
 
             This field is a member of `oneof`_ ``_max_age``.
     """

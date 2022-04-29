@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-# Copyright 2020 Google LLC
+# Copyright 2022 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -159,6 +159,8 @@ class CriterionErrorEnum(proto.Message):
         BROAD_MATCH_MODIFIER_KEYWORD_NOT_ALLOWED = 135
         ONE_AUDIENCE_ALLOWED_PER_ASSET_GROUP = 136
         AUDIENCE_NOT_ELIGIBLE_FOR_CAMPAIGN_TYPE = 137
+        AUDIENCE_NOT_ALLOWED_TO_ATTACH_WHEN_AUDIENCE_GROUPED_SET_TO_FALSE = 138
+        CANNOT_TARGET_CUSTOMER_MATCH_USER_LIST = 139
 
 
 __all__ = tuple(sorted(__protobuf__.manifest))

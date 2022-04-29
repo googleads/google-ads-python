@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-# Copyright 2020 Google LLC
+# Copyright 2022 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -78,6 +78,11 @@ class KeywordPlanHistoricalMetrics(proto.Message):
             in micros for the keyword.
 
             This field is a member of `oneof`_ ``_high_top_of_page_bid_micros``.
+        average_cpc_micros (int):
+            Average Cost Per Click in micros for the
+            keyword.
+
+            This field is a member of `oneof`_ ``_average_cpc_micros``.
     """
 
     avg_monthly_searches = proto.Field(proto.INT64, number=7, optional=True,)
@@ -96,6 +101,7 @@ class KeywordPlanHistoricalMetrics(proto.Message):
     high_top_of_page_bid_micros = proto.Field(
         proto.INT64, number=10, optional=True,
     )
+    average_cpc_micros = proto.Field(proto.INT64, number=11, optional=True,)
 
 
 class HistoricalMetricsOptions(proto.Message):
@@ -111,11 +117,19 @@ class HistoricalMetricsOptions(proto.Message):
             range for which search volume is available will be returned.
 
             This field is a member of `oneof`_ ``_year_month_range``.
+        include_average_cpc (bool):
+            Indicates whether to include average cost per
+            click value. Average CPC is a legacy value that
+            will be removed and replaced in the future, and
+            as such we are including it as an optioanl value
+            so clients only use it when strictly necessary
+            and to better track clients that use this value.
     """
 
     year_month_range = proto.Field(
         proto.MESSAGE, number=1, optional=True, message=dates.YearMonthRange,
     )
+    include_average_cpc = proto.Field(proto.BOOL, number=2,)
 
 
 class MonthlySearchVolume(proto.Message):

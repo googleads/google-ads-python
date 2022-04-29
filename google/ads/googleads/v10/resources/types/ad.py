@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-# Copyright 2020 Google LLC
+# Copyright 2022 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -216,6 +216,16 @@ class Ad(proto.Message):
             ad.
 
             This field is a member of `oneof`_ ``ad_data``.
+        discovery_multi_asset_ad (google.ads.googleads.v10.common.types.DiscoveryMultiAssetAdInfo):
+            Details pertaining to a discovery multi asset
+            ad.
+
+            This field is a member of `oneof`_ ``ad_data``.
+        discovery_carousel_ad (google.ads.googleads.v10.common.types.DiscoveryCarouselAdInfo):
+            Details pertaining to a discovery carousel
+            ad.
+
+            This field is a member of `oneof`_ ``ad_data``.
     """
 
     resource_name = proto.Field(proto.STRING, number=37,)
@@ -376,6 +386,18 @@ class Ad(proto.Message):
         number=50,
         oneof="ad_data",
         message=ad_type_infos.AppPreRegistrationAdInfo,
+    )
+    discovery_multi_asset_ad = proto.Field(
+        proto.MESSAGE,
+        number=51,
+        oneof="ad_data",
+        message=ad_type_infos.DiscoveryMultiAssetAdInfo,
+    )
+    discovery_carousel_ad = proto.Field(
+        proto.MESSAGE,
+        number=52,
+        oneof="ad_data",
+        message=ad_type_infos.DiscoveryCarouselAdInfo,
     )
 
 

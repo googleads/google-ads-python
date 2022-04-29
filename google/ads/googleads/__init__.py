@@ -12,10 +12,8 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-
 import google.ads.googleads.client
 import google.ads.googleads.errors
 import google.ads.googleads.util
 
-
-VERSION = "15.1.1"
+VERSION = "16.0.0"

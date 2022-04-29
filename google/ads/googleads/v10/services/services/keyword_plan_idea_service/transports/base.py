@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-# Copyright 2020 Google LLC
+# Copyright 2022 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -127,6 +127,11 @@ class KeywordPlanIdeaServiceTransport(abc.ABC):
                 default_timeout=None,
                 client_info=client_info,
             ),
+            self.generate_keyword_historical_metrics: gapic_v1.method.wrap_method(
+                self.generate_keyword_historical_metrics,
+                default_timeout=None,
+                client_info=client_info,
+            ),
         }
 
     def close(self):
@@ -146,6 +151,20 @@ class KeywordPlanIdeaServiceTransport(abc.ABC):
         Union[
             keyword_plan_idea_service.GenerateKeywordIdeaResponse,
             Awaitable[keyword_plan_idea_service.GenerateKeywordIdeaResponse],
+        ],
+    ]:
+        raise NotImplementedError()
+
+    @property
+    def generate_keyword_historical_metrics(
+        self,
+    ) -> Callable[
+        [keyword_plan_idea_service.GenerateKeywordHistoricalMetricsRequest],
+        Union[
+            keyword_plan_idea_service.GenerateKeywordHistoricalMetricsResponse,
+            Awaitable[
+                keyword_plan_idea_service.GenerateKeywordHistoricalMetricsResponse
+            ],
         ],
     ]:
         raise NotImplementedError()

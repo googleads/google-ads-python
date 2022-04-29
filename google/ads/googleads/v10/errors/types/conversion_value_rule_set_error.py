@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-# Copyright 2020 Google LLC
+# Copyright 2022 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -45,6 +45,7 @@ class ConversionValueRuleSetErrorEnum(proto.Message):
         INELIGIBLE_CONVERSION_ACTION_CATEGORIES = 11
         DIMENSION_NO_CONDITION_USED_WITH_OTHER_DIMENSIONS = 12
         DIMENSION_NO_CONDITION_NOT_ALLOWED = 13
+        UNSUPPORTED_CONVERSION_ACTION_CATEGORIES = 14
 
 
 __all__ = tuple(sorted(__protobuf__.manifest))

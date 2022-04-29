@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-# Copyright 2020 Google LLC
+# Copyright 2022 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -38,9 +38,16 @@ from google.ads.googleads.v10.resources.types import (
     ad_group_feed as gagr_ad_group_feed,
 )
 from google.ads.googleads.v10.resources.types import asset as gagr_asset
+from google.ads.googleads.v10.resources.types import asset_set as gagr_asset_set
+from google.ads.googleads.v10.resources.types import (
+    asset_set_asset as gagr_asset_set_asset,
+)
 from google.ads.googleads.v10.resources.types import campaign as gagr_campaign
 from google.ads.googleads.v10.resources.types import (
     campaign_asset as gagr_campaign_asset,
+)
+from google.ads.googleads.v10.resources.types import (
+    campaign_asset_set as gagr_campaign_asset_set,
 )
 from google.ads.googleads.v10.resources.types import (
     campaign_budget as gagr_campaign_budget,
@@ -166,6 +173,13 @@ class ChangeEvent(proto.Message):
                 Output only. Set if change_resource_type == CAMPAIGN_ASSET.
             ad_group_asset (google.ads.googleads.v10.resources.types.AdGroupAsset):
                 Output only. Set if change_resource_type == AD_GROUP_ASSET.
+            asset_set (google.ads.googleads.v10.resources.types.AssetSet):
+                Output only. Set if change_resource_type == ASSET_SET.
+            asset_set_asset (google.ads.googleads.v10.resources.types.AssetSetAsset):
+                Output only. Set if change_resource_type == ASSET_SET_ASSET.
+            campaign_asset_set (google.ads.googleads.v10.resources.types.CampaignAssetSet):
+                Output only. Set if change_resource_type ==
+                CAMPAIGN_ASSET_SET.
         """
 
         ad = proto.Field(proto.MESSAGE, number=1, message=gagr_ad.Ad,)
@@ -217,6 +231,19 @@ class ChangeEvent(proto.Message):
         )
         ad_group_asset = proto.Field(
             proto.MESSAGE, number=16, message=gagr_ad_group_asset.AdGroupAsset,
+        )
+        asset_set = proto.Field(
+            proto.MESSAGE, number=17, message=gagr_asset_set.AssetSet,
+        )
+        asset_set_asset = proto.Field(
+            proto.MESSAGE,
+            number=18,
+            message=gagr_asset_set_asset.AssetSetAsset,
+        )
+        campaign_asset_set = proto.Field(
+            proto.MESSAGE,
+            number=19,
+            message=gagr_campaign_asset_set.CampaignAssetSet,
         )
 
     resource_name = proto.Field(proto.STRING, number=1,)

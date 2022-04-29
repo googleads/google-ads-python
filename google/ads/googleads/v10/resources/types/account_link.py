@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-# Copyright 2020 Google LLC
+# Copyright 2022 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -27,6 +27,7 @@ __protobuf__ = proto.module(
         "AccountLink",
         "ThirdPartyAppAnalyticsLinkIdentifier",
         "DataPartnerLinkIdentifier",
+        "HotelCenterLinkIdentifier",
         "GoogleAdsLinkIdentifier",
     },
 )
@@ -69,6 +70,10 @@ class AccountLink(proto.Message):
             Output only. Google Ads link.
 
             This field is a member of `oneof`_ ``linked_account``.
+        hotel_center (google.ads.googleads.v10.resources.types.HotelCenterLinkIdentifier):
+            Output only. Hotel link
+
+            This field is a member of `oneof`_ ``linked_account``.
     """
 
     resource_name = proto.Field(proto.STRING, number=1,)
@@ -100,6 +105,12 @@ class AccountLink(proto.Message):
         number=7,
         oneof="linked_account",
         message="GoogleAdsLinkIdentifier",
+    )
+    hotel_center = proto.Field(
+        proto.MESSAGE,
+        number=9,
+        oneof="linked_account",
+        message="HotelCenterLinkIdentifier",
     )
 
 
@@ -165,6 +176,18 @@ class DataPartnerLinkIdentifier(proto.Message):
     """
 
     data_partner_id = proto.Field(proto.INT64, number=1, optional=True,)
+
+
+class HotelCenterLinkIdentifier(proto.Message):
+    r"""The identifier for Hotel account.
+
+    Attributes:
+        hotel_center_id (int):
+            Output only. The hotel center id of the hotel
+            account.
+    """
+
+    hotel_center_id = proto.Field(proto.INT64, number=1,)
 
 
 class GoogleAdsLinkIdentifier(proto.Message):

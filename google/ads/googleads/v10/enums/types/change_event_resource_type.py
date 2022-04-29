@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-# Copyright 2020 Google LLC
+# Copyright 2022 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -51,6 +51,9 @@ class ChangeEventResourceTypeEnum(proto.Message):
         CUSTOMER_ASSET = 15
         CAMPAIGN_ASSET = 16
         AD_GROUP_ASSET = 17
+        ASSET_SET = 18
+        ASSET_SET_ASSET = 19
+        CAMPAIGN_ASSET_SET = 20
 
 
 __all__ = tuple(sorted(__protobuf__.manifest))

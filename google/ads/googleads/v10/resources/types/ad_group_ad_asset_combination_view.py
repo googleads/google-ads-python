@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-# Copyright 2020 Google LLC
+# Copyright 2022 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -41,12 +41,22 @@ class AdGroupAdAssetCombinationView(proto.Message):
             ``customers/{customer_id}/adGroupAdAssetCombinationViews/{AdGroupAd.ad_group_id}~{AdGroupAd.ad.ad_id}~{AssetCombination.asset_combination_id_low}~{AssetCombination.asset_combination_id_high}``
         served_assets (Sequence[google.ads.googleads.v10.common.types.AssetUsage]):
             Output only. Served assets.
+        enabled (bool):
+            Output only. The status between the asset
+            combination and the latest version of the ad. If
+            true, the asset combination is linked to the
+            latest version of the ad. If false, it means the
+            link once existed but has been removed and is no
+            longer present in the latest version of the ad.
+
+            This field is a member of `oneof`_ ``_enabled``.
     """
 
     resource_name = proto.Field(proto.STRING, number=1,)
     served_assets = proto.RepeatedField(
         proto.MESSAGE, number=2, message=asset_usage.AssetUsage,
     )
+    enabled = proto.Field(proto.BOOL, number=3, optional=True,)
 
 
 __all__ = tuple(sorted(__protobuf__.manifest))

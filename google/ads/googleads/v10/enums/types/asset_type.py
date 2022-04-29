@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-# Copyright 2020 Google LLC
+# Copyright 2022 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -48,6 +48,14 @@ class AssetTypeEnum(proto.Message):
         CALL = 16
         PRICE = 17
         CALL_TO_ACTION = 18
+        DYNAMIC_REAL_ESTATE = 19
+        DYNAMIC_CUSTOM = 20
+        DYNAMIC_HOTELS_AND_RENTALS = 21
+        DYNAMIC_FLIGHTS = 22
+        DISCOVERY_CAROUSEL_CARD = 23
+        DYNAMIC_TRAVEL = 24
+        DYNAMIC_LOCAL = 25
+        DYNAMIC_JOBS = 26
 
 
 __all__ = tuple(sorted(__protobuf__.manifest))

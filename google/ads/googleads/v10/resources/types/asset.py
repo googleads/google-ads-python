@@ -26,7 +26,10 @@ from google.ads.googleads.v10.enums.types import policy_review_status
 __protobuf__ = proto.module(
     package="google.ads.googleads.v10.resources",
     marshal="google.ads.googleads.v10",
-    manifest={"Asset", "AssetPolicySummary",},
+    manifest={
+        "Asset",
+        "AssetPolicySummary",
+    },
 )
 
 
@@ -184,21 +187,52 @@ class Asset(proto.Message):
             This field is a member of `oneof`_ ``asset_data``.
     """
 
-    resource_name = proto.Field(proto.STRING, number=1,)
-    id = proto.Field(proto.INT64, number=11, optional=True,)
-    name = proto.Field(proto.STRING, number=12, optional=True,)
+    resource_name = proto.Field(
+        proto.STRING,
+        number=1,
+    )
+    id = proto.Field(
+        proto.INT64,
+        number=11,
+        optional=True,
+    )
+    name = proto.Field(
+        proto.STRING,
+        number=12,
+        optional=True,
+    )
     type_ = proto.Field(
-        proto.ENUM, number=4, enum=asset_type.AssetTypeEnum.AssetType,
+        proto.ENUM,
+        number=4,
+        enum=asset_type.AssetTypeEnum.AssetType,
     )
-    final_urls = proto.RepeatedField(proto.STRING, number=14,)
-    final_mobile_urls = proto.RepeatedField(proto.STRING, number=16,)
-    tracking_url_template = proto.Field(proto.STRING, number=17, optional=True,)
+    final_urls = proto.RepeatedField(
+        proto.STRING,
+        number=14,
+    )
+    final_mobile_urls = proto.RepeatedField(
+        proto.STRING,
+        number=16,
+    )
+    tracking_url_template = proto.Field(
+        proto.STRING,
+        number=17,
+        optional=True,
+    )
     url_custom_parameters = proto.RepeatedField(
-        proto.MESSAGE, number=18, message=custom_parameter.CustomParameter,
+        proto.MESSAGE,
+        number=18,
+        message=custom_parameter.CustomParameter,
     )
-    final_url_suffix = proto.Field(proto.STRING, number=19, optional=True,)
+    final_url_suffix = proto.Field(
+        proto.STRING,
+        number=19,
+        optional=True,
+    )
     policy_summary = proto.Field(
-        proto.MESSAGE, number=13, message="AssetPolicySummary",
+        proto.MESSAGE,
+        number=13,
+        message="AssetPolicySummary",
     )
     youtube_video_asset = proto.Field(
         proto.MESSAGE,
@@ -369,7 +403,9 @@ class AssetPolicySummary(proto.Message):
     """
 
     policy_topic_entries = proto.RepeatedField(
-        proto.MESSAGE, number=1, message=policy.PolicyTopicEntry,
+        proto.MESSAGE,
+        number=1,
+        message=policy.PolicyTopicEntry,
     )
     review_status = proto.Field(
         proto.ENUM,

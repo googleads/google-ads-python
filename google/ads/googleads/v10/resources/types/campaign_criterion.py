@@ -23,7 +23,9 @@ from google.ads.googleads.v10.enums.types import criterion_type
 __protobuf__ = proto.module(
     package="google.ads.googleads.v10.resources",
     marshal="google.ads.googleads.v10",
-    manifest={"CampaignCriterion",},
+    manifest={
+        "CampaignCriterion",
+    },
 )
 
 
@@ -195,12 +197,34 @@ class CampaignCriterion(proto.Message):
             This field is a member of `oneof`_ ``criterion``.
     """
 
-    resource_name = proto.Field(proto.STRING, number=1,)
-    campaign = proto.Field(proto.STRING, number=37, optional=True,)
-    criterion_id = proto.Field(proto.INT64, number=38, optional=True,)
-    display_name = proto.Field(proto.STRING, number=43,)
-    bid_modifier = proto.Field(proto.FLOAT, number=39, optional=True,)
-    negative = proto.Field(proto.BOOL, number=40, optional=True,)
+    resource_name = proto.Field(
+        proto.STRING,
+        number=1,
+    )
+    campaign = proto.Field(
+        proto.STRING,
+        number=37,
+        optional=True,
+    )
+    criterion_id = proto.Field(
+        proto.INT64,
+        number=38,
+        optional=True,
+    )
+    display_name = proto.Field(
+        proto.STRING,
+        number=43,
+    )
+    bid_modifier = proto.Field(
+        proto.FLOAT,
+        number=39,
+        optional=True,
+    )
+    negative = proto.Field(
+        proto.BOOL,
+        number=40,
+        optional=True,
+    )
     type_ = proto.Field(
         proto.ENUM,
         number=6,
@@ -302,7 +326,10 @@ class CampaignCriterion(proto.Message):
         message=criteria.ProximityInfo,
     )
     topic = proto.Field(
-        proto.MESSAGE, number=24, oneof="criterion", message=criteria.TopicInfo,
+        proto.MESSAGE,
+        number=24,
+        oneof="criterion",
+        message=criteria.TopicInfo,
     )
     listing_scope = proto.Field(
         proto.MESSAGE,

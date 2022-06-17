@@ -19,13 +19,14 @@ import proto  # type: ignore
 __protobuf__ = proto.module(
     package="google.ads.googleads.v10.enums",
     marshal="google.ads.googleads.v10",
-    manifest={"TimeTypeEnum",},
+    manifest={
+        "TimeTypeEnum",
+    },
 )
 
 
 class TimeTypeEnum(proto.Message):
-    r"""Message describing time types.
-    """
+    r"""Message describing time types."""
 
     class TimeType(proto.Enum):
         r"""The possible time types used by certain resources as an

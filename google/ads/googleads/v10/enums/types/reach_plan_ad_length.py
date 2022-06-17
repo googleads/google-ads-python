@@ -19,13 +19,14 @@ import proto  # type: ignore
 __protobuf__ = proto.module(
     package="google.ads.googleads.v10.enums",
     marshal="google.ads.googleads.v10",
-    manifest={"ReachPlanAdLengthEnum",},
+    manifest={
+        "ReachPlanAdLengthEnum",
+    },
 )
 
 
 class ReachPlanAdLengthEnum(proto.Message):
-    r"""Message describing length of a plannable video ad.
-    """
+    r"""Message describing length of a plannable video ad."""
 
     class ReachPlanAdLength(proto.Enum):
         r"""Possible ad length values."""

@@ -71,12 +71,23 @@ class MutateCampaignExperimentsRequest(proto.Message):
             resource name should be returned post mutation.
     """
 
-    customer_id = proto.Field(proto.STRING, number=1,)
-    operations = proto.RepeatedField(
-        proto.MESSAGE, number=2, message="CampaignExperimentOperation",
+    customer_id = proto.Field(
+        proto.STRING,
+        number=1,
     )
-    partial_failure = proto.Field(proto.BOOL, number=3,)
-    validate_only = proto.Field(proto.BOOL, number=4,)
+    operations = proto.RepeatedField(
+        proto.MESSAGE,
+        number=2,
+        message="CampaignExperimentOperation",
+    )
+    partial_failure = proto.Field(
+        proto.BOOL,
+        number=3,
+    )
+    validate_only = proto.Field(
+        proto.BOOL,
+        number=4,
+    )
     response_content_type = proto.Field(
         proto.ENUM,
         number=5,
@@ -113,7 +124,9 @@ class CampaignExperimentOperation(proto.Message):
     """
 
     update_mask = proto.Field(
-        proto.MESSAGE, number=3, message=field_mask_pb2.FieldMask,
+        proto.MESSAGE,
+        number=3,
+        message=field_mask_pb2.FieldMask,
     )
     update = proto.Field(
         proto.MESSAGE,
@@ -121,7 +134,11 @@ class CampaignExperimentOperation(proto.Message):
         oneof="operation",
         message=gagr_campaign_experiment.CampaignExperiment,
     )
-    remove = proto.Field(proto.STRING, number=2, oneof="operation",)
+    remove = proto.Field(
+        proto.STRING,
+        number=2,
+        oneof="operation",
+    )
 
 
 class MutateCampaignExperimentsResponse(proto.Message):
@@ -139,10 +156,14 @@ class MutateCampaignExperimentsResponse(proto.Message):
     """
 
     partial_failure_error = proto.Field(
-        proto.MESSAGE, number=3, message=status_pb2.Status,
+        proto.MESSAGE,
+        number=3,
+        message=status_pb2.Status,
     )
     results = proto.RepeatedField(
-        proto.MESSAGE, number=2, message="MutateCampaignExperimentResult",
+        proto.MESSAGE,
+        number=2,
+        message="MutateCampaignExperimentResult",
     )
 
 
@@ -158,7 +179,10 @@ class MutateCampaignExperimentResult(proto.Message):
             response_content_type is set to "MUTABLE_RESOURCE".
     """
 
-    resource_name = proto.Field(proto.STRING, number=1,)
+    resource_name = proto.Field(
+        proto.STRING,
+        number=1,
+    )
     campaign_experiment = proto.Field(
         proto.MESSAGE,
         number=2,
@@ -182,13 +206,19 @@ class CreateCampaignExperimentRequest(proto.Message):
             executed. Only errors are returned, not results.
     """
 
-    customer_id = proto.Field(proto.STRING, number=1,)
+    customer_id = proto.Field(
+        proto.STRING,
+        number=1,
+    )
     campaign_experiment = proto.Field(
         proto.MESSAGE,
         number=2,
         message=gagr_campaign_experiment.CampaignExperiment,
     )
-    validate_only = proto.Field(proto.BOOL, number=3,)
+    validate_only = proto.Field(
+        proto.BOOL,
+        number=3,
+    )
 
 
 class CreateCampaignExperimentMetadata(proto.Message):
@@ -200,7 +230,10 @@ class CreateCampaignExperimentMetadata(proto.Message):
             Resource name of campaign experiment created.
     """
 
-    campaign_experiment = proto.Field(proto.STRING, number=1,)
+    campaign_experiment = proto.Field(
+        proto.STRING,
+        number=1,
+    )
 
 
 class GraduateCampaignExperimentRequest(proto.Message):
@@ -220,9 +253,18 @@ class GraduateCampaignExperimentRequest(proto.Message):
             executed. Only errors are returned, not results.
     """
 
-    campaign_experiment = proto.Field(proto.STRING, number=1,)
-    campaign_budget = proto.Field(proto.STRING, number=2,)
-    validate_only = proto.Field(proto.BOOL, number=3,)
+    campaign_experiment = proto.Field(
+        proto.STRING,
+        number=1,
+    )
+    campaign_budget = proto.Field(
+        proto.STRING,
+        number=2,
+    )
+    validate_only = proto.Field(
+        proto.BOOL,
+        number=3,
+    )
 
 
 class GraduateCampaignExperimentResponse(proto.Message):
@@ -235,7 +277,10 @@ class GraduateCampaignExperimentResponse(proto.Message):
             CampaignExperiment.experiment_campaign.
     """
 
-    graduated_campaign = proto.Field(proto.STRING, number=1,)
+    graduated_campaign = proto.Field(
+        proto.STRING,
+        number=1,
+    )
 
 
 class PromoteCampaignExperimentRequest(proto.Message):
@@ -252,8 +297,14 @@ class PromoteCampaignExperimentRequest(proto.Message):
             returned.
     """
 
-    campaign_experiment = proto.Field(proto.STRING, number=1,)
-    validate_only = proto.Field(proto.BOOL, number=2,)
+    campaign_experiment = proto.Field(
+        proto.STRING,
+        number=1,
+    )
+    validate_only = proto.Field(
+        proto.BOOL,
+        number=2,
+    )
 
 
 class EndCampaignExperimentRequest(proto.Message):
@@ -269,8 +320,14 @@ class EndCampaignExperimentRequest(proto.Message):
             executed. Only errors are returned, not results.
     """
 
-    campaign_experiment = proto.Field(proto.STRING, number=1,)
-    validate_only = proto.Field(proto.BOOL, number=2,)
+    campaign_experiment = proto.Field(
+        proto.STRING,
+        number=1,
+    )
+    validate_only = proto.Field(
+        proto.BOOL,
+        number=2,
+    )
 
 
 class ListCampaignExperimentAsyncErrorsRequest(proto.Message):
@@ -293,9 +350,18 @@ class ListCampaignExperimentAsyncErrorsRequest(proto.Message):
             returned resources.
     """
 
-    resource_name = proto.Field(proto.STRING, number=1,)
-    page_token = proto.Field(proto.STRING, number=2,)
-    page_size = proto.Field(proto.INT32, number=3,)
+    resource_name = proto.Field(
+        proto.STRING,
+        number=1,
+    )
+    page_token = proto.Field(
+        proto.STRING,
+        number=2,
+    )
+    page_size = proto.Field(
+        proto.INT32,
+        number=3,
+    )
 
 
 class ListCampaignExperimentAsyncErrorsResponse(proto.Message):
@@ -318,9 +384,14 @@ class ListCampaignExperimentAsyncErrorsResponse(proto.Message):
         return self
 
     errors = proto.RepeatedField(
-        proto.MESSAGE, number=1, message=status_pb2.Status,
+        proto.MESSAGE,
+        number=1,
+        message=status_pb2.Status,
     )
-    next_page_token = proto.Field(proto.STRING, number=2,)
+    next_page_token = proto.Field(
+        proto.STRING,
+        number=2,
+    )
 
 
 __all__ = tuple(sorted(__protobuf__.manifest))

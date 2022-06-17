@@ -19,7 +19,9 @@ import proto  # type: ignore
 __protobuf__ = proto.module(
     package="google.ads.googleads.v10.resources",
     marshal="google.ads.googleads.v10",
-    manifest={"ExperimentArm",},
+    manifest={
+        "ExperimentArm",
+    },
 )
 
 
@@ -58,13 +60,34 @@ class ExperimentArm(proto.Message):
             treatment experiment arm.
     """
 
-    resource_name = proto.Field(proto.STRING, number=1,)
-    trial = proto.Field(proto.STRING, number=2,)
-    name = proto.Field(proto.STRING, number=3,)
-    control = proto.Field(proto.BOOL, number=4,)
-    traffic_split = proto.Field(proto.INT64, number=5,)
-    campaigns = proto.RepeatedField(proto.STRING, number=6,)
-    in_design_campaigns = proto.RepeatedField(proto.STRING, number=7,)
+    resource_name = proto.Field(
+        proto.STRING,
+        number=1,
+    )
+    trial = proto.Field(
+        proto.STRING,
+        number=2,
+    )
+    name = proto.Field(
+        proto.STRING,
+        number=3,
+    )
+    control = proto.Field(
+        proto.BOOL,
+        number=4,
+    )
+    traffic_split = proto.Field(
+        proto.INT64,
+        number=5,
+    )
+    campaigns = proto.RepeatedField(
+        proto.STRING,
+        number=6,
+    )
+    in_design_campaigns = proto.RepeatedField(
+        proto.STRING,
+        number=7,
+    )
 
 
 __all__ = tuple(sorted(__protobuf__.manifest))

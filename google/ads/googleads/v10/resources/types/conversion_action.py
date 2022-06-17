@@ -35,7 +35,9 @@ from google.ads.googleads.v10.enums.types import (
 __protobuf__ = proto.module(
     package="google.ads.googleads.v10.resources",
     marshal="google.ads.googleads.v10",
-    manifest={"ConversionAction",},
+    manifest={
+        "ConversionAction",
+    },
 )
 
 
@@ -195,12 +197,20 @@ class ConversionAction(proto.Message):
                 This field is a member of `oneof`_ ``_always_use_default_value``.
         """
 
-        default_value = proto.Field(proto.DOUBLE, number=4, optional=True,)
+        default_value = proto.Field(
+            proto.DOUBLE,
+            number=4,
+            optional=True,
+        )
         default_currency_code = proto.Field(
-            proto.STRING, number=5, optional=True,
+            proto.STRING,
+            number=5,
+            optional=True,
         )
         always_use_default_value = proto.Field(
-            proto.BOOL, number=6, optional=True,
+            proto.BOOL,
+            number=6,
+            optional=True,
         )
 
     class ThirdPartyAppAnalyticsSettings(proto.Message):
@@ -218,8 +228,15 @@ class ConversionAction(proto.Message):
                 analytics provider.
         """
 
-        event_name = proto.Field(proto.STRING, number=2, optional=True,)
-        provider_name = proto.Field(proto.STRING, number=3,)
+        event_name = proto.Field(
+            proto.STRING,
+            number=2,
+            optional=True,
+        )
+        provider_name = proto.Field(
+            proto.STRING,
+            number=3,
+        )
 
     class FirebaseSettings(proto.Message):
         r"""Settings related to a Firebase conversion action.
@@ -237,12 +254,31 @@ class ConversionAction(proto.Message):
                 This field is a member of `oneof`_ ``_project_id``.
         """
 
-        event_name = proto.Field(proto.STRING, number=3, optional=True,)
-        project_id = proto.Field(proto.STRING, number=4, optional=True,)
+        event_name = proto.Field(
+            proto.STRING,
+            number=3,
+            optional=True,
+        )
+        project_id = proto.Field(
+            proto.STRING,
+            number=4,
+            optional=True,
+        )
 
-    resource_name = proto.Field(proto.STRING, number=1,)
-    id = proto.Field(proto.INT64, number=21, optional=True,)
-    name = proto.Field(proto.STRING, number=22, optional=True,)
+    resource_name = proto.Field(
+        proto.STRING,
+        number=1,
+    )
+    id = proto.Field(
+        proto.INT64,
+        number=21,
+        optional=True,
+    )
+    name = proto.Field(
+        proto.STRING,
+        number=22,
+        optional=True,
+    )
     status = proto.Field(
         proto.ENUM,
         number=4,
@@ -258,24 +294,40 @@ class ConversionAction(proto.Message):
         number=30,
         enum=conversion_origin.ConversionOriginEnum.ConversionOrigin,
     )
-    primary_for_goal = proto.Field(proto.BOOL, number=31, optional=True,)
+    primary_for_goal = proto.Field(
+        proto.BOOL,
+        number=31,
+        optional=True,
+    )
     category = proto.Field(
         proto.ENUM,
         number=6,
         enum=conversion_action_category.ConversionActionCategoryEnum.ConversionActionCategory,
     )
-    owner_customer = proto.Field(proto.STRING, number=23, optional=True,)
+    owner_customer = proto.Field(
+        proto.STRING,
+        number=23,
+        optional=True,
+    )
     include_in_conversions_metric = proto.Field(
-        proto.BOOL, number=24, optional=True,
+        proto.BOOL,
+        number=24,
+        optional=True,
     )
     click_through_lookback_window_days = proto.Field(
-        proto.INT64, number=25, optional=True,
+        proto.INT64,
+        number=25,
+        optional=True,
     )
     view_through_lookback_window_days = proto.Field(
-        proto.INT64, number=26, optional=True,
+        proto.INT64,
+        number=26,
+        optional=True,
     )
     value_settings = proto.Field(
-        proto.MESSAGE, number=11, message=ValueSettings,
+        proto.MESSAGE,
+        number=11,
+        message=ValueSettings,
     )
     counting_type = proto.Field(
         proto.ENUM,
@@ -283,25 +335,39 @@ class ConversionAction(proto.Message):
         enum=conversion_action_counting_type.ConversionActionCountingTypeEnum.ConversionActionCountingType,
     )
     attribution_model_settings = proto.Field(
-        proto.MESSAGE, number=13, message=AttributionModelSettings,
+        proto.MESSAGE,
+        number=13,
+        message=AttributionModelSettings,
     )
     tag_snippets = proto.RepeatedField(
-        proto.MESSAGE, number=14, message=tag_snippet.TagSnippet,
+        proto.MESSAGE,
+        number=14,
+        message=tag_snippet.TagSnippet,
     )
     phone_call_duration_seconds = proto.Field(
-        proto.INT64, number=27, optional=True,
+        proto.INT64,
+        number=27,
+        optional=True,
     )
-    app_id = proto.Field(proto.STRING, number=28, optional=True,)
+    app_id = proto.Field(
+        proto.STRING,
+        number=28,
+        optional=True,
+    )
     mobile_app_vendor = proto.Field(
         proto.ENUM,
         number=17,
         enum=gage_mobile_app_vendor.MobileAppVendorEnum.MobileAppVendor,
     )
     firebase_settings = proto.Field(
-        proto.MESSAGE, number=18, message=FirebaseSettings,
+        proto.MESSAGE,
+        number=18,
+        message=FirebaseSettings,
     )
     third_party_app_analytics_settings = proto.Field(
-        proto.MESSAGE, number=19, message=ThirdPartyAppAnalyticsSettings,
+        proto.MESSAGE,
+        number=19,
+        message=ThirdPartyAppAnalyticsSettings,
     )
 
 

@@ -19,13 +19,14 @@ import proto  # type: ignore
 __protobuf__ = proto.module(
     package="google.ads.googleads.v10.enums",
     marshal="google.ads.googleads.v10",
-    manifest={"MimeTypeEnum",},
+    manifest={
+        "MimeTypeEnum",
+    },
 )
 
 
 class MimeTypeEnum(proto.Message):
-    r"""Container for enum describing the mime types.
-    """
+    r"""Container for enum describing the mime types."""
 
     class MimeType(proto.Enum):
         r"""The mime type"""

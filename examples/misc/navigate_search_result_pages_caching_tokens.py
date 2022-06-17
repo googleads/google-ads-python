@@ -198,7 +198,8 @@ if __name__ == "__main__":
 
     try:
         main(
-            googleads_client, args.customer_id,
+            googleads_client,
+            args.customer_id,
         )
     except GoogleAdsException as ex:
         print(

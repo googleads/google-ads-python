@@ -19,13 +19,14 @@ import proto  # type: ignore
 __protobuf__ = proto.module(
     package="google.ads.googleads.v10.enums",
     marshal="google.ads.googleads.v10",
-    manifest={"BidModifierSourceEnum",},
+    manifest={
+        "BidModifierSourceEnum",
+    },
 )
 
 
 class BidModifierSourceEnum(proto.Message):
-    r"""Container for enum describing possible bid modifier sources.
-    """
+    r"""Container for enum describing possible bid modifier sources."""
 
     class BidModifierSource(proto.Enum):
         r"""Enum describing possible bid modifier sources."""

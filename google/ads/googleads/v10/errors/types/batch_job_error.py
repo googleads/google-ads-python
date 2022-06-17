@@ -19,13 +19,14 @@ import proto  # type: ignore
 __protobuf__ = proto.module(
     package="google.ads.googleads.v10.errors",
     marshal="google.ads.googleads.v10",
-    manifest={"BatchJobErrorEnum",},
+    manifest={
+        "BatchJobErrorEnum",
+    },
 )
 
 
 class BatchJobErrorEnum(proto.Message):
-    r"""Container for enum describing possible batch job errors.
-    """
+    r"""Container for enum describing possible batch job errors."""
 
     class BatchJobError(proto.Enum):
         r"""Enum describing possible request errors."""

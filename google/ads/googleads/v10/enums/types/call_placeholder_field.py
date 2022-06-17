@@ -19,13 +19,14 @@ import proto  # type: ignore
 __protobuf__ = proto.module(
     package="google.ads.googleads.v10.enums",
     marshal="google.ads.googleads.v10",
-    manifest={"CallPlaceholderFieldEnum",},
+    manifest={
+        "CallPlaceholderFieldEnum",
+    },
 )
 
 
 class CallPlaceholderFieldEnum(proto.Message):
-    r"""Values for Call placeholder fields.
-    """
+    r"""Values for Call placeholder fields."""
 
     class CallPlaceholderField(proto.Enum):
         r"""Possible values for Call placeholder fields."""

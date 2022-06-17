@@ -62,12 +62,23 @@ class MutateCampaignCustomizersRequest(proto.Message):
             resource name should be returned post mutation.
     """
 
-    customer_id = proto.Field(proto.STRING, number=1,)
-    operations = proto.RepeatedField(
-        proto.MESSAGE, number=2, message="CampaignCustomizerOperation",
+    customer_id = proto.Field(
+        proto.STRING,
+        number=1,
     )
-    partial_failure = proto.Field(proto.BOOL, number=3,)
-    validate_only = proto.Field(proto.BOOL, number=4,)
+    operations = proto.RepeatedField(
+        proto.MESSAGE,
+        number=2,
+        message="CampaignCustomizerOperation",
+    )
+    partial_failure = proto.Field(
+        proto.BOOL,
+        number=3,
+    )
+    validate_only = proto.Field(
+        proto.BOOL,
+        number=4,
+    )
     response_content_type = proto.Field(
         proto.ENUM,
         number=5,
@@ -106,7 +117,11 @@ class CampaignCustomizerOperation(proto.Message):
         oneof="operation",
         message=gagr_campaign_customizer.CampaignCustomizer,
     )
-    remove = proto.Field(proto.STRING, number=2, oneof="operation",)
+    remove = proto.Field(
+        proto.STRING,
+        number=2,
+        oneof="operation",
+    )
 
 
 class MutateCampaignCustomizersResponse(proto.Message):
@@ -124,10 +139,14 @@ class MutateCampaignCustomizersResponse(proto.Message):
     """
 
     results = proto.RepeatedField(
-        proto.MESSAGE, number=1, message="MutateCampaignCustomizerResult",
+        proto.MESSAGE,
+        number=1,
+        message="MutateCampaignCustomizerResult",
     )
     partial_failure_error = proto.Field(
-        proto.MESSAGE, number=2, message=status_pb2.Status,
+        proto.MESSAGE,
+        number=2,
+        message=status_pb2.Status,
     )
 
 
@@ -143,7 +162,10 @@ class MutateCampaignCustomizerResult(proto.Message):
             response_content_type is set to "MUTABLE_RESOURCE".
     """
 
-    resource_name = proto.Field(proto.STRING, number=1,)
+    resource_name = proto.Field(
+        proto.STRING,
+        number=1,
+    )
     campaign_customizer = proto.Field(
         proto.MESSAGE,
         number=2,

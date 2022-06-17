@@ -62,8 +62,15 @@ class SuggestSmartCampaignBudgetOptionsRequest(proto.Message):
             This field is a member of `oneof`_ ``suggestion_data``.
     """
 
-    customer_id = proto.Field(proto.STRING, number=1,)
-    campaign = proto.Field(proto.STRING, number=2, oneof="suggestion_data",)
+    customer_id = proto.Field(
+        proto.STRING,
+        number=1,
+    )
+    campaign = proto.Field(
+        proto.STRING,
+        number=2,
+        oneof="suggestion_data",
+    )
     suggestion_info = proto.Field(
         proto.MESSAGE,
         number=3,
@@ -133,7 +140,9 @@ class SmartCampaignSuggestionInfo(proto.Message):
         """
 
         locations = proto.RepeatedField(
-            proto.MESSAGE, number=1, message=criteria.LocationInfo,
+            proto.MESSAGE,
+            number=1,
+            message=criteria.LocationInfo,
         )
 
     class BusinessContext(proto.Message):
@@ -144,15 +153,28 @@ class SmartCampaignSuggestionInfo(proto.Message):
                 Optional. The name of the business.
         """
 
-        business_name = proto.Field(proto.STRING, number=1,)
+        business_name = proto.Field(
+            proto.STRING,
+            number=1,
+        )
 
-    final_url = proto.Field(proto.STRING, number=1,)
-    language_code = proto.Field(proto.STRING, number=3,)
+    final_url = proto.Field(
+        proto.STRING,
+        number=1,
+    )
+    language_code = proto.Field(
+        proto.STRING,
+        number=3,
+    )
     ad_schedules = proto.RepeatedField(
-        proto.MESSAGE, number=6, message=criteria.AdScheduleInfo,
+        proto.MESSAGE,
+        number=6,
+        message=criteria.AdScheduleInfo,
     )
     keyword_themes = proto.RepeatedField(
-        proto.MESSAGE, number=7, message=criteria.KeywordThemeInfo,
+        proto.MESSAGE,
+        number=7,
+        message=criteria.KeywordThemeInfo,
     )
     business_context = proto.Field(
         proto.MESSAGE,
@@ -161,10 +183,15 @@ class SmartCampaignSuggestionInfo(proto.Message):
         message=BusinessContext,
     )
     business_location_id = proto.Field(
-        proto.INT64, number=2, oneof="business_setting",
+        proto.INT64,
+        number=2,
+        oneof="business_setting",
     )
     location_list = proto.Field(
-        proto.MESSAGE, number=4, oneof="geo_target", message=LocationList,
+        proto.MESSAGE,
+        number=4,
+        oneof="geo_target",
+        message=LocationList,
     )
     proximity = proto.Field(
         proto.MESSAGE,
@@ -205,8 +232,14 @@ class SuggestSmartCampaignBudgetOptionsResponse(proto.Message):
                 The estimated max daily clicks.
         """
 
-        min_daily_clicks = proto.Field(proto.INT64, number=1,)
-        max_daily_clicks = proto.Field(proto.INT64, number=2,)
+        min_daily_clicks = proto.Field(
+            proto.INT64,
+            number=1,
+        )
+        max_daily_clicks = proto.Field(
+            proto.INT64,
+            number=2,
+        )
 
     class BudgetOption(proto.Message):
         r"""Smart Campaign budget option.
@@ -223,7 +256,10 @@ class SuggestSmartCampaignBudgetOptionsResponse(proto.Message):
                 information to derive the estimates.
         """
 
-        daily_amount_micros = proto.Field(proto.INT64, number=1,)
+        daily_amount_micros = proto.Field(
+            proto.INT64,
+            number=1,
+        )
         metrics = proto.Field(
             proto.MESSAGE,
             number=2,
@@ -231,13 +267,22 @@ class SuggestSmartCampaignBudgetOptionsResponse(proto.Message):
         )
 
     low = proto.Field(
-        proto.MESSAGE, number=1, optional=True, message=BudgetOption,
+        proto.MESSAGE,
+        number=1,
+        optional=True,
+        message=BudgetOption,
     )
     recommended = proto.Field(
-        proto.MESSAGE, number=2, optional=True, message=BudgetOption,
+        proto.MESSAGE,
+        number=2,
+        optional=True,
+        message=BudgetOption,
     )
     high = proto.Field(
-        proto.MESSAGE, number=3, optional=True, message=BudgetOption,
+        proto.MESSAGE,
+        number=3,
+        optional=True,
+        message=BudgetOption,
     )
 
 
@@ -255,9 +300,14 @@ class SuggestSmartCampaignAdRequest(proto.Message):
             the suggestion: business_setting and geo_target.
     """
 
-    customer_id = proto.Field(proto.STRING, number=1,)
+    customer_id = proto.Field(
+        proto.STRING,
+        number=1,
+    )
     suggestion_info = proto.Field(
-        proto.MESSAGE, number=2, message="SmartCampaignSuggestionInfo",
+        proto.MESSAGE,
+        number=2,
+        message="SmartCampaignSuggestionInfo",
     )
 
 
@@ -272,7 +322,9 @@ class SuggestSmartCampaignAdResponse(proto.Message):
     """
 
     ad_info = proto.Field(
-        proto.MESSAGE, number=1, message=ad_type_infos.SmartCampaignAdInfo,
+        proto.MESSAGE,
+        number=1,
+        message=ad_type_infos.SmartCampaignAdInfo,
     )
 
 
@@ -296,9 +348,14 @@ class SuggestKeywordThemesRequest(proto.Message):
             -  suggestion_info.business_setting
     """
 
-    customer_id = proto.Field(proto.STRING, number=1,)
+    customer_id = proto.Field(
+        proto.STRING,
+        number=1,
+    )
     suggestion_info = proto.Field(
-        proto.MESSAGE, number=2, message="SmartCampaignSuggestionInfo",
+        proto.MESSAGE,
+        number=2,
+        message="SmartCampaignSuggestionInfo",
     )
 
 

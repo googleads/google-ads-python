@@ -19,13 +19,14 @@ import proto  # type: ignore
 __protobuf__ = proto.module(
     package="google.ads.googleads.v10.enums",
     marshal="google.ads.googleads.v10",
-    manifest={"PlacementTypeEnum",},
+    manifest={
+        "PlacementTypeEnum",
+    },
 )
 
 
 class PlacementTypeEnum(proto.Message):
-    r"""Container for enum describing possible placement types.
-    """
+    r"""Container for enum describing possible placement types."""
 
     class PlacementType(proto.Enum):
         r"""Possible placement types for a feed mapping."""

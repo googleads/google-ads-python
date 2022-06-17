@@ -64,12 +64,23 @@ class MutateAdGroupCriteriaRequest(proto.Message):
             resource name should be returned post mutation.
     """
 
-    customer_id = proto.Field(proto.STRING, number=1,)
-    operations = proto.RepeatedField(
-        proto.MESSAGE, number=2, message="AdGroupCriterionOperation",
+    customer_id = proto.Field(
+        proto.STRING,
+        number=1,
     )
-    partial_failure = proto.Field(proto.BOOL, number=3,)
-    validate_only = proto.Field(proto.BOOL, number=4,)
+    operations = proto.RepeatedField(
+        proto.MESSAGE,
+        number=2,
+        message="AdGroupCriterionOperation",
+    )
+    partial_failure = proto.Field(
+        proto.BOOL,
+        number=3,
+    )
+    validate_only = proto.Field(
+        proto.BOOL,
+        number=4,
+    )
     response_content_type = proto.Field(
         proto.ENUM,
         number=5,
@@ -122,10 +133,14 @@ class AdGroupCriterionOperation(proto.Message):
     """
 
     update_mask = proto.Field(
-        proto.MESSAGE, number=4, message=field_mask_pb2.FieldMask,
+        proto.MESSAGE,
+        number=4,
+        message=field_mask_pb2.FieldMask,
     )
     exempt_policy_violation_keys = proto.RepeatedField(
-        proto.MESSAGE, number=5, message=policy.PolicyViolationKey,
+        proto.MESSAGE,
+        number=5,
+        message=policy.PolicyViolationKey,
     )
     create = proto.Field(
         proto.MESSAGE,
@@ -139,7 +154,11 @@ class AdGroupCriterionOperation(proto.Message):
         oneof="operation",
         message=gagr_ad_group_criterion.AdGroupCriterion,
     )
-    remove = proto.Field(proto.STRING, number=3, oneof="operation",)
+    remove = proto.Field(
+        proto.STRING,
+        number=3,
+        oneof="operation",
+    )
 
 
 class MutateAdGroupCriteriaResponse(proto.Message):
@@ -157,10 +176,14 @@ class MutateAdGroupCriteriaResponse(proto.Message):
     """
 
     partial_failure_error = proto.Field(
-        proto.MESSAGE, number=3, message=status_pb2.Status,
+        proto.MESSAGE,
+        number=3,
+        message=status_pb2.Status,
     )
     results = proto.RepeatedField(
-        proto.MESSAGE, number=2, message="MutateAdGroupCriterionResult",
+        proto.MESSAGE,
+        number=2,
+        message="MutateAdGroupCriterionResult",
     )
 
 
@@ -176,7 +199,10 @@ class MutateAdGroupCriterionResult(proto.Message):
             response_content_type is set to "MUTABLE_RESOURCE".
     """
 
-    resource_name = proto.Field(proto.STRING, number=1,)
+    resource_name = proto.Field(
+        proto.STRING,
+        number=1,
+    )
     ad_group_criterion = proto.Field(
         proto.MESSAGE,
         number=2,

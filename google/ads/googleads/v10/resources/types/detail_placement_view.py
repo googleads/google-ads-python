@@ -23,7 +23,9 @@ from google.ads.googleads.v10.enums.types import (
 __protobuf__ = proto.module(
     package="google.ads.googleads.v10.resources",
     marshal="google.ads.googleads.v10",
-    manifest={"DetailPlacementView",},
+    manifest={
+        "DetailPlacementView",
+    },
 )
 
 
@@ -66,13 +68,30 @@ class DetailPlacementView(proto.Message):
             Website, YouTube Video, and Mobile Application.
     """
 
-    resource_name = proto.Field(proto.STRING, number=1,)
-    placement = proto.Field(proto.STRING, number=7, optional=True,)
-    display_name = proto.Field(proto.STRING, number=8, optional=True,)
-    group_placement_target_url = proto.Field(
-        proto.STRING, number=9, optional=True,
+    resource_name = proto.Field(
+        proto.STRING,
+        number=1,
     )
-    target_url = proto.Field(proto.STRING, number=10, optional=True,)
+    placement = proto.Field(
+        proto.STRING,
+        number=7,
+        optional=True,
+    )
+    display_name = proto.Field(
+        proto.STRING,
+        number=8,
+        optional=True,
+    )
+    group_placement_target_url = proto.Field(
+        proto.STRING,
+        number=9,
+        optional=True,
+    )
+    target_url = proto.Field(
+        proto.STRING,
+        number=10,
+        optional=True,
+    )
     placement_type = proto.Field(
         proto.ENUM,
         number=6,

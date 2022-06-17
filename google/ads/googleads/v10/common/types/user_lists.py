@@ -72,7 +72,11 @@ class SimilarUserListInfo(proto.Message):
             This field is a member of `oneof`_ ``_seed_user_list``.
     """
 
-    seed_user_list = proto.Field(proto.STRING, number=2, optional=True,)
+    seed_user_list = proto.Field(
+        proto.STRING,
+        number=2,
+        optional=True,
+    )
 
 
 class CrmBasedUserListInfo(proto.Message):
@@ -106,7 +110,11 @@ class CrmBasedUserListInfo(proto.Message):
             CRM lists.
     """
 
-    app_id = proto.Field(proto.STRING, number=4, optional=True,)
+    app_id = proto.Field(
+        proto.STRING,
+        number=4,
+        optional=True,
+    )
     upload_key_type = proto.Field(
         proto.ENUM,
         number=2,
@@ -145,7 +153,9 @@ class UserListRuleInfo(proto.Message):
         enum=user_list_rule_type.UserListRuleTypeEnum.UserListRuleType,
     )
     rule_item_groups = proto.RepeatedField(
-        proto.MESSAGE, number=2, message="UserListRuleItemGroupInfo",
+        proto.MESSAGE,
+        number=2,
+        message="UserListRuleItemGroupInfo",
     )
 
 
@@ -158,7 +168,9 @@ class UserListRuleItemGroupInfo(proto.Message):
     """
 
     rule_items = proto.RepeatedField(
-        proto.MESSAGE, number=1, message="UserListRuleItemInfo",
+        proto.MESSAGE,
+        number=1,
+        message="UserListRuleItemInfo",
     )
 
 
@@ -201,7 +213,11 @@ class UserListRuleItemInfo(proto.Message):
             This field is a member of `oneof`_ ``rule_item``.
     """
 
-    name = proto.Field(proto.STRING, number=5, optional=True,)
+    name = proto.Field(
+        proto.STRING,
+        number=5,
+        optional=True,
+    )
     number_rule_item = proto.Field(
         proto.MESSAGE,
         number=2,
@@ -251,8 +267,16 @@ class UserListDateRuleItemInfo(proto.Message):
         number=1,
         enum=user_list_date_rule_item_operator.UserListDateRuleItemOperatorEnum.UserListDateRuleItemOperator,
     )
-    value = proto.Field(proto.STRING, number=4, optional=True,)
-    offset_in_days = proto.Field(proto.INT64, number=5, optional=True,)
+    value = proto.Field(
+        proto.STRING,
+        number=4,
+        optional=True,
+    )
+    offset_in_days = proto.Field(
+        proto.INT64,
+        number=5,
+        optional=True,
+    )
 
 
 class UserListNumberRuleItemInfo(proto.Message):
@@ -276,7 +300,11 @@ class UserListNumberRuleItemInfo(proto.Message):
         number=1,
         enum=user_list_number_rule_item_operator.UserListNumberRuleItemOperatorEnum.UserListNumberRuleItemOperator,
     )
-    value = proto.Field(proto.DOUBLE, number=3, optional=True,)
+    value = proto.Field(
+        proto.DOUBLE,
+        number=3,
+        optional=True,
+    )
 
 
 class UserListStringRuleItemInfo(proto.Message):
@@ -303,7 +331,11 @@ class UserListStringRuleItemInfo(proto.Message):
         number=1,
         enum=user_list_string_rule_item_operator.UserListStringRuleItemOperatorEnum.UserListStringRuleItemOperator,
     )
-    value = proto.Field(proto.STRING, number=3, optional=True,)
+    value = proto.Field(
+        proto.STRING,
+        number=3,
+        optional=True,
+    )
 
 
 class CombinedRuleUserListInfo(proto.Message):
@@ -327,10 +359,14 @@ class CombinedRuleUserListInfo(proto.Message):
     """
 
     left_operand = proto.Field(
-        proto.MESSAGE, number=1, message="UserListRuleInfo",
+        proto.MESSAGE,
+        number=1,
+        message="UserListRuleInfo",
     )
     right_operand = proto.Field(
-        proto.MESSAGE, number=2, message="UserListRuleInfo",
+        proto.MESSAGE,
+        number=2,
+        message="UserListRuleInfo",
     )
     rule_operator = proto.Field(
         proto.ENUM,
@@ -365,9 +401,21 @@ class DateSpecificRuleUserListInfo(proto.Message):
             This field is a member of `oneof`_ ``_end_date``.
     """
 
-    rule = proto.Field(proto.MESSAGE, number=1, message="UserListRuleInfo",)
-    start_date = proto.Field(proto.STRING, number=4, optional=True,)
-    end_date = proto.Field(proto.STRING, number=5, optional=True,)
+    rule = proto.Field(
+        proto.MESSAGE,
+        number=1,
+        message="UserListRuleInfo",
+    )
+    start_date = proto.Field(
+        proto.STRING,
+        number=4,
+        optional=True,
+    )
+    end_date = proto.Field(
+        proto.STRING,
+        number=5,
+        optional=True,
+    )
 
 
 class ExpressionRuleUserListInfo(proto.Message):
@@ -385,7 +433,11 @@ class ExpressionRuleUserListInfo(proto.Message):
             Required for creating an expression rule user list.
     """
 
-    rule = proto.Field(proto.MESSAGE, number=1, message="UserListRuleInfo",)
+    rule = proto.Field(
+        proto.MESSAGE,
+        number=1,
+        message="UserListRuleInfo",
+    )
 
 
 class RuleBasedUserListInfo(proto.Message):
@@ -475,7 +527,9 @@ class LogicalUserListInfo(proto.Message):
     """
 
     rules = proto.RepeatedField(
-        proto.MESSAGE, number=1, message="UserListLogicalRuleInfo",
+        proto.MESSAGE,
+        number=1,
+        message="UserListLogicalRuleInfo",
     )
 
 
@@ -496,7 +550,9 @@ class UserListLogicalRuleInfo(proto.Message):
         enum=user_list_logical_rule_operator.UserListLogicalRuleOperatorEnum.UserListLogicalRuleOperator,
     )
     rule_operands = proto.RepeatedField(
-        proto.MESSAGE, number=2, message="LogicalUserListOperandInfo",
+        proto.MESSAGE,
+        number=2,
+        message="LogicalUserListOperandInfo",
     )
 
 
@@ -510,7 +566,11 @@ class LogicalUserListOperandInfo(proto.Message):
             This field is a member of `oneof`_ ``_user_list``.
     """
 
-    user_list = proto.Field(proto.STRING, number=2, optional=True,)
+    user_list = proto.Field(
+        proto.STRING,
+        number=2,
+        optional=True,
+    )
 
 
 class BasicUserListInfo(proto.Message):
@@ -523,7 +583,9 @@ class BasicUserListInfo(proto.Message):
     """
 
     actions = proto.RepeatedField(
-        proto.MESSAGE, number=1, message="UserListActionInfo",
+        proto.MESSAGE,
+        number=1,
+        message="UserListActionInfo",
     )
 
 
@@ -551,10 +613,14 @@ class UserListActionInfo(proto.Message):
     """
 
     conversion_action = proto.Field(
-        proto.STRING, number=3, oneof="user_list_action",
+        proto.STRING,
+        number=3,
+        oneof="user_list_action",
     )
     remarketing_action = proto.Field(
-        proto.STRING, number=4, oneof="user_list_action",
+        proto.STRING,
+        number=4,
+        oneof="user_list_action",
     )
 
 

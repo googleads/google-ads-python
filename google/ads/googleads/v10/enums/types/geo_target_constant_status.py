@@ -19,13 +19,14 @@ import proto  # type: ignore
 __protobuf__ = proto.module(
     package="google.ads.googleads.v10.enums",
     marshal="google.ads.googleads.v10",
-    manifest={"GeoTargetConstantStatusEnum",},
+    manifest={
+        "GeoTargetConstantStatusEnum",
+    },
 )
 
 
 class GeoTargetConstantStatusEnum(proto.Message):
-    r"""Container for describing the status of a geo target constant.
-    """
+    r"""Container for describing the status of a geo target constant."""
 
     class GeoTargetConstantStatus(proto.Enum):
         r"""The possible statuses of a geo target constant."""

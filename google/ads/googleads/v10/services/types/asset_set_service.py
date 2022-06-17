@@ -61,12 +61,23 @@ class MutateAssetSetsRequest(proto.Message):
             resource name should be returned post mutation.
     """
 
-    customer_id = proto.Field(proto.STRING, number=1,)
-    operations = proto.RepeatedField(
-        proto.MESSAGE, number=2, message="AssetSetOperation",
+    customer_id = proto.Field(
+        proto.STRING,
+        number=1,
     )
-    partial_failure = proto.Field(proto.BOOL, number=3,)
-    validate_only = proto.Field(proto.BOOL, number=4,)
+    operations = proto.RepeatedField(
+        proto.MESSAGE,
+        number=2,
+        message="AssetSetOperation",
+    )
+    partial_failure = proto.Field(
+        proto.BOOL,
+        number=3,
+    )
+    validate_only = proto.Field(
+        proto.BOOL,
+        number=4,
+    )
     response_content_type = proto.Field(
         proto.ENUM,
         number=5,
@@ -107,7 +118,9 @@ class AssetSetOperation(proto.Message):
     """
 
     update_mask = proto.Field(
-        proto.MESSAGE, number=4, message=field_mask_pb2.FieldMask,
+        proto.MESSAGE,
+        number=4,
+        message=field_mask_pb2.FieldMask,
     )
     create = proto.Field(
         proto.MESSAGE,
@@ -121,7 +134,11 @@ class AssetSetOperation(proto.Message):
         oneof="operation",
         message=gagr_asset_set.AssetSet,
     )
-    remove = proto.Field(proto.STRING, number=3, oneof="operation",)
+    remove = proto.Field(
+        proto.STRING,
+        number=3,
+        oneof="operation",
+    )
 
 
 class MutateAssetSetsResponse(proto.Message):
@@ -139,10 +156,14 @@ class MutateAssetSetsResponse(proto.Message):
     """
 
     results = proto.RepeatedField(
-        proto.MESSAGE, number=1, message="MutateAssetSetResult",
+        proto.MESSAGE,
+        number=1,
+        message="MutateAssetSetResult",
     )
     partial_failure_error = proto.Field(
-        proto.MESSAGE, number=2, message=status_pb2.Status,
+        proto.MESSAGE,
+        number=2,
+        message=status_pb2.Status,
     )
 
 
@@ -158,9 +179,14 @@ class MutateAssetSetResult(proto.Message):
             is set to "MUTABLE_RESOURCE".
     """
 
-    resource_name = proto.Field(proto.STRING, number=1,)
+    resource_name = proto.Field(
+        proto.STRING,
+        number=1,
+    )
     asset_set = proto.Field(
-        proto.MESSAGE, number=2, message=gagr_asset_set.AssetSet,
+        proto.MESSAGE,
+        number=2,
+        message=gagr_asset_set.AssetSet,
     )
 
 

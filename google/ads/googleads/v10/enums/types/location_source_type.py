@@ -19,13 +19,14 @@ import proto  # type: ignore
 __protobuf__ = proto.module(
     package="google.ads.googleads.v10.enums",
     marshal="google.ads.googleads.v10",
-    manifest={"LocationSourceTypeEnum",},
+    manifest={
+        "LocationSourceTypeEnum",
+    },
 )
 
 
 class LocationSourceTypeEnum(proto.Message):
-    r"""Used to distinguish the location source type.
-    """
+    r"""Used to distinguish the location source type."""
 
     class LocationSourceType(proto.Enum):
         r"""The possible types of a location source."""

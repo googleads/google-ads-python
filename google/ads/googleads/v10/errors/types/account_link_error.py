@@ -19,13 +19,14 @@ import proto  # type: ignore
 __protobuf__ = proto.module(
     package="google.ads.googleads.v10.errors",
     marshal="google.ads.googleads.v10",
-    manifest={"AccountLinkErrorEnum",},
+    manifest={
+        "AccountLinkErrorEnum",
+    },
 )
 
 
 class AccountLinkErrorEnum(proto.Message):
-    r"""Container for enum describing possible account link errors.
-    """
+    r"""Container for enum describing possible account link errors."""
 
     class AccountLinkError(proto.Enum):
         r"""Enum describing possible account link errors."""

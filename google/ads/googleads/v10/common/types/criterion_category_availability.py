@@ -54,10 +54,14 @@ class CriterionCategoryAvailability(proto.Message):
     """
 
     channel = proto.Field(
-        proto.MESSAGE, number=1, message="CriterionCategoryChannelAvailability",
+        proto.MESSAGE,
+        number=1,
+        message="CriterionCategoryChannelAvailability",
     )
     locale = proto.RepeatedField(
-        proto.MESSAGE, number=2, message="CriterionCategoryLocaleAvailability",
+        proto.MESSAGE,
+        number=2,
+        message="CriterionCategoryLocaleAvailability",
     )
 
 
@@ -105,7 +109,9 @@ class CriterionCategoryChannelAvailability(proto.Message):
         enum=gage_advertising_channel_sub_type.AdvertisingChannelSubTypeEnum.AdvertisingChannelSubType,
     )
     include_default_channel_sub_type = proto.Field(
-        proto.BOOL, number=5, optional=True,
+        proto.BOOL,
+        number=5,
+        optional=True,
     )
 
 
@@ -134,8 +140,16 @@ class CriterionCategoryLocaleAvailability(proto.Message):
         number=1,
         enum=criterion_category_locale_availability_mode.CriterionCategoryLocaleAvailabilityModeEnum.CriterionCategoryLocaleAvailabilityMode,
     )
-    country_code = proto.Field(proto.STRING, number=4, optional=True,)
-    language_code = proto.Field(proto.STRING, number=5, optional=True,)
+    country_code = proto.Field(
+        proto.STRING,
+        number=4,
+        optional=True,
+    )
+    language_code = proto.Field(
+        proto.STRING,
+        number=5,
+        optional=True,
+    )
 
 
 __all__ = tuple(sorted(__protobuf__.manifest))

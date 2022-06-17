@@ -19,7 +19,9 @@ import proto  # type: ignore
 __protobuf__ = proto.module(
     package="google.ads.googleads.v10.resources",
     marshal="google.ads.googleads.v10",
-    manifest={"AdGroupAudienceView",},
+    manifest={
+        "AdGroupAudienceView",
+    },
 )
 
 
@@ -37,7 +39,10 @@ class AdGroupAudienceView(proto.Message):
             ``customers/{customer_id}/adGroupAudienceViews/{ad_group_id}~{criterion_id}``
     """
 
-    resource_name = proto.Field(proto.STRING, number=1,)
+    resource_name = proto.Field(
+        proto.STRING,
+        number=1,
+    )
 
 
 __all__ = tuple(sorted(__protobuf__.manifest))

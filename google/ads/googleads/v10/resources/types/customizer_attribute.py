@@ -22,7 +22,9 @@ from google.ads.googleads.v10.enums.types import customizer_attribute_type
 __protobuf__ = proto.module(
     package="google.ads.googleads.v10.resources",
     marshal="google.ads.googleads.v10",
-    manifest={"CustomizerAttribute",},
+    manifest={
+        "CustomizerAttribute",
+    },
 )
 
 
@@ -56,9 +58,18 @@ class CustomizerAttribute(proto.Message):
             attribute.
     """
 
-    resource_name = proto.Field(proto.STRING, number=1,)
-    id = proto.Field(proto.INT64, number=2,)
-    name = proto.Field(proto.STRING, number=3,)
+    resource_name = proto.Field(
+        proto.STRING,
+        number=1,
+    )
+    id = proto.Field(
+        proto.INT64,
+        number=2,
+    )
+    name = proto.Field(
+        proto.STRING,
+        number=3,
+    )
     type_ = proto.Field(
         proto.ENUM,
         number=4,

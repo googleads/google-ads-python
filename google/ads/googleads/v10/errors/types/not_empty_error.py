@@ -19,13 +19,14 @@ import proto  # type: ignore
 __protobuf__ = proto.module(
     package="google.ads.googleads.v10.errors",
     marshal="google.ads.googleads.v10",
-    manifest={"NotEmptyErrorEnum",},
+    manifest={
+        "NotEmptyErrorEnum",
+    },
 )
 
 
 class NotEmptyErrorEnum(proto.Message):
-    r"""Container for enum describing possible not empty errors.
-    """
+    r"""Container for enum describing possible not empty errors."""
 
     class NotEmptyError(proto.Enum):
         r"""Enum describing possible not empty errors."""

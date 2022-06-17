@@ -62,12 +62,23 @@ class MutateCustomerNegativeCriteriaRequest(proto.Message):
             resource name should be returned post mutation.
     """
 
-    customer_id = proto.Field(proto.STRING, number=1,)
-    operations = proto.RepeatedField(
-        proto.MESSAGE, number=2, message="CustomerNegativeCriterionOperation",
+    customer_id = proto.Field(
+        proto.STRING,
+        number=1,
     )
-    partial_failure = proto.Field(proto.BOOL, number=3,)
-    validate_only = proto.Field(proto.BOOL, number=4,)
+    operations = proto.RepeatedField(
+        proto.MESSAGE,
+        number=2,
+        message="CustomerNegativeCriterionOperation",
+    )
+    partial_failure = proto.Field(
+        proto.BOOL,
+        number=3,
+    )
+    validate_only = proto.Field(
+        proto.BOOL,
+        number=4,
+    )
     response_content_type = proto.Field(
         proto.ENUM,
         number=5,
@@ -107,7 +118,11 @@ class CustomerNegativeCriterionOperation(proto.Message):
         oneof="operation",
         message=gagr_customer_negative_criterion.CustomerNegativeCriterion,
     )
-    remove = proto.Field(proto.STRING, number=2, oneof="operation",)
+    remove = proto.Field(
+        proto.STRING,
+        number=2,
+        oneof="operation",
+    )
 
 
 class MutateCustomerNegativeCriteriaResponse(proto.Message):
@@ -125,10 +140,14 @@ class MutateCustomerNegativeCriteriaResponse(proto.Message):
     """
 
     partial_failure_error = proto.Field(
-        proto.MESSAGE, number=3, message=status_pb2.Status,
+        proto.MESSAGE,
+        number=3,
+        message=status_pb2.Status,
     )
     results = proto.RepeatedField(
-        proto.MESSAGE, number=2, message="MutateCustomerNegativeCriteriaResult",
+        proto.MESSAGE,
+        number=2,
+        message="MutateCustomerNegativeCriteriaResult",
     )
 
 
@@ -144,7 +163,10 @@ class MutateCustomerNegativeCriteriaResult(proto.Message):
             is set to "MUTABLE_RESOURCE".
     """
 
-    resource_name = proto.Field(proto.STRING, number=1,)
+    resource_name = proto.Field(
+        proto.STRING,
+        number=1,
+    )
     customer_negative_criterion = proto.Field(
         proto.MESSAGE,
         number=2,

@@ -19,13 +19,14 @@ import proto  # type: ignore
 __protobuf__ = proto.module(
     package="google.ads.googleads.v10.errors",
     marshal="google.ads.googleads.v10",
-    manifest={"SharedSetErrorEnum",},
+    manifest={
+        "SharedSetErrorEnum",
+    },
 )
 
 
 class SharedSetErrorEnum(proto.Message):
-    r"""Container for enum describing possible shared set errors.
-    """
+    r"""Container for enum describing possible shared set errors."""
 
     class SharedSetError(proto.Enum):
         r"""Enum describing possible shared set errors."""

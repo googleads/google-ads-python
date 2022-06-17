@@ -22,7 +22,9 @@ from google.ads.googleads.v10.enums.types import change_status_resource_type
 __protobuf__ = proto.module(
     package="google.ads.googleads.v10.resources",
     marshal="google.ads.googleads.v10",
-    manifest={"ChangeStatus",},
+    manifest={
+        "ChangeStatus",
+    },
 )
 
 
@@ -118,34 +120,99 @@ class ChangeStatus(proto.Message):
             this change.
     """
 
-    resource_name = proto.Field(proto.STRING, number=1,)
-    last_change_date_time = proto.Field(proto.STRING, number=24, optional=True,)
+    resource_name = proto.Field(
+        proto.STRING,
+        number=1,
+    )
+    last_change_date_time = proto.Field(
+        proto.STRING,
+        number=24,
+        optional=True,
+    )
     resource_type = proto.Field(
         proto.ENUM,
         number=4,
         enum=change_status_resource_type.ChangeStatusResourceTypeEnum.ChangeStatusResourceType,
     )
-    campaign = proto.Field(proto.STRING, number=17, optional=True,)
-    ad_group = proto.Field(proto.STRING, number=18, optional=True,)
+    campaign = proto.Field(
+        proto.STRING,
+        number=17,
+        optional=True,
+    )
+    ad_group = proto.Field(
+        proto.STRING,
+        number=18,
+        optional=True,
+    )
     resource_status = proto.Field(
         proto.ENUM,
         number=8,
         enum=change_status_operation.ChangeStatusOperationEnum.ChangeStatusOperation,
     )
-    ad_group_ad = proto.Field(proto.STRING, number=25, optional=True,)
-    ad_group_criterion = proto.Field(proto.STRING, number=26, optional=True,)
-    campaign_criterion = proto.Field(proto.STRING, number=27, optional=True,)
-    feed = proto.Field(proto.STRING, number=28, optional=True,)
-    feed_item = proto.Field(proto.STRING, number=29, optional=True,)
-    ad_group_feed = proto.Field(proto.STRING, number=30, optional=True,)
-    campaign_feed = proto.Field(proto.STRING, number=31, optional=True,)
-    ad_group_bid_modifier = proto.Field(proto.STRING, number=32, optional=True,)
-    shared_set = proto.Field(proto.STRING, number=33,)
-    campaign_shared_set = proto.Field(proto.STRING, number=34,)
-    asset = proto.Field(proto.STRING, number=35,)
-    customer_asset = proto.Field(proto.STRING, number=36,)
-    campaign_asset = proto.Field(proto.STRING, number=37,)
-    ad_group_asset = proto.Field(proto.STRING, number=38,)
+    ad_group_ad = proto.Field(
+        proto.STRING,
+        number=25,
+        optional=True,
+    )
+    ad_group_criterion = proto.Field(
+        proto.STRING,
+        number=26,
+        optional=True,
+    )
+    campaign_criterion = proto.Field(
+        proto.STRING,
+        number=27,
+        optional=True,
+    )
+    feed = proto.Field(
+        proto.STRING,
+        number=28,
+        optional=True,
+    )
+    feed_item = proto.Field(
+        proto.STRING,
+        number=29,
+        optional=True,
+    )
+    ad_group_feed = proto.Field(
+        proto.STRING,
+        number=30,
+        optional=True,
+    )
+    campaign_feed = proto.Field(
+        proto.STRING,
+        number=31,
+        optional=True,
+    )
+    ad_group_bid_modifier = proto.Field(
+        proto.STRING,
+        number=32,
+        optional=True,
+    )
+    shared_set = proto.Field(
+        proto.STRING,
+        number=33,
+    )
+    campaign_shared_set = proto.Field(
+        proto.STRING,
+        number=34,
+    )
+    asset = proto.Field(
+        proto.STRING,
+        number=35,
+    )
+    customer_asset = proto.Field(
+        proto.STRING,
+        number=36,
+    )
+    campaign_asset = proto.Field(
+        proto.STRING,
+        number=37,
+    )
+    ad_group_asset = proto.Field(
+        proto.STRING,
+        number=38,
+    )
 
 
 __all__ = tuple(sorted(__protobuf__.manifest))

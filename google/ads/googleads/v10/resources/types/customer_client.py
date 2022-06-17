@@ -21,7 +21,9 @@ from google.ads.googleads.v10.enums.types import customer_status
 __protobuf__ = proto.module(
     package="google.ads.googleads.v10.resources",
     marshal="google.ads.googleads.v10",
-    manifest={"CustomerClient",},
+    manifest={
+        "CustomerClient",
+    },
 )
 
 
@@ -96,17 +98,59 @@ class CustomerClient(proto.Message):
             customer. Read only.
     """
 
-    resource_name = proto.Field(proto.STRING, number=1,)
-    client_customer = proto.Field(proto.STRING, number=12, optional=True,)
-    hidden = proto.Field(proto.BOOL, number=13, optional=True,)
-    level = proto.Field(proto.INT64, number=14, optional=True,)
-    time_zone = proto.Field(proto.STRING, number=15, optional=True,)
-    test_account = proto.Field(proto.BOOL, number=16, optional=True,)
-    manager = proto.Field(proto.BOOL, number=17, optional=True,)
-    descriptive_name = proto.Field(proto.STRING, number=18, optional=True,)
-    currency_code = proto.Field(proto.STRING, number=19, optional=True,)
-    id = proto.Field(proto.INT64, number=20, optional=True,)
-    applied_labels = proto.RepeatedField(proto.STRING, number=21,)
+    resource_name = proto.Field(
+        proto.STRING,
+        number=1,
+    )
+    client_customer = proto.Field(
+        proto.STRING,
+        number=12,
+        optional=True,
+    )
+    hidden = proto.Field(
+        proto.BOOL,
+        number=13,
+        optional=True,
+    )
+    level = proto.Field(
+        proto.INT64,
+        number=14,
+        optional=True,
+    )
+    time_zone = proto.Field(
+        proto.STRING,
+        number=15,
+        optional=True,
+    )
+    test_account = proto.Field(
+        proto.BOOL,
+        number=16,
+        optional=True,
+    )
+    manager = proto.Field(
+        proto.BOOL,
+        number=17,
+        optional=True,
+    )
+    descriptive_name = proto.Field(
+        proto.STRING,
+        number=18,
+        optional=True,
+    )
+    currency_code = proto.Field(
+        proto.STRING,
+        number=19,
+        optional=True,
+    )
+    id = proto.Field(
+        proto.INT64,
+        number=20,
+        optional=True,
+    )
+    applied_labels = proto.RepeatedField(
+        proto.STRING,
+        number=21,
+    )
     status = proto.Field(
         proto.ENUM,
         number=22,

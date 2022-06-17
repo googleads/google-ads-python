@@ -21,7 +21,9 @@ from google.ads.googleads.v10.enums.types import geo_targeting_type
 __protobuf__ = proto.module(
     package="google.ads.googleads.v10.resources",
     marshal="google.ads.googleads.v10",
-    manifest={"GeographicView",},
+    manifest={
+        "GeographicView",
+    },
 )
 
 
@@ -48,13 +50,20 @@ class GeographicView(proto.Message):
             This field is a member of `oneof`_ ``_country_criterion_id``.
     """
 
-    resource_name = proto.Field(proto.STRING, number=1,)
+    resource_name = proto.Field(
+        proto.STRING,
+        number=1,
+    )
     location_type = proto.Field(
         proto.ENUM,
         number=3,
         enum=geo_targeting_type.GeoTargetingTypeEnum.GeoTargetingType,
     )
-    country_criterion_id = proto.Field(proto.INT64, number=5, optional=True,)
+    country_criterion_id = proto.Field(
+        proto.INT64,
+        number=5,
+        optional=True,
+    )
 
 
 __all__ = tuple(sorted(__protobuf__.manifest))

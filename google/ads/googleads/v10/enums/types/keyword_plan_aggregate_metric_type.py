@@ -19,13 +19,14 @@ import proto  # type: ignore
 __protobuf__ = proto.module(
     package="google.ads.googleads.v10.enums",
     marshal="google.ads.googleads.v10",
-    manifest={"KeywordPlanAggregateMetricTypeEnum",},
+    manifest={
+        "KeywordPlanAggregateMetricTypeEnum",
+    },
 )
 
 
 class KeywordPlanAggregateMetricTypeEnum(proto.Message):
-    r"""The enumeration of keyword plan aggregate metric types.
-    """
+    r"""The enumeration of keyword plan aggregate metric types."""
 
     class KeywordPlanAggregateMetricType(proto.Enum):
         r"""Aggregate fields."""

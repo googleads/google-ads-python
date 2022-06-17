@@ -21,7 +21,9 @@ from google.ads.googleads.v10.enums.types import app_url_operating_system_type
 __protobuf__ = proto.module(
     package="google.ads.googleads.v10.common",
     marshal="google.ads.googleads.v10",
-    manifest={"FinalAppUrl",},
+    manifest={
+        "FinalAppUrl",
+    },
 )
 
 
@@ -51,7 +53,11 @@ class FinalAppUrl(proto.Message):
         number=1,
         enum=app_url_operating_system_type.AppUrlOperatingSystemTypeEnum.AppUrlOperatingSystemType,
     )
-    url = proto.Field(proto.STRING, number=3, optional=True,)
+    url = proto.Field(
+        proto.STRING,
+        number=3,
+        optional=True,
+    )
 
 
 __all__ = tuple(sorted(__protobuf__.manifest))

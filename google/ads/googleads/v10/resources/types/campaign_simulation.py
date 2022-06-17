@@ -23,7 +23,9 @@ from google.ads.googleads.v10.enums.types import simulation_type
 __protobuf__ = proto.module(
     package="google.ads.googleads.v10.resources",
     marshal="google.ads.googleads.v10",
-    manifest={"CampaignSimulation",},
+    manifest={
+        "CampaignSimulation",
+    },
 )
 
 
@@ -94,8 +96,14 @@ class CampaignSimulation(proto.Message):
             This field is a member of `oneof`_ ``point_list``.
     """
 
-    resource_name = proto.Field(proto.STRING, number=1,)
-    campaign_id = proto.Field(proto.INT64, number=2,)
+    resource_name = proto.Field(
+        proto.STRING,
+        number=1,
+    )
+    campaign_id = proto.Field(
+        proto.INT64,
+        number=2,
+    )
     type_ = proto.Field(
         proto.ENUM,
         number=3,
@@ -106,8 +114,14 @@ class CampaignSimulation(proto.Message):
         number=4,
         enum=simulation_modification_method.SimulationModificationMethodEnum.SimulationModificationMethod,
     )
-    start_date = proto.Field(proto.STRING, number=5,)
-    end_date = proto.Field(proto.STRING, number=6,)
+    start_date = proto.Field(
+        proto.STRING,
+        number=5,
+    )
+    end_date = proto.Field(
+        proto.STRING,
+        number=6,
+    )
     cpc_bid_point_list = proto.Field(
         proto.MESSAGE,
         number=7,

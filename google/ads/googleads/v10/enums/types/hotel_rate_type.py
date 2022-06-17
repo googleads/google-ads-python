@@ -19,13 +19,14 @@ import proto  # type: ignore
 __protobuf__ = proto.module(
     package="google.ads.googleads.v10.enums",
     marshal="google.ads.googleads.v10",
-    manifest={"HotelRateTypeEnum",},
+    manifest={
+        "HotelRateTypeEnum",
+    },
 )
 
 
 class HotelRateTypeEnum(proto.Message):
-    r"""Container for enum describing possible hotel rate types.
-    """
+    r"""Container for enum describing possible hotel rate types."""
 
     class HotelRateType(proto.Enum):
         r"""Enum describing possible hotel rate types."""

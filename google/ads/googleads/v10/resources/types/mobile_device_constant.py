@@ -21,7 +21,9 @@ from google.ads.googleads.v10.enums.types import mobile_device_type
 __protobuf__ = proto.module(
     package="google.ads.googleads.v10.resources",
     marshal="google.ads.googleads.v10",
-    manifest={"MobileDeviceConstant",},
+    manifest={
+        "MobileDeviceConstant",
+    },
 )
 
 
@@ -58,11 +60,30 @@ class MobileDeviceConstant(proto.Message):
             Output only. The type of mobile device.
     """
 
-    resource_name = proto.Field(proto.STRING, number=1,)
-    id = proto.Field(proto.INT64, number=7, optional=True,)
-    name = proto.Field(proto.STRING, number=8, optional=True,)
-    manufacturer_name = proto.Field(proto.STRING, number=9, optional=True,)
-    operating_system_name = proto.Field(proto.STRING, number=10, optional=True,)
+    resource_name = proto.Field(
+        proto.STRING,
+        number=1,
+    )
+    id = proto.Field(
+        proto.INT64,
+        number=7,
+        optional=True,
+    )
+    name = proto.Field(
+        proto.STRING,
+        number=8,
+        optional=True,
+    )
+    manufacturer_name = proto.Field(
+        proto.STRING,
+        number=9,
+        optional=True,
+    )
+    operating_system_name = proto.Field(
+        proto.STRING,
+        number=10,
+        optional=True,
+    )
     type_ = proto.Field(
         proto.ENUM,
         number=6,

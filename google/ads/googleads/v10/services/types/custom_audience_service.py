@@ -47,11 +47,19 @@ class MutateCustomAudiencesRequest(proto.Message):
             executed. Only errors are returned, not results.
     """
 
-    customer_id = proto.Field(proto.STRING, number=1,)
-    operations = proto.RepeatedField(
-        proto.MESSAGE, number=2, message="CustomAudienceOperation",
+    customer_id = proto.Field(
+        proto.STRING,
+        number=1,
     )
-    validate_only = proto.Field(proto.BOOL, number=3,)
+    operations = proto.RepeatedField(
+        proto.MESSAGE,
+        number=2,
+        message="CustomAudienceOperation",
+    )
+    validate_only = proto.Field(
+        proto.BOOL,
+        number=3,
+    )
 
 
 class CustomAudienceOperation(proto.Message):
@@ -88,7 +96,9 @@ class CustomAudienceOperation(proto.Message):
     """
 
     update_mask = proto.Field(
-        proto.MESSAGE, number=4, message=field_mask_pb2.FieldMask,
+        proto.MESSAGE,
+        number=4,
+        message=field_mask_pb2.FieldMask,
     )
     create = proto.Field(
         proto.MESSAGE,
@@ -102,7 +112,11 @@ class CustomAudienceOperation(proto.Message):
         oneof="operation",
         message=custom_audience.CustomAudience,
     )
-    remove = proto.Field(proto.STRING, number=3, oneof="operation",)
+    remove = proto.Field(
+        proto.STRING,
+        number=3,
+        oneof="operation",
+    )
 
 
 class MutateCustomAudiencesResponse(proto.Message):
@@ -114,7 +128,9 @@ class MutateCustomAudiencesResponse(proto.Message):
     """
 
     results = proto.RepeatedField(
-        proto.MESSAGE, number=1, message="MutateCustomAudienceResult",
+        proto.MESSAGE,
+        number=1,
+        message="MutateCustomAudienceResult",
     )
 
 
@@ -126,7 +142,10 @@ class MutateCustomAudienceResult(proto.Message):
             Returned for successful operations.
     """
 
-    resource_name = proto.Field(proto.STRING, number=1,)
+    resource_name = proto.Field(
+        proto.STRING,
+        number=1,
+    )
 
 
 __all__ = tuple(sorted(__protobuf__.manifest))

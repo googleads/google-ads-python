@@ -331,7 +331,7 @@ def _wait_for_feed_to_be_ready(client, customer_id, feed_resource_name):
 
         if feed_mapping is None:
             num_attempts += 1
-            sleep_seconds = 5 * 2 ** num_attempts
+            sleep_seconds = 5 * 2**num_attempts
             print(
                 f"Checked {num_attempts} time(s). Feed is not ready "
                 f"yet. Waiting {sleep_seconds} seconds before trying again."

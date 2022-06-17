@@ -53,12 +53,23 @@ class MutateCampaignLabelsRequest(proto.Message):
             executed. Only errors are returned, not results.
     """
 
-    customer_id = proto.Field(proto.STRING, number=1,)
-    operations = proto.RepeatedField(
-        proto.MESSAGE, number=2, message="CampaignLabelOperation",
+    customer_id = proto.Field(
+        proto.STRING,
+        number=1,
     )
-    partial_failure = proto.Field(proto.BOOL, number=3,)
-    validate_only = proto.Field(proto.BOOL, number=4,)
+    operations = proto.RepeatedField(
+        proto.MESSAGE,
+        number=2,
+        message="CampaignLabelOperation",
+    )
+    partial_failure = proto.Field(
+        proto.BOOL,
+        number=3,
+    )
+    validate_only = proto.Field(
+        proto.BOOL,
+        number=4,
+    )
 
 
 class CampaignLabelOperation(proto.Message):
@@ -94,7 +105,11 @@ class CampaignLabelOperation(proto.Message):
         oneof="operation",
         message=campaign_label.CampaignLabel,
     )
-    remove = proto.Field(proto.STRING, number=2, oneof="operation",)
+    remove = proto.Field(
+        proto.STRING,
+        number=2,
+        oneof="operation",
+    )
 
 
 class MutateCampaignLabelsResponse(proto.Message):
@@ -112,10 +127,14 @@ class MutateCampaignLabelsResponse(proto.Message):
     """
 
     partial_failure_error = proto.Field(
-        proto.MESSAGE, number=3, message=status_pb2.Status,
+        proto.MESSAGE,
+        number=3,
+        message=status_pb2.Status,
     )
     results = proto.RepeatedField(
-        proto.MESSAGE, number=2, message="MutateCampaignLabelResult",
+        proto.MESSAGE,
+        number=2,
+        message="MutateCampaignLabelResult",
     )
 
 
@@ -127,7 +146,10 @@ class MutateCampaignLabelResult(proto.Message):
             Returned for successful operations.
     """
 
-    resource_name = proto.Field(proto.STRING, number=1,)
+    resource_name = proto.Field(
+        proto.STRING,
+        number=1,
+    )
 
 
 __all__ = tuple(sorted(__protobuf__.manifest))

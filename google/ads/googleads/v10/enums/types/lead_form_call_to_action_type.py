@@ -19,13 +19,14 @@ import proto  # type: ignore
 __protobuf__ = proto.module(
     package="google.ads.googleads.v10.enums",
     marshal="google.ads.googleads.v10",
-    manifest={"LeadFormCallToActionTypeEnum",},
+    manifest={
+        "LeadFormCallToActionTypeEnum",
+    },
 )
 
 
 class LeadFormCallToActionTypeEnum(proto.Message):
-    r"""Describes the type of call-to-action phrases in a lead form.
-    """
+    r"""Describes the type of call-to-action phrases in a lead form."""
 
     class LeadFormCallToActionType(proto.Enum):
         r"""Enum describing the type of call-to-action phrases in a lead

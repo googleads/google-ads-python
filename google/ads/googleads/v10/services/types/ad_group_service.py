@@ -61,12 +61,23 @@ class MutateAdGroupsRequest(proto.Message):
             resource name should be returned post mutation.
     """
 
-    customer_id = proto.Field(proto.STRING, number=1,)
-    operations = proto.RepeatedField(
-        proto.MESSAGE, number=2, message="AdGroupOperation",
+    customer_id = proto.Field(
+        proto.STRING,
+        number=1,
     )
-    partial_failure = proto.Field(proto.BOOL, number=3,)
-    validate_only = proto.Field(proto.BOOL, number=4,)
+    operations = proto.RepeatedField(
+        proto.MESSAGE,
+        number=2,
+        message="AdGroupOperation",
+    )
+    partial_failure = proto.Field(
+        proto.BOOL,
+        number=3,
+    )
+    validate_only = proto.Field(
+        proto.BOOL,
+        number=4,
+    )
     response_content_type = proto.Field(
         proto.ENUM,
         number=5,
@@ -108,7 +119,9 @@ class AdGroupOperation(proto.Message):
     """
 
     update_mask = proto.Field(
-        proto.MESSAGE, number=4, message=field_mask_pb2.FieldMask,
+        proto.MESSAGE,
+        number=4,
+        message=field_mask_pb2.FieldMask,
     )
     create = proto.Field(
         proto.MESSAGE,
@@ -122,7 +135,11 @@ class AdGroupOperation(proto.Message):
         oneof="operation",
         message=gagr_ad_group.AdGroup,
     )
-    remove = proto.Field(proto.STRING, number=3, oneof="operation",)
+    remove = proto.Field(
+        proto.STRING,
+        number=3,
+        oneof="operation",
+    )
 
 
 class MutateAdGroupsResponse(proto.Message):
@@ -140,10 +157,14 @@ class MutateAdGroupsResponse(proto.Message):
     """
 
     partial_failure_error = proto.Field(
-        proto.MESSAGE, number=3, message=status_pb2.Status,
+        proto.MESSAGE,
+        number=3,
+        message=status_pb2.Status,
     )
     results = proto.RepeatedField(
-        proto.MESSAGE, number=2, message="MutateAdGroupResult",
+        proto.MESSAGE,
+        number=2,
+        message="MutateAdGroupResult",
     )
 
 
@@ -159,9 +180,14 @@ class MutateAdGroupResult(proto.Message):
             is set to "MUTABLE_RESOURCE".
     """
 
-    resource_name = proto.Field(proto.STRING, number=1,)
+    resource_name = proto.Field(
+        proto.STRING,
+        number=1,
+    )
     ad_group = proto.Field(
-        proto.MESSAGE, number=2, message=gagr_ad_group.AdGroup,
+        proto.MESSAGE,
+        number=2,
+        message=gagr_ad_group.AdGroup,
     )
 
 

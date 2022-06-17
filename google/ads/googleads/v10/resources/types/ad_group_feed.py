@@ -25,7 +25,9 @@ from google.ads.googleads.v10.enums.types import placeholder_type
 __protobuf__ = proto.module(
     package="google.ads.googleads.v10.resources",
     marshal="google.ads.googleads.v10",
-    manifest={"AdGroupFeed",},
+    manifest={
+        "AdGroupFeed",
+    },
 )
 
 
@@ -61,9 +63,20 @@ class AdGroupFeed(proto.Message):
             This field is read-only.
     """
 
-    resource_name = proto.Field(proto.STRING, number=1,)
-    feed = proto.Field(proto.STRING, number=7, optional=True,)
-    ad_group = proto.Field(proto.STRING, number=8, optional=True,)
+    resource_name = proto.Field(
+        proto.STRING,
+        number=1,
+    )
+    feed = proto.Field(
+        proto.STRING,
+        number=7,
+        optional=True,
+    )
+    ad_group = proto.Field(
+        proto.STRING,
+        number=8,
+        optional=True,
+    )
     placeholder_types = proto.RepeatedField(
         proto.ENUM,
         number=4,

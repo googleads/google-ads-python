@@ -22,7 +22,10 @@ from google.ads.googleads.v10.resources.types import invoice
 __protobuf__ = proto.module(
     package="google.ads.googleads.v10.services",
     marshal="google.ads.googleads.v10",
-    manifest={"ListInvoicesRequest", "ListInvoicesResponse",},
+    manifest={
+        "ListInvoicesRequest",
+        "ListInvoicesResponse",
+    },
 )
 
 
@@ -48,11 +51,22 @@ class ListInvoicesRequest(proto.Message):
             invoices.
     """
 
-    customer_id = proto.Field(proto.STRING, number=1,)
-    billing_setup = proto.Field(proto.STRING, number=2,)
-    issue_year = proto.Field(proto.STRING, number=3,)
+    customer_id = proto.Field(
+        proto.STRING,
+        number=1,
+    )
+    billing_setup = proto.Field(
+        proto.STRING,
+        number=2,
+    )
+    issue_year = proto.Field(
+        proto.STRING,
+        number=3,
+    )
     issue_month = proto.Field(
-        proto.ENUM, number=4, enum=month_of_year.MonthOfYearEnum.MonthOfYear,
+        proto.ENUM,
+        number=4,
+        enum=month_of_year.MonthOfYearEnum.MonthOfYear,
     )
 
 
@@ -67,7 +81,9 @@ class ListInvoicesResponse(proto.Message):
     """
 
     invoices = proto.RepeatedField(
-        proto.MESSAGE, number=1, message=invoice.Invoice,
+        proto.MESSAGE,
+        number=1,
+        message=invoice.Invoice,
     )
 
 

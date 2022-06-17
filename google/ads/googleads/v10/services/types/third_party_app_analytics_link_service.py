@@ -36,7 +36,10 @@ class RegenerateShareableLinkIdRequest(proto.Message):
             analytics link.
     """
 
-    resource_name = proto.Field(proto.STRING, number=1,)
+    resource_name = proto.Field(
+        proto.STRING,
+        number=1,
+    )
 
 
 class RegenerateShareableLinkIdResponse(proto.Message):

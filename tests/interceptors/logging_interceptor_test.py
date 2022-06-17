@@ -24,7 +24,11 @@ import mock
 
 from google.ads.googleads import client as Client
 from google.ads.googleads.interceptors import LoggingInterceptor
-from google.ads.googleads.interceptors.helpers import mask_message, _mask_message_fields, _copy_message
+from google.ads.googleads.interceptors.helpers import (
+    mask_message,
+    _mask_message_fields,
+    _copy_message,
+)
 import google.ads.googleads.interceptors.logging_interceptor as interceptor_module
 from google.ads.googleads import util
 
@@ -208,7 +212,9 @@ class LoggingInterceptorTest(TestCase):
             if failed:
                 return SimpleNamespace(**{"initial_response_object": None})
             else:
-                return SimpleNamespace(**{"initial_response_object": self._MOCK_STREAM})
+                return SimpleNamespace(
+                    **{"initial_response_object": self._MOCK_STREAM}
+                )
 
         mock_response = mock.Mock()
         mock_response.exception = mock_exception_fn
@@ -379,7 +385,9 @@ class LoggingInterceptorTest(TestCase):
 
             # Assert that the cache is added to the interceptor
             self.assertIsInstance(interceptor._cache, SimpleNamespace)
-            self.assertEqual(interceptor._cache.initial_response_object, self._MOCK_STREAM)
+            self.assertEqual(
+                interceptor._cache.initial_response_object, self._MOCK_STREAM
+            )
 
             mock_logger.debug.assert_called_once_with(
                 interceptor._FULL_REQUEST_LOG_LINE.format(
@@ -712,9 +720,7 @@ class LoggingInterceptorTest(TestCase):
     def test_mask_message_fields_unset_field(self):
         """Field is not masked if it is not set."""
         message = customer_user_access.CustomerUserAccess()
-        copy = _mask_message_fields(
-            ["email_address"], message, "REDACTED"
-        )
+        copy = _mask_message_fields(["email_address"], message, "REDACTED")
         self.assertFalse("email_address" in copy)
 
     def test_mask_message_fields_unset_nested(self):
@@ -734,9 +740,7 @@ class LoggingInterceptorTest(TestCase):
     def test_mask_message_fields_bad_field_name(self):
         """No error is raised if a given field is not defined on the message."""
         message = customer_user_access.CustomerUserAccess()
-        copy = _mask_message_fields(
-            ["bad_name"], message, "REDACTED"
-        )
+        copy = _mask_message_fields(["bad_name"], message, "REDACTED")
         self.assertFalse("email_address" in copy)
         self.assertFalse("inviter_user_email_address" in copy)
 
@@ -831,9 +835,7 @@ class LoggingInterceptorTest(TestCase):
             email_address="test@test.com",
             inviter_user_email_address="inviter@test.com",
         )
-        copy = mask_message(
-            customer_user_access_obj, "REDACTED"
-        )
+        copy = mask_message(customer_user_access_obj, "REDACTED")
         self.assertIsInstance(copy, customer_user_access_obj.__class__)
         self.assertIsNot(copy, customer_user_access_obj)
         self.assertEqual(copy.email_address, "REDACTED")

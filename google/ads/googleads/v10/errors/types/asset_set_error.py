@@ -19,13 +19,14 @@ import proto  # type: ignore
 __protobuf__ = proto.module(
     package="google.ads.googleads.v10.errors",
     marshal="google.ads.googleads.v10",
-    manifest={"AssetSetErrorEnum",},
+    manifest={
+        "AssetSetErrorEnum",
+    },
 )
 
 
 class AssetSetErrorEnum(proto.Message):
-    r"""Container for enum describing possible asset set errors.
-    """
+    r"""Container for enum describing possible asset set errors."""
 
     class AssetSetError(proto.Enum):
         r"""Enum describing possible asset set errors."""

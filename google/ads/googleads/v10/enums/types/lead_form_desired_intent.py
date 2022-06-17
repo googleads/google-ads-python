@@ -19,13 +19,14 @@ import proto  # type: ignore
 __protobuf__ = proto.module(
     package="google.ads.googleads.v10.enums",
     marshal="google.ads.googleads.v10",
-    manifest={"LeadFormDesiredIntentEnum",},
+    manifest={
+        "LeadFormDesiredIntentEnum",
+    },
 )
 
 
 class LeadFormDesiredIntentEnum(proto.Message):
-    r"""Describes the desired level of intent of generated leads.
-    """
+    r"""Describes the desired level of intent of generated leads."""
 
     class LeadFormDesiredIntent(proto.Enum):
         r"""Enum describing the desired level of intent of generated

@@ -19,7 +19,9 @@ import proto  # type: ignore
 __protobuf__ = proto.module(
     package="google.ads.googleads.v10.resources",
     marshal="google.ads.googleads.v10",
-    manifest={"LanguageConstant",},
+    manifest={
+        "LanguageConstant",
+    },
 )
 
 
@@ -53,11 +55,30 @@ class LanguageConstant(proto.Message):
             This field is a member of `oneof`_ ``_targetable``.
     """
 
-    resource_name = proto.Field(proto.STRING, number=1,)
-    id = proto.Field(proto.INT64, number=6, optional=True,)
-    code = proto.Field(proto.STRING, number=7, optional=True,)
-    name = proto.Field(proto.STRING, number=8, optional=True,)
-    targetable = proto.Field(proto.BOOL, number=9, optional=True,)
+    resource_name = proto.Field(
+        proto.STRING,
+        number=1,
+    )
+    id = proto.Field(
+        proto.INT64,
+        number=6,
+        optional=True,
+    )
+    code = proto.Field(
+        proto.STRING,
+        number=7,
+        optional=True,
+    )
+    name = proto.Field(
+        proto.STRING,
+        number=8,
+        optional=True,
+    )
+    targetable = proto.Field(
+        proto.BOOL,
+        number=9,
+        optional=True,
+    )
 
 
 __all__ = tuple(sorted(__protobuf__.manifest))

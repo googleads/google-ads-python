@@ -19,13 +19,14 @@ import proto  # type: ignore
 __protobuf__ = proto.module(
     package="google.ads.googleads.v10.enums",
     marshal="google.ads.googleads.v10",
-    manifest={"ListingGroupTypeEnum",},
+    manifest={
+        "ListingGroupTypeEnum",
+    },
 )
 
 
 class ListingGroupTypeEnum(proto.Message):
-    r"""Container for enum describing the type of the listing group.
-    """
+    r"""Container for enum describing the type of the listing group."""
 
     class ListingGroupType(proto.Enum):
         r"""The type of the listing group."""

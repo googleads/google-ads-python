@@ -23,7 +23,9 @@ from google.ads.googleads.v10.enums.types import simulation_type
 __protobuf__ = proto.module(
     package="google.ads.googleads.v10.resources",
     marshal="google.ads.googleads.v10",
-    manifest={"AdGroupCriterionSimulation",},
+    manifest={
+        "AdGroupCriterionSimulation",
+    },
 )
 
 
@@ -89,9 +91,20 @@ class AdGroupCriterionSimulation(proto.Message):
             This field is a member of `oneof`_ ``point_list``.
     """
 
-    resource_name = proto.Field(proto.STRING, number=1,)
-    ad_group_id = proto.Field(proto.INT64, number=9, optional=True,)
-    criterion_id = proto.Field(proto.INT64, number=10, optional=True,)
+    resource_name = proto.Field(
+        proto.STRING,
+        number=1,
+    )
+    ad_group_id = proto.Field(
+        proto.INT64,
+        number=9,
+        optional=True,
+    )
+    criterion_id = proto.Field(
+        proto.INT64,
+        number=10,
+        optional=True,
+    )
     type_ = proto.Field(
         proto.ENUM,
         number=4,
@@ -102,8 +115,16 @@ class AdGroupCriterionSimulation(proto.Message):
         number=5,
         enum=simulation_modification_method.SimulationModificationMethodEnum.SimulationModificationMethod,
     )
-    start_date = proto.Field(proto.STRING, number=11, optional=True,)
-    end_date = proto.Field(proto.STRING, number=12, optional=True,)
+    start_date = proto.Field(
+        proto.STRING,
+        number=11,
+        optional=True,
+    )
+    end_date = proto.Field(
+        proto.STRING,
+        number=12,
+        optional=True,
+    )
     cpc_bid_point_list = proto.Field(
         proto.MESSAGE,
         number=8,

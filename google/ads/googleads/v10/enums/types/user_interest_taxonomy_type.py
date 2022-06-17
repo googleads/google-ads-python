@@ -19,13 +19,14 @@ import proto  # type: ignore
 __protobuf__ = proto.module(
     package="google.ads.googleads.v10.enums",
     marshal="google.ads.googleads.v10",
-    manifest={"UserInterestTaxonomyTypeEnum",},
+    manifest={
+        "UserInterestTaxonomyTypeEnum",
+    },
 )
 
 
 class UserInterestTaxonomyTypeEnum(proto.Message):
-    r"""Message describing a UserInterestTaxonomyType.
-    """
+    r"""Message describing a UserInterestTaxonomyType."""
 
     class UserInterestTaxonomyType(proto.Enum):
         r"""Enum containing the possible UserInterestTaxonomyTypes."""

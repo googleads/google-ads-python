@@ -29,12 +29,11 @@ from google.ads.googleads.interceptors import (
     LoggingInterceptor,
 )
 
-
 _logger = logging.getLogger(__name__)
 
 _SERVICE_CLIENT_TEMPLATE = "{}Client"
 
-_VALID_API_VERSIONS = ["v10", "v9"]
+_VALID_API_VERSIONS = ["v11", "v10", "v9"]
 _DEFAULT_VERSION = _VALID_API_VERSIONS[0]
 
 # Retrieve the version of this client library to be sent in the user-agent
@@ -53,7 +52,6 @@ _GRPC_CHANNEL_OPTIONS = [
     ("grpc.max_metadata_size", 16 * 1024 * 1024),
     ("grpc.max_receive_message_length", 64 * 1024 * 1024),
 ]
-
 
 unary_stream_single_threading_option = util.get_nested_attr(
     grpc, "experimental.ChannelOptions.SingleThreadedUnaryStream", None
@@ -75,7 +73,7 @@ class _EnumGetter:
 
         Args:
             version: a str indicating the version of the Google Ads API to be
-                used.
+              used.
         """
         self._client = client
         self._version = client.version or _DEFAULT_VERSION
@@ -236,7 +234,7 @@ class GoogleAdsClient:
 
         Args:
             yaml_str: a str containing YAML configuration data used to
-                initialize a GoogleAdsClient.
+              initialize a GoogleAdsClient.
             version: a str indicating the Google Ads API version to be used.
 
         Returns:
@@ -256,7 +254,7 @@ class GoogleAdsClient:
 
         Args:
             config_dict: a dict consisting of configuration data used to
-                initialize a GoogleAdsClient.
+              initialize a GoogleAdsClient.
             version: a str indicating the Google Ads API version to be used.
 
         Returns:
@@ -276,7 +274,7 @@ class GoogleAdsClient:
 
         Args:
             path: a str indicating the path to a YAML file containing
-                configuration data used to initialize a GoogleAdsClient.
+              configuration data used to initialize a GoogleAdsClient.
             version: a str indicating the Google Ads API version to be used.
 
         Returns:
@@ -337,14 +335,14 @@ class GoogleAdsClient:
         """Returns a service client instance for the specified service_name.
 
         Args:
-            name: a str indicating the name of the service for which a
-                service client is being retrieved; e.g. you may specify
-                "CampaignService" to retrieve a CampaignServiceClient instance.
+            name: a str indicating the name of the service for which a service
+              client is being retrieved; e.g. you may specify "CampaignService"
+              to retrieve a CampaignServiceClient instance.
             version: a str indicating the version of the Google Ads API to be
-                used.
+              used.
             interceptors: an optional list of interceptors to include in
-                requests. NOTE: this parameter is not intended for non-Google
-                use and is not officially supported.
+              requests. NOTE: this parameter is not intended for non-Google use
+              and is not officially supported.
 
         Returns:
             A service client instance associated with the given service_name.
@@ -405,8 +403,8 @@ class GoogleAdsClient:
 
         Args:
             name: a str indicating the name of the type that is being retrieved;
-                e.g. you may specify "CampaignOperation" to retrieve a
-                CampaignOperation instance.
+              e.g. you may specify "CampaignOperation" to retrieve a
+              CampaignOperation instance.
             version: a str indicating the Google Ads API version to be used.
 
         Returns:

@@ -22,7 +22,9 @@ from google.ads.googleads.v10.enums.types import time_type
 __protobuf__ = proto.module(
     package="google.ads.googleads.v10.resources",
     marshal="google.ads.googleads.v10",
-    manifest={"BillingSetup",},
+    manifest={
+        "BillingSetup",
+    },
 )
 
 
@@ -136,40 +138,71 @@ class BillingSetup(proto.Message):
         """
 
         payments_account_id = proto.Field(
-            proto.STRING, number=6, optional=True,
+            proto.STRING,
+            number=6,
+            optional=True,
         )
         payments_account_name = proto.Field(
-            proto.STRING, number=7, optional=True,
+            proto.STRING,
+            number=7,
+            optional=True,
         )
         payments_profile_id = proto.Field(
-            proto.STRING, number=8, optional=True,
+            proto.STRING,
+            number=8,
+            optional=True,
         )
         payments_profile_name = proto.Field(
-            proto.STRING, number=9, optional=True,
+            proto.STRING,
+            number=9,
+            optional=True,
         )
         secondary_payments_profile_id = proto.Field(
-            proto.STRING, number=10, optional=True,
+            proto.STRING,
+            number=10,
+            optional=True,
         )
 
-    resource_name = proto.Field(proto.STRING, number=1,)
-    id = proto.Field(proto.INT64, number=15, optional=True,)
+    resource_name = proto.Field(
+        proto.STRING,
+        number=1,
+    )
+    id = proto.Field(
+        proto.INT64,
+        number=15,
+        optional=True,
+    )
     status = proto.Field(
         proto.ENUM,
         number=3,
         enum=billing_setup_status.BillingSetupStatusEnum.BillingSetupStatus,
     )
-    payments_account = proto.Field(proto.STRING, number=18, optional=True,)
-    payments_account_info = proto.Field(
-        proto.MESSAGE, number=12, message=PaymentsAccountInfo,
+    payments_account = proto.Field(
+        proto.STRING,
+        number=18,
+        optional=True,
     )
-    start_date_time = proto.Field(proto.STRING, number=16, oneof="start_time",)
+    payments_account_info = proto.Field(
+        proto.MESSAGE,
+        number=12,
+        message=PaymentsAccountInfo,
+    )
+    start_date_time = proto.Field(
+        proto.STRING,
+        number=16,
+        oneof="start_time",
+    )
     start_time_type = proto.Field(
         proto.ENUM,
         number=10,
         oneof="start_time",
         enum=time_type.TimeTypeEnum.TimeType,
     )
-    end_date_time = proto.Field(proto.STRING, number=17, oneof="end_time",)
+    end_date_time = proto.Field(
+        proto.STRING,
+        number=17,
+        oneof="end_time",
+    )
     end_time_type = proto.Field(
         proto.ENUM,
         number=14,

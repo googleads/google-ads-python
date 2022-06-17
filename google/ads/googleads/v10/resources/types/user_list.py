@@ -29,7 +29,9 @@ from google.ads.googleads.v10.enums.types import user_list_type
 __protobuf__ = proto.module(
     package="google.ads.googleads.v10.resources",
     marshal="google.ads.googleads.v10",
-    manifest={"UserList",},
+    manifest={
+        "UserList",
+    },
 )
 
 
@@ -188,25 +190,60 @@ class UserList(proto.Message):
             This field is a member of `oneof`_ ``user_list``.
     """
 
-    resource_name = proto.Field(proto.STRING, number=1,)
-    id = proto.Field(proto.INT64, number=25, optional=True,)
-    read_only = proto.Field(proto.BOOL, number=26, optional=True,)
-    name = proto.Field(proto.STRING, number=27, optional=True,)
-    description = proto.Field(proto.STRING, number=28, optional=True,)
+    resource_name = proto.Field(
+        proto.STRING,
+        number=1,
+    )
+    id = proto.Field(
+        proto.INT64,
+        number=25,
+        optional=True,
+    )
+    read_only = proto.Field(
+        proto.BOOL,
+        number=26,
+        optional=True,
+    )
+    name = proto.Field(
+        proto.STRING,
+        number=27,
+        optional=True,
+    )
+    description = proto.Field(
+        proto.STRING,
+        number=28,
+        optional=True,
+    )
     membership_status = proto.Field(
         proto.ENUM,
         number=6,
         enum=user_list_membership_status.UserListMembershipStatusEnum.UserListMembershipStatus,
     )
-    integration_code = proto.Field(proto.STRING, number=29, optional=True,)
-    membership_life_span = proto.Field(proto.INT64, number=30, optional=True,)
-    size_for_display = proto.Field(proto.INT64, number=31, optional=True,)
+    integration_code = proto.Field(
+        proto.STRING,
+        number=29,
+        optional=True,
+    )
+    membership_life_span = proto.Field(
+        proto.INT64,
+        number=30,
+        optional=True,
+    )
+    size_for_display = proto.Field(
+        proto.INT64,
+        number=31,
+        optional=True,
+    )
     size_range_for_display = proto.Field(
         proto.ENUM,
         number=10,
         enum=user_list_size_range.UserListSizeRangeEnum.UserListSizeRange,
     )
-    size_for_search = proto.Field(proto.INT64, number=32, optional=True,)
+    size_for_search = proto.Field(
+        proto.INT64,
+        number=32,
+        optional=True,
+    )
     size_range_for_search = proto.Field(
         proto.ENUM,
         number=12,
@@ -232,9 +269,21 @@ class UserList(proto.Message):
         number=16,
         enum=user_list_access_status.UserListAccessStatusEnum.UserListAccessStatus,
     )
-    eligible_for_search = proto.Field(proto.BOOL, number=33, optional=True,)
-    eligible_for_display = proto.Field(proto.BOOL, number=34, optional=True,)
-    match_rate_percentage = proto.Field(proto.INT32, number=24, optional=True,)
+    eligible_for_search = proto.Field(
+        proto.BOOL,
+        number=33,
+        optional=True,
+    )
+    eligible_for_display = proto.Field(
+        proto.BOOL,
+        number=34,
+        optional=True,
+    )
+    match_rate_percentage = proto.Field(
+        proto.INT32,
+        number=24,
+        optional=True,
+    )
     crm_based_user_list = proto.Field(
         proto.MESSAGE,
         number=19,

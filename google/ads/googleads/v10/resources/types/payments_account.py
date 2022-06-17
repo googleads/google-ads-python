@@ -19,7 +19,9 @@ import proto  # type: ignore
 __protobuf__ = proto.module(
     package="google.ads.googleads.v10.resources",
     marshal="google.ads.googleads.v10",
-    manifest={"PaymentsAccount",},
+    manifest={
+        "PaymentsAccount",
+    },
 )
 
 
@@ -69,16 +71,39 @@ class PaymentsAccount(proto.Message):
             This field is a member of `oneof`_ ``_paying_manager_customer``.
     """
 
-    resource_name = proto.Field(proto.STRING, number=1,)
-    payments_account_id = proto.Field(proto.STRING, number=8, optional=True,)
-    name = proto.Field(proto.STRING, number=9, optional=True,)
-    currency_code = proto.Field(proto.STRING, number=10, optional=True,)
-    payments_profile_id = proto.Field(proto.STRING, number=11, optional=True,)
+    resource_name = proto.Field(
+        proto.STRING,
+        number=1,
+    )
+    payments_account_id = proto.Field(
+        proto.STRING,
+        number=8,
+        optional=True,
+    )
+    name = proto.Field(
+        proto.STRING,
+        number=9,
+        optional=True,
+    )
+    currency_code = proto.Field(
+        proto.STRING,
+        number=10,
+        optional=True,
+    )
+    payments_profile_id = proto.Field(
+        proto.STRING,
+        number=11,
+        optional=True,
+    )
     secondary_payments_profile_id = proto.Field(
-        proto.STRING, number=12, optional=True,
+        proto.STRING,
+        number=12,
+        optional=True,
     )
     paying_manager_customer = proto.Field(
-        proto.STRING, number=13, optional=True,
+        proto.STRING,
+        number=13,
+        optional=True,
     )
 
 

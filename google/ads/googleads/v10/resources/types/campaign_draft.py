@@ -21,7 +21,9 @@ from google.ads.googleads.v10.enums.types import campaign_draft_status
 __protobuf__ = proto.module(
     package="google.ads.googleads.v10.resources",
     marshal="google.ads.googleads.v10",
-    manifest={"CampaignDraft",},
+    manifest={
+        "CampaignDraft",
+    },
 )
 
 
@@ -81,19 +83,44 @@ class CampaignDraft(proto.Message):
             This field is a member of `oneof`_ ``_long_running_operation``.
     """
 
-    resource_name = proto.Field(proto.STRING, number=1,)
-    draft_id = proto.Field(proto.INT64, number=9, optional=True,)
-    base_campaign = proto.Field(proto.STRING, number=10, optional=True,)
-    name = proto.Field(proto.STRING, number=11, optional=True,)
-    draft_campaign = proto.Field(proto.STRING, number=12, optional=True,)
+    resource_name = proto.Field(
+        proto.STRING,
+        number=1,
+    )
+    draft_id = proto.Field(
+        proto.INT64,
+        number=9,
+        optional=True,
+    )
+    base_campaign = proto.Field(
+        proto.STRING,
+        number=10,
+        optional=True,
+    )
+    name = proto.Field(
+        proto.STRING,
+        number=11,
+        optional=True,
+    )
+    draft_campaign = proto.Field(
+        proto.STRING,
+        number=12,
+        optional=True,
+    )
     status = proto.Field(
         proto.ENUM,
         number=6,
         enum=campaign_draft_status.CampaignDraftStatusEnum.CampaignDraftStatus,
     )
-    has_experiment_running = proto.Field(proto.BOOL, number=13, optional=True,)
+    has_experiment_running = proto.Field(
+        proto.BOOL,
+        number=13,
+        optional=True,
+    )
     long_running_operation = proto.Field(
-        proto.STRING, number=14, optional=True,
+        proto.STRING,
+        number=14,
+        optional=True,
     )
 
 

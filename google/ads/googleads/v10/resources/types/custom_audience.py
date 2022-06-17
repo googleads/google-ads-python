@@ -23,7 +23,10 @@ from google.ads.googleads.v10.enums.types import custom_audience_type
 __protobuf__ = proto.module(
     package="google.ads.googleads.v10.resources",
     marshal="google.ads.googleads.v10",
-    manifest={"CustomAudience", "CustomAudienceMember",},
+    manifest={
+        "CustomAudience",
+        "CustomAudienceMember",
+    },
 )
 
 
@@ -61,22 +64,36 @@ class CustomAudience(proto.Message):
             members will be overridden.
     """
 
-    resource_name = proto.Field(proto.STRING, number=1,)
-    id = proto.Field(proto.INT64, number=2,)
+    resource_name = proto.Field(
+        proto.STRING,
+        number=1,
+    )
+    id = proto.Field(
+        proto.INT64,
+        number=2,
+    )
     status = proto.Field(
         proto.ENUM,
         number=3,
         enum=custom_audience_status.CustomAudienceStatusEnum.CustomAudienceStatus,
     )
-    name = proto.Field(proto.STRING, number=4,)
+    name = proto.Field(
+        proto.STRING,
+        number=4,
+    )
     type_ = proto.Field(
         proto.ENUM,
         number=5,
         enum=custom_audience_type.CustomAudienceTypeEnum.CustomAudienceType,
     )
-    description = proto.Field(proto.STRING, number=6,)
+    description = proto.Field(
+        proto.STRING,
+        number=6,
+    )
     members = proto.RepeatedField(
-        proto.MESSAGE, number=7, message="CustomAudienceMember",
+        proto.MESSAGE,
+        number=7,
+        message="CustomAudienceMember",
     )
 
 
@@ -127,10 +144,26 @@ class CustomAudienceMember(proto.Message):
         number=1,
         enum=custom_audience_member_type.CustomAudienceMemberTypeEnum.CustomAudienceMemberType,
     )
-    keyword = proto.Field(proto.STRING, number=2, oneof="value",)
-    url = proto.Field(proto.STRING, number=3, oneof="value",)
-    place_category = proto.Field(proto.INT64, number=4, oneof="value",)
-    app = proto.Field(proto.STRING, number=5, oneof="value",)
+    keyword = proto.Field(
+        proto.STRING,
+        number=2,
+        oneof="value",
+    )
+    url = proto.Field(
+        proto.STRING,
+        number=3,
+        oneof="value",
+    )
+    place_category = proto.Field(
+        proto.INT64,
+        number=4,
+        oneof="value",
+    )
+    app = proto.Field(
+        proto.STRING,
+        number=5,
+        oneof="value",
+    )
 
 
 __all__ = tuple(sorted(__protobuf__.manifest))

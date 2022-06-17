@@ -24,7 +24,9 @@ from google.ads.googleads.v10.enums.types import experiment_type
 __protobuf__ = proto.module(
     package="google.ads.googleads.v10.resources",
     marshal="google.ads.googleads.v10",
-    manifest={"Experiment",},
+    manifest={
+        "Experiment",
+    },
 )
 
 
@@ -102,11 +104,27 @@ class Experiment(proto.Message):
             promotion process.
     """
 
-    resource_name = proto.Field(proto.STRING, number=1,)
-    experiment_id = proto.Field(proto.INT64, number=9, optional=True,)
-    name = proto.Field(proto.STRING, number=10,)
-    description = proto.Field(proto.STRING, number=11,)
-    suffix = proto.Field(proto.STRING, number=12,)
+    resource_name = proto.Field(
+        proto.STRING,
+        number=1,
+    )
+    experiment_id = proto.Field(
+        proto.INT64,
+        number=9,
+        optional=True,
+    )
+    name = proto.Field(
+        proto.STRING,
+        number=10,
+    )
+    description = proto.Field(
+        proto.STRING,
+        number=11,
+    )
+    suffix = proto.Field(
+        proto.STRING,
+        number=12,
+    )
     type_ = proto.Field(
         proto.ENUM,
         number=13,
@@ -117,13 +135,25 @@ class Experiment(proto.Message):
         number=14,
         enum=experiment_status.ExperimentStatusEnum.ExperimentStatus,
     )
-    start_date = proto.Field(proto.STRING, number=15, optional=True,)
-    end_date = proto.Field(proto.STRING, number=16, optional=True,)
+    start_date = proto.Field(
+        proto.STRING,
+        number=15,
+        optional=True,
+    )
+    end_date = proto.Field(
+        proto.STRING,
+        number=16,
+        optional=True,
+    )
     goals = proto.RepeatedField(
-        proto.MESSAGE, number=17, message=metric_goal.MetricGoal,
+        proto.MESSAGE,
+        number=17,
+        message=metric_goal.MetricGoal,
     )
     long_running_operation = proto.Field(
-        proto.STRING, number=18, optional=True,
+        proto.STRING,
+        number=18,
+        optional=True,
     )
     promote_status = proto.Field(
         proto.ENUM,

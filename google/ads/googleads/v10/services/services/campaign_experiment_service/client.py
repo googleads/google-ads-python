@@ -65,7 +65,8 @@ class CampaignExperimentServiceClientMeta(type):
     _transport_registry["grpc"] = CampaignExperimentServiceGrpcTransport
 
     def get_transport_class(
-        cls, label: str = None,
+        cls,
+        label: str = None,
     ) -> Type[CampaignExperimentServiceTransport]:
         """Returns an appropriate transport class.
 
@@ -201,10 +202,14 @@ class CampaignExperimentServiceClient(
         self.transport.close()
 
     @staticmethod
-    def campaign_path(customer_id: str, campaign_id: str,) -> str:
+    def campaign_path(
+        customer_id: str,
+        campaign_id: str,
+    ) -> str:
         """Returns a fully-qualified campaign string."""
         return "customers/{customer_id}/campaigns/{campaign_id}".format(
-            customer_id=customer_id, campaign_id=campaign_id,
+            customer_id=customer_id,
+            campaign_id=campaign_id,
         )
 
     @staticmethod
@@ -218,7 +223,9 @@ class CampaignExperimentServiceClient(
 
     @staticmethod
     def campaign_draft_path(
-        customer_id: str, base_campaign_id: str, draft_id: str,
+        customer_id: str,
+        base_campaign_id: str,
+        draft_id: str,
     ) -> str:
         """Returns a fully-qualified campaign_draft string."""
         return "customers/{customer_id}/campaignDrafts/{base_campaign_id}~{draft_id}".format(
@@ -238,7 +245,8 @@ class CampaignExperimentServiceClient(
 
     @staticmethod
     def campaign_experiment_path(
-        customer_id: str, campaign_experiment_id: str,
+        customer_id: str,
+        campaign_experiment_id: str,
     ) -> str:
         """Returns a fully-qualified campaign_experiment string."""
         return "customers/{customer_id}/campaignExperiments/{campaign_experiment_id}".format(
@@ -256,7 +264,9 @@ class CampaignExperimentServiceClient(
         return m.groupdict() if m else {}
 
     @staticmethod
-    def common_billing_account_path(billing_account: str,) -> str:
+    def common_billing_account_path(
+        billing_account: str,
+    ) -> str:
         """Returns a fully-qualified billing_account string."""
         return "billingAccounts/{billing_account}".format(
             billing_account=billing_account,
@@ -269,9 +279,13 @@ class CampaignExperimentServiceClient(
         return m.groupdict() if m else {}
 
     @staticmethod
-    def common_folder_path(folder: str,) -> str:
+    def common_folder_path(
+        folder: str,
+    ) -> str:
         """Returns a fully-qualified folder string."""
-        return "folders/{folder}".format(folder=folder,)
+        return "folders/{folder}".format(
+            folder=folder,
+        )
 
     @staticmethod
     def parse_common_folder_path(path: str) -> Dict[str, str]:
@@ -280,9 +294,13 @@ class CampaignExperimentServiceClient(
         return m.groupdict() if m else {}
 
     @staticmethod
-    def common_organization_path(organization: str,) -> str:
+    def common_organization_path(
+        organization: str,
+    ) -> str:
         """Returns a fully-qualified organization string."""
-        return "organizations/{organization}".format(organization=organization,)
+        return "organizations/{organization}".format(
+            organization=organization,
+        )
 
     @staticmethod
     def parse_common_organization_path(path: str) -> Dict[str, str]:
@@ -291,9 +309,13 @@ class CampaignExperimentServiceClient(
         return m.groupdict() if m else {}
 
     @staticmethod
-    def common_project_path(project: str,) -> str:
+    def common_project_path(
+        project: str,
+    ) -> str:
         """Returns a fully-qualified project string."""
-        return "projects/{project}".format(project=project,)
+        return "projects/{project}".format(
+            project=project,
+        )
 
     @staticmethod
     def parse_common_project_path(path: str) -> Dict[str, str]:
@@ -302,10 +324,14 @@ class CampaignExperimentServiceClient(
         return m.groupdict() if m else {}
 
     @staticmethod
-    def common_location_path(project: str, location: str,) -> str:
+    def common_location_path(
+        project: str,
+        location: str,
+    ) -> str:
         """Returns a fully-qualified location string."""
         return "projects/{project}/locations/{location}".format(
-            project=project, location=location,
+            project=project,
+            location=location,
         )
 
     @staticmethod
@@ -533,8 +559,10 @@ class CampaignExperimentServiceClient(
         if not isinstance(
             request, campaign_experiment_service.CreateCampaignExperimentRequest
         ):
-            request = campaign_experiment_service.CreateCampaignExperimentRequest(
-                request
+            request = (
+                campaign_experiment_service.CreateCampaignExperimentRequest(
+                    request
+                )
             )
             # If we have keyword arguments corresponding to fields on the
             # request, apply these.
@@ -559,7 +587,10 @@ class CampaignExperimentServiceClient(
 
         # Send the request.
         response = rpc(
-            request, retry=retry, timeout=timeout, metadata=metadata,
+            request,
+            retry=retry,
+            timeout=timeout,
+            metadata=metadata,
         )
 
         # Wrap the response in an operation future.
@@ -644,8 +675,10 @@ class CampaignExperimentServiceClient(
             request,
             campaign_experiment_service.MutateCampaignExperimentsRequest,
         ):
-            request = campaign_experiment_service.MutateCampaignExperimentsRequest(
-                request
+            request = (
+                campaign_experiment_service.MutateCampaignExperimentsRequest(
+                    request
+                )
             )
             # If we have keyword arguments corresponding to fields on the
             # request, apply these.
@@ -670,7 +703,10 @@ class CampaignExperimentServiceClient(
 
         # Send the request.
         response = rpc(
-            request, retry=retry, timeout=timeout, metadata=metadata,
+            request,
+            retry=retry,
+            timeout=timeout,
+            metadata=metadata,
         )
 
         # Done; return the response.
@@ -746,8 +782,10 @@ class CampaignExperimentServiceClient(
             request,
             campaign_experiment_service.GraduateCampaignExperimentRequest,
         ):
-            request = campaign_experiment_service.GraduateCampaignExperimentRequest(
-                request
+            request = (
+                campaign_experiment_service.GraduateCampaignExperimentRequest(
+                    request
+                )
             )
             # If we have keyword arguments corresponding to fields on the
             # request, apply these.
@@ -772,7 +810,10 @@ class CampaignExperimentServiceClient(
 
         # Send the request.
         response = rpc(
-            request, retry=retry, timeout=timeout, metadata=metadata,
+            request,
+            retry=retry,
+            timeout=timeout,
+            metadata=metadata,
         )
 
         # Done; return the response.
@@ -856,8 +897,10 @@ class CampaignExperimentServiceClient(
             request,
             campaign_experiment_service.PromoteCampaignExperimentRequest,
         ):
-            request = campaign_experiment_service.PromoteCampaignExperimentRequest(
-                request
+            request = (
+                campaign_experiment_service.PromoteCampaignExperimentRequest(
+                    request
+                )
             )
             # If we have keyword arguments corresponding to fields on the
             # request, apply these.
@@ -880,7 +923,10 @@ class CampaignExperimentServiceClient(
 
         # Send the request.
         response = rpc(
-            request, retry=retry, timeout=timeout, metadata=metadata,
+            request,
+            retry=retry,
+            timeout=timeout,
+            metadata=metadata,
         )
 
         # Wrap the response in an operation future.
@@ -972,7 +1018,10 @@ class CampaignExperimentServiceClient(
 
         # Send the request.
         rpc(
-            request, retry=retry, timeout=timeout, metadata=metadata,
+            request,
+            retry=retry,
+            timeout=timeout,
+            metadata=metadata,
         )
 
     def list_campaign_experiment_async_errors(
@@ -1064,13 +1113,19 @@ class CampaignExperimentServiceClient(
 
         # Send the request.
         response = rpc(
-            request, retry=retry, timeout=timeout, metadata=metadata,
+            request,
+            retry=retry,
+            timeout=timeout,
+            metadata=metadata,
         )
 
         # This method is paged; wrap the response in a pager, which provides
         # an `__iter__` convenience method.
         response = pagers.ListCampaignExperimentAsyncErrorsPager(
-            method=rpc, request=request, response=response, metadata=metadata,
+            method=rpc,
+            request=request,
+            response=response,
+            metadata=metadata,
         )
 
         # Done; return the response.
@@ -1079,7 +1134,9 @@ class CampaignExperimentServiceClient(
 
 try:
     DEFAULT_CLIENT_INFO = gapic_v1.client_info.ClientInfo(
-        gapic_version=pkg_resources.get_distribution("google-ads",).version,
+        gapic_version=pkg_resources.get_distribution(
+            "google-ads",
+        ).version,
     )
 except pkg_resources.DistributionNotFound:
     DEFAULT_CLIENT_INFO = gapic_v1.client_info.ClientInfo()

@@ -21,7 +21,9 @@ from google.ads.googleads.v10.enums.types import campaign_group_status
 __protobuf__ = proto.module(
     package="google.ads.googleads.v10.resources",
     marshal="google.ads.googleads.v10",
-    manifest={"CampaignGroup",},
+    manifest={
+        "CampaignGroup",
+    },
 )
 
 
@@ -50,9 +52,18 @@ class CampaignGroup(proto.Message):
             defaults to ENABLED.
     """
 
-    resource_name = proto.Field(proto.STRING, number=1,)
-    id = proto.Field(proto.INT64, number=3,)
-    name = proto.Field(proto.STRING, number=4,)
+    resource_name = proto.Field(
+        proto.STRING,
+        number=1,
+    )
+    id = proto.Field(
+        proto.INT64,
+        number=3,
+    )
+    name = proto.Field(
+        proto.STRING,
+        number=4,
+    )
     status = proto.Field(
         proto.ENUM,
         number=5,

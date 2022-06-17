@@ -62,12 +62,23 @@ class MutateFeedMappingsRequest(proto.Message):
             resource name should be returned post mutation.
     """
 
-    customer_id = proto.Field(proto.STRING, number=1,)
-    operations = proto.RepeatedField(
-        proto.MESSAGE, number=2, message="FeedMappingOperation",
+    customer_id = proto.Field(
+        proto.STRING,
+        number=1,
     )
-    partial_failure = proto.Field(proto.BOOL, number=3,)
-    validate_only = proto.Field(proto.BOOL, number=4,)
+    operations = proto.RepeatedField(
+        proto.MESSAGE,
+        number=2,
+        message="FeedMappingOperation",
+    )
+    partial_failure = proto.Field(
+        proto.BOOL,
+        number=3,
+    )
+    validate_only = proto.Field(
+        proto.BOOL,
+        number=4,
+    )
     response_content_type = proto.Field(
         proto.ENUM,
         number=5,
@@ -106,7 +117,11 @@ class FeedMappingOperation(proto.Message):
         oneof="operation",
         message=gagr_feed_mapping.FeedMapping,
     )
-    remove = proto.Field(proto.STRING, number=3, oneof="operation",)
+    remove = proto.Field(
+        proto.STRING,
+        number=3,
+        oneof="operation",
+    )
 
 
 class MutateFeedMappingsResponse(proto.Message):
@@ -124,10 +139,14 @@ class MutateFeedMappingsResponse(proto.Message):
     """
 
     partial_failure_error = proto.Field(
-        proto.MESSAGE, number=3, message=status_pb2.Status,
+        proto.MESSAGE,
+        number=3,
+        message=status_pb2.Status,
     )
     results = proto.RepeatedField(
-        proto.MESSAGE, number=2, message="MutateFeedMappingResult",
+        proto.MESSAGE,
+        number=2,
+        message="MutateFeedMappingResult",
     )
 
 
@@ -143,9 +162,14 @@ class MutateFeedMappingResult(proto.Message):
             response_content_type is set to "MUTABLE_RESOURCE".
     """
 
-    resource_name = proto.Field(proto.STRING, number=1,)
+    resource_name = proto.Field(
+        proto.STRING,
+        number=1,
+    )
     feed_mapping = proto.Field(
-        proto.MESSAGE, number=2, message=gagr_feed_mapping.FeedMapping,
+        proto.MESSAGE,
+        number=2,
+        message=gagr_feed_mapping.FeedMapping,
     )
 
 

@@ -19,13 +19,14 @@ import proto  # type: ignore
 __protobuf__ = proto.module(
     package="google.ads.googleads.v10.enums",
     marshal="google.ads.googleads.v10",
-    manifest={"CallToActionTypeEnum",},
+    manifest={
+        "CallToActionTypeEnum",
+    },
 )
 
 
 class CallToActionTypeEnum(proto.Message):
-    r"""Container for enum describing the call to action types.
-    """
+    r"""Container for enum describing the call to action types."""
 
     class CallToActionType(proto.Enum):
         r"""Enum describing possible types of call to action."""

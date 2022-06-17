@@ -21,7 +21,9 @@ from google.ads.googleads.v10.common.types import criteria
 __protobuf__ = proto.module(
     package="google.ads.googleads.v10.resources",
     marshal="google.ads.googleads.v10",
-    manifest={"CampaignBidModifier",},
+    manifest={
+        "CampaignBidModifier",
+    },
 )
 
 
@@ -61,10 +63,25 @@ class CampaignBidModifier(proto.Message):
             This field is a member of `oneof`_ ``criterion``.
     """
 
-    resource_name = proto.Field(proto.STRING, number=1,)
-    campaign = proto.Field(proto.STRING, number=6, optional=True,)
-    criterion_id = proto.Field(proto.INT64, number=7, optional=True,)
-    bid_modifier = proto.Field(proto.DOUBLE, number=8, optional=True,)
+    resource_name = proto.Field(
+        proto.STRING,
+        number=1,
+    )
+    campaign = proto.Field(
+        proto.STRING,
+        number=6,
+        optional=True,
+    )
+    criterion_id = proto.Field(
+        proto.INT64,
+        number=7,
+        optional=True,
+    )
+    bid_modifier = proto.Field(
+        proto.DOUBLE,
+        number=8,
+        optional=True,
+    )
     interaction_type = proto.Field(
         proto.MESSAGE,
         number=5,

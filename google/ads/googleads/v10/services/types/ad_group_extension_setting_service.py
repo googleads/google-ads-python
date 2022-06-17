@@ -59,12 +59,23 @@ class MutateAdGroupExtensionSettingsRequest(proto.Message):
             executed. Only errors are returned, not results.
     """
 
-    customer_id = proto.Field(proto.STRING, number=1,)
-    operations = proto.RepeatedField(
-        proto.MESSAGE, number=2, message="AdGroupExtensionSettingOperation",
+    customer_id = proto.Field(
+        proto.STRING,
+        number=1,
     )
-    partial_failure = proto.Field(proto.BOOL, number=3,)
-    validate_only = proto.Field(proto.BOOL, number=4,)
+    operations = proto.RepeatedField(
+        proto.MESSAGE,
+        number=2,
+        message="AdGroupExtensionSettingOperation",
+    )
+    partial_failure = proto.Field(
+        proto.BOOL,
+        number=3,
+    )
+    validate_only = proto.Field(
+        proto.BOOL,
+        number=4,
+    )
 
 
 class AdGroupExtensionSettingOperation(proto.Message):
@@ -107,7 +118,9 @@ class AdGroupExtensionSettingOperation(proto.Message):
     """
 
     update_mask = proto.Field(
-        proto.MESSAGE, number=4, message=field_mask_pb2.FieldMask,
+        proto.MESSAGE,
+        number=4,
+        message=field_mask_pb2.FieldMask,
     )
     response_content_type = proto.Field(
         proto.ENUM,
@@ -126,7 +139,11 @@ class AdGroupExtensionSettingOperation(proto.Message):
         oneof="operation",
         message=gagr_ad_group_extension_setting.AdGroupExtensionSetting,
     )
-    remove = proto.Field(proto.STRING, number=3, oneof="operation",)
+    remove = proto.Field(
+        proto.STRING,
+        number=3,
+        oneof="operation",
+    )
 
 
 class MutateAdGroupExtensionSettingsResponse(proto.Message):
@@ -144,10 +161,14 @@ class MutateAdGroupExtensionSettingsResponse(proto.Message):
     """
 
     partial_failure_error = proto.Field(
-        proto.MESSAGE, number=3, message=status_pb2.Status,
+        proto.MESSAGE,
+        number=3,
+        message=status_pb2.Status,
     )
     results = proto.RepeatedField(
-        proto.MESSAGE, number=2, message="MutateAdGroupExtensionSettingResult",
+        proto.MESSAGE,
+        number=2,
+        message="MutateAdGroupExtensionSettingResult",
     )
 
 
@@ -163,7 +184,10 @@ class MutateAdGroupExtensionSettingResult(proto.Message):
             response_content_type is set to "MUTABLE_RESOURCE".
     """
 
-    resource_name = proto.Field(proto.STRING, number=1,)
+    resource_name = proto.Field(
+        proto.STRING,
+        number=1,
+    )
     ad_group_extension_setting = proto.Field(
         proto.MESSAGE,
         number=2,

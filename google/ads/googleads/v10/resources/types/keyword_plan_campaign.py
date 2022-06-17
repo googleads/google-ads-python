@@ -23,7 +23,10 @@ from google.ads.googleads.v10.enums.types import (
 __protobuf__ = proto.module(
     package="google.ads.googleads.v10.resources",
     marshal="google.ads.googleads.v10",
-    manifest={"KeywordPlanCampaign", "KeywordPlanGeoTarget",},
+    manifest={
+        "KeywordPlanCampaign",
+        "KeywordPlanGeoTarget",
+    },
 )
 
 
@@ -72,19 +75,43 @@ class KeywordPlanCampaign(proto.Message):
             Max number allowed: 20.
     """
 
-    resource_name = proto.Field(proto.STRING, number=1,)
-    keyword_plan = proto.Field(proto.STRING, number=9, optional=True,)
-    id = proto.Field(proto.INT64, number=10, optional=True,)
-    name = proto.Field(proto.STRING, number=11, optional=True,)
-    language_constants = proto.RepeatedField(proto.STRING, number=12,)
+    resource_name = proto.Field(
+        proto.STRING,
+        number=1,
+    )
+    keyword_plan = proto.Field(
+        proto.STRING,
+        number=9,
+        optional=True,
+    )
+    id = proto.Field(
+        proto.INT64,
+        number=10,
+        optional=True,
+    )
+    name = proto.Field(
+        proto.STRING,
+        number=11,
+        optional=True,
+    )
+    language_constants = proto.RepeatedField(
+        proto.STRING,
+        number=12,
+    )
     keyword_plan_network = proto.Field(
         proto.ENUM,
         number=6,
         enum=gage_keyword_plan_network.KeywordPlanNetworkEnum.KeywordPlanNetwork,
     )
-    cpc_bid_micros = proto.Field(proto.INT64, number=13, optional=True,)
+    cpc_bid_micros = proto.Field(
+        proto.INT64,
+        number=13,
+        optional=True,
+    )
     geo_targets = proto.RepeatedField(
-        proto.MESSAGE, number=8, message="KeywordPlanGeoTarget",
+        proto.MESSAGE,
+        number=8,
+        message="KeywordPlanGeoTarget",
     )
 
 
@@ -99,7 +126,11 @@ class KeywordPlanGeoTarget(proto.Message):
             This field is a member of `oneof`_ ``_geo_target_constant``.
     """
 
-    geo_target_constant = proto.Field(proto.STRING, number=2, optional=True,)
+    geo_target_constant = proto.Field(
+        proto.STRING,
+        number=2,
+        optional=True,
+    )
 
 
 __all__ = tuple(sorted(__protobuf__.manifest))

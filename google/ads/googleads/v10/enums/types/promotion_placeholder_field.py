@@ -19,13 +19,14 @@ import proto  # type: ignore
 __protobuf__ = proto.module(
     package="google.ads.googleads.v10.enums",
     marshal="google.ads.googleads.v10",
-    manifest={"PromotionPlaceholderFieldEnum",},
+    manifest={
+        "PromotionPlaceholderFieldEnum",
+    },
 )
 
 
 class PromotionPlaceholderFieldEnum(proto.Message):
-    r"""Values for Promotion placeholder fields.
-    """
+    r"""Values for Promotion placeholder fields."""
 
     class PromotionPlaceholderField(proto.Enum):
         r"""Possible values for Promotion placeholder fields."""

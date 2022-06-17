@@ -23,7 +23,9 @@ from google.ads.googleads.v10.enums.types import policy_review_status
 __protobuf__ = proto.module(
     package="google.ads.googleads.v10.common",
     marshal="google.ads.googleads.v10",
-    manifest={"PolicySummary",},
+    manifest={
+        "PolicySummary",
+    },
 )
 
 
@@ -42,7 +44,9 @@ class PolicySummary(proto.Message):
     """
 
     policy_topic_entries = proto.RepeatedField(
-        proto.MESSAGE, number=1, message=policy.PolicyTopicEntry,
+        proto.MESSAGE,
+        number=1,
+        message=policy.PolicyTopicEntry,
     )
     review_status = proto.Field(
         proto.ENUM,

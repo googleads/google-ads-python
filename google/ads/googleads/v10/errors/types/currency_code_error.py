@@ -19,13 +19,14 @@ import proto  # type: ignore
 __protobuf__ = proto.module(
     package="google.ads.googleads.v10.errors",
     marshal="google.ads.googleads.v10",
-    manifest={"CurrencyCodeErrorEnum",},
+    manifest={
+        "CurrencyCodeErrorEnum",
+    },
 )
 
 
 class CurrencyCodeErrorEnum(proto.Message):
-    r"""Container for enum describing possible currency code errors.
-    """
+    r"""Container for enum describing possible currency code errors."""
 
     class CurrencyCodeError(proto.Enum):
         r"""Enum describing possible currency code errors."""

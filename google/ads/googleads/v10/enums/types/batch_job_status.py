@@ -19,13 +19,14 @@ import proto  # type: ignore
 __protobuf__ = proto.module(
     package="google.ads.googleads.v10.enums",
     marshal="google.ads.googleads.v10",
-    manifest={"BatchJobStatusEnum",},
+    manifest={
+        "BatchJobStatusEnum",
+    },
 )
 
 
 class BatchJobStatusEnum(proto.Message):
-    r"""Container for enum describing possible batch job statuses.
-    """
+    r"""Container for enum describing possible batch job statuses."""
 
     class BatchJobStatus(proto.Enum):
         r"""The batch job statuses."""

@@ -19,13 +19,14 @@ import proto  # type: ignore
 __protobuf__ = proto.module(
     package="google.ads.googleads.v10.errors",
     marshal="google.ads.googleads.v10",
-    manifest={"StringFormatErrorEnum",},
+    manifest={
+        "StringFormatErrorEnum",
+    },
 )
 
 
 class StringFormatErrorEnum(proto.Message):
-    r"""Container for enum describing possible string format errors.
-    """
+    r"""Container for enum describing possible string format errors."""
 
     class StringFormatError(proto.Enum):
         r"""Enum describing possible string format errors."""

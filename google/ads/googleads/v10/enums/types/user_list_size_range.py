@@ -19,13 +19,14 @@ import proto  # type: ignore
 __protobuf__ = proto.module(
     package="google.ads.googleads.v10.enums",
     marshal="google.ads.googleads.v10",
-    manifest={"UserListSizeRangeEnum",},
+    manifest={
+        "UserListSizeRangeEnum",
+    },
 )
 
 
 class UserListSizeRangeEnum(proto.Message):
-    r"""Size range in terms of number of users of a UserList.
-    """
+    r"""Size range in terms of number of users of a UserList."""
 
     class UserListSizeRange(proto.Enum):
         r"""Enum containing possible user list size ranges."""

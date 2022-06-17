@@ -92,28 +92,63 @@ class MediaFile(proto.Message):
             This field is a member of `oneof`_ ``mediatype``.
     """
 
-    resource_name = proto.Field(proto.STRING, number=1,)
-    id = proto.Field(proto.INT64, number=12, optional=True,)
+    resource_name = proto.Field(
+        proto.STRING,
+        number=1,
+    )
+    id = proto.Field(
+        proto.INT64,
+        number=12,
+        optional=True,
+    )
     type_ = proto.Field(
-        proto.ENUM, number=5, enum=media_type.MediaTypeEnum.MediaType,
+        proto.ENUM,
+        number=5,
+        enum=media_type.MediaTypeEnum.MediaType,
     )
     mime_type = proto.Field(
-        proto.ENUM, number=6, enum=gage_mime_type.MimeTypeEnum.MimeType,
+        proto.ENUM,
+        number=6,
+        enum=gage_mime_type.MimeTypeEnum.MimeType,
     )
-    source_url = proto.Field(proto.STRING, number=13, optional=True,)
-    name = proto.Field(proto.STRING, number=14, optional=True,)
-    file_size = proto.Field(proto.INT64, number=15, optional=True,)
+    source_url = proto.Field(
+        proto.STRING,
+        number=13,
+        optional=True,
+    )
+    name = proto.Field(
+        proto.STRING,
+        number=14,
+        optional=True,
+    )
+    file_size = proto.Field(
+        proto.INT64,
+        number=15,
+        optional=True,
+    )
     image = proto.Field(
-        proto.MESSAGE, number=3, oneof="mediatype", message="MediaImage",
+        proto.MESSAGE,
+        number=3,
+        oneof="mediatype",
+        message="MediaImage",
     )
     media_bundle = proto.Field(
-        proto.MESSAGE, number=4, oneof="mediatype", message="MediaBundle",
+        proto.MESSAGE,
+        number=4,
+        oneof="mediatype",
+        message="MediaBundle",
     )
     audio = proto.Field(
-        proto.MESSAGE, number=10, oneof="mediatype", message="MediaAudio",
+        proto.MESSAGE,
+        number=10,
+        oneof="mediatype",
+        message="MediaAudio",
     )
     video = proto.Field(
-        proto.MESSAGE, number=11, oneof="mediatype", message="MediaVideo",
+        proto.MESSAGE,
+        number=11,
+        oneof="mediatype",
+        message="MediaVideo",
     )
 
 
@@ -137,9 +172,21 @@ class MediaImage(proto.Message):
             This field is a member of `oneof`_ ``_preview_size_image_url``.
     """
 
-    data = proto.Field(proto.BYTES, number=4, optional=True,)
-    full_size_image_url = proto.Field(proto.STRING, number=2, optional=True,)
-    preview_size_image_url = proto.Field(proto.STRING, number=3, optional=True,)
+    data = proto.Field(
+        proto.BYTES,
+        number=4,
+        optional=True,
+    )
+    full_size_image_url = proto.Field(
+        proto.STRING,
+        number=2,
+        optional=True,
+    )
+    preview_size_image_url = proto.Field(
+        proto.STRING,
+        number=3,
+        optional=True,
+    )
 
 
 class MediaBundle(proto.Message):
@@ -160,8 +207,16 @@ class MediaBundle(proto.Message):
             This field is a member of `oneof`_ ``_url``.
     """
 
-    data = proto.Field(proto.BYTES, number=3, optional=True,)
-    url = proto.Field(proto.STRING, number=2, optional=True,)
+    data = proto.Field(
+        proto.BYTES,
+        number=3,
+        optional=True,
+    )
+    url = proto.Field(
+        proto.STRING,
+        number=2,
+        optional=True,
+    )
 
 
 class MediaAudio(proto.Message):
@@ -175,7 +230,11 @@ class MediaAudio(proto.Message):
             This field is a member of `oneof`_ ``_ad_duration_millis``.
     """
 
-    ad_duration_millis = proto.Field(proto.INT64, number=2, optional=True,)
+    ad_duration_millis = proto.Field(
+        proto.INT64,
+        number=2,
+        optional=True,
+    )
 
 
 class MediaVideo(proto.Message):
@@ -211,10 +270,26 @@ class MediaVideo(proto.Message):
             This field is a member of `oneof`_ ``_isci_code``.
     """
 
-    ad_duration_millis = proto.Field(proto.INT64, number=5, optional=True,)
-    youtube_video_id = proto.Field(proto.STRING, number=6, optional=True,)
-    advertising_id_code = proto.Field(proto.STRING, number=7, optional=True,)
-    isci_code = proto.Field(proto.STRING, number=8, optional=True,)
+    ad_duration_millis = proto.Field(
+        proto.INT64,
+        number=5,
+        optional=True,
+    )
+    youtube_video_id = proto.Field(
+        proto.STRING,
+        number=6,
+        optional=True,
+    )
+    advertising_id_code = proto.Field(
+        proto.STRING,
+        number=7,
+        optional=True,
+    )
+    isci_code = proto.Field(
+        proto.STRING,
+        number=8,
+        optional=True,
+    )
 
 
 __all__ = tuple(sorted(__protobuf__.manifest))

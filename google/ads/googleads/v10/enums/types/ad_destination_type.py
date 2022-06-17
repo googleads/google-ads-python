@@ -19,13 +19,14 @@ import proto  # type: ignore
 __protobuf__ = proto.module(
     package="google.ads.googleads.v10.enums",
     marshal="google.ads.googleads.v10",
-    manifest={"AdDestinationTypeEnum",},
+    manifest={
+        "AdDestinationTypeEnum",
+    },
 )
 
 
 class AdDestinationTypeEnum(proto.Message):
-    r"""Container for enumeration of Google Ads destination types.
-    """
+    r"""Container for enumeration of Google Ads destination types."""
 
     class AdDestinationType(proto.Enum):
         r"""Enumerates Google Ads destination types"""

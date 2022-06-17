@@ -61,12 +61,23 @@ class MutateLabelsRequest(proto.Message):
             resource name should be returned post mutation.
     """
 
-    customer_id = proto.Field(proto.STRING, number=1,)
-    operations = proto.RepeatedField(
-        proto.MESSAGE, number=2, message="LabelOperation",
+    customer_id = proto.Field(
+        proto.STRING,
+        number=1,
     )
-    partial_failure = proto.Field(proto.BOOL, number=3,)
-    validate_only = proto.Field(proto.BOOL, number=4,)
+    operations = proto.RepeatedField(
+        proto.MESSAGE,
+        number=2,
+        message="LabelOperation",
+    )
+    partial_failure = proto.Field(
+        proto.BOOL,
+        number=3,
+    )
+    validate_only = proto.Field(
+        proto.BOOL,
+        number=4,
+    )
     response_content_type = proto.Field(
         proto.ENUM,
         number=5,
@@ -108,15 +119,27 @@ class LabelOperation(proto.Message):
     """
 
     update_mask = proto.Field(
-        proto.MESSAGE, number=4, message=field_mask_pb2.FieldMask,
+        proto.MESSAGE,
+        number=4,
+        message=field_mask_pb2.FieldMask,
     )
     create = proto.Field(
-        proto.MESSAGE, number=1, oneof="operation", message=gagr_label.Label,
+        proto.MESSAGE,
+        number=1,
+        oneof="operation",
+        message=gagr_label.Label,
     )
     update = proto.Field(
-        proto.MESSAGE, number=2, oneof="operation", message=gagr_label.Label,
+        proto.MESSAGE,
+        number=2,
+        oneof="operation",
+        message=gagr_label.Label,
     )
-    remove = proto.Field(proto.STRING, number=3, oneof="operation",)
+    remove = proto.Field(
+        proto.STRING,
+        number=3,
+        oneof="operation",
+    )
 
 
 class MutateLabelsResponse(proto.Message):
@@ -134,10 +157,14 @@ class MutateLabelsResponse(proto.Message):
     """
 
     partial_failure_error = proto.Field(
-        proto.MESSAGE, number=3, message=status_pb2.Status,
+        proto.MESSAGE,
+        number=3,
+        message=status_pb2.Status,
     )
     results = proto.RepeatedField(
-        proto.MESSAGE, number=2, message="MutateLabelResult",
+        proto.MESSAGE,
+        number=2,
+        message="MutateLabelResult",
     )
 
 
@@ -153,8 +180,15 @@ class MutateLabelResult(proto.Message):
             set to "MUTABLE_RESOURCE".
     """
 
-    resource_name = proto.Field(proto.STRING, number=1,)
-    label = proto.Field(proto.MESSAGE, number=2, message=gagr_label.Label,)
+    resource_name = proto.Field(
+        proto.STRING,
+        number=1,
+    )
+    label = proto.Field(
+        proto.MESSAGE,
+        number=2,
+        message=gagr_label.Label,
+    )
 
 
 __all__ = tuple(sorted(__protobuf__.manifest))

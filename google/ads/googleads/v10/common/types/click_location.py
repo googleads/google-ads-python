@@ -19,7 +19,9 @@ import proto  # type: ignore
 __protobuf__ = proto.module(
     package="google.ads.googleads.v10.common",
     marshal="google.ads.googleads.v10",
-    manifest={"ClickLocation",},
+    manifest={
+        "ClickLocation",
+    },
 )
 
 
@@ -54,11 +56,31 @@ class ClickLocation(proto.Message):
             This field is a member of `oneof`_ ``_region``.
     """
 
-    city = proto.Field(proto.STRING, number=6, optional=True,)
-    country = proto.Field(proto.STRING, number=7, optional=True,)
-    metro = proto.Field(proto.STRING, number=8, optional=True,)
-    most_specific = proto.Field(proto.STRING, number=9, optional=True,)
-    region = proto.Field(proto.STRING, number=10, optional=True,)
+    city = proto.Field(
+        proto.STRING,
+        number=6,
+        optional=True,
+    )
+    country = proto.Field(
+        proto.STRING,
+        number=7,
+        optional=True,
+    )
+    metro = proto.Field(
+        proto.STRING,
+        number=8,
+        optional=True,
+    )
+    most_specific = proto.Field(
+        proto.STRING,
+        number=9,
+        optional=True,
+    )
+    region = proto.Field(
+        proto.STRING,
+        number=10,
+        optional=True,
+    )
 
 
 __all__ = tuple(sorted(__protobuf__.manifest))

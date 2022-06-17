@@ -19,7 +19,9 @@ import proto  # type: ignore
 __protobuf__ = proto.module(
     package="google.ads.googleads.v10.resources",
     marshal="google.ads.googleads.v10",
-    manifest={"HotelPerformanceView",},
+    manifest={
+        "HotelPerformanceView",
+    },
 )
 
 
@@ -34,7 +36,10 @@ class HotelPerformanceView(proto.Message):
             ``customers/{customer_id}/hotelPerformanceView``
     """
 
-    resource_name = proto.Field(proto.STRING, number=1,)
+    resource_name = proto.Field(
+        proto.STRING,
+        number=1,
+    )
 
 
 __all__ = tuple(sorted(__protobuf__.manifest))

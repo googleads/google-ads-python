@@ -26,7 +26,9 @@ from google.ads.googleads.v10.enums.types import value_rule_set_dimension
 __protobuf__ = proto.module(
     package="google.ads.googleads.v10.resources",
     marshal="google.ads.googleads.v10",
-    manifest={"ConversionValueRuleSet",},
+    manifest={
+        "ConversionValueRuleSet",
+    },
 )
 
 
@@ -76,21 +78,36 @@ class ConversionValueRuleSet(proto.Message):
             of the conversion value rule set.
     """
 
-    resource_name = proto.Field(proto.STRING, number=1,)
-    id = proto.Field(proto.INT64, number=2,)
-    conversion_value_rules = proto.RepeatedField(proto.STRING, number=3,)
+    resource_name = proto.Field(
+        proto.STRING,
+        number=1,
+    )
+    id = proto.Field(
+        proto.INT64,
+        number=2,
+    )
+    conversion_value_rules = proto.RepeatedField(
+        proto.STRING,
+        number=3,
+    )
     dimensions = proto.RepeatedField(
         proto.ENUM,
         number=4,
         enum=value_rule_set_dimension.ValueRuleSetDimensionEnum.ValueRuleSetDimension,
     )
-    owner_customer = proto.Field(proto.STRING, number=5,)
+    owner_customer = proto.Field(
+        proto.STRING,
+        number=5,
+    )
     attachment_type = proto.Field(
         proto.ENUM,
         number=6,
         enum=value_rule_set_attachment_type.ValueRuleSetAttachmentTypeEnum.ValueRuleSetAttachmentType,
     )
-    campaign = proto.Field(proto.STRING, number=7,)
+    campaign = proto.Field(
+        proto.STRING,
+        number=7,
+    )
     status = proto.Field(
         proto.ENUM,
         number=8,

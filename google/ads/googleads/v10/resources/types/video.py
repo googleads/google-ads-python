@@ -19,7 +19,9 @@ import proto  # type: ignore
 __protobuf__ = proto.module(
     package="google.ads.googleads.v10.resources",
     marshal="google.ads.googleads.v10",
-    manifest={"Video",},
+    manifest={
+        "Video",
+    },
 )
 
 
@@ -52,11 +54,30 @@ class Video(proto.Message):
             This field is a member of `oneof`_ ``_title``.
     """
 
-    resource_name = proto.Field(proto.STRING, number=1,)
-    id = proto.Field(proto.STRING, number=6, optional=True,)
-    channel_id = proto.Field(proto.STRING, number=7, optional=True,)
-    duration_millis = proto.Field(proto.INT64, number=8, optional=True,)
-    title = proto.Field(proto.STRING, number=9, optional=True,)
+    resource_name = proto.Field(
+        proto.STRING,
+        number=1,
+    )
+    id = proto.Field(
+        proto.STRING,
+        number=6,
+        optional=True,
+    )
+    channel_id = proto.Field(
+        proto.STRING,
+        number=7,
+        optional=True,
+    )
+    duration_millis = proto.Field(
+        proto.INT64,
+        number=8,
+        optional=True,
+    )
+    title = proto.Field(
+        proto.STRING,
+        number=9,
+        optional=True,
+    )
 
 
 __all__ = tuple(sorted(__protobuf__.manifest))

@@ -53,7 +53,10 @@ from google.ads.googleads.v10.enums.types import travel_placeholder_field
 __protobuf__ = proto.module(
     package="google.ads.googleads.v10.resources",
     marshal="google.ads.googleads.v10",
-    manifest={"FeedMapping", "AttributeFieldMapping",},
+    manifest={
+        "FeedMapping",
+        "AttributeFieldMapping",
+    },
 )
 
 
@@ -103,10 +106,19 @@ class FeedMapping(proto.Message):
             This field is a member of `oneof`_ ``target``.
     """
 
-    resource_name = proto.Field(proto.STRING, number=1,)
-    feed = proto.Field(proto.STRING, number=7, optional=True,)
+    resource_name = proto.Field(
+        proto.STRING,
+        number=1,
+    )
+    feed = proto.Field(
+        proto.STRING,
+        number=7,
+        optional=True,
+    )
     attribute_field_mappings = proto.RepeatedField(
-        proto.MESSAGE, number=5, message="AttributeFieldMapping",
+        proto.MESSAGE,
+        number=5,
+        message="AttributeFieldMapping",
     )
     status = proto.Field(
         proto.ENUM,
@@ -245,8 +257,16 @@ class AttributeFieldMapping(proto.Message):
             This field is a member of `oneof`_ ``field``.
     """
 
-    feed_attribute_id = proto.Field(proto.INT64, number=24, optional=True,)
-    field_id = proto.Field(proto.INT64, number=25, optional=True,)
+    feed_attribute_id = proto.Field(
+        proto.INT64,
+        number=24,
+        optional=True,
+    )
+    field_id = proto.Field(
+        proto.INT64,
+        number=25,
+        optional=True,
+    )
     sitelink_field = proto.Field(
         proto.ENUM,
         number=3,

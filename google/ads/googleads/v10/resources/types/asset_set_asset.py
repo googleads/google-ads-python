@@ -21,7 +21,9 @@ from google.ads.googleads.v10.enums.types import asset_set_asset_status
 __protobuf__ = proto.module(
     package="google.ads.googleads.v10.resources",
     marshal="google.ads.googleads.v10",
-    manifest={"AssetSetAsset",},
+    manifest={
+        "AssetSetAsset",
+    },
 )
 
 
@@ -46,9 +48,18 @@ class AssetSetAsset(proto.Message):
             asset. Read-only.
     """
 
-    resource_name = proto.Field(proto.STRING, number=1,)
-    asset_set = proto.Field(proto.STRING, number=2,)
-    asset = proto.Field(proto.STRING, number=3,)
+    resource_name = proto.Field(
+        proto.STRING,
+        number=1,
+    )
+    asset_set = proto.Field(
+        proto.STRING,
+        number=2,
+    )
+    asset = proto.Field(
+        proto.STRING,
+        number=3,
+    )
     status = proto.Field(
         proto.ENUM,
         number=4,

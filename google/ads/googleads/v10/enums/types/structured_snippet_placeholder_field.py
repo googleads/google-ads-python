@@ -19,13 +19,14 @@ import proto  # type: ignore
 __protobuf__ = proto.module(
     package="google.ads.googleads.v10.enums",
     marshal="google.ads.googleads.v10",
-    manifest={"StructuredSnippetPlaceholderFieldEnum",},
+    manifest={
+        "StructuredSnippetPlaceholderFieldEnum",
+    },
 )
 
 
 class StructuredSnippetPlaceholderFieldEnum(proto.Message):
-    r"""Values for Structured Snippet placeholder fields.
-    """
+    r"""Values for Structured Snippet placeholder fields."""
 
     class StructuredSnippetPlaceholderField(proto.Enum):
         r"""Possible values for Structured Snippet placeholder fields."""

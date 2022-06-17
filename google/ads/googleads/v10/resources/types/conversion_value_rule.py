@@ -26,7 +26,9 @@ from google.ads.googleads.v10.enums.types import value_rule_operation
 __protobuf__ = proto.module(
     package="google.ads.googleads.v10.resources",
     marshal="google.ads.googleads.v10",
-    manifest={"ConversionValueRule",},
+    manifest={
+        "ConversionValueRule",
+    },
 )
 
 
@@ -79,7 +81,10 @@ class ConversionValueRule(proto.Message):
             number=1,
             enum=value_rule_operation.ValueRuleOperationEnum.ValueRuleOperation,
         )
-        value = proto.Field(proto.DOUBLE, number=2,)
+        value = proto.Field(
+            proto.DOUBLE,
+            number=2,
+        )
 
     class ValueRuleGeoLocationCondition(proto.Message):
         r"""Condition on Geo dimension.
@@ -98,14 +103,18 @@ class ConversionValueRule(proto.Message):
         """
 
         excluded_geo_target_constants = proto.RepeatedField(
-            proto.STRING, number=1,
+            proto.STRING,
+            number=1,
         )
         excluded_geo_match_type = proto.Field(
             proto.ENUM,
             number=2,
             enum=value_rule_geo_location_match_type.ValueRuleGeoLocationMatchTypeEnum.ValueRuleGeoLocationMatchType,
         )
-        geo_target_constants = proto.RepeatedField(proto.STRING, number=3,)
+        geo_target_constants = proto.RepeatedField(
+            proto.STRING,
+            number=3,
+        )
         geo_match_type = proto.Field(
             proto.ENUM,
             number=4,
@@ -136,22 +145,47 @@ class ConversionValueRule(proto.Message):
                 User Interests.
         """
 
-        user_lists = proto.RepeatedField(proto.STRING, number=1,)
-        user_interests = proto.RepeatedField(proto.STRING, number=2,)
+        user_lists = proto.RepeatedField(
+            proto.STRING,
+            number=1,
+        )
+        user_interests = proto.RepeatedField(
+            proto.STRING,
+            number=2,
+        )
 
-    resource_name = proto.Field(proto.STRING, number=1,)
-    id = proto.Field(proto.INT64, number=2,)
-    action = proto.Field(proto.MESSAGE, number=3, message=ValueRuleAction,)
+    resource_name = proto.Field(
+        proto.STRING,
+        number=1,
+    )
+    id = proto.Field(
+        proto.INT64,
+        number=2,
+    )
+    action = proto.Field(
+        proto.MESSAGE,
+        number=3,
+        message=ValueRuleAction,
+    )
     geo_location_condition = proto.Field(
-        proto.MESSAGE, number=4, message=ValueRuleGeoLocationCondition,
+        proto.MESSAGE,
+        number=4,
+        message=ValueRuleGeoLocationCondition,
     )
     device_condition = proto.Field(
-        proto.MESSAGE, number=5, message=ValueRuleDeviceCondition,
+        proto.MESSAGE,
+        number=5,
+        message=ValueRuleDeviceCondition,
     )
     audience_condition = proto.Field(
-        proto.MESSAGE, number=6, message=ValueRuleAudienceCondition,
+        proto.MESSAGE,
+        number=6,
+        message=ValueRuleAudienceCondition,
     )
-    owner_customer = proto.Field(proto.STRING, number=7,)
+    owner_customer = proto.Field(
+        proto.STRING,
+        number=7,
+    )
     status = proto.Field(
         proto.ENUM,
         number=8,

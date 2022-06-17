@@ -19,13 +19,14 @@ import proto  # type: ignore
 __protobuf__ = proto.module(
     package="google.ads.googleads.v10.enums",
     marshal="google.ads.googleads.v10",
-    manifest={"CustomInterestMemberTypeEnum",},
+    manifest={
+        "CustomInterestMemberTypeEnum",
+    },
 )
 
 
 class CustomInterestMemberTypeEnum(proto.Message):
-    r"""The types of custom interest member, either KEYWORD or URL.
-    """
+    r"""The types of custom interest member, either KEYWORD or URL."""
 
     class CustomInterestMemberType(proto.Enum):
         r"""Enum containing possible custom interest member types."""

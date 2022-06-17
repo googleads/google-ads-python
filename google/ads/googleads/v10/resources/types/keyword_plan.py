@@ -22,7 +22,10 @@ from google.ads.googleads.v10.enums.types import keyword_plan_forecast_interval
 __protobuf__ = proto.module(
     package="google.ads.googleads.v10.resources",
     marshal="google.ads.googleads.v10",
-    manifest={"KeywordPlan", "KeywordPlanForecastPeriod",},
+    manifest={
+        "KeywordPlan",
+        "KeywordPlanForecastPeriod",
+    },
 )
 
 
@@ -52,11 +55,24 @@ class KeywordPlan(proto.Message):
             plan.
     """
 
-    resource_name = proto.Field(proto.STRING, number=1,)
-    id = proto.Field(proto.INT64, number=5, optional=True,)
-    name = proto.Field(proto.STRING, number=6, optional=True,)
+    resource_name = proto.Field(
+        proto.STRING,
+        number=1,
+    )
+    id = proto.Field(
+        proto.INT64,
+        number=5,
+        optional=True,
+    )
+    name = proto.Field(
+        proto.STRING,
+        number=6,
+        optional=True,
+    )
     forecast_period = proto.Field(
-        proto.MESSAGE, number=4, message="KeywordPlanForecastPeriod",
+        proto.MESSAGE,
+        number=4,
+        message="KeywordPlanForecastPeriod",
     )
 
 
@@ -93,7 +109,10 @@ class KeywordPlanForecastPeriod(proto.Message):
         enum=keyword_plan_forecast_interval.KeywordPlanForecastIntervalEnum.KeywordPlanForecastInterval,
     )
     date_range = proto.Field(
-        proto.MESSAGE, number=2, oneof="interval", message=dates.DateRange,
+        proto.MESSAGE,
+        number=2,
+        oneof="interval",
+        message=dates.DateRange,
     )
 
 

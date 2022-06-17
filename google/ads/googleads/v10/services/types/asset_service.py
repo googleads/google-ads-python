@@ -61,17 +61,28 @@ class MutateAssetsRequest(proto.Message):
             executed. Only errors are returned, not results.
     """
 
-    customer_id = proto.Field(proto.STRING, number=1,)
-    operations = proto.RepeatedField(
-        proto.MESSAGE, number=2, message="AssetOperation",
+    customer_id = proto.Field(
+        proto.STRING,
+        number=1,
     )
-    partial_failure = proto.Field(proto.BOOL, number=5,)
+    operations = proto.RepeatedField(
+        proto.MESSAGE,
+        number=2,
+        message="AssetOperation",
+    )
+    partial_failure = proto.Field(
+        proto.BOOL,
+        number=5,
+    )
     response_content_type = proto.Field(
         proto.ENUM,
         number=3,
         enum=gage_response_content_type.ResponseContentTypeEnum.ResponseContentType,
     )
-    validate_only = proto.Field(proto.BOOL, number=4,)
+    validate_only = proto.Field(
+        proto.BOOL,
+        number=4,
+    )
 
 
 class AssetOperation(proto.Message):
@@ -105,13 +116,21 @@ class AssetOperation(proto.Message):
     """
 
     update_mask = proto.Field(
-        proto.MESSAGE, number=3, message=field_mask_pb2.FieldMask,
+        proto.MESSAGE,
+        number=3,
+        message=field_mask_pb2.FieldMask,
     )
     create = proto.Field(
-        proto.MESSAGE, number=1, oneof="operation", message=gagr_asset.Asset,
+        proto.MESSAGE,
+        number=1,
+        oneof="operation",
+        message=gagr_asset.Asset,
     )
     update = proto.Field(
-        proto.MESSAGE, number=2, oneof="operation", message=gagr_asset.Asset,
+        proto.MESSAGE,
+        number=2,
+        oneof="operation",
+        message=gagr_asset.Asset,
     )
 
 
@@ -130,10 +149,14 @@ class MutateAssetsResponse(proto.Message):
     """
 
     partial_failure_error = proto.Field(
-        proto.MESSAGE, number=3, message=status_pb2.Status,
+        proto.MESSAGE,
+        number=3,
+        message=status_pb2.Status,
     )
     results = proto.RepeatedField(
-        proto.MESSAGE, number=2, message="MutateAssetResult",
+        proto.MESSAGE,
+        number=2,
+        message="MutateAssetResult",
     )
 
 
@@ -150,8 +173,15 @@ class MutateAssetResult(proto.Message):
             set to "MUTABLE_RESOURCE".
     """
 
-    resource_name = proto.Field(proto.STRING, number=1,)
-    asset = proto.Field(proto.MESSAGE, number=2, message=gagr_asset.Asset,)
+    resource_name = proto.Field(
+        proto.STRING,
+        number=1,
+    )
+    asset = proto.Field(
+        proto.MESSAGE,
+        number=2,
+        message=gagr_asset.Asset,
+    )
 
 
 __all__ = tuple(sorted(__protobuf__.manifest))

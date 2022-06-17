@@ -26,7 +26,9 @@ from google.ads.googleads.v10.enums.types import asset_performance_label
 __protobuf__ = proto.module(
     package="google.ads.googleads.v10.resources",
     marshal="google.ads.googleads.v10",
-    manifest={"AssetGroupAsset",},
+    manifest={
+        "AssetGroupAsset",
+    },
 )
 
 
@@ -61,9 +63,18 @@ class AssetGroupAsset(proto.Message):
             asset group asset.
     """
 
-    resource_name = proto.Field(proto.STRING, number=1,)
-    asset_group = proto.Field(proto.STRING, number=2,)
-    asset = proto.Field(proto.STRING, number=3,)
+    resource_name = proto.Field(
+        proto.STRING,
+        number=1,
+    )
+    asset_group = proto.Field(
+        proto.STRING,
+        number=2,
+    )
+    asset = proto.Field(
+        proto.STRING,
+        number=3,
+    )
     field_type = proto.Field(
         proto.ENUM,
         number=4,
@@ -80,7 +91,9 @@ class AssetGroupAsset(proto.Message):
         enum=asset_performance_label.AssetPerformanceLabelEnum.AssetPerformanceLabel,
     )
     policy_summary = proto.Field(
-        proto.MESSAGE, number=7, message=gagc_policy_summary.PolicySummary,
+        proto.MESSAGE,
+        number=7,
+        message=gagc_policy_summary.PolicySummary,
     )
 
 

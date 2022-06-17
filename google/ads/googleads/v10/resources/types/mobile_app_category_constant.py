@@ -19,7 +19,9 @@ import proto  # type: ignore
 __protobuf__ = proto.module(
     package="google.ads.googleads.v10.resources",
     marshal="google.ads.googleads.v10",
-    manifest={"MobileAppCategoryConstant",},
+    manifest={
+        "MobileAppCategoryConstant",
+    },
 )
 
 
@@ -44,9 +46,20 @@ class MobileAppCategoryConstant(proto.Message):
             This field is a member of `oneof`_ ``_name``.
     """
 
-    resource_name = proto.Field(proto.STRING, number=1,)
-    id = proto.Field(proto.INT32, number=4, optional=True,)
-    name = proto.Field(proto.STRING, number=5, optional=True,)
+    resource_name = proto.Field(
+        proto.STRING,
+        number=1,
+    )
+    id = proto.Field(
+        proto.INT32,
+        number=4,
+        optional=True,
+    )
+    name = proto.Field(
+        proto.STRING,
+        number=5,
+        optional=True,
+    )
 
 
 __all__ = tuple(sorted(__protobuf__.manifest))

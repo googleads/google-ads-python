@@ -63,12 +63,23 @@ class MutateConversionValueRulesRequest(proto.Message):
             resource name should be returned post mutation.
     """
 
-    customer_id = proto.Field(proto.STRING, number=1,)
-    operations = proto.RepeatedField(
-        proto.MESSAGE, number=2, message="ConversionValueRuleOperation",
+    customer_id = proto.Field(
+        proto.STRING,
+        number=1,
     )
-    partial_failure = proto.Field(proto.BOOL, number=5,)
-    validate_only = proto.Field(proto.BOOL, number=3,)
+    operations = proto.RepeatedField(
+        proto.MESSAGE,
+        number=2,
+        message="ConversionValueRuleOperation",
+    )
+    partial_failure = proto.Field(
+        proto.BOOL,
+        number=5,
+    )
+    validate_only = proto.Field(
+        proto.BOOL,
+        number=3,
+    )
     response_content_type = proto.Field(
         proto.ENUM,
         number=4,
@@ -111,7 +122,9 @@ class ConversionValueRuleOperation(proto.Message):
     """
 
     update_mask = proto.Field(
-        proto.MESSAGE, number=4, message=field_mask_pb2.FieldMask,
+        proto.MESSAGE,
+        number=4,
+        message=field_mask_pb2.FieldMask,
     )
     create = proto.Field(
         proto.MESSAGE,
@@ -125,7 +138,11 @@ class ConversionValueRuleOperation(proto.Message):
         oneof="operation",
         message=gagr_conversion_value_rule.ConversionValueRule,
     )
-    remove = proto.Field(proto.STRING, number=3, oneof="operation",)
+    remove = proto.Field(
+        proto.STRING,
+        number=3,
+        oneof="operation",
+    )
 
 
 class MutateConversionValueRulesResponse(proto.Message):
@@ -144,10 +161,14 @@ class MutateConversionValueRulesResponse(proto.Message):
     """
 
     results = proto.RepeatedField(
-        proto.MESSAGE, number=2, message="MutateConversionValueRuleResult",
+        proto.MESSAGE,
+        number=2,
+        message="MutateConversionValueRuleResult",
     )
     partial_failure_error = proto.Field(
-        proto.MESSAGE, number=3, message=status_pb2.Status,
+        proto.MESSAGE,
+        number=3,
+        message=status_pb2.Status,
     )
 
 
@@ -163,7 +184,10 @@ class MutateConversionValueRuleResult(proto.Message):
             response_content_type is set to "MUTABLE_RESOURCE".
     """
 
-    resource_name = proto.Field(proto.STRING, number=1,)
+    resource_name = proto.Field(
+        proto.STRING,
+        number=1,
+    )
     conversion_value_rule = proto.Field(
         proto.MESSAGE,
         number=2,

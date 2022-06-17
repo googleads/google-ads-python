@@ -22,7 +22,9 @@ from google.ads.googleads.v10.enums.types import product_bidding_category_status
 __protobuf__ = proto.module(
     package="google.ads.googleads.v10.resources",
     marshal="google.ads.googleads.v10",
-    manifest={"ProductBiddingCategoryConstant",},
+    manifest={
+        "ProductBiddingCategoryConstant",
+    },
 )
 
 
@@ -72,11 +74,24 @@ class ProductBiddingCategoryConstant(proto.Message):
             This field is a member of `oneof`_ ``_localized_name``.
     """
 
-    resource_name = proto.Field(proto.STRING, number=1,)
-    id = proto.Field(proto.INT64, number=10, optional=True,)
-    country_code = proto.Field(proto.STRING, number=11, optional=True,)
+    resource_name = proto.Field(
+        proto.STRING,
+        number=1,
+    )
+    id = proto.Field(
+        proto.INT64,
+        number=10,
+        optional=True,
+    )
+    country_code = proto.Field(
+        proto.STRING,
+        number=11,
+        optional=True,
+    )
     product_bidding_category_constant_parent = proto.Field(
-        proto.STRING, number=12, optional=True,
+        proto.STRING,
+        number=12,
+        optional=True,
     )
     level = proto.Field(
         proto.ENUM,
@@ -88,8 +103,16 @@ class ProductBiddingCategoryConstant(proto.Message):
         number=6,
         enum=product_bidding_category_status.ProductBiddingCategoryStatusEnum.ProductBiddingCategoryStatus,
     )
-    language_code = proto.Field(proto.STRING, number=13, optional=True,)
-    localized_name = proto.Field(proto.STRING, number=14, optional=True,)
+    language_code = proto.Field(
+        proto.STRING,
+        number=13,
+        optional=True,
+    )
+    localized_name = proto.Field(
+        proto.STRING,
+        number=14,
+        optional=True,
+    )
 
 
 __all__ = tuple(sorted(__protobuf__.manifest))

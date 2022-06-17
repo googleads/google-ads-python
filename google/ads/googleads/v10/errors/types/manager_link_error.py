@@ -19,13 +19,14 @@ import proto  # type: ignore
 __protobuf__ = proto.module(
     package="google.ads.googleads.v10.errors",
     marshal="google.ads.googleads.v10",
-    manifest={"ManagerLinkErrorEnum",},
+    manifest={
+        "ManagerLinkErrorEnum",
+    },
 )
 
 
 class ManagerLinkErrorEnum(proto.Message):
-    r"""Container for enum describing possible ManagerLink errors.
-    """
+    r"""Container for enum describing possible ManagerLink errors."""
 
     class ManagerLinkError(proto.Enum):
         r"""Enum describing possible ManagerLink errors."""

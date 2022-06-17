@@ -26,7 +26,9 @@ from google.ads.googleads.v10.enums.types import (
 __protobuf__ = proto.module(
     package="google.ads.googleads.v10.resources",
     marshal="google.ads.googleads.v10",
-    manifest={"FeedItemTarget",},
+    manifest={
+        "FeedItemTarget",
+    },
 )
 
 
@@ -88,25 +90,51 @@ class FeedItemTarget(proto.Message):
             This field is a member of `oneof`_ ``target``.
     """
 
-    resource_name = proto.Field(proto.STRING, number=1,)
-    feed_item = proto.Field(proto.STRING, number=12, optional=True,)
+    resource_name = proto.Field(
+        proto.STRING,
+        number=1,
+    )
+    feed_item = proto.Field(
+        proto.STRING,
+        number=12,
+        optional=True,
+    )
     feed_item_target_type = proto.Field(
         proto.ENUM,
         number=3,
         enum=gage_feed_item_target_type.FeedItemTargetTypeEnum.FeedItemTargetType,
     )
-    feed_item_target_id = proto.Field(proto.INT64, number=13, optional=True,)
+    feed_item_target_id = proto.Field(
+        proto.INT64,
+        number=13,
+        optional=True,
+    )
     status = proto.Field(
         proto.ENUM,
         number=11,
         enum=feed_item_target_status.FeedItemTargetStatusEnum.FeedItemTargetStatus,
     )
-    campaign = proto.Field(proto.STRING, number=14, oneof="target",)
-    ad_group = proto.Field(proto.STRING, number=15, oneof="target",)
-    keyword = proto.Field(
-        proto.MESSAGE, number=7, oneof="target", message=criteria.KeywordInfo,
+    campaign = proto.Field(
+        proto.STRING,
+        number=14,
+        oneof="target",
     )
-    geo_target_constant = proto.Field(proto.STRING, number=16, oneof="target",)
+    ad_group = proto.Field(
+        proto.STRING,
+        number=15,
+        oneof="target",
+    )
+    keyword = proto.Field(
+        proto.MESSAGE,
+        number=7,
+        oneof="target",
+        message=criteria.KeywordInfo,
+    )
+    geo_target_constant = proto.Field(
+        proto.STRING,
+        number=16,
+        oneof="target",
+    )
     device = proto.Field(
         proto.ENUM,
         number=9,

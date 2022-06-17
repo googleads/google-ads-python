@@ -19,13 +19,14 @@ import proto  # type: ignore
 __protobuf__ = proto.module(
     package="google.ads.googleads.v10.enums",
     marshal="google.ads.googleads.v10",
-    manifest={"UserListDateRuleItemOperatorEnum",},
+    manifest={
+        "UserListDateRuleItemOperatorEnum",
+    },
 )
 
 
 class UserListDateRuleItemOperatorEnum(proto.Message):
-    r"""Supported rule operator for date type.
-    """
+    r"""Supported rule operator for date type."""
 
     class UserListDateRuleItemOperator(proto.Enum):
         r"""Enum describing possible user list date rule item operators."""

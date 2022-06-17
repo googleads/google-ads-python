@@ -22,7 +22,9 @@ from google.ads.googleads.v10.enums.types import invoice_type
 __protobuf__ = proto.module(
     package="google.ads.googleads.v10.resources",
     marshal="google.ads.googleads.v10",
-    manifest={"Invoice",},
+    manifest={
+        "Invoice",
+    },
 )
 
 
@@ -230,58 +232,158 @@ class Invoice(proto.Message):
                 account budget's start and end time.
         """
 
-        customer = proto.Field(proto.STRING, number=10, optional=True,)
-        customer_descriptive_name = proto.Field(
-            proto.STRING, number=11, optional=True,
+        customer = proto.Field(
+            proto.STRING,
+            number=10,
+            optional=True,
         )
-        account_budget = proto.Field(proto.STRING, number=12, optional=True,)
+        customer_descriptive_name = proto.Field(
+            proto.STRING,
+            number=11,
+            optional=True,
+        )
+        account_budget = proto.Field(
+            proto.STRING,
+            number=12,
+            optional=True,
+        )
         account_budget_name = proto.Field(
-            proto.STRING, number=13, optional=True,
+            proto.STRING,
+            number=13,
+            optional=True,
         )
         purchase_order_number = proto.Field(
-            proto.STRING, number=14, optional=True,
+            proto.STRING,
+            number=14,
+            optional=True,
         )
         subtotal_amount_micros = proto.Field(
-            proto.INT64, number=15, optional=True,
+            proto.INT64,
+            number=15,
+            optional=True,
         )
-        tax_amount_micros = proto.Field(proto.INT64, number=16, optional=True,)
+        tax_amount_micros = proto.Field(
+            proto.INT64,
+            number=16,
+            optional=True,
+        )
         total_amount_micros = proto.Field(
-            proto.INT64, number=17, optional=True,
+            proto.INT64,
+            number=17,
+            optional=True,
         )
         billable_activity_date_range = proto.Field(
-            proto.MESSAGE, number=9, message=dates.DateRange,
+            proto.MESSAGE,
+            number=9,
+            message=dates.DateRange,
         )
 
-    resource_name = proto.Field(proto.STRING, number=1,)
-    id = proto.Field(proto.STRING, number=25, optional=True,)
+    resource_name = proto.Field(
+        proto.STRING,
+        number=1,
+    )
+    id = proto.Field(
+        proto.STRING,
+        number=25,
+        optional=True,
+    )
     type_ = proto.Field(
-        proto.ENUM, number=3, enum=invoice_type.InvoiceTypeEnum.InvoiceType,
+        proto.ENUM,
+        number=3,
+        enum=invoice_type.InvoiceTypeEnum.InvoiceType,
     )
-    billing_setup = proto.Field(proto.STRING, number=26, optional=True,)
-    payments_account_id = proto.Field(proto.STRING, number=27, optional=True,)
-    payments_profile_id = proto.Field(proto.STRING, number=28, optional=True,)
-    issue_date = proto.Field(proto.STRING, number=29, optional=True,)
-    due_date = proto.Field(proto.STRING, number=30, optional=True,)
+    billing_setup = proto.Field(
+        proto.STRING,
+        number=26,
+        optional=True,
+    )
+    payments_account_id = proto.Field(
+        proto.STRING,
+        number=27,
+        optional=True,
+    )
+    payments_profile_id = proto.Field(
+        proto.STRING,
+        number=28,
+        optional=True,
+    )
+    issue_date = proto.Field(
+        proto.STRING,
+        number=29,
+        optional=True,
+    )
+    due_date = proto.Field(
+        proto.STRING,
+        number=30,
+        optional=True,
+    )
     service_date_range = proto.Field(
-        proto.MESSAGE, number=9, message=dates.DateRange,
+        proto.MESSAGE,
+        number=9,
+        message=dates.DateRange,
     )
-    currency_code = proto.Field(proto.STRING, number=31, optional=True,)
-    adjustments_subtotal_amount_micros = proto.Field(proto.INT64, number=19,)
-    adjustments_tax_amount_micros = proto.Field(proto.INT64, number=20,)
-    adjustments_total_amount_micros = proto.Field(proto.INT64, number=21,)
+    currency_code = proto.Field(
+        proto.STRING,
+        number=31,
+        optional=True,
+    )
+    adjustments_subtotal_amount_micros = proto.Field(
+        proto.INT64,
+        number=19,
+    )
+    adjustments_tax_amount_micros = proto.Field(
+        proto.INT64,
+        number=20,
+    )
+    adjustments_total_amount_micros = proto.Field(
+        proto.INT64,
+        number=21,
+    )
     regulatory_costs_subtotal_amount_micros = proto.Field(
-        proto.INT64, number=22,
+        proto.INT64,
+        number=22,
     )
-    regulatory_costs_tax_amount_micros = proto.Field(proto.INT64, number=23,)
-    regulatory_costs_total_amount_micros = proto.Field(proto.INT64, number=24,)
-    subtotal_amount_micros = proto.Field(proto.INT64, number=33, optional=True,)
-    tax_amount_micros = proto.Field(proto.INT64, number=34, optional=True,)
-    total_amount_micros = proto.Field(proto.INT64, number=35, optional=True,)
-    corrected_invoice = proto.Field(proto.STRING, number=36, optional=True,)
-    replaced_invoices = proto.RepeatedField(proto.STRING, number=37,)
-    pdf_url = proto.Field(proto.STRING, number=38, optional=True,)
+    regulatory_costs_tax_amount_micros = proto.Field(
+        proto.INT64,
+        number=23,
+    )
+    regulatory_costs_total_amount_micros = proto.Field(
+        proto.INT64,
+        number=24,
+    )
+    subtotal_amount_micros = proto.Field(
+        proto.INT64,
+        number=33,
+        optional=True,
+    )
+    tax_amount_micros = proto.Field(
+        proto.INT64,
+        number=34,
+        optional=True,
+    )
+    total_amount_micros = proto.Field(
+        proto.INT64,
+        number=35,
+        optional=True,
+    )
+    corrected_invoice = proto.Field(
+        proto.STRING,
+        number=36,
+        optional=True,
+    )
+    replaced_invoices = proto.RepeatedField(
+        proto.STRING,
+        number=37,
+    )
+    pdf_url = proto.Field(
+        proto.STRING,
+        number=38,
+        optional=True,
+    )
     account_budget_summaries = proto.RepeatedField(
-        proto.MESSAGE, number=18, message=AccountBudgetSummary,
+        proto.MESSAGE,
+        number=18,
+        message=AccountBudgetSummary,
     )
 
 

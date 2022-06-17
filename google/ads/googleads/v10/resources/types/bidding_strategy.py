@@ -23,7 +23,9 @@ from google.ads.googleads.v10.enums.types import bidding_strategy_type
 __protobuf__ = proto.module(
     package="google.ads.googleads.v10.resources",
     marshal="google.ads.googleads.v10",
-    manifest={"BiddingStrategy",},
+    manifest={
+        "BiddingStrategy",
+    },
 )
 
 
@@ -145,9 +147,20 @@ class BiddingStrategy(proto.Message):
             This field is a member of `oneof`_ ``scheme``.
     """
 
-    resource_name = proto.Field(proto.STRING, number=1,)
-    id = proto.Field(proto.INT64, number=16, optional=True,)
-    name = proto.Field(proto.STRING, number=17, optional=True,)
+    resource_name = proto.Field(
+        proto.STRING,
+        number=1,
+    )
+    id = proto.Field(
+        proto.INT64,
+        number=16,
+        optional=True,
+    )
+    name = proto.Field(
+        proto.STRING,
+        number=17,
+        optional=True,
+    )
     status = proto.Field(
         proto.ENUM,
         number=15,
@@ -158,16 +171,30 @@ class BiddingStrategy(proto.Message):
         number=5,
         enum=bidding_strategy_type.BiddingStrategyTypeEnum.BiddingStrategyType,
     )
-    currency_code = proto.Field(proto.STRING, number=23,)
-    effective_currency_code = proto.Field(
-        proto.STRING, number=20, optional=True,
+    currency_code = proto.Field(
+        proto.STRING,
+        number=23,
     )
-    campaign_count = proto.Field(proto.INT64, number=18, optional=True,)
+    effective_currency_code = proto.Field(
+        proto.STRING,
+        number=20,
+        optional=True,
+    )
+    campaign_count = proto.Field(
+        proto.INT64,
+        number=18,
+        optional=True,
+    )
     non_removed_campaign_count = proto.Field(
-        proto.INT64, number=19, optional=True,
+        proto.INT64,
+        number=19,
+        optional=True,
     )
     enhanced_cpc = proto.Field(
-        proto.MESSAGE, number=7, oneof="scheme", message=bidding.EnhancedCpc,
+        proto.MESSAGE,
+        number=7,
+        oneof="scheme",
+        message=bidding.EnhancedCpc,
     )
     maximize_conversion_value = proto.Field(
         proto.MESSAGE,
@@ -182,7 +209,10 @@ class BiddingStrategy(proto.Message):
         message=bidding.MaximizeConversions,
     )
     target_cpa = proto.Field(
-        proto.MESSAGE, number=9, oneof="scheme", message=bidding.TargetCpa,
+        proto.MESSAGE,
+        number=9,
+        oneof="scheme",
+        message=bidding.TargetCpa,
     )
     target_impression_share = proto.Field(
         proto.MESSAGE,
@@ -191,10 +221,16 @@ class BiddingStrategy(proto.Message):
         message=bidding.TargetImpressionShare,
     )
     target_roas = proto.Field(
-        proto.MESSAGE, number=11, oneof="scheme", message=bidding.TargetRoas,
+        proto.MESSAGE,
+        number=11,
+        oneof="scheme",
+        message=bidding.TargetRoas,
     )
     target_spend = proto.Field(
-        proto.MESSAGE, number=12, oneof="scheme", message=bidding.TargetSpend,
+        proto.MESSAGE,
+        number=12,
+        oneof="scheme",
+        message=bidding.TargetSpend,
     )
 
 

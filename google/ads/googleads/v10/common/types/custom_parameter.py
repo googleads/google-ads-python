@@ -19,7 +19,9 @@ import proto  # type: ignore
 __protobuf__ = proto.module(
     package="google.ads.googleads.v10.common",
     marshal="google.ads.googleads.v10",
-    manifest={"CustomParameter",},
+    manifest={
+        "CustomParameter",
+    },
 )
 
 
@@ -38,8 +40,16 @@ class CustomParameter(proto.Message):
             This field is a member of `oneof`_ ``_value``.
     """
 
-    key = proto.Field(proto.STRING, number=3, optional=True,)
-    value = proto.Field(proto.STRING, number=4, optional=True,)
+    key = proto.Field(
+        proto.STRING,
+        number=3,
+        optional=True,
+    )
+    value = proto.Field(
+        proto.STRING,
+        number=4,
+        optional=True,
+    )
 
 
 __all__ = tuple(sorted(__protobuf__.manifest))

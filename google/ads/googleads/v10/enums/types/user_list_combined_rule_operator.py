@@ -19,13 +19,14 @@ import proto  # type: ignore
 __protobuf__ = proto.module(
     package="google.ads.googleads.v10.enums",
     marshal="google.ads.googleads.v10",
-    manifest={"UserListCombinedRuleOperatorEnum",},
+    manifest={
+        "UserListCombinedRuleOperatorEnum",
+    },
 )
 
 
 class UserListCombinedRuleOperatorEnum(proto.Message):
-    r"""Logical operator connecting two rules.
-    """
+    r"""Logical operator connecting two rules."""
 
     class UserListCombinedRuleOperator(proto.Enum):
         r"""Enum describing possible user list combined rule operators."""

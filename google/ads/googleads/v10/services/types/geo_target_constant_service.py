@@ -75,7 +75,10 @@ class SuggestGeoTargetConstantsRequest(proto.Message):
                 A list of location names.
         """
 
-        names = proto.RepeatedField(proto.STRING, number=2,)
+        names = proto.RepeatedField(
+            proto.STRING,
+            number=2,
+        )
 
     class GeoTargets(proto.Message):
         r"""A list of geo target constant resource names.
@@ -85,15 +88,32 @@ class SuggestGeoTargetConstantsRequest(proto.Message):
                 A list of geo target constant resource names.
         """
 
-        geo_target_constants = proto.RepeatedField(proto.STRING, number=2,)
+        geo_target_constants = proto.RepeatedField(
+            proto.STRING,
+            number=2,
+        )
 
-    locale = proto.Field(proto.STRING, number=6, optional=True,)
-    country_code = proto.Field(proto.STRING, number=7, optional=True,)
+    locale = proto.Field(
+        proto.STRING,
+        number=6,
+        optional=True,
+    )
+    country_code = proto.Field(
+        proto.STRING,
+        number=7,
+        optional=True,
+    )
     location_names = proto.Field(
-        proto.MESSAGE, number=1, oneof="query", message=LocationNames,
+        proto.MESSAGE,
+        number=1,
+        oneof="query",
+        message=LocationNames,
     )
     geo_targets = proto.Field(
-        proto.MESSAGE, number=2, oneof="query", message=GeoTargets,
+        proto.MESSAGE,
+        number=2,
+        oneof="query",
+        message=GeoTargets,
     )
 
 
@@ -107,7 +127,9 @@ class SuggestGeoTargetConstantsResponse(proto.Message):
     """
 
     geo_target_constant_suggestions = proto.RepeatedField(
-        proto.MESSAGE, number=1, message="GeoTargetConstantSuggestion",
+        proto.MESSAGE,
+        number=1,
+        message="GeoTargetConstantSuggestion",
     )
 
 
@@ -143,9 +165,21 @@ class GeoTargetConstantSuggestion(proto.Message):
             constant.
     """
 
-    locale = proto.Field(proto.STRING, number=6, optional=True,)
-    reach = proto.Field(proto.INT64, number=7, optional=True,)
-    search_term = proto.Field(proto.STRING, number=8, optional=True,)
+    locale = proto.Field(
+        proto.STRING,
+        number=6,
+        optional=True,
+    )
+    reach = proto.Field(
+        proto.INT64,
+        number=7,
+        optional=True,
+    )
+    search_term = proto.Field(
+        proto.STRING,
+        number=8,
+        optional=True,
+    )
     geo_target_constant = proto.Field(
         proto.MESSAGE,
         number=4,

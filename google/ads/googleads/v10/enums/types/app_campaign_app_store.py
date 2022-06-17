@@ -19,13 +19,14 @@ import proto  # type: ignore
 __protobuf__ = proto.module(
     package="google.ads.googleads.v10.enums",
     marshal="google.ads.googleads.v10",
-    manifest={"AppCampaignAppStoreEnum",},
+    manifest={
+        "AppCampaignAppStoreEnum",
+    },
 )
 
 
 class AppCampaignAppStoreEnum(proto.Message):
-    r"""The application store that distributes mobile applications.
-    """
+    r"""The application store that distributes mobile applications."""
 
     class AppCampaignAppStore(proto.Enum):
         r"""Enum describing app campaign app store."""

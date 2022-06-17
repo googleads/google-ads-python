@@ -19,13 +19,14 @@ import proto  # type: ignore
 __protobuf__ = proto.module(
     package="google.ads.googleads.v10.errors",
     marshal="google.ads.googleads.v10",
-    manifest={"AdParameterErrorEnum",},
+    manifest={
+        "AdParameterErrorEnum",
+    },
 )
 
 
 class AdParameterErrorEnum(proto.Message):
-    r"""Container for enum describing possible ad parameter errors.
-    """
+    r"""Container for enum describing possible ad parameter errors."""
 
     class AdParameterError(proto.Enum):
         r"""Enum describing possible ad parameter errors."""

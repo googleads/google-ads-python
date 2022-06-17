@@ -19,13 +19,14 @@ import proto  # type: ignore
 __protobuf__ = proto.module(
     package="google.ads.googleads.v10.errors",
     marshal="google.ads.googleads.v10",
-    manifest={"ChangeEventErrorEnum",},
+    manifest={
+        "ChangeEventErrorEnum",
+    },
 )
 
 
 class ChangeEventErrorEnum(proto.Message):
-    r"""Container for enum describing possible change event errors.
-    """
+    r"""Container for enum describing possible change event errors."""
 
     class ChangeEventError(proto.Enum):
         r"""Enum describing possible change event errors."""

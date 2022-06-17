@@ -19,7 +19,9 @@ import proto  # type: ignore
 __protobuf__ = proto.module(
     package="google.ads.googleads.v10.resources",
     marshal="google.ads.googleads.v10",
-    manifest={"TopicConstant",},
+    manifest={
+        "TopicConstant",
+    },
 )
 
 
@@ -53,10 +55,24 @@ class TopicConstant(proto.Message):
             https://developers.google.com/adwords/api/docs/appendix/verticals
     """
 
-    resource_name = proto.Field(proto.STRING, number=1,)
-    id = proto.Field(proto.INT64, number=5, optional=True,)
-    topic_constant_parent = proto.Field(proto.STRING, number=6, optional=True,)
-    path = proto.RepeatedField(proto.STRING, number=7,)
+    resource_name = proto.Field(
+        proto.STRING,
+        number=1,
+    )
+    id = proto.Field(
+        proto.INT64,
+        number=5,
+        optional=True,
+    )
+    topic_constant_parent = proto.Field(
+        proto.STRING,
+        number=6,
+        optional=True,
+    )
+    path = proto.RepeatedField(
+        proto.STRING,
+        number=7,
+    )
 
 
 __all__ = tuple(sorted(__protobuf__.manifest))

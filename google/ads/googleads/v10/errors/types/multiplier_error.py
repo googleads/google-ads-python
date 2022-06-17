@@ -19,13 +19,14 @@ import proto  # type: ignore
 __protobuf__ = proto.module(
     package="google.ads.googleads.v10.errors",
     marshal="google.ads.googleads.v10",
-    manifest={"MultiplierErrorEnum",},
+    manifest={
+        "MultiplierErrorEnum",
+    },
 )
 
 
 class MultiplierErrorEnum(proto.Message):
-    r"""Container for enum describing possible multiplier errors.
-    """
+    r"""Container for enum describing possible multiplier errors."""
 
     class MultiplierError(proto.Enum):
         r"""Enum describing possible multiplier errors."""

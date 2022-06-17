@@ -19,13 +19,14 @@ import proto  # type: ignore
 __protobuf__ = proto.module(
     package="google.ads.googleads.v10.errors",
     marshal="google.ads.googleads.v10",
-    manifest={"CampaignDraftErrorEnum",},
+    manifest={
+        "CampaignDraftErrorEnum",
+    },
 )
 
 
 class CampaignDraftErrorEnum(proto.Message):
-    r"""Container for enum describing possible campaign draft errors.
-    """
+    r"""Container for enum describing possible campaign draft errors."""
 
     class CampaignDraftError(proto.Enum):
         r"""Enum describing possible campaign draft errors."""

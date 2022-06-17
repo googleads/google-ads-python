@@ -19,13 +19,14 @@ import proto  # type: ignore
 __protobuf__ = proto.module(
     package="google.ads.googleads.v10.enums",
     marshal="google.ads.googleads.v10",
-    manifest={"RecommendationTypeEnum",},
+    manifest={
+        "RecommendationTypeEnum",
+    },
 )
 
 
 class RecommendationTypeEnum(proto.Message):
-    r"""Container for enum describing types of recommendations.
-    """
+    r"""Container for enum describing types of recommendations."""
 
     class RecommendationType(proto.Enum):
         r"""Types of recommendations."""

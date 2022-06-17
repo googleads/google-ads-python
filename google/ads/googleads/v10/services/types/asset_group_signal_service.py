@@ -62,12 +62,23 @@ class MutateAssetGroupSignalsRequest(proto.Message):
             resource name should be returned post mutation.
     """
 
-    customer_id = proto.Field(proto.STRING, number=1,)
-    operations = proto.RepeatedField(
-        proto.MESSAGE, number=2, message="AssetGroupSignalOperation",
+    customer_id = proto.Field(
+        proto.STRING,
+        number=1,
     )
-    partial_failure = proto.Field(proto.BOOL, number=3,)
-    validate_only = proto.Field(proto.BOOL, number=4,)
+    operations = proto.RepeatedField(
+        proto.MESSAGE,
+        number=2,
+        message="AssetGroupSignalOperation",
+    )
+    partial_failure = proto.Field(
+        proto.BOOL,
+        number=3,
+    )
+    validate_only = proto.Field(
+        proto.BOOL,
+        number=4,
+    )
     response_content_type = proto.Field(
         proto.ENUM,
         number=5,
@@ -105,7 +116,11 @@ class AssetGroupSignalOperation(proto.Message):
         oneof="operation",
         message=gagr_asset_group_signal.AssetGroupSignal,
     )
-    remove = proto.Field(proto.STRING, number=2, oneof="operation",)
+    remove = proto.Field(
+        proto.STRING,
+        number=2,
+        oneof="operation",
+    )
 
 
 class MutateAssetGroupSignalsResponse(proto.Message):
@@ -123,10 +138,14 @@ class MutateAssetGroupSignalsResponse(proto.Message):
     """
 
     results = proto.RepeatedField(
-        proto.MESSAGE, number=1, message="MutateAssetGroupSignalResult",
+        proto.MESSAGE,
+        number=1,
+        message="MutateAssetGroupSignalResult",
     )
     partial_failure_error = proto.Field(
-        proto.MESSAGE, number=2, message=status_pb2.Status,
+        proto.MESSAGE,
+        number=2,
+        message=status_pb2.Status,
     )
 
 
@@ -142,7 +161,10 @@ class MutateAssetGroupSignalResult(proto.Message):
             response_content_type is set to "MUTABLE_RESOURCE".
     """
 
-    resource_name = proto.Field(proto.STRING, number=1,)
+    resource_name = proto.Field(
+        proto.STRING,
+        number=1,
+    )
     asset_group_signal = proto.Field(
         proto.MESSAGE,
         number=2,

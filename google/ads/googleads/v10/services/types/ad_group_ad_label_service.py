@@ -53,12 +53,23 @@ class MutateAdGroupAdLabelsRequest(proto.Message):
             executed. Only errors are returned, not results.
     """
 
-    customer_id = proto.Field(proto.STRING, number=1,)
-    operations = proto.RepeatedField(
-        proto.MESSAGE, number=2, message="AdGroupAdLabelOperation",
+    customer_id = proto.Field(
+        proto.STRING,
+        number=1,
     )
-    partial_failure = proto.Field(proto.BOOL, number=3,)
-    validate_only = proto.Field(proto.BOOL, number=4,)
+    operations = proto.RepeatedField(
+        proto.MESSAGE,
+        number=2,
+        message="AdGroupAdLabelOperation",
+    )
+    partial_failure = proto.Field(
+        proto.BOOL,
+        number=3,
+    )
+    validate_only = proto.Field(
+        proto.BOOL,
+        number=4,
+    )
 
 
 class AdGroupAdLabelOperation(proto.Message):
@@ -92,7 +103,11 @@ class AdGroupAdLabelOperation(proto.Message):
         oneof="operation",
         message=ad_group_ad_label.AdGroupAdLabel,
     )
-    remove = proto.Field(proto.STRING, number=2, oneof="operation",)
+    remove = proto.Field(
+        proto.STRING,
+        number=2,
+        oneof="operation",
+    )
 
 
 class MutateAdGroupAdLabelsResponse(proto.Message):
@@ -110,10 +125,14 @@ class MutateAdGroupAdLabelsResponse(proto.Message):
     """
 
     partial_failure_error = proto.Field(
-        proto.MESSAGE, number=3, message=status_pb2.Status,
+        proto.MESSAGE,
+        number=3,
+        message=status_pb2.Status,
     )
     results = proto.RepeatedField(
-        proto.MESSAGE, number=2, message="MutateAdGroupAdLabelResult",
+        proto.MESSAGE,
+        number=2,
+        message="MutateAdGroupAdLabelResult",
     )
 
 
@@ -125,7 +144,10 @@ class MutateAdGroupAdLabelResult(proto.Message):
             Returned for successful operations.
     """
 
-    resource_name = proto.Field(proto.STRING, number=1,)
+    resource_name = proto.Field(
+        proto.STRING,
+        number=1,
+    )
 
 
 __all__ = tuple(sorted(__protobuf__.manifest))

@@ -19,13 +19,14 @@ import proto  # type: ignore
 __protobuf__ = proto.module(
     package="google.ads.googleads.v10.errors",
     marshal="google.ads.googleads.v10",
-    manifest={"CriterionErrorEnum",},
+    manifest={
+        "CriterionErrorEnum",
+    },
 )
 
 
 class CriterionErrorEnum(proto.Message):
-    r"""Container for enum describing possible criterion errors.
-    """
+    r"""Container for enum describing possible criterion errors."""
 
     class CriterionError(proto.Enum):
         r"""Enum describing possible criterion errors."""

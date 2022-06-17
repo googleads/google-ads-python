@@ -19,13 +19,14 @@ import proto  # type: ignore
 __protobuf__ = proto.module(
     package="google.ads.googleads.v10.enums",
     marshal="google.ads.googleads.v10",
-    manifest={"BiddingStrategyStatusEnum",},
+    manifest={
+        "BiddingStrategyStatusEnum",
+    },
 )
 
 
 class BiddingStrategyStatusEnum(proto.Message):
-    r"""Message describing BiddingStrategy statuses.
-    """
+    r"""Message describing BiddingStrategy statuses."""
 
     class BiddingStrategyStatus(proto.Enum):
         r"""The possible statuses of a BiddingStrategy."""

@@ -21,7 +21,10 @@ from google.ads.googleads.v10.enums.types import lead_form_field_user_input_type
 __protobuf__ = proto.module(
     package="google.ads.googleads.v10.resources",
     marshal="google.ads.googleads.v10",
-    manifest={"LeadFormSubmissionData", "LeadFormSubmissionField",},
+    manifest={
+        "LeadFormSubmissionData",
+        "LeadFormSubmissionField",
+    },
 )
 
 
@@ -61,17 +64,43 @@ class LeadFormSubmissionData(proto.Message):
             "2019-01-01 12:32:45-08:00".
     """
 
-    resource_name = proto.Field(proto.STRING, number=1,)
-    id = proto.Field(proto.STRING, number=2,)
-    asset = proto.Field(proto.STRING, number=3,)
-    campaign = proto.Field(proto.STRING, number=4,)
-    lead_form_submission_fields = proto.RepeatedField(
-        proto.MESSAGE, number=5, message="LeadFormSubmissionField",
+    resource_name = proto.Field(
+        proto.STRING,
+        number=1,
     )
-    ad_group = proto.Field(proto.STRING, number=6,)
-    ad_group_ad = proto.Field(proto.STRING, number=7,)
-    gclid = proto.Field(proto.STRING, number=8,)
-    submission_date_time = proto.Field(proto.STRING, number=9,)
+    id = proto.Field(
+        proto.STRING,
+        number=2,
+    )
+    asset = proto.Field(
+        proto.STRING,
+        number=3,
+    )
+    campaign = proto.Field(
+        proto.STRING,
+        number=4,
+    )
+    lead_form_submission_fields = proto.RepeatedField(
+        proto.MESSAGE,
+        number=5,
+        message="LeadFormSubmissionField",
+    )
+    ad_group = proto.Field(
+        proto.STRING,
+        number=6,
+    )
+    ad_group_ad = proto.Field(
+        proto.STRING,
+        number=7,
+    )
+    gclid = proto.Field(
+        proto.STRING,
+        number=8,
+    )
+    submission_date_time = proto.Field(
+        proto.STRING,
+        number=9,
+    )
 
 
 class LeadFormSubmissionField(proto.Message):
@@ -90,7 +119,10 @@ class LeadFormSubmissionField(proto.Message):
         number=1,
         enum=lead_form_field_user_input_type.LeadFormFieldUserInputTypeEnum.LeadFormFieldUserInputType,
     )
-    field_value = proto.Field(proto.STRING, number=2,)
+    field_value = proto.Field(
+        proto.STRING,
+        number=2,
+    )
 
 
 __all__ = tuple(sorted(__protobuf__.manifest))

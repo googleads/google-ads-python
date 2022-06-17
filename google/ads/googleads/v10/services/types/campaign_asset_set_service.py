@@ -62,12 +62,23 @@ class MutateCampaignAssetSetsRequest(proto.Message):
             resource name should be returned post mutation.
     """
 
-    customer_id = proto.Field(proto.STRING, number=1,)
-    operations = proto.RepeatedField(
-        proto.MESSAGE, number=2, message="CampaignAssetSetOperation",
+    customer_id = proto.Field(
+        proto.STRING,
+        number=1,
     )
-    partial_failure = proto.Field(proto.BOOL, number=3,)
-    validate_only = proto.Field(proto.BOOL, number=4,)
+    operations = proto.RepeatedField(
+        proto.MESSAGE,
+        number=2,
+        message="CampaignAssetSetOperation",
+    )
+    partial_failure = proto.Field(
+        proto.BOOL,
+        number=3,
+    )
+    validate_only = proto.Field(
+        proto.BOOL,
+        number=4,
+    )
     response_content_type = proto.Field(
         proto.ENUM,
         number=5,
@@ -105,7 +116,11 @@ class CampaignAssetSetOperation(proto.Message):
         oneof="operation",
         message=gagr_campaign_asset_set.CampaignAssetSet,
     )
-    remove = proto.Field(proto.STRING, number=2, oneof="operation",)
+    remove = proto.Field(
+        proto.STRING,
+        number=2,
+        oneof="operation",
+    )
 
 
 class MutateCampaignAssetSetsResponse(proto.Message):
@@ -123,10 +138,14 @@ class MutateCampaignAssetSetsResponse(proto.Message):
     """
 
     results = proto.RepeatedField(
-        proto.MESSAGE, number=1, message="MutateCampaignAssetSetResult",
+        proto.MESSAGE,
+        number=1,
+        message="MutateCampaignAssetSetResult",
     )
     partial_failure_error = proto.Field(
-        proto.MESSAGE, number=2, message=status_pb2.Status,
+        proto.MESSAGE,
+        number=2,
+        message=status_pb2.Status,
     )
 
 
@@ -142,7 +161,10 @@ class MutateCampaignAssetSetResult(proto.Message):
             response_content_type is set to "MUTABLE_RESOURCE".
     """
 
-    resource_name = proto.Field(proto.STRING, number=1,)
+    resource_name = proto.Field(
+        proto.STRING,
+        number=1,
+    )
     campaign_asset_set = proto.Field(
         proto.MESSAGE,
         number=2,

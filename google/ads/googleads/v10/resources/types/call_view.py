@@ -25,7 +25,9 @@ from google.ads.googleads.v10.enums.types import google_voice_call_status
 __protobuf__ = proto.module(
     package="google.ads.googleads.v10.resources",
     marshal="google.ads.googleads.v10",
-    manifest={"CallView",},
+    manifest={
+        "CallView",
+    },
 )
 
 
@@ -62,19 +64,39 @@ class CallView(proto.Message):
             Output only. The status of the call.
     """
 
-    resource_name = proto.Field(proto.STRING, number=1,)
-    caller_country_code = proto.Field(proto.STRING, number=2,)
-    caller_area_code = proto.Field(proto.STRING, number=3,)
-    call_duration_seconds = proto.Field(proto.INT64, number=4,)
-    start_call_date_time = proto.Field(proto.STRING, number=5,)
-    end_call_date_time = proto.Field(proto.STRING, number=6,)
+    resource_name = proto.Field(
+        proto.STRING,
+        number=1,
+    )
+    caller_country_code = proto.Field(
+        proto.STRING,
+        number=2,
+    )
+    caller_area_code = proto.Field(
+        proto.STRING,
+        number=3,
+    )
+    call_duration_seconds = proto.Field(
+        proto.INT64,
+        number=4,
+    )
+    start_call_date_time = proto.Field(
+        proto.STRING,
+        number=5,
+    )
+    end_call_date_time = proto.Field(
+        proto.STRING,
+        number=6,
+    )
     call_tracking_display_location = proto.Field(
         proto.ENUM,
         number=7,
         enum=gage_call_tracking_display_location.CallTrackingDisplayLocationEnum.CallTrackingDisplayLocation,
     )
     type_ = proto.Field(
-        proto.ENUM, number=8, enum=call_type.CallTypeEnum.CallType,
+        proto.ENUM,
+        number=8,
+        enum=call_type.CallTypeEnum.CallType,
     )
     call_status = proto.Field(
         proto.ENUM,

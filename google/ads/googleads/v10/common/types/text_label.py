@@ -19,7 +19,9 @@ import proto  # type: ignore
 __protobuf__ = proto.module(
     package="google.ads.googleads.v10.common",
     marshal="google.ads.googleads.v10",
-    manifest={"TextLabel",},
+    manifest={
+        "TextLabel",
+    },
 )
 
 
@@ -41,8 +43,16 @@ class TextLabel(proto.Message):
             This field is a member of `oneof`_ ``_description``.
     """
 
-    background_color = proto.Field(proto.STRING, number=3, optional=True,)
-    description = proto.Field(proto.STRING, number=4, optional=True,)
+    background_color = proto.Field(
+        proto.STRING,
+        number=3,
+        optional=True,
+    )
+    description = proto.Field(
+        proto.STRING,
+        number=4,
+        optional=True,
+    )
 
 
 __all__ = tuple(sorted(__protobuf__.manifest))

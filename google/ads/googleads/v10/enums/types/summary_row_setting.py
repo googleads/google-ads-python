@@ -19,13 +19,14 @@ import proto  # type: ignore
 __protobuf__ = proto.module(
     package="google.ads.googleads.v10.enums",
     marshal="google.ads.googleads.v10",
-    manifest={"SummaryRowSettingEnum",},
+    manifest={
+        "SummaryRowSettingEnum",
+    },
 )
 
 
 class SummaryRowSettingEnum(proto.Message):
-    r"""Indicates summary row setting in request parameter.
-    """
+    r"""Indicates summary row setting in request parameter."""
 
     class SummaryRowSetting(proto.Enum):
         r"""Enum describing return summary row settings."""

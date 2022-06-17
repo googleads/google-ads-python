@@ -19,13 +19,14 @@ import proto  # type: ignore
 __protobuf__ = proto.module(
     package="google.ads.googleads.v10.enums",
     marshal="google.ads.googleads.v10",
-    manifest={"SitelinkPlaceholderFieldEnum",},
+    manifest={
+        "SitelinkPlaceholderFieldEnum",
+    },
 )
 
 
 class SitelinkPlaceholderFieldEnum(proto.Message):
-    r"""Values for Sitelink placeholder fields.
-    """
+    r"""Values for Sitelink placeholder fields."""
 
     class SitelinkPlaceholderField(proto.Enum):
         r"""Possible values for Sitelink placeholder fields."""

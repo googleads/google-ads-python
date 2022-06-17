@@ -19,13 +19,14 @@ import proto  # type: ignore
 __protobuf__ = proto.module(
     package="google.ads.googleads.v10.enums",
     marshal="google.ads.googleads.v10",
-    manifest={"AdvertisingChannelSubTypeEnum",},
+    manifest={
+        "AdvertisingChannelSubTypeEnum",
+    },
 )
 
 
 class AdvertisingChannelSubTypeEnum(proto.Message):
-    r"""An immutable specialization of an Advertising Channel.
-    """
+    r"""An immutable specialization of an Advertising Channel."""
 
     class AdvertisingChannelSubType(proto.Enum):
         r"""Enum describing the different channel subtypes."""

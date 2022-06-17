@@ -19,7 +19,9 @@ import proto  # type: ignore
 __protobuf__ = proto.module(
     package="google.ads.googleads.v10.resources",
     marshal="google.ads.googleads.v10",
-    manifest={"DomainCategory",},
+    manifest={
+        "DomainCategory",
+    },
 )
 
 
@@ -89,16 +91,49 @@ class DomainCategory(proto.Message):
             This field is a member of `oneof`_ ``_recommended_cpc_bid_micros``.
     """
 
-    resource_name = proto.Field(proto.STRING, number=1,)
-    campaign = proto.Field(proto.STRING, number=10, optional=True,)
-    category = proto.Field(proto.STRING, number=11, optional=True,)
-    language_code = proto.Field(proto.STRING, number=12, optional=True,)
-    domain = proto.Field(proto.STRING, number=13, optional=True,)
-    coverage_fraction = proto.Field(proto.DOUBLE, number=14, optional=True,)
-    category_rank = proto.Field(proto.INT64, number=15, optional=True,)
-    has_children = proto.Field(proto.BOOL, number=16, optional=True,)
+    resource_name = proto.Field(
+        proto.STRING,
+        number=1,
+    )
+    campaign = proto.Field(
+        proto.STRING,
+        number=10,
+        optional=True,
+    )
+    category = proto.Field(
+        proto.STRING,
+        number=11,
+        optional=True,
+    )
+    language_code = proto.Field(
+        proto.STRING,
+        number=12,
+        optional=True,
+    )
+    domain = proto.Field(
+        proto.STRING,
+        number=13,
+        optional=True,
+    )
+    coverage_fraction = proto.Field(
+        proto.DOUBLE,
+        number=14,
+        optional=True,
+    )
+    category_rank = proto.Field(
+        proto.INT64,
+        number=15,
+        optional=True,
+    )
+    has_children = proto.Field(
+        proto.BOOL,
+        number=16,
+        optional=True,
+    )
     recommended_cpc_bid_micros = proto.Field(
-        proto.INT64, number=17, optional=True,
+        proto.INT64,
+        number=17,
+        optional=True,
     )
 
 

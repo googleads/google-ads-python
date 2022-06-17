@@ -19,13 +19,14 @@ import proto  # type: ignore
 __protobuf__ = proto.module(
     package="google.ads.googleads.v10.enums",
     marshal="google.ads.googleads.v10",
-    manifest={"ClickTypeEnum",},
+    manifest={
+        "ClickTypeEnum",
+    },
 )
 
 
 class ClickTypeEnum(proto.Message):
-    r"""Container for enumeration of Google Ads click types.
-    """
+    r"""Container for enumeration of Google Ads click types."""
 
     class ClickType(proto.Enum):
         r"""Enumerates Google Ads click types."""

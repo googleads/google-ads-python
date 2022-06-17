@@ -25,7 +25,10 @@ from google.ads.googleads.v10.enums.types import policy_review_status
 __protobuf__ = proto.module(
     package="google.ads.googleads.v10.resources",
     marshal="google.ads.googleads.v10",
-    manifest={"AdGroupAdAssetView", "AdGroupAdAssetPolicySummary",},
+    manifest={
+        "AdGroupAdAssetView",
+        "AdGroupAdAssetPolicySummary",
+    },
 )
 
 
@@ -74,17 +77,34 @@ class AdGroupAdAssetView(proto.Message):
             Output only. Performance of an asset linkage.
     """
 
-    resource_name = proto.Field(proto.STRING, number=1,)
-    ad_group_ad = proto.Field(proto.STRING, number=9, optional=True,)
-    asset = proto.Field(proto.STRING, number=10, optional=True,)
+    resource_name = proto.Field(
+        proto.STRING,
+        number=1,
+    )
+    ad_group_ad = proto.Field(
+        proto.STRING,
+        number=9,
+        optional=True,
+    )
+    asset = proto.Field(
+        proto.STRING,
+        number=10,
+        optional=True,
+    )
     field_type = proto.Field(
         proto.ENUM,
         number=2,
         enum=asset_field_type.AssetFieldTypeEnum.AssetFieldType,
     )
-    enabled = proto.Field(proto.BOOL, number=8, optional=True,)
+    enabled = proto.Field(
+        proto.BOOL,
+        number=8,
+        optional=True,
+    )
     policy_summary = proto.Field(
-        proto.MESSAGE, number=3, message="AdGroupAdAssetPolicySummary",
+        proto.MESSAGE,
+        number=3,
+        message="AdGroupAdAssetPolicySummary",
     )
     performance_label = proto.Field(
         proto.ENUM,
@@ -110,7 +130,9 @@ class AdGroupAdAssetPolicySummary(proto.Message):
     """
 
     policy_topic_entries = proto.RepeatedField(
-        proto.MESSAGE, number=1, message=policy.PolicyTopicEntry,
+        proto.MESSAGE,
+        number=1,
+        message=policy.PolicyTopicEntry,
     )
     review_status = proto.Field(
         proto.ENUM,

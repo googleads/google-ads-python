@@ -22,7 +22,9 @@ from google.ads.googleads.v10.enums.types import customizer_value_status
 __protobuf__ = proto.module(
     package="google.ads.googleads.v10.resources",
     marshal="google.ads.googleads.v10",
-    manifest={"AdGroupCriterionCustomizer",},
+    manifest={
+        "AdGroupCriterionCustomizer",
+    },
 )
 
 
@@ -56,16 +58,28 @@ class AdGroupCriterionCustomizer(proto.Message):
             CustomizerAttribute.
     """
 
-    resource_name = proto.Field(proto.STRING, number=1,)
-    ad_group_criterion = proto.Field(proto.STRING, number=2, optional=True,)
-    customizer_attribute = proto.Field(proto.STRING, number=3,)
+    resource_name = proto.Field(
+        proto.STRING,
+        number=1,
+    )
+    ad_group_criterion = proto.Field(
+        proto.STRING,
+        number=2,
+        optional=True,
+    )
+    customizer_attribute = proto.Field(
+        proto.STRING,
+        number=3,
+    )
     status = proto.Field(
         proto.ENUM,
         number=4,
         enum=customizer_value_status.CustomizerValueStatusEnum.CustomizerValueStatus,
     )
     value = proto.Field(
-        proto.MESSAGE, number=5, message=customizer_value.CustomizerValue,
+        proto.MESSAGE,
+        number=5,
+        message=customizer_value.CustomizerValue,
     )
 
 

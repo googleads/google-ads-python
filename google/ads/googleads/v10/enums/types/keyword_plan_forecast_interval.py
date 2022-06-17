@@ -19,13 +19,14 @@ import proto  # type: ignore
 __protobuf__ = proto.module(
     package="google.ads.googleads.v10.enums",
     marshal="google.ads.googleads.v10",
-    manifest={"KeywordPlanForecastIntervalEnum",},
+    manifest={
+        "KeywordPlanForecastIntervalEnum",
+    },
 )
 
 
 class KeywordPlanForecastIntervalEnum(proto.Message):
-    r"""Container for enumeration of forecast intervals.
-    """
+    r"""Container for enumeration of forecast intervals."""
 
     class KeywordPlanForecastInterval(proto.Enum):
         r"""Forecast intervals."""

@@ -49,9 +49,14 @@ class UploadUserDataRequest(proto.Message):
             This field is a member of `oneof`_ ``metadata``.
     """
 
-    customer_id = proto.Field(proto.STRING, number=1,)
+    customer_id = proto.Field(
+        proto.STRING,
+        number=1,
+    )
     operations = proto.RepeatedField(
-        proto.MESSAGE, number=3, message="UserDataOperation",
+        proto.MESSAGE,
+        number=3,
+        message="UserDataOperation",
     )
     customer_match_user_list_metadata = proto.Field(
         proto.MESSAGE,
@@ -116,9 +121,15 @@ class UploadUserDataResponse(proto.Message):
             This field is a member of `oneof`_ ``_received_operations_count``.
     """
 
-    upload_date_time = proto.Field(proto.STRING, number=3, optional=True,)
+    upload_date_time = proto.Field(
+        proto.STRING,
+        number=3,
+        optional=True,
+    )
     received_operations_count = proto.Field(
-        proto.INT32, number=4, optional=True,
+        proto.INT32,
+        number=4,
+        optional=True,
     )
 
 

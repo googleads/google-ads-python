@@ -21,7 +21,9 @@ from google.ads.googleads.v10.enums.types import customizer_attribute_type
 __protobuf__ = proto.module(
     package="google.ads.googleads.v10.common",
     marshal="google.ads.googleads.v10",
-    manifest={"CustomizerValue",},
+    manifest={
+        "CustomizerValue",
+    },
 )
 
 
@@ -45,7 +47,10 @@ class CustomizerValue(proto.Message):
         number=1,
         enum=customizer_attribute_type.CustomizerAttributeTypeEnum.CustomizerAttributeType,
     )
-    string_value = proto.Field(proto.STRING, number=2,)
+    string_value = proto.Field(
+        proto.STRING,
+        number=2,
+    )
 
 
 __all__ = tuple(sorted(__protobuf__.manifest))

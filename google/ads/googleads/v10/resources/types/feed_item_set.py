@@ -24,7 +24,9 @@ from google.ads.googleads.v10.enums.types import feed_item_set_status
 __protobuf__ = proto.module(
     package="google.ads.googleads.v10.resources",
     marshal="google.ads.googleads.v10",
-    manifest={"FeedItemSet",},
+    manifest={
+        "FeedItemSet",
+    },
 )
 
 
@@ -72,10 +74,22 @@ class FeedItemSet(proto.Message):
             This field is a member of `oneof`_ ``dynamic_set_filter``.
     """
 
-    resource_name = proto.Field(proto.STRING, number=1,)
-    feed = proto.Field(proto.STRING, number=2,)
-    feed_item_set_id = proto.Field(proto.INT64, number=3,)
-    display_name = proto.Field(proto.STRING, number=4,)
+    resource_name = proto.Field(
+        proto.STRING,
+        number=1,
+    )
+    feed = proto.Field(
+        proto.STRING,
+        number=2,
+    )
+    feed_item_set_id = proto.Field(
+        proto.INT64,
+        number=3,
+    )
+    display_name = proto.Field(
+        proto.STRING,
+        number=4,
+    )
     status = proto.Field(
         proto.ENUM,
         number=8,

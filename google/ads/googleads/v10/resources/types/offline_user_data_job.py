@@ -29,7 +29,10 @@ from google.ads.googleads.v10.enums.types import offline_user_data_job_type
 __protobuf__ = proto.module(
     package="google.ads.googleads.v10.resources",
     marshal="google.ads.googleads.v10",
-    manifest={"OfflineUserDataJob", "OfflineUserDataJobMetadata",},
+    manifest={
+        "OfflineUserDataJob",
+        "OfflineUserDataJobMetadata",
+    },
 )
 
 
@@ -83,9 +86,20 @@ class OfflineUserDataJob(proto.Message):
             This field is a member of `oneof`_ ``metadata``.
     """
 
-    resource_name = proto.Field(proto.STRING, number=1,)
-    id = proto.Field(proto.INT64, number=9, optional=True,)
-    external_id = proto.Field(proto.INT64, number=10, optional=True,)
+    resource_name = proto.Field(
+        proto.STRING,
+        number=1,
+    )
+    id = proto.Field(
+        proto.INT64,
+        number=9,
+        optional=True,
+    )
+    external_id = proto.Field(
+        proto.INT64,
+        number=10,
+        optional=True,
+    )
     type_ = proto.Field(
         proto.ENUM,
         number=4,
@@ -102,7 +116,9 @@ class OfflineUserDataJob(proto.Message):
         enum=offline_user_data_job_failure_reason.OfflineUserDataJobFailureReasonEnum.OfflineUserDataJobFailureReason,
     )
     operation_metadata = proto.Field(
-        proto.MESSAGE, number=11, message="OfflineUserDataJobMetadata",
+        proto.MESSAGE,
+        number=11,
+        message="OfflineUserDataJobMetadata",
     )
     customer_match_user_list_metadata = proto.Field(
         proto.MESSAGE,

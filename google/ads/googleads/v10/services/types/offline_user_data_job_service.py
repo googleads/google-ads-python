@@ -54,14 +54,23 @@ class CreateOfflineUserDataJobRequest(proto.Message):
             in the resource.
     """
 
-    customer_id = proto.Field(proto.STRING, number=1,)
+    customer_id = proto.Field(
+        proto.STRING,
+        number=1,
+    )
     job = proto.Field(
         proto.MESSAGE,
         number=2,
         message=offline_user_data_job.OfflineUserDataJob,
     )
-    validate_only = proto.Field(proto.BOOL, number=3,)
-    enable_match_rate_range_preview = proto.Field(proto.BOOL, number=5,)
+    validate_only = proto.Field(
+        proto.BOOL,
+        number=3,
+    )
+    enable_match_rate_range_preview = proto.Field(
+        proto.BOOL,
+        number=5,
+    )
 
 
 class CreateOfflineUserDataJobResponse(proto.Message):
@@ -73,7 +82,10 @@ class CreateOfflineUserDataJobResponse(proto.Message):
             The resource name of the OfflineUserDataJob.
     """
 
-    resource_name = proto.Field(proto.STRING, number=1,)
+    resource_name = proto.Field(
+        proto.STRING,
+        number=1,
+    )
 
 
 class RunOfflineUserDataJobRequest(proto.Message):
@@ -89,8 +101,14 @@ class RunOfflineUserDataJobRequest(proto.Message):
             executed. Only errors are returned, not results.
     """
 
-    resource_name = proto.Field(proto.STRING, number=1,)
-    validate_only = proto.Field(proto.BOOL, number=2,)
+    resource_name = proto.Field(
+        proto.STRING,
+        number=1,
+    )
+    validate_only = proto.Field(
+        proto.BOOL,
+        number=2,
+    )
 
 
 class AddOfflineUserDataJobOperationsRequest(proto.Message):
@@ -121,13 +139,29 @@ class AddOfflineUserDataJobOperationsRequest(proto.Message):
             executed. Only errors are returned, not results.
     """
 
-    resource_name = proto.Field(proto.STRING, number=1,)
-    enable_partial_failure = proto.Field(proto.BOOL, number=4, optional=True,)
-    enable_warnings = proto.Field(proto.BOOL, number=6, optional=True,)
-    operations = proto.RepeatedField(
-        proto.MESSAGE, number=3, message="OfflineUserDataJobOperation",
+    resource_name = proto.Field(
+        proto.STRING,
+        number=1,
     )
-    validate_only = proto.Field(proto.BOOL, number=5,)
+    enable_partial_failure = proto.Field(
+        proto.BOOL,
+        number=4,
+        optional=True,
+    )
+    enable_warnings = proto.Field(
+        proto.BOOL,
+        number=6,
+        optional=True,
+    )
+    operations = proto.RepeatedField(
+        proto.MESSAGE,
+        number=3,
+        message="OfflineUserDataJobOperation",
+    )
+    validate_only = proto.Field(
+        proto.BOOL,
+        number=5,
+    )
 
 
 class OfflineUserDataJobOperation(proto.Message):
@@ -172,7 +206,11 @@ class OfflineUserDataJobOperation(proto.Message):
         oneof="operation",
         message=offline_user_data.UserData,
     )
-    remove_all = proto.Field(proto.BOOL, number=3, oneof="operation",)
+    remove_all = proto.Field(
+        proto.BOOL,
+        number=3,
+        oneof="operation",
+    )
 
 
 class AddOfflineUserDataJobOperationsResponse(proto.Message):
@@ -193,9 +231,15 @@ class AddOfflineUserDataJobOperationsResponse(proto.Message):
     """
 
     partial_failure_error = proto.Field(
-        proto.MESSAGE, number=1, message=status_pb2.Status,
+        proto.MESSAGE,
+        number=1,
+        message=status_pb2.Status,
     )
-    warning = proto.Field(proto.MESSAGE, number=2, message=status_pb2.Status,)
+    warning = proto.Field(
+        proto.MESSAGE,
+        number=2,
+        message=status_pb2.Status,
+    )
 
 
 __all__ = tuple(sorted(__protobuf__.manifest))

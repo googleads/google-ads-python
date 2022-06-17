@@ -54,12 +54,23 @@ class MutateUserListsRequest(proto.Message):
             executed. Only errors are returned, not results.
     """
 
-    customer_id = proto.Field(proto.STRING, number=1,)
-    operations = proto.RepeatedField(
-        proto.MESSAGE, number=2, message="UserListOperation",
+    customer_id = proto.Field(
+        proto.STRING,
+        number=1,
     )
-    partial_failure = proto.Field(proto.BOOL, number=3,)
-    validate_only = proto.Field(proto.BOOL, number=4,)
+    operations = proto.RepeatedField(
+        proto.MESSAGE,
+        number=2,
+        message="UserListOperation",
+    )
+    partial_failure = proto.Field(
+        proto.BOOL,
+        number=3,
+    )
+    validate_only = proto.Field(
+        proto.BOOL,
+        number=4,
+    )
 
 
 class UserListOperation(proto.Message):
@@ -96,15 +107,27 @@ class UserListOperation(proto.Message):
     """
 
     update_mask = proto.Field(
-        proto.MESSAGE, number=4, message=field_mask_pb2.FieldMask,
+        proto.MESSAGE,
+        number=4,
+        message=field_mask_pb2.FieldMask,
     )
     create = proto.Field(
-        proto.MESSAGE, number=1, oneof="operation", message=user_list.UserList,
+        proto.MESSAGE,
+        number=1,
+        oneof="operation",
+        message=user_list.UserList,
     )
     update = proto.Field(
-        proto.MESSAGE, number=2, oneof="operation", message=user_list.UserList,
+        proto.MESSAGE,
+        number=2,
+        oneof="operation",
+        message=user_list.UserList,
     )
-    remove = proto.Field(proto.STRING, number=3, oneof="operation",)
+    remove = proto.Field(
+        proto.STRING,
+        number=3,
+        oneof="operation",
+    )
 
 
 class MutateUserListsResponse(proto.Message):
@@ -122,10 +145,14 @@ class MutateUserListsResponse(proto.Message):
     """
 
     partial_failure_error = proto.Field(
-        proto.MESSAGE, number=3, message=status_pb2.Status,
+        proto.MESSAGE,
+        number=3,
+        message=status_pb2.Status,
     )
     results = proto.RepeatedField(
-        proto.MESSAGE, number=2, message="MutateUserListResult",
+        proto.MESSAGE,
+        number=2,
+        message="MutateUserListResult",
     )
 
 
@@ -137,7 +164,10 @@ class MutateUserListResult(proto.Message):
             Returned for successful operations.
     """
 
-    resource_name = proto.Field(proto.STRING, number=1,)
+    resource_name = proto.Field(
+        proto.STRING,
+        number=1,
+    )
 
 
 __all__ = tuple(sorted(__protobuf__.manifest))

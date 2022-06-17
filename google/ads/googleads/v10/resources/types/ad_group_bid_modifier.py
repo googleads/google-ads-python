@@ -24,7 +24,9 @@ from google.ads.googleads.v10.enums.types import (
 __protobuf__ = proto.module(
     package="google.ads.googleads.v10.resources",
     marshal="google.ads.googleads.v10",
-    manifest={"AdGroupBidModifier",},
+    manifest={
+        "AdGroupBidModifier",
+    },
 )
 
 
@@ -109,11 +111,30 @@ class AdGroupBidModifier(proto.Message):
             This field is a member of `oneof`_ ``criterion``.
     """
 
-    resource_name = proto.Field(proto.STRING, number=1,)
-    ad_group = proto.Field(proto.STRING, number=13, optional=True,)
-    criterion_id = proto.Field(proto.INT64, number=14, optional=True,)
-    bid_modifier = proto.Field(proto.DOUBLE, number=15, optional=True,)
-    base_ad_group = proto.Field(proto.STRING, number=16, optional=True,)
+    resource_name = proto.Field(
+        proto.STRING,
+        number=1,
+    )
+    ad_group = proto.Field(
+        proto.STRING,
+        number=13,
+        optional=True,
+    )
+    criterion_id = proto.Field(
+        proto.INT64,
+        number=14,
+        optional=True,
+    )
+    bid_modifier = proto.Field(
+        proto.DOUBLE,
+        number=15,
+        optional=True,
+    )
+    base_ad_group = proto.Field(
+        proto.STRING,
+        number=16,
+        optional=True,
+    )
     bid_modifier_source = proto.Field(
         proto.ENUM,
         number=10,

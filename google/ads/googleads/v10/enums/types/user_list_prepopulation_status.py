@@ -19,13 +19,14 @@ import proto  # type: ignore
 __protobuf__ = proto.module(
     package="google.ads.googleads.v10.enums",
     marshal="google.ads.googleads.v10",
-    manifest={"UserListPrepopulationStatusEnum",},
+    manifest={
+        "UserListPrepopulationStatusEnum",
+    },
 )
 
 
 class UserListPrepopulationStatusEnum(proto.Message):
-    r"""Indicates status of prepopulation based on the rule.
-    """
+    r"""Indicates status of prepopulation based on the rule."""
 
     class UserListPrepopulationStatus(proto.Enum):
         r"""Enum describing possible user list prepopulation status."""

@@ -23,7 +23,10 @@ from google.ads.googleads.v10.enums.types import frequency_cap_time_unit
 __protobuf__ = proto.module(
     package="google.ads.googleads.v10.common",
     marshal="google.ads.googleads.v10",
-    manifest={"FrequencyCapEntry", "FrequencyCapKey",},
+    manifest={
+        "FrequencyCapEntry",
+        "FrequencyCapKey",
+    },
 )
 
 
@@ -44,8 +47,16 @@ class FrequencyCapEntry(proto.Message):
             This field is a member of `oneof`_ ``_cap``.
     """
 
-    key = proto.Field(proto.MESSAGE, number=1, message="FrequencyCapKey",)
-    cap = proto.Field(proto.INT32, number=3, optional=True,)
+    key = proto.Field(
+        proto.MESSAGE,
+        number=1,
+        message="FrequencyCapKey",
+    )
+    cap = proto.Field(
+        proto.INT32,
+        number=3,
+        optional=True,
+    )
 
 
 class FrequencyCapKey(proto.Message):
@@ -84,7 +95,11 @@ class FrequencyCapKey(proto.Message):
         number=2,
         enum=frequency_cap_time_unit.FrequencyCapTimeUnitEnum.FrequencyCapTimeUnit,
     )
-    time_length = proto.Field(proto.INT32, number=5, optional=True,)
+    time_length = proto.Field(
+        proto.INT32,
+        number=5,
+        optional=True,
+    )
 
 
 __all__ = tuple(sorted(__protobuf__.manifest))

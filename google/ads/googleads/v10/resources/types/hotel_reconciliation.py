@@ -21,7 +21,9 @@ from google.ads.googleads.v10.enums.types import hotel_reconciliation_status
 __protobuf__ = proto.module(
     package="google.ads.googleads.v10.resources",
     marshal="google.ads.googleads.v10",
-    manifest={"HotelReconciliation",},
+    manifest={
+        "HotelReconciliation",
+    },
 )
 
 
@@ -96,16 +98,46 @@ class HotelReconciliation(proto.Message):
             original value.
     """
 
-    resource_name = proto.Field(proto.STRING, number=1,)
-    commission_id = proto.Field(proto.STRING, number=2,)
-    order_id = proto.Field(proto.STRING, number=3,)
-    campaign = proto.Field(proto.STRING, number=11,)
-    hotel_center_id = proto.Field(proto.INT64, number=4,)
-    hotel_id = proto.Field(proto.STRING, number=5,)
-    check_in_date = proto.Field(proto.STRING, number=6,)
-    check_out_date = proto.Field(proto.STRING, number=7,)
-    reconciled_value_micros = proto.Field(proto.INT64, number=8,)
-    billed = proto.Field(proto.BOOL, number=9,)
+    resource_name = proto.Field(
+        proto.STRING,
+        number=1,
+    )
+    commission_id = proto.Field(
+        proto.STRING,
+        number=2,
+    )
+    order_id = proto.Field(
+        proto.STRING,
+        number=3,
+    )
+    campaign = proto.Field(
+        proto.STRING,
+        number=11,
+    )
+    hotel_center_id = proto.Field(
+        proto.INT64,
+        number=4,
+    )
+    hotel_id = proto.Field(
+        proto.STRING,
+        number=5,
+    )
+    check_in_date = proto.Field(
+        proto.STRING,
+        number=6,
+    )
+    check_out_date = proto.Field(
+        proto.STRING,
+        number=7,
+    )
+    reconciled_value_micros = proto.Field(
+        proto.INT64,
+        number=8,
+    )
+    billed = proto.Field(
+        proto.BOOL,
+        number=9,
+    )
     status = proto.Field(
         proto.ENUM,
         number=10,

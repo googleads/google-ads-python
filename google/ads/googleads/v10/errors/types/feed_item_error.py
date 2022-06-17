@@ -19,13 +19,14 @@ import proto  # type: ignore
 __protobuf__ = proto.module(
     package="google.ads.googleads.v10.errors",
     marshal="google.ads.googleads.v10",
-    manifest={"FeedItemErrorEnum",},
+    manifest={
+        "FeedItemErrorEnum",
+    },
 )
 
 
 class FeedItemErrorEnum(proto.Message):
-    r"""Container for enum describing possible feed item errors.
-    """
+    r"""Container for enum describing possible feed item errors."""
 
     class FeedItemError(proto.Enum):
         r"""Enum describing possible feed item errors."""

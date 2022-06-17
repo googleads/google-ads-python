@@ -19,13 +19,14 @@ import proto  # type: ignore
 __protobuf__ = proto.module(
     package="google.ads.googleads.v10.enums",
     marshal="google.ads.googleads.v10",
-    manifest={"UserListCrmDataSourceTypeEnum",},
+    manifest={
+        "UserListCrmDataSourceTypeEnum",
+    },
 )
 
 
 class UserListCrmDataSourceTypeEnum(proto.Message):
-    r"""Indicates source of Crm upload data.
-    """
+    r"""Indicates source of Crm upload data."""
 
     class UserListCrmDataSourceType(proto.Enum):
         r"""Enum describing possible user list crm data source type."""

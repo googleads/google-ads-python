@@ -65,12 +65,23 @@ class UploadClickConversionsRequest(proto.Message):
             executed. Only errors are returned, not results.
     """
 
-    customer_id = proto.Field(proto.STRING, number=1,)
-    conversions = proto.RepeatedField(
-        proto.MESSAGE, number=2, message="ClickConversion",
+    customer_id = proto.Field(
+        proto.STRING,
+        number=1,
     )
-    partial_failure = proto.Field(proto.BOOL, number=3,)
-    validate_only = proto.Field(proto.BOOL, number=4,)
+    conversions = proto.RepeatedField(
+        proto.MESSAGE,
+        number=2,
+        message="ClickConversion",
+    )
+    partial_failure = proto.Field(
+        proto.BOOL,
+        number=3,
+    )
+    validate_only = proto.Field(
+        proto.BOOL,
+        number=4,
+    )
 
 
 class UploadClickConversionsResponse(proto.Message):
@@ -93,10 +104,14 @@ class UploadClickConversionsResponse(proto.Message):
     """
 
     partial_failure_error = proto.Field(
-        proto.MESSAGE, number=1, message=status_pb2.Status,
+        proto.MESSAGE,
+        number=1,
+        message=status_pb2.Status,
     )
     results = proto.RepeatedField(
-        proto.MESSAGE, number=2, message="ClickConversionResult",
+        proto.MESSAGE,
+        number=2,
+        message="ClickConversionResult",
     )
 
 
@@ -126,12 +141,23 @@ class UploadCallConversionsRequest(proto.Message):
             executed. Only errors are returned, not results.
     """
 
-    customer_id = proto.Field(proto.STRING, number=1,)
-    conversions = proto.RepeatedField(
-        proto.MESSAGE, number=2, message="CallConversion",
+    customer_id = proto.Field(
+        proto.STRING,
+        number=1,
     )
-    partial_failure = proto.Field(proto.BOOL, number=3,)
-    validate_only = proto.Field(proto.BOOL, number=4,)
+    conversions = proto.RepeatedField(
+        proto.MESSAGE,
+        number=2,
+        message="CallConversion",
+    )
+    partial_failure = proto.Field(
+        proto.BOOL,
+        number=3,
+    )
+    validate_only = proto.Field(
+        proto.BOOL,
+        number=4,
+    )
 
 
 class UploadCallConversionsResponse(proto.Message):
@@ -154,10 +180,14 @@ class UploadCallConversionsResponse(proto.Message):
     """
 
     partial_failure_error = proto.Field(
-        proto.MESSAGE, number=1, message=status_pb2.Status,
+        proto.MESSAGE,
+        number=1,
+        message=status_pb2.Status,
     )
     results = proto.RepeatedField(
-        proto.MESSAGE, number=2, message="CallConversionResult",
+        proto.MESSAGE,
+        number=2,
+        message="CallConversionResult",
     )
 
 
@@ -233,23 +263,63 @@ class ClickConversion(proto.Message):
             on. e.g. App or Web.
     """
 
-    gclid = proto.Field(proto.STRING, number=9, optional=True,)
-    gbraid = proto.Field(proto.STRING, number=18,)
-    wbraid = proto.Field(proto.STRING, number=19,)
-    conversion_action = proto.Field(proto.STRING, number=10, optional=True,)
-    conversion_date_time = proto.Field(proto.STRING, number=11, optional=True,)
-    conversion_value = proto.Field(proto.DOUBLE, number=12, optional=True,)
-    currency_code = proto.Field(proto.STRING, number=13, optional=True,)
-    order_id = proto.Field(proto.STRING, number=14, optional=True,)
+    gclid = proto.Field(
+        proto.STRING,
+        number=9,
+        optional=True,
+    )
+    gbraid = proto.Field(
+        proto.STRING,
+        number=18,
+    )
+    wbraid = proto.Field(
+        proto.STRING,
+        number=19,
+    )
+    conversion_action = proto.Field(
+        proto.STRING,
+        number=10,
+        optional=True,
+    )
+    conversion_date_time = proto.Field(
+        proto.STRING,
+        number=11,
+        optional=True,
+    )
+    conversion_value = proto.Field(
+        proto.DOUBLE,
+        number=12,
+        optional=True,
+    )
+    currency_code = proto.Field(
+        proto.STRING,
+        number=13,
+        optional=True,
+    )
+    order_id = proto.Field(
+        proto.STRING,
+        number=14,
+        optional=True,
+    )
     external_attribution_data = proto.Field(
-        proto.MESSAGE, number=7, message="ExternalAttributionData",
+        proto.MESSAGE,
+        number=7,
+        message="ExternalAttributionData",
     )
     custom_variables = proto.RepeatedField(
-        proto.MESSAGE, number=15, message="CustomVariable",
+        proto.MESSAGE,
+        number=15,
+        message="CustomVariable",
     )
-    cart_data = proto.Field(proto.MESSAGE, number=16, message="CartData",)
+    cart_data = proto.Field(
+        proto.MESSAGE,
+        number=16,
+        message="CartData",
+    )
     user_identifiers = proto.RepeatedField(
-        proto.MESSAGE, number=17, message=offline_user_data.UserIdentifier,
+        proto.MESSAGE,
+        number=17,
+        message=offline_user_data.UserIdentifier,
     )
     conversion_environment = proto.Field(
         proto.ENUM,
@@ -307,14 +377,40 @@ class CallConversion(proto.Message):
             conversion.
     """
 
-    caller_id = proto.Field(proto.STRING, number=7, optional=True,)
-    call_start_date_time = proto.Field(proto.STRING, number=8, optional=True,)
-    conversion_action = proto.Field(proto.STRING, number=9, optional=True,)
-    conversion_date_time = proto.Field(proto.STRING, number=10, optional=True,)
-    conversion_value = proto.Field(proto.DOUBLE, number=11, optional=True,)
-    currency_code = proto.Field(proto.STRING, number=12, optional=True,)
+    caller_id = proto.Field(
+        proto.STRING,
+        number=7,
+        optional=True,
+    )
+    call_start_date_time = proto.Field(
+        proto.STRING,
+        number=8,
+        optional=True,
+    )
+    conversion_action = proto.Field(
+        proto.STRING,
+        number=9,
+        optional=True,
+    )
+    conversion_date_time = proto.Field(
+        proto.STRING,
+        number=10,
+        optional=True,
+    )
+    conversion_value = proto.Field(
+        proto.DOUBLE,
+        number=11,
+        optional=True,
+    )
+    currency_code = proto.Field(
+        proto.STRING,
+        number=12,
+        optional=True,
+    )
     custom_variables = proto.RepeatedField(
-        proto.MESSAGE, number=13, message="CustomVariable",
+        proto.MESSAGE,
+        number=13,
+        message="CustomVariable",
     )
 
 
@@ -335,10 +431,14 @@ class ExternalAttributionData(proto.Message):
     """
 
     external_attribution_credit = proto.Field(
-        proto.DOUBLE, number=3, optional=True,
+        proto.DOUBLE,
+        number=3,
+        optional=True,
     )
     external_attribution_model = proto.Field(
-        proto.STRING, number=4, optional=True,
+        proto.STRING,
+        number=4,
+        optional=True,
     )
 
 
@@ -378,13 +478,33 @@ class ClickConversionResult(proto.Message):
             for each conversion is 5.
     """
 
-    gclid = proto.Field(proto.STRING, number=4, optional=True,)
-    gbraid = proto.Field(proto.STRING, number=8,)
-    wbraid = proto.Field(proto.STRING, number=9,)
-    conversion_action = proto.Field(proto.STRING, number=5, optional=True,)
-    conversion_date_time = proto.Field(proto.STRING, number=6, optional=True,)
+    gclid = proto.Field(
+        proto.STRING,
+        number=4,
+        optional=True,
+    )
+    gbraid = proto.Field(
+        proto.STRING,
+        number=8,
+    )
+    wbraid = proto.Field(
+        proto.STRING,
+        number=9,
+    )
+    conversion_action = proto.Field(
+        proto.STRING,
+        number=5,
+        optional=True,
+    )
+    conversion_date_time = proto.Field(
+        proto.STRING,
+        number=6,
+        optional=True,
+    )
     user_identifiers = proto.RepeatedField(
-        proto.MESSAGE, number=7, message=offline_user_data.UserIdentifier,
+        proto.MESSAGE,
+        number=7,
+        message=offline_user_data.UserIdentifier,
     )
 
 
@@ -418,10 +538,26 @@ class CallConversionResult(proto.Message):
             This field is a member of `oneof`_ ``_conversion_date_time``.
     """
 
-    caller_id = proto.Field(proto.STRING, number=5, optional=True,)
-    call_start_date_time = proto.Field(proto.STRING, number=6, optional=True,)
-    conversion_action = proto.Field(proto.STRING, number=7, optional=True,)
-    conversion_date_time = proto.Field(proto.STRING, number=8, optional=True,)
+    caller_id = proto.Field(
+        proto.STRING,
+        number=5,
+        optional=True,
+    )
+    call_start_date_time = proto.Field(
+        proto.STRING,
+        number=6,
+        optional=True,
+    )
+    conversion_action = proto.Field(
+        proto.STRING,
+        number=7,
+        optional=True,
+    )
+    conversion_date_time = proto.Field(
+        proto.STRING,
+        number=8,
+        optional=True,
+    )
 
 
 class CustomVariable(proto.Message):
@@ -443,8 +579,14 @@ class CustomVariable(proto.Message):
             addresses or phone numbers.
     """
 
-    conversion_custom_variable = proto.Field(proto.STRING, number=1,)
-    value = proto.Field(proto.STRING, number=2,)
+    conversion_custom_variable = proto.Field(
+        proto.STRING,
+        number=1,
+    )
+    value = proto.Field(
+        proto.STRING,
+        number=2,
+    )
 
 
 class CartData(proto.Message):
@@ -485,15 +627,40 @@ class CartData(proto.Message):
                 message.
         """
 
-        product_id = proto.Field(proto.STRING, number=1,)
-        quantity = proto.Field(proto.INT32, number=2,)
-        unit_price = proto.Field(proto.DOUBLE, number=3,)
+        product_id = proto.Field(
+            proto.STRING,
+            number=1,
+        )
+        quantity = proto.Field(
+            proto.INT32,
+            number=2,
+        )
+        unit_price = proto.Field(
+            proto.DOUBLE,
+            number=3,
+        )
 
-    merchant_id = proto.Field(proto.INT64, number=6,)
-    feed_country_code = proto.Field(proto.STRING, number=2,)
-    feed_language_code = proto.Field(proto.STRING, number=3,)
-    local_transaction_cost = proto.Field(proto.DOUBLE, number=4,)
-    items = proto.RepeatedField(proto.MESSAGE, number=5, message=Item,)
+    merchant_id = proto.Field(
+        proto.INT64,
+        number=6,
+    )
+    feed_country_code = proto.Field(
+        proto.STRING,
+        number=2,
+    )
+    feed_language_code = proto.Field(
+        proto.STRING,
+        number=3,
+    )
+    local_transaction_cost = proto.Field(
+        proto.DOUBLE,
+        number=4,
+    )
+    items = proto.RepeatedField(
+        proto.MESSAGE,
+        number=5,
+        message=Item,
+    )
 
 
 __all__ = tuple(sorted(__protobuf__.manifest))

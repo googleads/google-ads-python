@@ -62,12 +62,23 @@ class MutateAdGroupCriterionCustomizersRequest(proto.Message):
             resource name should be returned post mutation.
     """
 
-    customer_id = proto.Field(proto.STRING, number=1,)
-    operations = proto.RepeatedField(
-        proto.MESSAGE, number=2, message="AdGroupCriterionCustomizerOperation",
+    customer_id = proto.Field(
+        proto.STRING,
+        number=1,
     )
-    partial_failure = proto.Field(proto.BOOL, number=3,)
-    validate_only = proto.Field(proto.BOOL, number=4,)
+    operations = proto.RepeatedField(
+        proto.MESSAGE,
+        number=2,
+        message="AdGroupCriterionCustomizerOperation",
+    )
+    partial_failure = proto.Field(
+        proto.BOOL,
+        number=3,
+    )
+    validate_only = proto.Field(
+        proto.BOOL,
+        number=4,
+    )
     response_content_type = proto.Field(
         proto.ENUM,
         number=5,
@@ -108,7 +119,11 @@ class AdGroupCriterionCustomizerOperation(proto.Message):
         oneof="operation",
         message=gagr_ad_group_criterion_customizer.AdGroupCriterionCustomizer,
     )
-    remove = proto.Field(proto.STRING, number=2, oneof="operation",)
+    remove = proto.Field(
+        proto.STRING,
+        number=2,
+        oneof="operation",
+    )
 
 
 class MutateAdGroupCriterionCustomizersResponse(proto.Message):
@@ -131,7 +146,9 @@ class MutateAdGroupCriterionCustomizersResponse(proto.Message):
         message="MutateAdGroupCriterionCustomizerResult",
     )
     partial_failure_error = proto.Field(
-        proto.MESSAGE, number=2, message=status_pb2.Status,
+        proto.MESSAGE,
+        number=2,
+        message=status_pb2.Status,
     )
 
 
@@ -147,7 +164,10 @@ class MutateAdGroupCriterionCustomizerResult(proto.Message):
             response_content_type is set to "MUTABLE_RESOURCE".
     """
 
-    resource_name = proto.Field(proto.STRING, number=1,)
+    resource_name = proto.Field(
+        proto.STRING,
+        number=1,
+    )
     ad_group_criterion_customizer = proto.Field(
         proto.MESSAGE,
         number=2,

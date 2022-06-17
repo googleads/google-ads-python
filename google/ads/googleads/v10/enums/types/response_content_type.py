@@ -19,13 +19,14 @@ import proto  # type: ignore
 __protobuf__ = proto.module(
     package="google.ads.googleads.v10.enums",
     marshal="google.ads.googleads.v10",
-    manifest={"ResponseContentTypeEnum",},
+    manifest={
+        "ResponseContentTypeEnum",
+    },
 )
 
 
 class ResponseContentTypeEnum(proto.Message):
-    r"""Container for possible response content types.
-    """
+    r"""Container for possible response content types."""
 
     class ResponseContentType(proto.Enum):
         r"""Possible response content types."""

@@ -19,13 +19,14 @@ import proto  # type: ignore
 __protobuf__ = proto.module(
     package="google.ads.googleads.v10.enums",
     marshal="google.ads.googleads.v10",
-    manifest={"VanityPharmaDisplayUrlModeEnum",},
+    manifest={
+        "VanityPharmaDisplayUrlModeEnum",
+    },
 )
 
 
 class VanityPharmaDisplayUrlModeEnum(proto.Message):
-    r"""The display mode for vanity pharma URLs.
-    """
+    r"""The display mode for vanity pharma URLs."""
 
     class VanityPharmaDisplayUrlMode(proto.Enum):
         r"""Enum describing possible display modes for vanity pharma

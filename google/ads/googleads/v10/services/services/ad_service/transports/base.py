@@ -30,7 +30,9 @@ from google.ads.googleads.v10.services.types import ad_service
 
 try:
     DEFAULT_CLIENT_INFO = gapic_v1.client_info.ClientInfo(
-        gapic_version=pkg_resources.get_distribution("google-ads",).version,
+        gapic_version=pkg_resources.get_distribution(
+            "google-ads",
+        ).version,
     )
 except pkg_resources.DistributionNotFound:
     DEFAULT_CLIENT_INFO = gapic_v1.client_info.ClientInfo()
@@ -124,19 +126,23 @@ class AdServiceTransport(abc.ABC):
         # Precompute the wrapped methods.
         self._wrapped_methods = {
             self.get_ad: gapic_v1.method.wrap_method(
-                self.get_ad, default_timeout=None, client_info=client_info,
+                self.get_ad,
+                default_timeout=None,
+                client_info=client_info,
             ),
             self.mutate_ads: gapic_v1.method.wrap_method(
-                self.mutate_ads, default_timeout=None, client_info=client_info,
+                self.mutate_ads,
+                default_timeout=None,
+                client_info=client_info,
             ),
         }
 
     def close(self):
         """Closes resources associated with the transport.
 
-       .. warning::
-            Only call this method if the transport is NOT shared
-            with other clients - this may cause errors in other clients!
+        .. warning::
+             Only call this method if the transport is NOT shared
+             with other clients - this may cause errors in other clients!
         """
         raise NotImplementedError()
 

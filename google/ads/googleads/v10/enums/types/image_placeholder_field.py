@@ -19,13 +19,14 @@ import proto  # type: ignore
 __protobuf__ = proto.module(
     package="google.ads.googleads.v10.enums",
     marshal="google.ads.googleads.v10",
-    manifest={"ImagePlaceholderFieldEnum",},
+    manifest={
+        "ImagePlaceholderFieldEnum",
+    },
 )
 
 
 class ImagePlaceholderFieldEnum(proto.Message):
-    r"""Values for Advertiser Provided Image placeholder fields.
-    """
+    r"""Values for Advertiser Provided Image placeholder fields."""
 
     class ImagePlaceholderField(proto.Enum):
         r"""Possible values for Advertiser Provided Image placeholder

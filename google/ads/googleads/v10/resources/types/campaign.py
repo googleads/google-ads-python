@@ -69,7 +69,9 @@ from google.ads.googleads.v10.enums.types import (
 __protobuf__ = proto.module(
     package="google.ads.googleads.v10.resources",
     marshal="google.ads.googleads.v10",
-    manifest={"Campaign",},
+    manifest={
+        "Campaign",
+    },
 )
 
 
@@ -385,15 +387,25 @@ class Campaign(proto.Message):
                 This field is a member of `oneof`_ ``_target_partner_search_network``.
         """
 
-        target_google_search = proto.Field(proto.BOOL, number=5, optional=True,)
+        target_google_search = proto.Field(
+            proto.BOOL,
+            number=5,
+            optional=True,
+        )
         target_search_network = proto.Field(
-            proto.BOOL, number=6, optional=True,
+            proto.BOOL,
+            number=6,
+            optional=True,
         )
         target_content_network = proto.Field(
-            proto.BOOL, number=7, optional=True,
+            proto.BOOL,
+            number=7,
+            optional=True,
         )
         target_partner_search_network = proto.Field(
-            proto.BOOL, number=8, optional=True,
+            proto.BOOL,
+            number=8,
+            optional=True,
         )
 
     class HotelSettingInfo(proto.Message):
@@ -406,7 +418,11 @@ class Campaign(proto.Message):
                 This field is a member of `oneof`_ ``_hotel_center_id``.
         """
 
-        hotel_center_id = proto.Field(proto.INT64, number=2, optional=True,)
+        hotel_center_id = proto.Field(
+            proto.INT64,
+            number=2,
+            optional=True,
+        )
 
     class DynamicSearchAdsSetting(proto.Message):
         r"""The setting for controlling Dynamic Search Ads (DSA).
@@ -429,12 +445,23 @@ class Campaign(proto.Message):
                 campaign.
         """
 
-        domain_name = proto.Field(proto.STRING, number=6,)
-        language_code = proto.Field(proto.STRING, number=7,)
-        use_supplied_urls_only = proto.Field(
-            proto.BOOL, number=8, optional=True,
+        domain_name = proto.Field(
+            proto.STRING,
+            number=6,
         )
-        feeds = proto.RepeatedField(proto.STRING, number=9,)
+        language_code = proto.Field(
+            proto.STRING,
+            number=7,
+        )
+        use_supplied_urls_only = proto.Field(
+            proto.BOOL,
+            number=8,
+            optional=True,
+        )
+        feeds = proto.RepeatedField(
+            proto.STRING,
+            number=9,
+        )
 
     class ShoppingSetting(proto.Message):
         r"""The setting for Shopping campaigns. Defines the universe of
@@ -475,11 +502,30 @@ class Campaign(proto.Message):
                 inventory.
         """
 
-        merchant_id = proto.Field(proto.INT64, number=5, optional=True,)
-        sales_country = proto.Field(proto.STRING, number=6, optional=True,)
-        campaign_priority = proto.Field(proto.INT32, number=7, optional=True,)
-        enable_local = proto.Field(proto.BOOL, number=8, optional=True,)
-        use_vehicle_inventory = proto.Field(proto.BOOL, number=9,)
+        merchant_id = proto.Field(
+            proto.INT64,
+            number=5,
+            optional=True,
+        )
+        sales_country = proto.Field(
+            proto.STRING,
+            number=6,
+            optional=True,
+        )
+        campaign_priority = proto.Field(
+            proto.INT32,
+            number=7,
+            optional=True,
+        )
+        enable_local = proto.Field(
+            proto.BOOL,
+            number=8,
+            optional=True,
+        )
+        use_vehicle_inventory = proto.Field(
+            proto.BOOL,
+            number=9,
+        )
 
     class TrackingSetting(proto.Message):
         r"""Campaign-level settings for tracking information.
@@ -492,7 +538,11 @@ class Campaign(proto.Message):
                 This field is a member of `oneof`_ ``_tracking_url``.
         """
 
-        tracking_url = proto.Field(proto.STRING, number=2, optional=True,)
+        tracking_url = proto.Field(
+            proto.STRING,
+            number=2,
+            optional=True,
+        )
 
     class GeoTargetTypeSetting(proto.Message):
         r"""Represents a collection of settings related to ads
@@ -556,7 +606,11 @@ class Campaign(proto.Message):
             number=1,
             enum=app_campaign_bidding_strategy_goal_type.AppCampaignBiddingStrategyGoalTypeEnum.AppCampaignBiddingStrategyGoalType,
         )
-        app_id = proto.Field(proto.STRING, number=4, optional=True,)
+        app_id = proto.Field(
+            proto.STRING,
+            number=4,
+            optional=True,
+        )
         app_store = proto.Field(
             proto.ENUM,
             number=3,
@@ -598,7 +652,10 @@ class Campaign(proto.Message):
                 optimizing this campaign.
         """
 
-        conversion_actions = proto.RepeatedField(proto.STRING, number=2,)
+        conversion_actions = proto.RepeatedField(
+            proto.STRING,
+            number=2,
+        )
 
     class OptimizationGoalSetting(proto.Message):
         r"""Optimization goal setting for this campaign, which includes a
@@ -628,11 +685,26 @@ class Campaign(proto.Message):
                 This field is a member of `oneof`_ ``_use_audience_grouped``.
         """
 
-        use_audience_grouped = proto.Field(proto.BOOL, number=1, optional=True,)
+        use_audience_grouped = proto.Field(
+            proto.BOOL,
+            number=1,
+            optional=True,
+        )
 
-    resource_name = proto.Field(proto.STRING, number=1,)
-    id = proto.Field(proto.INT64, number=59, optional=True,)
-    name = proto.Field(proto.STRING, number=58, optional=True,)
+    resource_name = proto.Field(
+        proto.STRING,
+        number=1,
+    )
+    id = proto.Field(
+        proto.INT64,
+        number=59,
+        optional=True,
+    )
+    name = proto.Field(
+        proto.STRING,
+        number=58,
+        optional=True,
+    )
     status = proto.Field(
         proto.ENUM,
         number=5,
@@ -658,9 +730,15 @@ class Campaign(proto.Message):
         number=10,
         enum=gage_advertising_channel_sub_type.AdvertisingChannelSubTypeEnum.AdvertisingChannelSubType,
     )
-    tracking_url_template = proto.Field(proto.STRING, number=60, optional=True,)
+    tracking_url_template = proto.Field(
+        proto.STRING,
+        number=60,
+        optional=True,
+    )
     url_custom_parameters = proto.RepeatedField(
-        proto.MESSAGE, number=12, message=custom_parameter.CustomParameter,
+        proto.MESSAGE,
+        number=12,
+        message=custom_parameter.CustomParameter,
     )
     real_time_bidding_setting = proto.Field(
         proto.MESSAGE,
@@ -668,16 +746,24 @@ class Campaign(proto.Message):
         message=gagc_real_time_bidding_setting.RealTimeBiddingSetting,
     )
     network_settings = proto.Field(
-        proto.MESSAGE, number=14, message=NetworkSettings,
+        proto.MESSAGE,
+        number=14,
+        message=NetworkSettings,
     )
     hotel_setting = proto.Field(
-        proto.MESSAGE, number=32, message=HotelSettingInfo,
+        proto.MESSAGE,
+        number=32,
+        message=HotelSettingInfo,
     )
     dynamic_search_ads_setting = proto.Field(
-        proto.MESSAGE, number=33, message=DynamicSearchAdsSetting,
+        proto.MESSAGE,
+        number=33,
+        message=DynamicSearchAdsSetting,
     )
     shopping_setting = proto.Field(
-        proto.MESSAGE, number=36, message=ShoppingSetting,
+        proto.MESSAGE,
+        number=36,
+        message=ShoppingSetting,
     )
     targeting_setting = proto.Field(
         proto.MESSAGE,
@@ -685,67 +771,128 @@ class Campaign(proto.Message):
         message=gagc_targeting_setting.TargetingSetting,
     )
     audience_setting = proto.Field(
-        proto.MESSAGE, number=73, optional=True, message=AudienceSetting,
+        proto.MESSAGE,
+        number=73,
+        optional=True,
+        message=AudienceSetting,
     )
     geo_target_type_setting = proto.Field(
-        proto.MESSAGE, number=47, message=GeoTargetTypeSetting,
+        proto.MESSAGE,
+        number=47,
+        message=GeoTargetTypeSetting,
     )
     local_campaign_setting = proto.Field(
-        proto.MESSAGE, number=50, message=LocalCampaignSetting,
+        proto.MESSAGE,
+        number=50,
+        message=LocalCampaignSetting,
     )
     app_campaign_setting = proto.Field(
-        proto.MESSAGE, number=51, message=AppCampaignSetting,
+        proto.MESSAGE,
+        number=51,
+        message=AppCampaignSetting,
     )
-    labels = proto.RepeatedField(proto.STRING, number=61,)
+    labels = proto.RepeatedField(
+        proto.STRING,
+        number=61,
+    )
     experiment_type = proto.Field(
         proto.ENUM,
         number=17,
         enum=campaign_experiment_type.CampaignExperimentTypeEnum.CampaignExperimentType,
     )
-    base_campaign = proto.Field(proto.STRING, number=56, optional=True,)
-    campaign_budget = proto.Field(proto.STRING, number=62, optional=True,)
+    base_campaign = proto.Field(
+        proto.STRING,
+        number=56,
+        optional=True,
+    )
+    campaign_budget = proto.Field(
+        proto.STRING,
+        number=62,
+        optional=True,
+    )
     bidding_strategy_type = proto.Field(
         proto.ENUM,
         number=22,
         enum=gage_bidding_strategy_type.BiddingStrategyTypeEnum.BiddingStrategyType,
     )
-    accessible_bidding_strategy = proto.Field(proto.STRING, number=71,)
-    start_date = proto.Field(proto.STRING, number=63, optional=True,)
-    campaign_group = proto.Field(proto.STRING, number=76, optional=True,)
-    end_date = proto.Field(proto.STRING, number=64, optional=True,)
-    final_url_suffix = proto.Field(proto.STRING, number=65, optional=True,)
+    accessible_bidding_strategy = proto.Field(
+        proto.STRING,
+        number=71,
+    )
+    start_date = proto.Field(
+        proto.STRING,
+        number=63,
+        optional=True,
+    )
+    campaign_group = proto.Field(
+        proto.STRING,
+        number=76,
+        optional=True,
+    )
+    end_date = proto.Field(
+        proto.STRING,
+        number=64,
+        optional=True,
+    )
+    final_url_suffix = proto.Field(
+        proto.STRING,
+        number=65,
+        optional=True,
+    )
     frequency_caps = proto.RepeatedField(
-        proto.MESSAGE, number=40, message=frequency_cap.FrequencyCapEntry,
+        proto.MESSAGE,
+        number=40,
+        message=frequency_cap.FrequencyCapEntry,
     )
     video_brand_safety_suitability = proto.Field(
         proto.ENUM,
         number=42,
         enum=brand_safety_suitability.BrandSafetySuitabilityEnum.BrandSafetySuitability,
     )
-    vanity_pharma = proto.Field(proto.MESSAGE, number=44, message=VanityPharma,)
+    vanity_pharma = proto.Field(
+        proto.MESSAGE,
+        number=44,
+        message=VanityPharma,
+    )
     selective_optimization = proto.Field(
-        proto.MESSAGE, number=45, message=SelectiveOptimization,
+        proto.MESSAGE,
+        number=45,
+        message=SelectiveOptimization,
     )
     optimization_goal_setting = proto.Field(
-        proto.MESSAGE, number=54, message=OptimizationGoalSetting,
+        proto.MESSAGE,
+        number=54,
+        message=OptimizationGoalSetting,
     )
     tracking_setting = proto.Field(
-        proto.MESSAGE, number=46, message=TrackingSetting,
+        proto.MESSAGE,
+        number=46,
+        message=TrackingSetting,
     )
     payment_mode = proto.Field(
         proto.ENUM,
         number=52,
         enum=gage_payment_mode.PaymentModeEnum.PaymentMode,
     )
-    optimization_score = proto.Field(proto.DOUBLE, number=66, optional=True,)
+    optimization_score = proto.Field(
+        proto.DOUBLE,
+        number=66,
+        optional=True,
+    )
     excluded_parent_asset_field_types = proto.RepeatedField(
         proto.ENUM,
         number=69,
         enum=asset_field_type.AssetFieldTypeEnum.AssetFieldType,
     )
-    url_expansion_opt_out = proto.Field(proto.BOOL, number=72, optional=True,)
+    url_expansion_opt_out = proto.Field(
+        proto.BOOL,
+        number=72,
+        optional=True,
+    )
     bidding_strategy = proto.Field(
-        proto.STRING, number=67, oneof="campaign_bidding_strategy",
+        proto.STRING,
+        number=67,
+        oneof="campaign_bidding_strategy",
     )
     commission = proto.Field(
         proto.MESSAGE,

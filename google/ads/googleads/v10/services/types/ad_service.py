@@ -47,7 +47,10 @@ class GetAdRequest(proto.Message):
             fetch.
     """
 
-    resource_name = proto.Field(proto.STRING, number=1,)
+    resource_name = proto.Field(
+        proto.STRING,
+        number=1,
+    )
 
 
 class MutateAdsRequest(proto.Message):
@@ -76,17 +79,28 @@ class MutateAdsRequest(proto.Message):
             executed. Only errors are returned, not results.
     """
 
-    customer_id = proto.Field(proto.STRING, number=1,)
-    operations = proto.RepeatedField(
-        proto.MESSAGE, number=2, message="AdOperation",
+    customer_id = proto.Field(
+        proto.STRING,
+        number=1,
     )
-    partial_failure = proto.Field(proto.BOOL, number=4,)
+    operations = proto.RepeatedField(
+        proto.MESSAGE,
+        number=2,
+        message="AdOperation",
+    )
+    partial_failure = proto.Field(
+        proto.BOOL,
+        number=4,
+    )
     response_content_type = proto.Field(
         proto.ENUM,
         number=5,
         enum=gage_response_content_type.ResponseContentTypeEnum.ResponseContentType,
     )
-    validate_only = proto.Field(proto.BOOL, number=3,)
+    validate_only = proto.Field(
+        proto.BOOL,
+        number=3,
+    )
 
 
 class AdOperation(proto.Message):
@@ -110,13 +124,20 @@ class AdOperation(proto.Message):
     """
 
     update_mask = proto.Field(
-        proto.MESSAGE, number=2, message=field_mask_pb2.FieldMask,
+        proto.MESSAGE,
+        number=2,
+        message=field_mask_pb2.FieldMask,
     )
     policy_validation_parameter = proto.Field(
-        proto.MESSAGE, number=3, message=policy.PolicyValidationParameter,
+        proto.MESSAGE,
+        number=3,
+        message=policy.PolicyValidationParameter,
     )
     update = proto.Field(
-        proto.MESSAGE, number=1, oneof="operation", message=gagr_ad.Ad,
+        proto.MESSAGE,
+        number=1,
+        oneof="operation",
+        message=gagr_ad.Ad,
     )
 
 
@@ -135,10 +156,14 @@ class MutateAdsResponse(proto.Message):
     """
 
     partial_failure_error = proto.Field(
-        proto.MESSAGE, number=3, message=status_pb2.Status,
+        proto.MESSAGE,
+        number=3,
+        message=status_pb2.Status,
     )
     results = proto.RepeatedField(
-        proto.MESSAGE, number=2, message="MutateAdResult",
+        proto.MESSAGE,
+        number=2,
+        message="MutateAdResult",
     )
 
 
@@ -155,8 +180,15 @@ class MutateAdResult(proto.Message):
             set to "MUTABLE_RESOURCE".
     """
 
-    resource_name = proto.Field(proto.STRING, number=1,)
-    ad = proto.Field(proto.MESSAGE, number=2, message=gagr_ad.Ad,)
+    resource_name = proto.Field(
+        proto.STRING,
+        number=1,
+    )
+    ad = proto.Field(
+        proto.MESSAGE,
+        number=2,
+        message=gagr_ad.Ad,
+    )
 
 
 __all__ = tuple(sorted(__protobuf__.manifest))

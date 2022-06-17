@@ -19,13 +19,14 @@ import proto  # type: ignore
 __protobuf__ = proto.module(
     package="google.ads.googleads.v10.enums",
     marshal="google.ads.googleads.v10",
-    manifest={"AdNetworkTypeEnum",},
+    manifest={
+        "AdNetworkTypeEnum",
+    },
 )
 
 
 class AdNetworkTypeEnum(proto.Message):
-    r"""Container for enumeration of Google Ads network types.
-    """
+    r"""Container for enumeration of Google Ads network types."""
 
     class AdNetworkType(proto.Enum):
         r"""Enumerates Google Ads network types."""

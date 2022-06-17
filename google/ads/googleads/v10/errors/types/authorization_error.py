@@ -19,13 +19,14 @@ import proto  # type: ignore
 __protobuf__ = proto.module(
     package="google.ads.googleads.v10.errors",
     marshal="google.ads.googleads.v10",
-    manifest={"AuthorizationErrorEnum",},
+    manifest={
+        "AuthorizationErrorEnum",
+    },
 )
 
 
 class AuthorizationErrorEnum(proto.Message):
-    r"""Container for enum describing possible authorization errors.
-    """
+    r"""Container for enum describing possible authorization errors."""
 
     class AuthorizationError(proto.Enum):
         r"""Enum describing possible authorization errors."""

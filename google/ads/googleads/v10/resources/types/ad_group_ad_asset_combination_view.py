@@ -21,7 +21,9 @@ from google.ads.googleads.v10.common.types import asset_usage
 __protobuf__ = proto.module(
     package="google.ads.googleads.v10.resources",
     marshal="google.ads.googleads.v10",
-    manifest={"AdGroupAdAssetCombinationView",},
+    manifest={
+        "AdGroupAdAssetCombinationView",
+    },
 )
 
 
@@ -52,11 +54,20 @@ class AdGroupAdAssetCombinationView(proto.Message):
             This field is a member of `oneof`_ ``_enabled``.
     """
 
-    resource_name = proto.Field(proto.STRING, number=1,)
-    served_assets = proto.RepeatedField(
-        proto.MESSAGE, number=2, message=asset_usage.AssetUsage,
+    resource_name = proto.Field(
+        proto.STRING,
+        number=1,
     )
-    enabled = proto.Field(proto.BOOL, number=3, optional=True,)
+    served_assets = proto.RepeatedField(
+        proto.MESSAGE,
+        number=2,
+        message=asset_usage.AssetUsage,
+    )
+    enabled = proto.Field(
+        proto.BOOL,
+        number=3,
+        optional=True,
+    )
 
 
 __all__ = tuple(sorted(__protobuf__.manifest))

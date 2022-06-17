@@ -53,7 +53,8 @@ class CampaignBudgetServiceClientMeta(type):
     _transport_registry["grpc"] = CampaignBudgetServiceGrpcTransport
 
     def get_transport_class(
-        cls, label: str = None,
+        cls,
+        label: str = None,
     ) -> Type[CampaignBudgetServiceTransport]:
         """Returns an appropriate transport class.
 
@@ -176,10 +177,14 @@ class CampaignBudgetServiceClient(metaclass=CampaignBudgetServiceClientMeta):
         self.transport.close()
 
     @staticmethod
-    def campaign_budget_path(customer_id: str, campaign_budget_id: str,) -> str:
+    def campaign_budget_path(
+        customer_id: str,
+        campaign_budget_id: str,
+    ) -> str:
         """Returns a fully-qualified campaign_budget string."""
         return "customers/{customer_id}/campaignBudgets/{campaign_budget_id}".format(
-            customer_id=customer_id, campaign_budget_id=campaign_budget_id,
+            customer_id=customer_id,
+            campaign_budget_id=campaign_budget_id,
         )
 
     @staticmethod
@@ -192,7 +197,9 @@ class CampaignBudgetServiceClient(metaclass=CampaignBudgetServiceClientMeta):
         return m.groupdict() if m else {}
 
     @staticmethod
-    def common_billing_account_path(billing_account: str,) -> str:
+    def common_billing_account_path(
+        billing_account: str,
+    ) -> str:
         """Returns a fully-qualified billing_account string."""
         return "billingAccounts/{billing_account}".format(
             billing_account=billing_account,
@@ -205,9 +212,13 @@ class CampaignBudgetServiceClient(metaclass=CampaignBudgetServiceClientMeta):
         return m.groupdict() if m else {}
 
     @staticmethod
-    def common_folder_path(folder: str,) -> str:
+    def common_folder_path(
+        folder: str,
+    ) -> str:
         """Returns a fully-qualified folder string."""
-        return "folders/{folder}".format(folder=folder,)
+        return "folders/{folder}".format(
+            folder=folder,
+        )
 
     @staticmethod
     def parse_common_folder_path(path: str) -> Dict[str, str]:
@@ -216,9 +227,13 @@ class CampaignBudgetServiceClient(metaclass=CampaignBudgetServiceClientMeta):
         return m.groupdict() if m else {}
 
     @staticmethod
-    def common_organization_path(organization: str,) -> str:
+    def common_organization_path(
+        organization: str,
+    ) -> str:
         """Returns a fully-qualified organization string."""
-        return "organizations/{organization}".format(organization=organization,)
+        return "organizations/{organization}".format(
+            organization=organization,
+        )
 
     @staticmethod
     def parse_common_organization_path(path: str) -> Dict[str, str]:
@@ -227,9 +242,13 @@ class CampaignBudgetServiceClient(metaclass=CampaignBudgetServiceClientMeta):
         return m.groupdict() if m else {}
 
     @staticmethod
-    def common_project_path(project: str,) -> str:
+    def common_project_path(
+        project: str,
+    ) -> str:
         """Returns a fully-qualified project string."""
-        return "projects/{project}".format(project=project,)
+        return "projects/{project}".format(
+            project=project,
+        )
 
     @staticmethod
     def parse_common_project_path(path: str) -> Dict[str, str]:
@@ -238,10 +257,14 @@ class CampaignBudgetServiceClient(metaclass=CampaignBudgetServiceClientMeta):
         return m.groupdict() if m else {}
 
     @staticmethod
-    def common_location_path(project: str, location: str,) -> str:
+    def common_location_path(
+        project: str,
+        location: str,
+    ) -> str:
         """Returns a fully-qualified location string."""
         return "projects/{project}/locations/{location}".format(
-            project=project, location=location,
+            project=project,
+            location=location,
         )
 
     @staticmethod
@@ -477,7 +500,10 @@ class CampaignBudgetServiceClient(metaclass=CampaignBudgetServiceClientMeta):
 
         # Send the request.
         response = rpc(
-            request, retry=retry, timeout=timeout, metadata=metadata,
+            request,
+            retry=retry,
+            timeout=timeout,
+            metadata=metadata,
         )
 
         # Done; return the response.
@@ -486,7 +512,9 @@ class CampaignBudgetServiceClient(metaclass=CampaignBudgetServiceClientMeta):
 
 try:
     DEFAULT_CLIENT_INFO = gapic_v1.client_info.ClientInfo(
-        gapic_version=pkg_resources.get_distribution("google-ads",).version,
+        gapic_version=pkg_resources.get_distribution(
+            "google-ads",
+        ).version,
     )
 except pkg_resources.DistributionNotFound:
     DEFAULT_CLIENT_INFO = gapic_v1.client_info.ClientInfo()

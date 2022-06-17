@@ -21,7 +21,10 @@ from google.ads.googleads.v10.resources.types import payments_account
 __protobuf__ = proto.module(
     package="google.ads.googleads.v10.services",
     marshal="google.ads.googleads.v10",
-    manifest={"ListPaymentsAccountsRequest", "ListPaymentsAccountsResponse",},
+    manifest={
+        "ListPaymentsAccountsRequest",
+        "ListPaymentsAccountsResponse",
+    },
 )
 
 
@@ -35,7 +38,10 @@ class ListPaymentsAccountsRequest(proto.Message):
             PaymentsAccount list operation to.
     """
 
-    customer_id = proto.Field(proto.STRING, number=1,)
+    customer_id = proto.Field(
+        proto.STRING,
+        number=1,
+    )
 
 
 class ListPaymentsAccountsResponse(proto.Message):
@@ -48,7 +54,9 @@ class ListPaymentsAccountsResponse(proto.Message):
     """
 
     payments_accounts = proto.RepeatedField(
-        proto.MESSAGE, number=1, message=payments_account.PaymentsAccount,
+        proto.MESSAGE,
+        number=1,
+        message=payments_account.PaymentsAccount,
     )
 
 

@@ -63,12 +63,23 @@ class MutateCustomerFeedsRequest(proto.Message):
             resource name should be returned post mutation.
     """
 
-    customer_id = proto.Field(proto.STRING, number=1,)
-    operations = proto.RepeatedField(
-        proto.MESSAGE, number=2, message="CustomerFeedOperation",
+    customer_id = proto.Field(
+        proto.STRING,
+        number=1,
     )
-    partial_failure = proto.Field(proto.BOOL, number=3,)
-    validate_only = proto.Field(proto.BOOL, number=4,)
+    operations = proto.RepeatedField(
+        proto.MESSAGE,
+        number=2,
+        message="CustomerFeedOperation",
+    )
+    partial_failure = proto.Field(
+        proto.BOOL,
+        number=3,
+    )
+    validate_only = proto.Field(
+        proto.BOOL,
+        number=4,
+    )
     response_content_type = proto.Field(
         proto.ENUM,
         number=5,
@@ -111,7 +122,9 @@ class CustomerFeedOperation(proto.Message):
     """
 
     update_mask = proto.Field(
-        proto.MESSAGE, number=4, message=field_mask_pb2.FieldMask,
+        proto.MESSAGE,
+        number=4,
+        message=field_mask_pb2.FieldMask,
     )
     create = proto.Field(
         proto.MESSAGE,
@@ -125,7 +138,11 @@ class CustomerFeedOperation(proto.Message):
         oneof="operation",
         message=gagr_customer_feed.CustomerFeed,
     )
-    remove = proto.Field(proto.STRING, number=3, oneof="operation",)
+    remove = proto.Field(
+        proto.STRING,
+        number=3,
+        oneof="operation",
+    )
 
 
 class MutateCustomerFeedsResponse(proto.Message):
@@ -143,10 +160,14 @@ class MutateCustomerFeedsResponse(proto.Message):
     """
 
     partial_failure_error = proto.Field(
-        proto.MESSAGE, number=3, message=status_pb2.Status,
+        proto.MESSAGE,
+        number=3,
+        message=status_pb2.Status,
     )
     results = proto.RepeatedField(
-        proto.MESSAGE, number=2, message="MutateCustomerFeedResult",
+        proto.MESSAGE,
+        number=2,
+        message="MutateCustomerFeedResult",
     )
 
 
@@ -162,9 +183,14 @@ class MutateCustomerFeedResult(proto.Message):
             response_content_type is set to "MUTABLE_RESOURCE".
     """
 
-    resource_name = proto.Field(proto.STRING, number=1,)
+    resource_name = proto.Field(
+        proto.STRING,
+        number=1,
+    )
     customer_feed = proto.Field(
-        proto.MESSAGE, number=2, message=gagr_customer_feed.CustomerFeed,
+        proto.MESSAGE,
+        number=2,
+        message=gagr_customer_feed.CustomerFeed,
     )
 
 

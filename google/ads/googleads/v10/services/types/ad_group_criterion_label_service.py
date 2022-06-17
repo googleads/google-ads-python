@@ -53,12 +53,23 @@ class MutateAdGroupCriterionLabelsRequest(proto.Message):
             executed. Only errors are returned, not results.
     """
 
-    customer_id = proto.Field(proto.STRING, number=1,)
-    operations = proto.RepeatedField(
-        proto.MESSAGE, number=2, message="AdGroupCriterionLabelOperation",
+    customer_id = proto.Field(
+        proto.STRING,
+        number=1,
     )
-    partial_failure = proto.Field(proto.BOOL, number=3,)
-    validate_only = proto.Field(proto.BOOL, number=4,)
+    operations = proto.RepeatedField(
+        proto.MESSAGE,
+        number=2,
+        message="AdGroupCriterionLabelOperation",
+    )
+    partial_failure = proto.Field(
+        proto.BOOL,
+        number=3,
+    )
+    validate_only = proto.Field(
+        proto.BOOL,
+        number=4,
+    )
 
 
 class AdGroupCriterionLabelOperation(proto.Message):
@@ -93,7 +104,11 @@ class AdGroupCriterionLabelOperation(proto.Message):
         oneof="operation",
         message=ad_group_criterion_label.AdGroupCriterionLabel,
     )
-    remove = proto.Field(proto.STRING, number=2, oneof="operation",)
+    remove = proto.Field(
+        proto.STRING,
+        number=2,
+        oneof="operation",
+    )
 
 
 class MutateAdGroupCriterionLabelsResponse(proto.Message):
@@ -111,10 +126,14 @@ class MutateAdGroupCriterionLabelsResponse(proto.Message):
     """
 
     partial_failure_error = proto.Field(
-        proto.MESSAGE, number=3, message=status_pb2.Status,
+        proto.MESSAGE,
+        number=3,
+        message=status_pb2.Status,
     )
     results = proto.RepeatedField(
-        proto.MESSAGE, number=2, message="MutateAdGroupCriterionLabelResult",
+        proto.MESSAGE,
+        number=2,
+        message="MutateAdGroupCriterionLabelResult",
     )
 
 
@@ -126,7 +145,10 @@ class MutateAdGroupCriterionLabelResult(proto.Message):
             Returned for successful operations.
     """
 
-    resource_name = proto.Field(proto.STRING, number=1,)
+    resource_name = proto.Field(
+        proto.STRING,
+        number=1,
+    )
 
 
 __all__ = tuple(sorted(__protobuf__.manifest))

@@ -19,13 +19,14 @@ import proto  # type: ignore
 __protobuf__ = proto.module(
     package="google.ads.googleads.v10.errors",
     marshal="google.ads.googleads.v10",
-    manifest={"RegionCodeErrorEnum",},
+    manifest={
+        "RegionCodeErrorEnum",
+    },
 )
 
 
 class RegionCodeErrorEnum(proto.Message):
-    r"""Container for enum describing possible region code errors.
-    """
+    r"""Container for enum describing possible region code errors."""
 
     class RegionCodeError(proto.Enum):
         r"""Enum describing possible region code errors."""

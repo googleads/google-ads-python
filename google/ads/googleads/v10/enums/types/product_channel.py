@@ -19,13 +19,14 @@ import proto  # type: ignore
 __protobuf__ = proto.module(
     package="google.ads.googleads.v10.enums",
     marshal="google.ads.googleads.v10",
-    manifest={"ProductChannelEnum",},
+    manifest={
+        "ProductChannelEnum",
+    },
 )
 
 
 class ProductChannelEnum(proto.Message):
-    r"""Locality of a product offer.
-    """
+    r"""Locality of a product offer."""
 
     class ProductChannel(proto.Enum):
         r"""Enum describing the locality of a product offer."""

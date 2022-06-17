@@ -19,13 +19,14 @@ import proto  # type: ignore
 __protobuf__ = proto.module(
     package="google.ads.googleads.v10.errors",
     marshal="google.ads.googleads.v10",
-    manifest={"BillingSetupErrorEnum",},
+    manifest={
+        "BillingSetupErrorEnum",
+    },
 )
 
 
 class BillingSetupErrorEnum(proto.Message):
-    r"""Container for enum describing possible billing setup errors.
-    """
+    r"""Container for enum describing possible billing setup errors."""
 
     class BillingSetupError(proto.Enum):
         r"""Enum describing possible billing setup errors."""

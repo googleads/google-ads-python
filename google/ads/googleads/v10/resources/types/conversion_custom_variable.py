@@ -23,7 +23,9 @@ from google.ads.googleads.v10.enums.types import (
 __protobuf__ = proto.module(
     package="google.ads.googleads.v10.resources",
     marshal="google.ads.googleads.v10",
-    manifest={"ConversionCustomVariable",},
+    manifest={
+        "ConversionCustomVariable",
+    },
 )
 
 
@@ -68,16 +70,31 @@ class ConversionCustomVariable(proto.Message):
             variable.
     """
 
-    resource_name = proto.Field(proto.STRING, number=1,)
-    id = proto.Field(proto.INT64, number=2,)
-    name = proto.Field(proto.STRING, number=3,)
-    tag = proto.Field(proto.STRING, number=4,)
+    resource_name = proto.Field(
+        proto.STRING,
+        number=1,
+    )
+    id = proto.Field(
+        proto.INT64,
+        number=2,
+    )
+    name = proto.Field(
+        proto.STRING,
+        number=3,
+    )
+    tag = proto.Field(
+        proto.STRING,
+        number=4,
+    )
     status = proto.Field(
         proto.ENUM,
         number=5,
         enum=conversion_custom_variable_status.ConversionCustomVariableStatusEnum.ConversionCustomVariableStatus,
     )
-    owner_customer = proto.Field(proto.STRING, number=6,)
+    owner_customer = proto.Field(
+        proto.STRING,
+        number=6,
+    )
 
 
 __all__ = tuple(sorted(__protobuf__.manifest))

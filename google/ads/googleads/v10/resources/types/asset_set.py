@@ -22,7 +22,9 @@ from google.ads.googleads.v10.enums.types import asset_set_type
 __protobuf__ = proto.module(
     package="google.ads.googleads.v10.resources",
     marshal="google.ads.googleads.v10",
-    manifest={"AssetSet",},
+    manifest={
+        "AssetSet",
+    },
 )
 
 
@@ -67,14 +69,32 @@ class AssetSet(proto.Message):
                 This field is a member of `oneof`_ ``_feed_label``.
         """
 
-        merchant_id = proto.Field(proto.INT64, number=1,)
-        feed_label = proto.Field(proto.STRING, number=2, optional=True,)
+        merchant_id = proto.Field(
+            proto.INT64,
+            number=1,
+        )
+        feed_label = proto.Field(
+            proto.STRING,
+            number=2,
+            optional=True,
+        )
 
-    id = proto.Field(proto.INT64, number=6,)
-    resource_name = proto.Field(proto.STRING, number=1,)
-    name = proto.Field(proto.STRING, number=2,)
+    id = proto.Field(
+        proto.INT64,
+        number=6,
+    )
+    resource_name = proto.Field(
+        proto.STRING,
+        number=1,
+    )
+    name = proto.Field(
+        proto.STRING,
+        number=2,
+    )
     type_ = proto.Field(
-        proto.ENUM, number=3, enum=asset_set_type.AssetSetTypeEnum.AssetSetType,
+        proto.ENUM,
+        number=3,
+        enum=asset_set_type.AssetSetTypeEnum.AssetSetType,
     )
     status = proto.Field(
         proto.ENUM,
@@ -82,7 +102,9 @@ class AssetSet(proto.Message):
         enum=asset_set_status.AssetSetStatusEnum.AssetSetStatus,
     )
     merchant_center_feed = proto.Field(
-        proto.MESSAGE, number=5, message=MerchantCenterFeed,
+        proto.MESSAGE,
+        number=5,
+        message=MerchantCenterFeed,
     )
 
 

@@ -21,7 +21,9 @@ from google.ads.googleads.v10.enums.types import access_role as gage_access_role
 __protobuf__ = proto.module(
     package="google.ads.googleads.v10.resources",
     marshal="google.ads.googleads.v10",
-    manifest={"CustomerUserAccess",},
+    manifest={
+        "CustomerUserAccess",
+    },
 )
 
 
@@ -59,17 +61,33 @@ class CustomerUserAccess(proto.Message):
             This field is a member of `oneof`_ ``_inviter_user_email_address``.
     """
 
-    resource_name = proto.Field(proto.STRING, number=1,)
-    user_id = proto.Field(proto.INT64, number=2,)
-    email_address = proto.Field(proto.STRING, number=3, optional=True,)
+    resource_name = proto.Field(
+        proto.STRING,
+        number=1,
+    )
+    user_id = proto.Field(
+        proto.INT64,
+        number=2,
+    )
+    email_address = proto.Field(
+        proto.STRING,
+        number=3,
+        optional=True,
+    )
     access_role = proto.Field(
-        proto.ENUM, number=4, enum=gage_access_role.AccessRoleEnum.AccessRole,
+        proto.ENUM,
+        number=4,
+        enum=gage_access_role.AccessRoleEnum.AccessRole,
     )
     access_creation_date_time = proto.Field(
-        proto.STRING, number=6, optional=True,
+        proto.STRING,
+        number=6,
+        optional=True,
     )
     inviter_user_email_address = proto.Field(
-        proto.STRING, number=7, optional=True,
+        proto.STRING,
+        number=7,
+        optional=True,
     )
 
 

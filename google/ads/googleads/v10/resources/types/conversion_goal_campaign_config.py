@@ -23,7 +23,9 @@ from google.ads.googleads.v10.enums.types import (
 __protobuf__ = proto.module(
     package="google.ads.googleads.v10.resources",
     marshal="google.ads.googleads.v10",
-    manifest={"ConversionGoalCampaignConfig",},
+    manifest={
+        "ConversionGoalCampaignConfig",
+    },
 )
 
 
@@ -48,14 +50,23 @@ class ConversionGoalCampaignConfig(proto.Message):
             using for optimization.
     """
 
-    resource_name = proto.Field(proto.STRING, number=1,)
-    campaign = proto.Field(proto.STRING, number=2,)
+    resource_name = proto.Field(
+        proto.STRING,
+        number=1,
+    )
+    campaign = proto.Field(
+        proto.STRING,
+        number=2,
+    )
     goal_config_level = proto.Field(
         proto.ENUM,
         number=3,
         enum=gage_goal_config_level.GoalConfigLevelEnum.GoalConfigLevel,
     )
-    custom_conversion_goal = proto.Field(proto.STRING, number=4,)
+    custom_conversion_goal = proto.Field(
+        proto.STRING,
+        number=4,
+    )
 
 
 __all__ = tuple(sorted(__protobuf__.manifest))

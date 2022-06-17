@@ -19,13 +19,14 @@ import proto  # type: ignore
 __protobuf__ = proto.module(
     package="google.ads.googleads.v10.enums",
     marshal="google.ads.googleads.v10",
-    manifest={"InteractionTypeEnum",},
+    manifest={
+        "InteractionTypeEnum",
+    },
 )
 
 
 class InteractionTypeEnum(proto.Message):
-    r"""Container for enum describing possible interaction types.
-    """
+    r"""Container for enum describing possible interaction types."""
 
     class InteractionType(proto.Enum):
         r"""Enum describing possible interaction types."""

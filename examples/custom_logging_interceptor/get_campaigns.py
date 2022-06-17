@@ -27,9 +27,13 @@ from cloud_logging_interceptor import CloudLoggingInterceptor
 
 _API_VERSION = "v10"
 
+
 def main(client, customer_id):
     # Instantiate the GoogleAdsService object with a custom interceptor.
-    ga_service = client.get_service("GoogleAdsService", interceptors=[CloudLoggingInterceptor(api_version=_API_VERSION)])
+    ga_service = client.get_service(
+        "GoogleAdsService",
+        interceptors=[CloudLoggingInterceptor(api_version=_API_VERSION)],
+    )
 
     query = """
         SELECT

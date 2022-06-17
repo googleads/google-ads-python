@@ -108,7 +108,9 @@ class OAuth2Tests(TestCase):
         ) as mock_initializer:
             oauth2.get_credentials(mock_config)
             mock_initializer.assert_called_once_with(
-                self.json_key_file_path, self.subject, http_proxy=None,
+                self.json_key_file_path,
+                self.subject,
+                http_proxy=None,
             )
 
     def test_get_credentials_with_proxy(self):

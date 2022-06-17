@@ -19,13 +19,14 @@ import proto  # type: ignore
 __protobuf__ = proto.module(
     package="google.ads.googleads.v10.enums",
     marshal="google.ads.googleads.v10",
-    manifest={"UserListNumberRuleItemOperatorEnum",},
+    manifest={
+        "UserListNumberRuleItemOperatorEnum",
+    },
 )
 
 
 class UserListNumberRuleItemOperatorEnum(proto.Message):
-    r"""Supported rule operator for number type.
-    """
+    r"""Supported rule operator for number type."""
 
     class UserListNumberRuleItemOperator(proto.Enum):
         r"""Enum describing possible user list number rule item

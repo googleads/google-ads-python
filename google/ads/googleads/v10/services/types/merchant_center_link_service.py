@@ -45,7 +45,10 @@ class ListMerchantCenterLinksRequest(proto.Message):
             operation.
     """
 
-    customer_id = proto.Field(proto.STRING, number=1,)
+    customer_id = proto.Field(
+        proto.STRING,
+        number=1,
+    )
 
 
 class ListMerchantCenterLinksResponse(proto.Message):
@@ -75,7 +78,10 @@ class GetMerchantCenterLinkRequest(proto.Message):
             Center link.
     """
 
-    resource_name = proto.Field(proto.STRING, number=1,)
+    resource_name = proto.Field(
+        proto.STRING,
+        number=1,
+    )
 
 
 class MutateMerchantCenterLinkRequest(proto.Message):
@@ -94,11 +100,19 @@ class MutateMerchantCenterLinkRequest(proto.Message):
             executed. Only errors are returned, not results.
     """
 
-    customer_id = proto.Field(proto.STRING, number=1,)
-    operation = proto.Field(
-        proto.MESSAGE, number=2, message="MerchantCenterLinkOperation",
+    customer_id = proto.Field(
+        proto.STRING,
+        number=1,
     )
-    validate_only = proto.Field(proto.BOOL, number=3,)
+    operation = proto.Field(
+        proto.MESSAGE,
+        number=2,
+        message="MerchantCenterLinkOperation",
+    )
+    validate_only = proto.Field(
+        proto.BOOL,
+        number=3,
+    )
 
 
 class MerchantCenterLinkOperation(proto.Message):
@@ -130,7 +144,9 @@ class MerchantCenterLinkOperation(proto.Message):
     """
 
     update_mask = proto.Field(
-        proto.MESSAGE, number=3, message=field_mask_pb2.FieldMask,
+        proto.MESSAGE,
+        number=3,
+        message=field_mask_pb2.FieldMask,
     )
     update = proto.Field(
         proto.MESSAGE,
@@ -138,7 +154,11 @@ class MerchantCenterLinkOperation(proto.Message):
         oneof="operation",
         message=merchant_center_link.MerchantCenterLink,
     )
-    remove = proto.Field(proto.STRING, number=2, oneof="operation",)
+    remove = proto.Field(
+        proto.STRING,
+        number=2,
+        oneof="operation",
+    )
 
 
 class MutateMerchantCenterLinkResponse(proto.Message):
@@ -150,7 +170,9 @@ class MutateMerchantCenterLinkResponse(proto.Message):
     """
 
     result = proto.Field(
-        proto.MESSAGE, number=2, message="MutateMerchantCenterLinkResult",
+        proto.MESSAGE,
+        number=2,
+        message="MutateMerchantCenterLinkResult",
     )
 
 
@@ -162,7 +184,10 @@ class MutateMerchantCenterLinkResult(proto.Message):
             Returned for successful operations.
     """
 
-    resource_name = proto.Field(proto.STRING, number=1,)
+    resource_name = proto.Field(
+        proto.STRING,
+        number=1,
+    )
 
 
 __all__ = tuple(sorted(__protobuf__.manifest))

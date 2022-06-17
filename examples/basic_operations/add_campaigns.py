@@ -46,8 +46,10 @@ def main(client, customer_id):
 
     # Add budget.
     try:
-        campaign_budget_response = campaign_budget_service.mutate_campaign_budgets(
-            customer_id=customer_id, operations=[campaign_budget_operation]
+        campaign_budget_response = (
+            campaign_budget_service.mutate_campaign_budgets(
+                customer_id=customer_id, operations=[campaign_budget_operation]
+            )
         )
     except GoogleAdsException as ex:
         _handle_googleads_exception(ex)

@@ -19,13 +19,14 @@ import proto  # type: ignore
 __protobuf__ = proto.module(
     package="google.ads.googleads.v10.enums",
     marshal="google.ads.googleads.v10",
-    manifest={"TargetingDimensionEnum",},
+    manifest={
+        "TargetingDimensionEnum",
+    },
 )
 
 
 class TargetingDimensionEnum(proto.Message):
-    r"""The dimensions that can be targeted.
-    """
+    r"""The dimensions that can be targeted."""
 
     class TargetingDimension(proto.Enum):
         r"""Enum describing possible targeting dimensions."""

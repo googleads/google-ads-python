@@ -19,13 +19,14 @@ import proto  # type: ignore
 __protobuf__ = proto.module(
     package="google.ads.googleads.v10.errors",
     marshal="google.ads.googleads.v10",
-    manifest={"DistinctErrorEnum",},
+    manifest={
+        "DistinctErrorEnum",
+    },
 )
 
 
 class DistinctErrorEnum(proto.Message):
-    r"""Container for enum describing possible distinct errors.
-    """
+    r"""Container for enum describing possible distinct errors."""
 
     class DistinctError(proto.Enum):
         r"""Enum describing possible distinct errors."""

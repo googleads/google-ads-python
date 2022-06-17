@@ -22,7 +22,9 @@ from google.ads.googleads.v10.enums.types import access_role as gage_access_role
 __protobuf__ = proto.module(
     package="google.ads.googleads.v10.resources",
     marshal="google.ads.googleads.v10",
-    manifest={"CustomerUserAccessInvitation",},
+    manifest={
+        "CustomerUserAccessInvitation",
+    },
 )
 
 
@@ -54,13 +56,27 @@ class CustomerUserAccessInvitation(proto.Message):
             Output only. Invitation status of the user.
     """
 
-    resource_name = proto.Field(proto.STRING, number=1,)
-    invitation_id = proto.Field(proto.INT64, number=2,)
-    access_role = proto.Field(
-        proto.ENUM, number=3, enum=gage_access_role.AccessRoleEnum.AccessRole,
+    resource_name = proto.Field(
+        proto.STRING,
+        number=1,
     )
-    email_address = proto.Field(proto.STRING, number=4,)
-    creation_date_time = proto.Field(proto.STRING, number=5,)
+    invitation_id = proto.Field(
+        proto.INT64,
+        number=2,
+    )
+    access_role = proto.Field(
+        proto.ENUM,
+        number=3,
+        enum=gage_access_role.AccessRoleEnum.AccessRole,
+    )
+    email_address = proto.Field(
+        proto.STRING,
+        number=4,
+    )
+    creation_date_time = proto.Field(
+        proto.STRING,
+        number=5,
+    )
     invitation_status = proto.Field(
         proto.ENUM,
         number=6,

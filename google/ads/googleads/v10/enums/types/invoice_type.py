@@ -19,13 +19,14 @@ import proto  # type: ignore
 __protobuf__ = proto.module(
     package="google.ads.googleads.v10.enums",
     marshal="google.ads.googleads.v10",
-    manifest={"InvoiceTypeEnum",},
+    manifest={
+        "InvoiceTypeEnum",
+    },
 )
 
 
 class InvoiceTypeEnum(proto.Message):
-    r"""Container for enum describing the type of invoices.
-    """
+    r"""Container for enum describing the type of invoices."""
 
     class InvoiceType(proto.Enum):
         r"""The possible type of invoices."""

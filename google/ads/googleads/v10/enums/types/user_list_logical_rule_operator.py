@@ -19,13 +19,14 @@ import proto  # type: ignore
 __protobuf__ = proto.module(
     package="google.ads.googleads.v10.enums",
     marshal="google.ads.googleads.v10",
-    manifest={"UserListLogicalRuleOperatorEnum",},
+    manifest={
+        "UserListLogicalRuleOperatorEnum",
+    },
 )
 
 
 class UserListLogicalRuleOperatorEnum(proto.Message):
-    r"""The logical operator of the rule.
-    """
+    r"""The logical operator of the rule."""
 
     class UserListLogicalRuleOperator(proto.Enum):
         r"""Enum describing possible user list logical rule operators."""

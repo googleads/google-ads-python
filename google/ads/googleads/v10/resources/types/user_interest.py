@@ -24,7 +24,9 @@ from google.ads.googleads.v10.enums.types import user_interest_taxonomy_type
 __protobuf__ = proto.module(
     package="google.ads.googleads.v10.resources",
     marshal="google.ads.googleads.v10",
-    manifest={"UserInterest",},
+    manifest={
+        "UserInterest",
+    },
 )
 
 
@@ -63,16 +65,35 @@ class UserInterest(proto.Message):
             user interest.
     """
 
-    resource_name = proto.Field(proto.STRING, number=1,)
+    resource_name = proto.Field(
+        proto.STRING,
+        number=1,
+    )
     taxonomy_type = proto.Field(
         proto.ENUM,
         number=2,
         enum=user_interest_taxonomy_type.UserInterestTaxonomyTypeEnum.UserInterestTaxonomyType,
     )
-    user_interest_id = proto.Field(proto.INT64, number=8, optional=True,)
-    name = proto.Field(proto.STRING, number=9, optional=True,)
-    user_interest_parent = proto.Field(proto.STRING, number=10, optional=True,)
-    launched_to_all = proto.Field(proto.BOOL, number=11, optional=True,)
+    user_interest_id = proto.Field(
+        proto.INT64,
+        number=8,
+        optional=True,
+    )
+    name = proto.Field(
+        proto.STRING,
+        number=9,
+        optional=True,
+    )
+    user_interest_parent = proto.Field(
+        proto.STRING,
+        number=10,
+        optional=True,
+    )
+    launched_to_all = proto.Field(
+        proto.BOOL,
+        number=11,
+        optional=True,
+    )
     availabilities = proto.RepeatedField(
         proto.MESSAGE,
         number=7,

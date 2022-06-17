@@ -51,7 +51,9 @@ class BidModifierSimulationPointList(proto.Message):
     """
 
     points = proto.RepeatedField(
-        proto.MESSAGE, number=1, message="BidModifierSimulationPoint",
+        proto.MESSAGE,
+        number=1,
+        message="BidModifierSimulationPoint",
     )
 
 
@@ -65,7 +67,9 @@ class CpcBidSimulationPointList(proto.Message):
     """
 
     points = proto.RepeatedField(
-        proto.MESSAGE, number=1, message="CpcBidSimulationPoint",
+        proto.MESSAGE,
+        number=1,
+        message="CpcBidSimulationPoint",
     )
 
 
@@ -79,7 +83,9 @@ class CpvBidSimulationPointList(proto.Message):
     """
 
     points = proto.RepeatedField(
-        proto.MESSAGE, number=1, message="CpvBidSimulationPoint",
+        proto.MESSAGE,
+        number=1,
+        message="CpvBidSimulationPoint",
     )
 
 
@@ -94,7 +100,9 @@ class TargetCpaSimulationPointList(proto.Message):
     """
 
     points = proto.RepeatedField(
-        proto.MESSAGE, number=1, message="TargetCpaSimulationPoint",
+        proto.MESSAGE,
+        number=1,
+        message="TargetCpaSimulationPoint",
     )
 
 
@@ -109,7 +117,9 @@ class TargetRoasSimulationPointList(proto.Message):
     """
 
     points = proto.RepeatedField(
-        proto.MESSAGE, number=1, message="TargetRoasSimulationPoint",
+        proto.MESSAGE,
+        number=1,
+        message="TargetRoasSimulationPoint",
     )
 
 
@@ -124,7 +134,9 @@ class PercentCpcBidSimulationPointList(proto.Message):
     """
 
     points = proto.RepeatedField(
-        proto.MESSAGE, number=1, message="PercentCpcBidSimulationPoint",
+        proto.MESSAGE,
+        number=1,
+        message="PercentCpcBidSimulationPoint",
     )
 
 
@@ -139,7 +151,9 @@ class BudgetSimulationPointList(proto.Message):
     """
 
     points = proto.RepeatedField(
-        proto.MESSAGE, number=1, message="BudgetSimulationPoint",
+        proto.MESSAGE,
+        number=1,
+        message="BudgetSimulationPoint",
     )
 
 
@@ -154,7 +168,9 @@ class TargetImpressionShareSimulationPointList(proto.Message):
     """
 
     points = proto.RepeatedField(
-        proto.MESSAGE, number=1, message="TargetImpressionShareSimulationPoint",
+        proto.MESSAGE,
+        number=1,
+        message="TargetImpressionShareSimulationPoint",
     )
 
 
@@ -238,29 +254,75 @@ class BidModifierSimulationPoint(proto.Message):
             This field is a member of `oneof`_ ``_parent_required_budget_micros``.
     """
 
-    bid_modifier = proto.Field(proto.DOUBLE, number=15, optional=True,)
-    biddable_conversions = proto.Field(proto.DOUBLE, number=16, optional=True,)
-    biddable_conversions_value = proto.Field(
-        proto.DOUBLE, number=17, optional=True,
+    bid_modifier = proto.Field(
+        proto.DOUBLE,
+        number=15,
+        optional=True,
     )
-    clicks = proto.Field(proto.INT64, number=18, optional=True,)
-    cost_micros = proto.Field(proto.INT64, number=19, optional=True,)
-    impressions = proto.Field(proto.INT64, number=20, optional=True,)
-    top_slot_impressions = proto.Field(proto.INT64, number=21, optional=True,)
+    biddable_conversions = proto.Field(
+        proto.DOUBLE,
+        number=16,
+        optional=True,
+    )
+    biddable_conversions_value = proto.Field(
+        proto.DOUBLE,
+        number=17,
+        optional=True,
+    )
+    clicks = proto.Field(
+        proto.INT64,
+        number=18,
+        optional=True,
+    )
+    cost_micros = proto.Field(
+        proto.INT64,
+        number=19,
+        optional=True,
+    )
+    impressions = proto.Field(
+        proto.INT64,
+        number=20,
+        optional=True,
+    )
+    top_slot_impressions = proto.Field(
+        proto.INT64,
+        number=21,
+        optional=True,
+    )
     parent_biddable_conversions = proto.Field(
-        proto.DOUBLE, number=22, optional=True,
+        proto.DOUBLE,
+        number=22,
+        optional=True,
     )
     parent_biddable_conversions_value = proto.Field(
-        proto.DOUBLE, number=23, optional=True,
+        proto.DOUBLE,
+        number=23,
+        optional=True,
     )
-    parent_clicks = proto.Field(proto.INT64, number=24, optional=True,)
-    parent_cost_micros = proto.Field(proto.INT64, number=25, optional=True,)
-    parent_impressions = proto.Field(proto.INT64, number=26, optional=True,)
+    parent_clicks = proto.Field(
+        proto.INT64,
+        number=24,
+        optional=True,
+    )
+    parent_cost_micros = proto.Field(
+        proto.INT64,
+        number=25,
+        optional=True,
+    )
+    parent_impressions = proto.Field(
+        proto.INT64,
+        number=26,
+        optional=True,
+    )
     parent_top_slot_impressions = proto.Field(
-        proto.INT64, number=27, optional=True,
+        proto.INT64,
+        number=27,
+        optional=True,
     )
     parent_required_budget_micros = proto.Field(
-        proto.INT64, number=28, optional=True,
+        proto.INT64,
+        number=28,
+        optional=True,
     )
 
 
@@ -321,20 +383,49 @@ class CpcBidSimulationPoint(proto.Message):
             This field is a member of `oneof`_ ``cpc_simulation_key_value``.
     """
 
-    required_budget_amount_micros = proto.Field(proto.INT64, number=17,)
-    biddable_conversions = proto.Field(proto.DOUBLE, number=9, optional=True,)
-    biddable_conversions_value = proto.Field(
-        proto.DOUBLE, number=10, optional=True,
+    required_budget_amount_micros = proto.Field(
+        proto.INT64,
+        number=17,
     )
-    clicks = proto.Field(proto.INT64, number=11, optional=True,)
-    cost_micros = proto.Field(proto.INT64, number=12, optional=True,)
-    impressions = proto.Field(proto.INT64, number=13, optional=True,)
-    top_slot_impressions = proto.Field(proto.INT64, number=14, optional=True,)
+    biddable_conversions = proto.Field(
+        proto.DOUBLE,
+        number=9,
+        optional=True,
+    )
+    biddable_conversions_value = proto.Field(
+        proto.DOUBLE,
+        number=10,
+        optional=True,
+    )
+    clicks = proto.Field(
+        proto.INT64,
+        number=11,
+        optional=True,
+    )
+    cost_micros = proto.Field(
+        proto.INT64,
+        number=12,
+        optional=True,
+    )
+    impressions = proto.Field(
+        proto.INT64,
+        number=13,
+        optional=True,
+    )
+    top_slot_impressions = proto.Field(
+        proto.INT64,
+        number=14,
+        optional=True,
+    )
     cpc_bid_micros = proto.Field(
-        proto.INT64, number=15, oneof="cpc_simulation_key_value",
+        proto.INT64,
+        number=15,
+        oneof="cpc_simulation_key_value",
     )
     cpc_bid_scaling_modifier = proto.Field(
-        proto.DOUBLE, number=16, oneof="cpc_simulation_key_value",
+        proto.DOUBLE,
+        number=16,
+        oneof="cpc_simulation_key_value",
     )
 
 
@@ -361,10 +452,26 @@ class CpvBidSimulationPoint(proto.Message):
             This field is a member of `oneof`_ ``_views``.
     """
 
-    cpv_bid_micros = proto.Field(proto.INT64, number=5, optional=True,)
-    cost_micros = proto.Field(proto.INT64, number=6, optional=True,)
-    impressions = proto.Field(proto.INT64, number=7, optional=True,)
-    views = proto.Field(proto.INT64, number=8, optional=True,)
+    cpv_bid_micros = proto.Field(
+        proto.INT64,
+        number=5,
+        optional=True,
+    )
+    cost_micros = proto.Field(
+        proto.INT64,
+        number=6,
+        optional=True,
+    )
+    impressions = proto.Field(
+        proto.INT64,
+        number=7,
+        optional=True,
+    )
+    views = proto.Field(
+        proto.INT64,
+        number=8,
+        optional=True,
+    )
 
 
 class TargetCpaSimulationPoint(proto.Message):
@@ -428,22 +535,57 @@ class TargetCpaSimulationPoint(proto.Message):
             This field is a member of `oneof`_ ``target_cpa_simulation_key_value``.
     """
 
-    required_budget_amount_micros = proto.Field(proto.INT64, number=19,)
-    biddable_conversions = proto.Field(proto.DOUBLE, number=9, optional=True,)
-    biddable_conversions_value = proto.Field(
-        proto.DOUBLE, number=10, optional=True,
+    required_budget_amount_micros = proto.Field(
+        proto.INT64,
+        number=19,
     )
-    app_installs = proto.Field(proto.DOUBLE, number=15,)
-    in_app_actions = proto.Field(proto.DOUBLE, number=16,)
-    clicks = proto.Field(proto.INT64, number=11, optional=True,)
-    cost_micros = proto.Field(proto.INT64, number=12, optional=True,)
-    impressions = proto.Field(proto.INT64, number=13, optional=True,)
-    top_slot_impressions = proto.Field(proto.INT64, number=14, optional=True,)
+    biddable_conversions = proto.Field(
+        proto.DOUBLE,
+        number=9,
+        optional=True,
+    )
+    biddable_conversions_value = proto.Field(
+        proto.DOUBLE,
+        number=10,
+        optional=True,
+    )
+    app_installs = proto.Field(
+        proto.DOUBLE,
+        number=15,
+    )
+    in_app_actions = proto.Field(
+        proto.DOUBLE,
+        number=16,
+    )
+    clicks = proto.Field(
+        proto.INT64,
+        number=11,
+        optional=True,
+    )
+    cost_micros = proto.Field(
+        proto.INT64,
+        number=12,
+        optional=True,
+    )
+    impressions = proto.Field(
+        proto.INT64,
+        number=13,
+        optional=True,
+    )
+    top_slot_impressions = proto.Field(
+        proto.INT64,
+        number=14,
+        optional=True,
+    )
     target_cpa_micros = proto.Field(
-        proto.INT64, number=17, oneof="target_cpa_simulation_key_value",
+        proto.INT64,
+        number=17,
+        oneof="target_cpa_simulation_key_value",
     )
     target_cpa_scaling_modifier = proto.Field(
-        proto.DOUBLE, number=18, oneof="target_cpa_simulation_key_value",
+        proto.DOUBLE,
+        number=18,
+        oneof="target_cpa_simulation_key_value",
     )
 
 
@@ -490,16 +632,45 @@ class TargetRoasSimulationPoint(proto.Message):
             This field is a member of `oneof`_ ``_top_slot_impressions``.
     """
 
-    target_roas = proto.Field(proto.DOUBLE, number=8, optional=True,)
-    required_budget_amount_micros = proto.Field(proto.INT64, number=15,)
-    biddable_conversions = proto.Field(proto.DOUBLE, number=9, optional=True,)
-    biddable_conversions_value = proto.Field(
-        proto.DOUBLE, number=10, optional=True,
+    target_roas = proto.Field(
+        proto.DOUBLE,
+        number=8,
+        optional=True,
     )
-    clicks = proto.Field(proto.INT64, number=11, optional=True,)
-    cost_micros = proto.Field(proto.INT64, number=12, optional=True,)
-    impressions = proto.Field(proto.INT64, number=13, optional=True,)
-    top_slot_impressions = proto.Field(proto.INT64, number=14, optional=True,)
+    required_budget_amount_micros = proto.Field(
+        proto.INT64,
+        number=15,
+    )
+    biddable_conversions = proto.Field(
+        proto.DOUBLE,
+        number=9,
+        optional=True,
+    )
+    biddable_conversions_value = proto.Field(
+        proto.DOUBLE,
+        number=10,
+        optional=True,
+    )
+    clicks = proto.Field(
+        proto.INT64,
+        number=11,
+        optional=True,
+    )
+    cost_micros = proto.Field(
+        proto.INT64,
+        number=12,
+        optional=True,
+    )
+    impressions = proto.Field(
+        proto.INT64,
+        number=13,
+        optional=True,
+    )
+    top_slot_impressions = proto.Field(
+        proto.INT64,
+        number=14,
+        optional=True,
+    )
 
 
 class PercentCpcBidSimulationPoint(proto.Message):
@@ -541,15 +712,41 @@ class PercentCpcBidSimulationPoint(proto.Message):
             This field is a member of `oneof`_ ``_top_slot_impressions``.
     """
 
-    percent_cpc_bid_micros = proto.Field(proto.INT64, number=1, optional=True,)
-    biddable_conversions = proto.Field(proto.DOUBLE, number=2, optional=True,)
-    biddable_conversions_value = proto.Field(
-        proto.DOUBLE, number=3, optional=True,
+    percent_cpc_bid_micros = proto.Field(
+        proto.INT64,
+        number=1,
+        optional=True,
     )
-    clicks = proto.Field(proto.INT64, number=4, optional=True,)
-    cost_micros = proto.Field(proto.INT64, number=5, optional=True,)
-    impressions = proto.Field(proto.INT64, number=6, optional=True,)
-    top_slot_impressions = proto.Field(proto.INT64, number=7, optional=True,)
+    biddable_conversions = proto.Field(
+        proto.DOUBLE,
+        number=2,
+        optional=True,
+    )
+    biddable_conversions_value = proto.Field(
+        proto.DOUBLE,
+        number=3,
+        optional=True,
+    )
+    clicks = proto.Field(
+        proto.INT64,
+        number=4,
+        optional=True,
+    )
+    cost_micros = proto.Field(
+        proto.INT64,
+        number=5,
+        optional=True,
+    )
+    impressions = proto.Field(
+        proto.INT64,
+        number=6,
+        optional=True,
+    )
+    top_slot_impressions = proto.Field(
+        proto.INT64,
+        number=7,
+        optional=True,
+    )
 
 
 class BudgetSimulationPoint(proto.Message):
@@ -582,14 +779,38 @@ class BudgetSimulationPoint(proto.Message):
             this field.
     """
 
-    budget_amount_micros = proto.Field(proto.INT64, number=1,)
-    required_cpc_bid_ceiling_micros = proto.Field(proto.INT64, number=2,)
-    biddable_conversions = proto.Field(proto.DOUBLE, number=3,)
-    biddable_conversions_value = proto.Field(proto.DOUBLE, number=4,)
-    clicks = proto.Field(proto.INT64, number=5,)
-    cost_micros = proto.Field(proto.INT64, number=6,)
-    impressions = proto.Field(proto.INT64, number=7,)
-    top_slot_impressions = proto.Field(proto.INT64, number=8,)
+    budget_amount_micros = proto.Field(
+        proto.INT64,
+        number=1,
+    )
+    required_cpc_bid_ceiling_micros = proto.Field(
+        proto.INT64,
+        number=2,
+    )
+    biddable_conversions = proto.Field(
+        proto.DOUBLE,
+        number=3,
+    )
+    biddable_conversions_value = proto.Field(
+        proto.DOUBLE,
+        number=4,
+    )
+    clicks = proto.Field(
+        proto.INT64,
+        number=5,
+    )
+    cost_micros = proto.Field(
+        proto.INT64,
+        number=6,
+    )
+    impressions = proto.Field(
+        proto.INT64,
+        number=7,
+    )
+    top_slot_impressions = proto.Field(
+        proto.INT64,
+        number=8,
+    )
 
 
 class TargetImpressionShareSimulationPoint(proto.Message):
@@ -633,16 +854,46 @@ class TargetImpressionShareSimulationPoint(proto.Message):
             this field.
     """
 
-    target_impression_share_micros = proto.Field(proto.INT64, number=1,)
-    required_cpc_bid_ceiling_micros = proto.Field(proto.INT64, number=2,)
-    required_budget_amount_micros = proto.Field(proto.INT64, number=3,)
-    biddable_conversions = proto.Field(proto.DOUBLE, number=4,)
-    biddable_conversions_value = proto.Field(proto.DOUBLE, number=5,)
-    clicks = proto.Field(proto.INT64, number=6,)
-    cost_micros = proto.Field(proto.INT64, number=7,)
-    impressions = proto.Field(proto.INT64, number=8,)
-    top_slot_impressions = proto.Field(proto.INT64, number=9,)
-    absolute_top_impressions = proto.Field(proto.INT64, number=10,)
+    target_impression_share_micros = proto.Field(
+        proto.INT64,
+        number=1,
+    )
+    required_cpc_bid_ceiling_micros = proto.Field(
+        proto.INT64,
+        number=2,
+    )
+    required_budget_amount_micros = proto.Field(
+        proto.INT64,
+        number=3,
+    )
+    biddable_conversions = proto.Field(
+        proto.DOUBLE,
+        number=4,
+    )
+    biddable_conversions_value = proto.Field(
+        proto.DOUBLE,
+        number=5,
+    )
+    clicks = proto.Field(
+        proto.INT64,
+        number=6,
+    )
+    cost_micros = proto.Field(
+        proto.INT64,
+        number=7,
+    )
+    impressions = proto.Field(
+        proto.INT64,
+        number=8,
+    )
+    top_slot_impressions = proto.Field(
+        proto.INT64,
+        number=9,
+    )
+    absolute_top_impressions = proto.Field(
+        proto.INT64,
+        number=10,
+    )
 
 
 __all__ = tuple(sorted(__protobuf__.manifest))

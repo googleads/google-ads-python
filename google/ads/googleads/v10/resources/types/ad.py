@@ -27,7 +27,9 @@ from google.ads.googleads.v10.enums.types import system_managed_entity_source
 __protobuf__ = proto.module(
     package="google.ads.googleads.v10.resources",
     marshal="google.ads.googleads.v10",
-    manifest={"Ad",},
+    manifest={
+        "Ad",
+    },
 )
 
 
@@ -228,28 +230,73 @@ class Ad(proto.Message):
             This field is a member of `oneof`_ ``ad_data``.
     """
 
-    resource_name = proto.Field(proto.STRING, number=37,)
-    id = proto.Field(proto.INT64, number=40, optional=True,)
-    final_urls = proto.RepeatedField(proto.STRING, number=41,)
+    resource_name = proto.Field(
+        proto.STRING,
+        number=37,
+    )
+    id = proto.Field(
+        proto.INT64,
+        number=40,
+        optional=True,
+    )
+    final_urls = proto.RepeatedField(
+        proto.STRING,
+        number=41,
+    )
     final_app_urls = proto.RepeatedField(
-        proto.MESSAGE, number=35, message=final_app_url.FinalAppUrl,
+        proto.MESSAGE,
+        number=35,
+        message=final_app_url.FinalAppUrl,
     )
-    final_mobile_urls = proto.RepeatedField(proto.STRING, number=42,)
-    tracking_url_template = proto.Field(proto.STRING, number=43, optional=True,)
-    final_url_suffix = proto.Field(proto.STRING, number=44, optional=True,)
+    final_mobile_urls = proto.RepeatedField(
+        proto.STRING,
+        number=42,
+    )
+    tracking_url_template = proto.Field(
+        proto.STRING,
+        number=43,
+        optional=True,
+    )
+    final_url_suffix = proto.Field(
+        proto.STRING,
+        number=44,
+        optional=True,
+    )
     url_custom_parameters = proto.RepeatedField(
-        proto.MESSAGE, number=10, message=custom_parameter.CustomParameter,
+        proto.MESSAGE,
+        number=10,
+        message=custom_parameter.CustomParameter,
     )
-    display_url = proto.Field(proto.STRING, number=45, optional=True,)
-    type_ = proto.Field(proto.ENUM, number=5, enum=ad_type.AdTypeEnum.AdType,)
-    added_by_google_ads = proto.Field(proto.BOOL, number=46, optional=True,)
+    display_url = proto.Field(
+        proto.STRING,
+        number=45,
+        optional=True,
+    )
+    type_ = proto.Field(
+        proto.ENUM,
+        number=5,
+        enum=ad_type.AdTypeEnum.AdType,
+    )
+    added_by_google_ads = proto.Field(
+        proto.BOOL,
+        number=46,
+        optional=True,
+    )
     device_preference = proto.Field(
-        proto.ENUM, number=20, enum=device.DeviceEnum.Device,
+        proto.ENUM,
+        number=20,
+        enum=device.DeviceEnum.Device,
     )
     url_collections = proto.RepeatedField(
-        proto.MESSAGE, number=26, message=url_collection.UrlCollection,
+        proto.MESSAGE,
+        number=26,
+        message=url_collection.UrlCollection,
     )
-    name = proto.Field(proto.STRING, number=47, optional=True,)
+    name = proto.Field(
+        proto.STRING,
+        number=47,
+        optional=True,
+    )
     system_managed_resource_source = proto.Field(
         proto.ENUM,
         number=27,

@@ -19,13 +19,14 @@ import proto  # type: ignore
 __protobuf__ = proto.module(
     package="google.ads.googleads.v10.enums",
     marshal="google.ads.googleads.v10",
-    manifest={"SkAdNetworkAdEventTypeEnum",},
+    manifest={
+        "SkAdNetworkAdEventTypeEnum",
+    },
 )
 
 
 class SkAdNetworkAdEventTypeEnum(proto.Message):
-    r"""Container for enumeration of SkAdNetwork ad event types.
-    """
+    r"""Container for enumeration of SkAdNetwork ad event types."""
 
     class SkAdNetworkAdEventType(proto.Enum):
         r"""Enumerates SkAdNetwork ad event types"""

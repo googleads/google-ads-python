@@ -19,7 +19,9 @@ import proto  # type: ignore
 __protobuf__ = proto.module(
     package="google.ads.googleads.v10.resources",
     marshal="google.ads.googleads.v10",
-    manifest={"DynamicSearchAdsSearchTermView",},
+    manifest={
+        "DynamicSearchAdsSearchTermView",
+    },
 )
 
 
@@ -76,14 +78,45 @@ class DynamicSearchAdsSearchTermView(proto.Message):
             This field is a member of `oneof`_ ``_has_negative_url``.
     """
 
-    resource_name = proto.Field(proto.STRING, number=1,)
-    search_term = proto.Field(proto.STRING, number=9, optional=True,)
-    headline = proto.Field(proto.STRING, number=10, optional=True,)
-    landing_page = proto.Field(proto.STRING, number=11, optional=True,)
-    page_url = proto.Field(proto.STRING, number=12, optional=True,)
-    has_negative_keyword = proto.Field(proto.BOOL, number=13, optional=True,)
-    has_matching_keyword = proto.Field(proto.BOOL, number=14, optional=True,)
-    has_negative_url = proto.Field(proto.BOOL, number=15, optional=True,)
+    resource_name = proto.Field(
+        proto.STRING,
+        number=1,
+    )
+    search_term = proto.Field(
+        proto.STRING,
+        number=9,
+        optional=True,
+    )
+    headline = proto.Field(
+        proto.STRING,
+        number=10,
+        optional=True,
+    )
+    landing_page = proto.Field(
+        proto.STRING,
+        number=11,
+        optional=True,
+    )
+    page_url = proto.Field(
+        proto.STRING,
+        number=12,
+        optional=True,
+    )
+    has_negative_keyword = proto.Field(
+        proto.BOOL,
+        number=13,
+        optional=True,
+    )
+    has_matching_keyword = proto.Field(
+        proto.BOOL,
+        number=14,
+        optional=True,
+    )
+    has_negative_url = proto.Field(
+        proto.BOOL,
+        number=15,
+        optional=True,
+    )
 
 
 __all__ = tuple(sorted(__protobuf__.manifest))

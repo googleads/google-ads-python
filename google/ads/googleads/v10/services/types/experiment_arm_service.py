@@ -63,12 +63,23 @@ class MutateExperimentArmsRequest(proto.Message):
             resource name should be returned post mutation.
     """
 
-    customer_id = proto.Field(proto.STRING, number=1,)
-    operations = proto.RepeatedField(
-        proto.MESSAGE, number=2, message="ExperimentArmOperation",
+    customer_id = proto.Field(
+        proto.STRING,
+        number=1,
     )
-    partial_failure = proto.Field(proto.BOOL, number=3,)
-    validate_only = proto.Field(proto.BOOL, number=4,)
+    operations = proto.RepeatedField(
+        proto.MESSAGE,
+        number=2,
+        message="ExperimentArmOperation",
+    )
+    partial_failure = proto.Field(
+        proto.BOOL,
+        number=3,
+    )
+    validate_only = proto.Field(
+        proto.BOOL,
+        number=4,
+    )
     response_content_type = proto.Field(
         proto.ENUM,
         number=5,
@@ -109,7 +120,9 @@ class ExperimentArmOperation(proto.Message):
     """
 
     update_mask = proto.Field(
-        proto.MESSAGE, number=4, message=field_mask_pb2.FieldMask,
+        proto.MESSAGE,
+        number=4,
+        message=field_mask_pb2.FieldMask,
     )
     create = proto.Field(
         proto.MESSAGE,
@@ -123,7 +136,11 @@ class ExperimentArmOperation(proto.Message):
         oneof="operation",
         message=gagr_experiment_arm.ExperimentArm,
     )
-    remove = proto.Field(proto.STRING, number=3, oneof="operation",)
+    remove = proto.Field(
+        proto.STRING,
+        number=3,
+        oneof="operation",
+    )
 
 
 class MutateExperimentArmsResponse(proto.Message):
@@ -141,10 +158,14 @@ class MutateExperimentArmsResponse(proto.Message):
     """
 
     partial_failure_error = proto.Field(
-        proto.MESSAGE, number=1, message=status_pb2.Status,
+        proto.MESSAGE,
+        number=1,
+        message=status_pb2.Status,
     )
     results = proto.RepeatedField(
-        proto.MESSAGE, number=2, message="MutateExperimentArmResult",
+        proto.MESSAGE,
+        number=2,
+        message="MutateExperimentArmResult",
     )
 
 
@@ -160,9 +181,14 @@ class MutateExperimentArmResult(proto.Message):
             response_content_type is set to "MUTABLE_RESOURCE".
     """
 
-    resource_name = proto.Field(proto.STRING, number=1,)
+    resource_name = proto.Field(
+        proto.STRING,
+        number=1,
+    )
     experiment_arm = proto.Field(
-        proto.MESSAGE, number=2, message=gagr_experiment_arm.ExperimentArm,
+        proto.MESSAGE,
+        number=2,
+        message=gagr_experiment_arm.ExperimentArm,
     )
 
 

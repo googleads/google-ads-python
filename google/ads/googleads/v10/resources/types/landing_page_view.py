@@ -19,7 +19,9 @@ import proto  # type: ignore
 __protobuf__ = proto.module(
     package="google.ads.googleads.v10.resources",
     marshal="google.ads.googleads.v10",
-    manifest={"LandingPageView",},
+    manifest={
+        "LandingPageView",
+    },
 )
 
 
@@ -40,8 +42,15 @@ class LandingPageView(proto.Message):
             This field is a member of `oneof`_ ``_unexpanded_final_url``.
     """
 
-    resource_name = proto.Field(proto.STRING, number=1,)
-    unexpanded_final_url = proto.Field(proto.STRING, number=3, optional=True,)
+    resource_name = proto.Field(
+        proto.STRING,
+        number=1,
+    )
+    unexpanded_final_url = proto.Field(
+        proto.STRING,
+        number=3,
+        optional=True,
+    )
 
 
 __all__ = tuple(sorted(__protobuf__.manifest))

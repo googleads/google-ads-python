@@ -59,8 +59,8 @@ class ListCampaignDraftAsyncErrorsPager:
                 sent along with the request as metadata.
         """
         self._method = method
-        self._request = campaign_draft_service.ListCampaignDraftAsyncErrorsRequest(
-            request
+        self._request = (
+            campaign_draft_service.ListCampaignDraftAsyncErrorsRequest(request)
         )
         self._response = response
         self._metadata = metadata

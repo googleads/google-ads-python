@@ -24,7 +24,9 @@ from google.ads.googleads.v10.enums.types import seasonality_event_status
 __protobuf__ = proto.module(
     package="google.ads.googleads.v10.resources",
     marshal="google.ads.googleads.v10",
-    manifest={"BiddingDataExclusion",},
+    manifest={
+        "BiddingDataExclusion",
+    },
 )
 
 
@@ -84,8 +86,14 @@ class BiddingDataExclusion(proto.Message):
             and campaign_ids is not supported.
     """
 
-    resource_name = proto.Field(proto.STRING, number=1,)
-    data_exclusion_id = proto.Field(proto.INT64, number=2,)
+    resource_name = proto.Field(
+        proto.STRING,
+        number=1,
+    )
+    data_exclusion_id = proto.Field(
+        proto.INT64,
+        number=2,
+    )
     scope = proto.Field(
         proto.ENUM,
         number=3,
@@ -96,14 +104,31 @@ class BiddingDataExclusion(proto.Message):
         number=4,
         enum=seasonality_event_status.SeasonalityEventStatusEnum.SeasonalityEventStatus,
     )
-    start_date_time = proto.Field(proto.STRING, number=5,)
-    end_date_time = proto.Field(proto.STRING, number=6,)
-    name = proto.Field(proto.STRING, number=7,)
-    description = proto.Field(proto.STRING, number=8,)
-    devices = proto.RepeatedField(
-        proto.ENUM, number=9, enum=device.DeviceEnum.Device,
+    start_date_time = proto.Field(
+        proto.STRING,
+        number=5,
     )
-    campaigns = proto.RepeatedField(proto.STRING, number=10,)
+    end_date_time = proto.Field(
+        proto.STRING,
+        number=6,
+    )
+    name = proto.Field(
+        proto.STRING,
+        number=7,
+    )
+    description = proto.Field(
+        proto.STRING,
+        number=8,
+    )
+    devices = proto.RepeatedField(
+        proto.ENUM,
+        number=9,
+        enum=device.DeviceEnum.Device,
+    )
+    campaigns = proto.RepeatedField(
+        proto.STRING,
+        number=10,
+    )
     advertising_channel_types = proto.RepeatedField(
         proto.ENUM,
         number=11,

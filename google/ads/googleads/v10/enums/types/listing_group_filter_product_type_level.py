@@ -19,13 +19,14 @@ import proto  # type: ignore
 __protobuf__ = proto.module(
     package="google.ads.googleads.v10.enums",
     marshal="google.ads.googleads.v10",
-    manifest={"ListingGroupFilterProductTypeLevelEnum",},
+    manifest={
+        "ListingGroupFilterProductTypeLevelEnum",
+    },
 )
 
 
 class ListingGroupFilterProductTypeLevelEnum(proto.Message):
-    r"""Level of the type of a product offer.
-    """
+    r"""Level of the type of a product offer."""
 
     class ListingGroupFilterProductTypeLevel(proto.Enum):
         r"""Enum describing the level of the type of a product offer."""

@@ -19,13 +19,14 @@ import proto  # type: ignore
 __protobuf__ = proto.module(
     package="google.ads.googleads.v10.enums",
     marshal="google.ads.googleads.v10",
-    manifest={"ConversionOriginEnum",},
+    manifest={
+        "ConversionOriginEnum",
+    },
 )
 
 
 class ConversionOriginEnum(proto.Message):
-    r"""Container for enum describing possible conversion origins.
-    """
+    r"""Container for enum describing possible conversion origins."""
 
     class ConversionOrigin(proto.Enum):
         r"""The possible places where a conversion can occur."""

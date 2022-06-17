@@ -26,7 +26,11 @@ from google.ads.googleads.v10.enums.types import feed_status
 __protobuf__ = proto.module(
     package="google.ads.googleads.v10.resources",
     marshal="google.ads.googleads.v10",
-    manifest={"Feed", "FeedAttribute", "FeedAttributeOperation",},
+    manifest={
+        "Feed",
+        "FeedAttribute",
+        "FeedAttributeOperation",
+    },
 )
 
 
@@ -145,12 +149,20 @@ class Feed(proto.Message):
                     This field is a member of `oneof`_ ``_http_authorization_header``.
             """
 
-            http_method = proto.Field(proto.STRING, number=4, optional=True,)
+            http_method = proto.Field(
+                proto.STRING,
+                number=4,
+                optional=True,
+            )
             http_request_url = proto.Field(
-                proto.STRING, number=5, optional=True,
+                proto.STRING,
+                number=5,
+                optional=True,
             )
             http_authorization_header = proto.Field(
-                proto.STRING, number=6, optional=True,
+                proto.STRING,
+                number=6,
+                optional=True,
             )
 
         oauth_info = proto.Field(
@@ -158,13 +170,28 @@ class Feed(proto.Message):
             number=1,
             message="Feed.PlacesLocationFeedData.OAuthInfo",
         )
-        email_address = proto.Field(proto.STRING, number=7, optional=True,)
-        business_account_id = proto.Field(proto.STRING, number=8,)
-        business_name_filter = proto.Field(
-            proto.STRING, number=9, optional=True,
+        email_address = proto.Field(
+            proto.STRING,
+            number=7,
+            optional=True,
         )
-        category_filters = proto.RepeatedField(proto.STRING, number=11,)
-        label_filters = proto.RepeatedField(proto.STRING, number=12,)
+        business_account_id = proto.Field(
+            proto.STRING,
+            number=8,
+        )
+        business_name_filter = proto.Field(
+            proto.STRING,
+            number=9,
+            optional=True,
+        )
+        category_filters = proto.RepeatedField(
+            proto.STRING,
+            number=11,
+        )
+        label_filters = proto.RepeatedField(
+            proto.STRING,
+            number=12,
+        )
 
     class AffiliateLocationFeedData(proto.Message):
         r"""Data used to configure an affiliate location feed populated
@@ -179,27 +206,49 @@ class Feed(proto.Message):
                 advertiser.
         """
 
-        chain_ids = proto.RepeatedField(proto.INT64, number=3,)
+        chain_ids = proto.RepeatedField(
+            proto.INT64,
+            number=3,
+        )
         relationship_type = proto.Field(
             proto.ENUM,
             number=2,
             enum=affiliate_location_feed_relationship_type.AffiliateLocationFeedRelationshipTypeEnum.AffiliateLocationFeedRelationshipType,
         )
 
-    resource_name = proto.Field(proto.STRING, number=1,)
-    id = proto.Field(proto.INT64, number=11, optional=True,)
-    name = proto.Field(proto.STRING, number=12, optional=True,)
+    resource_name = proto.Field(
+        proto.STRING,
+        number=1,
+    )
+    id = proto.Field(
+        proto.INT64,
+        number=11,
+        optional=True,
+    )
+    name = proto.Field(
+        proto.STRING,
+        number=12,
+        optional=True,
+    )
     attributes = proto.RepeatedField(
-        proto.MESSAGE, number=4, message="FeedAttribute",
+        proto.MESSAGE,
+        number=4,
+        message="FeedAttribute",
     )
     attribute_operations = proto.RepeatedField(
-        proto.MESSAGE, number=9, message="FeedAttributeOperation",
+        proto.MESSAGE,
+        number=9,
+        message="FeedAttributeOperation",
     )
     origin = proto.Field(
-        proto.ENUM, number=5, enum=feed_origin.FeedOriginEnum.FeedOrigin,
+        proto.ENUM,
+        number=5,
+        enum=feed_origin.FeedOriginEnum.FeedOrigin,
     )
     status = proto.Field(
-        proto.ENUM, number=8, enum=feed_status.FeedStatusEnum.FeedStatus,
+        proto.ENUM,
+        number=8,
+        enum=feed_status.FeedStatusEnum.FeedStatus,
     )
     places_location_feed_data = proto.Field(
         proto.MESSAGE,
@@ -243,14 +292,26 @@ class FeedAttribute(proto.Message):
             This field is a member of `oneof`_ ``_is_part_of_key``.
     """
 
-    id = proto.Field(proto.INT64, number=5, optional=True,)
-    name = proto.Field(proto.STRING, number=6, optional=True,)
+    id = proto.Field(
+        proto.INT64,
+        number=5,
+        optional=True,
+    )
+    name = proto.Field(
+        proto.STRING,
+        number=6,
+        optional=True,
+    )
     type_ = proto.Field(
         proto.ENUM,
         number=3,
         enum=feed_attribute_type.FeedAttributeTypeEnum.FeedAttributeType,
     )
-    is_part_of_key = proto.Field(proto.BOOL, number=7, optional=True,)
+    is_part_of_key = proto.Field(
+        proto.BOOL,
+        number=7,
+        optional=True,
+    )
 
 
 class FeedAttributeOperation(proto.Message):
@@ -272,8 +333,16 @@ class FeedAttributeOperation(proto.Message):
         UNKNOWN = 1
         ADD = 2
 
-    operator = proto.Field(proto.ENUM, number=1, enum=Operator,)
-    value = proto.Field(proto.MESSAGE, number=2, message="FeedAttribute",)
+    operator = proto.Field(
+        proto.ENUM,
+        number=1,
+        enum=Operator,
+    )
+    value = proto.Field(
+        proto.MESSAGE,
+        number=2,
+        message="FeedAttribute",
+    )
 
 
 __all__ = tuple(sorted(__protobuf__.manifest))

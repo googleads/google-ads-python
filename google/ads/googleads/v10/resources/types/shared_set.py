@@ -22,7 +22,9 @@ from google.ads.googleads.v10.enums.types import shared_set_type
 __protobuf__ = proto.module(
     package="google.ads.googleads.v10.resources",
     marshal="google.ads.googleads.v10",
-    manifest={"SharedSet",},
+    manifest={
+        "SharedSet",
+    },
 )
 
 
@@ -68,21 +70,40 @@ class SharedSet(proto.Message):
             This field is a member of `oneof`_ ``_reference_count``.
     """
 
-    resource_name = proto.Field(proto.STRING, number=1,)
-    id = proto.Field(proto.INT64, number=8, optional=True,)
+    resource_name = proto.Field(
+        proto.STRING,
+        number=1,
+    )
+    id = proto.Field(
+        proto.INT64,
+        number=8,
+        optional=True,
+    )
     type_ = proto.Field(
         proto.ENUM,
         number=3,
         enum=shared_set_type.SharedSetTypeEnum.SharedSetType,
     )
-    name = proto.Field(proto.STRING, number=9, optional=True,)
+    name = proto.Field(
+        proto.STRING,
+        number=9,
+        optional=True,
+    )
     status = proto.Field(
         proto.ENUM,
         number=5,
         enum=shared_set_status.SharedSetStatusEnum.SharedSetStatus,
     )
-    member_count = proto.Field(proto.INT64, number=10, optional=True,)
-    reference_count = proto.Field(proto.INT64, number=11, optional=True,)
+    member_count = proto.Field(
+        proto.INT64,
+        number=10,
+        optional=True,
+    )
+    reference_count = proto.Field(
+        proto.INT64,
+        number=11,
+        optional=True,
+    )
 
 
 __all__ = tuple(sorted(__protobuf__.manifest))

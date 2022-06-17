@@ -21,7 +21,9 @@ from google.ads.googleads.v10.enums.types import keyword_match_type
 __protobuf__ = proto.module(
     package="google.ads.googleads.v10.resources",
     marshal="google.ads.googleads.v10",
-    manifest={"KeywordPlanCampaignKeyword",},
+    manifest={
+        "KeywordPlanCampaignKeyword",
+    },
 )
 
 
@@ -60,16 +62,35 @@ class KeywordPlanCampaignKeyword(proto.Message):
             This field is a member of `oneof`_ ``_negative``.
     """
 
-    resource_name = proto.Field(proto.STRING, number=1,)
-    keyword_plan_campaign = proto.Field(proto.STRING, number=8, optional=True,)
-    id = proto.Field(proto.INT64, number=9, optional=True,)
-    text = proto.Field(proto.STRING, number=10, optional=True,)
+    resource_name = proto.Field(
+        proto.STRING,
+        number=1,
+    )
+    keyword_plan_campaign = proto.Field(
+        proto.STRING,
+        number=8,
+        optional=True,
+    )
+    id = proto.Field(
+        proto.INT64,
+        number=9,
+        optional=True,
+    )
+    text = proto.Field(
+        proto.STRING,
+        number=10,
+        optional=True,
+    )
     match_type = proto.Field(
         proto.ENUM,
         number=5,
         enum=keyword_match_type.KeywordMatchTypeEnum.KeywordMatchType,
     )
-    negative = proto.Field(proto.BOOL, number=11, optional=True,)
+    negative = proto.Field(
+        proto.BOOL,
+        number=11,
+        optional=True,
+    )
 
 
 __all__ = tuple(sorted(__protobuf__.manifest))

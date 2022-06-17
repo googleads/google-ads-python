@@ -19,13 +19,14 @@ import proto  # type: ignore
 __protobuf__ = proto.module(
     package="google.ads.googleads.v10.enums",
     marshal="google.ads.googleads.v10",
-    manifest={"ReachPlanNetworkEnum",},
+    manifest={
+        "ReachPlanNetworkEnum",
+    },
 )
 
 
 class ReachPlanNetworkEnum(proto.Message):
-    r"""Container for enum describing plannable networks.
-    """
+    r"""Container for enum describing plannable networks."""
 
     class ReachPlanNetwork(proto.Enum):
         r"""Possible plannable network values."""

@@ -56,11 +56,19 @@ class MutateCustomConversionGoalsRequest(proto.Message):
             resource name should be returned post mutation.
     """
 
-    customer_id = proto.Field(proto.STRING, number=1,)
-    operations = proto.RepeatedField(
-        proto.MESSAGE, number=2, message="CustomConversionGoalOperation",
+    customer_id = proto.Field(
+        proto.STRING,
+        number=1,
     )
-    validate_only = proto.Field(proto.BOOL, number=3,)
+    operations = proto.RepeatedField(
+        proto.MESSAGE,
+        number=2,
+        message="CustomConversionGoalOperation",
+    )
+    validate_only = proto.Field(
+        proto.BOOL,
+        number=3,
+    )
     response_content_type = proto.Field(
         proto.ENUM,
         number=4,
@@ -103,7 +111,9 @@ class CustomConversionGoalOperation(proto.Message):
     """
 
     update_mask = proto.Field(
-        proto.MESSAGE, number=4, message=field_mask_pb2.FieldMask,
+        proto.MESSAGE,
+        number=4,
+        message=field_mask_pb2.FieldMask,
     )
     create = proto.Field(
         proto.MESSAGE,
@@ -117,7 +127,11 @@ class CustomConversionGoalOperation(proto.Message):
         oneof="operation",
         message=gagr_custom_conversion_goal.CustomConversionGoal,
     )
-    remove = proto.Field(proto.STRING, number=3, oneof="operation",)
+    remove = proto.Field(
+        proto.STRING,
+        number=3,
+        oneof="operation",
+    )
 
 
 class MutateCustomConversionGoalsResponse(proto.Message):
@@ -129,7 +143,9 @@ class MutateCustomConversionGoalsResponse(proto.Message):
     """
 
     results = proto.RepeatedField(
-        proto.MESSAGE, number=1, message="MutateCustomConversionGoalResult",
+        proto.MESSAGE,
+        number=1,
+        message="MutateCustomConversionGoalResult",
     )
 
 
@@ -145,7 +161,10 @@ class MutateCustomConversionGoalResult(proto.Message):
             response_content_type is set to "MUTABLE_RESOURCE".
     """
 
-    resource_name = proto.Field(proto.STRING, number=1,)
+    resource_name = proto.Field(
+        proto.STRING,
+        number=1,
+    )
     custom_conversion_goal = proto.Field(
         proto.MESSAGE,
         number=2,

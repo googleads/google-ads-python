@@ -19,13 +19,14 @@ import proto  # type: ignore
 __protobuf__ = proto.module(
     package="google.ads.googleads.v10.enums",
     marshal="google.ads.googleads.v10",
-    manifest={"AccessRoleEnum",},
+    manifest={
+        "AccessRoleEnum",
+    },
 )
 
 
 class AccessRoleEnum(proto.Message):
-    r"""Container for enum describing possible access role for user.
-    """
+    r"""Container for enum describing possible access role for user."""
 
     class AccessRole(proto.Enum):
         r"""Possible access role of a user."""

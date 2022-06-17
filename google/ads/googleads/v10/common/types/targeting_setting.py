@@ -51,10 +51,14 @@ class TargetingSetting(proto.Message):
     """
 
     target_restrictions = proto.RepeatedField(
-        proto.MESSAGE, number=1, message="TargetRestriction",
+        proto.MESSAGE,
+        number=1,
+        message="TargetRestriction",
     )
     target_restriction_operations = proto.RepeatedField(
-        proto.MESSAGE, number=2, message="TargetRestrictionOperation",
+        proto.MESSAGE,
+        number=2,
+        message="TargetRestrictionOperation",
     )
 
 
@@ -83,7 +87,11 @@ class TargetRestriction(proto.Message):
         number=1,
         enum=gage_targeting_dimension.TargetingDimensionEnum.TargetingDimension,
     )
-    bid_only = proto.Field(proto.BOOL, number=3, optional=True,)
+    bid_only = proto.Field(
+        proto.BOOL,
+        number=3,
+        optional=True,
+    )
 
 
 class TargetRestrictionOperation(proto.Message):
@@ -105,8 +113,16 @@ class TargetRestrictionOperation(proto.Message):
         ADD = 2
         REMOVE = 3
 
-    operator = proto.Field(proto.ENUM, number=1, enum=Operator,)
-    value = proto.Field(proto.MESSAGE, number=2, message="TargetRestriction",)
+    operator = proto.Field(
+        proto.ENUM,
+        number=1,
+        enum=Operator,
+    )
+    value = proto.Field(
+        proto.MESSAGE,
+        number=2,
+        message="TargetRestriction",
+    )
 
 
 __all__ = tuple(sorted(__protobuf__.manifest))

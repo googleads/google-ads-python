@@ -22,7 +22,9 @@ from google.ads.googleads.v10.enums.types import google_ads_field_data_type
 __protobuf__ = proto.module(
     package="google.ads.googleads.v10.resources",
     marshal="google.ads.googleads.v10",
-    manifest={"GoogleAdsField",},
+    manifest={
+        "GoogleAdsField",
+    },
 )
 
 
@@ -102,28 +104,70 @@ class GoogleAdsField(proto.Message):
             This field is a member of `oneof`_ ``_is_repeated``.
     """
 
-    resource_name = proto.Field(proto.STRING, number=1,)
-    name = proto.Field(proto.STRING, number=21, optional=True,)
+    resource_name = proto.Field(
+        proto.STRING,
+        number=1,
+    )
+    name = proto.Field(
+        proto.STRING,
+        number=21,
+        optional=True,
+    )
     category = proto.Field(
         proto.ENUM,
         number=3,
         enum=google_ads_field_category.GoogleAdsFieldCategoryEnum.GoogleAdsFieldCategory,
     )
-    selectable = proto.Field(proto.BOOL, number=22, optional=True,)
-    filterable = proto.Field(proto.BOOL, number=23, optional=True,)
-    sortable = proto.Field(proto.BOOL, number=24, optional=True,)
-    selectable_with = proto.RepeatedField(proto.STRING, number=25,)
-    attribute_resources = proto.RepeatedField(proto.STRING, number=26,)
-    metrics = proto.RepeatedField(proto.STRING, number=27,)
-    segments = proto.RepeatedField(proto.STRING, number=28,)
-    enum_values = proto.RepeatedField(proto.STRING, number=29,)
+    selectable = proto.Field(
+        proto.BOOL,
+        number=22,
+        optional=True,
+    )
+    filterable = proto.Field(
+        proto.BOOL,
+        number=23,
+        optional=True,
+    )
+    sortable = proto.Field(
+        proto.BOOL,
+        number=24,
+        optional=True,
+    )
+    selectable_with = proto.RepeatedField(
+        proto.STRING,
+        number=25,
+    )
+    attribute_resources = proto.RepeatedField(
+        proto.STRING,
+        number=26,
+    )
+    metrics = proto.RepeatedField(
+        proto.STRING,
+        number=27,
+    )
+    segments = proto.RepeatedField(
+        proto.STRING,
+        number=28,
+    )
+    enum_values = proto.RepeatedField(
+        proto.STRING,
+        number=29,
+    )
     data_type = proto.Field(
         proto.ENUM,
         number=12,
         enum=google_ads_field_data_type.GoogleAdsFieldDataTypeEnum.GoogleAdsFieldDataType,
     )
-    type_url = proto.Field(proto.STRING, number=30, optional=True,)
-    is_repeated = proto.Field(proto.BOOL, number=31, optional=True,)
+    type_url = proto.Field(
+        proto.STRING,
+        number=30,
+        optional=True,
+    )
+    is_repeated = proto.Field(
+        proto.BOOL,
+        number=31,
+        optional=True,
+    )
 
 
 __all__ = tuple(sorted(__protobuf__.manifest))

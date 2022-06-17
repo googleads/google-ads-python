@@ -80,10 +80,16 @@ class AudienceDimension(proto.Message):
     """
 
     age = proto.Field(
-        proto.MESSAGE, number=1, oneof="dimension", message="AgeDimension",
+        proto.MESSAGE,
+        number=1,
+        oneof="dimension",
+        message="AgeDimension",
     )
     gender = proto.Field(
-        proto.MESSAGE, number=2, oneof="dimension", message="GenderDimension",
+        proto.MESSAGE,
+        number=2,
+        oneof="dimension",
+        message="GenderDimension",
     )
     household_income = proto.Field(
         proto.MESSAGE,
@@ -115,7 +121,9 @@ class AudienceExclusionDimension(proto.Message):
     """
 
     exclusions = proto.RepeatedField(
-        proto.MESSAGE, number=1, message="ExclusionSegment",
+        proto.MESSAGE,
+        number=1,
+        message="ExclusionSegment",
     )
 
 
@@ -132,7 +140,10 @@ class ExclusionSegment(proto.Message):
     """
 
     user_list = proto.Field(
-        proto.MESSAGE, number=1, oneof="segment", message="UserListSegment",
+        proto.MESSAGE,
+        number=1,
+        oneof="segment",
+        message="UserListSegment",
     )
 
 
@@ -150,9 +161,15 @@ class AgeDimension(proto.Message):
     """
 
     age_ranges = proto.RepeatedField(
-        proto.MESSAGE, number=1, message="AgeSegment",
+        proto.MESSAGE,
+        number=1,
+        message="AgeSegment",
     )
-    include_undetermined = proto.Field(proto.BOOL, number=2, optional=True,)
+    include_undetermined = proto.Field(
+        proto.BOOL,
+        number=2,
+        optional=True,
+    )
 
 
 class AgeSegment(proto.Message):
@@ -173,8 +190,16 @@ class AgeSegment(proto.Message):
             This field is a member of `oneof`_ ``_max_age``.
     """
 
-    min_age = proto.Field(proto.INT32, number=1, optional=True,)
-    max_age = proto.Field(proto.INT32, number=2, optional=True,)
+    min_age = proto.Field(
+        proto.INT32,
+        number=1,
+        optional=True,
+    )
+    max_age = proto.Field(
+        proto.INT32,
+        number=2,
+        optional=True,
+    )
 
 
 class GenderDimension(proto.Message):
@@ -190,9 +215,15 @@ class GenderDimension(proto.Message):
     """
 
     genders = proto.RepeatedField(
-        proto.ENUM, number=1, enum=gender_type.GenderTypeEnum.GenderType,
+        proto.ENUM,
+        number=1,
+        enum=gender_type.GenderTypeEnum.GenderType,
     )
-    include_undetermined = proto.Field(proto.BOOL, number=2, optional=True,)
+    include_undetermined = proto.Field(
+        proto.BOOL,
+        number=2,
+        optional=True,
+    )
 
 
 class HouseholdIncomeDimension(proto.Message):
@@ -214,7 +245,11 @@ class HouseholdIncomeDimension(proto.Message):
         number=1,
         enum=income_range_type.IncomeRangeTypeEnum.IncomeRangeType,
     )
-    include_undetermined = proto.Field(proto.BOOL, number=2, optional=True,)
+    include_undetermined = proto.Field(
+        proto.BOOL,
+        number=2,
+        optional=True,
+    )
 
 
 class ParentalStatusDimension(proto.Message):
@@ -236,7 +271,11 @@ class ParentalStatusDimension(proto.Message):
         number=1,
         enum=parental_status_type.ParentalStatusTypeEnum.ParentalStatusType,
     )
-    include_undetermined = proto.Field(proto.BOOL, number=2, optional=True,)
+    include_undetermined = proto.Field(
+        proto.BOOL,
+        number=2,
+        optional=True,
+    )
 
 
 class AudienceSegmentDimension(proto.Message):
@@ -250,7 +289,9 @@ class AudienceSegmentDimension(proto.Message):
     """
 
     segments = proto.RepeatedField(
-        proto.MESSAGE, number=1, message="AudienceSegment",
+        proto.MESSAGE,
+        number=1,
+        message="AudienceSegment",
     )
 
 
@@ -288,13 +329,22 @@ class AudienceSegment(proto.Message):
     """
 
     user_list = proto.Field(
-        proto.MESSAGE, number=1, oneof="segment", message="UserListSegment",
+        proto.MESSAGE,
+        number=1,
+        oneof="segment",
+        message="UserListSegment",
     )
     user_interest = proto.Field(
-        proto.MESSAGE, number=2, oneof="segment", message="UserInterestSegment",
+        proto.MESSAGE,
+        number=2,
+        oneof="segment",
+        message="UserInterestSegment",
     )
     life_event = proto.Field(
-        proto.MESSAGE, number=3, oneof="segment", message="LifeEventSegment",
+        proto.MESSAGE,
+        number=3,
+        oneof="segment",
+        message="LifeEventSegment",
     )
     detailed_demographic = proto.Field(
         proto.MESSAGE,
@@ -320,7 +370,11 @@ class UserListSegment(proto.Message):
             This field is a member of `oneof`_ ``_user_list``.
     """
 
-    user_list = proto.Field(proto.STRING, number=1, optional=True,)
+    user_list = proto.Field(
+        proto.STRING,
+        number=1,
+        optional=True,
+    )
 
 
 class UserInterestSegment(proto.Message):
@@ -333,7 +387,11 @@ class UserInterestSegment(proto.Message):
             This field is a member of `oneof`_ ``_user_interest_category``.
     """
 
-    user_interest_category = proto.Field(proto.STRING, number=1, optional=True,)
+    user_interest_category = proto.Field(
+        proto.STRING,
+        number=1,
+        optional=True,
+    )
 
 
 class LifeEventSegment(proto.Message):
@@ -346,7 +404,11 @@ class LifeEventSegment(proto.Message):
             This field is a member of `oneof`_ ``_life_event``.
     """
 
-    life_event = proto.Field(proto.STRING, number=1, optional=True,)
+    life_event = proto.Field(
+        proto.STRING,
+        number=1,
+        optional=True,
+    )
 
 
 class DetailedDemographicSegment(proto.Message):
@@ -359,7 +421,11 @@ class DetailedDemographicSegment(proto.Message):
             This field is a member of `oneof`_ ``_detailed_demographic``.
     """
 
-    detailed_demographic = proto.Field(proto.STRING, number=1, optional=True,)
+    detailed_demographic = proto.Field(
+        proto.STRING,
+        number=1,
+        optional=True,
+    )
 
 
 class CustomAudienceSegment(proto.Message):
@@ -372,7 +438,11 @@ class CustomAudienceSegment(proto.Message):
             This field is a member of `oneof`_ ``_custom_audience``.
     """
 
-    custom_audience = proto.Field(proto.STRING, number=1, optional=True,)
+    custom_audience = proto.Field(
+        proto.STRING,
+        number=1,
+        optional=True,
+    )
 
 
 __all__ = tuple(sorted(__protobuf__.manifest))

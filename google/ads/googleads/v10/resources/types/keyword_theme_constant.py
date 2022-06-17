@@ -19,7 +19,9 @@ import proto  # type: ignore
 __protobuf__ = proto.module(
     package="google.ads.googleads.v10.resources",
     marshal="google.ads.googleads.v10",
-    manifest={"KeywordThemeConstant",},
+    manifest={
+        "KeywordThemeConstant",
+    },
 )
 
 
@@ -54,10 +56,25 @@ class KeywordThemeConstant(proto.Message):
             This field is a member of `oneof`_ ``_display_name``.
     """
 
-    resource_name = proto.Field(proto.STRING, number=1,)
-    country_code = proto.Field(proto.STRING, number=2, optional=True,)
-    language_code = proto.Field(proto.STRING, number=3, optional=True,)
-    display_name = proto.Field(proto.STRING, number=4, optional=True,)
+    resource_name = proto.Field(
+        proto.STRING,
+        number=1,
+    )
+    country_code = proto.Field(
+        proto.STRING,
+        number=2,
+        optional=True,
+    )
+    language_code = proto.Field(
+        proto.STRING,
+        number=3,
+        optional=True,
+    )
+    display_name = proto.Field(
+        proto.STRING,
+        number=4,
+        optional=True,
+    )
 
 
 __all__ = tuple(sorted(__protobuf__.manifest))

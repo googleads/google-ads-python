@@ -19,13 +19,14 @@ import proto  # type: ignore
 __protobuf__ = proto.module(
     package="google.ads.googleads.v10.enums",
     marshal="google.ads.googleads.v10",
-    manifest={"CustomAudienceTypeEnum",},
+    manifest={
+        "CustomAudienceTypeEnum",
+    },
 )
 
 
 class CustomAudienceTypeEnum(proto.Message):
-    r"""The types of custom audience.
-    """
+    r"""The types of custom audience."""
 
     class CustomAudienceType(proto.Enum):
         r"""Enum containing possible custom audience types."""

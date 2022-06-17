@@ -19,13 +19,14 @@ import proto  # type: ignore
 __protobuf__ = proto.module(
     package="google.ads.googleads.v10.enums",
     marshal="google.ads.googleads.v10",
-    manifest={"ExperimentTypeEnum",},
+    manifest={
+        "ExperimentTypeEnum",
+    },
 )
 
 
 class ExperimentTypeEnum(proto.Message):
-    r"""Container for enum describing the type of experiment.
-    """
+    r"""Container for enum describing the type of experiment."""
 
     class ExperimentType(proto.Enum):
         r"""The type of the experiment."""

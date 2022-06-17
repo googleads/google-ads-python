@@ -21,7 +21,9 @@ from google.ads.googleads.v10.enums.types import merchant_center_link_status
 __protobuf__ = proto.module(
     package="google.ads.googleads.v10.resources",
     marshal="google.ads.googleads.v10",
-    manifest={"MerchantCenterLink",},
+    manifest={
+        "MerchantCenterLink",
+    },
 )
 
 
@@ -49,10 +51,19 @@ class MerchantCenterLink(proto.Message):
             The status of the link.
     """
 
-    resource_name = proto.Field(proto.STRING, number=1,)
-    id = proto.Field(proto.INT64, number=6, optional=True,)
+    resource_name = proto.Field(
+        proto.STRING,
+        number=1,
+    )
+    id = proto.Field(
+        proto.INT64,
+        number=6,
+        optional=True,
+    )
     merchant_center_account_name = proto.Field(
-        proto.STRING, number=7, optional=True,
+        proto.STRING,
+        number=7,
+        optional=True,
     )
     status = proto.Field(
         proto.ENUM,

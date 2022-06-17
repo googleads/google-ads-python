@@ -19,13 +19,14 @@ import proto  # type: ignore
 __protobuf__ = proto.module(
     package="google.ads.googleads.v10.enums",
     marshal="google.ads.googleads.v10",
-    manifest={"SpendingLimitTypeEnum",},
+    manifest={
+        "SpendingLimitTypeEnum",
+    },
 )
 
 
 class SpendingLimitTypeEnum(proto.Message):
-    r"""Message describing spending limit types.
-    """
+    r"""Message describing spending limit types."""
 
     class SpendingLimitType(proto.Enum):
         r"""The possible spending limit types used by certain resources

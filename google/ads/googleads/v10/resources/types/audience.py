@@ -22,7 +22,9 @@ from google.ads.googleads.v10.enums.types import audience_status
 __protobuf__ = proto.module(
     package="google.ads.googleads.v10.resources",
     marshal="google.ads.googleads.v10",
-    manifest={"Audience",},
+    manifest={
+        "Audience",
+    },
 )
 
 
@@ -58,20 +60,36 @@ class Audience(proto.Message):
             composition.
     """
 
-    resource_name = proto.Field(proto.STRING, number=1,)
-    id = proto.Field(proto.INT64, number=2,)
+    resource_name = proto.Field(
+        proto.STRING,
+        number=1,
+    )
+    id = proto.Field(
+        proto.INT64,
+        number=2,
+    )
     status = proto.Field(
         proto.ENUM,
         number=3,
         enum=audience_status.AudienceStatusEnum.AudienceStatus,
     )
-    name = proto.Field(proto.STRING, number=4,)
-    description = proto.Field(proto.STRING, number=5,)
+    name = proto.Field(
+        proto.STRING,
+        number=4,
+    )
+    description = proto.Field(
+        proto.STRING,
+        number=5,
+    )
     dimensions = proto.RepeatedField(
-        proto.MESSAGE, number=6, message=audiences.AudienceDimension,
+        proto.MESSAGE,
+        number=6,
+        message=audiences.AudienceDimension,
     )
     exclusion_dimension = proto.Field(
-        proto.MESSAGE, number=7, message=audiences.AudienceExclusionDimension,
+        proto.MESSAGE,
+        number=7,
+        message=audiences.AudienceExclusionDimension,
     )
 
 

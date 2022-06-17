@@ -56,7 +56,11 @@ class AdTextAsset(proto.Message):
             The policy summary of this text asset.
     """
 
-    text = proto.Field(proto.STRING, number=4, optional=True,)
+    text = proto.Field(
+        proto.STRING,
+        number=4,
+        optional=True,
+    )
     pinned_field = proto.Field(
         proto.ENUM,
         number=2,
@@ -68,7 +72,9 @@ class AdTextAsset(proto.Message):
         enum=gage_asset_performance_label.AssetPerformanceLabelEnum.AssetPerformanceLabel,
     )
     policy_summary_info = proto.Field(
-        proto.MESSAGE, number=6, message=asset_policy.AdAssetPolicySummary,
+        proto.MESSAGE,
+        number=6,
+        message=asset_policy.AdAssetPolicySummary,
     )
 
 
@@ -82,7 +88,11 @@ class AdImageAsset(proto.Message):
             This field is a member of `oneof`_ ``_asset``.
     """
 
-    asset = proto.Field(proto.STRING, number=2, optional=True,)
+    asset = proto.Field(
+        proto.STRING,
+        number=2,
+        optional=True,
+    )
 
 
 class AdVideoAsset(proto.Message):
@@ -95,7 +105,11 @@ class AdVideoAsset(proto.Message):
             This field is a member of `oneof`_ ``_asset``.
     """
 
-    asset = proto.Field(proto.STRING, number=2, optional=True,)
+    asset = proto.Field(
+        proto.STRING,
+        number=2,
+        optional=True,
+    )
 
 
 class AdMediaBundleAsset(proto.Message):
@@ -108,7 +122,11 @@ class AdMediaBundleAsset(proto.Message):
             This field is a member of `oneof`_ ``_asset``.
     """
 
-    asset = proto.Field(proto.STRING, number=2, optional=True,)
+    asset = proto.Field(
+        proto.STRING,
+        number=2,
+        optional=True,
+    )
 
 
 class AdDiscoveryCarouselCardAsset(proto.Message):
@@ -122,7 +140,11 @@ class AdDiscoveryCarouselCardAsset(proto.Message):
             This field is a member of `oneof`_ ``_asset``.
     """
 
-    asset = proto.Field(proto.STRING, number=1, optional=True,)
+    asset = proto.Field(
+        proto.STRING,
+        number=1,
+        optional=True,
+    )
 
 
 __all__ = tuple(sorted(__protobuf__.manifest))

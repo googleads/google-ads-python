@@ -19,13 +19,14 @@ import proto  # type: ignore
 __protobuf__ = proto.module(
     package="google.ads.googleads.v10.enums",
     marshal="google.ads.googleads.v10",
-    manifest={"GeoTargetingTypeEnum",},
+    manifest={
+        "GeoTargetingTypeEnum",
+    },
 )
 
 
 class GeoTargetingTypeEnum(proto.Message):
-    r"""Container for enum describing possible geo targeting types.
-    """
+    r"""Container for enum describing possible geo targeting types."""
 
     class GeoTargetingType(proto.Enum):
         r"""The possible geo targeting types."""

@@ -19,13 +19,14 @@ import proto  # type: ignore
 __protobuf__ = proto.module(
     package="google.ads.googleads.v10.enums",
     marshal="google.ads.googleads.v10",
-    manifest={"SlotEnum",},
+    manifest={
+        "SlotEnum",
+    },
 )
 
 
 class SlotEnum(proto.Message):
-    r"""Container for enumeration of possible positions of the Ad.
-    """
+    r"""Container for enumeration of possible positions of the Ad."""
 
     class Slot(proto.Enum):
         r"""Enumerates possible positions of the Ad."""

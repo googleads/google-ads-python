@@ -85,13 +85,41 @@ class OfflineUserAddressInfo(proto.Message):
             This field is a member of `oneof`_ ``_hashed_street_address``.
     """
 
-    hashed_first_name = proto.Field(proto.STRING, number=7, optional=True,)
-    hashed_last_name = proto.Field(proto.STRING, number=8, optional=True,)
-    city = proto.Field(proto.STRING, number=9, optional=True,)
-    state = proto.Field(proto.STRING, number=10, optional=True,)
-    country_code = proto.Field(proto.STRING, number=11, optional=True,)
-    postal_code = proto.Field(proto.STRING, number=12, optional=True,)
-    hashed_street_address = proto.Field(proto.STRING, number=13, optional=True,)
+    hashed_first_name = proto.Field(
+        proto.STRING,
+        number=7,
+        optional=True,
+    )
+    hashed_last_name = proto.Field(
+        proto.STRING,
+        number=8,
+        optional=True,
+    )
+    city = proto.Field(
+        proto.STRING,
+        number=9,
+        optional=True,
+    )
+    state = proto.Field(
+        proto.STRING,
+        number=10,
+        optional=True,
+    )
+    country_code = proto.Field(
+        proto.STRING,
+        number=11,
+        optional=True,
+    )
+    postal_code = proto.Field(
+        proto.STRING,
+        number=12,
+        optional=True,
+    )
+    hashed_street_address = proto.Field(
+        proto.STRING,
+        number=13,
+        optional=True,
+    )
 
 
 class UserIdentifier(proto.Message):
@@ -150,13 +178,25 @@ class UserIdentifier(proto.Message):
         number=6,
         enum=gage_user_identifier_source.UserIdentifierSourceEnum.UserIdentifierSource,
     )
-    hashed_email = proto.Field(proto.STRING, number=7, oneof="identifier",)
-    hashed_phone_number = proto.Field(
-        proto.STRING, number=8, oneof="identifier",
+    hashed_email = proto.Field(
+        proto.STRING,
+        number=7,
+        oneof="identifier",
     )
-    mobile_id = proto.Field(proto.STRING, number=9, oneof="identifier",)
+    hashed_phone_number = proto.Field(
+        proto.STRING,
+        number=8,
+        oneof="identifier",
+    )
+    mobile_id = proto.Field(
+        proto.STRING,
+        number=9,
+        oneof="identifier",
+    )
     third_party_user_id = proto.Field(
-        proto.STRING, number=10, oneof="identifier",
+        proto.STRING,
+        number=10,
+        oneof="identifier",
     )
     address_info = proto.Field(
         proto.MESSAGE,
@@ -216,19 +256,45 @@ class TransactionAttribute(proto.Message):
             Item attributes of the transaction.
     """
 
-    transaction_date_time = proto.Field(proto.STRING, number=8, optional=True,)
+    transaction_date_time = proto.Field(
+        proto.STRING,
+        number=8,
+        optional=True,
+    )
     transaction_amount_micros = proto.Field(
-        proto.DOUBLE, number=9, optional=True,
+        proto.DOUBLE,
+        number=9,
+        optional=True,
     )
-    currency_code = proto.Field(proto.STRING, number=10, optional=True,)
-    conversion_action = proto.Field(proto.STRING, number=11, optional=True,)
-    order_id = proto.Field(proto.STRING, number=12, optional=True,)
+    currency_code = proto.Field(
+        proto.STRING,
+        number=10,
+        optional=True,
+    )
+    conversion_action = proto.Field(
+        proto.STRING,
+        number=11,
+        optional=True,
+    )
+    order_id = proto.Field(
+        proto.STRING,
+        number=12,
+        optional=True,
+    )
     store_attribute = proto.Field(
-        proto.MESSAGE, number=6, message="StoreAttribute",
+        proto.MESSAGE,
+        number=6,
+        message="StoreAttribute",
     )
-    custom_value = proto.Field(proto.STRING, number=13, optional=True,)
+    custom_value = proto.Field(
+        proto.STRING,
+        number=13,
+        optional=True,
+    )
     item_attribute = proto.Field(
-        proto.MESSAGE, number=14, message="ItemAttribute",
+        proto.MESSAGE,
+        number=14,
+        message="ItemAttribute",
     )
 
 
@@ -243,7 +309,11 @@ class StoreAttribute(proto.Message):
             This field is a member of `oneof`_ ``_store_code``.
     """
 
-    store_code = proto.Field(proto.STRING, number=2, optional=True,)
+    store_code = proto.Field(
+        proto.STRING,
+        number=2,
+        optional=True,
+    )
 
 
 class ItemAttribute(proto.Message):
@@ -272,11 +342,27 @@ class ItemAttribute(proto.Message):
             not set.
     """
 
-    item_id = proto.Field(proto.STRING, number=1,)
-    merchant_id = proto.Field(proto.INT64, number=2, optional=True,)
-    country_code = proto.Field(proto.STRING, number=3,)
-    language_code = proto.Field(proto.STRING, number=4,)
-    quantity = proto.Field(proto.INT64, number=5,)
+    item_id = proto.Field(
+        proto.STRING,
+        number=1,
+    )
+    merchant_id = proto.Field(
+        proto.INT64,
+        number=2,
+        optional=True,
+    )
+    country_code = proto.Field(
+        proto.STRING,
+        number=3,
+    )
+    language_code = proto.Field(
+        proto.STRING,
+        number=4,
+    )
+    quantity = proto.Field(
+        proto.INT64,
+        number=5,
+    )
 
 
 class UserData(proto.Message):
@@ -297,13 +383,19 @@ class UserData(proto.Message):
     """
 
     user_identifiers = proto.RepeatedField(
-        proto.MESSAGE, number=1, message="UserIdentifier",
+        proto.MESSAGE,
+        number=1,
+        message="UserIdentifier",
     )
     transaction_attribute = proto.Field(
-        proto.MESSAGE, number=2, message="TransactionAttribute",
+        proto.MESSAGE,
+        number=2,
+        message="TransactionAttribute",
     )
     user_attribute = proto.Field(
-        proto.MESSAGE, number=3, message="UserAttribute",
+        proto.MESSAGE,
+        number=3,
+        message="UserAttribute",
     )
 
 
@@ -350,14 +442,37 @@ class UserAttribute(proto.Message):
             This field is a member of `oneof`_ ``_shopping_loyalty``.
     """
 
-    lifetime_value_micros = proto.Field(proto.INT64, number=1, optional=True,)
-    lifetime_value_bucket = proto.Field(proto.INT32, number=2, optional=True,)
-    last_purchase_date_time = proto.Field(proto.STRING, number=3,)
-    average_purchase_count = proto.Field(proto.INT32, number=4,)
-    average_purchase_value_micros = proto.Field(proto.INT64, number=5,)
-    acquisition_date_time = proto.Field(proto.STRING, number=6,)
+    lifetime_value_micros = proto.Field(
+        proto.INT64,
+        number=1,
+        optional=True,
+    )
+    lifetime_value_bucket = proto.Field(
+        proto.INT32,
+        number=2,
+        optional=True,
+    )
+    last_purchase_date_time = proto.Field(
+        proto.STRING,
+        number=3,
+    )
+    average_purchase_count = proto.Field(
+        proto.INT32,
+        number=4,
+    )
+    average_purchase_value_micros = proto.Field(
+        proto.INT64,
+        number=5,
+    )
+    acquisition_date_time = proto.Field(
+        proto.STRING,
+        number=6,
+    )
     shopping_loyalty = proto.Field(
-        proto.MESSAGE, number=7, optional=True, message="ShoppingLoyalty",
+        proto.MESSAGE,
+        number=7,
+        optional=True,
+        message="ShoppingLoyalty",
     )
 
 
@@ -377,7 +492,11 @@ class ShoppingLoyalty(proto.Message):
             This field is a member of `oneof`_ ``_loyalty_tier``.
     """
 
-    loyalty_tier = proto.Field(proto.STRING, number=1, optional=True,)
+    loyalty_tier = proto.Field(
+        proto.STRING,
+        number=1,
+        optional=True,
+    )
 
 
 class CustomerMatchUserListMetadata(proto.Message):
@@ -391,7 +510,11 @@ class CustomerMatchUserListMetadata(proto.Message):
             This field is a member of `oneof`_ ``_user_list``.
     """
 
-    user_list = proto.Field(proto.STRING, number=2, optional=True,)
+    user_list = proto.Field(
+        proto.STRING,
+        number=2,
+        optional=True,
+    )
 
 
 class StoreSalesMetadata(proto.Message):
@@ -429,13 +552,25 @@ class StoreSalesMetadata(proto.Message):
             upload.
     """
 
-    loyalty_fraction = proto.Field(proto.DOUBLE, number=5, optional=True,)
-    transaction_upload_fraction = proto.Field(
-        proto.DOUBLE, number=6, optional=True,
+    loyalty_fraction = proto.Field(
+        proto.DOUBLE,
+        number=5,
+        optional=True,
     )
-    custom_key = proto.Field(proto.STRING, number=7, optional=True,)
+    transaction_upload_fraction = proto.Field(
+        proto.DOUBLE,
+        number=6,
+        optional=True,
+    )
+    custom_key = proto.Field(
+        proto.STRING,
+        number=7,
+        optional=True,
+    )
     third_party_metadata = proto.Field(
-        proto.MESSAGE, number=3, message="StoreSalesThirdPartyMetadata",
+        proto.MESSAGE,
+        number=3,
+        message="StoreSalesThirdPartyMetadata",
     )
 
 
@@ -490,17 +625,35 @@ class StoreSalesThirdPartyMetadata(proto.Message):
     """
 
     advertiser_upload_date_time = proto.Field(
-        proto.STRING, number=7, optional=True,
+        proto.STRING,
+        number=7,
+        optional=True,
     )
     valid_transaction_fraction = proto.Field(
-        proto.DOUBLE, number=8, optional=True,
+        proto.DOUBLE,
+        number=8,
+        optional=True,
     )
-    partner_match_fraction = proto.Field(proto.DOUBLE, number=9, optional=True,)
+    partner_match_fraction = proto.Field(
+        proto.DOUBLE,
+        number=9,
+        optional=True,
+    )
     partner_upload_fraction = proto.Field(
-        proto.DOUBLE, number=10, optional=True,
+        proto.DOUBLE,
+        number=10,
+        optional=True,
     )
-    bridge_map_version_id = proto.Field(proto.STRING, number=11, optional=True,)
-    partner_id = proto.Field(proto.INT64, number=12, optional=True,)
+    bridge_map_version_id = proto.Field(
+        proto.STRING,
+        number=11,
+        optional=True,
+    )
+    partner_id = proto.Field(
+        proto.INT64,
+        number=12,
+        optional=True,
+    )
 
 
 __all__ = tuple(sorted(__protobuf__.manifest))

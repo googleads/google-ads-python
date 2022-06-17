@@ -19,7 +19,9 @@ import proto  # type: ignore
 __protobuf__ = proto.module(
     package="google.ads.googleads.v10.resources",
     marshal="google.ads.googleads.v10",
-    manifest={"KeywordPlanAdGroup",},
+    manifest={
+        "KeywordPlanAdGroup",
+    },
 )
 
 
@@ -58,11 +60,30 @@ class KeywordPlanAdGroup(proto.Message):
             This field is a member of `oneof`_ ``_cpc_bid_micros``.
     """
 
-    resource_name = proto.Field(proto.STRING, number=1,)
-    keyword_plan_campaign = proto.Field(proto.STRING, number=6, optional=True,)
-    id = proto.Field(proto.INT64, number=7, optional=True,)
-    name = proto.Field(proto.STRING, number=8, optional=True,)
-    cpc_bid_micros = proto.Field(proto.INT64, number=9, optional=True,)
+    resource_name = proto.Field(
+        proto.STRING,
+        number=1,
+    )
+    keyword_plan_campaign = proto.Field(
+        proto.STRING,
+        number=6,
+        optional=True,
+    )
+    id = proto.Field(
+        proto.INT64,
+        number=7,
+        optional=True,
+    )
+    name = proto.Field(
+        proto.STRING,
+        number=8,
+        optional=True,
+    )
+    cpc_bid_micros = proto.Field(
+        proto.INT64,
+        number=9,
+        optional=True,
+    )
 
 
 __all__ = tuple(sorted(__protobuf__.manifest))

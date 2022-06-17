@@ -19,13 +19,14 @@ import proto  # type: ignore
 __protobuf__ = proto.module(
     package="google.ads.googleads.v10.errors",
     marshal="google.ads.googleads.v10",
-    manifest={"ImageErrorEnum",},
+    manifest={
+        "ImageErrorEnum",
+    },
 )
 
 
 class ImageErrorEnum(proto.Message):
-    r"""Container for enum describing possible image errors.
-    """
+    r"""Container for enum describing possible image errors."""
 
     class ImageError(proto.Enum):
         r"""Enum describing possible image errors."""

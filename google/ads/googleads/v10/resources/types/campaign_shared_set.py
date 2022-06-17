@@ -21,7 +21,9 @@ from google.ads.googleads.v10.enums.types import campaign_shared_set_status
 __protobuf__ = proto.module(
     package="google.ads.googleads.v10.resources",
     marshal="google.ads.googleads.v10",
-    manifest={"CampaignSharedSet",},
+    manifest={
+        "CampaignSharedSet",
+    },
 )
 
 
@@ -57,9 +59,20 @@ class CampaignSharedSet(proto.Message):
             shared set. Read only.
     """
 
-    resource_name = proto.Field(proto.STRING, number=1,)
-    campaign = proto.Field(proto.STRING, number=5, optional=True,)
-    shared_set = proto.Field(proto.STRING, number=6, optional=True,)
+    resource_name = proto.Field(
+        proto.STRING,
+        number=1,
+    )
+    campaign = proto.Field(
+        proto.STRING,
+        number=5,
+        optional=True,
+    )
+    shared_set = proto.Field(
+        proto.STRING,
+        number=6,
+        optional=True,
+    )
     status = proto.Field(
         proto.ENUM,
         number=2,

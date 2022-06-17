@@ -19,13 +19,14 @@ import proto  # type: ignore
 __protobuf__ = proto.module(
     package="google.ads.googleads.v10.enums",
     marshal="google.ads.googleads.v10",
-    manifest={"AppPaymentModelTypeEnum",},
+    manifest={
+        "AppPaymentModelTypeEnum",
+    },
 )
 
 
 class AppPaymentModelTypeEnum(proto.Message):
-    r"""Represents a criterion for targeting paid apps.
-    """
+    r"""Represents a criterion for targeting paid apps."""
 
     class AppPaymentModelType(proto.Enum):
         r"""Enum describing possible app payment models."""

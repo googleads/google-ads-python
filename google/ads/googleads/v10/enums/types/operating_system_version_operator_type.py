@@ -19,13 +19,14 @@ import proto  # type: ignore
 __protobuf__ = proto.module(
     package="google.ads.googleads.v10.enums",
     marshal="google.ads.googleads.v10",
-    manifest={"OperatingSystemVersionOperatorTypeEnum",},
+    manifest={
+        "OperatingSystemVersionOperatorTypeEnum",
+    },
 )
 
 
 class OperatingSystemVersionOperatorTypeEnum(proto.Message):
-    r"""Container for enum describing the type of OS operators.
-    """
+    r"""Container for enum describing the type of OS operators."""
 
     class OperatingSystemVersionOperatorType(proto.Enum):
         r"""The type of operating system version."""

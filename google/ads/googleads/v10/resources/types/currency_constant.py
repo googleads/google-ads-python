@@ -19,7 +19,9 @@ import proto  # type: ignore
 __protobuf__ = proto.module(
     package="google.ads.googleads.v10.resources",
     marshal="google.ads.googleads.v10",
-    manifest={"CurrencyConstant",},
+    manifest={
+        "CurrencyConstant",
+    },
 )
 
 
@@ -55,11 +57,30 @@ class CurrencyConstant(proto.Message):
             This field is a member of `oneof`_ ``_billable_unit_micros``.
     """
 
-    resource_name = proto.Field(proto.STRING, number=1,)
-    code = proto.Field(proto.STRING, number=6, optional=True,)
-    name = proto.Field(proto.STRING, number=7, optional=True,)
-    symbol = proto.Field(proto.STRING, number=8, optional=True,)
-    billable_unit_micros = proto.Field(proto.INT64, number=9, optional=True,)
+    resource_name = proto.Field(
+        proto.STRING,
+        number=1,
+    )
+    code = proto.Field(
+        proto.STRING,
+        number=6,
+        optional=True,
+    )
+    name = proto.Field(
+        proto.STRING,
+        number=7,
+        optional=True,
+    )
+    symbol = proto.Field(
+        proto.STRING,
+        number=8,
+        optional=True,
+    )
+    billable_unit_micros = proto.Field(
+        proto.INT64,
+        number=9,
+        optional=True,
+    )
 
 
 __all__ = tuple(sorted(__protobuf__.manifest))

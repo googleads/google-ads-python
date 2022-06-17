@@ -19,7 +19,9 @@ import proto  # type: ignore
 __protobuf__ = proto.module(
     package="google.ads.googleads.v10.resources",
     marshal="google.ads.googleads.v10",
-    manifest={"FeedItemSetLink",},
+    manifest={
+        "FeedItemSetLink",
+    },
 )
 
 
@@ -37,9 +39,18 @@ class FeedItemSetLink(proto.Message):
             Immutable. The linked FeedItemSet.
     """
 
-    resource_name = proto.Field(proto.STRING, number=1,)
-    feed_item = proto.Field(proto.STRING, number=2,)
-    feed_item_set = proto.Field(proto.STRING, number=3,)
+    resource_name = proto.Field(
+        proto.STRING,
+        number=1,
+    )
+    feed_item = proto.Field(
+        proto.STRING,
+        number=2,
+    )
+    feed_item_set = proto.Field(
+        proto.STRING,
+        number=3,
+    )
 
 
 __all__ = tuple(sorted(__protobuf__.manifest))

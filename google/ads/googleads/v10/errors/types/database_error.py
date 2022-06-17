@@ -19,13 +19,14 @@ import proto  # type: ignore
 __protobuf__ = proto.module(
     package="google.ads.googleads.v10.errors",
     marshal="google.ads.googleads.v10",
-    manifest={"DatabaseErrorEnum",},
+    manifest={
+        "DatabaseErrorEnum",
+    },
 )
 
 
 class DatabaseErrorEnum(proto.Message):
-    r"""Container for enum describing possible database errors.
-    """
+    r"""Container for enum describing possible database errors."""
 
     class DatabaseError(proto.Enum):
         r"""Enum describing possible database errors."""

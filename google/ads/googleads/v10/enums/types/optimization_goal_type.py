@@ -19,13 +19,14 @@ import proto  # type: ignore
 __protobuf__ = proto.module(
     package="google.ads.googleads.v10.enums",
     marshal="google.ads.googleads.v10",
-    manifest={"OptimizationGoalTypeEnum",},
+    manifest={
+        "OptimizationGoalTypeEnum",
+    },
 )
 
 
 class OptimizationGoalTypeEnum(proto.Message):
-    r"""Container for enum describing the type of optimization goal.
-    """
+    r"""Container for enum describing the type of optimization goal."""
 
     class OptimizationGoalType(proto.Enum):
         r"""The type of optimization goal"""

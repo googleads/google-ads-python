@@ -115,7 +115,11 @@ if __name__ == "__main__":
         help="The Google Ads customer ID.",
     )
     parser.add_argument(
-        "-a", "--ad_group_id", type=str, required=True, help="An ad group ID.",
+        "-a",
+        "--ad_group_id",
+        type=str,
+        required=True,
+        help="An ad group ID.",
     )
     parser.add_argument(
         "-n",

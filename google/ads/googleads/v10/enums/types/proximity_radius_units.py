@@ -19,13 +19,14 @@ import proto  # type: ignore
 __protobuf__ = proto.module(
     package="google.ads.googleads.v10.enums",
     marshal="google.ads.googleads.v10",
-    manifest={"ProximityRadiusUnitsEnum",},
+    manifest={
+        "ProximityRadiusUnitsEnum",
+    },
 )
 
 
 class ProximityRadiusUnitsEnum(proto.Message):
-    r"""Container for enum describing unit of radius in proximity.
-    """
+    r"""Container for enum describing unit of radius in proximity."""
 
     class ProximityRadiusUnits(proto.Enum):
         r"""The unit of radius distance in proximity (e.g. MILES)"""

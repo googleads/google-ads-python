@@ -52,7 +52,8 @@ class BillingSetupServiceClientMeta(type):
     _transport_registry["grpc"] = BillingSetupServiceGrpcTransport
 
     def get_transport_class(
-        cls, label: str = None,
+        cls,
+        label: str = None,
     ) -> Type[BillingSetupServiceTransport]:
         """Returns an appropriate transport class.
 
@@ -185,10 +186,16 @@ class BillingSetupServiceClient(metaclass=BillingSetupServiceClientMeta):
         self.transport.close()
 
     @staticmethod
-    def billing_setup_path(customer_id: str, billing_setup_id: str,) -> str:
+    def billing_setup_path(
+        customer_id: str,
+        billing_setup_id: str,
+    ) -> str:
         """Returns a fully-qualified billing_setup string."""
-        return "customers/{customer_id}/billingSetups/{billing_setup_id}".format(
-            customer_id=customer_id, billing_setup_id=billing_setup_id,
+        return (
+            "customers/{customer_id}/billingSetups/{billing_setup_id}".format(
+                customer_id=customer_id,
+                billing_setup_id=billing_setup_id,
+            )
         )
 
     @staticmethod
@@ -202,11 +209,13 @@ class BillingSetupServiceClient(metaclass=BillingSetupServiceClientMeta):
 
     @staticmethod
     def payments_account_path(
-        customer_id: str, payments_account_id: str,
+        customer_id: str,
+        payments_account_id: str,
     ) -> str:
         """Returns a fully-qualified payments_account string."""
         return "customers/{customer_id}/paymentsAccounts/{payments_account_id}".format(
-            customer_id=customer_id, payments_account_id=payments_account_id,
+            customer_id=customer_id,
+            payments_account_id=payments_account_id,
         )
 
     @staticmethod
@@ -219,7 +228,9 @@ class BillingSetupServiceClient(metaclass=BillingSetupServiceClientMeta):
         return m.groupdict() if m else {}
 
     @staticmethod
-    def common_billing_account_path(billing_account: str,) -> str:
+    def common_billing_account_path(
+        billing_account: str,
+    ) -> str:
         """Returns a fully-qualified billing_account string."""
         return "billingAccounts/{billing_account}".format(
             billing_account=billing_account,
@@ -232,9 +243,13 @@ class BillingSetupServiceClient(metaclass=BillingSetupServiceClientMeta):
         return m.groupdict() if m else {}
 
     @staticmethod
-    def common_folder_path(folder: str,) -> str:
+    def common_folder_path(
+        folder: str,
+    ) -> str:
         """Returns a fully-qualified folder string."""
-        return "folders/{folder}".format(folder=folder,)
+        return "folders/{folder}".format(
+            folder=folder,
+        )
 
     @staticmethod
     def parse_common_folder_path(path: str) -> Dict[str, str]:
@@ -243,9 +258,13 @@ class BillingSetupServiceClient(metaclass=BillingSetupServiceClientMeta):
         return m.groupdict() if m else {}
 
     @staticmethod
-    def common_organization_path(organization: str,) -> str:
+    def common_organization_path(
+        organization: str,
+    ) -> str:
         """Returns a fully-qualified organization string."""
-        return "organizations/{organization}".format(organization=organization,)
+        return "organizations/{organization}".format(
+            organization=organization,
+        )
 
     @staticmethod
     def parse_common_organization_path(path: str) -> Dict[str, str]:
@@ -254,9 +273,13 @@ class BillingSetupServiceClient(metaclass=BillingSetupServiceClientMeta):
         return m.groupdict() if m else {}
 
     @staticmethod
-    def common_project_path(project: str,) -> str:
+    def common_project_path(
+        project: str,
+    ) -> str:
         """Returns a fully-qualified project string."""
-        return "projects/{project}".format(project=project,)
+        return "projects/{project}".format(
+            project=project,
+        )
 
     @staticmethod
     def parse_common_project_path(path: str) -> Dict[str, str]:
@@ -265,10 +288,14 @@ class BillingSetupServiceClient(metaclass=BillingSetupServiceClientMeta):
         return m.groupdict() if m else {}
 
     @staticmethod
-    def common_location_path(project: str, location: str,) -> str:
+    def common_location_path(
+        project: str,
+        location: str,
+    ) -> str:
         """Returns a fully-qualified location string."""
         return "projects/{project}/locations/{location}".format(
-            project=project, location=location,
+            project=project,
+            location=location,
         )
 
     @staticmethod
@@ -493,7 +520,10 @@ class BillingSetupServiceClient(metaclass=BillingSetupServiceClientMeta):
 
         # Send the request.
         response = rpc(
-            request, retry=retry, timeout=timeout, metadata=metadata,
+            request,
+            retry=retry,
+            timeout=timeout,
+            metadata=metadata,
         )
 
         # Done; return the response.
@@ -502,7 +532,9 @@ class BillingSetupServiceClient(metaclass=BillingSetupServiceClientMeta):
 
 try:
     DEFAULT_CLIENT_INFO = gapic_v1.client_info.ClientInfo(
-        gapic_version=pkg_resources.get_distribution("google-ads",).version,
+        gapic_version=pkg_resources.get_distribution(
+            "google-ads",
+        ).version,
     )
 except pkg_resources.DistributionNotFound:
     DEFAULT_CLIENT_INFO = gapic_v1.client_info.ClientInfo()

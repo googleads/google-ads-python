@@ -19,7 +19,9 @@ import proto  # type: ignore
 __protobuf__ = proto.module(
     package="google.ads.googleads.v10.common",
     marshal="google.ads.googleads.v10",
-    manifest={"RealTimeBiddingSetting",},
+    manifest={
+        "RealTimeBiddingSetting",
+    },
 )
 
 
@@ -35,7 +37,11 @@ class RealTimeBiddingSetting(proto.Message):
             This field is a member of `oneof`_ ``_opt_in``.
     """
 
-    opt_in = proto.Field(proto.BOOL, number=2, optional=True,)
+    opt_in = proto.Field(
+        proto.BOOL,
+        number=2,
+        optional=True,
+    )
 
 
 __all__ = tuple(sorted(__protobuf__.manifest))

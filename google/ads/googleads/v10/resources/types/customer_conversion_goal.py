@@ -22,7 +22,9 @@ from google.ads.googleads.v10.enums.types import conversion_origin
 __protobuf__ = proto.module(
     package="google.ads.googleads.v10.resources",
     marshal="google.ads.googleads.v10",
-    manifest={"CustomerConversionGoal",},
+    manifest={
+        "CustomerConversionGoal",
+    },
 )
 
 
@@ -51,7 +53,10 @@ class CustomerConversionGoal(proto.Message):
             goal.
     """
 
-    resource_name = proto.Field(proto.STRING, number=1,)
+    resource_name = proto.Field(
+        proto.STRING,
+        number=1,
+    )
     category = proto.Field(
         proto.ENUM,
         number=2,
@@ -62,7 +67,10 @@ class CustomerConversionGoal(proto.Message):
         number=3,
         enum=conversion_origin.ConversionOriginEnum.ConversionOrigin,
     )
-    biddable = proto.Field(proto.BOOL, number=4,)
+    biddable = proto.Field(
+        proto.BOOL,
+        number=4,
+    )
 
 
 __all__ = tuple(sorted(__protobuf__.manifest))

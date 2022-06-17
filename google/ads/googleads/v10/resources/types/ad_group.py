@@ -33,7 +33,9 @@ from google.ads.googleads.v10.enums.types import targeting_dimension
 __protobuf__ = proto.module(
     package="google.ads.googleads.v10.resources",
     marshal="google.ads.googleads.v10",
-    manifest={"AdGroup",},
+    manifest={
+        "AdGroup",
+    },
 )
 
 
@@ -201,40 +203,100 @@ class AdGroup(proto.Message):
                 criteria instead.
         """
 
-        use_audience_grouped = proto.Field(proto.BOOL, number=1,)
+        use_audience_grouped = proto.Field(
+            proto.BOOL,
+            number=1,
+        )
 
-    resource_name = proto.Field(proto.STRING, number=1,)
-    id = proto.Field(proto.INT64, number=34, optional=True,)
-    name = proto.Field(proto.STRING, number=35, optional=True,)
+    resource_name = proto.Field(
+        proto.STRING,
+        number=1,
+    )
+    id = proto.Field(
+        proto.INT64,
+        number=34,
+        optional=True,
+    )
+    name = proto.Field(
+        proto.STRING,
+        number=35,
+        optional=True,
+    )
     status = proto.Field(
         proto.ENUM,
         number=5,
         enum=ad_group_status.AdGroupStatusEnum.AdGroupStatus,
     )
     type_ = proto.Field(
-        proto.ENUM, number=12, enum=ad_group_type.AdGroupTypeEnum.AdGroupType,
+        proto.ENUM,
+        number=12,
+        enum=ad_group_type.AdGroupTypeEnum.AdGroupType,
     )
     ad_rotation_mode = proto.Field(
         proto.ENUM,
         number=22,
         enum=ad_group_ad_rotation_mode.AdGroupAdRotationModeEnum.AdGroupAdRotationMode,
     )
-    base_ad_group = proto.Field(proto.STRING, number=36, optional=True,)
-    tracking_url_template = proto.Field(proto.STRING, number=37, optional=True,)
+    base_ad_group = proto.Field(
+        proto.STRING,
+        number=36,
+        optional=True,
+    )
+    tracking_url_template = proto.Field(
+        proto.STRING,
+        number=37,
+        optional=True,
+    )
     url_custom_parameters = proto.RepeatedField(
-        proto.MESSAGE, number=6, message=custom_parameter.CustomParameter,
+        proto.MESSAGE,
+        number=6,
+        message=custom_parameter.CustomParameter,
     )
-    campaign = proto.Field(proto.STRING, number=38, optional=True,)
-    cpc_bid_micros = proto.Field(proto.INT64, number=39, optional=True,)
+    campaign = proto.Field(
+        proto.STRING,
+        number=38,
+        optional=True,
+    )
+    cpc_bid_micros = proto.Field(
+        proto.INT64,
+        number=39,
+        optional=True,
+    )
     effective_cpc_bid_micros = proto.Field(
-        proto.INT64, number=57, optional=True,
+        proto.INT64,
+        number=57,
+        optional=True,
     )
-    cpm_bid_micros = proto.Field(proto.INT64, number=40, optional=True,)
-    target_cpa_micros = proto.Field(proto.INT64, number=41, optional=True,)
-    cpv_bid_micros = proto.Field(proto.INT64, number=42, optional=True,)
-    target_cpm_micros = proto.Field(proto.INT64, number=43, optional=True,)
-    target_roas = proto.Field(proto.DOUBLE, number=44, optional=True,)
-    percent_cpc_bid_micros = proto.Field(proto.INT64, number=45, optional=True,)
+    cpm_bid_micros = proto.Field(
+        proto.INT64,
+        number=40,
+        optional=True,
+    )
+    target_cpa_micros = proto.Field(
+        proto.INT64,
+        number=41,
+        optional=True,
+    )
+    cpv_bid_micros = proto.Field(
+        proto.INT64,
+        number=42,
+        optional=True,
+    )
+    target_cpm_micros = proto.Field(
+        proto.INT64,
+        number=43,
+        optional=True,
+    )
+    target_roas = proto.Field(
+        proto.DOUBLE,
+        number=44,
+        optional=True,
+    )
+    percent_cpc_bid_micros = proto.Field(
+        proto.INT64,
+        number=45,
+        optional=True,
+    )
     explorer_auto_optimizer_setting = proto.Field(
         proto.MESSAGE,
         number=21,
@@ -245,30 +307,45 @@ class AdGroup(proto.Message):
         number=23,
         enum=targeting_dimension.TargetingDimensionEnum.TargetingDimension,
     )
-    final_url_suffix = proto.Field(proto.STRING, number=46, optional=True,)
+    final_url_suffix = proto.Field(
+        proto.STRING,
+        number=46,
+        optional=True,
+    )
     targeting_setting = proto.Field(
         proto.MESSAGE,
         number=25,
         message=gagc_targeting_setting.TargetingSetting,
     )
     audience_setting = proto.Field(
-        proto.MESSAGE, number=56, message=AudienceSetting,
+        proto.MESSAGE,
+        number=56,
+        message=AudienceSetting,
     )
     effective_target_cpa_micros = proto.Field(
-        proto.INT64, number=47, optional=True,
+        proto.INT64,
+        number=47,
+        optional=True,
     )
     effective_target_cpa_source = proto.Field(
         proto.ENUM,
         number=29,
         enum=bidding_source.BiddingSourceEnum.BiddingSource,
     )
-    effective_target_roas = proto.Field(proto.DOUBLE, number=48, optional=True,)
+    effective_target_roas = proto.Field(
+        proto.DOUBLE,
+        number=48,
+        optional=True,
+    )
     effective_target_roas_source = proto.Field(
         proto.ENUM,
         number=32,
         enum=bidding_source.BiddingSourceEnum.BiddingSource,
     )
-    labels = proto.RepeatedField(proto.STRING, number=49,)
+    labels = proto.RepeatedField(
+        proto.STRING,
+        number=49,
+    )
     excluded_parent_asset_field_types = proto.RepeatedField(
         proto.ENUM,
         number=54,

@@ -24,7 +24,9 @@ from google.ads.googleads.v10.enums.types import budget_type
 __protobuf__ = proto.module(
     package="google.ads.googleads.v10.resources",
     marshal="google.ads.googleads.v10",
-    manifest={"CampaignBudget",},
+    manifest={
+        "CampaignBudget",
+    },
 )
 
 
@@ -162,42 +164,89 @@ class CampaignBudget(proto.Message):
             Immutable. The type of the campaign budget.
     """
 
-    resource_name = proto.Field(proto.STRING, number=1,)
-    id = proto.Field(proto.INT64, number=19, optional=True,)
-    name = proto.Field(proto.STRING, number=20, optional=True,)
-    amount_micros = proto.Field(proto.INT64, number=21, optional=True,)
-    total_amount_micros = proto.Field(proto.INT64, number=22, optional=True,)
+    resource_name = proto.Field(
+        proto.STRING,
+        number=1,
+    )
+    id = proto.Field(
+        proto.INT64,
+        number=19,
+        optional=True,
+    )
+    name = proto.Field(
+        proto.STRING,
+        number=20,
+        optional=True,
+    )
+    amount_micros = proto.Field(
+        proto.INT64,
+        number=21,
+        optional=True,
+    )
+    total_amount_micros = proto.Field(
+        proto.INT64,
+        number=22,
+        optional=True,
+    )
     status = proto.Field(
-        proto.ENUM, number=6, enum=budget_status.BudgetStatusEnum.BudgetStatus,
+        proto.ENUM,
+        number=6,
+        enum=budget_status.BudgetStatusEnum.BudgetStatus,
     )
     delivery_method = proto.Field(
         proto.ENUM,
         number=7,
         enum=budget_delivery_method.BudgetDeliveryMethodEnum.BudgetDeliveryMethod,
     )
-    explicitly_shared = proto.Field(proto.BOOL, number=23, optional=True,)
-    reference_count = proto.Field(proto.INT64, number=24, optional=True,)
-    has_recommended_budget = proto.Field(proto.BOOL, number=25, optional=True,)
+    explicitly_shared = proto.Field(
+        proto.BOOL,
+        number=23,
+        optional=True,
+    )
+    reference_count = proto.Field(
+        proto.INT64,
+        number=24,
+        optional=True,
+    )
+    has_recommended_budget = proto.Field(
+        proto.BOOL,
+        number=25,
+        optional=True,
+    )
     recommended_budget_amount_micros = proto.Field(
-        proto.INT64, number=26, optional=True,
+        proto.INT64,
+        number=26,
+        optional=True,
     )
     period = proto.Field(
-        proto.ENUM, number=13, enum=budget_period.BudgetPeriodEnum.BudgetPeriod,
+        proto.ENUM,
+        number=13,
+        enum=budget_period.BudgetPeriodEnum.BudgetPeriod,
     )
     recommended_budget_estimated_change_weekly_clicks = proto.Field(
-        proto.INT64, number=27, optional=True,
+        proto.INT64,
+        number=27,
+        optional=True,
     )
     recommended_budget_estimated_change_weekly_cost_micros = proto.Field(
-        proto.INT64, number=28, optional=True,
+        proto.INT64,
+        number=28,
+        optional=True,
     )
     recommended_budget_estimated_change_weekly_interactions = proto.Field(
-        proto.INT64, number=29, optional=True,
+        proto.INT64,
+        number=29,
+        optional=True,
     )
     recommended_budget_estimated_change_weekly_views = proto.Field(
-        proto.INT64, number=30, optional=True,
+        proto.INT64,
+        number=30,
+        optional=True,
     )
     type_ = proto.Field(
-        proto.ENUM, number=18, enum=budget_type.BudgetTypeEnum.BudgetType,
+        proto.ENUM,
+        number=18,
+        enum=budget_type.BudgetTypeEnum.BudgetType,
     )
 
 

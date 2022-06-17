@@ -19,13 +19,14 @@ import proto  # type: ignore
 __protobuf__ = proto.module(
     package="google.ads.googleads.v10.enums",
     marshal="google.ads.googleads.v10",
-    manifest={"MatchingFunctionOperatorEnum",},
+    manifest={
+        "MatchingFunctionOperatorEnum",
+    },
 )
 
 
 class MatchingFunctionOperatorEnum(proto.Message):
-    r"""Container for enum describing matching function operator.
-    """
+    r"""Container for enum describing matching function operator."""
 
     class MatchingFunctionOperator(proto.Enum):
         r"""Possible operators in a matching function."""

@@ -19,13 +19,14 @@ import proto  # type: ignore
 __protobuf__ = proto.module(
     package="google.ads.googleads.v10.enums",
     marshal="google.ads.googleads.v10",
-    manifest={"DsaPageFeedCriterionFieldEnum",},
+    manifest={
+        "DsaPageFeedCriterionFieldEnum",
+    },
 )
 
 
 class DsaPageFeedCriterionFieldEnum(proto.Message):
-    r"""Values for Dynamic Search Ad Page Feed criterion fields.
-    """
+    r"""Values for Dynamic Search Ad Page Feed criterion fields."""
 
     class DsaPageFeedCriterionField(proto.Enum):
         r"""Possible values for Dynamic Search Ad Page Feed criterion

@@ -76,8 +76,15 @@ class AccountLink(proto.Message):
             This field is a member of `oneof`_ ``linked_account``.
     """
 
-    resource_name = proto.Field(proto.STRING, number=1,)
-    account_link_id = proto.Field(proto.INT64, number=8, optional=True,)
+    resource_name = proto.Field(
+        proto.STRING,
+        number=1,
+    )
+    account_link_id = proto.Field(
+        proto.INT64,
+        number=8,
+        optional=True,
+    )
     status = proto.Field(
         proto.ENUM,
         number=3,
@@ -151,9 +158,15 @@ class ThirdPartyAppAnalyticsLinkIdentifier(proto.Message):
     """
 
     app_analytics_provider_id = proto.Field(
-        proto.INT64, number=4, optional=True,
+        proto.INT64,
+        number=4,
+        optional=True,
     )
-    app_id = proto.Field(proto.STRING, number=5, optional=True,)
+    app_id = proto.Field(
+        proto.STRING,
+        number=5,
+        optional=True,
+    )
     app_vendor = proto.Field(
         proto.ENUM,
         number=3,
@@ -175,7 +188,11 @@ class DataPartnerLinkIdentifier(proto.Message):
             This field is a member of `oneof`_ ``_data_partner_id``.
     """
 
-    data_partner_id = proto.Field(proto.INT64, number=1, optional=True,)
+    data_partner_id = proto.Field(
+        proto.INT64,
+        number=1,
+        optional=True,
+    )
 
 
 class HotelCenterLinkIdentifier(proto.Message):
@@ -187,7 +204,10 @@ class HotelCenterLinkIdentifier(proto.Message):
             account.
     """
 
-    hotel_center_id = proto.Field(proto.INT64, number=1,)
+    hotel_center_id = proto.Field(
+        proto.INT64,
+        number=1,
+    )
 
 
 class GoogleAdsLinkIdentifier(proto.Message):
@@ -204,7 +224,11 @@ class GoogleAdsLinkIdentifier(proto.Message):
             This field is a member of `oneof`_ ``_customer``.
     """
 
-    customer = proto.Field(proto.STRING, number=3, optional=True,)
+    customer = proto.Field(
+        proto.STRING,
+        number=3,
+        optional=True,
+    )
 
 
 __all__ = tuple(sorted(__protobuf__.manifest))

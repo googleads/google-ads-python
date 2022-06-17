@@ -19,13 +19,14 @@ import proto  # type: ignore
 __protobuf__ = proto.module(
     package="google.ads.googleads.v10.enums",
     marshal="google.ads.googleads.v10",
-    manifest={"MediaTypeEnum",},
+    manifest={
+        "MediaTypeEnum",
+    },
 )
 
 
 class MediaTypeEnum(proto.Message):
-    r"""Container for enum describing the types of media.
-    """
+    r"""Container for enum describing the types of media."""
 
     class MediaType(proto.Enum):
         r"""The type of media."""

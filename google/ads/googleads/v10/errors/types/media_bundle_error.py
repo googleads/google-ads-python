@@ -19,13 +19,14 @@ import proto  # type: ignore
 __protobuf__ = proto.module(
     package="google.ads.googleads.v10.errors",
     marshal="google.ads.googleads.v10",
-    manifest={"MediaBundleErrorEnum",},
+    manifest={
+        "MediaBundleErrorEnum",
+    },
 )
 
 
 class MediaBundleErrorEnum(proto.Message):
-    r"""Container for enum describing possible media bundle errors.
-    """
+    r"""Container for enum describing possible media bundle errors."""
 
     class MediaBundleError(proto.Enum):
         r"""Enum describing possible media bundle errors."""

@@ -19,7 +19,9 @@ import proto  # type: ignore
 __protobuf__ = proto.module(
     package="google.ads.googleads.v10.common",
     marshal="google.ads.googleads.v10",
-    manifest={"Money",},
+    manifest={
+        "Money",
+    },
 )
 
 
@@ -38,8 +40,16 @@ class Money(proto.Message):
             This field is a member of `oneof`_ ``_amount_micros``.
     """
 
-    currency_code = proto.Field(proto.STRING, number=3, optional=True,)
-    amount_micros = proto.Field(proto.INT64, number=4, optional=True,)
+    currency_code = proto.Field(
+        proto.STRING,
+        number=3,
+        optional=True,
+    )
+    amount_micros = proto.Field(
+        proto.INT64,
+        number=4,
+        optional=True,
+    )
 
 
 __all__ = tuple(sorted(__protobuf__.manifest))

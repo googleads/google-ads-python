@@ -22,7 +22,9 @@ from google.ads.googleads.v10.enums.types import asset_link_status
 __protobuf__ = proto.module(
     package="google.ads.googleads.v10.resources",
     marshal="google.ads.googleads.v10",
-    manifest={"CustomerAsset",},
+    manifest={
+        "CustomerAsset",
+    },
 )
 
 
@@ -45,8 +47,14 @@ class CustomerAsset(proto.Message):
             Status of the customer asset.
     """
 
-    resource_name = proto.Field(proto.STRING, number=1,)
-    asset = proto.Field(proto.STRING, number=2,)
+    resource_name = proto.Field(
+        proto.STRING,
+        number=1,
+    )
+    asset = proto.Field(
+        proto.STRING,
+        number=2,
+    )
     field_type = proto.Field(
         proto.ENUM,
         number=3,

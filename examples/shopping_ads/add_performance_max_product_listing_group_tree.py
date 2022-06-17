@@ -189,11 +189,15 @@ class AssetGroupListingGroupFilterCreateOperationFactory:
             mutate_operation.asset_group_listing_group_filter_operation.create
         )
 
-        asset_group_listing_group_filter.resource_name = googleads_service.asset_group_listing_group_filter_path(
-            self.customer_id, self.asset_group_id, self.root_listing_id
+        asset_group_listing_group_filter.resource_name = (
+            googleads_service.asset_group_listing_group_filter_path(
+                self.customer_id, self.asset_group_id, self.root_listing_id
+            )
         )
-        asset_group_listing_group_filter.asset_group = googleads_service.asset_group_path(
-            self.customer_id, self.asset_group_id
+        asset_group_listing_group_filter.asset_group = (
+            googleads_service.asset_group_path(
+                self.customer_id, self.asset_group_id
+            )
         )
         # Since this is the root node, do not set the
         # parent_listing_group_filter field. For all other nodes, this would
@@ -239,14 +243,20 @@ class AssetGroupListingGroupFilterCreateOperationFactory:
             mutate_operation.asset_group_listing_group_filter_operation.create
         )
 
-        asset_group_listing_group_filter.resource_name = googleads_service.asset_group_listing_group_filter_path(
-            self.customer_id, self.asset_group_id, temporary_id
+        asset_group_listing_group_filter.resource_name = (
+            googleads_service.asset_group_listing_group_filter_path(
+                self.customer_id, self.asset_group_id, temporary_id
+            )
         )
-        asset_group_listing_group_filter.asset_group = googleads_service.asset_group_path(
-            self.customer_id, self.asset_group_id
+        asset_group_listing_group_filter.asset_group = (
+            googleads_service.asset_group_path(
+                self.customer_id, self.asset_group_id
+            )
         )
-        asset_group_listing_group_filter.parent_listing_group_filter = googleads_service.asset_group_listing_group_filter_path(
-            self.customer_id, self.asset_group_id, parent_id
+        asset_group_listing_group_filter.parent_listing_group_filter = (
+            googleads_service.asset_group_listing_group_filter_path(
+                self.customer_id, self.asset_group_id, parent_id
+            )
         )
         asset_group_listing_group_filter.type_ = (
             self.client.enums.ListingGroupFilterTypeEnum.SUBDIVISION
@@ -281,14 +291,20 @@ class AssetGroupListingGroupFilterCreateOperationFactory:
             mutate_operation.asset_group_listing_group_filter_operation.create
         )
 
-        asset_group_listing_group_filter.resource_name = googleads_service.asset_group_listing_group_filter_path(
-            self.customer_id, self.asset_group_id, temporary_id
+        asset_group_listing_group_filter.resource_name = (
+            googleads_service.asset_group_listing_group_filter_path(
+                self.customer_id, self.asset_group_id, temporary_id
+            )
         )
-        asset_group_listing_group_filter.asset_group = googleads_service.asset_group_path(
-            self.customer_id, self.asset_group_id
+        asset_group_listing_group_filter.asset_group = (
+            googleads_service.asset_group_path(
+                self.customer_id, self.asset_group_id
+            )
         )
-        asset_group_listing_group_filter.parent_listing_group_filter = googleads_service.asset_group_listing_group_filter_path(
-            self.customer_id, self.asset_group_id, parent_id
+        asset_group_listing_group_filter.parent_listing_group_filter = (
+            googleads_service.asset_group_listing_group_filter_path(
+                self.customer_id, self.asset_group_id, parent_id
+            )
         )
         # We must use the UnitIncluded type to indicate that the
         # AssetGroupListingGroupFilter won't have children.
@@ -325,20 +341,29 @@ def main(client, customer_id, asset_group_id, replace_existing_tree):
 
     if replace_existing_tree:
         # Retrieve a list of existing AssetGroupListingGroupFilters
-        existing_listing_group_filters = _get_all_existing_listing_group_filter_assets_in_asset_group(
-            client, customer_id, asset_group_resource_name
+        existing_listing_group_filters = (
+            _get_all_existing_listing_group_filter_assets_in_asset_group(
+                client, customer_id, asset_group_resource_name
+            )
         )
 
         # If present, create MutateOperations to remove each
         # AssetGroupListingGroupFilter and add them to the list of operations.
         if existing_listing_group_filters:
-            remove_operation_factory = AssetGroupListingGroupFilterRemoveOperationFactory(
-                client, existing_listing_group_filters
+            remove_operation_factory = (
+                AssetGroupListingGroupFilterRemoveOperationFactory(
+                    client, existing_listing_group_filters
+                )
             )
             operations.extend(remove_operation_factory.remove_all())
 
-    create_operation_factory = AssetGroupListingGroupFilterCreateOperationFactory(
-        client, customer_id, asset_group_id, _TEMPORARY_ID_LISTING_GROUP_ROOT
+    create_operation_factory = (
+        AssetGroupListingGroupFilterCreateOperationFactory(
+            client,
+            customer_id,
+            asset_group_id,
+            _TEMPORARY_ID_LISTING_GROUP_ROOT,
+        )
     )
 
     operations.append(create_operation_factory.create_root())

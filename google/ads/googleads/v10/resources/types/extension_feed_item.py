@@ -27,7 +27,9 @@ from google.ads.googleads.v10.enums.types import feed_item_target_device
 __protobuf__ = proto.module(
     package="google.ads.googleads.v10.resources",
     marshal="google.ads.googleads.v10",
-    manifest={"ExtensionFeedItem",},
+    manifest={
+        "ExtensionFeedItem",
+    },
 )
 
 
@@ -152,17 +154,34 @@ class ExtensionFeedItem(proto.Message):
             This field is a member of `oneof`_ ``serving_resource_targeting``.
     """
 
-    resource_name = proto.Field(proto.STRING, number=1,)
-    id = proto.Field(proto.INT64, number=25, optional=True,)
+    resource_name = proto.Field(
+        proto.STRING,
+        number=1,
+    )
+    id = proto.Field(
+        proto.INT64,
+        number=25,
+        optional=True,
+    )
     extension_type = proto.Field(
         proto.ENUM,
         number=13,
         enum=gage_extension_type.ExtensionTypeEnum.ExtensionType,
     )
-    start_date_time = proto.Field(proto.STRING, number=26, optional=True,)
-    end_date_time = proto.Field(proto.STRING, number=27, optional=True,)
+    start_date_time = proto.Field(
+        proto.STRING,
+        number=26,
+        optional=True,
+    )
+    end_date_time = proto.Field(
+        proto.STRING,
+        number=27,
+        optional=True,
+    )
     ad_schedules = proto.RepeatedField(
-        proto.MESSAGE, number=16, message=criteria.AdScheduleInfo,
+        proto.MESSAGE,
+        number=16,
+        message=criteria.AdScheduleInfo,
     )
     device = proto.Field(
         proto.ENUM,
@@ -170,10 +189,14 @@ class ExtensionFeedItem(proto.Message):
         enum=feed_item_target_device.FeedItemTargetDeviceEnum.FeedItemTargetDevice,
     )
     targeted_geo_target_constant = proto.Field(
-        proto.STRING, number=30, optional=True,
+        proto.STRING,
+        number=30,
+        optional=True,
     )
     targeted_keyword = proto.Field(
-        proto.MESSAGE, number=22, message=criteria.KeywordInfo,
+        proto.MESSAGE,
+        number=22,
+        message=criteria.KeywordInfo,
     )
     status = proto.Field(
         proto.ENUM,
@@ -253,10 +276,14 @@ class ExtensionFeedItem(proto.Message):
         message=extensions.ImageFeedItem,
     )
     targeted_campaign = proto.Field(
-        proto.STRING, number=28, oneof="serving_resource_targeting",
+        proto.STRING,
+        number=28,
+        oneof="serving_resource_targeting",
     )
     targeted_ad_group = proto.Field(
-        proto.STRING, number=29, oneof="serving_resource_targeting",
+        proto.STRING,
+        number=29,
+        oneof="serving_resource_targeting",
     )
 
 

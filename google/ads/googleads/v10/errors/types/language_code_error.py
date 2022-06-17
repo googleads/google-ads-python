@@ -19,13 +19,14 @@ import proto  # type: ignore
 __protobuf__ = proto.module(
     package="google.ads.googleads.v10.errors",
     marshal="google.ads.googleads.v10",
-    manifest={"LanguageCodeErrorEnum",},
+    manifest={
+        "LanguageCodeErrorEnum",
+    },
 )
 
 
 class LanguageCodeErrorEnum(proto.Message):
-    r"""Container for enum describing language code errors.
-    """
+    r"""Container for enum describing language code errors."""
 
     class LanguageCodeError(proto.Enum):
         r"""Enum describing language code errors."""

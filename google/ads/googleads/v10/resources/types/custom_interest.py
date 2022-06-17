@@ -23,7 +23,10 @@ from google.ads.googleads.v10.enums.types import custom_interest_type
 __protobuf__ = proto.module(
     package="google.ads.googleads.v10.resources",
     marshal="google.ads.googleads.v10",
-    manifest={"CustomInterest", "CustomInterestMember",},
+    manifest={
+        "CustomInterest",
+        "CustomInterestMember",
+    },
 )
 
 
@@ -66,22 +69,39 @@ class CustomInterest(proto.Message):
             members will be overridden.
     """
 
-    resource_name = proto.Field(proto.STRING, number=1,)
-    id = proto.Field(proto.INT64, number=8, optional=True,)
+    resource_name = proto.Field(
+        proto.STRING,
+        number=1,
+    )
+    id = proto.Field(
+        proto.INT64,
+        number=8,
+        optional=True,
+    )
     status = proto.Field(
         proto.ENUM,
         number=3,
         enum=custom_interest_status.CustomInterestStatusEnum.CustomInterestStatus,
     )
-    name = proto.Field(proto.STRING, number=9, optional=True,)
+    name = proto.Field(
+        proto.STRING,
+        number=9,
+        optional=True,
+    )
     type_ = proto.Field(
         proto.ENUM,
         number=5,
         enum=custom_interest_type.CustomInterestTypeEnum.CustomInterestType,
     )
-    description = proto.Field(proto.STRING, number=10, optional=True,)
+    description = proto.Field(
+        proto.STRING,
+        number=10,
+        optional=True,
+    )
     members = proto.RepeatedField(
-        proto.MESSAGE, number=7, message="CustomInterestMember",
+        proto.MESSAGE,
+        number=7,
+        message="CustomInterestMember",
     )
 
 
@@ -106,7 +126,11 @@ class CustomInterestMember(proto.Message):
         number=1,
         enum=custom_interest_member_type.CustomInterestMemberTypeEnum.CustomInterestMemberType,
     )
-    parameter = proto.Field(proto.STRING, number=3, optional=True,)
+    parameter = proto.Field(
+        proto.STRING,
+        number=3,
+        optional=True,
+    )
 
 
 __all__ = tuple(sorted(__protobuf__.manifest))

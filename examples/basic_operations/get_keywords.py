@@ -74,7 +74,9 @@ def main(
         if omit_unselected_resource_names:
             resource_name_log_statement = ""
         else:
-            resource_name_log_statement = f" and resource name '{ad_group.resource_name}'"
+            resource_name_log_statement = (
+                f" and resource name '{ad_group.resource_name}'"
+            )
 
         print(
             f'Keyword with text "{keyword.text}", match type '

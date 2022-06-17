@@ -56,11 +56,19 @@ class ApplyRecommendationRequest(proto.Message):
             valid. Default is false.
     """
 
-    customer_id = proto.Field(proto.STRING, number=1,)
-    operations = proto.RepeatedField(
-        proto.MESSAGE, number=2, message="ApplyRecommendationOperation",
+    customer_id = proto.Field(
+        proto.STRING,
+        number=1,
     )
-    partial_failure = proto.Field(proto.BOOL, number=3,)
+    operations = proto.RepeatedField(
+        proto.MESSAGE,
+        number=2,
+        message="ApplyRecommendationOperation",
+    )
+    partial_failure = proto.Field(
+        proto.BOOL,
+        number=3,
+    )
 
 
 class ApplyRecommendationOperation(proto.Message):
@@ -153,7 +161,9 @@ class ApplyRecommendationOperation(proto.Message):
         """
 
         new_budget_amount_micros = proto.Field(
-            proto.INT64, number=2, optional=True,
+            proto.INT64,
+            number=2,
+            optional=True,
         )
 
     class TextAdParameters(proto.Message):
@@ -166,7 +176,11 @@ class ApplyRecommendationOperation(proto.Message):
                 This is a required field.
         """
 
-        ad = proto.Field(proto.MESSAGE, number=1, message=gagr_ad.Ad,)
+        ad = proto.Field(
+            proto.MESSAGE,
+            number=1,
+            message=gagr_ad.Ad,
+        )
 
     class KeywordParameters(proto.Message):
         r"""Parameters to use when applying keyword recommendation.
@@ -188,13 +202,21 @@ class ApplyRecommendationOperation(proto.Message):
                 This field is a member of `oneof`_ ``_cpc_bid_micros``.
         """
 
-        ad_group = proto.Field(proto.STRING, number=4, optional=True,)
+        ad_group = proto.Field(
+            proto.STRING,
+            number=4,
+            optional=True,
+        )
         match_type = proto.Field(
             proto.ENUM,
             number=2,
             enum=keyword_match_type.KeywordMatchTypeEnum.KeywordMatchType,
         )
-        cpc_bid_micros = proto.Field(proto.INT64, number=5, optional=True,)
+        cpc_bid_micros = proto.Field(
+            proto.INT64,
+            number=5,
+            optional=True,
+        )
 
     class TargetCpaOptInParameters(proto.Message):
         r"""Parameters to use when applying Target CPA recommendation.
@@ -212,9 +234,15 @@ class ApplyRecommendationOperation(proto.Message):
                 This field is a member of `oneof`_ ``_new_campaign_budget_amount_micros``.
         """
 
-        target_cpa_micros = proto.Field(proto.INT64, number=3, optional=True,)
+        target_cpa_micros = proto.Field(
+            proto.INT64,
+            number=3,
+            optional=True,
+        )
         new_campaign_budget_amount_micros = proto.Field(
-            proto.INT64, number=4, optional=True,
+            proto.INT64,
+            number=4,
+            optional=True,
         )
 
     class TargetRoasOptInParameters(proto.Message):
@@ -236,9 +264,15 @@ class ApplyRecommendationOperation(proto.Message):
                 This field is a member of `oneof`_ ``_new_campaign_budget_amount_micros``.
         """
 
-        target_roas = proto.Field(proto.DOUBLE, number=1, optional=True,)
+        target_roas = proto.Field(
+            proto.DOUBLE,
+            number=1,
+            optional=True,
+        )
         new_campaign_budget_amount_micros = proto.Field(
-            proto.INT64, number=2, optional=True,
+            proto.INT64,
+            number=2,
+            optional=True,
         )
 
     class CalloutExtensionParameters(proto.Message):
@@ -252,7 +286,9 @@ class ApplyRecommendationOperation(proto.Message):
         """
 
         callout_extensions = proto.RepeatedField(
-            proto.MESSAGE, number=1, message=extensions.CalloutFeedItem,
+            proto.MESSAGE,
+            number=1,
+            message=extensions.CalloutFeedItem,
         )
 
     class CallExtensionParameters(proto.Message):
@@ -266,7 +302,9 @@ class ApplyRecommendationOperation(proto.Message):
         """
 
         call_extensions = proto.RepeatedField(
-            proto.MESSAGE, number=1, message=extensions.CallFeedItem,
+            proto.MESSAGE,
+            number=1,
+            message=extensions.CallFeedItem,
         )
 
     class SitelinkExtensionParameters(proto.Message):
@@ -280,7 +318,9 @@ class ApplyRecommendationOperation(proto.Message):
         """
 
         sitelink_extensions = proto.RepeatedField(
-            proto.MESSAGE, number=1, message=extensions.SitelinkFeedItem,
+            proto.MESSAGE,
+            number=1,
+            message=extensions.SitelinkFeedItem,
         )
 
     class MoveUnusedBudgetParameters(proto.Message):
@@ -296,7 +336,9 @@ class ApplyRecommendationOperation(proto.Message):
         """
 
         budget_micros_to_move = proto.Field(
-            proto.INT64, number=2, optional=True,
+            proto.INT64,
+            number=2,
+            optional=True,
         )
 
     class ResponsiveSearchAdAssetParameters(proto.Message):
@@ -309,7 +351,11 @@ class ApplyRecommendationOperation(proto.Message):
                 replaced.
         """
 
-        updated_ad = proto.Field(proto.MESSAGE, number=1, message=gagr_ad.Ad,)
+        updated_ad = proto.Field(
+            proto.MESSAGE,
+            number=1,
+            message=gagr_ad.Ad,
+        )
 
     class ResponsiveSearchAdParameters(proto.Message):
         r"""Parameters to use when applying a responsive search ad
@@ -321,7 +367,11 @@ class ApplyRecommendationOperation(proto.Message):
                 group.
         """
 
-        ad = proto.Field(proto.MESSAGE, number=1, message=gagr_ad.Ad,)
+        ad = proto.Field(
+            proto.MESSAGE,
+            number=1,
+            message=gagr_ad.Ad,
+        )
 
     class UseBroadMatchKeywordParameters(proto.Message):
         r"""Parameters to use when applying a use broad match keyword
@@ -336,10 +386,15 @@ class ApplyRecommendationOperation(proto.Message):
         """
 
         new_budget_amount_micros = proto.Field(
-            proto.INT64, number=1, optional=True,
+            proto.INT64,
+            number=1,
+            optional=True,
         )
 
-    resource_name = proto.Field(proto.STRING, number=1,)
+    resource_name = proto.Field(
+        proto.STRING,
+        number=1,
+    )
     campaign_budget = proto.Field(
         proto.MESSAGE,
         number=2,
@@ -431,10 +486,14 @@ class ApplyRecommendationResponse(proto.Message):
     """
 
     results = proto.RepeatedField(
-        proto.MESSAGE, number=1, message="ApplyRecommendationResult",
+        proto.MESSAGE,
+        number=1,
+        message="ApplyRecommendationResult",
     )
     partial_failure_error = proto.Field(
-        proto.MESSAGE, number=2, message=status_pb2.Status,
+        proto.MESSAGE,
+        number=2,
+        message=status_pb2.Status,
     )
 
 
@@ -446,7 +505,10 @@ class ApplyRecommendationResult(proto.Message):
             Returned for successful applies.
     """
 
-    resource_name = proto.Field(proto.STRING, number=1,)
+    resource_name = proto.Field(
+        proto.STRING,
+        number=1,
+    )
 
 
 class DismissRecommendationRequest(proto.Message):
@@ -480,13 +542,24 @@ class DismissRecommendationRequest(proto.Message):
                 dismiss.
         """
 
-        resource_name = proto.Field(proto.STRING, number=1,)
+        resource_name = proto.Field(
+            proto.STRING,
+            number=1,
+        )
 
-    customer_id = proto.Field(proto.STRING, number=1,)
-    operations = proto.RepeatedField(
-        proto.MESSAGE, number=3, message=DismissRecommendationOperation,
+    customer_id = proto.Field(
+        proto.STRING,
+        number=1,
     )
-    partial_failure = proto.Field(proto.BOOL, number=2,)
+    operations = proto.RepeatedField(
+        proto.MESSAGE,
+        number=3,
+        message=DismissRecommendationOperation,
+    )
+    partial_failure = proto.Field(
+        proto.BOOL,
+        number=2,
+    )
 
 
 class DismissRecommendationResponse(proto.Message):
@@ -513,13 +586,20 @@ class DismissRecommendationResponse(proto.Message):
                 Returned for successful dismissals.
         """
 
-        resource_name = proto.Field(proto.STRING, number=1,)
+        resource_name = proto.Field(
+            proto.STRING,
+            number=1,
+        )
 
     results = proto.RepeatedField(
-        proto.MESSAGE, number=1, message=DismissRecommendationResult,
+        proto.MESSAGE,
+        number=1,
+        message=DismissRecommendationResult,
     )
     partial_failure_error = proto.Field(
-        proto.MESSAGE, number=2, message=status_pb2.Status,
+        proto.MESSAGE,
+        number=2,
+        message=status_pb2.Status,
     )
 
 

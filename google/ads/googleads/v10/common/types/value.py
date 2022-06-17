@@ -19,7 +19,9 @@ import proto  # type: ignore
 __protobuf__ = proto.module(
     package="google.ads.googleads.v10.common",
     marshal="google.ads.googleads.v10",
-    manifest={"Value",},
+    manifest={
+        "Value",
+    },
 )
 
 
@@ -56,11 +58,31 @@ class Value(proto.Message):
             This field is a member of `oneof`_ ``value``.
     """
 
-    boolean_value = proto.Field(proto.BOOL, number=1, oneof="value",)
-    int64_value = proto.Field(proto.INT64, number=2, oneof="value",)
-    float_value = proto.Field(proto.FLOAT, number=3, oneof="value",)
-    double_value = proto.Field(proto.DOUBLE, number=4, oneof="value",)
-    string_value = proto.Field(proto.STRING, number=5, oneof="value",)
+    boolean_value = proto.Field(
+        proto.BOOL,
+        number=1,
+        oneof="value",
+    )
+    int64_value = proto.Field(
+        proto.INT64,
+        number=2,
+        oneof="value",
+    )
+    float_value = proto.Field(
+        proto.FLOAT,
+        number=3,
+        oneof="value",
+    )
+    double_value = proto.Field(
+        proto.DOUBLE,
+        number=4,
+        oneof="value",
+    )
+    string_value = proto.Field(
+        proto.STRING,
+        number=5,
+        oneof="value",
+    )
 
 
 __all__ = tuple(sorted(__protobuf__.manifest))

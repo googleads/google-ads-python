@@ -19,13 +19,14 @@ import proto  # type: ignore
 __protobuf__ = proto.module(
     package="google.ads.googleads.v10.enums",
     marshal="google.ads.googleads.v10",
-    manifest={"PriceExtensionPriceUnitEnum",},
+    manifest={
+        "PriceExtensionPriceUnitEnum",
+    },
 )
 
 
 class PriceExtensionPriceUnitEnum(proto.Message):
-    r"""Container for enum describing price extension price unit.
-    """
+    r"""Container for enum describing price extension price unit."""
 
     class PriceExtensionPriceUnit(proto.Enum):
         r"""Price extension price unit."""

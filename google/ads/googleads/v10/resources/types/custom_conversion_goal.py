@@ -21,7 +21,9 @@ from google.ads.googleads.v10.enums.types import custom_conversion_goal_status
 __protobuf__ = proto.module(
     package="google.ads.googleads.v10.resources",
     marshal="google.ads.googleads.v10",
-    manifest={"CustomConversionGoal",},
+    manifest={
+        "CustomConversionGoal",
+    },
 )
 
 
@@ -47,10 +49,22 @@ class CustomConversionGoal(proto.Message):
             The status of the custom conversion goal.
     """
 
-    resource_name = proto.Field(proto.STRING, number=1,)
-    id = proto.Field(proto.INT64, number=2,)
-    name = proto.Field(proto.STRING, number=3,)
-    conversion_actions = proto.RepeatedField(proto.STRING, number=4,)
+    resource_name = proto.Field(
+        proto.STRING,
+        number=1,
+    )
+    id = proto.Field(
+        proto.INT64,
+        number=2,
+    )
+    name = proto.Field(
+        proto.STRING,
+        number=3,
+    )
+    conversion_actions = proto.RepeatedField(
+        proto.STRING,
+        number=4,
+    )
     status = proto.Field(
         proto.ENUM,
         number=5,

@@ -19,13 +19,14 @@ import proto  # type: ignore
 __protobuf__ = proto.module(
     package="google.ads.googleads.v10.enums",
     marshal="google.ads.googleads.v10",
-    manifest={"GoogleAdsFieldDataTypeEnum",},
+    manifest={
+        "GoogleAdsFieldDataTypeEnum",
+    },
 )
 
 
 class GoogleAdsFieldDataTypeEnum(proto.Message):
-    r"""Container holding the various data types.
-    """
+    r"""Container holding the various data types."""
 
     class GoogleAdsFieldDataType(proto.Enum):
         r"""These are the various types a GoogleAdsService artifact may

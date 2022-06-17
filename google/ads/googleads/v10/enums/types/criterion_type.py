@@ -19,13 +19,14 @@ import proto  # type: ignore
 __protobuf__ = proto.module(
     package="google.ads.googleads.v10.enums",
     marshal="google.ads.googleads.v10",
-    manifest={"CriterionTypeEnum",},
+    manifest={
+        "CriterionTypeEnum",
+    },
 )
 
 
 class CriterionTypeEnum(proto.Message):
-    r"""The possible types of a criterion.
-    """
+    r"""The possible types of a criterion."""
 
     class CriterionType(proto.Enum):
         r"""Enum describing possible criterion types."""

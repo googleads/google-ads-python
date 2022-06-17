@@ -107,13 +107,34 @@ class FeedItem(proto.Message):
             is read-only.
     """
 
-    resource_name = proto.Field(proto.STRING, number=1,)
-    feed = proto.Field(proto.STRING, number=11, optional=True,)
-    id = proto.Field(proto.INT64, number=12, optional=True,)
-    start_date_time = proto.Field(proto.STRING, number=13, optional=True,)
-    end_date_time = proto.Field(proto.STRING, number=14, optional=True,)
+    resource_name = proto.Field(
+        proto.STRING,
+        number=1,
+    )
+    feed = proto.Field(
+        proto.STRING,
+        number=11,
+        optional=True,
+    )
+    id = proto.Field(
+        proto.INT64,
+        number=12,
+        optional=True,
+    )
+    start_date_time = proto.Field(
+        proto.STRING,
+        number=13,
+        optional=True,
+    )
+    end_date_time = proto.Field(
+        proto.STRING,
+        number=14,
+        optional=True,
+    )
     attribute_values = proto.RepeatedField(
-        proto.MESSAGE, number=6, message="FeedItemAttributeValue",
+        proto.MESSAGE,
+        number=6,
+        message="FeedItemAttributeValue",
     )
     geo_targeting_restriction = proto.Field(
         proto.ENUM,
@@ -121,7 +142,9 @@ class FeedItem(proto.Message):
         enum=gage_geo_targeting_restriction.GeoTargetingRestrictionEnum.GeoTargetingRestriction,
     )
     url_custom_parameters = proto.RepeatedField(
-        proto.MESSAGE, number=8, message=custom_parameter.CustomParameter,
+        proto.MESSAGE,
+        number=8,
+        message=custom_parameter.CustomParameter,
     )
     status = proto.Field(
         proto.ENUM,
@@ -129,7 +152,9 @@ class FeedItem(proto.Message):
         enum=feed_item_status.FeedItemStatusEnum.FeedItemStatus,
     )
     policy_infos = proto.RepeatedField(
-        proto.MESSAGE, number=10, message="FeedItemPlaceholderPolicyInfo",
+        proto.MESSAGE,
+        number=10,
+        message="FeedItemPlaceholderPolicyInfo",
     )
 
 
@@ -190,18 +215,52 @@ class FeedItemAttributeValue(proto.Message):
             refers to a feed attribute of type DOUBLE_LIST.
     """
 
-    feed_attribute_id = proto.Field(proto.INT64, number=11, optional=True,)
-    integer_value = proto.Field(proto.INT64, number=12, optional=True,)
-    boolean_value = proto.Field(proto.BOOL, number=13, optional=True,)
-    string_value = proto.Field(proto.STRING, number=14, optional=True,)
-    double_value = proto.Field(proto.DOUBLE, number=15, optional=True,)
-    price_value = proto.Field(
-        proto.MESSAGE, number=6, message=feed_common.Money,
+    feed_attribute_id = proto.Field(
+        proto.INT64,
+        number=11,
+        optional=True,
     )
-    integer_values = proto.RepeatedField(proto.INT64, number=16,)
-    boolean_values = proto.RepeatedField(proto.BOOL, number=17,)
-    string_values = proto.RepeatedField(proto.STRING, number=18,)
-    double_values = proto.RepeatedField(proto.DOUBLE, number=19,)
+    integer_value = proto.Field(
+        proto.INT64,
+        number=12,
+        optional=True,
+    )
+    boolean_value = proto.Field(
+        proto.BOOL,
+        number=13,
+        optional=True,
+    )
+    string_value = proto.Field(
+        proto.STRING,
+        number=14,
+        optional=True,
+    )
+    double_value = proto.Field(
+        proto.DOUBLE,
+        number=15,
+        optional=True,
+    )
+    price_value = proto.Field(
+        proto.MESSAGE,
+        number=6,
+        message=feed_common.Money,
+    )
+    integer_values = proto.RepeatedField(
+        proto.INT64,
+        number=16,
+    )
+    boolean_values = proto.RepeatedField(
+        proto.BOOL,
+        number=17,
+    )
+    string_values = proto.RepeatedField(
+        proto.STRING,
+        number=18,
+    )
+    double_values = proto.RepeatedField(
+        proto.DOUBLE,
+        number=19,
+    )
 
 
 class FeedItemPlaceholderPolicyInfo(proto.Message):
@@ -246,7 +305,9 @@ class FeedItemPlaceholderPolicyInfo(proto.Message):
         enum=placeholder_type.PlaceholderTypeEnum.PlaceholderType,
     )
     feed_mapping_resource_name = proto.Field(
-        proto.STRING, number=11, optional=True,
+        proto.STRING,
+        number=11,
+        optional=True,
     )
     review_status = proto.Field(
         proto.ENUM,
@@ -259,7 +320,9 @@ class FeedItemPlaceholderPolicyInfo(proto.Message):
         enum=policy_approval_status.PolicyApprovalStatusEnum.PolicyApprovalStatus,
     )
     policy_topic_entries = proto.RepeatedField(
-        proto.MESSAGE, number=5, message=policy.PolicyTopicEntry,
+        proto.MESSAGE,
+        number=5,
+        message=policy.PolicyTopicEntry,
     )
     validation_status = proto.Field(
         proto.ENUM,
@@ -267,7 +330,9 @@ class FeedItemPlaceholderPolicyInfo(proto.Message):
         enum=feed_item_validation_status.FeedItemValidationStatusEnum.FeedItemValidationStatus,
     )
     validation_errors = proto.RepeatedField(
-        proto.MESSAGE, number=7, message="FeedItemValidationError",
+        proto.MESSAGE,
+        number=7,
+        message="FeedItemValidationError",
     )
     quality_approval_status = proto.Field(
         proto.ENUM,
@@ -318,9 +383,20 @@ class FeedItemValidationError(proto.Message):
         number=1,
         enum=feed_item_validation_error.FeedItemValidationErrorEnum.FeedItemValidationError,
     )
-    description = proto.Field(proto.STRING, number=6, optional=True,)
-    feed_attribute_ids = proto.RepeatedField(proto.INT64, number=7,)
-    extra_info = proto.Field(proto.STRING, number=8, optional=True,)
+    description = proto.Field(
+        proto.STRING,
+        number=6,
+        optional=True,
+    )
+    feed_attribute_ids = proto.RepeatedField(
+        proto.INT64,
+        number=7,
+    )
+    extra_info = proto.Field(
+        proto.STRING,
+        number=8,
+        optional=True,
+    )
 
 
 __all__ = tuple(sorted(__protobuf__.manifest))

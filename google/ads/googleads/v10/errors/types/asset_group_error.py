@@ -19,13 +19,14 @@ import proto  # type: ignore
 __protobuf__ = proto.module(
     package="google.ads.googleads.v10.errors",
     marshal="google.ads.googleads.v10",
-    manifest={"AssetGroupErrorEnum",},
+    manifest={
+        "AssetGroupErrorEnum",
+    },
 )
 
 
 class AssetGroupErrorEnum(proto.Message):
-    r"""Container for enum describing possible asset group errors.
-    """
+    r"""Container for enum describing possible asset group errors."""
 
     class AssetGroupError(proto.Enum):
         r"""Enum describing possible asset group errors."""

@@ -60,12 +60,23 @@ class UploadConversionAdjustmentsRequest(proto.Message):
             executed. Only errors are returned, not results.
     """
 
-    customer_id = proto.Field(proto.STRING, number=1,)
-    conversion_adjustments = proto.RepeatedField(
-        proto.MESSAGE, number=2, message="ConversionAdjustment",
+    customer_id = proto.Field(
+        proto.STRING,
+        number=1,
     )
-    partial_failure = proto.Field(proto.BOOL, number=3,)
-    validate_only = proto.Field(proto.BOOL, number=4,)
+    conversion_adjustments = proto.RepeatedField(
+        proto.MESSAGE,
+        number=2,
+        message="ConversionAdjustment",
+    )
+    partial_failure = proto.Field(
+        proto.BOOL,
+        number=3,
+    )
+    validate_only = proto.Field(
+        proto.BOOL,
+        number=4,
+    )
 
 
 class UploadConversionAdjustmentsResponse(proto.Message):
@@ -89,10 +100,14 @@ class UploadConversionAdjustmentsResponse(proto.Message):
     """
 
     partial_failure_error = proto.Field(
-        proto.MESSAGE, number=1, message=status_pb2.Status,
+        proto.MESSAGE,
+        number=1,
+        message=status_pb2.Status,
     )
     results = proto.RepeatedField(
-        proto.MESSAGE, number=2, message="ConversionAdjustmentResult",
+        proto.MESSAGE,
+        number=2,
+        message="ConversionAdjustmentResult",
     )
 
 
@@ -163,23 +178,45 @@ class ConversionAdjustment(proto.Message):
     """
 
     gclid_date_time_pair = proto.Field(
-        proto.MESSAGE, number=12, message="GclidDateTimePair",
+        proto.MESSAGE,
+        number=12,
+        message="GclidDateTimePair",
     )
-    order_id = proto.Field(proto.STRING, number=13, optional=True,)
-    conversion_action = proto.Field(proto.STRING, number=8, optional=True,)
-    adjustment_date_time = proto.Field(proto.STRING, number=9, optional=True,)
+    order_id = proto.Field(
+        proto.STRING,
+        number=13,
+        optional=True,
+    )
+    conversion_action = proto.Field(
+        proto.STRING,
+        number=8,
+        optional=True,
+    )
+    adjustment_date_time = proto.Field(
+        proto.STRING,
+        number=9,
+        optional=True,
+    )
     adjustment_type = proto.Field(
         proto.ENUM,
         number=5,
         enum=conversion_adjustment_type.ConversionAdjustmentTypeEnum.ConversionAdjustmentType,
     )
     restatement_value = proto.Field(
-        proto.MESSAGE, number=6, message="RestatementValue",
+        proto.MESSAGE,
+        number=6,
+        message="RestatementValue",
     )
     user_identifiers = proto.RepeatedField(
-        proto.MESSAGE, number=10, message=offline_user_data.UserIdentifier,
+        proto.MESSAGE,
+        number=10,
+        message=offline_user_data.UserIdentifier,
     )
-    user_agent = proto.Field(proto.STRING, number=11, optional=True,)
+    user_agent = proto.Field(
+        proto.STRING,
+        number=11,
+        optional=True,
+    )
 
 
 class RestatementValue(proto.Message):
@@ -210,8 +247,16 @@ class RestatementValue(proto.Message):
             This field is a member of `oneof`_ ``_currency_code``.
     """
 
-    adjusted_value = proto.Field(proto.DOUBLE, number=3, optional=True,)
-    currency_code = proto.Field(proto.STRING, number=4, optional=True,)
+    adjusted_value = proto.Field(
+        proto.DOUBLE,
+        number=3,
+        optional=True,
+    )
+    currency_code = proto.Field(
+        proto.STRING,
+        number=4,
+        optional=True,
+    )
 
 
 class GclidDateTimePair(proto.Message):
@@ -233,8 +278,16 @@ class GclidDateTimePair(proto.Message):
             This field is a member of `oneof`_ ``_conversion_date_time``.
     """
 
-    gclid = proto.Field(proto.STRING, number=3, optional=True,)
-    conversion_date_time = proto.Field(proto.STRING, number=4, optional=True,)
+    gclid = proto.Field(
+        proto.STRING,
+        number=3,
+        optional=True,
+    )
+    conversion_date_time = proto.Field(
+        proto.STRING,
+        number=4,
+        optional=True,
+    )
 
 
 class ConversionAdjustmentResult(proto.Message):
@@ -264,11 +317,24 @@ class ConversionAdjustmentResult(proto.Message):
     """
 
     gclid_date_time_pair = proto.Field(
-        proto.MESSAGE, number=9, message="GclidDateTimePair",
+        proto.MESSAGE,
+        number=9,
+        message="GclidDateTimePair",
     )
-    order_id = proto.Field(proto.STRING, number=10,)
-    conversion_action = proto.Field(proto.STRING, number=7, optional=True,)
-    adjustment_date_time = proto.Field(proto.STRING, number=8, optional=True,)
+    order_id = proto.Field(
+        proto.STRING,
+        number=10,
+    )
+    conversion_action = proto.Field(
+        proto.STRING,
+        number=7,
+        optional=True,
+    )
+    adjustment_date_time = proto.Field(
+        proto.STRING,
+        number=8,
+        optional=True,
+    )
     adjustment_type = proto.Field(
         proto.ENUM,
         number=5,

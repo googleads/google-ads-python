@@ -19,13 +19,14 @@ import proto  # type: ignore
 __protobuf__ = proto.module(
     package="google.ads.googleads.v10.enums",
     marshal="google.ads.googleads.v10",
-    manifest={"FeedStatusEnum",},
+    manifest={
+        "FeedStatusEnum",
+    },
 )
 
 
 class FeedStatusEnum(proto.Message):
-    r"""Container for enum describing possible statuses of a feed.
-    """
+    r"""Container for enum describing possible statuses of a feed."""
 
     class FeedStatus(proto.Enum):
         r"""Possible statuses of a feed."""

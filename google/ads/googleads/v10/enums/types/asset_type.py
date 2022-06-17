@@ -19,13 +19,14 @@ import proto  # type: ignore
 __protobuf__ = proto.module(
     package="google.ads.googleads.v10.enums",
     marshal="google.ads.googleads.v10",
-    manifest={"AssetTypeEnum",},
+    manifest={
+        "AssetTypeEnum",
+    },
 )
 
 
 class AssetTypeEnum(proto.Message):
-    r"""Container for enum describing the types of asset.
-    """
+    r"""Container for enum describing the types of asset."""
 
     class AssetType(proto.Enum):
         r"""Enum describing possible types of asset."""

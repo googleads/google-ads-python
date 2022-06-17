@@ -62,17 +62,28 @@ class MutateFeedItemTargetsRequest(proto.Message):
             executed. Only errors are returned, not results.
     """
 
-    customer_id = proto.Field(proto.STRING, number=1,)
-    operations = proto.RepeatedField(
-        proto.MESSAGE, number=2, message="FeedItemTargetOperation",
+    customer_id = proto.Field(
+        proto.STRING,
+        number=1,
     )
-    partial_failure = proto.Field(proto.BOOL, number=4,)
+    operations = proto.RepeatedField(
+        proto.MESSAGE,
+        number=2,
+        message="FeedItemTargetOperation",
+    )
+    partial_failure = proto.Field(
+        proto.BOOL,
+        number=4,
+    )
     response_content_type = proto.Field(
         proto.ENUM,
         number=5,
         enum=gage_response_content_type.ResponseContentTypeEnum.ResponseContentType,
     )
-    validate_only = proto.Field(proto.BOOL, number=3,)
+    validate_only = proto.Field(
+        proto.BOOL,
+        number=3,
+    )
 
 
 class FeedItemTargetOperation(proto.Message):
@@ -106,7 +117,11 @@ class FeedItemTargetOperation(proto.Message):
         oneof="operation",
         message=gagr_feed_item_target.FeedItemTarget,
     )
-    remove = proto.Field(proto.STRING, number=2, oneof="operation",)
+    remove = proto.Field(
+        proto.STRING,
+        number=2,
+        oneof="operation",
+    )
 
 
 class MutateFeedItemTargetsResponse(proto.Message):
@@ -124,10 +139,14 @@ class MutateFeedItemTargetsResponse(proto.Message):
     """
 
     partial_failure_error = proto.Field(
-        proto.MESSAGE, number=3, message=status_pb2.Status,
+        proto.MESSAGE,
+        number=3,
+        message=status_pb2.Status,
     )
     results = proto.RepeatedField(
-        proto.MESSAGE, number=2, message="MutateFeedItemTargetResult",
+        proto.MESSAGE,
+        number=2,
+        message="MutateFeedItemTargetResult",
     )
 
 
@@ -143,9 +162,14 @@ class MutateFeedItemTargetResult(proto.Message):
             response_content_type is set to "MUTABLE_RESOURCE".
     """
 
-    resource_name = proto.Field(proto.STRING, number=1,)
+    resource_name = proto.Field(
+        proto.STRING,
+        number=1,
+    )
     feed_item_target = proto.Field(
-        proto.MESSAGE, number=2, message=gagr_feed_item_target.FeedItemTarget,
+        proto.MESSAGE,
+        number=2,
+        message=gagr_feed_item_target.FeedItemTarget,
     )
 
 

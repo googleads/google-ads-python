@@ -111,12 +111,31 @@ class GenerateKeywordIdeasRequest(proto.Message):
             This field is a member of `oneof`_ ``seed``.
     """
 
-    customer_id = proto.Field(proto.STRING, number=1,)
-    language = proto.Field(proto.STRING, number=14, optional=True,)
-    geo_target_constants = proto.RepeatedField(proto.STRING, number=15,)
-    include_adult_keywords = proto.Field(proto.BOOL, number=10,)
-    page_token = proto.Field(proto.STRING, number=12,)
-    page_size = proto.Field(proto.INT32, number=13,)
+    customer_id = proto.Field(
+        proto.STRING,
+        number=1,
+    )
+    language = proto.Field(
+        proto.STRING,
+        number=14,
+        optional=True,
+    )
+    geo_target_constants = proto.RepeatedField(
+        proto.STRING,
+        number=15,
+    )
+    include_adult_keywords = proto.Field(
+        proto.BOOL,
+        number=10,
+    )
+    page_token = proto.Field(
+        proto.STRING,
+        number=12,
+    )
+    page_size = proto.Field(
+        proto.INT32,
+        number=13,
+    )
     keyword_plan_network = proto.Field(
         proto.ENUM,
         number=9,
@@ -138,16 +157,28 @@ class GenerateKeywordIdeasRequest(proto.Message):
         message=keyword_plan_common.HistoricalMetricsOptions,
     )
     keyword_and_url_seed = proto.Field(
-        proto.MESSAGE, number=2, oneof="seed", message="KeywordAndUrlSeed",
+        proto.MESSAGE,
+        number=2,
+        oneof="seed",
+        message="KeywordAndUrlSeed",
     )
     keyword_seed = proto.Field(
-        proto.MESSAGE, number=3, oneof="seed", message="KeywordSeed",
+        proto.MESSAGE,
+        number=3,
+        oneof="seed",
+        message="KeywordSeed",
     )
     url_seed = proto.Field(
-        proto.MESSAGE, number=5, oneof="seed", message="UrlSeed",
+        proto.MESSAGE,
+        number=5,
+        oneof="seed",
+        message="UrlSeed",
     )
     site_seed = proto.Field(
-        proto.MESSAGE, number=11, oneof="seed", message="SiteSeed",
+        proto.MESSAGE,
+        number=11,
+        oneof="seed",
+        message="SiteSeed",
     )
 
 
@@ -164,8 +195,15 @@ class KeywordAndUrlSeed(proto.Message):
             Requires at least one keyword.
     """
 
-    url = proto.Field(proto.STRING, number=3, optional=True,)
-    keywords = proto.RepeatedField(proto.STRING, number=4,)
+    url = proto.Field(
+        proto.STRING,
+        number=3,
+        optional=True,
+    )
+    keywords = proto.RepeatedField(
+        proto.STRING,
+        number=4,
+    )
 
 
 class KeywordSeed(proto.Message):
@@ -176,7 +214,10 @@ class KeywordSeed(proto.Message):
             Requires at least one keyword.
     """
 
-    keywords = proto.RepeatedField(proto.STRING, number=2,)
+    keywords = proto.RepeatedField(
+        proto.STRING,
+        number=2,
+    )
 
 
 class SiteSeed(proto.Message):
@@ -191,7 +232,11 @@ class SiteSeed(proto.Message):
             This field is a member of `oneof`_ ``_site``.
     """
 
-    site = proto.Field(proto.STRING, number=2, optional=True,)
+    site = proto.Field(
+        proto.STRING,
+        number=2,
+        optional=True,
+    )
 
 
 class UrlSeed(proto.Message):
@@ -205,7 +250,11 @@ class UrlSeed(proto.Message):
             This field is a member of `oneof`_ ``_url``.
     """
 
-    url = proto.Field(proto.STRING, number=2, optional=True,)
+    url = proto.Field(
+        proto.STRING,
+        number=2,
+        optional=True,
+    )
 
 
 class GenerateKeywordIdeaResponse(proto.Message):
@@ -231,15 +280,23 @@ class GenerateKeywordIdeaResponse(proto.Message):
         return self
 
     results = proto.RepeatedField(
-        proto.MESSAGE, number=1, message="GenerateKeywordIdeaResult",
+        proto.MESSAGE,
+        number=1,
+        message="GenerateKeywordIdeaResult",
     )
     aggregate_metric_results = proto.Field(
         proto.MESSAGE,
         number=4,
         message=keyword_plan_common.KeywordPlanAggregateMetricResults,
     )
-    next_page_token = proto.Field(proto.STRING, number=2,)
-    total_size = proto.Field(proto.INT64, number=3,)
+    next_page_token = proto.Field(
+        proto.STRING,
+        number=2,
+    )
+    total_size = proto.Field(
+        proto.INT64,
+        number=3,
+    )
 
 
 class GenerateKeywordIdeaResult(proto.Message):
@@ -269,16 +326,25 @@ class GenerateKeywordIdeaResult(proto.Message):
             for the definition of "close variants".
     """
 
-    text = proto.Field(proto.STRING, number=5, optional=True,)
+    text = proto.Field(
+        proto.STRING,
+        number=5,
+        optional=True,
+    )
     keyword_idea_metrics = proto.Field(
         proto.MESSAGE,
         number=3,
         message=keyword_plan_common.KeywordPlanHistoricalMetrics,
     )
     keyword_annotations = proto.Field(
-        proto.MESSAGE, number=6, message=keyword_plan_common.KeywordAnnotations,
+        proto.MESSAGE,
+        number=6,
+        message=keyword_plan_common.KeywordAnnotations,
     )
-    close_variants = proto.RepeatedField(proto.STRING, number=7,)
+    close_variants = proto.RepeatedField(
+        proto.STRING,
+        number=7,
+    )
 
 
 class GenerateKeywordHistoricalMetricsRequest(proto.Message):
@@ -300,8 +366,14 @@ class GenerateKeywordHistoricalMetricsRequest(proto.Message):
             The options for historical metrics data.
     """
 
-    customer_id = proto.Field(proto.STRING, number=1,)
-    keywords = proto.RepeatedField(proto.STRING, number=2,)
+    customer_id = proto.Field(
+        proto.STRING,
+        number=1,
+    )
+    keywords = proto.RepeatedField(
+        proto.STRING,
+        number=2,
+    )
     historical_metrics_options = proto.Field(
         proto.MESSAGE,
         number=3,
@@ -349,8 +421,15 @@ class GenerateKeywordHistoricalMetricsResult(proto.Message):
             variants
     """
 
-    text = proto.Field(proto.STRING, number=1, optional=True,)
-    close_variants = proto.RepeatedField(proto.STRING, number=3,)
+    text = proto.Field(
+        proto.STRING,
+        number=1,
+        optional=True,
+    )
+    close_variants = proto.RepeatedField(
+        proto.STRING,
+        number=3,
+    )
     keyword_metrics = proto.Field(
         proto.MESSAGE,
         number=2,

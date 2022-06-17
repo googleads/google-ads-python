@@ -49,11 +49,19 @@ class MutateCustomerManagerLinkRequest(proto.Message):
             executed. Only errors are returned, not results.
     """
 
-    customer_id = proto.Field(proto.STRING, number=1,)
-    operations = proto.RepeatedField(
-        proto.MESSAGE, number=2, message="CustomerManagerLinkOperation",
+    customer_id = proto.Field(
+        proto.STRING,
+        number=1,
     )
-    validate_only = proto.Field(proto.BOOL, number=3,)
+    operations = proto.RepeatedField(
+        proto.MESSAGE,
+        number=2,
+        message="CustomerManagerLinkOperation",
+    )
+    validate_only = proto.Field(
+        proto.BOOL,
+        number=3,
+    )
 
 
 class MoveManagerLinkRequest(proto.Message):
@@ -77,10 +85,22 @@ class MoveManagerLinkRequest(proto.Message):
             executed. Only errors are returned, not results.
     """
 
-    customer_id = proto.Field(proto.STRING, number=1,)
-    previous_customer_manager_link = proto.Field(proto.STRING, number=2,)
-    new_manager = proto.Field(proto.STRING, number=3,)
-    validate_only = proto.Field(proto.BOOL, number=4,)
+    customer_id = proto.Field(
+        proto.STRING,
+        number=1,
+    )
+    previous_customer_manager_link = proto.Field(
+        proto.STRING,
+        number=2,
+    )
+    new_manager = proto.Field(
+        proto.STRING,
+        number=3,
+    )
+    validate_only = proto.Field(
+        proto.BOOL,
+        number=4,
+    )
 
 
 class CustomerManagerLinkOperation(proto.Message):
@@ -106,7 +126,9 @@ class CustomerManagerLinkOperation(proto.Message):
     """
 
     update_mask = proto.Field(
-        proto.MESSAGE, number=4, message=field_mask_pb2.FieldMask,
+        proto.MESSAGE,
+        number=4,
+        message=field_mask_pb2.FieldMask,
     )
     update = proto.Field(
         proto.MESSAGE,
@@ -126,7 +148,9 @@ class MutateCustomerManagerLinkResponse(proto.Message):
     """
 
     results = proto.RepeatedField(
-        proto.MESSAGE, number=1, message="MutateCustomerManagerLinkResult",
+        proto.MESSAGE,
+        number=1,
+        message="MutateCustomerManagerLinkResult",
     )
 
 
@@ -141,7 +165,10 @@ class MoveManagerLinkResponse(proto.Message):
             new manager customer.
     """
 
-    resource_name = proto.Field(proto.STRING, number=1,)
+    resource_name = proto.Field(
+        proto.STRING,
+        number=1,
+    )
 
 
 class MutateCustomerManagerLinkResult(proto.Message):
@@ -152,7 +179,10 @@ class MutateCustomerManagerLinkResult(proto.Message):
             Returned for successful operations.
     """
 
-    resource_name = proto.Field(proto.STRING, number=1,)
+    resource_name = proto.Field(
+        proto.STRING,
+        number=1,
+    )
 
 
 __all__ = tuple(sorted(__protobuf__.manifest))

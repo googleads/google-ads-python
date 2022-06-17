@@ -19,13 +19,14 @@ import proto  # type: ignore
 __protobuf__ = proto.module(
     package="google.ads.googleads.v10.enums",
     marshal="google.ads.googleads.v10",
-    manifest={"LeadFormFieldUserInputTypeEnum",},
+    manifest={
+        "LeadFormFieldUserInputTypeEnum",
+    },
 )
 
 
 class LeadFormFieldUserInputTypeEnum(proto.Message):
-    r"""Describes the input type of a lead form field.
-    """
+    r"""Describes the input type of a lead form field."""
 
     class LeadFormFieldUserInputType(proto.Enum):
         r"""Enum describing the input type of a lead form field."""

@@ -19,13 +19,14 @@ import proto  # type: ignore
 __protobuf__ = proto.module(
     package="google.ads.googleads.v10.enums",
     marshal="google.ads.googleads.v10",
-    manifest={"ExtensionSettingDeviceEnum",},
+    manifest={
+        "ExtensionSettingDeviceEnum",
+    },
 )
 
 
 class ExtensionSettingDeviceEnum(proto.Message):
-    r"""Container for enum describing extension setting device types.
-    """
+    r"""Container for enum describing extension setting device types."""
 
     class ExtensionSettingDevice(proto.Enum):
         r"""Possible device types for an extension setting."""

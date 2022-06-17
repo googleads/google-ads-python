@@ -19,13 +19,14 @@ import proto  # type: ignore
 __protobuf__ = proto.module(
     package="google.ads.googleads.v10.enums",
     marshal="google.ads.googleads.v10",
-    manifest={"DataDrivenModelStatusEnum",},
+    manifest={
+        "DataDrivenModelStatusEnum",
+    },
 )
 
 
 class DataDrivenModelStatusEnum(proto.Message):
-    r"""Container for enum indicating data driven model status.
-    """
+    r"""Container for enum indicating data driven model status."""
 
     class DataDrivenModelStatus(proto.Enum):
         r"""Enumerates data driven model statuses."""

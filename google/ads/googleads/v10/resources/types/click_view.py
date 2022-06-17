@@ -22,7 +22,9 @@ from google.ads.googleads.v10.common.types import criteria
 __protobuf__ = proto.module(
     package="google.ads.googleads.v10.resources",
     marshal="google.ads.googleads.v10",
-    manifest={"ClickView",},
+    manifest={
+        "ClickView",
+    },
 )
 
 
@@ -80,23 +82,53 @@ class ClickView(proto.Message):
             associated keyword, if it exists.
     """
 
-    resource_name = proto.Field(proto.STRING, number=1,)
-    gclid = proto.Field(proto.STRING, number=8, optional=True,)
+    resource_name = proto.Field(
+        proto.STRING,
+        number=1,
+    )
+    gclid = proto.Field(
+        proto.STRING,
+        number=8,
+        optional=True,
+    )
     area_of_interest = proto.Field(
-        proto.MESSAGE, number=3, message=click_location.ClickLocation,
+        proto.MESSAGE,
+        number=3,
+        message=click_location.ClickLocation,
     )
     location_of_presence = proto.Field(
-        proto.MESSAGE, number=4, message=click_location.ClickLocation,
+        proto.MESSAGE,
+        number=4,
+        message=click_location.ClickLocation,
     )
-    page_number = proto.Field(proto.INT64, number=9, optional=True,)
-    ad_group_ad = proto.Field(proto.STRING, number=10, optional=True,)
+    page_number = proto.Field(
+        proto.INT64,
+        number=9,
+        optional=True,
+    )
+    ad_group_ad = proto.Field(
+        proto.STRING,
+        number=10,
+        optional=True,
+    )
     campaign_location_target = proto.Field(
-        proto.STRING, number=11, optional=True,
+        proto.STRING,
+        number=11,
+        optional=True,
     )
-    user_list = proto.Field(proto.STRING, number=12, optional=True,)
-    keyword = proto.Field(proto.STRING, number=13,)
+    user_list = proto.Field(
+        proto.STRING,
+        number=12,
+        optional=True,
+    )
+    keyword = proto.Field(
+        proto.STRING,
+        number=13,
+    )
     keyword_info = proto.Field(
-        proto.MESSAGE, number=14, message=criteria.KeywordInfo,
+        proto.MESSAGE,
+        number=14,
+        message=criteria.KeywordInfo,
     )
 
 

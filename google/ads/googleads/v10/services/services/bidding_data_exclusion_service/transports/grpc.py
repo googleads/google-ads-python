@@ -137,8 +137,10 @@ class BiddingDataExclusionServiceGrpcTransport(
                 # default SSL credentials.
                 if client_cert_source:
                     cert, key = client_cert_source()
-                    self._ssl_channel_credentials = grpc.ssl_channel_credentials(
-                        certificate_chain=cert, private_key=key
+                    self._ssl_channel_credentials = (
+                        grpc.ssl_channel_credentials(
+                            certificate_chain=cert, private_key=key
+                        )
                     )
                 else:
                     self._ssl_channel_credentials = (
@@ -148,8 +150,10 @@ class BiddingDataExclusionServiceGrpcTransport(
             else:
                 if client_cert_source_for_mtls and not ssl_channel_credentials:
                     cert, key = client_cert_source_for_mtls()
-                    self._ssl_channel_credentials = grpc.ssl_channel_credentials(
-                        certificate_chain=cert, private_key=key
+                    self._ssl_channel_credentials = (
+                        grpc.ssl_channel_credentials(
+                            certificate_chain=cert, private_key=key
+                        )
                     )
 
         # The base transport sets the host, credentials and scopes
@@ -232,8 +236,7 @@ class BiddingDataExclusionServiceGrpcTransport(
 
     @property
     def grpc_channel(self) -> grpc.Channel:
-        """Return the channel designed to connect to this service.
-        """
+        """Return the channel designed to connect to this service."""
         return self._grpc_channel
 
     @property

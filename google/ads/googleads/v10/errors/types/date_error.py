@@ -19,13 +19,14 @@ import proto  # type: ignore
 __protobuf__ = proto.module(
     package="google.ads.googleads.v10.errors",
     marshal="google.ads.googleads.v10",
-    manifest={"DateErrorEnum",},
+    manifest={
+        "DateErrorEnum",
+    },
 )
 
 
 class DateErrorEnum(proto.Message):
-    r"""Container for enum describing possible date errors.
-    """
+    r"""Container for enum describing possible date errors."""
 
     class DateError(proto.Enum):
         r"""Enum describing possible date errors."""

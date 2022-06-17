@@ -258,7 +258,7 @@ def _create_performance_max_campaign_operation(
     campaign.maximize_conversion_value.target_roas = None
     # Below is what you would use if you want to maximize conversions
     # campaign.maximize_conversions.target_cpa = None
-    # The target CPA is optional. This is the average amount that you would 
+    # The target CPA is optional. This is the average amount that you would
     # like to spend per conversion action.
 
     # Set the shopping settings.
@@ -271,7 +271,7 @@ def _create_performance_max_campaign_operation(
     # If opted in (False), the entire domain will be targeted. For best
     # results, set this value to false to opt in and allow URL expansions. You
     # can optionally add exclusions to limit traffic to parts of your website.
-    # For a Retail campaign, we want the final URL's to be limited to 
+    # For a Retail campaign, we want the final URL's to be limited to
     # those explicitly surfaced via GMC.
     campaign.url_expansion_opt_out = True
 
@@ -447,16 +447,24 @@ def _create_asset_group_operation(
 
     # Creates a new ad group criterion containing the "default" listing group (All products).
     mutate_operation = client.get_type("MutateOperation")
-    asset_group_listing_group = mutate_operation.asset_group_listing_group_filter_operation.create
-    asset_group_listing_group.asset_group = asset_group_service.asset_group_path(
+    asset_group_listing_group = (
+        mutate_operation.asset_group_listing_group_filter_operation.create
+    )
+    asset_group_listing_group.asset_group = (
+        asset_group_service.asset_group_path(
             customer_id,
             _ASSET_GROUP_TEMPORARY_ID,
         )
-    asset_group_listing_group.type_ = client.enums.ListingGroupFilterTypeEnum.UNIT_INCLUDED
-    # Because this is a Performance Max campaign for retail, we need to specify that this is 
+    )
+    asset_group_listing_group.type_ = (
+        client.enums.ListingGroupFilterTypeEnum.UNIT_INCLUDED
+    )
+    # Because this is a Performance Max campaign for retail, we need to specify that this is
     # in the shopping vertical.
-    asset_group_listing_group.vertical = client.enums.ListingGroupFilterVerticalEnum.SHOPPING
-    
+    asset_group_listing_group.vertical = (
+        client.enums.ListingGroupFilterVerticalEnum.SHOPPING
+    )
+
     operations.append(mutate_operation)
 
     # For the list of required assets for a Performance Max campaign, see
@@ -596,7 +604,9 @@ def _create_and_link_text_asset(client, customer_id, text, field_type):
 
 
 # [START add_performance_max_retail_campaign_8]
-def _create_and_link_image_asset(client, customer_id, url, field_type, asset_name):
+def _create_and_link_image_asset(
+    client, customer_id, url, field_type, asset_name
+):
     """Creates a list of MutateOperations that create a new linked image asset.
 
     Args:

@@ -22,7 +22,9 @@ from google.ads.googleads.v10.enums.types import label_status
 __protobuf__ = proto.module(
     package="google.ads.googleads.v10.resources",
     marshal="google.ads.googleads.v10",
-    manifest={"Label",},
+    manifest={
+        "Label",
+    },
 )
 
 
@@ -52,14 +54,29 @@ class Label(proto.Message):
             background.
     """
 
-    resource_name = proto.Field(proto.STRING, number=1,)
-    id = proto.Field(proto.INT64, number=6, optional=True,)
-    name = proto.Field(proto.STRING, number=7, optional=True,)
+    resource_name = proto.Field(
+        proto.STRING,
+        number=1,
+    )
+    id = proto.Field(
+        proto.INT64,
+        number=6,
+        optional=True,
+    )
+    name = proto.Field(
+        proto.STRING,
+        number=7,
+        optional=True,
+    )
     status = proto.Field(
-        proto.ENUM, number=4, enum=label_status.LabelStatusEnum.LabelStatus,
+        proto.ENUM,
+        number=4,
+        enum=label_status.LabelStatusEnum.LabelStatus,
     )
     text_label = proto.Field(
-        proto.MESSAGE, number=5, message=gagc_text_label.TextLabel,
+        proto.MESSAGE,
+        number=5,
+        message=gagc_text_label.TextLabel,
     )
 
 

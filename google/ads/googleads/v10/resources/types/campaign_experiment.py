@@ -24,7 +24,9 @@ from google.ads.googleads.v10.enums.types import (
 __protobuf__ = proto.module(
     package="google.ads.googleads.v10.resources",
     marshal="google.ads.googleads.v10",
-    manifest={"CampaignExperiment",},
+    manifest={
+        "CampaignExperiment",
+    },
 )
 
 
@@ -116,28 +118,65 @@ class CampaignExperiment(proto.Message):
             This field is a member of `oneof`_ ``_end_date``.
     """
 
-    resource_name = proto.Field(proto.STRING, number=1,)
-    id = proto.Field(proto.INT64, number=13, optional=True,)
-    campaign_draft = proto.Field(proto.STRING, number=14, optional=True,)
-    name = proto.Field(proto.STRING, number=15, optional=True,)
-    description = proto.Field(proto.STRING, number=16, optional=True,)
-    traffic_split_percent = proto.Field(proto.INT64, number=17, optional=True,)
+    resource_name = proto.Field(
+        proto.STRING,
+        number=1,
+    )
+    id = proto.Field(
+        proto.INT64,
+        number=13,
+        optional=True,
+    )
+    campaign_draft = proto.Field(
+        proto.STRING,
+        number=14,
+        optional=True,
+    )
+    name = proto.Field(
+        proto.STRING,
+        number=15,
+        optional=True,
+    )
+    description = proto.Field(
+        proto.STRING,
+        number=16,
+        optional=True,
+    )
+    traffic_split_percent = proto.Field(
+        proto.INT64,
+        number=17,
+        optional=True,
+    )
     traffic_split_type = proto.Field(
         proto.ENUM,
         number=7,
         enum=campaign_experiment_traffic_split_type.CampaignExperimentTrafficSplitTypeEnum.CampaignExperimentTrafficSplitType,
     )
-    experiment_campaign = proto.Field(proto.STRING, number=18, optional=True,)
+    experiment_campaign = proto.Field(
+        proto.STRING,
+        number=18,
+        optional=True,
+    )
     status = proto.Field(
         proto.ENUM,
         number=9,
         enum=campaign_experiment_status.CampaignExperimentStatusEnum.CampaignExperimentStatus,
     )
     long_running_operation = proto.Field(
-        proto.STRING, number=19, optional=True,
+        proto.STRING,
+        number=19,
+        optional=True,
     )
-    start_date = proto.Field(proto.STRING, number=20, optional=True,)
-    end_date = proto.Field(proto.STRING, number=21, optional=True,)
+    start_date = proto.Field(
+        proto.STRING,
+        number=20,
+        optional=True,
+    )
+    end_date = proto.Field(
+        proto.STRING,
+        number=21,
+        optional=True,
+    )
 
 
 __all__ = tuple(sorted(__protobuf__.manifest))

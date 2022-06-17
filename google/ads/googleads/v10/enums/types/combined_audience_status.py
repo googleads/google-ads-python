@@ -19,13 +19,14 @@ import proto  # type: ignore
 __protobuf__ = proto.module(
     package="google.ads.googleads.v10.enums",
     marshal="google.ads.googleads.v10",
-    manifest={"CombinedAudienceStatusEnum",},
+    manifest={
+        "CombinedAudienceStatusEnum",
+    },
 )
 
 
 class CombinedAudienceStatusEnum(proto.Message):
-    r"""The status of combined audience.
-    """
+    r"""The status of combined audience."""
 
     class CombinedAudienceStatus(proto.Enum):
         r"""Enum containing possible combined audience status types."""

@@ -19,13 +19,14 @@ import proto  # type: ignore
 __protobuf__ = proto.module(
     package="google.ads.googleads.v10.enums",
     marshal="google.ads.googleads.v10",
-    manifest={"CustomInterestStatusEnum",},
+    manifest={
+        "CustomInterestStatusEnum",
+    },
 )
 
 
 class CustomInterestStatusEnum(proto.Message):
-    r"""The status of custom interest.
-    """
+    r"""The status of custom interest."""
 
     class CustomInterestStatus(proto.Enum):
         r"""Enum containing possible custom interest types."""

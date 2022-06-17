@@ -47,11 +47,19 @@ class MutateCustomerConversionGoalsRequest(proto.Message):
             executed. Only errors are returned, not results.
     """
 
-    customer_id = proto.Field(proto.STRING, number=1,)
-    operations = proto.RepeatedField(
-        proto.MESSAGE, number=2, message="CustomerConversionGoalOperation",
+    customer_id = proto.Field(
+        proto.STRING,
+        number=1,
     )
-    validate_only = proto.Field(proto.BOOL, number=3,)
+    operations = proto.RepeatedField(
+        proto.MESSAGE,
+        number=2,
+        message="CustomerConversionGoalOperation",
+    )
+    validate_only = proto.Field(
+        proto.BOOL,
+        number=3,
+    )
 
 
 class CustomerConversionGoalOperation(proto.Message):
@@ -71,7 +79,9 @@ class CustomerConversionGoalOperation(proto.Message):
     """
 
     update_mask = proto.Field(
-        proto.MESSAGE, number=2, message=field_mask_pb2.FieldMask,
+        proto.MESSAGE,
+        number=2,
+        message=field_mask_pb2.FieldMask,
     )
     update = proto.Field(
         proto.MESSAGE,
@@ -90,7 +100,9 @@ class MutateCustomerConversionGoalsResponse(proto.Message):
     """
 
     results = proto.RepeatedField(
-        proto.MESSAGE, number=1, message="MutateCustomerConversionGoalResult",
+        proto.MESSAGE,
+        number=1,
+        message="MutateCustomerConversionGoalResult",
     )
 
 
@@ -102,7 +114,10 @@ class MutateCustomerConversionGoalResult(proto.Message):
             Returned for successful operations.
     """
 
-    resource_name = proto.Field(proto.STRING, number=1,)
+    resource_name = proto.Field(
+        proto.STRING,
+        number=1,
+    )
 
 
 __all__ = tuple(sorted(__protobuf__.manifest))

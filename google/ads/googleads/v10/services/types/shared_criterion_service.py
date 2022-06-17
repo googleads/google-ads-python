@@ -62,12 +62,23 @@ class MutateSharedCriteriaRequest(proto.Message):
             resource name should be returned post mutation.
     """
 
-    customer_id = proto.Field(proto.STRING, number=1,)
-    operations = proto.RepeatedField(
-        proto.MESSAGE, number=2, message="SharedCriterionOperation",
+    customer_id = proto.Field(
+        proto.STRING,
+        number=1,
     )
-    partial_failure = proto.Field(proto.BOOL, number=3,)
-    validate_only = proto.Field(proto.BOOL, number=4,)
+    operations = proto.RepeatedField(
+        proto.MESSAGE,
+        number=2,
+        message="SharedCriterionOperation",
+    )
+    partial_failure = proto.Field(
+        proto.BOOL,
+        number=3,
+    )
+    validate_only = proto.Field(
+        proto.BOOL,
+        number=4,
+    )
     response_content_type = proto.Field(
         proto.ENUM,
         number=5,
@@ -106,7 +117,11 @@ class SharedCriterionOperation(proto.Message):
         oneof="operation",
         message=gagr_shared_criterion.SharedCriterion,
     )
-    remove = proto.Field(proto.STRING, number=3, oneof="operation",)
+    remove = proto.Field(
+        proto.STRING,
+        number=3,
+        oneof="operation",
+    )
 
 
 class MutateSharedCriteriaResponse(proto.Message):
@@ -124,10 +139,14 @@ class MutateSharedCriteriaResponse(proto.Message):
     """
 
     partial_failure_error = proto.Field(
-        proto.MESSAGE, number=3, message=status_pb2.Status,
+        proto.MESSAGE,
+        number=3,
+        message=status_pb2.Status,
     )
     results = proto.RepeatedField(
-        proto.MESSAGE, number=2, message="MutateSharedCriterionResult",
+        proto.MESSAGE,
+        number=2,
+        message="MutateSharedCriterionResult",
     )
 
 
@@ -143,9 +162,14 @@ class MutateSharedCriterionResult(proto.Message):
             response_content_type is set to "MUTABLE_RESOURCE".
     """
 
-    resource_name = proto.Field(proto.STRING, number=1,)
+    resource_name = proto.Field(
+        proto.STRING,
+        number=1,
+    )
     shared_criterion = proto.Field(
-        proto.MESSAGE, number=2, message=gagr_shared_criterion.SharedCriterion,
+        proto.MESSAGE,
+        number=2,
+        message=gagr_shared_criterion.SharedCriterion,
     )
 
 

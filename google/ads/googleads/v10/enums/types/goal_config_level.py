@@ -19,13 +19,14 @@ import proto  # type: ignore
 __protobuf__ = proto.module(
     package="google.ads.googleads.v10.enums",
     marshal="google.ads.googleads.v10",
-    manifest={"GoalConfigLevelEnum",},
+    manifest={
+        "GoalConfigLevelEnum",
+    },
 )
 
 
 class GoalConfigLevelEnum(proto.Message):
-    r"""Container for enum describing possible goal config levels.
-    """
+    r"""Container for enum describing possible goal config levels."""
 
     class GoalConfigLevel(proto.Enum):
         r"""The possible goal config levels. Campaigns automatically

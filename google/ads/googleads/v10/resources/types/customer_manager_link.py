@@ -21,7 +21,9 @@ from google.ads.googleads.v10.enums.types import manager_link_status
 __protobuf__ = proto.module(
     package="google.ads.googleads.v10.resources",
     marshal="google.ads.googleads.v10",
-    manifest={"CustomerManagerLink",},
+    manifest={
+        "CustomerManagerLink",
+    },
 )
 
 
@@ -48,9 +50,20 @@ class CustomerManagerLink(proto.Message):
             the manager.
     """
 
-    resource_name = proto.Field(proto.STRING, number=1,)
-    manager_customer = proto.Field(proto.STRING, number=6, optional=True,)
-    manager_link_id = proto.Field(proto.INT64, number=7, optional=True,)
+    resource_name = proto.Field(
+        proto.STRING,
+        number=1,
+    )
+    manager_customer = proto.Field(
+        proto.STRING,
+        number=6,
+        optional=True,
+    )
+    manager_link_id = proto.Field(
+        proto.INT64,
+        number=7,
+        optional=True,
+    )
     status = proto.Field(
         proto.ENUM,
         number=5,

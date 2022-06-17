@@ -19,7 +19,9 @@ import proto  # type: ignore
 __protobuf__ = proto.module(
     package="google.ads.googleads.v10.resources",
     marshal="google.ads.googleads.v10",
-    manifest={"ShoppingPerformanceView",},
+    manifest={
+        "ShoppingPerformanceView",
+    },
 )
 
 
@@ -39,7 +41,10 @@ class ShoppingPerformanceView(proto.Message):
             form: ``customers/{customer_id}/shoppingPerformanceView``
     """
 
-    resource_name = proto.Field(proto.STRING, number=1,)
+    resource_name = proto.Field(
+        proto.STRING,
+        number=1,
+    )
 
 
 __all__ = tuple(sorted(__protobuf__.manifest))

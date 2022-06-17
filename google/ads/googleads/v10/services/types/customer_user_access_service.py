@@ -44,9 +44,14 @@ class MutateCustomerUserAccessRequest(proto.Message):
             customer
     """
 
-    customer_id = proto.Field(proto.STRING, number=1,)
+    customer_id = proto.Field(
+        proto.STRING,
+        number=1,
+    )
     operation = proto.Field(
-        proto.MESSAGE, number=2, message="CustomerUserAccessOperation",
+        proto.MESSAGE,
+        number=2,
+        message="CustomerUserAccessOperation",
     )
 
 
@@ -79,7 +84,9 @@ class CustomerUserAccessOperation(proto.Message):
     """
 
     update_mask = proto.Field(
-        proto.MESSAGE, number=3, message=field_mask_pb2.FieldMask,
+        proto.MESSAGE,
+        number=3,
+        message=field_mask_pb2.FieldMask,
     )
     update = proto.Field(
         proto.MESSAGE,
@@ -87,7 +94,11 @@ class CustomerUserAccessOperation(proto.Message):
         oneof="operation",
         message=customer_user_access.CustomerUserAccess,
     )
-    remove = proto.Field(proto.STRING, number=2, oneof="operation",)
+    remove = proto.Field(
+        proto.STRING,
+        number=2,
+        oneof="operation",
+    )
 
 
 class MutateCustomerUserAccessResponse(proto.Message):
@@ -99,7 +110,9 @@ class MutateCustomerUserAccessResponse(proto.Message):
     """
 
     result = proto.Field(
-        proto.MESSAGE, number=1, message="MutateCustomerUserAccessResult",
+        proto.MESSAGE,
+        number=1,
+        message="MutateCustomerUserAccessResult",
     )
 
 
@@ -111,7 +124,10 @@ class MutateCustomerUserAccessResult(proto.Message):
             Returned for successful operations.
     """
 
-    resource_name = proto.Field(proto.STRING, number=1,)
+    resource_name = proto.Field(
+        proto.STRING,
+        number=1,
+    )
 
 
 __all__ = tuple(sorted(__protobuf__.manifest))

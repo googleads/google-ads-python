@@ -19,13 +19,14 @@ import proto  # type: ignore
 __protobuf__ = proto.module(
     package="google.ads.googleads.v10.enums",
     marshal="google.ads.googleads.v10",
-    manifest={"CalloutPlaceholderFieldEnum",},
+    manifest={
+        "CalloutPlaceholderFieldEnum",
+    },
 )
 
 
 class CalloutPlaceholderFieldEnum(proto.Message):
-    r"""Values for Callout placeholder fields.
-    """
+    r"""Values for Callout placeholder fields."""
 
     class CalloutPlaceholderField(proto.Enum):
         r"""Possible values for Callout placeholder fields."""

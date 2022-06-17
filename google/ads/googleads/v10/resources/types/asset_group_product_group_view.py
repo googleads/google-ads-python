@@ -19,7 +19,9 @@ import proto  # type: ignore
 __protobuf__ = proto.module(
     package="google.ads.googleads.v10.resources",
     marshal="google.ads.googleads.v10",
-    manifest={"AssetGroupProductGroupView",},
+    manifest={
+        "AssetGroupProductGroupView",
+    },
 )
 
 
@@ -41,9 +43,18 @@ class AssetGroupProductGroupView(proto.Message):
             group listing group filter.
     """
 
-    resource_name = proto.Field(proto.STRING, number=1,)
-    asset_group = proto.Field(proto.STRING, number=2,)
-    asset_group_listing_group_filter = proto.Field(proto.STRING, number=4,)
+    resource_name = proto.Field(
+        proto.STRING,
+        number=1,
+    )
+    asset_group = proto.Field(
+        proto.STRING,
+        number=2,
+    )
+    asset_group_listing_group_filter = proto.Field(
+        proto.STRING,
+        number=4,
+    )
 
 
 __all__ = tuple(sorted(__protobuf__.manifest))

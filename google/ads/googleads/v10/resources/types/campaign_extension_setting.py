@@ -24,7 +24,9 @@ from google.ads.googleads.v10.enums.types import (
 __protobuf__ = proto.module(
     package="google.ads.googleads.v10.resources",
     marshal="google.ads.googleads.v10",
-    manifest={"CampaignExtensionSetting",},
+    manifest={
+        "CampaignExtensionSetting",
+    },
 )
 
 
@@ -60,14 +62,24 @@ class CampaignExtensionSetting(proto.Message):
             serve. Optional.
     """
 
-    resource_name = proto.Field(proto.STRING, number=1,)
+    resource_name = proto.Field(
+        proto.STRING,
+        number=1,
+    )
     extension_type = proto.Field(
         proto.ENUM,
         number=2,
         enum=gage_extension_type.ExtensionTypeEnum.ExtensionType,
     )
-    campaign = proto.Field(proto.STRING, number=6, optional=True,)
-    extension_feed_items = proto.RepeatedField(proto.STRING, number=7,)
+    campaign = proto.Field(
+        proto.STRING,
+        number=6,
+        optional=True,
+    )
+    extension_feed_items = proto.RepeatedField(
+        proto.STRING,
+        number=7,
+    )
     device = proto.Field(
         proto.ENUM,
         number=5,

@@ -19,13 +19,14 @@ import proto  # type: ignore
 __protobuf__ = proto.module(
     package="google.ads.googleads.v10.enums",
     marshal="google.ads.googleads.v10",
-    manifest={"BudgetTypeEnum",},
+    manifest={
+        "BudgetTypeEnum",
+    },
 )
 
 
 class BudgetTypeEnum(proto.Message):
-    r"""Describes Budget types.
-    """
+    r"""Describes Budget types."""
 
     class BudgetType(proto.Enum):
         r"""Possible Budget types."""

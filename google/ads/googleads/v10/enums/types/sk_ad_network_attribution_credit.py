@@ -19,13 +19,14 @@ import proto  # type: ignore
 __protobuf__ = proto.module(
     package="google.ads.googleads.v10.enums",
     marshal="google.ads.googleads.v10",
-    manifest={"SkAdNetworkAttributionCreditEnum",},
+    manifest={
+        "SkAdNetworkAttributionCreditEnum",
+    },
 )
 
 
 class SkAdNetworkAttributionCreditEnum(proto.Message):
-    r"""Container for enumeration of SkAdNetwork attribution credits.
-    """
+    r"""Container for enumeration of SkAdNetwork attribution credits."""
 
     class SkAdNetworkAttributionCredit(proto.Enum):
         r"""Enumerates SkAdNetwork attribution credits."""

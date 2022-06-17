@@ -46,11 +46,19 @@ class MutateAccountBudgetProposalRequest(proto.Message):
             executed. Only errors are returned, not results.
     """
 
-    customer_id = proto.Field(proto.STRING, number=1,)
-    operation = proto.Field(
-        proto.MESSAGE, number=2, message="AccountBudgetProposalOperation",
+    customer_id = proto.Field(
+        proto.STRING,
+        number=1,
     )
-    validate_only = proto.Field(proto.BOOL, number=3,)
+    operation = proto.Field(
+        proto.MESSAGE,
+        number=2,
+        message="AccountBudgetProposalOperation",
+    )
+    validate_only = proto.Field(
+        proto.BOOL,
+        number=3,
+    )
 
 
 class AccountBudgetProposalOperation(proto.Message):
@@ -94,7 +102,9 @@ class AccountBudgetProposalOperation(proto.Message):
     """
 
     update_mask = proto.Field(
-        proto.MESSAGE, number=3, message=field_mask_pb2.FieldMask,
+        proto.MESSAGE,
+        number=3,
+        message=field_mask_pb2.FieldMask,
     )
     create = proto.Field(
         proto.MESSAGE,
@@ -102,7 +112,11 @@ class AccountBudgetProposalOperation(proto.Message):
         oneof="operation",
         message=account_budget_proposal.AccountBudgetProposal,
     )
-    remove = proto.Field(proto.STRING, number=1, oneof="operation",)
+    remove = proto.Field(
+        proto.STRING,
+        number=1,
+        oneof="operation",
+    )
 
 
 class MutateAccountBudgetProposalResponse(proto.Message):
@@ -114,7 +128,9 @@ class MutateAccountBudgetProposalResponse(proto.Message):
     """
 
     result = proto.Field(
-        proto.MESSAGE, number=2, message="MutateAccountBudgetProposalResult",
+        proto.MESSAGE,
+        number=2,
+        message="MutateAccountBudgetProposalResult",
     )
 
 
@@ -126,7 +142,10 @@ class MutateAccountBudgetProposalResult(proto.Message):
             Returned for successful operations.
     """
 
-    resource_name = proto.Field(proto.STRING, number=1,)
+    resource_name = proto.Field(
+        proto.STRING,
+        number=1,
+    )
 
 
 __all__ = tuple(sorted(__protobuf__.manifest))

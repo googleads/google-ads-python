@@ -26,7 +26,10 @@ from google.ads.googleads.v10.resources.types import ad as gagr_ad
 __protobuf__ = proto.module(
     package="google.ads.googleads.v10.resources",
     marshal="google.ads.googleads.v10",
-    manifest={"AdGroupAd", "AdGroupAdPolicySummary",},
+    manifest={
+        "AdGroupAd",
+        "AdGroupAdPolicySummary",
+    },
 )
 
 
@@ -64,22 +67,43 @@ class AdGroupAd(proto.Message):
             attached to this ad group ad.
     """
 
-    resource_name = proto.Field(proto.STRING, number=1,)
+    resource_name = proto.Field(
+        proto.STRING,
+        number=1,
+    )
     status = proto.Field(
         proto.ENUM,
         number=3,
         enum=ad_group_ad_status.AdGroupAdStatusEnum.AdGroupAdStatus,
     )
-    ad_group = proto.Field(proto.STRING, number=9, optional=True,)
-    ad = proto.Field(proto.MESSAGE, number=5, message=gagr_ad.Ad,)
+    ad_group = proto.Field(
+        proto.STRING,
+        number=9,
+        optional=True,
+    )
+    ad = proto.Field(
+        proto.MESSAGE,
+        number=5,
+        message=gagr_ad.Ad,
+    )
     policy_summary = proto.Field(
-        proto.MESSAGE, number=6, message="AdGroupAdPolicySummary",
+        proto.MESSAGE,
+        number=6,
+        message="AdGroupAdPolicySummary",
     )
     ad_strength = proto.Field(
-        proto.ENUM, number=7, enum=gage_ad_strength.AdStrengthEnum.AdStrength,
+        proto.ENUM,
+        number=7,
+        enum=gage_ad_strength.AdStrengthEnum.AdStrength,
     )
-    action_items = proto.RepeatedField(proto.STRING, number=13,)
-    labels = proto.RepeatedField(proto.STRING, number=10,)
+    action_items = proto.RepeatedField(
+        proto.STRING,
+        number=13,
+    )
+    labels = proto.RepeatedField(
+        proto.STRING,
+        number=10,
+    )
 
 
 class AdGroupAdPolicySummary(proto.Message):
@@ -99,7 +123,9 @@ class AdGroupAdPolicySummary(proto.Message):
     """
 
     policy_topic_entries = proto.RepeatedField(
-        proto.MESSAGE, number=1, message=policy.PolicyTopicEntry,
+        proto.MESSAGE,
+        number=1,
+        message=policy.PolicyTopicEntry,
     )
     review_status = proto.Field(
         proto.ENUM,

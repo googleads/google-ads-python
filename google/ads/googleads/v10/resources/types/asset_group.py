@@ -21,7 +21,9 @@ from google.ads.googleads.v10.enums.types import asset_group_status
 __protobuf__ = proto.module(
     package="google.ads.googleads.v10.resources",
     marshal="google.ads.googleads.v10",
-    manifest={"AssetGroup",},
+    manifest={
+        "AssetGroup",
+    },
 )
 
 
@@ -69,19 +71,43 @@ class AssetGroup(proto.Message):
             only be set when path1 is set.
     """
 
-    resource_name = proto.Field(proto.STRING, number=1,)
-    id = proto.Field(proto.INT64, number=9,)
-    campaign = proto.Field(proto.STRING, number=2,)
-    name = proto.Field(proto.STRING, number=3,)
-    final_urls = proto.RepeatedField(proto.STRING, number=4,)
-    final_mobile_urls = proto.RepeatedField(proto.STRING, number=5,)
+    resource_name = proto.Field(
+        proto.STRING,
+        number=1,
+    )
+    id = proto.Field(
+        proto.INT64,
+        number=9,
+    )
+    campaign = proto.Field(
+        proto.STRING,
+        number=2,
+    )
+    name = proto.Field(
+        proto.STRING,
+        number=3,
+    )
+    final_urls = proto.RepeatedField(
+        proto.STRING,
+        number=4,
+    )
+    final_mobile_urls = proto.RepeatedField(
+        proto.STRING,
+        number=5,
+    )
     status = proto.Field(
         proto.ENUM,
         number=6,
         enum=asset_group_status.AssetGroupStatusEnum.AssetGroupStatus,
     )
-    path1 = proto.Field(proto.STRING, number=7,)
-    path2 = proto.Field(proto.STRING, number=8,)
+    path1 = proto.Field(
+        proto.STRING,
+        number=7,
+    )
+    path2 = proto.Field(
+        proto.STRING,
+        number=8,
+    )
 
 
 __all__ = tuple(sorted(__protobuf__.manifest))

@@ -19,13 +19,14 @@ import proto  # type: ignore
 __protobuf__ = proto.module(
     package="google.ads.googleads.v10.errors",
     marshal="google.ads.googleads.v10",
-    manifest={"StringLengthErrorEnum",},
+    manifest={
+        "StringLengthErrorEnum",
+    },
 )
 
 
 class StringLengthErrorEnum(proto.Message):
-    r"""Container for enum describing possible string length errors.
-    """
+    r"""Container for enum describing possible string length errors."""
 
     class StringLengthError(proto.Enum):
         r"""Enum describing possible string length errors."""

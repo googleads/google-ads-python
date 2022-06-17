@@ -23,7 +23,9 @@ from google.ads.googleads.v10.enums.types import (
 __protobuf__ = proto.module(
     package="google.ads.googleads.v10.resources",
     marshal="google.ads.googleads.v10",
-    manifest={"FeedPlaceholderView",},
+    manifest={
+        "FeedPlaceholderView",
+    },
 )
 
 
@@ -41,7 +43,10 @@ class FeedPlaceholderView(proto.Message):
             placeholder view.
     """
 
-    resource_name = proto.Field(proto.STRING, number=1,)
+    resource_name = proto.Field(
+        proto.STRING,
+        number=1,
+    )
     placeholder_type = proto.Field(
         proto.ENUM,
         number=2,

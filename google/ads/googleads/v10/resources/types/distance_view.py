@@ -23,7 +23,9 @@ from google.ads.googleads.v10.enums.types import (
 __protobuf__ = proto.module(
     package="google.ads.googleads.v10.resources",
     marshal="google.ads.googleads.v10",
-    manifest={"DistanceView",},
+    manifest={
+        "DistanceView",
+    },
 )
 
 
@@ -50,13 +52,20 @@ class DistanceView(proto.Message):
             This field is a member of `oneof`_ ``_metric_system``.
     """
 
-    resource_name = proto.Field(proto.STRING, number=1,)
+    resource_name = proto.Field(
+        proto.STRING,
+        number=1,
+    )
     distance_bucket = proto.Field(
         proto.ENUM,
         number=2,
         enum=gage_distance_bucket.DistanceBucketEnum.DistanceBucket,
     )
-    metric_system = proto.Field(proto.BOOL, number=4, optional=True,)
+    metric_system = proto.Field(
+        proto.BOOL,
+        number=4,
+        optional=True,
+    )
 
 
 __all__ = tuple(sorted(__protobuf__.manifest))

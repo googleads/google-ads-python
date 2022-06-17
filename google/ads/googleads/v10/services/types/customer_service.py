@@ -59,11 +59,19 @@ class MutateCustomerRequest(proto.Message):
             resource name should be returned post mutation.
     """
 
-    customer_id = proto.Field(proto.STRING, number=1,)
-    operation = proto.Field(
-        proto.MESSAGE, number=4, message="CustomerOperation",
+    customer_id = proto.Field(
+        proto.STRING,
+        number=1,
     )
-    validate_only = proto.Field(proto.BOOL, number=5,)
+    operation = proto.Field(
+        proto.MESSAGE,
+        number=4,
+        message="CustomerOperation",
+    )
+    validate_only = proto.Field(
+        proto.BOOL,
+        number=5,
+    )
     response_content_type = proto.Field(
         proto.ENUM,
         number=6,
@@ -98,15 +106,29 @@ class CreateCustomerClientRequest(proto.Message):
             executed. Only errors are returned, not results.
     """
 
-    customer_id = proto.Field(proto.STRING, number=1,)
+    customer_id = proto.Field(
+        proto.STRING,
+        number=1,
+    )
     customer_client = proto.Field(
-        proto.MESSAGE, number=2, message=gagr_customer.Customer,
+        proto.MESSAGE,
+        number=2,
+        message=gagr_customer.Customer,
     )
-    email_address = proto.Field(proto.STRING, number=5, optional=True,)
+    email_address = proto.Field(
+        proto.STRING,
+        number=5,
+        optional=True,
+    )
     access_role = proto.Field(
-        proto.ENUM, number=4, enum=gage_access_role.AccessRoleEnum.AccessRole,
+        proto.ENUM,
+        number=4,
+        enum=gage_access_role.AccessRoleEnum.AccessRole,
     )
-    validate_only = proto.Field(proto.BOOL, number=6,)
+    validate_only = proto.Field(
+        proto.BOOL,
+        number=6,
+    )
 
 
 class CustomerOperation(proto.Message):
@@ -122,10 +144,14 @@ class CustomerOperation(proto.Message):
     """
 
     update = proto.Field(
-        proto.MESSAGE, number=1, message=gagr_customer.Customer,
+        proto.MESSAGE,
+        number=1,
+        message=gagr_customer.Customer,
     )
     update_mask = proto.Field(
-        proto.MESSAGE, number=2, message=field_mask_pb2.FieldMask,
+        proto.MESSAGE,
+        number=2,
+        message=field_mask_pb2.FieldMask,
     )
 
 
@@ -142,8 +168,14 @@ class CreateCustomerClientResponse(proto.Message):
             only.
     """
 
-    resource_name = proto.Field(proto.STRING, number=2,)
-    invitation_link = proto.Field(proto.STRING, number=3,)
+    resource_name = proto.Field(
+        proto.STRING,
+        number=2,
+    )
+    invitation_link = proto.Field(
+        proto.STRING,
+        number=3,
+    )
 
 
 class MutateCustomerResponse(proto.Message):
@@ -155,7 +187,9 @@ class MutateCustomerResponse(proto.Message):
     """
 
     result = proto.Field(
-        proto.MESSAGE, number=2, message="MutateCustomerResult",
+        proto.MESSAGE,
+        number=2,
+        message="MutateCustomerResult",
     )
 
 
@@ -171,9 +205,14 @@ class MutateCustomerResult(proto.Message):
             is set to "MUTABLE_RESOURCE".
     """
 
-    resource_name = proto.Field(proto.STRING, number=1,)
+    resource_name = proto.Field(
+        proto.STRING,
+        number=1,
+    )
     customer = proto.Field(
-        proto.MESSAGE, number=2, message=gagr_customer.Customer,
+        proto.MESSAGE,
+        number=2,
+        message=gagr_customer.Customer,
     )
 
 
@@ -194,7 +233,10 @@ class ListAccessibleCustomersResponse(proto.Message):
             accessible by the user authenticating the call.
     """
 
-    resource_names = proto.RepeatedField(proto.STRING, number=1,)
+    resource_names = proto.RepeatedField(
+        proto.STRING,
+        number=1,
+    )
 
 
 __all__ = tuple(sorted(__protobuf__.manifest))

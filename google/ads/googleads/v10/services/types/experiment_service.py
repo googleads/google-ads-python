@@ -65,12 +65,23 @@ class MutateExperimentsRequest(proto.Message):
             executed. Only errors are returned, not results.
     """
 
-    customer_id = proto.Field(proto.STRING, number=1,)
-    operations = proto.RepeatedField(
-        proto.MESSAGE, number=2, message="ExperimentOperation",
+    customer_id = proto.Field(
+        proto.STRING,
+        number=1,
     )
-    partial_failure = proto.Field(proto.BOOL, number=3,)
-    validate_only = proto.Field(proto.BOOL, number=4,)
+    operations = proto.RepeatedField(
+        proto.MESSAGE,
+        number=2,
+        message="ExperimentOperation",
+    )
+    partial_failure = proto.Field(
+        proto.BOOL,
+        number=3,
+    )
+    validate_only = proto.Field(
+        proto.BOOL,
+        number=4,
+    )
 
 
 class ExperimentOperation(proto.Message):
@@ -106,7 +117,9 @@ class ExperimentOperation(proto.Message):
     """
 
     update_mask = proto.Field(
-        proto.MESSAGE, number=4, message=field_mask_pb2.FieldMask,
+        proto.MESSAGE,
+        number=4,
+        message=field_mask_pb2.FieldMask,
     )
     create = proto.Field(
         proto.MESSAGE,
@@ -120,7 +133,11 @@ class ExperimentOperation(proto.Message):
         oneof="operation",
         message=gagr_experiment.Experiment,
     )
-    remove = proto.Field(proto.STRING, number=3, oneof="operation",)
+    remove = proto.Field(
+        proto.STRING,
+        number=3,
+        oneof="operation",
+    )
 
 
 class MutateExperimentsResponse(proto.Message):
@@ -138,10 +155,14 @@ class MutateExperimentsResponse(proto.Message):
     """
 
     partial_failure_error = proto.Field(
-        proto.MESSAGE, number=1, message=status_pb2.Status,
+        proto.MESSAGE,
+        number=1,
+        message=status_pb2.Status,
     )
     results = proto.RepeatedField(
-        proto.MESSAGE, number=2, message="MutateExperimentResult",
+        proto.MESSAGE,
+        number=2,
+        message="MutateExperimentResult",
     )
 
 
@@ -153,7 +174,10 @@ class MutateExperimentResult(proto.Message):
             Returned for successful operations.
     """
 
-    resource_name = proto.Field(proto.STRING, number=1,)
+    resource_name = proto.Field(
+        proto.STRING,
+        number=1,
+    )
 
 
 class EndExperimentRequest(proto.Message):
@@ -169,8 +193,14 @@ class EndExperimentRequest(proto.Message):
             executed. Only errors are returned, not results.
     """
 
-    experiment = proto.Field(proto.STRING, number=1,)
-    validate_only = proto.Field(proto.BOOL, number=2,)
+    experiment = proto.Field(
+        proto.STRING,
+        number=1,
+    )
+    validate_only = proto.Field(
+        proto.BOOL,
+        number=2,
+    )
 
 
 class ListExperimentAsyncErrorsRequest(proto.Message):
@@ -194,9 +224,18 @@ class ListExperimentAsyncErrorsRequest(proto.Message):
             1000.
     """
 
-    resource_name = proto.Field(proto.STRING, number=1,)
-    page_token = proto.Field(proto.STRING, number=2,)
-    page_size = proto.Field(proto.INT32, number=3,)
+    resource_name = proto.Field(
+        proto.STRING,
+        number=1,
+    )
+    page_token = proto.Field(
+        proto.STRING,
+        number=2,
+    )
+    page_size = proto.Field(
+        proto.INT32,
+        number=3,
+    )
 
 
 class ListExperimentAsyncErrorsResponse(proto.Message):
@@ -219,9 +258,14 @@ class ListExperimentAsyncErrorsResponse(proto.Message):
         return self
 
     errors = proto.RepeatedField(
-        proto.MESSAGE, number=1, message=status_pb2.Status,
+        proto.MESSAGE,
+        number=1,
+        message=status_pb2.Status,
     )
-    next_page_token = proto.Field(proto.STRING, number=2,)
+    next_page_token = proto.Field(
+        proto.STRING,
+        number=2,
+    )
 
 
 class GraduateExperimentRequest(proto.Message):
@@ -242,11 +286,19 @@ class GraduateExperimentRequest(proto.Message):
             executed. Only errors are returned, not results.
     """
 
-    experiment = proto.Field(proto.STRING, number=1,)
-    campaign_budget_mappings = proto.RepeatedField(
-        proto.MESSAGE, number=2, message="CampaignBudgetMapping",
+    experiment = proto.Field(
+        proto.STRING,
+        number=1,
     )
-    validate_only = proto.Field(proto.BOOL, number=3,)
+    campaign_budget_mappings = proto.RepeatedField(
+        proto.MESSAGE,
+        number=2,
+        message="CampaignBudgetMapping",
+    )
+    validate_only = proto.Field(
+        proto.BOOL,
+        number=3,
+    )
 
 
 class CampaignBudgetMapping(proto.Message):
@@ -262,8 +314,14 @@ class CampaignBudgetMapping(proto.Message):
             to the graduating experiment campaign.
     """
 
-    experiment_campaign = proto.Field(proto.STRING, number=1,)
-    campaign_budget = proto.Field(proto.STRING, number=2,)
+    experiment_campaign = proto.Field(
+        proto.STRING,
+        number=1,
+    )
+    campaign_budget = proto.Field(
+        proto.STRING,
+        number=2,
+    )
 
 
 class ScheduleExperimentRequest(proto.Message):
@@ -278,8 +336,14 @@ class ScheduleExperimentRequest(proto.Message):
             executed. Only errors are returned, not results.
     """
 
-    resource_name = proto.Field(proto.STRING, number=1,)
-    validate_only = proto.Field(proto.BOOL, number=2,)
+    resource_name = proto.Field(
+        proto.STRING,
+        number=1,
+    )
+    validate_only = proto.Field(
+        proto.BOOL,
+        number=2,
+    )
 
 
 class ScheduleExperimentMetadata(proto.Message):
@@ -290,7 +354,10 @@ class ScheduleExperimentMetadata(proto.Message):
             Required. The scheduled experiment.
     """
 
-    experiment = proto.Field(proto.STRING, number=1,)
+    experiment = proto.Field(
+        proto.STRING,
+        number=1,
+    )
 
 
 class PromoteExperimentRequest(proto.Message):
@@ -306,8 +373,14 @@ class PromoteExperimentRequest(proto.Message):
             executed. Only errors are returned, not results.
     """
 
-    resource_name = proto.Field(proto.STRING, number=1,)
-    validate_only = proto.Field(proto.BOOL, number=2,)
+    resource_name = proto.Field(
+        proto.STRING,
+        number=1,
+    )
+    validate_only = proto.Field(
+        proto.BOOL,
+        number=2,
+    )
 
 
 class PromoteExperimentMetadata(proto.Message):
@@ -318,7 +391,10 @@ class PromoteExperimentMetadata(proto.Message):
             Required. The promoted experiment.
     """
 
-    experiment = proto.Field(proto.STRING, number=1,)
+    experiment = proto.Field(
+        proto.STRING,
+        number=1,
+    )
 
 
 __all__ = tuple(sorted(__protobuf__.manifest))

@@ -19,13 +19,14 @@ import proto  # type: ignore
 __protobuf__ = proto.module(
     package="google.ads.googleads.v10.errors",
     marshal="google.ads.googleads.v10",
-    manifest={"AdCustomizerErrorEnum",},
+    manifest={
+        "AdCustomizerErrorEnum",
+    },
 )
 
 
 class AdCustomizerErrorEnum(proto.Message):
-    r"""Container for enum describing possible ad customizer errors.
-    """
+    r"""Container for enum describing possible ad customizer errors."""
 
     class AdCustomizerError(proto.Enum):
         r"""Enum describing possible ad customizer errors."""

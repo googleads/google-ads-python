@@ -24,7 +24,9 @@ from google.ads.googleads.v10.enums.types import time_type
 __protobuf__ = proto.module(
     package="google.ads.googleads.v10.resources",
     marshal="google.ads.googleads.v10",
-    manifest={"AccountBudgetProposal",},
+    manifest={
+        "AccountBudgetProposal",
+    },
 )
 
 
@@ -160,10 +162,25 @@ class AccountBudgetProposal(proto.Message):
             This field is a member of `oneof`_ ``approved_spending_limit``.
     """
 
-    resource_name = proto.Field(proto.STRING, number=1,)
-    id = proto.Field(proto.INT64, number=25, optional=True,)
-    billing_setup = proto.Field(proto.STRING, number=26, optional=True,)
-    account_budget = proto.Field(proto.STRING, number=27, optional=True,)
+    resource_name = proto.Field(
+        proto.STRING,
+        number=1,
+    )
+    id = proto.Field(
+        proto.INT64,
+        number=25,
+        optional=True,
+    )
+    billing_setup = proto.Field(
+        proto.STRING,
+        number=26,
+        optional=True,
+    )
+    account_budget = proto.Field(
+        proto.STRING,
+        number=27,
+        optional=True,
+    )
     proposal_type = proto.Field(
         proto.ENUM,
         number=4,
@@ -174,18 +191,40 @@ class AccountBudgetProposal(proto.Message):
         number=15,
         enum=account_budget_proposal_status.AccountBudgetProposalStatusEnum.AccountBudgetProposalStatus,
     )
-    proposed_name = proto.Field(proto.STRING, number=28, optional=True,)
+    proposed_name = proto.Field(
+        proto.STRING,
+        number=28,
+        optional=True,
+    )
     approved_start_date_time = proto.Field(
-        proto.STRING, number=30, optional=True,
+        proto.STRING,
+        number=30,
+        optional=True,
     )
     proposed_purchase_order_number = proto.Field(
-        proto.STRING, number=35, optional=True,
+        proto.STRING,
+        number=35,
+        optional=True,
     )
-    proposed_notes = proto.Field(proto.STRING, number=36, optional=True,)
-    creation_date_time = proto.Field(proto.STRING, number=37, optional=True,)
-    approval_date_time = proto.Field(proto.STRING, number=38, optional=True,)
+    proposed_notes = proto.Field(
+        proto.STRING,
+        number=36,
+        optional=True,
+    )
+    creation_date_time = proto.Field(
+        proto.STRING,
+        number=37,
+        optional=True,
+    )
+    approval_date_time = proto.Field(
+        proto.STRING,
+        number=38,
+        optional=True,
+    )
     proposed_start_date_time = proto.Field(
-        proto.STRING, number=29, oneof="proposed_start_time",
+        proto.STRING,
+        number=29,
+        oneof="proposed_start_time",
     )
     proposed_start_time_type = proto.Field(
         proto.ENUM,
@@ -194,7 +233,9 @@ class AccountBudgetProposal(proto.Message):
         enum=time_type.TimeTypeEnum.TimeType,
     )
     proposed_end_date_time = proto.Field(
-        proto.STRING, number=31, oneof="proposed_end_time",
+        proto.STRING,
+        number=31,
+        oneof="proposed_end_time",
     )
     proposed_end_time_type = proto.Field(
         proto.ENUM,
@@ -203,7 +244,9 @@ class AccountBudgetProposal(proto.Message):
         enum=time_type.TimeTypeEnum.TimeType,
     )
     approved_end_date_time = proto.Field(
-        proto.STRING, number=32, oneof="approved_end_time",
+        proto.STRING,
+        number=32,
+        oneof="approved_end_time",
     )
     approved_end_time_type = proto.Field(
         proto.ENUM,
@@ -212,7 +255,9 @@ class AccountBudgetProposal(proto.Message):
         enum=time_type.TimeTypeEnum.TimeType,
     )
     proposed_spending_limit_micros = proto.Field(
-        proto.INT64, number=33, oneof="proposed_spending_limit",
+        proto.INT64,
+        number=33,
+        oneof="proposed_spending_limit",
     )
     proposed_spending_limit_type = proto.Field(
         proto.ENUM,
@@ -221,7 +266,9 @@ class AccountBudgetProposal(proto.Message):
         enum=spending_limit_type.SpendingLimitTypeEnum.SpendingLimitType,
     )
     approved_spending_limit_micros = proto.Field(
-        proto.INT64, number=34, oneof="approved_spending_limit",
+        proto.INT64,
+        number=34,
+        oneof="approved_spending_limit",
     )
     approved_spending_limit_type = proto.Field(
         proto.ENUM,

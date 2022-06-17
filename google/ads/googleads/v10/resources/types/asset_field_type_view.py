@@ -21,7 +21,9 @@ from google.ads.googleads.v10.enums.types import asset_field_type
 __protobuf__ = proto.module(
     package="google.ads.googleads.v10.resources",
     marshal="google.ads.googleads.v10",
-    manifest={"AssetFieldTypeView",},
+    manifest={
+        "AssetFieldTypeView",
+    },
 )
 
 
@@ -41,7 +43,10 @@ class AssetFieldTypeView(proto.Message):
             asset field type view.
     """
 
-    resource_name = proto.Field(proto.STRING, number=1,)
+    resource_name = proto.Field(
+        proto.STRING,
+        number=1,
+    )
     field_type = proto.Field(
         proto.ENUM,
         number=3,

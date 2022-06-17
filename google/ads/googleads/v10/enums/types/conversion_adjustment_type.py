@@ -19,13 +19,14 @@ import proto  # type: ignore
 __protobuf__ = proto.module(
     package="google.ads.googleads.v10.enums",
     marshal="google.ads.googleads.v10",
-    manifest={"ConversionAdjustmentTypeEnum",},
+    manifest={
+        "ConversionAdjustmentTypeEnum",
+    },
 )
 
 
 class ConversionAdjustmentTypeEnum(proto.Message):
-    r"""Container for enum describing conversion adjustment types.
-    """
+    r"""Container for enum describing conversion adjustment types."""
 
     class ConversionAdjustmentType(proto.Enum):
         r"""The different actions advertisers can take to adjust the

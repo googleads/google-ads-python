@@ -22,7 +22,9 @@ from google.ads.googleads.v10.enums.types import experiment_metric_direction
 __protobuf__ = proto.module(
     package="google.ads.googleads.v10.common",
     marshal="google.ads.googleads.v10",
-    manifest={"MetricGoal",},
+    manifest={
+        "MetricGoal",
+    },
 )
 
 

@@ -53,7 +53,8 @@ class AdGroupFeedServiceClientMeta(type):
     _transport_registry["grpc"] = AdGroupFeedServiceGrpcTransport
 
     def get_transport_class(
-        cls, label: str = None,
+        cls,
+        label: str = None,
     ) -> Type[AdGroupFeedServiceTransport]:
         """Returns an appropriate transport class.
 
@@ -176,10 +177,14 @@ class AdGroupFeedServiceClient(metaclass=AdGroupFeedServiceClientMeta):
         self.transport.close()
 
     @staticmethod
-    def ad_group_path(customer_id: str, ad_group_id: str,) -> str:
+    def ad_group_path(
+        customer_id: str,
+        ad_group_id: str,
+    ) -> str:
         """Returns a fully-qualified ad_group string."""
         return "customers/{customer_id}/adGroups/{ad_group_id}".format(
-            customer_id=customer_id, ad_group_id=ad_group_id,
+            customer_id=customer_id,
+            ad_group_id=ad_group_id,
         )
 
     @staticmethod
@@ -193,11 +198,15 @@ class AdGroupFeedServiceClient(metaclass=AdGroupFeedServiceClientMeta):
 
     @staticmethod
     def ad_group_feed_path(
-        customer_id: str, ad_group_id: str, feed_id: str,
+        customer_id: str,
+        ad_group_id: str,
+        feed_id: str,
     ) -> str:
         """Returns a fully-qualified ad_group_feed string."""
         return "customers/{customer_id}/adGroupFeeds/{ad_group_id}~{feed_id}".format(
-            customer_id=customer_id, ad_group_id=ad_group_id, feed_id=feed_id,
+            customer_id=customer_id,
+            ad_group_id=ad_group_id,
+            feed_id=feed_id,
         )
 
     @staticmethod
@@ -210,10 +219,14 @@ class AdGroupFeedServiceClient(metaclass=AdGroupFeedServiceClientMeta):
         return m.groupdict() if m else {}
 
     @staticmethod
-    def feed_path(customer_id: str, feed_id: str,) -> str:
+    def feed_path(
+        customer_id: str,
+        feed_id: str,
+    ) -> str:
         """Returns a fully-qualified feed string."""
         return "customers/{customer_id}/feeds/{feed_id}".format(
-            customer_id=customer_id, feed_id=feed_id,
+            customer_id=customer_id,
+            feed_id=feed_id,
         )
 
     @staticmethod
@@ -225,7 +238,9 @@ class AdGroupFeedServiceClient(metaclass=AdGroupFeedServiceClientMeta):
         return m.groupdict() if m else {}
 
     @staticmethod
-    def common_billing_account_path(billing_account: str,) -> str:
+    def common_billing_account_path(
+        billing_account: str,
+    ) -> str:
         """Returns a fully-qualified billing_account string."""
         return "billingAccounts/{billing_account}".format(
             billing_account=billing_account,
@@ -238,9 +253,13 @@ class AdGroupFeedServiceClient(metaclass=AdGroupFeedServiceClientMeta):
         return m.groupdict() if m else {}
 
     @staticmethod
-    def common_folder_path(folder: str,) -> str:
+    def common_folder_path(
+        folder: str,
+    ) -> str:
         """Returns a fully-qualified folder string."""
-        return "folders/{folder}".format(folder=folder,)
+        return "folders/{folder}".format(
+            folder=folder,
+        )
 
     @staticmethod
     def parse_common_folder_path(path: str) -> Dict[str, str]:
@@ -249,9 +268,13 @@ class AdGroupFeedServiceClient(metaclass=AdGroupFeedServiceClientMeta):
         return m.groupdict() if m else {}
 
     @staticmethod
-    def common_organization_path(organization: str,) -> str:
+    def common_organization_path(
+        organization: str,
+    ) -> str:
         """Returns a fully-qualified organization string."""
-        return "organizations/{organization}".format(organization=organization,)
+        return "organizations/{organization}".format(
+            organization=organization,
+        )
 
     @staticmethod
     def parse_common_organization_path(path: str) -> Dict[str, str]:
@@ -260,9 +283,13 @@ class AdGroupFeedServiceClient(metaclass=AdGroupFeedServiceClientMeta):
         return m.groupdict() if m else {}
 
     @staticmethod
-    def common_project_path(project: str,) -> str:
+    def common_project_path(
+        project: str,
+    ) -> str:
         """Returns a fully-qualified project string."""
-        return "projects/{project}".format(project=project,)
+        return "projects/{project}".format(
+            project=project,
+        )
 
     @staticmethod
     def parse_common_project_path(path: str) -> Dict[str, str]:
@@ -271,10 +298,14 @@ class AdGroupFeedServiceClient(metaclass=AdGroupFeedServiceClientMeta):
         return m.groupdict() if m else {}
 
     @staticmethod
-    def common_location_path(project: str, location: str,) -> str:
+    def common_location_path(
+        project: str,
+        location: str,
+    ) -> str:
         """Returns a fully-qualified location string."""
         return "projects/{project}/locations/{location}".format(
-            project=project, location=location,
+            project=project,
+            location=location,
         )
 
     @staticmethod
@@ -506,7 +537,10 @@ class AdGroupFeedServiceClient(metaclass=AdGroupFeedServiceClientMeta):
 
         # Send the request.
         response = rpc(
-            request, retry=retry, timeout=timeout, metadata=metadata,
+            request,
+            retry=retry,
+            timeout=timeout,
+            metadata=metadata,
         )
 
         # Done; return the response.
@@ -515,7 +549,9 @@ class AdGroupFeedServiceClient(metaclass=AdGroupFeedServiceClientMeta):
 
 try:
     DEFAULT_CLIENT_INFO = gapic_v1.client_info.ClientInfo(
-        gapic_version=pkg_resources.get_distribution("google-ads",).version,
+        gapic_version=pkg_resources.get_distribution(
+            "google-ads",
+        ).version,
     )
 except pkg_resources.DistributionNotFound:
     DEFAULT_CLIENT_INFO = gapic_v1.client_info.ClientInfo()

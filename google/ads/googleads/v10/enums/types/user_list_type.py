@@ -19,13 +19,14 @@ import proto  # type: ignore
 __protobuf__ = proto.module(
     package="google.ads.googleads.v10.enums",
     marshal="google.ads.googleads.v10",
-    manifest={"UserListTypeEnum",},
+    manifest={
+        "UserListTypeEnum",
+    },
 )
 
 
 class UserListTypeEnum(proto.Message):
-    r"""The user list types.
-    """
+    r"""The user list types."""
 
     class UserListType(proto.Enum):
         r"""Enum containing possible user list types."""

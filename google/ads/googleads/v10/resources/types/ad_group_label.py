@@ -19,7 +19,9 @@ import proto  # type: ignore
 __protobuf__ = proto.module(
     package="google.ads.googleads.v10.resources",
     marshal="google.ads.googleads.v10",
-    manifest={"AdGroupLabel",},
+    manifest={
+        "AdGroupLabel",
+    },
 )
 
 
@@ -43,9 +45,20 @@ class AdGroupLabel(proto.Message):
             This field is a member of `oneof`_ ``_label``.
     """
 
-    resource_name = proto.Field(proto.STRING, number=1,)
-    ad_group = proto.Field(proto.STRING, number=4, optional=True,)
-    label = proto.Field(proto.STRING, number=5, optional=True,)
+    resource_name = proto.Field(
+        proto.STRING,
+        number=1,
+    )
+    ad_group = proto.Field(
+        proto.STRING,
+        number=4,
+        optional=True,
+    )
+    label = proto.Field(
+        proto.STRING,
+        number=5,
+        optional=True,
+    )
 
 
 __all__ = tuple(sorted(__protobuf__.manifest))

@@ -19,7 +19,9 @@ import proto  # type: ignore
 __protobuf__ = proto.module(
     package="google.ads.googleads.v10.resources",
     marshal="google.ads.googleads.v10",
-    manifest={"SmartCampaignSearchTermView",},
+    manifest={
+        "SmartCampaignSearchTermView",
+    },
 )
 
 
@@ -40,9 +42,18 @@ class SmartCampaignSearchTermView(proto.Message):
             term served in.
     """
 
-    resource_name = proto.Field(proto.STRING, number=1,)
-    search_term = proto.Field(proto.STRING, number=2,)
-    campaign = proto.Field(proto.STRING, number=3,)
+    resource_name = proto.Field(
+        proto.STRING,
+        number=1,
+    )
+    search_term = proto.Field(
+        proto.STRING,
+        number=2,
+    )
+    campaign = proto.Field(
+        proto.STRING,
+        number=3,
+    )
 
 
 __all__ = tuple(sorted(__protobuf__.manifest))

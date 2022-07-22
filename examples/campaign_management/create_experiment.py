@@ -13,9 +13,12 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
-""" This example creates a new experiment, experiment arms, and demonstrates
- how to modify the draft campaign as well as begin the experiment.
+"""This example creates a new experiment and experiment arms.
+
+It also demonstrates how to modify the draft campaign as well as begin the
+experiment.
 """
+
 import argparse
 import sys
 import uuid
@@ -23,101 +26,108 @@ from venv import create
 
 from google.ads.googleads.client import GoogleAdsClient
 from google.ads.googleads.errors import GoogleAdsException
+from google.api_core import protobuf_helpers
 
 
-def main(client, customer_id, campaign_id):
+def main(client, customer_id, base_campaign_id):
+    """The main method that creates all necessary entities for the example.
+
+    Args:
+        client: an initialized GoogleAdsClient instance.
+        customer_id: a client customer ID.
+        base_campaign_id: the campaign ID to associate with the control arm of
+            the experiment.
+    """
     experiment = create_experiment_resource(client, customer_id)
     treatment_arm = create_experiment_arms(
-        client, customer_id, campaign_id, experiment
+        client, customer_id, base_campaign_id, experiment
     )
     draft_campaign = fetch_draft_campaign(client, customer_id, treatment_arm)
 
     modify_draft_campaign(client, customer_id, draft_campaign)
 
-    # When you're done setting up the experiment and arms and modifying the draft
-    # campaign, this will begin the experiment.
+    # When you're done setting up the experiment and arms and modifying the
+    # draft campaign, this will begin the experiment.
     experiment_service = client.get_service("ExperimentService")
-
     experiment_service.schedule_experiment(resource_name=experiment)
 
 
 # [START create_experiment_1]
 def create_experiment_resource(client, customer_id):
+    """Creates a new experiment resource.
+
+    Args:
+        client: an initialized GoogleAdsClient instance.
+        customer_id: a client customer ID.
+
+    Returns:
+        the resource name for the new experiment.
+    """
     experiment_operation = client.get_type("ExperimentOperation")
     experiment = experiment_operation.create
 
     experiment.name = f"Example Experiment #{uuid.uuid4()}"
-    experiment.type = client.enums.ExperimentTypeEnum.SEARCH_CUSTOM
+    experiment.type_ = client.enums.ExperimentTypeEnum.SEARCH_CUSTOM
     experiment.suffix = "[experiment]"
     experiment.status = client.enums.ExperimentStatusEnum.SETUP
 
-    try:
-        experiment_service = client.get_service("ExperimentService")
-        response = experiment_service.mutate_experiments(
-            customer_id=customer_id, operations=[experiment_operation]
-        )
-    except GoogleAdsException as ex:
-        print(
-            f'Request with ID "{ex.request_id}" failed with status '
-            f'"{ex.error.code().name}" and includes the following errors:'
-        )
-        for error in ex.failure.errors:
-            print(f'\tError with message "{error.message}".')
-            if error.location:
-                for field_path_element in error.location.field_path_elements:
-                    print(f"\t\tOn field: {field_path_element.field_name}")
-        sys.exit(1)
+    experiment_service = client.get_service("ExperimentService")
+    response = experiment_service.mutate_experiments(
+        customer_id=customer_id, operations=[experiment_operation]
+    )
 
     experiment_resource_name = response.results[0].resource_name
     print(f"Created experiment with resource name {experiment_resource_name}")
 
     return experiment_resource_name
-
-
-# [END create_experiment_1]
+    # [END create_experiment_1]
 
 
 # [START create_experiment_2]
-def create_experiment_arms(client, customer_id, campaign_id, experiment):
+def create_experiment_arms(client, customer_id, base_campaign_id, experiment):
+    """Creates a control and treatment experiment arms.
+
+    Args:
+        client: an initialized GoogleAdsClient instance.
+        customer_id: a client customer ID.
+        base_campaign_id: the campaign ID to associate with the control arm of
+            the experiment.
+        experiment: the resource name for an experiment.
+
+    Returns:
+        the resource name for the new treatment experiment arm.
+    """
     operations = []
 
     campaign_service = client.get_service("CampaignService")
 
     # The "control" arm references an already-existing campaign.
-    exa = client.get_type("ExperimentArm")
-    exa.control = True
-    exa.campaigns = campaign_service.campaign_path(customer_id, campaign_id)
-    exa.trial = experiment
-    exa.name = "control arm"
-    exa.traffic_split = 40
-    operations.append(exa)
+    operation_1 = client.get_type("ExperimentArmOperation")
+    exa_1 = operation_1.create
+    exa_1.control = True
+    exa_1.campaigns.append(
+        campaign_service.campaign_path(customer_id, base_campaign_id)
+    )
+    exa_1.trial = experiment
+    exa_1.name = "control arm"
+    exa_1.traffic_split = 40
+    operations.append(operation_1)
 
     # The non-"control" arm, also called a "treatment" arm, will automatically
     # generate draft campaigns that you can modify before starting the
     # experiment.
-    exa = client.get_type("ExperimentArm")
-    exa.control = False
-    exa.trial = experiment
-    exa.name = "experiment arm"
-    exa.traffic_split = 60
-    operations.append(exa)
+    operation_2 = client.get_type("ExperimentArmOperation")
+    exa_2 = operation_2.create
+    exa_2.control = False
+    exa_2.trial = experiment
+    exa_2.name = "experiment arm"
+    exa_2.traffic_split = 60
+    operations.append(operation_2)
 
-    try:
-        experiment_arm_service = client.get_service("ExperimentArmService")
-        response = experiment_arm_service.mutate_experiment_arms(
-            customer_id, operations
-        )
-    except GoogleAdsException as ex:
-        print(
-            f'Request with ID "{ex.request_id}" failed with status '
-            f'"{ex.error.code().name}" and includes the following errors:'
-        )
-        for error in ex.failure.errors:
-            print(f'\tError with message "{error.message}".')
-            if error.location:
-                for field_path_element in error.location.field_path_elements:
-                    print(f"\t\tOn field: {field_path_element.field_name}")
-        sys.exit(1)
+    experiment_arm_service = client.get_service("ExperimentArmService")
+    response = experiment_arm_service.mutate_experiment_arms(
+        customer_id=customer_id, operations=operations
+    )
 
     # Results always return in the order that you specify them in the request.
     # Since we created the treatment arm last, it will be the last result.  If
@@ -130,56 +140,105 @@ def create_experiment_arms(client, customer_id, campaign_id, experiment):
     print(f"Created treatment arm with resource name {treatment_arm}")
 
     return treatment_arm
-
-
-# [END create_experiment_2]
+    # [END create_experiment_2]
 
 
 # [START create_experiment_3]
 def fetch_draft_campaign(client, customer_id, treatment_arm):
+    """Retrieves the in-design campaigns for an experiment.
+
+    Args:
+        client: an initialized GoogleAdsClient instance.
+        customer_id: a client customer ID.
+        treatment_arm: the resource name for the treatment arm of an experiment.
+
+    Returns:
+        the resource name for the in-design campaign.
+    """
     # The `in_design_campaigns` represent campaign drafts, which you can modify
     # before starting the experiment.
-
     ga_service = client.get_service("GoogleAdsService")
 
     query = f"""
-    SELECT experiment_arm.in_design_campaigns
-    FROM experiment_arm
-    WHERE experiment_arm.resource_name = {treatment_arm}"""
+      SELECT
+        experiment_arm.in_design_campaigns
+      FROM experiment_arm
+      WHERE experiment_arm.resource_name = '{treatment_arm}'"""
 
     request = client.get_type("SearchGoogleAdsRequest")
     request.customer_id = customer_id
     request.query = query
 
-    results = ga_service.search(request=request)
+    response = ga_service.search(request=request)
 
     # In design campaigns returns as a list, but for now it can only ever
     # contain a single ID, so we just grab the first one.
-    draft_campaign = results[0].experiment_arm.in_design_campaigns[0]
+    draft_campaign = response.results[0].experiment_arm.in_design_campaigns[0]
 
     print(f"Found draft campaign with resource name {draft_campaign}")
 
     return draft_campaign
-
-
-# [END create_experiment_3]
+    # [END create_experiment_3]
 
 
 def modify_draft_campaign(client, customer_id, draft_campaign):
+    """Modifies the given in-design campaign.
 
+    Args:
+        client: an initialized GoogleAdsClient instance.
+        customer_id: a client customer ID.
+        draft_campaign: the resource name for an in-design campaign.
+    """
     campaign_service = client.get_service("CampaignService")
     campaign_operation = client.get_type("CampaignOperation")
     campaign = campaign_operation.update
+    campaign.resource_name = draft_campaign
 
-    # You can change anything you like about the campaign. These are the changes you're testing
-    # by doing this experiment. Here we just change the name for illustrative purposes, but
-    # generally you may want to change more meaningful parts of the campaign.
+    # You can change anything you like about the campaign. These are the changes
+    # you're testing by doing this experiment. Here we just change the name for
+    # illustrative purposes, but generally you may want to change more
+    # meaningful parts of the campaign.
     campaign.name = f"Modified Campaign Name #{uuid.uuid4()}"
 
+    client.copy_from(
+        campaign_operation.update_mask,
+        protobuf_helpers.field_mask(None, campaign._pb),
+    )
+
+    campaign_service.mutate_campaigns(
+        customer_id=customer_id, operations=[campaign_operation]
+    )
+
+    print(f"Updated name for campaign {draft_campaign}")
+
+
+if __name__ == "__main__":
+    # GoogleAdsClient will read the google-ads.yaml configuration file in the
+    # home directory if none is specified.
+    googleads_client = GoogleAdsClient.load_from_storage(version="v11")
+
+    parser = argparse.ArgumentParser(
+        description=("Create a campaign experiment based on a campaign draft.")
+    )
+    # The following argument(s) need to be provided to run the example.
+    parser.add_argument(
+        "-c",
+        "--customer_id",
+        type=str,
+        required=True,
+        help="The Google Ads customer ID.",
+    )
+    parser.add_argument(
+        "-i",
+        "--base_campaign_id",
+        type=str,
+        required=True,
+        help="The campaign id.",
+    )
+    args = parser.parse_args()
+
     try:
-        response = campaign_service.mutate_campaigns(
-            customer_id=customer_id, operations=[campaign_operation]
-        )
+        main(googleads_client, args.customer_id, args.base_campaign_id)
     except GoogleAdsException as ex:
         print(
             f'Request with ID "{ex.request_id}" failed with status '
@@ -191,42 +250,3 @@ def modify_draft_campaign(client, customer_id, draft_campaign):
                 for field_path_element in error.location.field_path_elements:
                     print(f"\t\tOn field: {field_path_element.field_name}")
         sys.exit(1)
-
-    print(f"Updated name for campaign {draft_campaign}")
-
-
-if __name__ == "__main__":
-    parser = argparse.ArgumentParser(
-        description=("Create a campaign experiment based on a campaign draft.")
-    )
-    # The following argument(s) need to be provided to run the example.
-    parser.add_argument(
-        "-a",
-        "--api_version",
-        type=int,
-        required=True,
-        help="The version of the Google Ads API`.",
-    )
-    parser.add_argument(
-        "-c",
-        "--customer_id",
-        type=str,
-        required=True,
-        help="The Google Ads customer ID.",
-    )
-    parser.add_argument(
-        "-i",
-        "--campaign_id",
-        type=str,
-        required=True,
-        help="The campaign id.",
-    )
-    args = parser.parse_args()
-
-    # GoogleAdsClient will read the google-ads.yaml configuration file in the
-    # home directory if none is specified.
-    googleads_client = GoogleAdsClient.load_from_storage(
-        version=args.api_version
-    )
-
-    main(googleads_client, args.customer_id, args.campaign_id)

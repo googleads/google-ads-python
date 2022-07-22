@@ -19,9 +19,30 @@ and updates the metadata in order to insert the developer token and
 login-customer-id values.
 """
 
+import pkg_resources
+
+from google.protobuf.internal import api_implementation
 from grpc import UnaryUnaryClientInterceptor, UnaryStreamClientInterceptor
 
 from .interceptor import Interceptor
+
+# TODO: This logic should be updated or removed once the following is fixed:
+# https://github.com/googleapis/python-api-core/issues/416
+try:
+    _PROTOBUF_VERSION = pkg_resources.get_distribution("protobuf").version
+except pkg_resources.DistributionNotFound:
+    # If the distribution can't be found for whatever reason then we set
+    # the version to None so that we can know to leave this header out of the
+    # request.
+    _PROTOBUF_VERSION = None
+
+# Determine which protobuf implementation is being used.
+if api_implementation.Type() == "cpp":
+    _PB_IMPL_HEADER = "+c"
+elif api_implementation.Type() == "python":
+    _PB_IMPL_HEADER = "+n"
+else:
+    _PB_IMPL_HEADER = ""
 
 
 class MetadataInterceptor(
@@ -98,6 +119,26 @@ class MetadataInterceptor(
 
         if self.linked_customer_id_meta:
             metadata.append(self.linked_customer_id_meta)
+
+        # TODO: This logic should be updated or removed once the following is
+        # fixed: https://github.com/googleapis/python-api-core/issues/416
+        for i, metadatum in enumerate(metadata):
+            # Check if the user agent header key is in the current metadatum
+            if "x-goog-api-client" in metadatum and _PROTOBUF_VERSION:
+                # Convert the tuple to a list so it can be modified.
+                metadatum = list(metadatum)
+                # Check that "pb" isn't already included in the user agent.
+                if "pb" not in metadatum[1]:
+                    # Append the protobuf version key value pair to the end of
+                    # the string.
+                    metadatum[1] += f" pb/{_PROTOBUF_VERSION}{_PB_IMPL_HEADER}"
+                    # Convert the metadatum back to a tuple.
+                    metadatum = tuple(metadatum)
+                    # Splice the metadatum back in its original position in
+                    # order to preserve the order of the metadata list.
+                    metadata[i] = metadatum
+                    # Exit the loop since we already found the user agent.
+                    break
 
         client_call_details = self._update_client_call_details_metadata(
             client_call_details, metadata

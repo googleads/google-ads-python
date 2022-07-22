@@ -83,7 +83,7 @@ def _ad_text_assets_to_strs(assets):
 if __name__ == "__main__":
     # GoogleAdsClient will read the google-ads.yaml configuration file in the
     # home directory if none is specified.
-    googleads_client = GoogleAdsClient.load_from_storage(version="v10")
+    googleads_client = GoogleAdsClient.load_from_storage(version="v11")
 
     parser = argparse.ArgumentParser(
         description="List responsive display ads for specified customer. "

@@ -25,7 +25,7 @@ install_requires = [
     # have the same version range.
     "grpcio >= 1.38.1, < 2.0.0",
     "grpcio-status >= 1.38.1, < 2.0.0",
-    "proto-plus == 1.19.6",
+    "proto-plus >= 1.19.6, <= 1.20.6",
     "PyYAML >= 5.1, < 7.0",
     "setuptools >= 40.3.0",
     # Protobuf versions 3.18.* and 3.19.* are incompatible with this

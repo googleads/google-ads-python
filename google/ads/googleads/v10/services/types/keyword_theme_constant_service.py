@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-# Copyright 2020 Google LLC
+# Copyright 2022 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -47,9 +47,18 @@ class SuggestKeywordThemeConstantsRequest(proto.Message):
             scope of the query, default to 'en' if not set.
     """
 
-    query_text = proto.Field(proto.STRING, number=1,)
-    country_code = proto.Field(proto.STRING, number=2,)
-    language_code = proto.Field(proto.STRING, number=3,)
+    query_text = proto.Field(
+        proto.STRING,
+        number=1,
+    )
+    country_code = proto.Field(
+        proto.STRING,
+        number=2,
+    )
+    language_code = proto.Field(
+        proto.STRING,
+        number=3,
+    )
 
 
 class SuggestKeywordThemeConstantsResponse(proto.Message):

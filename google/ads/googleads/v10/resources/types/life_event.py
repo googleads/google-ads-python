@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-# Copyright 2020 Google LLC
+# Copyright 2022 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -23,7 +23,9 @@ from google.ads.googleads.v10.common.types import (
 __protobuf__ = proto.module(
     package="google.ads.googleads.v10.resources",
     marshal="google.ads.googleads.v10",
-    manifest={"LifeEvent",},
+    manifest={
+        "LifeEvent",
+    },
 )
 
 
@@ -53,11 +55,26 @@ class LifeEvent(proto.Message):
             life event.
     """
 
-    resource_name = proto.Field(proto.STRING, number=1,)
-    id = proto.Field(proto.INT64, number=2,)
-    name = proto.Field(proto.STRING, number=3,)
-    parent = proto.Field(proto.STRING, number=4,)
-    launched_to_all = proto.Field(proto.BOOL, number=5,)
+    resource_name = proto.Field(
+        proto.STRING,
+        number=1,
+    )
+    id = proto.Field(
+        proto.INT64,
+        number=2,
+    )
+    name = proto.Field(
+        proto.STRING,
+        number=3,
+    )
+    parent = proto.Field(
+        proto.STRING,
+        number=4,
+    )
+    launched_to_all = proto.Field(
+        proto.BOOL,
+        number=5,
+    )
     availabilities = proto.RepeatedField(
         proto.MESSAGE,
         number=6,

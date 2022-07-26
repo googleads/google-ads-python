@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-# Copyright 2020 Google LLC
+# Copyright 2022 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -23,7 +23,9 @@ from google.ads.googleads.v10.enums.types import (
 __protobuf__ = proto.module(
     package="google.ads.googleads.v10.common",
     marshal="google.ads.googleads.v10",
-    manifest={"AssetUsage",},
+    manifest={
+        "AssetUsage",
+    },
 )
 
 
@@ -37,7 +39,10 @@ class AssetUsage(proto.Message):
             The served field type of the asset.
     """
 
-    asset = proto.Field(proto.STRING, number=1,)
+    asset = proto.Field(
+        proto.STRING,
+        number=1,
+    )
     served_asset_field_type = proto.Field(
         proto.ENUM,
         number=2,

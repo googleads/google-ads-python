@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-# Copyright 2020 Google LLC
+# Copyright 2022 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -31,7 +31,9 @@ from google.ads.googleads.v10.services.types import (
 
 try:
     DEFAULT_CLIENT_INFO = gapic_v1.client_info.ClientInfo(
-        gapic_version=pkg_resources.get_distribution("google-ads",).version,
+        gapic_version=pkg_resources.get_distribution(
+            "google-ads",
+        ).version,
     )
 except pkg_resources.DistributionNotFound:
     DEFAULT_CLIENT_INFO = gapic_v1.client_info.ClientInfo()
@@ -134,9 +136,9 @@ class CustomerNegativeCriterionServiceTransport(abc.ABC):
     def close(self):
         """Closes resources associated with the transport.
 
-       .. warning::
-            Only call this method if the transport is NOT shared
-            with other clients - this may cause errors in other clients!
+        .. warning::
+             Only call this method if the transport is NOT shared
+             with other clients - this may cause errors in other clients!
         """
         raise NotImplementedError()
 

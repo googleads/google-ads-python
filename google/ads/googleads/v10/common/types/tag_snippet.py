@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-# Copyright 2020 Google LLC
+# Copyright 2022 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -22,7 +22,9 @@ from google.ads.googleads.v10.enums.types import tracking_code_type
 __protobuf__ = proto.module(
     package="google.ads.googleads.v10.common",
     marshal="google.ads.googleads.v10",
-    manifest={"TagSnippet",},
+    manifest={
+        "TagSnippet",
+    },
 )
 
 
@@ -60,8 +62,16 @@ class TagSnippet(proto.Message):
         number=2,
         enum=tracking_code_page_format.TrackingCodePageFormatEnum.TrackingCodePageFormat,
     )
-    global_site_tag = proto.Field(proto.STRING, number=5, optional=True,)
-    event_snippet = proto.Field(proto.STRING, number=6, optional=True,)
+    global_site_tag = proto.Field(
+        proto.STRING,
+        number=5,
+        optional=True,
+    )
+    event_snippet = proto.Field(
+        proto.STRING,
+        number=6,
+        optional=True,
+    )
 
 
 __all__ = tuple(sorted(__protobuf__.manifest))

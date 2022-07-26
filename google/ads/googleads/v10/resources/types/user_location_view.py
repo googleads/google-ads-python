@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-# Copyright 2020 Google LLC
+# Copyright 2022 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -19,7 +19,9 @@ import proto  # type: ignore
 __protobuf__ = proto.module(
     package="google.ads.googleads.v10.resources",
     marshal="google.ads.googleads.v10",
-    manifest={"UserLocationView",},
+    manifest={
+        "UserLocationView",
+    },
 )
 
 
@@ -48,9 +50,20 @@ class UserLocationView(proto.Message):
             This field is a member of `oneof`_ ``_targeting_location``.
     """
 
-    resource_name = proto.Field(proto.STRING, number=1,)
-    country_criterion_id = proto.Field(proto.INT64, number=4, optional=True,)
-    targeting_location = proto.Field(proto.BOOL, number=5, optional=True,)
+    resource_name = proto.Field(
+        proto.STRING,
+        number=1,
+    )
+    country_criterion_id = proto.Field(
+        proto.INT64,
+        number=4,
+        optional=True,
+    )
+    targeting_location = proto.Field(
+        proto.BOOL,
+        number=5,
+        optional=True,
+    )
 
 
 __all__ = tuple(sorted(__protobuf__.manifest))

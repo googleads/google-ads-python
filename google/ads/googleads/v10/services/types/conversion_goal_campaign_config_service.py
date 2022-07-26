@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-# Copyright 2020 Google LLC
+# Copyright 2022 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -56,13 +56,19 @@ class MutateConversionGoalCampaignConfigsRequest(proto.Message):
             resource name should be returned post mutation.
     """
 
-    customer_id = proto.Field(proto.STRING, number=1,)
+    customer_id = proto.Field(
+        proto.STRING,
+        number=1,
+    )
     operations = proto.RepeatedField(
         proto.MESSAGE,
         number=2,
         message="ConversionGoalCampaignConfigOperation",
     )
-    validate_only = proto.Field(proto.BOOL, number=3,)
+    validate_only = proto.Field(
+        proto.BOOL,
+        number=3,
+    )
     response_content_type = proto.Field(
         proto.ENUM,
         number=4,
@@ -90,7 +96,9 @@ class ConversionGoalCampaignConfigOperation(proto.Message):
     """
 
     update_mask = proto.Field(
-        proto.MESSAGE, number=2, message=field_mask_pb2.FieldMask,
+        proto.MESSAGE,
+        number=2,
+        message=field_mask_pb2.FieldMask,
     )
     update = proto.Field(
         proto.MESSAGE,
@@ -128,7 +136,10 @@ class MutateConversionGoalCampaignConfigResult(proto.Message):
             response_content_type is set to "MUTABLE_RESOURCE".
     """
 
-    resource_name = proto.Field(proto.STRING, number=1,)
+    resource_name = proto.Field(
+        proto.STRING,
+        number=1,
+    )
     conversion_goal_campaign_config = proto.Field(
         proto.MESSAGE,
         number=2,

@@ -38,7 +38,7 @@ def main(client, customer_id, recommendation_id):
             customer_id, recommendation_id
         )
     )
-    
+
     # This is where we override the recommended ad when a TextAdRecommendation is applied.
     # override_ad = client.get_type("Ad")
     # override_ad.resource_name = "INSERT_AD_ID_HERE"
@@ -58,7 +58,7 @@ def main(client, customer_id, recommendation_id):
 if __name__ == "__main__":
     # GoogleAdsClient will read the google-ads.yaml configuration file in the
     # home directory if none is specified.
-    googleads_client = GoogleAdsClient.load_from_storage(version="v10")
+    googleads_client = GoogleAdsClient.load_from_storage(version="v11")
 
     parser = argparse.ArgumentParser(
         description=("Applies a specified recommendation.")

@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-# Copyright 2020 Google LLC
+# Copyright 2022 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -19,13 +19,14 @@ import proto  # type: ignore
 __protobuf__ = proto.module(
     package="google.ads.googleads.v10.enums",
     marshal="google.ads.googleads.v10",
-    manifest={"AdvertisingChannelTypeEnum",},
+    manifest={
+        "AdvertisingChannelTypeEnum",
+    },
 )
 
 
 class AdvertisingChannelTypeEnum(proto.Message):
-    r"""The channel type a campaign may target to serve on.
-    """
+    r"""The channel type a campaign may target to serve on."""
 
     class AdvertisingChannelType(proto.Enum):
         r"""Enum describing the various advertising channel types."""
@@ -41,6 +42,7 @@ class AdvertisingChannelTypeEnum(proto.Message):
         SMART = 9
         PERFORMANCE_MAX = 10
         LOCAL_SERVICES = 11
+        DISCOVERY = 12
 
 
 __all__ = tuple(sorted(__protobuf__.manifest))

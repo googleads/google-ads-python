@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-# Copyright 2020 Google LLC
+# Copyright 2022 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -19,7 +19,9 @@ import proto  # type: ignore
 __protobuf__ = proto.module(
     package="google.ads.googleads.v10.common",
     marshal="google.ads.googleads.v10",
-    manifest={"UrlCollection",},
+    manifest={
+        "UrlCollection",
+    },
 )
 
 
@@ -42,10 +44,24 @@ class UrlCollection(proto.Message):
             This field is a member of `oneof`_ ``_tracking_url_template``.
     """
 
-    url_collection_id = proto.Field(proto.STRING, number=5, optional=True,)
-    final_urls = proto.RepeatedField(proto.STRING, number=6,)
-    final_mobile_urls = proto.RepeatedField(proto.STRING, number=7,)
-    tracking_url_template = proto.Field(proto.STRING, number=8, optional=True,)
+    url_collection_id = proto.Field(
+        proto.STRING,
+        number=5,
+        optional=True,
+    )
+    final_urls = proto.RepeatedField(
+        proto.STRING,
+        number=6,
+    )
+    final_mobile_urls = proto.RepeatedField(
+        proto.STRING,
+        number=7,
+    )
+    tracking_url_template = proto.Field(
+        proto.STRING,
+        number=8,
+        optional=True,
+    )
 
 
 __all__ = tuple(sorted(__protobuf__.manifest))

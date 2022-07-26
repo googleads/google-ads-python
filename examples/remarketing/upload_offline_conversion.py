@@ -63,8 +63,10 @@ def main(
     """
     click_conversion = client.get_type("ClickConversion")
     conversion_action_service = client.get_service("ConversionActionService")
-    click_conversion.conversion_action = conversion_action_service.conversion_action_path(
-        customer_id, conversion_action_id
+    click_conversion.conversion_action = (
+        conversion_action_service.conversion_action_path(
+            customer_id, conversion_action_id
+        )
     )
 
     # Sets the single specified ID field.
@@ -92,8 +94,10 @@ def main(
     request.customer_id = customer_id
     request.conversions = [click_conversion]
     request.partial_failure = True
-    conversion_upload_response = conversion_upload_service.upload_click_conversions(
-        request=request,
+    conversion_upload_response = (
+        conversion_upload_service.upload_click_conversions(
+            request=request,
+        )
     )
     uploaded_click_conversion = conversion_upload_response.results[0]
     print(
@@ -108,7 +112,7 @@ def main(
 if __name__ == "__main__":
     # GoogleAdsClient will read the google-ads.yaml configuration file in the
     # home directory if none is specified.
-    googleads_client = GoogleAdsClient.load_from_storage(version="v10")
+    googleads_client = GoogleAdsClient.load_from_storage(version="v11")
 
     parser = argparse.ArgumentParser(
         description="Uploads an offline conversion."

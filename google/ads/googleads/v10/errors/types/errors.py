@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-# Copyright 2020 Google LLC
+# Copyright 2022 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -108,6 +108,9 @@ from google.ads.googleads.v10.errors.types import (
     campaign_budget_error as gage_campaign_budget_error,
 )
 from google.ads.googleads.v10.errors.types import (
+    campaign_conversion_goal_error as gage_campaign_conversion_goal_error,
+)
+from google.ads.googleads.v10.errors.types import (
     campaign_criterion_error as gage_campaign_criterion_error,
 )
 from google.ads.googleads.v10.errors.types import (
@@ -148,6 +151,9 @@ from google.ads.googleads.v10.errors.types import (
 )
 from google.ads.googleads.v10.errors.types import (
     conversion_custom_variable_error as gage_conversion_custom_variable_error,
+)
+from google.ads.googleads.v10.errors.types import (
+    conversion_goal_campaign_config_error as gage_conversion_goal_campaign_config_error,
 )
 from google.ads.googleads.v10.errors.types import (
     conversion_upload_error as gage_conversion_upload_error,
@@ -448,9 +454,14 @@ class GoogleAdsFailure(proto.Message):
     """
 
     errors = proto.RepeatedField(
-        proto.MESSAGE, number=1, message="GoogleAdsError",
+        proto.MESSAGE,
+        number=1,
+        message="GoogleAdsError",
     )
-    request_id = proto.Field(proto.STRING, number=2,)
+    request_id = proto.Field(
+        proto.STRING,
+        number=2,
+    )
 
 
 class GoogleAdsError(proto.Message):
@@ -473,11 +484,30 @@ class GoogleAdsError(proto.Message):
             include details.
     """
 
-    error_code = proto.Field(proto.MESSAGE, number=1, message="ErrorCode",)
-    message = proto.Field(proto.STRING, number=2,)
-    trigger = proto.Field(proto.MESSAGE, number=3, message=value.Value,)
-    location = proto.Field(proto.MESSAGE, number=4, message="ErrorLocation",)
-    details = proto.Field(proto.MESSAGE, number=5, message="ErrorDetails",)
+    error_code = proto.Field(
+        proto.MESSAGE,
+        number=1,
+        message="ErrorCode",
+    )
+    message = proto.Field(
+        proto.STRING,
+        number=2,
+    )
+    trigger = proto.Field(
+        proto.MESSAGE,
+        number=3,
+        message=value.Value,
+    )
+    location = proto.Field(
+        proto.MESSAGE,
+        number=4,
+        message="ErrorLocation",
+    )
+    details = proto.Field(
+        proto.MESSAGE,
+        number=5,
+        message="ErrorDetails",
+    )
 
 
 class ErrorCode(proto.Message):
@@ -621,6 +651,11 @@ class ErrorCode(proto.Message):
             The reasons for the campaign criterion error
 
             This field is a member of `oneof`_ ``error_code``.
+        campaign_conversion_goal_error (google.ads.googleads.v10.errors.types.CampaignConversionGoalErrorEnum.CampaignConversionGoalError):
+            The reasons for the campaign conversion goal
+            error
+
+            This field is a member of `oneof`_ ``error_code``.
         campaign_customizer_error (google.ads.googleads.v10.errors.types.CampaignCustomizerErrorEnum.CampaignCustomizerError):
             The reasons for the campaign customizer
             error.
@@ -628,6 +663,11 @@ class ErrorCode(proto.Message):
             This field is a member of `oneof`_ ``error_code``.
         collection_size_error (google.ads.googleads.v10.errors.types.CollectionSizeErrorEnum.CollectionSizeError):
             The reasons for the collection size error
+
+            This field is a member of `oneof`_ ``error_code``.
+        conversion_goal_campaign_config_error (google.ads.googleads.v10.errors.types.ConversionGoalCampaignConfigErrorEnum.ConversionGoalCampaignConfigError):
+            The reasons for the conversion goal campaign
+            config error
 
             This field is a member of `oneof`_ ``error_code``.
         country_code_error (google.ads.googleads.v10.errors.types.CountryCodeErrorEnum.CountryCodeError):
@@ -1263,6 +1303,12 @@ class ErrorCode(proto.Message):
         oneof="error_code",
         enum=gage_campaign_criterion_error.CampaignCriterionErrorEnum.CampaignCriterionError,
     )
+    campaign_conversion_goal_error = proto.Field(
+        proto.ENUM,
+        number=166,
+        oneof="error_code",
+        enum=gage_campaign_conversion_goal_error.CampaignConversionGoalErrorEnum.CampaignConversionGoalError,
+    )
     campaign_customizer_error = proto.Field(
         proto.ENUM,
         number=160,
@@ -1274,6 +1320,12 @@ class ErrorCode(proto.Message):
         number=31,
         oneof="error_code",
         enum=gage_collection_size_error.CollectionSizeErrorEnum.CollectionSizeError,
+    )
+    conversion_goal_campaign_config_error = proto.Field(
+        proto.ENUM,
+        number=165,
+        oneof="error_code",
+        enum=gage_conversion_goal_campaign_config_error.ConversionGoalCampaignConfigErrorEnum.ConversionGoalCampaignConfigError,
     )
     country_code_error = proto.Field(
         proto.ENUM,
@@ -1924,11 +1976,20 @@ class ErrorLocation(proto.Message):
                 This field is a member of `oneof`_ ``_index``.
         """
 
-        field_name = proto.Field(proto.STRING, number=1,)
-        index = proto.Field(proto.INT32, number=3, optional=True,)
+        field_name = proto.Field(
+            proto.STRING,
+            number=1,
+        )
+        index = proto.Field(
+            proto.INT32,
+            number=3,
+            optional=True,
+        )
 
     field_path_elements = proto.RepeatedField(
-        proto.MESSAGE, number=2, message=FieldPathElement,
+        proto.MESSAGE,
+        number=2,
+        message=FieldPathElement,
     )
 
 
@@ -1954,18 +2015,29 @@ class ErrorDetails(proto.Message):
             error.
     """
 
-    unpublished_error_code = proto.Field(proto.STRING, number=1,)
+    unpublished_error_code = proto.Field(
+        proto.STRING,
+        number=1,
+    )
     policy_violation_details = proto.Field(
-        proto.MESSAGE, number=2, message="PolicyViolationDetails",
+        proto.MESSAGE,
+        number=2,
+        message="PolicyViolationDetails",
     )
     policy_finding_details = proto.Field(
-        proto.MESSAGE, number=3, message="PolicyFindingDetails",
+        proto.MESSAGE,
+        number=3,
+        message="PolicyFindingDetails",
     )
     quota_error_details = proto.Field(
-        proto.MESSAGE, number=4, message="QuotaErrorDetails",
+        proto.MESSAGE,
+        number=4,
+        message="QuotaErrorDetails",
     )
     resource_count_details = proto.Field(
-        proto.MESSAGE, number=5, message="ResourceCountDetails",
+        proto.MESSAGE,
+        number=5,
+        message="ResourceCountDetails",
     )
 
 
@@ -1989,12 +2061,23 @@ class PolicyViolationDetails(proto.Message):
             for this violation.
     """
 
-    external_policy_description = proto.Field(proto.STRING, number=2,)
-    key = proto.Field(
-        proto.MESSAGE, number=4, message=policy.PolicyViolationKey,
+    external_policy_description = proto.Field(
+        proto.STRING,
+        number=2,
     )
-    external_policy_name = proto.Field(proto.STRING, number=5,)
-    is_exemptible = proto.Field(proto.BOOL, number=6,)
+    key = proto.Field(
+        proto.MESSAGE,
+        number=4,
+        message=policy.PolicyViolationKey,
+    )
+    external_policy_name = proto.Field(
+        proto.STRING,
+        number=5,
+    )
+    is_exemptible = proto.Field(
+        proto.BOOL,
+        number=6,
+    )
 
 
 class PolicyFindingDetails(proto.Message):
@@ -2011,7 +2094,9 @@ class PolicyFindingDetails(proto.Message):
     """
 
     policy_topic_entries = proto.RepeatedField(
-        proto.MESSAGE, number=1, message=policy.PolicyTopicEntry,
+        proto.MESSAGE,
+        number=1,
+        message=policy.PolicyTopicEntry,
     )
 
 
@@ -2037,10 +2122,19 @@ class QuotaErrorDetails(proto.Message):
         ACCOUNT = 2
         DEVELOPER = 3
 
-    rate_scope = proto.Field(proto.ENUM, number=1, enum=QuotaRateScope,)
-    rate_name = proto.Field(proto.STRING, number=2,)
+    rate_scope = proto.Field(
+        proto.ENUM,
+        number=1,
+        enum=QuotaRateScope,
+    )
+    rate_name = proto.Field(
+        proto.STRING,
+        number=2,
+    )
     retry_delay = proto.Field(
-        proto.MESSAGE, number=3, message=duration_pb2.Duration,
+        proto.MESSAGE,
+        number=3,
+        message=duration_pb2.Duration,
     )
 
 
@@ -2064,15 +2158,27 @@ class ResourceCountDetails(proto.Message):
             The count of existing entities.
     """
 
-    enclosing_id = proto.Field(proto.STRING, number=1,)
-    enclosing_resource = proto.Field(proto.STRING, number=5,)
-    limit = proto.Field(proto.INT32, number=2,)
+    enclosing_id = proto.Field(
+        proto.STRING,
+        number=1,
+    )
+    enclosing_resource = proto.Field(
+        proto.STRING,
+        number=5,
+    )
+    limit = proto.Field(
+        proto.INT32,
+        number=2,
+    )
     limit_type = proto.Field(
         proto.ENUM,
         number=3,
         enum=resource_limit_type.ResourceLimitTypeEnum.ResourceLimitType,
     )
-    existing_count = proto.Field(proto.INT32, number=4,)
+    existing_count = proto.Field(
+        proto.INT32,
+        number=4,
+    )
 
 
 __all__ = tuple(sorted(__protobuf__.manifest))

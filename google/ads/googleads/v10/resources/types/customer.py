@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-# Copyright 2020 Google LLC
+# Copyright 2022 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -138,33 +138,89 @@ class Customer(proto.Message):
             Output only. The status of the customer.
     """
 
-    resource_name = proto.Field(proto.STRING, number=1,)
-    id = proto.Field(proto.INT64, number=19, optional=True,)
-    descriptive_name = proto.Field(proto.STRING, number=20, optional=True,)
-    currency_code = proto.Field(proto.STRING, number=21, optional=True,)
-    time_zone = proto.Field(proto.STRING, number=22, optional=True,)
-    tracking_url_template = proto.Field(proto.STRING, number=23, optional=True,)
-    final_url_suffix = proto.Field(proto.STRING, number=24, optional=True,)
-    auto_tagging_enabled = proto.Field(proto.BOOL, number=25, optional=True,)
-    has_partners_badge = proto.Field(proto.BOOL, number=26, optional=True,)
-    manager = proto.Field(proto.BOOL, number=27, optional=True,)
-    test_account = proto.Field(proto.BOOL, number=28, optional=True,)
+    resource_name = proto.Field(
+        proto.STRING,
+        number=1,
+    )
+    id = proto.Field(
+        proto.INT64,
+        number=19,
+        optional=True,
+    )
+    descriptive_name = proto.Field(
+        proto.STRING,
+        number=20,
+        optional=True,
+    )
+    currency_code = proto.Field(
+        proto.STRING,
+        number=21,
+        optional=True,
+    )
+    time_zone = proto.Field(
+        proto.STRING,
+        number=22,
+        optional=True,
+    )
+    tracking_url_template = proto.Field(
+        proto.STRING,
+        number=23,
+        optional=True,
+    )
+    final_url_suffix = proto.Field(
+        proto.STRING,
+        number=24,
+        optional=True,
+    )
+    auto_tagging_enabled = proto.Field(
+        proto.BOOL,
+        number=25,
+        optional=True,
+    )
+    has_partners_badge = proto.Field(
+        proto.BOOL,
+        number=26,
+        optional=True,
+    )
+    manager = proto.Field(
+        proto.BOOL,
+        number=27,
+        optional=True,
+    )
+    test_account = proto.Field(
+        proto.BOOL,
+        number=28,
+        optional=True,
+    )
     call_reporting_setting = proto.Field(
-        proto.MESSAGE, number=10, message="CallReportingSetting",
+        proto.MESSAGE,
+        number=10,
+        message="CallReportingSetting",
     )
     conversion_tracking_setting = proto.Field(
-        proto.MESSAGE, number=14, message="ConversionTrackingSetting",
+        proto.MESSAGE,
+        number=14,
+        message="ConversionTrackingSetting",
     )
     remarketing_setting = proto.Field(
-        proto.MESSAGE, number=15, message="RemarketingSetting",
+        proto.MESSAGE,
+        number=15,
+        message="RemarketingSetting",
     )
     pay_per_conversion_eligibility_failure_reasons = proto.RepeatedField(
         proto.ENUM,
         number=16,
         enum=customer_pay_per_conversion_eligibility_failure_reason.CustomerPayPerConversionEligibilityFailureReasonEnum.CustomerPayPerConversionEligibilityFailureReason,
     )
-    optimization_score = proto.Field(proto.DOUBLE, number=29, optional=True,)
-    optimization_score_weight = proto.Field(proto.DOUBLE, number=30,)
+    optimization_score = proto.Field(
+        proto.DOUBLE,
+        number=29,
+        optional=True,
+    )
+    optimization_score_weight = proto.Field(
+        proto.DOUBLE,
+        number=30,
+    )
     status = proto.Field(
         proto.ENUM,
         number=36,
@@ -194,12 +250,20 @@ class CallReportingSetting(proto.Message):
             This field is a member of `oneof`_ ``_call_conversion_action``.
     """
 
-    call_reporting_enabled = proto.Field(proto.BOOL, number=10, optional=True,)
+    call_reporting_enabled = proto.Field(
+        proto.BOOL,
+        number=10,
+        optional=True,
+    )
     call_conversion_reporting_enabled = proto.Field(
-        proto.BOOL, number=11, optional=True,
+        proto.BOOL,
+        number=11,
+        optional=True,
     )
     call_conversion_action = proto.Field(
-        proto.STRING, number=12, optional=True,
+        proto.STRING,
+        number=12,
+        optional=True,
     )
 
 
@@ -245,19 +309,39 @@ class ConversionTrackingSetting(proto.Message):
             cross-account conversion tracking, this value is
             inherited from the manager. This field is
             read-only.
+        google_ads_conversion_customer (str):
+            Output only. The resource name of the
+            customer where conversions are created and
+            managed. This field is read-only.
     """
 
-    conversion_tracking_id = proto.Field(proto.INT64, number=3, optional=True,)
-    cross_account_conversion_tracking_id = proto.Field(
-        proto.INT64, number=4, optional=True,
+    conversion_tracking_id = proto.Field(
+        proto.INT64,
+        number=3,
+        optional=True,
     )
-    accepted_customer_data_terms = proto.Field(proto.BOOL, number=5,)
+    cross_account_conversion_tracking_id = proto.Field(
+        proto.INT64,
+        number=4,
+        optional=True,
+    )
+    accepted_customer_data_terms = proto.Field(
+        proto.BOOL,
+        number=5,
+    )
     conversion_tracking_status = proto.Field(
         proto.ENUM,
         number=6,
         enum=conversion_tracking_status_enum.ConversionTrackingStatusEnum.ConversionTrackingStatus,
     )
-    enhanced_conversions_for_leads_enabled = proto.Field(proto.BOOL, number=7,)
+    enhanced_conversions_for_leads_enabled = proto.Field(
+        proto.BOOL,
+        number=7,
+    )
+    google_ads_conversion_customer = proto.Field(
+        proto.STRING,
+        number=8,
+    )
 
 
 class RemarketingSetting(proto.Message):
@@ -265,12 +349,16 @@ class RemarketingSetting(proto.Message):
 
     Attributes:
         google_global_site_tag (str):
-            Output only. The Google global site tag.
+            Output only. The Google tag.
 
             This field is a member of `oneof`_ ``_google_global_site_tag``.
     """
 
-    google_global_site_tag = proto.Field(proto.STRING, number=2, optional=True,)
+    google_global_site_tag = proto.Field(
+        proto.STRING,
+        number=2,
+        optional=True,
+    )
 
 
 __all__ = tuple(sorted(__protobuf__.manifest))

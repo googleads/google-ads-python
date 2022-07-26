@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-# Copyright 2020 Google LLC
+# Copyright 2022 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -173,6 +173,9 @@ from google.ads.googleads.v10.resources.types import (
 )
 from google.ads.googleads.v10.resources.types import (
     campaign_feed as gagr_campaign_feed,
+)
+from google.ads.googleads.v10.resources.types import (
+    campaign_group as gagr_campaign_group,
 )
 from google.ads.googleads.v10.resources.types import (
     campaign_label as gagr_campaign_label,
@@ -365,6 +368,9 @@ from google.ads.googleads.v10.resources.types import (
     language_constant as gagr_language_constant,
 )
 from google.ads.googleads.v10.resources.types import (
+    lead_form_submission_data as gagr_lead_form_submission_data,
+)
+from google.ads.googleads.v10.resources.types import (
     life_event as gagr_life_event,
 )
 from google.ads.googleads.v10.resources.types import (
@@ -500,6 +506,7 @@ from google.ads.googleads.v10.services.types import (
     campaign_extension_setting_service,
 )
 from google.ads.googleads.v10.services.types import campaign_feed_service
+from google.ads.googleads.v10.services.types import campaign_group_service
 from google.ads.googleads.v10.services.types import campaign_label_service
 from google.ads.googleads.v10.services.types import campaign_service
 from google.ads.googleads.v10.services.types import campaign_shared_set_service
@@ -621,12 +628,30 @@ class SearchGoogleAdsRequest(proto.Message):
             query results are returned.
     """
 
-    customer_id = proto.Field(proto.STRING, number=1,)
-    query = proto.Field(proto.STRING, number=2,)
-    page_token = proto.Field(proto.STRING, number=3,)
-    page_size = proto.Field(proto.INT32, number=4,)
-    validate_only = proto.Field(proto.BOOL, number=5,)
-    return_total_results_count = proto.Field(proto.BOOL, number=7,)
+    customer_id = proto.Field(
+        proto.STRING,
+        number=1,
+    )
+    query = proto.Field(
+        proto.STRING,
+        number=2,
+    )
+    page_token = proto.Field(
+        proto.STRING,
+        number=3,
+    )
+    page_size = proto.Field(
+        proto.INT32,
+        number=4,
+    )
+    validate_only = proto.Field(
+        proto.BOOL,
+        number=5,
+    )
+    return_total_results_count = proto.Field(
+        proto.BOOL,
+        number=7,
+    )
     summary_row_setting = proto.Field(
         proto.ENUM,
         number=8,
@@ -664,14 +689,28 @@ class SearchGoogleAdsResponse(proto.Message):
         return self
 
     results = proto.RepeatedField(
-        proto.MESSAGE, number=1, message="GoogleAdsRow",
+        proto.MESSAGE,
+        number=1,
+        message="GoogleAdsRow",
     )
-    next_page_token = proto.Field(proto.STRING, number=2,)
-    total_results_count = proto.Field(proto.INT64, number=3,)
+    next_page_token = proto.Field(
+        proto.STRING,
+        number=2,
+    )
+    total_results_count = proto.Field(
+        proto.INT64,
+        number=3,
+    )
     field_mask = proto.Field(
-        proto.MESSAGE, number=5, message=field_mask_pb2.FieldMask,
+        proto.MESSAGE,
+        number=5,
+        message=field_mask_pb2.FieldMask,
     )
-    summary_row = proto.Field(proto.MESSAGE, number=6, message="GoogleAdsRow",)
+    summary_row = proto.Field(
+        proto.MESSAGE,
+        number=6,
+        message="GoogleAdsRow",
+    )
 
 
 class SearchGoogleAdsStreamRequest(proto.Message):
@@ -692,8 +731,14 @@ class SearchGoogleAdsStreamRequest(proto.Message):
             query results are returned.
     """
 
-    customer_id = proto.Field(proto.STRING, number=1,)
-    query = proto.Field(proto.STRING, number=2,)
+    customer_id = proto.Field(
+        proto.STRING,
+        number=1,
+    )
+    query = proto.Field(
+        proto.STRING,
+        number=2,
+    )
     summary_row_setting = proto.Field(
         proto.ENUM,
         number=3,
@@ -722,13 +767,24 @@ class SearchGoogleAdsStreamResponse(proto.Message):
     """
 
     results = proto.RepeatedField(
-        proto.MESSAGE, number=1, message="GoogleAdsRow",
+        proto.MESSAGE,
+        number=1,
+        message="GoogleAdsRow",
     )
     field_mask = proto.Field(
-        proto.MESSAGE, number=2, message=field_mask_pb2.FieldMask,
+        proto.MESSAGE,
+        number=2,
+        message=field_mask_pb2.FieldMask,
     )
-    summary_row = proto.Field(proto.MESSAGE, number=3, message="GoogleAdsRow",)
-    request_id = proto.Field(proto.STRING, number=4,)
+    summary_row = proto.Field(
+        proto.MESSAGE,
+        number=3,
+        message="GoogleAdsRow",
+    )
+    request_id = proto.Field(
+        proto.STRING,
+        number=4,
+    )
 
 
 class GoogleAdsRow(proto.Message):
@@ -870,6 +926,8 @@ class GoogleAdsRow(proto.Message):
             the query.
         campaign_feed (google.ads.googleads.v10.resources.types.CampaignFeed):
             The campaign feed referenced in the query.
+        campaign_group (google.ads.googleads.v10.resources.types.CampaignGroup):
+            Campaign Group referenced in AWQL query.
         campaign_label (google.ads.googleads.v10.resources.types.CampaignLabel):
             The campaign label referenced in the query.
         campaign_shared_set (google.ads.googleads.v10.resources.types.CampaignSharedSet):
@@ -1112,6 +1170,9 @@ class GoogleAdsRow(proto.Message):
             The video referenced in the query.
         webpage_view (google.ads.googleads.v10.resources.types.WebpageView):
             The webpage view referenced in the query.
+        lead_form_submission_data (google.ads.googleads.v10.resources.types.LeadFormSubmissionData):
+            The lead form user submission referenced in
+            the query.
         metrics (google.ads.googleads.v10.common.types.Metrics):
             The metrics.
         segments (google.ads.googleads.v10.common.types.Segments):
@@ -1119,7 +1180,9 @@ class GoogleAdsRow(proto.Message):
     """
 
     account_budget = proto.Field(
-        proto.MESSAGE, number=42, message=gagr_account_budget.AccountBudget,
+        proto.MESSAGE,
+        number=42,
+        message=gagr_account_budget.AccountBudget,
     )
     account_budget_proposal = proto.Field(
         proto.MESSAGE,
@@ -1127,13 +1190,19 @@ class GoogleAdsRow(proto.Message):
         message=gagr_account_budget_proposal.AccountBudgetProposal,
     )
     account_link = proto.Field(
-        proto.MESSAGE, number=143, message=gagr_account_link.AccountLink,
+        proto.MESSAGE,
+        number=143,
+        message=gagr_account_link.AccountLink,
     )
     ad_group = proto.Field(
-        proto.MESSAGE, number=3, message=gagr_ad_group.AdGroup,
+        proto.MESSAGE,
+        number=3,
+        message=gagr_ad_group.AdGroup,
     )
     ad_group_ad = proto.Field(
-        proto.MESSAGE, number=16, message=gagr_ad_group_ad.AdGroupAd,
+        proto.MESSAGE,
+        number=16,
+        message=gagr_ad_group_ad.AdGroupAd,
     )
     ad_group_ad_asset_combination_view = proto.Field(
         proto.MESSAGE,
@@ -1151,7 +1220,9 @@ class GoogleAdsRow(proto.Message):
         message=gagr_ad_group_ad_label.AdGroupAdLabel,
     )
     ad_group_asset = proto.Field(
-        proto.MESSAGE, number=154, message=gagr_ad_group_asset.AdGroupAsset,
+        proto.MESSAGE,
+        number=154,
+        message=gagr_ad_group_asset.AdGroupAsset,
     )
     ad_group_audience_view = proto.Field(
         proto.MESSAGE,
@@ -1194,10 +1265,14 @@ class GoogleAdsRow(proto.Message):
         message=gagr_ad_group_extension_setting.AdGroupExtensionSetting,
     )
     ad_group_feed = proto.Field(
-        proto.MESSAGE, number=67, message=gagr_ad_group_feed.AdGroupFeed,
+        proto.MESSAGE,
+        number=67,
+        message=gagr_ad_group_feed.AdGroupFeed,
     )
     ad_group_label = proto.Field(
-        proto.MESSAGE, number=115, message=gagr_ad_group_label.AdGroupLabel,
+        proto.MESSAGE,
+        number=115,
+        message=gagr_ad_group_label.AdGroupLabel,
     )
     ad_group_simulation = proto.Field(
         proto.MESSAGE,
@@ -1205,18 +1280,30 @@ class GoogleAdsRow(proto.Message):
         message=gagr_ad_group_simulation.AdGroupSimulation,
     )
     ad_parameter = proto.Field(
-        proto.MESSAGE, number=130, message=gagr_ad_parameter.AdParameter,
+        proto.MESSAGE,
+        number=130,
+        message=gagr_ad_parameter.AdParameter,
     )
     age_range_view = proto.Field(
-        proto.MESSAGE, number=48, message=gagr_age_range_view.AgeRangeView,
+        proto.MESSAGE,
+        number=48,
+        message=gagr_age_range_view.AgeRangeView,
     )
     ad_schedule_view = proto.Field(
-        proto.MESSAGE, number=89, message=gagr_ad_schedule_view.AdScheduleView,
+        proto.MESSAGE,
+        number=89,
+        message=gagr_ad_schedule_view.AdScheduleView,
     )
     domain_category = proto.Field(
-        proto.MESSAGE, number=91, message=gagr_domain_category.DomainCategory,
+        proto.MESSAGE,
+        number=91,
+        message=gagr_domain_category.DomainCategory,
     )
-    asset = proto.Field(proto.MESSAGE, number=105, message=gagr_asset.Asset,)
+    asset = proto.Field(
+        proto.MESSAGE,
+        number=105,
+        message=gagr_asset.Asset,
+    )
     asset_field_type_view = proto.Field(
         proto.MESSAGE,
         number=168,
@@ -1243,16 +1330,24 @@ class GoogleAdsRow(proto.Message):
         message=gagr_asset_group_product_group_view.AssetGroupProductGroupView,
     )
     asset_group = proto.Field(
-        proto.MESSAGE, number=172, message=gagr_asset_group.AssetGroup,
+        proto.MESSAGE,
+        number=172,
+        message=gagr_asset_group.AssetGroup,
     )
     asset_set_asset = proto.Field(
-        proto.MESSAGE, number=180, message=gagr_asset_set_asset.AssetSetAsset,
+        proto.MESSAGE,
+        number=180,
+        message=gagr_asset_set_asset.AssetSetAsset,
     )
     asset_set = proto.Field(
-        proto.MESSAGE, number=179, message=gagr_asset_set.AssetSet,
+        proto.MESSAGE,
+        number=179,
+        message=gagr_asset_set.AssetSet,
     )
     batch_job = proto.Field(
-        proto.MESSAGE, number=139, message=gagr_batch_job.BatchJob,
+        proto.MESSAGE,
+        number=139,
+        message=gagr_batch_job.BatchJob,
     )
     bidding_data_exclusion = proto.Field(
         proto.MESSAGE,
@@ -1265,7 +1360,9 @@ class GoogleAdsRow(proto.Message):
         message=gagr_bidding_seasonality_adjustment.BiddingSeasonalityAdjustment,
     )
     bidding_strategy = proto.Field(
-        proto.MESSAGE, number=18, message=gagr_bidding_strategy.BiddingStrategy,
+        proto.MESSAGE,
+        number=18,
+        message=gagr_bidding_strategy.BiddingStrategy,
     )
     bidding_strategy_simulation = proto.Field(
         proto.MESSAGE,
@@ -1273,19 +1370,29 @@ class GoogleAdsRow(proto.Message):
         message=gagr_bidding_strategy_simulation.BiddingStrategySimulation,
     )
     billing_setup = proto.Field(
-        proto.MESSAGE, number=41, message=gagr_billing_setup.BillingSetup,
+        proto.MESSAGE,
+        number=41,
+        message=gagr_billing_setup.BillingSetup,
     )
     call_view = proto.Field(
-        proto.MESSAGE, number=152, message=gagr_call_view.CallView,
+        proto.MESSAGE,
+        number=152,
+        message=gagr_call_view.CallView,
     )
     campaign_budget = proto.Field(
-        proto.MESSAGE, number=19, message=gagr_campaign_budget.CampaignBudget,
+        proto.MESSAGE,
+        number=19,
+        message=gagr_campaign_budget.CampaignBudget,
     )
     campaign = proto.Field(
-        proto.MESSAGE, number=2, message=gagr_campaign.Campaign,
+        proto.MESSAGE,
+        number=2,
+        message=gagr_campaign.Campaign,
     )
     campaign_asset = proto.Field(
-        proto.MESSAGE, number=142, message=gagr_campaign_asset.CampaignAsset,
+        proto.MESSAGE,
+        number=142,
+        message=gagr_campaign_asset.CampaignAsset,
     )
     campaign_asset_set = proto.Field(
         proto.MESSAGE,
@@ -1323,7 +1430,9 @@ class GoogleAdsRow(proto.Message):
         message=gagr_campaign_customizer.CampaignCustomizer,
     )
     campaign_draft = proto.Field(
-        proto.MESSAGE, number=49, message=gagr_campaign_draft.CampaignDraft,
+        proto.MESSAGE,
+        number=49,
+        message=gagr_campaign_draft.CampaignDraft,
     )
     campaign_experiment = proto.Field(
         proto.MESSAGE,
@@ -1336,10 +1445,19 @@ class GoogleAdsRow(proto.Message):
         message=gagr_campaign_extension_setting.CampaignExtensionSetting,
     )
     campaign_feed = proto.Field(
-        proto.MESSAGE, number=63, message=gagr_campaign_feed.CampaignFeed,
+        proto.MESSAGE,
+        number=63,
+        message=gagr_campaign_feed.CampaignFeed,
+    )
+    campaign_group = proto.Field(
+        proto.MESSAGE,
+        number=25,
+        message=gagr_campaign_group.CampaignGroup,
     )
     campaign_label = proto.Field(
-        proto.MESSAGE, number=108, message=gagr_campaign_label.CampaignLabel,
+        proto.MESSAGE,
+        number=108,
+        message=gagr_campaign_label.CampaignLabel,
     )
     campaign_shared_set = proto.Field(
         proto.MESSAGE,
@@ -1352,13 +1470,19 @@ class GoogleAdsRow(proto.Message):
         message=gagr_campaign_simulation.CampaignSimulation,
     )
     carrier_constant = proto.Field(
-        proto.MESSAGE, number=66, message=gagr_carrier_constant.CarrierConstant,
+        proto.MESSAGE,
+        number=66,
+        message=gagr_carrier_constant.CarrierConstant,
     )
     change_event = proto.Field(
-        proto.MESSAGE, number=145, message=gagr_change_event.ChangeEvent,
+        proto.MESSAGE,
+        number=145,
+        message=gagr_change_event.ChangeEvent,
     )
     change_status = proto.Field(
-        proto.MESSAGE, number=37, message=gagr_change_status.ChangeStatus,
+        proto.MESSAGE,
+        number=37,
+        message=gagr_change_status.ChangeStatus,
     )
     combined_audience = proto.Field(
         proto.MESSAGE,
@@ -1366,7 +1490,9 @@ class GoogleAdsRow(proto.Message):
         message=gagr_combined_audience.CombinedAudience,
     )
     audience = proto.Field(
-        proto.MESSAGE, number=190, message=gagr_audience.Audience,
+        proto.MESSAGE,
+        number=190,
+        message=gagr_audience.Audience,
     )
     conversion_action = proto.Field(
         proto.MESSAGE,
@@ -1394,7 +1520,9 @@ class GoogleAdsRow(proto.Message):
         message=gagr_conversion_value_rule_set.ConversionValueRuleSet,
     )
     click_view = proto.Field(
-        proto.MESSAGE, number=122, message=gagr_click_view.ClickView,
+        proto.MESSAGE,
+        number=122,
+        message=gagr_click_view.ClickView,
     )
     currency_constant = proto.Field(
         proto.MESSAGE,
@@ -1402,7 +1530,9 @@ class GoogleAdsRow(proto.Message):
         message=gagr_currency_constant.CurrencyConstant,
     )
     custom_audience = proto.Field(
-        proto.MESSAGE, number=147, message=gagr_custom_audience.CustomAudience,
+        proto.MESSAGE,
+        number=147,
+        message=gagr_custom_audience.CustomAudience,
     )
     custom_conversion_goal = proto.Field(
         proto.MESSAGE,
@@ -1410,13 +1540,19 @@ class GoogleAdsRow(proto.Message):
         message=gagr_custom_conversion_goal.CustomConversionGoal,
     )
     custom_interest = proto.Field(
-        proto.MESSAGE, number=104, message=gagr_custom_interest.CustomInterest,
+        proto.MESSAGE,
+        number=104,
+        message=gagr_custom_interest.CustomInterest,
     )
     customer = proto.Field(
-        proto.MESSAGE, number=1, message=gagr_customer.Customer,
+        proto.MESSAGE,
+        number=1,
+        message=gagr_customer.Customer,
     )
     customer_asset = proto.Field(
-        proto.MESSAGE, number=155, message=gagr_customer_asset.CustomerAsset,
+        proto.MESSAGE,
+        number=155,
+        message=gagr_customer_asset.CustomerAsset,
     )
     accessible_bidding_strategy = proto.Field(
         proto.MESSAGE,
@@ -1439,7 +1575,9 @@ class GoogleAdsRow(proto.Message):
         message=gagr_customer_client_link.CustomerClientLink,
     )
     customer_client = proto.Field(
-        proto.MESSAGE, number=70, message=gagr_customer_client.CustomerClient,
+        proto.MESSAGE,
+        number=70,
+        message=gagr_customer_client.CustomerClient,
     )
     customer_conversion_goal = proto.Field(
         proto.MESSAGE,
@@ -1452,10 +1590,14 @@ class GoogleAdsRow(proto.Message):
         message=gagr_customer_extension_setting.CustomerExtensionSetting,
     )
     customer_feed = proto.Field(
-        proto.MESSAGE, number=64, message=gagr_customer_feed.CustomerFeed,
+        proto.MESSAGE,
+        number=64,
+        message=gagr_customer_feed.CustomerFeed,
     )
     customer_label = proto.Field(
-        proto.MESSAGE, number=124, message=gagr_customer_label.CustomerLabel,
+        proto.MESSAGE,
+        number=124,
+        message=gagr_customer_label.CustomerLabel,
     )
     customer_negative_criterion = proto.Field(
         proto.MESSAGE,
@@ -1493,7 +1635,9 @@ class GoogleAdsRow(proto.Message):
         message=gagr_display_keyword_view.DisplayKeywordView,
     )
     distance_view = proto.Field(
-        proto.MESSAGE, number=132, message=gagr_distance_view.DistanceView,
+        proto.MESSAGE,
+        number=132,
+        message=gagr_distance_view.DistanceView,
     )
     dynamic_search_ads_search_term_view = proto.Field(
         proto.MESSAGE,
@@ -1510,12 +1654,20 @@ class GoogleAdsRow(proto.Message):
         number=85,
         message=gagr_extension_feed_item.ExtensionFeedItem,
     )
-    feed = proto.Field(proto.MESSAGE, number=46, message=gagr_feed.Feed,)
+    feed = proto.Field(
+        proto.MESSAGE,
+        number=46,
+        message=gagr_feed.Feed,
+    )
     feed_item = proto.Field(
-        proto.MESSAGE, number=50, message=gagr_feed_item.FeedItem,
+        proto.MESSAGE,
+        number=50,
+        message=gagr_feed_item.FeedItem,
     )
     feed_item_set = proto.Field(
-        proto.MESSAGE, number=149, message=gagr_feed_item_set.FeedItemSet,
+        proto.MESSAGE,
+        number=149,
+        message=gagr_feed_item_set.FeedItemSet,
     )
     feed_item_set_link = proto.Field(
         proto.MESSAGE,
@@ -1523,10 +1675,14 @@ class GoogleAdsRow(proto.Message):
         message=gagr_feed_item_set_link.FeedItemSetLink,
     )
     feed_item_target = proto.Field(
-        proto.MESSAGE, number=116, message=gagr_feed_item_target.FeedItemTarget,
+        proto.MESSAGE,
+        number=116,
+        message=gagr_feed_item_target.FeedItemTarget,
     )
     feed_mapping = proto.Field(
-        proto.MESSAGE, number=58, message=gagr_feed_mapping.FeedMapping,
+        proto.MESSAGE,
+        number=58,
+        message=gagr_feed_mapping.FeedMapping,
     )
     feed_placeholder_view = proto.Field(
         proto.MESSAGE,
@@ -1534,7 +1690,9 @@ class GoogleAdsRow(proto.Message):
         message=gagr_feed_placeholder_view.FeedPlaceholderView,
     )
     gender_view = proto.Field(
-        proto.MESSAGE, number=40, message=gagr_gender_view.GenderView,
+        proto.MESSAGE,
+        number=40,
+        message=gagr_gender_view.GenderView,
     )
     geo_target_constant = proto.Field(
         proto.MESSAGE,
@@ -1542,7 +1700,9 @@ class GoogleAdsRow(proto.Message):
         message=gagr_geo_target_constant.GeoTargetConstant,
     )
     geographic_view = proto.Field(
-        proto.MESSAGE, number=125, message=gagr_geographic_view.GeographicView,
+        proto.MESSAGE,
+        number=125,
+        message=gagr_geographic_view.GeographicView,
     )
     group_placement_view = proto.Field(
         proto.MESSAGE,
@@ -1550,7 +1710,9 @@ class GoogleAdsRow(proto.Message):
         message=gagr_group_placement_view.GroupPlacementView,
     )
     hotel_group_view = proto.Field(
-        proto.MESSAGE, number=51, message=gagr_hotel_group_view.HotelGroupView,
+        proto.MESSAGE,
+        number=51,
+        message=gagr_hotel_group_view.HotelGroupView,
     )
     hotel_performance_view = proto.Field(
         proto.MESSAGE,
@@ -1568,10 +1730,14 @@ class GoogleAdsRow(proto.Message):
         message=gagr_income_range_view.IncomeRangeView,
     )
     keyword_view = proto.Field(
-        proto.MESSAGE, number=21, message=gagr_keyword_view.KeywordView,
+        proto.MESSAGE,
+        number=21,
+        message=gagr_keyword_view.KeywordView,
     )
     keyword_plan = proto.Field(
-        proto.MESSAGE, number=32, message=gagr_keyword_plan.KeywordPlan,
+        proto.MESSAGE,
+        number=32,
+        message=gagr_keyword_plan.KeywordPlan,
     )
     keyword_plan_campaign = proto.Field(
         proto.MESSAGE,
@@ -1598,7 +1764,11 @@ class GoogleAdsRow(proto.Message):
         number=163,
         message=gagr_keyword_theme_constant.KeywordThemeConstant,
     )
-    label = proto.Field(proto.MESSAGE, number=52, message=gagr_label.Label,)
+    label = proto.Field(
+        proto.MESSAGE,
+        number=52,
+        message=gagr_label.Label,
+    )
     landing_page_view = proto.Field(
         proto.MESSAGE,
         number=126,
@@ -1610,7 +1780,9 @@ class GoogleAdsRow(proto.Message):
         message=gagr_language_constant.LanguageConstant,
     )
     location_view = proto.Field(
-        proto.MESSAGE, number=123, message=gagr_location_view.LocationView,
+        proto.MESSAGE,
+        number=123,
+        message=gagr_location_view.LocationView,
     )
     managed_placement_view = proto.Field(
         proto.MESSAGE,
@@ -1618,7 +1790,9 @@ class GoogleAdsRow(proto.Message):
         message=gagr_managed_placement_view.ManagedPlacementView,
     )
     media_file = proto.Field(
-        proto.MESSAGE, number=90, message=gagr_media_file.MediaFile,
+        proto.MESSAGE,
+        number=90,
+        message=gagr_media_file.MediaFile,
     )
     mobile_app_category_constant = proto.Field(
         proto.MESSAGE,
@@ -1661,16 +1835,24 @@ class GoogleAdsRow(proto.Message):
         message=gagr_product_group_view.ProductGroupView,
     )
     recommendation = proto.Field(
-        proto.MESSAGE, number=22, message=gagr_recommendation.Recommendation,
+        proto.MESSAGE,
+        number=22,
+        message=gagr_recommendation.Recommendation,
     )
     search_term_view = proto.Field(
-        proto.MESSAGE, number=68, message=gagr_search_term_view.SearchTermView,
+        proto.MESSAGE,
+        number=68,
+        message=gagr_search_term_view.SearchTermView,
     )
     shared_criterion = proto.Field(
-        proto.MESSAGE, number=29, message=gagr_shared_criterion.SharedCriterion,
+        proto.MESSAGE,
+        number=29,
+        message=gagr_shared_criterion.SharedCriterion,
     )
     shared_set = proto.Field(
-        proto.MESSAGE, number=27, message=gagr_shared_set.SharedSet,
+        proto.MESSAGE,
+        number=27,
+        message=gagr_shared_set.SharedSet,
     )
     smart_campaign_setting = proto.Field(
         proto.MESSAGE,
@@ -1693,22 +1875,34 @@ class GoogleAdsRow(proto.Message):
         message=gagr_third_party_app_analytics_link.ThirdPartyAppAnalyticsLink,
     )
     topic_view = proto.Field(
-        proto.MESSAGE, number=44, message=gagr_topic_view.TopicView,
+        proto.MESSAGE,
+        number=44,
+        message=gagr_topic_view.TopicView,
     )
     experiment = proto.Field(
-        proto.MESSAGE, number=133, message=gagr_experiment.Experiment,
+        proto.MESSAGE,
+        number=133,
+        message=gagr_experiment.Experiment,
     )
     experiment_arm = proto.Field(
-        proto.MESSAGE, number=183, message=gagr_experiment_arm.ExperimentArm,
+        proto.MESSAGE,
+        number=183,
+        message=gagr_experiment_arm.ExperimentArm,
     )
     user_interest = proto.Field(
-        proto.MESSAGE, number=59, message=gagr_user_interest.UserInterest,
+        proto.MESSAGE,
+        number=59,
+        message=gagr_user_interest.UserInterest,
     )
     life_event = proto.Field(
-        proto.MESSAGE, number=161, message=gagr_life_event.LifeEvent,
+        proto.MESSAGE,
+        number=161,
+        message=gagr_life_event.LifeEvent,
     )
     user_list = proto.Field(
-        proto.MESSAGE, number=38, message=gagr_user_list.UserList,
+        proto.MESSAGE,
+        number=38,
+        message=gagr_user_list.UserList,
     )
     user_location_view = proto.Field(
         proto.MESSAGE,
@@ -1721,17 +1915,34 @@ class GoogleAdsRow(proto.Message):
         message=gagr_remarketing_action.RemarketingAction,
     )
     topic_constant = proto.Field(
-        proto.MESSAGE, number=31, message=gagr_topic_constant.TopicConstant,
+        proto.MESSAGE,
+        number=31,
+        message=gagr_topic_constant.TopicConstant,
     )
-    video = proto.Field(proto.MESSAGE, number=39, message=gagr_video.Video,)
+    video = proto.Field(
+        proto.MESSAGE,
+        number=39,
+        message=gagr_video.Video,
+    )
     webpage_view = proto.Field(
-        proto.MESSAGE, number=162, message=gagr_webpage_view.WebpageView,
+        proto.MESSAGE,
+        number=162,
+        message=gagr_webpage_view.WebpageView,
+    )
+    lead_form_submission_data = proto.Field(
+        proto.MESSAGE,
+        number=192,
+        message=gagr_lead_form_submission_data.LeadFormSubmissionData,
     )
     metrics = proto.Field(
-        proto.MESSAGE, number=4, message=gagc_metrics.Metrics,
+        proto.MESSAGE,
+        number=4,
+        message=gagc_metrics.Metrics,
     )
     segments = proto.Field(
-        proto.MESSAGE, number=102, message=gagc_segments.Segments,
+        proto.MESSAGE,
+        number=102,
+        message=gagc_segments.Segments,
     )
 
 
@@ -1764,12 +1975,23 @@ class MutateGoogleAdsRequest(proto.Message):
             E.g. MutateCampaignResult.campaign.
     """
 
-    customer_id = proto.Field(proto.STRING, number=1,)
-    mutate_operations = proto.RepeatedField(
-        proto.MESSAGE, number=2, message="MutateOperation",
+    customer_id = proto.Field(
+        proto.STRING,
+        number=1,
     )
-    partial_failure = proto.Field(proto.BOOL, number=3,)
-    validate_only = proto.Field(proto.BOOL, number=4,)
+    mutate_operations = proto.RepeatedField(
+        proto.MESSAGE,
+        number=2,
+        message="MutateOperation",
+    )
+    partial_failure = proto.Field(
+        proto.BOOL,
+        number=3,
+    )
+    validate_only = proto.Field(
+        proto.BOOL,
+        number=4,
+    )
     response_content_type = proto.Field(
         proto.ENUM,
         number=5,
@@ -1793,10 +2015,14 @@ class MutateGoogleAdsResponse(proto.Message):
     """
 
     partial_failure_error = proto.Field(
-        proto.MESSAGE, number=3, message=status_pb2.Status,
+        proto.MESSAGE,
+        number=3,
+        message=status_pb2.Status,
     )
     mutate_operation_responses = proto.RepeatedField(
-        proto.MESSAGE, number=1, message="MutateOperationResponse",
+        proto.MESSAGE,
+        number=1,
+        message="MutateOperationResponse",
     )
 
 
@@ -1958,6 +2184,10 @@ class MutateOperation(proto.Message):
             This field is a member of `oneof`_ ``operation``.
         campaign_feed_operation (google.ads.googleads.v10.services.types.CampaignFeedOperation):
             A campaign feed mutate operation.
+
+            This field is a member of `oneof`_ ``operation``.
+        campaign_group_operation (google.ads.googleads.v10.services.types.CampaignGroupOperation):
+            A campaign group mutate operation.
 
             This field is a member of `oneof`_ ``operation``.
         campaign_label_operation (google.ads.googleads.v10.services.types.CampaignLabelOperation):
@@ -2337,6 +2567,12 @@ class MutateOperation(proto.Message):
         number=27,
         oneof="operation",
         message=campaign_feed_service.CampaignFeedOperation,
+    )
+    campaign_group_operation = proto.Field(
+        proto.MESSAGE,
+        number=9,
+        oneof="operation",
+        message=campaign_group_service.CampaignGroupOperation,
     )
     campaign_label_operation = proto.Field(
         proto.MESSAGE,
@@ -2742,6 +2978,10 @@ class MutateOperationResponse(proto.Message):
             The result for the campaign feed mutate.
 
             This field is a member of `oneof`_ ``response``.
+        campaign_group_result (google.ads.googleads.v10.services.types.MutateCampaignGroupResult):
+            The result for the campaign group mutate.
+
+            This field is a member of `oneof`_ ``response``.
         campaign_label_result (google.ads.googleads.v10.services.types.MutateCampaignLabelResult):
             The result for the campaign label mutate.
 
@@ -3124,6 +3364,12 @@ class MutateOperationResponse(proto.Message):
         number=27,
         oneof="response",
         message=campaign_feed_service.MutateCampaignFeedResult,
+    )
+    campaign_group_result = proto.Field(
+        proto.MESSAGE,
+        number=9,
+        oneof="response",
+        message=campaign_group_service.MutateCampaignGroupResult,
     )
     campaign_label_result = proto.Field(
         proto.MESSAGE,

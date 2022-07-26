@@ -56,7 +56,8 @@ class ConfigTest(FileTestCase):
     ):
         merged = {**self.default_dict_config, **additional_configs}
         self.fs.create_file(
-            file_path, contents=yaml.safe_dump(merged),
+            file_path,
+            contents=yaml.safe_dump(merged),
         )
 
     def test_load_from_yaml_file_logging(self):
@@ -80,7 +81,10 @@ class ConfigTest(FileTestCase):
                         }
                     },
                     "loggers": {
-                        "": {"handlers": ["default_handler"], "level": "DEBUG",}
+                        "": {
+                            "handlers": ["default_handler"],
+                            "level": "DEBUG",
+                        }
                     },
                 },
             }
@@ -304,7 +308,10 @@ class ConfigTest(FileTestCase):
                         }
                     },
                     "loggers": {
-                        "": {"handlers": ["default_handler"], "level": "DEBUG",}
+                        "": {
+                            "handlers": ["default_handler"],
+                            "level": "DEBUG",
+                        }
                     },
                 },
             },
@@ -408,7 +415,9 @@ class ConfigTest(FileTestCase):
         """Should load linked CID from environment when specified"""
         environ = {
             **self.default_env_var_config,
-            **{"GOOGLE_ADS_LINKED_CUSTOMER_ID": self.linked_customer_id,},
+            **{
+                "GOOGLE_ADS_LINKED_CUSTOMER_ID": self.linked_customer_id,
+            },
         }
 
         with mock.patch("os.environ", environ):
@@ -507,7 +516,9 @@ class ConfigTest(FileTestCase):
         """IMPERSONATED_EMAIL is used instead of secondary var name."""
         environ = {
             **self.default_env_var_config,
-            **{"GOOGLE_ADS_DELEGATED_ACCOUNT": self.delegated_account,},
+            **{
+                "GOOGLE_ADS_DELEGATED_ACCOUNT": self.delegated_account,
+            },
         }
 
         with mock.patch("os.environ", environ):

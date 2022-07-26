@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-# Copyright 2020 Google LLC
+# Copyright 2022 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -21,15 +21,17 @@ from google.ads.googleads.v10.enums.types import asset_group_status
 __protobuf__ = proto.module(
     package="google.ads.googleads.v10.resources",
     marshal="google.ads.googleads.v10",
-    manifest={"AssetGroup",},
+    manifest={
+        "AssetGroup",
+    },
 )
 
 
 class AssetGroup(proto.Message):
     r"""An asset group.
-    AssetGroupAsset will be used to link an asset to the asset
-    group. AssetGroupHint will be used to associate a hint to an
-    asset group.
+    AssetGroupAsset is used to link an asset to the asset group.
+    AssetGroupSignal is used to associate a signal to an asset
+    group.
 
     Attributes:
         resource_name (str):
@@ -51,12 +53,12 @@ class AssetGroup(proto.Message):
         final_urls (Sequence[str]):
             A list of final URLs after all cross domain
             redirects. In performance max, by default, the
-            urls will be eligible for expansion unless opted
+            urls are eligible for expansion unless opted
             out.
         final_mobile_urls (Sequence[str]):
             A list of final mobile URLs after all cross
             domain redirects. In performance max, by
-            default, the urls will be eligible for expansion
+            default, the urls are eligible for expansion
             unless opted out.
         status (google.ads.googleads.v10.enums.types.AssetGroupStatusEnum.AssetGroupStatus):
             The status of the asset group.
@@ -69,19 +71,43 @@ class AssetGroup(proto.Message):
             only be set when path1 is set.
     """
 
-    resource_name = proto.Field(proto.STRING, number=1,)
-    id = proto.Field(proto.INT64, number=9,)
-    campaign = proto.Field(proto.STRING, number=2,)
-    name = proto.Field(proto.STRING, number=3,)
-    final_urls = proto.RepeatedField(proto.STRING, number=4,)
-    final_mobile_urls = proto.RepeatedField(proto.STRING, number=5,)
+    resource_name = proto.Field(
+        proto.STRING,
+        number=1,
+    )
+    id = proto.Field(
+        proto.INT64,
+        number=9,
+    )
+    campaign = proto.Field(
+        proto.STRING,
+        number=2,
+    )
+    name = proto.Field(
+        proto.STRING,
+        number=3,
+    )
+    final_urls = proto.RepeatedField(
+        proto.STRING,
+        number=4,
+    )
+    final_mobile_urls = proto.RepeatedField(
+        proto.STRING,
+        number=5,
+    )
     status = proto.Field(
         proto.ENUM,
         number=6,
         enum=asset_group_status.AssetGroupStatusEnum.AssetGroupStatus,
     )
-    path1 = proto.Field(proto.STRING, number=7,)
-    path2 = proto.Field(proto.STRING, number=8,)
+    path1 = proto.Field(
+        proto.STRING,
+        number=7,
+    )
+    path2 = proto.Field(
+        proto.STRING,
+        number=8,
+    )
 
 
 __all__ = tuple(sorted(__protobuf__.manifest))

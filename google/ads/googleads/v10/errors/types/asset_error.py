@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-# Copyright 2020 Google LLC
+# Copyright 2022 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -19,13 +19,14 @@ import proto  # type: ignore
 __protobuf__ = proto.module(
     package="google.ads.googleads.v10.errors",
     marshal="google.ads.googleads.v10",
-    manifest={"AssetErrorEnum",},
+    manifest={
+        "AssetErrorEnum",
+    },
 )
 
 
 class AssetErrorEnum(proto.Message):
-    r"""Container for enum describing possible asset errors.
-    """
+    r"""Container for enum describing possible asset errors."""
 
     class AssetError(proto.Enum):
         r"""Enum describing possible asset errors."""
@@ -61,6 +62,8 @@ class AssetErrorEnum(proto.Message):
         MOBILE_APP_INVALID_APP_ID = 30
         MOBILE_APP_INVALID_FINAL_URL_FOR_APP_DOWNLOAD_URL = 31
         NAME_REQUIRED_FOR_ASSET_TYPE = 32
+        LEAD_FORM_LEGACY_QUALIFYING_QUESTIONS_DISALLOWED = 33
+        NAME_CONFLICT_FOR_ASSET_TYPE = 34
 
 
 __all__ = tuple(sorted(__protobuf__.manifest))

@@ -63,9 +63,9 @@ def main(client_secrets_path, scopes):
     passthrough_val = hashlib.sha256(os.urandom(1024)).hexdigest()
 
     authorization_url, state = flow.authorization_url(
-        access_type='offline',
+        access_type="offline",
         state=passthrough_val,
-        include_granted_scopes='true'
+        include_granted_scopes="true",
     )
 
     # Prints the authorization URL so you can paste into your browser. In a
@@ -104,7 +104,7 @@ def _get_authorization_code(passthrough_val):
     """
     # Open a socket at localhost:PORT and listen for a request
     sock = socket.socket()
-    sock.bind(('localhost', _PORT))
+    sock.bind(("localhost", _PORT))
     sock.listen(1)
     connection, address = sock.accept()
     data = connection.recv(1024)
@@ -159,9 +159,9 @@ def _parse_raw_query_params(data):
     match = re.search("GET\s\/\?(.*) ", decoded)
     params = match.group(1)
     # Split the parameters to isolate the key/value pairs
-    pairs = [ pair.split("=") for pair in params.split("&") ]
+    pairs = [pair.split("=") for pair in params.split("&")]
     # Convert pairs to a dict to make it easy to access the values
-    return { key: val for key, val in pairs }
+    return {key: val for key, val in pairs}
 
 
 if __name__ == "__main__":

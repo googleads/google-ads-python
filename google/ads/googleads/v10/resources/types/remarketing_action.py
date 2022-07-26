@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-# Copyright 2020 Google LLC
+# Copyright 2022 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -21,7 +21,9 @@ from google.ads.googleads.v10.common.types import tag_snippet
 __protobuf__ = proto.module(
     package="google.ads.googleads.v10.resources",
     marshal="google.ads.googleads.v10",
-    manifest={"RemarketingAction",},
+    manifest={
+        "RemarketingAction",
+    },
 )
 
 
@@ -52,11 +54,24 @@ class RemarketingAction(proto.Message):
             remarketing actions.
     """
 
-    resource_name = proto.Field(proto.STRING, number=1,)
-    id = proto.Field(proto.INT64, number=5, optional=True,)
-    name = proto.Field(proto.STRING, number=6, optional=True,)
+    resource_name = proto.Field(
+        proto.STRING,
+        number=1,
+    )
+    id = proto.Field(
+        proto.INT64,
+        number=5,
+        optional=True,
+    )
+    name = proto.Field(
+        proto.STRING,
+        number=6,
+        optional=True,
+    )
     tag_snippets = proto.RepeatedField(
-        proto.MESSAGE, number=4, message=tag_snippet.TagSnippet,
+        proto.MESSAGE,
+        number=4,
+        message=tag_snippet.TagSnippet,
     )
 
 

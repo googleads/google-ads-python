@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-# Copyright 2020 Google LLC
+# Copyright 2022 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -56,7 +56,11 @@ class Commission(proto.Message):
             This field is a member of `oneof`_ ``_commission_rate_micros``.
     """
 
-    commission_rate_micros = proto.Field(proto.INT64, number=2, optional=True,)
+    commission_rate_micros = proto.Field(
+        proto.INT64,
+        number=2,
+        optional=True,
+    )
 
 
 class EnhancedCpc(proto.Message):
@@ -78,7 +82,11 @@ class ManualCpc(proto.Message):
             This field is a member of `oneof`_ ``_enhanced_cpc_enabled``.
     """
 
-    enhanced_cpc_enabled = proto.Field(proto.BOOL, number=2, optional=True,)
+    enhanced_cpc_enabled = proto.Field(
+        proto.BOOL,
+        number=2,
+        optional=True,
+    )
 
 
 class ManualCpm(proto.Message):
@@ -89,8 +97,7 @@ class ManualCpm(proto.Message):
 
 
 class ManualCpv(proto.Message):
-    r"""View based bidding where user pays per video view.
-    """
+    r"""View based bidding where user pays per video view."""
 
 
 class MaximizeConversions(proto.Message):
@@ -101,12 +108,13 @@ class MaximizeConversions(proto.Message):
         target_cpa (int):
             The target cost-per-action (CPA) option. This
             is the average amount that you would like to
-            spend per conversion action. If set, the bid
-            strategy will get as many conversions as
-            possible at or below the target cost-per-action.
-            If the target CPA is not set, the bid strategy
-            will aim to achieve the lowest possible CPA
-            given the budget.
+            spend per conversion action specified in micro
+            units of the bidding strategy's currency. If
+            set, the bid strategy will get as many
+            conversions as possible at or below the target
+            cost-per-action. If the target CPA is not set,
+            the bid strategy will aim to achieve the lowest
+            possible CPA given the budget.
         cpc_bid_ceiling_micros (int):
             Maximum bid limit that can be set by the bid
             strategy. The limit applies to all keywords
@@ -119,9 +127,18 @@ class MaximizeConversions(proto.Message):
             bidding strategies only.
     """
 
-    target_cpa = proto.Field(proto.INT64, number=1,)
-    cpc_bid_ceiling_micros = proto.Field(proto.INT64, number=2,)
-    cpc_bid_floor_micros = proto.Field(proto.INT64, number=3,)
+    target_cpa = proto.Field(
+        proto.INT64,
+        number=1,
+    )
+    cpc_bid_ceiling_micros = proto.Field(
+        proto.INT64,
+        number=2,
+    )
+    cpc_bid_floor_micros = proto.Field(
+        proto.INT64,
+        number=3,
+    )
 
 
 class MaximizeConversionValue(proto.Message):
@@ -150,9 +167,18 @@ class MaximizeConversionValue(proto.Message):
             bidding strategies only.
     """
 
-    target_roas = proto.Field(proto.DOUBLE, number=2,)
-    cpc_bid_ceiling_micros = proto.Field(proto.INT64, number=3,)
-    cpc_bid_floor_micros = proto.Field(proto.INT64, number=4,)
+    target_roas = proto.Field(
+        proto.DOUBLE,
+        number=2,
+    )
+    cpc_bid_ceiling_micros = proto.Field(
+        proto.INT64,
+        number=3,
+    )
+    cpc_bid_floor_micros = proto.Field(
+        proto.INT64,
+        number=4,
+    )
 
 
 class TargetCpa(proto.Message):
@@ -184,9 +210,21 @@ class TargetCpa(proto.Message):
             This field is a member of `oneof`_ ``_cpc_bid_floor_micros``.
     """
 
-    target_cpa_micros = proto.Field(proto.INT64, number=4, optional=True,)
-    cpc_bid_ceiling_micros = proto.Field(proto.INT64, number=5, optional=True,)
-    cpc_bid_floor_micros = proto.Field(proto.INT64, number=6, optional=True,)
+    target_cpa_micros = proto.Field(
+        proto.INT64,
+        number=4,
+        optional=True,
+    )
+    cpc_bid_ceiling_micros = proto.Field(
+        proto.INT64,
+        number=5,
+        optional=True,
+    )
+    cpc_bid_floor_micros = proto.Field(
+        proto.INT64,
+        number=6,
+        optional=True,
+    )
 
 
 class TargetCpm(proto.Message):
@@ -227,9 +265,15 @@ class TargetImpressionShare(proto.Message):
         enum=target_impression_share_location.TargetImpressionShareLocationEnum.TargetImpressionShareLocation,
     )
     location_fraction_micros = proto.Field(
-        proto.INT64, number=4, optional=True,
+        proto.INT64,
+        number=4,
+        optional=True,
     )
-    cpc_bid_ceiling_micros = proto.Field(proto.INT64, number=5, optional=True,)
+    cpc_bid_ceiling_micros = proto.Field(
+        proto.INT64,
+        number=5,
+        optional=True,
+    )
 
 
 class TargetRoas(proto.Message):
@@ -259,9 +303,21 @@ class TargetRoas(proto.Message):
             This field is a member of `oneof`_ ``_cpc_bid_floor_micros``.
     """
 
-    target_roas = proto.Field(proto.DOUBLE, number=4, optional=True,)
-    cpc_bid_ceiling_micros = proto.Field(proto.INT64, number=5, optional=True,)
-    cpc_bid_floor_micros = proto.Field(proto.INT64, number=6, optional=True,)
+    target_roas = proto.Field(
+        proto.DOUBLE,
+        number=4,
+        optional=True,
+    )
+    cpc_bid_ceiling_micros = proto.Field(
+        proto.INT64,
+        number=5,
+        optional=True,
+    )
+    cpc_bid_floor_micros = proto.Field(
+        proto.INT64,
+        number=6,
+        optional=True,
+    )
 
 
 class TargetSpend(proto.Message):
@@ -289,8 +345,16 @@ class TargetSpend(proto.Message):
             This field is a member of `oneof`_ ``_cpc_bid_ceiling_micros``.
     """
 
-    target_spend_micros = proto.Field(proto.INT64, number=3, optional=True,)
-    cpc_bid_ceiling_micros = proto.Field(proto.INT64, number=4, optional=True,)
+    target_spend_micros = proto.Field(
+        proto.INT64,
+        number=3,
+        optional=True,
+    )
+    cpc_bid_ceiling_micros = proto.Field(
+        proto.INT64,
+        number=4,
+        optional=True,
+    )
 
 
 class PercentCpc(proto.Message):
@@ -314,8 +378,16 @@ class PercentCpc(proto.Message):
             This field is a member of `oneof`_ ``_enhanced_cpc_enabled``.
     """
 
-    cpc_bid_ceiling_micros = proto.Field(proto.INT64, number=3, optional=True,)
-    enhanced_cpc_enabled = proto.Field(proto.BOOL, number=4, optional=True,)
+    cpc_bid_ceiling_micros = proto.Field(
+        proto.INT64,
+        number=3,
+        optional=True,
+    )
+    enhanced_cpc_enabled = proto.Field(
+        proto.BOOL,
+        number=4,
+        optional=True,
+    )
 
 
 __all__ = tuple(sorted(__protobuf__.manifest))

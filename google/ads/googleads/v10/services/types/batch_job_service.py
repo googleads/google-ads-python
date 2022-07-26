@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-# Copyright 2020 Google LLC
+# Copyright 2022 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -54,14 +54,24 @@ class MutateBatchJobRequest(proto.Message):
             individual batch job.
     """
 
-    customer_id = proto.Field(proto.STRING, number=1,)
+    customer_id = proto.Field(
+        proto.STRING,
+        number=1,
+    )
     operation = proto.Field(
-        proto.MESSAGE, number=2, message="BatchJobOperation",
+        proto.MESSAGE,
+        number=2,
+        message="BatchJobOperation",
     )
 
 
 class BatchJobOperation(proto.Message):
     r"""A single operation on a batch job.
+
+    This message has `oneof`_ fields (mutually exclusive fields).
+    For each oneof, at most one member field can be set at the same time.
+    Setting any member of the oneof automatically clears all other
+    members.
 
     .. _oneof: https://proto-plus-python.readthedocs.io/en/stable/fields.html#oneofs-mutually-exclusive-fields
 
@@ -71,10 +81,26 @@ class BatchJobOperation(proto.Message):
             expected for the new batch job.
 
             This field is a member of `oneof`_ ``operation``.
+        remove (str):
+            Remove operation: The batch job must not have been run. A
+            resource name for the removed batch job is expected, in this
+            format:
+
+            ``customers/{customer_id}/batchJobs/{batch_job_id}``
+
+            This field is a member of `oneof`_ ``operation``.
     """
 
     create = proto.Field(
-        proto.MESSAGE, number=1, oneof="operation", message=batch_job.BatchJob,
+        proto.MESSAGE,
+        number=1,
+        oneof="operation",
+        message=batch_job.BatchJob,
+    )
+    remove = proto.Field(
+        proto.STRING,
+        number=4,
+        oneof="operation",
     )
 
 
@@ -88,7 +114,9 @@ class MutateBatchJobResponse(proto.Message):
     """
 
     result = proto.Field(
-        proto.MESSAGE, number=1, message="MutateBatchJobResult",
+        proto.MESSAGE,
+        number=1,
+        message="MutateBatchJobResult",
     )
 
 
@@ -100,7 +128,10 @@ class MutateBatchJobResult(proto.Message):
             The resource name of the batch job.
     """
 
-    resource_name = proto.Field(proto.STRING, number=1,)
+    resource_name = proto.Field(
+        proto.STRING,
+        number=1,
+    )
 
 
 class RunBatchJobRequest(proto.Message):
@@ -113,7 +144,10 @@ class RunBatchJobRequest(proto.Message):
             to run.
     """
 
-    resource_name = proto.Field(proto.STRING, number=1,)
+    resource_name = proto.Field(
+        proto.STRING,
+        number=1,
+    )
 
 
 class AddBatchJobOperationsRequest(proto.Message):
@@ -144,10 +178,18 @@ class AddBatchJobOperationsRequest(proto.Message):
             "customers/1234/campaigns/-1".
     """
 
-    resource_name = proto.Field(proto.STRING, number=1,)
-    sequence_token = proto.Field(proto.STRING, number=2,)
+    resource_name = proto.Field(
+        proto.STRING,
+        number=1,
+    )
+    sequence_token = proto.Field(
+        proto.STRING,
+        number=2,
+    )
     mutate_operations = proto.RepeatedField(
-        proto.MESSAGE, number=3, message=google_ads_service.MutateOperation,
+        proto.MESSAGE,
+        number=3,
+        message=google_ads_service.MutateOperation,
     )
 
 
@@ -166,8 +208,14 @@ class AddBatchJobOperationsResponse(proto.Message):
             sequence_token field to the value of this field.
     """
 
-    total_operations = proto.Field(proto.INT64, number=1,)
-    next_sequence_token = proto.Field(proto.STRING, number=2,)
+    total_operations = proto.Field(
+        proto.INT64,
+        number=1,
+    )
+    next_sequence_token = proto.Field(
+        proto.STRING,
+        number=2,
+    )
 
 
 class ListBatchJobResultsRequest(proto.Message):
@@ -194,9 +242,18 @@ class ListBatchJobResultsRequest(proto.Message):
             resource name should be returned.
     """
 
-    resource_name = proto.Field(proto.STRING, number=1,)
-    page_token = proto.Field(proto.STRING, number=2,)
-    page_size = proto.Field(proto.INT32, number=3,)
+    resource_name = proto.Field(
+        proto.STRING,
+        number=1,
+    )
+    page_token = proto.Field(
+        proto.STRING,
+        number=2,
+    )
+    page_size = proto.Field(
+        proto.INT32,
+        number=3,
+    )
     response_content_type = proto.Field(
         proto.ENUM,
         number=4,
@@ -223,9 +280,14 @@ class ListBatchJobResultsResponse(proto.Message):
         return self
 
     results = proto.RepeatedField(
-        proto.MESSAGE, number=1, message="BatchJobResult",
+        proto.MESSAGE,
+        number=1,
+        message="BatchJobResult",
     )
-    next_page_token = proto.Field(proto.STRING, number=2,)
+    next_page_token = proto.Field(
+        proto.STRING,
+        number=2,
+    )
 
 
 class BatchJobResult(proto.Message):
@@ -242,13 +304,20 @@ class BatchJobResult(proto.Message):
             operation.
     """
 
-    operation_index = proto.Field(proto.INT64, number=1,)
+    operation_index = proto.Field(
+        proto.INT64,
+        number=1,
+    )
     mutate_operation_response = proto.Field(
         proto.MESSAGE,
         number=2,
         message=google_ads_service.MutateOperationResponse,
     )
-    status = proto.Field(proto.MESSAGE, number=3, message=status_pb2.Status,)
+    status = proto.Field(
+        proto.MESSAGE,
+        number=3,
+        message=status_pb2.Status,
+    )
 
 
 __all__ = tuple(sorted(__protobuf__.manifest))

@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-# Copyright 2020 Google LLC
+# Copyright 2022 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -23,7 +23,9 @@ from google.ads.googleads.v10.enums.types import policy_review_status
 __protobuf__ = proto.module(
     package="google.ads.googleads.v10.common",
     marshal="google.ads.googleads.v10",
-    manifest={"AdAssetPolicySummary",},
+    manifest={
+        "AdAssetPolicySummary",
+    },
 )
 
 
@@ -42,7 +44,9 @@ class AdAssetPolicySummary(proto.Message):
     """
 
     policy_topic_entries = proto.RepeatedField(
-        proto.MESSAGE, number=1, message=policy.PolicyTopicEntry,
+        proto.MESSAGE,
+        number=1,
+        message=policy.PolicyTopicEntry,
     )
     review_status = proto.Field(
         proto.ENUM,

@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-# Copyright 2020 Google LLC
+# Copyright 2022 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -68,21 +68,21 @@ class ListPlannableLocationsResponse(proto.Message):
 
     Attributes:
         plannable_locations (Sequence[google.ads.googleads.v10.services.types.PlannableLocation]):
-            The list of locations available for planning
-            (Countries, DMAs, sub-countries).
-            For locations like Countries and DMAs see
+            The list of locations available for planning.
+            See
             https://developers.google.com/google-ads/api/reference/data/geotargets
-            for more information.
+            for sample locations.
     """
 
     plannable_locations = proto.RepeatedField(
-        proto.MESSAGE, number=1, message="PlannableLocation",
+        proto.MESSAGE,
+        number=1,
+        message="PlannableLocation",
     )
 
 
 class PlannableLocation(proto.Message):
-    r"""A plannable location: a country, a DMA, a metro region, a tv
-    region, a province.
+    r"""A plannable location: country, metro region, province, etc.
 
     Attributes:
         id (str):
@@ -90,13 +90,13 @@ class PlannableLocation(proto.Message):
 
             This field is a member of `oneof`_ ``_id``.
         name (str):
-            The unique location name in english.
+            The unique location name in English.
 
             This field is a member of `oneof`_ ``_name``.
         parent_country_id (int):
-            The parent country, not present if location is a country. If
-            present will always be a GeoTargetConstant ID. Additional
-            information, such as country name is provided by
+            The parent country (not present if location is a country).
+            If present, will always be a GeoTargetConstant ID.
+            Additional information such as country name is provided by
             [ReachPlanService.ListPlannableLocations][google.ads.googleads.v10.services.ReachPlanService.ListPlannableLocations]
             or [GoogleAdsService.Search/SearchStream][].
 
@@ -114,11 +114,31 @@ class PlannableLocation(proto.Message):
             This field is a member of `oneof`_ ``_location_type``.
     """
 
-    id = proto.Field(proto.STRING, number=4, optional=True,)
-    name = proto.Field(proto.STRING, number=5, optional=True,)
-    parent_country_id = proto.Field(proto.INT64, number=6, optional=True,)
-    country_code = proto.Field(proto.STRING, number=7, optional=True,)
-    location_type = proto.Field(proto.STRING, number=8, optional=True,)
+    id = proto.Field(
+        proto.STRING,
+        number=4,
+        optional=True,
+    )
+    name = proto.Field(
+        proto.STRING,
+        number=5,
+        optional=True,
+    )
+    parent_country_id = proto.Field(
+        proto.INT64,
+        number=6,
+        optional=True,
+    )
+    country_code = proto.Field(
+        proto.STRING,
+        number=7,
+        optional=True,
+    )
+    location_type = proto.Field(
+        proto.STRING,
+        number=8,
+        optional=True,
+    )
 
 
 class ListPlannableProductsRequest(proto.Message):
@@ -127,11 +147,14 @@ class ListPlannableProductsRequest(proto.Message):
     Attributes:
         plannable_location_id (str):
             Required. The ID of the selected location for planning. To
-            list the available plannable location ids use
+            list the available plannable location IDs use
             [ReachPlanService.ListPlannableLocations][google.ads.googleads.v10.services.ReachPlanService.ListPlannableLocations].
     """
 
-    plannable_location_id = proto.Field(proto.STRING, number=2,)
+    plannable_location_id = proto.Field(
+        proto.STRING,
+        number=2,
+    )
 
 
 class ListPlannableProductsResponse(proto.Message):
@@ -144,7 +167,9 @@ class ListPlannableProductsResponse(proto.Message):
     """
 
     product_metadata = proto.RepeatedField(
-        proto.MESSAGE, number=1, message="ProductMetadata",
+        proto.MESSAGE,
+        number=1,
+        message="ProductMetadata",
     )
 
 
@@ -153,9 +178,10 @@ class ProductMetadata(proto.Message):
 
     Attributes:
         plannable_product_code (str):
-            The code associated with the ad product. E.g. BUMPER,
-            TRUEVIEW_IN_STREAM To list the available plannable product
-            codes use ListPlannableProducts.
+            The code associated with the ad product (for example:
+            BUMPER, TRUEVIEW_IN_STREAM). To list the available plannable
+            product codes use
+            [ReachPlanService.ListPlannableProducts][google.ads.googleads.v10.services.ReachPlanService.ListPlannableProducts].
 
             This field is a member of `oneof`_ ``_plannable_product_code``.
         plannable_product_name (str):
@@ -165,10 +191,19 @@ class ProductMetadata(proto.Message):
             product.
     """
 
-    plannable_product_code = proto.Field(proto.STRING, number=4, optional=True,)
-    plannable_product_name = proto.Field(proto.STRING, number=3,)
+    plannable_product_code = proto.Field(
+        proto.STRING,
+        number=4,
+        optional=True,
+    )
+    plannable_product_name = proto.Field(
+        proto.STRING,
+        number=3,
+    )
     plannable_targeting = proto.Field(
-        proto.MESSAGE, number=2, message="PlannableTargeting",
+        proto.MESSAGE,
+        number=2,
+        message="PlannableTargeting",
     )
 
 
@@ -187,7 +222,8 @@ class PlannableTargeting(proto.Message):
             Targetable devices for the ad product. TABLET device
             targeting is automatically applied to reported metrics when
             MOBILE targeting is selected for CPM_MASTHEAD,
-            GOOGLE_PREFERRED_BUMPER and GOOGLE_PREFERRED_SHORT products.
+            GOOGLE_PREFERRED_BUMPER, and GOOGLE_PREFERRED_SHORT
+            products.
         networks (Sequence[google.ads.googleads.v10.enums.types.ReachPlanNetworkEnum.ReachPlanNetwork]):
             Targetable networks for the ad product.
     """
@@ -198,10 +234,14 @@ class PlannableTargeting(proto.Message):
         enum=reach_plan_age_range.ReachPlanAgeRangeEnum.ReachPlanAgeRange,
     )
     genders = proto.RepeatedField(
-        proto.MESSAGE, number=2, message=criteria.GenderInfo,
+        proto.MESSAGE,
+        number=2,
+        message=criteria.GenderInfo,
     )
     devices = proto.RepeatedField(
-        proto.MESSAGE, number=3, message=criteria.DeviceInfo,
+        proto.MESSAGE,
+        number=3,
+        message=criteria.DeviceInfo,
     )
     networks = proto.RepeatedField(
         proto.ENUM,
@@ -218,7 +258,7 @@ class GenerateProductMixIdeasRequest(proto.Message):
         customer_id (str):
             Required. The ID of the customer.
         plannable_location_id (str):
-            Required. The ID of the location, this is one of the ids
+            Required. The ID of the location, this is one of the IDs
             returned by
             [ReachPlanService.ListPlannableLocations][google.ads.googleads.v10.services.ReachPlanService.ListPlannableLocations].
         currency_code (str):
@@ -235,11 +275,27 @@ class GenerateProductMixIdeasRequest(proto.Message):
             specified.
     """
 
-    customer_id = proto.Field(proto.STRING, number=1,)
-    plannable_location_id = proto.Field(proto.STRING, number=6,)
-    currency_code = proto.Field(proto.STRING, number=7,)
-    budget_micros = proto.Field(proto.INT64, number=8,)
-    preferences = proto.Field(proto.MESSAGE, number=5, message="Preferences",)
+    customer_id = proto.Field(
+        proto.STRING,
+        number=1,
+    )
+    plannable_location_id = proto.Field(
+        proto.STRING,
+        number=6,
+    )
+    currency_code = proto.Field(
+        proto.STRING,
+        number=7,
+    )
+    budget_micros = proto.Field(
+        proto.INT64,
+        number=8,
+    )
+    preferences = proto.Field(
+        proto.MESSAGE,
+        number=5,
+        message="Preferences",
+    )
 
 
 class Preferences(proto.Message):
@@ -265,22 +321,38 @@ class Preferences(proto.Message):
 
             This field is a member of `oneof`_ ``_top_content_only``.
         has_guaranteed_price (bool):
-            True if the price guaranteed. The cost of
+            True if the price is guaranteed. The cost of
             serving the ad is agreed upfront and not subject
             to an auction. If not set, default is any value.
 
             This field is a member of `oneof`_ ``_has_guaranteed_price``.
     """
 
-    is_skippable = proto.Field(proto.BOOL, number=6, optional=True,)
-    starts_with_sound = proto.Field(proto.BOOL, number=7, optional=True,)
+    is_skippable = proto.Field(
+        proto.BOOL,
+        number=6,
+        optional=True,
+    )
+    starts_with_sound = proto.Field(
+        proto.BOOL,
+        number=7,
+        optional=True,
+    )
     ad_length = proto.Field(
         proto.ENUM,
         number=3,
         enum=reach_plan_ad_length.ReachPlanAdLengthEnum.ReachPlanAdLength,
     )
-    top_content_only = proto.Field(proto.BOOL, number=8, optional=True,)
-    has_guaranteed_price = proto.Field(proto.BOOL, number=9, optional=True,)
+    top_content_only = proto.Field(
+        proto.BOOL,
+        number=8,
+        optional=True,
+    )
+    has_guaranteed_price = proto.Field(
+        proto.BOOL,
+        number=9,
+        optional=True,
+    )
 
 
 class GenerateProductMixIdeasResponse(proto.Message):
@@ -293,7 +365,9 @@ class GenerateProductMixIdeasResponse(proto.Message):
     """
 
     product_allocation = proto.RepeatedField(
-        proto.MESSAGE, number=1, message="ProductAllocation",
+        proto.MESSAGE,
+        number=1,
+        message="ProductAllocation",
     )
 
 
@@ -316,8 +390,16 @@ class ProductAllocation(proto.Message):
             This field is a member of `oneof`_ ``_budget_micros``.
     """
 
-    plannable_product_code = proto.Field(proto.STRING, number=3, optional=True,)
-    budget_micros = proto.Field(proto.INT64, number=4, optional=True,)
+    plannable_product_code = proto.Field(
+        proto.STRING,
+        number=3,
+        optional=True,
+    )
+    budget_micros = proto.Field(
+        proto.INT64,
+        number=4,
+        optional=True,
+    )
 
 
 class GenerateReachForecastRequest(proto.Message):
@@ -335,23 +417,23 @@ class GenerateReachForecastRequest(proto.Message):
         campaign_duration (google.ads.googleads.v10.services.types.CampaignDuration):
             Required. Campaign duration.
         cookie_frequency_cap (int):
-            Desired cookie frequency cap that will be applied to each
-            planned product. This is equivalent to the frequency cap
-            exposed in Google Ads when creating a campaign, it
-            represents the maximum number of times an ad can be shown to
-            the same user. If not specified no cap is applied.
+            Desired cookie frequency cap to be applied to each planned
+            product. This is equivalent to the frequency cap exposed in
+            Google Ads when creating a campaign, it represents the
+            maximum number of times an ad can be shown to the same user.
+            If not specified, no cap is applied.
 
             This field is deprecated in v4 and will eventually be
             removed. Please use cookie_frequency_cap_setting instead.
 
             This field is a member of `oneof`_ ``_cookie_frequency_cap``.
         cookie_frequency_cap_setting (google.ads.googleads.v10.services.types.FrequencyCap):
-            Desired cookie frequency cap that will be applied to each
-            planned product. This is equivalent to the frequency cap
-            exposed in Google Ads when creating a campaign, it
-            represents the maximum number of times an ad can be shown to
-            the same user during a specified time interval. If not
-            specified, a default of 0 (no cap) is applied.
+            Desired cookie frequency cap to be applied to each planned
+            product. This is equivalent to the frequency cap exposed in
+            Google Ads when creating a campaign, it represents the
+            maximum number of times an ad can be shown to the same user
+            during a specified time interval. If not specified, a
+            default of 0 (no cap) is applied.
 
             This field replaces the deprecated cookie_frequency_cap
             field.
@@ -394,17 +476,34 @@ class GenerateReachForecastRequest(proto.Message):
             15.
     """
 
-    customer_id = proto.Field(proto.STRING, number=1,)
-    currency_code = proto.Field(proto.STRING, number=9, optional=True,)
-    campaign_duration = proto.Field(
-        proto.MESSAGE, number=3, message="CampaignDuration",
+    customer_id = proto.Field(
+        proto.STRING,
+        number=1,
     )
-    cookie_frequency_cap = proto.Field(proto.INT32, number=10, optional=True,)
+    currency_code = proto.Field(
+        proto.STRING,
+        number=9,
+        optional=True,
+    )
+    campaign_duration = proto.Field(
+        proto.MESSAGE,
+        number=3,
+        message="CampaignDuration",
+    )
+    cookie_frequency_cap = proto.Field(
+        proto.INT32,
+        number=10,
+        optional=True,
+    )
     cookie_frequency_cap_setting = proto.Field(
-        proto.MESSAGE, number=8, message="FrequencyCap",
+        proto.MESSAGE,
+        number=8,
+        message="FrequencyCap",
     )
     min_effective_frequency = proto.Field(
-        proto.INT32, number=11, optional=True,
+        proto.INT32,
+        number=11,
+        optional=True,
     )
     effective_frequency_limit = proto.Field(
         proto.MESSAGE,
@@ -412,9 +511,15 @@ class GenerateReachForecastRequest(proto.Message):
         optional=True,
         message="EffectiveFrequencyLimit",
     )
-    targeting = proto.Field(proto.MESSAGE, number=6, message="Targeting",)
+    targeting = proto.Field(
+        proto.MESSAGE,
+        number=6,
+        message="Targeting",
+    )
     planned_products = proto.RepeatedField(
-        proto.MESSAGE, number=7, message="PlannedProduct",
+        proto.MESSAGE,
+        number=7,
+        message="PlannedProduct",
     )
 
 
@@ -428,7 +533,10 @@ class EffectiveFrequencyLimit(proto.Message):
             frequencies 1-10, inclusive.
     """
 
-    effective_frequency_breakdown_limit = proto.Field(proto.INT32, number=1,)
+    effective_frequency_breakdown_limit = proto.Field(
+        proto.INT32,
+        number=1,
+    )
 
 
 class FrequencyCap(proto.Message):
@@ -443,7 +551,10 @@ class FrequencyCap(proto.Message):
             Required. The type of time unit.
     """
 
-    impressions = proto.Field(proto.INT32, number=3,)
+    impressions = proto.Field(
+        proto.INT32,
+        number=3,
+    )
     time_unit = proto.Field(
         proto.ENUM,
         number=2,
@@ -481,17 +592,25 @@ class Targeting(proto.Message):
             [ReachPlanService.ListPlannableProducts][google.ads.googleads.v10.services.ReachPlanService.ListPlannableProducts].
     """
 
-    plannable_location_id = proto.Field(proto.STRING, number=6, optional=True,)
+    plannable_location_id = proto.Field(
+        proto.STRING,
+        number=6,
+        optional=True,
+    )
     age_range = proto.Field(
         proto.ENUM,
         number=2,
         enum=reach_plan_age_range.ReachPlanAgeRangeEnum.ReachPlanAgeRange,
     )
     genders = proto.RepeatedField(
-        proto.MESSAGE, number=3, message=criteria.GenderInfo,
+        proto.MESSAGE,
+        number=3,
+        message=criteria.GenderInfo,
     )
     devices = proto.RepeatedField(
-        proto.MESSAGE, number=4, message=criteria.DeviceInfo,
+        proto.MESSAGE,
+        number=4,
+        message=criteria.DeviceInfo,
     )
     network = proto.Field(
         proto.ENUM,
@@ -519,8 +638,16 @@ class CampaignDuration(proto.Message):
             field.
     """
 
-    duration_in_days = proto.Field(proto.INT32, number=2, optional=True,)
-    date_range = proto.Field(proto.MESSAGE, number=3, message=dates.DateRange,)
+    duration_in_days = proto.Field(
+        proto.INT32,
+        number=2,
+        optional=True,
+    )
+    date_range = proto.Field(
+        proto.MESSAGE,
+        number=3,
+        message=dates.DateRange,
+    )
 
 
 class PlannedProduct(proto.Message):
@@ -529,22 +656,30 @@ class PlannedProduct(proto.Message):
     Attributes:
         plannable_product_code (str):
             Required. Selected product for planning. The code associated
-            with the ad product. E.g. Trueview, Bumper To list the
-            available plannable product codes use
+            with the ad product (for example: Trueview, Bumper). To list
+            the available plannable product codes use
             [ReachPlanService.ListPlannableProducts][google.ads.googleads.v10.services.ReachPlanService.ListPlannableProducts].
 
             This field is a member of `oneof`_ ``_plannable_product_code``.
         budget_micros (int):
             Required. Maximum budget allocation in micros for the
             selected product. The value is specified in the selected
-            planning currency_code. E.g. 1 000 000$ = 1 000 000 000 000
-            micros.
+            planning currency_code. For example: 1 000 000$ = 1 000 000
+            000 000 micros.
 
             This field is a member of `oneof`_ ``_budget_micros``.
     """
 
-    plannable_product_code = proto.Field(proto.STRING, number=3, optional=True,)
-    budget_micros = proto.Field(proto.INT64, number=4, optional=True,)
+    plannable_product_code = proto.Field(
+        proto.STRING,
+        number=3,
+        optional=True,
+    )
+    budget_micros = proto.Field(
+        proto.INT64,
+        number=4,
+        optional=True,
+    )
 
 
 class GenerateReachForecastResponse(proto.Message):
@@ -559,9 +694,15 @@ class GenerateReachForecastResponse(proto.Message):
     """
 
     on_target_audience_metrics = proto.Field(
-        proto.MESSAGE, number=1, message="OnTargetAudienceMetrics",
+        proto.MESSAGE,
+        number=1,
+        message="OnTargetAudienceMetrics",
     )
-    reach_curve = proto.Field(proto.MESSAGE, number=2, message="ReachCurve",)
+    reach_curve = proto.Field(
+        proto.MESSAGE,
+        number=2,
+        message="ReachCurve",
+    )
 
 
 class ReachCurve(proto.Message):
@@ -573,7 +714,9 @@ class ReachCurve(proto.Message):
     """
 
     reach_forecasts = proto.RepeatedField(
-        proto.MESSAGE, number=1, message="ReachForecast",
+        proto.MESSAGE,
+        number=1,
+        message="ReachForecast",
     )
 
 
@@ -591,10 +734,19 @@ class ReachForecast(proto.Message):
             reach curve.
     """
 
-    cost_micros = proto.Field(proto.INT64, number=5,)
-    forecast = proto.Field(proto.MESSAGE, number=2, message="Forecast",)
+    cost_micros = proto.Field(
+        proto.INT64,
+        number=5,
+    )
+    forecast = proto.Field(
+        proto.MESSAGE,
+        number=2,
+        message="Forecast",
+    )
     planned_product_reach_forecasts = proto.RepeatedField(
-        proto.MESSAGE, number=4, message="PlannedProductReachForecast",
+        proto.MESSAGE,
+        number=4,
+        message="PlannedProductReachForecast",
     )
 
 
@@ -654,13 +806,35 @@ class Forecast(proto.Message):
             empty.
     """
 
-    on_target_reach = proto.Field(proto.INT64, number=5, optional=True,)
-    total_reach = proto.Field(proto.INT64, number=6, optional=True,)
-    on_target_impressions = proto.Field(proto.INT64, number=7, optional=True,)
-    total_impressions = proto.Field(proto.INT64, number=8, optional=True,)
-    viewable_impressions = proto.Field(proto.INT64, number=9, optional=True,)
+    on_target_reach = proto.Field(
+        proto.INT64,
+        number=5,
+        optional=True,
+    )
+    total_reach = proto.Field(
+        proto.INT64,
+        number=6,
+        optional=True,
+    )
+    on_target_impressions = proto.Field(
+        proto.INT64,
+        number=7,
+        optional=True,
+    )
+    total_impressions = proto.Field(
+        proto.INT64,
+        number=8,
+        optional=True,
+    )
+    viewable_impressions = proto.Field(
+        proto.INT64,
+        number=9,
+        optional=True,
+    )
     effective_frequency_breakdowns = proto.RepeatedField(
-        proto.MESSAGE, number=10, message="EffectiveFrequencyBreakdown",
+        proto.MESSAGE,
+        number=10,
+        message="EffectiveFrequencyBreakdown",
     )
 
 
@@ -683,10 +857,18 @@ class PlannedProductReachForecast(proto.Message):
             Forecasted traffic metrics for this product.
     """
 
-    plannable_product_code = proto.Field(proto.STRING, number=1,)
-    cost_micros = proto.Field(proto.INT64, number=2,)
+    plannable_product_code = proto.Field(
+        proto.STRING,
+        number=1,
+    )
+    cost_micros = proto.Field(
+        proto.INT64,
+        number=2,
+    )
     planned_product_forecast = proto.Field(
-        proto.MESSAGE, number=3, message="PlannedProductForecast",
+        proto.MESSAGE,
+        number=3,
+        message="PlannedProductForecast",
     )
 
 
@@ -726,11 +908,27 @@ class PlannedProductForecast(proto.Message):
             This field is a member of `oneof`_ ``_viewable_impressions``.
     """
 
-    on_target_reach = proto.Field(proto.INT64, number=1,)
-    total_reach = proto.Field(proto.INT64, number=2,)
-    on_target_impressions = proto.Field(proto.INT64, number=3,)
-    total_impressions = proto.Field(proto.INT64, number=4,)
-    viewable_impressions = proto.Field(proto.INT64, number=5, optional=True,)
+    on_target_reach = proto.Field(
+        proto.INT64,
+        number=1,
+    )
+    total_reach = proto.Field(
+        proto.INT64,
+        number=2,
+    )
+    on_target_impressions = proto.Field(
+        proto.INT64,
+        number=3,
+    )
+    total_impressions = proto.Field(
+        proto.INT64,
+        number=4,
+    )
+    viewable_impressions = proto.Field(
+        proto.INT64,
+        number=5,
+        optional=True,
+    )
 
 
 class OnTargetAudienceMetrics(proto.Message):
@@ -753,8 +951,16 @@ class OnTargetAudienceMetrics(proto.Message):
             This field is a member of `oneof`_ ``_census_audience_size``.
     """
 
-    youtube_audience_size = proto.Field(proto.INT64, number=3, optional=True,)
-    census_audience_size = proto.Field(proto.INT64, number=4, optional=True,)
+    youtube_audience_size = proto.Field(
+        proto.INT64,
+        number=3,
+        optional=True,
+    )
+    census_audience_size = proto.Field(
+        proto.INT64,
+        number=4,
+        optional=True,
+    )
 
 
 class EffectiveFrequencyBreakdown(proto.Message):
@@ -782,9 +988,18 @@ class EffectiveFrequencyBreakdown(proto.Message):
             not met, the total_reach value will be rounded to 0.
     """
 
-    effective_frequency = proto.Field(proto.INT32, number=1,)
-    on_target_reach = proto.Field(proto.INT64, number=2,)
-    total_reach = proto.Field(proto.INT64, number=3,)
+    effective_frequency = proto.Field(
+        proto.INT32,
+        number=1,
+    )
+    on_target_reach = proto.Field(
+        proto.INT64,
+        number=2,
+    )
+    total_reach = proto.Field(
+        proto.INT64,
+        number=3,
+    )
 
 
 __all__ = tuple(sorted(__protobuf__.manifest))

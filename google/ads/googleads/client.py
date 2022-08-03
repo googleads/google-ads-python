@@ -329,7 +329,7 @@ class GoogleAdsClient:
 
         # If given, write the http_proxy channel option for GRPC to use
         if http_proxy:
-            _GRPC_CHANNEL_OPTIONS.append(("grpc.http_proxy", http_proxy)),
+            _GRPC_CHANNEL_OPTIONS.append(("grpc.http_proxy", http_proxy))
 
     def get_service(self, name, version=_DEFAULT_VERSION, interceptors=None):
         """Returns a service client instance for the specified service_name.

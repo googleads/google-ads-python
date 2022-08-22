@@ -25,7 +25,7 @@ __protobuf__ = proto.module(
 
 class AssetSourceEnum(proto.Message):
     r"""Source of the asset or asset link for who generated the
-    entity. e.g. advertiser or automatically created.
+    entity. For example, advertiser or automatically created.
 
     """
 

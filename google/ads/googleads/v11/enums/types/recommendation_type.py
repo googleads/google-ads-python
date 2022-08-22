@@ -53,6 +53,8 @@ class RecommendationTypeEnum(proto.Message):
         RESPONSIVE_SEARCH_AD_ASSET = 21
         UPGRADE_SMART_SHOPPING_CAMPAIGN_TO_PERFORMANCE_MAX = 22
         RESPONSIVE_SEARCH_AD_IMPROVE_AD_STRENGTH = 23
+        DISPLAY_EXPANSION_OPT_IN = 24
+        UPGRADE_LOCAL_CAMPAIGN_TO_PERFORMANCE_MAX = 25
 
 
 __all__ = tuple(sorted(__protobuf__.manifest))

@@ -220,9 +220,9 @@ class TargetImpressionShare(proto.Message):
             The targeted location on the search results
             page.
         location_fraction_micros (int):
-            The desired fraction of ads to be shown in
-            the targeted location in micros. E.g. 1% equals
-            10,000.
+            The chosen fraction of ads to be shown in the
+            targeted location in micros. For example, 1%
+            equals 10,000.
 
             This field is a member of `oneof`_ ``_location_fraction_micros``.
         cpc_bid_ceiling_micros (int):
@@ -251,7 +251,7 @@ class TargetRoas(proto.Message):
 
     Attributes:
         target_roas (float):
-            Required. The desired revenue (based on
+            Required. The chosen revenue (based on
             conversion data) per unit of spend. Value must
             be between 0.01 and 1000.0, inclusive.
 

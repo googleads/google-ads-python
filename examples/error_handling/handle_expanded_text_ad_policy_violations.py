@@ -37,12 +37,12 @@ def main(client, customer_id, ad_group_id):
 
     ad_group_ad_service_client = client.get_service("AdGroupAdService")
 
-    ad_group_ad_operation, ignorable_policy_topics = _create_expanded_text_ad(
+    ad_group_ad_operation, ignorable_policy_topics = create_expanded_text_ad(
         client, ad_group_ad_service_client, customer_id, ad_group_id
     )
 
     try:
-        _request_exemption(
+        request_exemption(
             customer_id,
             ad_group_ad_service_client,
             ad_group_ad_operation,
@@ -61,7 +61,7 @@ def main(client, customer_id, ad_group_id):
         sys.exit(1)
 
 
-def _create_expanded_text_ad(
+def create_expanded_text_ad(
     client, ad_group_ad_service_client, customer_id, ad_group_id
 ):
     """Create an expanded text ad that includes a policy violation.
@@ -107,7 +107,7 @@ def _create_expanded_text_ad(
     except GoogleAdsException as googleads_exception:
         # The request will always fail due to the policy violation in the
         # ad's description.
-        ignorable_policy_topics = _fetch_ignorable_policy_topics(
+        ignorable_policy_topics = fetch_ignorable_policy_topics(
             client, googleads_exception
         )
 
@@ -115,7 +115,7 @@ def _create_expanded_text_ad(
 
 
 # [START handle_expanded_text_ad_policy_violations]
-def _fetch_ignorable_policy_topics(client, googleads_exception):
+def fetch_ignorable_policy_topics(client, googleads_exception):
     """Collects all ignorable policy topics to be sent for exemption request.
 
     Args:
@@ -170,7 +170,7 @@ def _fetch_ignorable_policy_topics(client, googleads_exception):
 
 
 # [START handle_expanded_text_ad_policy_violations_1]
-def _request_exemption(
+def request_exemption(
     customer_id,
     ad_group_ad_service_client,
     ad_group_ad_operation,

@@ -180,7 +180,7 @@ class CallReportingSetting(proto.Message):
     Attributes:
         call_reporting_enabled (bool):
             Enable reporting of phone call events by
-            redirecting them via Google System.
+            redirecting them through Google System.
 
             This field is a member of `oneof`_ ``_call_reporting_enabled``.
         call_conversion_reporting_enabled (bool):
@@ -211,11 +211,10 @@ class ConversionTrackingSetting(proto.Message):
 
     Attributes:
         conversion_tracking_id (int):
-            Output only. The conversion tracking id used
-            for this account. This id is automatically
-            assigned after any conversion tracking feature
-            is used. If the customer doesn't use conversion
-            tracking, this is 0. This field is read-only.
+            Output only. The conversion tracking id used for this
+            account. This id doesn't indicate whether the customer uses
+            conversion tracking (conversion_tracking_status does). This
+            field is read-only.
 
             This field is a member of `oneof`_ ``_conversion_tracking_id``.
         cross_account_conversion_tracking_id (int):

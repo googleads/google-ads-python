@@ -76,7 +76,7 @@ class AdGroupBidModifier(proto.Message):
             Output only. Bid modifier source.
         hotel_date_selection_type (google.ads.googleads.v11.common.types.HotelDateSelectionTypeInfo):
             Immutable. Criterion for hotel date selection
-            (default dates vs. user selected).
+            (default dates versus user selected).
 
             This field is a member of `oneof`_ ``criterion``.
         hotel_advance_booking_window (google.ads.googleads.v11.common.types.HotelAdvanceBookingWindowInfo):

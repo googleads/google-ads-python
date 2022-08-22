@@ -503,8 +503,8 @@ class AccountLinkServiceClient(metaclass=AccountLinkServiceClientMeta):
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> account_link_service.MutateAccountLinkResponse:
         r"""Creates or removes an account link. From V5, create is not
-        supported through AccountLinkService.MutateAccountLink. Please
-        use AccountLinkService.CreateAccountLink instead.
+        supported through AccountLinkService.MutateAccountLink. Use
+        AccountLinkService.CreateAccountLink instead.
 
         List of thrown errors: `AccountLinkError <>`__
         `AuthenticationError <>`__ `AuthorizationError <>`__

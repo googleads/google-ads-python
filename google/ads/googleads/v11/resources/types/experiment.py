@@ -63,7 +63,7 @@ class Experiment(proto.Message):
             The product/feature that uses this
             experiment.
         status (google.ads.googleads.v11.enums.types.ExperimentStatusEnum.ExperimentStatus):
-            The Advertiser-desired status of this
+            The Advertiser-chosen status of this
             experiment.
         start_date (str):
             Date when the experiment starts. By default,

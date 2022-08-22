@@ -25,7 +25,7 @@ __protobuf__ = proto.module(
 
 class PromotionExtensionOccasionEnum(proto.Message):
     r"""Container for enum describing a promotion extension occasion.
-    For more information about the occasions please check:
+    For more information about the occasions  check:
     https://support.google.com/google-ads/answer/7367521
 
     """

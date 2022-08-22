@@ -100,8 +100,8 @@ class FeedItem(proto.Message):
             validation and approval state for active feed
             mappings. There will be an entry in the list for
             each type of feed mapping associated with the
-            feed, e.g. a feed with a sitelink and a call
-            feed mapping would cause every feed item
+            feed, for example, a feed with a sitelink and a
+            call feed mapping would cause every feed item
             associated with that feed to have an entry in
             this list for both sitelink and call. This field
             is read-only.
@@ -301,12 +301,12 @@ class FeedItemValidationError(proto.Message):
             Output only. Set of feed attributes in the
             feed item flagged during validation. If empty,
             no specific feed attributes can be associated
-            with the error (e.g. error across the entire
-            feed item).
+            with the error (for example, error across the
+            entire feed item).
         extra_info (str):
             Output only. Any extra information related to this error
             which is not captured by validation_error and
-            feed_attribute_id (e.g. placeholder field IDs when
+            feed_attribute_id (for example, placeholder field IDs when
             feed_attribute_id is not mapped). Note that extra_info is
             not localized.
 

@@ -71,7 +71,7 @@ def main(client, customer_id, merchant_center_account_id):
             == merchant_center_link_status_enum.PENDING
             and str(merchant_center_link.id) == merchant_center_account_id
         ):
-            _update_merchant_center_link_status(
+            update_merchant_center_link_status(
                 client,
                 customer_id,
                 merchant_center_link_service,
@@ -81,7 +81,7 @@ def main(client, customer_id, merchant_center_account_id):
 
 
 # [START approve_merchant_center_link_2]
-def _update_merchant_center_link_status(
+def update_merchant_center_link_status(
     client,
     customer_id,
     merchant_center_link_service,

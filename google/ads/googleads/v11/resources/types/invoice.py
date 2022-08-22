@@ -57,15 +57,16 @@ class Invoice(proto.Message):
         payments_account_id (str):
             Output only. A 16 digit ID used to identify
             the payments account associated with the billing
-            setup, e.g. "1234-5678-9012-3456". It appears on
-            the invoice PDF as "Billing Account Number".
+            setup, for example, "1234-5678-9012-3456". It
+            appears on the invoice PDF as "Billing Account
+            Number".
 
             This field is a member of `oneof`_ ``_payments_account_id``.
         payments_profile_id (str):
             Output only. A 12 digit ID used to identify
             the payments profile associated with the billing
-            setup, e.g. "1234-5678-9012". It appears on the
-            invoice PDF as "Billing ID".
+            setup, for example, "1234-5678-9012". It appears
+            on the invoice PDF as "Billing ID".
 
             This field is a member of `oneof`_ ``_payments_profile_id``.
         issue_date (str):

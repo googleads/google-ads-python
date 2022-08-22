@@ -28,7 +28,7 @@ class MinuteOfHourEnum(proto.Message):
     """
 
     class MinuteOfHour(proto.Enum):
-        r"""Enumerates of quarter-hours. E.g. "FIFTEEN"."""
+        r"""Enumerates of quarter-hours. For example, "FIFTEEN"."""
         UNSPECIFIED = 0
         UNKNOWN = 1
         ZERO = 2

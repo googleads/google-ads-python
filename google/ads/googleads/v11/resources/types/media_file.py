@@ -153,7 +153,7 @@ class MediaBundle(proto.Message):
             This field is a member of `oneof`_ ``_data``.
         url (str):
             Output only. The url to access the uploaded
-            zipped data. E.g.
+            zipped data. For example,
             https://tpc.googlesyndication.com/simgad/123
             This field is read-only.
 

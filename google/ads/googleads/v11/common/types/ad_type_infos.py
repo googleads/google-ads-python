@@ -289,7 +289,7 @@ class DisplayCallToAction(proto.Message):
             This field is a member of `oneof`_ ``_text``.
         text_color (str):
             Text color for the display-call-to-action in
-            hexadecimal, e.g. #ffffff for white.
+            hexadecimal, for example, # ffffff for white.
 
             This field is a member of `oneof`_ ``_text_color``.
         url_collection_id (str):
@@ -592,9 +592,9 @@ class VideoResponsiveAdInfo(proto.Message):
     Attributes:
         headlines (Sequence[google.ads.googleads.v11.common.types.AdTextAsset]):
             List of text assets used for the short
-            headline, e.g. the "Call To Action" banner.
-            Currently, only a single value for the short
-            headline is supported.
+            headline, for example, the "Call To Action"
+            banner. Currently, only a single value for the
+            short headline is supported.
         long_headlines (Sequence[google.ads.googleads.v11.common.types.AdTextAsset]):
             List of text assets used for the long
             headline. Currently, only a single value for the
@@ -604,9 +604,9 @@ class VideoResponsiveAdInfo(proto.Message):
             Currently, only a single value for the
             description is supported.
         call_to_actions (Sequence[google.ads.googleads.v11.common.types.AdTextAsset]):
-            List of text assets used for the button, e.g.
-            the "Call To Action" button. Currently, only a
-            single value for the button is supported.
+            List of text assets used for the button, for
+            example, the "Call To Action" button. Currently,
+            only a single value for the button is supported.
         videos (Sequence[google.ads.googleads.v11.common.types.AdVideoAsset]):
             List of YouTube video assets used for the ad.
             Currently, only a single value for the YouTube
@@ -720,15 +720,15 @@ class LegacyResponsiveDisplayAdInfo(proto.Message):
 
             This field is a member of `oneof`_ ``_allow_flexible_color``.
         accent_color (str):
-            The accent color of the ad in hexadecimal, e.g. #ffffff for
-            white. If one of ``main_color`` and ``accent_color`` is set,
-            the other is required as well.
+            The accent color of the ad in hexadecimal, for example,
+            #ffffff for white. If one of ``main_color`` and
+            ``accent_color`` is set, the other is required as well.
 
             This field is a member of `oneof`_ ``_accent_color``.
         main_color (str):
-            The main color of the ad in hexadecimal, e.g. #ffffff for
-            white. If one of ``main_color`` and ``accent_color`` is set,
-            the other is required as well.
+            The main color of the ad in hexadecimal, for example,
+            #ffffff for white. If one of ``main_color`` and
+            ``accent_color`` is set, the other is required as well.
 
             This field is a member of `oneof`_ ``_main_color``.
         call_to_action_text (str):
@@ -759,7 +759,8 @@ class LegacyResponsiveDisplayAdInfo(proto.Message):
             Specifies which format the ad will be served in. Default is
             ALL_FORMATS.
         price_prefix (str):
-            Prefix before price. E.g. 'as low as'.
+            Prefix before price. For example, 'as low
+            as'.
 
             This field is a member of `oneof`_ ``_price_prefix``.
         promo_text (str):
@@ -997,15 +998,15 @@ class ResponsiveDisplayAdInfo(proto.Message):
 
             This field is a member of `oneof`_ ``_business_name``.
         main_color (str):
-            The main color of the ad in hexadecimal, e.g. #ffffff for
-            white. If one of ``main_color`` and ``accent_color`` is set,
-            the other is required as well.
+            The main color of the ad in hexadecimal, for example,
+            #ffffff for white. If one of ``main_color`` and
+            ``accent_color`` is set, the other is required as well.
 
             This field is a member of `oneof`_ ``_main_color``.
         accent_color (str):
-            The accent color of the ad in hexadecimal, e.g. #ffffff for
-            white. If one of ``main_color`` and ``accent_color`` is set,
-            the other is required as well.
+            The accent color of the ad in hexadecimal, for example,
+            #ffffff for white. If one of ``main_color`` and
+            ``accent_color`` is set, the other is required as well.
 
             This field is a member of `oneof`_ ``_accent_color``.
         allow_flexible_color (bool):
@@ -1022,7 +1023,8 @@ class ResponsiveDisplayAdInfo(proto.Message):
 
             This field is a member of `oneof`_ ``_call_to_action_text``.
         price_prefix (str):
-            Prefix before price. E.g. 'as low as'.
+            Prefix before price. For example, 'as low
+            as'.
 
             This field is a member of `oneof`_ ``_price_prefix``.
         promo_text (str):
@@ -1208,14 +1210,15 @@ class SmartCampaignAdInfo(proto.Message):
 
     Attributes:
         headlines (Sequence[google.ads.googleads.v11.common.types.AdTextAsset]):
-            List of text assets for headlines. When the
-            ad serves the headlines will be selected from
-            this list. 3 headlines must be specified.
+            List of text assets, each of which
+            corresponds to a headline when the ad serves.
+            This list consists of a minimum of 3 and up to
+            15 text assets.
         descriptions (Sequence[google.ads.googleads.v11.common.types.AdTextAsset]):
-            List of text assets for descriptions. When
-            the ad serves the descriptions will be selected
-            from this list. 2 descriptions must be
-            specified.
+            List of text assets, each of which
+            corresponds to a description when the ad serves.
+            This list consists of a minimum of 2 and up to 4
+            text assets.
     """
 
     headlines = proto.RepeatedField(
@@ -1343,7 +1346,7 @@ class DiscoveryMultiAssetAdInfo(proto.Message):
 
             This field is a member of `oneof`_ ``_call_to_action_text``.
         lead_form_only (bool):
-            Boolean flag that indicates if this ad must
+            Boolean option that indicates if this ad must
             be served with lead form.
 
             This field is a member of `oneof`_ ``_lead_form_only``.

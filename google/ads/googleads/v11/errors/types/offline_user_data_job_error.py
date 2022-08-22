@@ -67,6 +67,10 @@ class OfflineUserDataJobErrorEnum(proto.Message):
         LAST_PURCHASE_TIME_LESS_THAN_ACQUISITION_TIME = 38
         CUSTOMER_IDENTIFIER_NOT_ALLOWED = 39
         INVALID_ITEM_ID = 40
+        FIRST_PURCHASE_TIME_GREATER_THAN_LAST_PURCHASE_TIME = 42
+        INVALID_LIFECYCLE_STAGE = 43
+        INVALID_EVENT_VALUE = 44
+        EVENT_ATTRIBUTE_ALL_FIELDS_ARE_REQUIRED = 45
 
 
 __all__ = tuple(sorted(__protobuf__.manifest))

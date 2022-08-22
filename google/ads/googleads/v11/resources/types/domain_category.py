@@ -43,15 +43,15 @@ class DomainCategory(proto.Message):
             This field is a member of `oneof`_ ``_campaign``.
         category (str):
             Output only. Recommended category for the
-            website domain. e.g. if you have a website about
-            electronics, the categories could be "cameras",
-            "televisions", etc.
+            website domain, for example, if you have a
+            website about electronics, the categories could
+            be "cameras", "televisions", etc.
 
             This field is a member of `oneof`_ ``_category``.
         language_code (str):
             Output only. The language code specifying the
-            language of the website. e.g. "en" for English.
-            The language can be specified in the
+            language of the website, for example, "en" for
+            English. The language can be specified in the
             DynamicSearchAdsSetting required for dynamic
             search ads. This is the language of the pages
             from your website that you want Google Ads to

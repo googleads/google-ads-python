@@ -52,7 +52,7 @@ def main(client, customer_id):
             )
         )
     except GoogleAdsException as ex:
-        _handle_googleads_exception(ex)
+        handle_googleads_exception(ex)
         # [END add_campaigns]
 
     # [START add_campaigns_1]
@@ -97,10 +97,10 @@ def main(client, customer_id):
         )
         print(f"Created campaign {campaign_response.results[0].resource_name}.")
     except GoogleAdsException as ex:
-        _handle_googleads_exception(ex)
+        handle_googleads_exception(ex)
 
 
-def _handle_googleads_exception(exception):
+def handle_googleads_exception(exception):
     print(
         f'Request with ID "{exception.request_id}" failed with status '
         f'"{exception.error.code().name}" and includes the following errors:'

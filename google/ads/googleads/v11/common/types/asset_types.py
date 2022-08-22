@@ -236,8 +236,8 @@ class LeadFormAsset(proto.Message):
 
             This field is a member of `oneof`_ ``_background_image_asset``.
         desired_intent (google.ads.googleads.v11.enums.types.LeadFormDesiredIntentEnum.LeadFormDesiredIntent):
-            Desired intent for the lead form, e.g. more
-            volume or more qualified.
+            Chosen intent for the lead form, for example,
+            more volume or more qualified.
         custom_disclosure (str):
             Custom disclosure shown along with Google
             disclaimer on the lead form. Accessible to
@@ -324,8 +324,8 @@ class LeadFormCustomQuestionField(proto.Message):
 
     Attributes:
         custom_question_text (str):
-            The exact custom question field text (e.g.
-            "Do you own a car?").
+            The exact custom question field text (for
+            example, "Do you own a car?").
         single_choice_answers (google.ads.googleads.v11.common.types.LeadFormSingleChoiceAnswers):
             Answer configuration for a single choice
             question. Minimum of 2 answers and maximum of 12
@@ -633,33 +633,34 @@ class DynamicEducationAsset(proto.Message):
             Location ID which can be any sequence of
             letters and digits and must be unique.
         program_name (str):
-            Required. Program name, e.g. Nursing.
+            Required. Program name, for example, Nursing.
             Required.
         subject (str):
-            Subject of study, e.g. Health.
+            Subject of study, for example, Health.
         program_description (str):
-            Program description, e.g. Nursing
+            Program description, for example, Nursing
             Certification.
         school_name (str):
-            School name, e.g. Mountain View School of
-            Nursing.
+            School name, for example, Mountain View
+            School of Nursing.
         address (str):
             School address which can be specified in one
             of the following formats. (1) City, state, code,
-            country, e.g. Mountain View, CA, USA. (2) Full
-            address, e.g. 123 Boulevard St, Mountain View,
-            CA 94043. (3) Latitude-longitude in the DDD
-            format, e.g. 41.40338, 2.17403
+            country, for example, Mountain View, CA, USA.
+            (2) Full address, for example, 123 Boulevard St,
+            Mountain View, CA 94043. (3) Latitude-longitude
+            in the DDD format, for example, 41.40338,
+            2.17403
         contextual_keywords (Sequence[str]):
-            Contextual keywords, e.g. Nursing
+            Contextual keywords, for example, Nursing
             certification, Health, Mountain View.
         android_app_link (str):
-            Android deep link, e.g.
+            Android deep link, for example,
             android-app://com.example.android/http/example.com/gizmos?1234.
         similar_program_ids (Sequence[str]):
             Similar program IDs.
         ios_app_link (str):
-            iOS deep link, e.g.
+            iOS deep link, for example,
             exampleApp://content/page.
         ios_app_store_id (int):
             iOS app store ID. This is used to check if the user has the
@@ -667,12 +668,12 @@ class DynamicEducationAsset(proto.Message):
             field is set, then the ios_app_link field must also be
             present.
         thumbnail_image_url (str):
-            Thumbnail image url, e.g.
+            Thumbnail image url, for example,
             http://www.example.com/thumbnail.png. The
             thumbnail image will not be uploaded as image
             asset.
         image_url (str):
-            Image url, e.g.
+            Image url, for example,
             http://www.example.com/image.png. The image will
             not be uploaded as image asset.
     """
@@ -880,44 +881,47 @@ class DynamicRealEstateAsset(proto.Message):
             unique and match the values of remarketing tag.
             Required.
         listing_name (str):
-            Required. Listing name, e.g. Boulevard
-            Bungalow. Required.
+            Required. Listing name, for example,
+            Boulevard Bungalow. Required.
         city_name (str):
-            City name, e.g. Mountain View, California.
+            City name, for example, Mountain View,
+            California.
         description (str):
-            Description, e.g. 3 beds, 2 baths, 1568 sq.
-            ft.
+            Description, for example, 3 beds, 2 baths,
+            1568 sq. ft.
         address (str):
             Address which can be specified in one of the
             following formats. (1) City, state, code,
-            country, e.g. Mountain View, CA, USA. (2) Full
-            address, e.g. 123 Boulevard St, Mountain View,
-            CA 94043. (3) Latitude-longitude in the DDD
-            format, e.g. 41.40338, 2.17403
+            country, for example, Mountain View, CA, USA.
+            (2) Full address, for example, 123 Boulevard St,
+            Mountain View, CA 94043. (3) Latitude-longitude
+            in the DDD format, for example, 41.40338,
+            2.17403
         price (str):
             Price which can be number followed by the
             alphabetic currency code, ISO 4217 standard. Use
-            '.' as the decimal mark. e.g. 200,000.00 USD.
+            '.' as the decimal mark, for example, 200,000.00
+            USD.
         image_url (str):
-            Image URL, e.g.
+            Image URL, for example,
             http://www.example.com/image.png. The image will
             not be uploaded as image asset.
         property_type (str):
-            Property type, e.g. House.
+            Property type, for example, House.
         listing_type (str):
-            Listing type, e.g. For sale.
+            Listing type, for example, For sale.
         contextual_keywords (Sequence[str]):
-            Contextual keywords, e.g. For sale; Houses
-            for sale.
+            Contextual keywords, for example, For sale;
+            Houses for sale.
         formatted_price (str):
             Formatted price which can be any characters.
             If set, this attribute will be used instead of
-            'price', e.g. Starting at $200,000.00.
+            'price', for example, Starting at $200,000.00.
         android_app_link (str):
-            Android deep link, e.g.
+            Android deep link, for example,
             android-app://com.example.android/http/example.com/gizmos?1234.
         ios_app_link (str):
-            iOS deep link, e.g.
+            iOS deep link, for example,
             exampleApp://content/page.
         ios_app_store_id (int):
             iOS app store ID. This is used to check if the user has the
@@ -952,60 +956,63 @@ class DynamicCustomAsset(proto.Message):
         id (str):
             Required. ID which can be any sequence of
             letters and digits, and must be unique and match
-            the values of remarketing tag, e.g. sedan.
-            Required.
+            the values of remarketing tag, for example,
+            sedan. Required.
         id2 (str):
             ID2 which can be any sequence of letters and
-            digits, e.g. red. ID sequence (ID + ID2) must be
-            unique.
+            digits, for example, red. ID sequence (ID + ID2)
+            must be unique.
         item_title (str):
-            Required. Item title, e.g. Mid-size sedan.
-            Required.
+            Required. Item title, for example, Mid-size
+            sedan. Required.
         item_subtitle (str):
-            Item subtitle, e.g. At your Mountain View
-            dealership.
+            Item subtitle, for example, At your Mountain
+            View dealership.
         item_description (str):
-            Item description, e.g. Best selling mid-size
-            car.
+            Item description, for example, Best selling
+            mid-size car.
         item_address (str):
             Item address which can be specified in one of
             the following formats. (1) City, state, code,
-            country, e.g. Mountain View, CA, USA. (2) Full
-            address, e.g. 123 Boulevard St, Mountain View,
-            CA 94043. (3) Latitude-longitude in the DDD
-            format, e.g. 41.40338, 2.17403
+            country, for example, Mountain View, CA, USA.
+            (2) Full address, for example, 123 Boulevard St,
+            Mountain View, CA 94043. (3) Latitude-longitude
+            in the DDD format, for example, 41.40338,
+            2.17403
         item_category (str):
-            Item category, e.g. Sedans.
+            Item category, for example, Sedans.
         price (str):
             Price which can be number followed by the
             alphabetic currency code, ISO 4217 standard. Use
-            '.' as the decimal mark, e.g. 20,000.00 USD.
+            '.' as the decimal mark, for example, 20,000.00
+            USD.
         sale_price (str):
             Sale price which can be number followed by
             the alphabetic currency code, ISO 4217 standard.
-            Use '.' as the decimal mark, e.g. 15,000.00 USD.
-            Must be less than the 'price' field.
+            Use '.' as the decimal mark, for example,
+            15,000.00 USD. Must be less than the 'price'
+            field.
         formatted_price (str):
             Formatted price which can be any characters.
             If set, this attribute will be used instead of
-            'price', e.g. Starting at $20,000.00.
+            'price', for example, Starting at $20,000.00.
         formatted_sale_price (str):
             Formatted sale price which can be any
             characters. If set, this attribute will be used
-            instead of 'sale price', e.g. On sale for
-            $15,000.00.
+            instead of 'sale price', for example, On sale
+            for $15,000.00.
         image_url (str):
-            Image URL, e.g.
+            Image URL, for example,
             http://www.example.com/image.png. The image will
             not be uploaded as image asset.
         contextual_keywords (Sequence[str]):
-            Contextual keywords, e.g. Sedans, 4 door
-            sedans.
+            Contextual keywords, for example, Sedans, 4
+            door sedans.
         android_app_link (str):
-            Android deep link, e.g.
+            Android deep link, for example,
             android-app://com.example.android/http/example.com/gizmos?1234.
         ios_app_link (str):
-            iOS deep link, e.g.
+            iOS deep link, for example,
             exampleApp://content/page.
         ios_app_store_id (int):
             iOS app store ID. This is used to check if the user has the
@@ -1045,45 +1052,48 @@ class DynamicHotelsAndRentalsAsset(proto.Message):
             unique and match the values of remarketing tag.
             Required.
         property_name (str):
-            Required. Property name, e.g. Mountain View
-            Hotel. Required.
+            Required. Property name, for example,
+            Mountain View Hotel. Required.
         image_url (str):
-            Image URL, e.g.
+            Image URL, for example,
             http://www.example.com/image.png. The image will
             not be uploaded as image asset.
         destination_name (str):
-            Destination name, e.g. Downtown Mountain
-            View.
+            Destination name, for example, Downtown
+            Mountain View.
         description (str):
-            Description, e.g. Close to SJC Airport.
+            Description, for example, Close to SJC
+            Airport.
         price (str):
             Price which can be number followed by the
             alphabetic currency code, ISO 4217 standard. Use
-            '.' as the decimal mark, e.g. 100.00 USD.
+            '.' as the decimal mark, for example, 100.00
+            USD.
         sale_price (str):
             ISO 4217 standard. Use '.' as the decimal
-            mark, e.g. 80.00 USD. Must be less than the
-            'price' field.
+            mark, for example, 80.00 USD. Must be less than
+            the 'price' field.
         star_rating (int):
             Star rating. Must be a number between 1 to 5,
             inclusive.
         category (str):
-            Category, e.g. Hotel suite.
+            Category, for example, Hotel suite.
         contextual_keywords (Sequence[str]):
-            Contextual keywords, e.g. Mountain View
-            "Hotels", South Bay hotels.
+            Contextual keywords, for example, Mountain
+            View "Hotels", South Bay hotels.
         address (str):
             Address which can be specified in one of the
             following formats. (1) City, state, code,
-            country, e.g. Mountain View, CA, USA. (2) Full
-            address, e.g. 123 Boulevard St, Mountain View,
-            CA 94043. (3) Latitude-longitude in the DDD
-            format, e.g. 41.40338, 2.17403
+            country, for example, Mountain View, CA, USA.
+            (2) Full address, for example, 123 Boulevard St,
+            Mountain View, CA 94043. (3) Latitude-longitude
+            in the DDD format, for example, 41.40338,
+            2.17403
         android_app_link (str):
-            Android deep link, e.g.
+            Android deep link, for example,
             android-app://com.example.android/http/example.com/gizmos?1234.
         ios_app_link (str):
-            iOS deep link, e.g.
+            iOS deep link, for example,
             exampleApp://content/page.
         ios_app_store_id (int):
             iOS app store ID. This is used to check if the user has the
@@ -1093,12 +1103,12 @@ class DynamicHotelsAndRentalsAsset(proto.Message):
         formatted_price (str):
             Formatted price which can be any characters.
             If set, this attribute will be used instead of
-            'price', e.g. Starting at $100.00.
+            'price', for example, Starting at $100.00.
         formatted_sale_price (str):
             Formatted sale price which can be any
             characters. If set, this attribute will be used
-            instead of 'sale price', e.g. On sale for
-            $80.00.
+            instead of 'sale price', for example, On sale
+            for $80.00.
         similar_property_ids (Sequence[str]):
             Similar property IDs.
     """
@@ -1136,39 +1146,40 @@ class DynamicFlightsAsset(proto.Message):
             letters and digits. The ID sequence (destination
             ID + origin ID) must be unique.
         flight_description (str):
-            Required. Flight description, e.g. Book your
-            ticket. Required.
+            Required. Flight description, for example,
+            Book your ticket. Required.
         image_url (str):
-            Image URL, e.g.
+            Image URL, for example,
             http://www.example.com/image.png. The image will
             not be uploaded as image asset.
         destination_name (str):
-            Destination name, e.g. Paris.
+            Destination name, for example, Paris.
         origin_name (str):
-            Origin name, e.g. London.
+            Origin name, for example, London.
         flight_price (str):
             Flight price which can be number followed by
             the alphabetic currency code, ISO 4217 standard.
-            Use '.' as the decimal mark. e.g. 100.00 USD.
+            Use '.' as the decimal mark, for example, 100.00
+            USD.
         flight_sale_price (str):
             Flight sale price which can be number followed by the
             alphabetic currency code, ISO 4217 standard. Use '.' as the
-            decimal mark, e.g. 80.00 USD. Must be less than the
+            decimal mark, for example, 80.00 USD. Must be less than the
             'flight_price' field.
         formatted_price (str):
             Formatted price which can be any characters.
             If set, this attribute will be used instead of
-            'price', e.g. Starting at $100.00.
+            'price', for example, Starting at $100.00.
         formatted_sale_price (str):
             Formatted sale price which can be any
             characters. If set, this attribute will be used
-            instead of 'sale price', e.g. On sale for
-            $80.00.
+            instead of 'sale price', for example, On sale
+            for $80.00.
         android_app_link (str):
-            Android deep link, e.g.
+            Android deep link, for example,
             android-app://com.example.android/http/example.com/gizmos?1234.
         ios_app_link (str):
-            iOS deep link, e.g.
+            iOS deep link, for example,
             exampleApp://content/page.
         ios_app_store_id (int):
             iOS app store ID. This is used to check if the user has the
@@ -1176,13 +1187,14 @@ class DynamicFlightsAsset(proto.Message):
             field is set, then the ios_app_link field must also be
             present.
         similar_destination_ids (Sequence[str]):
-            Similar destination IDs, e.g. PAR,LON.
+            Similar destination IDs, for example,
+            PAR,LON.
         custom_mapping (str):
             A custom field which can be multiple key to values mapping
             separated by delimiters (",", "|" and ":"), in the forms of
             "<KEY_1>: <VALUE_1>, <VALUE_2>, ... ,<VALUE_N> \| <KEY_2>:
             <VALUE_1>, ... ,<VALUE_N> \| ... \| <KEY_N>: <VALUE_1>, ...
-            ,<VALUE_N>" e.g. wifi: most \| aircraft: 320, 77W \|
+            ,<VALUE_N>" for example, wifi: most \| aircraft: 320, 77W \|
             flights: 42 \| legroom: 32".
     """
 
@@ -1245,52 +1257,55 @@ class DynamicTravelAsset(proto.Message):
             letters and digits. The ID sequence (destination
             ID + origin ID) must be unique.
         title (str):
-            Required. Title, e.g. Book your train ticket.
-            Required.
+            Required. Title, for example, Book your train
+            ticket. Required.
         destination_name (str):
-            Destination name, e.g. Paris.
+            Destination name, for example, Paris.
         destination_address (str):
             Destination address which can be specified in
             one of the following formats. (1) City, state,
-            code, country, e.g. Mountain View, CA, USA. (2)
-            Full address, e.g. 123 Boulevard St, Mountain
-            View, CA 94043. (3) Latitude-longitude in the
-            DDD format, e.g. 41.40338, 2.17403.
+            code, country, for example, Mountain View, CA,
+            USA. (2) Full address, for example, 123
+            Boulevard St, Mountain View, CA 94043. (3)
+            Latitude-longitude in the DDD format, for
+            example, 41.40338, 2.17403.
         origin_name (str):
-            Origin name, e.g. London.
+            Origin name, for example, London.
         price (str):
             Price which can be a number followed by the
             alphabetic currency code, ISO 4217 standard. Use
-            '.' as the decimal mark. e.g. 100.00 USD.
+            '.' as the decimal mark, for example, 100.00
+            USD.
         sale_price (str):
             Sale price which can be a number followed by
             the alphabetic currency code, ISO 4217 standard.
-            Use '.' as the decimal mark, e.g. 80.00 USD.
-            Must be less than the 'price' field.
+            Use '.' as the decimal mark, for example, 80.00
+            USD. Must be less than the 'price' field.
         formatted_price (str):
             Formatted price which can be any characters.
             If set, this attribute will be used instead of
-            'price', e.g. Starting at $100.00.
+            'price', for example, Starting at $100.00.
         formatted_sale_price (str):
             Formatted sale price which can be any
             characters. If set, this attribute will be used
-            instead of 'sale price', e.g. On sale for
-            $80.00.
+            instead of 'sale price', for example, On sale
+            for $80.00.
         category (str):
-            Category, e.g. Express.
+            Category, for example, Express.
         contextual_keywords (Sequence[str]):
-            Contextual keywords, e.g. Paris trains.
+            Contextual keywords, for example, Paris
+            trains.
         similar_destination_ids (Sequence[str]):
-            Similar destination IDs, e.g. NYC.
+            Similar destination IDs, for example, NYC.
         image_url (str):
-            Image URL, e.g.
+            Image URL, for example,
             http://www.example.com/image.png. The image will
             not be uploaded as image asset.
         android_app_link (str):
-            Android deep link, e.g.
+            Android deep link, for example,
             android-app://com.example.android/http/example.com/gizmos?1234.
         ios_app_link (str):
-            iOS deep link, e.g.
+            iOS deep link, for example,
             exampleApp://content/page.
         ios_app_store_id (int):
             iOS app store ID. This is used to check if the user has the
@@ -1327,53 +1342,56 @@ class DynamicLocalAsset(proto.Message):
             of letters and digits, and must be unique and
             match the values of remarketing tag. Required.
         deal_name (str):
-            Required. Deal name, e.g. 50% off at Mountain
-            View Grocers. Required.
+            Required. Deal name, for example, 50% off at
+            Mountain View Grocers. Required.
         subtitle (str):
-            Subtitle, e.g. Groceries.
+            Subtitle, for example, Groceries.
         description (str):
-            Description, e.g. Save on your weekly bill.
+            Description, for example, Save on your weekly
+            bill.
         price (str):
             Price which can be a number followed by the
             alphabetic currency code, ISO 4217 standard. Use
-            '.' as the decimal mark, e.g. 100.00 USD.
+            '.' as the decimal mark, for example, 100.00
+            USD.
         sale_price (str):
             Sale price which can be number followed by
             the alphabetic currency code, ISO 4217 standard.
-            Use '.' as the decimal mark, e.g. 80.00 USD.
-            Must be less than the 'price' field.
+            Use '.' as the decimal mark, for example, 80.00
+            USD. Must be less than the 'price' field.
         image_url (str):
-            Image URL, e.g.
+            Image URL, for example,
             http://www.example.com/image.png. The image will
             not be uploaded as image asset.
         address (str):
             Address which can be specified in one of the
             following formats. (1) City, state, code,
-            country, e.g. Mountain View, CA, USA. (2) Full
-            address, e.g. 123 Boulevard St, Mountain View,
-            CA 94043. (3) Latitude-longitude in the DDD
-            format, e.g. 41.40338, 2.17403.
+            country, for example, Mountain View, CA, USA.
+            (2) Full address, for example, 123 Boulevard St,
+            Mountain View, CA 94043. (3) Latitude-longitude
+            in the DDD format, for example, 41.40338,
+            2.17403.
         category (str):
-            Category, e.g. Food.
+            Category, for example, Food.
         contextual_keywords (Sequence[str]):
-            Contextual keywords, e.g. Save groceries
-            coupons.
+            Contextual keywords, for example, Save
+            groceries coupons.
         formatted_price (str):
             Formatted price which can be any characters.
             If set, this attribute will be used instead of
-            'price', e.g. Starting at $100.00.
+            'price', for example, Starting at $100.00.
         formatted_sale_price (str):
             Formatted sale price which can be any
             characters. If set, this attribute will be used
-            instead of 'sale price', e.g. On sale for
-            $80.00.
+            instead of 'sale price', for example, On sale
+            for $80.00.
         android_app_link (str):
-            Android deep link, e.g.
+            Android deep link, for example,
             android-app://com.example.android/http/example.com/gizmos?1234.
         similar_deal_ids (Sequence[str]):
-            Similar deal IDs, e.g. 1275.
+            Similar deal IDs, for example, 1275.
         ios_app_link (str):
-            iOS deep link, e.g.
+            iOS deep link, for example,
             exampleApp://content/page.
         ios_app_store_id (int):
             iOS app store ID. This is used to check if the user has the
@@ -1413,38 +1431,39 @@ class DynamicJobsAsset(proto.Message):
             letters and digits. The ID sequence (job ID +
             location ID) must be unique.
         job_title (str):
-            Required. Job title, e.g. Software engineer.
-            Required.
+            Required. Job title, for example, Software
+            engineer. Required.
         job_subtitle (str):
-            Job subtitle, e.g. Level II.
+            Job subtitle, for example, Level II.
         description (str):
-            Description, e.g. Apply your technical
-            skills.
+            Description, for example, Apply your
+            technical skills.
         image_url (str):
-            Image URL, e.g.
+            Image URL, for example,
             http://www.example.com/image.png. The image will
             not be uploaded as image asset.
         job_category (str):
-            Job category, e.g. Technical.
+            Job category, for example, Technical.
         contextual_keywords (Sequence[str]):
-            Contextual keywords, e.g. Software
+            Contextual keywords, for example, Software
             engineering job.
         address (str):
             Address which can be specified in one of the
             following formats. (1) City, state, code,
-            country, e.g. Mountain View, CA, USA. (2) Full
-            address, e.g. 123 Boulevard St, Mountain View,
-            CA 94043. (3) Latitude-longitude in the DDD
-            format, e.g. 41.40338, 2.17403.
+            country, for example, Mountain View, CA, USA.
+            (2) Full address, for example, 123 Boulevard St,
+            Mountain View, CA 94043. (3) Latitude-longitude
+            in the DDD format, for example, 41.40338,
+            2.17403.
         salary (str):
-            Salary, e.g. $100,000.
+            Salary, for example, $100,000.
         android_app_link (str):
-            Android deep link, e.g.
+            Android deep link, for example,
             android-app://com.example.android/http/example.com/gizmos?1234.
         similar_job_ids (Sequence[str]):
-            Similar job IDs, e.g. 1275.
+            Similar job IDs, for example, 1275.
         ios_app_link (str):
-            iOS deep link, e.g.
+            iOS deep link, for example,
             exampleApp://content/page.
         ios_app_store_id (int):
             iOS app store ID. This is used to check if the user has the

@@ -43,8 +43,8 @@ class CarrierConstant(proto.Message):
             This field is a member of `oneof`_ ``_name``.
         country_code (str):
             Output only. The country code of the country
-            where the carrier is located, e.g., "AR", "FR",
-            etc.
+            where the carrier is located, for example, "AR",
+            "FR", etc.
 
             This field is a member of `oneof`_ ``_country_code``.
     """

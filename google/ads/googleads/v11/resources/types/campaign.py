@@ -39,6 +39,9 @@ from google.ads.googleads.v11.enums.types import (
 )
 from google.ads.googleads.v11.enums.types import asset_field_type
 from google.ads.googleads.v11.enums.types import (
+    bidding_strategy_system_status as gage_bidding_strategy_system_status,
+)
+from google.ads.googleads.v11.enums.types import (
     bidding_strategy_type as gage_bidding_strategy_type,
 )
 from google.ads.googleads.v11.enums.types import brand_safety_suitability
@@ -111,6 +114,9 @@ class Campaign(proto.Message):
         serving_status (google.ads.googleads.v11.enums.types.CampaignServingStatusEnum.CampaignServingStatus):
             Output only. The ad serving status of the
             campaign.
+        bidding_strategy_system_status (google.ads.googleads.v11.enums.types.BiddingStrategySystemStatusEnum.BiddingStrategySystemStatus):
+            Output only. The system status of the
+            campaign's bidding strategy.
         ad_serving_optimization_status (google.ads.googleads.v11.enums.types.AdServingOptimizationStatusEnum.AdServingOptimizationStatus):
             The ad serving optimization status of the
             campaign.
@@ -220,7 +226,11 @@ class Campaign(proto.Message):
             This field is a member of `oneof`_ ``_campaign_group``.
         end_date (str):
             The last day of the campaign in serving
-            customer's timezone in YYYY-MM-DD format.
+            customer's timezone in YYYY-MM-DD format. On
+            create, defaults to 2037-12-30, which means the
+            campaign will run indefinitely. To set an
+            existing campaign to run indefinitely, set this
+            field to 2037-12-30.
 
             This field is a member of `oneof`_ ``_end_date``.
         final_url_suffix (str):
@@ -340,7 +350,7 @@ class Campaign(proto.Message):
         target_impression_share (google.ads.googleads.v11.common.types.TargetImpressionShare):
             Target Impression Share bidding strategy. An
             automated bidding strategy that sets bids to
-            achieve a desired percentage of impressions.
+            achieve a chosen percentage of impressions.
 
             This field is a member of `oneof`_ ``campaign_bidding_strategy``.
         target_roas (google.ads.googleads.v11.common.types.TargetRoas):
@@ -451,11 +461,11 @@ class Campaign(proto.Message):
         Attributes:
             domain_name (str):
                 Required. The Internet domain name that this
-                setting represents, e.g., "google.com" or
+                setting represents, for example, "google.com" or
                 "www.google.com".
             language_code (str):
                 Required. The language code specifying the
-                language of the domain, e.g., "en".
+                language of the domain, for example, "en".
             use_supplied_urls_only (bool):
                 Whether the campaign uses advertiser supplied
                 URLs exclusively.
@@ -489,7 +499,7 @@ class Campaign(proto.Message):
                 Sales country of products to include in the campaign. Only
                 one of feed_label or sales_country can be set. Field is
                 immutable except for clearing. Once this field is cleared,
-                you must use feed_label if you wish to set the sales
+                you must use feed_label if you want to set the sales
                 country.
 
                 This field is a member of `oneof`_ ``_sales_country``.
@@ -497,8 +507,8 @@ class Campaign(proto.Message):
                 Feed label of products to include in the campaign. Only one
                 of feed_label or sales_country can be set. If used instead
                 of sales_country, the feed_label field accepts country codes
-                in the same format i.e. 'XX'. Otherwise can be any string
-                used for feed label in Google Merchant Center.
+                in the same format for example: 'XX'. Otherwise can be any
+                string used for feed label in Google Merchant Center.
             campaign_priority (int):
                 Priority of the campaign. Campaigns with
                 numerically higher priorities take precedence
@@ -722,6 +732,11 @@ class Campaign(proto.Message):
         proto.ENUM,
         number=21,
         enum=campaign_serving_status.CampaignServingStatusEnum.CampaignServingStatus,
+    )
+    bidding_strategy_system_status = proto.Field(
+        proto.ENUM,
+        number=78,
+        enum=gage_bidding_strategy_system_status.BiddingStrategySystemStatusEnum.BiddingStrategySystemStatus,
     )
     ad_serving_optimization_status = proto.Field(
         proto.ENUM,

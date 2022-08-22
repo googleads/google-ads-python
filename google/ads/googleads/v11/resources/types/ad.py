@@ -74,8 +74,8 @@ class Ad(proto.Message):
         url_custom_parameters (Sequence[google.ads.googleads.v11.common.types.CustomParameter]):
             The list of mappings that can be used to substitute custom
             parameter tags in a ``tracking_url_template``,
-            ``final_urls``, or ``mobile_final_urls``. For mutates,
-            please use url custom parameter operations.
+            ``final_urls``, or ``mobile_final_urls``. For mutates, use
+            url custom parameter operations.
         display_url (str):
             The URL that appears in the ad description
             for some ad formats.
@@ -98,8 +98,8 @@ class Ad(proto.Message):
             When this preference is set the ad will be
             preferred over other ads when being displayed on
             a mobile device. The ad can still be displayed
-            on other device types, e.g. if no other ads are
-            available. If unspecified (no device
+            on other device types, for example, if no other
+            ads are available. If unspecified (no device
             preference), all devices are targeted. This is
             only supported by some ad types.
         url_collections (Sequence[google.ads.googleads.v11.common.types.UrlCollection]):

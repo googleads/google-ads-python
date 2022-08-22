@@ -24,13 +24,13 @@ __protobuf__ = proto.module(
 
 
 class DayOfWeekEnum(proto.Message):
-    r"""Container for enumeration of days of the week, e.g.,
+    r"""Container for enumeration of days of the week, for example,
     "Monday".
 
     """
 
     class DayOfWeek(proto.Enum):
-        r"""Enumerates days of the week, e.g., "Monday"."""
+        r"""Enumerates days of the week, for example, "Monday"."""
         UNSPECIFIED = 0
         UNKNOWN = 1
         MONDAY = 2

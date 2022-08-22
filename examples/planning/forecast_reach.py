@@ -41,17 +41,17 @@ def main(client, customer_id):
     currency_code = "USD"
     budget = 500000
 
-    _show_plannable_locations(client)
-    _show_plannable_products(client, location_id)
-    _forecast_manual_mix(
+    show_plannable_locations(client)
+    show_plannable_products(client, location_id)
+    forecast_manual_mix(
         client, customer_id, location_id, currency_code, budget
     )
-    _forecast_suggested_mix(
+    forecast_suggested_mix(
         client, customer_id, location_id, currency_code, budget
     )
 
 
-def _show_plannable_locations(client):
+def show_plannable_locations(client):
     """Shows map of plannable locations to their IDs.
 
     Args:
@@ -69,7 +69,7 @@ def _show_plannable_locations(client):
 
 
 # [START forecast_reach_2]
-def _show_plannable_products(client, location_id):
+def show_plannable_products(client, location_id):
     """Lists plannable products for a given location.
 
     Args:
@@ -103,7 +103,7 @@ def _show_plannable_products(client, location_id):
 
 
 # [START forecast_reach]
-def _request_reach_curve(
+def request_reach_curve(
     client, customer_id, product_mix, location_id, currency_code
 ):
     """Creates a sample request for a given product mix.
@@ -178,7 +178,7 @@ def _request_reach_curve(
 
 
 # [START forecast_reach_3]
-def _forecast_manual_mix(
+def forecast_manual_mix(
     client, customer_id, location_id, currency_code, budget
 ):
     """Pulls a forecast for product mix created manually.
@@ -204,14 +204,14 @@ def _forecast_manual_mix(
         planned_product.budget_micros = math.trunc(budget * ONE_MILLION * split)
         product_mix.append(planned_product)
 
-    _request_reach_curve(
+    request_reach_curve(
         client, customer_id, product_mix, location_id, currency_code
     )
     # [END forecast_reach_3]
 
 
 # [START forecast_reach_1]
-def _forecast_suggested_mix(
+def forecast_suggested_mix(
     client, customer_id, location_id, currency_code, budget
 ):
     """Pulls a forecast for a product mix based on your set of preferences.
@@ -251,7 +251,7 @@ def _forecast_suggested_mix(
         planned_product.budget_micros = product.budget_micros
         product_mix.append(planned_product)
 
-    _request_reach_curve(
+    request_reach_curve(
         client, customer_id, product_mix, location_id, currency_code
     )
     # [END forecast_reach_1]

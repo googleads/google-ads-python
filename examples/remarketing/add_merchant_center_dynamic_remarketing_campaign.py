@@ -46,24 +46,24 @@ def main(
     """
     # Create a shopping campaign associated with a given Merchant Center
     # account.
-    campaign_resource_name = _create_campaign(
+    campaign_resource_name = create_campaign(
         client, customer_id, merchant_center_account_id, campaign_budget_id
     )
 
     # Create an ad group for the campaign.
-    ad_group_resource_name = _create_ad_group(
+    ad_group_resource_name = create_ad_group(
         client, customer_id, campaign_resource_name
     )
 
     # Create a dynamic display ad in the ad group.
-    _create_ad(client, customer_id, ad_group_resource_name)
+    create_ad(client, customer_id, ad_group_resource_name)
 
     # Target a specific user list for remarketing.
-    _attach_user_list(client, customer_id, ad_group_resource_name, user_list_id)
+    attach_user_list(client, customer_id, ad_group_resource_name, user_list_id)
 
 
 # [START add_merchant_center_dynamic_remarketing_campaign_2]
-def _create_campaign(
+def create_campaign(
     client, customer_id, merchant_center_account_id, campaign_budget_id
 ):
     """Creates a campaign linked to a Merchant Center product feed.
@@ -116,7 +116,7 @@ def _create_campaign(
 
 
 # [START add_merchant_center_dynamic_remarketing_campaign_1]
-def _create_ad_group(client, customer_id, campaign_resource_name):
+def create_ad_group(client, customer_id, campaign_resource_name):
     """Creates an ad group for the remarketing campaign.
 
     Args:
@@ -147,7 +147,7 @@ def _create_ad_group(client, customer_id, campaign_resource_name):
 
 
 # [START add_merchant_center_dynamic_remarketing_campaign]
-def _create_ad(client, customer_id, ad_group_resource_name):
+def create_ad(client, customer_id, ad_group_resource_name):
     """Creates the responsive display ad.
 
     Args:
@@ -159,10 +159,10 @@ def _create_ad(client, customer_id, ad_group_resource_name):
     ad_group_ad_service = client.get_service("AdGroupAdService")
 
     # Upload image assets for the ad.
-    marketing_image_resource_name = _upload_image_asset(
+    marketing_image_resource_name = upload_image_asset(
         client, customer_id, "https://gaagl.page.link/Eit5", "Marketing Image"
     )
-    square_marketing_image_resource_name = _upload_image_asset(
+    square_marketing_image_resource_name = upload_image_asset(
         client,
         customer_id,
         "https://gaagl.page.link/bjYi",
@@ -227,7 +227,7 @@ def _create_ad(client, customer_id, ad_group_resource_name):
     # [END add_merchant_center_dynamic_remarketing_campaign]
 
 
-def _upload_image_asset(client, customer_id, image_url, asset_name):
+def upload_image_asset(client, customer_id, image_url, asset_name):
     """Adds an image asset to the Google Ads account.
 
     Args:
@@ -264,7 +264,7 @@ def _upload_image_asset(client, customer_id, image_url, asset_name):
 
 
 # [START add_merchant_center_dynamic_remarketing_campaign_3]
-def _attach_user_list(
+def attach_user_list(
     client, customer_id, ad_group_resource_name, user_list_id
 ):
     """Targets a user list with an ad group.

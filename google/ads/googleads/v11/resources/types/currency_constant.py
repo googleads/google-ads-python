@@ -34,7 +34,7 @@ class CurrencyConstant(proto.Message):
             ``currencyConstants/{code}``
         code (str):
             Output only. ISO 4217 three-letter currency
-            code, e.g. "USD".
+            code, for example, "USD".
 
             This field is a member of `oneof`_ ``_code``.
         name (str):
@@ -44,7 +44,7 @@ class CurrencyConstant(proto.Message):
             This field is a member of `oneof`_ ``_name``.
         symbol (str):
             Output only. Standard symbol for describing
-            this currency, e.g. '$' for US Dollars.
+            this currency, for example, '$' for US Dollars.
 
             This field is a member of `oneof`_ ``_symbol``.
         billable_unit_micros (int):

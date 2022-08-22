@@ -44,7 +44,7 @@ KEYWORDS_TO_ADD = ["mars cruise", "space hotel"]
 PAGE_SIZE = 1000
 
 
-def _create_campaign_budget(client, customer_id):
+def create_campaign_budget(client, customer_id):
     """Creates a new campaign budget and returns it.
 
     Args:
@@ -66,16 +66,16 @@ def _create_campaign_budget(client, customer_id):
             customer_id=customer_id, operations=[operation]
         )
         campaign_budget_resource_name = response.results[0].resource_name
-        new_campaign_budget = _get_campaign_budget(
+        new_campaign_budget = get_campaign_budget(
             client, customer_id, campaign_budget_resource_name
         )
         print(f"Added budget named {new_campaign_budget.name}")
         return new_campaign_budget
     except GoogleAdsClient as ex:
-        _handle_googleads_exception(ex)
+        handle_googleads_exception(ex)
 
 
-def _get_campaign_budget(client, customer_id, resource_name):
+def get_campaign_budget(client, customer_id, resource_name):
     """Retrieves the CampaignBudget associated with the given resource name.
 
     Args:
@@ -106,10 +106,10 @@ def _get_campaign_budget(client, customer_id, resource_name):
         budget = list(response)[0].campaign_budget
         return budget
     except GoogleAdsException as ex:
-        _handle_googleads_exception(ex)
+        handle_googleads_exception(ex)
 
 
-def _create_campaign(client, budget_id):
+def create_campaign(client, budget_id):
     """Creates a new campaign and returns the newly created campaign ID.
 
     Args:
@@ -153,7 +153,7 @@ def _create_campaign(client, budget_id):
     return created_campaign["id"]
 
 
-def _create_ad_group(client, campaign_id):
+def create_ad_group(client, campaign_id):
     """Creates a new ad group and returns the newly created ad group id.
 
     Args:
@@ -192,7 +192,7 @@ def _create_ad_group(client, campaign_id):
     return created_ad_group["id"]
 
 
-def _create_text_ads(client, ad_group_id):
+def create_text_ads(client, ad_group_id):
     """Creates text ads using the given ad group ID.
 
     Args:
@@ -230,7 +230,7 @@ def _create_text_ads(client, ad_group_id):
         )
 
 
-def _create_keywords(client, ad_group_id, keywords_to_add):
+def create_keywords(client, ad_group_id, keywords_to_add):
     """Populates keywords on a given ad group ID.
 
     Args:
@@ -273,7 +273,7 @@ def _create_keywords(client, ad_group_id, keywords_to_add):
         )
 
 
-def _handle_googleads_exception(exception):
+def handle_googleads_exception(exception):
     print(
         f'Request with ID "{exception.request_id}" failed with status '
         f'"{exception.error.code().name}" and includes the following errors:'
@@ -304,8 +304,8 @@ if __name__ == "__main__":
         help="The Google Ads customer ID.",
     )
     args = parser.parse_args()
-    budget = _create_campaign_budget(googleads_client, args.customer_id)
-    campaign_id = _create_campaign(adwords_client, budget.id)
-    ad_group_id = _create_ad_group(adwords_client, campaign_id)
-    _create_text_ads(adwords_client, ad_group_id)
-    _create_keywords(adwords_client, ad_group_id, KEYWORDS_TO_ADD)
+    budget = create_campaign_budget(googleads_client, args.customer_id)
+    campaign_id = create_campaign(adwords_client, budget.id)
+    ad_group_id = create_ad_group(adwords_client, campaign_id)
+    create_text_ads(adwords_client, ad_group_id)
+    create_keywords(adwords_client, ad_group_id, KEYWORDS_TO_ADD)

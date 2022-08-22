@@ -34,14 +34,14 @@ def main(client, customer_id, campaign_id):
         campaign_id: The campaign to which sitelinks will be added.
     """
     # Creates sitelink assets.
-    resource_names = _create_sitelink_assets(client, customer_id, campaign_id)
+    resource_names = create_sitelink_assets(client, customer_id, campaign_id)
     # Associates the sitelinks at the campaign level.
-    _link_sitelinks_to_campaign(
+    link_sitelinks_to_campaign(
         client, customer_id, campaign_id, resource_names
     )
 
 
-def _create_sitelink_assets(client, customer_id, campaign_id):
+def create_sitelink_assets(client, customer_id, campaign_id):
     """Creates sitelink assets, which can be added to campaigns.
 
     Args:
@@ -104,7 +104,7 @@ def _create_sitelink_assets(client, customer_id, campaign_id):
     return resource_names
 
 
-def _link_sitelinks_to_campaign(
+def link_sitelinks_to_campaign(
     client, customer_id, campaign_id, resource_names
 ):
     """Creates sitelink assets, which can be added to campaigns.

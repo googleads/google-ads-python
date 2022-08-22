@@ -86,7 +86,7 @@ class AccessibleBiddingStrategy(proto.Message):
             This field is a member of `oneof`_ ``scheme``.
         target_impression_share (google.ads.googleads.v11.resources.types.AccessibleBiddingStrategy.TargetImpressionShare):
             Output only. A bidding strategy that
-            automatically optimizes towards a desired
+            automatically optimizes towards a chosen
             percentage of impressions.
 
             This field is a member of `oneof`_ ``scheme``.
@@ -162,9 +162,9 @@ class AccessibleBiddingStrategy(proto.Message):
                 Output only. The targeted location on the
                 search results page.
             location_fraction_micros (int):
-                The desired fraction of ads to be shown in
-                the targeted location in micros. E.g. 1% equals
-                10,000.
+                The chosen fraction of ads to be shown in the
+                targeted location in micros. For example, 1%
+                equals 10,000.
 
                 This field is a member of `oneof`_ ``_location_fraction_micros``.
             cpc_bid_ceiling_micros (int):
@@ -195,7 +195,7 @@ class AccessibleBiddingStrategy(proto.Message):
 
         Attributes:
             target_roas (float):
-                Output only. The desired revenue (based on
+                Output only. The chosen revenue (based on
                 conversion data) per unit of spend.
 
                 This field is a member of `oneof`_ ``_target_roas``.

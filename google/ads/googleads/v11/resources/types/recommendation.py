@@ -71,10 +71,12 @@ class Recommendation(proto.Message):
             This field will be set for the following recommendation
             types: CALL_EXTENSION, CALLOUT_EXTENSION,
             ENHANCED_CPC_OPT_IN, USE_BROAD_MATCH_KEYWORD, KEYWORD,
-            KEYWORD_MATCH_TYPE, MAXIMIZE_CLICKS_OPT_IN,
-            MAXIMIZE_CONVERSIONS_OPT_IN, OPTIMIZE_AD_ROTATION,
-            RESPONSIVE_SEARCH_AD, RESPONSIVE_SEARCH_AD_ASSET,
-            SEARCH_PARTNERS_OPT_IN, SITELINK_EXTENSION,
+            KEYWORD_MATCH_TYPE,
+            UPGRADE_LOCAL_CAMPAIGN_TO_PERFORMANCE_MAX,
+            MAXIMIZE_CLICKS_OPT_IN, MAXIMIZE_CONVERSIONS_OPT_IN,
+            OPTIMIZE_AD_ROTATION, RESPONSIVE_SEARCH_AD,
+            RESPONSIVE_SEARCH_AD_ASSET, SEARCH_PARTNERS_OPT_IN,
+            DISPLAY_EXPANSION_OPT_IN, SITELINK_EXTENSION,
             TARGET_CPA_OPT_IN, TARGET_ROAS_OPT_IN, TEXT_AD,
             UPGRADE_SMART_SHOPPING_CAMPAIGN_TO_PERFORMANCE_MAX
 
@@ -202,6 +204,16 @@ class Recommendation(proto.Message):
         responsive_search_ad_improve_ad_strength_recommendation (google.ads.googleads.v11.resources.types.Recommendation.ResponsiveSearchAdImproveAdStrengthRecommendation):
             Output only. The responsive search ad improve
             ad strength recommendation.
+
+            This field is a member of `oneof`_ ``recommendation``.
+        display_expansion_opt_in_recommendation (google.ads.googleads.v11.resources.types.Recommendation.DisplayExpansionOptInRecommendation):
+            Output only. The Display Expansion opt-in
+            recommendation.
+
+            This field is a member of `oneof`_ ``recommendation``.
+        upgrade_local_campaign_to_performance_max_recommendation (google.ads.googleads.v11.resources.types.Recommendation.UpgradeLocalCampaignToPerformanceMaxRecommendation):
+            Output only. The upgrade a Local campaign to
+            a Performance Max campaign recommendation.
 
             This field is a member of `oneof`_ ``recommendation``.
     """
@@ -351,13 +363,14 @@ class Recommendation(proto.Message):
                 Output only. Recommended ad.
             creation_date (str):
                 Output only. Creation date of the recommended
-                ad. YYYY-MM-DD format, e.g., 2018-04-17.
+                ad. YYYY-MM-DD format, for example, 2018-04-17.
 
                 This field is a member of `oneof`_ ``_creation_date``.
             auto_apply_date (str):
                 Output only. Date, if present, is the
                 earliest when the recommendation will be auto
-                applied. YYYY-MM-DD format, e.g., 2018-04-17.
+                applied. YYYY-MM-DD format, for example,
+                2018-04-17.
 
                 This field is a member of `oneof`_ ``_auto_apply_date``.
         """
@@ -673,6 +686,16 @@ class Recommendation(proto.Message):
         merchant_id = proto.Field(proto.INT64, number=1,)
         sales_country_code = proto.Field(proto.STRING, number=2,)
 
+    class DisplayExpansionOptInRecommendation(proto.Message):
+        r"""The Display Expansion opt-in recommendation.
+        """
+
+    class UpgradeLocalCampaignToPerformanceMaxRecommendation(proto.Message):
+        r"""The Upgrade Local campaign to Performance Max campaign
+        recommendation.
+
+        """
+
     resource_name = proto.Field(proto.STRING, number=1,)
     type_ = proto.Field(
         proto.ENUM,
@@ -815,6 +838,18 @@ class Recommendation(proto.Message):
         number=33,
         oneof="recommendation",
         message=ResponsiveSearchAdImproveAdStrengthRecommendation,
+    )
+    display_expansion_opt_in_recommendation = proto.Field(
+        proto.MESSAGE,
+        number=34,
+        oneof="recommendation",
+        message=DisplayExpansionOptInRecommendation,
+    )
+    upgrade_local_campaign_to_performance_max_recommendation = proto.Field(
+        proto.MESSAGE,
+        number=35,
+        oneof="recommendation",
+        message=UpgradeLocalCampaignToPerformanceMaxRecommendation,
     )
 
 

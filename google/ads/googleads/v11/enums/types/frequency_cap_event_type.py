@@ -30,7 +30,9 @@ class FrequencyCapEventTypeEnum(proto.Message):
     """
 
     class FrequencyCapEventType(proto.Enum):
-        r"""The type of event that the cap applies to (e.g. impression)."""
+        r"""The type of event that the cap applies to (for example,
+        impression).
+        """
         UNSPECIFIED = 0
         UNKNOWN = 1
         IMPRESSION = 2

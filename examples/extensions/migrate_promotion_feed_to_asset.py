@@ -42,37 +42,37 @@ def main(client, customer_id, feed_item_id):
     )
 
     # Get the target extension feed item
-    extension_feed_item = _get_extension_feed_item(
+    extension_feed_item = get_extension_feed_item(
         client, customer_id, feed_item_id
     )
 
     # Get all campaign IDs associated with the extension feed item.
-    campaign_ids = _get_targeted_campaign_ids(
+    campaign_ids = get_targeted_campaign_ids(
         client, customer_id, resource_name
     )
 
     # Get all ad group IDs associated with the extension feed item.
-    ad_group_ids = _get_targeted_ad_group_ids(
+    ad_group_ids = get_targeted_ad_group_ids(
         client, customer_id, resource_name
     )
 
     # Create a new Promotion asset that matches the target extension feed item.
-    promotion_asset_resource_name = _create_promotion_asset_from_feed(
+    promotion_asset_resource_name = create_promotion_asset_from_feed(
         client, customer_id, extension_feed_item
     )
 
     # Associate the new Promotion asset with the same campaigns as the original.
-    _associate_asset_with_campaigns(
+    associate_asset_with_campaigns(
         client, customer_id, promotion_asset_resource_name, campaign_ids
     )
 
     # Associate the new Promotion asset with the same ad groups as the original.
-    _associate_asset_with_ad_groups(
+    associate_asset_with_ad_groups(
         client, customer_id, promotion_asset_resource_name, ad_group_ids
     )
 
 
-def _get_extension_feed_item(client, customer_id, feed_item_id):
+def get_extension_feed_item(client, customer_id, feed_item_id):
     """Gets the requested Promotion-type extension feed item.
 
     Note that extension feed items pertain to feeds that were created by Google.
@@ -167,7 +167,7 @@ def _get_extension_feed_item(client, customer_id, feed_item_id):
 
 
 # [START migrate_promotion_feed_to_asset_1]
-def _get_targeted_campaign_ids(client, customer_id, resource_name):
+def get_targeted_campaign_ids(client, customer_id, resource_name):
     """Retrieves all campaigns associated with the given FeedItem resource name.
 
     Args:
@@ -206,7 +206,7 @@ def _get_targeted_campaign_ids(client, customer_id, resource_name):
 # [END migrate_promotion_feed_to_asset_1]
 
 
-def _get_targeted_ad_group_ids(client, customer_id, resource_name):
+def get_targeted_ad_group_ids(client, customer_id, resource_name):
     """Retrieves all ad groups associated with the given FeedItem resource name.
 
     Args:
@@ -243,7 +243,7 @@ def _get_targeted_ad_group_ids(client, customer_id, resource_name):
 
 
 # [START migrate_promotion_feed_to_asset]
-def _create_promotion_asset_from_feed(client, customer_id, extension_feed_item):
+def create_promotion_asset_from_feed(client, customer_id, extension_feed_item):
     """Retrieves all campaigns associated with the given FeedItem resource name.
 
     Args:
@@ -325,7 +325,7 @@ def _create_promotion_asset_from_feed(client, customer_id, extension_feed_item):
 
 
 # [START migrate_promotion_feed_to_asset_2]
-def _associate_asset_with_campaigns(
+def associate_asset_with_campaigns(
     client, customer_id, promotion_asset_resource_name, campaign_ids
 ):
     """Associates the specified promotion asset with the specified campaigns.
@@ -369,7 +369,7 @@ def _associate_asset_with_campaigns(
 # [END migrate_promotion_feed_to_asset_2]
 
 
-def _associate_asset_with_ad_groups(
+def associate_asset_with_ad_groups(
     client, customer_id, promotion_asset_resource_name, ad_group_ids
 ):
     """Associates the specified promotion asset with the specified campaigns.

@@ -31,6 +31,8 @@ __protobuf__ = proto.module(
         "ItemAttribute",
         "UserData",
         "UserAttribute",
+        "EventAttribute",
+        "EventItemAttribute",
         "ShoppingLoyalty",
         "CustomerMatchUserListMetadata",
         "StoreSalesMetadata",
@@ -348,6 +350,20 @@ class UserAttribute(proto.Message):
             on the allow-list with the user's consent.
 
             This field is a member of `oneof`_ ``_shopping_loyalty``.
+        lifecycle_stage (str):
+            Optional. Advertiser defined lifecycle stage
+            for the user. The accepted values are “Lead”,
+            “Active” and “Churned”.
+        first_purchase_date_time (str):
+            Optional. Timestamp of the first purchase made by the user.
+            The format is YYYY-MM-DD HH:MM:SS[+/-HH:MM], where
+            [+/-HH:MM] is an optional timezone offset from UTC. If the
+            offset is absent, the API will use the account's timezone as
+            default.
+        event_attribute (Sequence[google.ads.googleads.v11.common.types.EventAttribute]):
+            Optional. Advertiser defined events and their
+            attributes. All the values in the nested fields
+            are required. Currently this field is in beta.
     """
 
     lifetime_value_micros = proto.Field(proto.INT64, number=1, optional=True,)
@@ -359,6 +375,49 @@ class UserAttribute(proto.Message):
     shopping_loyalty = proto.Field(
         proto.MESSAGE, number=7, optional=True, message="ShoppingLoyalty",
     )
+    lifecycle_stage = proto.Field(proto.STRING, number=8,)
+    first_purchase_date_time = proto.Field(proto.STRING, number=9,)
+    event_attribute = proto.RepeatedField(
+        proto.MESSAGE, number=10, message="EventAttribute",
+    )
+
+
+class EventAttribute(proto.Message):
+    r"""Advertiser defined events and their attributes. All the
+    values in the nested fields are required.
+
+    Attributes:
+        event (str):
+            Required. Advertiser defined event to be used
+            for remarketing. The accepted values are
+            “Viewed”, “Cart”, “Purchased” and “Recommended”.
+        event_date_time (str):
+            Required. Timestamp at which the event happened. The format
+            is YYYY-MM-DD HH:MM:SS[+/-HH:MM], where [+/-HH:MM] is an
+            optional timezone offset from UTC. If the offset is absent,
+            the API will use the account's timezone as default.
+        item_attribute (Sequence[google.ads.googleads.v11.common.types.EventItemAttribute]):
+            Required. Item attributes of the event.
+    """
+
+    event = proto.Field(proto.STRING, number=1,)
+    event_date_time = proto.Field(proto.STRING, number=2,)
+    item_attribute = proto.RepeatedField(
+        proto.MESSAGE, number=3, message="EventItemAttribute",
+    )
+
+
+class EventItemAttribute(proto.Message):
+    r"""Event Item attributes of the Customer Match.
+
+    Attributes:
+        item_id (str):
+            Optional. A unique identifier of a product.
+            It can be either the Merchant Center Item ID or
+            GTIN (Global Trade Item Number).
+    """
+
+    item_id = proto.Field(proto.STRING, number=1,)
 
 
 class ShoppingLoyalty(proto.Message):
@@ -400,10 +459,10 @@ class StoreSalesMetadata(proto.Message):
     Attributes:
         loyalty_fraction (float):
             This is the fraction of all transactions that
-            are identifiable (i.e., associated with any form
-            of customer information). Required.
-            The fraction needs to be between 0 and 1
-            (excluding 0).
+            are identifiable (for example, associated with
+            any form of customer information). Required. The
+            fraction needs to be between 0 and 1 (excluding
+            0).
 
             This field is a member of `oneof`_ ``_loyalty_fraction``.
         transaction_upload_fraction (float):
@@ -441,9 +500,9 @@ class StoreSalesMetadata(proto.Message):
 
 class StoreSalesThirdPartyMetadata(proto.Message):
     r"""Metadata for a third party Store Sales.
-    This product is only for customers on the allow-list. Please
-    contact your Google business development representative for
-    details on the upload configuration.
+    This product is only for customers on the allow-list. Contact
+    your Google business development representative for details on
+    the upload configuration.
 
     Attributes:
         advertiser_upload_date_time (str):

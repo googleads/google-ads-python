@@ -76,7 +76,7 @@ def main(client, customer_id):
 
     googleads_service = client.get_service("GoogleAdsService")
     response = googleads_service.search(request=request)
-    _cache_next_page_token(page_tokens, response, 1)
+    cache_next_page_token(page_tokens, response, 1)
 
     # Determines the total number of results and prints it. The total results
     # count does not take into consideration the LIMIT clause of the query so
@@ -97,13 +97,13 @@ def main(client, customer_id):
     # the page tokens will be cached.
     middle_page_number = math.ceil(total_number_of_pages / 2)
     print(f"\n--- 1. Print results of the page {middle_page_number}\n")
-    _fetch_and_print_results(
+    fetch_and_print_results(
         client, customer_id, query, middle_page_number, page_tokens
     )
 
 
 # [START navigate_search_result_pages_caching_tokens]
-def _fetch_and_print_results(
+def fetch_and_print_results(
     client, customer_id, query, page_number, page_tokens
 ):
     """Fetches and prints the results of a page using a cache of page tokens.
@@ -147,7 +147,7 @@ def _fetch_and_print_results(
         request.page_token = page_tokens[current_page_number]
 
         response = googleads_service.search(request=request)
-        _cache_next_page_token(page_tokens, response, current_page_number)
+        cache_next_page_token(page_tokens, response, current_page_number)
         current_page_number += 1
 
     # Prints the results of the requested page.
@@ -160,7 +160,7 @@ def _fetch_and_print_results(
         # [END navigate_search_result_pages_caching_tokens]
 
 
-def _cache_next_page_token(page_tokens, page, page_number):
+def cache_next_page_token(page_tokens, page, page_number):
     """Updates the cache of page tokens based on a page that was retrieved.
 
     Args:

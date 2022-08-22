@@ -32,16 +32,16 @@ def main(client, customer_id, language_code):
         language_code: the language of the hotel callout feed item text.
     """
     # Creates assets for the hotel callout extensions.
-    asset_resource_names = _add_extension_assets(
+    asset_resource_names = add_extension_assets(
         client, customer_id, language_code
     )
 
     # Adds the extensions at the account level, so these will serve in all
     # eligible campaigns.
-    _link_asset_to_account(client, customer_id, asset_resource_names)
+    link_asset_to_account(client, customer_id, asset_resource_names)
 
 
-def _add_extension_assets(client, customer_id, language_code):
+def add_extension_assets(client, customer_id, language_code):
     """Creates new assets for the hotel callout.
 
     Args:
@@ -78,7 +78,7 @@ def _add_extension_assets(client, customer_id, language_code):
     return resource_names
 
 
-def _link_asset_to_account(client, customer_id, resource_names):
+def link_asset_to_account(client, customer_id, resource_names):
     """Links Asset at the Customer level to serve in all eligible campaigns.
 
     Args:

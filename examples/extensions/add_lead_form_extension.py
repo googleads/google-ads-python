@@ -34,14 +34,14 @@ def main(client, customer_id, campaign_id):
         customer_id: The Google Ads customer ID.
         campaign_id: The ID for a Campaign belonging to the given customer.
     """
-    lead_form_asset_resource_name = _create_lead_form_asset(client, customer_id)
-    _create_lead_form_extension(
+    lead_form_asset_resource_name = create_lead_form_asset(client, customer_id)
+    create_lead_form_extension(
         client, customer_id, campaign_id, lead_form_asset_resource_name
     )
 
 
 # [START add_lead_form_extension]
-def _create_lead_form_asset(client, customer_id):
+def create_lead_form_asset(client, customer_id):
     """Creates a lead form asset using the given customer ID.
 
     Args:
@@ -139,7 +139,7 @@ def _create_lead_form_asset(client, customer_id):
 
 
 # [START add_lead_form_extension_1]
-def _create_lead_form_extension(
+def create_lead_form_extension(
     client, customer_id, campaign_id, lead_form_asset_resource_name
 ):
     """Creates the lead form extension.

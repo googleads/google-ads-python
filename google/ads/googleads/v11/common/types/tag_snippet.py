@@ -35,7 +35,8 @@ class TagSnippet(proto.Message):
             tracking conversions.
         page_format (google.ads.googleads.v11.enums.types.TrackingCodePageFormatEnum.TrackingCodePageFormat):
             The format of the web page where the tracking
-            tag and snippet will be installed, e.g. HTML.
+            tag and snippet will be installed, for example,
+            HTML.
         global_site_tag (str):
             The site tag that adds visitors to your basic
             remarketing lists and sets new cookies on your

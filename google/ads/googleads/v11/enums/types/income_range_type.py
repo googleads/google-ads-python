@@ -30,8 +30,8 @@ class IncomeRangeTypeEnum(proto.Message):
     """
 
     class IncomeRangeType(proto.Enum):
-        r"""The type of demographic income ranges (e.g. between 0% to
-        50%).
+        r"""The type of demographic income ranges (for example, between
+        0% to 50%).
         """
         UNSPECIFIED = 0
         UNKNOWN = 1

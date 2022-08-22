@@ -37,15 +37,15 @@ def main(client, customer_id):
         client: The Google Ads client.
         customer_id: The customer ID for which to add the user list.
     """
-    user_list_resource_name = _create_customer_match_user_list(
+    user_list_resource_name = create_customer_match_user_list(
         client, customer_id
     )
-    _add_users_to_customer_match_user_list(
+    add_users_to_customer_match_user_list(
         client, customer_id, user_list_resource_name
     )
 
 
-def _create_customer_match_user_list(client, customer_id):
+def create_customer_match_user_list(client, customer_id):
     """Creates a Customer Match user list.
 
     Args:
@@ -89,7 +89,7 @@ def _create_customer_match_user_list(client, customer_id):
 
 
 # [START add_customer_match_user_list]
-def _add_users_to_customer_match_user_list(
+def add_users_to_customer_match_user_list(
     client, customer_id, user_list_resource_name
 ):
     """Uses Customer Match to create and add users to a new user list.
@@ -130,7 +130,7 @@ def _add_users_to_customer_match_user_list(
 
     request = client.get_type("AddOfflineUserDataJobOperationsRequest")
     request.resource_name = offline_user_data_job_resource_name
-    request.operations = _build_offline_user_data_job_operations(client)
+    request.operations = build_offline_user_data_job_operations(client)
     request.enable_partial_failure = True
 
     # Issues a request to add the operations to the offline user data job.
@@ -176,7 +176,7 @@ def _add_users_to_customer_match_user_list(
     # once. If the job is completed successfully, prints information about the
     # user list. Otherwise, prints the query to use to check the job again
     # later.
-    _check_job_status(
+    check_job_status(
         client,
         customer_id,
         offline_user_data_job_resource_name,
@@ -186,7 +186,7 @@ def _add_users_to_customer_match_user_list(
 
 
 # [START add_customer_match_user_list_2]
-def _build_offline_user_data_job_operations(client):
+def build_offline_user_data_job_operations(client):
     """Builds and returns two sample offline user data job operations.
 
     Args:
@@ -202,7 +202,7 @@ def _build_offline_user_data_job_operations(client):
     user_data_with_email_address = user_data_with_email_address_operation.create
     user_identifier_with_hashed_email = client.get_type("UserIdentifier")
     # Hash normalized email addresses based on SHA-256 hashing algorithm.
-    user_identifier_with_hashed_email.hashed_email = _normalize_and_hash(
+    user_identifier_with_hashed_email.hashed_email = normalize_and_hash(
         "customer@example.com"
     )
     user_data_with_email_address.user_identifiers.append(
@@ -219,10 +219,10 @@ def _build_offline_user_data_job_operations(client):
     user_identifier_with_address = client.get_type("UserIdentifier")
     # First and last name must be normalized and hashed.
     user_identifier_with_address.address_info.hashed_first_name = (
-        _normalize_and_hash("John")
+        normalize_and_hash("John")
     )
     user_identifier_with_address.address_info.hashed_last_name = (
-        _normalize_and_hash("Doe")
+        normalize_and_hash("Doe")
     )
     # Country and zip codes are sent in plain text.
     user_identifier_with_address.address_info.country_code = "US"
@@ -238,7 +238,7 @@ def _build_offline_user_data_job_operations(client):
     # [END add_customer_match_user_list_2]
 
 
-def _check_job_status(
+def check_job_status(
     client,
     customer_id,
     offline_user_data_job_resource_name,
@@ -278,7 +278,7 @@ def _check_job_status(
     )
 
     if status_name == "SUCCESS":
-        _print_customer_match_user_list_info(
+        print_customer_match_user_list_info(
             client, customer_id, user_list_resource_name
         )
     elif status_name == "FAILED":
@@ -290,7 +290,7 @@ def _check_job_status(
         )
 
 
-def _print_customer_match_user_list_info(
+def print_customer_match_user_list_info(
     client, customer_id, user_list_resource_name
 ):
     """Prints information about the Customer Match user list.
@@ -330,7 +330,7 @@ def _print_customer_match_user_list_info(
     )
 
 
-def _normalize_and_hash(s):
+def normalize_and_hash(s):
     """Normalizes and hashes a string with SHA-256.
 
     Args:

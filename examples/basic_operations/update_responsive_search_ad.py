@@ -12,22 +12,22 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
-"""This example updates an expanded text ad.
+"""This example updates a responsive search ad.
 
-To get expanded text ads, run get_expanded_text_ads.py.
+To get responsive search ads, run get_responsive_search_ads.py.
 """
 
 
 import argparse
 import sys
-import uuid
+from uuid import uuid4
 
 from google.ads.googleads.client import GoogleAdsClient
 from google.ads.googleads.errors import GoogleAdsException
 from google.api_core import protobuf_helpers
 
 
-# [START update_expanded_text_ad]
+# [START update_responsive_search_ad]
 def main(client, customer_id, ad_id):
     ad_service = client.get_service("AdService")
     ad_operation = client.get_type("AdOperation")
@@ -35,13 +35,32 @@ def main(client, customer_id, ad_id):
     # Update ad operation.
     ad = ad_operation.update
     ad.resource_name = ad_service.ad_path(customer_id, ad_id)
-    ad.expanded_text_ad.headline_part1 = (
-        f"Cruise to Pluto {str(uuid.uuid4())[:8]}"
+
+    # Update some properties of the responsive search ad.
+    headline_1 = client.get_type("AdTextAsset")
+    headline_1.text = f"Cruise to Pluto #{uuid4().hex[:8]}"
+    headline_1.pinned_field = client.enums.ServedAssetFieldTypeEnum.HEADLINE_1
+
+    headline_2 = client.get_type("AdTextAsset")
+    headline_2.text = "Tickets on sale now"
+
+    headline_3 = client.get_type("AdTextAsset")
+    headline_3.text = "Buy your tickets now"
+
+    ad.responsive_search_ad.headlines.extend(
+        [headline_1, headline_2, headline_3]
     )
-    ad.expanded_text_ad.headline_part2 = "Tickets on sale now"
-    ad.expanded_text_ad.description = "Best space cruise ever."
-    ad.final_urls.append("http://www.example.com")
-    ad.final_mobile_urls.append("http://www.example.com/mobile")
+
+    description_1 = client.get_type("AdTextAsset")
+    description_1.text = "Best space cruise ever."
+
+    description_2 = client.get_type("AdTextAsset")
+    description_2.text = (
+        "The most wonderful space experience you will ever have."
+    )
+
+    ad.final_urls.append("https://www.example.com")
+    ad.final_mobile_urls.append("https://www.example.com/mobile")
     client.copy_from(
         ad_operation.update_mask, protobuf_helpers.field_mask(None, ad._pb)
     )
@@ -54,7 +73,7 @@ def main(client, customer_id, ad_id):
         f'Ad with resource name "{ad_response.results[0].resource_name}" '
         "was updated."
     )
-    # [END update_expanded_text_ad]
+    # [END update_responsive_search_ad]
 
 
 if __name__ == "__main__":
@@ -64,8 +83,8 @@ if __name__ == "__main__":
 
     parser = argparse.ArgumentParser(
         description=(
-            "Updates the specified expanded text ad, "
-            "for the given customer ID."
+            "Updates the specified responsive search ad, for the given "
+            "customer ID."
         )
     )
     # The following argument(s) should be provided to run the example.

@@ -54,7 +54,7 @@ def main(client, customer_id):
     # Create rules targeting any user that visits the URLs in URL_LIST.
     for url in URL_LIST:
         user_list_rule_item_group_info.rule_items.append(
-            _build_visited_site_rule_info(client, url)
+            build_visited_site_rule_info(client, url)
         )
     user_list_rule_info.rule_item_groups.append(user_list_rule_item_group_info)
 
@@ -100,7 +100,7 @@ def main(client, customer_id):
     )
 
 
-def _build_visited_site_rule_info(client, url):
+def build_visited_site_rule_info(client, url):
     """Creates a UserListRuleItemInfo object targeting a visit to a given URL.
 
     Args:

@@ -40,20 +40,20 @@ def main(
     create_default_listing_group,
 ):
     # Creates a budget to be used by the campaign that will be created below.
-    budget_resource_name = _add_campaign_budget(client, customer_id)
+    budget_resource_name = add_campaign_budget(client, customer_id)
 
     # Create a standard shopping campaign.
-    campaign_resource_name = _add_standard_shopping_campaign(
+    campaign_resource_name = add_standard_shopping_campaign(
         client, customer_id, budget_resource_name, merchant_center_account_id
     )
 
     # Create a shopping product ad group.
-    ad_group_resource_name = _add_shopping_product_ad_group(
+    ad_group_resource_name = add_shopping_product_ad_group(
         client, customer_id, campaign_resource_name
     )
 
     # Create a shopping product ad group ad.
-    _add_shopping_product_ad_group_ad(
+    add_shopping_product_ad_group_ad(
         client, customer_id, ad_group_resource_name
     )
 
@@ -61,12 +61,12 @@ def main(
         # Creates an ad group criterion containing a listing group.
         # This will be the listing group tree for 'All products' and will
         # contain a single biddable unit node.
-        _add_default_shopping_listing_group(
+        add_default_shopping_listing_group(
             client, customer_id, ad_group_resource_name
         )
 
 
-def _add_campaign_budget(client, customer_id):
+def add_campaign_budget(client, customer_id):
     """Creates a new campaign budget in the specified client account."""
     campaign_budget_service = client.get_service("CampaignBudgetService")
 
@@ -92,7 +92,7 @@ def _add_campaign_budget(client, customer_id):
 
 
 # [START add_shopping_product_ad]
-def _add_shopping_product_ad_group_ad(
+def add_shopping_product_ad_group_ad(
     client, customer_id, ad_group_resource_name
 ):
     """Creates a new shopping product ad group ad in the specified ad group."""
@@ -124,7 +124,7 @@ def _add_shopping_product_ad_group_ad(
 
 
 # [START add_shopping_product_ad_1]
-def _add_shopping_product_ad_group(client, customer_id, campaign_resource_name):
+def add_shopping_product_ad_group(client, customer_id, campaign_resource_name):
     """Creates a new shopping product ad group in the specified campaign."""
     ad_group_service = client.get_service("AdGroupService")
 
@@ -156,7 +156,7 @@ def _add_shopping_product_ad_group(client, customer_id, campaign_resource_name):
 
 
 # [START add_shopping_product_ad_2]
-def _add_standard_shopping_campaign(
+def add_standard_shopping_campaign(
     client, customer_id, budget_resource_name, merchant_center_account_id
 ):
     """Creates a new standard shopping campaign in the specified client account."""
@@ -215,7 +215,7 @@ def _add_standard_shopping_campaign(
     # [END add_shopping_product_ad_2]
 
 
-def _add_default_shopping_listing_group(
+def add_default_shopping_listing_group(
     client, customer_id, ad_group_resource_name
 ):
     """Creates a new default shopping listing group for the specified ad group.

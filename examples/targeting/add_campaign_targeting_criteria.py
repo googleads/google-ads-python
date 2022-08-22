@@ -26,11 +26,11 @@ def main(client, customer_id, campaign_id, keyword_text, location_id):
     campaign_criterion_service = client.get_service("CampaignCriterionService")
 
     operations = [
-        _create_location_op(client, customer_id, campaign_id, location_id),
-        _create_negative_keyword_op(
+        create_location_op(client, customer_id, campaign_id, location_id),
+        create_negative_keyword_op(
             client, customer_id, campaign_id, keyword_text
         ),
-        _create_proximity_op(client, customer_id, campaign_id),
+        create_proximity_op(client, customer_id, campaign_id),
     ]
 
     campaign_criterion_response = (
@@ -44,7 +44,7 @@ def main(client, customer_id, campaign_id, keyword_text, location_id):
 
 
 # [START add_campaign_targeting_criteria]
-def _create_location_op(client, customer_id, campaign_id, location_id):
+def create_location_op(client, customer_id, campaign_id, location_id):
     campaign_service = client.get_service("CampaignService")
     geo_target_constant_service = client.get_service("GeoTargetConstantService")
 
@@ -67,7 +67,7 @@ def _create_location_op(client, customer_id, campaign_id, location_id):
     # [END add_campaign_targeting_criteria]
 
 
-def _create_negative_keyword_op(client, customer_id, campaign_id, keyword_text):
+def create_negative_keyword_op(client, customer_id, campaign_id, keyword_text):
     campaign_service = client.get_service("CampaignService")
 
     # Create the campaign criterion.
@@ -85,7 +85,7 @@ def _create_negative_keyword_op(client, customer_id, campaign_id, keyword_text):
 
 
 # [START add_campaign_targeting_criteria_1]
-def _create_proximity_op(client, customer_id, campaign_id):
+def create_proximity_op(client, customer_id, campaign_id):
     campaign_service = client.get_service("CampaignService")
 
     # Create the campaign criterion.

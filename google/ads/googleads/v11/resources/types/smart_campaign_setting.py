@@ -19,9 +19,7 @@ import proto  # type: ignore
 __protobuf__ = proto.module(
     package="google.ads.googleads.v11.resources",
     marshal="google.ads.googleads.v11",
-    manifest={
-        "SmartCampaignSetting",
-    },
+    manifest={"SmartCampaignSetting",},
 )
 
 
@@ -58,7 +56,7 @@ class SmartCampaignSetting(proto.Message):
             optimized for ads as this campaign's landing
             page.  This campaign must be linked to a
             business profile to use this option.  For more
-            information on this feature, please consult
+            information on this feature, consult
             https://support.google.com/google-ads/answer/9827068.
 
             This field is a member of `oneof`_ ``landing_page``.
@@ -68,7 +66,7 @@ class SmartCampaignSetting(proto.Message):
             This field is a member of `oneof`_ ``business_setting``.
         business_profile_location (str):
             The resource name of a Business Profile location. Business
-            Profile location resource names can be fetched via the
+            Profile location resource names can be fetched through the
             Business Profile API and adhere to the following format:
             ``locations/{locationId}``.
 
@@ -94,16 +92,8 @@ class SmartCampaignSetting(proto.Message):
                 This field is a member of `oneof`_ ``_country_code``.
         """
 
-        phone_number = proto.Field(
-            proto.STRING,
-            number=1,
-            optional=True,
-        )
-        country_code = proto.Field(
-            proto.STRING,
-            number=2,
-            optional=True,
-        )
+        phone_number = proto.Field(proto.STRING, number=1, optional=True,)
+        country_code = proto.Field(proto.STRING, number=2, optional=True,)
 
     class AdOptimizedBusinessProfileSetting(proto.Message):
         r"""Settings for configuring a business profile optimized for ads
@@ -114,36 +104,16 @@ class SmartCampaignSetting(proto.Message):
                 Enabling a lead form on your business profile
                 enables prospective customers to contact your
                 business by filling out a simple form, and
-                you'll receive their information via email.
+                you'll receive their information through email.
         """
 
-        include_lead_form = proto.Field(
-            proto.BOOL,
-            number=1,
-        )
+        include_lead_form = proto.Field(proto.BOOL, number=1,)
 
-    resource_name = proto.Field(
-        proto.STRING,
-        number=1,
-    )
-    campaign = proto.Field(
-        proto.STRING,
-        number=2,
-    )
-    phone_number = proto.Field(
-        proto.MESSAGE,
-        number=3,
-        message=PhoneNumber,
-    )
-    advertising_language_code = proto.Field(
-        proto.STRING,
-        number=7,
-    )
-    final_url = proto.Field(
-        proto.STRING,
-        number=8,
-        oneof="landing_page",
-    )
+    resource_name = proto.Field(proto.STRING, number=1,)
+    campaign = proto.Field(proto.STRING, number=2,)
+    phone_number = proto.Field(proto.MESSAGE, number=3, message=PhoneNumber,)
+    advertising_language_code = proto.Field(proto.STRING, number=7,)
+    final_url = proto.Field(proto.STRING, number=8, oneof="landing_page",)
     ad_optimized_business_profile_setting = proto.Field(
         proto.MESSAGE,
         number=9,
@@ -151,14 +121,10 @@ class SmartCampaignSetting(proto.Message):
         message=AdOptimizedBusinessProfileSetting,
     )
     business_name = proto.Field(
-        proto.STRING,
-        number=5,
-        oneof="business_setting",
+        proto.STRING, number=5, oneof="business_setting",
     )
     business_profile_location = proto.Field(
-        proto.STRING,
-        number=10,
-        oneof="business_setting",
+        proto.STRING, number=10, oneof="business_setting",
     )
 
 

@@ -19,23 +19,20 @@ import proto  # type: ignore
 __protobuf__ = proto.module(
     package="google.ads.googleads.v11.enums",
     marshal="google.ads.googleads.v11",
-    manifest={"ParentalStatusTypeEnum",},
+    manifest={"UserListFlexibleRuleOperatorEnum",},
 )
 
 
-class ParentalStatusTypeEnum(proto.Message):
-    r"""Container for enum describing the type of demographic
-    parental statuses.
-
+class UserListFlexibleRuleOperatorEnum(proto.Message):
+    r"""Logical operator connecting two rules.
     """
 
-    class ParentalStatusType(proto.Enum):
-        r"""The type of parental statuses (for example, not a parent)."""
+    class UserListFlexibleRuleOperator(proto.Enum):
+        r"""Enum describing possible user list combined rule operators."""
         UNSPECIFIED = 0
         UNKNOWN = 1
-        PARENT = 300
-        NOT_A_PARENT = 301
-        UNDETERMINED = 302
+        AND = 2
+        OR = 3
 
 
 __all__ = tuple(sorted(__protobuf__.manifest))

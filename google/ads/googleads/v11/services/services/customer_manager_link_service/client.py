@@ -517,7 +517,7 @@ class CustomerManagerLinkServiceClient(
     ) -> customer_manager_link_service.MoveManagerLinkResponse:
         r"""Moves a client customer to a new manager customer. This
         simplifies the complex request that requires two operations to
-        move a client customer to a new manager. i.e:
+        move a client customer to a new manager, for example:
 
         1. Update operation with Status INACTIVE (previous manager) and,
         2. Update operation with Status ACTIVE (new manager).

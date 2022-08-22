@@ -56,7 +56,7 @@ class CustomerClient(proto.Message):
             This field is a member of `oneof`_ ``_level``.
         time_zone (str):
             Output only. Common Locale Data Repository (CLDR) string
-            representation of the time zone of the client, e.g.
+            representation of the time zone of the client, for example,
             America/Los_Angeles. Read only.
 
             This field is a member of `oneof`_ ``_time_zone``.
@@ -76,8 +76,8 @@ class CustomerClient(proto.Message):
 
             This field is a member of `oneof`_ ``_descriptive_name``.
         currency_code (str):
-            Output only. Currency code (e.g. 'USD',
-            'EUR') for the client. Read only.
+            Output only. Currency code (for example,
+            'USD', 'EUR') for the client. Read only.
 
             This field is a member of `oneof`_ ``_currency_code``.
         id (int):

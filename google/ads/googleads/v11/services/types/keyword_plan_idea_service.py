@@ -102,51 +102,33 @@ class GenerateKeywordIdeasRequest(proto.Message):
             The options for historical metrics data.
         keyword_and_url_seed (google.ads.googleads.v11.services.types.KeywordAndUrlSeed):
             A Keyword and a specific Url to generate
-            ideas from e.g. cars, www.example.com/cars.
+            ideas from for example, cars,
+            www.example.com/cars.
 
             This field is a member of `oneof`_ ``seed``.
         keyword_seed (google.ads.googleads.v11.services.types.KeywordSeed):
             A Keyword or phrase to generate ideas from,
-            e.g. cars.
+            for example, cars.
 
             This field is a member of `oneof`_ ``seed``.
         url_seed (google.ads.googleads.v11.services.types.UrlSeed):
-            A specific url to generate ideas from, e.g.
-            www.example.com/cars.
+            A specific url to generate ideas from, for
+            example, www.example.com/cars.
 
             This field is a member of `oneof`_ ``seed``.
         site_seed (google.ads.googleads.v11.services.types.SiteSeed):
-            The site to generate ideas from, e.g.
+            The site to generate ideas from, for example,
             www.example.com.
 
             This field is a member of `oneof`_ ``seed``.
     """
 
-    customer_id = proto.Field(
-        proto.STRING,
-        number=1,
-    )
-    language = proto.Field(
-        proto.STRING,
-        number=14,
-        optional=True,
-    )
-    geo_target_constants = proto.RepeatedField(
-        proto.STRING,
-        number=15,
-    )
-    include_adult_keywords = proto.Field(
-        proto.BOOL,
-        number=10,
-    )
-    page_token = proto.Field(
-        proto.STRING,
-        number=12,
-    )
-    page_size = proto.Field(
-        proto.INT32,
-        number=13,
-    )
+    customer_id = proto.Field(proto.STRING, number=1,)
+    language = proto.Field(proto.STRING, number=14, optional=True,)
+    geo_target_constants = proto.RepeatedField(proto.STRING, number=15,)
+    include_adult_keywords = proto.Field(proto.BOOL, number=10,)
+    page_token = proto.Field(proto.STRING, number=12,)
+    page_size = proto.Field(proto.INT32, number=13,)
     keyword_plan_network = proto.Field(
         proto.ENUM,
         number=9,
@@ -168,28 +150,16 @@ class GenerateKeywordIdeasRequest(proto.Message):
         message=keyword_plan_common.HistoricalMetricsOptions,
     )
     keyword_and_url_seed = proto.Field(
-        proto.MESSAGE,
-        number=2,
-        oneof="seed",
-        message="KeywordAndUrlSeed",
+        proto.MESSAGE, number=2, oneof="seed", message="KeywordAndUrlSeed",
     )
     keyword_seed = proto.Field(
-        proto.MESSAGE,
-        number=3,
-        oneof="seed",
-        message="KeywordSeed",
+        proto.MESSAGE, number=3, oneof="seed", message="KeywordSeed",
     )
     url_seed = proto.Field(
-        proto.MESSAGE,
-        number=5,
-        oneof="seed",
-        message="UrlSeed",
+        proto.MESSAGE, number=5, oneof="seed", message="UrlSeed",
     )
     site_seed = proto.Field(
-        proto.MESSAGE,
-        number=11,
-        oneof="seed",
-        message="SiteSeed",
+        proto.MESSAGE, number=11, oneof="seed", message="SiteSeed",
     )
 
 
@@ -206,15 +176,8 @@ class KeywordAndUrlSeed(proto.Message):
             Requires at least one keyword.
     """
 
-    url = proto.Field(
-        proto.STRING,
-        number=3,
-        optional=True,
-    )
-    keywords = proto.RepeatedField(
-        proto.STRING,
-        number=4,
-    )
+    url = proto.Field(proto.STRING, number=3, optional=True,)
+    keywords = proto.RepeatedField(proto.STRING, number=4,)
 
 
 class KeywordSeed(proto.Message):
@@ -225,10 +188,7 @@ class KeywordSeed(proto.Message):
             Requires at least one keyword.
     """
 
-    keywords = proto.RepeatedField(
-        proto.STRING,
-        number=2,
-    )
+    keywords = proto.RepeatedField(proto.STRING, number=2,)
 
 
 class SiteSeed(proto.Message):
@@ -243,11 +203,7 @@ class SiteSeed(proto.Message):
             This field is a member of `oneof`_ ``_site``.
     """
 
-    site = proto.Field(
-        proto.STRING,
-        number=2,
-        optional=True,
-    )
+    site = proto.Field(proto.STRING, number=2, optional=True,)
 
 
 class UrlSeed(proto.Message):
@@ -261,11 +217,7 @@ class UrlSeed(proto.Message):
             This field is a member of `oneof`_ ``_url``.
     """
 
-    url = proto.Field(
-        proto.STRING,
-        number=2,
-        optional=True,
-    )
+    url = proto.Field(proto.STRING, number=2, optional=True,)
 
 
 class GenerateKeywordIdeaResponse(proto.Message):
@@ -291,23 +243,15 @@ class GenerateKeywordIdeaResponse(proto.Message):
         return self
 
     results = proto.RepeatedField(
-        proto.MESSAGE,
-        number=1,
-        message="GenerateKeywordIdeaResult",
+        proto.MESSAGE, number=1, message="GenerateKeywordIdeaResult",
     )
     aggregate_metric_results = proto.Field(
         proto.MESSAGE,
         number=4,
         message=keyword_plan_common.KeywordPlanAggregateMetricResults,
     )
-    next_page_token = proto.Field(
-        proto.STRING,
-        number=2,
-    )
-    total_size = proto.Field(
-        proto.INT64,
-        number=3,
-    )
+    next_page_token = proto.Field(proto.STRING, number=2,)
+    total_size = proto.Field(proto.INT64, number=3,)
 
 
 class GenerateKeywordIdeaResult(proto.Message):
@@ -337,25 +281,16 @@ class GenerateKeywordIdeaResult(proto.Message):
             for the definition of "close variants".
     """
 
-    text = proto.Field(
-        proto.STRING,
-        number=5,
-        optional=True,
-    )
+    text = proto.Field(proto.STRING, number=5, optional=True,)
     keyword_idea_metrics = proto.Field(
         proto.MESSAGE,
         number=3,
         message=keyword_plan_common.KeywordPlanHistoricalMetrics,
     )
     keyword_annotations = proto.Field(
-        proto.MESSAGE,
-        number=6,
-        message=keyword_plan_common.KeywordAnnotations,
+        proto.MESSAGE, number=6, message=keyword_plan_common.KeywordAnnotations,
     )
-    close_variants = proto.RepeatedField(
-        proto.STRING,
-        number=7,
-    )
+    close_variants = proto.RepeatedField(proto.STRING, number=7,)
 
 
 class GenerateKeywordHistoricalMetricsRequest(proto.Message):
@@ -398,27 +333,11 @@ class GenerateKeywordHistoricalMetricsRequest(proto.Message):
             The options for historical metrics data.
     """
 
-    customer_id = proto.Field(
-        proto.STRING,
-        number=1,
-    )
-    keywords = proto.RepeatedField(
-        proto.STRING,
-        number=2,
-    )
-    language = proto.Field(
-        proto.STRING,
-        number=4,
-        optional=True,
-    )
-    include_adult_keywords = proto.Field(
-        proto.BOOL,
-        number=5,
-    )
-    geo_target_constants = proto.RepeatedField(
-        proto.STRING,
-        number=6,
-    )
+    customer_id = proto.Field(proto.STRING, number=1,)
+    keywords = proto.RepeatedField(proto.STRING, number=2,)
+    language = proto.Field(proto.STRING, number=4, optional=True,)
+    include_adult_keywords = proto.Field(proto.BOOL, number=5,)
+    geo_target_constants = proto.RepeatedField(proto.STRING, number=6,)
     keyword_plan_network = proto.Field(
         proto.ENUM,
         number=7,
@@ -483,15 +402,8 @@ class GenerateKeywordHistoricalMetricsResult(proto.Message):
             variants
     """
 
-    text = proto.Field(
-        proto.STRING,
-        number=1,
-        optional=True,
-    )
-    close_variants = proto.RepeatedField(
-        proto.STRING,
-        number=3,
-    )
+    text = proto.Field(proto.STRING, number=1, optional=True,)
+    close_variants = proto.RepeatedField(proto.STRING, number=3,)
     keyword_metrics = proto.Field(
         proto.MESSAGE,
         number=2,
@@ -515,18 +427,9 @@ class GenerateAdGroupThemesRequest(proto.Message):
             ``customers/{customer_id}/adGroups/{ad_group_id}``
     """
 
-    customer_id = proto.Field(
-        proto.STRING,
-        number=1,
-    )
-    keywords = proto.RepeatedField(
-        proto.STRING,
-        number=2,
-    )
-    ad_groups = proto.RepeatedField(
-        proto.STRING,
-        number=3,
-    )
+    customer_id = proto.Field(proto.STRING, number=1,)
+    keywords = proto.RepeatedField(proto.STRING, number=2,)
+    ad_groups = proto.RepeatedField(proto.STRING, number=3,)
 
 
 class GenerateAdGroupThemesResponse(proto.Message):
@@ -542,14 +445,10 @@ class GenerateAdGroupThemesResponse(proto.Message):
     """
 
     ad_group_keyword_suggestions = proto.RepeatedField(
-        proto.MESSAGE,
-        number=1,
-        message="AdGroupKeywordSuggestion",
+        proto.MESSAGE, number=1, message="AdGroupKeywordSuggestion",
     )
     unusable_ad_groups = proto.RepeatedField(
-        proto.MESSAGE,
-        number=2,
-        message="UnusableAdGroup",
+        proto.MESSAGE, number=2, message="UnusableAdGroup",
     )
 
 
@@ -573,27 +472,15 @@ class AdGroupKeywordSuggestion(proto.Message):
             format: ``customers/{customer_id}/campaigns/{campaign_id}``
     """
 
-    keyword_text = proto.Field(
-        proto.STRING,
-        number=1,
-    )
-    suggested_keyword_text = proto.Field(
-        proto.STRING,
-        number=2,
-    )
+    keyword_text = proto.Field(proto.STRING, number=1,)
+    suggested_keyword_text = proto.Field(proto.STRING, number=2,)
     suggested_match_type = proto.Field(
         proto.ENUM,
         number=3,
         enum=keyword_match_type.KeywordMatchTypeEnum.KeywordMatchType,
     )
-    suggested_ad_group = proto.Field(
-        proto.STRING,
-        number=4,
-    )
-    suggested_campaign = proto.Field(
-        proto.STRING,
-        number=5,
-    )
+    suggested_ad_group = proto.Field(proto.STRING, number=4,)
+    suggested_campaign = proto.Field(proto.STRING, number=5,)
 
 
 class UnusableAdGroup(proto.Message):
@@ -614,14 +501,8 @@ class UnusableAdGroup(proto.Message):
             ``customers/{customer_id}/campaigns/{campaign_id}``
     """
 
-    ad_group = proto.Field(
-        proto.STRING,
-        number=1,
-    )
-    campaign = proto.Field(
-        proto.STRING,
-        number=2,
-    )
+    ad_group = proto.Field(proto.STRING, number=1,)
+    campaign = proto.Field(proto.STRING, number=2,)
 
 
 __all__ = tuple(sorted(__protobuf__.manifest))

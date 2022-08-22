@@ -599,9 +599,10 @@ class TargetImpressionShareSimulationPoint(proto.Message):
     Attributes:
         target_impression_share_micros (int):
             The simulated target impression share value (in micros) upon
-            which projected metrics are based. E.g. 10% impression
-            share, which is equal to 0.1, is stored as 100_000. This
-            value is validated and will not exceed 1M (100%).
+            which projected metrics are based. For example, 10%
+            impression share, which is equal to 0.1, is stored as
+            100_000. This value is validated and will not exceed 1M
+            (100%).
         required_cpc_bid_ceiling_micros (int):
             Projected required daily cpc bid ceiling that
             the advertiser must set to realize this

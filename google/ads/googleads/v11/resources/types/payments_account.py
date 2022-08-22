@@ -57,8 +57,8 @@ class PaymentsAccount(proto.Message):
             This field is a member of `oneof`_ ``_payments_profile_id``.
         secondary_payments_profile_id (str):
             Output only. A secondary payments profile ID
-            present in uncommon situations, e.g. when a
-            sequential liability agreement has been
+            present in uncommon situations, for example,
+            when a sequential liability agreement has been
             arranged.
 
             This field is a member of `oneof`_ ``_secondary_payments_profile_id``.

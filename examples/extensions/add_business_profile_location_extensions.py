@@ -103,7 +103,7 @@ def main(
     # per email address, and a Google Ads account cannot have a location
     # extension feed and an affiliate location extension feed at the same
     # time.
-    _delete_location_extension_feeds(client, customer_id)
+    delete_location_extension_feeds(client, customer_id)
 
     # [START add_business_profile_location_extensions_1]
     # Add the feed. Since it is a system generated feed, Google Ads will
@@ -132,7 +132,7 @@ def main(
     number_of_attempts = 0
 
     while number_of_attempts < MAX_CUSTOMER_FEED_ADD_ATTEMPTS:
-        feed_mapping = _get_business_profile_feed_mapping(
+        feed_mapping = get_business_profile_feed_mapping(
             client, customer_id, feed_resource_name
         )
 
@@ -195,7 +195,7 @@ def main(
         # [END add_business_profile_location_extensions_3]
 
 
-def _delete_location_extension_feeds(client, customer_id):
+def delete_location_extension_feeds(client, customer_id):
     """Deletes the existing location extension feeds.
 
     Args:
@@ -207,18 +207,18 @@ def _delete_location_extension_feeds(client, customer_id):
     # stop serving.
     # 2. Delete the feed so that Google Ads will no longer sync from the
     # Business Profile account.
-    old_customer_feeds = _get_location_extension_customer_feeds(
+    old_customer_feeds = get_location_extension_customer_feeds(
         client, customer_id
     )
     if old_customer_feeds:
-        _delete_customer_feeds(client, customer_id, old_customer_feeds)
+        delete_customer_feeds(client, customer_id, old_customer_feeds)
 
-    old_feeds = _get_location_extension_feeds(client, customer_id)
+    old_feeds = get_location_extension_feeds(client, customer_id)
     if old_feeds:
-        _delete_feeds(client, customer_id, old_feeds)
+        delete_feeds(client, customer_id, old_feeds)
 
 
-def _get_location_extension_customer_feeds(client, customer_id):
+def get_location_extension_customer_feeds(client, customer_id):
     """Gets the existing location extension customer feeds.
 
     Args:
@@ -249,7 +249,7 @@ def _get_location_extension_customer_feeds(client, customer_id):
     return [row.customer_feed for row in result]
 
 
-def _get_location_extension_feeds(client, customer_id):
+def get_location_extension_feeds(client, customer_id):
     """Gets the existing location extension feeds.
 
     Args:
@@ -284,7 +284,7 @@ def _get_location_extension_feeds(client, customer_id):
     ]
 
 
-def _delete_customer_feeds(client, customer_id, old_customer_feeds):
+def delete_customer_feeds(client, customer_id, old_customer_feeds):
     """Removes the customer feeds.
 
     Args:
@@ -305,7 +305,7 @@ def _delete_customer_feeds(client, customer_id, old_customer_feeds):
     )
 
 
-def _delete_feeds(client, customer_id, old_feeds):
+def delete_feeds(client, customer_id, old_feeds):
     """Removes the specified feeds.
 
     Args:
@@ -324,7 +324,7 @@ def _delete_feeds(client, customer_id, old_feeds):
     feed_service.mutate_feeds(customer_id=customer_id, operations=operations)
 
 
-def _get_business_profile_feed_mapping(client, customer_id, feed_resource_name):
+def get_business_profile_feed_mapping(client, customer_id, feed_resource_name):
     """Gets a Business Profile Feed mapping.
 
     Args:

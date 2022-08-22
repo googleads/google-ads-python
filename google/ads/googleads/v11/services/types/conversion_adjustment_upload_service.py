@@ -77,9 +77,9 @@ class UploadConversionAdjustmentsResponse(proto.Message):
             Errors that pertain to conversion adjustment
             failures in the partial failure mode. Returned
             when all errors occur inside the adjustments. If
-            any errors occur outside the adjustments (e.g.
-            auth errors), we return an RPC level error.
-            See
+            any errors occur outside the adjustments (for
+            example, auth errors), we return an RPC level
+            error. See
             https://developers.google.com/google-ads/api/docs/best-practices/partial-failures
             for more information about partial failure.
         results (Sequence[google.ads.googleads.v11.services.types.ConversionAdjustmentResult]):
@@ -126,8 +126,8 @@ class ConversionAdjustment(proto.Message):
         adjustment_date_time (str):
             The date time at which the adjustment occurred. Must be
             after the conversion_date_time. The timezone must be
-            specified. The format is "yyyy-mm-dd hh:mm:ss+|-hh:mm", e.g.
-            "2019-01-01 12:32:45-08:00".
+            specified. The format is "yyyy-mm-dd hh:mm:ss+|-hh:mm", for
+            example, "2019-01-01 12:32:45-08:00".
 
             This field is a member of `oneof`_ ``_adjustment_date_time``.
         adjustment_type (google.ads.googleads.v11.enums.types.ConversionAdjustmentTypeEnum.ConversionAdjustmentType):
@@ -204,8 +204,8 @@ class RestatementValue(proto.Message):
             provided, then the default currency from the
             conversion action is used, and if that is not
             set then the account currency is used. This is
-            the ISO 4217 3-character currency code e.g. USD
-            or EUR.
+            the ISO 4217 3-character currency code for
+            example, USD or EUR.
 
             This field is a member of `oneof`_ ``_currency_code``.
     """
@@ -227,8 +227,8 @@ class GclidDateTimePair(proto.Message):
         conversion_date_time (str):
             The date time at which the original conversion for this
             adjustment occurred. The timezone must be specified. The
-            format is "yyyy-mm-dd hh:mm:ss+|-hh:mm", e.g. "2019-01-01
-            12:32:45-08:00".
+            format is "yyyy-mm-dd hh:mm:ss+|-hh:mm", for example,
+            "2019-01-01 12:32:45-08:00".
 
             This field is a member of `oneof`_ ``_conversion_date_time``.
     """
@@ -255,7 +255,7 @@ class ConversionAdjustmentResult(proto.Message):
             This field is a member of `oneof`_ ``_conversion_action``.
         adjustment_date_time (str):
             The date time at which the adjustment occurred. The format
-            is "yyyy-mm-dd hh:mm:ss+|-hh:mm", e.g. "2019-01-01
+            is "yyyy-mm-dd hh:mm:ss+|-hh:mm", for example, "2019-01-01
             12:32:45-08:00".
 
             This field is a member of `oneof`_ ``_adjustment_date_time``.

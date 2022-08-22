@@ -50,20 +50,21 @@ class DetailPlacementView(proto.Message):
 
             This field is a member of `oneof`_ ``_display_name``.
         group_placement_target_url (str):
-            Output only. URL of the group placement, e.g.
-            domain, link to the mobile application in app
-            store, or a YouTube channel URL.
+            Output only. URL of the group placement, for
+            example, domain, link to the mobile application
+            in app store, or a YouTube channel URL.
 
             This field is a member of `oneof`_ ``_group_placement_target_url``.
         target_url (str):
-            Output only. URL of the placement, e.g.
-            website, link to the mobile application in app
-            store, or a YouTube video URL.
+            Output only. URL of the placement, for
+            example, website, link to the mobile application
+            in app store, or a YouTube video URL.
 
             This field is a member of `oneof`_ ``_target_url``.
         placement_type (google.ads.googleads.v11.enums.types.PlacementTypeEnum.PlacementType):
-            Output only. Type of the placement, e.g.
-            Website, YouTube Video, and Mobile Application.
+            Output only. Type of the placement, for
+            example, Website, YouTube Video, and Mobile
+            Application.
     """
 
     resource_name = proto.Field(proto.STRING, number=1,)

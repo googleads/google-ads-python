@@ -49,7 +49,7 @@ def main(client, customer_id):
         campaign_budget_id = campaign_budget_response.results[0].resource_name
         print(f'Budget "{campaign_budget_id}" was created.')
     except GoogleAdsException as ex:
-        _handle_googleads_exception(ex)
+        handle_googleads_exception(ex)
         # [END use_portfolio_bidding_strategy]
 
     # [START use_portfolio_bidding_strategy_1]
@@ -70,7 +70,7 @@ def main(client, customer_id):
         bidding_strategy_id = bidding_strategy_response.results[0].resource_name
         print(f'Created portfolio bidding strategy "{bidding_strategy_id}".')
     except GoogleAdsException as ex:
-        _handle_googleads_exception(ex)
+        handle_googleads_exception(ex)
         # [END use_portfolio_bidding_strategy_1]
 
     # [START use_portfolio_bidding_strategy_2]
@@ -106,10 +106,10 @@ def main(client, customer_id):
         )
         print(f"Created campaign {campaign_response.results[0].resource_name}.")
     except GoogleAdsException as ex:
-        _handle_googleads_exception(ex)
+        handle_googleads_exception(ex)
 
 
-def _handle_googleads_exception(exception):
+def handle_googleads_exception(exception):
     print(
         f'Request with ID "{exception.request_id}" failed with status '
         f'"{exception.error.code().name}" and includes the following errors:'

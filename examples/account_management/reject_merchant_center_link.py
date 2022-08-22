@@ -79,7 +79,7 @@ def main(client, customer_id, merchant_center_account_id):
         if merchant_center_link.id == merchant_center_account_id:
             # A Merchant Center link can be pending or enabled; in both
             # cases, we reject it by removing the link.
-            _remove_merchant_center_link(
+            remove_merchant_center_link(
                 client,
                 merchant_center_link_service,
                 customer_id,
@@ -99,7 +99,7 @@ def main(client, customer_id, merchant_center_account_id):
 
 
 # [START reject_merchant_center_link]
-def _remove_merchant_center_link(
+def remove_merchant_center_link(
     client, merchant_center_link_service, customer_id, merchant_center_link
 ):
     """Removes a Merchant Center link from a Google Ads client customer account.

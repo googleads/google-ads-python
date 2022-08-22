@@ -52,21 +52,21 @@ def main(client, customer_id, campaign_id, ad_group_id, bid_modifier_value):
         bid_modifier_value: a float that specifies a modifier on the bid amount
             for newly created ad group criterion.
     """
-    user_list_resource_name = _create_user_list(client, customer_id)
-    ad_group_criterion_resource_name = _target_ads_in_ad_group_to_user_list(
+    user_list_resource_name = create_user_list(client, customer_id)
+    ad_group_criterion_resource_name = target_ads_in_ad_group_to_user_list(
         client, customer_id, ad_group_id, user_list_resource_name
     )
-    _modify_ad_group_bids(
+    modify_ad_group_bids(
         client,
         customer_id,
         ad_group_criterion_resource_name,
         bid_modifier_value,
     )
-    _remove_existing_criteria_from_ad_group(client, customer_id, campaign_id)
-    campaign_criterion_resource_name = _target_ads_in_campaign_to_user_list(
+    remove_existing_criteria_from_ad_group(client, customer_id, campaign_id)
+    campaign_criterion_resource_name = target_ads_in_campaign_to_user_list(
         client, customer_id, campaign_id, user_list_resource_name
     )
-    _modify_campaign_bids(
+    modify_campaign_bids(
         client,
         customer_id,
         campaign_criterion_resource_name,
@@ -75,7 +75,7 @@ def main(client, customer_id, campaign_id, ad_group_id, bid_modifier_value):
 
 
 # [START setup_remarketing]
-def _create_user_list(client, customer_id):
+def create_user_list(client, customer_id):
     """Creates a user list targeting users that have visited a given URL.
 
     Args:
@@ -126,7 +126,7 @@ def _create_user_list(client, customer_id):
 
 
 # [START setup_remarketing_1]
-def _target_ads_in_ad_group_to_user_list(
+def target_ads_in_ad_group_to_user_list(
     client, customer_id, ad_group_id, user_list_resource_name
 ):
     """Creates an ad group criterion that targets a user list with an ad group.
@@ -165,7 +165,7 @@ def _target_ads_in_ad_group_to_user_list(
     # [END setup_remarketing_1]
 
 
-def _modify_ad_group_bids(
+def modify_ad_group_bids(
     client, customer_id, ad_group_criterion_resource_name, bid_modifier_value
 ):
     """Updates the bid modifier on an ad group criterion.
@@ -203,7 +203,7 @@ def _modify_ad_group_bids(
 
 
 # [START setup_remarketing_3]
-def _remove_existing_criteria_from_ad_group(client, customer_id, campaign_id):
+def remove_existing_criteria_from_ad_group(client, customer_id, campaign_id):
     """Removes all ad group criteria targeting a user list under a campaign.
 
     This is a necessary step before targeting a user list at the campaign level.
@@ -215,7 +215,7 @@ def _remove_existing_criteria_from_ad_group(client, customer_id, campaign_id):
             criteria that targets user lists removed.
     """
     # Retrieves all of the ad group criteria under a campaign.
-    all_ad_group_criteria = _get_user_list_ad_group_criteria(
+    all_ad_group_criteria = get_user_list_ad_group_criteria(
         client, customer_id, campaign_id
     )
 
@@ -238,7 +238,7 @@ def _remove_existing_criteria_from_ad_group(client, customer_id, campaign_id):
 
 
 # [START setup_remarketing_2]
-def _get_user_list_ad_group_criteria(client, customer_id, campaign_id):
+def get_user_list_ad_group_criteria(client, customer_id, campaign_id):
     """Finds all of user list ad group criteria under a campaign.
 
     Args:
@@ -281,7 +281,7 @@ def _get_user_list_ad_group_criteria(client, customer_id, campaign_id):
 
 
 # [START setup_remarketing_4]
-def _target_ads_in_campaign_to_user_list(
+def target_ads_in_campaign_to_user_list(
     client, customer_id, campaign_id, user_list_resource_name
 ):
     """Creates a campaign criterion that targets a user list with a campaign.
@@ -318,7 +318,7 @@ def _target_ads_in_campaign_to_user_list(
     # [END setup_remarketing_4]
 
 
-def _modify_campaign_bids(
+def modify_campaign_bids(
     client, customer_id, campaign_criterion_resource_name, bid_modifier_value
 ):
     """Updates the bid modifier on a campaign criterion.

@@ -121,14 +121,14 @@ def account_hierarchy_module(google_ads_client, customer_id):
                 "\nThe hierarchy of customer ID "
                 f"{root_customer_client.id} is printed below:"
             )
-            _print_account_hierarchy(
+            print_account_hierarchy(
                 root_customer_client, customer_ids_to_child_accounts, 0
             )
         else:
             print(f"No hierarchy info was found for Customer ID {customer_id}.")
 
 
-def _print_account_hierarchy(
+def print_account_hierarchy(
     customer_client, customer_ids_to_child_accounts, depth
 ):
     """Prints the specified account's hierarchy using recursion.
@@ -152,7 +152,7 @@ def _print_account_hierarchy(
     # Recursively call this function for all child accounts of customer_client.
     if customer_id in customer_ids_to_child_accounts:
         for child_account in customer_ids_to_child_accounts[customer_id]:
-            _print_account_hierarchy(
+            print_account_hierarchy(
                 child_account, customer_ids_to_child_accounts, depth + 1
             )
 

@@ -71,7 +71,7 @@ def main(
     # entities necessary to create a Smart campaign. It will be reused a number
     # of times to retrieve suggestions for keyword themes, budget amount,
     # ad creatives, and campaign criteria.
-    suggestion_info = _get_smart_campaign_suggestion_info(
+    suggestion_info = get_smart_campaign_suggestion_info(
         client, business_profile_location, business_name
     )
 
@@ -79,7 +79,7 @@ def main(
     # generate a list of keyword themes using the SuggestKeywordThemes method
     # on the SmartCampaignSuggestService. It is strongly recommended that you
     # use this strategy for generating keyword themes.
-    keyword_theme_constants = _get_keyword_theme_suggestions(
+    keyword_theme_constants = get_keyword_theme_suggestions(
         client, customer_id, suggestion_info
     )
 
@@ -87,12 +87,12 @@ def main(
     # from the KeywordThemeConstantService and append them to the existing list.
     if keyword_text:
         keyword_theme_constants.extend(
-            _get_keyword_text_auto_completions(client, keyword_text)
+            get_keyword_text_auto_completions(client, keyword_text)
         )
 
     # Map the KeywordThemeConstants retrieved by the previous two steps to
     # KeywordThemeInfo instances.
-    keyword_theme_infos = _map_keyword_theme_constants_to_infos(
+    keyword_theme_infos = map_keyword_theme_constants_to_infos(
         client, keyword_theme_constants
     )
 
@@ -100,7 +100,7 @@ def main(
     # from it and add it to the existing list.
     if freeform_keyword_text:
         keyword_theme_infos.append(
-            _get_freeform_keyword_theme_info(client, freeform_keyword_text)
+            get_freeform_keyword_theme_info(client, freeform_keyword_text)
         )
 
     # Now add the generated keyword themes to the suggestion info instance.
@@ -108,12 +108,12 @@ def main(
     # [END add_smart_campaign_12]
 
     # Retrieve a budget amount suggestion.
-    suggested_budget_amount = _get_budget_suggestion(
+    suggested_budget_amount = get_budget_suggestion(
         client, customer_id, suggestion_info
     )
 
     # Retrieve Smart campaign ad creative suggestions.
-    ad_suggestions = _get_ad_suggestions(client, customer_id, suggestion_info)
+    ad_suggestions = get_ad_suggestions(client, customer_id, suggestion_info)
 
     # [START add_smart_campaign_7]
     # The below methods create and return MutateOperations that we later
@@ -123,20 +123,20 @@ def main(
     # create them in a single Mutate request so they all complete successfully
     # or fail entirely, leaving no orphaned entities. See:
     # https://developers.google.com/google-ads/api/docs/mutating/overview
-    campaign_budget_operation = _create_campaign_budget_operation(
+    campaign_budget_operation = create_campaign_budget_operation(
         client, customer_id, suggested_budget_amount
     )
-    smart_campaign_operation = _create_smart_campaign_operation(
+    smart_campaign_operation = create_smart_campaign_operation(
         client, customer_id
     )
-    smart_campaign_setting_operation = _create_smart_campaign_setting_operation(
+    smart_campaign_setting_operation = create_smart_campaign_setting_operation(
         client, customer_id, business_profile_location, business_name
     )
-    campaign_criterion_operations = _create_campaign_criterion_operations(
+    campaign_criterion_operations = create_campaign_criterion_operations(
         client, customer_id, keyword_theme_infos, suggestion_info
     )
-    ad_group_operation = _create_ad_group_operation(client, customer_id)
-    ad_group_ad_operation = _create_ad_group_ad_operation(
+    ad_group_operation = create_ad_group_operation(client, customer_id)
+    ad_group_ad_operation = create_ad_group_ad_operation(
         client, customer_id, ad_suggestions
     )
 
@@ -161,12 +161,12 @@ def main(
         ],
     )
 
-    _print_response_details(response)
+    print_response_details(response)
     # [END add_smart_campaign_7]
 
 
 # [START add_smart_campaign_11]
-def _get_keyword_theme_suggestions(client, customer_id, suggestion_info):
+def get_keyword_theme_suggestions(client, customer_id, suggestion_info):
     """Retrieves KeywordThemeConstants using the given suggestion info.
 
     Here we use the SuggestKeywordThemes method, which uses all of the business
@@ -204,7 +204,7 @@ def _get_keyword_theme_suggestions(client, customer_id, suggestion_info):
 
 
 # [START add_smart_campaign]
-def _get_keyword_text_auto_completions(client, keyword_text):
+def get_keyword_text_auto_completions(client, keyword_text):
     """Retrieves KeywordThemeConstants for the given keyword text.
 
     These KeywordThemeConstants are derived from autocomplete data for the
@@ -238,7 +238,7 @@ def _get_keyword_text_auto_completions(client, keyword_text):
 
 
 # [START add_smart_campaign_13]
-def _get_freeform_keyword_theme_info(client, freeform_keyword_text):
+def get_freeform_keyword_theme_info(client, freeform_keyword_text):
     """Creates a KeywordThemeInfo using the given free-form keyword text.
 
     Args:
@@ -255,7 +255,7 @@ def _get_freeform_keyword_theme_info(client, freeform_keyword_text):
     # [END add_smart_campaign_13]
 
 
-def _map_keyword_theme_constants_to_infos(client, keyword_theme_constants):
+def map_keyword_theme_constants_to_infos(client, keyword_theme_constants):
     """Maps a list of KeywordThemeConstants to KeywordThemeInfos.
 
     Args:
@@ -275,7 +275,7 @@ def _map_keyword_theme_constants_to_infos(client, keyword_theme_constants):
 
 
 # [START add_smart_campaign_9]
-def _get_smart_campaign_suggestion_info(
+def get_smart_campaign_suggestion_info(
     client, business_profile_location, business_name
 ):
     """Builds a SmartCampaignSuggestionInfo object with business details.
@@ -358,7 +358,7 @@ def _get_smart_campaign_suggestion_info(
 
 
 # [START add_smart_campaign_1]
-def _get_budget_suggestion(client, customer_id, suggestion_info):
+def get_budget_suggestion(client, customer_id, suggestion_info):
     """Retrieves a suggested budget amount for a new budget.
 
     Using the SmartCampaignSuggestService to determine a daily budget for new
@@ -407,7 +407,7 @@ def _get_budget_suggestion(client, customer_id, suggestion_info):
 
 
 # [START add_smart_campaign_10]
-def _get_ad_suggestions(client, customer_id, suggestion_info):
+def get_ad_suggestions(client, customer_id, suggestion_info):
     """Retrieves creative suggestions for a Smart campaign ad.
 
     Using the SmartCampaignSuggestService to suggest creatives for new and
@@ -454,7 +454,7 @@ def _get_ad_suggestions(client, customer_id, suggestion_info):
 
 
 # [START add_smart_campaign_2]
-def _create_campaign_budget_operation(
+def create_campaign_budget_operation(
     client, customer_id, suggested_budget_amount
 ):
     """Creates a MutateOperation that creates a new CampaignBudget.
@@ -493,7 +493,7 @@ def _create_campaign_budget_operation(
 
 
 # [START add_smart_campaign_3]
-def _create_smart_campaign_operation(client, customer_id):
+def create_smart_campaign_operation(client, customer_id):
     """Creates a MutateOperation that creates a new Smart campaign.
 
     A temporary ID will be assigned to this campaign so that it can
@@ -535,7 +535,7 @@ def _create_smart_campaign_operation(client, customer_id):
 
 
 # [START add_smart_campaign_4]
-def _create_smart_campaign_setting_operation(
+def create_smart_campaign_setting_operation(
     client, customer_id, business_profile_location, business_name
 ):
     """Creates a MutateOperation to create a new SmartCampaignSetting.
@@ -594,7 +594,7 @@ def _create_smart_campaign_setting_operation(
 
 
 # [START add_smart_campaign_8]
-def _create_campaign_criterion_operations(
+def create_campaign_criterion_operations(
     client, customer_id, keyword_theme_infos, suggestion_info
 ):
     """Creates a list of MutateOperations that create new campaign criteria.
@@ -646,7 +646,7 @@ def _create_campaign_criterion_operations(
 
 
 # [START add_smart_campaign_5]
-def _create_ad_group_operation(client, customer_id):
+def create_ad_group_operation(client, customer_id):
     """Creates a MutateOperation that creates a new ad group.
 
     A temporary ID will be used in the campaign resource name for this
@@ -682,7 +682,7 @@ def _create_ad_group_operation(client, customer_id):
 
 
 # [START add_smart_campaign_6]
-def _create_ad_group_ad_operation(client, customer_id, ad_suggestions):
+def create_ad_group_ad_operation(client, customer_id, ad_suggestions):
     """Creates a MutateOperation that creates a new ad group ad.
 
     A temporary ID will be used in the ad group resource name for this
@@ -743,7 +743,7 @@ def _create_ad_group_ad_operation(client, customer_id, ad_suggestions):
     # [END add_smart_campaign_6]
 
 
-def _print_response_details(response):
+def print_response_details(response):
     """Prints the details of a MutateGoogleAdsResponse.
 
     Parses the "response" oneof field name and uses it to extract the new

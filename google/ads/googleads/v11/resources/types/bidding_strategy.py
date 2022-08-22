@@ -127,7 +127,7 @@ class BiddingStrategy(proto.Message):
             This field is a member of `oneof`_ ``scheme``.
         target_impression_share (google.ads.googleads.v11.common.types.TargetImpressionShare):
             A bidding strategy that automatically
-            optimizes towards a desired percentage of
+            optimizes towards a chosen percentage of
             impressions.
 
             This field is a member of `oneof`_ ``scheme``.

@@ -98,8 +98,8 @@ class BillingSetup(proto.Message):
                 Output only. A 16 digit id used to identify
                 the payments account associated with the billing
                 setup.
-                This must be passed as a string with dashes,
-                e.g. "1234-5678-9012-3456".
+                This must be passed as a string with dashes, for
+                example, "1234-5678-9012-3456".
 
                 This field is a member of `oneof`_ ``_payments_account_id``.
             payments_account_name (str):
@@ -118,7 +118,7 @@ class BillingSetup(proto.Message):
                 payments profile associated with the billing
                 setup.
                 This must be passed in as a string with dashes,
-                e.g. "1234-5678-9012".
+                for example, "1234-5678-9012".
 
                 This field is a member of `oneof`_ ``_payments_profile_id``.
             payments_profile_name (str):
@@ -128,8 +128,8 @@ class BillingSetup(proto.Message):
                 This field is a member of `oneof`_ ``_payments_profile_name``.
             secondary_payments_profile_id (str):
                 Output only. A secondary payments profile id
-                present in uncommon situations, e.g. when a
-                sequential liability agreement has been
+                present in uncommon situations, for example,
+                when a sequential liability agreement has been
                 arranged.
 
                 This field is a member of `oneof`_ ``_secondary_payments_profile_id``.

@@ -25,7 +25,7 @@ __protobuf__ = proto.module(
 
 class ConversionEnvironmentEnum(proto.Message):
     r"""Container for enum representing the conversion environment an
-    uploaded conversion was recorded on. e.g. App or Web.
+    uploaded conversion was recorded on, for example, App or Web.
 
     """
 

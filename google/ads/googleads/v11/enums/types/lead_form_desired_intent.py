@@ -24,11 +24,11 @@ __protobuf__ = proto.module(
 
 
 class LeadFormDesiredIntentEnum(proto.Message):
-    r"""Describes the desired level of intent of generated leads.
+    r"""Describes the chosen level of intent of generated leads.
     """
 
     class LeadFormDesiredIntent(proto.Enum):
-        r"""Enum describing the desired level of intent of generated
+        r"""Enum describing the chosen level of intent of generated
         leads.
         """
         UNSPECIFIED = 0

@@ -133,12 +133,12 @@ class Segments(proto.Message):
             This field is a member of `oneof`_ ``_conversion_action_name``.
         conversion_adjustment (bool):
             This segments your conversion columns by the
-            original conversion and conversion value vs. the
-            delta if conversions were adjusted. False row
-            has the data as originally stated; While true
-            row has the delta between data now and the data
-            as originally stated. Summing the two together
-            results post-adjustment data.
+            original conversion and conversion value versus
+            the delta if conversions were adjusted. False
+            row has the data as originally stated; While
+            true row has the delta between data now and the
+            data as originally stated. Summing the two
+            together results post-adjustment data.
 
             This field is a member of `oneof`_ ``_conversion_adjustment``.
         conversion_attribution_event_type (google.ads.googleads.v11.enums.types.ConversionAttributionEventTypeEnum.ConversionAttributionEventType):
@@ -153,11 +153,11 @@ class Segments(proto.Message):
             conversion.
         date (str):
             Date to which metrics apply.
-            yyyy-MM-dd format, e.g., 2018-04-17.
+            yyyy-MM-dd format, for example, 2018-04-17.
 
             This field is a member of `oneof`_ ``_date``.
         day_of_week (google.ads.googleads.v11.enums.types.DayOfWeekEnum.DayOfWeek):
-            Day of the week, e.g., MONDAY.
+            Day of the week, for example, MONDAY.
         device (google.ads.googleads.v11.enums.types.DeviceEnum.Device):
             Device to which metrics apply.
         external_conversion_source (google.ads.googleads.v11.enums.types.ExternalConversionSourceEnum.ExternalConversionSource):
@@ -286,7 +286,7 @@ class Segments(proto.Message):
 
             This field is a member of `oneof`_ ``_month``.
         month_of_year (google.ads.googleads.v11.enums.types.MonthOfYearEnum.MonthOfYear):
-            Month of the year, e.g., January.
+            Month of the year, for example, January.
         partner_hotel_id (str):
             Partner hotel ID.
 
@@ -397,8 +397,9 @@ class Segments(proto.Message):
         quarter (str):
             Quarter as represented by the date of the
             first day of a quarter. Uses the calendar year
-            for quarters, e.g., the second quarter of 2018
-            starts on 2018-04-01. Formatted as yyyy-MM-dd.
+            for quarters, for example, the second quarter of
+            2018 starts on 2018-04-01. Formatted as
+            yyyy-MM-dd.
 
             This field is a member of `oneof`_ ``_quarter``.
         recommendation_type (google.ads.googleads.v11.enums.types.RecommendationTypeEnum.RecommendationType):
@@ -435,7 +436,7 @@ class Segments(proto.Message):
         sk_ad_network_conversion_value (int):
             iOS Store Kit Ad Network conversion value.
             Null value means this segment is not applicable,
-            e.g. non-iOS campaign.
+            for example, non-iOS campaign.
 
             This field is a member of `oneof`_ ``_sk_ad_network_conversion_value``.
         sk_ad_network_user_type (google.ads.googleads.v11.enums.types.SkAdNetworkUserTypeEnum.SkAdNetworkUserType):
@@ -445,9 +446,9 @@ class Segments(proto.Message):
         sk_ad_network_source_app (google.ads.googleads.v11.common.types.SkAdNetworkSourceApp):
             App where the ad that drove the iOS Store Kit
             Ad Network install was shown. Null value means
-            this segment is not applicable, e.g. non-iOS
-            campaign, or was not present in any postbacks
-            sent by Apple.
+            this segment is not applicable, for example,
+            non-iOS campaign, or was not present in any
+            postbacks sent by Apple.
 
             This field is a member of `oneof`_ ``_sk_ad_network_source_app``.
         sk_ad_network_attribution_credit (google.ads.googleads.v11.enums.types.SkAdNetworkAttributionCreditEnum.SkAdNetworkAttributionCredit):
@@ -456,11 +457,11 @@ class Segments(proto.Message):
             Only used with CustomerAsset, CampaignAsset and AdGroupAsset
             metrics. Indicates whether the interaction metrics occurred
             on the asset itself or a different asset or ad unit.
-            Interactions (e.g. clicks) are counted across all the parts
-            of the served ad (e.g. Ad itself and other components like
-            Sitelinks) when they are served together. When
-            interaction_on_this_asset is true, it means the interactions
-            are on this specific asset and when
+            Interactions (for example, clicks) are counted across all
+            the parts of the served ad (for example, Ad itself and other
+            components like Sitelinks) when they are served together.
+            When interaction_on_this_asset is true, it means the
+            interactions are on this specific asset and when
             interaction_on_this_asset is false, it means the
             interactions is not on this specific asset but on other
             parts of the served ad this asset is served with.
@@ -479,40 +480,24 @@ class Segments(proto.Message):
         enum=gage_ad_network_type.AdNetworkTypeEnum.AdNetworkType,
     )
     auction_insight_domain = proto.Field(
-        proto.STRING,
-        number=145,
-        optional=True,
+        proto.STRING, number=145, optional=True,
     )
     budget_campaign_association_status = proto.Field(
-        proto.MESSAGE,
-        number=134,
-        message="BudgetCampaignAssociationStatus",
+        proto.MESSAGE, number=134, message="BudgetCampaignAssociationStatus",
     )
     click_type = proto.Field(
-        proto.ENUM,
-        number=26,
-        enum=gage_click_type.ClickTypeEnum.ClickType,
+        proto.ENUM, number=26, enum=gage_click_type.ClickTypeEnum.ClickType,
     )
-    conversion_action = proto.Field(
-        proto.STRING,
-        number=113,
-        optional=True,
-    )
+    conversion_action = proto.Field(proto.STRING, number=113, optional=True,)
     conversion_action_category = proto.Field(
         proto.ENUM,
         number=53,
         enum=gage_conversion_action_category.ConversionActionCategoryEnum.ConversionActionCategory,
     )
     conversion_action_name = proto.Field(
-        proto.STRING,
-        number=114,
-        optional=True,
+        proto.STRING, number=114, optional=True,
     )
-    conversion_adjustment = proto.Field(
-        proto.BOOL,
-        number=115,
-        optional=True,
-    )
+    conversion_adjustment = proto.Field(proto.BOOL, number=115, optional=True,)
     conversion_attribution_event_type = proto.Field(
         proto.ENUM,
         number=2,
@@ -528,136 +513,52 @@ class Segments(proto.Message):
         number=51,
         enum=gage_conversion_or_adjustment_lag_bucket.ConversionOrAdjustmentLagBucketEnum.ConversionOrAdjustmentLagBucket,
     )
-    date = proto.Field(
-        proto.STRING,
-        number=79,
-        optional=True,
-    )
+    date = proto.Field(proto.STRING, number=79, optional=True,)
     day_of_week = proto.Field(
-        proto.ENUM,
-        number=5,
-        enum=gage_day_of_week.DayOfWeekEnum.DayOfWeek,
+        proto.ENUM, number=5, enum=gage_day_of_week.DayOfWeekEnum.DayOfWeek,
     )
     device = proto.Field(
-        proto.ENUM,
-        number=1,
-        enum=gage_device.DeviceEnum.Device,
+        proto.ENUM, number=1, enum=gage_device.DeviceEnum.Device,
     )
     external_conversion_source = proto.Field(
         proto.ENUM,
         number=55,
         enum=gage_external_conversion_source.ExternalConversionSourceEnum.ExternalConversionSource,
     )
-    geo_target_airport = proto.Field(
-        proto.STRING,
-        number=116,
-        optional=True,
-    )
-    geo_target_canton = proto.Field(
-        proto.STRING,
-        number=117,
-        optional=True,
-    )
-    geo_target_city = proto.Field(
-        proto.STRING,
-        number=118,
-        optional=True,
-    )
-    geo_target_country = proto.Field(
-        proto.STRING,
-        number=119,
-        optional=True,
-    )
-    geo_target_county = proto.Field(
-        proto.STRING,
-        number=120,
-        optional=True,
-    )
-    geo_target_district = proto.Field(
-        proto.STRING,
-        number=121,
-        optional=True,
-    )
-    geo_target_metro = proto.Field(
-        proto.STRING,
-        number=122,
-        optional=True,
-    )
+    geo_target_airport = proto.Field(proto.STRING, number=116, optional=True,)
+    geo_target_canton = proto.Field(proto.STRING, number=117, optional=True,)
+    geo_target_city = proto.Field(proto.STRING, number=118, optional=True,)
+    geo_target_country = proto.Field(proto.STRING, number=119, optional=True,)
+    geo_target_county = proto.Field(proto.STRING, number=120, optional=True,)
+    geo_target_district = proto.Field(proto.STRING, number=121, optional=True,)
+    geo_target_metro = proto.Field(proto.STRING, number=122, optional=True,)
     geo_target_most_specific_location = proto.Field(
-        proto.STRING,
-        number=123,
-        optional=True,
+        proto.STRING, number=123, optional=True,
     )
     geo_target_postal_code = proto.Field(
-        proto.STRING,
-        number=124,
-        optional=True,
+        proto.STRING, number=124, optional=True,
     )
-    geo_target_province = proto.Field(
-        proto.STRING,
-        number=125,
-        optional=True,
-    )
-    geo_target_region = proto.Field(
-        proto.STRING,
-        number=126,
-        optional=True,
-    )
-    geo_target_state = proto.Field(
-        proto.STRING,
-        number=127,
-        optional=True,
-    )
+    geo_target_province = proto.Field(proto.STRING, number=125, optional=True,)
+    geo_target_region = proto.Field(proto.STRING, number=126, optional=True,)
+    geo_target_state = proto.Field(proto.STRING, number=127, optional=True,)
     hotel_booking_window_days = proto.Field(
-        proto.INT64,
-        number=135,
-        optional=True,
+        proto.INT64, number=135, optional=True,
     )
-    hotel_center_id = proto.Field(
-        proto.INT64,
-        number=80,
-        optional=True,
-    )
-    hotel_check_in_date = proto.Field(
-        proto.STRING,
-        number=81,
-        optional=True,
-    )
+    hotel_center_id = proto.Field(proto.INT64, number=80, optional=True,)
+    hotel_check_in_date = proto.Field(proto.STRING, number=81, optional=True,)
     hotel_check_in_day_of_week = proto.Field(
-        proto.ENUM,
-        number=9,
-        enum=gage_day_of_week.DayOfWeekEnum.DayOfWeek,
+        proto.ENUM, number=9, enum=gage_day_of_week.DayOfWeekEnum.DayOfWeek,
     )
-    hotel_city = proto.Field(
-        proto.STRING,
-        number=82,
-        optional=True,
-    )
-    hotel_class = proto.Field(
-        proto.INT32,
-        number=83,
-        optional=True,
-    )
-    hotel_country = proto.Field(
-        proto.STRING,
-        number=84,
-        optional=True,
-    )
+    hotel_city = proto.Field(proto.STRING, number=82, optional=True,)
+    hotel_class = proto.Field(proto.INT32, number=83, optional=True,)
+    hotel_country = proto.Field(proto.STRING, number=84, optional=True,)
     hotel_date_selection_type = proto.Field(
         proto.ENUM,
         number=13,
         enum=gage_hotel_date_selection_type.HotelDateSelectionTypeEnum.HotelDateSelectionType,
     )
-    hotel_length_of_stay = proto.Field(
-        proto.INT32,
-        number=85,
-        optional=True,
-    )
-    hotel_rate_rule_id = proto.Field(
-        proto.STRING,
-        number=86,
-        optional=True,
-    )
+    hotel_length_of_stay = proto.Field(proto.INT32, number=85, optional=True,)
+    hotel_rate_rule_id = proto.Field(proto.STRING, number=86, optional=True,)
     hotel_rate_type = proto.Field(
         proto.ENUM,
         number=74,
@@ -668,81 +569,41 @@ class Segments(proto.Message):
         number=78,
         enum=gage_hotel_price_bucket.HotelPriceBucketEnum.HotelPriceBucket,
     )
-    hotel_state = proto.Field(
-        proto.STRING,
-        number=87,
-        optional=True,
-    )
-    hour = proto.Field(
-        proto.INT32,
-        number=88,
-        optional=True,
-    )
+    hotel_state = proto.Field(proto.STRING, number=87, optional=True,)
+    hour = proto.Field(proto.INT32, number=88, optional=True,)
     interaction_on_this_extension = proto.Field(
-        proto.BOOL,
-        number=89,
-        optional=True,
+        proto.BOOL, number=89, optional=True,
     )
-    keyword = proto.Field(
-        proto.MESSAGE,
-        number=61,
-        message="Keyword",
-    )
-    month = proto.Field(
-        proto.STRING,
-        number=90,
-        optional=True,
-    )
+    keyword = proto.Field(proto.MESSAGE, number=61, message="Keyword",)
+    month = proto.Field(proto.STRING, number=90, optional=True,)
     month_of_year = proto.Field(
         proto.ENUM,
         number=18,
         enum=gage_month_of_year.MonthOfYearEnum.MonthOfYear,
     )
-    partner_hotel_id = proto.Field(
-        proto.STRING,
-        number=91,
-        optional=True,
-    )
+    partner_hotel_id = proto.Field(proto.STRING, number=91, optional=True,)
     placeholder_type = proto.Field(
         proto.ENUM,
         number=20,
         enum=gage_placeholder_type.PlaceholderTypeEnum.PlaceholderType,
     )
-    product_aggregator_id = proto.Field(
-        proto.INT64,
-        number=132,
-        optional=True,
-    )
+    product_aggregator_id = proto.Field(proto.INT64, number=132, optional=True,)
     product_bidding_category_level1 = proto.Field(
-        proto.STRING,
-        number=92,
-        optional=True,
+        proto.STRING, number=92, optional=True,
     )
     product_bidding_category_level2 = proto.Field(
-        proto.STRING,
-        number=93,
-        optional=True,
+        proto.STRING, number=93, optional=True,
     )
     product_bidding_category_level3 = proto.Field(
-        proto.STRING,
-        number=94,
-        optional=True,
+        proto.STRING, number=94, optional=True,
     )
     product_bidding_category_level4 = proto.Field(
-        proto.STRING,
-        number=95,
-        optional=True,
+        proto.STRING, number=95, optional=True,
     )
     product_bidding_category_level5 = proto.Field(
-        proto.STRING,
-        number=96,
-        optional=True,
+        proto.STRING, number=96, optional=True,
     )
-    product_brand = proto.Field(
-        proto.STRING,
-        number=97,
-        optional=True,
-    )
+    product_brand = proto.Field(proto.STRING, number=97, optional=True,)
     product_channel = proto.Field(
         proto.ENUM,
         number=30,
@@ -758,91 +619,33 @@ class Segments(proto.Message):
         number=32,
         enum=gage_product_condition.ProductConditionEnum.ProductCondition,
     )
-    product_country = proto.Field(
-        proto.STRING,
-        number=98,
-        optional=True,
-    )
+    product_country = proto.Field(proto.STRING, number=98, optional=True,)
     product_custom_attribute0 = proto.Field(
-        proto.STRING,
-        number=99,
-        optional=True,
+        proto.STRING, number=99, optional=True,
     )
     product_custom_attribute1 = proto.Field(
-        proto.STRING,
-        number=100,
-        optional=True,
+        proto.STRING, number=100, optional=True,
     )
     product_custom_attribute2 = proto.Field(
-        proto.STRING,
-        number=101,
-        optional=True,
+        proto.STRING, number=101, optional=True,
     )
     product_custom_attribute3 = proto.Field(
-        proto.STRING,
-        number=102,
-        optional=True,
+        proto.STRING, number=102, optional=True,
     )
     product_custom_attribute4 = proto.Field(
-        proto.STRING,
-        number=103,
-        optional=True,
+        proto.STRING, number=103, optional=True,
     )
-    product_item_id = proto.Field(
-        proto.STRING,
-        number=104,
-        optional=True,
-    )
-    product_language = proto.Field(
-        proto.STRING,
-        number=105,
-        optional=True,
-    )
-    product_merchant_id = proto.Field(
-        proto.INT64,
-        number=133,
-        optional=True,
-    )
-    product_store_id = proto.Field(
-        proto.STRING,
-        number=106,
-        optional=True,
-    )
-    product_title = proto.Field(
-        proto.STRING,
-        number=107,
-        optional=True,
-    )
-    product_type_l1 = proto.Field(
-        proto.STRING,
-        number=108,
-        optional=True,
-    )
-    product_type_l2 = proto.Field(
-        proto.STRING,
-        number=109,
-        optional=True,
-    )
-    product_type_l3 = proto.Field(
-        proto.STRING,
-        number=110,
-        optional=True,
-    )
-    product_type_l4 = proto.Field(
-        proto.STRING,
-        number=111,
-        optional=True,
-    )
-    product_type_l5 = proto.Field(
-        proto.STRING,
-        number=112,
-        optional=True,
-    )
-    quarter = proto.Field(
-        proto.STRING,
-        number=128,
-        optional=True,
-    )
+    product_item_id = proto.Field(proto.STRING, number=104, optional=True,)
+    product_language = proto.Field(proto.STRING, number=105, optional=True,)
+    product_merchant_id = proto.Field(proto.INT64, number=133, optional=True,)
+    product_store_id = proto.Field(proto.STRING, number=106, optional=True,)
+    product_title = proto.Field(proto.STRING, number=107, optional=True,)
+    product_type_l1 = proto.Field(proto.STRING, number=108, optional=True,)
+    product_type_l2 = proto.Field(proto.STRING, number=109, optional=True,)
+    product_type_l3 = proto.Field(proto.STRING, number=110, optional=True,)
+    product_type_l4 = proto.Field(proto.STRING, number=111, optional=True,)
+    product_type_l5 = proto.Field(proto.STRING, number=112, optional=True,)
+    quarter = proto.Field(proto.STRING, number=128, optional=True,)
     recommendation_type = proto.Field(
         proto.ENUM,
         number=140,
@@ -858,35 +661,17 @@ class Segments(proto.Message):
         number=22,
         enum=gage_search_term_match_type.SearchTermMatchTypeEnum.SearchTermMatchType,
     )
-    slot = proto.Field(
-        proto.ENUM,
-        number=23,
-        enum=gage_slot.SlotEnum.Slot,
-    )
+    slot = proto.Field(proto.ENUM, number=23, enum=gage_slot.SlotEnum.Slot,)
     conversion_value_rule_primary_dimension = proto.Field(
         proto.ENUM,
         number=138,
         enum=gage_conversion_value_rule_primary_dimension.ConversionValueRulePrimaryDimensionEnum.ConversionValueRulePrimaryDimension,
     )
-    webpage = proto.Field(
-        proto.STRING,
-        number=129,
-        optional=True,
-    )
-    week = proto.Field(
-        proto.STRING,
-        number=130,
-        optional=True,
-    )
-    year = proto.Field(
-        proto.INT32,
-        number=131,
-        optional=True,
-    )
+    webpage = proto.Field(proto.STRING, number=129, optional=True,)
+    week = proto.Field(proto.STRING, number=130, optional=True,)
+    year = proto.Field(proto.INT32, number=131, optional=True,)
     sk_ad_network_conversion_value = proto.Field(
-        proto.INT64,
-        number=137,
-        optional=True,
+        proto.INT64, number=137, optional=True,
     )
     sk_ad_network_user_type = proto.Field(
         proto.ENUM,
@@ -929,16 +714,8 @@ class Keyword(proto.Message):
             Keyword info.
     """
 
-    ad_group_criterion = proto.Field(
-        proto.STRING,
-        number=3,
-        optional=True,
-    )
-    info = proto.Field(
-        proto.MESSAGE,
-        number=2,
-        message=criteria.KeywordInfo,
-    )
+    ad_group_criterion = proto.Field(proto.STRING, number=3, optional=True,)
+    info = proto.Field(proto.MESSAGE, number=2, message=criteria.KeywordInfo,)
 
 
 class BudgetCampaignAssociationStatus(proto.Message):
@@ -953,11 +730,7 @@ class BudgetCampaignAssociationStatus(proto.Message):
             Budget campaign association status.
     """
 
-    campaign = proto.Field(
-        proto.STRING,
-        number=1,
-        optional=True,
-    )
+    campaign = proto.Field(proto.STRING, number=1, optional=True,)
     status = proto.Field(
         proto.ENUM,
         number=2,
@@ -978,14 +751,8 @@ class AssetInteractionTarget(proto.Message):
             or a different asset or ad unit.
     """
 
-    asset = proto.Field(
-        proto.STRING,
-        number=1,
-    )
-    interaction_on_this_asset = proto.Field(
-        proto.BOOL,
-        number=2,
-    )
+    asset = proto.Field(proto.STRING, number=1,)
+    interaction_on_this_asset = proto.Field(proto.BOOL, number=2,)
 
 
 class SkAdNetworkSourceApp(proto.Message):
@@ -1000,9 +767,7 @@ class SkAdNetworkSourceApp(proto.Message):
     """
 
     sk_ad_network_source_app_id = proto.Field(
-        proto.STRING,
-        number=1,
-        optional=True,
+        proto.STRING, number=1, optional=True,
     )
 
 

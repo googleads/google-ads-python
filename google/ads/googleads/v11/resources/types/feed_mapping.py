@@ -91,14 +91,14 @@ class FeedMapping(proto.Message):
             This field is read-only.
         placeholder_type (google.ads.googleads.v11.enums.types.PlaceholderTypeEnum.PlaceholderType):
             Immutable. The placeholder type of this
-            mapping (i.e., if the mapping maps feed
+            mapping (for example, if the mapping maps feed
             attributes to placeholder fields).
 
             This field is a member of `oneof`_ ``target``.
         criterion_type (google.ads.googleads.v11.enums.types.FeedMappingCriterionTypeEnum.FeedMappingCriterionType):
             Immutable. The criterion type of this mapping
-            (i.e., if the mapping maps feed attributes to
-            criterion fields).
+            (for example, if the mapping maps feed
+            attributes to criterion fields).
 
             This field is a member of `oneof`_ ``target``.
     """

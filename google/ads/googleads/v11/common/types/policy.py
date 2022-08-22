@@ -52,9 +52,9 @@ class PolicyViolationKey(proto.Message):
         violating_text (str):
             The text that violates the policy if
             specified. Otherwise, refers to the policy in
-            general (e.g., when requesting to be exempt from
-            the whole policy). If not specified for
-            criterion exemptions, the whole policy is
+            general (for example, when requesting to be
+            exempt from the whole policy). If not specified
+            for criterion exemptions, the whole policy is
             implied. Must be specified for ad exemptions.
 
             This field is a member of `oneof`_ ``_violating_text``.
@@ -82,8 +82,8 @@ class PolicyValidationParameter(proto.Message):
         exempt_policy_violation_keys (Sequence[google.ads.googleads.v11.common.types.PolicyViolationKey]):
             The list of policy violation keys that should not cause a
             PolicyViolationError to be reported. Not all policy
-            violations are exemptable, please refer to the is_exemptible
-            field in the returned PolicyViolationError.
+            violations are exemptable, refer to the is_exemptible field
+            in the returned PolicyViolationError.
 
             Resources violating these polices will be saved, but will
             not be eligible to serve. They may begin serving at a later
@@ -98,8 +98,8 @@ class PolicyValidationParameter(proto.Message):
 
 
 class PolicyTopicEntry(proto.Message):
-    r"""Policy finding attached to a resource (e.g. alcohol policy
-    associated with a site that sells alcohol).
+    r"""Policy finding attached to a resource (for example, alcohol
+    policy associated with a site that sells alcohol).
 
     Each PolicyTopicEntry has a topic that indicates the specific
     ads policy the entry is about and a type to indicate the effect
@@ -121,11 +121,12 @@ class PolicyTopicEntry(proto.Message):
             this policy will have on serving.
         evidences (Sequence[google.ads.googleads.v11.common.types.PolicyTopicEvidence]):
             Additional information that explains policy
-            finding (e.g. the brand name for a trademark
-            finding).
+            finding (for example, the brand name for a
+            trademark finding).
         constraints (Sequence[google.ads.googleads.v11.common.types.PolicyTopicConstraint]):
             Indicates how serving of this resource may be
-            affected (e.g. not serving in a country).
+            affected (for example, not serving in a
+            country).
     """
 
     topic = proto.Field(proto.STRING, number=5, optional=True,)

@@ -78,7 +78,7 @@ def main(client, customer_id, manager_customer_id):
         for row in response.result:
             manager_link_id = row.customer_client_link.manager_link_id
     except GoogleAdsException as ex:
-        _handle_googleads_exception(ex)
+        handle_googleads_exception(ex)
 
     customer_manager_link_service = client.get_service(
         "CustomerManagerLinkService"

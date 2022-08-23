@@ -82,7 +82,7 @@ def main(client_secrets_path, scopes):
 
     # Retrieves an authorization code by opening a socket to receive the
     # redirect request and parsing the query parameters set in the URL.
-    code = unquote(_get_authorization_code(passthrough_val))
+    code = unquote(get_authorization_code(passthrough_val))
 
     # Pass the code back into the OAuth module to get a refresh token.
     flow.fetch_token(code=code)

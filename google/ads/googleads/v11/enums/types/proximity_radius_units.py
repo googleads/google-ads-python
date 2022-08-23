@@ -28,7 +28,7 @@ class ProximityRadiusUnitsEnum(proto.Message):
     """
 
     class ProximityRadiusUnits(proto.Enum):
-        r"""The unit of radius distance in proximity (e.g. MILES)"""
+        r"""The unit of radius distance in proximity (for example, MILES)"""
         UNSPECIFIED = 0
         UNKNOWN = 1
         MILES = 2

@@ -39,6 +39,7 @@ __all__ = (
     "AssetSetErrorEnum",
     "AssetSetLinkErrorEnum",
     "AudienceErrorEnum",
+    "AudienceInsightsErrorEnum",
     "AuthenticationErrorEnum",
     "AuthorizationErrorEnum",
     "BatchJobErrorEnum",

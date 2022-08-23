@@ -46,16 +46,16 @@ def main(client, customer_id, ad_group_id):
     # https://developers.google.com/google-ads/api/reference/rpc/latest/DisplayUploadAdInfo
 
     # Creates a new media bundle asset and returns the resource name.
-    ad_asset_resource_name = _create_media_bundle_asset(client, customer_id)
+    ad_asset_resource_name = create_media_bundle_asset(client, customer_id)
 
     # Creates a new display upload ad and associates it with the specified
     # ad group.
-    _create_display_upload_ad_group_ad(
+    create_display_upload_ad_group_ad(
         client, customer_id, ad_group_id, ad_asset_resource_name
     )
 
 
-def _create_media_bundle_asset(client, customer_id):
+def create_media_bundle_asset(client, customer_id):
     """Creates a media bundle from the assets in a zip file.
 
     The zip file contains the HTML5 components.
@@ -96,7 +96,7 @@ def _create_media_bundle_asset(client, customer_id):
     return uploaded_asset_resource_name
 
 
-def _create_display_upload_ad_group_ad(
+def create_display_upload_ad_group_ad(
     client, customer_id, ad_group_id, ad_asset_resource_name
 ):
     """Creates a new HTML5 display upload ad and adds it to the given ad group.

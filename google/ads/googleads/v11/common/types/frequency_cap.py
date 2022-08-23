@@ -55,14 +55,14 @@ class FrequencyCapKey(proto.Message):
     Attributes:
         level (google.ads.googleads.v11.enums.types.FrequencyCapLevelEnum.FrequencyCapLevel):
             The level on which the cap is to be applied
-            (e.g. ad group ad, ad group). The cap is applied
-            to all the entities of this level.
+            (for example, ad group ad, ad group). The cap is
+            applied to all the entities of this level.
         event_type (google.ads.googleads.v11.enums.types.FrequencyCapEventTypeEnum.FrequencyCapEventType):
             The type of event that the cap applies to
-            (e.g. impression).
+            (for example, impression).
         time_unit (google.ads.googleads.v11.enums.types.FrequencyCapTimeUnitEnum.FrequencyCapTimeUnit):
-            Unit of time the cap is defined at (e.g. day,
-            week).
+            Unit of time the cap is defined at (for
+            example, day, week).
         time_length (int):
             Number of time units the cap lasts.
 

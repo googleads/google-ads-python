@@ -123,8 +123,8 @@ class MutateAssetsResponse(proto.Message):
             Errors that pertain to operation failures in the partial
             failure mode. Returned only when partial_failure = true and
             all errors occur inside the operations. If any errors occur
-            outside the operations (e.g. auth errors), we return an RPC
-            level error.
+            outside the operations (for example, auth errors), we return
+            an RPC level error.
         results (Sequence[google.ads.googleads.v11.services.types.MutateAssetResult]):
             All results for the mutate.
     """

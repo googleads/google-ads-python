@@ -30,7 +30,7 @@ class GenderTypeEnum(proto.Message):
     """
 
     class GenderType(proto.Enum):
-        r"""The type of demographic genders (e.g. female)."""
+        r"""The type of demographic genders (for example, female)."""
         UNSPECIFIED = 0
         UNKNOWN = 1
         MALE = 10

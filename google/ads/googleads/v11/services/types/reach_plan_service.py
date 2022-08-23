@@ -53,6 +53,10 @@ __protobuf__ = proto.module(
         "OnTargetAudienceMetrics",
         "EffectiveFrequencyBreakdown",
         "ForecastMetricOptions",
+        "AudienceTargeting",
+        "AdvancedProductTargeting",
+        "YouTubeSelectSettings",
+        "YouTubeSelectLineUp",
     },
 )
 
@@ -191,6 +195,9 @@ class PlannableTargeting(proto.Message):
             products.
         networks (Sequence[google.ads.googleads.v11.enums.types.ReachPlanNetworkEnum.ReachPlanNetwork]):
             Targetable networks for the ad product.
+        youtube_select_lineups (Sequence[google.ads.googleads.v11.services.types.YouTubeSelectLineUp]):
+            Targetable YouTube Select Lineups for the ad
+            product.
     """
 
     age_ranges = proto.RepeatedField(
@@ -208,6 +215,9 @@ class PlannableTargeting(proto.Message):
         proto.ENUM,
         number=4,
         enum=reach_plan_network.ReachPlanNetworkEnum.ReachPlanNetwork,
+    )
+    youtube_select_lineups = proto.RepeatedField(
+        proto.MESSAGE, number=5, message="YouTubeSelectLineUp",
     )
 
 
@@ -336,18 +346,18 @@ class GenerateReachForecastRequest(proto.Message):
         campaign_duration (google.ads.googleads.v11.services.types.CampaignDuration):
             Required. Campaign duration.
         cookie_frequency_cap (int):
-            Desired cookie frequency cap to be applied to each planned
+            Chosen cookie frequency cap to be applied to each planned
             product. This is equivalent to the frequency cap exposed in
             Google Ads when creating a campaign, it represents the
             maximum number of times an ad can be shown to the same user.
             If not specified, no cap is applied.
 
             This field is deprecated in v4 and will eventually be
-            removed. Please use cookie_frequency_cap_setting instead.
+            removed. Use cookie_frequency_cap_setting instead.
 
             This field is a member of `oneof`_ ``_cookie_frequency_cap``.
         cookie_frequency_cap_setting (google.ads.googleads.v11.services.types.FrequencyCap):
-            Desired cookie frequency cap to be applied to each planned
+            Chosen cookie frequency cap to be applied to each planned
             product. This is equivalent to the frequency cap exposed in
             Google Ads when creating a campaign, it represents the
             maximum number of times an ad can be shown to the same user
@@ -357,7 +367,7 @@ class GenerateReachForecastRequest(proto.Message):
             This field replaces the deprecated cookie_frequency_cap
             field.
         min_effective_frequency (int):
-            Desired minimum effective frequency (the number of times a
+            Chosen minimum effective frequency (the number of times a
             person was exposed to the ad) for the reported reach metrics
             [1-10]. This won't affect the targeting, but just the
             reporting. If not specified, a default of 1 is applied.
@@ -386,7 +396,7 @@ class GenerateReachForecastRequest(proto.Message):
             selected in the product mix.
             This is planned targeting: execution details
             might vary based on the advertising product,
-            please consult an implementation specialist.
+            consult an implementation specialist.
             See specific metrics for details on how
             targeting affects them.
         planned_products (Sequence[google.ads.googleads.v11.services.types.PlannedProduct]):
@@ -396,6 +406,12 @@ class GenerateReachForecastRequest(proto.Message):
         forecast_metric_options (google.ads.googleads.v11.services.types.ForecastMetricOptions):
             Controls the forecast metrics returned in the
             response.
+        customer_reach_group (str):
+            The name of the customer being planned for. This is a
+            user-defined value. Required if targeting.audience_targeting
+            is set.
+
+            This field is a member of `oneof`_ ``_customer_reach_group``.
     """
 
     customer_id = proto.Field(proto.STRING, number=1,)
@@ -423,6 +439,7 @@ class GenerateReachForecastRequest(proto.Message):
     forecast_metric_options = proto.Field(
         proto.MESSAGE, number=13, message="ForecastMetricOptions",
     )
+    customer_reach_group = proto.Field(proto.STRING, number=14, optional=True,)
 
 
 class EffectiveFrequencyLimit(proto.Message):
@@ -486,6 +503,10 @@ class Targeting(proto.Message):
             targets all applicable networks. Applicable networks vary by
             product and region and can be obtained from
             [ReachPlanService.ListPlannableProducts][google.ads.googleads.v11.services.ReachPlanService.ListPlannableProducts].
+        audience_targeting (google.ads.googleads.v11.services.types.AudienceTargeting):
+            Targeted audiences.
+            If not specified, does not target any specific
+            audience.
     """
 
     plannable_location_id = proto.Field(proto.STRING, number=6, optional=True,)
@@ -504,6 +525,9 @@ class Targeting(proto.Message):
         proto.ENUM,
         number=5,
         enum=reach_plan_network.ReachPlanNetworkEnum.ReachPlanNetwork,
+    )
+    audience_targeting = proto.Field(
+        proto.MESSAGE, number=7, message="AudienceTargeting",
     )
 
 
@@ -548,10 +572,17 @@ class PlannedProduct(proto.Message):
             000 000 micros.
 
             This field is a member of `oneof`_ ``_budget_micros``.
+        advanced_product_targeting (google.ads.googleads.v11.services.types.AdvancedProductTargeting):
+            Targeting settings for the selected product. To list the
+            available targeting for each product use
+            [ReachPlanService.ListPlannableProducts][google.ads.googleads.v11.services.ReachPlanService.ListPlannableProducts].
     """
 
     plannable_product_code = proto.Field(proto.STRING, number=3, optional=True,)
     budget_micros = proto.Field(proto.INT64, number=4, optional=True,)
+    advanced_product_targeting = proto.Field(
+        proto.MESSAGE, number=5, message="AdvancedProductTargeting",
+    )
 
 
 class GenerateReachForecastResponse(proto.Message):
@@ -881,6 +912,65 @@ class ForecastMetricOptions(proto.Message):
     """
 
     include_coview = proto.Field(proto.BOOL, number=1,)
+
+
+class AudienceTargeting(proto.Message):
+    r"""Audience targeting for reach forecast.
+
+    Attributes:
+        user_interest (Sequence[google.ads.googleads.v11.common.types.UserInterestInfo]):
+            List of audiences based on user interests to
+            be targeted.
+    """
+
+    user_interest = proto.RepeatedField(
+        proto.MESSAGE, number=1, message=criteria.UserInterestInfo,
+    )
+
+
+class AdvancedProductTargeting(proto.Message):
+    r"""Advanced targeting settings for products.
+
+    .. _oneof: https://proto-plus-python.readthedocs.io/en/stable/fields.html#oneofs-mutually-exclusive-fields
+
+    Attributes:
+        youtube_select_settings (google.ads.googleads.v11.services.types.YouTubeSelectSettings):
+            Settings for YouTube Select targeting.
+
+            This field is a member of `oneof`_ ``advanced_targeting``.
+    """
+
+    youtube_select_settings = proto.Field(
+        proto.MESSAGE,
+        number=1,
+        oneof="advanced_targeting",
+        message="YouTubeSelectSettings",
+    )
+
+
+class YouTubeSelectSettings(proto.Message):
+    r"""Request settings for YouTube Select Lineups
+
+    Attributes:
+        lineup_id (int):
+            Lineup for YouTube Select Targeting.
+    """
+
+    lineup_id = proto.Field(proto.INT64, number=1,)
+
+
+class YouTubeSelectLineUp(proto.Message):
+    r"""A Plannable YouTube Select Lineup for product targeting.
+
+    Attributes:
+        lineup_id (int):
+            The ID of the YouTube Select Lineup.
+        lineup_name (str):
+            The unique name of the YouTube Select Lineup.
+    """
+
+    lineup_id = proto.Field(proto.INT64, number=1,)
+    lineup_name = proto.Field(proto.STRING, number=2,)
 
 
 __all__ = tuple(sorted(__protobuf__.manifest))

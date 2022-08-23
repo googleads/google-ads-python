@@ -37,10 +37,10 @@ def main(client, customer_id):
         client: An initialized instance of GoogleAdsClient
         customer_id: A str of the customer_id to use in requests.
     """
-    _add_keyword_plan(client, customer_id)
+    add_keyword_plan(client, customer_id)
 
 
-def _add_keyword_plan(client, customer_id):
+def add_keyword_plan(client, customer_id):
     """Adds a keyword plan, campaign, ad group, etc. to the customer account.
 
     Args:
@@ -50,22 +50,22 @@ def _add_keyword_plan(client, customer_id):
     Raises:
         GoogleAdsException: If an error is returned from the API.
     """
-    keyword_plan = _create_keyword_plan(client, customer_id)
-    keyword_plan_campaign = _create_keyword_plan_campaign(
+    keyword_plan = create_keyword_plan(client, customer_id)
+    keyword_plan_campaign = create_keyword_plan_campaign(
         client, customer_id, keyword_plan
     )
-    keyword_plan_ad_group = _create_keyword_plan_ad_group(
+    keyword_plan_ad_group = create_keyword_plan_ad_group(
         client, customer_id, keyword_plan_campaign
     )
-    _create_keyword_plan_ad_group_keywords(
+    create_keyword_plan_ad_group_keywords(
         client, customer_id, keyword_plan_ad_group
     )
-    _create_keyword_plan_negative_campaign_keywords(
+    create_keyword_plan_negative_campaign_keywords(
         client, customer_id, keyword_plan_campaign
     )
 
 
-def _create_keyword_plan(client, customer_id):
+def create_keyword_plan(client, customer_id):
     """Adds a keyword plan to the given customer account.
 
     Args:
@@ -99,7 +99,7 @@ def _create_keyword_plan(client, customer_id):
     return resource_name
 
 
-def _create_keyword_plan_campaign(client, customer_id, keyword_plan):
+def create_keyword_plan_campaign(client, customer_id, keyword_plan):
     """Adds a keyword plan campaign to the given keyword plan.
 
     Args:
@@ -148,7 +148,7 @@ def _create_keyword_plan_campaign(client, customer_id, keyword_plan):
     return resource_name
 
 
-def _create_keyword_plan_ad_group(client, customer_id, keyword_plan_campaign):
+def create_keyword_plan_ad_group(client, customer_id, keyword_plan_campaign):
     """Adds a keyword plan ad group to the given keyword plan campaign.
 
     Args:
@@ -184,7 +184,7 @@ def _create_keyword_plan_ad_group(client, customer_id, keyword_plan_campaign):
     return resource_name
 
 
-def _create_keyword_plan_ad_group_keywords(client, customer_id, plan_ad_group):
+def create_keyword_plan_ad_group_keywords(client, customer_id, plan_ad_group):
     """Adds keyword plan ad group keywords to the given keyword plan ad group.
 
     Args:
@@ -243,7 +243,7 @@ def _create_keyword_plan_ad_group_keywords(client, customer_id, plan_ad_group):
         )
 
 
-def _create_keyword_plan_negative_campaign_keywords(
+def create_keyword_plan_negative_campaign_keywords(
     client, customer_id, plan_campaign
 ):
     """Adds a keyword plan negative campaign keyword to the given campaign.

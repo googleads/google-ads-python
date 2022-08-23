@@ -27,7 +27,7 @@ __protobuf__ = proto.module(
 
 
 class Audience(proto.Message):
-    r"""Audience is an effective targeting option that allows you to
+    r"""Audience is an effective targeting option that lets you
     intersect different segment attributes, such as detailed
     demographics and affinities, to create audiences that represent
     sections of your target segments.

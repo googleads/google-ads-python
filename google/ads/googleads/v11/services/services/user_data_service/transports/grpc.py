@@ -32,12 +32,13 @@ class UserDataServiceGrpcTransport(UserDataServiceTransport):
     """gRPC backend transport for UserDataService.
 
     Service to manage user data uploads.
-    Any uploads made to a Customer Match list via this service will
-    be eligible for matching as per the customer matching process.
-    Please see https://support.google.com/google-ads/answer/7474263.
-    However, the uploads made via this service will not be visible
-    under the 'Segment members' section for the Customer Match List
-    in the Google Ads UI.
+    Any uploads made to a Customer Match list through this service
+    will be eligible for matching as per the customer matching
+    process. See
+    https://support.google.com/google-ads/answer/7474263. However,
+    the uploads made through this service will not be visible under
+    the 'Segment members' section for the Customer Match List in the
+    Google Ads UI.
 
     This class defines the same methods as the primary client, so the
     primary client can load the underlying transport implementation

@@ -71,13 +71,13 @@ def main(
     # Creates a user identifier using sample values for the user address,
     # hashing where required.
     address_identifier = client.get_type("UserIdentifier")
-    address_identifier.address_info.hashed_first_name = _normalize_and_hash(
+    address_identifier.address_info.hashed_first_name = normalize_and_hash(
         "Joanna"
     )
-    address_identifier.address_info.hashed_last_name = _normalize_and_hash(
+    address_identifier.address_info.hashed_last_name = normalize_and_hash(
         "Joanna"
     )
-    address_identifier.address_info.hashed_street_address = _normalize_and_hash(
+    address_identifier.address_info.hashed_street_address = normalize_and_hash(
         "1600 Amphitheatre Pkwy"
     )
     address_identifier.address_info.city = "Mountain View"
@@ -96,7 +96,7 @@ def main(
         client.enums.UserIdentifierSourceEnum.FIRST_PARTY
     )
     # Uses the normalize and hash method specifically for email addresses.
-    email_identifier.hashed_email = _normalize_and_hash_email_address(
+    email_identifier.hashed_email = normalize_and_hash_email_address(
         "joannasmith@gmail.com"
     )
 
@@ -160,7 +160,7 @@ def main(
 
 
 # [START normalize_and_hash]
-def _normalize_and_hash_email_address(email_address):
+def normalize_and_hash_email_address(email_address):
     """Returns the result of normalizing and hashing an email address.
 
     For this use case, Google Ads requires removal of any '.' characters
@@ -187,10 +187,10 @@ def _normalize_and_hash_email_address(email_address):
         email_parts[0] = email_parts[0].replace(".", "")
         normalized_email = "@".join(email_parts)
 
-    return _normalize_and_hash(normalized_email)
+    return normalize_and_hash(normalized_email)
 
 
-def _normalize_and_hash(s):
+def normalize_and_hash(s):
     """Normalizes and hashes a string with SHA-256.
 
     Private customer data must be hashed during upload, as described at:

@@ -56,7 +56,7 @@ def main(client, customer_id, page_size, campaign_id):
                 f'"{shared_set.name}" was found.'
             )
     except GoogleAdsException as ex:
-        _handle_googleads_exception(ex)
+        handle_googleads_exception(ex)
 
     # Next, retrieve shared criteria for all found shared sets.
     ids = ", ".join(shared_set_ids)
@@ -81,7 +81,7 @@ def main(client, customer_id, page_size, campaign_id):
             request=shared_criteria_search_request
         )
     except GoogleAdsException as ex:
-        _handle_googleads_exception(ex)
+        handle_googleads_exception(ex)
 
     criterion_type_enum = client.enums.CriterionTypeEnum
     criterion_ids = []
@@ -116,10 +116,10 @@ def main(client, customer_id, page_size, campaign_id):
         for result in response.results:
             print(f'Removed shared criterion "{result.resource_name}".')
     except GoogleAdsException as ex:
-        _handle_googleads_exception(ex)
+        handle_googleads_exception(ex)
 
 
-def _handle_googleads_exception(exception):
+def handle_googleads_exception(exception):
     print(
         f'Request with ID "{exception.request_id}" failed with status '
         f'"{exception.error.code().name}" and includes the following errors:'

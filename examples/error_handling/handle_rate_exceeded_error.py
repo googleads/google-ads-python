@@ -52,7 +52,7 @@ def main(client, customer_id, ad_group_id):
     temp_resource_exhausted = quota_error_enum.RESOURCE_TEMPORARILY_EXHAUSTED
 
     for i in range(NUM_REQUESTS):
-        operations = _create_ad_group_criterion_operations(
+        operations = create_ad_group_criterion_operations(
             client, customer_id, ad_group_id, i
         )
 
@@ -62,7 +62,7 @@ def main(client, customer_id, ad_group_id):
 
             while retry_count < NUM_RETRIES:
                 try:
-                    _request_mutate_and_display_result(
+                    request_mutate_and_display_result(
                         client, customer_id, operations
                     )
                     break
@@ -105,7 +105,7 @@ def main(client, customer_id, ad_group_id):
             raise ex
 
 
-def _create_ad_group_criterion_operations(
+def create_ad_group_criterion_operations(
     client, customer_id, ad_group_id, request_index
 ):
     """Creates ad group criterion operations.
@@ -147,7 +147,7 @@ def _create_ad_group_criterion_operations(
     return operations
 
 
-def _request_mutate_and_display_result(client, customer_id, operations):
+def request_mutate_and_display_result(client, customer_id, operations):
     """Mutates a set of ad group criteria as a dry-run and displays the results.
 
     The request is sent with validate_only set to true, so no actual mutations

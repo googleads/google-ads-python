@@ -53,10 +53,10 @@ def main(
     marketing_image_asset_id=None,
     square_marketing_image_asset_id=None,
 ):
-    budget_resource_name = _create_budget(client, customer_id)
+    budget_resource_name = create_budget(client, customer_id)
     print(f'Created budget with resource name "{budget_resource_name}".')
 
-    campaign_resource_name = _create_smart_display_campaign(
+    campaign_resource_name = create_smart_display_campaign(
         client, customer_id, budget_resource_name
     )
     print(
@@ -64,7 +64,7 @@ def main(
         f'"{campaign_resource_name}".'
     )
 
-    ad_group_resource_name = _create_ad_group(
+    ad_group_resource_name = create_ad_group(
         client, customer_id, campaign_resource_name
     )
     print(f'Created ad group with resource name "{ad_group_resource_name}"')
@@ -75,7 +75,7 @@ def main(
             f'"{marketing_image_asset_id}".'
         )
     else:
-        marketing_image_asset_id = _upload_image_asset(
+        marketing_image_asset_id = upload_image_asset(
             client,
             customer_id,
             _MARKETING_IMAGE_URL,
@@ -94,7 +94,7 @@ def main(
             f'"{square_marketing_image_asset_id}".'
         )
     else:
-        square_marketing_image_asset_id = _upload_image_asset(
+        square_marketing_image_asset_id = upload_image_asset(
             client,
             customer_id,
             _SQUARE_MARKETING_IMAGE_URL,
@@ -107,7 +107,7 @@ def main(
             f'"{square_marketing_image_asset_id}".'
         )
 
-    responsive_display_ad_resource_name = _create_responsive_display_ad(
+    responsive_display_ad_resource_name = create_responsive_display_ad(
         client,
         customer_id,
         ad_group_resource_name,
@@ -126,7 +126,7 @@ def main(
 
 
 # [START add_smart_display_ad]
-def _create_budget(client, customer_id):
+def create_budget(client, customer_id):
     campaign_budget_operation = client.get_type("CampaignBudgetOperation")
     campaign_budget = campaign_budget_operation.create
     campaign_budget.name = f"Interplanetary Cruise Budget #{uuid4()}"
@@ -144,14 +144,14 @@ def _create_budget(client, customer_id):
             )
         )
     except GoogleAdsException as ex:
-        _handle_googleads_exception(ex)
+        handle_googleads_exception(ex)
 
     return campaign_budget_response.results[0].resource_name
     # [END add_smart_display_ad]
 
 
 # [START add_smart_display_ad_1]
-def _create_smart_display_campaign(client, customer_id, budget_resource_name):
+def create_smart_display_campaign(client, customer_id, budget_resource_name):
     campaign_service = client.get_service("CampaignService")
     campaign_operation = client.get_type("CampaignOperation")
     campaign = campaign_operation.create
@@ -182,14 +182,14 @@ def _create_smart_display_campaign(client, customer_id, budget_resource_name):
             customer_id=customer_id, operations=[campaign_operation]
         )
     except GoogleAdsException as ex:
-        _handle_googleads_exception(ex)
+        handle_googleads_exception(ex)
 
     return campaign_response.results[0].resource_name
     # [END add_smart_display_ad_1]
 
 
 # [START add_smart_display_ad_4]
-def _create_ad_group(client, customer_id, campaign_resource_name):
+def create_ad_group(client, customer_id, campaign_resource_name):
     ad_group_service = client.get_service("AdGroupService")
     ad_group_operation = client.get_type("AdGroupOperation")
     ad_group = ad_group_operation.create
@@ -203,14 +203,14 @@ def _create_ad_group(client, customer_id, campaign_resource_name):
             customer_id=customer_id, operations=[ad_group_operation]
         )
     except GoogleAdsException as ex:
-        _handle_googleads_exception(ex)
+        handle_googleads_exception(ex)
 
     return ad_group_response.results[0].resource_name
     # [END add_smart_display_ad_4]
 
 
 # [START add_smart_display_ad_3]
-def _upload_image_asset(
+def upload_image_asset(
     client, customer_id, image_url, image_width, image_height, image_name
 ):
     # Download image from URL
@@ -248,12 +248,12 @@ def _upload_image_asset(
         mutate_asset_response = asset_service.mutate_assets(request=request)
         return mutate_asset_response.results[0].asset.id
     except GoogleAdsException as ex:
-        _handle_googleads_exception(ex)
+        handle_googleads_exception(ex)
         # [END add_smart_display_ad_3]
 
 
 # [START add_smart_display_ad_2]
-def _create_responsive_display_ad(
+def create_responsive_display_ad(
     client,
     customer_id,
     ad_group_resource_name,
@@ -314,13 +314,13 @@ def _create_responsive_display_ad(
             customer_id=customer_id, operations=[ad_group_ad_operation]
         )
     except GoogleAdsException as ex:
-        _handle_googleads_exception(ex)
+        handle_googleads_exception(ex)
 
     return ad_group_ad_response.results[0].resource_name
     # [END add_smart_display_ad_2]
 
 
-def _handle_googleads_exception(exception):
+def handle_googleads_exception(exception):
     print(
         f'Request with ID "{exception.request_id}" failed with status '
         f'"{exception.error.code().name}" and includes the following errors:'

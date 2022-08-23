@@ -35,8 +35,8 @@ class SuggestKeywordThemeConstantsRequest(proto.Message):
     Attributes:
         query_text (str):
             The query text of a keyword theme that will
-            be used to map to similar keyword themes. E.g.
-            "plumber" or "roofer".
+            be used to map to similar keyword themes. For
+            example, "plumber" or "roofer".
         country_code (str):
             Upper-case, two-letter country code as
             defined by ISO-3166. This for refining the scope

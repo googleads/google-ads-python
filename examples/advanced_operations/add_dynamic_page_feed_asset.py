@@ -36,31 +36,31 @@ def main(client, customer_id, campaign_id, ad_group_id):
     dsa_page_url_label = "discounts"
 
     # Creates a list of assets.
-    asset_resource_names = _create_assets(
+    asset_resource_names = create_assets(
         client, dsa_page_url_label, customer_id
     )
 
     # Creates an AssetSet - this is a collection of assets that can be
     # associated with a campaign. Note: do not confuse this with an AssetGroup.
     # An AssetGroup replaces AdGroups in some types of campaigns.
-    asset_set_resource_name = _create_asset_set(client, customer_id)
+    asset_set_resource_name = create_asset_set(client, customer_id)
 
     # Adds the Assets to the AssetSet.
-    _add_assets_to_asset_set(
+    add_assets_to_asset_set(
         client, asset_resource_names, asset_set_resource_name, customer_id
     )
 
     # Links the AssetSet to the Campaign.
-    _link_asset_set_to_campaign(
+    link_asset_set_to_campaign(
         client, asset_set_resource_name, customer_id, campaign_id
     )
 
     # Optional: Targets web pages matching the feed's label in the ad group.
-    _add_dsa_target(client, dsa_page_url_label, customer_id, ad_group_id)
+    add_dsa_target(client, dsa_page_url_label, customer_id, ad_group_id)
 
 
 # [START add_asset]
-def _create_assets(client, dsa_page_url_label, customer_id):
+def create_assets(client, dsa_page_url_label, customer_id):
     """Creates Assets to be used in a DSA page feed.
 
     Args:
@@ -101,7 +101,7 @@ def _create_assets(client, dsa_page_url_label, customer_id):
 
 
 # [START add_asset_set]
-def _create_asset_set(client, customer_id):
+def create_asset_set(client, customer_id):
     """Creates an AssetSet.
 
     The AssetSet will be used to link the dynamic page feed assets to a
@@ -131,7 +131,7 @@ def _create_asset_set(client, customer_id):
 
 
 # [START add_asset_set_asset]
-def _add_assets_to_asset_set(
+def add_assets_to_asset_set(
     client, asset_resource_names, asset_set_resource_name, customer_id
 ):
     """Adds an Asset to an AssetSet by creating an AssetSetAsset link.
@@ -160,7 +160,7 @@ def _add_assets_to_asset_set(
 
 
 # [START add_campaign_asset_set]
-def _link_asset_set_to_campaign(
+def link_asset_set_to_campaign(
     client, asset_set_resource_name, customer_id, campaign_id
 ):
     """Links an AssetSet to a Campaign by creating a CampaignAssetSet.
@@ -189,7 +189,7 @@ def _link_asset_set_to_campaign(
 
 
 # [START add_dsa_target]
-def _add_dsa_target(client, dsa_page_url_label, customer_id, ad_group_id):
+def add_dsa_target(client, dsa_page_url_label, customer_id, ad_group_id):
     """Creates an ad group criterion targeting the DSA label.
 
     Args:

@@ -43,13 +43,13 @@ def main(client, customer_id, email_address, access_role):
       access_role: The updated access role.
     """
 
-    user_id = _get_user_access(client, customer_id, email_address)
+    user_id = get_user_access(client, customer_id, email_address)
 
     if user_id:
-        _modify_user_access(client, customer_id, user_id, access_role)
+        modify_user_access(client, customer_id, user_id, access_role)
 
 
-def _get_user_access(client, customer_id, email_address):
+def get_user_access(client, customer_id, email_address):
     """Gets the customer user access given an email address.
 
     Args:
@@ -98,7 +98,7 @@ def _get_user_access(client, customer_id, email_address):
         return None
 
 
-def _modify_user_access(client, customer_id, user_id, access_role):
+def modify_user_access(client, customer_id, user_id, access_role):
     """Modifies the user access role to a specified value.
 
     Args:

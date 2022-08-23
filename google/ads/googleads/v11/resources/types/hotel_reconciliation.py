@@ -28,7 +28,8 @@ __protobuf__ = proto.module(
 class HotelReconciliation(proto.Message):
     r"""A hotel reconciliation. It contains conversion information
     from Hotel bookings to reconcile with advertiser records. These
-    rows may be updated or canceled before billing via Bulk Uploads.
+    rows may be updated or canceled before billing through Bulk
+    Uploads.
 
     Attributes:
         resource_name (str):

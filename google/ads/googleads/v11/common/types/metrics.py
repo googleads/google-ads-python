@@ -22,9 +22,7 @@ from google.ads.googleads.v11.enums.types import quality_score_bucket
 __protobuf__ = proto.module(
     package="google.ads.googleads.v11.common",
     marshal="google.ads.googleads.v11",
-    manifest={
-        "Metrics",
-    },
+    manifest={"Metrics",},
 )
 
 
@@ -338,10 +336,10 @@ class Metrics(proto.Message):
             conversion action successfully fired and was
             seen by Google Ads. This firing event may not
             have been the result of an attributable
-            conversion (e.g. because the tag was fired from
-            a browser that did not previously click an ad
-            from an appropriate advertiser). The date/time
-            is in the customer's time zone.
+            conversion (for example, because the tag was
+            fired from a browser that did not previously
+            click an ad from an appropriate advertiser). The
+            date/time is in the customer's time zone.
 
             This field is a member of `oneof`_ ``_conversion_last_received_request_date_time``.
         conversion_last_conversion_date (str):
@@ -913,8 +911,8 @@ class Metrics(proto.Message):
             The total number of view-through conversions.
             These happen when a customer sees an image or
             rich media ad, then later completes a conversion
-            on your site without interacting with (e.g.,
-            clicking on) another ad.
+            on your site without interacting with (for
+            example, clicking on) another ad.
 
             This field is a member of `oneof`_ ``_view_through_conversions``.
         sk_ad_network_conversions (int):
@@ -923,370 +921,178 @@ class Metrics(proto.Message):
     """
 
     absolute_top_impression_percentage = proto.Field(
-        proto.DOUBLE,
-        number=183,
-        optional=True,
+        proto.DOUBLE, number=183, optional=True,
     )
-    active_view_cpm = proto.Field(
-        proto.DOUBLE,
-        number=184,
-        optional=True,
-    )
-    active_view_ctr = proto.Field(
-        proto.DOUBLE,
-        number=185,
-        optional=True,
-    )
+    active_view_cpm = proto.Field(proto.DOUBLE, number=184, optional=True,)
+    active_view_ctr = proto.Field(proto.DOUBLE, number=185, optional=True,)
     active_view_impressions = proto.Field(
-        proto.INT64,
-        number=186,
-        optional=True,
+        proto.INT64, number=186, optional=True,
     )
     active_view_measurability = proto.Field(
-        proto.DOUBLE,
-        number=187,
-        optional=True,
+        proto.DOUBLE, number=187, optional=True,
     )
     active_view_measurable_cost_micros = proto.Field(
-        proto.INT64,
-        number=188,
-        optional=True,
+        proto.INT64, number=188, optional=True,
     )
     active_view_measurable_impressions = proto.Field(
-        proto.INT64,
-        number=189,
-        optional=True,
+        proto.INT64, number=189, optional=True,
     )
     active_view_viewability = proto.Field(
-        proto.DOUBLE,
-        number=190,
-        optional=True,
+        proto.DOUBLE, number=190, optional=True,
     )
     all_conversions_from_interactions_rate = proto.Field(
-        proto.DOUBLE,
-        number=191,
-        optional=True,
+        proto.DOUBLE, number=191, optional=True,
     )
     all_conversions_value = proto.Field(
-        proto.DOUBLE,
-        number=192,
-        optional=True,
+        proto.DOUBLE, number=192, optional=True,
     )
     all_conversions_value_by_conversion_date = proto.Field(
-        proto.DOUBLE,
-        number=240,
+        proto.DOUBLE, number=240,
     )
-    all_conversions = proto.Field(
-        proto.DOUBLE,
-        number=193,
-        optional=True,
-    )
-    all_conversions_by_conversion_date = proto.Field(
-        proto.DOUBLE,
-        number=241,
-    )
+    all_conversions = proto.Field(proto.DOUBLE, number=193, optional=True,)
+    all_conversions_by_conversion_date = proto.Field(proto.DOUBLE, number=241,)
     all_conversions_value_per_cost = proto.Field(
-        proto.DOUBLE,
-        number=194,
-        optional=True,
+        proto.DOUBLE, number=194, optional=True,
     )
     all_conversions_from_click_to_call = proto.Field(
-        proto.DOUBLE,
-        number=195,
-        optional=True,
+        proto.DOUBLE, number=195, optional=True,
     )
     all_conversions_from_directions = proto.Field(
-        proto.DOUBLE,
-        number=196,
-        optional=True,
+        proto.DOUBLE, number=196, optional=True,
     )
     all_conversions_from_interactions_value_per_interaction = proto.Field(
-        proto.DOUBLE,
-        number=197,
-        optional=True,
+        proto.DOUBLE, number=197, optional=True,
     )
     all_conversions_from_menu = proto.Field(
-        proto.DOUBLE,
-        number=198,
-        optional=True,
+        proto.DOUBLE, number=198, optional=True,
     )
     all_conversions_from_order = proto.Field(
-        proto.DOUBLE,
-        number=199,
-        optional=True,
+        proto.DOUBLE, number=199, optional=True,
     )
     all_conversions_from_other_engagement = proto.Field(
-        proto.DOUBLE,
-        number=200,
-        optional=True,
+        proto.DOUBLE, number=200, optional=True,
     )
     all_conversions_from_store_visit = proto.Field(
-        proto.DOUBLE,
-        number=201,
-        optional=True,
+        proto.DOUBLE, number=201, optional=True,
     )
     all_conversions_from_store_website = proto.Field(
-        proto.DOUBLE,
-        number=202,
-        optional=True,
+        proto.DOUBLE, number=202, optional=True,
     )
     auction_insight_search_absolute_top_impression_percentage = proto.Field(
-        proto.DOUBLE,
-        number=258,
-        optional=True,
+        proto.DOUBLE, number=258, optional=True,
     )
     auction_insight_search_impression_share = proto.Field(
-        proto.DOUBLE,
-        number=259,
-        optional=True,
+        proto.DOUBLE, number=259, optional=True,
     )
     auction_insight_search_outranking_share = proto.Field(
-        proto.DOUBLE,
-        number=260,
-        optional=True,
+        proto.DOUBLE, number=260, optional=True,
     )
     auction_insight_search_overlap_rate = proto.Field(
-        proto.DOUBLE,
-        number=261,
-        optional=True,
+        proto.DOUBLE, number=261, optional=True,
     )
     auction_insight_search_position_above_rate = proto.Field(
-        proto.DOUBLE,
-        number=262,
-        optional=True,
+        proto.DOUBLE, number=262, optional=True,
     )
     auction_insight_search_top_impression_percentage = proto.Field(
-        proto.DOUBLE,
-        number=263,
-        optional=True,
+        proto.DOUBLE, number=263, optional=True,
     )
-    average_cost = proto.Field(
-        proto.DOUBLE,
-        number=203,
-        optional=True,
-    )
-    average_cpc = proto.Field(
-        proto.DOUBLE,
-        number=204,
-        optional=True,
-    )
-    average_cpe = proto.Field(
-        proto.DOUBLE,
-        number=205,
-        optional=True,
-    )
-    average_cpm = proto.Field(
-        proto.DOUBLE,
-        number=206,
-        optional=True,
-    )
-    average_cpv = proto.Field(
-        proto.DOUBLE,
-        number=207,
-        optional=True,
-    )
-    average_page_views = proto.Field(
-        proto.DOUBLE,
-        number=208,
-        optional=True,
-    )
-    average_time_on_site = proto.Field(
-        proto.DOUBLE,
-        number=209,
-        optional=True,
-    )
+    average_cost = proto.Field(proto.DOUBLE, number=203, optional=True,)
+    average_cpc = proto.Field(proto.DOUBLE, number=204, optional=True,)
+    average_cpe = proto.Field(proto.DOUBLE, number=205, optional=True,)
+    average_cpm = proto.Field(proto.DOUBLE, number=206, optional=True,)
+    average_cpv = proto.Field(proto.DOUBLE, number=207, optional=True,)
+    average_page_views = proto.Field(proto.DOUBLE, number=208, optional=True,)
+    average_time_on_site = proto.Field(proto.DOUBLE, number=209, optional=True,)
     benchmark_average_max_cpc = proto.Field(
-        proto.DOUBLE,
-        number=210,
-        optional=True,
+        proto.DOUBLE, number=210, optional=True,
     )
     biddable_app_install_conversions = proto.Field(
-        proto.DOUBLE,
-        number=254,
-        optional=True,
+        proto.DOUBLE, number=254, optional=True,
     )
     biddable_app_post_install_conversions = proto.Field(
-        proto.DOUBLE,
-        number=255,
-        optional=True,
+        proto.DOUBLE, number=255, optional=True,
     )
-    benchmark_ctr = proto.Field(
-        proto.DOUBLE,
-        number=211,
-        optional=True,
-    )
-    bounce_rate = proto.Field(
-        proto.DOUBLE,
-        number=212,
-        optional=True,
-    )
-    clicks = proto.Field(
-        proto.INT64,
-        number=131,
-        optional=True,
-    )
-    combined_clicks = proto.Field(
-        proto.INT64,
-        number=156,
-        optional=True,
-    )
+    benchmark_ctr = proto.Field(proto.DOUBLE, number=211, optional=True,)
+    bounce_rate = proto.Field(proto.DOUBLE, number=212, optional=True,)
+    clicks = proto.Field(proto.INT64, number=131, optional=True,)
+    combined_clicks = proto.Field(proto.INT64, number=156, optional=True,)
     combined_clicks_per_query = proto.Field(
-        proto.DOUBLE,
-        number=157,
-        optional=True,
+        proto.DOUBLE, number=157, optional=True,
     )
-    combined_queries = proto.Field(
-        proto.INT64,
-        number=158,
-        optional=True,
-    )
+    combined_queries = proto.Field(proto.INT64, number=158, optional=True,)
     content_budget_lost_impression_share = proto.Field(
-        proto.DOUBLE,
-        number=159,
-        optional=True,
+        proto.DOUBLE, number=159, optional=True,
     )
     content_impression_share = proto.Field(
-        proto.DOUBLE,
-        number=160,
-        optional=True,
+        proto.DOUBLE, number=160, optional=True,
     )
     conversion_last_received_request_date_time = proto.Field(
-        proto.STRING,
-        number=161,
-        optional=True,
+        proto.STRING, number=161, optional=True,
     )
     conversion_last_conversion_date = proto.Field(
-        proto.STRING,
-        number=162,
-        optional=True,
+        proto.STRING, number=162, optional=True,
     )
     content_rank_lost_impression_share = proto.Field(
-        proto.DOUBLE,
-        number=163,
-        optional=True,
+        proto.DOUBLE, number=163, optional=True,
     )
     conversions_from_interactions_rate = proto.Field(
-        proto.DOUBLE,
-        number=164,
-        optional=True,
+        proto.DOUBLE, number=164, optional=True,
     )
-    conversions_value = proto.Field(
-        proto.DOUBLE,
-        number=165,
-        optional=True,
-    )
+    conversions_value = proto.Field(proto.DOUBLE, number=165, optional=True,)
     conversions_value_by_conversion_date = proto.Field(
-        proto.DOUBLE,
-        number=242,
+        proto.DOUBLE, number=242,
     )
     conversions_value_per_cost = proto.Field(
-        proto.DOUBLE,
-        number=166,
-        optional=True,
+        proto.DOUBLE, number=166, optional=True,
     )
     conversions_from_interactions_value_per_interaction = proto.Field(
-        proto.DOUBLE,
-        number=167,
-        optional=True,
+        proto.DOUBLE, number=167, optional=True,
     )
-    conversions = proto.Field(
-        proto.DOUBLE,
-        number=168,
-        optional=True,
-    )
-    conversions_by_conversion_date = proto.Field(
-        proto.DOUBLE,
-        number=243,
-    )
-    cost_micros = proto.Field(
-        proto.INT64,
-        number=169,
-        optional=True,
-    )
+    conversions = proto.Field(proto.DOUBLE, number=168, optional=True,)
+    conversions_by_conversion_date = proto.Field(proto.DOUBLE, number=243,)
+    cost_micros = proto.Field(proto.INT64, number=169, optional=True,)
     cost_per_all_conversions = proto.Field(
-        proto.DOUBLE,
-        number=170,
-        optional=True,
+        proto.DOUBLE, number=170, optional=True,
     )
-    cost_per_conversion = proto.Field(
-        proto.DOUBLE,
-        number=171,
-        optional=True,
-    )
+    cost_per_conversion = proto.Field(proto.DOUBLE, number=171, optional=True,)
     cost_per_current_model_attributed_conversion = proto.Field(
-        proto.DOUBLE,
-        number=172,
-        optional=True,
+        proto.DOUBLE, number=172, optional=True,
     )
     cross_device_conversions = proto.Field(
-        proto.DOUBLE,
-        number=173,
-        optional=True,
+        proto.DOUBLE, number=173, optional=True,
     )
-    ctr = proto.Field(
-        proto.DOUBLE,
-        number=174,
-        optional=True,
-    )
+    ctr = proto.Field(proto.DOUBLE, number=174, optional=True,)
     current_model_attributed_conversions = proto.Field(
-        proto.DOUBLE,
-        number=175,
-        optional=True,
+        proto.DOUBLE, number=175, optional=True,
     )
     current_model_attributed_conversions_from_interactions_rate = proto.Field(
-        proto.DOUBLE,
-        number=176,
-        optional=True,
+        proto.DOUBLE, number=176, optional=True,
     )
     current_model_attributed_conversions_from_interactions_value_per_interaction = proto.Field(
-        proto.DOUBLE,
-        number=177,
-        optional=True,
+        proto.DOUBLE, number=177, optional=True,
     )
     current_model_attributed_conversions_value = proto.Field(
-        proto.DOUBLE,
-        number=178,
-        optional=True,
+        proto.DOUBLE, number=178, optional=True,
     )
     current_model_attributed_conversions_value_per_cost = proto.Field(
-        proto.DOUBLE,
-        number=179,
-        optional=True,
+        proto.DOUBLE, number=179, optional=True,
     )
-    engagement_rate = proto.Field(
-        proto.DOUBLE,
-        number=180,
-        optional=True,
-    )
-    engagements = proto.Field(
-        proto.INT64,
-        number=181,
-        optional=True,
-    )
+    engagement_rate = proto.Field(proto.DOUBLE, number=180, optional=True,)
+    engagements = proto.Field(proto.INT64, number=181, optional=True,)
     hotel_average_lead_value_micros = proto.Field(
-        proto.DOUBLE,
-        number=213,
-        optional=True,
+        proto.DOUBLE, number=213, optional=True,
     )
     hotel_commission_rate_micros = proto.Field(
-        proto.INT64,
-        number=256,
-        optional=True,
+        proto.INT64, number=256, optional=True,
     )
     hotel_expected_commission_cost = proto.Field(
-        proto.DOUBLE,
-        number=257,
-        optional=True,
+        proto.DOUBLE, number=257, optional=True,
     )
     hotel_price_difference_percentage = proto.Field(
-        proto.DOUBLE,
-        number=214,
-        optional=True,
+        proto.DOUBLE, number=214, optional=True,
     )
     hotel_eligible_impressions = proto.Field(
-        proto.INT64,
-        number=215,
-        optional=True,
+        proto.INT64, number=215, optional=True,
     )
     historical_creative_quality_score = proto.Field(
         proto.ENUM,
@@ -1299,279 +1105,126 @@ class Metrics(proto.Message):
         enum=quality_score_bucket.QualityScoreBucketEnum.QualityScoreBucket,
     )
     historical_quality_score = proto.Field(
-        proto.INT64,
-        number=216,
-        optional=True,
+        proto.INT64, number=216, optional=True,
     )
     historical_search_predicted_ctr = proto.Field(
         proto.ENUM,
         number=83,
         enum=quality_score_bucket.QualityScoreBucketEnum.QualityScoreBucket,
     )
-    gmail_forwards = proto.Field(
-        proto.INT64,
-        number=217,
-        optional=True,
-    )
-    gmail_saves = proto.Field(
-        proto.INT64,
-        number=218,
-        optional=True,
-    )
+    gmail_forwards = proto.Field(proto.INT64, number=217, optional=True,)
+    gmail_saves = proto.Field(proto.INT64, number=218, optional=True,)
     gmail_secondary_clicks = proto.Field(
-        proto.INT64,
-        number=219,
-        optional=True,
+        proto.INT64, number=219, optional=True,
     )
     impressions_from_store_reach = proto.Field(
-        proto.INT64,
-        number=220,
-        optional=True,
+        proto.INT64, number=220, optional=True,
     )
-    impressions = proto.Field(
-        proto.INT64,
-        number=221,
-        optional=True,
-    )
-    interaction_rate = proto.Field(
-        proto.DOUBLE,
-        number=222,
-        optional=True,
-    )
-    interactions = proto.Field(
-        proto.INT64,
-        number=223,
-        optional=True,
-    )
+    impressions = proto.Field(proto.INT64, number=221, optional=True,)
+    interaction_rate = proto.Field(proto.DOUBLE, number=222, optional=True,)
+    interactions = proto.Field(proto.INT64, number=223, optional=True,)
     interaction_event_types = proto.RepeatedField(
         proto.ENUM,
         number=100,
         enum=interaction_event_type.InteractionEventTypeEnum.InteractionEventType,
     )
-    invalid_click_rate = proto.Field(
-        proto.DOUBLE,
-        number=224,
-        optional=True,
-    )
-    invalid_clicks = proto.Field(
-        proto.INT64,
-        number=225,
-        optional=True,
-    )
-    message_chats = proto.Field(
-        proto.INT64,
-        number=226,
-        optional=True,
-    )
-    message_impressions = proto.Field(
-        proto.INT64,
-        number=227,
-        optional=True,
-    )
-    message_chat_rate = proto.Field(
-        proto.DOUBLE,
-        number=228,
-        optional=True,
-    )
+    invalid_click_rate = proto.Field(proto.DOUBLE, number=224, optional=True,)
+    invalid_clicks = proto.Field(proto.INT64, number=225, optional=True,)
+    message_chats = proto.Field(proto.INT64, number=226, optional=True,)
+    message_impressions = proto.Field(proto.INT64, number=227, optional=True,)
+    message_chat_rate = proto.Field(proto.DOUBLE, number=228, optional=True,)
     mobile_friendly_clicks_percentage = proto.Field(
-        proto.DOUBLE,
-        number=229,
-        optional=True,
+        proto.DOUBLE, number=229, optional=True,
     )
     optimization_score_uplift = proto.Field(
-        proto.DOUBLE,
-        number=247,
-        optional=True,
+        proto.DOUBLE, number=247, optional=True,
     )
     optimization_score_url = proto.Field(
-        proto.STRING,
-        number=248,
-        optional=True,
+        proto.STRING, number=248, optional=True,
     )
-    organic_clicks = proto.Field(
-        proto.INT64,
-        number=230,
-        optional=True,
-    )
+    organic_clicks = proto.Field(proto.INT64, number=230, optional=True,)
     organic_clicks_per_query = proto.Field(
-        proto.DOUBLE,
-        number=231,
-        optional=True,
+        proto.DOUBLE, number=231, optional=True,
     )
-    organic_impressions = proto.Field(
-        proto.INT64,
-        number=232,
-        optional=True,
-    )
+    organic_impressions = proto.Field(proto.INT64, number=232, optional=True,)
     organic_impressions_per_query = proto.Field(
-        proto.DOUBLE,
-        number=233,
-        optional=True,
+        proto.DOUBLE, number=233, optional=True,
     )
-    organic_queries = proto.Field(
-        proto.INT64,
-        number=234,
-        optional=True,
-    )
-    percent_new_visitors = proto.Field(
-        proto.DOUBLE,
-        number=235,
-        optional=True,
-    )
-    phone_calls = proto.Field(
-        proto.INT64,
-        number=236,
-        optional=True,
-    )
-    phone_impressions = proto.Field(
-        proto.INT64,
-        number=237,
-        optional=True,
-    )
-    phone_through_rate = proto.Field(
-        proto.DOUBLE,
-        number=238,
-        optional=True,
-    )
-    relative_ctr = proto.Field(
-        proto.DOUBLE,
-        number=239,
-        optional=True,
-    )
+    organic_queries = proto.Field(proto.INT64, number=234, optional=True,)
+    percent_new_visitors = proto.Field(proto.DOUBLE, number=235, optional=True,)
+    phone_calls = proto.Field(proto.INT64, number=236, optional=True,)
+    phone_impressions = proto.Field(proto.INT64, number=237, optional=True,)
+    phone_through_rate = proto.Field(proto.DOUBLE, number=238, optional=True,)
+    relative_ctr = proto.Field(proto.DOUBLE, number=239, optional=True,)
     search_absolute_top_impression_share = proto.Field(
-        proto.DOUBLE,
-        number=136,
-        optional=True,
+        proto.DOUBLE, number=136, optional=True,
     )
     search_budget_lost_absolute_top_impression_share = proto.Field(
-        proto.DOUBLE,
-        number=137,
-        optional=True,
+        proto.DOUBLE, number=137, optional=True,
     )
     search_budget_lost_impression_share = proto.Field(
-        proto.DOUBLE,
-        number=138,
-        optional=True,
+        proto.DOUBLE, number=138, optional=True,
     )
     search_budget_lost_top_impression_share = proto.Field(
-        proto.DOUBLE,
-        number=139,
-        optional=True,
+        proto.DOUBLE, number=139, optional=True,
     )
-    search_click_share = proto.Field(
-        proto.DOUBLE,
-        number=140,
-        optional=True,
-    )
+    search_click_share = proto.Field(proto.DOUBLE, number=140, optional=True,)
     search_exact_match_impression_share = proto.Field(
-        proto.DOUBLE,
-        number=141,
-        optional=True,
+        proto.DOUBLE, number=141, optional=True,
     )
     search_impression_share = proto.Field(
-        proto.DOUBLE,
-        number=142,
-        optional=True,
+        proto.DOUBLE, number=142, optional=True,
     )
     search_rank_lost_absolute_top_impression_share = proto.Field(
-        proto.DOUBLE,
-        number=143,
-        optional=True,
+        proto.DOUBLE, number=143, optional=True,
     )
     search_rank_lost_impression_share = proto.Field(
-        proto.DOUBLE,
-        number=144,
-        optional=True,
+        proto.DOUBLE, number=144, optional=True,
     )
     search_rank_lost_top_impression_share = proto.Field(
-        proto.DOUBLE,
-        number=145,
-        optional=True,
+        proto.DOUBLE, number=145, optional=True,
     )
     search_top_impression_share = proto.Field(
-        proto.DOUBLE,
-        number=146,
-        optional=True,
+        proto.DOUBLE, number=146, optional=True,
     )
-    speed_score = proto.Field(
-        proto.INT64,
-        number=147,
-        optional=True,
-    )
+    speed_score = proto.Field(proto.INT64, number=147, optional=True,)
     top_impression_percentage = proto.Field(
-        proto.DOUBLE,
-        number=148,
-        optional=True,
+        proto.DOUBLE, number=148, optional=True,
     )
     valid_accelerated_mobile_pages_clicks_percentage = proto.Field(
-        proto.DOUBLE,
-        number=149,
-        optional=True,
+        proto.DOUBLE, number=149, optional=True,
     )
     value_per_all_conversions = proto.Field(
-        proto.DOUBLE,
-        number=150,
-        optional=True,
+        proto.DOUBLE, number=150, optional=True,
     )
     value_per_all_conversions_by_conversion_date = proto.Field(
-        proto.DOUBLE,
-        number=244,
-        optional=True,
+        proto.DOUBLE, number=244, optional=True,
     )
-    value_per_conversion = proto.Field(
-        proto.DOUBLE,
-        number=151,
-        optional=True,
-    )
+    value_per_conversion = proto.Field(proto.DOUBLE, number=151, optional=True,)
     value_per_conversions_by_conversion_date = proto.Field(
-        proto.DOUBLE,
-        number=245,
-        optional=True,
+        proto.DOUBLE, number=245, optional=True,
     )
     value_per_current_model_attributed_conversion = proto.Field(
-        proto.DOUBLE,
-        number=152,
-        optional=True,
+        proto.DOUBLE, number=152, optional=True,
     )
     video_quartile_p100_rate = proto.Field(
-        proto.DOUBLE,
-        number=132,
-        optional=True,
+        proto.DOUBLE, number=132, optional=True,
     )
     video_quartile_p25_rate = proto.Field(
-        proto.DOUBLE,
-        number=133,
-        optional=True,
+        proto.DOUBLE, number=133, optional=True,
     )
     video_quartile_p50_rate = proto.Field(
-        proto.DOUBLE,
-        number=134,
-        optional=True,
+        proto.DOUBLE, number=134, optional=True,
     )
     video_quartile_p75_rate = proto.Field(
-        proto.DOUBLE,
-        number=135,
-        optional=True,
+        proto.DOUBLE, number=135, optional=True,
     )
-    video_view_rate = proto.Field(
-        proto.DOUBLE,
-        number=153,
-        optional=True,
-    )
-    video_views = proto.Field(
-        proto.INT64,
-        number=154,
-        optional=True,
-    )
+    video_view_rate = proto.Field(proto.DOUBLE, number=153, optional=True,)
+    video_views = proto.Field(proto.INT64, number=154, optional=True,)
     view_through_conversions = proto.Field(
-        proto.INT64,
-        number=155,
-        optional=True,
+        proto.INT64, number=155, optional=True,
     )
-    sk_ad_network_conversions = proto.Field(
-        proto.INT64,
-        number=246,
-    )
+    sk_ad_network_conversions = proto.Field(proto.INT64, number=246,)
 
 
 __all__ = tuple(sorted(__protobuf__.manifest))

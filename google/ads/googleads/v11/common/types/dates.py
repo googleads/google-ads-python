@@ -66,9 +66,10 @@ class YearMonth(proto.Message):
 
     Attributes:
         year (int):
-            The year (e.g. 2020).
+            The year (for example, 2020).
         month (google.ads.googleads.v11.enums.types.MonthOfYearEnum.MonthOfYear):
-            The month of the year. (e.g. FEBRUARY).
+            The month of the year. (for example,
+            FEBRUARY).
     """
 
     year = proto.Field(proto.INT64, number=1,)

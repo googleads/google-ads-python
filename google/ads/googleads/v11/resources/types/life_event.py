@@ -41,8 +41,8 @@ class LifeEvent(proto.Message):
         id (int):
             Output only. The ID of the life event.
         name (str):
-            Output only. The name of the life event.
-            E.g.,"Recently Moved".
+            Output only. The name of the life event, for
+            example,"Recently Moved".
         parent (str):
             Output only. The parent of the life_event.
         launched_to_all (bool):

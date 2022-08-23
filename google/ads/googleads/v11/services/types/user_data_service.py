@@ -101,14 +101,15 @@ class UserDataOperation(proto.Message):
 class UploadUserDataResponse(proto.Message):
     r"""Response message for
     [UserDataService.UploadUserData][google.ads.googleads.v11.services.UserDataService.UploadUserData]
-    Uploads made via this service will not be visible under the 'Segment
-    members' section for the Customer Match List in the Google Ads UI.
+    Uploads made through this service will not be visible under the
+    'Segment members' section for the Customer Match List in the Google
+    Ads UI.
 
     Attributes:
         upload_date_time (str):
             The date time at which the request was received by API,
-            formatted as "yyyy-mm-dd hh:mm:ss+|-hh:mm", e.g. "2019-01-01
-            12:32:45-08:00".
+            formatted as "yyyy-mm-dd hh:mm:ss+|-hh:mm", for example,
+            "2019-01-01 12:32:45-08:00".
 
             This field is a member of `oneof`_ ``_upload_date_time``.
         received_operations_count (int):

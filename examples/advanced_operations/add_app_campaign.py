@@ -34,28 +34,28 @@ from google.ads.googleads.errors import GoogleAdsException
 def main(client, customer_id):
     """Main function for running this example."""
     # Creates the budget for the campaign.
-    budget_resource_name = _create_budget(client, customer_id)
+    budget_resource_name = create_budget(client, customer_id)
 
     # Creates the campaign.
-    campaign_resource_name = _create_campaign(
+    campaign_resource_name = create_campaign(
         client, customer_id, budget_resource_name
     )
 
     # Sets campaign targeting.
-    _set_campaign_targeting_criteria(
+    set_campaign_targeting_criteria(
         client, customer_id, campaign_resource_name
     )
 
     # Creates an Ad Group.
-    ad_group_resource_name = _create_ad_group(
+    ad_group_resource_name = create_ad_group(
         client, customer_id, campaign_resource_name
     )
 
     # Creates an App Ad.
-    _create_app_ad(client, customer_id, ad_group_resource_name)
+    create_app_ad(client, customer_id, ad_group_resource_name)
 
 
-def _create_budget(client, customer_id):
+def create_budget(client, customer_id):
     """Creates a budget under the given customer ID.
 
     Args:
@@ -89,7 +89,7 @@ def _create_budget(client, customer_id):
     return resource_name
 
 
-def _create_campaign(client, customer_id, budget_resource_name):
+def create_campaign(client, customer_id, budget_resource_name):
     """Creates an app campaign under the given customer ID.
 
     Args:
@@ -157,7 +157,7 @@ def _create_campaign(client, customer_id, budget_resource_name):
     return resource_name
 
 
-def _set_campaign_targeting_criteria(
+def set_campaign_targeting_criteria(
     client, customer_id, campaign_resource_name
 ):
     """Sets campaign targeting criteria for a given campaign.
@@ -212,7 +212,7 @@ def _set_campaign_targeting_criteria(
         )
 
 
-def _create_ad_group(client, customer_id, campaign_resource_name):
+def create_ad_group(client, customer_id, campaign_resource_name):
     """Creates an ad group for a given campaign.
 
     Args:
@@ -245,7 +245,7 @@ def _create_ad_group(client, customer_id, campaign_resource_name):
     return ad_group_resource_name
 
 
-def _create_app_ad(client, customer_id, ad_group_resource_name):
+def create_app_ad(client, customer_id, ad_group_resource_name):
     """Creates an App ad for a given ad group.
 
     Args:
@@ -264,14 +264,14 @@ def _create_app_ad(client, customer_id, ad_group_resource_name):
     # text_ad, gmail_ad, etc.
     ad_group_ad.ad.app_ad.headlines.extend(
         [
-            _create_ad_text_asset(client, "A cool puzzle game"),
-            _create_ad_text_asset(client, "Remove connected blocks"),
+            create_ad_text_asset(client, "A cool puzzle game"),
+            create_ad_text_asset(client, "Remove connected blocks"),
         ]
     )
     ad_group_ad.ad.app_ad.descriptions.extend(
         [
-            _create_ad_text_asset(client, "3 difficulty levels"),
-            _create_ad_text_asset(client, "4 colorful fun skins"),
+            create_ad_text_asset(client, "3 difficulty levels"),
+            create_ad_text_asset(client, "4 colorful fun skins"),
         ]
     )
     # Optional: You can set up to 20 image assets for your campaign.
@@ -288,7 +288,7 @@ def _create_app_ad(client, customer_id, ad_group_resource_name):
     )
 
 
-def _create_ad_text_asset(client, text):
+def create_ad_text_asset(client, text):
     ad_text_asset = client.get_type("AdTextAsset")
     ad_text_asset.text = text
     return ad_text_asset

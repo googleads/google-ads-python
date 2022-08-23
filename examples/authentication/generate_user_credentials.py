@@ -82,7 +82,7 @@ def main(client_secrets_path, scopes):
 
     # Retrieves an authorization code by opening a socket to receive the
     # redirect request and parsing the query parameters set in the URL.
-    code = unquote(_get_authorization_code(passthrough_val))
+    code = unquote(get_authorization_code(passthrough_val))
 
     # Pass the code back into the OAuth module to get a refresh token.
     flow.fetch_token(code=code)
@@ -96,7 +96,7 @@ def main(client_secrets_path, scopes):
     )
 
 
-def _get_authorization_code(passthrough_val):
+def get_authorization_code(passthrough_val):
     """Opens a socket to handle a single HTTP request containing auth tokens.
 
     Args:
@@ -114,7 +114,7 @@ def _get_authorization_code(passthrough_val):
     connection, address = sock.accept()
     data = connection.recv(1024)
     # Parse the raw request to retrieve the URL query parameters.
-    params = _parse_raw_query_params(data)
+    params = parse_raw_query_params(data)
 
     try:
         if not params.get("code"):
@@ -145,7 +145,7 @@ def _get_authorization_code(passthrough_val):
     return params.get("code")
 
 
-def _parse_raw_query_params(data):
+def parse_raw_query_params(data):
     """Parses a raw HTTP request to extract its query params as a dict.
 
     Note that this logic is likely irrelevant if you're building OAuth logic

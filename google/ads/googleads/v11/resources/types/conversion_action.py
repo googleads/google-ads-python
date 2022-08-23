@@ -76,8 +76,9 @@ class ConversionAction(proto.Message):
             conversion goal configured with a primary_for_goal = false
             conversion action, that conversion action is still biddable.
             By default, primary_for_goal will be true if not set. In V9,
-            primary_for_goal can only be set to false after creation via
-            an 'update' operation because it's not declared as optional.
+            primary_for_goal can only be set to false after creation
+            through an 'update' operation because it's not declared as
+            optional.
 
             This field is a member of `oneof`_ ``_primary_for_goal``.
         category (google.ads.googleads.v11.enums.types.ConversionActionCategoryEnum.ConversionActionCategory):
@@ -96,8 +97,8 @@ class ConversionAction(proto.Message):
             This field is a member of `oneof`_ ``_include_in_conversions_metric``.
         click_through_lookback_window_days (int):
             The maximum number of days that may elapse
-            between an interaction (e.g., a click) and a
-            conversion event.
+            between an interaction (for example, a click)
+            and a conversion event.
 
             This field is a member of `oneof`_ ``_click_through_lookback_window_days``.
         view_through_lookback_window_days (int):

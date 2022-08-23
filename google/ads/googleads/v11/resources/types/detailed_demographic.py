@@ -42,8 +42,8 @@ class DetailedDemographic(proto.Message):
             demographic.
         name (str):
             Output only. The name of the detailed
-            demographic. E.g."Highest Level of Educational
-            Attainment".
+            demographic. For example,"Highest Level of
+            Educational Attainment".
         parent (str):
             Output only. The parent of the detailed_demographic.
         launched_to_all (bool):

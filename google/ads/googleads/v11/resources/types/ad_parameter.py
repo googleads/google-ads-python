@@ -29,7 +29,8 @@ class AdParameter(proto.Message):
     URLs). There can be a maximum of two AdParameters per ad group
     criterion. (One with parameter_index = 1 and one with
     parameter_index = 2.) In the ad the parameters are referenced by a
-    placeholder of the form "{param#:value}". E.g. "{param1:$17}"
+    placeholder of the form "{param#:value}". For example,
+    "{param1:$17}"
 
     Attributes:
         resource_name (str):

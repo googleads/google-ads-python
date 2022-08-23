@@ -87,6 +87,9 @@ from google.ads.googleads.v11.errors.types import (
     audience_error as gage_audience_error,
 )
 from google.ads.googleads.v11.errors.types import (
+    audience_insights_error as gage_audience_insights_error,
+)
+from google.ads.googleads.v11.errors.types import (
     authentication_error as gage_authentication_error,
 )
 from google.ads.googleads.v11.errors.types import (
@@ -1091,6 +1094,10 @@ class ErrorCode(proto.Message):
             The reasons for the experiment arm error
 
             This field is a member of `oneof`_ ``error_code``.
+        audience_insights_error (google.ads.googleads.v11.errors.types.AudienceInsightsErrorEnum.AudienceInsightsError):
+            The reasons for the Audience Insights error
+
+            This field is a member of `oneof`_ ``error_code``.
     """
 
     request_error = proto.Field(
@@ -1926,6 +1933,12 @@ class ErrorCode(proto.Message):
         number=156,
         oneof="error_code",
         enum=gage_experiment_arm_error.ExperimentArmErrorEnum.ExperimentArmError,
+    )
+    audience_insights_error = proto.Field(
+        proto.ENUM,
+        number=167,
+        oneof="error_code",
+        enum=gage_audience_insights_error.AudienceInsightsErrorEnum.AudienceInsightsError,
     )
 
 

@@ -1,3 +1,18 @@
+* 18.1.0
+- Google Ads API v11_1 release.
+- Bump protobuf dependency to version 4.21.5.
+- Bump proto-plus dependency to version 1.22.0.
+- Update examples to remove references to expanded text ads.
+- Fix bug preventing https protocol in proxy URLs.
+- Various example updates.
+
+* 18.0.0
+- Remove support for Google Ads API v9.
+- Added "pb" user agent key/value pair.
+- Change validate_text_ad example to use an RSA instead of ETA.
+- Rename get_artifact_metadata example to search_for_google_ads_fields.
+- Fix various issues in create_experiment example.
+
 * 17.0.0
 - Google Ads API v11_0 release.
 - Added example create_experiment.

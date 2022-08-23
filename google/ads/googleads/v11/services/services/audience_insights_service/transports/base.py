@@ -29,9 +29,7 @@ from google.ads.googleads.v11.services.types import audience_insights_service
 
 try:
     DEFAULT_CLIENT_INFO = gapic_v1.client_info.ClientInfo(
-        gapic_version=pkg_resources.get_distribution(
-            "google-ads",
-        ).version,
+        gapic_version=pkg_resources.get_distribution("google-ads",).version,
     )
 except pkg_resources.DistributionNotFound:
     DEFAULT_CLIENT_INFO = gapic_v1.client_info.ClientInfo()
@@ -134,14 +132,19 @@ class AudienceInsightsServiceTransport(abc.ABC):
                 default_timeout=None,
                 client_info=client_info,
             ),
+            self.generate_audience_composition_insights: gapic_v1.method.wrap_method(
+                self.generate_audience_composition_insights,
+                default_timeout=None,
+                client_info=client_info,
+            ),
         }
 
     def close(self):
         """Closes resources associated with the transport.
 
-        .. warning::
-             Only call this method if the transport is NOT shared
-             with other clients - this may cause errors in other clients!
+       .. warning::
+            Only call this method if the transport is NOT shared
+            with other clients - this may cause errors in other clients!
         """
         raise NotImplementedError()
 
@@ -168,6 +171,20 @@ class AudienceInsightsServiceTransport(abc.ABC):
             audience_insights_service.ListAudienceInsightsAttributesResponse,
             Awaitable[
                 audience_insights_service.ListAudienceInsightsAttributesResponse
+            ],
+        ],
+    ]:
+        raise NotImplementedError()
+
+    @property
+    def generate_audience_composition_insights(
+        self,
+    ) -> Callable[
+        [audience_insights_service.GenerateAudienceCompositionInsightsRequest],
+        Union[
+            audience_insights_service.GenerateAudienceCompositionInsightsResponse,
+            Awaitable[
+                audience_insights_service.GenerateAudienceCompositionInsightsResponse
             ],
         ],
     ]:

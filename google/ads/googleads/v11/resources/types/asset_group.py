@@ -15,6 +15,7 @@
 #
 import proto  # type: ignore
 
+from google.ads.googleads.v11.enums.types import ad_strength as gage_ad_strength
 from google.ads.googleads.v11.enums.types import asset_group_status
 
 
@@ -67,6 +68,9 @@ class AssetGroup(proto.Message):
             Second part of text that may appear appended
             to the url displayed in the ad. This field can
             only be set when path1 is set.
+        ad_strength (google.ads.googleads.v11.enums.types.AdStrengthEnum.AdStrength):
+            Output only. Overall ad strength of this
+            asset group.
     """
 
     resource_name = proto.Field(proto.STRING, number=1,)
@@ -82,6 +86,9 @@ class AssetGroup(proto.Message):
     )
     path1 = proto.Field(proto.STRING, number=7,)
     path2 = proto.Field(proto.STRING, number=8,)
+    ad_strength = proto.Field(
+        proto.ENUM, number=10, enum=gage_ad_strength.AdStrengthEnum.AdStrength,
+    )
 
 
 __all__ = tuple(sorted(__protobuf__.manifest))

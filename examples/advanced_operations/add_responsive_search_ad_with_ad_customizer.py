@@ -49,21 +49,21 @@ def main(client, customer_id, ad_group_id, customizer_attribute_name):
         ad_group_id: an ad group ID.
         customizer_attribute_name: the name for the customizer attribute.
     """
-    customizer_attribute_resource_name = _create_customizer_attribute(
+    customizer_attribute_resource_name = create_customizer_attribute(
         client, customer_id, customizer_attribute_name
     )
 
-    _link_customizer_attribute_to_customer(
+    link_customizer_attribute_to_customer(
         client, customer_id, customizer_attribute_resource_name
     )
 
-    _create_responsive_search_ad_with_customization(
+    create_responsive_search_ad_with_customization(
         client, customer_id, ad_group_id, customizer_attribute_name
     )
 
 
 # [START add_responsive_search_ad_with_ad_customizer_1]
-def _create_customizer_attribute(
+def create_customizer_attribute(
     client, customer_id, customizer_attribute_name
 ):
     """Creates a customizer attribute with the given customizer attribute name.
@@ -104,7 +104,7 @@ def _create_customizer_attribute(
 
 
 # [START add_responsive_search_ad_with_ad_customizer_2]
-def _link_customizer_attribute_to_customer(
+def link_customizer_attribute_to_customer(
     client, customer_id, customizer_attribute_resource_name
 ):
     """Links the customizer attribute to the customer.
@@ -148,7 +148,7 @@ def _link_customizer_attribute_to_customer(
 
 
 # [START add_responsive_search_ad_with_ad_customizer_3]
-def _create_responsive_search_ad_with_customization(
+def create_responsive_search_ad_with_customization(
     client, customer_id, ad_group_id, customizer_attribute_name
 ):
     """Creates a responsive search ad using the specified customizer attribute.
@@ -212,7 +212,7 @@ def _create_responsive_search_ad_with_customization(
 if __name__ == "__main__":
     # GoogleAdsClient will read the google-ads.yaml configuration file in the
     # home directory if none is specified.
-    googleads_client = GoogleAdsClient.load_from_storage(version="v10")
+    googleads_client = GoogleAdsClient.load_from_storage(version="v11")
 
     parser = argparse.ArgumentParser(
         description=(

@@ -95,8 +95,8 @@ class AdGroupCriterionOperation(proto.Message):
         exempt_policy_violation_keys (Sequence[google.ads.googleads.v11.common.types.PolicyViolationKey]):
             The list of policy violation keys that should not cause a
             PolicyViolationError to be reported. Not all policy
-            violations are exemptable, please refer to the is_exemptible
-            field in the returned PolicyViolationError.
+            violations are exemptable, refer to the is_exemptible field
+            in the returned PolicyViolationError.
 
             Resources violating these polices will be saved, but will
             not be eligible to serve. They may begin serving at a later
@@ -150,8 +150,8 @@ class MutateAdGroupCriteriaResponse(proto.Message):
             Errors that pertain to operation failures in the partial
             failure mode. Returned only when partial_failure = true and
             all errors occur inside the operations. If any errors occur
-            outside the operations (e.g. auth errors), we return an RPC
-            level error.
+            outside the operations (for example, auth errors), we return
+            an RPC level error.
         results (Sequence[google.ads.googleads.v11.services.types.MutateAdGroupCriterionResult]):
             All results for the mutate.
     """

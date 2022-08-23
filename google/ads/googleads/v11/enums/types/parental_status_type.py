@@ -30,7 +30,7 @@ class ParentalStatusTypeEnum(proto.Message):
     """
 
     class ParentalStatusType(proto.Enum):
-        r"""The type of parental statuses (e.g. not a parent)."""
+        r"""The type of parental statuses (for example, not a parent)."""
         UNSPECIFIED = 0
         UNKNOWN = 1
         PARENT = 300

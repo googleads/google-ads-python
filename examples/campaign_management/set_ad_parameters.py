@@ -38,8 +38,8 @@ def main(client, customer_id, ad_group_id, criterion_id):
     )
 
     operations = [
-        _create_ad_parameter(client, resource_name, 1, "100"),
-        _create_ad_parameter(client, resource_name, 2, "$40"),
+        create_ad_parameter(client, resource_name, 1, "100"),
+        create_ad_parameter(client, resource_name, 2, "$40"),
     ]
 
     ad_parameter_service = client.get_service("AdParameterService")
@@ -70,7 +70,7 @@ def main(client, customer_id, ad_group_id, criterion_id):
             )
 
 
-def _create_ad_parameter(
+def create_ad_parameter(
     client, resource_name, parameter_index, insertion_text
 ):
     """Creates a new ad parameter create operation and returns it.
@@ -101,7 +101,7 @@ def _create_ad_parameter(
 if __name__ == "__main__":
     # GoogleAdsClient will read the google-ads.yaml configuration file in the
     # home directory if none is specified.
-    googleads_client = GoogleAdsClient.load_from_storage(version="v10")
+    googleads_client = GoogleAdsClient.load_from_storage(version="v11")
 
     # Initializes a command line argument parser.
     parser = argparse.ArgumentParser(

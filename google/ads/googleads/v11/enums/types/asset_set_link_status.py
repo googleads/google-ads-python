@@ -30,8 +30,8 @@ class AssetSetLinkStatusEnum(proto.Message):
     """
 
     class AssetSetLinkStatus(proto.Enum):
-        r"""The possible statuses of he linkage between asset set and its
-        container.
+        r"""The possible statuses of the linkage between asset set and
+        its container.
         """
         UNSPECIFIED = 0
         UNKNOWN = 1

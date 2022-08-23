@@ -30,8 +30,8 @@ class AgeRangeTypeEnum(proto.Message):
     """
 
     class AgeRangeType(proto.Enum):
-        r"""The type of demographic age ranges (e.g. between 18 and 24
-        years old).
+        r"""The type of demographic age ranges (for example, between 18
+        and 24 years old).
         """
         UNSPECIFIED = 0
         UNKNOWN = 1

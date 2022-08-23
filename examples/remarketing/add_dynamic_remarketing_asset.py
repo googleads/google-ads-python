@@ -33,18 +33,18 @@ def main(client, customer_id, campaign_id):
         campaign_id: the ID for a campaign of a type that supports dynamic
             remarketing, such as Display.
     """
-    asset_resource_name = _create_asset(client, customer_id)
-    asset_set_resource_name = _create_asset_set(client, customer_id)
-    _add_assets_to_asset_set(
+    asset_resource_name = create_asset(client, customer_id)
+    asset_set_resource_name = create_asset_set(client, customer_id)
+    add_assets_to_asset_set(
         client, asset_resource_name, asset_set_resource_name, customer_id
     )
-    _link_asset_set_to_campaign(
+    link_asset_set_to_campaign(
         client, asset_set_resource_name, customer_id, campaign_id
     )
 
 
 # [START add_asset]
-def _create_asset(client, customer_id):
+def create_asset(client, customer_id):
     """Creates a DynamicEducationAsset.
 
     See https://support.google.com/google-ads/answer/6053288?#zippy=%2Ceducation
@@ -96,7 +96,7 @@ def _create_asset(client, customer_id):
 
 
 # [START add_asset_set]
-def _create_asset_set(client, customer_id):
+def create_asset_set(client, customer_id):
     """Creates an AssetSet.
 
     The AssetSet will be used to link the dynamic remarketing assets to a
@@ -127,7 +127,7 @@ def _create_asset_set(client, customer_id):
 
 
 # [START add_asset_set_asset]
-def _add_assets_to_asset_set(
+def add_assets_to_asset_set(
     client, asset_resource_name, asset_set_resource_name, customer_id
 ):
     """Adds an Asset to an AssetSet by creating an AssetSetAsset link.
@@ -158,7 +158,7 @@ def _add_assets_to_asset_set(
 
 
 # [START add_campaign_asset_set]
-def _link_asset_set_to_campaign(
+def link_asset_set_to_campaign(
     client, asset_set_resource_name, customer_id, campaign_id
 ):
     """Creates a CampaignAssetSet.
@@ -193,7 +193,7 @@ def _link_asset_set_to_campaign(
 if __name__ == "__main__":
     # GoogleAdsClient will read the google-ads.yaml configuration file in the
     # home directory if none is specified.
-    googleads_client = GoogleAdsClient.load_from_storage(version="v10")
+    googleads_client = GoogleAdsClient.load_from_storage(version="v11")
 
     parser = argparse.ArgumentParser(
         description="Adds an asset for use in dynamic remarketing."

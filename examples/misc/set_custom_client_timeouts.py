@@ -38,11 +38,12 @@ _QUERY = "SELECT campaign.id FROM campaign"
 
 def main(client, customer_id):
     """Main method, to run this code example as a standalone application."""
-    _make_server_streaming_call(client, customer_id)
-    _make_unary_call(client, customer_id)
+    make_server_streaming_call(client, customer_id)
+    make_unary_call(client, customer_id)
 
 
-def _make_server_streaming_call(client, customer_id):
+# [START set_custom_client_timeouts]
+def make_server_streaming_call(client, customer_id):
     """Makes a server streaming call using a custom client timeout.
 
     Args:
@@ -87,9 +88,11 @@ def _make_server_streaming_call(client, customer_id):
         sys.exit(1)
 
     print(f"Total # of campaign IDs retrieved: {len(campaign_ids)}")
+    # [END set_custom_client_timeouts]
 
 
-def _make_unary_call(client, customer_id):
+# [START set_custom_client_timeouts_1]
+def make_unary_call(client, customer_id):
     """Makes a unary call using a custom client timeout.
 
     Args:
@@ -115,6 +118,9 @@ def _make_unary_call(client, customer_id):
                 deadline=_CLIENT_TIMEOUT_SECONDS,
                 # Sets the timeout that is used for the first try to one tenth
                 # of the maximum accumulative timeout of the call.
+                # Note: This overrides the default value and can lead to
+                # RequestError.RPC_DEADLINE_TOO_SHORT errors when too small. We
+                # recommend changing the value only if necessary.
                 initial=_CLIENT_TIMEOUT_SECONDS / 10,
                 # Sets the maximum timeout that can be used for any given try
                 # to one fifth of the maximum accumulative timeout of the call
@@ -144,12 +150,13 @@ def _make_unary_call(client, customer_id):
         sys.exit(1)
 
     print(f"Total # of campaign IDs retrieved: {len(campaign_ids)}")
+    # [END set_custom_client_timeouts_1]
 
 
 if __name__ == "__main__":
     # GoogleAdsClient will read the google-ads.yaml configuration file in the
     # home directory if none is specified.
-    googleads_client = GoogleAdsClient.load_from_storage(version="v10")
+    googleads_client = GoogleAdsClient.load_from_storage(version="v11")
 
     parser = argparse.ArgumentParser(
         description="Demonstrates custom client timeouts in the context of "

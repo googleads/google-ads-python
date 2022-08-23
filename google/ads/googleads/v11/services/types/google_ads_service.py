@@ -1781,7 +1781,7 @@ class MutateGoogleAdsRequest(proto.Message):
             resource name should be returned post mutation.
             The mutable resource will only be returned if
             the resource has the appropriate response field.
-            E.g. MutateCampaignResult.campaign.
+            For example, MutateCampaignResult.campaign.
     """
 
     customer_id = proto.Field(proto.STRING, number=1,)
@@ -1806,8 +1806,8 @@ class MutateGoogleAdsResponse(proto.Message):
             Errors that pertain to operation failures in the partial
             failure mode. Returned only when partial_failure = true and
             all errors occur inside the operations. If any errors occur
-            outside the operations (e.g., auth errors), we return an RPC
-            level error.
+            outside the operations (for example, auth errors), we return
+            an RPC level error.
         mutate_operation_responses (Sequence[google.ads.googleads.v11.services.types.MutateOperationResponse]):
             All responses for the mutate.
     """
@@ -2859,6 +2859,14 @@ class MutateOperationResponse(proto.Message):
             mutate.
 
             This field is a member of `oneof`_ ``response``.
+        experiment_result (google.ads.googleads.v11.services.types.MutateExperimentResult):
+            The result for the experiment mutate.
+
+            This field is a member of `oneof`_ ``response``.
+        experiment_arm_result (google.ads.googleads.v11.services.types.MutateExperimentArmResult):
+            The result for the experiment arm mutate.
+
+            This field is a member of `oneof`_ ``response``.
         extension_feed_item_result (google.ads.googleads.v11.services.types.MutateExtensionFeedItemResult):
             The result for the extension feed item
             mutate.
@@ -3272,6 +3280,18 @@ class MutateOperationResponse(proto.Message):
         number=70,
         oneof="response",
         message=customizer_attribute_service.MutateCustomizerAttributeResult,
+    )
+    experiment_result = proto.Field(
+        proto.MESSAGE,
+        number=81,
+        oneof="response",
+        message=experiment_service.MutateExperimentResult,
+    )
+    experiment_arm_result = proto.Field(
+        proto.MESSAGE,
+        number=82,
+        oneof="response",
+        message=experiment_arm_service.MutateExperimentArmResult,
     )
     extension_feed_item_result = proto.Field(
         proto.MESSAGE,

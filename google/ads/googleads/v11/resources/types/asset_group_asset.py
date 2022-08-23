@@ -49,7 +49,7 @@ class AssetGroupAsset(proto.Message):
             asset is linking.
         field_type (google.ads.googleads.v11.enums.types.AssetFieldTypeEnum.AssetFieldType):
             The description of the placement of the asset within the
-            asset group. E.g.: HEADLINE, YOUTUBE_VIDEO etc
+            asset group. For example: HEADLINE, YOUTUBE_VIDEO etc
         status (google.ads.googleads.v11.enums.types.AssetLinkStatusEnum.AssetLinkStatus):
             The status of the link between an asset and
             asset group.

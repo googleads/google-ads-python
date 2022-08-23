@@ -54,17 +54,17 @@ class UserList(proto.Message):
 
             This field is a member of `oneof`_ ``_id``.
         read_only (bool):
-            Output only. A flag that indicates if a user
-            may edit a list. Depends on the list ownership
-            and list type. For example, external remarketing
-            user lists are not editable.
+            Output only. An option that indicates if a
+            user may edit a list. Depends on the list
+            ownership and list type. For example, external
+            remarketing user lists are not editable.
 
             This field is read-only.
 
             This field is a member of `oneof`_ ``_read_only``.
         name (str):
             Name of this user list. Depending on its access_reason, the
-            user list name may not be unique (e.g. if
+            user list name may not be unique (for example, if
             access_reason=SHARED)
 
             This field is a member of `oneof`_ ``_name``.

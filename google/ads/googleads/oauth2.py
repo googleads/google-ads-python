@@ -39,9 +39,10 @@ def _initialize_credentials_decorator(func):
         credentials = func(*args, **kwargs)
         # If the configs contain an http_proxy, refresh credentials through the
         # proxy URI
-        if kwargs.get("http_proxy"):
+        proxy = kwargs.get("http_proxy")
+        if proxy:
             session = Session()
-            session.proxies.update({"http": kwargs.get("http_proxy")})
+            session.proxies.update({"http": proxy, "https": proxy})
             credentials.refresh(Request(session=session))
         else:
             credentials.refresh(Request())

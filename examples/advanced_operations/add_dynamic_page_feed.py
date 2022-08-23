@@ -57,29 +57,29 @@ def main(client, customer_id, campaign_id, ad_group_id):
 
     # Get the page feed resource name. This code example creates a new feed,
     # but you can fetch and re-use an existing feed.
-    feed_resource_name = _create_feed(client, customer_id)
+    feed_resource_name = create_feed(client, customer_id)
 
     # We need to look up the attribute name and ID for the feed we just
     # created so that we can give them back to the API for construction of
     # feed mappings in the next function.
-    feed_details = _get_feed_details(client, customer_id, feed_resource_name)
-    _create_feed_mapping(client, customer_id, feed_details)
-    _create_feed_items(client, customer_id, feed_details, dsa_page_url_label)
+    feed_details = get_feed_details(client, customer_id, feed_resource_name)
+    create_feed_mapping(client, customer_id, feed_details)
+    create_feed_items(client, customer_id, feed_details, dsa_page_url_label)
 
     # Associate the page feed with the campaign.
-    _update_campaign_dsa_setting(client, customer_id, campaign_id, feed_details)
+    update_campaign_dsa_setting(client, customer_id, campaign_id, feed_details)
     ad_group_service = client.get_service("AdGroupService")
     ad_group_resource_name = ad_group_service.ad_group_path(
         customer_id, ad_group_id
     )
 
     # Optional: Target web pages matching the feed's label in the ad group.
-    _add_dsa_targeting(
+    add_dsa_targeting(
         client, customer_id, ad_group_resource_name, dsa_page_url_label
     )
 
 
-def _create_feed(client, customer_id):
+def create_feed(client, customer_id):
     """Creates a page feed with URLs
 
     Args:
@@ -119,7 +119,7 @@ def _create_feed(client, customer_id):
     return response.results[0].resource_name
 
 
-def _get_feed_details(client, customer_id, resource_name):
+def get_feed_details(client, customer_id, resource_name):
     """Makes a search request to retrieve the attributes of a single feed.
 
     Args:
@@ -161,7 +161,7 @@ def _get_feed_details(client, customer_id, resource_name):
     )
 
 
-def _create_feed_mapping(client, customer_id, feed_details):
+def create_feed_mapping(client, customer_id, feed_details):
     """Creates feed mapping using the given feed details
 
     Args:
@@ -201,7 +201,7 @@ def _create_feed_mapping(client, customer_id, feed_details):
     print(f"Feed mapping created with resource_name: '{resource_name}'")
 
 
-def _create_feed_items(client, customer_id, feed_details, label):
+def create_feed_items(client, customer_id, feed_details, label):
     """Creates feed items with the given feed_details and label
 
     Args:
@@ -255,9 +255,7 @@ def _create_feed_items(client, customer_id, feed_details, label):
 
 
 # [START add_dynamic_page_feed]
-def _update_campaign_dsa_setting(
-    client, customer_id, campaign_id, feed_details
-):
+def update_campaign_dsa_setting(client, customer_id, campaign_id, feed_details):
     """Updates the given campaign with the given feed details.
 
     Args:
@@ -323,7 +321,7 @@ def _update_campaign_dsa_setting(
 
 
 # [START add_dynamic_page_feed_2]
-def _add_dsa_targeting(client, customer_id, ad_group_resource_name, label):
+def add_dsa_targeting(client, customer_id, ad_group_resource_name, label):
     """Adds Dynamic Search Ad targeting criteria to the given ad group.
 
     Args:
@@ -365,7 +363,7 @@ def _add_dsa_targeting(client, customer_id, ad_group_resource_name, label):
 if __name__ == "__main__":
     # GoogleAdsClient will read the google-ads.yaml configuration file in the
     # home directory if none is specified.
-    googleads_client = GoogleAdsClient.load_from_storage(version="v10")
+    googleads_client = GoogleAdsClient.load_from_storage(version="v11")
 
     parser = argparse.ArgumentParser(
         description=(

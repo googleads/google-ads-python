@@ -74,12 +74,13 @@ class UserDataServiceClientMeta(type):
 
 class UserDataServiceClient(metaclass=UserDataServiceClientMeta):
     """Service to manage user data uploads.
-    Any uploads made to a Customer Match list via this service will
-    be eligible for matching as per the customer matching process.
-    Please see https://support.google.com/google-ads/answer/7474263.
-    However, the uploads made via this service will not be visible
-    under the 'Segment members' section for the Customer Match List
-    in the Google Ads UI.
+    Any uploads made to a Customer Match list through this service
+    will be eligible for matching as per the customer matching
+    process. See
+    https://support.google.com/google-ads/answer/7474263. However,
+    the uploads made through this service will not be visible under
+    the 'Segment members' section for the Customer Match List in the
+    Google Ads UI.
     """
 
     @staticmethod
@@ -396,7 +397,7 @@ class UserDataServiceClient(metaclass=UserDataServiceClientMeta):
         Returns:
             google.ads.googleads.v11.services.types.UploadUserDataResponse:
                 Response message for [UserDataService.UploadUserData][google.ads.googleads.v11.services.UserDataService.UploadUserData]
-                   Uploads made via this service will not be visible
+                   Uploads made through this service will not be visible
                    under the 'Segment members' section for the Customer
                    Match List in the Google Ads UI.
 

@@ -28,21 +28,21 @@ from google.ads.googleads.errors import GoogleAdsException
 
 
 def main(client, customer_id, page_size):
-    remarketing_action_resource_name = _add_remarketing_action(
+    remarketing_action_resource_name = add_remarketing_action(
         client, customer_id
     )
 
     print(f'Created remarketing action "{remarketing_action_resource_name}".')
 
-    queried_remarketing_action = _query_remarketing_action(
+    queried_remarketing_action = query_remarketing_action(
         client, customer_id, remarketing_action_resource_name, page_size
     )
 
-    _print_remarketing_action_attributes(queried_remarketing_action)
+    print_remarketing_action_attributes(queried_remarketing_action)
 
 
 # [START add_remarketing_action]
-def _add_remarketing_action(client, customer_id):
+def add_remarketing_action(client, customer_id):
     remarketing_action_service = client.get_service("RemarketingActionService")
     remarketing_action_operation = client.get_type("RemarketingActionOperation")
 
@@ -72,7 +72,7 @@ def _add_remarketing_action(client, customer_id):
     # [END add_remarketing_action]
 
 
-def _query_remarketing_action(client, customer_id, resource_name, page_size):
+def query_remarketing_action(client, customer_id, resource_name, page_size):
     """Retrieves the previously created remarketing action with tag snippets.
 
     Args:
@@ -118,7 +118,7 @@ def _query_remarketing_action(client, customer_id, resource_name, page_size):
         sys.exit(1)
 
 
-def _print_remarketing_action_attributes(remarketing_action):
+def print_remarketing_action_attributes(remarketing_action):
     print(
         f"Remarketing action has ID {remarketing_action.id} and name "
         f'"{remarketing_action.name}". \nIt has the following '
@@ -143,7 +143,7 @@ def _print_remarketing_action_attributes(remarketing_action):
 if __name__ == "__main__":
     # GoogleAdsClient will read the google-ads.yaml configuration file in the
     # home directory if none is specified.
-    googleads_client = GoogleAdsClient.load_from_storage(version="v10")
+    googleads_client = GoogleAdsClient.load_from_storage(version="v11")
 
     parser = argparse.ArgumentParser(
         description="Adds a remarketing action for specified customer."

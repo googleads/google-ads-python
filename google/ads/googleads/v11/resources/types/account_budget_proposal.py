@@ -34,10 +34,10 @@ class AccountBudgetProposal(proto.Message):
     All fields prefixed with 'proposed' may not necessarily be applied
     directly. For example, proposed spending limits may be adjusted
     before their application. This is true if the 'proposed' field has
-    an 'approved' counterpart, e.g. spending limits.
+    an 'approved' counterpart, for example, spending limits.
 
-    Please note that the proposal type (proposal_type) changes which
-    fields are required and which must remain empty.
+    Note that the proposal type (proposal_type) changes which fields are
+    required and which must remain empty.
 
     This message has `oneof`_ fields (mutually exclusive fields).
     For each oneof, at most one member field can be set at the same time.
@@ -68,9 +68,9 @@ class AccountBudgetProposal(proto.Message):
 
             This field is a member of `oneof`_ ``_account_budget``.
         proposal_type (google.ads.googleads.v11.enums.types.AccountBudgetProposalTypeEnum.AccountBudgetProposalType):
-            Immutable. The type of this proposal, e.g.
-            END to end the budget associated with this
-            proposal.
+            Immutable. The type of this proposal, for
+            example, END to end the budget associated with
+            this proposal.
         status (google.ads.googleads.v11.enums.types.AccountBudgetProposalStatusEnum.AccountBudgetProposalStatus):
             Output only. The status of this proposal.
             When a new proposal is created, the status
@@ -115,7 +115,7 @@ class AccountBudgetProposal(proto.Message):
             This field is a member of `oneof`_ ``proposed_start_time``.
         proposed_start_time_type (google.ads.googleads.v11.enums.types.TimeTypeEnum.TimeType):
             Immutable. The proposed start date time as a
-            well-defined type, e.g. NOW.
+            well-defined type, for example, NOW.
 
             This field is a member of `oneof`_ ``proposed_start_time``.
         proposed_end_date_time (str):
@@ -125,7 +125,7 @@ class AccountBudgetProposal(proto.Message):
             This field is a member of `oneof`_ ``proposed_end_time``.
         proposed_end_time_type (google.ads.googleads.v11.enums.types.TimeTypeEnum.TimeType):
             Immutable. The proposed end date time as a
-            well-defined type, e.g. FOREVER.
+            well-defined type, for example, FOREVER.
 
             This field is a member of `oneof`_ ``proposed_end_time``.
         approved_end_date_time (str):
@@ -135,7 +135,7 @@ class AccountBudgetProposal(proto.Message):
             This field is a member of `oneof`_ ``approved_end_time``.
         approved_end_time_type (google.ads.googleads.v11.enums.types.TimeTypeEnum.TimeType):
             Output only. The approved end date time as a
-            well-defined type, e.g. FOREVER.
+            well-defined type, for example, FOREVER.
 
             This field is a member of `oneof`_ ``approved_end_time``.
         proposed_spending_limit_micros (int):
@@ -145,7 +145,7 @@ class AccountBudgetProposal(proto.Message):
             This field is a member of `oneof`_ ``proposed_spending_limit``.
         proposed_spending_limit_type (google.ads.googleads.v11.enums.types.SpendingLimitTypeEnum.SpendingLimitType):
             Immutable. The proposed spending limit as a
-            well-defined type, e.g. INFINITE.
+            well-defined type, for example, INFINITE.
 
             This field is a member of `oneof`_ ``proposed_spending_limit``.
         approved_spending_limit_micros (int):
@@ -155,7 +155,7 @@ class AccountBudgetProposal(proto.Message):
             This field is a member of `oneof`_ ``approved_spending_limit``.
         approved_spending_limit_type (google.ads.googleads.v11.enums.types.SpendingLimitTypeEnum.SpendingLimitType):
             Output only. The approved spending limit as a
-            well-defined type, e.g. INFINITE.
+            well-defined type, for example, INFINITE.
 
             This field is a member of `oneof`_ ``approved_spending_limit``.
     """

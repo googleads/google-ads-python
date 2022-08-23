@@ -111,7 +111,7 @@ def main(client, customer_id, ad_group_id):
     # Only update the TargetSetting on the ad group if there is an audience
     # TargetRestriction with bid_only set to false.
     if should_update_targeting_setting:
-        _update_targeting_setting(
+        update_targeting_setting(
             client, customer_id, ad_group_id, targeting_setting
         )
     else:
@@ -119,7 +119,7 @@ def main(client, customer_id, ad_group_id):
 
 
 # [START update_audience_target_restriction_2]
-def _update_targeting_setting(
+def update_targeting_setting(
     client, customer_id, ad_group_id, targeting_setting
 ):
     """Updates the given TargetingSetting of an ad group.
@@ -168,7 +168,7 @@ def _update_targeting_setting(
 if __name__ == "__main__":
     # GoogleAdsClient will read the google-ads.yaml configuration file in the
     # home directory if none is specified.
-    googleads_client = GoogleAdsClient.load_from_storage(version="v10")
+    googleads_client = GoogleAdsClient.load_from_storage(version="v11")
 
     parser = argparse.ArgumentParser(
         description="Updates the audience target restriction of a given ad "

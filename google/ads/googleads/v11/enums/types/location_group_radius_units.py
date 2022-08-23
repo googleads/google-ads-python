@@ -30,7 +30,9 @@ class LocationGroupRadiusUnitsEnum(proto.Message):
     """
 
     class LocationGroupRadiusUnits(proto.Enum):
-        r"""The unit of radius distance in location group (e.g. MILES)"""
+        r"""The unit of radius distance in location group (for example,
+        MILES)
+        """
         UNSPECIFIED = 0
         UNKNOWN = 1
         METERS = 2

@@ -37,13 +37,14 @@ class LanguageConstant(proto.Message):
 
             This field is a member of `oneof`_ ``_id``.
         code (str):
-            Output only. The language code, e.g. "en_US", "en_AU", "es",
-            "fr", etc.
+            Output only. The language code, for example, "en_US",
+            "en_AU", "es", "fr", etc.
 
             This field is a member of `oneof`_ ``_code``.
         name (str):
             Output only. The full name of the language in
-            English, e.g., "English (US)", "Spanish", etc.
+            English, for example, "English (US)", "Spanish",
+            etc.
 
             This field is a member of `oneof`_ ``_name``.
         targetable (bool):

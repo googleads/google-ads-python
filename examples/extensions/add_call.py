@@ -38,13 +38,13 @@ def main(
         phone_country: a two-letter ISO-3166 code.
         conversion_action_id: an ID for a conversion action.
     """
-    asset_resource_name = _add_extension_asset(
+    asset_resource_name = add_extension_asset(
         client, customer_id, phone_number, phone_country, conversion_action_id
     )
-    _link_asset_to_account(client, customer_id, asset_resource_name)
+    link_asset_to_account(client, customer_id, asset_resource_name)
 
 
-def _add_extension_asset(
+def add_extension_asset(
     client, customer_id, phone_number, phone_country, conversion_action_id
 ):
     """Creates a new asset for the call.
@@ -99,7 +99,7 @@ def _add_extension_asset(
     return resource_name
 
 
-def _link_asset_to_account(client, customer_id, asset_resource_name):
+def link_asset_to_account(client, customer_id, asset_resource_name):
     """Links the call asset at the account level to serve in eligible campaigns.
 
     Args:
@@ -123,7 +123,7 @@ def _link_asset_to_account(client, customer_id, asset_resource_name):
 if __name__ == "__main__":
     # GoogleAdsClient will read the google-ads.yaml configuration file in the
     # home directory if none is specified.
-    googleads_client = GoogleAdsClient.load_from_storage(version="v10")
+    googleads_client = GoogleAdsClient.load_from_storage(version="v11")
 
     parser = argparse.ArgumentParser(
         description=("Adds a call extension to a specific account.")

@@ -137,7 +137,8 @@ class MonthlySearchVolume(proto.Message):
 
     Attributes:
         year (int):
-            The year of the search volume (e.g. 2020).
+            The year of the search volume (for example,
+            2020).
 
             This field is a member of `oneof`_ ``_year``.
         month (google.ads.googleads.v11.enums.types.MonthOfYearEnum.MonthOfYear):

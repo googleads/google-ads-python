@@ -25,7 +25,7 @@ from google.ads.googleads.errors import GoogleAdsException
 from cloud_logging_interceptor import CloudLoggingInterceptor
 
 
-_API_VERSION = "v10"
+_API_VERSION = "v11"
 
 
 def main(client, customer_id):

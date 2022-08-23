@@ -134,10 +134,8 @@ class AudienceInsightsServiceGrpcTransport(AudienceInsightsServiceTransport):
                 # default SSL credentials.
                 if client_cert_source:
                     cert, key = client_cert_source()
-                    self._ssl_channel_credentials = (
-                        grpc.ssl_channel_credentials(
-                            certificate_chain=cert, private_key=key
-                        )
+                    self._ssl_channel_credentials = grpc.ssl_channel_credentials(
+                        certificate_chain=cert, private_key=key
                     )
                 else:
                     self._ssl_channel_credentials = (
@@ -147,10 +145,8 @@ class AudienceInsightsServiceGrpcTransport(AudienceInsightsServiceTransport):
             else:
                 if client_cert_source_for_mtls and not ssl_channel_credentials:
                     cert, key = client_cert_source_for_mtls()
-                    self._ssl_channel_credentials = (
-                        grpc.ssl_channel_credentials(
-                            certificate_chain=cert, private_key=key
-                        )
+                    self._ssl_channel_credentials = grpc.ssl_channel_credentials(
+                        certificate_chain=cert, private_key=key
                     )
 
         # The base transport sets the host, credentials and scopes
@@ -233,7 +229,8 @@ class AudienceInsightsServiceGrpcTransport(AudienceInsightsServiceTransport):
 
     @property
     def grpc_channel(self) -> grpc.Channel:
-        """Return the channel designed to connect to this service."""
+        """Return the channel designed to connect to this service.
+        """
         return self._grpc_channel
 
     @property
@@ -311,6 +308,45 @@ class AudienceInsightsServiceGrpcTransport(AudienceInsightsServiceTransport):
                 response_deserializer=audience_insights_service.ListAudienceInsightsAttributesResponse.deserialize,
             )
         return self._stubs["list_audience_insights_attributes"]
+
+    @property
+    def generate_audience_composition_insights(
+        self,
+    ) -> Callable[
+        [audience_insights_service.GenerateAudienceCompositionInsightsRequest],
+        audience_insights_service.GenerateAudienceCompositionInsightsResponse,
+    ]:
+        r"""Return a callable for the generate audience composition
+        insights method over gRPC.
+
+        Returns a collection of attributes that are represented in an
+        audience of interest, with metrics that compare each attribute's
+        share of the audience with its share of a baseline audience.
+
+        List of thrown errors: `AudienceInsightsError <>`__
+        `AuthenticationError <>`__ `AuthorizationError <>`__
+        `FieldError <>`__ `HeaderError <>`__ `InternalError <>`__
+        `QuotaError <>`__ `RangeError <>`__ `RequestError <>`__
+
+        Returns:
+            Callable[[~.GenerateAudienceCompositionInsightsRequest],
+                    ~.GenerateAudienceCompositionInsightsResponse]:
+                A function that, when called, will call the underlying RPC
+                on the server.
+        """
+        # Generate a "stub function" on-the-fly which will actually make
+        # the request.
+        # gRPC handles serialization and deserialization, so we just need
+        # to pass in the functions for each.
+        if "generate_audience_composition_insights" not in self._stubs:
+            self._stubs[
+                "generate_audience_composition_insights"
+            ] = self.grpc_channel.unary_unary(
+                "/google.ads.googleads.v11.services.AudienceInsightsService/GenerateAudienceCompositionInsights",
+                request_serializer=audience_insights_service.GenerateAudienceCompositionInsightsRequest.serialize,
+                response_deserializer=audience_insights_service.GenerateAudienceCompositionInsightsResponse.deserialize,
+            )
+        return self._stubs["generate_audience_composition_insights"]
 
     def close(self):
         self.grpc_channel.close()

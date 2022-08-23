@@ -33,7 +33,7 @@ _logger = logging.getLogger(__name__)
 
 _SERVICE_CLIENT_TEMPLATE = "{}Client"
 
-_VALID_API_VERSIONS = ["v11", "v10", "v9"]
+_VALID_API_VERSIONS = ["v11", "v10"]
 _DEFAULT_VERSION = _VALID_API_VERSIONS[0]
 
 # Retrieve the version of this client library to be sent in the user-agent
@@ -329,7 +329,7 @@ class GoogleAdsClient:
 
         # If given, write the http_proxy channel option for GRPC to use
         if http_proxy:
-            _GRPC_CHANNEL_OPTIONS.append(("grpc.http_proxy", http_proxy)),
+            _GRPC_CHANNEL_OPTIONS.append(("grpc.http_proxy", http_proxy))
 
     def get_service(self, name, version=_DEFAULT_VERSION, interceptors=None):
         """Returns a service client instance for the specified service_name.

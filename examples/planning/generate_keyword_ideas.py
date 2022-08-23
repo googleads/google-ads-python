@@ -42,7 +42,7 @@ def main(
     keyword_plan_network = (
         client.enums.KeywordPlanNetworkEnum.GOOGLE_SEARCH_AND_PARTNERS
     )
-    location_rns = _map_locations_ids_to_resource_names(client, location_ids)
+    location_rns = map_locations_ids_to_resource_names(client, location_ids)
     language_rn = client.get_service("GoogleAdsService").language_constant_path(
         language_id
     )
@@ -98,16 +98,7 @@ def main(
     # [END generate_keyword_ideas]
 
 
-def map_keywords_to_string_values(client, keyword_texts):
-    keyword_protos = []
-    for keyword in keyword_texts:
-        string_val = client.get_type("StringValue")
-        string_val.value = keyword
-        keyword_protos.append(string_val)
-    return keyword_protos
-
-
-def _map_locations_ids_to_resource_names(client, location_ids):
+def map_locations_ids_to_resource_names(client, location_ids):
     """Converts a list of location IDs to resource names.
 
     Args:
@@ -126,7 +117,7 @@ def _map_locations_ids_to_resource_names(client, location_ids):
 if __name__ == "__main__":
     # GoogleAdsClient will read the google-ads.yaml configuration file in the
     # home directory if none is specified.
-    googleads_client = GoogleAdsClient.load_from_storage(version="v10")
+    googleads_client = GoogleAdsClient.load_from_storage(version="v11")
 
     parser = argparse.ArgumentParser(
         description="Generates keyword ideas from a list of seed keywords."

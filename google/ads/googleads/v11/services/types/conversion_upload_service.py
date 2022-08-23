@@ -82,8 +82,9 @@ class UploadClickConversionsResponse(proto.Message):
             Errors that pertain to conversion failures in
             the partial failure mode. Returned when all
             errors occur inside the conversions. If any
-            errors occur outside the conversions (e.g. auth
-            errors), we return an RPC level error. See
+            errors occur outside the conversions (for
+            example, auth errors), we return an RPC level
+            error. See
             https://developers.google.com/google-ads/api/docs/best-practices/partial-failures
             for more information about partial failure.
         results (Sequence[google.ads.googleads.v11.services.types.ClickConversionResult]):
@@ -143,8 +144,9 @@ class UploadCallConversionsResponse(proto.Message):
             Errors that pertain to conversion failures in
             the partial failure mode. Returned when all
             errors occur inside the conversions. If any
-            errors occur outside the conversions (e.g. auth
-            errors), we return an RPC level error. See
+            errors occur outside the conversions (for
+            example, auth errors), we return an RPC level
+            error. See
             https://developers.google.com/google-ads/api/docs/best-practices/partial-failures
             for more information about partial failure.
         results (Sequence[google.ads.googleads.v11.services.types.CallConversionResult]):
@@ -190,8 +192,8 @@ class ClickConversion(proto.Message):
         conversion_date_time (str):
             The date time at which the conversion occurred. Must be
             after the click time. The timezone must be specified. The
-            format is "yyyy-mm-dd hh:mm:ss+|-hh:mm", e.g. "2019-01-01
-            12:32:45-08:00".
+            format is "yyyy-mm-dd hh:mm:ss+|-hh:mm", for example,
+            "2019-01-01 12:32:45-08:00".
 
             This field is a member of `oneof`_ ``_conversion_date_time``.
         conversion_value (float):
@@ -230,7 +232,7 @@ class ClickConversion(proto.Message):
             for each conversion is 5.
         conversion_environment (google.ads.googleads.v11.enums.types.ConversionEnvironmentEnum.ConversionEnvironment):
             The environment this conversion was recorded
-            on. e.g. App or Web.
+            on, for example, App or Web.
     """
 
     gclid = proto.Field(proto.STRING, number=9, optional=True,)
@@ -265,14 +267,14 @@ class CallConversion(proto.Message):
         caller_id (str):
             The caller id from which this call was
             placed. Caller id is expected to be in E.164
-            format with preceding '+' sign. e.g.
+            format with preceding '+' sign, for example,
             "+16502531234".
 
             This field is a member of `oneof`_ ``_caller_id``.
         call_start_date_time (str):
             The date time at which the call occurred. The timezone must
             be specified. The format is "yyyy-mm-dd hh:mm:ss+|-hh:mm",
-            e.g. "2019-01-01 12:32:45-08:00".
+            for example, "2019-01-01 12:32:45-08:00".
 
             This field is a member of `oneof`_ ``_call_start_date_time``.
         conversion_action (str):
@@ -287,8 +289,8 @@ class CallConversion(proto.Message):
         conversion_date_time (str):
             The date time at which the conversion occurred. Must be
             after the call time. The timezone must be specified. The
-            format is "yyyy-mm-dd hh:mm:ss+|-hh:mm", e.g. "2019-01-01
-            12:32:45-08:00".
+            format is "yyyy-mm-dd hh:mm:ss+|-hh:mm", for example,
+            "2019-01-01 12:32:45-08:00".
 
             This field is a member of `oneof`_ ``_conversion_date_time``.
         conversion_value (float):
@@ -367,7 +369,7 @@ class ClickConversionResult(proto.Message):
             This field is a member of `oneof`_ ``_conversion_action``.
         conversion_date_time (str):
             The date time at which the conversion occurred. The format
-            is "yyyy-mm-dd hh:mm:ss+|-hh:mm", e.g. "2019-01-01
+            is "yyyy-mm-dd hh:mm:ss+|-hh:mm", for example, "2019-01-01
             12:32:45-08:00".
 
             This field is a member of `oneof`_ ``_conversion_date_time``.
@@ -401,7 +403,7 @@ class CallConversionResult(proto.Message):
             This field is a member of `oneof`_ ``_caller_id``.
         call_start_date_time (str):
             The date time at which the call occurred. The format is
-            "yyyy-mm-dd hh:mm:ss+|-hh:mm", e.g. "2019-01-01
+            "yyyy-mm-dd hh:mm:ss+|-hh:mm", for example, "2019-01-01
             12:32:45-08:00".
 
             This field is a member of `oneof`_ ``_call_start_date_time``.
@@ -412,7 +414,7 @@ class CallConversionResult(proto.Message):
             This field is a member of `oneof`_ ``_conversion_action``.
         conversion_date_time (str):
             The date time at which the conversion occurred. The format
-            is "yyyy-mm-dd hh:mm:ss+|-hh:mm", e.g. "2019-01-01
+            is "yyyy-mm-dd hh:mm:ss+|-hh:mm", for example, "2019-01-01
             12:32:45-08:00".
 
             This field is a member of `oneof`_ ``_conversion_date_time``.

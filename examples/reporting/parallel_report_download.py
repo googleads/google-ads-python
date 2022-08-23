@@ -53,13 +53,13 @@ def main(client, customer_ids):
         FROM ad_group
         WHERE segments.date DURING LAST_30_DAYS"""
 
-    inputs = _generate_inputs(
+    inputs = generate_inputs(
         client, customer_ids, [campaign_query, ad_group_query]
     )
     with multiprocessing.Pool(MAX_PROCESSES) as pool:
-        # Call _issue_search_request on each input, parallelizing the work
+        # Call issue_search_request on each input, parallelizing the work
         # across processes in the pool.
-        results = pool.starmap(_issue_search_request, inputs)
+        results = pool.starmap(issue_search_request, inputs)
 
         # Partition our results into successful and failed results.
         successes = []
@@ -101,7 +101,7 @@ def main(client, customer_ids):
                         print(f"\t\tOn field: {field_path_element.field_name}")
 
 
-def _issue_search_request(client, customer_id, query):
+def issue_search_request(client, customer_id, query):
     """Issues a search request using streaming.
 
     Retries if a GoogleAdsException is caught, until MAX_RETRIES is reached.
@@ -157,7 +157,7 @@ def _issue_search_request(client, customer_id, query):
                 )
 
 
-def _generate_inputs(client, customer_ids, queries):
+def generate_inputs(client, customer_ids, queries):
     """Generates all inputs to feed into search requests.
 
     A GoogleAdsService instance cannot be serialized with pickle for parallel
@@ -175,7 +175,7 @@ def _generate_inputs(client, customer_ids, queries):
 if __name__ == "__main__":
     # GoogleAdsClient will read the google-ads.yaml configuration file in the
     # home directory if none is specified.
-    googleads_client = GoogleAdsClient.load_from_storage(version="v10")
+    googleads_client = GoogleAdsClient.load_from_storage(version="v11")
 
     parser = argparse.ArgumentParser(
         description="Download a set of reports in parallel from a list of "

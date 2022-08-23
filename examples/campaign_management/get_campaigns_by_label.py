@@ -68,7 +68,7 @@ def main(client, customer_id, label_id, page_size):
     # search criteria.
     for row in iterator:
         print(
-            f'Campaign found with name "{row.campaign.id}", ID '
+            f'Campaign found with ID "{row.campaign.id}", name '
             f'"{row.campaign.name}", and label "{row.label.name}".'
         )
 
@@ -76,7 +76,7 @@ def main(client, customer_id, label_id, page_size):
 if __name__ == "__main__":
     # GoogleAdsClient will read the google-ads.yaml configuration file in the
     # home directory if none is specified.
-    googleads_client = GoogleAdsClient.load_from_storage(version="v8")
+    googleads_client = GoogleAdsClient.load_from_storage(version="v11")
 
     parser = argparse.ArgumentParser(
         description="Lists all campaigns for specified customer."

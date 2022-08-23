@@ -45,17 +45,17 @@ def main(client, customer_id, chain_id, campaign_id):
         campaign_id: The campaign ID for which the affiliate location extensions
             will be added.
     """
-    feed_resource_name = _create_affiliate_location_extension_feed(
+    feed_resource_name = create_affiliate_location_extension_feed(
         client, customer_id, chain_id
     )
     # After the completion of the feed creation operation above, the added
     # feed will not be available for usage in a campaign feed until the feed
     # mappings are created. We will wait with an exponential back-off policy
     # until the feed mappings have been created.
-    feed_mapping = _wait_for_feed_to_be_ready(
+    feed_mapping = wait_for_feed_to_be_ready(
         client, customer_id, feed_resource_name
     )
-    _create_campaign_feed(
+    create_campaign_feed(
         client,
         customer_id,
         campaign_id,
@@ -66,7 +66,7 @@ def main(client, customer_id, chain_id, campaign_id):
 
 
 # [START add_affiliate_location_extensions]
-def _create_affiliate_location_extension_feed(client, customer_id, chain_id):
+def create_affiliate_location_extension_feed(client, customer_id, chain_id):
     """Creates the Affiliate Location Extension feed.
 
     Args:
@@ -84,7 +84,7 @@ def _create_affiliate_location_extension_feed(client, customer_id, chain_id):
     # This is because Google Ads only allows one location extension feed per
     # email address, and a Google Ads account cannot have a location extension
     # feed and an affiliate location extension feed at the same time.
-    _remove_location_extension_feeds(client, customer_id)
+    remove_location_extension_feeds(client, customer_id)
 
     # Get the FeedServiceClient.
     feed_service = client.get_service("FeedService")
@@ -111,14 +111,14 @@ def _create_affiliate_location_extension_feed(client, customer_id, chain_id):
     # Display the results.
     feed_resource_name = mutate_feeds_response.results[0].resource_name
     print(
-        "Affliate location extension feed created with resource name: "
+        "Affiliate location extension feed created with resource name: "
         f"{feed_resource_name}."
     )
     return feed_resource_name
     # [END add_affiliate_location_extensions]
 
 
-def _remove_location_extension_feeds(client, customer_id):
+def remove_location_extension_feeds(client, customer_id):
     """Removes the old location extension feeds.
 
     Args:
@@ -128,23 +128,23 @@ def _remove_location_extension_feeds(client, customer_id):
     # To remove a location extension feed, you need to:
     # 1. Remove the CustomerFeed so that the location extensions from the feed
     # stop serving.
-    # 2. Remove the feed so that Google Ads will no longer sync from the GMB
-    # account.
+    # 2. Remove the feed so that Google Ads will no longer sync from the
+    # Business Profile account.
     # Optional: You may also want to remove the CampaignFeeds and AdGroupFeeds.
-    old_customer_feeds = _get_location_extension_customer_feeds(
+    old_customer_feeds = get_location_extension_customer_feeds(
         client, customer_id
     )
 
     if old_customer_feeds:
-        _remove_customer_feeds(client, customer_id, old_customer_feeds)
+        remove_customer_feeds(client, customer_id, old_customer_feeds)
 
-    feeds = _get_location_extension_feeds(client, customer_id)
+    feeds = get_location_extension_feeds(client, customer_id)
 
     if feeds:
-        _remove_feeds(client, customer_id, feeds)
+        remove_feeds(client, customer_id, feeds)
 
 
-def _get_location_extension_feeds(client, customer_id):
+def get_location_extension_feeds(client, customer_id):
     """Gets the location extension feeds.
 
     Args:
@@ -181,7 +181,7 @@ def _get_location_extension_feeds(client, customer_id):
     ]
 
 
-def _remove_feeds(client, customer_id, feeds):
+def remove_feeds(client, customer_id, feeds):
     """Removes the feeds.
 
     Args:
@@ -200,7 +200,7 @@ def _remove_feeds(client, customer_id, feeds):
     feed_service.mutate_feeds(customer_id=customer_id, operations=operations)
 
 
-def _get_location_extension_customer_feeds(client, customer_id):
+def get_location_extension_customer_feeds(client, customer_id):
     """Gets the location extension customer feeds.
 
     Args:
@@ -233,7 +233,7 @@ def _get_location_extension_customer_feeds(client, customer_id):
     return [row.customer_feed for row in search_results]
 
 
-def _remove_customer_feeds(client, customer_id, customer_feeds):
+def remove_customer_feeds(client, customer_id, customer_feeds):
     """Removes the customer feeds.
 
     Args:
@@ -255,7 +255,7 @@ def _remove_customer_feeds(client, customer_id, customer_feeds):
 
 
 # [START add_affiliate_location_extensions_1]
-def _get_affiliate_location_extension_feed_mapping(
+def get_affiliate_location_extension_feed_mapping(
     client, customer_id, feed_resource_name
 ):
     """Gets the Affiliate Location Extension feed mapping.
@@ -301,8 +301,8 @@ def _get_affiliate_location_extension_feed_mapping(
 
 
 # [START add_affiliate_location_extensions_2]
-def _wait_for_feed_to_be_ready(client, customer_id, feed_resource_name):
-    """Waits for the Affliate location extension feed to be ready.
+def wait_for_feed_to_be_ready(client, customer_id, feed_resource_name):
+    """Waits for the Affiliate location extension feed to be ready.
 
     Args:
         client: The Google Ads API client.
@@ -324,14 +324,14 @@ def _wait_for_feed_to_be_ready(client, customer_id, feed_resource_name):
         # creating feed attributes and feed mapping. Once the feed mapping is
         # created, it is ready to be used for creating customer feed.
         # This process is asynchronous, so we wait until the feed mapping is
-        # created, peforming exponential backoff.
-        feed_mapping = _get_affiliate_location_extension_feed_mapping(
+        # created, performing exponential backoff.
+        feed_mapping = get_affiliate_location_extension_feed_mapping(
             client, customer_id, feed_resource_name
         )
 
         if feed_mapping is None:
             num_attempts += 1
-            sleep_seconds = 5 * 2 ** num_attempts
+            sleep_seconds = 5 * 2**num_attempts
             print(
                 f"Checked {num_attempts} time(s). Feed is not ready "
                 f"yet. Waiting {sleep_seconds} seconds before trying again."
@@ -349,7 +349,7 @@ def _wait_for_feed_to_be_ready(client, customer_id, feed_resource_name):
 
 
 # [START add_affiliate_location_extensions_3]
-def _create_campaign_feed(
+def create_campaign_feed(
     client, customer_id, campaign_id, feed_mapping, feed_resource_name, chain_id
 ):
     """Creates the campaign feed.
@@ -359,7 +359,7 @@ def _create_campaign_feed(
         customer_id: The Google Ads customer ID.
         campaign_id: The campaign ID to which the affiliate location extensions
             will be added.
-        feed_mapping: The affliate location extension feedmapping for the feed
+        feed_mapping: The affiliate location extension feedmapping for the feed
             resource name.
         feed_resource_name: The feed resource name.
         chain_id: The retail chain ID.
@@ -368,7 +368,7 @@ def _create_campaign_feed(
     campaign_feed_service = client.get_service("CampaignFeedService")
     feed_service = client.get_service("FeedService")
 
-    attribute_id_for_chain_id = _get_attribute_id_for_chain_id(
+    attribute_id_for_chain_id = get_attribute_id_for_chain_id(
         client, feed_mapping
     )
     feed_id = feed_service.parse_feed_path(feed_resource_name)["feed_id"]
@@ -390,8 +390,10 @@ def _create_campaign_feed(
         "CampaignService"
     ).campaign_path(customer_id, campaign_id)
 
-    mutate_campaign_feeds_response = campaign_feed_service.mutate_campaign_feeds(
-        customer_id=customer_id, operations=[campaign_feed_operation]
+    mutate_campaign_feeds_response = (
+        campaign_feed_service.mutate_campaign_feeds(
+            customer_id=customer_id, operations=[campaign_feed_operation]
+        )
     )
 
     # Display the result.
@@ -403,7 +405,7 @@ def _create_campaign_feed(
 
 
 # [START add_affiliate_location_extensions_4]
-def _get_attribute_id_for_chain_id(client, feed_mapping):
+def get_attribute_id_for_chain_id(client, feed_mapping):
     """Gets the feed attribute ID for the retail chain ID.
 
     Args:
@@ -432,7 +434,7 @@ def _get_attribute_id_for_chain_id(client, feed_mapping):
 if __name__ == "__main__":
     # will read the google-ads.yaml configuration file in the
     # home directory if none is specified.
-    googleads_client = GoogleAdsClient.load_from_storage(version="v8")
+    googleads_client = GoogleAdsClient.load_from_storage(version="v11")
 
     parser = argparse.ArgumentParser(
         description="Demonstrates how to add Affiliate Location extensions."
@@ -466,7 +468,10 @@ if __name__ == "__main__":
 
     try:
         main(
-            googleads_client, args.customer_id, args.chain_id, args.campaign_id,
+            googleads_client,
+            args.customer_id,
+            args.chain_id,
+            args.campaign_id,
         )
     except GoogleAdsException as ex:
         print(

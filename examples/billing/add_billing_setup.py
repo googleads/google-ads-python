@@ -47,10 +47,10 @@ def main(
             account and to the new billing setup. If provided it must be
             formatted as "1234-5678-9012".
     """
-    billing_setup = _create_billing_setup(
+    billing_setup = create_billing_setup(
         client, customer_id, payments_account_id, payments_profile_id
     )
-    _set_billing_setup_date_times(client, customer_id, billing_setup)
+    set_billing_setup_date_times(client, customer_id, billing_setup)
     billing_setup_operation = client.get_type("BillingSetupOperation")
     client.copy_from(billing_setup_operation.create, billing_setup)
     billing_setup_service = client.get_service("BillingSetupService")
@@ -63,7 +63,7 @@ def main(
     )
 
 
-def _create_billing_setup(
+def create_billing_setup(
     client, customer_id, payments_account_id=None, payments_profile_id=None
 ):
     """Creates and returns a new billing setup instance.
@@ -109,7 +109,7 @@ def _create_billing_setup(
     return billing_setup
 
 
-def _set_billing_setup_date_times(client, customer_id, billing_setup):
+def set_billing_setup_date_times(client, customer_id, billing_setup):
     """Sets the starting and ending date times for the new billing setup.
 
     Queries the customer's account to see if there are any approved billing
@@ -172,7 +172,7 @@ def _set_billing_setup_date_times(client, customer_id, billing_setup):
         # Sets the new billing setup start date to one day after the end date.
         start_date = end_date_time_obj + timedelta(days=1)
     else:
-        # If there are no BillingSetup objecst to retrieve, the only acceptable
+        # If there are no BillingSetup objects to retrieve, the only acceptable
         # start date time is today.
         start_date = datetime.now()
 
@@ -185,7 +185,7 @@ def _set_billing_setup_date_times(client, customer_id, billing_setup):
 if __name__ == "__main__":
     # GoogleAdsClient will read the google-ads.yaml configuration file in the
     # home directory if none is specified.
-    googleads_client = GoogleAdsClient.load_from_storage(version="v8")
+    googleads_client = GoogleAdsClient.load_from_storage(version="v11")
 
     parser = argparse.ArgumentParser(
         description=("Creates a billing setup for a given customer.")

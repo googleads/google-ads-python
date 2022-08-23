@@ -45,7 +45,7 @@ def main(client, customer_id):
     # Create rules targeting any user that visits "http://example.com/example1"
     # and "http://example.com/example2".
     for url in ["http://example.com/example1", "http://example.com/example2"]:
-        rule_infos.append(_build_visited_site_rule_info(client, url))
+        rule_infos.append(build_visited_site_rule_info(client, url))
 
     # The two rules are combined by joining the first AND second URLs. See
     # https://developers.google.com/google-ads/api/reference/rpc/latest/CombinedRuleUserListInfo
@@ -98,7 +98,7 @@ def main(client, customer_id):
     )
 
 
-def _build_visited_site_rule_info(client, url):
+def build_visited_site_rule_info(client, url):
     """Creates a UserListRuleInfo object targeting a visit to a specified URL.
 
     Args:
@@ -127,7 +127,7 @@ def _build_visited_site_rule_info(client, url):
 if __name__ == "__main__":
     # GoogleAdsClient will read the google-ads.yaml configuration file in the
     # home directory if none is specified.
-    googleads_client = GoogleAdsClient.load_from_storage(version="v8")
+    googleads_client = GoogleAdsClient.load_from_storage(version="v11")
 
     parser = argparse.ArgumentParser(
         description="Creates a combination user list containing users that are "

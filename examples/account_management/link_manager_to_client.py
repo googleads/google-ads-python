@@ -14,8 +14,8 @@
 # limitations under the License.
 """This example shows how to link a manager customer to a client customer."""
 
-
 import argparse
+import sys
 
 from google.api_core import protobuf_helpers
 
@@ -38,7 +38,9 @@ def main(client, customer_id, manager_customer_id):
     # Extend an invitation to the client while authenticating as the manager.
     client_link_operation = client.get_type("CustomerClientLinkOperation")
     client_link = client_link_operation.create
-    client_link.client_customer = customer_client_link_service.customer_path(customer_id)
+    client_link.client_customer = customer_client_link_service.customer_path(
+        customer_id
+    )
     client_link.status = client.enums.ManagerLinkStatusEnum.PENDING
 
     response = customer_client_link_service.mutate_customer_client_link(
@@ -76,19 +78,15 @@ def main(client, customer_id, manager_customer_id):
         for row in response.result:
             manager_link_id = row.customer_client_link.manager_link_id
     except GoogleAdsException as ex:
-        _handle_googleads_exception(ex)
+        handle_googleads_exception(ex)
 
     customer_manager_link_service = client.get_service(
         "CustomerManagerLinkService"
     )
     manager_link_operation = client.get_type("CustomerManagerLinkOperation")
     manager_link = manager_link_operation.update
-    manager_link.resource_name = (
-        customer_manager_link_service.customer_manager_link_path(
-            customer_id,
-            manager_customer_id,
-            manager_link_id,
-        )
+    manager_link.resource_name = customer_manager_link_service.customer_manager_link_path(
+        customer_id, manager_customer_id, manager_link_id,
     )
 
     manager_link.status = client.enums.ManagerLinkStatusEnum.ACTIVE
@@ -98,7 +96,7 @@ def main(client, customer_id, manager_customer_id):
     )
 
     response = customer_manager_link_service.mutate_customer_manager_link(
-        customer_id=manager_customer_id, operations=[manager_link_operation]
+        customer_id=customer_id, operations=[manager_link_operation]
     )
     print(
         "Client accepted invitation with resource_name: "
@@ -110,7 +108,7 @@ def main(client, customer_id, manager_customer_id):
 if __name__ == "__main__":
     # GoogleAdsClient will read the google-ads.yaml configuration file in the
     # home directory if none is specified.
-    googleads_client = GoogleAdsClient.load_from_storage(version="v8")
+    googleads_client = GoogleAdsClient.load_from_storage(version="v11")
 
     parser = argparse.ArgumentParser(
         description=(
@@ -134,10 +132,10 @@ if __name__ == "__main__":
         main(googleads_client, args.customer_id, args.manager_customer_id)
     except GoogleAdsException as ex:
         print(
-            f'Request with ID "{exception.request_id}" failed with status '
-            f'"{exception.error.code().name}" and includes the following errors:'
+            f'Request with ID "{ex.request_id}" failed with status '
+            f'"{ex.error.code().name}" and includes the following errors:'
         )
-        for error in exception.failure.errors:
+        for error in ex.failure.errors:
             print(f'\tError with message "{error.message}".')
             if error.location:
                 for field_path_element in error.location.field_path_elements:

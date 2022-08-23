@@ -34,7 +34,7 @@ from google.ads.googleads.errors import GoogleAdsException
 last_criterion_id = 0
 
 
-def _next_id():
+def next_id():
     """Returns a decreasing negative number for temporary ad group criteria IDs.
 
     The ad group criteria will get real IDs when created on the server.
@@ -67,14 +67,14 @@ def main(client, customer_id, ad_group_id, replace_existing_tree):
     # error if a listing group tree already exists and this option is not
     # set to true.
     if replace_existing_tree:
-        _remove_listing_group_tree(client, customer_id, ad_group_id)
+        remove_listing_group_tree(client, customer_id, ad_group_id)
 
     # Create a list of ad group criteria operations.
     operations = []
 
     # Construct the listing group tree "root" node.
     # Subdivision node: (Root node)
-    ad_group_criterion_root_operation = _create_listing_group_subdivision(
+    ad_group_criterion_root_operation = create_listing_group_subdivision(
         client, customer_id, ad_group_id
     )
 
@@ -97,7 +97,7 @@ def main(client, customer_id, ad_group_id, replace_existing_tree):
         product_condition_enum.NEW
     )
     operations.append(
-        _create_listing_group_unit_biddable(
+        create_listing_group_unit_biddable(
             client,
             customer_id,
             ad_group_id,
@@ -114,7 +114,7 @@ def main(client, customer_id, ad_group_id, replace_existing_tree):
         product_condition_enum.USED
     )
     operations.append(
-        _create_listing_group_unit_biddable(
+        create_listing_group_unit_biddable(
             client,
             customer_id,
             ad_group_id,
@@ -132,7 +132,7 @@ def main(client, customer_id, ad_group_id, replace_existing_tree):
         condition_dimension_info.product_condition,
         client.get_type("ProductConditionInfo"),
     )
-    ad_group_criterion_other_operation = _create_listing_group_subdivision(
+    ad_group_criterion_other_operation = create_listing_group_subdivision(
         client,
         customer_id,
         ad_group_id,
@@ -155,7 +155,7 @@ def main(client, customer_id, ad_group_id, replace_existing_tree):
     # * CPC bid: $0.90
     brand_dimension_info.product_brand.value = "CoolBrand"
     operations.append(
-        _create_listing_group_unit_biddable(
+        create_listing_group_unit_biddable(
             client,
             customer_id,
             ad_group_id,
@@ -170,7 +170,7 @@ def main(client, customer_id, ad_group_id, replace_existing_tree):
     # * CPC bid: $0.01
     brand_dimension_info.product_brand.value = "CheapBrand"
     operations.append(
-        _create_listing_group_unit_biddable(
+        create_listing_group_unit_biddable(
             client,
             customer_id,
             ad_group_id,
@@ -187,7 +187,7 @@ def main(client, customer_id, ad_group_id, replace_existing_tree):
         client.get_type("ProductBrandInfo"),
     )
     operations.append(
-        _create_listing_group_unit_biddable(
+        create_listing_group_unit_biddable(
             client,
             customer_id,
             ad_group_id,
@@ -216,7 +216,7 @@ def main(client, customer_id, ad_group_id, replace_existing_tree):
     # [END add_shopping_product_listing_group_tree]
 
 
-def _remove_listing_group_tree(client, customer_id, ad_group_id):
+def remove_listing_group_tree(client, customer_id, ad_group_id):
     """Removes ad group criteria for an ad group's existing listing group tree.
 
     Args:
@@ -267,7 +267,7 @@ def _remove_listing_group_tree(client, customer_id, ad_group_id):
         print(f"Removed {len(response.results)} ad group criteria.")
 
 
-def _create_listing_group_subdivision(
+def create_listing_group_subdivision(
     client,
     customer_id,
     ad_group_id,
@@ -298,7 +298,7 @@ def _create_listing_group_subdivision(
     # the ID for the ad group criterion.
     ad_group_criterion.resource_name = client.get_service(
         "AdGroupCriterionService"
-    ).ad_group_criterion_path(customer_id, ad_group_id, _next_id())
+    ).ad_group_criterion_path(customer_id, ad_group_id, next_id())
     ad_group_criterion.status = client.enums.AdGroupCriterionStatusEnum.ENABLED
 
     listing_group_info = ad_group_criterion.listing_group
@@ -325,7 +325,7 @@ def _create_listing_group_subdivision(
     return operation
 
 
-def _create_listing_group_unit_biddable(
+def create_listing_group_unit_biddable(
     client,
     customer_id,
     ad_group_id,
@@ -385,7 +385,7 @@ def _create_listing_group_unit_biddable(
 
 
 if __name__ == "__main__":
-    googleads_client = GoogleAdsClient.load_from_storage(version="v8")
+    googleads_client = GoogleAdsClient.load_from_storage(version="v11")
 
     parser = argparse.ArgumentParser(
         description="Add shopping product listing group tree to a shopping ad "

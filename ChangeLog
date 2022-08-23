@@ -1,3 +1,52 @@
+* 18.1.0
+- Google Ads API v11_1 release.
+- Bump protobuf dependency to version 4.21.5.
+- Bump proto-plus dependency to version 1.22.0.
+- Update examples to remove references to expanded text ads.
+- Fix bug preventing https protocol in proxy URLs.
+- Various example updates.
+
+* 18.0.0
+- Remove support for Google Ads API v9.
+- Added "pb" user agent key/value pair.
+- Change validate_text_ad example to use an RSA instead of ETA.
+- Rename get_artifact_metadata example to search_for_google_ads_fields.
+- Fix various issues in create_experiment example.
+
+* 17.0.0
+- Google Ads API v11_0 release.
+- Added example create_experiment.
+- Added example detect_and_apply_recommendations
+- Updated example add_smart_campaign
+
+* 16.0.0
+- Add support for fog Google Ads API v10_1.
+- Remove support for Google Ads API v8.
+- Replace authentication examples with one file generate_user_credentials.py.
+
+* 15.1.1
+- Bump protobuf dependency to 3.20.0 excluding 3.18.* and 3.19.*.
+- Remove duplicate google-api-core dependency.
+
+* 15.1.0
+- Fix issue preventing streaming responses from being logged.
+- Expose logging utilities for external interceptor logic.
+- Various example updates and improvements.
+
+* 15.0.0
+- Google Ads API v10_0 release.
+- Remove all "get" methods from services.
+- Remove services that only contained "get" methods.
+- Remove support got Google Ads API v7_0.
+
+* 14.1.0
+- Google Ads API v9_0 release
+- Update gRPC transport logic to replace "gapic" user-agent with "gccl"
+- Update examples to support v9 changes
+- Add new Performance Max examples
+  advanced_operations/add_performance_max_campaign.py and
+  shopping_ads/add_performance_max_retail_campaign.py
+
 * 14.0.1
 - Pin protobuf to < 3.18.0
 - Add examples add_bidding_data_exclusion, add_bidding_seasonality_adjustment

@@ -67,12 +67,12 @@ def main(client, customer_id):
 if __name__ == "__main__":
     # GoogleAdsClient will read the google-ads.yaml configuration file in the
     # home directory if none is specified.
-    googleads_client = GoogleAdsClient.load_from_storage(version="v8")
+    googleads_client = GoogleAdsClient.load_from_storage(version="v11")
 
     parser = argparse.ArgumentParser(
         description=(
             "Adds various types of negative criteria as exclusions at the "
-            "customer level. These criteria will be applied to all campaignsi "
+            "customer level. These criteria will be applied to all campaigns "
             "for the given customer."
         )
     )

@@ -34,18 +34,18 @@ def main(client, customer_id):
         customer_id: a client customer ID.
     """
     # Creates a new flights feed.
-    feed_resource_name = _create_feed(client, customer_id)
+    feed_resource_name = create_feed(client, customer_id)
 
     print(f"Feed with resource name '{feed_resource_name}' was created.")
 
     # Gets the newly created feed's attributes and packages them into a map.
     # This read operation is required to retrieve the attribute IDs.
-    placeholders_to_feed_attributes_map = _get_placeholder_fields_map(
+    placeholders_to_feed_attributes_map = get_placeholder_fields_map(
         client, customer_id, feed_resource_name
     )
 
     # Creates the feed mapping.
-    feed_mapping_resource_name = _create_feed_mapping(
+    feed_mapping_resource_name = create_feed_mapping(
         client,
         customer_id,
         feed_resource_name,
@@ -58,7 +58,7 @@ def main(client, customer_id):
     )
 
     # Creates a feed item.
-    feed_item_resource_name = _create_feed_item(
+    feed_item_resource_name = create_feed_item(
         client,
         customer_id,
         feed_resource_name,
@@ -71,7 +71,7 @@ def main(client, customer_id):
     )
 
 
-def _create_feed(client, customer_id):
+def create_feed(client, customer_id):
     """Creates a feed that will be used as a flight feed.
 
     Args:
@@ -146,7 +146,7 @@ def _create_feed(client, customer_id):
     return feed_response.results[0].resource_name
 
 
-def _create_feed_mapping(
+def create_feed_mapping(
     client, customer_id, feed_resource_name, placeholders_to_feed_attribute_map
 ):
     """Creates a feed mapping for a given feed.
@@ -241,7 +241,7 @@ def _create_feed_mapping(
     return feed_mapping_response.results[0].resource_name
 
 
-def _create_feed_item(
+def create_feed_item(
     client, customer_id, feed_resource_name, placeholders_to_feed_attribute_map
 ):
     """Adds a new item to the feed.
@@ -344,7 +344,7 @@ def _create_feed_item(
     return feed_item_response.results[0].resource_name
 
 
-def _get_placeholder_fields_map(client, customer_id, feed_resource_name):
+def get_placeholder_fields_map(client, customer_id, feed_resource_name):
     """Get mapping of placeholder fields to feed attributes for a flights feed.
 
     Args:
@@ -413,7 +413,7 @@ def _get_placeholder_fields_map(client, customer_id, feed_resource_name):
 if __name__ == "__main__":
     # GoogleAdsClient will read the google-ads.yaml configuration file in the
     # home directory if none is specified.
-    googleads_client = GoogleAdsClient.load_from_storage(version="v8")
+    googleads_client = GoogleAdsClient.load_from_storage(version="v11")
 
     parser = argparse.ArgumentParser(
         description="Adds a flights feed for specified customer."

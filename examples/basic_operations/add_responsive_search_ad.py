@@ -45,21 +45,21 @@ def main(client, customer_id, ad_group_id):
     # optional; if no pinning is set, then headlines and descriptions will be
     # rotated and the ones that perform best will be used more often.
     served_asset_enum = client.enums.ServedAssetFieldTypeEnum.HEADLINE_1
-    pinned_headline = _create_ad_text_asset(
+    pinned_headline = create_ad_text_asset(
         client, f"Cruise to Mars #{str(uuid4())[:8]}", served_asset_enum
     )
 
     ad_group_ad.ad.responsive_search_ad.headlines.extend(
         [
             pinned_headline,
-            _create_ad_text_asset(client, "Best Space Cruise Line"),
-            _create_ad_text_asset(client, "Experience the Stars"),
+            create_ad_text_asset(client, "Best Space Cruise Line"),
+            create_ad_text_asset(client, "Experience the Stars"),
         ]
     )
     ad_group_ad.ad.responsive_search_ad.descriptions.extend(
         [
-            _create_ad_text_asset(client, "Buy your tickets now"),
-            _create_ad_text_asset(client, "Visit the Red Planet"),
+            create_ad_text_asset(client, "Buy your tickets now"),
+            create_ad_text_asset(client, "Visit the Red Planet"),
         ]
     )
     ad_group_ad.ad.responsive_search_ad.path1 = "all-inclusive"
@@ -77,7 +77,7 @@ def main(client, customer_id, ad_group_id):
         )
 
 
-def _create_ad_text_asset(client, text, pinned_field=None):
+def create_ad_text_asset(client, text, pinned_field=None):
     """Create an AdTextAsset."""
     ad_text_asset = client.get_type("AdTextAsset")
     ad_text_asset.text = text
@@ -89,7 +89,7 @@ def _create_ad_text_asset(client, text, pinned_field=None):
 if __name__ == "__main__":
     # GoogleAdsClient will read the google-ads.yaml configuration file in the
     # home directory if none is specified.
-    googleads_client = GoogleAdsClient.load_from_storage(version="v8")
+    googleads_client = GoogleAdsClient.load_from_storage(version="v11")
 
     parser = argparse.ArgumentParser(
         description=(

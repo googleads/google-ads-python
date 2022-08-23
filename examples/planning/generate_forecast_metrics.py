@@ -43,11 +43,11 @@ def main(client, customer_id, keyword_plan_id):
 
         click_val = metrics.clicks
         clicks = f"{click_val:.2f}" if click_val else "unspecified"
-        print(f"Estimated daily clicks: {clicks}")
+        print(f"Estimated total clicks: {clicks}")
 
         imp_val = metrics.impressions
         impressions = f"{imp_val:.2f}" if imp_val else "unspecified"
-        print(f"Estimated daily impressions: {impressions}")
+        print(f"Estimated total impressions: {impressions}")
 
         cpc_val = metrics.average_cpc
         cpc = f"{cpc_val:.2f}" if cpc_val else "unspecified"
@@ -58,7 +58,7 @@ def main(client, customer_id, keyword_plan_id):
 if __name__ == "__main__":
     # GoogleAdsClient will read the google-ads.yaml configuration file in the
     # home directory if none is specified.
-    googleads_client = GoogleAdsClient.load_from_storage(version="v8")
+    googleads_client = GoogleAdsClient.load_from_storage(version="v11")
 
     parser = argparse.ArgumentParser(
         description="Generates forecast metrics for a keyword plan."

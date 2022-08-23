@@ -52,7 +52,7 @@ def main(client, customer_id):
             )
         )
     except GoogleAdsException as ex:
-        _handle_googleads_exception(ex)
+        handle_googleads_exception(ex)
         # [END add_campaigns]
 
     # [START add_campaigns_1]
@@ -76,8 +76,10 @@ def main(client, customer_id):
     # Set the campaign network options.
     campaign.network_settings.target_google_search = True
     campaign.network_settings.target_search_network = True
-    campaign.network_settings.target_content_network = False
     campaign.network_settings.target_partner_search_network = False
+    # Enable Display Expansion on Search campaigns. For more details see:
+    # https://support.google.com/google-ads/answer/7193800
+    campaign.network_settings.target_content_network = True
     # [END add_campaigns_1]
 
     # Optional: Set the start date.
@@ -95,10 +97,10 @@ def main(client, customer_id):
         )
         print(f"Created campaign {campaign_response.results[0].resource_name}.")
     except GoogleAdsException as ex:
-        _handle_googleads_exception(ex)
+        handle_googleads_exception(ex)
 
 
-def _handle_googleads_exception(exception):
+def handle_googleads_exception(exception):
     print(
         f'Request with ID "{exception.request_id}" failed with status '
         f'"{exception.error.code().name}" and includes the following errors:'
@@ -114,7 +116,7 @@ def _handle_googleads_exception(exception):
 if __name__ == "__main__":
     # GoogleAdsClient will read the google-ads.yaml configuration file in the
     # home directory if none is specified.
-    googleads_client = GoogleAdsClient.load_from_storage(version="v8")
+    googleads_client = GoogleAdsClient.load_from_storage(version="v11")
 
     parser = argparse.ArgumentParser(
         description="Adds a campaign for specified customer."

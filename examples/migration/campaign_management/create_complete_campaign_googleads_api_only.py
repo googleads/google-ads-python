@@ -41,7 +41,7 @@ KEYWORDS_TO_ADD = ["mars cruise", "space hotel"]
 PAGE_SIZE = 1000
 
 
-def _create_campaign_budget(client, customer_id):
+def create_campaign_budget(client, customer_id):
     """Creates a new campaign budget and returns it.
 
     Args:
@@ -63,16 +63,16 @@ def _create_campaign_budget(client, customer_id):
             customer_id=customer_id, operations=[operation]
         )
         campaign_budget_resource_name = response.results[0].resource_name
-        new_campaign_budget = _get_campaign_budget(
+        new_campaign_budget = get_campaign_budget(
             client, customer_id, campaign_budget_resource_name
         )
         print(f"Added budget named {new_campaign_budget.name}")
         return new_campaign_budget
     except GoogleAdsClient as ex:
-        _handle_googleads_exception(ex)
+        handle_googleads_exception(ex)
 
 
-def _get_campaign_budget(client, customer_id, resource_name):
+def get_campaign_budget(client, customer_id, resource_name):
     """Retrieves the CampaignBudget associated with the given resource name.
 
     Args:
@@ -103,10 +103,10 @@ def _get_campaign_budget(client, customer_id, resource_name):
         budget = list(response)[0].campaign_budget
         return budget
     except GoogleAdsException as ex:
-        _handle_googleads_exception(ex)
+        handle_googleads_exception(ex)
 
 
-def _create_campaign(client, customer_id, campaign_budget):
+def create_campaign(client, customer_id, campaign_budget):
     """Creates a new campaign and returns it.
 
     Args:
@@ -146,16 +146,16 @@ def _create_campaign(client, customer_id, campaign_budget):
             customer_id=customer_id, operations=[operation]
         )
         campaign_resource_name = response.results[0].resource_name
-        new_campaign = _get_campaign(
+        new_campaign = get_campaign(
             client, customer_id, campaign_resource_name
         )
         print(f"Added campaign named {new_campaign.name}")
         return new_campaign
     except GoogleAdsException as ex:
-        _handle_googleads_exception(ex)
+        handle_googleads_exception(ex)
 
 
-def _get_campaign(client, customer_id, campaign_resource_name):
+def get_campaign(client, customer_id, campaign_resource_name):
     """Retrieves the Campaign associated with the given resource name.
 
     Args:
@@ -186,10 +186,10 @@ def _get_campaign(client, customer_id, campaign_resource_name):
         campaign = list(response)[0].campaign
         return campaign
     except GoogleAdsException as ex:
-        _handle_googleads_exception(ex)
+        handle_googleads_exception(ex)
 
 
-def _create_ad_group(client, customer_id, campaign):
+def create_ad_group(client, customer_id, campaign):
     """Creates a new ad group and returns it.
 
     Args:
@@ -214,14 +214,14 @@ def _create_ad_group(client, customer_id, campaign):
             customer_id=customer_id, operations=[operation]
         )
         ad_group_resource_name = response.results[0].resource_name
-        ad_group = _get_ad_group(client, customer_id, ad_group_resource_name)
+        ad_group = get_ad_group(client, customer_id, ad_group_resource_name)
         print(f"Added AdGroup named {ad_group.name}")
         return ad_group
     except GoogleAdsException as ex:
-        _handle_googleads_exception(ex)
+        handle_googleads_exception(ex)
 
 
-def _get_ad_group(client, customer_id, ad_group_resource_name):
+def get_ad_group(client, customer_id, ad_group_resource_name):
     """Retrieves an AdGroup associated with the given resource name.
 
     Args:
@@ -252,10 +252,10 @@ def _get_ad_group(client, customer_id, ad_group_resource_name):
         adGroup = list(response)[0].ad_group
         return adGroup
     except GoogleAdsException as ex:
-        _handle_googleads_exception(ex)
+        handle_googleads_exception(ex)
 
 
-def _create_text_ads(client, customer_id, ad_group):
+def create_text_ads(client, customer_id, ad_group):
     """Creates new text ads in a given ad group.
 
     Args:
@@ -291,9 +291,9 @@ def _create_text_ads(client, customer_id, ad_group):
             row.resource_name for row in ad_group_ad_response.results
         ]
     except GoogleAdsException as ex:
-        _handle_googleads_exception(ex)
+        handle_googleads_exception(ex)
 
-    new_ads = _get_ads(client, customer_id, new_ad_resource_names)
+    new_ads = get_ads(client, customer_id, new_ad_resource_names)
     for new_ad in new_ads:
         print(
             f"Created expanded text ad with ID {new_ad.ad.id}, status "
@@ -303,7 +303,7 @@ def _create_text_ads(client, customer_id, ad_group):
         )
 
 
-def _get_ads(client, customer_id, new_ad_resource_names):
+def get_ads(client, customer_id, new_ad_resource_names):
     """Retrieves a list of AdGroupAds.
 
     Args:
@@ -315,7 +315,7 @@ def _get_ads(client, customer_id, new_ad_resource_names):
         A list of AdGroupAds.
     """
 
-    def _formatter(given_string):
+    def formatter(given_string):
         """Assigns ' ' to names of resources.
 
         This produces a formatted string that can be used within an IN clause.
@@ -329,7 +329,7 @@ def _get_ads(client, customer_id, new_ad_resource_names):
             results.append(repr(i))
         return ",".join(results)
 
-    resouce_names = _formatter(new_ad_resource_names)
+    resource_names = formatter(new_ad_resource_names)
 
     ga_service = client.get_service("GoogleAdsService")
     query = f"""
@@ -341,7 +341,7 @@ def _get_ads(client, customer_id, new_ad_resource_names):
             ad_group_ad.ad.final_urls,
             ad_group_ad.resource_name
         FROM ad_group_ad
-        WHERE ad_group_ad.resource_name in ({resouce_names})"""
+        WHERE ad_group_ad.resource_name in ({resource_names})"""
 
     request = client.get_type("SearchGoogleAdsRequest")
     request.customer_id = customer_id
@@ -352,10 +352,10 @@ def _get_ads(client, customer_id, new_ad_resource_names):
         response = ga_service.search(request=request)
         return [row.ad_group_ad for row in response.results]
     except GoogleAdsException as ex:
-        _handle_googleads_exception(ex)
+        handle_googleads_exception(ex)
 
 
-def _create_keywords(client, customer_id, ad_group, keywords_to_add):
+def create_keywords(client, customer_id, ad_group, keywords_to_add):
     """Creates new keywords on a given ad group.
 
     Args:
@@ -384,16 +384,19 @@ def _create_keywords(client, customer_id, ad_group, keywords_to_add):
         ad_group_criterion_operations.append(operation)
 
     try:
-        ad_group_criterion_response = ad_group_criterion_service.mutate_ad_group_criteria(
-            customer_id=customer_id, operations=ad_group_criterion_operations,
+        ad_group_criterion_response = (
+            ad_group_criterion_service.mutate_ad_group_criteria(
+                customer_id=customer_id,
+                operations=ad_group_criterion_operations,
+            )
         )
         new_ad_resource_names = [
             row.resource_name for row in ad_group_criterion_response.results
         ]
     except GoogleAdsException as ex:
-        _handle_googleads_exception(ex)
+        handle_googleads_exception(ex)
 
-    new_keywords = _get_keywords(client, customer_id, new_ad_resource_names)
+    new_keywords = get_keywords(client, customer_id, new_ad_resource_names)
 
     for criterion in new_keywords:
         print(
@@ -403,7 +406,7 @@ def _create_keywords(client, customer_id, ad_group, keywords_to_add):
         )
 
 
-def _get_keywords(client, customer_id, keyword_resource_names):
+def get_keywords(client, customer_id, keyword_resource_names):
     """Retrieves a list of AdGroupCriterion.
 
     Args:
@@ -415,7 +418,7 @@ def _get_keywords(client, customer_id, keyword_resource_names):
     Returns:
         A list of AdGroupCriterion.
     """
-    resource_names = _formatter(keyword_resource_names)
+    resource_names = formatter(keyword_resource_names)
     ga_service = client.get_service("GoogleAdsService", version="v4")
     query = f"""
         SELECT
@@ -439,10 +442,10 @@ def _get_keywords(client, customer_id, keyword_resource_names):
         response = ga_service.search(request=request)
         return [row.ad_group_criterion for row in response.results]
     except GoogleAdsException as ex:
-        _handle_googleads_exception(ex)
+        handle_googleads_exception(ex)
 
 
-def _formatter(given_string):
+def formatter(given_string):
     """This helper function is used to assign ' ' to names of resources
     so that this formatted string can be used within an IN clause.
 
@@ -455,7 +458,7 @@ def _formatter(given_string):
     return ",".join(results)
 
 
-def _handle_googleads_exception(exception):
+def handle_googleads_exception(exception):
     print(
         f'Request with ID "{exception.request_id}" failed with status '
         f'"{exception.error.code().name}" and includes the following errors:'
@@ -471,7 +474,7 @@ def _handle_googleads_exception(exception):
 if __name__ == "__main__":
     # Initialize client object.
     # It will read the config file. The default file path is the Home Directory.
-    googleads_client = GoogleAdsClient.load_from_storage(version="v8")
+    googleads_client = GoogleAdsClient.load_from_storage(version="v11")
 
     parser = argparse.ArgumentParser(
         description="Lists all campaigns for specified customer."
@@ -485,10 +488,10 @@ if __name__ == "__main__":
         help="The Google Ads customer ID.",
     )
     args = parser.parse_args()
-    budget = _create_campaign_budget(googleads_client, args.customer_id)
-    campaign = _create_campaign(googleads_client, args.customer_id, budget)
-    ad_group = _create_ad_group(googleads_client, args.customer_id, campaign)
-    _create_text_ads(googleads_client, args.customer_id, ad_group)
-    _create_keywords(
+    budget = create_campaign_budget(googleads_client, args.customer_id)
+    campaign = create_campaign(googleads_client, args.customer_id, budget)
+    ad_group = create_ad_group(googleads_client, args.customer_id, campaign)
+    create_text_ads(googleads_client, args.customer_id, ad_group)
+    create_keywords(
         googleads_client, args.customer_id, ad_group, KEYWORDS_TO_ADD
     )

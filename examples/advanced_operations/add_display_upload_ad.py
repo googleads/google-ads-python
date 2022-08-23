@@ -46,16 +46,16 @@ def main(client, customer_id, ad_group_id):
     # https://developers.google.com/google-ads/api/reference/rpc/latest/DisplayUploadAdInfo
 
     # Creates a new media bundle asset and returns the resource name.
-    ad_asset_resource_name = _create_media_bundle_asset(client, customer_id)
+    ad_asset_resource_name = create_media_bundle_asset(client, customer_id)
 
     # Creates a new display upload ad and associates it with the specified
     # ad group.
-    _create_display_upload_ad_group_ad(
+    create_display_upload_ad_group_ad(
         client, customer_id, ad_group_id, ad_asset_resource_name
     )
 
 
-def _create_media_bundle_asset(client, customer_id):
+def create_media_bundle_asset(client, customer_id):
     """Creates a media bundle from the assets in a zip file.
 
     The zip file contains the HTML5 components.
@@ -73,6 +73,7 @@ def _create_media_bundle_asset(client, customer_id):
     asset_operation = client.get_type("AssetOperation")
     media_bundle_asset = asset_operation.create
     media_bundle_asset.type_ = client.enums.AssetTypeEnum.MEDIA_BUNDLE
+    media_bundle_asset.name = "Ad Media Bundle"
     # The HTML5 zip file contains all the HTML, CSS, and images needed for the
     # HTML5 ad. For help on creating an HTML5 zip file, check out Google Web
     # Designer (https://www.google.com/webdesigner/).
@@ -95,7 +96,7 @@ def _create_media_bundle_asset(client, customer_id):
     return uploaded_asset_resource_name
 
 
-def _create_display_upload_ad_group_ad(
+def create_display_upload_ad_group_ad(
     client, customer_id, ad_group_id, ad_asset_resource_name
 ):
     """Creates a new HTML5 display upload ad and adds it to the given ad group.
@@ -149,7 +150,7 @@ def _create_display_upload_ad_group_ad(
 if __name__ == "__main__":
     # GoogleAdsClient will read the google-ads.yaml configuration file in the
     # home directory if none is specified.
-    googleads_client = GoogleAdsClient.load_from_storage(version="v8")
+    googleads_client = GoogleAdsClient.load_from_storage(version="v11")
 
     parser = argparse.ArgumentParser(
         description="Adds a display upload ad to a given ad group."

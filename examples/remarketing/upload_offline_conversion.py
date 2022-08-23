@@ -37,6 +37,8 @@ def main(
     conversion_value,
     conversion_custom_variable_id,
     conversion_custom_variable_value,
+    gbraid,
+    wbraid,
 ):
     """Creates a click conversion with a default currency of USD.
 
@@ -44,7 +46,8 @@ def main(
         client: An initialized GoogleAdsClient instance.
         customer_id: The client customer ID string.
         conversion_action_id: The ID of the conversion action to upload to.
-        gclid: The Google Click Identifier ID.
+        gclid: The Google Click Identifier ID. If set, the wbraid and gbraid
+            parameters must be None.
         conversion_date_time: The the date and time of the conversion (should be
             after the click time). The format is 'yyyy-mm-dd hh:mm:ss+|-hh:mm',
             e.g. '2021-01-01 12:32:45-08:00'.
@@ -53,6 +56,10 @@ def main(
             variable to associate with the upload.
         conversion_custom_variable_value: The str value of the conversion custom
             variable to associate with the upload.
+        gbraid: The GBRAID for the iOS app conversion. If set, the gclid and
+            wbraid parameters must be None.
+        wbraid: The WBRAID for the iOS app conversion. If set, the gclid and
+            gbraid parameters must be None.
     """
     click_conversion = client.get_type("ClickConversion")
     conversion_action_service = client.get_service("ConversionActionService")
@@ -61,7 +68,15 @@ def main(
             customer_id, conversion_action_id
         )
     )
-    click_conversion.gclid = gclid
+
+    # Sets the single specified ID field.
+    if gclid:
+        click_conversion.gclid = gclid
+    elif gbraid:
+        click_conversion.gbraid = gbraid
+    else:
+        click_conversion.wbraid = wbraid
+
     click_conversion.conversion_value = float(conversion_value)
     click_conversion.conversion_date_time = conversion_date_time
     click_conversion.currency_code = "USD"
@@ -77,7 +92,7 @@ def main(
     conversion_upload_service = client.get_service("ConversionUploadService")
     request = client.get_type("UploadClickConversionsRequest")
     request.customer_id = customer_id
-    request.conversions = [click_conversion]
+    request.conversions.append(click_conversion)
     request.partial_failure = True
     conversion_upload_response = (
         conversion_upload_service.upload_click_conversions(
@@ -97,7 +112,7 @@ def main(
 if __name__ == "__main__":
     # GoogleAdsClient will read the google-ads.yaml configuration file in the
     # home directory if none is specified.
-    googleads_client = GoogleAdsClient.load_from_storage(version="v8")
+    googleads_client = GoogleAdsClient.load_from_storage(version="v11")
 
     parser = argparse.ArgumentParser(
         description="Uploads an offline conversion."
@@ -116,16 +131,6 @@ if __name__ == "__main__":
         type=str,
         required=True,
         help="The conversion action ID.",
-    )
-    parser.add_argument(
-        "-g",
-        "--gclid",
-        type=str,
-        required=True,
-        help="The Google Click Identifier ID "
-        "(gclid) which should be newer than the number of "
-        "days set on the conversion window of the conversion "
-        "action.",
     )
     parser.add_argument(
         "-t",
@@ -156,6 +161,36 @@ if __name__ == "__main__":
         type=str,
         help="The value of the conversion custom variable to associate with the upload.",
     )
+    group = parser.add_mutually_exclusive_group(required=True)
+    group.add_argument(
+        "-g",
+        "--gclid",
+        type=str,
+        help="The Google Click Identifier (gclid) which should be newer than "
+        "the number of days set on the conversion window of the conversion "
+        "action. Only one of either a gclid, WBRAID, or GBRAID identifier can "
+        "be passed into this example. See the following for more details: "
+        "https://developers.google.com/google-ads/api/docs/conversions/upload-clicks",
+    )
+    group.add_argument(
+        "-b",
+        "--gbraid",
+        type=str,
+        help="The GBRAID identifier for an iOS app conversion. Only one of "
+        "either a gclid, WBRAID, or GBRAID identifier can be passed into this "
+        "example. See the following for more details: "
+        "https://developers.google.com/google-ads/api/docs/conversions/upload-clicks",
+    )
+    group.add_argument(
+        "-d",
+        "--wbraid",
+        type=str,
+        help="The WBRAID identifier for an iOS app conversion. Only one of "
+        "either a gclid, WBRAID, or GBRAID identifier can be passed into this "
+        "example. See the following for more details: "
+        "https://developers.google.com/google-ads/api/docs/conversions/upload-clicks",
+    )
+
     args = parser.parse_args()
 
     try:
@@ -168,6 +203,8 @@ if __name__ == "__main__":
             args.conversion_value,
             args.conversion_custom_variable_id,
             args.conversion_custom_variable_value,
+            args.gbraid,
+            args.wbraid,
         )
     except GoogleAdsException as ex:
         print(

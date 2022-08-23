@@ -22,7 +22,7 @@ from google.ads.googleads.client import GoogleAdsClient
 from google.ads.googleads.errors import GoogleAdsException
 
 
-def _display_categories(categories, prefix=""):
+def display_categories(categories, prefix=""):
     """Recursively prints out each category and its children.
 
     Args:
@@ -34,9 +34,7 @@ def _display_categories(categories, prefix=""):
     for category in categories:
         print(f"{prefix}{category.name} [{category.category_id}]")
         if not category.children:
-            _display_categories(
-                category.children, prefix=prefix + category.name
-            )
+            display_categories(category.children, prefix=prefix + category.name)
 
 
 def main(client, customer_id):
@@ -92,11 +90,11 @@ def main(client, customer_id):
                 # Otherwise adds the category as a root category.
                 root_categories.append(category)
 
-    _display_categories(root_categories)
+    display_categories(root_categories)
 
 
 if __name__ == "__main__":
-    googleads_client = GoogleAdsClient.load_from_storage(version="v8")
+    googleads_client = GoogleAdsClient.load_from_storage(version="v11")
 
     parser = argparse.ArgumentParser(
         description="Get Product Bidding Category Constant"

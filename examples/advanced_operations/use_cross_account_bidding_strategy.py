@@ -39,18 +39,18 @@ def main(client, customer_id, manager_customer_id, campaign_id):
         campaign_id: The ID of an existing campaign in the client customer's
             account.
     """
-    bidding_strategy_resource_name = _create_bidding_strategy(
+    bidding_strategy_resource_name = create_bidding_strategy(
         client, manager_customer_id
     )
-    _list_manager_owned_bidding_strategies(client, manager_customer_id)
-    _list_customer_accessible_bidding_strategies(client, customer_id)
-    _attach_cross_account_bidding_strategy_to_campaign(
+    list_manager_owned_bidding_strategies(client, manager_customer_id)
+    list_customer_accessible_bidding_strategies(client, customer_id)
+    attach_cross_account_bidding_strategy_to_campaign(
         client, customer_id, campaign_id, bidding_strategy_resource_name
     )
 
 
 # [START create_cross_account_strategy]
-def _create_bidding_strategy(client, manager_customer_id):
+def create_bidding_strategy(client, manager_customer_id):
     """Creates a new cross-account bidding strategy in the manager account.
 
     The cross-account bidding strategy is of type TargetSpend (Maximize Clicks).
@@ -91,7 +91,7 @@ def _create_bidding_strategy(client, manager_customer_id):
 
 
 # [START list_manager_strategies]
-def _list_manager_owned_bidding_strategies(client, manager_customer_id):
+def list_manager_owned_bidding_strategies(client, manager_customer_id):
     """List all cross-account bidding strategies in the manager account.
 
     Args:
@@ -131,7 +131,7 @@ def _list_manager_owned_bidding_strategies(client, manager_customer_id):
 
 
 # [START list_accessible_strategies]
-def _list_customer_accessible_bidding_strategies(client, customer_id):
+def list_customer_accessible_bidding_strategies(client, customer_id):
     """Lists all bidding strategies available to the client account.
 
     This includes both portfolio bidding strategies owned by account and
@@ -179,7 +179,7 @@ def _list_customer_accessible_bidding_strategies(client, customer_id):
 
 
 # [START attach_strategy]
-def _attach_cross_account_bidding_strategy_to_campaign(
+def attach_cross_account_bidding_strategy_to_campaign(
     client, customer_id, campaign_id, bidding_strategy_resource_name
 ):
     """Attaches the cross-account bidding strategy to the given campaign.
@@ -219,7 +219,7 @@ def _attach_cross_account_bidding_strategy_to_campaign(
 if __name__ == "__main__":
     # GoogleAdsClient will read the google-ads.yaml configuration file in the
     # home directory if none is specified.
-    googleads_client = GoogleAdsClient.load_from_storage(version="v8")
+    googleads_client = GoogleAdsClient.load_from_storage(version="v11")
 
     parser = argparse.ArgumentParser(description=("Creates a Smart campaign."))
     # The following argument(s) should be provided to run the example.

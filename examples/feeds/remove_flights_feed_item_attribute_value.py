@@ -56,7 +56,7 @@ def main(
     feed_item_operation = client.get_type("FeedItemOperation")
 
     # Get a map of the FlightPlaceholderFields to FeedAttributes.
-    placeholders_to_feed_attributes_map = _get_feed(
+    placeholders_to_feed_attributes_map = get_feed(
         client, customer_id, feed_id
     )
 
@@ -64,7 +64,7 @@ def main(
     flight_placeholder_field = client.enums.FlightPlaceholderFieldEnum[
         flight_placeholder_field_name
     ].value
-    feed_item = _remove_attribute_value_from_feed_item(
+    feed_item = remove_attribute_value_from_feed_item(
         client,
         customer_id,
         feed_id,
@@ -92,7 +92,7 @@ def main(
         )
 
 
-def _get_feed(client, customer_id, feed_id):
+def get_feed(client, customer_id, feed_id):
     """Retrieves details about a feed.
 
     Args:
@@ -158,7 +158,7 @@ def _get_feed(client, customer_id, feed_id):
     return feed_attributes
 
 
-def _remove_attribute_value_from_feed_item(
+def remove_attribute_value_from_feed_item(
     client,
     customer_id,
     feed_id,
@@ -186,7 +186,7 @@ def _remove_attribute_value_from_feed_item(
 
     # Retrieve the feed item and its associated attributes based on its resource
     # name.
-    feed_item = _get_feed_item(client, customer_id, feed_id, feed_item_id)
+    feed_item = get_feed_item(client, customer_id, feed_id, feed_item_id)
 
     # Create the FeedItemAttributeValue that will be updated.
     feed_item_attribute_value = client.get_type("FeedItemAttributeValue")
@@ -218,7 +218,7 @@ def _remove_attribute_value_from_feed_item(
     # [END remove_flights_feed_item_attribute_value_1]
 
 
-def _get_feed_item(client, customer_id, feed_id, feed_item_id):
+def get_feed_item(client, customer_id, feed_id, feed_item_id):
     """Retrieves a feed item and its attribute values given a resource name.
 
     Args:
@@ -257,7 +257,7 @@ def _get_feed_item(client, customer_id, feed_id, feed_item_id):
 if __name__ == "__main__":
     # GoogleAdsClient will read the google-ads.yaml configuration file in the
     # home directory if none is specified.
-    googleads_client = GoogleAdsClient.load_from_storage(version="v8")
+    googleads_client = GoogleAdsClient.load_from_storage(version="v11")
 
     parser = argparse.ArgumentParser(
         description="Removes a feed item attribute value of a feed item in a "

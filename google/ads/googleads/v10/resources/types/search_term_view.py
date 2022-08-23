@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-# Copyright 2020 Google LLC
+# Copyright 2022 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -21,7 +21,9 @@ from google.ads.googleads.v10.enums.types import search_term_targeting_status
 __protobuf__ = proto.module(
     package="google.ads.googleads.v10.resources",
     marshal="google.ads.googleads.v10",
-    manifest={"SearchTermView",},
+    manifest={
+        "SearchTermView",
+    },
 )
 
 
@@ -50,9 +52,20 @@ class SearchTermView(proto.Message):
             excluded keywords.
     """
 
-    resource_name = proto.Field(proto.STRING, number=1,)
-    search_term = proto.Field(proto.STRING, number=5, optional=True,)
-    ad_group = proto.Field(proto.STRING, number=6, optional=True,)
+    resource_name = proto.Field(
+        proto.STRING,
+        number=1,
+    )
+    search_term = proto.Field(
+        proto.STRING,
+        number=5,
+        optional=True,
+    )
+    ad_group = proto.Field(
+        proto.STRING,
+        number=6,
+        optional=True,
+    )
     status = proto.Field(
         proto.ENUM,
         number=4,

@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-# Copyright 2020 Google LLC
+# Copyright 2022 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -26,7 +26,10 @@ from google.ads.googleads.v10.enums.types import policy_review_status
 __protobuf__ = proto.module(
     package="google.ads.googleads.v10.resources",
     marshal="google.ads.googleads.v10",
-    manifest={"Asset", "AssetPolicySummary",},
+    manifest={
+        "Asset",
+        "AssetPolicySummary",
+    },
 )
 
 
@@ -150,23 +153,86 @@ class Asset(proto.Message):
             Immutable. A call to action asset.
 
             This field is a member of `oneof`_ ``asset_data``.
+        dynamic_real_estate_asset (google.ads.googleads.v10.common.types.DynamicRealEstateAsset):
+            A dynamic real estate asset.
+
+            This field is a member of `oneof`_ ``asset_data``.
+        dynamic_custom_asset (google.ads.googleads.v10.common.types.DynamicCustomAsset):
+            A dynamic custom asset.
+
+            This field is a member of `oneof`_ ``asset_data``.
+        dynamic_hotels_and_rentals_asset (google.ads.googleads.v10.common.types.DynamicHotelsAndRentalsAsset):
+            A dynamic hotels and rentals asset.
+
+            This field is a member of `oneof`_ ``asset_data``.
+        dynamic_flights_asset (google.ads.googleads.v10.common.types.DynamicFlightsAsset):
+            A dynamic flights asset.
+
+            This field is a member of `oneof`_ ``asset_data``.
+        discovery_carousel_card_asset (google.ads.googleads.v10.common.types.DiscoveryCarouselCardAsset):
+            Immutable. A discovery carousel card asset.
+
+            This field is a member of `oneof`_ ``asset_data``.
+        dynamic_travel_asset (google.ads.googleads.v10.common.types.DynamicTravelAsset):
+            A dynamic travel asset.
+
+            This field is a member of `oneof`_ ``asset_data``.
+        dynamic_local_asset (google.ads.googleads.v10.common.types.DynamicLocalAsset):
+            A dynamic local asset.
+
+            This field is a member of `oneof`_ ``asset_data``.
+        dynamic_jobs_asset (google.ads.googleads.v10.common.types.DynamicJobsAsset):
+            A dynamic jobs asset.
+
+            This field is a member of `oneof`_ ``asset_data``.
     """
 
-    resource_name = proto.Field(proto.STRING, number=1,)
-    id = proto.Field(proto.INT64, number=11, optional=True,)
-    name = proto.Field(proto.STRING, number=12, optional=True,)
+    resource_name = proto.Field(
+        proto.STRING,
+        number=1,
+    )
+    id = proto.Field(
+        proto.INT64,
+        number=11,
+        optional=True,
+    )
+    name = proto.Field(
+        proto.STRING,
+        number=12,
+        optional=True,
+    )
     type_ = proto.Field(
-        proto.ENUM, number=4, enum=asset_type.AssetTypeEnum.AssetType,
+        proto.ENUM,
+        number=4,
+        enum=asset_type.AssetTypeEnum.AssetType,
     )
-    final_urls = proto.RepeatedField(proto.STRING, number=14,)
-    final_mobile_urls = proto.RepeatedField(proto.STRING, number=16,)
-    tracking_url_template = proto.Field(proto.STRING, number=17, optional=True,)
+    final_urls = proto.RepeatedField(
+        proto.STRING,
+        number=14,
+    )
+    final_mobile_urls = proto.RepeatedField(
+        proto.STRING,
+        number=16,
+    )
+    tracking_url_template = proto.Field(
+        proto.STRING,
+        number=17,
+        optional=True,
+    )
     url_custom_parameters = proto.RepeatedField(
-        proto.MESSAGE, number=18, message=custom_parameter.CustomParameter,
+        proto.MESSAGE,
+        number=18,
+        message=custom_parameter.CustomParameter,
     )
-    final_url_suffix = proto.Field(proto.STRING, number=19, optional=True,)
+    final_url_suffix = proto.Field(
+        proto.STRING,
+        number=19,
+        optional=True,
+    )
     policy_summary = proto.Field(
-        proto.MESSAGE, number=13, message="AssetPolicySummary",
+        proto.MESSAGE,
+        number=13,
+        message="AssetPolicySummary",
     )
     youtube_video_asset = proto.Field(
         proto.MESSAGE,
@@ -270,6 +336,54 @@ class Asset(proto.Message):
         oneof="asset_data",
         message=asset_types.CallToActionAsset,
     )
+    dynamic_real_estate_asset = proto.Field(
+        proto.MESSAGE,
+        number=30,
+        oneof="asset_data",
+        message=asset_types.DynamicRealEstateAsset,
+    )
+    dynamic_custom_asset = proto.Field(
+        proto.MESSAGE,
+        number=31,
+        oneof="asset_data",
+        message=asset_types.DynamicCustomAsset,
+    )
+    dynamic_hotels_and_rentals_asset = proto.Field(
+        proto.MESSAGE,
+        number=32,
+        oneof="asset_data",
+        message=asset_types.DynamicHotelsAndRentalsAsset,
+    )
+    dynamic_flights_asset = proto.Field(
+        proto.MESSAGE,
+        number=33,
+        oneof="asset_data",
+        message=asset_types.DynamicFlightsAsset,
+    )
+    discovery_carousel_card_asset = proto.Field(
+        proto.MESSAGE,
+        number=34,
+        oneof="asset_data",
+        message=asset_types.DiscoveryCarouselCardAsset,
+    )
+    dynamic_travel_asset = proto.Field(
+        proto.MESSAGE,
+        number=35,
+        oneof="asset_data",
+        message=asset_types.DynamicTravelAsset,
+    )
+    dynamic_local_asset = proto.Field(
+        proto.MESSAGE,
+        number=36,
+        oneof="asset_data",
+        message=asset_types.DynamicLocalAsset,
+    )
+    dynamic_jobs_asset = proto.Field(
+        proto.MESSAGE,
+        number=37,
+        oneof="asset_data",
+        message=asset_types.DynamicJobsAsset,
+    )
 
 
 class AssetPolicySummary(proto.Message):
@@ -289,7 +403,9 @@ class AssetPolicySummary(proto.Message):
     """
 
     policy_topic_entries = proto.RepeatedField(
-        proto.MESSAGE, number=1, message=policy.PolicyTopicEntry,
+        proto.MESSAGE,
+        number=1,
+        message=policy.PolicyTopicEntry,
     )
     review_status = proto.Field(
         proto.ENUM,

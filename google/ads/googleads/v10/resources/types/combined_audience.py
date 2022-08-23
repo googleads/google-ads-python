@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-# Copyright 2020 Google LLC
+# Copyright 2022 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -21,7 +21,9 @@ from google.ads.googleads.v10.enums.types import combined_audience_status
 __protobuf__ = proto.module(
     package="google.ads.googleads.v10.resources",
     marshal="google.ads.googleads.v10",
-    manifest={"CombinedAudience",},
+    manifest={
+        "CombinedAudience",
+    },
 )
 
 
@@ -50,15 +52,27 @@ class CombinedAudience(proto.Message):
             audience.
     """
 
-    resource_name = proto.Field(proto.STRING, number=1,)
-    id = proto.Field(proto.INT64, number=2,)
+    resource_name = proto.Field(
+        proto.STRING,
+        number=1,
+    )
+    id = proto.Field(
+        proto.INT64,
+        number=2,
+    )
     status = proto.Field(
         proto.ENUM,
         number=3,
         enum=combined_audience_status.CombinedAudienceStatusEnum.CombinedAudienceStatus,
     )
-    name = proto.Field(proto.STRING, number=4,)
-    description = proto.Field(proto.STRING, number=5,)
+    name = proto.Field(
+        proto.STRING,
+        number=4,
+    )
+    description = proto.Field(
+        proto.STRING,
+        number=5,
+    )
 
 
 __all__ = tuple(sorted(__protobuf__.manifest))

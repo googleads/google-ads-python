@@ -43,20 +43,18 @@ def main(client, customer_id):
         client: an initialized GoogleAdsClient instance.
         customer_id: a client customer ID str.
     """
-    budget_resource_name = _create_campaign_budget(client, customer_id)
-    campaign_resource_name = _create_campaign(
+    budget_resource_name = create_campaign_budget(client, customer_id)
+    campaign_resource_name = create_campaign(
         client, customer_id, budget_resource_name
     )
-    ad_group_resource_name = _create_ad_group(
+    ad_group_resource_name = create_ad_group(
         client, customer_id, campaign_resource_name
     )
-    create_local_ad = _create_local_ad(
-        client, customer_id, ad_group_resource_name
-    )
+    create_local_ad(client, customer_id, ad_group_resource_name)
 
 
 # [START add_local_campaign]
-def _create_campaign_budget(client, customer_id):
+def create_campaign_budget(client, customer_id):
     """Adds a campaign budget to the given client account.
 
     Args:
@@ -89,7 +87,7 @@ def _create_campaign_budget(client, customer_id):
 
 
 # [START add_local_campaign_1]
-def _create_campaign(client, customer_id, budget_resource_name):
+def create_campaign(client, customer_id, budget_resource_name):
     """Adds a Local campaign to the given client account using the given budget.
 
     Args:
@@ -154,7 +152,7 @@ def _create_campaign(client, customer_id, budget_resource_name):
 
 
 # [START add_local_campaign_2]
-def _create_ad_group(client, customer_id, campaign_resource_name):
+def create_ad_group(client, customer_id, campaign_resource_name):
     """Adds an ad group to the given client account under the given campaign.
 
     Args:
@@ -186,7 +184,7 @@ def _create_ad_group(client, customer_id, campaign_resource_name):
 
 
 # [START add_local_campaign_3]
-def _create_local_ad(client, customer_id, ad_group_resource_name):
+def create_local_ad(client, customer_id, ad_group_resource_name):
     """Adds a local ad to the given client account under the given ad group.
 
     Args:
@@ -201,33 +199,33 @@ def _create_local_ad(client, customer_id, ad_group_resource_name):
     ad_group_ad.ad.final_urls.append("https://www.example.com")
     ad_group_ad.ad.local_ad.headlines.extend(
         [
-            _create_ad_text_asset(client, "Best Space Cruise Line"),
-            _create_ad_text_asset(client, "Experience the Stars"),
+            create_ad_text_asset(client, "Best Space Cruise Line"),
+            create_ad_text_asset(client, "Experience the Stars"),
         ]
     )
     ad_group_ad.ad.local_ad.descriptions.extend(
         [
-            _create_ad_text_asset(client, "Buy your tickets now"),
-            _create_ad_text_asset(client, "Visit the Red Planet"),
+            create_ad_text_asset(client, "Buy your tickets now"),
+            create_ad_text_asset(client, "Visit the Red Planet"),
         ]
     )
     ad_group_ad.ad.local_ad.call_to_actions.append(
-        _create_ad_text_asset(client, "Shop Now")
+        create_ad_text_asset(client, "Shop Now")
     )
     marketing_image = client.get_type("AdImageAsset")
-    marketing_image.asset = _create_image_asset(
+    marketing_image.asset = create_image_asset(
         client, customer_id, _MARKETING_IMAGE_URL, "Marketing Image"
     )
     ad_group_ad.ad.local_ad.marketing_images.append(marketing_image)
 
     logo_image = client.get_type("AdImageAsset")
-    logo_image.asset = _create_image_asset(
+    logo_image.asset = create_image_asset(
         client, customer_id, _LOGO_IMAGE_URL, "Square Marketing Image"
     )
     ad_group_ad.ad.local_ad.logo_images.append(logo_image)
 
     video = client.get_type("AdVideoAsset")
-    video.asset = _create_youtube_video_asset(
+    video.asset = create_youtube_video_asset(
         client, customer_id, _YOUTUBE_VIDEO_ID, "Local Campaigns"
     )
     ad_group_ad.ad.local_ad.videos.append(video)
@@ -240,7 +238,7 @@ def _create_local_ad(client, customer_id, ad_group_resource_name):
     print(f"Created ad group ad with resource name: '{resource_name}'")
 
 
-def _create_ad_text_asset(client, text):
+def create_ad_text_asset(client, text):
     """Creates an ad text asset with the given text value.
 
     Args:
@@ -257,7 +255,7 @@ def _create_ad_text_asset(client, text):
 
 
 # [START add_local_campaign_4]
-def _create_image_asset(client, customer_id, image_url, image_name):
+def create_image_asset(client, customer_id, image_url, image_name):
     """Creates an asset with the given image URL and name.
 
     Args:
@@ -273,7 +271,7 @@ def _create_image_asset(client, customer_id, image_url, image_name):
     asset = asset_operation.create
     asset.name = image_name
     asset.type_ = client.enums.AssetTypeEnum.IMAGE
-    asset.image_asset.data = _get_image_bytes(image_url)
+    asset.image_asset.data = get_image_bytes(image_url)
     asset_service = client.get_service("AssetService")
     response = asset_service.mutate_assets(
         customer_id=customer_id, operations=[asset_operation]
@@ -286,7 +284,7 @@ def _create_image_asset(client, customer_id, image_url, image_name):
     return resource_name
 
 
-def _get_image_bytes(url):
+def get_image_bytes(url):
     """Loads image data from a URL.
 
     Args:
@@ -301,7 +299,7 @@ def _get_image_bytes(url):
 
 
 # [START add_local_campaign_5]
-def _create_youtube_video_asset(
+def create_youtube_video_asset(
     client, customer_id, youtube_video_id, youtube_video_name
 ):
     """Creates a asset with the given YouTube video ID and name.
@@ -337,7 +335,7 @@ def _create_youtube_video_asset(
 if __name__ == "__main__":
     # GoogleAdsClient will read the google-ads.yaml configuration file in the
     # home directory if none is specified.
-    googleads_client = GoogleAdsClient.load_from_storage(version="v10")
+    googleads_client = GoogleAdsClient.load_from_storage(version="v11")
 
     parser = argparse.ArgumentParser(
         description="Adds a Local Campaign to the given account."

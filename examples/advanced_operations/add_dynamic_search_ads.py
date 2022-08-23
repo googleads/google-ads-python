@@ -34,18 +34,18 @@ def main(client, customer_id):
         client: an initialized GoogleAdsClient instance.
         customer_id: a client customer ID str.
     """
-    budget_resource_name = _create_budget(client, customer_id)
-    campaign_resource_name = _create_campaign(
+    budget_resource_name = create_budget(client, customer_id)
+    campaign_resource_name = create_campaign(
         client, customer_id, budget_resource_name
     )
-    ad_group_resource_name = _create_ad_group(
+    ad_group_resource_name = create_ad_group(
         client, customer_id, campaign_resource_name
     )
-    _create_expanded_dsa(client, customer_id, ad_group_resource_name)
-    _add_webpage_criterion(client, customer_id, ad_group_resource_name)
+    create_expanded_dsa(client, customer_id, ad_group_resource_name)
+    add_webpage_criterion(client, customer_id, ad_group_resource_name)
 
 
-def _create_budget(client, customer_id):
+def create_budget(client, customer_id):
     """Creates a budget under the given customer ID.
 
     Args:
@@ -79,7 +79,7 @@ def _create_budget(client, customer_id):
 
 
 # [START add_dynamic_search_ads]
-def _create_campaign(client, customer_id, budget_resource_name):
+def create_campaign(client, customer_id, budget_resource_name):
     """Creates a Dynamic Search Ad Campaign under the given customer ID.
 
     Args:
@@ -130,7 +130,7 @@ def _create_campaign(client, customer_id, budget_resource_name):
 
 
 # [START add_dynamic_search_ads_1]
-def _create_ad_group(client, customer_id, campaign_resource_name):
+def create_ad_group(client, customer_id, campaign_resource_name):
     """Creates a Dynamic Search Ad Group under the given Campaign.
 
     Args:
@@ -174,7 +174,7 @@ def _create_ad_group(client, customer_id, campaign_resource_name):
 
 
 # [START add_dynamic_search_ads_2]
-def _create_expanded_dsa(client, customer_id, ad_group_resource_name):
+def create_expanded_dsa(client, customer_id, ad_group_resource_name):
     """Creates a dynamic search ad under the given ad group.
 
     Args:
@@ -208,7 +208,7 @@ def _create_expanded_dsa(client, customer_id, ad_group_resource_name):
     # [END add_dynamic_search_ads_2]
 
 
-def _add_webpage_criterion(client, customer_id, ad_group_resource_name):
+def add_webpage_criterion(client, customer_id, ad_group_resource_name):
     """Creates a web page criterion to the given ad group.
 
     Args:
@@ -260,7 +260,7 @@ def _add_webpage_criterion(client, customer_id, ad_group_resource_name):
 if __name__ == "__main__":
     # GoogleAdsClient will read the google-ads.yaml configuration file in the
     # home directory if none is specified.
-    googleads_client = GoogleAdsClient.load_from_storage(version="v10")
+    googleads_client = GoogleAdsClient.load_from_storage(version="v11")
 
     parser = argparse.ArgumentParser(
         description=(

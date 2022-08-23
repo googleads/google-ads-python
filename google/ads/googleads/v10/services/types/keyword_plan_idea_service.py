@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-# Copyright 2020 Google LLC
+# Copyright 2022 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -33,6 +33,9 @@ __protobuf__ = proto.module(
         "UrlSeed",
         "GenerateKeywordIdeaResponse",
         "GenerateKeywordIdeaResult",
+        "GenerateKeywordHistoricalMetricsRequest",
+        "GenerateKeywordHistoricalMetricsResponse",
+        "GenerateKeywordHistoricalMetricsResult",
     },
 )
 
@@ -108,12 +111,31 @@ class GenerateKeywordIdeasRequest(proto.Message):
             This field is a member of `oneof`_ ``seed``.
     """
 
-    customer_id = proto.Field(proto.STRING, number=1,)
-    language = proto.Field(proto.STRING, number=14, optional=True,)
-    geo_target_constants = proto.RepeatedField(proto.STRING, number=15,)
-    include_adult_keywords = proto.Field(proto.BOOL, number=10,)
-    page_token = proto.Field(proto.STRING, number=12,)
-    page_size = proto.Field(proto.INT32, number=13,)
+    customer_id = proto.Field(
+        proto.STRING,
+        number=1,
+    )
+    language = proto.Field(
+        proto.STRING,
+        number=14,
+        optional=True,
+    )
+    geo_target_constants = proto.RepeatedField(
+        proto.STRING,
+        number=15,
+    )
+    include_adult_keywords = proto.Field(
+        proto.BOOL,
+        number=10,
+    )
+    page_token = proto.Field(
+        proto.STRING,
+        number=12,
+    )
+    page_size = proto.Field(
+        proto.INT32,
+        number=13,
+    )
     keyword_plan_network = proto.Field(
         proto.ENUM,
         number=9,
@@ -135,16 +157,28 @@ class GenerateKeywordIdeasRequest(proto.Message):
         message=keyword_plan_common.HistoricalMetricsOptions,
     )
     keyword_and_url_seed = proto.Field(
-        proto.MESSAGE, number=2, oneof="seed", message="KeywordAndUrlSeed",
+        proto.MESSAGE,
+        number=2,
+        oneof="seed",
+        message="KeywordAndUrlSeed",
     )
     keyword_seed = proto.Field(
-        proto.MESSAGE, number=3, oneof="seed", message="KeywordSeed",
+        proto.MESSAGE,
+        number=3,
+        oneof="seed",
+        message="KeywordSeed",
     )
     url_seed = proto.Field(
-        proto.MESSAGE, number=5, oneof="seed", message="UrlSeed",
+        proto.MESSAGE,
+        number=5,
+        oneof="seed",
+        message="UrlSeed",
     )
     site_seed = proto.Field(
-        proto.MESSAGE, number=11, oneof="seed", message="SiteSeed",
+        proto.MESSAGE,
+        number=11,
+        oneof="seed",
+        message="SiteSeed",
     )
 
 
@@ -161,8 +195,15 @@ class KeywordAndUrlSeed(proto.Message):
             Requires at least one keyword.
     """
 
-    url = proto.Field(proto.STRING, number=3, optional=True,)
-    keywords = proto.RepeatedField(proto.STRING, number=4,)
+    url = proto.Field(
+        proto.STRING,
+        number=3,
+        optional=True,
+    )
+    keywords = proto.RepeatedField(
+        proto.STRING,
+        number=4,
+    )
 
 
 class KeywordSeed(proto.Message):
@@ -173,7 +214,10 @@ class KeywordSeed(proto.Message):
             Requires at least one keyword.
     """
 
-    keywords = proto.RepeatedField(proto.STRING, number=2,)
+    keywords = proto.RepeatedField(
+        proto.STRING,
+        number=2,
+    )
 
 
 class SiteSeed(proto.Message):
@@ -188,7 +232,11 @@ class SiteSeed(proto.Message):
             This field is a member of `oneof`_ ``_site``.
     """
 
-    site = proto.Field(proto.STRING, number=2, optional=True,)
+    site = proto.Field(
+        proto.STRING,
+        number=2,
+        optional=True,
+    )
 
 
 class UrlSeed(proto.Message):
@@ -202,7 +250,11 @@ class UrlSeed(proto.Message):
             This field is a member of `oneof`_ ``_url``.
     """
 
-    url = proto.Field(proto.STRING, number=2, optional=True,)
+    url = proto.Field(
+        proto.STRING,
+        number=2,
+        optional=True,
+    )
 
 
 class GenerateKeywordIdeaResponse(proto.Message):
@@ -228,15 +280,23 @@ class GenerateKeywordIdeaResponse(proto.Message):
         return self
 
     results = proto.RepeatedField(
-        proto.MESSAGE, number=1, message="GenerateKeywordIdeaResult",
+        proto.MESSAGE,
+        number=1,
+        message="GenerateKeywordIdeaResult",
     )
     aggregate_metric_results = proto.Field(
         proto.MESSAGE,
         number=4,
         message=keyword_plan_common.KeywordPlanAggregateMetricResults,
     )
-    next_page_token = proto.Field(proto.STRING, number=2,)
-    total_size = proto.Field(proto.INT64, number=3,)
+    next_page_token = proto.Field(
+        proto.STRING,
+        number=2,
+    )
+    total_size = proto.Field(
+        proto.INT64,
+        number=3,
+    )
 
 
 class GenerateKeywordIdeaResult(proto.Message):
@@ -258,16 +318,122 @@ class GenerateKeywordIdeaResult(proto.Message):
             The annotations for the keyword.
             The annotation data is only provided if
             requested.
+        close_variants (Sequence[str]):
+            The list of close variants from the requested
+            keywords that are combined into this
+            GenerateKeywordIdeaResult. See
+            https://support.google.com/google-ads/answer/9342105
+            for the definition of "close variants".
     """
 
-    text = proto.Field(proto.STRING, number=5, optional=True,)
+    text = proto.Field(
+        proto.STRING,
+        number=5,
+        optional=True,
+    )
     keyword_idea_metrics = proto.Field(
         proto.MESSAGE,
         number=3,
         message=keyword_plan_common.KeywordPlanHistoricalMetrics,
     )
     keyword_annotations = proto.Field(
-        proto.MESSAGE, number=6, message=keyword_plan_common.KeywordAnnotations,
+        proto.MESSAGE,
+        number=6,
+        message=keyword_plan_common.KeywordAnnotations,
+    )
+    close_variants = proto.RepeatedField(
+        proto.STRING,
+        number=7,
+    )
+
+
+class GenerateKeywordHistoricalMetricsRequest(proto.Message):
+    r"""Request message for
+    [KeywordPlanIdeaService.GenerateKeywordHistoricalMetrics][google.ads.googleads.v10.services.KeywordPlanIdeaService.GenerateKeywordHistoricalMetrics].
+
+    Attributes:
+        customer_id (str):
+            The ID of the customer with the
+            recommendation.
+        keywords (Sequence[str]):
+            A list of keywords to get historical metrics.
+            Not all inputs will be returned as a result of
+            near-exact deduplication. For example, if stats
+            for "car" and "cars" are requested, only "car"
+            will be returned.
+            A maximum of 10,000 keywords can be used.
+        historical_metrics_options (google.ads.googleads.v10.common.types.HistoricalMetricsOptions):
+            The options for historical metrics data.
+    """
+
+    customer_id = proto.Field(
+        proto.STRING,
+        number=1,
+    )
+    keywords = proto.RepeatedField(
+        proto.STRING,
+        number=2,
+    )
+    historical_metrics_options = proto.Field(
+        proto.MESSAGE,
+        number=3,
+        message=keyword_plan_common.HistoricalMetricsOptions,
+    )
+
+
+class GenerateKeywordHistoricalMetricsResponse(proto.Message):
+    r"""Response message for
+    [KeywordPlanIdeaService.GenerateKeywordHistoricalMetrics][google.ads.googleads.v10.services.KeywordPlanIdeaService.GenerateKeywordHistoricalMetrics].
+
+    Attributes:
+        results (Sequence[google.ads.googleads.v10.services.types.GenerateKeywordHistoricalMetricsResult]):
+            List of keywords and their historical
+            metrics.
+    """
+
+    results = proto.RepeatedField(
+        proto.MESSAGE,
+        number=1,
+        message="GenerateKeywordHistoricalMetricsResult",
+    )
+
+
+class GenerateKeywordHistoricalMetricsResult(proto.Message):
+    r"""The result of generating keyword historical metrics.
+
+    Attributes:
+        text (str):
+            The text of the query associated with one or more keywords.
+            Note that we de-dupe your keywords list, eliminating close
+            variants before returning the keywords as text. For example,
+            if your request originally contained the keywords "car" and
+            "cars", the returned search query will only contain "cars".
+            The list of de-duped queries will be included in
+            close_variants field.
+
+            This field is a member of `oneof`_ ``_text``.
+        close_variants (Sequence[str]):
+            The list of close variants from the requested
+            keywords whose stats are combined into this
+            GenerateKeywordHistoricalMetricsResult.
+        keyword_metrics (google.ads.googleads.v10.common.types.KeywordPlanHistoricalMetrics):
+            The historical metrics for text and its close
+            variants
+    """
+
+    text = proto.Field(
+        proto.STRING,
+        number=1,
+        optional=True,
+    )
+    close_variants = proto.RepeatedField(
+        proto.STRING,
+        number=3,
+    )
+    keyword_metrics = proto.Field(
+        proto.MESSAGE,
+        number=2,
+        message=keyword_plan_common.KeywordPlanHistoricalMetrics,
     )
 
 

@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-# Copyright 2020 Google LLC
+# Copyright 2022 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -45,9 +45,14 @@ class DynamicLocationSetFilter(proto.Message):
             Business name filter.
     """
 
-    labels = proto.RepeatedField(proto.STRING, number=1,)
+    labels = proto.RepeatedField(
+        proto.STRING,
+        number=1,
+    )
     business_name_filter = proto.Field(
-        proto.MESSAGE, number=2, message="BusinessNameFilter",
+        proto.MESSAGE,
+        number=2,
+        message="BusinessNameFilter",
     )
 
 
@@ -63,7 +68,10 @@ class BusinessNameFilter(proto.Message):
             business_name.
     """
 
-    business_name = proto.Field(proto.STRING, number=1,)
+    business_name = proto.Field(
+        proto.STRING,
+        number=1,
+    )
     filter_type = proto.Field(
         proto.ENUM,
         number=2,
@@ -84,7 +92,10 @@ class DynamicAffiliateLocationSetFilter(proto.Message):
             FeedItemSet.
     """
 
-    chain_ids = proto.RepeatedField(proto.INT64, number=1,)
+    chain_ids = proto.RepeatedField(
+        proto.INT64,
+        number=1,
+    )
 
 
 __all__ = tuple(sorted(__protobuf__.manifest))

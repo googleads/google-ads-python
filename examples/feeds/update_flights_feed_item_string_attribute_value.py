@@ -61,7 +61,7 @@ def main(
     """
     feed_service = client.get_service("FeedService")
     # Gets a map of the placeholder values to feed attributes.
-    placeholders_to_feed_attribute_map = _flight_placeholder_fields_map(
+    placeholders_to_feed_attribute_map = flight_placeholder_fields_map(
         client, customer_id, feed_service.feed_path(customer_id, feed_id)
     )
     # Gets the ID of the feed attribute for the placeholder field. This is
@@ -85,7 +85,7 @@ def main(
     # Retrieves the feed item and its associated attributes based on the
     # resource name.
     feed_item_service = client.get_service("FeedItemService")
-    feed_item = _get_feed_item(
+    feed_item = get_feed_item(
         client,
         customer_id,
         feed_item_service.feed_item_path(customer_id, feed_id, feed_item_id),
@@ -93,7 +93,7 @@ def main(
 
     # Gets the index of the attribute value that will be updated in the
     # feed item.
-    attribute_index = _get_attribute_index(
+    attribute_index = get_attribute_index(
         updated_feed_item_attribute_value, feed_item
     )
     # Any feed item attribute values that are not included in the updated
@@ -124,7 +124,7 @@ def main(
     # [END update_flights_feed_item_string_attribute_value]
 
 
-def _flight_placeholder_fields_map(client, customer_id, feed_resource_name):
+def flight_placeholder_fields_map(client, customer_id, feed_resource_name):
     """Maps place holder fields and feed attributes for a flights feed.
 
     See FlightPlaceholderField.php for all available placeholder field values.
@@ -139,7 +139,7 @@ def _flight_placeholder_fields_map(client, customer_id, feed_resource_name):
     """
     flight_placeholder_field_enum = client.enums.FlightPlaceholderFieldEnum
 
-    return _placeholder_field_maps(
+    return placeholder_field_maps(
         client,
         customer_id,
         feed_resource_name,
@@ -153,7 +153,7 @@ def _flight_placeholder_fields_map(client, customer_id, feed_resource_name):
     )
 
 
-def _placeholder_field_maps(
+def placeholder_field_maps(
     client, customer_id, feed_resource_name, feed_attribute_names_map
 ):
     """Retrieves the placeholder fields to feed attributes map for a feed.
@@ -204,7 +204,7 @@ def _placeholder_field_maps(
     }
 
 
-def _get_feed_item(client, customer_id, feed_item_resource_name):
+def get_feed_item(client, customer_id, feed_item_resource_name):
     """Retrieves a feed item and its attribute values given a resource name.
 
     Args:
@@ -235,7 +235,7 @@ def _get_feed_item(client, customer_id, feed_item_resource_name):
     return list(response)[0].feed_item
 
 
-def _get_attribute_index(target_feed_item_attribute_value, feed_item):
+def get_attribute_index(target_feed_item_attribute_value, feed_item):
     """Gets the index of the target feed item attribute value.
 
     This is needed to specify which feed item attribute value will be updated
@@ -276,7 +276,7 @@ def _get_attribute_index(target_feed_item_attribute_value, feed_item):
 if __name__ == "__main__":
     # GoogleAdsClient will read the google-ads.yaml configuration file in the
     # home directory if none is specified.
-    googleads_client = GoogleAdsClient.load_from_storage(version="v10")
+    googleads_client = GoogleAdsClient.load_from_storage(version="v11")
 
     parser = argparse.ArgumentParser(
         description="Updates a feed item attribute value in a flights feed."

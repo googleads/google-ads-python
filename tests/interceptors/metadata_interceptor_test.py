@@ -145,3 +145,83 @@ class MetadataInterceptorTest(TestCase):
             )
 
             mock_continuation.assert_called_once()
+
+    def test_intercept_updates_user_agent_add_pb(self):
+        """Asserts that the protobuf version is included in the user agent.
+
+        This test should be removed or updated once this functionality is
+        incorporated into python-api-core per this feature request:
+        https://github.com/googleapis/python-api-core/issues/416
+        """
+        interceptor = MetadataInterceptor(
+            self.mock_developer_token,
+            self.mock_login_customer_id,
+            self.mock_linked_customer_id,
+        )
+
+        mock_request = mock.Mock()
+        mock_client_call_details = mock.Mock()
+        mock_client_call_details.method = "test/method"
+        mock_client_call_details.timeout = 5
+        mock_client_call_details.metadata = [
+            ("apples", "oranges"),
+            ("x-goog-api-client", "gl-python/3.7.0 grpc/1.45.0 gax/2.2.2"),
+        ]
+        # Create a simple function that just returns the client_call_details
+        # so we can make assertions about what was modified in the _intercept
+        # method.
+        def mock_continuation(client_call_details, request):
+            return client_call_details
+
+        with mock.patch.object(
+            interceptor,
+            "_update_client_call_details_metadata",
+            wraps=interceptor._update_client_call_details_metadata,
+        ) as mock_updater:
+            modified_client_call_details = interceptor._intercept(
+                mock_continuation, mock_client_call_details, mock_request
+            )
+
+            user_agent = modified_client_call_details.metadata[1][1]
+            self.assertEqual(user_agent.count("pb"), 1)
+
+    def test_intercept_updates_user_agent_existing_pb(self):
+        """Asserts that the protobuf version is not added if already present.
+
+        This test should be removed or updated once this functionality is
+        incorporated into python-api-core per this feature request:
+        https://github.com/googleapis/python-api-core/issues/416
+        """
+        interceptor = MetadataInterceptor(
+            self.mock_developer_token,
+            self.mock_login_customer_id,
+            self.mock_linked_customer_id,
+        )
+
+        mock_request = mock.Mock()
+        mock_client_call_details = mock.Mock()
+        mock_client_call_details.method = "test/method"
+        mock_client_call_details.timeout = 5
+        mock_client_call_details.metadata = [
+            ("apples", "oranges"),
+            ("x-goog-api-client", "gl-python/3.7.0 grpc/1.45.0 pb/3.21.0",),
+        ]
+        # Create a simple function that just returns the client_call_details
+        # so we can make assertions about what was modified in the _intercept
+        # method.
+        def mock_continuation(client_call_details, request):
+            return client_call_details
+
+        with mock.patch.object(
+            interceptor,
+            "_update_client_call_details_metadata",
+            wraps=interceptor._update_client_call_details_metadata,
+        ) as mock_updater:
+            modified_client_call_details = interceptor._intercept(
+                mock_continuation, mock_client_call_details, mock_request
+            )
+
+            user_agent = modified_client_call_details.metadata[1][1]
+            # We assert that the _intercept method did not add the "pb" key
+            # value pair because it was already present when passed in.
+            self.assertEqual(user_agent.count("pb"), 1)

@@ -28,17 +28,6 @@ Documentation
 Please refer to our `Developer Site`_ for documentation on how to install,
 configure, and use this client library.
 
-For Python 3.6 Users
---------------------
-Version `12.0.0`_ of this library is the last version that is compatible with
-Python 3.6. It contains support for `v6`_, `v7`_, and `v8`_ of the Google Ads
-API. The latest API version supported by version `12.0.0`_, `v8`_, will be
-supported until the Spring of 2022, so Python 3.6 users can access the Google
-Ads API until then. Given that the `EOL`_ for Python 3.6 is December 23, 2021,
-we encourage our users to upgrade to Python 3.7 or above as soon as possible to
-avoid issues. Please follow the `Google Ads Developer Blog`_ for announcements
-of the specific deprecation dates for the above API versions.
-
 Protobuf Messages
 -----------------
 Version `14.0.0`_ of this library introduced the **required** `use_proto_plus`
@@ -61,6 +50,7 @@ Authors
 * `Ben Karl`_
 * `Andrew Burke`_
 * `Laura Chevalier`_
+* `Bob Hancock`_
 
 .. |build-status| image:: https://storage.googleapis.com/gaa-clientlibs/badges/google-ads-python/buildstatus_ubuntu.svg
 .. _Developer Site: https://developers.google.com/google-ads/api/docs/client-libs/python/
@@ -72,11 +62,12 @@ Authors
 .. _Ben Karl: https://github.com/BenRKarl
 .. _Andrew Burke: https://github.com/AndrewMBurke
 .. _Laura Chevalier: https://github.com/laurachevalier4
+.. _Bob Hancock: https://github.com/bobhancock
 .. _12.0.0: https://pypi.org/project/google-ads/12.0.0/
 .. _14.0.0: https://pypi.org/project/google-ads/14.0.0/
-.. _v6: https://developers.google.com/google-ads/api/reference/rpc/v6/overview
-.. _v7: https://developers.google.com/google-ads/api/reference/rpc/v7/overview
-.. _v8: https://developers.google.com/google-ads/api/reference/rpc/v8/overview
+.. _15.0.0: https://pypi.org/project/google-ads/15.0.0/
+.. _v9: https://developers.google.com/google-ads/api/reference/rpc/v9/overview
+.. _v10: https://developers.google.com/google-ads/api/reference/rpc/v10/overview
 .. _EOL: https://endoflife.date/python
 .. _Google Ads Developer Blog: https://ads-developers.googleblog.com/
 .. _Protobuf Messages: https://developers.google.com/google-ads/api/docs/client-libs/python/protobuf-messages

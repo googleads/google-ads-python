@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-# Copyright 2020 Google LLC
+# Copyright 2022 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -133,8 +133,10 @@ class KeywordPlanIdeaServiceGrpcTransport(KeywordPlanIdeaServiceTransport):
                 # default SSL credentials.
                 if client_cert_source:
                     cert, key = client_cert_source()
-                    self._ssl_channel_credentials = grpc.ssl_channel_credentials(
-                        certificate_chain=cert, private_key=key
+                    self._ssl_channel_credentials = (
+                        grpc.ssl_channel_credentials(
+                            certificate_chain=cert, private_key=key
+                        )
                     )
                 else:
                     self._ssl_channel_credentials = (
@@ -144,8 +146,10 @@ class KeywordPlanIdeaServiceGrpcTransport(KeywordPlanIdeaServiceTransport):
             else:
                 if client_cert_source_for_mtls and not ssl_channel_credentials:
                     cert, key = client_cert_source_for_mtls()
-                    self._ssl_channel_credentials = grpc.ssl_channel_credentials(
-                        certificate_chain=cert, private_key=key
+                    self._ssl_channel_credentials = (
+                        grpc.ssl_channel_credentials(
+                            certificate_chain=cert, private_key=key
+                        )
                     )
 
         # The base transport sets the host, credentials and scopes
@@ -228,8 +232,7 @@ class KeywordPlanIdeaServiceGrpcTransport(KeywordPlanIdeaServiceTransport):
 
     @property
     def grpc_channel(self) -> grpc.Channel:
-        """Return the channel designed to connect to this service.
-        """
+        """Return the channel designed to connect to this service."""
         return self._grpc_channel
 
     @property
@@ -268,6 +271,43 @@ class KeywordPlanIdeaServiceGrpcTransport(KeywordPlanIdeaServiceTransport):
                 response_deserializer=keyword_plan_idea_service.GenerateKeywordIdeaResponse.deserialize,
             )
         return self._stubs["generate_keyword_ideas"]
+
+    @property
+    def generate_keyword_historical_metrics(
+        self,
+    ) -> Callable[
+        [keyword_plan_idea_service.GenerateKeywordHistoricalMetricsRequest],
+        keyword_plan_idea_service.GenerateKeywordHistoricalMetricsResponse,
+    ]:
+        r"""Return a callable for the generate keyword historical
+        metrics method over gRPC.
+
+        Returns a list of keyword historical metrics.
+
+        List of thrown errors: `AuthenticationError <>`__
+        `AuthorizationError <>`__ `CollectionSizeError <>`__
+        `HeaderError <>`__ `InternalError <>`__ `QuotaError <>`__
+        `RequestError <>`__
+
+        Returns:
+            Callable[[~.GenerateKeywordHistoricalMetricsRequest],
+                    ~.GenerateKeywordHistoricalMetricsResponse]:
+                A function that, when called, will call the underlying RPC
+                on the server.
+        """
+        # Generate a "stub function" on-the-fly which will actually make
+        # the request.
+        # gRPC handles serialization and deserialization, so we just need
+        # to pass in the functions for each.
+        if "generate_keyword_historical_metrics" not in self._stubs:
+            self._stubs[
+                "generate_keyword_historical_metrics"
+            ] = self.grpc_channel.unary_unary(
+                "/google.ads.googleads.v10.services.KeywordPlanIdeaService/GenerateKeywordHistoricalMetrics",
+                request_serializer=keyword_plan_idea_service.GenerateKeywordHistoricalMetricsRequest.serialize,
+                response_deserializer=keyword_plan_idea_service.GenerateKeywordHistoricalMetricsResponse.deserialize,
+            )
+        return self._stubs["generate_keyword_historical_metrics"]
 
     def close(self):
         self.grpc_channel.close()

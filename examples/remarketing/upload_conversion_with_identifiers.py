@@ -69,7 +69,7 @@ def main(
     user_identifier = client.get_type("UserIdentifier")
     # Creates a SHA256 hashed string using the given email address, as
     # described at https://support.google.com/google-ads/answer/9888656.
-    user_identifier.hashed_email = _normalize_and_hash_email_address(
+    user_identifier.hashed_email = normalize_and_hash_email_address(
         email_address
     )
     # Optional: Specifies the user identifier source.
@@ -112,7 +112,7 @@ def main(
 
 
 # [START normalize_and_hash]
-def _normalize_and_hash_email_address(email_address):
+def normalize_and_hash_email_address(email_address):
     """Returns the result of normalizing and hashing an email address.
 
     For this use case, Google Ads requires removal of any '.' characters
@@ -139,10 +139,10 @@ def _normalize_and_hash_email_address(email_address):
         email_parts[0] = email_parts[0].replace(".", "")
         normalized_email = "@".join(email_parts)
 
-    return _normalize_and_hash(normalized_email)
+    return normalize_and_hash(normalized_email)
 
 
-def _normalize_and_hash(s):
+def normalize_and_hash(s):
     """Normalizes and hashes a string with SHA-256.
 
     Private customer data must be hashed during upload, as described at:
@@ -161,7 +161,7 @@ def _normalize_and_hash(s):
 if __name__ == "__main__":
     # GoogleAdsClient will read the google-ads.yaml configuration file in the
     # home directory if none is specified.
-    googleads_client = GoogleAdsClient.load_from_storage(version="v10")
+    googleads_client = GoogleAdsClient.load_from_storage(version="v11")
 
     parser = argparse.ArgumentParser(
         description="Imports offline call conversion values for calls related "

@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-# Copyright 2020 Google LLC
+# Copyright 2022 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -21,7 +21,11 @@ from google.ads.googleads.v10.enums.types import month_of_year
 __protobuf__ = proto.module(
     package="google.ads.googleads.v10.common",
     marshal="google.ads.googleads.v10",
-    manifest={"DateRange", "YearMonthRange", "YearMonth",},
+    manifest={
+        "DateRange",
+        "YearMonthRange",
+        "YearMonth",
+    },
 )
 
 
@@ -41,8 +45,16 @@ class DateRange(proto.Message):
             This field is a member of `oneof`_ ``_end_date``.
     """
 
-    start_date = proto.Field(proto.STRING, number=3, optional=True,)
-    end_date = proto.Field(proto.STRING, number=4, optional=True,)
+    start_date = proto.Field(
+        proto.STRING,
+        number=3,
+        optional=True,
+    )
+    end_date = proto.Field(
+        proto.STRING,
+        number=4,
+        optional=True,
+    )
 
 
 class YearMonthRange(proto.Message):
@@ -57,8 +69,16 @@ class YearMonthRange(proto.Message):
             The inclusive end year month.
     """
 
-    start = proto.Field(proto.MESSAGE, number=1, message="YearMonth",)
-    end = proto.Field(proto.MESSAGE, number=2, message="YearMonth",)
+    start = proto.Field(
+        proto.MESSAGE,
+        number=1,
+        message="YearMonth",
+    )
+    end = proto.Field(
+        proto.MESSAGE,
+        number=2,
+        message="YearMonth",
+    )
 
 
 class YearMonth(proto.Message):
@@ -71,9 +91,14 @@ class YearMonth(proto.Message):
             The month of the year. (e.g. FEBRUARY).
     """
 
-    year = proto.Field(proto.INT64, number=1,)
+    year = proto.Field(
+        proto.INT64,
+        number=1,
+    )
     month = proto.Field(
-        proto.ENUM, number=2, enum=month_of_year.MonthOfYearEnum.MonthOfYear,
+        proto.ENUM,
+        number=2,
+        enum=month_of_year.MonthOfYearEnum.MonthOfYear,
     )
 
 

@@ -26,15 +26,16 @@ from google.ads.googleads.errors import GoogleAdsException
 
 
 def main(client, customer_id, recommendation_id):
-    rec_service = client.get_service("RecommendationService")
-    operation = client.get_type("DismissRecommendationOperation")
+    recommendation_service = client.get_service("RecommendationService")
+    request = client.get_type("DismissRecommendationRequest")
+    operation = request.DismissRecommendationOperation()
     operation.resource_name = recommendation_service.recommendation_path(
         customer_id, recommendation_id
     )
+    request.customer_id = customer_id
+    request.operations.append(operation)
 
-    response = rec_service.dismiss_recommendation(
-        customer_id=customer_id, operations=[operation]
-    )
+    response = recommendation_service.dismiss_recommendation(request=request)
 
     print(
         "Dismissed recommendation with resource name: "
@@ -45,7 +46,7 @@ def main(client, customer_id, recommendation_id):
 if __name__ == "__main__":
     # GoogleAdsClient will read the google-ads.yaml configuration file in the
     # home directory if none is specified.
-    googleads_client = GoogleAdsClient.load_from_storage(version="v10")
+    googleads_client = GoogleAdsClient.load_from_storage(version="v11")
 
     parser = argparse.ArgumentParser(
         description=("Dismisses a recommendation with the given ID.")

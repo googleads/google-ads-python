@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-# Copyright 2020 Google LLC
+# Copyright 2022 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -45,7 +45,10 @@ class MutateCustomerUserAccessInvitationRequest(proto.Message):
             access invitation
     """
 
-    customer_id = proto.Field(proto.STRING, number=1,)
+    customer_id = proto.Field(
+        proto.STRING,
+        number=1,
+    )
     operation = proto.Field(
         proto.MESSAGE,
         number=2,
@@ -85,7 +88,11 @@ class CustomerUserAccessInvitationOperation(proto.Message):
         oneof="operation",
         message=customer_user_access_invitation.CustomerUserAccessInvitation,
     )
-    remove = proto.Field(proto.STRING, number=2, oneof="operation",)
+    remove = proto.Field(
+        proto.STRING,
+        number=2,
+        oneof="operation",
+    )
 
 
 class MutateCustomerUserAccessInvitationResponse(proto.Message):
@@ -111,7 +118,10 @@ class MutateCustomerUserAccessInvitationResult(proto.Message):
             Returned for successful operations.
     """
 
-    resource_name = proto.Field(proto.STRING, number=1,)
+    resource_name = proto.Field(
+        proto.STRING,
+        number=1,
+    )
 
 
 __all__ = tuple(sorted(__protobuf__.manifest))

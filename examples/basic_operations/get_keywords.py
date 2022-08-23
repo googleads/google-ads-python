@@ -74,7 +74,9 @@ def main(
         if omit_unselected_resource_names:
             resource_name_log_statement = ""
         else:
-            resource_name_log_statement = f" and resource name '{ad_group.resource_name}'"
+            resource_name_log_statement = (
+                f" and resource name '{ad_group.resource_name}'"
+            )
 
         print(
             f'Keyword with text "{keyword.text}", match type '
@@ -88,7 +90,7 @@ def main(
 if __name__ == "__main__":
     # GoogleAdsClient will read the google-ads.yaml configuration file in the
     # home directory if none is specified.
-    googleads_client = GoogleAdsClient.load_from_storage(version="v10")
+    googleads_client = GoogleAdsClient.load_from_storage(version="v11")
 
     parser = argparse.ArgumentParser(
         description=(

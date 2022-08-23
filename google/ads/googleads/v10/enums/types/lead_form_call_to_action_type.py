@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-# Copyright 2020 Google LLC
+# Copyright 2022 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -19,13 +19,14 @@ import proto  # type: ignore
 __protobuf__ = proto.module(
     package="google.ads.googleads.v10.enums",
     marshal="google.ads.googleads.v10",
-    manifest={"LeadFormCallToActionTypeEnum",},
+    manifest={
+        "LeadFormCallToActionTypeEnum",
+    },
 )
 
 
 class LeadFormCallToActionTypeEnum(proto.Message):
-    r"""Describes the type of call-to-action phrases in a lead form.
-    """
+    r"""Describes the type of call-to-action phrases in a lead form."""
 
     class LeadFormCallToActionType(proto.Enum):
         r"""Enum describing the type of call-to-action phrases in a lead

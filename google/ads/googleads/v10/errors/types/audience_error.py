@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-# Copyright 2020 Google LLC
+# Copyright 2022 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -19,13 +19,14 @@ import proto  # type: ignore
 __protobuf__ = proto.module(
     package="google.ads.googleads.v10.errors",
     marshal="google.ads.googleads.v10",
-    manifest={"AudienceErrorEnum",},
+    manifest={
+        "AudienceErrorEnum",
+    },
 )
 
 
 class AudienceErrorEnum(proto.Message):
-    r"""Container for enum describing possible audience errors.
-    """
+    r"""Container for enum describing possible audience errors."""
 
     class AudienceError(proto.Enum):
         r"""Enum describing possible audience errors."""
@@ -33,6 +34,12 @@ class AudienceErrorEnum(proto.Message):
         UNKNOWN = 1
         NAME_ALREADY_IN_USE = 2
         DIMENSION_INVALID = 3
+        AUDIENCE_SEGMENT_NOT_FOUND = 4
+        AUDIENCE_SEGMENT_TYPE_NOT_SUPPORTED = 5
+        DUPLICATE_AUDIENCE_SEGMENT = 6
+        TOO_MANY_SEGMENTS = 7
+        TOO_MANY_DIMENSIONS_OF_SAME_TYPE = 8
+        IN_USE = 9
 
 
 __all__ = tuple(sorted(__protobuf__.manifest))

@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-# Copyright 2020 Google LLC
+# Copyright 2022 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -78,23 +78,47 @@ class KeywordPlanHistoricalMetrics(proto.Message):
             in micros for the keyword.
 
             This field is a member of `oneof`_ ``_high_top_of_page_bid_micros``.
+        average_cpc_micros (int):
+            Average Cost Per Click in micros for the
+            keyword.
+
+            This field is a member of `oneof`_ ``_average_cpc_micros``.
     """
 
-    avg_monthly_searches = proto.Field(proto.INT64, number=7, optional=True,)
+    avg_monthly_searches = proto.Field(
+        proto.INT64,
+        number=7,
+        optional=True,
+    )
     monthly_search_volumes = proto.RepeatedField(
-        proto.MESSAGE, number=6, message="MonthlySearchVolume",
+        proto.MESSAGE,
+        number=6,
+        message="MonthlySearchVolume",
     )
     competition = proto.Field(
         proto.ENUM,
         number=2,
         enum=keyword_plan_competition_level.KeywordPlanCompetitionLevelEnum.KeywordPlanCompetitionLevel,
     )
-    competition_index = proto.Field(proto.INT64, number=8, optional=True,)
+    competition_index = proto.Field(
+        proto.INT64,
+        number=8,
+        optional=True,
+    )
     low_top_of_page_bid_micros = proto.Field(
-        proto.INT64, number=9, optional=True,
+        proto.INT64,
+        number=9,
+        optional=True,
     )
     high_top_of_page_bid_micros = proto.Field(
-        proto.INT64, number=10, optional=True,
+        proto.INT64,
+        number=10,
+        optional=True,
+    )
+    average_cpc_micros = proto.Field(
+        proto.INT64,
+        number=11,
+        optional=True,
     )
 
 
@@ -111,10 +135,24 @@ class HistoricalMetricsOptions(proto.Message):
             range for which search volume is available will be returned.
 
             This field is a member of `oneof`_ ``_year_month_range``.
+        include_average_cpc (bool):
+            Indicates whether to include average cost per
+            click value. Average CPC is a legacy value that
+            will be removed and replaced in the future, and
+            as such we are including it as an optioanl value
+            so clients only use it when strictly necessary
+            and to better track clients that use this value.
     """
 
     year_month_range = proto.Field(
-        proto.MESSAGE, number=1, optional=True, message=dates.YearMonthRange,
+        proto.MESSAGE,
+        number=1,
+        optional=True,
+        message=dates.YearMonthRange,
+    )
+    include_average_cpc = proto.Field(
+        proto.BOOL,
+        number=2,
     )
 
 
@@ -136,11 +174,21 @@ class MonthlySearchVolume(proto.Message):
             This field is a member of `oneof`_ ``_monthly_searches``.
     """
 
-    year = proto.Field(proto.INT64, number=4, optional=True,)
-    month = proto.Field(
-        proto.ENUM, number=2, enum=month_of_year.MonthOfYearEnum.MonthOfYear,
+    year = proto.Field(
+        proto.INT64,
+        number=4,
+        optional=True,
     )
-    monthly_searches = proto.Field(proto.INT64, number=5, optional=True,)
+    month = proto.Field(
+        proto.ENUM,
+        number=2,
+        enum=month_of_year.MonthOfYearEnum.MonthOfYear,
+    )
+    monthly_searches = proto.Field(
+        proto.INT64,
+        number=5,
+        optional=True,
+    )
 
 
 class KeywordPlanAggregateMetrics(proto.Message):
@@ -174,7 +222,9 @@ class KeywordPlanAggregateMetricResults(proto.Message):
     """
 
     device_searches = proto.RepeatedField(
-        proto.MESSAGE, number=1, message="KeywordPlanDeviceSearches",
+        proto.MESSAGE,
+        number=1,
+        message="KeywordPlanDeviceSearches",
     )
 
 
@@ -192,9 +242,15 @@ class KeywordPlanDeviceSearches(proto.Message):
     """
 
     device = proto.Field(
-        proto.ENUM, number=1, enum=gage_device.DeviceEnum.Device,
+        proto.ENUM,
+        number=1,
+        enum=gage_device.DeviceEnum.Device,
     )
-    search_count = proto.Field(proto.INT64, number=2, optional=True,)
+    search_count = proto.Field(
+        proto.INT64,
+        number=2,
+        optional=True,
+    )
 
 
 class KeywordAnnotations(proto.Message):
@@ -206,7 +262,9 @@ class KeywordAnnotations(proto.Message):
     """
 
     concepts = proto.RepeatedField(
-        proto.MESSAGE, number=1, message="KeywordConcept",
+        proto.MESSAGE,
+        number=1,
+        message="KeywordConcept",
     )
 
 
@@ -220,9 +278,14 @@ class KeywordConcept(proto.Message):
             The concept group of the concept details.
     """
 
-    name = proto.Field(proto.STRING, number=1,)
+    name = proto.Field(
+        proto.STRING,
+        number=1,
+    )
     concept_group = proto.Field(
-        proto.MESSAGE, number=2, message="ConceptGroup",
+        proto.MESSAGE,
+        number=2,
+        message="ConceptGroup",
     )
 
 
@@ -236,7 +299,10 @@ class ConceptGroup(proto.Message):
             The concept group type.
     """
 
-    name = proto.Field(proto.STRING, number=1,)
+    name = proto.Field(
+        proto.STRING,
+        number=1,
+    )
     type_ = proto.Field(
         proto.ENUM,
         number=2,

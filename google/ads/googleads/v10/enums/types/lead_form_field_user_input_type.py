@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-# Copyright 2020 Google LLC
+# Copyright 2022 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -19,13 +19,14 @@ import proto  # type: ignore
 __protobuf__ = proto.module(
     package="google.ads.googleads.v10.enums",
     marshal="google.ads.googleads.v10",
-    manifest={"LeadFormFieldUserInputTypeEnum",},
+    manifest={
+        "LeadFormFieldUserInputTypeEnum",
+    },
 )
 
 
 class LeadFormFieldUserInputTypeEnum(proto.Message):
-    r"""Describes the input type of a lead form field.
-    """
+    r"""Describes the input type of a lead form field."""
 
     class LeadFormFieldUserInputType(proto.Enum):
         r"""Enum describing the input type of a lead form field."""
@@ -42,6 +43,13 @@ class LeadFormFieldUserInputTypeEnum(proto.Message):
         COMPANY_NAME = 13
         WORK_PHONE = 14
         JOB_TITLE = 15
+        GOVERNMENT_ISSUED_ID_CPF_BR = 16
+        GOVERNMENT_ISSUED_ID_DNI_AR = 17
+        GOVERNMENT_ISSUED_ID_DNI_PE = 18
+        GOVERNMENT_ISSUED_ID_RUT_CL = 19
+        GOVERNMENT_ISSUED_ID_CC_CO = 20
+        GOVERNMENT_ISSUED_ID_CI_EC = 21
+        GOVERNMENT_ISSUED_ID_RFC_MX = 22
         FIRST_NAME = 23
         LAST_NAME = 24
         VEHICLE_MODEL = 1001

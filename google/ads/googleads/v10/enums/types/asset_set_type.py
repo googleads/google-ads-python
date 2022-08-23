@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-# Copyright 2020 Google LLC
+# Copyright 2022 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -19,13 +19,14 @@ import proto  # type: ignore
 __protobuf__ = proto.module(
     package="google.ads.googleads.v10.enums",
     marshal="google.ads.googleads.v10",
-    manifest={"AssetSetTypeEnum",},
+    manifest={
+        "AssetSetTypeEnum",
+    },
 )
 
 
 class AssetSetTypeEnum(proto.Message):
-    r"""Container for enum describing possible types of an asset set.
-    """
+    r"""Container for enum describing possible types of an asset set."""
 
     class AssetSetType(proto.Enum):
         r"""Possible types of an asset set."""
@@ -34,6 +35,13 @@ class AssetSetTypeEnum(proto.Message):
         PAGE_FEED = 2
         DYNAMIC_EDUCATION = 3
         MERCHANT_CENTER_FEED = 4
+        DYNAMIC_REAL_ESTATE = 5
+        DYNAMIC_CUSTOM = 6
+        DYNAMIC_HOTELS_AND_RENTALS = 7
+        DYNAMIC_FLIGHTS = 8
+        DYNAMIC_TRAVEL = 9
+        DYNAMIC_LOCAL = 10
+        DYNAMIC_JOBS = 11
 
 
 __all__ = tuple(sorted(__protobuf__.manifest))

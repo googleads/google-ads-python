@@ -47,7 +47,7 @@ def main(client, customer_id, ad_group_id, keyword_text):
     (
         googleads_exception,
         ad_group_criterion_operation,
-    ) = _create_keyword_criterion(
+    ) = create_keyword_criterion(
         client,
         ad_group_criterion_service,
         customer_id,
@@ -60,10 +60,10 @@ def main(client, customer_id, ad_group_id, keyword_text):
         # your keyword contains many policy violations, but not all of them are
         # exemptible, the request will not be sent.
         if googleads_exception is not None:
-            exempt_policy_violation_keys = _fetch_exempt_policy_violation_keys(
+            exempt_policy_violation_keys = fetch_exempt_policy_violation_keys(
                 googleads_exception
             )
-            _request_exemption(
+            request_exemption(
                 customer_id,
                 ad_group_criterion_service,
                 ad_group_criterion_operation,
@@ -82,7 +82,7 @@ def main(client, customer_id, ad_group_id, keyword_text):
         sys.exit(1)
 
 
-def _create_keyword_criterion(
+def create_keyword_criterion(
     client, ad_group_criterion_service, customer_id, ad_group_id, keyword_text
 ):
     """Attempts to add a keyword criterion to an ad group.
@@ -129,7 +129,7 @@ def _create_keyword_criterion(
 
 
 # [START handle_keyword_policy_violations]
-def _fetch_exempt_policy_violation_keys(googleads_exception):
+def fetch_exempt_policy_violation_keys(googleads_exception):
     """Collects all policy violation keys that can be exempted.
 
     Args:
@@ -190,7 +190,7 @@ def _fetch_exempt_policy_violation_keys(googleads_exception):
 
 
 # [START handle_keyword_policy_violations_1]
-def _request_exemption(
+def request_exemption(
     customer_id,
     ad_group_criterion_service,
     ad_group_criterion_operation,
@@ -226,7 +226,7 @@ def _request_exemption(
 if __name__ == "__main__":
     # GoogleAdsClient will read the google-ads.yaml configuration file in the
     # home directory if none is specified.
-    googleads_client = GoogleAdsClient.load_from_storage(version="v10")
+    googleads_client = GoogleAdsClient.load_from_storage(version="v11")
 
     parser = argparse.ArgumentParser(
         description="Demonstrates how to request an exemption for policy "

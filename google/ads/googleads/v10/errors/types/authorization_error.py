@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-# Copyright 2020 Google LLC
+# Copyright 2022 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -19,13 +19,14 @@ import proto  # type: ignore
 __protobuf__ = proto.module(
     package="google.ads.googleads.v10.errors",
     marshal="google.ads.googleads.v10",
-    manifest={"AuthorizationErrorEnum",},
+    manifest={
+        "AuthorizationErrorEnum",
+    },
 )
 
 
 class AuthorizationErrorEnum(proto.Message):
-    r"""Container for enum describing possible authorization errors.
-    """
+    r"""Container for enum describing possible authorization errors."""
 
     class AuthorizationError(proto.Enum):
         r"""Enum describing possible authorization errors."""
@@ -44,6 +45,7 @@ class AuthorizationErrorEnum(proto.Message):
         INVALID_LOGIN_CUSTOMER_ID_SERVING_CUSTOMER_ID_COMBINATION = 11
         SERVICE_ACCESS_DENIED = 12
         ACCESS_DENIED_FOR_ACCOUNT_TYPE = 25
+        METRIC_ACCESS_DENIED = 26
 
 
 __all__ = tuple(sorted(__protobuf__.manifest))

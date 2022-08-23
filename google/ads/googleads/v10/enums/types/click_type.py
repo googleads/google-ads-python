@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-# Copyright 2020 Google LLC
+# Copyright 2022 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -19,13 +19,14 @@ import proto  # type: ignore
 __protobuf__ = proto.module(
     package="google.ads.googleads.v10.enums",
     marshal="google.ads.googleads.v10",
-    manifest={"ClickTypeEnum",},
+    manifest={
+        "ClickTypeEnum",
+    },
 )
 
 
 class ClickTypeEnum(proto.Message):
-    r"""Container for enumeration of Google Ads click types.
-    """
+    r"""Container for enumeration of Google Ads click types."""
 
     class ClickType(proto.Enum):
         r"""Enumerates Google Ads click types."""
@@ -84,6 +85,7 @@ class ClickTypeEnum(proto.Message):
         PRICE_EXTENSION = 54
         HOTEL_BOOK_ON_GOOGLE_ROOM_SELECTION = 55
         SHOPPING_COMPARISON_LISTING = 56
+        CROSS_NETWORK = 57
 
 
 __all__ = tuple(sorted(__protobuf__.manifest))

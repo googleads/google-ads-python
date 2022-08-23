@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-# Copyright 2020 Google LLC
+# Copyright 2022 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -19,7 +19,9 @@ import proto  # type: ignore
 __protobuf__ = proto.module(
     package="google.ads.googleads.v10.resources",
     marshal="google.ads.googleads.v10",
-    manifest={"SmartCampaignSetting",},
+    manifest={
+        "SmartCampaignSetting",
+    },
 )
 
 
@@ -80,19 +82,47 @@ class SmartCampaignSetting(proto.Message):
                 This field is a member of `oneof`_ ``_country_code``.
         """
 
-        phone_number = proto.Field(proto.STRING, number=1, optional=True,)
-        country_code = proto.Field(proto.STRING, number=2, optional=True,)
+        phone_number = proto.Field(
+            proto.STRING,
+            number=1,
+            optional=True,
+        )
+        country_code = proto.Field(
+            proto.STRING,
+            number=2,
+            optional=True,
+        )
 
-    resource_name = proto.Field(proto.STRING, number=1,)
-    campaign = proto.Field(proto.STRING, number=2,)
-    phone_number = proto.Field(proto.MESSAGE, number=3, message=PhoneNumber,)
-    final_url = proto.Field(proto.STRING, number=4,)
-    advertising_language_code = proto.Field(proto.STRING, number=7,)
+    resource_name = proto.Field(
+        proto.STRING,
+        number=1,
+    )
+    campaign = proto.Field(
+        proto.STRING,
+        number=2,
+    )
+    phone_number = proto.Field(
+        proto.MESSAGE,
+        number=3,
+        message=PhoneNumber,
+    )
+    final_url = proto.Field(
+        proto.STRING,
+        number=4,
+    )
+    advertising_language_code = proto.Field(
+        proto.STRING,
+        number=7,
+    )
     business_name = proto.Field(
-        proto.STRING, number=5, oneof="business_setting",
+        proto.STRING,
+        number=5,
+        oneof="business_setting",
     )
     business_location_id = proto.Field(
-        proto.INT64, number=6, oneof="business_setting",
+        proto.INT64,
+        number=6,
+        oneof="business_setting",
     )
 
 

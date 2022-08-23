@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-# Copyright 2020 Google LLC
+# Copyright 2022 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -38,9 +38,16 @@ from google.ads.googleads.v10.resources.types import (
     ad_group_feed as gagr_ad_group_feed,
 )
 from google.ads.googleads.v10.resources.types import asset as gagr_asset
+from google.ads.googleads.v10.resources.types import asset_set as gagr_asset_set
+from google.ads.googleads.v10.resources.types import (
+    asset_set_asset as gagr_asset_set_asset,
+)
 from google.ads.googleads.v10.resources.types import campaign as gagr_campaign
 from google.ads.googleads.v10.resources.types import (
     campaign_asset as gagr_campaign_asset,
+)
+from google.ads.googleads.v10.resources.types import (
+    campaign_asset_set as gagr_campaign_asset_set,
 )
 from google.ads.googleads.v10.resources.types import (
     campaign_budget as gagr_campaign_budget,
@@ -62,7 +69,9 @@ from google.protobuf import field_mask_pb2  # type: ignore
 __protobuf__ = proto.module(
     package="google.ads.googleads.v10.resources",
     marshal="google.ads.googleads.v10",
-    manifest={"ChangeEvent",},
+    manifest={
+        "ChangeEvent",
+    },
 )
 
 
@@ -166,11 +175,24 @@ class ChangeEvent(proto.Message):
                 Output only. Set if change_resource_type == CAMPAIGN_ASSET.
             ad_group_asset (google.ads.googleads.v10.resources.types.AdGroupAsset):
                 Output only. Set if change_resource_type == AD_GROUP_ASSET.
+            asset_set (google.ads.googleads.v10.resources.types.AssetSet):
+                Output only. Set if change_resource_type == ASSET_SET.
+            asset_set_asset (google.ads.googleads.v10.resources.types.AssetSetAsset):
+                Output only. Set if change_resource_type == ASSET_SET_ASSET.
+            campaign_asset_set (google.ads.googleads.v10.resources.types.CampaignAssetSet):
+                Output only. Set if change_resource_type ==
+                CAMPAIGN_ASSET_SET.
         """
 
-        ad = proto.Field(proto.MESSAGE, number=1, message=gagr_ad.Ad,)
+        ad = proto.Field(
+            proto.MESSAGE,
+            number=1,
+            message=gagr_ad.Ad,
+        )
         ad_group = proto.Field(
-            proto.MESSAGE, number=2, message=gagr_ad_group.AdGroup,
+            proto.MESSAGE,
+            number=2,
+            message=gagr_ad_group.AdGroup,
         )
         ad_group_criterion = proto.Field(
             proto.MESSAGE,
@@ -178,7 +200,9 @@ class ChangeEvent(proto.Message):
             message=gagr_ad_group_criterion.AdGroupCriterion,
         )
         campaign = proto.Field(
-            proto.MESSAGE, number=4, message=gagr_campaign.Campaign,
+            proto.MESSAGE,
+            number=4,
+            message=gagr_campaign.Campaign,
         )
         campaign_budget = proto.Field(
             proto.MESSAGE,
@@ -195,49 +219,102 @@ class ChangeEvent(proto.Message):
             number=7,
             message=gagr_campaign_criterion.CampaignCriterion,
         )
-        feed = proto.Field(proto.MESSAGE, number=8, message=gagr_feed.Feed,)
+        feed = proto.Field(
+            proto.MESSAGE,
+            number=8,
+            message=gagr_feed.Feed,
+        )
         feed_item = proto.Field(
-            proto.MESSAGE, number=9, message=gagr_feed_item.FeedItem,
+            proto.MESSAGE,
+            number=9,
+            message=gagr_feed_item.FeedItem,
         )
         campaign_feed = proto.Field(
-            proto.MESSAGE, number=10, message=gagr_campaign_feed.CampaignFeed,
+            proto.MESSAGE,
+            number=10,
+            message=gagr_campaign_feed.CampaignFeed,
         )
         ad_group_feed = proto.Field(
-            proto.MESSAGE, number=11, message=gagr_ad_group_feed.AdGroupFeed,
+            proto.MESSAGE,
+            number=11,
+            message=gagr_ad_group_feed.AdGroupFeed,
         )
         ad_group_ad = proto.Field(
-            proto.MESSAGE, number=12, message=gagr_ad_group_ad.AdGroupAd,
+            proto.MESSAGE,
+            number=12,
+            message=gagr_ad_group_ad.AdGroupAd,
         )
-        asset = proto.Field(proto.MESSAGE, number=13, message=gagr_asset.Asset,)
+        asset = proto.Field(
+            proto.MESSAGE,
+            number=13,
+            message=gagr_asset.Asset,
+        )
         customer_asset = proto.Field(
-            proto.MESSAGE, number=14, message=gagr_customer_asset.CustomerAsset,
+            proto.MESSAGE,
+            number=14,
+            message=gagr_customer_asset.CustomerAsset,
         )
         campaign_asset = proto.Field(
-            proto.MESSAGE, number=15, message=gagr_campaign_asset.CampaignAsset,
+            proto.MESSAGE,
+            number=15,
+            message=gagr_campaign_asset.CampaignAsset,
         )
         ad_group_asset = proto.Field(
-            proto.MESSAGE, number=16, message=gagr_ad_group_asset.AdGroupAsset,
+            proto.MESSAGE,
+            number=16,
+            message=gagr_ad_group_asset.AdGroupAsset,
+        )
+        asset_set = proto.Field(
+            proto.MESSAGE,
+            number=17,
+            message=gagr_asset_set.AssetSet,
+        )
+        asset_set_asset = proto.Field(
+            proto.MESSAGE,
+            number=18,
+            message=gagr_asset_set_asset.AssetSetAsset,
+        )
+        campaign_asset_set = proto.Field(
+            proto.MESSAGE,
+            number=19,
+            message=gagr_campaign_asset_set.CampaignAssetSet,
         )
 
-    resource_name = proto.Field(proto.STRING, number=1,)
-    change_date_time = proto.Field(proto.STRING, number=2,)
+    resource_name = proto.Field(
+        proto.STRING,
+        number=1,
+    )
+    change_date_time = proto.Field(
+        proto.STRING,
+        number=2,
+    )
     change_resource_type = proto.Field(
         proto.ENUM,
         number=3,
         enum=change_event_resource_type.ChangeEventResourceTypeEnum.ChangeEventResourceType,
     )
-    change_resource_name = proto.Field(proto.STRING, number=4,)
+    change_resource_name = proto.Field(
+        proto.STRING,
+        number=4,
+    )
     client_type = proto.Field(
         proto.ENUM,
         number=5,
         enum=change_client_type.ChangeClientTypeEnum.ChangeClientType,
     )
-    user_email = proto.Field(proto.STRING, number=6,)
+    user_email = proto.Field(
+        proto.STRING,
+        number=6,
+    )
     old_resource = proto.Field(
-        proto.MESSAGE, number=7, message=ChangedResource,
+        proto.MESSAGE,
+        number=7,
+        message=ChangedResource,
     )
     new_resource = proto.Field(
-        proto.MESSAGE, number=8, message=ChangedResource,
+        proto.MESSAGE,
+        number=8,
+        message=ChangedResource,
     )
     resource_change_operation = proto.Field(
         proto.ENUM,
@@ -245,13 +322,30 @@ class ChangeEvent(proto.Message):
         enum=gage_resource_change_operation.ResourceChangeOperationEnum.ResourceChangeOperation,
     )
     changed_fields = proto.Field(
-        proto.MESSAGE, number=10, message=field_mask_pb2.FieldMask,
+        proto.MESSAGE,
+        number=10,
+        message=field_mask_pb2.FieldMask,
     )
-    campaign = proto.Field(proto.STRING, number=11,)
-    ad_group = proto.Field(proto.STRING, number=12,)
-    feed = proto.Field(proto.STRING, number=13,)
-    feed_item = proto.Field(proto.STRING, number=14,)
-    asset = proto.Field(proto.STRING, number=20,)
+    campaign = proto.Field(
+        proto.STRING,
+        number=11,
+    )
+    ad_group = proto.Field(
+        proto.STRING,
+        number=12,
+    )
+    feed = proto.Field(
+        proto.STRING,
+        number=13,
+    )
+    feed_item = proto.Field(
+        proto.STRING,
+        number=14,
+    )
+    asset = proto.Field(
+        proto.STRING,
+        number=20,
+    )
 
 
 __all__ = tuple(sorted(__protobuf__.manifest))

@@ -86,7 +86,7 @@ def main(
 
     # This campaign will override the customer conversion goals.
     # Retrieve the current list of customer conversion goals.
-    customer_conversion_goals = _get_customer_conversion_goals(
+    customer_conversion_goals = get_customer_conversion_goals(
         client, customer_id
     )
 
@@ -96,7 +96,7 @@ def main(
     # https://developers.google.com/google-ads/api/docs/performance-max/assets
     #
     # Create the headlines.
-    headline_asset_resource_names = _create_multiple_text_assets(
+    headline_asset_resource_names = create_multiple_text_assets(
         client,
         customer_id,
         [
@@ -106,7 +106,7 @@ def main(
         ],
     )
     # Create the descriptions.
-    description_asset_resource_names = _create_multiple_text_assets(
+    description_asset_resource_names = create_multiple_text_assets(
         client,
         customer_id,
         [
@@ -122,30 +122,30 @@ def main(
     # to create them in a single Mutate request so they all complete
     # successfully or fail entirely, leaving no orphaned entities. See:
     # https://developers.google.com/google-ads/api/docs/mutating/overview
-    campaign_budget_operation = _create_campaign_budget_operation(
+    campaign_budget_operation = create_campaign_budget_operation(
         client,
         customer_id,
     )
     performance_max_campaign_operation = (
-        _create_performance_max_campaign_operation(
+        create_performance_max_campaign_operation(
             client,
             customer_id,
             merchant_center_account_id,
             sales_country,
         )
     )
-    campaign_criterion_operations = _create_campaign_criterion_operations(
+    campaign_criterion_operations = create_campaign_criterion_operations(
         client,
         customer_id,
     )
-    asset_group_operations = _create_asset_group_operation(
+    asset_group_operations = create_asset_group_operation(
         client,
         customer_id,
         final_url,
         headline_asset_resource_names,
         description_asset_resource_names,
     )
-    conversion_goal_operations = _create_conversion_goal_operations(
+    conversion_goal_operations = create_conversion_goal_operations(
         client,
         customer_id,
         customer_conversion_goals,
@@ -166,12 +166,12 @@ def main(
             *conversion_goal_operations,
         ],
     )
-    _print_response_details(response)
+    print_response_details(response)
     # [END add_performance_max_retail_campaign_1]
 
 
 # [START add_performance_max_retail_campaign_2]
-def _create_campaign_budget_operation(
+def create_campaign_budget_operation(
     client,
     customer_id,
 ):
@@ -210,7 +210,7 @@ def _create_campaign_budget_operation(
 
 
 # [START add_performance_max_retail_campaign_3]
-def _create_performance_max_campaign_operation(
+def create_performance_max_campaign_operation(
     client,
     customer_id,
     merchant_center_account_id,
@@ -251,10 +251,15 @@ def _create_performance_max_campaign_operation(
     # For more information on Max Conversion Value, see the support article:
     # http://support.google.com/google-ads/answer/7684216.
     # A target_roas of 3.5 corresponds to a 350% return on ad spend.
-    campaign.bidding_strategy_type = (
-        client.enums.BiddingStrategyTypeEnum.MAXIMIZE_CONVERSION_VALUE
-    )
-    campaign.maximize_conversion_value.target_roas = 3.5
+    # campaign.maximize_conversion_value.target_roas = 3.5
+    # For first time users, it's recommended not to set a target ROAS.
+    # Although target ROAS is optional, you still need to define it
+    # even if you do not want to use it.
+    campaign.maximize_conversion_value.target_roas = None
+    # Below is what you would use if you want to maximize conversions
+    # campaign.maximize_conversions.target_cpa = None
+    # The target CPA is optional. This is the average amount that you would
+    # like to spend per conversion action.
 
     # Set the shopping settings.
     campaign.shopping_setting.merchant_id = merchant_center_account_id
@@ -263,11 +268,12 @@ def _create_performance_max_campaign_operation(
     # Set the Final URL expansion opt out. This flag is specific to
     # Performance Max campaigns. If opted out (True), only the final URLs in
     # the asset group or URLs specified in the advertiser's Google Merchant
-    # Center or business data feeds are targeted.
     # If opted in (False), the entire domain will be targeted. For best
     # results, set this value to false to opt in and allow URL expansions. You
     # can optionally add exclusions to limit traffic to parts of your website.
-    campaign.url_expansion_opt_out = False
+    # For a Retail campaign, we want the final URL's to be limited to
+    # those explicitly surfaced via GMC.
+    campaign.url_expansion_opt_out = True
 
     # Assign the resource name with a temporary ID.
     campaign_service = client.get_service("CampaignService")
@@ -288,7 +294,7 @@ def _create_performance_max_campaign_operation(
 
 
 # [START add_performance_max_retail_campaign_4]
-def _create_campaign_criterion_operations(
+def create_campaign_criterion_operations(
     client,
     customer_id,
 ):
@@ -358,7 +364,7 @@ def _create_campaign_criterion_operations(
 
 
 # [START add_performance_max_retail_campaign_5]
-def _create_multiple_text_assets(client, customer_id, texts):
+def create_multiple_text_assets(client, customer_id, texts):
     """Creates multiple text assets and returns the list of resource names.
 
     Args:
@@ -390,13 +396,13 @@ def _create_multiple_text_assets(client, customer_id, texts):
     for result in response.mutate_operation_responses:
         if result._pb.HasField("asset_result"):
             asset_resource_names.append(result.asset_result.resource_name)
-    _print_response_details(response)
+    print_response_details(response)
     return asset_resource_names
     # [END add_performance_max_retail_campaign_5]
 
 
 # [START add_performance_max_retail_campaign_6]
-def _create_asset_group_operation(
+def create_asset_group_operation(
     client,
     customer_id,
     final_url,
@@ -437,6 +443,28 @@ def _create_asset_group_operation(
         customer_id,
         _ASSET_GROUP_TEMPORARY_ID,
     )
+    operations.append(mutate_operation)
+
+    # Creates a new ad group criterion containing the "default" listing group (All products).
+    mutate_operation = client.get_type("MutateOperation")
+    asset_group_listing_group = (
+        mutate_operation.asset_group_listing_group_filter_operation.create
+    )
+    asset_group_listing_group.asset_group = (
+        asset_group_service.asset_group_path(
+            customer_id,
+            _ASSET_GROUP_TEMPORARY_ID,
+        )
+    )
+    asset_group_listing_group.type_ = (
+        client.enums.ListingGroupFilterTypeEnum.UNIT_INCLUDED
+    )
+    # Because this is a Performance Max campaign for retail, we need to specify that this is
+    # in the shopping vertical.
+    asset_group_listing_group.vertical = (
+        client.enums.ListingGroupFilterVerticalEnum.SHOPPING
+    )
+
     operations.append(mutate_operation)
 
     # For the list of required assets for a Performance Max campaign, see
@@ -480,7 +508,7 @@ def _create_asset_group_operation(
         operations.append(mutate_operation)
 
     # Create and link the long headline text asset.
-    mutate_operations = _create_and_link_text_asset(
+    mutate_operations = create_and_link_text_asset(
         client,
         customer_id,
         "Travel the World",
@@ -489,7 +517,7 @@ def _create_asset_group_operation(
     operations.extend(mutate_operations)
 
     # Create and link the business name text asset.
-    mutate_operations = _create_and_link_text_asset(
+    mutate_operations = create_and_link_text_asset(
         client,
         customer_id,
         "Interplanetary Cruises",
@@ -500,7 +528,7 @@ def _create_asset_group_operation(
     # Create and link the image assets.
 
     # Create and link the Logo Asset.
-    mutate_operations = _create_and_link_image_asset(
+    mutate_operations = create_and_link_image_asset(
         client,
         customer_id,
         "https://gaagl.page.link/bjYi",
@@ -510,7 +538,7 @@ def _create_asset_group_operation(
     operations.extend(mutate_operations)
 
     # Create and link the Marketing Image Asset.
-    mutate_operations = _create_and_link_image_asset(
+    mutate_operations = create_and_link_image_asset(
         client,
         customer_id,
         "https://gaagl.page.link/Eit5",
@@ -520,7 +548,7 @@ def _create_asset_group_operation(
     operations.extend(mutate_operations)
 
     # Create and link the Square Marketing Image Asset.
-    mutate_operations = _create_and_link_image_asset(
+    mutate_operations = create_and_link_image_asset(
         client,
         customer_id,
         "https://gaagl.page.link/bjYi",
@@ -533,7 +561,7 @@ def _create_asset_group_operation(
 
 
 # [START add_performance_max_retail_campaign_7]
-def _create_and_link_text_asset(client, customer_id, text, field_type):
+def create_and_link_text_asset(client, customer_id, text, field_type):
     """Creates a list of MutateOperations that create a new linked text asset.
 
     Args:
@@ -576,7 +604,9 @@ def _create_and_link_text_asset(client, customer_id, text, field_type):
 
 
 # [START add_performance_max_retail_campaign_8]
-def _create_and_link_image_asset(client, customer_id, url, field_type, asset_name):
+def create_and_link_image_asset(
+    client, customer_id, url, field_type, asset_name
+):
     """Creates a list of MutateOperations that create a new linked image asset.
 
     Args:
@@ -603,7 +633,7 @@ def _create_and_link_image_asset(client, customer_id, url, field_type, asset_nam
     # When there is an existing image asset with the same content but a different
     # name, the new name will be dropped silently.
     asset.name = asset_name
-    asset.image_asset.data = _get_image_bytes(url)
+    asset.image_asset.data = get_image_bytes(url)
     operations.append(mutate_operation)
 
     # Create an AssetGroupAsset to link the Asset to the AssetGroup.
@@ -625,7 +655,7 @@ def _create_and_link_image_asset(client, customer_id, url, field_type, asset_nam
 
 
 # [START add_performance_max_retail_campaign_9]
-def _get_customer_conversion_goals(client, customer_id):
+def get_customer_conversion_goals(client, customer_id):
     """Retrieves the list of customer conversion goals.
 
     Args:
@@ -663,7 +693,7 @@ def _get_customer_conversion_goals(client, customer_id):
     return customer_conversion_goals
 
 
-def _create_conversion_goal_operations(
+def create_conversion_goal_operations(
     client,
     customer_id,
     customer_conversion_goals,
@@ -732,7 +762,7 @@ def _create_conversion_goal_operations(
     # [END add_performance_max_retail_campaign_9]
 
 
-def _get_image_bytes(url):
+def get_image_bytes(url):
     """Loads image data from a URL.
 
     Args:
@@ -745,7 +775,7 @@ def _get_image_bytes(url):
     return response.content
 
 
-def _print_response_details(response):
+def print_response_details(response):
     """Prints the details of a MutateGoogleAdsResponse.
 
     Parses the "response" oneof field name and uses it to extract the new
@@ -774,7 +804,7 @@ def _print_response_details(response):
 if __name__ == "__main__":
     # GoogleAdsClient will read the google-ads.yaml configuration file in the
     # home directory if none is specified.
-    googleads_client = GoogleAdsClient.load_from_storage(version="v10")
+    googleads_client = GoogleAdsClient.load_from_storage(version="v11")
 
     parser = argparse.ArgumentParser(
         description=("Creates a Performance Max retail campaign.")

@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-# Copyright 2020 Google LLC
+# Copyright 2022 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -19,7 +19,9 @@ import proto  # type: ignore
 __protobuf__ = proto.module(
     package="google.ads.googleads.v10.resources",
     marshal="google.ads.googleads.v10",
-    manifest={"AssetGroupProductGroupView",},
+    manifest={
+        "AssetGroupProductGroupView",
+    },
 )
 
 
@@ -33,9 +35,26 @@ class AssetGroupProductGroupView(proto.Message):
             have the form:
 
             ``customers/{customer_id}/assetGroupProductGroupViews/{asset_group_id}~{listing_group_filter_id}``
+        asset_group (str):
+            Output only. The asset group associated with
+            the listing group filter.
+        asset_group_listing_group_filter (str):
+            Output only. The resource name of the asset
+            group listing group filter.
     """
 
-    resource_name = proto.Field(proto.STRING, number=1,)
+    resource_name = proto.Field(
+        proto.STRING,
+        number=1,
+    )
+    asset_group = proto.Field(
+        proto.STRING,
+        number=2,
+    )
+    asset_group_listing_group_filter = proto.Field(
+        proto.STRING,
+        number=4,
+    )
 
 
 __all__ = tuple(sorted(__protobuf__.manifest))

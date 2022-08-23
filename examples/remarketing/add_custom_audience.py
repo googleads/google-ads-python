@@ -56,23 +56,23 @@ def main(client, customer_id):
     # meet any of the membership conditions will be reached.
     member_type_enum = client.enums.CustomAudienceMemberTypeEnum
 
-    member1 = _create_custom_audience_member(
+    member1 = create_custom_audience_member(
         client, member_type_enum.KEYWORD, "mars cruise"
     )
 
-    member2 = _create_custom_audience_member(
+    member2 = create_custom_audience_member(
         client, member_type_enum.KEYWORD, "jupiter cruise"
     )
 
-    member3 = _create_custom_audience_member(
+    member3 = create_custom_audience_member(
         client, member_type_enum.URL, "http://www.example.com/locations/mars"
     )
 
-    member4 = _create_custom_audience_member(
+    member4 = create_custom_audience_member(
         client, member_type_enum.URL, "http://www.example.com/locations/jupiter"
     )
 
-    member5 = _create_custom_audience_member(
+    member5 = create_custom_audience_member(
         client, member_type_enum.APP, "com.google.android.apps.adwords"
     )
 
@@ -91,7 +91,7 @@ def main(client, customer_id):
     )
 
 
-def _create_custom_audience_member(client, member_type, value):
+def create_custom_audience_member(client, member_type, value):
     """Creates a custom audience member for a given member type and value.
 
     Args:
@@ -124,7 +124,7 @@ def _create_custom_audience_member(client, member_type, value):
 if __name__ == "__main__":
     # GoogleAdsClient will read the google-ads.yaml configuration file in the
     # home directory if none is specified.
-    googleads_client = GoogleAdsClient.load_from_storage(version="v10")
+    googleads_client = GoogleAdsClient.load_from_storage(version="v11")
 
     parser = argparse.ArgumentParser(
         description="Adds a custom audience for a specified customer."

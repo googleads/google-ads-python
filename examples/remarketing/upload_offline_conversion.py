@@ -92,7 +92,7 @@ def main(
     conversion_upload_service = client.get_service("ConversionUploadService")
     request = client.get_type("UploadClickConversionsRequest")
     request.customer_id = customer_id
-    request.conversions = [click_conversion]
+    request.conversions.append(click_conversion)
     request.partial_failure = True
     conversion_upload_response = (
         conversion_upload_service.upload_click_conversions(

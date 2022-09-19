@@ -48,7 +48,7 @@ def main(client, customer_id, keyword_plan_id):
         # variants included in the response.
         print(
             f"The search query, '{metric.search_query}', (and the following "
-            f"variants: {', '.join(metrics.close_variants)}), generated the "
+            f"variants: {', '.join(metric.close_variants)}), generated the "
             "following historical metrics:"
         )
 

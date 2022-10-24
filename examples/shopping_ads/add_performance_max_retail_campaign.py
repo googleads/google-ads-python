@@ -13,9 +13,12 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 """This example shows how to create a Performance Max retail campaign.
+
 This will be created for "All products".
+
 For more information about Performance Max retail campaigns, see
 https://developers.google.com/google-ads/api/docs/performance-max/retail
+
 Prerequisites:
 - You need to have access to a Merchant Center account. You can find
   instructions to create a Merchant Center account here:
@@ -154,11 +157,14 @@ def create_campaign_budget_operation(
     client, customer_id,
 ):
     """Creates a MutateOperation that creates a new CampaignBudget.
+
     A temporary ID will be assigned to this campaign budget so that it can be
     referenced by other objects being created in the same Mutate request.
+
     Args:
         client: an initialized GoogleAdsClient instance.
         customer_id: a client customer ID.
+
     Returns:
         a MutateOperation that creates a CampaignBudget.
     """
@@ -189,13 +195,16 @@ def create_performance_max_campaign_operation(
     client, customer_id, merchant_center_account_id, sales_country,
 ):
     """Creates a MutateOperation that creates a new Performance Max campaign.
+
     A temporary ID will be assigned to this campaign so that it can
     be referenced by other objects being created in the same Mutate request.
+
     Args:
         client: an initialized GoogleAdsClient instance.
         customer_id: a client customer ID.
         merchant_center_account_id: The Merchant Center account ID.
         sales_country: Sales country of products to include in the campaign.
+
     Returns:
         a MutateOperation that creates a campaign.
     """
@@ -267,9 +276,11 @@ def create_campaign_criterion_operations(
     client, customer_id,
 ):
     """Creates a list of MutateOperations that create new campaign criteria.
+
     Args:
         client: an initialized GoogleAdsClient instance.
         customer_id: a client customer ID.
+
     Returns:
         a list of MutateOperations that create new campaign criteria.
     """
@@ -330,13 +341,16 @@ def create_campaign_criterion_operations(
 # [START add_performance_max_retail_campaign_5]
 def create_multiple_text_assets(client, customer_id, texts):
     """Creates multiple text assets and returns the list of resource names.
+
     These repeated assets must be created in a separate request prior to
     creating the campaign.
+
     Args:
         client: an initialized GoogleAdsClient instance.
         customer_id: a client customer ID.
         texts: a list of strings, each of which will be used to create a text
           asset.
+
     Returns:
         asset_resource_names: a list of asset resource names.
     """
@@ -367,12 +381,15 @@ def create_multiple_text_assets(client, customer_id, texts):
 # [START add_performance_max_retail_campaign_10]
 def create_asset_group_operation(client, customer_id, final_url):
     """Creates a MutateOperation that creates a new asset group.
+
     A temporary ID will be assigned to this asset group so that it can
     be referenced by other objects being created in the same Mutate request.
+
     Args:
         client: an initialized GoogleAdsClient instance.
         customer_id: a client customer ID.
         final_url: the final URL.
+
     Returns:
         a MutateOperation that creates a new asset group.
     """
@@ -398,11 +415,14 @@ def create_asset_group_operation(client, customer_id, final_url):
 # [START add_performance_max_retail_campaign_11]
 def create_listing_group_filter_operation(client, customer_id):
     """Creates a MutateOperation that creates a new listing group filter.
+
     A temporary ID will be assigned to this listing group filter so that it
     can be referenced by other objects being created in the same Mutate request.
+
     Args:
         client: an initialized GoogleAdsClient instance.
         customer_id: a client customer ID.
+
     Returns:
         a MutateOperation that creates a new listing group filter.
     """
@@ -437,13 +457,16 @@ def create_asset_and_asset_group_asset_operations(
     description_asset_resource_names,
 ):
     """Creates a list of MutateOperations that create a new asset_group.
+
     A temporary ID will be assigned to this asset group so that it can
     be referenced by other objects being created in the same Mutate request.
+
     Args:
         client: an initialized GoogleAdsClient instance.
         customer_id: a client customer ID.
         headline_asset_resource_names: a list of headline resource names.
         description_asset_resource_names: a list of description resource names.
+
     Returns:
         MutateOperations that create a new asset group and related assets.
     """
@@ -549,11 +572,13 @@ def create_asset_and_asset_group_asset_operations(
 # [START add_performance_max_retail_campaign_7]
 def create_and_link_text_asset(client, customer_id, text, field_type):
     """Creates a list of MutateOperations that create a new linked text asset.
+
     Args:
         client: an initialized GoogleAdsClient instance.
         customer_id: a client customer ID.
         text: the text of the asset to be created.
         field_type: the field_type of the new asset in the AssetGroupAsset.
+
     Returns:
         MutateOperations that create a new linked text asset.
     """
@@ -591,12 +616,14 @@ def create_and_link_image_asset(
     client, customer_id, url, field_type, asset_name
 ):
     """Creates a list of MutateOperations that create a new linked image asset.
+
     Args:
         client: an initialized GoogleAdsClient instance.
         customer_id: a client customer ID.
         url: the url of the image to be retrieved and put into an asset.
         field_type: the field_type of the new asset in the AssetGroupAsset.
         asset_name: the asset name.
+
     Returns:
         MutateOperations that create a new linked image asset.
     """
@@ -637,20 +664,25 @@ def create_and_link_image_asset(
 # [START add_performance_max_retail_campaign_12]
 def sort_asset_and_asset_group_asset_operations(operations):
     """Sorts a list of asset and asset group asset operations.
+
     This sorts the list such that all asset operations precede
     all asset group asset operations. If asset group assets are
     created before assets then an error will be returned by
     the API.
+
     Args:
         operations: a list of asset and asset group asset operations.
+
     Returns:
         a sorted list of asset and asset group asset operations.
     """
 
     def sorter(operation):
         """Determines whether the operation creates an asset group asset.
+
         Args:
             operation: a MutateOperation instance.
+
         Returns:
             True if the MutateOperation creates an asset group asset.
         """
@@ -663,9 +695,11 @@ def sort_asset_and_asset_group_asset_operations(operations):
 # [START add_performance_max_retail_campaign_9]
 def get_customer_conversion_goals(client, customer_id):
     """Retrieves the list of customer conversion goals.
+
     Args:
         client: an initialized GoogleAdsClient instance.
         customer_id: a client customer ID.
+
     Returns:
         a list of dicts containing the category and origin of customer
         conversion goals.
@@ -701,11 +735,13 @@ def create_conversion_goal_operations(
     client, customer_id, customer_conversion_goals,
 ):
     """Creates a list of MutateOperations that override customer conversion goals.
+
     Args:
         client: an initialized GoogleAdsClient instance.
         customer_id: a client customer ID.
         customer_conversion_goals: the list of customer conversion goals that
           will be overridden.
+
     Returns:
         MutateOperations that update campaign conversion goals.
     """
@@ -762,8 +798,10 @@ def create_conversion_goal_operations(
 
 def get_image_bytes(url):
     """Loads image data from a URL.
+
     Args:
         url: a URL str.
+
     Returns:
         Images bytes loaded from the given URL.
     """
@@ -773,8 +811,10 @@ def get_image_bytes(url):
 
 def print_response_details(response):
     """Prints the details of a MutateGoogleAdsResponse.
+
     Parses the "response" oneof field name and uses it to extract the new
     entity's name and resource name.
+    
     Args:
         response: a MutateGoogleAdsResponse object.
     """

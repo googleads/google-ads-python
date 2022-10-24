@@ -69,6 +69,7 @@ def main(
     client, customer_id, merchant_center_account_id, sales_country, final_url,
 ):
     """The main method that creates all necessary entities for the example.
+    
     Args:
         client: an initialized GoogleAdsClient instance.
         customer_id: a client customer ID.
@@ -814,7 +815,7 @@ def print_response_details(response):
 
     Parses the "response" oneof field name and uses it to extract the new
     entity's name and resource name.
-    
+
     Args:
         response: a MutateGoogleAdsResponse object.
     """

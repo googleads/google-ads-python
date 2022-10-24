@@ -69,7 +69,7 @@ def main(
     client, customer_id, merchant_center_account_id, sales_country, final_url,
 ):
     """The main method that creates all necessary entities for the example.
-    
+
     Args:
         client: an initialized GoogleAdsClient instance.
         customer_id: a client customer ID.

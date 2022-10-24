@@ -53,17 +53,17 @@ def main(client, customer_id):
             # name of the Enum as a default if the numeric value for the
             # monetary or date fields is not present.
             approved_spending_limit = (
-                _micros_to_currency(budget.approved_spending_limit_micros)
+                micros_to_currency(budget.approved_spending_limit_micros)
                 or budget.approved_spending_limit_type.name
             )
 
             proposed_spending_limit = (
-                _micros_to_currency(budget.proposed_spending_limit_micros)
+                micros_to_currency(budget.proposed_spending_limit_micros)
                 or budget.proposed_spending_limit_type.name
             )
 
             adjusted_spending_limit = (
-                _micros_to_currency(budget.adjusted_spending_limit_micros)
+                micros_to_currency(budget.adjusted_spending_limit_micros)
                 or budget.adjusted_spending_limit_type.name
             )
 
@@ -78,11 +78,11 @@ def main(client, customer_id):
             )
 
             amount_served = (
-                _micros_to_currency(budget.amount_served_micros) or 0.0
+                micros_to_currency(budget.amount_served_micros) or 0.0
             )
 
             total_adjustments = (
-                _micros_to_currency(budget.total_adjustments_micros) or 0.0
+                micros_to_currency(budget.total_adjustments_micros) or 0.0
             )
 
             print(
@@ -101,14 +101,14 @@ def main(client, customer_id):
             )
 
 
-def _micros_to_currency(micros):
+def micros_to_currency(micros):
     return micros / 1000000.0 if micros is not None else None
 
 
 if __name__ == "__main__":
     # GoogleAdsClient will read the google-ads.yaml configuration file in the
     # home directory if none is specified.
-    googleads_client = GoogleAdsClient.load_from_storage(version="v9")
+    googleads_client = GoogleAdsClient.load_from_storage(version="v11")
 
     parser = argparse.ArgumentParser(
         description=(

@@ -46,7 +46,7 @@ def main(client, customer_id, campaign_id):
 
         print(f'Created shared set "{shared_set_resource_name}".')
     except GoogleAdsException as ex:
-        _handle_googleads_exception(ex)
+        handle_googleads_exception(ex)
 
     # Keywords to create a shared set of.
     keywords = ["mars cruise", "mars hotels"]
@@ -71,7 +71,7 @@ def main(client, customer_id, campaign_id):
                 f'"{shared_criterion.resource_name}".'
             )
     except GoogleAdsException as ex:
-        _handle_googleads_exception(ex)
+        handle_googleads_exception(ex)
 
     campaign_set_operation = client.get_type("CampaignSharedSetOperation")
     campaign_set = campaign_set_operation.create
@@ -92,10 +92,10 @@ def main(client, customer_id, campaign_id):
             '"{campaign_shared_set_resource_name.results[0].resource_name}".'
         )
     except GoogleAdsException as ex:
-        _handle_googleads_exception(ex)
+        handle_googleads_exception(ex)
 
 
-def _handle_googleads_exception(exception):
+def handle_googleads_exception(exception):
     print(
         f'Request with ID "{exception.request_id}" failed with status '
         f'"{exception.error.code().name}" and includes the following errors:'
@@ -111,7 +111,7 @@ def _handle_googleads_exception(exception):
 if __name__ == "__main__":
     # GoogleAdsClient will read the google-ads.yaml configuration file in the
     # home directory if none is specified.
-    googleads_client = GoogleAdsClient.load_from_storage(version="v9")
+    googleads_client = GoogleAdsClient.load_from_storage(version="v11")
 
     parser = argparse.ArgumentParser(
         description=(

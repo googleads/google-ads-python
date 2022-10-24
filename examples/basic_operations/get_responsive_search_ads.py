@@ -61,10 +61,10 @@ def main(client, customer_id, page_size, ad_group_id=None):
             "was found."
         )
         headlines = "\n".join(
-            _ad_text_assets_to_strs(ad.responsive_search_ad.headlines)
+            ad_text_assets_to_strs(ad.responsive_search_ad.headlines)
         )
         descriptions = "\n".join(
-            _ad_text_assets_to_strs(ad.responsive_search_ad.descriptions)
+            ad_text_assets_to_strs(ad.responsive_search_ad.descriptions)
         )
         print(f"Headlines:\n{headlines}\nDescriptions:\n{descriptions}\n")
 
@@ -72,7 +72,7 @@ def main(client, customer_id, page_size, ad_group_id=None):
         print("No responsive search ads were found.")
 
 
-def _ad_text_assets_to_strs(assets):
+def ad_text_assets_to_strs(assets):
     """Converts a list of AdTextAssets to a list of user-friendly strings."""
     s = []
     for asset in assets:
@@ -83,7 +83,7 @@ def _ad_text_assets_to_strs(assets):
 if __name__ == "__main__":
     # GoogleAdsClient will read the google-ads.yaml configuration file in the
     # home directory if none is specified.
-    googleads_client = GoogleAdsClient.load_from_storage(version="v9")
+    googleads_client = GoogleAdsClient.load_from_storage(version="v11")
 
     parser = argparse.ArgumentParser(
         description="List responsive display ads for specified customer. "

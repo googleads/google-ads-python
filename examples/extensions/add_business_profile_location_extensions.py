@@ -17,7 +17,6 @@
 The feed will also be associated with a customer.
 """
 
-
 import argparse
 import sys
 import time
@@ -45,11 +44,11 @@ def main(
         client: An initialized GoogleAdsClient instance.
         customer_id: The Google Ads customer ID.
         business_profile_email: The email address associated with the Business
-            Profile account.
+          Profile account.
         business_account_id: The account ID of the managed business.
-        business_profile_access_token: The access token created using the 'AdWords' scope
-            and the client ID and client secret of with the Cloud project
-            associated with the Business Profile account.
+        business_profile_access_token: The access token created using the
+          'AdWords' scope and the client ID and client secret of with the Cloud
+          project associated with the Business Profile account.
     """
     # Get the FeedService and CustomerFeedService clients.
     feed_service = client.get_service("FeedService")
@@ -66,7 +65,9 @@ def main(
     business_profile_feed = feed_operation.create
     business_profile_feed.name = f"Business Profile Feed #{uuid4()}"
     # Configure the location feed populated from Business Profile Locations.
-    business_profile_feed.places_location_feed_data.email_address = business_profile_email
+    business_profile_feed.places_location_feed_data.email_address = (
+        business_profile_email
+    )
 
     if business_account_id is not None:
         business_profile_feed.places_location_feed_data.business_account_id = (
@@ -83,7 +84,9 @@ def main(
 
     # Set the authentication info to be able to connect Google Ads to the
     # Business Profile account.
-    business_profile_feed.places_location_feed_data.oauth_info.http_method = "GET"
+    business_profile_feed.places_location_feed_data.oauth_info.http_method = (
+        "GET"
+    )
     business_profile_feed.places_location_feed_data.oauth_info.http_request_url = (
         DEFAULT_OAUTH2_SCOPE
     )
@@ -100,7 +103,7 @@ def main(
     # per email address, and a Google Ads account cannot have a location
     # extension feed and an affiliate location extension feed at the same
     # time.
-    _delete_location_extension_feeds(client, customer_id)
+    delete_location_extension_feeds(client, customer_id)
 
     # [START add_business_profile_location_extensions_1]
     # Add the feed. Since it is a system generated feed, Google Ads will
@@ -129,13 +132,13 @@ def main(
     number_of_attempts = 0
 
     while number_of_attempts < MAX_CUSTOMER_FEED_ADD_ATTEMPTS:
-        feed_mapping = _get_business_profile_feed_mapping(
+        feed_mapping = get_business_profile_feed_mapping(
             client, customer_id, feed_resource_name
         )
 
         if feed_mapping is None:
             number_of_attempts += 1
-            sleep_seconds = 5 * (2 ** number_of_attempts)
+            sleep_seconds = 5 * (2**number_of_attempts)
 
             print(
                 f"Attempt #{number_of_attempts} was not successful. "
@@ -192,7 +195,7 @@ def main(
         # [END add_business_profile_location_extensions_3]
 
 
-def _delete_location_extension_feeds(client, customer_id):
+def delete_location_extension_feeds(client, customer_id):
     """Deletes the existing location extension feeds.
 
     Args:
@@ -204,23 +207,24 @@ def _delete_location_extension_feeds(client, customer_id):
     # stop serving.
     # 2. Delete the feed so that Google Ads will no longer sync from the
     # Business Profile account.
-    old_customer_feeds = _get_location_extension_customer_feeds(
+    old_customer_feeds = get_location_extension_customer_feeds(
         client, customer_id
     )
     if old_customer_feeds:
-        _delete_customer_feeds(client, customer_id, old_customer_feeds)
+        delete_customer_feeds(client, customer_id, old_customer_feeds)
 
-    old_feeds = _get_location_extension_feeds(client, customer_id)
+    old_feeds = get_location_extension_feeds(client, customer_id)
     if old_feeds:
-        _delete_feeds(client, customer_id, old_feeds)
+        delete_feeds(client, customer_id, old_feeds)
 
 
-def _get_location_extension_customer_feeds(client, customer_id):
+def get_location_extension_customer_feeds(client, customer_id):
     """Gets the existing location extension customer feeds.
 
     Args:
         client: An initialized Google Ads API client.
         customer_id: The Google Ads customer ID.
+
     Returns:
         A list of location extension feeds.
     """
@@ -245,12 +249,13 @@ def _get_location_extension_customer_feeds(client, customer_id):
     return [row.customer_feed for row in result]
 
 
-def _get_location_extension_feeds(client, customer_id):
+def get_location_extension_feeds(client, customer_id):
     """Gets the existing location extension feeds.
 
     Args:
         client: An initialized Google Ads API client.
         customer_id: The Google Ads customer ID.
+
     Returns:
         A list of location extension feeds.
     """
@@ -279,7 +284,7 @@ def _get_location_extension_feeds(client, customer_id):
     ]
 
 
-def _delete_customer_feeds(client, customer_id, old_customer_feeds):
+def delete_customer_feeds(client, customer_id, old_customer_feeds):
     """Removes the customer feeds.
 
     Args:
@@ -300,7 +305,7 @@ def _delete_customer_feeds(client, customer_id, old_customer_feeds):
     )
 
 
-def _delete_feeds(client, customer_id, old_feeds):
+def delete_feeds(client, customer_id, old_feeds):
     """Removes the specified feeds.
 
     Args:
@@ -319,7 +324,7 @@ def _delete_feeds(client, customer_id, old_feeds):
     feed_service.mutate_feeds(customer_id=customer_id, operations=operations)
 
 
-def _get_business_profile_feed_mapping(client, customer_id, feed_resource_name):
+def get_business_profile_feed_mapping(client, customer_id, feed_resource_name):
     """Gets a Business Profile Feed mapping.
 
     Args:
@@ -352,7 +357,7 @@ def _get_business_profile_feed_mapping(client, customer_id, feed_resource_name):
 if __name__ == "__main__":
     # GoogleAdsClient will read the google-ads.yaml configuration file in the
     # home directory if none is specified.
-    googleads_client = GoogleAdsClient.load_from_storage(version="v9")
+    googleads_client = GoogleAdsClient.load_from_storage(version="v11")
 
     parser = argparse.ArgumentParser(
         description="Adds a feed that syncs feed items from a Business Profile "
@@ -380,8 +385,8 @@ if __name__ == "__main__":
         required=False,
         help="The account ID of the managed business.\n"
         "If the email_address is for a Business Profile manager instead of the "
-        "Business Profile account owner, then set business_account_id to the
-        Google+ Page ID of a location for which the manager has access. This "
+        "Business Profile account owner, then set business_account_id to the"
+        "Google+ Page ID of a location for which the manager has access. This "
         "information is available through the Business Profile API. See "
         "https://developers.google.com/my-business/reference/rest/v4/accounts.locations#locationkey"
         "for details.",

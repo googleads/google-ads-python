@@ -100,14 +100,14 @@ def main(client, customer_id, billing_setup_id):
             # [END get_invoices_1]
 
 
-def _micros_to_currency(micros):
+def micros_to_currency(micros):
     return micros / 1000000.0 if micros is not None else None
 
 
 if __name__ == "__main__":
     # GoogleAdsClient will read the google-ads.yaml configuration file in the
     # home directory if none is specified.
-    googleads_client = GoogleAdsClient.load_from_storage(version="v9")
+    googleads_client = GoogleAdsClient.load_from_storage(version="v11")
 
     parser = argparse.ArgumentParser(
         description="Retrieves the invoices issued last month for a given billing setup."

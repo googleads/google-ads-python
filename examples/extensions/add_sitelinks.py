@@ -48,7 +48,7 @@ def main(client, customer_id, campaign_id):
         customer_id, campaign_id
     )
 
-    feed_item_resource_names = _create_extension_feed_items(
+    feed_item_resource_names = create_extension_feed_items(
         client, customer_id, campaign_resource_name
     )
 
@@ -76,7 +76,7 @@ def main(client, customer_id, campaign_id):
 
 
 # [START add_sitelinks]
-def _create_extension_feed_items(client, customer_id, campaign_resource_name):
+def create_extension_feed_items(client, customer_id, campaign_resource_name):
     """Helper method that creates extension feed items.
 
     Args:
@@ -110,7 +110,7 @@ def _create_extension_feed_items(client, customer_id, campaign_resource_name):
     extension_feed_item_operation2 = client.get_type(
         "ExtensionFeedItemOperation"
     )
-    date_range = _get_thanksgiving_string_date_range()
+    date_range = get_thanksgiving_string_date_range()
     extension_feed_item2 = extension_feed_item_operation2.create
     extension_feed_item2.extension_type = extension_type_enum.SITELINK
     extension_feed_item2.sitelink_feed_item.link_text = "Thanksgiving Specials"
@@ -157,7 +157,7 @@ def _create_extension_feed_items(client, customer_id, campaign_resource_name):
         day_of_week_enum.FRIDAY,
     ]:
         ad_schedule = client.get_type("AdScheduleInfo")
-        _populate_ad_schedule(
+        populate_ad_schedule(
             ad_schedule,
             day_of_week,
             18,
@@ -186,7 +186,7 @@ def _create_extension_feed_items(client, customer_id, campaign_resource_name):
     # [END add_sitelinks]
 
 
-def _get_thanksgiving_string_date_range():
+def get_thanksgiving_string_date_range():
     """Retrieves a _DateRange with formatted datetime start/end strings."""
     now = datetime.datetime.now()
     start_dt = datetime.datetime(now.year, 11, 20, 0, 0, 0)
@@ -197,12 +197,12 @@ def _get_thanksgiving_string_date_range():
 
     end_dt = datetime.datetime(start_dt.year, 11, 27, 23, 59, 59)
 
-    return _DateRange(
+    return DateRange(
         start_dt.strftime(_date_format), end_dt.strftime(_date_format)
     )
 
 
-def _populate_ad_schedule(
+def populate_ad_schedule(
     ad_schedule, day_of_week, start_hour, start_minute, end_hour, end_minute
 ):
     """Helper method to populate a given AdScheduleInfo instance."""
@@ -216,7 +216,7 @@ def _populate_ad_schedule(
 if __name__ == "__main__":
     # GoogleAdsClient will read the google-ads.yaml configuration file in the
     # home directory if none is specified.
-    googleads_client = GoogleAdsClient.load_from_storage(version="v9")
+    googleads_client = GoogleAdsClient.load_from_storage(version="v11")
 
     parser = argparse.ArgumentParser(
         description="Adds sitelinks to the specified campaign."

@@ -32,9 +32,9 @@ from google.ads.googleads.errors import GoogleAdsException
 def main(
     client, customer_id, hotel_center_account_id, cpc_bid_ceiling_micro_amount
 ):
-    budget_resource_name = _add_budget(client, customer_id)
+    budget_resource_name = add_budget(client, customer_id)
 
-    campaign_resource_name = _add_hotel_campaign(
+    campaign_resource_name = add_hotel_campaign(
         client,
         customer_id,
         budget_resource_name,
@@ -42,14 +42,14 @@ def main(
         cpc_bid_ceiling_micro_amount,
     )
 
-    ad_group_resource_name = _add_hotel_ad_group(
+    ad_group_resource_name = add_hotel_ad_group(
         client, customer_id, campaign_resource_name
     )
 
-    _add_hotel_ad(client, customer_id, ad_group_resource_name)
+    add_hotel_ad(client, customer_id, ad_group_resource_name)
 
 
-def _add_budget(client, customer_id):
+def add_budget(client, customer_id):
     campaign_budget_service = client.get_service("CampaignBudgetService")
 
     # Create a budget, which can be shared by multiple campaigns.
@@ -74,7 +74,7 @@ def _add_budget(client, customer_id):
 
 
 # [START add_hotel_ad_3]
-def _add_hotel_ad(client, customer_id, ad_group_resource_name):
+def add_hotel_ad(client, customer_id, ad_group_resource_name):
     ad_group_ad_service = client.get_service("AdGroupAdService")
 
     # Creates a new ad group ad and sets the hotel ad to it.
@@ -101,7 +101,7 @@ def _add_hotel_ad(client, customer_id, ad_group_resource_name):
 
 
 # [START add_hotel_ad_2]
-def _add_hotel_ad_group(client, customer_id, campaign_resource_name):
+def add_hotel_ad_group(client, customer_id, campaign_resource_name):
     ad_group_service = client.get_service("AdGroupService")
 
     # Create ad group.
@@ -130,7 +130,7 @@ def _add_hotel_ad_group(client, customer_id, campaign_resource_name):
 
 
 # [START add_hotel_ad]
-def _add_hotel_campaign(
+def add_hotel_campaign(
     client,
     customer_id,
     budget_resource_name,
@@ -187,7 +187,7 @@ def _add_hotel_campaign(
 if __name__ == "__main__":
     # GoogleAdsClient will read the google-ads.yaml configuration file in the
     # home directory if none is specified.
-    googleads_client = GoogleAdsClient.load_from_storage(version="v9")
+    googleads_client = GoogleAdsClient.load_from_storage(version="v11")
 
     parser = argparse.ArgumentParser(
         description=(

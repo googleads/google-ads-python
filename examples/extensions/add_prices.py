@@ -31,13 +31,13 @@ def main(client, customer_id):
         customer_id: a client customer ID.
     """
     # Create a new price asset.
-    price_asset_resource_name = _create_price_asset(client, customer_id)
+    price_asset_resource_name = create_price_asset(client, customer_id)
 
     # Add the new price asset to the account.
-    _add_asset_to_account(client, customer_id, price_asset_resource_name)
+    add_asset_to_account(client, customer_id, price_asset_resource_name)
 
 
-def _create_price_asset(client, customer_id):
+def create_price_asset(client, customer_id):
     """Creates a price asset and returns its resource name.
 
     Args:
@@ -64,7 +64,7 @@ def _create_price_asset(client, customer_id):
     price_asset.language_code = "en"
     price_asset.price_offerings.extend(
         [
-            _create_price_offering(
+            create_price_offering(
                 client,
                 "Scrubs",
                 "Body Scrub, Salt Scrub",
@@ -74,7 +74,7 @@ def _create_price_asset(client, customer_id):
                 "USD",
                 client.enums.PriceExtensionPriceUnitEnum.PER_HOUR,
             ),
-            _create_price_offering(
+            create_price_offering(
                 client,
                 "Hair Cuts",
                 "Once a month",
@@ -84,7 +84,7 @@ def _create_price_asset(client, customer_id):
                 "USD",
                 client.enums.PriceExtensionPriceUnitEnum.PER_MONTH,
             ),
-            _create_price_offering(
+            create_price_offering(
                 client,
                 "Skin Care Package",
                 "Four times a month",
@@ -109,7 +109,7 @@ def _create_price_asset(client, customer_id):
     return resource_name
 
 
-def _create_price_offering(
+def create_price_offering(
     client,
     header,
     description,
@@ -149,7 +149,7 @@ def _create_price_offering(
     return price_offering
 
 
-def _add_asset_to_account(client, customer_id, price_asset_resource_name):
+def add_asset_to_account(client, customer_id, price_asset_resource_name):
     """Adds a new Asset to the given user account.
 
     Adding the Asset to an account allows it to serve in all campaigns under
@@ -158,7 +158,7 @@ def _add_asset_to_account(client, customer_id, price_asset_resource_name):
     Args:
         client: an initialized GoogleAdsClient instance.
         customer_id: a client customer ID.
-        price_asset_resource_name: a resource name for an Assset containing
+        price_asset_resource_name: a resource name for an Asset containing
             a PriceAsset.
     """
     # Create a customer asset operation.
@@ -184,7 +184,7 @@ def _add_asset_to_account(client, customer_id, price_asset_resource_name):
 if __name__ == "__main__":
     # GoogleAdsClient will read the google-ads.yaml configuration file in the
     # home directory if none is specified.
-    googleads_client = GoogleAdsClient.load_from_storage(version="v9")
+    googleads_client = GoogleAdsClient.load_from_storage(version="v11")
 
     parser = argparse.ArgumentParser(
         description="Add price asset for the specified customer id."

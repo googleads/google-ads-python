@@ -38,7 +38,7 @@ NUMBER_OF_ADS = 5
 KEYWORDS_TO_ADD = ["mars cruise", "space hotel"]
 
 
-def _create_campaign_budget(client):
+def create_campaign_budget(client):
     """Creates a new budget and returns the newly created budget ID.
 
     Args:
@@ -66,7 +66,7 @@ def _create_campaign_budget(client):
     return created_budget["budgetId"]
 
 
-def _create_campaign(client, budget_id):
+def create_campaign(client, budget_id):
     """Creates a new campaign and returns the newly created campaign ID.
 
     Args:
@@ -104,14 +104,14 @@ def _create_campaign(client, budget_id):
     results = campaign_service.mutate(campaign_operations)
     created_campaign = results["value"][0]
     print(
-        "CreatedCampign with ID {} and name {} was created".format(
+        "Created Campaign with ID {} and name {} was created".format(
             created_campaign["id"], created_campaign["name"]
         )
     )
     return created_campaign["id"]
 
 
-def _create_ad_group(client, campaign_id):
+def create_ad_group(client, campaign_id):
     """Creates a new ad group and returns the new created ad group ID.
 
     Args:
@@ -152,7 +152,7 @@ def _create_ad_group(client, campaign_id):
     return created_ad_group["id"]
 
 
-def _create_text_ads(client, ad_group_id):
+def create_text_ads(client, ad_group_id):
     """Creates text ads using the given ad group ID.
 
     Args:
@@ -195,7 +195,7 @@ def _create_text_ads(client, ad_group_id):
         )
 
 
-def _create_keywords(client, ad_group_id, keywords_to_add):
+def create_keywords(client, ad_group_id, keywords_to_add):
     """Populates keywords on a given ad group ID.
 
     Args:
@@ -244,8 +244,8 @@ if __name__ == "__main__":
     # Initialize the client object.
     # By default, it will read the config file from the Home Directory.
     adwords_client = adwords.AdWordsClient.LoadFromStorage()
-    budget_id = _create_campaign_budget(adwords_client)
-    campaign_id = _create_campaign(adwords_client, budget_id)
-    ad_group_id = _create_ad_group(adwords_client, campaign_id)
-    _create_text_ads(adwords_client, ad_group_id)
-    _create_keywords(adwords_client, ad_group_id, KEYWORDS_TO_ADD)
+    budget_id = create_campaign_budget(adwords_client)
+    campaign_id = create_campaign(adwords_client, budget_id)
+    ad_group_id = create_ad_group(adwords_client, campaign_id)
+    create_text_ads(adwords_client, ad_group_id)
+    create_keywords(adwords_client, ad_group_id, KEYWORDS_TO_ADD)

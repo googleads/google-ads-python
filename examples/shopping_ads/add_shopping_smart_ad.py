@@ -53,10 +53,10 @@ def main(
             listing group.
     """
     # Create a budget to be used by the campaign that will be created below.
-    budget_resource_name = _add_campaign_budget(client, customer_id)
+    budget_resource_name = add_campaign_budget(client, customer_id)
 
     # Create a smart shopping campaign.
-    campaign_resource_name = _add_smart_shopping_campaign(
+    campaign_resource_name = add_smart_shopping_campaign(
         client,
         customer_id,
         budget_resource_name,
@@ -64,12 +64,12 @@ def main(
     )
 
     # Create a smart shopping ad group.
-    ad_group_resource_name = _add_smart_shopping_ad_group(
+    ad_group_resource_name = add_smart_shopping_ad_group(
         client, customer_id, campaign_resource_name
     )
 
     # Creates a smart shopping ad group ad.
-    _add_smart_shopping_ad_group_ad(client, customer_id, ad_group_resource_name)
+    add_smart_shopping_ad_group_ad(client, customer_id, ad_group_resource_name)
 
     if create_default_listing_group:
         # A product group is a subset of inventory. Listing groups are the
@@ -77,10 +77,10 @@ def main(
         # the chosen group or exclude a group from bidding.
         # This method creates an ad group criterion containing a listing
         # group.
-        _add_shopping_listing_group(client, customer_id, ad_group_resource_name)
+        add_shopping_listing_group(client, customer_id, ad_group_resource_name)
 
 
-def _add_campaign_budget(client, customer_id):
+def add_campaign_budget(client, customer_id):
     """Creates a campaign budget in the specified client account.
 
     Args:
@@ -124,7 +124,7 @@ def _add_campaign_budget(client, customer_id):
 
 
 # [START add_shopping_smart_ad_3]
-def _add_smart_shopping_campaign(
+def add_smart_shopping_campaign(
     client, customer_id, budget_resource_name, merchant_center_account_id
 ):
     """Creates a new shopping campaign for smart shopping ads.
@@ -192,7 +192,7 @@ def _add_smart_shopping_campaign(
 
 
 # [START add_shopping_smart_ad_2]
-def _add_smart_shopping_ad_group(client, customer_id, campaign_resource_name):
+def add_smart_shopping_ad_group(client, customer_id, campaign_resource_name):
     """Creates a new ad group in the specified smart shopping campaign.
 
     Args:
@@ -231,7 +231,7 @@ def _add_smart_shopping_ad_group(client, customer_id, campaign_resource_name):
 
 
 # [START add_shopping_smart_ad_1]
-def _add_smart_shopping_ad_group_ad(
+def add_smart_shopping_ad_group_ad(
     client, customer_id, ad_group_resource_name
 ):
     """Creates a new ad group ad in the specified smart shopping ad group.
@@ -273,7 +273,7 @@ def _add_smart_shopping_ad_group_ad(
     # [END add_shopping_smart_ad_1]
 
 
-def _add_shopping_listing_group(client, customer_id, ad_group_resource_name):
+def add_shopping_listing_group(client, customer_id, ad_group_resource_name):
     """Creates a new shopping listing group for the specified ad group.
 
     This is known as a "product group" in the Google Ads user interface. The
@@ -324,7 +324,7 @@ def _add_shopping_listing_group(client, customer_id, ad_group_resource_name):
 if __name__ == "__main__":
     # GoogleAdsClient will read the google-ads.yaml configuration file in the
     # home directory if none is specified.
-    googleads_client = GoogleAdsClient.load_from_storage(version="v9")
+    googleads_client = GoogleAdsClient.load_from_storage(version="v11")
 
     parser = argparse.ArgumentParser(
         description=(

@@ -38,11 +38,11 @@ def main(client, customer_id, language_name, carrier_country_code):
         carrier_country_code: String code of the country where the mobile
             carriers are located.
     """
-    _search_for_language_constants(client, customer_id, language_name)
-    _search_for_carrier_constants(client, customer_id, carrier_country_code)
+    search_for_language_constants(client, customer_id, language_name)
+    search_for_carrier_constants(client, customer_id, carrier_country_code)
 
 
-def _search_for_language_constants(client, customer_id, language_name):
+def search_for_language_constants(client, customer_id, language_name):
     """Searches for language constants where the name includes a given string.
 
     Args:
@@ -81,7 +81,7 @@ def _search_for_language_constants(client, customer_id, language_name):
             )
 
 
-def _search_for_carrier_constants(client, customer_id, carrier_country_code):
+def search_for_carrier_constants(client, customer_id, carrier_country_code):
     """Searches for mobile carrier constants with a given country code.
 
     Args:
@@ -122,7 +122,7 @@ def _search_for_carrier_constants(client, customer_id, carrier_country_code):
 if __name__ == "__main__":
     # GoogleAdsClient will read the google-ads.yaml configuration file in the
     # home directory if none is specified.
-    googleads_client = GoogleAdsClient.load_from_storage(version="v9")
+    googleads_client = GoogleAdsClient.load_from_storage(version="v11")
 
     parser = argparse.ArgumentParser(
         description=(

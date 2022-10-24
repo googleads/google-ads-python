@@ -45,8 +45,10 @@ def main(client, customer_id, merchant_center_account_id):
         "MerchantCenterLinkService"
     )
     # Get the extant customer account to Merchant Center account links.
-    list_merchant_center_links_response = merchant_center_link_service.list_merchant_center_links(
-        customer_id=customer_id
+    list_merchant_center_links_response = (
+        merchant_center_link_service.list_merchant_center_links(
+            customer_id=customer_id
+        )
     )
 
     number_of_links = len(
@@ -77,7 +79,7 @@ def main(client, customer_id, merchant_center_account_id):
         if merchant_center_link.id == merchant_center_account_id:
             # A Merchant Center link can be pending or enabled; in both
             # cases, we reject it by removing the link.
-            _remove_merchant_center_link(
+            remove_merchant_center_link(
                 client,
                 merchant_center_link_service,
                 customer_id,
@@ -97,7 +99,7 @@ def main(client, customer_id, merchant_center_account_id):
 
 
 # [START reject_merchant_center_link]
-def _remove_merchant_center_link(
+def remove_merchant_center_link(
     client, merchant_center_link_service, customer_id, merchant_center_link
 ):
     """Removes a Merchant Center link from a Google Ads client customer account.
@@ -129,7 +131,7 @@ def _remove_merchant_center_link(
 if __name__ == "__main__":
     # GoogleAdsClient will read the google-ads.yaml configuration file in the
     # home directory if none is specified.
-    googleads_client = GoogleAdsClient.load_from_storage(version="v9")
+    googleads_client = GoogleAdsClient.load_from_storage(version="v11")
 
     parser = argparse.ArgumentParser(
         description=(

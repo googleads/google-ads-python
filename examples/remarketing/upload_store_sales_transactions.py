@@ -90,7 +90,7 @@ def main(
     )
 
     # Create an offline user data job for uploading transactions.
-    offline_user_data_job_resource_name = _create_offline_user_data_job(
+    offline_user_data_job_resource_name = create_offline_user_data_job(
         client,
         offline_user_data_job_service,
         customer_id,
@@ -103,7 +103,7 @@ def main(
     )
 
     # Add transactions to the job.
-    _add_transactions_to_offline_user_data_job(
+    add_transactions_to_offline_user_data_job(
         client,
         offline_user_data_job_service,
         customer_id,
@@ -121,10 +121,10 @@ def main(
     # instead of waiting for the job to complete, retrieves and displays
     # the job status once and then prints the query to use to check the job
     # again later.
-    _check_job_status(client, customer_id, offline_user_data_job_resource_name)
+    check_job_status(client, customer_id, offline_user_data_job_resource_name)
 
 
-def _create_offline_user_data_job(
+def create_offline_user_data_job(
     client,
     offline_user_data_job_service,
     customer_id,
@@ -230,8 +230,10 @@ def _create_offline_user_data_job(
         # Set the third party partner ID uploading the transactions.
         store_sales_third_party_metadata.partner_id = partner_id
 
-    create_offline_user_data_job_response = offline_user_data_job_service.create_offline_user_data_job(
-        customer_id=customer_id, job=offline_user_data_job
+    create_offline_user_data_job_response = (
+        offline_user_data_job_service.create_offline_user_data_job(
+            customer_id=customer_id, job=offline_user_data_job
+        )
     )
     offline_user_data_job_resource_name = (
         create_offline_user_data_job_response.resource_name
@@ -243,7 +245,7 @@ def _create_offline_user_data_job(
     return offline_user_data_job_resource_name
 
 
-def _add_transactions_to_offline_user_data_job(
+def add_transactions_to_offline_user_data_job(
     client,
     offline_user_data_job_service,
     customer_id,
@@ -283,7 +285,7 @@ def _add_transactions_to_offline_user_data_job(
             item attributes.
     """
     # Construct some sample transactions.
-    operations = _build_offline_user_data_job_operations(
+    operations = build_offline_user_data_job_operations(
         client,
         customer_id,
         conversion_action_id,
@@ -304,14 +306,16 @@ def _add_transactions_to_offline_user_data_job(
     request.enable_warnings = True
     request.operations = operations
 
-    response = offline_user_data_job_service.add_offline_user_data_job_operations(
-        request=request,
+    response = (
+        offline_user_data_job_service.add_offline_user_data_job_operations(
+            request=request,
+        )
     )
     # [END enable_warnings_1]
 
     # Print the error message for any partial failure error that is returned.
     if response.partial_failure_error:
-        _print_google_ads_failures(response.partial_failure_error)
+        print_google_ads_failures(response.partial_failure_error)
     else:
         print(
             f"Successfully added {len(operations)} to the offline user data "
@@ -320,11 +324,11 @@ def _add_transactions_to_offline_user_data_job(
 
     # Print the message for any warnings that are returned.
     if response.warning:
-        _print_google_ads_failures(response.warning)
+        print_google_ads_failures(response.warning)
 
 
 # [START enable_warnings_2]
-def _print_google_ads_failures(client, status):
+def print_google_ads_failures(client, status):
     """Prints the details for partial failure errors and warnings.
 
     Both partial failure errors and warnings are returned as Status instances,
@@ -351,7 +355,7 @@ def _print_google_ads_failures(client, status):
             # [END enable_warnings_2]
 
 
-def _build_offline_user_data_job_operations(
+def build_offline_user_data_job_operations(
     client,
     customer_id,
     conversion_action_id,
@@ -395,16 +399,16 @@ def _build_offline_user_data_job_operations(
     user_data_with_email_address = user_data_with_email_address_operation.create
     email_identifier = client.get_type("UserIdentifier")
     # Hash normalized email addresses based on SHA-256 hashing algorithm.
-    email_identifier.hashed_email = _normalize_and_hash("customer@example.com")
+    email_identifier.hashed_email = normalize_and_hash("customer@example.com")
     state_identifier = client.get_type("UserIdentifier")
     state_identifier.address_info.state = "NY"
     user_data_with_email_address.user_identifiers.extend(
         [email_identifier, state_identifier]
     )
-    user_data_with_email_address.transaction_attribute.conversion_action = client.get_service(
-        "ConversionActionService"
-    ).conversion_action_path(
-        customer_id, conversion_action_id
+    user_data_with_email_address.transaction_attribute.conversion_action = (
+        client.get_service("ConversionActionService").conversion_action_path(
+            customer_id, conversion_action_id
+        )
     )
     user_data_with_email_address.transaction_attribute.currency_code = "USD"
     # Convert the transaction amount from $200 USD to micros.
@@ -429,20 +433,20 @@ def _build_offline_user_data_job_operations(
     )
     address_identifier = client.get_type("UserIdentifier")
     # First and last name must be normalized and hashed.
-    address_identifier.address_info.hashed_first_name = _normalize_and_hash(
+    address_identifier.address_info.hashed_first_name = normalize_and_hash(
         "John"
     )
-    address_identifier.address_info.hashed_last_name = _normalize_and_hash(
+    address_identifier.address_info.hashed_last_name = normalize_and_hash(
         "Doe"
     )
     # Country and zip codes are sent in plain text.
     address_identifier.address_info.country_code = "US"
     address_identifier.address_info.postal_code = "10011"
     user_data_with_physical_address.user_identifiers.append(address_identifier)
-    user_data_with_physical_address.transaction_attribute.conversion_action = client.get_service(
-        "ConversionActionService"
-    ).conversion_action_path(
-        customer_id, conversion_action_id
+    user_data_with_physical_address.transaction_attribute.conversion_action = (
+        client.get_service("ConversionActionService").conversion_action_path(
+            customer_id, conversion_action_id
+        )
     )
     user_data_with_physical_address.transaction_attribute.currency_code = "EUR"
     # Convert the transaction amount from 450 EUR to micros.
@@ -485,7 +489,7 @@ def _build_offline_user_data_job_operations(
     ]
 
 
-def _normalize_and_hash(s):
+def normalize_and_hash(s):
     """Normalizes and hashes a string with SHA-256.
 
     Args:
@@ -497,7 +501,7 @@ def _normalize_and_hash(s):
     return hashlib.sha256(s.strip().lower().encode()).hexdigest()
 
 
-def _check_job_status(client, customer_id, offline_user_data_job_resource_name):
+def check_job_status(client, customer_id, offline_user_data_job_resource_name):
     """Retrieves, checks, and prints the status of the offline user data job.
 
     Args:
@@ -563,7 +567,7 @@ def _check_job_status(client, customer_id, offline_user_data_job_resource_name):
 if __name__ == "__main__":
     # GoogleAdsClient will read the google-ads.yaml configuration file in the
     # home directory if none is specified.
-    googleads_client = GoogleAdsClient.load_from_storage(version="v9")
+    googleads_client = GoogleAdsClient.load_from_storage(version="v11")
 
     parser = argparse.ArgumentParser(
         description="This example uploads offline data for store sales "

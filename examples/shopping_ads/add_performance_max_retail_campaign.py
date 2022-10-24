@@ -61,16 +61,12 @@ _ASSET_GROUP_TEMPORARY_ID = "-3"
 
 # There are also entities that will be created in the same request but do not
 # need to be fixed temporary IDs because they are referenced only once.
-next_temp_id = int(_ASSET_GROUP_TEMPORARY_ID) - 1
+_next_temp_id = int(_ASSET_GROUP_TEMPORARY_ID) - 1
 
 
 # [START add_performance_max_retail_campaign]
 def main(
-    client,
-    customer_id,
-    merchant_center_account_id,
-    sales_country,
-    final_url,
+    client, customer_id, merchant_center_account_id, sales_country, final_url,
 ):
     """The main method that creates all necessary entities for the example.
 
@@ -86,7 +82,7 @@ def main(
 
     # This campaign will override the customer conversion goals.
     # Retrieve the current list of customer conversion goals.
-    customer_conversion_goals = _get_customer_conversion_goals(
+    customer_conversion_goals = get_customer_conversion_goals(
         client, customer_id
     )
 
@@ -96,23 +92,12 @@ def main(
     # https://developers.google.com/google-ads/api/docs/performance-max/assets
     #
     # Create the headlines.
-    headline_asset_resource_names = _create_multiple_text_assets(
-        client,
-        customer_id,
-        [
-            "Travel",
-            "Travel Reviews",
-            "Book travel",
-        ],
+    headline_asset_resource_names = create_multiple_text_assets(
+        client, customer_id, ["Travel", "Travel Reviews", "Book travel",],
     )
     # Create the descriptions.
-    description_asset_resource_names = _create_multiple_text_assets(
-        client,
-        customer_id,
-        [
-            "Take to the air!",
-            "Fly to the sky!",
-        ],
+    description_asset_resource_names = create_multiple_text_assets(
+        client, customer_id, ["Take to the air!", "Fly to the sky!",],
     )
 
     # The below methods create and return MutateOperations that we later
@@ -122,33 +107,29 @@ def main(
     # to create them in a single Mutate request so they all complete
     # successfully or fail entirely, leaving no orphaned entities. See:
     # https://developers.google.com/google-ads/api/docs/mutating/overview
-    campaign_budget_operation = _create_campaign_budget_operation(
+    campaign_budget_operation = create_campaign_budget_operation(
+        client, customer_id,
+    )
+    performance_max_campaign_operation = create_performance_max_campaign_operation(
+        client, customer_id, merchant_center_account_id, sales_country,
+    )
+    campaign_criterion_operations = create_campaign_criterion_operations(
+        client, customer_id,
+    )
+    asset_group_operation = create_asset_group_operation(
+        client, customer_id, final_url
+    )
+    listing_group_filter_operation = create_listing_group_filter_operation(
+        client, customer_id
+    )
+    asset_and_asset_group_asset_operations = create_asset_and_asset_group_asset_operations(
         client,
         customer_id,
-    )
-    performance_max_campaign_operation = (
-        _create_performance_max_campaign_operation(
-            client,
-            customer_id,
-            merchant_center_account_id,
-            sales_country,
-        )
-    )
-    campaign_criterion_operations = _create_campaign_criterion_operations(
-        client,
-        customer_id,
-    )
-    asset_group_operations = _create_asset_group_operation(
-        client,
-        customer_id,
-        final_url,
         headline_asset_resource_names,
         description_asset_resource_names,
     )
-    conversion_goal_operations = _create_conversion_goal_operations(
-        client,
-        customer_id,
-        customer_conversion_goals,
+    conversion_goal_operations = create_conversion_goal_operations(
+        client, customer_id, customer_conversion_goals,
     )
 
     # Send the operations in a single Mutate request.
@@ -162,18 +143,19 @@ def main(
             # Expand the list of multiple operations into the list of
             # other mutate operations.
             *campaign_criterion_operations,
-            *asset_group_operations,
+            asset_group_operation,
+            listing_group_filter_operation,
+            *asset_and_asset_group_asset_operations,
             *conversion_goal_operations,
         ],
     )
-    _print_response_details(response)
+    print_response_details(response)
     # [END add_performance_max_retail_campaign_1]
 
 
 # [START add_performance_max_retail_campaign_2]
-def _create_campaign_budget_operation(
-    client,
-    customer_id,
+def create_campaign_budget_operation(
+    client, customer_id,
 ):
     """Creates a MutateOperation that creates a new CampaignBudget.
 
@@ -210,11 +192,8 @@ def _create_campaign_budget_operation(
 
 
 # [START add_performance_max_retail_campaign_3]
-def _create_performance_max_campaign_operation(
-    client,
-    customer_id,
-    merchant_center_account_id,
-    sales_country,
+def create_performance_max_campaign_operation(
+    client, customer_id, merchant_center_account_id, sales_country,
 ):
     """Creates a MutateOperation that creates a new Performance Max campaign.
 
@@ -258,7 +237,7 @@ def _create_performance_max_campaign_operation(
     campaign.maximize_conversion_value.target_roas = None
     # Below is what you would use if you want to maximize conversions
     # campaign.maximize_conversions.target_cpa = None
-    # The target CPA is optional. This is the average amount that you would 
+    # The target CPA is optional. This is the average amount that you would
     # like to spend per conversion action.
 
     # Set the shopping settings.
@@ -271,7 +250,7 @@ def _create_performance_max_campaign_operation(
     # If opted in (False), the entire domain will be targeted. For best
     # results, set this value to false to opt in and allow URL expansions. You
     # can optionally add exclusions to limit traffic to parts of your website.
-    # For a Retail campaign, we want the final URL's to be limited to 
+    # For a Retail campaign, we want the final URL's to be limited to
     # those explicitly surfaced via GMC.
     campaign.url_expansion_opt_out = True
 
@@ -294,9 +273,8 @@ def _create_performance_max_campaign_operation(
 
 
 # [START add_performance_max_retail_campaign_4]
-def _create_campaign_criterion_operations(
-    client,
-    customer_id,
+def create_campaign_criterion_operations(
+    client, customer_id,
 ):
     """Creates a list of MutateOperations that create new campaign criteria.
 
@@ -309,7 +287,7 @@ def _create_campaign_criterion_operations(
     """
     campaign_service = client.get_service("CampaignService")
     geo_target_constant_service = client.get_service("GeoTargetConstantService")
-    language_constant_service = client.get_service("LanguageConstantService")
+    googleads_service = client.get_service("GoogleAdsService")
 
     operations = []
     # Set the LOCATION campaign criteria.
@@ -318,29 +296,27 @@ def _create_campaign_criterion_operations(
     # https://developers.google.com/google-ads/api/reference/data/geotargets
     # and they can also be retrieved using the GeoTargetConstantService as shown
     # here: https://developers.google.com/google-ads/api/docs/targeting/location-targeting
-    #
-    # We will add one positive location target for New York City (ID=1023191)
-    # and one negative location target for Brooklyn (ID=1022762).
-    # First, add the positive (negative = False) for New York City.
     mutate_operation = client.get_type("MutateOperation")
     campaign_criterion = mutate_operation.campaign_criterion_operation.create
     campaign_criterion.campaign = campaign_service.campaign_path(
         customer_id, _PERFORMANCE_MAX_CAMPAIGN_TEMPORARY_ID
     )
-    campaign_criterion.location.geo_target_constant = (
-        geo_target_constant_service.geo_target_constant_path("1023191")
+    # Adds one positive location target for New York City (ID=1023191),
+    # specifically adding the positive criteria before the negative one.
+    campaign_criterion.location.geo_target_constant = geo_target_constant_service.geo_target_constant_path(
+        "1023191"
     )
     campaign_criterion.negative = False
     operations.append(mutate_operation)
 
-    # Next add the negative target for Brooklyn.
+    # Next add the negative target for Brooklyn (ID=1022762).
     mutate_operation = client.get_type("MutateOperation")
     campaign_criterion = mutate_operation.campaign_criterion_operation.create
     campaign_criterion.campaign = campaign_service.campaign_path(
         customer_id, _PERFORMANCE_MAX_CAMPAIGN_TEMPORARY_ID
     )
-    campaign_criterion.location.geo_target_constant = (
-        geo_target_constant_service.geo_target_constant_path("1022762")
+    campaign_criterion.location.geo_target_constant = geo_target_constant_service.geo_target_constant_path(
+        "1022762"
     )
     campaign_criterion.negative = True
     operations.append(mutate_operation)
@@ -354,9 +330,9 @@ def _create_campaign_criterion_operations(
     # Set the language.
     # For a list of all language codes, see:
     # https://developers.google.com/google-ads/api/reference/data/codes-formats#expandable-7
-    campaign_criterion.language.language_constant = (
-        language_constant_service.language_constant_path("1000")  # English
-    )
+    campaign_criterion.language.language_constant = googleads_service.language_constant_path(
+        "1000"
+    )  # English
     operations.append(mutate_operation)
 
     return operations
@@ -364,8 +340,11 @@ def _create_campaign_criterion_operations(
 
 
 # [START add_performance_max_retail_campaign_5]
-def _create_multiple_text_assets(client, customer_id, texts):
+def create_multiple_text_assets(client, customer_id, texts):
     """Creates multiple text assets and returns the list of resource names.
+
+    These repeated assets must be created in a separate request prior to
+    creating the campaign.
 
     Args:
         client: an initialized GoogleAdsClient instance.
@@ -389,23 +368,92 @@ def _create_multiple_text_assets(client, customer_id, texts):
 
     # Send the operations in a single Mutate request.
     response = googleads_service.mutate(
-        customer_id=customer_id,
-        mutate_operations=operations,
+        customer_id=customer_id, mutate_operations=operations,
     )
     asset_resource_names = []
     for result in response.mutate_operation_responses:
         if result._pb.HasField("asset_result"):
             asset_resource_names.append(result.asset_result.resource_name)
-    _print_response_details(response)
+    print_response_details(response)
     return asset_resource_names
     # [END add_performance_max_retail_campaign_5]
 
 
+# [START add_performance_max_retail_campaign_10]
+def create_asset_group_operation(client, customer_id, final_url):
+    """Creates a MutateOperation that creates a new asset group.
+
+    A temporary ID will be assigned to this asset group so that it can
+    be referenced by other objects being created in the same Mutate request.
+
+    Args:
+        client: an initialized GoogleAdsClient instance.
+        customer_id: a client customer ID.
+        final_url: the final URL.
+
+    Returns:
+        a MutateOperation that creates a new asset group.
+    """
+    googleads_service = client.get_service("GoogleAdsService")
+    # Create the AssetGroup.
+    mutate_operation = client.get_type("MutateOperation")
+    asset_group = mutate_operation.asset_group_operation.create
+    asset_group.name = f"Performance Max retail asset group #{uuid4()}"
+    asset_group.campaign = googleads_service.campaign_path(
+        customer_id, _PERFORMANCE_MAX_CAMPAIGN_TEMPORARY_ID
+    )
+    asset_group.final_urls.append(final_url)
+    asset_group.final_mobile_urls.append(final_url)
+    asset_group.status = client.enums.AssetGroupStatusEnum.PAUSED
+    asset_group.resource_name = googleads_service.asset_group_path(
+        customer_id, _ASSET_GROUP_TEMPORARY_ID,
+    )
+
+    return mutate_operation
+    # [END add_performance_max_retail_campaign_10]
+
+
+# [START add_performance_max_retail_campaign_11]
+def create_listing_group_filter_operation(client, customer_id):
+    """Creates a MutateOperation that creates a new listing group filter.
+
+    A temporary ID will be assigned to this listing group filter so that it
+    can be referenced by other objects being created in the same Mutate request.
+
+    Args:
+        client: an initialized GoogleAdsClient instance.
+        customer_id: a client customer ID.
+
+    Returns:
+        a MutateOperation that creates a new listing group filter.
+    """
+    googleads_service = client.get_service("GoogleAdsService")
+    # Creates a new ad group criterion containing the "default" listing
+    # group (All products).
+    mutate_operation = client.get_type("MutateOperation")
+    asset_group_listing_group = (
+        mutate_operation.asset_group_listing_group_filter_operation.create
+    )
+    asset_group_listing_group.asset_group = googleads_service.asset_group_path(
+        customer_id, _ASSET_GROUP_TEMPORARY_ID,
+    )
+    asset_group_listing_group.type_ = (
+        client.enums.ListingGroupFilterTypeEnum.UNIT_INCLUDED
+    )
+    # Because this is a Performance Max campaign for retail, we need to specify
+    # that this is in the shopping vertical.
+    asset_group_listing_group.vertical = (
+        client.enums.ListingGroupFilterVerticalEnum.SHOPPING
+    )
+
+    return mutate_operation
+    # [END add_performance_max_retail_campaign_11]
+
+
 # [START add_performance_max_retail_campaign_6]
-def _create_asset_group_operation(
+def create_asset_and_asset_group_asset_operations(
     client,
     customer_id,
-    final_url,
     headline_asset_resource_names,
     description_asset_resource_names,
 ):
@@ -417,7 +465,6 @@ def _create_asset_group_operation(
     Args:
         client: an initialized GoogleAdsClient instance.
         customer_id: a client customer ID.
-        final_url: the final URL.
         headline_asset_resource_names: a list of headline resource names.
         description_asset_resource_names: a list of description resource names.
 
@@ -425,39 +472,8 @@ def _create_asset_group_operation(
         MutateOperations that create a new asset group and related assets.
     """
     asset_group_service = client.get_service("AssetGroupService")
-    campaign_service = client.get_service("CampaignService")
 
     operations = []
-
-    # Create the AssetGroup.
-    mutate_operation = client.get_type("MutateOperation")
-    asset_group = mutate_operation.asset_group_operation.create
-    asset_group.name = f"Performance Max retail asset group #{uuid4()}"
-    asset_group.campaign = campaign_service.campaign_path(
-        customer_id, _PERFORMANCE_MAX_CAMPAIGN_TEMPORARY_ID
-    )
-    asset_group.final_urls.append(final_url)
-    asset_group.final_mobile_urls.append(final_url)
-    asset_group.status = client.enums.AssetGroupStatusEnum.PAUSED
-    asset_group.resource_name = asset_group_service.asset_group_path(
-        customer_id,
-        _ASSET_GROUP_TEMPORARY_ID,
-    )
-    operations.append(mutate_operation)
-
-    # Creates a new ad group criterion containing the "default" listing group (All products).
-    mutate_operation = client.get_type("MutateOperation")
-    asset_group_listing_group = mutate_operation.asset_group_listing_group_filter_operation.create
-    asset_group_listing_group.asset_group = asset_group_service.asset_group_path(
-            customer_id,
-            _ASSET_GROUP_TEMPORARY_ID,
-        )
-    asset_group_listing_group.type_ = client.enums.ListingGroupFilterTypeEnum.UNIT_INCLUDED
-    # Because this is a Performance Max campaign for retail, we need to specify that this is 
-    # in the shopping vertical.
-    asset_group_listing_group.vertical = client.enums.ListingGroupFilterVerticalEnum.SHOPPING
-    
-    operations.append(mutate_operation)
 
     # For the list of required assets for a Performance Max campaign, see
     # https://developers.google.com/google-ads/api/docs/performance-max/assets
@@ -479,8 +495,7 @@ def _create_asset_group_operation(
         asset_group_asset = mutate_operation.asset_group_asset_operation.create
         asset_group_asset.field_type = client.enums.AssetFieldTypeEnum.HEADLINE
         asset_group_asset.asset_group = asset_group_service.asset_group_path(
-            customer_id,
-            _ASSET_GROUP_TEMPORARY_ID,
+            customer_id, _ASSET_GROUP_TEMPORARY_ID,
         )
         asset_group_asset.asset = resource_name
         operations.append(mutate_operation)
@@ -493,14 +508,13 @@ def _create_asset_group_operation(
             client.enums.AssetFieldTypeEnum.DESCRIPTION
         )
         asset_group_asset.asset_group = asset_group_service.asset_group_path(
-            customer_id,
-            _ASSET_GROUP_TEMPORARY_ID,
+            customer_id, _ASSET_GROUP_TEMPORARY_ID,
         )
         asset_group_asset.asset = resource_name
         operations.append(mutate_operation)
 
     # Create and link the long headline text asset.
-    mutate_operations = _create_and_link_text_asset(
+    mutate_operations = create_and_link_text_asset(
         client,
         customer_id,
         "Travel the World",
@@ -509,7 +523,7 @@ def _create_asset_group_operation(
     operations.extend(mutate_operations)
 
     # Create and link the business name text asset.
-    mutate_operations = _create_and_link_text_asset(
+    mutate_operations = create_and_link_text_asset(
         client,
         customer_id,
         "Interplanetary Cruises",
@@ -520,37 +534,44 @@ def _create_asset_group_operation(
     # Create and link the image assets.
 
     # Create and link the Logo Asset.
-    mutate_operations = _create_and_link_image_asset(
+    mutate_operations = create_and_link_image_asset(
         client,
         customer_id,
-        "https://gaagl.page.link/bjYi",
+        "https://gaagl.page.link/1Crm",
         client.enums.AssetFieldTypeEnum.LOGO,
+        "Logo Image",
     )
     operations.extend(mutate_operations)
 
     # Create and link the Marketing Image Asset.
-    mutate_operations = _create_and_link_image_asset(
+    mutate_operations = create_and_link_image_asset(
         client,
         customer_id,
         "https://gaagl.page.link/Eit5",
         client.enums.AssetFieldTypeEnum.MARKETING_IMAGE,
+        "Marketing Image",
     )
     operations.extend(mutate_operations)
 
     # Create and link the Square Marketing Image Asset.
-    mutate_operations = _create_and_link_image_asset(
+    mutate_operations = create_and_link_image_asset(
         client,
         customer_id,
         "https://gaagl.page.link/bjYi",
         client.enums.AssetFieldTypeEnum.SQUARE_MARKETING_IMAGE,
+        "Square Marketing Image",
     )
     operations.extend(mutate_operations)
-    return operations
+
+    # After being created the list must be sorted so that all asset
+    # operations come before all the asset group asset operations,
+    # otherwise the API will reject the request.
+    return sort_asset_and_asset_group_asset_operations(operations)
     # [END add_performance_max_retail_campaign_6]
 
 
 # [START add_performance_max_retail_campaign_7]
-def _create_and_link_text_asset(client, customer_id, text, field_type):
+def create_and_link_text_asset(client, customer_id, text, field_type):
     """Creates a list of MutateOperations that create a new linked text asset.
 
     Args:
@@ -562,7 +583,7 @@ def _create_and_link_text_asset(client, customer_id, text, field_type):
     Returns:
         MutateOperations that create a new linked text asset.
     """
-    global next_temp_id
+    global _next_temp_id
     operations = []
     asset_service = client.get_service("AssetService")
     asset_group_service = client.get_service("AssetGroupService")
@@ -570,7 +591,7 @@ def _create_and_link_text_asset(client, customer_id, text, field_type):
     # Create the Text Asset.
     mutate_operation = client.get_type("MutateOperation")
     asset = mutate_operation.asset_operation.create
-    asset.resource_name = asset_service.asset_path(customer_id, next_temp_id)
+    asset.resource_name = asset_service.asset_path(customer_id, _next_temp_id)
     asset.text_asset.text = text
     operations.append(mutate_operation)
 
@@ -579,21 +600,22 @@ def _create_and_link_text_asset(client, customer_id, text, field_type):
     asset_group_asset = mutate_operation.asset_group_asset_operation.create
     asset_group_asset.field_type = field_type
     asset_group_asset.asset_group = asset_group_service.asset_group_path(
-        customer_id,
-        _ASSET_GROUP_TEMPORARY_ID,
+        customer_id, _ASSET_GROUP_TEMPORARY_ID,
     )
     asset_group_asset.asset = asset_service.asset_path(
-        customer_id, next_temp_id
+        customer_id, _next_temp_id
     )
     operations.append(mutate_operation)
 
-    next_temp_id -= 1
+    _next_temp_id -= 1
     return operations
     # [END add_performance_max_retail_campaign_7]
 
 
 # [START add_performance_max_retail_campaign_8]
-def _create_and_link_image_asset(client, customer_id, url, field_type):
+def create_and_link_image_asset(
+    client, customer_id, url, field_type, asset_name
+):
     """Creates a list of MutateOperations that create a new linked image asset.
 
     Args:
@@ -601,11 +623,12 @@ def _create_and_link_image_asset(client, customer_id, url, field_type):
         customer_id: a client customer ID.
         url: the url of the image to be retrieved and put into an asset.
         field_type: the field_type of the new asset in the AssetGroupAsset.
+        asset_name: the asset name.
 
     Returns:
         MutateOperations that create a new linked image asset.
     """
-    global next_temp_id
+    global _next_temp_id
     operations = []
     asset_service = client.get_service("AssetService")
     asset_group_service = client.get_service("AssetGroupService")
@@ -613,9 +636,13 @@ def _create_and_link_image_asset(client, customer_id, url, field_type):
     # Create the Image Asset.
     mutate_operation = client.get_type("MutateOperation")
     asset = mutate_operation.asset_operation.create
-    asset.resource_name = asset_service.asset_path(customer_id, next_temp_id)
+    asset.resource_name = asset_service.asset_path(customer_id, _next_temp_id)
     asset.type_ = client.enums.AssetTypeEnum.IMAGE
-    asset.image_asset.data = _get_image_bytes(url)
+    # Provide a unique friendly name to identify your asset.
+    # When there is an existing image asset with the same content but a different
+    # name, the new name will be dropped silently.
+    asset.name = asset_name
+    asset.image_asset.data = get_image_bytes(url)
     operations.append(mutate_operation)
 
     # Create an AssetGroupAsset to link the Asset to the AssetGroup.
@@ -623,21 +650,51 @@ def _create_and_link_image_asset(client, customer_id, url, field_type):
     asset_group_asset = mutate_operation.asset_group_asset_operation.create
     asset_group_asset.field_type = field_type
     asset_group_asset.asset_group = asset_group_service.asset_group_path(
-        customer_id,
-        _ASSET_GROUP_TEMPORARY_ID,
+        customer_id, _ASSET_GROUP_TEMPORARY_ID,
     )
     asset_group_asset.asset = asset_service.asset_path(
-        customer_id, next_temp_id
+        customer_id, _next_temp_id
     )
     operations.append(mutate_operation)
 
-    next_temp_id -= 1
+    _next_temp_id -= 1
     return operations
     # [END add_performance_max_retail_campaign_8]
 
 
+# [START add_performance_max_retail_campaign_12]
+def sort_asset_and_asset_group_asset_operations(operations):
+    """Sorts a list of asset and asset group asset operations.
+
+    This sorts the list such that all asset operations precede
+    all asset group asset operations. If asset group assets are
+    created before assets then an error will be returned by
+    the API.
+
+    Args:
+        operations: a list of asset and asset group asset operations.
+
+    Returns:
+        a sorted list of asset and asset group asset operations.
+    """
+
+    def sorter(operation):
+        """Determines whether the operation creates an asset group asset.
+
+        Args:
+            operation: a MutateOperation instance.
+
+        Returns:
+            True if the MutateOperation creates an asset group asset.
+        """
+        return bool(operation.asset_group_asset_operation)
+
+    return sorted(operations, key=sorter)
+    # [END add_performance_max_retail_campaign_12]
+
+
 # [START add_performance_max_retail_campaign_9]
-def _get_customer_conversion_goals(client, customer_id):
+def get_customer_conversion_goals(client, customer_id):
     """Retrieves the list of customer conversion goals.
 
     Args:
@@ -675,10 +732,8 @@ def _get_customer_conversion_goals(client, customer_id):
     return customer_conversion_goals
 
 
-def _create_conversion_goal_operations(
-    client,
-    customer_id,
-    customer_conversion_goals,
+def create_conversion_goal_operations(
+    client, customer_id, customer_conversion_goals,
 ):
     """Creates a list of MutateOperations that override customer conversion goals.
 
@@ -705,13 +760,11 @@ def _create_conversion_goal_operations(
             mutate_operation.campaign_conversion_goal_operation.update
         )
 
-        campaign_conversion_goal.resource_name = (
-            campaign_conversion_goal_service.campaign_conversion_goal_path(
-                customer_id,
-                _PERFORMANCE_MAX_CAMPAIGN_TEMPORARY_ID,
-                customer_conversion_goal["category"].name,
-                customer_conversion_goal["origin"].name,
-            )
+        campaign_conversion_goal.resource_name = campaign_conversion_goal_service.campaign_conversion_goal_path(
+            customer_id,
+            _PERFORMANCE_MAX_CAMPAIGN_TEMPORARY_ID,
+            customer_conversion_goal["category"].name,
+            customer_conversion_goal["origin"].name,
         )
         # Change the biddability for the campaign conversion goal.
         # Set biddability to True for the desired (category, origin).
@@ -744,7 +797,7 @@ def _create_conversion_goal_operations(
     # [END add_performance_max_retail_campaign_9]
 
 
-def _get_image_bytes(url):
+def get_image_bytes(url):
     """Loads image data from a URL.
 
     Args:
@@ -757,7 +810,7 @@ def _get_image_bytes(url):
     return response.content
 
 
-def _print_response_details(response):
+def print_response_details(response):
     """Prints the details of a MutateGoogleAdsResponse.
 
     Parses the "response" oneof field name and uses it to extract the new
@@ -786,7 +839,7 @@ def _print_response_details(response):
 if __name__ == "__main__":
     # GoogleAdsClient will read the google-ads.yaml configuration file in the
     # home directory if none is specified.
-    googleads_client = GoogleAdsClient.load_from_storage(version="v9")
+    googleads_client = GoogleAdsClient.load_from_storage(version="v11")
 
     parser = argparse.ArgumentParser(
         description=("Creates a Performance Max retail campaign.")

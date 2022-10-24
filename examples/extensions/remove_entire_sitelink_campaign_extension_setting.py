@@ -43,19 +43,23 @@ def main(client, customer_id, campaign_id):
     """
     # Initialize an array of MutateOperations
     mutate_operations = []
-    sitelink_campaign_extension_setting_mutate_operation = _create_sitelink_campaign_extension_setting_mutate_operation(
-        client, customer_id, campaign_id
+    sitelink_campaign_extension_setting_mutate_operation = (
+        create_sitelink_campaign_extension_setting_mutate_operation(
+            client, customer_id, campaign_id
+        )
     )
     mutate_operations.append(
         sitelink_campaign_extension_setting_mutate_operation
     )
 
     ga_service = client.get_service("GoogleAdsService")
-    extension_feed_item_resource_names = _get_all_sitelink_extension_feed_items(
+    extension_feed_item_resource_names = get_all_sitelink_extension_feed_items(
         client, ga_service, customer_id, campaign_id
     )
-    extension_feed_item_mutate_operations = _create_extension_feed_item_mutate_operations(
-        client, extension_feed_item_resource_names
+    extension_feed_item_mutate_operations = (
+        create_extension_feed_item_mutate_operations(
+            client, extension_feed_item_resource_names
+        )
     )
     mutate_operations.extend(extension_feed_item_mutate_operations)
 
@@ -84,7 +88,7 @@ def main(client, customer_id, campaign_id):
         # [END remove_entire_sitelink_campaign_extension_setting]
 
 
-def _create_sitelink_campaign_extension_setting_mutate_operation(
+def create_sitelink_campaign_extension_setting_mutate_operation(
     client, customer_id, campaign_id
 ):
     """Creates a MutateOperation for the sitelink campaign extension setting
@@ -115,7 +119,7 @@ def _create_sitelink_campaign_extension_setting_mutate_operation(
 
 
 # [START remove_entire_sitelink_campaign_extension_setting_1]
-def _get_all_sitelink_extension_feed_items(
+def get_all_sitelink_extension_feed_items(
     client, ga_service, customer_id, campaign_id
 ):
     """Gets all sitelink extension feed items associated to the specified
@@ -170,7 +174,7 @@ def _get_all_sitelink_extension_feed_items(
     # [END remove_entire_sitelink_campaign_extension_setting_1]
 
 
-def _create_extension_feed_item_mutate_operations(
+def create_extension_feed_item_mutate_operations(
     client, extension_feed_item_resource_names
 ):
     """Creates MutateOperations for the sitelink extension feed items that will
@@ -197,7 +201,7 @@ def _create_extension_feed_item_mutate_operations(
 if __name__ == "__main__":
     # GoogleAdsClient will read the google-ads.yaml configuration file in the
     # home directory if none is specified.
-    googleads_client = GoogleAdsClient.load_from_storage(version="v9")
+    googleads_client = GoogleAdsClient.load_from_storage(version="v11")
 
     parser = argparse.ArgumentParser(
         description="Removes the entire sitelink campaign extension setting."
@@ -211,7 +215,11 @@ if __name__ == "__main__":
         help="The Google Ads customer ID",
     )
     parser.add_argument(
-        "-i", "--campaign_id", type=str, required=True, help="The campaign ID",
+        "-i",
+        "--campaign_id",
+        type=str,
+        required=True,
+        help="The campaign ID",
     )
     args = parser.parse_args()
 

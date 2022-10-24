@@ -37,7 +37,7 @@ def main(client, customer_id, campaign_id):
         campaign_id: The ID for a campaign to create Ad Groups under.
     """
     try:
-        ad_group_response = _create_ad_groups(client, customer_id, campaign_id)
+        ad_group_response = create_ad_groups(client, customer_id, campaign_id)
     except GoogleAdsException as ex:
         print(
             f'Request with ID "{ex.request_id}" failed with status '
@@ -50,11 +50,11 @@ def main(client, customer_id, campaign_id):
                     print(f"\t\tOn field: {field_path_element.field_name}")
         sys.exit(1)
     else:
-        _print_results(client, ad_group_response)
+        print_results(client, ad_group_response)
 
 
 # [START handle_partial_failure]
-def _create_ad_groups(client, customer_id, campaign_id):
+def create_ad_groups(client, customer_id, campaign_id):
     """Creates three Ad Groups, two of which intentionally generate errors.
 
     Args:
@@ -101,7 +101,7 @@ def _create_ad_groups(client, customer_id, campaign_id):
 
 
 # [START handle_partial_failure_1]
-def _is_partial_failure_error_present(response):
+def is_partial_failure_error_present(response):
     """Checks whether a response message has a partial failure error.
 
     In Python the partial_failure_error attr is always present on a response
@@ -123,7 +123,7 @@ def _is_partial_failure_error_present(response):
 
 
 # [START handle_partial_failure_2]
-def _print_results(client, response):
+def print_results(client, response):
     """Prints partial failure errors and success messages from a response.
 
     This function shows how to retrieve partial_failure errors from a response
@@ -161,7 +161,7 @@ def _print_results(client, response):
         response: a MutateAdGroupsResponse instance.
     """
     # Check for existence of any partial failures in the response.
-    if _is_partial_failure_error_present(response):
+    if is_partial_failure_error_present(response):
         print("Partial failures occurred. Details will be shown below.\n")
         # Prints the details of the partial failure errors.
         partial_failure = getattr(response, "partial_failure_error", None)
@@ -207,7 +207,7 @@ def _print_results(client, response):
 if __name__ == "__main__":
     # GoogleAdsClient will read the google-ads.yaml configuration file in the
     # home directory if none is specified.
-    googleads_client = GoogleAdsClient.load_from_storage(version="v9")
+    googleads_client = GoogleAdsClient.load_from_storage(version="v11")
 
     parser = argparse.ArgumentParser(
         description="Adds an ad group for specified customer and campaign id."

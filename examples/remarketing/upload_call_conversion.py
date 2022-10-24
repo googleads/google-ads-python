@@ -92,7 +92,7 @@ def main(
     # Print any partial errors returned.
     if upload_call_conversions_response.partial_failure_error:
         print(
-            "Partial error ocurred: "
+            "Partial error occurred: "
             f"'{upload_call_conversions_response.partial_failure_error.message}'"
         )
 
@@ -112,7 +112,7 @@ def main(
 if __name__ == "__main__":
     # GoogleAdsClient will read the google-ads.yaml configuration file in the
     # home directory if none is specified.
-    googleads_client = GoogleAdsClient.load_from_storage(version="v9")
+    googleads_client = GoogleAdsClient.load_from_storage(version="v11")
 
     parser = argparse.ArgumentParser(
         description="Imports offline call conversion values for calls related "

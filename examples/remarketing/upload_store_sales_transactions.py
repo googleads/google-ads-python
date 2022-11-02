@@ -436,9 +436,7 @@ def build_offline_user_data_job_operations(
     address_identifier.address_info.hashed_first_name = normalize_and_hash(
         "John"
     )
-    address_identifier.address_info.hashed_last_name = normalize_and_hash(
-        "Doe"
-    )
+    address_identifier.address_info.hashed_last_name = normalize_and_hash("Doe")
     # Country and zip codes are sent in plain text.
     address_identifier.address_info.country_code = "US"
     address_identifier.address_info.postal_code = "10011"
@@ -567,7 +565,7 @@ def check_job_status(client, customer_id, offline_user_data_job_resource_name):
 if __name__ == "__main__":
     # GoogleAdsClient will read the google-ads.yaml configuration file in the
     # home directory if none is specified.
-    googleads_client = GoogleAdsClient.load_from_storage(version="v11")
+    googleads_client = GoogleAdsClient.load_from_storage(version="v12")
 
     parser = argparse.ArgumentParser(
         description="This example uploads offline data for store sales "

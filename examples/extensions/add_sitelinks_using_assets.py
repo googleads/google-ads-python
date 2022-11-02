@@ -36,9 +36,7 @@ def main(client, customer_id, campaign_id):
     # Creates sitelink assets.
     resource_names = create_sitelink_assets(client, customer_id, campaign_id)
     # Associates the sitelinks at the campaign level.
-    link_sitelinks_to_campaign(
-        client, customer_id, campaign_id, resource_names
-    )
+    link_sitelinks_to_campaign(client, customer_id, campaign_id, resource_names)
 
 
 def create_sitelink_assets(client, customer_id, campaign_id):
@@ -141,7 +139,7 @@ def link_sitelinks_to_campaign(
 if __name__ == "__main__":
     # GoogleAdsClient will read the google-ads.yaml configuration file in the
     # home directory if none is specified.
-    googleads_client = GoogleAdsClient.load_from_storage(version="v11")
+    googleads_client = GoogleAdsClient.load_from_storage(version="v12")
 
     parser = argparse.ArgumentParser(
         description="Adds sitelinks to a campaign using feed services."

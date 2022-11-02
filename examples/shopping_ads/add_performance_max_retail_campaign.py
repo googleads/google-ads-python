@@ -66,7 +66,11 @@ _next_temp_id = int(_ASSET_GROUP_TEMPORARY_ID) - 1
 
 # [START add_performance_max_retail_campaign]
 def main(
-    client, customer_id, merchant_center_account_id, sales_country, final_url,
+    client,
+    customer_id,
+    merchant_center_account_id,
+    sales_country,
+    final_url,
 ):
     """The main method that creates all necessary entities for the example.
 
@@ -93,11 +97,22 @@ def main(
     #
     # Create the headlines.
     headline_asset_resource_names = create_multiple_text_assets(
-        client, customer_id, ["Travel", "Travel Reviews", "Book travel",],
+        client,
+        customer_id,
+        [
+            "Travel",
+            "Travel Reviews",
+            "Book travel",
+        ],
     )
     # Create the descriptions.
     description_asset_resource_names = create_multiple_text_assets(
-        client, customer_id, ["Take to the air!", "Fly to the sky!",],
+        client,
+        customer_id,
+        [
+            "Take to the air!",
+            "Fly to the sky!",
+        ],
     )
 
     # The below methods create and return MutateOperations that we later
@@ -108,13 +123,20 @@ def main(
     # successfully or fail entirely, leaving no orphaned entities. See:
     # https://developers.google.com/google-ads/api/docs/mutating/overview
     campaign_budget_operation = create_campaign_budget_operation(
-        client, customer_id,
+        client,
+        customer_id,
     )
-    performance_max_campaign_operation = create_performance_max_campaign_operation(
-        client, customer_id, merchant_center_account_id, sales_country,
+    performance_max_campaign_operation = (
+        create_performance_max_campaign_operation(
+            client,
+            customer_id,
+            merchant_center_account_id,
+            sales_country,
+        )
     )
     campaign_criterion_operations = create_campaign_criterion_operations(
-        client, customer_id,
+        client,
+        customer_id,
     )
     asset_group_operation = create_asset_group_operation(
         client, customer_id, final_url
@@ -122,14 +144,18 @@ def main(
     listing_group_filter_operation = create_listing_group_filter_operation(
         client, customer_id
     )
-    asset_and_asset_group_asset_operations = create_asset_and_asset_group_asset_operations(
-        client,
-        customer_id,
-        headline_asset_resource_names,
-        description_asset_resource_names,
+    asset_and_asset_group_asset_operations = (
+        create_asset_and_asset_group_asset_operations(
+            client,
+            customer_id,
+            headline_asset_resource_names,
+            description_asset_resource_names,
+        )
     )
     conversion_goal_operations = create_conversion_goal_operations(
-        client, customer_id, customer_conversion_goals,
+        client,
+        customer_id,
+        customer_conversion_goals,
     )
 
     # Send the operations in a single Mutate request.
@@ -155,7 +181,8 @@ def main(
 
 # [START add_performance_max_retail_campaign_2]
 def create_campaign_budget_operation(
-    client, customer_id,
+    client,
+    customer_id,
 ):
     """Creates a MutateOperation that creates a new CampaignBudget.
 
@@ -193,7 +220,10 @@ def create_campaign_budget_operation(
 
 # [START add_performance_max_retail_campaign_3]
 def create_performance_max_campaign_operation(
-    client, customer_id, merchant_center_account_id, sales_country,
+    client,
+    customer_id,
+    merchant_center_account_id,
+    sales_country,
 ):
     """Creates a MutateOperation that creates a new Performance Max campaign.
 
@@ -274,7 +304,8 @@ def create_performance_max_campaign_operation(
 
 # [START add_performance_max_retail_campaign_4]
 def create_campaign_criterion_operations(
-    client, customer_id,
+    client,
+    customer_id,
 ):
     """Creates a list of MutateOperations that create new campaign criteria.
 
@@ -303,8 +334,8 @@ def create_campaign_criterion_operations(
     )
     # Adds one positive location target for New York City (ID=1023191),
     # specifically adding the positive criteria before the negative one.
-    campaign_criterion.location.geo_target_constant = geo_target_constant_service.geo_target_constant_path(
-        "1023191"
+    campaign_criterion.location.geo_target_constant = (
+        geo_target_constant_service.geo_target_constant_path("1023191")
     )
     campaign_criterion.negative = False
     operations.append(mutate_operation)
@@ -315,8 +346,8 @@ def create_campaign_criterion_operations(
     campaign_criterion.campaign = campaign_service.campaign_path(
         customer_id, _PERFORMANCE_MAX_CAMPAIGN_TEMPORARY_ID
     )
-    campaign_criterion.location.geo_target_constant = geo_target_constant_service.geo_target_constant_path(
-        "1022762"
+    campaign_criterion.location.geo_target_constant = (
+        geo_target_constant_service.geo_target_constant_path("1022762")
     )
     campaign_criterion.negative = True
     operations.append(mutate_operation)
@@ -330,8 +361,8 @@ def create_campaign_criterion_operations(
     # Set the language.
     # For a list of all language codes, see:
     # https://developers.google.com/google-ads/api/reference/data/codes-formats#expandable-7
-    campaign_criterion.language.language_constant = googleads_service.language_constant_path(
-        "1000"
+    campaign_criterion.language.language_constant = (
+        googleads_service.language_constant_path("1000")
     )  # English
     operations.append(mutate_operation)
 
@@ -368,7 +399,8 @@ def create_multiple_text_assets(client, customer_id, texts):
 
     # Send the operations in a single Mutate request.
     response = googleads_service.mutate(
-        customer_id=customer_id, mutate_operations=operations,
+        customer_id=customer_id,
+        mutate_operations=operations,
     )
     asset_resource_names = []
     for result in response.mutate_operation_responses:
@@ -406,7 +438,8 @@ def create_asset_group_operation(client, customer_id, final_url):
     asset_group.final_mobile_urls.append(final_url)
     asset_group.status = client.enums.AssetGroupStatusEnum.PAUSED
     asset_group.resource_name = googleads_service.asset_group_path(
-        customer_id, _ASSET_GROUP_TEMPORARY_ID,
+        customer_id,
+        _ASSET_GROUP_TEMPORARY_ID,
     )
 
     return mutate_operation
@@ -435,7 +468,8 @@ def create_listing_group_filter_operation(client, customer_id):
         mutate_operation.asset_group_listing_group_filter_operation.create
     )
     asset_group_listing_group.asset_group = googleads_service.asset_group_path(
-        customer_id, _ASSET_GROUP_TEMPORARY_ID,
+        customer_id,
+        _ASSET_GROUP_TEMPORARY_ID,
     )
     asset_group_listing_group.type_ = (
         client.enums.ListingGroupFilterTypeEnum.UNIT_INCLUDED
@@ -495,7 +529,8 @@ def create_asset_and_asset_group_asset_operations(
         asset_group_asset = mutate_operation.asset_group_asset_operation.create
         asset_group_asset.field_type = client.enums.AssetFieldTypeEnum.HEADLINE
         asset_group_asset.asset_group = asset_group_service.asset_group_path(
-            customer_id, _ASSET_GROUP_TEMPORARY_ID,
+            customer_id,
+            _ASSET_GROUP_TEMPORARY_ID,
         )
         asset_group_asset.asset = resource_name
         operations.append(mutate_operation)
@@ -508,7 +543,8 @@ def create_asset_and_asset_group_asset_operations(
             client.enums.AssetFieldTypeEnum.DESCRIPTION
         )
         asset_group_asset.asset_group = asset_group_service.asset_group_path(
-            customer_id, _ASSET_GROUP_TEMPORARY_ID,
+            customer_id,
+            _ASSET_GROUP_TEMPORARY_ID,
         )
         asset_group_asset.asset = resource_name
         operations.append(mutate_operation)
@@ -600,7 +636,8 @@ def create_and_link_text_asset(client, customer_id, text, field_type):
     asset_group_asset = mutate_operation.asset_group_asset_operation.create
     asset_group_asset.field_type = field_type
     asset_group_asset.asset_group = asset_group_service.asset_group_path(
-        customer_id, _ASSET_GROUP_TEMPORARY_ID,
+        customer_id,
+        _ASSET_GROUP_TEMPORARY_ID,
     )
     asset_group_asset.asset = asset_service.asset_path(
         customer_id, _next_temp_id
@@ -650,7 +687,8 @@ def create_and_link_image_asset(
     asset_group_asset = mutate_operation.asset_group_asset_operation.create
     asset_group_asset.field_type = field_type
     asset_group_asset.asset_group = asset_group_service.asset_group_path(
-        customer_id, _ASSET_GROUP_TEMPORARY_ID,
+        customer_id,
+        _ASSET_GROUP_TEMPORARY_ID,
     )
     asset_group_asset.asset = asset_service.asset_path(
         customer_id, _next_temp_id
@@ -733,7 +771,9 @@ def get_customer_conversion_goals(client, customer_id):
 
 
 def create_conversion_goal_operations(
-    client, customer_id, customer_conversion_goals,
+    client,
+    customer_id,
+    customer_conversion_goals,
 ):
     """Creates a list of MutateOperations that override customer conversion goals.
 
@@ -760,11 +800,13 @@ def create_conversion_goal_operations(
             mutate_operation.campaign_conversion_goal_operation.update
         )
 
-        campaign_conversion_goal.resource_name = campaign_conversion_goal_service.campaign_conversion_goal_path(
-            customer_id,
-            _PERFORMANCE_MAX_CAMPAIGN_TEMPORARY_ID,
-            customer_conversion_goal["category"].name,
-            customer_conversion_goal["origin"].name,
+        campaign_conversion_goal.resource_name = (
+            campaign_conversion_goal_service.campaign_conversion_goal_path(
+                customer_id,
+                _PERFORMANCE_MAX_CAMPAIGN_TEMPORARY_ID,
+                customer_conversion_goal["category"].name,
+                customer_conversion_goal["origin"].name,
+            )
         )
         # Change the biddability for the campaign conversion goal.
         # Set biddability to True for the desired (category, origin).
@@ -839,7 +881,7 @@ def print_response_details(response):
 if __name__ == "__main__":
     # GoogleAdsClient will read the google-ads.yaml configuration file in the
     # home directory if none is specified.
-    googleads_client = GoogleAdsClient.load_from_storage(version="v11")
+    googleads_client = GoogleAdsClient.load_from_storage(version="v12")
 
     parser = argparse.ArgumentParser(
         description=("Creates a Performance Max retail campaign.")

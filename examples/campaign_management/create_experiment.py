@@ -36,7 +36,7 @@ def main(client, customer_id, base_campaign_id):
         client: an initialized GoogleAdsClient instance.
         customer_id: a client customer ID.
         base_campaign_id: the campaign ID to associate with the control arm of
-            the experiment.
+          the experiment.
     """
     experiment = create_experiment_resource(client, customer_id)
     treatment_arm = create_experiment_arms(
@@ -91,7 +91,7 @@ def create_experiment_arms(client, customer_id, base_campaign_id, experiment):
         client: an initialized GoogleAdsClient instance.
         customer_id: a client customer ID.
         base_campaign_id: the campaign ID to associate with the control arm of
-            the experiment.
+          the experiment.
         experiment: the resource name for an experiment.
 
     Returns:
@@ -108,7 +108,7 @@ def create_experiment_arms(client, customer_id, base_campaign_id, experiment):
     exa_1.campaigns.append(
         campaign_service.campaign_path(customer_id, base_campaign_id)
     )
-    exa_1.trial = experiment
+    exa_1.experiment = experiment
     exa_1.name = "control arm"
     exa_1.traffic_split = 40
     operations.append(operation_1)
@@ -119,7 +119,7 @@ def create_experiment_arms(client, customer_id, base_campaign_id, experiment):
     operation_2 = client.get_type("ExperimentArmOperation")
     exa_2 = operation_2.create
     exa_2.control = False
-    exa_2.trial = experiment
+    exa_2.experiment = experiment
     exa_2.name = "experiment arm"
     exa_2.traffic_split = 60
     operations.append(operation_2)
@@ -215,7 +215,7 @@ def modify_draft_campaign(client, customer_id, draft_campaign):
 if __name__ == "__main__":
     # GoogleAdsClient will read the google-ads.yaml configuration file in the
     # home directory if none is specified.
-    googleads_client = GoogleAdsClient.load_from_storage(version="v11")
+    googleads_client = GoogleAdsClient.load_from_storage(version="v12")
 
     parser = argparse.ArgumentParser(
         description=("Create a campaign experiment based on a campaign draft.")

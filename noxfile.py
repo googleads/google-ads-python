@@ -20,9 +20,9 @@ def tests(session):
     session.install(".")
     # modules for testing
     session.install(
-        "mock>=3.0.0,<4.0.0",
-        "pyfakefs>=3.5,<3.6",
-        "coverage==5.5",
+        "mock>=4.0.3",
+        "pyfakefs>=3.5,<3.7",
+        "coverage==6.5.0",
     )
     session.run(
         "coverage",

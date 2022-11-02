@@ -47,14 +47,10 @@ def main(client, customer_id, feed_item_id):
     )
 
     # Get all campaign IDs associated with the extension feed item.
-    campaign_ids = get_targeted_campaign_ids(
-        client, customer_id, resource_name
-    )
+    campaign_ids = get_targeted_campaign_ids(client, customer_id, resource_name)
 
     # Get all ad group IDs associated with the extension feed item.
-    ad_group_ids = get_targeted_ad_group_ids(
-        client, customer_id, resource_name
-    )
+    ad_group_ids = get_targeted_ad_group_ids(client, customer_id, resource_name)
 
     # Create a new Promotion asset that matches the target extension feed item.
     promotion_asset_resource_name = create_promotion_asset_from_feed(
@@ -413,7 +409,7 @@ def associate_asset_with_ad_groups(
 if __name__ == "__main__":
     # GoogleAdsClient will read the google-ads.yaml configuration file in the
     # home directory if none is specified.
-    googleads_client = GoogleAdsClient.load_from_storage(version="v11")
+    googleads_client = GoogleAdsClient.load_from_storage(version="v12")
 
     parser = argparse.ArgumentParser(
         description="Migrates a feed-based promotion extension to an "

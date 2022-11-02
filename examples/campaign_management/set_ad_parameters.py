@@ -70,9 +70,7 @@ def main(client, customer_id, ad_group_id, criterion_id):
             )
 
 
-def create_ad_parameter(
-    client, resource_name, parameter_index, insertion_text
-):
+def create_ad_parameter(client, resource_name, parameter_index, insertion_text):
     """Creates a new ad parameter create operation and returns it.
 
     There can be a maximum of two ad parameters per ad group criterion, one
@@ -101,7 +99,7 @@ def create_ad_parameter(
 if __name__ == "__main__":
     # GoogleAdsClient will read the google-ads.yaml configuration file in the
     # home directory if none is specified.
-    googleads_client = GoogleAdsClient.load_from_storage(version="v11")
+    googleads_client = GoogleAdsClient.load_from_storage(version="v12")
 
     # Initializes a command line argument parser.
     parser = argparse.ArgumentParser(

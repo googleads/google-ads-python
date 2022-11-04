@@ -204,7 +204,10 @@ class MetadataInterceptorTest(TestCase):
         mock_client_call_details.timeout = 5
         mock_client_call_details.metadata = [
             ("apples", "oranges"),
-            ("x-goog-api-client", "gl-python/3.7.0 grpc/1.45.0 pb/3.21.0",),
+            (
+                "x-goog-api-client",
+                "gl-python/3.7.0 grpc/1.45.0 pb/3.21.0",
+            ),
         ]
         # Create a simple function that just returns the client_call_details
         # so we can make assertions about what was modified in the _intercept

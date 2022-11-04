@@ -56,9 +56,7 @@ def main(
     feed_item_operation = client.get_type("FeedItemOperation")
 
     # Get a map of the FlightPlaceholderFields to FeedAttributes.
-    placeholders_to_feed_attributes_map = get_feed(
-        client, customer_id, feed_id
-    )
+    placeholders_to_feed_attributes_map = get_feed(client, customer_id, feed_id)
 
     # Remove the attribute from the feed item.
     flight_placeholder_field = client.enums.FlightPlaceholderFieldEnum[
@@ -257,7 +255,7 @@ def get_feed_item(client, customer_id, feed_id, feed_item_id):
 if __name__ == "__main__":
     # GoogleAdsClient will read the google-ads.yaml configuration file in the
     # home directory if none is specified.
-    googleads_client = GoogleAdsClient.load_from_storage(version="v11")
+    googleads_client = GoogleAdsClient.load_from_storage(version="v12")
 
     parser = argparse.ArgumentParser(
         description="Removes a feed item attribute value of a feed item in a "

@@ -42,9 +42,7 @@ def main(client, customer_id):
     )
 
     # Sets campaign targeting.
-    set_campaign_targeting_criteria(
-        client, customer_id, campaign_resource_name
-    )
+    set_campaign_targeting_criteria(client, customer_id, campaign_resource_name)
 
     # Creates an Ad Group.
     ad_group_resource_name = create_ad_group(
@@ -297,7 +295,7 @@ def create_ad_text_asset(client, text):
 if __name__ == "__main__":
     # GoogleAdsClient will read the google-ads.yaml configuration file in the
     # home directory if none is specified.
-    googleads_client = GoogleAdsClient.load_from_storage(version="v11")
+    googleads_client = GoogleAdsClient.load_from_storage(version="v12")
 
     parser = argparse.ArgumentParser(
         description=(

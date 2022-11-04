@@ -32,11 +32,11 @@ install_requires = [
 ]
 
 with io.open("README.rst", "r", encoding="utf-8") as readme_file:
-    long_description = readme_file.read()
+  long_description = readme_file.read()
 
 setup(
     name="google-ads",
-    version="18.2.0",
+    version="19.0.0",
     author="Google LLC",
     author_email="googleapis-packages@google.com",
     classifiers=[
@@ -53,15 +53,10 @@ setup(
     python_requires=">=3.7",
     long_description=long_description,
     install_requires=install_requires,
-    extras_require={
-        "tests": [
-            "nox >= 2020.12.31, < 2022.6",
-        ]
-    },
+    extras_require={"tests": ["nox >= 2020.12.31, < 2022.6",]},
     license="Apache 2.0",
     packages=find_packages(
-        exclude=["examples", "examples.*", "tests", "tests.*"]
-    ),
+        exclude=["examples", "examples.*", "tests", "tests.*"]),
     namespace_packages=["google", "google.ads"],
     url="https://github.com/googleads/google-ads-python",
     zip_safe=False,

@@ -40,7 +40,7 @@ class CloudLoggingInterceptor(LoggingInterceptor):
     this is to inherit from the Interceptor class instead, and selectively copy whatever
     logic is needed from the LoggingInterceptor class."""
 
-    def _init__(self, api_version):
+    def __init__(self, api_version):
         """Initializer for the CloudLoggingInterceptor.
 
         Args:

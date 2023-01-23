@@ -63,9 +63,7 @@ def main(client, customer_id, ad_group_id, customizer_attribute_name):
 
 
 # [START add_responsive_search_ad_with_ad_customizer_1]
-def create_customizer_attribute(
-    client, customer_id, customizer_attribute_name
-):
+def create_customizer_attribute(client, customer_id, customizer_attribute_name):
     """Creates a customizer attribute with the given customizer attribute name.
 
     Args:
@@ -212,7 +210,7 @@ def create_responsive_search_ad_with_customization(
 if __name__ == "__main__":
     # GoogleAdsClient will read the google-ads.yaml configuration file in the
     # home directory if none is specified.
-    googleads_client = GoogleAdsClient.load_from_storage(version="v11")
+    googleads_client = GoogleAdsClient.load_from_storage(version="v12")
 
     parser = argparse.ArgumentParser(
         description=(

@@ -264,9 +264,7 @@ def upload_image_asset(client, customer_id, image_url, asset_name):
 
 
 # [START add_merchant_center_dynamic_remarketing_campaign_3]
-def attach_user_list(
-    client, customer_id, ad_group_resource_name, user_list_id
-):
+def attach_user_list(client, customer_id, ad_group_resource_name, user_list_id):
     """Targets a user list with an ad group.
 
     Args:
@@ -303,7 +301,7 @@ def attach_user_list(
 if __name__ == "__main__":
     # GoogleAdsClient will read the google-ads.yaml configuration file in the
     # home directory if none is specified.
-    googleads_client = GoogleAdsClient.load_from_storage(version="v11")
+    googleads_client = GoogleAdsClient.load_from_storage(version="v12")
 
     parser = argparse.ArgumentParser(
         description=(

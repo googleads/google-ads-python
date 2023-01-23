@@ -62,11 +62,10 @@ def main(
             gbraid parameters must be None.
     """
     click_conversion = client.get_type("ClickConversion")
+    conversion_upload_service = client.get_service("ConversionUploadService")
     conversion_action_service = client.get_service("ConversionActionService")
-    click_conversion.conversion_action = (
-        conversion_action_service.conversion_action_path(
-            customer_id, conversion_action_id
-        )
+    click_conversion.conversion_action = conversion_action_service.conversion_action_path(
+        customer_id, conversion_action_id
     )
 
     # Sets the single specified ID field.
@@ -83,21 +82,18 @@ def main(
 
     if conversion_custom_variable_id and conversion_custom_variable_value:
         conversion_custom_variable = client.get_type("CustomVariable")
-        conversion_custom_variable.conversion_custom_variable = (
-            conversion_custom_variable_id
+        conversion_custom_variable.conversion_custom_variable = conversion_upload_service.conversion_custom_variable_path(
+            customer_id, conversion_custom_variable_id
         )
         conversion_custom_variable.value = conversion_custom_variable_value
         click_conversion.custom_variables.append(conversion_custom_variable)
 
-    conversion_upload_service = client.get_service("ConversionUploadService")
     request = client.get_type("UploadClickConversionsRequest")
     request.customer_id = customer_id
     request.conversions.append(click_conversion)
     request.partial_failure = True
-    conversion_upload_response = (
-        conversion_upload_service.upload_click_conversions(
-            request=request,
-        )
+    conversion_upload_response = conversion_upload_service.upload_click_conversions(
+        request=request,
     )
     uploaded_click_conversion = conversion_upload_response.results[0]
     print(
@@ -112,7 +108,7 @@ def main(
 if __name__ == "__main__":
     # GoogleAdsClient will read the google-ads.yaml configuration file in the
     # home directory if none is specified.
-    googleads_client = GoogleAdsClient.load_from_storage(version="v11")
+    googleads_client = GoogleAdsClient.load_from_storage(version="v12")
 
     parser = argparse.ArgumentParser(
         description="Uploads an offline conversion."

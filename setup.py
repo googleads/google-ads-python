@@ -18,25 +18,25 @@ import io
 
 install_requires = [
     "google-auth-oauthlib >= 0.3.0, < 1.0.0",
-    "google-api-core >= 2.8.1, < 3.0.0",
+    "google-api-core == 2.10.1",
     "googleapis-common-protos >= 1.56.4, < 2.0.0",
     # NOTE: Source code for grpcio and grpcio-status exist in the same
     # grpc/grpc monorepo and thus these two dependencies should always
     # have the same version range.
     "grpcio >= 1.38.1, < 2.0.0",
     "grpcio-status >= 1.38.1, < 2.0.0",
-    "proto-plus == 1.22.0",
+    "proto-plus == 1.22.1",
     "PyYAML >= 5.1, < 7.0",
     "setuptools >= 40.3.0",
     "protobuf >= 4.21.5",
 ]
 
 with io.open("README.rst", "r", encoding="utf-8") as readme_file:
-    long_description = readme_file.read()
+  long_description = readme_file.read()
 
 setup(
     name="google-ads",
-    version="18.1.0",
+    version="19.0.0",
     author="Google LLC",
     author_email="googleapis-packages@google.com",
     classifiers=[
@@ -56,8 +56,7 @@ setup(
     extras_require={"tests": ["nox >= 2020.12.31, < 2022.6",]},
     license="Apache 2.0",
     packages=find_packages(
-        exclude=["examples", "examples.*", "tests", "tests.*"]
-    ),
+        exclude=["examples", "examples.*", "tests", "tests.*"]),
     namespace_packages=["google", "google.ads"],
     url="https://github.com/googleads/google-ads-python",
     zip_safe=False,

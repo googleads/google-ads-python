@@ -13,9 +13,9 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 """This example illustrates how to get all campaigns and log details to
+
 Google Cloud Logging using a custom logging interceptor.
 """
-
 
 import argparse
 import sys
@@ -24,8 +24,7 @@ from google.ads.googleads.client import GoogleAdsClient
 from google.ads.googleads.errors import GoogleAdsException
 from cloud_logging_interceptor import CloudLoggingInterceptor
 
-
-_API_VERSION = "v11"
+_API_VERSION = "v12"
 
 
 def main(client, customer_id):

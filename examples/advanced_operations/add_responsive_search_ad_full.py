@@ -83,30 +83,30 @@ def main(client, customer_id):
   """
     # Step 1.1 -- Create budget.
     # Create a budget, which can be shared by multiple campaigns.
-    campaign_budget = _create_campaign_budget(client, customer_id)
+    campaign_budget = create_campaign_budget(client, customer_id)
 
     # Step 1.2 -- Create campaign.
-    campaign_id = _create_campaign(client, customer_id, campaign_budget)
+    campaign_id = create_campaign(client, customer_id, campaign_budget)
 
     # Step 2 -- Create an ad group.
-    ad_group_id = _create_ad_group(client, customer_id, campaign_id)
+    ad_group_id = create_ad_group(client, customer_id, campaign_id)
 
     # Step 3 -- Create an ad group ad
-    _create_ad_group_ad(client, customer_id, ad_group_id)
+    create_ad_group_ad(client, customer_id, ad_group_id)
 
     # Step 4 -- Add Keywords
-    _add_keywords(client, customer_id, ad_group_id)
+    add_keywords(client, customer_id, ad_group_id)
 
     # Step 5 -- Add Geo Targeting
-    _add_geo_targeting(client, customer_id, campaign_id)
+    add_geo_targeting(client, customer_id, campaign_id)
 
     # Step 6 -- Add Image Extensions
     # This is optional but recommended for RSA.
     if _ADD_IMAGE_EXTENSION:
-        _add_images(client, customer_id, campaign_id)
+        add_images(client, customer_id, campaign_id)
 
 
-def _create_campaign_budget(client, customer_id):
+def create_campaign_budget(client, customer_id):
     """Creates campaign budget resource.
     
     Args:
@@ -135,7 +135,7 @@ def _create_campaign_budget(client, customer_id):
     return campaign_budget_resource
 
 
-def _create_campaign(client, customer_id, campaign_budget):
+def create_campaign(client, customer_id, campaign_budget):
     """Creates campaign resource.
     
     Args:
@@ -191,7 +191,7 @@ def _create_campaign(client, customer_id, campaign_budget):
     return campaign_id
 
 
-def _create_ad_group(client, customer_id, campaign_id):
+def create_ad_group(client, customer_id, campaign_id):
     """Creates ad group.
     
     Args:
@@ -224,7 +224,7 @@ def _create_ad_group(client, customer_id, campaign_id):
     return ad_group_id
 
 
-def _create_ad_group_ad(client, customer_id, ad_group_id):
+def create_ad_group_ad(client, customer_id, ad_group_id):
     """Creates ad group ad.
     
     Args:
@@ -298,7 +298,7 @@ def _create_ad_group_ad(client, customer_id, ad_group_id):
     return ad_id
 
 
-def _add_keywords(client, customer_id, ad_group_id):
+def add_keywords(client, customer_id, ad_group_id):
     """Creates keywords.
 
     Creates 3 keyword match types: EXACT, PHRASE, and BROAD.
@@ -399,7 +399,7 @@ def _add_keywords(client, customer_id, ad_group_id):
     return
 
 
-def _add_geo_targeting(client, customer_id, campaign_id):
+def add_geo_targeting(client, customer_id, campaign_id):
     """Creates geo targets.
 
     Args:
@@ -462,7 +462,7 @@ def _add_geo_targeting(client, customer_id, campaign_id):
     return
 
 
-def _add_images(client, customer_id, campaign_id):
+def add_images(client, customer_id, campaign_id):
     # Step 6.1 - Add Image Asset.
 
     # Download image from URL.

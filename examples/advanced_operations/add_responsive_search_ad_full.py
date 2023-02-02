@@ -281,9 +281,6 @@ def create_ad_group_ad(client, customer_id, ad_group_resource_name):
             f"Created responsive search ad with resource name "
             f'"{result.resource_name}".'
         )
-        ad_resource_name = result.resource_name.split("/")[-1]
-
-    return ad_resource_name
 
 
 def add_keywords(client, customer_id, ad_group_resource_name):

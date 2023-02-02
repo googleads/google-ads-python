@@ -50,16 +50,17 @@ _LOCALE = "es"
 # https://developers.google.com/google-ads/api/reference/data/geotargets
 _COUNTRY_CODE = "AR"
 
-# To add image extensions, the account has to follow these requirements:
-# https://support.google.com/google-ads/answer/9566341
-# If the account does not meet the requirements, set below variable to False.
-_ADD_IMAGE_EXTENSION = True
-
-"""Support function"""
-
 
 def create_ad_text_asset(client, text, pinned_field=None):
-    """Create an AdTextAsset."""
+    """Create an AdTextAsset.
+    Args:
+        client: an initialized GoogleAdsClient instance.
+        text: text for headlines and descriptions.
+        pinned_field: to pin a text asset so it always shows in the ad.
+    
+    Returns:
+        An ad text asset.
+    """
     ad_text_asset = client.get_type("AdTextAsset")
     ad_text_asset.text = text
     if pinned_field:
@@ -67,43 +68,36 @@ def create_ad_text_asset(client, text, pinned_field=None):
     return ad_text_asset
 
 
-"""6 steps to create a Responsive Search Ad (RSA)."""
-
-
-def main(client, customer_id):
+def main(client, customer_id, omit_image_extensions):
     """
-  The main method that creates all necessary entities for the example.
+    The main method that creates all necessary entities for the example.
 
-  Args:
-      client: an initialized GoogleAdsClient instance.
-      customer_id: a client customer ID.
+    Args:
+        client: an initialized GoogleAdsClient instance.
+        customer_id: a client customer ID.
 
-  Returns:
-      A responsive search ad with all settings required to run campaign.
-  """
-    # Step 1.1 -- Create budget.
+    Returns:
+        A responsive search ad with all settings required to run campaign.
+    """
     # Create a budget, which can be shared by multiple campaigns.
     campaign_budget = create_campaign_budget(client, customer_id)
 
-    # Step 1.2 -- Create campaign.
-    campaign_id = create_campaign(client, customer_id, campaign_budget)
+    campaign_resource_name = create_campaign(client, customer_id, campaign_budget)
 
-    # Step 2 -- Create an ad group.
-    ad_group_id = create_ad_group(client, customer_id, campaign_id)
+    ad_group_resource_name = create_ad_group(client, customer_id, campaign_resource_name)
 
-    # Step 3 -- Create an ad group ad
-    create_ad_group_ad(client, customer_id, ad_group_id)
+    create_ad_group_ad(client, customer_id, ad_group_resource_name)
 
-    # Step 4 -- Add Keywords
-    add_keywords(client, customer_id, ad_group_id)
+    add_keywords(client, customer_id, ad_group_resource_name)
 
-    # Step 5 -- Add Geo Targeting
-    add_geo_targeting(client, customer_id, campaign_id)
+    add_geo_targeting(client, customer_id, campaign_resource_name)
 
-    # Step 6 -- Add Image Extensions
     # This is optional but recommended for RSA.
-    if _ADD_IMAGE_EXTENSION:
-        add_images(client, customer_id, campaign_id)
+    # To add image extensions, the account has to follow these requirements:
+    # https://support.google.com/google-ads/answer/9566341
+    # If the account meets the requirements, set below variable to True.
+    if omit_image_extensions:
+        add_images(client, customer_id, campaign_resource_name)
 
 
 def create_campaign_budget(client, customer_id):
@@ -116,7 +110,6 @@ def create_campaign_budget(client, customer_id):
     Returns:
       Campaign budget resource name.
     """
-    # Step 1.1 -- Create budget.
     # Create a budget, which can be shared by multiple campaigns.
     campaign_budget_service = client.get_service("CampaignBudgetService")
     campaign_budget_operation = client.get_type("CampaignBudgetOperation")
@@ -130,9 +123,7 @@ def create_campaign_budget(client, customer_id):
         customer_id=customer_id, operations=[campaign_budget_operation]
     )
 
-    campaign_budget_resource = campaign_budget_response.results[0].resource_name
-
-    return campaign_budget_resource
+    return campaign_budget_response.results[0].resource_name
 
 
 def create_campaign(client, customer_id, campaign_budget):
@@ -146,7 +137,6 @@ def create_campaign(client, customer_id, campaign_budget):
     Returns:
       Campaign resource name.
     """
-    # Step 1.2 -- Create campaign.
     campaign_service = client.get_service("CampaignService")
     campaign_operation = client.get_type("CampaignOperation")
     campaign = campaign_operation.create
@@ -186,30 +176,29 @@ def create_campaign(client, customer_id, campaign_budget):
     campaign_response = campaign_service.mutate_campaigns(
         customer_id=customer_id, operations=[campaign_operation]
     )
-    print(f"Created campaign {campaign_response.results[0].resource_name}.")
-    campaign_id = campaign_response.results[0].resource_name.split("/")[-1]
-    return campaign_id
+    resource_name = campaign_response.results[0].resource_name
+    print(f"Created campaign {resource_name}.")
+    return resource_name
 
 
-def create_ad_group(client, customer_id, campaign_id):
+def create_ad_group(client, customer_id, campaign_resource_name):
     """Creates ad group.
     
     Args:
       client: an initialized GoogleAdsClient instance.
       customer_id: a client customer ID.
-      campaign_id: a campaign ID.
+      campaign_resource_name: a campaign resource name.
     
     Returns:
       Ad group ID.
     """
-    campaign_service = client.get_service("CampaignService")
     ad_group_service = client.get_service("AdGroupService")
 
     ad_group_operation = client.get_type("AdGroupOperation")
     ad_group = ad_group_operation.create
     ad_group.name = f"Testing RSA via API {uuid.uuid4()}"
     ad_group.status = client.enums.AdGroupStatusEnum.ENABLED
-    ad_group.campaign = campaign_service.campaign_path(customer_id, campaign_id)
+    ad_group.campaign = campaign_resource_name
     ad_group.type_ = client.enums.AdGroupTypeEnum.SEARCH_STANDARD
 
     # If you want to set up a max CPC bid uncomment line below.
@@ -219,29 +208,28 @@ def create_ad_group(client, customer_id, campaign_id):
     ad_group_response = ad_group_service.mutate_ad_groups(
         customer_id=customer_id, operations=[ad_group_operation]
     )
-    print(f"Created ad group {ad_group_response.results[0].resource_name}.")
-    ad_group_id = ad_group_response.results[0].resource_name.split("/")[-1]
-    return ad_group_id
+    ad_group_resource_name = ad_group_response.results[0].resource_name
+    print(f"Created ad group {ad_group_resource_name}.")
+    return ad_group_resource_name
 
 
-def create_ad_group_ad(client, customer_id, ad_group_id):
+def create_ad_group_ad(client, customer_id, ad_group_resource_name):
     """Creates ad group ad.
     
     Args:
       client: an initialized GoogleAdsClient instance.
       customer_id: a client customer ID.
-      ad_group_id: an ad group ID.
+      ad_group_resource_name: an ad group resource name.
     
     Returns:
-      Ad group ad ID.
+      Ad group ad resource name.
     """
     ad_group_ad_service = client.get_service("AdGroupAdService")
-    ad_group_service = client.get_service("AdGroupService")
 
     ad_group_ad_operation = client.get_type("AdGroupAdOperation")
     ad_group_ad = ad_group_ad_operation.create
     ad_group_ad.status = client.enums.AdGroupAdStatusEnum.ENABLED
-    ad_group_ad.ad_group = ad_group_service.ad_group_path(customer_id, ad_group_id)
+    ad_group_ad.ad_group = ad_group_resource_name
 
     # Set responsive search ad info.
     # https://developers.google.com/google-ads/api/reference/rpc/v11/ResponsiveSearchAdInfo
@@ -293,12 +281,12 @@ def create_ad_group_ad(client, customer_id, ad_group_id):
             f"Created responsive search ad with resource name "
             f'"{result.resource_name}".'
         )
-        ad_id = result.resource_name.split("/")[-1]
+        ad_resource_name = result.resource_name.split("/")[-1]
 
-    return ad_id
+    return ad_resource_name
 
 
-def add_keywords(client, customer_id, ad_group_id):
+def add_keywords(client, customer_id, ad_group_resource_name):
     """Creates keywords.
 
     Creates 3 keyword match types: EXACT, PHRASE, and BROAD.
@@ -311,29 +299,20 @@ def add_keywords(client, customer_id, ad_group_id):
     Args:
       client: an initialized GoogleAdsClient instance.
       customer_id: a client customer ID.
-      ad_group_id: an ad group ID.
-    
-    Returns:
-      Keywords created.
+      ad_group_resource_name: an ad group resource name.
     """
     ad_group_criterion_service = client.get_service("AdGroupCriterionService")
-    ad_group_service = client.get_service("AdGroupService")
 
     operations = []
     # Create keyword 1.
     ad_group_criterion_operation = client.get_type("AdGroupCriterionOperation")
     ad_group_criterion = ad_group_criterion_operation.create
-    ad_group_criterion.ad_group = ad_group_service.ad_group_path(
-        customer_id, ad_group_id
-    )
+    ad_group_criterion.ad_group = ad_group_resource_name
     ad_group_criterion.status = client.enums.AdGroupCriterionStatusEnum.ENABLED
     ad_group_criterion.keyword.text = _KEYWORD_TEXT_EXACT_1
     ad_group_criterion.keyword.match_type = client.enums.KeywordMatchTypeEnum.EXACT
 
-    # Optional field
-    # All fields can be referenced from the protos directly.
-    # The protos are located in subdirectories under:
-    # https://github.com/googleapis/googleapis/tree/master/google/ads/googleads
+    # Uncomment the below line if you want to change this keyword to a negative target.
     # ad_group_criterion.negative = True
 
     # Optional repeated field
@@ -345,17 +324,12 @@ def add_keywords(client, customer_id, ad_group_id):
     # Create keyword 2.
     ad_group_criterion_operation = client.get_type("AdGroupCriterionOperation")
     ad_group_criterion = ad_group_criterion_operation.create
-    ad_group_criterion.ad_group = ad_group_service.ad_group_path(
-        customer_id, ad_group_id
-    )
+    ad_group_criterion.ad_group = ad_group_resource_name
     ad_group_criterion.status = client.enums.AdGroupCriterionStatusEnum.ENABLED
     ad_group_criterion.keyword.text = _KEYWORD_TEXT_PHRASE_1
     ad_group_criterion.keyword.match_type = client.enums.KeywordMatchTypeEnum.PHRASE
 
-    # Optional field
-    # All fields can be referenced from the protos directly.
-    # The protos are located in subdirectories under:
-    # https://github.com/googleapis/googleapis/tree/master/google/ads/googleads
+    # Uncomment the below line if you want to change this keyword to a negative target.
     # ad_group_criterion.negative = True
 
     # Optional repeated field
@@ -367,17 +341,12 @@ def add_keywords(client, customer_id, ad_group_id):
     # Create keyword 3.
     ad_group_criterion_operation = client.get_type("AdGroupCriterionOperation")
     ad_group_criterion = ad_group_criterion_operation.create
-    ad_group_criterion.ad_group = ad_group_service.ad_group_path(
-        customer_id, ad_group_id
-    )
+    ad_group_criterion.ad_group = ad_group_resource_name
     ad_group_criterion.status = client.enums.AdGroupCriterionStatusEnum.ENABLED
     ad_group_criterion.keyword.text = _KEYWORD_TEXT_BROAD_1
     ad_group_criterion.keyword.match_type = client.enums.KeywordMatchTypeEnum.BROAD
 
-    # Optional field
-    # All fields can be referenced from the protos directly.
-    # The protos are located in subdirectories under:
-    # https://github.com/googleapis/googleapis/tree/master/google/ads/googleads
+    # Uncomment the below line if you want to change this keyword to a negative target.
     # ad_group_criterion.negative = True
 
     # Optional repeated field
@@ -393,25 +362,22 @@ def add_keywords(client, customer_id, ad_group_id):
     ad_group_criterion_response = ad_group_criterion_service.mutate_ad_group_criteria(
         customer_id=customer_id, operations=[*campaign_criterion_operations],
     )
-    for results in ad_group_criterion_response.results:
-        print("Created keyword " f"{results.resource_name}.")
-
-    return
+    for result in ad_group_criterion_response.results:
+        print("Created keyword " f"{result.resource_name}.")
 
 
-def add_geo_targeting(client, customer_id, campaign_id):
+def add_geo_targeting(client, customer_id, campaign_resource_name):
     """Creates geo targets.
 
     Args:
       client: an initialized GoogleAdsClient instance.
       customer_id: a client customer ID.
-      campaign_id: an campaign ID.
+      campaign_resource_name: an campaign resource name.
     
     Returns:
       Geo targets.
     """
     geo_target_constant_service = client.get_service("GeoTargetConstantService")
-    campaign_service = client.get_service("CampaignService")
 
     # Search by location names from
     # GeoTargetConstantService.suggest_geo_target_constants() and directly
@@ -443,9 +409,7 @@ def add_geo_targeting(client, customer_id, campaign_id):
         # Create the campaign criterion for location targeting.
         campaign_criterion_operation = client.get_type("CampaignCriterionOperation")
         campaign_criterion = campaign_criterion_operation.create
-        campaign_criterion.campaign = campaign_service.campaign_path(
-            customer_id, campaign_id
-        )
+        campaign_criterion.campaign = campaign_resource_name
         campaign_criterion.location.geo_target_constant = (
             geo_target_constant.resource_name
         )
@@ -459,14 +423,12 @@ def add_geo_targeting(client, customer_id, campaign_id):
     for result in campaign_criterion_response.results:
         print(f'Added campaign criterion "{result.resource_name}".')
 
-    return
 
-
-def add_images(client, customer_id, campaign_id):
+def add_images(client, customer_id, campaign_resource_name):
     # Step 6.1 - Add Image Asset.
 
-    # Download image from URL.
-    url = "https://img.cppng.com/download/2020-06/66912-logo-now-google-plus-search-free-transparent-image-hd.png"
+    # Download PNG image from URL.
+    url = "https://gaagl.page.link/bjYi"
     image_content = requests.get(url).content
 
     asset_service = client.get_service("AssetService")
@@ -498,15 +460,13 @@ def add_images(client, customer_id, campaign_id):
     for row in mutate_asset_response.results:
         print(f"\tResource name: {row.resource_name}")
 
-    image_asset_id = mutate_asset_response.results[0].resource_name.split("/")[-1]
+    image_asset_resource_name = mutate_asset_response.results[0].resource_name
 
     # Step 6.2 - Create Image Extension
     extension_feed_item_service = client.get_service("ExtensionFeedItemService")
     extension_feed_item_operation = client.get_type("ExtensionFeedItemOperation")
     extension_feed_item = extension_feed_item_operation.create
-    extension_feed_item.image_feed_item.image_asset = client.get_service(
-        "AssetService"
-    ).asset_path(customer_id, image_asset_id)
+    extension_feed_item.image_feed_item.image_asset = image_asset_resource_name
 
     extension_feed_response = extension_feed_item_service.mutate_extension_feed_items(
         customer_id=customer_id, operations=[extension_feed_item_operation]
@@ -523,9 +483,7 @@ def add_images(client, customer_id, campaign_id):
         "CampaignExtensionSettingOperation"
     )
     ces = campaign_extension_setting_operation.create
-    ces.campaign = client.get_service("CampaignService").campaign_path(
-        customer_id, campaign_id
-    )
+    ces.campaign = campaign_resource_name
     ces.extension_type = client.enums.ExtensionTypeEnum.IMAGE
     ces.extension_feed_items.append(image_resource_name)
 
@@ -537,7 +495,6 @@ def add_images(client, customer_id, campaign_id):
         "Created a campaign extension setting with resource name: "
         f"'{campaign_extension_response.results[0].resource_name}'"
     )
-    return
 
 
 if __name__ == "__main__":
@@ -555,6 +512,13 @@ if __name__ == "__main__":
         type=str,
         required=True,
         help="The Google Ads customer ID.",
+    )
+    parser.add_argument(
+        "-o",
+        "--omit_image_extensions",
+        type=bool,
+        default=False,
+        help="Whether or not the campaign will use image extensions.",
     )
 
     args = parser.parse_args()

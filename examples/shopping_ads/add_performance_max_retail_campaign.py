@@ -266,7 +266,7 @@ def create_performance_max_campaign_operation(
     # even if you do not want to use it.
     campaign.maximize_conversion_value.target_roas = None
     # Below is what you would use if you want to maximize conversions
-    # campaign.maximize_conversions.target_cpa = None
+    # campaign.maximize_conversions.target_cpa_micros = None
     # The target CPA is optional. This is the average amount that you would
     # like to spend per conversion action.
 
@@ -881,7 +881,7 @@ def print_response_details(response):
 if __name__ == "__main__":
     # GoogleAdsClient will read the google-ads.yaml configuration file in the
     # home directory if none is specified.
-    googleads_client = GoogleAdsClient.load_from_storage(version="v12")
+    googleads_client = GoogleAdsClient.load_from_storage(version="v13")
 
     parser = argparse.ArgumentParser(
         description=("Creates a Performance Max retail campaign.")

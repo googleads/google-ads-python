@@ -177,7 +177,7 @@ def cache_next_page_token(page_tokens, page, page_number):
 if __name__ == "__main__":
     # GoogleAdsClient will read the google-ads.yaml configuration file in the
     # home directory if none is specified.
-    googleads_client = GoogleAdsClient.load_from_storage(version="v12")
+    googleads_client = GoogleAdsClient.load_from_storage(version="v13")
 
     parser = argparse.ArgumentParser(
         description=(
@@ -198,8 +198,7 @@ if __name__ == "__main__":
 
     try:
         main(
-            googleads_client,
-            args.customer_id,
+            googleads_client, args.customer_id,
         )
     except GoogleAdsException as ex:
         print(

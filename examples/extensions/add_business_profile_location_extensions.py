@@ -138,7 +138,7 @@ def main(
 
         if feed_mapping is None:
             number_of_attempts += 1
-            sleep_seconds = 5 * (2**number_of_attempts)
+            sleep_seconds = 5 * (2 ** number_of_attempts)
 
             print(
                 f"Attempt #{number_of_attempts} was not successful. "
@@ -357,7 +357,7 @@ def get_business_profile_feed_mapping(client, customer_id, feed_resource_name):
 if __name__ == "__main__":
     # GoogleAdsClient will read the google-ads.yaml configuration file in the
     # home directory if none is specified.
-    googleads_client = GoogleAdsClient.load_from_storage(version="v12")
+    googleads_client = GoogleAdsClient.load_from_storage(version="v13")
 
     parser = argparse.ArgumentParser(
         description="Adds a feed that syncs feed items from a Business Profile "

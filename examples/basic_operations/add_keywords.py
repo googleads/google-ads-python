@@ -48,11 +48,8 @@ def main(client, customer_id, ad_group_id, keyword_text):
     # ad_group_criterion.final_urls.append('https://www.example.com')
 
     # Add keyword
-    ad_group_criterion_response = (
-        ad_group_criterion_service.mutate_ad_group_criteria(
-            customer_id=customer_id,
-            operations=[ad_group_criterion_operation],
-        )
+    ad_group_criterion_response = ad_group_criterion_service.mutate_ad_group_criteria(
+        customer_id=customer_id, operations=[ad_group_criterion_operation],
     )
 
     print(
@@ -64,7 +61,7 @@ def main(client, customer_id, ad_group_id, keyword_text):
 if __name__ == "__main__":
     # GoogleAdsClient will read the google-ads.yaml configuration file in the
     # home directory if none is specified.
-    googleads_client = GoogleAdsClient.load_from_storage(version="v12")
+    googleads_client = GoogleAdsClient.load_from_storage(version="v13")
 
     parser = argparse.ArgumentParser(
         description=(

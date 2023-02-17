@@ -40,8 +40,7 @@ def main(client, customer_id, page_size, ad_group_id=None):
           ad_group_bid_modifier.hotel_length_of_stay.max_nights,
           ad_group_bid_modifier.hotel_check_in_day.day_of_week,
           ad_group_bid_modifier.hotel_check_in_date_range.start_date,
-          ad_group_bid_modifier.hotel_check_in_date_range.end_date,
-          ad_group_bid_modifier.preferred_content.type
+          ad_group_bid_modifier.hotel_check_in_date_range.end_date
         FROM ad_group_bid_modifier"""
 
     if ad_group_id:
@@ -88,8 +87,6 @@ def main(client, customer_id, page_size, ad_group_id=None):
                 f"Min Nights: {modifier.hotel_length_of_stay.min_nights}, "
                 f"Max Nights: {modifier.hotel_length_of_stay.max_nights}"
             )
-        elif criterion_field == "preferred_content":
-            criterion_details += f"Type: {modifier.preferred_content.type_}"
         else:
             criterion_details = "  - No Criterion type found."
 
@@ -99,7 +96,7 @@ def main(client, customer_id, page_size, ad_group_id=None):
 if __name__ == "__main__":
     # GoogleAdsClient will read the google-ads.yaml configuration file in the
     # home directory if none is specified.
-    googleads_client = GoogleAdsClient.load_from_storage(version="v12")
+    googleads_client = GoogleAdsClient.load_from_storage(version="v13")
 
     parser = argparse.ArgumentParser(
         description="List ad group bid modifiers for specified customer."

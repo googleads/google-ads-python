@@ -183,8 +183,7 @@ def main(client, customer_id, ad_group_id, replace_existing_tree):
     # Biddable Unit node: (Brand other node)
     # * CPC bid: $0.05
     client.copy_from(
-        brand_dimension_info.product_brand,
-        client.get_type("ProductBrandInfo"),
+        brand_dimension_info.product_brand, client.get_type("ProductBrandInfo"),
     )
     operations.append(
         create_listing_group_unit_biddable(
@@ -198,10 +197,8 @@ def main(client, customer_id, ad_group_id, replace_existing_tree):
     )
 
     # Add the ad group criteria.
-    mutate_ad_group_criteria_response = (
-        ad_group_criterion_service.mutate_ad_group_criteria(
-            customer_id=customer_id, operations=operations
-        )
+    mutate_ad_group_criteria_response = ad_group_criterion_service.mutate_ad_group_criteria(
+        customer_id=customer_id, operations=operations
     )
 
     # Print the results of the successful mutates.
@@ -385,7 +382,7 @@ def create_listing_group_unit_biddable(
 
 
 if __name__ == "__main__":
-    googleads_client = GoogleAdsClient.load_from_storage(version="v12")
+    googleads_client = GoogleAdsClient.load_from_storage(version="v13")
 
     parser = argparse.ArgumentParser(
         description="Add shopping product listing group tree to a shopping ad "

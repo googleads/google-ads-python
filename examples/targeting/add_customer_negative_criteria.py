@@ -53,11 +53,9 @@ def main(client, customer_id):
     )
 
     # Issues a mutate request to add the negative customer criteria.
-    response = (
-        customer_negative_criterion_service.mutate_customer_negative_criteria(
-            customer_id=customer_id,
-            operations=[tragedy_criterion_op, placement_criterion_op],
-        )
+    response = customer_negative_criterion_service.mutate_customer_negative_criteria(
+        customer_id=customer_id,
+        operations=[tragedy_criterion_op, placement_criterion_op],
     )
     print(f"Added {len(response.results)} negative customer criteria:")
     for negative_criterion in response.results:
@@ -67,7 +65,7 @@ def main(client, customer_id):
 if __name__ == "__main__":
     # GoogleAdsClient will read the google-ads.yaml configuration file in the
     # home directory if none is specified.
-    googleads_client = GoogleAdsClient.load_from_storage(version="v12")
+    googleads_client = GoogleAdsClient.load_from_storage(version="v13")
 
     parser = argparse.ArgumentParser(
         description=(
@@ -88,8 +86,7 @@ if __name__ == "__main__":
 
     try:
         main(
-            googleads_client,
-            args.customer_id,
+            googleads_client, args.customer_id,
         )
     except GoogleAdsException as ex:
         print(

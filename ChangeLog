@@ -1,4 +1,13 @@
-* 18.2.0
+* 20.0.0
+- Remove support for Google Ads API v10.
+- Google Ads API v13 release.
+- Extend version range for proto-plus and google-api-core
+- Update add_customer_match_user_list example with more complex user identifiers
+- Remove add_expression_rule_user_list example
+- Update remarketing examples to use flexible rule user lists
+- Update get_ad_group_bid_modifiers example to remove preferred content criteria
+
+* 19.0.0
 - Google Ads API v12 release.
 - Bump proto-plus to 1.22.1.
 - Remove example for Add Dynamic Page Feed.

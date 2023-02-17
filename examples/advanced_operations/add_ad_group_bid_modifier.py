@@ -51,8 +51,7 @@ def main(client, customer_id, ad_group_id, bid_modifier_value):
 
     # Add the ad group bid modifier.
     ad_group_bm_response = ad_group_bm_service.mutate_ad_group_bid_modifiers(
-        customer_id=customer_id,
-        operations=[ad_group_bid_modifier_operation],
+        customer_id=customer_id, operations=[ad_group_bid_modifier_operation],
     )
     # [END add_ad_group_bid_modifier]
 
@@ -65,7 +64,7 @@ def main(client, customer_id, ad_group_id, bid_modifier_value):
 if __name__ == "__main__":
     # GoogleAdsClient will read the google-ads.yaml configuration file in the
     # home directory if none is specified.
-    googleads_client = GoogleAdsClient.load_from_storage(version="v12")
+    googleads_client = GoogleAdsClient.load_from_storage(version="v13")
 
     parser = argparse.ArgumentParser(
         description=(

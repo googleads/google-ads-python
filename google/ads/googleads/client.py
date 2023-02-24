@@ -203,10 +203,11 @@ class GoogleAdsClient:
             version_module = import_module(f"google.ads.googleads.{version}")
         except ImportError:
             raise ValueError(
-                'Specified Google Ads API version "{}" does not '
-                'exist. Valid API versions are: "{}"'.format(
-                    version, '", "'.join(_VALID_API_VERSIONS)
-                )
+                f"There was an error importing the "
+                f'"google.ads.googleads.{version}" module. Please check that '
+                f'"{version}" is a valid API version. Here are the current '
+                "API versions supported by this library: "
+                f"{', '.join(_VALID_API_VERSIONS)}."
             )
         return version_module
 

@@ -196,7 +196,7 @@ def normalize_and_hash_email_address(email_address):
     Returns:
         A normalized (lowercase, removed whitespace) and SHA-265 hashed string.
     """
-    normalized_email = email_address.lower()
+    normalized_email = email_address.strip().lower()
     email_parts = normalized_email.split("@")
 
     # Check that there are at least two segments

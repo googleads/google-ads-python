@@ -363,6 +363,7 @@ def build_offline_user_data_job_operations(client):
             operations.append(operation)
 
     return operations
+    # [END add_customer_match_user_list_2]
 
 
 def check_job_status(client, customer_id, offline_user_data_job_resource_name):

@@ -354,6 +354,7 @@ def build_offline_user_data_job_operations(client):
                 )
                 address_info.country_code = record["country_code"]
                 address_info.postal_code = record["postal_code"]
+        # [END add_customer_match_user_list_2]
 
         # If the user_identifiers repeated field is not empty, create a new
         # OfflineUserDataJobOperation and add the UserData to it.
@@ -363,7 +364,6 @@ def build_offline_user_data_job_operations(client):
             operations.append(operation)
 
     return operations
-    # [END add_customer_match_user_list_2]
 
 
 def check_job_status(client, customer_id, offline_user_data_job_resource_name):

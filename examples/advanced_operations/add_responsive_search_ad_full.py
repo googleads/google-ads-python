@@ -380,8 +380,8 @@ def add_geo_targeting(client, customer_id, campaign_resource_name):
     # GeoTargetConstantService.suggest_geo_target_constants() and directly
     # apply GeoTargetConstant.resource_name.
     gtc_request = client.get_type("SuggestGeoTargetConstantsRequest")
-    gtc_request._LOCALE = _LOCALE
-    gtc_request._COUNTRY_CODE = _COUNTRY_CODE
+    gtc_request.locale = _LOCALE
+    gtc_request.country_code = _COUNTRY_CODE
 
     # The location names to get suggested geo target constants.
     gtc_request.location_names.names.extend(
@@ -396,10 +396,10 @@ def add_geo_targeting(client, customer_id, campaign_resource_name):
         print(
             f"{geo_target_constant.resource_name} "
             f"({geo_target_constant.name}, "
-            f"{geo_target_constant._COUNTRY_CODE}, "
+            f"{geo_target_constant.country_code}, "
             f"{geo_target_constant.target_type}, "
             f"{geo_target_constant.status.name}) "
-            f"is found in _LOCALE ({suggestion._LOCALE}) "
+            f"is found in _LOCALE ({suggestion.locale}) "
             f"with reach ({suggestion.reach}) "
             f"from search term ({suggestion.search_term})."
         )

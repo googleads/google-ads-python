@@ -36,7 +36,7 @@ _COUNTRY_CODE = "US"
 # https://developers.google.com/google-ads/api/reference/data/codes-formats#expandable-7
 _LANGUAGE_CODE = "en"
 _LANDING_PAGE_URL = "http://www.example.com"
-_PHONE_NUMBER = "555-555-5555"
+_PHONE_NUMBER = "800-555-0100"
 _BUDGET_TEMPORARY_ID = "-1"
 _SMART_CAMPAIGN_TEMPORARY_ID = "-2"
 _AD_GROUP_TEMPORARY_ID = "-3"

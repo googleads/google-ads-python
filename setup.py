@@ -17,7 +17,7 @@ from setuptools import setup, find_packages
 import io
 
 install_requires = [
-    "google-auth-oauthlib >= 0.3.0, < 1.0.0",
+    "google-auth-oauthlib >= 0.3.0, < 2.0.0",
     "google-api-core >= 2.10.1, <= 2.11.0",
     "googleapis-common-protos >= 1.56.4, < 2.0.0",
     # NOTE: Source code for grpcio and grpcio-status exist in the same
@@ -32,11 +32,11 @@ install_requires = [
 ]
 
 with io.open("README.rst", "r", encoding="utf-8") as readme_file:
-  long_description = readme_file.read()
+    long_description = readme_file.read()
 
 setup(
     name="google-ads",
-    version="20.0.0",
+    version="21.0.0",
     author="Google LLC",
     author_email="googleapis-packages@google.com",
     classifiers=[
@@ -56,7 +56,8 @@ setup(
     extras_require={"tests": ["nox >= 2020.12.31, < 2022.6",]},
     license="Apache 2.0",
     packages=find_packages(
-        exclude=["examples", "examples.*", "tests", "tests.*"]),
+        exclude=["examples", "examples.*", "tests", "tests.*"]
+    ),
     namespace_packages=["google", "google.ads"],
     url="https://github.com/googleads/google-ads-python",
     zip_safe=False,

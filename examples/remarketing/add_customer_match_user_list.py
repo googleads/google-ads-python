@@ -249,30 +249,30 @@ def build_offline_user_data_job_operations(client):
     """
     # The first user data has an email address and a phone number.
     raw_record_1 = {
-        "email": "test@gmail.com",
+        "email": "dana@example.com",
         # Phone number to be converted to E.164 format, with a leading '+' as
         # required. This includes whitespace that will be removed later.
-        "phone": "+1 234 5678910",
+        "phone": "+1 800 5550101",
     }
 
     # The second user data has an email address, a mailing address, and a phone
     # number.
     raw_record_2 = {
-        # Email address that includes a period (.) before the Gmail domain.
-        "email": "test.2@gmail.com",
+        # Email address that includes a period (.) before the email domain.
+        "email": "alex.2@example.com",
         # Address that includes all four required elements: first name, last
         # name, country code, and postal code.
-        "first_name": "John",
-        "last_mame": "Doe",
+        "first_name": "Alex",
+        "last_mame": "Quinn",
         "country_code": "US",
-        "postal_code": "10011",
+        "postal_code": "94045",
         # Phone number to be converted to E.164 format, with a leading '+' as
         # required.
-        "phone": "+1 234 5678910",
+        "phone": "+1 800 5550102",
     }
 
     # The third user data only has an email address.
-    raw_record_3 = {"email": "test3@gmail.com"}
+    raw_record_3 = {"email": "charlie@example.com"}
 
     # Adds the raw records to a raw input list.
     raw_records = [raw_record_1, raw_record_2, raw_record_3]
@@ -321,7 +321,7 @@ def build_offline_user_data_job_operations(client):
         # UserIdentifier for it.
         if "phone" in record:
             user_identifier = client.get_type("UserIdentifier")
-            user_identifier.hashed_email = normalize_and_hash(
+            user_identifier.hashed_phone_number = normalize_and_hash(
                 record["phone"], True
             )
             # Adds the hashed phone number identifier to the UserData object's

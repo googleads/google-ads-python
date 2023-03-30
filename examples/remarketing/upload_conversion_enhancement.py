@@ -95,7 +95,7 @@ def main(
     )
     # Uses the normalize and hash method specifically for email addresses.
     email_identifier.hashed_email = normalize_and_hash_email_address(
-        "joannasmith@gmail.com"
+        "dana@example.com"
     )
 
     # Adds both user identifiers to the conversion adjustment.

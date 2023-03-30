@@ -34,7 +34,7 @@ def main(
     Args:
         client: an initialized GoogleAdsClient instance.
         customer_id: a client customer ID.
-        phone_number: a phone number for your business, e.g. '(123) 456-7890'.
+        phone_number: a phone number for your business, e.g. '(800) 555-0100'.
         phone_country: a two-letter ISO-3166 code.
         conversion_action_id: an ID for a conversion action.
     """
@@ -52,7 +52,7 @@ def add_extension_asset(
     Args:
         client: an initialized GoogleAdsClient instance.
         customer_id: a client customer ID.
-        phone_number: a phone number for your business, e.g. '(123) 456-7890'.
+        phone_number: a phone number for your business, e.g. '(800) 555-0100'.
         phone_country: a two-letter ISO-3166 code.
         conversion_action_id: an ID for a conversion action.
 
@@ -141,7 +141,7 @@ if __name__ == "__main__":
         "--phone_number",
         type=str,
         required=True,
-        help=("A phone number for your business, e.g. '(123) 456-7890'"),
+        help=("A phone number for your business, e.g. '(800) 555-0100'"),
     )
     parser.add_argument(
         "-p",

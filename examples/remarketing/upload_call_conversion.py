@@ -45,7 +45,7 @@ def main(
         conversion_action_id: The ID of the conversion action to upload to.
         caller_id: The caller ID from which this call was placed. Caller ID is
             expected to be in E.164 format with preceding '+' sign,
-            e.g. '+16502531234'.
+            e.g. '+18005550100'.
         call_start_date_time: The date and time at which the call occurred. The
             format is 'yyyy-mm-dd hh:mm:ss+|-hh:mm',
             e.g. '2021-01-01 12:32:45-08:00'.
@@ -140,7 +140,7 @@ if __name__ == "__main__":
         required=True,
         help="The caller ID from which this call was placed. Caller ID is "
         "expected to be in E.164 format with preceding '+' sign, "
-        "e.g. '+16502531234'.",
+        "e.g. '+18005550100'.",
     )
     parser.add_argument(
         "-s",

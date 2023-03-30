@@ -1,3 +1,12 @@
+* 21.0.0
+- Remove support for Google Ads API v11.
+- Update examples to use recommended example PII.
+- Increase maximum support version of google-auth-oauthlib to < 2.0.0.
+- Fix bug in add_customer_match_user_list example.
+- Add add_dynamic_page_feed_asset example.
+- Add add_performance_max_for_travel_goals_campaign example.
+- Update create_experiment example to get campaign ID from experiment arm response.
+
 * 20.0.0
 - Remove support for Google Ads API v10.
 - Google Ads API v13 release.

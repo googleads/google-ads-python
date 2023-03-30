@@ -395,7 +395,7 @@ def build_offline_user_data_job_operations(
     user_data_with_email_address = user_data_with_email_address_operation.create
     email_identifier = client.get_type("UserIdentifier")
     # Hash normalized email addresses based on SHA-256 hashing algorithm.
-    email_identifier.hashed_email = normalize_and_hash("customer@example.com")
+    email_identifier.hashed_email = normalize_and_hash("dana@example.com")
     state_identifier = client.get_type("UserIdentifier")
     state_identifier.address_info.state = "NY"
     user_data_with_email_address.user_identifiers.extend(
@@ -430,9 +430,11 @@ def build_offline_user_data_job_operations(
     address_identifier = client.get_type("UserIdentifier")
     # First and last name must be normalized and hashed.
     address_identifier.address_info.hashed_first_name = normalize_and_hash(
-        "John"
+        "Dana"
     )
-    address_identifier.address_info.hashed_last_name = normalize_and_hash("Doe")
+    address_identifier.address_info.hashed_last_name = normalize_and_hash(
+        "Quinn"
+    )
     # Country and zip codes are sent in plain text.
     address_identifier.address_info.country_code = "US"
     address_identifier.address_info.postal_code = "10011"

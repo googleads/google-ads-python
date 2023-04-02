@@ -889,11 +889,11 @@ class GoogleAdsRow(proto.Message):
         campaign_feed (google.ads.googleads.v12.resources.types.CampaignFeed):
             The campaign feed referenced in the query.
         campaign_group (google.ads.googleads.v12.resources.types.CampaignGroup):
-            Campaign Group referenced in AWQL query.
+            Campaign Group referenced in GAQL query.
         campaign_label (google.ads.googleads.v12.resources.types.CampaignLabel):
             The campaign label referenced in the query.
         campaign_shared_set (google.ads.googleads.v12.resources.types.CampaignSharedSet):
-            Campaign Shared Set referenced in AWQL query.
+            Campaign Shared Set referenced in GAQL query.
         campaign_simulation (google.ads.googleads.v12.resources.types.CampaignSimulation):
             The campaign simulation referenced in the
             query.

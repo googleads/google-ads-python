@@ -873,7 +873,7 @@ class GoogleAdsClientTest(FileTestCase):
         This tests the 'client.enums' property for a service in every version
         of the API. It loops over the names of all properties on 'client.enums',
         imports them using client.get_type to ensure they're part of the API,
-        and ensures the enum fields are directly accessible wihout needing to
+        and ensures the enum fields are directly accessible without needing to
         access the inner Enum object.
         """
         for ver in valid_versions:
@@ -961,7 +961,7 @@ class GoogleAdsClientTest(FileTestCase):
         self.assertIsNot(destination, origin)
 
     def test_client_copy_from_different_types_proto_plus(self):
-        """TypeError is raised with different types of proto_plus messasges."""
+        """TypeError is raised with different types of proto_plus messages."""
         client = self._create_test_client(use_proto_plus=True)
         destination = client.get_type("AdGroup", version=latest_version)
         origin = client.get_type("Campaign", version=latest_version)
@@ -970,7 +970,7 @@ class GoogleAdsClientTest(FileTestCase):
         self.assertRaises(TypeError, client.copy_from, destination, origin)
 
     def test_client_copy_from_different_types_protobuf(self):
-        """TypeError is raised with different types of protobuf messasges."""
+        """TypeError is raised with different types of protobuf messages."""
         client = self._create_test_client(use_proto_plus=True)
         destination = client.get_type("AdGroup", version=latest_version)
         protobuf_dest = type(destination).pb(destination)

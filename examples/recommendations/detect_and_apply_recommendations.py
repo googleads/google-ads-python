@@ -102,7 +102,7 @@ if __name__ == "__main__":
     googleads_client = GoogleAdsClient.load_from_storage(version="v13")
 
     parser = argparse.ArgumentParser(
-        description=("Detectes and applies a specified recommendation.")
+        description=("Detects and applies a specified recommendation.")
     )
     # The following argument(s) should be provided to run the example.
     parser.add_argument(

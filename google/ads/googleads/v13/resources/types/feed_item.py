@@ -268,7 +268,7 @@ class FeedItemPlaceholderPolicyInfo(proto.Message):
             the placeholder type.
         validation_status (google.ads.googleads.v13.enums.types.FeedItemValidationStatusEnum.FeedItemValidationStatus):
             Output only. The validation status of the
-            palceholder type.
+            placeholder type.
         validation_errors (MutableSequence[google.ads.googleads.v13.resources.types.FeedItemValidationError]):
             Output only. List of placeholder type
             validation errors.

@@ -163,7 +163,7 @@ class ProtoCopyFromTest(TestCase):
         self.assertIsNot(destination, origin)
 
     def test_client_copy_from_different_types_proto_plus(self):
-        """TypeError is raised with different types of proto_plus messasges."""
+        """TypeError is raised with different types of proto_plus messages."""
         destination = ProtobufFixture()
         destination = proto.Message.wrap(destination)
         origin = ProtoPlusFixture()
@@ -172,7 +172,7 @@ class ProtoCopyFromTest(TestCase):
         self.assertRaises(TypeError, util.proto_copy_from, destination, origin)
 
     def test_client_copy_from_different_types_protobuf(self):
-        """TypeError is raised with different types of protobuf messasges."""
+        """TypeError is raised with different types of protobuf messages."""
         destination = ProtoPlusFixture()
         destination = type(destination).pb(destination)
         origin = ProtobufFixture()

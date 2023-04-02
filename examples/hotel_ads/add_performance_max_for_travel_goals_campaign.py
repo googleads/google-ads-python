@@ -130,7 +130,7 @@ def main(client, customer_id, place_id):
 
     # Creates a hotel property asset set, which will be used later to link with
     # a newly created campaign.
-    hotel_property_asset_set_resource_name = create_hoteL_asset_set(
+    hotel_property_asset_set_resource_name = create_hotel_asset_set(
         client, customer_id
     )
 
@@ -298,7 +298,7 @@ def create_multiple_text_assets(
 
 
 # [START create_hotel_asset_set]
-def create_hoteL_asset_set(client, customer_id):
+def create_hotel_asset_set(client, customer_id):
     """Creates a hotel property asset set.
 
     Args:

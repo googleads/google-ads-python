@@ -174,7 +174,7 @@ def add_assets_to_asset_set(
 
     for result in response.results:
         print(
-            "\tCreated an asset set asset link with resourece name "
+            "\tCreated an asset set asset link with resource name "
             f"'{result.resource_name}'"
         )
         # [END add_asset_set_asset]

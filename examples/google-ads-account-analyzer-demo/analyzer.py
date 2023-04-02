@@ -12,7 +12,7 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
-"""Gets the account infomation of the given MCC and login customer."""
+"""Gets the account information of the given MCC and login customer."""
 
 
 import argparse
@@ -158,7 +158,7 @@ def print_account_hierarchy(
 
 
 def get_users_module(google_ads_client, customer_id):
-    """Prints the user access informaion for the given customer_id.
+    """Prints the user access information for the given customer_id.
 
     Args:
         client: an initialized GoogleAdsClient instance.

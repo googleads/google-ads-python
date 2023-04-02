@@ -84,7 +84,7 @@ class AssetGroupListingGroupFilterRemoveOperationFactory:
                 # Check if we've already visited a sibling in this group, and
                 # either update it or create a new branch accordingly.
                 if parent_resource_name in self.parents_to_children:
-                    # If we've visitied a sibling already, add this resource
+                    # If we've visited a sibling already, add this resource
                     # name to the existing list.
                     self.parents_to_children[parent_resource_name].append(
                         resource_name
@@ -201,7 +201,7 @@ class AssetGroupListingGroupFilterCreateOperationFactory:
         # asset_group_listing_group_filter.parent_listing_group_filter = "<PARENT FILTER NAME>"
 
         # Unlike the add_performance_max_retail_campaign example, the type for
-        # the root node here must be Subsivision because we add child
+        # the root node here must be a subdivision because we add child
         # partitions under it.
         asset_group_listing_group_filter.type_ = (
             self.client.enums.ListingGroupFilterTypeEnum.SUBDIVISION

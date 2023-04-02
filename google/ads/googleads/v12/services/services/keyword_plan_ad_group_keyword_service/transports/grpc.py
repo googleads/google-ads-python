@@ -39,7 +39,7 @@ class KeywordPlanAdGroupKeywordServiceGrpcTransport(
     KeywordPlanAdGroup is required to add ad group keywords.
     Positive and negative keywords are supported. A maximum of
     10,000 positive keywords are allowed per keyword plan. A maximum
-    of 1,000 negative keywords are allower per keyword plan. This
+    of 1,000 negative keywords are allowed per keyword plan. This
     includes campaign negative keywords and ad group negative
     keywords.
 

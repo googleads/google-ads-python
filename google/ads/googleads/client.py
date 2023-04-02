@@ -83,7 +83,7 @@ class _EnumGetter:
     def __dir__(self):
         """Overrides behavior when dir() is called on instances of this class.
 
-        It's useful to use dir() to see a list of available attrbutes. Since
+        It's useful to use dir() to see a list of available attributes. Since
         this class exposes all the enums in the API it borrows the __all__
         property from the corresponding enums module.
         """
@@ -126,7 +126,7 @@ class _EnumGetter:
         """Returns self serialized as a dict.
 
         Since this class overrides __getattr__ we define this method to help
-        with pickling, which is imporant to avoid recursion depth errors when
+        with pickling, which is important to avoid recursion depth errors when
         pickling this class or the GoogleAdsClient or using multiprocessing.
 
         Returns:
@@ -138,7 +138,7 @@ class _EnumGetter:
         """Deserializes self with the given dictionary.
 
         Since this class overrides __getattr__ we define this method to help
-        with pickling, which is imporant to avoid recursion depth errors when
+        with pickling, which is important to avoid recursion depth errors when
         pickling this class or the GoogleAdsClient or using multiprocessing.
 
         Args:

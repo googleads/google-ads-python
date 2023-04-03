@@ -121,7 +121,7 @@ class HistoricalMetricsOptions(proto.Message):
             Indicates whether to include average cost per
             click value. Average CPC is a legacy value that
             will be removed and replaced in the future, and
-            as such we are including it as an optioanl value
+            as such we are including it as an optional value
             so clients only use it when strictly necessary
             and to better track clients that use this value.
     """

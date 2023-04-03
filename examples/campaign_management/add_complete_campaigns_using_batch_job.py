@@ -83,13 +83,13 @@ async def main(client, customer_id):
     operations_response = run_batch_job(batch_job_service, resource_name)
 
     # Create an asyncio.Event instance to control execution during the
-    # asyncronous steps in _poll_batch_job. Note that this is not important
-    # for polling asyncronously, it simply helps with execution control so we
-    # can run _fetch_and_print_results after the asyncronous operations have
+    # asynchronous steps in _poll_batch_job. Note that this is not important
+    # for polling asynchronously, it simply helps with execution control, so we
+    # can run _fetch_and_print_results after the asynchronous operations have
     # completed.
     done_event = asyncio.Event()
     poll_batch_job(operations_response, done_event)
-    # Execution will stop here and wait for the asyncronous steps in
+    # Execution will stop here and wait for the asynchronous steps in
     # _poll_batch_job to complete before proceeding.
     await done_event.wait()
 

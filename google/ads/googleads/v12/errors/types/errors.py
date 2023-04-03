@@ -520,7 +520,7 @@ class ErrorCode(proto.Message):
 
             This field is a member of `oneof`_ ``error_code``.
         query_error (google.ads.googleads.v12.errors.types.QueryErrorEnum.QueryError):
-            An error with an AWQL query
+            An error with an GAQL query
 
             This field is a member of `oneof`_ ``error_code``.
         mutate_error (google.ads.googleads.v12.errors.types.MutateErrorEnum.MutateError):
@@ -541,7 +541,7 @@ class ErrorCode(proto.Message):
 
             This field is a member of `oneof`_ ``error_code``.
         quota_error (google.ads.googleads.v12.errors.types.QuotaErrorEnum.QuotaError):
-            An error with the amonut of quota remaining.
+            An error with the amount of quota remaining.
 
             This field is a member of `oneof`_ ``error_code``.
         ad_error (google.ads.googleads.v12.errors.types.AdErrorEnum.AdError):

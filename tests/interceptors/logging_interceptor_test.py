@@ -139,7 +139,7 @@ class LoggingInterceptorTest(TestCase):
             "request_id", "failure", and "error." The "failure" attribute has an
             "error" attribute that is an array of mock error objects, and the
             "error" attribute is an object with a "trailing_metadata" method
-            that returns a tuble of mock metadata.
+            that returns a tuple of mock metadata.
         """
         exception = self._MOCK_EXCEPTION
         error = self._MOCK_ERROR

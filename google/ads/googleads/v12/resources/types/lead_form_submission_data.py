@@ -61,7 +61,7 @@ class LeadFormSubmissionData(proto.Message):
             submitted lead form.
         gclid (str):
             Output only. Google Click Id associated with
-            the submissed lead form.
+            the submitted lead form.
         submission_date_time (str):
             Output only. The date and time at which the lead form was
             submitted. The format is "yyyy-mm-dd hh:mm:ss+|-hh:mm", for

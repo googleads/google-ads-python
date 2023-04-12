@@ -61,13 +61,13 @@ def main(client, customer_id):
         resource_type = cs.resource_type.name
         if resource_type == "AD_GROUP":
             resource_name = cs.ad_group
-        if resource_type == "AD_GROUP_AD":
+        elif resource_type == "AD_GROUP_AD":
             resource_name = cs.ad_group_ad
-        if resource_type == "AD_GROUP_CRITERION":
+        elif resource_type == "AD_GROUP_CRITERION":
             resource_name = cs.ad_group_criterion
-        if resource_type == "CAMPAIGN":
+        elif resource_type == "CAMPAIGN":
             resource_name = cs.campaign
-        if resource_type == "CAMPAIGN_CRITERION":
+        elif resource_type == "CAMPAIGN_CRITERION":
             resource_name = cs.campaign_criterion
         else:
             resource_name = "UNKNOWN"

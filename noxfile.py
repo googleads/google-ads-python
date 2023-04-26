@@ -14,7 +14,7 @@
 
 import nox
 
-PYTHON_VERSIONS = ["3.7"]
+PYTHON_VERSIONS = ["3.8", "3.9", "3.10"]
 
 TEST_COMMAND = [
     "coverage",
@@ -29,7 +29,10 @@ TEST_COMMAND = [
     "*_test.py",
 ]
 COVERAGE_COMMAND = [
-    "coverage", "report", "-m", "--omit=.nox/*,examples/*,*/__init__.py",
+    "coverage",
+    "report",
+    "-m",
+    "--omit=.nox/*,examples/*,*/__init__.py",
 ]
 
 
@@ -56,13 +59,13 @@ def tests_minimum_dependency_versions(session):
         "coverage==6.5.0",
         # Google-published dependencies pinned to the
         # lowest possible version supported.
-        "google-api-core==2.8.0",
-        "proto-plus==1.19.6",
-        "protobuf==3.12.0",
+        "google-api-core==2.11.0",
+        "proto-plus==1.22.3",
+        "protobuf==4.25.0",
         "google-auth-oauthlib==0.3.0",
-        "googleapis-common-protos==1.56.0",
-        "grpcio==1.38.1",
-        "grpcio-status==1.38.1",
+        "googleapis-common-protos==1.56.3",
+        "grpcio==1.41.0",
+        "grpcio-status==1.41.0",
     )
     session.run(*TEST_COMMAND)
     session.run(*COVERAGE_COMMAND)

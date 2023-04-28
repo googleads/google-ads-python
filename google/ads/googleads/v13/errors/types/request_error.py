@@ -13,6 +13,8 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 #
+from __future__ import annotations
+
 
 import proto  # type: ignore
 
@@ -55,6 +57,7 @@ class RequestErrorEnum(proto.Message):
         INCONSISTENT_RETURN_SUMMARY_ROW_VALUE = 31
         TOTAL_RESULTS_COUNT_NOT_ORIGINALLY_REQUESTED = 32
         RPC_DEADLINE_TOO_SHORT = 33
+        UNSUPPORTED_VERSION = 38
 
 
 __all__ = tuple(sorted(__protobuf__.manifest))

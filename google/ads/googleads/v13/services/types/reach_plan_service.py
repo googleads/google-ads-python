@@ -13,6 +13,8 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 #
+from __future__ import annotations
+
 from typing import MutableSequence
 
 import proto  # type: ignore
@@ -318,9 +320,8 @@ class GenerateReachForecastRequest(proto.Message):
             Controls the forecast metrics returned in the
             response.
         customer_reach_group (str):
-            The name of the customer being planned for. This is a
-            user-defined value. Required if targeting.audience_targeting
-            is set.
+            The name of the customer being planned for.
+            This is a user-defined value.
 
             This field is a member of `oneof`_ ``_customer_reach_group``.
     """

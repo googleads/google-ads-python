@@ -13,6 +13,8 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 #
+from __future__ import annotations
+
 
 import proto  # type: ignore
 
@@ -50,6 +52,7 @@ class RecommendationErrorEnum(proto.Message):
         DUPLICATE_RESOURCE_NAME = 13
         RECOMMENDATION_ALREADY_DISMISSED = 14
         INVALID_APPLY_REQUEST = 15
+        RECOMMENDATION_TYPE_APPLY_NOT_SUPPORTED = 17
 
 
 __all__ = tuple(sorted(__protobuf__.manifest))

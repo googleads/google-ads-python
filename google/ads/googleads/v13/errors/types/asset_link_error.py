@@ -13,6 +13,8 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 #
+from __future__ import annotations
+
 
 import proto  # type: ignore
 
@@ -54,6 +56,7 @@ class AssetLinkErrorEnum(proto.Message):
         CANNOT_CREATE_AUTOMATICALLY_CREATED_LINKS = 19
         CANNOT_LINK_TO_AUTOMATICALLY_CREATED_ASSET = 20
         CANNOT_MODIFY_ASSET_LINK_SOURCE = 21
+        CANNOT_LINK_LOCATION_LEAD_FORM_WITHOUT_LOCATION_ASSET = 22
 
 
 __all__ = tuple(sorted(__protobuf__.manifest))

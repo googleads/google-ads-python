@@ -13,6 +13,8 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 #
+from __future__ import annotations
+
 from typing import MutableSequence
 
 import proto  # type: ignore
@@ -53,6 +55,9 @@ from google.ads.googleads.v13.enums.types import campaign_primary_status
 from google.ads.googleads.v13.enums.types import campaign_primary_status_reason
 from google.ads.googleads.v13.enums.types import campaign_serving_status
 from google.ads.googleads.v13.enums.types import campaign_status
+from google.ads.googleads.v13.enums.types import (
+    listing_type as gage_listing_type,
+)
 from google.ads.googleads.v13.enums.types import (
     location_source_type as gage_location_source_type,
 )
@@ -331,6 +336,12 @@ class Campaign(proto.Message):
             Performance Max for travel goals campaigns.
 
             This field is a member of `oneof`_ ``_hotel_property_asset_set``.
+        listing_type (google.ads.googleads.v13.enums.types.ListingTypeEnum.ListingType):
+            Immutable. Listing type of ads served for
+            this campaign. Field is restricted for usage
+            with Performance Max campaigns.
+
+            This field is a member of `oneof`_ ``_listing_type``.
         bidding_strategy (str):
             Portfolio bidding strategy used by campaign.
 
@@ -580,8 +591,10 @@ class Campaign(proto.Message):
 
                 This field is a member of `oneof`_ ``_enable_local``.
             use_vehicle_inventory (bool):
-                Immutable. Whether to target Vehicle Listing
-                inventory.
+                Immutable. Whether to target Vehicle Listing inventory. This
+                field is supported only in Smart Shopping Campaigns. For
+                setting Vehicle Listing inventory in Performance Max
+                campaigns, use ``listing_type`` instead.
         """
 
         merchant_id: int = proto.Field(
@@ -1004,6 +1017,12 @@ class Campaign(proto.Message):
     )
     hotel_property_asset_set: str = proto.Field(
         proto.STRING, number=83, optional=True,
+    )
+    listing_type: gage_listing_type.ListingTypeEnum.ListingType = proto.Field(
+        proto.ENUM,
+        number=86,
+        optional=True,
+        enum=gage_listing_type.ListingTypeEnum.ListingType,
     )
     bidding_strategy: str = proto.Field(
         proto.STRING, number=67, oneof="campaign_bidding_strategy",

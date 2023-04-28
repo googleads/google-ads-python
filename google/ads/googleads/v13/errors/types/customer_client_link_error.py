@@ -13,6 +13,8 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 #
+from __future__ import annotations
+
 
 import proto  # type: ignore
 
@@ -25,7 +27,7 @@ __protobuf__ = proto.module(
 
 
 class CustomerClientLinkErrorEnum(proto.Message):
-    r"""Container for enum describing possible CustomerClientLink
+    r"""Container for enum describing possible CustomeClientLink
     errors.
 
     """

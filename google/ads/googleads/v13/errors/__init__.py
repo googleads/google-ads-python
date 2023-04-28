@@ -78,6 +78,7 @@ __all__ = (
     "CustomerErrorEnum",
     "CustomerFeedErrorEnum",
     "CustomerManagerLinkErrorEnum",
+    "CustomerSkAdNetworkConversionValueSchemaErrorEnum",
     "CustomerUserAccessErrorEnum",
     "CustomizerAttributeErrorEnum",
     "DatabaseErrorEnum",

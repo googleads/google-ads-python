@@ -13,6 +13,8 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 #
+from __future__ import annotations
+
 
 import proto  # type: ignore
 
@@ -45,6 +47,9 @@ class CampaignSimulation(proto.Message):
     -  MULTI_CHANNEL - TARGET_CPA - UNIFORM
     -  DISCOVERY - TARGET_CPA - DEFAULT
     -  DISPLAY - TARGET_CPA - UNIFORM
+    -  PERFORMANCE_MAX - TARGET_CPA - UNIFORM
+    -  PERFORMANCE_MAX - TARGET_ROAS - UNIFORM
+    -  PERFORMANCE_MAX - BUDGET - UNIFORM
 
     This message has `oneof`_ fields (mutually exclusive fields).
     For each oneof, at most one member field can be set at the same time.

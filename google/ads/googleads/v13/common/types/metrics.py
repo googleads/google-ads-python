@@ -13,6 +13,8 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 #
+from __future__ import annotations
+
 from typing import MutableSequence
 
 import proto  # type: ignore
@@ -835,6 +837,20 @@ class Metrics(proto.Message):
             range from 1 to 10, 10 being the fastest.
 
             This field is a member of `oneof`_ ``_speed_score``.
+        average_target_cpa_micros (int):
+            The average Target CPA, or unset if not
+            available (for example, for campaigns that had
+            traffic from portfolio bidding strategies or
+            non-tCPA).
+
+            This field is a member of `oneof`_ ``_average_target_cpa_micros``.
+        average_target_roas (float):
+            The average Target ROAS, or unset if not
+            available (for example, for campaigns that had
+            traffic from portfolio bidding strategies or
+            non-tROAS).
+
+            This field is a member of `oneof`_ ``_average_target_roas``.
         top_impression_percentage (float):
             The percent of your ad impressions that are
             shown anywhere above the organic search results.
@@ -1400,6 +1416,12 @@ class Metrics(proto.Message):
     )
     speed_score: int = proto.Field(
         proto.INT64, number=147, optional=True,
+    )
+    average_target_cpa_micros: int = proto.Field(
+        proto.INT64, number=290, optional=True,
+    )
+    average_target_roas: float = proto.Field(
+        proto.DOUBLE, number=250, optional=True,
     )
     top_impression_percentage: float = proto.Field(
         proto.DOUBLE, number=148, optional=True,

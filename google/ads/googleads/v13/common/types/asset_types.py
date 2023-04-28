@@ -13,6 +13,8 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 #
+from __future__ import annotations
+
 from typing import MutableSequence
 
 import proto  # type: ignore
@@ -344,6 +346,11 @@ class LeadFormAsset(proto.Message):
 
 class LeadFormField(proto.Message):
     r"""One input field instance within a form.
+    This message has `oneof`_ fields (mutually exclusive fields).
+    For each oneof, at most one member field can be set at the same time.
+    Setting any member of the oneof automatically clears all other
+    members.
+
     .. _oneof: https://proto-plus-python.readthedocs.io/en/stable/fields.html#oneofs-mutually-exclusive-fields
 
     Attributes:
@@ -359,6 +366,15 @@ class LeadFormField(proto.Message):
             and maximum of 12 allowed.
 
             This field is a member of `oneof`_ ``answers``.
+        has_location_answer (bool):
+            Answer configuration for location question. If true,
+            campaign/account level location data (state, city, business
+            name etc) will be rendered on the Lead Form. Starting V13.1,
+            has_location_answer can only be set for "What is your
+            preferred dealership?" question, for advertisers with
+            Location Assets setup at campaign/account level.
+
+            This field is a member of `oneof`_ ``answers``.
     """
 
     input_type: lead_form_field_user_input_type.LeadFormFieldUserInputTypeEnum.LeadFormFieldUserInputType = proto.Field(
@@ -372,10 +388,18 @@ class LeadFormField(proto.Message):
         oneof="answers",
         message="LeadFormSingleChoiceAnswers",
     )
+    has_location_answer: bool = proto.Field(
+        proto.BOOL, number=3, oneof="answers",
+    )
 
 
 class LeadFormCustomQuestionField(proto.Message):
     r"""One custom question input field instance within a form.
+    This message has `oneof`_ fields (mutually exclusive fields).
+    For each oneof, at most one member field can be set at the same time.
+    Setting any member of the oneof automatically clears all other
+    members.
+
     .. _oneof: https://proto-plus-python.readthedocs.io/en/stable/fields.html#oneofs-mutually-exclusive-fields
 
     Attributes:
@@ -388,6 +412,15 @@ class LeadFormCustomQuestionField(proto.Message):
             allowed.
 
             This field is a member of `oneof`_ ``answers``.
+        has_location_answer (bool):
+            Answer configuration for location question. If true,
+            campaign/account level location data (state, city, business
+            name etc) will be rendered on the Lead Form. Starting V13.1,
+            has_location_answer can only be set for "What is your
+            preferred dealership?" question, for advertisers with
+            Location Assets setup at campaign/account level.
+
+            This field is a member of `oneof`_ ``answers``.
     """
 
     custom_question_text: str = proto.Field(
@@ -398,6 +431,9 @@ class LeadFormCustomQuestionField(proto.Message):
         number=2,
         oneof="answers",
         message="LeadFormSingleChoiceAnswers",
+    )
+    has_location_answer: bool = proto.Field(
+        proto.BOOL, number=3, oneof="answers",
     )
 
 

@@ -13,6 +13,8 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 #
+from __future__ import annotations
+
 from typing import MutableSequence
 
 import proto  # type: ignore
@@ -268,7 +270,7 @@ class FeedItemPlaceholderPolicyInfo(proto.Message):
             the placeholder type.
         validation_status (google.ads.googleads.v13.enums.types.FeedItemValidationStatusEnum.FeedItemValidationStatus):
             Output only. The validation status of the
-            placeholder type.
+            palceholder type.
         validation_errors (MutableSequence[google.ads.googleads.v13.resources.types.FeedItemValidationError]):
             Output only. List of placeholder type
             validation errors.

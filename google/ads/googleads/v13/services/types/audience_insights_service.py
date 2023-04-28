@@ -13,11 +13,14 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 #
+from __future__ import annotations
+
 from typing import MutableSequence
 
 import proto  # type: ignore
 
 from google.ads.googleads.v13.common.types import criteria
+from google.ads.googleads.v13.common.types import dates
 from google.ads.googleads.v13.enums.types import audience_insights_dimension
 
 
@@ -115,6 +118,9 @@ class GenerateAudienceCompositionInsightsRequest(proto.Message):
         audience (google.ads.googleads.v13.services.types.InsightsAudience):
             Required. The audience of interest for which
             insights are being requested.
+        baseline_audience (google.ads.googleads.v13.services.types.InsightsAudience):
+            The baseline audience to which the audience
+            of interest is being compared.
         data_month (str):
             The one-month range of historical data to use
             for insights, in the format "yyyy-mm". If unset,
@@ -133,6 +139,9 @@ class GenerateAudienceCompositionInsightsRequest(proto.Message):
     )
     audience: "InsightsAudience" = proto.Field(
         proto.MESSAGE, number=2, message="InsightsAudience",
+    )
+    baseline_audience: "InsightsAudience" = proto.Field(
+        proto.MESSAGE, number=6, message="InsightsAudience",
     )
     data_month: str = proto.Field(
         proto.STRING, number=3,
@@ -252,10 +261,18 @@ class ListInsightsEligibleDatesResponse(proto.Message):
             The months for which AudienceInsights data is
             currently available, each represented as a
             string in the form "YYYY-MM".
+        last_thirty_days (google.ads.googleads.v13.common.types.DateRange):
+            The actual dates covered by the "last 30 days" date range
+            that will be used implicitly for
+            [AudienceInsightsService.GenerateAudienceCompositionInsights][google.ads.googleads.v13.services.AudienceInsightsService.GenerateAudienceCompositionInsights]
+            requests that have no data_month set.
     """
 
     data_months: MutableSequence[str] = proto.RepeatedField(
         proto.STRING, number=1,
+    )
+    last_thirty_days: dates.DateRange = proto.Field(
+        proto.MESSAGE, number=2, message=dates.DateRange,
     )
 
 

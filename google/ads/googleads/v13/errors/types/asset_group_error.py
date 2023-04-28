@@ -13,6 +13,8 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 #
+from __future__ import annotations
+
 
 import proto  # type: ignore
 
@@ -42,6 +44,12 @@ class AssetGroupErrorEnum(proto.Message):
         NOT_ENOUGH_SQUARE_MARKETING_IMAGE_ASSET = 9
         NOT_ENOUGH_LOGO_ASSET = 10
         FINAL_URL_SHOPPING_MERCHANT_HOME_PAGE_URL_DOMAINS_DIFFER = 11
+        PATH1_REQUIRED_WHEN_PATH2_IS_SET = 12
+        SHORT_DESCRIPTION_REQUIRED = 13
+        FINAL_URL_REQUIRED = 14
+        FINAL_URL_CONTAINS_INVALID_DOMAIN_NAME = 15
+        AD_CUSTOMIZER_NOT_SUPPORTED = 16
+        CANNOT_MUTATE_ASSET_GROUP_FOR_REMOVED_CAMPAIGN = 17
 
 
 __all__ = tuple(sorted(__protobuf__.manifest))

@@ -1,7 +1,7 @@
 * 21.1.0
 - Google Ads API v13_1 release.
 - Add Python versions 3.8, 3.9, and 3.10 to list of classifiers.
-- Remove restatement functionality from upload_conversion_enhanvement example.
+- Remove restatement functionality from upload_conversion_enhancement example.
 - Move examples/hotel_ads to examples/travel
 - Update metadata_interceptor tests to dynamically retrieve Python version.
 

@@ -13,6 +13,8 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 #
+from __future__ import annotations
+
 from typing import MutableSequence
 
 import proto  # type: ignore
@@ -129,11 +131,13 @@ class CriterionCategoryLocaleAvailability(proto.Message):
             COUNTRY_AND_LANGUAGE (both country and language will be
             set).
         country_code (str):
-            Code of the country.
+            The ISO-3166-1 alpha-2 country code
+            associated with the category.
 
             This field is a member of `oneof`_ ``_country_code``.
         language_code (str):
-            Code of the language.
+            ISO 639-1 code of the language associated
+            with the category.
 
             This field is a member of `oneof`_ ``_language_code``.
     """

@@ -13,6 +13,8 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 #
+from __future__ import annotations
+
 
 import proto  # type: ignore
 
@@ -58,6 +60,20 @@ class RecommendationTypeEnum(proto.Message):
         CALLOUT_ASSET = 28
         SITELINK_ASSET = 29
         CALL_ASSET = 30
+        SHOPPING_ADD_AGE_GROUP = 31
+        SHOPPING_ADD_COLOR = 32
+        SHOPPING_ADD_GENDER = 33
+        SHOPPING_ADD_GTIN = 34
+        SHOPPING_ADD_MORE_IDENTIFIERS = 35
+        SHOPPING_ADD_SIZE = 36
+        SHOPPING_ADD_PRODUCTS_TO_CAMPAIGN = 37
+        SHOPPING_FIX_DISAPPROVED_PRODUCTS = 38
+        SHOPPING_TARGET_ALL_OFFERS = 39
+        SHOPPING_FIX_SUSPENDED_MERCHANT_CENTER_ACCOUNT = 40
+        SHOPPING_FIX_MERCHANT_CENTER_ACCOUNT_SUSPENSION_WARNING = 41
+        SHOPPING_MIGRATE_REGULAR_SHOPPING_CAMPAIGN_OFFERS_TO_PERFORMANCE_MAX = (
+            42
+        )
 
 
 __all__ = tuple(sorted(__protobuf__.manifest))

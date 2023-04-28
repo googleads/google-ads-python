@@ -36,7 +36,7 @@ with io.open("README.rst", "r", encoding="utf-8") as readme_file:
 
 setup(
     name="google-ads",
-    version="21.0.0",
+    version="21.1.0",
     author="Google LLC",
     author_email="googleapis-packages@google.com",
     classifiers=[
@@ -47,6 +47,9 @@ setup(
         "Programming Language :: Python",
         "Programming Language :: Python :: 3",
         "Programming Language :: Python :: 3.7",
+        "Programming Language :: Python :: 3.8",
+        "Programming Language :: Python :: 3.9",
+        "Programming Language :: Python :: 3.10",
     ],
     description="Client library for the Google Ads API",
     include_package_data=True,

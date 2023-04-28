@@ -13,6 +13,8 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 #
+from __future__ import annotations
+
 
 import proto  # type: ignore
 
@@ -58,6 +60,9 @@ class UserListErrorEnum(proto.Message):
         RULE_TYPE_IS_NOT_SUPPORTED = 34
         CAN_NOT_ADD_A_SIMILAR_USERLIST_AS_LOGICAL_LIST_OPERAND = 35
         CAN_NOT_MIX_CRM_BASED_IN_LOGICAL_LIST_WITH_OTHER_LISTS = 36
+        APP_ID_NOT_ALLOWED = 39
+        CANNOT_MUTATE_SYSTEM_LIST = 40
+        MOBILE_APP_IS_SENSITIVE = 41
 
 
 __all__ = tuple(sorted(__protobuf__.manifest))

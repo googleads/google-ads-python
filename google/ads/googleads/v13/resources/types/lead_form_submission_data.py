@@ -13,6 +13,8 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 #
+from __future__ import annotations
+
 from typing import MutableSequence
 
 import proto  # type: ignore
@@ -62,7 +64,7 @@ class LeadFormSubmissionData(proto.Message):
             submitted lead form.
         gclid (str):
             Output only. Google Click Id associated with
-            the submitted lead form.
+            the submissed lead form.
         submission_date_time (str):
             Output only. The date and time at which the lead form was
             submitted. The format is "yyyy-mm-dd hh:mm:ss+|-hh:mm", for

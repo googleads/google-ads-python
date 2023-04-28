@@ -13,6 +13,8 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 #
+from __future__ import annotations
+
 
 import proto  # type: ignore
 
@@ -25,11 +27,11 @@ __protobuf__ = proto.module(
 
 
 class AudienceInsightsDimensionEnum(proto.Message):
-    r"""Container for enum describing audience insights dimensions.
+    r"""Container for enum describing insights dimensions.
     """
 
     class AudienceInsightsDimension(proto.Enum):
-        r"""Possible audience dimensions for use in generating insights."""
+        r"""Possible dimensions for use in generating insights."""
         UNSPECIFIED = 0
         UNKNOWN = 1
         CATEGORY = 2

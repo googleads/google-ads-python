@@ -13,6 +13,8 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 #
+from __future__ import annotations
+
 from typing import MutableSequence
 
 import proto  # type: ignore
@@ -20,6 +22,9 @@ import proto  # type: ignore
 from google.ads.googleads.v13.common.types import criteria
 from google.ads.googleads.v13.enums.types import keyword_match_type
 from google.ads.googleads.v13.enums.types import recommendation_type
+from google.ads.googleads.v13.enums.types import (
+    shopping_add_products_to_campaign_recommendation_enum,
+)
 from google.ads.googleads.v13.enums.types import (
     target_cpa_opt_in_recommendation_goal,
 )
@@ -79,6 +84,12 @@ class Recommendation(proto.Message):
             TARGET_CPA_OPT_IN, TARGET_ROAS_OPT_IN, TEXT_AD,
             UPGRADE_SMART_SHOPPING_CAMPAIGN_TO_PERFORMANCE_MAX ,
             RAISE_TARGET_CPA_BID_TOO_LOW, FORECASTING_SET_TARGET_ROAS
+            SHOPPING_ADD_AGE_GROUP, SHOPPING_ADD_COLOR,
+            SHOPPING_ADD_GENDER, SHOPPING_ADD_SIZE, SHOPPING_ADD_GTIN,
+            SHOPPING_ADD_MORE_IDENTIFIERS,
+            SHOPPING_ADD_PRODUCTS_TO_CAMPAIGN,
+            SHOPPING_FIX_DISAPPROVED_PRODUCTS,
+            SHOPPING_MIGRATE_REGULAR_SHOPPING_CAMPAIGN_OFFERS_TO_PERFORMANCE_MAX
 
             This field is a member of `oneof`_ ``_campaign``.
         ad_group (str):
@@ -231,7 +242,91 @@ class Recommendation(proto.Message):
             Output only. The call asset recommendation.
 
             This field is a member of `oneof`_ ``recommendation``.
+        shopping_add_age_group_recommendation (google.ads.googleads.v13.resources.types.Recommendation.ShoppingOfferAttributeRecommendation):
+            Output only. The shopping add age group
+            recommendation.
+
+            This field is a member of `oneof`_ ``recommendation``.
+        shopping_add_color_recommendation (google.ads.googleads.v13.resources.types.Recommendation.ShoppingOfferAttributeRecommendation):
+            Output only. The shopping add color
+            recommendation.
+
+            This field is a member of `oneof`_ ``recommendation``.
+        shopping_add_gender_recommendation (google.ads.googleads.v13.resources.types.Recommendation.ShoppingOfferAttributeRecommendation):
+            Output only. The shopping add gender
+            recommendation.
+
+            This field is a member of `oneof`_ ``recommendation``.
+        shopping_add_gtin_recommendation (google.ads.googleads.v13.resources.types.Recommendation.ShoppingOfferAttributeRecommendation):
+            Output only. The shopping add GTIN
+            recommendation.
+
+            This field is a member of `oneof`_ ``recommendation``.
+        shopping_add_more_identifiers_recommendation (google.ads.googleads.v13.resources.types.Recommendation.ShoppingOfferAttributeRecommendation):
+            Output only. The shopping add more
+            identifiers recommendation.
+
+            This field is a member of `oneof`_ ``recommendation``.
+        shopping_add_size_recommendation (google.ads.googleads.v13.resources.types.Recommendation.ShoppingOfferAttributeRecommendation):
+            Output only. The shopping add size
+            recommendation.
+
+            This field is a member of `oneof`_ ``recommendation``.
+        shopping_add_products_to_campaign_recommendation (google.ads.googleads.v13.resources.types.Recommendation.ShoppingAddProductsToCampaignRecommendation):
+            Output only. The shopping add products to
+            campaign recommendation.
+
+            This field is a member of `oneof`_ ``recommendation``.
+        shopping_fix_disapproved_products_recommendation (google.ads.googleads.v13.resources.types.Recommendation.ShoppingFixDisapprovedProductsRecommendation):
+            Output only. The shopping fix disapproved
+            products recommendation.
+
+            This field is a member of `oneof`_ ``recommendation``.
+        shopping_target_all_offers_recommendation (google.ads.googleads.v13.resources.types.Recommendation.ShoppingTargetAllOffersRecommendation):
+            Output only. The shopping target all offers
+            recommendation.
+
+            This field is a member of `oneof`_ ``recommendation``.
+        shopping_fix_suspended_merchant_center_account_recommendation (google.ads.googleads.v13.resources.types.Recommendation.ShoppingMerchantCenterAccountSuspensionRecommendation):
+            Output only. The shopping fix suspended
+            Merchant Center account recommendation.
+
+            This field is a member of `oneof`_ ``recommendation``.
+        shopping_fix_merchant_center_account_suspension_warning_recommendation (google.ads.googleads.v13.resources.types.Recommendation.ShoppingMerchantCenterAccountSuspensionRecommendation):
+            Output only. The shopping fix Merchant Center
+            account suspension warning recommendation.
+
+            This field is a member of `oneof`_ ``recommendation``.
+        shopping_migrate_regular_shopping_campaign_offers_to_performance_max_recommendation (google.ads.googleads.v13.resources.types.Recommendation.ShoppingMigrateRegularShoppingCampaignOffersToPerformanceMaxRecommendation):
+            Output only. The shopping migrate Regular
+            Shopping Campaign offers to Performance Max
+            recommendation.
+
+            This field is a member of `oneof`_ ``recommendation``.
     """
+
+    class MerchantInfo(proto.Message):
+        r"""The Merchant Center account details.
+        Attributes:
+            id (int):
+                Output only. The Merchant Center account ID.
+            name (str):
+                Output only. The name of the Merchant Center
+                account.
+            multi_client (bool):
+                Output only. Whether the Merchant Center
+                account is a Multi-Client account (MCA).
+        """
+
+        id: int = proto.Field(
+            proto.INT64, number=1,
+        )
+        name: str = proto.Field(
+            proto.STRING, number=2,
+        )
+        multi_client: bool = proto.Field(
+            proto.BOOL, number=3,
+        )
 
     class RecommendationImpact(proto.Message):
         r"""The impact of making the change as described in the
@@ -558,11 +653,11 @@ class Recommendation(proto.Message):
         r"""The sitelink asset recommendation.
         Attributes:
             recommended_campaign_sitelink_assets (MutableSequence[google.ads.googleads.v13.resources.types.Asset]):
-                Output only. New sitelink extension assets
-                recommended at the campaign level.
+                Output only. New sitelink assets recommended
+                at the campaign level.
             recommended_customer_sitelink_assets (MutableSequence[google.ads.googleads.v13.resources.types.Asset]):
-                Output only. New sitelink extension assets
-                recommended at the customer level.
+                Output only. New sitelink assets recommended
+                at the customer level.
         """
 
         recommended_campaign_sitelink_assets: MutableSequence[
@@ -802,6 +897,163 @@ class Recommendation(proto.Message):
             proto.MESSAGE, number=2, message="Recommendation.CampaignBudget",
         )
 
+    class ShoppingOfferAttributeRecommendation(proto.Message):
+        r"""The shopping recommendation to add an attribute to offers
+        that are demoted because it is missing.
+
+        Attributes:
+            merchant (google.ads.googleads.v13.resources.types.Recommendation.MerchantInfo):
+                Output only. The details of the Merchant
+                Center account.
+            feed_label (str):
+                Output only. The campaign feed label.
+            offers_count (int):
+                Output only. The number of online, servable
+                offers.
+            demoted_offers_count (int):
+                Output only. The number of online, servable
+                offers that are demoted for missing attributes.
+                Visit the Merchant Center for more details.
+        """
+
+        merchant: "Recommendation.MerchantInfo" = proto.Field(
+            proto.MESSAGE, number=1, message="Recommendation.MerchantInfo",
+        )
+        feed_label: str = proto.Field(
+            proto.STRING, number=2,
+        )
+        offers_count: int = proto.Field(
+            proto.INT64, number=3,
+        )
+        demoted_offers_count: int = proto.Field(
+            proto.INT64, number=4,
+        )
+
+    class ShoppingFixDisapprovedProductsRecommendation(proto.Message):
+        r"""The shopping recommendation to fix disapproved products in a
+        Shopping Campaign Inventory.
+
+        Attributes:
+            merchant (google.ads.googleads.v13.resources.types.Recommendation.MerchantInfo):
+                Output only. The details of the Merchant
+                Center account.
+            feed_label (str):
+                Output only. The feed label for the campaign.
+            products_count (int):
+                Output only. The number of products of the
+                campaign.
+            disapproved_products_count (int):
+                Output only. The numbers of products of the
+                campaign that are disapproved.
+        """
+
+        merchant: "Recommendation.MerchantInfo" = proto.Field(
+            proto.MESSAGE, number=1, message="Recommendation.MerchantInfo",
+        )
+        feed_label: str = proto.Field(
+            proto.STRING, number=2,
+        )
+        products_count: int = proto.Field(
+            proto.INT64, number=3,
+        )
+        disapproved_products_count: int = proto.Field(
+            proto.INT64, number=4,
+        )
+
+    class ShoppingTargetAllOffersRecommendation(proto.Message):
+        r"""The shopping recommendation to create a catch-all campaign
+        that targets all offers.
+
+        Attributes:
+            merchant (google.ads.googleads.v13.resources.types.Recommendation.MerchantInfo):
+                Output only. The details of the Merchant
+                Center account.
+            untargeted_offers_count (int):
+                Output only. The number of untargeted offers.
+            feed_label (str):
+                Output only. The offer feed label.
+        """
+
+        merchant: "Recommendation.MerchantInfo" = proto.Field(
+            proto.MESSAGE, number=1, message="Recommendation.MerchantInfo",
+        )
+        untargeted_offers_count: int = proto.Field(
+            proto.INT64, number=2,
+        )
+        feed_label: str = proto.Field(
+            proto.STRING, number=3,
+        )
+
+    class ShoppingAddProductsToCampaignRecommendation(proto.Message):
+        r"""The shopping recommendation to add products to a Shopping
+        Campaign Inventory.
+
+        Attributes:
+            merchant (google.ads.googleads.v13.resources.types.Recommendation.MerchantInfo):
+                Output only. The details of the Merchant
+                Center account.
+            feed_label (str):
+                Output only. The feed label for the campaign.
+            reason (google.ads.googleads.v13.enums.types.ShoppingAddProductsToCampaignRecommendationEnum.Reason):
+                Output only. The reason why no products are
+                attached to the campaign.
+        """
+
+        merchant: "Recommendation.MerchantInfo" = proto.Field(
+            proto.MESSAGE, number=1, message="Recommendation.MerchantInfo",
+        )
+        feed_label: str = proto.Field(
+            proto.STRING, number=2,
+        )
+        reason: shopping_add_products_to_campaign_recommendation_enum.ShoppingAddProductsToCampaignRecommendationEnum.Reason = proto.Field(
+            proto.ENUM,
+            number=3,
+            enum=shopping_add_products_to_campaign_recommendation_enum.ShoppingAddProductsToCampaignRecommendationEnum.Reason,
+        )
+
+    class ShoppingMerchantCenterAccountSuspensionRecommendation(proto.Message):
+        r"""The shopping recommendation to fix Merchant Center account
+        suspension issues.
+
+        Attributes:
+            merchant (google.ads.googleads.v13.resources.types.Recommendation.MerchantInfo):
+                Output only. The details of the Merchant
+                Center account.
+            feed_label (str):
+                Output only. The feed label of the campaign
+                for which the suspension happened.
+        """
+
+        merchant: "Recommendation.MerchantInfo" = proto.Field(
+            proto.MESSAGE, number=1, message="Recommendation.MerchantInfo",
+        )
+        feed_label: str = proto.Field(
+            proto.STRING, number=2,
+        )
+
+    class ShoppingMigrateRegularShoppingCampaignOffersToPerformanceMaxRecommendation(
+        proto.Message
+    ):
+        r"""The shopping recommendation to migrate Regular Shopping
+        Campaign targeted offers to Performance Max campaigns.
+
+        Attributes:
+            merchant (google.ads.googleads.v13.resources.types.Recommendation.MerchantInfo):
+                Output only. The details of the Merchant
+                Center account.
+            feed_label (str):
+                Output only. The feed label of the offers
+                targeted by the campaigns sharing this
+                suggestion.
+        """
+
+        merchant: "Recommendation.MerchantInfo" = proto.Field(
+            proto.MESSAGE, number=1, message="Recommendation.MerchantInfo",
+        )
+        feed_label: str = proto.Field(
+            proto.STRING, number=2,
+        )
+
     class CampaignBudget(proto.Message):
         r"""A campaign budget shared amongst various budget
         recommendation types.
@@ -1009,6 +1261,78 @@ class Recommendation(proto.Message):
         number=41,
         oneof="recommendation",
         message=CallAssetRecommendation,
+    )
+    shopping_add_age_group_recommendation: ShoppingOfferAttributeRecommendation = proto.Field(
+        proto.MESSAGE,
+        number=42,
+        oneof="recommendation",
+        message=ShoppingOfferAttributeRecommendation,
+    )
+    shopping_add_color_recommendation: ShoppingOfferAttributeRecommendation = proto.Field(
+        proto.MESSAGE,
+        number=43,
+        oneof="recommendation",
+        message=ShoppingOfferAttributeRecommendation,
+    )
+    shopping_add_gender_recommendation: ShoppingOfferAttributeRecommendation = proto.Field(
+        proto.MESSAGE,
+        number=44,
+        oneof="recommendation",
+        message=ShoppingOfferAttributeRecommendation,
+    )
+    shopping_add_gtin_recommendation: ShoppingOfferAttributeRecommendation = proto.Field(
+        proto.MESSAGE,
+        number=45,
+        oneof="recommendation",
+        message=ShoppingOfferAttributeRecommendation,
+    )
+    shopping_add_more_identifiers_recommendation: ShoppingOfferAttributeRecommendation = proto.Field(
+        proto.MESSAGE,
+        number=46,
+        oneof="recommendation",
+        message=ShoppingOfferAttributeRecommendation,
+    )
+    shopping_add_size_recommendation: ShoppingOfferAttributeRecommendation = proto.Field(
+        proto.MESSAGE,
+        number=47,
+        oneof="recommendation",
+        message=ShoppingOfferAttributeRecommendation,
+    )
+    shopping_add_products_to_campaign_recommendation: ShoppingAddProductsToCampaignRecommendation = proto.Field(
+        proto.MESSAGE,
+        number=48,
+        oneof="recommendation",
+        message=ShoppingAddProductsToCampaignRecommendation,
+    )
+    shopping_fix_disapproved_products_recommendation: ShoppingFixDisapprovedProductsRecommendation = proto.Field(
+        proto.MESSAGE,
+        number=49,
+        oneof="recommendation",
+        message=ShoppingFixDisapprovedProductsRecommendation,
+    )
+    shopping_target_all_offers_recommendation: ShoppingTargetAllOffersRecommendation = proto.Field(
+        proto.MESSAGE,
+        number=50,
+        oneof="recommendation",
+        message=ShoppingTargetAllOffersRecommendation,
+    )
+    shopping_fix_suspended_merchant_center_account_recommendation: ShoppingMerchantCenterAccountSuspensionRecommendation = proto.Field(
+        proto.MESSAGE,
+        number=51,
+        oneof="recommendation",
+        message=ShoppingMerchantCenterAccountSuspensionRecommendation,
+    )
+    shopping_fix_merchant_center_account_suspension_warning_recommendation: ShoppingMerchantCenterAccountSuspensionRecommendation = proto.Field(
+        proto.MESSAGE,
+        number=52,
+        oneof="recommendation",
+        message=ShoppingMerchantCenterAccountSuspensionRecommendation,
+    )
+    shopping_migrate_regular_shopping_campaign_offers_to_performance_max_recommendation: ShoppingMigrateRegularShoppingCampaignOffersToPerformanceMaxRecommendation = proto.Field(
+        proto.MESSAGE,
+        number=53,
+        oneof="recommendation",
+        message=ShoppingMigrateRegularShoppingCampaignOffersToPerformanceMaxRecommendation,
     )
 
 

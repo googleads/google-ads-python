@@ -13,6 +13,8 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 #
+from __future__ import annotations
+
 from typing import MutableSequence
 
 import proto  # type: ignore
@@ -124,7 +126,7 @@ class ApplyRecommendationOperation(proto.Message):
             This field is a member of `oneof`_ ``apply_parameters``.
         sitelink_extension (google.ads.googleads.v13.services.types.ApplyRecommendationOperation.SitelinkExtensionParameters):
             Parameters to use when applying sitelink
-            extension recommendation.
+            recommendation.
 
             This field is a member of `oneof`_ ``apply_parameters``.
         move_unused_budget (google.ads.googleads.v13.services.types.ApplyRecommendationOperation.MoveUnusedBudgetParameters):
@@ -358,13 +360,11 @@ class ApplyRecommendationOperation(proto.Message):
         )
 
     class SitelinkExtensionParameters(proto.Message):
-        r"""Parameters to use when applying sitelink extension
-        recommendation.
-
+        r"""Parameters to use when applying sitelink recommendation.
         Attributes:
             sitelink_extensions (MutableSequence[google.ads.googleads.v13.common.types.SitelinkFeedItem]):
-                Sitelink extensions to be added. This is a
-                required field.
+                Sitelinks to be added. This is a required
+                field.
         """
 
         sitelink_extensions: MutableSequence[

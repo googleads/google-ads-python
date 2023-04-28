@@ -13,6 +13,8 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 #
+from __future__ import annotations
+
 from typing import MutableSequence
 
 import proto  # type: ignore
@@ -204,6 +206,9 @@ from google.ads.googleads.v13.errors.types import (
 )
 from google.ads.googleads.v13.errors.types import (
     customer_manager_link_error as gage_customer_manager_link_error,
+)
+from google.ads.googleads.v13.errors.types import (
+    customer_sk_ad_network_conversion_value_schema_error as gage_customer_sk_ad_network_conversion_value_schema_error,
 )
 from google.ads.googleads.v13.errors.types import (
     customer_user_access_error as gage_customer_user_access_error,
@@ -535,7 +540,7 @@ class ErrorCode(proto.Message):
 
             This field is a member of `oneof`_ ``error_code``.
         query_error (google.ads.googleads.v13.errors.types.QueryErrorEnum.QueryError):
-            An error with an GAQL query
+            An error with an AWQL query
 
             This field is a member of `oneof`_ ``error_code``.
         mutate_error (google.ads.googleads.v13.errors.types.MutateErrorEnum.MutateError):
@@ -556,7 +561,7 @@ class ErrorCode(proto.Message):
 
             This field is a member of `oneof`_ ``error_code``.
         quota_error (google.ads.googleads.v13.errors.types.QuotaErrorEnum.QuotaError):
-            An error with the amount of quota remaining.
+            An error with the amonut of quota remaining.
 
             This field is a member of `oneof`_ ``error_code``.
         ad_error (google.ads.googleads.v13.errors.types.AdErrorEnum.AdError):
@@ -1118,6 +1123,11 @@ class ErrorCode(proto.Message):
             This field is a member of `oneof`_ ``error_code``.
         audience_insights_error (google.ads.googleads.v13.errors.types.AudienceInsightsErrorEnum.AudienceInsightsError):
             The reasons for the Audience Insights error
+
+            This field is a member of `oneof`_ ``error_code``.
+        customer_sk_ad_network_conversion_value_schema_error (google.ads.googleads.v13.errors.types.CustomerSkAdNetworkConversionValueSchemaErrorEnum.CustomerSkAdNetworkConversionValueSchemaError):
+            The reasons for the customer SK Ad network
+            conversion value schema error
 
             This field is a member of `oneof`_ ``error_code``.
         currency_error (google.ads.googleads.v13.errors.types.CurrencyErrorEnum.CurrencyError):
@@ -1971,6 +1981,12 @@ class ErrorCode(proto.Message):
         number=167,
         oneof="error_code",
         enum=gage_audience_insights_error.AudienceInsightsErrorEnum.AudienceInsightsError,
+    )
+    customer_sk_ad_network_conversion_value_schema_error: gage_customer_sk_ad_network_conversion_value_schema_error.CustomerSkAdNetworkConversionValueSchemaErrorEnum.CustomerSkAdNetworkConversionValueSchemaError = proto.Field(
+        proto.ENUM,
+        number=170,
+        oneof="error_code",
+        enum=gage_customer_sk_ad_network_conversion_value_schema_error.CustomerSkAdNetworkConversionValueSchemaErrorEnum.CustomerSkAdNetworkConversionValueSchemaError,
     )
     currency_error: gage_currency_error.CurrencyErrorEnum.CurrencyError = proto.Field(
         proto.ENUM,

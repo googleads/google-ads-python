@@ -13,6 +13,8 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 #
+from __future__ import annotations
+
 from typing import MutableSequence
 
 import proto  # type: ignore
@@ -663,7 +665,7 @@ class StructuredSnippetFeedItem(proto.Message):
 
 
 class SitelinkFeedItem(proto.Message):
-    r"""Represents a sitelink extension.
+    r"""Represents a sitelink.
     .. _oneof: https://proto-plus-python.readthedocs.io/en/stable/fields.html#oneofs-mutually-exclusive-fields
 
     Attributes:

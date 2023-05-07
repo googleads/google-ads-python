@@ -61,7 +61,7 @@ def main(
     request = client.get_type("GenerateKeywordIdeasRequest")
     request.customer_id = customer_id
     request.language = language_rn
-    request.geo_target_constants = location_rns
+    request.geo_target_constants.extend(location_rns)
     request.include_adult_keywords = False
     request.keyword_plan_network = keyword_plan_network
 
@@ -88,7 +88,7 @@ def main(
     )
 
     for idea in keyword_ideas:
-        competition_value = idea.keyword_idea_metrics.competition.name
+        competition_value = idea.keyword_idea_metrics.competition
         print(
             f'Keyword idea text "{idea.text}" has '
             f'"{idea.keyword_idea_metrics.avg_monthly_searches}" '

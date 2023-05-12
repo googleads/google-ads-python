@@ -427,7 +427,6 @@ def check_job_status(client, customer_id, offline_user_data_job_resource_name):
     # [END add_customer_match_user_list_4]
 
 
-# [START add_customer_match_user_list_5]
 def print_customer_match_user_list_info(
     client, customer_id, user_list_resource_name
 ):
@@ -439,6 +438,7 @@ def print_customer_match_user_list_info(
         user_list_resource_name: The resource name of the user list to which to
             add users.
     """
+    # [START add_customer_match_user_list_5]
     googleads_service_client = client.get_service("GoogleAdsService")
 
     # Creates a query that retrieves the user list.
@@ -453,6 +453,7 @@ def print_customer_match_user_list_info(
     search_results = googleads_service_client.search(
         customer_id=customer_id, query=query
     )
+    # [END add_customer_match_user_list_5]
 
     # Prints out some information about the user list.
     user_list = next(iter(search_results)).user_list
@@ -466,7 +467,6 @@ def print_customer_match_user_list_info(
         "Reminder: It may take several hours for the user list to be "
         "populated. Estimates of size zero are possible."
     )
-    # [START add_customer_match_user_list_5]
 
 
 def normalize_and_hash(s, remove_all_whitespace):

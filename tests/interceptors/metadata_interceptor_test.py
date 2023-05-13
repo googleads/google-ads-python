@@ -14,10 +14,16 @@
 """Tests for the Metadata gRPC Interceptor."""
 
 from unittest import TestCase
+import sys
 
 import mock
 
 from google.ads.googleads.interceptors import MetadataInterceptor
+
+# Dynamically generate the current Python version as a string in the format
+# "X.Y.Z" for use in tests.
+info = sys.version_info
+python_version = f"{info.major}.{info.minor}.{info.micro}"
 
 
 class MetadataInterceptorTest(TestCase):
@@ -25,6 +31,7 @@ class MetadataInterceptorTest(TestCase):
         self.mock_developer_token = "1234567890"
         self.mock_login_customer_id = "0987654321"
         self.mock_linked_customer_id = "5555555555"
+        self.python_version = python_version
         super(MetadataInterceptorTest, self).setUp()
 
     def test_init(self):
@@ -164,8 +171,14 @@ class MetadataInterceptorTest(TestCase):
         mock_client_call_details.method = "test/method"
         mock_client_call_details.timeout = 5
         mock_client_call_details.metadata = [
-            ("apples", "oranges"),
-            ("x-goog-api-client", "gl-python/3.7.0 grpc/1.45.0 gax/2.2.2"),
+            (
+                "apples",
+                "oranges"
+            ),
+            (
+                "x-goog-api-client",
+                f"gl-python/{self.python_version} grpc/1.45.0 gax/2.2.2"
+            ),
         ]
         # Create a simple function that just returns the client_call_details
         # so we can make assertions about what was modified in the _intercept
@@ -206,7 +219,7 @@ class MetadataInterceptorTest(TestCase):
             ("apples", "oranges"),
             (
                 "x-goog-api-client",
-                "gl-python/3.7.0 grpc/1.45.0 pb/3.21.0",
+                f"gl-python/{self.python_version} grpc/1.45.0 pb/3.21.0",
             ),
         ]
         # Create a simple function that just returns the client_call_details

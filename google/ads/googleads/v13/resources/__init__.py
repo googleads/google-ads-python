@@ -113,6 +113,7 @@ __all__ = (
     "CustomerLabel",
     "CustomerManagerLink",
     "CustomerNegativeCriterion",
+    "CustomerSkAdNetworkConversionValueSchema",
     "CustomerUserAccess",
     "CustomerUserAccessInvitation",
     "CustomizerAttribute",

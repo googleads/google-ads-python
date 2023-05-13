@@ -13,6 +13,8 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 #
+from __future__ import annotations
+
 from typing import MutableSequence
 
 import proto  # type: ignore
@@ -91,7 +93,7 @@ class ExtensionFeedItem(proto.Message):
             Output only. Status of the feed item.
             This field is read-only.
         sitelink_feed_item (google.ads.googleads.v13.common.types.SitelinkFeedItem):
-            Sitelink extension.
+            Sitelink.
 
             This field is a member of `oneof`_ ``extension``.
         structured_snippet_feed_item (google.ads.googleads.v13.common.types.StructuredSnippetFeedItem):

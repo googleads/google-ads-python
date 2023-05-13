@@ -13,6 +13,8 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 #
+from __future__ import annotations
+
 
 import proto  # type: ignore
 
@@ -66,6 +68,7 @@ class AssetErrorEnum(proto.Message):
         NAME_CONFLICT_FOR_ASSET_TYPE = 34
         CANNOT_MODIFY_ASSET_SOURCE = 35
         CANNOT_MODIFY_AUTOMATICALLY_CREATED_ASSET = 36
+        LEAD_FORM_LOCATION_ANSWER_TYPE_DISALLOWED = 37
 
 
 __all__ = tuple(sorted(__protobuf__.manifest))

@@ -13,6 +13,8 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 #
+from __future__ import annotations
+
 from typing import MutableSequence
 
 import proto  # type: ignore
@@ -928,11 +930,11 @@ class GoogleAdsRow(proto.Message):
         campaign_feed (google.ads.googleads.v13.resources.types.CampaignFeed):
             The campaign feed referenced in the query.
         campaign_group (google.ads.googleads.v13.resources.types.CampaignGroup):
-            Campaign Group referenced in GAQL query.
+            Campaign Group referenced in AWQL query.
         campaign_label (google.ads.googleads.v13.resources.types.CampaignLabel):
             The campaign label referenced in the query.
         campaign_shared_set (google.ads.googleads.v13.resources.types.CampaignSharedSet):
-            Campaign Shared Set referenced in GAQL query.
+            Campaign Shared Set referenced in AWQL query.
         campaign_simulation (google.ads.googleads.v13.resources.types.CampaignSimulation):
             The campaign simulation referenced in the
             query.

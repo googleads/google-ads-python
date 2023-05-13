@@ -32,8 +32,6 @@ def main(
     order_id,
     conversion_date_time,
     user_agent,
-    restatement_value,
-    currency_code,
 ):
     """The main method that creates all necessary entities for the example.
 
@@ -44,8 +42,6 @@ def main(
         order_id: The unique ID (transaction ID) of the conversion.
         conversion_date_time: The date and time of the conversion.
         user_agent: The HTTP user agent of the conversion.
-        restatement_value: The enhancement value.
-        currency_code: The currency of the enhancement value.
     """
     # [START create_adjustment]
     conversion_action_service = client.get_service("ConversionActionService")
@@ -110,20 +106,7 @@ def main(
         # enhancement are either both attributed as same-device or both
         # attributed as cross-device.
         conversion_adjustment.user_agent = user_agent
-
-    if restatement_value:
-        # Sets the new value of the conversion.
-        conversion_adjustment.restatement_value.adjusted_value = (
-            restatement_value
-        )
-        if currency_code:
-            # Sets the currency of the new value, if provided. Otherwise, the
-            # default currency from the conversion action is used, and if that
-            # is not set then the account currency is used.
-            conversion_adjustment.restatement_value.currency_code = (
-                currency_code
-            )
-    # [END create_conversion]
+        # [END create_adjustment]
 
     # Creates the conversion adjustment upload service client.
     conversion_adjustment_upload_service = client.get_service(
@@ -251,16 +234,6 @@ if __name__ == "__main__":
         type=str,
         help="The HTTP user agent of the conversion.",
     )
-    parser.add_argument(
-        "-v", "--restatement_value", type=float, help="The enhancement value.",
-    )
-    parser.add_argument(
-        "-y",
-        "--currency_code",
-        type=str,
-        required=True,
-        help="The currency of the conversion value.",
-    )
     args = parser.parse_args()
 
     try:
@@ -271,8 +244,6 @@ if __name__ == "__main__":
             args.order_id,
             args.conversion_date_time,
             args.user_agent,
-            args.restatement_value,
-            args.currency_code,
         )
     except GoogleAdsException as ex:
         print(

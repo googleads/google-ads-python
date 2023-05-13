@@ -13,6 +13,8 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 #
+from __future__ import annotations
+
 from typing import MutableSequence
 
 import proto  # type: ignore
@@ -46,16 +48,17 @@ __protobuf__ = proto.module(
 
 class KeywordPlanHistoricalMetrics(proto.Message):
     r"""Historical metrics specific to the targeting options
-    selected. Targeting options include geographies, network, etc.
-    Refer to https://support.google.com/google-ads/answer/3022575
-    for more details.
+    selected. Targeting options include geographies, network, and so
+    on. Refer to
+    https://support.google.com/google-ads/answer/3022575 for more
+    details.
 
     .. _oneof: https://proto-plus-python.readthedocs.io/en/stable/fields.html#oneofs-mutually-exclusive-fields
 
     Attributes:
         avg_monthly_searches (int):
             Approximate number of monthly searches on
-            this query averaged for the past 12 months.
+            this query, averaged for the past 12 months.
 
             This field is a member of `oneof`_ ``_avg_monthly_searches``.
         monthly_search_volumes (MutableSequence[google.ads.googleads.v13.common.types.MonthlySearchVolume]):
@@ -123,20 +126,17 @@ class HistoricalMetricsOptions(proto.Message):
     Attributes:
         year_month_range (google.ads.googleads.v13.common.types.YearMonthRange):
             The year month range for historical metrics. If not
-            specified the searches will be returned for past 12 months.
-            Searches data is available for the past 4 years. If the
+            specified, metrics for the past 12 months are returned.
+            Search metrics are available for the past 4 years. If the
             search volume is not available for the entire
             year_month_range provided, the subset of the year month
-            range for which search volume is available will be returned.
+            range for which search volume is available are returned.
 
             This field is a member of `oneof`_ ``_year_month_range``.
         include_average_cpc (bool):
             Indicates whether to include average cost per
-            click value. Average CPC is a legacy value that
-            will be removed and replaced in the future, and
-            as such we are including it as an optional value
-            so clients only use it when strictly necessary
-            and to better track clients that use this value.
+            click value. Average CPC is provided only for
+            legacy support.
     """
 
     year_month_range: dates.YearMonthRange = proto.Field(
@@ -239,7 +239,7 @@ class KeywordPlanDeviceSearches(proto.Message):
 
 
 class KeywordAnnotations(proto.Message):
-    r"""The Annotations for the Keyword plan keywords.
+    r"""The annotations for the keyword plan keywords.
     Attributes:
         concepts (MutableSequence[google.ads.googleads.v13.common.types.KeywordConcept]):
             The list of concepts for the keyword.

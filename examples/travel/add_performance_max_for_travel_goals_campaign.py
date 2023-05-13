@@ -327,6 +327,7 @@ def create_hotel_asset_set(client, customer_id):
     # [END create_hotel_asset_set]
 
 
+# [START create_hotel_asset]
 def create_hotel_asset(client, customer_id, place_id, asset_set_resource_name):
     """Creates a hotel property asset using the specified place ID.
 
@@ -378,6 +379,7 @@ def create_hotel_asset(client, customer_id, place_id, asset_set_resource_name):
     print_response_details(response)
 
     return response.mutate_operation_responses[0].asset_result.resource_name
+    # [END create_hotel_asset]
 
 
 def create_campaign_budget_operation(client, customer_id):

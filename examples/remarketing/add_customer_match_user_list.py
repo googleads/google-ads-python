@@ -344,7 +344,7 @@ def build_offline_user_data_job_operations(client):
                     f"{missing_keys}"
                 )
             else:
-                user_identifier = client.get_type("OfflineUserAddressInfo")
+                user_identifier = client.get_type("UserIdentifier")
                 address_info = user_identifier.address_info
                 address_info.hashed_first_name = normalize_and_hash(
                     record["first_name"], False
@@ -354,6 +354,7 @@ def build_offline_user_data_job_operations(client):
                 )
                 address_info.country_code = record["country_code"]
                 address_info.postal_code = record["postal_code"]
+                user_data.user_identifiers.append(user_identifier)
         # [END add_customer_match_user_list_2]
 
         # If the user_identifiers repeated field is not empty, create a new

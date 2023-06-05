@@ -206,7 +206,7 @@ def _validate_customer_id(customer_id, id_type):
     """
     if customer_id is not None:
         # Checks that the string is comprised only of 10 digits.
-        pattern = re.compile("^\d{10}", re.ASCII)
+        pattern = re.compile(r"^\d{10}", re.ASCII)
         if not pattern.fullmatch(customer_id):
             raise ValueError(
                 f"The specified {id_type} customer ID is invalid. It must be a "

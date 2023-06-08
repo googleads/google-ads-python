@@ -203,7 +203,7 @@ def get_hotel_asset_suggestion(client, customer_id, place_id):
     request.language_option = "en-US"
     # In this example we only use a single place ID for the purpose of
     # demonstration, but it's possible to append more than one here if needed.
-    request.place_id.append(place_id)
+    request.place_ids.append(place_id)
     # Send a request to suggest assets to be created as an asset group for the
     # Performance Max for travel goals campaign.
     travel_asset_suggestion_service = client.get_service(
@@ -928,7 +928,7 @@ def print_response_details(mutate_response):
 if __name__ == "__main__":
     # GoogleAdsClient will read the google-ads.yaml configuration file in the
     # home directory if none is specified.
-    googleads_client = GoogleAdsClient.load_from_storage(version="v13")
+    googleads_client = GoogleAdsClient.load_from_storage(version="v14")
 
     parser = argparse.ArgumentParser(
         description=("Creates a Performance Max for travel goals campaign.")

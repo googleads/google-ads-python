@@ -66,10 +66,10 @@ def main(
     # hashing where required.
     address_identifier = client.get_type("UserIdentifier")
     address_identifier.address_info.hashed_first_name = normalize_and_hash(
-        "Joanna"
+        "Dana"
     )
     address_identifier.address_info.hashed_last_name = normalize_and_hash(
-        "Joanna"
+        "Quinn"
     )
     address_identifier.address_info.hashed_street_address = normalize_and_hash(
         "1600 Amphitheatre Pkwy"
@@ -190,7 +190,7 @@ def normalize_and_hash(s):
 if __name__ == "__main__":
     # GoogleAdsClient will read the google-ads.yaml configuration file in the
     # home directory if none is specified.
-    googleads_client = GoogleAdsClient.load_from_storage(version="v13")
+    googleads_client = GoogleAdsClient.load_from_storage(version="v14")
 
     parser = argparse.ArgumentParser(
         description="Imports offline call conversion values for calls related "

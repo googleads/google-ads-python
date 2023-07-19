@@ -265,7 +265,7 @@ def build_offline_user_data_job_operations(client):
         # Address that includes all four required elements: first name, last
         # name, country code, and postal code.
         "first_name": "Alex",
-        "last_mame": "Quinn",
+        "last_name": "Quinn",
         "country_code": "US",
         "postal_code": "94045",
         # Phone number to be converted to E.164 format, with a leading '+' as
@@ -352,7 +352,7 @@ def build_offline_user_data_job_operations(client):
                     record["first_name"], False
                 )
                 address_info.hashed_last_name = normalize_and_hash(
-                    record["first_last"], False
+                    record["last_name"], False
                 )
                 address_info.country_code = record["country_code"]
                 address_info.postal_code = record["postal_code"]

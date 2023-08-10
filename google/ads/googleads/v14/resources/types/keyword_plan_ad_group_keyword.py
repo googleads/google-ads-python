@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-# Copyright 2022 Google LLC
+# Copyright 2023 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -24,7 +24,9 @@ from google.ads.googleads.v14.enums.types import keyword_match_type
 __protobuf__ = proto.module(
     package="google.ads.googleads.v14.resources",
     marshal="google.ads.googleads.v14",
-    manifest={"KeywordPlanAdGroupKeyword",},
+    manifest={
+        "KeywordPlanAdGroupKeyword",
+    },
 )
 
 
@@ -73,27 +75,40 @@ class KeywordPlanAdGroupKeyword(proto.Message):
     """
 
     resource_name: str = proto.Field(
-        proto.STRING, number=1,
+        proto.STRING,
+        number=1,
     )
     keyword_plan_ad_group: str = proto.Field(
-        proto.STRING, number=8, optional=True,
+        proto.STRING,
+        number=8,
+        optional=True,
     )
     id: int = proto.Field(
-        proto.INT64, number=9, optional=True,
+        proto.INT64,
+        number=9,
+        optional=True,
     )
     text: str = proto.Field(
-        proto.STRING, number=10, optional=True,
+        proto.STRING,
+        number=10,
+        optional=True,
     )
-    match_type: keyword_match_type.KeywordMatchTypeEnum.KeywordMatchType = proto.Field(
-        proto.ENUM,
-        number=5,
-        enum=keyword_match_type.KeywordMatchTypeEnum.KeywordMatchType,
+    match_type: keyword_match_type.KeywordMatchTypeEnum.KeywordMatchType = (
+        proto.Field(
+            proto.ENUM,
+            number=5,
+            enum=keyword_match_type.KeywordMatchTypeEnum.KeywordMatchType,
+        )
     )
     cpc_bid_micros: int = proto.Field(
-        proto.INT64, number=11, optional=True,
+        proto.INT64,
+        number=11,
+        optional=True,
     )
     negative: bool = proto.Field(
-        proto.BOOL, number=12, optional=True,
+        proto.BOOL,
+        number=12,
+        optional=True,
     )
 
 

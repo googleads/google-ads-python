@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-# Copyright 2022 Google LLC
+# Copyright 2023 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -87,16 +87,16 @@ class Recommendation(proto.Message):
             RESPONSIVE_SEARCH_AD_ASSET, SEARCH_PARTNERS_OPT_IN,
             DISPLAY_EXPANSION_OPT_IN, SITELINK_EXTENSION,
             TARGET_CPA_OPT_IN, TARGET_ROAS_OPT_IN, TEXT_AD,
-            UPGRADE_SMART_SHOPPING_CAMPAIGN_TO_PERFORMANCE_MAX ,
-            RAISE_TARGET_CPA_BID_TOO_LOW, FORECASTING_SET_TARGET_ROAS
+            UPGRADE_SMART_SHOPPING_CAMPAIGN_TO_PERFORMANCE_MAX,
+            RAISE_TARGET_CPA_BID_TOO_LOW, FORECASTING_SET_TARGET_ROAS,
             SHOPPING_ADD_AGE_GROUP, SHOPPING_ADD_COLOR,
             SHOPPING_ADD_GENDER, SHOPPING_ADD_SIZE, SHOPPING_ADD_GTIN,
             SHOPPING_ADD_MORE_IDENTIFIERS,
             SHOPPING_ADD_PRODUCTS_TO_CAMPAIGN,
             SHOPPING_FIX_DISAPPROVED_PRODUCTS,
-            SHOPPING_MIGRATE_REGULAR_SHOPPING_CAMPAIGN_OFFERS_TO_PERFORMANCE_MAX
+            SHOPPING_MIGRATE_REGULAR_SHOPPING_CAMPAIGN_OFFERS_TO_PERFORMANCE_MAX,
             DYNAMIC_IMAGE_EXTENSION_OPT_IN, RAISE_TARGET_CPA,
-            LOWER_TARGET_ROAS
+            LOWER_TARGET_ROAS,
 
             This field is a member of `oneof`_ ``_campaign``.
         ad_group (str):
@@ -327,6 +327,21 @@ class Recommendation(proto.Message):
             ROAS.
 
             This field is a member of `oneof`_ ``recommendation``.
+        performance_max_opt_in_recommendation (google.ads.googleads.v14.resources.types.Recommendation.PerformanceMaxOptInRecommendation):
+            Output only. The Performance Max Opt In
+            recommendation.
+
+            This field is a member of `oneof`_ ``recommendation``.
+        improve_performance_max_ad_strength_recommendation (google.ads.googleads.v14.resources.types.Recommendation.ImprovePerformanceMaxAdStrengthRecommendation):
+            Output only. The improve Performance Max ad
+            strength recommendation.
+
+            This field is a member of `oneof`_ ``recommendation``.
+        migrate_dynamic_search_ads_campaign_to_performance_max_recommendation (google.ads.googleads.v14.resources.types.Recommendation.MigrateDynamicSearchAdsCampaignToPerformanceMaxRecommendation):
+            Output only. The Dynamic Search Ads to
+            Performance Max migration recommendation.
+
+            This field is a member of `oneof`_ ``recommendation``.
     """
 
     class MerchantInfo(proto.Message):
@@ -511,6 +526,10 @@ class Recommendation(proto.Message):
         Attributes:
             keyword (google.ads.googleads.v14.common.types.KeywordInfo):
                 Output only. The recommended keyword.
+            search_terms (MutableSequence[google.ads.googleads.v14.resources.types.Recommendation.KeywordRecommendation.SearchTerm]):
+                Output only. A list of search terms this
+                keyword matches. The same search term may be
+                repeated for multiple keywords.
             recommended_cpc_bid_micros (int):
                 Output only. The recommended CPC
                 (cost-per-click) bid.
@@ -518,10 +537,38 @@ class Recommendation(proto.Message):
                 This field is a member of `oneof`_ ``_recommended_cpc_bid_micros``.
         """
 
+        class SearchTerm(proto.Message):
+            r"""Information about a search term as related to a keyword
+            recommendation.
+
+            Attributes:
+                text (str):
+                    Output only. The text of the search term.
+                estimated_weekly_search_count (int):
+                    Output only. Estimated number of historical
+                    weekly searches for this search term.
+            """
+
+            text: str = proto.Field(
+                proto.STRING,
+                number=1,
+            )
+            estimated_weekly_search_count: int = proto.Field(
+                proto.INT64,
+                number=2,
+            )
+
         keyword: criteria.KeywordInfo = proto.Field(
             proto.MESSAGE,
             number=1,
             message=criteria.KeywordInfo,
+        )
+        search_terms: MutableSequence[
+            "Recommendation.KeywordRecommendation.SearchTerm"
+        ] = proto.RepeatedField(
+            proto.MESSAGE,
+            number=4,
+            message="Recommendation.KeywordRecommendation.SearchTerm",
         )
         recommended_cpc_bid_micros: int = proto.Field(
             proto.INT64,
@@ -1279,8 +1326,8 @@ class Recommendation(proto.Message):
             new_start_date (str):
                 Output only. The date when the new budget would start being
                 used. This field will be set for the following
-                recommendation types: FORECASTING_SET_TARGET_ROAS.
-                YYYY-MM-DD format, for example, 2018-04-17.
+                recommendation types: FORECASTING_SET_TARGET_ROAS YYYY-MM-DD
+                format, for example, 2018-04-17.
         """
 
         current_amount_micros: int = proto.Field(
@@ -1294,6 +1341,41 @@ class Recommendation(proto.Message):
         new_start_date: str = proto.Field(
             proto.STRING,
             number=3,
+        )
+
+    class PerformanceMaxOptInRecommendation(proto.Message):
+        r"""The Performance Max Opt In recommendation."""
+
+    class ImprovePerformanceMaxAdStrengthRecommendation(proto.Message):
+        r"""Recommendation to improve the asset group strength of a
+        Performance Max campaign to an "Excellent" rating.
+
+        Attributes:
+            asset_group (str):
+                Output only. The asset group resource name.
+        """
+
+        asset_group: str = proto.Field(
+            proto.STRING,
+            number=1,
+        )
+
+    class MigrateDynamicSearchAdsCampaignToPerformanceMaxRecommendation(
+        proto.Message
+    ):
+        r"""The Dynamic Search Ads to Performance Max migration
+        recommendation.
+
+        Attributes:
+            apply_link (str):
+                Output only. A link to the Google Ads UI
+                where the customer can manually apply the
+                recommendation.
+        """
+
+        apply_link: str = proto.Field(
+            proto.STRING,
+            number=1,
         )
 
     resource_name: str = proto.Field(
@@ -1611,6 +1693,26 @@ class Recommendation(proto.Message):
             oneof="recommendation",
             message=LowerTargetRoasRecommendation,
         )
+    )
+    performance_max_opt_in_recommendation: PerformanceMaxOptInRecommendation = (
+        proto.Field(
+            proto.MESSAGE,
+            number=57,
+            oneof="recommendation",
+            message=PerformanceMaxOptInRecommendation,
+        )
+    )
+    improve_performance_max_ad_strength_recommendation: ImprovePerformanceMaxAdStrengthRecommendation = proto.Field(
+        proto.MESSAGE,
+        number=58,
+        oneof="recommendation",
+        message=ImprovePerformanceMaxAdStrengthRecommendation,
+    )
+    migrate_dynamic_search_ads_campaign_to_performance_max_recommendation: MigrateDynamicSearchAdsCampaignToPerformanceMaxRecommendation = proto.Field(
+        proto.MESSAGE,
+        number=59,
+        oneof="recommendation",
+        message=MigrateDynamicSearchAdsCampaignToPerformanceMaxRecommendation,
     )
 
 

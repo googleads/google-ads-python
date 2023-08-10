@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-# Copyright 2022 Google LLC
+# Copyright 2023 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -80,6 +80,7 @@ __all__ = (
     "CampaignFeed",
     "CampaignGroup",
     "CampaignLabel",
+    "CampaignSearchTermInsight",
     "CampaignSharedSet",
     "CampaignSimulation",
     "CarrierConstant",
@@ -101,6 +102,7 @@ __all__ = (
     "CustomInterestMember",
     "CustomLeadFormSubmissionField",
     "Customer",
+    "CustomerAgreementSetting",
     "CustomerAsset",
     "CustomerAssetSet",
     "CustomerClient",
@@ -112,6 +114,7 @@ __all__ = (
     "CustomerLabel",
     "CustomerManagerLink",
     "CustomerNegativeCriterion",
+    "CustomerSearchTermInsight",
     "CustomerSkAdNetworkConversionValueSchema",
     "CustomerUserAccess",
     "CustomerUserAccessInvitation",
@@ -169,6 +172,7 @@ __all__ = (
     "LeadFormSubmissionField",
     "LifeEvent",
     "ListingGroupFilterDimension",
+    "ListingGroupFilterDimensionPath",
     "LocationView",
     "ManagedPlacementView",
     "MediaAudio",

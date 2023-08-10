@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-# Copyright 2022 Google LLC
+# Copyright 2023 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -58,12 +58,16 @@ class CriterionCategoryAvailability(proto.Message):
     """
 
     channel: "CriterionCategoryChannelAvailability" = proto.Field(
-        proto.MESSAGE, number=1, message="CriterionCategoryChannelAvailability",
+        proto.MESSAGE,
+        number=1,
+        message="CriterionCategoryChannelAvailability",
     )
     locale: MutableSequence[
         "CriterionCategoryLocaleAvailability"
     ] = proto.RepeatedField(
-        proto.MESSAGE, number=2, message="CriterionCategoryLocaleAvailability",
+        proto.MESSAGE,
+        number=2,
+        message="CriterionCategoryLocaleAvailability",
     )
 
 
@@ -115,7 +119,9 @@ class CriterionCategoryChannelAvailability(proto.Message):
         enum=gage_advertising_channel_sub_type.AdvertisingChannelSubTypeEnum.AdvertisingChannelSubType,
     )
     include_default_channel_sub_type: bool = proto.Field(
-        proto.BOOL, number=5, optional=True,
+        proto.BOOL,
+        number=5,
+        optional=True,
     )
 
 
@@ -148,10 +154,14 @@ class CriterionCategoryLocaleAvailability(proto.Message):
         enum=criterion_category_locale_availability_mode.CriterionCategoryLocaleAvailabilityModeEnum.CriterionCategoryLocaleAvailabilityMode,
     )
     country_code: str = proto.Field(
-        proto.STRING, number=4, optional=True,
+        proto.STRING,
+        number=4,
+        optional=True,
     )
     language_code: str = proto.Field(
-        proto.STRING, number=5, optional=True,
+        proto.STRING,
+        number=5,
+        optional=True,
     )
 
 

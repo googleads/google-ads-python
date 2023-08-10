@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-# Copyright 2022 Google LLC
+# Copyright 2023 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -68,18 +68,23 @@ class MutateConversionValueRulesRequest(proto.Message):
     """
 
     customer_id: str = proto.Field(
-        proto.STRING, number=1,
+        proto.STRING,
+        number=1,
     )
     operations: MutableSequence[
         "ConversionValueRuleOperation"
     ] = proto.RepeatedField(
-        proto.MESSAGE, number=2, message="ConversionValueRuleOperation",
+        proto.MESSAGE,
+        number=2,
+        message="ConversionValueRuleOperation",
     )
     partial_failure: bool = proto.Field(
-        proto.BOOL, number=5,
+        proto.BOOL,
+        number=5,
     )
     validate_only: bool = proto.Field(
-        proto.BOOL, number=3,
+        proto.BOOL,
+        number=3,
     )
     response_content_type: gage_response_content_type.ResponseContentTypeEnum.ResponseContentType = proto.Field(
         proto.ENUM,
@@ -105,12 +110,14 @@ class ConversionValueRuleOperation(proto.Message):
             fields are modified in an update.
         create (google.ads.googleads.v14.resources.types.ConversionValueRule):
             Create operation: No resource name is
-            expected for the new conversion value rule.
+            expected for the new conversion
+            value rule.
 
             This field is a member of `oneof`_ ``operation``.
         update (google.ads.googleads.v14.resources.types.ConversionValueRule):
             Update operation: The conversion value rule
-            is expected to have a valid resource name.
+            is expected to have a valid
+            resource name.
 
             This field is a member of `oneof`_ ``operation``.
         remove (str):
@@ -123,7 +130,9 @@ class ConversionValueRuleOperation(proto.Message):
     """
 
     update_mask: field_mask_pb2.FieldMask = proto.Field(
-        proto.MESSAGE, number=4, message=field_mask_pb2.FieldMask,
+        proto.MESSAGE,
+        number=4,
+        message=field_mask_pb2.FieldMask,
     )
     create: gagr_conversion_value_rule.ConversionValueRule = proto.Field(
         proto.MESSAGE,
@@ -138,7 +147,9 @@ class ConversionValueRuleOperation(proto.Message):
         message=gagr_conversion_value_rule.ConversionValueRule,
     )
     remove: str = proto.Field(
-        proto.STRING, number=3, oneof="operation",
+        proto.STRING,
+        number=3,
+        oneof="operation",
     )
 
 
@@ -160,10 +171,14 @@ class MutateConversionValueRulesResponse(proto.Message):
     results: MutableSequence[
         "MutateConversionValueRuleResult"
     ] = proto.RepeatedField(
-        proto.MESSAGE, number=2, message="MutateConversionValueRuleResult",
+        proto.MESSAGE,
+        number=2,
+        message="MutateConversionValueRuleResult",
     )
     partial_failure_error: status_pb2.Status = proto.Field(
-        proto.MESSAGE, number=3, message=status_pb2.Status,
+        proto.MESSAGE,
+        number=3,
+        message=status_pb2.Status,
     )
 
 
@@ -179,12 +194,15 @@ class MutateConversionValueRuleResult(proto.Message):
     """
 
     resource_name: str = proto.Field(
-        proto.STRING, number=1,
+        proto.STRING,
+        number=1,
     )
-    conversion_value_rule: gagr_conversion_value_rule.ConversionValueRule = proto.Field(
-        proto.MESSAGE,
-        number=2,
-        message=gagr_conversion_value_rule.ConversionValueRule,
+    conversion_value_rule: gagr_conversion_value_rule.ConversionValueRule = (
+        proto.Field(
+            proto.MESSAGE,
+            number=2,
+            message=gagr_conversion_value_rule.ConversionValueRule,
+        )
     )
 
 

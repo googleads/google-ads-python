@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-# Copyright 2022 Google LLC
+# Copyright 2023 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -26,7 +26,10 @@ from google.ads.googleads.v14.enums.types import matching_function_operator
 __protobuf__ = proto.module(
     package="google.ads.googleads.v14.common",
     marshal="google.ads.googleads.v14",
-    manifest={"MatchingFunction", "Operand",},
+    manifest={
+        "MatchingFunction",
+        "Operand",
+    },
 )
 
 
@@ -72,7 +75,9 @@ class MatchingFunction(proto.Message):
     """
 
     function_string: str = proto.Field(
-        proto.STRING, number=5, optional=True,
+        proto.STRING,
+        number=5,
+        optional=True,
     )
     operator: matching_function_operator.MatchingFunctionOperatorEnum.MatchingFunctionOperator = proto.Field(
         proto.ENUM,
@@ -80,10 +85,14 @@ class MatchingFunction(proto.Message):
         enum=matching_function_operator.MatchingFunctionOperatorEnum.MatchingFunctionOperator,
     )
     left_operands: MutableSequence["Operand"] = proto.RepeatedField(
-        proto.MESSAGE, number=2, message="Operand",
+        proto.MESSAGE,
+        number=2,
+        message="Operand",
     )
     right_operands: MutableSequence["Operand"] = proto.RepeatedField(
-        proto.MESSAGE, number=3, message="Operand",
+        proto.MESSAGE,
+        number=3,
+        message="Operand",
     )
 
 
@@ -151,16 +160,24 @@ class Operand(proto.Message):
         """
 
         string_value: str = proto.Field(
-            proto.STRING, number=5, oneof="constant_operand_value",
+            proto.STRING,
+            number=5,
+            oneof="constant_operand_value",
         )
         long_value: int = proto.Field(
-            proto.INT64, number=6, oneof="constant_operand_value",
+            proto.INT64,
+            number=6,
+            oneof="constant_operand_value",
         )
         boolean_value: bool = proto.Field(
-            proto.BOOL, number=7, oneof="constant_operand_value",
+            proto.BOOL,
+            number=7,
+            oneof="constant_operand_value",
         )
         double_value: float = proto.Field(
-            proto.DOUBLE, number=8, oneof="constant_operand_value",
+            proto.DOUBLE,
+            number=8,
+            oneof="constant_operand_value",
         )
 
     class FeedAttributeOperand(proto.Message):
@@ -182,10 +199,14 @@ class Operand(proto.Message):
         """
 
         feed_id: int = proto.Field(
-            proto.INT64, number=3, optional=True,
+            proto.INT64,
+            number=3,
+            optional=True,
         )
         feed_attribute_id: int = proto.Field(
-            proto.INT64, number=4, optional=True,
+            proto.INT64,
+            number=4,
+            optional=True,
         )
 
     class FunctionOperand(proto.Message):
@@ -198,7 +219,9 @@ class Operand(proto.Message):
         """
 
         matching_function: "MatchingFunction" = proto.Field(
-            proto.MESSAGE, number=1, message="MatchingFunction",
+            proto.MESSAGE,
+            number=1,
+            message="MatchingFunction",
         )
 
     class RequestContextOperand(proto.Message):

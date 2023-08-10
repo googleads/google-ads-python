@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-# Copyright 2022 Google LLC
+# Copyright 2023 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -93,12 +93,16 @@ class KeywordPlanHistoricalMetrics(proto.Message):
     """
 
     avg_monthly_searches: int = proto.Field(
-        proto.INT64, number=7, optional=True,
+        proto.INT64,
+        number=7,
+        optional=True,
     )
     monthly_search_volumes: MutableSequence[
         "MonthlySearchVolume"
     ] = proto.RepeatedField(
-        proto.MESSAGE, number=6, message="MonthlySearchVolume",
+        proto.MESSAGE,
+        number=6,
+        message="MonthlySearchVolume",
     )
     competition: keyword_plan_competition_level.KeywordPlanCompetitionLevelEnum.KeywordPlanCompetitionLevel = proto.Field(
         proto.ENUM,
@@ -106,16 +110,24 @@ class KeywordPlanHistoricalMetrics(proto.Message):
         enum=keyword_plan_competition_level.KeywordPlanCompetitionLevelEnum.KeywordPlanCompetitionLevel,
     )
     competition_index: int = proto.Field(
-        proto.INT64, number=8, optional=True,
+        proto.INT64,
+        number=8,
+        optional=True,
     )
     low_top_of_page_bid_micros: int = proto.Field(
-        proto.INT64, number=9, optional=True,
+        proto.INT64,
+        number=9,
+        optional=True,
     )
     high_top_of_page_bid_micros: int = proto.Field(
-        proto.INT64, number=10, optional=True,
+        proto.INT64,
+        number=10,
+        optional=True,
     )
     average_cpc_micros: int = proto.Field(
-        proto.INT64, number=11, optional=True,
+        proto.INT64,
+        number=11,
+        optional=True,
     )
 
 
@@ -140,10 +152,14 @@ class HistoricalMetricsOptions(proto.Message):
     """
 
     year_month_range: dates.YearMonthRange = proto.Field(
-        proto.MESSAGE, number=1, optional=True, message=dates.YearMonthRange,
+        proto.MESSAGE,
+        number=1,
+        optional=True,
+        message=dates.YearMonthRange,
     )
     include_average_cpc: bool = proto.Field(
-        proto.BOOL, number=2,
+        proto.BOOL,
+        number=2,
     )
 
 
@@ -168,13 +184,19 @@ class MonthlySearchVolume(proto.Message):
     """
 
     year: int = proto.Field(
-        proto.INT64, number=4, optional=True,
+        proto.INT64,
+        number=4,
+        optional=True,
     )
     month: month_of_year.MonthOfYearEnum.MonthOfYear = proto.Field(
-        proto.ENUM, number=2, enum=month_of_year.MonthOfYearEnum.MonthOfYear,
+        proto.ENUM,
+        number=2,
+        enum=month_of_year.MonthOfYearEnum.MonthOfYear,
     )
     monthly_searches: int = proto.Field(
-        proto.INT64, number=5, optional=True,
+        proto.INT64,
+        number=5,
+        optional=True,
     )
 
 
@@ -211,7 +233,9 @@ class KeywordPlanAggregateMetricResults(proto.Message):
     device_searches: MutableSequence[
         "KeywordPlanDeviceSearches"
     ] = proto.RepeatedField(
-        proto.MESSAGE, number=1, message="KeywordPlanDeviceSearches",
+        proto.MESSAGE,
+        number=1,
+        message="KeywordPlanDeviceSearches",
     )
 
 
@@ -231,10 +255,14 @@ class KeywordPlanDeviceSearches(proto.Message):
     """
 
     device: gage_device.DeviceEnum.Device = proto.Field(
-        proto.ENUM, number=1, enum=gage_device.DeviceEnum.Device,
+        proto.ENUM,
+        number=1,
+        enum=gage_device.DeviceEnum.Device,
     )
     search_count: int = proto.Field(
-        proto.INT64, number=2, optional=True,
+        proto.INT64,
+        number=2,
+        optional=True,
     )
 
 
@@ -246,7 +274,9 @@ class KeywordAnnotations(proto.Message):
     """
 
     concepts: MutableSequence["KeywordConcept"] = proto.RepeatedField(
-        proto.MESSAGE, number=1, message="KeywordConcept",
+        proto.MESSAGE,
+        number=1,
+        message="KeywordConcept",
     )
 
 
@@ -260,10 +290,13 @@ class KeywordConcept(proto.Message):
     """
 
     name: str = proto.Field(
-        proto.STRING, number=1,
+        proto.STRING,
+        number=1,
     )
     concept_group: "ConceptGroup" = proto.Field(
-        proto.MESSAGE, number=2, message="ConceptGroup",
+        proto.MESSAGE,
+        number=2,
+        message="ConceptGroup",
     )
 
 
@@ -277,7 +310,8 @@ class ConceptGroup(proto.Message):
     """
 
     name: str = proto.Field(
-        proto.STRING, number=1,
+        proto.STRING,
+        number=1,
     )
     type_: keyword_plan_concept_group_type.KeywordPlanConceptGroupTypeEnum.KeywordPlanConceptGroupType = proto.Field(
         proto.ENUM,

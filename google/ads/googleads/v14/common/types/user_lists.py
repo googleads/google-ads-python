@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-# Copyright 2022 Google LLC
+# Copyright 2023 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -78,7 +78,9 @@ class SimilarUserListInfo(proto.Message):
     """
 
     seed_user_list: str = proto.Field(
-        proto.STRING, number=2, optional=True,
+        proto.STRING,
+        number=2,
+        optional=True,
     )
 
 
@@ -116,7 +118,9 @@ class CrmBasedUserListInfo(proto.Message):
     """
 
     app_id: str = proto.Field(
-        proto.STRING, number=4, optional=True,
+        proto.STRING,
+        number=4,
+        optional=True,
     )
     upload_key_type: customer_match_upload_key_type.CustomerMatchUploadKeyTypeEnum.CustomerMatchUploadKeyType = proto.Field(
         proto.ENUM,
@@ -150,15 +154,19 @@ class UserListRuleInfo(proto.Message):
             groups are grouped together based on rule_type.
     """
 
-    rule_type: user_list_rule_type.UserListRuleTypeEnum.UserListRuleType = proto.Field(
-        proto.ENUM,
-        number=1,
-        enum=user_list_rule_type.UserListRuleTypeEnum.UserListRuleType,
+    rule_type: user_list_rule_type.UserListRuleTypeEnum.UserListRuleType = (
+        proto.Field(
+            proto.ENUM,
+            number=1,
+            enum=user_list_rule_type.UserListRuleTypeEnum.UserListRuleType,
+        )
     )
     rule_item_groups: MutableSequence[
         "UserListRuleItemGroupInfo"
     ] = proto.RepeatedField(
-        proto.MESSAGE, number=2, message="UserListRuleItemGroupInfo",
+        proto.MESSAGE,
+        number=2,
+        message="UserListRuleItemGroupInfo",
     )
 
 
@@ -170,7 +178,9 @@ class UserListRuleItemGroupInfo(proto.Message):
     """
 
     rule_items: MutableSequence["UserListRuleItemInfo"] = proto.RepeatedField(
-        proto.MESSAGE, number=1, message="UserListRuleItemInfo",
+        proto.MESSAGE,
+        number=1,
+        message="UserListRuleItemInfo",
     )
 
 
@@ -213,7 +223,9 @@ class UserListRuleItemInfo(proto.Message):
     """
 
     name: str = proto.Field(
-        proto.STRING, number=5, optional=True,
+        proto.STRING,
+        number=5,
+        optional=True,
     )
     number_rule_item: "UserListNumberRuleItemInfo" = proto.Field(
         proto.MESSAGE,
@@ -266,10 +278,14 @@ class UserListDateRuleItemInfo(proto.Message):
         enum=user_list_date_rule_item_operator.UserListDateRuleItemOperatorEnum.UserListDateRuleItemOperator,
     )
     value: str = proto.Field(
-        proto.STRING, number=4, optional=True,
+        proto.STRING,
+        number=4,
+        optional=True,
     )
     offset_in_days: int = proto.Field(
-        proto.INT64, number=5, optional=True,
+        proto.INT64,
+        number=5,
+        optional=True,
     )
 
 
@@ -296,7 +312,9 @@ class UserListNumberRuleItemInfo(proto.Message):
         enum=user_list_number_rule_item_operator.UserListNumberRuleItemOperatorEnum.UserListNumberRuleItemOperator,
     )
     value: float = proto.Field(
-        proto.DOUBLE, number=3, optional=True,
+        proto.DOUBLE,
+        number=3,
+        optional=True,
     )
 
 
@@ -326,7 +344,9 @@ class UserListStringRuleItemInfo(proto.Message):
         enum=user_list_string_rule_item_operator.UserListStringRuleItemOperatorEnum.UserListStringRuleItemOperator,
     )
     value: str = proto.Field(
-        proto.STRING, number=3, optional=True,
+        proto.STRING,
+        number=3,
+        optional=True,
     )
 
 
@@ -348,10 +368,14 @@ class FlexibleRuleOperandInfo(proto.Message):
     """
 
     rule: "UserListRuleInfo" = proto.Field(
-        proto.MESSAGE, number=1, message="UserListRuleInfo",
+        proto.MESSAGE,
+        number=1,
+        message="UserListRuleInfo",
     )
     lookback_window_days: int = proto.Field(
-        proto.INT64, number=2, optional=True,
+        proto.INT64,
+        number=2,
+        optional=True,
     )
 
 
@@ -387,12 +411,16 @@ class FlexibleRuleUserListInfo(proto.Message):
     inclusive_operands: MutableSequence[
         "FlexibleRuleOperandInfo"
     ] = proto.RepeatedField(
-        proto.MESSAGE, number=2, message="FlexibleRuleOperandInfo",
+        proto.MESSAGE,
+        number=2,
+        message="FlexibleRuleOperandInfo",
     )
     exclusive_operands: MutableSequence[
         "FlexibleRuleOperandInfo"
     ] = proto.RepeatedField(
-        proto.MESSAGE, number=3, message="FlexibleRuleOperandInfo",
+        proto.MESSAGE,
+        number=3,
+        message="FlexibleRuleOperandInfo",
     )
 
 
@@ -430,7 +458,9 @@ class RuleBasedUserListInfo(proto.Message):
         enum=user_list_prepopulation_status.UserListPrepopulationStatusEnum.UserListPrepopulationStatus,
     )
     flexible_rule_user_list: "FlexibleRuleUserListInfo" = proto.Field(
-        proto.MESSAGE, number=5, message="FlexibleRuleUserListInfo",
+        proto.MESSAGE,
+        number=5,
+        message="FlexibleRuleUserListInfo",
     )
 
 
@@ -450,7 +480,9 @@ class LogicalUserListInfo(proto.Message):
     """
 
     rules: MutableSequence["UserListLogicalRuleInfo"] = proto.RepeatedField(
-        proto.MESSAGE, number=1, message="UserListLogicalRuleInfo",
+        proto.MESSAGE,
+        number=1,
+        message="UserListLogicalRuleInfo",
     )
 
 
@@ -473,7 +505,9 @@ class UserListLogicalRuleInfo(proto.Message):
     rule_operands: MutableSequence[
         "LogicalUserListOperandInfo"
     ] = proto.RepeatedField(
-        proto.MESSAGE, number=2, message="LogicalUserListOperandInfo",
+        proto.MESSAGE,
+        number=2,
+        message="LogicalUserListOperandInfo",
     )
 
 
@@ -489,7 +523,9 @@ class LogicalUserListOperandInfo(proto.Message):
     """
 
     user_list: str = proto.Field(
-        proto.STRING, number=2, optional=True,
+        proto.STRING,
+        number=2,
+        optional=True,
     )
 
 
@@ -503,7 +539,9 @@ class BasicUserListInfo(proto.Message):
     """
 
     actions: MutableSequence["UserListActionInfo"] = proto.RepeatedField(
-        proto.MESSAGE, number=1, message="UserListActionInfo",
+        proto.MESSAGE,
+        number=1,
+        message="UserListActionInfo",
     )
 
 
@@ -531,10 +569,14 @@ class UserListActionInfo(proto.Message):
     """
 
     conversion_action: str = proto.Field(
-        proto.STRING, number=3, oneof="user_list_action",
+        proto.STRING,
+        number=3,
+        oneof="user_list_action",
     )
     remarketing_action: str = proto.Field(
-        proto.STRING, number=4, oneof="user_list_action",
+        proto.STRING,
+        number=4,
+        oneof="user_list_action",
     )
 
 

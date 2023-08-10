@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-# Copyright 2022 Google LLC
+# Copyright 2023 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -39,7 +39,9 @@ from google.ads.googleads.v14.enums.types import (
 __protobuf__ = proto.module(
     package="google.ads.googleads.v14.resources",
     marshal="google.ads.googleads.v14",
-    manifest={"ConversionAction",},
+    manifest={
+        "ConversionAction",
+    },
 )
 
 
@@ -207,13 +209,19 @@ class ConversionAction(proto.Message):
         """
 
         default_value: float = proto.Field(
-            proto.DOUBLE, number=4, optional=True,
+            proto.DOUBLE,
+            number=4,
+            optional=True,
         )
         default_currency_code: str = proto.Field(
-            proto.STRING, number=5, optional=True,
+            proto.STRING,
+            number=5,
+            optional=True,
         )
         always_use_default_value: bool = proto.Field(
-            proto.BOOL, number=6, optional=True,
+            proto.BOOL,
+            number=6,
+            optional=True,
         )
 
     class ThirdPartyAppAnalyticsSettings(proto.Message):
@@ -234,10 +242,13 @@ class ConversionAction(proto.Message):
         """
 
         event_name: str = proto.Field(
-            proto.STRING, number=2, optional=True,
+            proto.STRING,
+            number=2,
+            optional=True,
         )
         provider_name: str = proto.Field(
-            proto.STRING, number=3,
+            proto.STRING,
+            number=3,
         )
 
     class FirebaseSettings(proto.Message):
@@ -264,16 +275,22 @@ class ConversionAction(proto.Message):
         """
 
         event_name: str = proto.Field(
-            proto.STRING, number=3, optional=True,
+            proto.STRING,
+            number=3,
+            optional=True,
         )
         project_id: str = proto.Field(
-            proto.STRING, number=4, optional=True,
+            proto.STRING,
+            number=4,
+            optional=True,
         )
         property_id: int = proto.Field(
-            proto.INT64, number=5,
+            proto.INT64,
+            number=5,
         )
         property_name: str = proto.Field(
-            proto.STRING, number=6,
+            proto.STRING,
+            number=6,
         )
 
     class GoogleAnalytics4Settings(proto.Message):
@@ -288,23 +305,31 @@ class ConversionAction(proto.Message):
         """
 
         event_name: str = proto.Field(
-            proto.STRING, number=1,
+            proto.STRING,
+            number=1,
         )
         property_name: str = proto.Field(
-            proto.STRING, number=2,
+            proto.STRING,
+            number=2,
         )
         property_id: int = proto.Field(
-            proto.INT64, number=3,
+            proto.INT64,
+            number=3,
         )
 
     resource_name: str = proto.Field(
-        proto.STRING, number=1,
+        proto.STRING,
+        number=1,
     )
     id: int = proto.Field(
-        proto.INT64, number=21, optional=True,
+        proto.INT64,
+        number=21,
+        optional=True,
     )
     name: str = proto.Field(
-        proto.STRING, number=22, optional=True,
+        proto.STRING,
+        number=22,
+        optional=True,
     )
     status: conversion_action_status.ConversionActionStatusEnum.ConversionActionStatus = proto.Field(
         proto.ENUM,
@@ -316,13 +341,17 @@ class ConversionAction(proto.Message):
         number=5,
         enum=conversion_action_type.ConversionActionTypeEnum.ConversionActionType,
     )
-    origin: conversion_origin.ConversionOriginEnum.ConversionOrigin = proto.Field(
-        proto.ENUM,
-        number=30,
-        enum=conversion_origin.ConversionOriginEnum.ConversionOrigin,
+    origin: conversion_origin.ConversionOriginEnum.ConversionOrigin = (
+        proto.Field(
+            proto.ENUM,
+            number=30,
+            enum=conversion_origin.ConversionOriginEnum.ConversionOrigin,
+        )
     )
     primary_for_goal: bool = proto.Field(
-        proto.BOOL, number=31, optional=True,
+        proto.BOOL,
+        number=31,
+        optional=True,
     )
     category: conversion_action_category.ConversionActionCategoryEnum.ConversionActionCategory = proto.Field(
         proto.ENUM,
@@ -330,19 +359,29 @@ class ConversionAction(proto.Message):
         enum=conversion_action_category.ConversionActionCategoryEnum.ConversionActionCategory,
     )
     owner_customer: str = proto.Field(
-        proto.STRING, number=23, optional=True,
+        proto.STRING,
+        number=23,
+        optional=True,
     )
     include_in_conversions_metric: bool = proto.Field(
-        proto.BOOL, number=24, optional=True,
+        proto.BOOL,
+        number=24,
+        optional=True,
     )
     click_through_lookback_window_days: int = proto.Field(
-        proto.INT64, number=25, optional=True,
+        proto.INT64,
+        number=25,
+        optional=True,
     )
     view_through_lookback_window_days: int = proto.Field(
-        proto.INT64, number=26, optional=True,
+        proto.INT64,
+        number=26,
+        optional=True,
     )
     value_settings: ValueSettings = proto.Field(
-        proto.MESSAGE, number=11, message=ValueSettings,
+        proto.MESSAGE,
+        number=11,
+        message=ValueSettings,
     )
     counting_type: conversion_action_counting_type.ConversionActionCountingTypeEnum.ConversionActionCountingType = proto.Field(
         proto.ENUM,
@@ -350,16 +389,24 @@ class ConversionAction(proto.Message):
         enum=conversion_action_counting_type.ConversionActionCountingTypeEnum.ConversionActionCountingType,
     )
     attribution_model_settings: AttributionModelSettings = proto.Field(
-        proto.MESSAGE, number=13, message=AttributionModelSettings,
+        proto.MESSAGE,
+        number=13,
+        message=AttributionModelSettings,
     )
     tag_snippets: MutableSequence[tag_snippet.TagSnippet] = proto.RepeatedField(
-        proto.MESSAGE, number=14, message=tag_snippet.TagSnippet,
+        proto.MESSAGE,
+        number=14,
+        message=tag_snippet.TagSnippet,
     )
     phone_call_duration_seconds: int = proto.Field(
-        proto.INT64, number=27, optional=True,
+        proto.INT64,
+        number=27,
+        optional=True,
     )
     app_id: str = proto.Field(
-        proto.STRING, number=28, optional=True,
+        proto.STRING,
+        number=28,
+        optional=True,
     )
     mobile_app_vendor: gage_mobile_app_vendor.MobileAppVendorEnum.MobileAppVendor = proto.Field(
         proto.ENUM,
@@ -367,13 +414,21 @@ class ConversionAction(proto.Message):
         enum=gage_mobile_app_vendor.MobileAppVendorEnum.MobileAppVendor,
     )
     firebase_settings: FirebaseSettings = proto.Field(
-        proto.MESSAGE, number=18, message=FirebaseSettings,
+        proto.MESSAGE,
+        number=18,
+        message=FirebaseSettings,
     )
-    third_party_app_analytics_settings: ThirdPartyAppAnalyticsSettings = proto.Field(
-        proto.MESSAGE, number=19, message=ThirdPartyAppAnalyticsSettings,
+    third_party_app_analytics_settings: ThirdPartyAppAnalyticsSettings = (
+        proto.Field(
+            proto.MESSAGE,
+            number=19,
+            message=ThirdPartyAppAnalyticsSettings,
+        )
     )
     google_analytics_4_settings: GoogleAnalytics4Settings = proto.Field(
-        proto.MESSAGE, number=34, message=GoogleAnalytics4Settings,
+        proto.MESSAGE,
+        number=34,
+        message=GoogleAnalytics4Settings,
     )
 
 

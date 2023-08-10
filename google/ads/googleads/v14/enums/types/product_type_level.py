@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-# Copyright 2022 Google LLC
+# Copyright 2023 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -22,13 +22,14 @@ import proto  # type: ignore
 __protobuf__ = proto.module(
     package="google.ads.googleads.v14.enums",
     marshal="google.ads.googleads.v14",
-    manifest={"ProductTypeLevelEnum",},
+    manifest={
+        "ProductTypeLevelEnum",
+    },
 )
 
 
 class ProductTypeLevelEnum(proto.Message):
-    r"""Level of the type of a product offer.
-    """
+    r"""Level of the type of a product offer."""
 
     class ProductTypeLevel(proto.Enum):
         r"""Enum describing the level of the type of a product offer."""

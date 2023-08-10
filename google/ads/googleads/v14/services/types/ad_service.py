@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-# Copyright 2022 Google LLC
+# Copyright 2023 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -52,7 +52,8 @@ class GetAdRequest(proto.Message):
     """
 
     resource_name: str = proto.Field(
-        proto.STRING, number=1,
+        proto.STRING,
+        number=1,
     )
 
 
@@ -83,13 +84,17 @@ class MutateAdsRequest(proto.Message):
     """
 
     customer_id: str = proto.Field(
-        proto.STRING, number=1,
+        proto.STRING,
+        number=1,
     )
     operations: MutableSequence["AdOperation"] = proto.RepeatedField(
-        proto.MESSAGE, number=2, message="AdOperation",
+        proto.MESSAGE,
+        number=2,
+        message="AdOperation",
     )
     partial_failure: bool = proto.Field(
-        proto.BOOL, number=4,
+        proto.BOOL,
+        number=4,
     )
     response_content_type: gage_response_content_type.ResponseContentTypeEnum.ResponseContentType = proto.Field(
         proto.ENUM,
@@ -97,7 +102,8 @@ class MutateAdsRequest(proto.Message):
         enum=gage_response_content_type.ResponseContentTypeEnum.ResponseContentType,
     )
     validate_only: bool = proto.Field(
-        proto.BOOL, number=3,
+        proto.BOOL,
+        number=3,
     )
 
 
@@ -121,13 +127,20 @@ class AdOperation(proto.Message):
     """
 
     update_mask: field_mask_pb2.FieldMask = proto.Field(
-        proto.MESSAGE, number=2, message=field_mask_pb2.FieldMask,
+        proto.MESSAGE,
+        number=2,
+        message=field_mask_pb2.FieldMask,
     )
     policy_validation_parameter: policy.PolicyValidationParameter = proto.Field(
-        proto.MESSAGE, number=3, message=policy.PolicyValidationParameter,
+        proto.MESSAGE,
+        number=3,
+        message=policy.PolicyValidationParameter,
     )
     update: gagr_ad.Ad = proto.Field(
-        proto.MESSAGE, number=1, oneof="operation", message=gagr_ad.Ad,
+        proto.MESSAGE,
+        number=1,
+        oneof="operation",
+        message=gagr_ad.Ad,
     )
 
 
@@ -145,10 +158,14 @@ class MutateAdsResponse(proto.Message):
     """
 
     partial_failure_error: status_pb2.Status = proto.Field(
-        proto.MESSAGE, number=3, message=status_pb2.Status,
+        proto.MESSAGE,
+        number=3,
+        message=status_pb2.Status,
     )
     results: MutableSequence["MutateAdResult"] = proto.RepeatedField(
-        proto.MESSAGE, number=2, message="MutateAdResult",
+        proto.MESSAGE,
+        number=2,
+        message="MutateAdResult",
     )
 
 
@@ -165,10 +182,13 @@ class MutateAdResult(proto.Message):
     """
 
     resource_name: str = proto.Field(
-        proto.STRING, number=1,
+        proto.STRING,
+        number=1,
     )
     ad: gagr_ad.Ad = proto.Field(
-        proto.MESSAGE, number=2, message=gagr_ad.Ad,
+        proto.MESSAGE,
+        number=2,
+        message=gagr_ad.Ad,
     )
 
 

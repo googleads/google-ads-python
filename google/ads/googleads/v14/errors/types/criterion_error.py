@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-# Copyright 2022 Google LLC
+# Copyright 2023 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -22,13 +22,14 @@ import proto  # type: ignore
 __protobuf__ = proto.module(
     package="google.ads.googleads.v14.errors",
     marshal="google.ads.googleads.v14",
-    manifest={"CriterionErrorEnum",},
+    manifest={
+        "CriterionErrorEnum",
+    },
 )
 
 
 class CriterionErrorEnum(proto.Message):
-    r"""Container for enum describing possible criterion errors.
-    """
+    r"""Container for enum describing possible criterion errors."""
 
     class CriterionError(proto.Enum):
         r"""Enum describing possible criterion errors."""
@@ -175,6 +176,9 @@ class CriterionErrorEnum(proto.Message):
         CANNOT_HAVE_MULTIPLE_NEGATIVE_KEYWORD_LIST_PER_ACCOUNT = 147
         CUSTOMER_CANNOT_ADD_CRITERION_OF_THIS_TYPE = 149
         CANNOT_TARGET_SIMILAR_USER_LIST = 151
+        CANNOT_ADD_AUDIENCE_SEGMENT_CRITERION_WHEN_AUDIENCE_GROUPED_IS_SET = 152
+        ONE_AUDIENCE_ALLOWED_PER_AD_GROUP = 153
+        INVALID_DETAILED_DEMOGRAPHIC = 154
 
 
 __all__ = tuple(sorted(__protobuf__.manifest))

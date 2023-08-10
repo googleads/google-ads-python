@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-# Copyright 2022 Google LLC
+# Copyright 2023 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -22,7 +22,9 @@ import proto  # type: ignore
 __protobuf__ = proto.module(
     package="google.ads.googleads.v14.enums",
     marshal="google.ads.googleads.v14",
-    manifest={"CampaignPrimaryStatusReasonEnum",},
+    manifest={
+        "CampaignPrimaryStatusReasonEnum",
+    },
 )
 
 
@@ -72,6 +74,9 @@ class CampaignPrimaryStatusReasonEnum(proto.Message):
         CAMPAIGN_GROUP_ALL_GROUP_BUDGETS_ENDED = 31
         APP_NOT_RELEASED = 32
         APP_PARTIALLY_RELEASED = 33
+        HAS_ASSET_GROUPS_DISAPPROVED = 34
+        HAS_ASSET_GROUPS_LIMITED_BY_POLICY = 35
+        MOST_ASSET_GROUPS_UNDER_REVIEW = 36
 
 
 __all__ = tuple(sorted(__protobuf__.manifest))

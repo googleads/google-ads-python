@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-# Copyright 2022 Google LLC
+# Copyright 2023 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -22,13 +22,14 @@ import proto  # type: ignore
 __protobuf__ = proto.module(
     package="google.ads.googleads.v14.errors",
     marshal="google.ads.googleads.v14",
-    manifest={"RequestErrorEnum",},
+    manifest={
+        "RequestErrorEnum",
+    },
 )
 
 
 class RequestErrorEnum(proto.Message):
-    r"""Container for enum describing possible request errors.
-    """
+    r"""Container for enum describing possible request errors."""
 
     class RequestError(proto.Enum):
         r"""Enum describing possible request errors."""
@@ -58,6 +59,7 @@ class RequestErrorEnum(proto.Message):
         TOTAL_RESULTS_COUNT_NOT_ORIGINALLY_REQUESTED = 32
         RPC_DEADLINE_TOO_SHORT = 33
         UNSUPPORTED_VERSION = 38
+        CLOUD_PROJECT_NOT_FOUND = 39
 
 
 __all__ = tuple(sorted(__protobuf__.manifest))

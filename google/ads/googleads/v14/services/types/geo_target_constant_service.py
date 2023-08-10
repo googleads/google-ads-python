@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-# Copyright 2022 Google LLC
+# Copyright 2023 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -79,7 +79,8 @@ class SuggestGeoTargetConstantsRequest(proto.Message):
         """
 
         names: MutableSequence[str] = proto.RepeatedField(
-            proto.STRING, number=2,
+            proto.STRING,
+            number=2,
         )
 
     class GeoTargets(proto.Message):
@@ -90,20 +91,31 @@ class SuggestGeoTargetConstantsRequest(proto.Message):
         """
 
         geo_target_constants: MutableSequence[str] = proto.RepeatedField(
-            proto.STRING, number=2,
+            proto.STRING,
+            number=2,
         )
 
     locale: str = proto.Field(
-        proto.STRING, number=6, optional=True,
+        proto.STRING,
+        number=6,
+        optional=True,
     )
     country_code: str = proto.Field(
-        proto.STRING, number=7, optional=True,
+        proto.STRING,
+        number=7,
+        optional=True,
     )
     location_names: LocationNames = proto.Field(
-        proto.MESSAGE, number=1, oneof="query", message=LocationNames,
+        proto.MESSAGE,
+        number=1,
+        oneof="query",
+        message=LocationNames,
     )
     geo_targets: GeoTargets = proto.Field(
-        proto.MESSAGE, number=2, oneof="query", message=GeoTargets,
+        proto.MESSAGE,
+        number=2,
+        oneof="query",
+        message=GeoTargets,
     )
 
 
@@ -119,7 +131,9 @@ class SuggestGeoTargetConstantsResponse(proto.Message):
     geo_target_constant_suggestions: MutableSequence[
         "GeoTargetConstantSuggestion"
     ] = proto.RepeatedField(
-        proto.MESSAGE, number=1, message="GeoTargetConstantSuggestion",
+        proto.MESSAGE,
+        number=1,
+        message="GeoTargetConstantSuggestion",
     )
 
 
@@ -157,18 +171,26 @@ class GeoTargetConstantSuggestion(proto.Message):
     """
 
     locale: str = proto.Field(
-        proto.STRING, number=6, optional=True,
+        proto.STRING,
+        number=6,
+        optional=True,
     )
     reach: int = proto.Field(
-        proto.INT64, number=7, optional=True,
+        proto.INT64,
+        number=7,
+        optional=True,
     )
     search_term: str = proto.Field(
-        proto.STRING, number=8, optional=True,
+        proto.STRING,
+        number=8,
+        optional=True,
     )
-    geo_target_constant: gagr_geo_target_constant.GeoTargetConstant = proto.Field(
-        proto.MESSAGE,
-        number=4,
-        message=gagr_geo_target_constant.GeoTargetConstant,
+    geo_target_constant: gagr_geo_target_constant.GeoTargetConstant = (
+        proto.Field(
+            proto.MESSAGE,
+            number=4,
+            message=gagr_geo_target_constant.GeoTargetConstant,
+        )
     )
     geo_target_constant_parents: MutableSequence[
         gagr_geo_target_constant.GeoTargetConstant

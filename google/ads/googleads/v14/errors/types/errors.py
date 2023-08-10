@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-# Copyright 2022 Google LLC
+# Copyright 2023 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -399,6 +399,9 @@ from google.ads.googleads.v14.errors.types import (
     resource_count_limit_exceeded_error as gage_resource_count_limit_exceeded_error,
 )
 from google.ads.googleads.v14.errors.types import (
+    search_term_insight_error as gage_search_term_insight_error,
+)
+from google.ads.googleads.v14.errors.types import (
     setting_error as gage_setting_error,
 )
 from google.ads.googleads.v14.errors.types import (
@@ -470,10 +473,13 @@ class GoogleAdsFailure(proto.Message):
     """
 
     errors: MutableSequence["GoogleAdsError"] = proto.RepeatedField(
-        proto.MESSAGE, number=1, message="GoogleAdsError",
+        proto.MESSAGE,
+        number=1,
+        message="GoogleAdsError",
     )
     request_id: str = proto.Field(
-        proto.STRING, number=2,
+        proto.STRING,
+        number=2,
     )
 
 
@@ -497,19 +503,28 @@ class GoogleAdsError(proto.Message):
     """
 
     error_code: "ErrorCode" = proto.Field(
-        proto.MESSAGE, number=1, message="ErrorCode",
+        proto.MESSAGE,
+        number=1,
+        message="ErrorCode",
     )
     message: str = proto.Field(
-        proto.STRING, number=2,
+        proto.STRING,
+        number=2,
     )
     trigger: value.Value = proto.Field(
-        proto.MESSAGE, number=3, message=value.Value,
+        proto.MESSAGE,
+        number=3,
+        message=value.Value,
     )
     location: "ErrorLocation" = proto.Field(
-        proto.MESSAGE, number=4, message="ErrorLocation",
+        proto.MESSAGE,
+        number=4,
+        message="ErrorLocation",
     )
     details: "ErrorDetails" = proto.Field(
-        proto.MESSAGE, number=5, message="ErrorDetails",
+        proto.MESSAGE,
+        number=5,
+        message="ErrorDetails",
     )
 
 
@@ -1113,6 +1128,10 @@ class ErrorCode(proto.Message):
             The reasons for the audience error
 
             This field is a member of `oneof`_ ``error_code``.
+        search_term_insight_error (google.ads.googleads.v14.errors.types.SearchTermInsightErrorEnum.SearchTermInsightError):
+            The reasons for the Search term insight error
+
+            This field is a member of `oneof`_ ``error_code``.
         smart_campaign_error (google.ads.googleads.v14.errors.types.SmartCampaignErrorEnum.SmartCampaignError):
             The reasons for the Smart campaign error
 
@@ -1136,11 +1155,13 @@ class ErrorCode(proto.Message):
             This field is a member of `oneof`_ ``error_code``.
     """
 
-    request_error: gage_request_error.RequestErrorEnum.RequestError = proto.Field(
-        proto.ENUM,
-        number=1,
-        oneof="error_code",
-        enum=gage_request_error.RequestErrorEnum.RequestError,
+    request_error: gage_request_error.RequestErrorEnum.RequestError = (
+        proto.Field(
+            proto.ENUM,
+            number=1,
+            oneof="error_code",
+            enum=gage_request_error.RequestErrorEnum.RequestError,
+        )
     )
     bidding_strategy_error: gage_bidding_strategy_error.BiddingStrategyErrorEnum.BiddingStrategyError = proto.Field(
         proto.ENUM,
@@ -1148,11 +1169,13 @@ class ErrorCode(proto.Message):
         oneof="error_code",
         enum=gage_bidding_strategy_error.BiddingStrategyErrorEnum.BiddingStrategyError,
     )
-    url_field_error: gage_url_field_error.UrlFieldErrorEnum.UrlFieldError = proto.Field(
-        proto.ENUM,
-        number=3,
-        oneof="error_code",
-        enum=gage_url_field_error.UrlFieldErrorEnum.UrlFieldError,
+    url_field_error: gage_url_field_error.UrlFieldErrorEnum.UrlFieldError = (
+        proto.Field(
+            proto.ENUM,
+            number=3,
+            oneof="error_code",
+            enum=gage_url_field_error.UrlFieldErrorEnum.UrlFieldError,
+        )
     )
     list_operation_error: gage_list_operation_error.ListOperationErrorEnum.ListOperationError = proto.Field(
         proto.ENUM,
@@ -1184,11 +1207,13 @@ class ErrorCode(proto.Message):
         oneof="error_code",
         enum=gage_authorization_error.AuthorizationErrorEnum.AuthorizationError,
     )
-    internal_error: gage_internal_error.InternalErrorEnum.InternalError = proto.Field(
-        proto.ENUM,
-        number=10,
-        oneof="error_code",
-        enum=gage_internal_error.InternalErrorEnum.InternalError,
+    internal_error: gage_internal_error.InternalErrorEnum.InternalError = (
+        proto.Field(
+            proto.ENUM,
+            number=10,
+            oneof="error_code",
+            enum=gage_internal_error.InternalErrorEnum.InternalError,
+        )
     )
     quota_error: gage_quota_error.QuotaErrorEnum.QuotaError = proto.Field(
         proto.ENUM,
@@ -1202,11 +1227,13 @@ class ErrorCode(proto.Message):
         oneof="error_code",
         enum=gage_ad_error.AdErrorEnum.AdError,
     )
-    ad_group_error: gage_ad_group_error.AdGroupErrorEnum.AdGroupError = proto.Field(
-        proto.ENUM,
-        number=13,
-        oneof="error_code",
-        enum=gage_ad_group_error.AdGroupErrorEnum.AdGroupError,
+    ad_group_error: gage_ad_group_error.AdGroupErrorEnum.AdGroupError = (
+        proto.Field(
+            proto.ENUM,
+            number=13,
+            oneof="error_code",
+            enum=gage_ad_group_error.AdGroupErrorEnum.AdGroupError,
+        )
     )
     campaign_budget_error: gage_campaign_budget_error.CampaignBudgetErrorEnum.CampaignBudgetError = proto.Field(
         proto.ENUM,
@@ -1214,11 +1241,13 @@ class ErrorCode(proto.Message):
         oneof="error_code",
         enum=gage_campaign_budget_error.CampaignBudgetErrorEnum.CampaignBudgetError,
     )
-    campaign_error: gage_campaign_error.CampaignErrorEnum.CampaignError = proto.Field(
-        proto.ENUM,
-        number=15,
-        oneof="error_code",
-        enum=gage_campaign_error.CampaignErrorEnum.CampaignError,
+    campaign_error: gage_campaign_error.CampaignErrorEnum.CampaignError = (
+        proto.Field(
+            proto.ENUM,
+            number=15,
+            oneof="error_code",
+            enum=gage_campaign_error.CampaignErrorEnum.CampaignError,
+        )
     )
     authentication_error: gage_authentication_error.AuthenticationErrorEnum.AuthenticationError = proto.Field(
         proto.ENUM,
@@ -1304,17 +1333,21 @@ class ErrorCode(proto.Message):
         oneof="error_code",
         enum=gage_asset_set_link_error.AssetSetLinkErrorEnum.AssetSetLinkError,
     )
-    asset_set_error: gage_asset_set_error.AssetSetErrorEnum.AssetSetError = proto.Field(
-        proto.ENUM,
-        number=152,
-        oneof="error_code",
-        enum=gage_asset_set_error.AssetSetErrorEnum.AssetSetError,
+    asset_set_error: gage_asset_set_error.AssetSetErrorEnum.AssetSetError = (
+        proto.Field(
+            proto.ENUM,
+            number=152,
+            oneof="error_code",
+            enum=gage_asset_set_error.AssetSetErrorEnum.AssetSetError,
+        )
     )
-    bidding_error: gage_bidding_error.BiddingErrorEnum.BiddingError = proto.Field(
-        proto.ENUM,
-        number=26,
-        oneof="error_code",
-        enum=gage_bidding_error.BiddingErrorEnum.BiddingError,
+    bidding_error: gage_bidding_error.BiddingErrorEnum.BiddingError = (
+        proto.Field(
+            proto.ENUM,
+            number=26,
+            oneof="error_code",
+            enum=gage_bidding_error.BiddingErrorEnum.BiddingError,
+        )
     )
     campaign_criterion_error: gage_campaign_criterion_error.CampaignCriterionErrorEnum.CampaignCriterionError = proto.Field(
         proto.ENUM,
@@ -1352,11 +1385,13 @@ class ErrorCode(proto.Message):
         oneof="error_code",
         enum=gage_country_code_error.CountryCodeErrorEnum.CountryCodeError,
     )
-    criterion_error: gage_criterion_error.CriterionErrorEnum.CriterionError = proto.Field(
-        proto.ENUM,
-        number=32,
-        oneof="error_code",
-        enum=gage_criterion_error.CriterionErrorEnum.CriterionError,
+    criterion_error: gage_criterion_error.CriterionErrorEnum.CriterionError = (
+        proto.Field(
+            proto.ENUM,
+            number=32,
+            oneof="error_code",
+            enum=gage_criterion_error.CriterionErrorEnum.CriterionError,
+        )
     )
     custom_conversion_goal_error: gage_custom_conversion_goal_error.CustomConversionGoalErrorEnum.CustomConversionGoalError = proto.Field(
         proto.ENUM,
@@ -1370,11 +1405,13 @@ class ErrorCode(proto.Message):
         oneof="error_code",
         enum=gage_customer_customizer_error.CustomerCustomizerErrorEnum.CustomerCustomizerError,
     )
-    customer_error: gage_customer_error.CustomerErrorEnum.CustomerError = proto.Field(
-        proto.ENUM,
-        number=90,
-        oneof="error_code",
-        enum=gage_customer_error.CustomerErrorEnum.CustomerError,
+    customer_error: gage_customer_error.CustomerErrorEnum.CustomerError = (
+        proto.Field(
+            proto.ENUM,
+            number=90,
+            oneof="error_code",
+            enum=gage_customer_error.CustomerErrorEnum.CustomerError,
+        )
     )
     customizer_attribute_error: gage_customizer_attribute_error.CustomizerAttributeErrorEnum.CustomizerAttributeError = proto.Field(
         proto.ENUM,
@@ -1394,11 +1431,13 @@ class ErrorCode(proto.Message):
         oneof="error_code",
         enum=gage_date_range_error.DateRangeErrorEnum.DateRangeError,
     )
-    distinct_error: gage_distinct_error.DistinctErrorEnum.DistinctError = proto.Field(
-        proto.ENUM,
-        number=35,
-        oneof="error_code",
-        enum=gage_distinct_error.DistinctErrorEnum.DistinctError,
+    distinct_error: gage_distinct_error.DistinctErrorEnum.DistinctError = (
+        proto.Field(
+            proto.ENUM,
+            number=35,
+            oneof="error_code",
+            enum=gage_distinct_error.DistinctErrorEnum.DistinctError,
+        )
     )
     feed_attribute_reference_error: gage_feed_attribute_reference_error.FeedAttributeReferenceErrorEnum.FeedAttributeReferenceError = proto.Field(
         proto.ENUM,
@@ -1406,11 +1445,13 @@ class ErrorCode(proto.Message):
         oneof="error_code",
         enum=gage_feed_attribute_reference_error.FeedAttributeReferenceErrorEnum.FeedAttributeReferenceError,
     )
-    function_error: gage_function_error.FunctionErrorEnum.FunctionError = proto.Field(
-        proto.ENUM,
-        number=37,
-        oneof="error_code",
-        enum=gage_function_error.FunctionErrorEnum.FunctionError,
+    function_error: gage_function_error.FunctionErrorEnum.FunctionError = (
+        proto.Field(
+            proto.ENUM,
+            number=37,
+            oneof="error_code",
+            enum=gage_function_error.FunctionErrorEnum.FunctionError,
+        )
     )
     function_parsing_error: gage_function_parsing_error.FunctionParsingErrorEnum.FunctionParsingError = proto.Field(
         proto.ENUM,
@@ -1472,11 +1513,13 @@ class ErrorCode(proto.Message):
         oneof="error_code",
         enum=gage_new_resource_creation_error.NewResourceCreationErrorEnum.NewResourceCreationError,
     )
-    not_empty_error: gage_not_empty_error.NotEmptyErrorEnum.NotEmptyError = proto.Field(
-        proto.ENUM,
-        number=46,
-        oneof="error_code",
-        enum=gage_not_empty_error.NotEmptyErrorEnum.NotEmptyError,
+    not_empty_error: gage_not_empty_error.NotEmptyErrorEnum.NotEmptyError = (
+        proto.Field(
+            proto.ENUM,
+            number=46,
+            oneof="error_code",
+            enum=gage_not_empty_error.NotEmptyErrorEnum.NotEmptyError,
+        )
     )
     null_error: gage_null_error.NullErrorEnum.NullError = proto.Field(
         proto.ENUM,
@@ -1484,11 +1527,13 @@ class ErrorCode(proto.Message):
         oneof="error_code",
         enum=gage_null_error.NullErrorEnum.NullError,
     )
-    operator_error: gage_operator_error.OperatorErrorEnum.OperatorError = proto.Field(
-        proto.ENUM,
-        number=48,
-        oneof="error_code",
-        enum=gage_operator_error.OperatorErrorEnum.OperatorError,
+    operator_error: gage_operator_error.OperatorErrorEnum.OperatorError = (
+        proto.Field(
+            proto.ENUM,
+            number=48,
+            oneof="error_code",
+            enum=gage_operator_error.OperatorErrorEnum.OperatorError,
+        )
     )
     range_error: gage_range_error.RangeErrorEnum.RangeError = proto.Field(
         proto.ENUM,
@@ -1508,11 +1553,13 @@ class ErrorCode(proto.Message):
         oneof="error_code",
         enum=gage_region_code_error.RegionCodeErrorEnum.RegionCodeError,
     )
-    setting_error: gage_setting_error.SettingErrorEnum.SettingError = proto.Field(
-        proto.ENUM,
-        number=52,
-        oneof="error_code",
-        enum=gage_setting_error.SettingErrorEnum.SettingError,
+    setting_error: gage_setting_error.SettingErrorEnum.SettingError = (
+        proto.Field(
+            proto.ENUM,
+            number=52,
+            oneof="error_code",
+            enum=gage_setting_error.SettingErrorEnum.SettingError,
+        )
     )
     string_format_error: gage_string_format_error.StringFormatErrorEnum.StringFormatError = proto.Field(
         proto.ENUM,
@@ -1556,11 +1603,13 @@ class ErrorCode(proto.Message):
         oneof="error_code",
         enum=gage_ad_group_bid_modifier_error.AdGroupBidModifierErrorEnum.AdGroupBidModifierError,
     )
-    context_error: gage_context_error.ContextErrorEnum.ContextError = proto.Field(
-        proto.ENUM,
-        number=60,
-        oneof="error_code",
-        enum=gage_context_error.ContextErrorEnum.ContextError,
+    context_error: gage_context_error.ContextErrorEnum.ContextError = (
+        proto.Field(
+            proto.ENUM,
+            number=60,
+            oneof="error_code",
+            enum=gage_context_error.ContextErrorEnum.ContextError,
+        )
     )
     field_error: gage_field_error.FieldErrorEnum.FieldError = proto.Field(
         proto.ENUM,
@@ -1628,11 +1677,13 @@ class ErrorCode(proto.Message):
         oneof="error_code",
         enum=gage_header_error.HeaderErrorEnum.HeaderError,
     )
-    database_error: gage_database_error.DatabaseErrorEnum.DatabaseError = proto.Field(
-        proto.ENUM,
-        number=67,
-        oneof="error_code",
-        enum=gage_database_error.DatabaseErrorEnum.DatabaseError,
+    database_error: gage_database_error.DatabaseErrorEnum.DatabaseError = (
+        proto.Field(
+            proto.ENUM,
+            number=67,
+            oneof="error_code",
+            enum=gage_database_error.DatabaseErrorEnum.DatabaseError,
+        )
     )
     policy_finding_error: gage_policy_finding_error.PolicyFindingErrorEnum.PolicyFindingError = proto.Field(
         proto.ENUM,
@@ -1688,11 +1739,13 @@ class ErrorCode(proto.Message):
         oneof="error_code",
         enum=gage_account_budget_proposal_error.AccountBudgetProposalErrorEnum.AccountBudgetProposalError,
     )
-    user_list_error: gage_user_list_error.UserListErrorEnum.UserListError = proto.Field(
-        proto.ENUM,
-        number=78,
-        oneof="error_code",
-        enum=gage_user_list_error.UserListErrorEnum.UserListError,
+    user_list_error: gage_user_list_error.UserListErrorEnum.UserListError = (
+        proto.Field(
+            proto.ENUM,
+            number=78,
+            oneof="error_code",
+            enum=gage_user_list_error.UserListErrorEnum.UserListError,
+        )
     )
     change_event_error: gage_change_event_error.ChangeEventErrorEnum.ChangeEventError = proto.Field(
         proto.ENUM,
@@ -1724,11 +1777,13 @@ class ErrorCode(proto.Message):
         oneof="error_code",
         enum=gage_campaign_draft_error.CampaignDraftErrorEnum.CampaignDraftError,
     )
-    feed_item_error: gage_feed_item_error.FeedItemErrorEnum.FeedItemError = proto.Field(
-        proto.ENUM,
-        number=83,
-        oneof="error_code",
-        enum=gage_feed_item_error.FeedItemErrorEnum.FeedItemError,
+    feed_item_error: gage_feed_item_error.FeedItemErrorEnum.FeedItemError = (
+        proto.Field(
+            proto.ENUM,
+            number=83,
+            oneof="error_code",
+            enum=gage_feed_item_error.FeedItemErrorEnum.FeedItemError,
+        )
     )
     label_error: gage_label_error.LabelErrorEnum.LabelError = proto.Field(
         proto.ENUM,
@@ -1898,11 +1953,13 @@ class ErrorCode(proto.Message):
         oneof="error_code",
         enum=gage_reach_plan_error.ReachPlanErrorEnum.ReachPlanError,
     )
-    invoice_error: gage_invoice_error.InvoiceErrorEnum.InvoiceError = proto.Field(
-        proto.ENUM,
-        number=126,
-        oneof="error_code",
-        enum=gage_invoice_error.InvoiceErrorEnum.InvoiceError,
+    invoice_error: gage_invoice_error.InvoiceErrorEnum.InvoiceError = (
+        proto.Field(
+            proto.ENUM,
+            number=126,
+            oneof="error_code",
+            enum=gage_invoice_error.InvoiceErrorEnum.InvoiceError,
+        )
     )
     payments_account_error: gage_payments_account_error.PaymentsAccountErrorEnum.PaymentsAccountError = proto.Field(
         proto.ENUM,
@@ -1910,11 +1967,13 @@ class ErrorCode(proto.Message):
         oneof="error_code",
         enum=gage_payments_account_error.PaymentsAccountErrorEnum.PaymentsAccountError,
     )
-    time_zone_error: gage_time_zone_error.TimeZoneErrorEnum.TimeZoneError = proto.Field(
-        proto.ENUM,
-        number=128,
-        oneof="error_code",
-        enum=gage_time_zone_error.TimeZoneErrorEnum.TimeZoneError,
+    time_zone_error: gage_time_zone_error.TimeZoneErrorEnum.TimeZoneError = (
+        proto.Field(
+            proto.ENUM,
+            number=128,
+            oneof="error_code",
+            enum=gage_time_zone_error.TimeZoneErrorEnum.TimeZoneError,
+        )
     )
     asset_link_error: gage_asset_link_error.AssetLinkErrorEnum.AssetLinkError = proto.Field(
         proto.ENUM,
@@ -1922,17 +1981,21 @@ class ErrorCode(proto.Message):
         oneof="error_code",
         enum=gage_asset_link_error.AssetLinkErrorEnum.AssetLinkError,
     )
-    user_data_error: gage_user_data_error.UserDataErrorEnum.UserDataError = proto.Field(
-        proto.ENUM,
-        number=130,
-        oneof="error_code",
-        enum=gage_user_data_error.UserDataErrorEnum.UserDataError,
+    user_data_error: gage_user_data_error.UserDataErrorEnum.UserDataError = (
+        proto.Field(
+            proto.ENUM,
+            number=130,
+            oneof="error_code",
+            enum=gage_user_data_error.UserDataErrorEnum.UserDataError,
+        )
     )
-    batch_job_error: gage_batch_job_error.BatchJobErrorEnum.BatchJobError = proto.Field(
-        proto.ENUM,
-        number=131,
-        oneof="error_code",
-        enum=gage_batch_job_error.BatchJobErrorEnum.BatchJobError,
+    batch_job_error: gage_batch_job_error.BatchJobErrorEnum.BatchJobError = (
+        proto.Field(
+            proto.ENUM,
+            number=131,
+            oneof="error_code",
+            enum=gage_batch_job_error.BatchJobErrorEnum.BatchJobError,
+        )
     )
     account_link_error: gage_account_link_error.AccountLinkErrorEnum.AccountLinkError = proto.Field(
         proto.ENUM,
@@ -1958,11 +2021,19 @@ class ErrorCode(proto.Message):
         oneof="error_code",
         enum=gage_custom_audience_error.CustomAudienceErrorEnum.CustomAudienceError,
     )
-    audience_error: gage_audience_error.AudienceErrorEnum.AudienceError = proto.Field(
+    audience_error: gage_audience_error.AudienceErrorEnum.AudienceError = (
+        proto.Field(
+            proto.ENUM,
+            number=164,
+            oneof="error_code",
+            enum=gage_audience_error.AudienceErrorEnum.AudienceError,
+        )
+    )
+    search_term_insight_error: gage_search_term_insight_error.SearchTermInsightErrorEnum.SearchTermInsightError = proto.Field(
         proto.ENUM,
-        number=164,
+        number=174,
         oneof="error_code",
-        enum=gage_audience_error.AudienceErrorEnum.AudienceError,
+        enum=gage_search_term_insight_error.SearchTermInsightErrorEnum.SearchTermInsightError,
     )
     smart_campaign_error: gage_smart_campaign_error.SmartCampaignErrorEnum.SmartCampaignError = proto.Field(
         proto.ENUM,
@@ -1988,11 +2059,13 @@ class ErrorCode(proto.Message):
         oneof="error_code",
         enum=gage_customer_sk_ad_network_conversion_value_schema_error.CustomerSkAdNetworkConversionValueSchemaErrorEnum.CustomerSkAdNetworkConversionValueSchemaError,
     )
-    currency_error: gage_currency_error.CurrencyErrorEnum.CurrencyError = proto.Field(
-        proto.ENUM,
-        number=171,
-        oneof="error_code",
-        enum=gage_currency_error.CurrencyErrorEnum.CurrencyError,
+    currency_error: gage_currency_error.CurrencyErrorEnum.CurrencyError = (
+        proto.Field(
+            proto.ENUM,
+            number=171,
+            oneof="error_code",
+            enum=gage_currency_error.CurrencyErrorEnum.CurrencyError,
+        )
     )
 
 
@@ -2021,16 +2094,21 @@ class ErrorLocation(proto.Message):
         """
 
         field_name: str = proto.Field(
-            proto.STRING, number=1,
+            proto.STRING,
+            number=1,
         )
         index: int = proto.Field(
-            proto.INT32, number=3, optional=True,
+            proto.INT32,
+            number=3,
+            optional=True,
         )
 
     field_path_elements: MutableSequence[
         FieldPathElement
     ] = proto.RepeatedField(
-        proto.MESSAGE, number=2, message=FieldPathElement,
+        proto.MESSAGE,
+        number=2,
+        message=FieldPathElement,
     )
 
 
@@ -2056,19 +2134,28 @@ class ErrorDetails(proto.Message):
     """
 
     unpublished_error_code: str = proto.Field(
-        proto.STRING, number=1,
+        proto.STRING,
+        number=1,
     )
     policy_violation_details: "PolicyViolationDetails" = proto.Field(
-        proto.MESSAGE, number=2, message="PolicyViolationDetails",
+        proto.MESSAGE,
+        number=2,
+        message="PolicyViolationDetails",
     )
     policy_finding_details: "PolicyFindingDetails" = proto.Field(
-        proto.MESSAGE, number=3, message="PolicyFindingDetails",
+        proto.MESSAGE,
+        number=3,
+        message="PolicyFindingDetails",
     )
     quota_error_details: "QuotaErrorDetails" = proto.Field(
-        proto.MESSAGE, number=4, message="QuotaErrorDetails",
+        proto.MESSAGE,
+        number=4,
+        message="QuotaErrorDetails",
     )
     resource_count_details: "ResourceCountDetails" = proto.Field(
-        proto.MESSAGE, number=5, message="ResourceCountDetails",
+        proto.MESSAGE,
+        number=5,
+        message="ResourceCountDetails",
     )
 
 
@@ -2093,16 +2180,21 @@ class PolicyViolationDetails(proto.Message):
     """
 
     external_policy_description: str = proto.Field(
-        proto.STRING, number=2,
+        proto.STRING,
+        number=2,
     )
     key: policy.PolicyViolationKey = proto.Field(
-        proto.MESSAGE, number=4, message=policy.PolicyViolationKey,
+        proto.MESSAGE,
+        number=4,
+        message=policy.PolicyViolationKey,
     )
     external_policy_name: str = proto.Field(
-        proto.STRING, number=5,
+        proto.STRING,
+        number=5,
     )
     is_exemptible: bool = proto.Field(
-        proto.BOOL, number=6,
+        proto.BOOL,
+        number=6,
     )
 
 
@@ -2122,7 +2214,9 @@ class PolicyFindingDetails(proto.Message):
     policy_topic_entries: MutableSequence[
         policy.PolicyTopicEntry
     ] = proto.RepeatedField(
-        proto.MESSAGE, number=1, message=policy.PolicyTopicEntry,
+        proto.MESSAGE,
+        number=1,
+        message=policy.PolicyTopicEntry,
     )
 
 
@@ -2148,13 +2242,18 @@ class QuotaErrorDetails(proto.Message):
         DEVELOPER = 3
 
     rate_scope: QuotaRateScope = proto.Field(
-        proto.ENUM, number=1, enum=QuotaRateScope,
+        proto.ENUM,
+        number=1,
+        enum=QuotaRateScope,
     )
     rate_name: str = proto.Field(
-        proto.STRING, number=2,
+        proto.STRING,
+        number=2,
     )
     retry_delay: duration_pb2.Duration = proto.Field(
-        proto.MESSAGE, number=3, message=duration_pb2.Duration,
+        proto.MESSAGE,
+        number=3,
+        message=duration_pb2.Duration,
     )
 
 
@@ -2179,21 +2278,27 @@ class ResourceCountDetails(proto.Message):
     """
 
     enclosing_id: str = proto.Field(
-        proto.STRING, number=1,
+        proto.STRING,
+        number=1,
     )
     enclosing_resource: str = proto.Field(
-        proto.STRING, number=5,
+        proto.STRING,
+        number=5,
     )
     limit: int = proto.Field(
-        proto.INT32, number=2,
+        proto.INT32,
+        number=2,
     )
-    limit_type: resource_limit_type.ResourceLimitTypeEnum.ResourceLimitType = proto.Field(
-        proto.ENUM,
-        number=3,
-        enum=resource_limit_type.ResourceLimitTypeEnum.ResourceLimitType,
+    limit_type: resource_limit_type.ResourceLimitTypeEnum.ResourceLimitType = (
+        proto.Field(
+            proto.ENUM,
+            number=3,
+            enum=resource_limit_type.ResourceLimitTypeEnum.ResourceLimitType,
+        )
     )
     existing_count: int = proto.Field(
-        proto.INT32, number=4,
+        proto.INT32,
+        number=4,
     )
 
 

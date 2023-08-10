@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-# Copyright 2022 Google LLC
+# Copyright 2023 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -22,7 +22,9 @@ import proto  # type: ignore
 __protobuf__ = proto.module(
     package="google.ads.googleads.v14.common",
     marshal="google.ads.googleads.v14",
-    manifest={"Value",},
+    manifest={
+        "Value",
+    },
 )
 
 
@@ -59,19 +61,29 @@ class Value(proto.Message):
     """
 
     boolean_value: bool = proto.Field(
-        proto.BOOL, number=1, oneof="value",
+        proto.BOOL,
+        number=1,
+        oneof="value",
     )
     int64_value: int = proto.Field(
-        proto.INT64, number=2, oneof="value",
+        proto.INT64,
+        number=2,
+        oneof="value",
     )
     float_value: float = proto.Field(
-        proto.FLOAT, number=3, oneof="value",
+        proto.FLOAT,
+        number=3,
+        oneof="value",
     )
     double_value: float = proto.Field(
-        proto.DOUBLE, number=4, oneof="value",
+        proto.DOUBLE,
+        number=4,
+        oneof="value",
     )
     string_value: str = proto.Field(
-        proto.STRING, number=5, oneof="value",
+        proto.STRING,
+        number=5,
+        oneof="value",
     )
 
 

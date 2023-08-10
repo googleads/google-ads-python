@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-# Copyright 2022 Google LLC
+# Copyright 2023 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -65,7 +65,9 @@ class Commission(proto.Message):
     """
 
     commission_rate_micros: int = proto.Field(
-        proto.INT64, number=2, optional=True,
+        proto.INT64,
+        number=2,
+        optional=True,
     )
 
 
@@ -101,7 +103,9 @@ class ManualCpc(proto.Message):
     """
 
     enhanced_cpc_enabled: bool = proto.Field(
-        proto.BOOL, number=2, optional=True,
+        proto.BOOL,
+        number=2,
+        optional=True,
     )
 
 
@@ -113,8 +117,7 @@ class ManualCpm(proto.Message):
 
 
 class ManualCpv(proto.Message):
-    r"""View based bidding where user pays per video view.
-    """
+    r"""View based bidding where user pays per video view."""
 
 
 class MaximizeConversions(proto.Message):
@@ -145,13 +148,16 @@ class MaximizeConversions(proto.Message):
     """
 
     cpc_bid_ceiling_micros: int = proto.Field(
-        proto.INT64, number=2,
+        proto.INT64,
+        number=2,
     )
     cpc_bid_floor_micros: int = proto.Field(
-        proto.INT64, number=3,
+        proto.INT64,
+        number=3,
     )
     target_cpa_micros: int = proto.Field(
-        proto.INT64, number=4,
+        proto.INT64,
+        number=4,
     )
 
 
@@ -182,13 +188,16 @@ class MaximizeConversionValue(proto.Message):
     """
 
     target_roas: float = proto.Field(
-        proto.DOUBLE, number=2,
+        proto.DOUBLE,
+        number=2,
     )
     cpc_bid_ceiling_micros: int = proto.Field(
-        proto.INT64, number=3,
+        proto.INT64,
+        number=3,
     )
     cpc_bid_floor_micros: int = proto.Field(
-        proto.INT64, number=4,
+        proto.INT64,
+        number=4,
     )
 
 
@@ -224,13 +233,19 @@ class TargetCpa(proto.Message):
     """
 
     target_cpa_micros: int = proto.Field(
-        proto.INT64, number=4, optional=True,
+        proto.INT64,
+        number=4,
+        optional=True,
     )
     cpc_bid_ceiling_micros: int = proto.Field(
-        proto.INT64, number=5, optional=True,
+        proto.INT64,
+        number=5,
+        optional=True,
     )
     cpc_bid_floor_micros: int = proto.Field(
-        proto.INT64, number=6, optional=True,
+        proto.INT64,
+        number=6,
+        optional=True,
     )
 
 
@@ -268,7 +283,8 @@ class TargetCpmTargetFrequencyGoal(proto.Message):
     """
 
     target_count: int = proto.Field(
-        proto.INT64, number=1,
+        proto.INT64,
+        number=1,
     )
     time_unit: target_frequency_time_unit.TargetFrequencyTimeUnitEnum.TargetFrequencyTimeUnit = proto.Field(
         proto.ENUM,
@@ -309,10 +325,14 @@ class TargetImpressionShare(proto.Message):
         enum=target_impression_share_location.TargetImpressionShareLocationEnum.TargetImpressionShareLocation,
     )
     location_fraction_micros: int = proto.Field(
-        proto.INT64, number=4, optional=True,
+        proto.INT64,
+        number=4,
+        optional=True,
     )
     cpc_bid_ceiling_micros: int = proto.Field(
-        proto.INT64, number=5, optional=True,
+        proto.INT64,
+        number=5,
+        optional=True,
     )
 
 
@@ -346,13 +366,19 @@ class TargetRoas(proto.Message):
     """
 
     target_roas: float = proto.Field(
-        proto.DOUBLE, number=4, optional=True,
+        proto.DOUBLE,
+        number=4,
+        optional=True,
     )
     cpc_bid_ceiling_micros: int = proto.Field(
-        proto.INT64, number=5, optional=True,
+        proto.INT64,
+        number=5,
+        optional=True,
     )
     cpc_bid_floor_micros: int = proto.Field(
-        proto.INT64, number=6, optional=True,
+        proto.INT64,
+        number=6,
+        optional=True,
     )
 
 
@@ -384,10 +410,14 @@ class TargetSpend(proto.Message):
     """
 
     target_spend_micros: int = proto.Field(
-        proto.INT64, number=3, optional=True,
+        proto.INT64,
+        number=3,
+        optional=True,
     )
     cpc_bid_ceiling_micros: int = proto.Field(
-        proto.INT64, number=4, optional=True,
+        proto.INT64,
+        number=4,
+        optional=True,
     )
 
 
@@ -415,10 +445,14 @@ class PercentCpc(proto.Message):
     """
 
     cpc_bid_ceiling_micros: int = proto.Field(
-        proto.INT64, number=3, optional=True,
+        proto.INT64,
+        number=3,
+        optional=True,
     )
     enhanced_cpc_enabled: bool = proto.Field(
-        proto.BOOL, number=4, optional=True,
+        proto.BOOL,
+        number=4,
+        optional=True,
     )
 
 

@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-# Copyright 2022 Google LLC
+# Copyright 2023 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -68,18 +68,23 @@ class MutateCampaignExtensionSettingsRequest(proto.Message):
     """
 
     customer_id: str = proto.Field(
-        proto.STRING, number=1,
+        proto.STRING,
+        number=1,
     )
     operations: MutableSequence[
         "CampaignExtensionSettingOperation"
     ] = proto.RepeatedField(
-        proto.MESSAGE, number=2, message="CampaignExtensionSettingOperation",
+        proto.MESSAGE,
+        number=2,
+        message="CampaignExtensionSettingOperation",
     )
     partial_failure: bool = proto.Field(
-        proto.BOOL, number=3,
+        proto.BOOL,
+        number=3,
     )
     validate_only: bool = proto.Field(
-        proto.BOOL, number=4,
+        proto.BOOL,
+        number=4,
     )
     response_content_type: gage_response_content_type.ResponseContentTypeEnum.ResponseContentType = proto.Field(
         proto.ENUM,
@@ -105,13 +110,14 @@ class CampaignExtensionSettingOperation(proto.Message):
             fields are modified in an update.
         create (google.ads.googleads.v14.resources.types.CampaignExtensionSetting):
             Create operation: No resource name is
-            expected for the new campaign extension setting.
+            expected for the new campaign
+            extension setting.
 
             This field is a member of `oneof`_ ``operation``.
         update (google.ads.googleads.v14.resources.types.CampaignExtensionSetting):
             Update operation: The campaign extension
-            setting is expected to have a valid resource
-            name.
+            setting is expected to have a
+            valid resource name.
 
             This field is a member of `oneof`_ ``operation``.
         remove (str):
@@ -124,22 +130,30 @@ class CampaignExtensionSettingOperation(proto.Message):
     """
 
     update_mask: field_mask_pb2.FieldMask = proto.Field(
-        proto.MESSAGE, number=4, message=field_mask_pb2.FieldMask,
-    )
-    create: gagr_campaign_extension_setting.CampaignExtensionSetting = proto.Field(
         proto.MESSAGE,
-        number=1,
-        oneof="operation",
-        message=gagr_campaign_extension_setting.CampaignExtensionSetting,
+        number=4,
+        message=field_mask_pb2.FieldMask,
     )
-    update: gagr_campaign_extension_setting.CampaignExtensionSetting = proto.Field(
-        proto.MESSAGE,
-        number=2,
-        oneof="operation",
-        message=gagr_campaign_extension_setting.CampaignExtensionSetting,
+    create: gagr_campaign_extension_setting.CampaignExtensionSetting = (
+        proto.Field(
+            proto.MESSAGE,
+            number=1,
+            oneof="operation",
+            message=gagr_campaign_extension_setting.CampaignExtensionSetting,
+        )
+    )
+    update: gagr_campaign_extension_setting.CampaignExtensionSetting = (
+        proto.Field(
+            proto.MESSAGE,
+            number=2,
+            oneof="operation",
+            message=gagr_campaign_extension_setting.CampaignExtensionSetting,
+        )
     )
     remove: str = proto.Field(
-        proto.STRING, number=3, oneof="operation",
+        proto.STRING,
+        number=3,
+        oneof="operation",
     )
 
 
@@ -157,12 +171,16 @@ class MutateCampaignExtensionSettingsResponse(proto.Message):
     """
 
     partial_failure_error: status_pb2.Status = proto.Field(
-        proto.MESSAGE, number=3, message=status_pb2.Status,
+        proto.MESSAGE,
+        number=3,
+        message=status_pb2.Status,
     )
     results: MutableSequence[
         "MutateCampaignExtensionSettingResult"
     ] = proto.RepeatedField(
-        proto.MESSAGE, number=2, message="MutateCampaignExtensionSettingResult",
+        proto.MESSAGE,
+        number=2,
+        message="MutateCampaignExtensionSettingResult",
     )
 
 
@@ -178,7 +196,8 @@ class MutateCampaignExtensionSettingResult(proto.Message):
     """
 
     resource_name: str = proto.Field(
-        proto.STRING, number=1,
+        proto.STRING,
+        number=1,
     )
     campaign_extension_setting: gagr_campaign_extension_setting.CampaignExtensionSetting = proto.Field(
         proto.MESSAGE,

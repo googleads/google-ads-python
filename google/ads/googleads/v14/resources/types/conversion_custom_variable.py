@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-# Copyright 2022 Google LLC
+# Copyright 2023 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -26,7 +26,9 @@ from google.ads.googleads.v14.enums.types import (
 __protobuf__ = proto.module(
     package="google.ads.googleads.v14.resources",
     marshal="google.ads.googleads.v14",
-    manifest={"ConversionCustomVariable",},
+    manifest={
+        "ConversionCustomVariable",
+    },
 )
 
 
@@ -71,16 +73,20 @@ class ConversionCustomVariable(proto.Message):
     """
 
     resource_name: str = proto.Field(
-        proto.STRING, number=1,
+        proto.STRING,
+        number=1,
     )
     id: int = proto.Field(
-        proto.INT64, number=2,
+        proto.INT64,
+        number=2,
     )
     name: str = proto.Field(
-        proto.STRING, number=3,
+        proto.STRING,
+        number=3,
     )
     tag: str = proto.Field(
-        proto.STRING, number=4,
+        proto.STRING,
+        number=4,
     )
     status: conversion_custom_variable_status.ConversionCustomVariableStatusEnum.ConversionCustomVariableStatus = proto.Field(
         proto.ENUM,
@@ -88,7 +94,8 @@ class ConversionCustomVariable(proto.Message):
         enum=conversion_custom_variable_status.ConversionCustomVariableStatusEnum.ConversionCustomVariableStatus,
     )
     owner_customer: str = proto.Field(
-        proto.STRING, number=6,
+        proto.STRING,
+        number=6,
     )
 
 

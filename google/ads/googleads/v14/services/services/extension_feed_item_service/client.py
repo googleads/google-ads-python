@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-# Copyright 2022 Google LLC
+# Copyright 2023 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -65,7 +65,8 @@ class ExtensionFeedItemServiceClientMeta(type):
     _transport_registry["grpc"] = ExtensionFeedItemServiceGrpcTransport
 
     def get_transport_class(
-        cls, label: Optional[str] = None,
+        cls,
+        label: Optional[str] = None,
     ) -> Type[ExtensionFeedItemServiceTransport]:
         """Returns an appropriate transport class.
 
@@ -190,10 +191,14 @@ class ExtensionFeedItemServiceClient(
         self.transport.close()
 
     @staticmethod
-    def ad_group_path(customer_id: str, ad_group_id: str,) -> str:
+    def ad_group_path(
+        customer_id: str,
+        ad_group_id: str,
+    ) -> str:
         """Returns a fully-qualified ad_group string."""
         return "customers/{customer_id}/adGroups/{ad_group_id}".format(
-            customer_id=customer_id, ad_group_id=ad_group_id,
+            customer_id=customer_id,
+            ad_group_id=ad_group_id,
         )
 
     @staticmethod
@@ -206,10 +211,14 @@ class ExtensionFeedItemServiceClient(
         return m.groupdict() if m else {}
 
     @staticmethod
-    def asset_path(customer_id: str, asset_id: str,) -> str:
+    def asset_path(
+        customer_id: str,
+        asset_id: str,
+    ) -> str:
         """Returns a fully-qualified asset string."""
         return "customers/{customer_id}/assets/{asset_id}".format(
-            customer_id=customer_id, asset_id=asset_id,
+            customer_id=customer_id,
+            asset_id=asset_id,
         )
 
     @staticmethod
@@ -221,10 +230,14 @@ class ExtensionFeedItemServiceClient(
         return m.groupdict() if m else {}
 
     @staticmethod
-    def campaign_path(customer_id: str, campaign_id: str,) -> str:
+    def campaign_path(
+        customer_id: str,
+        campaign_id: str,
+    ) -> str:
         """Returns a fully-qualified campaign string."""
         return "customers/{customer_id}/campaigns/{campaign_id}".format(
-            customer_id=customer_id, campaign_id=campaign_id,
+            customer_id=customer_id,
+            campaign_id=campaign_id,
         )
 
     @staticmethod
@@ -237,10 +250,16 @@ class ExtensionFeedItemServiceClient(
         return m.groupdict() if m else {}
 
     @staticmethod
-    def extension_feed_item_path(customer_id: str, feed_item_id: str,) -> str:
+    def extension_feed_item_path(
+        customer_id: str,
+        feed_item_id: str,
+    ) -> str:
         """Returns a fully-qualified extension_feed_item string."""
-        return "customers/{customer_id}/extensionFeedItems/{feed_item_id}".format(
-            customer_id=customer_id, feed_item_id=feed_item_id,
+        return (
+            "customers/{customer_id}/extensionFeedItems/{feed_item_id}".format(
+                customer_id=customer_id,
+                feed_item_id=feed_item_id,
+            )
         )
 
     @staticmethod
@@ -253,7 +272,9 @@ class ExtensionFeedItemServiceClient(
         return m.groupdict() if m else {}
 
     @staticmethod
-    def geo_target_constant_path(criterion_id: str,) -> str:
+    def geo_target_constant_path(
+        criterion_id: str,
+    ) -> str:
         """Returns a fully-qualified geo_target_constant string."""
         return "geoTargetConstants/{criterion_id}".format(
             criterion_id=criterion_id,
@@ -266,7 +287,9 @@ class ExtensionFeedItemServiceClient(
         return m.groupdict() if m else {}
 
     @staticmethod
-    def common_billing_account_path(billing_account: str,) -> str:
+    def common_billing_account_path(
+        billing_account: str,
+    ) -> str:
         """Returns a fully-qualified billing_account string."""
         return "billingAccounts/{billing_account}".format(
             billing_account=billing_account,
@@ -279,9 +302,13 @@ class ExtensionFeedItemServiceClient(
         return m.groupdict() if m else {}
 
     @staticmethod
-    def common_folder_path(folder: str,) -> str:
+    def common_folder_path(
+        folder: str,
+    ) -> str:
         """Returns a fully-qualified folder string."""
-        return "folders/{folder}".format(folder=folder,)
+        return "folders/{folder}".format(
+            folder=folder,
+        )
 
     @staticmethod
     def parse_common_folder_path(path: str) -> Dict[str, str]:
@@ -290,9 +317,13 @@ class ExtensionFeedItemServiceClient(
         return m.groupdict() if m else {}
 
     @staticmethod
-    def common_organization_path(organization: str,) -> str:
+    def common_organization_path(
+        organization: str,
+    ) -> str:
         """Returns a fully-qualified organization string."""
-        return "organizations/{organization}".format(organization=organization,)
+        return "organizations/{organization}".format(
+            organization=organization,
+        )
 
     @staticmethod
     def parse_common_organization_path(path: str) -> Dict[str, str]:
@@ -301,9 +332,13 @@ class ExtensionFeedItemServiceClient(
         return m.groupdict() if m else {}
 
     @staticmethod
-    def common_project_path(project: str,) -> str:
+    def common_project_path(
+        project: str,
+    ) -> str:
         """Returns a fully-qualified project string."""
-        return "projects/{project}".format(project=project,)
+        return "projects/{project}".format(
+            project=project,
+        )
 
     @staticmethod
     def parse_common_project_path(path: str) -> Dict[str, str]:
@@ -312,10 +347,14 @@ class ExtensionFeedItemServiceClient(
         return m.groupdict() if m else {}
 
     @staticmethod
-    def common_location_path(project: str, location: str,) -> str:
+    def common_location_path(
+        project: str,
+        location: str,
+    ) -> str:
         """Returns a fully-qualified location string."""
         return "projects/{project}/locations/{location}".format(
-            project=project, location=location,
+            project=project,
+            location=location,
         )
 
     @staticmethod
@@ -538,8 +577,10 @@ class ExtensionFeedItemServiceClient(
         if not isinstance(
             request, extension_feed_item_service.MutateExtensionFeedItemsRequest
         ):
-            request = extension_feed_item_service.MutateExtensionFeedItemsRequest(
-                request
+            request = (
+                extension_feed_item_service.MutateExtensionFeedItemsRequest(
+                    request
+                )
             )
             # If we have keyword arguments corresponding to fields on the
             # request, apply these.
@@ -564,7 +605,10 @@ class ExtensionFeedItemServiceClient(
 
         # Send the request.
         response = rpc(
-            request, retry=retry, timeout=timeout, metadata=metadata,
+            request,
+            retry=retry,
+            timeout=timeout,
+            metadata=metadata,
         )
 
         # Done; return the response.
@@ -573,7 +617,9 @@ class ExtensionFeedItemServiceClient(
 
 try:
     DEFAULT_CLIENT_INFO = gapic_v1.client_info.ClientInfo(
-        gapic_version=pkg_resources.get_distribution("google-ads",).version,
+        gapic_version=pkg_resources.get_distribution(
+            "google-ads",
+        ).version,
     )
 except pkg_resources.DistributionNotFound:
     DEFAULT_CLIENT_INFO = gapic_v1.client_info.ClientInfo()

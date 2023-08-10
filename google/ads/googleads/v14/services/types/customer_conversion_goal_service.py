@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-# Copyright 2022 Google LLC
+# Copyright 2023 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -52,15 +52,19 @@ class MutateCustomerConversionGoalsRequest(proto.Message):
     """
 
     customer_id: str = proto.Field(
-        proto.STRING, number=1,
+        proto.STRING,
+        number=1,
     )
     operations: MutableSequence[
         "CustomerConversionGoalOperation"
     ] = proto.RepeatedField(
-        proto.MESSAGE, number=2, message="CustomerConversionGoalOperation",
+        proto.MESSAGE,
+        number=2,
+        message="CustomerConversionGoalOperation",
     )
     validate_only: bool = proto.Field(
-        proto.BOOL, number=3,
+        proto.BOOL,
+        number=3,
     )
 
 
@@ -74,13 +78,16 @@ class CustomerConversionGoalOperation(proto.Message):
             fields are modified in an update.
         update (google.ads.googleads.v14.resources.types.CustomerConversionGoal):
             Update operation: The customer conversion
-            goal is expected to have a valid resource name.
+            goal is expected to have a
+            valid resource name.
 
             This field is a member of `oneof`_ ``operation``.
     """
 
     update_mask: field_mask_pb2.FieldMask = proto.Field(
-        proto.MESSAGE, number=2, message=field_mask_pb2.FieldMask,
+        proto.MESSAGE,
+        number=2,
+        message=field_mask_pb2.FieldMask,
     )
     update: customer_conversion_goal.CustomerConversionGoal = proto.Field(
         proto.MESSAGE,
@@ -100,7 +107,9 @@ class MutateCustomerConversionGoalsResponse(proto.Message):
     results: MutableSequence[
         "MutateCustomerConversionGoalResult"
     ] = proto.RepeatedField(
-        proto.MESSAGE, number=1, message="MutateCustomerConversionGoalResult",
+        proto.MESSAGE,
+        number=1,
+        message="MutateCustomerConversionGoalResult",
     )
 
 
@@ -112,7 +121,8 @@ class MutateCustomerConversionGoalResult(proto.Message):
     """
 
     resource_name: str = proto.Field(
-        proto.STRING, number=1,
+        proto.STRING,
+        number=1,
     )
 
 

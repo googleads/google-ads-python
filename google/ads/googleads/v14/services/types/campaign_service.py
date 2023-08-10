@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-# Copyright 2022 Google LLC
+# Copyright 2023 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -66,16 +66,21 @@ class MutateCampaignsRequest(proto.Message):
     """
 
     customer_id: str = proto.Field(
-        proto.STRING, number=1,
+        proto.STRING,
+        number=1,
     )
     operations: MutableSequence["CampaignOperation"] = proto.RepeatedField(
-        proto.MESSAGE, number=2, message="CampaignOperation",
+        proto.MESSAGE,
+        number=2,
+        message="CampaignOperation",
     )
     partial_failure: bool = proto.Field(
-        proto.BOOL, number=3,
+        proto.BOOL,
+        number=3,
     )
     validate_only: bool = proto.Field(
-        proto.BOOL, number=4,
+        proto.BOOL,
+        number=4,
     )
     response_content_type: gage_response_content_type.ResponseContentTypeEnum.ResponseContentType = proto.Field(
         proto.ENUM,
@@ -104,7 +109,8 @@ class CampaignOperation(proto.Message):
             This field is a member of `oneof`_ ``operation``.
         update (google.ads.googleads.v14.resources.types.Campaign):
             Update operation: The campaign is expected to
-            have a valid resource name.
+            have a valid
+            resource name.
 
             This field is a member of `oneof`_ ``operation``.
         remove (str):
@@ -117,7 +123,9 @@ class CampaignOperation(proto.Message):
     """
 
     update_mask: field_mask_pb2.FieldMask = proto.Field(
-        proto.MESSAGE, number=4, message=field_mask_pb2.FieldMask,
+        proto.MESSAGE,
+        number=4,
+        message=field_mask_pb2.FieldMask,
     )
     create: gagr_campaign.Campaign = proto.Field(
         proto.MESSAGE,
@@ -132,7 +140,9 @@ class CampaignOperation(proto.Message):
         message=gagr_campaign.Campaign,
     )
     remove: str = proto.Field(
-        proto.STRING, number=3, oneof="operation",
+        proto.STRING,
+        number=3,
+        oneof="operation",
     )
 
 
@@ -150,10 +160,14 @@ class MutateCampaignsResponse(proto.Message):
     """
 
     partial_failure_error: status_pb2.Status = proto.Field(
-        proto.MESSAGE, number=3, message=status_pb2.Status,
+        proto.MESSAGE,
+        number=3,
+        message=status_pb2.Status,
     )
     results: MutableSequence["MutateCampaignResult"] = proto.RepeatedField(
-        proto.MESSAGE, number=2, message="MutateCampaignResult",
+        proto.MESSAGE,
+        number=2,
+        message="MutateCampaignResult",
     )
 
 
@@ -169,10 +183,13 @@ class MutateCampaignResult(proto.Message):
     """
 
     resource_name: str = proto.Field(
-        proto.STRING, number=1,
+        proto.STRING,
+        number=1,
     )
     campaign: gagr_campaign.Campaign = proto.Field(
-        proto.MESSAGE, number=2, message=gagr_campaign.Campaign,
+        proto.MESSAGE,
+        number=2,
+        message=gagr_campaign.Campaign,
     )
 
 

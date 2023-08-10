@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-# Copyright 2022 Google LLC
+# Copyright 2023 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -32,7 +32,7 @@ class OfflineConversionDiagnosticStatusEnum(proto.Message):
     r"""All possible statuses for oci diagnostics."""
 
     class OfflineConversionDiagnosticStatus(proto.Enum):
-        r"""Next id: 8"""
+        r"""Possible statuses of the offline ingestion setup."""
         UNSPECIFIED = 0
         UNKNOWN = 1
         EXCELLENT = 2

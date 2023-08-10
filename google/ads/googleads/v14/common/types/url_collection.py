@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-# Copyright 2022 Google LLC
+# Copyright 2023 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -23,7 +23,9 @@ import proto  # type: ignore
 __protobuf__ = proto.module(
     package="google.ads.googleads.v14.common",
     marshal="google.ads.googleads.v14",
-    manifest={"UrlCollection",},
+    manifest={
+        "UrlCollection",
+    },
 )
 
 
@@ -48,16 +50,22 @@ class UrlCollection(proto.Message):
     """
 
     url_collection_id: str = proto.Field(
-        proto.STRING, number=5, optional=True,
+        proto.STRING,
+        number=5,
+        optional=True,
     )
     final_urls: MutableSequence[str] = proto.RepeatedField(
-        proto.STRING, number=6,
+        proto.STRING,
+        number=6,
     )
     final_mobile_urls: MutableSequence[str] = proto.RepeatedField(
-        proto.STRING, number=7,
+        proto.STRING,
+        number=7,
     )
     tracking_url_template: str = proto.Field(
-        proto.STRING, number=8, optional=True,
+        proto.STRING,
+        number=8,
+        optional=True,
     )
 
 

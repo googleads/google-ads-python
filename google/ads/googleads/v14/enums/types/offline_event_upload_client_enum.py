@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-# Copyright 2022 Google LLC
+# Copyright 2023 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -32,7 +32,7 @@ class OfflineEventUploadClientEnum(proto.Message):
     r"""All possible clients for an offline upload event."""
 
     class OfflineEventUploadClient(proto.Enum):
-        r"""Next id: 5"""
+        r"""Type of client."""
         UNSPECIFIED = 0
         UNKNOWN = 1
         GOOGLE_ADS_API = 2

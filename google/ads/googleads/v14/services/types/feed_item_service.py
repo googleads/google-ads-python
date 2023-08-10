@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-# Copyright 2022 Google LLC
+# Copyright 2023 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -66,16 +66,21 @@ class MutateFeedItemsRequest(proto.Message):
     """
 
     customer_id: str = proto.Field(
-        proto.STRING, number=1,
+        proto.STRING,
+        number=1,
     )
     operations: MutableSequence["FeedItemOperation"] = proto.RepeatedField(
-        proto.MESSAGE, number=2, message="FeedItemOperation",
+        proto.MESSAGE,
+        number=2,
+        message="FeedItemOperation",
     )
     partial_failure: bool = proto.Field(
-        proto.BOOL, number=3,
+        proto.BOOL,
+        number=3,
     )
     validate_only: bool = proto.Field(
-        proto.BOOL, number=4,
+        proto.BOOL,
+        number=4,
     )
     response_content_type: gage_response_content_type.ResponseContentTypeEnum.ResponseContentType = proto.Field(
         proto.ENUM,
@@ -104,7 +109,8 @@ class FeedItemOperation(proto.Message):
             This field is a member of `oneof`_ ``operation``.
         update (google.ads.googleads.v14.resources.types.FeedItem):
             Update operation: The feed item is expected
-            to have a valid resource name.
+            to have a valid resource
+            name.
 
             This field is a member of `oneof`_ ``operation``.
         remove (str):
@@ -117,7 +123,9 @@ class FeedItemOperation(proto.Message):
     """
 
     update_mask: field_mask_pb2.FieldMask = proto.Field(
-        proto.MESSAGE, number=4, message=field_mask_pb2.FieldMask,
+        proto.MESSAGE,
+        number=4,
+        message=field_mask_pb2.FieldMask,
     )
     create: gagr_feed_item.FeedItem = proto.Field(
         proto.MESSAGE,
@@ -132,7 +140,9 @@ class FeedItemOperation(proto.Message):
         message=gagr_feed_item.FeedItem,
     )
     remove: str = proto.Field(
-        proto.STRING, number=3, oneof="operation",
+        proto.STRING,
+        number=3,
+        oneof="operation",
     )
 
 
@@ -150,10 +160,14 @@ class MutateFeedItemsResponse(proto.Message):
     """
 
     partial_failure_error: status_pb2.Status = proto.Field(
-        proto.MESSAGE, number=3, message=status_pb2.Status,
+        proto.MESSAGE,
+        number=3,
+        message=status_pb2.Status,
     )
     results: MutableSequence["MutateFeedItemResult"] = proto.RepeatedField(
-        proto.MESSAGE, number=2, message="MutateFeedItemResult",
+        proto.MESSAGE,
+        number=2,
+        message="MutateFeedItemResult",
     )
 
 
@@ -169,10 +183,13 @@ class MutateFeedItemResult(proto.Message):
     """
 
     resource_name: str = proto.Field(
-        proto.STRING, number=1,
+        proto.STRING,
+        number=1,
     )
     feed_item: gagr_feed_item.FeedItem = proto.Field(
-        proto.MESSAGE, number=2, message=gagr_feed_item.FeedItem,
+        proto.MESSAGE,
+        number=2,
+        message=gagr_feed_item.FeedItem,
     )
 
 

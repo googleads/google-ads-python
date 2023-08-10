@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-# Copyright 2022 Google LLC
+# Copyright 2023 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -44,10 +44,13 @@ class MutateBillingSetupRequest(proto.Message):
     """
 
     customer_id: str = proto.Field(
-        proto.STRING, number=1,
+        proto.STRING,
+        number=1,
     )
     operation: "BillingSetupOperation" = proto.Field(
-        proto.MESSAGE, number=2, message="BillingSetupOperation",
+        proto.MESSAGE,
+        number=2,
+        message="BillingSetupOperation",
     )
 
 
@@ -84,7 +87,9 @@ class BillingSetupOperation(proto.Message):
         message=billing_setup.BillingSetup,
     )
     remove: str = proto.Field(
-        proto.STRING, number=1, oneof="operation",
+        proto.STRING,
+        number=1,
+        oneof="operation",
     )
 
 
@@ -97,7 +102,9 @@ class MutateBillingSetupResponse(proto.Message):
     """
 
     result: "MutateBillingSetupResult" = proto.Field(
-        proto.MESSAGE, number=1, message="MutateBillingSetupResult",
+        proto.MESSAGE,
+        number=1,
+        message="MutateBillingSetupResult",
     )
 
 
@@ -109,7 +116,8 @@ class MutateBillingSetupResult(proto.Message):
     """
 
     resource_name: str = proto.Field(
-        proto.STRING, number=1,
+        proto.STRING,
+        number=1,
     )
 
 

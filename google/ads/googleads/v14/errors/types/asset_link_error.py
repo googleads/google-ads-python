@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-# Copyright 2022 Google LLC
+# Copyright 2023 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -22,13 +22,14 @@ import proto  # type: ignore
 __protobuf__ = proto.module(
     package="google.ads.googleads.v14.errors",
     marshal="google.ads.googleads.v14",
-    manifest={"AssetLinkErrorEnum",},
+    manifest={
+        "AssetLinkErrorEnum",
+    },
 )
 
 
 class AssetLinkErrorEnum(proto.Message):
-    r"""Container for enum describing possible asset link errors.
-    """
+    r"""Container for enum describing possible asset link errors."""
 
     class AssetLinkError(proto.Enum):
         r"""Enum describing possible asset link errors."""
@@ -57,6 +58,8 @@ class AssetLinkErrorEnum(proto.Message):
         CANNOT_LINK_TO_AUTOMATICALLY_CREATED_ASSET = 20
         CANNOT_MODIFY_ASSET_LINK_SOURCE = 21
         CANNOT_LINK_LOCATION_LEAD_FORM_WITHOUT_LOCATION_ASSET = 22
+        CUSTOMER_NOT_VERIFIED = 23
+        UNSUPPORTED_CALL_TO_ACTION = 24
 
 
 __all__ = tuple(sorted(__protobuf__.manifest))

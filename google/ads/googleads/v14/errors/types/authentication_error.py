@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-# Copyright 2022 Google LLC
+# Copyright 2023 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -22,13 +22,14 @@ import proto  # type: ignore
 __protobuf__ = proto.module(
     package="google.ads.googleads.v14.errors",
     marshal="google.ads.googleads.v14",
-    manifest={"AuthenticationErrorEnum",},
+    manifest={
+        "AuthenticationErrorEnum",
+    },
 )
 
 
 class AuthenticationErrorEnum(proto.Message):
-    r"""Container for enum describing possible authentication errors.
-    """
+    r"""Container for enum describing possible authentication errors."""
 
     class AuthenticationError(proto.Enum):
         r"""Enum describing possible authentication errors."""
@@ -52,6 +53,9 @@ class AuthenticationErrorEnum(proto.Message):
         USER_ID_INVALID = 22
         TWO_STEP_VERIFICATION_NOT_ENROLLED = 23
         ADVANCED_PROTECTION_NOT_ENROLLED = 24
+        ORGANIZATION_NOT_RECOGNIZED = 26
+        ORGANIZATION_NOT_APPROVED = 27
+        ORGANIZATION_NOT_ASSOCIATED_WITH_DEVELOPER_TOKEN = 28
 
 
 __all__ = tuple(sorted(__protobuf__.manifest))

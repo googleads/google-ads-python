@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-# Copyright 2022 Google LLC
+# Copyright 2023 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -22,13 +22,14 @@ import proto  # type: ignore
 __protobuf__ = proto.module(
     package="google.ads.googleads.v14.enums",
     marshal="google.ads.googleads.v14",
-    manifest={"AppCampaignAppStoreEnum",},
+    manifest={
+        "AppCampaignAppStoreEnum",
+    },
 )
 
 
 class AppCampaignAppStoreEnum(proto.Message):
-    r"""The application store that distributes mobile applications.
-    """
+    r"""The application store that distributes mobile applications."""
 
     class AppCampaignAppStore(proto.Enum):
         r"""Enum describing app campaign app store."""

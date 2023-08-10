@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-# Copyright 2022 Google LLC
+# Copyright 2023 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -26,7 +26,9 @@ from google.ads.googleads.v14.enums.types import (
 __protobuf__ = proto.module(
     package="google.ads.googleads.v14.resources",
     marshal="google.ads.googleads.v14",
-    manifest={"DetailPlacementView",},
+    manifest={
+        "DetailPlacementView",
+    },
 )
 
 
@@ -73,24 +75,35 @@ class DetailPlacementView(proto.Message):
     """
 
     resource_name: str = proto.Field(
-        proto.STRING, number=1,
+        proto.STRING,
+        number=1,
     )
     placement: str = proto.Field(
-        proto.STRING, number=7, optional=True,
+        proto.STRING,
+        number=7,
+        optional=True,
     )
     display_name: str = proto.Field(
-        proto.STRING, number=8, optional=True,
+        proto.STRING,
+        number=8,
+        optional=True,
     )
     group_placement_target_url: str = proto.Field(
-        proto.STRING, number=9, optional=True,
+        proto.STRING,
+        number=9,
+        optional=True,
     )
     target_url: str = proto.Field(
-        proto.STRING, number=10, optional=True,
+        proto.STRING,
+        number=10,
+        optional=True,
     )
-    placement_type: gage_placement_type.PlacementTypeEnum.PlacementType = proto.Field(
-        proto.ENUM,
-        number=6,
-        enum=gage_placement_type.PlacementTypeEnum.PlacementType,
+    placement_type: gage_placement_type.PlacementTypeEnum.PlacementType = (
+        proto.Field(
+            proto.ENUM,
+            number=6,
+            enum=gage_placement_type.PlacementTypeEnum.PlacementType,
+        )
     )
 
 

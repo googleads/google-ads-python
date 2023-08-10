@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-# Copyright 2022 Google LLC
+# Copyright 2023 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -27,7 +27,10 @@ from google.ads.googleads.v14.enums.types import (
 __protobuf__ = proto.module(
     package="google.ads.googleads.v14.resources",
     marshal="google.ads.googleads.v14",
-    manifest={"KeywordPlanCampaign", "KeywordPlanGeoTarget",},
+    manifest={
+        "KeywordPlanCampaign",
+        "KeywordPlanGeoTarget",
+    },
 )
 
 
@@ -79,19 +82,27 @@ class KeywordPlanCampaign(proto.Message):
     """
 
     resource_name: str = proto.Field(
-        proto.STRING, number=1,
+        proto.STRING,
+        number=1,
     )
     keyword_plan: str = proto.Field(
-        proto.STRING, number=9, optional=True,
+        proto.STRING,
+        number=9,
+        optional=True,
     )
     id: int = proto.Field(
-        proto.INT64, number=10, optional=True,
+        proto.INT64,
+        number=10,
+        optional=True,
     )
     name: str = proto.Field(
-        proto.STRING, number=11, optional=True,
+        proto.STRING,
+        number=11,
+        optional=True,
     )
     language_constants: MutableSequence[str] = proto.RepeatedField(
-        proto.STRING, number=12,
+        proto.STRING,
+        number=12,
     )
     keyword_plan_network: gage_keyword_plan_network.KeywordPlanNetworkEnum.KeywordPlanNetwork = proto.Field(
         proto.ENUM,
@@ -99,10 +110,14 @@ class KeywordPlanCampaign(proto.Message):
         enum=gage_keyword_plan_network.KeywordPlanNetworkEnum.KeywordPlanNetwork,
     )
     cpc_bid_micros: int = proto.Field(
-        proto.INT64, number=13, optional=True,
+        proto.INT64,
+        number=13,
+        optional=True,
     )
     geo_targets: MutableSequence["KeywordPlanGeoTarget"] = proto.RepeatedField(
-        proto.MESSAGE, number=8, message="KeywordPlanGeoTarget",
+        proto.MESSAGE,
+        number=8,
+        message="KeywordPlanGeoTarget",
     )
 
 
@@ -119,7 +134,9 @@ class KeywordPlanGeoTarget(proto.Message):
     """
 
     geo_target_constant: str = proto.Field(
-        proto.STRING, number=2, optional=True,
+        proto.STRING,
+        number=2,
+        optional=True,
     )
 
 

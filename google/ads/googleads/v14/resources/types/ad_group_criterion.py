@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-# Copyright 2022 Google LLC
+# Copyright 2023 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -34,7 +34,9 @@ from google.ads.googleads.v14.enums.types import quality_score_bucket
 __protobuf__ = proto.module(
     package="google.ads.googleads.v14.resources",
     marshal="google.ads.googleads.v14",
-    manifest={"AdGroupCriterion",},
+    manifest={
+        "AdGroupCriterion",
+    },
 )
 
 
@@ -104,6 +106,7 @@ class AdGroupCriterion(proto.Message):
             the criterion.
             The different reasons for disapproving a
             criterion can be found here:
+
             https://support.google.com/adspolicy/answer/6008942
             This field is read-only.
         labels (MutableSequence[str]):
@@ -276,6 +279,14 @@ class AdGroupCriterion(proto.Message):
             Immutable. Audience.
 
             This field is a member of `oneof`_ ``criterion``.
+        location (google.ads.googleads.v14.common.types.LocationInfo):
+            Immutable. Location.
+
+            This field is a member of `oneof`_ ``criterion``.
+        language (google.ads.googleads.v14.common.types.LanguageInfo):
+            Immutable. Language.
+
+            This field is a member of `oneof`_ ``criterion``.
     """
 
     class QualityInfo(proto.Message):
@@ -302,7 +313,9 @@ class AdGroupCriterion(proto.Message):
         """
 
         quality_score: int = proto.Field(
-            proto.INT32, number=5, optional=True,
+            proto.INT32,
+            number=5,
+            optional=True,
         )
         creative_quality_score: quality_score_bucket.QualityScoreBucketEnum.QualityScoreBucket = proto.Field(
             proto.ENUM,
@@ -359,29 +372,43 @@ class AdGroupCriterion(proto.Message):
         """
 
         first_page_cpc_micros: int = proto.Field(
-            proto.INT64, number=6, optional=True,
+            proto.INT64,
+            number=6,
+            optional=True,
         )
         first_position_cpc_micros: int = proto.Field(
-            proto.INT64, number=7, optional=True,
+            proto.INT64,
+            number=7,
+            optional=True,
         )
         top_of_page_cpc_micros: int = proto.Field(
-            proto.INT64, number=8, optional=True,
+            proto.INT64,
+            number=8,
+            optional=True,
         )
         estimated_add_clicks_at_first_position_cpc: int = proto.Field(
-            proto.INT64, number=9, optional=True,
+            proto.INT64,
+            number=9,
+            optional=True,
         )
         estimated_add_cost_at_first_position_cpc: int = proto.Field(
-            proto.INT64, number=10, optional=True,
+            proto.INT64,
+            number=10,
+            optional=True,
         )
 
     resource_name: str = proto.Field(
-        proto.STRING, number=1,
+        proto.STRING,
+        number=1,
     )
     criterion_id: int = proto.Field(
-        proto.INT64, number=56, optional=True,
+        proto.INT64,
+        number=56,
+        optional=True,
     )
     display_name: str = proto.Field(
-        proto.STRING, number=77,
+        proto.STRING,
+        number=77,
     )
     status: ad_group_criterion_status.AdGroupCriterionStatusEnum.AdGroupCriterionStatus = proto.Field(
         proto.ENUM,
@@ -389,10 +416,14 @@ class AdGroupCriterion(proto.Message):
         enum=ad_group_criterion_status.AdGroupCriterionStatusEnum.AdGroupCriterionStatus,
     )
     quality_info: QualityInfo = proto.Field(
-        proto.MESSAGE, number=4, message=QualityInfo,
+        proto.MESSAGE,
+        number=4,
+        message=QualityInfo,
     )
     ad_group: str = proto.Field(
-        proto.STRING, number=57, optional=True,
+        proto.STRING,
+        number=57,
+        optional=True,
     )
     type_: criterion_type.CriterionTypeEnum.CriterionType = proto.Field(
         proto.ENUM,
@@ -400,7 +431,9 @@ class AdGroupCriterion(proto.Message):
         enum=criterion_type.CriterionTypeEnum.CriterionType,
     )
     negative: bool = proto.Field(
-        proto.BOOL, number=58, optional=True,
+        proto.BOOL,
+        number=58,
+        optional=True,
     )
     system_serving_status: criterion_system_serving_status.CriterionSystemServingStatusEnum.CriterionSystemServingStatus = proto.Field(
         proto.ENUM,
@@ -413,52 +446,78 @@ class AdGroupCriterion(proto.Message):
         enum=ad_group_criterion_approval_status.AdGroupCriterionApprovalStatusEnum.AdGroupCriterionApprovalStatus,
     )
     disapproval_reasons: MutableSequence[str] = proto.RepeatedField(
-        proto.STRING, number=59,
+        proto.STRING,
+        number=59,
     )
     labels: MutableSequence[str] = proto.RepeatedField(
-        proto.STRING, number=60,
+        proto.STRING,
+        number=60,
     )
     bid_modifier: float = proto.Field(
-        proto.DOUBLE, number=61, optional=True,
+        proto.DOUBLE,
+        number=61,
+        optional=True,
     )
     cpc_bid_micros: int = proto.Field(
-        proto.INT64, number=62, optional=True,
+        proto.INT64,
+        number=62,
+        optional=True,
     )
     cpm_bid_micros: int = proto.Field(
-        proto.INT64, number=63, optional=True,
+        proto.INT64,
+        number=63,
+        optional=True,
     )
     cpv_bid_micros: int = proto.Field(
-        proto.INT64, number=64, optional=True,
+        proto.INT64,
+        number=64,
+        optional=True,
     )
     percent_cpc_bid_micros: int = proto.Field(
-        proto.INT64, number=65, optional=True,
+        proto.INT64,
+        number=65,
+        optional=True,
     )
     effective_cpc_bid_micros: int = proto.Field(
-        proto.INT64, number=66, optional=True,
+        proto.INT64,
+        number=66,
+        optional=True,
     )
     effective_cpm_bid_micros: int = proto.Field(
-        proto.INT64, number=67, optional=True,
+        proto.INT64,
+        number=67,
+        optional=True,
     )
     effective_cpv_bid_micros: int = proto.Field(
-        proto.INT64, number=68, optional=True,
+        proto.INT64,
+        number=68,
+        optional=True,
     )
     effective_percent_cpc_bid_micros: int = proto.Field(
-        proto.INT64, number=69, optional=True,
+        proto.INT64,
+        number=69,
+        optional=True,
     )
-    effective_cpc_bid_source: bidding_source.BiddingSourceEnum.BiddingSource = proto.Field(
-        proto.ENUM,
-        number=21,
-        enum=bidding_source.BiddingSourceEnum.BiddingSource,
+    effective_cpc_bid_source: bidding_source.BiddingSourceEnum.BiddingSource = (
+        proto.Field(
+            proto.ENUM,
+            number=21,
+            enum=bidding_source.BiddingSourceEnum.BiddingSource,
+        )
     )
-    effective_cpm_bid_source: bidding_source.BiddingSourceEnum.BiddingSource = proto.Field(
-        proto.ENUM,
-        number=22,
-        enum=bidding_source.BiddingSourceEnum.BiddingSource,
+    effective_cpm_bid_source: bidding_source.BiddingSourceEnum.BiddingSource = (
+        proto.Field(
+            proto.ENUM,
+            number=22,
+            enum=bidding_source.BiddingSourceEnum.BiddingSource,
+        )
     )
-    effective_cpv_bid_source: bidding_source.BiddingSourceEnum.BiddingSource = proto.Field(
-        proto.ENUM,
-        number=23,
-        enum=bidding_source.BiddingSourceEnum.BiddingSource,
+    effective_cpv_bid_source: bidding_source.BiddingSourceEnum.BiddingSource = (
+        proto.Field(
+            proto.ENUM,
+            number=23,
+            enum=bidding_source.BiddingSourceEnum.BiddingSource,
+        )
     )
     effective_percent_cpc_bid_source: bidding_source.BiddingSourceEnum.BiddingSource = proto.Field(
         proto.ENUM,
@@ -466,24 +525,34 @@ class AdGroupCriterion(proto.Message):
         enum=bidding_source.BiddingSourceEnum.BiddingSource,
     )
     position_estimates: PositionEstimates = proto.Field(
-        proto.MESSAGE, number=10, message=PositionEstimates,
+        proto.MESSAGE,
+        number=10,
+        message=PositionEstimates,
     )
     final_urls: MutableSequence[str] = proto.RepeatedField(
-        proto.STRING, number=70,
+        proto.STRING,
+        number=70,
     )
     final_mobile_urls: MutableSequence[str] = proto.RepeatedField(
-        proto.STRING, number=71,
+        proto.STRING,
+        number=71,
     )
     final_url_suffix: str = proto.Field(
-        proto.STRING, number=72, optional=True,
+        proto.STRING,
+        number=72,
+        optional=True,
     )
     tracking_url_template: str = proto.Field(
-        proto.STRING, number=73, optional=True,
+        proto.STRING,
+        number=73,
+        optional=True,
     )
     url_custom_parameters: MutableSequence[
         custom_parameter.CustomParameter
     ] = proto.RepeatedField(
-        proto.MESSAGE, number=14, message=custom_parameter.CustomParameter,
+        proto.MESSAGE,
+        number=14,
+        message=custom_parameter.CustomParameter,
     )
     keyword: criteria.KeywordInfo = proto.Field(
         proto.MESSAGE,
@@ -558,7 +627,10 @@ class AdGroupCriterion(proto.Message):
         message=criteria.YouTubeChannelInfo,
     )
     topic: criteria.TopicInfo = proto.Field(
-        proto.MESSAGE, number=43, oneof="criterion", message=criteria.TopicInfo,
+        proto.MESSAGE,
+        number=43,
+        oneof="criterion",
+        message=criteria.TopicInfo,
     )
     user_interest: criteria.UserInterestInfo = proto.Field(
         proto.MESSAGE,
@@ -607,6 +679,18 @@ class AdGroupCriterion(proto.Message):
         number=79,
         oneof="criterion",
         message=criteria.AudienceInfo,
+    )
+    location: criteria.LocationInfo = proto.Field(
+        proto.MESSAGE,
+        number=82,
+        oneof="criterion",
+        message=criteria.LocationInfo,
+    )
+    language: criteria.LanguageInfo = proto.Field(
+        proto.MESSAGE,
+        number=83,
+        oneof="criterion",
+        message=criteria.LanguageInfo,
     )
 
 

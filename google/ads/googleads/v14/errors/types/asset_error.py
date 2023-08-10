@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-# Copyright 2022 Google LLC
+# Copyright 2023 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -22,13 +22,14 @@ import proto  # type: ignore
 __protobuf__ = proto.module(
     package="google.ads.googleads.v14.errors",
     marshal="google.ads.googleads.v14",
-    manifest={"AssetErrorEnum",},
+    manifest={
+        "AssetErrorEnum",
+    },
 )
 
 
 class AssetErrorEnum(proto.Message):
-    r"""Container for enum describing possible asset errors.
-    """
+    r"""Container for enum describing possible asset errors."""
 
     class AssetError(proto.Enum):
         r"""Enum describing possible asset errors."""
@@ -69,6 +70,7 @@ class AssetErrorEnum(proto.Message):
         CANNOT_MODIFY_ASSET_SOURCE = 35
         CANNOT_MODIFY_AUTOMATICALLY_CREATED_ASSET = 36
         LEAD_FORM_LOCATION_ANSWER_TYPE_DISALLOWED = 37
+        PAGE_FEED_INVALID_LABEL_TEXT = 38
 
 
 __all__ = tuple(sorted(__protobuf__.manifest))

@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-# Copyright 2022 Google LLC
+# Copyright 2023 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -95,37 +95,62 @@ class MediaFile(proto.Message):
     """
 
     resource_name: str = proto.Field(
-        proto.STRING, number=1,
+        proto.STRING,
+        number=1,
     )
     id: int = proto.Field(
-        proto.INT64, number=12, optional=True,
+        proto.INT64,
+        number=12,
+        optional=True,
     )
     type_: media_type.MediaTypeEnum.MediaType = proto.Field(
-        proto.ENUM, number=5, enum=media_type.MediaTypeEnum.MediaType,
+        proto.ENUM,
+        number=5,
+        enum=media_type.MediaTypeEnum.MediaType,
     )
     mime_type: gage_mime_type.MimeTypeEnum.MimeType = proto.Field(
-        proto.ENUM, number=6, enum=gage_mime_type.MimeTypeEnum.MimeType,
+        proto.ENUM,
+        number=6,
+        enum=gage_mime_type.MimeTypeEnum.MimeType,
     )
     source_url: str = proto.Field(
-        proto.STRING, number=13, optional=True,
+        proto.STRING,
+        number=13,
+        optional=True,
     )
     name: str = proto.Field(
-        proto.STRING, number=14, optional=True,
+        proto.STRING,
+        number=14,
+        optional=True,
     )
     file_size: int = proto.Field(
-        proto.INT64, number=15, optional=True,
+        proto.INT64,
+        number=15,
+        optional=True,
     )
     image: "MediaImage" = proto.Field(
-        proto.MESSAGE, number=3, oneof="mediatype", message="MediaImage",
+        proto.MESSAGE,
+        number=3,
+        oneof="mediatype",
+        message="MediaImage",
     )
     media_bundle: "MediaBundle" = proto.Field(
-        proto.MESSAGE, number=4, oneof="mediatype", message="MediaBundle",
+        proto.MESSAGE,
+        number=4,
+        oneof="mediatype",
+        message="MediaBundle",
     )
     audio: "MediaAudio" = proto.Field(
-        proto.MESSAGE, number=10, oneof="mediatype", message="MediaAudio",
+        proto.MESSAGE,
+        number=10,
+        oneof="mediatype",
+        message="MediaAudio",
     )
     video: "MediaVideo" = proto.Field(
-        proto.MESSAGE, number=11, oneof="mediatype", message="MediaVideo",
+        proto.MESSAGE,
+        number=11,
+        oneof="mediatype",
+        message="MediaVideo",
     )
 
 
@@ -151,13 +176,19 @@ class MediaImage(proto.Message):
     """
 
     data: bytes = proto.Field(
-        proto.BYTES, number=4, optional=True,
+        proto.BYTES,
+        number=4,
+        optional=True,
     )
     full_size_image_url: str = proto.Field(
-        proto.STRING, number=2, optional=True,
+        proto.STRING,
+        number=2,
+        optional=True,
     )
     preview_size_image_url: str = proto.Field(
-        proto.STRING, number=3, optional=True,
+        proto.STRING,
+        number=3,
+        optional=True,
     )
 
 
@@ -182,10 +213,14 @@ class MediaBundle(proto.Message):
     """
 
     data: bytes = proto.Field(
-        proto.BYTES, number=3, optional=True,
+        proto.BYTES,
+        number=3,
+        optional=True,
     )
     url: str = proto.Field(
-        proto.STRING, number=2, optional=True,
+        proto.STRING,
+        number=2,
+        optional=True,
     )
 
 
@@ -202,7 +237,9 @@ class MediaAudio(proto.Message):
     """
 
     ad_duration_millis: int = proto.Field(
-        proto.INT64, number=2, optional=True,
+        proto.INT64,
+        number=2,
+        optional=True,
     )
 
 
@@ -241,16 +278,24 @@ class MediaVideo(proto.Message):
     """
 
     ad_duration_millis: int = proto.Field(
-        proto.INT64, number=5, optional=True,
+        proto.INT64,
+        number=5,
+        optional=True,
     )
     youtube_video_id: str = proto.Field(
-        proto.STRING, number=6, optional=True,
+        proto.STRING,
+        number=6,
+        optional=True,
     )
     advertising_id_code: str = proto.Field(
-        proto.STRING, number=7, optional=True,
+        proto.STRING,
+        number=7,
+        optional=True,
     )
     isci_code: str = proto.Field(
-        proto.STRING, number=8, optional=True,
+        proto.STRING,
+        number=8,
+        optional=True,
     )
 
 

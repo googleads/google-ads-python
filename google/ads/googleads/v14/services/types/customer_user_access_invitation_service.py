@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-# Copyright 2022 Google LLC
+# Copyright 2023 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -37,7 +37,7 @@ __protobuf__ = proto.module(
 
 class MutateCustomerUserAccessInvitationRequest(proto.Message):
     r"""Request message for
-    [CustomerUserAccessInvitation.MutateCustomerUserAccessInvitation][]
+    [CustomerUserAccessInvitationService.MutateCustomerUserAccessInvitation][google.ads.googleads.v14.services.CustomerUserAccessInvitationService.MutateCustomerUserAccessInvitation]
 
     Attributes:
         customer_id (str):
@@ -49,7 +49,8 @@ class MutateCustomerUserAccessInvitationRequest(proto.Message):
     """
 
     customer_id: str = proto.Field(
-        proto.STRING, number=1,
+        proto.STRING,
+        number=1,
     )
     operation: "CustomerUserAccessInvitationOperation" = proto.Field(
         proto.MESSAGE,
@@ -72,7 +73,8 @@ class CustomerUserAccessInvitationOperation(proto.Message):
     Attributes:
         create (google.ads.googleads.v14.resources.types.CustomerUserAccessInvitation):
             Create operation: No resource name is
-            expected for the new access invitation.
+            expected for the new access
+            invitation.
 
             This field is a member of `oneof`_ ``operation``.
         remove (str):
@@ -91,7 +93,9 @@ class CustomerUserAccessInvitationOperation(proto.Message):
         message=customer_user_access_invitation.CustomerUserAccessInvitation,
     )
     remove: str = proto.Field(
-        proto.STRING, number=2, oneof="operation",
+        proto.STRING,
+        number=2,
+        oneof="operation",
     )
 
 
@@ -117,7 +121,8 @@ class MutateCustomerUserAccessInvitationResult(proto.Message):
     """
 
     resource_name: str = proto.Field(
-        proto.STRING, number=1,
+        proto.STRING,
+        number=1,
     )
 
 

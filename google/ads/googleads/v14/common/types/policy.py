@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-# Copyright 2022 Google LLC
+# Copyright 2023 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -67,10 +67,14 @@ class PolicyViolationKey(proto.Message):
     """
 
     policy_name: str = proto.Field(
-        proto.STRING, number=3, optional=True,
+        proto.STRING,
+        number=3,
+        optional=True,
     )
     violating_text: str = proto.Field(
-        proto.STRING, number=4, optional=True,
+        proto.STRING,
+        number=4,
+        optional=True,
     )
 
 
@@ -101,12 +105,15 @@ class PolicyValidationParameter(proto.Message):
     """
 
     ignorable_policy_topics: MutableSequence[str] = proto.RepeatedField(
-        proto.STRING, number=3,
+        proto.STRING,
+        number=3,
     )
     exempt_policy_violation_keys: MutableSequence[
         "PolicyViolationKey"
     ] = proto.RepeatedField(
-        proto.MESSAGE, number=2, message="PolicyViolationKey",
+        proto.MESSAGE,
+        number=2,
+        message="PolicyViolationKey",
     )
 
 
@@ -145,7 +152,9 @@ class PolicyTopicEntry(proto.Message):
     """
 
     topic: str = proto.Field(
-        proto.STRING, number=5, optional=True,
+        proto.STRING,
+        number=5,
+        optional=True,
     )
     type_: policy_topic_entry_type.PolicyTopicEntryTypeEnum.PolicyTopicEntryType = proto.Field(
         proto.ENUM,
@@ -153,10 +162,14 @@ class PolicyTopicEntry(proto.Message):
         enum=policy_topic_entry_type.PolicyTopicEntryTypeEnum.PolicyTopicEntryType,
     )
     evidences: MutableSequence["PolicyTopicEvidence"] = proto.RepeatedField(
-        proto.MESSAGE, number=3, message="PolicyTopicEvidence",
+        proto.MESSAGE,
+        number=3,
+        message="PolicyTopicEvidence",
     )
     constraints: MutableSequence["PolicyTopicConstraint"] = proto.RepeatedField(
-        proto.MESSAGE, number=4, message="PolicyTopicConstraint",
+        proto.MESSAGE,
+        number=4,
+        message="PolicyTopicConstraint",
     )
 
 
@@ -212,7 +225,8 @@ class PolicyTopicEvidence(proto.Message):
         """
 
         texts: MutableSequence[str] = proto.RepeatedField(
-            proto.STRING, number=2,
+            proto.STRING,
+            number=2,
         )
 
     class WebsiteList(proto.Message):
@@ -227,7 +241,8 @@ class PolicyTopicEvidence(proto.Message):
         """
 
         websites: MutableSequence[str] = proto.RepeatedField(
-            proto.STRING, number=2,
+            proto.STRING,
+            number=2,
         )
 
     class DestinationTextList(proto.Message):
@@ -241,7 +256,8 @@ class PolicyTopicEvidence(proto.Message):
         """
 
         destination_texts: MutableSequence[str] = proto.RepeatedField(
-            proto.STRING, number=2,
+            proto.STRING,
+            number=2,
         )
 
     class DestinationMismatch(proto.Message):
@@ -298,7 +314,9 @@ class PolicyTopicEvidence(proto.Message):
         """
 
         expanded_url: str = proto.Field(
-            proto.STRING, number=7, optional=True,
+            proto.STRING,
+            number=7,
+            optional=True,
         )
         device: policy_topic_evidence_destination_not_working_device.PolicyTopicEvidenceDestinationNotWorkingDeviceEnum.PolicyTopicEvidenceDestinationNotWorkingDevice = proto.Field(
             proto.ENUM,
@@ -306,7 +324,9 @@ class PolicyTopicEvidence(proto.Message):
             enum=policy_topic_evidence_destination_not_working_device.PolicyTopicEvidenceDestinationNotWorkingDeviceEnum.PolicyTopicEvidenceDestinationNotWorkingDevice,
         )
         last_checked_date_time: str = proto.Field(
-            proto.STRING, number=8, optional=True,
+            proto.STRING,
+            number=8,
+            optional=True,
         )
         dns_error_type: policy_topic_evidence_destination_not_working_dns_error_type.PolicyTopicEvidenceDestinationNotWorkingDnsErrorTypeEnum.PolicyTopicEvidenceDestinationNotWorkingDnsErrorType = proto.Field(
             proto.ENUM,
@@ -315,26 +335,45 @@ class PolicyTopicEvidence(proto.Message):
             enum=policy_topic_evidence_destination_not_working_dns_error_type.PolicyTopicEvidenceDestinationNotWorkingDnsErrorTypeEnum.PolicyTopicEvidenceDestinationNotWorkingDnsErrorType,
         )
         http_error_code: int = proto.Field(
-            proto.INT64, number=6, oneof="reason",
+            proto.INT64,
+            number=6,
+            oneof="reason",
         )
 
     website_list: WebsiteList = proto.Field(
-        proto.MESSAGE, number=3, oneof="value", message=WebsiteList,
+        proto.MESSAGE,
+        number=3,
+        oneof="value",
+        message=WebsiteList,
     )
     text_list: TextList = proto.Field(
-        proto.MESSAGE, number=4, oneof="value", message=TextList,
+        proto.MESSAGE,
+        number=4,
+        oneof="value",
+        message=TextList,
     )
     language_code: str = proto.Field(
-        proto.STRING, number=9, oneof="value",
+        proto.STRING,
+        number=9,
+        oneof="value",
     )
     destination_text_list: DestinationTextList = proto.Field(
-        proto.MESSAGE, number=6, oneof="value", message=DestinationTextList,
+        proto.MESSAGE,
+        number=6,
+        oneof="value",
+        message=DestinationTextList,
     )
     destination_mismatch: DestinationMismatch = proto.Field(
-        proto.MESSAGE, number=7, oneof="value", message=DestinationMismatch,
+        proto.MESSAGE,
+        number=7,
+        oneof="value",
+        message=DestinationMismatch,
     )
     destination_not_working: DestinationNotWorking = proto.Field(
-        proto.MESSAGE, number=8, oneof="value", message=DestinationNotWorking,
+        proto.MESSAGE,
+        number=8,
+        oneof="value",
+        message=DestinationNotWorking,
     )
 
 
@@ -387,7 +426,9 @@ class PolicyTopicConstraint(proto.Message):
         """
 
         total_targeted_countries: int = proto.Field(
-            proto.INT32, number=3, optional=True,
+            proto.INT32,
+            number=3,
+            optional=True,
         )
         countries: MutableSequence[
             "PolicyTopicConstraint.CountryConstraint"
@@ -418,20 +459,36 @@ class PolicyTopicConstraint(proto.Message):
         """
 
         country_criterion: str = proto.Field(
-            proto.STRING, number=2, optional=True,
+            proto.STRING,
+            number=2,
+            optional=True,
         )
 
     country_constraint_list: CountryConstraintList = proto.Field(
-        proto.MESSAGE, number=1, oneof="value", message=CountryConstraintList,
+        proto.MESSAGE,
+        number=1,
+        oneof="value",
+        message=CountryConstraintList,
     )
     reseller_constraint: ResellerConstraint = proto.Field(
-        proto.MESSAGE, number=2, oneof="value", message=ResellerConstraint,
+        proto.MESSAGE,
+        number=2,
+        oneof="value",
+        message=ResellerConstraint,
     )
     certificate_missing_in_country_list: CountryConstraintList = proto.Field(
-        proto.MESSAGE, number=3, oneof="value", message=CountryConstraintList,
+        proto.MESSAGE,
+        number=3,
+        oneof="value",
+        message=CountryConstraintList,
     )
-    certificate_domain_mismatch_in_country_list: CountryConstraintList = proto.Field(
-        proto.MESSAGE, number=4, oneof="value", message=CountryConstraintList,
+    certificate_domain_mismatch_in_country_list: CountryConstraintList = (
+        proto.Field(
+            proto.MESSAGE,
+            number=4,
+            oneof="value",
+            message=CountryConstraintList,
+        )
     )
 
 

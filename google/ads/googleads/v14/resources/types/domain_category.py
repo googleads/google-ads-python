@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-# Copyright 2022 Google LLC
+# Copyright 2023 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -22,7 +22,9 @@ import proto  # type: ignore
 __protobuf__ = proto.module(
     package="google.ads.googleads.v14.resources",
     marshal="google.ads.googleads.v14",
-    manifest={"DomainCategory",},
+    manifest={
+        "DomainCategory",
+    },
 )
 
 
@@ -95,31 +97,48 @@ class DomainCategory(proto.Message):
     """
 
     resource_name: str = proto.Field(
-        proto.STRING, number=1,
+        proto.STRING,
+        number=1,
     )
     campaign: str = proto.Field(
-        proto.STRING, number=10, optional=True,
+        proto.STRING,
+        number=10,
+        optional=True,
     )
     category: str = proto.Field(
-        proto.STRING, number=11, optional=True,
+        proto.STRING,
+        number=11,
+        optional=True,
     )
     language_code: str = proto.Field(
-        proto.STRING, number=12, optional=True,
+        proto.STRING,
+        number=12,
+        optional=True,
     )
     domain: str = proto.Field(
-        proto.STRING, number=13, optional=True,
+        proto.STRING,
+        number=13,
+        optional=True,
     )
     coverage_fraction: float = proto.Field(
-        proto.DOUBLE, number=14, optional=True,
+        proto.DOUBLE,
+        number=14,
+        optional=True,
     )
     category_rank: int = proto.Field(
-        proto.INT64, number=15, optional=True,
+        proto.INT64,
+        number=15,
+        optional=True,
     )
     has_children: bool = proto.Field(
-        proto.BOOL, number=16, optional=True,
+        proto.BOOL,
+        number=16,
+        optional=True,
     )
     recommended_cpc_bid_micros: int = proto.Field(
-        proto.INT64, number=17, optional=True,
+        proto.INT64,
+        number=17,
+        optional=True,
     )
 
 

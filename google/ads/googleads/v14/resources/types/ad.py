@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-# Copyright 2022 Google LLC
+# Copyright 2023 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -31,7 +31,9 @@ from google.ads.googleads.v14.enums.types import system_managed_entity_source
 __protobuf__ = proto.module(
     package="google.ads.googleads.v14.resources",
     marshal="google.ads.googleads.v14",
-    manifest={"Ad",},
+    manifest={
+        "Ad",
+    },
 )
 
 
@@ -225,6 +227,11 @@ class Ad(proto.Message):
             ad.
 
             This field is a member of `oneof`_ ``ad_data``.
+        discovery_video_responsive_ad (google.ads.googleads.v14.common.types.DiscoveryVideoResponsiveAdInfo):
+            Details pertaining to a discovery video
+            responsive ad.
+
+            This field is a member of `oneof`_ ``ad_data``.
         travel_ad (google.ads.googleads.v14.common.types.TravelAdInfo):
             Details pertaining to a travel ad.
 
@@ -232,52 +239,77 @@ class Ad(proto.Message):
     """
 
     resource_name: str = proto.Field(
-        proto.STRING, number=37,
+        proto.STRING,
+        number=37,
     )
     id: int = proto.Field(
-        proto.INT64, number=40, optional=True,
+        proto.INT64,
+        number=40,
+        optional=True,
     )
     final_urls: MutableSequence[str] = proto.RepeatedField(
-        proto.STRING, number=41,
+        proto.STRING,
+        number=41,
     )
     final_app_urls: MutableSequence[
         final_app_url.FinalAppUrl
     ] = proto.RepeatedField(
-        proto.MESSAGE, number=35, message=final_app_url.FinalAppUrl,
+        proto.MESSAGE,
+        number=35,
+        message=final_app_url.FinalAppUrl,
     )
     final_mobile_urls: MutableSequence[str] = proto.RepeatedField(
-        proto.STRING, number=42,
+        proto.STRING,
+        number=42,
     )
     tracking_url_template: str = proto.Field(
-        proto.STRING, number=43, optional=True,
+        proto.STRING,
+        number=43,
+        optional=True,
     )
     final_url_suffix: str = proto.Field(
-        proto.STRING, number=44, optional=True,
+        proto.STRING,
+        number=44,
+        optional=True,
     )
     url_custom_parameters: MutableSequence[
         custom_parameter.CustomParameter
     ] = proto.RepeatedField(
-        proto.MESSAGE, number=10, message=custom_parameter.CustomParameter,
+        proto.MESSAGE,
+        number=10,
+        message=custom_parameter.CustomParameter,
     )
     display_url: str = proto.Field(
-        proto.STRING, number=45, optional=True,
+        proto.STRING,
+        number=45,
+        optional=True,
     )
     type_: ad_type.AdTypeEnum.AdType = proto.Field(
-        proto.ENUM, number=5, enum=ad_type.AdTypeEnum.AdType,
+        proto.ENUM,
+        number=5,
+        enum=ad_type.AdTypeEnum.AdType,
     )
     added_by_google_ads: bool = proto.Field(
-        proto.BOOL, number=46, optional=True,
+        proto.BOOL,
+        number=46,
+        optional=True,
     )
     device_preference: device.DeviceEnum.Device = proto.Field(
-        proto.ENUM, number=20, enum=device.DeviceEnum.Device,
+        proto.ENUM,
+        number=20,
+        enum=device.DeviceEnum.Device,
     )
     url_collections: MutableSequence[
         url_collection.UrlCollection
     ] = proto.RepeatedField(
-        proto.MESSAGE, number=26, message=url_collection.UrlCollection,
+        proto.MESSAGE,
+        number=26,
+        message=url_collection.UrlCollection,
     )
     name: str = proto.Field(
-        proto.STRING, number=47, optional=True,
+        proto.STRING,
+        number=47,
+        optional=True,
     )
     system_managed_resource_source: system_managed_entity_source.SystemManagedResourceSourceEnum.SystemManagedResourceSource = proto.Field(
         proto.ENUM,
@@ -302,11 +334,13 @@ class Ad(proto.Message):
         oneof="ad_data",
         message=ad_type_infos.CallAdInfo,
     )
-    expanded_dynamic_search_ad: ad_type_infos.ExpandedDynamicSearchAdInfo = proto.Field(
-        proto.MESSAGE,
-        number=14,
-        oneof="ad_data",
-        message=ad_type_infos.ExpandedDynamicSearchAdInfo,
+    expanded_dynamic_search_ad: ad_type_infos.ExpandedDynamicSearchAdInfo = (
+        proto.Field(
+            proto.MESSAGE,
+            number=14,
+            oneof="ad_data",
+            message=ad_type_infos.ExpandedDynamicSearchAdInfo,
+        )
     )
     hotel_ad: ad_type_infos.HotelAdInfo = proto.Field(
         proto.MESSAGE,
@@ -404,23 +438,33 @@ class Ad(proto.Message):
         oneof="ad_data",
         message=ad_type_infos.SmartCampaignAdInfo,
     )
-    app_pre_registration_ad: ad_type_infos.AppPreRegistrationAdInfo = proto.Field(
-        proto.MESSAGE,
-        number=50,
-        oneof="ad_data",
-        message=ad_type_infos.AppPreRegistrationAdInfo,
+    app_pre_registration_ad: ad_type_infos.AppPreRegistrationAdInfo = (
+        proto.Field(
+            proto.MESSAGE,
+            number=50,
+            oneof="ad_data",
+            message=ad_type_infos.AppPreRegistrationAdInfo,
+        )
     )
-    discovery_multi_asset_ad: ad_type_infos.DiscoveryMultiAssetAdInfo = proto.Field(
-        proto.MESSAGE,
-        number=51,
-        oneof="ad_data",
-        message=ad_type_infos.DiscoveryMultiAssetAdInfo,
+    discovery_multi_asset_ad: ad_type_infos.DiscoveryMultiAssetAdInfo = (
+        proto.Field(
+            proto.MESSAGE,
+            number=51,
+            oneof="ad_data",
+            message=ad_type_infos.DiscoveryMultiAssetAdInfo,
+        )
     )
     discovery_carousel_ad: ad_type_infos.DiscoveryCarouselAdInfo = proto.Field(
         proto.MESSAGE,
         number=52,
         oneof="ad_data",
         message=ad_type_infos.DiscoveryCarouselAdInfo,
+    )
+    discovery_video_responsive_ad: ad_type_infos.DiscoveryVideoResponsiveAdInfo = proto.Field(
+        proto.MESSAGE,
+        number=60,
+        oneof="ad_data",
+        message=ad_type_infos.DiscoveryVideoResponsiveAdInfo,
     )
     travel_ad: ad_type_infos.TravelAdInfo = proto.Field(
         proto.MESSAGE,

@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-# Copyright 2022 Google LLC
+# Copyright 2023 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -27,7 +27,10 @@ from google.ads.googleads.v14.enums.types import custom_audience_type
 __protobuf__ = proto.module(
     package="google.ads.googleads.v14.resources",
     marshal="google.ads.googleads.v14",
-    manifest={"CustomAudience", "CustomAudienceMember",},
+    manifest={
+        "CustomAudience",
+        "CustomAudienceMember",
+    },
 )
 
 
@@ -65,10 +68,12 @@ class CustomAudience(proto.Message):
     """
 
     resource_name: str = proto.Field(
-        proto.STRING, number=1,
+        proto.STRING,
+        number=1,
     )
     id: int = proto.Field(
-        proto.INT64, number=2,
+        proto.INT64,
+        number=2,
     )
     status: custom_audience_status.CustomAudienceStatusEnum.CustomAudienceStatus = proto.Field(
         proto.ENUM,
@@ -76,18 +81,24 @@ class CustomAudience(proto.Message):
         enum=custom_audience_status.CustomAudienceStatusEnum.CustomAudienceStatus,
     )
     name: str = proto.Field(
-        proto.STRING, number=4,
+        proto.STRING,
+        number=4,
     )
-    type_: custom_audience_type.CustomAudienceTypeEnum.CustomAudienceType = proto.Field(
-        proto.ENUM,
-        number=5,
-        enum=custom_audience_type.CustomAudienceTypeEnum.CustomAudienceType,
+    type_: custom_audience_type.CustomAudienceTypeEnum.CustomAudienceType = (
+        proto.Field(
+            proto.ENUM,
+            number=5,
+            enum=custom_audience_type.CustomAudienceTypeEnum.CustomAudienceType,
+        )
     )
     description: str = proto.Field(
-        proto.STRING, number=6,
+        proto.STRING,
+        number=6,
     )
     members: MutableSequence["CustomAudienceMember"] = proto.RepeatedField(
-        proto.MESSAGE, number=7, message="CustomAudienceMember",
+        proto.MESSAGE,
+        number=7,
+        message="CustomAudienceMember",
     )
 
 
@@ -139,16 +150,24 @@ class CustomAudienceMember(proto.Message):
         enum=custom_audience_member_type.CustomAudienceMemberTypeEnum.CustomAudienceMemberType,
     )
     keyword: str = proto.Field(
-        proto.STRING, number=2, oneof="value",
+        proto.STRING,
+        number=2,
+        oneof="value",
     )
     url: str = proto.Field(
-        proto.STRING, number=3, oneof="value",
+        proto.STRING,
+        number=3,
+        oneof="value",
     )
     place_category: int = proto.Field(
-        proto.INT64, number=4, oneof="value",
+        proto.INT64,
+        number=4,
+        oneof="value",
     )
     app: str = proto.Field(
-        proto.STRING, number=5, oneof="value",
+        proto.STRING,
+        number=5,
+        oneof="value",
     )
 
 

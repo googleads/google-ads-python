@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-# Copyright 2022 Google LLC
+# Copyright 2023 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -27,7 +27,9 @@ from google.ads.googleads.v14.enums.types import (
 __protobuf__ = proto.module(
     package="google.ads.googleads.v14.resources",
     marshal="google.ads.googleads.v14",
-    manifest={"AccessibleBiddingStrategy",},
+    manifest={
+        "AccessibleBiddingStrategy",
+    },
 )
 
 
@@ -124,7 +126,8 @@ class AccessibleBiddingStrategy(proto.Message):
         """
 
         target_roas: float = proto.Field(
-            proto.DOUBLE, number=1,
+            proto.DOUBLE,
+            number=1,
         )
 
     class MaximizeConversions(proto.Message):
@@ -139,7 +142,8 @@ class AccessibleBiddingStrategy(proto.Message):
         """
 
         target_cpa_micros: int = proto.Field(
-            proto.INT64, number=2,
+            proto.INT64,
+            number=2,
         )
 
     class TargetCpa(proto.Message):
@@ -160,7 +164,9 @@ class AccessibleBiddingStrategy(proto.Message):
         """
 
         target_cpa_micros: int = proto.Field(
-            proto.INT64, number=1, optional=True,
+            proto.INT64,
+            number=1,
+            optional=True,
         )
 
     class TargetImpressionShare(proto.Message):
@@ -196,10 +202,14 @@ class AccessibleBiddingStrategy(proto.Message):
             enum=target_impression_share_location.TargetImpressionShareLocationEnum.TargetImpressionShareLocation,
         )
         location_fraction_micros: int = proto.Field(
-            proto.INT64, number=2, optional=True,
+            proto.INT64,
+            number=2,
+            optional=True,
         )
         cpc_bid_ceiling_micros: int = proto.Field(
-            proto.INT64, number=3, optional=True,
+            proto.INT64,
+            number=3,
+            optional=True,
         )
 
     class TargetRoas(proto.Message):
@@ -217,7 +227,9 @@ class AccessibleBiddingStrategy(proto.Message):
         """
 
         target_roas: float = proto.Field(
-            proto.DOUBLE, number=1, optional=True,
+            proto.DOUBLE,
+            number=1,
+            optional=True,
         )
 
     class TargetSpend(proto.Message):
@@ -248,20 +260,27 @@ class AccessibleBiddingStrategy(proto.Message):
         """
 
         target_spend_micros: int = proto.Field(
-            proto.INT64, number=1, optional=True,
+            proto.INT64,
+            number=1,
+            optional=True,
         )
         cpc_bid_ceiling_micros: int = proto.Field(
-            proto.INT64, number=2, optional=True,
+            proto.INT64,
+            number=2,
+            optional=True,
         )
 
     resource_name: str = proto.Field(
-        proto.STRING, number=1,
+        proto.STRING,
+        number=1,
     )
     id: int = proto.Field(
-        proto.INT64, number=2,
+        proto.INT64,
+        number=2,
     )
     name: str = proto.Field(
-        proto.STRING, number=3,
+        proto.STRING,
+        number=3,
     )
     type_: bidding_strategy_type.BiddingStrategyTypeEnum.BiddingStrategyType = proto.Field(
         proto.ENUM,
@@ -269,10 +288,12 @@ class AccessibleBiddingStrategy(proto.Message):
         enum=bidding_strategy_type.BiddingStrategyTypeEnum.BiddingStrategyType,
     )
     owner_customer_id: int = proto.Field(
-        proto.INT64, number=5,
+        proto.INT64,
+        number=5,
     )
     owner_descriptive_name: str = proto.Field(
-        proto.STRING, number=6,
+        proto.STRING,
+        number=6,
     )
     maximize_conversion_value: MaximizeConversionValue = proto.Field(
         proto.MESSAGE,
@@ -281,19 +302,34 @@ class AccessibleBiddingStrategy(proto.Message):
         message=MaximizeConversionValue,
     )
     maximize_conversions: MaximizeConversions = proto.Field(
-        proto.MESSAGE, number=8, oneof="scheme", message=MaximizeConversions,
+        proto.MESSAGE,
+        number=8,
+        oneof="scheme",
+        message=MaximizeConversions,
     )
     target_cpa: TargetCpa = proto.Field(
-        proto.MESSAGE, number=9, oneof="scheme", message=TargetCpa,
+        proto.MESSAGE,
+        number=9,
+        oneof="scheme",
+        message=TargetCpa,
     )
     target_impression_share: TargetImpressionShare = proto.Field(
-        proto.MESSAGE, number=10, oneof="scheme", message=TargetImpressionShare,
+        proto.MESSAGE,
+        number=10,
+        oneof="scheme",
+        message=TargetImpressionShare,
     )
     target_roas: TargetRoas = proto.Field(
-        proto.MESSAGE, number=11, oneof="scheme", message=TargetRoas,
+        proto.MESSAGE,
+        number=11,
+        oneof="scheme",
+        message=TargetRoas,
     )
     target_spend: TargetSpend = proto.Field(
-        proto.MESSAGE, number=12, oneof="scheme", message=TargetSpend,
+        proto.MESSAGE,
+        number=12,
+        oneof="scheme",
+        message=TargetSpend,
     )
 
 

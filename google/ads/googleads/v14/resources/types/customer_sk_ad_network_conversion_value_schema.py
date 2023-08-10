@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-# Copyright 2022 Google LLC
+# Copyright 2023 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -23,7 +23,9 @@ import proto  # type: ignore
 __protobuf__ = proto.module(
     package="google.ads.googleads.v14.resources",
     marshal="google.ads.googleads.v14",
-    manifest={"CustomerSkAdNetworkConversionValueSchema",},
+    manifest={
+        "CustomerSkAdNetworkConversionValueSchema",
+    },
 )
 
 
@@ -68,7 +70,8 @@ class CustomerSkAdNetworkConversionValueSchema(proto.Message):
             """
 
             fine_grained_conversion_value: int = proto.Field(
-                proto.INT32, number=1,
+                proto.INT32,
+                number=1,
             )
             conversion_value_mapping: "CustomerSkAdNetworkConversionValueSchema.SkAdNetworkConversionValueSchema.ConversionValueMapping" = proto.Field(
                 proto.MESSAGE,
@@ -96,10 +99,12 @@ class CustomerSkAdNetworkConversionValueSchema(proto.Message):
             """
 
             min_time_post_install_hours: int = proto.Field(
-                proto.INT64, number=1,
+                proto.INT64,
+                number=1,
             )
             max_time_post_install_hours: int = proto.Field(
-                proto.INT64, number=2,
+                proto.INT64,
+                number=2,
             )
             mapped_events: MutableSequence[
                 "CustomerSkAdNetworkConversionValueSchema.SkAdNetworkConversionValueSchema.Event"
@@ -161,10 +166,12 @@ class CustomerSkAdNetworkConversionValueSchema(proto.Message):
                 """
 
                 min_event_revenue: float = proto.Field(
-                    proto.DOUBLE, number=3,
+                    proto.DOUBLE,
+                    number=3,
                 )
                 max_event_revenue: float = proto.Field(
-                    proto.DOUBLE, number=4,
+                    proto.DOUBLE,
+                    number=4,
                 )
 
             class EventOccurrenceRange(proto.Message):
@@ -181,17 +188,21 @@ class CustomerSkAdNetworkConversionValueSchema(proto.Message):
                 """
 
                 min_event_count: int = proto.Field(
-                    proto.INT64, number=1,
+                    proto.INT64,
+                    number=1,
                 )
                 max_event_count: int = proto.Field(
-                    proto.INT64, number=2,
+                    proto.INT64,
+                    number=2,
                 )
 
             mapped_event_name: str = proto.Field(
-                proto.STRING, number=1,
+                proto.STRING,
+                number=1,
             )
             currency_code: str = proto.Field(
-                proto.STRING, number=2,
+                proto.STRING,
+                number=2,
             )
             event_revenue_range: "CustomerSkAdNetworkConversionValueSchema.SkAdNetworkConversionValueSchema.Event.RevenueRange" = proto.Field(
                 proto.MESSAGE,
@@ -200,7 +211,9 @@ class CustomerSkAdNetworkConversionValueSchema(proto.Message):
                 message="CustomerSkAdNetworkConversionValueSchema.SkAdNetworkConversionValueSchema.Event.RevenueRange",
             )
             event_revenue_value: float = proto.Field(
-                proto.DOUBLE, number=4, oneof="revenue_rate",
+                proto.DOUBLE,
+                number=4,
+                oneof="revenue_rate",
             )
             event_occurrence_range: "CustomerSkAdNetworkConversionValueSchema.SkAdNetworkConversionValueSchema.Event.EventOccurrenceRange" = proto.Field(
                 proto.MESSAGE,
@@ -209,14 +222,18 @@ class CustomerSkAdNetworkConversionValueSchema(proto.Message):
                 message="CustomerSkAdNetworkConversionValueSchema.SkAdNetworkConversionValueSchema.Event.EventOccurrenceRange",
             )
             event_counter: int = proto.Field(
-                proto.INT64, number=6, oneof="event_rate",
+                proto.INT64,
+                number=6,
+                oneof="event_rate",
             )
 
         app_id: str = proto.Field(
-            proto.STRING, number=1,
+            proto.STRING,
+            number=1,
         )
         measurement_window_hours: int = proto.Field(
-            proto.INT32, number=2,
+            proto.INT32,
+            number=2,
         )
         fine_grained_conversion_value_mappings: MutableSequence[
             "CustomerSkAdNetworkConversionValueSchema.SkAdNetworkConversionValueSchema.FineGrainedConversionValueMappings"
@@ -227,10 +244,13 @@ class CustomerSkAdNetworkConversionValueSchema(proto.Message):
         )
 
     resource_name: str = proto.Field(
-        proto.STRING, number=1,
+        proto.STRING,
+        number=1,
     )
     schema: SkAdNetworkConversionValueSchema = proto.Field(
-        proto.MESSAGE, number=2, message=SkAdNetworkConversionValueSchema,
+        proto.MESSAGE,
+        number=2,
+        message=SkAdNetworkConversionValueSchema,
     )
 
 

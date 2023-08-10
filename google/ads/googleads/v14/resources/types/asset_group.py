@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-# Copyright 2022 Google LLC
+# Copyright 2023 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -20,13 +20,19 @@ from typing import MutableSequence
 import proto  # type: ignore
 
 from google.ads.googleads.v14.enums.types import ad_strength as gage_ad_strength
+from google.ads.googleads.v14.enums.types import asset_group_primary_status
+from google.ads.googleads.v14.enums.types import (
+    asset_group_primary_status_reason,
+)
 from google.ads.googleads.v14.enums.types import asset_group_status
 
 
 __protobuf__ = proto.module(
     package="google.ads.googleads.v14.resources",
     marshal="google.ads.googleads.v14",
-    manifest={"AssetGroup",},
+    manifest={
+        "AssetGroup",
+    },
 )
 
 
@@ -65,6 +71,15 @@ class AssetGroup(proto.Message):
             unless opted out.
         status (google.ads.googleads.v14.enums.types.AssetGroupStatusEnum.AssetGroupStatus):
             The status of the asset group.
+        primary_status (google.ads.googleads.v14.enums.types.AssetGroupPrimaryStatusEnum.AssetGroupPrimaryStatus):
+            Output only. The primary status of the asset
+            group. Provides insights into why an asset group
+            is not serving or not serving optimally.
+        primary_status_reasons (MutableSequence[google.ads.googleads.v14.enums.types.AssetGroupPrimaryStatusReasonEnum.AssetGroupPrimaryStatusReason]):
+            Output only. Provides reasons into why an
+            asset group is not serving or not serving
+            optimally. It will be empty when the asset group
+            is serving without issues.
         path1 (str):
             First part of text that may appear appended
             to the url displayed in the ad.
@@ -78,36 +93,60 @@ class AssetGroup(proto.Message):
     """
 
     resource_name: str = proto.Field(
-        proto.STRING, number=1,
+        proto.STRING,
+        number=1,
     )
     id: int = proto.Field(
-        proto.INT64, number=9,
+        proto.INT64,
+        number=9,
     )
     campaign: str = proto.Field(
-        proto.STRING, number=2,
+        proto.STRING,
+        number=2,
     )
     name: str = proto.Field(
-        proto.STRING, number=3,
+        proto.STRING,
+        number=3,
     )
     final_urls: MutableSequence[str] = proto.RepeatedField(
-        proto.STRING, number=4,
+        proto.STRING,
+        number=4,
     )
     final_mobile_urls: MutableSequence[str] = proto.RepeatedField(
-        proto.STRING, number=5,
+        proto.STRING,
+        number=5,
     )
-    status: asset_group_status.AssetGroupStatusEnum.AssetGroupStatus = proto.Field(
+    status: asset_group_status.AssetGroupStatusEnum.AssetGroupStatus = (
+        proto.Field(
+            proto.ENUM,
+            number=6,
+            enum=asset_group_status.AssetGroupStatusEnum.AssetGroupStatus,
+        )
+    )
+    primary_status: asset_group_primary_status.AssetGroupPrimaryStatusEnum.AssetGroupPrimaryStatus = proto.Field(
         proto.ENUM,
-        number=6,
-        enum=asset_group_status.AssetGroupStatusEnum.AssetGroupStatus,
+        number=11,
+        enum=asset_group_primary_status.AssetGroupPrimaryStatusEnum.AssetGroupPrimaryStatus,
+    )
+    primary_status_reasons: MutableSequence[
+        asset_group_primary_status_reason.AssetGroupPrimaryStatusReasonEnum.AssetGroupPrimaryStatusReason
+    ] = proto.RepeatedField(
+        proto.ENUM,
+        number=12,
+        enum=asset_group_primary_status_reason.AssetGroupPrimaryStatusReasonEnum.AssetGroupPrimaryStatusReason,
     )
     path1: str = proto.Field(
-        proto.STRING, number=7,
+        proto.STRING,
+        number=7,
     )
     path2: str = proto.Field(
-        proto.STRING, number=8,
+        proto.STRING,
+        number=8,
     )
     ad_strength: gage_ad_strength.AdStrengthEnum.AdStrength = proto.Field(
-        proto.ENUM, number=10, enum=gage_ad_strength.AdStrengthEnum.AdStrength,
+        proto.ENUM,
+        number=10,
+        enum=gage_ad_strength.AdStrengthEnum.AdStrength,
     )
 
 

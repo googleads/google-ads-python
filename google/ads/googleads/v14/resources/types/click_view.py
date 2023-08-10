@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-# Copyright 2022 Google LLC
+# Copyright 2023 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -25,7 +25,9 @@ from google.ads.googleads.v14.common.types import criteria
 __protobuf__ = proto.module(
     package="google.ads.googleads.v14.resources",
     marshal="google.ads.googleads.v14",
-    manifest={"ClickView",},
+    manifest={
+        "ClickView",
+    },
 )
 
 
@@ -86,34 +88,52 @@ class ClickView(proto.Message):
     """
 
     resource_name: str = proto.Field(
-        proto.STRING, number=1,
+        proto.STRING,
+        number=1,
     )
     gclid: str = proto.Field(
-        proto.STRING, number=8, optional=True,
+        proto.STRING,
+        number=8,
+        optional=True,
     )
     area_of_interest: click_location.ClickLocation = proto.Field(
-        proto.MESSAGE, number=3, message=click_location.ClickLocation,
+        proto.MESSAGE,
+        number=3,
+        message=click_location.ClickLocation,
     )
     location_of_presence: click_location.ClickLocation = proto.Field(
-        proto.MESSAGE, number=4, message=click_location.ClickLocation,
+        proto.MESSAGE,
+        number=4,
+        message=click_location.ClickLocation,
     )
     page_number: int = proto.Field(
-        proto.INT64, number=9, optional=True,
+        proto.INT64,
+        number=9,
+        optional=True,
     )
     ad_group_ad: str = proto.Field(
-        proto.STRING, number=10, optional=True,
+        proto.STRING,
+        number=10,
+        optional=True,
     )
     campaign_location_target: str = proto.Field(
-        proto.STRING, number=11, optional=True,
+        proto.STRING,
+        number=11,
+        optional=True,
     )
     user_list: str = proto.Field(
-        proto.STRING, number=12, optional=True,
+        proto.STRING,
+        number=12,
+        optional=True,
     )
     keyword: str = proto.Field(
-        proto.STRING, number=13,
+        proto.STRING,
+        number=13,
     )
     keyword_info: criteria.KeywordInfo = proto.Field(
-        proto.MESSAGE, number=14, message=criteria.KeywordInfo,
+        proto.MESSAGE,
+        number=14,
+        message=criteria.KeywordInfo,
     )
 
 

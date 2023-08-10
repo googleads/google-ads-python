@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-# Copyright 2022 Google LLC
+# Copyright 2023 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -22,13 +22,14 @@ import proto  # type: ignore
 __protobuf__ = proto.module(
     package="google.ads.googleads.v14.enums",
     marshal="google.ads.googleads.v14",
-    manifest={"AdTypeEnum",},
+    manifest={
+        "AdTypeEnum",
+    },
 )
 
 
 class AdTypeEnum(proto.Message):
-    r"""Container for enum describing possible types of an ad.
-    """
+    r"""Container for enum describing possible types of an ad."""
 
     class AdType(proto.Enum):
         r"""The possible types of an ad."""
@@ -64,6 +65,7 @@ class AdTypeEnum(proto.Message):
         DISCOVERY_MULTI_ASSET_AD = 35
         DISCOVERY_CAROUSEL_AD = 36
         TRAVEL_AD = 37
+        DISCOVERY_VIDEO_RESPONSIVE_AD = 38
 
 
 __all__ = tuple(sorted(__protobuf__.manifest))

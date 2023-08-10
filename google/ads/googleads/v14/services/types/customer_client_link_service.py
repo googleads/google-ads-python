@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-# Copyright 2022 Google LLC
+# Copyright 2023 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -51,13 +51,17 @@ class MutateCustomerClientLinkRequest(proto.Message):
     """
 
     customer_id: str = proto.Field(
-        proto.STRING, number=1,
+        proto.STRING,
+        number=1,
     )
     operation: "CustomerClientLinkOperation" = proto.Field(
-        proto.MESSAGE, number=2, message="CustomerClientLinkOperation",
+        proto.MESSAGE,
+        number=2,
+        message="CustomerClientLinkOperation",
     )
     validate_only: bool = proto.Field(
-        proto.BOOL, number=3,
+        proto.BOOL,
+        number=3,
     )
 
 
@@ -87,7 +91,9 @@ class CustomerClientLinkOperation(proto.Message):
     """
 
     update_mask: field_mask_pb2.FieldMask = proto.Field(
-        proto.MESSAGE, number=4, message=field_mask_pb2.FieldMask,
+        proto.MESSAGE,
+        number=4,
+        message=field_mask_pb2.FieldMask,
     )
     create: customer_client_link.CustomerClientLink = proto.Field(
         proto.MESSAGE,
@@ -112,7 +118,9 @@ class MutateCustomerClientLinkResponse(proto.Message):
     """
 
     result: "MutateCustomerClientLinkResult" = proto.Field(
-        proto.MESSAGE, number=1, message="MutateCustomerClientLinkResult",
+        proto.MESSAGE,
+        number=1,
+        message="MutateCustomerClientLinkResult",
     )
 
 
@@ -124,7 +132,8 @@ class MutateCustomerClientLinkResult(proto.Message):
     """
 
     resource_name: str = proto.Field(
-        proto.STRING, number=1,
+        proto.STRING,
+        number=1,
     )
 
 

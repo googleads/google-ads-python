@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-# Copyright 2022 Google LLC
+# Copyright 2023 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -59,18 +59,23 @@ class MutateKeywordPlanCampaignsRequest(proto.Message):
     """
 
     customer_id: str = proto.Field(
-        proto.STRING, number=1,
+        proto.STRING,
+        number=1,
     )
     operations: MutableSequence[
         "KeywordPlanCampaignOperation"
     ] = proto.RepeatedField(
-        proto.MESSAGE, number=2, message="KeywordPlanCampaignOperation",
+        proto.MESSAGE,
+        number=2,
+        message="KeywordPlanCampaignOperation",
     )
     partial_failure: bool = proto.Field(
-        proto.BOOL, number=3,
+        proto.BOOL,
+        number=3,
     )
     validate_only: bool = proto.Field(
-        proto.BOOL, number=4,
+        proto.BOOL,
+        number=4,
     )
 
 
@@ -91,12 +96,14 @@ class KeywordPlanCampaignOperation(proto.Message):
             fields are modified in an update.
         create (google.ads.googleads.v14.resources.types.KeywordPlanCampaign):
             Create operation: No resource name is
-            expected for the new Keyword Plan campaign.
+            expected for the new Keyword Plan
+            campaign.
 
             This field is a member of `oneof`_ ``operation``.
         update (google.ads.googleads.v14.resources.types.KeywordPlanCampaign):
             Update operation: The Keyword Plan campaign
-            is expected to have a valid resource name.
+            is expected to have a valid
+            resource name.
 
             This field is a member of `oneof`_ ``operation``.
         remove (str):
@@ -109,7 +116,9 @@ class KeywordPlanCampaignOperation(proto.Message):
     """
 
     update_mask: field_mask_pb2.FieldMask = proto.Field(
-        proto.MESSAGE, number=4, message=field_mask_pb2.FieldMask,
+        proto.MESSAGE,
+        number=4,
+        message=field_mask_pb2.FieldMask,
     )
     create: keyword_plan_campaign.KeywordPlanCampaign = proto.Field(
         proto.MESSAGE,
@@ -124,7 +133,9 @@ class KeywordPlanCampaignOperation(proto.Message):
         message=keyword_plan_campaign.KeywordPlanCampaign,
     )
     remove: str = proto.Field(
-        proto.STRING, number=3, oneof="operation",
+        proto.STRING,
+        number=3,
+        oneof="operation",
     )
 
 
@@ -142,12 +153,16 @@ class MutateKeywordPlanCampaignsResponse(proto.Message):
     """
 
     partial_failure_error: status_pb2.Status = proto.Field(
-        proto.MESSAGE, number=3, message=status_pb2.Status,
+        proto.MESSAGE,
+        number=3,
+        message=status_pb2.Status,
     )
     results: MutableSequence[
         "MutateKeywordPlanCampaignResult"
     ] = proto.RepeatedField(
-        proto.MESSAGE, number=2, message="MutateKeywordPlanCampaignResult",
+        proto.MESSAGE,
+        number=2,
+        message="MutateKeywordPlanCampaignResult",
     )
 
 
@@ -159,7 +174,8 @@ class MutateKeywordPlanCampaignResult(proto.Message):
     """
 
     resource_name: str = proto.Field(
-        proto.STRING, number=1,
+        proto.STRING,
+        number=1,
     )
 
 

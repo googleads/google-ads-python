@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-# Copyright 2022 Google LLC
+# Copyright 2023 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -32,7 +32,9 @@ from google.ads.googleads.v14.enums.types import user_list_type
 __protobuf__ = proto.module(
     package="google.ads.googleads.v14.resources",
     marshal="google.ads.googleads.v14",
-    manifest={"UserList",},
+    manifest={
+        "UserList",
+    },
 )
 
 
@@ -194,19 +196,28 @@ class UserList(proto.Message):
     """
 
     resource_name: str = proto.Field(
-        proto.STRING, number=1,
+        proto.STRING,
+        number=1,
     )
     id: int = proto.Field(
-        proto.INT64, number=25, optional=True,
+        proto.INT64,
+        number=25,
+        optional=True,
     )
     read_only: bool = proto.Field(
-        proto.BOOL, number=26, optional=True,
+        proto.BOOL,
+        number=26,
+        optional=True,
     )
     name: str = proto.Field(
-        proto.STRING, number=27, optional=True,
+        proto.STRING,
+        number=27,
+        optional=True,
     )
     description: str = proto.Field(
-        proto.STRING, number=28, optional=True,
+        proto.STRING,
+        number=28,
+        optional=True,
     )
     membership_status: user_list_membership_status.UserListMembershipStatusEnum.UserListMembershipStatus = proto.Field(
         proto.ENUM,
@@ -214,13 +225,19 @@ class UserList(proto.Message):
         enum=user_list_membership_status.UserListMembershipStatusEnum.UserListMembershipStatus,
     )
     integration_code: str = proto.Field(
-        proto.STRING, number=29, optional=True,
+        proto.STRING,
+        number=29,
+        optional=True,
     )
     membership_life_span: int = proto.Field(
-        proto.INT64, number=30, optional=True,
+        proto.INT64,
+        number=30,
+        optional=True,
     )
     size_for_display: int = proto.Field(
-        proto.INT64, number=31, optional=True,
+        proto.INT64,
+        number=31,
+        optional=True,
     )
     size_range_for_display: user_list_size_range.UserListSizeRangeEnum.UserListSizeRange = proto.Field(
         proto.ENUM,
@@ -228,7 +245,9 @@ class UserList(proto.Message):
         enum=user_list_size_range.UserListSizeRangeEnum.UserListSizeRange,
     )
     size_for_search: int = proto.Field(
-        proto.INT64, number=32, optional=True,
+        proto.INT64,
+        number=32,
+        optional=True,
     )
     size_range_for_search: user_list_size_range.UserListSizeRangeEnum.UserListSizeRange = proto.Field(
         proto.ENUM,
@@ -245,10 +264,12 @@ class UserList(proto.Message):
         number=14,
         enum=user_list_closing_reason.UserListClosingReasonEnum.UserListClosingReason,
     )
-    access_reason: gage_access_reason.AccessReasonEnum.AccessReason = proto.Field(
-        proto.ENUM,
-        number=15,
-        enum=gage_access_reason.AccessReasonEnum.AccessReason,
+    access_reason: gage_access_reason.AccessReasonEnum.AccessReason = (
+        proto.Field(
+            proto.ENUM,
+            number=15,
+            enum=gage_access_reason.AccessReasonEnum.AccessReason,
+        )
     )
     account_user_list_status: user_list_access_status.UserListAccessStatusEnum.UserListAccessStatus = proto.Field(
         proto.ENUM,
@@ -256,13 +277,19 @@ class UserList(proto.Message):
         enum=user_list_access_status.UserListAccessStatusEnum.UserListAccessStatus,
     )
     eligible_for_search: bool = proto.Field(
-        proto.BOOL, number=33, optional=True,
+        proto.BOOL,
+        number=33,
+        optional=True,
     )
     eligible_for_display: bool = proto.Field(
-        proto.BOOL, number=34, optional=True,
+        proto.BOOL,
+        number=34,
+        optional=True,
     )
     match_rate_percentage: int = proto.Field(
-        proto.INT32, number=24, optional=True,
+        proto.INT32,
+        number=24,
+        optional=True,
     )
     crm_based_user_list: user_lists.CrmBasedUserListInfo = proto.Field(
         proto.MESSAGE,

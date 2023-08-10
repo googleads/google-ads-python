@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-# Copyright 2022 Google LLC
+# Copyright 2023 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -30,7 +30,10 @@ from google.ads.googleads.v14.enums.types import served_asset_field_type
 __protobuf__ = proto.module(
     package="google.ads.googleads.v14.resources",
     marshal="google.ads.googleads.v14",
-    manifest={"AdGroupAdAssetView", "AdGroupAdAssetPolicySummary",},
+    manifest={
+        "AdGroupAdAssetView",
+        "AdGroupAdAssetPolicySummary",
+    },
 )
 
 
@@ -85,24 +88,35 @@ class AdGroupAdAssetView(proto.Message):
     """
 
     resource_name: str = proto.Field(
-        proto.STRING, number=1,
+        proto.STRING,
+        number=1,
     )
     ad_group_ad: str = proto.Field(
-        proto.STRING, number=9, optional=True,
+        proto.STRING,
+        number=9,
+        optional=True,
     )
     asset: str = proto.Field(
-        proto.STRING, number=10, optional=True,
+        proto.STRING,
+        number=10,
+        optional=True,
     )
-    field_type: asset_field_type.AssetFieldTypeEnum.AssetFieldType = proto.Field(
-        proto.ENUM,
-        number=2,
-        enum=asset_field_type.AssetFieldTypeEnum.AssetFieldType,
+    field_type: asset_field_type.AssetFieldTypeEnum.AssetFieldType = (
+        proto.Field(
+            proto.ENUM,
+            number=2,
+            enum=asset_field_type.AssetFieldTypeEnum.AssetFieldType,
+        )
     )
     enabled: bool = proto.Field(
-        proto.BOOL, number=8, optional=True,
+        proto.BOOL,
+        number=8,
+        optional=True,
     )
     policy_summary: "AdGroupAdAssetPolicySummary" = proto.Field(
-        proto.MESSAGE, number=3, message="AdGroupAdAssetPolicySummary",
+        proto.MESSAGE,
+        number=3,
+        message="AdGroupAdAssetPolicySummary",
     )
     performance_label: asset_performance_label.AssetPerformanceLabelEnum.AssetPerformanceLabel = proto.Field(
         proto.ENUM,
@@ -134,7 +148,9 @@ class AdGroupAdAssetPolicySummary(proto.Message):
     policy_topic_entries: MutableSequence[
         policy.PolicyTopicEntry
     ] = proto.RepeatedField(
-        proto.MESSAGE, number=1, message=policy.PolicyTopicEntry,
+        proto.MESSAGE,
+        number=1,
+        message=policy.PolicyTopicEntry,
     )
     review_status: policy_review_status.PolicyReviewStatusEnum.PolicyReviewStatus = proto.Field(
         proto.ENUM,

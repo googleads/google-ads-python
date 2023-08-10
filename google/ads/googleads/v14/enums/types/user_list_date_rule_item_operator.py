@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-# Copyright 2022 Google LLC
+# Copyright 2023 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -22,13 +22,14 @@ import proto  # type: ignore
 __protobuf__ = proto.module(
     package="google.ads.googleads.v14.enums",
     marshal="google.ads.googleads.v14",
-    manifest={"UserListDateRuleItemOperatorEnum",},
+    manifest={
+        "UserListDateRuleItemOperatorEnum",
+    },
 )
 
 
 class UserListDateRuleItemOperatorEnum(proto.Message):
-    r"""Supported rule operator for date type.
-    """
+    r"""Supported rule operator for date type."""
 
     class UserListDateRuleItemOperator(proto.Enum):
         r"""Enum describing possible user list date rule item operators."""

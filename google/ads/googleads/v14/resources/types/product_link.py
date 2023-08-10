@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-# Copyright 2022 Google LLC
+# Copyright 2023 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -24,7 +24,11 @@ from google.ads.googleads.v14.enums.types import linked_product_type
 __protobuf__ = proto.module(
     package="google.ads.googleads.v14.resources",
     marshal="google.ads.googleads.v14",
-    manifest={"ProductLink", "DataPartnerIdentifier", "GoogleAdsIdentifier",},
+    manifest={
+        "ProductLink",
+        "DataPartnerIdentifier",
+        "GoogleAdsIdentifier",
+    },
 )
 
 
@@ -63,15 +67,20 @@ class ProductLink(proto.Message):
     """
 
     resource_name: str = proto.Field(
-        proto.STRING, number=1,
+        proto.STRING,
+        number=1,
     )
     product_link_id: int = proto.Field(
-        proto.INT64, number=2, optional=True,
+        proto.INT64,
+        number=2,
+        optional=True,
     )
-    type_: linked_product_type.LinkedProductTypeEnum.LinkedProductType = proto.Field(
-        proto.ENUM,
-        number=3,
-        enum=linked_product_type.LinkedProductTypeEnum.LinkedProductType,
+    type_: linked_product_type.LinkedProductTypeEnum.LinkedProductType = (
+        proto.Field(
+            proto.ENUM,
+            number=3,
+            enum=linked_product_type.LinkedProductTypeEnum.LinkedProductType,
+        )
     )
     data_partner: "DataPartnerIdentifier" = proto.Field(
         proto.MESSAGE,
@@ -103,7 +112,9 @@ class DataPartnerIdentifier(proto.Message):
     """
 
     data_partner_id: int = proto.Field(
-        proto.INT64, number=1, optional=True,
+        proto.INT64,
+        number=1,
+        optional=True,
     )
 
 
@@ -123,7 +134,9 @@ class GoogleAdsIdentifier(proto.Message):
     """
 
     customer: str = proto.Field(
-        proto.STRING, number=1, optional=True,
+        proto.STRING,
+        number=1,
+        optional=True,
     )
 
 

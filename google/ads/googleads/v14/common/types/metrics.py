@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-# Copyright 2022 Google LLC
+# Copyright 2023 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -26,7 +26,10 @@ from google.ads.googleads.v14.enums.types import quality_score_bucket
 __protobuf__ = proto.module(
     package="google.ads.googleads.v14.common",
     marshal="google.ads.googleads.v14",
-    manifest={"Metrics",},
+    manifest={
+        "Metrics",
+        "SearchVolumeRange",
+    },
 )
 
 
@@ -97,6 +100,19 @@ class Metrics(proto.Message):
             date. Details for the by_conversion_date columns are
             available at
             https://support.google.com/google-ads/answer/9549009.
+        all_new_customer_lifetime_value (float):
+            All of new customers' lifetime conversion value. If you have
+            set up customer acquisition goal at either account level or
+            campaign level, this will include the additional conversion
+            value from new customers for both biddable and non-biddable
+            conversions. If your campaign has adopted the customer
+            acquisition goal and selected "bid higher for new
+            customers", these values will be included in
+            "all_conversions_value". See
+            https://support.google.com/google-ads/answer/12080169 for
+            more details.
+
+            This field is a member of `oneof`_ ``_all_new_customer_lifetime_value``.
         all_conversions (float):
             The total number of conversions. This includes all
             conversions regardless of the value of
@@ -396,6 +412,18 @@ class Metrics(proto.Message):
             means the conversion date. Details for the
             by_conversion_date columns are available at
             https://support.google.com/google-ads/answer/9549009.
+        new_customer_lifetime_value (float):
+            New customers' lifetime conversion value. If you have set up
+            customer acquisition goal at either account level or
+            campaign level, this will include the additional conversion
+            value from new customers for biddable conversions. If your
+            campaign has adopted the customer acquisition goal and
+            selected "bid higher for new customers", these values will
+            be included in "conversions_value" for optimization. See
+            https://support.google.com/google-ads/answer/12080169 for
+            more details.
+
+            This field is a member of `oneof`_ ``_new_customer_lifetime_value``.
         conversions_value_per_cost (float):
             The value of conversions divided by the cost of ad
             interactions. This only includes conversion actions which
@@ -831,6 +859,11 @@ class Metrics(proto.Message):
             below 0.1 is reported as 0.0999.
 
             This field is a member of `oneof`_ ``_search_top_impression_share``.
+        search_volume (google.ads.googleads.v14.common.types.SearchVolumeRange):
+            Search volume range for a search term insight
+            category.
+
+            This field is a member of `oneof`_ ``_search_volume``.
         speed_score (int):
             A measure of how quickly your page loads
             after clicks on your mobile ads. The score is a
@@ -1060,226 +1093,386 @@ class Metrics(proto.Message):
     """
 
     absolute_top_impression_percentage: float = proto.Field(
-        proto.DOUBLE, number=183, optional=True,
+        proto.DOUBLE,
+        number=183,
+        optional=True,
     )
     active_view_cpm: float = proto.Field(
-        proto.DOUBLE, number=184, optional=True,
+        proto.DOUBLE,
+        number=184,
+        optional=True,
     )
     active_view_ctr: float = proto.Field(
-        proto.DOUBLE, number=185, optional=True,
+        proto.DOUBLE,
+        number=185,
+        optional=True,
     )
     active_view_impressions: int = proto.Field(
-        proto.INT64, number=186, optional=True,
+        proto.INT64,
+        number=186,
+        optional=True,
     )
     active_view_measurability: float = proto.Field(
-        proto.DOUBLE, number=187, optional=True,
+        proto.DOUBLE,
+        number=187,
+        optional=True,
     )
     active_view_measurable_cost_micros: int = proto.Field(
-        proto.INT64, number=188, optional=True,
+        proto.INT64,
+        number=188,
+        optional=True,
     )
     active_view_measurable_impressions: int = proto.Field(
-        proto.INT64, number=189, optional=True,
+        proto.INT64,
+        number=189,
+        optional=True,
     )
     active_view_viewability: float = proto.Field(
-        proto.DOUBLE, number=190, optional=True,
+        proto.DOUBLE,
+        number=190,
+        optional=True,
     )
     all_conversions_from_interactions_rate: float = proto.Field(
-        proto.DOUBLE, number=191, optional=True,
+        proto.DOUBLE,
+        number=191,
+        optional=True,
     )
     all_conversions_value: float = proto.Field(
-        proto.DOUBLE, number=192, optional=True,
+        proto.DOUBLE,
+        number=192,
+        optional=True,
     )
     all_conversions_value_by_conversion_date: float = proto.Field(
-        proto.DOUBLE, number=240,
+        proto.DOUBLE,
+        number=240,
+    )
+    all_new_customer_lifetime_value: float = proto.Field(
+        proto.DOUBLE,
+        number=294,
+        optional=True,
     )
     all_conversions: float = proto.Field(
-        proto.DOUBLE, number=193, optional=True,
+        proto.DOUBLE,
+        number=193,
+        optional=True,
     )
     all_conversions_by_conversion_date: float = proto.Field(
-        proto.DOUBLE, number=241,
+        proto.DOUBLE,
+        number=241,
     )
     all_conversions_value_per_cost: float = proto.Field(
-        proto.DOUBLE, number=194, optional=True,
+        proto.DOUBLE,
+        number=194,
+        optional=True,
     )
     all_conversions_from_click_to_call: float = proto.Field(
-        proto.DOUBLE, number=195, optional=True,
+        proto.DOUBLE,
+        number=195,
+        optional=True,
     )
     all_conversions_from_directions: float = proto.Field(
-        proto.DOUBLE, number=196, optional=True,
+        proto.DOUBLE,
+        number=196,
+        optional=True,
     )
-    all_conversions_from_interactions_value_per_interaction: float = proto.Field(
-        proto.DOUBLE, number=197, optional=True,
+    all_conversions_from_interactions_value_per_interaction: float = (
+        proto.Field(
+            proto.DOUBLE,
+            number=197,
+            optional=True,
+        )
     )
     all_conversions_from_menu: float = proto.Field(
-        proto.DOUBLE, number=198, optional=True,
+        proto.DOUBLE,
+        number=198,
+        optional=True,
     )
     all_conversions_from_order: float = proto.Field(
-        proto.DOUBLE, number=199, optional=True,
+        proto.DOUBLE,
+        number=199,
+        optional=True,
     )
     all_conversions_from_other_engagement: float = proto.Field(
-        proto.DOUBLE, number=200, optional=True,
+        proto.DOUBLE,
+        number=200,
+        optional=True,
     )
     all_conversions_from_store_visit: float = proto.Field(
-        proto.DOUBLE, number=201, optional=True,
+        proto.DOUBLE,
+        number=201,
+        optional=True,
     )
     all_conversions_from_store_website: float = proto.Field(
-        proto.DOUBLE, number=202, optional=True,
+        proto.DOUBLE,
+        number=202,
+        optional=True,
     )
-    auction_insight_search_absolute_top_impression_percentage: float = proto.Field(
-        proto.DOUBLE, number=258, optional=True,
+    auction_insight_search_absolute_top_impression_percentage: float = (
+        proto.Field(
+            proto.DOUBLE,
+            number=258,
+            optional=True,
+        )
     )
     auction_insight_search_impression_share: float = proto.Field(
-        proto.DOUBLE, number=259, optional=True,
+        proto.DOUBLE,
+        number=259,
+        optional=True,
     )
     auction_insight_search_outranking_share: float = proto.Field(
-        proto.DOUBLE, number=260, optional=True,
+        proto.DOUBLE,
+        number=260,
+        optional=True,
     )
     auction_insight_search_overlap_rate: float = proto.Field(
-        proto.DOUBLE, number=261, optional=True,
+        proto.DOUBLE,
+        number=261,
+        optional=True,
     )
     auction_insight_search_position_above_rate: float = proto.Field(
-        proto.DOUBLE, number=262, optional=True,
+        proto.DOUBLE,
+        number=262,
+        optional=True,
     )
     auction_insight_search_top_impression_percentage: float = proto.Field(
-        proto.DOUBLE, number=263, optional=True,
+        proto.DOUBLE,
+        number=263,
+        optional=True,
     )
     average_cost: float = proto.Field(
-        proto.DOUBLE, number=203, optional=True,
+        proto.DOUBLE,
+        number=203,
+        optional=True,
     )
     average_cpc: float = proto.Field(
-        proto.DOUBLE, number=204, optional=True,
+        proto.DOUBLE,
+        number=204,
+        optional=True,
     )
     average_cpe: float = proto.Field(
-        proto.DOUBLE, number=205, optional=True,
+        proto.DOUBLE,
+        number=205,
+        optional=True,
     )
     average_cpm: float = proto.Field(
-        proto.DOUBLE, number=206, optional=True,
+        proto.DOUBLE,
+        number=206,
+        optional=True,
     )
     average_cpv: float = proto.Field(
-        proto.DOUBLE, number=207, optional=True,
+        proto.DOUBLE,
+        number=207,
+        optional=True,
     )
     average_page_views: float = proto.Field(
-        proto.DOUBLE, number=208, optional=True,
+        proto.DOUBLE,
+        number=208,
+        optional=True,
     )
     average_time_on_site: float = proto.Field(
-        proto.DOUBLE, number=209, optional=True,
+        proto.DOUBLE,
+        number=209,
+        optional=True,
     )
     benchmark_average_max_cpc: float = proto.Field(
-        proto.DOUBLE, number=210, optional=True,
+        proto.DOUBLE,
+        number=210,
+        optional=True,
     )
     biddable_app_install_conversions: float = proto.Field(
-        proto.DOUBLE, number=254, optional=True,
+        proto.DOUBLE,
+        number=254,
+        optional=True,
     )
     biddable_app_post_install_conversions: float = proto.Field(
-        proto.DOUBLE, number=255, optional=True,
+        proto.DOUBLE,
+        number=255,
+        optional=True,
     )
     benchmark_ctr: float = proto.Field(
-        proto.DOUBLE, number=211, optional=True,
+        proto.DOUBLE,
+        number=211,
+        optional=True,
     )
     bounce_rate: float = proto.Field(
-        proto.DOUBLE, number=212, optional=True,
+        proto.DOUBLE,
+        number=212,
+        optional=True,
     )
     clicks: int = proto.Field(
-        proto.INT64, number=131, optional=True,
+        proto.INT64,
+        number=131,
+        optional=True,
     )
     combined_clicks: int = proto.Field(
-        proto.INT64, number=156, optional=True,
+        proto.INT64,
+        number=156,
+        optional=True,
     )
     combined_clicks_per_query: float = proto.Field(
-        proto.DOUBLE, number=157, optional=True,
+        proto.DOUBLE,
+        number=157,
+        optional=True,
     )
     combined_queries: int = proto.Field(
-        proto.INT64, number=158, optional=True,
+        proto.INT64,
+        number=158,
+        optional=True,
     )
     content_budget_lost_impression_share: float = proto.Field(
-        proto.DOUBLE, number=159, optional=True,
+        proto.DOUBLE,
+        number=159,
+        optional=True,
     )
     content_impression_share: float = proto.Field(
-        proto.DOUBLE, number=160, optional=True,
+        proto.DOUBLE,
+        number=160,
+        optional=True,
     )
     conversion_last_received_request_date_time: str = proto.Field(
-        proto.STRING, number=161, optional=True,
+        proto.STRING,
+        number=161,
+        optional=True,
     )
     conversion_last_conversion_date: str = proto.Field(
-        proto.STRING, number=162, optional=True,
+        proto.STRING,
+        number=162,
+        optional=True,
     )
     content_rank_lost_impression_share: float = proto.Field(
-        proto.DOUBLE, number=163, optional=True,
+        proto.DOUBLE,
+        number=163,
+        optional=True,
     )
     conversions_from_interactions_rate: float = proto.Field(
-        proto.DOUBLE, number=164, optional=True,
+        proto.DOUBLE,
+        number=164,
+        optional=True,
     )
     conversions_value: float = proto.Field(
-        proto.DOUBLE, number=165, optional=True,
+        proto.DOUBLE,
+        number=165,
+        optional=True,
     )
     conversions_value_by_conversion_date: float = proto.Field(
-        proto.DOUBLE, number=242,
+        proto.DOUBLE,
+        number=242,
+    )
+    new_customer_lifetime_value: float = proto.Field(
+        proto.DOUBLE,
+        number=293,
+        optional=True,
     )
     conversions_value_per_cost: float = proto.Field(
-        proto.DOUBLE, number=166, optional=True,
+        proto.DOUBLE,
+        number=166,
+        optional=True,
     )
     conversions_from_interactions_value_per_interaction: float = proto.Field(
-        proto.DOUBLE, number=167, optional=True,
+        proto.DOUBLE,
+        number=167,
+        optional=True,
     )
     conversions: float = proto.Field(
-        proto.DOUBLE, number=168, optional=True,
+        proto.DOUBLE,
+        number=168,
+        optional=True,
     )
     conversions_by_conversion_date: float = proto.Field(
-        proto.DOUBLE, number=243,
+        proto.DOUBLE,
+        number=243,
     )
     cost_micros: int = proto.Field(
-        proto.INT64, number=169, optional=True,
+        proto.INT64,
+        number=169,
+        optional=True,
     )
     cost_per_all_conversions: float = proto.Field(
-        proto.DOUBLE, number=170, optional=True,
+        proto.DOUBLE,
+        number=170,
+        optional=True,
     )
     cost_per_conversion: float = proto.Field(
-        proto.DOUBLE, number=171, optional=True,
+        proto.DOUBLE,
+        number=171,
+        optional=True,
     )
     cost_per_current_model_attributed_conversion: float = proto.Field(
-        proto.DOUBLE, number=172, optional=True,
+        proto.DOUBLE,
+        number=172,
+        optional=True,
     )
     cross_device_conversions: float = proto.Field(
-        proto.DOUBLE, number=173, optional=True,
+        proto.DOUBLE,
+        number=173,
+        optional=True,
     )
     ctr: float = proto.Field(
-        proto.DOUBLE, number=174, optional=True,
+        proto.DOUBLE,
+        number=174,
+        optional=True,
     )
     current_model_attributed_conversions: float = proto.Field(
-        proto.DOUBLE, number=175, optional=True,
+        proto.DOUBLE,
+        number=175,
+        optional=True,
     )
-    current_model_attributed_conversions_from_interactions_rate: float = proto.Field(
-        proto.DOUBLE, number=176, optional=True,
+    current_model_attributed_conversions_from_interactions_rate: float = (
+        proto.Field(
+            proto.DOUBLE,
+            number=176,
+            optional=True,
+        )
     )
     current_model_attributed_conversions_from_interactions_value_per_interaction: float = proto.Field(
-        proto.DOUBLE, number=177, optional=True,
+        proto.DOUBLE,
+        number=177,
+        optional=True,
     )
     current_model_attributed_conversions_value: float = proto.Field(
-        proto.DOUBLE, number=178, optional=True,
+        proto.DOUBLE,
+        number=178,
+        optional=True,
     )
     current_model_attributed_conversions_value_per_cost: float = proto.Field(
-        proto.DOUBLE, number=179, optional=True,
+        proto.DOUBLE,
+        number=179,
+        optional=True,
     )
     engagement_rate: float = proto.Field(
-        proto.DOUBLE, number=180, optional=True,
+        proto.DOUBLE,
+        number=180,
+        optional=True,
     )
     engagements: int = proto.Field(
-        proto.INT64, number=181, optional=True,
+        proto.INT64,
+        number=181,
+        optional=True,
     )
     hotel_average_lead_value_micros: float = proto.Field(
-        proto.DOUBLE, number=213, optional=True,
+        proto.DOUBLE,
+        number=213,
+        optional=True,
     )
     hotel_commission_rate_micros: int = proto.Field(
-        proto.INT64, number=256, optional=True,
+        proto.INT64,
+        number=256,
+        optional=True,
     )
     hotel_expected_commission_cost: float = proto.Field(
-        proto.DOUBLE, number=257, optional=True,
+        proto.DOUBLE,
+        number=257,
+        optional=True,
     )
     hotel_price_difference_percentage: float = proto.Field(
-        proto.DOUBLE, number=214, optional=True,
+        proto.DOUBLE,
+        number=214,
+        optional=True,
     )
     hotel_eligible_impressions: int = proto.Field(
-        proto.INT64, number=215, optional=True,
+        proto.INT64,
+        number=215,
+        optional=True,
     )
     historical_creative_quality_score: quality_score_bucket.QualityScoreBucketEnum.QualityScoreBucket = proto.Field(
         proto.ENUM,
@@ -1292,7 +1485,9 @@ class Metrics(proto.Message):
         enum=quality_score_bucket.QualityScoreBucketEnum.QualityScoreBucket,
     )
     historical_quality_score: int = proto.Field(
-        proto.INT64, number=216, optional=True,
+        proto.INT64,
+        number=216,
+        optional=True,
     )
     historical_search_predicted_ctr: quality_score_bucket.QualityScoreBucketEnum.QualityScoreBucket = proto.Field(
         proto.ENUM,
@@ -1300,25 +1495,39 @@ class Metrics(proto.Message):
         enum=quality_score_bucket.QualityScoreBucketEnum.QualityScoreBucket,
     )
     gmail_forwards: int = proto.Field(
-        proto.INT64, number=217, optional=True,
+        proto.INT64,
+        number=217,
+        optional=True,
     )
     gmail_saves: int = proto.Field(
-        proto.INT64, number=218, optional=True,
+        proto.INT64,
+        number=218,
+        optional=True,
     )
     gmail_secondary_clicks: int = proto.Field(
-        proto.INT64, number=219, optional=True,
+        proto.INT64,
+        number=219,
+        optional=True,
     )
     impressions_from_store_reach: int = proto.Field(
-        proto.INT64, number=220, optional=True,
+        proto.INT64,
+        number=220,
+        optional=True,
     )
     impressions: int = proto.Field(
-        proto.INT64, number=221, optional=True,
+        proto.INT64,
+        number=221,
+        optional=True,
     )
     interaction_rate: float = proto.Field(
-        proto.DOUBLE, number=222, optional=True,
+        proto.DOUBLE,
+        number=222,
+        optional=True,
     )
     interactions: int = proto.Field(
-        proto.INT64, number=223, optional=True,
+        proto.INT64,
+        number=223,
+        optional=True,
     )
     interaction_event_types: MutableSequence[
         interaction_event_type.InteractionEventTypeEnum.InteractionEventType
@@ -1328,199 +1537,368 @@ class Metrics(proto.Message):
         enum=interaction_event_type.InteractionEventTypeEnum.InteractionEventType,
     )
     invalid_click_rate: float = proto.Field(
-        proto.DOUBLE, number=224, optional=True,
+        proto.DOUBLE,
+        number=224,
+        optional=True,
     )
     invalid_clicks: int = proto.Field(
-        proto.INT64, number=225, optional=True,
+        proto.INT64,
+        number=225,
+        optional=True,
     )
     message_chats: int = proto.Field(
-        proto.INT64, number=226, optional=True,
+        proto.INT64,
+        number=226,
+        optional=True,
     )
     message_impressions: int = proto.Field(
-        proto.INT64, number=227, optional=True,
+        proto.INT64,
+        number=227,
+        optional=True,
     )
     message_chat_rate: float = proto.Field(
-        proto.DOUBLE, number=228, optional=True,
+        proto.DOUBLE,
+        number=228,
+        optional=True,
     )
     mobile_friendly_clicks_percentage: float = proto.Field(
-        proto.DOUBLE, number=229, optional=True,
+        proto.DOUBLE,
+        number=229,
+        optional=True,
     )
     optimization_score_uplift: float = proto.Field(
-        proto.DOUBLE, number=247, optional=True,
+        proto.DOUBLE,
+        number=247,
+        optional=True,
     )
     optimization_score_url: str = proto.Field(
-        proto.STRING, number=248, optional=True,
+        proto.STRING,
+        number=248,
+        optional=True,
     )
     organic_clicks: int = proto.Field(
-        proto.INT64, number=230, optional=True,
+        proto.INT64,
+        number=230,
+        optional=True,
     )
     organic_clicks_per_query: float = proto.Field(
-        proto.DOUBLE, number=231, optional=True,
+        proto.DOUBLE,
+        number=231,
+        optional=True,
     )
     organic_impressions: int = proto.Field(
-        proto.INT64, number=232, optional=True,
+        proto.INT64,
+        number=232,
+        optional=True,
     )
     organic_impressions_per_query: float = proto.Field(
-        proto.DOUBLE, number=233, optional=True,
+        proto.DOUBLE,
+        number=233,
+        optional=True,
     )
     organic_queries: int = proto.Field(
-        proto.INT64, number=234, optional=True,
+        proto.INT64,
+        number=234,
+        optional=True,
     )
     percent_new_visitors: float = proto.Field(
-        proto.DOUBLE, number=235, optional=True,
+        proto.DOUBLE,
+        number=235,
+        optional=True,
     )
     phone_calls: int = proto.Field(
-        proto.INT64, number=236, optional=True,
+        proto.INT64,
+        number=236,
+        optional=True,
     )
     phone_impressions: int = proto.Field(
-        proto.INT64, number=237, optional=True,
+        proto.INT64,
+        number=237,
+        optional=True,
     )
     phone_through_rate: float = proto.Field(
-        proto.DOUBLE, number=238, optional=True,
+        proto.DOUBLE,
+        number=238,
+        optional=True,
     )
     relative_ctr: float = proto.Field(
-        proto.DOUBLE, number=239, optional=True,
+        proto.DOUBLE,
+        number=239,
+        optional=True,
     )
     search_absolute_top_impression_share: float = proto.Field(
-        proto.DOUBLE, number=136, optional=True,
+        proto.DOUBLE,
+        number=136,
+        optional=True,
     )
     search_budget_lost_absolute_top_impression_share: float = proto.Field(
-        proto.DOUBLE, number=137, optional=True,
+        proto.DOUBLE,
+        number=137,
+        optional=True,
     )
     search_budget_lost_impression_share: float = proto.Field(
-        proto.DOUBLE, number=138, optional=True,
+        proto.DOUBLE,
+        number=138,
+        optional=True,
     )
     search_budget_lost_top_impression_share: float = proto.Field(
-        proto.DOUBLE, number=139, optional=True,
+        proto.DOUBLE,
+        number=139,
+        optional=True,
     )
     search_click_share: float = proto.Field(
-        proto.DOUBLE, number=140, optional=True,
+        proto.DOUBLE,
+        number=140,
+        optional=True,
     )
     search_exact_match_impression_share: float = proto.Field(
-        proto.DOUBLE, number=141, optional=True,
+        proto.DOUBLE,
+        number=141,
+        optional=True,
     )
     search_impression_share: float = proto.Field(
-        proto.DOUBLE, number=142, optional=True,
+        proto.DOUBLE,
+        number=142,
+        optional=True,
     )
     search_rank_lost_absolute_top_impression_share: float = proto.Field(
-        proto.DOUBLE, number=143, optional=True,
+        proto.DOUBLE,
+        number=143,
+        optional=True,
     )
     search_rank_lost_impression_share: float = proto.Field(
-        proto.DOUBLE, number=144, optional=True,
+        proto.DOUBLE,
+        number=144,
+        optional=True,
     )
     search_rank_lost_top_impression_share: float = proto.Field(
-        proto.DOUBLE, number=145, optional=True,
+        proto.DOUBLE,
+        number=145,
+        optional=True,
     )
     search_top_impression_share: float = proto.Field(
-        proto.DOUBLE, number=146, optional=True,
+        proto.DOUBLE,
+        number=146,
+        optional=True,
+    )
+    search_volume: "SearchVolumeRange" = proto.Field(
+        proto.MESSAGE,
+        number=295,
+        optional=True,
+        message="SearchVolumeRange",
     )
     speed_score: int = proto.Field(
-        proto.INT64, number=147, optional=True,
+        proto.INT64,
+        number=147,
+        optional=True,
     )
     average_target_cpa_micros: int = proto.Field(
-        proto.INT64, number=290, optional=True,
+        proto.INT64,
+        number=290,
+        optional=True,
     )
     average_target_roas: float = proto.Field(
-        proto.DOUBLE, number=250, optional=True,
+        proto.DOUBLE,
+        number=250,
+        optional=True,
     )
     top_impression_percentage: float = proto.Field(
-        proto.DOUBLE, number=148, optional=True,
+        proto.DOUBLE,
+        number=148,
+        optional=True,
     )
     valid_accelerated_mobile_pages_clicks_percentage: float = proto.Field(
-        proto.DOUBLE, number=149, optional=True,
+        proto.DOUBLE,
+        number=149,
+        optional=True,
     )
     value_per_all_conversions: float = proto.Field(
-        proto.DOUBLE, number=150, optional=True,
+        proto.DOUBLE,
+        number=150,
+        optional=True,
     )
     value_per_all_conversions_by_conversion_date: float = proto.Field(
-        proto.DOUBLE, number=244, optional=True,
+        proto.DOUBLE,
+        number=244,
+        optional=True,
     )
     value_per_conversion: float = proto.Field(
-        proto.DOUBLE, number=151, optional=True,
+        proto.DOUBLE,
+        number=151,
+        optional=True,
     )
     value_per_conversions_by_conversion_date: float = proto.Field(
-        proto.DOUBLE, number=245, optional=True,
+        proto.DOUBLE,
+        number=245,
+        optional=True,
     )
     value_per_current_model_attributed_conversion: float = proto.Field(
-        proto.DOUBLE, number=152, optional=True,
+        proto.DOUBLE,
+        number=152,
+        optional=True,
     )
     video_quartile_p100_rate: float = proto.Field(
-        proto.DOUBLE, number=132, optional=True,
+        proto.DOUBLE,
+        number=132,
+        optional=True,
     )
     video_quartile_p25_rate: float = proto.Field(
-        proto.DOUBLE, number=133, optional=True,
+        proto.DOUBLE,
+        number=133,
+        optional=True,
     )
     video_quartile_p50_rate: float = proto.Field(
-        proto.DOUBLE, number=134, optional=True,
+        proto.DOUBLE,
+        number=134,
+        optional=True,
     )
     video_quartile_p75_rate: float = proto.Field(
-        proto.DOUBLE, number=135, optional=True,
+        proto.DOUBLE,
+        number=135,
+        optional=True,
     )
     video_view_rate: float = proto.Field(
-        proto.DOUBLE, number=153, optional=True,
+        proto.DOUBLE,
+        number=153,
+        optional=True,
     )
     video_views: int = proto.Field(
-        proto.INT64, number=154, optional=True,
+        proto.INT64,
+        number=154,
+        optional=True,
     )
     view_through_conversions: int = proto.Field(
-        proto.INT64, number=155, optional=True,
+        proto.INT64,
+        number=155,
+        optional=True,
     )
     sk_ad_network_conversions: int = proto.Field(
-        proto.INT64, number=246,
+        proto.INT64,
+        number=246,
     )
     publisher_purchased_clicks: int = proto.Field(
-        proto.INT64, number=264,
+        proto.INT64,
+        number=264,
     )
     publisher_organic_clicks: int = proto.Field(
-        proto.INT64, number=265,
+        proto.INT64,
+        number=265,
     )
     publisher_unknown_clicks: int = proto.Field(
-        proto.INT64, number=266,
+        proto.INT64,
+        number=266,
     )
     all_conversions_from_location_asset_click_to_call: float = proto.Field(
-        proto.DOUBLE, number=267, optional=True,
+        proto.DOUBLE,
+        number=267,
+        optional=True,
     )
     all_conversions_from_location_asset_directions: float = proto.Field(
-        proto.DOUBLE, number=268, optional=True,
+        proto.DOUBLE,
+        number=268,
+        optional=True,
     )
     all_conversions_from_location_asset_menu: float = proto.Field(
-        proto.DOUBLE, number=269, optional=True,
+        proto.DOUBLE,
+        number=269,
+        optional=True,
     )
     all_conversions_from_location_asset_order: float = proto.Field(
-        proto.DOUBLE, number=270, optional=True,
+        proto.DOUBLE,
+        number=270,
+        optional=True,
     )
     all_conversions_from_location_asset_other_engagement: float = proto.Field(
-        proto.DOUBLE, number=271, optional=True,
+        proto.DOUBLE,
+        number=271,
+        optional=True,
     )
     all_conversions_from_location_asset_store_visits: float = proto.Field(
-        proto.DOUBLE, number=272, optional=True,
+        proto.DOUBLE,
+        number=272,
+        optional=True,
     )
     all_conversions_from_location_asset_website: float = proto.Field(
-        proto.DOUBLE, number=273, optional=True,
+        proto.DOUBLE,
+        number=273,
+        optional=True,
     )
     eligible_impressions_from_location_asset_store_reach: int = proto.Field(
-        proto.INT64, number=274, optional=True,
+        proto.INT64,
+        number=274,
+        optional=True,
     )
-    view_through_conversions_from_location_asset_click_to_call: float = proto.Field(
-        proto.DOUBLE, number=275, optional=True,
+    view_through_conversions_from_location_asset_click_to_call: float = (
+        proto.Field(
+            proto.DOUBLE,
+            number=275,
+            optional=True,
+        )
     )
-    view_through_conversions_from_location_asset_directions: float = proto.Field(
-        proto.DOUBLE, number=276, optional=True,
+    view_through_conversions_from_location_asset_directions: float = (
+        proto.Field(
+            proto.DOUBLE,
+            number=276,
+            optional=True,
+        )
     )
     view_through_conversions_from_location_asset_menu: float = proto.Field(
-        proto.DOUBLE, number=277, optional=True,
+        proto.DOUBLE,
+        number=277,
+        optional=True,
     )
     view_through_conversions_from_location_asset_order: float = proto.Field(
-        proto.DOUBLE, number=278, optional=True,
+        proto.DOUBLE,
+        number=278,
+        optional=True,
     )
-    view_through_conversions_from_location_asset_other_engagement: float = proto.Field(
-        proto.DOUBLE, number=279, optional=True,
+    view_through_conversions_from_location_asset_other_engagement: float = (
+        proto.Field(
+            proto.DOUBLE,
+            number=279,
+            optional=True,
+        )
     )
-    view_through_conversions_from_location_asset_store_visits: float = proto.Field(
-        proto.DOUBLE, number=280, optional=True,
+    view_through_conversions_from_location_asset_store_visits: float = (
+        proto.Field(
+            proto.DOUBLE,
+            number=280,
+            optional=True,
+        )
     )
     view_through_conversions_from_location_asset_website: float = proto.Field(
-        proto.DOUBLE, number=281, optional=True,
+        proto.DOUBLE,
+        number=281,
+        optional=True,
+    )
+
+
+class SearchVolumeRange(proto.Message):
+    r"""Search volume range.
+    Actual search volume falls within this range.
+
+    .. _oneof: https://proto-plus-python.readthedocs.io/en/stable/fields.html#oneofs-mutually-exclusive-fields
+
+    Attributes:
+        min_ (int):
+            Lower bound of search volume.
+
+            This field is a member of `oneof`_ ``_min``.
+        max_ (int):
+            Upper bound of search volume.
+
+            This field is a member of `oneof`_ ``_max``.
+    """
+
+    min_: int = proto.Field(
+        proto.INT64,
+        number=1,
+        optional=True,
+    )
+    max_: int = proto.Field(
+        proto.INT64,
+        number=2,
+        optional=True,
     )
 
 

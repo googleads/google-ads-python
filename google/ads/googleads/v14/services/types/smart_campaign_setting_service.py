@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-# Copyright 2022 Google LLC
+# Copyright 2023 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -66,7 +66,8 @@ class GetSmartCampaignStatusRequest(proto.Message):
     """
 
     resource_name: str = proto.Field(
-        proto.STRING, number=1,
+        proto.STRING,
+        number=1,
     )
 
 
@@ -116,10 +117,14 @@ class SmartCampaignEligibleDetails(proto.Message):
     """
 
     last_impression_date_time: str = proto.Field(
-        proto.STRING, number=1, optional=True,
+        proto.STRING,
+        number=1,
+        optional=True,
     )
     end_date_time: str = proto.Field(
-        proto.STRING, number=2, optional=True,
+        proto.STRING,
+        number=2,
+        optional=True,
     )
 
 
@@ -137,7 +142,9 @@ class SmartCampaignPausedDetails(proto.Message):
     """
 
     paused_date_time: str = proto.Field(
-        proto.STRING, number=1, optional=True,
+        proto.STRING,
+        number=1,
+        optional=True,
     )
 
 
@@ -155,7 +162,9 @@ class SmartCampaignRemovedDetails(proto.Message):
     """
 
     removed_date_time: str = proto.Field(
-        proto.STRING, number=1, optional=True,
+        proto.STRING,
+        number=1,
+        optional=True,
     )
 
 
@@ -173,7 +182,9 @@ class SmartCampaignEndedDetails(proto.Message):
     """
 
     end_date_time: str = proto.Field(
-        proto.STRING, number=1, optional=True,
+        proto.STRING,
+        number=1,
+        optional=True,
     )
 
 
@@ -255,7 +266,7 @@ class GetSmartCampaignStatusResponse(proto.Message):
 
 class MutateSmartCampaignSettingsRequest(proto.Message):
     r"""Request message for
-    [SmartCampaignSettingService.MutateSmartCampaignSetting][].
+    [SmartCampaignSettingService.MutateSmartCampaignSettings][google.ads.googleads.v14.services.SmartCampaignSettingService.MutateSmartCampaignSettings].
 
     Attributes:
         customer_id (str):
@@ -280,18 +291,23 @@ class MutateSmartCampaignSettingsRequest(proto.Message):
     """
 
     customer_id: str = proto.Field(
-        proto.STRING, number=1,
+        proto.STRING,
+        number=1,
     )
     operations: MutableSequence[
         "SmartCampaignSettingOperation"
     ] = proto.RepeatedField(
-        proto.MESSAGE, number=2, message="SmartCampaignSettingOperation",
+        proto.MESSAGE,
+        number=2,
+        message="SmartCampaignSettingOperation",
     )
     partial_failure: bool = proto.Field(
-        proto.BOOL, number=3,
+        proto.BOOL,
+        number=3,
     )
     validate_only: bool = proto.Field(
-        proto.BOOL, number=4,
+        proto.BOOL,
+        number=4,
     )
     response_content_type: gage_response_content_type.ResponseContentTypeEnum.ResponseContentType = proto.Field(
         proto.ENUM,
@@ -307,7 +323,8 @@ class SmartCampaignSettingOperation(proto.Message):
     Attributes:
         update (google.ads.googleads.v14.resources.types.SmartCampaignSetting):
             Update operation: The Smart campaign setting
-            must specify a valid resource name.
+            must specify a valid
+            resource name.
         update_mask (google.protobuf.field_mask_pb2.FieldMask):
             FieldMask that determines which resource
             fields are modified in an update.
@@ -319,7 +336,9 @@ class SmartCampaignSettingOperation(proto.Message):
         message=gagr_smart_campaign_setting.SmartCampaignSetting,
     )
     update_mask: field_mask_pb2.FieldMask = proto.Field(
-        proto.MESSAGE, number=2, message=field_mask_pb2.FieldMask,
+        proto.MESSAGE,
+        number=2,
+        message=field_mask_pb2.FieldMask,
     )
 
 
@@ -337,12 +356,16 @@ class MutateSmartCampaignSettingsResponse(proto.Message):
     """
 
     partial_failure_error: status_pb2.Status = proto.Field(
-        proto.MESSAGE, number=1, message=status_pb2.Status,
+        proto.MESSAGE,
+        number=1,
+        message=status_pb2.Status,
     )
     results: MutableSequence[
         "MutateSmartCampaignSettingResult"
     ] = proto.RepeatedField(
-        proto.MESSAGE, number=2, message="MutateSmartCampaignSettingResult",
+        proto.MESSAGE,
+        number=2,
+        message="MutateSmartCampaignSettingResult",
     )
 
 
@@ -358,12 +381,15 @@ class MutateSmartCampaignSettingResult(proto.Message):
     """
 
     resource_name: str = proto.Field(
-        proto.STRING, number=1,
+        proto.STRING,
+        number=1,
     )
-    smart_campaign_setting: gagr_smart_campaign_setting.SmartCampaignSetting = proto.Field(
-        proto.MESSAGE,
-        number=2,
-        message=gagr_smart_campaign_setting.SmartCampaignSetting,
+    smart_campaign_setting: gagr_smart_campaign_setting.SmartCampaignSetting = (
+        proto.Field(
+            proto.MESSAGE,
+            number=2,
+            message=gagr_smart_campaign_setting.SmartCampaignSetting,
+        )
     )
 
 

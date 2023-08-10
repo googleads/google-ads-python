@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-# Copyright 2022 Google LLC
+# Copyright 2023 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -43,7 +43,7 @@ __protobuf__ = proto.module(
 
 class SuggestSmartCampaignBudgetOptionsRequest(proto.Message):
     r"""Request message for
-    [SmartCampaignSuggestService.SuggestSmartCampaignBudgets][].
+    [SmartCampaignSuggestService.SuggestSmartCampaignBudgetOptions][google.ads.googleads.v14.services.SmartCampaignSuggestService.SuggestSmartCampaignBudgetOptions].
 
     This message has `oneof`_ fields (mutually exclusive fields).
     For each oneof, at most one member field can be set at the same time.
@@ -69,10 +69,13 @@ class SuggestSmartCampaignBudgetOptionsRequest(proto.Message):
     """
 
     customer_id: str = proto.Field(
-        proto.STRING, number=1,
+        proto.STRING,
+        number=1,
     )
     campaign: str = proto.Field(
-        proto.STRING, number=2, oneof="suggestion_data",
+        proto.STRING,
+        number=2,
+        oneof="suggestion_data",
     )
     suggestion_info: "SmartCampaignSuggestionInfo" = proto.Field(
         proto.MESSAGE,
@@ -143,7 +146,9 @@ class SmartCampaignSuggestionInfo(proto.Message):
         """
 
         locations: MutableSequence[criteria.LocationInfo] = proto.RepeatedField(
-            proto.MESSAGE, number=1, message=criteria.LocationInfo,
+            proto.MESSAGE,
+            number=1,
+            message=criteria.LocationInfo,
         )
 
     class BusinessContext(proto.Message):
@@ -154,24 +159,31 @@ class SmartCampaignSuggestionInfo(proto.Message):
         """
 
         business_name: str = proto.Field(
-            proto.STRING, number=1,
+            proto.STRING,
+            number=1,
         )
 
     final_url: str = proto.Field(
-        proto.STRING, number=1,
+        proto.STRING,
+        number=1,
     )
     language_code: str = proto.Field(
-        proto.STRING, number=3,
+        proto.STRING,
+        number=3,
     )
     ad_schedules: MutableSequence[
         criteria.AdScheduleInfo
     ] = proto.RepeatedField(
-        proto.MESSAGE, number=6, message=criteria.AdScheduleInfo,
+        proto.MESSAGE,
+        number=6,
+        message=criteria.AdScheduleInfo,
     )
     keyword_themes: MutableSequence[
         criteria.KeywordThemeInfo
     ] = proto.RepeatedField(
-        proto.MESSAGE, number=7, message=criteria.KeywordThemeInfo,
+        proto.MESSAGE,
+        number=7,
+        message=criteria.KeywordThemeInfo,
     )
     business_context: BusinessContext = proto.Field(
         proto.MESSAGE,
@@ -180,10 +192,15 @@ class SmartCampaignSuggestionInfo(proto.Message):
         message=BusinessContext,
     )
     business_profile_location: str = proto.Field(
-        proto.STRING, number=9, oneof="business_setting",
+        proto.STRING,
+        number=9,
+        oneof="business_setting",
     )
     location_list: LocationList = proto.Field(
-        proto.MESSAGE, number=4, oneof="geo_target", message=LocationList,
+        proto.MESSAGE,
+        number=4,
+        oneof="geo_target",
+        message=LocationList,
     )
     proximity: criteria.ProximityInfo = proto.Field(
         proto.MESSAGE,
@@ -195,7 +212,7 @@ class SmartCampaignSuggestionInfo(proto.Message):
 
 class SuggestSmartCampaignBudgetOptionsResponse(proto.Message):
     r"""Response message for
-    [SmartCampaignSuggestService.SuggestSmartCampaignBudgets][].
+    [SmartCampaignSuggestService.SuggestSmartCampaignBudgetOptions][google.ads.googleads.v14.services.SmartCampaignSuggestService.SuggestSmartCampaignBudgetOptions].
     Depending on whether the system could suggest the options, either
     all of the options or none of them might be returned.
 
@@ -226,10 +243,12 @@ class SuggestSmartCampaignBudgetOptionsResponse(proto.Message):
         """
 
         min_daily_clicks: int = proto.Field(
-            proto.INT64, number=1,
+            proto.INT64,
+            number=1,
         )
         max_daily_clicks: int = proto.Field(
-            proto.INT64, number=2,
+            proto.INT64,
+            number=2,
         )
 
     class BudgetOption(proto.Message):
@@ -247,22 +266,34 @@ class SuggestSmartCampaignBudgetOptionsResponse(proto.Message):
         """
 
         daily_amount_micros: int = proto.Field(
-            proto.INT64, number=1,
+            proto.INT64,
+            number=1,
         )
-        metrics: "SuggestSmartCampaignBudgetOptionsResponse.Metrics" = proto.Field(
-            proto.MESSAGE,
-            number=2,
-            message="SuggestSmartCampaignBudgetOptionsResponse.Metrics",
+        metrics: "SuggestSmartCampaignBudgetOptionsResponse.Metrics" = (
+            proto.Field(
+                proto.MESSAGE,
+                number=2,
+                message="SuggestSmartCampaignBudgetOptionsResponse.Metrics",
+            )
         )
 
     low: BudgetOption = proto.Field(
-        proto.MESSAGE, number=1, optional=True, message=BudgetOption,
+        proto.MESSAGE,
+        number=1,
+        optional=True,
+        message=BudgetOption,
     )
     recommended: BudgetOption = proto.Field(
-        proto.MESSAGE, number=2, optional=True, message=BudgetOption,
+        proto.MESSAGE,
+        number=2,
+        optional=True,
+        message=BudgetOption,
     )
     high: BudgetOption = proto.Field(
-        proto.MESSAGE, number=3, optional=True, message=BudgetOption,
+        proto.MESSAGE,
+        number=3,
+        optional=True,
+        message=BudgetOption,
     )
 
 
@@ -281,10 +312,13 @@ class SuggestSmartCampaignAdRequest(proto.Message):
     """
 
     customer_id: str = proto.Field(
-        proto.STRING, number=1,
+        proto.STRING,
+        number=1,
     )
     suggestion_info: "SmartCampaignSuggestionInfo" = proto.Field(
-        proto.MESSAGE, number=2, message="SmartCampaignSuggestionInfo",
+        proto.MESSAGE,
+        number=2,
+        message="SmartCampaignSuggestionInfo",
     )
 
 
@@ -299,7 +333,9 @@ class SuggestSmartCampaignAdResponse(proto.Message):
     """
 
     ad_info: ad_type_infos.SmartCampaignAdInfo = proto.Field(
-        proto.MESSAGE, number=1, message=ad_type_infos.SmartCampaignAdInfo,
+        proto.MESSAGE,
+        number=1,
+        message=ad_type_infos.SmartCampaignAdInfo,
     )
 
 
@@ -324,10 +360,13 @@ class SuggestKeywordThemesRequest(proto.Message):
     """
 
     customer_id: str = proto.Field(
-        proto.STRING, number=1,
+        proto.STRING,
+        number=1,
     )
     suggestion_info: "SmartCampaignSuggestionInfo" = proto.Field(
-        proto.MESSAGE, number=2, message="SmartCampaignSuggestionInfo",
+        proto.MESSAGE,
+        number=2,
+        message="SmartCampaignSuggestionInfo",
     )
 
 
@@ -367,11 +406,15 @@ class SuggestKeywordThemesResponse(proto.Message):
             message=gagr_keyword_theme_constant.KeywordThemeConstant,
         )
         free_form_keyword_theme: str = proto.Field(
-            proto.STRING, number=2, oneof="keyword_theme",
+            proto.STRING,
+            number=2,
+            oneof="keyword_theme",
         )
 
     keyword_themes: MutableSequence[KeywordTheme] = proto.RepeatedField(
-        proto.MESSAGE, number=2, message=KeywordTheme,
+        proto.MESSAGE,
+        number=2,
+        message=KeywordTheme,
     )
 
 

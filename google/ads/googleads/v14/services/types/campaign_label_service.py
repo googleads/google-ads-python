@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-# Copyright 2022 Google LLC
+# Copyright 2023 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -58,16 +58,21 @@ class MutateCampaignLabelsRequest(proto.Message):
     """
 
     customer_id: str = proto.Field(
-        proto.STRING, number=1,
+        proto.STRING,
+        number=1,
     )
     operations: MutableSequence["CampaignLabelOperation"] = proto.RepeatedField(
-        proto.MESSAGE, number=2, message="CampaignLabelOperation",
+        proto.MESSAGE,
+        number=2,
+        message="CampaignLabelOperation",
     )
     partial_failure: bool = proto.Field(
-        proto.BOOL, number=3,
+        proto.BOOL,
+        number=3,
     )
     validate_only: bool = proto.Field(
-        proto.BOOL, number=4,
+        proto.BOOL,
+        number=4,
     )
 
 
@@ -105,7 +110,9 @@ class CampaignLabelOperation(proto.Message):
         message=campaign_label.CampaignLabel,
     )
     remove: str = proto.Field(
-        proto.STRING, number=2, oneof="operation",
+        proto.STRING,
+        number=2,
+        oneof="operation",
     )
 
 
@@ -123,10 +130,14 @@ class MutateCampaignLabelsResponse(proto.Message):
     """
 
     partial_failure_error: status_pb2.Status = proto.Field(
-        proto.MESSAGE, number=3, message=status_pb2.Status,
+        proto.MESSAGE,
+        number=3,
+        message=status_pb2.Status,
     )
     results: MutableSequence["MutateCampaignLabelResult"] = proto.RepeatedField(
-        proto.MESSAGE, number=2, message="MutateCampaignLabelResult",
+        proto.MESSAGE,
+        number=2,
+        message="MutateCampaignLabelResult",
     )
 
 
@@ -138,7 +149,8 @@ class MutateCampaignLabelResult(proto.Message):
     """
 
     resource_name: str = proto.Field(
-        proto.STRING, number=1,
+        proto.STRING,
+        number=1,
     )
 
 

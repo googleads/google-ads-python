@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-# Copyright 2022 Google LLC
+# Copyright 2023 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -24,7 +24,9 @@ from google.ads.googleads.v14.enums.types import manager_link_status
 __protobuf__ = proto.module(
     package="google.ads.googleads.v14.resources",
     marshal="google.ads.googleads.v14",
-    manifest={"CustomerClientLink",},
+    manifest={
+        "CustomerClientLink",
+    },
 )
 
 
@@ -59,21 +61,30 @@ class CustomerClientLink(proto.Message):
     """
 
     resource_name: str = proto.Field(
-        proto.STRING, number=1,
+        proto.STRING,
+        number=1,
     )
     client_customer: str = proto.Field(
-        proto.STRING, number=7, optional=True,
+        proto.STRING,
+        number=7,
+        optional=True,
     )
     manager_link_id: int = proto.Field(
-        proto.INT64, number=8, optional=True,
+        proto.INT64,
+        number=8,
+        optional=True,
     )
-    status: manager_link_status.ManagerLinkStatusEnum.ManagerLinkStatus = proto.Field(
-        proto.ENUM,
-        number=5,
-        enum=manager_link_status.ManagerLinkStatusEnum.ManagerLinkStatus,
+    status: manager_link_status.ManagerLinkStatusEnum.ManagerLinkStatus = (
+        proto.Field(
+            proto.ENUM,
+            number=5,
+            enum=manager_link_status.ManagerLinkStatusEnum.ManagerLinkStatus,
+        )
     )
     hidden: bool = proto.Field(
-        proto.BOOL, number=9, optional=True,
+        proto.BOOL,
+        number=9,
+        optional=True,
     )
 
 

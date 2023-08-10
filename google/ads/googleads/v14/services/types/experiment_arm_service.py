@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-# Copyright 2022 Google LLC
+# Copyright 2023 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -68,16 +68,21 @@ class MutateExperimentArmsRequest(proto.Message):
     """
 
     customer_id: str = proto.Field(
-        proto.STRING, number=1,
+        proto.STRING,
+        number=1,
     )
     operations: MutableSequence["ExperimentArmOperation"] = proto.RepeatedField(
-        proto.MESSAGE, number=2, message="ExperimentArmOperation",
+        proto.MESSAGE,
+        number=2,
+        message="ExperimentArmOperation",
     )
     partial_failure: bool = proto.Field(
-        proto.BOOL, number=3,
+        proto.BOOL,
+        number=3,
     )
     validate_only: bool = proto.Field(
-        proto.BOOL, number=4,
+        proto.BOOL,
+        number=4,
     )
     response_content_type: gage_response_content_type.ResponseContentTypeEnum.ResponseContentType = proto.Field(
         proto.ENUM,
@@ -105,7 +110,8 @@ class ExperimentArmOperation(proto.Message):
             This field is a member of `oneof`_ ``operation``.
         update (google.ads.googleads.v14.resources.types.ExperimentArm):
             Update operation: The experiment arm is
-            expected to have a valid resource name.
+            expected to have a valid
+            resource name.
 
             This field is a member of `oneof`_ ``operation``.
         remove (str):
@@ -118,7 +124,9 @@ class ExperimentArmOperation(proto.Message):
     """
 
     update_mask: field_mask_pb2.FieldMask = proto.Field(
-        proto.MESSAGE, number=4, message=field_mask_pb2.FieldMask,
+        proto.MESSAGE,
+        number=4,
+        message=field_mask_pb2.FieldMask,
     )
     create: gagr_experiment_arm.ExperimentArm = proto.Field(
         proto.MESSAGE,
@@ -133,7 +141,9 @@ class ExperimentArmOperation(proto.Message):
         message=gagr_experiment_arm.ExperimentArm,
     )
     remove: str = proto.Field(
-        proto.STRING, number=3, oneof="operation",
+        proto.STRING,
+        number=3,
+        oneof="operation",
     )
 
 
@@ -151,10 +161,14 @@ class MutateExperimentArmsResponse(proto.Message):
     """
 
     partial_failure_error: status_pb2.Status = proto.Field(
-        proto.MESSAGE, number=1, message=status_pb2.Status,
+        proto.MESSAGE,
+        number=1,
+        message=status_pb2.Status,
     )
     results: MutableSequence["MutateExperimentArmResult"] = proto.RepeatedField(
-        proto.MESSAGE, number=2, message="MutateExperimentArmResult",
+        proto.MESSAGE,
+        number=2,
+        message="MutateExperimentArmResult",
     )
 
 
@@ -170,10 +184,13 @@ class MutateExperimentArmResult(proto.Message):
     """
 
     resource_name: str = proto.Field(
-        proto.STRING, number=1,
+        proto.STRING,
+        number=1,
     )
     experiment_arm: gagr_experiment_arm.ExperimentArm = proto.Field(
-        proto.MESSAGE, number=2, message=gagr_experiment_arm.ExperimentArm,
+        proto.MESSAGE,
+        number=2,
+        message=gagr_experiment_arm.ExperimentArm,
     )
 
 

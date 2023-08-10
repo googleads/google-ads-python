@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-# Copyright 2022 Google LLC
+# Copyright 2023 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -27,13 +27,16 @@ from google.ads.googleads.v14.common.types import (
 __protobuf__ = proto.module(
     package="google.ads.googleads.v14.resources",
     marshal="google.ads.googleads.v14",
-    manifest={"DetailedDemographic",},
+    manifest={
+        "DetailedDemographic",
+    },
 )
 
 
 class DetailedDemographic(proto.Message):
     r"""A detailed demographic: a particular interest-based vertical
-    to be targeted to reach users based on long-term life facts.
+    to be targeted
+    to reach users based on long-term life facts.
 
     Attributes:
         resource_name (str):
@@ -59,19 +62,24 @@ class DetailedDemographic(proto.Message):
     """
 
     resource_name: str = proto.Field(
-        proto.STRING, number=1,
+        proto.STRING,
+        number=1,
     )
     id: int = proto.Field(
-        proto.INT64, number=2,
+        proto.INT64,
+        number=2,
     )
     name: str = proto.Field(
-        proto.STRING, number=3,
+        proto.STRING,
+        number=3,
     )
     parent: str = proto.Field(
-        proto.STRING, number=4,
+        proto.STRING,
+        number=4,
     )
     launched_to_all: bool = proto.Field(
-        proto.BOOL, number=5,
+        proto.BOOL,
+        number=5,
     )
     availabilities: MutableSequence[
         criterion_category_availability.CriterionCategoryAvailability

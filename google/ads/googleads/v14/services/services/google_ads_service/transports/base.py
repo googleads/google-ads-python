@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-# Copyright 2022 Google LLC
+# Copyright 2023 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -29,7 +29,9 @@ from google.ads.googleads.v14.services.types import google_ads_service
 
 try:
     DEFAULT_CLIENT_INFO = gapic_v1.client_info.ClientInfo(
-        gapic_version=pkg_resources.get_distribution("google-ads",).version,
+        gapic_version=pkg_resources.get_distribution(
+            "google-ads",
+        ).version,
     )
 except pkg_resources.DistributionNotFound:
     DEFAULT_CLIENT_INFO = gapic_v1.client_info.ClientInfo()
@@ -123,7 +125,9 @@ class GoogleAdsServiceTransport(abc.ABC):
         # Precompute the wrapped methods.
         self._wrapped_methods = {
             self.search: gapic_v1.method.wrap_method(
-                self.search, default_timeout=None, client_info=client_info,
+                self.search,
+                default_timeout=None,
+                client_info=client_info,
             ),
             self.search_stream: gapic_v1.method.wrap_method(
                 self.search_stream,
@@ -131,16 +135,18 @@ class GoogleAdsServiceTransport(abc.ABC):
                 client_info=client_info,
             ),
             self.mutate: gapic_v1.method.wrap_method(
-                self.mutate, default_timeout=None, client_info=client_info,
+                self.mutate,
+                default_timeout=None,
+                client_info=client_info,
             ),
         }
 
     def close(self):
         """Closes resources associated with the transport.
 
-       .. warning::
-            Only call this method if the transport is NOT shared
-            with other clients - this may cause errors in other clients!
+        .. warning::
+             Only call this method if the transport is NOT shared
+             with other clients - this may cause errors in other clients!
         """
         raise NotImplementedError()
 

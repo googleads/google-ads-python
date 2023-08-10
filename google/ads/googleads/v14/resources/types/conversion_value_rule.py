@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-# Copyright 2022 Google LLC
+# Copyright 2023 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -30,7 +30,9 @@ from google.ads.googleads.v14.enums.types import value_rule_operation
 __protobuf__ = proto.module(
     package="google.ads.googleads.v14.resources",
     marshal="google.ads.googleads.v14",
-    manifest={"ConversionValueRule",},
+    manifest={
+        "ConversionValueRule",
+    },
 )
 
 
@@ -82,7 +84,8 @@ class ConversionValueRule(proto.Message):
             enum=value_rule_operation.ValueRuleOperationEnum.ValueRuleOperation,
         )
         value: float = proto.Field(
-            proto.DOUBLE, number=2,
+            proto.DOUBLE,
+            number=2,
         )
 
     class ValueRuleGeoLocationCondition(proto.Message):
@@ -103,7 +106,8 @@ class ConversionValueRule(proto.Message):
         excluded_geo_target_constants: MutableSequence[
             str
         ] = proto.RepeatedField(
-            proto.STRING, number=1,
+            proto.STRING,
+            number=1,
         )
         excluded_geo_match_type: value_rule_geo_location_match_type.ValueRuleGeoLocationMatchTypeEnum.ValueRuleGeoLocationMatchType = proto.Field(
             proto.ENUM,
@@ -111,7 +115,8 @@ class ConversionValueRule(proto.Message):
             enum=value_rule_geo_location_match_type.ValueRuleGeoLocationMatchTypeEnum.ValueRuleGeoLocationMatchType,
         )
         geo_target_constants: MutableSequence[str] = proto.RepeatedField(
-            proto.STRING, number=3,
+            proto.STRING,
+            number=3,
         )
         geo_match_type: value_rule_geo_location_match_type.ValueRuleGeoLocationMatchTypeEnum.ValueRuleGeoLocationMatchType = proto.Field(
             proto.ENUM,
@@ -148,32 +153,45 @@ class ConversionValueRule(proto.Message):
         """
 
         user_lists: MutableSequence[str] = proto.RepeatedField(
-            proto.STRING, number=1,
+            proto.STRING,
+            number=1,
         )
         user_interests: MutableSequence[str] = proto.RepeatedField(
-            proto.STRING, number=2,
+            proto.STRING,
+            number=2,
         )
 
     resource_name: str = proto.Field(
-        proto.STRING, number=1,
+        proto.STRING,
+        number=1,
     )
     id: int = proto.Field(
-        proto.INT64, number=2,
+        proto.INT64,
+        number=2,
     )
     action: ValueRuleAction = proto.Field(
-        proto.MESSAGE, number=3, message=ValueRuleAction,
+        proto.MESSAGE,
+        number=3,
+        message=ValueRuleAction,
     )
     geo_location_condition: ValueRuleGeoLocationCondition = proto.Field(
-        proto.MESSAGE, number=4, message=ValueRuleGeoLocationCondition,
+        proto.MESSAGE,
+        number=4,
+        message=ValueRuleGeoLocationCondition,
     )
     device_condition: ValueRuleDeviceCondition = proto.Field(
-        proto.MESSAGE, number=5, message=ValueRuleDeviceCondition,
+        proto.MESSAGE,
+        number=5,
+        message=ValueRuleDeviceCondition,
     )
     audience_condition: ValueRuleAudienceCondition = proto.Field(
-        proto.MESSAGE, number=6, message=ValueRuleAudienceCondition,
+        proto.MESSAGE,
+        number=6,
+        message=ValueRuleAudienceCondition,
     )
     owner_customer: str = proto.Field(
-        proto.STRING, number=7,
+        proto.STRING,
+        number=7,
     )
     status: conversion_value_rule_status.ConversionValueRuleStatusEnum.ConversionValueRuleStatus = proto.Field(
         proto.ENUM,

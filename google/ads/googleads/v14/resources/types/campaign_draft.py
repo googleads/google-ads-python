@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-# Copyright 2022 Google LLC
+# Copyright 2023 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -24,7 +24,9 @@ from google.ads.googleads.v14.enums.types import campaign_draft_status
 __protobuf__ = proto.module(
     package="google.ads.googleads.v14.resources",
     marshal="google.ads.googleads.v14",
-    manifest={"CampaignDraft",},
+    manifest={
+        "CampaignDraft",
+    },
 )
 
 
@@ -86,19 +88,28 @@ class CampaignDraft(proto.Message):
     """
 
     resource_name: str = proto.Field(
-        proto.STRING, number=1,
+        proto.STRING,
+        number=1,
     )
     draft_id: int = proto.Field(
-        proto.INT64, number=9, optional=True,
+        proto.INT64,
+        number=9,
+        optional=True,
     )
     base_campaign: str = proto.Field(
-        proto.STRING, number=10, optional=True,
+        proto.STRING,
+        number=10,
+        optional=True,
     )
     name: str = proto.Field(
-        proto.STRING, number=11, optional=True,
+        proto.STRING,
+        number=11,
+        optional=True,
     )
     draft_campaign: str = proto.Field(
-        proto.STRING, number=12, optional=True,
+        proto.STRING,
+        number=12,
+        optional=True,
     )
     status: campaign_draft_status.CampaignDraftStatusEnum.CampaignDraftStatus = proto.Field(
         proto.ENUM,
@@ -106,10 +117,14 @@ class CampaignDraft(proto.Message):
         enum=campaign_draft_status.CampaignDraftStatusEnum.CampaignDraftStatus,
     )
     has_experiment_running: bool = proto.Field(
-        proto.BOOL, number=13, optional=True,
+        proto.BOOL,
+        number=13,
+        optional=True,
     )
     long_running_operation: str = proto.Field(
-        proto.STRING, number=14, optional=True,
+        proto.STRING,
+        number=14,
+        optional=True,
     )
 
 

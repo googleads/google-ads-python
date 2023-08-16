@@ -44,8 +44,7 @@ def main(client, customer_id):
                 f"Campaign with ID {row.campaign.id} and name "
                 f'"{row.campaign.name}" was found.'
             )
-
-# [END get_campaigns]
+            # [END get_campaigns]
 
 if __name__ == "__main__":
     # GoogleAdsClient will read the google-ads.yaml configuration file in the

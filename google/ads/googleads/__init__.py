@@ -12,8 +12,19 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+import sys
+import warnings
+
 import google.ads.googleads.client
 import google.ads.googleads.errors
 import google.ads.googleads.util
 
-VERSION = "21.1.0"
+VERSION = "21.3.0"
+
+# Checks if the current runtime is Python 3.7.
+if sys.version_info.major == 3 and sys.version_info.minor == 7:
+    warnings.warn(
+        "Python 3.7 is deprecated in the google-ads package. Please upgrade to "
+        "Python 3.8 or higher.",
+        category=DeprecationWarning
+    )

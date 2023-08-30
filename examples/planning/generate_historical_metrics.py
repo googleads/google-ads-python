@@ -105,7 +105,7 @@ def generate_historical_metrics(client, customer_id):
         for month in metrics.monthly_search_volumes:
             print(
                 f"\tApproximately {month.monthly_searches} searches in "
-                f"{month.month.name}, {month.year}"
+                f"{month.month}, {month.year}"
             )
             # [END generate_historical_metrics]
 

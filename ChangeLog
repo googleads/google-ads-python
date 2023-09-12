@@ -1,5 +1,8 @@
+* 22.0.0
+- Remove support for Google Ads API v12.
+
 * 21.3.0
-- Google Ads API v14_1 release,
+- Google Ads API v14_1 release.
 - Increase maximum version for proto-plus and google-api-core dependencies.
 - Remove add_keyword_plan example.
 - Add generate_forecast_metrics and generate_historical_metrics examples.

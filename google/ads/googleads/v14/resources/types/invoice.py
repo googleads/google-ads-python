@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-# Copyright 2022 Google LLC
+# Copyright 2023 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -27,7 +27,9 @@ from google.ads.googleads.v14.enums.types import month_of_year
 __protobuf__ = proto.module(
     package="google.ads.googleads.v14.resources",
     marshal="google.ads.googleads.v14",
-    manifest={"Invoice",},
+    manifest={
+        "Invoice",
+    },
 )
 
 
@@ -115,13 +117,25 @@ class Invoice(proto.Message):
         regulatory_costs_total_amount_micros (int):
             Output only. The total amount of invoice
             level regulatory costs, in micros.
+        export_charge_subtotal_amount_micros (int):
+            Output only. The pretax subtotal amount of
+            invoice level export charges, in micros.
+
+            This field is a member of `oneof`_ ``_export_charge_subtotal_amount_micros``.
+        export_charge_tax_amount_micros (int):
+            Output only. The sum of taxes on the invoice
+            level export charges, in micros.
+
+            This field is a member of `oneof`_ ``_export_charge_tax_amount_micros``.
+        export_charge_total_amount_micros (int):
+            Output only. The total amount of invoice
+            level export charges, in micros.
+
+            This field is a member of `oneof`_ ``_export_charge_total_amount_micros``.
         subtotal_amount_micros (int):
-            Output only. The pretax subtotal amount, in micros. This
-            equals the sum of the AccountBudgetSummary subtotal amounts,
-            Invoice.adjustments_subtotal_amount_micros, and
-            Invoice.regulatory_costs_subtotal_amount_micros. Starting
-            with v6, the Invoice.regulatory_costs_subtotal_amount_micros
-            is no longer included.
+            Output only. The pretax subtotal amount, in micros. This is
+            equal to the sum of the AccountBudgetSummary subtotal
+            amounts and Invoice.adjustments_subtotal_amount_micros.
 
             This field is a member of `oneof`_ ``_subtotal_amount_micros``.
         tax_amount_micros (int):
@@ -133,11 +147,11 @@ class Invoice(proto.Message):
             This field is a member of `oneof`_ ``_tax_amount_micros``.
         total_amount_micros (int):
             Output only. The total amount, in micros. This equals the
-            sum of Invoice.subtotal_amount_micros and
-            Invoice.tax_amount_micros. Starting with v6,
-            Invoice.regulatory_costs_subtotal_amount_micros is also
-            added as it is no longer already included in
-            Invoice.tax_amount_micros.
+            sum of Invoice.subtotal_amount_micros,
+            Invoice.tax_amount_micros,
+            Invoice.regulatory_costs_subtotal_amount_micros, and
+            Invoice.export_charge_subtotal_amount_micros (which is
+            separated into a separate line item starting with V14.1).
 
             This field is a member of `oneof`_ ``_total_amount_micros``.
         corrected_invoice (str):
@@ -244,6 +258,20 @@ class Invoice(proto.Message):
                 in micros.
 
                 This field is a member of `oneof`_ ``_regulatory_costs_total_amount_micros``.
+            export_charge_subtotal_amount_micros (int):
+                Output only. Pretax export charge subtotal
+                amount, in micros.
+
+                This field is a member of `oneof`_ ``_export_charge_subtotal_amount_micros``.
+            export_charge_tax_amount_micros (int):
+                Output only. Tax on export charge, in micros.
+
+                This field is a member of `oneof`_ ``_export_charge_tax_amount_micros``.
+            export_charge_total_amount_micros (int):
+                Output only. Total export charge amount, in
+                micros.
+
+                This field is a member of `oneof`_ ``_export_charge_total_amount_micros``.
             subtotal_amount_micros (int):
                 Output only. Total pretax subtotal amount
                 attributable to the account during the service
@@ -265,52 +293,99 @@ class Invoice(proto.Message):
         """
 
         customer: str = proto.Field(
-            proto.STRING, number=1, optional=True,
+            proto.STRING,
+            number=1,
+            optional=True,
         )
         billing_correction_subtotal_amount_micros: int = proto.Field(
-            proto.INT64, number=2, optional=True,
+            proto.INT64,
+            number=2,
+            optional=True,
         )
         billing_correction_tax_amount_micros: int = proto.Field(
-            proto.INT64, number=3, optional=True,
+            proto.INT64,
+            number=3,
+            optional=True,
         )
         billing_correction_total_amount_micros: int = proto.Field(
-            proto.INT64, number=4, optional=True,
+            proto.INT64,
+            number=4,
+            optional=True,
         )
         coupon_adjustment_subtotal_amount_micros: int = proto.Field(
-            proto.INT64, number=5, optional=True,
+            proto.INT64,
+            number=5,
+            optional=True,
         )
         coupon_adjustment_tax_amount_micros: int = proto.Field(
-            proto.INT64, number=6, optional=True,
+            proto.INT64,
+            number=6,
+            optional=True,
         )
         coupon_adjustment_total_amount_micros: int = proto.Field(
-            proto.INT64, number=7, optional=True,
+            proto.INT64,
+            number=7,
+            optional=True,
         )
         excess_credit_adjustment_subtotal_amount_micros: int = proto.Field(
-            proto.INT64, number=8, optional=True,
+            proto.INT64,
+            number=8,
+            optional=True,
         )
         excess_credit_adjustment_tax_amount_micros: int = proto.Field(
-            proto.INT64, number=9, optional=True,
+            proto.INT64,
+            number=9,
+            optional=True,
         )
         excess_credit_adjustment_total_amount_micros: int = proto.Field(
-            proto.INT64, number=10, optional=True,
+            proto.INT64,
+            number=10,
+            optional=True,
         )
         regulatory_costs_subtotal_amount_micros: int = proto.Field(
-            proto.INT64, number=11, optional=True,
+            proto.INT64,
+            number=11,
+            optional=True,
         )
         regulatory_costs_tax_amount_micros: int = proto.Field(
-            proto.INT64, number=12, optional=True,
+            proto.INT64,
+            number=12,
+            optional=True,
         )
         regulatory_costs_total_amount_micros: int = proto.Field(
-            proto.INT64, number=13, optional=True,
+            proto.INT64,
+            number=13,
+            optional=True,
+        )
+        export_charge_subtotal_amount_micros: int = proto.Field(
+            proto.INT64,
+            number=17,
+            optional=True,
+        )
+        export_charge_tax_amount_micros: int = proto.Field(
+            proto.INT64,
+            number=18,
+            optional=True,
+        )
+        export_charge_total_amount_micros: int = proto.Field(
+            proto.INT64,
+            number=19,
+            optional=True,
         )
         subtotal_amount_micros: int = proto.Field(
-            proto.INT64, number=14, optional=True,
+            proto.INT64,
+            number=14,
+            optional=True,
         )
         tax_amount_micros: int = proto.Field(
-            proto.INT64, number=15, optional=True,
+            proto.INT64,
+            number=15,
+            optional=True,
         )
         total_amount_micros: int = proto.Field(
-            proto.INT64, number=16, optional=True,
+            proto.INT64,
+            number=16,
+            optional=True,
         )
 
     class AccountBudgetSummary(proto.Message):
@@ -411,48 +486,76 @@ class Invoice(proto.Message):
         """
 
         customer: str = proto.Field(
-            proto.STRING, number=10, optional=True,
+            proto.STRING,
+            number=10,
+            optional=True,
         )
         customer_descriptive_name: str = proto.Field(
-            proto.STRING, number=11, optional=True,
+            proto.STRING,
+            number=11,
+            optional=True,
         )
         account_budget: str = proto.Field(
-            proto.STRING, number=12, optional=True,
+            proto.STRING,
+            number=12,
+            optional=True,
         )
         account_budget_name: str = proto.Field(
-            proto.STRING, number=13, optional=True,
+            proto.STRING,
+            number=13,
+            optional=True,
         )
         purchase_order_number: str = proto.Field(
-            proto.STRING, number=14, optional=True,
+            proto.STRING,
+            number=14,
+            optional=True,
         )
         subtotal_amount_micros: int = proto.Field(
-            proto.INT64, number=15, optional=True,
+            proto.INT64,
+            number=15,
+            optional=True,
         )
         tax_amount_micros: int = proto.Field(
-            proto.INT64, number=16, optional=True,
+            proto.INT64,
+            number=16,
+            optional=True,
         )
         total_amount_micros: int = proto.Field(
-            proto.INT64, number=17, optional=True,
+            proto.INT64,
+            number=17,
+            optional=True,
         )
         billable_activity_date_range: dates.DateRange = proto.Field(
-            proto.MESSAGE, number=9, message=dates.DateRange,
+            proto.MESSAGE,
+            number=9,
+            message=dates.DateRange,
         )
         served_amount_micros: int = proto.Field(
-            proto.INT64, number=18, optional=True,
+            proto.INT64,
+            number=18,
+            optional=True,
         )
         billed_amount_micros: int = proto.Field(
-            proto.INT64, number=19, optional=True,
+            proto.INT64,
+            number=19,
+            optional=True,
         )
         overdelivery_amount_micros: int = proto.Field(
-            proto.INT64, number=20, optional=True,
+            proto.INT64,
+            number=20,
+            optional=True,
         )
         invalid_activity_amount_micros: int = proto.Field(
-            proto.INT64, number=21, optional=True,
+            proto.INT64,
+            number=21,
+            optional=True,
         )
         invalid_activity_summaries: MutableSequence[
             "Invoice.InvalidActivitySummary"
         ] = proto.RepeatedField(
-            proto.MESSAGE, number=22, message="Invoice.InvalidActivitySummary",
+            proto.MESSAGE,
+            number=22,
+            message="Invoice.InvalidActivitySummary",
         )
 
     class InvalidActivitySummary(proto.Message):
@@ -495,101 +598,168 @@ class Invoice(proto.Message):
                 This field is a member of `oneof`_ ``_amount_micros``.
         """
 
-        original_month_of_service: month_of_year.MonthOfYearEnum.MonthOfYear = proto.Field(
-            proto.ENUM,
-            number=1,
-            optional=True,
-            enum=month_of_year.MonthOfYearEnum.MonthOfYear,
+        original_month_of_service: month_of_year.MonthOfYearEnum.MonthOfYear = (
+            proto.Field(
+                proto.ENUM,
+                number=1,
+                optional=True,
+                enum=month_of_year.MonthOfYearEnum.MonthOfYear,
+            )
         )
         original_year_of_service: str = proto.Field(
-            proto.STRING, number=2, optional=True,
+            proto.STRING,
+            number=2,
+            optional=True,
         )
         original_invoice_id: str = proto.Field(
-            proto.STRING, number=3, optional=True,
+            proto.STRING,
+            number=3,
+            optional=True,
         )
         original_account_budget_name: str = proto.Field(
-            proto.STRING, number=4, optional=True,
+            proto.STRING,
+            number=4,
+            optional=True,
         )
         original_purchase_order_number: str = proto.Field(
-            proto.STRING, number=5, optional=True,
+            proto.STRING,
+            number=5,
+            optional=True,
         )
         amount_micros: int = proto.Field(
-            proto.INT64, number=6, optional=True,
+            proto.INT64,
+            number=6,
+            optional=True,
         )
 
     resource_name: str = proto.Field(
-        proto.STRING, number=1,
+        proto.STRING,
+        number=1,
     )
     id: str = proto.Field(
-        proto.STRING, number=25, optional=True,
+        proto.STRING,
+        number=25,
+        optional=True,
     )
     type_: invoice_type.InvoiceTypeEnum.InvoiceType = proto.Field(
-        proto.ENUM, number=3, enum=invoice_type.InvoiceTypeEnum.InvoiceType,
+        proto.ENUM,
+        number=3,
+        enum=invoice_type.InvoiceTypeEnum.InvoiceType,
     )
     billing_setup: str = proto.Field(
-        proto.STRING, number=26, optional=True,
+        proto.STRING,
+        number=26,
+        optional=True,
     )
     payments_account_id: str = proto.Field(
-        proto.STRING, number=27, optional=True,
+        proto.STRING,
+        number=27,
+        optional=True,
     )
     payments_profile_id: str = proto.Field(
-        proto.STRING, number=28, optional=True,
+        proto.STRING,
+        number=28,
+        optional=True,
     )
     issue_date: str = proto.Field(
-        proto.STRING, number=29, optional=True,
+        proto.STRING,
+        number=29,
+        optional=True,
     )
     due_date: str = proto.Field(
-        proto.STRING, number=30, optional=True,
+        proto.STRING,
+        number=30,
+        optional=True,
     )
     service_date_range: dates.DateRange = proto.Field(
-        proto.MESSAGE, number=9, message=dates.DateRange,
+        proto.MESSAGE,
+        number=9,
+        message=dates.DateRange,
     )
     currency_code: str = proto.Field(
-        proto.STRING, number=31, optional=True,
+        proto.STRING,
+        number=31,
+        optional=True,
     )
     adjustments_subtotal_amount_micros: int = proto.Field(
-        proto.INT64, number=19,
+        proto.INT64,
+        number=19,
     )
     adjustments_tax_amount_micros: int = proto.Field(
-        proto.INT64, number=20,
+        proto.INT64,
+        number=20,
     )
     adjustments_total_amount_micros: int = proto.Field(
-        proto.INT64, number=21,
+        proto.INT64,
+        number=21,
     )
     regulatory_costs_subtotal_amount_micros: int = proto.Field(
-        proto.INT64, number=22,
+        proto.INT64,
+        number=22,
     )
     regulatory_costs_tax_amount_micros: int = proto.Field(
-        proto.INT64, number=23,
+        proto.INT64,
+        number=23,
     )
     regulatory_costs_total_amount_micros: int = proto.Field(
-        proto.INT64, number=24,
+        proto.INT64,
+        number=24,
+    )
+    export_charge_subtotal_amount_micros: int = proto.Field(
+        proto.INT64,
+        number=40,
+        optional=True,
+    )
+    export_charge_tax_amount_micros: int = proto.Field(
+        proto.INT64,
+        number=41,
+        optional=True,
+    )
+    export_charge_total_amount_micros: int = proto.Field(
+        proto.INT64,
+        number=42,
+        optional=True,
     )
     subtotal_amount_micros: int = proto.Field(
-        proto.INT64, number=33, optional=True,
+        proto.INT64,
+        number=33,
+        optional=True,
     )
     tax_amount_micros: int = proto.Field(
-        proto.INT64, number=34, optional=True,
+        proto.INT64,
+        number=34,
+        optional=True,
     )
     total_amount_micros: int = proto.Field(
-        proto.INT64, number=35, optional=True,
+        proto.INT64,
+        number=35,
+        optional=True,
     )
     corrected_invoice: str = proto.Field(
-        proto.STRING, number=36, optional=True,
+        proto.STRING,
+        number=36,
+        optional=True,
     )
     replaced_invoices: MutableSequence[str] = proto.RepeatedField(
-        proto.STRING, number=37,
+        proto.STRING,
+        number=37,
     )
     pdf_url: str = proto.Field(
-        proto.STRING, number=38, optional=True,
+        proto.STRING,
+        number=38,
+        optional=True,
     )
     account_budget_summaries: MutableSequence[
         AccountBudgetSummary
     ] = proto.RepeatedField(
-        proto.MESSAGE, number=18, message=AccountBudgetSummary,
+        proto.MESSAGE,
+        number=18,
+        message=AccountBudgetSummary,
     )
     account_summaries: MutableSequence[AccountSummary] = proto.RepeatedField(
-        proto.MESSAGE, number=39, message=AccountSummary,
+        proto.MESSAGE,
+        number=39,
+        message=AccountSummary,
     )
 
 

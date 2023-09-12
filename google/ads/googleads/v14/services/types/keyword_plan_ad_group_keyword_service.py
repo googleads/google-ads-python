@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-# Copyright 2022 Google LLC
+# Copyright 2023 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -62,18 +62,23 @@ class MutateKeywordPlanAdGroupKeywordsRequest(proto.Message):
     """
 
     customer_id: str = proto.Field(
-        proto.STRING, number=1,
+        proto.STRING,
+        number=1,
     )
     operations: MutableSequence[
         "KeywordPlanAdGroupKeywordOperation"
     ] = proto.RepeatedField(
-        proto.MESSAGE, number=2, message="KeywordPlanAdGroupKeywordOperation",
+        proto.MESSAGE,
+        number=2,
+        message="KeywordPlanAdGroupKeywordOperation",
     )
     partial_failure: bool = proto.Field(
-        proto.BOOL, number=3,
+        proto.BOOL,
+        number=3,
     )
     validate_only: bool = proto.Field(
-        proto.BOOL, number=4,
+        proto.BOOL,
+        number=4,
     )
 
 
@@ -94,14 +99,14 @@ class KeywordPlanAdGroupKeywordOperation(proto.Message):
             fields are modified in an update.
         create (google.ads.googleads.v14.resources.types.KeywordPlanAdGroupKeyword):
             Create operation: No resource name is
-            expected for the new Keyword Plan ad group
-            keyword.
+            expected for the new Keyword Plan
+            ad group keyword.
 
             This field is a member of `oneof`_ ``operation``.
         update (google.ads.googleads.v14.resources.types.KeywordPlanAdGroupKeyword):
             Update operation: The Keyword Plan ad group
-            keyword is expected to have a valid resource
-            name.
+            keyword is expected to have a
+            valid resource name.
 
             This field is a member of `oneof`_ ``operation``.
         remove (str):
@@ -114,22 +119,30 @@ class KeywordPlanAdGroupKeywordOperation(proto.Message):
     """
 
     update_mask: field_mask_pb2.FieldMask = proto.Field(
-        proto.MESSAGE, number=4, message=field_mask_pb2.FieldMask,
-    )
-    create: keyword_plan_ad_group_keyword.KeywordPlanAdGroupKeyword = proto.Field(
         proto.MESSAGE,
-        number=1,
-        oneof="operation",
-        message=keyword_plan_ad_group_keyword.KeywordPlanAdGroupKeyword,
+        number=4,
+        message=field_mask_pb2.FieldMask,
     )
-    update: keyword_plan_ad_group_keyword.KeywordPlanAdGroupKeyword = proto.Field(
-        proto.MESSAGE,
-        number=2,
-        oneof="operation",
-        message=keyword_plan_ad_group_keyword.KeywordPlanAdGroupKeyword,
+    create: keyword_plan_ad_group_keyword.KeywordPlanAdGroupKeyword = (
+        proto.Field(
+            proto.MESSAGE,
+            number=1,
+            oneof="operation",
+            message=keyword_plan_ad_group_keyword.KeywordPlanAdGroupKeyword,
+        )
+    )
+    update: keyword_plan_ad_group_keyword.KeywordPlanAdGroupKeyword = (
+        proto.Field(
+            proto.MESSAGE,
+            number=2,
+            oneof="operation",
+            message=keyword_plan_ad_group_keyword.KeywordPlanAdGroupKeyword,
+        )
     )
     remove: str = proto.Field(
-        proto.STRING, number=3, oneof="operation",
+        proto.STRING,
+        number=3,
+        oneof="operation",
     )
 
 
@@ -147,7 +160,9 @@ class MutateKeywordPlanAdGroupKeywordsResponse(proto.Message):
     """
 
     partial_failure_error: status_pb2.Status = proto.Field(
-        proto.MESSAGE, number=3, message=status_pb2.Status,
+        proto.MESSAGE,
+        number=3,
+        message=status_pb2.Status,
     )
     results: MutableSequence[
         "MutateKeywordPlanAdGroupKeywordResult"
@@ -166,7 +181,8 @@ class MutateKeywordPlanAdGroupKeywordResult(proto.Message):
     """
 
     resource_name: str = proto.Field(
-        proto.STRING, number=1,
+        proto.STRING,
+        number=1,
     )
 
 

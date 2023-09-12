@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-# Copyright 2022 Google LLC
+# Copyright 2023 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -15,13 +15,19 @@
 #
 from __future__ import annotations
 
+from typing import MutableSequence
 
 import proto  # type: ignore
 
+from google.ads.googleads.v14.common.types import asset_policy
 from google.ads.googleads.v14.common.types import (
     policy_summary as gagc_policy_summary,
 )
 from google.ads.googleads.v14.enums.types import asset_field_type
+from google.ads.googleads.v14.enums.types import asset_link_primary_status
+from google.ads.googleads.v14.enums.types import (
+    asset_link_primary_status_reason,
+)
 from google.ads.googleads.v14.enums.types import asset_link_status
 from google.ads.googleads.v14.enums.types import asset_performance_label
 
@@ -29,7 +35,9 @@ from google.ads.googleads.v14.enums.types import asset_performance_label
 __protobuf__ = proto.module(
     package="google.ads.googleads.v14.resources",
     marshal="google.ads.googleads.v14",
-    manifest={"AssetGroupAsset",},
+    manifest={
+        "AssetGroupAsset",
+    },
 )
 
 
@@ -56,6 +64,23 @@ class AssetGroupAsset(proto.Message):
         status (google.ads.googleads.v14.enums.types.AssetLinkStatusEnum.AssetLinkStatus):
             The status of the link between an asset and
             asset group.
+        primary_status (google.ads.googleads.v14.enums.types.AssetLinkPrimaryStatusEnum.AssetLinkPrimaryStatus):
+            Output only. Provides the PrimaryStatus of
+            this asset link. Primary status is meant
+            essentially to differentiate between the plain
+            "status" field, which has advertiser set values
+            of enabled, paused, or removed.  The primary
+            status takes into account other signals (for
+            assets its mainly policy and quality approvals)
+            to come up with a more comprehensive status to
+            indicate its serving state.
+        primary_status_reasons (MutableSequence[google.ads.googleads.v14.enums.types.AssetLinkPrimaryStatusReasonEnum.AssetLinkPrimaryStatusReason]):
+            Output only. Provides a list of reasons for
+            why an asset is not serving or not serving at
+            full capacity.
+        primary_status_details (MutableSequence[google.ads.googleads.v14.common.types.AssetLinkPrimaryStatusDetails]):
+            Output only. Provides the details of the
+            primary status and its associated reasons.
         performance_label (google.ads.googleads.v14.enums.types.AssetPerformanceLabelEnum.AssetPerformanceLabel):
             Output only. The performance of this asset
             group asset.
@@ -65,23 +90,47 @@ class AssetGroupAsset(proto.Message):
     """
 
     resource_name: str = proto.Field(
-        proto.STRING, number=1,
+        proto.STRING,
+        number=1,
     )
     asset_group: str = proto.Field(
-        proto.STRING, number=2,
+        proto.STRING,
+        number=2,
     )
     asset: str = proto.Field(
-        proto.STRING, number=3,
+        proto.STRING,
+        number=3,
     )
-    field_type: asset_field_type.AssetFieldTypeEnum.AssetFieldType = proto.Field(
-        proto.ENUM,
-        number=4,
-        enum=asset_field_type.AssetFieldTypeEnum.AssetFieldType,
+    field_type: asset_field_type.AssetFieldTypeEnum.AssetFieldType = (
+        proto.Field(
+            proto.ENUM,
+            number=4,
+            enum=asset_field_type.AssetFieldTypeEnum.AssetFieldType,
+        )
     )
     status: asset_link_status.AssetLinkStatusEnum.AssetLinkStatus = proto.Field(
         proto.ENUM,
         number=5,
         enum=asset_link_status.AssetLinkStatusEnum.AssetLinkStatus,
+    )
+    primary_status: asset_link_primary_status.AssetLinkPrimaryStatusEnum.AssetLinkPrimaryStatus = proto.Field(
+        proto.ENUM,
+        number=8,
+        enum=asset_link_primary_status.AssetLinkPrimaryStatusEnum.AssetLinkPrimaryStatus,
+    )
+    primary_status_reasons: MutableSequence[
+        asset_link_primary_status_reason.AssetLinkPrimaryStatusReasonEnum.AssetLinkPrimaryStatusReason
+    ] = proto.RepeatedField(
+        proto.ENUM,
+        number=9,
+        enum=asset_link_primary_status_reason.AssetLinkPrimaryStatusReasonEnum.AssetLinkPrimaryStatusReason,
+    )
+    primary_status_details: MutableSequence[
+        asset_policy.AssetLinkPrimaryStatusDetails
+    ] = proto.RepeatedField(
+        proto.MESSAGE,
+        number=10,
+        message=asset_policy.AssetLinkPrimaryStatusDetails,
     )
     performance_label: asset_performance_label.AssetPerformanceLabelEnum.AssetPerformanceLabel = proto.Field(
         proto.ENUM,
@@ -89,7 +138,9 @@ class AssetGroupAsset(proto.Message):
         enum=asset_performance_label.AssetPerformanceLabelEnum.AssetPerformanceLabel,
     )
     policy_summary: gagc_policy_summary.PolicySummary = proto.Field(
-        proto.MESSAGE, number=7, message=gagc_policy_summary.PolicySummary,
+        proto.MESSAGE,
+        number=7,
+        message=gagc_policy_summary.PolicySummary,
     )
 
 

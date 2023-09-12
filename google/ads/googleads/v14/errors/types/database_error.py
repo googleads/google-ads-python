@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-# Copyright 2022 Google LLC
+# Copyright 2023 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -22,13 +22,14 @@ import proto  # type: ignore
 __protobuf__ = proto.module(
     package="google.ads.googleads.v14.errors",
     marshal="google.ads.googleads.v14",
-    manifest={"DatabaseErrorEnum",},
+    manifest={
+        "DatabaseErrorEnum",
+    },
 )
 
 
 class DatabaseErrorEnum(proto.Message):
-    r"""Container for enum describing possible database errors.
-    """
+    r"""Container for enum describing possible database errors."""
 
     class DatabaseError(proto.Enum):
         r"""Enum describing possible database errors."""

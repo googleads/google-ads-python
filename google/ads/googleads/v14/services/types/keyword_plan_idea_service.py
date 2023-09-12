@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-# Copyright 2022 Google LLC
+# Copyright 2023 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -140,22 +140,29 @@ class GenerateKeywordIdeasRequest(proto.Message):
     """
 
     customer_id: str = proto.Field(
-        proto.STRING, number=1,
+        proto.STRING,
+        number=1,
     )
     language: str = proto.Field(
-        proto.STRING, number=14, optional=True,
+        proto.STRING,
+        number=14,
+        optional=True,
     )
     geo_target_constants: MutableSequence[str] = proto.RepeatedField(
-        proto.STRING, number=15,
+        proto.STRING,
+        number=15,
     )
     include_adult_keywords: bool = proto.Field(
-        proto.BOOL, number=10,
+        proto.BOOL,
+        number=10,
     )
     page_token: str = proto.Field(
-        proto.STRING, number=12,
+        proto.STRING,
+        number=12,
     )
     page_size: int = proto.Field(
-        proto.INT32, number=13,
+        proto.INT32,
+        number=13,
     )
     keyword_plan_network: gage_keyword_plan_network.KeywordPlanNetworkEnum.KeywordPlanNetwork = proto.Field(
         proto.ENUM,
@@ -169,27 +176,43 @@ class GenerateKeywordIdeasRequest(proto.Message):
         number=17,
         enum=keyword_plan_keyword_annotation.KeywordPlanKeywordAnnotationEnum.KeywordPlanKeywordAnnotation,
     )
-    aggregate_metrics: keyword_plan_common.KeywordPlanAggregateMetrics = proto.Field(
-        proto.MESSAGE,
-        number=16,
-        message=keyword_plan_common.KeywordPlanAggregateMetrics,
+    aggregate_metrics: keyword_plan_common.KeywordPlanAggregateMetrics = (
+        proto.Field(
+            proto.MESSAGE,
+            number=16,
+            message=keyword_plan_common.KeywordPlanAggregateMetrics,
+        )
     )
-    historical_metrics_options: keyword_plan_common.HistoricalMetricsOptions = proto.Field(
-        proto.MESSAGE,
-        number=18,
-        message=keyword_plan_common.HistoricalMetricsOptions,
+    historical_metrics_options: keyword_plan_common.HistoricalMetricsOptions = (
+        proto.Field(
+            proto.MESSAGE,
+            number=18,
+            message=keyword_plan_common.HistoricalMetricsOptions,
+        )
     )
     keyword_and_url_seed: "KeywordAndUrlSeed" = proto.Field(
-        proto.MESSAGE, number=2, oneof="seed", message="KeywordAndUrlSeed",
+        proto.MESSAGE,
+        number=2,
+        oneof="seed",
+        message="KeywordAndUrlSeed",
     )
     keyword_seed: "KeywordSeed" = proto.Field(
-        proto.MESSAGE, number=3, oneof="seed", message="KeywordSeed",
+        proto.MESSAGE,
+        number=3,
+        oneof="seed",
+        message="KeywordSeed",
     )
     url_seed: "UrlSeed" = proto.Field(
-        proto.MESSAGE, number=5, oneof="seed", message="UrlSeed",
+        proto.MESSAGE,
+        number=5,
+        oneof="seed",
+        message="UrlSeed",
     )
     site_seed: "SiteSeed" = proto.Field(
-        proto.MESSAGE, number=11, oneof="seed", message="SiteSeed",
+        proto.MESSAGE,
+        number=11,
+        oneof="seed",
+        message="SiteSeed",
     )
 
 
@@ -208,10 +231,13 @@ class KeywordAndUrlSeed(proto.Message):
     """
 
     url: str = proto.Field(
-        proto.STRING, number=3, optional=True,
+        proto.STRING,
+        number=3,
+        optional=True,
     )
     keywords: MutableSequence[str] = proto.RepeatedField(
-        proto.STRING, number=4,
+        proto.STRING,
+        number=4,
     )
 
 
@@ -223,7 +249,8 @@ class KeywordSeed(proto.Message):
     """
 
     keywords: MutableSequence[str] = proto.RepeatedField(
-        proto.STRING, number=2,
+        proto.STRING,
+        number=2,
     )
 
 
@@ -241,7 +268,9 @@ class SiteSeed(proto.Message):
     """
 
     site: str = proto.Field(
-        proto.STRING, number=2, optional=True,
+        proto.STRING,
+        number=2,
+        optional=True,
     )
 
 
@@ -258,7 +287,9 @@ class UrlSeed(proto.Message):
     """
 
     url: str = proto.Field(
-        proto.STRING, number=2, optional=True,
+        proto.STRING,
+        number=2,
+        optional=True,
     )
 
 
@@ -285,7 +316,9 @@ class GenerateKeywordIdeaResponse(proto.Message):
         return self
 
     results: MutableSequence["GenerateKeywordIdeaResult"] = proto.RepeatedField(
-        proto.MESSAGE, number=1, message="GenerateKeywordIdeaResult",
+        proto.MESSAGE,
+        number=1,
+        message="GenerateKeywordIdeaResult",
     )
     aggregate_metric_results: keyword_plan_common.KeywordPlanAggregateMetricResults = proto.Field(
         proto.MESSAGE,
@@ -293,10 +326,12 @@ class GenerateKeywordIdeaResponse(proto.Message):
         message=keyword_plan_common.KeywordPlanAggregateMetricResults,
     )
     next_page_token: str = proto.Field(
-        proto.STRING, number=2,
+        proto.STRING,
+        number=2,
     )
     total_size: int = proto.Field(
-        proto.INT64, number=3,
+        proto.INT64,
+        number=3,
     )
 
 
@@ -329,18 +364,25 @@ class GenerateKeywordIdeaResult(proto.Message):
     """
 
     text: str = proto.Field(
-        proto.STRING, number=5, optional=True,
+        proto.STRING,
+        number=5,
+        optional=True,
     )
-    keyword_idea_metrics: keyword_plan_common.KeywordPlanHistoricalMetrics = proto.Field(
-        proto.MESSAGE,
-        number=3,
-        message=keyword_plan_common.KeywordPlanHistoricalMetrics,
+    keyword_idea_metrics: keyword_plan_common.KeywordPlanHistoricalMetrics = (
+        proto.Field(
+            proto.MESSAGE,
+            number=3,
+            message=keyword_plan_common.KeywordPlanHistoricalMetrics,
+        )
     )
     keyword_annotations: keyword_plan_common.KeywordAnnotations = proto.Field(
-        proto.MESSAGE, number=6, message=keyword_plan_common.KeywordAnnotations,
+        proto.MESSAGE,
+        number=6,
+        message=keyword_plan_common.KeywordAnnotations,
     )
     close_variants: MutableSequence[str] = proto.RepeatedField(
-        proto.STRING, number=7,
+        proto.STRING,
+        number=7,
     )
 
 
@@ -387,34 +429,44 @@ class GenerateKeywordHistoricalMetricsRequest(proto.Message):
     """
 
     customer_id: str = proto.Field(
-        proto.STRING, number=1,
+        proto.STRING,
+        number=1,
     )
     keywords: MutableSequence[str] = proto.RepeatedField(
-        proto.STRING, number=2,
+        proto.STRING,
+        number=2,
     )
     language: str = proto.Field(
-        proto.STRING, number=4, optional=True,
+        proto.STRING,
+        number=4,
+        optional=True,
     )
     include_adult_keywords: bool = proto.Field(
-        proto.BOOL, number=5,
+        proto.BOOL,
+        number=5,
     )
     geo_target_constants: MutableSequence[str] = proto.RepeatedField(
-        proto.STRING, number=6,
+        proto.STRING,
+        number=6,
     )
     keyword_plan_network: gage_keyword_plan_network.KeywordPlanNetworkEnum.KeywordPlanNetwork = proto.Field(
         proto.ENUM,
         number=7,
         enum=gage_keyword_plan_network.KeywordPlanNetworkEnum.KeywordPlanNetwork,
     )
-    aggregate_metrics: keyword_plan_common.KeywordPlanAggregateMetrics = proto.Field(
-        proto.MESSAGE,
-        number=8,
-        message=keyword_plan_common.KeywordPlanAggregateMetrics,
+    aggregate_metrics: keyword_plan_common.KeywordPlanAggregateMetrics = (
+        proto.Field(
+            proto.MESSAGE,
+            number=8,
+            message=keyword_plan_common.KeywordPlanAggregateMetrics,
+        )
     )
-    historical_metrics_options: keyword_plan_common.HistoricalMetricsOptions = proto.Field(
-        proto.MESSAGE,
-        number=3,
-        message=keyword_plan_common.HistoricalMetricsOptions,
+    historical_metrics_options: keyword_plan_common.HistoricalMetricsOptions = (
+        proto.Field(
+            proto.MESSAGE,
+            number=3,
+            message=keyword_plan_common.HistoricalMetricsOptions,
+        )
     )
 
 
@@ -469,15 +521,20 @@ class GenerateKeywordHistoricalMetricsResult(proto.Message):
     """
 
     text: str = proto.Field(
-        proto.STRING, number=1, optional=True,
+        proto.STRING,
+        number=1,
+        optional=True,
     )
     close_variants: MutableSequence[str] = proto.RepeatedField(
-        proto.STRING, number=3,
+        proto.STRING,
+        number=3,
     )
-    keyword_metrics: keyword_plan_common.KeywordPlanHistoricalMetrics = proto.Field(
-        proto.MESSAGE,
-        number=2,
-        message=keyword_plan_common.KeywordPlanHistoricalMetrics,
+    keyword_metrics: keyword_plan_common.KeywordPlanHistoricalMetrics = (
+        proto.Field(
+            proto.MESSAGE,
+            number=2,
+            message=keyword_plan_common.KeywordPlanHistoricalMetrics,
+        )
     )
 
 
@@ -498,13 +555,16 @@ class GenerateAdGroupThemesRequest(proto.Message):
     """
 
     customer_id: str = proto.Field(
-        proto.STRING, number=1,
+        proto.STRING,
+        number=1,
     )
     keywords: MutableSequence[str] = proto.RepeatedField(
-        proto.STRING, number=2,
+        proto.STRING,
+        number=2,
     )
     ad_groups: MutableSequence[str] = proto.RepeatedField(
-        proto.STRING, number=3,
+        proto.STRING,
+        number=3,
     )
 
 
@@ -523,12 +583,16 @@ class GenerateAdGroupThemesResponse(proto.Message):
     ad_group_keyword_suggestions: MutableSequence[
         "AdGroupKeywordSuggestion"
     ] = proto.RepeatedField(
-        proto.MESSAGE, number=1, message="AdGroupKeywordSuggestion",
+        proto.MESSAGE,
+        number=1,
+        message="AdGroupKeywordSuggestion",
     )
     unusable_ad_groups: MutableSequence[
         "UnusableAdGroup"
     ] = proto.RepeatedField(
-        proto.MESSAGE, number=2, message="UnusableAdGroup",
+        proto.MESSAGE,
+        number=2,
+        message="UnusableAdGroup",
     )
 
 
@@ -553,10 +617,12 @@ class AdGroupKeywordSuggestion(proto.Message):
     """
 
     keyword_text: str = proto.Field(
-        proto.STRING, number=1,
+        proto.STRING,
+        number=1,
     )
     suggested_keyword_text: str = proto.Field(
-        proto.STRING, number=2,
+        proto.STRING,
+        number=2,
     )
     suggested_match_type: keyword_match_type.KeywordMatchTypeEnum.KeywordMatchType = proto.Field(
         proto.ENUM,
@@ -564,10 +630,12 @@ class AdGroupKeywordSuggestion(proto.Message):
         enum=keyword_match_type.KeywordMatchTypeEnum.KeywordMatchType,
     )
     suggested_ad_group: str = proto.Field(
-        proto.STRING, number=4,
+        proto.STRING,
+        number=4,
     )
     suggested_campaign: str = proto.Field(
-        proto.STRING, number=5,
+        proto.STRING,
+        number=5,
     )
 
 
@@ -590,10 +658,12 @@ class UnusableAdGroup(proto.Message):
     """
 
     ad_group: str = proto.Field(
-        proto.STRING, number=1,
+        proto.STRING,
+        number=1,
     )
     campaign: str = proto.Field(
-        proto.STRING, number=2,
+        proto.STRING,
+        number=2,
     )
 
 
@@ -628,16 +698,23 @@ class GenerateKeywordForecastMetricsRequest(proto.Message):
     """
 
     customer_id: str = proto.Field(
-        proto.STRING, number=1,
+        proto.STRING,
+        number=1,
     )
     currency_code: str = proto.Field(
-        proto.STRING, number=2, optional=True,
+        proto.STRING,
+        number=2,
+        optional=True,
     )
     forecast_period: dates.DateRange = proto.Field(
-        proto.MESSAGE, number=3, message=dates.DateRange,
+        proto.MESSAGE,
+        number=3,
+        message=dates.DateRange,
     )
     campaign: "CampaignToForecast" = proto.Field(
-        proto.MESSAGE, number=4, message="CampaignToForecast",
+        proto.MESSAGE,
+        number=4,
+        message="CampaignToForecast",
     )
 
 
@@ -711,11 +788,13 @@ class CampaignToForecast(proto.Message):
             oneof="bidding_strategy",
             message="ManualCpcBiddingStrategy",
         )
-        maximize_clicks_bidding_strategy: "MaximizeClicksBiddingStrategy" = proto.Field(
-            proto.MESSAGE,
-            number=2,
-            oneof="bidding_strategy",
-            message="MaximizeClicksBiddingStrategy",
+        maximize_clicks_bidding_strategy: "MaximizeClicksBiddingStrategy" = (
+            proto.Field(
+                proto.MESSAGE,
+                number=2,
+                oneof="bidding_strategy",
+                message="MaximizeClicksBiddingStrategy",
+            )
         )
         maximize_conversions_bidding_strategy: "MaximizeConversionsBiddingStrategy" = proto.Field(
             proto.MESSAGE,
@@ -725,12 +804,15 @@ class CampaignToForecast(proto.Message):
         )
 
     language_constants: MutableSequence[str] = proto.RepeatedField(
-        proto.STRING, number=1,
+        proto.STRING,
+        number=1,
     )
     geo_modifiers: MutableSequence[
         "CriterionBidModifier"
     ] = proto.RepeatedField(
-        proto.MESSAGE, number=2, message="CriterionBidModifier",
+        proto.MESSAGE,
+        number=2,
+        message="CriterionBidModifier",
     )
     keyword_plan_network: gage_keyword_plan_network.KeywordPlanNetworkEnum.KeywordPlanNetwork = proto.Field(
         proto.ENUM,
@@ -740,16 +822,24 @@ class CampaignToForecast(proto.Message):
     negative_keywords: MutableSequence[
         criteria.KeywordInfo
     ] = proto.RepeatedField(
-        proto.MESSAGE, number=4, message=criteria.KeywordInfo,
+        proto.MESSAGE,
+        number=4,
+        message=criteria.KeywordInfo,
     )
     bidding_strategy: CampaignBiddingStrategy = proto.Field(
-        proto.MESSAGE, number=5, message=CampaignBiddingStrategy,
+        proto.MESSAGE,
+        number=5,
+        message=CampaignBiddingStrategy,
     )
     conversion_rate: float = proto.Field(
-        proto.DOUBLE, number=6, optional=True,
+        proto.DOUBLE,
+        number=6,
+        optional=True,
     )
     ad_groups: MutableSequence["ForecastAdGroup"] = proto.RepeatedField(
-        proto.MESSAGE, number=7, message="ForecastAdGroup",
+        proto.MESSAGE,
+        number=7,
+        message="ForecastAdGroup",
     )
 
 
@@ -776,15 +866,21 @@ class ForecastAdGroup(proto.Message):
     """
 
     max_cpc_bid_micros: int = proto.Field(
-        proto.INT64, number=1, optional=True,
+        proto.INT64,
+        number=1,
+        optional=True,
     )
     biddable_keywords: MutableSequence["BiddableKeyword"] = proto.RepeatedField(
-        proto.MESSAGE, number=2, message="BiddableKeyword",
+        proto.MESSAGE,
+        number=2,
+        message="BiddableKeyword",
     )
     negative_keywords: MutableSequence[
         criteria.KeywordInfo
     ] = proto.RepeatedField(
-        proto.MESSAGE, number=3, message=criteria.KeywordInfo,
+        proto.MESSAGE,
+        number=3,
+        message=criteria.KeywordInfo,
     )
 
 
@@ -808,10 +904,14 @@ class BiddableKeyword(proto.Message):
     """
 
     keyword: criteria.KeywordInfo = proto.Field(
-        proto.MESSAGE, number=1, message=criteria.KeywordInfo,
+        proto.MESSAGE,
+        number=1,
+        message=criteria.KeywordInfo,
     )
     max_cpc_bid_micros: int = proto.Field(
-        proto.INT64, number=2, optional=True,
+        proto.INT64,
+        number=2,
+        optional=True,
     )
 
 
@@ -832,10 +932,13 @@ class CriterionBidModifier(proto.Message):
     """
 
     geo_target_constant: str = proto.Field(
-        proto.STRING, number=1,
+        proto.STRING,
+        number=1,
     )
     bid_modifier: float = proto.Field(
-        proto.DOUBLE, number=2, optional=True,
+        proto.DOUBLE,
+        number=2,
+        optional=True,
     )
 
 
@@ -859,10 +962,13 @@ class ManualCpcBiddingStrategy(proto.Message):
     """
 
     daily_budget_micros: int = proto.Field(
-        proto.INT64, number=1, optional=True,
+        proto.INT64,
+        number=1,
+        optional=True,
     )
     max_cpc_bid_micros: int = proto.Field(
-        proto.INT64, number=2,
+        proto.INT64,
+        number=2,
     )
 
 
@@ -884,10 +990,13 @@ class MaximizeClicksBiddingStrategy(proto.Message):
     """
 
     daily_target_spend_micros: int = proto.Field(
-        proto.INT64, number=1,
+        proto.INT64,
+        number=1,
     )
     max_cpc_bid_ceiling_micros: int = proto.Field(
-        proto.INT64, number=2, optional=True,
+        proto.INT64,
+        number=2,
+        optional=True,
     )
 
 
@@ -901,7 +1010,8 @@ class MaximizeConversionsBiddingStrategy(proto.Message):
     """
 
     daily_target_spend_micros: int = proto.Field(
-        proto.INT64, number=1,
+        proto.INT64,
+        number=1,
     )
 
 
@@ -969,28 +1079,44 @@ class KeywordForecastMetrics(proto.Message):
     """
 
     impressions: float = proto.Field(
-        proto.DOUBLE, number=1, optional=True,
+        proto.DOUBLE,
+        number=1,
+        optional=True,
     )
     click_through_rate: float = proto.Field(
-        proto.DOUBLE, number=2, optional=True,
+        proto.DOUBLE,
+        number=2,
+        optional=True,
     )
     average_cpc_micros: int = proto.Field(
-        proto.INT64, number=3, optional=True,
+        proto.INT64,
+        number=3,
+        optional=True,
     )
     clicks: float = proto.Field(
-        proto.DOUBLE, number=4, optional=True,
+        proto.DOUBLE,
+        number=4,
+        optional=True,
     )
     cost_micros: int = proto.Field(
-        proto.INT64, number=5, optional=True,
+        proto.INT64,
+        number=5,
+        optional=True,
     )
     conversions: float = proto.Field(
-        proto.DOUBLE, number=6, optional=True,
+        proto.DOUBLE,
+        number=6,
+        optional=True,
     )
     conversion_rate: float = proto.Field(
-        proto.DOUBLE, number=7, optional=True,
+        proto.DOUBLE,
+        number=7,
+        optional=True,
     )
     average_cpa_micros: int = proto.Field(
-        proto.INT64, number=8, optional=True,
+        proto.INT64,
+        number=8,
+        optional=True,
     )
 
 

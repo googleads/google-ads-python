@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-# Copyright 2022 Google LLC
+# Copyright 2023 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -72,6 +72,7 @@ __protobuf__ = proto.module(
         "OfflineConversionUploadSummary",
         "OfflineConversionUploadAlert",
         "OfflineConversionUploadError",
+        "CustomerAgreementSetting",
     },
 )
 
@@ -205,6 +206,9 @@ class Customer(proto.Message):
         offline_conversion_client_summaries (MutableSequence[google.ads.googleads.v14.resources.types.OfflineConversionClientSummary]):
             Output only. Offline conversion upload
             diagnostics.
+        customer_agreement_setting (google.ads.googleads.v14.resources.types.CustomerAgreementSetting):
+            Output only. Customer Agreement Setting for a
+            customer.
     """
 
     resource_name: str = proto.Field(
@@ -323,6 +327,11 @@ class Customer(proto.Message):
         proto.MESSAGE,
         number=43,
         message="OfflineConversionClientSummary",
+    )
+    customer_agreement_setting: "CustomerAgreementSetting" = proto.Field(
+        proto.MESSAGE,
+        number=44,
+        message="CustomerAgreementSetting",
     )
 
 
@@ -468,7 +477,6 @@ class OfflineConversionClientSummary(proto.Message):
     r"""Offline conversion upload diagnostic summarized by client.
     This proto contains general information, breakdown by date/job
     and alerts for offline conversion upload results.
-    Next tag: 10
 
     Attributes:
         client (google.ads.googleads.v14.enums.types.OfflineEventUploadClientEnum.OfflineEventUploadClient):
@@ -550,8 +558,6 @@ class OfflineConversionClientSummary(proto.Message):
 
 class OfflineConversionUploadSummary(proto.Message):
     r"""Historical upload summary, grouped by upload date or job.
-    Next tag: 5
-
     This message has `oneof`_ fields (mutually exclusive fields).
     For each oneof, at most one member field can be set at the same time.
     Setting any member of the oneof automatically clears all other
@@ -596,8 +602,6 @@ class OfflineConversionUploadSummary(proto.Message):
 
 class OfflineConversionUploadAlert(proto.Message):
     r"""Alert for offline conversion client summary.
-    Next tag: 3
-
     Attributes:
         error (google.ads.googleads.v14.resources.types.OfflineConversionUploadError):
             Output only. Error for offline conversion
@@ -619,8 +623,6 @@ class OfflineConversionUploadAlert(proto.Message):
 
 class OfflineConversionUploadError(proto.Message):
     r"""Possible errors for offline conversion client summary.
-    Next tag: 11
-
     This message has `oneof`_ fields (mutually exclusive fields).
     For each oneof, at most one member field can be set at the same time.
     Setting any member of the oneof automatically clears all other
@@ -733,6 +735,20 @@ class OfflineConversionUploadError(proto.Message):
         number=10,
         oneof="error_code",
         enum=gage_string_length_error.StringLengthErrorEnum.StringLengthError,
+    )
+
+
+class CustomerAgreementSetting(proto.Message):
+    r"""Customer Agreement Setting for a customer.
+    Attributes:
+        accepted_lead_form_terms (bool):
+            Output only. Whether the customer has
+            accepted lead form term of service.
+    """
+
+    accepted_lead_form_terms: bool = proto.Field(
+        proto.BOOL,
+        number=1,
     )
 
 

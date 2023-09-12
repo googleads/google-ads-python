@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-# Copyright 2022 Google LLC
+# Copyright 2023 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -57,12 +57,16 @@ class TargetingSetting(proto.Message):
     target_restrictions: MutableSequence[
         "TargetRestriction"
     ] = proto.RepeatedField(
-        proto.MESSAGE, number=1, message="TargetRestriction",
+        proto.MESSAGE,
+        number=1,
+        message="TargetRestriction",
     )
     target_restriction_operations: MutableSequence[
         "TargetRestrictionOperation"
     ] = proto.RepeatedField(
-        proto.MESSAGE, number=2, message="TargetRestrictionOperation",
+        proto.MESSAGE,
+        number=2,
+        message="TargetRestrictionOperation",
     )
 
 
@@ -93,7 +97,9 @@ class TargetRestriction(proto.Message):
         enum=gage_targeting_dimension.TargetingDimensionEnum.TargetingDimension,
     )
     bid_only: bool = proto.Field(
-        proto.BOOL, number=3, optional=True,
+        proto.BOOL,
+        number=3,
+        optional=True,
     )
 
 
@@ -117,10 +123,14 @@ class TargetRestrictionOperation(proto.Message):
         REMOVE = 3
 
     operator: Operator = proto.Field(
-        proto.ENUM, number=1, enum=Operator,
+        proto.ENUM,
+        number=1,
+        enum=Operator,
     )
     value: "TargetRestriction" = proto.Field(
-        proto.MESSAGE, number=2, message="TargetRestriction",
+        proto.MESSAGE,
+        number=2,
+        message="TargetRestriction",
     )
 
 

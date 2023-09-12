@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-# Copyright 2022 Google LLC
+# Copyright 2023 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -22,13 +22,14 @@ import proto  # type: ignore
 __protobuf__ = proto.module(
     package="google.ads.googleads.v14.enums",
     marshal="google.ads.googleads.v14",
-    manifest={"RecommendationTypeEnum",},
+    manifest={
+        "RecommendationTypeEnum",
+    },
 )
 
 
 class RecommendationTypeEnum(proto.Message):
-    r"""Container for enum describing types of recommendations.
-    """
+    r"""Container for enum describing types of recommendations."""
 
     class RecommendationType(proto.Enum):
         r"""Types of recommendations."""
@@ -77,6 +78,9 @@ class RecommendationTypeEnum(proto.Message):
         DYNAMIC_IMAGE_EXTENSION_OPT_IN = 43
         RAISE_TARGET_CPA = 44
         LOWER_TARGET_ROAS = 45
+        PERFORMANCE_MAX_OPT_IN = 46
+        IMPROVE_PERFORMANCE_MAX_AD_STRENGTH = 47
+        MIGRATE_DYNAMIC_SEARCH_ADS_CAMPAIGN_TO_PERFORMANCE_MAX = 48
 
 
 __all__ = tuple(sorted(__protobuf__.manifest))

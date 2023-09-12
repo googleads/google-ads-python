@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-# Copyright 2022 Google LLC
+# Copyright 2023 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -57,7 +57,10 @@ from google.ads.googleads.v14.enums.types import travel_placeholder_field
 __protobuf__ = proto.module(
     package="google.ads.googleads.v14.resources",
     marshal="google.ads.googleads.v14",
-    manifest={"FeedMapping", "AttributeFieldMapping",},
+    manifest={
+        "FeedMapping",
+        "AttributeFieldMapping",
+    },
 )
 
 
@@ -107,20 +110,27 @@ class FeedMapping(proto.Message):
     """
 
     resource_name: str = proto.Field(
-        proto.STRING, number=1,
+        proto.STRING,
+        number=1,
     )
     feed: str = proto.Field(
-        proto.STRING, number=7, optional=True,
+        proto.STRING,
+        number=7,
+        optional=True,
     )
     attribute_field_mappings: MutableSequence[
         "AttributeFieldMapping"
     ] = proto.RepeatedField(
-        proto.MESSAGE, number=5, message="AttributeFieldMapping",
+        proto.MESSAGE,
+        number=5,
+        message="AttributeFieldMapping",
     )
-    status: feed_mapping_status.FeedMappingStatusEnum.FeedMappingStatus = proto.Field(
-        proto.ENUM,
-        number=6,
-        enum=feed_mapping_status.FeedMappingStatusEnum.FeedMappingStatus,
+    status: feed_mapping_status.FeedMappingStatusEnum.FeedMappingStatus = (
+        proto.Field(
+            proto.ENUM,
+            number=6,
+            enum=feed_mapping_status.FeedMappingStatusEnum.FeedMappingStatus,
+        )
     )
     placeholder_type: gage_placeholder_type.PlaceholderTypeEnum.PlaceholderType = proto.Field(
         proto.ENUM,
@@ -255,10 +265,14 @@ class AttributeFieldMapping(proto.Message):
     """
 
     feed_attribute_id: int = proto.Field(
-        proto.INT64, number=24, optional=True,
+        proto.INT64,
+        number=24,
+        optional=True,
     )
     field_id: int = proto.Field(
-        proto.INT64, number=25, optional=True,
+        proto.INT64,
+        number=25,
+        optional=True,
     )
     sitelink_field: sitelink_placeholder_field.SitelinkPlaceholderFieldEnum.SitelinkPlaceholderField = proto.Field(
         proto.ENUM,

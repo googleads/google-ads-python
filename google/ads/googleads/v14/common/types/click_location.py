@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-# Copyright 2022 Google LLC
+# Copyright 2023 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -22,7 +22,9 @@ import proto  # type: ignore
 __protobuf__ = proto.module(
     package="google.ads.googleads.v14.common",
     marshal="google.ads.googleads.v14",
-    manifest={"ClickLocation",},
+    manifest={
+        "ClickLocation",
+    },
 )
 
 
@@ -59,19 +61,29 @@ class ClickLocation(proto.Message):
     """
 
     city: str = proto.Field(
-        proto.STRING, number=6, optional=True,
+        proto.STRING,
+        number=6,
+        optional=True,
     )
     country: str = proto.Field(
-        proto.STRING, number=7, optional=True,
+        proto.STRING,
+        number=7,
+        optional=True,
     )
     metro: str = proto.Field(
-        proto.STRING, number=8, optional=True,
+        proto.STRING,
+        number=8,
+        optional=True,
     )
     most_specific: str = proto.Field(
-        proto.STRING, number=9, optional=True,
+        proto.STRING,
+        number=9,
+        optional=True,
     )
     region: str = proto.Field(
-        proto.STRING, number=10, optional=True,
+        proto.STRING,
+        number=10,
+        optional=True,
     )
 
 

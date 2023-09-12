@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-# Copyright 2022 Google LLC
+# Copyright 2023 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -67,18 +67,23 @@ class MutateCampaignCustomizersRequest(proto.Message):
     """
 
     customer_id: str = proto.Field(
-        proto.STRING, number=1,
+        proto.STRING,
+        number=1,
     )
     operations: MutableSequence[
         "CampaignCustomizerOperation"
     ] = proto.RepeatedField(
-        proto.MESSAGE, number=2, message="CampaignCustomizerOperation",
+        proto.MESSAGE,
+        number=2,
+        message="CampaignCustomizerOperation",
     )
     partial_failure: bool = proto.Field(
-        proto.BOOL, number=3,
+        proto.BOOL,
+        number=3,
     )
     validate_only: bool = proto.Field(
-        proto.BOOL, number=4,
+        proto.BOOL,
+        number=4,
     )
     response_content_type: gage_response_content_type.ResponseContentTypeEnum.ResponseContentType = proto.Field(
         proto.ENUM,
@@ -101,7 +106,8 @@ class CampaignCustomizerOperation(proto.Message):
     Attributes:
         create (google.ads.googleads.v14.resources.types.CampaignCustomizer):
             Create operation: No resource name is
-            expected for the new campaign customizer
+            expected for the new campaign
+            customizer
 
             This field is a member of `oneof`_ ``operation``.
         remove (str):
@@ -119,7 +125,9 @@ class CampaignCustomizerOperation(proto.Message):
         message=gagr_campaign_customizer.CampaignCustomizer,
     )
     remove: str = proto.Field(
-        proto.STRING, number=2, oneof="operation",
+        proto.STRING,
+        number=2,
+        oneof="operation",
     )
 
 
@@ -139,10 +147,14 @@ class MutateCampaignCustomizersResponse(proto.Message):
     results: MutableSequence[
         "MutateCampaignCustomizerResult"
     ] = proto.RepeatedField(
-        proto.MESSAGE, number=1, message="MutateCampaignCustomizerResult",
+        proto.MESSAGE,
+        number=1,
+        message="MutateCampaignCustomizerResult",
     )
     partial_failure_error: status_pb2.Status = proto.Field(
-        proto.MESSAGE, number=2, message=status_pb2.Status,
+        proto.MESSAGE,
+        number=2,
+        message=status_pb2.Status,
     )
 
 
@@ -158,12 +170,15 @@ class MutateCampaignCustomizerResult(proto.Message):
     """
 
     resource_name: str = proto.Field(
-        proto.STRING, number=1,
+        proto.STRING,
+        number=1,
     )
-    campaign_customizer: gagr_campaign_customizer.CampaignCustomizer = proto.Field(
-        proto.MESSAGE,
-        number=2,
-        message=gagr_campaign_customizer.CampaignCustomizer,
+    campaign_customizer: gagr_campaign_customizer.CampaignCustomizer = (
+        proto.Field(
+            proto.MESSAGE,
+            number=2,
+            message=gagr_campaign_customizer.CampaignCustomizer,
+        )
     )
 
 

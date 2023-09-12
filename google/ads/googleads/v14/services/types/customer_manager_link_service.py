@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-# Copyright 2022 Google LLC
+# Copyright 2023 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -54,15 +54,19 @@ class MutateCustomerManagerLinkRequest(proto.Message):
     """
 
     customer_id: str = proto.Field(
-        proto.STRING, number=1,
+        proto.STRING,
+        number=1,
     )
     operations: MutableSequence[
         "CustomerManagerLinkOperation"
     ] = proto.RepeatedField(
-        proto.MESSAGE, number=2, message="CustomerManagerLinkOperation",
+        proto.MESSAGE,
+        number=2,
+        message="CustomerManagerLinkOperation",
     )
     validate_only: bool = proto.Field(
-        proto.BOOL, number=3,
+        proto.BOOL,
+        number=3,
     )
 
 
@@ -88,22 +92,27 @@ class MoveManagerLinkRequest(proto.Message):
     """
 
     customer_id: str = proto.Field(
-        proto.STRING, number=1,
+        proto.STRING,
+        number=1,
     )
     previous_customer_manager_link: str = proto.Field(
-        proto.STRING, number=2,
+        proto.STRING,
+        number=2,
     )
     new_manager: str = proto.Field(
-        proto.STRING, number=3,
+        proto.STRING,
+        number=3,
     )
     validate_only: bool = proto.Field(
-        proto.BOOL, number=4,
+        proto.BOOL,
+        number=4,
     )
 
 
 class CustomerManagerLinkOperation(proto.Message):
     r"""Updates the status of a CustomerManagerLink.
     The following actions are possible:
+
     1. Update operation with status ACTIVE accepts a pending
     invitation. 2. Update operation with status REFUSED declines a
     pending invitation. 3. Update operation with status INACTIVE
@@ -123,7 +132,9 @@ class CustomerManagerLinkOperation(proto.Message):
     """
 
     update_mask: field_mask_pb2.FieldMask = proto.Field(
-        proto.MESSAGE, number=4, message=field_mask_pb2.FieldMask,
+        proto.MESSAGE,
+        number=4,
+        message=field_mask_pb2.FieldMask,
     )
     update: customer_manager_link.CustomerManagerLink = proto.Field(
         proto.MESSAGE,
@@ -144,7 +155,9 @@ class MutateCustomerManagerLinkResponse(proto.Message):
     results: MutableSequence[
         "MutateCustomerManagerLinkResult"
     ] = proto.RepeatedField(
-        proto.MESSAGE, number=1, message="MutateCustomerManagerLinkResult",
+        proto.MESSAGE,
+        number=1,
+        message="MutateCustomerManagerLinkResult",
     )
 
 
@@ -159,7 +172,8 @@ class MoveManagerLinkResponse(proto.Message):
     """
 
     resource_name: str = proto.Field(
-        proto.STRING, number=1,
+        proto.STRING,
+        number=1,
     )
 
 
@@ -171,7 +185,8 @@ class MutateCustomerManagerLinkResult(proto.Message):
     """
 
     resource_name: str = proto.Field(
-        proto.STRING, number=1,
+        proto.STRING,
+        number=1,
     )
 
 

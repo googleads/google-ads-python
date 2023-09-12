@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-# Copyright 2022 Google LLC
+# Copyright 2023 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -28,7 +28,9 @@ from google.ads.googleads.v14.enums.types import google_voice_call_status
 __protobuf__ = proto.module(
     package="google.ads.googleads.v14.resources",
     marshal="google.ads.googleads.v14",
-    manifest={"CallView",},
+    manifest={
+        "CallView",
+    },
 )
 
 
@@ -66,22 +68,28 @@ class CallView(proto.Message):
     """
 
     resource_name: str = proto.Field(
-        proto.STRING, number=1,
+        proto.STRING,
+        number=1,
     )
     caller_country_code: str = proto.Field(
-        proto.STRING, number=2,
+        proto.STRING,
+        number=2,
     )
     caller_area_code: str = proto.Field(
-        proto.STRING, number=3,
+        proto.STRING,
+        number=3,
     )
     call_duration_seconds: int = proto.Field(
-        proto.INT64, number=4,
+        proto.INT64,
+        number=4,
     )
     start_call_date_time: str = proto.Field(
-        proto.STRING, number=5,
+        proto.STRING,
+        number=5,
     )
     end_call_date_time: str = proto.Field(
-        proto.STRING, number=6,
+        proto.STRING,
+        number=6,
     )
     call_tracking_display_location: gage_call_tracking_display_location.CallTrackingDisplayLocationEnum.CallTrackingDisplayLocation = proto.Field(
         proto.ENUM,
@@ -89,7 +97,9 @@ class CallView(proto.Message):
         enum=gage_call_tracking_display_location.CallTrackingDisplayLocationEnum.CallTrackingDisplayLocation,
     )
     type_: call_type.CallTypeEnum.CallType = proto.Field(
-        proto.ENUM, number=8, enum=call_type.CallTypeEnum.CallType,
+        proto.ENUM,
+        number=8,
+        enum=call_type.CallTypeEnum.CallType,
     )
     call_status: google_voice_call_status.GoogleVoiceCallStatusEnum.GoogleVoiceCallStatus = proto.Field(
         proto.ENUM,

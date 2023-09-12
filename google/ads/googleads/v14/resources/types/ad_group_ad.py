@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-# Copyright 2022 Google LLC
+# Copyright 2023 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -30,7 +30,10 @@ from google.ads.googleads.v14.resources.types import ad as gagr_ad
 __protobuf__ = proto.module(
     package="google.ads.googleads.v14.resources",
     marshal="google.ads.googleads.v14",
-    manifest={"AdGroupAd", "AdGroupAdPolicySummary",},
+    manifest={
+        "AdGroupAd",
+        "AdGroupAdPolicySummary",
+    },
 )
 
 
@@ -70,30 +73,43 @@ class AdGroupAd(proto.Message):
     """
 
     resource_name: str = proto.Field(
-        proto.STRING, number=1,
+        proto.STRING,
+        number=1,
     )
-    status: ad_group_ad_status.AdGroupAdStatusEnum.AdGroupAdStatus = proto.Field(
-        proto.ENUM,
-        number=3,
-        enum=ad_group_ad_status.AdGroupAdStatusEnum.AdGroupAdStatus,
+    status: ad_group_ad_status.AdGroupAdStatusEnum.AdGroupAdStatus = (
+        proto.Field(
+            proto.ENUM,
+            number=3,
+            enum=ad_group_ad_status.AdGroupAdStatusEnum.AdGroupAdStatus,
+        )
     )
     ad_group: str = proto.Field(
-        proto.STRING, number=9, optional=True,
+        proto.STRING,
+        number=9,
+        optional=True,
     )
     ad: gagr_ad.Ad = proto.Field(
-        proto.MESSAGE, number=5, message=gagr_ad.Ad,
+        proto.MESSAGE,
+        number=5,
+        message=gagr_ad.Ad,
     )
     policy_summary: "AdGroupAdPolicySummary" = proto.Field(
-        proto.MESSAGE, number=6, message="AdGroupAdPolicySummary",
+        proto.MESSAGE,
+        number=6,
+        message="AdGroupAdPolicySummary",
     )
     ad_strength: gage_ad_strength.AdStrengthEnum.AdStrength = proto.Field(
-        proto.ENUM, number=7, enum=gage_ad_strength.AdStrengthEnum.AdStrength,
+        proto.ENUM,
+        number=7,
+        enum=gage_ad_strength.AdStrengthEnum.AdStrength,
     )
     action_items: MutableSequence[str] = proto.RepeatedField(
-        proto.STRING, number=13,
+        proto.STRING,
+        number=13,
     )
     labels: MutableSequence[str] = proto.RepeatedField(
-        proto.STRING, number=10,
+        proto.STRING,
+        number=10,
     )
 
 
@@ -115,7 +131,9 @@ class AdGroupAdPolicySummary(proto.Message):
     policy_topic_entries: MutableSequence[
         policy.PolicyTopicEntry
     ] = proto.RepeatedField(
-        proto.MESSAGE, number=1, message=policy.PolicyTopicEntry,
+        proto.MESSAGE,
+        number=1,
+        message=policy.PolicyTopicEntry,
     )
     review_status: policy_review_status.PolicyReviewStatusEnum.PolicyReviewStatus = proto.Field(
         proto.ENUM,

@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-# Copyright 2022 Google LLC
+# Copyright 2023 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -25,7 +25,9 @@ from google.ads.googleads.v14.common.types import asset_usage
 __protobuf__ = proto.module(
     package="google.ads.googleads.v14.resources",
     marshal="google.ads.googleads.v14",
-    manifest={"AdGroupAdAssetCombinationView",},
+    manifest={
+        "AdGroupAdAssetCombinationView",
+    },
 )
 
 
@@ -59,15 +61,20 @@ class AdGroupAdAssetCombinationView(proto.Message):
     """
 
     resource_name: str = proto.Field(
-        proto.STRING, number=1,
+        proto.STRING,
+        number=1,
     )
     served_assets: MutableSequence[
         asset_usage.AssetUsage
     ] = proto.RepeatedField(
-        proto.MESSAGE, number=2, message=asset_usage.AssetUsage,
+        proto.MESSAGE,
+        number=2,
+        message=asset_usage.AssetUsage,
     )
     enabled: bool = proto.Field(
-        proto.BOOL, number=3, optional=True,
+        proto.BOOL,
+        number=3,
+        optional=True,
     )
 
 

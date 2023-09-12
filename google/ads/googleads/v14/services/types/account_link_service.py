@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-# Copyright 2022 Google LLC
+# Copyright 2023 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -52,10 +52,13 @@ class CreateAccountLinkRequest(proto.Message):
     """
 
     customer_id: str = proto.Field(
-        proto.STRING, number=1,
+        proto.STRING,
+        number=1,
     )
     account_link: gagr_account_link.AccountLink = proto.Field(
-        proto.MESSAGE, number=2, message=gagr_account_link.AccountLink,
+        proto.MESSAGE,
+        number=2,
+        message=gagr_account_link.AccountLink,
     )
 
 
@@ -70,7 +73,8 @@ class CreateAccountLinkResponse(proto.Message):
     """
 
     resource_name: str = proto.Field(
-        proto.STRING, number=1,
+        proto.STRING,
+        number=1,
     )
 
 
@@ -97,16 +101,21 @@ class MutateAccountLinkRequest(proto.Message):
     """
 
     customer_id: str = proto.Field(
-        proto.STRING, number=1,
+        proto.STRING,
+        number=1,
     )
     operation: "AccountLinkOperation" = proto.Field(
-        proto.MESSAGE, number=2, message="AccountLinkOperation",
+        proto.MESSAGE,
+        number=2,
+        message="AccountLinkOperation",
     )
     partial_failure: bool = proto.Field(
-        proto.BOOL, number=3,
+        proto.BOOL,
+        number=3,
     )
     validate_only: bool = proto.Field(
-        proto.BOOL, number=4,
+        proto.BOOL,
+        number=4,
     )
 
 
@@ -125,7 +134,8 @@ class AccountLinkOperation(proto.Message):
             fields are modified in an update.
         update (google.ads.googleads.v14.resources.types.AccountLink):
             Update operation: The account link is
-            expected to have a valid resource name.
+            expected to have
+            a valid resource name.
 
             This field is a member of `oneof`_ ``operation``.
         remove (str):
@@ -138,7 +148,9 @@ class AccountLinkOperation(proto.Message):
     """
 
     update_mask: field_mask_pb2.FieldMask = proto.Field(
-        proto.MESSAGE, number=4, message=field_mask_pb2.FieldMask,
+        proto.MESSAGE,
+        number=4,
+        message=field_mask_pb2.FieldMask,
     )
     update: gagr_account_link.AccountLink = proto.Field(
         proto.MESSAGE,
@@ -147,7 +159,9 @@ class AccountLinkOperation(proto.Message):
         message=gagr_account_link.AccountLink,
     )
     remove: str = proto.Field(
-        proto.STRING, number=3, oneof="operation",
+        proto.STRING,
+        number=3,
+        oneof="operation",
     )
 
 
@@ -165,10 +179,14 @@ class MutateAccountLinkResponse(proto.Message):
     """
 
     result: "MutateAccountLinkResult" = proto.Field(
-        proto.MESSAGE, number=1, message="MutateAccountLinkResult",
+        proto.MESSAGE,
+        number=1,
+        message="MutateAccountLinkResult",
     )
     partial_failure_error: status_pb2.Status = proto.Field(
-        proto.MESSAGE, number=2, message=status_pb2.Status,
+        proto.MESSAGE,
+        number=2,
+        message=status_pb2.Status,
     )
 
 
@@ -180,7 +198,8 @@ class MutateAccountLinkResult(proto.Message):
     """
 
     resource_name: str = proto.Field(
-        proto.STRING, number=1,
+        proto.STRING,
+        number=1,
     )
 
 

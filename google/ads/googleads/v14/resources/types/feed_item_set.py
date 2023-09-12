@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-# Copyright 2022 Google LLC
+# Copyright 2023 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -27,7 +27,9 @@ from google.ads.googleads.v14.enums.types import feed_item_set_status
 __protobuf__ = proto.module(
     package="google.ads.googleads.v14.resources",
     marshal="google.ads.googleads.v14",
-    manifest={"FeedItemSet",},
+    manifest={
+        "FeedItemSet",
+    },
 )
 
 
@@ -76,21 +78,27 @@ class FeedItemSet(proto.Message):
     """
 
     resource_name: str = proto.Field(
-        proto.STRING, number=1,
+        proto.STRING,
+        number=1,
     )
     feed: str = proto.Field(
-        proto.STRING, number=2,
+        proto.STRING,
+        number=2,
     )
     feed_item_set_id: int = proto.Field(
-        proto.INT64, number=3,
+        proto.INT64,
+        number=3,
     )
     display_name: str = proto.Field(
-        proto.STRING, number=4,
+        proto.STRING,
+        number=4,
     )
-    status: feed_item_set_status.FeedItemSetStatusEnum.FeedItemSetStatus = proto.Field(
-        proto.ENUM,
-        number=8,
-        enum=feed_item_set_status.FeedItemSetStatusEnum.FeedItemSetStatus,
+    status: feed_item_set_status.FeedItemSetStatusEnum.FeedItemSetStatus = (
+        proto.Field(
+            proto.ENUM,
+            number=8,
+            enum=feed_item_set_status.FeedItemSetStatusEnum.FeedItemSetStatus,
+        )
     )
     dynamic_location_set_filter: feed_item_set_filter_type_infos.DynamicLocationSetFilter = proto.Field(
         proto.MESSAGE,

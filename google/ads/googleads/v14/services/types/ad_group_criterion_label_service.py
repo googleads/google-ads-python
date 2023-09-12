@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-# Copyright 2022 Google LLC
+# Copyright 2023 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -58,18 +58,23 @@ class MutateAdGroupCriterionLabelsRequest(proto.Message):
     """
 
     customer_id: str = proto.Field(
-        proto.STRING, number=1,
+        proto.STRING,
+        number=1,
     )
     operations: MutableSequence[
         "AdGroupCriterionLabelOperation"
     ] = proto.RepeatedField(
-        proto.MESSAGE, number=2, message="AdGroupCriterionLabelOperation",
+        proto.MESSAGE,
+        number=2,
+        message="AdGroupCriterionLabelOperation",
     )
     partial_failure: bool = proto.Field(
-        proto.BOOL, number=3,
+        proto.BOOL,
+        number=3,
     )
     validate_only: bool = proto.Field(
-        proto.BOOL, number=4,
+        proto.BOOL,
+        number=4,
     )
 
 
@@ -87,7 +92,8 @@ class AdGroupCriterionLabelOperation(proto.Message):
     Attributes:
         create (google.ads.googleads.v14.resources.types.AdGroupCriterionLabel):
             Create operation: No resource name is
-            expected for the new ad group label.
+            expected for the new ad group
+            label.
 
             This field is a member of `oneof`_ ``operation``.
         remove (str):
@@ -106,7 +112,9 @@ class AdGroupCriterionLabelOperation(proto.Message):
         message=ad_group_criterion_label.AdGroupCriterionLabel,
     )
     remove: str = proto.Field(
-        proto.STRING, number=2, oneof="operation",
+        proto.STRING,
+        number=2,
+        oneof="operation",
     )
 
 
@@ -124,12 +132,16 @@ class MutateAdGroupCriterionLabelsResponse(proto.Message):
     """
 
     partial_failure_error: status_pb2.Status = proto.Field(
-        proto.MESSAGE, number=3, message=status_pb2.Status,
+        proto.MESSAGE,
+        number=3,
+        message=status_pb2.Status,
     )
     results: MutableSequence[
         "MutateAdGroupCriterionLabelResult"
     ] = proto.RepeatedField(
-        proto.MESSAGE, number=2, message="MutateAdGroupCriterionLabelResult",
+        proto.MESSAGE,
+        number=2,
+        message="MutateAdGroupCriterionLabelResult",
     )
 
 
@@ -141,7 +153,8 @@ class MutateAdGroupCriterionLabelResult(proto.Message):
     """
 
     resource_name: str = proto.Field(
-        proto.STRING, number=1,
+        proto.STRING,
+        number=1,
     )
 
 

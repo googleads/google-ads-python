@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-# Copyright 2022 Google LLC
+# Copyright 2023 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -22,13 +22,14 @@ import proto  # type: ignore
 __protobuf__ = proto.module(
     package="google.ads.googleads.v14.errors",
     marshal="google.ads.googleads.v14",
-    manifest={"CampaignErrorEnum",},
+    manifest={
+        "CampaignErrorEnum",
+    },
 )
 
 
 class CampaignErrorEnum(proto.Message):
-    r"""Container for enum describing possible campaign errors.
-    """
+    r"""Container for enum describing possible campaign errors."""
 
     class CampaignError(proto.Enum):
         r"""Enum describing possible campaign errors."""
@@ -106,6 +107,8 @@ class CampaignErrorEnum(proto.Message):
         NOT_COMPATIBLE_WITH_BIDDING_STRATEGY_TYPE = 80
         NOT_COMPATIBLE_WITH_GOOGLE_ATTRIBUTION_CONVERSIONS = 81
         CONVERSION_LAG_TOO_HIGH = 82
+        NOT_LINKED_ADVERTISING_PARTNER = 83
+        INVALID_NUMBER_OF_ADVERTISING_PARTNER_IDS = 84
 
 
 __all__ = tuple(sorted(__protobuf__.manifest))

@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-# Copyright 2022 Google LLC
+# Copyright 2023 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -28,7 +28,9 @@ from google.ads.googleads.v14.enums.types import seasonality_event_status
 __protobuf__ = proto.module(
     package="google.ads.googleads.v14.resources",
     marshal="google.ads.googleads.v14",
-    manifest={"BiddingSeasonalityAdjustment",},
+    manifest={
+        "BiddingSeasonalityAdjustment",
+    },
 )
 
 
@@ -98,10 +100,12 @@ class BiddingSeasonalityAdjustment(proto.Message):
     """
 
     resource_name: str = proto.Field(
-        proto.STRING, number=1,
+        proto.STRING,
+        number=1,
     )
     seasonality_adjustment_id: int = proto.Field(
-        proto.INT64, number=2,
+        proto.INT64,
+        number=2,
     )
     scope: seasonality_event_scope.SeasonalityEventScopeEnum.SeasonalityEventScope = proto.Field(
         proto.ENUM,
@@ -114,25 +118,33 @@ class BiddingSeasonalityAdjustment(proto.Message):
         enum=seasonality_event_status.SeasonalityEventStatusEnum.SeasonalityEventStatus,
     )
     start_date_time: str = proto.Field(
-        proto.STRING, number=5,
+        proto.STRING,
+        number=5,
     )
     end_date_time: str = proto.Field(
-        proto.STRING, number=6,
+        proto.STRING,
+        number=6,
     )
     name: str = proto.Field(
-        proto.STRING, number=7,
+        proto.STRING,
+        number=7,
     )
     description: str = proto.Field(
-        proto.STRING, number=8,
+        proto.STRING,
+        number=8,
     )
     devices: MutableSequence[device.DeviceEnum.Device] = proto.RepeatedField(
-        proto.ENUM, number=9, enum=device.DeviceEnum.Device,
+        proto.ENUM,
+        number=9,
+        enum=device.DeviceEnum.Device,
     )
     conversion_rate_modifier: float = proto.Field(
-        proto.DOUBLE, number=10,
+        proto.DOUBLE,
+        number=10,
     )
     campaigns: MutableSequence[str] = proto.RepeatedField(
-        proto.STRING, number=11,
+        proto.STRING,
+        number=11,
     )
     advertising_channel_types: MutableSequence[
         advertising_channel_type.AdvertisingChannelTypeEnum.AdvertisingChannelType

@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-# Copyright 2022 Google LLC
+# Copyright 2023 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -53,13 +53,17 @@ class MutateAssetGroupsRequest(proto.Message):
     """
 
     customer_id: str = proto.Field(
-        proto.STRING, number=1,
+        proto.STRING,
+        number=1,
     )
     operations: MutableSequence["AssetGroupOperation"] = proto.RepeatedField(
-        proto.MESSAGE, number=2, message="AssetGroupOperation",
+        proto.MESSAGE,
+        number=2,
+        message="AssetGroupOperation",
     )
     validate_only: bool = proto.Field(
-        proto.BOOL, number=4,
+        proto.BOOL,
+        number=4,
     )
 
 
@@ -83,7 +87,8 @@ class AssetGroupOperation(proto.Message):
             This field is a member of `oneof`_ ``operation``.
         update (google.ads.googleads.v14.resources.types.AssetGroup):
             Update operation: The asset group is expected
-            to have a valid resource name.
+            to have a valid resource
+            name.
 
             This field is a member of `oneof`_ ``operation``.
         remove (str):
@@ -95,7 +100,9 @@ class AssetGroupOperation(proto.Message):
     """
 
     update_mask: field_mask_pb2.FieldMask = proto.Field(
-        proto.MESSAGE, number=4, message=field_mask_pb2.FieldMask,
+        proto.MESSAGE,
+        number=4,
+        message=field_mask_pb2.FieldMask,
     )
     create: asset_group.AssetGroup = proto.Field(
         proto.MESSAGE,
@@ -110,7 +117,9 @@ class AssetGroupOperation(proto.Message):
         message=asset_group.AssetGroup,
     )
     remove: str = proto.Field(
-        proto.STRING, number=3, oneof="operation",
+        proto.STRING,
+        number=3,
+        oneof="operation",
     )
 
 
@@ -128,10 +137,14 @@ class MutateAssetGroupsResponse(proto.Message):
     """
 
     results: MutableSequence["MutateAssetGroupResult"] = proto.RepeatedField(
-        proto.MESSAGE, number=1, message="MutateAssetGroupResult",
+        proto.MESSAGE,
+        number=1,
+        message="MutateAssetGroupResult",
     )
     partial_failure_error: status_pb2.Status = proto.Field(
-        proto.MESSAGE, number=2, message=status_pb2.Status,
+        proto.MESSAGE,
+        number=2,
+        message=status_pb2.Status,
     )
 
 
@@ -143,7 +156,8 @@ class MutateAssetGroupResult(proto.Message):
     """
 
     resource_name: str = proto.Field(
-        proto.STRING, number=1,
+        proto.STRING,
+        number=1,
     )
 
 

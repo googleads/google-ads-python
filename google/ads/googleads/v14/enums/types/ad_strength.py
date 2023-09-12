@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-# Copyright 2022 Google LLC
+# Copyright 2023 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -22,13 +22,14 @@ import proto  # type: ignore
 __protobuf__ = proto.module(
     package="google.ads.googleads.v14.enums",
     marshal="google.ads.googleads.v14",
-    manifest={"AdStrengthEnum",},
+    manifest={
+        "AdStrengthEnum",
+    },
 )
 
 
 class AdStrengthEnum(proto.Message):
-    r"""Container for enum describing possible ad strengths.
-    """
+    r"""Container for enum describing possible ad strengths."""
 
     class AdStrength(proto.Enum):
         r"""Enum listing the possible ad strengths."""

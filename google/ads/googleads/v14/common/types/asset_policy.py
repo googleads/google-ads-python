@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-# Copyright 2022 Google LLC
+# Copyright 2023 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -58,7 +58,9 @@ class AdAssetPolicySummary(proto.Message):
     policy_topic_entries: MutableSequence[
         policy.PolicyTopicEntry
     ] = proto.RepeatedField(
-        proto.MESSAGE, number=1, message=policy.PolicyTopicEntry,
+        proto.MESSAGE,
+        number=1,
+        message=policy.PolicyTopicEntry,
     )
     review_status: policy_review_status.PolicyReviewStatusEnum.PolicyReviewStatus = proto.Field(
         proto.ENUM,
@@ -80,7 +82,7 @@ class AssetLinkPrimaryStatusDetails(proto.Message):
     annotated with it. For instance, when the reason is
     ASSET_DISAPPROVED, the details field will contain additional
     information about the offline evaluation errors which led to the
-    asset being disapproved. Next Id: 4
+    asset being disapproved.
 
     .. _oneof: https://proto-plus-python.readthedocs.io/en/stable/fields.html#oneofs-mutually-exclusive-fields
 
@@ -114,14 +116,15 @@ class AssetLinkPrimaryStatusDetails(proto.Message):
         enum=asset_link_primary_status.AssetLinkPrimaryStatusEnum.AssetLinkPrimaryStatus,
     )
     asset_disapproved: "AssetDisapproved" = proto.Field(
-        proto.MESSAGE, number=3, oneof="details", message="AssetDisapproved",
+        proto.MESSAGE,
+        number=3,
+        oneof="details",
+        message="AssetDisapproved",
     )
 
 
 class AssetDisapproved(proto.Message):
     r"""Details related to AssetLinkPrimaryStatusReasonPB.ASSET_DISAPPROVED
-    Next Id: 2
-
     Attributes:
         offline_evaluation_error_reasons (MutableSequence[google.ads.googleads.v14.enums.types.AssetOfflineEvaluationErrorReasonsEnum.AssetOfflineEvaluationErrorReasons]):
             Provides the quality evaluation disapproval

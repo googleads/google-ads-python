@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-# Copyright 2022 Google LLC
+# Copyright 2023 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -22,13 +22,14 @@ import proto  # type: ignore
 __protobuf__ = proto.module(
     package="google.ads.googleads.v14.errors",
     marshal="google.ads.googleads.v14",
-    manifest={"ExperimentErrorEnum",},
+    manifest={
+        "ExperimentErrorEnum",
+    },
 )
 
 
 class ExperimentErrorEnum(proto.Message):
-    r"""Container for enum describing possible experiment error.
-    """
+    r"""Container for enum describing possible experiment error."""
 
     class ExperimentError(proto.Enum):
         r"""Enum describing possible experiment errors."""
@@ -58,6 +59,9 @@ class ExperimentErrorEnum(proto.Message):
         CANNOT_CREATE_EXPERIMENT_CAMPAIGN_WITH_SHARED_BUDGET = 23
         CANNOT_CREATE_EXPERIMENT_CAMPAIGN_WITH_CUSTOM_BUDGET = 24
         STATUS_TRANSITION_INVALID = 25
+        DUPLICATE_EXPERIMENT_CAMPAIGN_NAME = 26
+        CANNOT_REMOVE_IN_CREATION_EXPERIMENT = 27
+        CANNOT_ADD_CAMPAIGN_WITH_DEPRECATED_AD_TYPES = 28
 
 
 __all__ = tuple(sorted(__protobuf__.manifest))

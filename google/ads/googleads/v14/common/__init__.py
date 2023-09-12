@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-# Copyright 2022 Google LLC
+# Copyright 2023 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -19,6 +19,7 @@ __all__ = (
     "ActivityIdInfo",
     "ActivityRatingInfo",
     "AdAssetPolicySummary",
+    "AdCallToActionAsset",
     "AdDiscoveryCarouselCardAsset",
     "AdImageAsset",
     "AdMediaBundleAsset",
@@ -90,6 +91,7 @@ __all__ = (
     "DiscoveryCarouselAdInfo",
     "DiscoveryCarouselCardAsset",
     "DiscoveryMultiAssetAdInfo",
+    "DiscoveryVideoResponsiveAdInfo",
     "DisplayUploadAdInfo",
     "DynamicAffiliateLocationSetFilter",
     "DynamicBusinessProfileLocationGroupFilter",
@@ -160,6 +162,7 @@ __all__ = (
     "LegacyResponsiveDisplayAdInfo",
     "LifeEventSegment",
     "ListingDimensionInfo",
+    "ListingDimensionPath",
     "ListingGroupInfo",
     "ListingScopeInfo",
     "LocalAdInfo",
@@ -230,6 +233,7 @@ __all__ = (
     "ResponsiveDisplayAdInfo",
     "ResponsiveSearchAdInfo",
     "RuleBasedUserListInfo",
+    "SearchVolumeRange",
     "Segments",
     "ShoppingComparisonListingAdInfo",
     "ShoppingLoyalty",

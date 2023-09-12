@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-# Copyright 2022 Google LLC
+# Copyright 2023 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -66,16 +66,21 @@ class MutateAssetSetsRequest(proto.Message):
     """
 
     customer_id: str = proto.Field(
-        proto.STRING, number=1,
+        proto.STRING,
+        number=1,
     )
     operations: MutableSequence["AssetSetOperation"] = proto.RepeatedField(
-        proto.MESSAGE, number=2, message="AssetSetOperation",
+        proto.MESSAGE,
+        number=2,
+        message="AssetSetOperation",
     )
     partial_failure: bool = proto.Field(
-        proto.BOOL, number=3,
+        proto.BOOL,
+        number=3,
     )
     validate_only: bool = proto.Field(
-        proto.BOOL, number=4,
+        proto.BOOL,
+        number=4,
     )
     response_content_type: gage_response_content_type.ResponseContentTypeEnum.ResponseContentType = proto.Field(
         proto.ENUM,
@@ -104,7 +109,8 @@ class AssetSetOperation(proto.Message):
             This field is a member of `oneof`_ ``operation``.
         update (google.ads.googleads.v14.resources.types.AssetSet):
             Update operation: The asset set is expected
-            to have a valid resource name.
+            to have a valid resource
+            name.
 
             This field is a member of `oneof`_ ``operation``.
         remove (str):
@@ -116,7 +122,9 @@ class AssetSetOperation(proto.Message):
     """
 
     update_mask: field_mask_pb2.FieldMask = proto.Field(
-        proto.MESSAGE, number=4, message=field_mask_pb2.FieldMask,
+        proto.MESSAGE,
+        number=4,
+        message=field_mask_pb2.FieldMask,
     )
     create: gagr_asset_set.AssetSet = proto.Field(
         proto.MESSAGE,
@@ -131,7 +139,9 @@ class AssetSetOperation(proto.Message):
         message=gagr_asset_set.AssetSet,
     )
     remove: str = proto.Field(
-        proto.STRING, number=3, oneof="operation",
+        proto.STRING,
+        number=3,
+        oneof="operation",
     )
 
 
@@ -149,10 +159,14 @@ class MutateAssetSetsResponse(proto.Message):
     """
 
     results: MutableSequence["MutateAssetSetResult"] = proto.RepeatedField(
-        proto.MESSAGE, number=1, message="MutateAssetSetResult",
+        proto.MESSAGE,
+        number=1,
+        message="MutateAssetSetResult",
     )
     partial_failure_error: status_pb2.Status = proto.Field(
-        proto.MESSAGE, number=2, message=status_pb2.Status,
+        proto.MESSAGE,
+        number=2,
+        message=status_pb2.Status,
     )
 
 
@@ -168,10 +182,13 @@ class MutateAssetSetResult(proto.Message):
     """
 
     resource_name: str = proto.Field(
-        proto.STRING, number=1,
+        proto.STRING,
+        number=1,
     )
     asset_set: gagr_asset_set.AssetSet = proto.Field(
-        proto.MESSAGE, number=2, message=gagr_asset_set.AssetSet,
+        proto.MESSAGE,
+        number=2,
+        message=gagr_asset_set.AssetSet,
     )
 
 

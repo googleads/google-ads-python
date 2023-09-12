@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-# Copyright 2022 Google LLC
+# Copyright 2023 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -98,30 +98,44 @@ class AppFeedItem(proto.Message):
     """
 
     link_text: str = proto.Field(
-        proto.STRING, number=9, optional=True,
+        proto.STRING,
+        number=9,
+        optional=True,
     )
     app_id: str = proto.Field(
-        proto.STRING, number=10, optional=True,
+        proto.STRING,
+        number=10,
+        optional=True,
     )
     app_store: gage_app_store.AppStoreEnum.AppStore = proto.Field(
-        proto.ENUM, number=3, enum=gage_app_store.AppStoreEnum.AppStore,
+        proto.ENUM,
+        number=3,
+        enum=gage_app_store.AppStoreEnum.AppStore,
     )
     final_urls: MutableSequence[str] = proto.RepeatedField(
-        proto.STRING, number=11,
+        proto.STRING,
+        number=11,
     )
     final_mobile_urls: MutableSequence[str] = proto.RepeatedField(
-        proto.STRING, number=12,
+        proto.STRING,
+        number=12,
     )
     tracking_url_template: str = proto.Field(
-        proto.STRING, number=13, optional=True,
+        proto.STRING,
+        number=13,
+        optional=True,
     )
     url_custom_parameters: MutableSequence[
         custom_parameter.CustomParameter
     ] = proto.RepeatedField(
-        proto.MESSAGE, number=7, message=custom_parameter.CustomParameter,
+        proto.MESSAGE,
+        number=7,
+        message=custom_parameter.CustomParameter,
     )
     final_url_suffix: str = proto.Field(
-        proto.STRING, number=14, optional=True,
+        proto.STRING,
+        number=14,
+        optional=True,
     )
 
 
@@ -167,19 +181,29 @@ class CallFeedItem(proto.Message):
     """
 
     phone_number: str = proto.Field(
-        proto.STRING, number=7, optional=True,
+        proto.STRING,
+        number=7,
+        optional=True,
     )
     country_code: str = proto.Field(
-        proto.STRING, number=8, optional=True,
+        proto.STRING,
+        number=8,
+        optional=True,
     )
     call_tracking_enabled: bool = proto.Field(
-        proto.BOOL, number=9, optional=True,
+        proto.BOOL,
+        number=9,
+        optional=True,
     )
     call_conversion_action: str = proto.Field(
-        proto.STRING, number=10, optional=True,
+        proto.STRING,
+        number=10,
+        optional=True,
     )
     call_conversion_tracking_disabled: bool = proto.Field(
-        proto.BOOL, number=11, optional=True,
+        proto.BOOL,
+        number=11,
+        optional=True,
     )
     call_conversion_reporting_state: gage_call_conversion_reporting_state.CallConversionReportingStateEnum.CallConversionReportingState = proto.Field(
         proto.ENUM,
@@ -202,7 +226,9 @@ class CalloutFeedItem(proto.Message):
     """
 
     callout_text: str = proto.Field(
-        proto.STRING, number=2, optional=True,
+        proto.STRING,
+        number=2,
+        optional=True,
     )
 
 
@@ -246,28 +272,44 @@ class LocationFeedItem(proto.Message):
     """
 
     business_name: str = proto.Field(
-        proto.STRING, number=9, optional=True,
+        proto.STRING,
+        number=9,
+        optional=True,
     )
     address_line_1: str = proto.Field(
-        proto.STRING, number=10, optional=True,
+        proto.STRING,
+        number=10,
+        optional=True,
     )
     address_line_2: str = proto.Field(
-        proto.STRING, number=11, optional=True,
+        proto.STRING,
+        number=11,
+        optional=True,
     )
     city: str = proto.Field(
-        proto.STRING, number=12, optional=True,
+        proto.STRING,
+        number=12,
+        optional=True,
     )
     province: str = proto.Field(
-        proto.STRING, number=13, optional=True,
+        proto.STRING,
+        number=13,
+        optional=True,
     )
     postal_code: str = proto.Field(
-        proto.STRING, number=14, optional=True,
+        proto.STRING,
+        number=14,
+        optional=True,
     )
     country_code: str = proto.Field(
-        proto.STRING, number=15, optional=True,
+        proto.STRING,
+        number=15,
+        optional=True,
     )
     phone_number: str = proto.Field(
-        proto.STRING, number=16, optional=True,
+        proto.STRING,
+        number=16,
+        optional=True,
     )
 
 
@@ -320,34 +362,54 @@ class AffiliateLocationFeedItem(proto.Message):
     """
 
     business_name: str = proto.Field(
-        proto.STRING, number=11, optional=True,
+        proto.STRING,
+        number=11,
+        optional=True,
     )
     address_line_1: str = proto.Field(
-        proto.STRING, number=12, optional=True,
+        proto.STRING,
+        number=12,
+        optional=True,
     )
     address_line_2: str = proto.Field(
-        proto.STRING, number=13, optional=True,
+        proto.STRING,
+        number=13,
+        optional=True,
     )
     city: str = proto.Field(
-        proto.STRING, number=14, optional=True,
+        proto.STRING,
+        number=14,
+        optional=True,
     )
     province: str = proto.Field(
-        proto.STRING, number=15, optional=True,
+        proto.STRING,
+        number=15,
+        optional=True,
     )
     postal_code: str = proto.Field(
-        proto.STRING, number=16, optional=True,
+        proto.STRING,
+        number=16,
+        optional=True,
     )
     country_code: str = proto.Field(
-        proto.STRING, number=17, optional=True,
+        proto.STRING,
+        number=17,
+        optional=True,
     )
     phone_number: str = proto.Field(
-        proto.STRING, number=18, optional=True,
+        proto.STRING,
+        number=18,
+        optional=True,
     )
     chain_id: int = proto.Field(
-        proto.INT64, number=19, optional=True,
+        proto.INT64,
+        number=19,
+        optional=True,
     )
     chain_name: str = proto.Field(
-        proto.STRING, number=20, optional=True,
+        proto.STRING,
+        number=20,
+        optional=True,
     )
 
 
@@ -386,19 +448,29 @@ class TextMessageFeedItem(proto.Message):
     """
 
     business_name: str = proto.Field(
-        proto.STRING, number=6, optional=True,
+        proto.STRING,
+        number=6,
+        optional=True,
     )
     country_code: str = proto.Field(
-        proto.STRING, number=7, optional=True,
+        proto.STRING,
+        number=7,
+        optional=True,
     )
     phone_number: str = proto.Field(
-        proto.STRING, number=8, optional=True,
+        proto.STRING,
+        number=8,
+        optional=True,
     )
     text: str = proto.Field(
-        proto.STRING, number=9, optional=True,
+        proto.STRING,
+        number=9,
+        optional=True,
     )
     extension_text: str = proto.Field(
-        proto.STRING, number=10, optional=True,
+        proto.STRING,
+        number=10,
+        optional=True,
     )
 
 
@@ -431,10 +503,12 @@ class PriceFeedItem(proto.Message):
             This field is a member of `oneof`_ ``_final_url_suffix``.
     """
 
-    type_: price_extension_type.PriceExtensionTypeEnum.PriceExtensionType = proto.Field(
-        proto.ENUM,
-        number=1,
-        enum=price_extension_type.PriceExtensionTypeEnum.PriceExtensionType,
+    type_: price_extension_type.PriceExtensionTypeEnum.PriceExtensionType = (
+        proto.Field(
+            proto.ENUM,
+            number=1,
+            enum=price_extension_type.PriceExtensionTypeEnum.PriceExtensionType,
+        )
     )
     price_qualifier: price_extension_price_qualifier.PriceExtensionPriceQualifierEnum.PriceExtensionPriceQualifier = proto.Field(
         proto.ENUM,
@@ -442,16 +516,24 @@ class PriceFeedItem(proto.Message):
         enum=price_extension_price_qualifier.PriceExtensionPriceQualifierEnum.PriceExtensionPriceQualifier,
     )
     tracking_url_template: str = proto.Field(
-        proto.STRING, number=7, optional=True,
+        proto.STRING,
+        number=7,
+        optional=True,
     )
     language_code: str = proto.Field(
-        proto.STRING, number=8, optional=True,
+        proto.STRING,
+        number=8,
+        optional=True,
     )
     price_offerings: MutableSequence["PriceOffer"] = proto.RepeatedField(
-        proto.MESSAGE, number=5, message="PriceOffer",
+        proto.MESSAGE,
+        number=5,
+        message="PriceOffer",
     )
     final_url_suffix: str = proto.Field(
-        proto.STRING, number=9, optional=True,
+        proto.STRING,
+        number=9,
+        optional=True,
     )
 
 
@@ -481,13 +563,19 @@ class PriceOffer(proto.Message):
     """
 
     header: str = proto.Field(
-        proto.STRING, number=7, optional=True,
+        proto.STRING,
+        number=7,
+        optional=True,
     )
     description: str = proto.Field(
-        proto.STRING, number=8, optional=True,
+        proto.STRING,
+        number=8,
+        optional=True,
     )
     price: feed_common.Money = proto.Field(
-        proto.MESSAGE, number=3, message=feed_common.Money,
+        proto.MESSAGE,
+        number=3,
+        message=feed_common.Money,
     )
     unit: price_extension_price_unit.PriceExtensionPriceUnitEnum.PriceExtensionPriceUnit = proto.Field(
         proto.ENUM,
@@ -495,10 +583,12 @@ class PriceOffer(proto.Message):
         enum=price_extension_price_unit.PriceExtensionPriceUnitEnum.PriceExtensionPriceUnit,
     )
     final_urls: MutableSequence[str] = proto.RepeatedField(
-        proto.STRING, number=9,
+        proto.STRING,
+        number=9,
     )
     final_mobile_urls: MutableSequence[str] = proto.RepeatedField(
-        proto.STRING, number=10,
+        proto.STRING,
+        number=10,
     )
 
 
@@ -583,7 +673,9 @@ class PromotionFeedItem(proto.Message):
     """
 
     promotion_target: str = proto.Field(
-        proto.STRING, number=16, optional=True,
+        proto.STRING,
+        number=16,
+        optional=True,
     )
     discount_modifier: promotion_extension_discount_modifier.PromotionExtensionDiscountModifierEnum.PromotionExtensionDiscountModifier = proto.Field(
         proto.ENUM,
@@ -591,10 +683,14 @@ class PromotionFeedItem(proto.Message):
         enum=promotion_extension_discount_modifier.PromotionExtensionDiscountModifierEnum.PromotionExtensionDiscountModifier,
     )
     promotion_start_date: str = proto.Field(
-        proto.STRING, number=19, optional=True,
+        proto.STRING,
+        number=19,
+        optional=True,
     )
     promotion_end_date: str = proto.Field(
-        proto.STRING, number=20, optional=True,
+        proto.STRING,
+        number=20,
+        optional=True,
     )
     occasion: promotion_extension_occasion.PromotionExtensionOccasionEnum.PromotionExtensionOccasion = proto.Field(
         proto.ENUM,
@@ -602,27 +698,39 @@ class PromotionFeedItem(proto.Message):
         enum=promotion_extension_occasion.PromotionExtensionOccasionEnum.PromotionExtensionOccasion,
     )
     final_urls: MutableSequence[str] = proto.RepeatedField(
-        proto.STRING, number=21,
+        proto.STRING,
+        number=21,
     )
     final_mobile_urls: MutableSequence[str] = proto.RepeatedField(
-        proto.STRING, number=22,
+        proto.STRING,
+        number=22,
     )
     tracking_url_template: str = proto.Field(
-        proto.STRING, number=23, optional=True,
+        proto.STRING,
+        number=23,
+        optional=True,
     )
     url_custom_parameters: MutableSequence[
         custom_parameter.CustomParameter
     ] = proto.RepeatedField(
-        proto.MESSAGE, number=13, message=custom_parameter.CustomParameter,
+        proto.MESSAGE,
+        number=13,
+        message=custom_parameter.CustomParameter,
     )
     final_url_suffix: str = proto.Field(
-        proto.STRING, number=24, optional=True,
+        proto.STRING,
+        number=24,
+        optional=True,
     )
     language_code: str = proto.Field(
-        proto.STRING, number=25, optional=True,
+        proto.STRING,
+        number=25,
+        optional=True,
     )
     percent_off: int = proto.Field(
-        proto.INT64, number=17, oneof="discount_type",
+        proto.INT64,
+        number=17,
+        oneof="discount_type",
     )
     money_amount_off: feed_common.Money = proto.Field(
         proto.MESSAGE,
@@ -631,7 +739,9 @@ class PromotionFeedItem(proto.Message):
         message=feed_common.Money,
     )
     promotion_code: str = proto.Field(
-        proto.STRING, number=18, oneof="promotion_trigger",
+        proto.STRING,
+        number=18,
+        oneof="promotion_trigger",
     )
     orders_over_amount: feed_common.Money = proto.Field(
         proto.MESSAGE,
@@ -657,10 +767,13 @@ class StructuredSnippetFeedItem(proto.Message):
     """
 
     header: str = proto.Field(
-        proto.STRING, number=3, optional=True,
+        proto.STRING,
+        number=3,
+        optional=True,
     )
     values: MutableSequence[str] = proto.RepeatedField(
-        proto.STRING, number=4,
+        proto.STRING,
+        number=4,
     )
 
 
@@ -711,30 +824,44 @@ class SitelinkFeedItem(proto.Message):
     """
 
     link_text: str = proto.Field(
-        proto.STRING, number=9, optional=True,
+        proto.STRING,
+        number=9,
+        optional=True,
     )
     line1: str = proto.Field(
-        proto.STRING, number=10, optional=True,
+        proto.STRING,
+        number=10,
+        optional=True,
     )
     line2: str = proto.Field(
-        proto.STRING, number=11, optional=True,
+        proto.STRING,
+        number=11,
+        optional=True,
     )
     final_urls: MutableSequence[str] = proto.RepeatedField(
-        proto.STRING, number=12,
+        proto.STRING,
+        number=12,
     )
     final_mobile_urls: MutableSequence[str] = proto.RepeatedField(
-        proto.STRING, number=13,
+        proto.STRING,
+        number=13,
     )
     tracking_url_template: str = proto.Field(
-        proto.STRING, number=14, optional=True,
+        proto.STRING,
+        number=14,
+        optional=True,
     )
     url_custom_parameters: MutableSequence[
         custom_parameter.CustomParameter
     ] = proto.RepeatedField(
-        proto.MESSAGE, number=7, message=custom_parameter.CustomParameter,
+        proto.MESSAGE,
+        number=7,
+        message=custom_parameter.CustomParameter,
     )
     final_url_suffix: str = proto.Field(
-        proto.STRING, number=15, optional=True,
+        proto.STRING,
+        number=15,
+        optional=True,
     )
 
 
@@ -757,10 +884,14 @@ class HotelCalloutFeedItem(proto.Message):
     """
 
     text: str = proto.Field(
-        proto.STRING, number=3, optional=True,
+        proto.STRING,
+        number=3,
+        optional=True,
     )
     language_code: str = proto.Field(
-        proto.STRING, number=4, optional=True,
+        proto.STRING,
+        number=4,
+        optional=True,
     )
 
 
@@ -772,7 +903,8 @@ class ImageFeedItem(proto.Message):
     """
 
     image_asset: str = proto.Field(
-        proto.STRING, number=1,
+        proto.STRING,
+        number=1,
     )
 
 

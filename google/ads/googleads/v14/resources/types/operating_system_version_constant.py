@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-# Copyright 2022 Google LLC
+# Copyright 2023 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -26,7 +26,9 @@ from google.ads.googleads.v14.enums.types import (
 __protobuf__ = proto.module(
     package="google.ads.googleads.v14.resources",
     marshal="google.ads.googleads.v14",
-    manifest={"OperatingSystemVersionConstant",},
+    manifest={
+        "OperatingSystemVersionConstant",
+    },
 )
 
 
@@ -68,19 +70,28 @@ class OperatingSystemVersionConstant(proto.Message):
     """
 
     resource_name: str = proto.Field(
-        proto.STRING, number=1,
+        proto.STRING,
+        number=1,
     )
     id: int = proto.Field(
-        proto.INT64, number=7, optional=True,
+        proto.INT64,
+        number=7,
+        optional=True,
     )
     name: str = proto.Field(
-        proto.STRING, number=8, optional=True,
+        proto.STRING,
+        number=8,
+        optional=True,
     )
     os_major_version: int = proto.Field(
-        proto.INT32, number=9, optional=True,
+        proto.INT32,
+        number=9,
+        optional=True,
     )
     os_minor_version: int = proto.Field(
-        proto.INT32, number=10, optional=True,
+        proto.INT32,
+        number=10,
+        optional=True,
     )
     operator_type: operating_system_version_operator_type.OperatingSystemVersionOperatorTypeEnum.OperatingSystemVersionOperatorType = proto.Field(
         proto.ENUM,

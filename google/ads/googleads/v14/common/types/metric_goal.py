@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-# Copyright 2022 Google LLC
+# Copyright 2023 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -25,7 +25,9 @@ from google.ads.googleads.v14.enums.types import experiment_metric_direction
 __protobuf__ = proto.module(
     package="google.ads.googleads.v14.common",
     marshal="google.ads.googleads.v14",
-    manifest={"MetricGoal",},
+    manifest={
+        "MetricGoal",
+    },
 )
 
 
@@ -40,10 +42,12 @@ class MetricGoal(proto.Message):
             example, increase, decrease, no change.
     """
 
-    metric: experiment_metric.ExperimentMetricEnum.ExperimentMetric = proto.Field(
-        proto.ENUM,
-        number=1,
-        enum=experiment_metric.ExperimentMetricEnum.ExperimentMetric,
+    metric: experiment_metric.ExperimentMetricEnum.ExperimentMetric = (
+        proto.Field(
+            proto.ENUM,
+            number=1,
+            enum=experiment_metric.ExperimentMetricEnum.ExperimentMetric,
+        )
     )
     direction: experiment_metric_direction.ExperimentMetricDirectionEnum.ExperimentMetricDirection = proto.Field(
         proto.ENUM,

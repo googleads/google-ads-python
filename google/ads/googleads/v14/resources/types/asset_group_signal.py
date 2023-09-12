@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-# Copyright 2022 Google LLC
+# Copyright 2023 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -24,7 +24,9 @@ from google.ads.googleads.v14.common.types import criteria
 __protobuf__ = proto.module(
     package="google.ads.googleads.v14.resources",
     marshal="google.ads.googleads.v14",
-    manifest={"AssetGroupSignal",},
+    manifest={
+        "AssetGroupSignal",
+    },
 )
 
 
@@ -50,13 +52,17 @@ class AssetGroupSignal(proto.Message):
     """
 
     resource_name: str = proto.Field(
-        proto.STRING, number=1,
+        proto.STRING,
+        number=1,
     )
     asset_group: str = proto.Field(
-        proto.STRING, number=2,
+        proto.STRING,
+        number=2,
     )
     audience: criteria.AudienceInfo = proto.Field(
-        proto.MESSAGE, number=3, message=criteria.AudienceInfo,
+        proto.MESSAGE,
+        number=3,
+        message=criteria.AudienceInfo,
     )
 
 

@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-# Copyright 2022 Google LLC
+# Copyright 2023 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -67,18 +67,23 @@ class MutateSharedCriteriaRequest(proto.Message):
     """
 
     customer_id: str = proto.Field(
-        proto.STRING, number=1,
+        proto.STRING,
+        number=1,
     )
     operations: MutableSequence[
         "SharedCriterionOperation"
     ] = proto.RepeatedField(
-        proto.MESSAGE, number=2, message="SharedCriterionOperation",
+        proto.MESSAGE,
+        number=2,
+        message="SharedCriterionOperation",
     )
     partial_failure: bool = proto.Field(
-        proto.BOOL, number=3,
+        proto.BOOL,
+        number=3,
     )
     validate_only: bool = proto.Field(
-        proto.BOOL, number=4,
+        proto.BOOL,
+        number=4,
     )
     response_content_type: gage_response_content_type.ResponseContentTypeEnum.ResponseContentType = proto.Field(
         proto.ENUM,
@@ -99,7 +104,8 @@ class SharedCriterionOperation(proto.Message):
     Attributes:
         create (google.ads.googleads.v14.resources.types.SharedCriterion):
             Create operation: No resource name is
-            expected for the new shared criterion.
+            expected for the new shared
+            criterion.
 
             This field is a member of `oneof`_ ``operation``.
         remove (str):
@@ -118,7 +124,9 @@ class SharedCriterionOperation(proto.Message):
         message=gagr_shared_criterion.SharedCriterion,
     )
     remove: str = proto.Field(
-        proto.STRING, number=3, oneof="operation",
+        proto.STRING,
+        number=3,
+        oneof="operation",
     )
 
 
@@ -136,12 +144,16 @@ class MutateSharedCriteriaResponse(proto.Message):
     """
 
     partial_failure_error: status_pb2.Status = proto.Field(
-        proto.MESSAGE, number=3, message=status_pb2.Status,
+        proto.MESSAGE,
+        number=3,
+        message=status_pb2.Status,
     )
     results: MutableSequence[
         "MutateSharedCriterionResult"
     ] = proto.RepeatedField(
-        proto.MESSAGE, number=2, message="MutateSharedCriterionResult",
+        proto.MESSAGE,
+        number=2,
+        message="MutateSharedCriterionResult",
     )
 
 
@@ -157,10 +169,13 @@ class MutateSharedCriterionResult(proto.Message):
     """
 
     resource_name: str = proto.Field(
-        proto.STRING, number=1,
+        proto.STRING,
+        number=1,
     )
     shared_criterion: gagr_shared_criterion.SharedCriterion = proto.Field(
-        proto.MESSAGE, number=2, message=gagr_shared_criterion.SharedCriterion,
+        proto.MESSAGE,
+        number=2,
+        message=gagr_shared_criterion.SharedCriterion,
     )
 
 

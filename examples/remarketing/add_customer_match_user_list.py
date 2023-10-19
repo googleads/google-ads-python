@@ -35,7 +35,15 @@ from google.ads.googleads.client import GoogleAdsClient
 from google.ads.googleads.errors import GoogleAdsException
 
 
-def main(client, customer_id, run_job, user_list_id, offline_user_data_job_id):
+def main(
+    client,
+    customer_id,
+    run_job,
+    user_list_id,
+    offline_user_data_job_id,
+    ad_user_data_consent,
+    ad_personalization_consent,
+):
     """Uses Customer Match to create and add users to a new user list.
 
     Args:
@@ -47,6 +55,10 @@ def main(client, customer_id, run_job, user_list_id, offline_user_data_job_id):
             created.
         offline_user_data_job_id: ID of an existing OfflineUserDataJob in the
             PENDING state. If None, a new job is created.
+        ad_user_data_consent: The consent status for ad user data for all
+            members in the job.
+        ad_personalization_consent: The personalization consent status for ad
+            user data for all members in the job.
     """
     googleads_service = client.get_service("GoogleAdsService")
 
@@ -68,9 +80,11 @@ def main(client, customer_id, run_job, user_list_id, offline_user_data_job_id):
         user_list_resource_name,
         run_job,
         offline_user_data_job_id,
+        ad_user_data_consent,
+        ad_personalization_consent,
     )
 
-    
+
 # [START add_customer_match_user_list_3]
 def create_customer_match_user_list(client, customer_id):
     """Creates a Customer Match user list.
@@ -126,6 +140,8 @@ def add_users_to_customer_match_user_list(
     user_list_resource_name,
     run_job,
     offline_user_data_job_id,
+    ad_user_data_consent,
+    ad_personalization_consent,
 ):
     """Uses Customer Match to create and add users to a new user list.
 
@@ -138,6 +154,10 @@ def add_users_to_customer_match_user_list(
             Otherwise, only adds operations to the job.
         offline_user_data_job_id: ID of an existing OfflineUserDataJob in the
             PENDING state. If None, a new job is created.
+        ad_user_data_consent: The consent status for ad user data for all
+            members in the job.
+        ad_personalization_consent: The personalization consent status for ad
+            user data for all members in the job.
     """
     # Creates the OfflineUserDataJobService client.
     offline_user_data_job_service_client = client.get_service(
@@ -146,8 +166,10 @@ def add_users_to_customer_match_user_list(
 
     if offline_user_data_job_id:
         # Reuses the specified offline user data job.
-        offline_user_data_job_resource_name = offline_user_data_job_service_client.offline_user_data_job_path(
-            customer_id, offline_user_data_job_id
+        offline_user_data_job_resource_name = (
+            offline_user_data_job_service_client.offline_user_data_job_path(
+                customer_id, offline_user_data_job_id
+            )
         )
     else:
         # Creates a new offline user data job.
@@ -158,9 +180,24 @@ def add_users_to_customer_match_user_list(
         offline_user_data_job.customer_match_user_list_metadata.user_list = (
             user_list_resource_name
         )
+
+        # Specifies whether user consent was obtained for the data you are
+        # uploading. For more details, see:
+        # https://www.google.com/about/company/user-consent-policy
+        if ad_user_data_consent:
+            offline_user_data_job.customer_match_user_list_metadata.consent.ad_user_data = client.enums.ConsentStatusEnum[
+                ad_user_data_consent
+            ]
+        if ad_personalization_consent:
+            offline_user_data_job.customer_match_user_list_metadata.consent.ad_personalization = client.enums.ConsentStatusEnum[
+                ad_personalization_consent
+            ]
+
         # Issues a request to create an offline user data job.
-        create_offline_user_data_job_response = offline_user_data_job_service_client.create_offline_user_data_job(
-            customer_id=customer_id, job=offline_user_data_job
+        create_offline_user_data_job_response = (
+            offline_user_data_job_service_client.create_offline_user_data_job(
+                customer_id=customer_id, job=offline_user_data_job
+            )
         )
         offline_user_data_job_resource_name = (
             create_offline_user_data_job_response.resource_name
@@ -497,7 +534,7 @@ def normalize_and_hash(s, remove_all_whitespace):
 if __name__ == "__main__":
     # GoogleAdsClient will read the google-ads.yaml configuration file in the
     # home directory if none is specified.
-    googleads_client = GoogleAdsClient.load_from_storage(version="v14")
+    googleads_client = GoogleAdsClient.load_from_storage(version="v15")
 
     parser = argparse.ArgumentParser(
         description="Adds a customer match user list for specified customer."
@@ -540,6 +577,26 @@ if __name__ == "__main__":
             "not specified, this example will create a new job."
         ),
     )
+    parser.add_argument(
+        "-d",
+        "--ad_user_data_consent",
+        type=str,
+        choices=[e.name for e in googleads_client.enums.ConsentStatusEnum],
+        help=(
+            "The data consent status for ad user data for all members in "
+            "the job."
+        ),
+    )
+    parser.add_argument(
+        "-p",
+        "--ad_personalization_consent",
+        type=str,
+        choices=[e.name for e in googleads_client.enums.ConsentStatusEnum],
+        help=(
+            "The personalization consent status for ad user data for all "
+            "members in the job."
+        ),
+    )
 
     args = parser.parse_args()
 
@@ -550,6 +607,8 @@ if __name__ == "__main__":
             args.run_job,
             args.user_list_id,
             args.offline_user_data_job_id,
+            args.ad_user_data_consent,
+            args.ad_personalization_consent,
         )
     except GoogleAdsException as ex:
         print(

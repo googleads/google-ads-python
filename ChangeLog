@@ -1,3 +1,12 @@
+* 22.1.0
+- Google Ads API v15 release.
+- Add configuration option allowing developer token to be ignored.
+- Make "impersonation_email" an optional configuration for service accounts.
+- Redact PII fields from new LocalServicesLead and LocalServicesLeadConversation in logs.
+- Add DMA consent to conversions and Customer Match examples.
+- Update enhanced conversions examples to fit with for-leads and for-web workflows.
+- Update usage of ProductBiddingCategoryConstant to ProductCategoryConstant in examples.
+
 * 22.0.0
 - Remove support for Google Ads API v12.
 

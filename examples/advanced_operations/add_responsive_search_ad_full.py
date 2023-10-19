@@ -370,8 +370,11 @@ def add_keywords(client, customer_id, ad_group_resource_name):
     campaign_criterion_operations = operations
 
     # Add keywords
-    ad_group_criterion_response = ad_group_criterion_service.mutate_ad_group_criteria(
-        customer_id=customer_id, operations=[*campaign_criterion_operations],
+    ad_group_criterion_response = (
+        ad_group_criterion_service.mutate_ad_group_criteria(
+            customer_id=customer_id,
+            operations=[*campaign_criterion_operations],
+        )
     )
     for result in ad_group_criterion_response.results:
         print("Created keyword " f"{result.resource_name}.")
@@ -431,8 +434,10 @@ def add_geo_targeting(client, customer_id, campaign_resource_name):
         operations.append(campaign_criterion_operation)
 
     campaign_criterion_service = client.get_service("CampaignCriterionService")
-    campaign_criterion_response = campaign_criterion_service.mutate_campaign_criteria(
-        customer_id=customer_id, operations=[*operations]
+    campaign_criterion_response = (
+        campaign_criterion_service.mutate_campaign_criteria(
+            customer_id=customer_id, operations=[*operations]
+        )
     )
 
     for result in campaign_criterion_response.results:
@@ -485,8 +490,10 @@ def add_images(client, customer_id, campaign_resource_name):
     extension_feed_item = extension_feed_item_operation.create
     extension_feed_item.image_feed_item.image_asset = image_asset_resource_name
 
-    extension_feed_response = extension_feed_item_service.mutate_extension_feed_items(
-        customer_id=customer_id, operations=[extension_feed_item_operation]
+    extension_feed_response = (
+        extension_feed_item_service.mutate_extension_feed_items(
+            customer_id=customer_id, operations=[extension_feed_item_operation]
+        )
     )
     image_resource_name = extension_feed_response.results[0].resource_name
 
@@ -507,9 +514,11 @@ def add_images(client, customer_id, campaign_resource_name):
     ces.extension_type = client.enums.ExtensionTypeEnum.IMAGE
     ces.extension_feed_items.append(image_resource_name)
 
-    campaign_extension_response = campaign_extension_setting_service.mutate_campaign_extension_settings(
-        customer_id=customer_id,
-        operations=[campaign_extension_setting_operation],
+    campaign_extension_response = (
+        campaign_extension_setting_service.mutate_campaign_extension_settings(
+            customer_id=customer_id,
+            operations=[campaign_extension_setting_operation],
+        )
     )
 
     print(
@@ -521,7 +530,7 @@ def add_images(client, customer_id, campaign_resource_name):
 if __name__ == "__main__":
     # GoogleAdsClient will read the google-ads.yaml configuration file in the
     # home directory if none is specified.
-    googleads_client = GoogleAdsClient.load_from_storage(version="v14")
+    googleads_client = GoogleAdsClient.load_from_storage(version="v15")
 
     parser = argparse.ArgumentParser(
         description=("Creates a Responsive Search Ad for specified customer.")

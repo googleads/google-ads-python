@@ -33,7 +33,7 @@ _logger = logging.getLogger(__name__)
 
 _SERVICE_CLIENT_TEMPLATE = "{}Client"
 
-_VALID_API_VERSIONS = ["v14", "v13"]
+_VALID_API_VERSIONS = ["v15", "v14", "v13"]
 _DEFAULT_VERSION = _VALID_API_VERSIONS[0]
 
 # Retrieve the version of this client library to be sent in the user-agent
@@ -187,6 +187,9 @@ class GoogleAdsClient:
             "linked_customer_id": config_data.get("linked_customer_id"),
             "http_proxy": config_data.get("http_proxy"),
             "use_proto_plus": config_data.get("use_proto_plus"),
+            "use_cloud_org_for_api_access": config_data.get(
+                "use_cloud_org_for_api_access"
+            ),
         }
 
     @classmethod
@@ -302,6 +305,7 @@ class GoogleAdsClient:
         version=None,
         http_proxy=None,
         use_proto_plus=False,
+        use_cloud_org_for_api_access=None,
     ):
         """Initializer for the GoogleAdsClient.
 
@@ -314,6 +318,13 @@ class GoogleAdsClient:
             linked_customer_id: a str specifying a linked customer ID.
             version: a str indicating the Google Ads API version to be used.
             http_proxy: a str specifying the proxy URI through which to connect.
+            use_proto_plus: a bool specifying whether or not to use proto-plus
+                for protobuf message interfaces.
+            use_cloud_org_for_api_access: a str specifying whether to use the
+                Google Cloud Organization of your Google Cloud project instead
+                of developer token to determine your Google Ads API access
+                levels. Use this flag only if you are enrolled into a limited
+                pilot that supports this configuration
         """
         if logging_config:
             logging.config.dictConfig(logging_config)
@@ -326,6 +337,7 @@ class GoogleAdsClient:
         self.version = version
         self.http_proxy = http_proxy
         self.use_proto_plus = use_proto_plus
+        self.use_cloud_org_for_api_access = use_cloud_org_for_api_access
         self.enums = _EnumGetter(self)
 
         # If given, write the http_proxy channel option for GRPC to use
@@ -386,6 +398,7 @@ class GoogleAdsClient:
                 self.developer_token,
                 self.login_customer_id,
                 self.linked_customer_id,
+                self.use_cloud_org_for_api_access,
             ),
             LoggingInterceptor(_logger, version, endpoint),
             ExceptionInterceptor(version, use_proto_plus=self.use_proto_plus),

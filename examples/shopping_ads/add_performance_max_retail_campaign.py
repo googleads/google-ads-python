@@ -69,7 +69,6 @@ def main(
     client,
     customer_id,
     merchant_center_account_id,
-    sales_country,
     final_url,
 ):
     """The main method that creates all necessary entities for the example.
@@ -78,7 +77,6 @@ def main(
         client: an initialized GoogleAdsClient instance.
         customer_id: a client customer ID.
         merchant_center_account_id: The Merchant Center account ID.
-        sales_country: sales country of products to include in the campaign.
         final_url: the final URL.
     """
     # [START add_performance_max_retail_campaign_1]
@@ -131,7 +129,6 @@ def main(
             client,
             customer_id,
             merchant_center_account_id,
-            sales_country,
         )
     )
     campaign_criterion_operations = create_campaign_criterion_operations(
@@ -223,7 +220,6 @@ def create_performance_max_campaign_operation(
     client,
     customer_id,
     merchant_center_account_id,
-    sales_country,
 ):
     """Creates a MutateOperation that creates a new Performance Max campaign.
 
@@ -234,7 +230,6 @@ def create_performance_max_campaign_operation(
         client: an initialized GoogleAdsClient instance.
         customer_id: a client customer ID.
         merchant_center_account_id: The Merchant Center account ID.
-        sales_country: Sales country of products to include in the campaign.
 
     Returns:
         a MutateOperation that creates a campaign.
@@ -272,7 +267,13 @@ def create_performance_max_campaign_operation(
 
     # Set the shopping settings.
     campaign.shopping_setting.merchant_id = merchant_center_account_id
-    campaign.shopping_setting.sales_country = sales_country
+
+    # Optional: To use products only from a specific feed, set
+    # shopping_setting.feed_label to the feed label used in Merchant Center.
+    # See: https://support.google.com/merchants/answer/12453549.
+    # Omitting the shopping_setting.feed_label field will use products from all
+    # feeds.
+    # campaign.shopping_setting.feed_label = "INSERT_FEED_LABEL_HERE"
 
     # Set the Final URL expansion opt out. This flag is specific to
     # Performance Max campaigns. If opted out (True), only the final URLs in
@@ -475,9 +476,9 @@ def create_listing_group_filter_operation(client, customer_id):
         client.enums.ListingGroupFilterTypeEnum.UNIT_INCLUDED
     )
     # Because this is a Performance Max campaign for retail, we need to specify
-    # that this is in the shopping vertical.
-    asset_group_listing_group.vertical = (
-        client.enums.ListingGroupFilterVerticalEnum.SHOPPING
+    # that this is in the shopping listing source.
+    asset_group_listing_group.listing_source = (
+        client.enums.ListingGroupFilterListingSourceEnum.SHOPPING
     )
 
     return mutate_operation
@@ -881,7 +882,7 @@ def print_response_details(response):
 if __name__ == "__main__":
     # GoogleAdsClient will read the google-ads.yaml configuration file in the
     # home directory if none is specified.
-    googleads_client = GoogleAdsClient.load_from_storage(version="v14")
+    googleads_client = GoogleAdsClient.load_from_storage(version="v15")
 
     parser = argparse.ArgumentParser(
         description=("Creates a Performance Max retail campaign.")
@@ -902,14 +903,6 @@ if __name__ == "__main__":
         help="The Merchant Center account ID.",
     )
     parser.add_argument(
-        "-f",
-        "--sales_country",
-        type=str,
-        required=False,
-        default="US",
-        help="The sales country of products to include in the campaign",
-    )
-    parser.add_argument(
         "-u",
         "--final_url",
         type=str,
@@ -925,7 +918,6 @@ if __name__ == "__main__":
             googleads_client,
             args.customer_id,
             args.merchant_center_account_id,
-            args.sales_country,
             args.final_url,
         )
     except GoogleAdsException as ex:

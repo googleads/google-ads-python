@@ -28,7 +28,7 @@ install_requires = [
     "proto-plus >= 1.19.6, < 2.0.0",
     "PyYAML >= 5.1, < 7.0",
     "setuptools >= 40.3.0",
-    "protobuf >= 3.12.0, < 5.0.0dev, !=3.18.*, !=3.19.*",
+    "protobuf >= 3.12.0, < 5.0.0, !=3.18.*, !=3.19.*",
 ]
 
 with io.open("README.rst", "r", encoding="utf-8") as readme_file:
@@ -36,7 +36,7 @@ with io.open("README.rst", "r", encoding="utf-8") as readme_file:
 
 setup(
     name="google-ads",
-    version="22.0.0",
+    version="22.1.0",
     author="Google LLC",
     author_email="googleapis-packages@google.com",
     classifiers=[
@@ -53,10 +53,14 @@ setup(
     ],
     description="Client library for the Google Ads API",
     include_package_data=True,
-    python_requires=">=3.7",
+    python_requires=">=3.7, <3.12",
     long_description=long_description,
     install_requires=install_requires,
-    extras_require={"tests": ["nox >= 2020.12.31, < 2022.6",]},
+    extras_require={
+        "tests": [
+            "nox >= 2020.12.31, < 2022.6",
+        ]
+    },
     license="Apache 2.0",
     packages=find_packages(
         exclude=["examples", "examples.*", "tests", "tests.*"]

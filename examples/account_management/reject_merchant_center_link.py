@@ -22,6 +22,11 @@ To run this example, you must use the Merchant Center UI or the Content API for
 Shopping to send a link request between your Merchant Center and Google Ads
 accounts. You can find detailed instructions to link your Merchant Center and
 Google Ads accounts here: https://support.google.com/merchants/answer/6159060.
+
+NOTE: This code example uses version v14 of the Google Ads API. Version v15 of
+the Google Ads API replaces MerchantCenterLinkService with
+ProductLinkInvitationService and ProductLinkService. We will add new code
+examples using these services shortly.
 """
 
 import argparse
@@ -45,8 +50,10 @@ def main(client, customer_id, merchant_center_account_id):
         "MerchantCenterLinkService"
     )
     # Get the extant customer account to Merchant Center account links.
-    list_merchant_center_links_response = merchant_center_link_service.list_merchant_center_links(
-        customer_id=customer_id
+    list_merchant_center_links_response = (
+        merchant_center_link_service.list_merchant_center_links(
+            customer_id=customer_id
+        )
     )
 
     number_of_links = len(

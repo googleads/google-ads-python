@@ -616,7 +616,9 @@ def create_asset_group_operations(
         # and link it to the asset group.
         asset_mutate_operation = client.get_type("MutateOperation")
         asset = asset_mutate_operation.asset_operation.create
-        asset.resource_name = googleads_service.asset_path(customer_id, next_temp_id)
+        asset.resource_name = googleads_service.asset_path(
+            customer_id, next_temp_id
+        )
         asset.name = (
             f"Suggested call-to-action asset #{get_printable_datetime()}"
         )
@@ -629,7 +631,9 @@ def create_asset_group_operations(
         asset_group_asset = (
             asset_group_asset_mutate_operation.asset_group_asset_operation.create
         )
-        asset_group_asset.asset = googleads_service.asset_path(customer_id, next_temp_id)
+        asset_group_asset.asset = googleads_service.asset_path(
+            customer_id, next_temp_id
+        )
         asset_group_asset.asset_group = asset_group_resource_name
         asset_group_asset.field_type = (
             client.enums.AssetFieldTypeEnum.CALL_TO_ACTION_SELECTION
@@ -808,7 +812,6 @@ def create_image_assets_for_asset_group(
         if field_type_enum.name in required_image_asset_counts:
             required_image_asset_counts[field_type_enum.name] += 1
 
-
     # Adds more image assets to fulfill the requirements.
     for field_type_name, min_count in MIN_REQUIRED_IMAGE_ASSET_COUNTS.items():
         difference = min_count - required_image_asset_counts[field_type_name]
@@ -928,7 +931,7 @@ def print_response_details(mutate_response):
 if __name__ == "__main__":
     # GoogleAdsClient will read the google-ads.yaml configuration file in the
     # home directory if none is specified.
-    googleads_client = GoogleAdsClient.load_from_storage(version="v14")
+    googleads_client = GoogleAdsClient.load_from_storage(version="v15")
 
     parser = argparse.ArgumentParser(
         description=("Creates a Performance Max for travel goals campaign.")

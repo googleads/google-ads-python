@@ -263,7 +263,7 @@ def create_ad_with_customizations(
 if __name__ == "__main__":
     # GoogleAdsClient will read the google-ads.yaml configuration file in the
     # home directory if none is specified.
-    googleads_client = GoogleAdsClient.load_from_storage(version="v14")
+    googleads_client = GoogleAdsClient.load_from_storage(version="v15")
 
     parser = argparse.ArgumentParser(
         description=(
@@ -281,7 +281,11 @@ if __name__ == "__main__":
         help="The Google Ads customer ID.",
     )
     parser.add_argument(
-        "-a", "--ad_group_id", type=str, required=True, help="An ad group ID.",
+        "-a",
+        "--ad_group_id",
+        type=str,
+        required=True,
+        help="An ad group ID.",
     )
     args = parser.parse_args()
 

@@ -81,8 +81,10 @@ def main(client, customer_id, campaign_id):
     campaign_set.shared_set = shared_set_resource_name
 
     try:
-        campaign_shared_set_resource_name = campaign_shared_set_service.mutate_campaign_shared_sets(
-            customer_id=customer_id, operations=[campaign_set_operation]
+        campaign_shared_set_resource_name = (
+            campaign_shared_set_service.mutate_campaign_shared_sets(
+                customer_id=customer_id, operations=[campaign_set_operation]
+            )
         )
 
         print(
@@ -109,7 +111,7 @@ def handle_googleads_exception(exception):
 if __name__ == "__main__":
     # GoogleAdsClient will read the google-ads.yaml configuration file in the
     # home directory if none is specified.
-    googleads_client = GoogleAdsClient.load_from_storage(version="v14")
+    googleads_client = GoogleAdsClient.load_from_storage(version="v15")
 
     parser = argparse.ArgumentParser(
         description=(

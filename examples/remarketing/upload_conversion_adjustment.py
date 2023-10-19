@@ -46,8 +46,10 @@ def main(
     # The GCLID should have been uploaded before with a conversion
     conversion_adjustment = client.get_type("ConversionAdjustment")
     conversion_action_service = client.get_service("ConversionActionService")
-    conversion_adjustment.conversion_action = conversion_action_service.conversion_action_path(
-        customer_id, conversion_action_id
+    conversion_adjustment.conversion_action = (
+        conversion_action_service.conversion_action_path(
+            customer_id, conversion_action_id
+        )
     )
     conversion_adjustment.adjustment_type = conversion_adjustment_type
     conversion_adjustment.adjustment_date_time = adjustment_date_time
@@ -75,8 +77,10 @@ def main(
     request.customer_id = customer_id
     request.conversion_adjustments = [conversion_adjustment]
     request.partial_failure = True
-    response = conversion_adjustment_upload_service.upload_conversion_adjustments(
-        request=request,
+    response = (
+        conversion_adjustment_upload_service.upload_conversion_adjustments(
+            request=request,
+        )
     )
     conversion_adjustment_result = response.results[0]
     print(
@@ -92,7 +96,7 @@ def main(
 if __name__ == "__main__":
     # GoogleAdsClient will read the google-ads.yaml configuration file in the
     # home directory if none is specified.
-    googleads_client = GoogleAdsClient.load_from_storage(version="v14")
+    googleads_client = GoogleAdsClient.load_from_storage(version="v15")
 
     parser = argparse.ArgumentParser(
         description="Uploads a conversion adjustment."

@@ -46,8 +46,10 @@ def main(client, customer_id):
 
     # Add budget.
     try:
-        campaign_budget_response = campaign_budget_service.mutate_campaign_budgets(
-            customer_id=customer_id, operations=[campaign_budget_operation]
+        campaign_budget_response = (
+            campaign_budget_service.mutate_campaign_budgets(
+                customer_id=customer_id, operations=[campaign_budget_operation]
+            )
         )
     except GoogleAdsException as ex:
         handle_googleads_exception(ex)
@@ -114,7 +116,7 @@ def handle_googleads_exception(exception):
 if __name__ == "__main__":
     # GoogleAdsClient will read the google-ads.yaml configuration file in the
     # home directory if none is specified.
-    googleads_client = GoogleAdsClient.load_from_storage(version="v14")
+    googleads_client = GoogleAdsClient.load_from_storage(version="v15")
 
     parser = argparse.ArgumentParser(
         description="Adds a campaign for specified customer."

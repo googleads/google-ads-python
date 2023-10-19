@@ -51,7 +51,11 @@ class MetadataInterceptor(
     """An interceptor that appends custom metadata to requests."""
 
     def __init__(
-        self, developer_token, login_customer_id, linked_customer_id=None
+        self,
+        developer_token,
+        login_customer_id,
+        linked_customer_id=None,
+        use_cloud_org_for_api_access=None,
     ):
         """Initialization method for this class.
 
@@ -59,6 +63,11 @@ class MetadataInterceptor(
             developer_token: a str developer token.
             login_customer_id: a str specifying a login customer ID.
             linked_customer_id: a str specifying a linked customer ID.
+            use_cloud_org_for_api_access: a str specifying whether to use the
+                Google Cloud Organization of your Google Cloud project instead
+                of developer token to determine your Google Ads API access
+                levels. Use this flag only if you are enrolled into a limited
+                pilot that supports this configuration
         """
         self.developer_token_meta = ("developer-token", developer_token)
         self.login_customer_id_meta = (
@@ -71,6 +80,7 @@ class MetadataInterceptor(
             if linked_customer_id
             else None
         )
+        self.use_cloud_org_for_api_access = use_cloud_org_for_api_access
 
     def _update_client_call_details_metadata(
         self, client_call_details, metadata
@@ -112,7 +122,10 @@ class MetadataInterceptor(
         else:
             metadata = list(client_call_details.metadata)
 
-        metadata.append(self.developer_token_meta)
+        # If self.use_cloud_org_for_api_access is not True, add the developer
+        # token to the request's metadata
+        if not self.use_cloud_org_for_api_access:
+            metadata.append(self.developer_token_meta)
 
         if self.login_customer_id_meta:
             metadata.append(self.login_customer_id_meta)

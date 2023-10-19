@@ -97,8 +97,10 @@ def main(client, customer_id, ad_group_id, percent_cpc_bid_micro_amount):
     )
 
     # Adds the listing group and prints the resulting node resource names.
-    mutate_ad_group_criteria_response = ad_group_criterion_service.mutate_ad_group_criteria(
-        customer_id=customer_id, operations=operations
+    mutate_ad_group_criteria_response = (
+        ad_group_criterion_service.mutate_ad_group_criteria(
+            customer_id=customer_id, operations=operations
+        )
     )
     results = mutate_ad_group_criteria_response.results
     print(
@@ -132,7 +134,8 @@ def add_root_node(
 
     # Create the root of the tree as a SUBDIVISION node.
     root_listing_group_info = create_listing_group_info(
-        client, client.enums.ListingGroupTypeEnum.SUBDIVISION,
+        client,
+        client.enums.ListingGroupTypeEnum.SUBDIVISION,
     )
 
     root_ad_group_criterion = create_ad_group_criterion(
@@ -456,7 +459,7 @@ def create_ad_group_criterion(
 if __name__ == "__main__":
     # GoogleAdsClient will read the google-ads.yaml configuration file in the
     # home directory if none is specified.
-    googleads_client = GoogleAdsClient.load_from_storage(version="v14")
+    googleads_client = GoogleAdsClient.load_from_storage(version="v15")
 
     parser = argparse.ArgumentParser(
         description="Shows how to add a hotel listing group tree with two "

@@ -12,7 +12,16 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
-"""This code example uploads an image."""
+"""This code example uploads an image.
+
+This code example uses version v14 of the Google Ads API. Google Ads is
+migrating from individual media files to assets, and version v15 of the API
+removed support for MediaFileService as part of this migration. Once your Ads
+account is migrated, this code example will stop working, and you should use
+upload_image_asset.py instead. This code example will be removed once the
+migration completes. For more details, see:
+https://ads-developers.googleblog.com/2023/07/image-and-location-auto-migration.html
+"""
 
 
 import argparse

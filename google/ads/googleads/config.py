@@ -33,10 +33,12 @@ _OPTIONAL_KEYS = (
     "logging",
     "linked_customer_id",
     "http_proxy",
+    "use_cloud_org_for_api_access",
 )
 _CONFIG_FILE_PATH_KEY = ("configuration_file_path",)
 _OAUTH2_INSTALLED_APP_KEYS = ("client_id", "client_secret", "refresh_token")
-_OAUTH2_SERVICE_ACCOUNT_KEYS = ("json_key_file_path", "impersonated_email")
+_OAUTH2_REQUIRED_SERVICE_ACCOUNT_KEYS = ("json_key_file_path",)
+_OAUTH2_OPTIONAL_SERVICE_ACCOUNT_KEYS = ("impersonated_email",)
 # These keys are deprecated environment variables that can be used in place of
 # the primary OAuth2 service account keys for backwards compatibility. They will
 # be removed in favor of the primary keys at some point.
@@ -50,7 +52,8 @@ _KEYS_ENV_VARIABLES_MAP = {
     + _OPTIONAL_KEYS
     + _OAUTH2_INSTALLED_APP_KEYS
     + _CONFIG_FILE_PATH_KEY
-    + _OAUTH2_SERVICE_ACCOUNT_KEYS
+    + _OAUTH2_REQUIRED_SERVICE_ACCOUNT_KEYS
+    + _OAUTH2_OPTIONAL_SERVICE_ACCOUNT_KEYS
     + _SECONDARY_OAUTH2_SERVICE_ACCOUNT_KEYS
 }
 
@@ -350,13 +353,13 @@ def get_oauth2_installed_app_keys():
     return _OAUTH2_INSTALLED_APP_KEYS
 
 
-def get_oauth2_service_account_keys():
+def get_oauth2_required_service_account_keys():
     """A getter that returns the required OAuth2 service account keys.
 
     Returns:
         A tuple containing the required keys as strs.
     """
-    return _OAUTH2_SERVICE_ACCOUNT_KEYS
+    return _OAUTH2_REQUIRED_SERVICE_ACCOUNT_KEYS
 
 
 def convert_login_customer_id_to_str(config_data):

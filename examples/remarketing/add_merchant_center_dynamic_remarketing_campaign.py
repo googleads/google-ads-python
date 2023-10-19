@@ -87,11 +87,6 @@ def create_campaign(
     campaign.shopping_setting.campaign_priority = 0
     # This connects the campaign to the Merchant Center account.
     campaign.shopping_setting.merchant_id = merchant_center_account_id
-    # Display Network campaigns do not support partition by country. The only
-    # supported value is "ZZ". This signals that products from all countries are
-    # available in the campaign. The actual products which serve are based on
-    # the products tagged in the user list entry.
-    campaign.shopping_setting.sales_country = "ZZ"
     campaign.shopping_setting.enable_local = True
     # Dynamic remarketing campaigns are only available on the Google Display
     # Network.
@@ -286,8 +281,10 @@ def attach_user_list(client, customer_id, ad_group_resource_name, user_list_id):
     ).user_list_path(customer_id, user_list_id)
 
     # Issue a mutate request to add the ad group criterion.
-    ad_group_criterion_response = ad_group_criterion_service.mutate_ad_group_criteria(
-        customer_id=customer_id, operations=[ad_group_criterion_operation]
+    ad_group_criterion_response = (
+        ad_group_criterion_service.mutate_ad_group_criteria(
+            customer_id=customer_id, operations=[ad_group_criterion_operation]
+        )
     )
     print(
         "Created ad group criterion with resource name "
@@ -299,7 +296,7 @@ def attach_user_list(client, customer_id, ad_group_resource_name, user_list_id):
 if __name__ == "__main__":
     # GoogleAdsClient will read the google-ads.yaml configuration file in the
     # home directory if none is specified.
-    googleads_client = GoogleAdsClient.load_from_storage(version="v14")
+    googleads_client = GoogleAdsClient.load_from_storage(version="v15")
 
     parser = argparse.ArgumentParser(
         description=(

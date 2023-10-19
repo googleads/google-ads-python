@@ -53,6 +53,12 @@ customer_user_access_invitation = import_module(
 )
 change_event = import_module(f"{module_prefix}.resources.types.change_event")
 feed = import_module(f"{module_prefix}.resources.types.feed")
+local_services_lead = import_module(
+    f"{module_prefix}.resources.types.local_services_lead"
+)
+local_services_lead_conversation = import_module(
+    f"{module_prefix}.resources.types.local_services_lead_conversation"
+)
 
 
 class LoggingInterceptorTest(TestCase):
@@ -891,3 +897,33 @@ class LoggingInterceptorTest(TestCase):
         copy = mask_message(message, "REDACTED")
         self.assertIsInstance(copy, message.__class__)
         self.assertEqual(copy.email_address, "REDACTED")
+
+    def test_mask_local_services_lead(self):
+        """Copies and masks a LocalServicesLead instance."""
+        contact_details = local_services_lead.ContactDetails(
+            phone_number="800-555-0100",
+            email="dana@test.com",
+            consumer_name="Dana Test",
+        )
+        message = local_services_lead.LocalServicesLead(
+            contact_details=contact_details
+        )
+        copy = mask_message(message, "REDACTED")
+        self.assertIsInstance(copy, message.__class__)
+        self.assertEqual(copy.contact_details.email, "REDACTED")
+        self.assertEqual(copy.contact_details.phone_number, "REDACTED")
+        self.assertEqual(copy.contact_details.consumer_name, "REDACTED")
+
+    def test_mask_local_services_lead_conversation(self):
+        """Copies and masks a LocalServicesLead instance."""
+        message_details = local_services_lead_conversation.MessageDetails(
+            text="This is a test conversation",
+        )
+        message = (
+            local_services_lead_conversation.LocalServicesLeadConversation(
+                message_details=message_details
+            )
+        )
+        copy = mask_message(message, "REDACTED")
+        self.assertIsInstance(copy, message.__class__)
+        self.assertEqual(copy.message_details.text, "REDACTED")

@@ -174,9 +174,6 @@ def add_standard_shopping_campaign(
     )
     campaign.shopping_setting.merchant_id = merchant_center_account_id
 
-    # Sets the sales country of products to include in the campaign.
-    campaign.shopping_setting.sales_country = "US"
-
     # Sets the priority of the campaign. Higher numbers take priority over lower
     # numbers. For standard shopping campaigns, allowed values are between 0 and
     # 2, inclusive.
@@ -239,8 +236,10 @@ def add_default_shopping_listing_group(
     #  Set the bid for products in this listing group unit.
     ad_group_criterion.cpc_bid_micros = 500000
 
-    ad_group_criterion_response = ad_group_criterion_service.mutate_ad_group_criteria(
-        customer_id=customer_id, operations=[ad_group_criterion_operation]
+    ad_group_criterion_response = (
+        ad_group_criterion_service.mutate_ad_group_criteria(
+            customer_id=customer_id, operations=[ad_group_criterion_operation]
+        )
     )
 
     print(
@@ -252,7 +251,7 @@ def add_default_shopping_listing_group(
 if __name__ == "__main__":
     # GoogleAdsClient will read the google-ads.yaml configuration file in the
     # home directory if none is specified.
-    googleads_client = GoogleAdsClient.load_from_storage(version="v14")
+    googleads_client = GoogleAdsClient.load_from_storage(version="v15")
 
     parser = argparse.ArgumentParser(
         description=(

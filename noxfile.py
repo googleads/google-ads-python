@@ -16,6 +16,22 @@ import nox
 
 PYTHON_VERSIONS = ["3.7"]
 
+TEST_COMMAND = [
+    "coverage",
+    "run",
+    "--append",
+    "-m",
+    "unittest",
+    "discover",
+    "--buffer",
+    "-s=tests",
+    "-p",
+    "*_test.py",
+]
+COVERAGE_COMMAND = [
+    "coverage", "report", "-m", "--omit=.nox/*,examples/*,*/__init__.py",
+]
+
 
 @nox.session(python=PYTHON_VERSIONS)
 def tests(session):
@@ -26,20 +42,9 @@ def tests(session):
         "pyfakefs>=3.5,<3.7",
         "coverage==6.5.0",
     )
-    session.run(
-        "coverage",
-        "run",
-        "--append",
-        "-m",
-        "unittest",
-        "discover",
-        "-s=tests",
-        "-p",
-        "*_test.py",
-    )
-    session.run(
-        "coverage", "report", "-m", "--omit=.nox/*,examples/*,*/__init__.py"
-    )
+    session.run(*TEST_COMMAND)
+    session.run(*COVERAGE_COMMAND)
+
 
 # This session runs all the unit tests but with the lowest-possible versions
 # of supported dependencies that are published by Google.
@@ -61,17 +66,5 @@ def tests_minimum_dependency_versions(session):
         "grpcio==1.38.1",
         "grpcio-status==1.38.1",
     )
-    session.run(
-        "coverage",
-        "run",
-        "--append",
-        "-m",
-        "unittest",
-        "discover",
-        "-s=tests",
-        "-p",
-        "*_test.py",
-    )
-    session.run(
-        "coverage", "report", "-m", "--omit=.nox/*,examples/*,*/__init__.py"
-    )
+    session.run(*TEST_COMMAND)
+    session.run(*COVERAGE_COMMAND)

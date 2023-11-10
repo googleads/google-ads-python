@@ -13,10 +13,9 @@
 # limitations under the License.
 """Tests for the Metadata gRPC Interceptor."""
 
+from unittest import mock
 from unittest import TestCase
 import sys
-
-import mock
 
 from google.ads.googleads.interceptors import MetadataInterceptor
 

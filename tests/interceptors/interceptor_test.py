@@ -15,7 +15,7 @@
 
 
 from importlib import import_module
-import mock
+from unittest import mock
 from unittest import TestCase
 
 import grpc

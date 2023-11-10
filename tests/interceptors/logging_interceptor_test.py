@@ -17,10 +17,9 @@
 from importlib import import_module
 import json
 import logging
+from unittest import mock
 from unittest import TestCase
 from types import SimpleNamespace
-
-import mock
 
 from google.ads.googleads import client as Client
 from google.ads.googleads.interceptors import LoggingInterceptor

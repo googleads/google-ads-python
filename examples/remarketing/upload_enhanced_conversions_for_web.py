@@ -144,8 +144,8 @@ def main(
             address_info.hashed_last_name = normalize_and_hash(
                 raw_record["last_name"]
             )
-            address_info.hashed_street_address = raw_record["country_code"]
-            address_info.hashed_street_address = raw_record["postal_code"]
+            address_info.country_code = raw_record["country_code"]
+            address_info.postal_code = raw_record["postal_code"]
             # Adds the address identifier to the conversion adjustment.
             conversion_adjustment.user_identifiers.append(address_identifier)
             # [END add_user_identifiers]

@@ -15,7 +15,7 @@
 
 from importlib import import_module
 from inspect import getmembers
-import mock
+from unittest import mock
 import os
 import pickle
 from pyfakefs.fake_filesystem_unittest import TestCase as FileTestCase

@@ -14,7 +14,7 @@
 """Tests for the Exception gRPC Interceptor."""
 
 import grpc
-import mock
+from unittest import mock
 from unittest import TestCase
 
 from google.protobuf.message import Message as ProtobufMessageType

@@ -13,7 +13,7 @@
 # limitations under the License.
 """Tests for the OAuth2 helper module."""
 
-import mock
+from unittest import mock
 from unittest import TestCase
 
 from google.ads.googleads import oauth2

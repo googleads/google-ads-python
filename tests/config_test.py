@@ -13,7 +13,7 @@
 # limitations under the License.
 """Tests the configuration helper module."""
 
-import mock
+from unittest import mock
 import os
 import yaml
 from pyfakefs.fake_filesystem_unittest import TestCase as FileTestCase

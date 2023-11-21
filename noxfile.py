@@ -38,7 +38,6 @@ def tests(session):
     session.install(".")
     # modules for testing
     session.install(
-        "mock>=4.0.3",
         "pyfakefs>=3.5,<3.7",
         "coverage==6.5.0",
     )
@@ -53,7 +52,6 @@ def tests_minimum_dependency_versions(session):
     session.install(".")
     # modules for testing
     session.install(
-        "mock>=4.0.3",
         "pyfakefs>=3.5,<3.7",
         "coverage==6.5.0",
         # Google-published dependencies pinned to the

@@ -26,7 +26,6 @@ from google.ads.googleads.errors import GoogleAdsException
 from google.api_core import protobuf_helpers
 
 
-# [START add_ad_group_image_asset]
 def main(client, customer_id, ad_group_id, asset_id):
     ad_group_asset_service = client.get_service("AdGroupAssetService")
     ad_group_asset_resource_name = ad_group_asset_service.asset_path(
@@ -49,7 +48,6 @@ def main(client, customer_id, ad_group_id, asset_id):
             "Created ad group asset with resource name: "
             f"'{result.resource_name}'"
         )
-    # [End add_ad_group_image_asset.py]
 
 
 if __name__ == "__main__":

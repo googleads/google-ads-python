@@ -15,21 +15,13 @@ RUN apt-get update -qy && \
     apt-get install -qy --no-install-recommends \
         git \
         openssh-client \
-        python3.7 \
-        python3.7-dev \
-        python3.7-distutils \
         python3.8 \
-        python3.8-dev \
         python3.8-distutils \
         python3.9 \
-        python3.9-dev \
         python3.10 \
-        python3.10-dev \
         python3.11 \
-        python3.11-dev && \
+        python3.12 && \
     curl -fsSo /tmp/get-pip.py https://bootstrap.pypa.io/get-pip.py && \
-    python3.7 /tmp/get-pip.py && \
-    python3.7 -m pip install --no-cache-dir --upgrade pip && \
     python3.8 /tmp/get-pip.py && \
     python3.8 -m pip install --no-cache-dir --upgrade pip && \
     python3.9 /tmp/get-pip.py && \
@@ -38,6 +30,8 @@ RUN apt-get update -qy && \
     python3.10 -m pip install --no-cache-dir --upgrade pip && \
     python3.11 /tmp/get-pip.py && \
     python3.11 -m pip install --no-cache-dir --upgrade pip && \
+    python3.12 /tmp/get-pip.py && \
+    python3.12 -m pip install --no-cache-dir --upgrade pip && \
     rm /tmp/get-pip.py && \
     python3 -m pip install --no-cache-dir "nox>=2020.12.31,<2022.6" && \
     rm -rf /var/cache/apt/lists

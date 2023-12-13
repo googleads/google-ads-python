@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-# Copyright 2022 Google LLC
+# Copyright 2023 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -22,13 +22,14 @@ import proto  # type: ignore
 __protobuf__ = proto.module(
     package="google.ads.googleads.v13.enums",
     marshal="google.ads.googleads.v13",
-    manifest={"FeedStatusEnum",},
+    manifest={
+        "FeedStatusEnum",
+    },
 )
 
 
 class FeedStatusEnum(proto.Message):
-    r"""Container for enum describing possible statuses of a feed.
-    """
+    r"""Container for enum describing possible statuses of a feed."""
 
     class FeedStatus(proto.Enum):
         r"""Possible statuses of a feed."""

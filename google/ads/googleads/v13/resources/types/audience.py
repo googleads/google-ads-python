@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-# Copyright 2022 Google LLC
+# Copyright 2023 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -26,7 +26,9 @@ from google.ads.googleads.v13.enums.types import audience_status
 __protobuf__ = proto.module(
     package="google.ads.googleads.v13.resources",
     marshal="google.ads.googleads.v13",
-    manifest={"Audience",},
+    manifest={
+        "Audience",
+    },
 )
 
 
@@ -63,10 +65,12 @@ class Audience(proto.Message):
     """
 
     resource_name: str = proto.Field(
-        proto.STRING, number=1,
+        proto.STRING,
+        number=1,
     )
     id: int = proto.Field(
-        proto.INT64, number=2,
+        proto.INT64,
+        number=2,
     )
     status: audience_status.AudienceStatusEnum.AudienceStatus = proto.Field(
         proto.ENUM,
@@ -74,18 +78,24 @@ class Audience(proto.Message):
         enum=audience_status.AudienceStatusEnum.AudienceStatus,
     )
     name: str = proto.Field(
-        proto.STRING, number=4,
+        proto.STRING,
+        number=4,
     )
     description: str = proto.Field(
-        proto.STRING, number=5,
+        proto.STRING,
+        number=5,
     )
     dimensions: MutableSequence[
         audiences.AudienceDimension
     ] = proto.RepeatedField(
-        proto.MESSAGE, number=6, message=audiences.AudienceDimension,
+        proto.MESSAGE,
+        number=6,
+        message=audiences.AudienceDimension,
     )
     exclusion_dimension: audiences.AudienceExclusionDimension = proto.Field(
-        proto.MESSAGE, number=7, message=audiences.AudienceExclusionDimension,
+        proto.MESSAGE,
+        number=7,
+        message=audiences.AudienceExclusionDimension,
     )
 
 

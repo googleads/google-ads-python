@@ -13,12 +13,12 @@
 # limitations under the License.
 """A setup module for the Google Ads API client library."""
 
-from setuptools import setup, find_packages
+from setuptools import setup, find_namespace_packages
 import io
 
 install_requires = [
     "google-auth-oauthlib >= 0.3.0, < 2.0.0",
-    "google-api-core >= 2.11.0, <= 3.0.0",
+    "google-api-core >= 2.13.0, <= 3.0.0",
     "googleapis-common-protos >= 1.56.3, < 2.0.0",
     # NOTE: Source code for grpcio and grpcio-status exist in the same
     # grpc/grpc monorepo and thus these two dependencies should always
@@ -27,7 +27,6 @@ install_requires = [
     "grpcio-status >= 1.59.0, < 2.0.0",
     "proto-plus >= 1.22.3, < 2.0.0",
     "PyYAML >= 5.1, < 7.0",
-    "setuptools >= 40.3.0",
     "protobuf >= 4.25.0, < 5.0.0",
 ]
 
@@ -63,8 +62,9 @@ setup(
         ]
     },
     license="Apache 2.0",
-    packages=find_packages(
-        exclude=["examples", "examples.*", "tests", "tests.*"]
+    packages=find_namespace_packages(
+        include=["google.ads.*"],
+        exclude=["examples", "examples.*", "tests", "tests.*"],
     ),
     namespace_packages=["google", "google.ads"],
     url="https://github.com/googleads/google-ads-python",

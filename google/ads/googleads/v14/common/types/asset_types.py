@@ -1032,12 +1032,10 @@ class CallAsset(proto.Message):
     Attributes:
         country_code (str):
             Required. Two-letter country code of the
-            phone number. Examples: 'US',
-            'us'.
+            phone number. Examples: 'US', 'us'.
         phone_number (str):
             Required. The advertiser's raw phone number.
-            Examples: '1234567890',
-            '(123)456-7890'
+            Examples: '1234567890', '(123)456-7890'
         call_conversion_reporting_state (google.ads.googleads.v14.enums.types.CallConversionReportingStateEnum.CallConversionReportingState):
             Indicates whether this CallAsset should use
             its own call conversion setting, follow the
@@ -1723,8 +1721,8 @@ class DiscoveryCarouselCardAsset(proto.Message):
     Attributes:
         marketing_image_asset (str):
             Asset resource name of the associated 1.91:1
-            marketing image. This and/or
-            square marketing image asset is required.
+            marketing image. This and/or square marketing
+            image asset is required.
         square_marketing_image_asset (str):
             Asset resource name of the associated square
             marketing image. This and/or a marketing image

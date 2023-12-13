@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-# Copyright 2022 Google LLC
+# Copyright 2023 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -24,7 +24,9 @@ from google.ads.googleads.v13.enums.types import asset_set_asset_status
 __protobuf__ = proto.module(
     package="google.ads.googleads.v13.resources",
     marshal="google.ads.googleads.v13",
-    manifest={"AssetSetAsset",},
+    manifest={
+        "AssetSetAsset",
+    },
 )
 
 
@@ -50,13 +52,16 @@ class AssetSetAsset(proto.Message):
     """
 
     resource_name: str = proto.Field(
-        proto.STRING, number=1,
+        proto.STRING,
+        number=1,
     )
     asset_set: str = proto.Field(
-        proto.STRING, number=2,
+        proto.STRING,
+        number=2,
     )
     asset: str = proto.Field(
-        proto.STRING, number=3,
+        proto.STRING,
+        number=3,
     )
     status: asset_set_asset_status.AssetSetAssetStatusEnum.AssetSetAssetStatus = proto.Field(
         proto.ENUM,

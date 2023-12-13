@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-# Copyright 2022 Google LLC
+# Copyright 2023 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -27,7 +27,6 @@ from typing import (
     Union,
     cast,
 )
-import pkg_resources
 
 from google.api_core import client_options as client_options_lib
 from google.api_core import gapic_v1
@@ -37,6 +36,8 @@ from google.auth.transport import mtls  # type: ignore
 from google.auth.transport.grpc import SslCredentials  # type: ignore
 from google.auth.exceptions import MutualTLSChannelError  # type: ignore
 from google.oauth2 import service_account  # type: ignore
+
+from google.ads.googleads.v13 import gapic_version as package_version
 
 try:
     OptionalRetry = Union[retries.Retry, gapic_v1.method._MethodDefault]
@@ -65,7 +66,8 @@ class GoogleAdsServiceClientMeta(type):
     _transport_registry["grpc"] = GoogleAdsServiceGrpcTransport
 
     def get_transport_class(
-        cls, label: Optional[str] = None,
+        cls,
+        label: Optional[str] = None,
     ) -> Type[GoogleAdsServiceTransport]:
         """Returns an appropriate transport class.
 
@@ -189,11 +191,13 @@ class GoogleAdsServiceClient(metaclass=GoogleAdsServiceClientMeta):
 
     @staticmethod
     def accessible_bidding_strategy_path(
-        customer_id: str, bidding_strategy_id: str,
+        customer_id: str,
+        bidding_strategy_id: str,
     ) -> str:
         """Returns a fully-qualified accessible_bidding_strategy string."""
         return "customers/{customer_id}/accessibleBiddingStrategies/{bidding_strategy_id}".format(
-            customer_id=customer_id, bidding_strategy_id=bidding_strategy_id,
+            customer_id=customer_id,
+            bidding_strategy_id=bidding_strategy_id,
         )
 
     @staticmethod
@@ -206,10 +210,16 @@ class GoogleAdsServiceClient(metaclass=GoogleAdsServiceClientMeta):
         return m.groupdict() if m else {}
 
     @staticmethod
-    def account_budget_path(customer_id: str, account_budget_id: str,) -> str:
+    def account_budget_path(
+        customer_id: str,
+        account_budget_id: str,
+    ) -> str:
         """Returns a fully-qualified account_budget string."""
-        return "customers/{customer_id}/accountBudgets/{account_budget_id}".format(
-            customer_id=customer_id, account_budget_id=account_budget_id,
+        return (
+            "customers/{customer_id}/accountBudgets/{account_budget_id}".format(
+                customer_id=customer_id,
+                account_budget_id=account_budget_id,
+            )
         )
 
     @staticmethod
@@ -223,7 +233,8 @@ class GoogleAdsServiceClient(metaclass=GoogleAdsServiceClientMeta):
 
     @staticmethod
     def account_budget_proposal_path(
-        customer_id: str, account_budget_proposal_id: str,
+        customer_id: str,
+        account_budget_proposal_id: str,
     ) -> str:
         """Returns a fully-qualified account_budget_proposal string."""
         return "customers/{customer_id}/accountBudgetProposals/{account_budget_proposal_id}".format(
@@ -241,10 +252,14 @@ class GoogleAdsServiceClient(metaclass=GoogleAdsServiceClientMeta):
         return m.groupdict() if m else {}
 
     @staticmethod
-    def account_link_path(customer_id: str, account_link_id: str,) -> str:
+    def account_link_path(
+        customer_id: str,
+        account_link_id: str,
+    ) -> str:
         """Returns a fully-qualified account_link string."""
         return "customers/{customer_id}/accountLinks/{account_link_id}".format(
-            customer_id=customer_id, account_link_id=account_link_id,
+            customer_id=customer_id,
+            account_link_id=account_link_id,
         )
 
     @staticmethod
@@ -257,10 +272,14 @@ class GoogleAdsServiceClient(metaclass=GoogleAdsServiceClientMeta):
         return m.groupdict() if m else {}
 
     @staticmethod
-    def ad_path(customer_id: str, ad_id: str,) -> str:
+    def ad_path(
+        customer_id: str,
+        ad_id: str,
+    ) -> str:
         """Returns a fully-qualified ad string."""
         return "customers/{customer_id}/ads/{ad_id}".format(
-            customer_id=customer_id, ad_id=ad_id,
+            customer_id=customer_id,
+            ad_id=ad_id,
         )
 
     @staticmethod
@@ -272,10 +291,14 @@ class GoogleAdsServiceClient(metaclass=GoogleAdsServiceClientMeta):
         return m.groupdict() if m else {}
 
     @staticmethod
-    def ad_group_path(customer_id: str, ad_group_id: str,) -> str:
+    def ad_group_path(
+        customer_id: str,
+        ad_group_id: str,
+    ) -> str:
         """Returns a fully-qualified ad_group string."""
         return "customers/{customer_id}/adGroups/{ad_group_id}".format(
-            customer_id=customer_id, ad_group_id=ad_group_id,
+            customer_id=customer_id,
+            ad_group_id=ad_group_id,
         )
 
     @staticmethod
@@ -289,11 +312,17 @@ class GoogleAdsServiceClient(metaclass=GoogleAdsServiceClientMeta):
 
     @staticmethod
     def ad_group_ad_path(
-        customer_id: str, ad_group_id: str, ad_id: str,
+        customer_id: str,
+        ad_group_id: str,
+        ad_id: str,
     ) -> str:
         """Returns a fully-qualified ad_group_ad string."""
-        return "customers/{customer_id}/adGroupAds/{ad_group_id}~{ad_id}".format(
-            customer_id=customer_id, ad_group_id=ad_group_id, ad_id=ad_id,
+        return (
+            "customers/{customer_id}/adGroupAds/{ad_group_id}~{ad_id}".format(
+                customer_id=customer_id,
+                ad_group_id=ad_group_id,
+                ad_id=ad_id,
+            )
         )
 
     @staticmethod
@@ -361,7 +390,10 @@ class GoogleAdsServiceClient(metaclass=GoogleAdsServiceClientMeta):
 
     @staticmethod
     def ad_group_ad_label_path(
-        customer_id: str, ad_group_id: str, ad_id: str, label_id: str,
+        customer_id: str,
+        ad_group_id: str,
+        ad_id: str,
+        label_id: str,
     ) -> str:
         """Returns a fully-qualified ad_group_ad_label string."""
         return "customers/{customer_id}/adGroupAdLabels/{ad_group_id}~{ad_id}~{label_id}".format(
@@ -382,7 +414,10 @@ class GoogleAdsServiceClient(metaclass=GoogleAdsServiceClientMeta):
 
     @staticmethod
     def ad_group_asset_path(
-        customer_id: str, ad_group_id: str, asset_id: str, field_type: str,
+        customer_id: str,
+        ad_group_id: str,
+        asset_id: str,
+        field_type: str,
     ) -> str:
         """Returns a fully-qualified ad_group_asset string."""
         return "customers/{customer_id}/adGroupAssets/{ad_group_id}~{asset_id}~{field_type}".format(
@@ -403,7 +438,9 @@ class GoogleAdsServiceClient(metaclass=GoogleAdsServiceClientMeta):
 
     @staticmethod
     def ad_group_asset_set_path(
-        customer_id: str, ad_group_id: str, asset_set_id: str,
+        customer_id: str,
+        ad_group_id: str,
+        asset_set_id: str,
     ) -> str:
         """Returns a fully-qualified ad_group_asset_set string."""
         return "customers/{customer_id}/adGroupAssetSets/{ad_group_id}~{asset_set_id}".format(
@@ -423,7 +460,9 @@ class GoogleAdsServiceClient(metaclass=GoogleAdsServiceClientMeta):
 
     @staticmethod
     def ad_group_audience_view_path(
-        customer_id: str, ad_group_id: str, criterion_id: str,
+        customer_id: str,
+        ad_group_id: str,
+        criterion_id: str,
     ) -> str:
         """Returns a fully-qualified ad_group_audience_view string."""
         return "customers/{customer_id}/adGroupAudienceViews/{ad_group_id}~{criterion_id}".format(
@@ -443,7 +482,9 @@ class GoogleAdsServiceClient(metaclass=GoogleAdsServiceClientMeta):
 
     @staticmethod
     def ad_group_bid_modifier_path(
-        customer_id: str, ad_group_id: str, criterion_id: str,
+        customer_id: str,
+        ad_group_id: str,
+        criterion_id: str,
     ) -> str:
         """Returns a fully-qualified ad_group_bid_modifier string."""
         return "customers/{customer_id}/adGroupBidModifiers/{ad_group_id}~{criterion_id}".format(
@@ -463,7 +504,9 @@ class GoogleAdsServiceClient(metaclass=GoogleAdsServiceClientMeta):
 
     @staticmethod
     def ad_group_criterion_path(
-        customer_id: str, ad_group_id: str, criterion_id: str,
+        customer_id: str,
+        ad_group_id: str,
+        criterion_id: str,
     ) -> str:
         """Returns a fully-qualified ad_group_criterion string."""
         return "customers/{customer_id}/adGroupCriteria/{ad_group_id}~{criterion_id}".format(
@@ -507,7 +550,10 @@ class GoogleAdsServiceClient(metaclass=GoogleAdsServiceClientMeta):
 
     @staticmethod
     def ad_group_criterion_label_path(
-        customer_id: str, ad_group_id: str, criterion_id: str, label_id: str,
+        customer_id: str,
+        ad_group_id: str,
+        criterion_id: str,
+        label_id: str,
     ) -> str:
         """Returns a fully-qualified ad_group_criterion_label string."""
         return "customers/{customer_id}/adGroupCriterionLabels/{ad_group_id}~{criterion_id}~{label_id}".format(
@@ -558,7 +604,9 @@ class GoogleAdsServiceClient(metaclass=GoogleAdsServiceClientMeta):
 
     @staticmethod
     def ad_group_customizer_path(
-        customer_id: str, ad_group_id: str, customizer_attribute_id: str,
+        customer_id: str,
+        ad_group_id: str,
+        customizer_attribute_id: str,
     ) -> str:
         """Returns a fully-qualified ad_group_customizer string."""
         return "customers/{customer_id}/adGroupCustomizers/{ad_group_id}~{customizer_attribute_id}".format(
@@ -578,7 +626,9 @@ class GoogleAdsServiceClient(metaclass=GoogleAdsServiceClientMeta):
 
     @staticmethod
     def ad_group_extension_setting_path(
-        customer_id: str, ad_group_id: str, extension_type: str,
+        customer_id: str,
+        ad_group_id: str,
+        extension_type: str,
     ) -> str:
         """Returns a fully-qualified ad_group_extension_setting string."""
         return "customers/{customer_id}/adGroupExtensionSettings/{ad_group_id}~{extension_type}".format(
@@ -598,11 +648,15 @@ class GoogleAdsServiceClient(metaclass=GoogleAdsServiceClientMeta):
 
     @staticmethod
     def ad_group_feed_path(
-        customer_id: str, ad_group_id: str, feed_id: str,
+        customer_id: str,
+        ad_group_id: str,
+        feed_id: str,
     ) -> str:
         """Returns a fully-qualified ad_group_feed string."""
         return "customers/{customer_id}/adGroupFeeds/{ad_group_id}~{feed_id}".format(
-            customer_id=customer_id, ad_group_id=ad_group_id, feed_id=feed_id,
+            customer_id=customer_id,
+            ad_group_id=ad_group_id,
+            feed_id=feed_id,
         )
 
     @staticmethod
@@ -616,11 +670,15 @@ class GoogleAdsServiceClient(metaclass=GoogleAdsServiceClientMeta):
 
     @staticmethod
     def ad_group_label_path(
-        customer_id: str, ad_group_id: str, label_id: str,
+        customer_id: str,
+        ad_group_id: str,
+        label_id: str,
     ) -> str:
         """Returns a fully-qualified ad_group_label string."""
         return "customers/{customer_id}/adGroupLabels/{ad_group_id}~{label_id}".format(
-            customer_id=customer_id, ad_group_id=ad_group_id, label_id=label_id,
+            customer_id=customer_id,
+            ad_group_id=ad_group_id,
+            label_id=label_id,
         )
 
     @staticmethod
@@ -686,7 +744,9 @@ class GoogleAdsServiceClient(metaclass=GoogleAdsServiceClientMeta):
 
     @staticmethod
     def ad_schedule_view_path(
-        customer_id: str, campaign_id: str, criterion_id: str,
+        customer_id: str,
+        campaign_id: str,
+        criterion_id: str,
     ) -> str:
         """Returns a fully-qualified ad_schedule_view string."""
         return "customers/{customer_id}/adScheduleViews/{campaign_id}~{criterion_id}".format(
@@ -706,7 +766,9 @@ class GoogleAdsServiceClient(metaclass=GoogleAdsServiceClientMeta):
 
     @staticmethod
     def age_range_view_path(
-        customer_id: str, ad_group_id: str, criterion_id: str,
+        customer_id: str,
+        ad_group_id: str,
+        criterion_id: str,
     ) -> str:
         """Returns a fully-qualified age_range_view string."""
         return "customers/{customer_id}/ageRangeViews/{ad_group_id}~{criterion_id}".format(
@@ -725,10 +787,14 @@ class GoogleAdsServiceClient(metaclass=GoogleAdsServiceClientMeta):
         return m.groupdict() if m else {}
 
     @staticmethod
-    def asset_path(customer_id: str, asset_id: str,) -> str:
+    def asset_path(
+        customer_id: str,
+        asset_id: str,
+    ) -> str:
         """Returns a fully-qualified asset string."""
         return "customers/{customer_id}/assets/{asset_id}".format(
-            customer_id=customer_id, asset_id=asset_id,
+            customer_id=customer_id,
+            asset_id=asset_id,
         )
 
     @staticmethod
@@ -740,10 +806,16 @@ class GoogleAdsServiceClient(metaclass=GoogleAdsServiceClientMeta):
         return m.groupdict() if m else {}
 
     @staticmethod
-    def asset_field_type_view_path(customer_id: str, field_type: str,) -> str:
+    def asset_field_type_view_path(
+        customer_id: str,
+        field_type: str,
+    ) -> str:
         """Returns a fully-qualified asset_field_type_view string."""
-        return "customers/{customer_id}/assetFieldTypeViews/{field_type}".format(
-            customer_id=customer_id, field_type=field_type,
+        return (
+            "customers/{customer_id}/assetFieldTypeViews/{field_type}".format(
+                customer_id=customer_id,
+                field_type=field_type,
+            )
         )
 
     @staticmethod
@@ -756,10 +828,14 @@ class GoogleAdsServiceClient(metaclass=GoogleAdsServiceClientMeta):
         return m.groupdict() if m else {}
 
     @staticmethod
-    def asset_group_path(customer_id: str, asset_group_id: str,) -> str:
+    def asset_group_path(
+        customer_id: str,
+        asset_group_id: str,
+    ) -> str:
         """Returns a fully-qualified asset_group string."""
         return "customers/{customer_id}/assetGroups/{asset_group_id}".format(
-            customer_id=customer_id, asset_group_id=asset_group_id,
+            customer_id=customer_id,
+            asset_group_id=asset_group_id,
         )
 
     @staticmethod
@@ -773,7 +849,10 @@ class GoogleAdsServiceClient(metaclass=GoogleAdsServiceClientMeta):
 
     @staticmethod
     def asset_group_asset_path(
-        customer_id: str, asset_group_id: str, asset_id: str, field_type: str,
+        customer_id: str,
+        asset_group_id: str,
+        asset_id: str,
+        field_type: str,
     ) -> str:
         """Returns a fully-qualified asset_group_asset string."""
         return "customers/{customer_id}/assetGroupAssets/{asset_group_id}~{asset_id}~{field_type}".format(
@@ -794,7 +873,9 @@ class GoogleAdsServiceClient(metaclass=GoogleAdsServiceClientMeta):
 
     @staticmethod
     def asset_group_listing_group_filter_path(
-        customer_id: str, asset_group_id: str, listing_group_filter_id: str,
+        customer_id: str,
+        asset_group_id: str,
+        listing_group_filter_id: str,
     ) -> str:
         """Returns a fully-qualified asset_group_listing_group_filter string."""
         return "customers/{customer_id}/assetGroupListingGroupFilters/{asset_group_id}~{listing_group_filter_id}".format(
@@ -816,7 +897,9 @@ class GoogleAdsServiceClient(metaclass=GoogleAdsServiceClientMeta):
 
     @staticmethod
     def asset_group_product_group_view_path(
-        customer_id: str, asset_group_id: str, listing_group_filter_id: str,
+        customer_id: str,
+        asset_group_id: str,
+        listing_group_filter_id: str,
     ) -> str:
         """Returns a fully-qualified asset_group_product_group_view string."""
         return "customers/{customer_id}/assetGroupProductGroupViews/{asset_group_id}~{listing_group_filter_id}".format(
@@ -836,7 +919,9 @@ class GoogleAdsServiceClient(metaclass=GoogleAdsServiceClientMeta):
 
     @staticmethod
     def asset_group_signal_path(
-        customer_id: str, asset_group_id: str, criterion_id: str,
+        customer_id: str,
+        asset_group_id: str,
+        criterion_id: str,
     ) -> str:
         """Returns a fully-qualified asset_group_signal string."""
         return "customers/{customer_id}/assetGroupSignals/{asset_group_id}~{criterion_id}".format(
@@ -855,10 +940,14 @@ class GoogleAdsServiceClient(metaclass=GoogleAdsServiceClientMeta):
         return m.groupdict() if m else {}
 
     @staticmethod
-    def asset_set_path(customer_id: str, asset_set_id: str,) -> str:
+    def asset_set_path(
+        customer_id: str,
+        asset_set_id: str,
+    ) -> str:
         """Returns a fully-qualified asset_set string."""
         return "customers/{customer_id}/assetSets/{asset_set_id}".format(
-            customer_id=customer_id, asset_set_id=asset_set_id,
+            customer_id=customer_id,
+            asset_set_id=asset_set_id,
         )
 
     @staticmethod
@@ -872,7 +961,9 @@ class GoogleAdsServiceClient(metaclass=GoogleAdsServiceClientMeta):
 
     @staticmethod
     def asset_set_asset_path(
-        customer_id: str, asset_set_id: str, asset_id: str,
+        customer_id: str,
+        asset_set_id: str,
+        asset_id: str,
     ) -> str:
         """Returns a fully-qualified asset_set_asset string."""
         return "customers/{customer_id}/assetSetAssets/{asset_set_id}~{asset_id}".format(
@@ -891,10 +982,16 @@ class GoogleAdsServiceClient(metaclass=GoogleAdsServiceClientMeta):
         return m.groupdict() if m else {}
 
     @staticmethod
-    def asset_set_type_view_path(customer_id: str, asset_set_type: str,) -> str:
+    def asset_set_type_view_path(
+        customer_id: str,
+        asset_set_type: str,
+    ) -> str:
         """Returns a fully-qualified asset_set_type_view string."""
-        return "customers/{customer_id}/assetSetTypeViews/{asset_set_type}".format(
-            customer_id=customer_id, asset_set_type=asset_set_type,
+        return (
+            "customers/{customer_id}/assetSetTypeViews/{asset_set_type}".format(
+                customer_id=customer_id,
+                asset_set_type=asset_set_type,
+            )
         )
 
     @staticmethod
@@ -907,10 +1004,14 @@ class GoogleAdsServiceClient(metaclass=GoogleAdsServiceClientMeta):
         return m.groupdict() if m else {}
 
     @staticmethod
-    def audience_path(customer_id: str, audience_id: str,) -> str:
+    def audience_path(
+        customer_id: str,
+        audience_id: str,
+    ) -> str:
         """Returns a fully-qualified audience string."""
         return "customers/{customer_id}/audiences/{audience_id}".format(
-            customer_id=customer_id, audience_id=audience_id,
+            customer_id=customer_id,
+            audience_id=audience_id,
         )
 
     @staticmethod
@@ -923,10 +1024,14 @@ class GoogleAdsServiceClient(metaclass=GoogleAdsServiceClientMeta):
         return m.groupdict() if m else {}
 
     @staticmethod
-    def batch_job_path(customer_id: str, batch_job_id: str,) -> str:
+    def batch_job_path(
+        customer_id: str,
+        batch_job_id: str,
+    ) -> str:
         """Returns a fully-qualified batch_job string."""
         return "customers/{customer_id}/batchJobs/{batch_job_id}".format(
-            customer_id=customer_id, batch_job_id=batch_job_id,
+            customer_id=customer_id,
+            batch_job_id=batch_job_id,
         )
 
     @staticmethod
@@ -940,11 +1045,13 @@ class GoogleAdsServiceClient(metaclass=GoogleAdsServiceClientMeta):
 
     @staticmethod
     def bidding_data_exclusion_path(
-        customer_id: str, seasonality_event_id: str,
+        customer_id: str,
+        seasonality_event_id: str,
     ) -> str:
         """Returns a fully-qualified bidding_data_exclusion string."""
         return "customers/{customer_id}/biddingDataExclusions/{seasonality_event_id}".format(
-            customer_id=customer_id, seasonality_event_id=seasonality_event_id,
+            customer_id=customer_id,
+            seasonality_event_id=seasonality_event_id,
         )
 
     @staticmethod
@@ -958,11 +1065,13 @@ class GoogleAdsServiceClient(metaclass=GoogleAdsServiceClientMeta):
 
     @staticmethod
     def bidding_seasonality_adjustment_path(
-        customer_id: str, seasonality_event_id: str,
+        customer_id: str,
+        seasonality_event_id: str,
     ) -> str:
         """Returns a fully-qualified bidding_seasonality_adjustment string."""
         return "customers/{customer_id}/biddingSeasonalityAdjustments/{seasonality_event_id}".format(
-            customer_id=customer_id, seasonality_event_id=seasonality_event_id,
+            customer_id=customer_id,
+            seasonality_event_id=seasonality_event_id,
         )
 
     @staticmethod
@@ -976,11 +1085,13 @@ class GoogleAdsServiceClient(metaclass=GoogleAdsServiceClientMeta):
 
     @staticmethod
     def bidding_strategy_path(
-        customer_id: str, bidding_strategy_id: str,
+        customer_id: str,
+        bidding_strategy_id: str,
     ) -> str:
         """Returns a fully-qualified bidding_strategy string."""
         return "customers/{customer_id}/biddingStrategies/{bidding_strategy_id}".format(
-            customer_id=customer_id, bidding_strategy_id=bidding_strategy_id,
+            customer_id=customer_id,
+            bidding_strategy_id=bidding_strategy_id,
         )
 
     @staticmethod
@@ -1021,10 +1132,16 @@ class GoogleAdsServiceClient(metaclass=GoogleAdsServiceClientMeta):
         return m.groupdict() if m else {}
 
     @staticmethod
-    def billing_setup_path(customer_id: str, billing_setup_id: str,) -> str:
+    def billing_setup_path(
+        customer_id: str,
+        billing_setup_id: str,
+    ) -> str:
         """Returns a fully-qualified billing_setup string."""
-        return "customers/{customer_id}/billingSetups/{billing_setup_id}".format(
-            customer_id=customer_id, billing_setup_id=billing_setup_id,
+        return (
+            "customers/{customer_id}/billingSetups/{billing_setup_id}".format(
+                customer_id=customer_id,
+                billing_setup_id=billing_setup_id,
+            )
         )
 
     @staticmethod
@@ -1037,10 +1154,14 @@ class GoogleAdsServiceClient(metaclass=GoogleAdsServiceClientMeta):
         return m.groupdict() if m else {}
 
     @staticmethod
-    def call_view_path(customer_id: str, call_detail_id: str,) -> str:
+    def call_view_path(
+        customer_id: str,
+        call_detail_id: str,
+    ) -> str:
         """Returns a fully-qualified call_view string."""
         return "customers/{customer_id}/callViews/{call_detail_id}".format(
-            customer_id=customer_id, call_detail_id=call_detail_id,
+            customer_id=customer_id,
+            call_detail_id=call_detail_id,
         )
 
     @staticmethod
@@ -1053,10 +1174,14 @@ class GoogleAdsServiceClient(metaclass=GoogleAdsServiceClientMeta):
         return m.groupdict() if m else {}
 
     @staticmethod
-    def campaign_path(customer_id: str, campaign_id: str,) -> str:
+    def campaign_path(
+        customer_id: str,
+        campaign_id: str,
+    ) -> str:
         """Returns a fully-qualified campaign string."""
         return "customers/{customer_id}/campaigns/{campaign_id}".format(
-            customer_id=customer_id, campaign_id=campaign_id,
+            customer_id=customer_id,
+            campaign_id=campaign_id,
         )
 
     @staticmethod
@@ -1070,7 +1195,10 @@ class GoogleAdsServiceClient(metaclass=GoogleAdsServiceClientMeta):
 
     @staticmethod
     def campaign_asset_path(
-        customer_id: str, campaign_id: str, asset_id: str, field_type: str,
+        customer_id: str,
+        campaign_id: str,
+        asset_id: str,
+        field_type: str,
     ) -> str:
         """Returns a fully-qualified campaign_asset string."""
         return "customers/{customer_id}/campaignAssets/{campaign_id}~{asset_id}~{field_type}".format(
@@ -1091,7 +1219,9 @@ class GoogleAdsServiceClient(metaclass=GoogleAdsServiceClientMeta):
 
     @staticmethod
     def campaign_asset_set_path(
-        customer_id: str, campaign_id: str, asset_set_id: str,
+        customer_id: str,
+        campaign_id: str,
+        asset_set_id: str,
     ) -> str:
         """Returns a fully-qualified campaign_asset_set string."""
         return "customers/{customer_id}/campaignAssetSets/{campaign_id}~{asset_set_id}".format(
@@ -1111,7 +1241,9 @@ class GoogleAdsServiceClient(metaclass=GoogleAdsServiceClientMeta):
 
     @staticmethod
     def campaign_audience_view_path(
-        customer_id: str, campaign_id: str, criterion_id: str,
+        customer_id: str,
+        campaign_id: str,
+        criterion_id: str,
     ) -> str:
         """Returns a fully-qualified campaign_audience_view string."""
         return "customers/{customer_id}/campaignAudienceViews/{campaign_id}~{criterion_id}".format(
@@ -1131,7 +1263,9 @@ class GoogleAdsServiceClient(metaclass=GoogleAdsServiceClientMeta):
 
     @staticmethod
     def campaign_bid_modifier_path(
-        customer_id: str, campaign_id: str, criterion_id: str,
+        customer_id: str,
+        campaign_id: str,
+        criterion_id: str,
     ) -> str:
         """Returns a fully-qualified campaign_bid_modifier string."""
         return "customers/{customer_id}/campaignBidModifiers/{campaign_id}~{criterion_id}".format(
@@ -1150,10 +1284,14 @@ class GoogleAdsServiceClient(metaclass=GoogleAdsServiceClientMeta):
         return m.groupdict() if m else {}
 
     @staticmethod
-    def campaign_budget_path(customer_id: str, campaign_budget_id: str,) -> str:
+    def campaign_budget_path(
+        customer_id: str,
+        campaign_budget_id: str,
+    ) -> str:
         """Returns a fully-qualified campaign_budget string."""
         return "customers/{customer_id}/campaignBudgets/{campaign_budget_id}".format(
-            customer_id=customer_id, campaign_budget_id=campaign_budget_id,
+            customer_id=customer_id,
+            campaign_budget_id=campaign_budget_id,
         )
 
     @staticmethod
@@ -1167,7 +1305,10 @@ class GoogleAdsServiceClient(metaclass=GoogleAdsServiceClientMeta):
 
     @staticmethod
     def campaign_conversion_goal_path(
-        customer_id: str, campaign_id: str, category: str, source: str,
+        customer_id: str,
+        campaign_id: str,
+        category: str,
+        source: str,
     ) -> str:
         """Returns a fully-qualified campaign_conversion_goal string."""
         return "customers/{customer_id}/campaignConversionGoals/{campaign_id}~{category}~{source}".format(
@@ -1188,7 +1329,9 @@ class GoogleAdsServiceClient(metaclass=GoogleAdsServiceClientMeta):
 
     @staticmethod
     def campaign_criterion_path(
-        customer_id: str, campaign_id: str, criterion_id: str,
+        customer_id: str,
+        campaign_id: str,
+        criterion_id: str,
     ) -> str:
         """Returns a fully-qualified campaign_criterion string."""
         return "customers/{customer_id}/campaignCriteria/{campaign_id}~{criterion_id}".format(
@@ -1238,7 +1381,9 @@ class GoogleAdsServiceClient(metaclass=GoogleAdsServiceClientMeta):
 
     @staticmethod
     def campaign_customizer_path(
-        customer_id: str, campaign_id: str, customizer_attribute_id: str,
+        customer_id: str,
+        campaign_id: str,
+        customizer_attribute_id: str,
     ) -> str:
         """Returns a fully-qualified campaign_customizer string."""
         return "customers/{customer_id}/campaignCustomizers/{campaign_id}~{customizer_attribute_id}".format(
@@ -1258,7 +1403,9 @@ class GoogleAdsServiceClient(metaclass=GoogleAdsServiceClientMeta):
 
     @staticmethod
     def campaign_draft_path(
-        customer_id: str, base_campaign_id: str, draft_id: str,
+        customer_id: str,
+        base_campaign_id: str,
+        draft_id: str,
     ) -> str:
         """Returns a fully-qualified campaign_draft string."""
         return "customers/{customer_id}/campaignDrafts/{base_campaign_id}~{draft_id}".format(
@@ -1278,7 +1425,9 @@ class GoogleAdsServiceClient(metaclass=GoogleAdsServiceClientMeta):
 
     @staticmethod
     def campaign_extension_setting_path(
-        customer_id: str, campaign_id: str, extension_type: str,
+        customer_id: str,
+        campaign_id: str,
+        extension_type: str,
     ) -> str:
         """Returns a fully-qualified campaign_extension_setting string."""
         return "customers/{customer_id}/campaignExtensionSettings/{campaign_id}~{extension_type}".format(
@@ -1298,11 +1447,15 @@ class GoogleAdsServiceClient(metaclass=GoogleAdsServiceClientMeta):
 
     @staticmethod
     def campaign_feed_path(
-        customer_id: str, campaign_id: str, feed_id: str,
+        customer_id: str,
+        campaign_id: str,
+        feed_id: str,
     ) -> str:
         """Returns a fully-qualified campaign_feed string."""
         return "customers/{customer_id}/campaignFeeds/{campaign_id}~{feed_id}".format(
-            customer_id=customer_id, campaign_id=campaign_id, feed_id=feed_id,
+            customer_id=customer_id,
+            campaign_id=campaign_id,
+            feed_id=feed_id,
         )
 
     @staticmethod
@@ -1315,10 +1468,16 @@ class GoogleAdsServiceClient(metaclass=GoogleAdsServiceClientMeta):
         return m.groupdict() if m else {}
 
     @staticmethod
-    def campaign_group_path(customer_id: str, campaign_group_id: str,) -> str:
+    def campaign_group_path(
+        customer_id: str,
+        campaign_group_id: str,
+    ) -> str:
         """Returns a fully-qualified campaign_group string."""
-        return "customers/{customer_id}/campaignGroups/{campaign_group_id}".format(
-            customer_id=customer_id, campaign_group_id=campaign_group_id,
+        return (
+            "customers/{customer_id}/campaignGroups/{campaign_group_id}".format(
+                customer_id=customer_id,
+                campaign_group_id=campaign_group_id,
+            )
         )
 
     @staticmethod
@@ -1332,11 +1491,15 @@ class GoogleAdsServiceClient(metaclass=GoogleAdsServiceClientMeta):
 
     @staticmethod
     def campaign_label_path(
-        customer_id: str, campaign_id: str, label_id: str,
+        customer_id: str,
+        campaign_id: str,
+        label_id: str,
     ) -> str:
         """Returns a fully-qualified campaign_label string."""
         return "customers/{customer_id}/campaignLabels/{campaign_id}~{label_id}".format(
-            customer_id=customer_id, campaign_id=campaign_id, label_id=label_id,
+            customer_id=customer_id,
+            campaign_id=campaign_id,
+            label_id=label_id,
         )
 
     @staticmethod
@@ -1350,7 +1513,9 @@ class GoogleAdsServiceClient(metaclass=GoogleAdsServiceClientMeta):
 
     @staticmethod
     def campaign_shared_set_path(
-        customer_id: str, campaign_id: str, shared_set_id: str,
+        customer_id: str,
+        campaign_id: str,
+        shared_set_id: str,
     ) -> str:
         """Returns a fully-qualified campaign_shared_set string."""
         return "customers/{customer_id}/campaignSharedSets/{campaign_id}~{shared_set_id}".format(
@@ -1397,7 +1562,9 @@ class GoogleAdsServiceClient(metaclass=GoogleAdsServiceClientMeta):
         return m.groupdict() if m else {}
 
     @staticmethod
-    def carrier_constant_path(criterion_id: str,) -> str:
+    def carrier_constant_path(
+        criterion_id: str,
+    ) -> str:
         """Returns a fully-qualified carrier_constant string."""
         return "carrierConstants/{criterion_id}".format(
             criterion_id=criterion_id,
@@ -1434,10 +1601,14 @@ class GoogleAdsServiceClient(metaclass=GoogleAdsServiceClientMeta):
         return m.groupdict() if m else {}
 
     @staticmethod
-    def change_status_path(customer_id: str, change_status_id: str,) -> str:
+    def change_status_path(
+        customer_id: str,
+        change_status_id: str,
+    ) -> str:
         """Returns a fully-qualified change_status string."""
         return "customers/{customer_id}/changeStatus/{change_status_id}".format(
-            customer_id=customer_id, change_status_id=change_status_id,
+            customer_id=customer_id,
+            change_status_id=change_status_id,
         )
 
     @staticmethod
@@ -1450,10 +1621,16 @@ class GoogleAdsServiceClient(metaclass=GoogleAdsServiceClientMeta):
         return m.groupdict() if m else {}
 
     @staticmethod
-    def click_view_path(customer_id: str, date: str, gclid: str,) -> str:
+    def click_view_path(
+        customer_id: str,
+        date: str,
+        gclid: str,
+    ) -> str:
         """Returns a fully-qualified click_view string."""
         return "customers/{customer_id}/clickViews/{date}~{gclid}".format(
-            customer_id=customer_id, date=date, gclid=gclid,
+            customer_id=customer_id,
+            date=date,
+            gclid=gclid,
         )
 
     @staticmethod
@@ -1467,11 +1644,13 @@ class GoogleAdsServiceClient(metaclass=GoogleAdsServiceClientMeta):
 
     @staticmethod
     def combined_audience_path(
-        customer_id: str, combined_audience_id: str,
+        customer_id: str,
+        combined_audience_id: str,
     ) -> str:
         """Returns a fully-qualified combined_audience string."""
         return "customers/{customer_id}/combinedAudiences/{combined_audience_id}".format(
-            customer_id=customer_id, combined_audience_id=combined_audience_id,
+            customer_id=customer_id,
+            combined_audience_id=combined_audience_id,
         )
 
     @staticmethod
@@ -1485,11 +1664,13 @@ class GoogleAdsServiceClient(metaclass=GoogleAdsServiceClientMeta):
 
     @staticmethod
     def conversion_action_path(
-        customer_id: str, conversion_action_id: str,
+        customer_id: str,
+        conversion_action_id: str,
     ) -> str:
         """Returns a fully-qualified conversion_action string."""
         return "customers/{customer_id}/conversionActions/{conversion_action_id}".format(
-            customer_id=customer_id, conversion_action_id=conversion_action_id,
+            customer_id=customer_id,
+            conversion_action_id=conversion_action_id,
         )
 
     @staticmethod
@@ -1503,7 +1684,8 @@ class GoogleAdsServiceClient(metaclass=GoogleAdsServiceClientMeta):
 
     @staticmethod
     def conversion_custom_variable_path(
-        customer_id: str, conversion_custom_variable_id: str,
+        customer_id: str,
+        conversion_custom_variable_id: str,
     ) -> str:
         """Returns a fully-qualified conversion_custom_variable string."""
         return "customers/{customer_id}/conversionCustomVariables/{conversion_custom_variable_id}".format(
@@ -1522,11 +1704,13 @@ class GoogleAdsServiceClient(metaclass=GoogleAdsServiceClientMeta):
 
     @staticmethod
     def conversion_goal_campaign_config_path(
-        customer_id: str, campaign_id: str,
+        customer_id: str,
+        campaign_id: str,
     ) -> str:
         """Returns a fully-qualified conversion_goal_campaign_config string."""
         return "customers/{customer_id}/conversionGoalCampaignConfigs/{campaign_id}".format(
-            customer_id=customer_id, campaign_id=campaign_id,
+            customer_id=customer_id,
+            campaign_id=campaign_id,
         )
 
     @staticmethod
@@ -1540,7 +1724,8 @@ class GoogleAdsServiceClient(metaclass=GoogleAdsServiceClientMeta):
 
     @staticmethod
     def conversion_value_rule_path(
-        customer_id: str, conversion_value_rule_id: str,
+        customer_id: str,
+        conversion_value_rule_id: str,
     ) -> str:
         """Returns a fully-qualified conversion_value_rule string."""
         return "customers/{customer_id}/conversionValueRules/{conversion_value_rule_id}".format(
@@ -1559,7 +1744,8 @@ class GoogleAdsServiceClient(metaclass=GoogleAdsServiceClientMeta):
 
     @staticmethod
     def conversion_value_rule_set_path(
-        customer_id: str, conversion_value_rule_set_id: str,
+        customer_id: str,
+        conversion_value_rule_set_id: str,
     ) -> str:
         """Returns a fully-qualified conversion_value_rule_set string."""
         return "customers/{customer_id}/conversionValueRuleSets/{conversion_value_rule_set_id}".format(
@@ -1577,9 +1763,13 @@ class GoogleAdsServiceClient(metaclass=GoogleAdsServiceClientMeta):
         return m.groupdict() if m else {}
 
     @staticmethod
-    def currency_constant_path(code: str,) -> str:
+    def currency_constant_path(
+        code: str,
+    ) -> str:
         """Returns a fully-qualified currency_constant string."""
-        return "currencyConstants/{code}".format(code=code,)
+        return "currencyConstants/{code}".format(
+            code=code,
+        )
 
     @staticmethod
     def parse_currency_constant_path(path: str) -> Dict[str, str]:
@@ -1588,10 +1778,14 @@ class GoogleAdsServiceClient(metaclass=GoogleAdsServiceClientMeta):
         return m.groupdict() if m else {}
 
     @staticmethod
-    def custom_audience_path(customer_id: str, custom_audience_id: str,) -> str:
+    def custom_audience_path(
+        customer_id: str,
+        custom_audience_id: str,
+    ) -> str:
         """Returns a fully-qualified custom_audience string."""
         return "customers/{customer_id}/customAudiences/{custom_audience_id}".format(
-            customer_id=customer_id, custom_audience_id=custom_audience_id,
+            customer_id=customer_id,
+            custom_audience_id=custom_audience_id,
         )
 
     @staticmethod
@@ -1604,10 +1798,14 @@ class GoogleAdsServiceClient(metaclass=GoogleAdsServiceClientMeta):
         return m.groupdict() if m else {}
 
     @staticmethod
-    def custom_conversion_goal_path(customer_id: str, goal_id: str,) -> str:
+    def custom_conversion_goal_path(
+        customer_id: str,
+        goal_id: str,
+    ) -> str:
         """Returns a fully-qualified custom_conversion_goal string."""
         return "customers/{customer_id}/customConversionGoals/{goal_id}".format(
-            customer_id=customer_id, goal_id=goal_id,
+            customer_id=customer_id,
+            goal_id=goal_id,
         )
 
     @staticmethod
@@ -1620,9 +1818,13 @@ class GoogleAdsServiceClient(metaclass=GoogleAdsServiceClientMeta):
         return m.groupdict() if m else {}
 
     @staticmethod
-    def customer_path(customer_id: str,) -> str:
+    def customer_path(
+        customer_id: str,
+    ) -> str:
         """Returns a fully-qualified customer string."""
-        return "customers/{customer_id}".format(customer_id=customer_id,)
+        return "customers/{customer_id}".format(
+            customer_id=customer_id,
+        )
 
     @staticmethod
     def parse_customer_path(path: str) -> Dict[str, str]:
@@ -1632,11 +1834,15 @@ class GoogleAdsServiceClient(metaclass=GoogleAdsServiceClientMeta):
 
     @staticmethod
     def customer_asset_path(
-        customer_id: str, asset_id: str, field_type: str,
+        customer_id: str,
+        asset_id: str,
+        field_type: str,
     ) -> str:
         """Returns a fully-qualified customer_asset string."""
         return "customers/{customer_id}/customerAssets/{asset_id}~{field_type}".format(
-            customer_id=customer_id, asset_id=asset_id, field_type=field_type,
+            customer_id=customer_id,
+            asset_id=asset_id,
+            field_type=field_type,
         )
 
     @staticmethod
@@ -1649,10 +1855,16 @@ class GoogleAdsServiceClient(metaclass=GoogleAdsServiceClientMeta):
         return m.groupdict() if m else {}
 
     @staticmethod
-    def customer_asset_set_path(customer_id: str, asset_set_id: str,) -> str:
+    def customer_asset_set_path(
+        customer_id: str,
+        asset_set_id: str,
+    ) -> str:
         """Returns a fully-qualified customer_asset_set string."""
-        return "customers/{customer_id}/customerAssetSets/{asset_set_id}".format(
-            customer_id=customer_id, asset_set_id=asset_set_id,
+        return (
+            "customers/{customer_id}/customerAssetSets/{asset_set_id}".format(
+                customer_id=customer_id,
+                asset_set_id=asset_set_id,
+            )
         )
 
     @staticmethod
@@ -1665,10 +1877,14 @@ class GoogleAdsServiceClient(metaclass=GoogleAdsServiceClientMeta):
         return m.groupdict() if m else {}
 
     @staticmethod
-    def customer_client_path(customer_id: str, client_customer_id: str,) -> str:
+    def customer_client_path(
+        customer_id: str,
+        client_customer_id: str,
+    ) -> str:
         """Returns a fully-qualified customer_client string."""
         return "customers/{customer_id}/customerClients/{client_customer_id}".format(
-            customer_id=customer_id, client_customer_id=client_customer_id,
+            customer_id=customer_id,
+            client_customer_id=client_customer_id,
         )
 
     @staticmethod
@@ -1682,7 +1898,9 @@ class GoogleAdsServiceClient(metaclass=GoogleAdsServiceClientMeta):
 
     @staticmethod
     def customer_client_link_path(
-        customer_id: str, client_customer_id: str, manager_link_id: str,
+        customer_id: str,
+        client_customer_id: str,
+        manager_link_id: str,
     ) -> str:
         """Returns a fully-qualified customer_client_link string."""
         return "customers/{customer_id}/customerClientLinks/{client_customer_id}~{manager_link_id}".format(
@@ -1702,11 +1920,15 @@ class GoogleAdsServiceClient(metaclass=GoogleAdsServiceClientMeta):
 
     @staticmethod
     def customer_conversion_goal_path(
-        customer_id: str, category: str, source: str,
+        customer_id: str,
+        category: str,
+        source: str,
     ) -> str:
         """Returns a fully-qualified customer_conversion_goal string."""
         return "customers/{customer_id}/customerConversionGoals/{category}~{source}".format(
-            customer_id=customer_id, category=category, source=source,
+            customer_id=customer_id,
+            category=category,
+            source=source,
         )
 
     @staticmethod
@@ -1720,7 +1942,8 @@ class GoogleAdsServiceClient(metaclass=GoogleAdsServiceClientMeta):
 
     @staticmethod
     def customer_customizer_path(
-        customer_id: str, customizer_attribute_id: str,
+        customer_id: str,
+        customizer_attribute_id: str,
     ) -> str:
         """Returns a fully-qualified customer_customizer string."""
         return "customers/{customer_id}/customerCustomizers/{customizer_attribute_id}".format(
@@ -1739,11 +1962,13 @@ class GoogleAdsServiceClient(metaclass=GoogleAdsServiceClientMeta):
 
     @staticmethod
     def customer_extension_setting_path(
-        customer_id: str, extension_type: str,
+        customer_id: str,
+        extension_type: str,
     ) -> str:
         """Returns a fully-qualified customer_extension_setting string."""
         return "customers/{customer_id}/customerExtensionSettings/{extension_type}".format(
-            customer_id=customer_id, extension_type=extension_type,
+            customer_id=customer_id,
+            extension_type=extension_type,
         )
 
     @staticmethod
@@ -1756,10 +1981,14 @@ class GoogleAdsServiceClient(metaclass=GoogleAdsServiceClientMeta):
         return m.groupdict() if m else {}
 
     @staticmethod
-    def customer_feed_path(customer_id: str, feed_id: str,) -> str:
+    def customer_feed_path(
+        customer_id: str,
+        feed_id: str,
+    ) -> str:
         """Returns a fully-qualified customer_feed string."""
         return "customers/{customer_id}/customerFeeds/{feed_id}".format(
-            customer_id=customer_id, feed_id=feed_id,
+            customer_id=customer_id,
+            feed_id=feed_id,
         )
 
     @staticmethod
@@ -1772,10 +2001,14 @@ class GoogleAdsServiceClient(metaclass=GoogleAdsServiceClientMeta):
         return m.groupdict() if m else {}
 
     @staticmethod
-    def customer_label_path(customer_id: str, label_id: str,) -> str:
+    def customer_label_path(
+        customer_id: str,
+        label_id: str,
+    ) -> str:
         """Returns a fully-qualified customer_label string."""
         return "customers/{customer_id}/customerLabels/{label_id}".format(
-            customer_id=customer_id, label_id=label_id,
+            customer_id=customer_id,
+            label_id=label_id,
         )
 
     @staticmethod
@@ -1789,7 +2022,9 @@ class GoogleAdsServiceClient(metaclass=GoogleAdsServiceClientMeta):
 
     @staticmethod
     def customer_manager_link_path(
-        customer_id: str, manager_customer_id: str, manager_link_id: str,
+        customer_id: str,
+        manager_customer_id: str,
+        manager_link_id: str,
     ) -> str:
         """Returns a fully-qualified customer_manager_link string."""
         return "customers/{customer_id}/customerManagerLinks/{manager_customer_id}~{manager_link_id}".format(
@@ -1809,11 +2044,13 @@ class GoogleAdsServiceClient(metaclass=GoogleAdsServiceClientMeta):
 
     @staticmethod
     def customer_negative_criterion_path(
-        customer_id: str, criterion_id: str,
+        customer_id: str,
+        criterion_id: str,
     ) -> str:
         """Returns a fully-qualified customer_negative_criterion string."""
         return "customers/{customer_id}/customerNegativeCriteria/{criterion_id}".format(
-            customer_id=customer_id, criterion_id=criterion_id,
+            customer_id=customer_id,
+            criterion_id=criterion_id,
         )
 
     @staticmethod
@@ -1826,10 +2063,14 @@ class GoogleAdsServiceClient(metaclass=GoogleAdsServiceClientMeta):
         return m.groupdict() if m else {}
 
     @staticmethod
-    def customer_user_access_path(customer_id: str, user_id: str,) -> str:
+    def customer_user_access_path(
+        customer_id: str,
+        user_id: str,
+    ) -> str:
         """Returns a fully-qualified customer_user_access string."""
         return "customers/{customer_id}/customerUserAccesses/{user_id}".format(
-            customer_id=customer_id, user_id=user_id,
+            customer_id=customer_id,
+            user_id=user_id,
         )
 
     @staticmethod
@@ -1843,11 +2084,13 @@ class GoogleAdsServiceClient(metaclass=GoogleAdsServiceClientMeta):
 
     @staticmethod
     def customer_user_access_invitation_path(
-        customer_id: str, invitation_id: str,
+        customer_id: str,
+        invitation_id: str,
     ) -> str:
         """Returns a fully-qualified customer_user_access_invitation string."""
         return "customers/{customer_id}/customerUserAccessInvitations/{invitation_id}".format(
-            customer_id=customer_id, invitation_id=invitation_id,
+            customer_id=customer_id,
+            invitation_id=invitation_id,
         )
 
     @staticmethod
@@ -1860,10 +2103,14 @@ class GoogleAdsServiceClient(metaclass=GoogleAdsServiceClientMeta):
         return m.groupdict() if m else {}
 
     @staticmethod
-    def custom_interest_path(customer_id: str, custom_interest_id: str,) -> str:
+    def custom_interest_path(
+        customer_id: str,
+        custom_interest_id: str,
+    ) -> str:
         """Returns a fully-qualified custom_interest string."""
         return "customers/{customer_id}/customInterests/{custom_interest_id}".format(
-            customer_id=customer_id, custom_interest_id=custom_interest_id,
+            customer_id=customer_id,
+            custom_interest_id=custom_interest_id,
         )
 
     @staticmethod
@@ -1877,7 +2124,8 @@ class GoogleAdsServiceClient(metaclass=GoogleAdsServiceClientMeta):
 
     @staticmethod
     def customizer_attribute_path(
-        customer_id: str, customizer_attribute_id: str,
+        customer_id: str,
+        customizer_attribute_id: str,
     ) -> str:
         """Returns a fully-qualified customizer_attribute string."""
         return "customers/{customer_id}/customizerAttributes/{customizer_attribute_id}".format(
@@ -1896,7 +2144,8 @@ class GoogleAdsServiceClient(metaclass=GoogleAdsServiceClientMeta):
 
     @staticmethod
     def detailed_demographic_path(
-        customer_id: str, detailed_demographic_id: str,
+        customer_id: str,
+        detailed_demographic_id: str,
     ) -> str:
         """Returns a fully-qualified detailed_demographic string."""
         return "customers/{customer_id}/detailedDemographics/{detailed_demographic_id}".format(
@@ -1915,7 +2164,9 @@ class GoogleAdsServiceClient(metaclass=GoogleAdsServiceClientMeta):
 
     @staticmethod
     def detail_placement_view_path(
-        customer_id: str, ad_group_id: str, base64_placement: str,
+        customer_id: str,
+        ad_group_id: str,
+        base64_placement: str,
     ) -> str:
         """Returns a fully-qualified detail_placement_view string."""
         return "customers/{customer_id}/detailPlacementViews/{ad_group_id}~{base64_placement}".format(
@@ -1935,7 +2186,9 @@ class GoogleAdsServiceClient(metaclass=GoogleAdsServiceClientMeta):
 
     @staticmethod
     def display_keyword_view_path(
-        customer_id: str, ad_group_id: str, criterion_id: str,
+        customer_id: str,
+        ad_group_id: str,
+        criterion_id: str,
     ) -> str:
         """Returns a fully-qualified display_keyword_view string."""
         return "customers/{customer_id}/displayKeywordViews/{ad_group_id}~{criterion_id}".format(
@@ -1955,7 +2208,9 @@ class GoogleAdsServiceClient(metaclass=GoogleAdsServiceClientMeta):
 
     @staticmethod
     def distance_view_path(
-        customer_id: str, placeholder_chain_id: str, distance_bucket: str,
+        customer_id: str,
+        placeholder_chain_id: str,
+        distance_bucket: str,
     ) -> str:
         """Returns a fully-qualified distance_view string."""
         return "customers/{customer_id}/distanceViews/{placeholder_chain_id}~{distance_bucket}".format(
@@ -2029,7 +2284,8 @@ class GoogleAdsServiceClient(metaclass=GoogleAdsServiceClientMeta):
 
     @staticmethod
     def expanded_landing_page_view_path(
-        customer_id: str, expanded_final_url_fingerprint: str,
+        customer_id: str,
+        expanded_final_url_fingerprint: str,
     ) -> str:
         """Returns a fully-qualified expanded_landing_page_view string."""
         return "customers/{customer_id}/expandedLandingPageViews/{expanded_final_url_fingerprint}".format(
@@ -2047,10 +2303,14 @@ class GoogleAdsServiceClient(metaclass=GoogleAdsServiceClientMeta):
         return m.groupdict() if m else {}
 
     @staticmethod
-    def experiment_path(customer_id: str, trial_id: str,) -> str:
+    def experiment_path(
+        customer_id: str,
+        trial_id: str,
+    ) -> str:
         """Returns a fully-qualified experiment string."""
         return "customers/{customer_id}/experiments/{trial_id}".format(
-            customer_id=customer_id, trial_id=trial_id,
+            customer_id=customer_id,
+            trial_id=trial_id,
         )
 
     @staticmethod
@@ -2064,7 +2324,9 @@ class GoogleAdsServiceClient(metaclass=GoogleAdsServiceClientMeta):
 
     @staticmethod
     def experiment_arm_path(
-        customer_id: str, trial_id: str, trial_arm_id: str,
+        customer_id: str,
+        trial_id: str,
+        trial_arm_id: str,
     ) -> str:
         """Returns a fully-qualified experiment_arm string."""
         return "customers/{customer_id}/experimentArms/{trial_id}~{trial_arm_id}".format(
@@ -2083,10 +2345,16 @@ class GoogleAdsServiceClient(metaclass=GoogleAdsServiceClientMeta):
         return m.groupdict() if m else {}
 
     @staticmethod
-    def extension_feed_item_path(customer_id: str, feed_item_id: str,) -> str:
+    def extension_feed_item_path(
+        customer_id: str,
+        feed_item_id: str,
+    ) -> str:
         """Returns a fully-qualified extension_feed_item string."""
-        return "customers/{customer_id}/extensionFeedItems/{feed_item_id}".format(
-            customer_id=customer_id, feed_item_id=feed_item_id,
+        return (
+            "customers/{customer_id}/extensionFeedItems/{feed_item_id}".format(
+                customer_id=customer_id,
+                feed_item_id=feed_item_id,
+            )
         )
 
     @staticmethod
@@ -2099,10 +2367,14 @@ class GoogleAdsServiceClient(metaclass=GoogleAdsServiceClientMeta):
         return m.groupdict() if m else {}
 
     @staticmethod
-    def feed_path(customer_id: str, feed_id: str,) -> str:
+    def feed_path(
+        customer_id: str,
+        feed_id: str,
+    ) -> str:
         """Returns a fully-qualified feed string."""
         return "customers/{customer_id}/feeds/{feed_id}".format(
-            customer_id=customer_id, feed_id=feed_id,
+            customer_id=customer_id,
+            feed_id=feed_id,
         )
 
     @staticmethod
@@ -2115,11 +2387,17 @@ class GoogleAdsServiceClient(metaclass=GoogleAdsServiceClientMeta):
 
     @staticmethod
     def feed_item_path(
-        customer_id: str, feed_id: str, feed_item_id: str,
+        customer_id: str,
+        feed_id: str,
+        feed_item_id: str,
     ) -> str:
         """Returns a fully-qualified feed_item string."""
-        return "customers/{customer_id}/feedItems/{feed_id}~{feed_item_id}".format(
-            customer_id=customer_id, feed_id=feed_id, feed_item_id=feed_item_id,
+        return (
+            "customers/{customer_id}/feedItems/{feed_id}~{feed_item_id}".format(
+                customer_id=customer_id,
+                feed_id=feed_id,
+                feed_item_id=feed_item_id,
+            )
         )
 
     @staticmethod
@@ -2133,7 +2411,9 @@ class GoogleAdsServiceClient(metaclass=GoogleAdsServiceClientMeta):
 
     @staticmethod
     def feed_item_set_path(
-        customer_id: str, feed_id: str, feed_item_set_id: str,
+        customer_id: str,
+        feed_id: str,
+        feed_item_set_id: str,
     ) -> str:
         """Returns a fully-qualified feed_item_set string."""
         return "customers/{customer_id}/feedItemSets/{feed_id}~{feed_item_set_id}".format(
@@ -2203,7 +2483,9 @@ class GoogleAdsServiceClient(metaclass=GoogleAdsServiceClientMeta):
 
     @staticmethod
     def feed_mapping_path(
-        customer_id: str, feed_id: str, feed_mapping_id: str,
+        customer_id: str,
+        feed_id: str,
+        feed_mapping_id: str,
     ) -> str:
         """Returns a fully-qualified feed_mapping string."""
         return "customers/{customer_id}/feedMappings/{feed_id}~{feed_mapping_id}".format(
@@ -2223,11 +2505,13 @@ class GoogleAdsServiceClient(metaclass=GoogleAdsServiceClientMeta):
 
     @staticmethod
     def feed_placeholder_view_path(
-        customer_id: str, placeholder_type: str,
+        customer_id: str,
+        placeholder_type: str,
     ) -> str:
         """Returns a fully-qualified feed_placeholder_view string."""
         return "customers/{customer_id}/feedPlaceholderViews/{placeholder_type}".format(
-            customer_id=customer_id, placeholder_type=placeholder_type,
+            customer_id=customer_id,
+            placeholder_type=placeholder_type,
         )
 
     @staticmethod
@@ -2241,7 +2525,9 @@ class GoogleAdsServiceClient(metaclass=GoogleAdsServiceClientMeta):
 
     @staticmethod
     def gender_view_path(
-        customer_id: str, ad_group_id: str, criterion_id: str,
+        customer_id: str,
+        ad_group_id: str,
+        criterion_id: str,
     ) -> str:
         """Returns a fully-qualified gender_view string."""
         return "customers/{customer_id}/genderViews/{ad_group_id}~{criterion_id}".format(
@@ -2261,7 +2547,9 @@ class GoogleAdsServiceClient(metaclass=GoogleAdsServiceClientMeta):
 
     @staticmethod
     def geographic_view_path(
-        customer_id: str, country_criterion_id: str, location_type: str,
+        customer_id: str,
+        country_criterion_id: str,
+        location_type: str,
     ) -> str:
         """Returns a fully-qualified geographic_view string."""
         return "customers/{customer_id}/geographicViews/{country_criterion_id}~{location_type}".format(
@@ -2280,7 +2568,9 @@ class GoogleAdsServiceClient(metaclass=GoogleAdsServiceClientMeta):
         return m.groupdict() if m else {}
 
     @staticmethod
-    def geo_target_constant_path(criterion_id: str,) -> str:
+    def geo_target_constant_path(
+        criterion_id: str,
+    ) -> str:
         """Returns a fully-qualified geo_target_constant string."""
         return "geoTargetConstants/{criterion_id}".format(
             criterion_id=criterion_id,
@@ -2294,7 +2584,9 @@ class GoogleAdsServiceClient(metaclass=GoogleAdsServiceClientMeta):
 
     @staticmethod
     def group_placement_view_path(
-        customer_id: str, ad_group_id: str, base64_placement: str,
+        customer_id: str,
+        ad_group_id: str,
+        base64_placement: str,
     ) -> str:
         """Returns a fully-qualified group_placement_view string."""
         return "customers/{customer_id}/groupPlacementViews/{ad_group_id}~{base64_placement}".format(
@@ -2314,7 +2606,9 @@ class GoogleAdsServiceClient(metaclass=GoogleAdsServiceClientMeta):
 
     @staticmethod
     def hotel_group_view_path(
-        customer_id: str, ad_group_id: str, criterion_id: str,
+        customer_id: str,
+        ad_group_id: str,
+        criterion_id: str,
     ) -> str:
         """Returns a fully-qualified hotel_group_view string."""
         return "customers/{customer_id}/hotelGroupViews/{ad_group_id}~{criterion_id}".format(
@@ -2333,7 +2627,9 @@ class GoogleAdsServiceClient(metaclass=GoogleAdsServiceClientMeta):
         return m.groupdict() if m else {}
 
     @staticmethod
-    def hotel_performance_view_path(customer_id: str,) -> str:
+    def hotel_performance_view_path(
+        customer_id: str,
+    ) -> str:
         """Returns a fully-qualified hotel_performance_view string."""
         return "customers/{customer_id}/hotelPerformanceView".format(
             customer_id=customer_id,
@@ -2348,10 +2644,14 @@ class GoogleAdsServiceClient(metaclass=GoogleAdsServiceClientMeta):
         return m.groupdict() if m else {}
 
     @staticmethod
-    def hotel_reconciliation_path(customer_id: str, commission_id: str,) -> str:
+    def hotel_reconciliation_path(
+        customer_id: str,
+        commission_id: str,
+    ) -> str:
         """Returns a fully-qualified hotel_reconciliation string."""
         return "customers/{customer_id}/hotelReconciliations/{commission_id}".format(
-            customer_id=customer_id, commission_id=commission_id,
+            customer_id=customer_id,
+            commission_id=commission_id,
         )
 
     @staticmethod
@@ -2365,7 +2665,9 @@ class GoogleAdsServiceClient(metaclass=GoogleAdsServiceClientMeta):
 
     @staticmethod
     def income_range_view_path(
-        customer_id: str, ad_group_id: str, criterion_id: str,
+        customer_id: str,
+        ad_group_id: str,
+        criterion_id: str,
     ) -> str:
         """Returns a fully-qualified income_range_view string."""
         return "customers/{customer_id}/incomeRangeViews/{ad_group_id}~{criterion_id}".format(
@@ -2384,10 +2686,14 @@ class GoogleAdsServiceClient(metaclass=GoogleAdsServiceClientMeta):
         return m.groupdict() if m else {}
 
     @staticmethod
-    def keyword_plan_path(customer_id: str, keyword_plan_id: str,) -> str:
+    def keyword_plan_path(
+        customer_id: str,
+        keyword_plan_id: str,
+    ) -> str:
         """Returns a fully-qualified keyword_plan string."""
         return "customers/{customer_id}/keywordPlans/{keyword_plan_id}".format(
-            customer_id=customer_id, keyword_plan_id=keyword_plan_id,
+            customer_id=customer_id,
+            keyword_plan_id=keyword_plan_id,
         )
 
     @staticmethod
@@ -2401,7 +2707,8 @@ class GoogleAdsServiceClient(metaclass=GoogleAdsServiceClientMeta):
 
     @staticmethod
     def keyword_plan_ad_group_path(
-        customer_id: str, keyword_plan_ad_group_id: str,
+        customer_id: str,
+        keyword_plan_ad_group_id: str,
     ) -> str:
         """Returns a fully-qualified keyword_plan_ad_group string."""
         return "customers/{customer_id}/keywordPlanAdGroups/{keyword_plan_ad_group_id}".format(
@@ -2420,7 +2727,8 @@ class GoogleAdsServiceClient(metaclass=GoogleAdsServiceClientMeta):
 
     @staticmethod
     def keyword_plan_ad_group_keyword_path(
-        customer_id: str, keyword_plan_ad_group_keyword_id: str,
+        customer_id: str,
+        keyword_plan_ad_group_keyword_id: str,
     ) -> str:
         """Returns a fully-qualified keyword_plan_ad_group_keyword string."""
         return "customers/{customer_id}/keywordPlanAdGroupKeywords/{keyword_plan_ad_group_keyword_id}".format(
@@ -2439,7 +2747,8 @@ class GoogleAdsServiceClient(metaclass=GoogleAdsServiceClientMeta):
 
     @staticmethod
     def keyword_plan_campaign_path(
-        customer_id: str, keyword_plan_campaign_id: str,
+        customer_id: str,
+        keyword_plan_campaign_id: str,
     ) -> str:
         """Returns a fully-qualified keyword_plan_campaign string."""
         return "customers/{customer_id}/keywordPlanCampaigns/{keyword_plan_campaign_id}".format(
@@ -2458,7 +2767,8 @@ class GoogleAdsServiceClient(metaclass=GoogleAdsServiceClientMeta):
 
     @staticmethod
     def keyword_plan_campaign_keyword_path(
-        customer_id: str, keyword_plan_campaign_keyword_id: str,
+        customer_id: str,
+        keyword_plan_campaign_keyword_id: str,
     ) -> str:
         """Returns a fully-qualified keyword_plan_campaign_keyword string."""
         return "customers/{customer_id}/keywordPlanCampaignKeywords/{keyword_plan_campaign_keyword_id}".format(
@@ -2477,7 +2787,8 @@ class GoogleAdsServiceClient(metaclass=GoogleAdsServiceClientMeta):
 
     @staticmethod
     def keyword_theme_constant_path(
-        express_category_id: str, express_sub_category_id: str,
+        express_category_id: str,
+        express_sub_category_id: str,
     ) -> str:
         """Returns a fully-qualified keyword_theme_constant string."""
         return "keywordThemeConstants/{express_category_id}~{express_sub_category_id}".format(
@@ -2496,7 +2807,9 @@ class GoogleAdsServiceClient(metaclass=GoogleAdsServiceClientMeta):
 
     @staticmethod
     def keyword_view_path(
-        customer_id: str, ad_group_id: str, criterion_id: str,
+        customer_id: str,
+        ad_group_id: str,
+        criterion_id: str,
     ) -> str:
         """Returns a fully-qualified keyword_view string."""
         return "customers/{customer_id}/keywordViews/{ad_group_id}~{criterion_id}".format(
@@ -2515,10 +2828,14 @@ class GoogleAdsServiceClient(metaclass=GoogleAdsServiceClientMeta):
         return m.groupdict() if m else {}
 
     @staticmethod
-    def label_path(customer_id: str, label_id: str,) -> str:
+    def label_path(
+        customer_id: str,
+        label_id: str,
+    ) -> str:
         """Returns a fully-qualified label string."""
         return "customers/{customer_id}/labels/{label_id}".format(
-            customer_id=customer_id, label_id=label_id,
+            customer_id=customer_id,
+            label_id=label_id,
         )
 
     @staticmethod
@@ -2531,7 +2848,8 @@ class GoogleAdsServiceClient(metaclass=GoogleAdsServiceClientMeta):
 
     @staticmethod
     def landing_page_view_path(
-        customer_id: str, unexpanded_final_url_fingerprint: str,
+        customer_id: str,
+        unexpanded_final_url_fingerprint: str,
     ) -> str:
         """Returns a fully-qualified landing_page_view string."""
         return "customers/{customer_id}/landingPageViews/{unexpanded_final_url_fingerprint}".format(
@@ -2549,7 +2867,9 @@ class GoogleAdsServiceClient(metaclass=GoogleAdsServiceClientMeta):
         return m.groupdict() if m else {}
 
     @staticmethod
-    def language_constant_path(criterion_id: str,) -> str:
+    def language_constant_path(
+        criterion_id: str,
+    ) -> str:
         """Returns a fully-qualified language_constant string."""
         return "languageConstants/{criterion_id}".format(
             criterion_id=criterion_id,
@@ -2563,7 +2883,8 @@ class GoogleAdsServiceClient(metaclass=GoogleAdsServiceClientMeta):
 
     @staticmethod
     def lead_form_submission_data_path(
-        customer_id: str, lead_form_user_submission_id: str,
+        customer_id: str,
+        lead_form_user_submission_id: str,
     ) -> str:
         """Returns a fully-qualified lead_form_submission_data string."""
         return "customers/{customer_id}/leadFormSubmissionData/{lead_form_user_submission_id}".format(
@@ -2581,10 +2902,14 @@ class GoogleAdsServiceClient(metaclass=GoogleAdsServiceClientMeta):
         return m.groupdict() if m else {}
 
     @staticmethod
-    def life_event_path(customer_id: str, life_event_id: str,) -> str:
+    def life_event_path(
+        customer_id: str,
+        life_event_id: str,
+    ) -> str:
         """Returns a fully-qualified life_event string."""
         return "customers/{customer_id}/lifeEvents/{life_event_id}".format(
-            customer_id=customer_id, life_event_id=life_event_id,
+            customer_id=customer_id,
+            life_event_id=life_event_id,
         )
 
     @staticmethod
@@ -2598,7 +2923,9 @@ class GoogleAdsServiceClient(metaclass=GoogleAdsServiceClientMeta):
 
     @staticmethod
     def location_view_path(
-        customer_id: str, campaign_id: str, criterion_id: str,
+        customer_id: str,
+        campaign_id: str,
+        criterion_id: str,
     ) -> str:
         """Returns a fully-qualified location_view string."""
         return "customers/{customer_id}/locationViews/{campaign_id}~{criterion_id}".format(
@@ -2618,7 +2945,9 @@ class GoogleAdsServiceClient(metaclass=GoogleAdsServiceClientMeta):
 
     @staticmethod
     def managed_placement_view_path(
-        customer_id: str, ad_group_id: str, criterion_id: str,
+        customer_id: str,
+        ad_group_id: str,
+        criterion_id: str,
     ) -> str:
         """Returns a fully-qualified managed_placement_view string."""
         return "customers/{customer_id}/managedPlacementViews/{ad_group_id}~{criterion_id}".format(
@@ -2637,10 +2966,14 @@ class GoogleAdsServiceClient(metaclass=GoogleAdsServiceClientMeta):
         return m.groupdict() if m else {}
 
     @staticmethod
-    def media_file_path(customer_id: str, media_file_id: str,) -> str:
+    def media_file_path(
+        customer_id: str,
+        media_file_id: str,
+    ) -> str:
         """Returns a fully-qualified media_file string."""
         return "customers/{customer_id}/mediaFiles/{media_file_id}".format(
-            customer_id=customer_id, media_file_id=media_file_id,
+            customer_id=customer_id,
+            media_file_id=media_file_id,
         )
 
     @staticmethod
@@ -2653,7 +2986,9 @@ class GoogleAdsServiceClient(metaclass=GoogleAdsServiceClientMeta):
         return m.groupdict() if m else {}
 
     @staticmethod
-    def mobile_app_category_constant_path(mobile_app_category_id: str,) -> str:
+    def mobile_app_category_constant_path(
+        mobile_app_category_id: str,
+    ) -> str:
         """Returns a fully-qualified mobile_app_category_constant string."""
         return "mobileAppCategoryConstants/{mobile_app_category_id}".format(
             mobile_app_category_id=mobile_app_category_id,
@@ -2669,7 +3004,9 @@ class GoogleAdsServiceClient(metaclass=GoogleAdsServiceClientMeta):
         return m.groupdict() if m else {}
 
     @staticmethod
-    def mobile_device_constant_path(criterion_id: str,) -> str:
+    def mobile_device_constant_path(
+        criterion_id: str,
+    ) -> str:
         """Returns a fully-qualified mobile_device_constant string."""
         return "mobileDeviceConstants/{criterion_id}".format(
             criterion_id=criterion_id,
@@ -2683,7 +3020,8 @@ class GoogleAdsServiceClient(metaclass=GoogleAdsServiceClientMeta):
 
     @staticmethod
     def offline_user_data_job_path(
-        customer_id: str, offline_user_data_update_id: str,
+        customer_id: str,
+        offline_user_data_update_id: str,
     ) -> str:
         """Returns a fully-qualified offline_user_data_job string."""
         return "customers/{customer_id}/offlineUserDataJobs/{offline_user_data_update_id}".format(
@@ -2701,7 +3039,9 @@ class GoogleAdsServiceClient(metaclass=GoogleAdsServiceClientMeta):
         return m.groupdict() if m else {}
 
     @staticmethod
-    def operating_system_version_constant_path(criterion_id: str,) -> str:
+    def operating_system_version_constant_path(
+        criterion_id: str,
+    ) -> str:
         """Returns a fully-qualified operating_system_version_constant string."""
         return "operatingSystemVersionConstants/{criterion_id}".format(
             criterion_id=criterion_id,
@@ -2743,7 +3083,9 @@ class GoogleAdsServiceClient(metaclass=GoogleAdsServiceClientMeta):
 
     @staticmethod
     def parental_status_view_path(
-        customer_id: str, ad_group_id: str, criterion_id: str,
+        customer_id: str,
+        ad_group_id: str,
+        criterion_id: str,
     ) -> str:
         """Returns a fully-qualified parental_status_view string."""
         return "customers/{customer_id}/parentalStatusViews/{ad_group_id}~{criterion_id}".format(
@@ -2763,11 +3105,13 @@ class GoogleAdsServiceClient(metaclass=GoogleAdsServiceClientMeta):
 
     @staticmethod
     def payments_account_path(
-        customer_id: str, payments_account_id: str,
+        customer_id: str,
+        payments_account_id: str,
     ) -> str:
         """Returns a fully-qualified payments_account string."""
         return "customers/{customer_id}/paymentsAccounts/{payments_account_id}".format(
-            customer_id=customer_id, payments_account_id=payments_account_id,
+            customer_id=customer_id,
+            payments_account_id=payments_account_id,
         )
 
     @staticmethod
@@ -2780,10 +3124,14 @@ class GoogleAdsServiceClient(metaclass=GoogleAdsServiceClientMeta):
         return m.groupdict() if m else {}
 
     @staticmethod
-    def per_store_view_path(customer_id: str, place_id: str,) -> str:
+    def per_store_view_path(
+        customer_id: str,
+        place_id: str,
+    ) -> str:
         """Returns a fully-qualified per_store_view string."""
         return "customers/{customer_id}/perStoreViews/{place_id}".format(
-            customer_id=customer_id, place_id=place_id,
+            customer_id=customer_id,
+            place_id=place_id,
         )
 
     @staticmethod
@@ -2797,11 +3145,15 @@ class GoogleAdsServiceClient(metaclass=GoogleAdsServiceClientMeta):
 
     @staticmethod
     def product_bidding_category_constant_path(
-        country_code: str, level: str, id: str,
+        country_code: str,
+        level: str,
+        id: str,
     ) -> str:
         """Returns a fully-qualified product_bidding_category_constant string."""
         return "productBiddingCategoryConstants/{country_code}~{level}~{id}".format(
-            country_code=country_code, level=level, id=id,
+            country_code=country_code,
+            level=level,
+            id=id,
         )
 
     @staticmethod
@@ -2817,7 +3169,9 @@ class GoogleAdsServiceClient(metaclass=GoogleAdsServiceClientMeta):
 
     @staticmethod
     def product_group_view_path(
-        customer_id: str, adgroup_id: str, criterion_id: str,
+        customer_id: str,
+        adgroup_id: str,
+        criterion_id: str,
     ) -> str:
         """Returns a fully-qualified product_group_view string."""
         return "customers/{customer_id}/productGroupViews/{adgroup_id}~{criterion_id}".format(
@@ -2836,10 +3190,14 @@ class GoogleAdsServiceClient(metaclass=GoogleAdsServiceClientMeta):
         return m.groupdict() if m else {}
 
     @staticmethod
-    def product_link_path(customer_id: str, product_link_id: str,) -> str:
+    def product_link_path(
+        customer_id: str,
+        product_link_id: str,
+    ) -> str:
         """Returns a fully-qualified product_link string."""
         return "customers/{customer_id}/productLinks/{product_link_id}".format(
-            customer_id=customer_id, product_link_id=product_link_id,
+            customer_id=customer_id,
+            product_link_id=product_link_id,
         )
 
     @staticmethod
@@ -2852,7 +3210,9 @@ class GoogleAdsServiceClient(metaclass=GoogleAdsServiceClientMeta):
         return m.groupdict() if m else {}
 
     @staticmethod
-    def qualifying_question_path(qualifying_question_id: str,) -> str:
+    def qualifying_question_path(
+        qualifying_question_id: str,
+    ) -> str:
         """Returns a fully-qualified qualifying_question string."""
         return "qualifyingQuestions/{qualifying_question_id}".format(
             qualifying_question_id=qualifying_question_id,
@@ -2867,10 +3227,14 @@ class GoogleAdsServiceClient(metaclass=GoogleAdsServiceClientMeta):
         return m.groupdict() if m else {}
 
     @staticmethod
-    def recommendation_path(customer_id: str, recommendation_id: str,) -> str:
+    def recommendation_path(
+        customer_id: str,
+        recommendation_id: str,
+    ) -> str:
         """Returns a fully-qualified recommendation string."""
         return "customers/{customer_id}/recommendations/{recommendation_id}".format(
-            customer_id=customer_id, recommendation_id=recommendation_id,
+            customer_id=customer_id,
+            recommendation_id=recommendation_id,
         )
 
     @staticmethod
@@ -2884,7 +3248,8 @@ class GoogleAdsServiceClient(metaclass=GoogleAdsServiceClientMeta):
 
     @staticmethod
     def remarketing_action_path(
-        customer_id: str, remarketing_action_id: str,
+        customer_id: str,
+        remarketing_action_id: str,
     ) -> str:
         """Returns a fully-qualified remarketing_action string."""
         return "customers/{customer_id}/remarketingActions/{remarketing_action_id}".format(
@@ -2903,7 +3268,10 @@ class GoogleAdsServiceClient(metaclass=GoogleAdsServiceClientMeta):
 
     @staticmethod
     def search_term_view_path(
-        customer_id: str, campaign_id: str, ad_group_id: str, query: str,
+        customer_id: str,
+        campaign_id: str,
+        ad_group_id: str,
+        query: str,
     ) -> str:
         """Returns a fully-qualified search_term_view string."""
         return "customers/{customer_id}/searchTermViews/{campaign_id}~{ad_group_id}~{query}".format(
@@ -2924,7 +3292,9 @@ class GoogleAdsServiceClient(metaclass=GoogleAdsServiceClientMeta):
 
     @staticmethod
     def shared_criterion_path(
-        customer_id: str, shared_set_id: str, criterion_id: str,
+        customer_id: str,
+        shared_set_id: str,
+        criterion_id: str,
     ) -> str:
         """Returns a fully-qualified shared_criterion string."""
         return "customers/{customer_id}/sharedCriteria/{shared_set_id}~{criterion_id}".format(
@@ -2943,10 +3313,14 @@ class GoogleAdsServiceClient(metaclass=GoogleAdsServiceClientMeta):
         return m.groupdict() if m else {}
 
     @staticmethod
-    def shared_set_path(customer_id: str, shared_set_id: str,) -> str:
+    def shared_set_path(
+        customer_id: str,
+        shared_set_id: str,
+    ) -> str:
         """Returns a fully-qualified shared_set string."""
         return "customers/{customer_id}/sharedSets/{shared_set_id}".format(
-            customer_id=customer_id, shared_set_id=shared_set_id,
+            customer_id=customer_id,
+            shared_set_id=shared_set_id,
         )
 
     @staticmethod
@@ -2959,7 +3333,9 @@ class GoogleAdsServiceClient(metaclass=GoogleAdsServiceClientMeta):
         return m.groupdict() if m else {}
 
     @staticmethod
-    def shopping_performance_view_path(customer_id: str,) -> str:
+    def shopping_performance_view_path(
+        customer_id: str,
+    ) -> str:
         """Returns a fully-qualified shopping_performance_view string."""
         return "customers/{customer_id}/shoppingPerformanceView".format(
             customer_id=customer_id,
@@ -2975,11 +3351,15 @@ class GoogleAdsServiceClient(metaclass=GoogleAdsServiceClientMeta):
 
     @staticmethod
     def smart_campaign_search_term_view_path(
-        customer_id: str, campaign_id: str, query: str,
+        customer_id: str,
+        campaign_id: str,
+        query: str,
     ) -> str:
         """Returns a fully-qualified smart_campaign_search_term_view string."""
         return "customers/{customer_id}/smartCampaignSearchTermViews/{campaign_id}~{query}".format(
-            customer_id=customer_id, campaign_id=campaign_id, query=query,
+            customer_id=customer_id,
+            campaign_id=campaign_id,
+            query=query,
         )
 
     @staticmethod
@@ -2992,10 +3372,14 @@ class GoogleAdsServiceClient(metaclass=GoogleAdsServiceClientMeta):
         return m.groupdict() if m else {}
 
     @staticmethod
-    def smart_campaign_setting_path(customer_id: str, campaign_id: str,) -> str:
+    def smart_campaign_setting_path(
+        customer_id: str,
+        campaign_id: str,
+    ) -> str:
         """Returns a fully-qualified smart_campaign_setting string."""
         return "customers/{customer_id}/smartCampaignSettings/{campaign_id}".format(
-            customer_id=customer_id, campaign_id=campaign_id,
+            customer_id=customer_id,
+            campaign_id=campaign_id,
         )
 
     @staticmethod
@@ -3009,11 +3393,13 @@ class GoogleAdsServiceClient(metaclass=GoogleAdsServiceClientMeta):
 
     @staticmethod
     def third_party_app_analytics_link_path(
-        customer_id: str, customer_link_id: str,
+        customer_id: str,
+        customer_link_id: str,
     ) -> str:
         """Returns a fully-qualified third_party_app_analytics_link string."""
         return "customers/{customer_id}/thirdPartyAppAnalyticsLinks/{customer_link_id}".format(
-            customer_id=customer_id, customer_link_id=customer_link_id,
+            customer_id=customer_id,
+            customer_link_id=customer_link_id,
         )
 
     @staticmethod
@@ -3026,9 +3412,13 @@ class GoogleAdsServiceClient(metaclass=GoogleAdsServiceClientMeta):
         return m.groupdict() if m else {}
 
     @staticmethod
-    def topic_constant_path(topic_id: str,) -> str:
+    def topic_constant_path(
+        topic_id: str,
+    ) -> str:
         """Returns a fully-qualified topic_constant string."""
-        return "topicConstants/{topic_id}".format(topic_id=topic_id,)
+        return "topicConstants/{topic_id}".format(
+            topic_id=topic_id,
+        )
 
     @staticmethod
     def parse_topic_constant_path(path: str) -> Dict[str, str]:
@@ -3038,7 +3428,9 @@ class GoogleAdsServiceClient(metaclass=GoogleAdsServiceClientMeta):
 
     @staticmethod
     def topic_view_path(
-        customer_id: str, ad_group_id: str, criterion_id: str,
+        customer_id: str,
+        ad_group_id: str,
+        criterion_id: str,
     ) -> str:
         """Returns a fully-qualified topic_view string."""
         return "customers/{customer_id}/topicViews/{ad_group_id}~{criterion_id}".format(
@@ -3058,7 +3450,9 @@ class GoogleAdsServiceClient(metaclass=GoogleAdsServiceClientMeta):
 
     @staticmethod
     def travel_activity_group_view_path(
-        customer_id: str, ad_group_id: str, criterion_id: str,
+        customer_id: str,
+        ad_group_id: str,
+        criterion_id: str,
     ) -> str:
         """Returns a fully-qualified travel_activity_group_view string."""
         return "customers/{customer_id}/travelActivityGroupViews/{ad_group_id}~{criterion_id}".format(
@@ -3077,7 +3471,9 @@ class GoogleAdsServiceClient(metaclass=GoogleAdsServiceClientMeta):
         return m.groupdict() if m else {}
 
     @staticmethod
-    def travel_activity_performance_view_path(customer_id: str,) -> str:
+    def travel_activity_performance_view_path(
+        customer_id: str,
+    ) -> str:
         """Returns a fully-qualified travel_activity_performance_view string."""
         return "customers/{customer_id}/travelActivityPerformanceViews".format(
             customer_id=customer_id,
@@ -3095,10 +3491,16 @@ class GoogleAdsServiceClient(metaclass=GoogleAdsServiceClientMeta):
         return m.groupdict() if m else {}
 
     @staticmethod
-    def user_interest_path(customer_id: str, user_interest_id: str,) -> str:
+    def user_interest_path(
+        customer_id: str,
+        user_interest_id: str,
+    ) -> str:
         """Returns a fully-qualified user_interest string."""
-        return "customers/{customer_id}/userInterests/{user_interest_id}".format(
-            customer_id=customer_id, user_interest_id=user_interest_id,
+        return (
+            "customers/{customer_id}/userInterests/{user_interest_id}".format(
+                customer_id=customer_id,
+                user_interest_id=user_interest_id,
+            )
         )
 
     @staticmethod
@@ -3111,10 +3513,14 @@ class GoogleAdsServiceClient(metaclass=GoogleAdsServiceClientMeta):
         return m.groupdict() if m else {}
 
     @staticmethod
-    def user_list_path(customer_id: str, user_list_id: str,) -> str:
+    def user_list_path(
+        customer_id: str,
+        user_list_id: str,
+    ) -> str:
         """Returns a fully-qualified user_list string."""
         return "customers/{customer_id}/userLists/{user_list_id}".format(
-            customer_id=customer_id, user_list_id=user_list_id,
+            customer_id=customer_id,
+            user_list_id=user_list_id,
         )
 
     @staticmethod
@@ -3128,7 +3534,9 @@ class GoogleAdsServiceClient(metaclass=GoogleAdsServiceClientMeta):
 
     @staticmethod
     def user_location_view_path(
-        customer_id: str, country_criterion_id: str, is_targeting_location: str,
+        customer_id: str,
+        country_criterion_id: str,
+        is_targeting_location: str,
     ) -> str:
         """Returns a fully-qualified user_location_view string."""
         return "customers/{customer_id}/userLocationViews/{country_criterion_id}~{is_targeting_location}".format(
@@ -3147,10 +3555,14 @@ class GoogleAdsServiceClient(metaclass=GoogleAdsServiceClientMeta):
         return m.groupdict() if m else {}
 
     @staticmethod
-    def video_path(customer_id: str, video_id: str,) -> str:
+    def video_path(
+        customer_id: str,
+        video_id: str,
+    ) -> str:
         """Returns a fully-qualified video string."""
         return "customers/{customer_id}/videos/{video_id}".format(
-            customer_id=customer_id, video_id=video_id,
+            customer_id=customer_id,
+            video_id=video_id,
         )
 
     @staticmethod
@@ -3163,7 +3575,9 @@ class GoogleAdsServiceClient(metaclass=GoogleAdsServiceClientMeta):
 
     @staticmethod
     def webpage_view_path(
-        customer_id: str, ad_group_id: str, criterion_id: str,
+        customer_id: str,
+        ad_group_id: str,
+        criterion_id: str,
     ) -> str:
         """Returns a fully-qualified webpage_view string."""
         return "customers/{customer_id}/webpageViews/{ad_group_id}~{criterion_id}".format(
@@ -3182,7 +3596,9 @@ class GoogleAdsServiceClient(metaclass=GoogleAdsServiceClientMeta):
         return m.groupdict() if m else {}
 
     @staticmethod
-    def common_billing_account_path(billing_account: str,) -> str:
+    def common_billing_account_path(
+        billing_account: str,
+    ) -> str:
         """Returns a fully-qualified billing_account string."""
         return "billingAccounts/{billing_account}".format(
             billing_account=billing_account,
@@ -3195,9 +3611,13 @@ class GoogleAdsServiceClient(metaclass=GoogleAdsServiceClientMeta):
         return m.groupdict() if m else {}
 
     @staticmethod
-    def common_folder_path(folder: str,) -> str:
+    def common_folder_path(
+        folder: str,
+    ) -> str:
         """Returns a fully-qualified folder string."""
-        return "folders/{folder}".format(folder=folder,)
+        return "folders/{folder}".format(
+            folder=folder,
+        )
 
     @staticmethod
     def parse_common_folder_path(path: str) -> Dict[str, str]:
@@ -3206,9 +3626,13 @@ class GoogleAdsServiceClient(metaclass=GoogleAdsServiceClientMeta):
         return m.groupdict() if m else {}
 
     @staticmethod
-    def common_organization_path(organization: str,) -> str:
+    def common_organization_path(
+        organization: str,
+    ) -> str:
         """Returns a fully-qualified organization string."""
-        return "organizations/{organization}".format(organization=organization,)
+        return "organizations/{organization}".format(
+            organization=organization,
+        )
 
     @staticmethod
     def parse_common_organization_path(path: str) -> Dict[str, str]:
@@ -3217,9 +3641,13 @@ class GoogleAdsServiceClient(metaclass=GoogleAdsServiceClientMeta):
         return m.groupdict() if m else {}
 
     @staticmethod
-    def common_project_path(project: str,) -> str:
+    def common_project_path(
+        project: str,
+    ) -> str:
         """Returns a fully-qualified project string."""
-        return "projects/{project}".format(project=project,)
+        return "projects/{project}".format(
+            project=project,
+        )
 
     @staticmethod
     def parse_common_project_path(path: str) -> Dict[str, str]:
@@ -3228,10 +3656,14 @@ class GoogleAdsServiceClient(metaclass=GoogleAdsServiceClientMeta):
         return m.groupdict() if m else {}
 
     @staticmethod
-    def common_location_path(project: str, location: str,) -> str:
+    def common_location_path(
+        project: str,
+        location: str,
+    ) -> str:
         """Returns a fully-qualified location string."""
         return "projects/{project}/locations/{location}".format(
-            project=project, location=location,
+            project=project,
+            location=location,
         )
 
     @staticmethod
@@ -3458,13 +3890,19 @@ class GoogleAdsServiceClient(metaclass=GoogleAdsServiceClientMeta):
 
         # Send the request.
         response = rpc(
-            request, retry=retry, timeout=timeout, metadata=metadata,
+            request,
+            retry=retry,
+            timeout=timeout,
+            metadata=metadata,
         )
 
         # This method is paged; wrap the response in a pager, which provides
         # an `__iter__` convenience method.
         response = pagers.SearchPager(
-            method=rpc, request=request, response=response, metadata=metadata,
+            method=rpc,
+            request=request,
+            response=response,
+            metadata=metadata,
         )
 
         # Done; return the response.
@@ -3557,7 +3995,10 @@ class GoogleAdsServiceClient(metaclass=GoogleAdsServiceClientMeta):
 
         # Send the request.
         response = rpc(
-            request, retry=retry, timeout=timeout, metadata=metadata,
+            request,
+            retry=retry,
+            timeout=timeout,
+            metadata=metadata,
         )
 
         # Done; return the response.
@@ -3732,19 +4173,19 @@ class GoogleAdsServiceClient(metaclass=GoogleAdsServiceClientMeta):
 
         # Send the request.
         response = rpc(
-            request, retry=retry, timeout=timeout, metadata=metadata,
+            request,
+            retry=retry,
+            timeout=timeout,
+            metadata=metadata,
         )
 
         # Done; return the response.
         return response
 
 
-try:
-    DEFAULT_CLIENT_INFO = gapic_v1.client_info.ClientInfo(
-        gapic_version=pkg_resources.get_distribution("google-ads",).version,
-    )
-except pkg_resources.DistributionNotFound:
-    DEFAULT_CLIENT_INFO = gapic_v1.client_info.ClientInfo()
+DEFAULT_CLIENT_INFO = gapic_v1.client_info.ClientInfo(
+    gapic_version=package_version.__version__
+)
 
 
 __all__ = ("GoogleAdsServiceClient",)

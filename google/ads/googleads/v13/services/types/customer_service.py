@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-# Copyright 2022 Google LLC
+# Copyright 2023 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -64,13 +64,17 @@ class MutateCustomerRequest(proto.Message):
     """
 
     customer_id: str = proto.Field(
-        proto.STRING, number=1,
+        proto.STRING,
+        number=1,
     )
     operation: "CustomerOperation" = proto.Field(
-        proto.MESSAGE, number=4, message="CustomerOperation",
+        proto.MESSAGE,
+        number=4,
+        message="CustomerOperation",
     )
     validate_only: bool = proto.Field(
-        proto.BOOL, number=5,
+        proto.BOOL,
+        number=5,
     )
     response_content_type: gage_response_content_type.ResponseContentTypeEnum.ResponseContentType = proto.Field(
         proto.ENUM,
@@ -109,19 +113,27 @@ class CreateCustomerClientRequest(proto.Message):
     """
 
     customer_id: str = proto.Field(
-        proto.STRING, number=1,
+        proto.STRING,
+        number=1,
     )
     customer_client: gagr_customer.Customer = proto.Field(
-        proto.MESSAGE, number=2, message=gagr_customer.Customer,
+        proto.MESSAGE,
+        number=2,
+        message=gagr_customer.Customer,
     )
     email_address: str = proto.Field(
-        proto.STRING, number=5, optional=True,
+        proto.STRING,
+        number=5,
+        optional=True,
     )
     access_role: gage_access_role.AccessRoleEnum.AccessRole = proto.Field(
-        proto.ENUM, number=4, enum=gage_access_role.AccessRoleEnum.AccessRole,
+        proto.ENUM,
+        number=4,
+        enum=gage_access_role.AccessRoleEnum.AccessRole,
     )
     validate_only: bool = proto.Field(
-        proto.BOOL, number=6,
+        proto.BOOL,
+        number=6,
     )
 
 
@@ -137,10 +149,14 @@ class CustomerOperation(proto.Message):
     """
 
     update: gagr_customer.Customer = proto.Field(
-        proto.MESSAGE, number=1, message=gagr_customer.Customer,
+        proto.MESSAGE,
+        number=1,
+        message=gagr_customer.Customer,
     )
     update_mask: field_mask_pb2.FieldMask = proto.Field(
-        proto.MESSAGE, number=2, message=field_mask_pb2.FieldMask,
+        proto.MESSAGE,
+        number=2,
+        message=field_mask_pb2.FieldMask,
     )
 
 
@@ -157,10 +173,12 @@ class CreateCustomerClientResponse(proto.Message):
     """
 
     resource_name: str = proto.Field(
-        proto.STRING, number=2,
+        proto.STRING,
+        number=2,
     )
     invitation_link: str = proto.Field(
-        proto.STRING, number=3,
+        proto.STRING,
+        number=3,
     )
 
 
@@ -172,7 +190,9 @@ class MutateCustomerResponse(proto.Message):
     """
 
     result: "MutateCustomerResult" = proto.Field(
-        proto.MESSAGE, number=2, message="MutateCustomerResult",
+        proto.MESSAGE,
+        number=2,
+        message="MutateCustomerResult",
     )
 
 
@@ -188,10 +208,13 @@ class MutateCustomerResult(proto.Message):
     """
 
     resource_name: str = proto.Field(
-        proto.STRING, number=1,
+        proto.STRING,
+        number=1,
     )
     customer: gagr_customer.Customer = proto.Field(
-        proto.MESSAGE, number=2, message=gagr_customer.Customer,
+        proto.MESSAGE,
+        number=2,
+        message=gagr_customer.Customer,
     )
 
 
@@ -213,7 +236,8 @@ class ListAccessibleCustomersResponse(proto.Message):
     """
 
     resource_names: MutableSequence[str] = proto.RepeatedField(
-        proto.STRING, number=1,
+        proto.STRING,
+        number=1,
     )
 
 

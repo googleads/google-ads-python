@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-# Copyright 2022 Google LLC
+# Copyright 2023 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -59,18 +59,23 @@ class MutateKeywordPlanAdGroupsRequest(proto.Message):
     """
 
     customer_id: str = proto.Field(
-        proto.STRING, number=1,
+        proto.STRING,
+        number=1,
     )
     operations: MutableSequence[
         "KeywordPlanAdGroupOperation"
     ] = proto.RepeatedField(
-        proto.MESSAGE, number=2, message="KeywordPlanAdGroupOperation",
+        proto.MESSAGE,
+        number=2,
+        message="KeywordPlanAdGroupOperation",
     )
     partial_failure: bool = proto.Field(
-        proto.BOOL, number=3,
+        proto.BOOL,
+        number=3,
     )
     validate_only: bool = proto.Field(
-        proto.BOOL, number=4,
+        proto.BOOL,
+        number=4,
     )
 
 
@@ -109,7 +114,9 @@ class KeywordPlanAdGroupOperation(proto.Message):
     """
 
     update_mask: field_mask_pb2.FieldMask = proto.Field(
-        proto.MESSAGE, number=4, message=field_mask_pb2.FieldMask,
+        proto.MESSAGE,
+        number=4,
+        message=field_mask_pb2.FieldMask,
     )
     create: keyword_plan_ad_group.KeywordPlanAdGroup = proto.Field(
         proto.MESSAGE,
@@ -124,7 +131,9 @@ class KeywordPlanAdGroupOperation(proto.Message):
         message=keyword_plan_ad_group.KeywordPlanAdGroup,
     )
     remove: str = proto.Field(
-        proto.STRING, number=3, oneof="operation",
+        proto.STRING,
+        number=3,
+        oneof="operation",
     )
 
 
@@ -144,12 +153,16 @@ class MutateKeywordPlanAdGroupsResponse(proto.Message):
     """
 
     partial_failure_error: status_pb2.Status = proto.Field(
-        proto.MESSAGE, number=3, message=status_pb2.Status,
+        proto.MESSAGE,
+        number=3,
+        message=status_pb2.Status,
     )
     results: MutableSequence[
         "MutateKeywordPlanAdGroupResult"
     ] = proto.RepeatedField(
-        proto.MESSAGE, number=2, message="MutateKeywordPlanAdGroupResult",
+        proto.MESSAGE,
+        number=2,
+        message="MutateKeywordPlanAdGroupResult",
     )
 
 
@@ -161,7 +174,8 @@ class MutateKeywordPlanAdGroupResult(proto.Message):
     """
 
     resource_name: str = proto.Field(
-        proto.STRING, number=1,
+        proto.STRING,
+        number=1,
     )
 
 

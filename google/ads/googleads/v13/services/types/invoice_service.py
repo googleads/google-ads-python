@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-# Copyright 2022 Google LLC
+# Copyright 2023 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -26,7 +26,10 @@ from google.ads.googleads.v13.resources.types import invoice
 __protobuf__ = proto.module(
     package="google.ads.googleads.v13.services",
     marshal="google.ads.googleads.v13",
-    manifest={"ListInvoicesRequest", "ListInvoicesResponse",},
+    manifest={
+        "ListInvoicesRequest",
+        "ListInvoicesResponse",
+    },
 )
 
 
@@ -53,16 +56,21 @@ class ListInvoicesRequest(proto.Message):
     """
 
     customer_id: str = proto.Field(
-        proto.STRING, number=1,
+        proto.STRING,
+        number=1,
     )
     billing_setup: str = proto.Field(
-        proto.STRING, number=2,
+        proto.STRING,
+        number=2,
     )
     issue_year: str = proto.Field(
-        proto.STRING, number=3,
+        proto.STRING,
+        number=3,
     )
     issue_month: month_of_year.MonthOfYearEnum.MonthOfYear = proto.Field(
-        proto.ENUM, number=4, enum=month_of_year.MonthOfYearEnum.MonthOfYear,
+        proto.ENUM,
+        number=4,
+        enum=month_of_year.MonthOfYearEnum.MonthOfYear,
     )
 
 
@@ -77,7 +85,9 @@ class ListInvoicesResponse(proto.Message):
     """
 
     invoices: MutableSequence[invoice.Invoice] = proto.RepeatedField(
-        proto.MESSAGE, number=1, message=invoice.Invoice,
+        proto.MESSAGE,
+        number=1,
+        message=invoice.Invoice,
     )
 
 

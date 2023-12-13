@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-# Copyright 2022 Google LLC
+# Copyright 2023 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -68,15 +68,19 @@ class MutateCustomerSkAdNetworkConversionValueSchemaRequest(proto.Message):
     """
 
     customer_id: str = proto.Field(
-        proto.STRING, number=1,
+        proto.STRING,
+        number=1,
     )
-    operation: "CustomerSkAdNetworkConversionValueSchemaOperation" = proto.Field(
-        proto.MESSAGE,
-        number=2,
-        message="CustomerSkAdNetworkConversionValueSchemaOperation",
+    operation: "CustomerSkAdNetworkConversionValueSchemaOperation" = (
+        proto.Field(
+            proto.MESSAGE,
+            number=2,
+            message="CustomerSkAdNetworkConversionValueSchemaOperation",
+        )
     )
     validate_only: bool = proto.Field(
-        proto.BOOL, number=3,
+        proto.BOOL,
+        number=3,
     )
 
 
@@ -93,10 +97,12 @@ class MutateCustomerSkAdNetworkConversionValueSchemaResult(proto.Message):
     """
 
     resource_name: str = proto.Field(
-        proto.STRING, number=1,
+        proto.STRING,
+        number=1,
     )
     app_id: str = proto.Field(
-        proto.STRING, number=2,
+        proto.STRING,
+        number=2,
     )
 
 
@@ -109,10 +115,12 @@ class MutateCustomerSkAdNetworkConversionValueSchemaResponse(proto.Message):
             All results for the mutate.
     """
 
-    result: "MutateCustomerSkAdNetworkConversionValueSchemaResult" = proto.Field(
-        proto.MESSAGE,
-        number=1,
-        message="MutateCustomerSkAdNetworkConversionValueSchemaResult",
+    result: "MutateCustomerSkAdNetworkConversionValueSchemaResult" = (
+        proto.Field(
+            proto.MESSAGE,
+            number=1,
+            message="MutateCustomerSkAdNetworkConversionValueSchemaResult",
+        )
     )
 
 

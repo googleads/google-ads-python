@@ -61,7 +61,7 @@ def tests_minimum_dependency_versions(session):
         "coverage==6.5.0",
         # Google-published dependencies pinned to the
         # lowest possible version supported.
-        "google-api-core==2.11.0",
+        "google-api-core==2.13.0",
         "proto-plus==1.22.3",
         "protobuf==4.25.0",
         "google-auth-oauthlib==0.3.0",

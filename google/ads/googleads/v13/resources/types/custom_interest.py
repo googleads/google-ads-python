@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-# Copyright 2022 Google LLC
+# Copyright 2023 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -27,7 +27,10 @@ from google.ads.googleads.v13.enums.types import custom_interest_type
 __protobuf__ = proto.module(
     package="google.ads.googleads.v13.resources",
     marshal="google.ads.googleads.v13",
-    manifest={"CustomInterest", "CustomInterestMember",},
+    manifest={
+        "CustomInterest",
+        "CustomInterestMember",
+    },
 )
 
 
@@ -72,10 +75,13 @@ class CustomInterest(proto.Message):
     """
 
     resource_name: str = proto.Field(
-        proto.STRING, number=1,
+        proto.STRING,
+        number=1,
     )
     id: int = proto.Field(
-        proto.INT64, number=8, optional=True,
+        proto.INT64,
+        number=8,
+        optional=True,
     )
     status: custom_interest_status.CustomInterestStatusEnum.CustomInterestStatus = proto.Field(
         proto.ENUM,
@@ -83,18 +89,26 @@ class CustomInterest(proto.Message):
         enum=custom_interest_status.CustomInterestStatusEnum.CustomInterestStatus,
     )
     name: str = proto.Field(
-        proto.STRING, number=9, optional=True,
+        proto.STRING,
+        number=9,
+        optional=True,
     )
-    type_: custom_interest_type.CustomInterestTypeEnum.CustomInterestType = proto.Field(
-        proto.ENUM,
-        number=5,
-        enum=custom_interest_type.CustomInterestTypeEnum.CustomInterestType,
+    type_: custom_interest_type.CustomInterestTypeEnum.CustomInterestType = (
+        proto.Field(
+            proto.ENUM,
+            number=5,
+            enum=custom_interest_type.CustomInterestTypeEnum.CustomInterestType,
+        )
     )
     description: str = proto.Field(
-        proto.STRING, number=10, optional=True,
+        proto.STRING,
+        number=10,
+        optional=True,
     )
     members: MutableSequence["CustomInterestMember"] = proto.RepeatedField(
-        proto.MESSAGE, number=7, message="CustomInterestMember",
+        proto.MESSAGE,
+        number=7,
+        message="CustomInterestMember",
     )
 
 
@@ -122,7 +136,9 @@ class CustomInterestMember(proto.Message):
         enum=custom_interest_member_type.CustomInterestMemberTypeEnum.CustomInterestMemberType,
     )
     parameter: str = proto.Field(
-        proto.STRING, number=3, optional=True,
+        proto.STRING,
+        number=3,
+        optional=True,
     )
 
 

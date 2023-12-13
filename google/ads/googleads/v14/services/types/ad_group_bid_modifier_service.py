@@ -110,14 +110,12 @@ class AdGroupBidModifierOperation(proto.Message):
             fields are modified in an update.
         create (google.ads.googleads.v14.resources.types.AdGroupBidModifier):
             Create operation: No resource name is
-            expected for the new ad group bid
-            modifier.
+            expected for the new ad group bid modifier.
 
             This field is a member of `oneof`_ ``operation``.
         update (google.ads.googleads.v14.resources.types.AdGroupBidModifier):
             Update operation: The ad group bid modifier
-            is expected to have a valid
-            resource name.
+            is expected to have a valid resource name.
 
             This field is a member of `oneof`_ ``operation``.
         remove (str):

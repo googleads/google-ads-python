@@ -45,6 +45,7 @@ class CampaignBudget(proto.Message):
             ``customers/{customer_id}/campaignBudgets/{campaign_budget_id}``
         id (int):
             Output only. The ID of the campaign budget.
+
             A campaign budget is created using the
             CampaignBudgetService create operation and is
             assigned a budget ID. A budget ID can be shared
@@ -55,6 +56,7 @@ class CampaignBudget(proto.Message):
             This field is a member of `oneof`_ ``_id``.
         name (str):
             The name of the campaign budget.
+
             When creating a campaign budget through
             CampaignBudgetService, every explicitly shared
             campaign budget must have a non-null, non-empty
@@ -94,6 +96,7 @@ class CampaignBudget(proto.Message):
             Specifies whether the budget is explicitly
             shared. Defaults to true if unspecified in a
             create operation.
+
             If true, the budget was created with the purpose
             of sharing across one or more campaigns.
 
@@ -131,6 +134,7 @@ class CampaignBudget(proto.Message):
             set to the budget amount. Amount is specified in
             micros, where one million is equivalent to one
             currency unit.
+
             This field is read-only.
 
             This field is a member of `oneof`_ ``_recommended_budget_amount_micros``.
@@ -157,6 +161,7 @@ class CampaignBudget(proto.Message):
             Output only. The estimated change in weekly
             interactions if the recommended budget is
             applied.
+
             This field is read-only.
 
             This field is a member of `oneof`_ ``_recommended_budget_estimated_change_weekly_interactions``.

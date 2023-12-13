@@ -660,6 +660,7 @@ class VideoResponsiveAdInfo(proto.Message):
 
 class ResponsiveSearchAdInfo(proto.Message):
     r"""A responsive search ad.
+
     Responsive search ads let you create an ad that adapts to show
     more text, and more relevant messages, to your customers. Enter
     multiple headlines and descriptions when creating a responsive

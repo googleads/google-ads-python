@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-# Copyright 2022 Google LLC
+# Copyright 2023 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -67,18 +67,23 @@ class MutateAssetGroupSignalsRequest(proto.Message):
     """
 
     customer_id: str = proto.Field(
-        proto.STRING, number=1,
+        proto.STRING,
+        number=1,
     )
     operations: MutableSequence[
         "AssetGroupSignalOperation"
     ] = proto.RepeatedField(
-        proto.MESSAGE, number=2, message="AssetGroupSignalOperation",
+        proto.MESSAGE,
+        number=2,
+        message="AssetGroupSignalOperation",
     )
     partial_failure: bool = proto.Field(
-        proto.BOOL, number=3,
+        proto.BOOL,
+        number=3,
     )
     validate_only: bool = proto.Field(
-        proto.BOOL, number=4,
+        proto.BOOL,
+        number=4,
     )
     response_content_type: gage_response_content_type.ResponseContentTypeEnum.ResponseContentType = proto.Field(
         proto.ENUM,
@@ -117,7 +122,9 @@ class AssetGroupSignalOperation(proto.Message):
         message=gagr_asset_group_signal.AssetGroupSignal,
     )
     remove: str = proto.Field(
-        proto.STRING, number=2, oneof="operation",
+        proto.STRING,
+        number=2,
+        oneof="operation",
     )
 
 
@@ -137,10 +144,14 @@ class MutateAssetGroupSignalsResponse(proto.Message):
     results: MutableSequence[
         "MutateAssetGroupSignalResult"
     ] = proto.RepeatedField(
-        proto.MESSAGE, number=1, message="MutateAssetGroupSignalResult",
+        proto.MESSAGE,
+        number=1,
+        message="MutateAssetGroupSignalResult",
     )
     partial_failure_error: status_pb2.Status = proto.Field(
-        proto.MESSAGE, number=2, message=status_pb2.Status,
+        proto.MESSAGE,
+        number=2,
+        message=status_pb2.Status,
     )
 
 
@@ -156,7 +167,8 @@ class MutateAssetGroupSignalResult(proto.Message):
     """
 
     resource_name: str = proto.Field(
-        proto.STRING, number=1,
+        proto.STRING,
+        number=1,
     )
     asset_group_signal: gagr_asset_group_signal.AssetGroupSignal = proto.Field(
         proto.MESSAGE,

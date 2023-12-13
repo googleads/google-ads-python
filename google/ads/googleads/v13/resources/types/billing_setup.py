@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-# Copyright 2022 Google LLC
+# Copyright 2023 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -25,7 +25,9 @@ from google.ads.googleads.v13.enums.types import time_type
 __protobuf__ = proto.module(
     package="google.ads.googleads.v13.resources",
     marshal="google.ads.googleads.v13",
-    manifest={"BillingSetup",},
+    manifest={
+        "BillingSetup",
+    },
 )
 
 
@@ -102,6 +104,7 @@ class BillingSetup(proto.Message):
                 Output only. A 16 digit id used to identify
                 the payments account associated with the billing
                 setup.
+
                 This must be passed as a string with dashes, for
                 example, "1234-5678-9012-3456".
 
@@ -122,6 +125,7 @@ class BillingSetup(proto.Message):
                 Immutable. A 12 digit id used to identify the
                 payments profile associated with the billing
                 setup.
+
                 This must be passed in as a string with dashes,
                 for example, "1234-5678-9012".
 
@@ -141,40 +145,61 @@ class BillingSetup(proto.Message):
         """
 
         payments_account_id: str = proto.Field(
-            proto.STRING, number=6, optional=True,
+            proto.STRING,
+            number=6,
+            optional=True,
         )
         payments_account_name: str = proto.Field(
-            proto.STRING, number=7, optional=True,
+            proto.STRING,
+            number=7,
+            optional=True,
         )
         payments_profile_id: str = proto.Field(
-            proto.STRING, number=8, optional=True,
+            proto.STRING,
+            number=8,
+            optional=True,
         )
         payments_profile_name: str = proto.Field(
-            proto.STRING, number=9, optional=True,
+            proto.STRING,
+            number=9,
+            optional=True,
         )
         secondary_payments_profile_id: str = proto.Field(
-            proto.STRING, number=10, optional=True,
+            proto.STRING,
+            number=10,
+            optional=True,
         )
 
     resource_name: str = proto.Field(
-        proto.STRING, number=1,
+        proto.STRING,
+        number=1,
     )
     id: int = proto.Field(
-        proto.INT64, number=15, optional=True,
+        proto.INT64,
+        number=15,
+        optional=True,
     )
-    status: billing_setup_status.BillingSetupStatusEnum.BillingSetupStatus = proto.Field(
-        proto.ENUM,
-        number=3,
-        enum=billing_setup_status.BillingSetupStatusEnum.BillingSetupStatus,
+    status: billing_setup_status.BillingSetupStatusEnum.BillingSetupStatus = (
+        proto.Field(
+            proto.ENUM,
+            number=3,
+            enum=billing_setup_status.BillingSetupStatusEnum.BillingSetupStatus,
+        )
     )
     payments_account: str = proto.Field(
-        proto.STRING, number=18, optional=True,
+        proto.STRING,
+        number=18,
+        optional=True,
     )
     payments_account_info: PaymentsAccountInfo = proto.Field(
-        proto.MESSAGE, number=12, message=PaymentsAccountInfo,
+        proto.MESSAGE,
+        number=12,
+        message=PaymentsAccountInfo,
     )
     start_date_time: str = proto.Field(
-        proto.STRING, number=16, oneof="start_time",
+        proto.STRING,
+        number=16,
+        oneof="start_time",
     )
     start_time_type: time_type.TimeTypeEnum.TimeType = proto.Field(
         proto.ENUM,
@@ -183,7 +208,9 @@ class BillingSetup(proto.Message):
         enum=time_type.TimeTypeEnum.TimeType,
     )
     end_date_time: str = proto.Field(
-        proto.STRING, number=17, oneof="end_time",
+        proto.STRING,
+        number=17,
+        oneof="end_time",
     )
     end_time_type: time_type.TimeTypeEnum.TimeType = proto.Field(
         proto.ENUM,

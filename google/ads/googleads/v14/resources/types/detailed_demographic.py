@@ -35,8 +35,7 @@ __protobuf__ = proto.module(
 
 class DetailedDemographic(proto.Message):
     r"""A detailed demographic: a particular interest-based vertical
-    to be targeted
-    to reach users based on long-term life facts.
+    to be targeted to reach users based on long-term life facts.
 
     Attributes:
         resource_name (str):

@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-# Copyright 2022 Google LLC
+# Copyright 2023 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -59,16 +59,21 @@ class MutateUserListsRequest(proto.Message):
     """
 
     customer_id: str = proto.Field(
-        proto.STRING, number=1,
+        proto.STRING,
+        number=1,
     )
     operations: MutableSequence["UserListOperation"] = proto.RepeatedField(
-        proto.MESSAGE, number=2, message="UserListOperation",
+        proto.MESSAGE,
+        number=2,
+        message="UserListOperation",
     )
     partial_failure: bool = proto.Field(
-        proto.BOOL, number=3,
+        proto.BOOL,
+        number=3,
     )
     validate_only: bool = proto.Field(
-        proto.BOOL, number=4,
+        proto.BOOL,
+        number=4,
     )
 
 
@@ -105,16 +110,26 @@ class UserListOperation(proto.Message):
     """
 
     update_mask: field_mask_pb2.FieldMask = proto.Field(
-        proto.MESSAGE, number=4, message=field_mask_pb2.FieldMask,
+        proto.MESSAGE,
+        number=4,
+        message=field_mask_pb2.FieldMask,
     )
     create: user_list.UserList = proto.Field(
-        proto.MESSAGE, number=1, oneof="operation", message=user_list.UserList,
+        proto.MESSAGE,
+        number=1,
+        oneof="operation",
+        message=user_list.UserList,
     )
     update: user_list.UserList = proto.Field(
-        proto.MESSAGE, number=2, oneof="operation", message=user_list.UserList,
+        proto.MESSAGE,
+        number=2,
+        oneof="operation",
+        message=user_list.UserList,
     )
     remove: str = proto.Field(
-        proto.STRING, number=3, oneof="operation",
+        proto.STRING,
+        number=3,
+        oneof="operation",
     )
 
 
@@ -132,10 +147,14 @@ class MutateUserListsResponse(proto.Message):
     """
 
     partial_failure_error: status_pb2.Status = proto.Field(
-        proto.MESSAGE, number=3, message=status_pb2.Status,
+        proto.MESSAGE,
+        number=3,
+        message=status_pb2.Status,
     )
     results: MutableSequence["MutateUserListResult"] = proto.RepeatedField(
-        proto.MESSAGE, number=2, message="MutateUserListResult",
+        proto.MESSAGE,
+        number=2,
+        message="MutateUserListResult",
     )
 
 
@@ -147,7 +166,8 @@ class MutateUserListResult(proto.Message):
     """
 
     resource_name: str = proto.Field(
-        proto.STRING, number=1,
+        proto.STRING,
+        number=1,
     )
 
 

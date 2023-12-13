@@ -323,8 +323,7 @@ class SmartCampaignSettingOperation(proto.Message):
     Attributes:
         update (google.ads.googleads.v14.resources.types.SmartCampaignSetting):
             Update operation: The Smart campaign setting
-            must specify a valid
-            resource name.
+            must specify a valid resource name.
         update_mask (google.protobuf.field_mask_pb2.FieldMask):
             FieldMask that determines which resource
             fields are modified in an update.

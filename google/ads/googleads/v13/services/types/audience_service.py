@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-# Copyright 2022 Google LLC
+# Copyright 2023 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -66,16 +66,21 @@ class MutateAudiencesRequest(proto.Message):
     """
 
     customer_id: str = proto.Field(
-        proto.STRING, number=1,
+        proto.STRING,
+        number=1,
     )
     operations: MutableSequence["AudienceOperation"] = proto.RepeatedField(
-        proto.MESSAGE, number=2, message="AudienceOperation",
+        proto.MESSAGE,
+        number=2,
+        message="AudienceOperation",
     )
     partial_failure: bool = proto.Field(
-        proto.BOOL, number=3,
+        proto.BOOL,
+        number=3,
     )
     validate_only: bool = proto.Field(
-        proto.BOOL, number=4,
+        proto.BOOL,
+        number=4,
     )
     response_content_type: gage_response_content_type.ResponseContentTypeEnum.ResponseContentType = proto.Field(
         proto.ENUM,
@@ -98,10 +103,14 @@ class MutateAudiencesResponse(proto.Message):
     """
 
     results: MutableSequence["MutateAudienceResult"] = proto.RepeatedField(
-        proto.MESSAGE, number=1, message="MutateAudienceResult",
+        proto.MESSAGE,
+        number=1,
+        message="MutateAudienceResult",
     )
     partial_failure_error: status_pb2.Status = proto.Field(
-        proto.MESSAGE, number=2, message=status_pb2.Status,
+        proto.MESSAGE,
+        number=2,
+        message=status_pb2.Status,
     )
 
 
@@ -131,7 +140,9 @@ class AudienceOperation(proto.Message):
     """
 
     update_mask: field_mask_pb2.FieldMask = proto.Field(
-        proto.MESSAGE, number=4, message=field_mask_pb2.FieldMask,
+        proto.MESSAGE,
+        number=4,
+        message=field_mask_pb2.FieldMask,
     )
     create: gagr_audience.Audience = proto.Field(
         proto.MESSAGE,
@@ -159,10 +170,13 @@ class MutateAudienceResult(proto.Message):
     """
 
     resource_name: str = proto.Field(
-        proto.STRING, number=1,
+        proto.STRING,
+        number=1,
     )
     audience: gagr_audience.Audience = proto.Field(
-        proto.MESSAGE, number=2, message=gagr_audience.Audience,
+        proto.MESSAGE,
+        number=2,
+        message=gagr_audience.Audience,
     )
 
 

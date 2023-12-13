@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-# Copyright 2022 Google LLC
+# Copyright 2023 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -67,18 +67,23 @@ class MutateCampaignAssetSetsRequest(proto.Message):
     """
 
     customer_id: str = proto.Field(
-        proto.STRING, number=1,
+        proto.STRING,
+        number=1,
     )
     operations: MutableSequence[
         "CampaignAssetSetOperation"
     ] = proto.RepeatedField(
-        proto.MESSAGE, number=2, message="CampaignAssetSetOperation",
+        proto.MESSAGE,
+        number=2,
+        message="CampaignAssetSetOperation",
     )
     partial_failure: bool = proto.Field(
-        proto.BOOL, number=3,
+        proto.BOOL,
+        number=3,
     )
     validate_only: bool = proto.Field(
-        proto.BOOL, number=4,
+        proto.BOOL,
+        number=4,
     )
     response_content_type: gage_response_content_type.ResponseContentTypeEnum.ResponseContentType = proto.Field(
         proto.ENUM,
@@ -117,7 +122,9 @@ class CampaignAssetSetOperation(proto.Message):
         message=gagr_campaign_asset_set.CampaignAssetSet,
     )
     remove: str = proto.Field(
-        proto.STRING, number=2, oneof="operation",
+        proto.STRING,
+        number=2,
+        oneof="operation",
     )
 
 
@@ -137,10 +144,14 @@ class MutateCampaignAssetSetsResponse(proto.Message):
     results: MutableSequence[
         "MutateCampaignAssetSetResult"
     ] = proto.RepeatedField(
-        proto.MESSAGE, number=1, message="MutateCampaignAssetSetResult",
+        proto.MESSAGE,
+        number=1,
+        message="MutateCampaignAssetSetResult",
     )
     partial_failure_error: status_pb2.Status = proto.Field(
-        proto.MESSAGE, number=2, message=status_pb2.Status,
+        proto.MESSAGE,
+        number=2,
+        message=status_pb2.Status,
     )
 
 
@@ -156,7 +167,8 @@ class MutateCampaignAssetSetResult(proto.Message):
     """
 
     resource_name: str = proto.Field(
-        proto.STRING, number=1,
+        proto.STRING,
+        number=1,
     )
     campaign_asset_set: gagr_campaign_asset_set.CampaignAssetSet = proto.Field(
         proto.MESSAGE,

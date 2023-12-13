@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-# Copyright 2022 Google LLC
+# Copyright 2023 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -22,13 +22,14 @@ import proto  # type: ignore
 __protobuf__ = proto.module(
     package="google.ads.googleads.v13.enums",
     marshal="google.ads.googleads.v13",
-    manifest={"CustomInterestMemberTypeEnum",},
+    manifest={
+        "CustomInterestMemberTypeEnum",
+    },
 )
 
 
 class CustomInterestMemberTypeEnum(proto.Message):
-    r"""The types of custom interest member, either KEYWORD or URL.
-    """
+    r"""The types of custom interest member, either KEYWORD or URL."""
 
     class CustomInterestMemberType(proto.Enum):
         r"""Enum containing possible custom interest member types."""

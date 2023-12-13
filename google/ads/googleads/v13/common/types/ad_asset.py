@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-# Copyright 2022 Google LLC
+# Copyright 2023 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -61,7 +61,9 @@ class AdTextAsset(proto.Message):
     """
 
     text: str = proto.Field(
-        proto.STRING, number=4, optional=True,
+        proto.STRING,
+        number=4,
+        optional=True,
     )
     pinned_field: served_asset_field_type.ServedAssetFieldTypeEnum.ServedAssetFieldType = proto.Field(
         proto.ENUM,
@@ -74,7 +76,9 @@ class AdTextAsset(proto.Message):
         enum=gage_asset_performance_label.AssetPerformanceLabelEnum.AssetPerformanceLabel,
     )
     policy_summary_info: asset_policy.AdAssetPolicySummary = proto.Field(
-        proto.MESSAGE, number=6, message=asset_policy.AdAssetPolicySummary,
+        proto.MESSAGE,
+        number=6,
+        message=asset_policy.AdAssetPolicySummary,
     )
 
 
@@ -90,7 +94,9 @@ class AdImageAsset(proto.Message):
     """
 
     asset: str = proto.Field(
-        proto.STRING, number=2, optional=True,
+        proto.STRING,
+        number=2,
+        optional=True,
     )
 
 
@@ -106,7 +112,9 @@ class AdVideoAsset(proto.Message):
     """
 
     asset: str = proto.Field(
-        proto.STRING, number=2, optional=True,
+        proto.STRING,
+        number=2,
+        optional=True,
     )
 
 
@@ -122,7 +130,9 @@ class AdMediaBundleAsset(proto.Message):
     """
 
     asset: str = proto.Field(
-        proto.STRING, number=2, optional=True,
+        proto.STRING,
+        number=2,
+        optional=True,
     )
 
 
@@ -139,7 +149,9 @@ class AdDiscoveryCarouselCardAsset(proto.Message):
     """
 
     asset: str = proto.Field(
-        proto.STRING, number=1, optional=True,
+        proto.STRING,
+        number=1,
+        optional=True,
     )
 
 

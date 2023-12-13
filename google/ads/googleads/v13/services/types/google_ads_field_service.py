@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-# Copyright 2022 Google LLC
+# Copyright 2023 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -44,7 +44,8 @@ class GetGoogleAdsFieldRequest(proto.Message):
     """
 
     resource_name: str = proto.Field(
-        proto.STRING, number=1,
+        proto.STRING,
+        number=1,
     )
 
 
@@ -68,13 +69,16 @@ class SearchGoogleAdsFieldsRequest(proto.Message):
     """
 
     query: str = proto.Field(
-        proto.STRING, number=1,
+        proto.STRING,
+        number=1,
     )
     page_token: str = proto.Field(
-        proto.STRING, number=2,
+        proto.STRING,
+        number=2,
     )
     page_size: int = proto.Field(
-        proto.INT32, number=3,
+        proto.INT32,
+        number=3,
     )
 
 
@@ -102,13 +106,17 @@ class SearchGoogleAdsFieldsResponse(proto.Message):
     results: MutableSequence[
         google_ads_field.GoogleAdsField
     ] = proto.RepeatedField(
-        proto.MESSAGE, number=1, message=google_ads_field.GoogleAdsField,
+        proto.MESSAGE,
+        number=1,
+        message=google_ads_field.GoogleAdsField,
     )
     next_page_token: str = proto.Field(
-        proto.STRING, number=2,
+        proto.STRING,
+        number=2,
     )
     total_results_count: int = proto.Field(
-        proto.INT64, number=3,
+        proto.INT64,
+        number=3,
     )
 
 

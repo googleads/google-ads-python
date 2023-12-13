@@ -104,8 +104,7 @@ class CustomerAssetSetOperation(proto.Message):
     Attributes:
         create (google.ads.googleads.v14.resources.types.CustomerAssetSet):
             Create operation: No resource name is
-            expected for the new customer asset
-            set.
+            expected for the new customer asset set.
 
             This field is a member of `oneof`_ ``operation``.
         remove (str):

@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-# Copyright 2022 Google LLC
+# Copyright 2023 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -26,7 +26,9 @@ from google.ads.googleads.v13.enums.types import asset_set_type
 __protobuf__ = proto.module(
     package="google.ads.googleads.v13.resources",
     marshal="google.ads.googleads.v13",
-    manifest={"AssetSet",},
+    manifest={
+        "AssetSet",
+    },
 )
 
 
@@ -109,10 +111,13 @@ class AssetSet(proto.Message):
         """
 
         merchant_id: int = proto.Field(
-            proto.INT64, number=1,
+            proto.INT64,
+            number=1,
         )
         feed_label: str = proto.Field(
-            proto.STRING, number=2, optional=True,
+            proto.STRING,
+            number=2,
+            optional=True,
         )
 
     class HotelPropertyData(proto.Message):
@@ -134,23 +139,32 @@ class AssetSet(proto.Message):
         """
 
         hotel_center_id: int = proto.Field(
-            proto.INT64, number=1, optional=True,
+            proto.INT64,
+            number=1,
+            optional=True,
         )
         partner_name: str = proto.Field(
-            proto.STRING, number=2, optional=True,
+            proto.STRING,
+            number=2,
+            optional=True,
         )
 
     id: int = proto.Field(
-        proto.INT64, number=6,
+        proto.INT64,
+        number=6,
     )
     resource_name: str = proto.Field(
-        proto.STRING, number=1,
+        proto.STRING,
+        number=1,
     )
     name: str = proto.Field(
-        proto.STRING, number=2,
+        proto.STRING,
+        number=2,
     )
     type_: asset_set_type.AssetSetTypeEnum.AssetSetType = proto.Field(
-        proto.ENUM, number=3, enum=asset_set_type.AssetSetTypeEnum.AssetSetType,
+        proto.ENUM,
+        number=3,
+        enum=asset_set_type.AssetSetTypeEnum.AssetSetType,
     )
     status: asset_set_status.AssetSetStatusEnum.AssetSetStatus = proto.Field(
         proto.ENUM,
@@ -158,13 +172,18 @@ class AssetSet(proto.Message):
         enum=asset_set_status.AssetSetStatusEnum.AssetSetStatus,
     )
     merchant_center_feed: MerchantCenterFeed = proto.Field(
-        proto.MESSAGE, number=5, message=MerchantCenterFeed,
+        proto.MESSAGE,
+        number=5,
+        message=MerchantCenterFeed,
     )
     location_group_parent_asset_set_id: int = proto.Field(
-        proto.INT64, number=10,
+        proto.INT64,
+        number=10,
     )
     hotel_property_data: HotelPropertyData = proto.Field(
-        proto.MESSAGE, number=11, message=HotelPropertyData,
+        proto.MESSAGE,
+        number=11,
+        message=HotelPropertyData,
     )
     location_set: asset_set_types.LocationSet = proto.Field(
         proto.MESSAGE,

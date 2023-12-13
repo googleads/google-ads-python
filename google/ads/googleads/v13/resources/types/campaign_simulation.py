@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-# Copyright 2022 Google LLC
+# Copyright 2023 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -26,7 +26,9 @@ from google.ads.googleads.v13.enums.types import simulation_type
 __protobuf__ = proto.module(
     package="google.ads.googleads.v13.resources",
     marshal="google.ads.googleads.v13",
-    manifest={"CampaignSimulation",},
+    manifest={
+        "CampaignSimulation",
+    },
 )
 
 
@@ -106,10 +108,12 @@ class CampaignSimulation(proto.Message):
     """
 
     resource_name: str = proto.Field(
-        proto.STRING, number=1,
+        proto.STRING,
+        number=1,
     )
     campaign_id: int = proto.Field(
-        proto.INT64, number=2,
+        proto.INT64,
+        number=2,
     )
     type_: simulation_type.SimulationTypeEnum.SimulationType = proto.Field(
         proto.ENUM,
@@ -122,10 +126,12 @@ class CampaignSimulation(proto.Message):
         enum=simulation_modification_method.SimulationModificationMethodEnum.SimulationModificationMethod,
     )
     start_date: str = proto.Field(
-        proto.STRING, number=5,
+        proto.STRING,
+        number=5,
     )
     end_date: str = proto.Field(
-        proto.STRING, number=6,
+        proto.STRING,
+        number=6,
     )
     cpc_bid_point_list: simulation.CpcBidSimulationPointList = proto.Field(
         proto.MESSAGE,
@@ -133,17 +139,21 @@ class CampaignSimulation(proto.Message):
         oneof="point_list",
         message=simulation.CpcBidSimulationPointList,
     )
-    target_cpa_point_list: simulation.TargetCpaSimulationPointList = proto.Field(
-        proto.MESSAGE,
-        number=8,
-        oneof="point_list",
-        message=simulation.TargetCpaSimulationPointList,
+    target_cpa_point_list: simulation.TargetCpaSimulationPointList = (
+        proto.Field(
+            proto.MESSAGE,
+            number=8,
+            oneof="point_list",
+            message=simulation.TargetCpaSimulationPointList,
+        )
     )
-    target_roas_point_list: simulation.TargetRoasSimulationPointList = proto.Field(
-        proto.MESSAGE,
-        number=9,
-        oneof="point_list",
-        message=simulation.TargetRoasSimulationPointList,
+    target_roas_point_list: simulation.TargetRoasSimulationPointList = (
+        proto.Field(
+            proto.MESSAGE,
+            number=9,
+            oneof="point_list",
+            message=simulation.TargetRoasSimulationPointList,
+        )
     )
     target_impression_share_point_list: simulation.TargetImpressionShareSimulationPointList = proto.Field(
         proto.MESSAGE,

@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-# Copyright 2022 Google LLC
+# Copyright 2023 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -67,18 +67,23 @@ class MutateAdGroupCustomizersRequest(proto.Message):
     """
 
     customer_id: str = proto.Field(
-        proto.STRING, number=1,
+        proto.STRING,
+        number=1,
     )
     operations: MutableSequence[
         "AdGroupCustomizerOperation"
     ] = proto.RepeatedField(
-        proto.MESSAGE, number=2, message="AdGroupCustomizerOperation",
+        proto.MESSAGE,
+        number=2,
+        message="AdGroupCustomizerOperation",
     )
     partial_failure: bool = proto.Field(
-        proto.BOOL, number=3,
+        proto.BOOL,
+        number=3,
     )
     validate_only: bool = proto.Field(
-        proto.BOOL, number=4,
+        proto.BOOL,
+        number=4,
     )
     response_content_type: gage_response_content_type.ResponseContentTypeEnum.ResponseContentType = proto.Field(
         proto.ENUM,
@@ -119,7 +124,9 @@ class AdGroupCustomizerOperation(proto.Message):
         message=gagr_ad_group_customizer.AdGroupCustomizer,
     )
     remove: str = proto.Field(
-        proto.STRING, number=2, oneof="operation",
+        proto.STRING,
+        number=2,
+        oneof="operation",
     )
 
 
@@ -139,10 +146,14 @@ class MutateAdGroupCustomizersResponse(proto.Message):
     results: MutableSequence[
         "MutateAdGroupCustomizerResult"
     ] = proto.RepeatedField(
-        proto.MESSAGE, number=1, message="MutateAdGroupCustomizerResult",
+        proto.MESSAGE,
+        number=1,
+        message="MutateAdGroupCustomizerResult",
     )
     partial_failure_error: status_pb2.Status = proto.Field(
-        proto.MESSAGE, number=2, message=status_pb2.Status,
+        proto.MESSAGE,
+        number=2,
+        message=status_pb2.Status,
     )
 
 
@@ -158,12 +169,15 @@ class MutateAdGroupCustomizerResult(proto.Message):
     """
 
     resource_name: str = proto.Field(
-        proto.STRING, number=1,
+        proto.STRING,
+        number=1,
     )
-    ad_group_customizer: gagr_ad_group_customizer.AdGroupCustomizer = proto.Field(
-        proto.MESSAGE,
-        number=2,
-        message=gagr_ad_group_customizer.AdGroupCustomizer,
+    ad_group_customizer: gagr_ad_group_customizer.AdGroupCustomizer = (
+        proto.Field(
+            proto.MESSAGE,
+            number=2,
+            message=gagr_ad_group_customizer.AdGroupCustomizer,
+        )
     )
 
 

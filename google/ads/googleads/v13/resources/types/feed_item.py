@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-# Copyright 2022 Google LLC
+# Copyright 2023 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -113,24 +113,35 @@ class FeedItem(proto.Message):
     """
 
     resource_name: str = proto.Field(
-        proto.STRING, number=1,
+        proto.STRING,
+        number=1,
     )
     feed: str = proto.Field(
-        proto.STRING, number=11, optional=True,
+        proto.STRING,
+        number=11,
+        optional=True,
     )
     id: int = proto.Field(
-        proto.INT64, number=12, optional=True,
+        proto.INT64,
+        number=12,
+        optional=True,
     )
     start_date_time: str = proto.Field(
-        proto.STRING, number=13, optional=True,
+        proto.STRING,
+        number=13,
+        optional=True,
     )
     end_date_time: str = proto.Field(
-        proto.STRING, number=14, optional=True,
+        proto.STRING,
+        number=14,
+        optional=True,
     )
     attribute_values: MutableSequence[
         "FeedItemAttributeValue"
     ] = proto.RepeatedField(
-        proto.MESSAGE, number=6, message="FeedItemAttributeValue",
+        proto.MESSAGE,
+        number=6,
+        message="FeedItemAttributeValue",
     )
     geo_targeting_restriction: gage_geo_targeting_restriction.GeoTargetingRestrictionEnum.GeoTargetingRestriction = proto.Field(
         proto.ENUM,
@@ -140,7 +151,9 @@ class FeedItem(proto.Message):
     url_custom_parameters: MutableSequence[
         custom_parameter.CustomParameter
     ] = proto.RepeatedField(
-        proto.MESSAGE, number=8, message=custom_parameter.CustomParameter,
+        proto.MESSAGE,
+        number=8,
+        message=custom_parameter.CustomParameter,
     )
     status: feed_item_status.FeedItemStatusEnum.FeedItemStatus = proto.Field(
         proto.ENUM,
@@ -150,7 +163,9 @@ class FeedItem(proto.Message):
     policy_infos: MutableSequence[
         "FeedItemPlaceholderPolicyInfo"
     ] = proto.RepeatedField(
-        proto.MESSAGE, number=10, message="FeedItemPlaceholderPolicyInfo",
+        proto.MESSAGE,
+        number=10,
+        message="FeedItemPlaceholderPolicyInfo",
     )
 
 
@@ -213,34 +228,50 @@ class FeedItemAttributeValue(proto.Message):
     """
 
     feed_attribute_id: int = proto.Field(
-        proto.INT64, number=11, optional=True,
+        proto.INT64,
+        number=11,
+        optional=True,
     )
     integer_value: int = proto.Field(
-        proto.INT64, number=12, optional=True,
+        proto.INT64,
+        number=12,
+        optional=True,
     )
     boolean_value: bool = proto.Field(
-        proto.BOOL, number=13, optional=True,
+        proto.BOOL,
+        number=13,
+        optional=True,
     )
     string_value: str = proto.Field(
-        proto.STRING, number=14, optional=True,
+        proto.STRING,
+        number=14,
+        optional=True,
     )
     double_value: float = proto.Field(
-        proto.DOUBLE, number=15, optional=True,
+        proto.DOUBLE,
+        number=15,
+        optional=True,
     )
     price_value: feed_common.Money = proto.Field(
-        proto.MESSAGE, number=6, message=feed_common.Money,
+        proto.MESSAGE,
+        number=6,
+        message=feed_common.Money,
     )
     integer_values: MutableSequence[int] = proto.RepeatedField(
-        proto.INT64, number=16,
+        proto.INT64,
+        number=16,
     )
     boolean_values: MutableSequence[bool] = proto.RepeatedField(
-        proto.BOOL, number=17,
+        proto.BOOL,
+        number=17,
     )
     string_values: MutableSequence[str] = proto.RepeatedField(
-        proto.STRING, number=18,
+        proto.STRING,
+        number=18,
     )
     double_values: MutableSequence[float] = proto.RepeatedField(
-        proto.DOUBLE, number=19,
+        proto.DOUBLE,
+        number=19,
     )
 
 
@@ -270,7 +301,7 @@ class FeedItemPlaceholderPolicyInfo(proto.Message):
             the placeholder type.
         validation_status (google.ads.googleads.v13.enums.types.FeedItemValidationStatusEnum.FeedItemValidationStatus):
             Output only. The validation status of the
-            palceholder type.
+            placeholder type.
         validation_errors (MutableSequence[google.ads.googleads.v13.resources.types.FeedItemValidationError]):
             Output only. List of placeholder type
             validation errors.
@@ -288,7 +319,9 @@ class FeedItemPlaceholderPolicyInfo(proto.Message):
         enum=placeholder_type.PlaceholderTypeEnum.PlaceholderType,
     )
     feed_mapping_resource_name: str = proto.Field(
-        proto.STRING, number=11, optional=True,
+        proto.STRING,
+        number=11,
+        optional=True,
     )
     review_status: policy_review_status.PolicyReviewStatusEnum.PolicyReviewStatus = proto.Field(
         proto.ENUM,
@@ -303,7 +336,9 @@ class FeedItemPlaceholderPolicyInfo(proto.Message):
     policy_topic_entries: MutableSequence[
         policy.PolicyTopicEntry
     ] = proto.RepeatedField(
-        proto.MESSAGE, number=5, message=policy.PolicyTopicEntry,
+        proto.MESSAGE,
+        number=5,
+        message=policy.PolicyTopicEntry,
     )
     validation_status: feed_item_validation_status.FeedItemValidationStatusEnum.FeedItemValidationStatus = proto.Field(
         proto.ENUM,
@@ -313,7 +348,9 @@ class FeedItemPlaceholderPolicyInfo(proto.Message):
     validation_errors: MutableSequence[
         "FeedItemValidationError"
     ] = proto.RepeatedField(
-        proto.MESSAGE, number=7, message="FeedItemValidationError",
+        proto.MESSAGE,
+        number=7,
+        message="FeedItemValidationError",
     )
     quality_approval_status: feed_item_quality_approval_status.FeedItemQualityApprovalStatusEnum.FeedItemQualityApprovalStatus = proto.Field(
         proto.ENUM,
@@ -369,13 +406,18 @@ class FeedItemValidationError(proto.Message):
         enum=feed_item_validation_error.FeedItemValidationErrorEnum.FeedItemValidationError,
     )
     description: str = proto.Field(
-        proto.STRING, number=6, optional=True,
+        proto.STRING,
+        number=6,
+        optional=True,
     )
     feed_attribute_ids: MutableSequence[int] = proto.RepeatedField(
-        proto.INT64, number=7,
+        proto.INT64,
+        number=7,
     )
     extra_info: str = proto.Field(
-        proto.STRING, number=8, optional=True,
+        proto.STRING,
+        number=8,
+        optional=True,
     )
 
 

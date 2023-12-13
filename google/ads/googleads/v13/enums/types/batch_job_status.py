@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-# Copyright 2022 Google LLC
+# Copyright 2023 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -22,13 +22,14 @@ import proto  # type: ignore
 __protobuf__ = proto.module(
     package="google.ads.googleads.v13.enums",
     marshal="google.ads.googleads.v13",
-    manifest={"BatchJobStatusEnum",},
+    manifest={
+        "BatchJobStatusEnum",
+    },
 )
 
 
 class BatchJobStatusEnum(proto.Message):
-    r"""Container for enum describing possible batch job statuses.
-    """
+    r"""Container for enum describing possible batch job statuses."""
 
     class BatchJobStatus(proto.Enum):
         r"""The batch job statuses."""

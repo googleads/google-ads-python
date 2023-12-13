@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-# Copyright 2022 Google LLC
+# Copyright 2023 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -28,7 +28,9 @@ from google.ads.googleads.v13.enums.types import user_interest_taxonomy_type
 __protobuf__ = proto.module(
     package="google.ads.googleads.v13.resources",
     marshal="google.ads.googleads.v13",
-    manifest={"UserInterest",},
+    manifest={
+        "UserInterest",
+    },
 )
 
 
@@ -70,7 +72,8 @@ class UserInterest(proto.Message):
     """
 
     resource_name: str = proto.Field(
-        proto.STRING, number=1,
+        proto.STRING,
+        number=1,
     )
     taxonomy_type: user_interest_taxonomy_type.UserInterestTaxonomyTypeEnum.UserInterestTaxonomyType = proto.Field(
         proto.ENUM,
@@ -78,16 +81,24 @@ class UserInterest(proto.Message):
         enum=user_interest_taxonomy_type.UserInterestTaxonomyTypeEnum.UserInterestTaxonomyType,
     )
     user_interest_id: int = proto.Field(
-        proto.INT64, number=8, optional=True,
+        proto.INT64,
+        number=8,
+        optional=True,
     )
     name: str = proto.Field(
-        proto.STRING, number=9, optional=True,
+        proto.STRING,
+        number=9,
+        optional=True,
     )
     user_interest_parent: str = proto.Field(
-        proto.STRING, number=10, optional=True,
+        proto.STRING,
+        number=10,
+        optional=True,
     )
     launched_to_all: bool = proto.Field(
-        proto.BOOL, number=11, optional=True,
+        proto.BOOL,
+        number=11,
+        optional=True,
     )
     availabilities: MutableSequence[
         criterion_category_availability.CriterionCategoryAvailability

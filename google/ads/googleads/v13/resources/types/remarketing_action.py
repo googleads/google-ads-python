@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-# Copyright 2022 Google LLC
+# Copyright 2023 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -25,7 +25,9 @@ from google.ads.googleads.v13.common.types import tag_snippet
 __protobuf__ = proto.module(
     package="google.ads.googleads.v13.resources",
     marshal="google.ads.googleads.v13",
-    manifest={"RemarketingAction",},
+    manifest={
+        "RemarketingAction",
+    },
 )
 
 
@@ -49,6 +51,7 @@ class RemarketingAction(proto.Message):
             This field is a member of `oneof`_ ``_id``.
         name (str):
             The name of the remarketing action.
+
             This field is required and should not be empty
             when creating new remarketing actions.
 
@@ -59,16 +62,23 @@ class RemarketingAction(proto.Message):
     """
 
     resource_name: str = proto.Field(
-        proto.STRING, number=1,
+        proto.STRING,
+        number=1,
     )
     id: int = proto.Field(
-        proto.INT64, number=5, optional=True,
+        proto.INT64,
+        number=5,
+        optional=True,
     )
     name: str = proto.Field(
-        proto.STRING, number=6, optional=True,
+        proto.STRING,
+        number=6,
+        optional=True,
     )
     tag_snippets: MutableSequence[tag_snippet.TagSnippet] = proto.RepeatedField(
-        proto.MESSAGE, number=4, message=tag_snippet.TagSnippet,
+        proto.MESSAGE,
+        number=4,
+        message=tag_snippet.TagSnippet,
     )
 
 

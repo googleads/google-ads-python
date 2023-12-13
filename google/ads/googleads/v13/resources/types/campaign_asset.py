@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-# Copyright 2022 Google LLC
+# Copyright 2023 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -32,7 +32,9 @@ from google.ads.googleads.v13.enums.types import asset_source
 __protobuf__ = proto.module(
     package="google.ads.googleads.v13.resources",
     marshal="google.ads.googleads.v13",
-    manifest={"CampaignAsset",},
+    manifest={
+        "CampaignAsset",
+    },
 )
 
 
@@ -84,21 +86,30 @@ class CampaignAsset(proto.Message):
     """
 
     resource_name: str = proto.Field(
-        proto.STRING, number=1,
+        proto.STRING,
+        number=1,
     )
     campaign: str = proto.Field(
-        proto.STRING, number=6, optional=True,
+        proto.STRING,
+        number=6,
+        optional=True,
     )
     asset: str = proto.Field(
-        proto.STRING, number=7, optional=True,
+        proto.STRING,
+        number=7,
+        optional=True,
     )
-    field_type: asset_field_type.AssetFieldTypeEnum.AssetFieldType = proto.Field(
-        proto.ENUM,
-        number=4,
-        enum=asset_field_type.AssetFieldTypeEnum.AssetFieldType,
+    field_type: asset_field_type.AssetFieldTypeEnum.AssetFieldType = (
+        proto.Field(
+            proto.ENUM,
+            number=4,
+            enum=asset_field_type.AssetFieldTypeEnum.AssetFieldType,
+        )
     )
     source: asset_source.AssetSourceEnum.AssetSource = proto.Field(
-        proto.ENUM, number=8, enum=asset_source.AssetSourceEnum.AssetSource,
+        proto.ENUM,
+        number=8,
+        enum=asset_source.AssetSourceEnum.AssetSource,
     )
     status: asset_link_status.AssetLinkStatusEnum.AssetLinkStatus = proto.Field(
         proto.ENUM,

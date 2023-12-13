@@ -105,14 +105,13 @@ class AdGroupExtensionSettingOperation(proto.Message):
             resource name should be returned post mutation.
         create (google.ads.googleads.v14.resources.types.AdGroupExtensionSetting):
             Create operation: No resource name is
-            expected for the new ad group
-            extension setting.
+            expected for the new ad group extension setting.
 
             This field is a member of `oneof`_ ``operation``.
         update (google.ads.googleads.v14.resources.types.AdGroupExtensionSetting):
             Update operation: The ad group extension
-            setting is expected to have a
-            valid resource name.
+            setting is expected to have a valid resource
+            name.
 
             This field is a member of `oneof`_ ``operation``.
         remove (str):

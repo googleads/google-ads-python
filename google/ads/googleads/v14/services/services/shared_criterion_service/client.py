@@ -26,7 +26,6 @@ from typing import (
     Union,
     cast,
 )
-import pkg_resources
 
 from google.api_core import client_options as client_options_lib
 from google.api_core import gapic_v1
@@ -36,6 +35,8 @@ from google.auth.transport import mtls  # type: ignore
 from google.auth.transport.grpc import SslCredentials  # type: ignore
 from google.auth.exceptions import MutualTLSChannelError  # type: ignore
 from google.oauth2 import service_account  # type: ignore
+
+from google.ads.googleads.v14 import gapic_version as package_version
 
 try:
     OptionalRetry = Union[retries.Retry, gapic_v1.method._MethodDefault]
@@ -187,6 +188,24 @@ class SharedCriterionServiceClient(metaclass=SharedCriterionServiceClientMeta):
             and may cause errors in other clients!
         """
         self.transport.close()
+
+    @staticmethod
+    def mobile_app_category_constant_path(
+        mobile_app_category_id: str,
+    ) -> str:
+        """Returns a fully-qualified mobile_app_category_constant string."""
+        return "mobileAppCategoryConstants/{mobile_app_category_id}".format(
+            mobile_app_category_id=mobile_app_category_id,
+        )
+
+    @staticmethod
+    def parse_mobile_app_category_constant_path(path: str) -> Dict[str, str]:
+        """Parses a mobile_app_category_constant path into its component segments."""
+        m = re.match(
+            r"^mobileAppCategoryConstants/(?P<mobile_app_category_id>.+?)$",
+            path,
+        )
+        return m.groupdict() if m else {}
 
     @staticmethod
     def shared_criterion_path(
@@ -548,14 +567,9 @@ class SharedCriterionServiceClient(metaclass=SharedCriterionServiceClientMeta):
         return response
 
 
-try:
-    DEFAULT_CLIENT_INFO = gapic_v1.client_info.ClientInfo(
-        gapic_version=pkg_resources.get_distribution(
-            "google-ads",
-        ).version,
-    )
-except pkg_resources.DistributionNotFound:
-    DEFAULT_CLIENT_INFO = gapic_v1.client_info.ClientInfo()
+DEFAULT_CLIENT_INFO = gapic_v1.client_info.ClientInfo(
+    gapic_version=package_version.__version__
+)
 
 
 __all__ = ("SharedCriterionServiceClient",)

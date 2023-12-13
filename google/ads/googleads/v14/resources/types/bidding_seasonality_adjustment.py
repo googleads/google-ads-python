@@ -36,6 +36,7 @@ __protobuf__ = proto.module(
 
 class BiddingSeasonalityAdjustment(proto.Message):
     r"""Represents a bidding seasonality adjustment.
+
     See "About seasonality adjustments" at
     https://support.google.com/google-ads/answer/10369906.
 
@@ -57,6 +58,7 @@ class BiddingSeasonalityAdjustment(proto.Message):
             Required. The inclusive start time of the
             seasonality adjustment in yyyy-MM-dd HH:mm:ss
             format.
+
             A seasonality adjustment is forward looking and
             should be used for events that start and end in
             the future.

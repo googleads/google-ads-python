@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-# Copyright 2022 Google LLC
+# Copyright 2023 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -22,7 +22,9 @@ import proto  # type: ignore
 __protobuf__ = proto.module(
     package="google.ads.googleads.v13.resources",
     marshal="google.ads.googleads.v13",
-    manifest={"KeywordPlanAdGroup",},
+    manifest={
+        "KeywordPlanAdGroup",
+    },
 )
 
 
@@ -50,6 +52,7 @@ class KeywordPlanAdGroup(proto.Message):
             This field is a member of `oneof`_ ``_id``.
         name (str):
             The name of the keyword plan ad group.
+
             This field is required and should not be empty
             when creating keyword plan ad group.
 
@@ -64,19 +67,28 @@ class KeywordPlanAdGroup(proto.Message):
     """
 
     resource_name: str = proto.Field(
-        proto.STRING, number=1,
+        proto.STRING,
+        number=1,
     )
     keyword_plan_campaign: str = proto.Field(
-        proto.STRING, number=6, optional=True,
+        proto.STRING,
+        number=6,
+        optional=True,
     )
     id: int = proto.Field(
-        proto.INT64, number=7, optional=True,
+        proto.INT64,
+        number=7,
+        optional=True,
     )
     name: str = proto.Field(
-        proto.STRING, number=8, optional=True,
+        proto.STRING,
+        number=8,
+        optional=True,
     )
     cpc_bid_micros: int = proto.Field(
-        proto.INT64, number=9, optional=True,
+        proto.INT64,
+        number=9,
+        optional=True,
     )
 
 

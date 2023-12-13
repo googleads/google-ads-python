@@ -36,6 +36,7 @@ __protobuf__ = proto.module(
 
 class BiddingDataExclusion(proto.Message):
     r"""Represents a bidding data exclusion.
+
     See "About data exclusions" at
     https://support.google.com/google-ads/answer/10370710.
 
@@ -55,6 +56,7 @@ class BiddingDataExclusion(proto.Message):
         start_date_time (str):
             Required. The inclusive start time of the
             data exclusion in yyyy-MM-dd HH:mm:ss format.
+
             A data exclusion is backward looking and should
             be used for events that start in the past and
             end either in the past or future.

@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-# Copyright 2022 Google LLC
+# Copyright 2023 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -67,16 +67,21 @@ class MutateAssetSetAssetsRequest(proto.Message):
     """
 
     customer_id: str = proto.Field(
-        proto.STRING, number=1,
+        proto.STRING,
+        number=1,
     )
     operations: MutableSequence["AssetSetAssetOperation"] = proto.RepeatedField(
-        proto.MESSAGE, number=2, message="AssetSetAssetOperation",
+        proto.MESSAGE,
+        number=2,
+        message="AssetSetAssetOperation",
     )
     partial_failure: bool = proto.Field(
-        proto.BOOL, number=3,
+        proto.BOOL,
+        number=3,
     )
     validate_only: bool = proto.Field(
-        proto.BOOL, number=4,
+        proto.BOOL,
+        number=4,
     )
     response_content_type: gage_response_content_type.ResponseContentTypeEnum.ResponseContentType = proto.Field(
         proto.ENUM,
@@ -115,7 +120,9 @@ class AssetSetAssetOperation(proto.Message):
         message=gagr_asset_set_asset.AssetSetAsset,
     )
     remove: str = proto.Field(
-        proto.STRING, number=2, oneof="operation",
+        proto.STRING,
+        number=2,
+        oneof="operation",
     )
 
 
@@ -133,10 +140,14 @@ class MutateAssetSetAssetsResponse(proto.Message):
     """
 
     results: MutableSequence["MutateAssetSetAssetResult"] = proto.RepeatedField(
-        proto.MESSAGE, number=1, message="MutateAssetSetAssetResult",
+        proto.MESSAGE,
+        number=1,
+        message="MutateAssetSetAssetResult",
     )
     partial_failure_error: status_pb2.Status = proto.Field(
-        proto.MESSAGE, number=2, message=status_pb2.Status,
+        proto.MESSAGE,
+        number=2,
+        message=status_pb2.Status,
     )
 
 
@@ -152,10 +163,13 @@ class MutateAssetSetAssetResult(proto.Message):
     """
 
     resource_name: str = proto.Field(
-        proto.STRING, number=1,
+        proto.STRING,
+        number=1,
     )
     asset_set_asset: gagr_asset_set_asset.AssetSetAsset = proto.Field(
-        proto.MESSAGE, number=2, message=gagr_asset_set_asset.AssetSetAsset,
+        proto.MESSAGE,
+        number=2,
+        message=gagr_asset_set_asset.AssetSetAsset,
     )
 
 

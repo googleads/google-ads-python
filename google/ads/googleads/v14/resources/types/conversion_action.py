@@ -61,6 +61,7 @@ class ConversionAction(proto.Message):
             This field is a member of `oneof`_ ``_id``.
         name (str):
             The name of the conversion action.
+
             This field is required and should not be empty
             when creating new conversion actions.
 
@@ -130,6 +131,7 @@ class ConversionAction(proto.Message):
             The phone call duration in seconds after
             which a conversion should be reported for this
             conversion action.
+
             The value must be between 0 and 10000,
             inclusive.
 

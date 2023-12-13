@@ -30,6 +30,7 @@ __protobuf__ = proto.module(
 
 class UserLocationView(proto.Message):
     r"""A user location view.
+
     User Location View includes all metrics aggregated at the
     country level, one row per country. It reports metrics at the
     actual physical location of the user by targeted or not targeted

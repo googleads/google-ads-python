@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-# Copyright 2022 Google LLC
+# Copyright 2023 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -67,18 +67,23 @@ class MutateAdGroupCriterionCustomizersRequest(proto.Message):
     """
 
     customer_id: str = proto.Field(
-        proto.STRING, number=1,
+        proto.STRING,
+        number=1,
     )
     operations: MutableSequence[
         "AdGroupCriterionCustomizerOperation"
     ] = proto.RepeatedField(
-        proto.MESSAGE, number=2, message="AdGroupCriterionCustomizerOperation",
+        proto.MESSAGE,
+        number=2,
+        message="AdGroupCriterionCustomizerOperation",
     )
     partial_failure: bool = proto.Field(
-        proto.BOOL, number=3,
+        proto.BOOL,
+        number=3,
     )
     validate_only: bool = proto.Field(
-        proto.BOOL, number=4,
+        proto.BOOL,
+        number=4,
     )
     response_content_type: gage_response_content_type.ResponseContentTypeEnum.ResponseContentType = proto.Field(
         proto.ENUM,
@@ -121,7 +126,9 @@ class AdGroupCriterionCustomizerOperation(proto.Message):
         message=gagr_ad_group_criterion_customizer.AdGroupCriterionCustomizer,
     )
     remove: str = proto.Field(
-        proto.STRING, number=2, oneof="operation",
+        proto.STRING,
+        number=2,
+        oneof="operation",
     )
 
 
@@ -146,7 +153,9 @@ class MutateAdGroupCriterionCustomizersResponse(proto.Message):
         message="MutateAdGroupCriterionCustomizerResult",
     )
     partial_failure_error: status_pb2.Status = proto.Field(
-        proto.MESSAGE, number=2, message=status_pb2.Status,
+        proto.MESSAGE,
+        number=2,
+        message=status_pb2.Status,
     )
 
 
@@ -162,7 +171,8 @@ class MutateAdGroupCriterionCustomizerResult(proto.Message):
     """
 
     resource_name: str = proto.Field(
-        proto.STRING, number=1,
+        proto.STRING,
+        number=1,
     )
     ad_group_criterion_customizer: gagr_ad_group_criterion_customizer.AdGroupCriterionCustomizer = proto.Field(
         proto.MESSAGE,

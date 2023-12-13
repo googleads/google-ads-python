@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-# Copyright 2022 Google LLC
+# Copyright 2023 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -42,7 +42,7 @@ __protobuf__ = proto.module(
 
 class MutateConversionGoalCampaignConfigsRequest(proto.Message):
     r"""Request message for
-    [ConversionGoalCampaignConfigService.MutateConversionGoalCampaignConfig][].
+    [ConversionGoalCampaignConfigService.MutateConversionGoalCampaignConfigs][google.ads.googleads.v13.services.ConversionGoalCampaignConfigService.MutateConversionGoalCampaignConfigs].
 
     Attributes:
         customer_id (str):
@@ -61,7 +61,8 @@ class MutateConversionGoalCampaignConfigsRequest(proto.Message):
     """
 
     customer_id: str = proto.Field(
-        proto.STRING, number=1,
+        proto.STRING,
+        number=1,
     )
     operations: MutableSequence[
         "ConversionGoalCampaignConfigOperation"
@@ -71,7 +72,8 @@ class MutateConversionGoalCampaignConfigsRequest(proto.Message):
         message="ConversionGoalCampaignConfigOperation",
     )
     validate_only: bool = proto.Field(
-        proto.BOOL, number=3,
+        proto.BOOL,
+        number=3,
     )
     response_content_type: gage_response_content_type.ResponseContentTypeEnum.ResponseContentType = proto.Field(
         proto.ENUM,
@@ -99,7 +101,9 @@ class ConversionGoalCampaignConfigOperation(proto.Message):
     """
 
     update_mask: field_mask_pb2.FieldMask = proto.Field(
-        proto.MESSAGE, number=2, message=field_mask_pb2.FieldMask,
+        proto.MESSAGE,
+        number=2,
+        message=field_mask_pb2.FieldMask,
     )
     update: gagr_conversion_goal_campaign_config.ConversionGoalCampaignConfig = proto.Field(
         proto.MESSAGE,
@@ -139,7 +143,8 @@ class MutateConversionGoalCampaignConfigResult(proto.Message):
     """
 
     resource_name: str = proto.Field(
-        proto.STRING, number=1,
+        proto.STRING,
+        number=1,
     )
     conversion_goal_campaign_config: gagr_conversion_goal_campaign_config.ConversionGoalCampaignConfig = proto.Field(
         proto.MESSAGE,

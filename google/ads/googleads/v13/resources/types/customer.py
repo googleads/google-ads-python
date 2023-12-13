@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-# Copyright 2022 Google LLC
+# Copyright 2023 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -123,8 +123,10 @@ class Customer(proto.Message):
             ranges from 0% (0.0) to 100% (1.0). This field
             is null for all manager customers, and for
             unscored non-manager customers.
+
             See "About optimization score" at
             https://support.google.com/google-ads/answer/9061546.
+
             This field is read-only.
 
             This field is a member of `oneof`_ ``_optimization_score``.
@@ -167,46 +169,73 @@ class Customer(proto.Message):
     """
 
     resource_name: str = proto.Field(
-        proto.STRING, number=1,
+        proto.STRING,
+        number=1,
     )
     id: int = proto.Field(
-        proto.INT64, number=19, optional=True,
+        proto.INT64,
+        number=19,
+        optional=True,
     )
     descriptive_name: str = proto.Field(
-        proto.STRING, number=20, optional=True,
+        proto.STRING,
+        number=20,
+        optional=True,
     )
     currency_code: str = proto.Field(
-        proto.STRING, number=21, optional=True,
+        proto.STRING,
+        number=21,
+        optional=True,
     )
     time_zone: str = proto.Field(
-        proto.STRING, number=22, optional=True,
+        proto.STRING,
+        number=22,
+        optional=True,
     )
     tracking_url_template: str = proto.Field(
-        proto.STRING, number=23, optional=True,
+        proto.STRING,
+        number=23,
+        optional=True,
     )
     final_url_suffix: str = proto.Field(
-        proto.STRING, number=24, optional=True,
+        proto.STRING,
+        number=24,
+        optional=True,
     )
     auto_tagging_enabled: bool = proto.Field(
-        proto.BOOL, number=25, optional=True,
+        proto.BOOL,
+        number=25,
+        optional=True,
     )
     has_partners_badge: bool = proto.Field(
-        proto.BOOL, number=26, optional=True,
+        proto.BOOL,
+        number=26,
+        optional=True,
     )
     manager: bool = proto.Field(
-        proto.BOOL, number=27, optional=True,
+        proto.BOOL,
+        number=27,
+        optional=True,
     )
     test_account: bool = proto.Field(
-        proto.BOOL, number=28, optional=True,
+        proto.BOOL,
+        number=28,
+        optional=True,
     )
     call_reporting_setting: "CallReportingSetting" = proto.Field(
-        proto.MESSAGE, number=10, message="CallReportingSetting",
+        proto.MESSAGE,
+        number=10,
+        message="CallReportingSetting",
     )
     conversion_tracking_setting: "ConversionTrackingSetting" = proto.Field(
-        proto.MESSAGE, number=14, message="ConversionTrackingSetting",
+        proto.MESSAGE,
+        number=14,
+        message="ConversionTrackingSetting",
     )
     remarketing_setting: "RemarketingSetting" = proto.Field(
-        proto.MESSAGE, number=15, message="RemarketingSetting",
+        proto.MESSAGE,
+        number=15,
+        message="RemarketingSetting",
     )
     pay_per_conversion_eligibility_failure_reasons: MutableSequence[
         customer_pay_per_conversion_eligibility_failure_reason.CustomerPayPerConversionEligibilityFailureReasonEnum.CustomerPayPerConversionEligibilityFailureReason
@@ -216,10 +245,13 @@ class Customer(proto.Message):
         enum=customer_pay_per_conversion_eligibility_failure_reason.CustomerPayPerConversionEligibilityFailureReasonEnum.CustomerPayPerConversionEligibilityFailureReason,
     )
     optimization_score: float = proto.Field(
-        proto.DOUBLE, number=29, optional=True,
+        proto.DOUBLE,
+        number=29,
+        optional=True,
     )
     optimization_score_weight: float = proto.Field(
-        proto.DOUBLE, number=30,
+        proto.DOUBLE,
+        number=30,
     )
     status: customer_status.CustomerStatusEnum.CustomerStatus = proto.Field(
         proto.ENUM,
@@ -227,16 +259,24 @@ class Customer(proto.Message):
         enum=customer_status.CustomerStatusEnum.CustomerStatus,
     )
     location_asset_auto_migration_done: bool = proto.Field(
-        proto.BOOL, number=38, optional=True,
+        proto.BOOL,
+        number=38,
+        optional=True,
     )
     image_asset_auto_migration_done: bool = proto.Field(
-        proto.BOOL, number=39, optional=True,
+        proto.BOOL,
+        number=39,
+        optional=True,
     )
     location_asset_auto_migration_done_date_time: str = proto.Field(
-        proto.STRING, number=40, optional=True,
+        proto.STRING,
+        number=40,
+        optional=True,
     )
     image_asset_auto_migration_done_date_time: str = proto.Field(
-        proto.STRING, number=41, optional=True,
+        proto.STRING,
+        number=41,
+        optional=True,
     )
 
 
@@ -266,13 +306,19 @@ class CallReportingSetting(proto.Message):
     """
 
     call_reporting_enabled: bool = proto.Field(
-        proto.BOOL, number=10, optional=True,
+        proto.BOOL,
+        number=10,
+        optional=True,
     )
     call_conversion_reporting_enabled: bool = proto.Field(
-        proto.BOOL, number=11, optional=True,
+        proto.BOOL,
+        number=11,
+        optional=True,
     )
     call_conversion_action: str = proto.Field(
-        proto.STRING, number=12, optional=True,
+        proto.STRING,
+        number=12,
+        optional=True,
     )
 
 
@@ -326,13 +372,18 @@ class ConversionTrackingSetting(proto.Message):
     """
 
     conversion_tracking_id: int = proto.Field(
-        proto.INT64, number=3, optional=True,
+        proto.INT64,
+        number=3,
+        optional=True,
     )
     cross_account_conversion_tracking_id: int = proto.Field(
-        proto.INT64, number=4, optional=True,
+        proto.INT64,
+        number=4,
+        optional=True,
     )
     accepted_customer_data_terms: bool = proto.Field(
-        proto.BOOL, number=5,
+        proto.BOOL,
+        number=5,
     )
     conversion_tracking_status: conversion_tracking_status_enum.ConversionTrackingStatusEnum.ConversionTrackingStatus = proto.Field(
         proto.ENUM,
@@ -340,10 +391,12 @@ class ConversionTrackingSetting(proto.Message):
         enum=conversion_tracking_status_enum.ConversionTrackingStatusEnum.ConversionTrackingStatus,
     )
     enhanced_conversions_for_leads_enabled: bool = proto.Field(
-        proto.BOOL, number=7,
+        proto.BOOL,
+        number=7,
     )
     google_ads_conversion_customer: str = proto.Field(
-        proto.STRING, number=8,
+        proto.STRING,
+        number=8,
     )
 
 
@@ -359,7 +412,9 @@ class RemarketingSetting(proto.Message):
     """
 
     google_global_site_tag: str = proto.Field(
-        proto.STRING, number=2, optional=True,
+        proto.STRING,
+        number=2,
+        optional=True,
     )
 
 

@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-# Copyright 2022 Google LLC
+# Copyright 2023 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -35,7 +35,9 @@ from google.ads.googleads.v13.resources.types import asset
 __protobuf__ = proto.module(
     package="google.ads.googleads.v13.resources",
     marshal="google.ads.googleads.v13",
-    manifest={"Recommendation",},
+    manifest={
+        "Recommendation",
+    },
 )
 
 
@@ -82,14 +84,14 @@ class Recommendation(proto.Message):
             RESPONSIVE_SEARCH_AD_ASSET, SEARCH_PARTNERS_OPT_IN,
             DISPLAY_EXPANSION_OPT_IN, SITELINK_EXTENSION,
             TARGET_CPA_OPT_IN, TARGET_ROAS_OPT_IN, TEXT_AD,
-            UPGRADE_SMART_SHOPPING_CAMPAIGN_TO_PERFORMANCE_MAX ,
-            RAISE_TARGET_CPA_BID_TOO_LOW, FORECASTING_SET_TARGET_ROAS
+            UPGRADE_SMART_SHOPPING_CAMPAIGN_TO_PERFORMANCE_MAX,
+            RAISE_TARGET_CPA_BID_TOO_LOW, FORECASTING_SET_TARGET_ROAS,
             SHOPPING_ADD_AGE_GROUP, SHOPPING_ADD_COLOR,
             SHOPPING_ADD_GENDER, SHOPPING_ADD_SIZE, SHOPPING_ADD_GTIN,
             SHOPPING_ADD_MORE_IDENTIFIERS,
             SHOPPING_ADD_PRODUCTS_TO_CAMPAIGN,
             SHOPPING_FIX_DISAPPROVED_PRODUCTS,
-            SHOPPING_MIGRATE_REGULAR_SHOPPING_CAMPAIGN_OFFERS_TO_PERFORMANCE_MAX
+            SHOPPING_MIGRATE_REGULAR_SHOPPING_CAMPAIGN_OFFERS_TO_PERFORMANCE_MAX,
 
             This field is a member of `oneof`_ ``_campaign``.
         ad_group (str):
@@ -319,13 +321,16 @@ class Recommendation(proto.Message):
         """
 
         id: int = proto.Field(
-            proto.INT64, number=1,
+            proto.INT64,
+            number=1,
         )
         name: str = proto.Field(
-            proto.STRING, number=2,
+            proto.STRING,
+            number=2,
         )
         multi_client: bool = proto.Field(
-            proto.BOOL, number=3,
+            proto.BOOL,
+            number=3,
         )
 
     class RecommendationImpact(proto.Message):
@@ -387,19 +392,29 @@ class Recommendation(proto.Message):
         """
 
         impressions: float = proto.Field(
-            proto.DOUBLE, number=6, optional=True,
+            proto.DOUBLE,
+            number=6,
+            optional=True,
         )
         clicks: float = proto.Field(
-            proto.DOUBLE, number=7, optional=True,
+            proto.DOUBLE,
+            number=7,
+            optional=True,
         )
         cost_micros: int = proto.Field(
-            proto.INT64, number=8, optional=True,
+            proto.INT64,
+            number=8,
+            optional=True,
         )
         conversions: float = proto.Field(
-            proto.DOUBLE, number=9, optional=True,
+            proto.DOUBLE,
+            number=9,
+            optional=True,
         )
         video_views: float = proto.Field(
-            proto.DOUBLE, number=10, optional=True,
+            proto.DOUBLE,
+            number=10,
+            optional=True,
         )
 
     class CampaignBudgetRecommendation(proto.Message):
@@ -439,7 +454,9 @@ class Recommendation(proto.Message):
             """
 
             budget_amount_micros: int = proto.Field(
-                proto.INT64, number=3, optional=True,
+                proto.INT64,
+                number=3,
+                optional=True,
             )
             impact: "Recommendation.RecommendationImpact" = proto.Field(
                 proto.MESSAGE,
@@ -448,10 +465,14 @@ class Recommendation(proto.Message):
             )
 
         current_budget_amount_micros: int = proto.Field(
-            proto.INT64, number=7, optional=True,
+            proto.INT64,
+            number=7,
+            optional=True,
         )
         recommended_budget_amount_micros: int = proto.Field(
-            proto.INT64, number=8, optional=True,
+            proto.INT64,
+            number=8,
+            optional=True,
         )
         budget_options: MutableSequence[
             "Recommendation.CampaignBudgetRecommendation.CampaignBudgetRecommendationOption"
@@ -476,10 +497,14 @@ class Recommendation(proto.Message):
         """
 
         keyword: criteria.KeywordInfo = proto.Field(
-            proto.MESSAGE, number=1, message=criteria.KeywordInfo,
+            proto.MESSAGE,
+            number=1,
+            message=criteria.KeywordInfo,
         )
         recommended_cpc_bid_micros: int = proto.Field(
-            proto.INT64, number=3, optional=True,
+            proto.INT64,
+            number=3,
+            optional=True,
         )
 
     class TextAdRecommendation(proto.Message):
@@ -504,13 +529,19 @@ class Recommendation(proto.Message):
         """
 
         ad: gagr_ad.Ad = proto.Field(
-            proto.MESSAGE, number=1, message=gagr_ad.Ad,
+            proto.MESSAGE,
+            number=1,
+            message=gagr_ad.Ad,
         )
         creation_date: str = proto.Field(
-            proto.STRING, number=4, optional=True,
+            proto.STRING,
+            number=4,
+            optional=True,
         )
         auto_apply_date: str = proto.Field(
-            proto.STRING, number=5, optional=True,
+            proto.STRING,
+            number=5,
+            optional=True,
         )
 
     class TargetCpaOptInRecommendation(proto.Message):
@@ -560,10 +591,14 @@ class Recommendation(proto.Message):
                 enum=target_cpa_opt_in_recommendation_goal.TargetCpaOptInRecommendationGoalEnum.TargetCpaOptInRecommendationGoal,
             )
             target_cpa_micros: int = proto.Field(
-                proto.INT64, number=5, optional=True,
+                proto.INT64,
+                number=5,
+                optional=True,
             )
             required_campaign_budget_amount_micros: int = proto.Field(
-                proto.INT64, number=6, optional=True,
+                proto.INT64,
+                number=6,
+                optional=True,
             )
             impact: "Recommendation.RecommendationImpact" = proto.Field(
                 proto.MESSAGE,
@@ -579,7 +614,9 @@ class Recommendation(proto.Message):
             message="Recommendation.TargetCpaOptInRecommendation.TargetCpaOptInRecommendationOption",
         )
         recommended_target_cpa_micros: int = proto.Field(
-            proto.INT64, number=3, optional=True,
+            proto.INT64,
+            number=3,
+            optional=True,
         )
 
     class MaximizeConversionsOptInRecommendation(proto.Message):
@@ -595,16 +632,16 @@ class Recommendation(proto.Message):
         """
 
         recommended_budget_amount_micros: int = proto.Field(
-            proto.INT64, number=2, optional=True,
+            proto.INT64,
+            number=2,
+            optional=True,
         )
 
     class EnhancedCpcOptInRecommendation(proto.Message):
-        r"""The Enhanced Cost-Per-Click Opt-In recommendation.
-        """
+        r"""The Enhanced Cost-Per-Click Opt-In recommendation."""
 
     class SearchPartnersOptInRecommendation(proto.Message):
-        r"""The Search Partners Opt-In recommendation.
-        """
+        r"""The Search Partners Opt-In recommendation."""
 
     class MaximizeClicksOptInRecommendation(proto.Message):
         r"""The Maximize Clicks opt-in recommendation.
@@ -620,12 +657,13 @@ class Recommendation(proto.Message):
         """
 
         recommended_budget_amount_micros: int = proto.Field(
-            proto.INT64, number=2, optional=True,
+            proto.INT64,
+            number=2,
+            optional=True,
         )
 
     class OptimizeAdRotationRecommendation(proto.Message):
-        r"""The Optimize Ad Rotation recommendation.
-        """
+        r"""The Optimize Ad Rotation recommendation."""
 
     class CalloutAssetRecommendation(proto.Message):
         r"""The callout asset recommendation.
@@ -641,12 +679,16 @@ class Recommendation(proto.Message):
         recommended_campaign_callout_assets: MutableSequence[
             asset.Asset
         ] = proto.RepeatedField(
-            proto.MESSAGE, number=1, message=asset.Asset,
+            proto.MESSAGE,
+            number=1,
+            message=asset.Asset,
         )
         recommended_customer_callout_assets: MutableSequence[
             asset.Asset
         ] = proto.RepeatedField(
-            proto.MESSAGE, number=2, message=asset.Asset,
+            proto.MESSAGE,
+            number=2,
+            message=asset.Asset,
         )
 
     class SitelinkAssetRecommendation(proto.Message):
@@ -663,17 +705,20 @@ class Recommendation(proto.Message):
         recommended_campaign_sitelink_assets: MutableSequence[
             asset.Asset
         ] = proto.RepeatedField(
-            proto.MESSAGE, number=1, message=asset.Asset,
+            proto.MESSAGE,
+            number=1,
+            message=asset.Asset,
         )
         recommended_customer_sitelink_assets: MutableSequence[
             asset.Asset
         ] = proto.RepeatedField(
-            proto.MESSAGE, number=2, message=asset.Asset,
+            proto.MESSAGE,
+            number=2,
+            message=asset.Asset,
         )
 
     class CallAssetRecommendation(proto.Message):
-        r"""The call asset recommendation.
-        """
+        r"""The call asset recommendation."""
 
     class KeywordMatchTypeRecommendation(proto.Message):
         r"""The keyword match type recommendation.
@@ -686,7 +731,9 @@ class Recommendation(proto.Message):
         """
 
         keyword: criteria.KeywordInfo = proto.Field(
-            proto.MESSAGE, number=1, message=criteria.KeywordInfo,
+            proto.MESSAGE,
+            number=1,
+            message=criteria.KeywordInfo,
         )
         recommended_match_type: keyword_match_type.KeywordMatchTypeEnum.KeywordMatchType = proto.Field(
             proto.ENUM,
@@ -709,12 +756,16 @@ class Recommendation(proto.Message):
         """
 
         excess_campaign_budget: str = proto.Field(
-            proto.STRING, number=3, optional=True,
+            proto.STRING,
+            number=3,
+            optional=True,
         )
-        budget_recommendation: "Recommendation.CampaignBudgetRecommendation" = proto.Field(
-            proto.MESSAGE,
-            number=2,
-            message="Recommendation.CampaignBudgetRecommendation",
+        budget_recommendation: "Recommendation.CampaignBudgetRecommendation" = (
+            proto.Field(
+                proto.MESSAGE,
+                number=2,
+                message="Recommendation.CampaignBudgetRecommendation",
+            )
         )
 
     class TargetRoasOptInRecommendation(proto.Message):
@@ -739,10 +790,14 @@ class Recommendation(proto.Message):
         """
 
         recommended_target_roas: float = proto.Field(
-            proto.DOUBLE, number=1, optional=True,
+            proto.DOUBLE,
+            number=1,
+            optional=True,
         )
         required_campaign_budget_amount_micros: int = proto.Field(
-            proto.INT64, number=2, optional=True,
+            proto.INT64,
+            number=2,
+            optional=True,
         )
 
     class ResponsiveSearchAdAssetRecommendation(proto.Message):
@@ -755,7 +810,9 @@ class Recommendation(proto.Message):
         """
 
         recommended_assets: gagr_ad.Ad = proto.Field(
-            proto.MESSAGE, number=2, message=gagr_ad.Ad,
+            proto.MESSAGE,
+            number=2,
+            message=gagr_ad.Ad,
         )
 
     class ResponsiveSearchAdImproveAdStrengthRecommendation(proto.Message):
@@ -768,10 +825,14 @@ class Recommendation(proto.Message):
         """
 
         current_ad: gagr_ad.Ad = proto.Field(
-            proto.MESSAGE, number=1, message=gagr_ad.Ad,
+            proto.MESSAGE,
+            number=1,
+            message=gagr_ad.Ad,
         )
         recommended_ad: gagr_ad.Ad = proto.Field(
-            proto.MESSAGE, number=2, message=gagr_ad.Ad,
+            proto.MESSAGE,
+            number=2,
+            message=gagr_ad.Ad,
         )
 
     class ResponsiveSearchAdRecommendation(proto.Message):
@@ -782,7 +843,9 @@ class Recommendation(proto.Message):
         """
 
         ad: gagr_ad.Ad = proto.Field(
-            proto.MESSAGE, number=1, message=gagr_ad.Ad,
+            proto.MESSAGE,
+            number=1,
+            message=gagr_ad.Ad,
         )
 
     class UseBroadMatchKeywordRecommendation(proto.Message):
@@ -807,19 +870,25 @@ class Recommendation(proto.Message):
         """
 
         keyword: MutableSequence[criteria.KeywordInfo] = proto.RepeatedField(
-            proto.MESSAGE, number=1, message=criteria.KeywordInfo,
+            proto.MESSAGE,
+            number=1,
+            message=criteria.KeywordInfo,
         )
         suggested_keywords_count: int = proto.Field(
-            proto.INT64, number=2,
+            proto.INT64,
+            number=2,
         )
         campaign_keywords_count: int = proto.Field(
-            proto.INT64, number=3,
+            proto.INT64,
+            number=3,
         )
         campaign_uses_shared_budget: bool = proto.Field(
-            proto.BOOL, number=4,
+            proto.BOOL,
+            number=4,
         )
         required_campaign_budget_amount_micros: int = proto.Field(
-            proto.INT64, number=5,
+            proto.INT64,
+            number=5,
         )
 
     class UpgradeSmartShoppingCampaignToPerformanceMaxRecommendation(
@@ -837,10 +906,12 @@ class Recommendation(proto.Message):
         """
 
         merchant_id: int = proto.Field(
-            proto.INT64, number=1,
+            proto.INT64,
+            number=1,
         )
         sales_country_code: str = proto.Field(
-            proto.STRING, number=2,
+            proto.STRING,
+            number=2,
         )
 
     class RaiseTargetCpaBidTooLowRecommendation(proto.Message):
@@ -863,15 +934,18 @@ class Recommendation(proto.Message):
         """
 
         recommended_target_multiplier: float = proto.Field(
-            proto.DOUBLE, number=1, optional=True,
+            proto.DOUBLE,
+            number=1,
+            optional=True,
         )
         average_target_cpa_micros: int = proto.Field(
-            proto.INT64, number=2, optional=True,
+            proto.INT64,
+            number=2,
+            optional=True,
         )
 
     class DisplayExpansionOptInRecommendation(proto.Message):
-        r"""The Display Expansion opt-in recommendation.
-        """
+        r"""The Display Expansion opt-in recommendation."""
 
     class UpgradeLocalCampaignToPerformanceMaxRecommendation(proto.Message):
         r"""The Upgrade Local campaign to Performance Max campaign
@@ -891,10 +965,13 @@ class Recommendation(proto.Message):
         """
 
         recommended_target_roas: float = proto.Field(
-            proto.DOUBLE, number=1,
+            proto.DOUBLE,
+            number=1,
         )
         campaign_budget: "Recommendation.CampaignBudget" = proto.Field(
-            proto.MESSAGE, number=2, message="Recommendation.CampaignBudget",
+            proto.MESSAGE,
+            number=2,
+            message="Recommendation.CampaignBudget",
         )
 
     class ShoppingOfferAttributeRecommendation(proto.Message):
@@ -917,16 +994,21 @@ class Recommendation(proto.Message):
         """
 
         merchant: "Recommendation.MerchantInfo" = proto.Field(
-            proto.MESSAGE, number=1, message="Recommendation.MerchantInfo",
+            proto.MESSAGE,
+            number=1,
+            message="Recommendation.MerchantInfo",
         )
         feed_label: str = proto.Field(
-            proto.STRING, number=2,
+            proto.STRING,
+            number=2,
         )
         offers_count: int = proto.Field(
-            proto.INT64, number=3,
+            proto.INT64,
+            number=3,
         )
         demoted_offers_count: int = proto.Field(
-            proto.INT64, number=4,
+            proto.INT64,
+            number=4,
         )
 
     class ShoppingFixDisapprovedProductsRecommendation(proto.Message):
@@ -948,16 +1030,21 @@ class Recommendation(proto.Message):
         """
 
         merchant: "Recommendation.MerchantInfo" = proto.Field(
-            proto.MESSAGE, number=1, message="Recommendation.MerchantInfo",
+            proto.MESSAGE,
+            number=1,
+            message="Recommendation.MerchantInfo",
         )
         feed_label: str = proto.Field(
-            proto.STRING, number=2,
+            proto.STRING,
+            number=2,
         )
         products_count: int = proto.Field(
-            proto.INT64, number=3,
+            proto.INT64,
+            number=3,
         )
         disapproved_products_count: int = proto.Field(
-            proto.INT64, number=4,
+            proto.INT64,
+            number=4,
         )
 
     class ShoppingTargetAllOffersRecommendation(proto.Message):
@@ -975,13 +1062,17 @@ class Recommendation(proto.Message):
         """
 
         merchant: "Recommendation.MerchantInfo" = proto.Field(
-            proto.MESSAGE, number=1, message="Recommendation.MerchantInfo",
+            proto.MESSAGE,
+            number=1,
+            message="Recommendation.MerchantInfo",
         )
         untargeted_offers_count: int = proto.Field(
-            proto.INT64, number=2,
+            proto.INT64,
+            number=2,
         )
         feed_label: str = proto.Field(
-            proto.STRING, number=3,
+            proto.STRING,
+            number=3,
         )
 
     class ShoppingAddProductsToCampaignRecommendation(proto.Message):
@@ -1000,10 +1091,13 @@ class Recommendation(proto.Message):
         """
 
         merchant: "Recommendation.MerchantInfo" = proto.Field(
-            proto.MESSAGE, number=1, message="Recommendation.MerchantInfo",
+            proto.MESSAGE,
+            number=1,
+            message="Recommendation.MerchantInfo",
         )
         feed_label: str = proto.Field(
-            proto.STRING, number=2,
+            proto.STRING,
+            number=2,
         )
         reason: shopping_add_products_to_campaign_recommendation_enum.ShoppingAddProductsToCampaignRecommendationEnum.Reason = proto.Field(
             proto.ENUM,
@@ -1025,10 +1119,13 @@ class Recommendation(proto.Message):
         """
 
         merchant: "Recommendation.MerchantInfo" = proto.Field(
-            proto.MESSAGE, number=1, message="Recommendation.MerchantInfo",
+            proto.MESSAGE,
+            number=1,
+            message="Recommendation.MerchantInfo",
         )
         feed_label: str = proto.Field(
-            proto.STRING, number=2,
+            proto.STRING,
+            number=2,
         )
 
     class ShoppingMigrateRegularShoppingCampaignOffersToPerformanceMaxRecommendation(
@@ -1048,10 +1145,13 @@ class Recommendation(proto.Message):
         """
 
         merchant: "Recommendation.MerchantInfo" = proto.Field(
-            proto.MESSAGE, number=1, message="Recommendation.MerchantInfo",
+            proto.MESSAGE,
+            number=1,
+            message="Recommendation.MerchantInfo",
         )
         feed_label: str = proto.Field(
-            proto.STRING, number=2,
+            proto.STRING,
+            number=2,
         )
 
     class CampaignBudget(proto.Message):
@@ -1066,45 +1166,62 @@ class Recommendation(proto.Message):
             new_start_date (str):
                 Output only. The date when the new budget would start being
                 used. This field will be set for the following
-                recommendation types: FORECASTING_SET_TARGET_ROAS.
-                YYYY-MM-DD format, for example, 2018-04-17.
+                recommendation types: FORECASTING_SET_TARGET_ROAS YYYY-MM-DD
+                format, for example, 2018-04-17.
         """
 
         current_amount_micros: int = proto.Field(
-            proto.INT64, number=1,
+            proto.INT64,
+            number=1,
         )
         recommended_new_amount_micros: int = proto.Field(
-            proto.INT64, number=2,
+            proto.INT64,
+            number=2,
         )
         new_start_date: str = proto.Field(
-            proto.STRING, number=3,
+            proto.STRING,
+            number=3,
         )
 
     resource_name: str = proto.Field(
-        proto.STRING, number=1,
+        proto.STRING,
+        number=1,
     )
-    type_: recommendation_type.RecommendationTypeEnum.RecommendationType = proto.Field(
-        proto.ENUM,
-        number=2,
-        enum=recommendation_type.RecommendationTypeEnum.RecommendationType,
+    type_: recommendation_type.RecommendationTypeEnum.RecommendationType = (
+        proto.Field(
+            proto.ENUM,
+            number=2,
+            enum=recommendation_type.RecommendationTypeEnum.RecommendationType,
+        )
     )
     impact: RecommendationImpact = proto.Field(
-        proto.MESSAGE, number=3, message=RecommendationImpact,
+        proto.MESSAGE,
+        number=3,
+        message=RecommendationImpact,
     )
     campaign_budget: str = proto.Field(
-        proto.STRING, number=24, optional=True,
+        proto.STRING,
+        number=24,
+        optional=True,
     )
     campaign: str = proto.Field(
-        proto.STRING, number=25, optional=True,
+        proto.STRING,
+        number=25,
+        optional=True,
     )
     ad_group: str = proto.Field(
-        proto.STRING, number=26, optional=True,
+        proto.STRING,
+        number=26,
+        optional=True,
     )
     dismissed: bool = proto.Field(
-        proto.BOOL, number=27, optional=True,
+        proto.BOOL,
+        number=27,
+        optional=True,
     )
     campaigns: MutableSequence[str] = proto.RepeatedField(
-        proto.STRING, number=38,
+        proto.STRING,
+        number=38,
     )
     campaign_budget_recommendation: CampaignBudgetRecommendation = proto.Field(
         proto.MESSAGE,
@@ -1112,11 +1229,13 @@ class Recommendation(proto.Message):
         oneof="recommendation",
         message=CampaignBudgetRecommendation,
     )
-    forecasting_campaign_budget_recommendation: CampaignBudgetRecommendation = proto.Field(
-        proto.MESSAGE,
-        number=22,
-        oneof="recommendation",
-        message=CampaignBudgetRecommendation,
+    forecasting_campaign_budget_recommendation: CampaignBudgetRecommendation = (
+        proto.Field(
+            proto.MESSAGE,
+            number=22,
+            oneof="recommendation",
+            message=CampaignBudgetRecommendation,
+        )
     )
     keyword_recommendation: KeywordRecommendation = proto.Field(
         proto.MESSAGE,
@@ -1130,11 +1249,13 @@ class Recommendation(proto.Message):
         oneof="recommendation",
         message=TextAdRecommendation,
     )
-    target_cpa_opt_in_recommendation: TargetCpaOptInRecommendation = proto.Field(
-        proto.MESSAGE,
-        number=10,
-        oneof="recommendation",
-        message=TargetCpaOptInRecommendation,
+    target_cpa_opt_in_recommendation: TargetCpaOptInRecommendation = (
+        proto.Field(
+            proto.MESSAGE,
+            number=10,
+            oneof="recommendation",
+            message=TargetCpaOptInRecommendation,
+        )
     )
     maximize_conversions_opt_in_recommendation: MaximizeConversionsOptInRecommendation = proto.Field(
         proto.MESSAGE,
@@ -1142,53 +1263,69 @@ class Recommendation(proto.Message):
         oneof="recommendation",
         message=MaximizeConversionsOptInRecommendation,
     )
-    enhanced_cpc_opt_in_recommendation: EnhancedCpcOptInRecommendation = proto.Field(
-        proto.MESSAGE,
-        number=12,
-        oneof="recommendation",
-        message=EnhancedCpcOptInRecommendation,
+    enhanced_cpc_opt_in_recommendation: EnhancedCpcOptInRecommendation = (
+        proto.Field(
+            proto.MESSAGE,
+            number=12,
+            oneof="recommendation",
+            message=EnhancedCpcOptInRecommendation,
+        )
     )
-    search_partners_opt_in_recommendation: SearchPartnersOptInRecommendation = proto.Field(
-        proto.MESSAGE,
-        number=14,
-        oneof="recommendation",
-        message=SearchPartnersOptInRecommendation,
+    search_partners_opt_in_recommendation: SearchPartnersOptInRecommendation = (
+        proto.Field(
+            proto.MESSAGE,
+            number=14,
+            oneof="recommendation",
+            message=SearchPartnersOptInRecommendation,
+        )
     )
-    maximize_clicks_opt_in_recommendation: MaximizeClicksOptInRecommendation = proto.Field(
-        proto.MESSAGE,
-        number=15,
-        oneof="recommendation",
-        message=MaximizeClicksOptInRecommendation,
+    maximize_clicks_opt_in_recommendation: MaximizeClicksOptInRecommendation = (
+        proto.Field(
+            proto.MESSAGE,
+            number=15,
+            oneof="recommendation",
+            message=MaximizeClicksOptInRecommendation,
+        )
     )
-    optimize_ad_rotation_recommendation: OptimizeAdRotationRecommendation = proto.Field(
-        proto.MESSAGE,
-        number=16,
-        oneof="recommendation",
-        message=OptimizeAdRotationRecommendation,
+    optimize_ad_rotation_recommendation: OptimizeAdRotationRecommendation = (
+        proto.Field(
+            proto.MESSAGE,
+            number=16,
+            oneof="recommendation",
+            message=OptimizeAdRotationRecommendation,
+        )
     )
-    keyword_match_type_recommendation: KeywordMatchTypeRecommendation = proto.Field(
-        proto.MESSAGE,
-        number=20,
-        oneof="recommendation",
-        message=KeywordMatchTypeRecommendation,
+    keyword_match_type_recommendation: KeywordMatchTypeRecommendation = (
+        proto.Field(
+            proto.MESSAGE,
+            number=20,
+            oneof="recommendation",
+            message=KeywordMatchTypeRecommendation,
+        )
     )
-    move_unused_budget_recommendation: MoveUnusedBudgetRecommendation = proto.Field(
-        proto.MESSAGE,
-        number=21,
-        oneof="recommendation",
-        message=MoveUnusedBudgetRecommendation,
+    move_unused_budget_recommendation: MoveUnusedBudgetRecommendation = (
+        proto.Field(
+            proto.MESSAGE,
+            number=21,
+            oneof="recommendation",
+            message=MoveUnusedBudgetRecommendation,
+        )
     )
-    target_roas_opt_in_recommendation: TargetRoasOptInRecommendation = proto.Field(
-        proto.MESSAGE,
-        number=23,
-        oneof="recommendation",
-        message=TargetRoasOptInRecommendation,
+    target_roas_opt_in_recommendation: TargetRoasOptInRecommendation = (
+        proto.Field(
+            proto.MESSAGE,
+            number=23,
+            oneof="recommendation",
+            message=TargetRoasOptInRecommendation,
+        )
     )
-    responsive_search_ad_recommendation: ResponsiveSearchAdRecommendation = proto.Field(
-        proto.MESSAGE,
-        number=28,
-        oneof="recommendation",
-        message=ResponsiveSearchAdRecommendation,
+    responsive_search_ad_recommendation: ResponsiveSearchAdRecommendation = (
+        proto.Field(
+            proto.MESSAGE,
+            number=28,
+            oneof="recommendation",
+            message=ResponsiveSearchAdRecommendation,
+        )
     )
     marginal_roi_campaign_budget_recommendation: CampaignBudgetRecommendation = proto.Field(
         proto.MESSAGE,
@@ -1268,23 +1405,29 @@ class Recommendation(proto.Message):
         oneof="recommendation",
         message=ShoppingOfferAttributeRecommendation,
     )
-    shopping_add_color_recommendation: ShoppingOfferAttributeRecommendation = proto.Field(
-        proto.MESSAGE,
-        number=43,
-        oneof="recommendation",
-        message=ShoppingOfferAttributeRecommendation,
+    shopping_add_color_recommendation: ShoppingOfferAttributeRecommendation = (
+        proto.Field(
+            proto.MESSAGE,
+            number=43,
+            oneof="recommendation",
+            message=ShoppingOfferAttributeRecommendation,
+        )
     )
-    shopping_add_gender_recommendation: ShoppingOfferAttributeRecommendation = proto.Field(
-        proto.MESSAGE,
-        number=44,
-        oneof="recommendation",
-        message=ShoppingOfferAttributeRecommendation,
+    shopping_add_gender_recommendation: ShoppingOfferAttributeRecommendation = (
+        proto.Field(
+            proto.MESSAGE,
+            number=44,
+            oneof="recommendation",
+            message=ShoppingOfferAttributeRecommendation,
+        )
     )
-    shopping_add_gtin_recommendation: ShoppingOfferAttributeRecommendation = proto.Field(
-        proto.MESSAGE,
-        number=45,
-        oneof="recommendation",
-        message=ShoppingOfferAttributeRecommendation,
+    shopping_add_gtin_recommendation: ShoppingOfferAttributeRecommendation = (
+        proto.Field(
+            proto.MESSAGE,
+            number=45,
+            oneof="recommendation",
+            message=ShoppingOfferAttributeRecommendation,
+        )
     )
     shopping_add_more_identifiers_recommendation: ShoppingOfferAttributeRecommendation = proto.Field(
         proto.MESSAGE,
@@ -1292,11 +1435,13 @@ class Recommendation(proto.Message):
         oneof="recommendation",
         message=ShoppingOfferAttributeRecommendation,
     )
-    shopping_add_size_recommendation: ShoppingOfferAttributeRecommendation = proto.Field(
-        proto.MESSAGE,
-        number=47,
-        oneof="recommendation",
-        message=ShoppingOfferAttributeRecommendation,
+    shopping_add_size_recommendation: ShoppingOfferAttributeRecommendation = (
+        proto.Field(
+            proto.MESSAGE,
+            number=47,
+            oneof="recommendation",
+            message=ShoppingOfferAttributeRecommendation,
+        )
     )
     shopping_add_products_to_campaign_recommendation: ShoppingAddProductsToCampaignRecommendation = proto.Field(
         proto.MESSAGE,

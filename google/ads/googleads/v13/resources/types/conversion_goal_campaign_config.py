@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-# Copyright 2022 Google LLC
+# Copyright 2023 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -26,7 +26,9 @@ from google.ads.googleads.v13.enums.types import (
 __protobuf__ = proto.module(
     package="google.ads.googleads.v13.resources",
     marshal="google.ads.googleads.v13",
-    manifest={"ConversionGoalCampaignConfig",},
+    manifest={
+        "ConversionGoalCampaignConfig",
+    },
 )
 
 
@@ -51,10 +53,12 @@ class ConversionGoalCampaignConfig(proto.Message):
     """
 
     resource_name: str = proto.Field(
-        proto.STRING, number=1,
+        proto.STRING,
+        number=1,
     )
     campaign: str = proto.Field(
-        proto.STRING, number=2,
+        proto.STRING,
+        number=2,
     )
     goal_config_level: gage_goal_config_level.GoalConfigLevelEnum.GoalConfigLevel = proto.Field(
         proto.ENUM,
@@ -62,7 +66,8 @@ class ConversionGoalCampaignConfig(proto.Message):
         enum=gage_goal_config_level.GoalConfigLevelEnum.GoalConfigLevel,
     )
     custom_conversion_goal: str = proto.Field(
-        proto.STRING, number=4,
+        proto.STRING,
+        number=4,
     )
 
 

@@ -91,6 +91,7 @@ class Experiment(proto.Message):
             If this field is set, then the experiment ends
             at the end of the specified date in the
             customer's time zone.
+
             Format: YYYY-MM-DD
             Example: 2019-04-18
 

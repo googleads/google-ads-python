@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-# Copyright 2022 Google LLC
+# Copyright 2023 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -22,13 +22,16 @@ import proto  # type: ignore
 __protobuf__ = proto.module(
     package="google.ads.googleads.v13.enums",
     marshal="google.ads.googleads.v13",
-    manifest={"PromotionExtensionOccasionEnum",},
+    manifest={
+        "PromotionExtensionOccasionEnum",
+    },
 )
 
 
 class PromotionExtensionOccasionEnum(proto.Message):
     r"""Container for enum describing a promotion extension occasion.
     For more information about the occasions  check:
+
     https://support.google.com/google-ads/answer/7367521
 
     """

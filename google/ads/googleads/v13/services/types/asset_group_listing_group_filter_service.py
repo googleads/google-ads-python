@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-# Copyright 2022 Google LLC
+# Copyright 2023 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -63,7 +63,8 @@ class MutateAssetGroupListingGroupFiltersRequest(proto.Message):
     """
 
     customer_id: str = proto.Field(
-        proto.STRING, number=1,
+        proto.STRING,
+        number=1,
     )
     operations: MutableSequence[
         "AssetGroupListingGroupFilterOperation"
@@ -73,7 +74,8 @@ class MutateAssetGroupListingGroupFiltersRequest(proto.Message):
         message="AssetGroupListingGroupFilterOperation",
     )
     validate_only: bool = proto.Field(
-        proto.BOOL, number=3,
+        proto.BOOL,
+        number=3,
     )
     response_content_type: gage_response_content_type.ResponseContentTypeEnum.ResponseContentType = proto.Field(
         proto.ENUM,
@@ -121,7 +123,9 @@ class AssetGroupListingGroupFilterOperation(proto.Message):
     """
 
     update_mask: field_mask_pb2.FieldMask = proto.Field(
-        proto.MESSAGE, number=4, message=field_mask_pb2.FieldMask,
+        proto.MESSAGE,
+        number=4,
+        message=field_mask_pb2.FieldMask,
     )
     create: gagr_asset_group_listing_group_filter.AssetGroupListingGroupFilter = proto.Field(
         proto.MESSAGE,
@@ -136,7 +140,9 @@ class AssetGroupListingGroupFilterOperation(proto.Message):
         message=gagr_asset_group_listing_group_filter.AssetGroupListingGroupFilter,
     )
     remove: str = proto.Field(
-        proto.STRING, number=3, oneof="operation",
+        proto.STRING,
+        number=3,
+        oneof="operation",
     )
 
 
@@ -170,7 +176,8 @@ class MutateAssetGroupListingGroupFilterResult(proto.Message):
     """
 
     resource_name: str = proto.Field(
-        proto.STRING, number=1,
+        proto.STRING,
+        number=1,
     )
     asset_group_listing_group_filter: gagr_asset_group_listing_group_filter.AssetGroupListingGroupFilter = proto.Field(
         proto.MESSAGE,

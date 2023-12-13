@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-# Copyright 2022 Google LLC
+# Copyright 2023 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -50,7 +50,8 @@ class ListMerchantCenterLinksRequest(proto.Message):
     """
 
     customer_id: str = proto.Field(
-        proto.STRING, number=1,
+        proto.STRING,
+        number=1,
     )
 
 
@@ -84,7 +85,8 @@ class GetMerchantCenterLinkRequest(proto.Message):
     """
 
     resource_name: str = proto.Field(
-        proto.STRING, number=1,
+        proto.STRING,
+        number=1,
     )
 
 
@@ -105,13 +107,17 @@ class MutateMerchantCenterLinkRequest(proto.Message):
     """
 
     customer_id: str = proto.Field(
-        proto.STRING, number=1,
+        proto.STRING,
+        number=1,
     )
     operation: "MerchantCenterLinkOperation" = proto.Field(
-        proto.MESSAGE, number=2, message="MerchantCenterLinkOperation",
+        proto.MESSAGE,
+        number=2,
+        message="MerchantCenterLinkOperation",
     )
     validate_only: bool = proto.Field(
-        proto.BOOL, number=3,
+        proto.BOOL,
+        number=3,
     )
 
 
@@ -143,7 +149,9 @@ class MerchantCenterLinkOperation(proto.Message):
     """
 
     update_mask: field_mask_pb2.FieldMask = proto.Field(
-        proto.MESSAGE, number=3, message=field_mask_pb2.FieldMask,
+        proto.MESSAGE,
+        number=3,
+        message=field_mask_pb2.FieldMask,
     )
     update: merchant_center_link.MerchantCenterLink = proto.Field(
         proto.MESSAGE,
@@ -152,7 +160,9 @@ class MerchantCenterLinkOperation(proto.Message):
         message=merchant_center_link.MerchantCenterLink,
     )
     remove: str = proto.Field(
-        proto.STRING, number=2, oneof="operation",
+        proto.STRING,
+        number=2,
+        oneof="operation",
     )
 
 
@@ -164,7 +174,9 @@ class MutateMerchantCenterLinkResponse(proto.Message):
     """
 
     result: "MutateMerchantCenterLinkResult" = proto.Field(
-        proto.MESSAGE, number=2, message="MutateMerchantCenterLinkResult",
+        proto.MESSAGE,
+        number=2,
+        message="MutateMerchantCenterLinkResult",
     )
 
 
@@ -176,7 +188,8 @@ class MutateMerchantCenterLinkResult(proto.Message):
     """
 
     resource_name: str = proto.Field(
-        proto.STRING, number=1,
+        proto.STRING,
+        number=1,
     )
 
 

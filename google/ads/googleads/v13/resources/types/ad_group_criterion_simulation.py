@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-# Copyright 2022 Google LLC
+# Copyright 2023 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -26,7 +26,9 @@ from google.ads.googleads.v13.enums.types import simulation_type
 __protobuf__ = proto.module(
     package="google.ads.googleads.v13.resources",
     marshal="google.ads.googleads.v13",
-    manifest={"AdGroupCriterionSimulation",},
+    manifest={
+        "AdGroupCriterionSimulation",
+    },
 )
 
 
@@ -93,13 +95,18 @@ class AdGroupCriterionSimulation(proto.Message):
     """
 
     resource_name: str = proto.Field(
-        proto.STRING, number=1,
+        proto.STRING,
+        number=1,
     )
     ad_group_id: int = proto.Field(
-        proto.INT64, number=9, optional=True,
+        proto.INT64,
+        number=9,
+        optional=True,
     )
     criterion_id: int = proto.Field(
-        proto.INT64, number=10, optional=True,
+        proto.INT64,
+        number=10,
+        optional=True,
     )
     type_: simulation_type.SimulationTypeEnum.SimulationType = proto.Field(
         proto.ENUM,
@@ -112,10 +119,14 @@ class AdGroupCriterionSimulation(proto.Message):
         enum=simulation_modification_method.SimulationModificationMethodEnum.SimulationModificationMethod,
     )
     start_date: str = proto.Field(
-        proto.STRING, number=11, optional=True,
+        proto.STRING,
+        number=11,
+        optional=True,
     )
     end_date: str = proto.Field(
-        proto.STRING, number=12, optional=True,
+        proto.STRING,
+        number=12,
+        optional=True,
     )
     cpc_bid_point_list: simulation.CpcBidSimulationPointList = proto.Field(
         proto.MESSAGE,
@@ -123,11 +134,13 @@ class AdGroupCriterionSimulation(proto.Message):
         oneof="point_list",
         message=simulation.CpcBidSimulationPointList,
     )
-    percent_cpc_bid_point_list: simulation.PercentCpcBidSimulationPointList = proto.Field(
-        proto.MESSAGE,
-        number=13,
-        oneof="point_list",
-        message=simulation.PercentCpcBidSimulationPointList,
+    percent_cpc_bid_point_list: simulation.PercentCpcBidSimulationPointList = (
+        proto.Field(
+            proto.MESSAGE,
+            number=13,
+            oneof="point_list",
+            message=simulation.PercentCpcBidSimulationPointList,
+        )
     )
 
 

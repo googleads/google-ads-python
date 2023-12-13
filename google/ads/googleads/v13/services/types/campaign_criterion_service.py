@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-# Copyright 2022 Google LLC
+# Copyright 2023 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -68,18 +68,23 @@ class MutateCampaignCriteriaRequest(proto.Message):
     """
 
     customer_id: str = proto.Field(
-        proto.STRING, number=1,
+        proto.STRING,
+        number=1,
     )
     operations: MutableSequence[
         "CampaignCriterionOperation"
     ] = proto.RepeatedField(
-        proto.MESSAGE, number=2, message="CampaignCriterionOperation",
+        proto.MESSAGE,
+        number=2,
+        message="CampaignCriterionOperation",
     )
     partial_failure: bool = proto.Field(
-        proto.BOOL, number=3,
+        proto.BOOL,
+        number=3,
     )
     validate_only: bool = proto.Field(
-        proto.BOOL, number=4,
+        proto.BOOL,
+        number=4,
     )
     response_content_type: gage_response_content_type.ResponseContentTypeEnum.ResponseContentType = proto.Field(
         proto.ENUM,
@@ -123,7 +128,9 @@ class CampaignCriterionOperation(proto.Message):
     """
 
     update_mask: field_mask_pb2.FieldMask = proto.Field(
-        proto.MESSAGE, number=4, message=field_mask_pb2.FieldMask,
+        proto.MESSAGE,
+        number=4,
+        message=field_mask_pb2.FieldMask,
     )
     create: gagr_campaign_criterion.CampaignCriterion = proto.Field(
         proto.MESSAGE,
@@ -138,7 +145,9 @@ class CampaignCriterionOperation(proto.Message):
         message=gagr_campaign_criterion.CampaignCriterion,
     )
     remove: str = proto.Field(
-        proto.STRING, number=3, oneof="operation",
+        proto.STRING,
+        number=3,
+        oneof="operation",
     )
 
 
@@ -156,12 +165,16 @@ class MutateCampaignCriteriaResponse(proto.Message):
     """
 
     partial_failure_error: status_pb2.Status = proto.Field(
-        proto.MESSAGE, number=3, message=status_pb2.Status,
+        proto.MESSAGE,
+        number=3,
+        message=status_pb2.Status,
     )
     results: MutableSequence[
         "MutateCampaignCriterionResult"
     ] = proto.RepeatedField(
-        proto.MESSAGE, number=2, message="MutateCampaignCriterionResult",
+        proto.MESSAGE,
+        number=2,
+        message="MutateCampaignCriterionResult",
     )
 
 
@@ -177,7 +190,8 @@ class MutateCampaignCriterionResult(proto.Message):
     """
 
     resource_name: str = proto.Field(
-        proto.STRING, number=1,
+        proto.STRING,
+        number=1,
     )
     campaign_criterion: gagr_campaign_criterion.CampaignCriterion = proto.Field(
         proto.MESSAGE,

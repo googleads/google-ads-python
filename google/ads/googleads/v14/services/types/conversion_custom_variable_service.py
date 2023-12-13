@@ -110,14 +110,13 @@ class ConversionCustomVariableOperation(proto.Message):
             fields are modified in an update.
         create (google.ads.googleads.v14.resources.types.ConversionCustomVariable):
             Create operation: No resource name is
-            expected for the new conversion
-            custom variable.
+            expected for the new conversion custom variable.
 
             This field is a member of `oneof`_ ``operation``.
         update (google.ads.googleads.v14.resources.types.ConversionCustomVariable):
             Update operation: The conversion custom
-            variable is expected to have a
-            valid resource name.
+            variable is expected to have a valid resource
+            name.
 
             This field is a member of `oneof`_ ``operation``.
     """

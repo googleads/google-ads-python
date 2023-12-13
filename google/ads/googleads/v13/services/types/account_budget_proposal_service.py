@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-# Copyright 2022 Google LLC
+# Copyright 2023 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -50,13 +50,17 @@ class MutateAccountBudgetProposalRequest(proto.Message):
     """
 
     customer_id: str = proto.Field(
-        proto.STRING, number=1,
+        proto.STRING,
+        number=1,
     )
     operation: "AccountBudgetProposalOperation" = proto.Field(
-        proto.MESSAGE, number=2, message="AccountBudgetProposalOperation",
+        proto.MESSAGE,
+        number=2,
+        message="AccountBudgetProposalOperation",
     )
     validate_only: bool = proto.Field(
-        proto.BOOL, number=3,
+        proto.BOOL,
+        number=3,
     )
 
 
@@ -78,6 +82,7 @@ class AccountBudgetProposalOperation(proto.Message):
             proposals that propose such modifications are
             final. Therefore, update operations are not
             supported for proposals.
+
             Proposals that modify budgets have the 'update'
             proposal type.  Specifying a mask for any other
             proposal type is considered an error.
@@ -101,7 +106,9 @@ class AccountBudgetProposalOperation(proto.Message):
     """
 
     update_mask: field_mask_pb2.FieldMask = proto.Field(
-        proto.MESSAGE, number=3, message=field_mask_pb2.FieldMask,
+        proto.MESSAGE,
+        number=3,
+        message=field_mask_pb2.FieldMask,
     )
     create: account_budget_proposal.AccountBudgetProposal = proto.Field(
         proto.MESSAGE,
@@ -110,7 +117,9 @@ class AccountBudgetProposalOperation(proto.Message):
         message=account_budget_proposal.AccountBudgetProposal,
     )
     remove: str = proto.Field(
-        proto.STRING, number=1, oneof="operation",
+        proto.STRING,
+        number=1,
+        oneof="operation",
     )
 
 
@@ -122,7 +131,9 @@ class MutateAccountBudgetProposalResponse(proto.Message):
     """
 
     result: "MutateAccountBudgetProposalResult" = proto.Field(
-        proto.MESSAGE, number=2, message="MutateAccountBudgetProposalResult",
+        proto.MESSAGE,
+        number=2,
+        message="MutateAccountBudgetProposalResult",
     )
 
 
@@ -134,7 +145,8 @@ class MutateAccountBudgetProposalResult(proto.Message):
     """
 
     resource_name: str = proto.Field(
-        proto.STRING, number=1,
+        proto.STRING,
+        number=1,
     )
 
 

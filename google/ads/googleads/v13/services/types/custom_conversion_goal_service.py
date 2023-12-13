@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-# Copyright 2022 Google LLC
+# Copyright 2023 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -61,15 +61,19 @@ class MutateCustomConversionGoalsRequest(proto.Message):
     """
 
     customer_id: str = proto.Field(
-        proto.STRING, number=1,
+        proto.STRING,
+        number=1,
     )
     operations: MutableSequence[
         "CustomConversionGoalOperation"
     ] = proto.RepeatedField(
-        proto.MESSAGE, number=2, message="CustomConversionGoalOperation",
+        proto.MESSAGE,
+        number=2,
+        message="CustomConversionGoalOperation",
     )
     validate_only: bool = proto.Field(
-        proto.BOOL, number=3,
+        proto.BOOL,
+        number=3,
     )
     response_content_type: gage_response_content_type.ResponseContentTypeEnum.ResponseContentType = proto.Field(
         proto.ENUM,
@@ -113,7 +117,9 @@ class CustomConversionGoalOperation(proto.Message):
     """
 
     update_mask: field_mask_pb2.FieldMask = proto.Field(
-        proto.MESSAGE, number=4, message=field_mask_pb2.FieldMask,
+        proto.MESSAGE,
+        number=4,
+        message=field_mask_pb2.FieldMask,
     )
     create: gagr_custom_conversion_goal.CustomConversionGoal = proto.Field(
         proto.MESSAGE,
@@ -128,7 +134,9 @@ class CustomConversionGoalOperation(proto.Message):
         message=gagr_custom_conversion_goal.CustomConversionGoal,
     )
     remove: str = proto.Field(
-        proto.STRING, number=3, oneof="operation",
+        proto.STRING,
+        number=3,
+        oneof="operation",
     )
 
 
@@ -142,7 +150,9 @@ class MutateCustomConversionGoalsResponse(proto.Message):
     results: MutableSequence[
         "MutateCustomConversionGoalResult"
     ] = proto.RepeatedField(
-        proto.MESSAGE, number=1, message="MutateCustomConversionGoalResult",
+        proto.MESSAGE,
+        number=1,
+        message="MutateCustomConversionGoalResult",
     )
 
 
@@ -158,12 +168,15 @@ class MutateCustomConversionGoalResult(proto.Message):
     """
 
     resource_name: str = proto.Field(
-        proto.STRING, number=1,
+        proto.STRING,
+        number=1,
     )
-    custom_conversion_goal: gagr_custom_conversion_goal.CustomConversionGoal = proto.Field(
-        proto.MESSAGE,
-        number=2,
-        message=gagr_custom_conversion_goal.CustomConversionGoal,
+    custom_conversion_goal: gagr_custom_conversion_goal.CustomConversionGoal = (
+        proto.Field(
+            proto.MESSAGE,
+            number=2,
+            message=gagr_custom_conversion_goal.CustomConversionGoal,
+        )
     )
 
 

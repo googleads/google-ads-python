@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-# Copyright 2022 Google LLC
+# Copyright 2023 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -140,12 +140,16 @@ class KeywordInfo(proto.Message):
     """
 
     text: str = proto.Field(
-        proto.STRING, number=3, optional=True,
+        proto.STRING,
+        number=3,
+        optional=True,
     )
-    match_type: keyword_match_type.KeywordMatchTypeEnum.KeywordMatchType = proto.Field(
-        proto.ENUM,
-        number=2,
-        enum=keyword_match_type.KeywordMatchTypeEnum.KeywordMatchType,
+    match_type: keyword_match_type.KeywordMatchTypeEnum.KeywordMatchType = (
+        proto.Field(
+            proto.ENUM,
+            number=2,
+            enum=keyword_match_type.KeywordMatchTypeEnum.KeywordMatchType,
+        )
     )
 
 
@@ -158,13 +162,16 @@ class PlacementInfo(proto.Message):
     Attributes:
         url (str):
             URL of the placement.
+
             For example, "http://www.domain.com".
 
             This field is a member of `oneof`_ ``_url``.
     """
 
     url: str = proto.Field(
-        proto.STRING, number=2, optional=True,
+        proto.STRING,
+        number=2,
+        optional=True,
     )
 
 
@@ -181,7 +188,9 @@ class MobileAppCategoryInfo(proto.Message):
     """
 
     mobile_app_category_constant: str = proto.Field(
-        proto.STRING, number=2, optional=True,
+        proto.STRING,
+        number=2,
+        optional=True,
     )
 
 
@@ -218,10 +227,14 @@ class MobileApplicationInfo(proto.Message):
     """
 
     app_id: str = proto.Field(
-        proto.STRING, number=4, optional=True,
+        proto.STRING,
+        number=4,
+        optional=True,
     )
     name: str = proto.Field(
-        proto.STRING, number=5, optional=True,
+        proto.STRING,
+        number=5,
+        optional=True,
     )
 
 
@@ -237,7 +250,9 @@ class LocationInfo(proto.Message):
     """
 
     geo_target_constant: str = proto.Field(
-        proto.STRING, number=2, optional=True,
+        proto.STRING,
+        number=2,
+        optional=True,
     )
 
 
@@ -249,7 +264,9 @@ class DeviceInfo(proto.Message):
     """
 
     type_: device.DeviceEnum.Device = proto.Field(
-        proto.ENUM, number=1, enum=device.DeviceEnum.Device,
+        proto.ENUM,
+        number=1,
+        enum=device.DeviceEnum.Device,
     )
 
 
@@ -272,16 +289,22 @@ class ListingGroupInfo(proto.Message):
             This field is a member of `oneof`_ ``_parent_ad_group_criterion``.
     """
 
-    type_: listing_group_type.ListingGroupTypeEnum.ListingGroupType = proto.Field(
-        proto.ENUM,
-        number=1,
-        enum=listing_group_type.ListingGroupTypeEnum.ListingGroupType,
+    type_: listing_group_type.ListingGroupTypeEnum.ListingGroupType = (
+        proto.Field(
+            proto.ENUM,
+            number=1,
+            enum=listing_group_type.ListingGroupTypeEnum.ListingGroupType,
+        )
     )
     case_value: "ListingDimensionInfo" = proto.Field(
-        proto.MESSAGE, number=2, message="ListingDimensionInfo",
+        proto.MESSAGE,
+        number=2,
+        message="ListingDimensionInfo",
     )
     parent_ad_group_criterion: str = proto.Field(
-        proto.STRING, number=4, optional=True,
+        proto.STRING,
+        number=4,
+        optional=True,
     )
 
 
@@ -293,7 +316,9 @@ class ListingScopeInfo(proto.Message):
     """
 
     dimensions: MutableSequence["ListingDimensionInfo"] = proto.RepeatedField(
-        proto.MESSAGE, number=2, message="ListingDimensionInfo",
+        proto.MESSAGE,
+        number=2,
+        message="ListingDimensionInfo",
     )
 
 
@@ -405,10 +430,16 @@ class ListingDimensionInfo(proto.Message):
     """
 
     hotel_id: "HotelIdInfo" = proto.Field(
-        proto.MESSAGE, number=2, oneof="dimension", message="HotelIdInfo",
+        proto.MESSAGE,
+        number=2,
+        oneof="dimension",
+        message="HotelIdInfo",
     )
     hotel_class: "HotelClassInfo" = proto.Field(
-        proto.MESSAGE, number=3, oneof="dimension", message="HotelClassInfo",
+        proto.MESSAGE,
+        number=3,
+        oneof="dimension",
+        message="HotelClassInfo",
     )
     hotel_country_region: "HotelCountryRegionInfo" = proto.Field(
         proto.MESSAGE,
@@ -417,10 +448,16 @@ class ListingDimensionInfo(proto.Message):
         message="HotelCountryRegionInfo",
     )
     hotel_state: "HotelStateInfo" = proto.Field(
-        proto.MESSAGE, number=5, oneof="dimension", message="HotelStateInfo",
+        proto.MESSAGE,
+        number=5,
+        oneof="dimension",
+        message="HotelStateInfo",
     )
     hotel_city: "HotelCityInfo" = proto.Field(
-        proto.MESSAGE, number=6, oneof="dimension", message="HotelCityInfo",
+        proto.MESSAGE,
+        number=6,
+        oneof="dimension",
+        message="HotelCityInfo",
     )
     product_bidding_category: "ProductBiddingCategoryInfo" = proto.Field(
         proto.MESSAGE,
@@ -429,7 +466,10 @@ class ListingDimensionInfo(proto.Message):
         message="ProductBiddingCategoryInfo",
     )
     product_brand: "ProductBrandInfo" = proto.Field(
-        proto.MESSAGE, number=15, oneof="dimension", message="ProductBrandInfo",
+        proto.MESSAGE,
+        number=15,
+        oneof="dimension",
+        message="ProductBrandInfo",
     )
     product_channel: "ProductChannelInfo" = proto.Field(
         proto.MESSAGE,
@@ -462,7 +502,10 @@ class ListingDimensionInfo(proto.Message):
         message="ProductItemIdInfo",
     )
     product_type: "ProductTypeInfo" = proto.Field(
-        proto.MESSAGE, number=12, oneof="dimension", message="ProductTypeInfo",
+        proto.MESSAGE,
+        number=12,
+        oneof="dimension",
+        message="ProductTypeInfo",
     )
     product_grouping: "ProductGroupingInfo" = proto.Field(
         proto.MESSAGE,
@@ -489,7 +532,10 @@ class ListingDimensionInfo(proto.Message):
         message="ProductTypeFullInfo",
     )
     activity_id: "ActivityIdInfo" = proto.Field(
-        proto.MESSAGE, number=21, oneof="dimension", message="ActivityIdInfo",
+        proto.MESSAGE,
+        number=21,
+        oneof="dimension",
+        message="ActivityIdInfo",
     )
     activity_rating: "ActivityRatingInfo" = proto.Field(
         proto.MESSAGE,
@@ -523,7 +569,9 @@ class HotelIdInfo(proto.Message):
     """
 
     value: str = proto.Field(
-        proto.STRING, number=2, optional=True,
+        proto.STRING,
+        number=2,
+        optional=True,
     )
 
 
@@ -539,7 +587,9 @@ class HotelClassInfo(proto.Message):
     """
 
     value: int = proto.Field(
-        proto.INT64, number=2, optional=True,
+        proto.INT64,
+        number=2,
+        optional=True,
     )
 
 
@@ -555,7 +605,9 @@ class HotelCountryRegionInfo(proto.Message):
     """
 
     country_region_criterion: str = proto.Field(
-        proto.STRING, number=2, optional=True,
+        proto.STRING,
+        number=2,
+        optional=True,
     )
 
 
@@ -571,7 +623,9 @@ class HotelStateInfo(proto.Message):
     """
 
     state_criterion: str = proto.Field(
-        proto.STRING, number=2, optional=True,
+        proto.STRING,
+        number=2,
+        optional=True,
     )
 
 
@@ -587,7 +641,9 @@ class HotelCityInfo(proto.Message):
     """
 
     city_criterion: str = proto.Field(
-        proto.STRING, number=2, optional=True,
+        proto.STRING,
+        number=2,
+        optional=True,
     )
 
 
@@ -609,7 +665,9 @@ class ProductBiddingCategoryInfo(proto.Message):
     """
 
     id: int = proto.Field(
-        proto.INT64, number=4, optional=True,
+        proto.INT64,
+        number=4,
+        optional=True,
     )
     level: product_bidding_category_level.ProductBiddingCategoryLevelEnum.ProductBiddingCategoryLevel = proto.Field(
         proto.ENUM,
@@ -630,7 +688,9 @@ class ProductBrandInfo(proto.Message):
     """
 
     value: str = proto.Field(
-        proto.STRING, number=2, optional=True,
+        proto.STRING,
+        number=2,
+        optional=True,
     )
 
 
@@ -641,10 +701,12 @@ class ProductChannelInfo(proto.Message):
             Value of the locality.
     """
 
-    channel: gage_product_channel.ProductChannelEnum.ProductChannel = proto.Field(
-        proto.ENUM,
-        number=1,
-        enum=gage_product_channel.ProductChannelEnum.ProductChannel,
+    channel: gage_product_channel.ProductChannelEnum.ProductChannel = (
+        proto.Field(
+            proto.ENUM,
+            number=1,
+            enum=gage_product_channel.ProductChannelEnum.ProductChannel,
+        )
     )
 
 
@@ -669,10 +731,12 @@ class ProductConditionInfo(proto.Message):
             Value of the condition.
     """
 
-    condition: gage_product_condition.ProductConditionEnum.ProductCondition = proto.Field(
-        proto.ENUM,
-        number=1,
-        enum=gage_product_condition.ProductConditionEnum.ProductCondition,
+    condition: gage_product_condition.ProductConditionEnum.ProductCondition = (
+        proto.Field(
+            proto.ENUM,
+            number=1,
+            enum=gage_product_condition.ProductConditionEnum.ProductCondition,
+        )
     )
 
 
@@ -690,7 +754,9 @@ class ProductCustomAttributeInfo(proto.Message):
     """
 
     value: str = proto.Field(
-        proto.STRING, number=3, optional=True,
+        proto.STRING,
+        number=3,
+        optional=True,
     )
     index: product_custom_attribute_index.ProductCustomAttributeIndexEnum.ProductCustomAttributeIndex = proto.Field(
         proto.ENUM,
@@ -711,7 +777,9 @@ class ProductItemIdInfo(proto.Message):
     """
 
     value: str = proto.Field(
-        proto.STRING, number=2, optional=True,
+        proto.STRING,
+        number=2,
+        optional=True,
     )
 
 
@@ -729,12 +797,16 @@ class ProductTypeInfo(proto.Message):
     """
 
     value: str = proto.Field(
-        proto.STRING, number=3, optional=True,
+        proto.STRING,
+        number=3,
+        optional=True,
     )
-    level: product_type_level.ProductTypeLevelEnum.ProductTypeLevel = proto.Field(
-        proto.ENUM,
-        number=2,
-        enum=product_type_level.ProductTypeLevelEnum.ProductTypeLevel,
+    level: product_type_level.ProductTypeLevelEnum.ProductTypeLevel = (
+        proto.Field(
+            proto.ENUM,
+            number=2,
+            enum=product_type_level.ProductTypeLevelEnum.ProductTypeLevel,
+        )
     )
 
 
@@ -752,7 +824,9 @@ class ProductGroupingInfo(proto.Message):
     """
 
     value: str = proto.Field(
-        proto.STRING, number=1, optional=True,
+        proto.STRING,
+        number=1,
+        optional=True,
     )
 
 
@@ -770,7 +844,9 @@ class ProductLabelsInfo(proto.Message):
     """
 
     value: str = proto.Field(
-        proto.STRING, number=1, optional=True,
+        proto.STRING,
+        number=1,
+        optional=True,
     )
 
 
@@ -788,7 +864,9 @@ class ProductLegacyConditionInfo(proto.Message):
     """
 
     value: str = proto.Field(
-        proto.STRING, number=1, optional=True,
+        proto.STRING,
+        number=1,
+        optional=True,
     )
 
 
@@ -806,13 +884,14 @@ class ProductTypeFullInfo(proto.Message):
     """
 
     value: str = proto.Field(
-        proto.STRING, number=1, optional=True,
+        proto.STRING,
+        number=1,
+        optional=True,
     )
 
 
 class UnknownListingDimensionInfo(proto.Message):
-    r"""Unknown listing dimension.
-    """
+    r"""Unknown listing dimension."""
 
 
 class HotelDateSelectionTypeInfo(proto.Message):
@@ -851,10 +930,14 @@ class HotelAdvanceBookingWindowInfo(proto.Message):
     """
 
     min_days: int = proto.Field(
-        proto.INT64, number=3, optional=True,
+        proto.INT64,
+        number=3,
+        optional=True,
     )
     max_days: int = proto.Field(
-        proto.INT64, number=4, optional=True,
+        proto.INT64,
+        number=4,
+        optional=True,
     )
 
 
@@ -874,10 +957,14 @@ class HotelLengthOfStayInfo(proto.Message):
     """
 
     min_nights: int = proto.Field(
-        proto.INT64, number=3, optional=True,
+        proto.INT64,
+        number=3,
+        optional=True,
     )
     max_nights: int = proto.Field(
-        proto.INT64, number=4, optional=True,
+        proto.INT64,
+        number=4,
+        optional=True,
     )
 
 
@@ -891,10 +978,12 @@ class HotelCheckInDateRangeInfo(proto.Message):
     """
 
     start_date: str = proto.Field(
-        proto.STRING, number=1,
+        proto.STRING,
+        number=1,
     )
     end_date: str = proto.Field(
-        proto.STRING, number=2,
+        proto.STRING,
+        number=2,
     )
 
 
@@ -906,7 +995,9 @@ class HotelCheckInDayInfo(proto.Message):
     """
 
     day_of_week: gage_day_of_week.DayOfWeekEnum.DayOfWeek = proto.Field(
-        proto.ENUM, number=1, enum=gage_day_of_week.DayOfWeekEnum.DayOfWeek,
+        proto.ENUM,
+        number=1,
+        enum=gage_day_of_week.DayOfWeekEnum.DayOfWeek,
     )
 
 
@@ -922,7 +1013,9 @@ class ActivityIdInfo(proto.Message):
     """
 
     value: str = proto.Field(
-        proto.STRING, number=1, optional=True,
+        proto.STRING,
+        number=1,
+        optional=True,
     )
 
 
@@ -940,7 +1033,9 @@ class ActivityRatingInfo(proto.Message):
     """
 
     value: int = proto.Field(
-        proto.INT64, number=1, optional=True,
+        proto.INT64,
+        number=1,
+        optional=True,
     )
 
 
@@ -957,7 +1052,9 @@ class ActivityCountryInfo(proto.Message):
     """
 
     value: str = proto.Field(
-        proto.STRING, number=1, optional=True,
+        proto.STRING,
+        number=1,
+        optional=True,
     )
 
 
@@ -977,6 +1074,7 @@ class InteractionTypeInfo(proto.Message):
 
 class AdScheduleInfo(proto.Message):
     r"""Represents an AdSchedule criterion.
+
     AdSchedule is specified as the day of the week and a time
     interval within which ads will be shown.
 
@@ -994,11 +1092,13 @@ class AdScheduleInfo(proto.Message):
             Minutes after the end hour at which this
             schedule ends. The schedule is exclusive of the
             end minute.
+
             This field is required for CREATE operations and
             is prohibited on UPDATE operations.
         start_hour (int):
             Starting hour in 24 hour time.
             This field must be between 0 and 23, inclusive.
+
             This field is required for CREATE operations and
             is prohibited on UPDATE operations.
 
@@ -1007,30 +1107,42 @@ class AdScheduleInfo(proto.Message):
             Ending hour in 24 hour time; 24 signifies end
             of the day. This field must be between 0 and 24,
             inclusive.
+
             This field is required for CREATE operations and
             is prohibited on UPDATE operations.
 
             This field is a member of `oneof`_ ``_end_hour``.
         day_of_week (google.ads.googleads.v13.enums.types.DayOfWeekEnum.DayOfWeek):
             Day of the week the schedule applies to.
+
             This field is required for CREATE operations and
             is prohibited on UPDATE operations.
     """
 
     start_minute: minute_of_hour.MinuteOfHourEnum.MinuteOfHour = proto.Field(
-        proto.ENUM, number=1, enum=minute_of_hour.MinuteOfHourEnum.MinuteOfHour,
+        proto.ENUM,
+        number=1,
+        enum=minute_of_hour.MinuteOfHourEnum.MinuteOfHour,
     )
     end_minute: minute_of_hour.MinuteOfHourEnum.MinuteOfHour = proto.Field(
-        proto.ENUM, number=2, enum=minute_of_hour.MinuteOfHourEnum.MinuteOfHour,
+        proto.ENUM,
+        number=2,
+        enum=minute_of_hour.MinuteOfHourEnum.MinuteOfHour,
     )
     start_hour: int = proto.Field(
-        proto.INT32, number=6, optional=True,
+        proto.INT32,
+        number=6,
+        optional=True,
     )
     end_hour: int = proto.Field(
-        proto.INT32, number=7, optional=True,
+        proto.INT32,
+        number=7,
+        optional=True,
     )
     day_of_week: gage_day_of_week.DayOfWeekEnum.DayOfWeek = proto.Field(
-        proto.ENUM, number=5, enum=gage_day_of_week.DayOfWeekEnum.DayOfWeek,
+        proto.ENUM,
+        number=5,
+        enum=gage_day_of_week.DayOfWeekEnum.DayOfWeek,
     )
 
 
@@ -1042,7 +1154,9 @@ class AgeRangeInfo(proto.Message):
     """
 
     type_: age_range_type.AgeRangeTypeEnum.AgeRangeType = proto.Field(
-        proto.ENUM, number=1, enum=age_range_type.AgeRangeTypeEnum.AgeRangeType,
+        proto.ENUM,
+        number=1,
+        enum=age_range_type.AgeRangeTypeEnum.AgeRangeType,
     )
 
 
@@ -1054,7 +1168,9 @@ class GenderInfo(proto.Message):
     """
 
     type_: gender_type.GenderTypeEnum.GenderType = proto.Field(
-        proto.ENUM, number=1, enum=gender_type.GenderTypeEnum.GenderType,
+        proto.ENUM,
+        number=1,
+        enum=gender_type.GenderTypeEnum.GenderType,
     )
 
 
@@ -1079,10 +1195,12 @@ class ParentalStatusInfo(proto.Message):
             Type of the parental status.
     """
 
-    type_: parental_status_type.ParentalStatusTypeEnum.ParentalStatusType = proto.Field(
-        proto.ENUM,
-        number=1,
-        enum=parental_status_type.ParentalStatusTypeEnum.ParentalStatusType,
+    type_: parental_status_type.ParentalStatusTypeEnum.ParentalStatusType = (
+        proto.Field(
+            proto.ENUM,
+            number=1,
+            enum=parental_status_type.ParentalStatusTypeEnum.ParentalStatusType,
+        )
     )
 
 
@@ -1099,7 +1217,9 @@ class YouTubeVideoInfo(proto.Message):
     """
 
     video_id: str = proto.Field(
-        proto.STRING, number=2, optional=True,
+        proto.STRING,
+        number=2,
+        optional=True,
     )
 
 
@@ -1116,7 +1236,9 @@ class YouTubeChannelInfo(proto.Message):
     """
 
     channel_id: str = proto.Field(
-        proto.STRING, number=2, optional=True,
+        proto.STRING,
+        number=2,
+        optional=True,
     )
 
 
@@ -1134,7 +1256,9 @@ class UserListInfo(proto.Message):
     """
 
     user_list: str = proto.Field(
-        proto.STRING, number=2, optional=True,
+        proto.STRING,
+        number=2,
+        optional=True,
     )
 
 
@@ -1165,10 +1289,14 @@ class ProximityInfo(proto.Message):
     """
 
     geo_point: "GeoPointInfo" = proto.Field(
-        proto.MESSAGE, number=1, message="GeoPointInfo",
+        proto.MESSAGE,
+        number=1,
+        message="GeoPointInfo",
     )
     radius: float = proto.Field(
-        proto.DOUBLE, number=5, optional=True,
+        proto.DOUBLE,
+        number=5,
+        optional=True,
     )
     radius_units: proximity_radius_units.ProximityRadiusUnitsEnum.ProximityRadiusUnits = proto.Field(
         proto.ENUM,
@@ -1176,7 +1304,9 @@ class ProximityInfo(proto.Message):
         enum=proximity_radius_units.ProximityRadiusUnitsEnum.ProximityRadiusUnits,
     )
     address: "AddressInfo" = proto.Field(
-        proto.MESSAGE, number=4, message="AddressInfo",
+        proto.MESSAGE,
+        number=4,
+        message="AddressInfo",
     )
 
 
@@ -1196,10 +1326,14 @@ class GeoPointInfo(proto.Message):
     """
 
     longitude_in_micro_degrees: int = proto.Field(
-        proto.INT32, number=3, optional=True,
+        proto.INT32,
+        number=3,
+        optional=True,
     )
     latitude_in_micro_degrees: int = proto.Field(
-        proto.INT32, number=4, optional=True,
+        proto.INT32,
+        number=4,
+        optional=True,
     )
 
 
@@ -1241,25 +1375,39 @@ class AddressInfo(proto.Message):
     """
 
     postal_code: str = proto.Field(
-        proto.STRING, number=8, optional=True,
+        proto.STRING,
+        number=8,
+        optional=True,
     )
     province_code: str = proto.Field(
-        proto.STRING, number=9, optional=True,
+        proto.STRING,
+        number=9,
+        optional=True,
     )
     country_code: str = proto.Field(
-        proto.STRING, number=10, optional=True,
+        proto.STRING,
+        number=10,
+        optional=True,
     )
     province_name: str = proto.Field(
-        proto.STRING, number=11, optional=True,
+        proto.STRING,
+        number=11,
+        optional=True,
     )
     street_address: str = proto.Field(
-        proto.STRING, number=12, optional=True,
+        proto.STRING,
+        number=12,
+        optional=True,
     )
     street_address2: str = proto.Field(
-        proto.STRING, number=13, optional=True,
+        proto.STRING,
+        number=13,
+        optional=True,
     )
     city_name: str = proto.Field(
-        proto.STRING, number=14, optional=True,
+        proto.STRING,
+        number=14,
+        optional=True,
     )
 
 
@@ -1284,10 +1432,13 @@ class TopicInfo(proto.Message):
     """
 
     topic_constant: str = proto.Field(
-        proto.STRING, number=3, optional=True,
+        proto.STRING,
+        number=3,
+        optional=True,
     )
     path: MutableSequence[str] = proto.RepeatedField(
-        proto.STRING, number=4,
+        proto.STRING,
+        number=4,
     )
 
 
@@ -1303,12 +1454,15 @@ class LanguageInfo(proto.Message):
     """
 
     language_constant: str = proto.Field(
-        proto.STRING, number=2, optional=True,
+        proto.STRING,
+        number=2,
+        optional=True,
     )
 
 
 class IpBlockInfo(proto.Message):
     r"""An IpBlock criterion used for IP exclusions. We allow:
+
     - IPv4 and IPv6 addresses
      - individual addresses (192.168.0.1)
      - masks for individual addresses (192.168.0.1/32)
@@ -1324,7 +1478,9 @@ class IpBlockInfo(proto.Message):
     """
 
     ip_address: str = proto.Field(
-        proto.STRING, number=2, optional=True,
+        proto.STRING,
+        number=2,
+        optional=True,
     )
 
 
@@ -1336,10 +1492,12 @@ class ContentLabelInfo(proto.Message):
             operations.
     """
 
-    type_: content_label_type.ContentLabelTypeEnum.ContentLabelType = proto.Field(
-        proto.ENUM,
-        number=1,
-        enum=content_label_type.ContentLabelTypeEnum.ContentLabelType,
+    type_: content_label_type.ContentLabelTypeEnum.ContentLabelType = (
+        proto.Field(
+            proto.ENUM,
+            number=1,
+            enum=content_label_type.ContentLabelTypeEnum.ContentLabelType,
+        )
     )
 
 
@@ -1355,7 +1513,9 @@ class CarrierInfo(proto.Message):
     """
 
     carrier_constant: str = proto.Field(
-        proto.STRING, number=2, optional=True,
+        proto.STRING,
+        number=2,
+        optional=True,
     )
 
 
@@ -1371,7 +1531,9 @@ class UserInterestInfo(proto.Message):
     """
 
     user_interest_category: str = proto.Field(
-        proto.STRING, number=2, optional=True,
+        proto.STRING,
+        number=2,
+        optional=True,
     )
 
 
@@ -1416,16 +1578,23 @@ class WebpageInfo(proto.Message):
     """
 
     criterion_name: str = proto.Field(
-        proto.STRING, number=3, optional=True,
+        proto.STRING,
+        number=3,
+        optional=True,
     )
     conditions: MutableSequence["WebpageConditionInfo"] = proto.RepeatedField(
-        proto.MESSAGE, number=2, message="WebpageConditionInfo",
+        proto.MESSAGE,
+        number=2,
+        message="WebpageConditionInfo",
     )
     coverage_percentage: float = proto.Field(
-        proto.DOUBLE, number=4,
+        proto.DOUBLE,
+        number=4,
     )
     sample: "WebpageSampleInfo" = proto.Field(
-        proto.MESSAGE, number=5, message="WebpageSampleInfo",
+        proto.MESSAGE,
+        number=5,
+        message="WebpageSampleInfo",
     )
 
 
@@ -1457,7 +1626,9 @@ class WebpageConditionInfo(proto.Message):
         enum=webpage_condition_operator.WebpageConditionOperatorEnum.WebpageConditionOperator,
     )
     argument: str = proto.Field(
-        proto.STRING, number=4, optional=True,
+        proto.STRING,
+        number=4,
+        optional=True,
     )
 
 
@@ -1469,7 +1640,8 @@ class WebpageSampleInfo(proto.Message):
     """
 
     sample_urls: MutableSequence[str] = proto.RepeatedField(
-        proto.STRING, number=1,
+        proto.STRING,
+        number=1,
     )
 
 
@@ -1486,7 +1658,9 @@ class OperatingSystemVersionInfo(proto.Message):
     """
 
     operating_system_version_constant: str = proto.Field(
-        proto.STRING, number=2, optional=True,
+        proto.STRING,
+        number=2,
+        optional=True,
     )
 
 
@@ -1516,7 +1690,9 @@ class MobileDeviceInfo(proto.Message):
     """
 
     mobile_device_constant: str = proto.Field(
-        proto.STRING, number=2, optional=True,
+        proto.STRING,
+        number=2,
+        optional=True,
     )
 
 
@@ -1534,7 +1710,9 @@ class CustomAffinityInfo(proto.Message):
     """
 
     custom_affinity: str = proto.Field(
-        proto.STRING, number=2, optional=True,
+        proto.STRING,
+        number=2,
+        optional=True,
     )
 
 
@@ -1552,7 +1730,9 @@ class CustomIntentInfo(proto.Message):
     """
 
     custom_intent: str = proto.Field(
-        proto.STRING, number=2, optional=True,
+        proto.STRING,
+        number=2,
+        optional=True,
     )
 
 
@@ -1614,13 +1794,18 @@ class LocationGroupInfo(proto.Message):
     """
 
     feed: str = proto.Field(
-        proto.STRING, number=5, optional=True,
+        proto.STRING,
+        number=5,
+        optional=True,
     )
     geo_target_constants: MutableSequence[str] = proto.RepeatedField(
-        proto.STRING, number=6,
+        proto.STRING,
+        number=6,
     )
     radius: int = proto.Field(
-        proto.INT64, number=7, optional=True,
+        proto.INT64,
+        number=7,
+        optional=True,
     )
     radius_units: location_group_radius_units.LocationGroupRadiusUnitsEnum.LocationGroupRadiusUnits = proto.Field(
         proto.ENUM,
@@ -1628,13 +1813,17 @@ class LocationGroupInfo(proto.Message):
         enum=location_group_radius_units.LocationGroupRadiusUnitsEnum.LocationGroupRadiusUnits,
     )
     feed_item_sets: MutableSequence[str] = proto.RepeatedField(
-        proto.STRING, number=8,
+        proto.STRING,
+        number=8,
     )
     enable_customer_level_location_asset_set: bool = proto.Field(
-        proto.BOOL, number=9, optional=True,
+        proto.BOOL,
+        number=9,
+        optional=True,
     )
     location_group_asset_sets: MutableSequence[str] = proto.RepeatedField(
-        proto.STRING, number=10,
+        proto.STRING,
+        number=10,
     )
 
 
@@ -1646,7 +1835,8 @@ class CustomAudienceInfo(proto.Message):
     """
 
     custom_audience: str = proto.Field(
-        proto.STRING, number=1,
+        proto.STRING,
+        number=1,
     )
 
 
@@ -1658,7 +1848,8 @@ class CombinedAudienceInfo(proto.Message):
     """
 
     combined_audience: str = proto.Field(
-        proto.STRING, number=1,
+        proto.STRING,
+        number=1,
     )
 
 
@@ -1670,7 +1861,8 @@ class AudienceInfo(proto.Message):
     """
 
     audience: str = proto.Field(
-        proto.STRING, number=1,
+        proto.STRING,
+        number=1,
     )
 
 
@@ -1699,10 +1891,14 @@ class KeywordThemeInfo(proto.Message):
     """
 
     keyword_theme_constant: str = proto.Field(
-        proto.STRING, number=1, oneof="keyword_theme",
+        proto.STRING,
+        number=1,
+        oneof="keyword_theme",
     )
     free_form_keyword_theme: str = proto.Field(
-        proto.STRING, number=2, oneof="keyword_theme",
+        proto.STRING,
+        number=2,
+        oneof="keyword_theme",
     )
 
 
@@ -1716,7 +1912,8 @@ class LocalServiceIdInfo(proto.Message):
     """
 
     service_id: str = proto.Field(
-        proto.STRING, number=1,
+        proto.STRING,
+        number=1,
     )
 
 

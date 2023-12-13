@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-# Copyright 2022 Google LLC
+# Copyright 2023 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -30,7 +30,9 @@ from google.ads.googleads.v13.enums.types import value_rule_set_dimension
 __protobuf__ = proto.module(
     package="google.ads.googleads.v13.resources",
     marshal="google.ads.googleads.v13",
-    manifest={"ConversionValueRuleSet",},
+    manifest={
+        "ConversionValueRuleSet",
+    },
 )
 
 
@@ -80,13 +82,16 @@ class ConversionValueRuleSet(proto.Message):
     """
 
     resource_name: str = proto.Field(
-        proto.STRING, number=1,
+        proto.STRING,
+        number=1,
     )
     id: int = proto.Field(
-        proto.INT64, number=2,
+        proto.INT64,
+        number=2,
     )
     conversion_value_rules: MutableSequence[str] = proto.RepeatedField(
-        proto.STRING, number=3,
+        proto.STRING,
+        number=3,
     )
     dimensions: MutableSequence[
         value_rule_set_dimension.ValueRuleSetDimensionEnum.ValueRuleSetDimension
@@ -96,7 +101,8 @@ class ConversionValueRuleSet(proto.Message):
         enum=value_rule_set_dimension.ValueRuleSetDimensionEnum.ValueRuleSetDimension,
     )
     owner_customer: str = proto.Field(
-        proto.STRING, number=5,
+        proto.STRING,
+        number=5,
     )
     attachment_type: value_rule_set_attachment_type.ValueRuleSetAttachmentTypeEnum.ValueRuleSetAttachmentType = proto.Field(
         proto.ENUM,
@@ -104,7 +110,8 @@ class ConversionValueRuleSet(proto.Message):
         enum=value_rule_set_attachment_type.ValueRuleSetAttachmentTypeEnum.ValueRuleSetAttachmentType,
     )
     campaign: str = proto.Field(
-        proto.STRING, number=7,
+        proto.STRING,
+        number=7,
     )
     status: conversion_value_rule_set_status.ConversionValueRuleSetStatusEnum.ConversionValueRuleSetStatus = proto.Field(
         proto.ENUM,

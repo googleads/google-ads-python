@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-# Copyright 2022 Google LLC
+# Copyright 2023 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -22,7 +22,9 @@ import proto  # type: ignore
 __protobuf__ = proto.module(
     package="google.ads.googleads.v13.resources",
     marshal="google.ads.googleads.v13",
-    manifest={"AdParameter",},
+    manifest={
+        "AdParameter",
+    },
 )
 
 
@@ -56,35 +58,44 @@ class AdParameter(proto.Message):
         insertion_text (str):
             Numeric value to insert into the ad text. The
             following restrictions  apply:
+
              - Can use comma or period as a separator, with
-            an optional period or    comma (respectively)
-            for fractional values. For example, 1,000,000.00
-            and 2.000.000,10 are valid.
+              an optional period or    comma (respectively)
+              for fractional values. For example,
+              1,000,000.00    and 2.000.000,10 are valid.
              - Can be prepended or appended with a currency
-            symbol. For example,    $99.99 is valid.
+              symbol. For example,    $99.99 is valid.
              - Can be prepended or appended with a currency
-            code. For example, 99.99USD    and EUR200 are
-            valid.
+              code. For example, 99.99USD    and EUR200 are
+              valid.
              - Can use '%'. For example, 1.0% and 1,0% are
-            valid.  - Can use plus or minus. For example,
-            -10.99 and 25+ are valid.  - Can use '/' between
-            two numbers. For example 4/1 and 0.95/0.45 are
-            valid.
+              valid.
+             - Can use plus or minus. For example, -10.99
+              and 25+ are valid.
+             - Can use '/' between two numbers. For example
+              4/1 and 0.95/0.45 are    valid.
 
             This field is a member of `oneof`_ ``_insertion_text``.
     """
 
     resource_name: str = proto.Field(
-        proto.STRING, number=1,
+        proto.STRING,
+        number=1,
     )
     ad_group_criterion: str = proto.Field(
-        proto.STRING, number=5, optional=True,
+        proto.STRING,
+        number=5,
+        optional=True,
     )
     parameter_index: int = proto.Field(
-        proto.INT64, number=6, optional=True,
+        proto.INT64,
+        number=6,
+        optional=True,
     )
     insertion_text: str = proto.Field(
-        proto.STRING, number=7, optional=True,
+        proto.STRING,
+        number=7,
+        optional=True,
     )
 
 

@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-# Copyright 2022 Google LLC
+# Copyright 2023 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -105,10 +105,13 @@ class YoutubeVideoAsset(proto.Message):
     """
 
     youtube_video_id: str = proto.Field(
-        proto.STRING, number=2, optional=True,
+        proto.STRING,
+        number=2,
+        optional=True,
     )
     youtube_video_title: str = proto.Field(
-        proto.STRING, number=3,
+        proto.STRING,
+        number=3,
     )
 
 
@@ -129,7 +132,9 @@ class MediaBundleAsset(proto.Message):
     """
 
     data: bytes = proto.Field(
-        proto.BYTES, number=2, optional=True,
+        proto.BYTES,
+        number=2,
+        optional=True,
     )
 
 
@@ -154,16 +159,24 @@ class ImageAsset(proto.Message):
     """
 
     data: bytes = proto.Field(
-        proto.BYTES, number=5, optional=True,
+        proto.BYTES,
+        number=5,
+        optional=True,
     )
     file_size: int = proto.Field(
-        proto.INT64, number=6, optional=True,
+        proto.INT64,
+        number=6,
+        optional=True,
     )
     mime_type: gage_mime_type.MimeTypeEnum.MimeType = proto.Field(
-        proto.ENUM, number=3, enum=gage_mime_type.MimeTypeEnum.MimeType,
+        proto.ENUM,
+        number=3,
+        enum=gage_mime_type.MimeTypeEnum.MimeType,
     )
     full_size: "ImageDimension" = proto.Field(
-        proto.MESSAGE, number=4, message="ImageDimension",
+        proto.MESSAGE,
+        number=4,
+        message="ImageDimension",
     )
 
 
@@ -190,13 +203,19 @@ class ImageDimension(proto.Message):
     """
 
     height_pixels: int = proto.Field(
-        proto.INT64, number=4, optional=True,
+        proto.INT64,
+        number=4,
+        optional=True,
     )
     width_pixels: int = proto.Field(
-        proto.INT64, number=5, optional=True,
+        proto.INT64,
+        number=5,
+        optional=True,
     )
     url: str = proto.Field(
-        proto.STRING, number=6, optional=True,
+        proto.STRING,
+        number=6,
+        optional=True,
     )
 
 
@@ -212,7 +231,9 @@ class TextAsset(proto.Message):
     """
 
     text: str = proto.Field(
-        proto.STRING, number=2, optional=True,
+        proto.STRING,
+        number=2,
+        optional=True,
     )
 
 
@@ -288,7 +309,8 @@ class LeadFormAsset(proto.Message):
     """
 
     business_name: str = proto.Field(
-        proto.STRING, number=10,
+        proto.STRING,
+        number=10,
     )
     call_to_action_type: lead_form_call_to_action_type.LeadFormCallToActionTypeEnum.LeadFormCallToActionType = proto.Field(
         proto.ENUM,
@@ -296,35 +318,49 @@ class LeadFormAsset(proto.Message):
         enum=lead_form_call_to_action_type.LeadFormCallToActionTypeEnum.LeadFormCallToActionType,
     )
     call_to_action_description: str = proto.Field(
-        proto.STRING, number=18,
+        proto.STRING,
+        number=18,
     )
     headline: str = proto.Field(
-        proto.STRING, number=12,
+        proto.STRING,
+        number=12,
     )
     description: str = proto.Field(
-        proto.STRING, number=13,
+        proto.STRING,
+        number=13,
     )
     privacy_policy_url: str = proto.Field(
-        proto.STRING, number=14,
+        proto.STRING,
+        number=14,
     )
     post_submit_headline: str = proto.Field(
-        proto.STRING, number=15, optional=True,
+        proto.STRING,
+        number=15,
+        optional=True,
     )
     post_submit_description: str = proto.Field(
-        proto.STRING, number=16, optional=True,
+        proto.STRING,
+        number=16,
+        optional=True,
     )
     fields: MutableSequence["LeadFormField"] = proto.RepeatedField(
-        proto.MESSAGE, number=8, message="LeadFormField",
+        proto.MESSAGE,
+        number=8,
+        message="LeadFormField",
     )
     custom_question_fields: MutableSequence[
         "LeadFormCustomQuestionField"
     ] = proto.RepeatedField(
-        proto.MESSAGE, number=23, message="LeadFormCustomQuestionField",
+        proto.MESSAGE,
+        number=23,
+        message="LeadFormCustomQuestionField",
     )
     delivery_methods: MutableSequence[
         "LeadFormDeliveryMethod"
     ] = proto.RepeatedField(
-        proto.MESSAGE, number=9, message="LeadFormDeliveryMethod",
+        proto.MESSAGE,
+        number=9,
+        message="LeadFormDeliveryMethod",
     )
     post_submit_call_to_action_type: lead_form_post_submit_call_to_action_type.LeadFormPostSubmitCallToActionTypeEnum.LeadFormPostSubmitCallToActionType = proto.Field(
         proto.ENUM,
@@ -332,7 +368,9 @@ class LeadFormAsset(proto.Message):
         enum=lead_form_post_submit_call_to_action_type.LeadFormPostSubmitCallToActionTypeEnum.LeadFormPostSubmitCallToActionType,
     )
     background_image_asset: str = proto.Field(
-        proto.STRING, number=20, optional=True,
+        proto.STRING,
+        number=20,
+        optional=True,
     )
     desired_intent: lead_form_desired_intent.LeadFormDesiredIntentEnum.LeadFormDesiredIntent = proto.Field(
         proto.ENUM,
@@ -340,7 +378,9 @@ class LeadFormAsset(proto.Message):
         enum=lead_form_desired_intent.LeadFormDesiredIntentEnum.LeadFormDesiredIntent,
     )
     custom_disclosure: str = proto.Field(
-        proto.STRING, number=22, optional=True,
+        proto.STRING,
+        number=22,
+        optional=True,
     )
 
 
@@ -389,7 +429,9 @@ class LeadFormField(proto.Message):
         message="LeadFormSingleChoiceAnswers",
     )
     has_location_answer: bool = proto.Field(
-        proto.BOOL, number=3, oneof="answers",
+        proto.BOOL,
+        number=3,
+        oneof="answers",
     )
 
 
@@ -424,7 +466,8 @@ class LeadFormCustomQuestionField(proto.Message):
     """
 
     custom_question_text: str = proto.Field(
-        proto.STRING, number=1,
+        proto.STRING,
+        number=1,
     )
     single_choice_answers: "LeadFormSingleChoiceAnswers" = proto.Field(
         proto.MESSAGE,
@@ -433,7 +476,9 @@ class LeadFormCustomQuestionField(proto.Message):
         message="LeadFormSingleChoiceAnswers",
     )
     has_location_answer: bool = proto.Field(
-        proto.BOOL, number=3, oneof="answers",
+        proto.BOOL,
+        number=3,
+        oneof="answers",
     )
 
 
@@ -449,7 +494,8 @@ class LeadFormSingleChoiceAnswers(proto.Message):
     """
 
     answers: MutableSequence[str] = proto.RepeatedField(
-        proto.STRING, number=1,
+        proto.STRING,
+        number=1,
     )
 
 
@@ -499,13 +545,19 @@ class WebhookDelivery(proto.Message):
     """
 
     advertiser_webhook_url: str = proto.Field(
-        proto.STRING, number=4, optional=True,
+        proto.STRING,
+        number=4,
+        optional=True,
     )
     google_secret: str = proto.Field(
-        proto.STRING, number=5, optional=True,
+        proto.STRING,
+        number=5,
+        optional=True,
     )
     payload_schema_version: int = proto.Field(
-        proto.INT64, number=6, optional=True,
+        proto.INT64,
+        number=6,
+        optional=True,
     )
 
 
@@ -580,7 +632,8 @@ class PromotionAsset(proto.Message):
     """
 
     promotion_target: str = proto.Field(
-        proto.STRING, number=1,
+        proto.STRING,
+        number=1,
     )
     discount_modifier: promotion_extension_discount_modifier.PromotionExtensionDiscountModifierEnum.PromotionExtensionDiscountModifier = proto.Field(
         proto.ENUM,
@@ -588,10 +641,12 @@ class PromotionAsset(proto.Message):
         enum=promotion_extension_discount_modifier.PromotionExtensionDiscountModifierEnum.PromotionExtensionDiscountModifier,
     )
     redemption_start_date: str = proto.Field(
-        proto.STRING, number=7,
+        proto.STRING,
+        number=7,
     )
     redemption_end_date: str = proto.Field(
-        proto.STRING, number=8,
+        proto.STRING,
+        number=8,
     )
     occasion: promotion_extension_occasion.PromotionExtensionOccasionEnum.PromotionExtensionOccasion = proto.Field(
         proto.ENUM,
@@ -599,21 +654,28 @@ class PromotionAsset(proto.Message):
         enum=promotion_extension_occasion.PromotionExtensionOccasionEnum.PromotionExtensionOccasion,
     )
     language_code: str = proto.Field(
-        proto.STRING, number=10,
+        proto.STRING,
+        number=10,
     )
     start_date: str = proto.Field(
-        proto.STRING, number=11,
+        proto.STRING,
+        number=11,
     )
     end_date: str = proto.Field(
-        proto.STRING, number=12,
+        proto.STRING,
+        number=12,
     )
     ad_schedule_targets: MutableSequence[
         criteria.AdScheduleInfo
     ] = proto.RepeatedField(
-        proto.MESSAGE, number=13, message=criteria.AdScheduleInfo,
+        proto.MESSAGE,
+        number=13,
+        message=criteria.AdScheduleInfo,
     )
     percent_off: int = proto.Field(
-        proto.INT64, number=3, oneof="discount_type",
+        proto.INT64,
+        number=3,
+        oneof="discount_type",
     )
     money_amount_off: feed_common.Money = proto.Field(
         proto.MESSAGE,
@@ -622,7 +684,9 @@ class PromotionAsset(proto.Message):
         message=feed_common.Money,
     )
     promotion_code: str = proto.Field(
-        proto.STRING, number=5, oneof="promotion_trigger",
+        proto.STRING,
+        number=5,
+        oneof="promotion_trigger",
     )
     orders_over_amount: feed_common.Money = proto.Field(
         proto.MESSAGE,
@@ -653,18 +717,23 @@ class CalloutAsset(proto.Message):
     """
 
     callout_text: str = proto.Field(
-        proto.STRING, number=1,
+        proto.STRING,
+        number=1,
     )
     start_date: str = proto.Field(
-        proto.STRING, number=2,
+        proto.STRING,
+        number=2,
     )
     end_date: str = proto.Field(
-        proto.STRING, number=3,
+        proto.STRING,
+        number=3,
     )
     ad_schedule_targets: MutableSequence[
         criteria.AdScheduleInfo
     ] = proto.RepeatedField(
-        proto.MESSAGE, number=4, message=criteria.AdScheduleInfo,
+        proto.MESSAGE,
+        number=4,
+        message=criteria.AdScheduleInfo,
     )
 
 
@@ -685,10 +754,12 @@ class StructuredSnippetAsset(proto.Message):
     """
 
     header: str = proto.Field(
-        proto.STRING, number=1,
+        proto.STRING,
+        number=1,
     )
     values: MutableSequence[str] = proto.RepeatedField(
-        proto.STRING, number=2,
+        proto.STRING,
+        number=2,
     )
 
 
@@ -723,24 +794,31 @@ class SitelinkAsset(proto.Message):
     """
 
     link_text: str = proto.Field(
-        proto.STRING, number=1,
+        proto.STRING,
+        number=1,
     )
     description1: str = proto.Field(
-        proto.STRING, number=2,
+        proto.STRING,
+        number=2,
     )
     description2: str = proto.Field(
-        proto.STRING, number=3,
+        proto.STRING,
+        number=3,
     )
     start_date: str = proto.Field(
-        proto.STRING, number=4,
+        proto.STRING,
+        number=4,
     )
     end_date: str = proto.Field(
-        proto.STRING, number=5,
+        proto.STRING,
+        number=5,
     )
     ad_schedule_targets: MutableSequence[
         criteria.AdScheduleInfo
     ] = proto.RepeatedField(
-        proto.MESSAGE, number=6, message=criteria.AdScheduleInfo,
+        proto.MESSAGE,
+        number=6,
+        message=criteria.AdScheduleInfo,
     )
 
 
@@ -755,10 +833,12 @@ class PageFeedAsset(proto.Message):
     """
 
     page_url: str = proto.Field(
-        proto.STRING, number=1,
+        proto.STRING,
+        number=1,
     )
     labels: MutableSequence[str] = proto.RepeatedField(
-        proto.STRING, number=2,
+        proto.STRING,
+        number=2,
     )
 
 
@@ -820,46 +900,60 @@ class DynamicEducationAsset(proto.Message):
     """
 
     program_id: str = proto.Field(
-        proto.STRING, number=1,
+        proto.STRING,
+        number=1,
     )
     location_id: str = proto.Field(
-        proto.STRING, number=2,
+        proto.STRING,
+        number=2,
     )
     program_name: str = proto.Field(
-        proto.STRING, number=3,
+        proto.STRING,
+        number=3,
     )
     subject: str = proto.Field(
-        proto.STRING, number=4,
+        proto.STRING,
+        number=4,
     )
     program_description: str = proto.Field(
-        proto.STRING, number=5,
+        proto.STRING,
+        number=5,
     )
     school_name: str = proto.Field(
-        proto.STRING, number=6,
+        proto.STRING,
+        number=6,
     )
     address: str = proto.Field(
-        proto.STRING, number=7,
+        proto.STRING,
+        number=7,
     )
     contextual_keywords: MutableSequence[str] = proto.RepeatedField(
-        proto.STRING, number=8,
+        proto.STRING,
+        number=8,
     )
     android_app_link: str = proto.Field(
-        proto.STRING, number=9,
+        proto.STRING,
+        number=9,
     )
     similar_program_ids: MutableSequence[str] = proto.RepeatedField(
-        proto.STRING, number=10,
+        proto.STRING,
+        number=10,
     )
     ios_app_link: str = proto.Field(
-        proto.STRING, number=11,
+        proto.STRING,
+        number=11,
     )
     ios_app_store_id: int = proto.Field(
-        proto.INT64, number=12,
+        proto.INT64,
+        number=12,
     )
     thumbnail_image_url: str = proto.Field(
-        proto.STRING, number=13,
+        proto.STRING,
+        number=13,
     )
     image_url: str = proto.Field(
-        proto.STRING, number=14,
+        proto.STRING,
+        number=14,
     )
 
 
@@ -887,21 +981,27 @@ class MobileAppAsset(proto.Message):
     """
 
     app_id: str = proto.Field(
-        proto.STRING, number=1,
+        proto.STRING,
+        number=1,
     )
-    app_store: mobile_app_vendor.MobileAppVendorEnum.MobileAppVendor = proto.Field(
-        proto.ENUM,
-        number=2,
-        enum=mobile_app_vendor.MobileAppVendorEnum.MobileAppVendor,
+    app_store: mobile_app_vendor.MobileAppVendorEnum.MobileAppVendor = (
+        proto.Field(
+            proto.ENUM,
+            number=2,
+            enum=mobile_app_vendor.MobileAppVendorEnum.MobileAppVendor,
+        )
     )
     link_text: str = proto.Field(
-        proto.STRING, number=3,
+        proto.STRING,
+        number=3,
     )
     start_date: str = proto.Field(
-        proto.STRING, number=4,
+        proto.STRING,
+        number=4,
     )
     end_date: str = proto.Field(
-        proto.STRING, number=5,
+        proto.STRING,
+        number=5,
     )
 
 
@@ -918,10 +1018,12 @@ class HotelCalloutAsset(proto.Message):
     """
 
     text: str = proto.Field(
-        proto.STRING, number=1,
+        proto.STRING,
+        number=1,
     )
     language_code: str = proto.Field(
-        proto.STRING, number=2,
+        proto.STRING,
+        number=2,
     )
 
 
@@ -952,10 +1054,12 @@ class CallAsset(proto.Message):
     """
 
     country_code: str = proto.Field(
-        proto.STRING, number=1,
+        proto.STRING,
+        number=1,
     )
     phone_number: str = proto.Field(
-        proto.STRING, number=2,
+        proto.STRING,
+        number=2,
     )
     call_conversion_reporting_state: gage_call_conversion_reporting_state.CallConversionReportingStateEnum.CallConversionReportingState = proto.Field(
         proto.ENUM,
@@ -963,12 +1067,15 @@ class CallAsset(proto.Message):
         enum=gage_call_conversion_reporting_state.CallConversionReportingStateEnum.CallConversionReportingState,
     )
     call_conversion_action: str = proto.Field(
-        proto.STRING, number=4,
+        proto.STRING,
+        number=4,
     )
     ad_schedule_targets: MutableSequence[
         criteria.AdScheduleInfo
     ] = proto.RepeatedField(
-        proto.MESSAGE, number=5, message=criteria.AdScheduleInfo,
+        proto.MESSAGE,
+        number=5,
+        message=criteria.AdScheduleInfo,
     )
 
 
@@ -988,10 +1095,12 @@ class PriceAsset(proto.Message):
             and 8, inclusive.
     """
 
-    type_: price_extension_type.PriceExtensionTypeEnum.PriceExtensionType = proto.Field(
-        proto.ENUM,
-        number=1,
-        enum=price_extension_type.PriceExtensionTypeEnum.PriceExtensionType,
+    type_: price_extension_type.PriceExtensionTypeEnum.PriceExtensionType = (
+        proto.Field(
+            proto.ENUM,
+            number=1,
+            enum=price_extension_type.PriceExtensionTypeEnum.PriceExtensionType,
+        )
     )
     price_qualifier: price_extension_price_qualifier.PriceExtensionPriceQualifierEnum.PriceExtensionPriceQualifier = proto.Field(
         proto.ENUM,
@@ -999,10 +1108,13 @@ class PriceAsset(proto.Message):
         enum=price_extension_price_qualifier.PriceExtensionPriceQualifierEnum.PriceExtensionPriceQualifier,
     )
     language_code: str = proto.Field(
-        proto.STRING, number=3,
+        proto.STRING,
+        number=3,
     )
     price_offerings: MutableSequence["PriceOffering"] = proto.RepeatedField(
-        proto.MESSAGE, number=4, message="PriceOffering",
+        proto.MESSAGE,
+        number=4,
+        message="PriceOffering",
     )
 
 
@@ -1031,13 +1143,17 @@ class PriceOffering(proto.Message):
     """
 
     header: str = proto.Field(
-        proto.STRING, number=1,
+        proto.STRING,
+        number=1,
     )
     description: str = proto.Field(
-        proto.STRING, number=2,
+        proto.STRING,
+        number=2,
     )
     price: feed_common.Money = proto.Field(
-        proto.MESSAGE, number=3, message=feed_common.Money,
+        proto.MESSAGE,
+        number=3,
+        message=feed_common.Money,
     )
     unit: price_extension_price_unit.PriceExtensionPriceUnitEnum.PriceExtensionPriceUnit = proto.Field(
         proto.ENUM,
@@ -1045,10 +1161,12 @@ class PriceOffering(proto.Message):
         enum=price_extension_price_unit.PriceExtensionPriceUnitEnum.PriceExtensionPriceUnit,
     )
     final_url: str = proto.Field(
-        proto.STRING, number=5,
+        proto.STRING,
+        number=5,
     )
     final_mobile_url: str = proto.Field(
-        proto.STRING, number=6,
+        proto.STRING,
+        number=6,
     )
 
 
@@ -1127,49 +1245,64 @@ class DynamicRealEstateAsset(proto.Message):
     """
 
     listing_id: str = proto.Field(
-        proto.STRING, number=1,
+        proto.STRING,
+        number=1,
     )
     listing_name: str = proto.Field(
-        proto.STRING, number=2,
+        proto.STRING,
+        number=2,
     )
     city_name: str = proto.Field(
-        proto.STRING, number=3,
+        proto.STRING,
+        number=3,
     )
     description: str = proto.Field(
-        proto.STRING, number=4,
+        proto.STRING,
+        number=4,
     )
     address: str = proto.Field(
-        proto.STRING, number=5,
+        proto.STRING,
+        number=5,
     )
     price: str = proto.Field(
-        proto.STRING, number=6,
+        proto.STRING,
+        number=6,
     )
     image_url: str = proto.Field(
-        proto.STRING, number=7,
+        proto.STRING,
+        number=7,
     )
     property_type: str = proto.Field(
-        proto.STRING, number=8,
+        proto.STRING,
+        number=8,
     )
     listing_type: str = proto.Field(
-        proto.STRING, number=9,
+        proto.STRING,
+        number=9,
     )
     contextual_keywords: MutableSequence[str] = proto.RepeatedField(
-        proto.STRING, number=10,
+        proto.STRING,
+        number=10,
     )
     formatted_price: str = proto.Field(
-        proto.STRING, number=11,
+        proto.STRING,
+        number=11,
     )
     android_app_link: str = proto.Field(
-        proto.STRING, number=12,
+        proto.STRING,
+        number=12,
     )
     ios_app_link: str = proto.Field(
-        proto.STRING, number=13,
+        proto.STRING,
+        number=13,
     )
     ios_app_store_id: int = proto.Field(
-        proto.INT64, number=14,
+        proto.INT64,
+        number=14,
     )
     similar_listing_ids: MutableSequence[str] = proto.RepeatedField(
-        proto.STRING, number=15,
+        proto.STRING,
+        number=15,
     )
 
 
@@ -1247,55 +1380,72 @@ class DynamicCustomAsset(proto.Message):
     """
 
     id: str = proto.Field(
-        proto.STRING, number=1,
+        proto.STRING,
+        number=1,
     )
     id2: str = proto.Field(
-        proto.STRING, number=2,
+        proto.STRING,
+        number=2,
     )
     item_title: str = proto.Field(
-        proto.STRING, number=3,
+        proto.STRING,
+        number=3,
     )
     item_subtitle: str = proto.Field(
-        proto.STRING, number=4,
+        proto.STRING,
+        number=4,
     )
     item_description: str = proto.Field(
-        proto.STRING, number=5,
+        proto.STRING,
+        number=5,
     )
     item_address: str = proto.Field(
-        proto.STRING, number=6,
+        proto.STRING,
+        number=6,
     )
     item_category: str = proto.Field(
-        proto.STRING, number=7,
+        proto.STRING,
+        number=7,
     )
     price: str = proto.Field(
-        proto.STRING, number=8,
+        proto.STRING,
+        number=8,
     )
     sale_price: str = proto.Field(
-        proto.STRING, number=9,
+        proto.STRING,
+        number=9,
     )
     formatted_price: str = proto.Field(
-        proto.STRING, number=10,
+        proto.STRING,
+        number=10,
     )
     formatted_sale_price: str = proto.Field(
-        proto.STRING, number=11,
+        proto.STRING,
+        number=11,
     )
     image_url: str = proto.Field(
-        proto.STRING, number=12,
+        proto.STRING,
+        number=12,
     )
     contextual_keywords: MutableSequence[str] = proto.RepeatedField(
-        proto.STRING, number=13,
+        proto.STRING,
+        number=13,
     )
     android_app_link: str = proto.Field(
-        proto.STRING, number=14,
+        proto.STRING,
+        number=14,
     )
     ios_app_link: str = proto.Field(
-        proto.STRING, number=16,
+        proto.STRING,
+        number=16,
     )
     ios_app_store_id: int = proto.Field(
-        proto.INT64, number=17,
+        proto.INT64,
+        number=17,
     )
     similar_ids: MutableSequence[str] = proto.RepeatedField(
-        proto.STRING, number=15,
+        proto.STRING,
+        number=15,
     )
 
 
@@ -1370,55 +1520,72 @@ class DynamicHotelsAndRentalsAsset(proto.Message):
     """
 
     property_id: str = proto.Field(
-        proto.STRING, number=1,
+        proto.STRING,
+        number=1,
     )
     property_name: str = proto.Field(
-        proto.STRING, number=2,
+        proto.STRING,
+        number=2,
     )
     image_url: str = proto.Field(
-        proto.STRING, number=3,
+        proto.STRING,
+        number=3,
     )
     destination_name: str = proto.Field(
-        proto.STRING, number=4,
+        proto.STRING,
+        number=4,
     )
     description: str = proto.Field(
-        proto.STRING, number=5,
+        proto.STRING,
+        number=5,
     )
     price: str = proto.Field(
-        proto.STRING, number=6,
+        proto.STRING,
+        number=6,
     )
     sale_price: str = proto.Field(
-        proto.STRING, number=7,
+        proto.STRING,
+        number=7,
     )
     star_rating: int = proto.Field(
-        proto.INT64, number=8,
+        proto.INT64,
+        number=8,
     )
     category: str = proto.Field(
-        proto.STRING, number=9,
+        proto.STRING,
+        number=9,
     )
     contextual_keywords: MutableSequence[str] = proto.RepeatedField(
-        proto.STRING, number=10,
+        proto.STRING,
+        number=10,
     )
     address: str = proto.Field(
-        proto.STRING, number=11,
+        proto.STRING,
+        number=11,
     )
     android_app_link: str = proto.Field(
-        proto.STRING, number=12,
+        proto.STRING,
+        number=12,
     )
     ios_app_link: str = proto.Field(
-        proto.STRING, number=13,
+        proto.STRING,
+        number=13,
     )
     ios_app_store_id: int = proto.Field(
-        proto.INT64, number=14,
+        proto.INT64,
+        number=14,
     )
     formatted_price: str = proto.Field(
-        proto.STRING, number=15,
+        proto.STRING,
+        number=15,
     )
     formatted_sale_price: str = proto.Field(
-        proto.STRING, number=16,
+        proto.STRING,
+        number=16,
     )
     similar_property_ids: MutableSequence[str] = proto.RepeatedField(
-        proto.STRING, number=17,
+        proto.STRING,
+        number=17,
     )
 
 
@@ -1488,49 +1655,64 @@ class DynamicFlightsAsset(proto.Message):
     """
 
     destination_id: str = proto.Field(
-        proto.STRING, number=1,
+        proto.STRING,
+        number=1,
     )
     origin_id: str = proto.Field(
-        proto.STRING, number=2,
+        proto.STRING,
+        number=2,
     )
     flight_description: str = proto.Field(
-        proto.STRING, number=3,
+        proto.STRING,
+        number=3,
     )
     image_url: str = proto.Field(
-        proto.STRING, number=4,
+        proto.STRING,
+        number=4,
     )
     destination_name: str = proto.Field(
-        proto.STRING, number=5,
+        proto.STRING,
+        number=5,
     )
     origin_name: str = proto.Field(
-        proto.STRING, number=6,
+        proto.STRING,
+        number=6,
     )
     flight_price: str = proto.Field(
-        proto.STRING, number=7,
+        proto.STRING,
+        number=7,
     )
     flight_sale_price: str = proto.Field(
-        proto.STRING, number=8,
+        proto.STRING,
+        number=8,
     )
     formatted_price: str = proto.Field(
-        proto.STRING, number=9,
+        proto.STRING,
+        number=9,
     )
     formatted_sale_price: str = proto.Field(
-        proto.STRING, number=10,
+        proto.STRING,
+        number=10,
     )
     android_app_link: str = proto.Field(
-        proto.STRING, number=11,
+        proto.STRING,
+        number=11,
     )
     ios_app_link: str = proto.Field(
-        proto.STRING, number=12,
+        proto.STRING,
+        number=12,
     )
     ios_app_store_id: int = proto.Field(
-        proto.INT64, number=13,
+        proto.INT64,
+        number=13,
     )
     similar_destination_ids: MutableSequence[str] = proto.RepeatedField(
-        proto.STRING, number=14,
+        proto.STRING,
+        number=14,
     )
     custom_mapping: str = proto.Field(
-        proto.STRING, number=15,
+        proto.STRING,
+        number=15,
     )
 
 
@@ -1555,19 +1737,24 @@ class DiscoveryCarouselCardAsset(proto.Message):
     """
 
     marketing_image_asset: str = proto.Field(
-        proto.STRING, number=1,
+        proto.STRING,
+        number=1,
     )
     square_marketing_image_asset: str = proto.Field(
-        proto.STRING, number=2,
+        proto.STRING,
+        number=2,
     )
     portrait_marketing_image_asset: str = proto.Field(
-        proto.STRING, number=3,
+        proto.STRING,
+        number=3,
     )
     headline: str = proto.Field(
-        proto.STRING, number=4,
+        proto.STRING,
+        number=4,
     )
     call_to_action_text: str = proto.Field(
-        proto.STRING, number=5,
+        proto.STRING,
+        number=5,
     )
 
 
@@ -1642,55 +1829,72 @@ class DynamicTravelAsset(proto.Message):
     """
 
     destination_id: str = proto.Field(
-        proto.STRING, number=1,
+        proto.STRING,
+        number=1,
     )
     origin_id: str = proto.Field(
-        proto.STRING, number=2,
+        proto.STRING,
+        number=2,
     )
     title: str = proto.Field(
-        proto.STRING, number=3,
+        proto.STRING,
+        number=3,
     )
     destination_name: str = proto.Field(
-        proto.STRING, number=4,
+        proto.STRING,
+        number=4,
     )
     destination_address: str = proto.Field(
-        proto.STRING, number=5,
+        proto.STRING,
+        number=5,
     )
     origin_name: str = proto.Field(
-        proto.STRING, number=6,
+        proto.STRING,
+        number=6,
     )
     price: str = proto.Field(
-        proto.STRING, number=7,
+        proto.STRING,
+        number=7,
     )
     sale_price: str = proto.Field(
-        proto.STRING, number=8,
+        proto.STRING,
+        number=8,
     )
     formatted_price: str = proto.Field(
-        proto.STRING, number=9,
+        proto.STRING,
+        number=9,
     )
     formatted_sale_price: str = proto.Field(
-        proto.STRING, number=10,
+        proto.STRING,
+        number=10,
     )
     category: str = proto.Field(
-        proto.STRING, number=11,
+        proto.STRING,
+        number=11,
     )
     contextual_keywords: MutableSequence[str] = proto.RepeatedField(
-        proto.STRING, number=12,
+        proto.STRING,
+        number=12,
     )
     similar_destination_ids: MutableSequence[str] = proto.RepeatedField(
-        proto.STRING, number=13,
+        proto.STRING,
+        number=13,
     )
     image_url: str = proto.Field(
-        proto.STRING, number=14,
+        proto.STRING,
+        number=14,
     )
     android_app_link: str = proto.Field(
-        proto.STRING, number=15,
+        proto.STRING,
+        number=15,
     )
     ios_app_link: str = proto.Field(
-        proto.STRING, number=16,
+        proto.STRING,
+        number=16,
     )
     ios_app_store_id: int = proto.Field(
-        proto.INT64, number=17,
+        proto.INT64,
+        number=17,
     )
 
 
@@ -1761,52 +1965,68 @@ class DynamicLocalAsset(proto.Message):
     """
 
     deal_id: str = proto.Field(
-        proto.STRING, number=1,
+        proto.STRING,
+        number=1,
     )
     deal_name: str = proto.Field(
-        proto.STRING, number=2,
+        proto.STRING,
+        number=2,
     )
     subtitle: str = proto.Field(
-        proto.STRING, number=3,
+        proto.STRING,
+        number=3,
     )
     description: str = proto.Field(
-        proto.STRING, number=4,
+        proto.STRING,
+        number=4,
     )
     price: str = proto.Field(
-        proto.STRING, number=5,
+        proto.STRING,
+        number=5,
     )
     sale_price: str = proto.Field(
-        proto.STRING, number=6,
+        proto.STRING,
+        number=6,
     )
     image_url: str = proto.Field(
-        proto.STRING, number=7,
+        proto.STRING,
+        number=7,
     )
     address: str = proto.Field(
-        proto.STRING, number=8,
+        proto.STRING,
+        number=8,
     )
     category: str = proto.Field(
-        proto.STRING, number=9,
+        proto.STRING,
+        number=9,
     )
     contextual_keywords: MutableSequence[str] = proto.RepeatedField(
-        proto.STRING, number=10,
+        proto.STRING,
+        number=10,
     )
     formatted_price: str = proto.Field(
-        proto.STRING, number=11,
+        proto.STRING,
+        number=11,
     )
     formatted_sale_price: str = proto.Field(
-        proto.STRING, number=12,
+        proto.STRING,
+        number=12,
     )
     android_app_link: str = proto.Field(
-        proto.STRING, number=13,
+        proto.STRING,
+        number=13,
     )
     similar_deal_ids: MutableSequence[str] = proto.RepeatedField(
-        proto.STRING, number=14,
+        proto.STRING,
+        number=14,
     )
     ios_app_link: str = proto.Field(
-        proto.STRING, number=15,
+        proto.STRING,
+        number=15,
     )
     ios_app_store_id: int = proto.Field(
-        proto.INT64, number=16,
+        proto.INT64,
+        number=16,
     )
 
 
@@ -1864,46 +2084,60 @@ class DynamicJobsAsset(proto.Message):
     """
 
     job_id: str = proto.Field(
-        proto.STRING, number=1,
+        proto.STRING,
+        number=1,
     )
     location_id: str = proto.Field(
-        proto.STRING, number=2,
+        proto.STRING,
+        number=2,
     )
     job_title: str = proto.Field(
-        proto.STRING, number=3,
+        proto.STRING,
+        number=3,
     )
     job_subtitle: str = proto.Field(
-        proto.STRING, number=4,
+        proto.STRING,
+        number=4,
     )
     description: str = proto.Field(
-        proto.STRING, number=5,
+        proto.STRING,
+        number=5,
     )
     image_url: str = proto.Field(
-        proto.STRING, number=6,
+        proto.STRING,
+        number=6,
     )
     job_category: str = proto.Field(
-        proto.STRING, number=7,
+        proto.STRING,
+        number=7,
     )
     contextual_keywords: MutableSequence[str] = proto.RepeatedField(
-        proto.STRING, number=8,
+        proto.STRING,
+        number=8,
     )
     address: str = proto.Field(
-        proto.STRING, number=9,
+        proto.STRING,
+        number=9,
     )
     salary: str = proto.Field(
-        proto.STRING, number=10,
+        proto.STRING,
+        number=10,
     )
     android_app_link: str = proto.Field(
-        proto.STRING, number=11,
+        proto.STRING,
+        number=11,
     )
     similar_job_ids: MutableSequence[str] = proto.RepeatedField(
-        proto.STRING, number=12,
+        proto.STRING,
+        number=12,
     )
     ios_app_link: str = proto.Field(
-        proto.STRING, number=13,
+        proto.STRING,
+        number=13,
     )
     ios_app_store_id: int = proto.Field(
-        proto.INT64, number=14,
+        proto.INT64,
+        number=14,
     )
 
 
@@ -1932,12 +2166,15 @@ class LocationAsset(proto.Message):
     """
 
     place_id: str = proto.Field(
-        proto.STRING, number=1,
+        proto.STRING,
+        number=1,
     )
     business_profile_locations: MutableSequence[
         "BusinessProfileLocation"
     ] = proto.RepeatedField(
-        proto.MESSAGE, number=2, message="BusinessProfileLocation",
+        proto.MESSAGE,
+        number=2,
+        message="BusinessProfileLocation",
     )
     location_ownership_type: gage_location_ownership_type.LocationOwnershipTypeEnum.LocationOwnershipType = proto.Field(
         proto.ENUM,
@@ -1966,13 +2203,16 @@ class BusinessProfileLocation(proto.Message):
     """
 
     labels: MutableSequence[str] = proto.RepeatedField(
-        proto.STRING, number=1,
+        proto.STRING,
+        number=1,
     )
     store_code: str = proto.Field(
-        proto.STRING, number=2,
+        proto.STRING,
+        number=2,
     )
     listing_id: int = proto.Field(
-        proto.INT64, number=3,
+        proto.INT64,
+        number=3,
     )
 
 
@@ -1991,13 +2231,16 @@ class HotelPropertyAsset(proto.Message):
     """
 
     place_id: str = proto.Field(
-        proto.STRING, number=1,
+        proto.STRING,
+        number=1,
     )
     hotel_address: str = proto.Field(
-        proto.STRING, number=2,
+        proto.STRING,
+        number=2,
     )
     hotel_name: str = proto.Field(
-        proto.STRING, number=3,
+        proto.STRING,
+        number=3,
     )
 
 

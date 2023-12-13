@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-# Copyright 2022 Google LLC
+# Copyright 2023 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -41,7 +41,7 @@ __protobuf__ = proto.module(
 
 class SuggestTravelAssetsRequest(proto.Message):
     r"""Request message for
-    [TravelSuggestAssetsService.SuggestTravelAssets][].
+    [TravelAssetSuggestionService.SuggestTravelAssets][google.ads.googleads.v13.services.TravelAssetSuggestionService.SuggestTravelAssets].
 
     Attributes:
         customer_id (str):
@@ -57,22 +57,26 @@ class SuggestTravelAssetsRequest(proto.Message):
             assets are requested. See
             https://developers.google.com/places/web-service/place-id
             for more information.
+            .
     """
 
     customer_id: str = proto.Field(
-        proto.STRING, number=1,
+        proto.STRING,
+        number=1,
     )
     language_option: str = proto.Field(
-        proto.STRING, number=2,
+        proto.STRING,
+        number=2,
     )
     place_id: MutableSequence[str] = proto.RepeatedField(
-        proto.STRING, number=3,
+        proto.STRING,
+        number=3,
     )
 
 
 class SuggestTravelAssetsResponse(proto.Message):
     r"""Response message for
-    [TravelSuggestAssetsService.SuggestTravelAssets][].
+    [TravelAssetSuggestionService.SuggestTravelAssets][google.ads.googleads.v13.services.TravelAssetSuggestionService.SuggestTravelAssets].
 
     Attributes:
         hotel_asset_suggestions (MutableSequence[google.ads.googleads.v13.services.types.HotelAssetSuggestion]):
@@ -83,7 +87,9 @@ class SuggestTravelAssetsResponse(proto.Message):
     hotel_asset_suggestions: MutableSequence[
         "HotelAssetSuggestion"
     ] = proto.RepeatedField(
-        proto.MESSAGE, number=1, message="HotelAssetSuggestion",
+        proto.MESSAGE,
+        number=1,
+        message="HotelAssetSuggestion",
     )
 
 
@@ -109,13 +115,16 @@ class HotelAssetSuggestion(proto.Message):
     """
 
     place_id: str = proto.Field(
-        proto.STRING, number=1,
+        proto.STRING,
+        number=1,
     )
     final_url: str = proto.Field(
-        proto.STRING, number=2,
+        proto.STRING,
+        number=2,
     )
     hotel_name: str = proto.Field(
-        proto.STRING, number=3,
+        proto.STRING,
+        number=3,
     )
     call_to_action: call_to_action_type.CallToActionTypeEnum.CallToActionType = proto.Field(
         proto.ENUM,
@@ -123,10 +132,14 @@ class HotelAssetSuggestion(proto.Message):
         enum=call_to_action_type.CallToActionTypeEnum.CallToActionType,
     )
     text_assets: MutableSequence["HotelTextAsset"] = proto.RepeatedField(
-        proto.MESSAGE, number=5, message="HotelTextAsset",
+        proto.MESSAGE,
+        number=5,
+        message="HotelTextAsset",
     )
     image_assets: MutableSequence["HotelImageAsset"] = proto.RepeatedField(
-        proto.MESSAGE, number=6, message="HotelImageAsset",
+        proto.MESSAGE,
+        number=6,
+        message="HotelImageAsset",
     )
     status: hotel_asset_suggestion_status.HotelAssetSuggestionStatusEnum.HotelAssetSuggestionStatus = proto.Field(
         proto.ENUM,
@@ -146,7 +159,8 @@ class HotelTextAsset(proto.Message):
     """
 
     text: str = proto.Field(
-        proto.STRING, number=1,
+        proto.STRING,
+        number=1,
     )
     asset_field_type: gage_asset_field_type.AssetFieldTypeEnum.AssetFieldType = proto.Field(
         proto.ENUM,
@@ -166,7 +180,8 @@ class HotelImageAsset(proto.Message):
     """
 
     uri: str = proto.Field(
-        proto.STRING, number=1,
+        proto.STRING,
+        number=1,
     )
     asset_field_type: gage_asset_field_type.AssetFieldTypeEnum.AssetFieldType = proto.Field(
         proto.ENUM,

@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-# Copyright 2022 Google LLC
+# Copyright 2023 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -24,7 +24,9 @@ from google.ads.googleads.v13.enums.types import access_role as gage_access_role
 __protobuf__ = proto.module(
     package="google.ads.googleads.v13.resources",
     marshal="google.ads.googleads.v13",
-    manifest={"CustomerUserAccess",},
+    manifest={
+        "CustomerUserAccess",
+    },
 )
 
 
@@ -65,22 +67,32 @@ class CustomerUserAccess(proto.Message):
     """
 
     resource_name: str = proto.Field(
-        proto.STRING, number=1,
+        proto.STRING,
+        number=1,
     )
     user_id: int = proto.Field(
-        proto.INT64, number=2,
+        proto.INT64,
+        number=2,
     )
     email_address: str = proto.Field(
-        proto.STRING, number=3, optional=True,
+        proto.STRING,
+        number=3,
+        optional=True,
     )
     access_role: gage_access_role.AccessRoleEnum.AccessRole = proto.Field(
-        proto.ENUM, number=4, enum=gage_access_role.AccessRoleEnum.AccessRole,
+        proto.ENUM,
+        number=4,
+        enum=gage_access_role.AccessRoleEnum.AccessRole,
     )
     access_creation_date_time: str = proto.Field(
-        proto.STRING, number=6, optional=True,
+        proto.STRING,
+        number=6,
+        optional=True,
     )
     inviter_user_email_address: str = proto.Field(
-        proto.STRING, number=7, optional=True,
+        proto.STRING,
+        number=7,
+        optional=True,
     )
 
 

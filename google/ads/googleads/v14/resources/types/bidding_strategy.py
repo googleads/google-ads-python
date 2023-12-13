@@ -55,6 +55,7 @@ class BiddingStrategy(proto.Message):
             The name of the bidding strategy.
             All bidding strategies within an account must be
             named distinctly.
+
             The length of this string should be between 1
             and 255, inclusive, in UTF-8 bytes, (trimmed).
 
@@ -67,6 +68,7 @@ class BiddingStrategy(proto.Message):
             Output only. The type of the bidding
             strategy. Create a bidding strategy by setting
             the bidding scheme.
+
             This field is read-only.
         currency_code (str):
             Immutable. The currency used by the bidding strategy (ISO

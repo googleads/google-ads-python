@@ -55,14 +55,14 @@ class ConversionCustomVariable(proto.Message):
         tag (str):
             Required. Immutable. The tag of the
             conversion custom variable. It is used in the
-            event snippet and sent to Google Ads along with
-            conversion pings. For conversion uploads in
+            event snippet  and sent to Google Ads along with
+            conversion pings. For conversion uploads  in
             Google Ads API, the resource name of the
-            conversion custom variable is used. Tag should
+            conversion custom variable is  used. Tag should
             be unique. The maximum size of tag is 100 bytes.
-            There should not be any extra spaces before and
-            after. Currently only lowercase letters, numbers
-            and underscores are allowed in the tag.
+            There  should not be any extra spaces before and
+            after. Currently only lowercase  letters,
+            numbers and underscores are allowed in the tag.
         status (google.ads.googleads.v15.enums.types.ConversionCustomVariableStatusEnum.ConversionCustomVariableStatus):
             The status of the conversion custom variable
             for conversion event accrual.

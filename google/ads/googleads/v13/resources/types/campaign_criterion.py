@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-# Copyright 2022 Google LLC
+# Copyright 2023 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -26,7 +26,9 @@ from google.ads.googleads.v13.enums.types import criterion_type
 __protobuf__ = proto.module(
     package="google.ads.googleads.v13.resources",
     marshal="google.ads.googleads.v13",
-    manifest={"CampaignCriterion",},
+    manifest={
+        "CampaignCriterion",
+    },
 )
 
 
@@ -52,6 +54,7 @@ class CampaignCriterion(proto.Message):
             This field is a member of `oneof`_ ``_campaign``.
         criterion_id (int):
             Output only. The ID of the criterion.
+
             This field is ignored during mutate.
 
             This field is a member of `oneof`_ ``_criterion_id``.
@@ -206,22 +209,32 @@ class CampaignCriterion(proto.Message):
     """
 
     resource_name: str = proto.Field(
-        proto.STRING, number=1,
+        proto.STRING,
+        number=1,
     )
     campaign: str = proto.Field(
-        proto.STRING, number=37, optional=True,
+        proto.STRING,
+        number=37,
+        optional=True,
     )
     criterion_id: int = proto.Field(
-        proto.INT64, number=38, optional=True,
+        proto.INT64,
+        number=38,
+        optional=True,
     )
     display_name: str = proto.Field(
-        proto.STRING, number=43,
+        proto.STRING,
+        number=43,
     )
     bid_modifier: float = proto.Field(
-        proto.FLOAT, number=39, optional=True,
+        proto.FLOAT,
+        number=39,
+        optional=True,
     )
     negative: bool = proto.Field(
-        proto.BOOL, number=40, optional=True,
+        proto.BOOL,
+        number=40,
+        optional=True,
     )
     type_: criterion_type.CriterionTypeEnum.CriterionType = proto.Field(
         proto.ENUM,
@@ -324,7 +337,10 @@ class CampaignCriterion(proto.Message):
         message=criteria.ProximityInfo,
     )
     topic: criteria.TopicInfo = proto.Field(
-        proto.MESSAGE, number=24, oneof="criterion", message=criteria.TopicInfo,
+        proto.MESSAGE,
+        number=24,
+        oneof="criterion",
+        message=criteria.TopicInfo,
     )
     listing_scope: criteria.ListingScopeInfo = proto.Field(
         proto.MESSAGE,

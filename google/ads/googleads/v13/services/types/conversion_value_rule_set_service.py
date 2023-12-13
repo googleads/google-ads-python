@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-# Copyright 2022 Google LLC
+# Copyright 2023 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -68,18 +68,23 @@ class MutateConversionValueRuleSetsRequest(proto.Message):
     """
 
     customer_id: str = proto.Field(
-        proto.STRING, number=1,
+        proto.STRING,
+        number=1,
     )
     operations: MutableSequence[
         "ConversionValueRuleSetOperation"
     ] = proto.RepeatedField(
-        proto.MESSAGE, number=2, message="ConversionValueRuleSetOperation",
+        proto.MESSAGE,
+        number=2,
+        message="ConversionValueRuleSetOperation",
     )
     partial_failure: bool = proto.Field(
-        proto.BOOL, number=5,
+        proto.BOOL,
+        number=5,
     )
     validate_only: bool = proto.Field(
-        proto.BOOL, number=3,
+        proto.BOOL,
+        number=3,
     )
     response_content_type: gage_response_content_type.ResponseContentTypeEnum.ResponseContentType = proto.Field(
         proto.ENUM,
@@ -123,7 +128,9 @@ class ConversionValueRuleSetOperation(proto.Message):
     """
 
     update_mask: field_mask_pb2.FieldMask = proto.Field(
-        proto.MESSAGE, number=4, message=field_mask_pb2.FieldMask,
+        proto.MESSAGE,
+        number=4,
+        message=field_mask_pb2.FieldMask,
     )
     create: gagr_conversion_value_rule_set.ConversionValueRuleSet = proto.Field(
         proto.MESSAGE,
@@ -138,7 +145,9 @@ class ConversionValueRuleSetOperation(proto.Message):
         message=gagr_conversion_value_rule_set.ConversionValueRuleSet,
     )
     remove: str = proto.Field(
-        proto.STRING, number=3, oneof="operation",
+        proto.STRING,
+        number=3,
+        oneof="operation",
     )
 
 
@@ -160,10 +169,14 @@ class MutateConversionValueRuleSetsResponse(proto.Message):
     results: MutableSequence[
         "MutateConversionValueRuleSetResult"
     ] = proto.RepeatedField(
-        proto.MESSAGE, number=1, message="MutateConversionValueRuleSetResult",
+        proto.MESSAGE,
+        number=1,
+        message="MutateConversionValueRuleSetResult",
     )
     partial_failure_error: status_pb2.Status = proto.Field(
-        proto.MESSAGE, number=2, message=status_pb2.Status,
+        proto.MESSAGE,
+        number=2,
+        message=status_pb2.Status,
     )
 
 
@@ -179,7 +192,8 @@ class MutateConversionValueRuleSetResult(proto.Message):
     """
 
     resource_name: str = proto.Field(
-        proto.STRING, number=1,
+        proto.STRING,
+        number=1,
     )
     conversion_value_rule_set: gagr_conversion_value_rule_set.ConversionValueRuleSet = proto.Field(
         proto.MESSAGE,

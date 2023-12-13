@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-# Copyright 2022 Google LLC
+# Copyright 2023 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -66,16 +66,21 @@ class MutateLabelsRequest(proto.Message):
     """
 
     customer_id: str = proto.Field(
-        proto.STRING, number=1,
+        proto.STRING,
+        number=1,
     )
     operations: MutableSequence["LabelOperation"] = proto.RepeatedField(
-        proto.MESSAGE, number=2, message="LabelOperation",
+        proto.MESSAGE,
+        number=2,
+        message="LabelOperation",
     )
     partial_failure: bool = proto.Field(
-        proto.BOOL, number=3,
+        proto.BOOL,
+        number=3,
     )
     validate_only: bool = proto.Field(
-        proto.BOOL, number=4,
+        proto.BOOL,
+        number=4,
     )
     response_content_type: gage_response_content_type.ResponseContentTypeEnum.ResponseContentType = proto.Field(
         proto.ENUM,
@@ -117,16 +122,26 @@ class LabelOperation(proto.Message):
     """
 
     update_mask: field_mask_pb2.FieldMask = proto.Field(
-        proto.MESSAGE, number=4, message=field_mask_pb2.FieldMask,
+        proto.MESSAGE,
+        number=4,
+        message=field_mask_pb2.FieldMask,
     )
     create: gagr_label.Label = proto.Field(
-        proto.MESSAGE, number=1, oneof="operation", message=gagr_label.Label,
+        proto.MESSAGE,
+        number=1,
+        oneof="operation",
+        message=gagr_label.Label,
     )
     update: gagr_label.Label = proto.Field(
-        proto.MESSAGE, number=2, oneof="operation", message=gagr_label.Label,
+        proto.MESSAGE,
+        number=2,
+        oneof="operation",
+        message=gagr_label.Label,
     )
     remove: str = proto.Field(
-        proto.STRING, number=3, oneof="operation",
+        proto.STRING,
+        number=3,
+        oneof="operation",
     )
 
 
@@ -144,10 +159,14 @@ class MutateLabelsResponse(proto.Message):
     """
 
     partial_failure_error: status_pb2.Status = proto.Field(
-        proto.MESSAGE, number=3, message=status_pb2.Status,
+        proto.MESSAGE,
+        number=3,
+        message=status_pb2.Status,
     )
     results: MutableSequence["MutateLabelResult"] = proto.RepeatedField(
-        proto.MESSAGE, number=2, message="MutateLabelResult",
+        proto.MESSAGE,
+        number=2,
+        message="MutateLabelResult",
     )
 
 
@@ -163,10 +182,13 @@ class MutateLabelResult(proto.Message):
     """
 
     resource_name: str = proto.Field(
-        proto.STRING, number=1,
+        proto.STRING,
+        number=1,
     )
     label: gagr_label.Label = proto.Field(
-        proto.MESSAGE, number=2, message=gagr_label.Label,
+        proto.MESSAGE,
+        number=2,
+        message=gagr_label.Label,
     )
 
 

@@ -162,8 +162,10 @@ class Customer(proto.Message):
             ranges from 0% (0.0) to 100% (1.0). This field
             is null for all manager customers, and for
             unscored non-manager customers.
+
             See "About optimization score" at
             https://support.google.com/google-ads/answer/9061546.
+
             This field is read-only.
 
             This field is a member of `oneof`_ ``_optimization_score``.

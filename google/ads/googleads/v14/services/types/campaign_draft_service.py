@@ -135,14 +135,12 @@ class CampaignDraftOperation(proto.Message):
             fields are modified in an update.
         create (google.ads.googleads.v14.resources.types.CampaignDraft):
             Create operation: No resource name is
-            expected for the new campaign
-            draft.
+            expected for the new campaign draft.
 
             This field is a member of `oneof`_ ``operation``.
         update (google.ads.googleads.v14.resources.types.CampaignDraft):
             Update operation: The campaign draft is
-            expected to have a valid
-            resource name.
+            expected to have a valid resource name.
 
             This field is a member of `oneof`_ ``operation``.
         remove (str):

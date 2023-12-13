@@ -101,14 +101,14 @@ class AssetGroupListingGroupFilterOperation(proto.Message):
             fields are modified in an update.
         create (google.ads.googleads.v14.resources.types.AssetGroupListingGroupFilter):
             Create operation: No resource name is
-            expected for the new asset group
-            listing group filter.
+            expected for the new asset group listing group
+            filter.
 
             This field is a member of `oneof`_ ``operation``.
         update (google.ads.googleads.v14.resources.types.AssetGroupListingGroupFilter):
             Update operation: The asset group listing
-            group filter is expected to
-            have a valid resource name.
+            group filter is expected to have a valid
+            resource name.
 
             This field is a member of `oneof`_ ``operation``.
         remove (str):

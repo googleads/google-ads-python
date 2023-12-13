@@ -108,14 +108,12 @@ class CustomerAssetOperation(proto.Message):
             fields are modified in an update.
         create (google.ads.googleads.v14.resources.types.CustomerAsset):
             Create operation: No resource name is
-            expected for the new customer
-            asset.
+            expected for the new customer asset.
 
             This field is a member of `oneof`_ ``operation``.
         update (google.ads.googleads.v14.resources.types.CustomerAsset):
             Update operation: The customer asset is
-            expected to have a valid resource
-            name.
+            expected to have a valid resource name.
 
             This field is a member of `oneof`_ ``operation``.
         remove (str):

@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-# Copyright 2022 Google LLC
+# Copyright 2023 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -25,7 +25,9 @@ from google.ads.googleads.v13.enums.types import conversion_origin
 __protobuf__ = proto.module(
     package="google.ads.googleads.v13.resources",
     marshal="google.ads.googleads.v13",
-    manifest={"CustomerConversionGoal",},
+    manifest={
+        "CustomerConversionGoal",
+    },
 )
 
 
@@ -55,20 +57,24 @@ class CustomerConversionGoal(proto.Message):
     """
 
     resource_name: str = proto.Field(
-        proto.STRING, number=1,
+        proto.STRING,
+        number=1,
     )
     category: conversion_action_category.ConversionActionCategoryEnum.ConversionActionCategory = proto.Field(
         proto.ENUM,
         number=2,
         enum=conversion_action_category.ConversionActionCategoryEnum.ConversionActionCategory,
     )
-    origin: conversion_origin.ConversionOriginEnum.ConversionOrigin = proto.Field(
-        proto.ENUM,
-        number=3,
-        enum=conversion_origin.ConversionOriginEnum.ConversionOrigin,
+    origin: conversion_origin.ConversionOriginEnum.ConversionOrigin = (
+        proto.Field(
+            proto.ENUM,
+            number=3,
+            enum=conversion_origin.ConversionOriginEnum.ConversionOrigin,
+        )
     )
     biddable: bool = proto.Field(
-        proto.BOOL, number=4,
+        proto.BOOL,
+        number=4,
     )
 
 

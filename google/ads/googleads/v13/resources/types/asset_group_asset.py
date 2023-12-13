@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-# Copyright 2022 Google LLC
+# Copyright 2023 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -29,7 +29,9 @@ from google.ads.googleads.v13.enums.types import asset_performance_label
 __protobuf__ = proto.module(
     package="google.ads.googleads.v13.resources",
     marshal="google.ads.googleads.v13",
-    manifest={"AssetGroupAsset",},
+    manifest={
+        "AssetGroupAsset",
+    },
 )
 
 
@@ -65,18 +67,23 @@ class AssetGroupAsset(proto.Message):
     """
 
     resource_name: str = proto.Field(
-        proto.STRING, number=1,
+        proto.STRING,
+        number=1,
     )
     asset_group: str = proto.Field(
-        proto.STRING, number=2,
+        proto.STRING,
+        number=2,
     )
     asset: str = proto.Field(
-        proto.STRING, number=3,
+        proto.STRING,
+        number=3,
     )
-    field_type: asset_field_type.AssetFieldTypeEnum.AssetFieldType = proto.Field(
-        proto.ENUM,
-        number=4,
-        enum=asset_field_type.AssetFieldTypeEnum.AssetFieldType,
+    field_type: asset_field_type.AssetFieldTypeEnum.AssetFieldType = (
+        proto.Field(
+            proto.ENUM,
+            number=4,
+            enum=asset_field_type.AssetFieldTypeEnum.AssetFieldType,
+        )
     )
     status: asset_link_status.AssetLinkStatusEnum.AssetLinkStatus = proto.Field(
         proto.ENUM,
@@ -89,7 +96,9 @@ class AssetGroupAsset(proto.Message):
         enum=asset_performance_label.AssetPerformanceLabelEnum.AssetPerformanceLabel,
     )
     policy_summary: gagc_policy_summary.PolicySummary = proto.Field(
-        proto.MESSAGE, number=7, message=gagc_policy_summary.PolicySummary,
+        proto.MESSAGE,
+        number=7,
+        message=gagc_policy_summary.PolicySummary,
     )
 
 

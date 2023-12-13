@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-# Copyright 2022 Google LLC
+# Copyright 2023 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -28,7 +28,9 @@ from google.ads.googleads.v13.enums.types import experiment_type
 __protobuf__ = proto.module(
     package="google.ads.googleads.v13.resources",
     marshal="google.ads.googleads.v13",
-    manifest={"Experiment",},
+    manifest={
+        "Experiment",
+    },
 )
 
 
@@ -89,6 +91,7 @@ class Experiment(proto.Message):
             If this field is set, then the experiment ends
             at the end of the specified date in the
             customer's time zone.
+
             Format: YYYY-MM-DD
             Example: 2019-04-18
 
@@ -109,41 +112,57 @@ class Experiment(proto.Message):
     """
 
     resource_name: str = proto.Field(
-        proto.STRING, number=1,
+        proto.STRING,
+        number=1,
     )
     experiment_id: int = proto.Field(
-        proto.INT64, number=9, optional=True,
+        proto.INT64,
+        number=9,
+        optional=True,
     )
     name: str = proto.Field(
-        proto.STRING, number=10,
+        proto.STRING,
+        number=10,
     )
     description: str = proto.Field(
-        proto.STRING, number=11,
+        proto.STRING,
+        number=11,
     )
     suffix: str = proto.Field(
-        proto.STRING, number=12,
+        proto.STRING,
+        number=12,
     )
     type_: experiment_type.ExperimentTypeEnum.ExperimentType = proto.Field(
         proto.ENUM,
         number=13,
         enum=experiment_type.ExperimentTypeEnum.ExperimentType,
     )
-    status: experiment_status.ExperimentStatusEnum.ExperimentStatus = proto.Field(
-        proto.ENUM,
-        number=14,
-        enum=experiment_status.ExperimentStatusEnum.ExperimentStatus,
+    status: experiment_status.ExperimentStatusEnum.ExperimentStatus = (
+        proto.Field(
+            proto.ENUM,
+            number=14,
+            enum=experiment_status.ExperimentStatusEnum.ExperimentStatus,
+        )
     )
     start_date: str = proto.Field(
-        proto.STRING, number=15, optional=True,
+        proto.STRING,
+        number=15,
+        optional=True,
     )
     end_date: str = proto.Field(
-        proto.STRING, number=16, optional=True,
+        proto.STRING,
+        number=16,
+        optional=True,
     )
     goals: MutableSequence[metric_goal.MetricGoal] = proto.RepeatedField(
-        proto.MESSAGE, number=17, message=metric_goal.MetricGoal,
+        proto.MESSAGE,
+        number=17,
+        message=metric_goal.MetricGoal,
     )
     long_running_operation: str = proto.Field(
-        proto.STRING, number=18, optional=True,
+        proto.STRING,
+        number=18,
+        optional=True,
     )
     promote_status: async_action_status.AsyncActionStatusEnum.AsyncActionStatus = proto.Field(
         proto.ENUM,

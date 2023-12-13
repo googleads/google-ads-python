@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-# Copyright 2022 Google LLC
+# Copyright 2023 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -24,7 +24,9 @@ from google.ads.googleads.v13.enums.types import campaign_group_status
 __protobuf__ = proto.module(
     package="google.ads.googleads.v13.resources",
     marshal="google.ads.googleads.v13",
-    manifest={"CampaignGroup",},
+    manifest={
+        "CampaignGroup",
+    },
 )
 
 
@@ -40,6 +42,7 @@ class CampaignGroup(proto.Message):
             Output only. The ID of the campaign group.
         name (str):
             The name of the campaign group.
+
             This field is required and should not be empty
             when creating new campaign groups.
 
@@ -48,18 +51,22 @@ class CampaignGroup(proto.Message):
             (code point 0xD) characters.
         status (google.ads.googleads.v13.enums.types.CampaignGroupStatusEnum.CampaignGroupStatus):
             The status of the campaign group.
+
             When a new campaign group is added, the status
             defaults to ENABLED.
     """
 
     resource_name: str = proto.Field(
-        proto.STRING, number=1,
+        proto.STRING,
+        number=1,
     )
     id: int = proto.Field(
-        proto.INT64, number=3,
+        proto.INT64,
+        number=3,
     )
     name: str = proto.Field(
-        proto.STRING, number=4,
+        proto.STRING,
+        number=4,
     )
     status: campaign_group_status.CampaignGroupStatusEnum.CampaignGroupStatus = proto.Field(
         proto.ENUM,

@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-# Copyright 2022 Google LLC
+# Copyright 2023 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -22,13 +22,14 @@ import proto  # type: ignore
 __protobuf__ = proto.module(
     package="google.ads.googleads.v13.enums",
     marshal="google.ads.googleads.v13",
-    manifest={"ResourceLimitTypeEnum",},
+    manifest={
+        "ResourceLimitTypeEnum",
+    },
 )
 
 
 class ResourceLimitTypeEnum(proto.Message):
-    r"""Container for enum describing possible resource limit types.
-    """
+    r"""Container for enum describing possible resource limit types."""
 
     class ResourceLimitType(proto.Enum):
         r"""Resource limit type."""

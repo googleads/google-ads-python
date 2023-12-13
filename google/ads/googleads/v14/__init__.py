@@ -16,6 +16,10 @@
 import importlib
 import sys
 
+from google.ads.googleads.v14 import gapic_version as package_version
+
+__version__ = package_version.__version__
+
 
 if sys.version_info < (3, 7):
     raise ImportError("This module requires Python 3.7 or later.")

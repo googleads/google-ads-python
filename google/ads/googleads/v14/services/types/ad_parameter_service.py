@@ -111,8 +111,7 @@ class AdParameterOperation(proto.Message):
             This field is a member of `oneof`_ ``operation``.
         update (google.ads.googleads.v14.resources.types.AdParameter):
             Update operation: The ad parameter is
-            expected to have a valid resource
-            name.
+            expected to have a valid resource name.
 
             This field is a member of `oneof`_ ``operation``.
         remove (str):

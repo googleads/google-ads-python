@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-# Copyright 2022 Google LLC
+# Copyright 2023 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -58,18 +58,23 @@ class MutateFeedItemSetLinksRequest(proto.Message):
     """
 
     customer_id: str = proto.Field(
-        proto.STRING, number=1,
+        proto.STRING,
+        number=1,
     )
     operations: MutableSequence[
         "FeedItemSetLinkOperation"
     ] = proto.RepeatedField(
-        proto.MESSAGE, number=2, message="FeedItemSetLinkOperation",
+        proto.MESSAGE,
+        number=2,
+        message="FeedItemSetLinkOperation",
     )
     partial_failure: bool = proto.Field(
-        proto.BOOL, number=3,
+        proto.BOOL,
+        number=3,
     )
     validate_only: bool = proto.Field(
-        proto.BOOL, number=4,
+        proto.BOOL,
+        number=4,
     )
 
 
@@ -106,7 +111,9 @@ class FeedItemSetLinkOperation(proto.Message):
         message=feed_item_set_link.FeedItemSetLink,
     )
     remove: str = proto.Field(
-        proto.STRING, number=2, oneof="operation",
+        proto.STRING,
+        number=2,
+        oneof="operation",
     )
 
 
@@ -126,10 +133,14 @@ class MutateFeedItemSetLinksResponse(proto.Message):
     results: MutableSequence[
         "MutateFeedItemSetLinkResult"
     ] = proto.RepeatedField(
-        proto.MESSAGE, number=1, message="MutateFeedItemSetLinkResult",
+        proto.MESSAGE,
+        number=1,
+        message="MutateFeedItemSetLinkResult",
     )
     partial_failure_error: status_pb2.Status = proto.Field(
-        proto.MESSAGE, number=2, message=status_pb2.Status,
+        proto.MESSAGE,
+        number=2,
+        message=status_pb2.Status,
     )
 
 
@@ -141,7 +152,8 @@ class MutateFeedItemSetLinkResult(proto.Message):
     """
 
     resource_name: str = proto.Field(
-        proto.STRING, number=1,
+        proto.STRING,
+        number=1,
     )
 
 

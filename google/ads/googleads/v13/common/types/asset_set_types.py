@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-# Copyright 2022 Google LLC
+# Copyright 2023 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -90,10 +90,16 @@ class LocationSet(proto.Message):
         message="BusinessProfileLocationSet",
     )
     chain_location_set: "ChainSet" = proto.Field(
-        proto.MESSAGE, number=2, oneof="source", message="ChainSet",
+        proto.MESSAGE,
+        number=2,
+        oneof="source",
+        message="ChainSet",
     )
     maps_location_set: "MapsLocationSet" = proto.Field(
-        proto.MESSAGE, number=5, oneof="source", message="MapsLocationSet",
+        proto.MESSAGE,
+        number=5,
+        oneof="source",
+        message="MapsLocationSet",
     )
 
 
@@ -142,22 +148,28 @@ class BusinessProfileLocationSet(proto.Message):
     """
 
     http_authorization_token: str = proto.Field(
-        proto.STRING, number=1,
+        proto.STRING,
+        number=1,
     )
     email_address: str = proto.Field(
-        proto.STRING, number=2,
+        proto.STRING,
+        number=2,
     )
     business_name_filter: str = proto.Field(
-        proto.STRING, number=3,
+        proto.STRING,
+        number=3,
     )
     label_filters: MutableSequence[str] = proto.RepeatedField(
-        proto.STRING, number=4,
+        proto.STRING,
+        number=4,
     )
     listing_id_filters: MutableSequence[int] = proto.RepeatedField(
-        proto.INT64, number=5,
+        proto.INT64,
+        number=5,
     )
     business_account_id: str = proto.Field(
-        proto.STRING, number=6,
+        proto.STRING,
+        number=6,
     )
 
 
@@ -180,7 +192,9 @@ class ChainSet(proto.Message):
         enum=chain_relationship_type.ChainRelationshipTypeEnum.ChainRelationshipType,
     )
     chains: MutableSequence["ChainFilter"] = proto.RepeatedField(
-        proto.MESSAGE, number=2, message="ChainFilter",
+        proto.MESSAGE,
+        number=2,
+        message="ChainFilter",
     )
 
 
@@ -202,10 +216,12 @@ class ChainFilter(proto.Message):
     """
 
     chain_id: int = proto.Field(
-        proto.INT64, number=1,
+        proto.INT64,
+        number=1,
     )
     location_attributes: MutableSequence[str] = proto.RepeatedField(
-        proto.STRING, number=2,
+        proto.STRING,
+        number=2,
     )
 
 
@@ -218,7 +234,9 @@ class MapsLocationSet(proto.Message):
     """
 
     maps_locations: MutableSequence["MapsLocationInfo"] = proto.RepeatedField(
-        proto.MESSAGE, number=1, message="MapsLocationInfo",
+        proto.MESSAGE,
+        number=1,
+        message="MapsLocationInfo",
     )
 
 
@@ -230,7 +248,8 @@ class MapsLocationInfo(proto.Message):
     """
 
     place_id: str = proto.Field(
-        proto.STRING, number=1,
+        proto.STRING,
+        number=1,
     )
 
 
@@ -275,7 +294,8 @@ class DynamicBusinessProfileLocationGroupFilter(proto.Message):
     """
 
     label_filters: MutableSequence[str] = proto.RepeatedField(
-        proto.STRING, number=1,
+        proto.STRING,
+        number=1,
     )
     business_name_filter: "BusinessProfileBusinessNameFilter" = proto.Field(
         proto.MESSAGE,
@@ -284,7 +304,8 @@ class DynamicBusinessProfileLocationGroupFilter(proto.Message):
         message="BusinessProfileBusinessNameFilter",
     )
     listing_id_filters: MutableSequence[int] = proto.RepeatedField(
-        proto.INT64, number=3,
+        proto.INT64,
+        number=3,
     )
 
 
@@ -299,7 +320,8 @@ class BusinessProfileBusinessNameFilter(proto.Message):
     """
 
     business_name: str = proto.Field(
-        proto.STRING, number=1,
+        proto.STRING,
+        number=1,
     )
     filter_type: location_string_filter_type.LocationStringFilterTypeEnum.LocationStringFilterType = proto.Field(
         proto.ENUM,
@@ -323,7 +345,9 @@ class ChainLocationGroup(proto.Message):
     dynamic_chain_location_group_filters: MutableSequence[
         "ChainFilter"
     ] = proto.RepeatedField(
-        proto.MESSAGE, number=1, message="ChainFilter",
+        proto.MESSAGE,
+        number=1,
+        message="ChainFilter",
     )
 
 

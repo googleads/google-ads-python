@@ -42,6 +42,7 @@ class CampaignDraft(proto.Message):
             ``customers/{customer_id}/campaignDrafts/{base_campaign_id}~{draft_id}``
         draft_id (int):
             Output only. The ID of the draft.
+
             This field is read-only.
 
             This field is a member of `oneof`_ ``_draft_id``.
@@ -52,6 +53,7 @@ class CampaignDraft(proto.Message):
             This field is a member of `oneof`_ ``_base_campaign``.
         name (str):
             The name of the campaign draft.
+
             This field is required and should not be empty
             when creating new campaign drafts.
 
@@ -64,6 +66,7 @@ class CampaignDraft(proto.Message):
             Output only. Resource name of the Campaign
             that results from overlaying the draft changes
             onto the base campaign.
+
             This field is read-only.
 
             This field is a member of `oneof`_ ``_draft_campaign``.

@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-# Copyright 2022 Google LLC
+# Copyright 2023 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -22,12 +22,15 @@ import proto  # type: ignore
 __protobuf__ = proto.module(
     package="google.ads.googleads.v13.resources",
     marshal="google.ads.googleads.v13",
-    manifest={"UserLocationView",},
+    manifest={
+        "UserLocationView",
+    },
 )
 
 
 class UserLocationView(proto.Message):
     r"""A user location view.
+
     User Location View includes all metrics aggregated at the
     country level, one row per country. It reports metrics at the
     actual physical location of the user by targeted or not targeted
@@ -54,13 +57,18 @@ class UserLocationView(proto.Message):
     """
 
     resource_name: str = proto.Field(
-        proto.STRING, number=1,
+        proto.STRING,
+        number=1,
     )
     country_criterion_id: int = proto.Field(
-        proto.INT64, number=4, optional=True,
+        proto.INT64,
+        number=4,
+        optional=True,
     )
     targeting_location: bool = proto.Field(
-        proto.BOOL, number=5, optional=True,
+        proto.BOOL,
+        number=5,
+        optional=True,
     )
 
 

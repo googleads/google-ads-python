@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-# Copyright 2022 Google LLC
+# Copyright 2023 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -22,7 +22,9 @@ import proto  # type: ignore
 __protobuf__ = proto.module(
     package="google.ads.googleads.v13.resources",
     marshal="google.ads.googleads.v13",
-    manifest={"SmartCampaignSetting",},
+    manifest={
+        "SmartCampaignSetting",
+    },
 )
 
 
@@ -98,10 +100,14 @@ class SmartCampaignSetting(proto.Message):
         """
 
         phone_number: str = proto.Field(
-            proto.STRING, number=1, optional=True,
+            proto.STRING,
+            number=1,
+            optional=True,
         )
         country_code: str = proto.Field(
-            proto.STRING, number=2, optional=True,
+            proto.STRING,
+            number=2,
+            optional=True,
         )
 
     class AdOptimizedBusinessProfileSetting(proto.Message):
@@ -121,35 +127,50 @@ class SmartCampaignSetting(proto.Message):
         """
 
         include_lead_form: bool = proto.Field(
-            proto.BOOL, number=1, optional=True,
+            proto.BOOL,
+            number=1,
+            optional=True,
         )
 
     resource_name: str = proto.Field(
-        proto.STRING, number=1,
+        proto.STRING,
+        number=1,
     )
     campaign: str = proto.Field(
-        proto.STRING, number=2,
+        proto.STRING,
+        number=2,
     )
     phone_number: PhoneNumber = proto.Field(
-        proto.MESSAGE, number=3, message=PhoneNumber,
+        proto.MESSAGE,
+        number=3,
+        message=PhoneNumber,
     )
     advertising_language_code: str = proto.Field(
-        proto.STRING, number=7,
+        proto.STRING,
+        number=7,
     )
     final_url: str = proto.Field(
-        proto.STRING, number=8, oneof="landing_page",
-    )
-    ad_optimized_business_profile_setting: AdOptimizedBusinessProfileSetting = proto.Field(
-        proto.MESSAGE,
-        number=9,
+        proto.STRING,
+        number=8,
         oneof="landing_page",
-        message=AdOptimizedBusinessProfileSetting,
+    )
+    ad_optimized_business_profile_setting: AdOptimizedBusinessProfileSetting = (
+        proto.Field(
+            proto.MESSAGE,
+            number=9,
+            oneof="landing_page",
+            message=AdOptimizedBusinessProfileSetting,
+        )
     )
     business_name: str = proto.Field(
-        proto.STRING, number=5, oneof="business_setting",
+        proto.STRING,
+        number=5,
+        oneof="business_setting",
     )
     business_profile_location: str = proto.Field(
-        proto.STRING, number=10, oneof="business_setting",
+        proto.STRING,
+        number=10,
+        oneof="business_setting",
     )
 
 

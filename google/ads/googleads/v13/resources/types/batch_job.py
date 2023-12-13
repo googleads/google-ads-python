@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-# Copyright 2022 Google LLC
+# Copyright 2023 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -24,7 +24,9 @@ from google.ads.googleads.v13.enums.types import batch_job_status
 __protobuf__ = proto.module(
     package="google.ads.googleads.v13.resources",
     marshal="google.ads.googleads.v13",
-    manifest={"BatchJob",},
+    manifest={
+        "BatchJob",
+    },
 )
 
 
@@ -119,38 +121,59 @@ class BatchJob(proto.Message):
         """
 
         creation_date_time: str = proto.Field(
-            proto.STRING, number=8, optional=True,
+            proto.STRING,
+            number=8,
+            optional=True,
         )
         start_date_time: str = proto.Field(
-            proto.STRING, number=7, optional=True,
+            proto.STRING,
+            number=7,
+            optional=True,
         )
         completion_date_time: str = proto.Field(
-            proto.STRING, number=9, optional=True,
+            proto.STRING,
+            number=9,
+            optional=True,
         )
         estimated_completion_ratio: float = proto.Field(
-            proto.DOUBLE, number=10, optional=True,
+            proto.DOUBLE,
+            number=10,
+            optional=True,
         )
         operation_count: int = proto.Field(
-            proto.INT64, number=11, optional=True,
+            proto.INT64,
+            number=11,
+            optional=True,
         )
         executed_operation_count: int = proto.Field(
-            proto.INT64, number=12, optional=True,
+            proto.INT64,
+            number=12,
+            optional=True,
         )
         execution_limit_seconds: int = proto.Field(
-            proto.INT32, number=13, optional=True,
+            proto.INT32,
+            number=13,
+            optional=True,
         )
 
     resource_name: str = proto.Field(
-        proto.STRING, number=1,
+        proto.STRING,
+        number=1,
     )
     id: int = proto.Field(
-        proto.INT64, number=7, optional=True,
+        proto.INT64,
+        number=7,
+        optional=True,
     )
     next_add_sequence_token: str = proto.Field(
-        proto.STRING, number=8, optional=True,
+        proto.STRING,
+        number=8,
+        optional=True,
     )
     metadata: BatchJobMetadata = proto.Field(
-        proto.MESSAGE, number=4, message=BatchJobMetadata,
+        proto.MESSAGE,
+        number=4,
+        message=BatchJobMetadata,
     )
     status: batch_job_status.BatchJobStatusEnum.BatchJobStatus = proto.Field(
         proto.ENUM,
@@ -158,7 +181,9 @@ class BatchJob(proto.Message):
         enum=batch_job_status.BatchJobStatusEnum.BatchJobStatus,
     )
     long_running_operation: str = proto.Field(
-        proto.STRING, number=9, optional=True,
+        proto.STRING,
+        number=9,
+        optional=True,
     )
 
 

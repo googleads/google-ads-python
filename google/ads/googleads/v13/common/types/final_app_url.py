@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-# Copyright 2022 Google LLC
+# Copyright 2023 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -24,7 +24,9 @@ from google.ads.googleads.v13.enums.types import app_url_operating_system_type
 __protobuf__ = proto.module(
     package="google.ads.googleads.v13.common",
     marshal="google.ads.googleads.v13",
-    manifest={"FinalAppUrl",},
+    manifest={
+        "FinalAppUrl",
+    },
 )
 
 
@@ -57,7 +59,9 @@ class FinalAppUrl(proto.Message):
         enum=app_url_operating_system_type.AppUrlOperatingSystemTypeEnum.AppUrlOperatingSystemType,
     )
     url: str = proto.Field(
-        proto.STRING, number=3, optional=True,
+        proto.STRING,
+        number=3,
+        optional=True,
     )
 
 

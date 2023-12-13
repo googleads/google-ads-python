@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-# Copyright 2022 Google LLC
+# Copyright 2023 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -35,7 +35,9 @@ from google.ads.googleads.v13.enums.types import targeting_dimension
 __protobuf__ = proto.module(
     package="google.ads.googleads.v13.resources",
     marshal="google.ads.googleads.v13",
-    manifest={"AdGroup",},
+    manifest={
+        "AdGroup",
+    },
 )
 
 
@@ -55,11 +57,13 @@ class AdGroup(proto.Message):
             This field is a member of `oneof`_ ``_id``.
         name (str):
             The name of the ad group.
+
             This field is required and should not be empty
             when creating new ad groups.
 
             It must contain fewer than 255 UTF-8 full-width
             characters.
+
             It must not contain any null (code point 0x0),
             NL line feed (code point 0xA) or carriage return
             (code point 0xD) characters.
@@ -81,6 +85,7 @@ class AdGroup(proto.Message):
 
             For base ad groups, this field equals the ad
             group resource name.
+
             This field is read-only.
 
             This field is a member of `oneof`_ ``_base_ad_group``.
@@ -218,17 +223,23 @@ class AdGroup(proto.Message):
         """
 
         use_audience_grouped: bool = proto.Field(
-            proto.BOOL, number=1,
+            proto.BOOL,
+            number=1,
         )
 
     resource_name: str = proto.Field(
-        proto.STRING, number=1,
+        proto.STRING,
+        number=1,
     )
     id: int = proto.Field(
-        proto.INT64, number=34, optional=True,
+        proto.INT64,
+        number=34,
+        optional=True,
     )
     name: str = proto.Field(
-        proto.STRING, number=35, optional=True,
+        proto.STRING,
+        number=35,
+        optional=True,
     )
     status: ad_group_status.AdGroupStatusEnum.AdGroupStatus = proto.Field(
         proto.ENUM,
@@ -236,7 +247,9 @@ class AdGroup(proto.Message):
         enum=ad_group_status.AdGroupStatusEnum.AdGroupStatus,
     )
     type_: ad_group_type.AdGroupTypeEnum.AdGroupType = proto.Field(
-        proto.ENUM, number=12, enum=ad_group_type.AdGroupTypeEnum.AdGroupType,
+        proto.ENUM,
+        number=12,
+        enum=ad_group_type.AdGroupTypeEnum.AdGroupType,
     )
     ad_rotation_mode: ad_group_ad_rotation_mode.AdGroupAdRotationModeEnum.AdGroupAdRotationMode = proto.Field(
         proto.ENUM,
@@ -244,45 +257,70 @@ class AdGroup(proto.Message):
         enum=ad_group_ad_rotation_mode.AdGroupAdRotationModeEnum.AdGroupAdRotationMode,
     )
     base_ad_group: str = proto.Field(
-        proto.STRING, number=36, optional=True,
+        proto.STRING,
+        number=36,
+        optional=True,
     )
     tracking_url_template: str = proto.Field(
-        proto.STRING, number=37, optional=True,
+        proto.STRING,
+        number=37,
+        optional=True,
     )
     url_custom_parameters: MutableSequence[
         custom_parameter.CustomParameter
     ] = proto.RepeatedField(
-        proto.MESSAGE, number=6, message=custom_parameter.CustomParameter,
+        proto.MESSAGE,
+        number=6,
+        message=custom_parameter.CustomParameter,
     )
     campaign: str = proto.Field(
-        proto.STRING, number=38, optional=True,
+        proto.STRING,
+        number=38,
+        optional=True,
     )
     cpc_bid_micros: int = proto.Field(
-        proto.INT64, number=39, optional=True,
+        proto.INT64,
+        number=39,
+        optional=True,
     )
     effective_cpc_bid_micros: int = proto.Field(
-        proto.INT64, number=57, optional=True,
+        proto.INT64,
+        number=57,
+        optional=True,
     )
     cpm_bid_micros: int = proto.Field(
-        proto.INT64, number=40, optional=True,
+        proto.INT64,
+        number=40,
+        optional=True,
     )
     target_cpa_micros: int = proto.Field(
-        proto.INT64, number=41, optional=True,
+        proto.INT64,
+        number=41,
+        optional=True,
     )
     cpv_bid_micros: int = proto.Field(
-        proto.INT64, number=42, optional=True,
+        proto.INT64,
+        number=42,
+        optional=True,
     )
     target_cpm_micros: int = proto.Field(
-        proto.INT64, number=43, optional=True,
+        proto.INT64,
+        number=43,
+        optional=True,
     )
     target_roas: float = proto.Field(
-        proto.DOUBLE, number=44, optional=True,
+        proto.DOUBLE,
+        number=44,
+        optional=True,
     )
     percent_cpc_bid_micros: int = proto.Field(
-        proto.INT64, number=45, optional=True,
+        proto.INT64,
+        number=45,
+        optional=True,
     )
     optimized_targeting_enabled: bool = proto.Field(
-        proto.BOOL, number=59,
+        proto.BOOL,
+        number=59,
     )
     display_custom_bid_dimension: targeting_dimension.TargetingDimensionEnum.TargetingDimension = proto.Field(
         proto.ENUM,
@@ -290,7 +328,9 @@ class AdGroup(proto.Message):
         enum=targeting_dimension.TargetingDimensionEnum.TargetingDimension,
     )
     final_url_suffix: str = proto.Field(
-        proto.STRING, number=46, optional=True,
+        proto.STRING,
+        number=46,
+        optional=True,
     )
     targeting_setting: gagc_targeting_setting.TargetingSetting = proto.Field(
         proto.MESSAGE,
@@ -298,10 +338,14 @@ class AdGroup(proto.Message):
         message=gagc_targeting_setting.TargetingSetting,
     )
     audience_setting: AudienceSetting = proto.Field(
-        proto.MESSAGE, number=56, message=AudienceSetting,
+        proto.MESSAGE,
+        number=56,
+        message=AudienceSetting,
     )
     effective_target_cpa_micros: int = proto.Field(
-        proto.INT64, number=47, optional=True,
+        proto.INT64,
+        number=47,
+        optional=True,
     )
     effective_target_cpa_source: bidding_source.BiddingSourceEnum.BiddingSource = proto.Field(
         proto.ENUM,
@@ -309,7 +353,9 @@ class AdGroup(proto.Message):
         enum=bidding_source.BiddingSourceEnum.BiddingSource,
     )
     effective_target_roas: float = proto.Field(
-        proto.DOUBLE, number=48, optional=True,
+        proto.DOUBLE,
+        number=48,
+        optional=True,
     )
     effective_target_roas_source: bidding_source.BiddingSourceEnum.BiddingSource = proto.Field(
         proto.ENUM,
@@ -317,7 +363,8 @@ class AdGroup(proto.Message):
         enum=bidding_source.BiddingSourceEnum.BiddingSource,
     )
     labels: MutableSequence[str] = proto.RepeatedField(
-        proto.STRING, number=49,
+        proto.STRING,
+        number=49,
     )
     excluded_parent_asset_field_types: MutableSequence[
         asset_field_type.AssetFieldTypeEnum.AssetFieldType

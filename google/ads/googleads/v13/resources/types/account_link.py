@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-# Copyright 2022 Google LLC
+# Copyright 2023 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -85,26 +85,35 @@ class AccountLink(proto.Message):
     """
 
     resource_name: str = proto.Field(
-        proto.STRING, number=1,
+        proto.STRING,
+        number=1,
     )
     account_link_id: int = proto.Field(
-        proto.INT64, number=8, optional=True,
+        proto.INT64,
+        number=8,
+        optional=True,
     )
-    status: account_link_status.AccountLinkStatusEnum.AccountLinkStatus = proto.Field(
-        proto.ENUM,
-        number=3,
-        enum=account_link_status.AccountLinkStatusEnum.AccountLinkStatus,
+    status: account_link_status.AccountLinkStatusEnum.AccountLinkStatus = (
+        proto.Field(
+            proto.ENUM,
+            number=3,
+            enum=account_link_status.AccountLinkStatusEnum.AccountLinkStatus,
+        )
     )
-    type_: linked_account_type.LinkedAccountTypeEnum.LinkedAccountType = proto.Field(
-        proto.ENUM,
-        number=4,
-        enum=linked_account_type.LinkedAccountTypeEnum.LinkedAccountType,
+    type_: linked_account_type.LinkedAccountTypeEnum.LinkedAccountType = (
+        proto.Field(
+            proto.ENUM,
+            number=4,
+            enum=linked_account_type.LinkedAccountTypeEnum.LinkedAccountType,
+        )
     )
-    third_party_app_analytics: "ThirdPartyAppAnalyticsLinkIdentifier" = proto.Field(
-        proto.MESSAGE,
-        number=5,
-        oneof="linked_account",
-        message="ThirdPartyAppAnalyticsLinkIdentifier",
+    third_party_app_analytics: "ThirdPartyAppAnalyticsLinkIdentifier" = (
+        proto.Field(
+            proto.MESSAGE,
+            number=5,
+            oneof="linked_account",
+            message="ThirdPartyAppAnalyticsLinkIdentifier",
+        )
     )
     data_partner: "DataPartnerLinkIdentifier" = proto.Field(
         proto.MESSAGE,
@@ -171,15 +180,21 @@ class ThirdPartyAppAnalyticsLinkIdentifier(proto.Message):
     """
 
     app_analytics_provider_id: int = proto.Field(
-        proto.INT64, number=4, optional=True,
+        proto.INT64,
+        number=4,
+        optional=True,
     )
     app_id: str = proto.Field(
-        proto.STRING, number=5, optional=True,
+        proto.STRING,
+        number=5,
+        optional=True,
     )
-    app_vendor: mobile_app_vendor.MobileAppVendorEnum.MobileAppVendor = proto.Field(
-        proto.ENUM,
-        number=3,
-        enum=mobile_app_vendor.MobileAppVendorEnum.MobileAppVendor,
+    app_vendor: mobile_app_vendor.MobileAppVendorEnum.MobileAppVendor = (
+        proto.Field(
+            proto.ENUM,
+            number=3,
+            enum=mobile_app_vendor.MobileAppVendorEnum.MobileAppVendor,
+        )
     )
 
 
@@ -199,7 +214,9 @@ class DataPartnerLinkIdentifier(proto.Message):
     """
 
     data_partner_id: int = proto.Field(
-        proto.INT64, number=1, optional=True,
+        proto.INT64,
+        number=1,
+        optional=True,
     )
 
 
@@ -212,7 +229,8 @@ class HotelCenterLinkIdentifier(proto.Message):
     """
 
     hotel_center_id: int = proto.Field(
-        proto.INT64, number=1,
+        proto.INT64,
+        number=1,
     )
 
 
@@ -232,7 +250,9 @@ class GoogleAdsLinkIdentifier(proto.Message):
     """
 
     customer: str = proto.Field(
-        proto.STRING, number=3, optional=True,
+        proto.STRING,
+        number=3,
+        optional=True,
     )
 
 
@@ -255,7 +275,9 @@ class AdvertisingPartnerLinkIdentifier(proto.Message):
     """
 
     customer: str = proto.Field(
-        proto.STRING, number=1, optional=True,
+        proto.STRING,
+        number=1,
+        optional=True,
     )
 
 

@@ -110,6 +110,7 @@ class Campaign(proto.Message):
             This field is a member of `oneof`_ ``_id``.
         name (str):
             The name of the campaign.
+
             This field is required and should not be empty
             when creating new campaigns.
 
@@ -134,6 +135,7 @@ class Campaign(proto.Message):
             CampaignPrimaryStatus.
         status (google.ads.googleads.v14.enums.types.CampaignStatusEnum.CampaignStatus):
             The status of the campaign.
+
             When a new campaign is added, the status
             defaults to ENABLED.
         serving_status (google.ads.googleads.v14.enums.types.CampaignServingStatusEnum.CampaignServingStatus):
@@ -303,6 +305,7 @@ class Campaign(proto.Message):
 
             See "About optimization score" at
             https://support.google.com/google-ads/answer/9061546.
+
             This field is read-only.
 
             This field is a member of `oneof`_ ``_optimization_score``.

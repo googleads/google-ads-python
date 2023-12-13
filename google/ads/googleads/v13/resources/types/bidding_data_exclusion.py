@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-# Copyright 2022 Google LLC
+# Copyright 2023 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -28,12 +28,15 @@ from google.ads.googleads.v13.enums.types import seasonality_event_status
 __protobuf__ = proto.module(
     package="google.ads.googleads.v13.resources",
     marshal="google.ads.googleads.v13",
-    manifest={"BiddingDataExclusion",},
+    manifest={
+        "BiddingDataExclusion",
+    },
 )
 
 
 class BiddingDataExclusion(proto.Message):
     r"""Represents a bidding data exclusion.
+
     See "About data exclusions" at
     https://support.google.com/google-ads/answer/10370710.
 
@@ -53,6 +56,7 @@ class BiddingDataExclusion(proto.Message):
         start_date_time (str):
             Required. The inclusive start time of the
             data exclusion in yyyy-MM-dd HH:mm:ss format.
+
             A data exclusion is backward looking and should
             be used for events that start in the past and
             end either in the past or future.
@@ -89,10 +93,12 @@ class BiddingDataExclusion(proto.Message):
     """
 
     resource_name: str = proto.Field(
-        proto.STRING, number=1,
+        proto.STRING,
+        number=1,
     )
     data_exclusion_id: int = proto.Field(
-        proto.INT64, number=2,
+        proto.INT64,
+        number=2,
     )
     scope: seasonality_event_scope.SeasonalityEventScopeEnum.SeasonalityEventScope = proto.Field(
         proto.ENUM,
@@ -105,22 +111,29 @@ class BiddingDataExclusion(proto.Message):
         enum=seasonality_event_status.SeasonalityEventStatusEnum.SeasonalityEventStatus,
     )
     start_date_time: str = proto.Field(
-        proto.STRING, number=5,
+        proto.STRING,
+        number=5,
     )
     end_date_time: str = proto.Field(
-        proto.STRING, number=6,
+        proto.STRING,
+        number=6,
     )
     name: str = proto.Field(
-        proto.STRING, number=7,
+        proto.STRING,
+        number=7,
     )
     description: str = proto.Field(
-        proto.STRING, number=8,
+        proto.STRING,
+        number=8,
     )
     devices: MutableSequence[device.DeviceEnum.Device] = proto.RepeatedField(
-        proto.ENUM, number=9, enum=device.DeviceEnum.Device,
+        proto.ENUM,
+        number=9,
+        enum=device.DeviceEnum.Device,
     )
     campaigns: MutableSequence[str] = proto.RepeatedField(
-        proto.STRING, number=10,
+        proto.STRING,
+        number=10,
     )
     advertising_channel_types: MutableSequence[
         advertising_channel_type.AdvertisingChannelTypeEnum.AdvertisingChannelType

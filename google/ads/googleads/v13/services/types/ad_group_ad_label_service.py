@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-# Copyright 2022 Google LLC
+# Copyright 2023 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -58,18 +58,23 @@ class MutateAdGroupAdLabelsRequest(proto.Message):
     """
 
     customer_id: str = proto.Field(
-        proto.STRING, number=1,
+        proto.STRING,
+        number=1,
     )
     operations: MutableSequence[
         "AdGroupAdLabelOperation"
     ] = proto.RepeatedField(
-        proto.MESSAGE, number=2, message="AdGroupAdLabelOperation",
+        proto.MESSAGE,
+        number=2,
+        message="AdGroupAdLabelOperation",
     )
     partial_failure: bool = proto.Field(
-        proto.BOOL, number=3,
+        proto.BOOL,
+        number=3,
     )
     validate_only: bool = proto.Field(
-        proto.BOOL, number=4,
+        proto.BOOL,
+        number=4,
     )
 
 
@@ -104,7 +109,9 @@ class AdGroupAdLabelOperation(proto.Message):
         message=ad_group_ad_label.AdGroupAdLabel,
     )
     remove: str = proto.Field(
-        proto.STRING, number=2, oneof="operation",
+        proto.STRING,
+        number=2,
+        oneof="operation",
     )
 
 
@@ -122,12 +129,16 @@ class MutateAdGroupAdLabelsResponse(proto.Message):
     """
 
     partial_failure_error: status_pb2.Status = proto.Field(
-        proto.MESSAGE, number=3, message=status_pb2.Status,
+        proto.MESSAGE,
+        number=3,
+        message=status_pb2.Status,
     )
     results: MutableSequence[
         "MutateAdGroupAdLabelResult"
     ] = proto.RepeatedField(
-        proto.MESSAGE, number=2, message="MutateAdGroupAdLabelResult",
+        proto.MESSAGE,
+        number=2,
+        message="MutateAdGroupAdLabelResult",
     )
 
 
@@ -139,7 +150,8 @@ class MutateAdGroupAdLabelResult(proto.Message):
     """
 
     resource_name: str = proto.Field(
-        proto.STRING, number=1,
+        proto.STRING,
+        number=1,
     )
 
 

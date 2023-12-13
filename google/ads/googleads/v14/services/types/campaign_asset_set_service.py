@@ -104,8 +104,7 @@ class CampaignAssetSetOperation(proto.Message):
     Attributes:
         create (google.ads.googleads.v14.resources.types.CampaignAssetSet):
             Create operation: No resource name is
-            expected for the new campaign asset
-            set.
+            expected for the new campaign asset set.
 
             This field is a member of `oneof`_ ``operation``.
         remove (str):

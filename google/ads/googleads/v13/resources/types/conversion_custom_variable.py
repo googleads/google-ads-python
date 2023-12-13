@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-# Copyright 2022 Google LLC
+# Copyright 2023 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -26,7 +26,9 @@ from google.ads.googleads.v13.enums.types import (
 __protobuf__ = proto.module(
     package="google.ads.googleads.v13.resources",
     marshal="google.ads.googleads.v13",
-    manifest={"ConversionCustomVariable",},
+    manifest={
+        "ConversionCustomVariable",
+    },
 )
 
 
@@ -53,14 +55,14 @@ class ConversionCustomVariable(proto.Message):
         tag (str):
             Required. Immutable. The tag of the
             conversion custom variable. It is used in the
-            event snippet and sent to Google Ads along with
-            conversion pings. For conversion uploads in
+            event snippet  and sent to Google Ads along with
+            conversion pings. For conversion uploads  in
             Google Ads API, the resource name of the
-            conversion custom variable is used. Tag should
+            conversion custom variable is  used. Tag should
             be unique. The maximum size of tag is 100 bytes.
-            There should not be any extra spaces before and
-            after. Currently only lowercase letters, numbers
-            and underscores are allowed in the tag.
+            There  should not be any extra spaces before and
+            after. Currently only lowercase  letters,
+            numbers and underscores are allowed in the tag.
         status (google.ads.googleads.v13.enums.types.ConversionCustomVariableStatusEnum.ConversionCustomVariableStatus):
             The status of the conversion custom variable
             for conversion event accrual.
@@ -71,16 +73,20 @@ class ConversionCustomVariable(proto.Message):
     """
 
     resource_name: str = proto.Field(
-        proto.STRING, number=1,
+        proto.STRING,
+        number=1,
     )
     id: int = proto.Field(
-        proto.INT64, number=2,
+        proto.INT64,
+        number=2,
     )
     name: str = proto.Field(
-        proto.STRING, number=3,
+        proto.STRING,
+        number=3,
     )
     tag: str = proto.Field(
-        proto.STRING, number=4,
+        proto.STRING,
+        number=4,
     )
     status: conversion_custom_variable_status.ConversionCustomVariableStatusEnum.ConversionCustomVariableStatus = proto.Field(
         proto.ENUM,
@@ -88,7 +94,8 @@ class ConversionCustomVariable(proto.Message):
         enum=conversion_custom_variable_status.ConversionCustomVariableStatusEnum.ConversionCustomVariableStatus,
     )
     owner_customer: str = proto.Field(
-        proto.STRING, number=6,
+        proto.STRING,
+        number=6,
     )
 
 

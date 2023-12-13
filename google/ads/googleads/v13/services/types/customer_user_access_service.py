@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-# Copyright 2022 Google LLC
+# Copyright 2023 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -48,10 +48,13 @@ class MutateCustomerUserAccessRequest(proto.Message):
     """
 
     customer_id: str = proto.Field(
-        proto.STRING, number=1,
+        proto.STRING,
+        number=1,
     )
     operation: "CustomerUserAccessOperation" = proto.Field(
-        proto.MESSAGE, number=2, message="CustomerUserAccessOperation",
+        proto.MESSAGE,
+        number=2,
+        message="CustomerUserAccessOperation",
     )
 
 
@@ -83,7 +86,9 @@ class CustomerUserAccessOperation(proto.Message):
     """
 
     update_mask: field_mask_pb2.FieldMask = proto.Field(
-        proto.MESSAGE, number=3, message=field_mask_pb2.FieldMask,
+        proto.MESSAGE,
+        number=3,
+        message=field_mask_pb2.FieldMask,
     )
     update: customer_user_access.CustomerUserAccess = proto.Field(
         proto.MESSAGE,
@@ -92,7 +97,9 @@ class CustomerUserAccessOperation(proto.Message):
         message=customer_user_access.CustomerUserAccess,
     )
     remove: str = proto.Field(
-        proto.STRING, number=2, oneof="operation",
+        proto.STRING,
+        number=2,
+        oneof="operation",
     )
 
 
@@ -104,7 +111,9 @@ class MutateCustomerUserAccessResponse(proto.Message):
     """
 
     result: "MutateCustomerUserAccessResult" = proto.Field(
-        proto.MESSAGE, number=1, message="MutateCustomerUserAccessResult",
+        proto.MESSAGE,
+        number=1,
+        message="MutateCustomerUserAccessResult",
     )
 
 
@@ -116,7 +125,8 @@ class MutateCustomerUserAccessResult(proto.Message):
     """
 
     resource_name: str = proto.Field(
-        proto.STRING, number=1,
+        proto.STRING,
+        number=1,
     )
 
 

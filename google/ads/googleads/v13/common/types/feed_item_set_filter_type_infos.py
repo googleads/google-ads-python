@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-# Copyright 2022 Google LLC
+# Copyright 2023 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -50,10 +50,13 @@ class DynamicLocationSetFilter(proto.Message):
     """
 
     labels: MutableSequence[str] = proto.RepeatedField(
-        proto.STRING, number=1,
+        proto.STRING,
+        number=1,
     )
     business_name_filter: "BusinessNameFilter" = proto.Field(
-        proto.MESSAGE, number=2, message="BusinessNameFilter",
+        proto.MESSAGE,
+        number=2,
+        message="BusinessNameFilter",
     )
 
 
@@ -70,7 +73,8 @@ class BusinessNameFilter(proto.Message):
     """
 
     business_name: str = proto.Field(
-        proto.STRING, number=1,
+        proto.STRING,
+        number=1,
     )
     filter_type: feed_item_set_string_filter_type.FeedItemSetStringFilterTypeEnum.FeedItemSetStringFilterType = proto.Field(
         proto.ENUM,
@@ -93,7 +97,8 @@ class DynamicAffiliateLocationSetFilter(proto.Message):
     """
 
     chain_ids: MutableSequence[int] = proto.RepeatedField(
-        proto.INT64, number=1,
+        proto.INT64,
+        number=1,
     )
 
 

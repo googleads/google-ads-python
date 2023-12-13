@@ -110,14 +110,12 @@ class ConversionActionOperation(proto.Message):
             fields are modified in an update.
         create (google.ads.googleads.v14.resources.types.ConversionAction):
             Create operation: No resource name is
-            expected for the new conversion
-            action.
+            expected for the new conversion action.
 
             This field is a member of `oneof`_ ``operation``.
         update (google.ads.googleads.v14.resources.types.ConversionAction):
             Update operation: The conversion action is
-            expected to have a valid
-            resource name.
+            expected to have a valid resource name.
 
             This field is a member of `oneof`_ ``operation``.
         remove (str):

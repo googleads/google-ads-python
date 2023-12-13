@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-# Copyright 2022 Google LLC
+# Copyright 2023 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -52,15 +52,19 @@ class MutateCampaignConversionGoalsRequest(proto.Message):
     """
 
     customer_id: str = proto.Field(
-        proto.STRING, number=1,
+        proto.STRING,
+        number=1,
     )
     operations: MutableSequence[
         "CampaignConversionGoalOperation"
     ] = proto.RepeatedField(
-        proto.MESSAGE, number=2, message="CampaignConversionGoalOperation",
+        proto.MESSAGE,
+        number=2,
+        message="CampaignConversionGoalOperation",
     )
     validate_only: bool = proto.Field(
-        proto.BOOL, number=3,
+        proto.BOOL,
+        number=3,
     )
 
 
@@ -80,7 +84,9 @@ class CampaignConversionGoalOperation(proto.Message):
     """
 
     update_mask: field_mask_pb2.FieldMask = proto.Field(
-        proto.MESSAGE, number=2, message=field_mask_pb2.FieldMask,
+        proto.MESSAGE,
+        number=2,
+        message=field_mask_pb2.FieldMask,
     )
     update: campaign_conversion_goal.CampaignConversionGoal = proto.Field(
         proto.MESSAGE,
@@ -100,7 +106,9 @@ class MutateCampaignConversionGoalsResponse(proto.Message):
     results: MutableSequence[
         "MutateCampaignConversionGoalResult"
     ] = proto.RepeatedField(
-        proto.MESSAGE, number=1, message="MutateCampaignConversionGoalResult",
+        proto.MESSAGE,
+        number=1,
+        message="MutateCampaignConversionGoalResult",
     )
 
 
@@ -112,7 +120,8 @@ class MutateCampaignConversionGoalResult(proto.Message):
     """
 
     resource_name: str = proto.Field(
-        proto.STRING, number=1,
+        proto.STRING,
+        number=1,
     )
 
 

@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-# Copyright 2022 Google LLC
+# Copyright 2023 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -68,18 +68,23 @@ class MutateBiddingDataExclusionsRequest(proto.Message):
     """
 
     customer_id: str = proto.Field(
-        proto.STRING, number=1,
+        proto.STRING,
+        number=1,
     )
     operations: MutableSequence[
         "BiddingDataExclusionOperation"
     ] = proto.RepeatedField(
-        proto.MESSAGE, number=2, message="BiddingDataExclusionOperation",
+        proto.MESSAGE,
+        number=2,
+        message="BiddingDataExclusionOperation",
     )
     partial_failure: bool = proto.Field(
-        proto.BOOL, number=3,
+        proto.BOOL,
+        number=3,
     )
     validate_only: bool = proto.Field(
-        proto.BOOL, number=4,
+        proto.BOOL,
+        number=4,
     )
     response_content_type: gage_response_content_type.ResponseContentTypeEnum.ResponseContentType = proto.Field(
         proto.ENUM,
@@ -123,7 +128,9 @@ class BiddingDataExclusionOperation(proto.Message):
     """
 
     update_mask: field_mask_pb2.FieldMask = proto.Field(
-        proto.MESSAGE, number=4, message=field_mask_pb2.FieldMask,
+        proto.MESSAGE,
+        number=4,
+        message=field_mask_pb2.FieldMask,
     )
     create: gagr_bidding_data_exclusion.BiddingDataExclusion = proto.Field(
         proto.MESSAGE,
@@ -138,7 +145,9 @@ class BiddingDataExclusionOperation(proto.Message):
         message=gagr_bidding_data_exclusion.BiddingDataExclusion,
     )
     remove: str = proto.Field(
-        proto.STRING, number=3, oneof="operation",
+        proto.STRING,
+        number=3,
+        oneof="operation",
     )
 
 
@@ -156,12 +165,16 @@ class MutateBiddingDataExclusionsResponse(proto.Message):
     """
 
     partial_failure_error: status_pb2.Status = proto.Field(
-        proto.MESSAGE, number=3, message=status_pb2.Status,
+        proto.MESSAGE,
+        number=3,
+        message=status_pb2.Status,
     )
     results: MutableSequence[
         "MutateBiddingDataExclusionsResult"
     ] = proto.RepeatedField(
-        proto.MESSAGE, number=2, message="MutateBiddingDataExclusionsResult",
+        proto.MESSAGE,
+        number=2,
+        message="MutateBiddingDataExclusionsResult",
     )
 
 
@@ -177,12 +190,15 @@ class MutateBiddingDataExclusionsResult(proto.Message):
     """
 
     resource_name: str = proto.Field(
-        proto.STRING, number=1,
+        proto.STRING,
+        number=1,
     )
-    bidding_data_exclusion: gagr_bidding_data_exclusion.BiddingDataExclusion = proto.Field(
-        proto.MESSAGE,
-        number=2,
-        message=gagr_bidding_data_exclusion.BiddingDataExclusion,
+    bidding_data_exclusion: gagr_bidding_data_exclusion.BiddingDataExclusion = (
+        proto.Field(
+            proto.MESSAGE,
+            number=2,
+            message=gagr_bidding_data_exclusion.BiddingDataExclusion,
+        )
     )
 
 

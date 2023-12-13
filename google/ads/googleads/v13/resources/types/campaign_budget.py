@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-# Copyright 2022 Google LLC
+# Copyright 2023 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -27,7 +27,9 @@ from google.ads.googleads.v13.enums.types import budget_type
 __protobuf__ = proto.module(
     package="google.ads.googleads.v13.resources",
     marshal="google.ads.googleads.v13",
-    manifest={"CampaignBudget",},
+    manifest={
+        "CampaignBudget",
+    },
 )
 
 
@@ -43,6 +45,7 @@ class CampaignBudget(proto.Message):
             ``customers/{customer_id}/campaignBudgets/{campaign_budget_id}``
         id (int):
             Output only. The ID of the campaign budget.
+
             A campaign budget is created using the
             CampaignBudgetService create operation and is
             assigned a budget ID. A budget ID can be shared
@@ -53,6 +56,7 @@ class CampaignBudget(proto.Message):
             This field is a member of `oneof`_ ``_id``.
         name (str):
             The name of the campaign budget.
+
             When creating a campaign budget through
             CampaignBudgetService, every explicitly shared
             campaign budget must have a non-null, non-empty
@@ -92,6 +96,7 @@ class CampaignBudget(proto.Message):
             Specifies whether the budget is explicitly
             shared. Defaults to true if unspecified in a
             create operation.
+
             If true, the budget was created with the purpose
             of sharing across one or more campaigns.
 
@@ -129,6 +134,7 @@ class CampaignBudget(proto.Message):
             set to the budget amount. Amount is specified in
             micros, where one million is equivalent to one
             currency unit.
+
             This field is read-only.
 
             This field is a member of `oneof`_ ``_recommended_budget_amount_micros``.
@@ -155,6 +161,7 @@ class CampaignBudget(proto.Message):
             Output only. The estimated change in weekly
             interactions if the recommended budget is
             applied.
+
             This field is read-only.
 
             This field is a member of `oneof`_ ``_recommended_budget_estimated_change_weekly_interactions``.
@@ -179,22 +186,33 @@ class CampaignBudget(proto.Message):
     """
 
     resource_name: str = proto.Field(
-        proto.STRING, number=1,
+        proto.STRING,
+        number=1,
     )
     id: int = proto.Field(
-        proto.INT64, number=19, optional=True,
+        proto.INT64,
+        number=19,
+        optional=True,
     )
     name: str = proto.Field(
-        proto.STRING, number=20, optional=True,
+        proto.STRING,
+        number=20,
+        optional=True,
     )
     amount_micros: int = proto.Field(
-        proto.INT64, number=21, optional=True,
+        proto.INT64,
+        number=21,
+        optional=True,
     )
     total_amount_micros: int = proto.Field(
-        proto.INT64, number=22, optional=True,
+        proto.INT64,
+        number=22,
+        optional=True,
     )
     status: budget_status.BudgetStatusEnum.BudgetStatus = proto.Field(
-        proto.ENUM, number=6, enum=budget_status.BudgetStatusEnum.BudgetStatus,
+        proto.ENUM,
+        number=6,
+        enum=budget_status.BudgetStatusEnum.BudgetStatus,
     )
     delivery_method: budget_delivery_method.BudgetDeliveryMethodEnum.BudgetDeliveryMethod = proto.Field(
         proto.ENUM,
@@ -202,37 +220,58 @@ class CampaignBudget(proto.Message):
         enum=budget_delivery_method.BudgetDeliveryMethodEnum.BudgetDeliveryMethod,
     )
     explicitly_shared: bool = proto.Field(
-        proto.BOOL, number=23, optional=True,
+        proto.BOOL,
+        number=23,
+        optional=True,
     )
     reference_count: int = proto.Field(
-        proto.INT64, number=24, optional=True,
+        proto.INT64,
+        number=24,
+        optional=True,
     )
     has_recommended_budget: bool = proto.Field(
-        proto.BOOL, number=25, optional=True,
+        proto.BOOL,
+        number=25,
+        optional=True,
     )
     recommended_budget_amount_micros: int = proto.Field(
-        proto.INT64, number=26, optional=True,
+        proto.INT64,
+        number=26,
+        optional=True,
     )
     period: budget_period.BudgetPeriodEnum.BudgetPeriod = proto.Field(
-        proto.ENUM, number=13, enum=budget_period.BudgetPeriodEnum.BudgetPeriod,
+        proto.ENUM,
+        number=13,
+        enum=budget_period.BudgetPeriodEnum.BudgetPeriod,
     )
     recommended_budget_estimated_change_weekly_clicks: int = proto.Field(
-        proto.INT64, number=27, optional=True,
+        proto.INT64,
+        number=27,
+        optional=True,
     )
     recommended_budget_estimated_change_weekly_cost_micros: int = proto.Field(
-        proto.INT64, number=28, optional=True,
+        proto.INT64,
+        number=28,
+        optional=True,
     )
     recommended_budget_estimated_change_weekly_interactions: int = proto.Field(
-        proto.INT64, number=29, optional=True,
+        proto.INT64,
+        number=29,
+        optional=True,
     )
     recommended_budget_estimated_change_weekly_views: int = proto.Field(
-        proto.INT64, number=30, optional=True,
+        proto.INT64,
+        number=30,
+        optional=True,
     )
     type_: budget_type.BudgetTypeEnum.BudgetType = proto.Field(
-        proto.ENUM, number=18, enum=budget_type.BudgetTypeEnum.BudgetType,
+        proto.ENUM,
+        number=18,
+        enum=budget_type.BudgetTypeEnum.BudgetType,
     )
     aligned_bidding_strategy_id: int = proto.Field(
-        proto.INT64, number=31,
+        proto.INT64,
+        number=31,
     )
 
 

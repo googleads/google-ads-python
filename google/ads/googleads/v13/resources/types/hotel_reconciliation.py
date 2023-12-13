@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-# Copyright 2022 Google LLC
+# Copyright 2023 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -24,7 +24,9 @@ from google.ads.googleads.v13.enums.types import hotel_reconciliation_status
 __protobuf__ = proto.module(
     package="google.ads.googleads.v13.resources",
     marshal="google.ads.googleads.v13",
-    manifest={"HotelReconciliation",},
+    manifest={
+        "HotelReconciliation",
+    },
 )
 
 
@@ -101,34 +103,44 @@ class HotelReconciliation(proto.Message):
     """
 
     resource_name: str = proto.Field(
-        proto.STRING, number=1,
+        proto.STRING,
+        number=1,
     )
     commission_id: str = proto.Field(
-        proto.STRING, number=2,
+        proto.STRING,
+        number=2,
     )
     order_id: str = proto.Field(
-        proto.STRING, number=3,
+        proto.STRING,
+        number=3,
     )
     campaign: str = proto.Field(
-        proto.STRING, number=11,
+        proto.STRING,
+        number=11,
     )
     hotel_center_id: int = proto.Field(
-        proto.INT64, number=4,
+        proto.INT64,
+        number=4,
     )
     hotel_id: str = proto.Field(
-        proto.STRING, number=5,
+        proto.STRING,
+        number=5,
     )
     check_in_date: str = proto.Field(
-        proto.STRING, number=6,
+        proto.STRING,
+        number=6,
     )
     check_out_date: str = proto.Field(
-        proto.STRING, number=7,
+        proto.STRING,
+        number=7,
     )
     reconciled_value_micros: int = proto.Field(
-        proto.INT64, number=8,
+        proto.INT64,
+        number=8,
     )
     billed: bool = proto.Field(
-        proto.BOOL, number=9,
+        proto.BOOL,
+        number=9,
     )
     status: hotel_reconciliation_status.HotelReconciliationStatusEnum.HotelReconciliationStatus = proto.Field(
         proto.ENUM,

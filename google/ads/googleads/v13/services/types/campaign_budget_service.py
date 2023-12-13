@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-# Copyright 2022 Google LLC
+# Copyright 2023 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -68,18 +68,23 @@ class MutateCampaignBudgetsRequest(proto.Message):
     """
 
     customer_id: str = proto.Field(
-        proto.STRING, number=1,
+        proto.STRING,
+        number=1,
     )
     operations: MutableSequence[
         "CampaignBudgetOperation"
     ] = proto.RepeatedField(
-        proto.MESSAGE, number=2, message="CampaignBudgetOperation",
+        proto.MESSAGE,
+        number=2,
+        message="CampaignBudgetOperation",
     )
     partial_failure: bool = proto.Field(
-        proto.BOOL, number=3,
+        proto.BOOL,
+        number=3,
     )
     validate_only: bool = proto.Field(
-        proto.BOOL, number=4,
+        proto.BOOL,
+        number=4,
     )
     response_content_type: gage_response_content_type.ResponseContentTypeEnum.ResponseContentType = proto.Field(
         proto.ENUM,
@@ -123,7 +128,9 @@ class CampaignBudgetOperation(proto.Message):
     """
 
     update_mask: field_mask_pb2.FieldMask = proto.Field(
-        proto.MESSAGE, number=4, message=field_mask_pb2.FieldMask,
+        proto.MESSAGE,
+        number=4,
+        message=field_mask_pb2.FieldMask,
     )
     create: gagr_campaign_budget.CampaignBudget = proto.Field(
         proto.MESSAGE,
@@ -138,7 +145,9 @@ class CampaignBudgetOperation(proto.Message):
         message=gagr_campaign_budget.CampaignBudget,
     )
     remove: str = proto.Field(
-        proto.STRING, number=3, oneof="operation",
+        proto.STRING,
+        number=3,
+        oneof="operation",
     )
 
 
@@ -156,12 +165,16 @@ class MutateCampaignBudgetsResponse(proto.Message):
     """
 
     partial_failure_error: status_pb2.Status = proto.Field(
-        proto.MESSAGE, number=3, message=status_pb2.Status,
+        proto.MESSAGE,
+        number=3,
+        message=status_pb2.Status,
     )
     results: MutableSequence[
         "MutateCampaignBudgetResult"
     ] = proto.RepeatedField(
-        proto.MESSAGE, number=2, message="MutateCampaignBudgetResult",
+        proto.MESSAGE,
+        number=2,
+        message="MutateCampaignBudgetResult",
     )
 
 
@@ -177,10 +190,13 @@ class MutateCampaignBudgetResult(proto.Message):
     """
 
     resource_name: str = proto.Field(
-        proto.STRING, number=1,
+        proto.STRING,
+        number=1,
     )
     campaign_budget: gagr_campaign_budget.CampaignBudget = proto.Field(
-        proto.MESSAGE, number=2, message=gagr_campaign_budget.CampaignBudget,
+        proto.MESSAGE,
+        number=2,
+        message=gagr_campaign_budget.CampaignBudget,
     )
 
 

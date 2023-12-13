@@ -83,14 +83,12 @@ class CustomInterestOperation(proto.Message):
             fields are modified in an update.
         create (google.ads.googleads.v14.resources.types.CustomInterest):
             Create operation: No resource name is
-            expected for the new custom
-            interest.
+            expected for the new custom interest.
 
             This field is a member of `oneof`_ ``operation``.
         update (google.ads.googleads.v14.resources.types.CustomInterest):
             Update operation: The custom interest is
-            expected to have a valid
-            resource name.
+            expected to have a valid resource name.
 
             This field is a member of `oneof`_ ``operation``.
     """

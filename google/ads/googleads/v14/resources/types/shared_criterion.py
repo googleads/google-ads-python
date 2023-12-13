@@ -53,6 +53,7 @@ class SharedCriterion(proto.Message):
             This field is a member of `oneof`_ ``_shared_set``.
         criterion_id (int):
             Output only. The ID of the criterion.
+
             This field is ignored for mutates.
 
             This field is a member of `oneof`_ ``_criterion_id``.

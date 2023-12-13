@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-# Copyright 2022 Google LLC
+# Copyright 2023 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -52,15 +52,19 @@ class MutateCustomInterestsRequest(proto.Message):
     """
 
     customer_id: str = proto.Field(
-        proto.STRING, number=1,
+        proto.STRING,
+        number=1,
     )
     operations: MutableSequence[
         "CustomInterestOperation"
     ] = proto.RepeatedField(
-        proto.MESSAGE, number=2, message="CustomInterestOperation",
+        proto.MESSAGE,
+        number=2,
+        message="CustomInterestOperation",
     )
     validate_only: bool = proto.Field(
-        proto.BOOL, number=4,
+        proto.BOOL,
+        number=4,
     )
 
 
@@ -90,7 +94,9 @@ class CustomInterestOperation(proto.Message):
     """
 
     update_mask: field_mask_pb2.FieldMask = proto.Field(
-        proto.MESSAGE, number=4, message=field_mask_pb2.FieldMask,
+        proto.MESSAGE,
+        number=4,
+        message=field_mask_pb2.FieldMask,
     )
     create: custom_interest.CustomInterest = proto.Field(
         proto.MESSAGE,
@@ -116,7 +122,9 @@ class MutateCustomInterestsResponse(proto.Message):
     results: MutableSequence[
         "MutateCustomInterestResult"
     ] = proto.RepeatedField(
-        proto.MESSAGE, number=2, message="MutateCustomInterestResult",
+        proto.MESSAGE,
+        number=2,
+        message="MutateCustomInterestResult",
     )
 
 
@@ -128,7 +136,8 @@ class MutateCustomInterestResult(proto.Message):
     """
 
     resource_name: str = proto.Field(
-        proto.STRING, number=1,
+        proto.STRING,
+        number=1,
     )
 
 

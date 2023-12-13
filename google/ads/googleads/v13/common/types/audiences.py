@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-# Copyright 2022 Google LLC
+# Copyright 2023 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -83,10 +83,16 @@ class AudienceDimension(proto.Message):
     """
 
     age: "AgeDimension" = proto.Field(
-        proto.MESSAGE, number=1, oneof="dimension", message="AgeDimension",
+        proto.MESSAGE,
+        number=1,
+        oneof="dimension",
+        message="AgeDimension",
     )
     gender: "GenderDimension" = proto.Field(
-        proto.MESSAGE, number=2, oneof="dimension", message="GenderDimension",
+        proto.MESSAGE,
+        number=2,
+        oneof="dimension",
+        message="GenderDimension",
     )
     household_income: "HouseholdIncomeDimension" = proto.Field(
         proto.MESSAGE,
@@ -118,7 +124,9 @@ class AudienceExclusionDimension(proto.Message):
     """
 
     exclusions: MutableSequence["ExclusionSegment"] = proto.RepeatedField(
-        proto.MESSAGE, number=1, message="ExclusionSegment",
+        proto.MESSAGE,
+        number=1,
+        message="ExclusionSegment",
     )
 
 
@@ -134,7 +142,10 @@ class ExclusionSegment(proto.Message):
     """
 
     user_list: "UserListSegment" = proto.Field(
-        proto.MESSAGE, number=1, oneof="segment", message="UserListSegment",
+        proto.MESSAGE,
+        number=1,
+        oneof="segment",
+        message="UserListSegment",
     )
 
 
@@ -153,10 +164,14 @@ class AgeDimension(proto.Message):
     """
 
     age_ranges: MutableSequence["AgeSegment"] = proto.RepeatedField(
-        proto.MESSAGE, number=1, message="AgeSegment",
+        proto.MESSAGE,
+        number=1,
+        message="AgeSegment",
     )
     include_undetermined: bool = proto.Field(
-        proto.BOOL, number=2, optional=True,
+        proto.BOOL,
+        number=2,
+        optional=True,
     )
 
 
@@ -180,10 +195,14 @@ class AgeSegment(proto.Message):
     """
 
     min_age: int = proto.Field(
-        proto.INT32, number=1, optional=True,
+        proto.INT32,
+        number=1,
+        optional=True,
     )
     max_age: int = proto.Field(
-        proto.INT32, number=2, optional=True,
+        proto.INT32,
+        number=2,
+        optional=True,
     )
 
 
@@ -203,10 +222,14 @@ class GenderDimension(proto.Message):
     genders: MutableSequence[
         gender_type.GenderTypeEnum.GenderType
     ] = proto.RepeatedField(
-        proto.ENUM, number=1, enum=gender_type.GenderTypeEnum.GenderType,
+        proto.ENUM,
+        number=1,
+        enum=gender_type.GenderTypeEnum.GenderType,
     )
     include_undetermined: bool = proto.Field(
-        proto.BOOL, number=2, optional=True,
+        proto.BOOL,
+        number=2,
+        optional=True,
     )
 
 
@@ -233,7 +256,9 @@ class HouseholdIncomeDimension(proto.Message):
         enum=income_range_type.IncomeRangeTypeEnum.IncomeRangeType,
     )
     include_undetermined: bool = proto.Field(
-        proto.BOOL, number=2, optional=True,
+        proto.BOOL,
+        number=2,
+        optional=True,
     )
 
 
@@ -260,7 +285,9 @@ class ParentalStatusDimension(proto.Message):
         enum=parental_status_type.ParentalStatusTypeEnum.ParentalStatusType,
     )
     include_undetermined: bool = proto.Field(
-        proto.BOOL, number=2, optional=True,
+        proto.BOOL,
+        number=2,
+        optional=True,
     )
 
 
@@ -275,7 +302,9 @@ class AudienceSegmentDimension(proto.Message):
     """
 
     segments: MutableSequence["AudienceSegment"] = proto.RepeatedField(
-        proto.MESSAGE, number=1, message="AudienceSegment",
+        proto.MESSAGE,
+        number=1,
+        message="AudienceSegment",
     )
 
 
@@ -312,13 +341,22 @@ class AudienceSegment(proto.Message):
     """
 
     user_list: "UserListSegment" = proto.Field(
-        proto.MESSAGE, number=1, oneof="segment", message="UserListSegment",
+        proto.MESSAGE,
+        number=1,
+        oneof="segment",
+        message="UserListSegment",
     )
     user_interest: "UserInterestSegment" = proto.Field(
-        proto.MESSAGE, number=2, oneof="segment", message="UserInterestSegment",
+        proto.MESSAGE,
+        number=2,
+        oneof="segment",
+        message="UserInterestSegment",
     )
     life_event: "LifeEventSegment" = proto.Field(
-        proto.MESSAGE, number=3, oneof="segment", message="LifeEventSegment",
+        proto.MESSAGE,
+        number=3,
+        oneof="segment",
+        message="LifeEventSegment",
     )
     detailed_demographic: "DetailedDemographicSegment" = proto.Field(
         proto.MESSAGE,
@@ -350,7 +388,9 @@ class UserListSegment(proto.Message):
     """
 
     user_list: str = proto.Field(
-        proto.STRING, number=1, optional=True,
+        proto.STRING,
+        number=1,
+        optional=True,
     )
 
 
@@ -366,7 +406,9 @@ class UserInterestSegment(proto.Message):
     """
 
     user_interest_category: str = proto.Field(
-        proto.STRING, number=1, optional=True,
+        proto.STRING,
+        number=1,
+        optional=True,
     )
 
 
@@ -382,7 +424,9 @@ class LifeEventSegment(proto.Message):
     """
 
     life_event: str = proto.Field(
-        proto.STRING, number=1, optional=True,
+        proto.STRING,
+        number=1,
+        optional=True,
     )
 
 
@@ -398,7 +442,9 @@ class DetailedDemographicSegment(proto.Message):
     """
 
     detailed_demographic: str = proto.Field(
-        proto.STRING, number=1, optional=True,
+        proto.STRING,
+        number=1,
+        optional=True,
     )
 
 
@@ -414,7 +460,9 @@ class CustomAudienceSegment(proto.Message):
     """
 
     custom_audience: str = proto.Field(
-        proto.STRING, number=1, optional=True,
+        proto.STRING,
+        number=1,
+        optional=True,
     )
 
 

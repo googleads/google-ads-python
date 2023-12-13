@@ -110,14 +110,13 @@ class CampaignExtensionSettingOperation(proto.Message):
             fields are modified in an update.
         create (google.ads.googleads.v14.resources.types.CampaignExtensionSetting):
             Create operation: No resource name is
-            expected for the new campaign
-            extension setting.
+            expected for the new campaign extension setting.
 
             This field is a member of `oneof`_ ``operation``.
         update (google.ads.googleads.v14.resources.types.CampaignExtensionSetting):
             Update operation: The campaign extension
-            setting is expected to have a
-            valid resource name.
+            setting is expected to have a valid resource
+            name.
 
             This field is a member of `oneof`_ ``operation``.
         remove (str):

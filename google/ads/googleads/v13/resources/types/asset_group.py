@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-# Copyright 2022 Google LLC
+# Copyright 2023 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -26,7 +26,9 @@ from google.ads.googleads.v13.enums.types import asset_group_status
 __protobuf__ = proto.module(
     package="google.ads.googleads.v13.resources",
     marshal="google.ads.googleads.v13",
-    manifest={"AssetGroup",},
+    manifest={
+        "AssetGroup",
+    },
 )
 
 
@@ -78,36 +80,48 @@ class AssetGroup(proto.Message):
     """
 
     resource_name: str = proto.Field(
-        proto.STRING, number=1,
+        proto.STRING,
+        number=1,
     )
     id: int = proto.Field(
-        proto.INT64, number=9,
+        proto.INT64,
+        number=9,
     )
     campaign: str = proto.Field(
-        proto.STRING, number=2,
+        proto.STRING,
+        number=2,
     )
     name: str = proto.Field(
-        proto.STRING, number=3,
+        proto.STRING,
+        number=3,
     )
     final_urls: MutableSequence[str] = proto.RepeatedField(
-        proto.STRING, number=4,
+        proto.STRING,
+        number=4,
     )
     final_mobile_urls: MutableSequence[str] = proto.RepeatedField(
-        proto.STRING, number=5,
+        proto.STRING,
+        number=5,
     )
-    status: asset_group_status.AssetGroupStatusEnum.AssetGroupStatus = proto.Field(
-        proto.ENUM,
-        number=6,
-        enum=asset_group_status.AssetGroupStatusEnum.AssetGroupStatus,
+    status: asset_group_status.AssetGroupStatusEnum.AssetGroupStatus = (
+        proto.Field(
+            proto.ENUM,
+            number=6,
+            enum=asset_group_status.AssetGroupStatusEnum.AssetGroupStatus,
+        )
     )
     path1: str = proto.Field(
-        proto.STRING, number=7,
+        proto.STRING,
+        number=7,
     )
     path2: str = proto.Field(
-        proto.STRING, number=8,
+        proto.STRING,
+        number=8,
     )
     ad_strength: gage_ad_strength.AdStrengthEnum.AdStrength = proto.Field(
-        proto.ENUM, number=10, enum=gage_ad_strength.AdStrengthEnum.AdStrength,
+        proto.ENUM,
+        number=10,
+        enum=gage_ad_strength.AdStrengthEnum.AdStrength,
     )
 
 

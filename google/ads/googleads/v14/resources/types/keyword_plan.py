@@ -51,6 +51,7 @@ class KeywordPlan(proto.Message):
             This field is a member of `oneof`_ ``_id``.
         name (str):
             The name of the keyword plan.
+
             This field is required and should not be empty
             when creating new keyword plans.
 

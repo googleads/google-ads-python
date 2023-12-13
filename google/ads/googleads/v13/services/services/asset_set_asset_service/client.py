@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-# Copyright 2022 Google LLC
+# Copyright 2023 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -26,7 +26,6 @@ from typing import (
     Union,
     cast,
 )
-import pkg_resources
 
 from google.api_core import client_options as client_options_lib
 from google.api_core import gapic_v1
@@ -36,6 +35,8 @@ from google.auth.transport import mtls  # type: ignore
 from google.auth.transport.grpc import SslCredentials  # type: ignore
 from google.auth.exceptions import MutualTLSChannelError  # type: ignore
 from google.oauth2 import service_account  # type: ignore
+
+from google.ads.googleads.v13 import gapic_version as package_version
 
 try:
     OptionalRetry = Union[retries.Retry, gapic_v1.method._MethodDefault]
@@ -62,7 +63,8 @@ class AssetSetAssetServiceClientMeta(type):
     _transport_registry["grpc"] = AssetSetAssetServiceGrpcTransport
 
     def get_transport_class(
-        cls, label: Optional[str] = None,
+        cls,
+        label: Optional[str] = None,
     ) -> Type[AssetSetAssetServiceTransport]:
         """Returns an appropriate transport class.
 
@@ -185,10 +187,14 @@ class AssetSetAssetServiceClient(metaclass=AssetSetAssetServiceClientMeta):
         self.transport.close()
 
     @staticmethod
-    def asset_path(customer_id: str, asset_id: str,) -> str:
+    def asset_path(
+        customer_id: str,
+        asset_id: str,
+    ) -> str:
         """Returns a fully-qualified asset string."""
         return "customers/{customer_id}/assets/{asset_id}".format(
-            customer_id=customer_id, asset_id=asset_id,
+            customer_id=customer_id,
+            asset_id=asset_id,
         )
 
     @staticmethod
@@ -200,10 +206,14 @@ class AssetSetAssetServiceClient(metaclass=AssetSetAssetServiceClientMeta):
         return m.groupdict() if m else {}
 
     @staticmethod
-    def asset_set_path(customer_id: str, asset_set_id: str,) -> str:
+    def asset_set_path(
+        customer_id: str,
+        asset_set_id: str,
+    ) -> str:
         """Returns a fully-qualified asset_set string."""
         return "customers/{customer_id}/assetSets/{asset_set_id}".format(
-            customer_id=customer_id, asset_set_id=asset_set_id,
+            customer_id=customer_id,
+            asset_set_id=asset_set_id,
         )
 
     @staticmethod
@@ -217,7 +227,9 @@ class AssetSetAssetServiceClient(metaclass=AssetSetAssetServiceClientMeta):
 
     @staticmethod
     def asset_set_asset_path(
-        customer_id: str, asset_set_id: str, asset_id: str,
+        customer_id: str,
+        asset_set_id: str,
+        asset_id: str,
     ) -> str:
         """Returns a fully-qualified asset_set_asset string."""
         return "customers/{customer_id}/assetSetAssets/{asset_set_id}~{asset_id}".format(
@@ -236,7 +248,9 @@ class AssetSetAssetServiceClient(metaclass=AssetSetAssetServiceClientMeta):
         return m.groupdict() if m else {}
 
     @staticmethod
-    def common_billing_account_path(billing_account: str,) -> str:
+    def common_billing_account_path(
+        billing_account: str,
+    ) -> str:
         """Returns a fully-qualified billing_account string."""
         return "billingAccounts/{billing_account}".format(
             billing_account=billing_account,
@@ -249,9 +263,13 @@ class AssetSetAssetServiceClient(metaclass=AssetSetAssetServiceClientMeta):
         return m.groupdict() if m else {}
 
     @staticmethod
-    def common_folder_path(folder: str,) -> str:
+    def common_folder_path(
+        folder: str,
+    ) -> str:
         """Returns a fully-qualified folder string."""
-        return "folders/{folder}".format(folder=folder,)
+        return "folders/{folder}".format(
+            folder=folder,
+        )
 
     @staticmethod
     def parse_common_folder_path(path: str) -> Dict[str, str]:
@@ -260,9 +278,13 @@ class AssetSetAssetServiceClient(metaclass=AssetSetAssetServiceClientMeta):
         return m.groupdict() if m else {}
 
     @staticmethod
-    def common_organization_path(organization: str,) -> str:
+    def common_organization_path(
+        organization: str,
+    ) -> str:
         """Returns a fully-qualified organization string."""
-        return "organizations/{organization}".format(organization=organization,)
+        return "organizations/{organization}".format(
+            organization=organization,
+        )
 
     @staticmethod
     def parse_common_organization_path(path: str) -> Dict[str, str]:
@@ -271,9 +293,13 @@ class AssetSetAssetServiceClient(metaclass=AssetSetAssetServiceClientMeta):
         return m.groupdict() if m else {}
 
     @staticmethod
-    def common_project_path(project: str,) -> str:
+    def common_project_path(
+        project: str,
+    ) -> str:
         """Returns a fully-qualified project string."""
-        return "projects/{project}".format(project=project,)
+        return "projects/{project}".format(
+            project=project,
+        )
 
     @staticmethod
     def parse_common_project_path(path: str) -> Dict[str, str]:
@@ -282,10 +308,14 @@ class AssetSetAssetServiceClient(metaclass=AssetSetAssetServiceClientMeta):
         return m.groupdict() if m else {}
 
     @staticmethod
-    def common_location_path(project: str, location: str,) -> str:
+    def common_location_path(
+        project: str,
+        location: str,
+    ) -> str:
         """Returns a fully-qualified location string."""
         return "projects/{project}/locations/{location}".format(
-            project=project, location=location,
+            project=project,
+            location=location,
         )
 
     @staticmethod
@@ -515,19 +545,19 @@ class AssetSetAssetServiceClient(metaclass=AssetSetAssetServiceClientMeta):
 
         # Send the request.
         response = rpc(
-            request, retry=retry, timeout=timeout, metadata=metadata,
+            request,
+            retry=retry,
+            timeout=timeout,
+            metadata=metadata,
         )
 
         # Done; return the response.
         return response
 
 
-try:
-    DEFAULT_CLIENT_INFO = gapic_v1.client_info.ClientInfo(
-        gapic_version=pkg_resources.get_distribution("google-ads",).version,
-    )
-except pkg_resources.DistributionNotFound:
-    DEFAULT_CLIENT_INFO = gapic_v1.client_info.ClientInfo()
+DEFAULT_CLIENT_INFO = gapic_v1.client_info.ClientInfo(
+    gapic_version=package_version.__version__
+)
 
 
 __all__ = ("AssetSetAssetServiceClient",)

@@ -42,6 +42,7 @@ class CampaignGroup(proto.Message):
             Output only. The ID of the campaign group.
         name (str):
             The name of the campaign group.
+
             This field is required and should not be empty
             when creating new campaign groups.
 
@@ -50,6 +51,7 @@ class CampaignGroup(proto.Message):
             (code point 0xD) characters.
         status (google.ads.googleads.v14.enums.types.CampaignGroupStatusEnum.CampaignGroupStatus):
             The status of the campaign group.
+
             When a new campaign group is added, the status
             defaults to ENABLED.
     """

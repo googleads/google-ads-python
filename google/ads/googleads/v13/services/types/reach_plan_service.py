@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-# Copyright 2022 Google LLC
+# Copyright 2023 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -80,7 +80,9 @@ class ListPlannableLocationsResponse(proto.Message):
     plannable_locations: MutableSequence[
         "PlannableLocation"
     ] = proto.RepeatedField(
-        proto.MESSAGE, number=1, message="PlannableLocation",
+        proto.MESSAGE,
+        number=1,
+        message="PlannableLocation",
     )
 
 
@@ -102,7 +104,7 @@ class PlannableLocation(proto.Message):
             If present, will always be a GeoTargetConstant ID.
             Additional information such as country name is provided by
             [ReachPlanService.ListPlannableLocations][google.ads.googleads.v13.services.ReachPlanService.ListPlannableLocations]
-            or [GoogleAdsService.Search/SearchStream][].
+            or GoogleAdsService.Search/SearchStream.
 
             This field is a member of `oneof`_ ``_parent_country_id``.
         country_code (str):
@@ -113,25 +115,35 @@ class PlannableLocation(proto.Message):
         location_type (str):
             The location's type. Location types correspond to
             target_type returned by searching location type in
-            [GoogleAdsService.Search/SearchStream][].
+            GoogleAdsService.Search/SearchStream.
 
             This field is a member of `oneof`_ ``_location_type``.
     """
 
     id: str = proto.Field(
-        proto.STRING, number=4, optional=True,
+        proto.STRING,
+        number=4,
+        optional=True,
     )
     name: str = proto.Field(
-        proto.STRING, number=5, optional=True,
+        proto.STRING,
+        number=5,
+        optional=True,
     )
     parent_country_id: int = proto.Field(
-        proto.INT64, number=6, optional=True,
+        proto.INT64,
+        number=6,
+        optional=True,
     )
     country_code: str = proto.Field(
-        proto.STRING, number=7, optional=True,
+        proto.STRING,
+        number=7,
+        optional=True,
     )
     location_type: str = proto.Field(
-        proto.STRING, number=8, optional=True,
+        proto.STRING,
+        number=8,
+        optional=True,
     )
 
 
@@ -145,7 +157,8 @@ class ListPlannableProductsRequest(proto.Message):
     """
 
     plannable_location_id: str = proto.Field(
-        proto.STRING, number=2,
+        proto.STRING,
+        number=2,
     )
 
 
@@ -158,7 +171,9 @@ class ListPlannableProductsResponse(proto.Message):
     """
 
     product_metadata: MutableSequence["ProductMetadata"] = proto.RepeatedField(
-        proto.MESSAGE, number=1, message="ProductMetadata",
+        proto.MESSAGE,
+        number=1,
+        message="ProductMetadata",
     )
 
 
@@ -182,13 +197,18 @@ class ProductMetadata(proto.Message):
     """
 
     plannable_product_code: str = proto.Field(
-        proto.STRING, number=4, optional=True,
+        proto.STRING,
+        number=4,
+        optional=True,
     )
     plannable_product_name: str = proto.Field(
-        proto.STRING, number=3,
+        proto.STRING,
+        number=3,
     )
     plannable_targeting: "PlannableTargeting" = proto.Field(
-        proto.MESSAGE, number=2, message="PlannableTargeting",
+        proto.MESSAGE,
+        number=2,
+        message="PlannableTargeting",
     )
 
 
@@ -223,10 +243,14 @@ class PlannableTargeting(proto.Message):
         enum=reach_plan_age_range.ReachPlanAgeRangeEnum.ReachPlanAgeRange,
     )
     genders: MutableSequence[criteria.GenderInfo] = proto.RepeatedField(
-        proto.MESSAGE, number=2, message=criteria.GenderInfo,
+        proto.MESSAGE,
+        number=2,
+        message=criteria.GenderInfo,
     )
     devices: MutableSequence[criteria.DeviceInfo] = proto.RepeatedField(
-        proto.MESSAGE, number=3, message=criteria.DeviceInfo,
+        proto.MESSAGE,
+        number=3,
+        message=criteria.DeviceInfo,
     )
     networks: MutableSequence[
         reach_plan_network.ReachPlanNetworkEnum.ReachPlanNetwork
@@ -238,7 +262,9 @@ class PlannableTargeting(proto.Message):
     youtube_select_lineups: MutableSequence[
         "YouTubeSelectLineUp"
     ] = proto.RepeatedField(
-        proto.MESSAGE, number=5, message="YouTubeSelectLineUp",
+        proto.MESSAGE,
+        number=5,
+        message="YouTubeSelectLineUp",
     )
 
 
@@ -310,6 +336,7 @@ class GenerateReachForecastRequest(proto.Message):
             This is planned targeting: execution details
             might vary based on the advertising product,
             consult an implementation specialist.
+
             See specific metrics for details on how
             targeting affects them.
         planned_products (MutableSequence[google.ads.googleads.v13.services.types.PlannedProduct]):
@@ -327,22 +354,33 @@ class GenerateReachForecastRequest(proto.Message):
     """
 
     customer_id: str = proto.Field(
-        proto.STRING, number=1,
+        proto.STRING,
+        number=1,
     )
     currency_code: str = proto.Field(
-        proto.STRING, number=9, optional=True,
+        proto.STRING,
+        number=9,
+        optional=True,
     )
     campaign_duration: "CampaignDuration" = proto.Field(
-        proto.MESSAGE, number=3, message="CampaignDuration",
+        proto.MESSAGE,
+        number=3,
+        message="CampaignDuration",
     )
     cookie_frequency_cap: int = proto.Field(
-        proto.INT32, number=10, optional=True,
+        proto.INT32,
+        number=10,
+        optional=True,
     )
     cookie_frequency_cap_setting: "FrequencyCap" = proto.Field(
-        proto.MESSAGE, number=8, message="FrequencyCap",
+        proto.MESSAGE,
+        number=8,
+        message="FrequencyCap",
     )
     min_effective_frequency: int = proto.Field(
-        proto.INT32, number=11, optional=True,
+        proto.INT32,
+        number=11,
+        optional=True,
     )
     effective_frequency_limit: "EffectiveFrequencyLimit" = proto.Field(
         proto.MESSAGE,
@@ -351,16 +389,24 @@ class GenerateReachForecastRequest(proto.Message):
         message="EffectiveFrequencyLimit",
     )
     targeting: "Targeting" = proto.Field(
-        proto.MESSAGE, number=6, message="Targeting",
+        proto.MESSAGE,
+        number=6,
+        message="Targeting",
     )
     planned_products: MutableSequence["PlannedProduct"] = proto.RepeatedField(
-        proto.MESSAGE, number=7, message="PlannedProduct",
+        proto.MESSAGE,
+        number=7,
+        message="PlannedProduct",
     )
     forecast_metric_options: "ForecastMetricOptions" = proto.Field(
-        proto.MESSAGE, number=13, message="ForecastMetricOptions",
+        proto.MESSAGE,
+        number=13,
+        message="ForecastMetricOptions",
     )
     customer_reach_group: str = proto.Field(
-        proto.STRING, number=14, optional=True,
+        proto.STRING,
+        number=14,
+        optional=True,
     )
 
 
@@ -374,7 +420,8 @@ class EffectiveFrequencyLimit(proto.Message):
     """
 
     effective_frequency_breakdown_limit: int = proto.Field(
-        proto.INT32, number=1,
+        proto.INT32,
+        number=1,
     )
 
 
@@ -391,7 +438,8 @@ class FrequencyCap(proto.Message):
     """
 
     impressions: int = proto.Field(
-        proto.INT32, number=3,
+        proto.INT32,
+        number=3,
     )
     time_unit: frequency_cap_time_unit.FrequencyCapTimeUnitEnum.FrequencyCapTimeUnit = proto.Field(
         proto.ENUM,
@@ -454,29 +502,42 @@ class Targeting(proto.Message):
     """
 
     plannable_location_id: str = proto.Field(
-        proto.STRING, number=6, optional=True,
+        proto.STRING,
+        number=6,
+        optional=True,
     )
     plannable_location_ids: MutableSequence[str] = proto.RepeatedField(
-        proto.STRING, number=8,
+        proto.STRING,
+        number=8,
     )
-    age_range: reach_plan_age_range.ReachPlanAgeRangeEnum.ReachPlanAgeRange = proto.Field(
-        proto.ENUM,
-        number=2,
-        enum=reach_plan_age_range.ReachPlanAgeRangeEnum.ReachPlanAgeRange,
+    age_range: reach_plan_age_range.ReachPlanAgeRangeEnum.ReachPlanAgeRange = (
+        proto.Field(
+            proto.ENUM,
+            number=2,
+            enum=reach_plan_age_range.ReachPlanAgeRangeEnum.ReachPlanAgeRange,
+        )
     )
     genders: MutableSequence[criteria.GenderInfo] = proto.RepeatedField(
-        proto.MESSAGE, number=3, message=criteria.GenderInfo,
+        proto.MESSAGE,
+        number=3,
+        message=criteria.GenderInfo,
     )
     devices: MutableSequence[criteria.DeviceInfo] = proto.RepeatedField(
-        proto.MESSAGE, number=4, message=criteria.DeviceInfo,
+        proto.MESSAGE,
+        number=4,
+        message=criteria.DeviceInfo,
     )
-    network: reach_plan_network.ReachPlanNetworkEnum.ReachPlanNetwork = proto.Field(
-        proto.ENUM,
-        number=5,
-        enum=reach_plan_network.ReachPlanNetworkEnum.ReachPlanNetwork,
+    network: reach_plan_network.ReachPlanNetworkEnum.ReachPlanNetwork = (
+        proto.Field(
+            proto.ENUM,
+            number=5,
+            enum=reach_plan_network.ReachPlanNetworkEnum.ReachPlanNetwork,
+        )
     )
     audience_targeting: "AudienceTargeting" = proto.Field(
-        proto.MESSAGE, number=7, message="AudienceTargeting",
+        proto.MESSAGE,
+        number=7,
+        message="AudienceTargeting",
     )
 
 
@@ -501,10 +562,14 @@ class CampaignDuration(proto.Message):
     """
 
     duration_in_days: int = proto.Field(
-        proto.INT32, number=2, optional=True,
+        proto.INT32,
+        number=2,
+        optional=True,
     )
     date_range: dates.DateRange = proto.Field(
-        proto.MESSAGE, number=3, message=dates.DateRange,
+        proto.MESSAGE,
+        number=3,
+        message=dates.DateRange,
     )
 
 
@@ -534,13 +599,19 @@ class PlannedProduct(proto.Message):
     """
 
     plannable_product_code: str = proto.Field(
-        proto.STRING, number=3, optional=True,
+        proto.STRING,
+        number=3,
+        optional=True,
     )
     budget_micros: int = proto.Field(
-        proto.INT64, number=4, optional=True,
+        proto.INT64,
+        number=4,
+        optional=True,
     )
     advanced_product_targeting: "AdvancedProductTargeting" = proto.Field(
-        proto.MESSAGE, number=5, message="AdvancedProductTargeting",
+        proto.MESSAGE,
+        number=5,
+        message="AdvancedProductTargeting",
     )
 
 
@@ -555,10 +626,14 @@ class GenerateReachForecastResponse(proto.Message):
     """
 
     on_target_audience_metrics: "OnTargetAudienceMetrics" = proto.Field(
-        proto.MESSAGE, number=1, message="OnTargetAudienceMetrics",
+        proto.MESSAGE,
+        number=1,
+        message="OnTargetAudienceMetrics",
     )
     reach_curve: "ReachCurve" = proto.Field(
-        proto.MESSAGE, number=2, message="ReachCurve",
+        proto.MESSAGE,
+        number=2,
+        message="ReachCurve",
     )
 
 
@@ -570,7 +645,9 @@ class ReachCurve(proto.Message):
     """
 
     reach_forecasts: MutableSequence["ReachForecast"] = proto.RepeatedField(
-        proto.MESSAGE, number=1, message="ReachForecast",
+        proto.MESSAGE,
+        number=1,
+        message="ReachForecast",
     )
 
 
@@ -588,15 +665,20 @@ class ReachForecast(proto.Message):
     """
 
     cost_micros: int = proto.Field(
-        proto.INT64, number=5,
+        proto.INT64,
+        number=5,
     )
     forecast: "Forecast" = proto.Field(
-        proto.MESSAGE, number=2, message="Forecast",
+        proto.MESSAGE,
+        number=2,
+        message="Forecast",
     )
     planned_product_reach_forecasts: MutableSequence[
         "PlannedProductReachForecast"
     ] = proto.RepeatedField(
-        proto.MESSAGE, number=4, message="PlannedProductReachForecast",
+        proto.MESSAGE,
+        number=4,
+        message="PlannedProductReachForecast",
     )
 
 
@@ -682,36 +764,56 @@ class Forecast(proto.Message):
     """
 
     on_target_reach: int = proto.Field(
-        proto.INT64, number=5, optional=True,
+        proto.INT64,
+        number=5,
+        optional=True,
     )
     total_reach: int = proto.Field(
-        proto.INT64, number=6, optional=True,
+        proto.INT64,
+        number=6,
+        optional=True,
     )
     on_target_impressions: int = proto.Field(
-        proto.INT64, number=7, optional=True,
+        proto.INT64,
+        number=7,
+        optional=True,
     )
     total_impressions: int = proto.Field(
-        proto.INT64, number=8, optional=True,
+        proto.INT64,
+        number=8,
+        optional=True,
     )
     viewable_impressions: int = proto.Field(
-        proto.INT64, number=9, optional=True,
+        proto.INT64,
+        number=9,
+        optional=True,
     )
     effective_frequency_breakdowns: MutableSequence[
         "EffectiveFrequencyBreakdown"
     ] = proto.RepeatedField(
-        proto.MESSAGE, number=10, message="EffectiveFrequencyBreakdown",
+        proto.MESSAGE,
+        number=10,
+        message="EffectiveFrequencyBreakdown",
     )
     on_target_coview_reach: int = proto.Field(
-        proto.INT64, number=11, optional=True,
+        proto.INT64,
+        number=11,
+        optional=True,
     )
     total_coview_reach: int = proto.Field(
-        proto.INT64, number=12, optional=True,
+        proto.INT64,
+        number=12,
+        optional=True,
     )
     on_target_coview_impressions: int = proto.Field(
-        proto.INT64, number=13, optional=True,
+        proto.INT64,
+        number=13,
+        optional=True,
     )
     total_coview_impressions: int = proto.Field(
-        proto.INT64, number=14, optional=True,
+        proto.INT64,
+        number=14,
+        optional=True,
     )
 
 
@@ -735,13 +837,17 @@ class PlannedProductReachForecast(proto.Message):
     """
 
     plannable_product_code: str = proto.Field(
-        proto.STRING, number=1,
+        proto.STRING,
+        number=1,
     )
     cost_micros: int = proto.Field(
-        proto.INT64, number=2,
+        proto.INT64,
+        number=2,
     )
     planned_product_forecast: "PlannedProductForecast" = proto.Field(
-        proto.MESSAGE, number=3, message="PlannedProductForecast",
+        proto.MESSAGE,
+        number=3,
+        message="PlannedProductForecast",
     )
 
 
@@ -806,40 +912,56 @@ class PlannedProductForecast(proto.Message):
     """
 
     on_target_reach: int = proto.Field(
-        proto.INT64, number=1,
+        proto.INT64,
+        number=1,
     )
     total_reach: int = proto.Field(
-        proto.INT64, number=2,
+        proto.INT64,
+        number=2,
     )
     on_target_impressions: int = proto.Field(
-        proto.INT64, number=3,
+        proto.INT64,
+        number=3,
     )
     total_impressions: int = proto.Field(
-        proto.INT64, number=4,
+        proto.INT64,
+        number=4,
     )
     viewable_impressions: int = proto.Field(
-        proto.INT64, number=5, optional=True,
+        proto.INT64,
+        number=5,
+        optional=True,
     )
     on_target_coview_reach: int = proto.Field(
-        proto.INT64, number=6, optional=True,
+        proto.INT64,
+        number=6,
+        optional=True,
     )
     total_coview_reach: int = proto.Field(
-        proto.INT64, number=7, optional=True,
+        proto.INT64,
+        number=7,
+        optional=True,
     )
     on_target_coview_impressions: int = proto.Field(
-        proto.INT64, number=8, optional=True,
+        proto.INT64,
+        number=8,
+        optional=True,
     )
     total_coview_impressions: int = proto.Field(
-        proto.INT64, number=9, optional=True,
+        proto.INT64,
+        number=9,
+        optional=True,
     )
 
 
 class OnTargetAudienceMetrics(proto.Message):
-    r"""Audience metrics for the planned products.
-    These metrics consider the following targeting dimensions:
-    - Location
-    - PlannableAgeRange
-    - Gender
+    r"""Audience metrics for the planned products. These metrics consider
+    the following targeting dimensions:
+
+    -  Location
+    -  PlannableAgeRange
+    -  Gender
+    -  AudienceTargeting (only for youtube_audience_size)
 
     .. _oneof: https://proto-plus-python.readthedocs.io/en/stable/fields.html#oneofs-mutually-exclusive-fields
 
@@ -857,10 +979,14 @@ class OnTargetAudienceMetrics(proto.Message):
     """
 
     youtube_audience_size: int = proto.Field(
-        proto.INT64, number=3, optional=True,
+        proto.INT64,
+        number=3,
+        optional=True,
     )
     census_audience_size: int = proto.Field(
-        proto.INT64, number=4, optional=True,
+        proto.INT64,
+        number=4,
+        optional=True,
     )
 
 
@@ -903,19 +1029,26 @@ class EffectiveFrequencyBreakdown(proto.Message):
     """
 
     effective_frequency: int = proto.Field(
-        proto.INT32, number=1,
+        proto.INT32,
+        number=1,
     )
     on_target_reach: int = proto.Field(
-        proto.INT64, number=2,
+        proto.INT64,
+        number=2,
     )
     total_reach: int = proto.Field(
-        proto.INT64, number=3,
+        proto.INT64,
+        number=3,
     )
     effective_coview_reach: int = proto.Field(
-        proto.INT64, number=4, optional=True,
+        proto.INT64,
+        number=4,
+        optional=True,
     )
     on_target_effective_coview_reach: int = proto.Field(
-        proto.INT64, number=5, optional=True,
+        proto.INT64,
+        number=5,
+        optional=True,
     )
 
 
@@ -928,7 +1061,8 @@ class ForecastMetricOptions(proto.Message):
     """
 
     include_coview: bool = proto.Field(
-        proto.BOOL, number=1,
+        proto.BOOL,
+        number=1,
     )
 
 
@@ -943,7 +1077,9 @@ class AudienceTargeting(proto.Message):
     user_interest: MutableSequence[
         criteria.UserInterestInfo
     ] = proto.RepeatedField(
-        proto.MESSAGE, number=1, message=criteria.UserInterestInfo,
+        proto.MESSAGE,
+        number=1,
+        message=criteria.UserInterestInfo,
     )
 
 
@@ -974,7 +1110,8 @@ class YouTubeSelectSettings(proto.Message):
     """
 
     lineup_id: int = proto.Field(
-        proto.INT64, number=1,
+        proto.INT64,
+        number=1,
     )
 
 
@@ -988,10 +1125,12 @@ class YouTubeSelectLineUp(proto.Message):
     """
 
     lineup_id: int = proto.Field(
-        proto.INT64, number=1,
+        proto.INT64,
+        number=1,
     )
     lineup_name: str = proto.Field(
-        proto.STRING, number=2,
+        proto.STRING,
+        number=2,
     )
 
 

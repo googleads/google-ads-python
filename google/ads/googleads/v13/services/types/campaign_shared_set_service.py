@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-# Copyright 2022 Google LLC
+# Copyright 2023 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -67,18 +67,23 @@ class MutateCampaignSharedSetsRequest(proto.Message):
     """
 
     customer_id: str = proto.Field(
-        proto.STRING, number=1,
+        proto.STRING,
+        number=1,
     )
     operations: MutableSequence[
         "CampaignSharedSetOperation"
     ] = proto.RepeatedField(
-        proto.MESSAGE, number=2, message="CampaignSharedSetOperation",
+        proto.MESSAGE,
+        number=2,
+        message="CampaignSharedSetOperation",
     )
     partial_failure: bool = proto.Field(
-        proto.BOOL, number=3,
+        proto.BOOL,
+        number=3,
     )
     validate_only: bool = proto.Field(
-        proto.BOOL, number=4,
+        proto.BOOL,
+        number=4,
     )
     response_content_type: gage_response_content_type.ResponseContentTypeEnum.ResponseContentType = proto.Field(
         proto.ENUM,
@@ -118,7 +123,9 @@ class CampaignSharedSetOperation(proto.Message):
         message=gagr_campaign_shared_set.CampaignSharedSet,
     )
     remove: str = proto.Field(
-        proto.STRING, number=3, oneof="operation",
+        proto.STRING,
+        number=3,
+        oneof="operation",
     )
 
 
@@ -136,12 +143,16 @@ class MutateCampaignSharedSetsResponse(proto.Message):
     """
 
     partial_failure_error: status_pb2.Status = proto.Field(
-        proto.MESSAGE, number=3, message=status_pb2.Status,
+        proto.MESSAGE,
+        number=3,
+        message=status_pb2.Status,
     )
     results: MutableSequence[
         "MutateCampaignSharedSetResult"
     ] = proto.RepeatedField(
-        proto.MESSAGE, number=2, message="MutateCampaignSharedSetResult",
+        proto.MESSAGE,
+        number=2,
+        message="MutateCampaignSharedSetResult",
     )
 
 
@@ -157,12 +168,15 @@ class MutateCampaignSharedSetResult(proto.Message):
     """
 
     resource_name: str = proto.Field(
-        proto.STRING, number=1,
+        proto.STRING,
+        number=1,
     )
-    campaign_shared_set: gagr_campaign_shared_set.CampaignSharedSet = proto.Field(
-        proto.MESSAGE,
-        number=2,
-        message=gagr_campaign_shared_set.CampaignSharedSet,
+    campaign_shared_set: gagr_campaign_shared_set.CampaignSharedSet = (
+        proto.Field(
+            proto.MESSAGE,
+            number=2,
+            message=gagr_campaign_shared_set.CampaignSharedSet,
+        )
     )
 
 

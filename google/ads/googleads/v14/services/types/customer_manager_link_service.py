@@ -114,9 +114,11 @@ class CustomerManagerLinkOperation(proto.Message):
     The following actions are possible:
 
     1. Update operation with status ACTIVE accepts a pending
-    invitation. 2. Update operation with status REFUSED declines a
-    pending invitation. 3. Update operation with status INACTIVE
-    terminates link to manager.
+        invitation.
+    2. Update operation with status REFUSED declines a pending
+        invitation.
+    3. Update operation with status INACTIVE terminates link to
+        manager.
 
     .. _oneof: https://proto-plus-python.readthedocs.io/en/stable/fields.html#oneofs-mutually-exclusive-fields
 

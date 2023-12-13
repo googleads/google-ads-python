@@ -134,8 +134,7 @@ class AccountLinkOperation(proto.Message):
             fields are modified in an update.
         update (google.ads.googleads.v14.resources.types.AccountLink):
             Update operation: The account link is
-            expected to have
-            a valid resource name.
+            expected to have a valid resource name.
 
             This field is a member of `oneof`_ ``operation``.
         remove (str):

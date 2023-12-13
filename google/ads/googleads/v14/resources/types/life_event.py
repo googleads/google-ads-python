@@ -35,8 +35,8 @@ __protobuf__ = proto.module(
 
 class LifeEvent(proto.Message):
     r"""A life event: a particular interest-based vertical to be
-    targeted to reach
-    users when they are in the midst of important life milestones.
+    targeted to reach users when they are in the midst of important
+    life milestones.
 
     Attributes:
         resource_name (str):

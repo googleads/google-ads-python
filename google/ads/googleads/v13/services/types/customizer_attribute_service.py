@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-# Copyright 2022 Google LLC
+# Copyright 2023 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -68,18 +68,23 @@ class MutateCustomizerAttributesRequest(proto.Message):
     """
 
     customer_id: str = proto.Field(
-        proto.STRING, number=1,
+        proto.STRING,
+        number=1,
     )
     operations: MutableSequence[
         "CustomizerAttributeOperation"
     ] = proto.RepeatedField(
-        proto.MESSAGE, number=2, message="CustomizerAttributeOperation",
+        proto.MESSAGE,
+        number=2,
+        message="CustomizerAttributeOperation",
     )
     partial_failure: bool = proto.Field(
-        proto.BOOL, number=3,
+        proto.BOOL,
+        number=3,
     )
     validate_only: bool = proto.Field(
-        proto.BOOL, number=4,
+        proto.BOOL,
+        number=4,
     )
     response_content_type: gage_response_content_type.ResponseContentTypeEnum.ResponseContentType = proto.Field(
         proto.ENUM,
@@ -117,7 +122,9 @@ class CustomizerAttributeOperation(proto.Message):
     """
 
     update_mask: field_mask_pb2.FieldMask = proto.Field(
-        proto.MESSAGE, number=4, message=field_mask_pb2.FieldMask,
+        proto.MESSAGE,
+        number=4,
+        message=field_mask_pb2.FieldMask,
     )
     create: gagr_customizer_attribute.CustomizerAttribute = proto.Field(
         proto.MESSAGE,
@@ -126,7 +133,9 @@ class CustomizerAttributeOperation(proto.Message):
         message=gagr_customizer_attribute.CustomizerAttribute,
     )
     remove: str = proto.Field(
-        proto.STRING, number=2, oneof="operation",
+        proto.STRING,
+        number=2,
+        oneof="operation",
     )
 
 
@@ -146,10 +155,14 @@ class MutateCustomizerAttributesResponse(proto.Message):
     results: MutableSequence[
         "MutateCustomizerAttributeResult"
     ] = proto.RepeatedField(
-        proto.MESSAGE, number=1, message="MutateCustomizerAttributeResult",
+        proto.MESSAGE,
+        number=1,
+        message="MutateCustomizerAttributeResult",
     )
     partial_failure_error: status_pb2.Status = proto.Field(
-        proto.MESSAGE, number=2, message=status_pb2.Status,
+        proto.MESSAGE,
+        number=2,
+        message=status_pb2.Status,
     )
 
 
@@ -165,12 +178,15 @@ class MutateCustomizerAttributeResult(proto.Message):
     """
 
     resource_name: str = proto.Field(
-        proto.STRING, number=1,
+        proto.STRING,
+        number=1,
     )
-    customizer_attribute: gagr_customizer_attribute.CustomizerAttribute = proto.Field(
-        proto.MESSAGE,
-        number=2,
-        message=gagr_customizer_attribute.CustomizerAttribute,
+    customizer_attribute: gagr_customizer_attribute.CustomizerAttribute = (
+        proto.Field(
+            proto.MESSAGE,
+            number=2,
+            message=gagr_customizer_attribute.CustomizerAttribute,
+        )
     )
 
 

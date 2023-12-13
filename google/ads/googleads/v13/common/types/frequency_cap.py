@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-# Copyright 2022 Google LLC
+# Copyright 2023 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -26,7 +26,10 @@ from google.ads.googleads.v13.enums.types import frequency_cap_time_unit
 __protobuf__ = proto.module(
     package="google.ads.googleads.v13.common",
     marshal="google.ads.googleads.v13",
-    manifest={"FrequencyCapEntry", "FrequencyCapKey",},
+    manifest={
+        "FrequencyCapEntry",
+        "FrequencyCapKey",
+    },
 )
 
 
@@ -50,10 +53,14 @@ class FrequencyCapEntry(proto.Message):
     """
 
     key: "FrequencyCapKey" = proto.Field(
-        proto.MESSAGE, number=1, message="FrequencyCapKey",
+        proto.MESSAGE,
+        number=1,
+        message="FrequencyCapKey",
     )
     cap: int = proto.Field(
-        proto.INT32, number=3, optional=True,
+        proto.INT32,
+        number=3,
+        optional=True,
     )
 
 
@@ -80,10 +87,12 @@ class FrequencyCapKey(proto.Message):
             This field is a member of `oneof`_ ``_time_length``.
     """
 
-    level: frequency_cap_level.FrequencyCapLevelEnum.FrequencyCapLevel = proto.Field(
-        proto.ENUM,
-        number=1,
-        enum=frequency_cap_level.FrequencyCapLevelEnum.FrequencyCapLevel,
+    level: frequency_cap_level.FrequencyCapLevelEnum.FrequencyCapLevel = (
+        proto.Field(
+            proto.ENUM,
+            number=1,
+            enum=frequency_cap_level.FrequencyCapLevelEnum.FrequencyCapLevel,
+        )
     )
     event_type: frequency_cap_event_type.FrequencyCapEventTypeEnum.FrequencyCapEventType = proto.Field(
         proto.ENUM,
@@ -96,7 +105,9 @@ class FrequencyCapKey(proto.Message):
         enum=frequency_cap_time_unit.FrequencyCapTimeUnitEnum.FrequencyCapTimeUnit,
     )
     time_length: int = proto.Field(
-        proto.INT32, number=5, optional=True,
+        proto.INT32,
+        number=5,
+        optional=True,
     )
 
 

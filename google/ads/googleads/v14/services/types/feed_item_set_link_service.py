@@ -92,8 +92,7 @@ class FeedItemSetLinkOperation(proto.Message):
     Attributes:
         create (google.ads.googleads.v14.resources.types.FeedItemSetLink):
             Create operation: No resource name is
-            expected for the
-            new feed item set link.
+            expected for the new feed item set link.
 
             This field is a member of `oneof`_ ``operation``.
         remove (str):

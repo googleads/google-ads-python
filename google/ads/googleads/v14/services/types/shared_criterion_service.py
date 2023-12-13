@@ -104,8 +104,7 @@ class SharedCriterionOperation(proto.Message):
     Attributes:
         create (google.ads.googleads.v14.resources.types.SharedCriterion):
             Create operation: No resource name is
-            expected for the new shared
-            criterion.
+            expected for the new shared criterion.
 
             This field is a member of `oneof`_ ``operation``.
         remove (str):

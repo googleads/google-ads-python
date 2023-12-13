@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-# Copyright 2022 Google LLC
+# Copyright 2023 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -22,7 +22,9 @@ import proto  # type: ignore
 __protobuf__ = proto.module(
     package="google.ads.googleads.v13.resources",
     marshal="google.ads.googleads.v13",
-    manifest={"DynamicSearchAdsSearchTermView",},
+    manifest={
+        "DynamicSearchAdsSearchTermView",
+    },
 )
 
 
@@ -39,6 +41,7 @@ class DynamicSearchAdsSearchTermView(proto.Message):
             ``customers/{customer_id}/dynamicSearchAdsSearchTermViews/{ad_group_id}~{search_term_fingerprint}~{headline_fingerprint}~{landing_page_fingerprint}~{page_url_fingerprint}``
         search_term (str):
             Output only. Search term
+
             This field is read-only.
 
             This field is a member of `oneof`_ ``_search_term``.
@@ -81,28 +84,43 @@ class DynamicSearchAdsSearchTermView(proto.Message):
     """
 
     resource_name: str = proto.Field(
-        proto.STRING, number=1,
+        proto.STRING,
+        number=1,
     )
     search_term: str = proto.Field(
-        proto.STRING, number=9, optional=True,
+        proto.STRING,
+        number=9,
+        optional=True,
     )
     headline: str = proto.Field(
-        proto.STRING, number=10, optional=True,
+        proto.STRING,
+        number=10,
+        optional=True,
     )
     landing_page: str = proto.Field(
-        proto.STRING, number=11, optional=True,
+        proto.STRING,
+        number=11,
+        optional=True,
     )
     page_url: str = proto.Field(
-        proto.STRING, number=12, optional=True,
+        proto.STRING,
+        number=12,
+        optional=True,
     )
     has_negative_keyword: bool = proto.Field(
-        proto.BOOL, number=13, optional=True,
+        proto.BOOL,
+        number=13,
+        optional=True,
     )
     has_matching_keyword: bool = proto.Field(
-        proto.BOOL, number=14, optional=True,
+        proto.BOOL,
+        number=14,
+        optional=True,
     )
     has_negative_url: bool = proto.Field(
-        proto.BOOL, number=15, optional=True,
+        proto.BOOL,
+        number=15,
+        optional=True,
     )
 
 

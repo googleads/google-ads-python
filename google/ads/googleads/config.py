@@ -13,7 +13,6 @@
 # limitations under the License.
 """A set of functions to help load configuration from various locations."""
 
-from distutils.util import strtobool
 import functools
 import json
 import logging.config
@@ -414,18 +413,27 @@ def disambiguate_string_bool(value):
         A boolean.
 
     Raises:
-        TypeError: If the string is not a valid boolean representation.
+        TypeError, ValueError: If the string is not a valid boolean
+            representation.
     """
+    # This section reproduces the logic from the now deprecated
+    # distutils.util.strtobool. The below values are the same used by strtobool
+    # as true/false equivalents.
+    true_equivalents = ["y", "yes", "t", "true", "on", "1"]
+    false_equivalents = ["n", "no", "f", "false", "off", "0"]
+
     if isinstance(value, bool):
         return value
     elif isinstance(value, str):
-        try:
-            return bool(strtobool(value))
-        except ValueError:
+        if value.lower() in true_equivalents:
+            return True
+        elif value.lower() in false_equivalents:
+            return False
+        else:
             raise ValueError(
-                'The "use_proto_plus" configuration key value should be'
-                f'explicitly set to "True" or "False" but "{value}" '
-                "was given."
+                "The 'use_proto_plus' configuration key value should be "
+                f"explicitly set to {true_equivalents} for 'true', or "
+                f"{false_equivalents} for 'false', but '{value}' was given."
             )
     else:
         raise TypeError(

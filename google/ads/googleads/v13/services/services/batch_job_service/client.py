@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-# Copyright 2022 Google LLC
+# Copyright 2023 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -26,7 +26,6 @@ from typing import (
     Union,
     cast,
 )
-import pkg_resources
 
 from google.api_core import client_options as client_options_lib
 from google.api_core import gapic_v1
@@ -36,6 +35,8 @@ from google.auth.transport import mtls  # type: ignore
 from google.auth.transport.grpc import SslCredentials  # type: ignore
 from google.auth.exceptions import MutualTLSChannelError  # type: ignore
 from google.oauth2 import service_account  # type: ignore
+
+from google.ads.googleads.v13 import gapic_version as package_version
 
 try:
     OptionalRetry = Union[retries.Retry, gapic_v1.method._MethodDefault]
@@ -67,7 +68,8 @@ class BatchJobServiceClientMeta(type):
     _transport_registry["grpc"] = BatchJobServiceGrpcTransport
 
     def get_transport_class(
-        cls, label: Optional[str] = None,
+        cls,
+        label: Optional[str] = None,
     ) -> Type[BatchJobServiceTransport]:
         """Returns an appropriate transport class.
 
@@ -191,11 +193,13 @@ class BatchJobServiceClient(metaclass=BatchJobServiceClientMeta):
 
     @staticmethod
     def accessible_bidding_strategy_path(
-        customer_id: str, bidding_strategy_id: str,
+        customer_id: str,
+        bidding_strategy_id: str,
     ) -> str:
         """Returns a fully-qualified accessible_bidding_strategy string."""
         return "customers/{customer_id}/accessibleBiddingStrategies/{bidding_strategy_id}".format(
-            customer_id=customer_id, bidding_strategy_id=bidding_strategy_id,
+            customer_id=customer_id,
+            bidding_strategy_id=bidding_strategy_id,
         )
 
     @staticmethod
@@ -208,10 +212,14 @@ class BatchJobServiceClient(metaclass=BatchJobServiceClientMeta):
         return m.groupdict() if m else {}
 
     @staticmethod
-    def ad_path(customer_id: str, ad_id: str,) -> str:
+    def ad_path(
+        customer_id: str,
+        ad_id: str,
+    ) -> str:
         """Returns a fully-qualified ad string."""
         return "customers/{customer_id}/ads/{ad_id}".format(
-            customer_id=customer_id, ad_id=ad_id,
+            customer_id=customer_id,
+            ad_id=ad_id,
         )
 
     @staticmethod
@@ -223,10 +231,14 @@ class BatchJobServiceClient(metaclass=BatchJobServiceClientMeta):
         return m.groupdict() if m else {}
 
     @staticmethod
-    def ad_group_path(customer_id: str, ad_group_id: str,) -> str:
+    def ad_group_path(
+        customer_id: str,
+        ad_group_id: str,
+    ) -> str:
         """Returns a fully-qualified ad_group string."""
         return "customers/{customer_id}/adGroups/{ad_group_id}".format(
-            customer_id=customer_id, ad_group_id=ad_group_id,
+            customer_id=customer_id,
+            ad_group_id=ad_group_id,
         )
 
     @staticmethod
@@ -240,11 +252,17 @@ class BatchJobServiceClient(metaclass=BatchJobServiceClientMeta):
 
     @staticmethod
     def ad_group_ad_path(
-        customer_id: str, ad_group_id: str, ad_id: str,
+        customer_id: str,
+        ad_group_id: str,
+        ad_id: str,
     ) -> str:
         """Returns a fully-qualified ad_group_ad string."""
-        return "customers/{customer_id}/adGroupAds/{ad_group_id}~{ad_id}".format(
-            customer_id=customer_id, ad_group_id=ad_group_id, ad_id=ad_id,
+        return (
+            "customers/{customer_id}/adGroupAds/{ad_group_id}~{ad_id}".format(
+                customer_id=customer_id,
+                ad_group_id=ad_group_id,
+                ad_id=ad_id,
+            )
         )
 
     @staticmethod
@@ -258,7 +276,10 @@ class BatchJobServiceClient(metaclass=BatchJobServiceClientMeta):
 
     @staticmethod
     def ad_group_ad_label_path(
-        customer_id: str, ad_group_id: str, ad_id: str, label_id: str,
+        customer_id: str,
+        ad_group_id: str,
+        ad_id: str,
+        label_id: str,
     ) -> str:
         """Returns a fully-qualified ad_group_ad_label string."""
         return "customers/{customer_id}/adGroupAdLabels/{ad_group_id}~{ad_id}~{label_id}".format(
@@ -279,7 +300,10 @@ class BatchJobServiceClient(metaclass=BatchJobServiceClientMeta):
 
     @staticmethod
     def ad_group_asset_path(
-        customer_id: str, ad_group_id: str, asset_id: str, field_type: str,
+        customer_id: str,
+        ad_group_id: str,
+        asset_id: str,
+        field_type: str,
     ) -> str:
         """Returns a fully-qualified ad_group_asset string."""
         return "customers/{customer_id}/adGroupAssets/{ad_group_id}~{asset_id}~{field_type}".format(
@@ -300,7 +324,9 @@ class BatchJobServiceClient(metaclass=BatchJobServiceClientMeta):
 
     @staticmethod
     def ad_group_bid_modifier_path(
-        customer_id: str, ad_group_id: str, criterion_id: str,
+        customer_id: str,
+        ad_group_id: str,
+        criterion_id: str,
     ) -> str:
         """Returns a fully-qualified ad_group_bid_modifier string."""
         return "customers/{customer_id}/adGroupBidModifiers/{ad_group_id}~{criterion_id}".format(
@@ -320,7 +346,9 @@ class BatchJobServiceClient(metaclass=BatchJobServiceClientMeta):
 
     @staticmethod
     def ad_group_criterion_path(
-        customer_id: str, ad_group_id: str, criterion_id: str,
+        customer_id: str,
+        ad_group_id: str,
+        criterion_id: str,
     ) -> str:
         """Returns a fully-qualified ad_group_criterion string."""
         return "customers/{customer_id}/adGroupCriteria/{ad_group_id}~{criterion_id}".format(
@@ -364,7 +392,10 @@ class BatchJobServiceClient(metaclass=BatchJobServiceClientMeta):
 
     @staticmethod
     def ad_group_criterion_label_path(
-        customer_id: str, ad_group_id: str, criterion_id: str, label_id: str,
+        customer_id: str,
+        ad_group_id: str,
+        criterion_id: str,
+        label_id: str,
     ) -> str:
         """Returns a fully-qualified ad_group_criterion_label string."""
         return "customers/{customer_id}/adGroupCriterionLabels/{ad_group_id}~{criterion_id}~{label_id}".format(
@@ -385,7 +416,9 @@ class BatchJobServiceClient(metaclass=BatchJobServiceClientMeta):
 
     @staticmethod
     def ad_group_customizer_path(
-        customer_id: str, ad_group_id: str, customizer_attribute_id: str,
+        customer_id: str,
+        ad_group_id: str,
+        customizer_attribute_id: str,
     ) -> str:
         """Returns a fully-qualified ad_group_customizer string."""
         return "customers/{customer_id}/adGroupCustomizers/{ad_group_id}~{customizer_attribute_id}".format(
@@ -405,7 +438,9 @@ class BatchJobServiceClient(metaclass=BatchJobServiceClientMeta):
 
     @staticmethod
     def ad_group_extension_setting_path(
-        customer_id: str, ad_group_id: str, extension_type: str,
+        customer_id: str,
+        ad_group_id: str,
+        extension_type: str,
     ) -> str:
         """Returns a fully-qualified ad_group_extension_setting string."""
         return "customers/{customer_id}/adGroupExtensionSettings/{ad_group_id}~{extension_type}".format(
@@ -425,11 +460,15 @@ class BatchJobServiceClient(metaclass=BatchJobServiceClientMeta):
 
     @staticmethod
     def ad_group_feed_path(
-        customer_id: str, ad_group_id: str, feed_id: str,
+        customer_id: str,
+        ad_group_id: str,
+        feed_id: str,
     ) -> str:
         """Returns a fully-qualified ad_group_feed string."""
         return "customers/{customer_id}/adGroupFeeds/{ad_group_id}~{feed_id}".format(
-            customer_id=customer_id, ad_group_id=ad_group_id, feed_id=feed_id,
+            customer_id=customer_id,
+            ad_group_id=ad_group_id,
+            feed_id=feed_id,
         )
 
     @staticmethod
@@ -443,11 +482,15 @@ class BatchJobServiceClient(metaclass=BatchJobServiceClientMeta):
 
     @staticmethod
     def ad_group_label_path(
-        customer_id: str, ad_group_id: str, label_id: str,
+        customer_id: str,
+        ad_group_id: str,
+        label_id: str,
     ) -> str:
         """Returns a fully-qualified ad_group_label string."""
         return "customers/{customer_id}/adGroupLabels/{ad_group_id}~{label_id}".format(
-            customer_id=customer_id, ad_group_id=ad_group_id, label_id=label_id,
+            customer_id=customer_id,
+            ad_group_id=ad_group_id,
+            label_id=label_id,
         )
 
     @staticmethod
@@ -484,10 +527,14 @@ class BatchJobServiceClient(metaclass=BatchJobServiceClientMeta):
         return m.groupdict() if m else {}
 
     @staticmethod
-    def asset_path(customer_id: str, asset_id: str,) -> str:
+    def asset_path(
+        customer_id: str,
+        asset_id: str,
+    ) -> str:
         """Returns a fully-qualified asset string."""
         return "customers/{customer_id}/assets/{asset_id}".format(
-            customer_id=customer_id, asset_id=asset_id,
+            customer_id=customer_id,
+            asset_id=asset_id,
         )
 
     @staticmethod
@@ -499,10 +546,14 @@ class BatchJobServiceClient(metaclass=BatchJobServiceClientMeta):
         return m.groupdict() if m else {}
 
     @staticmethod
-    def asset_group_path(customer_id: str, asset_group_id: str,) -> str:
+    def asset_group_path(
+        customer_id: str,
+        asset_group_id: str,
+    ) -> str:
         """Returns a fully-qualified asset_group string."""
         return "customers/{customer_id}/assetGroups/{asset_group_id}".format(
-            customer_id=customer_id, asset_group_id=asset_group_id,
+            customer_id=customer_id,
+            asset_group_id=asset_group_id,
         )
 
     @staticmethod
@@ -516,7 +567,10 @@ class BatchJobServiceClient(metaclass=BatchJobServiceClientMeta):
 
     @staticmethod
     def asset_group_asset_path(
-        customer_id: str, asset_group_id: str, asset_id: str, field_type: str,
+        customer_id: str,
+        asset_group_id: str,
+        asset_id: str,
+        field_type: str,
     ) -> str:
         """Returns a fully-qualified asset_group_asset string."""
         return "customers/{customer_id}/assetGroupAssets/{asset_group_id}~{asset_id}~{field_type}".format(
@@ -537,7 +591,9 @@ class BatchJobServiceClient(metaclass=BatchJobServiceClientMeta):
 
     @staticmethod
     def asset_group_listing_group_filter_path(
-        customer_id: str, asset_group_id: str, listing_group_filter_id: str,
+        customer_id: str,
+        asset_group_id: str,
+        listing_group_filter_id: str,
     ) -> str:
         """Returns a fully-qualified asset_group_listing_group_filter string."""
         return "customers/{customer_id}/assetGroupListingGroupFilters/{asset_group_id}~{listing_group_filter_id}".format(
@@ -559,7 +615,9 @@ class BatchJobServiceClient(metaclass=BatchJobServiceClientMeta):
 
     @staticmethod
     def asset_group_signal_path(
-        customer_id: str, asset_group_id: str, criterion_id: str,
+        customer_id: str,
+        asset_group_id: str,
+        criterion_id: str,
     ) -> str:
         """Returns a fully-qualified asset_group_signal string."""
         return "customers/{customer_id}/assetGroupSignals/{asset_group_id}~{criterion_id}".format(
@@ -578,10 +636,14 @@ class BatchJobServiceClient(metaclass=BatchJobServiceClientMeta):
         return m.groupdict() if m else {}
 
     @staticmethod
-    def asset_set_path(customer_id: str, asset_set_id: str,) -> str:
+    def asset_set_path(
+        customer_id: str,
+        asset_set_id: str,
+    ) -> str:
         """Returns a fully-qualified asset_set string."""
         return "customers/{customer_id}/assetSets/{asset_set_id}".format(
-            customer_id=customer_id, asset_set_id=asset_set_id,
+            customer_id=customer_id,
+            asset_set_id=asset_set_id,
         )
 
     @staticmethod
@@ -595,7 +657,9 @@ class BatchJobServiceClient(metaclass=BatchJobServiceClientMeta):
 
     @staticmethod
     def asset_set_asset_path(
-        customer_id: str, asset_set_id: str, asset_id: str,
+        customer_id: str,
+        asset_set_id: str,
+        asset_id: str,
     ) -> str:
         """Returns a fully-qualified asset_set_asset string."""
         return "customers/{customer_id}/assetSetAssets/{asset_set_id}~{asset_id}".format(
@@ -614,10 +678,14 @@ class BatchJobServiceClient(metaclass=BatchJobServiceClientMeta):
         return m.groupdict() if m else {}
 
     @staticmethod
-    def audience_path(customer_id: str, audience_id: str,) -> str:
+    def audience_path(
+        customer_id: str,
+        audience_id: str,
+    ) -> str:
         """Returns a fully-qualified audience string."""
         return "customers/{customer_id}/audiences/{audience_id}".format(
-            customer_id=customer_id, audience_id=audience_id,
+            customer_id=customer_id,
+            audience_id=audience_id,
         )
 
     @staticmethod
@@ -630,10 +698,14 @@ class BatchJobServiceClient(metaclass=BatchJobServiceClientMeta):
         return m.groupdict() if m else {}
 
     @staticmethod
-    def batch_job_path(customer_id: str, batch_job_id: str,) -> str:
+    def batch_job_path(
+        customer_id: str,
+        batch_job_id: str,
+    ) -> str:
         """Returns a fully-qualified batch_job string."""
         return "customers/{customer_id}/batchJobs/{batch_job_id}".format(
-            customer_id=customer_id, batch_job_id=batch_job_id,
+            customer_id=customer_id,
+            batch_job_id=batch_job_id,
         )
 
     @staticmethod
@@ -647,11 +719,13 @@ class BatchJobServiceClient(metaclass=BatchJobServiceClientMeta):
 
     @staticmethod
     def bidding_data_exclusion_path(
-        customer_id: str, seasonality_event_id: str,
+        customer_id: str,
+        seasonality_event_id: str,
     ) -> str:
         """Returns a fully-qualified bidding_data_exclusion string."""
         return "customers/{customer_id}/biddingDataExclusions/{seasonality_event_id}".format(
-            customer_id=customer_id, seasonality_event_id=seasonality_event_id,
+            customer_id=customer_id,
+            seasonality_event_id=seasonality_event_id,
         )
 
     @staticmethod
@@ -665,11 +739,13 @@ class BatchJobServiceClient(metaclass=BatchJobServiceClientMeta):
 
     @staticmethod
     def bidding_seasonality_adjustment_path(
-        customer_id: str, seasonality_event_id: str,
+        customer_id: str,
+        seasonality_event_id: str,
     ) -> str:
         """Returns a fully-qualified bidding_seasonality_adjustment string."""
         return "customers/{customer_id}/biddingSeasonalityAdjustments/{seasonality_event_id}".format(
-            customer_id=customer_id, seasonality_event_id=seasonality_event_id,
+            customer_id=customer_id,
+            seasonality_event_id=seasonality_event_id,
         )
 
     @staticmethod
@@ -683,11 +759,13 @@ class BatchJobServiceClient(metaclass=BatchJobServiceClientMeta):
 
     @staticmethod
     def bidding_strategy_path(
-        customer_id: str, bidding_strategy_id: str,
+        customer_id: str,
+        bidding_strategy_id: str,
     ) -> str:
         """Returns a fully-qualified bidding_strategy string."""
         return "customers/{customer_id}/biddingStrategies/{bidding_strategy_id}".format(
-            customer_id=customer_id, bidding_strategy_id=bidding_strategy_id,
+            customer_id=customer_id,
+            bidding_strategy_id=bidding_strategy_id,
         )
 
     @staticmethod
@@ -700,10 +778,14 @@ class BatchJobServiceClient(metaclass=BatchJobServiceClientMeta):
         return m.groupdict() if m else {}
 
     @staticmethod
-    def campaign_path(customer_id: str, campaign_id: str,) -> str:
+    def campaign_path(
+        customer_id: str,
+        campaign_id: str,
+    ) -> str:
         """Returns a fully-qualified campaign string."""
         return "customers/{customer_id}/campaigns/{campaign_id}".format(
-            customer_id=customer_id, campaign_id=campaign_id,
+            customer_id=customer_id,
+            campaign_id=campaign_id,
         )
 
     @staticmethod
@@ -717,7 +799,10 @@ class BatchJobServiceClient(metaclass=BatchJobServiceClientMeta):
 
     @staticmethod
     def campaign_asset_path(
-        customer_id: str, campaign_id: str, asset_id: str, field_type: str,
+        customer_id: str,
+        campaign_id: str,
+        asset_id: str,
+        field_type: str,
     ) -> str:
         """Returns a fully-qualified campaign_asset string."""
         return "customers/{customer_id}/campaignAssets/{campaign_id}~{asset_id}~{field_type}".format(
@@ -738,7 +823,9 @@ class BatchJobServiceClient(metaclass=BatchJobServiceClientMeta):
 
     @staticmethod
     def campaign_asset_set_path(
-        customer_id: str, campaign_id: str, asset_set_id: str,
+        customer_id: str,
+        campaign_id: str,
+        asset_set_id: str,
     ) -> str:
         """Returns a fully-qualified campaign_asset_set string."""
         return "customers/{customer_id}/campaignAssetSets/{campaign_id}~{asset_set_id}".format(
@@ -758,7 +845,9 @@ class BatchJobServiceClient(metaclass=BatchJobServiceClientMeta):
 
     @staticmethod
     def campaign_bid_modifier_path(
-        customer_id: str, campaign_id: str, criterion_id: str,
+        customer_id: str,
+        campaign_id: str,
+        criterion_id: str,
     ) -> str:
         """Returns a fully-qualified campaign_bid_modifier string."""
         return "customers/{customer_id}/campaignBidModifiers/{campaign_id}~{criterion_id}".format(
@@ -777,10 +866,14 @@ class BatchJobServiceClient(metaclass=BatchJobServiceClientMeta):
         return m.groupdict() if m else {}
 
     @staticmethod
-    def campaign_budget_path(customer_id: str, campaign_budget_id: str,) -> str:
+    def campaign_budget_path(
+        customer_id: str,
+        campaign_budget_id: str,
+    ) -> str:
         """Returns a fully-qualified campaign_budget string."""
         return "customers/{customer_id}/campaignBudgets/{campaign_budget_id}".format(
-            customer_id=customer_id, campaign_budget_id=campaign_budget_id,
+            customer_id=customer_id,
+            campaign_budget_id=campaign_budget_id,
         )
 
     @staticmethod
@@ -794,7 +887,10 @@ class BatchJobServiceClient(metaclass=BatchJobServiceClientMeta):
 
     @staticmethod
     def campaign_conversion_goal_path(
-        customer_id: str, campaign_id: str, category: str, source: str,
+        customer_id: str,
+        campaign_id: str,
+        category: str,
+        source: str,
     ) -> str:
         """Returns a fully-qualified campaign_conversion_goal string."""
         return "customers/{customer_id}/campaignConversionGoals/{campaign_id}~{category}~{source}".format(
@@ -815,7 +911,9 @@ class BatchJobServiceClient(metaclass=BatchJobServiceClientMeta):
 
     @staticmethod
     def campaign_criterion_path(
-        customer_id: str, campaign_id: str, criterion_id: str,
+        customer_id: str,
+        campaign_id: str,
+        criterion_id: str,
     ) -> str:
         """Returns a fully-qualified campaign_criterion string."""
         return "customers/{customer_id}/campaignCriteria/{campaign_id}~{criterion_id}".format(
@@ -835,7 +933,9 @@ class BatchJobServiceClient(metaclass=BatchJobServiceClientMeta):
 
     @staticmethod
     def campaign_customizer_path(
-        customer_id: str, campaign_id: str, customizer_attribute_id: str,
+        customer_id: str,
+        campaign_id: str,
+        customizer_attribute_id: str,
     ) -> str:
         """Returns a fully-qualified campaign_customizer string."""
         return "customers/{customer_id}/campaignCustomizers/{campaign_id}~{customizer_attribute_id}".format(
@@ -855,7 +955,9 @@ class BatchJobServiceClient(metaclass=BatchJobServiceClientMeta):
 
     @staticmethod
     def campaign_draft_path(
-        customer_id: str, base_campaign_id: str, draft_id: str,
+        customer_id: str,
+        base_campaign_id: str,
+        draft_id: str,
     ) -> str:
         """Returns a fully-qualified campaign_draft string."""
         return "customers/{customer_id}/campaignDrafts/{base_campaign_id}~{draft_id}".format(
@@ -875,7 +977,9 @@ class BatchJobServiceClient(metaclass=BatchJobServiceClientMeta):
 
     @staticmethod
     def campaign_extension_setting_path(
-        customer_id: str, campaign_id: str, extension_type: str,
+        customer_id: str,
+        campaign_id: str,
+        extension_type: str,
     ) -> str:
         """Returns a fully-qualified campaign_extension_setting string."""
         return "customers/{customer_id}/campaignExtensionSettings/{campaign_id}~{extension_type}".format(
@@ -895,11 +999,15 @@ class BatchJobServiceClient(metaclass=BatchJobServiceClientMeta):
 
     @staticmethod
     def campaign_feed_path(
-        customer_id: str, campaign_id: str, feed_id: str,
+        customer_id: str,
+        campaign_id: str,
+        feed_id: str,
     ) -> str:
         """Returns a fully-qualified campaign_feed string."""
         return "customers/{customer_id}/campaignFeeds/{campaign_id}~{feed_id}".format(
-            customer_id=customer_id, campaign_id=campaign_id, feed_id=feed_id,
+            customer_id=customer_id,
+            campaign_id=campaign_id,
+            feed_id=feed_id,
         )
 
     @staticmethod
@@ -912,10 +1020,16 @@ class BatchJobServiceClient(metaclass=BatchJobServiceClientMeta):
         return m.groupdict() if m else {}
 
     @staticmethod
-    def campaign_group_path(customer_id: str, campaign_group_id: str,) -> str:
+    def campaign_group_path(
+        customer_id: str,
+        campaign_group_id: str,
+    ) -> str:
         """Returns a fully-qualified campaign_group string."""
-        return "customers/{customer_id}/campaignGroups/{campaign_group_id}".format(
-            customer_id=customer_id, campaign_group_id=campaign_group_id,
+        return (
+            "customers/{customer_id}/campaignGroups/{campaign_group_id}".format(
+                customer_id=customer_id,
+                campaign_group_id=campaign_group_id,
+            )
         )
 
     @staticmethod
@@ -929,11 +1043,15 @@ class BatchJobServiceClient(metaclass=BatchJobServiceClientMeta):
 
     @staticmethod
     def campaign_label_path(
-        customer_id: str, campaign_id: str, label_id: str,
+        customer_id: str,
+        campaign_id: str,
+        label_id: str,
     ) -> str:
         """Returns a fully-qualified campaign_label string."""
         return "customers/{customer_id}/campaignLabels/{campaign_id}~{label_id}".format(
-            customer_id=customer_id, campaign_id=campaign_id, label_id=label_id,
+            customer_id=customer_id,
+            campaign_id=campaign_id,
+            label_id=label_id,
         )
 
     @staticmethod
@@ -947,7 +1065,9 @@ class BatchJobServiceClient(metaclass=BatchJobServiceClientMeta):
 
     @staticmethod
     def campaign_shared_set_path(
-        customer_id: str, campaign_id: str, shared_set_id: str,
+        customer_id: str,
+        campaign_id: str,
+        shared_set_id: str,
     ) -> str:
         """Returns a fully-qualified campaign_shared_set string."""
         return "customers/{customer_id}/campaignSharedSets/{campaign_id}~{shared_set_id}".format(
@@ -966,12 +1086,34 @@ class BatchJobServiceClient(metaclass=BatchJobServiceClientMeta):
         return m.groupdict() if m else {}
 
     @staticmethod
+    def combined_audience_path(
+        customer_id: str,
+        combined_audience_id: str,
+    ) -> str:
+        """Returns a fully-qualified combined_audience string."""
+        return "customers/{customer_id}/combinedAudiences/{combined_audience_id}".format(
+            customer_id=customer_id,
+            combined_audience_id=combined_audience_id,
+        )
+
+    @staticmethod
+    def parse_combined_audience_path(path: str) -> Dict[str, str]:
+        """Parses a combined_audience path into its component segments."""
+        m = re.match(
+            r"^customers/(?P<customer_id>.+?)/combinedAudiences/(?P<combined_audience_id>.+?)$",
+            path,
+        )
+        return m.groupdict() if m else {}
+
+    @staticmethod
     def conversion_action_path(
-        customer_id: str, conversion_action_id: str,
+        customer_id: str,
+        conversion_action_id: str,
     ) -> str:
         """Returns a fully-qualified conversion_action string."""
         return "customers/{customer_id}/conversionActions/{conversion_action_id}".format(
-            customer_id=customer_id, conversion_action_id=conversion_action_id,
+            customer_id=customer_id,
+            conversion_action_id=conversion_action_id,
         )
 
     @staticmethod
@@ -985,7 +1127,8 @@ class BatchJobServiceClient(metaclass=BatchJobServiceClientMeta):
 
     @staticmethod
     def conversion_custom_variable_path(
-        customer_id: str, conversion_custom_variable_id: str,
+        customer_id: str,
+        conversion_custom_variable_id: str,
     ) -> str:
         """Returns a fully-qualified conversion_custom_variable string."""
         return "customers/{customer_id}/conversionCustomVariables/{conversion_custom_variable_id}".format(
@@ -1004,11 +1147,13 @@ class BatchJobServiceClient(metaclass=BatchJobServiceClientMeta):
 
     @staticmethod
     def conversion_goal_campaign_config_path(
-        customer_id: str, campaign_id: str,
+        customer_id: str,
+        campaign_id: str,
     ) -> str:
         """Returns a fully-qualified conversion_goal_campaign_config string."""
         return "customers/{customer_id}/conversionGoalCampaignConfigs/{campaign_id}".format(
-            customer_id=customer_id, campaign_id=campaign_id,
+            customer_id=customer_id,
+            campaign_id=campaign_id,
         )
 
     @staticmethod
@@ -1022,7 +1167,8 @@ class BatchJobServiceClient(metaclass=BatchJobServiceClientMeta):
 
     @staticmethod
     def conversion_value_rule_path(
-        customer_id: str, conversion_value_rule_id: str,
+        customer_id: str,
+        conversion_value_rule_id: str,
     ) -> str:
         """Returns a fully-qualified conversion_value_rule string."""
         return "customers/{customer_id}/conversionValueRules/{conversion_value_rule_id}".format(
@@ -1041,7 +1187,8 @@ class BatchJobServiceClient(metaclass=BatchJobServiceClientMeta):
 
     @staticmethod
     def conversion_value_rule_set_path(
-        customer_id: str, conversion_value_rule_set_id: str,
+        customer_id: str,
+        conversion_value_rule_set_id: str,
     ) -> str:
         """Returns a fully-qualified conversion_value_rule_set string."""
         return "customers/{customer_id}/conversionValueRuleSets/{conversion_value_rule_set_id}".format(
@@ -1059,10 +1206,14 @@ class BatchJobServiceClient(metaclass=BatchJobServiceClientMeta):
         return m.groupdict() if m else {}
 
     @staticmethod
-    def custom_conversion_goal_path(customer_id: str, goal_id: str,) -> str:
+    def custom_conversion_goal_path(
+        customer_id: str,
+        goal_id: str,
+    ) -> str:
         """Returns a fully-qualified custom_conversion_goal string."""
         return "customers/{customer_id}/customConversionGoals/{goal_id}".format(
-            customer_id=customer_id, goal_id=goal_id,
+            customer_id=customer_id,
+            goal_id=goal_id,
         )
 
     @staticmethod
@@ -1075,9 +1226,13 @@ class BatchJobServiceClient(metaclass=BatchJobServiceClientMeta):
         return m.groupdict() if m else {}
 
     @staticmethod
-    def customer_path(customer_id: str,) -> str:
+    def customer_path(
+        customer_id: str,
+    ) -> str:
         """Returns a fully-qualified customer string."""
-        return "customers/{customer_id}".format(customer_id=customer_id,)
+        return "customers/{customer_id}".format(
+            customer_id=customer_id,
+        )
 
     @staticmethod
     def parse_customer_path(path: str) -> Dict[str, str]:
@@ -1087,11 +1242,15 @@ class BatchJobServiceClient(metaclass=BatchJobServiceClientMeta):
 
     @staticmethod
     def customer_asset_path(
-        customer_id: str, asset_id: str, field_type: str,
+        customer_id: str,
+        asset_id: str,
+        field_type: str,
     ) -> str:
         """Returns a fully-qualified customer_asset string."""
         return "customers/{customer_id}/customerAssets/{asset_id}~{field_type}".format(
-            customer_id=customer_id, asset_id=asset_id, field_type=field_type,
+            customer_id=customer_id,
+            asset_id=asset_id,
+            field_type=field_type,
         )
 
     @staticmethod
@@ -1105,11 +1264,15 @@ class BatchJobServiceClient(metaclass=BatchJobServiceClientMeta):
 
     @staticmethod
     def customer_conversion_goal_path(
-        customer_id: str, category: str, source: str,
+        customer_id: str,
+        category: str,
+        source: str,
     ) -> str:
         """Returns a fully-qualified customer_conversion_goal string."""
         return "customers/{customer_id}/customerConversionGoals/{category}~{source}".format(
-            customer_id=customer_id, category=category, source=source,
+            customer_id=customer_id,
+            category=category,
+            source=source,
         )
 
     @staticmethod
@@ -1123,7 +1286,8 @@ class BatchJobServiceClient(metaclass=BatchJobServiceClientMeta):
 
     @staticmethod
     def customer_customizer_path(
-        customer_id: str, customizer_attribute_id: str,
+        customer_id: str,
+        customizer_attribute_id: str,
     ) -> str:
         """Returns a fully-qualified customer_customizer string."""
         return "customers/{customer_id}/customerCustomizers/{customizer_attribute_id}".format(
@@ -1142,11 +1306,13 @@ class BatchJobServiceClient(metaclass=BatchJobServiceClientMeta):
 
     @staticmethod
     def customer_extension_setting_path(
-        customer_id: str, extension_type: str,
+        customer_id: str,
+        extension_type: str,
     ) -> str:
         """Returns a fully-qualified customer_extension_setting string."""
         return "customers/{customer_id}/customerExtensionSettings/{extension_type}".format(
-            customer_id=customer_id, extension_type=extension_type,
+            customer_id=customer_id,
+            extension_type=extension_type,
         )
 
     @staticmethod
@@ -1159,10 +1325,14 @@ class BatchJobServiceClient(metaclass=BatchJobServiceClientMeta):
         return m.groupdict() if m else {}
 
     @staticmethod
-    def customer_feed_path(customer_id: str, feed_id: str,) -> str:
+    def customer_feed_path(
+        customer_id: str,
+        feed_id: str,
+    ) -> str:
         """Returns a fully-qualified customer_feed string."""
         return "customers/{customer_id}/customerFeeds/{feed_id}".format(
-            customer_id=customer_id, feed_id=feed_id,
+            customer_id=customer_id,
+            feed_id=feed_id,
         )
 
     @staticmethod
@@ -1175,10 +1345,14 @@ class BatchJobServiceClient(metaclass=BatchJobServiceClientMeta):
         return m.groupdict() if m else {}
 
     @staticmethod
-    def customer_label_path(customer_id: str, label_id: str,) -> str:
+    def customer_label_path(
+        customer_id: str,
+        label_id: str,
+    ) -> str:
         """Returns a fully-qualified customer_label string."""
         return "customers/{customer_id}/customerLabels/{label_id}".format(
-            customer_id=customer_id, label_id=label_id,
+            customer_id=customer_id,
+            label_id=label_id,
         )
 
     @staticmethod
@@ -1192,11 +1366,13 @@ class BatchJobServiceClient(metaclass=BatchJobServiceClientMeta):
 
     @staticmethod
     def customer_negative_criterion_path(
-        customer_id: str, criterion_id: str,
+        customer_id: str,
+        criterion_id: str,
     ) -> str:
         """Returns a fully-qualified customer_negative_criterion string."""
         return "customers/{customer_id}/customerNegativeCriteria/{criterion_id}".format(
-            customer_id=customer_id, criterion_id=criterion_id,
+            customer_id=customer_id,
+            criterion_id=criterion_id,
         )
 
     @staticmethod
@@ -1210,7 +1386,8 @@ class BatchJobServiceClient(metaclass=BatchJobServiceClientMeta):
 
     @staticmethod
     def customizer_attribute_path(
-        customer_id: str, customizer_attribute_id: str,
+        customer_id: str,
+        customizer_attribute_id: str,
     ) -> str:
         """Returns a fully-qualified customizer_attribute string."""
         return "customers/{customer_id}/customizerAttributes/{customizer_attribute_id}".format(
@@ -1228,10 +1405,14 @@ class BatchJobServiceClient(metaclass=BatchJobServiceClientMeta):
         return m.groupdict() if m else {}
 
     @staticmethod
-    def experiment_path(customer_id: str, trial_id: str,) -> str:
+    def experiment_path(
+        customer_id: str,
+        trial_id: str,
+    ) -> str:
         """Returns a fully-qualified experiment string."""
         return "customers/{customer_id}/experiments/{trial_id}".format(
-            customer_id=customer_id, trial_id=trial_id,
+            customer_id=customer_id,
+            trial_id=trial_id,
         )
 
     @staticmethod
@@ -1245,7 +1426,9 @@ class BatchJobServiceClient(metaclass=BatchJobServiceClientMeta):
 
     @staticmethod
     def experiment_arm_path(
-        customer_id: str, trial_id: str, trial_arm_id: str,
+        customer_id: str,
+        trial_id: str,
+        trial_arm_id: str,
     ) -> str:
         """Returns a fully-qualified experiment_arm string."""
         return "customers/{customer_id}/experimentArms/{trial_id}~{trial_arm_id}".format(
@@ -1264,10 +1447,16 @@ class BatchJobServiceClient(metaclass=BatchJobServiceClientMeta):
         return m.groupdict() if m else {}
 
     @staticmethod
-    def extension_feed_item_path(customer_id: str, feed_item_id: str,) -> str:
+    def extension_feed_item_path(
+        customer_id: str,
+        feed_item_id: str,
+    ) -> str:
         """Returns a fully-qualified extension_feed_item string."""
-        return "customers/{customer_id}/extensionFeedItems/{feed_item_id}".format(
-            customer_id=customer_id, feed_item_id=feed_item_id,
+        return (
+            "customers/{customer_id}/extensionFeedItems/{feed_item_id}".format(
+                customer_id=customer_id,
+                feed_item_id=feed_item_id,
+            )
         )
 
     @staticmethod
@@ -1280,10 +1469,14 @@ class BatchJobServiceClient(metaclass=BatchJobServiceClientMeta):
         return m.groupdict() if m else {}
 
     @staticmethod
-    def feed_path(customer_id: str, feed_id: str,) -> str:
+    def feed_path(
+        customer_id: str,
+        feed_id: str,
+    ) -> str:
         """Returns a fully-qualified feed string."""
         return "customers/{customer_id}/feeds/{feed_id}".format(
-            customer_id=customer_id, feed_id=feed_id,
+            customer_id=customer_id,
+            feed_id=feed_id,
         )
 
     @staticmethod
@@ -1296,11 +1489,17 @@ class BatchJobServiceClient(metaclass=BatchJobServiceClientMeta):
 
     @staticmethod
     def feed_item_path(
-        customer_id: str, feed_id: str, feed_item_id: str,
+        customer_id: str,
+        feed_id: str,
+        feed_item_id: str,
     ) -> str:
         """Returns a fully-qualified feed_item string."""
-        return "customers/{customer_id}/feedItems/{feed_id}~{feed_item_id}".format(
-            customer_id=customer_id, feed_id=feed_id, feed_item_id=feed_item_id,
+        return (
+            "customers/{customer_id}/feedItems/{feed_id}~{feed_item_id}".format(
+                customer_id=customer_id,
+                feed_id=feed_id,
+                feed_item_id=feed_item_id,
+            )
         )
 
     @staticmethod
@@ -1314,7 +1513,9 @@ class BatchJobServiceClient(metaclass=BatchJobServiceClientMeta):
 
     @staticmethod
     def feed_item_set_path(
-        customer_id: str, feed_id: str, feed_item_set_id: str,
+        customer_id: str,
+        feed_id: str,
+        feed_item_set_id: str,
     ) -> str:
         """Returns a fully-qualified feed_item_set string."""
         return "customers/{customer_id}/feedItemSets/{feed_id}~{feed_item_set_id}".format(
@@ -1384,7 +1585,9 @@ class BatchJobServiceClient(metaclass=BatchJobServiceClientMeta):
 
     @staticmethod
     def feed_mapping_path(
-        customer_id: str, feed_id: str, feed_mapping_id: str,
+        customer_id: str,
+        feed_id: str,
+        feed_mapping_id: str,
     ) -> str:
         """Returns a fully-qualified feed_mapping string."""
         return "customers/{customer_id}/feedMappings/{feed_id}~{feed_mapping_id}".format(
@@ -1403,7 +1606,9 @@ class BatchJobServiceClient(metaclass=BatchJobServiceClientMeta):
         return m.groupdict() if m else {}
 
     @staticmethod
-    def geo_target_constant_path(criterion_id: str,) -> str:
+    def geo_target_constant_path(
+        criterion_id: str,
+    ) -> str:
         """Returns a fully-qualified geo_target_constant string."""
         return "geoTargetConstants/{criterion_id}".format(
             criterion_id=criterion_id,
@@ -1416,10 +1621,14 @@ class BatchJobServiceClient(metaclass=BatchJobServiceClientMeta):
         return m.groupdict() if m else {}
 
     @staticmethod
-    def keyword_plan_path(customer_id: str, keyword_plan_id: str,) -> str:
+    def keyword_plan_path(
+        customer_id: str,
+        keyword_plan_id: str,
+    ) -> str:
         """Returns a fully-qualified keyword_plan string."""
         return "customers/{customer_id}/keywordPlans/{keyword_plan_id}".format(
-            customer_id=customer_id, keyword_plan_id=keyword_plan_id,
+            customer_id=customer_id,
+            keyword_plan_id=keyword_plan_id,
         )
 
     @staticmethod
@@ -1433,7 +1642,8 @@ class BatchJobServiceClient(metaclass=BatchJobServiceClientMeta):
 
     @staticmethod
     def keyword_plan_ad_group_path(
-        customer_id: str, keyword_plan_ad_group_id: str,
+        customer_id: str,
+        keyword_plan_ad_group_id: str,
     ) -> str:
         """Returns a fully-qualified keyword_plan_ad_group string."""
         return "customers/{customer_id}/keywordPlanAdGroups/{keyword_plan_ad_group_id}".format(
@@ -1452,7 +1662,8 @@ class BatchJobServiceClient(metaclass=BatchJobServiceClientMeta):
 
     @staticmethod
     def keyword_plan_ad_group_keyword_path(
-        customer_id: str, keyword_plan_ad_group_keyword_id: str,
+        customer_id: str,
+        keyword_plan_ad_group_keyword_id: str,
     ) -> str:
         """Returns a fully-qualified keyword_plan_ad_group_keyword string."""
         return "customers/{customer_id}/keywordPlanAdGroupKeywords/{keyword_plan_ad_group_keyword_id}".format(
@@ -1471,7 +1682,8 @@ class BatchJobServiceClient(metaclass=BatchJobServiceClientMeta):
 
     @staticmethod
     def keyword_plan_campaign_path(
-        customer_id: str, keyword_plan_campaign_id: str,
+        customer_id: str,
+        keyword_plan_campaign_id: str,
     ) -> str:
         """Returns a fully-qualified keyword_plan_campaign string."""
         return "customers/{customer_id}/keywordPlanCampaigns/{keyword_plan_campaign_id}".format(
@@ -1490,7 +1702,8 @@ class BatchJobServiceClient(metaclass=BatchJobServiceClientMeta):
 
     @staticmethod
     def keyword_plan_campaign_keyword_path(
-        customer_id: str, keyword_plan_campaign_keyword_id: str,
+        customer_id: str,
+        keyword_plan_campaign_keyword_id: str,
     ) -> str:
         """Returns a fully-qualified keyword_plan_campaign_keyword string."""
         return "customers/{customer_id}/keywordPlanCampaignKeywords/{keyword_plan_campaign_keyword_id}".format(
@@ -1508,10 +1721,14 @@ class BatchJobServiceClient(metaclass=BatchJobServiceClientMeta):
         return m.groupdict() if m else {}
 
     @staticmethod
-    def label_path(customer_id: str, label_id: str,) -> str:
+    def label_path(
+        customer_id: str,
+        label_id: str,
+    ) -> str:
         """Returns a fully-qualified label string."""
         return "customers/{customer_id}/labels/{label_id}".format(
-            customer_id=customer_id, label_id=label_id,
+            customer_id=customer_id,
+            label_id=label_id,
         )
 
     @staticmethod
@@ -1523,7 +1740,9 @@ class BatchJobServiceClient(metaclass=BatchJobServiceClientMeta):
         return m.groupdict() if m else {}
 
     @staticmethod
-    def language_constant_path(criterion_id: str,) -> str:
+    def language_constant_path(
+        criterion_id: str,
+    ) -> str:
         """Returns a fully-qualified language_constant string."""
         return "languageConstants/{criterion_id}".format(
             criterion_id=criterion_id,
@@ -1536,10 +1755,14 @@ class BatchJobServiceClient(metaclass=BatchJobServiceClientMeta):
         return m.groupdict() if m else {}
 
     @staticmethod
-    def media_file_path(customer_id: str, media_file_id: str,) -> str:
+    def media_file_path(
+        customer_id: str,
+        media_file_id: str,
+    ) -> str:
         """Returns a fully-qualified media_file string."""
         return "customers/{customer_id}/mediaFiles/{media_file_id}".format(
-            customer_id=customer_id, media_file_id=media_file_id,
+            customer_id=customer_id,
+            media_file_id=media_file_id,
         )
 
     @staticmethod
@@ -1552,8 +1775,27 @@ class BatchJobServiceClient(metaclass=BatchJobServiceClientMeta):
         return m.groupdict() if m else {}
 
     @staticmethod
+    def mobile_app_category_constant_path(
+        mobile_app_category_id: str,
+    ) -> str:
+        """Returns a fully-qualified mobile_app_category_constant string."""
+        return "mobileAppCategoryConstants/{mobile_app_category_id}".format(
+            mobile_app_category_id=mobile_app_category_id,
+        )
+
+    @staticmethod
+    def parse_mobile_app_category_constant_path(path: str) -> Dict[str, str]:
+        """Parses a mobile_app_category_constant path into its component segments."""
+        m = re.match(
+            r"^mobileAppCategoryConstants/(?P<mobile_app_category_id>.+?)$",
+            path,
+        )
+        return m.groupdict() if m else {}
+
+    @staticmethod
     def remarketing_action_path(
-        customer_id: str, remarketing_action_id: str,
+        customer_id: str,
+        remarketing_action_id: str,
     ) -> str:
         """Returns a fully-qualified remarketing_action string."""
         return "customers/{customer_id}/remarketingActions/{remarketing_action_id}".format(
@@ -1572,7 +1814,9 @@ class BatchJobServiceClient(metaclass=BatchJobServiceClientMeta):
 
     @staticmethod
     def shared_criterion_path(
-        customer_id: str, shared_set_id: str, criterion_id: str,
+        customer_id: str,
+        shared_set_id: str,
+        criterion_id: str,
     ) -> str:
         """Returns a fully-qualified shared_criterion string."""
         return "customers/{customer_id}/sharedCriteria/{shared_set_id}~{criterion_id}".format(
@@ -1591,10 +1835,14 @@ class BatchJobServiceClient(metaclass=BatchJobServiceClientMeta):
         return m.groupdict() if m else {}
 
     @staticmethod
-    def shared_set_path(customer_id: str, shared_set_id: str,) -> str:
+    def shared_set_path(
+        customer_id: str,
+        shared_set_id: str,
+    ) -> str:
         """Returns a fully-qualified shared_set string."""
         return "customers/{customer_id}/sharedSets/{shared_set_id}".format(
-            customer_id=customer_id, shared_set_id=shared_set_id,
+            customer_id=customer_id,
+            shared_set_id=shared_set_id,
         )
 
     @staticmethod
@@ -1607,10 +1855,14 @@ class BatchJobServiceClient(metaclass=BatchJobServiceClientMeta):
         return m.groupdict() if m else {}
 
     @staticmethod
-    def smart_campaign_setting_path(customer_id: str, campaign_id: str,) -> str:
+    def smart_campaign_setting_path(
+        customer_id: str,
+        campaign_id: str,
+    ) -> str:
         """Returns a fully-qualified smart_campaign_setting string."""
         return "customers/{customer_id}/smartCampaignSettings/{campaign_id}".format(
-            customer_id=customer_id, campaign_id=campaign_id,
+            customer_id=customer_id,
+            campaign_id=campaign_id,
         )
 
     @staticmethod
@@ -1623,10 +1875,31 @@ class BatchJobServiceClient(metaclass=BatchJobServiceClientMeta):
         return m.groupdict() if m else {}
 
     @staticmethod
-    def user_interest_path(customer_id: str, user_interest_id: str,) -> str:
+    def topic_constant_path(
+        topic_id: str,
+    ) -> str:
+        """Returns a fully-qualified topic_constant string."""
+        return "topicConstants/{topic_id}".format(
+            topic_id=topic_id,
+        )
+
+    @staticmethod
+    def parse_topic_constant_path(path: str) -> Dict[str, str]:
+        """Parses a topic_constant path into its component segments."""
+        m = re.match(r"^topicConstants/(?P<topic_id>.+?)$", path)
+        return m.groupdict() if m else {}
+
+    @staticmethod
+    def user_interest_path(
+        customer_id: str,
+        user_interest_id: str,
+    ) -> str:
         """Returns a fully-qualified user_interest string."""
-        return "customers/{customer_id}/userInterests/{user_interest_id}".format(
-            customer_id=customer_id, user_interest_id=user_interest_id,
+        return (
+            "customers/{customer_id}/userInterests/{user_interest_id}".format(
+                customer_id=customer_id,
+                user_interest_id=user_interest_id,
+            )
         )
 
     @staticmethod
@@ -1639,10 +1912,14 @@ class BatchJobServiceClient(metaclass=BatchJobServiceClientMeta):
         return m.groupdict() if m else {}
 
     @staticmethod
-    def user_list_path(customer_id: str, user_list_id: str,) -> str:
+    def user_list_path(
+        customer_id: str,
+        user_list_id: str,
+    ) -> str:
         """Returns a fully-qualified user_list string."""
         return "customers/{customer_id}/userLists/{user_list_id}".format(
-            customer_id=customer_id, user_list_id=user_list_id,
+            customer_id=customer_id,
+            user_list_id=user_list_id,
         )
 
     @staticmethod
@@ -1655,7 +1932,9 @@ class BatchJobServiceClient(metaclass=BatchJobServiceClientMeta):
         return m.groupdict() if m else {}
 
     @staticmethod
-    def common_billing_account_path(billing_account: str,) -> str:
+    def common_billing_account_path(
+        billing_account: str,
+    ) -> str:
         """Returns a fully-qualified billing_account string."""
         return "billingAccounts/{billing_account}".format(
             billing_account=billing_account,
@@ -1668,9 +1947,13 @@ class BatchJobServiceClient(metaclass=BatchJobServiceClientMeta):
         return m.groupdict() if m else {}
 
     @staticmethod
-    def common_folder_path(folder: str,) -> str:
+    def common_folder_path(
+        folder: str,
+    ) -> str:
         """Returns a fully-qualified folder string."""
-        return "folders/{folder}".format(folder=folder,)
+        return "folders/{folder}".format(
+            folder=folder,
+        )
 
     @staticmethod
     def parse_common_folder_path(path: str) -> Dict[str, str]:
@@ -1679,9 +1962,13 @@ class BatchJobServiceClient(metaclass=BatchJobServiceClientMeta):
         return m.groupdict() if m else {}
 
     @staticmethod
-    def common_organization_path(organization: str,) -> str:
+    def common_organization_path(
+        organization: str,
+    ) -> str:
         """Returns a fully-qualified organization string."""
-        return "organizations/{organization}".format(organization=organization,)
+        return "organizations/{organization}".format(
+            organization=organization,
+        )
 
     @staticmethod
     def parse_common_organization_path(path: str) -> Dict[str, str]:
@@ -1690,9 +1977,13 @@ class BatchJobServiceClient(metaclass=BatchJobServiceClientMeta):
         return m.groupdict() if m else {}
 
     @staticmethod
-    def common_project_path(project: str,) -> str:
+    def common_project_path(
+        project: str,
+    ) -> str:
         """Returns a fully-qualified project string."""
-        return "projects/{project}".format(project=project,)
+        return "projects/{project}".format(
+            project=project,
+        )
 
     @staticmethod
     def parse_common_project_path(path: str) -> Dict[str, str]:
@@ -1701,10 +1992,14 @@ class BatchJobServiceClient(metaclass=BatchJobServiceClientMeta):
         return m.groupdict() if m else {}
 
     @staticmethod
-    def common_location_path(project: str, location: str,) -> str:
+    def common_location_path(
+        project: str,
+        location: str,
+    ) -> str:
         """Returns a fully-qualified location string."""
         return "projects/{project}/locations/{location}".format(
-            project=project, location=location,
+            project=project,
+            location=location,
         )
 
     @staticmethod
@@ -1929,7 +2224,10 @@ class BatchJobServiceClient(metaclass=BatchJobServiceClientMeta):
 
         # Send the request.
         response = rpc(
-            request, retry=retry, timeout=timeout, metadata=metadata,
+            request,
+            retry=retry,
+            timeout=timeout,
+            metadata=metadata,
         )
 
         # Done; return the response.
@@ -2020,13 +2318,19 @@ class BatchJobServiceClient(metaclass=BatchJobServiceClientMeta):
 
         # Send the request.
         response = rpc(
-            request, retry=retry, timeout=timeout, metadata=metadata,
+            request,
+            retry=retry,
+            timeout=timeout,
+            metadata=metadata,
         )
 
         # This method is paged; wrap the response in a pager, which provides
         # an `__iter__` convenience method.
         response = pagers.ListBatchJobResultsPager(
-            method=rpc, request=request, response=response, metadata=metadata,
+            method=rpc,
+            request=request,
+            response=response,
+            metadata=metadata,
         )
 
         # Done; return the response.
@@ -2123,7 +2427,10 @@ class BatchJobServiceClient(metaclass=BatchJobServiceClientMeta):
 
         # Send the request.
         response = rpc(
-            request, retry=retry, timeout=timeout, metadata=metadata,
+            request,
+            retry=retry,
+            timeout=timeout,
+            metadata=metadata,
         )
 
         # Wrap the response in an operation future.
@@ -2257,19 +2564,19 @@ class BatchJobServiceClient(metaclass=BatchJobServiceClientMeta):
 
         # Send the request.
         response = rpc(
-            request, retry=retry, timeout=timeout, metadata=metadata,
+            request,
+            retry=retry,
+            timeout=timeout,
+            metadata=metadata,
         )
 
         # Done; return the response.
         return response
 
 
-try:
-    DEFAULT_CLIENT_INFO = gapic_v1.client_info.ClientInfo(
-        gapic_version=pkg_resources.get_distribution("google-ads",).version,
-    )
-except pkg_resources.DistributionNotFound:
-    DEFAULT_CLIENT_INFO = gapic_v1.client_info.ClientInfo()
+DEFAULT_CLIENT_INFO = gapic_v1.client_info.ClientInfo(
+    gapic_version=package_version.__version__
+)
 
 
 __all__ = ("BatchJobServiceClient",)

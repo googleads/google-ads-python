@@ -94,14 +94,12 @@ class AssetGroupAssetOperation(proto.Message):
             fields are modified in an update.
         create (google.ads.googleads.v14.resources.types.AssetGroupAsset):
             Create operation: No resource name is
-            expected for the new asset group
-            asset.
+            expected for the new asset group asset.
 
             This field is a member of `oneof`_ ``operation``.
         update (google.ads.googleads.v14.resources.types.AssetGroupAsset):
             Update operation: The asset group asset is
-            expected to have a valid
-            resource name.
+            expected to have a valid resource name.
 
             This field is a member of `oneof`_ ``operation``.
         remove (str):

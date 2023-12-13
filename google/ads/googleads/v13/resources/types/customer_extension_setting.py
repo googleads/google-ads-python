@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-# Copyright 2022 Google LLC
+# Copyright 2023 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -28,7 +28,9 @@ from google.ads.googleads.v13.enums.types import (
 __protobuf__ = proto.module(
     package="google.ads.googleads.v13.resources",
     marshal="google.ads.googleads.v13",
-    manifest={"CustomerExtensionSetting",},
+    manifest={
+        "CustomerExtensionSetting",
+    },
 )
 
 
@@ -56,15 +58,19 @@ class CustomerExtensionSetting(proto.Message):
     """
 
     resource_name: str = proto.Field(
-        proto.STRING, number=1,
+        proto.STRING,
+        number=1,
     )
-    extension_type: gage_extension_type.ExtensionTypeEnum.ExtensionType = proto.Field(
-        proto.ENUM,
-        number=2,
-        enum=gage_extension_type.ExtensionTypeEnum.ExtensionType,
+    extension_type: gage_extension_type.ExtensionTypeEnum.ExtensionType = (
+        proto.Field(
+            proto.ENUM,
+            number=2,
+            enum=gage_extension_type.ExtensionTypeEnum.ExtensionType,
+        )
     )
     extension_feed_items: MutableSequence[str] = proto.RepeatedField(
-        proto.STRING, number=5,
+        proto.STRING,
+        number=5,
     )
     device: extension_setting_device.ExtensionSettingDeviceEnum.ExtensionSettingDevice = proto.Field(
         proto.ENUM,

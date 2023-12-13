@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-# Copyright 2022 Google LLC
+# Copyright 2023 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -72,38 +72,50 @@ class LeadFormSubmissionData(proto.Message):
     """
 
     resource_name: str = proto.Field(
-        proto.STRING, number=1,
+        proto.STRING,
+        number=1,
     )
     id: str = proto.Field(
-        proto.STRING, number=2,
+        proto.STRING,
+        number=2,
     )
     asset: str = proto.Field(
-        proto.STRING, number=3,
+        proto.STRING,
+        number=3,
     )
     campaign: str = proto.Field(
-        proto.STRING, number=4,
+        proto.STRING,
+        number=4,
     )
     lead_form_submission_fields: MutableSequence[
         "LeadFormSubmissionField"
     ] = proto.RepeatedField(
-        proto.MESSAGE, number=5, message="LeadFormSubmissionField",
+        proto.MESSAGE,
+        number=5,
+        message="LeadFormSubmissionField",
     )
     custom_lead_form_submission_fields: MutableSequence[
         "CustomLeadFormSubmissionField"
     ] = proto.RepeatedField(
-        proto.MESSAGE, number=10, message="CustomLeadFormSubmissionField",
+        proto.MESSAGE,
+        number=10,
+        message="CustomLeadFormSubmissionField",
     )
     ad_group: str = proto.Field(
-        proto.STRING, number=6,
+        proto.STRING,
+        number=6,
     )
     ad_group_ad: str = proto.Field(
-        proto.STRING, number=7,
+        proto.STRING,
+        number=7,
     )
     gclid: str = proto.Field(
-        proto.STRING, number=8,
+        proto.STRING,
+        number=8,
     )
     submission_date_time: str = proto.Field(
-        proto.STRING, number=9,
+        proto.STRING,
+        number=9,
     )
 
 
@@ -123,7 +135,8 @@ class LeadFormSubmissionField(proto.Message):
         enum=lead_form_field_user_input_type.LeadFormFieldUserInputTypeEnum.LeadFormFieldUserInputType,
     )
     field_value: str = proto.Field(
-        proto.STRING, number=2,
+        proto.STRING,
+        number=2,
     )
 
 
@@ -139,10 +152,12 @@ class CustomLeadFormSubmissionField(proto.Message):
     """
 
     question_text: str = proto.Field(
-        proto.STRING, number=1,
+        proto.STRING,
+        number=1,
     )
     field_value: str = proto.Field(
-        proto.STRING, number=2,
+        proto.STRING,
+        number=2,
     )
 
 

@@ -104,8 +104,7 @@ class AssetGroupSignalOperation(proto.Message):
     Attributes:
         create (google.ads.googleads.v14.resources.types.AssetGroupSignal):
             Create operation: No resource name is
-            expected for the new asset group
-            signal.
+            expected for the new asset group signal.
 
             This field is a member of `oneof`_ ``operation``.
         remove (str):

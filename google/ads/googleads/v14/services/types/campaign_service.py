@@ -109,8 +109,7 @@ class CampaignOperation(proto.Message):
             This field is a member of `oneof`_ ``operation``.
         update (google.ads.googleads.v14.resources.types.Campaign):
             Update operation: The campaign is expected to
-            have a valid
-            resource name.
+            have a valid resource name.
 
             This field is a member of `oneof`_ ``operation``.
         remove (str):

@@ -51,6 +51,7 @@ class RemarketingAction(proto.Message):
             This field is a member of `oneof`_ ``_id``.
         name (str):
             The name of the remarketing action.
+
             This field is required and should not be empty
             when creating new remarketing actions.
 

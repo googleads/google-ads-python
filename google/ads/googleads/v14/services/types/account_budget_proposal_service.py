@@ -82,15 +82,15 @@ class AccountBudgetProposalOperation(proto.Message):
             proposals that propose such modifications are
             final. Therefore, update operations are not
             supported for proposals.
+
             Proposals that modify budgets have the 'update'
             proposal type.  Specifying a mask for any other
             proposal type is considered an error.
         create (google.ads.googleads.v14.resources.types.AccountBudgetProposal):
             Create operation: A new proposal to create a
-            new budget, edit an
-            existing budget, end an actively running budget,
-            or remove an approved budget scheduled to start
-            in the future.
+            new budget, edit an existing budget, end an
+            actively running budget, or remove an approved
+            budget scheduled to start in the future.
             No resource name is expected for the new
             proposal.
 

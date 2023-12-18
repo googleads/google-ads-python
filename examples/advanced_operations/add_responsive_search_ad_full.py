@@ -51,9 +51,7 @@ _LOCALE = "es"
 _COUNTRY_CODE = "AR"
 
 
-def main(
-    client, customer_id, omit_image_extensions, customizer_attribute_name=None
-):
+def main(client, customer_id, omit_image_extensions, customizer_attribute_name=None):
     """
     The main method that creates all necessary entities for the example.
 
@@ -77,9 +75,7 @@ def main(
     # Create a budget, which can be shared by multiple campaigns.
     campaign_budget = create_campaign_budget(client, customer_id)
 
-    campaign_resource_name = create_campaign(
-        client, customer_id, campaign_budget
-    )
+    campaign_resource_name = create_campaign(client, customer_id, campaign_budget)
 
     ad_group_resource_name = create_ad_group(
         client, customer_id, campaign_resource_name
@@ -113,22 +109,20 @@ def create_customizer_attribute(client, customer_id, customizer_attribute_name):
     Returns:
         A resource name for a customizer attribute.
     """
-    # Creates a customizer attribute operation for creating a customizer
+    # Create a customizer attribute operation for creating a customizer
     # attribute.
     operation = client.get_type("CustomizerAttributeOperation")
-    # Creates a customizer attribute with the specified name.
+    # Create a customizer attribute with the specified name.
     customizer_attribute = operation.create
     customizer_attribute.name = customizer_attribute_name
-    # Specifies the type to be 'PRICE' so that we can dynamically customize the
+    # Specifie the type to be 'PRICE' so that we can dynamically customize the
     # part of the ad's description that is a price of a product/service we
     # advertise.
     customizer_attribute.type_ = client.enums.CustomizerAttributeTypeEnum.PRICE
 
-    # Issues a mutate request to add the customizer attribute and prints its
+    # Issue a mutate request to add the customizer attribute and prints its
     # information.
-    customizer_attribute_service = client.get_service(
-        "CustomizerAttributeService"
-    )
+    customizer_attribute_service = client.get_service("CustomizerAttributeService")
     response = customizer_attribute_service.mutate_customizer_attributes(
         customer_id=customer_id, operations=[operation]
     )
@@ -148,41 +142,34 @@ def link_customizer_attribute_to_customer(
 ):
     """Links the customizer attribute to the customer.
 
-    This is done by providing a value to be used in a responsive search ad
-    that will be created in a later step.
-
     Args:
         client: an initialized GoogleAdsClient instance.
-        customer_id: a client customer ID.
+            customer_id: a client customer ID.
         customizer_attribute_resource_name: a resource name for  customizer
             attribute.
     """
-    # Creates a customer customizer operation.
+    # Create a customer customizer operation.
     operation = client.get_type("CustomerCustomizerOperation")
-    # Creates a customer customizer with the value to be used in the responsive
+    # Create a customer customizer with the value to be used in the responsive
     # search ad.
     customer_customizer = operation.create
-    customer_customizer.customizer_attribute = (
-        customizer_attribute_resource_name
-    )
-    customer_customizer.value.type_ = (
-        client.enums.CustomizerAttributeTypeEnum.PRICE
-    )
-    # Specify '100USD' as a text value. The ad customizer will dynamically
-    # replace the placeholder with this value when the ad serves.
+    customer_customizer.customizer_attribute = customizer_attribute_resource_name
+    customer_customizer.value.type_ = client.enums.CustomizerAttributeTypeEnum.PRICE
+    # The ad customizer will dynamically replace the placeholder with this value
+    # when the ad serves.
     customer_customizer.value.string_value = "100USD"
 
-    customer_customizer_service = client.get_service(
-        "CustomerCustomizerService"
-    )
-    # Issues a mutate request to add the customer customizer and prints its
+    customer_customizer_service = client.get_service("CustomerCustomizerService")
+    # Issue a mutate request to create the customer customizer and prints its
     # information.
     response = customer_customizer_service.mutate_customer_customizers(
         customer_id=customer_id, operations=[operation]
     )
     resource_name = response.results[0].resource_name
 
-    print(f"Added a customer customizer with resource name: '{resource_name}'")
+    print(
+        f"Added a customer customizer to the customer with resource name: '{resource_name}'"
+    )
 
 
 # [END add_responsive_search_full_customizer_2]
@@ -209,21 +196,19 @@ def create_ad_text_asset_with_customizer(client, customizer_attribute_name):
     """Create an AdTextAsset.
     Args:
         client: an initialized GoogleAdsClient instance.
-        customizer_attribute_name: The resource Name of the customizer attribute.
+        customizer_attribute_name: The resource name of the customizer attribute.
 
     Returns:
         An ad text asset.
     """
     ad_text_asset = client.get_type("AdTextAsset")
 
-    # Creates this particular description using the ad customizer. Visit
+    # Create this particular description using the ad customizer. Visit
     # https://developers.google.com/google-ads/api/docs/ads/customize-responsive-search-ads#ad_customizers_in_responsive_search_ads
     # for details about the placeholder format. The ad customizer replaces the
     # placeholder with the value we previously created and linked to the
     # customer using CustomerCustomizer.
-    ad_text_asset.text = (
-        f"Just {{CUSTOMIZER.{customizer_attribute_name}:10USD}}"
-    )
+    ad_text_asset.text = f"Just {{CUSTOMIZER.{customizer_attribute_name}:10USD}}"
 
     return ad_text_asset
 
@@ -243,9 +228,7 @@ def create_campaign_budget(client, customer_id):
     campaign_budget_operation = client.get_type("CampaignBudgetOperation")
     campaign_budget = campaign_budget_operation.create
     campaign_budget.name = f"Campaign budget {uuid.uuid4()}"
-    campaign_budget.delivery_method = (
-        client.enums.BudgetDeliveryMethodEnum.STANDARD
-    )
+    campaign_budget.delivery_method = client.enums.BudgetDeliveryMethodEnum.STANDARD
     campaign_budget.amount_micros = 500000
 
     # Add budget.
@@ -271,9 +254,7 @@ def create_campaign(client, customer_id, campaign_budget):
     campaign_operation = client.get_type("CampaignOperation")
     campaign = campaign_operation.create
     campaign.name = f"Testing RSA via API {uuid.uuid4()}"
-    campaign.advertising_channel_type = (
-        client.enums.AdvertisingChannelTypeEnum.SEARCH
-    )
+    campaign.advertising_channel_type = client.enums.AdvertisingChannelTypeEnum.SEARCH
 
     # Recommendation: Set the campaign to PAUSED when creating it to prevent
     # the ads from immediately serving. Set to ENABLED once you've added
@@ -354,8 +335,8 @@ def create_ad_group_ad(
       client: an initialized GoogleAdsClient instance.
       customer_id: a client customer ID.
       ad_group_resource_name: an ad group resource name.
-      customizer_attribute_name: (optional) the resource name of the customizer attribute
-        to use in one of the descriptions
+      customizer_attribute_name: (optional) If present, indicates the resource
+        name of the customizer attribute to use in one of the descriptions
 
     Returns:
       Ad group ad resource name.
@@ -395,6 +376,7 @@ def create_ad_group_ad(
     # Description 1 and 2
     description_1 = create_ad_text_asset(client, "Desc 1 testing")
     description_2 = None
+
     if customizer_attribute_name:
         description_2 = create_ad_text_asset_with_customizer(
             client, customizer_attribute_name
@@ -449,9 +431,7 @@ def add_keywords(client, customer_id, ad_group_resource_name):
     ad_group_criterion.ad_group = ad_group_resource_name
     ad_group_criterion.status = client.enums.AdGroupCriterionStatusEnum.ENABLED
     ad_group_criterion.keyword.text = _KEYWORD_TEXT_EXACT_1
-    ad_group_criterion.keyword.match_type = (
-        client.enums.KeywordMatchTypeEnum.EXACT
-    )
+    ad_group_criterion.keyword.match_type = client.enums.KeywordMatchTypeEnum.EXACT
 
     # Uncomment the below line if you want to change this keyword to a negative target.
     # ad_group_criterion.negative = True
@@ -468,9 +448,7 @@ def add_keywords(client, customer_id, ad_group_resource_name):
     ad_group_criterion.ad_group = ad_group_resource_name
     ad_group_criterion.status = client.enums.AdGroupCriterionStatusEnum.ENABLED
     ad_group_criterion.keyword.text = _KEYWORD_TEXT_PHRASE_1
-    ad_group_criterion.keyword.match_type = (
-        client.enums.KeywordMatchTypeEnum.PHRASE
-    )
+    ad_group_criterion.keyword.match_type = client.enums.KeywordMatchTypeEnum.PHRASE
 
     # Uncomment the below line if you want to change this keyword to a negative target.
     # ad_group_criterion.negative = True
@@ -487,9 +465,7 @@ def add_keywords(client, customer_id, ad_group_resource_name):
     ad_group_criterion.ad_group = ad_group_resource_name
     ad_group_criterion.status = client.enums.AdGroupCriterionStatusEnum.ENABLED
     ad_group_criterion.keyword.text = _KEYWORD_TEXT_BROAD_1
-    ad_group_criterion.keyword.match_type = (
-        client.enums.KeywordMatchTypeEnum.BROAD
-    )
+    ad_group_criterion.keyword.match_type = client.enums.KeywordMatchTypeEnum.BROAD
 
     # Uncomment the below line if you want to change this keyword to a negative target.
     # ad_group_criterion.negative = True
@@ -504,11 +480,9 @@ def add_keywords(client, customer_id, ad_group_resource_name):
     campaign_criterion_operations = operations
 
     # Add keywords
-    ad_group_criterion_response = (
-        ad_group_criterion_service.mutate_ad_group_criteria(
-            customer_id=customer_id,
-            operations=[*campaign_criterion_operations],
-        )
+    ad_group_criterion_response = ad_group_criterion_service.mutate_ad_group_criteria(
+        customer_id=customer_id,
+        operations=[*campaign_criterion_operations],
     )
     for result in ad_group_criterion_response.results:
         print("Created keyword " f"{result.resource_name}.")
@@ -539,35 +513,28 @@ def add_geo_targeting(client, customer_id, campaign_resource_name):
         [_GEO_LOCATION_1, _GEO_LOCATION_2, _GEO_LOCATION_3]
     )
 
-    results = geo_target_constant_service.suggest_geo_target_constants(
-        gtc_request
-    )
+    results = geo_target_constant_service.suggest_geo_target_constants(gtc_request)
 
     operations = []
     for suggestion in results.geo_target_constant_suggestions:
-        geo_target_constant = suggestion.geo_target_constant
         print(
-            f"geo_target_constant: {geo_target_constant} "
+            f"geo_target_constant: {suggestion.geo_target_constant} "
             f"is found in _LOCALE ({suggestion.locale}) "
             f"with reach ({suggestion.reach}) "
             f"from search term ({suggestion.search_term})."
         )
         # Create the campaign criterion for location targeting.
-        campaign_criterion_operation = client.get_type(
-            "CampaignCriterionOperation"
-        )
+        campaign_criterion_operation = client.get_type("CampaignCriterionOperation")
         campaign_criterion = campaign_criterion_operation.create
         campaign_criterion.campaign = campaign_resource_name
         campaign_criterion.location.geo_target_constant = (
-            geo_target_constant.resource_name
+            suggestion.geo_target_constant.resource_name
         )
         operations.append(campaign_criterion_operation)
 
     campaign_criterion_service = client.get_service("CampaignCriterionService")
-    campaign_criterion_response = (
-        campaign_criterion_service.mutate_campaign_criteria(
-            customer_id=customer_id, operations=[*operations]
-        )
+    campaign_criterion_response = campaign_criterion_service.mutate_campaign_criteria(
+        customer_id=customer_id, operations=[*operations]
     )
 
     for result in campaign_criterion_response.results:
@@ -614,23 +581,16 @@ def add_images(client, customer_id, campaign_resource_name):
 
     # Step 6.2 - Create Image Extension
     extension_feed_item_service = client.get_service("ExtensionFeedItemService")
-    extension_feed_item_operation = client.get_type(
-        "ExtensionFeedItemOperation"
-    )
+    extension_feed_item_operation = client.get_type("ExtensionFeedItemOperation")
     extension_feed_item = extension_feed_item_operation.create
     extension_feed_item.image_feed_item.image_asset = image_asset_resource_name
 
-    extension_feed_response = (
-        extension_feed_item_service.mutate_extension_feed_items(
-            customer_id=customer_id, operations=[extension_feed_item_operation]
-        )
+    extension_feed_response = extension_feed_item_service.mutate_extension_feed_items(
+        customer_id=customer_id, operations=[extension_feed_item_operation]
     )
     image_resource_name = extension_feed_response.results[0].resource_name
 
-    print(
-        "Created an image extension with resource name: "
-        f"'{image_resource_name}'"
-    )
+    print("Created an image extension with resource name: " f"'{image_resource_name}'")
 
     # Step 6.3 - Link Image Extension to RSA
     campaign_extension_setting_service = client.get_service(
@@ -681,11 +641,10 @@ if __name__ == "__main__":
         help="Whether or not the campaign will use image extensions.",
     )
 
-    # The name of the customizer attribute to be used in the ad customizer, which
+    # The name of the customizer attribute used in the ad customizer, which
     # must be unique for a given customer account. To run this example multiple
     # times, specify a unique value as a command line argument. Note that there is
-    # a limit for the number of enabled customizer attributes in one account, so
-    # you shouldn't run this example more than necessary. For more details visit:
+    # a limit for the number of enabled customizer attributes in one account For more details visit:
     # https://developers.google.com/google-ads/api/docs/ads/customize-responsive-search-ads#rules_and_limitations
     parser.add_argument(
         "-n",
@@ -694,7 +653,7 @@ if __name__ == "__main__":
         default=None,
         help=(
             "The name of the customizer attribute to be created. The name must "
-            "be unique across a single client account, so be sure not to use "
+            "be unique across a client account, so be sure not to use "
             "the same value more than once."
         ),
     )

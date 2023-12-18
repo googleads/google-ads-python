@@ -192,11 +192,11 @@ def create_ad_text_asset(client, text, pinned_field=None):
     return ad_text_asset
 
 
-def create_ad_text_asset_with_customizer(client, customizer_attribute_name):
+def create_ad_text_asset_with_customizer(client, customizer_attribute_rname):
     """Create an AdTextAsset.
     Args:
         client: an initialized GoogleAdsClient instance.
-        customizer_attribute_name: The resource name of the customizer attribute.
+        customizer_attribute_rname: The resource name of the customizer attribute.
 
     Returns:
         An ad text asset.
@@ -208,7 +208,7 @@ def create_ad_text_asset_with_customizer(client, customizer_attribute_name):
     # for details about the placeholder format. The ad customizer replaces the
     # placeholder with the value we previously created and linked to the
     # customer using CustomerCustomizer.
-    ad_text_asset.text = f"Just {{CUSTOMIZER.{customizer_attribute_name}:10USD}}"
+    ad_text_asset.text = f"Just {{CUSTOMIZER.{customizer_attribute_rname}:10USD}}"
 
     return ad_text_asset
 
@@ -644,7 +644,8 @@ if __name__ == "__main__":
     # The name of the customizer attribute used in the ad customizer, which
     # must be unique for a given customer account. To run this example multiple
     # times, specify a unique value as a command line argument. Note that there is
-    # a limit for the number of enabled customizer attributes in one account For more details visit:
+    # a limit for the number of enabled customizer attributes in one account
+    # For more details visit:
     # https://developers.google.com/google-ads/api/docs/ads/customize-responsive-search-ads#rules_and_limitations
     parser.add_argument(
         "-n",

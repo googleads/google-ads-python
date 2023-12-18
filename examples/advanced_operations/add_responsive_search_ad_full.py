@@ -183,7 +183,7 @@ def create_ad_text_asset(client, text, pinned_field=None):
         pinned_field: to pin a text asset so it always shows in the ad.
 
     Returns:
-        An ad text asset.
+        An AdTextAsset.
     """
     ad_text_asset = client.get_type("AdTextAsset")
     ad_text_asset.text = text
@@ -192,14 +192,14 @@ def create_ad_text_asset(client, text, pinned_field=None):
     return ad_text_asset
 
 
-def create_ad_text_asset_with_customizer(client, customizer_attribute_rname):
+def create_ad_text_asset_with_customizer(client, customizer_attribute_resource_name):
     """Create an AdTextAsset.
     Args:
         client: an initialized GoogleAdsClient instance.
-        customizer_attribute_rname: The resource name of the customizer attribute.
+        customizer_attribute_resource_name: The resource name of the customizer attribute.
 
     Returns:
-        An ad text asset.
+        An AdTextAsset.
     """
     ad_text_asset = client.get_type("AdTextAsset")
 
@@ -208,7 +208,9 @@ def create_ad_text_asset_with_customizer(client, customizer_attribute_rname):
     # for details about the placeholder format. The ad customizer replaces the
     # placeholder with the value we previously created and linked to the
     # customer using CustomerCustomizer.
-    ad_text_asset.text = f"Just {{CUSTOMIZER.{customizer_attribute_rname}:10USD}}"
+    ad_text_asset.text = (
+        f"Just {{CUSTOMIZER.{customizer_attribute_resource_name}:10USD}}"
+    )
 
     return ad_text_asset
 

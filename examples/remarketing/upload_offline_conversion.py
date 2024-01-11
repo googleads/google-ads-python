@@ -40,6 +40,7 @@ def main(
     gbraid,
     wbraid,
     order_id,
+    ad_user_data_consent,
 ):
     """Creates a click conversion with a default currency of USD.
 
@@ -62,6 +63,7 @@ def main(
         wbraid: The WBRAID for the iOS app conversion. If set, the gclid and
             gbraid parameters must be None.
         order_id: The order ID for the click conversion.
+        ad_user_data_consent: The ad user data consent for the click.
     """
     click_conversion = client.get_type("ClickConversion")
     conversion_upload_service = client.get_service("ConversionUploadService")
@@ -96,6 +98,15 @@ def main(
 
     if order_id:
         click_conversion.order_id = order_id
+
+    # Sets the consent information, if provided.
+    if ad_user_data_consent:
+        # Specifies whether user consent was obtained for the data you are
+        # uploading. For more details, see:
+        # https://www.google.com/about/company/user-consent-policy
+        click_conversion.consent.ad_user_data = client.enums.ConsentStatusEnum[
+            ad_user_data_consent
+        ]
 
     # Uploads the click conversion. Partial failure must be set to True here.
     #
@@ -209,6 +220,15 @@ if __name__ == "__main__":
         type=str,
         help="The order ID for the click conversion.",
     )
+    parser.add_argument(
+        "-d",
+        "--ad_user_data_consent",
+        type=str,
+        choices=[e.name for e in googleads_client.enums.ConsentStatusEnum],
+        help=(
+            "The ad user data consent for the click."
+        ),
+    )
     args = parser.parse_args()
 
     try:
@@ -224,6 +244,7 @@ if __name__ == "__main__":
             args.gbraid,
             args.wbraid,
             args.order_id,
+            args.ad_user_data_consent,
         )
     except GoogleAdsException as ex:
         print(

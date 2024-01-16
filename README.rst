@@ -9,11 +9,7 @@ Build Status
 
 Requirements
 ------------
-* Python 3.7+
-
-Note that Python 3.7 is deprecated in this package, and it will become fully
-incompatible in a future version. Please upgrade to Python 3.8 or higher to
-ensure you can continue using this package to access the Google Ads API.
+* Python 3.8+
 
 Installation
 ------------

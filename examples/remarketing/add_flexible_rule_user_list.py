@@ -104,7 +104,6 @@ def main(client, customer_id):
         "http://example.com/example3"
     )
     user_list.membership_status = client.enums.UserListMembershipStatusEnum.OPEN
-    user_list.membership_life_span = 365
     user_list.rule_based_user_list = rule_based_user_list_info
 
     # Issue a mutate request to add the user list, then print the results.

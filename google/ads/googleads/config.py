@@ -419,8 +419,8 @@ def disambiguate_string_bool(value):
     # This section reproduces the logic from the now deprecated
     # distutils.util.strtobool. The below values are the same used by strtobool
     # as true/false equivalents.
-    true_equivalents = ["y", "yes", "t", "true", "on", "1"]
-    false_equivalents = ["n", "no", "f", "false", "off", "0"]
+    true_equivalents = ("y", "yes", "t", "true", "on", "1")
+    false_equivalents = ("n", "no", "f", "false", "off", "0")
 
     if isinstance(value, bool):
         return value
@@ -431,7 +431,7 @@ def disambiguate_string_bool(value):
             return False
         else:
             raise ValueError(
-                "The 'use_proto_plus' configuration key value should be "
+                "The 'use_proto_plus' configuration key value must be "
                 f"explicitly set to {true_equivalents} for 'true', or "
                 f"{false_equivalents} for 'false', but '{value}' was given."
             )

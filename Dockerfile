@@ -1,4 +1,5 @@
-FROM ubuntu:20.04
+ARG image_name=ubuntu:20.04
+FROM ${image_name}
 
 ARG DEBIAN_FRONTEND=noninteractive
 ENV TZ=Etc/GMT

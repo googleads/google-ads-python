@@ -36,7 +36,7 @@ __protobuf__ = proto.module(
 
 class ConfigureCampaignLifecycleGoalsRequest(proto.Message):
     r"""Request message for
-    [CampaignLifecycleService.configureCampaignLifecycleGoals][].
+    [CampaignLifecycleGoalService.configureCampaignLifecycleGoals][].
 
     Attributes:
         customer_id (str):
@@ -105,7 +105,7 @@ class CampaignLifecycleGoalOperation(proto.Message):
 
 class ConfigureCampaignLifecycleGoalsResponse(proto.Message):
     r"""Response message for
-    [CampaignLifecycleService.configureCampaignLifecycleGoals][].
+    [CampaignLifecycleGoalService.configureCampaignLifecycleGoals][].
 
     Attributes:
         result (google.ads.googleads.v15.services.types.ConfigureCampaignLifecycleGoalsResult):

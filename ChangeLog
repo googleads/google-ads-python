@@ -1,3 +1,11 @@
+* 23.0.0
+- Remove support for Python 3.7
+- Add support for Python 3.11 and 3.12
+- Remove support for Google Ads API v13
+- Add Docker support for unit tests
+- Switch to a native/implicit namespace package
+- Remove usage of pkg_resources
+
 * 22.1.0
 - Google Ads API v15 release.
 - Add configuration option allowing developer token to be ignored.

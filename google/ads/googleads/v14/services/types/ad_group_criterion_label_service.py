@@ -92,8 +92,7 @@ class AdGroupCriterionLabelOperation(proto.Message):
     Attributes:
         create (google.ads.googleads.v14.resources.types.AdGroupCriterionLabel):
             Create operation: No resource name is
-            expected for the new ad group
-            label.
+            expected for the new ad group label.
 
             This field is a member of `oneof`_ ``operation``.
         remove (str):

@@ -87,6 +87,7 @@ class PolicyValidationParameter(proto.Message):
             field is currently only compatible with Enhanced
             Text Ad. It corresponds to the
             PolicyTopicEntry.topic field.
+
             Resources violating these policies will be
             saved, but will not be eligible to serve. They
             may begin serving at a later time due to a

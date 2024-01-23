@@ -50,8 +50,8 @@ class SharedSet(proto.Message):
             This field is a member of `oneof`_ ``_id``.
         type_ (google.ads.googleads.v14.enums.types.SharedSetTypeEnum.SharedSetType):
             Immutable. The type of this shared set: each
-            shared set holds only a single
-            kind of resource. Required. Immutable.
+            shared set holds only a single kind of resource.
+            Required. Immutable.
         name (str):
             The name of this shared set. Required.
             Shared Sets must have names that are unique

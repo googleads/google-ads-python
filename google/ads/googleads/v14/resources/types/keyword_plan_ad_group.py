@@ -52,6 +52,7 @@ class KeywordPlanAdGroup(proto.Message):
             This field is a member of `oneof`_ ``_id``.
         name (str):
             The name of the keyword plan ad group.
+
             This field is required and should not be empty
             when creating keyword plan ad group.
 

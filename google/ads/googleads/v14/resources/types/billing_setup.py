@@ -74,8 +74,8 @@ class BillingSetup(proto.Message):
             setup, this and payments_account will be populated.
         start_date_time (str):
             Immutable. The start date time in yyyy-MM-dd
-            or yyyy-MM-dd HH:mm:ss
-            format. Only a future time is allowed.
+            or yyyy-MM-dd HH:mm:ss format. Only a future
+            time is allowed.
 
             This field is a member of `oneof`_ ``start_time``.
         start_time_type (google.ads.googleads.v14.enums.types.TimeTypeEnum.TimeType):
@@ -85,8 +85,7 @@ class BillingSetup(proto.Message):
             This field is a member of `oneof`_ ``start_time``.
         end_date_time (str):
             Output only. The end date time in yyyy-MM-dd
-            or yyyy-MM-dd HH:mm:ss
-            format.
+            or yyyy-MM-dd HH:mm:ss format.
 
             This field is a member of `oneof`_ ``end_time``.
         end_time_type (google.ads.googleads.v14.enums.types.TimeTypeEnum.TimeType):
@@ -105,6 +104,7 @@ class BillingSetup(proto.Message):
                 Output only. A 16 digit id used to identify
                 the payments account associated with the billing
                 setup.
+
                 This must be passed as a string with dashes, for
                 example, "1234-5678-9012-3456".
 
@@ -125,6 +125,7 @@ class BillingSetup(proto.Message):
                 Immutable. A 12 digit id used to identify the
                 payments profile associated with the billing
                 setup.
+
                 This must be passed in as a string with dashes,
                 for example, "1234-5678-9012".
 

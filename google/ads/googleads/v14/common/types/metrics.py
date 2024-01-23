@@ -139,6 +139,7 @@ class Metrics(proto.Message):
             an ad. This number doesn't include whether or
             not calls were connected, or the duration of any
             calls.
+
             This metric applies to feed items only.
 
             This field is a member of `oneof`_ ``_all_conversions_from_click_to_call``.
@@ -146,6 +147,7 @@ class Metrics(proto.Message):
             The number of times people clicked a "Get
             directions" button to navigate to a store after
             clicking an ad.
+
             This metric applies to feed items only.
 
             This field is a member of `oneof`_ ``_all_conversions_from_directions``.
@@ -172,6 +174,7 @@ class Metrics(proto.Message):
             The number of other conversions (for example,
             posting a review or saving a location for a
             store) that occurred after people clicked an ad.
+
             This metric applies to feed items only.
 
             This field is a member of `oneof`_ ``_all_conversions_from_other_engagement``.
@@ -237,6 +240,7 @@ class Metrics(proto.Message):
             participant's ad was shown in a higher position
             than yours, when both of your ads were shown at
             the same page.
+
             This metric is not publicly available.
 
             This field is a member of `oneof`_ ``_auction_insight_search_position_above_rate``.

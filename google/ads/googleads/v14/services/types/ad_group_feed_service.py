@@ -113,8 +113,7 @@ class AdGroupFeedOperation(proto.Message):
             This field is a member of `oneof`_ ``operation``.
         update (google.ads.googleads.v14.resources.types.AdGroupFeed):
             Update operation: The ad group feed is
-            expected to have a valid resource
-            name.
+            expected to have a valid resource name.
 
             This field is a member of `oneof`_ ``operation``.
         remove (str):

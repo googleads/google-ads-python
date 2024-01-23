@@ -13,13 +13,11 @@
 # limitations under the License.
 """A client and common configurations for the Google Ads API."""
 
-from importlib import import_module
+from importlib import import_module, metadata
 import logging.config
-import pkg_resources
 
 from google.api_core.gapic_v1.client_info import ClientInfo
 import grpc.experimental
-import proto
 from proto.enums import ProtoEnumMeta
 
 from google.ads.googleads import config, oauth2, util
@@ -33,19 +31,12 @@ _logger = logging.getLogger(__name__)
 
 _SERVICE_CLIENT_TEMPLATE = "{}Client"
 
-_VALID_API_VERSIONS = ["v15", "v14", "v13"]
+_VALID_API_VERSIONS = ["v15", "v14"]
 _DEFAULT_VERSION = _VALID_API_VERSIONS[0]
 
 # Retrieve the version of this client library to be sent in the user-agent
 # information of API calls.
-try:
-    _CLIENT_INFO = ClientInfo(
-        client_library_version=pkg_resources.get_distribution(
-            "google-ads",
-        ).version,
-    )
-except pkg_resources.DistributionNotFound:
-    _CLIENT_INFO = ClientInfo()
+_CLIENT_INFO = ClientInfo(client_library_version=metadata.version("google-ads"))
 
 # See options at grpc.github.io/grpc/core/group__grpc__arg__keys.html
 _GRPC_CHANNEL_OPTIONS = [

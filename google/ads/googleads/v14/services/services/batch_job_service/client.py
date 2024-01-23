@@ -26,7 +26,6 @@ from typing import (
     Union,
     cast,
 )
-import pkg_resources
 
 from google.api_core import client_options as client_options_lib
 from google.api_core import gapic_v1
@@ -36,6 +35,8 @@ from google.auth.transport import mtls  # type: ignore
 from google.auth.transport.grpc import SslCredentials  # type: ignore
 from google.auth.exceptions import MutualTLSChannelError  # type: ignore
 from google.oauth2 import service_account  # type: ignore
+
+from google.ads.googleads.v14 import gapic_version as package_version
 
 try:
     OptionalRetry = Union[retries.Retry, gapic_v1.method._MethodDefault]
@@ -1085,6 +1086,26 @@ class BatchJobServiceClient(metaclass=BatchJobServiceClientMeta):
         return m.groupdict() if m else {}
 
     @staticmethod
+    def combined_audience_path(
+        customer_id: str,
+        combined_audience_id: str,
+    ) -> str:
+        """Returns a fully-qualified combined_audience string."""
+        return "customers/{customer_id}/combinedAudiences/{combined_audience_id}".format(
+            customer_id=customer_id,
+            combined_audience_id=combined_audience_id,
+        )
+
+    @staticmethod
+    def parse_combined_audience_path(path: str) -> Dict[str, str]:
+        """Parses a combined_audience path into its component segments."""
+        m = re.match(
+            r"^customers/(?P<customer_id>.+?)/combinedAudiences/(?P<combined_audience_id>.+?)$",
+            path,
+        )
+        return m.groupdict() if m else {}
+
+    @staticmethod
     def conversion_action_path(
         customer_id: str,
         conversion_action_id: str,
@@ -1754,6 +1775,24 @@ class BatchJobServiceClient(metaclass=BatchJobServiceClientMeta):
         return m.groupdict() if m else {}
 
     @staticmethod
+    def mobile_app_category_constant_path(
+        mobile_app_category_id: str,
+    ) -> str:
+        """Returns a fully-qualified mobile_app_category_constant string."""
+        return "mobileAppCategoryConstants/{mobile_app_category_id}".format(
+            mobile_app_category_id=mobile_app_category_id,
+        )
+
+    @staticmethod
+    def parse_mobile_app_category_constant_path(path: str) -> Dict[str, str]:
+        """Parses a mobile_app_category_constant path into its component segments."""
+        m = re.match(
+            r"^mobileAppCategoryConstants/(?P<mobile_app_category_id>.+?)$",
+            path,
+        )
+        return m.groupdict() if m else {}
+
+    @staticmethod
     def remarketing_action_path(
         customer_id: str,
         remarketing_action_id: str,
@@ -1833,6 +1872,21 @@ class BatchJobServiceClient(metaclass=BatchJobServiceClientMeta):
             r"^customers/(?P<customer_id>.+?)/smartCampaignSettings/(?P<campaign_id>.+?)$",
             path,
         )
+        return m.groupdict() if m else {}
+
+    @staticmethod
+    def topic_constant_path(
+        topic_id: str,
+    ) -> str:
+        """Returns a fully-qualified topic_constant string."""
+        return "topicConstants/{topic_id}".format(
+            topic_id=topic_id,
+        )
+
+    @staticmethod
+    def parse_topic_constant_path(path: str) -> Dict[str, str]:
+        """Parses a topic_constant path into its component segments."""
+        m = re.match(r"^topicConstants/(?P<topic_id>.+?)$", path)
         return m.groupdict() if m else {}
 
     @staticmethod
@@ -2520,14 +2574,9 @@ class BatchJobServiceClient(metaclass=BatchJobServiceClientMeta):
         return response
 
 
-try:
-    DEFAULT_CLIENT_INFO = gapic_v1.client_info.ClientInfo(
-        gapic_version=pkg_resources.get_distribution(
-            "google-ads",
-        ).version,
-    )
-except pkg_resources.DistributionNotFound:
-    DEFAULT_CLIENT_INFO = gapic_v1.client_info.ClientInfo()
+DEFAULT_CLIENT_INFO = gapic_v1.client_info.ClientInfo(
+    gapic_version=package_version.__version__
+)
 
 
 __all__ = ("BatchJobServiceClient",)

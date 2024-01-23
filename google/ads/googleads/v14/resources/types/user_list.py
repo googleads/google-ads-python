@@ -109,6 +109,7 @@ class UserList(proto.Message):
             Output only. Size range in terms of number of
             users of the UserList, on the Google Display
             Network.
+
             This field is read-only.
         size_for_search (int):
             Output only. Estimated number of users in
@@ -116,6 +117,7 @@ class UserList(proto.Message):
             are the users available for targeting in Search
             campaigns. This value is null if the number of
             users has not yet been determined.
+
             This field is read-only.
 
             This field is a member of `oneof`_ ``_size_for_search``.
@@ -126,6 +128,7 @@ class UserList(proto.Message):
             This field is read-only.
         type_ (google.ads.googleads.v14.enums.types.UserListTypeEnum.UserListType):
             Output only. Type of this list.
+
             This field is read-only.
         closing_reason (google.ads.googleads.v14.enums.types.UserListClosingReasonEnum.UserListClosingReason):
             Indicating the reason why this user list
@@ -138,6 +141,7 @@ class UserList(proto.Message):
             account has been granted access to the list. The
             reason can be SHARED, OWNED, LICENSED or
             SUBSCRIBED.
+
             This field is read-only.
         account_user_list_status (google.ads.googleads.v14.enums.types.UserListAccessStatusEnum.UserListAccessStatus):
             Indicates if this share is still enabled.

@@ -110,14 +110,12 @@ class ConversionValueRuleOperation(proto.Message):
             fields are modified in an update.
         create (google.ads.googleads.v14.resources.types.ConversionValueRule):
             Create operation: No resource name is
-            expected for the new conversion
-            value rule.
+            expected for the new conversion value rule.
 
             This field is a member of `oneof`_ ``operation``.
         update (google.ads.googleads.v14.resources.types.ConversionValueRule):
             Update operation: The conversion value rule
-            is expected to have a valid
-            resource name.
+            is expected to have a valid resource name.
 
             This field is a member of `oneof`_ ``operation``.
         remove (str):

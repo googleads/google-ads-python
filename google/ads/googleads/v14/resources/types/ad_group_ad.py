@@ -64,9 +64,8 @@ class AdGroupAd(proto.Message):
         action_items (MutableSequence[str]):
             Output only. A list of recommendations to
             improve the ad strength. For example, a
-            recommendation could be "Your headlines are a
-            little too similar. Try adding more distinct
-            headlines.".
+            recommendation could be "Try adding a few more
+            unique headlines or unpinning some assets.".
         labels (MutableSequence[str]):
             Output only. The resource names of labels
             attached to this ad group ad.

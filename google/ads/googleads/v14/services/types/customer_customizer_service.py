@@ -106,8 +106,7 @@ class CustomerCustomizerOperation(proto.Message):
     Attributes:
         create (google.ads.googleads.v14.resources.types.CustomerCustomizer):
             Create operation: No resource name is
-            expected for the new customer
-            customizer
+            expected for the new customer customizer
 
             This field is a member of `oneof`_ ``operation``.
         remove (str):

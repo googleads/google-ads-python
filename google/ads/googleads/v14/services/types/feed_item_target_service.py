@@ -104,8 +104,7 @@ class FeedItemTargetOperation(proto.Message):
     Attributes:
         create (google.ads.googleads.v14.resources.types.FeedItemTarget):
             Create operation: No resource name is
-            expected for the new feed item
-            target.
+            expected for the new feed item target.
 
             This field is a member of `oneof`_ ``operation``.
         remove (str):

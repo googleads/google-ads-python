@@ -73,8 +73,7 @@ class CustomerUserAccessInvitationOperation(proto.Message):
     Attributes:
         create (google.ads.googleads.v14.resources.types.CustomerUserAccessInvitation):
             Create operation: No resource name is
-            expected for the new access
-            invitation.
+            expected for the new access invitation.
 
             This field is a member of `oneof`_ ``operation``.
         remove (str):

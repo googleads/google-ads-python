@@ -168,6 +168,7 @@ class AddBatchJobOperationsRequest(proto.Message):
             in the previous AddBatchJobOperations response.
         mutate_operations (MutableSequence[google.ads.googleads.v14.services.types.MutateOperation]):
             Required. The list of mutates being added.
+
             Operations can use negative integers as temp ids
             to signify dependencies between entities created
             in this batch job. For example, a customer with

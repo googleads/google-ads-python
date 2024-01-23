@@ -57,6 +57,7 @@ class KeywordPlanCampaign(proto.Message):
             This field is a member of `oneof`_ ``_id``.
         name (str):
             The name of the Keyword Plan campaign.
+
             This field is required and should not be empty
             when creating Keyword Plan campaigns.
 
@@ -66,12 +67,14 @@ class KeywordPlanCampaign(proto.Message):
             campaign. Max allowed: 1.
         keyword_plan_network (google.ads.googleads.v14.enums.types.KeywordPlanNetworkEnum.KeywordPlanNetwork):
             Targeting network.
+
             This field is required and should not be empty
             when creating Keyword Plan campaigns.
         cpc_bid_micros (int):
             A default max cpc bid in micros, and in the
             account currency, for all ad groups under the
             campaign.
+
             This field is required and should not be empty
             when creating Keyword Plan campaigns.
 

@@ -1018,12 +1018,13 @@ class PlannedProductForecast(proto.Message):
 
 
 class OnTargetAudienceMetrics(proto.Message):
-    r"""Audience metrics for the planned products.
-    These metrics consider the following targeting dimensions:
+    r"""Audience metrics for the planned products. These metrics consider
+    the following targeting dimensions:
 
-    - Location
-    - PlannableAgeRange
-    - Gender
+    -  Location
+    -  PlannableAgeRange
+    -  Gender
+    -  AudienceTargeting (only for youtube_audience_size)
 
     .. _oneof: https://proto-plus-python.readthedocs.io/en/stable/fields.html#oneofs-mutually-exclusive-fields
 

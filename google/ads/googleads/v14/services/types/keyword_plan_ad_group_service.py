@@ -96,14 +96,12 @@ class KeywordPlanAdGroupOperation(proto.Message):
             fields are modified in an update.
         create (google.ads.googleads.v14.resources.types.KeywordPlanAdGroup):
             Create operation: No resource name is
-            expected for the new Keyword Plan
-            ad group.
+            expected for the new Keyword Plan ad group.
 
             This field is a member of `oneof`_ ``operation``.
         update (google.ads.googleads.v14.resources.types.KeywordPlanAdGroup):
             Update operation: The Keyword Plan ad group
-            is expected to have a valid
-            resource name.
+            is expected to have a valid resource name.
 
             This field is a member of `oneof`_ ``operation``.
         remove (str):

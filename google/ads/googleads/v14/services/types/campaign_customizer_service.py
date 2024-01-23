@@ -106,8 +106,7 @@ class CampaignCustomizerOperation(proto.Message):
     Attributes:
         create (google.ads.googleads.v14.resources.types.CampaignCustomizer):
             Create operation: No resource name is
-            expected for the new campaign
-            customizer
+            expected for the new campaign customizer
 
             This field is a member of `oneof`_ ``operation``.
         remove (str):

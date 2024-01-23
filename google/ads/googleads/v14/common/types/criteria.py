@@ -164,6 +164,7 @@ class PlacementInfo(proto.Message):
     Attributes:
         url (str):
             URL of the placement.
+
             For example, "http://www.domain.com".
 
             This field is a member of `oneof`_ ``_url``.
@@ -1126,6 +1127,7 @@ class InteractionTypeInfo(proto.Message):
 
 class AdScheduleInfo(proto.Message):
     r"""Represents an AdSchedule criterion.
+
     AdSchedule is specified as the day of the week and a time
     interval within which ads will be shown.
 
@@ -1143,11 +1145,13 @@ class AdScheduleInfo(proto.Message):
             Minutes after the end hour at which this
             schedule ends. The schedule is exclusive of the
             end minute.
+
             This field is required for CREATE operations and
             is prohibited on UPDATE operations.
         start_hour (int):
             Starting hour in 24 hour time.
             This field must be between 0 and 23, inclusive.
+
             This field is required for CREATE operations and
             is prohibited on UPDATE operations.
 
@@ -1156,12 +1160,14 @@ class AdScheduleInfo(proto.Message):
             Ending hour in 24 hour time; 24 signifies end
             of the day. This field must be between 0 and 24,
             inclusive.
+
             This field is required for CREATE operations and
             is prohibited on UPDATE operations.
 
             This field is a member of `oneof`_ ``_end_hour``.
         day_of_week (google.ads.googleads.v14.enums.types.DayOfWeekEnum.DayOfWeek):
             Day of the week the schedule applies to.
+
             This field is required for CREATE operations and
             is prohibited on UPDATE operations.
     """

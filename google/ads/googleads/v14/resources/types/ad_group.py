@@ -57,11 +57,13 @@ class AdGroup(proto.Message):
             This field is a member of `oneof`_ ``_id``.
         name (str):
             The name of the ad group.
+
             This field is required and should not be empty
             when creating new ad groups.
 
             It must contain fewer than 255 UTF-8 full-width
             characters.
+
             It must not contain any null (code point 0x0),
             NL line feed (code point 0xA) or carriage return
             (code point 0xD) characters.
@@ -83,6 +85,7 @@ class AdGroup(proto.Message):
 
             For base ad groups, this field equals the ad
             group resource name.
+
             This field is read-only.
 
             This field is a member of `oneof`_ ``_base_ad_group``.

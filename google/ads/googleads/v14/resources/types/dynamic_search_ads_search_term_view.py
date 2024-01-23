@@ -41,6 +41,7 @@ class DynamicSearchAdsSearchTermView(proto.Message):
             ``customers/{customer_id}/dynamicSearchAdsSearchTermViews/{ad_group_id}~{search_term_fingerprint}~{headline_fingerprint}~{landing_page_fingerprint}~{page_url_fingerprint}``
         search_term (str):
             Output only. Search term
+
             This field is read-only.
 
             This field is a member of `oneof`_ ``_search_term``.

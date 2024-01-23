@@ -101,6 +101,7 @@ class AccountBudget(proto.Message):
             Output only. The approved start time of the
             account-level budget in yyyy-MM-dd HH:mm:ss
             format.
+
             For example, if a new budget is approved after
             the proposed start time, the approved start time
             is the time of approval.
@@ -108,6 +109,7 @@ class AccountBudget(proto.Message):
             This field is a member of `oneof`_ ``_approved_start_date_time``.
         total_adjustments_micros (int):
             Output only. The total adjustments amount.
+
             An example of an adjustment is courtesy credits.
         amount_served_micros (int):
             Output only. The value of Ads that have been served, in
@@ -179,6 +181,7 @@ class AccountBudget(proto.Message):
         adjusted_spending_limit_micros (int):
             Output only. The adjusted spending limit in
             micros.  One million is equivalent to one unit.
+
             If the approved spending limit is finite, the
             adjusted spending limit may vary depending on
             the types of adjustments applied to this budget,
@@ -188,6 +191,7 @@ class AccountBudget(proto.Message):
             here:
 
             https://support.google.com/google-ads/answer/1704323
+
             For example, a debit adjustment reduces how much
             the account is allowed to spend.
 

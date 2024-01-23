@@ -45,8 +45,10 @@ class Label(proto.Message):
             This field is a member of `oneof`_ ``_id``.
         name (str):
             The name of the label.
+
             This field is required and should not be empty
             when creating a new label.
+
             The length of this string should be between 1
             and 80, inclusive.
 

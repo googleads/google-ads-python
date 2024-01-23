@@ -576,7 +576,7 @@ class ErrorCode(proto.Message):
 
             This field is a member of `oneof`_ ``error_code``.
         quota_error (google.ads.googleads.v14.errors.types.QuotaErrorEnum.QuotaError):
-            An error with the amonut of quota remaining.
+            An error with the amount of quota remaining.
 
             This field is a member of `oneof`_ ``error_code``.
         ad_error (google.ads.googleads.v14.errors.types.AdErrorEnum.AdError):

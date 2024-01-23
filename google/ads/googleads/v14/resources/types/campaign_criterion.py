@@ -54,6 +54,7 @@ class CampaignCriterion(proto.Message):
             This field is a member of `oneof`_ ``_campaign``.
         criterion_id (int):
             Output only. The ID of the criterion.
+
             This field is ignored during mutate.
 
             This field is a member of `oneof`_ ``_criterion_id``.

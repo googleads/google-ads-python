@@ -110,8 +110,7 @@ class CustomizerAttributeOperation(proto.Message):
             fields are modified in an update.
         create (google.ads.googleads.v14.resources.types.CustomizerAttribute):
             Create operation: No resource name is
-            expected for the new customizer
-            attribute
+            expected for the new customizer attribute
 
             This field is a member of `oneof`_ ``operation``.
         remove (str):

@@ -94,14 +94,12 @@ class RemarketingActionOperation(proto.Message):
             fields are modified in an update.
         create (google.ads.googleads.v14.resources.types.RemarketingAction):
             Create operation: No resource name is
-            expected for the new remarketing
-            action.
+            expected for the new remarketing action.
 
             This field is a member of `oneof`_ ``operation``.
         update (google.ads.googleads.v14.resources.types.RemarketingAction):
             Update operation: The remarketing action is
-            expected to have a valid
-            resource name.
+            expected to have a valid resource name.
 
             This field is a member of `oneof`_ ``operation``.
     """

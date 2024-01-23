@@ -106,8 +106,7 @@ class AdGroupCustomizerOperation(proto.Message):
     Attributes:
         create (google.ads.googleads.v14.resources.types.AdGroupCustomizer):
             Create operation: No resource name is
-            expected for the new ad group
-            customizer
+            expected for the new ad group customizer
 
             This field is a member of `oneof`_ ``operation``.
         remove (str):

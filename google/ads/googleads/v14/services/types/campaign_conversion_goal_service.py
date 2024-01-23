@@ -78,8 +78,7 @@ class CampaignConversionGoalOperation(proto.Message):
             fields are modified in an update.
         update (google.ads.googleads.v14.resources.types.CampaignConversionGoal):
             Update operation: The customer conversion
-            goal is expected to have a
-            valid resource name.
+            goal is expected to have a valid resource name.
 
             This field is a member of `oneof`_ ``operation``.
     """

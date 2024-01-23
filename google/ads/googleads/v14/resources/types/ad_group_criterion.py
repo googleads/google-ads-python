@@ -57,6 +57,7 @@ class AdGroupCriterion(proto.Message):
             ``customers/{customer_id}/adGroupCriteria/{ad_group_id}~{criterion_id}``
         criterion_id (int):
             Output only. The ID of the criterion.
+
             This field is ignored for mutates.
 
             This field is a member of `oneof`_ ``_criterion_id``.
@@ -66,6 +67,7 @@ class AdGroupCriterion(proto.Message):
             This field is ignored for mutates.
         status (google.ads.googleads.v14.enums.types.AdGroupCriterionStatusEnum.AdGroupCriterionStatus):
             The status of the criterion.
+
             This is the status of the ad group criterion
             entity, set by the client. Note: UI reports may
             incorporate additional information that affects
@@ -108,6 +110,7 @@ class AdGroupCriterion(proto.Message):
             criterion can be found here:
 
             https://support.google.com/adspolicy/answer/6008942
+
             This field is read-only.
         labels (MutableSequence[str]):
             Output only. The resource names of labels
@@ -296,6 +299,7 @@ class AdGroupCriterion(proto.Message):
         Attributes:
             quality_score (int):
                 Output only. The quality score.
+
                 This field may not be populated if Google does
                 not have enough information to determine a
                 value.

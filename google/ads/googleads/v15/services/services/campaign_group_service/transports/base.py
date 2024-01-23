@@ -15,7 +15,6 @@
 #
 import abc
 from typing import Awaitable, Callable, Optional, Sequence, Union
-import pkg_resources
 
 import google.auth  # type: ignore
 import google.api_core  # type: ignore
@@ -27,14 +26,11 @@ from google.oauth2 import service_account  # type: ignore
 
 from google.ads.googleads.v15.services.types import campaign_group_service
 
-try:
-    DEFAULT_CLIENT_INFO = gapic_v1.client_info.ClientInfo(
-        gapic_version=pkg_resources.get_distribution(
-            "google-ads",
-        ).version,
-    )
-except pkg_resources.DistributionNotFound:
-    DEFAULT_CLIENT_INFO = gapic_v1.client_info.ClientInfo()
+from google.ads.googleads.v15 import gapic_version as package_version
+
+DEFAULT_CLIENT_INFO = gapic_v1.client_info.ClientInfo(
+    gapic_version=package_version.__version__
+)
 
 
 class CampaignGroupServiceTransport(abc.ABC):

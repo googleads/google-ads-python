@@ -32,6 +32,7 @@ __protobuf__ = proto.module(
 
 class GeographicView(proto.Message):
     r"""A geographic view.
+
     Geographic View includes all metrics aggregated at the country
     level, one row per country. It reports metrics at either actual
     physical location of the user or an area of interest. If other

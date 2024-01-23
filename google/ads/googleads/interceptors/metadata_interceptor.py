@@ -19,22 +19,19 @@ and updates the metadata in order to insert the developer token and
 login-customer-id values.
 """
 
-import pkg_resources
+# TODO: Explicitly importing the protobuf package version here should be removed
+# once the below issue is resolved, and the protobuf version is added to the
+# request user-agent directly by the google-api-core package:
+# https://github.com/googleapis/python-api-core/issues/416
+from importlib import metadata
+
+_PROTOBUF_VERSION = metadata.version("protobuf")
+
 
 from google.protobuf.internal import api_implementation
 from grpc import UnaryUnaryClientInterceptor, UnaryStreamClientInterceptor
 
 from .interceptor import Interceptor
-
-# TODO: This logic should be updated or removed once the following is fixed:
-# https://github.com/googleapis/python-api-core/issues/416
-try:
-    _PROTOBUF_VERSION = pkg_resources.get_distribution("protobuf").version
-except pkg_resources.DistributionNotFound:
-    # If the distribution can't be found for whatever reason then we set
-    # the version to None so that we can know to leave this header out of the
-    # request.
-    _PROTOBUF_VERSION = None
 
 # Determine which protobuf implementation is being used.
 if api_implementation.Type() == "cpp":

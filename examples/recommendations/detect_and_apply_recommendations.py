@@ -12,30 +12,28 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
-"""This example shows how to retrieve recommendations and apply them.
+"""This example shows how to retrieve recommendations and apply them in a batch.
 
-The auto-apply feature, which automatically applies recommendations as they
-become eligible, is supported by the Google Ads UI but not by the Google Ads
-API. See https://support.google.com/google-ads/answer/10279006 for more
-information on using auto-apply in the Google Ads UI.
+Recommendations should be applied shortly after they're retrieved. Depending on
+the recommendation type, a recommendation can become obsolete quickly, and
+obsolete recommendations throw an error when applied. For more details, see:
+https://developers.google.com/google-ads/api/docs/recommendations#take_action
 
-This example demonstrates how an alternative can be implemented with the
-features that are currently supported by the Google Ads API. It periodically
-retrieves and applies `KEYWORD` recommendations with default parameters.
+As of Google Ads API v15 users can subscribe to certain recommendation types to
+apply them automatically. For more details, see:
+https://developers.google.com/google-ads/api/docs/recommendations#auto-apply
+
+As of Google Ads API v16 users can proactively generate certain recommendation
+types during the campaign construction process. For more details see:
+https://developers.google.com/google-ads/api/docs/recommendations#recommendations-in-campaign-construction
 """
 
 
 import argparse
 import sys
-from time import sleep
 
 from google.ads.googleads.client import GoogleAdsClient
 from google.ads.googleads.errors import GoogleAdsException
-
-MAX_RESULT_SIZE = 2
-NUMBER_OF_RUNS = 2
-SECONDS_TO_SLEEP = 5
-PAGE_SIZE = 1000
 
 
 def main(client, customer_id):
@@ -62,53 +60,46 @@ def detect_and_apply_recommendations(client, customer_id):
           recommendation.keyword_recommendation
         FROM recommendation
         WHERE
-          recommendation.type = KEYWORD
-        LIMIT {MAX_RESULT_SIZE}"""
+          recommendation.type = KEYWORD"""
 
-    for i in range(NUMBER_OF_RUNS):
-        request = client.get_type("SearchGoogleAdsRequest")
-        request.customer_id = customer_id
-        request.query = query
-        request.page_size = PAGE_SIZE
+    # Detects keyword recommendations that exist for the customer account.
+    response = googleads_service.search(customer_id=customer_id, query=query)
 
-        response = googleads_service.search(request=request)
-
-        for row in response.results:
-            recommendation = row.recommendation
-            print(
-                f"Keyword recommendation ('{recommendation.resource_name}') "
-                f"was found for campaign '{recommendation.campaign}"
-            )
-
-            if "keyword_recommendation" in recommendation:
-                keyword = recommendation.keyword_recommendation.keyword
-                print(
-                    f"\tKeyword = '{keyword.text}'\n"
-                    f"\tType = '{keyword.match_type}'"
-                )
-
-            apply_recommendation(
-                client, customer_id, recommendation.resource_name
-            )
-
+    operations = []
+    for row in response.results:
+        recommendation = row.recommendation
         print(
-            f"Waiting {SECONDS_TO_SLEEP} seconds before applying more "
-            "recommendations."
+            f"Keyword recommendation ('{recommendation.resource_name}') "
+            f"was found for campaign '{recommendation.campaign}."
         )
-        sleep(SECONDS_TO_SLEEP)
+
+        keyword = recommendation.keyword_recommendation.keyword
+        print(
+            f"\tKeyword = '{keyword.text}'\n" f"\tType = '{keyword.match_type}'"
+        )
+
+        # Create an ApplyRecommendationOperation that will be used to apply
+        # this recommendation, and add it to the list of operations.
+        operations.append(
+            build_recommendation_operation(client, recommendation.resource_name)
+        )
+
+    # If there are operations present, send a request to apply the
+    # recommendations.
+    if operations:
+        apply_recommendations(client, customer_id, operations)
 
 
-# [START apply_recommendation]
-def apply_recommendation(client, customer_id, recommendation):
-    """Applies a recommendation.
+def build_recommendation_operation(client, recommendation):
+    """Creates a ApplyRecommendationOperation to apply the given recommendation.
 
     Args:
         client: an initialized GoogleAdsClient instance.
         customer_id: a client customer ID.
         recommendation: a resource name for the recommendation to be applied.
     """
-    # If you have a recommendation_id instead of the resournce_name
-    # you can create a resource name from it like this:
+    # If you have a recommendation ID instead of a resource name, you can create
+    # a resource name like this:
     #
     # googleads_service = client.get_service("GoogleAdsService")
     # resource_name = googleads_service.recommendation_path(
@@ -116,28 +107,41 @@ def apply_recommendation(client, customer_id, recommendation):
     # )
 
     operation = client.get_type("ApplyRecommendationOperation")
-    operation.resource_name = recommendation
 
     # Each recommendation type has optional parameters to override the
-    # recommended values. This is an example to override a recommended ad when a
-    # TextAdRecommendation is applied.
-    # For details, please read:
-    # https://developers.google.com/google-ads/api/reference/rpc/google.ads.google_ads.v1.services#google.ads.google_ads.v1.services.ApplyRecommendationOperation
+    # recommended values. Below is an example showing how to override a
+    # recommended ad when a TextAdRecommendation is applied.
     #
-    # operation.text_ad.ad = "INSERT_AD_ID_AS_INTEGER_HERE"
+    # operation.text_ad.ad.resource_name = "INSERT_AD_RESOURCE_NAME"
+    #
+    # For more details, see:
+    # https://developers.google.com/google-ads/api/reference/rpc/latest/ApplyRecommendationOperation#apply_parameters
 
-    # Issues a mutate request to apply the recommendation.
+    operation.resource_name = recommendation
+    return operation
+
+
+# [START apply_recommendation]
+def apply_recommendations(client, customer_id, operations):
+    """Applies a batch of recommendations.
+
+    Args:
+        client: an initialized GoogleAdsClient instance.
+        customer_id: a client customer ID.
+        operations: a list of ApplyRecommendationOperation messages.
+    """
+    # Issues a mutate request to apply the recommendations.
     recommendation_service = client.get_service("RecommendationService")
     response = recommendation_service.apply_recommendation(
-        customer_id=customer_id, operations=[operation]
+        customer_id=customer_id, operations=operations
     )
 
-    applied_recommendation = response.results[0].resource_name
-
-    print(
-        "Applied recommendation with resource name: '{applied_recommendation}'."
-    )
-    # [END apply_recommendation]
+    for result in response.results:
+        print(
+            "Applied a recommendation with resource name: "
+            f"'{result[0].resource_name}'."
+        )
+        # [END apply_recommendation]
 
 
 if __name__ == "__main__":
@@ -146,7 +150,10 @@ if __name__ == "__main__":
     googleads_client = GoogleAdsClient.load_from_storage(version="v16")
 
     parser = argparse.ArgumentParser(
-        description="Lists TEXT_AD recommendations for specified customer."
+        description=(
+            "Retrieves keyword recommendations for specified customer and "
+            "applies them."
+        )
     )
     # The following argument(s) should be provided to run the example.
     parser.add_argument(

@@ -39,13 +39,12 @@ def main(client, customer_id, campaign_id):
     link_sitelinks_to_campaign(client, customer_id, campaign_id, resource_names)
 
 
-def create_sitelink_assets(client, customer_id, campaign_id):
+def create_sitelink_assets(client, customer_id):
     """Creates sitelink assets, which can be added to campaigns.
 
     Args:
         client: The Google Ads client.
         customer_id: The customer ID for which to add the keyword.
-        campaign_id: The campaign to which sitelinks will be added.
 
     Returns:
         a list of sitelink asset resource names.

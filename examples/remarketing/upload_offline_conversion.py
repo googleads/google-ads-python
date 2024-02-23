@@ -136,7 +136,7 @@ def main(
 if __name__ == "__main__":
     # GoogleAdsClient will read the google-ads.yaml configuration file in the
     # home directory if none is specified.
-    googleads_client = GoogleAdsClient.load_from_storage(version="v15")
+    googleads_client = GoogleAdsClient.load_from_storage(version="v16")
 
     parser = argparse.ArgumentParser(
         description="Uploads an offline conversion."
@@ -225,9 +225,7 @@ if __name__ == "__main__":
         "--ad_user_data_consent",
         type=str,
         choices=[e.name for e in googleads_client.enums.ConsentStatusEnum],
-        help=(
-            "The ad user data consent for the click."
-        ),
+        help=("The ad user data consent for the click."),
     )
     args = parser.parse_args()
 

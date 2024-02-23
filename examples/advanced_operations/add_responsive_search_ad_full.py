@@ -51,7 +51,9 @@ _LOCALE = "es"
 _COUNTRY_CODE = "AR"
 
 
-def main(client, customer_id, omit_image_extensions, customizer_attribute_name=None):
+def main(
+    client, customer_id, omit_image_extensions, customizer_attribute_name=None
+):
     """
     The main method that creates all necessary entities for the example.
 
@@ -75,7 +77,9 @@ def main(client, customer_id, omit_image_extensions, customizer_attribute_name=N
     # Create a budget, which can be shared by multiple campaigns.
     campaign_budget = create_campaign_budget(client, customer_id)
 
-    campaign_resource_name = create_campaign(client, customer_id, campaign_budget)
+    campaign_resource_name = create_campaign(
+        client, customer_id, campaign_budget
+    )
 
     ad_group_resource_name = create_ad_group(
         client, customer_id, campaign_resource_name
@@ -122,7 +126,9 @@ def create_customizer_attribute(client, customer_id, customizer_attribute_name):
 
     # Issue a mutate request to add the customizer attribute and prints its
     # information.
-    customizer_attribute_service = client.get_service("CustomizerAttributeService")
+    customizer_attribute_service = client.get_service(
+        "CustomizerAttributeService"
+    )
     response = customizer_attribute_service.mutate_customizer_attributes(
         customer_id=customer_id, operations=[operation]
     )
@@ -153,13 +159,19 @@ def link_customizer_attribute_to_customer(
     # Create a customer customizer with the value to be used in the responsive
     # search ad.
     customer_customizer = operation.create
-    customer_customizer.customizer_attribute = customizer_attribute_resource_name
-    customer_customizer.value.type_ = client.enums.CustomizerAttributeTypeEnum.PRICE
+    customer_customizer.customizer_attribute = (
+        customizer_attribute_resource_name
+    )
+    customer_customizer.value.type_ = (
+        client.enums.CustomizerAttributeTypeEnum.PRICE
+    )
     # The ad customizer will dynamically replace the placeholder with this value
     # when the ad serves.
     customer_customizer.value.string_value = "100USD"
 
-    customer_customizer_service = client.get_service("CustomerCustomizerService")
+    customer_customizer_service = client.get_service(
+        "CustomerCustomizerService"
+    )
     # Issue a mutate request to create the customer customizer and prints its
     # information.
     response = customer_customizer_service.mutate_customer_customizers(
@@ -192,7 +204,9 @@ def create_ad_text_asset(client, text, pinned_field=None):
     return ad_text_asset
 
 
-def create_ad_text_asset_with_customizer(client, customizer_attribute_resource_name):
+def create_ad_text_asset_with_customizer(
+    client, customizer_attribute_resource_name
+):
     """Create an AdTextAsset.
     Args:
         client: an initialized GoogleAdsClient instance.
@@ -230,7 +244,9 @@ def create_campaign_budget(client, customer_id):
     campaign_budget_operation = client.get_type("CampaignBudgetOperation")
     campaign_budget = campaign_budget_operation.create
     campaign_budget.name = f"Campaign budget {uuid.uuid4()}"
-    campaign_budget.delivery_method = client.enums.BudgetDeliveryMethodEnum.STANDARD
+    campaign_budget.delivery_method = (
+        client.enums.BudgetDeliveryMethodEnum.STANDARD
+    )
     campaign_budget.amount_micros = 500000
 
     # Add budget.
@@ -256,7 +272,9 @@ def create_campaign(client, customer_id, campaign_budget):
     campaign_operation = client.get_type("CampaignOperation")
     campaign = campaign_operation.create
     campaign.name = f"Testing RSA via API {uuid.uuid4()}"
-    campaign.advertising_channel_type = client.enums.AdvertisingChannelTypeEnum.SEARCH
+    campaign.advertising_channel_type = (
+        client.enums.AdvertisingChannelTypeEnum.SEARCH
+    )
 
     # Recommendation: Set the campaign to PAUSED when creating it to prevent
     # the ads from immediately serving. Set to ENABLED once you've added
@@ -433,7 +451,9 @@ def add_keywords(client, customer_id, ad_group_resource_name):
     ad_group_criterion.ad_group = ad_group_resource_name
     ad_group_criterion.status = client.enums.AdGroupCriterionStatusEnum.ENABLED
     ad_group_criterion.keyword.text = _KEYWORD_TEXT_EXACT_1
-    ad_group_criterion.keyword.match_type = client.enums.KeywordMatchTypeEnum.EXACT
+    ad_group_criterion.keyword.match_type = (
+        client.enums.KeywordMatchTypeEnum.EXACT
+    )
 
     # Uncomment the below line if you want to change this keyword to a negative target.
     # ad_group_criterion.negative = True
@@ -450,7 +470,9 @@ def add_keywords(client, customer_id, ad_group_resource_name):
     ad_group_criterion.ad_group = ad_group_resource_name
     ad_group_criterion.status = client.enums.AdGroupCriterionStatusEnum.ENABLED
     ad_group_criterion.keyword.text = _KEYWORD_TEXT_PHRASE_1
-    ad_group_criterion.keyword.match_type = client.enums.KeywordMatchTypeEnum.PHRASE
+    ad_group_criterion.keyword.match_type = (
+        client.enums.KeywordMatchTypeEnum.PHRASE
+    )
 
     # Uncomment the below line if you want to change this keyword to a negative target.
     # ad_group_criterion.negative = True
@@ -467,7 +489,9 @@ def add_keywords(client, customer_id, ad_group_resource_name):
     ad_group_criterion.ad_group = ad_group_resource_name
     ad_group_criterion.status = client.enums.AdGroupCriterionStatusEnum.ENABLED
     ad_group_criterion.keyword.text = _KEYWORD_TEXT_BROAD_1
-    ad_group_criterion.keyword.match_type = client.enums.KeywordMatchTypeEnum.BROAD
+    ad_group_criterion.keyword.match_type = (
+        client.enums.KeywordMatchTypeEnum.BROAD
+    )
 
     # Uncomment the below line if you want to change this keyword to a negative target.
     # ad_group_criterion.negative = True
@@ -482,9 +506,11 @@ def add_keywords(client, customer_id, ad_group_resource_name):
     campaign_criterion_operations = operations
 
     # Add keywords
-    ad_group_criterion_response = ad_group_criterion_service.mutate_ad_group_criteria(
-        customer_id=customer_id,
-        operations=[*campaign_criterion_operations],
+    ad_group_criterion_response = (
+        ad_group_criterion_service.mutate_ad_group_criteria(
+            customer_id=customer_id,
+            operations=[*campaign_criterion_operations],
+        )
     )
     for result in ad_group_criterion_response.results:
         print("Created keyword " f"{result.resource_name}.")
@@ -515,7 +541,9 @@ def add_geo_targeting(client, customer_id, campaign_resource_name):
         [_GEO_LOCATION_1, _GEO_LOCATION_2, _GEO_LOCATION_3]
     )
 
-    results = geo_target_constant_service.suggest_geo_target_constants(gtc_request)
+    results = geo_target_constant_service.suggest_geo_target_constants(
+        gtc_request
+    )
 
     operations = []
     for suggestion in results.geo_target_constant_suggestions:
@@ -526,7 +554,9 @@ def add_geo_targeting(client, customer_id, campaign_resource_name):
             f"from search term ({suggestion.search_term})."
         )
         # Create the campaign criterion for location targeting.
-        campaign_criterion_operation = client.get_type("CampaignCriterionOperation")
+        campaign_criterion_operation = client.get_type(
+            "CampaignCriterionOperation"
+        )
         campaign_criterion = campaign_criterion_operation.create
         campaign_criterion.campaign = campaign_resource_name
         campaign_criterion.location.geo_target_constant = (
@@ -535,8 +565,10 @@ def add_geo_targeting(client, customer_id, campaign_resource_name):
         operations.append(campaign_criterion_operation)
 
     campaign_criterion_service = client.get_service("CampaignCriterionService")
-    campaign_criterion_response = campaign_criterion_service.mutate_campaign_criteria(
-        customer_id=customer_id, operations=[*operations]
+    campaign_criterion_response = (
+        campaign_criterion_service.mutate_campaign_criteria(
+            customer_id=customer_id, operations=[*operations]
+        )
     )
 
     for result in campaign_criterion_response.results:
@@ -583,16 +615,23 @@ def add_images(client, customer_id, campaign_resource_name):
 
     # Step 6.2 - Create Image Extension
     extension_feed_item_service = client.get_service("ExtensionFeedItemService")
-    extension_feed_item_operation = client.get_type("ExtensionFeedItemOperation")
+    extension_feed_item_operation = client.get_type(
+        "ExtensionFeedItemOperation"
+    )
     extension_feed_item = extension_feed_item_operation.create
     extension_feed_item.image_feed_item.image_asset = image_asset_resource_name
 
-    extension_feed_response = extension_feed_item_service.mutate_extension_feed_items(
-        customer_id=customer_id, operations=[extension_feed_item_operation]
+    extension_feed_response = (
+        extension_feed_item_service.mutate_extension_feed_items(
+            customer_id=customer_id, operations=[extension_feed_item_operation]
+        )
     )
     image_resource_name = extension_feed_response.results[0].resource_name
 
-    print("Created an image extension with resource name: " f"'{image_resource_name}'")
+    print(
+        "Created an image extension with resource name: "
+        f"'{image_resource_name}'"
+    )
 
     # Step 6.3 - Link Image Extension to RSA
     campaign_extension_setting_service = client.get_service(
@@ -622,7 +661,7 @@ def add_images(client, customer_id, campaign_resource_name):
 if __name__ == "__main__":
     # GoogleAdsClient will read the google-ads.yaml configuration file in the
     # home directory if none is specified.
-    googleads_client = GoogleAdsClient.load_from_storage(version="v15")
+    googleads_client = GoogleAdsClient.load_from_storage(version="v16")
 
     parser = argparse.ArgumentParser(
         description=("Creates a Responsive Search Ad for specified customer.")

@@ -32,6 +32,10 @@ def main(client, customer_id):
 
     # Create conversion action.
     conversion_action = conversion_action_operation.create
+
+    # Note that conversion action names must be unique. If a conversion action
+    # already exists with the specified conversion_action_name, the create
+    # operation will fail with a ConversionActionError.DUPLICATE_NAME error.
     conversion_action.name = f"Earth to Mars Cruises Conversion {uuid.uuid4()}"
     conversion_action.type_ = (
         client.enums.ConversionActionTypeEnum.UPLOAD_CLICKS
@@ -65,7 +69,7 @@ def main(client, customer_id):
 if __name__ == "__main__":
     # GoogleAdsClient will read the google-ads.yaml configuration file in the
     # home directory if none is specified.
-    googleads_client = GoogleAdsClient.load_from_storage(version="v15")
+    googleads_client = GoogleAdsClient.load_from_storage(version="v16")
 
     parser = argparse.ArgumentParser(
         description="Adds a conversion action for specified customer."

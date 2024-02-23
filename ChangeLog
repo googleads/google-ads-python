@@ -1,3 +1,11 @@
+* 23.1.0
+- Google Ads API v16 release.
+- Use native `open` function to load README in setup.py.
+- Remove `namespace_packages` parameter in call to `setup` in setup.py.
+- Remove `upload_image` and `upload_media_bundle` examples.
+- Combine detect and apply recommendations examples.
+- Update extensions-related examples to use assets instead.
+
 * 23.0.0
 - Remove support for Python 3.7
 - Add support for Python 3.11 and 3.12

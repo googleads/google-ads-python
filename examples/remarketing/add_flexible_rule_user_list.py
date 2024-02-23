@@ -151,7 +151,7 @@ def create_user_list_rule_info_from_url(client, url):
 if __name__ == "__main__":
     # GoogleAdsClient will read the google-ads.yaml configuration file in the
     # home directory if none is specified.
-    googleads_client = GoogleAdsClient.load_from_storage(version="v15")
+    googleads_client = GoogleAdsClient.load_from_storage(version="v16")
 
     parser = argparse.ArgumentParser(
         description="Creates a combination user list containing users that are "

@@ -14,7 +14,6 @@
 """A setup module for the Google Ads API client library."""
 
 from setuptools import setup, find_namespace_packages
-import io
 
 install_requires = [
     "google-auth-oauthlib >= 0.3.0, < 2.0.0",
@@ -30,12 +29,12 @@ install_requires = [
     "protobuf >= 4.25.0, < 5.0.0",
 ]
 
-with io.open("README.rst", "r", encoding="utf-8") as readme_file:
+with open("README.rst", "r", encoding="utf-8") as readme_file:
     long_description = readme_file.read()
 
 setup(
     name="google-ads",
-    version="23.0.0",
+    version="23.1.0",
     author="Google LLC",
     author_email="googleapis-packages@google.com",
     classifiers=[
@@ -66,7 +65,6 @@ setup(
         include=["google.ads.*"],
         exclude=["examples", "examples.*", "tests", "tests.*"],
     ),
-    namespace_packages=["google", "google.ads"],
     url="https://github.com/googleads/google-ads-python",
     zip_safe=False,
 )

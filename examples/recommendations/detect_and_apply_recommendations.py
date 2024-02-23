@@ -1,5 +1,5 @@
 #!/usr/bin/env python
-# Copyright 2022 Google LLC
+# Copyright 2023 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -12,101 +12,141 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
-"""This example illustrate how to retrieve and apply recommendations.
+"""This example shows how to retrieve recommendations and apply them.
 
 The auto-apply feature, which automatically applies recommendations as they
-become eligible, is currently supported by the Google Ads UI but not by the
-Google Ads API. See https://support.google.com/google-ads/answer/10279006
-for more information on using auto-apply in the Google Ads UI.
+become eligible, is supported by the Google Ads UI but not by the Google Ads
+API. See https://support.google.com/google-ads/answer/10279006 for more
+information on using auto-apply in the Google Ads UI.
+
+This example demonstrates how an alternative can be implemented with the
+features that are currently supported by the Google Ads API. It periodically
+retrieves and applies `KEYWORD` recommendations with default parameters.
 """
 
+
 import argparse
-from re import I
 import sys
-import time
+from time import sleep
 
 from google.ads.googleads.client import GoogleAdsClient
 from google.ads.googleads.errors import GoogleAdsException
 
-# The maximum number of recommendations to periodically retrieve and apply.  In a real
-# application, such a limit would typically not be used.
 MAX_RESULT_SIZE = 2
-
-# The number of times to retrieve and apply recommendations. In a real application, such a
-# limit would typically not be used.
-NUMBER_OF_RUNS = 3
-
-# The time to wait between two runs. In a real application, this would typically be set to
-# minutes or hours instead of seconds.
-SECONDS_TO_WAIT = 5
+NUMBER_OF_RUNS = 2
+SECONDS_TO_SLEEP = 5
+PAGE_SIZE = 1000
 
 
-# [START detect_and_apply_recommendations]
 def main(client, customer_id):
-    ga_service = client.get_service("GoogleAdsService")
+    """The main method that creates all necessary entities for the example.
 
-    query = f"""SELECT recommendation.resource_name
+    Args:
+        client: an initialized GoogleAdsClient instance.
+        customer_id: a client customer ID.
+    """
+    detect_and_apply_recommendations(client, customer_id)
+
+
+def detect_and_apply_recommendations(client, customer_id):
+    """Detects recommendations and applies them.
+
+    Args:
+        client: an initialized GoogleAdsClient instance.
+        customer_id: a client customer ID.
+    """
+    googleads_service = client.get_service("GoogleAdsService")
+    query = f"""
+        SELECT
+          recommendation.campaign,
+          recommendation.keyword_recommendation
         FROM recommendation
-        WHERE recommendation.type = KEYWORD
+        WHERE
+          recommendation.type = KEYWORD
         LIMIT {MAX_RESULT_SIZE}"""
 
-    recommendation_service = client.get_service("RecommendationService")
+    for i in range(NUMBER_OF_RUNS):
+        request = client.get_type("SearchGoogleAdsRequest")
+        request.customer_id = customer_id
+        request.query = query
+        request.page_size = PAGE_SIZE
 
-    for i in range(NUMBER_OF_RUNS + 1):
-        search_request = client.get_type("SearchGoogleAdsStreamRequest")
-        search_request.customer_id = customer_id
-        search_request.query = query
-        stream = ga_service.search_stream(request=search_request)
+        response = googleads_service.search(request=request)
 
-        apply_recommendation_operations = []
-
-        for batch in stream:
-            for row in batch.results:
-                recommendation = row.recommendation
-
-                apply_recommendation_operation = client.get_type(
-                    "ApplyRecommendationOperation"
-                )
-
-                apply_recommendation_operation.resource_name = (
-                    recommendation_service.recommendation_path(
-                        customer_id, recommendation.id
-                    )
-                )
-
-                apply_recommendation_operations.append(
-                    apply_recommendation_operation
-                )
-
-            recommendation_response = (
-                recommendation_service.apply_recommendation(
-                    customer_id=customer_id,
-                    operations=apply_recommendation_operations,
-                )
+        for row in response.results:
+            recommendation = row.recommendation
+            print(
+                f"Keyword recommendation ('{recommendation.resource_name}') "
+                f"was found for campaign '{recommendation.campaign}"
             )
 
-            for resp in recommendation_response:
-                for row in resp.results:
-                    print(
-                        f"Applied recommendation with resource name:  \
-                        {recommendation_response.resource_name}"
-                    )
+            if "keyword_recommendation" in recommendation:
+                keyword = recommendation.keyword_recommendation.keyword
+                print(
+                    f"\tKeyword = '{keyword.text}'\n"
+                    f"\tType = '{keyword.match_type}'"
+                )
+
+            apply_recommendation(
+                client, customer_id, recommendation.resource_name
+            )
 
         print(
-            f"Waiting {SECONDS_TO_WAIT} seconds before checking for additional \
-                recommendations."
+            f"Waiting {SECONDS_TO_SLEEP} seconds before applying more "
+            "recommendations."
         )
-        time.sleep(float(SECONDS_TO_WAIT))
-    # [END detect_and_apply_recommendations]
+        sleep(SECONDS_TO_SLEEP)
+
+
+# [START apply_recommendation]
+def apply_recommendation(client, customer_id, recommendation):
+    """Applies a recommendation.
+
+    Args:
+        client: an initialized GoogleAdsClient instance.
+        customer_id: a client customer ID.
+        recommendation: a resource name for the recommendation to be applied.
+    """
+    # If you have a recommendation_id instead of the resournce_name
+    # you can create a resource name from it like this:
+    #
+    # googleads_service = client.get_service("GoogleAdsService")
+    # resource_name = googleads_service.recommendation_path(
+    #   customer_id, recommendation.id
+    # )
+
+    operation = client.get_type("ApplyRecommendationOperation")
+    operation.resource_name = recommendation
+
+    # Each recommendation type has optional parameters to override the
+    # recommended values. This is an example to override a recommended ad when a
+    # TextAdRecommendation is applied.
+    # For details, please read:
+    # https://developers.google.com/google-ads/api/reference/rpc/google.ads.google_ads.v1.services#google.ads.google_ads.v1.services.ApplyRecommendationOperation
+    #
+    # operation.text_ad.ad = "INSERT_AD_ID_AS_INTEGER_HERE"
+
+    # Issues a mutate request to apply the recommendation.
+    recommendation_service = client.get_service("RecommendationService")
+    response = recommendation_service.apply_recommendation(
+        customer_id=customer_id, operations=[operation]
+    )
+
+    applied_recommendation = response.results[0].resource_name
+
+    print(
+        "Applied recommendation with resource name: '{applied_recommendation}'."
+    )
+    # [END apply_recommendation]
 
 
 if __name__ == "__main__":
     # GoogleAdsClient will read the google-ads.yaml configuration file in the
     # home directory if none is specified.
-    googleads_client = GoogleAdsClient.load_from_storage(version="v15")
+    googleads_client = GoogleAdsClient.load_from_storage(version="v16")
 
     parser = argparse.ArgumentParser(
-        description=("Detects and applies a specified recommendation.")
+        description="Lists TEXT_AD recommendations for specified customer."
     )
     # The following argument(s) should be provided to run the example.
     parser.add_argument(

@@ -61,7 +61,7 @@ def main(
     request = client.get_type("GenerateKeywordIdeasRequest")
     request.customer_id = customer_id
     request.language = language_rn
-    request.geo_target_constants = location_rns
+    request.geo_target_constants.extend(location_rns)
     request.include_adult_keywords = False
     request.keyword_plan_network = keyword_plan_network
 

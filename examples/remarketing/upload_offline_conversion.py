@@ -221,7 +221,7 @@ if __name__ == "__main__":
         help="The order ID for the click conversion.",
     )
     parser.add_argument(
-        "-d",
+        "-s",
         "--ad_user_data_consent",
         type=str,
         choices=[e.name for e in googleads_client.enums.ConsentStatusEnum],

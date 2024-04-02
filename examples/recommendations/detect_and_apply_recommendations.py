@@ -125,6 +125,7 @@ def build_recommendation_operation(client, recommendation):
     return operation
     # [END build_apply_recommendation_operation]
 
+
 # [START apply_recommendation]
 def apply_recommendations(client, customer_id, operations):
     """Applies a batch of recommendations.

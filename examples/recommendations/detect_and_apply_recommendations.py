@@ -53,6 +53,8 @@ def detect_and_apply_recommendations(client, customer_id):
         client: an initialized GoogleAdsClient instance.
         customer_id: a client customer ID.
     """
+
+    # [START detect_keyword_recommendations]
     googleads_service = client.get_service("GoogleAdsService")
     query = f"""
         SELECT
@@ -83,6 +85,7 @@ def detect_and_apply_recommendations(client, customer_id):
         operations.append(
             build_recommendation_operation(client, recommendation.resource_name)
         )
+    # [END detect_keyword_recommendations]
 
     # If there are operations present, send a request to apply the
     # recommendations.
@@ -90,6 +93,7 @@ def detect_and_apply_recommendations(client, customer_id):
         apply_recommendations(client, customer_id, operations)
 
 
+# [START build_apply_recommendation_operation]
 def build_recommendation_operation(client, recommendation):
     """Creates a ApplyRecommendationOperation to apply the given recommendation.
 
@@ -119,6 +123,7 @@ def build_recommendation_operation(client, recommendation):
 
     operation.resource_name = recommendation
     return operation
+    # [END build_apply_recommendation_operation]
 
 
 # [START apply_recommendation]

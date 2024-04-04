@@ -101,7 +101,7 @@ def main(
         client.enums.UserIdentifierSourceEnum.FIRST_PARTY
     )
     # Uses the normalize and hash method specifically for email addresses.
-    email_identifier.hashed_phone_number = normalize_and_hash_email_address(
+    email_identifier.hashed_email = normalize_and_hash_email_address(
         raw_record["email"]
     )
     # Adds the user identifier to the conversion.

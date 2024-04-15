@@ -25,7 +25,10 @@ login-customer-id values.
 # https://github.com/googleapis/python-api-core/issues/416
 from importlib import metadata
 
-_PROTOBUF_VERSION = metadata.version("protobuf")
+try:
+    _PROTOBUF_VERSION = metadata.version("protobuf")
+except metadata.PackageNotFoundError:
+    _PROTOBUF_VERSION = None
 
 
 from google.protobuf.internal import api_implementation

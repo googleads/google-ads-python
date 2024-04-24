@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-# Copyright 2023 Google LLC
+# Copyright 2024 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -21,6 +21,7 @@ import proto  # type: ignore
 from google.ads.googleads.v16.resources.types import (
     customer_sk_ad_network_conversion_value_schema,
 )
+from google.rpc import status_pb2  # type: ignore
 
 
 __protobuf__ = proto.module(
@@ -65,6 +66,11 @@ class MutateCustomerSkAdNetworkConversionValueSchemaRequest(proto.Message):
         validate_only (bool):
             If true, the request is validated but not
             executed. Only errors are returned, not results.
+        enable_warnings (bool):
+            Optional. If true, enables returning
+            warnings. Warnings return error messages and
+            error codes without blocking the execution of
+            the mutate operation.
     """
 
     customer_id: str = proto.Field(
@@ -81,6 +87,10 @@ class MutateCustomerSkAdNetworkConversionValueSchemaRequest(proto.Message):
     validate_only: bool = proto.Field(
         proto.BOOL,
         number=3,
+    )
+    enable_warnings: bool = proto.Field(
+        proto.BOOL,
+        number=4,
     )
 
 
@@ -113,6 +123,9 @@ class MutateCustomerSkAdNetworkConversionValueSchemaResponse(proto.Message):
     Attributes:
         result (google.ads.googleads.v16.services.types.MutateCustomerSkAdNetworkConversionValueSchemaResult):
             All results for the mutate.
+        warning (google.rpc.status_pb2.Status):
+            Non blocking errors that provides schema validation failure
+            details. Returned only when enable_warnings = true.
     """
 
     result: "MutateCustomerSkAdNetworkConversionValueSchemaResult" = (
@@ -121,6 +134,11 @@ class MutateCustomerSkAdNetworkConversionValueSchemaResponse(proto.Message):
             number=1,
             message="MutateCustomerSkAdNetworkConversionValueSchemaResult",
         )
+    )
+    warning: status_pb2.Status = proto.Field(
+        proto.MESSAGE,
+        number=2,
+        message=status_pb2.Status,
     )
 
 

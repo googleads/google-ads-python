@@ -133,10 +133,6 @@ def handle_googleads_exception(exception):
 
 
 if __name__ == "__main__":
-    # GoogleAdsClient will read the google-ads.yaml configuration file in the
-    # home directory if none is specified.
-    googleads_client = GoogleAdsClient.load_from_storage(version="v16")
-
     parser = argparse.ArgumentParser(
         description=(
             "Finds shared sets, then finds and removes shared set "
@@ -155,6 +151,10 @@ if __name__ == "__main__":
         "-i", "--campaign_id", type=str, required=True, help="The campaign ID."
     )
     args = parser.parse_args()
+
+    # GoogleAdsClient will read the google-ads.yaml configuration file in the
+    # home directory if none is specified.
+    googleads_client = GoogleAdsClient.load_from_storage(version="v16")
 
     main(
         googleads_client, args.customer_id, _DEFAULT_PAGE_SIZE, args.campaign_id

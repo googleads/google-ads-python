@@ -182,10 +182,6 @@ def main(client, customer_id):
 
 
 if __name__ == "__main__":
-    # GoogleAdsClient will read the google-ads.yaml configuration file in the
-    # home directory if none is specified.
-    googleads_client = GoogleAdsClient.load_from_storage(version="v16")
-
     parser = argparse.ArgumentParser(
         description="Creates a rule-based user list defined by an expression "
         "rule for users who have either checked out in November, "
@@ -201,6 +197,10 @@ if __name__ == "__main__":
         help="The Google Ads customer ID.",
     )
     args = parser.parse_args()
+
+    # GoogleAdsClient will read the google-ads.yaml configuration file in the
+    # home directory if none is specified.
+    googleads_client = GoogleAdsClient.load_from_storage(version="v16")
 
     try:
         main(googleads_client, args.customer_id)

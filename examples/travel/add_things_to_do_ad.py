@@ -226,10 +226,6 @@ def add_ad_group_ad(client, customer_id, ad_group_resource_name):
 
 
 if __name__ == "__main__":
-    # GoogleAdsClient will read the google-ads.yaml configuration file in the
-    # home directory if none is specified.
-    googleads_client = GoogleAdsClient.load_from_storage(version="v16")
-
     parser = argparse.ArgumentParser(
         description=(
             "Adds a Things to do campaign, ad group, and a Things to do ad."
@@ -251,6 +247,10 @@ if __name__ == "__main__":
         help=("The Things to Do Center account ID."),
     )
     args = parser.parse_args()
+
+    # GoogleAdsClient will read the google-ads.yaml configuration file in the
+    # home directory if none is specified.
+    googleads_client = GoogleAdsClient.load_from_storage(version="v16")
 
     try:
         main(

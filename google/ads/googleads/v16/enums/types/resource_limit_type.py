@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-# Copyright 2023 Google LLC
+# Copyright 2024 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -176,6 +176,7 @@ class ResourceLimitTypeEnum(proto.Message):
         BRANDS_PER_SHARED_SET = 183
         ENABLED_BRAND_LIST_CRITERIA_PER_CAMPAIGN = 184
         SHARED_SETS_PER_ACCOUNT_FOR_BRAND = 185
+        LOOKALIKE_USER_LISTS_PER_CUSTOMER = 186
 
 
 __all__ = tuple(sorted(__protobuf__.manifest))

@@ -63,10 +63,6 @@ def main(client, customer_id, ad_group_id, bid_modifier_value):
 
 
 if __name__ == "__main__":
-    # GoogleAdsClient will read the google-ads.yaml configuration file in the
-    # home directory if none is specified.
-    googleads_client = GoogleAdsClient.load_from_storage(version="v16")
-
     parser = argparse.ArgumentParser(
         description=(
             "Adds an ad group bid modifier to the specified ad group "
@@ -93,6 +89,10 @@ if __name__ == "__main__":
         help="The bid modifier value.",
     )
     args = parser.parse_args()
+
+    # GoogleAdsClient will read the google-ads.yaml configuration file in the
+    # home directory if none is specified.
+    googleads_client = GoogleAdsClient.load_from_storage(version="v16")
 
     try:
         main(

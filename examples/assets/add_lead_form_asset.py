@@ -171,10 +171,6 @@ def create_lead_form_campaign_asset(
 
 
 if __name__ == "__main__":
-    # GoogleAdsClient will read the google-ads.yaml configuration file in the
-    # home directory if none is specified.
-    googleads_client = GoogleAdsClient.load_from_storage(version="v16")
-
     parser = argparse.ArgumentParser(
         description="This code example creates a lead form and a lead form "
         "asset for a campaign. Run add_campaigns.py to create a "
@@ -196,6 +192,10 @@ if __name__ == "__main__":
         help="The ID of a Campaign belonging to the given customer.",
     )
     args = parser.parse_args()
+
+    # GoogleAdsClient will read the google-ads.yaml configuration file in the
+    # home directory if none is specified.
+    googleads_client = GoogleAdsClient.load_from_storage(version="v16")
 
     try:
         main(googleads_client, args.customer_id, args.campaign_id)

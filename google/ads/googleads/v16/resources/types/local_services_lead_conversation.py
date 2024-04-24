@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-# Copyright 2023 Google LLC
+# Copyright 2024 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -15,6 +15,7 @@
 #
 from __future__ import annotations
 
+from typing import MutableSequence
 
 import proto  # type: ignore
 
@@ -148,11 +149,20 @@ class MessageDetails(proto.Message):
     Attributes:
         text (str):
             Output only. Textual content of the message.
+        attachment_urls (MutableSequence[str]):
+            Output only. URL to the SMS or email
+            attachments. These URLs can be used to download
+            the contents of the attachment by using the
+            developer token.
     """
 
     text: str = proto.Field(
         proto.STRING,
         number=1,
+    )
+    attachment_urls: MutableSequence[str] = proto.RepeatedField(
+        proto.STRING,
+        number=2,
     )
 
 

@@ -148,10 +148,6 @@ def create_display_upload_ad_group_ad(
 
 
 if __name__ == "__main__":
-    # GoogleAdsClient will read the google-ads.yaml configuration file in the
-    # home directory if none is specified.
-    googleads_client = GoogleAdsClient.load_from_storage(version="v16")
-
     parser = argparse.ArgumentParser(
         description="Adds a display upload ad to a given ad group."
     )
@@ -171,6 +167,10 @@ if __name__ == "__main__":
         help="The ID of the ad group to which the new ad will be added.",
     )
     args = parser.parse_args()
+
+    # GoogleAdsClient will read the google-ads.yaml configuration file in the
+    # home directory if none is specified.
+    googleads_client = GoogleAdsClient.load_from_storage(version="v16")
 
     try:
         main(googleads_client, args.customer_id, args.ad_group_id)

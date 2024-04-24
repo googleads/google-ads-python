@@ -183,10 +183,6 @@ def set_billing_setup_date_times(client, customer_id, billing_setup):
 
 
 if __name__ == "__main__":
-    # GoogleAdsClient will read the google-ads.yaml configuration file in the
-    # home directory if none is specified.
-    googleads_client = GoogleAdsClient.load_from_storage(version="v16")
-
     parser = argparse.ArgumentParser(
         description=("Creates a billing setup for a given customer.")
     )
@@ -223,6 +219,10 @@ if __name__ == "__main__":
         "'1234-5678-9012-3456'.",
     )
     args = parser.parse_args()
+
+    # GoogleAdsClient will read the google-ads.yaml configuration file in the
+    # home directory if none is specified.
+    googleads_client = GoogleAdsClient.load_from_storage(version="v16")
 
     try:
         main(

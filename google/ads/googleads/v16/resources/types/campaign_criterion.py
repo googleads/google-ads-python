@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-# Copyright 2023 Google LLC
+# Copyright 2024 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -124,10 +124,6 @@ class CampaignCriterion(proto.Message):
             This field is a member of `oneof`_ ``criterion``.
         user_list (google.ads.googleads.v16.common.types.UserListInfo):
             Immutable. User List.
-            The Similar Audiences sunset starts May 2023.
-            Refer to
-            https://ads-developers.googleblog.com/2022/11/announcing-deprecation-and-sunset-of.html
-            for other options.
 
             This field is a member of `oneof`_ ``criterion``.
         youtube_video (google.ads.googleads.v16.common.types.YouTubeVideoInfo):

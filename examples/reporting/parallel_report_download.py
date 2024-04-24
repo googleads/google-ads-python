@@ -173,10 +173,6 @@ def generate_inputs(client, customer_ids, queries):
 
 
 if __name__ == "__main__":
-    # GoogleAdsClient will read the google-ads.yaml configuration file in the
-    # home directory if none is specified.
-    googleads_client = GoogleAdsClient.load_from_storage(version="v16")
-
     parser = argparse.ArgumentParser(
         description="Download a set of reports in parallel from a list of "
         "accounts."
@@ -197,6 +193,10 @@ if __name__ == "__main__":
         help="The login customer ID (optional).",
     )
     args = parser.parse_args()
+
+    # GoogleAdsClient will read the google-ads.yaml configuration file in the
+    # home directory if none is specified.
+    googleads_client = GoogleAdsClient.load_from_storage(version="v16")
     # Override the login_customer_id on the GoogleAdsClient, if specified.
     if args.login_customer_id is not None:
         googleads_client.login_customer_id = args.login_customer_id

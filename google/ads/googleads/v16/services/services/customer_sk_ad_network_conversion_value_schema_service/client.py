@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-# Copyright 2023 Google LLC
+# Copyright 2024 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -37,6 +37,7 @@ except AttributeError:  # pragma: NO COVER
 from google.ads.googleads.v16.services.types import (
     customer_sk_ad_network_conversion_value_schema_service,
 )
+from google.rpc import status_pb2  # type: ignore
 from .transports.base import (
     CustomerSkAdNetworkConversionValueSchemaServiceTransport,
     DEFAULT_CLIENT_INFO,

@@ -30,20 +30,31 @@ def main(
     client,
     customer_id,
     conversion_action_id,
-    gclid,
     adjustment_type,
-    conversion_date_time,
+    order_id,
     adjustment_date_time,
-    restatement_value,
+    restatement_value=None,
 ):
+    """The main method that creates all necessary entities for the example.
+
+    Args:
+        client: an initialized GoogleAdsClient instance.
+        customer_id: a client customer ID.
+        conversion_action_id: the ID of the conversion action to upload the
+            adjustment to.
+        adjustment_type: the adjustment type, e.g. " "RETRACTION, RESTATEMENT.
+        order_id: the transaction ID of the conversion to adjust. Strongly
+            recommended instead of using gclid and conversion_date_time.
+        adjustment_date_time: the date and time of the adjustment.
+        restatement_value: the adjusted value for adjustment type RESTATEMENT.
+    """
     conversion_adjustment_type_enum = client.enums.ConversionAdjustmentTypeEnum
     # Determine the adjustment type.
     conversion_adjustment_type = conversion_adjustment_type_enum[
         adjustment_type
     ].value
 
-    # Associates conversion adjustments with the existing conversion action.
-    # The GCLID should have been uploaded before with a conversion
+    # Applies the conversion adjustment to the existing conversion.
     conversion_adjustment = client.get_type("ConversionAdjustment")
     conversion_action_service = client.get_service("ConversionActionService")
     conversion_adjustment.conversion_action = (
@@ -54,11 +65,15 @@ def main(
     conversion_adjustment.adjustment_type = conversion_adjustment_type
     conversion_adjustment.adjustment_date_time = adjustment_date_time
 
-    # Set the Gclid Date
-    conversion_adjustment.gclid_date_time_pair.gclid = gclid
-    conversion_adjustment.gclid_date_time_pair.conversion_date_time = (
-        conversion_date_time
-    )
+    # Sets the order_id to identify the conversion to adjust.
+    conversion_adjustment.order_id = order_id
+
+    # As an alternative to setting order_id, you can provide a
+    # gclid_date_time_pair, but setting order_id instead is strongly recommended.
+    # conversion_adjustment.gclid_date_time_pair.gclid = gclid
+    # conversion_adjustment.gclid_date_time_pair.conversion_date_time = (
+    #     conversion_date_time
+    # )
 
     # Sets adjusted value for adjustment type RESTATEMENT.
     if (
@@ -70,34 +85,52 @@ def main(
             restatement_value
         )
 
-    conversion_adjustment_upload_service = client.get_service(
-        "ConversionAdjustmentUploadService"
-    )
+    # Uploads the click conversion. Partial failure should always be set to
+    # true.
+    service = client.get_service("ConversionAdjustmentUploadService")
     request = client.get_type("UploadConversionAdjustmentsRequest")
     request.customer_id = customer_id
-    request.conversion_adjustments = [conversion_adjustment]
+    request.conversion_adjustments.append(conversion_adjustment)
+    # Enables partial failure (must be true)
     request.partial_failure = True
-    response = (
-        conversion_adjustment_upload_service.upload_conversion_adjustments(
-            request=request,
-        )
-    )
-    conversion_adjustment_result = response.results[0]
-    print(
-        f"Uploaded conversion that occurred at "
-        f'"{conversion_adjustment_result.adjustment_date_time}" '
-        f"from Gclid "
-        f'"{conversion_adjustment_result.gclid_date_time_pair.gclid}"'
-        f' to "{conversion_adjustment_result.conversion_action}"'
-    )
-    # [END upload_conversion_adjustment]
+
+    response = service.upload_conversion_adjustments(request=request)
+
+    # Extracts the partial failure error if present on the response.
+    if response.partial_failure_error:
+        error_details = response.partial_failure_error.details
+
+    for i, conversion_adjustment_result in enumerate(response.results):
+        # If there's a GoogleAdsFailure in error_details at this position then
+        # the uploaded operation failed and we print the error message.
+        if error_details and error_details[i]:
+            error_detail = error_details[i]
+            failure_message = client.get_type("GoogleAdsFailure")
+            # Parse the string into a GoogleAdsFailure message instance.
+            # To access class-only methods on the message we retrieve its type.
+            GoogleAdsFailure = type(failure_message)
+            failure_object = GoogleAdsFailure.deserialize(error_detail.value)
+
+            for error in failure_object.errors:
+                # Construct and print a string that details which element in
+                # the operation list failed (by index number) as well as the
+                # error message and error code.
+                print(
+                    "A partial failure at index "
+                    f"{error.location.field_path_elements[0].index} occurred "
+                    f"\nError message: {error.message}\nError code: "
+                    f"{error.error_code}"
+                )
+        else:
+            print(
+                "Uploaded conversion adjustment for conversion action "
+                f"'{conversion_adjustment_result.conversion_action}' and order "
+                f"ID '{conversion_adjustment_result.order_id}'."
+            )
+            # [END upload_conversion_adjustment]
 
 
 if __name__ == "__main__":
-    # GoogleAdsClient will read the google-ads.yaml configuration file in the
-    # home directory if none is specified.
-    googleads_client = GoogleAdsClient.load_from_storage(version="v16")
-
     parser = argparse.ArgumentParser(
         description="Uploads a conversion adjustment."
     )
@@ -114,14 +147,7 @@ if __name__ == "__main__":
         "--conversion_action_id",
         type=str,
         required=True,
-        help="The conversion action ID to be " "uploaded to.",
-    )
-    parser.add_argument(
-        "-g",
-        "--gclid",
-        type=str,
-        required=True,
-        help="The Google Click Identifier ID.",
+        help="The ID of the conversion action to upload the adjustment to.",
     )
     parser.add_argument(
         "-d",
@@ -131,27 +157,28 @@ if __name__ == "__main__":
         choices=[
             e.name for e in googleads_client.enums.ConversionAdjustmentTypeEnum
         ],
-        help="The Adjustment type, e.g. " "RETRACTION, RESTATEMENT",
+        help="The adjustment type, e.g. " "RETRACTION, RESTATEMENT",
     )
     parser.add_argument(
-        "-t",
-        "--conversion_date_time",
+        "-o",
+        "--order_id",
         type=str,
         required=True,
-        help="The the date and time of the "
-        "conversion. The format is "
-        '"yyyy-mm-dd hh:mm:ss+|-hh:mm", e.g. '
-        "“2019-01-01 12:32:45-08:00”",
+        help=(
+            "The transaction ID of the conversion to adjust. Required if the "
+            "conversion being adjusted meets the criteria described at: "
+            "https://developers.google.com/google-ads/api/docs/conversions/upload-adjustments#requirements."
+        ),
     )
     parser.add_argument(
         "-v",
         "--adjustment_date_time",
         type=str,
         required=True,
-        help="The the date and time of the "
-        "adjustment. The format is "
-        '"yyyy-mm-dd hh:mm:ss+|-hh:mm", e.g. '
-        "“2019-01-01 12:32:45-08:00”",
+        help=(
+            "The date and time of the adjustment. The format is "
+            "'yyyy-mm-dd hh:mm:ss+|-hh:mm', e.g. '2019-01-01 12:32:45-08:00'"
+        ),
     )
     # Optional: Specify an adjusted value for adjustment type RESTATEMENT.
     # This value will be ignored if you specify RETRACTION as adjustment type.
@@ -160,18 +187,21 @@ if __name__ == "__main__":
         "--restatement_value",
         type=str,
         required=False,
-        help="The adjusted value for " "adjustment type RESTATEMENT.",
+        help="The adjusted value for adjustment type RESTATEMENT.",
     )
     args = parser.parse_args()
+
+    # GoogleAdsClient will read the google-ads.yaml configuration file in the
+    # home directory if none is specified.
+    googleads_client = GoogleAdsClient.load_from_storage(version="v16")
 
     try:
         main(
             googleads_client,
             args.customer_id,
             args.conversion_action_id,
-            args.gclid,
             args.adjustment_type,
-            args.conversion_date_time,
+            args.order_id,
             args.adjustment_date_time,
             args.restatement_value,
         )

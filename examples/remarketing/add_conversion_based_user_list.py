@@ -78,10 +78,6 @@ def main(client, customer_id, conversion_action_ids):
 
 
 if __name__ == "__main__":
-    # GoogleAdsClient will read the google-ads.yaml configuration file in the
-    # home directory if none is specified.
-    googleads_client = GoogleAdsClient.load_from_storage(version="v16")
-
     parser = argparse.ArgumentParser(
         description="Creates a basic user list based on conversion actions."
     )
@@ -102,6 +98,10 @@ if __name__ == "__main__":
         help="The IDs of the conversion actions for the basic user list.",
     )
     args = parser.parse_args()
+
+    # GoogleAdsClient will read the google-ads.yaml configuration file in the
+    # home directory if none is specified.
+    googleads_client = GoogleAdsClient.load_from_storage(version="v16")
 
     try:
         main(googleads_client, args.customer_id, args.conversion_action_ids)

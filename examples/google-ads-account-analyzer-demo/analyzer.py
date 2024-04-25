@@ -189,8 +189,6 @@ def get_users_module(google_ads_client, customer_id):
 
 
 if __name__ == "__main__":
-    # GoogleAdsClient will read the google-ads.yaml configuration file in the
-    # home directory if none is specified.
     parser = argparse.ArgumentParser(
         description="This analyzer will display the account info "
         "according to the input."
@@ -206,6 +204,8 @@ if __name__ == "__main__":
     args = parser.parse_args()
 
     try:
+        # GoogleAdsClient will read the google-ads.yaml configuration file in
+        # the home directory if none is specified.
         googleads_client = GoogleAdsClient.load_from_storage()
         account_hierarchy_module(googleads_client, args.customer_id)
         get_users_module(googleads_client, args.customer_id)

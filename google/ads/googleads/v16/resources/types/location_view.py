@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-# Copyright 2023 Google LLC
+# Copyright 2024 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -29,8 +29,10 @@ __protobuf__ = proto.module(
 
 
 class LocationView(proto.Message):
-    r"""A location view summarizes the performance of campaigns by
-    Location criteria.
+    r"""A location view summarizes the performance of campaigns by a
+    Location criterion. If no Location criterion is set, no results are
+    returned; instead, use geographic_view or user_location_view for
+    visitor location data.
 
     Attributes:
         resource_name (str):

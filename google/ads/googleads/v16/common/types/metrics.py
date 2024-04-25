@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-# Copyright 2023 Google LLC
+# Copyright 2024 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -39,9 +39,9 @@ class Metrics(proto.Message):
 
     Attributes:
         absolute_top_impression_percentage (float):
-            The percent of your ad impressions that are
-            shown as the very first ad above the organic
-            search results.
+            Search absolute top impression share is the
+            percentage of your Search ad impressions that
+            are shown in the most prominent Search position.
 
             This field is a member of `oneof`_ ``_absolute_top_impression_percentage``.
         active_view_cpm (float):
@@ -194,8 +194,8 @@ class Metrics(proto.Message):
         auction_insight_search_absolute_top_impression_percentage (float):
             This metric is part of the Auction Insights
             report, and tells how often the ads of another
-            participant showed as the very first ad above
-            the organic search results.
+            participant showed in the most prominent
+            position on the search results page.
             This percentage is computed only over the
             auctions that you appeared in the page.
 
@@ -247,9 +247,9 @@ class Metrics(proto.Message):
         auction_insight_search_top_impression_percentage (float):
             This metric is part of the Auction Insights
             report, and tells how often the ads of another
-            participant showed above the organic search
-            results. This percentage is computed only over
-            the auctions that you appeared in the page.
+            participant showed adjacent to the top organic
+            search results. This percentage is computed only
+            over the auctions that you appeared in the page.
 
             This metric is not publicly available.
 
@@ -776,10 +776,10 @@ class Metrics(proto.Message):
             This field is a member of `oneof`_ ``_search_absolute_top_impression_share``.
         search_budget_lost_absolute_top_impression_share (float):
             The number estimating how often your ad
-            wasn't the very first ad above the organic
-            search results due to a low budget. Note: Search
-            budget lost absolute top impression share is
-            reported in the range of 0 to 0.9. Any value
+            wasn't the very first ad among the top ads in
+            the search results due to a low budget. Note:
+            Search budget lost absolute top impression share
+            is reported in the range of 0 to 0.9. Any value
             above 0.9 is reported as 0.9001.
 
             This field is a member of `oneof`_ ``_search_budget_lost_absolute_top_impression_share``.
@@ -794,7 +794,7 @@ class Metrics(proto.Message):
             This field is a member of `oneof`_ ``_search_budget_lost_impression_share``.
         search_budget_lost_top_impression_share (float):
             The number estimating how often your ad
-            didn't show anywhere above the organic search
+            didn't show adjacent to the top organic search
             results due to a low budget. Note: Search budget
             lost top impression share is reported in the
             range of 0 to 0.9. Any value above 0.9 is
@@ -833,10 +833,10 @@ class Metrics(proto.Message):
             This field is a member of `oneof`_ ``_search_impression_share``.
         search_rank_lost_absolute_top_impression_share (float):
             The number estimating how often your ad
-            wasn't the very first ad above the organic
-            search results due to poor Ad Rank. Note: Search
-            rank lost absolute top impression share is
-            reported in the range of 0 to 0.9. Any value
+            wasn't the very first ad among the top ads in
+            the search results due to poor Ad Rank. Note:
+            Search rank lost absolute top impression share
+            is reported in the range of 0 to 0.9. Any value
             above 0.9 is reported as 0.9001.
 
             This field is a member of `oneof`_ ``_search_rank_lost_absolute_top_impression_share``.
@@ -851,7 +851,7 @@ class Metrics(proto.Message):
             This field is a member of `oneof`_ ``_search_rank_lost_impression_share``.
         search_rank_lost_top_impression_share (float):
             The number estimating how often your ad
-            didn't show anywhere above the organic search
+            didn't show adjacent to the top organic search
             results due to poor Ad Rank. Note: Search rank
             lost top impression share is reported in the
             range of 0 to 0.9. Any value above 0.9 is
@@ -859,13 +859,16 @@ class Metrics(proto.Message):
 
             This field is a member of `oneof`_ ``_search_rank_lost_top_impression_share``.
         search_top_impression_share (float):
-            The impressions you've received in the top
-            location (anywhere above the organic search
-            results) compared to the estimated number of
-            impressions you were eligible to receive in the
-            top location. Note: Search top impression share
+            The impressions you've received among the top
+            ads compared to the estimated number of
+            impressions you were eligible to receive among
+            the top ads. Note: Search top impression share
             is reported in the range of 0.1 to 1. Any value
             below 0.1 is reported as 0.0999.
+
+            Top ads are generally above the top organic
+            results, although they may show below the top
+            organic results on certain queries.
 
             This field is a member of `oneof`_ ``_search_top_impression_share``.
         search_volume (google.ads.googleads.v16.common.types.SearchVolumeRange):
@@ -895,7 +898,8 @@ class Metrics(proto.Message):
             This field is a member of `oneof`_ ``_average_target_roas``.
         top_impression_percentage (float):
             The percent of your ad impressions that are
-            shown anywhere above the organic search results.
+            shown adjacent to the top organic search
+            results.
 
             This field is a member of `oneof`_ ``_top_impression_percentage``.
         valid_accelerated_mobile_pages_clicks_percentage (float):

@@ -554,10 +554,6 @@ def add_geo_targeting(client, customer_id, campaign_resource_name):
 
 
 if __name__ == "__main__":
-    # GoogleAdsClient will read the google-ads.yaml configuration file in the
-    # home directory if none is specified.
-    googleads_client = GoogleAdsClient.load_from_storage(version="v16")
-
     parser = argparse.ArgumentParser(
         description=("Creates a Responsive Search Ad for specified customer.")
     )
@@ -589,6 +585,10 @@ if __name__ == "__main__":
     )
 
     args = parser.parse_args()
+
+    # GoogleAdsClient will read the google-ads.yaml configuration file in the
+    # home directory if none is specified.
+    googleads_client = GoogleAdsClient.load_from_storage(version="v16")
 
     try:
         main(

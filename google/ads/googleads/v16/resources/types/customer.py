@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-# Copyright 2023 Google LLC
+# Copyright 2024 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -19,6 +19,7 @@ from typing import MutableSequence
 
 import proto  # type: ignore
 
+from google.ads.googleads.v16.enums.types import brand_safety_suitability
 from google.ads.googleads.v16.enums.types import conversion_tracking_status_enum
 from google.ads.googleads.v16.enums.types import (
     customer_pay_per_conversion_eligibility_failure_reason,
@@ -179,6 +180,12 @@ class Customer(proto.Message):
         local_services_settings (google.ads.googleads.v16.resources.types.LocalServicesSettings):
             Output only. Settings for Local Services
             customer.
+        video_brand_safety_suitability (google.ads.googleads.v16.enums.types.BrandSafetySuitabilityEnum.BrandSafetySuitability):
+            Output only. Brand Safety setting at the
+            account level. Allows for selecting an inventory
+            type to show your ads on content that is the
+            right fit for your brand. See
+            https://support.google.com/google-ads/answer/7515513.
     """
 
     resource_name: str = proto.Field(
@@ -300,6 +307,11 @@ class Customer(proto.Message):
         proto.MESSAGE,
         number=45,
         message="LocalServicesSettings",
+    )
+    video_brand_safety_suitability: brand_safety_suitability.BrandSafetySuitabilityEnum.BrandSafetySuitability = proto.Field(
+        proto.ENUM,
+        number=46,
+        enum=brand_safety_suitability.BrandSafetySuitabilityEnum.BrandSafetySuitability,
     )
 
 

@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-# Copyright 2023 Google LLC
+# Copyright 2024 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -65,6 +65,7 @@ class AssetFieldTypeEnum(proto.Message):
         AD_IMAGE = 26
         BUSINESS_LOGO = 27
         HOTEL_PROPERTY = 28
+        DISCOVERY_CAROUSEL_CARD = 29
 
 
 __all__ = tuple(sorted(__protobuf__.manifest))

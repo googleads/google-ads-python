@@ -84,10 +84,6 @@ def main(client, customer_id, user_list_ids):
 
 
 if __name__ == "__main__":
-    # GoogleAdsClient will read the google-ads.yaml configuration file in the
-    # home directory if none is specified.
-    googleads_client = GoogleAdsClient.load_from_storage(version="v16")
-
     parser = argparse.ArgumentParser(
         description="Creates a combination user list containing users that are "
         "present on any one of the provided user lists."
@@ -109,6 +105,10 @@ if __name__ == "__main__":
         help="The user list IDs logically combine.",
     )
     args = parser.parse_args()
+
+    # GoogleAdsClient will read the google-ads.yaml configuration file in the
+    # home directory if none is specified.
+    googleads_client = GoogleAdsClient.load_from_storage(version="v16")
 
     try:
         main(googleads_client, args.customer_id, args.user_list_ids)

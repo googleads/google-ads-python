@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-# Copyright 2023 Google LLC
+# Copyright 2024 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -41,6 +41,7 @@ class ProductLinkInvitationErrorEnum(proto.Message):
         INVALID_STATUS = 2
         PERMISSION_DENIED = 3
         NO_INVITATION_REQUIRED = 4
+        CUSTOMER_NOT_PERMITTED_TO_CREATE_INVITATION = 5
 
 
 __all__ = tuple(sorted(__protobuf__.manifest))

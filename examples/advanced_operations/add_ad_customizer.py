@@ -261,10 +261,6 @@ def create_ad_with_customizations(
 
 
 if __name__ == "__main__":
-    # GoogleAdsClient will read the google-ads.yaml configuration file in the
-    # home directory if none is specified.
-    googleads_client = GoogleAdsClient.load_from_storage(version="v16")
-
     parser = argparse.ArgumentParser(
         description=(
             "This code example adds two ad customizer attributes and "
@@ -288,6 +284,10 @@ if __name__ == "__main__":
         help="An ad group ID.",
     )
     args = parser.parse_args()
+
+    # GoogleAdsClient will read the google-ads.yaml configuration file in the
+    # home directory if none is specified.
+    googleads_client = GoogleAdsClient.load_from_storage(version="v16")
 
     try:
         main(googleads_client, args.customer_id, args.ad_group_id)

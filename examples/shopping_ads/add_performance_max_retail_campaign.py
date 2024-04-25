@@ -880,10 +880,6 @@ def print_response_details(response):
 # [END add_performance_max_retail_campaign]
 
 if __name__ == "__main__":
-    # GoogleAdsClient will read the google-ads.yaml configuration file in the
-    # home directory if none is specified.
-    googleads_client = GoogleAdsClient.load_from_storage(version="v16")
-
     parser = argparse.ArgumentParser(
         description=("Creates a Performance Max retail campaign.")
     )
@@ -912,6 +908,10 @@ if __name__ == "__main__":
     )
 
     args = parser.parse_args()
+
+    # GoogleAdsClient will read the google-ads.yaml configuration file in the
+    # home directory if none is specified.
+    googleads_client = GoogleAdsClient.load_from_storage(version="v16")
 
     try:
         main(

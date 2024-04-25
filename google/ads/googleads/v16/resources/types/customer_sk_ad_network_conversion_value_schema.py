@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-# Copyright 2023 Google LLC
+# Copyright 2024 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -18,6 +18,10 @@ from __future__ import annotations
 from typing import MutableSequence
 
 import proto  # type: ignore
+
+from google.ads.googleads.v16.enums.types import (
+    sk_ad_network_coarse_conversion_value,
+)
 
 
 __protobuf__ = proto.module(
@@ -55,7 +59,15 @@ class CustomerSkAdNetworkConversionValueSchema(proto.Message):
                 (https://developer.apple.com/documentation/storekit/skadnetwork/3566697-updateconversionvalue).
             fine_grained_conversion_value_mappings (MutableSequence[google.ads.googleads.v16.resources.types.CustomerSkAdNetworkConversionValueSchema.SkAdNetworkConversionValueSchema.FineGrainedConversionValueMappings]):
                 Output only. Fine grained conversion value
-                mappings.
+                mappings. For SkAdNetwork versions >= 4.0 that
+                support multiple conversion windows, fine
+                grained conversion value mappings are only
+                applicable to the first postback.
+            postback_mappings (MutableSequence[google.ads.googleads.v16.resources.types.CustomerSkAdNetworkConversionValueSchema.SkAdNetworkConversionValueSchema.PostbackMapping]):
+                Output only. Per-postback conversion value
+                mappings for postbacks in multiple conversion
+                windows. Only applicable for SkAdNetwork
+                versions >= 4.0.
         """
 
         class FineGrainedConversionValueMappings(proto.Message):
@@ -76,6 +88,95 @@ class CustomerSkAdNetworkConversionValueSchema(proto.Message):
             conversion_value_mapping: "CustomerSkAdNetworkConversionValueSchema.SkAdNetworkConversionValueSchema.ConversionValueMapping" = proto.Field(
                 proto.MESSAGE,
                 number=2,
+                message="CustomerSkAdNetworkConversionValueSchema.SkAdNetworkConversionValueSchema.ConversionValueMapping",
+            )
+
+        class PostbackMapping(proto.Message):
+            r"""Mappings for each postback in multiple conversion windows.
+            This message has `oneof`_ fields (mutually exclusive fields).
+            For each oneof, at most one member field can be set at the same time.
+            Setting any member of the oneof automatically clears all other
+            members.
+
+            .. _oneof: https://proto-plus-python.readthedocs.io/en/stable/fields.html#oneofs-mutually-exclusive-fields
+
+            Attributes:
+                postback_sequence_index (int):
+                    Output only. 0-based index that indicates the order of
+                    postback. Valid values are in the inclusive range [0,2].
+                coarse_grained_conversion_value_mappings (google.ads.googleads.v16.resources.types.CustomerSkAdNetworkConversionValueSchema.SkAdNetworkConversionValueSchema.CoarseGrainedConversionValueMappings):
+                    Output only. Conversion value mappings for
+                    all coarse grained conversion values.
+                lock_window_coarse_conversion_value (google.ads.googleads.v16.enums.types.SkAdNetworkCoarseConversionValueEnum.SkAdNetworkCoarseConversionValue):
+                    Output only. Coarse grained conversion value
+                    that triggers conversion window lock.
+
+                    This field is a member of `oneof`_ ``lock_window_trigger``.
+                lock_window_fine_conversion_value (int):
+                    Output only. Fine grained conversion value
+                    that triggers conversion window lock.
+
+                    This field is a member of `oneof`_ ``lock_window_trigger``.
+                lock_window_event (str):
+                    Output only. Event name that triggers
+                    conversion window lock.
+
+                    This field is a member of `oneof`_ ``lock_window_trigger``.
+            """
+
+            postback_sequence_index: int = proto.Field(
+                proto.INT32,
+                number=1,
+            )
+            coarse_grained_conversion_value_mappings: "CustomerSkAdNetworkConversionValueSchema.SkAdNetworkConversionValueSchema.CoarseGrainedConversionValueMappings" = proto.Field(
+                proto.MESSAGE,
+                number=2,
+                message="CustomerSkAdNetworkConversionValueSchema.SkAdNetworkConversionValueSchema.CoarseGrainedConversionValueMappings",
+            )
+            lock_window_coarse_conversion_value: sk_ad_network_coarse_conversion_value.SkAdNetworkCoarseConversionValueEnum.SkAdNetworkCoarseConversionValue = proto.Field(
+                proto.ENUM,
+                number=3,
+                oneof="lock_window_trigger",
+                enum=sk_ad_network_coarse_conversion_value.SkAdNetworkCoarseConversionValueEnum.SkAdNetworkCoarseConversionValue,
+            )
+            lock_window_fine_conversion_value: int = proto.Field(
+                proto.INT32,
+                number=4,
+                oneof="lock_window_trigger",
+            )
+            lock_window_event: str = proto.Field(
+                proto.STRING,
+                number=5,
+                oneof="lock_window_trigger",
+            )
+
+        class CoarseGrainedConversionValueMappings(proto.Message):
+            r"""Mappings for coarse grained conversion values.
+            Attributes:
+                low_conversion_value_mapping (google.ads.googleads.v16.resources.types.CustomerSkAdNetworkConversionValueSchema.SkAdNetworkConversionValueSchema.ConversionValueMapping):
+                    Output only. Mapping for "low" coarse
+                    conversion value.
+                medium_conversion_value_mapping (google.ads.googleads.v16.resources.types.CustomerSkAdNetworkConversionValueSchema.SkAdNetworkConversionValueSchema.ConversionValueMapping):
+                    Output only. Mapping for "medium" coarse
+                    conversion value.
+                high_conversion_value_mapping (google.ads.googleads.v16.resources.types.CustomerSkAdNetworkConversionValueSchema.SkAdNetworkConversionValueSchema.ConversionValueMapping):
+                    Output only. Mapping for "high" coarse
+                    conversion value.
+            """
+
+            low_conversion_value_mapping: "CustomerSkAdNetworkConversionValueSchema.SkAdNetworkConversionValueSchema.ConversionValueMapping" = proto.Field(
+                proto.MESSAGE,
+                number=1,
+                message="CustomerSkAdNetworkConversionValueSchema.SkAdNetworkConversionValueSchema.ConversionValueMapping",
+            )
+            medium_conversion_value_mapping: "CustomerSkAdNetworkConversionValueSchema.SkAdNetworkConversionValueSchema.ConversionValueMapping" = proto.Field(
+                proto.MESSAGE,
+                number=2,
+                message="CustomerSkAdNetworkConversionValueSchema.SkAdNetworkConversionValueSchema.ConversionValueMapping",
+            )
+            high_conversion_value_mapping: "CustomerSkAdNetworkConversionValueSchema.SkAdNetworkConversionValueSchema.ConversionValueMapping" = proto.Field(
+                proto.MESSAGE,
+                number=3,
                 message="CustomerSkAdNetworkConversionValueSchema.SkAdNetworkConversionValueSchema.ConversionValueMapping",
             )
 
@@ -241,6 +342,13 @@ class CustomerSkAdNetworkConversionValueSchema(proto.Message):
             proto.MESSAGE,
             number=3,
             message="CustomerSkAdNetworkConversionValueSchema.SkAdNetworkConversionValueSchema.FineGrainedConversionValueMappings",
+        )
+        postback_mappings: MutableSequence[
+            "CustomerSkAdNetworkConversionValueSchema.SkAdNetworkConversionValueSchema.PostbackMapping"
+        ] = proto.RepeatedField(
+            proto.MESSAGE,
+            number=4,
+            message="CustomerSkAdNetworkConversionValueSchema.SkAdNetworkConversionValueSchema.PostbackMapping",
         )
 
     resource_name: str = proto.Field(

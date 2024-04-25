@@ -457,10 +457,6 @@ def create_ad_group_criterion(
 
 
 if __name__ == "__main__":
-    # GoogleAdsClient will read the google-ads.yaml configuration file in the
-    # home directory if none is specified.
-    googleads_client = GoogleAdsClient.load_from_storage(version="v16")
-
     parser = argparse.ArgumentParser(
         description="Shows how to add a hotel listing group tree with two "
         "levels."
@@ -491,6 +487,10 @@ if __name__ == "__main__":
         "values for each ad group criterion.",
     )
     args = parser.parse_args()
+
+    # GoogleAdsClient will read the google-ads.yaml configuration file in the
+    # home directory if none is specified.
+    googleads_client = GoogleAdsClient.load_from_storage(version="v16")
 
     try:
         main(

@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-# Copyright 2023 Google LLC
+# Copyright 2024 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -74,6 +74,7 @@ class CriterionTypeEnum(proto.Message):
         SEARCH_THEME = 38
         BRAND = 39
         BRAND_LIST = 40
+        LIFE_EVENT = 41
 
 
 __all__ = tuple(sorted(__protobuf__.manifest))

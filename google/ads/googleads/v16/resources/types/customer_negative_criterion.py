@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-# Copyright 2023 Google LLC
+# Copyright 2024 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -81,6 +81,10 @@ class CustomerNegativeCriterion(proto.Message):
             Immutable. NegativeKeywordList.
 
             This field is a member of `oneof`_ ``criterion``.
+        ip_block (google.ads.googleads.v16.common.types.IpBlockInfo):
+            Immutable. IPBLock
+
+            This field is a member of `oneof`_ ``criterion``.
     """
 
     resource_name: str = proto.Field(
@@ -138,6 +142,12 @@ class CustomerNegativeCriterion(proto.Message):
         number=11,
         oneof="criterion",
         message=criteria.NegativeKeywordListInfo,
+    )
+    ip_block: criteria.IpBlockInfo = proto.Field(
+        proto.MESSAGE,
+        number=12,
+        oneof="criterion",
+        message=criteria.IpBlockInfo,
     )
 
 

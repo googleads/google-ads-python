@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-# Copyright 2023 Google LLC
+# Copyright 2024 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -394,6 +394,7 @@ _lazy_type_to_package_map = {
     "BiddingStrategyTypeEnum": "google.ads.googleads.v16.enums.types.bidding_strategy_type",
     "BidModifierSourceEnum": "google.ads.googleads.v16.enums.types.bid_modifier_source",
     "BillingSetupStatusEnum": "google.ads.googleads.v16.enums.types.billing_setup_status",
+    "BrandRequestRejectionReasonEnum": "google.ads.googleads.v16.enums.types.brand_request_rejection_reason",
     "BrandSafetySuitabilityEnum": "google.ads.googleads.v16.enums.types.brand_safety_suitability",
     "BrandStateEnum": "google.ads.googleads.v16.enums.types.brand_state",
     "BudgetCampaignAssociationStatusEnum": "google.ads.googleads.v16.enums.types.budget_campaign_association_status",
@@ -543,6 +544,7 @@ _lazy_type_to_package_map = {
     "LocalPlaceholderFieldEnum": "google.ads.googleads.v16.enums.types.local_placeholder_field",
     "LocalServicesBusinessRegistrationCheckRejectionReasonEnum": "google.ads.googleads.v16.enums.types.local_services_business_registration_check_rejection_reason",
     "LocalServicesBusinessRegistrationTypeEnum": "google.ads.googleads.v16.enums.types.local_services_business_registration_type",
+    "LocalServicesCreditStateEnum": "google.ads.googleads.v16.enums.types.local_services_lead_credit_state",
     "LocalServicesEmployeeStatusEnum": "google.ads.googleads.v16.enums.types.local_services_employee_status",
     "LocalServicesEmployeeTypeEnum": "google.ads.googleads.v16.enums.types.local_services_employee_type",
     "LocalServicesInsuranceRejectionReasonEnum": "google.ads.googleads.v16.enums.types.local_services_insurance_rejection_reason",
@@ -834,6 +836,7 @@ _lazy_type_to_package_map = {
     "UrlFieldErrorEnum": "google.ads.googleads.v16.errors.types.url_field_error",
     "UserDataErrorEnum": "google.ads.googleads.v16.errors.types.user_data_error",
     "UserListErrorEnum": "google.ads.googleads.v16.errors.types.user_list_error",
+    "VideoCampaignErrorEnum": "google.ads.googleads.v16.errors.types.video_campaign_error",
     "YoutubeVideoRegistrationErrorEnum": "google.ads.googleads.v16.errors.types.youtube_video_registration_error",
     "AccessibleBiddingStrategy": "google.ads.googleads.v16.resources.types.accessible_bidding_strategy",
     "AccountBudget": "google.ads.googleads.v16.resources.types.account_budget",
@@ -926,6 +929,7 @@ _lazy_type_to_package_map = {
     "ConversionTrackingSetting": "google.ads.googleads.v16.resources.types.customer",
     "ConversionValueRule": "google.ads.googleads.v16.resources.types.conversion_value_rule",
     "ConversionValueRuleSet": "google.ads.googleads.v16.resources.types.conversion_value_rule_set",
+    "CreditDetails": "google.ads.googleads.v16.resources.types.local_services_lead",
     "CurrencyConstant": "google.ads.googleads.v16.resources.types.currency_constant",
     "CustomAudience": "google.ads.googleads.v16.resources.types.custom_audience",
     "CustomAudienceMember": "google.ads.googleads.v16.resources.types.custom_audience",

@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-# Copyright 2023 Google LLC
+# Copyright 2024 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -21,6 +21,8 @@ import proto  # type: ignore
 
 from google.ads.googleads.v16.enums.types import age_range_type
 from google.ads.googleads.v16.enums.types import app_payment_model_type
+from google.ads.googleads.v16.enums.types import brand_request_rejection_reason
+from google.ads.googleads.v16.enums.types import brand_state
 from google.ads.googleads.v16.enums.types import content_label_type
 from google.ads.googleads.v16.enums.types import day_of_week as gage_day_of_week
 from google.ads.googleads.v16.enums.types import device
@@ -2061,16 +2063,56 @@ class BrandInfo(proto.Message):
     .. _oneof: https://proto-plus-python.readthedocs.io/en/stable/fields.html#oneofs-mutually-exclusive-fields
 
     Attributes:
+        display_name (str):
+            Output only. A text representation of a
+            brand.
+
+            This field is a member of `oneof`_ ``_display_name``.
         entity_id (str):
             The Commercial KG MID for the brand.
 
             This field is a member of `oneof`_ ``_entity_id``.
+        primary_url (str):
+            Output only. The primary url of a brand.
+
+            This field is a member of `oneof`_ ``_primary_url``.
+        rejection_reason (google.ads.googleads.v16.enums.types.BrandRequestRejectionReasonEnum.BrandRequestRejectionReason):
+            Output only. The rejection reason when a
+            brand status is REJECTED.
+
+            This field is a member of `oneof`_ ``_rejection_reason``.
+        status (google.ads.googleads.v16.enums.types.BrandStateEnum.BrandState):
+            Output only. The status of a brand.
+
+            This field is a member of `oneof`_ ``_status``.
     """
 
+    display_name: str = proto.Field(
+        proto.STRING,
+        number=2,
+        optional=True,
+    )
     entity_id: str = proto.Field(
         proto.STRING,
         number=1,
         optional=True,
+    )
+    primary_url: str = proto.Field(
+        proto.STRING,
+        number=3,
+        optional=True,
+    )
+    rejection_reason: brand_request_rejection_reason.BrandRequestRejectionReasonEnum.BrandRequestRejectionReason = proto.Field(
+        proto.ENUM,
+        number=4,
+        optional=True,
+        enum=brand_request_rejection_reason.BrandRequestRejectionReasonEnum.BrandRequestRejectionReason,
+    )
+    status: brand_state.BrandStateEnum.BrandState = proto.Field(
+        proto.ENUM,
+        number=5,
+        optional=True,
+        enum=brand_state.BrandStateEnum.BrandState,
     )
 
 

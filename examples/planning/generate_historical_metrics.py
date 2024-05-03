@@ -47,7 +47,7 @@ def generate_historical_metrics(client, customer_id):
     keyword_plan_idea_service = client.get_service("KeywordPlanIdeaService")
     request = client.get_type("GenerateKeywordHistoricalMetricsRequest")
     request.customer_id = customer_id
-    request.keywords = ["mars cruise", "cheap cruise", "jupiter cruise"]
+    request.keywords.extend(["mars cruise", "cheap cruise", "jupiter cruise"])
     # Geo target constant 2840 is for USA.
     request.geo_target_constants.append(
         googleads_service.geo_target_constant_path("2840")

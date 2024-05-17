@@ -602,10 +602,6 @@ def check_job_status(client, customer_id, offline_user_data_job_resource_name):
 
 
 if __name__ == "__main__":
-    # GoogleAdsClient will read the google-ads.yaml configuration file in the
-    # home directory if none is specified.
-    googleads_client = GoogleAdsClient.load_from_storage(version="v16")
-
     parser = argparse.ArgumentParser(
         description="This example uploads offline data for store sales "
         "transactions."
@@ -761,6 +757,10 @@ if __name__ == "__main__":
         ),
     )
     args = parser.parse_args()
+
+    # GoogleAdsClient will read the google-ads.yaml configuration file in the
+    # home directory if none is specified.
+    googleads_client = GoogleAdsClient.load_from_storage(version="v16")
 
     # Additional check to make sure that custom_key and custom_value are either
     # not provided or both provided together.

@@ -34,7 +34,7 @@ with open("README.rst", "r", encoding="utf-8") as readme_file:
 
 setup(
     name="google-ads",
-    version="23.1.0",
+    version="24.0.0",
     author="Google LLC",
     author_email="googleapis-packages@google.com",
     classifiers=[

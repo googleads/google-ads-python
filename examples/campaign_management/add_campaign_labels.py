@@ -66,10 +66,6 @@ def main(client, customer_id, label_id, campaign_ids):
 
 
 if __name__ == "__main__":
-    # GoogleAdsClient will read the google-ads.yaml configuration file in the
-    # home directory if none is specified.
-    googleads_client = GoogleAdsClient.load_from_storage(version="v16")
-
     parser = argparse.ArgumentParser(
         description="This code example adds a campaign label to a list of "
         "campaigns."
@@ -98,6 +94,10 @@ if __name__ == "__main__":
         help="The campaign IDs to receive the label.",
     )
     args = parser.parse_args()
+
+    # GoogleAdsClient will read the google-ads.yaml configuration file in the
+    # home directory if none is specified.
+    googleads_client = GoogleAdsClient.load_from_storage(version="v16")
     try:
         main(
             googleads_client, args.customer_id, args.label_id, args.campaign_ids

@@ -239,6 +239,52 @@ class MetadataInterceptorTest(TestCase):
             # value pair because it was already present when passed in.
             self.assertEqual(user_agent.count("pb"), 1)
 
+    @mock.patch(
+        "google.ads.googleads.interceptors.metadata_interceptor._PROTOBUF_VERSION",
+        None,
+    )
+    def test_absent_pb_version(self):
+        """Asserts that the protobuf package version is left out if not present.
+
+        In a situation where the `metadata` package cannot find a version for
+        the `protobuf` package, we assert that the "pb/x.y.x" substring is left
+        out of the user agent of the request.
+        """
+        interceptor = MetadataInterceptor(
+            self.mock_developer_token,
+            self.mock_login_customer_id,
+            self.mock_linked_customer_id,
+        )
+
+        mock_request = mock.Mock()
+        mock_client_call_details = mock.Mock()
+        mock_client_call_details.method = "test/method"
+        mock_client_call_details.timeout = 5
+        mock_client_call_details.metadata = [
+            ("apples", "oranges"),
+            (
+                "x-goog-api-client",
+                f"gl-python/{self.python_version} grpc/1.45.0",
+            ),
+        ]
+
+        def mock_continuation(client_call_details, _):
+            return client_call_details
+
+        with mock.patch.object(
+            interceptor,
+            "_update_client_call_details_metadata",
+            wraps=interceptor._update_client_call_details_metadata,
+        ):
+            modified_client_call_details = interceptor._intercept(
+                mock_continuation, mock_client_call_details, mock_request
+            )
+
+            user_agent = modified_client_call_details.metadata[1][1]
+            # We assert that the _intercept method did not add the "pb" key
+            # value pair because it was already present when passed in.
+            self.assertEqual(user_agent.count("pb"), 0)
+
     def test_intercept_unary_stream_use_cloud_org_for_api_access(self):
         interceptor = MetadataInterceptor(
             self.mock_developer_token,

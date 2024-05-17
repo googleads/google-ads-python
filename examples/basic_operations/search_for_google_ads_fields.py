@@ -94,10 +94,6 @@ def main(client, name_prefix, page_size):
 
 
 if __name__ == "__main__":
-    # GoogleAdsClient will read the google-ads.yaml configuration file in the
-    # home directory if none is specified.
-    googleads_client = GoogleAdsClient.load_from_storage(version="v16")
-
     parser = argparse.ArgumentParser(
         description="Lists metadata for the specified artifact."
     )
@@ -110,6 +106,10 @@ if __name__ == "__main__":
         help="The name prefix to use when searching for Google Ads field names",
     )
     args = parser.parse_args()
+
+    # GoogleAdsClient will read the google-ads.yaml configuration file in the
+    # home directory if none is specified.
+    googleads_client = GoogleAdsClient.load_from_storage(version="v16")
 
     try:
         main(googleads_client, args.name_prefix, _DEFAULT_PAGE_SIZE)

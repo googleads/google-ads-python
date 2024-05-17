@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-# Copyright 2023 Google LLC
+# Copyright 2024 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -18,6 +18,9 @@ from __future__ import annotations
 
 import proto  # type: ignore
 
+from google.ads.googleads.v16.enums.types import (
+    local_services_lead_credit_state,
+)
 from google.ads.googleads.v16.enums.types import local_services_lead_status
 from google.ads.googleads.v16.enums.types import local_services_lead_type
 
@@ -29,6 +32,7 @@ __protobuf__ = proto.module(
         "LocalServicesLead",
         "ContactDetails",
         "Note",
+        "CreditDetails",
     },
 )
 
@@ -84,6 +88,10 @@ class LocalServicesLead(proto.Message):
         lead_charged (bool):
             Output only. True if the advertiser was
             charged for the lead.
+        credit_details (google.ads.googleads.v16.resources.types.CreditDetails):
+            Output only. Credit details of the lead.
+
+            This field is a member of `oneof`_ ``_credit_details``.
     """
 
     resource_name: str = proto.Field(
@@ -137,6 +145,12 @@ class LocalServicesLead(proto.Message):
         proto.BOOL,
         number=11,
     )
+    credit_details: "CreditDetails" = proto.Field(
+        proto.MESSAGE,
+        number=12,
+        optional=True,
+        message="CreditDetails",
+    )
 
 
 class ContactDetails(proto.Message):
@@ -188,6 +202,30 @@ class Note(proto.Message):
         number=1,
     )
     description: str = proto.Field(
+        proto.STRING,
+        number=2,
+    )
+
+
+class CreditDetails(proto.Message):
+    r"""Represents the credit details of a lead.
+    Attributes:
+        credit_state (google.ads.googleads.v16.enums.types.LocalServicesCreditStateEnum.CreditState):
+            Output only. Credit state of the lead.
+        credit_state_last_update_date_time (str):
+            Output only. The date time when the credit
+            state of the lead was last updated. The format
+            is "YYYY-MM-DD HH:MM:SS" in the Google Ads
+            account's timezone. Examples: "2018-03-05
+            09:15:00" or "2018-02-01 14:34:30".
+    """
+
+    credit_state: local_services_lead_credit_state.LocalServicesCreditStateEnum.CreditState = proto.Field(
+        proto.ENUM,
+        number=1,
+        enum=local_services_lead_credit_state.LocalServicesCreditStateEnum.CreditState,
+    )
+    credit_state_last_update_date_time: str = proto.Field(
         proto.STRING,
         number=2,
     )

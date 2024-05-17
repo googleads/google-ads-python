@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-# Copyright 2023 Google LLC
+# Copyright 2024 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -280,8 +280,11 @@ class Campaign(proto.Message):
             A list that limits how often each user will
             see this campaign's ads.
         video_brand_safety_suitability (google.ads.googleads.v16.enums.types.BrandSafetySuitabilityEnum.BrandSafetySuitability):
-            Output only. 3-Tier Brand Safety setting for
-            the campaign.
+            Output only. Brand Safety setting at the
+            individual campaign level. Allows for selecting
+            an inventory type to show your ads on content
+            that is the right fit for your brand. See
+            https://support.google.com/google-ads/answer/7515513.
         vanity_pharma (google.ads.googleads.v16.resources.types.Campaign.VanityPharma):
             Describes how unbranded pharma ads will be
             displayed.

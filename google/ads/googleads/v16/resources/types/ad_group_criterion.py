@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-# Copyright 2023 Google LLC
+# Copyright 2024 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -41,7 +41,9 @@ __protobuf__ = proto.module(
 
 
 class AdGroupCriterion(proto.Message):
-    r"""An ad group criterion.
+    r"""An ad group criterion. The ad_group_criterion report only returns
+    criteria that were explicitly added to the ad group.
+
     This message has `oneof`_ fields (mutually exclusive fields).
     For each oneof, at most one member field can be set at the same time.
     Setting any member of the oneof automatically clears all other
@@ -232,10 +234,6 @@ class AdGroupCriterion(proto.Message):
             This field is a member of `oneof`_ ``criterion``.
         user_list (google.ads.googleads.v16.common.types.UserListInfo):
             Immutable. User List.
-            The Similar Audiences sunset starts May 2023.
-            Refer to
-            https://ads-developers.googleblog.com/2022/11/announcing-deprecation-and-sunset-of.html
-            for other options.
 
             This field is a member of `oneof`_ ``criterion``.
         youtube_video (google.ads.googleads.v16.common.types.YouTubeVideoInfo):

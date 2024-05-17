@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-# Copyright 2023 Google LLC
+# Copyright 2024 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -144,10 +144,6 @@ class ConversionValueRule(proto.Message):
         Attributes:
             user_lists (MutableSequence[str]):
                 User Lists.
-                The Similar Audiences sunset starts May 2023.
-                Refer to
-                https://ads-developers.googleblog.com/2022/11/announcing-deprecation-and-sunset-of.html
-                for other options.
             user_interests (MutableSequence[str]):
                 User Interests.
         """

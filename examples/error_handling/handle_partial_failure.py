@@ -205,10 +205,6 @@ def print_results(client, response):
 
 
 if __name__ == "__main__":
-    # GoogleAdsClient will read the google-ads.yaml configuration file in the
-    # home directory if none is specified.
-    googleads_client = GoogleAdsClient.load_from_storage(version="v16")
-
     parser = argparse.ArgumentParser(
         description="Adds an ad group for specified customer and campaign id."
     )
@@ -224,5 +220,9 @@ if __name__ == "__main__":
         "-i", "--campaign_id", type=str, required=True, help="The campaign ID."
     )
     args = parser.parse_args()
+
+    # GoogleAdsClient will read the google-ads.yaml configuration file in the
+    # home directory if none is specified.
+    googleads_client = GoogleAdsClient.load_from_storage(version="v16")
 
     main(googleads_client, args.customer_id, args.campaign_id)

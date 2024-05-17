@@ -19,4 +19,4 @@ import google.ads.googleads.client
 import google.ads.googleads.errors
 import google.ads.googleads.util
 
-VERSION = "23.1.0"
+VERSION = "24.0.0"

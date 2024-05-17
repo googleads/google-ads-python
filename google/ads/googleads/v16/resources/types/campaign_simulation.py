@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-# Copyright 2023 Google LLC
+# Copyright 2024 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -47,6 +47,7 @@ class CampaignSimulation(proto.Message):
     -  SHOPPING - BUDGET - UNIFORM
     -  SHOPPING - TARGET_ROAS - UNIFORM
     -  MULTI_CHANNEL - TARGET_CPA - UNIFORM
+    -  MULTI_CHANNEL - TARGET_ROAS - UNIFORM
     -  DISCOVERY - TARGET_CPA - DEFAULT
     -  DISPLAY - TARGET_CPA - UNIFORM
     -  PERFORMANCE_MAX - TARGET_CPA - UNIFORM

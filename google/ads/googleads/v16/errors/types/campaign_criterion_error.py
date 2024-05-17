@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-# Copyright 2023 Google LLC
+# Copyright 2024 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -67,6 +67,7 @@ class CampaignCriterionErrorEnum(proto.Message):
         )
         LOCAL_SERVICE_ID_NOT_FOUND_FOR_CATEGORY = 25
         CANNOT_ATTACH_BRAND_LIST_TO_NON_QUALIFIED_SEARCH_CAMPAIGN = 26
+        CANNOT_REMOVE_ALL_LOCATIONS_DUE_TO_TOO_MANY_COUNTRY_EXCLUSIONS = 27
 
 
 __all__ = tuple(sorted(__protobuf__.manifest))

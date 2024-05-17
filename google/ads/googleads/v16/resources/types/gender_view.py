@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-# Copyright 2023 Google LLC
+# Copyright 2024 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -29,7 +29,11 @@ __protobuf__ = proto.module(
 
 
 class GenderView(proto.Message):
-    r"""A gender view.
+    r"""A gender view. The gender_view resource reflects the effective
+    serving state, rather than what criteria were added. An ad group
+    without gender criteria by default shows to all genders, so all
+    genders appear in gender_view with stats.
+
     Attributes:
         resource_name (str):
             Output only. The resource name of the gender view. Gender

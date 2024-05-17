@@ -1,3 +1,15 @@
+* 24.0.0
+- Google Ads API v16_1 release.
+- Remove support for Google Ads API v14.
+- Remove the following obsolete examples:
+  - account_management/approve_merchant_center_link.py
+  - account_management/reject_merchant_center_link.py
+  - remarketing/add_flights_feed.py
+  - remarketing/add_real_estate_feed.py
+- Added example account_management/verify_advertiser_identity.py.
+- Update example remarketing/upload_conversion_adjustment.py to use order ID.
+- Update all examples to initialize client after CLI argument validation.
+
 * 23.1.0
 - Google Ads API v16 release.
 - Use native `open` function to load README in setup.py.

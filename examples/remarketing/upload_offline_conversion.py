@@ -134,10 +134,6 @@ def main(
 
 
 if __name__ == "__main__":
-    # GoogleAdsClient will read the google-ads.yaml configuration file in the
-    # home directory if none is specified.
-    googleads_client = GoogleAdsClient.load_from_storage(version="v16")
-
     parser = argparse.ArgumentParser(
         description="Uploads an offline conversion."
     )
@@ -221,13 +217,17 @@ if __name__ == "__main__":
         help="The order ID for the click conversion.",
     )
     parser.add_argument(
-        "-d",
+        "-s",
         "--ad_user_data_consent",
         type=str,
         choices=[e.name for e in googleads_client.enums.ConsentStatusEnum],
         help=("The ad user data consent for the click."),
     )
     args = parser.parse_args()
+
+    # GoogleAdsClient will read the google-ads.yaml configuration file in the
+    # home directory if none is specified.
+    googleads_client = GoogleAdsClient.load_from_storage(version="v16")
 
     try:
         main(

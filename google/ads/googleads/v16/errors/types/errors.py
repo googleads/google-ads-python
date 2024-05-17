@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-# Copyright 2023 Google LLC
+# Copyright 2024 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -459,6 +459,9 @@ from google.ads.googleads.v16.errors.types import (
     user_list_error as gage_user_list_error,
 )
 from google.ads.googleads.v16.errors.types import (
+    video_campaign_error as gage_video_campaign_error,
+)
+from google.ads.googleads.v16.errors.types import (
     youtube_video_registration_error as gage_youtube_video_registration_error,
 )
 from google.protobuf import duration_pb2  # type: ignore
@@ -614,6 +617,10 @@ class ErrorCode(proto.Message):
             This field is a member of `oneof`_ ``error_code``.
         campaign_error (google.ads.googleads.v16.errors.types.CampaignErrorEnum.CampaignError):
             An error with a Campaign mutate.
+
+            This field is a member of `oneof`_ ``error_code``.
+        video_campaign_error (google.ads.googleads.v16.errors.types.VideoCampaignErrorEnum.VideoCampaignError):
+            An error with a Video Campaign mutate.
 
             This field is a member of `oneof`_ ``error_code``.
         authentication_error (google.ads.googleads.v16.errors.types.AuthenticationErrorEnum.AuthenticationError):
@@ -1302,6 +1309,12 @@ class ErrorCode(proto.Message):
             oneof="error_code",
             enum=gage_campaign_error.CampaignErrorEnum.CampaignError,
         )
+    )
+    video_campaign_error: gage_video_campaign_error.VideoCampaignErrorEnum.VideoCampaignError = proto.Field(
+        proto.ENUM,
+        number=182,
+        oneof="error_code",
+        enum=gage_video_campaign_error.VideoCampaignErrorEnum.VideoCampaignError,
     )
     authentication_error: gage_authentication_error.AuthenticationErrorEnum.AuthenticationError = proto.Field(
         proto.ENUM,

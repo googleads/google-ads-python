@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-# Copyright 2023 Google LLC
+# Copyright 2024 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -63,6 +63,7 @@ class ExperimentErrorEnum(proto.Message):
         CANNOT_REMOVE_IN_CREATION_EXPERIMENT = 27
         CANNOT_ADD_CAMPAIGN_WITH_DEPRECATED_AD_TYPES = 28
         CANNOT_ENABLE_SYNC_FOR_UNSUPPORTED_EXPERIMENT_TYPE = 29
+        INVALID_DURATION_FOR_AN_EXPERIMENT = 30
 
 
 __all__ = tuple(sorted(__protobuf__.manifest))

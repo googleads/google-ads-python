@@ -1,3 +1,7 @@
+* 24.1.0
+- Google Ads API v17 release.
+- Remove page_size parameter from Search requests in all examples.
+
 * 24.0.0
 - Google Ads API v16_1 release.
 - Remove support for Google Ads API v14.

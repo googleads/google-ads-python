@@ -757,7 +757,6 @@ def get_customer_conversion_goals(client, customer_id):
     search_request = client.get_type("SearchGoogleAdsRequest")
     search_request.customer_id = customer_id
     search_request.query = query
-    search_request.page_size = 10000
     results = ga_service.search(request=search_request)
 
     # Iterate over the results and build the list of conversion goals.
@@ -911,7 +910,7 @@ if __name__ == "__main__":
 
     # GoogleAdsClient will read the google-ads.yaml configuration file in the
     # home directory if none is specified.
-    googleads_client = GoogleAdsClient.load_from_storage(version="v16")
+    googleads_client = GoogleAdsClient.load_from_storage(version="v17")
 
     try:
         main(

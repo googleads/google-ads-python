@@ -35,9 +35,6 @@ from google.ads.googleads.client import GoogleAdsClient
 from google.ads.googleads.errors import GoogleAdsException
 
 
-_DEFAULT_PAGE_SIZE = 10000
-
-
 def main(client, customer_id, campaign_id, ad_group_id, bid_modifier_value):
     """The main method that creates all necessary entities for the example.
 
@@ -274,7 +271,6 @@ def get_user_list_ad_group_criteria(client, customer_id, campaign_id):
     search_request = client.get_type("SearchGoogleAdsRequest")
     search_request.customer_id = customer_id
     search_request.query = query
-    search_request.page_size = _DEFAULT_PAGE_SIZE
     response = googleads_service.search(request=search_request)
 
     # Iterates over all rows in all pages. Prints the user list criteria and
@@ -417,7 +413,7 @@ if __name__ == "__main__":
 
     # GoogleAdsClient will read the google-ads.yaml configuration file in the
     # home directory if none is specified.
-    googleads_client = GoogleAdsClient.load_from_storage(version="v16")
+    googleads_client = GoogleAdsClient.load_from_storage(version="v17")
 
     try:
         main(

@@ -20,10 +20,8 @@ import sys
 from google.ads.googleads.client import GoogleAdsClient
 from google.ads.googleads.errors import GoogleAdsException
 
-_DEFAULT_PAGE_SIZE = 1000
 
-
-def main(client, customer_id, page_size, ad_group_id=None):
+def main(client, customer_id, ad_group_id=None):
     ga_service = client.get_service("GoogleAdsService")
 
     query = """
@@ -52,7 +50,6 @@ def main(client, customer_id, page_size, ad_group_id=None):
     search_request = client.get_type("SearchGoogleAdsRequest")
     search_request.customer_id = customer_id
     search_request.query = query
-    search_request.page_size = _DEFAULT_PAGE_SIZE
 
     results = ga_service.search(request=search_request)
 
@@ -119,13 +116,12 @@ if __name__ == "__main__":
 
     # GoogleAdsClient will read the google-ads.yaml configuration file in the
     # home directory if none is specified.
-    googleads_client = GoogleAdsClient.load_from_storage(version="v16")
+    googleads_client = GoogleAdsClient.load_from_storage(version="v17")
 
     try:
         main(
             googleads_client,
             args.customer_id,
-            _DEFAULT_PAGE_SIZE,
             ad_group_id=args.ad_group_id,
         )
     except GoogleAdsException as ex:

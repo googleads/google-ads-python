@@ -22,10 +22,7 @@ from google.ads.googleads.client import GoogleAdsClient
 from google.ads.googleads.errors import GoogleAdsException
 
 
-_DEFAULT_PAGE_SIZE = 10000
-
-
-def main(client, customer_id, page_size, campaign_id):
+def main(client, customer_id, campaign_id):
     ga_service = client.get_service("GoogleAdsService")
     shared_criterion_service = client.get_service("SharedCriterionService")
 
@@ -41,7 +38,6 @@ def main(client, customer_id, page_size, campaign_id):
         shared_set_search_request = client.get_type("SearchGoogleAdsRequest")
         shared_set_search_request.customer_id = customer_id
         shared_set_search_request.query = shared_sets_query
-        shared_set_search_request.page_size = _DEFAULT_PAGE_SIZE
 
         shared_set_response = ga_service.search(
             request=shared_set_search_request
@@ -75,7 +71,6 @@ def main(client, customer_id, page_size, campaign_id):
         )
         shared_criteria_search_request.customer_id = customer_id
         shared_criteria_search_request.query = shared_criteria_query
-        shared_criteria_search_request.page_size = _DEFAULT_PAGE_SIZE
 
         shared_criteria_response = ga_service.search(
             request=shared_criteria_search_request
@@ -154,8 +149,6 @@ if __name__ == "__main__":
 
     # GoogleAdsClient will read the google-ads.yaml configuration file in the
     # home directory if none is specified.
-    googleads_client = GoogleAdsClient.load_from_storage(version="v16")
+    googleads_client = GoogleAdsClient.load_from_storage(version="v17")
 
-    main(
-        googleads_client, args.customer_id, _DEFAULT_PAGE_SIZE, args.campaign_id
-    )
+    main(googleads_client, args.customer_id, args.campaign_id)

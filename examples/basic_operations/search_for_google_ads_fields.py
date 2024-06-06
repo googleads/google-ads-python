@@ -27,17 +27,13 @@ from google.ads.googleads.client import GoogleAdsClient
 from google.ads.googleads.errors import GoogleAdsException
 
 
-_DEFAULT_PAGE_SIZE = 1000
-
-
-def main(client, name_prefix, page_size):
+def main(client, name_prefix):
     """The main method that creates all necessary entities for the example.
 
     Args:
         client: an initialized GoogleAdsClient instance.
         name_prefix: the name prefix to use when searching for Google Ads field
             names.
-        page_size: the number of rows to return per page.
     """
     gaf_service = client.get_service("GoogleAdsFieldService")
 
@@ -56,7 +52,6 @@ def main(client, name_prefix, page_size):
 
     request = client.get_type("SearchGoogleAdsFieldsRequest")
     request.query = query
-    request.page_size = page_size
 
     response = gaf_service.search_google_ads_fields(request=request)
 
@@ -109,10 +104,10 @@ if __name__ == "__main__":
 
     # GoogleAdsClient will read the google-ads.yaml configuration file in the
     # home directory if none is specified.
-    googleads_client = GoogleAdsClient.load_from_storage(version="v16")
+    googleads_client = GoogleAdsClient.load_from_storage(version="v17")
 
     try:
-        main(googleads_client, args.name_prefix, _DEFAULT_PAGE_SIZE)
+        main(googleads_client, args.name_prefix)
     except GoogleAdsException as ex:
         print(
             f'Request with ID "{ex.request_id}" failed with status '

@@ -39,9 +39,6 @@ from google.ads.googleads.errors import GoogleAdsException
 # These temporary IDs are fixed because they are used in multiple places.
 _TEMPORARY_ID_LISTING_GROUP_ROOT = -1
 
-# Sets the page size for paged search queries.
-_PAGE_SIZE = 10000
-
 
 class AssetGroupListingGroupFilterRemoveOperationFactory:
     def __init__(self, client, listing_group_filters):
@@ -482,7 +479,6 @@ def get_all_existing_listing_group_filter_assets_in_asset_group(
     request = client.get_type("SearchGoogleAdsRequest")
     request.customer_id = customer_id
     request.query = query
-    request.page_size = _PAGE_SIZE
 
     googleads_service = client.get_service("GoogleAdsService")
     response = googleads_service.search(request=request)
@@ -566,7 +562,7 @@ if __name__ == "__main__":
 
     # GoogleAdsClient will read the google-ads.yaml configuration file in the
     # home directory if none is specified.
-    googleads_client = GoogleAdsClient.load_from_storage(version="v16")
+    googleads_client = GoogleAdsClient.load_from_storage(version="v17")
 
     try:
         main(

@@ -13,13 +13,15 @@
 # limitations under the License.
 """A set of functions to help initialize OAuth2 credentials."""
 
-
+import os
+import json
 import functools
 from requests import Session
 
 from google.oauth2.service_account import Credentials as ServiceAccountCreds
 from google.oauth2.credentials import Credentials as InstalledAppCredentials
 from google.auth.transport.requests import Request
+
 
 from google.ads.googleads import config
 
@@ -77,6 +79,12 @@ def get_installed_app_credentials(
         token_uri=token_uri,
     )
 
+# In environments where it is preferable to supply secrets or other configuration via
+# environment variables or where it is not feasible to make a .json key file available,
+# file available, you may instead provide credential as a JSON string in the
+# `GOOGLE_ADS_SERVICE_ACCOUNT_INFO_STRING` environment variable. This JSON string
+# should contain the same contents and be formatted the same way as the contents
+# of a .json key file.
 
 @_initialize_credentials_decorator
 def get_service_account_credentials(
@@ -92,6 +100,11 @@ def get_service_account_credentials(
     Returns:
         An instance of oauth2.credentials.Credentials
     """
+    service_account_info = os.getenv("GOOGLE_ADS_SERVICE_ACCOUNT_INFO_STRING")
+    if service_account_info:
+        return ServiceAccountCreds.from_service_account_info(
+            json.loads(service_account_info), subject=subject, scopes=scopes
+        )
     return ServiceAccountCreds.from_service_account_file(
         json_key_file_path, subject=subject, scopes=scopes
     )
@@ -126,6 +139,11 @@ def get_credentials(config_data):
             config_data.get("impersonated_email"),
             http_proxy=config_data.get("http_proxy"),
         )
+    elif "GOOGLE_ADS_SERVICE_ACCOUNT_INFO_STRING" in os.environ:
+        return get_service_account_credentials(
+            None,
+            config_data.get("impersonated_email"),
+            http_proxy=config_data.get("http_proxy"),)
     else:
         raise ValueError(
             "Your YAML file is incorrectly configured for OAuth2. "

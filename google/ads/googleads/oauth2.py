@@ -132,6 +132,10 @@ def get_credentials(config_data):
             config_data.get("refresh_token"),
             http_proxy=config_data.get("http_proxy"),
         )
+    elif "GOOGLE_ADS_SERVICE_ACCOUNT_INFO_STRING" in os.environ:
+        return get_service_account_credentials(
+            None,
+            config_data.get("impersonated_email"),)
     elif all(key in config_data for key in required_service_account_keys):
         # Using the Service Account Flow
         return get_service_account_credentials(
@@ -139,11 +143,6 @@ def get_credentials(config_data):
             config_data.get("impersonated_email"),
             http_proxy=config_data.get("http_proxy"),
         )
-    elif "GOOGLE_ADS_SERVICE_ACCOUNT_INFO_STRING" in os.environ:
-        return get_service_account_credentials(
-            None,
-            config_data.get("impersonated_email"),
-            http_proxy=config_data.get("http_proxy"),)
     else:
         raise ValueError(
             "Your YAML file is incorrectly configured for OAuth2. "

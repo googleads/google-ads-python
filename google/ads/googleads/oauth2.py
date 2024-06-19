@@ -12,7 +12,6 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 """A set of functions to help initialize OAuth2 credentials."""
-
 import json
 import functools
 from requests import Session

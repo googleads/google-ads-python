@@ -215,6 +215,7 @@ __all__ = (
     "OfflineConversionError",
     "OfflineConversionSummary",
     "OfflineConversionUploadClientSummary",
+    "OfflineConversionUploadConversionActionSummary",
     "OfflineUserDataJob",
     "OfflineUserDataJobMetadata",
     "OperatingSystemVersionConstant",

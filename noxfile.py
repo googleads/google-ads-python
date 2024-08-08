@@ -15,6 +15,7 @@
 import nox
 
 PYTHON_VERSIONS = ["3.8", "3.9", "3.10", "3.11", "3.12"]
+PROTOBUF_IMPLEMENTATIONS = ["python", "upb"]
 
 TEST_COMMAND = [
     "coverage",
@@ -38,7 +39,8 @@ FREEZE_COMMAND = ["python", "-m", "pip", "freeze"]
 
 
 @nox.session(python=PYTHON_VERSIONS)
-def tests(session):
+@nox.parametrize("protobuf_implementation", PROTOBUF_IMPLEMENTATIONS)
+def tests(session, protobuf_implementation):
     session.install(".")
     # modules for testing
     session.install(
@@ -46,14 +48,20 @@ def tests(session):
         "coverage==6.5.0",
     )
     session.run(*FREEZE_COMMAND)
-    session.run(*TEST_COMMAND)
+    session.run(
+        *TEST_COMMAND,
+        env={
+            "PROTOCOL_BUFFERS_PYTHON_IMPLEMENTATION": protobuf_implementation,
+        },
+    )
     session.run(*COVERAGE_COMMAND)
 
 
 # This session runs all the unit tests but with the lowest-possible versions
 # of supported dependencies that are published by Google.
 @nox.session(python=PYTHON_VERSIONS)
-def tests_minimum_dependency_versions(session):
+@nox.parametrize("protobuf_implementation", PROTOBUF_IMPLEMENTATIONS)
+def tests_minimum_dependency_versions(session, protobuf_implementation):
     session.install(".")
     # modules for testing
     session.install(
@@ -70,5 +78,10 @@ def tests_minimum_dependency_versions(session):
         "grpcio-status==1.59.0",
     )
     session.run(*FREEZE_COMMAND)
-    session.run(*TEST_COMMAND)
+    session.run(
+        *TEST_COMMAND,
+        env={
+            "PROTOCOL_BUFFERS_PYTHON_IMPLEMENTATION": protobuf_implementation,
+        },
+    )
     session.run(*COVERAGE_COMMAND)

@@ -275,6 +275,25 @@ class AdGroupAdServiceClient(metaclass=AdGroupAdServiceClientMeta):
         return m.groupdict() if m else {}
 
     @staticmethod
+    def asset_path(
+        customer_id: str,
+        asset_id: str,
+    ) -> str:
+        """Returns a fully-qualified asset string."""
+        return "customers/{customer_id}/assets/{asset_id}".format(
+            customer_id=customer_id,
+            asset_id=asset_id,
+        )
+
+    @staticmethod
+    def parse_asset_path(path: str) -> Dict[str, str]:
+        """Parses a asset path into its component segments."""
+        m = re.match(
+            r"^customers/(?P<customer_id>.+?)/assets/(?P<asset_id>.+?)$", path
+        )
+        return m.groupdict() if m else {}
+
+    @staticmethod
     def common_billing_account_path(
         billing_account: str,
     ) -> str:
@@ -595,6 +614,107 @@ class AdGroupAdServiceClient(metaclass=AdGroupAdServiceClientMeta):
 
         # Done; return the response.
         return response
+
+    def remove_automatically_created_assets(
+        self,
+        request: Optional[
+            Union[
+                ad_group_ad_service.RemoveAutomaticallyCreatedAssetsRequest,
+                dict,
+            ]
+        ] = None,
+        *,
+        ad_group_ad: Optional[str] = None,
+        assets_with_field_type: Optional[
+            MutableSequence[ad_group_ad_service.AssetsWithFieldType]
+        ] = None,
+        retry: OptionalRetry = gapic_v1.method.DEFAULT,
+        timeout: Union[float, object] = gapic_v1.method.DEFAULT,
+        metadata: Sequence[Tuple[str, str]] = (),
+    ) -> None:
+        r"""Remove automatically created assets from an ad.
+
+        List of thrown errors: `AdError <>`__ `AuthenticationError <>`__
+        `AuthorizationError <>`__
+        `AutomaticallyCreatedAssetRemovalError <>`__ `HeaderError <>`__
+        `InternalError <>`__ `MutateError <>`__ `QuotaError <>`__
+        `RequestError <>`__
+
+        Args:
+            request (Union[google.ads.googleads.v17.services.types.RemoveAutomaticallyCreatedAssetsRequest, dict, None]):
+                The request object. Request message for
+                [AdGroupAdService.RemoveAutomaticallyCreatedAssetsRequest][].
+            ad_group_ad (str):
+                Required. The resource name of the
+                AdGroupAd from which to remove
+                automatically created assets.
+
+                This corresponds to the ``ad_group_ad`` field
+                on the ``request`` instance; if ``request`` is provided, this
+                should not be set.
+            assets_with_field_type (MutableSequence[google.ads.googleads.v17.services.types.AssetsWithFieldType]):
+                Required. List of assets with field
+                type to be removed from the AdGroupAd.
+
+                This corresponds to the ``assets_with_field_type`` field
+                on the ``request`` instance; if ``request`` is provided, this
+                should not be set.
+            retry (google.api_core.retry.Retry): Designation of what errors, if any,
+                should be retried.
+            timeout (float): The timeout for this request.
+            metadata (Sequence[Tuple[str, str]]): Strings which should be
+                sent along with the request as metadata.
+        """
+        # Create or coerce a protobuf request object.
+        # Quick check: If we got a request object, we should *not* have
+        # gotten any keyword arguments that map to the request.
+        has_flattened_params = any([ad_group_ad, assets_with_field_type])
+        if request is not None and has_flattened_params:
+            raise ValueError(
+                "If the `request` argument is set, then none of "
+                "the individual field arguments should be set."
+            )
+
+        # Minor optimization to avoid making a copy if the user passes
+        # in a ad_group_ad_service.RemoveAutomaticallyCreatedAssetsRequest.
+        # There's no risk of modifying the input as we've already verified
+        # there are no flattened fields.
+        if not isinstance(
+            request, ad_group_ad_service.RemoveAutomaticallyCreatedAssetsRequest
+        ):
+            request = (
+                ad_group_ad_service.RemoveAutomaticallyCreatedAssetsRequest(
+                    request
+                )
+            )
+            # If we have keyword arguments corresponding to fields on the
+            # request, apply these.
+            if ad_group_ad is not None:
+                request.ad_group_ad = ad_group_ad
+            if assets_with_field_type is not None:
+                request.assets_with_field_type = assets_with_field_type
+
+        # Wrap the RPC method; this adds retry and timeout information,
+        # and friendly error handling.
+        rpc = self._transport._wrapped_methods[
+            self._transport.remove_automatically_created_assets
+        ]
+
+        # Certain fields should be provided within the metadata header;
+        # add these here.
+        metadata = tuple(metadata) + (
+            gapic_v1.routing_header.to_grpc_metadata(
+                (("ad_group_ad", request.ad_group_ad),)
+            ),
+        )
+
+        # Send the request.
+        rpc(
+            request,
+            retry=retry,
+            timeout=timeout,
+            metadata=metadata,
+        )
 
 
 DEFAULT_CLIENT_INFO = gapic_v1.client_info.ClientInfo(

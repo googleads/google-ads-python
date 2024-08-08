@@ -57,6 +57,7 @@ class ChangeStatusResourceTypeEnum(proto.Message):
         CAMPAIGN_ASSET = 18
         AD_GROUP_ASSET = 19
         COMBINED_AUDIENCE = 20
+        ASSET_GROUP = 21
 
 
 __all__ = tuple(sorted(__protobuf__.manifest))

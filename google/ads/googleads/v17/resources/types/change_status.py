@@ -126,6 +126,9 @@ class ChangeStatus(proto.Message):
         combined_audience (str):
             Output only. The CombinedAudience affected by
             this change.
+        asset_group (str):
+            Output only. The AssetGroup affected by this
+            change.
     """
 
     resource_name: str = proto.Field(
@@ -224,6 +227,10 @@ class ChangeStatus(proto.Message):
     combined_audience: str = proto.Field(
         proto.STRING,
         number=40,
+    )
+    asset_group: str = proto.Field(
+        proto.STRING,
+        number=41,
     )
 
 

@@ -25,6 +25,7 @@ from google.auth.transport.grpc import SslCredentials  # type: ignore
 import grpc  # type: ignore
 
 from google.ads.googleads.v17.services.types import ad_group_ad_service
+from google.protobuf import empty_pb2  # type: ignore
 from .base import AdGroupAdServiceTransport, DEFAULT_CLIENT_INFO
 
 
@@ -122,7 +123,8 @@ class AdGroupAdServiceGrpcTransport(AdGroupAdServiceTransport):
 
         if channel:
             # Ignore credentials if a channel was passed.
-            credentials = False
+            credentials = None
+            self._ignore_credentials = True
             # If a channel was explicitly provided, set it.
             self._grpc_channel = channel
             self._ssl_channel_credentials = None
@@ -286,6 +288,44 @@ class AdGroupAdServiceGrpcTransport(AdGroupAdServiceTransport):
                 response_deserializer=ad_group_ad_service.MutateAdGroupAdsResponse.deserialize,
             )
         return self._stubs["mutate_ad_group_ads"]
+
+    @property
+    def remove_automatically_created_assets(
+        self,
+    ) -> Callable[
+        [ad_group_ad_service.RemoveAutomaticallyCreatedAssetsRequest],
+        empty_pb2.Empty,
+    ]:
+        r"""Return a callable for the remove automatically created
+        assets method over gRPC.
+
+        Remove automatically created assets from an ad.
+
+        List of thrown errors: `AdError <>`__ `AuthenticationError <>`__
+        `AuthorizationError <>`__
+        `AutomaticallyCreatedAssetRemovalError <>`__ `HeaderError <>`__
+        `InternalError <>`__ `MutateError <>`__ `QuotaError <>`__
+        `RequestError <>`__
+
+        Returns:
+            Callable[[~.RemoveAutomaticallyCreatedAssetsRequest],
+                    ~.Empty]:
+                A function that, when called, will call the underlying RPC
+                on the server.
+        """
+        # Generate a "stub function" on-the-fly which will actually make
+        # the request.
+        # gRPC handles serialization and deserialization, so we just need
+        # to pass in the functions for each.
+        if "remove_automatically_created_assets" not in self._stubs:
+            self._stubs[
+                "remove_automatically_created_assets"
+            ] = self.grpc_channel.unary_unary(
+                "/google.ads.googleads.v17.services.AdGroupAdService/RemoveAutomaticallyCreatedAssets",
+                request_serializer=ad_group_ad_service.RemoveAutomaticallyCreatedAssetsRequest.serialize,
+                response_deserializer=empty_pb2.Empty.FromString,
+            )
+        return self._stubs["remove_automatically_created_assets"]
 
     def close(self):
         self.grpc_channel.close()

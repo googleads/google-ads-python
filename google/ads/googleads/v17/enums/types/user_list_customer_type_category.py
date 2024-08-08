@@ -44,6 +44,13 @@ class UserListCustomerTypeCategoryEnum(proto.Message):
         PAID_SUBSCRIBERS = 8
         LOYALTY_SIGN_UPS = 9
         CART_ABANDONERS = 10
+        LOYALTY_TIER_1_MEMBERS = 11
+        LOYALTY_TIER_2_MEMBERS = 12
+        LOYALTY_TIER_3_MEMBERS = 13
+        LOYALTY_TIER_4_MEMBERS = 14
+        LOYALTY_TIER_5_MEMBERS = 15
+        LOYALTY_TIER_6_MEMBERS = 16
+        LOYALTY_TIER_7_MEMBERS = 17
 
 
 __all__ = tuple(sorted(__protobuf__.manifest))

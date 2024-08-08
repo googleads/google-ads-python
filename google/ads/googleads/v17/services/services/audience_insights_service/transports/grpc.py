@@ -124,7 +124,8 @@ class AudienceInsightsServiceGrpcTransport(AudienceInsightsServiceTransport):
 
         if channel:
             # Ignore credentials if a channel was passed.
-            credentials = False
+            credentials = None
+            self._ignore_credentials = True
             # If a channel was explicitly provided, set it.
             self._grpc_channel = channel
             self._ssl_channel_credentials = None
@@ -428,6 +429,45 @@ class AudienceInsightsServiceGrpcTransport(AudienceInsightsServiceTransport):
                 response_deserializer=audience_insights_service.GenerateSuggestedTargetingInsightsResponse.deserialize,
             )
         return self._stubs["generate_suggested_targeting_insights"]
+
+    @property
+    def generate_audience_overlap_insights(
+        self,
+    ) -> Callable[
+        [audience_insights_service.GenerateAudienceOverlapInsightsRequest],
+        audience_insights_service.GenerateAudienceOverlapInsightsResponse,
+    ]:
+        r"""Return a callable for the generate audience overlap
+        insights method over gRPC.
+
+        Returns a collection of audience attributes along with estimates
+        of the overlap between their potential YouTube reach and that of
+        a given input attribute.
+
+        List of thrown errors: `AudienceInsightsError <>`__
+        `AuthenticationError <>`__ `AuthorizationError <>`__
+        `FieldError <>`__ `HeaderError <>`__ `InternalError <>`__
+        `QuotaError <>`__ `RangeError <>`__ `RequestError <>`__
+
+        Returns:
+            Callable[[~.GenerateAudienceOverlapInsightsRequest],
+                    ~.GenerateAudienceOverlapInsightsResponse]:
+                A function that, when called, will call the underlying RPC
+                on the server.
+        """
+        # Generate a "stub function" on-the-fly which will actually make
+        # the request.
+        # gRPC handles serialization and deserialization, so we just need
+        # to pass in the functions for each.
+        if "generate_audience_overlap_insights" not in self._stubs:
+            self._stubs[
+                "generate_audience_overlap_insights"
+            ] = self.grpc_channel.unary_unary(
+                "/google.ads.googleads.v17.services.AudienceInsightsService/GenerateAudienceOverlapInsights",
+                request_serializer=audience_insights_service.GenerateAudienceOverlapInsightsRequest.serialize,
+                response_deserializer=audience_insights_service.GenerateAudienceOverlapInsightsResponse.deserialize,
+            )
+        return self._stubs["generate_audience_overlap_insights"]
 
     def close(self):
         self.grpc_channel.close()

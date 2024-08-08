@@ -157,6 +157,17 @@ class AdGroup(proto.Message):
             1,000,000 \* [fraction].
 
             This field is a member of `oneof`_ ``_percent_cpc_bid_micros``.
+        fixed_cpm_micros (int):
+            The fixed amount in micros that the
+            advertiser pays for every thousand impressions
+            of the ad.
+
+            This field is a member of `oneof`_ ``_fixed_cpm_micros``.
+        target_cpv_micros (int):
+            Average amount in micros that the advertiser
+            is willing to pay for every ad view.
+
+            This field is a member of `oneof`_ ``_target_cpv_micros``.
         optimized_targeting_enabled (bool):
             True if optimized targeting is enabled.
             Optimized Targeting is the replacement for
@@ -325,6 +336,16 @@ class AdGroup(proto.Message):
     percent_cpc_bid_micros: int = proto.Field(
         proto.INT64,
         number=45,
+        optional=True,
+    )
+    fixed_cpm_micros: int = proto.Field(
+        proto.INT64,
+        number=64,
+        optional=True,
+    )
+    target_cpv_micros: int = proto.Field(
+        proto.INT64,
+        number=65,
         optional=True,
     )
     optimized_targeting_enabled: bool = proto.Field(

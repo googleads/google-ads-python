@@ -442,6 +442,9 @@ from google.ads.googleads.v17.resources.types import (
     offline_conversion_upload_client_summary as gagr_offline_conversion_upload_client_summary,
 )
 from google.ads.googleads.v17.resources.types import (
+    offline_conversion_upload_conversion_action_summary as gagr_offline_conversion_upload_conversion_action_summary,
+)
+from google.ads.googleads.v17.resources.types import (
     offline_user_data_job as gagr_offline_user_data_job,
 )
 from google.ads.googleads.v17.resources.types import (
@@ -1239,7 +1242,11 @@ class GoogleAdsRow(proto.Message):
             The mobile device constant referenced in the
             query.
         offline_conversion_upload_client_summary (google.ads.googleads.v17.resources.types.OfflineConversionUploadClientSummary):
-            Offline conversion upload client summary.
+            Offline conversion upload summary at customer
+            level.
+        offline_conversion_upload_conversion_action_summary (google.ads.googleads.v17.resources.types.OfflineConversionUploadConversionActionSummary):
+            Offline conversion upload summary at
+            conversion type level.
         offline_user_data_job (google.ads.googleads.v17.resources.types.OfflineUserDataJob):
             The offline user data job referenced in the
             query.
@@ -2098,6 +2105,11 @@ class GoogleAdsRow(proto.Message):
         proto.MESSAGE,
         number=216,
         message=gagr_offline_conversion_upload_client_summary.OfflineConversionUploadClientSummary,
+    )
+    offline_conversion_upload_conversion_action_summary: gagr_offline_conversion_upload_conversion_action_summary.OfflineConversionUploadConversionActionSummary = proto.Field(
+        proto.MESSAGE,
+        number=228,
+        message=gagr_offline_conversion_upload_conversion_action_summary.OfflineConversionUploadConversionActionSummary,
     )
     offline_user_data_job: gagr_offline_user_data_job.OfflineUserDataJob = (
         proto.Field(

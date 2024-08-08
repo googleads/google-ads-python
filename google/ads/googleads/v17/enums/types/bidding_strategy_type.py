@@ -40,6 +40,7 @@ class BiddingStrategyTypeEnum(proto.Message):
         UNKNOWN = 1
         COMMISSION = 16
         ENHANCED_CPC = 2
+        FIXED_CPM = 19
         INVALID = 17
         MANUAL_CPA = 18
         MANUAL_CPC = 3
@@ -51,6 +52,7 @@ class BiddingStrategyTypeEnum(proto.Message):
         PERCENT_CPC = 12
         TARGET_CPA = 6
         TARGET_CPM = 14
+        TARGET_CPV = 20
         TARGET_IMPRESSION_SHARE = 15
         TARGET_OUTRANK_SHARE = 7
         TARGET_ROAS = 8

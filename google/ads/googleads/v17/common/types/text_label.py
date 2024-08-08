@@ -34,7 +34,7 @@ class TextLabel(proto.Message):
 
     Attributes:
         background_color (str):
-            Background color of the label in RGB format. This string
+            Background color of the label in HEX format. This string
             must match the regular expression
             '^#([a-fA-F0-9]{6}|[a-fA-F0-9]{3})$'. Note: The background
             color may not be visible for manager accounts.

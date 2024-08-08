@@ -186,6 +186,8 @@ class Campaign(proto.Message):
             Settings for Travel campaign.
         demand_gen_campaign_settings (google.ads.googleads.v17.resources.types.Campaign.DemandGenCampaignSettings):
             Settings for Demand Gen campaign.
+        video_campaign_settings (google.ads.googleads.v17.resources.types.Campaign.VideoCampaignSettings):
+            Settings for Video campaign.
         real_time_bidding_setting (google.ads.googleads.v17.common.types.RealTimeBiddingSetting):
             Settings for Real-Time Bidding, a feature
             only available for campaigns targeting the Ad
@@ -451,6 +453,16 @@ class Campaign(proto.Message):
         target_cpm (google.ads.googleads.v17.common.types.TargetCpm):
             A bidding strategy that automatically
             optimizes cost per thousand impressions.
+
+            This field is a member of `oneof`_ ``campaign_bidding_strategy``.
+        fixed_cpm (google.ads.googleads.v17.common.types.FixedCpm):
+            A manual bidding strategy with a fixed CPM.
+
+            This field is a member of `oneof`_ ``campaign_bidding_strategy``.
+        target_cpv (google.ads.googleads.v17.common.types.TargetCpv):
+            An automated bidding strategy that sets bids
+            to optimize performance given the target CPV you
+            set.
 
             This field is a member of `oneof`_ ``campaign_bidding_strategy``.
     """
@@ -953,6 +965,62 @@ class Campaign(proto.Message):
             optional=True,
         )
 
+    class VideoCampaignSettings(proto.Message):
+        r"""Settings for Video campaign.
+        Attributes:
+            video_ad_inventory_control (google.ads.googleads.v17.resources.types.Campaign.VideoCampaignSettings.VideoAdInventoryControl):
+                Inventory control for responsive ad
+                containers in reach campaigns.
+        """
+
+        class VideoAdInventoryControl(proto.Message):
+            r"""For campaigns using responsive ad containers inventory controls
+            determine on which inventories the ads can be shown. This only
+            applies for campaigns with the bidding strategies TARGET_CPM and
+            FIXED_CPM.
+
+            .. _oneof: https://proto-plus-python.readthedocs.io/en/stable/fields.html#oneofs-mutually-exclusive-fields
+
+            Attributes:
+                allow_in_stream (bool):
+                    Determine if VideoResponsiveAds can be used
+                    for in-stream video ads.
+
+                    This field is a member of `oneof`_ ``_allow_in_stream``.
+                allow_in_feed (bool):
+                    Determine if VideoResponsiveAds can be used
+                    for in-feed video ads.
+
+                    This field is a member of `oneof`_ ``_allow_in_feed``.
+                allow_shorts (bool):
+                    Determine if VideoResponsiveAds can be used
+                    as shorts format.
+
+                    This field is a member of `oneof`_ ``_allow_shorts``.
+            """
+
+            allow_in_stream: bool = proto.Field(
+                proto.BOOL,
+                number=1,
+                optional=True,
+            )
+            allow_in_feed: bool = proto.Field(
+                proto.BOOL,
+                number=2,
+                optional=True,
+            )
+            allow_shorts: bool = proto.Field(
+                proto.BOOL,
+                number=3,
+                optional=True,
+            )
+
+        video_ad_inventory_control: "Campaign.VideoCampaignSettings.VideoAdInventoryControl" = proto.Field(
+            proto.MESSAGE,
+            number=1,
+            message="Campaign.VideoCampaignSettings.VideoAdInventoryControl",
+        )
+
     class AssetAutomationSetting(proto.Message):
         r"""Asset automation setting contains pair of AssetAutomationType
         and the asset automation opt-in/out status
@@ -1069,6 +1137,11 @@ class Campaign(proto.Message):
         proto.MESSAGE,
         number=91,
         message=DemandGenCampaignSettings,
+    )
+    video_campaign_settings: VideoCampaignSettings = proto.Field(
+        proto.MESSAGE,
+        number=94,
+        message=VideoCampaignSettings,
     )
     real_time_bidding_setting: gagc_real_time_bidding_setting.RealTimeBiddingSetting = proto.Field(
         proto.MESSAGE,
@@ -1340,6 +1413,18 @@ class Campaign(proto.Message):
         number=41,
         oneof="campaign_bidding_strategy",
         message=bidding.TargetCpm,
+    )
+    fixed_cpm: bidding.FixedCpm = proto.Field(
+        proto.MESSAGE,
+        number=92,
+        oneof="campaign_bidding_strategy",
+        message=bidding.FixedCpm,
+    )
+    target_cpv: bidding.TargetCpv = proto.Field(
+        proto.MESSAGE,
+        number=93,
+        oneof="campaign_bidding_strategy",
+        message=bidding.TargetCpv,
     )
 
 

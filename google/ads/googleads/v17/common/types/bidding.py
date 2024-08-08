@@ -18,6 +18,10 @@ from __future__ import annotations
 
 import proto  # type: ignore
 
+from google.ads.googleads.v17.enums.types import fixed_cpm_goal
+from google.ads.googleads.v17.enums.types import (
+    fixed_cpm_target_frequency_time_unit,
+)
 from google.ads.googleads.v17.enums.types import target_frequency_time_unit
 from google.ads.googleads.v17.enums.types import (
     target_impression_share_location,
@@ -43,6 +47,9 @@ __protobuf__ = proto.module(
         "TargetRoas",
         "TargetSpend",
         "PercentCpc",
+        "FixedCpm",
+        "FixedCpmTargetFrequencyGoalInfo",
+        "TargetCpv",
     },
 )
 
@@ -454,6 +461,69 @@ class PercentCpc(proto.Message):
         number=4,
         optional=True,
     )
+
+
+class FixedCpm(proto.Message):
+    r"""Fixed CPM (cost per thousand impression) bidding strategy. A
+    manual bidding strategy with a fixed CPM.
+
+    .. _oneof: https://proto-plus-python.readthedocs.io/en/stable/fields.html#oneofs-mutually-exclusive-fields
+
+    Attributes:
+        goal (google.ads.googleads.v17.enums.types.FixedCpmGoalEnum.FixedCpmGoal):
+            Fixed CPM bidding goal. Determines the exact
+            bidding optimization parameters.
+        target_frequency_info (google.ads.googleads.v17.common.types.FixedCpmTargetFrequencyGoalInfo):
+            Target frequency bidding goal details.
+
+            This field is a member of `oneof`_ ``goal_info``.
+    """
+
+    goal: fixed_cpm_goal.FixedCpmGoalEnum.FixedCpmGoal = proto.Field(
+        proto.ENUM,
+        number=1,
+        enum=fixed_cpm_goal.FixedCpmGoalEnum.FixedCpmGoal,
+    )
+    target_frequency_info: "FixedCpmTargetFrequencyGoalInfo" = proto.Field(
+        proto.MESSAGE,
+        number=2,
+        oneof="goal_info",
+        message="FixedCpmTargetFrequencyGoalInfo",
+    )
+
+
+class FixedCpmTargetFrequencyGoalInfo(proto.Message):
+    r"""Target frequency bidding goal details for Fixed CPM bidding
+    strategy. Only relevant if the goal of the bidding strategy is
+    ``TARGET_FREQUENCY``.
+
+    Attributes:
+        target_count (int):
+            Target frequency count represents the number
+            of times an advertiser wants to show the ad to
+            target a single user.
+        time_unit (google.ads.googleads.v17.enums.types.FixedCpmTargetFrequencyTimeUnitEnum.FixedCpmTargetFrequencyTimeUnit):
+            Time window expressing the period over which you want to
+            reach the specified target_count.
+    """
+
+    target_count: int = proto.Field(
+        proto.INT64,
+        number=1,
+    )
+    time_unit: fixed_cpm_target_frequency_time_unit.FixedCpmTargetFrequencyTimeUnitEnum.FixedCpmTargetFrequencyTimeUnit = proto.Field(
+        proto.ENUM,
+        number=2,
+        enum=fixed_cpm_target_frequency_time_unit.FixedCpmTargetFrequencyTimeUnitEnum.FixedCpmTargetFrequencyTimeUnit,
+    )
+
+
+class TargetCpv(proto.Message):
+    r"""Target CPV (cost per view) bidding strategy. An automated
+    bidding strategy that sets bids to optimize performance given
+    the target CPV you set.
+
+    """
 
 
 __all__ = tuple(sorted(__protobuf__.manifest))

@@ -68,12 +68,12 @@ __protobuf__ = proto.module(
 
 
 class OfflineConversionUploadClientSummary(proto.Message):
-    r"""Offline conversion upload client summary.
+    r"""Offline conversion upload summary at customer level.
     Attributes:
         resource_name (str):
             Output only. The resource name of the offline conversion
-            upload client summary. Offline conversion upload client
-            summary resource names have the form:
+            upload summary at customer level. Offline conversion upload
+            client summary resource names have the form:
 
             ``customers/{customer_id}/offlineConversionUploadClientSummaries/{client}``
         client (google.ads.googleads.v17.enums.types.OfflineEventUploadClientEnum.OfflineEventUploadClient):
@@ -81,7 +81,7 @@ class OfflineConversionUploadClientSummary(proto.Message):
         status (google.ads.googleads.v17.enums.types.OfflineConversionDiagnosticStatusEnum.OfflineConversionDiagnosticStatus):
             Output only. Overall status for offline
             conversion client summary. Status is generated
-            from most recent calendar day with upload stats
+            from most recent calendar day with upload stats.
         total_event_count (int):
             Output only. Total count of uploaded events.
         successful_event_count (int):
@@ -89,6 +89,12 @@ class OfflineConversionUploadClientSummary(proto.Message):
             uploaded events.
         success_rate (float):
             Output only. Successful rate.
+        pending_event_count (int):
+            Output only. Total count of pending uploaded
+            events.
+        pending_rate (float):
+            Output only. The ratio of total pending
+            events to total events.
         last_upload_date_time (str):
             Output only. Date for the latest upload
             batch. The format is "yyyy-mm-dd hh:mm:ss", and
@@ -131,6 +137,14 @@ class OfflineConversionUploadClientSummary(proto.Message):
         proto.DOUBLE,
         number=6,
     )
+    pending_event_count: int = proto.Field(
+        proto.INT64,
+        number=11,
+    )
+    pending_rate: float = proto.Field(
+        proto.DOUBLE,
+        number=12,
+    )
     last_upload_date_time: str = proto.Field(
         proto.STRING,
         number=7,
@@ -170,6 +184,9 @@ class OfflineConversionSummary(proto.Message):
             Output only. Total count of successful event.
         failed_count (int):
             Output only. Total count of failed event.
+        pending_count (int):
+            Output only. Total count of pending uploaded
+            event.
         job_id (int):
             Output only. Dimension key for last N jobs.
 
@@ -187,6 +204,10 @@ class OfflineConversionSummary(proto.Message):
     failed_count: int = proto.Field(
         proto.INT64,
         number=4,
+    )
+    pending_count: int = proto.Field(
+        proto.INT64,
+        number=5,
     )
     job_id: int = proto.Field(
         proto.INT64,

@@ -26,7 +26,7 @@ install_requires = [
     "grpcio-status >= 1.59.0, < 2.0.0",
     "proto-plus >= 1.22.3, < 2.0.0",
     "PyYAML >= 5.1, < 7.0",
-    "protobuf >= 4.25.0, < 5.0.0",
+    "protobuf >= 4.25.0, < 6.0.0",
 ]
 
 with open("README.rst", "r", encoding="utf-8") as readme_file:
@@ -34,7 +34,7 @@ with open("README.rst", "r", encoding="utf-8") as readme_file:
 
 setup(
     name="google-ads",
-    version="24.1.0",
+    version="25.0.0",
     author="Google LLC",
     author_email="googleapis-packages@google.com",
     classifiers=[

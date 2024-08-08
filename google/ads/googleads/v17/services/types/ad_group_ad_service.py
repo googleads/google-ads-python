@@ -21,6 +21,9 @@ import proto  # type: ignore
 
 from google.ads.googleads.v17.common.types import policy
 from google.ads.googleads.v17.enums.types import (
+    asset_field_type as gage_asset_field_type,
+)
+from google.ads.googleads.v17.enums.types import (
     response_content_type as gage_response_content_type,
 )
 from google.ads.googleads.v17.resources.types import (
@@ -38,6 +41,8 @@ __protobuf__ = proto.module(
         "AdGroupAdOperation",
         "MutateAdGroupAdsResponse",
         "MutateAdGroupAdResult",
+        "RemoveAutomaticallyCreatedAssetsRequest",
+        "AssetsWithFieldType",
     },
 )
 
@@ -202,6 +207,54 @@ class MutateAdGroupAdResult(proto.Message):
         proto.MESSAGE,
         number=2,
         message=gagr_ad_group_ad.AdGroupAd,
+    )
+
+
+class RemoveAutomaticallyCreatedAssetsRequest(proto.Message):
+    r"""Request message for
+    [AdGroupAdService.RemoveAutomaticallyCreatedAssetsRequest][].
+
+    Attributes:
+        ad_group_ad (str):
+            Required. The resource name of the AdGroupAd
+            from which to remove automatically created
+            assets.
+        assets_with_field_type (MutableSequence[google.ads.googleads.v17.services.types.AssetsWithFieldType]):
+            Required. List of assets with field type to
+            be removed from the AdGroupAd.
+    """
+
+    ad_group_ad: str = proto.Field(
+        proto.STRING,
+        number=1,
+    )
+    assets_with_field_type: MutableSequence[
+        "AssetsWithFieldType"
+    ] = proto.RepeatedField(
+        proto.MESSAGE,
+        number=2,
+        message="AssetsWithFieldType",
+    )
+
+
+class AssetsWithFieldType(proto.Message):
+    r"""The combination of system asset and field type to remove.
+    Attributes:
+        asset (str):
+            Required. The resource name of the asset to
+            be removed.
+        asset_field_type (google.ads.googleads.v17.enums.types.AssetFieldTypeEnum.AssetFieldType):
+            Required. The asset field type.
+    """
+
+    asset: str = proto.Field(
+        proto.STRING,
+        number=1,
+    )
+    asset_field_type: gage_asset_field_type.AssetFieldTypeEnum.AssetFieldType = proto.Field(
+        proto.ENUM,
+        number=2,
+        enum=gage_asset_field_type.AssetFieldTypeEnum.AssetFieldType,
     )
 
 

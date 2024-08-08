@@ -25,6 +25,7 @@ from google.auth import credentials as ga_credentials  # type: ignore
 from google.oauth2 import service_account  # type: ignore
 
 from google.ads.googleads.v17.services.types import ad_group_ad_service
+from google.protobuf import empty_pb2  # type: ignore
 
 from google.ads.googleads.v17 import gapic_version as package_version
 
@@ -86,6 +87,9 @@ class AdGroupAdServiceTransport(abc.ABC):
         # Save the scopes.
         self._scopes = scopes
 
+        if not hasattr(self, "_ignore_credentials"):
+            self._ignore_credentials: bool = False
+
         # If no credentials are provided, then determine the appropriate
         # defaults.
         if credentials and credentials_file:
@@ -99,7 +103,7 @@ class AdGroupAdServiceTransport(abc.ABC):
                 **scopes_kwargs,
                 quota_project_id=quota_project_id,
             )
-        elif credentials is None:
+        elif credentials is None and not self._ignore_credentials:
             credentials, _ = google.auth.default(
                 **scopes_kwargs, quota_project_id=quota_project_id
             )
@@ -125,6 +129,11 @@ class AdGroupAdServiceTransport(abc.ABC):
                 default_timeout=None,
                 client_info=client_info,
             ),
+            self.remove_automatically_created_assets: gapic_v1.method.wrap_method(
+                self.remove_automatically_created_assets,
+                default_timeout=None,
+                client_info=client_info,
+            ),
         }
 
     def close(self):
@@ -145,6 +154,15 @@ class AdGroupAdServiceTransport(abc.ABC):
             ad_group_ad_service.MutateAdGroupAdsResponse,
             Awaitable[ad_group_ad_service.MutateAdGroupAdsResponse],
         ],
+    ]:
+        raise NotImplementedError()
+
+    @property
+    def remove_automatically_created_assets(
+        self,
+    ) -> Callable[
+        [ad_group_ad_service.RemoveAutomaticallyCreatedAssetsRequest],
+        Union[empty_pb2.Empty, Awaitable[empty_pb2.Empty]],
     ]:
         raise NotImplementedError()
 

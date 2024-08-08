@@ -23,6 +23,9 @@ from google.ads.googleads.v17.enums.types import (
     ad_destination_type as gage_ad_destination_type,
 )
 from google.ads.googleads.v17.enums.types import (
+    ad_format_type as gage_ad_format_type,
+)
+from google.ads.googleads.v17.enums.types import (
     ad_network_type as gage_ad_network_type,
 )
 from google.ads.googleads.v17.enums.types import (
@@ -150,6 +153,8 @@ class Segments(proto.Message):
             This field is a member of `oneof`_ ``_external_activity_id``.
         ad_destination_type (google.ads.googleads.v17.enums.types.AdDestinationTypeEnum.AdDestinationType):
             Ad Destination type.
+        ad_format_type (google.ads.googleads.v17.enums.types.AdFormatTypeEnum.AdFormatType):
+            Ad Format type.
         ad_network_type (google.ads.googleads.v17.enums.types.AdNetworkTypeEnum.AdNetworkType):
             Ad network type.
         ad_group (str):
@@ -555,6 +560,10 @@ class Segments(proto.Message):
             index.
 
             This field is a member of `oneof`_ ``_sk_ad_network_postback_sequence_index``.
+        sk_ad_network_version (str):
+            The version of the SKAdNetwork API used.
+
+            This field is a member of `oneof`_ ``_sk_ad_network_version``.
         asset_interaction_target (google.ads.googleads.v17.common.types.AssetInteractionTarget):
             Only used with CustomerAsset, CampaignAsset and AdGroupAsset
             metrics. Indicates whether the interaction metrics occurred
@@ -610,6 +619,13 @@ class Segments(proto.Message):
         proto.ENUM,
         number=136,
         enum=gage_ad_destination_type.AdDestinationTypeEnum.AdDestinationType,
+    )
+    ad_format_type: gage_ad_format_type.AdFormatTypeEnum.AdFormatType = (
+        proto.Field(
+            proto.ENUM,
+            number=191,
+            enum=gage_ad_format_type.AdFormatTypeEnum.AdFormatType,
+        )
     )
     ad_network_type: gage_ad_network_type.AdNetworkTypeEnum.AdNetworkType = (
         proto.Field(
@@ -1110,6 +1126,11 @@ class Segments(proto.Message):
     sk_ad_network_postback_sequence_index: int = proto.Field(
         proto.INT64,
         number=154,
+        optional=True,
+    )
+    sk_ad_network_version: str = proto.Field(
+        proto.STRING,
+        number=192,
         optional=True,
     )
     asset_interaction_target: "AssetInteractionTarget" = proto.Field(

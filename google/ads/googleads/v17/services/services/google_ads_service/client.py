@@ -3335,6 +3335,30 @@ class GoogleAdsServiceClient(metaclass=GoogleAdsServiceClientMeta):
         return m.groupdict() if m else {}
 
     @staticmethod
+    def offline_conversion_upload_conversion_action_summary_path(
+        customer_id: str,
+        conversion_type_id: str,
+        client: str,
+    ) -> str:
+        """Returns a fully-qualified offline_conversion_upload_conversion_action_summary string."""
+        return "customers/{customer_id}/offlineConversionUploadConversionActionSummaries/{conversion_type_id}~{client}".format(
+            customer_id=customer_id,
+            conversion_type_id=conversion_type_id,
+            client=client,
+        )
+
+    @staticmethod
+    def parse_offline_conversion_upload_conversion_action_summary_path(
+        path: str,
+    ) -> Dict[str, str]:
+        """Parses a offline_conversion_upload_conversion_action_summary path into its component segments."""
+        m = re.match(
+            r"^customers/(?P<customer_id>.+?)/offlineConversionUploadConversionActionSummaries/(?P<conversion_type_id>.+?)~(?P<client>.+?)$",
+            path,
+        )
+        return m.groupdict() if m else {}
+
+    @staticmethod
     def offline_user_data_job_path(
         customer_id: str,
         offline_user_data_update_id: str,
@@ -4304,6 +4328,8 @@ class GoogleAdsServiceClient(metaclass=GoogleAdsServiceClientMeta):
             method=rpc,
             request=request,
             response=response,
+            retry=retry,
+            timeout=timeout,
             metadata=metadata,
         )
 

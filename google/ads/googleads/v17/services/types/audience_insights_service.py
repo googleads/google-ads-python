@@ -39,6 +39,10 @@ __protobuf__ = proto.module(
         "ListAudienceInsightsAttributesResponse",
         "ListInsightsEligibleDatesRequest",
         "ListInsightsEligibleDatesResponse",
+        "GenerateAudienceOverlapInsightsRequest",
+        "GenerateAudienceOverlapInsightsResponse",
+        "DimensionOverlapResult",
+        "AudienceOverlapItem",
         "AudienceInsightsAttribute",
         "AudienceInsightsTopic",
         "AudienceInsightsEntity",
@@ -361,6 +365,13 @@ class ListAudienceInsightsAttributesRequest(proto.Message):
             attributes are not filtered by country. Setting this field
             when SUB_COUNTRY_LOCATION attributes are not requested will
             return an error.
+        youtube_reach_location (google.ads.googleads.v17.common.types.LocationInfo):
+            If present, potential YouTube reach estimates within the
+            specified market will be returned for attributes for which
+            they are available. Reach is only available for the
+            AGE_RANGE, GENDER, AFFINITY_USER_INTEREST and
+            IN_MARKET_USER_INTEREST dimensions, and may not be available
+            for every attribute of those dimensions in every market.
     """
 
     customer_id: str = proto.Field(
@@ -387,6 +398,11 @@ class ListAudienceInsightsAttributesRequest(proto.Message):
     ] = proto.RepeatedField(
         proto.MESSAGE,
         number=5,
+        message=criteria.LocationInfo,
+    )
+    youtube_reach_location: criteria.LocationInfo = proto.Field(
+        proto.MESSAGE,
+        number=6,
         message=criteria.LocationInfo,
     )
 
@@ -440,6 +456,142 @@ class ListInsightsEligibleDatesResponse(proto.Message):
         proto.MESSAGE,
         number=2,
         message=dates.DateRange,
+    )
+
+
+class GenerateAudienceOverlapInsightsRequest(proto.Message):
+    r"""Request message for
+    [AudienceInsightsService.GenerateAudienceOverlapInsights][google.ads.googleads.v17.services.AudienceInsightsService.GenerateAudienceOverlapInsights].
+
+    Attributes:
+        customer_id (str):
+            Required. The ID of the customer.
+        country_location (google.ads.googleads.v17.common.types.LocationInfo):
+            Required. The country in which to calculate
+            the sizes and overlaps of audiences.
+        primary_attribute (google.ads.googleads.v17.services.types.AudienceInsightsAttribute):
+            Required. The audience attribute that should
+            be intersected with all other eligible
+            audiences.  This must be an Affinity or
+            In-Market UserInterest, an AgeRange or a Gender.
+        dimensions (MutableSequence[google.ads.googleads.v17.enums.types.AudienceInsightsDimensionEnum.AudienceInsightsDimension]):
+            Required. The types of attributes of which to calculate the
+            overlap with the primary_attribute. The values must be a
+            subset of AFFINITY_USER_INTEREST, IN_MARKET_USER_INTEREST,
+            AGE_RANGE and GENDER.
+        customer_insights_group (str):
+            The name of the customer being planned for.
+            This is a user-defined value.
+    """
+
+    customer_id: str = proto.Field(
+        proto.STRING,
+        number=1,
+    )
+    country_location: criteria.LocationInfo = proto.Field(
+        proto.MESSAGE,
+        number=2,
+        message=criteria.LocationInfo,
+    )
+    primary_attribute: "AudienceInsightsAttribute" = proto.Field(
+        proto.MESSAGE,
+        number=3,
+        message="AudienceInsightsAttribute",
+    )
+    dimensions: MutableSequence[
+        audience_insights_dimension.AudienceInsightsDimensionEnum.AudienceInsightsDimension
+    ] = proto.RepeatedField(
+        proto.ENUM,
+        number=4,
+        enum=audience_insights_dimension.AudienceInsightsDimensionEnum.AudienceInsightsDimension,
+    )
+    customer_insights_group: str = proto.Field(
+        proto.STRING,
+        number=5,
+    )
+
+
+class GenerateAudienceOverlapInsightsResponse(proto.Message):
+    r"""Response message for
+    [AudienceInsightsService.GenerateAudienceOverlapInsights][google.ads.googleads.v17.services.AudienceInsightsService.GenerateAudienceOverlapInsights].
+
+    Attributes:
+        primary_attribute_metadata (google.ads.googleads.v17.services.types.AudienceInsightsAttributeMetadata):
+            Metadata for the primary attribute, including
+            potential YouTube reach.
+        dimension_results (MutableSequence[google.ads.googleads.v17.services.types.DimensionOverlapResult]):
+            Lists of attributes and their overlap with
+            the primary attribute, one list per requested
+            dimension.
+    """
+
+    primary_attribute_metadata: "AudienceInsightsAttributeMetadata" = (
+        proto.Field(
+            proto.MESSAGE,
+            number=1,
+            message="AudienceInsightsAttributeMetadata",
+        )
+    )
+    dimension_results: MutableSequence[
+        "DimensionOverlapResult"
+    ] = proto.RepeatedField(
+        proto.MESSAGE,
+        number=2,
+        message="DimensionOverlapResult",
+    )
+
+
+class DimensionOverlapResult(proto.Message):
+    r"""A list of audience attributes of a single dimension, including their
+    overlap with a primary attribute, returned as part of a
+    [GenerateAudienceOverlapInsightsResponse][google.ads.googleads.v17.services.GenerateAudienceOverlapInsightsResponse].
+
+    Attributes:
+        dimension (google.ads.googleads.v17.enums.types.AudienceInsightsDimensionEnum.AudienceInsightsDimension):
+            The dimension of all the attributes in this
+            section.
+        items (MutableSequence[google.ads.googleads.v17.services.types.AudienceOverlapItem]):
+            The attributes and their overlap with the
+            primary attribute.
+    """
+
+    dimension: audience_insights_dimension.AudienceInsightsDimensionEnum.AudienceInsightsDimension = proto.Field(
+        proto.ENUM,
+        number=1,
+        enum=audience_insights_dimension.AudienceInsightsDimensionEnum.AudienceInsightsDimension,
+    )
+    items: MutableSequence["AudienceOverlapItem"] = proto.RepeatedField(
+        proto.MESSAGE,
+        number=2,
+        message="AudienceOverlapItem",
+    )
+
+
+class AudienceOverlapItem(proto.Message):
+    r"""An audience attribute, with metadata including the overlap
+    between this attribute's potential YouTube reach and that of a
+    primary attribute.
+
+    Attributes:
+        attribute_metadata (google.ads.googleads.v17.services.types.AudienceInsightsAttributeMetadata):
+            The attribute and its metadata, including
+            potential YouTube reach.
+        potential_youtube_reach_intersection (int):
+            The estimated size of the intersection of
+            this audience attribute with the primary
+            attribute, that is, the number of reachable
+            YouTube users who match BOTH the primary
+            attribute and this one.
+    """
+
+    attribute_metadata: "AudienceInsightsAttributeMetadata" = proto.Field(
+        proto.MESSAGE,
+        number=1,
+        message="AudienceInsightsAttributeMetadata",
+    )
+    potential_youtube_reach_intersection: int = proto.Field(
+        proto.INT64,
+        number=2,
     )
 
 
@@ -729,6 +881,13 @@ class AudienceInsightsAttributeMetadata(proto.Message):
             singer-songwriter". If the dimension is CATEGORY, this is
             the complete path to the category in The Product & Service
             taxonomy, for example "/Apparel/Clothing/Outerwear".
+        potential_youtube_reach (int):
+            An estimate of the number of reachable YouTube users
+            matching this attribute in the requested location, or zero
+            if that information is not available for this attribute.
+            Only populated in GenerateAudienceOverlapInsightsResponses
+            and in ListAudienceInsightsAttributesResponses when
+            youtube_reach_location is present in the request.
         youtube_channel_metadata (google.ads.googleads.v17.services.types.YouTubeChannelAttributeMetadata):
             Special metadata for a YouTube channel.
 
@@ -761,6 +920,10 @@ class AudienceInsightsAttributeMetadata(proto.Message):
     display_info: str = proto.Field(
         proto.STRING,
         number=5,
+    )
+    potential_youtube_reach: int = proto.Field(
+        proto.INT64,
+        number=9,
     )
     youtube_channel_metadata: "YouTubeChannelAttributeMetadata" = proto.Field(
         proto.MESSAGE,

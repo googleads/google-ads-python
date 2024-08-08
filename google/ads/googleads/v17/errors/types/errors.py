@@ -103,6 +103,9 @@ from google.ads.googleads.v17.errors.types import (
     authorization_error as gage_authorization_error,
 )
 from google.ads.googleads.v17.errors.types import (
+    automatically_created_asset_removal_error as gage_automatically_created_asset_removal_error,
+)
+from google.ads.googleads.v17.errors.types import (
     batch_job_error as gage_batch_job_error,
 )
 from google.ads.googleads.v17.errors.types import (
@@ -424,6 +427,9 @@ from google.ads.googleads.v17.errors.types import (
 )
 from google.ads.googleads.v17.errors.types import (
     setting_error as gage_setting_error,
+)
+from google.ads.googleads.v17.errors.types import (
+    shareable_preview_error as gage_shareable_preview_error,
 )
 from google.ads.googleads.v17.errors.types import (
     shared_criterion_error as gage_shared_criterion_error,
@@ -1228,6 +1234,15 @@ class ErrorCode(proto.Message):
         shopping_product_error (google.ads.googleads.v17.errors.types.ShoppingProductErrorEnum.ShoppingProductError):
             The reasons for error in querying shopping
             product.
+
+            This field is a member of `oneof`_ ``error_code``.
+        automatically_created_asset_removal_error (google.ads.googleads.v17.errors.types.AutomaticallyCreatedAssetRemovalErrorEnum.AutomaticallyCreatedAssetRemovalError):
+            The reasons for error in automatically
+            created asset removal action.
+
+            This field is a member of `oneof`_ ``error_code``.
+        shareable_preview_error (google.ads.googleads.v17.errors.types.ShareablePreviewErrorEnum.ShareablePreviewError):
+            The reasons for the shareable preview error.
 
             This field is a member of `oneof`_ ``error_code``.
     """
@@ -2203,6 +2218,18 @@ class ErrorCode(proto.Message):
         number=184,
         oneof="error_code",
         enum=gage_shopping_product_error.ShoppingProductErrorEnum.ShoppingProductError,
+    )
+    automatically_created_asset_removal_error: gage_automatically_created_asset_removal_error.AutomaticallyCreatedAssetRemovalErrorEnum.AutomaticallyCreatedAssetRemovalError = proto.Field(
+        proto.ENUM,
+        number=185,
+        oneof="error_code",
+        enum=gage_automatically_created_asset_removal_error.AutomaticallyCreatedAssetRemovalErrorEnum.AutomaticallyCreatedAssetRemovalError,
+    )
+    shareable_preview_error: gage_shareable_preview_error.ShareablePreviewErrorEnum.ShareablePreviewError = proto.Field(
+        proto.ENUM,
+        number=186,
+        oneof="error_code",
+        enum=gage_shareable_preview_error.ShareablePreviewErrorEnum.ShareablePreviewError,
     )
 
 

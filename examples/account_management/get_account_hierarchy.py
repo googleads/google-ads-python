@@ -88,6 +88,11 @@ def main(client, login_customer_id=None):
         unprocessed_customer_ids = [seed_customer_id]
         customer_ids_to_child_accounts = dict()
         root_customer_client = None
+        
+        # login_customer_id is required to query child accounts that are not
+        # directly accessible to the OAuth Credentials
+        client.login_customer_id = str(seed_customer_id)
+        googleads_service = client.get_service("GoogleAdsService")
 
         while unprocessed_customer_ids:
             customer_id = int(unprocessed_customer_ids.pop(0))

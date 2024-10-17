@@ -37,11 +37,11 @@ def main(client, customer_id, campaign_id):
 
     request = client.get_type("SearchGoogleAdsRequest")
     request.customer_id = customer_id
+    request.search_settings.return_total_results_count = True
     request.query = query
 
     results = ga_service.search(request=request)
 
-    disapproved_ads_count = 0
     disapproved_enum = client.enums.PolicyApprovalStatusEnum.DISAPPROVED
 
     print("Disapproved ads:")
@@ -95,7 +95,7 @@ if __name__ == "__main__":
 
     # GoogleAdsClient will read the google-ads.yaml configuration file in the
     # home directory if none is specified.
-    googleads_client = GoogleAdsClient.load_from_storage(version="v17")
+    googleads_client = GoogleAdsClient.load_from_storage(version="v18")
 
     try:
         main(

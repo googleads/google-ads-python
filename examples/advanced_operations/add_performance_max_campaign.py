@@ -628,7 +628,6 @@ def print_response_details(response):
             )
 
 
-
 def create_asset_group_signal_operations(client, customer_id, audience_id):
     """Creates a list of MutateOperations that may create asset group signals.
 
@@ -668,12 +667,11 @@ def create_asset_group_signal_operations(client, customer_id, audience_id):
     mutate_operation = client.get_type("MutateOperation")
     operation = mutate_operation.asset_group_signal_operation.create
     operation.asset_group = asset_group_resource_name
-    operation.search_theme.text = "travel" 
+    operation.search_theme.text = "travel"
     operations.append(mutate_operation)
     # [END add_performance_max_campaign_10]
 
     return operations
-    
 
 
 # [END add_performance_max_campaign]
@@ -701,7 +699,7 @@ if __name__ == "__main__":
 
     # GoogleAdsClient will read the google-ads.yaml configuration file in the
     # home directory if none is specified.
-    googleads_client = GoogleAdsClient.load_from_storage(version="v17")
+    googleads_client = GoogleAdsClient.load_from_storage(version="v18")
 
     try:
         main(googleads_client, args.customer_id, args.audience_id)

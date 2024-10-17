@@ -19,7 +19,7 @@ import google.ads.googleads.client
 import google.ads.googleads.errors
 import google.ads.googleads.util
 
-VERSION = "25.0.0"
+VERSION = "25.1.0"
 
 if sys.version_info.major == 3 and sys.version_info.minor <= 8:
     warnings.warn(
